@@ -103,6 +103,8 @@ import { useAiPresetsPickerActions } from "SRC_DIR/Hooks/useAiPresetsPickerActio
 import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
+import { buildFolderUrl } from "SRC_DIR/helpers/articleNavigation";
+import { getFolderInfo } from "@docspace/shared/api/files";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 
 import config from "PACKAGE_FILE";
@@ -687,6 +689,20 @@ const Shell = ({ page = "home", ...rest }) => {
       });
   };
 
+  // "Open folder" in the composer's folder pill: the chat knows the folder
+  // by id only, so its section is read first; a folder gone meanwhile stays
+  // where it is.
+  const onOpenFolderContext = React.useCallback(
+    (folder) => {
+      getFolderInfo(folder.id)
+        .then((info) =>
+          navigate(buildFolderUrl(info.id, info.rootFolderType, userId)),
+        )
+        .catch(() => undefined);
+    },
+    [navigate, userId],
+  );
+
   const initIndexedDb = React.useCallback(async () => {
     await indexedDbHelper.init(userId, [IndexedDBStores.images]);
   }, [userId]);
@@ -1051,6 +1067,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // The picker opens on the current project list: one created,
           // renamed or left elsewhere meanwhile is picked up.
           onProfilePickerOpen={fetchAiPresets}
+          onOpenFolderContext={onOpenFolderContext}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={
             isProjectModelUnavailable || (standalone ? undefined : !isAIReady)

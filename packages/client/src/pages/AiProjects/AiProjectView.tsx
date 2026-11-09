@@ -61,6 +61,7 @@ import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights
 
 // Concept: the sources column is off, the composer connects the rooms instead.
 // import { ProjectSources } from "./sub-components/project/ProjectSources";
+import { readProjectFolder, writeProjectFolder } from "./folderContextMemory";
 import styles from "./AiProjectView.module.scss";
 
 type AiProjectViewProps = {
@@ -127,12 +128,14 @@ const AiProjectView = ({
         profileName: profile?.name ?? null,
         instructionsRooms: toChatRooms(instructionsRooms),
         knowledgeRooms: toChatRooms(knowledgeRooms),
+        // The folder this project's chat last worked in comes back with it.
+        folderContext: readProjectFolder(userId, roomId),
       });
     });
     return () => {
       cancelled = true;
     };
-  }, [store, aiChatStore, roomId, inRoom]);
+  }, [store, aiChatStore, roomId, inRoom, userId]);
 
   // Set while the view unmounts, so closing the project on the way out is
   // not taken for a project that dropped under it.
@@ -265,10 +268,24 @@ const AiProjectView = ({
   //   return () => aiChatStore.setComposerContextHidden(false);
   // }, [aiChatStore]);
 
-  // The context folder is picked only in the project's sources column. Once
-  // the project view is left, the folder would keep scoping every round with
-  // nothing on screen to show or remove it, so it goes with the view.
-  React.useEffect(() => () => useCloudsStore.getState().clearFolderContext(), [useCloudsStore]);
+  // The folder the chat works in is remembered for the project while it is
+  // open: picked or swapped in the composer, it is kept; disconnected, it is
+  // forgotten. Once the project view is left, the folder would keep scoping
+  // every round with nothing on screen to show or remove it, so it goes with
+  // the view - after the memory stops listening, so leaving is not taken
+  // for disconnecting.
+  React.useEffect(() => {
+    if (!inRoom) return undefined;
+    const unsubscribe = useCloudsStore.subscribe((state, previous) => {
+      if (state.selectedFolderContext === previous.selectedFolderContext) return;
+      const selected = state.selectedFolderContext;
+      writeProjectFolder(userId, roomId, selected ? { cloud: selected.cloud, ...selected.room } : null);
+    });
+    return () => {
+      unsubscribe();
+      useCloudsStore.getState().clearFolderContext();
+    };
+  }, [useCloudsStore, inRoom, roomId, userId]);
 
   if (!inRoom) {
     return (

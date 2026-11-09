@@ -117,18 +117,16 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
         </TableCell>
       ))}
       <TableCell>
-        {byok ? null : (
-          <div className={styles.toggleCell}>
-            <div className={styles.toggleWrapper}>
-              <ToggleButton
-                isChecked={enabled}
-                onChange={onChange}
-                isDisabled={isUpdating || !isAiToolsServiceOn}
-                dataTestId={`ai_model_toggle_${modelId}`}
-              />
-            </div>
+        <div className={styles.toggleCell}>
+          <div className={styles.toggleWrapper}>
+            <ToggleButton
+              isChecked={enabled}
+              onChange={onChange}
+              isDisabled={isUpdating || !isAiToolsServiceOn}
+              dataTestId={`ai_model_toggle_${modelId}`}
+            />
           </div>
-        )}
+        </div>
       </TableCell>
       <TableCell>
         {link ? (

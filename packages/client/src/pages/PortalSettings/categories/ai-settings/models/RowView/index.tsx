@@ -193,21 +193,16 @@ const RowView = (props: ModelSettingsRowViewProps) => {
               ))}
             </div>
 
-            {row.byok ? null : (
-              <div
-                className={styles.toggle}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ToggleButton
-                  isChecked={enabled}
-                  onChange={() =>
-                    requestToggle({ id: row.id, title: row.alias }, !enabled)
-                  }
-                  isDisabled={isUpdating || !isAiToolsServiceOn}
-                  dataTestId={`ai_model_toggle_${row.id}`}
-                />
-              </div>
-            )}
+            <div className={styles.toggle} onClick={(e) => e.stopPropagation()}>
+              <ToggleButton
+                isChecked={enabled}
+                onChange={() =>
+                  requestToggle({ id: row.id, title: row.alias }, !enabled)
+                }
+                isDisabled={isUpdating || !isAiToolsServiceOn}
+                dataTestId={`ai_model_toggle_${row.id}`}
+              />
+            </div>
           </div>
         );
       })}

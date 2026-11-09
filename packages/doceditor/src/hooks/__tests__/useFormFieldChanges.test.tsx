@@ -285,6 +285,102 @@ describe("useFormFieldChanges", () => {
     );
   });
 
+  describe("a report still on its way", () => {
+    // The server answers the next report only when the test lets it.
+    const holdNextReport = () => {
+      let answer: (fail?: unknown) => void = () => {};
+      report.mockImplementationOnce(
+        () =>
+          new Promise<void>((resolve, reject) => {
+            answer = (fail) => (fail ? reject(fail) : resolve());
+          }),
+      );
+
+      return (fail?: unknown) => answer(fail);
+    };
+
+    // A report whose request has gone out and has no answer yet.
+    const sendHeld = async () => {
+      const answer = holdNextReport();
+      const sent = hook.reportFieldChanges();
+      await vi.waitFor(() => expect(report).toHaveBeenCalledTimes(1));
+
+      return { answer, sent };
+    };
+
+    it("Rename undone before the server answered: the empty report still goes after it", async () => {
+      render();
+      setForms(form("1", "name"));
+      await hook.takeSnapshot();
+
+      setForms(form("1", "fullName"));
+      const { answer, sent } = await sendHeld();
+      setForms(form("1", "name"));
+      await hook.reportFieldChanges();
+      answer();
+      await sent;
+
+      expect(report).toHaveBeenCalledTimes(2);
+      expect(report.mock.calls[1][1].renames).toEqual([]);
+      // The server keeps the report with the highest number: the empty one.
+      expect(report.mock.calls[1][1].sequence).toBeGreaterThan(
+        report.mock.calls[0][1].sequence,
+      );
+    });
+
+    it("Same renames read again before the server answered: they are sent once", async () => {
+      render();
+      setForms(form("1", "name"));
+      await hook.takeSnapshot();
+
+      setForms(form("1", "fullName"));
+      const { answer, sent } = await sendHeld();
+      await hook.reportFieldChanges();
+      answer();
+      await sent;
+
+      expect(report).toHaveBeenCalledTimes(1);
+    });
+
+    it("Report that was on its way failed: the same renames are sent on the next read", async () => {
+      render();
+      setForms(form("1", "name"));
+      await hook.takeSnapshot();
+
+      setForms(form("1", "fullName"));
+      const { answer, sent } = await sendHeld();
+      answer(httpError(500));
+      await sent;
+      await hook.reportFieldChanges();
+
+      expect(report).toHaveBeenCalledTimes(2);
+      expect(report.mock.calls[1][1].renames).toEqual([
+        { oldKey: "name", newKey: "fullName" },
+      ]);
+    });
+
+    it("Earlier report answered after a later one went out: the later one is not sent again", async () => {
+      render();
+      setForms(form("1", "name"), form("2", "email"));
+      await hook.takeSnapshot();
+
+      setForms(form("1", "fullName"), form("2", "email"));
+      const first = await sendHeld();
+      setForms(form("1", "fullName"), form("2", "mail"));
+      const second = holdNextReport();
+      const sent = hook.reportFieldChanges();
+      await vi.waitFor(() => expect(report).toHaveBeenCalledTimes(2));
+
+      first.answer();
+      await first.sent;
+      await hook.reportFieldChanges();
+      second();
+      await sent;
+
+      expect(report).toHaveBeenCalledTimes(2);
+    });
+  });
+
   it("A field the editor gives no id: the read tells nothing and nothing is sent", async () => {
     render();
     setForms(form("1", "name"), form("2", "email"));

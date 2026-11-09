@@ -219,6 +219,9 @@ const useFormFieldChanges = (
   } | null>(null);
   // The renames the server took last, with the number of their report.
   const reported = useRef({ report: NO_RENAMES, sequence: 0 });
+  // The renames of the report sent last, while its request is on its way: the server is about to keep them, so a read
+  // is compared against them rather than against the renames taken before.
+  const sending = useRef<{ report: string; sequence: number } | null>(null);
   // The renames sent as the editor is left, while their request is on its way.
   const flushing = useRef<string | null>(null);
   // Reads go one after another, each numbered above the one before; the server keeps the report with the highest
@@ -318,10 +321,12 @@ const useFormFieldChanges = (
     );
 
     return read.then(async (result) => {
-      // Nothing new since the last report.
-      if (!result || result.report === reported.current.report) return;
+      // Nothing new since the last report, taken or still on its way.
+      const last = sending.current ?? reported.current;
+      if (!result || result.report === last.report) return;
 
       const { to, renames, sequence, report } = result;
+      sending.current = { report, sequence };
       try {
         await reportFormFieldChanges(to.id, {
           version: to.openedVersion,
@@ -332,6 +337,9 @@ const useFormFieldChanges = (
         markReported(report, sequence);
       } catch (error) {
         onReportError(error);
+      } finally {
+        // A later report went out in the meantime: it is the one on its way now.
+        if (sending.current?.sequence === sequence) sending.current = null;
       }
     });
   }, [target, readFields, markReported, onReportError, sessionId]);

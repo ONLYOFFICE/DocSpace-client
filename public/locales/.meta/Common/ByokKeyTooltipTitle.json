@@ -1,0 +1,21 @@
+{
+  "key_path": "ByokKeyTooltipTitle",
+  "content": "Your {{provider}} key",
+  "content_en_sha1_hash": "712ff129b99090d014ac01e28c7c00a218b10000",
+  "created_at": "2026-11-09T17:06:31.646Z",
+  "updated_at": "2026-11-09T17:06:31.646Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

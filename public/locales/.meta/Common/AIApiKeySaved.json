@@ -1,0 +1,28 @@
+{
+  "key_path": "AIApiKeySaved",
+  "content": "API key saved",
+  "content_en_sha1_hash": "c0e80f9588e75615524766f931bb5406527c756e",
+  "created_at": "2026-11-09T17:06:22.737Z",
+  "updated_at": "2026-11-09T17:07:34.877Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/index.tsx",
+      "line_number": 93,
+      "context": "const closeForm = () => setOpenForm(null);\n \n const onSave = async (modelId: string, provider: string, key: string) => {\n await saveByokKey?.(modelId, provider, key);\n closeForm();\n toastr.success(t(\"Common:AIApiKeySaved\"));\n fetchAiPrices?.();\n };\n \n const onDelete = async ({ id }: TByokKey) => {\n await removeByokKey?.(id);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

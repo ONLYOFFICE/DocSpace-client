@@ -1,0 +1,28 @@
+{
+  "key_path": "AIModelsDescriptionNoByok",
+  "content": "Access a wide range of AI models through OpenRouter. To run a model on your own provider key, connect it in <1>BYOK</1>.",
+  "content_en_sha1_hash": "4c1fdfc2b84ce3b34b9bf51a8102faaa90b0e338",
+  "created_at": "2026-11-09T17:06:24.186Z",
+  "updated_at": "2026-11-09T17:07:34.881Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/ModelsDescription.tsx",
+      "line_number": 84,
+      "context": "t(\"Common:AIModelsDescriptionWithFee\", {\n percent: aiToolsByokFeePercent,\n })\n ) : (\n <CommonTrans\n i18nKey=\"AIModelsDescriptionNoByok\"\n namespaces={[\"Common\"]}\n components={{ 1: byokLink }}\n />\n )}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "key_path": "OnlyServiceFeeCharged",
+  "content": "Only the service fee is charged to the wallet.",
+  "content_en_sha1_hash": "844d292e54d6154b3263955fbc6ec89f8aaaa9a6",
+  "created_at": "2026-11-09T17:07:00.371Z",
+  "updated_at": "2026-11-09T17:07:00.371Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

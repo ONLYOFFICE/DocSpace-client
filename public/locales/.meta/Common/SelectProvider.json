@@ -1,0 +1,28 @@
+{
+  "key_path": "SelectProvider",
+  "content": "Select provider",
+  "content_en_sha1_hash": "c7a9e8ea6a4e135743a9f4ac1da20862a69fa0f2",
+  "created_at": "2026-11-09T17:07:11.982Z",
+  "updated_at": "2026-11-09T17:07:34.877Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokKeyForm.tsx",
+      "line_number": 112,
+      "context": ">\n <ComboBox\n options={providerOptions}\n selectedOption={\n selectedProvider ??\n ({ label: t(\"Common:SelectProvider\") } as TOption)\n }\n scaled\n scaledOptions\n displayArrow\n displaySelectedOption",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

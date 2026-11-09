@@ -1,0 +1,21 @@
+{
+  "key_path": "ServiceFee",
+  "content": "Service fee",
+  "content_en_sha1_hash": "049b4253172a6fb6c6efafe7489dc77a727e2876",
+  "created_at": "2026-11-09T17:07:12.331Z",
+  "updated_at": "2026-11-09T17:07:12.331Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

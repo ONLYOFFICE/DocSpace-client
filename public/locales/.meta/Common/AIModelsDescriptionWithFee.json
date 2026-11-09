@@ -1,0 +1,28 @@
+{
+  "key_path": "AIModelsDescriptionWithFee",
+  "content": "Models run through OpenRouter, and the prices shown are OpenRouter rates. Models marked BYOK run on your own provider key instead: the provider bills you for the tokens used, and only the {{percent}}% service fee on that amount is charged to your wallet.",
+  "content_en_sha1_hash": "1b1f083359d8d95addd640631d7dd36a24aa20d4",
+  "created_at": "2026-11-09T17:06:24.210Z",
+  "updated_at": "2026-11-09T17:07:34.881Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/ModelsDescription.tsx",
+      "line_number": 79,
+      "context": ");\n \n return (\n <Text className={className}>\n {hasByok ? (\n t(\"Common:AIModelsDescriptionWithFee\", {\n percent: aiToolsByokFeePercent,\n })\n ) : (\n <CommonTrans\n i18nKey=\"AIModelsDescriptionNoByok\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

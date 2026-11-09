@@ -1,0 +1,21 @@
+{
+  "key_path": "BilledByProviderGeneric",
+  "content": "Billed by the provider",
+  "content_en_sha1_hash": "c9e0cf0ec3a115ff0f38f474ddc01cb061854d28",
+  "created_at": "2026-11-09T17:06:30.495Z",
+  "updated_at": "2026-11-09T17:06:30.495Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

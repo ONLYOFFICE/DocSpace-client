@@ -3,7 +3,7 @@
   "content": "If you move or copy encrypted files outside this private room, they will be saved in decrypted form.",
   "content_en_sha1_hash": "f81b9d39b060fb053c635c73bc98b8e6c662ff1a",
   "created_at": "2026-05-24T17:27:26.409Z",
-  "updated_at": "2026-11-06T11:20:11.805Z",
+  "updated_at": "2026-11-09T17:07:34.693Z",
   "comment": {
     "text": "Warning description in a banner that informs users that moving or copying encrypted files out of a private room will cause them to be decrypted.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EncryptedTransferConfirmDialog/index.tsx",
+      "line_number": 66,
+      "context": ">\n <ModalDialog.Header>\n {t(\"Common:EncryptedTransferBannerTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:EncryptedTransferBannerDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n testId=\"encrypted_transfer_confirm_button\"\n label={t(\"Common:Move\")}",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
       "line_number": 682,

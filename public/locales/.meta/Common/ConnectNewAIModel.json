@@ -1,0 +1,28 @@
+{
+  "key_path": "ConnectNewAIModel",
+  "content": "Connect new AI model",
+  "content_en_sha1_hash": "b132ea0591d0f567f61f7266ad91510b31139726",
+  "created_at": "2026-11-09T17:06:34.158Z",
+  "updated_at": "2026-11-09T17:07:34.876Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokKeyForm.tsx",
+      "line_number": 100,
+      "context": "const isSubmitDisabled = !providerId || !modelId || !apiKey.trim();\n \n return (\n <div className={styles.form} data-testid=\"byok-key-form\">\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Common:ConnectNewAIModel\")}\n </Text>\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"Common:Provider\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

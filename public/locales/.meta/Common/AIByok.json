@@ -1,0 +1,40 @@
+{
+  "key_path": "AIByok",
+  "content": "BYOK",
+  "content_en_sha1_hash": "36068183dc3a08f9ed1b66438fb337937d0c7394",
+  "created_at": "2026-11-09T17:06:22.792Z",
+  "updated_at": "2026-11-09T17:07:34.878Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 211,
+      "context": "...(standalone\n ? []\n : [\n {\n id: TAB_IDS.BYOK,\n name: t(\"Common:AIByok\"),\n content: <ByokKeys />,\n onClick: makeOnClick(TAB_IDS.BYOK),\n },\n ]),\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/sub-components/ByokBadge.tsx",
+      "line_number": 48,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <Badge\n className={styles.badge}\n label={t(\"Common:AIByok\")}\n backgroundColor=\"var(--tag-new-background)\"\n color=\"var(--text-secondary)\"\n fontSize=\"10px\"\n fontWeight={700}\n borderRadius=\"9px\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 571,
+      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-byok\",\n key: \"7-6\",\n link: \"byok\",\n tKey: \"Common:AIByok\",\n isCategory: true,\n },\n ],\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

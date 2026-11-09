@@ -276,15 +276,23 @@ The system SHALL refuse to copy or move a folder out of a private room, showing 
 - **THEN** the folder is not transferred and Common:CannotTransferFolderFromPrivateRoom is shown, while the selected encrypted files are copied re-encrypted
 
 ### Requirement: Files leaving a private room are decrypted
-The system SHALL, when files are copied or moved out of a private room to a destination outside private rooms, decrypt them on the client with the unlocked identity and upload them as plaintext to the destination, after showing a warning banner in the destination picker. On move, the system SHALL delete each source file only after its decrypted copy succeeded. The system SHALL report Common:EncryptedCopyFailed with the failed names on error.
+The system SHALL decrypt files copied or moved out of a private room on the client and upload them as plaintext, after warning that they will be saved decrypted: in the destination picker, or in a confirmation before anything moves when the transfer starts without it (drag and drop, cut and paste). On move it SHALL delete each source only after its decrypted copy succeeded, and SHALL report Common:EncryptedCopyFailed with the failed names on error.
 
 #### Scenario: Copy to My documents
 - **WHEN** the user copies an encrypted file to a folder outside the room and confirms
 - **THEN** a decrypted copy with the original name appears in the destination
 
 #### Scenario: Move out of the room
-- **WHEN** the user chooses "Move" to a destination outside the room and every decrypted copy succeeds
+- **WHEN** the user moves encrypted files to a destination outside the room, confirms the warning, and every decrypted copy succeeds
 - **THEN** the decrypted copies appear in the destination and the source files are deleted from the private room
+
+#### Scenario: Move out by drag and drop or paste
+- **WHEN** the user drops encrypted files of a private room onto a folder outside private rooms, or pastes there files cut in a private room
+- **THEN** a confirmation with Common:EncryptedTransferBannerTitle and Common:EncryptedTransferBannerDescription is shown, and nothing MUST be decrypted, uploaded or deleted before the user confirms
+
+#### Scenario: Warning declined
+- **WHEN** the user cancels that confirmation
+- **THEN** nothing is transferred and the source files stay in the private room
 
 #### Scenario: Move with a failed copy
 - **WHEN** the user moves several encrypted files out and one decrypted copy fails
@@ -390,15 +398,15 @@ The system SHALL offer "Download" for a folder inside a private room and for the
 - **THEN** the same zip is saved as from the folder's context menu, named after the folder, and no server archive of its ciphertext is requested
 
 ### Requirement: Deletion bypasses the recycle bin
-The system SHALL delete items in a private room permanently, never moving them to the recycle bin, and SHALL always show the delete confirmation with the permanent-deletion note.
+The system SHALL delete items in a private room permanently, never moving them to the recycle bin, and SHALL always show the delete confirmation with the permanent-deletion note, whichever way the deletion starts: the item menu, the menu of a selection, the header menu, the Delete key or the menu of the folder being viewed.
 
 #### Scenario: Delete a file
 - **WHEN** the user deletes a file in a private room and confirms
 - **THEN** the file is removed immediately and does not appear in Trash
 
 #### Scenario: Confirmation disabled in settings
-- **WHEN** the user has turned off delete confirmations
-- **THEN** the confirmation dialog is still shown for items in a private room
+- **WHEN** the user has turned off delete confirmations and deletes items in a private room from the item menu, the menu of a selection, the header menu, with the Delete key or from the menu of the folder being viewed
+- **THEN** the confirmation dialog is shown before anything is deleted, and nothing MUST be deleted without it
 
 ### Requirement: Version operations withheld
 The system SHALL NOT offer version history, finalize version, version list or version blocking for an encrypted file.
@@ -539,11 +547,15 @@ The system SHALL apply the private-room transfer rules to Ctrl+X and Ctrl+V exac
 - **THEN** nothing is added to the clipboard
 
 ### Requirement: Create hotkeys respect keys
-The system SHALL ignore the file-creation hotkeys inside a private room when the user cannot create encrypted files.
+The system SHALL ignore the file-creation hotkeys inside a private room when the user cannot create encrypted files, and SHALL ignore there the hotkey that creates a form from a file, which the create menu of a private room does not offer.
 
 #### Scenario: Shift+D without keys
 - **WHEN** a user with no keys presses the new-document hotkey in a private room
 - **THEN** nothing is created
+
+#### Scenario: Form from a file
+- **WHEN** a user, with keys or without, presses Alt+Shift+O in a private room
+- **THEN** no file picker opens and nothing is created
 
 ### Requirement: Quick actions in private rooms
 The system SHALL show only the create-file tiles as quick actions inside a private room, and only when the user can create encrypted files.

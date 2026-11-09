@@ -494,8 +494,8 @@ export const onClickDeleteSelectedFolderImpl = (
 ) => {
   const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
     self.dialogsStore;
-  const { confirmDelete } = self.filesSettingsStore;
-  const { deleteAction, deleteRoomsAction } = self.filesActionsStore;
+  const { isDeleteConfirmationForced, deleteAction, deleteRoomsAction } =
+    self.filesActionsStore;
   const { id: selectedFolderId, getSelectedFolder } = self.selectedFolderStore;
   const { isThirdPartySelection, setBufferSelection } = self.filesStore;
 
@@ -503,7 +503,7 @@ export const onClickDeleteSelectedFolderImpl = (
 
   setIsFolderActions(true);
 
-  if (confirmDelete || isThirdPartySelection) {
+  if (isDeleteConfirmationForced || isThirdPartySelection) {
     setBufferSelection(selectedFolder);
     // the original .js passes `undefined` through here when
     // the caller omits isRoom — the cast keeps the exact runtime value.

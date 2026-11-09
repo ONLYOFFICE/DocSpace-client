@@ -38,6 +38,7 @@ import api from "@docspace/shared/api";
 import { FileType, FolderType } from "@docspace/shared/enums";
 
 import { createTestFilesStore, testFilenameCache } from "./testHarness";
+import { fakeTreeFoldersStore } from "../../__tests__/sharedFakes";
 import {
   loadAllPagesForClientSearchImpl,
   CLIENT_SEARCH_MAX_ITEMS,
@@ -81,8 +82,10 @@ const plainFolder = (id: number, title: string): TFolder =>
     viewAccessibility: {},
   }) as unknown as TFolder;
 
-const setupStore = () => {
-  const store = createTestFilesStore();
+const setupStore = (isPrivacyFolder = false) => {
+  const store = createTestFilesStore({
+    treeFoldersStore: { ...fakeTreeFoldersStore(), isPrivacyFolder },
+  });
   store.files = [];
   store.folders = [];
   store.getFilesContextOptions = () => CTX_SENTINEL;
@@ -160,6 +163,35 @@ describe("FilesStore client search — filesList filtering", () => {
 
     store.filter.sortOrder = "descending";
     expect(store.filesList.map((i) => i.id)).toEqual([3, 2, 1]);
+  });
+
+  it("Sort by name", () => {
+    const store = setupStore(true);
+    store.files = [
+      encryptedFile(1, "uuid-aaa.docx"),
+      encryptedFile(2, "uuid-bbb.docx"),
+    ];
+    store.folders = [plainFolder(3, "Archive")];
+    testFilenameCache.set("1", "Zebra.docx");
+    testFilenameCache.set("2", "Apple.docx");
+
+    store.filter.sortBy = "AZ";
+    store.filter.sortOrder = "ascending";
+
+    expect(store.filesList.map((i) => i.id)).toEqual([3, 2, 1]);
+
+    store.filter.sortOrder = "descending";
+    expect(store.filesList.map((i) => i.id)).toEqual([3, 1, 2]);
+  });
+
+  it("keeps the server order of a name sort outside a private room", () => {
+    const store = setupStore();
+    store.files = [plainFile(1, "Zebra.docx"), plainFile(2, "Apple.docx")];
+
+    store.filter.sortBy = "AZ";
+    store.filter.sortOrder = "ascending";
+
+    expect(store.filesList.map((i) => i.id)).toEqual([1, 2]);
   });
 
   it("keeps the server order for non-name sorts", () => {

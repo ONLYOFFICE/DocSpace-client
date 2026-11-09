@@ -503,12 +503,7 @@ self: FilesActionStore,
 )=> {
   const { secondaryProgressDataStore } = self.uploadDataStore;
   const { setSecondaryProgressBarData } = secondaryProgressDataStore;
-  if (
-    self.filesSettingsStore.confirmDelete ||
-    self.treeFoldersStore.isPrivacyFolder ||
-    isThirdParty ||
-    isRoom
-  ) {
+  if (self.isDeleteConfirmationForced || isThirdParty || isRoom) {
     self.dialogsStore.setIsRoomDelete(isRoom as boolean);
     self.dialogsStore.setDeleteDialogVisible(true);
   } else {

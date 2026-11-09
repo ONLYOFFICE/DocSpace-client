@@ -788,6 +788,32 @@ export async function startUploadSession(
   }) as TUploadOperation;
 }
 
+const CHUNK_UPLOAD_ATTEMPTS = 3;
+const CHUNK_RETRY_DELAY_MS = 1000;
+const CHUNK_RETRY_JITTER_MS = 500;
+
+const isRetryableChunkError = (error: unknown) => {
+  if (!axios.isAxiosError(error) || axios.isCancel(error)) return false;
+
+  const status = error.response?.status;
+
+  return !status || status === 502 || status === 503 || status === 504;
+};
+
+const waitBeforeChunkRetry = (attempt: number, signal?: AbortSignal) =>
+  new Promise<void>((resolve) => {
+    const done = () => {
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", done);
+      resolve();
+    };
+    const timer = setTimeout(
+      done,
+      CHUNK_RETRY_DELAY_MS * attempt + Math.random() * CHUNK_RETRY_JITTER_MS,
+    );
+    signal?.addEventListener("abort", done);
+  });
+
 export async function uploadChunkParallel(
   folderId: string | number,
   sessionId: string,
@@ -795,12 +821,25 @@ export async function uploadChunkParallel(
   data: FormData,
   signal?: AbortSignal,
 ) {
-  return request({
-    method: "post",
-    url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
-    data,
-    signal,
-  });
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await request({
+        method: "post",
+        url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
+        data,
+        signal,
+      });
+    } catch (error) {
+      if (
+        attempt >= CHUNK_UPLOAD_ATTEMPTS ||
+        signal?.aborted ||
+        !isRetryableChunkError(error)
+      )
+        throw error;
+
+      await waitBeforeChunkRetry(attempt, signal);
+    }
+  }
 }
 
 export async function uploadChunkSequential(

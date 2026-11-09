@@ -102,6 +102,7 @@ export type TFilesStore = {
 export type TFilesActionsStore = {
   uploadDataStore: UploadDataStore;
   isGroupMenuBlocked: boolean;
+  isDeleteConfirmationForced: boolean;
   emptyTrashInProgress: boolean;
   emptyPersonalRoomInProgress: boolean;
   isExpiredLinkAsync: (

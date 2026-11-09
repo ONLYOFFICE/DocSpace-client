@@ -223,7 +223,7 @@ const ClientArticleSidebar = ({
   );
 
   // The AI Workspace list narrowed to one of its room types: the section's
-  // Skills (Instructions rooms) and Knowledge base (Knowledge rooms) entries
+  // Skills (Instructions rooms) and Knowledge (Knowledge rooms) entries
   // are the same /ai-rooms list with the `type` filter preset.
   const aiHubTypeUrl = React.useCallback(
     (type: RoomsType) => {
@@ -586,7 +586,7 @@ const ClientArticleSidebar = ({
     // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`).
     // Its root lists the agents (AI projects; a project opens as its chat),
     // the entries are the same list narrowed to the other room types -
-    // Skills (Instructions rooms), Knowledge base (Knowledge rooms) - plus a
+    // Skills (Instructions rooms), Knowledge (Knowledge rooms) - plus a
     // Trash scoped to those room types; the server never archives them, so
     // there is no Archive slot. The bare `/ai-rooms` is the
     // Rooms app's SDK frame page: the section lives on the nested paths.
@@ -606,7 +606,7 @@ const ClientArticleSidebar = ({
           },
           {
             id: "ai-rooms-knowledge",
-            label: t("Common:Knowledge"),
+            label: t("Common:AiWorkspaceKnowledge"),
             icon: CatalogKnowledgeReactSvgUrl,
             ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),
           },

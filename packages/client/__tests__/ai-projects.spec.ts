@@ -115,7 +115,7 @@ test.describe("AI Workspace", () => {
         await expect(table(page)).not.toContainText(room.title);
       }
 
-      // One AI section in the sidebar, with Skills, Knowledge base
+      // One AI section in the sidebar, with Skills, Knowledge
       // and Trash and no Archive; the projects have no section of their own.
       await expect(sidebar(page)).toContainText("AI Workspace");
       await expect(sidebar(page)).not.toContainText("AI Projects");

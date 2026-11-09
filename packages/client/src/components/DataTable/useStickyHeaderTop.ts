@@ -34,7 +34,38 @@
  */
 
 import type React from "react";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
+
+// The bars stuck above the table in its scroller: the Section's pinned header
+// and any sticky sibling on the way up from the table, such as the tabs a
+// settings page pins under that header.
+const barsAbove = (
+  table: HTMLElement,
+  scroller: HTMLElement,
+  pinned: HTMLElement,
+) => {
+  const bars = [pinned];
+  for (let el: Element | null = table; el && el !== scroller;) {
+    for (
+      let sibling = el.previousElementSibling;
+      sibling;
+      sibling = sibling.previousElementSibling
+    ) {
+      if (
+        sibling !== pinned &&
+        sibling instanceof HTMLElement &&
+        getComputedStyle(sibling).position === "sticky"
+      )
+        bars.push(sibling);
+    }
+    el = el.parentElement;
+  }
+  return bars;
+};
+
+// Where a stuck bar ends, from the top of the scroller.
+const stuckBottom = (bar: HTMLElement) =>
+  (parseFloat(getComputedStyle(bar).top) || 0) + bar.offsetHeight;
 
 /**
  * Where the DataTable's sticky header stops: where the old table's
@@ -48,25 +79,40 @@ import { useLayoutEffect } from "react";
  *
  * `belowPinned` is for a table further down a page, such as one under a
  * settings page's description: its resting place is far below the pinned
- * header, so the header stops right under the pinned one instead.
+ * header, so the header stops right under the pinned one instead - or under
+ * the lowest bar the page pins below it, such as a settings page's tabs.
+ *
+ * The table may come later than the component that calls this - one that
+ * renders nothing until its list has loaded - so the element behind `tableRef`
+ * is read on every render and measured whenever it changes.
  */
 export const useStickyHeaderTop = (
   tableRef: React.RefObject<HTMLDivElement | null>,
   { belowPinned = false }: { belowPinned?: boolean } = {},
 ) => {
+  const [table, setTable] = useState<HTMLDivElement | null>(null);
+
   useLayoutEffect(() => {
-    const table = tableRef.current;
+    if (tableRef.current !== table) setTable(tableRef.current);
+  });
+
+  useLayoutEffect(() => {
     const scroller = table?.closest<HTMLElement>(".section-scroll");
-    const pinned = scroller?.querySelector(".section-sticky-container");
+    const pinned = scroller?.querySelector<HTMLElement>(
+      ".section-sticky-container",
+    );
     if (!table || !scroller || !pinned) return undefined;
 
+    const bars = belowPinned ? barsAbove(table, scroller, pinned) : [pinned];
+
     // The table's offset in the scrolled content, the same at any scroll; or
-    // the pinned header's bottom in the scroller, the same while it is pinned.
+    // the bottom of the lowest bar above it, the same while they are stuck.
     const update = () => {
-      const scrollerTop = scroller.getBoundingClientRect().top;
       const top = belowPinned
-        ? pinned.getBoundingClientRect().bottom - scrollerTop
-        : table.getBoundingClientRect().top - scrollerTop + scroller.scrollTop;
+        ? Math.max(...bars.map(stuckBottom))
+        : table.getBoundingClientRect().top -
+          scroller.getBoundingClientRect().top +
+          scroller.scrollTop;
       table.style.setProperty(
         "--data-table-header-top",
         `${Math.max(0, Math.round(top))}px`,
@@ -75,7 +121,7 @@ export const useStickyHeaderTop = (
 
     update();
     const observer = new ResizeObserver(update);
-    observer.observe(pinned);
+    bars.forEach((bar) => observer.observe(bar));
     return () => observer.disconnect();
-  }, [tableRef, belowPinned]);
+  }, [table, belowPinned]);
 };

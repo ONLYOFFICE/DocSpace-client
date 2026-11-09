@@ -38,7 +38,7 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.fil
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -58,6 +58,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/data-table";
 
 import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeaderTop";
 
 import styles from "../../../../StyledDataImport.module.scss";
 import {
@@ -146,6 +147,9 @@ const TableView = (props: TypeSelectTableViewProps) => {
     [checkedKeys, toggleAccount],
   );
 
+  const tableRef = useRef<HTMLDivElement>(null);
+  useStickyHeaderTop(tableRef, { belowPinned: true });
+
   return (
     <div
       className={classNames(
@@ -168,6 +172,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
       ) : null}
       {accountsData.length > 0 ? (
         <DataTable<TEnhancedMigrationUser>
+          ref={tableRef}
           ariaLabel={t("Common:People")}
           columns={columns}
           rows={accountsData}

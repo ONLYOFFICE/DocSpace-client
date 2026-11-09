@@ -71,11 +71,6 @@
     margin-top: 16px;
     margin-bottom: 24px;
 
-    :global(.table-container_header) {
-      position: absolute;
-      z-index: 0;
-    }
-
     :global(.history-row-container) {
       max-width: 700px;
     }

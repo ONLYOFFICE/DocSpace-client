@@ -37,7 +37,7 @@ import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
 import type { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
@@ -52,6 +52,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/data-table";
 
 import sectionTableStyles from "SRC_DIR/components/DataTable/DataTable.module.scss";
+import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeaderTop";
 
 import type { TSelectAll } from "../../../../sub-components/SelectAllHeader";
 import styles from "../../../../StyledDataImport.module.scss";
@@ -128,10 +129,14 @@ const TableView = (props: TableViewProps) => {
     setSearchValue("");
   };
 
+  const tableRef = useRef<HTMLDivElement>(null);
+  useStickyHeaderTop(tableRef, { belowPinned: true });
+
   return (
     <div className={styles.styledTableContainer}>
       {accountsData.length > 0 ? (
         <DataTable<TEnhancedMigrationUser>
+          ref={tableRef}
           ariaLabel={t("Common:People")}
           columns={columns}
           rows={accountsData}

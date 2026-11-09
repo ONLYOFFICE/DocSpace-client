@@ -541,6 +541,73 @@ describe("UploadDataStore.asyncUpload — cancellation mid-chunk", () => {
     ).toEqual(["cancelled.docx", "next.docx"]);
     expect(store.files[0].fileId).toBe(888);
   });
+
+  it("keeps a row cancelled on its own as uploaded when finalize completes, without converting it or deleting the move source", async () => {
+    const { store } = createTestUploadDataStore();
+    const browserFile = makeBrowserFile("moved.doc", 1024, {
+      uploadContext: { moveSource: { fileId: 5, title: "moved.doc" } },
+    });
+    const entry = makeUploadFile({
+      uniqueId: "cancel-row",
+      file: browserFile,
+      toFolderId: 1,
+      needConvert: true,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    const deleteMovedEncryptedSource = vi.fn();
+    store.deleteMovedEncryptedSource = deleteMovedEncryptedSource as never;
+    const startConversion = vi.fn();
+    store.startConversion = startConversion as never;
+
+    vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+      id: "sess-1",
+      path: [],
+    } as never);
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    let releaseFinalize: (() => void) | undefined;
+    vi.mocked(filesApi.finalizeUploadSession).mockImplementation(
+      () =>
+        new Promise((res) => {
+          releaseFinalize = () =>
+            res({
+              uploaded: true,
+              id: 777,
+              file: makeFileInfo({ id: 777 }),
+            } as never);
+        }) as never,
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(releaseFinalize).toBeDefined());
+
+    store.cancelCurrentUpload("cancel-row", t);
+    expect(store.currentUploadNumber).toBe(0);
+
+    releaseFinalize?.();
+    await done;
+
+    expect(store.files[0]).toMatchObject({
+      action: "uploaded",
+      cancel: false,
+      fileId: 777,
+      error: null,
+    });
+    expect(
+      store.uploadedFilesHistory.find((h) => h.uniqueId === "cancel-row")
+        ?.action,
+    ).toBe("uploaded");
+    expect(store.currentUploadNumber).toBe(0);
+    expect(deleteMovedEncryptedSource).not.toHaveBeenCalled();
+    expect(startConversion).not.toHaveBeenCalled();
+    expect(store.filesToConversion).toEqual([]);
+  });
 });
 
 describe("UploadDataStore.uploadFileChunks — failed chunk", () => {

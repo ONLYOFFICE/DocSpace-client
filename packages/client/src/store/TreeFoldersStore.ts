@@ -123,7 +123,7 @@ class TreeFoldersStore {
           folder.title = i18n.t("Common:Recent");
           break;
         case FolderType.AiHub:
-          folder.title = i18n.t("Common:AIChat");
+          folder.title = i18n.t("Common:AiWorkspace");
           break;
         default:
           break;

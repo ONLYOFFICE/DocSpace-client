@@ -222,8 +222,8 @@ const ClientArticleSidebar = ({
     [userId],
   );
 
-  // The AI Chat list narrowed to one of its room types: the section's
-  // Templates (AI projects), Skills (Instructions rooms) and Knowledge base
+  // The AI Workspace list narrowed to one of its room types: the section's
+  // Agents (AI projects), Skills (Instructions rooms) and Knowledge base
   // (Knowledge rooms) entries are the same /ai-rooms list with the `type`
   // filter preset, which the filter bar then shows as a chip.
   const aiHubTypeUrl = React.useCallback(
@@ -583,9 +583,9 @@ const ClientArticleSidebar = ({
     }
 
     // The AI sections close the apps, while the portal has AI switched on
-    // (the server only serves their roots then). "AI Chat" holds the
+    // (the server only serves their roots then). "AI Workspace" holds the
     // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`).
-    // Its entries are the same list narrowed to one room type - Templates
+    // Its entries are the same list narrowed to one room type - Agents
     // (AI projects), Skills (Instructions rooms), Knowledge base (Knowledge
     // rooms) - plus a Trash scoped to those room types; the server never
     // archives them, so there is no Archive slot. The bare `/ai-rooms` is the
@@ -593,14 +593,14 @@ const ClientArticleSidebar = ({
     if (aiHubFolder && aiServicesEnabled) {
       mainItems.push({
         id: "ai-rooms",
-        label: t("Common:AIChat"),
+        label: t("Common:AiWorkspace"),
         icon: getCatalogIconUrlByType(FolderType.Rooms),
         ...nav(searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub)),
         ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),
         children: [
           {
-            id: "ai-rooms-templates",
-            label: t("Common:Templates"),
+            id: "ai-rooms-agents",
+            label: t("Common:Agents"),
             icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
             ...nav(aiHubTypeUrl(RoomsType.AiProjectRoom)),
           },

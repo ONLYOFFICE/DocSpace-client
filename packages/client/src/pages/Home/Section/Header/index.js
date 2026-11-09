@@ -776,7 +776,7 @@ const SectionHeaderContent = (props) => {
 
     // The AI root is titled by the client, as the tree titles it.
     if (getCategoryType(location) === CategoryType.AiHub)
-      return t("Common:AIChat");
+      return t("Common:AiWorkspace");
 
     if (isContactsPage) {
       switch (contactsTab) {

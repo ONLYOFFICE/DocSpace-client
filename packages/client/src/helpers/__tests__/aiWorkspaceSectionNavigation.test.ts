@@ -4,10 +4,10 @@ import { RoomsType } from "@docspace/shared/enums";
 
 import { getClientActiveId } from "../articleNavigation";
 
-// The AI Chat section's entries are the same /ai-rooms list narrowed to one
+// The AI Workspace section's entries are the same /ai-rooms list narrowed to one
 // room type through the `type` filter, so the sidebar highlights them by the
 // query string, not by the path.
-describe("AI Chat section active item", () => {
+describe("AI Workspace section active item", () => {
   const ids = { roomsFolderId: 1 };
 
   it.each([
@@ -16,7 +16,7 @@ describe("AI Chat section active item", () => {
     [
       "/ai-rooms/filter",
       `?searchArea=AiHub&type=${RoomsType.AiProjectRoom}`,
-      "ai-rooms-templates",
+      "ai-rooms-agents",
     ],
     [
       "/ai-rooms/filter",

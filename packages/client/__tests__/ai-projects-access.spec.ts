@@ -69,7 +69,7 @@ const ERROR_404_PATH = "/error/404";
 
 const pathnameOf = (page: Page) => new URL(page.url()).pathname;
 
-test.describe("AI Chat access", () => {
+test.describe("AI Workspace access", () => {
   test("are left for the user's start page once AI services are switched off", async ({
     page,
     baseUrl,

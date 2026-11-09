@@ -204,11 +204,11 @@ export const getSectionTrashUrl = (
 };
 
 /**
- * The AI Chat section's entries are the `/ai-rooms` list narrowed to one
+ * The AI Workspace section's entries are the `/ai-rooms` list narrowed to one
  * room type, so the active entry is read from the `type` filter in the query.
  */
 const AI_HUB_TYPE_ITEM_IDS: Record<string, string> = {
-  [RoomsType.AiProjectRoom]: "ai-rooms-templates",
+  [RoomsType.AiProjectRoom]: "ai-rooms-agents",
   [RoomsType.InstructionsRoom]: "ai-rooms-skills",
   [RoomsType.KnowledgeRoom]: "ai-rooms-knowledge",
 };

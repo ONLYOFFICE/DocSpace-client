@@ -41,7 +41,10 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import {
+  useAiChatPanel,
+  useOpenAiChat,
+} from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
@@ -230,6 +233,7 @@ const PureHome = observer((props) => {
     isFormsFolder,
     isAiSectionFolder,
     isAiProjectRoomRoot,
+    isAiWorkspaceRoot,
     isPrivacyFolder,
     isArchiveFolder,
     isTemplatesFolder,
@@ -290,13 +294,37 @@ const PureHome = observer((props) => {
 
   usePanelExclusivity(infoPanelStore);
 
+  // The AI Workspace root is the chat itself: opening the section opens the
+  // panel over the whole page, and leaving the root (one of its entries,
+  // another section) closes what it opened. A panel the user had open
+  // before is left as it was.
+  const openAiChat = useOpenAiChat();
+  const openedForWorkspaceRef = React.useRef(false);
+  const showAiWorkspaceChat = isAiWorkspaceRoot && isAiChatAvailable;
+  React.useEffect(() => {
+    if (showAiWorkspaceChat) {
+      if (!aiChatPanel.isChatPanelVisible) {
+        openedForWorkspaceRef.current = true;
+        openAiChat();
+      }
+      return;
+    }
+    if (!openedForWorkspaceRef.current) return;
+    openedForWorkspaceRef.current = false;
+    if (aiChatPanel.isChatPanelVisible) aiChatPanel.closeChatPanel();
+    // The panel's visibility is read on the transition only: toggling it on
+    // the root must not reopen the chat on the spot.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: visibility is read on the transition only
+  }, [showAiWorkspaceChat]);
+
   // An open AI project draws its chat in the section body (AiProjectView),
   // so the side panel stays out of the way while a project room is shown.
+  // On the AI Workspace root the panel is the page: always fullscreen.
   const isAiChatFullscreen =
     isAiChatAvailable &&
     !isAiProjectRoomRoot &&
     aiChatPanel.isChatPanelVisible &&
-    (aiChatPanel.isChatPanelFullscreen || !isDesktop);
+    (aiChatPanel.isChatPanelFullscreen || !isDesktop || isAiWorkspaceRoot);
 
   // On tablets/phones the opened AI chat panel takes over the whole main
   // area, so navigating to another section via the left panel must hide it —
@@ -1042,6 +1070,14 @@ export const Component = inject(
       isFormsFolder,
       isAiSectionFolder,
       isAiProjectRoomRoot,
+      // The AI Workspace list with no room type picked: the section's own
+      // entries (Agents, Skills, Knowledge base) narrow the same list by type
+      // and keep the rooms on screen.
+      isAiWorkspaceRoot:
+        isAiSectionFolder &&
+        !(Array.isArray(roomsFilter?.type)
+          ? roomsFilter.type.length > 0
+          : roomsFilter?.type),
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
 

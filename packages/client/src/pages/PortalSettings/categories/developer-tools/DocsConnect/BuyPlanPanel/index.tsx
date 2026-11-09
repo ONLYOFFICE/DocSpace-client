@@ -65,6 +65,7 @@ import RebrandingSvg from "PUBLIC_DIR/images/icons/16/docs-connect.rebranding.re
 import ExternalLinkSvg from "PUBLIC_DIR/images/external.link.14.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
+import { formatCurrencyIsolated } from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 import type {
@@ -373,13 +374,17 @@ const BuyPlanPanel = ({
     formatCurrencyValue(i18n.language, amount, currency, 2);
 
   const formatCurrencyExact = (amount: number) =>
-    new Intl.NumberFormat(i18n.language, {
-      numberingSystem: LATIN_NUMBERING_SYSTEM,
-      style: "currency",
-      currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 10,
-    }).format(amount);
+    formatCurrencyIsolated(
+      i18n.language,
+      new Intl.NumberFormat(i18n.language, {
+        numberingSystem: LATIN_NUMBERING_SYSTEM,
+        style: "currency",
+        currency,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 10,
+      }),
+      amount,
+    );
 
   const priceLoader = (
     <Loader

@@ -42,7 +42,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TByokKey } from "@docspace/shared/api/ai/types";
 
 import ByokKeyField from "./ByokKeyField";
-import { getByokProviderMeta } from "./providers";
 import styles from "./Byok.module.scss";
 
 type ByokEditCardProps = {
@@ -67,7 +66,6 @@ const ByokEditCard = ({
   const [isSaving, setIsSaving] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);
 
-  const icon = getByokProviderMeta(byokKey.provider)?.icon;
   const isBusy = isSaving || isDeleting;
 
   const onSubmit = async () => {
@@ -98,7 +96,13 @@ const ByokEditCard = ({
       </Text>
       <div className={styles.editModel}>
         <div className={styles.cardIcon}>
-          {icon ? <img src={icon} alt="" /> : null}
+          {byokKey.image ? (
+            <div
+              className={styles.iconsContainer}
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+              dangerouslySetInnerHTML={{ __html: byokKey.image }}
+            />
+          ) : null}
         </div>
         <div className={styles.cardInfo}>
           <Text fontSize="14px" fontWeight={600} truncate>
@@ -110,7 +114,6 @@ const ByokEditCard = ({
         </div>
       </div>
       <ByokKeyField
-        providerId={byokKey.provider}
         value={apiKey}
         error={error}
         isDisabled={isBusy}

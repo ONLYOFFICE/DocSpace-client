@@ -77,10 +77,16 @@
   border: 1px solid var(--border-service-color);
   border-radius: 6px;
 
-  img {
+  svg {
     width: 24px;
     height: 24px;
   }
+}
+
+.iconsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardInfo {
@@ -105,16 +111,6 @@
   border: 1px solid var(--border-service-color);
   border-radius: 6px;
   box-sizing: border-box;
-}
-
-.keyField {
-  position: relative;
-}
-
-.keyLink {
-  position: absolute;
-  inset-inline-end: 0;
-  bottom: calc(100% + 4px);
 }
 
 .formButtons {

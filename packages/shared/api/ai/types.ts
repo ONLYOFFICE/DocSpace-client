@@ -304,4 +304,5 @@ export type TByokKey = {
   id: string;
   name?: string;
   provider: string;
+  image?: string;
 };

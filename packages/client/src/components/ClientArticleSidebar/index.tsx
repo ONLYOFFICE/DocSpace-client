@@ -584,8 +584,8 @@ const ClientArticleSidebar = ({
     // The AI sections close the apps, while the portal has AI switched on
     // (the server only serves their roots then). "AI Workspace" holds the
     // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`).
-    // Its root is the chat, with the agents (AI projects) listed above the
-    // composer; the entries are the same list narrowed to one room type -
+    // Its root lists the agents (AI projects; a project opens as its chat),
+    // the entries are the same list narrowed to the other room types -
     // Skills (Instructions rooms), Knowledge base (Knowledge rooms) - plus a
     // Trash scoped to those room types; the server never archives them, so
     // there is no Archive slot. The bare `/ai-rooms` is the

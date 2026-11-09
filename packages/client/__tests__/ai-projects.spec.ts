@@ -105,9 +105,14 @@ test.describe("AI Workspace", () => {
 
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
 
+      // The root lists the agents; the Instructions and Knowledge rooms sit
+      // behind the section's own entries.
       await expect(table(page)).toBeVisible();
-      for (const room of [...AI_HUB_ROOMS, ...AI_PROJECTS]) {
+      for (const room of AI_PROJECTS) {
         await expect(table(page)).toContainText(room.title);
+      }
+      for (const room of AI_HUB_ROOMS) {
+        await expect(table(page)).not.toContainText(room.title);
       }
 
       // One AI section in the sidebar, with Skills, Knowledge base

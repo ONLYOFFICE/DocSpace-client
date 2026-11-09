@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect } from "vitest";
 
+import { RoomSearchArea, RoomsType } from "../../enums";
 import RoomsFilter from "./filter";
 
 const conditions = [
@@ -45,5 +46,27 @@ describe("RoomsFilter metadata params", () => {
     copy.metadataTemplateId = null;
 
     expect(copy.equals(filter)).toBe(false);
+  });
+});
+
+describe("RoomsFilter AI Workspace default", () => {
+  it("lists the AI projects when no room type is asked for", () => {
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+    expect(filter.type).toEqual([String(RoomsType.AiProjectRoom)]);
+    expect(filter.toUrlParams()).toContain(`type=${RoomsType.AiProjectRoom}`);
+
+    const fromUrl = RoomsFilter.getFilter({ search: "?searchArea=AiHub" } as Location);
+    expect(fromUrl?.type).toEqual([String(RoomsType.AiProjectRoom)]);
+  });
+
+  it("keeps the room type an address asks for", () => {
+    const fromUrl = RoomsFilter.getFilter({
+      search: `?searchArea=AiHub&type=${RoomsType.InstructionsRoom}`,
+    } as Location);
+    expect(fromUrl?.type).toEqual(String(RoomsType.InstructionsRoom));
+  });
+
+  it("leaves the other search areas without a type", () => {
+    expect(RoomsFilter.getDefault(undefined, RoomSearchArea.Active).type).toBeNull();
   });
 });

@@ -81,7 +81,6 @@ import {
 } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
-  Events,
   DeviceType,
   IndexedDBStores,
 } from "@docspace/shared/enums";
@@ -100,7 +99,6 @@ import "@docspace/shared/styles/theme.scss";
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
 import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
-import WorkspaceIntro from "SRC_DIR/pages/AiProjects/sub-components/workspace/WorkspaceIntro";
 import { useAiPresetsPickerActions } from "SRC_DIR/Hooks/useAiPresetsPickerActions";
 import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
@@ -196,9 +194,6 @@ const Shell = ({ page = "home", ...rest }) => {
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
-    aiProjects,
-    isAiWorkspaceRoot,
-    canCreateAiProject,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -263,23 +258,6 @@ const Shell = ({ page = "home", ...rest }) => {
   const isInsideAiProject =
     isAiProjectOpen && location.pathname.startsWith("/ai-rooms/");
 
-  // The AI Workspace root is the chat with the agents listed above the
-  // composer: the list is read again on every entry, so an agent created,
-  // renamed or left elsewhere is picked up.
-  const showWorkspaceIntro = isAiWorkspaceRoot && !isInsideAiProject;
-  React.useEffect(() => {
-    if (showWorkspaceIntro) void fetchAiPresets?.();
-  }, [showWorkspaceIntro, fetchAiPresets]);
-  const openAiProject = React.useCallback(
-    (project) => navigate(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
-    [navigate],
-  );
-  // The project form, as the section's "+" opens it (GlobalEvents).
-  const createAiProject = React.useCallback(() => {
-    const event = new CustomEvent(Events.ROOM_CREATE);
-    event.payload = { isAiProjectCreate: true };
-    window.dispatchEvent(event);
-  }, []);
   useCreateFileError({
     setPortalTariff,
     setFormCreationInfo,
@@ -1111,12 +1089,6 @@ const Shell = ({ page = "home", ...rest }) => {
           chatIntro={
             isInsideAiProject && aiActiveProject ? (
               <ProjectIntro project={aiActiveProject} />
-            ) : showWorkspaceIntro ? (
-              <WorkspaceIntro
-                projects={aiProjects}
-                onOpen={openAiProject}
-                onCreate={canCreateAiProject ? createAiProject : undefined}
-              />
             ) : undefined
           }
           // Instructions rooms are connected on their own only from an AI
@@ -1310,16 +1282,6 @@ const ShellWrapper = inject(
       aiActiveProject: aiProjectsStore.activeProject,
       openEditAiProject: aiProjectsStore.openEditDialog,
       aiPresets: aiPresetsStore.presets,
-      aiProjects: aiPresetsStore.projects,
-      // The AI Workspace list with no room type picked: the chat is the page
-      // there, with the agents listed above the composer.
-      isAiWorkspaceRoot:
-        treeFoldersStore.isAiHubFolder &&
-        !(Array.isArray(filesStore.roomsFilter?.type)
-          ? filesStore.roomsFilter.type.length > 0
-          : filesStore.roomsFilter?.type),
-      // Matches the section's own "+": room admins and admins create projects.
-      canCreateAiProject: authStore.isAdmin || authStore.isRoomAdmin,
       requestPresetApply: aiPresetsStore.requestApply,
       fetchAiPresets: aiPresetsStore.fetchPresets,
       // The Forms section, in both its shapes: the bare Forms root, and a

@@ -3,14 +3,21 @@
   "content": "No reasoning",
   "content_en_sha1_hash": "4e2e72400f61f8b3fff5b5ed13abd6886f4306e8",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a field label, section title, option or toggle label. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Option in the reasoning-effort drop-down on the Document Agent tab: the model runs without extended thinking. Short label, noun phrase.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 205,
+      "context": "[profiles, defaultProfile],\n );\n \n const reasoningLabels = React.useMemo<Record<TReasoningLevel, string>>(\n () => ({\n off: t(\"Common:DocumentAgentReasoning_off\"),\n low: t(\"Common:DocumentAgentReasoning_low\"),\n medium: t(\"Common:DocumentAgentReasoning_medium\"),\n high: t(\"Common:DocumentAgentReasoning_high\"),\n max: t(\"Common:DocumentAgentReasoning_max\"),\n }),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

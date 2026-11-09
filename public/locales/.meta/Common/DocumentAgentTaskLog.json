@@ -3,14 +3,21 @@
   "content": "Save task logs",
   "content_en_sha1_hash": "d35bf0d2908fd631cd7718a2e10d1e9238749af0",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a field label, section title, option or toggle label. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Label next to the toggle on the Document Agent tab that makes every agent task save its full step-by-step log as a file. Short imperative phrase; 'task log' is a text file, not the chat.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 427,
+      "context": "isDisabled={fieldsDisabled}\n dataTestId=\"document-agent-tasklog-toggle\"\n />\n <div className={styles.toggleCaption}>\n <Text fontWeight={600} lineHeight=\"20px\" noSelect>\n {t(\"Common:DocumentAgentTaskLog\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" className={styles.hint}>\n {t(\"Common:DocumentAgentTaskLogHint\")}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

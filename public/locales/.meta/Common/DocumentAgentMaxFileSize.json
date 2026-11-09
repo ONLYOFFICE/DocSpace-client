@@ -3,14 +3,21 @@
   "content": "Maximum file size (MB)",
   "content_en_sha1_hash": "f801623c48386283193743a50342af99376607ef",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a field label, section title, option or toggle label. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Label of the numeric field on the Document Agent tab that caps the size of one input or output file of an agent task; the unit MB is in the label. Short noun phrase.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 406,
+      "context": "t(\"Common:DocumentAgentMaxToolCalls\"),\n \"maxToolCalls\",\n t(\"Common:DocumentAgentMaxToolCallsHint\", { max: MAX_TOOL_CALLS }),\n )}\n {numberField(\n t(\"Common:DocumentAgentMaxFileSize\"),\n \"maxFileMb\",\n t(\"Common:DocumentAgentMaxFileSizeHint\", { max: MAX_FILE_MB }),\n )}\n </div>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

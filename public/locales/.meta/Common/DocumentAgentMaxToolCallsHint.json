@@ -3,14 +3,21 @@
   "content": "How many tool calls one task may make before it is stopped, up to {{max}}.",
   "content_en_sha1_hash": "ea784bb29556c534009d332a1a6e449caeede120",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T14:14:59.918Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a hint under a field. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Hint in small text under the 'Maximum tool calls per task' field on the Document Agent tab; {{max}} is the upper limit the field accepts (a number, 150). One sentence.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 403,
+      "context": "</Text>\n \n {numberField(\n t(\"Common:DocumentAgentMaxToolCalls\"),\n \"maxToolCalls\",\n t(\"Common:DocumentAgentMaxToolCallsHint\", { max: MAX_TOOL_CALLS }),\n )}\n {numberField(\n t(\"Common:DocumentAgentMaxFileSize\"),\n \"maxFileMb\",\n t(\"Common:DocumentAgentMaxFileSizeHint\", { max: MAX_FILE_MB }),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,14 +3,27 @@
   "content": "Document Agent",
   "content_en_sha1_hash": "b5c188a494f453b71e515b6088f27a59906f9d23",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Name of the Document Agent tab in Portal settings → AI settings (and its item in the settings tree). Short noun phrase, title case.",
+    "text": "Name of the Document Agent tab in Portal settings > AI settings, also its item in the settings navigation. Short noun phrase naming the feature (an AI agent that works on office documents), title case.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 257,
+      "context": "onClick: makeOnClick(TAB_IDS.LIMITS),\n },\n ]),\n {\n id: TAB_IDS.DOCUMENT_AGENT,\n name: t(\"Common:DocumentAgent\"),\n content: <DocumentAgent />,\n onClick: makeOnClick(TAB_IDS.DOCUMENT_AGENT),\n isDisabled: disableNonAiModels,\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 571,
+      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-document-agent\",\n key: \"7-6\",\n link: \"document-agent\",\n tKey: \"Common:DocumentAgent\",\n isCategory: true,\n },\n ],\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

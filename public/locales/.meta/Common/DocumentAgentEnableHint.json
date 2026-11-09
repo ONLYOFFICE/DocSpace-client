@@ -3,14 +3,21 @@
   "content": "Users can hand document tasks to the agent from the AI chat.",
   "content_en_sha1_hash": "c68fc6f8d7df06d355006c715aa9783cdbd300a4",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: the caption under the 'Enable Document Agent' toggle, saying what switching it on gives users.",
+    "text": "Caption in small text under the 'Enable Document Agent' toggle on the Document Agent tab, saying what users get when it is on. One short sentence.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 344,
+      "context": "<div className={styles.toggleCaption}>\n <Text fontWeight={600} lineHeight=\"20px\" noSelect>\n {t(\"Common:DocumentAgentEnable\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:DocumentAgentEnableHint\")}\n </Text>\n </div>\n </div>\n \n <div className={styles.section}>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,14 +3,21 @@
   "content": "Next to the task's results",
   "content_en_sha1_hash": "4cff0c20c7c3f748129de65d050c63301660242c",
   "created_at": "2026-11-06T13:44:16.707Z",
-  "updated_at": "2026-11-06T13:44:16.707Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: radio option: the log goes into the same folder as the task's result files.",
+    "text": "Radio option under 'Save logs to' on the Document Agent tab: the log file goes into the same folder as the files the task produced. Completes the label above it; noun phrase, no period.",
     "is_auto": true,
-    "updated_at": "2026-11-06T13:44:16.707Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 451,
+      "context": "spacing=\"12px\"\n fontSize=\"13px\"\n options={[\n {\n value: \"results\",\n label: t(\"Common:DocumentAgentTaskLogNextToResults\"),\n dataTestId: \"document-agent-tasklog-folder-results\",\n },\n {\n value: \"custom\",\n label: t(\"Common:DocumentAgentTaskLogCustomFolder\"),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

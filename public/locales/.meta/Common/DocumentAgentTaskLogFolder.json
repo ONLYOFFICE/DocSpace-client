@@ -3,14 +3,21 @@
   "content": "Save logs to",
   "content_en_sha1_hash": "01b3e04b1860b4ecf1f5d7ad3628231945858db8",
   "created_at": "2026-11-06T13:44:16.707Z",
-  "updated_at": "2026-11-06T13:44:16.707Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: label of the choice where task log files are stored.",
+    "text": "Label above the two radio options on the Document Agent tab that choose where the task log files are saved; shown only while task logs are on. Phrase that the options complete (a folder), so it ends without a period.",
     "is_auto": true,
-    "updated_at": "2026-11-06T13:44:16.707Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 439,
+      "context": "{draft.taskLog ? (\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"Common:DocumentAgentTaskLogFolder\")}\n removeMargin\n >\n <RadioButtonGroup\n className={styles.radioGroup}\n name=\"document-agent-tasklog-folder\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,14 +3,21 @@
   "content": "Maximum",
   "content_en_sha1_hash": "a8df2fec28d8948a0326722029c7492b88ee4fbe",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a field label, section title, option or toggle label. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Option in the reasoning-effort drop-down on the Document Agent tab: the highest thinking effort the model offers. One-word level name.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 209,
+      "context": "() => ({\n off: t(\"Common:DocumentAgentReasoning_off\"),\n low: t(\"Common:DocumentAgentReasoning_low\"),\n medium: t(\"Common:DocumentAgentReasoning_medium\"),\n high: t(\"Common:DocumentAgentReasoning_high\"),\n max: t(\"Common:DocumentAgentReasoning_max\"),\n }),\n [t],\n );\n \n if (!documentAgentInitied || !draft) return <DocumentAgentLoader />;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

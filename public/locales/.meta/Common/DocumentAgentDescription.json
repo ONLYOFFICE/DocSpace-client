@@ -3,14 +3,21 @@
   "content": "The Document Agent creates and edits office files in a sandbox of its own and saves the results as new files. Choose the model it runs on and how much one task may do.",
   "content_en_sha1_hash": "2a8813809571b85b18134bde202ccd9e167bcda9",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a field label, section title, option or toggle label. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Introductory paragraph at the top of the Document Agent tab in Portal settings > AI settings, explaining what the agent does and what the page sets. Two full sentences.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 328,
+      "context": "};\n \n return (\n <div className={styles.container} data-testid=\"document-agent-settings\">\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"Common:DocumentAgentDescription\")}\n </Text>\n \n <div className={styles.toggleBox}>\n <ToggleButton\n className={styles.toggle}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

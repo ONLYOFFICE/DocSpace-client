@@ -3,14 +3,21 @@
   "content": "The model every Document Agent task runs on. Long tasks cost more, so a cheaper model than the chat's may suit.",
   "content_en_sha1_hash": "5fc5714ae73d100d89c282e4fd25b056aabc0551",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T10:41:22.945Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a hint under a field. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Hint in small text under the model drop-down on the Document Agent tab, explaining that every agent task runs on this model and that a cheaper one than the chat's may do, since tasks are long. Two sentences.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 371,
+      "context": "isDefaultMode\n displaySelectedOption\n isDisabled={fieldsDisabled}\n dataTestId=\"document-agent-profile-combobox\"\n />\n <Text className={styles.hint}>{t(\"Common:DocumentAgentModelHint\")}</Text>\n </FieldContainer>\n \n <FieldContainer\n labelVisible\n isVertical",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,14 +3,21 @@
   "content": "Every task leaves a file with each of its steps.",
   "content_en_sha1_hash": "584b3d91b06f3e1641a12f89ad4e7b7035ab7d81",
   "created_at": "2026-11-06T10:41:22.945Z",
-  "updated_at": "2026-11-06T14:14:59.918Z",
+  "updated_at": "2026-11-09T07:52:23.260Z",
   "comment": {
-    "text": "Portal settings → AI settings → Document Agent tab: a hint under a field. The Document Agent is an external service that creates and edits office files for the user.",
+    "text": "Caption in small text under the 'Save task logs' toggle on the Document Agent tab, saying what the toggle produces. One short sentence.",
     "is_auto": true,
-    "updated_at": "2026-11-06T10:41:22.945Z",
+    "updated_at": "2026-11-09T07:52:23.260Z",
     "model": "claude-fable-5-1"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 430,
+      "context": "<div className={styles.toggleCaption}>\n <Text fontWeight={600} lineHeight=\"20px\" noSelect>\n {t(\"Common:DocumentAgentTaskLog\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" className={styles.hint}>\n {t(\"Common:DocumentAgentTaskLogHint\")}\n </Text>\n </div>\n </div>\n \n {draft.taskLog ? (",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

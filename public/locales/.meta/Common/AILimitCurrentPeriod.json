@@ -3,7 +3,7 @@
   "content": "Current period:",
   "content_en_sha1_hash": "aa389b318ef8c43a2b298a5916c1042a2bfa7cb2",
   "created_at": "2026-10-22T16:08:49.251Z",
-  "updated_at": "2026-10-22T16:10:38.032Z",
+  "updated_at": "2026-11-09T17:07:34.741Z",
   "comment": {
     "text": "Label in the Change AI limit dialog, followed by the user's spending in the current limit period (e.g. 'Spent $2 of $5 (40%). Resets Oct 23, 12:00 AM.'). Ends with a colon.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
-      "line_number": 243,
+      "line_number": 236,
       "context": "<div className={styles.content}>\n <Text>{t(\"Common:SetAILimitDescription\")}</Text>\n {spending ? (\n <div className={styles.currentPeriod}>\n <Text className={styles.status}>\n {t(\"Common:AILimitCurrentPeriod\")}\n </Text>\n {spending}\n </div>\n ) : null}\n <div className={styles.controls}>",
       "module": "/packages/client"
     }

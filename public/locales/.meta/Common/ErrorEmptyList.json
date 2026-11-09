@@ -3,7 +3,7 @@
   "content": "The list of entities has been changed. Please check the contents and try again.",
   "content_en_sha1_hash": "5fcafe5e752386800be3676175e2dc663d211f5b",
   "created_at": "2025-05-19T21:30:45.073Z",
-  "updated_at": "2026-11-06T11:20:11.803Z",
+  "updated_at": "2026-11-09T17:07:34.692Z",
   "comment": {
     "text": "This is an error toast message displayed when an operation fails because the list of items it was trying to act upon has become empty or invalid.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/HotkeyStore.ts",
-      "line_number": 967,
+      "line_number": 978,
       "context": "})\n .catch(() => {\n clearActiveOperations(fileIds, folderIds);\n });\n } else if (!isPastedIntoItself && !isPastedIntoSameFolder) {\n toastr.error(t(\"Common:ErrorEmptyList\"));\n }\n };\n \n uploadClipboardFiles = async (t: TTranslation, event: ClipboardEvent) => {\n const { createFoldersTree } = this.filesActionsStore;",
       "module": "/packages/client"
     }

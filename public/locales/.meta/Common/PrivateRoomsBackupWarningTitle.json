@@ -3,7 +3,7 @@
   "content": "Private rooms are not backed up",
   "content_en_sha1_hash": "49aa7d41bbef12f32069e53ade3a0629e43e8c74",
   "created_at": "2026-11-06T11:19:15.755Z",
-  "updated_at": "2026-11-06T11:20:44.054Z",
+  "updated_at": "2026-11-09T17:07:35.054Z",
   "comment": {
     "text": "Bold first line of the grey information bar on the Data backup, Automatic backup and Restore pages of the portal settings, shown only while private (end-to-end encrypted) rooms are available; the line under it is Common:PrivateRoomsBackupWarning. A short statement, not a sentence with a period, telling administrators that private rooms are left out of backups.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/sub-components/PrivateRoomsBackupWarning.tsx",
-      "line_number": 59,
-      "context": "return (\n <div className={styles.privateRoomsWarning}>\n <PublicRoomBar\n barIsVisible\n iconName={CatalogPrivateReactSvgUrl}\n headerText={t(\"Common:PrivateRoomsBackupWarningTitle\")}\n bodyText={t(\"Common:PrivateRoomsBackupWarning\")}\n dataTestId=\"private-rooms-backup-warning\"\n />\n </div>\n );",
+      "line_number": 69,
+      "context": "return (\n <div className={classNames(styles.privateRoomsWarning, className)}>\n <PublicRoomBar\n barIsVisible\n iconName={CatalogPrivateReactSvgUrl}\n headerText={t(\"Common:PrivateRoomsBackupWarningTitle\")}\n bodyText={t(\"Common:PrivateRoomsBackupWarning\")}\n dataTestId=\"private-rooms-backup-warning\"\n style={barStyle}\n />\n </div>",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Download without decryption",
   "content_en_sha1_hash": "aee1006ca4da5eaffd975d51074dacd7bfb71bce",
   "created_at": "2026-05-24T17:27:24.897Z",
-  "updated_at": "2026-11-05T16:49:39.991Z",
+  "updated_at": "2026-11-09T17:07:34.963Z",
   "comment": {
     "text": "Menu option label for downloading a file without performing decryption.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 289,
+      "line_number": 287,
       "context": "case \"downloadEncrypted\":\n if (!this.isAvailableOption(\"download\")) return null;\n return {\n id: \"menu-download-encrypted\",\n label: t(\"Common:DownloadWithoutDecryption\"),\n onClick: this.downloadEncryptedHandle,\n iconUrl: DownloadReactSvgUrl,\n };\n \n case \"downloadAs\":",
       "module": "/packages/client"
     },

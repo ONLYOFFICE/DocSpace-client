@@ -225,6 +225,7 @@ export const getOptions = (
   vectorizationEnabled: boolean = true,
   isCreateSkillWithAIAvailable: boolean = true,
   isPrivateScope: boolean = false,
+  isCreateMarkdownAvailable: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -435,8 +436,18 @@ export const getOptions = (
 
   // The flat AI source rooms: an Instructions room holds Markdown skills,
   // a Knowledge room holds files to index. Neither takes a folder.
-  // A skill is uploaded or written by AI, never created empty: the server
-  // refuses a Markdown file without its name / description frontmatter.
+  // A skill is uploaded, written by AI, or created with its frontmatter
+  // while the Markdown plugin is enabled: the server refuses a Markdown
+  // file without its name / description.
+  const createMarkdown: EmptyViewItemType = {
+    title: t("EmptyView:CreateNewFileTitle"),
+    description: t("Common:InstructionsRoomMarkdownOnly"),
+    icon: <CreateNewFormIcon />,
+    key: "create-markdown",
+    disabled: !security?.Create,
+    onClick: () => actions.onCreate("md"),
+  };
+
   const uploadMarkdownFromDevice = createUploadFromDeviceOption(
     t("EmptyView:UploadDeviceOptionTitle"),
     t("Common:InstructionsRoomMarkdownOnly"),
@@ -515,6 +526,16 @@ export const getOptions = (
         icon: FormReactSvgUrl,
         onClick: () => actions.onCreate("pdf"),
       },
+      ...(isCreateMarkdownAvailable
+        ? [
+            {
+              key: "create-markdown",
+              label: t("Common:MarkdownFile"),
+              icon: DocumentsReactSvgUrl,
+              onClick: () => actions.onCreate("md"),
+            },
+          ]
+        : []),
       { isSeparator: true, key: "separator" },
       {
         key: "create-folder",
@@ -693,14 +714,17 @@ export const getOptions = (
         uploadFromDeviceAnyFile,
       ];
 
-    // Markdown only, uploaded from the device (a pick from the workspace
-    // could bring any format; a new empty file has no frontmatter).
+    // Markdown only: uploaded, written by AI, or created through the
+    // Markdown plugin with its frontmatter.
     case RoomsType.InstructionsRoom: {
       if (isNotAdmin) return [];
 
-      const skillOptions = isCreateSkillWithAIAvailable
-        ? [uploadMarkdownFromStorage, uploadMarkdownFromDevice, createSkillWithAI]
-        : [uploadMarkdownFromStorage, uploadMarkdownFromDevice];
+      const skillOptions = [
+        ...(isCreateMarkdownAvailable ? [createMarkdown] : []),
+        uploadMarkdownFromStorage,
+        uploadMarkdownFromDevice,
+        ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
+      ];
 
       return isCollaborator ? skillOptions : [inviteUser, ...skillOptions];
     }

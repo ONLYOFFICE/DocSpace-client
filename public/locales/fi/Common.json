@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Lataa kaikki työtilasi tiedot yhtenä tiedostona.",
   "ManyEmails": "Liian monta tunnistettua sähköpostiosoitetta",
   "MarkAsFavorite": "Merkitse suosikiksi",
+  "MarkdownFile": "Markdown-tiedosto",
   "MarkedAsFavorite": "Lisätty suosikkeihin",
   "MaxCopies": "{{copiesCount}} - varmuuskopioiden enimmäismäärä",
   "MaxCurrency": "maks. {{currency}}",

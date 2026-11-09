@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Изтеглете всички данни от работното си пространство като един файл.",
   "ManyEmails": "Анализирани са твърде много имейли",
   "MarkAsFavorite": "Маркирай като любим",
+  "MarkdownFile": "Markdown файл",
   "MarkedAsFavorite": "Добавен в любими",
   "MaxCopies": "{{copiesCount}} - максимален брой резервни копия",
   "MaxCurrency": "макс {{currency}}",

@@ -37,7 +37,7 @@ import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
-import { AnalyticsEvents } from "@docspace/shared/enums";
+import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -50,6 +50,7 @@ import {
   getDefaultFileTestIdPrefix,
 } from "SRC_DIR/helpers/filesUtils";
 import { runEncryptedFileCreation } from "SRC_DIR/helpers/encryptedFileCreation";
+import { getNewSkillContent } from "SRC_DIR/helpers/plugins/markdown";
 import {
   getDisplayFileNames,
   getUniqueFileTitle,
@@ -106,6 +107,8 @@ const CreateEvent = ({
   filesList,
   fetchFiles,
   openDocEditor,
+  isInstructionsRoom,
+  openMarkdownFile,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -178,6 +181,40 @@ const CreateEvent = ({
             clearActiveOperations(null, folderIds);
             onCloseAction();
           });
+      } else if (extension === "md" && !isPrivacy) {
+        // Markdown is edited by the Markdown plugin, not by the document
+        // editor: the file is created here and opened in the plugin. A
+        // skill in an Instructions room starts with the frontmatter the
+        // server requires of it.
+        const fileTitle = `${newValue.trimEnd()}.${extension}`;
+
+        try {
+          const file = isInstructionsRoom
+            ? await api.files.insertFile(
+                parentId,
+                fileTitle,
+                new Blob([getNewSkillContent(newValue.trimEnd())], {
+                  type: "text/markdown",
+                }),
+              )
+            : await createFile(parentId, fileTitle);
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: AnalyticsEvents.FileCreated,
+            id: file.id,
+            parentId: file.folderId,
+            file_type: extension,
+          });
+
+          onCloseAction();
+
+          if (open) await openMarkdownFile(file);
+        } catch (error) {
+          isPaymentRequiredError(error);
+          toastr.error(error);
+          onCloseAction();
+        }
       } else if (isPrivacy) {
         const withEditor =
           openEditor && !(isFrame && frameConfig?.events?.onEditorOpen);
@@ -328,6 +365,8 @@ const CreateEvent = ({
       encryptionRoomId,
       fetchFiles,
       openDocEditor,
+      isInstructionsRoom,
+      openMarkdownFile,
     ],
   );
 
@@ -399,6 +438,7 @@ export default inject(
     filesSettingsStore,
     currentTariffStatusStore,
     publicRoomStore,
+    pluginStore,
   }) => {
     const publicRoomKey = publicRoomStore.publicRoomKey;
 
@@ -422,7 +462,7 @@ export default inject(
 
     const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
 
-    const { id: parentId, isIndexedFolder } = selectedFolderStore;
+    const { id: parentId, isIndexedFolder, roomType } = selectedFolderStore;
 
     const encryptionRoomId =
       selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
@@ -481,6 +521,8 @@ export default inject(
       filesList: files,
       fetchFiles,
       openDocEditor,
+      isInstructionsRoom: roomType === RoomsType.InstructionsRoom,
+      openMarkdownFile: pluginStore.openMarkdownFile,
     };
   },
 )(observer(CreateEvent));

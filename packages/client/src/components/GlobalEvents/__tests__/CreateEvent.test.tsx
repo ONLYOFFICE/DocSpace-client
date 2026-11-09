@@ -100,6 +100,9 @@ vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   return { ModalDialog };
 });
 
+const { RoomsType } = await import("@docspace/shared/enums");
+const api = (await import("@docspace/shared/api")).default;
+
 const CreateEvent = (await import("../CreateEvent"))
   .default as unknown as React.ComponentType<Record<string, unknown>>;
 
@@ -110,7 +113,12 @@ const ROOM_ID = 20;
 const createStores = ({
   keepNewFileName = false,
   isPrivacy = true,
-}: { keepNewFileName?: boolean; isPrivacy?: boolean } = {}) => {
+  roomType = undefined,
+}: {
+  keepNewFileName?: boolean;
+  isPrivacy?: boolean;
+  roomType?: (typeof RoomsType)[keyof typeof RoomsType];
+} = {}) => {
   const filesSettingsStore = observable(
     {
       keepNewFileName,
@@ -163,6 +171,7 @@ const createStores = ({
       isIndexedFolder: false,
       navigationPath: [],
       isRoom: true,
+      roomType,
     },
     treeFoldersStore: { isRecycleBinFolder: false, isPrivacyFolder: isPrivacy },
     uploadDataStore: {
@@ -177,6 +186,7 @@ const createStores = ({
     oformsStore: { gallerySelected: null, setGallerySelected: vi.fn() },
     currentTariffStatusStore: { setPortalTariff: vi.fn() },
     publicRoomStore: { publicRoomKey: null },
+    pluginStore: { openMarkdownFile: vi.fn(async () => undefined) },
   };
 };
 
@@ -366,5 +376,61 @@ describe("CreateEvent - one create action makes one file", () => {
 
     expect(stores.filesStore.createFile).toHaveBeenCalledTimes(1);
     expect(mocks.runEncryptedFileCreation).not.toHaveBeenCalled();
+  });
+});
+
+describe("CreateEvent - a Markdown file opens in the Markdown plugin", () => {
+  beforeEach(() => {
+    vi.spyOn(window, "open").mockImplementation(() => null);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("Folder: created empty and opened in the plugin", async () => {
+    const stores = createStores({ keepNewFileName: true, isPrivacy: false });
+    const file = { id: 40, folderId: ROOM_ID, fileExst: ".md" };
+    stores.filesStore.createFile.mockResolvedValue(file);
+    renderCreateEvent(stores, createRequest("md"));
+    await flush();
+
+    expect(stores.filesStore.createFile).toHaveBeenCalledWith(
+      ROOM_ID,
+      "Common:NewMarkdown.md",
+    );
+    expect(stores.pluginStore.openMarkdownFile).toHaveBeenCalledWith(file);
+    expect(window.open).not.toHaveBeenCalled();
+    expect(stores.filesStore.openDocEditor).not.toHaveBeenCalled();
+  });
+
+  it("Instructions room: created with the skill frontmatter", async () => {
+    const stores = createStores({
+      keepNewFileName: true,
+      isPrivacy: false,
+      roomType: RoomsType.InstructionsRoom,
+    });
+    const file = { id: 41, folderId: ROOM_ID, fileExst: ".md" };
+    const insertFile = vi
+      .spyOn(api.files, "insertFile")
+      .mockResolvedValue(file as never);
+    renderCreateEvent(stores, createRequest("md"));
+    await flush();
+
+    expect(stores.filesStore.createFile).not.toHaveBeenCalled();
+    expect(insertFile).toHaveBeenCalledTimes(1);
+    const [folderId, title, content] = insertFile.mock.calls[0];
+    expect(folderId).toBe(ROOM_ID);
+    expect(title).toBe("Common:NewMarkdown.md");
+    // jsdom's Blob has no text()
+    const text = await new Promise<string>((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.readAsText(content as Blob);
+    });
+    expect(text).toBe(
+      '---\nname: common-newmarkdown\ndescription: "Common:NewMarkdown"\n---\n\n',
+    );
+    expect(stores.pluginStore.openMarkdownFile).toHaveBeenCalledWith(file);
   });
 });

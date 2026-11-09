@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Stiahnite si všetky údaje z vášho pracovného priestoru ako jeden súbor.",
   "ManyEmails": "Analyzovalo sa príliš veľa e -mailov",
   "MarkAsFavorite": "Označiť ako obľúbené",
+  "MarkdownFile": "Súbor Markdown",
   "MarkedAsFavorite": "Pridané k obľúbeným",
   "MaxCopies": "{{copiesCount}} - maximálny počet zálohovaných kópií",
   "MaxCurrency": "max {{currency}}",

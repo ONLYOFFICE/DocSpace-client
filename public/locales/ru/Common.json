@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Скачайте все данные вашего рабочего пространства в виде одного файла.",
   "ManyEmails": "Слишком много распознанных адресов электронной почты",
   "MarkAsFavorite": "Добавить в избранное",
+  "MarkdownFile": "Файл Markdown",
   "MarkedAsFavorite": "Добавлено в избранное",
   "MaxCopies": "{{copiesCount}} - максимальное количество сохраняемых резервных копий",
   "MaxCurrency": "максимум {{currency}}",

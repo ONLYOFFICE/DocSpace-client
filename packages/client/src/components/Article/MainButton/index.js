@@ -105,6 +105,7 @@ const ArticleMainButtonContent = (props) => {
     setSelectFileKnowledgeRoomDialogVisible,
     setGenerateSkillDialogVisible,
     isCreateSkillWithAIAvailable,
+    isCreateMarkdownAvailable,
     knowledgeUploadAccept,
     showArticleLoader,
     isFavoritesFolder,
@@ -500,6 +501,19 @@ const ArticleMainButtonContent = (props) => {
       key: "template-gallery",
     };
 
+    // Markdown is created and edited through the Markdown plugin, so it is
+    // offered only while the plugin is enabled.
+    const createNewMarkdown = {
+      id: "actions_new-markdown",
+      className: "main-button_drop-down",
+      icon: ActionsDocumentsReactSvgUrl,
+      label: t("Common:MarkdownFile"),
+      onClick: onCreate,
+      action: "md",
+      key: "md",
+    };
+    const markdownActions = isCreateMarkdownAvailable ? [createNewMarkdown] : [];
+
     const createNewPresentationPptx = {
       id: "actions_new-presentation",
       className: "main-button_drop-down",
@@ -553,9 +567,10 @@ const ArticleMainButtonContent = (props) => {
 
     // Instructions and Knowledge rooms are flat and hold one kind of file:
     // no folders and no folder upload. An Instructions room takes Markdown
-    // skills (a new empty file has no frontmatter, which the server
-    // refuses); a Knowledge room takes files to index, never edited, and
-    // none at all while vectorization is off.
+    // skills: uploaded, or created with their frontmatter while the
+    // Markdown plugin is enabled (the server refuses a skill without it); a
+    // Knowledge room takes files to index, never edited, and none at all
+    // while vectorization is off.
     if (
       currentRoomType === RoomsType.InstructionsRoom ||
       currentRoomType === RoomsType.KnowledgeRoom
@@ -598,9 +613,18 @@ const ArticleMainButtonContent = (props) => {
         : isCreateSkillWithAIAvailable
           ? [...sourceRoomUploadActions, createSkillWithAI]
           : sourceRoomUploadActions;
+      const sourceCreateActions = isKnowledgeRoom ? [] : markdownActions;
       setUploadActions(sourceUploadActions);
-      setActions([]);
-      setModel(sourceUploadActions);
+      setActions(sourceCreateActions);
+      setModel(
+        sourceCreateActions.length > 0
+          ? [
+              ...sourceCreateActions,
+              { isSeparator: true, key: "separator" },
+              ...sourceUploadActions,
+            ]
+          : sourceUploadActions,
+      );
 
       return;
     }
@@ -622,6 +646,7 @@ const ArticleMainButtonContent = (props) => {
           createNewSpreadsheetXlsx,
           createNewPresentationPptx,
           isPrivacy ? createNewPdfForm : formActions,
+          ...(isPrivacy ? [] : markdownActions),
           createNewFolder,
         ]
       : [createNewFolder];
@@ -688,6 +713,7 @@ const ArticleMainButtonContent = (props) => {
     onShowKnowledgeRoomSelectFileDialog,
     onShowGenerateSkillDialog,
     isCreateSkillWithAIAvailable,
+    isCreateMarkdownAvailable,
     onUploadFileClick,
     onUploadFolderClick,
     createActionsForFormRoom,
@@ -1000,6 +1026,7 @@ export default inject(
       setGenerateSkillDialogVisible,
       isCreateSkillWithAIAvailable:
         contextOptionsStore.isCreateSkillWithAIAvailable,
+      isCreateMarkdownAvailable: contextOptionsStore.isCreateMarkdownAvailable,
       knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
       createFoldersTree,
 

@@ -107,6 +107,10 @@ import type {
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserRole } from "../helpers/plugins/roles";
+import {
+  isSupersededPluginItem,
+  MARKDOWN_EXTENSION,
+} from "../helpers/plugins/markdown";
 import { createPluginApi } from "../helpers/plugins/react/api";
 import {
   createModuleEvents,
@@ -1302,6 +1306,8 @@ class PluginStore {
 
     // Process all top-level items
     Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
+      if (isSupersededPluginItem(plugin, key)) return;
+
       const contextMenuItem = processContextMenuItem(value);
       this.contextMenuItems.set(key, contextMenuItem);
       actualKeys.add(key);
@@ -1406,6 +1412,8 @@ class PluginStore {
         : true;
 
       if (!correctUserType || !correctDevice) return;
+
+      if (isSupersededPluginItem(plugin, key)) return;
 
       const newItems: IMainButtonItemClient[] = [];
 
@@ -1872,6 +1880,23 @@ class PluginStore {
 
     return null;
   }
+
+  /**
+   * The enabled plugin item that opens `.md` files, or null: Markdown is
+   * edited and created only through it (see helpers/plugins/markdown).
+   */
+  get markdownFileItem() {
+    if (!this.settingsStore.enablePlugins) return null;
+
+    return this.fileItems.get(MARKDOWN_EXTENSION) ?? null;
+  }
+
+  get isMarkdownEditorAvailable() {
+    return !!this.markdownFileItem;
+  }
+
+  /** Opens a `.md` file in the Markdown plugin, for editing when allowed. */
+  openMarkdownFile = (file: TFile) => this.markdownFileItem?.onClick(file);
 
   get fileItemsList() {
     const items = Array.from(this.fileItems, ([key, value]) => {

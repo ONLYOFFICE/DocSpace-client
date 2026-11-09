@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "نزّل جميع البيانات الموجودة في مساحة عملك كملف واحد.",
   "ManyEmails": "تم تحليل عدد كبير جداً من عناوين البريد الإلكتروني",
   "MarkAsFavorite": "وضع علامة كمفضلة",
+  "MarkdownFile": "ملف Markdown",
   "MarkedAsFavorite": "تمت الإضافة إلى المفضلة",
   "MaxCopies": "{{copiesCount}} - الحد الأقصى لعدد النسخ الاحتياطية",
   "MaxCurrency": "الحد الأقصى {{currency}}",

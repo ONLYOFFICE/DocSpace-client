@@ -130,6 +130,8 @@ export interface InjectedEmptyViewContainerProps
   vectorizationEnabled?: boolean;
   /** The AI can write a skill: an Instructions room offers it. */
   isCreateSkillWithAIAvailable?: boolean;
+  /** The Markdown plugin is enabled: a Markdown file can be created. */
+  isCreateMarkdownAvailable?: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

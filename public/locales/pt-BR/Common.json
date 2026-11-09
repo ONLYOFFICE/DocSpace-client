@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Baixe todos os dados do seu espaço de trabalho em um único arquivo.",
   "ManyEmails": "Muitos endereços de e-mail foram processados",
   "MarkAsFavorite": "Marcar como favorito",
+  "MarkdownFile": "Arquivo Markdown",
   "MarkedAsFavorite": "Adicionado aos favoritos",
   "MaxCopies": "{{copiesCount}} - número máximo de cópias de backup",
   "MaxCurrency": "máx. {{currency}}",

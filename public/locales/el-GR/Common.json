@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Κατεβάστε όλα τα δεδομένα του χώρου εργασίας σας σε ένα ενιαίο αρχείο.",
   "ManyEmails": "Αναλύθηκαν πάρα πολλές διευθύνσεις email",
   "MarkAsFavorite": "Σήμανση ως αγαπημένο",
+  "MarkdownFile": "Αρχείο Markdown",
   "MarkedAsFavorite": "Προστέθηκε στα αγαπημένα",
   "MaxCopies": "{{copiesCount}} – μέγιστος αριθμός αντιγράφων ασφαλείας",
   "MaxCurrency": "Μέγιστο {{currency}}",

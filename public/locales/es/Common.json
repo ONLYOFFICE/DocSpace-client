@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Descargue todos los datos de su espacio de trabajo en un único archivo.",
   "ManyEmails": "Se detectaron demasiadas direcciones de correo electrónico",
   "MarkAsFavorite": "Marcar como favorito",
+  "MarkdownFile": "Archivo Markdown",
   "MarkedAsFavorite": "Agregado a los favoritos",
   "MaxCopies": "{{copiesCount}} - número máximo de copias de seguridad",
   "MaxCurrency": "máx. {{currency}}",

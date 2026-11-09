@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Laden Sie alle Daten in Ihrem Arbeitsbereich als einzelne Datei herunter.",
   "ManyEmails": "Zu viele E-Mail-Adressen erkannt",
   "MarkAsFavorite": "Als Favorit kennzeichnen",
+  "MarkdownFile": "Markdown-Datei",
   "MarkedAsFavorite": "Zu Favoriten hinzugefügt",
   "MaxCopies": "{{copiesCount}} - maximale Anzahl von Sicherungskopien",
   "MaxCurrency": "Max. {{currency}}",

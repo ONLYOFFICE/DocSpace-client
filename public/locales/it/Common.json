@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Scarica tutti i dati del tuo spazio di lavoro come un unico file.",
   "ManyEmails": "Ci sono troppe email da analizzare",
   "MarkAsFavorite": "Segna come preferito",
+  "MarkdownFile": "File Markdown",
   "MarkedAsFavorite": "Aggiunto ai preferiti",
   "MaxCopies": "{{copiesCount}} - numero massimo di copie di backup",
   "MaxCurrency": "max {{currency}}",

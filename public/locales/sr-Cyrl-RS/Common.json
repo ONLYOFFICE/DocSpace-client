@@ -1507,6 +1507,7 @@
   "ManualBackupDescription": "Преузмите све податке из свог радног простора као једну датотеку.",
   "ManyEmails": "Превише обрађених емаил адреса",
   "MarkAsFavorite": "Означи као омиљено",
+  "MarkdownFile": "Markdown датотека",
   "MarkedAsFavorite": "Додато у омиљено",
   "MaxCopies": "{{copiesCount}} - максимални број резервних копија",
   "MaxCurrency": "макс {{currency}}",

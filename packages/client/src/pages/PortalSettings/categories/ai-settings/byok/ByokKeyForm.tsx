@@ -143,7 +143,6 @@ const ByokKeyForm = ({ providers, onSave, onCancel }: ByokKeyFormProps) => {
         />
       </FieldContainer>
       <ByokKeyField
-        providerId={providerId}
         value={apiKey}
         error={error}
         isDisabled={isSaving}

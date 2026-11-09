@@ -37,14 +37,9 @@ import type React from "react";
 import { useTranslation } from "react-i18next";
 
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
-import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 
-import { getByokProviderMeta } from "./providers";
-import styles from "./Byok.module.scss";
-
 type ByokKeyFieldProps = {
-  providerId: string;
   value: string;
   error: string;
   isDisabled: boolean;
@@ -52,15 +47,12 @@ type ByokKeyFieldProps = {
 };
 
 const ByokKeyField = ({
-  providerId,
   value,
   error,
   isDisabled,
   onChange,
 }: ByokKeyFieldProps) => {
   const { t } = useTranslation(["Common"]);
-
-  const keyUrl = providerId ? getByokProviderMeta(providerId)?.keyUrl : "";
 
   const onKeyChange = (
     _event: React.ChangeEvent<HTMLInputElement>,
@@ -77,36 +69,20 @@ const ByokKeyField = ({
       errorMessage={error}
       errorMessageWidth="100%"
     >
-      <div className={styles.keyField}>
-        {keyUrl ? (
-          <Link
-            className={styles.keyLink}
-            type={LinkType.page}
-            target={LinkTarget.blank}
-            href={keyUrl}
-            fontSize="13px"
-            fontWeight={600}
-            isHovered
-            dataTestId="byok-get-key-link"
-          >
-            {t("Common:GetAPIKey")}
-          </Link>
-        ) : null}
-        <PasswordInput
-          placeholder={t("Common:EnterKey")}
-          inputName="byok_key"
-          inputValue={value}
-          onChange={onKeyChange}
-          hasError={!!error}
-          isDisabled={isDisabled}
-          scale
-          isSimulateType
-          isFullWidth
-          isDisableTooltip
-          autoComplete="off"
-          testId="byok-key-input"
-        />
-      </div>
+      <PasswordInput
+        placeholder={t("Common:EnterKey")}
+        inputName="byok_key"
+        inputValue={value}
+        onChange={onKeyChange}
+        hasError={!!error}
+        isDisabled={isDisabled}
+        scale
+        isSimulateType
+        isFullWidth
+        isDisableTooltip
+        autoComplete="off"
+        testId="byok-key-input"
+      />
     </FieldContainer>
   );
 };

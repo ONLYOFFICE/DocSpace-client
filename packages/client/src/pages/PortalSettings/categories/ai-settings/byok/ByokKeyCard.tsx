@@ -43,7 +43,6 @@ import type { TByokKey } from "@docspace/shared/api/ai/types";
 import AccessEditIconUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import TrashIconUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
-import { getByokProviderMeta } from "./providers";
 import styles from "./Byok.module.scss";
 
 type ByokKeyCardProps = {
@@ -61,7 +60,6 @@ const ByokKeyCard = ({
 }: ByokKeyCardProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const icon = getByokProviderMeta(byokKey.provider)?.icon;
 
   const onDeleteClick = async () => {
     try {
@@ -93,7 +91,13 @@ const ByokKeyCard = ({
   return (
     <div className={styles.card} data-testid="byok-key-card">
       <div className={styles.cardIcon}>
-        {icon ? <img src={icon} alt="" /> : null}
+        {byokKey.image ? (
+          <div
+            className={styles.iconsContainer}
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
+            dangerouslySetInnerHTML={{ __html: byokKey.image }}
+          />
+        ) : null}
       </div>
       <div className={styles.cardInfo}>
         <Text fontSize="14px" fontWeight={600} truncate>

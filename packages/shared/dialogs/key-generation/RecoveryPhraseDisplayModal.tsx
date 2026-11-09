@@ -48,6 +48,7 @@ import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
 
 import {
   buildRecoveryKitHtml,
@@ -104,7 +105,9 @@ export const RecoveryPhraseDisplayModal: React.FC<
     const productName = getBrandName("ProductName");
     return buildRecoveryKitHtml({
       words,
-      createdDate: new Date().toLocaleDateString(i18n.language),
+      createdDate: new Date().toLocaleDateString(i18n.language, {
+        numberingSystem: LATIN_NUMBERING_SYSTEM,
+      }),
       lang: i18n.language,
       dir: i18n.dir(),
       accountLabel,

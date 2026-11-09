@@ -99,6 +99,9 @@ const toRoomIds = (rooms: AiChatPresetRoom[]) =>
 class AiPresetsStore {
   presets: TAiPreset[] = [];
 
+  /** The projects the presets are made of, as the AI Workspace start screen lists them. */
+  projects: TAiProject[] = [];
+
   userId: string | null = null;
 
   /** The settings the save dialog is open for; `null` while it is closed. */
@@ -129,6 +132,7 @@ class AiPresetsStore {
     if (this.userId === userId) return;
     this.userId = userId;
     this.presets = [];
+    this.projects = [];
     this.activePreset = null;
     if (userId) void this.fetchPresets();
   };
@@ -144,7 +148,9 @@ class AiPresetsStore {
         count: PICKER_PROJECTS_COUNT,
       });
       runInAction(() => {
-        if (id === this.requestId) this.presets = page.folders.map(toAiPreset);
+        if (id !== this.requestId) return;
+        this.projects = page.folders;
+        this.presets = page.folders.map(toAiPreset);
       });
     } catch {
       // AI or the projects may be unavailable to the caller: no picker entry.

@@ -208,7 +208,6 @@ export const getSectionTrashUrl = (
  * room type, so the active entry is read from the `type` filter in the query.
  */
 const AI_HUB_TYPE_ITEM_IDS: Record<string, string> = {
-  [RoomsType.AiProjectRoom]: "ai-rooms-agents",
   [RoomsType.InstructionsRoom]: "ai-rooms-skills",
   [RoomsType.KnowledgeRoom]: "ai-rooms-knowledge",
 };

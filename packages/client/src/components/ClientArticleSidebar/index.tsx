@@ -223,9 +223,8 @@ const ClientArticleSidebar = ({
   );
 
   // The AI Workspace list narrowed to one of its room types: the section's
-  // Agents (AI projects), Skills (Instructions rooms) and Knowledge base
-  // (Knowledge rooms) entries are the same /ai-rooms list with the `type`
-  // filter preset, which the filter bar then shows as a chip.
+  // Skills (Instructions rooms) and Knowledge base (Knowledge rooms) entries
+  // are the same /ai-rooms list with the `type` filter preset.
   const aiHubTypeUrl = React.useCallback(
     (type: RoomsType) => {
       const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
@@ -585,10 +584,11 @@ const ClientArticleSidebar = ({
     // The AI sections close the apps, while the portal has AI switched on
     // (the server only serves their roots then). "AI Workspace" holds the
     // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`).
-    // Its entries are the same list narrowed to one room type - Agents
-    // (AI projects), Skills (Instructions rooms), Knowledge base (Knowledge
-    // rooms) - plus a Trash scoped to those room types; the server never
-    // archives them, so there is no Archive slot. The bare `/ai-rooms` is the
+    // Its root is the chat, with the agents (AI projects) listed above the
+    // composer; the entries are the same list narrowed to one room type -
+    // Skills (Instructions rooms), Knowledge base (Knowledge rooms) - plus a
+    // Trash scoped to those room types; the server never archives them, so
+    // there is no Archive slot. The bare `/ai-rooms` is the
     // Rooms app's SDK frame page: the section lives on the nested paths.
     if (aiHubFolder && aiServicesEnabled) {
       mainItems.push({
@@ -598,12 +598,6 @@ const ClientArticleSidebar = ({
         ...nav(searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub)),
         ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),
         children: [
-          {
-            id: "ai-rooms-agents",
-            label: t("Common:Agents"),
-            icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
-            ...nav(aiHubTypeUrl(RoomsType.AiProjectRoom)),
-          },
           {
             id: "ai-rooms-skills",
             label: t("Common:Skills"),

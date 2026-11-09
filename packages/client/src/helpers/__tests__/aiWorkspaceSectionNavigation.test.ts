@@ -13,10 +13,11 @@ describe("AI Workspace section active item", () => {
   it.each([
     ["/ai-rooms/filter", "", "ai-rooms"],
     ["/ai-rooms/filter", "?searchArea=AiHub", "ai-rooms"],
+    // The agents have no entry: they are listed on the section's root.
     [
       "/ai-rooms/filter",
       `?searchArea=AiHub&type=${RoomsType.AiProjectRoom}`,
-      "ai-rooms-agents",
+      "ai-rooms",
     ],
     [
       "/ai-rooms/filter",

@@ -75,7 +75,10 @@ const stuckBottom = (bar: HTMLElement) =>
  * under them. Measured again whenever they change height.
  *
  * In the Section's `stickyTableHeader` mode, with the quick-actions banner, the
- * Section places the header itself and this value is not used.
+ * Section places the header itself, under `--section-filter-bottom`, and this
+ * value is not used. That variable assumes a filter of fixed height, so the
+ * real bottom of the sticky filter - taller with the room groups under it -
+ * is set on the table in its place.
  *
  * `belowPinned` is for a table further down a page, such as one under a
  * settings page's description: its resting place is far below the pinned
@@ -105,6 +108,16 @@ export const useStickyHeaderTop = (
 
     const bars = belowPinned ? barsAbove(table, scroller, pinned) : [pinned];
 
+    // In the Section's `stickyTableHeader` mode the filter sticks inside the
+    // scroller and the Section stops the header at `--section-filter-bottom`,
+    // which the page works out from a fixed filter height. The filter grows
+    // with the room groups under it, so its real bottom is set on the table.
+    const filter = scroller.querySelector<HTMLElement>(
+      ".section-body_sticky-filter",
+    );
+    const stickyFilter =
+      filter && getComputedStyle(filter).position === "sticky" ? filter : null;
+
     // The table's offset in the scrolled content, the same at any scroll; or
     // the bottom of the lowest bar above it, the same while they are stuck.
     const update = () => {
@@ -117,11 +130,21 @@ export const useStickyHeaderTop = (
         "--data-table-header-top",
         `${Math.max(0, Math.round(top))}px`,
       );
+      if (stickyFilter) {
+        table.style.setProperty(
+          "--section-filter-bottom",
+          `${Math.round(stuckBottom(stickyFilter))}px`,
+        );
+      }
     };
 
     update();
     const observer = new ResizeObserver(update);
     bars.forEach((bar) => observer.observe(bar));
-    return () => observer.disconnect();
+    if (stickyFilter) observer.observe(stickyFilter);
+    return () => {
+      observer.disconnect();
+      table.style.removeProperty("--section-filter-bottom");
+    };
   }, [table, belowPinned]);
 };

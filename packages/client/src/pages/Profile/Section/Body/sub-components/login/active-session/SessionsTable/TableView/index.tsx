@@ -122,6 +122,7 @@ const TableView = ({
       rows={sessionsData}
       getRowKey={getRowKey}
       getRowProps={getRowProps}
+      virtualize
       widthStorage={widthStorage}
       className={classNames(sectionTableStyles.settingsTable, styles.table)}
     />

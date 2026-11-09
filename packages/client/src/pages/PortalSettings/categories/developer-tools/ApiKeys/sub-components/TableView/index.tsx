@@ -110,6 +110,7 @@ const TableView = ({
       rows={items}
       getRowKey={getRowKey}
       getRowProps={getRowProps}
+      virtualize
       widthStorage={widthStorage}
       className={classNames(sectionTableStyles.settingsTable, styles.table)}
     />

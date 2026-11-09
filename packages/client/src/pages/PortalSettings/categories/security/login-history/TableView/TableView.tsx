@@ -104,6 +104,7 @@ const LoginHistoryTable = ({
       rows={historyUsers}
       getRowKey={getRowKey}
       getRowProps={getRowProps}
+      virtualize
       rowHeight={ROW_HEIGHT}
       widthStorage={widthStorage}
       className={sectionTableStyles.settingsTable}

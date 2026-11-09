@@ -111,6 +111,7 @@ const AuditTrailTable = ({
       rows={auditTrailUsers}
       getRowKey={getRowKey}
       getRowProps={getRowProps}
+      virtualize
       rowHeight={ROW_HEIGHT}
       widthStorage={widthStorage}
       className={classNames(sectionTableStyles.settingsTable, {

@@ -177,6 +177,12 @@ class PaymentStore {
     );
   }
 
+  get aiToolsByokFeePercent() {
+    return this.formatServiceFeePercent(
+      this.currentTariffStatusStore?.aiToolsByokFeePercent,
+    );
+  }
+
   formatServiceFeePercent = (value?: number | null) => {
     if (value == null) return;
 

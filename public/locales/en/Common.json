@@ -100,7 +100,7 @@
   "AIAgentsEmptyScreenTent": "See AI agents details here",
   "AIApiKeyDeleted": "API key deleted",
   "AIApiKeySaved": "API key saved",
-  "AIApiKeysDescription": "Connect your own provider API key to run a model on it. Your key takes precedence: requests to that model go to the provider directly rather than through OpenRouter. The provider bills you for the tokens used, and only the service fee on that amount is charged to your wallet.",
+  "AIApiKeysDescription": "Connect your own provider API key to run a model on it. Your key takes precedence: requests to that model go to the provider directly rather than through OpenRouter. The provider bills you for the tokens used, and only the {{percent}}% service fee on that amount is charged to your wallet.",
   "AIByok": "BYOK",
   "AIChat": "AI Chat",
   "AIChatBenefitsTitle": "Get access to a wide range of AI models through OpenRouter integration:",

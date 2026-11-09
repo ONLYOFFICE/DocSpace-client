@@ -44,6 +44,7 @@ import type { TByokKey } from "@docspace/shared/api/ai/types";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
+import type PaymentStore from "SRC_DIR/store/PaymentStore";
 
 import ByokKeyForm from "./ByokKeyForm";
 import ByokKeyCard from "./ByokKeyCard";
@@ -62,6 +63,7 @@ type ByokKeysProps = {
   saveByokKey?: AISettingsStore["saveByokKey"];
   removeByokKey?: AISettingsStore["removeByokKey"];
   fetchAiPrices?: ServicesStore["fetchAiPrices"];
+  aiToolsByokFeePercent?: PaymentStore["aiToolsByokFeePercent"];
 };
 
 const ByokKeys = ({
@@ -73,6 +75,7 @@ const ByokKeys = ({
   saveByokKey,
   removeByokKey,
   fetchAiPrices,
+  aiToolsByokFeePercent,
 }: ByokKeysProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -102,7 +105,7 @@ const ByokKeys = ({
   return (
     <div>
       <Text className={styles.description}>
-        {t("Common:AIApiKeysDescription")}
+        {t("Common:AIApiKeysDescription", { percent: aiToolsByokFeePercent })}
       </Text>
       {openForm === ADD_FORM ? (
         <ByokKeyForm
@@ -151,26 +154,30 @@ const ByokKeys = ({
   );
 };
 
-export default inject<TStore>(({ aiSettingsStore, servicesStore }) => {
-  const {
-    byokInitied,
-    byokKeys,
-    byokProviders,
-    byokProviderNames,
-    fetchByok,
-    saveByokKey,
-    removeByokKey,
-  } = aiSettingsStore;
-  const { fetchAiPrices } = servicesStore;
+export default inject<TStore>(
+  ({ aiSettingsStore, servicesStore, paymentStore }) => {
+    const {
+      byokInitied,
+      byokKeys,
+      byokProviders,
+      byokProviderNames,
+      fetchByok,
+      saveByokKey,
+      removeByokKey,
+    } = aiSettingsStore;
+    const { fetchAiPrices } = servicesStore;
+    const { aiToolsByokFeePercent } = paymentStore;
 
-  return {
-    byokInitied,
-    byokKeys,
-    byokProviders,
-    byokProviderNames,
-    fetchByok,
-    saveByokKey,
-    removeByokKey,
-    fetchAiPrices,
-  };
-})(observer(ByokKeys));
+    return {
+      byokInitied,
+      byokKeys,
+      byokProviders,
+      byokProviderNames,
+      fetchByok,
+      saveByokKey,
+      removeByokKey,
+      fetchAiPrices,
+      aiToolsByokFeePercent,
+    };
+  },
+)(observer(ByokKeys));

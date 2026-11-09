@@ -47,13 +47,13 @@ const BYOK_PATH = "/portal-settings/ai-settings/byok";
 type ModelsDescriptionProps = {
   className?: string;
   hasByok: boolean;
-  aiToolsFeePercent?: string;
+  aiToolsByokFeePercent?: string;
 };
 
 const ModelsDescription = ({
   className,
   hasByok,
-  aiToolsFeePercent,
+  aiToolsByokFeePercent,
 }: ModelsDescriptionProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const ModelsDescription = ({
     <Text className={className}>
       {hasByok ? (
         t("Common:AIModelsDescriptionWithFee", {
-          percent: aiToolsFeePercent,
+          percent: aiToolsByokFeePercent,
         })
       ) : (
         <CommonTrans
@@ -91,9 +91,9 @@ const ModelsDescription = ({
 };
 
 export default inject<TStore>(({ paymentStore }) => {
-  const { aiToolsFeePercent } = paymentStore;
+  const { aiToolsByokFeePercent } = paymentStore;
 
   return {
-    aiToolsFeePercent,
+    aiToolsByokFeePercent,
   };
 })(observer(ModelsDescription));

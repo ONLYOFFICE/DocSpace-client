@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2026-11-05T16:49:39.806Z",
+  "updated_at": "2026-11-06T10:45:53.688Z",
   "comment": {
     "text": "This is a button label. It allows users to confirm a change, such as changing a room owner, portal owner, or user type.",
     "is_auto": true,
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 171,
-      "context": "type={LinkType.page}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n <Badge\n className=\"paid-badge\"\n fontWeight=\"700\"\n backgroundColor={",
+      "line_number": 170,
+      "context": "type={LinkType.page}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n <PaidBadge className=\"paid-badge\" fontWeight=\"700\" />\n </div>\n \n <div className={styles.infoRow}>",
       "module": "/packages/client"
     },
     {

@@ -994,10 +994,9 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get docspaceManagingRoomsHelpUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.docspacemanagingrooms
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
+  get customFilterHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.customfilter
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.customfilter}`
       : this.helpCenterDomain;
   }
 

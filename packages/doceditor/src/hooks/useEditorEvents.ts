@@ -73,6 +73,7 @@ import {
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getSafeReturnUrl } from "@docspace/shared/utils/getSafeReturnUrl";
 import {
   FormFillingManageAction,
   StartFillingMode,
@@ -89,7 +90,6 @@ import {
   getCurrentDocumentVersion,
   getDocEditor,
   getFormsSectionFolderUrl,
-  getSafeReturnUrl,
   isFormRole,
   isFormRoomFile,
   setDocumentTitle,
@@ -285,7 +285,9 @@ const useEditorEvents = ({
       // don't init the editor's AI plugin for them at all — mirrors the
       // portal, where guests get no AI chat, and the backend gateway
       // rejects guest calls anyway.
-      const aiAllowed = Boolean(user) && !user?.isVisitor;
+      // Spec: private-rooms/editor-integration, "AI editor tools disabled for encrypted files"
+      const aiAllowed =
+        Boolean(user) && !user?.isVisitor && !config?.file?.encrypted;
       const connector = aiAllowed ? docEditor?.createConnector?.() : undefined;
 
       if (connector && !isOAuthFrame()) {
@@ -315,9 +317,7 @@ const useEditorEvents = ({
           pending.forEach((call) => connector.sendEvent("ai_onCallTool", call));
         };
 
-        const isEncrypted = !!config?.file?.encrypted;
-
-        if (successAuth && !isEncrypted) {
+        if (successAuth) {
           try {
             const hasError = (data: unknown) =>
               !!data &&

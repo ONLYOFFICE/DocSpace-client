@@ -36,17 +36,14 @@
 const KEYS_MANAGEMENT_PATH = "/profile/keys-management";
 
 /**
- * The client's keys-management page on the portal, carrying the opt-in so
- * the page renders where the client keeps the feature hidden. Null when the
- * portal address is unknown.
+ * The client's keys-management page on the portal. Null when the portal
+ * address is unknown.
  */
 export const getKeysManagementUrl = (portalUrl: string | null | undefined) => {
   if (!portalUrl) return null;
 
   try {
-    const url = new URL(KEYS_MANAGEMENT_PATH, portalUrl);
-    url.searchParams.set("privateRooms", "1");
-    return url.toString();
+    return new URL(KEYS_MANAGEMENT_PATH, portalUrl).toString();
   } catch {
     return null;
   }

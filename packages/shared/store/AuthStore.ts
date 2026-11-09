@@ -558,6 +558,13 @@ class AuthStore {
 
     this.isLogout = true;
 
+    // The tab shows no user any more. Left in place, the id would name the
+    // next page this tab is sent to the login page from after the user
+    // who logged out, and keep it from whoever logs in next.
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("sessionUserId");
+    }
+
     // Clear encryption state: MobX store + in-memory unlocked-identity cache
     // + the persisted device unlock for the signed-out user
     this.userStore?.clearEncryptionKeys();

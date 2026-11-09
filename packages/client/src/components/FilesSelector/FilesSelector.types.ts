@@ -93,6 +93,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	treeFolders?: TFolder[];
 	withRecentTreeFolder?: boolean;
 	withFavoritesTreeFolder?: boolean;
+	withRoomsTreeFolder?: boolean;
 	withFormsTreeFolder?: boolean;
 
 	theme: TTheme;

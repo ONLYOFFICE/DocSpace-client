@@ -23,6 +23,7 @@ import api from "@docspace/shared/api";
 import { getRoomMissingFileKeys } from "@docspace/shared/api/privacy";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { prepareNewOwner } from "@docspace/shared/services/private-room/room-member-flows";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 // The harness registers the toast mock the store sees; import it first.
 import { createTestFilesActionsStore } from "./testHarness";
@@ -158,6 +159,36 @@ describe("FilesActionsStore.changeRoomOwner on a private room", () => {
     expect(setFileOwner).not.toHaveBeenCalled();
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionUnlockRequired");
     expect(filesStore.setSelected).toHaveBeenCalledWith("none");
+  });
+
+  it("Administrator leaves through the owner change", async () => {
+    const updateRoomMemberRole = vi
+      .spyOn(api.rooms, "updateRoomMemberRole")
+      .mockResolvedValue({} as never);
+    const filesStore = {
+      selection: [{ id: 9, private: true }],
+      bufferSelection: null,
+      setSelected: vi.fn(),
+      setFolder: vi.fn(),
+      removeFiles: vi.fn(),
+      setInRoomFolder: vi.fn(),
+    };
+    const store = createTestFilesActionsStore({
+      filesStore,
+      selectedFolderStore: { isRootFolder: true, id: 9 },
+      userStore: { user: { id: "user-1", isAdmin: true }, encryptionKeys: [] },
+    });
+
+    await store.changeRoomOwner(t, "user-2", true);
+
+    expect(setFileOwner).toHaveBeenCalledWith("user-2", [9]);
+    expect(updateRoomMemberRole).toHaveBeenCalledWith(9, {
+      invitations: [{ id: "user-1", access: ShareAccessRights.None }],
+      force: false,
+    });
+    expect(filesStore.removeFiles).toHaveBeenCalledWith(null, [9]);
+    expect(filesStore.setInRoomFolder).not.toHaveBeenCalled();
+    updateRoomMemberRole.mockRestore();
   });
 
   it("Ordinary room", async () => {

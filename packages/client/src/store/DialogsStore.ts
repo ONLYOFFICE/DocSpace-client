@@ -91,6 +91,7 @@ import type {
 } from "SRC_DIR/components/dialogs/EditRoomGroupsDialog/EditRoomGroupsDialog.types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 import type { TMetadataAIPanelData } from "SRC_DIR/components/panels/MetadataAIPanel/types";
+import type { TEncryptedTransferConfirm } from "./filesActionsStore/copyMove.helpers";
 import type { TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
 import type InfoPanelStore from "./InfoPanelStore";
@@ -253,6 +254,8 @@ class DialogsStore {
   moveToPublicRoomVisible = false;
 
   moveToPublicRoomData: unknown = null;
+
+  encryptedTransferConfirm: TEncryptedTransferConfirm | null = null;
 
   backupToPublicRoomVisible = false;
 
@@ -1106,6 +1109,12 @@ class DialogsStore {
   setMoveToPublicRoomVisible = (visible: boolean, data: unknown = null) => {
     this.moveToPublicRoomVisible = visible;
     this.moveToPublicRoomData = data;
+  };
+
+  setEncryptedTransferConfirm = (
+    encryptedTransferConfirm: TEncryptedTransferConfirm | null,
+  ) => {
+    this.encryptedTransferConfirm = encryptedTransferConfirm;
   };
 
   setBackupToPublicRoomVisible = (

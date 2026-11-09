@@ -38,14 +38,12 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import classnames from "classnames";
 import styles from "./ToggleLDAP.module.scss";
 
 const ToggleLDAP = ({
-  theme,
   isLdapEnabled,
   toggleLdap,
   isLdapAvailable,
@@ -87,16 +85,7 @@ const ToggleLDAP = ({
             {t("LdapToggle")}
           </Text>
           {!isLdapAvailable ? (
-            <Badge
-              backgroundColor={
-                theme.isBase
-                  ? globalColors.favoritesStatus
-                  : globalColors.favoriteStatusDark
-              }
-              label={t("Common:Paid")}
-              className="toggle-caption_title_badge"
-              isPaidBadge
-            />
+            <PaidBadge className="toggle-caption_title_badge" />
           ) : null}
         </div>
         <Text
@@ -114,14 +103,12 @@ const ToggleLDAP = ({
   /* {confirmationDisableModal && <DisableSsoConfirmationModal />} */
 };
 
-export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {
-  const { theme } = settingsStore;
+export default inject(({ ldapStore, currentQuotaStore }) => {
   const { isLdapEnabled, toggleLdap, save, isUIDisabled, serverSettings } =
     ldapStore;
   const { isLdapAvailable } = currentQuotaStore;
 
   return {
-    theme,
     toggleLdap,
     isLdapEnabled,
     save,

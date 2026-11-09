@@ -34,9 +34,8 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { withTranslation, Trans } from "react-i18next";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
@@ -143,8 +142,6 @@ const PortalRenamingComponent = (props) => {
   const [isCustomizationView, setIsCustomizationView] = useState(false);
 
   const [isShowModal, setIsShowModal] = useState(false);
-
-  const theme = useTheme();
 
   const checkInnerWidth = useCallback(() => {
     if (!isMobileDevice()) {
@@ -375,17 +372,7 @@ const PortalRenamingComponent = (props) => {
             {t("PortalRenaming")}
           </div>
           {!isSettingPaid && !standalone ? (
-            <Badge
-              className="paid-badge"
-              fontWeight="700"
-              backgroundColor={
-                theme.isBase
-                  ? globalColors.favoritesStatus
-                  : globalColors.favoriteStatusDark
-              }
-              label={t("Common:Paid")}
-              isPaidBadge
-            />
+            <PaidBadge className="paid-badge" fontWeight="700" />
           ) : null}
         </div>
       ) : null}

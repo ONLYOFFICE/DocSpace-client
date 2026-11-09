@@ -3,7 +3,7 @@
   "content": "New workspace name",
   "content_en_sha1_hash": "92c6fc6d2a8f1a7bcfa12b86e2a96946198398dc",
   "created_at": "2026-08-12T11:00:46.218Z",
-  "updated_at": "2026-11-05T16:49:39.933Z",
+  "updated_at": "2026-11-06T10:45:54.559Z",
   "comment": {
     "text": "Field label for a text input in the portal customization settings, indicating where to enter the updated workspace name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 337,
+      "line_number": 334,
       "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerPortalRenaming\"\n className=\"field-container-width\"\n labelText={`${t(\"PortalRenamingLabelText\")}`}\n isVertical\n >\n <TextInput\n id=\"textInputContainerPortalRenaming\"\n name=\"portal_name\"",
       "module": "/packages/client"
     }

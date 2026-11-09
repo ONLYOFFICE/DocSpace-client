@@ -5,6 +5,7 @@ import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
+import { PluginFileType } from "../../../helpers/plugins/enums";
 
 // Bug 82885: plugin context-menu keys must never reach a file from an
 // encrypted room. Plugins get only a file id and fetch the bytes themselves,
@@ -121,6 +122,32 @@ describe("getFilesContextOptions — plugin items vs encrypted files", () => {
     store.dialogsStore = { roomGroups: [] } as never;
 
     expect(store.getFilesContextOptions(privateRoom)).not.toContain(PLUGIN_KEY);
+  });
+
+  it("asks the plugin store for a room's keys with its id and room type", () => {
+    const getContextMenuKeysByType = vi.fn(() => [PLUGIN_KEY]);
+    const store = createTestFilesStore({
+      settingsStore: { enablePlugins: true },
+      pluginStore: { getContextMenuKeysByType },
+      userStore: { encryptionKeys: [{ id: "key-1" }] },
+    });
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    const room = {
+      ...baseFolder(),
+      id: 6,
+      title: "Room",
+      roomType: RoomsType.CustomRoom,
+    } as unknown as TItem;
+
+    expect(store.getFilesContextOptions(room)).toContain(PLUGIN_KEY);
+
+    const roomCall = (getContextMenuKeysByType.mock.calls as unknown[][]).find(
+      (args) => args[0] === PluginFileType.room,
+    );
+
+    expect(roomCall?.[4]).toBe(6);
+    expect(roomCall?.[5]).toBe(RoomsType.CustomRoom);
   });
 
   it("keeps plugin actions out of a form room's contents", () => {

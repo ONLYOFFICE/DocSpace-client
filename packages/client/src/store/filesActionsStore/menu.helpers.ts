@@ -110,6 +110,8 @@ self: FilesActionStore,option: string
       return !allFilesIsEditing && canDelete && hasSelection;
     }
     case "create-room": {
+      if (self.filesStore.isRoomsSectionOff) return false;
+
       const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
       return canCreateRoom;
     }

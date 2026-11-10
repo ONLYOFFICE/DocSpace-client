@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Τα δωμάτια AI δημιουργούνται από διαχειριστές δωματίων. Όταν κάποιος σας προσκαλέσει σε ένα, θα εμφανιστεί εδώ.",
   "AiRoomsTurnedOff": "Η AI απενεργοποιήθηκε. Τα δωμάτια AI δεν θα είναι διαθέσιμα μέχρι ο υπερδιαχειριστής να την ενεργοποιήσει ξανά.",
   "AIProjectSkillsEmpty": "Αυτό το δωμάτιο δεν έχει ακόμη δεξιότητες.",
-  "AIProjectSources": "Πηγές",
+  "AIProjectContext": "Πλαίσιο",
   "AIProjectAddSuggestion": "Προσθήκη πρότασης",
   "AIProjectEditSuggestion": "Επεξεργασία πρότασης",
   "AIProjectSuggestionPrompt": "Εντολή",

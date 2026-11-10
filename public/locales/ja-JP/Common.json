@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AIルームはルームの管理者が設定します。招待されるとここに表示されます。",
   "AiRoomsTurnedOff": "AIがオフになりました。スーパー管理者が再びオンにするまで、AIルームは利用できません。",
   "AIProjectSkillsEmpty": "このルームにはまだスキルがありません。",
-  "AIProjectSources": "ソース",
+  "AIProjectContext": "コンテキスト",
   "AIProjectAddSuggestion": "候補を追加",
   "AIProjectEditSuggestion": "候補を編集",
   "AIProjectSuggestionPrompt": "プロンプト",

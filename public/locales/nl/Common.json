@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AI-kamers worden ingesteld door kamerbeheerders. Wanneer iemand u voor een kamer uitnodigt, verschijnt die hier.",
   "AiRoomsTurnedOff": "AI is uitgeschakeld. AI-kamers zijn niet beschikbaar totdat de superbeheerder AI weer inschakelt.",
   "AIProjectSkillsEmpty": "Deze kamer heeft nog geen vaardigheden.",
-  "AIProjectSources": "Bronnen",
+  "AIProjectContext": "Context",
   "AIProjectAddSuggestion": "Suggestie toevoegen",
   "AIProjectEditSuggestion": "Suggestie bewerken",
   "AIProjectSuggestionPrompt": "Prompt",

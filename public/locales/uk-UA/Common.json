@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Кімнати AI налаштовують адміністратори кімнат. Коли вас запросять до такої кімнати, вона з'явиться тут.",
   "AiRoomsTurnedOff": "AI вимкнено. Кімнати AI будуть недоступні, доки суперадміністратор знову його не ввімкне.",
   "AIProjectSkillsEmpty": "У цій кімнаті ще немає навичок.",
-  "AIProjectSources": "Джерела",
+  "AIProjectContext": "Контекст",
   "AIProjectAddSuggestion": "Додати підказку",
   "AIProjectEditSuggestion": "Змінити підказку",
   "AIProjectSuggestionPrompt": "Запит",

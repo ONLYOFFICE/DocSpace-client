@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AI-huoneet määrittävät huoneiden järjestelmänvalvojat. Kun joku kutsuu sinut huoneeseen, se näkyy täällä.",
   "AiRoomsTurnedOff": "AI on poistettu käytöstä. AI-huoneet eivät ole käytettävissä, ennen kuin pääjärjestelmänvalvoja ottaa sen uudelleen käyttöön.",
   "AIProjectSkillsEmpty": "Tässä huoneessa ei ole vielä taitoja.",
-  "AIProjectSources": "Lähteet",
+  "AIProjectContext": "Konteksti",
   "AIProjectAddSuggestion": "Lisää ehdotus",
   "AIProjectEditSuggestion": "Muokkaa ehdotusta",
   "AIProjectSuggestionPrompt": "Kehote",

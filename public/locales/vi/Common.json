@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Phòng AI do quản trị viên phòng thiết lập. Khi có người mời bạn vào một phòng, phòng đó sẽ xuất hiện tại đây.",
   "AiRoomsTurnedOff": "AI đã bị tắt. Phòng AI sẽ không khả dụng cho đến khi siêu quản trị viên bật lại.",
   "AIProjectSkillsEmpty": "Phòng này chưa có kỹ năng nào.",
-  "AIProjectSources": "Nguồn",
+  "AIProjectContext": "Ngữ cảnh",
   "AIProjectAddSuggestion": "Thêm gợi ý",
   "AIProjectEditSuggestion": "Chỉnh sửa gợi ý",
   "AIProjectSuggestionPrompt": "Lời nhắc",

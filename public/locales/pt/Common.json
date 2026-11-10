@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "As salas de IA são configuradas pelos administradores de sala. Quando alguém o convidar para uma, ela aparecerá aqui.",
   "AiRoomsTurnedOff": "A IA foi desativada. As salas de IA ficam indisponíveis até que o superadministrador a volte a ativar.",
   "AIProjectSkillsEmpty": "Esta sala ainda não tem competências.",
-  "AIProjectSources": "Fontes",
+  "AIProjectContext": "Contexto",
   "AIProjectAddSuggestion": "Adicionar sugestão",
   "AIProjectEditSuggestion": "Editar sugestão",
   "AIProjectSuggestionPrompt": "Prompt",

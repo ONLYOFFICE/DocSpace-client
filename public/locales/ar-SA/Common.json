@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "يُعِدّ مسؤولو الغرف غرف الذكاء الاصطناعي. عندما يدعوك أحدهم إلى غرفة، ستظهر هنا.",
   "AiRoomsTurnedOff": "تم إيقاف الذكاء الاصطناعي. لن تتوفر غرف الذكاء الاصطناعي حتى يعيد المسؤول العام تشغيله.",
   "AIProjectSkillsEmpty": "لا تحتوي هذه الغرفة على مهارات بعد.",
-  "AIProjectSources": "المصادر",
+  "AIProjectContext": "السياق",
   "AIProjectAddSuggestion": "إضافة اقتراح",
   "AIProjectEditSuggestion": "تعديل الاقتراح",
   "AIProjectSuggestionPrompt": "الطلب",

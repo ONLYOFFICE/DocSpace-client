@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "ИИ стаите се настройват от администраторите на стаи. Когато някой ви покани в такава стая, тя ще се появи тук.",
   "AiRoomsTurnedOff": "ИИ е изключен. ИИ стаите няма да са налични, докато суперадминистраторът не го включи отново.",
   "AIProjectSkillsEmpty": "В тази стая все още няма умения.",
-  "AIProjectSources": "Източници",
+  "AIProjectContext": "Контекст",
   "AIProjectAddSuggestion": "Добави предложение",
   "AIProjectEditSuggestion": "Редактирай предложението",
   "AIProjectSuggestionPrompt": "Заявка",

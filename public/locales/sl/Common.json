@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Sobe AI nastavljajo skrbniki sob. Ko vas nekdo povabi v sobo, se ta prikaže tukaj.",
   "AiRoomsTurnedOff": "AI je izklopljen. Sobe AI ne bodo na voljo, dokler ga superskrbnik znova ne vklopi.",
   "AIProjectSkillsEmpty": "Ta soba še nima veščin.",
-  "AIProjectSources": "Viri",
+  "AIProjectContext": "Kontekst",
   "AIProjectAddSuggestion": "Dodaj predlog",
   "AIProjectEditSuggestion": "Uredi predlog",
   "AIProjectSuggestionPrompt": "Poziv",

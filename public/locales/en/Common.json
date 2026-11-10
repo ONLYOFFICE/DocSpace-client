@@ -210,7 +210,7 @@
   "AiRoomsEmptyUserDescription": "AI rooms are set up by room admins. When someone invites you to one, it appears here.",
   "AiRoomsTurnedOff": "AI has been turned off. AI rooms are unavailable until the Full admin turns it on again.",
   "AIProjectSkillsEmpty": "This room has no skills yet.",
-  "AIProjectSources": "Sources",
+  "AIProjectContext": "Context",
   "AIProjectAddSuggestion": "Add suggestion",
   "AIProjectEditSuggestion": "Edit suggestion",
   "AIProjectSuggestionPrompt": "Prompt",

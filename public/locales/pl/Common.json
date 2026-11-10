@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Pokoje AI tworzą administratorzy pokoi. Gdy ktoś zaprosi Cię do takiego pokoju, pojawi się on tutaj.",
   "AiRoomsTurnedOff": "AI zostało wyłączone. Pokoje AI będą niedostępne, dopóki superadministrator ponownie go nie włączy.",
   "AIProjectSkillsEmpty": "Ten pokój nie ma jeszcze żadnych umiejętności.",
-  "AIProjectSources": "Źródła",
+  "AIProjectContext": "Kontekst",
   "AIProjectAddSuggestion": "Dodaj sugestię",
   "AIProjectEditSuggestion": "Edytuj sugestię",
   "AIProjectSuggestionPrompt": "Prompt",

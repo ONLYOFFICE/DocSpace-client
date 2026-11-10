@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AI 房间由房间管理员设置。当有人邀请您加入房间时，房间将显示在此处。",
   "AiRoomsTurnedOff": "AI 已被关闭。在超级管理员重新开启之前，AI 房间将不可用。",
   "AIProjectSkillsEmpty": "此房间还没有技能。",
-  "AIProjectSources": "来源",
+  "AIProjectContext": "上下文",
   "AIProjectAddSuggestion": "添加建议",
   "AIProjectEditSuggestion": "编辑建议",
   "AIProjectSuggestionPrompt": "提示词",

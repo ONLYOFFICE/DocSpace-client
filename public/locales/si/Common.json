@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AI කාමර සකසන්නේ කාමර පරිපාලකයින් විසිනි. යමෙකු ඔබට කාමරයකට ආරාධනා කළ විට, එය මෙහි දිස් වේ.",
   "AiRoomsTurnedOff": "AI අක්‍රිය කර ඇත. සුපිරි පරිපාලක එය නැවත සක්‍රිය කරන තුරු AI කාමර ලබා ගත නොහැක.",
   "AIProjectSkillsEmpty": "මෙම කාමරයේ තවමත් කුසලතා නොමැත.",
-  "AIProjectSources": "මූලාශ්‍ර",
+  "AIProjectContext": "සන්දර්භය",
   "AIProjectAddSuggestion": "යෝජනාවක් එක් කරන්න",
   "AIProjectEditSuggestion": "යෝජනාව සංස්කරණය කරන්න",
   "AIProjectSuggestionPrompt": "විමසුම",

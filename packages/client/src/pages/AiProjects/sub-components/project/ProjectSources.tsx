@@ -80,7 +80,7 @@ import config from "PACKAGE_FILE";
 import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
@@ -607,7 +607,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   return (
     <>
       {compact ? (
-        <div className={styles.compact} aria-label={t("Common:AIProjectSources")} data-testid="ai-project-sources-strip">
+        <div className={styles.compact} aria-label={t("Common:AIProjectContext")} data-testid="ai-project-sources-strip">
           <div onClick={onTabsClick}>
             <Tabs
               type={TabsTypes.Secondary}
@@ -628,12 +628,22 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
         // Collapsed, the column is a narrow rail of what is connected: the
         // logos of the Skills rooms, of the Knowledge rooms and the folder,
         // each kind with its add button. A logo brings the cards back, as
-        // the button under them does.
+        // the arrow above them does.
         <aside
           className={classNames(styles.column, styles.rail)}
-          aria-label={t("Common:AIProjectSources")}
+          aria-label={t("Common:AIProjectContext")}
           data-testid="ai-project-sources-rail"
         >
+          <div className={styles.railExpand}>
+            <IconButton
+              className={styles.expandArrow}
+              iconName={ArrowReactSvgUrl}
+              size={16}
+              onClick={toggleCollapsed}
+              title={t("Common:Show")}
+              dataTestId="ai-project-sources-expand"
+            />
+          </div>
           <div className={styles.railRooms}>
             {instructionsRooms.map((room) => (
               <button
@@ -689,24 +699,16 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
               />
             )}
           </div>
-          <div className={styles.railExpand}>
-            <IconButton
-              iconName={PanelReactSvgUrl}
-              size={16}
-              onClick={toggleCollapsed}
-              title={t("Common:Show")}
-              dataTestId="ai-project-sources-expand"
-            />
-          </div>
         </aside>
       ) : (
-        <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
+        <aside className={styles.column} aria-label={t("Common:AIProjectContext")}>
           <div className={styles.columnHead}>
             <Text fontSize="15px" lineHeight="20px" fontWeight={700} truncate noSelect>
-              {t("Common:AIProjectSources")}
+              {t("Common:AIProjectContext")}
             </Text>
             <IconButton
-              iconName={PanelReactSvgUrl}
+              className={styles.collapseArrow}
+              iconName={ArrowReactSvgUrl}
               size={16}
               onClick={toggleCollapsed}
               title={t("Common:Hide")}

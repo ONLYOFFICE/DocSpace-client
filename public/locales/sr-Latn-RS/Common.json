@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AI sobe podešavaju administratori soba. Kada vas neko pozove u takvu sobu, ona će se pojaviti ovde.",
   "AiRoomsTurnedOff": "AI je isključena. AI sobe neće biti dostupne dok je superadministrator ponovo ne uključi.",
   "AIProjectSkillsEmpty": "Ova soba još uvek nema veštine.",
-  "AIProjectSources": "Izvori",
+  "AIProjectContext": "Kontekst",
   "AIProjectAddSuggestion": "Dodaj predlog",
   "AIProjectEditSuggestion": "Uredi predlog",
   "AIProjectSuggestionPrompt": "Upit",

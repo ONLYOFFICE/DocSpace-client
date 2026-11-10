@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AI otaqları otaq administratorları tərəfindən qurulur. Kimsə sizi otağa dəvət etdikdə, o burada görünəcək.",
   "AiRoomsTurnedOff": "AI söndürülüb. Super administrator onu yenidən aktivləşdirənə qədər AI otaqları əlçatan olmayacaq.",
   "AIProjectSkillsEmpty": "Bu otaqda hələ bacarıq yoxdur.",
-  "AIProjectSources": "Mənbələr",
+  "AIProjectContext": "Kontekst",
   "AIProjectAddSuggestion": "Təklif əlavə edin",
   "AIProjectEditSuggestion": "Təklifi redaktə edin",
   "AIProjectSuggestionPrompt": "Sorğu",

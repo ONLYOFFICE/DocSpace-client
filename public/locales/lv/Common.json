@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "MI telpas iestata telpu administratori. Kad kāds jūs uzaicinās uz telpu, tā parādīsies šeit.",
   "AiRoomsTurnedOff": "MI ir izslēgts. MI telpas nebūs pieejamas, līdz superadministrators to atkal ieslēgs.",
   "AIProjectSkillsEmpty": "Šajā telpā vēl nav prasmju.",
-  "AIProjectSources": "Avoti",
+  "AIProjectContext": "Konteksts",
   "AIProjectAddSuggestion": "Pievienot ieteikumu",
   "AIProjectEditSuggestion": "Rediģēt ieteikumu",
   "AIProjectSuggestionPrompt": "Uzvedne",

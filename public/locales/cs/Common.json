@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "AI místnosti nastavují administrátoři místností. Když vás někdo do místnosti pozve, zobrazí se zde.",
   "AiRoomsTurnedOff": "AI bylo vypnuto. AI místnosti nebudou dostupné, dokud je supersprávce znovu nezapne.",
   "AIProjectSkillsEmpty": "Tato místnost zatím nemá žádné dovednosti.",
-  "AIProjectSources": "Zdroje",
+  "AIProjectContext": "Kontext",
   "AIProjectAddSuggestion": "Přidat návrh",
   "AIProjectEditSuggestion": "Upravit návrh",
   "AIProjectSuggestionPrompt": "Výzva",

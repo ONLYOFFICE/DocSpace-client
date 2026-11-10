@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "ԱԲ սենյակները ստեղծում են սենյակների ադմինիստրատորները։ Երբ ինչ-որ մեկը ձեզ հրավիրի սենյակ, այն կհայտնվի այստեղ։",
   "AiRoomsTurnedOff": "ԱԲ-ն անջատված է։ ԱԲ սենյակները հասանելի չեն լինի, մինչև գերադմինիստրատորը այն նորից միացնի։",
   "AIProjectSkillsEmpty": "Այս սենյակում դեռ հմտություններ չկան։",
-  "AIProjectSources": "Աղբյուրներ",
+  "AIProjectContext": "Համատեքստ",
   "AIProjectAddSuggestion": "Ավելացնել առաջարկ",
   "AIProjectEditSuggestion": "Խմբագրել առաջարկը",
   "AIProjectSuggestionPrompt": "Հարցում",

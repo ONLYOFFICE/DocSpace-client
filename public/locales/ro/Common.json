@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Sălile IA sunt configurate de administratorii sălilor. Când cineva vă invită într-una, aceasta apare aici.",
   "AiRoomsTurnedOff": "IA a fost dezactivată. Sălile IA nu vor fi disponibile până când superadministratorul o reactivează.",
   "AIProjectSkillsEmpty": "Această sală nu are încă abilități.",
-  "AIProjectSources": "Surse",
+  "AIProjectContext": "Context",
   "AIProjectAddSuggestion": "Adăugați o sugestie",
   "AIProjectEditSuggestion": "Editați sugestia",
   "AIProjectSuggestionPrompt": "Prompt",

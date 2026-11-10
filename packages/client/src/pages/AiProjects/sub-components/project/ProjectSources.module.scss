@@ -41,7 +41,7 @@
     var(--info-panel-border-color, var(--files-section-table-view-row-border-color));
 }
 
-// The column's title and the button that collapses it to the rail.
+// The column's title and the arrow that collapses it to the rail.
 .columnHead {
   flex: 0 0 auto;
   display: flex;
@@ -58,8 +58,22 @@
   }
 }
 
-// The collapsed column: a narrow rail of the connected rooms' logos, with
-// the button that brings the cards back pinned under them.
+// The arrow of the column's head points the way the column goes: to the
+// chat's far edge to collapse it, back to the chat to bring the cards out.
+.collapseArrow {
+  @include mixins.flip-in-rtl;
+}
+
+.expandArrow {
+  transform: scaleX(-1);
+
+  [data-dir="rtl"] & {
+    transform: none;
+  }
+}
+
+// The collapsed column: a narrow rail of the connected rooms' logos, under
+// the arrow that brings the cards back.
 .rail {
   flex-basis: 48px;
   align-items: stretch;
@@ -72,7 +86,7 @@
   align-items: flex-end;
   gap: 12px;
   min-height: 0;
-  padding-block: 16px;
+  padding-block: 0 16px;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: none;
@@ -109,14 +123,15 @@
   background: var(--files-section-table-view-row-border-color);
 }
 
+// As tall as the expanded column's head, so the arrow keeps its line, and
+// centred over the logos.
 .railExpand {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
   justify-content: flex-end;
-  height: 48px;
+  height: 52px;
   padding-inline-end: 8px;
-  border-top: 1px solid var(--files-section-table-view-row-border-color);
 }
 
 // The cards share the column's height (a kind without rooms has none).

@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "ИИ-комнаты настраивают администраторы комнат. Когда вас пригласят в такую комнату, она появится здесь.",
   "AiRoomsTurnedOff": "ИИ отключен. ИИ-комнаты будут недоступны, пока суперадминистратор снова его не включит.",
   "AIProjectSkillsEmpty": "В этой комнате пока нет навыков.",
-  "AIProjectSources": "Источники",
+  "AIProjectContext": "Контекст",
   "AIProjectAddSuggestion": "Добавить подсказку",
   "AIProjectEditSuggestion": "Изменить подсказку",
   "AIProjectSuggestionPrompt": "Запрос",

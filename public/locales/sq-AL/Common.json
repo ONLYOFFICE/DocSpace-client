@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Dhomat IA konfigurohen nga administratorët e dhomave. Kur dikush ju fton në një të tillë, ajo shfaqet këtu.",
   "AiRoomsTurnedOff": "IA është çaktivizuar. Dhomat IA nuk do të jenë të disponueshme derisa superadministratori ta aktivizojë sërish.",
   "AIProjectSkillsEmpty": "Kjo dhomë nuk ka ende aftësi.",
-  "AIProjectSources": "Burimet",
+  "AIProjectContext": "Konteksti",
   "AIProjectAddSuggestion": "Shto sugjerim",
   "AIProjectEditSuggestion": "Redakto sugjerimin",
   "AIProjectSuggestionPrompt": "Kërkesa",

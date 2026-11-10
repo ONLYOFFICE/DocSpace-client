@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "ຫ້ອງ AI ຖືກຕັ້ງຄ່າໂດຍຜູ້ເບິ່ງແຍງຫ້ອງ. ເມື່ອມີຄົນເຊີນທ່ານເຂົ້າຫ້ອງ, ມັນຈະປາກົດຢູ່ບ່ອນນີ້.",
   "AiRoomsTurnedOff": "AI ຖືກປິດແລ້ວ. ຫ້ອງ AI ຈະບໍ່ພ້ອມໃຊ້ງານຈົນກວ່າຜູ້ດູແລລະບົບສູງສຸດຈະເປີດມັນອີກຄັ້ງ.",
   "AIProjectSkillsEmpty": "ຫ້ອງນີ້ຍັງບໍ່ມີທັກສະເທື່ອ.",
-  "AIProjectSources": "ແຫຼ່ງຂໍ້ມູນ",
+  "AIProjectContext": "ບໍລິບົດ",
   "AIProjectAddSuggestion": "ເພີ່ມຄຳແນະນຳ",
   "AIProjectEditSuggestion": "ແກ້ໄຂຄຳແນະນຳ",
   "AIProjectSuggestionPrompt": "ຄຳສັ່ງ",

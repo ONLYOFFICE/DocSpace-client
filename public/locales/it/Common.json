@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "Le stanze IA vengono configurate dagli amministratori delle stanze. Quando qualcuno ti invita in una stanza, questa appare qui.",
   "AiRoomsTurnedOff": "L'IA è stata disattivata. Le stanze IA non saranno disponibili finché il superamministratore non la riattiverà.",
   "AIProjectSkillsEmpty": "Questa stanza non ha ancora competenze.",
-  "AIProjectSources": "Fonti",
+  "AIProjectContext": "Contesto",
   "AIProjectAddSuggestion": "Aggiungi suggerimento",
   "AIProjectEditSuggestion": "Modifica suggerimento",
   "AIProjectSuggestionPrompt": "Prompt",

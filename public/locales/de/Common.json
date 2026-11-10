@@ -207,7 +207,7 @@
   "AiRoomsEmptyUserDescription": "KI-Räume werden von Raum-Admins eingerichtet. Wenn Sie jemand zu einem Raum einlädt, erscheint er hier.",
   "AiRoomsTurnedOff": "KI wurde deaktiviert. KI-Räume sind nicht verfügbar, bis der Super-Administrator sie wieder aktiviert.",
   "AIProjectSkillsEmpty": "Dieser Raum enthält noch keine Skills.",
-  "AIProjectSources": "Quellen",
+  "AIProjectContext": "Kontext",
   "AIProjectAddSuggestion": "Vorschlag hinzufügen",
   "AIProjectEditSuggestion": "Vorschlag bearbeiten",
   "AIProjectSuggestionPrompt": "Prompt",

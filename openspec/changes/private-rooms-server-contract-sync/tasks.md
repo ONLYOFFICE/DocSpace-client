@@ -6,7 +6,7 @@
 
 ## 2. Integration
 
-- [ ] 2.1 `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green. Verify: the validate summary
+- [x] 2.1 `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green. Verify: the validate summary
 
 ## Workflow follow-up
 

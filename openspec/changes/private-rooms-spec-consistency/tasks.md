@@ -7,7 +7,7 @@
 
 ## 2. Tests of the integrity limitations
 
-- [ ] 2.1 In `packages/shared/services/encryption/__tests__/dse3-tampering.test.ts`, add the cases "Chunk size rewritten in storage" (a file of two chunks with the header's chunk size changed fails with an authentication or format error and returns no plaintext), "Older version served" (two versions encrypted under the same data key with different file nonces; the older one decrypts to its own content without an error) and "Another file served" (a container encrypted under another key fails with an authentication error). Verify: `cd packages/shared && pnpm exec vitest run services/encryption/__tests__/dse3-tampering.test.ts`; `pnpm exec tsc --noEmit -p tsconfig.json` in shared
+- [x] 2.1 In `packages/shared/services/encryption/__tests__/dse3-tampering.test.ts`, add the cases "Chunk size rewritten in storage" (a file of two chunks with the header's chunk size changed fails with an authentication or format error and returns no plaintext), "Older version served" (two versions encrypted under the same data key with different file nonces; the older one decrypts to its own content without an error) and "Another file served" (a container encrypted under another key fails with an authentication error). Verify: `cd packages/shared && pnpm exec vitest run services/encryption/__tests__/dse3-tampering.test.ts`; `pnpm exec tsc --noEmit -p tsconfig.json` in shared
 
 ## 3. Purpose sections
 

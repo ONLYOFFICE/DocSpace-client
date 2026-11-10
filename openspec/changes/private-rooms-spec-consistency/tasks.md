@@ -11,7 +11,7 @@
 
 ## 3. Purpose sections
 
-- [ ] 3.1 Rewrite by hand the Purpose of `openspec/specs/private-rooms/feature-gating/spec.md` (private rooms are a beta offered while the E2E rooms app is on, with the host opt-in of an embedding frame; no browser-local flag) and of `openspec/specs/private-rooms/editor-integration/spec.md` (the editor's web client decrypts and encrypts in the browser with the DEK the client hands over; save-as, version history and the other withheld actions are handled for encrypted files), keeping each Implementation line accurate (design decision 5). Verify: `npx -y @fission-ai/openspec@latest validate --specs --strict`
+- [x] 3.1 Rewrite by hand the Purpose of `openspec/specs/private-rooms/feature-gating/spec.md` (private rooms are a beta offered while the E2E rooms app is on, with the host opt-in of an embedding frame; no browser-local flag) and of `openspec/specs/private-rooms/editor-integration/spec.md` (the editor's web client decrypts and encrypts in the browser with the DEK the client hands over; save-as, version history and the other withheld actions are handled for encrypted files), keeping each Implementation line accurate (design decision 5). Verify: `npx -y @fission-ai/openspec@latest validate --specs --strict`
 
 ## 4. Other changes
 

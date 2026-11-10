@@ -45,5 +45,5 @@ task 2.3 retires that limitation when the change resumes.
 ## Workflow follow-up
 
 - Do not flip the written version (task 1.4) before task 4.3 is answered and the Document Server release that reads version 3 is named; the read side, the associated data and the tamper coverage do not wait.
-- `private-rooms-editor-contract` modifies the same "PDF form flag in the header" requirement (the server's plaintext rule); whichever change archives second re-applies the other's wording on top of the main spec before `openspec validate`.
+- `private-rooms-editor-contract` modifies the same "PDF form flag in the header" requirement (the server's plaintext rule); whichever change archives second re-applies the other's wording on top of the main spec before `openspec validate`. Done on 2026-11-10: the editor contract's wording (the 300-byte window and its two scenarios) reached the main spec by a sync, and this delta's block was rebased on it.
 - Archive with `/opsx:archive private-rooms-dse3-header-authentication` after review.

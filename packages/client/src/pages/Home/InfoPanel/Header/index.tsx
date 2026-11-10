@@ -59,6 +59,7 @@ const InfoPanelHeaderContent = ({
     infoPanelItemsList,
     enablePlugins,
     isRecentFolder,
+    isPrivacyFolder,
   } = restProps as Exclude<InfoPanelHeaderContentProps, { isGallery: true }>;
 
   return (
@@ -72,6 +73,7 @@ const InfoPanelHeaderContent = ({
       infoPanelItemsList={infoPanelItemsList}
       enablePlugins={enablePlugins}
       isRecentFolder={isRecentFolder}
+      isPrivacyFolder={isPrivacyFolder}
     />
   );
 };
@@ -98,7 +100,7 @@ export default inject(
 
     const selection = infoPanelStore.infoPanelSelection;
 
-    const { isRecentFolder } = treeFoldersStore;
+    const { isRecentFolder, isPrivacyFolder } = treeFoldersStore;
 
     return {
       selection,
@@ -114,6 +116,7 @@ export default inject(
       enablePlugins,
 
       isRecentFolder,
+      isPrivacyFolder,
     };
   },
 )(observer(InfoPanelHeaderContent));

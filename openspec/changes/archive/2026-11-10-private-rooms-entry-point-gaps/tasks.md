@@ -26,7 +26,14 @@
 
 - [x] 6.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green. Verify: the gate output and the validate summary
 
+## 7. Info panel
+
+- [x] 7.1 In `packages/client/src/helpers/info-panel/tabs.ts`, add an `isPrivacyFolder` parameter to `getAvailableInfoPanelTabs` and add no plugin tab when the item is private or encrypted or `isPrivacyFolder` is true, with the one-line spec pointer; pass `treeFoldersStore.isPrivacyFolder` from `InfoPanel/Body` and `InfoPanel/Header` (`index.tsx` into `bodyGeneral.tsx` and `headerGeneral.tsx`) (design decision 6). Verify: cases "Info panel of a private room", "Info panel of a folder inside a private room" (a folder without the `private` flag, `isPrivacyFolder` true), "Info panel of an encrypted file" (`isPrivacyFolder` false, as in Recent) and "Info panel of an item outside private rooms" (the plugin tab is there), each with an enabled plugin tab, in `packages/client/src/helpers/info-panel/__tests__/tabs.test.ts`, `cd packages/client && pnpm exec vitest run src/helpers/info-panel`; the first three fail without the change; `pnpm exec tsc --noEmit -p tsconfig.json` in client
+
+## 8. Integration
+
+- [x] 8.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green. Verify: the gate output and the validate summary
+
 ## Workflow follow-up
 
-- One more entry point belongs to this change: the plugin tabs of the info panel in a private room, of a folder in it and of an encrypted file. It is added with `/opsx:update private-rooms-entry-point-gaps` before the change is archived.
-- Archive with `/opsx:archive private-rooms-entry-point-gaps` once all three entry points are done. The archive merges the badge, media viewer rename and media viewer download scenarios into `openspec/specs/private-rooms/file-operations/spec.md`.
+- Archive with `/opsx:archive private-rooms-entry-point-gaps` once group 8 is done; all three entry points are then covered. The archive merges the badge, media viewer rename and media viewer download scenarios into `openspec/specs/private-rooms/file-operations/spec.md` and the info panel scenarios into `openspec/specs/private-rooms/room-membership/spec.md`.

@@ -68,6 +68,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     infoPanelItemsList,
     enablePlugins,
     isRecentFolder,
+    isPrivacyFolder,
   } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
 
   return (
@@ -94,6 +95,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       infoPanelItemsList={infoPanelItemsList}
       enablePlugins={enablePlugins}
       isRecentFolder={isRecentFolder}
+      isPrivacyFolder={isPrivacyFolder}
     />
   );
 };
@@ -157,6 +159,7 @@ export default inject(
 
       enablePlugins: settingsStore.enablePlugins,
       isRecentFolder: treeFoldersStore.isRecentFolder,
+      isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

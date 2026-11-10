@@ -21,9 +21,12 @@ dialog shows the opaque server name ("Rename withheld for encrypted
 files"). Both were seen on the test portal on 2026-11-10. Neither
 requirement names the media viewer, so neither has a scenario for it.
 
-One more entry point bypasses private-room rules in the same way: the
-plugin tabs of the info panel. It belongs to this change but is not planned
-yet; see Out of scope.
+The info panel breaks "AI and plugin actions withheld" of
+`room-membership`: it adds the tabs of enabled plugins for a private room,
+a folder inside one and an encrypted file, while the context menu withholds
+plugin entries for all three. Plugins receive an item id and fetch the
+content themselves. This was found in the code, not on the test portal. The
+requirement's only scenario names the context menu.
 
 ## What Changes
 
@@ -47,6 +50,9 @@ yet; see Out of scope.
   desktop menu, the mobile menu and the menu of a PDF.
 - Unchanged: download and Rename in the media viewer for a file that is not
   encrypted.
+- The client's info panel shows no plugin tabs for a private room, a folder
+  inside one or an encrypted file. Other items keep the tabs their plugins
+  ask for.
 
 ## Capabilities
 
@@ -64,6 +70,8 @@ None.
   names the media viewer menu and gets scenarios for it; "Download decrypts
   on the client" gets a scenario for the media viewer's download button
   and Ctrl+S.
+- `private-rooms/room-membership`: "AI and plugin actions withheld" names
+  the plugin tabs of the info panel and gets scenarios for them.
 
 ## Impact
 
@@ -72,7 +80,10 @@ None.
 - Shared: `packages/shared/components/media-viewer/MediaViewer.helpers.tsx`
   and `MediaViewer.test.tsx`.
 - Client: `packages/client/src/pages/Home/MediaViewer/index.js`
-  (`onDownloadMediaFile`). For the badge, no source change:
+  (`onDownloadMediaFile`); `packages/client/src/helpers/info-panel/tabs.ts`
+  and its callers `InfoPanel/Body/bodyGeneral.tsx` and
+  `InfoPanel/Header/headerGeneral.tsx` with their `index.tsx` wrappers, and
+  `helpers/info-panel/__tests__/tabs.test.ts`. For the badge, no source change:
   `packages/client/src/HOCs/withBadges.js` passes its handler only to that
   badge. Cases in `packages/client/__tests__/encrypted-file-ui.spec.ts`.
 - SDK: no source change. Its row, table and tile views render the shared
@@ -89,9 +100,6 @@ None.
 
 ## Out of scope
 
-- Plugin tabs in the info panel of a private room, of a folder in it and of
-  an encrypted file. Added to this change with `/opsx:update` before the
-  archive.
 - Decrypting a PDF in the media viewer. Only the Rename entry of its menu
   changes here.
 - A version history for encrypted files. "Version operations withheld" is a

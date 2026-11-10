@@ -59,6 +59,8 @@ export type TGetAvailableInfoPanelTabsParams = {
   // `undefined` is allowed because TreeFoldersStore.isRecentFolder is
   // `boolean | undefined`; the flag is only used for truthiness checks.
   isRecentFolder: boolean | undefined;
+  /** TreeFoldersStore.isPrivacyFolder: the open folder is in a private room. */
+  isPrivacyFolder: boolean;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
 };
@@ -79,6 +81,7 @@ export function getAvailableInfoPanelTabs({
   selection,
   isTrash,
   isRecentFolder,
+  isPrivacyFolder,
   enablePlugins,
   infoPanelItemsList,
 }: TGetAvailableInfoPanelTabsParams): TInfoPanelTabsResult {
@@ -152,7 +155,10 @@ export function getAvailableInfoPanelTabs({
     tabs.push(InfoPanelView.infoMetadata);
   }
 
-  if (enablePlugins && infoPanelItemsList.length > 0) {
+  // Spec: private-rooms/room-membership, "AI and plugin actions withheld"
+  const pluginsWithheld = isPrivateItem || isPrivacyFolder;
+
+  if (enablePlugins && infoPanelItemsList.length > 0 && !pluginsWithheld) {
     const isRoomSelection = isRoomUtil(selection);
     const isFileSelection = isFileUtil(selection);
 

@@ -3,7 +3,7 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2025-11-25T11:53:02.411Z",
-  "updated_at": "2026-11-05T16:49:39.817Z",
+  "updated_at": "2026-11-09T09:36:33.223Z",
   "comment": {
     "text": "Name of the AI Chat feature and of the AI Chat section (formerly \"AI rooms\") holding Instructions and Knowledge rooms: sidebar item, section header, folder title, dashboard card, default-page option, quick-action label. Noun phrase, no trailing punctuation.",
     "is_auto": true,
@@ -18,6 +18,12 @@
       "module": "@onlyoffice/apps-ui-kit"
     },
     {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 596,
+      "context": "// archives them, so there is no Archive slot. The bare `/ai-rooms` is the\n // Rooms app's SDK frame page: the section lives on the nested paths.\n if (aiHubFolder && aiServicesEnabled) {\n mainItems.push({\n id: \"ai-rooms\",\n label: t(\"Common:AIChat\"),\n icon: getCatalogIconUrlByType(FolderType.Rooms),\n ...nav(searchAreaUrl(\"/ai-rooms/filter\", RoomSearchArea.AiHub)),\n ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),\n children: [\n {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 374,
       "context": "// Opens the AI chat panel — the same action the quick-action tiles and the\n // dashboard use. Only offered where the chat is actually reachable\n // (`isAiChatAvailable` already covers guests and portals without AI).\n const openAiChat = {\n title: t(\"Common:AIChat\"),\n description: t(\"EmptyView:AIChatOptionDescription\"),\n icon: <CreateChatIcon />,\n key: \"open-ai-chat\",\n onClick: actions.onOpenAiChat,\n disabled: false,",
@@ -30,9 +36,33 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 237,
+      "context": "// onboarding tour.\n if (isAiHubAvailable) {\n items.push({\n id: \"ai-hub\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:AIChat\"),\n description: t(\"Common:AiRoomsCreateDescription\"),\n installed: true,\n href: AI_HUB_PATH,\n buttonLabel: t(\"Common:Open\"),\n onAction: () => navigate(AI_HUB_PATH),",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
       "line_number": 187,
       "context": "const aiChatItems = React.useMemo<QuickActionItem>(\n () => ({\n id: \"quick-ai-chat\",\n dataTestId: \"quick-ai-chat\",\n icon: <AIChatIcon />,\n label: t(\"Common:AIChat\"),\n onClick: openChat,\n }),\n [t, openChat],\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 779,
+      "context": "if (isPrivateRoomsListRoot(location, isRoomsFolder))\n return t(\"Common:Private\");\n \n // The AI root is titled by the client, as the tree titles it.\n if (getCategoryType(location) === CategoryType.AiHub)\n return t(\"Common:AIChat\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
+      "line_number": 88,
+      "context": "{\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n {\n label: t(\"Common:AIChat\"),\n key: FolderType.AiHub,\n },\n ];\n \n return options.filter((option) =>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
+      "line_number": 126,
+      "context": "break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n case FolderType.AiHub:\n folder.title = i18n.t(\"Common:AIChat\");\n break;\n default:\n break;\n }\n });",
       "module": "/packages/client"
     },
     {

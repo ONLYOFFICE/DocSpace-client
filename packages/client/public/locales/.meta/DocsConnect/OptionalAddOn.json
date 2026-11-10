@@ -3,7 +3,7 @@
   "content": "Optional add-on",
   "content_en_sha1_hash": "b5dab5aefdb080bf97c5367b0ec29238f38a86af",
   "created_at": "2026-07-27T13:07:48.511Z",
-  "updated_at": "2026-11-06T10:45:54.645Z",
+  "updated_at": "2026-11-09T07:51:49.345Z",
   "comment": {
     "text": "Secondary text label in the DocsConnect Buy Plan panel indicating that a service is an additional, non-mandatory component.",
     "is_auto": true,

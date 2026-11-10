@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2026-07-27T13:07:48.490Z",
-  "updated_at": "2026-11-06T10:45:54.627Z",
+  "updated_at": "2026-11-09T07:51:49.341Z",
   "comment": {
     "text": "A label or caption in summary cards and information rows that identifies the number of users included in a subscription plan.",
     "is_auto": true,

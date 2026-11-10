@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.ts",
-      "line_number": 1259,
+      "line_number": 1250,
       "context": "hasImage: boolean | string | undefined,\n onDelete?: () => () => void,\n ): TModel[] => {\n return [\n {\n label: t(\"Common:UploadPicture\"),\n icon: UploadSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n // the original .js called `ref.current.click()`\n // without null guards; `!` keeps that runtime.\n onClick: (ref?: RefObject<Nullable<HTMLInputElement>>) =>",
       "module": "/packages/client"
     },

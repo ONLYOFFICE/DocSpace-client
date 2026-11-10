@@ -3,7 +3,7 @@
   "content": "Room quota has been successfully disabled.",
   "content_en_sha1_hash": "bc508edc6864a5a5ff719032d851c846cc501122",
   "created_at": "2025-05-19T21:30:52.442Z",
-  "updated_at": "2026-11-06T10:45:55.614Z",
+  "updated_at": "2026-11-09T07:51:49.590Z",
   "comment": {
     "text": "Toast message. Appears after a user successfully disables the room quota setting.",
     "is_auto": true,

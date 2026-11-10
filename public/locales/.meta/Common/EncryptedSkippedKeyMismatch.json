@@ -3,7 +3,7 @@
   "content": "Skipped {{users}}: their encryption key has changed and was not trusted. Re-verify the key and retry from the Members panel.",
   "content_en_sha1_hash": "7031e80ba4b5c877c4740cf3ff8a83c8812c6e1f",
   "created_at": "2026-05-24T17:27:26.380Z",
-  "updated_at": "2026-11-06T10:45:54.112Z",
+  "updated_at": "2026-11-09T09:26:33.384Z",
   "comment": {
     "text": "Warning toast message appearing when encryption keys for specific users are no longer trusted. The {{users}} variable contains a comma-separated list of names.",
     "is_auto": true,

@@ -1,23 +1,15 @@
 {
   "key_path": "EnableAiRoomsTitle",
-  "content": "Enable AI Chat?",
-  "content_en_sha1_hash": "ddc7930d180cc6d26d1206b2dec6ec1a5b020e1b",
-  "created_at": "2026-11-09T09:25:22.038Z",
-  "updated_at": "2026-11-09T09:26:33.410Z",
+  "content": "Enable AI Workspace?",
+  "content_en_sha1_hash": "7fa7a6b2c27cd4d97f1f1cf2189cc4459ae4473b",
+  "created_at": "2026-11-10T13:41:43.804Z",
+  "updated_at": "2026-11-10T13:41:43.804Z",
   "comment": {
-    "text": "Title of the dashboard modal asking the admin to enable the AI Chat section (formerly \"AI rooms\"). A question; keep the question mark.",
-    "is_auto": true,
-    "updated_at": "2026-11-09T09:27:35.823Z",
-    "model": "claude-fable-5-1"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/EnableAiRoomsDialog/index.tsx",
-      "line_number": 67,
-      "context": "<ModalDialog\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:EnableAiRoomsTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:EnableAiRoomsDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

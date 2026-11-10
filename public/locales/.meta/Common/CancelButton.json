@@ -199,7 +199,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
-      "line_number": 281,
+      "line_number": 288,
       "context": "isDisabled={!canSave}\n scale\n testId=\"change_ai_limit_dialog_submit\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n isDisabled={isLoading}\n scale\n testId=\"change_ai_limit_dialog_cancel\"",
       "module": "/packages/client"
     },
@@ -408,12 +408,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/EncryptedTransferConfirmDialog/index.tsx",
-      "line_number": 79,
-      "context": "scale\n onClick={filesActionsStore.confirmEncryptedTransfer}\n />\n <Button\n testId=\"encrypted_transfer_cancel_button\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
       "line_number": 417,
       "context": "isLoading={isSaving}\n isDisabled={!canSave || isGenerating}\n testId=\"generate-skill-save\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isSaving}\n testId=\"generate-skill-cancel\"",
@@ -577,7 +571,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 340,
+      "line_number": 308,
       "context": "testId=\"metadata_ai_save_button\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={isReview ? t(\"Metadata:Discard\") : t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={isReview ? discard : onClose}\n testId=\"metadata_ai_cancel_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -613,8 +607,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 460,
+      "line_number": 558,
       "context": "onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
+      "line_number": 140,
+      "context": "scale\n isDisabled={!canSave}\n onClick={onSubmit}\n testId=\"ai-project-suggestion-save\"\n />\n <Button label={t(\"Common:CancelButton\")} size={ButtonSize.normal} scale onClick={onClose} />\n </ModalDialog.Footer>\n </ModalDialog>\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -672,18 +672,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokEditCard.tsx",
-      "line_number": 137,
-      "context": "testId=\"byok-edit-delete-button\"\n />\n <div className={styles.formButtons}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n isDisabled={isBusy}\n testId=\"byok-edit-cancel-button\"\n />\n <Button",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokKeyForm.tsx",
-      "line_number": 157,
-      "context": "}}\n />\n <div className={styles.formButtons}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n isDisabled={isSaving}\n testId=\"byok-cancel-button\"\n />\n <Button",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
       "line_number": 103,
       "context": "isLoading={loading}\n testId=\"reset-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
@@ -727,7 +715,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 407,
+      "line_number": 420,
       "context": "id=\"buttonsPortalRenaming\"\n className=\"save-cancel-buttons\"\n onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}\n saveButtonDisabled={!!errorValue}",
       "module": "/packages/client"
     },
@@ -1423,7 +1411,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 680,
+      "line_number": 674,
       "context": ") : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}\n displaySettings",
       "module": "/packages/shared"
     },
@@ -1435,14 +1423,26 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 203,
+      "line_number": 201,
       "context": "\"brand-name-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onCancelAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isEqualText || hasError}\n disableRestoreToDefault={isEqualText}\n showReminder={showReminder}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
-      "line_number": 163,
-      "context": "scale\n isDisabled={!canSave}\n onClick={onSubmit}\n testId=\"ai-project-suggestion-save\"\n />\n <Button label={t(\"Common:CancelButton\")} size={ButtonSize.normal} scale onClick={onClose} />\n </ModalDialog.Footer>\n </ModalDialog>\n );\n };",
+      "file_path": "/packages/client/src/components/dialogs/EncryptedTransferConfirmDialog/index.tsx",
+      "line_number": 79,
+      "context": "scale\n onClick={filesActionsStore.confirmEncryptedTransfer}\n />\n <Button\n testId=\"encrypted_transfer_cancel_button\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokEditCard.tsx",
+      "line_number": 137,
+      "context": "testId=\"byok-edit-delete-button\"\n />\n <div className={styles.formButtons}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n isDisabled={isBusy}\n testId=\"byok-edit-cancel-button\"\n />\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokKeyForm.tsx",
+      "line_number": 157,
+      "context": "}}\n />\n <div className={styles.formButtons}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n isDisabled={isSaving}\n testId=\"byok-cancel-button\"\n />\n <Button",
       "module": "/packages/client"
     }
   ],

@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 225,
+      "line_number": 224,
       "context": "onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.MCP_SERVERS,\n name: t(\"Common:MCPServers\"),\n // Portal settings are an administrator page: a tool switched off here is\n // off for every user, so the page edits the tenant list (Bug 84381).\n content: <McpServers toolPrefsScope=\"tenant\" />,\n onClick: makeOnClick(TAB_IDS.MCP_SERVERS),\n isDisabled: disableNonAiModels,",
       "module": "/packages/client"
     }

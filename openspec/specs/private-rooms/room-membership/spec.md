@@ -194,13 +194,6 @@ The system SHALL remove a member of a private room through the role update alone
 - **WHEN** a member is removed from the Members tab of a private room selected in the Private or Rooms list
 - **THEN** the same role update runs as for a removal from inside the room, and nothing more
 
-### Requirement: Removing a group revokes each member
-The system SHALL expand a removed group into its current members and run the revocation for each of them; as for a single member, the server keeps their access entries.
-
-#### Scenario: Group removed
-- **WHEN** a group is removed from a private room
-- **THEN** a revocation runs for every user in that group, and their access entries remain stored on the server
-
 ### Requirement: Leaving a room revokes own access first
 The system SHALL drop the leaver's role without a revocation of its own when a member leaves a private room; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
 
@@ -446,3 +439,18 @@ The system SHALL, before it asks the server to transfer a private room to a veri
 #### Scenario: Ordinary room
 - **WHEN** the owner transfers a room that is not private
 - **THEN** no unlock is asked, no file is read and the transfer is asked at once
+
+### Requirement: Groups and guests are not members of a private room
+The system SHALL NOT make a group or a guest a member of a private room in this version. The server refuses a group's share with 403, because its key check finds no encryption key for a group, and it refuses a guest the same way, because a guest cannot store an encryption key. The invite panels offer neither.
+
+#### Scenario: Group shared with a private room
+- **WHEN** a group is sent in the share request of a private room
+- **THEN** the server answers 403 and the group gets no access
+
+#### Scenario: Guest shared with a private room
+- **WHEN** a guest is sent in the share request of a private room
+- **THEN** the server answers 403, since the guest holds no key, and the guest gets no access
+
+#### Scenario: Guest tries to store a key
+- **WHEN** a guest submits an encryption key pair
+- **THEN** the server refuses it with 403 and stores nothing

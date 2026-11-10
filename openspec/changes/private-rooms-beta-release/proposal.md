@@ -28,8 +28,9 @@ a beta, with the E2E rooms app as the switch on standalone portals.
   existing feedback channels. The shared `BetaBadge` gets a description and a
   title override for this, since both are specific to RTL languages today.
 - Keys management stays reachable for users who already hold a key when the
-  app is switched off. Existing private rooms stay usable and are listed in
-  Rooms.
+  app is switched off. Existing private rooms stay usable by their address
+  and are listed nowhere, the Rooms section included (owner's decision,
+  confirmed 2026-11-10).
 - An embedded client frame and the SDK private pages still need the host
   opt-in. Inside a frame, a browser value no longer opts in.
 - The E2E base fixture stops setting the flag, and an app-off spec replaces

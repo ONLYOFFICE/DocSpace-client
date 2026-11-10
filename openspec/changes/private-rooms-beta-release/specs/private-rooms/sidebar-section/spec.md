@@ -34,7 +34,7 @@ The system SHALL make the Private section available while the E2E rooms app is o
 
 #### Scenario: App switched off on a standalone portal
 - **WHEN** an administrator switches the E2E rooms app off while the section is shown
-- **THEN** the section disappears without a reload, and the Rooms section lists private rooms again
+- **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
 
 ### Requirement: Private addresses open in Rooms while the section is not available
 The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.

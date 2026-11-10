@@ -33,7 +33,7 @@ The system SHALL keep rooms that are already private, and files that are already
 - **THEN** no create entry offers the Private room type
 
 ### Requirement: E2E suite runs without the flag
-The system SHALL run the client E2E suite without any browser-local flag. The base fixture SHALL write no `privateRooms` entry, so every spec sees the Private section as a portal user does. A dedicated spec SHALL switch the E2E rooms app off on a standalone portal and assert that each entry point disappears while existing private rooms stay listed in Rooms.
+The system SHALL run the client E2E suite without any browser-local flag. The base fixture SHALL write no `privateRooms` entry, so every spec sees the Private section as a portal user does. A dedicated spec SHALL switch the E2E rooms app off on a standalone portal and assert that each entry point disappears and that existing private rooms are not listed in Rooms.
 
 #### Scenario: Base fixture
 - **WHEN** a client E2E test gets its page from the base fixture
@@ -41,7 +41,7 @@ The system SHALL run the client E2E suite without any browser-local flag. The ba
 
 #### Scenario: App-off spec
 - **WHEN** the app-off spec mocks a standalone portal whose E2E rooms app is off
-- **THEN** the Private sidebar item, the E2E rooms app and the Private room type are absent, and an existing private room is listed in Rooms
+- **THEN** the Private sidebar item, the E2E rooms app and the Private room type are absent, and an existing private room is not listed in Rooms
 
 ### Requirement: Private room type is offered only from the Private section
 The system SHALL offer the Private room type for creation only while the Private section is available, and then only through the Private section. The generic create-room chooser, its list and both dropdown variants, SHALL NOT offer it in any state. All other room types SHALL be offered whether or not the section is available.

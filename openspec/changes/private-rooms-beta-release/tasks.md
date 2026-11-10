@@ -49,6 +49,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 - [x] 4.2 Replace `private-rooms-hidden.spec.ts` with `private-rooms-app-off.spec.ts`, covering "App-off spec", "Browser-local flag ignored", "App off, key held", "Link opened while the section is not available" and "Chooser with the app off" on a mocked standalone portal. Verify under Docker as in 4.1.
 - [x] 4.3 Assert the badges: "Beta badge shown" in `private-rooms-section.spec.ts` and "Tab label" in `keys-management.spec.ts`, each with the tooltip title. Verify under Docker as in 4.1.
 - [x] 4.4 Run the full client E2E under Docker (`tests-dev`, `--update-snapshots=changed`). Design decision 7 expects no screenshot to move; check any that does by eye before committing it, and announce a regeneration to the teams that merge into the release branch. Verify: the full run, green except the failures the release branch has on its own (seven on 2026-11-03: five in `unpaid-portal-requests`, two in `ai-services-disabled`).
+- [ ] 4.5 Make the app-off spec follow the owner's decision that private rooms are listed nowhere while the app is off: the rooms list mock leaves private rooms out of the Rooms area as `FileSecurity` does for `searchArea=Active` (it forces `NotPrivate`), and `private-rooms-app-off.spec.ts` asserts that the existing private room is not listed in Rooms (scenario "App-off spec"). The same mock is due to follow the server in `private-rooms-server-section` (its rooms list contract for `Active`); whichever lands first does it for both. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test __tests__/private-rooms-app-off.spec.ts --reporter=line`; the rooms list contract test under `packages/shared/__mocks__/handlers`.
 
 ## 5. Documentation
 
@@ -69,7 +70,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 - [x] 6.1 Run the pre-push gate (`pnpm run tsc`, `pnpm run lint`, `npm --prefix ./common/tests run test:lefthook`, `pnpm run test`, `pnpm run test:client`, `pnpm run test:sdk`, `pnpm run test:doceditor`), the SDK private E2E and `npx -y @fission-ai/openspec@latest validate --all --strict`. Verify: all green.
 - [ ] 6.2 Run on staging with the Document Server of 0.1, and record date, builds and results in design.md (SaaS half done 2026-11-06 on `tests.onlyoffice.io`, design.md "Release stand check": the owner sees the section and both badges; the app-off half waits for a standalone portal):
   - a user who never opted in sees the Private section and the badges;
-  - on a standalone portal an administrator switches the Private app off: the section goes, private rooms are listed in Rooms, and the Keys management tab stays for a key holder;
+  - on a standalone portal an administrator switches the Private app off: the section goes, private rooms are not listed in Rooms either, and the Keys management tab stays for a key holder;
   - the manual checks of `private-rooms-server-hardening` 10.2, the server behaviours its suite cannot cover (the editor session drop, the real crypto library, the socket recipients, the hidden submit button, the letters, the audit export and the room history report, digest letters).
 
   Verify: that record.

@@ -198,6 +198,40 @@ describe("AiProjectsStore", () => {
       expect(store.knowledgePending[9]).toBe(false);
     });
 
+    it("reads the skills without a toast when nobody asked, and with one for an expanded room", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      api.getAiProjectSkills.mockRejectedValue(new Error("gone"));
+
+      await store.fetchSkills(1, { silent: true });
+      expect(toastr.error).not.toHaveBeenCalled();
+
+      await store.fetchSkills(1);
+      expect(toastr.error).toHaveBeenCalledTimes(1);
+    });
+
+    it("keeps the skills pending until the latest read ends, whichever ends first", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      let resolveOlder: (rooms: unknown) => void = () => {};
+      let resolveLatest: (rooms: unknown) => void = () => {};
+      api.getAiProjectSkills
+        .mockImplementationOnce(() => new Promise((resolve) => (resolveOlder = resolve)))
+        .mockImplementationOnce(() => new Promise((resolve) => (resolveLatest = resolve)));
+
+      const older = store.fetchSkills(1, { silent: true });
+      const latest = store.fetchSkills(1);
+
+      resolveOlder([]);
+      await older;
+      expect(store.skillsPending).toBe(true);
+
+      resolveLatest([{ id: 12, title: "Skills", skills: [] }]);
+      await latest;
+      expect(store.skillsPending).toBe(false);
+      expect(store.skills).toEqual([{ id: 12, title: "Skills", skills: [] }]);
+    });
+
     it("counts the Knowledge rooms' files for the open project, leaving a failed room uncounted", async () => {
       const store = createStore();
       await store.openProject(project(1));

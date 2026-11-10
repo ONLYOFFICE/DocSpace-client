@@ -372,14 +372,25 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   // The Skills and Knowledge titles say how many files are connected, so
   // both are read once the rooms are known and again when they change: the
   // skills of every linked room come in one read, a Knowledge room answers
-  // its number of files alone.
+  // its number of files alone. The column unmounts while the history or the
+  // info panel is open and mounts again after, so what the store already
+  // holds for the project is not read again; nobody asked for these reads,
+  // so a failed one shows no toast - an expanded room reads again and says.
   const instructionsIds = instructionsRooms.map((room) => room.id).join();
   const knowledgeIds = knowledgeRooms.map((room) => room.id).join();
   React.useEffect(() => {
-    if (instructionsIds) void store.fetchSkills(project.id);
+    if (!instructionsIds) return;
+    const ids = instructionsIds.split(",").map(Number);
+    const isRead = ids.every((id) => store.skills.some((room) => room.id === id));
+    if (!isRead) void store.fetchSkills(project.id, { silent: true });
   }, [store, project.id, instructionsIds]);
   React.useEffect(() => {
-    if (knowledgeIds) void store.fetchKnowledgeCounts(project.id, knowledgeIds.split(",").map(Number));
+    if (!knowledgeIds) return;
+    const uncounted = knowledgeIds
+      .split(",")
+      .map(Number)
+      .filter((id) => store.knowledge[id] === undefined && store.knowledgeCounts[id] === undefined);
+    if (uncounted.length > 0) void store.fetchKnowledgeCounts(project.id, uncounted);
   }, [store, project.id, knowledgeIds]);
 
   // No number until the skills are read; a room the read left out adds none.

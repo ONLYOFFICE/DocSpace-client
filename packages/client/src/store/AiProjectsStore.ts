@@ -134,6 +134,9 @@ class AiProjectsStore {
 
   skillsLoading = false;
 
+  /** The latest skills read: only it ends `skills*`, an older one left over from another project or click does not. */
+  private skillsRequest = 0;
+
   /** As `skills*`, per Knowledge room. */
   knowledgePending: Record<number, boolean> = {};
 
@@ -294,20 +297,37 @@ class AiProjectsStore {
     }
   };
 
-  fetchSkills = async (id: number) => {
+  /**
+   * Reads the skills of the project's Instructions rooms. A read nobody
+   * asked for (`silent`: the card title's count) fails without a toast; an
+   * expanded room reads again and says why.
+   */
+  fetchSkills = async (id: number, options?: { silent?: boolean }) => {
     const { startLoader, endLoader } = createLoader();
+    this.skillsRequest += 1;
+    const request = this.skillsRequest;
     this.skillsPending = true;
-    startLoader(() => runInAction(() => (this.skillsLoading = true)));
+    startLoader(() =>
+      runInAction(() => {
+        if (request === this.skillsRequest) this.skillsLoading = true;
+      }),
+    );
     try {
       const rooms = await getAiProjectSkills(id);
       runInAction(() => {
         if (this.activeProject?.id === id) this.skills = rooms;
       });
     } catch (e) {
-      toastr.error(errorMessage(e));
+      if (!options?.silent) toastr.error(errorMessage(e));
     } finally {
-      runInAction(() => (this.skillsPending = false));
-      endLoader(() => runInAction(() => (this.skillsLoading = false)));
+      runInAction(() => {
+        if (request === this.skillsRequest) this.skillsPending = false;
+      });
+      endLoader(() =>
+        runInAction(() => {
+          if (request === this.skillsRequest) this.skillsLoading = false;
+        }),
+      );
     }
   };
 

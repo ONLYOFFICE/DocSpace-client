@@ -58,18 +58,25 @@ export type EncryptedFileSeed = {
   folderId?: number;
   /** The file's `version` and `versionGroup`; 1 when left out. */
   versionGroup?: number;
+  /** The user who created the file; the room's owner when left out. */
+  createdBy?: string;
 };
 
 export type EncryptedFileRecord = Required<
   Omit<
     EncryptedFileSeed,
-    "bytes" | "encryptedNameHeader" | "folderId" | "versionGroup"
+    | "bytes"
+    | "encryptedNameHeader"
+    | "folderId"
+    | "versionGroup"
+    | "createdBy"
   >
 > & {
   bytes?: Uint8Array;
   encryptedNameHeader?: string;
   folderId?: number;
   versionGroup?: number;
+  createdBy?: string;
 };
 
 export type EncryptedFolderSeed = { id: number; title: string };
@@ -95,6 +102,12 @@ export type EncryptedFilesHandlerHandle = {
   setFiles: (files: EncryptedFileSeed[]) => void;
   setFileKeys: (fileId: number, keys: EncryptedFileKey[]) => void;
   setRoomUserKeys: (keys: RoomMemberKeyEntry[]) => void;
+  /**
+   * The stored keys of portal users who are not members of the room, such as
+   * a file's creator who left it: publickeys still answers with the
+   * creator's keys.
+   */
+  setNonMemberKeys: (keys: RoomMemberKeyEntry[]) => void;
   /** Marks a file as lying outside a private room (publickeys answers 415). */
   setFileOutsidePrivateRoom: (fileId: number) => void;
   /**
@@ -274,6 +287,7 @@ const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   encryptedNameHeader: seed.encryptedNameHeader,
   folderId: seed.folderId,
   versionGroup: seed.versionGroup,
+  createdBy: seed.createdBy,
 });
 
 /** EmployeeDto of a user the mock has no directory entry for. */
@@ -302,7 +316,7 @@ const buildFileDto = (
   const downloadOrigin = port ? `${BASE_URL}:${port}` : BASE_URL;
   const dotIdx = record.serverTitle.lastIndexOf(".");
   const fileExst = dotIdx > 0 ? record.serverTitle.slice(dotIdx) : "";
-  const creator = userDto(ownerId);
+  const creator = userDto(record.createdBy ?? ownerId);
   return {
     id: record.id,
     title: record.serverTitle,
@@ -508,6 +522,7 @@ export const encryptedFilesHandlers = (
   const sessions = new Map<string, UploadSessionRecord>();
   const requests: RequestLog[] = [];
   let roomUserKeys: RoomMemberKeyEntry[] = [...(opts.roomUserKeys ?? [])];
+  let nonMemberKeys: RoomMemberKeyEntry[] = [];
   let currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
   let freeSpace: number | null = null;
   const createdOn = new Map<string, string>();
@@ -603,6 +618,9 @@ export const encryptedFilesHandlers = (
     setRoomUserKeys: (keys) => {
       roomUserKeys = [...keys];
     },
+    setNonMemberKeys: (keys) => {
+      nonMemberKeys = [...keys];
+    },
     setFileOutsidePrivateRoom: (fileId) => {
       outsidePrivateRoom.add(fileId);
     },
@@ -639,6 +657,7 @@ export const encryptedFilesHandlers = (
       accessManagers = null;
       requests.length = 0;
       roomUserKeys = [];
+      nonMemberKeys = [];
       nextFileId = 1000;
       nextSessionId = 1;
       operations.length = 0;
@@ -930,8 +949,13 @@ export const encryptedFilesHandlers = (
     /**
      * Mirrors SecurityController.GetEncryptionAccess ->
      * EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)
-     * (HttpGet "file/{fileId}/publickeys"): the keys of the users who reach
-     * the file through a direct user share (here: the room's member keys).
+     * (HttpGet "file/{fileId}/publickeys"): the keys of the users holding a
+     * share record of their own on the file or a folder above it up to the
+     * room (FileSharing.GetSharedInfoAsync over SecurityDao.GetSharesAsync),
+     * plus the file's creator, whom GetSharedInfoAsync adds as the owner
+     * entry even after they left. The room's owner holds no share record of
+     * their own, so here the members are `roomUserKeys` without the owner,
+     * and the creator's keys come from `roomUserKeys` or `nonMemberKeys`.
      * 404 for a missing file, 415 for a file outside a private room
      * (NotSupportedException); SanitizeAccessKeys drops entries without a
      * public key and keeps the private half only on the caller's entries.
@@ -952,8 +976,18 @@ export const encryptedFilesHandlers = (
         if (outsidePrivateRoom.has(fileId)) {
           return errorResponse(415, "Unsupported Media Type");
         }
+        const creatorId = String(f.createdBy ?? ownerId);
+        const holders = roomUserKeys.filter(
+          (k) => String(k.userId) !== ownerId || String(k.userId) === creatorId,
+        );
+        const creatorKeys = holders.some((k) => String(k.userId) === creatorId)
+          ? []
+          : roomUserKeys
+              .concat(nonMemberKeys)
+              .filter((k) => String(k.userId) === creatorId);
         return okResponse(
-          roomUserKeys
+          holders
+            .concat(creatorKeys)
             .filter((k) => !!k.publicKey?.trim())
             .map((k) => {
               if (String(k.userId) === currentUserId) return { ...k };

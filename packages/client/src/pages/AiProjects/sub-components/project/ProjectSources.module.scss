@@ -41,7 +41,7 @@
     var(--info-panel-border-color, var(--files-section-table-view-row-border-color));
 }
 
-// The column's title and the button that collapses it to the tab.
+// The column's title and the button that collapses it to the rail.
 .columnHead {
   flex: 0 0 auto;
   display: flex;
@@ -58,53 +58,65 @@
   }
 }
 
-// The collapsed column: a tab on the chat's far edge, over the
-// conversation (the project body is its positioned box), so the chat keeps
-// the whole width.
-.handle {
-  position: absolute;
-  inset-block-start: 12px;
-  inset-inline-end: 0;
-  z-index: 1;
+// The collapsed column: a narrow rail of the connected rooms' logos, with
+// the button that brings the cards back pinned under them.
+.rail {
+  flex-basis: 48px;
+  align-items: stretch;
+}
+
+.railRooms {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 28px;
-  padding-inline: 8px 10px;
-  border: 1px solid var(--files-section-table-view-row-border-color);
-  border-inline-end: none;
-  border-start-start-radius: 14px;
-  border-end-start-radius: 14px;
-  background: var(--background-color);
-  color: inherit;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  white-space: nowrap;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  min-height: 0;
+  padding-block: 16px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.railRoom {
+  display: flex;
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  background: none;
   cursor: pointer;
 
   &:focus:not(:focus-visible) {
     outline: none;
   }
 
-  svg {
-    width: 8px;
-    height: 8px;
-    // Points to where the column opens: towards the chat.
-    transform: rotate(90deg);
+  // The logo's colour square is absolutely positioned (see `.roomItem`).
+  :global(.room-icon) {
+    position: relative;
 
-    path {
-      fill: var(--text-secondary);
+    :global(.room-image) {
+      border-radius: 6px;
     }
   }
 }
 
-// The tab's triangle is mirrored as a whole in RTL, its own turn kept.
-.handleIcon {
-  display: flex;
+// Between the kinds of sources, centred under the logos.
+.railDivider {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 1px;
+  margin-inline-end: 4px;
+  background: var(--files-section-table-view-row-border-color);
+}
 
-  @include mixins.flip-in-rtl;
+.railExpand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  height: 48px;
+  padding-inline-end: 8px;
+  border-top: 1px solid var(--files-section-table-view-row-border-color);
 }
 
 // The cards share the column's height (a kind without rooms has none).

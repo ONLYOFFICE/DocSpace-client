@@ -81,13 +81,12 @@ import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
-import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { isManager } from "../../utils";
-import RoomItem from "./RoomItem";
+import RoomItem, { SourceRoomLogo } from "./RoomItem";
 import styles from "./ProjectSources.module.scss";
 
 type SectionProps = {
@@ -608,20 +607,77 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
           {openSection ? <div className={styles.compactCard}>{openedCard[openSection]}</div> : null}
         </div>
       ) : collapsed ? (
-        // Collapsed, the column is gone and the chat takes its width; a tab
-        // at the chat's far edge brings the cards back.
-        <button
-          type="button"
-          className={styles.handle}
-          onClick={toggleCollapsed}
-          title={t("Common:Show")}
-          data-testid="ai-project-sources-expand"
+        // Collapsed, the column is a narrow rail of what is connected: the
+        // logos of the Skills rooms, of the Knowledge rooms and the folder.
+        // A logo brings the cards back, as the button under them does.
+        <aside
+          className={classNames(styles.column, styles.rail)}
+          aria-label={t("Common:AIProjectSources")}
+          data-testid="ai-project-sources-rail"
         >
-          <span className={styles.handleIcon} aria-hidden="true">
-            <ExpanderDownIcon />
-          </span>
-          {t("Common:AIProjectSources")}
-        </button>
+          <div className={styles.railRooms}>
+            {instructionsRooms.map((room) => (
+              <button
+                key={room.id}
+                type="button"
+                className={styles.railRoom}
+                title={room.title}
+                onClick={toggleCollapsed}
+                data-testid={`ai-project-rail-room-${room.id}`}
+              >
+                <SourceRoomLogo title={room.title} logo={room.logo} icon="instructionsRoom.svg" size="32px" />
+              </button>
+            ))}
+            {instructionsRooms.length > 0 && knowledgeRooms.length > 0 ? <span className={styles.railDivider} /> : null}
+            {knowledgeRooms.map((room) => (
+              <button
+                key={room.id}
+                type="button"
+                className={styles.railRoom}
+                title={room.title}
+                onClick={toggleCollapsed}
+                data-testid={`ai-project-rail-room-${room.id}`}
+              >
+                <SourceRoomLogo title={room.title} logo={room.logo} icon="knowledgeRoom.svg" size="32px" />
+              </button>
+            ))}
+            {instructionsRooms.length + knowledgeRooms.length > 0 ? <span className={styles.railDivider} /> : null}
+            {folderContext ? (
+              <button
+                type="button"
+                className={styles.railRoom}
+                title={contextPath || folderContext.room.name}
+                onClick={toggleCollapsed}
+                data-testid="ai-project-rail-folder"
+              >
+                <SourceRoomLogo
+                  title={folderContext.room.name}
+                  logo={
+                    contextFolder?.isRoom && contextLogo ? { ...contextLogo, color: contextLogo.color ?? "" } : undefined
+                  }
+                  icon="folder.svg"
+                  size="32px"
+                />
+              </button>
+            ) : (
+              <AddButton
+                className={styles.addRoom}
+                titleText={t("Common:AIProjectAddFolder")}
+                onClick={() => setIsPickerVisible(true)}
+                testId="ai-project-rail-folder-add"
+              />
+            )}
+          </div>
+          <div className={styles.railExpand}>
+            <IconButton
+              iconName={PanelReactSvgUrl}
+              size={16}
+              onClick={toggleCollapsed}
+              title={t("Common:Show")}
+              dataTestId="ai-project-sources-expand"
+            />
+          </div>
+        </aside>
       ) : (
         <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
           <div className={styles.columnHead}>

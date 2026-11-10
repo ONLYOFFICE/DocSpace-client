@@ -231,7 +231,7 @@ const RoomsRowDataComponent = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, tableStore, filesSettingsStore }) => {
+  ({ currentQuotaStore, tableStore, filesSettingsStore, treeFoldersStore }) => {
     const {
       roomColumnTypeIsEnabled,
       roomColumnOwnerIsEnabled,
@@ -250,7 +250,10 @@ export default inject(
     } = filesSettingsStore;
     return {
       roomQuotaColumnIsEnable,
-      roomColumnTypeIsEnabled,
+      // The AI section's lists have no Type column (see the header's
+      // `getRoomsColumns`), whatever the Rooms table last left the flag at.
+      roomColumnTypeIsEnabled:
+        roomColumnTypeIsEnabled && !treeFoldersStore.isAiSectionFolder,
       roomColumnOwnerIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnActivityIsEnabled,

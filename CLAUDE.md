@@ -289,6 +289,7 @@ the translation skills use that comment as context.
 |------|---------------------|
 | `.claude/rules/client-architecture.md` | `packages/client/src/**`, `packages/shared/**` |
 | `.claude/rules/source-checks.md` | `packages/**`, `public/images/**` |
+| `.claude/rules/css-selectors.md` | `**/*.scss`, `**/*.css` — selectors that restyle the whole page |
 | `.claude/rules/generated-artifacts.md` | `public/locales/.constants/**`, `**/biome-plugins/**`, `**/package.json` |
 | `.claude/rules/unit-tests.md` | `**/*.test.*`, `**/__tests__/**` (unit), vitest configs |
 | `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |

@@ -64,6 +64,18 @@ directories are scanned. The check reads values on the line itself: a literal,
 or an offset added to a counter (`tabIndex={index + 1}`). Any other computed
 value - a variable, a ternary - is not caught.
 
+## No selectors on the class or style attribute (css-selectors.test.js)
+
+No `.scss`/`.css` may match on `class` or `style` with any operator:
+`[class*="Navigation_box"]`, `[class^=icon]`, `[style*="display: none"]`.
+Such a selector makes the browser restyle every element with a class on each
+change below it; give the element a class of its own and match that. Why, and
+what else to watch (`:has()`), is in `.claude/rules/css-selectors.md`.
+`css-selectors-allowlist.json` maps the files that still do it to how many
+lines each, and only shrinks: more lines fail, fewer fail until the count is
+lowered. Comments are skipped, so a comment may name the selector it warns
+against.
+
 ## Images (images.test.js)
 
 - Every image added under `packages/**` or `public/` must be

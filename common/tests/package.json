@@ -19,6 +19,7 @@
     "test:ascii": "cross-env VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run ascii.test.js",
     "test:license": "cross-env VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run license.test.js",
     "test:dependencies": "cross-env VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run dependencies.test.js",
+    "test:css-selectors": "cross-env VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run css-selectors.test.js",
     "test:indentation": "cross-env VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest run indentation.test.js",
     "open-report": "open-cli reports/tests-report.html"
   },

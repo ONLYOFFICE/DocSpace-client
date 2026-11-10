@@ -157,11 +157,15 @@ When the editor saves an encrypted PDF form, the saved DSE3 container SHALL carr
 - **THEN** the header of the saved container carries the form flag
 
 ### Requirement: Encrypted forms are not submitted to form-data collection
-The system SHALL NOT accept a form submission of an encrypted file into form-data collection (a form-filling room). Such a submission would be stored without encryption and its field values reported in plaintext, so the server SHALL refuse it.
+The system SHALL NOT accept a form submission of an encrypted file into form-data collection, where it would be stored without encryption and its field values reported in plaintext. The editor configuration of an encrypted file SHALL NOT offer the submit action, and the server SHALL refuse a submit of a file in a private room before storing anything.
 
 #### Scenario: Submission refused
-- **WHEN** a filler submits an encrypted PDF form in a form-filling room
+- **WHEN** the editor sends a submit of an encrypted PDF form that lies in a private room
 - **THEN** the server refuses it, no result file is stored, and no field value MUST be indexed, exported or sent to an external database
+
+#### Scenario: Submit action absent
+- **WHEN** an encrypted PDF form is opened in the editor
+- **THEN** the editor configuration offers no submit action
 
 ### Requirement: Share to fill out hidden in a private room
 The editor SHALL NOT offer "Share to fill out" for a PDF form in a private room, since its destinations, a form-filling room and a virtual data room, take the form out of the private room.
@@ -188,7 +192,7 @@ The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the
 - **WHEN** the server signs the editor configuration of an encrypted file
 - **THEN** the DEK is not part of the signed payload, and the Document Server accepts the configuration with the DEK beside it
 
-### Requirement: SDK does not open encrypted files in the editor
+### Requirement: SDK opens encrypted files only with the Document Server capability
 The SDK file list SHALL refuse to open an encrypted file in the editor while the Document Server capability is absent and SHALL show Common:PrivateRoomEditorNotSupported; when the capability is present it SHALL open the file through the same key flow as the client.
 
 #### Scenario: Open from the SDK
@@ -209,6 +213,11 @@ The server SHALL accept the encrypted flag from the Document Server callback and
 #### Scenario: Callback without the flag
 - **WHEN** the Document Server reports a save of an encrypted file without the encrypted flag
 - **THEN** the save is refused, no version MUST be stored as not encrypted, and the previous encrypted version stays current
+
+## RENAMED Requirements
+
+- FROM: `### Requirement: SDK does not open encrypted files in the editor`
+- TO: `### Requirement: SDK opens encrypted files only with the Document Server capability`
 
 ## REMOVED Requirements
 

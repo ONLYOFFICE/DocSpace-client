@@ -43,20 +43,15 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
+import { pluginRoomTypes } from "SRC_DIR/helpers/plugins/react/utils";
 import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
 
 import { InfoPanelView } from "./index";
 
 type TSelection = TRoom | TFolder | TFile | null | (TRoom | TFolder | TFile)[];
 
-type TPluginItem = {
-  key: string;
-  value: {
-    filesType?: PluginFileType[];
-    filesExsts?: string[];
-    subMenu: { name: string };
-  };
-};
+type TPluginItem = { key: string; value: IInfoPanelItemClient };
 
 export type TGetAvailableInfoPanelTabsParams = {
   selection: TSelection;
@@ -178,7 +173,38 @@ export function getAvailableInfoPanelTabs({
       viewAccessibility.MediaView &&
       !viewAccessibility.ImageView;
 
+    const security = selection.security as
+      | Partial<Record<string, boolean>>
+      | undefined;
+
+    const roomType = isRoomSelection
+      ? pluginRoomTypes[selection.roomType]
+      : undefined;
+
     for (const item of infoPanelItemsList) {
+      if (
+        item.value.itemSecurity &&
+        !item.value.itemSecurity.every((key) => security?.[key])
+      ) {
+        continue;
+      }
+
+      // A plugin may list a numeric id as a string.
+      if (
+        item.value.itemId &&
+        !item.value.itemId.some((id) => String(id) === String(selection.id))
+      ) {
+        continue;
+      }
+
+      if (
+        isRoomSelection &&
+        item.value.roomType &&
+        !(roomType && item.value.roomType.includes(roomType))
+      ) {
+        continue;
+      }
+
       if (!item.value.filesType) {
         tabs.push(`info_plugin-${item.key}`);
         continue;

@@ -53,6 +53,7 @@ export type TFilesStore = {
   roomsForDelete: unknown[];
   roomsForRestore: unknown[];
   isThirdPartySelection: boolean;
+  isRoomsSectionOff: boolean;
   isFiltered: boolean;
   allFilesIsEditing: boolean;
   canConvertSelected: boolean;
@@ -101,6 +102,7 @@ export type TFilesStore = {
 export type TFilesActionsStore = {
   uploadDataStore: UploadDataStore;
   isGroupMenuBlocked: boolean;
+  isDeleteConfirmationForced: boolean;
   emptyTrashInProgress: boolean;
   emptyPersonalRoomInProgress: boolean;
   isExpiredLinkAsync: (

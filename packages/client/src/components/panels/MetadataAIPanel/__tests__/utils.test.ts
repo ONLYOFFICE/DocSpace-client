@@ -55,13 +55,13 @@ import {
   canReadAsText,
   getFillCustomFieldChanges,
   getFillNotFound,
+  getMetadataAIBlock,
   getMetadataAIError,
   getMetadataAIOptions,
-  getMetadataAIServiceLimit,
   getSkippedTitles,
   getSuggestNotFound,
   getTemplateForms,
-  getMetadataAIModel,
+  getMetadataAIProfile,
   getUndoShortcut,
   isSameEntry,
   isMetadataAINoModel,
@@ -185,18 +185,20 @@ describe("context menu options", () => {
     expect(hidden.every((options) => options.length === 0)).toBe(true);
   });
 
-  it("names the model bound to metadata generation, else the default one", () => {
+  it("picks the profile bound to metadata generation, else the default one", () => {
     const profiles = [
       { id: "a", name: "GPT", modelId: "gpt-4o" },
       { id: "b", name: "", modelId: "claude-sonnet" },
     ] as TProfile[];
 
-    expect(getMetadataAIModel(profiles, { Default: "a" })).toBe("GPT");
+    expect(getMetadataAIProfile(profiles, { Default: "a" })).toBe(profiles[0]);
     expect(
-      getMetadataAIModel(profiles, { Default: "a", GenerateMeta: "b" }),
-    ).toBe("claude-sonnet");
-    expect(getMetadataAIModel(profiles, { GenerateMeta: "gone" })).toBe(null);
-    expect(getMetadataAIModel(profiles, {})).toBe(null);
+      getMetadataAIProfile(profiles, { Default: "a", GenerateMeta: "b" }),
+    ).toBe(profiles[1]);
+    expect(getMetadataAIProfile(profiles, { GenerateMeta: "gone" })).toBe(
+      null,
+    );
+    expect(getMetadataAIProfile(profiles, {})).toBe(null);
   });
 
   it("opens the metadata tab only for the entry the info panel shows", () => {
@@ -517,17 +519,41 @@ describe("service answers", () => {
         "Service group 'ai-services', amount limit 1.2000000000, available -0.1026610350 until 2026-10-23 23:59:59Z",
     };
 
-    expect(getMetadataAIServiceLimit(limitError)).toEqual({
+    expect(getMetadataAIBlock(limitError, "onlyoffice", false)).toEqual({
+      kind: "limit",
       until: "2026-10-23T23:59:59Z",
     });
     expect(
-      getMetadataAIServiceLimit({
-        status: 502,
-        code: "auth",
-        providerMessage: "403 Access denied",
-      }),
+      getMetadataAIBlock(
+        { status: 502, code: "auth", providerMessage: "403 Access denied" },
+        "onlyoffice",
+        false,
+      ),
     ).toBeNull();
-    expect(getMetadataAIServiceLimit({ status: 502 })).toBeNull();
-    expect(getMetadataAIServiceLimit(new Error("offline"))).toBeNull();
+    expect(getMetadataAIBlock({ status: 502 }, "onlyoffice", false)).toBeNull();
+    expect(
+      getMetadataAIBlock(new Error("offline"), "onlyoffice", false),
+    ).toBeNull();
+  });
+
+  it("tells an empty portal wallet from a provider out of credits", () => {
+    const noCredit = {
+      status: 402,
+      code: "insufficient_funds",
+      providerMessage: "402 Payment required",
+    };
+
+    expect(getMetadataAIBlock(noCredit, "onlyoffice", false)).toEqual({
+      kind: "wallet",
+    });
+    expect(getMetadataAIBlock(noCredit, "openai", false)).toEqual({
+      kind: "provider",
+    });
+    expect(getMetadataAIBlock(noCredit, undefined, false)).toEqual({
+      kind: "provider",
+    });
+    expect(getMetadataAIBlock(noCredit, "onlyoffice", true)).toEqual({
+      kind: "provider",
+    });
   });
 });

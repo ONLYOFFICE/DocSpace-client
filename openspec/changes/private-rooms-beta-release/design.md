@@ -183,4 +183,105 @@ DocSpace server 3.1.0, Document Server 10.0.2.5 (not the build of gate item
   Private section went without a reload, the private room "Pirate room" was
   listed in Rooms with its private badge, and the Keys management tab and
   page stayed, also after a full load of `/profile/keys-management`. The app
-  was switched back on afterwards.
+  was switched back on afterwards. Since the server's Private section
+  (`c866c055e1`, 2026-11-06) the Rooms list leaves private rooms out, and the
+  owner decided the same day to hide them while the section is not available
+  (`private-rooms-server-section`, proposal decision 5): with the app off a
+  private room is reached by its address only.
+
+## Release stand check (2026-11-06, SaaS, part of task 6.2)
+
+The owner's SaaS stand `tests.onlyoffice.io`: DocSpace `4.1.0.12300`
+(`standalone: false`), Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`,
+the user the portal owner, holding one key. Read through the API and the
+browser, no data changed:
+
+- `GET files/settings` answers `docServiceEncryptionSupported: true`, and
+  `doc-eu.onlyoffice.io/sdkjs/common/crypto/onlyoffice-crypto.js` is served
+  (HPKE 1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3
+  constants), so gate item 0.1 is met for SaaS: the release's Document
+  Server carries the add-on and reads container version 2, as the client
+  writes. The standalone package build stays the Document Server team's
+  question (`private-rooms-editor-contract`, Open Questions).
+- The Private item carries the Beta badge, the list shows the owner's
+  private room with its Private tag, and the Keys management tab carries
+  the badge with the key card (Active, X25519), the device remembered and
+  auto-lock off.
+- The E2E rooms app is on (`e2e-rooms`, enabled); no switch is offered on
+  SaaS, so the app-off half of task 6.2 needs a standalone portal.
+- The server carries every backend commit through `b562fc3fb1`: the
+  candidates and missing-keys routes answer, the room and its files report
+  Copy, Duplicate, IndexExport, UseChat, Vectorization, AskAi, Convert and
+  Embed false, and the audit trail masks the room title (see
+  `private-rooms-server-hardening`, "Release stand check").
+- Later the same day, with the owner's go-ahead: the API probes passed as
+  the server contract says (an upload session without the encrypted flag
+  403, a readable name 400, an opaque name opens, its cancel through
+  another folder 404 with the session kept and through its own 200, copy-as
+  of an encrypted file 403, a private room with indexing 400, an external
+  link on a private room 403). A new private room, an encrypted document
+  created in it and opened on the first try; after one edit and a save the
+  document **cannot be reopened** (Document Server error -82), the known
+  open item 6.2 of `private-rooms-editor-contract` reproduced on the
+  release build. That is a beta blocker: every document edited in a
+  private room becomes unopenable while the Document Server holds its
+  session. Details in that change's design.md, "Release stand check of
+  2026-11-06".
+- With a second user holding a key ("User Test", `fenran@yandex.ru`, a
+  user of the User type, key created by the owner at 12:38), the member
+  flows from the owner's side, each checked through the API after the UI:
+  - an invitee without a key (a User-type account) is refused before the
+    grant: the invite result shows Common:EncryptedUploadNotSharedWith-style
+    wording ("Could not share encrypted files with ...: they have not set
+    up encryption keys yet") and the room's member list stays unchanged;
+  - the invitee with a key is added as Viewer and the file keys are
+    written for them at once ("File keys issued for ... to: <owner>,
+    <member>" in the audit trail, `access/missing` empty, both users in
+    the file's public keys);
+  - a role change (Viewer to Editor) keeps the keys ("appointed: Editor",
+    no revocation);
+  - removal through the Members panel shows the warning dialog and the
+    server revokes the keys: "File keys in the room "Private room" removed
+    for: <member>" in the audit trail, the file's public keys back to the
+    owner alone, `access/missing?userIds=<member>` naming the file;
+  - a second invitation re-keys the returning member (keys issued again,
+    `access/missing` empty);
+  - archiving moves the room under the Archive root, lists it under
+    Private → Archive, the client stays in the Private section, the
+    room reports Copy, CopyTo, Duplicate, IndexExport and UseChat false and
+    its file Copy and Duplicate false with Download true, the file's
+    public keys still answer; restoring puts it back under the Rooms root
+    and the empty Archive state offers "Go to Private";
+  - the file's context menu offers Select, Edit, Preview, Move or copy,
+    Download, File info and Delete, with no rename, links, duplicate or
+    AI entries, and the History tab lists no file-keys entry.
+- The owner change: the Change room owner panel admits room
+  administrators and portal administrators only ("No members found" while
+  the second user was of the User type), so the owner had the account
+  raised to Room admin in Contacts; the panel then listed the user, and
+  "Assign Owner" with "Leave the room" ticked transferred the room and
+  left it ("You have left the room"). The client found no missing key to
+  wrap, the server accepted the transfer, and the leave revoked the old
+  owner's keys on the server ("File keys in the room "Private room"
+  removed for: <old owner>", then "Deleted user: <old owner>"). Afterwards
+  the room and its file answer the portal owner 403, who is no longer a
+  member, and the Private list shows the other room only.
+- Two observations for the client and the server:
+  - the room's row stayed in the Private list after the owner change that
+    left the room, until the page was reloaded: the leave helper keeps
+    the row for a portal administrator, who keeps reading an ordinary
+    room after leaving it, while the server refuses them a private room
+    (`private-rooms-admin-leave`);
+  - the audit row of the owner change carries an empty action text next
+    to the revocation and the leave rows (server, `DocumentsActionMapper`
+    or the room-owner-changed resource, to check).
+- The member's side (the letter wording, opening the room as the new
+  owner, the download that decrypts, the reopen of the saved document)
+  is the owner's to check in the member's browser.
+- A deep link to a private room without its `/filter` segment
+  (`/private/9064440`) was rewritten by the client to
+  `/private/undefined/filter?...` and showed the Private list instead of
+  the room. `/rooms/shared/5735991` does the same
+  (`/rooms/shared/undefined/filter?...`), so it is the client's handling
+  of a bare room address in every section, not a private-rooms matter;
+  the addresses the client builds carry `/filter`.

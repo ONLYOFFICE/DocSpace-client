@@ -18,9 +18,10 @@ WORKDIR /app
 
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
-# `*.tgz` is optional: ui-kit and ai-chat come from npm, but a locally packed
-# tarball at the repo root can be referenced as `file:../../<name>.tgz` for
-# local development. A glob matching nothing is fine next to real sources.
+# `*.tgz` is optional: ui-kit, ai-chat and the plugin SDK come from npm, but a
+# locally packed tarball at the repo root can be referenced as
+# `file:../../<name>.tgz` for local development. A glob matching nothing is
+# fine next to real sources.
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc *.tgz ./
 
 COPY common/ ./common/

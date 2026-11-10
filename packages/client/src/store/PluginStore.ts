@@ -117,7 +117,8 @@ import {
   releaseModuleEvents,
   setModuleEventDispatcher,
 } from "../helpers/plugins/react/socket";
-import { toCurrentUser } from "../helpers/plugins/react/utils";
+import type { RoomsType } from "@docspace/shared/enums";
+import { pluginRoomTypes, toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
   PluginScopes,
@@ -1062,10 +1063,25 @@ class PluginStore {
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];
-    const { type, fileExst, userRole, device, security, itemSecurity, itemId } =
-      ctx;
+    const {
+      type,
+      fileExst,
+      userRole,
+      device,
+      security,
+      itemSecurity,
+      itemId,
+      roomType,
+    } = ctx;
 
     if (type && item.fileType && !item.fileType.includes(type)) return;
+
+    if (
+      type === PluginFileType.room &&
+      item.roomType &&
+      !(roomType && item.roomType.includes(roomType))
+    )
+      return;
 
     if (fileExst && item.fileExt && !item.fileExt.includes(fileExst)) return;
 
@@ -1089,7 +1105,11 @@ class PluginStore {
     )
       return;
 
-    if (itemId !== undefined && item.itemId && !item.itemId.includes(itemId))
+    if (
+      itemId !== undefined &&
+      item.itemId &&
+      !item.itemId.some((id) => String(id) === String(itemId))
+    )
       return;
 
     if (item.items && item.items.length > 0) {
@@ -1123,6 +1143,7 @@ class PluginStore {
       | TFolderSecurity
       | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>,
     itemId?: number | string,
+    roomType?: RoomsType,
   ) => {
     if (this.contextMenuItems.size === 0) return;
 
@@ -1172,6 +1193,8 @@ class PluginStore {
             security,
             itemSecurity,
             itemId,
+            roomType:
+              roomType === undefined ? undefined : pluginRoomTypes[roomType],
           });
 
           if (validKeys) keys.push(...validKeys);

@@ -3,7 +3,7 @@
   "content": "Contact the Full admin to choose a model for metadata.",
   "content_en_sha1_hash": "256d446542550b0a59676ea76f5ff13ad85c1dfc",
   "created_at": "2026-10-30T14:50:49.949Z",
-  "updated_at": "2026-10-30T14:53:11.372Z",
+  "updated_at": "2026-11-06T10:45:54.133Z",
   "comment": {
     "text": "Description in the no AI model warning block of the AI metadata side panels, shown to users who cannot change the AI settings, so there is no button. Full admin is the portal role; use the same term as in the AI spending limit messages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/MetadataAIPanel/index.tsx",
-      "line_number": 156,
+      "line_number": 188,
       "context": "<AINotice\n title={t(\"Metadata:AINoModelTitle\")}\n description={\n isAdmin\n ? t(\"Metadata:AINoModelChoose\")\n : t(\"Metadata:AINoModelContactAdmin\")\n }\n buttonLabel={t(\"Common:GoToSettings\")}\n onClick={isAdmin ? openAISettings(\"model-assignment\") : undefined}\n dataTestId=\"metadata_ai_no_model_notice\"\n buttonTestId=\"metadata_ai_choose_model_button\"",
       "module": "/packages/client"
     }

@@ -821,6 +821,89 @@ and the key-pair list in the signed configuration (task 10.6) did not
 land. The same commit changed the private-room file-key contract
 (`private-rooms-server-hardening`, "Landed on 2026-11-05").
 
+### Reported by the backend team on 2026-11-05
+
+The backend developer's reply to the server document of 2026-11-02
+(recorded in `private-rooms-server-hardening`, design.md "Answered by the
+backend team on 2026-11-05") checked which Document Server images on their
+machine serve `sdkjs/common/crypto/onlyoffice-crypto.js`, the path
+`DocumentServiceEncryptionChecker` probes (D2). Reported, not re-run here:
+
+| Image | Version | Library |
+| --- | --- | --- |
+| `documentserver:latest` (Community) | 10.0.0-169 | no |
+| `4testing-documentserver-de:10.0.0.168` | 10.0.0-168 | yes |
+| `4testing-documentserver-de:10.0.0.158` | 10.0.0-158 | yes |
+| `4testing-documentserver:10.0.0.2` (Community) | 10.0.0-2 | no |
+| `documentserver-de:latest` | 9.3.1-10 | no |
+| `documentserver:9.4.0.1` | 9.4.0-129 | no |
+
+Docker Hub beyond these and the Enterprise images were not checked. Since
+`b562fc3fb1` a portal on an image without the library can neither create
+a private room (403) nor open an encrypted file (415), so if the library
+ships in the developer edition only, private rooms become an edition
+limitation that product has not accepted. The question to the Document
+Server team stands (Open Questions, "Does the community or enterprise
+edition carry the crypto add-on"), and gate item 0.1 of
+`private-rooms-beta-release` depends on it. For tests and development the
+server setting `files:docservice:encryption-assume-supported` skips the
+probe without adding the library. The reply keeps the stable key and base
+(task 6.2) and the key pairs in the signed configuration (task 10.6) with
+the Document Server team: the first is fixed together with it, the second
+removed once it confirms the editor does not need them. The list of
+questions to the Document Server team in the document of 2026-11-02 was
+not checked on the server.
+
+### Release stand check of 2026-11-06
+
+The owner's SaaS stand `tests.onlyoffice.io` (DocSpace `4.1.0.12300`) uses
+Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`, which serves
+`sdkjs/common/crypto/onlyoffice-crypto.js`: HPKE through `@hpke/common`
+1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3 header
+and chunk constants (`DSE3_FIXED_HEADER_SIZE`, `DSE3_CHUNK_PLAINTEXT_SIZE`,
+`DSE3_FLAG_HAS_ENCRYPTED_NAME`); no version-3 reader. `GET files/settings`
+answers `docServiceEncryptionSupported: true`.
+
+Later the same day, with the owner's go-ahead, a full run on the stand
+(DocSpace `4.1.0.12300`, Document Server `10.0.3.19`, the client of the
+release, one user holding a key, the device remembered):
+
+- A new private room ("Probe 2026-11-06"), a document created from the
+  empty template through the encrypted creation (`24c4fd94-...docx`,
+  version 1, 7043 bytes, DSE3 version 2 with the name flag), the audit
+  trail with "File keys issued for ... to: <user id>" next to "File
+  Uploaded", both under the context "Rooms: Private room".
+- The editor opened it in edit mode on the first open; a line was typed
+  and saved with Ctrl+S: version 2 (39087 bytes, "Edited with encrypt;
+  Saved", DSE3 version 2 header), the audit trail with "File Updated".
+- **The reopen fails.** With the editor tab closed and the file opened
+  again from the list (twice at once by a double-click, then once alone,
+  then once more after a minute), the editor shows "Something went wrong.
+  An error has occurred while opening the file" and the console logs the
+  Document Server error code -82. `GET files/file/{id}/openedit` answers
+  200 with a new document key, the encrypted flag and the key pairs;
+  `GET files/file/{id}/history` lists both versions as encrypted. Opening
+  `?version=1` in view mode shows the typed line, so the Document Server
+  serves the held session of the first key on top of the first version,
+  while the open of version 2 under its new key fails. A file of the older
+  room that no editor had saved ("Test doc.docx", 34757 bytes) opens and
+  shows its content. This is the scenario of task 6.2 (P-5, the stable key
+  and base while a session exists) on the release build: a document saved
+  once in a private room cannot be reopened while the Document Server
+  holds its session, which the run of 2026-10-30 found to last at least a
+  day when the session has changes. Not traced further on the stand (the
+  Document Server side is not reachable from the portal); the backend
+  team's reply of 2026-11-05 keeps 6.2 with the Document Server team.
+- The editor's **AI Tools** tab is shown for the encrypted file, with AI
+  Chat, Summarization, Translation, Quick AI Action, Create AI assistant
+  and Grammar & Spelling. The doceditor skips the plugin's initialisation
+  for an encrypted file, so no portal model is connected: AI Chat asks to
+  "Connect an AI Model" and Settings lists none. The plugin still lets
+  the user add their own provider key there, after which its actions
+  would send the clear text of the document to that provider from the
+  browser. Recorded in `private-rooms-ai-integration` (design.md,
+  Context) as a path that exists outside the client's control.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -1258,10 +1341,16 @@ BLOCKED or "after <x>" waits.
 - Which build of the crypto library does each Document Server release ship,
   and when does a build that reads and writes DSE3 version 3 ship? Owner:
   Document Server team, together with
-  `private-rooms-dse3-header-authentication`.
+  `private-rooms-dse3-header-authentication`. The SaaS Document Server
+  10.0.3.19 serves a library with wrap and identity version 2 and no
+  version-3 reader ("Release stand check of 2026-11-06").
 - Does the community or enterprise edition carry the crypto add-on, or only
   the developer edition, and from which release? This sets the minimum
-  Document Server version. Owner: Document Server team.
+  Document Server version. Owner: Document Server team. The backend team's
+  image check of 2026-11-05 ("Reported by the backend team") found the
+  library in the developer-edition images 10.0.0.158 and 10.0.0.168 only,
+  not in the Community images 10.0.0-2 and 10.0.0-169 nor in the published
+  9.x images.
 - Will the Document Server publish a capability signal (health check or
   settings) to replace the library-path probe? Owner: Document Server team.
 - Role-based filling in a private virtual data room: does the encrypted

@@ -3,7 +3,7 @@
   "content": "Move to Archive",
   "content_en_sha1_hash": "52a9e2c3c99b7859025f578bf7b536f850eee85b",
   "created_at": "2026-10-02T12:15:07.318Z",
-  "updated_at": "2026-11-05T16:49:39.992Z",
+  "updated_at": "2026-11-09T17:07:34.964Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 383,
+      "line_number": 381,
       "context": "case \"archive\":\n if (!this.isAvailableOption(\"archive\")) return null;\n return {\n id: \"menu-archive\",\n key: \"archive\",\n label: t(\"Common:MoveToArchive\"),\n iconUrl: RoomArchiveSvgUrl,\n onClick: this.archiveHandle,\n disabled: false,\n };\n case \"unarchive\":",
       "module": "/packages/client"
     },

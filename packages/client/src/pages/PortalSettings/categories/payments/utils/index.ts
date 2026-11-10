@@ -66,7 +66,7 @@ export const getBillingPageTitle = (
   if (pathname.includes("/billing/payment-method"))
     return t("Common:PaymentMethod");
   if (pathname.includes("/billing/invoice-history"))
-    return t("Common:InvoiceHistory");
+    return t("Common:Invoices");
   if (pathname.includes("/billing/usage")) return t("Common:Usage");
   if (pathname.includes("/billing/addons/ai-services"))
     return t("Common:AIFeatures");

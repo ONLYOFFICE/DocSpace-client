@@ -248,7 +248,7 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom,
         isTemplatesFolder,
         isExtsCustomFilter,
-        docspaceManagingRoomsHelpUrl,
+        customFilterHelpUrl,
         isRecentFolder,
         currentUserId,
       } = this.props;
@@ -293,7 +293,7 @@ export default function withBadges(WrappedComponent) {
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
           isExtsCustomFilter={isExtsCustomFilter}
-          customFilterExternalLink={docspaceManagingRoomsHelpUrl}
+          customFilterExternalLink={customFilterHelpUrl}
           newFilesBadge={
             <NewFilesBadge
               className="tablet-badge"
@@ -355,7 +355,7 @@ export default function withBadges(WrappedComponent) {
         isTabletView,
         isDesktopClient,
         theme,
-        docspaceManagingRoomsHelpUrl,
+        customFilterHelpUrl,
       } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
@@ -396,7 +396,7 @@ export default function withBadges(WrappedComponent) {
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
-        docspaceManagingRoomsHelpUrl,
+        customFilterHelpUrl,
         retryVectorization,
         setFavoriteAction,
         isRecentFolder,

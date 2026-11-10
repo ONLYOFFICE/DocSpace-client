@@ -38,3 +38,9 @@
   margin-top: 12px;
   margin-inline-start: 24px;
 }
+
+// The bar's own margins are switched off; each page sets the gaps around
+// the wrapper through the class it passes.
+.privateRoomsWarning {
+  max-width: 700px;
+}

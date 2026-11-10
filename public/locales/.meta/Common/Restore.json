@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2026-11-05T16:49:39.826Z",
+  "updated_at": "2026-11-09T17:07:34.694Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears when restoring a file, folder, or room from the trash.",
     "is_auto": true,
@@ -67,13 +67,13 @@
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/menu.helpers.ts",
-      "line_number": 196,
+      "line_number": 198,
       "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"restore\", {\n id: \"menu-restore\",\n label: t(\"Common:Restore\"),\n onClick: () => setRestorePanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n })\n .set(\"delete\", deleteOption)\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 393,
+      "line_number": 391,
       "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: this.unarchiveHandle,\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
     },
@@ -121,7 +121,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 343,
+      "line_number": 349,
       "context": ">\n <Button\n className=\"restore\"\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Restore\")}\n onClick={onRestorePortal}\n isDisabled={\n isCopyingToLocal ||\n !isChecked ||\n filesList.length === 0 ||",
       "module": "/packages/shared"
     },
@@ -151,7 +151,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 620,
+      "line_number": 622,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}",
       "module": "/packages/shared"
     }

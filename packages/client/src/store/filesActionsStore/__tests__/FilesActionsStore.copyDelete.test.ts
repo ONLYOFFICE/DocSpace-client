@@ -285,6 +285,7 @@ describe("FilesActionsStore - private-room transfer plan", () => {
         { move },
       );
       expect(handled).toBe(true);
+      expect(store.dialogsStore.encryptedTransferConfirm).toBeNull();
       expect(toastr.error).toHaveBeenCalledWith(
         "Common:CannotTransferFolderFromPrivateRoom",
       );
@@ -324,32 +325,44 @@ describe("FilesActionsStore - private-room transfer plan with a known destinatio
 });
 
 describe("FilesActionsStore - drag out of a private room", () => {
+  const dragOut = (canMove: boolean) => {
+    const item = {
+      id: 1,
+      title: "a.docx",
+      isFolder: false,
+      security: { Move: canMove },
+    };
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isPrivacyFolder: true },
+      selectedFolderStore: { rootFolderId: 10 },
+      filesStore: { selection: [item], bufferSelection: null },
+    });
+    const copy = vi.fn(async () => {});
+    store.copyEncryptedFilesToFolder = copy;
+
+    store.moveDragItems(5, "Docs", {
+      id: 5,
+      private: false,
+      rootFolderId: 20,
+    } as never);
+
+    return { store, copy, item };
+  };
+
   it.each([
     [true, true],
     [false, false],
   ])(
-    "dragging files with Move=%s decrypts them with deleteSourceOnSuccess=%s",
+    "Move out by drag and drop or paste: files dragged with Move=%s are decrypted once confirmed, deleteSourceOnSuccess=%s",
     (canMove, deleteSourceOnSuccess) => {
-      const item = {
-        id: 1,
-        title: "a.docx",
-        isFolder: false,
-        security: { Move: canMove },
-      };
-      const store = createTestFilesActionsStore({
-        treeFoldersStore: { isPrivacyFolder: true },
-        selectedFolderStore: { rootFolderId: 10 },
-        filesStore: { selection: [item], bufferSelection: null },
-      });
-      const copy = vi.fn(async () => {});
-      store.copyEncryptedFilesToFolder = copy;
+      const { store, copy, item } = dragOut(canMove);
 
-      store.moveDragItems(5, "Docs", {
-        id: 5,
-        private: false,
-        rootFolderId: 20,
-      } as never);
+      expect(store.dialogsStore.encryptedTransferConfirm).not.toBeNull();
+      expect(copy).not.toHaveBeenCalled();
 
+      store.confirmEncryptedTransfer();
+
+      expect(store.dialogsStore.encryptedTransferConfirm).toBeNull();
       expect(copy).toHaveBeenCalledWith(
         [item],
         5,
@@ -357,6 +370,15 @@ describe("FilesActionsStore - drag out of a private room", () => {
       );
     },
   );
+
+  it("Warning declined", () => {
+    const { store, copy } = dragOut(true);
+
+    store.dialogsStore.setEncryptedTransferConfirm(null);
+    store.confirmEncryptedTransfer();
+
+    expect(copy).not.toHaveBeenCalled();
+  });
 });
 
 describe("FilesActionsStore - drag inside a private room", () => {
@@ -442,6 +464,7 @@ describe("FilesActionsStore - drag out of an archived private room", () => {
     const { store, copy, itemOperationToFolder } = archivedStore([file]);
 
     store.moveDragItems(5, "My documents", myDocuments);
+    store.confirmEncryptedTransfer();
 
     expect(copy).toHaveBeenCalledWith(
       [file],
@@ -500,6 +523,7 @@ describe("FilesActionsStore - the section does not decide transfers", () => {
       private: false,
       rootFolderId: 20,
     } as never);
+    store.confirmEncryptedTransfer();
 
     return copy.mock.calls;
   };

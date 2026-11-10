@@ -3,7 +3,7 @@
   "content": "Logo",
   "content_en_sha1_hash": "83fce8327410848c9eb609acb21732c7c0fec96a",
   "created_at": "2026-08-31T18:23:38.879Z",
-  "updated_at": "2026-08-31T18:26:36.578Z",
+  "updated_at": "2026-11-06T10:45:54.976Z",
   "comment": {
     "text": "Menu item title or category label within the WhiteLabel settings section.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 75,
+      "line_number": 76,
       "context": "return (\n <div className={styles.header}>\n <div className={classNames(styles.headerContainer, \"header-container\")}>\n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"WhiteLabel\")}\n </Text>\n \n {!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}",
       "module": "/packages/shared"
     }

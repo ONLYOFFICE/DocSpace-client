@@ -51,7 +51,11 @@ import {
   isAfter,
   now,
 } from "@onlyoffice/apps-ui-kit/utils/date";
-import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
+import {
+  AI_SEARCH,
+  AI_TOOLS,
+  AI_TOOLS_BYOK,
+} from "@onlyoffice/apps-ui-kit/billing/constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";
@@ -239,6 +243,10 @@ class CurrentTariffStatusStore {
 
   get aiSearchFeePercent() {
     return this.serviceFeePercents.get(AI_SEARCH) ?? null;
+  }
+
+  get aiToolsByokFeePercent() {
+    return this.serviceFeePercents.get(AI_TOOLS_BYOK) ?? null;
   }
 
   setServiceFeePercent = (serviceName: string, value: number) => {

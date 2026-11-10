@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2026-11-05T16:49:40.002Z",
+  "updated_at": "2026-11-09T17:07:34.982Z",
   "comment": {
     "text": "This is a button label that appears while an action is being processed, indicating that the system is busy.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 710,
+      "line_number": 712,
       "context": "className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:LoginButton\")\n }\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"login_button\"",
       "module": "/packages/login"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMembersView.tsx",
-      "line_number": 253,
+      "line_number": 254,
       "context": "{hasMore ? (\n <Button\n size={ButtonSize.small}\n label={\n isLoadingMore\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ShowMore\")\n }\n onClick={handleLoadMore}\n isDisabled={isLoadingMore}\n />",
       "module": "/packages/sdk"
     },

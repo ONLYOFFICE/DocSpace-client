@@ -58,6 +58,7 @@ export interface RestoreBackupProps {
 	isInitialLoading: boolean;
 	// settingsStore
 	standalone: boolean;
+	showPrivateRoomsWarning?: boolean;
 	setTenantStatus: (tenantStatus: TenantStatus) => void;
 
 	// backup

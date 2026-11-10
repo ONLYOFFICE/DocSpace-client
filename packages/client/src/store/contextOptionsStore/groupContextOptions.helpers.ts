@@ -258,7 +258,9 @@ self: ContextOptionsStore,t: TTranslation
     (x) => x.providerKey && x.id === x.rootFolderId,
   );
 
-  const canCreateRoom = selection.some((k) => k.security?.CreateRoomFrom);
+  const canCreateRoom =
+    !self.filesStore.isRoomsSectionOff &&
+    selection.some((k) => k.security?.CreateRoomFrom);
 
   const options: TContextOption[] = [
     /* {
@@ -350,7 +352,7 @@ self: ContextOptionsStore,t: TTranslation
       onClick: allFilesIsEditing
         ? () => onShowEditingToast(t)
         : () => {
-            if (self.filesSettingsStore.confirmDelete) {
+            if (self.filesActionsStore.isDeleteConfirmationForced) {
               setDeleteDialogVisible(true);
             } else {
               const translations = {

@@ -52,6 +52,9 @@ import {
   CachePriceTooltip,
   type TCachePriceBreakdown,
 } from "../CachePriceTooltip";
+import { ByokBadge } from "../sub-components/ByokBadge";
+import { isByokModel } from "../utils";
+import ModelsDescription from "../ModelsDescription";
 
 import styles from "./ModelSettingsRowView.module.scss";
 
@@ -60,6 +63,7 @@ type TModelRow = {
   alias: string;
   image: string;
   link?: string;
+  byok: boolean;
   prices: string[];
   breakdown: TCachePriceBreakdown | null;
 };
@@ -97,6 +101,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     alias: m.alias,
     image: m.image,
     link: m.link,
+    byok: isByokModel(m),
     prices: [
       t("Common:AIModelPrice", {
         inputPrice: formatAiModelPrice(m.price?.prompt),
@@ -115,6 +120,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     alias: m.alias,
     image: m.image,
     link: m.link,
+    byok: isByokModel(m),
     prices: [
       t("Common:AIImageModelPrice", {
         inputPrice: formatAiModelPrice(m.price?.prompt),
@@ -169,6 +175,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
                 <Text fontSize="14px" fontWeight={600} className={styles.title}>
                   {row.alias}
                 </Text>
+                {row.byok ? <ByokBadge /> : null}
                 {row.link ? (
                   <ExternalLinkIcon className={styles.detailsIcon} />
                 ) : null}
@@ -204,9 +211,10 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 
   return (
     <div className={styles.rowContainer}>
-      <Text className={styles.introText}>
-        {t("Common:AIModelsDescription")}
-      </Text>
+      <ModelsDescription
+        className={styles.introText}
+        hasByok={[...chatRows, ...imageRows].some((row) => row.byok)}
+      />
 
       {chatRows.length ? (
         <React.Fragment>

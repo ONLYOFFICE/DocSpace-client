@@ -3,7 +3,7 @@
   "content": "Rooms removed",
   "content_en_sha1_hash": "b7f6fbe672117d78dda530804dc9a74efcd4e510",
   "created_at": "2025-05-19T21:30:56.133Z",
-  "updated_at": "2026-11-05T16:49:39.875Z",
+  "updated_at": "2026-11-09T17:07:34.780Z",
   "comment": {
     "text": "This is a toast message confirming the successful removal of multiple rooms. It appears after a user deletes several rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 135,
+      "line_number": 156,
       "context": "successRemoveRoom: isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isFormSpace\n ? t(\"Common:SpacesRemoved\")\n : t(\"Common:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");\n }",
       "module": "/packages/client"
     },
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/delete.helpers.ts",
-      "line_number": 695,
+      "line_number": 690,
       "context": "items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Common:RoomRemoved\"),\n successRemoveRooms: t(\"Common:RoomsRemoved\"),\n };\n \n self.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     },

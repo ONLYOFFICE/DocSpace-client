@@ -129,3 +129,58 @@ describe("roomMembers mock — PUT /files/rooms/{id}/share in a private room (mi
     ]);
   });
 });
+
+/**
+ * Mirrors VirtualRoomsController.GetRoomSecurityInfo:
+ * SecurityDao.GetPureSharesQuery keeps SubjectType.User records only for
+ * ShareFilterType.User (16), and a guest is such a record.
+ */
+describe("roomMembers mock — GET /files/rooms/{id}/share by filter type", () => {
+  const GROUP_ID = "44444444-4444-4444-4444-444444444444";
+
+  const getMembers = async (filterType: number) => {
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/rooms/${ROOM_ID}/share?filterType=${filterType}`,
+    );
+    const { response } = (await res.json()) as {
+      response: {
+        total: number;
+        items: Array<{
+          subjectType: number;
+          sharedTo: { id: string; isVisitor?: boolean };
+        }>;
+      };
+    };
+    return response;
+  };
+
+  beforeEach(() => {
+    members.current!.setMembers([
+      { id: OWNER_ID, access: 1 },
+      { id: BOB_ID, access: 11, isVisitor: true },
+      { id: GROUP_ID, access: 11, isGroup: true, displayName: "Marketing" },
+    ]);
+  });
+
+  it("Users only", async () => {
+    const { items, total } = await getMembers(16);
+
+    expect(items.map((m) => [m.sharedTo.id, m.subjectType])).toEqual([
+      [OWNER_ID, 0],
+      [BOB_ID, 0],
+    ]);
+    expect(items[1].sharedTo.isVisitor).toBe(true);
+    expect(total).toBe(2);
+  });
+
+  it("answers users and groups without a filter", async () => {
+    const { items, total } = await getMembers(0);
+
+    expect(items.map((m) => [m.sharedTo.id, m.subjectType])).toEqual([
+      [OWNER_ID, 0],
+      [BOB_ID, 0],
+      [GROUP_ID, 2],
+    ]);
+    expect(total).toBe(3);
+  });
+});

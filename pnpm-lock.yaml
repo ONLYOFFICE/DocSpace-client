@@ -617,8 +617,8 @@ importers:
         specifier: 2.4.16
         version: 2.4.16
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: ^3.0.0
-        version: 3.0.0(@types/node@24.10.7)(react@19.2.8)
+        specifier: file:../../onlyoffice-docspace-plugin-sdk-3.1.0-20261106.tgz
+        version: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261106.tgz(@types/node@24.10.7)(react@19.2.8)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -3573,7 +3573,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-qeRz94mE2e9DnRQ4qUiBzUyq6E7lt1LxD11ZfX9OPEwnwG1Y517R6zyKQheDxNj0iaG5mcx4X57QazQoJyMWjA==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-K7e1wSdNNQ8gxiVMTLxmk45WBINnAEca0SXLNVLYRaU0HbGsws5L6H4lsMRNdiE1kz7UG/pMaD395G8ndOqLLw==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
@@ -3637,8 +3637,9 @@ packages:
   '@onlyoffice/docspace-api-sdk@3.7.0':
     resolution: {integrity: sha512-zzhvkBZj7RelLDxGg/OnonG2vFwurlI2FaPSSHPiYXosu5y4lopQnSkoxoZ1uXgnWAKREjt1d0p+nkdtTH5xkA==}
 
-  '@onlyoffice/docspace-plugin-sdk@3.0.0':
-    resolution: {integrity: sha512-Xry7qsgq3A04UslXmNDJoIv23k2Vqn/dniRB+danh4H4XpYNP0bI8gqWLXGooFkuDnOxQ41KuZ/J1nEGw5PCRg==}
+  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261106.tgz':
+    resolution: {integrity: sha512-xD/OhUZ6eStjmmCBdtoLP/jzJysX1CcpjO0FQZ+s/C+/b40mA+H+44BsDouCw9GHFgcPwEci7zsrdH4vp1vg+A==, tarball: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261106.tgz}
+    version: 3.1.0-20261106
     hasBin: true
     peerDependencies:
       react: 19.2.8
@@ -11861,7 +11862,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@onlyoffice/docspace-plugin-sdk@3.0.0(@types/node@24.10.7)(react@19.2.8)':
+  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261106.tgz(@types/node@24.10.7)(react@19.2.8)':
     dependencies:
       '@types/react': 19.2.10
       inquirer: 9.3.8(@types/node@24.10.7)

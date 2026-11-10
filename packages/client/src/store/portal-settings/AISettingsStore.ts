@@ -35,15 +35,23 @@
 
 import { makeAutoObservable } from "mobx";
 
-import {
-  type KnowledgeConfig,
-  type TDocumentAgentSettings,
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+
+import type {
+  KnowledgeConfig,
+  TByokKey,
+  TByokProvider,
+  TDocumentAgentSettings,
 } from "@docspace/shared/api/ai/types";
 import {
   updateKnowledgeConfig,
   getKnowledgeConfig,
   getDocumentAgentSettings,
   updateDocumentAgentSettings,
+  getByokKeys,
+  getByokProviders,
+  setByokKey,
+  deleteByokKey,
 } from "@docspace/shared/api/ai";
 import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 
@@ -70,6 +78,14 @@ class AISettingsStore {
   documentAgentSettings: TDocumentAgentSettings = DOCUMENT_AGENT_DEFAULTS;
 
   documentAgentInitied = false;
+
+  byokKeys: TByokKey[] = [];
+
+  byokProviders: TByokProvider[] = [];
+
+  byokProviderNames: Record<string, string> = {};
+
+  byokInitied = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -137,6 +153,43 @@ class AISettingsStore {
 
   resetDocumentAgentSettings = async () => {
     await this.updateDocumentAgentSettings(DOCUMENT_AGENT_DEFAULTS);
+  };
+
+  setByokData = (keys: TByokKey[], providers: TByokProvider[]) => {
+    this.byokKeys = keys;
+    this.byokProviders = providers;
+    providers.forEach(({ id, name }) => {
+      this.byokProviderNames[id] = name;
+    });
+  };
+
+  setByokInitied = (value: boolean) => {
+    this.byokInitied = value;
+  };
+
+  fetchByok = async () => {
+    try {
+      const [keys, providers] = await Promise.all([
+        getByokKeys(),
+        getByokProviders(),
+      ]);
+
+      this.setByokData(keys ?? [], providers ?? []);
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      this.setByokInitied(true);
+    }
+  };
+
+  saveByokKey = async (modelId: string, provider: string, key: string) => {
+    await setByokKey(modelId, provider, key);
+    await this.fetchByok();
+  };
+
+  removeByokKey = async (modelId: string) => {
+    await deleteByokKey(modelId);
+    await this.fetchByok();
   };
 }
 

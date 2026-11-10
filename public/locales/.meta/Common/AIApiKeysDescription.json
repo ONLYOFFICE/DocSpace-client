@@ -1,0 +1,29 @@
+{
+  "key_path": "AIApiKeysDescription",
+  "content": "Connect your own provider API key to run a model on it. Your key takes precedence: requests to that model go to the provider directly rather than through OpenRouter. The provider bills you for the tokens used, and only the {{percent}}% service fee on that amount is charged to your wallet.",
+  "content_en_sha1_hash": "25b70bd096a9158e2315822ea28da217907edfd8",
+  "created_at": "2026-11-09T17:06:22.765Z",
+  "updated_at": "2026-11-09T17:12:09.867Z",
+  "comment": {
+    "text": "Description at the top of the BYOK tab of the AI settings page explaining that a connected provider key is used instead of OpenRouter. {{percent}} is a number (the service fee percentage) followed by a literal % sign; OpenRouter is a product name and stays untranslated.",
+    "is_auto": true,
+    "updated_at": "2026-11-09T17:12:09.867Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/index.tsx",
+      "line_number": 108,
+      "context": "if (!byokInitied) return <ByokLoader />;\n \n return (\n <div>\n <Text className={styles.description}>\n {t(\"Common:AIApiKeysDescription\", { percent: aiToolsByokFeePercent })}\n </Text>\n {openForm === ADD_FORM ? (\n <ByokKeyForm\n providers={byokProviders}\n onSave={onSave}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

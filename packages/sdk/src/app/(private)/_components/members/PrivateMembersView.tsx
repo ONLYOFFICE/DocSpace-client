@@ -60,6 +60,7 @@ import MembersEmptyContainer from "@/app/(docspace)/_components/info-panel/views
 import PrivateMemberUser from "./PrivateMemberUser";
 import {
   classifyMembers,
+  USERS_ONLY,
   type MemberSectionKey,
 } from "./PrivateMembersView.utils";
 import styles from "./PrivateMembersView.module.scss";
@@ -102,7 +103,7 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
       const data: TGetRoomMembers = await api.rooms.getRoomMembers(
         roomId,
         {
-          filterType: 0,
+          filterType: USERS_ONLY,
           filterValue: filterValue?.trim() || undefined,
           startIndex,
           count: PAGE_SIZE,

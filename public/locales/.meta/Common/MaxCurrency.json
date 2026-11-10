@@ -3,7 +3,7 @@
   "content": "max {{currency}}",
   "content_en_sha1_hash": "a65fa7e5122446959ff71b0cc6f1f5658de2d0e0",
   "created_at": "2026-10-22T16:09:10.929Z",
-  "updated_at": "2026-10-22T16:10:38.032Z",
+  "updated_at": "2026-11-09T17:07:34.739Z",
   "comment": {
     "text": "Error text below an amount input field when the entered value exceeds the maximum allowed (e.g. AI spending limit). {{currency}} is replaced with the maximum value and its currency (e.g. \"$10,000\"). Lowercase, short.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
-      "line_number": 114,
-      "context": "const getErrorMessage = () => {\n if (amount === null) return undefined;\n \n if (amount > MAX_LIMIT_AMOUNT) {\n return t(\"Common:MaxCurrency\", {\n currency: format(MAX_LIMIT_AMOUNT, 0),\n });\n }\n \n if (amount < MIN_LIMIT_AMOUNT) {",
+      "line_number": 113,
+      "context": "const getErrorMessage = () => {\n if (amount === null) return undefined;\n \n if (amount > MAX_LIMIT_AMOUNT) {\n return t(\"Common:MaxCurrency\", {\n currency: format(MAX_LIMIT_AMOUNT, 0),\n });\n }\n \n return undefined;",
       "module": "/packages/client"
     }
   ],

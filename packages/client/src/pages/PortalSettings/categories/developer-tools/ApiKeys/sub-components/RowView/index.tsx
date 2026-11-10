@@ -37,6 +37,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "@onlyoffice/apps-ui-kit/hooks/useViewEffect";
 import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 import { TableViewProps } from "../../types";
+import { ApiKeysLifetimeTooltip } from "../ApiKeysLifetimeIcon";
 import RowItem from "./RowItem";
 import styles from "./RowView.module.scss";
 
@@ -51,16 +52,19 @@ const RowView = (props: TableViewProps) => {
   });
 
   return (
-    <RowContainer className={styles.rowContainer} useReactWindow={false}>
-      {items.map((item) => (
-        <RowItem
-          key={item.id}
-          item={item}
-          sectionWidth={sectionWidth}
-          {...rest}
-        />
-      ))}
-    </RowContainer>
+    <>
+      <RowContainer className={styles.rowContainer} useReactWindow={false}>
+        {items.map((item) => (
+          <RowItem
+            key={item.id}
+            item={item}
+            sectionWidth={sectionWidth}
+            {...rest}
+          />
+        ))}
+      </RowContainer>
+      <ApiKeysLifetimeTooltip />
+    </>
   );
 };
 

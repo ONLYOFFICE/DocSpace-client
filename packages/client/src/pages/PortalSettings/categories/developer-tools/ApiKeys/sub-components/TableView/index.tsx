@@ -51,6 +51,7 @@ import { useStickyHeaderTop } from "SRC_DIR/components/DataTable/useStickyHeader
 
 import type { TableViewProps } from "../../types";
 import { getContextOptions } from "../useContextOptions";
+import { ApiKeysLifetimeTooltip } from "../ApiKeysLifetimeIcon";
 
 import { getApiKeysColumns } from "./apiKeysColumns";
 import styles from "./TableView.module.scss";
@@ -103,17 +104,20 @@ const TableView = ({
   useStickyHeaderTop(tableRef, { belowPinned: true });
 
   return (
-    <DataTable<TApiKey>
-      ref={tableRef}
-      ariaLabel={t("Settings:ApiKeys")}
-      columns={columns}
-      rows={items}
-      getRowKey={getRowKey}
-      getRowProps={getRowProps}
-      virtualize
-      widthStorage={widthStorage}
-      className={classNames(sectionTableStyles.settingsTable, styles.table)}
-    />
+    <>
+      <DataTable<TApiKey>
+        ref={tableRef}
+        ariaLabel={t("Settings:ApiKeys")}
+        columns={columns}
+        rows={items}
+        getRowKey={getRowKey}
+        getRowProps={getRowProps}
+        virtualize
+        widthStorage={widthStorage}
+        className={classNames(sectionTableStyles.settingsTable, styles.table)}
+      />
+      <ApiKeysLifetimeTooltip />
+    </>
   );
 };
 

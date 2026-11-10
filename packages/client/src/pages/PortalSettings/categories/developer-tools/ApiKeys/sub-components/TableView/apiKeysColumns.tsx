@@ -83,7 +83,6 @@ const NameCell = ({
     </Text>
     <ApiKeysLifetimeIcon
       t={t}
-      item={item}
       expiresAt={item.expiresAt}
       expiresAtDate={
         item.expiresAt ? getStatusByDate(item.expiresAt, culture) : ""

@@ -78,7 +78,6 @@ const RowItem = (props: RowItemType) => {
             </Text>
             <ApiKeysLifetimeIcon
               t={t}
-              item={item}
               expiresAtDate={expiresAtDate}
               expiresAt={item.expiresAt}
             />
@@ -112,4 +111,3 @@ const RowItem = (props: RowItemType) => {
 };
 
 export default RowItem;
-

@@ -39,32 +39,32 @@ import { IconSizeType } from "@docspace/shared/utils";
 import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TTranslation } from "@docspace/shared/types";
-import { TApiKey } from "@docspace/shared/api/api-keys/types";
-import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
+import {
+  now,
+  parseToDateTime,
+  isAfter,
+} from "@onlyoffice/apps-ui-kit/utils/date";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import styles from "./ApiKeysLifetimeIcon.module.scss";
 
+const LIFETIME_TOOLTIP_ID = "apiKeysLifetimeTooltip";
+
+/**
+ * The lifetime icon of a key. Its text rides on the icon, and one
+ * `ApiKeysLifetimeTooltip` per list shows it: a tooltip in every row cost a
+ * mount for each row the list draws.
+ */
 export const ApiKeysLifetimeIcon = ({
   t,
-  item,
   expiresAt,
   expiresAtDate,
 }: {
   t: TTranslation;
-  item: TApiKey;
   expiresAt: string;
   expiresAtDate: string;
 }) => {
   const showLifetimeIcon = expiresAt;
   const isExpired = isAfter(now(), parseToDateTime(expiresAt));
-
-  const getTooltipContent = () => (
-    <Text fontSize="12px" fontWeight={400} noSelect>
-      {isExpired
-        ? t("Settings:APIKeyExpired")
-        : t("Settings:APIKeyDeactivated", { date: expiresAtDate })}
-    </Text>
-  );
 
   return showLifetimeIcon ? (
     <div
@@ -77,15 +77,28 @@ export const ApiKeysLifetimeIcon = ({
         className="api-keys_lifetime"
         size={IconSizeType.medium}
         isClickable
-        data-tooltip-id={`lifetimeTooltip${item.id}`}
+        data-tooltip-id={LIFETIME_TOOLTIP_ID}
+        data-tooltip-content={
+          isExpired
+            ? t("Settings:APIKeyExpired")
+            : t("Settings:APIKeyDeactivated", { date: expiresAtDate })
+        }
         isFill={false}
-      />
-      <Tooltip
-        id={`lifetimeTooltip${item.id}`}
-        place="bottom"
-        getContent={getTooltipContent}
-        maxWidth="300px"
       />
     </div>
   ) : null;
 };
+
+/** The one tooltip of every lifetime icon in a list. */
+export const ApiKeysLifetimeTooltip = () => (
+  <Tooltip
+    id={LIFETIME_TOOLTIP_ID}
+    place="bottom"
+    getContent={({ content }) => (
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        {content}
+      </Text>
+    )}
+    maxWidth="300px"
+  />
+);

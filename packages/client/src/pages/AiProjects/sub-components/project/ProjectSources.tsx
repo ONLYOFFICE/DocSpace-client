@@ -413,6 +413,20 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       ]
     : undefined;
 
+  // The same on the collapsed column's rail: a plus under the kind's logos.
+  const railAdd = (kind: RoomsKind, title: string) =>
+    canEdit ? (
+      <AddButton
+        className={styles.addRoom}
+        titleText={title}
+        onClick={() => setRoomsPicker(kind)}
+        testId={`ai-project-rail-${kind}-add`}
+      />
+    ) : null;
+  // A kind is on the rail when it has rooms or the caller can add them.
+  const hasInstructionsGroup = instructionsRooms.length > 0 || canEdit;
+  const hasKnowledgeGroup = knowledgeRooms.length > 0 || canEdit;
+
   // For a member a kind with no available linked room has no card and no
   // tab: only a manager links rooms, and an empty card would only say so.
   const instructionsSection = instructionsRooms.length === 0 && !canEdit ? null : (
@@ -608,8 +622,9 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
         </div>
       ) : collapsed ? (
         // Collapsed, the column is a narrow rail of what is connected: the
-        // logos of the Skills rooms, of the Knowledge rooms and the folder.
-        // A logo brings the cards back, as the button under them does.
+        // logos of the Skills rooms, of the Knowledge rooms and the folder,
+        // each kind with its add button. A logo brings the cards back, as
+        // the button under them does.
         <aside
           className={classNames(styles.column, styles.rail)}
           aria-label={t("Common:AIProjectSources")}
@@ -628,7 +643,8 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
                 <SourceRoomLogo title={room.title} logo={room.logo} icon="instructionsRoom.svg" size="32px" />
               </button>
             ))}
-            {instructionsRooms.length > 0 && knowledgeRooms.length > 0 ? <span className={styles.railDivider} /> : null}
+            {railAdd("instructions", t("Common:AIProjectAddSkills"))}
+            {hasInstructionsGroup && hasKnowledgeGroup ? <span className={styles.railDivider} /> : null}
             {knowledgeRooms.map((room) => (
               <button
                 key={room.id}
@@ -641,7 +657,8 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
                 <SourceRoomLogo title={room.title} logo={room.logo} icon="knowledgeRoom.svg" size="32px" />
               </button>
             ))}
-            {instructionsRooms.length + knowledgeRooms.length > 0 ? <span className={styles.railDivider} /> : null}
+            {railAdd("knowledge", t("Common:AIProjectAddKnowledge"))}
+            {hasInstructionsGroup || hasKnowledgeGroup ? <span className={styles.railDivider} /> : null}
             {folderContext ? (
               <button
                 type="button"

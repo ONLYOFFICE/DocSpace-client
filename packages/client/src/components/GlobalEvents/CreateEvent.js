@@ -50,7 +50,7 @@ import {
   getDefaultFileTestIdPrefix,
 } from "SRC_DIR/helpers/filesUtils";
 import { runEncryptedFileCreation } from "SRC_DIR/helpers/encryptedFileCreation";
-import { getNewSkillContent } from "SRC_DIR/helpers/plugins/markdown";
+import { createSkill } from "@docspace/shared/api/ai";
 import {
   getDisplayFileNames,
   getUniqueFileTitle,
@@ -183,20 +183,18 @@ const CreateEvent = ({
           });
       } else if (extension === "md" && !isPrivacy) {
         // Markdown is edited by the Markdown plugin, not by the document
-        // editor: the file is created here and opened in the plugin. A
-        // skill in an Instructions room starts with the frontmatter the
-        // server requires of it.
+        // editor: the file is created here and opened in the plugin, when
+        // it is enabled. A skill in an Instructions room is written by the
+        // AI service from the skill template, with the frontmatter the
+        // Files service requires of it.
         const fileTitle = `${newValue.trimEnd()}.${extension}`;
 
         try {
           const file = isInstructionsRoom
-            ? await api.files.insertFile(
-                parentId,
-                fileTitle,
-                new Blob([getNewSkillContent(newValue.trimEnd())], {
-                  type: "text/markdown",
-                }),
-              )
+            ? await createSkill({
+                destId: parentId,
+                title: newValue.trimEnd(),
+              }).then((skill) => api.files.getFileInfo(skill.id))
             : await createFile(parentId, fileTitle);
 
           window.dataLayer = window.dataLayer || [];

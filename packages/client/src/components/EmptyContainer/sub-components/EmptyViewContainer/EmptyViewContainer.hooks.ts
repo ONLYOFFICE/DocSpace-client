@@ -213,6 +213,7 @@ export const useOptions = (
     vectorizationEnabled = true,
     isCreateSkillWithAIAvailable = true,
     isCreateMarkdownAvailable = false,
+    isCreateSkillAvailable = false,
     createRoom,
   }: EmptyViewContainerProps,
   t: TTranslation,
@@ -530,6 +531,7 @@ export const useOptions = (
         isCreateSkillWithAIAvailable,
         isPrivateRoomsRoute(pathname),
         isCreateMarkdownAvailable,
+        isCreateSkillAvailable,
       ),
     [
       type,
@@ -570,6 +572,7 @@ export const useOptions = (
       vectorizationEnabled,
       isCreateSkillWithAIAvailable,
       isCreateMarkdownAvailable,
+      isCreateSkillAvailable,
       pathname,
     ],
   );

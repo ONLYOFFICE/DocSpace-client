@@ -309,6 +309,20 @@ export type TGenerateSkillResult = {
   content: string;
 };
 
+export type TCreateSkillRequest = {
+  /** The Instructions room the skill is created in. */
+  destId: number | string;
+  /** The file's title without the extension; the skill's name is derived from it. */
+  title: string;
+};
+
+/** The skill file created from the template. */
+export type TCreateSkillResult = {
+  id: string;
+  /** The title the file was saved under, extension included. */
+  title: string;
+};
+
 export type TGenerateSkillError = Error & {
   status?: number;
   code?: string;

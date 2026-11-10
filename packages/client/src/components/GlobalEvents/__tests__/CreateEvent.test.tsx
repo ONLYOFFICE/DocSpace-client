@@ -39,6 +39,7 @@ import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
 import type React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createSkill } from "@docspace/shared/api/ai";
 
 type TDeferred<T> = {
   promise: Promise<T>;
@@ -57,6 +58,8 @@ const mocks = vi.hoisted(() => ({
   runEncryptedFileCreation: vi.fn(),
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
 }));
+
+vi.mock("@docspace/shared/api/ai", () => ({ createSkill: vi.fn() }));
 
 vi.mock("SRC_DIR/i18n", () => ({
   default: { t: (key: string) => key, exists: () => true, language: "en" },
@@ -404,33 +407,31 @@ describe("CreateEvent - a Markdown file opens in the Markdown plugin", () => {
     expect(stores.filesStore.openDocEditor).not.toHaveBeenCalled();
   });
 
-  it("Instructions room: created with the skill frontmatter", async () => {
+  it("Instructions room: created by the AI service from the skill template", async () => {
     const stores = createStores({
       keepNewFileName: true,
       isPrivacy: false,
       roomType: RoomsType.InstructionsRoom,
     });
     const file = { id: 41, folderId: ROOM_ID, fileExst: ".md" };
-    const insertFile = vi
-      .spyOn(api.files, "insertFile")
+    const insertFile = vi.spyOn(api.files, "insertFile");
+    const getFileInfo = vi
+      .spyOn(api.files, "getFileInfo")
       .mockResolvedValue(file as never);
+    vi.mocked(createSkill).mockResolvedValue({
+      id: "41",
+      title: "Common:NewMarkdown.md",
+    });
     renderCreateEvent(stores, createRequest("md"));
     await flush();
 
     expect(stores.filesStore.createFile).not.toHaveBeenCalled();
-    expect(insertFile).toHaveBeenCalledTimes(1);
-    const [folderId, title, content] = insertFile.mock.calls[0];
-    expect(folderId).toBe(ROOM_ID);
-    expect(title).toBe("Common:NewMarkdown.md");
-    // jsdom's Blob has no text()
-    const text = await new Promise<string>((resolve) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.readAsText(content as Blob);
+    expect(insertFile).not.toHaveBeenCalled();
+    expect(createSkill).toHaveBeenCalledWith({
+      destId: ROOM_ID,
+      title: "Common:NewMarkdown",
     });
-    expect(text).toBe(
-      '---\nname: common-newmarkdown\ndescription: "Common:NewMarkdown"\n---\n\n',
-    );
+    expect(getFileInfo).toHaveBeenCalledWith("41");
     expect(stores.pluginStore.openMarkdownFile).toHaveBeenCalledWith(file);
   });
 });

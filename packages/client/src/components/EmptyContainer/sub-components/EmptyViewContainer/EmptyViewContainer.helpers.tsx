@@ -226,6 +226,7 @@ export const getOptions = (
   isCreateSkillWithAIAvailable: boolean = true,
   isPrivateScope: boolean = false,
   isCreateMarkdownAvailable: boolean = false,
+  isCreateSkillAvailable: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -436,9 +437,9 @@ export const getOptions = (
 
   // The flat AI source rooms: an Instructions room holds Markdown skills,
   // a Knowledge room holds files to index. Neither takes a folder.
-  // A skill is uploaded, written by AI, or created with its frontmatter
-  // while the Markdown plugin is enabled: the server refuses a Markdown
-  // file without its name / description.
+  // A skill is uploaded, written by AI, or created from the skill template
+  // by the AI service: the server refuses a Markdown file without its
+  // name / description.
   const createMarkdown: EmptyViewItemType = {
     title: t("EmptyView:CreateNewFileTitle"),
     description: t("Common:InstructionsRoomMarkdownOnly"),
@@ -714,13 +715,13 @@ export const getOptions = (
         uploadFromDeviceAnyFile,
       ];
 
-    // Markdown only: uploaded, written by AI, or created through the
-    // Markdown plugin with its frontmatter.
+    // Markdown only: created from the skill template, uploaded, or
+    // written by AI.
     case RoomsType.InstructionsRoom: {
       if (isNotAdmin) return [];
 
       const skillOptions = [
-        ...(isCreateMarkdownAvailable ? [createMarkdown] : []),
+        ...(isCreateSkillAvailable ? [createMarkdown] : []),
         uploadMarkdownFromStorage,
         uploadMarkdownFromDevice,
         ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),

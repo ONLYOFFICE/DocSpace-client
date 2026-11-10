@@ -132,6 +132,8 @@ export interface InjectedEmptyViewContainerProps
   isCreateSkillWithAIAvailable?: boolean;
   /** The Markdown plugin is enabled: a Markdown file can be created. */
   isCreateMarkdownAvailable?: boolean;
+  /** The AI service is on: an Instructions room creates a skill from the template. */
+  isCreateSkillAvailable?: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

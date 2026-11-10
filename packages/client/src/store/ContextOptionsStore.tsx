@@ -1131,6 +1131,14 @@ class ContextOptionsStore {
     return this.pluginStore.isMarkdownEditorAvailable;
   }
 
+  /**
+   * A skill can be created in an Instructions room: the AI service, which
+   * writes it from the skill template, is on. No model is needed for it.
+   */
+  get isCreateSkillAvailable() {
+    return !!this.settingsStore.aiServicesEnabled;
+  }
+
   get isCreateSkillWithAIAvailable() {
     return (
       this.settingsStore.aiServicesEnabled &&

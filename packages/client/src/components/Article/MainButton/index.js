@@ -105,6 +105,7 @@ const ArticleMainButtonContent = (props) => {
     setSelectFileKnowledgeRoomDialogVisible,
     setGenerateSkillDialogVisible,
     isCreateSkillWithAIAvailable,
+    isCreateSkillAvailable,
     isCreateMarkdownAvailable,
     knowledgeUploadAccept,
     showArticleLoader,
@@ -567,8 +568,8 @@ const ArticleMainButtonContent = (props) => {
 
     // Instructions and Knowledge rooms are flat and hold one kind of file:
     // no folders and no folder upload. An Instructions room takes Markdown
-    // skills: uploaded, or created with their frontmatter while the
-    // Markdown plugin is enabled (the server refuses a skill without it); a
+    // skills: uploaded, or created from the skill template by the AI
+    // service (the server refuses a skill without its frontmatter); a
     // Knowledge room takes files to index, never edited, and none at all
     // while vectorization is off.
     if (
@@ -613,7 +614,8 @@ const ArticleMainButtonContent = (props) => {
         : isCreateSkillWithAIAvailable
           ? [...sourceRoomUploadActions, createSkillWithAI]
           : sourceRoomUploadActions;
-      const sourceCreateActions = isKnowledgeRoom ? [] : markdownActions;
+      const sourceCreateActions =
+        !isKnowledgeRoom && isCreateSkillAvailable ? [createNewMarkdown] : [];
       setUploadActions(sourceUploadActions);
       setActions(sourceCreateActions);
       setModel(
@@ -713,6 +715,7 @@ const ArticleMainButtonContent = (props) => {
     onShowKnowledgeRoomSelectFileDialog,
     onShowGenerateSkillDialog,
     isCreateSkillWithAIAvailable,
+    isCreateSkillAvailable,
     isCreateMarkdownAvailable,
     onUploadFileClick,
     onUploadFolderClick,
@@ -1026,6 +1029,7 @@ export default inject(
       setGenerateSkillDialogVisible,
       isCreateSkillWithAIAvailable:
         contextOptionsStore.isCreateSkillWithAIAvailable,
+      isCreateSkillAvailable: contextOptionsStore.isCreateSkillAvailable,
       isCreateMarkdownAvailable: contextOptionsStore.isCreateMarkdownAvailable,
       knowledgeUploadAccept: filesSettingsStore.knowledgeUploadAccept,
       createFoldersTree,

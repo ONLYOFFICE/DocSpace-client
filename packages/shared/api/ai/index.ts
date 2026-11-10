@@ -66,6 +66,8 @@ import type {
   TMetadataAIFillResult,
   TMetadataAIGenerateRequest,
   TMetadataAIGenerateResult,
+  TCreateSkillRequest,
+  TCreateSkillResult,
   TGenerateSkillRequest,
   TGenerateSkillResult,
   TDocumentAgentSettings,
@@ -622,4 +624,29 @@ export const generateSkillWithAI = async (
   }
 
   return body as TGenerateSkillResult;
+};
+
+/**
+ * Create a skill in an Instructions room from the skill template. The AI
+ * service checks the title and that the folder is an Instructions room, and
+ * saves the file as `<title>.md`.
+ */
+export const createSkill = async (data: TCreateSkillRequest) => {
+  const response = await authFetch(`/api/2.0/ai/skills/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+    });
+  }
+
+  return body as TCreateSkillResult;
 };

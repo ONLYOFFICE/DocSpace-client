@@ -36,8 +36,6 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  getNewSkillContent,
-  getSkillName,
   isMarkdownFile,
   isSupersededPluginItem,
 } from "../markdown";
@@ -80,36 +78,5 @@ describe("isSupersededPluginItem", () => {
         "markdownit-context-menu-item",
       ),
     ).toBe(false);
-  });
-});
-
-describe("getSkillName", () => {
-  it("turns a title into lowercase words joined by single hyphens", () => {
-    expect(getSkillName("Release Notes v2")).toBe("release-notes-v2");
-    expect(getSkillName("  --Café__menu--  ")).toBe("cafe-menu");
-  });
-
-  it("falls back when the title has no Latin letters or digits", () => {
-    expect(getSkillName("Навык")).toBe("skill");
-  });
-
-  it("keeps at most 64 characters without a trailing hyphen", () => {
-    const name = getSkillName(`${"a".repeat(63)} b`);
-
-    expect(name).toBe("a".repeat(63));
-  });
-});
-
-describe("getNewSkillContent", () => {
-  it("starts with the frontmatter the server requires", () => {
-    expect(getNewSkillContent("Code review: rules #1")).toBe(
-      '---\nname: code-review-rules-1\ndescription: "Code review: rules #1"\n---\n\n',
-    );
-  });
-
-  it("drops angle brackets from the description", () => {
-    expect(getNewSkillContent("<b>Bold</b>")).toContain(
-      'description: "bBold/b"',
-    );
   });
 });

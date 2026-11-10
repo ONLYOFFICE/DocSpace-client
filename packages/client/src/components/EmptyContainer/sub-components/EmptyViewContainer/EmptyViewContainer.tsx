@@ -206,6 +206,7 @@ const InjectedEmptyViewContainer = inject<
       vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
       isCreateSkillWithAIAvailable:
         contextOptionsStore.isCreateSkillWithAIAvailable,
+      isCreateSkillAvailable: contextOptionsStore.isCreateSkillAvailable,
       isCreateMarkdownAvailable: contextOptionsStore.isCreateMarkdownAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
       createRoom: contextOptionsStore.onCreateRoom,

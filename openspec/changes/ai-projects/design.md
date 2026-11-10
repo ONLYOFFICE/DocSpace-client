@@ -77,7 +77,7 @@ Two mappers stay: `toAiProject` (logo colour with `#`, linked rooms with `availa
 ### A project reaches the chat through three paths
 Rooms the caller cannot read are filtered out before they reach the chat on every path.
 
-- **Open.** The page calls ui-kit `AiChatStore.openProject({ profileId, instructionsRooms, knowledgeRooms })`. It is the project-named form of `openPreset`: it starts a fresh thread with the project's model, skills rooms and knowledge rooms. At the same time `AiProjectsStore.openProject` sets `AiPresetsStore.activePreset`, which Shell reads for `contextRoom` (the Instructions rooms) and `AiPresetsBridge` reads for the chat title.
+- **Open.** The page calls ui-kit `AiChatStore.openProject({ profileId, instructionsRooms, knowledgeRooms })`. It is the project-named form of `openPreset`: it starts a fresh thread with the project's model, skills rooms and knowledge rooms. At the same time `AiProjectsStore.openProject` sets `AiPresetsStore.activePreset`, which Shell reads for `contextRoom` (the Instructions rooms). The chat panel keeps its "AI Chat" title.
 - **Edit or reset.** An edit of the open project (by anyone) and leaving the project go through `applyPreset`. It changes the open chat in place, without a new thread, and the reset passes an empty preset.
 - **Picker outside the page.** `AiPresetsBridge` also applies the project through `applyPreset`, because a project picked in a running chat should not discard its thread.
 

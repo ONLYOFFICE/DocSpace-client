@@ -625,3 +625,37 @@ The server SHALL NOT include the wrapped file keys of private rooms or the users
 #### Scenario: Portal restored from a backup
 - **WHEN** a portal with a private room is restored from a backup
 - **THEN** the private room and its encrypted files are present, no member can open them, and no key import restores that access
+
+### Requirement: File keys follow the share
+The server SHALL remove a user's file keys from every encrypted file of a private room, subfolders included, when the user loses access to it (their share removed or set to none, a leave, a clearing), and from every file on the portal when their personal data is deleted, keeping the keys of the room's creator and of a share removed before a change of owner; each room revocation SHALL be audited with the room and the users and SHALL NOT appear in the file or folder history.
+
+#### Scenario: Member removed
+- **WHEN** a room manager removes a member from a private room
+- **THEN** the member's keys are gone from every encrypted file of the room and the other members keep theirs
+
+#### Scenario: Member leaves
+- **WHEN** a member leaves a private room
+- **THEN** the leaver's keys are gone from every encrypted file of the room
+
+#### Scenario: Owner keeps the keys
+- **WHEN** the owner clears the room's access, sets their own share to none or has it removed by a manager
+- **THEN** the owner keeps their keys and stays the owner
+
+#### Scenario: Personal data deleted
+- **WHEN** a user's personal data is deleted
+- **THEN** every file key held for that user on the portal is removed
+
+#### Scenario: Owner changed
+- **WHEN** ownership of a private room is transferred
+- **THEN** the new owner's share removed by the transfer costs them no key
+
+### Requirement: Clearing the access of a private room
+The server SHALL refuse with 403 a portal administrator who is not a member clearing the access of a private room or of an entry inside one, while the clearing of an ordinary room by an administrator stays as it was; whoever loses access to a private room through a clearing SHALL lose their wrapped file keys, the room's creator excepted.
+
+#### Scenario: Access cleared by an administrator outside the room
+- **WHEN** a portal administrator who is not a member clears the access of a private room
+- **THEN** the server answers 403 and nothing changes
+
+#### Scenario: Members cleared by the owner
+- **WHEN** the owner clears the access of a private room
+- **THEN** the members lose their keys on every encrypted file of the room and the owner keeps theirs

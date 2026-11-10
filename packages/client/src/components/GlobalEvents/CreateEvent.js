@@ -109,6 +109,7 @@ const CreateEvent = ({
   openDocEditor,
   isInstructionsRoom,
   openMarkdownFile,
+  isMarkdownEditorAvailable,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -188,6 +189,13 @@ const CreateEvent = ({
         // AI service from the skill template, with the frontmatter the
         // Files service requires of it.
         const fileTitle = `${newValue.trimEnd()}.${extension}`;
+        // Without the plugin the new file opens view-only in the document
+        // editor, as any Markdown file does. A new tab is opened before the
+        // request: the browser blocks one opened after it.
+        const viewerWindow =
+          open && !isMarkdownEditorAvailable && openOnNewPage
+            ? window.open("", "_blank")
+            : null;
 
         try {
           const file = isInstructionsRoom
@@ -207,8 +215,12 @@ const CreateEvent = ({
 
           onCloseAction();
 
-          if (open) await openMarkdownFile(file);
+          if (open) {
+            if (isMarkdownEditorAvailable) await openMarkdownFile(file);
+            else openDocEditor(file.id, true, null, false, false, viewerWindow);
+          }
         } catch (error) {
+          viewerWindow?.close();
           isPaymentRequiredError(error);
           toastr.error(error);
           onCloseAction();
@@ -365,6 +377,7 @@ const CreateEvent = ({
       openDocEditor,
       isInstructionsRoom,
       openMarkdownFile,
+      isMarkdownEditorAvailable,
     ],
   );
 
@@ -521,6 +534,7 @@ export default inject(
       openDocEditor,
       isInstructionsRoom: roomType === RoomsType.InstructionsRoom,
       openMarkdownFile: pluginStore.openMarkdownFile,
+      isMarkdownEditorAvailable: pluginStore.isMarkdownEditorAvailable,
     };
   },
 )(observer(CreateEvent));

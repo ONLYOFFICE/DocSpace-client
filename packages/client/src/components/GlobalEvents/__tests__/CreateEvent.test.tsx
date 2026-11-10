@@ -189,7 +189,10 @@ const createStores = ({
     oformsStore: { gallerySelected: null, setGallerySelected: vi.fn() },
     currentTariffStatusStore: { setPortalTariff: vi.fn() },
     publicRoomStore: { publicRoomKey: null },
-    pluginStore: { openMarkdownFile: vi.fn(async () => undefined) },
+    pluginStore: {
+      openMarkdownFile: vi.fn(async () => undefined),
+      isMarkdownEditorAvailable: true,
+    },
   };
 };
 
@@ -433,5 +436,29 @@ describe("CreateEvent - a Markdown file opens in the Markdown plugin", () => {
     });
     expect(getFileInfo).toHaveBeenCalledWith("41");
     expect(stores.pluginStore.openMarkdownFile).toHaveBeenCalledWith(file);
+  });
+
+  it("Instructions room without the plugin: the new skill opens view-only", async () => {
+    const stores = createStores({
+      keepNewFileName: true,
+      isPrivacy: false,
+      roomType: RoomsType.InstructionsRoom,
+    });
+    stores.pluginStore.isMarkdownEditorAvailable = false;
+    const file = { id: 42, folderId: ROOM_ID, fileExst: ".md" };
+    vi.spyOn(api.files, "getFileInfo").mockResolvedValue(file as never);
+    vi.mocked(createSkill).mockResolvedValue({ id: "42", title: "a.md" });
+    renderCreateEvent(stores, createRequest("md"));
+    await flush();
+
+    expect(stores.pluginStore.openMarkdownFile).not.toHaveBeenCalled();
+    expect(stores.filesStore.openDocEditor).toHaveBeenCalledWith(
+      42,
+      true,
+      null,
+      false,
+      false,
+      null,
+    );
   });
 });

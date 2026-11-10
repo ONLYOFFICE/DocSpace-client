@@ -30,11 +30,11 @@ An Instructions room SHALL hold Markdown (`.md`) files only: no subfolders can b
 
 #### Scenario: Create a skill from the room
 - **WHEN** a Content creator opens the empty view, the "+" menu or the main button inside an Instructions room while AI services are on
-- **THEN** "Markdown file" is offered next to the upload and asks for a title in the dialog that creates a file in any other room; the AI service (`POST ai/skills/create`) checks the title and that the folder is an Instructions room, and saves `<title>.md` there from the skill template, with a `name` / `description` frontmatter derived from the title; the file opens in the Markdown plugin when it is enabled
+- **THEN** "Markdown file" is offered next to the upload and asks for a title in the dialog that creates a file in any other room; the AI service (`POST ai/skills/create`) checks the title and that the folder is an Instructions room, and saves `<title>.md` there from the skill template, with a `name` / `description` frontmatter derived from the title; the new file is opened at once, in the Markdown plugin when it is enabled
 
 #### Scenario: No Markdown plugin
 - **WHEN** the Markdown plugin is disabled
-- **THEN** a skill is still created from the template and uploaded, and it opens view-only, as the document editor never edits Markdown
+- **THEN** a skill is still created from the template and uploaded, and it opens view-only, a new one right after it is created, as the document editor never edits Markdown
 
 #### Scenario: Upload from storage
 - **WHEN** a Content creator picks "Upload from storage"

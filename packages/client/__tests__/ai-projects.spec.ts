@@ -50,16 +50,18 @@ import {
   AI_PROJECT_WITHOUT_SOURCES,
   rootHandler,
   filesSettingsHandler,
+  roomTagsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
  * The "AI rooms" section the server keeps under its own root, drawn by Home
- * with the Rooms machinery (`/ai-rooms/*`): the Instructions rooms, the
- * Knowledge rooms and the AI projects, the section's slots, the three-type
- * create picker, a menu without archive, the project form, and a project
- * opened with its sources.
+ * with the Rooms machinery (`/ai-rooms/*`): the root lists the AI projects,
+ * the Skills and Knowledge entries their rooms; each list creates what it
+ * holds (the project form on the root, the entry's room type locked in the
+ * room dialog), a room's menu has no archive, and a project opens with its
+ * sources.
  *
  * The list is a Files table; the project views open the first stock
  * project, which links Instructions and Knowledge rooms, and the last,
@@ -137,8 +139,12 @@ test.describe("AI Workspace", () => {
         ...aiSectionsHandlers(TEST_PORT, stockProjects()),
       );
 
+      // The root lists the agents: the Knowledge rooms sit behind the
+      // section's own entry.
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
+      await sidebar(page).getByText("Knowledge", { exact: true }).click();
+      await expect(table(page)).toContainText("Contracts archive");
 
       const knowledgeRow = table(page)
         .locator("[data-testid^=table-row-]")
@@ -151,7 +157,7 @@ test.describe("AI Workspace", () => {
       await expect(page.locator("#option_archive-room")).toHaveCount(0);
     });
 
-    test("creates rooms from a picker of the three AI types", async ({
+    test("creates a project from the root, which lists the agents", async ({
       page,
       mockRequest,
       baseUrl,
@@ -164,22 +170,10 @@ test.describe("AI Workspace", () => {
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
 
+      // The list creates what it holds: on the root, an agent, so New room
+      // opens the project form with no room type to choose.
       await page.getByText("New room", { exact: true }).first().click();
-
-      const types = page.getByTestId("room-type-list-item");
-      await expect(types).toHaveCount(3);
-      await expect(types.nth(0)).toContainText("Instructions");
-      await expect(types.nth(1)).toContainText("Knowledge");
-      await expect(types.nth(2)).toContainText("AI project");
-
-      await expectScreenshot(page, [
-        "desktop",
-        "ai-projects",
-        "ai-rooms-create-picker.png",
-      ]);
-
-      // "AI project" leaves the room dialog for the project form.
-      await types.nth(2).click();
+      await expect(page.getByTestId("room-type-list-item")).toHaveCount(0);
       // The modal root is a zero-size wrapper; the aside's fields are what shows.
       await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
       await expect(page.getByTestId("ai-project-title")).toBeVisible();
@@ -190,6 +184,30 @@ test.describe("AI Workspace", () => {
         "ai-projects",
         "ai-projects-create-dialog.png",
       ]);
+    });
+
+    test("creates a Knowledge room from the Knowledge list", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "owner"),
+        // The room dialog reads the portal's tags for its tag input.
+        roomTagsHandler(TEST_PORT),
+        ...aiSectionsHandlers(TEST_PORT, stockProjects()),
+      );
+
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await expect(table(page)).toBeVisible();
+      await sidebar(page).getByText("Knowledge", { exact: true }).click();
+      await expect(table(page)).toContainText("Contracts archive");
+
+      // The entry's room type is set and locked: no chooser, no project form.
+      await page.getByText("New room", { exact: true }).first().click();
+      await expect(page.getByTestId("create_room_dialog_save")).toBeVisible();
+      await expect(page.getByTestId("room-type-list-item")).toHaveCount(0);
+      await expect(page.getByTestId("ai-project-dialog")).toHaveCount(0);
     });
 
     test("offers an admin to create a room when the section is empty", async ({
@@ -251,8 +269,8 @@ test.describe("AI Workspace", () => {
       );
 
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      // The empty root creates an agent: New room opens the project form.
       await emptyView(page).getByText("New room", { exact: true }).click();
-      await page.getByTestId("room-type-list-item").nth(2).click();
       await page.getByTestId("ai-project-title").fill("Sales");
 
       // A picture goes through the icon's hidden file input into the crop

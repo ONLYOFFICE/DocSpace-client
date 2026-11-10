@@ -422,7 +422,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   // A request without the peer's name waits for it, so the dialog never names
   // the peer by user id unless the lookup fails, as the skipped-member toast.
-  // Spec: private-rooms/key-management, "Peer named in the dialog".
+  // Spec: private-rooms/key-management, "Key-change dialog"
   useEffect(() => {
     if (!keyChangeRequest || keyChangeRequest.displayName) return undefined;
     const request = keyChangeRequest;

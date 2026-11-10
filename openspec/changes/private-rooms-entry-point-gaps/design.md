@@ -56,7 +56,36 @@ ReadHistory and EditHistory false, which differs from the server for the
 room owner, the only viewpoint the mock serves. With either value, no E2E
 case can reach the badge.
 
-No stashed design document covers the version badge.
+Media viewer. The shared viewer
+(`packages/shared/components/media-viewer/MediaViewer.tsx`) calls the id-based
+`onDownload` from its toolbar download button and from Ctrl+S
+(`onDownloadMedia`), and the item-based `onClickDownload` from the Download
+entry of its menu. The two apps fill these differently:
+
+- Client (`packages/client/src/pages/Home/MediaViewer/index.js`):
+  `onDownloadMediaFile`, passed as `onDownload`, opens the playlist item's
+  `src` with `openUrl(..., UrlActionType.Download)`. `MediaViewerDataStore`
+  builds every playlist item with `src: file.viewUrl`, so the browser saves
+  the ciphertext container (seen on the test portal: a DSE3 file). The menu
+  entry instead goes through `ContextOptionsStore.onClickDownload`, which
+  sends an encrypted file to `filesActionsStore.downloadAction`, the
+  decrypting download, and shows a localized toast on failure.
+- SDK (`packages/sdk/src/app/(docspace)/_components/FilesMediaViewer/hooks/useMediaViewer.ts`):
+  both `onDownload` and `onClickDownload` call `downloadAction`
+  (`useDownloadActions.ts`), which sends an encrypted file through its
+  `encryptedActions`. The SDK download is already correct.
+
+Rename comes from the menu models in `MediaViewer.helpers.tsx`, shared by
+both apps. `getMobileMediaContextModel` and `getPDFContextModel` show it
+unless `security.Rename` is false; the server reports Rename true to the
+room owner (above). `getDesktopMediaContextModel` hides it only in an
+archived room or for a public file and does not read the right at all. None
+of the three reads `encrypted`. On the test portal the rename dialog opened
+from the viewer showed the file's opaque name. `getPDFContextModel` is used
+when the viewer opens a PDF, which the client playlist admits only while
+`ClientConfig.pdfViewer` is set.
+
+No stashed design document covers the version badge or the media viewer.
 
 ## Goals / Non-Goals
 
@@ -66,12 +95,16 @@ No stashed design document covers the version badge.
 - The badge of any other file behaves as before.
 - The mock reports the rights of an encrypted file as the server does for
   the room owner.
+- Every download from the media viewer of an encrypted file saves the
+  decrypted file under its original name.
+- No media viewer menu offers Rename for an encrypted file, in either app.
 
 **Non-Goals:**
 - Hiding the badge or changing its label.
 - Modelling room roles in the mock. It keeps serving the room owner.
-- Changing how the client treats the Rename, Lock and CopyLink rights of an
-  encrypted file.
+- Changing how the client treats the Lock and CopyLink rights of an
+  encrypted file, or its Rename right outside the media viewer.
+- Decrypting a PDF in the media viewer. Only its menu changes here.
 
 ## Decisions
 
@@ -102,6 +135,28 @@ No stashed design document covers the version badge.
    `versionGroup` (default 1), which the file reports as both `version` and
    `versionGroup`, so a spec can show a file with several versions. The
    contract test checks both. An E2E case can then fail without the fix.
+4. **The client's viewer download of an encrypted file takes the menu's
+   path.** When the playlist item is marked `encrypted`,
+   `onDownloadMediaFile` looks the file up in the files of the folder, or
+   takes `previewFile` when the viewer was opened from a preview link, and
+   calls `onClickDownload(file, t)`, the handler the viewer's Download entry
+   already uses, which owns the decryption and the error toast. If no file is
+   found it downloads nothing rather than the ciphertext. Any other item
+   keeps `openUrl` on the playlist `src`. Alternatives:
+   - (a) Check `encrypted` in the shared viewer and call `onClickDownload`
+     from there. Rejected: the shared viewer does not own the download, the
+     apps do, and the SDK is already correct.
+   - (b) Give the playlist item another `src`. Rejected: the viewer's
+     decrypting preview reads that `src`.
+5. **Rename is withheld by `item.encrypted` in all three menu models.**
+   `getDesktopMediaContextModel`, `getMobileMediaContextModel` and
+   `getPDFContextModel` hide the Rename entry for an encrypted file, with the
+   one-line pointer
+   `Spec: private-rooms/file-operations, "Rename withheld for encrypted files"`.
+   The right is not trusted, for the reason in decision 1 (a). The PDF model
+   is included although the client reaches it only with `pdfViewer` set:
+   the requirement makes no exception for an entry point, and the check sits
+   in the same file.
 
 ## Risks / Trade-offs
 
@@ -120,3 +175,11 @@ No stashed design document covers the version badge.
   user without ReadHistory.] → Accepted for this change; passing `noHover`
   would also change the badge for that user, which is not a private-room
   rule.
+- [The mobile and PDF viewer menus still gate Move, Copy and Duplicate by
+  the server rights alone.] → Copy and Duplicate are refused by the server
+  in a private room (Context), and a move out of the room is covered by
+  "Files leaving a private room are decrypted". Not changed here.
+- [An encrypted playlist item whose file the client cannot find downloads
+  nothing and shows nothing (decision 4).] → Accepted: the viewer only
+  lists files of the open folder or the previewed file, so this is not
+  expected to happen, and a silent no-op is safer than the ciphertext.

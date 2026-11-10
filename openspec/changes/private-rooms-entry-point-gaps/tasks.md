@@ -16,7 +16,17 @@
 
 - [x] 4.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green. Verify: the gate output and the validate summary
 
+## 5. Media viewer
+
+- [ ] 5.1 In `packages/shared/components/media-viewer/MediaViewer.helpers.tsx`, leave the Rename entry out of `getDesktopMediaContextModel`, `getMobileMediaContextModel` and `getPDFContextModel` for an encrypted file, whatever its Rename right, with the one-line spec pointer (design decision 5). Verify: cases "Media viewer menu of an encrypted file" (desktop, mobile and PDF models, encrypted file with `security.Rename` true: no `rename` key) and "Media viewer menu of a file that is not encrypted" (the same file without the flag: `rename` is there) in `packages/shared/components/media-viewer/MediaViewer.test.tsx`, `cd packages/shared && pnpm exec vitest run components/media-viewer`; the encrypted cases fail on the helpers without the change; `pnpm exec tsc --noEmit -p tsconfig.json` in shared, client and sdk
+- [ ] 5.2 In `packages/client/src/pages/Home/MediaViewer/index.js`, make `onDownloadMediaFile` send a playlist item marked `encrypted` to `onClickDownload(file, t)`, with the file taken from the folder's files or from `previewFile`, and download nothing when no file is found; other items keep `openUrl` (design decision 4). Verify: the E2E case of task 5.3; `pnpm exec tsc --noEmit -p tsconfig.json` in client
+- [ ] 5.3 Client E2E: in `packages/client/__tests__/encrypted-file-ui.spec.ts`, a case "Download from the media viewer" that seeds an encrypted image whose bytes are built with `encryptFile` for the test user's key (as `private-room-cross-user-download.spec.ts` does), opens it in the media viewer with the identity unlocked, downloads it with the toolbar button and then with Ctrl+S, and checks that each saved file has the original name and the plaintext bytes; and a case "Media viewer menu of an encrypted file" that opens the viewer's menu and finds no Rename entry. Both fail without tasks 5.1 and 5.2. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test __tests__/encrypted-file-ui.spec.ts --reporter=line`
+
+## 6. Integration
+
+- [ ] 6.1 Pre-push gate (`npm --prefix ./common/tests run test:lefthook`, `pnpm nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@latest validate --all --strict` (`OPENSPEC_TELEMETRY=0`) green. Verify: the gate output and the validate summary
+
 ## Workflow follow-up
 
-- Two more entry points belong to this change: the media viewer (download of the ciphertext and Rename for an encrypted file) and the plugin tabs of the info panel in a private room. They are added with `/opsx:update private-rooms-entry-point-gaps` before it is archived.
-- Archive with `/opsx:archive private-rooms-entry-point-gaps` once all three entry points are done. The archive merges the badge scenarios into `openspec/specs/private-rooms/file-operations/spec.md`.
+- One more entry point belongs to this change: the plugin tabs of the info panel in a private room, of a folder in it and of an encrypted file. It is added with `/opsx:update private-rooms-entry-point-gaps` before the change is archived.
+- Archive with `/opsx:archive private-rooms-entry-point-gaps` once all three entry points are done. The archive merges the badge, media viewer rename and media viewer download scenarios into `openspec/specs/private-rooms/file-operations/spec.md`.

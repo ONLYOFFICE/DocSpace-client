@@ -52,6 +52,8 @@ import {
   buildCachePriceBreakdown,
   CachePriceTooltip,
 } from "../CachePriceTooltip";
+import { isByokModel } from "../utils";
+import ModelsDescription from "../ModelsDescription";
 import { getAiModelsColumns } from "./aiModelsColumns";
 import type { TModelRow } from "./aiModelsTypes";
 import styles from "./ModelSettingsTable.module.scss";
@@ -97,6 +99,7 @@ const TableView = ({
         alias: m.alias,
         image: m.image,
         link: m.link,
+        byok: isByokModel(m),
         prices: [
           { key: "input", value: formatAiModelPrice(m.price?.prompt) },
           { key: "output", value: formatAiModelPrice(m.price?.completion) },
@@ -121,6 +124,7 @@ const TableView = ({
         alias: m.alias,
         image: m.image,
         link: m.link,
+        byok: isByokModel(m),
         prices: [
           { key: "imageInput", value: formatAiModelPrice(m.price?.prompt) },
           { key: "imageOutput", value: formatAiModelPrice(m.price?.image) },
@@ -147,9 +151,10 @@ const TableView = ({
 
   return (
     <div className={styles.tableWrapper}>
-      <Text className={styles.introText}>
-        {t("Common:AIModelsDescription")}
-      </Text>
+      <ModelsDescription
+        className={styles.introText}
+        hasByok={[...chatRows, ...imageRows].some((row) => row.byok)}
+      />
 
       {chatRows.length ? (
         <>

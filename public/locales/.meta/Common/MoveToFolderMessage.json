@@ -3,7 +3,7 @@
   "content": "You can't move the folder to its subfolder",
   "content_en_sha1_hash": "506393764de44f23f65ce73e264a120055299986",
   "created_at": "2025-05-19T21:30:46.641Z",
-  "updated_at": "2026-11-06T11:20:11.801Z",
+  "updated_at": "2026-11-09T17:07:34.691Z",
   "comment": {
     "text": "This is an error toast message that appears when a user attempts to move a folder into one of its own subfolders, which is an invalid operation.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/HotkeyStore.ts",
-      "line_number": 914,
+      "line_number": 925,
       "context": "if (!fileInAction) {\n fileIds.push(item.id);\n }\n } else if (item.id === selectedItemId) {\n isPastedIntoItself = true;\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else if (item.parentId === selectedItemId) {\n isPastedIntoSameFolder = true;\n } else {\n const folderInAction = activeFolders.includes(item.id);",
       "module": "/packages/client"
     },

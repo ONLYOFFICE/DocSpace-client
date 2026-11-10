@@ -50,6 +50,8 @@ export type TModelRow = {
   alias: string;
   image: string;
   link?: string;
+  /** A model the portal's own provider key serves. */
+  byok: boolean;
   prices: TModelPrice[];
 };
 

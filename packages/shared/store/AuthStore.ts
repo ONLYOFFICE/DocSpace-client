@@ -60,7 +60,11 @@ import {
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { isOAuthFrame } from "../utils/oauthToken";
 import { getCookie, setCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
-import { AI_SEARCH, AI_TOOLS } from "@onlyoffice/apps-ui-kit/billing/constants";
+import {
+  AI_SEARCH,
+  AI_TOOLS,
+  AI_TOOLS_BYOK,
+} from "@onlyoffice/apps-ui-kit/billing/constants";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -355,6 +359,7 @@ class AuthStore {
     if (isSaasAdmin && !this.currentTariffStatusStore?.isNotPaidPeriod) {
       this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS);
       this.currentTariffStatusStore?.fetchServiceFeePercent(AI_SEARCH);
+      this.currentTariffStatusStore?.fetchServiceFeePercent(AI_TOOLS_BYOK);
     }
 
     runInAction(() => {

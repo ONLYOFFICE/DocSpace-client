@@ -44,6 +44,7 @@ import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
 import { CachePriceAnchor } from "../CachePriceTooltip";
+import { ByokBadge } from "../sub-components/ByokBadge";
 
 import type { TModelPrice, TModelRow, TRequestToggle } from "./aiModelsTypes";
 import styles from "./ModelSettingsTable.module.scss";
@@ -61,6 +62,7 @@ export const ModelCell = ({ row }: { row: TModelRow }) => (
       <Text fontSize="12px" fontWeight={600} className={styles.modelTitle}>
         {row.alias}
       </Text>
+      {row.byok ? <ByokBadge /> : null}
     </div>
   </div>
 );

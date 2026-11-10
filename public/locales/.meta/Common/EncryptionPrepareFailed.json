@@ -3,7 +3,7 @@
   "content": "Could not encrypt the file before upload. The file was not sent. Please try again or contact support.",
   "content_en_sha1_hash": "5d6f40171a9b3563ed0cffff6184241215ebb92d",
   "created_at": "2026-05-24T17:27:26.712Z",
-  "updated_at": "2026-11-05T16:49:40.001Z",
+  "updated_at": "2026-11-09T17:07:34.980Z",
   "comment": {
     "text": "Error text displayed for a specific file in the upload list when the encryption process fails before the upload begins.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts",
-      "line_number": 587,
+      "line_number": 619,
       "context": "if (gate.reason === \"no-key\") requestDeviceSetupHint();\n failUploadItem(\n self,\n indexOfFile,\n gate.reason === \"unsupported-room-type\"\n ? i18n.t(\"Common:EncryptionPrepareFailed\")\n : getEncryptedUploadRefusalMessage(i18n.t, gate.reason),\n t,\n createNewIfExist,\n );\n return;",
       "module": "/packages/client"
     },

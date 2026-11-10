@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2026-06-01T21:20:31.256Z",
-  "updated_at": "2026-06-15T19:31:56.230Z",
+  "updated_at": "2026-11-09T17:07:35.085Z",
   "comment": {
     "text": "Section label in the info panel that identifies the list of room administrators.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMembersView.tsx",
-      "line_number": 166,
+      "line_number": 167,
       "context": "const sections = classifyMembers(members);\n \n const sectionTitle = (key: MemberSectionKey): string => {\n switch (key) {\n case \"administrators\":\n return t(\"Common:RoomAdministration\");\n case \"users\":\n return t(\"Common:RoomUsers\");\n case \"expected\":\n return t(\"Common:RoomExpectUsers\");\n default:",
       "module": "/packages/sdk"
     }

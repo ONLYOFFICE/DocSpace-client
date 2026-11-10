@@ -27,7 +27,7 @@ Picking a project SHALL read it again from the server (its room, sources and mod
 - its available Instructions rooms as the skills rooms;
 - its available Knowledge rooms as the knowledge bases.
 
-The chat SHALL show the project's name as its title. If the re-read fails for any reason other than 404 or 403, the picker's copy SHALL be applied instead.
+The chat panel SHALL keep its "AI Chat" title, whatever project the chat runs in. If the re-read fails for any reason other than 404 or 403, the picker's copy SHALL be applied instead.
 
 #### Scenario: Apply a project
 - **WHEN** the user picks the "Sales" project in the model picker

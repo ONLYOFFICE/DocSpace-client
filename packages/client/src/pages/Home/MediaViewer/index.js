@@ -254,11 +254,24 @@ const FilesMediaViewer = (props) => {
   const onDownloadMediaFile = useCallback(
     (id) => {
       if (playlist.length > 0) {
-        const viewUrlFile = playlist.find((file) => file.fileId === id).src;
-        return openUrl(viewUrlFile, UrlActionType.Download);
+        const playlistItem = playlist.find((file) => file.fileId === id);
+
+        // Spec: private-rooms/file-operations, "Download decrypts on the client"
+        if (playlistItem?.encrypted) {
+          const file =
+            files.find((item) => isSameId(item.id, id)) ??
+            (previewFile && isSameId(previewFile.id, id)
+              ? previewFile
+              : undefined);
+
+          if (file) onClickDownload(file, t);
+          return;
+        }
+
+        return openUrl(playlistItem.src, UrlActionType.Download);
       }
     },
-    [playlist],
+    [playlist, files, previewFile, onClickDownload, t],
   );
 
   const onMediaViewerClose = useCallback(async () => {

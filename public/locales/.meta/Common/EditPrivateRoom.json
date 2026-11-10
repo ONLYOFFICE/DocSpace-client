@@ -3,7 +3,7 @@
   "content": "Edit private room",
   "content_en_sha1_hash": "9bc9c7e40dc0ffa66a66464b89d92685226840d9",
   "created_at": "2026-06-09T09:42:41.645Z",
-  "updated_at": "2026-11-06T10:45:55.872Z",
+  "updated_at": "2026-11-09T09:26:33.789Z",
   "comment": {
     "text": "Dialog title in the header of a modal window that appears when modifying an existing private room.",
     "is_auto": true,

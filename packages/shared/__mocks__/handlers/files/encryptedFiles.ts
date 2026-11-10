@@ -56,14 +56,20 @@ export type EncryptedFileSeed = {
   encryptedNameHeader?: string;
   /** One of `folders`; the room itself when left out. */
   folderId?: number;
+  /** The file's `version` and `versionGroup`; 1 when left out. */
+  versionGroup?: number;
 };
 
 export type EncryptedFileRecord = Required<
-  Omit<EncryptedFileSeed, "bytes" | "encryptedNameHeader" | "folderId">
+  Omit<
+    EncryptedFileSeed,
+    "bytes" | "encryptedNameHeader" | "folderId" | "versionGroup"
+  >
 > & {
   bytes?: Uint8Array;
   encryptedNameHeader?: string;
   folderId?: number;
+  versionGroup?: number;
 };
 
 export type EncryptedFolderSeed = { id: number; title: string };
@@ -267,6 +273,7 @@ const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   bytes: seed.bytes,
   encryptedNameHeader: seed.encryptedNameHeader,
   folderId: seed.folderId,
+  versionGroup: seed.versionGroup,
 });
 
 /** EmployeeDto of a user the mock has no directory entry for. */
@@ -309,8 +316,8 @@ const buildFileDto = (
     ...(!archived && { parentRoomType: 19 }),
     pureContentLength: record.size,
     contentLength: `${record.size} bytes`,
-    version: 1,
-    versionGroup: 1,
+    version: record.versionGroup ?? 1,
+    versionGroup: record.versionGroup ?? 1,
     access: 0,
     canShare: true,
     shared: false,
@@ -328,6 +335,9 @@ const buildFileDto = (
     viewAccessibility: viewAccessibilityOf(fileExst),
     // FileSecurity.FilterEntryAsync denies Copy, Duplicate and Vectorization
     // on a file of a private room before the section rules (bd89a24dcd).
+    // Rename, Lock, CopyLink and the history rights are not denied there: the
+    // room owner gets them through HasFullAccessAsync, and the Archive branch
+    // admits ReadHistory and none of the others.
     security: {
       Read: true,
       Edit: true,
@@ -340,14 +350,14 @@ const buildFileDto = (
       FillForms: false,
       Review: false,
       CustomFilter: false,
-      ReadHistory: false,
-      Lock: false,
-      EditHistory: false,
+      ReadHistory: true,
+      Lock: true,
+      EditHistory: true,
       Duplicate: !isPrivate,
       SubmitToFormGallery: false,
       Convert: false,
       CreateRoomFrom: false,
-      CopyLink: false,
+      CopyLink: true,
       Embed: false,
       Vectorization: false,
       ...(archived && {
@@ -356,6 +366,9 @@ const buildFileDto = (
         Move: false,
         Rename: false,
         ReadHistory: true,
+        Lock: false,
+        EditHistory: false,
+        CopyLink: false,
         Duplicate: false,
       }),
     },

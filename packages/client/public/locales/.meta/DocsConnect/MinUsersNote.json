@@ -3,7 +3,7 @@
   "content": "(min users: {{count}})",
   "content_en_sha1_hash": "ff8a75f349d2decbe1bd325e8a7f4f0d125f016d",
   "created_at": "2026-07-27T13:07:48.520Z",
-  "updated_at": "2026-11-06T10:45:54.646Z",
+  "updated_at": "2026-11-09T07:51:49.346Z",
   "comment": {
     "text": "Secondary text label in the Buy Plan panel indicating the minimum required number of users, where {{count}} is a numeric value.",
     "is_auto": true,

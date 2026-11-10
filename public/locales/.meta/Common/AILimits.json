@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 251,
-      "context": "...(standalone\n ? []\n : [\n {\n id: TAB_IDS.LIMITS,\n name: t(\"Common:AILimits\"),\n content: <AILimits />,\n onClick: makeOnClick(TAB_IDS.LIMITS),\n },\n ]),\n ];",
+      "line_number": 250,
+      "context": "...(standalone\n ? []\n : [\n {\n id: TAB_IDS.LIMITS,\n name: t(\"Common:AILimits\"),\n content: <AILimits />,\n onClick: makeOnClick(TAB_IDS.LIMITS),\n },\n ]),\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
       "line_number": 564,
-      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-limits\",\n key: \"7-5\",\n link: \"limits\",\n tKey: \"Common:AILimits\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-ai-settings-byok\",\n key: \"7-6\",",
+      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-limits\",\n key: \"7-5\",\n link: \"limits\",\n tKey: \"Common:AILimits\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-ai-settings-document-agent\",\n key: \"7-6\",",
       "module": "/packages/client"
     }
   ],

@@ -36,7 +36,7 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import { observable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
-import type RoomsFilter from "@docspace/shared/api/rooms/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
   FileType,
   FolderType,
@@ -141,6 +141,41 @@ const highTotalPayload = () => ({
   new: 0,
   pathParts: [] as unknown[],
   current: { id: 7, parentId: 0, rootFolderType: FolderType.Rooms, security: {} },
+});
+
+describe("FilesStore.fetchRooms — AI Workspace empty list", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  const fetchEmptyAiList = async (filter: RoomsFilter) => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isAiSectionFolder: true },
+    });
+    vi.spyOn(api.rooms, "getRooms").mockResolvedValue(roomsPayload([]) as never);
+    store.setIsEmptyPage(false);
+    await store.fetchRooms(0, filter);
+    return store;
+  };
+
+  it("an empty agents list shows the section's own empty view", async () => {
+    const store = await fetchEmptyAiList(
+      RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub),
+    );
+    expect(store.isEmptyPage).toBe(true);
+  });
+
+  it("an empty Skills list shows the section's own empty view", async () => {
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+    filter.type = String(RoomsType.InstructionsRoom);
+    const store = await fetchEmptyAiList(filter);
+    expect(store.isEmptyPage).toBe(true);
+  });
+
+  it("a search with no results is still the filtered empty view", async () => {
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+    filter.filterValue = "plan";
+    const store = await fetchEmptyAiList(filter);
+    expect(store.isEmptyPage).toBe(false);
+  });
 });
 
 describe("FilesStore.fetchRooms — last-page clamp", () => {

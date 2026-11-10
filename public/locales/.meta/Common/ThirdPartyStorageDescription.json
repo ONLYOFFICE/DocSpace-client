@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 639,
+      "line_number": 633,
       "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:ThirdPartyStorageDescription\")}\n </Text>\n \n {isCheckedThirdPartyStorage ? (\n <ThirdPartyStorageModule\n thirdPartyStorage={thirdPartyStorage}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 759,
+      "line_number": 753,
       "context": "testId=\"third_party_storage_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:ThirdPartyStorageDescription\")}\n </Text>\n {isCheckedThirdPartyStorage ? (\n <ThirdPartyStorageModule\n isValidForm={isValidForm}\n formSettings={formSettings}",
       "module": "/packages/shared"
     }

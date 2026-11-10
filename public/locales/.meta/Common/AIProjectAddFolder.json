@@ -1,0 +1,21 @@
+{
+  "key_path": "AIProjectAddFolder",
+  "content": "Add folder",
+  "content_en_sha1_hash": "03eb1a44337cd655fb9bdee418a5b3306e6f1e8e",
+  "created_at": "2026-11-10T13:41:16.973Z",
+  "updated_at": "2026-11-10T13:41:16.973Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

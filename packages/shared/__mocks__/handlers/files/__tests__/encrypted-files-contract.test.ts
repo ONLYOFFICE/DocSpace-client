@@ -811,6 +811,62 @@ describe("encryptedFiles mock — the copy right (mirrors FileSecurity.FilterEnt
   });
 });
 
+describe("encryptedFiles mock — the room owner's rights and the versions (mirrors FileSecurity.FilterEntryAsync and FileDto)", () => {
+  type Listing = {
+    response: {
+      files: (Record<string, unknown> & {
+        security: Record<string, boolean>;
+      })[];
+    };
+  };
+  const list = async (roomId: number) =>
+    (await (
+      await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${roomId}`)
+    ).json()) as Listing;
+  const seed = { id: 1, title: "secret.docx", encrypted: true, fileKeys: [] };
+
+  it("File in an active private room reports the owner's rename, lock, link and history rights", async () => {
+    handle.current!.setFiles([seed]);
+
+    const { files } = (await list(ROOM_ID)).response;
+
+    expect(files[0].security).toMatchObject({
+      Rename: true,
+      Lock: true,
+      CopyLink: true,
+      ReadHistory: true,
+      EditHistory: true,
+    });
+  });
+
+  it("File in an archived private room reports ReadHistory and none of the others", async () => {
+    archivedHandle.current!.setFiles([seed]);
+
+    const { files } = (await list(ARCHIVED_ROOM_ID)).response;
+
+    expect(files[0].security).toMatchObject({
+      Rename: false,
+      Lock: false,
+      CopyLink: false,
+      ReadHistory: true,
+      EditHistory: false,
+    });
+  });
+
+  it("Seeded version group", async () => {
+    handle.current!.setFiles([seed, { ...seed, id: 2, versionGroup: 3 }]);
+
+    const { files } = (await list(ROOM_ID)).response;
+
+    expect(
+      files.map((f) => [f.id, f.version, f.versionGroup]),
+    ).toEqual([
+      [1, 1, 1],
+      [2, 3, 3],
+    ]);
+  });
+});
+
 describe("encryptedFiles mock — an archived room and its folders (mirrors FoldersController and FolderDtoHelper)", () => {
   type Entry = Record<string, unknown> & { security?: Record<string, boolean> };
   type Listing = {

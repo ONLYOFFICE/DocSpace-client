@@ -64,6 +64,13 @@ const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
 const TABLE_FAVORITES_COLUMNS = `favoritesTableColumns_ver-${TableVersions.Favorites}`;
 const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
+// The lists of the AI section (AI Workspace, Skills, Knowledge) are rooms
+// tables without the Type column: every row of a list is of one type. Their
+// column list and sizes are kept apart from the Rooms ones, which do have
+// it, so neither table resets or rewrites the other's, under their own
+// version (`TableVersions.AiRooms`): bump it when these columns change, and
+// what the browsers stored for the old set is no longer read.
+const TABLE_AI_ROOMS_COLUMNS = `aiRoomsTableColumns_ver-${TableVersions.AiRooms}`;
 const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
 const TABLE_IN_SHARED_FOLDER_COLUMNS = `inSharedFolderTableColumns_ver-${TableVersions.InSharedFolder}`;
 
@@ -78,6 +85,7 @@ const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
 const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersions.Rooms}`;
+const COLUMNS_AI_ROOMS_SIZE = `aiRoomsColumnsSize_ver-${TableVersions.AiRooms}`;
 const COLUMNS_SHARED_WITH_ME_SIZE = `sharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 const COLUMNS_IN_SHARED_FOLDER_SIZE = `inSharedFolderColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
@@ -92,6 +100,7 @@ const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVe
 const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
+const COLUMNS_AI_ROOMS_SIZE_INFO_PANEL = `aiRoomsColumnsSizeInfoPanel_ver-${TableVersions.AiRooms}`;
 const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 const COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE = `infoPanelInSharedColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
@@ -937,6 +946,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
+    else if (isAiSectionFolder)
+      tableStorageName = `${TABLE_AI_ROOMS_COLUMNS}=${userId}`;
     else if (isRooms) tableStorageName = `${TABLE_ROOMS_COLUMNS}=${userId}`;
     else if (isContactsPeople)
       tableStorageName = `${TABLE_PEOPLE_COLUMNS}=${userId}`;
@@ -1008,6 +1019,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
+    else if (isAiSectionFolder)
+      columnStorageName = `${COLUMNS_AI_ROOMS_SIZE}=${userId}`;
     else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
     else if (isTrashFolder)
       columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
@@ -1079,6 +1092,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;
+    else if (isAiSectionFolder)
+      columnInfoPanelStorageName = `${COLUMNS_AI_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isRooms)
       columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isTrashFolder)

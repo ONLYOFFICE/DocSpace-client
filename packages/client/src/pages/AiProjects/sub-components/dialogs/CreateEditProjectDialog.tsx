@@ -42,6 +42,7 @@ import { ModalDialog, ModalDialogType } from "@onlyoffice/apps-ui-kit/components
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { ComboBox, type TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
@@ -55,6 +56,8 @@ import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import {
   AI_PROJECT_MAX_ROOMS_PER_TYPE,
+  AI_PROJECT_MAX_SUGGESTIONS,
+  AI_PROJECT_MAX_TEXT_LENGTH,
   INSTRUCTIONS_ROOM_TYPE,
   KNOWLEDGE_ROOM_TYPE,
 } from "@docspace/shared/api/ai/projects";
@@ -63,6 +66,7 @@ import type {
   TAiProjectCover,
   TAiProjectLogoUpload,
   TAiProjectSource,
+  TAiProjectSuggestion,
 } from "@docspace/shared/api/ai/projects";
 import { aiProjectToRoom } from "@docspace/shared/api/ai/projects";
 
@@ -83,6 +87,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import { SourceRoomLogo } from "../project/RoomItem";
 import { savedProjectProfileId } from "../../utils";
+import SuggestionDialog from "./SuggestionDialog";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -109,6 +114,14 @@ const logoCrop = (file: File, { x, y, zoom }: TIcon) =>
     img.src = url;
   });
 
+/** A suggestion as the form lists it, with a local key for its chip. */
+type TSuggestionRow = TAiProjectSuggestion & { key: string };
+
+const toSuggestionRow = (suggestion: TAiProjectSuggestion): TSuggestionRow => ({
+  ...suggestion,
+  key: createRandomTagId(),
+});
+
 type TRoomType = typeof INSTRUCTIONS_ROOM_TYPE | typeof KNOWLEDGE_ROOM_TYPE;
 
 const MAX_TITLE = 170;
@@ -121,8 +134,10 @@ const ROOM_ICONS: Record<TRoomType, "instructionsRoom.svg" | "knowledgeRoom.svg"
 /**
  * The create / edit aside of a project, as the mockups draw it: the logo
  * with its colour next to the name, the owner row (edit only), the model
- * with its note under the field, then the rooms of each kind as tags with
- * the "Select rooms" button in the same line and the hint below.
+ * with its note under the field, the rooms of each kind as tags with the
+ * "Select rooms" button in the same line and the hint below, then the
+ * suggestion chips of the empty chat (added and edited in a centred dialog)
+ * and the instructions to the chat as the agent dialog had them.
  */
 const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogProps) => {
   const { t } = useTranslation(["Common"]);
@@ -168,6 +183,22 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const hasImage = !!previewIcon || !!storedImage;
   // `null` until a model is picked: the portal default is preselected.
   const [profileId, setProfileId] = React.useState<string | null>(project?.aiProject.profile?.id ?? null);
+  // What the form opened with: the instructions and suggestions are sent
+  // only when they differ from it. A refresh of the open project replaces
+  // the store's copy while the form keeps its fields, so comparing against
+  // that copy would write the form's older values over another member's change.
+  const [seed] = React.useState(() => ({
+    instructions: (project?.aiProject.instructions ?? "").trim(),
+    suggestions: JSON.stringify(
+      (project?.aiProject.suggestions ?? []).map(({ name: label, prompt: text }) => [label, text]),
+    ),
+  }));
+  const [prompt, setPrompt] = React.useState(project?.aiProject.instructions ?? "");
+  const [suggestions, setSuggestions] = React.useState<TSuggestionRow[]>(() =>
+    (project?.aiProject.suggestions ?? []).map(toSuggestionRow),
+  );
+  // The suggestion open in its dialog: `"new"` to add one, a row key to edit it.
+  const [editedSuggestion, setEditedSuggestion] = React.useState<string | null>(null);
   const [instructions, setInstructions] = React.useState<TAiProjectSource[]>(project?.aiProject.instructionsRooms ?? []);
   const [knowledge, setKnowledge] = React.useState<TAiProjectSource[]>(project?.aiProject.knowledgeRooms ?? []);
   const [selector, setSelector] = React.useState<TRoomType | null>(null);
@@ -301,6 +332,11 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         logo: { color: `#${color}`, cover: coverIcon?.id ?? "", image },
         aiProject: {
           profileId: savedProfileId,
+          instructions: prompt.trim() === seed.instructions ? undefined : prompt.trim(),
+          suggestions:
+            JSON.stringify(suggestions.map(({ name: label, prompt: text }) => [label, text])) === seed.suggestions
+              ? undefined
+              : suggestions.map(({ name: label, prompt: text }) => ({ name: label, prompt: text })),
           instructionsRoomIds: instructions.map((r) => r.id),
           knowledgeRoomIds: knowledge.map((r) => r.id),
           rooms: [...instructions, ...knowledge],
@@ -410,9 +446,67 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     </StyledParam>
   );
 
+  const onSaveSuggestion = (suggestion: TAiProjectSuggestion) => {
+    setSuggestions((rows) =>
+      editedSuggestion === "new"
+        ? [...rows, toSuggestionRow(suggestion)]
+        : rows.map((row) => (row.key === editedSuggestion ? { ...row, ...suggestion } : row)),
+    );
+    setEditedSuggestion(null);
+  };
+
+  // The chips of the empty chat, as the rooms below list theirs: "Add
+  // suggestion" and a click on a chip open the centred dialog, the cross
+  // removes the chip, the limit disables the button.
+  const suggestionsBlock = (
+    <div className={styles.block}>
+      <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+        {t("Common:AIProjectSuggestions")}
+      </Text>
+      <div className={styles.addRow}>
+        <AddButton
+          label={t("Common:AIProjectAddSuggestion")}
+          onClick={() => setEditedSuggestion("new")}
+          isDisabled={isSaving || suggestions.length >= AI_PROJECT_MAX_SUGGESTIONS}
+          testId="ai-project-add-suggestion"
+        />
+      </div>
+      {suggestions.length > 0 ? (
+        <div className={styles.roomList}>
+          {suggestions.map((row) => (
+            <div className={styles.suggestionItem} key={row.key} title={row.prompt} data-testid="ai-project-suggestion">
+              <button
+                type="button"
+                className={styles.suggestionLabel}
+                onClick={() => setEditedSuggestion(row.key)}
+                disabled={isSaving}
+                data-testid="ai-project-edit-suggestion"
+              >
+                <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect truncate>
+                  {row.name}
+                </Text>
+              </button>
+              <IconButton
+                iconName={CrossReactSvgUrl}
+                size={12}
+                onClick={() => setSuggestions((rows) => rows.filter((r) => r.key !== row.key))}
+                isDisabled={isSaving}
+                dataTestId="ai-project-remove-suggestion"
+              />
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <Text className={styles.hint} fontSize="12px" lineHeight="16px" noSelect>
+        {t("Common:AIProjectSuggestionsHint", { limit: AI_PROJECT_MAX_SUGGESTIONS })}
+      </Text>
+    </div>
+  );
+
   const selected = selector === INSTRUCTIONS_ROOM_TYPE ? instructions : knowledge;
 
   return (
+    <>
     <ModalDialog
         visible
         displayType={ModalDialogType.aside}
@@ -422,7 +516,11 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
           e.preventDefault();
           void onSubmit();
         }}
-        onClose={store.closeProjectDialog}
+        // A swipe on the suggestion dialog's header also reaches this
+        // dialog's own swipe handler: the form stays while that one is open.
+        onClose={() => {
+          if (editedSuggestion === null) store.closeProjectDialog();
+        }}
         isCloseable={!isSaving}
         containerVisible={selector !== null}
         dataTestId="ai-project-dialog"
@@ -504,7 +602,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
             </div>
             <TagInput
               t={t}
-              title={`${t("Common:Tags")}:`}
+              title={t("Common:Tags")}
               tagHandler={tagHandler}
               setIsScrollLocked={() => {}}
               isDisabled={isSaving}
@@ -532,6 +630,26 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
             </div>
             {roomsBlock(t("Common:InstructionsRooms"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
             {roomsBlock(t("Common:AIProjectKnowledgeRooms"), t("Common:AIProjectKnowledgeHint"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}
+            {suggestionsBlock}
+            <div className={styles.block}>
+              <div>
+                <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+                  {t("Common:AIInstructions")}
+                </Text>
+                <Text className={styles.hint} fontSize="12px" lineHeight="16px" noSelect>
+                  {t("Common:InstructionsDescriptionAgent")}
+                </Text>
+              </div>
+              <Textarea
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                heightTextArea={144}
+                maxLength={AI_PROJECT_MAX_TEXT_LENGTH}
+                placeholder={t("Common:InstructionsDescriptionAgentExample")}
+                isDisabled={isSaving}
+                dataTestId="ai-project-instructions-textarea"
+              />
+            </div>
             {project?.createdBy ? (
               <div className={styles.owner}>
                 <ChangeRoomOwner
@@ -571,6 +689,15 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
           <Button label={t("Common:CancelButton")} size={ButtonSize.normal} scale onClick={store.closeProjectDialog} isDisabled={isSaving} />
         </ModalDialog.Footer>
     </ModalDialog>
+    {/* A sibling of the form, not inside it: Enter in its fields must not submit the project. */}
+    {editedSuggestion !== null ? (
+      <SuggestionDialog
+        suggestion={suggestions.find((row) => row.key === editedSuggestion) ?? null}
+        onSave={onSaveSuggestion}
+        onClose={() => setEditedSuggestion(null)}
+      />
+    ) : null}
+    </>
   );
 };
 

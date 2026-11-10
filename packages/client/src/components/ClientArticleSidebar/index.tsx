@@ -72,7 +72,7 @@ import type {
 } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
@@ -85,6 +85,8 @@ import {
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
+import CatalogSkillsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import CatalogKnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
@@ -216,6 +218,19 @@ const ClientArticleSidebar = ({
       const filter = RoomsFilter.getDefault(userId, searchArea);
       filter.searchArea = searchArea;
       return `${basePath}?${filter.toUrlParams(userId, false)}`;
+    },
+    [userId],
+  );
+
+  // The AI Workspace list narrowed to one of its room types: the section's
+  // Skills (Instructions rooms) and Knowledge (Knowledge rooms) entries
+  // are the same /ai-rooms list with the `type` filter preset.
+  const aiHubTypeUrl = React.useCallback(
+    (type: RoomsType) => {
+      const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
+      filter.searchArea = RoomSearchArea.AiHub;
+      filter.type = [String(type)];
+      return `/ai-rooms/filter?${filter.toUrlParams(userId, false)}`;
     },
     [userId],
   );
@@ -567,45 +582,33 @@ const ClientArticleSidebar = ({
     }
 
     // The AI sections close the apps, while the portal has AI switched on
-    // (the server only serves their roots then). "AI rooms" holds the
-    // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`)
-    // and, like Rooms and Forms, carries Recent / Favorites / Trash scoped to
-    // its room types; the server never archives them, so there is no Archive
-    // slot. The bare `/ai-rooms` is the Rooms app's SDK frame page: the
-    // section lives on the nested paths.
+    // (the server only serves their roots then). "AI Workspace" holds the
+    // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`).
+    // Its root lists the agents (AI projects; a project opens as its chat),
+    // the entries are the same list narrowed to the other room types -
+    // Skills (Instructions rooms), Knowledge (Knowledge rooms) - plus a
+    // Trash scoped to those room types; the server never archives them, so
+    // there is no Archive slot. The bare `/ai-rooms` is the
+    // Rooms app's SDK frame page: the section lives on the nested paths.
     if (aiHubFolder && aiServicesEnabled) {
       mainItems.push({
         id: "ai-rooms",
-        label: t("Common:AiRooms"),
+        label: t("Common:AiWorkspace"),
         icon: getCatalogIconUrlByType(FolderType.Rooms),
         ...nav(searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub)),
         ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),
         children: [
           {
-            id: "ai-rooms-recent",
-            label: t("Common:Recent"),
-            icon: getCatalogIconUrlByType(FolderType.Recent),
-            ...nav(
-              scopedUrl(
-                CategoryType.Recent,
-                "/ai-rooms/recent",
-                recentFolderId,
-                AI_HUB_SECTION_FOLDER_TYPES,
-              ),
-            ),
+            id: "ai-rooms-skills",
+            label: t("Common:Skills"),
+            icon: CatalogSkillsReactSvgUrl,
+            ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),
           },
           {
-            id: "ai-rooms-favorites",
-            label: t("Common:Favorites"),
-            icon: getCatalogIconUrlByType(FolderType.Favorites),
-            ...nav(
-              scopedUrl(
-                CategoryType.Favorite,
-                "/ai-rooms/favorites",
-                favoritesFolderId,
-                AI_HUB_SECTION_FOLDER_TYPES,
-              ),
-            ),
+            id: "ai-rooms-knowledge",
+            label: t("Common:AiWorkspaceKnowledge"),
+            icon: CatalogKnowledgeReactSvgUrl,
+            ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),
           },
           {
             id: "ai-rooms-trash",
@@ -646,6 +649,7 @@ const ClientArticleSidebar = ({
     folderUrl,
     scopedUrl,
     searchAreaUrl,
+    aiHubTypeUrl,
     treeFolders,
     isVisitor,
     canUseTemplates,

@@ -37,7 +37,7 @@
 
 import isEmpty from "lodash/isEmpty";
 
-import { RoomSearchArea } from "../../enums";
+import { RoomSearchArea, RoomsType } from "../../enums";
 import {
   getObjectByLocation,
   toUrlParams,
@@ -97,6 +97,8 @@ const SUBJECT_FILTER = "subjectFilter";
 const SUBJECT_ID = "subjectId";
 const TAGS = "tags";
 const TYPE = "type";
+/** What an AI Workspace address without a room type lists: the AI projects. */
+const AI_HUB_DEFAULT_TYPE = [String(RoomsType.AiProjectRoom)];
 const WITHOUT_TAGS = "withoutTags";
 const GROUP_ID = "groupId";
 const START_INDEX = "startIndex";
@@ -160,6 +162,9 @@ class RoomsFilter {
     );
 
     defaultFilter.searchArea = searchArea;
+    // The AI Workspace root is the list of agents (AI projects); its other
+    // room types are reached through the section's own entries.
+    if (searchArea === RoomSearchArea.AiHub) defaultFilter.type = AI_HUB_DEFAULT_TYPE;
 
     if (userId) {
       const storageKey =
@@ -243,7 +248,11 @@ class RoomsFilter {
     const pageCount = (urlPageCount && +urlPageCount) || defaultPageCount;
     const filterValue = (urlFilterValue as string) || defaultFilterValue;
     const provider = (urlProvider as string) || defaultProvider;
-    const type = urlType || defaultType;
+    const searchAreaFromUrl = (urlSearchArea as string) || defaultSearchArea;
+    const type =
+      urlType ||
+      defaultType ||
+      (searchAreaFromUrl === RoomSearchArea.AiHub ? AI_HUB_DEFAULT_TYPE : null);
     const subjectId = (urlSubjectId as string) || defaultSubjectId;
     const subjectFilter =
       urlSubjectFilter?.toString() || defaultSubjectFilter?.toString();
@@ -557,6 +566,16 @@ class RoomsFilter {
 
   hasMetadataFilter() {
     return Boolean(this.metadataTemplateId || this.metadataFilters?.length);
+  }
+
+  /**
+   * Whether the room type narrows the list as a filter. In AI Workspace the
+   * type picks the list itself (the agents, Skills, Knowledge) and is always
+   * set, so it never makes the list "filtered" there.
+   */
+  hasTypeFilter() {
+    if (this.searchArea === RoomSearchArea.AiHub) return false;
+    return Boolean(this.type);
   }
 
   clone() {

@@ -72,6 +72,7 @@ import {
   setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
 import {
   getSectionAddressCorrection,
   SECTION_DECIDED_STATE,
@@ -808,13 +809,18 @@ export function fetchRoomsImpl(
           // Spec: private-rooms/sidebar-section, "Section titles and path labels"
           if (self.categoryType === CategoryType.PrivateRooms)
             setDocumentTitle(i18n.t("Common:Private"));
+          // The AI root is titled by the client, as the tree and the section
+          // header title it; the server's folder title is not shown anywhere.
+          if (self.categoryType === CategoryType.AiHub)
+            setDocumentTitle(
+              getAiWorkspaceTitle(i18n.t, window.location.search),
+            );
 
           const isEmptyList = data.folders.length === 0;
           if (filter && isEmptyList) {
             const {
               subjectId,
               filterValue,
-              type,
               withSubfolders: withRoomsSubfolders,
               searchInContent: searchInContentRooms,
               tags,
@@ -825,7 +831,7 @@ export function fetchRoomsImpl(
               subjectId ||
               filter.subjectOwnerId ||
               filterValue ||
-              type ||
+              filter.hasTypeFilter() ||
               filter.provider ||
               withRoomsSubfolders ||
               searchInContentRooms ||

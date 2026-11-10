@@ -315,6 +315,225 @@ test.describe("Encrypted file UI in private room", () => {
     expect(await page.locator("#option_copy-external-link").count()).toBe(0);
     expect(await page.locator("#option_copy-shared-link").count()).toBe(0);
   });
+
+  test("Version badge of an encrypted file", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        initialFiles: [{ ...seedEncryptedFile, versionGroup: 3 }],
+      }),
+    );
+
+    const historyRequests: string[] = [];
+    page.on("request", (req) => {
+      if (/\/files\/file\/8800\/history/.test(req.url())) {
+        historyRequests.push(req.url());
+      }
+    });
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
+    if (await passphrasePrompt.isVisible()) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
+    const versionBadge = row.getByText("V.3", { exact: true });
+    await expect(versionBadge).toBeVisible({ timeout: 5000 });
+    await expect(row.getByTitle("Show version history")).toHaveCount(0);
+    await versionBadge.click();
+    await page.waitForTimeout(1000);
+
+    await expect(page.getByTestId("version_history_panel")).toHaveCount(0);
+    expect(historyRequests).toEqual([]);
+  });
+});
+
+test.describe("Media viewer of an encrypted file", () => {
+  const VIEWER_ROOM_ID = 9460;
+  const VIEWER_FILE_ID = 8860;
+  const ALICE_ID = "11111111-1111-1111-1111-111111111111";
+  const IMAGE_TITLE = "photo.png";
+  // A valid 1x1 PNG, so the decrypted preview renders and the toolbar shows.
+  const PNG_BYTES = new Uint8Array(
+    Buffer.from(
+      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+      "base64",
+    ),
+  );
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  /** Unlocks the identity if a passphrase prompt is on screen. */
+  const unlockIfPrompted = async (page: Page, passphrase: string) => {
+    const prompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await prompt.waitFor({ state: "visible", timeout: 5000 }).catch(() => {});
+    if (!(await prompt.isVisible())) return;
+    await prompt
+      .locator('input[name="passphrase"], #passphrase input')
+      .first()
+      .fill(passphrase);
+    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await expect(prompt).toBeHidden({ timeout: 10000 });
+  };
+
+  /**
+   * Opens a private room holding one encrypted PNG wrapped for the test user,
+   * unlocks the identity and opens the image in the media viewer.
+   */
+  const openEncryptedImage = async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }: {
+    page: Page;
+    mockRequest: WorkerFixture;
+    baseUrl: string;
+  }) => {
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const userPublicKey = keysHandle.getKeys()[0].publicKey;
+    const alice = await generateIdentityKeyPair();
+    const alicePublicKey = arrayBufferToBase64(
+      alice.publicKey.buffer as ArrayBuffer,
+    );
+
+    const { encryptedBlob, dek } = await encryptFile(PNG_BYTES, {
+      fileName: IMAGE_TITLE,
+    });
+    const fileKeys = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE_ID,
+      recipients: [
+        { userId: ALICE_ID, publicKey: alicePublicKey },
+        { userId: TEST_USER_ID, publicKey: userPublicKey },
+      ],
+      fileId: VIEWER_FILE_ID,
+    });
+
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: VIEWER_ROOM_ID,
+        ownerId: TEST_USER_ID,
+        initialFiles: [
+          {
+            id: VIEWER_FILE_ID,
+            title: IMAGE_TITLE,
+            serverTitle: "obfuscated.png",
+            size: PNG_BYTES.byteLength,
+            encrypted: true,
+            fileKeys,
+            bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
+          },
+        ],
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+    );
+    accessHandle.current!.setRoomKeys(VIEWER_ROOM_ID, [
+      { id: "alice-1", userId: ALICE_ID, publicKey: alicePublicKey, privateKeyEnc: "" },
+      { id: "user-1", userId: TEST_USER_ID, publicKey: userPublicKey, privateKeyEnc: "" },
+    ]);
+
+    await page.goto(
+      `${baseUrl}/private/${VIEWER_ROOM_ID}/filter?folder=${VIEWER_ROOM_ID}`,
+    );
+    const table = page.getByTestId("table-body");
+    await expect(table).toBeVisible({ timeout: 15000 });
+    await unlockIfPrompted(page, passphrase);
+
+    await table
+      .getByTestId("files-cell-name-0")
+      .locator(".item-file-name")
+      .click();
+    await expect(page).toHaveURL(/\/media\/view\//);
+    await unlockIfPrompted(page, passphrase);
+    // The decrypted preview is a blob URL; the ciphertext URL is never shown.
+    await expect(page.getByTestId("image-content")).toHaveAttribute(
+      "src",
+      /^blob:/,
+      { timeout: 15000 },
+    );
+    await page.mouse.move(200, 200);
+    await expect(page.getByTestId("viewer-toolbar")).toBeVisible({
+      timeout: 5000,
+    });
+  };
+
+  const expectPlaintextDownload = async (
+    download: import("@playwright/test").Download,
+  ) => {
+    expect(download.suggestedFilename()).toBe(IMAGE_TITLE);
+    const fs = await import("node:fs/promises");
+    const saved = await fs.readFile((await download.path()) as string);
+    expect(new Uint8Array(saved)).toEqual(PNG_BYTES);
+  };
+
+  test("Download from the media viewer", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await openEncryptedImage({ page, mockRequest, baseUrl });
+
+    const fromButton = page.waitForEvent("download", { timeout: 20000 });
+    await page.getByTestId("toolbar-item-download").click();
+    await expectPlaintextDownload(await fromButton);
+
+    const fromHotkey = page.waitForEvent("download", { timeout: 20000 });
+    await page.keyboard.press("Control+s");
+    await expectPlaintextDownload(await fromHotkey);
+  });
+
+  test("Media viewer menu of an encrypted file", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await openEncryptedImage({ page, mockRequest, baseUrl });
+
+    await page.getByTestId("toolbar-item-context-menu").click();
+    // An image's menu leaves Download to the toolbar; Delete shows it is open.
+    await expect(
+      page.getByRole("option", { name: "Delete", exact: true }),
+    ).toBeVisible({ timeout: 5000 });
+    await expect(
+      page.getByRole("option", { name: "Rename", exact: true }),
+    ).toHaveCount(0);
+  });
 });
 
 test.describe("Encrypted file moved out of a private room", () => {

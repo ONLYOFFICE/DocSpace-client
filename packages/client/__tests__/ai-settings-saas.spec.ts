@@ -55,6 +55,7 @@ test.use({ locale: "en-US", timezoneId: "UTC" });
 const AI_MODELS_ROUTE = "/portal-settings/ai-settings/ai-models";
 const WEB_SEARCH_ROUTE = "/portal-settings/ai-settings/web-search";
 const KNOWLEDGE_ROUTE = "/portal-settings/ai-settings/knowledge";
+const DOCUMENT_AGENT_ROUTE = "/portal-settings/ai-settings/document-agent";
 const AI_PRICES_PATH = "portal/payment/ai-prices";
 const RESTRICTIONS_PATH = "portal/payment/ai-model/restrictions";
 const FIRST_RENDER = { timeout: 15000 };
@@ -510,6 +511,64 @@ test.describe("AI settings on SaaS", () => {
       "ai-settings",
       "knowledge-base.png",
     ]);
+  });
+
+  test("the Document Agent tab shows its defaults until the portal saves some", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${DOCUMENT_AGENT_ROUTE}`);
+
+    await expect(
+      page.getByText("Enable Document Agent", { exact: true }),
+    ).toBeVisible(FIRST_RENDER);
+    await expect(
+      page.getByTestId("document-agent-enabled-toggle"),
+    ).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByText("Model and reasoning")).toBeVisible();
+    await expect(page.getByText("Task limits")).toBeVisible();
+    await expect(
+      page.getByTestId("document-agent-maxToolCalls-input"),
+    ).toHaveValue("150");
+    await expect(
+      page.getByTestId("document-agent-maxFileMb-input"),
+    ).toHaveValue("32");
+    await expect(
+      page.getByTestId("document-agent-tasklog-toggle"),
+    ).toHaveAttribute("aria-checked", "false");
+    // Nothing changed yet: nothing to save.
+    await expect(page.getByTestId("document-agent-save-button")).toBeDisabled();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "ai-settings",
+      "document-agent.png",
+    ]);
+  });
+
+  test("switching task logs on offers where to save them", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${DOCUMENT_AGENT_ROUTE}`);
+    await expect(
+      page.getByText("Enable Document Agent", { exact: true }),
+    ).toBeVisible(FIRST_RENDER);
+
+    await page
+      .getByTestId("document-agent-tasklog-toggle")
+      .locator("label")
+      .click();
+
+    await expect(page.getByText("Save logs to")).toBeVisible();
+    await expect(
+      page.getByText("Next to the task's results", { exact: true }),
+    ).toBeVisible();
+    await expect(page.getByTestId("document-agent-save-button")).toBeEnabled();
+    await page.getByTestId("document-agent-tasklog-folder-custom").click();
+    // A folder has to be picked before the choice can be saved.
+    await expect(page.getByTestId("files-selector-input")).toBeVisible();
+    await expect(page.getByTestId("document-agent-save-button")).toBeDisabled();
   });
 
   test("a failed price request shows the reload screen", async ({

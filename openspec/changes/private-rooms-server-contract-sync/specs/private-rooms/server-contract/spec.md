@@ -26,7 +26,44 @@ The server SHALL use the E2E rooms app of the portal only to list the private ro
 - **WHEN** the E2E rooms app is off and a member with keys lists rooms with the private rooms area, writes file keys or creates a private room
 - **THEN** the server handles the request as while the app is on
 
+### Requirement: Guests cannot hold encryption keys
+The server SHALL refuse with 403 a guest who creates, replaces or deletes an encryption key envelope, and SHALL store nothing; a guest therefore never holds a key and cannot become a member of a private room.
+
+#### Scenario: Guest creates a key
+- **WHEN** a guest posts an encryption key envelope
+- **THEN** the server answers 403 and stores nothing
+
+#### Scenario: Guest deletes a key
+- **WHEN** a guest deletes an envelope by id
+- **THEN** the server answers 403
+
+### Requirement: Oversized key set is refused
+The server SHALL refuse with 400, and store nothing, a create or replace request whose resulting key set does not fit the stored sign-in profile once encrypted (65,535 bytes), so a set is never truncated in storage. The boundary applies to the encrypted profile, so a client cannot compute it exactly from the plain set.
+
+#### Scenario: Key set too large
+- **WHEN** a user posts an envelope that makes their key set too large to store
+- **THEN** the server answers 400 and the keys they already had stay as they were
+
 ## MODIFIED Requirements
+
+### Requirement: File public keys
+The server SHALL return, for one file in a private room, active or archived, the keys of every user holding a share record of their own (not a group or a link) on the file or on any folder above it up to the room, plus the file's creator even without a record; it SHALL skip users without stored keys or a public key, keep the private half only on the caller's entries, and answer 415 outside a private room. Existing access entries are not consulted.
+
+#### Scenario: Keys of a file
+- **WHEN** a reader of the file requests its public keys
+- **THEN** every user who reaches the file through a user share and has stored keys is returned, whether or not an access entry exists for them
+
+#### Scenario: File in an archived private room
+- **WHEN** a reader requests the public keys of a file in an archived private room
+- **THEN** the keys are returned as for a file in an active private room, and the server MUST NOT answer 415
+
+#### Scenario: Room owner who did not create the file
+- **WHEN** the public keys of a file that another member created are requested, and the room owner holds no share record of their own
+- **THEN** the room owner's keys are not in the answer
+
+#### Scenario: Creator who left the room
+- **WHEN** the public keys of a file are requested after its creator left the room
+- **THEN** the creator's keys are still in the answer
 
 ### Requirement: Encrypted flag on file update
 The server SHALL accept an encrypted flag on the file-content update request, require edit rights, and store the uploaded bytes as a new version carrying that flag. An update without the flag of an encrypted file, or of a file in a private room, SHALL be refused with 403 and store nothing, so encrypted content never becomes an open file.

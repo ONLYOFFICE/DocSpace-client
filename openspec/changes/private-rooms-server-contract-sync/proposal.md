@@ -33,6 +33,23 @@ the private section on the server (its root, the rooms list privacy filter, the
 room groups and the new-items counts) is written by
 `private-rooms-server-section`.
 
+The client side follows the same server in places too (added 2026-11-10):
+
+- `GET files/file/{id}/publickeys` returns the keys of the users holding a
+  share record of their own on the file or a folder above it up to the room,
+  plus the file's creator; the main spec says "plus the owner", and the E2E
+  mock returns every member. The room owner is not returned unless they
+  created the file.
+- The client types make `privateKeyEnc` required on every key, while the
+  server leaves it out of another member's key; make `userKeys` required,
+  while the server leaves it out for a user without keys; and type the key
+  deletion as returning a key list, while the server answers 204 without a
+  body.
+- The E2E mocks answer "You don't have enough permission ..." where the
+  server answers 403 "Access denied", and the key mock refuses neither a guest
+  (403) nor a key set too large to store (400). Neither rule is in the main
+  spec.
+
 ## What Changes
 
 - `server-contract`: the file update, room creation and copy refusal
@@ -41,6 +58,13 @@ room groups and the new-items counts) is written by
   history; two requirements are added, "File keys cannot be written in an
   archived private room" and "The E2E rooms app gates only the private section
   listing".
+- `server-contract` (added 2026-11-10): "File public keys" names the file's
+  creator instead of the owner; two requirements are added, "Guests cannot
+  hold encryption keys" and "Oversized key set is refused".
+- Client types: a separate type for another member's key with an optional
+  private half, an optional `userKeys`, and a key deletion without a body.
+- E2E mocks and their contract tests: the 403 texts, the publickeys set, the
+  guest and the size refusals of the key mock.
 - `private-rooms-server-hardening`, which modifies two of these requirements
   and removes the third, is aligned so that its archive does not undo them.
 
@@ -56,12 +80,9 @@ None.
 
 ## Impact
 
-- Specs only; no application code.
-- Other changes: `private-rooms-server-hardening` (the creation and copy
-  blocks, the header of its removed requirement).
-- Mocks and their contract tests are not touched here: the contract test that
-  still expects "You don't have enough permission to move the file" and the
-  other mock and type corrections are planned as a later update of this change.
+- Specs, client types (`packages/shared/api/privacy`, `packages/shared/api/files`), the E2E mocks under `packages/shared/__mocks__/handlers` and their contract tests. No application behaviour changes.
+- Other changes: `private-rooms-server-hardening` (the creation, copy and
+  file public keys blocks, the header of its removed requirement).
 - Server (`../server`): no work. Every statement comes from its source at
   `a7d94e4b81` (design.md).
 

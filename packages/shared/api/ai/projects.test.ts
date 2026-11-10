@@ -25,6 +25,7 @@ import {
   aiProjectToRoom,
   createAiProject,
   getAiProjectKnowledgeFiles,
+  getAiProjectKnowledgeFilesCount,
   getAiProjects,
   getAiProject,
   getAiProjectSkills,
@@ -552,5 +553,14 @@ describe("the calls", () => {
       vectorizationStatus: 2,
       security: { Vectorization: false },
     });
+  });
+
+  it("counts a Knowledge room's files from the total of a one-row read", async () => {
+    route({
+      "GET /files/9?filterType=1&count=1": { total: 42, files: [{ id: 1, title: "a.pdf" }] },
+      "GET /files/10?filterType=1&count=1": { files: [] },
+    });
+    expect(await getAiProjectKnowledgeFilesCount(9)).toBe(42);
+    expect(await getAiProjectKnowledgeFilesCount(10)).toBe(0);
   });
 });

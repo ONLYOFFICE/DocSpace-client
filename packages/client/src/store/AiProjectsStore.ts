@@ -42,6 +42,7 @@ import {
   createAiProject,
   getAiProject,
   getAiProjectKnowledgeFiles,
+  getAiProjectKnowledgeFilesCount,
   getAiProjectSkills,
   refreshAiProjectSettings,
   toAiProject,
@@ -117,6 +118,12 @@ class AiProjectsStore {
   knowledge: Record<number, TAiProjectKnowledgeFile[]> = {};
 
   /**
+   * How many files each linked Knowledge room holds, by room id: what the
+   * Knowledge card's title counts for a room whose files were not read.
+   */
+  knowledgeCounts: Record<number, number> = {};
+
+  /**
    * A sources read in flight (`*Pending`) and one in flight long enough to
    * show (`*Loading`): the skeleton appears after `SHOW_LOADER_TIMER` and
    * stays at least `MIN_LOADER_TIMER` (`createLoader`), so a fast answer
@@ -190,6 +197,7 @@ class AiProjectsStore {
     this.activeProject = project;
     this.skills = [];
     this.knowledge = {};
+    this.knowledgeCounts = {};
     let opened = project;
     if (project.aiProject.partial) {
       try {
@@ -224,6 +232,7 @@ class AiProjectsStore {
     this.activeProject = null;
     this.skills = [];
     this.knowledge = {};
+    this.knowledgeCounts = {};
     this.aiPresetsStore.setActivePreset(null);
   };
 
@@ -259,7 +268,7 @@ class AiProjectsStore {
    * Follows an edit of the open project made elsewhere (the server announces
    * it as an update of the project room): the model and the linked rooms are
    * read again and, when they changed, reach the project and its chat. A
-   * Knowledge room no longer linked drops its files.
+   * Knowledge room no longer linked drops its files and their count.
    */
   refreshActiveSettings = async () => {
     const project = this.activeProject;
@@ -274,6 +283,10 @@ class AiProjectsStore {
           .map(Number)
           .filter((id) => !linked.has(id))
           .forEach((id) => delete this.knowledge[id]);
+        Object.keys(this.knowledgeCounts)
+          .map(Number)
+          .filter((id) => !linked.has(id))
+          .forEach((id) => delete this.knowledgeCounts[id]);
       });
       this.syncPreset(updated);
     } catch {
@@ -316,6 +329,27 @@ class AiProjectsStore {
       runInAction(() => (this.knowledgePending[roomId] = false));
       endLoader(() => runInAction(() => (this.knowledgeLoading[roomId] = false)));
     }
+  };
+
+  /**
+   * Counts the files of the project's linked Knowledge rooms for the
+   * Knowledge card's title, without reading the files themselves. Silent: a
+   * room whose count cannot be read stays uncounted, and the title shows no
+   * number rather than a wrong one.
+   */
+  fetchKnowledgeCounts = async (projectId: number, roomIds: number[]) => {
+    await Promise.all(
+      roomIds.map(async (roomId) => {
+        try {
+          const count = await getAiProjectKnowledgeFilesCount(roomId);
+          runInAction(() => {
+            if (this.activeProject?.id === projectId) this.knowledgeCounts[roomId] = count;
+          });
+        } catch {
+          // Left uncounted.
+        }
+      }),
+    );
   };
 
   /**

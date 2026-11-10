@@ -6,6 +6,7 @@ const api = vi.hoisted(() => ({
   createAiProject: vi.fn(),
   getAiProject: vi.fn(),
   getAiProjectKnowledgeFiles: vi.fn(),
+  getAiProjectKnowledgeFilesCount: vi.fn(),
   getAiProjectSkills: vi.fn(),
   refreshAiProjectSettings: vi.fn(),
   updateAiProject: vi.fn(),
@@ -195,6 +196,27 @@ describe("AiProjectsStore", () => {
       expect(store.knowledge).toEqual({ 9: [{ id: 1, title: "a.docx" }] });
       expect(store.skillsPending).toBe(false);
       expect(store.knowledgePending[9]).toBe(false);
+    });
+
+    it("counts the Knowledge rooms' files for the open project, leaving a failed room uncounted", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      api.getAiProjectKnowledgeFilesCount.mockImplementation(async (roomId: number) => {
+        if (roomId === 31) throw new Error("gone");
+        return roomId === 30 ? 7 : 0;
+      });
+
+      await store.fetchKnowledgeCounts(1, [30, 31, 32]);
+
+      expect(store.knowledgeCounts).toEqual({ 30: 7, 32: 0 });
+      expect(toastr.error).not.toHaveBeenCalled();
+
+      // A count that lands after another project was opened is dropped, and
+      // opening resets what the previous project counted.
+      await store.openProject(project(2));
+      expect(store.knowledgeCounts).toEqual({});
+      await store.fetchKnowledgeCounts(1, [30]);
+      expect(store.knowledgeCounts).toEqual({});
     });
 
     it("re-reads the open project and re-syncs the chat", async () => {

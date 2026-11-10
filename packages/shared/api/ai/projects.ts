@@ -946,3 +946,16 @@ export const getAiProjectKnowledgeFiles = async (roomId: number): Promise<TAiPro
     };
   });
 };
+
+/**
+ * How many files a linked Knowledge room holds (`GET files/{roomId}`, files
+ * only: one row is asked for, the answer's `total` is what is read), for the
+ * number in the Knowledge card's title before the room is expanded.
+ */
+export const getAiProjectKnowledgeFilesCount = async (roomId: number): Promise<number> => {
+  const page = (await request({
+    method: "GET",
+    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: 1 })}`,
+  })) as { total?: number };
+  return page.total ?? 0;
+};

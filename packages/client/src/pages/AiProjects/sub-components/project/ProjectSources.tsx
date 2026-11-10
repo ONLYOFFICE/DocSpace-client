@@ -91,6 +91,8 @@ import styles from "./ProjectSources.module.scss";
 
 type SectionProps = {
   title: string;
+  /** How many files the section's rooms hold together, at the end of the title's row; none while unknown. */
+  count?: number;
   /** Without it the section has no menu. */
   menu?: ContextMenuModel[];
   menuTitle: string;
@@ -102,7 +104,7 @@ type SectionProps = {
 };
 
 /** One source of the project, as the mockup draws it: a bordered card with its title, one menu and the rooms below. */
-const Section = ({ title, menu, menuTitle, children, note, testId, headless = false }: SectionProps) => {
+const Section = ({ title, count, menu, menuTitle, children, note, testId, headless = false }: SectionProps) => {
   const menuButton = menu ? (
     <ContextMenuButton
       className={headless ? styles.sectionMenuFloating : styles.sectionMenu}
@@ -122,6 +124,18 @@ const Section = ({ title, menu, menuTitle, children, note, testId, headless = fa
           <Text fontSize="13px" lineHeight="20px" fontWeight={700} truncate noSelect>
             {title}
           </Text>
+          {count === undefined ? null : (
+            <Text
+              className={styles.sectionCount}
+              fontSize="13px"
+              lineHeight="20px"
+              fontWeight={600}
+              noSelect
+              dataTestId={`${testId}-count`}
+            >
+              {count}
+            </Text>
+          )}
           {menuButton}
         </div>
       )}
@@ -355,6 +369,33 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const instructionsRooms = project.aiProject.instructionsRooms.filter((room) => room.available);
   const knowledgeRooms = project.aiProject.knowledgeRooms.filter((room) => room.available);
 
+  // The Skills and Knowledge titles say how many files are connected, so
+  // both are read once the rooms are known and again when they change: the
+  // skills of every linked room come in one read, a Knowledge room answers
+  // its number of files alone.
+  const instructionsIds = instructionsRooms.map((room) => room.id).join();
+  const knowledgeIds = knowledgeRooms.map((room) => room.id).join();
+  React.useEffect(() => {
+    if (instructionsIds) void store.fetchSkills(project.id);
+  }, [store, project.id, instructionsIds]);
+  React.useEffect(() => {
+    if (knowledgeIds) void store.fetchKnowledgeCounts(project.id, knowledgeIds.split(",").map(Number));
+  }, [store, project.id, knowledgeIds]);
+
+  // No number until the skills are read; a room the read left out adds none.
+  const skillsRooms = instructionsRooms.flatMap((room) => store.skills.find((item) => item.id === room.id) ?? []);
+  const skillsCount =
+    skillsRooms.length > 0 ? skillsRooms.reduce((sum, room) => sum + room.skills.length, 0) : undefined;
+  // A room's files, once it was expanded, are counted as read; before that
+  // its own count. One room still uncounted and the title shows no number.
+  const knowledgeRoomCounts = knowledgeRooms.map(
+    (room): number | undefined => store.knowledge[room.id]?.length ?? store.knowledgeCounts[room.id],
+  );
+  const knowledgeCount =
+    knowledgeRoomCounts.length > 0 && knowledgeRoomCounts.every((count): count is number => count !== undefined)
+      ? knowledgeRoomCounts.reduce((sum, count) => sum + count, 0)
+      : undefined;
+
   // The rooms of a kind are picked as in the project form: the linked ones
   // come ticked, and what is submitted replaces them. A room the caller can
   // no longer read stays among them, so picking does not unlink it.
@@ -438,6 +479,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (
     <Section
       title={t("Common:Skills")}
+      count={skillsCount}
       menuTitle={t("Common:Skills")}
       testId="ai-project-instructions"
       headless={compact}
@@ -484,6 +526,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const knowledgeSection = knowledgeRooms.length === 0 && !canAddRooms ? null : (
     <Section
       title={t("Common:AiWorkspaceKnowledge")}
+      count={knowledgeCount}
       menuTitle={t("Common:AiWorkspaceKnowledge")}
       testId="ai-project-knowledge"
       headless={compact}

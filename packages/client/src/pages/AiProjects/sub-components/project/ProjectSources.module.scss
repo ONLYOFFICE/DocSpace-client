@@ -181,6 +181,15 @@
   }
 }
 
+// How many files a card's rooms hold together, at the end of its title's
+// row (before the menu, when the card has one): the title gives way, the
+// number stays whole.
+.sectionCount {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  color: var(--text-secondary);
+}
+
 .sectionMenu {
   flex: 0 0 auto;
 }

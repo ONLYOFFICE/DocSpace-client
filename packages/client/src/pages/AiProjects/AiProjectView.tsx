@@ -258,6 +258,18 @@ const AiProjectView = ({
     };
   }, [inRoom, roomId, setInRoom, userId, navigate, t]);
 
+  // The project's chat fills the section body, and the chat reads that from
+  // its fullscreen flag: only then the history opens as a column beside the
+  // conversation, otherwise it replaces it. Opening the project sets the
+  // flag, but whatever closes the side chat panel drops it with the project
+  // still on screen - the info panel opening (`usePanelExclusivity`), a
+  // sidebar click - and nothing put it back. The view keeps it set.
+  const isProjectOnScreen = inRoom && isAiChatAvailable && store.activeProject?.id === roomId;
+  const isChatFullscreen = aiChatStore.effectiveFullscreen;
+  React.useEffect(() => {
+    if (isProjectOnScreen && !isChatFullscreen) aiChatStore.setFullscreen(true);
+  }, [aiChatStore, isProjectOnScreen, isChatFullscreen]);
+
   // The sources column, expanded or collapsed to its rail, replaces the
   // composer's chips while the project is on screen.
   React.useEffect(() => {

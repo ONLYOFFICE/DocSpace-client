@@ -132,8 +132,8 @@ class AISettingsStore {
     this.documentAgentInitied = value;
   };
 
-  // A portal that has never saved the settings (or an AI service without the
-  // endpoint yet) shows the defaults.
+  // The AI service answers its own defaults for a portal that has never
+  // saved the settings; a read that fails leaves the ones above.
   fetchDocumentAgentSettings = async () => {
     try {
       const res = await getDocumentAgentSettings();

@@ -64,8 +64,8 @@ const wrapped = (settings: DocumentAgentSettingsMock) => ({
 });
 
 /**
- * GET: the saved settings, or 404 when the portal has none yet (what the
- * endpoint answers until it exists; the tab then shows its defaults).
+ * GET: the saved settings, or 404 when none are passed (a chat service
+ * without the route; the tab then shows its defaults).
  */
 export const aiDocumentAgentSettingsGetHandler = (
   port: string,

@@ -181,9 +181,11 @@ export const getKnowledgeConfig = async () => {
   }
 };
 
-// The document agent's tenant settings. The endpoint is the planned
-// `/ai/document-agent/settings` of the AI service; until it lands the GET
-// answers 404, which the caller treats as "defaults" (no toast).
+// The document agent's tenant settings, kept by the AI service and reached
+// through the chat service's `/ai/document-agent/settings`. A profile or a
+// log folder that no longer exists comes back as null. A 403 (AI switched
+// off, a guest) and a 404 (a chat service without the route) leave the
+// caller on its defaults, with no toast.
 export const getDocumentAgentSettings = async () => {
   try {
     const res = await request({

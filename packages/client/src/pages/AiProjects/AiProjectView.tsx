@@ -138,35 +138,44 @@ const AiProjectView = ({
   // not taken for a project that dropped under it.
   const isLeavingRef = React.useRef(false);
 
+  // The project's settings leave the chat with it: the model goes back to
+  // the default and its Instructions and Knowledge rooms are disconnected,
+  // and the panel closes, which drops the fullscreen flag the view kept set,
+  // so a chat opened elsewhere starts clean and as a side panel.
+  const releaseChat = React.useCallback(() => {
+    aiChatStore.applyPreset({ profileId: null, profileName: null, contextRooms: [], knowledgeRooms: [] });
+    aiChatStore.close();
+  }, [aiChatStore]);
+
   // Leaving the room (Back, another section, a deleted room) drops the open
-  // project with it, and takes its settings out of the chat: the model goes
-  // back to the default and its Instructions and Knowledge rooms are
-  // disconnected, so a chat opened elsewhere starts clean.
+  // project with it.
   React.useEffect(() => {
     isLeavingRef.current = false;
     return () => {
       isLeavingRef.current = true;
       if (store.activeProject) {
         store.closeProject();
-        aiChatStore.applyPreset({ profileId: null, profileName: null, contextRooms: [], knowledgeRooms: [] });
-        aiChatStore.close();
+        releaseChat();
       }
     };
-  }, [store, aiChatStore]);
+  }, [store, releaseChat]);
 
   // The project dropped under the open chat (left, or handed over without
-  // staying in it): the section goes back to the list.
+  // staying in it): the section goes back to the list. The project is
+  // already closed by then, so the unmount above has nothing to close and
+  // the chat is released here.
   React.useEffect(
     () =>
       reaction(
         () => store.activeProject,
         (project, previous) => {
           if (project === null && previous !== null && !isLeavingRef.current) {
+            releaseChat();
             navigate(getCategoryUrl(CategoryType.AiHub));
           }
         },
       ),
-    [store, navigate],
+    [store, navigate, releaseChat],
   );
 
   // An edit of the open project (here or by someone else) reaches its chat in

@@ -50,6 +50,8 @@ import {
   type TAiModelPrice,
   type TCachePriceBreakdown,
 } from "../CachePriceTooltip";
+import { isByokModel } from "../utils";
+import ModelsDescription from "../ModelsDescription";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
@@ -65,6 +67,7 @@ type TModelRow = {
   alias: string;
   image: string;
   link?: string;
+  byok: boolean;
   prices: {
     key: string;
     value: string;
@@ -118,6 +121,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     alias: m.alias,
     image: m.image,
     link: m.link,
+    byok: isByokModel(m),
     prices: [
       { key: "input", value: formatAiModelPrice(m.price?.prompt) },
       { key: "output", value: formatAiModelPrice(m.price?.completion) },
@@ -134,6 +138,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     alias: m.alias,
     image: m.image,
     link: m.link,
+    byok: isByokModel(m),
     prices: [
       { key: "imageInput", value: formatAiModelPrice(m.price?.prompt) },
       { key: "imageOutput", value: formatAiModelPrice(m.price?.image) },
@@ -187,6 +192,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
               onToggle={onToggle}
               image={row.image}
               link={row.link}
+              byok={row.byok}
             />
           ))}
         </TableBody>
@@ -196,9 +202,10 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 
   return (
     <div className={styles.tableWrapper}>
-      <Text className={styles.introText}>
-        {t("Common:AIModelsDescription")}
-      </Text>
+      <ModelsDescription
+        className={styles.introText}
+        hasByok={[...chatRows, ...imageRows].some((row) => row.byok)}
+      />
 
       {chatRows.length ? (
         <React.Fragment>

@@ -96,7 +96,7 @@ const ITEMS = [
     id: "billing-invoice-history",
     path: "/billing/invoice-history",
     icon: InvoiceHistoryReactSvgUrl,
-    translationKey: "Common:InvoiceHistory" as const,
+    translationKey: "Common:Invoices" as const,
     ownerOrPayerOnly: true,
   },
   {

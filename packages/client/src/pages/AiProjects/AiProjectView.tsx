@@ -306,11 +306,12 @@ const AiProjectView = ({
         <ProjectSources store={store} project={project} compact />
       ) : null}
       <div className={classnames(styles.panelBody, styles.projectBody)}>
-        {/* The history and the info panel each take the sources' place. */}
-        {isDesktop && !isHistoryOpen && !infoPanelVisible ? <ProjectSources store={store} project={project} /> : null}
         <div className={styles.panelChat}>
           <AiChatPanelBody />
         </div>
+        {/* The sources stand after the chat. The history opens before it and
+            the info panel after it: while either is open the sources hide. */}
+        {isDesktop && !isHistoryOpen && !infoPanelVisible ? <ProjectSources store={store} project={project} /> : null}
       </div>
     </div>
   );

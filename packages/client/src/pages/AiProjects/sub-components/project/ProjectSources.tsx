@@ -43,6 +43,11 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Tabs, TabsTypes, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import {
   ContextMenuButton,
@@ -55,8 +60,19 @@ import { getFolderInfo, getFolderPath } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TAiProject, TAiProjectKnowledgeFile, TAiProjectLogo } from "@docspace/shared/api/ai/projects";
-import { VectorizationStatus } from "@docspace/shared/enums";
+import {
+  AI_PROJECT_MAX_ROOMS_PER_TYPE,
+  INSTRUCTIONS_ROOM_TYPE,
+  KNOWLEDGE_ROOM_TYPE,
+} from "@docspace/shared/api/ai/projects";
+import type {
+  TAiProject,
+  TAiProjectCover,
+  TAiProjectKnowledgeFile,
+  TAiProjectLogo,
+  TAiProjectSource,
+} from "@docspace/shared/api/ai/projects";
+import { RoomSearchArea, VectorizationStatus } from "@docspace/shared/enums";
 import { FailedVectorizationBadge } from "@docspace/shared/components/failed-vectorization-badge";
 
 
@@ -242,6 +258,9 @@ type ProjectSourcesProps = {
 
 type SectionKey = "instructions" | "knowledge" | "context";
 
+/** The kind of rooms the selector opened from a card's add button lists. */
+type RoomsKind = "instructions" | "knowledge";
+
 const COLLAPSED_KEY = "aiProjectSourcesCollapsed";
 
 // The column stays collapsed or expanded as the user left it, in this
@@ -282,6 +301,10 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       writeCollapsed(!prev);
       return !prev;
     });
+  // The kind whose rooms are being picked from its card; null while closed.
+  const [roomsPicker, setRoomsPicker] = React.useState<RoomsKind | null>(null);
+  const settingsStore = useStore("settingsStore");
+  const vectorizationEnabled = settingsStore.aiConfig?.vectorizationEnabled !== false;
   const filesSettingsStore = useStore("filesSettingsStore");
   const filesActionsStore = useStore("filesActionsStore");
   // Rooms start collapsed; each opens to its skills or its files on demand.
@@ -329,8 +352,59 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const instructionsRooms = project.aiProject.instructionsRooms.filter((room) => room.available);
   const knowledgeRooms = project.aiProject.knowledgeRooms.filter((room) => room.available);
 
-  // What the collapsed column's tab counts: the linked rooms and the folder.
-  const sourcesCount = instructionsRooms.length + knowledgeRooms.length + (folderContext ? 1 : 0);
+  // The rooms of a kind are picked as in the project form: the linked ones
+  // come ticked, and what is submitted replaces them. A room the caller can
+  // no longer read stays among them, so picking does not unlink it.
+  const pickedRooms =
+    roomsPicker === "instructions" ? project.aiProject.instructionsRooms : project.aiProject.knowledgeRooms;
+
+  const onRoomsLimitReached = () =>
+    toastr.warning(
+      roomsPicker === "instructions"
+        ? t("Common:AIProjectInstructionsRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })
+        : t("Common:AIProjectKnowledgeRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),
+    );
+
+  const onRoomsSelected = (items: TSelectorItem[]) => {
+    if (!roomsPicker) return;
+    const roomType = roomsPicker === "instructions" ? INSTRUCTIONS_ROOM_TYPE : KNOWLEDGE_ROOM_TYPE;
+    // The logo the selector read with the room, so the cards show the new
+    // rooms without reading them back.
+    const rooms: TAiProjectSource[] = items.map((item) => {
+      const linked = pickedRooms.find((room) => room.id === Number(item.id));
+      if (linked) return linked;
+      const room = item as { color?: string; cover?: TAiProjectCover; icon?: string; iconOriginal?: string };
+      return {
+        id: Number(item.id),
+        title: item.label,
+        roomType,
+        available: true,
+        archived: false,
+        logo: {
+          color: room.color ? `#${room.color.replace("#", "")}` : "",
+          cover: room.cover ?? null,
+          medium: typeof room.icon === "string" ? room.icon : undefined,
+          original: room.iconOriginal,
+        },
+      };
+    });
+    void store.setActiveRooms(roomsPicker, rooms);
+    setRoomsPicker(null);
+  };
+
+  // A manager adds rooms of a kind from its card, as the folder is added
+  // from the Folder card.
+  const addRooms = (kind: RoomsKind, label: string) =>
+    canEdit ? (
+      <AddButton
+        className={styles.addRoom}
+        label={label}
+        titleText={label}
+        onClick={() => setRoomsPicker(kind)}
+        noSelect
+        testId={`ai-project-${kind}-add`}
+      />
+    ) : null;
 
   // Only a chosen folder has a menu; an empty Context is its add button.
   const contextMenu: ContextMenuModel[] | undefined = folderContext
@@ -340,12 +414,12 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       ]
     : undefined;
 
-  // A kind with no available linked room has no card and no tab: the rooms
-  // are linked in Edit project, and an empty card would only say so.
-  const instructionsSection = instructionsRooms.length === 0 ? null : (
+  // For a member a kind with no available linked room has no card and no
+  // tab: only a manager links rooms, and an empty card would only say so.
+  const instructionsSection = instructionsRooms.length === 0 && !canEdit ? null : (
     <Section
-      title={t("Common:AIProjectInstructions")}
-      menuTitle={t("Common:AIProjectInstructions")}
+      title={t("Common:Skills")}
+      menuTitle={t("Common:Skills")}
       testId="ai-project-instructions"
       headless={compact}
     >
@@ -384,13 +458,14 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
             </RoomCard>
           );
         })}
+      {addRooms("instructions", t("Common:AIProjectAddSkills"))}
     </Section>
   );
 
-  const knowledgeSection = knowledgeRooms.length === 0 ? null : (
+  const knowledgeSection = knowledgeRooms.length === 0 && !canEdit ? null : (
     <Section
-      title={t("Common:Knowledge")}
-      menuTitle={t("Common:Knowledge")}
+      title={t("Common:AiWorkspaceKnowledge")}
+      menuTitle={t("Common:AiWorkspaceKnowledge")}
       testId="ai-project-knowledge"
       headless={compact}
     >
@@ -447,14 +522,15 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
             </RoomCard>
           );
         })}
+      {addRooms("knowledge", t("Common:AIProjectAddKnowledge"))}
     </Section>
   );
 
   const contextSection = (
     <Section
-      title={t("Common:AIProjectContext")}
+      title={t("Common:Folder")}
       menu={contextMenu}
-      menuTitle={t("Common:AIProjectContext")}
+      menuTitle={t("Common:Folder")}
       note={canEdit ? undefined : t("Common:AIProjectContextNote")}
       testId="ai-project-context"
       headless={compact}
@@ -476,8 +552,8 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
         <>
           <AddButton
             className={styles.addRoom}
-            label={t("Common:AIProjectAddRoom")}
-            titleText={t("Common:AIProjectAddRoom")}
+            label={t("Common:AIProjectAddFolder")}
+            titleText={t("Common:AIProjectAddFolder")}
             onClick={() => setIsPickerVisible(true)}
             noSelect
             testId="ai-project-context-add"
@@ -492,12 +568,12 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   // they take the full width and nothing has to be selected.
   const tabs: TTabItem[] = [
     ...(instructionsSection
-      ? [{ id: "instructions", name: t("Common:AIProjectInstructions"), iconName: LampReactSvgUrl, content: null }]
+      ? [{ id: "instructions", name: t("Common:Skills"), iconName: LampReactSvgUrl, content: null }]
       : []),
     ...(knowledgeSection
-      ? [{ id: "knowledge", name: t("Common:Knowledge"), iconName: BookTrainingReactSvgUrl, content: null }]
+      ? [{ id: "knowledge", name: t("Common:AiWorkspaceKnowledge"), iconName: BookTrainingReactSvgUrl, content: null }]
       : []),
-    { id: "context", name: t("Common:AIProjectContext"), iconName: FolderReactSvgUrl, content: null },
+    { id: "context", name: t("Common:Folder"), iconName: FolderReactSvgUrl, content: null },
   ];
   const openedCard = { instructions: instructionsSection, knowledge: knowledgeSection, context: contextSection };
 
@@ -533,8 +609,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
         </div>
       ) : collapsed ? (
         // Collapsed, the column is gone and the chat takes its width; a tab
-        // at the chat's edge says how many sources are connected and brings
-        // the cards back.
+        // at the chat's far edge brings the cards back.
         <button
           type="button"
           className={styles.handle}
@@ -545,7 +620,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
           <span className={styles.handleIcon} aria-hidden="true">
             <ExpanderDownIcon />
           </span>
-          {sourcesCount > 0 ? `${t("Common:AIProjectSources")} \u00b7 ${sourcesCount}` : t("Common:AIProjectSources")}
+          {t("Common:AIProjectSources")}
         </button>
       ) : (
         <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
@@ -569,6 +644,49 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
         </aside>
       )}
       {isPickerVisible ? <ContextFolderDialog onClose={() => setIsPickerVisible(false)} /> : null}
+      {roomsPicker ? (
+        <>
+          <Backdrop visible isAside withBackground zIndex={309} onClick={() => setRoomsPicker(null)} />
+          <Aside visible withoutBodyScroll zIndex={310} onClose={() => setRoomsPicker(null)} withoutHeader>
+            <RoomSelector
+              onClose={() => setRoomsPicker(null)}
+              isMultiSelect
+              // Room rows come with `disableMultiSelect`; this overrules it,
+              // as the project form does.
+              forceIsMultiSelect
+              maxSelectedItems={AI_PROJECT_MAX_ROOMS_PER_TYPE}
+              onSelectLimitReached={onRoomsLimitReached}
+              roomType={roomsPicker === "instructions" ? INSTRUCTIONS_ROOM_TYPE : KNOWLEDGE_ROOM_TYPE}
+              // Instructions and Knowledge rooms live under the AI root, not in Rooms.
+              searchArea={RoomSearchArea.AiHub}
+              isRoomDisabled={() => roomsPicker === "knowledge" && !vectorizationEnabled}
+              getRoomDisabledText={() =>
+                roomsPicker === "knowledge" && !vectorizationEnabled
+                  ? t("Common:KnowledgeRoomsNeedVectorization")
+                  : undefined
+              }
+              withSearch
+              withHeader
+              headerProps={{
+                headerLabel: roomsPicker === "instructions" ? t("Common:Skills") : t("Common:AiWorkspaceKnowledge"),
+                onCloseClick: () => setRoomsPicker(null),
+                onBackClick: () => setRoomsPicker(null),
+                withoutBackButton: false,
+                withoutBorder: false,
+              }}
+              withCancelButton
+              cancelButtonLabel={t("Common:CancelButton")}
+              onCancel={() => setRoomsPicker(null)}
+              submitButtonLabel={t("Common:SelectAction")}
+              selectedItems={
+                pickedRooms.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]
+              }
+              sortSelectedFirst
+              onSubmit={onRoomsSelected}
+            />
+          </Aside>
+        </>
+      ) : null}
     </>
   );
 });

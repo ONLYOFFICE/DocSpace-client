@@ -60,6 +60,7 @@ import type {
   TAiProjectRequest,
   TAiProjectRoomDto,
   TAiProjectSkillsRoom,
+  TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
@@ -146,6 +147,36 @@ class AiProjectsStore {
   }
 
   /* ------------------------------ Project ------------------------------ */
+
+  /**
+   * Sets the rooms of one kind linked to the open project, as its sources
+   * column picked them. Only the links are written: the room itself, the
+   * model and the instructions stay as they are.
+   */
+  setActiveRooms = async (kind: "instructions" | "knowledge", rooms: TAiProjectSource[]) => {
+    const current = this.activeProject;
+    if (!current) return;
+    const instructions = kind === "instructions" ? rooms : current.aiProject.instructionsRooms;
+    const knowledge = kind === "knowledge" ? rooms : current.aiProject.knowledgeRooms;
+    try {
+      const project = await updateAiProject(
+        current.id,
+        {
+          aiProject: {
+            instructionsRoomIds: instructions.map((room) => room.id),
+            knowledgeRoomIds: knowledge.map((room) => room.id),
+            rooms: [...instructions, ...knowledge],
+          },
+        },
+        current,
+      );
+      showWarnings(project);
+      runInAction(() => this.replaceProject(project));
+      if (this.activeProject?.id === current.id) this.syncPreset(project);
+    } catch (e) {
+      toastr.error(errorMessage(e));
+    }
+  };
 
   // The sources (skills, knowledge files) are not read here: the cards read
   // a room's list when its row is expanded (fetchSkills / fetchKnowledgeFiles),

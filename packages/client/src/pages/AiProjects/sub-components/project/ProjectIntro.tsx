@@ -162,10 +162,10 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
       {instructionsRooms.length > 0 || knowledgeRooms.length > 0 ? (
         <div className={styles.sources}>
           {instructionsRooms.length > 0 ? (
-            <SourceGroup label={t("Common:AIProjectInstructions")} rooms={instructionsRooms} kind="instructions" />
+            <SourceGroup label={t("Common:Skills")} rooms={instructionsRooms} kind="instructions" />
           ) : null}
           {knowledgeRooms.length > 0 ? (
-            <SourceGroup label={t("Common:Knowledge")} rooms={knowledgeRooms} kind="knowledge" />
+            <SourceGroup label={t("Common:AiWorkspaceKnowledge")} rooms={knowledgeRooms} kind="knowledge" />
           ) : null}
         </div>
       ) : null}

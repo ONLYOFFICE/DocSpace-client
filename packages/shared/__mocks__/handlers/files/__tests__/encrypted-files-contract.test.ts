@@ -1730,7 +1730,7 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
 
     expect(status).toBe(403);
     expect(body.error.message).toBe(
-      "You don't have enough permission to move the folder",
+      "Access denied",
     );
   });
 
@@ -1742,7 +1742,7 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
 
     expect(status).toBe(403);
     expect(body.error.message).toBe(
-      "You don't have enough permission to move the folder",
+      "Access denied",
     );
   });
 

@@ -363,7 +363,7 @@ export const privacyroomAccessHandlers = (
         }
         const members = new Set((keys ?? []).map((k) => String(k.userId)));
         if (!members.has(callerId) && !accessManagers.get(id)?.has(callerId)) {
-          return errorResponse(403, "You don't have enough permission to edit the file");
+          return errorResponse(403, "Access denied");
         }
         if (nonPrivateRooms.has(id)) {
           return errorResponse(400, "This action is only available in a private room");
@@ -373,7 +373,7 @@ export const privacyroomAccessHandlers = (
           ? managers.has(callerId)
           : members.has(callerId);
         if (archivedRooms.has(id) || !mayInvite) {
-          return errorResponse(403, "You don't have enough permission to perform the operation");
+          return errorResponse(403, "Access denied");
         }
         const guidRe =
           /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

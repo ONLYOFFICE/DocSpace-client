@@ -314,8 +314,7 @@ export const roomLinksHandler = (
  * FileStorageService.SetInvitationLinkAsync / SetExternalLinkAsync ->
  * FileSharingAceHelper.SetAceObjectAsync: since bd89a24dcd a link with an
  * access other than None on a private room is refused with 403
- * (SecurityException, "You don't have enough permission to perform the
- * operation"), whatever its kind; a revocation (access None) passes and the
+ * (SecurityException, which ResponseWrapper answers with "Access denied"), whatever its kind; a revocation (access None) passes and the
  * route answers null, the link being gone. An ordinary room answers the
  * link as requested. The mock keeps no links: the answer is built from the
  * request.
@@ -339,7 +338,7 @@ export const roomLinkSetHandler = (
         return HttpResponse.json(
           {
             error: {
-              message: "You don't have enough permission to perform the operation",
+              message: "Access denied",
             },
             status: 1,
             statusCode: 403,

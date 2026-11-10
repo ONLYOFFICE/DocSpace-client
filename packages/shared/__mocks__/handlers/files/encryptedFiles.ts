@@ -991,7 +991,7 @@ export const encryptedFilesHandlers = (
           ...roomUserKeys.map((k) => String(k.userId)),
         ]);
         if (!members.has(currentUserId) && !accessManagers?.has(currentUserId)) {
-          return errorResponse(403, "You don't have enough permission to edit the file");
+          return errorResponse(403, "Access denied");
         }
         if (!isPrivate) {
           return errorResponse(400, "This action is only available in a private room");
@@ -1000,7 +1000,7 @@ export const encryptedFilesHandlers = (
           ? accessManagers.has(currentUserId)
           : members.has(currentUserId);
         if (archived || !mayManage) {
-          return errorResponse(403, "You don't have enough permission to perform the operation");
+          return errorResponse(403, "Access denied");
         }
         const guidRe =
           /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -1586,8 +1586,8 @@ export const encryptedFilesHandlers = (
      * moves files between the room and its folders. CopyPermissionsCheck
      * judges a folder by the private rooms around it (since bd89a24dcd):
      * a subfolder of this room stays in it and a folder from outside does
-     * not enter it, either refused with "You don't have enough permission
-     * to move the folder"; a subfolder moved within the room passes, the
+     * not enter it, either refused with 403 "Access denied" (the
+     * SecurityException of CopyPermissionsCheck, as ResponseWrapper words it); a subfolder moved within the room passes, the
      * mock listing it without nesting its folders.
      *
      * The archived room itself moved to the Rooms section is restored: the
@@ -1648,13 +1648,13 @@ export const encryptedFilesHandlers = (
         });
         return errorResponse(
           403,
-          "You don't have enough permission to move the folder",
+          "Access denied",
         );
       }
       if (!holdsFolder(destFolderId) || fileIds.some((id) => !files.has(id))) {
         return withOtherRooms
           ? undefined
-          : errorResponse(403, "You don't have enough permission to move the file");
+          : errorResponse(403, "Access denied");
       }
       requests.push({
         method: "PUT",

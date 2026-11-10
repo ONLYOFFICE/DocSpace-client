@@ -46,7 +46,7 @@ describe("roomLinks mock — PUT /files/rooms/{id}/links (mirrors VirtualRoomsCo
 
     expect(status).toBe(403);
     expect(body.error.message).toBe(
-      "You don't have enough permission to perform the operation",
+      "Access denied",
     );
   });
 

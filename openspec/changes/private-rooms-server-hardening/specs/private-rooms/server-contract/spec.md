@@ -228,15 +228,11 @@ The server SHALL refuse with 403 an upload session into a private room, or into 
 - **THEN** the server accepts it as before
 
 ### Requirement: File keys follow the share
-The server SHALL remove a user's file keys from every encrypted file of a private room, subfolders included, when the user loses access to it (their own or their group's share removed or set to none, a leave, a clearing), and from every file on the portal when their personal data is deleted, keeping the keys of the room's creator and of a share removed before a change of owner; each room revocation SHALL be audited with the room and the users and SHALL NOT appear in the file or folder history.
+The server SHALL remove a user's file keys from every encrypted file of a private room, subfolders included, when the user loses access to it (their share removed or set to none, a leave, a clearing), and from every file on the portal when their personal data is deleted, keeping the keys of the room's creator and of a share removed before a change of owner; each room revocation SHALL be audited with the room and the users and SHALL NOT appear in the file or folder history.
 
 #### Scenario: Member removed
 - **WHEN** a room manager removes a member from a private room
 - **THEN** the member's keys are gone from every encrypted file of the room and the other members keep theirs
-
-#### Scenario: Group removed
-- **WHEN** a room manager removes a group from a private room
-- **THEN** every member of the group who loses access to the room with it loses their keys on every encrypted file of the room, and a member who keeps access through another share keeps theirs
 
 #### Scenario: Member leaves
 - **WHEN** a member leaves a private room

@@ -108,12 +108,16 @@ The SDK SHALL recover the decrypted names of encrypted files whenever the file l
 - **WHEN** an encrypted file appears in the open folder through a socket event or a navigation while the identity is unlocked
 - **THEN** its decrypted name is recovered and shown without reloading the page
 
-### Requirement: Member removal warning and group expansion
-When a member is removed from a private room in the SDK, the removal dialog SHALL warn that the member will lose access to encrypted files, and a removed group SHALL be expanded to its members before the revocation runs. The server keeps the wraps of removed members; access ends only through the lost read access.
+### Requirement: Member removal warning
+When a member is removed from a private room in the SDK, the removal dialog SHALL warn that the member will lose access to encrypted files, and the removal SHALL run through the role update alone, without a revocation of the SDK's own; the server removes the member's wrapped keys with the share.
+
+#### Scenario: Remove a member
+- **WHEN** a member is removed from a private room
+- **THEN** the warning is shown, the role update runs and the SDK writes no access entry
 
 #### Scenario: Remove a group
 - **WHEN** a group is removed from a private room
-- **THEN** a revocation runs for every member of the group, and their wrap entries remain stored on the server
+- **THEN** the role update runs for the group alone, without expanding it into its members, and the SDK writes no access entry
 
 ### Requirement: Members grouped without groups and guests
 The SDK members view of a private room SHALL bucket members into administrators, users and expected members, and SHALL NOT list groups or guests because they hold no encryption identity.
@@ -418,11 +422,11 @@ The SDK invite panel of a private room SHALL offer portal users only, with no Gu
 - **THEN** only the verified invitees are granted access, and the panel stays open listing the skipped ones with the reason
 
 ### Requirement: Leaving a private room revokes own access first
-The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, run a revocation of the user's own access entries before dropping the role, on a best-effort basis that never blocks leaving.
+The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, drop the role without a revocation of its own; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
 
 #### Scenario: Member leaves
 - **WHEN** a member leaves a private room
-- **THEN** the revocation of their own entries runs before their role is dropped, and the entries remain stored on the server
+- **THEN** the role is dropped, the SDK writes no access entry, and the leaver's keys are gone from every encrypted file of the room
 
 ### Requirement: Member removal is blocked during active uploads
 The SDK SHALL refuse to start removing a member of a private room while uploads into the room or any folder inside it are in progress on this device, showing Common:CannotRemoveMemberWhileUploads with the upload count, and SHALL let the removal start once they finish.
@@ -540,3 +544,14 @@ The SDK SHALL show a member of a private room for whom some files could not be r
 #### Scenario: Retry from the SDK members list
 - **WHEN** a user who may edit the room retries a pending member and every missing file is re-wrapped
 - **THEN** the pending marker disappears and Common:EncryptedAccessRestored is shown
+
+### Requirement: Private room creation needs a Document Server that encrypts
+The SDK SHALL refuse to start private room creation when its files settings report that the connected Document Server cannot work with encrypted files, with Common:PrivateRoomDocServiceNotSupported, and SHALL show the same key when the server refuses the creation for that reason.
+
+#### Scenario: Document Server without encryption
+- **WHEN** a user starts creating a private room and the files settings report no encrypted-editing support
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown and no dialog opens
+
+#### Scenario: Creation refused by the server
+- **WHEN** the server refuses the creation of a private room because the Document Server cannot encrypt
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown instead of the server's message

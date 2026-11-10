@@ -312,7 +312,7 @@ The server SHALL answer the editor configuration of an encrypted file with the A
 ## MODIFIED Requirements
 
 ### Requirement: File access entries write
-The server SHALL, when the caller can read the file, the file's parent room is private and the caller can create content in it, store the submitted entries of the listed users who can read the file, replacing their previous entries and keeping every other user's entry, and SHALL answer the ids of the listed users it skipped because they cannot read the file; otherwise it SHALL answer 403 and store nothing. Each listed user SHALL be checked on a fresh read of the file. Leaving a user out never revokes their entry.
+The server SHALL store the submitted entries of the listed users who can read the file, replacing their previous entries and keeping every other user's entry, and SHALL answer the ids of the users it skipped because they cannot read the file. It SHALL do so only when the caller can read the file and create content in its parent room, which is private; otherwise it SHALL answer 403 and store nothing. Each listed user SHALL be checked on a fresh read of the file.
 
 #### Scenario: Authorised replace
 - **WHEN** a room member with create rights submits entries for users who can all read the file

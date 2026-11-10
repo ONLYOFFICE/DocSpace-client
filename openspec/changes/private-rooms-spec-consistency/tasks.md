@@ -15,7 +15,7 @@
 
 ## 4. Other changes
 
-- [ ] 4.1 In `openspec/changes/private-rooms-dse3-header-authentication/tasks.md`, note that its version-3 header binding must modify or remove "DSE3 header flags, chunk size and name length are not authenticated" for version-3 containers when it archives after this change, and that it does not close "Older versions of a file are not detected". Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-dse3-header-authentication --strict`
+- [x] 4.1 In `openspec/changes/private-rooms-dse3-header-authentication/tasks.md`, note that its version-3 header binding must modify or remove "DSE3 header flags, chunk size and name length are not authenticated" for version-3 containers when it archives after this change, and that it does not close "Older versions of a file are not detected". Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-dse3-header-authentication --strict`
 
 ## 5. Integration
 

@@ -247,11 +247,19 @@ The system SHALL list "New PDF form" among the create entries of a private room 
 - **THEN** the entries are document, spreadsheet, presentation, PDF form, folder and upload files
 
 ### Requirement: Rename withheld for encrypted files
-The system SHALL NOT offer rename for an encrypted file, neither in the context menu nor via the F2 hotkey.
+The system SHALL NOT offer rename for an encrypted file, neither in the context menu, nor in the media viewer menu, nor via the F2 hotkey.
 
 #### Scenario: F2 on encrypted file
 - **WHEN** the user presses F2 with an encrypted file selected
 - **THEN** no rename editor opens
+
+#### Scenario: Media viewer menu of an encrypted file
+- **WHEN** the user opens the menu of an encrypted file in the media viewer, on a desktop or on a mobile device, including the menu of a PDF
+- **THEN** rename is absent, whatever rename right the server reports for the file
+
+#### Scenario: Media viewer menu of a file that is not encrypted
+- **WHEN** the user opens the media viewer menu of a file that is not encrypted and may be renamed
+- **THEN** rename is present
 
 ### Requirement: Transfer into a private room is refused
 The system SHALL refuse to copy or move items from outside into a private room, showing Common:CannotTransferToPrivateRoom, and SHALL exclude private rooms from the destination picker for such operations.
@@ -348,6 +356,10 @@ The system SHALL download an encrypted file by fetching the ciphertext, decrypti
 - **WHEN** the user downloads one encrypted file for which they hold no access entry
 - **THEN** nothing is downloaded and Common:EncryptionDownloadFailed is shown
 
+#### Scenario: Download from the media viewer
+- **WHEN** the user downloads an encrypted file from the media viewer with its download button or Ctrl+S, and the identity is unlocked
+- **THEN** the browser saves the plaintext file under its original name, and the ciphertext MUST NOT be handed to the browser as the download
+
 ### Requirement: Multiple encrypted files download as a decrypted zip
 The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, a decrypted name that clashes with another taking the lowest numbered suffix no other entry has. A selected folder that lies in a private room SHALL be included as its decrypted subtree under the folder's name, and no server archive SHALL be requested for it. Non-encrypted files and folders outside private rooms of the same selection download through the standard path.
 
@@ -409,11 +421,19 @@ The system SHALL delete items in a private room permanently, never moving them t
 - **THEN** the confirmation dialog is shown before anything is deleted, and nothing MUST be deleted without it
 
 ### Requirement: Version operations withheld
-The system SHALL NOT offer version history, finalize version, version list or version blocking for an encrypted file.
+The system SHALL NOT offer version history, finalize version, version list or version blocking for an encrypted file. The version badge of an encrypted file MAY show the version count, but SHALL NOT open the version history or carry the Common:ShowVersionHistory tooltip, whatever history rights the server reports for the file.
 
 #### Scenario: Context menu of an encrypted file
 - **WHEN** the context menu of an encrypted file is opened
 - **THEN** show-version-history, finalize-version, version and block-unblock-version are absent
+
+#### Scenario: Version badge of an encrypted file
+- **WHEN** the user clicks the version badge of an encrypted file that has several versions, in a list, table or tile view, and the server reports the ReadHistory right on it
+- **THEN** the version history panel MUST NOT open, no version list is requested, and the badge has no Common:ShowVersionHistory tooltip
+
+#### Scenario: Version badge of a file that is not encrypted
+- **WHEN** the user clicks the version badge of a file that is not encrypted and has several versions, and the server reports the ReadHistory right on it
+- **THEN** the version history panel opens, and the badge carries the Common:ShowVersionHistory tooltip
 
 ### Requirement: Favorites, conversion and download-as withheld
 The system SHALL NOT offer mark-as-favorite, convert or download-as for an encrypted file, nor favorites for a folder in a private room.

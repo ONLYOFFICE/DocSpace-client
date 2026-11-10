@@ -878,6 +878,7 @@ class TableStore {
 
       case "Head of Group":
         this.setGroupsColumnManager(!this.managerGroupsColumnIsEnabled);
+        return;
 
       default:
     }

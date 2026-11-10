@@ -36,6 +36,7 @@
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
 import { useState } from "react";
+import { observer } from "mobx-react";
 import type { TFunction } from "i18next";
 
 import {
@@ -93,38 +94,41 @@ const AuthorCell = ({ webhook }: { webhook: TWebhook }) => (
   </>
 );
 
-/** The webhook's switch, which waits for the server before it moves. */
-const StateCell = ({
-  webhook,
-  t,
-  toggleEnabled,
-}: {
-  webhook: TWebhook;
-  t: TFunction;
-  toggleEnabled: TToggleEnabled;
-}) => {
-  const [isChecked, setIsChecked] = useState(webhook.enabled);
-  const [isLoading, setIsLoading] = useState(false);
+/**
+ * The webhook's switch, which waits for the server before it moves: the store
+ * flips `enabled` once the request succeeds, so it follows any other change of
+ * the webhook too.
+ */
+const StateCell = observer(
+  ({
+    webhook,
+    t,
+    toggleEnabled,
+  }: {
+    webhook: TWebhook;
+    t: TFunction;
+    toggleEnabled: TToggleEnabled;
+  }) => {
+    const [isLoading, setIsLoading] = useState(false);
 
-  const onChange = async () => {
-    setIsLoading(true);
-    const res = (await toggleEnabled(webhook, t)) as
-      Partial<TWebhook> | undefined;
-    if (res) setIsChecked(!!res.enabled);
-    setIsLoading(false);
-  };
+    const onChange = async () => {
+      setIsLoading(true);
+      await toggleEnabled(webhook, t);
+      setIsLoading(false);
+    };
 
-  return (
-    <ToggleButton
-      dataTestId={`toggle_button_${webhook.name}`}
-      className="toggle toggleButton"
-      id="toggle id"
-      isChecked={isChecked}
-      onChange={onChange}
-      isDisabled={isLoading}
-    />
-  );
-};
+    return (
+      <ToggleButton
+        dataTestId={`toggle_button_${webhook.name}`}
+        className="toggle toggleButton"
+        id="toggle id"
+        isChecked={webhook.enabled}
+        onChange={onChange}
+        isDisabled={isLoading}
+      />
+    );
+  },
+);
 
 /** The old table's columns: the author only for an admin; then the menu. */
 export const getWebhooksColumns = (

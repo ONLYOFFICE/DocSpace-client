@@ -77,6 +77,8 @@
 // section does); the conversation sits to the right of the sources column
 // with a gap and no divider, as the mockup draws it.
 .projectBody {
+  // The collapsed sources' tab is placed against this box.
+  position: relative;
   padding: 0 20px;
   box-sizing: border-box;
 

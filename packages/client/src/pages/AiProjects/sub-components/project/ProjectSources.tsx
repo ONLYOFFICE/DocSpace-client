@@ -65,6 +65,7 @@ import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
+import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
@@ -262,27 +263,6 @@ const writeCollapsed = (collapsed: boolean) => {
   }
 };
 
-type RailItemProps = {
-  icon: string;
-  title: string;
-  /** The number of linked rooms, drawn under the icon. */
-  count?: number;
-  onClick: () => void;
-  testId: string;
-};
-
-/** One kind of sources on the collapsed column's rail: a click expands the column. */
-const RailItem = ({ icon, title, count, onClick, testId }: RailItemProps) => (
-  <div className={styles.railItem}>
-    <IconButton iconName={icon} size={16} onClick={onClick} title={title} dataTestId={testId} />
-    {count ? (
-      <Text className={styles.railCount} fontSize="11px" lineHeight="16px" fontWeight={600} noSelect>
-        {count}
-      </Text>
-    ) : null}
-  </div>
-);
-
 /**
  * The three sources of a project, each with one menu: Instructions rooms
  * (skills), Knowledge rooms (search) and the user's own context folder.
@@ -348,6 +328,9 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   // and not drawn in the intro, so the cards leave it out as well.
   const instructionsRooms = project.aiProject.instructionsRooms.filter((room) => room.available);
   const knowledgeRooms = project.aiProject.knowledgeRooms.filter((room) => room.available);
+
+  // What the collapsed column's tab counts: the linked rooms and the folder.
+  const sourcesCount = instructionsRooms.length + knowledgeRooms.length + (folderContext ? 1 : 0);
 
   // Only a chosen folder has a menu; an empty Context is its add button.
   const contextMenu: ContextMenuModel[] | undefined = folderContext
@@ -549,46 +532,21 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
           {openSection ? <div className={styles.compactCard}>{openedCard[openSection]}</div> : null}
         </div>
       ) : collapsed ? (
-        // Collapsed, the column is a rail: what is connected, by kind, and
-        // any of them brings the cards back.
-        <aside
-          className={classNames(styles.column, styles.rail)}
-          aria-label={t("Common:AIProjectSources")}
-          data-testid="ai-project-sources-rail"
+        // Collapsed, the column is gone and the chat takes its width; a tab
+        // at the chat's edge says how many sources are connected and brings
+        // the cards back.
+        <button
+          type="button"
+          className={styles.handle}
+          onClick={toggleCollapsed}
+          title={t("Common:Show")}
+          data-testid="ai-project-sources-expand"
         >
-          <IconButton
-            iconName={PanelReactSvgUrl}
-            size={16}
-            onClick={toggleCollapsed}
-            title={t("Common:Show")}
-            dataTestId="ai-project-sources-expand"
-          />
-          {instructionsRooms.length > 0 ? (
-            <RailItem
-              icon={LampReactSvgUrl}
-              title={t("Common:AIProjectInstructions")}
-              count={instructionsRooms.length}
-              onClick={toggleCollapsed}
-              testId="ai-project-rail-instructions"
-            />
-          ) : null}
-          {knowledgeRooms.length > 0 ? (
-            <RailItem
-              icon={BookTrainingReactSvgUrl}
-              title={t("Common:Knowledge")}
-              count={knowledgeRooms.length}
-              onClick={toggleCollapsed}
-              testId="ai-project-rail-knowledge"
-            />
-          ) : null}
-          <RailItem
-            icon={FolderReactSvgUrl}
-            title={folderContext ? folderContext.room.name : t("Common:AIProjectContext")}
-            count={folderContext ? 1 : undefined}
-            onClick={toggleCollapsed}
-            testId="ai-project-rail-context"
-          />
-        </aside>
+          <span className={styles.handleIcon} aria-hidden="true">
+            <ExpanderDownIcon />
+          </span>
+          {sourcesCount > 0 ? `${t("Common:AIProjectSources")} \u00b7 ${sourcesCount}` : t("Common:AIProjectSources")}
+        </button>
       ) : (
         <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
           <div className={styles.columnHead}>

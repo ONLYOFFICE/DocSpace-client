@@ -41,7 +41,7 @@
     var(--info-panel-border-color, var(--files-section-table-view-row-border-color));
 }
 
-// The column's title and the button that collapses it to the rail.
+// The column's title and the button that collapses it to the tab.
 .columnHead {
   flex: 0 0 auto;
   display: flex;
@@ -58,26 +58,53 @@
   }
 }
 
-// The collapsed column: a narrow rail with one button per kind of sources.
-// The section's side gutter stays before it, so its buttons sit centred
-// between the gutter and the divider.
-.rail {
-  flex-basis: 36px;
-  align-items: flex-start;
-  gap: 16px;
-  padding-block: 18px 16px;
-}
-
-.railItem {
+// The collapsed column: a tab on the chat's starting edge, over the
+// conversation (the project body is its positioned box), so the chat keeps
+// the whole width.
+.handle {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-start: 0;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2px;
-  width: 16px;
+  gap: 6px;
+  height: 28px;
+  padding-inline: 8px 10px;
+  border: 1px solid var(--files-section-table-view-row-border-color);
+  border-inline-start: none;
+  border-start-end-radius: 14px;
+  border-end-end-radius: 14px;
+  background: var(--background-color);
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  svg {
+    width: 8px;
+    height: 8px;
+    // Points to where the column opens: towards the chat.
+    transform: rotate(-90deg);
+
+    path {
+      fill: var(--text-secondary);
+    }
+  }
 }
 
-.railCount {
-  color: var(--text-secondary);
+// The tab's triangle is mirrored as a whole in RTL, its own turn kept.
+.handleIcon {
+  display: flex;
+
+  @include mixins.flip-in-rtl;
 }
 
 // The cards share the column's height (a kind without rooms has none).

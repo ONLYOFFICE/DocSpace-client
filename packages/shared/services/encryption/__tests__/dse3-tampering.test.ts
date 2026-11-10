@@ -253,7 +253,7 @@ describe("DSE3 v2 tamper tests — AAD binding", () => {
   });
 });
 
-// Spec: encryption-core, "DSE3 header flags and name length are not authenticated"
+// Spec: encryption-core, "DSE3 header flags, chunk size and name length are not authenticated"
 describe("DSE3 v2 header flags and name length", () => {
   const FLAGS_OFFSET = 6;
   const NAME_LEN_OFFSET = 31;

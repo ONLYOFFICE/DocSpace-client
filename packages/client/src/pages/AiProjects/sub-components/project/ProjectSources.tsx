@@ -346,6 +346,10 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const contextLogo = contextFolder ? (contextFolder as Partial<TRoom>).logo : undefined;
 
   const canEdit = isManager(project);
+  // Who links rooms to the project: its owner and managers, and anyone the
+  // server lets edit the project (`security.EditRoom`), e.g. a DocSpace admin
+  // whose role in it is neither. The role alone hid the add buttons from them.
+  const canAddRooms = canEdit || project.aiProject.canEditSettings;
   // A linked room the caller can no longer read is not connected to the chat
   // and not drawn in the intro, so the cards leave it out as well.
   const instructionsRooms = project.aiProject.instructionsRooms.filter((room) => room.available);
@@ -394,7 +398,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   // A manager adds rooms of a kind from its card, as the folder is added
   // from the Folder card.
   const addRooms = (kind: RoomsKind, label: string) =>
-    canEdit ? (
+    canAddRooms ? (
       <AddButton
         className={styles.addRoom}
         label={label}
@@ -415,7 +419,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
 
   // The same on the collapsed column's rail: a plus under the kind's logos.
   const railAdd = (kind: RoomsKind, title: string) =>
-    canEdit ? (
+    canAddRooms ? (
       <AddButton
         className={styles.addRoom}
         titleText={title}
@@ -424,12 +428,12 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       />
     ) : null;
   // A kind is on the rail when it has rooms or the caller can add them.
-  const hasInstructionsGroup = instructionsRooms.length > 0 || canEdit;
-  const hasKnowledgeGroup = knowledgeRooms.length > 0 || canEdit;
+  const hasInstructionsGroup = instructionsRooms.length > 0 || canAddRooms;
+  const hasKnowledgeGroup = knowledgeRooms.length > 0 || canAddRooms;
 
   // For a member a kind with no available linked room has no card and no
   // tab: only a manager links rooms, and an empty card would only say so.
-  const instructionsSection = instructionsRooms.length === 0 && !canEdit ? null : (
+  const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (
     <Section
       title={t("Common:Skills")}
       menuTitle={t("Common:Skills")}
@@ -475,7 +479,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
     </Section>
   );
 
-  const knowledgeSection = knowledgeRooms.length === 0 && !canEdit ? null : (
+  const knowledgeSection = knowledgeRooms.length === 0 && !canAddRooms ? null : (
     <Section
       title={t("Common:AiWorkspaceKnowledge")}
       menuTitle={t("Common:AiWorkspaceKnowledge")}

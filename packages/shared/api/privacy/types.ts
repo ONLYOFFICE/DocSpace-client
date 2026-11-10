@@ -48,6 +48,15 @@ export type TEncryptionKeyPair = {
   cryptoEngineId?: string;
 };
 
+/**
+ * A key in the key set of a room or a file (`EncryptionKeyDto`): the private
+ * half comes back only on the caller's own entries and is absent on another
+ * member's, since the server does not write a null property.
+ */
+export type TMemberEncryptionKey = Omit<TEncryptionKeyPair, "privateKeyEnc"> & {
+  privateKeyEnc?: string;
+};
+
 /** A key of a prospective member: the answer never carries the private half. */
 export type TRoomCandidateKey = Omit<TEncryptionKeyPair, "privateKeyEnc">;
 

@@ -61,7 +61,8 @@ export type TFile = TFileBase & {
 };
 
 export type TFileEncryptionInfo = {
-  userKeys: Array<{
+  /** Absent for a user without keys: the server does not write a null property. */
+  userKeys?: Array<{
     id: string;
     userId: string;
     publicKey: string;

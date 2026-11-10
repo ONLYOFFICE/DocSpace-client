@@ -940,7 +940,9 @@ test.describe("Private section — info panel", () => {
 
   /**
    * Opens a room from a list, shows a file of it in the info panel through
-   * the file's Info option and goes back to the list with the browser's Back.
+   * the file's Info option (under More options next to the version history,
+   * which the mock grants as the server does) and goes back to the list with
+   * the browser's Back.
    */
   const backToListAfterAFileShown = async (
     page: Page,
@@ -954,6 +956,7 @@ test.describe("Private section — info panel", () => {
     await expect(fileRow(page, file)).toBeVisible({ timeout: 15000 });
 
     await fileRow(page, file).click({ button: "right" });
+    await page.getByTestId("option_info").hover();
     await page.getByTestId("option_show-info").click();
     await expect(page.locator(".info-panel_header-text")).toContainText(
       file.replace(/\.txt$/, ""),

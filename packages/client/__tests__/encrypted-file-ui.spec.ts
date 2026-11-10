@@ -315,6 +315,55 @@ test.describe("Encrypted file UI in private room", () => {
     expect(await page.locator("#option_copy-external-link").count()).toBe(0);
     expect(await page.locator("#option_copy-shared-link").count()).toBe(0);
   });
+
+  test("Version badge of an encrypted file", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        initialFiles: [{ ...seedEncryptedFile, versionGroup: 3 }],
+      }),
+    );
+
+    const historyRequests: string[] = [];
+    page.on("request", (req) => {
+      if (/\/files\/file\/8800\/history/.test(req.url())) {
+        historyRequests.push(req.url());
+      }
+    });
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
+    if (await passphrasePrompt.isVisible()) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
+    const versionBadge = row.getByText("V.3", { exact: true });
+    await expect(versionBadge).toBeVisible({ timeout: 5000 });
+    await expect(row.getByTitle("Show version history")).toHaveCount(0);
+    await versionBadge.click();
+    await page.waitForTimeout(1000);
+
+    await expect(page.getByTestId("version_history_panel")).toHaveCount(0);
+    expect(historyRequests).toEqual([]);
+  });
 });
 
 test.describe("Encrypted file moved out of a private room", () => {

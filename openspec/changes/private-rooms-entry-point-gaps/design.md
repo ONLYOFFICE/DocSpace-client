@@ -109,7 +109,11 @@ No stashed design document covers the version badge.
   CopyLink and the history rights on its files, so a client rule that
   relied on those rights being false would show up as a failing spec.] →
   The client E2E specs that use the mock are run in the E2E task. The SDK
-  and doceditor specs that use it assert none of these rights.
+  and doceditor specs that use it assert none of these rights. The run
+  found two info-panel cases in `private-rooms-section.spec.ts` that open
+  Info on a file that is not encrypted: with ReadHistory the client puts
+  Info under More options next to the version history, as it does on the
+  server's data, so those cases now open that submenu first.
 - [The ui-kit `Badge` shows a pointer cursor on hover whether or not it has
   a click handler, unless it gets `noHover`. So the version badge of an
   encrypted file still looks clickable on hover, as it does today for a

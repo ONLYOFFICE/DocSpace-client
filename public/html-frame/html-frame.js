@@ -33,26 +33,39 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// Shows HTML that a plugin hands over (a mail body, an HTML file) under this page's own
-// Content Security Policy instead of the portal's, which nginx sets for /static/html-frame/:
-// the content may load images, styles, fonts and media from any site. It never runs scripts,
-// because the frame it goes into has no allow-scripts, and it cannot reach the portal, because
-// that frame has no allow-same-origin either. Only the page that framed this one, on the same
-// origin, may hand content over.
+// Shows HTML that a plugin hands over (a mail body, an HTML file) under this
+// page's own Content Security Policy, which nginx sets for /static/html-frame/
+// instead of the portal one: the content may load images, styles, fonts and
+// media from any site. It never runs scripts, because its frame has no
+// allow-scripts, and it cannot reach the portal, because the frame has no
+// allow-same-origin either. Only the same-origin page that framed this one may
+// hand content over.
 //
 // Messages:
-//   to the parent:   { type: "html-frame-ready" }                          once, on load
-//   from the parent: { type: "html-frame-content", html: string, title?: string }
+//   to the parent, once on load: { type: "html-frame-ready" }
+//   from the parent: { type: "html-frame-content", html, title? }, all strings
 (() => {
   const frame = document.getElementById("content");
 
   window.addEventListener("message", (event) => {
-    if (event.source !== window.parent || event.origin !== window.location.origin) return;
+    if (
+      event.source !== window.parent ||
+      event.origin !== window.location.origin
+    )
+      return;
     const data = event.data;
-    if (!data || data.type !== "html-frame-content" || typeof data.html !== "string") return;
+    if (
+      !data ||
+      data.type !== "html-frame-content" ||
+      typeof data.html !== "string"
+    )
+      return;
     if (typeof data.title === "string") frame.title = data.title;
     frame.srcdoc = data.html;
   });
 
-  window.parent.postMessage({ type: "html-frame-ready" }, window.location.origin);
+  window.parent.postMessage(
+    { type: "html-frame-ready" },
+    window.location.origin,
+  );
 })();

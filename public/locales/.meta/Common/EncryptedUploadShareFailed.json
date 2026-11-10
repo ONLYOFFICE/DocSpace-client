@@ -3,7 +3,7 @@
   "content": "Not shared with the other room members: {{names}}. Retry from the Members panel.",
   "content_en_sha1_hash": "f15e918264a8801be1a238745881d07fc5ca81c5",
   "created_at": "2026-11-02T09:20:34.757Z",
-  "updated_at": "2026-11-05T16:49:40.002Z",
+  "updated_at": "2026-11-09T17:07:34.980Z",
   "comment": {
     "text": "Warning toast after uploading to an end-to-end encrypted private room, shown when a file was stored but its key could not be shared with the other room members, so they cannot open it yet. {{names}} is a comma-separated list of the uploaded file names, one or several; Members panel is the room's member list in the info panel, where a pending member can be retried.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts",
-      "line_number": 939,
+      "line_number": 971,
       "context": "}\n \n // Spec: file-operations, \"Uploads into a private room are encrypted on the client\"\n if (result.shareFailed) {\n toastr.warning(\n i18n.t(\"Common:EncryptedUploadShareFailed\", {\n names: result.originalName,\n }),\n );\n }\n } finally {",
       "module": "/packages/client"
     },

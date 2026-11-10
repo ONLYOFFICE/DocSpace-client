@@ -288,3 +288,21 @@ export type TGenerateSkillError = Error & {
   providerMessage?: string;
 };
 
+
+export type TByokModel = {
+  id: string;
+  name: string;
+};
+
+export type TByokProvider = {
+  id: string;
+  name: string;
+  models: TByokModel[];
+};
+
+export type TByokKey = {
+  id: string;
+  name?: string;
+  provider: string;
+  image?: string;
+};

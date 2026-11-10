@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-11-06T10:45:53.701Z",
+  "updated_at": "2026-11-09T17:07:34.677Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -205,7 +205,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
-      "line_number": 288,
+      "line_number": 281,
       "context": "isDisabled={!canSave}\n scale\n testId=\"change_ai_limit_dialog_submit\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n isDisabled={isLoading}\n scale\n testId=\"change_ai_limit_dialog_cancel\"",
       "module": "/packages/client"
     },
@@ -411,6 +411,12 @@
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
       "line_number": 126,
       "context": "testId=\"empty_trash_dialog_submit\"\n />\n <Button\n id=\"empty-archive_delete-cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n onClick={onClose}\n isLoading={isLoading}\n scale\n testId=\"empty_trash_dialog_cancel\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/EncryptedTransferConfirmDialog/index.tsx",
+      "line_number": 79,
+      "context": "scale\n onClick={filesActionsStore.confirmEncryptedTransfer}\n />\n <Button\n testId=\"encrypted_transfer_cancel_button\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -687,6 +693,18 @@
       "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/sub-components/ConditionsPanel.tsx",
       "line_number": 176,
       "context": "testId=\"metadata_filter_apply\"\n />\n <Button\n size={ButtonSize.normal}\n scale\n label={t(\"Common:CancelButton\")}\n onClick={onBack}\n testId=\"metadata_filter_cancel\"\n />\n </div>\n </form>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokEditCard.tsx",
+      "line_number": 137,
+      "context": "testId=\"byok-edit-delete-button\"\n />\n <div className={styles.formButtons}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n isDisabled={isBusy}\n testId=\"byok-edit-cancel-button\"\n />\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokKeyForm.tsx",
+      "line_number": 157,
+      "context": "}}\n />\n <div className={styles.formButtons}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n isDisabled={isSaving}\n testId=\"byok-cancel-button\"\n />\n <Button",
       "module": "/packages/client"
     },
     {
@@ -1471,7 +1489,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 677,
+      "line_number": 680,
       "context": ") : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}\n displaySettings",
       "module": "/packages/shared"
     },

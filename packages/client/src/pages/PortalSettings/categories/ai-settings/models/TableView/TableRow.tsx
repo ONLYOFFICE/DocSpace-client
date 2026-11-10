@@ -47,6 +47,7 @@ import {
   CachePriceAnchor,
   type TCachePriceBreakdown,
 } from "../CachePriceTooltip";
+import { ByokBadge } from "../sub-components/ByokBadge";
 
 import styles from "./ModelSettingsTable.module.scss";
 
@@ -62,6 +63,7 @@ type ModelSettingsRowProps = {
   enabled: boolean;
   isUpdating: boolean;
   link?: string;
+  byok?: boolean;
   onToggle: (modelId: string, enabled: boolean) => void;
   isAiToolsServiceOn?: boolean;
 };
@@ -73,6 +75,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   enabled,
   isUpdating,
   link,
+  byok,
   onToggle,
   image,
   isAiToolsServiceOn,
@@ -100,6 +103,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
             >
               {title}
             </Text>
+            {byok ? <ByokBadge /> : null}
           </div>
         </div>
       </TableCell>

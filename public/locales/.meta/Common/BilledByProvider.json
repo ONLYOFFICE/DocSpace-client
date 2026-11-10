@@ -1,0 +1,22 @@
+{
+  "key_path": "BilledByProvider",
+  "content": "Billed by {{provider}}",
+  "content_en_sha1_hash": "89203812524e843987c3ea8f7b189c79e65d7ba4",
+  "created_at": "2026-11-09T17:06:30.472Z",
+  "updated_at": "2026-11-09T17:12:09.867Z",
+  "comment": {
+    "text": "Row label in the BYOK tooltip of a wallet transaction in the transaction history, followed by the amount the AI provider charged. {{provider}} is the provider name, e.g. OpenAI or Anthropic.",
+    "is_auto": true,
+    "updated_at": "2026-11-09T17:12:09.867Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

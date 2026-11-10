@@ -41,6 +41,45 @@
     var(--info-panel-border-color, var(--files-section-table-view-row-border-color));
 }
 
+// The column's title and the button that collapses it to the rail.
+.columnHead {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  height: 52px;
+  padding-inline-end: 16px;
+  box-sizing: border-box;
+
+  > :first-child {
+    min-width: 0;
+  }
+}
+
+// The collapsed column: a narrow rail with one button per kind of sources.
+// The section's side gutter stays before it, so its buttons sit centred
+// between the gutter and the divider.
+.rail {
+  flex-basis: 36px;
+  align-items: flex-start;
+  gap: 16px;
+  padding-block: 18px 16px;
+}
+
+.railItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 16px;
+}
+
+.railCount {
+  color: var(--text-secondary);
+}
+
 // The cards share the column's height (a kind without rooms has none).
 // Grid rows grow from 0 in equal shares up to their content, so a short
 // card keeps its full height and a long one takes what is left and scrolls
@@ -50,9 +89,9 @@
   grid-auto-rows: minmax(0, max-content);
   align-content: start;
   gap: 12px;
-  height: 100%;
+  flex: 1 1 0;
   min-height: 0;
-  padding-block: 16px;
+  padding-block: 0 16px;
   padding-inline: 0 16px;
   box-sizing: border-box;
 }

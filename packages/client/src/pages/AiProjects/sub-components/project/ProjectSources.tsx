@@ -42,6 +42,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Tabs, TabsTypes, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import {
   ContextMenuButton,
@@ -63,6 +64,7 @@ import config from "PACKAGE_FILE";
 import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
@@ -239,6 +241,48 @@ type ProjectSourcesProps = {
 
 type SectionKey = "instructions" | "knowledge" | "context";
 
+const COLLAPSED_KEY = "aiProjectSourcesCollapsed";
+
+// The column stays collapsed or expanded as the user left it, in this
+// browser. Without storage (a private window) it opens expanded.
+const readCollapsed = () => {
+  try {
+    return localStorage.getItem(COLLAPSED_KEY) === "true";
+  } catch {
+    return false;
+  }
+};
+
+const writeCollapsed = (collapsed: boolean) => {
+  try {
+    if (collapsed) localStorage.setItem(COLLAPSED_KEY, "true");
+    else localStorage.removeItem(COLLAPSED_KEY);
+  } catch {
+    // Nothing to remember without storage.
+  }
+};
+
+type RailItemProps = {
+  icon: string;
+  title: string;
+  /** The number of linked rooms, drawn under the icon. */
+  count?: number;
+  onClick: () => void;
+  testId: string;
+};
+
+/** One kind of sources on the collapsed column's rail: a click expands the column. */
+const RailItem = ({ icon, title, count, onClick, testId }: RailItemProps) => (
+  <div className={styles.railItem}>
+    <IconButton iconName={icon} size={16} onClick={onClick} title={title} dataTestId={testId} />
+    {count ? (
+      <Text className={styles.railCount} fontSize="11px" lineHeight="16px" fontWeight={600} noSelect>
+        {count}
+      </Text>
+    ) : null}
+  </div>
+);
+
 /**
  * The three sources of a project, each with one menu: Instructions rooms
  * (skills), Knowledge rooms (search) and the user's own context folder.
@@ -252,6 +296,12 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const [contextPath, setContextPath] = React.useState("");
   const [contextFolder, setContextFolder] = React.useState<TFolder | null>(null);
   const [openSection, setOpenSection] = React.useState<SectionKey | null>(null);
+  const [collapsed, setCollapsed] = React.useState(readCollapsed);
+  const toggleCollapsed = () =>
+    setCollapsed((prev) => {
+      writeCollapsed(!prev);
+      return !prev;
+    });
   const filesSettingsStore = useStore("filesSettingsStore");
   const filesActionsStore = useStore("filesActionsStore");
   // Rooms start collapsed; each opens to its skills or its files on demand.
@@ -498,8 +548,61 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
           </div>
           {openSection ? <div className={styles.compactCard}>{openedCard[openSection]}</div> : null}
         </div>
+      ) : collapsed ? (
+        // Collapsed, the column is a rail: what is connected, by kind, and
+        // any of them brings the cards back.
+        <aside
+          className={classNames(styles.column, styles.rail)}
+          aria-label={t("Common:AIProjectSources")}
+          data-testid="ai-project-sources-rail"
+        >
+          <IconButton
+            iconName={PanelReactSvgUrl}
+            size={16}
+            onClick={toggleCollapsed}
+            title={t("Common:Show")}
+            dataTestId="ai-project-sources-expand"
+          />
+          {instructionsRooms.length > 0 ? (
+            <RailItem
+              icon={LampReactSvgUrl}
+              title={t("Common:AIProjectInstructions")}
+              count={instructionsRooms.length}
+              onClick={toggleCollapsed}
+              testId="ai-project-rail-instructions"
+            />
+          ) : null}
+          {knowledgeRooms.length > 0 ? (
+            <RailItem
+              icon={BookTrainingReactSvgUrl}
+              title={t("Common:Knowledge")}
+              count={knowledgeRooms.length}
+              onClick={toggleCollapsed}
+              testId="ai-project-rail-knowledge"
+            />
+          ) : null}
+          <RailItem
+            icon={FolderReactSvgUrl}
+            title={folderContext ? folderContext.room.name : t("Common:AIProjectContext")}
+            count={folderContext ? 1 : undefined}
+            onClick={toggleCollapsed}
+            testId="ai-project-rail-context"
+          />
+        </aside>
       ) : (
         <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
+          <div className={styles.columnHead}>
+            <Text fontSize="15px" lineHeight="20px" fontWeight={700} truncate noSelect>
+              {t("Common:AIProjectSources")}
+            </Text>
+            <IconButton
+              iconName={PanelReactSvgUrl}
+              size={16}
+              onClick={toggleCollapsed}
+              title={t("Common:Hide")}
+              dataTestId="ai-project-sources-collapse"
+            />
+          </div>
           <div className={styles.sections}>
             {instructionsSection}
             {knowledgeSection}

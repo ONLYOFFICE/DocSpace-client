@@ -59,6 +59,9 @@ import type { TFile } from "../../api/files/types";
 import { ToolbarActionType } from "./MediaViewer.enums";
 import type { ContextFunctions, TranslationType } from "./MediaViewer.types";
 
+// Spec: private-rooms/file-operations, "Rename withheld for encrypted files"
+const isRenameWithheld = (file?: TFile) => !!file?.encrypted;
+
 export const getPDFContextModel = (
   t: TranslationType,
   item: TFile,
@@ -131,7 +134,7 @@ export const getPDFContextModel = (
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
       onClick: () => funcs.onClickRename?.(item),
-      disabled: !item.security.Rename,
+      disabled: !item.security.Rename || isRenameWithheld(item),
     },
     {
       key: "separator1",
@@ -215,7 +218,10 @@ export const getMobileMediaContextModel = (
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
       onClick: () => onClickRename?.(targetFile),
-      disabled: !targetFile?.security?.Rename || isPublicFile,
+      disabled:
+        !targetFile?.security?.Rename ||
+        isPublicFile ||
+        isRenameWithheld(targetFile),
     },
 
     {
@@ -260,7 +266,7 @@ export const getDesktopMediaContextModel = (
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
       onClick: () => onClickRename?.(targetFile),
-      disabled: archiveRoom || isPublicFile,
+      disabled: archiveRoom || isPublicFile || isRenameWithheld(targetFile),
     },
     {
       key: "delete",

@@ -202,15 +202,15 @@ The system SHALL expand a removed group into its current members and run the rev
 - **THEN** a revocation runs for every user in that group, and their access entries remain stored on the server
 
 ### Requirement: Leaving a room revokes own access first
-The system SHALL, when a member leaves a private room, run a revocation of the leaver's own access entries before dropping the role, on a best-effort basis that never blocks leaving. The server keeps those entries, as an access-list write never removes a user it does not name; access ends when the role is dropped.
+The system SHALL drop the leaver's role without a revocation of its own when a member leaves a private room; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
 
 #### Scenario: Leave succeeds
 - **WHEN** a member confirms leaving a private room
-- **THEN** the revocation runs, then the role is dropped, and the leaver's access entries remain stored on the server
+- **THEN** the role is dropped and the leaver's keys are gone from every encrypted file of the room
 
 #### Scenario: Cleanup fails
-- **WHEN** removing the access entries fails for some files
-- **THEN** the member still leaves the room and the failure is only logged
+- **WHEN** the role update fails
+- **THEN** the member stays in the room with their keys and the failure is shown
 
 ### Requirement: New owner must hold a verified key
 The system SHALL validate the chosen new owner of a private room before transferring ownership, whether the owner is changed from the owner panel or from the room's edit dialog, and SHALL refuse with Common:EncryptedChangeOwnerNoKeys or Common:EncryptedChangeOwnerKeyMismatch when the candidate has no key or a refused key change.

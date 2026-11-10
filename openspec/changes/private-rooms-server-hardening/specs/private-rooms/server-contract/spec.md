@@ -346,15 +346,15 @@ The server SHALL refuse a conversion started through the conversion check, the d
 - **THEN** the server answers 403 and creates no copy
 
 ### Requirement: Server-side copy out of a private room is refused
-The server SHALL refuse a batch copy of a file or a folder from inside a private room to a folder outside that room, whether the room is active or archived, before the operation is queued, so no copy and no folder tree is created; it SHALL refuse a batch move or copy of a folder from outside into a private room; and only a move within the same private room SHALL pass the private-room check.
+The server SHALL refuse a batch copy of a file or a folder from inside a private room to a folder outside that room, whether the room is active or archived, before the operation is queued, so no copy and no folder tree is created; it SHALL refuse a batch move or copy of a folder from outside into a private room; and only a move within the same private room SHALL pass the private-room check. A refusal before the operation is queued is a 403 with the message "Access denied".
 
 #### Scenario: Copy out of an archived private room
 - **WHEN** a member requests a batch copy of an encrypted file from an archived private room to My documents
-- **THEN** the server refuses the request with "You don't have enough permission to move the file", queues no operation and creates no file
+- **THEN** the server refuses the request with 403 "Access denied", queues no operation and creates no file
 
 #### Scenario: Copy out of an active private room
 - **WHEN** a member requests a batch copy of an encrypted file from an active private room to My documents
-- **THEN** the server refuses the request with "You don't have enough permission to copy the file" and creates no file
+- **THEN** the server refuses the request with 403 "Access denied" and creates no file
 
 #### Scenario: Copy within the same private room
 - **WHEN** a member requests a batch copy of an encrypted file into a subfolder of the same private room
@@ -362,7 +362,7 @@ The server SHALL refuse a batch copy of a file or a folder from inside a private
 
 #### Scenario: Move into another private room
 - **WHEN** a member of two private rooms requests a batch move of an encrypted file from one into the other
-- **THEN** the server refuses the file with "You don't have enough permission to move the file" and moves nothing
+- **THEN** the server refuses the request with 403 "Access denied" and moves nothing
 
 #### Scenario: Subfolder moved out
 - **WHEN** the owner requests a batch move of a subfolder of a private room to a folder in My documents
@@ -460,7 +460,7 @@ The server SHALL NOT include the plaintext title of a private room or of its fol
 - **THEN** they carry its title
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, and on the AI hub room types (Knowledge, Instructions and AI project rooms). It SHALL otherwise store the room with the requested room type and the private setting; an AI agent created with the flag is stored as a private agent under the same key and Document Server checks as a room.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, and on the AI hub room types (Knowledge, Instructions and AI project rooms). It SHALL otherwise store the room with the requested room type and the private setting.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -492,6 +492,6 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 
 ## REMOVED Requirements
 
-### Requirement: No recovery, offboarding or file-key audit endpoints
+### Requirement: No recovery or offboarding endpoints
 **Reason**: Replaced by the administrative recovery, offboarding and per-file access history requirements above.
 **Migration**: Implement the endpoints on the server; the client enrolment and recovery flows follow in the keys-management tab.

@@ -2,7 +2,7 @@
 
 ## 1. Other changes
 
-- [ ] 1.1 With `/opsx:update private-rooms-server-hardening`: rename its REMOVED header "No recovery, offboarding or file-key audit endpoints" to "No recovery or offboarding endpoints"; give its MODIFIED "Private room creation requires keys" the statement of this change (without the AI agent clause, which its scenario keeps) while keeping its "Public or form-filling room created as private" scenario; give its MODIFIED "Server-side copy out of a private room is refused" the 403 "Access denied" wording of this change (design decisions 3 and 4). Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-server-hardening --strict` (`OPENSPEC_TELEMETRY=0`)
+- [x] 1.1 With `/opsx:update private-rooms-server-hardening`: rename its REMOVED header "No recovery, offboarding or file-key audit endpoints" to "No recovery or offboarding endpoints"; give its MODIFIED "Private room creation requires keys" the statement of this change (without the AI agent clause, which its scenario keeps) while keeping its "Public or form-filling room created as private" scenario; give its MODIFIED "Server-side copy out of a private room is refused" the 403 "Access denied" wording of this change (design decisions 3 and 4). Verify: `npx -y @fission-ai/openspec@latest validate private-rooms-server-hardening --strict` (`OPENSPEC_TELEMETRY=0`)
 
 ## 2. Integration
 

@@ -24,7 +24,9 @@ through CodeGraph (`FileSecurity`, `FilterEntryAsync`, `SetSecurity`,
 `products/ASC.Files/Core/Core/Security/FileSecurity.cs`, method
 `FilterEntryAsync`, which `SetSecurity` calls for every action of the file
 list (`_securityEntries`, which includes Rename, ReadHistory, Lock,
-EditHistory and CopyLink).
+EditHistory and CopyLink). Rechecked after a pull to `a7d94e4b81`
+(2026-11-10): the commits since `b4cd1db402` touch only `ASC.AI` (document
+agent settings and skills), so the reads below stand.
 
 - `:1708-1721`: the refusal for every entry of a private room covers Copy,
   Duplicate, IndexExport, UseChat, Vectorization and StartFilling. Rename,
@@ -85,7 +87,30 @@ from the viewer showed the file's opaque name. `getPDFContextModel` is used
 when the viewer opens a PDF, which the client playlist admits only while
 `ClientConfig.pdfViewer` is set.
 
-No stashed design document covers the version badge or the media viewer.
+Info panel. `getAvailableInfoPanelTabs`
+(`packages/client/src/helpers/info-panel/tabs.ts`) builds the tab list for
+the client's info panel; its only callers are `InfoPanel/Body/bodyGeneral.tsx`
+and `InfoPanel/Header/headerGeneral.tsx`, which get `isTrash` and
+`isRecentFolder` from `treeFoldersStore` through their `index.tsx`
+wrappers. It already computes `isPrivateItem` (the item's `private` or
+`encrypted` flag), but uses it only to leave out the Share tab. The tabs of
+enabled plugins are added afterwards, filtered by the plugin's own
+`itemSecurity`, item ids, file types and room types, never by privacy.
+
+A folder inside a private room carries no flag of its own. Through
+CodeGraph: `FolderDtoHelper.GetFolderWrapperAsync`
+(`products/ASC.Files/Core/ApiModels/ResponseDto/FolderDto.cs:595`) sets
+`Private` from `folder.SettingsPrivate`, and the folder queries
+(`products/ASC.Files/Core/Core/EF/Queries/FolderQueries.cs:429-431, 464`)
+load the room settings by the folder's own id, so a subfolder has none and
+reports `private: false`. Its `rootFolderType` is that of any room. The
+client's context menu therefore withholds plugin entries from folders by
+`treeFoldersStore.isPrivacyFolder || item.private`
+(`filesStore/contextOptions.helpers.ts`); `isPrivacyFolder` is true when the
+open folder or one on its navigation path is private.
+
+No stashed design document covers the version badge, the media viewer or
+the info panel.
 
 ## Goals / Non-Goals
 
@@ -98,6 +123,9 @@ No stashed design document covers the version badge or the media viewer.
 - Every download from the media viewer of an encrypted file saves the
   decrypted file under its original name.
 - No media viewer menu offers Rename for an encrypted file, in either app.
+- The info panel shows no plugin tab for a private room, a folder inside
+  one or an encrypted file, as the context menu already withholds plugin
+  entries.
 
 **Non-Goals:**
 - Hiding the badge or changing its label.
@@ -157,6 +185,17 @@ No stashed design document covers the version badge or the media viewer.
    is included although the client reaches it only with `pdfViewer` set:
    the requirement makes no exception for an entry point, and the check sits
    in the same file.
+6. **The tabs helper takes `isPrivacyFolder` and skips plugin tabs for a
+   private item.** `getAvailableInfoPanelTabs` gets a new
+   `isPrivacyFolder` parameter, passed by both callers from
+   `treeFoldersStore`, and adds no plugin tab when `isPrivateItem` or
+   `isPrivacyFolder` is true, with the one-line pointer
+   `Spec: private-rooms/room-membership, "AI and plugin actions withheld"`.
+   This is the same test the context menu uses. Alternatives:
+   - (a) Decide from the item alone. Rejected: a subfolder of a private room
+     has no flag (Context).
+   - (b) Filter the plugin tabs in each caller. Rejected: two copies of one
+     rule, and the helper is where the tabs are chosen and tested.
 
 ## Risks / Trade-offs
 
@@ -179,6 +218,11 @@ No stashed design document covers the version badge or the media viewer.
   the server rights alone.] → Copy and Duplicate are refused by the server
   in a private room (Context), and a move out of the room is covered by
   "Files leaving a private room are decrypted". Not changed here.
+- [`isPrivacyFolder` describes the open folder, not the item the info
+  panel shows.] → The info panel shows either the open folder or an item
+  listed in it, so inside a private room both are private. A private room
+  in a rooms list and an encrypted file in Recent or Favorites carry their
+  own `private` or `encrypted` flag.
 - [An encrypted playlist item whose file the client cannot find downloads
   nothing and shows nothing (decision 4).] → Accepted: the viewer only
   lists files of the open folder or the previewed file, so this is not

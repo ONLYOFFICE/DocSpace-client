@@ -62,6 +62,7 @@ const InfoPanelHeaderGeneral = ({
   enablePlugins,
 
   isRecentFolder,
+  isPrivacyFolder,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -101,6 +102,7 @@ const InfoPanelHeaderGeneral = ({
     selection,
     isTrash,
     isRecentFolder,
+    isPrivacyFolder,
     enablePlugins,
     infoPanelItemsList,
   });

@@ -52,6 +52,7 @@ export type BodyProps = {
 
   enablePlugins: SettingsStore["enablePlugins"];
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
+  isPrivacyFolder: TreeFoldersStore["isPrivacyFolder"];
 
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 

@@ -151,8 +151,12 @@ class AISettingsStore {
     this.setDocumentAgentSettings({ ...settings, ...(res ?? {}) });
   };
 
-  resetDocumentAgentSettings = async () => {
-    await this.updateDocumentAgentSettings(DOCUMENT_AGENT_DEFAULTS);
+  /** The defaults, on the model the tab shows for them: the portal's default profile. */
+  resetDocumentAgentSettings = async (profileId: string | null = null) => {
+    await this.updateDocumentAgentSettings({
+      ...DOCUMENT_AGENT_DEFAULTS,
+      profileId,
+    });
   };
 
   setByokData = (keys: TByokKey[], providers: TByokProvider[]) => {

@@ -227,10 +227,25 @@ const DocumentAgentComponent = ({
       patch({ [field]: value });
     };
 
+  // The model that is saved is the one the combo box shows. With nothing
+  // picked, or with a profile that is gone, it shows the portal's default,
+  // so that profile's id is what goes: a null would leave the task on
+  // whatever model the chat round ran on, which is not what the tab says.
+  // While the profiles are not loaded there is nothing shown to go by, and
+  // the stored value goes back as it is.
+  const shownProfileId = (profileId: string | null) =>
+    profileOptions.length === 0 ||
+    profileOptions.some((option) => option.key === profileId)
+      ? profileId
+      : String(profileOptions[0].key);
+
   const parsed = fromDraft(draft);
+  // Settings stored without a model, or with one that is gone, differ from
+  // what the tab shows: they can be saved as shown with no other change.
   const isDirty =
     !!documentAgentSettings &&
-    JSON.stringify(toDraft(documentAgentSettings)) !== JSON.stringify(draft);
+    (JSON.stringify(toDraft(documentAgentSettings)) !== JSON.stringify(draft) ||
+      documentAgentSettings.profileId !== shownProfileId(draft.profileId));
   const logFolderMissing = draft.taskLog && customLogFolder && draft.taskLogFolderId === null;
   const isSaveDisabled = !parsed || !isDirty || saveRequestRunning || logFolderMissing;
 
@@ -239,7 +254,10 @@ const DocumentAgentComponent = ({
 
     setSaveRequestRunning(true);
     try {
-      await updateDocumentAgentSettings?.(parsed);
+      await updateDocumentAgentSettings?.({
+        ...parsed,
+        profileId: shownProfileId(parsed.profileId),
+      });
       toastr.success(t("Common:ChangesSavedSuccessfully"));
     } catch (e) {
       console.error(e);
@@ -251,7 +269,7 @@ const DocumentAgentComponent = ({
   const onReset = async () => {
     setSaveRequestRunning(true);
     try {
-      await resetDocumentAgentSettings?.();
+      await resetDocumentAgentSettings?.(shownProfileId(null));
       toastr.success(t("Common:ChangesSavedSuccessfully"));
     } catch (e) {
       console.error(e);
@@ -261,7 +279,7 @@ const DocumentAgentComponent = ({
   };
 
   // Nothing chosen yet, or a profile that is gone, shows as the portal's
-  // default; the setting stays null until a model is picked by hand.
+  // default; saving stores that profile (see shownProfileId).
   const selectedProfile =
     profileOptions.find((option) => option.key === draft.profileId) ??
     profileOptions[0] ??

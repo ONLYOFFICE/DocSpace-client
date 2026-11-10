@@ -214,6 +214,47 @@ describe("privacyroom mock - DELETE /privacyroom/keys/{id} (DeleteKeys / DeleteA
   });
 });
 
+describe("privacyroom mock - key writes refused (DemandKeyOwnerAsync, EncryptionLoginProvider.SetKeysAsync)", () => {
+  it("Guest creates a key", async () => {
+    keysHandle.current!.setGuest(true);
+
+    const { status } = await send("POST", {
+      id: ID_1,
+      publicKey: "p1",
+      privateKeyEnc: "e1",
+    });
+
+    expect(status).toBe(403);
+    expect(keysHandle.current!.getKeys()).toEqual([]);
+  });
+
+  it("Guest deletes a key", async () => {
+    await send("POST", { id: ID_1, publicKey: "p1", privateKeyEnc: "e1" });
+    keysHandle.current!.setGuest(true);
+
+    const res = await fetch(`${KEYS_URL}/${ID_1}`, { method: "DELETE" });
+
+    expect(res.status).toBe(403);
+    expect(keysHandle.current!.getKeys().map((k) => k.id)).toEqual([ID_1]);
+  });
+
+  it("Key set too large", async () => {
+    await send("POST", { id: ID_1, publicKey: "p1", privateKeyEnc: "e1" });
+
+    const { status, body } = await send("POST", {
+      id: ID_2,
+      publicKey: "p2",
+      privateKeyEnc: "x".repeat(70000),
+    });
+
+    expect(status).toBe(400);
+    expect(body.error?.message).toBe(
+      "The encryption keys are too large to be stored",
+    );
+    expect(keysHandle.current!.getKeys().map((k) => k.id)).toEqual([ID_1]);
+  });
+});
+
 describe("privacyroom mock - GET /privacyroom/{roomId}/access (GetUserKeysForRoom)", () => {
   const member = (userId: string, id: string, publicKey = `pk-${id}`) => ({
     id,

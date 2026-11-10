@@ -25,6 +25,7 @@ import {
   aiProjectToRoom,
   createAiProject,
   getAiProjectKnowledgeFiles,
+  getAiProjectKnowledgeFilesCount,
   getAiProjects,
   getAiProject,
   getAiProjectSkills,
@@ -89,6 +90,8 @@ describe("toAiProject", () => {
     expect(project.aiProject).toEqual({
       partial: true,
       profile: null,
+      instructions: "",
+      suggestions: [],
       instructionsRooms: [],
       knowledgeRooms: [],
       canEditSettings: true,
@@ -401,6 +404,126 @@ describe("the calls", () => {
     ]);
   });
 
+  it("reads the project's instructions with the room, and none when they cannot be read", async () => {
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/instructions": { instructions: "Be brief." },
+    });
+    expect((await getAiProject(7)).aiProject.instructions).toBe("Be brief.");
+
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    expect((await getAiProject(7)).aiProject.instructions).toBe("");
+  });
+
+  it("stores the instructions of a new project, and none when they are empty", async () => {
+    route({
+      "POST /files/rooms": folder({ aiProject: undefined }),
+      "PUT /files/rooms/7/instructions": ({ data }: { data?: unknown }) => {
+        expect(data).toEqual({ instructions: "Be brief." });
+        return { instructions: "Be brief." };
+      },
+    });
+    expect((await createAiProject({ title: "Sales", aiProject: { instructions: "Be brief." } })).aiProject.instructions).toBe(
+      "Be brief.",
+    );
+
+    request.mockClear();
+    await createAiProject({ title: "Sales", aiProject: { instructions: "" } });
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7/instructions" }));
+  });
+
+  it("writes changed instructions on an edit, skips unchanged ones and keeps the save when refused", async () => {
+    const opened = toAiProject(folder({ aiProject: { ...folder().aiProject, instructions: "Old" } }));
+    route({
+      "PUT /files/rooms/7/instructions": ({ data }: { data?: unknown }) => {
+        expect(data).toEqual({ instructions: "" });
+        return { instructions: "" };
+      },
+    });
+    const cleared = await updateAiProject(
+      7,
+      { title: opened.title, aiProject: { instructions: "" } },
+      opened,
+    );
+    expect(cleared.aiProject.instructions).toBe("");
+
+    request.mockClear();
+    await updateAiProject(7, { title: opened.title, aiProject: { instructions: "Old" } }, opened);
+    expect(request).not.toHaveBeenCalled();
+
+    route({
+      "PUT /files/rooms/7/instructions": () => {
+        throw { response: { data: { error: "Not allowed" } } };
+      },
+    });
+    const refused = await updateAiProject(7, { title: opened.title, aiProject: { instructions: "New" } }, opened);
+    expect(refused.aiProject.instructions).toBe("Old");
+    expect(refused.aiProject.warnings).toEqual([
+      { code: "instructionsNotSaved", roomId: null, subjectId: null, message: "Not allowed" },
+    ]);
+  });
+
+  it("reads the project's suggestions with the room, and none when they cannot be read", async () => {
+    const chips = [{ name: "Summary", prompt: "Summarize the contracts" }];
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/suggestions": { suggestions: chips },
+    });
+    expect((await getAiProject(7)).aiProject.suggestions).toEqual(chips);
+
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    expect((await getAiProject(7)).aiProject.suggestions).toEqual([]);
+  });
+
+  it("stores the suggestions of a new project, and none when there are none", async () => {
+    const chips = [{ name: "Summary", prompt: "Summarize the contracts" }];
+    route({
+      "POST /files/rooms": folder({ aiProject: undefined }),
+      "PUT /files/rooms/7/suggestions": ({ data }: { data?: unknown }) => {
+        expect(data).toEqual({ suggestions: chips });
+        return { suggestions: chips };
+      },
+    });
+    expect((await createAiProject({ title: "Sales", aiProject: { suggestions: chips } })).aiProject.suggestions).toEqual(
+      chips,
+    );
+
+    request.mockClear();
+    await createAiProject({ title: "Sales", aiProject: { suggestions: [] } });
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7/suggestions" }));
+  });
+
+  it("writes changed suggestions on an edit, skips unchanged ones and keeps the save when refused", async () => {
+    const old = [{ name: "Old", prompt: "Old prompt" }];
+    const opened = toAiProject(folder({ aiProject: { ...folder().aiProject, suggestions: old } }));
+
+    await updateAiProject(7, { title: opened.title, aiProject: { suggestions: [{ ...old[0] }] } }, opened);
+    expect(request).not.toHaveBeenCalled();
+
+    route({
+      "PUT /files/rooms/7/suggestions": () => {
+        throw { response: { data: { error: "Too many suggestions" } } };
+      },
+    });
+    const refused = await updateAiProject(
+      7,
+      { title: opened.title, aiProject: { suggestions: [{ name: "New", prompt: "New prompt" }] } },
+      opened,
+    );
+    expect(refused.aiProject.suggestions).toEqual(old);
+    expect(refused.aiProject.warnings).toEqual([
+      { code: "suggestionsNotSaved", roomId: null, subjectId: null, message: "Too many suggestions" },
+    ]);
+  });
+
   it("prefixes the linked rooms' colours in the skills list", async () => {
     request.mockResolvedValueOnce({ rooms: [{ id: 12, logo: { color: "AABBCC" } }, { id: 13, logo: null }] });
     const skills = await getAiProjectSkills(7);
@@ -430,5 +553,14 @@ describe("the calls", () => {
       vectorizationStatus: 2,
       security: { Vectorization: false },
     });
+  });
+
+  it("counts a Knowledge room's files from the total of a one-row read", async () => {
+    route({
+      "GET /files/9?filterType=1&count=1": { total: 42, files: [{ id: 1, title: "a.pdf" }] },
+      "GET /files/10?filterType=1&count=1": { files: [] },
+    });
+    expect(await getAiProjectKnowledgeFilesCount(9)).toBe(42);
+    expect(await getAiProjectKnowledgeFilesCount(10)).toBe(0);
   });
 });

@@ -81,6 +81,8 @@ import {
   setInfoPanelMobileHidden,
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
+import { getAiWorkspaceCreatePayload } from "SRC_DIR/helpers/aiWorkspace";
+import { isMarkdownFile } from "SRC_DIR/helpers/plugins/markdown";
 import {
   onClickEditRoom as onClickEditRoomHelper,
   onShowEditingToast,
@@ -435,6 +437,13 @@ class ContextOptionsStore {
   };
 
   onClickLinkEdit = async (item: TContextItem) => {
+    // A Markdown file is edited by the Markdown plugin only; without it
+    // there is no editing, and the document editor is never opened for it.
+    if (isMarkdownFile(item.fileExst)) {
+      await this.pluginStore.openMarkdownFile(item as unknown as TFile);
+      return;
+    }
+
     // Confirm pausing form filling if form is active
     const confirmed = await this.confirmPauseFormSubmissions(item);
     if (!confirmed) return;
@@ -1032,9 +1041,10 @@ class ContextOptionsStore {
       event.payload = { isFormsCreate: true };
     }
 
-    // "AI rooms" draws its own chooser.
+    // The AI Workspace list creates what it holds: the entry's room type,
+    // or an agent on the root.
     if (!fromItem && window.location.pathname.startsWith("/ai-rooms/")) {
-      event.payload = { isAiRoomsCreate: true };
+      event.payload = getAiWorkspaceCreatePayload(window.location.search);
     }
 
     window.dispatchEvent(event);
@@ -1113,6 +1123,22 @@ class ContextOptionsStore {
    * are on and AI is set up on the portal (unknown counts as set up until the
    * chat profiles are read, as for the AI rooms).
    */
+  /**
+   * A Markdown file can be created: the Markdown plugin, which opens it for
+   * editing, is enabled.
+   */
+  get isCreateMarkdownAvailable() {
+    return this.pluginStore.isMarkdownEditorAvailable;
+  }
+
+  /**
+   * A skill can be created in an Instructions room: the AI service, which
+   * writes it from the skill template, is on. No model is needed for it.
+   */
+  get isCreateSkillAvailable() {
+    return !!this.settingsStore.aiServicesEnabled;
+  }
+
   get isCreateSkillWithAIAvailable() {
     return (
       this.settingsStore.aiServicesEnabled &&

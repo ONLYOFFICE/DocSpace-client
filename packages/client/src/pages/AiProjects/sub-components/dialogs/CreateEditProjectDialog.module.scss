@@ -88,3 +88,36 @@
     min-width: 0;
   }
 }
+
+// A suggestion chip, drawn as a room chip: its label opens the dialog,
+// the cross removes it.
+.suggestionItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 3px;
+  background: var(--filled-button-background-color);
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  > :last-child {
+    flex: 0 0 auto;
+  }
+}
+
+.suggestionLabel {
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+}

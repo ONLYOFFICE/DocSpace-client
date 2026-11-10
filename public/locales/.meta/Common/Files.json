@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 383,
+      "line_number": 399,
       "context": "const childFolders = [sharedFolder, recentFolder, favFolder];\n if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);\n \n mainItems.push({\n id: myDocsFolder ? String(myDocsFolder.id) : \"files\",\n label: myDocsFolder ? myDocsFolder.title : t(\"Common:Files\"),\n icon: getCatalogIconUrlByType(FolderType.USER),\n ...(primaryFolder\n ? nav(folderUrl(primaryFolder.id, primaryFolder.rootFolderType))\n : {}),\n ...sectionBadge(",
       "module": "/packages/client"
     },
@@ -33,18 +33,6 @@
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
       "line_number": 151,
       "context": "// from an empty portal to something in it.\n elementStep(\n CREATE_SECTION_SELECTOR,\n t(\"DashboardTour:DashboardCreateTitle\"),\n t(\"DashboardTour:DashboardCreate\", {\n files: t(\"Common:Files\"),\n }),\n callbacks,\n DASHBOARD_TOUR_LABEL,\n ),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 101,
-      "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:Files\"),\n productName: getBrandName(\"ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 101,
-      "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:Files\"),\n productName: getBrandName(\"ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
       "module": "/packages/client"
     },
     {
@@ -66,12 +54,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 70,
-      "context": "users,\n onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
       "line_number": 63,
       "context": "const onClose = () => setEmptyTrashDialogVisible(false);\n \n const sectionName = isArchiveFolder\n ? t(\"Common:Archive\")\n : isPersonalReadOnly\n ? t(\"Common:Files\")\n : t(\"Common:TrashSection\");\n \n const onEmptyTrash = () => {\n onClose();",
@@ -84,24 +66,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 94,
-      "context": "<Text style={{ marginTop: \"16px\" }}>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: t(\"Common:Files\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </Text>\n <Text style={{ marginTop: \"16px\" }}>\n {t(\"Common:ForQuestionsContactPortalAdmin\")}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 256,
-      "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 256,
-      "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 256,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
@@ -111,18 +75,6 @@
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 198,
       "context": "filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };\n \n export const getFolderDescription = (\n t: TTranslation,\n access: AccessType,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 257,
-      "context": "// 2. AI chat tile is the last one and may sit past the carousel fold.\n canCreateFiles &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n FILES_TOUR_LABEL,\n 6,\n revealQuickActionTile('[data-testid=\"quick-ai-chat\"]'),\n ),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 257,
-      "context": "// 2. AI chat tile is the last one and may sit past the carousel fold.\n canCreateFiles &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n FILES_TOUR_LABEL,\n 6,\n revealQuickActionTile('[data-testid=\"quick-ai-chat\"]'),\n ),",
       "module": "/packages/client"
     },
     {
@@ -204,18 +156,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 848,
-      "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 188,
-      "context": "t={t}\n i18nKey=\"ImportFilesDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Files\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
       "line_number": 188,
       "context": "t={t}\n i18nKey=\"ImportFilesDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Files\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
@@ -255,12 +195,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
       "line_number": 99,
       "context": "label: t(\"Common:Folders\"),\n typeKey: FilterType.FoldersOnly,\n },\n {\n key: \"filter-type-all\",\n label: t(\"Common:Files\"),\n typeKey: FilterType.FilesOnly,\n },\n {\n key: \"filter-type-documents\",\n label: t(\"Common:Documents\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 409,
-      "context": "<Checkbox\n dataTestId=\"applies_to_documents_checkbox\"\n isChecked={applyToDocuments}\n onChange={() => setApplyToDocuments(!applyToDocuments)}\n label={t(\"Settings:AppliesToDocuments\", {\n myDocuments: t(\"Common:Files\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
     {
@@ -312,18 +246,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 78,
-      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n <ToggleButton",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
-      "line_number": 72,
-      "context": "// builder is not cancelled — it keeps running on the server and still saves the\n // file, so giving up only means the user has to pick the file up themselves.\n export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;\n \n const getSaveLocationText = () =>\n i18n.t(\"Common:ReportSaveLocation\", { sectionName: i18n.t(\"Common:Files\") });\n \n class DocumentBuilderReportStore {\n private filesSettingsStore: FilesSettingsStore;\n \n private buildingReports = new Set<TReportType>();",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
       "line_number": 72,
       "context": "// builder is not cancelled — it keeps running on the server and still saves the\n // file, so giving up only means the user has to pick the file up themselves.\n export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;\n \n const getSaveLocationText = () =>\n i18n.t(\"Common:ReportSaveLocation\", { sectionName: i18n.t(\"Common:Files\") });\n \n class DocumentBuilderReportStore {\n private filesSettingsStore: FilesSettingsStore;\n \n private buildingReports = new Set<TReportType>();",
@@ -334,12 +256,6 @@
       "line_number": 105,
       "context": "const treeFolders = (await getFoldersTree()) as TTreeFolder[];\n \n treeFolders.forEach((folder) => {\n switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:Files\");\n break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
-      "line_number": 258,
-      "context": "},\n {\n id: \"filter_type-files\",\n key: String(FilterType.FilesOnly),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\", { defaultValue: \"Files\" }),\n },\n );\n }\n \n typeOptions.push(",
-      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
@@ -363,12 +279,6 @@
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/details.tsx",
       "line_number": 104,
       "context": "const culture = i18n.language || \"en\";\n \n const folders = agent.foldersCount ?? 0;\n const files = agent.filesCount ?? 0;\n const contentLabel = `${t(\"Common:Folders\", { defaultValue: \"Folders\" })}: ${folders} | ${t(\"Common:Files\", { defaultValue: \"Files\" })}: ${files}`;\n \n const storageLabel =\n agent.usedSpace !== undefined && agent.quotaLimit !== undefined\n ? `${formatBytes(agent.usedSpace)} / ${formatBytes(agent.quotaLimit)}`\n : formatBytes(agent.usedSpace);",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 234,
-      "context": "},\n {\n id: \"filter_type-all-files\",\n key: FilterType.FilesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\"),\n },\n {\n id: \"filter_type-documents\",\n key: FilterType.DocumentsOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
     },
     {
@@ -409,13 +319,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 520,
+      "line_number": 514,
       "context": "styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n settingsFileSelector={settingsFileSelector}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 667,
+      "line_number": 661,
       "context": "\"backup-description module-documents\",\n { [styles.disabled]: additionalDisabled },\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n newPath={newPath}",
       "module": "/packages/shared"
     },
@@ -429,30 +339,6 @@
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
       "line_number": 67,
       "context": "return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentManagerDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 67,
-      "context": "return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentManagerDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 67,
-      "context": "return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentManagerDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 50,
-      "context": "t: TTranslation,\n ) => {\n switch (type) {\n case EmployeeType.Admin:\n return t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 50,
-      "context": "t: TTranslation,\n ) => {\n switch (type) {\n case EmployeeType.Admin:\n return t(\"Common:RolePortalAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:Files\"),\n });",
       "module": "/packages/shared"
     },
     {

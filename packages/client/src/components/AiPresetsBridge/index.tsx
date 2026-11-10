@@ -140,19 +140,6 @@ const AiPresetsBridge = ({
     return () => aiChatStore.setKnowledgePickerHidden(false);
   }, [aiChatStore, vectorizationEnabled]);
 
-  // A chat started from a project carries the project's name as its title.
-  React.useEffect(() => {
-    const dispose = reaction(
-      () => aiPresetsStore.activePreset?.name ?? null,
-      (name) => aiChatStore.setProjectTitle(name),
-      { fireImmediately: true },
-    );
-    return () => {
-      dispose();
-      aiChatStore.setProjectTitle(null);
-    };
-  }, [aiChatStore, aiPresetsStore]);
-
   // A preset picked in the model picker: applied to the open chat as it
   // stands, and made the active preset so its skills rooms reach the chat
   // as the context rooms (see Shell's `contextRoom`).

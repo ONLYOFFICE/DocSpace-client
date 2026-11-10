@@ -42,6 +42,12 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
+import { Aside } from "@onlyoffice/apps-ui-kit/components/aside";
+import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
+import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Tabs, TabsTypes, type TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import {
   ContextMenuButton,
@@ -54,8 +60,19 @@ import { getFolderInfo, getFolderPath } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TAiProject, TAiProjectKnowledgeFile, TAiProjectLogo } from "@docspace/shared/api/ai/projects";
-import { VectorizationStatus } from "@docspace/shared/enums";
+import {
+  AI_PROJECT_MAX_ROOMS_PER_TYPE,
+  INSTRUCTIONS_ROOM_TYPE,
+  KNOWLEDGE_ROOM_TYPE,
+} from "@docspace/shared/api/ai/projects";
+import type {
+  TAiProject,
+  TAiProjectCover,
+  TAiProjectKnowledgeFile,
+  TAiProjectLogo,
+  TAiProjectSource,
+} from "@docspace/shared/api/ai/projects";
+import { RoomSearchArea, VectorizationStatus } from "@docspace/shared/enums";
 import { FailedVectorizationBadge } from "@docspace/shared/components/failed-vectorization-badge";
 
 
@@ -63,16 +80,19 @@ import config from "PACKAGE_FILE";
 import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { isManager } from "../../utils";
-import RoomItem from "./RoomItem";
+import RoomItem, { SourceRoomLogo } from "./RoomItem";
 import styles from "./ProjectSources.module.scss";
 
 type SectionProps = {
   title: string;
+  /** How many files the section's rooms hold together, at the end of the title's row; none while unknown. */
+  count?: number;
   /** Without it the section has no menu. */
   menu?: ContextMenuModel[];
   menuTitle: string;
@@ -84,7 +104,7 @@ type SectionProps = {
 };
 
 /** One source of the project, as the mockup draws it: a bordered card with its title, one menu and the rooms below. */
-const Section = ({ title, menu, menuTitle, children, note, testId, headless = false }: SectionProps) => {
+const Section = ({ title, count, menu, menuTitle, children, note, testId, headless = false }: SectionProps) => {
   const menuButton = menu ? (
     <ContextMenuButton
       className={headless ? styles.sectionMenuFloating : styles.sectionMenu}
@@ -104,6 +124,18 @@ const Section = ({ title, menu, menuTitle, children, note, testId, headless = fa
           <Text fontSize="13px" lineHeight="20px" fontWeight={700} truncate noSelect>
             {title}
           </Text>
+          {count === undefined ? null : (
+            <Text
+              className={styles.sectionCount}
+              fontSize="13px"
+              lineHeight="20px"
+              fontWeight={600}
+              noSelect
+              dataTestId={`${testId}-count`}
+            >
+              {count}
+            </Text>
+          )}
           {menuButton}
         </div>
       )}
@@ -239,6 +271,30 @@ type ProjectSourcesProps = {
 
 type SectionKey = "instructions" | "knowledge" | "context";
 
+/** The kind of rooms the selector opened from a card's add button lists. */
+type RoomsKind = "instructions" | "knowledge";
+
+const COLLAPSED_KEY = "aiProjectSourcesCollapsed";
+
+// The column stays collapsed or expanded as the user left it, in this
+// browser. Without storage (a private window) it opens expanded.
+const readCollapsed = () => {
+  try {
+    return localStorage.getItem(COLLAPSED_KEY) === "true";
+  } catch {
+    return false;
+  }
+};
+
+const writeCollapsed = (collapsed: boolean) => {
+  try {
+    if (collapsed) localStorage.setItem(COLLAPSED_KEY, "true");
+    else localStorage.removeItem(COLLAPSED_KEY);
+  } catch {
+    // Nothing to remember without storage.
+  }
+};
+
 /**
  * The three sources of a project, each with one menu: Instructions rooms
  * (skills), Knowledge rooms (search) and the user's own context folder.
@@ -252,6 +308,16 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const [contextPath, setContextPath] = React.useState("");
   const [contextFolder, setContextFolder] = React.useState<TFolder | null>(null);
   const [openSection, setOpenSection] = React.useState<SectionKey | null>(null);
+  const [collapsed, setCollapsed] = React.useState(readCollapsed);
+  const toggleCollapsed = () =>
+    setCollapsed((prev) => {
+      writeCollapsed(!prev);
+      return !prev;
+    });
+  // The kind whose rooms are being picked from its card; null while closed.
+  const [roomsPicker, setRoomsPicker] = React.useState<RoomsKind | null>(null);
+  const settingsStore = useStore("settingsStore");
+  const vectorizationEnabled = settingsStore.aiConfig?.vectorizationEnabled !== false;
   const filesSettingsStore = useStore("filesSettingsStore");
   const filesActionsStore = useStore("filesActionsStore");
   // Rooms start collapsed; each opens to its skills or its files on demand.
@@ -294,10 +360,106 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   const contextLogo = contextFolder ? (contextFolder as Partial<TRoom>).logo : undefined;
 
   const canEdit = isManager(project);
+  // Who links rooms to the project: its owner and managers, and anyone the
+  // server lets edit the project (`security.EditRoom`), e.g. a DocSpace admin
+  // whose role in it is neither. The role alone hid the add buttons from them.
+  const canAddRooms = canEdit || project.aiProject.canEditSettings;
   // A linked room the caller can no longer read is not connected to the chat
   // and not drawn in the intro, so the cards leave it out as well.
   const instructionsRooms = project.aiProject.instructionsRooms.filter((room) => room.available);
   const knowledgeRooms = project.aiProject.knowledgeRooms.filter((room) => room.available);
+
+  // The Skills and Knowledge titles say how many files are connected, so
+  // both are read once the rooms are known and again when they change: the
+  // skills of every linked room come in one read, a Knowledge room answers
+  // its number of files alone. The column unmounts while the history or the
+  // info panel is open and mounts again after, so what the store already
+  // holds for the project is not read again; nobody asked for these reads,
+  // so a failed one shows no toast - an expanded room reads again and says.
+  const instructionsIds = instructionsRooms.map((room) => room.id).join();
+  const knowledgeIds = knowledgeRooms.map((room) => room.id).join();
+  React.useEffect(() => {
+    if (!instructionsIds) return;
+    const ids = instructionsIds.split(",").map(Number);
+    const isRead = ids.every((id) => store.skills.some((room) => room.id === id));
+    if (!isRead) void store.fetchSkills(project.id, { silent: true });
+  }, [store, project.id, instructionsIds]);
+  React.useEffect(() => {
+    if (!knowledgeIds) return;
+    const uncounted = knowledgeIds
+      .split(",")
+      .map(Number)
+      .filter((id) => store.knowledge[id] === undefined && store.knowledgeCounts[id] === undefined);
+    if (uncounted.length > 0) void store.fetchKnowledgeCounts(project.id, uncounted);
+  }, [store, project.id, knowledgeIds]);
+
+  // No number until the skills are read; a room the read left out adds none.
+  const skillsRooms = instructionsRooms.flatMap((room) => store.skills.find((item) => item.id === room.id) ?? []);
+  const skillsCount =
+    skillsRooms.length > 0 ? skillsRooms.reduce((sum, room) => sum + room.skills.length, 0) : undefined;
+  // A room's files, once it was expanded, are counted as read; before that
+  // its own count. One room still uncounted and the title shows no number.
+  const knowledgeRoomCounts = knowledgeRooms.map(
+    (room): number | undefined => store.knowledge[room.id]?.length ?? store.knowledgeCounts[room.id],
+  );
+  const knowledgeCount =
+    knowledgeRoomCounts.length > 0 && knowledgeRoomCounts.every((count): count is number => count !== undefined)
+      ? knowledgeRoomCounts.reduce((sum, count) => sum + count, 0)
+      : undefined;
+
+  // The rooms of a kind are picked as in the project form: the linked ones
+  // come ticked, and what is submitted replaces them. A room the caller can
+  // no longer read stays among them, so picking does not unlink it.
+  const pickedRooms =
+    roomsPicker === "instructions" ? project.aiProject.instructionsRooms : project.aiProject.knowledgeRooms;
+
+  const onRoomsLimitReached = () =>
+    toastr.warning(
+      roomsPicker === "instructions"
+        ? t("Common:AIProjectInstructionsRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })
+        : t("Common:AIProjectKnowledgeRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),
+    );
+
+  const onRoomsSelected = (items: TSelectorItem[]) => {
+    if (!roomsPicker) return;
+    const roomType = roomsPicker === "instructions" ? INSTRUCTIONS_ROOM_TYPE : KNOWLEDGE_ROOM_TYPE;
+    // The logo the selector read with the room, so the cards show the new
+    // rooms without reading them back.
+    const rooms: TAiProjectSource[] = items.map((item) => {
+      const linked = pickedRooms.find((room) => room.id === Number(item.id));
+      if (linked) return linked;
+      const room = item as { color?: string; cover?: TAiProjectCover; icon?: string; iconOriginal?: string };
+      return {
+        id: Number(item.id),
+        title: item.label,
+        roomType,
+        available: true,
+        archived: false,
+        logo: {
+          color: room.color ? `#${room.color.replace("#", "")}` : "",
+          cover: room.cover ?? null,
+          medium: typeof room.icon === "string" ? room.icon : undefined,
+          original: room.iconOriginal,
+        },
+      };
+    });
+    void store.setActiveRooms(roomsPicker, rooms);
+    setRoomsPicker(null);
+  };
+
+  // A manager adds rooms of a kind from its card, as the folder is added
+  // from the Folder card.
+  const addRooms = (kind: RoomsKind, label: string) =>
+    canAddRooms ? (
+      <AddButton
+        className={styles.addRoom}
+        label={label}
+        titleText={label}
+        onClick={() => setRoomsPicker(kind)}
+        noSelect
+        testId={`ai-project-${kind}-add`}
+      />
+    ) : null;
 
   // Only a chosen folder has a menu; an empty Context is its add button.
   const contextMenu: ContextMenuModel[] | undefined = folderContext
@@ -307,12 +469,29 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
       ]
     : undefined;
 
-  // A kind with no available linked room has no card and no tab: the rooms
-  // are linked in Edit project, and an empty card would only say so.
-  const instructionsSection = instructionsRooms.length === 0 ? null : (
+  // The same on the collapsed column's rail: a plus under the kind's logos.
+  // It has no label there, so what it adds is its tooltip (`title`;
+  // `titleText` is the label's own and shows nothing without one).
+  const railAdd = (kind: RoomsKind, title: string) =>
+    canAddRooms ? (
+      <AddButton
+        className={styles.addRoom}
+        title={title}
+        onClick={() => setRoomsPicker(kind)}
+        testId={`ai-project-rail-${kind}-add`}
+      />
+    ) : null;
+  // A kind is on the rail when it has rooms or the caller can add them.
+  const hasInstructionsGroup = instructionsRooms.length > 0 || canAddRooms;
+  const hasKnowledgeGroup = knowledgeRooms.length > 0 || canAddRooms;
+
+  // For a member a kind with no available linked room has no card and no
+  // tab: only a manager links rooms, and an empty card would only say so.
+  const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (
     <Section
-      title={t("Common:AIProjectInstructions")}
-      menuTitle={t("Common:AIProjectInstructions")}
+      title={t("Common:Skills")}
+      count={skillsCount}
+      menuTitle={t("Common:Skills")}
       testId="ai-project-instructions"
       headless={compact}
     >
@@ -351,13 +530,15 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
             </RoomCard>
           );
         })}
+      {addRooms("instructions", t("Common:AIProjectAddSkills"))}
     </Section>
   );
 
-  const knowledgeSection = knowledgeRooms.length === 0 ? null : (
+  const knowledgeSection = knowledgeRooms.length === 0 && !canAddRooms ? null : (
     <Section
-      title={t("Common:Knowledge")}
-      menuTitle={t("Common:Knowledge")}
+      title={t("Common:AiWorkspaceKnowledge")}
+      count={knowledgeCount}
+      menuTitle={t("Common:AiWorkspaceKnowledge")}
       testId="ai-project-knowledge"
       headless={compact}
     >
@@ -414,14 +595,15 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
             </RoomCard>
           );
         })}
+      {addRooms("knowledge", t("Common:AIProjectAddKnowledge"))}
     </Section>
   );
 
   const contextSection = (
     <Section
-      title={t("Common:AIProjectContext")}
+      title={t("Common:Folder")}
       menu={contextMenu}
-      menuTitle={t("Common:AIProjectContext")}
+      menuTitle={t("Common:Folder")}
       note={canEdit ? undefined : t("Common:AIProjectContextNote")}
       testId="ai-project-context"
       headless={compact}
@@ -443,8 +625,8 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
         <>
           <AddButton
             className={styles.addRoom}
-            label={t("Common:AIProjectAddRoom")}
-            titleText={t("Common:AIProjectAddRoom")}
+            label={t("Common:AIProjectAddFolder")}
+            titleText={t("Common:AIProjectAddFolder")}
             onClick={() => setIsPickerVisible(true)}
             noSelect
             testId="ai-project-context-add"
@@ -459,12 +641,12 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   // they take the full width and nothing has to be selected.
   const tabs: TTabItem[] = [
     ...(instructionsSection
-      ? [{ id: "instructions", name: t("Common:AIProjectInstructions"), iconName: LampReactSvgUrl, content: null }]
+      ? [{ id: "instructions", name: t("Common:Skills"), iconName: LampReactSvgUrl, content: null }]
       : []),
     ...(knowledgeSection
-      ? [{ id: "knowledge", name: t("Common:Knowledge"), iconName: BookTrainingReactSvgUrl, content: null }]
+      ? [{ id: "knowledge", name: t("Common:AiWorkspaceKnowledge"), iconName: BookTrainingReactSvgUrl, content: null }]
       : []),
-    { id: "context", name: t("Common:AIProjectContext"), iconName: FolderReactSvgUrl, content: null },
+    { id: "context", name: t("Common:Folder"), iconName: FolderReactSvgUrl, content: null },
   ];
   const openedCard = { instructions: instructionsSection, knowledge: knowledgeSection, context: contextSection };
 
@@ -481,7 +663,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
   return (
     <>
       {compact ? (
-        <div className={styles.compact} aria-label={t("Common:AIProjectSources")} data-testid="ai-project-sources-strip">
+        <div className={styles.compact} aria-label={t("Common:AIProjectContext")} data-testid="ai-project-sources-strip">
           <div onClick={onTabsClick}>
             <Tabs
               type={TabsTypes.Secondary}
@@ -498,8 +680,97 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
           </div>
           {openSection ? <div className={styles.compactCard}>{openedCard[openSection]}</div> : null}
         </div>
+      ) : collapsed ? (
+        // Collapsed, the column is a narrow rail of what is connected: the
+        // logos of the Skills rooms, of the Knowledge rooms and the folder,
+        // each kind with its add button. A logo brings the cards back, as
+        // the arrow above them does.
+        <aside
+          className={classNames(styles.column, styles.rail)}
+          aria-label={t("Common:AIProjectContext")}
+          data-testid="ai-project-sources-rail"
+        >
+          <div className={styles.railExpand}>
+            <IconButton
+              className={styles.expandArrow}
+              iconName={ArrowReactSvgUrl}
+              size={16}
+              onClick={toggleCollapsed}
+              title={t("Common:Show")}
+              dataTestId="ai-project-sources-expand"
+            />
+          </div>
+          <div className={styles.railRooms}>
+            {instructionsRooms.map((room) => (
+              <button
+                key={room.id}
+                type="button"
+                className={styles.railRoom}
+                title={room.title}
+                onClick={toggleCollapsed}
+                data-testid={`ai-project-rail-room-${room.id}`}
+              >
+                <SourceRoomLogo title={room.title} logo={room.logo} icon="instructionsRoom.svg" size="32px" />
+              </button>
+            ))}
+            {railAdd("instructions", t("Common:AIProjectAddSkills"))}
+            {hasInstructionsGroup && hasKnowledgeGroup ? <span className={styles.railDivider} /> : null}
+            {knowledgeRooms.map((room) => (
+              <button
+                key={room.id}
+                type="button"
+                className={styles.railRoom}
+                title={room.title}
+                onClick={toggleCollapsed}
+                data-testid={`ai-project-rail-room-${room.id}`}
+              >
+                <SourceRoomLogo title={room.title} logo={room.logo} icon="knowledgeRoom.svg" size="32px" />
+              </button>
+            ))}
+            {railAdd("knowledge", t("Common:AIProjectAddKnowledge"))}
+            {hasInstructionsGroup || hasKnowledgeGroup ? <span className={styles.railDivider} /> : null}
+            {folderContext ? (
+              <button
+                type="button"
+                className={styles.railRoom}
+                title={contextPath || folderContext.room.name}
+                onClick={toggleCollapsed}
+                data-testid="ai-project-rail-folder"
+              >
+                <SourceRoomLogo
+                  title={folderContext.room.name}
+                  logo={
+                    contextFolder?.isRoom && contextLogo ? { ...contextLogo, color: contextLogo.color ?? "" } : undefined
+                  }
+                  icon="folder.svg"
+                  size="32px"
+                />
+              </button>
+            ) : (
+              <AddButton
+                className={styles.addRoom}
+                title={t("Common:AIProjectAddFolder")}
+                onClick={() => setIsPickerVisible(true)}
+                testId="ai-project-rail-folder-add"
+              />
+            )}
+          </div>
+        </aside>
       ) : (
-        <aside className={styles.column} aria-label={t("Common:AIProjectSources")}>
+        <aside className={styles.column} aria-label={t("Common:AIProjectContext")}>
+          <div className={styles.columnHead}>
+            <Text fontSize="15px" lineHeight="20px" fontWeight={700} truncate noSelect>
+              {t("Common:AIProjectContext")}
+            </Text>
+            <IconButton
+              className={styles.collapseArrow}
+              iconName={ArrowReactSvgUrl}
+              size={16}
+              onClick={toggleCollapsed}
+              title={t("Common:Hide")}
+              dataTestId="ai-project-sources-collapse"
+            />
+          </div>
           <div className={styles.sections}>
             {instructionsSection}
             {knowledgeSection}
@@ -508,6 +779,49 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
         </aside>
       )}
       {isPickerVisible ? <ContextFolderDialog onClose={() => setIsPickerVisible(false)} /> : null}
+      {roomsPicker ? (
+        <>
+          <Backdrop visible isAside withBackground zIndex={309} onClick={() => setRoomsPicker(null)} />
+          <Aside visible withoutBodyScroll zIndex={310} onClose={() => setRoomsPicker(null)} withoutHeader>
+            <RoomSelector
+              onClose={() => setRoomsPicker(null)}
+              isMultiSelect
+              // Room rows come with `disableMultiSelect`; this overrules it,
+              // as the project form does.
+              forceIsMultiSelect
+              maxSelectedItems={AI_PROJECT_MAX_ROOMS_PER_TYPE}
+              onSelectLimitReached={onRoomsLimitReached}
+              roomType={roomsPicker === "instructions" ? INSTRUCTIONS_ROOM_TYPE : KNOWLEDGE_ROOM_TYPE}
+              // Instructions and Knowledge rooms live under the AI root, not in Rooms.
+              searchArea={RoomSearchArea.AiHub}
+              isRoomDisabled={() => roomsPicker === "knowledge" && !vectorizationEnabled}
+              getRoomDisabledText={() =>
+                roomsPicker === "knowledge" && !vectorizationEnabled
+                  ? t("Common:KnowledgeRoomsNeedVectorization")
+                  : undefined
+              }
+              withSearch
+              withHeader
+              headerProps={{
+                headerLabel: roomsPicker === "instructions" ? t("Common:Skills") : t("Common:AiWorkspaceKnowledge"),
+                onCloseClick: () => setRoomsPicker(null),
+                onBackClick: () => setRoomsPicker(null),
+                withoutBackButton: false,
+                withoutBorder: false,
+              }}
+              withCancelButton
+              cancelButtonLabel={t("Common:CancelButton")}
+              onCancel={() => setRoomsPicker(null)}
+              submitButtonLabel={t("Common:SelectAction")}
+              selectedItems={
+                pickedRooms.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]
+              }
+              sortSelectedFirst
+              onSubmit={onRoomsSelected}
+            />
+          </Aside>
+        </>
+      ) : null}
     </>
   );
 });

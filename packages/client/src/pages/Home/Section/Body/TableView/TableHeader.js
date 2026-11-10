@@ -711,6 +711,7 @@ class FilesTableHeader extends React.Component {
       roomQuotaColumnIsEnable,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
+      isAiSectionFolder,
     } = this.props;
 
     const columns = [
@@ -724,15 +725,22 @@ class FilesTableHeader extends React.Component {
         minWidth: 210,
         onClick: this.onRoomsFilter,
       },
-      {
-        key: "Type",
-        title: t("Common:Type"),
-        enable: roomColumnTypeIsEnabled,
-        resizable: true,
-        sortBy: SortByFieldName.RoomType,
-        onChange: this.onColumnChange,
-        onClick: this.onRoomsFilter,
-      },
+      // The lists of the AI section (AI Workspace, Skills, Knowledge) hold
+      // rooms of one type each, so they have no Type column: neither in the
+      // table nor among the columns to switch on.
+      ...(isAiSectionFolder
+        ? []
+        : [
+            {
+              key: "Type",
+              title: t("Common:Type"),
+              enable: roomColumnTypeIsEnabled,
+              resizable: true,
+              sortBy: SortByFieldName.RoomType,
+              onChange: this.onColumnChange,
+              onClick: this.onRoomsFilter,
+            },
+          ]),
       {
         key: "Tags",
         title: t("Common:Tags"),
@@ -1009,6 +1017,7 @@ export default inject(
       isFavoritesFolder,
       isSharedWithMeFolder,
       isInSharedFolder,
+      isAiSectionFolder,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -1170,6 +1179,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      isAiSectionFolder,
       isIndexEditingMode,
 
       indexColumnSize,

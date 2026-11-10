@@ -3,7 +3,7 @@
   "content": "Cannot transfer ownership to {{user}}: their encryption key has changed and was not trusted. Re-verify the key and try again.",
   "content_en_sha1_hash": "94955485b9dabdb7cb56a4d8491f659bb5fac6f7",
   "created_at": "2026-05-24T17:27:26.255Z",
-  "updated_at": "2026-11-06T10:45:55.610Z",
+  "updated_at": "2026-11-09T09:26:33.741Z",
   "comment": {
     "text": "Error toast message appearing during room ownership transfer if the target user's encryption key is untrusted. The {{user}} variable represents the name of the recipient.",
     "is_auto": true,

@@ -184,16 +184,16 @@ describe("AiPresetsBridge", () => {
     expect(aiChatStore.onSavePreset).toBeNull();
   });
 
-  it("hides the save button and titles the chat inside a project", () => {
+  it("hides the save button inside a project and keeps the chat title", () => {
     const store = new AiPresetsStore();
     renderBridge(store, { path: "/ai-rooms/1/filter" });
     expect(aiChatStore.onSavePreset).toBe(store.openSaveDialog);
     act(() => store.setActivePreset(toAiPreset(project(1, "Sales"))));
     expect(aiChatStore.onSavePreset).toBeNull();
-    expect(aiChatStore.projectTitle).toBe("Sales");
+    // The panel is titled "AI Chat" whatever project the chat runs in.
+    expect(aiChatStore.projectTitle).toBeNull();
 
     act(() => store.setActivePreset(null));
-    expect(aiChatStore.projectTitle).toBeNull();
     expect(aiChatStore.onSavePreset).toBe(store.openSaveDialog);
   });
 
@@ -245,7 +245,7 @@ describe("AiPresetsBridge", () => {
     });
     expect(store.pendingApply).toBeNull();
     expect(store.activePreset?.name).toBe("Sales");
-    expect(aiChatStore.projectTitle).toBe("Sales");
+    expect(aiChatStore.projectTitle).toBeNull();
     expect(aiChatStore.applyPreset).toHaveBeenCalledWith({
       profileId: "p1",
       profileName: "Claude",

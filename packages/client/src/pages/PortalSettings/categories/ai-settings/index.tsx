@@ -82,6 +82,7 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import type PaymentStore from "SRC_DIR/store/PaymentStore";
 
 import { Knowledge } from "./knowledge";
+import { DocumentAgent } from "./document-agent";
 // SaaS variants (informational/pricing cards); the ui-kit WebSearch above and
 // the local Knowledge are the functional components used on standalone.
 import WebSearchSaas from "./search/WebSearchSaas";
@@ -101,6 +102,7 @@ const TAB_IDS = {
   WEB_SEARCH: "web-search",
   KNOWLEDGE: "knowledge",
   LIMITS: "limits",
+  DOCUMENT_AGENT: "document-agent",
 } as const;
 
 const detectTabFromPath = (pathname: string) => {
@@ -110,11 +112,13 @@ const detectTabFromPath = (pathname: string) => {
   if (pathname.includes("web-search")) return TAB_IDS.WEB_SEARCH;
   if (pathname.includes("knowledge")) return TAB_IDS.KNOWLEDGE;
   if (pathname.includes("limits")) return TAB_IDS.LIMITS;
+  if (pathname.includes("document-agent")) return TAB_IDS.DOCUMENT_AGENT;
   return TAB_IDS.AI_MODELS;
 };
 
 type TAISettingsProps = {
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
+  fetchDocumentAgentSettings?: AISettingsStore["fetchDocumentAgentSettings"];
   currentDeviceType?: DeviceType;
   standalone?: boolean;
   isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
@@ -126,6 +130,7 @@ type TAISettingsProps = {
 
 const AISettings = ({
   fetchKnowledge,
+  fetchDocumentAgentSettings,
   currentDeviceType,
   standalone,
   isAiToolsServiceOn,
@@ -177,7 +182,14 @@ const AISettings = ({
     if (gateNonAiModelsTabs) return;
 
     if (standalone && currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
-  }, [standalone, currentTabId, gateNonAiModelsTabs, initKnowledge]);
+    if (currentTabId === TAB_IDS.DOCUMENT_AGENT) fetchDocumentAgentSettings?.();
+  }, [
+    standalone,
+    currentTabId,
+    gateNonAiModelsTabs,
+    initKnowledge,
+    fetchDocumentAgentSettings,
+  ]);
 
   const navigateToTab = (id: string) => {
     navigate(`${BASE_PATH}/${id}`);
@@ -253,6 +265,13 @@ const AISettings = ({
             onClick: makeOnClick(TAB_IDS.LIMITS),
           },
         ]),
+    {
+      id: TAB_IDS.DOCUMENT_AGENT,
+      name: t("Common:DocumentAgent"),
+      content: <DocumentAgent />,
+      onClick: makeOnClick(TAB_IDS.DOCUMENT_AGENT),
+      isDisabled: disableNonAiModels,
+    },
   ];
 
   const tabsStickyTop = SECTION_HEADER_HEIGHT[currentDeviceType!];
@@ -285,7 +304,7 @@ const AISettings = ({
 
 export const Component = inject(
   ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
-    const { fetchKnowledge } = aiSettingsStore;
+    const { fetchKnowledge, fetchDocumentAgentSettings } = aiSettingsStore;
     const { currentDeviceType, standalone } = settingsStore;
     const {
       isAiToolsServiceOn,
@@ -297,6 +316,7 @@ export const Component = inject(
 
     return {
       fetchKnowledge,
+      fetchDocumentAgentSettings,
       currentDeviceType,
       standalone,
       isAiToolsServiceOn,

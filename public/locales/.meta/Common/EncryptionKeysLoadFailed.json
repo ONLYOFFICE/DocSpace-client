@@ -3,7 +3,7 @@
   "content": "Could not load your encryption keys. Check your connection and try again.",
   "content_en_sha1_hash": "c7a7201604e550b892e17ba81464f7ef38fb7521",
   "created_at": "2026-11-03T09:09:25.006Z",
-  "updated_at": "2026-11-06T10:45:53.786Z",
+  "updated_at": "2026-11-09T09:26:33.324Z",
   "comment": {
     "text": "Error shown when the list of the user's own encryption keys could not be loaded from the server: as a toast when the user starts creating a private (end-to-end encrypted) room, and as a message with a Try again button on the Keys management tab of the profile. The app cannot tell yet whether the user already has a key.",
     "is_auto": true,

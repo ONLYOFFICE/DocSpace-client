@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 637,
+      "line_number": 646,
       "context": "// instead of text, so the collapsed sidebar keeps the same separation.\n ...(mainItems.length > 0\n ? [\n {\n id: \"main\",\n label: t(\"Common:AppsSectionTitle\"),\n items: mainItems,\n },\n ]\n : []),\n ];",
       "module": "/packages/client"
     },
@@ -33,12 +33,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 253,
       "context": "return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"OAuth:Apps\":\n return t(\"OAuth:Apps\");\n case \"Common:AppsSectionTitle\":\n return t(\"Common:AppsSectionTitle\");\n default:\n throw new Error(\"Unexpected translation key\");\n }\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 581,
-      "context": "{\n id: \"portal-settings_catalog-apps\",\n key: \"8\",\n type: PageType.apps,\n link: \"apps\",\n tKey: \"Common:AppsSectionTitle\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-apps-list\",\n key: \"8-0\",",
       "module": "/packages/client"
     },
     {

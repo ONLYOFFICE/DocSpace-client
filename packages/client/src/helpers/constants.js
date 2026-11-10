@@ -83,6 +83,9 @@ export const TableVersions = Object.freeze({
   Guests: "1",
   SharedWithMe: "2",
   InSharedFolder: "1",
+  // The AI section's lists (AI Workspace, Skills, Knowledge): their own
+  // version, so a change of their columns resets only what they stored.
+  AiRooms: "1",
 });
 
 /**

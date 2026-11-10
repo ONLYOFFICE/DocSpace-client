@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 571,
+      "line_number": 565,
       "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n {...(setDefaultFolderId && { setDefaultFolderId })}\n setSelectedFolder={setSelectedFolder}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 707,
+      "line_number": 701,
       "context": "testId=\"third_party_resource_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n newPath={newPath}\n accounts={accounts}",
       "module": "/packages/shared"
     }

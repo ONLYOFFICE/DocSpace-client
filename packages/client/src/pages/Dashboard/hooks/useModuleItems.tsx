@@ -234,7 +234,7 @@ export const useModuleItems = ({
       items.push({
         id: "ai-hub",
         icon: <CatalogRoomsIcon />,
-        title: t("Common:AiRooms"),
+        title: t("Common:AiWorkspace"),
         description: t("Common:AiRoomsCreateDescription"),
         installed: true,
         href: AI_HUB_PATH,

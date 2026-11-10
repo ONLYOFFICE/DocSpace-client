@@ -565,8 +565,15 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-ai-settings-byok",
+        id: "portal-settings_catalog-ai-settings-document-agent",
         key: "7-6",
+        link: "document-agent",
+        tKey: "Common:DocumentAgent",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-ai-settings-byok",
+        key: "7-7",
         link: "byok",
         tKey: "Common:AIByok",
         isCategory: true,

@@ -41,7 +41,6 @@ import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import {
-  AI_HUB_SECTION_TYPES,
   ROOMS_SECTION_TYPES,
 } from "@docspace/shared/utils/rooms";
 import FilterInput from "@onlyoffice/apps-ui-kit/components/filter";
@@ -200,9 +199,11 @@ const SectionFilterContent = ({
   // Spec: private-rooms/sidebar-section, "Section filter"
   const isPrivateSection = isPrivateRoomsRoute(location.pathname);
 
-  // "AI rooms" is a root of its own (searchArea=AiHub) and filters by the
-  // Instructions, Knowledge and AI project types. The bare `/ai-rooms` is the
-  // SDK frame page, not this section.
+  // "AI Workspace" is a root of its own (searchArea=AiHub). Its room type is
+  // set by the sidebar entry (Agents, Skills, Knowledge base), so the filter
+  // neither offers a type nor shows the preset one as a chip, and keeps it
+  // while the other filters change. The bare `/ai-rooms` is the SDK frame
+  // page, not this section.
   const isAiHubSection = location.pathname.startsWith("/ai-rooms/");
 
   // Trash is a single, centralized folder reached from several sections
@@ -366,7 +367,9 @@ const SectionFilterContent = ({
       if (isContactsPage) {
         onContactsFilter(data);
       } else if (isRooms) {
-        const type = getType(data) || null;
+        const type = isAiHubSection
+          ? roomsFilter.type
+          : getType(data) || null;
 
         const subjectId = getSubjectId(data) || null;
 
@@ -770,7 +773,7 @@ const SectionFilterContent = ({
         });
       }
 
-      if (roomsFilter.type) {
+      if (roomsFilter.type && !isAiHubSection) {
         const key = +roomsFilter.type;
 
         const label = getRoomTypeName(key, t);
@@ -932,6 +935,7 @@ const SectionFilterContent = ({
     i18n.language,
     roomsFilter.provider,
     roomsFilter.type,
+    isAiHubSection,
     roomsFilter.subjectId,
     roomsFilter.subjectFilter,
     roomsFilter.subjectOwnerId,
@@ -1148,9 +1152,7 @@ const SectionFilterContent = ({
     // Room types offered in the "Rooms" section filter. Form Filling Rooms live
     // in their own "Forms" section, and RoomsTypePrivate is a client-only
     // synthetic value, so both are excluded by ROOMS_SECTION_TYPES.
-    const roomTypeValues = isAiHubSection
-      ? AI_HUB_SECTION_TYPES
-      : ROOMS_SECTION_TYPES;
+    const roomTypeValues = ROOMS_SECTION_TYPES;
 
     const typeOptions = isRooms
       ? [
@@ -1211,20 +1213,6 @@ const SectionFilterContent = ({
                   key: RoomsType.VirtualDataRoom,
                   group: FilterGroups.roomFilterType,
                   label: t("Common:VirtualDataRoom"),
-                };
-              case RoomsType.InstructionsRoom:
-                return {
-                  id: "filter_type-instructions",
-                  key: RoomsType.InstructionsRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:InstructionsRooms"),
-                };
-              case RoomsType.KnowledgeRoom:
-                return {
-                  id: "filter_type-knowledge",
-                  key: RoomsType.KnowledgeRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:KnowledgeRooms"),
                 };
               case RoomsType.CustomRoom:
               default:
@@ -1396,9 +1384,9 @@ const SectionFilterContent = ({
       filterOptions.push(...ownerOptions);
       filterOptions.push(...subjectOptions);
 
-      // The "Forms" section holds one room type — no room-type filter is
-      // shown there.
-      if (!isFormsSection && !isPrivateSection)
+      // The "Forms" section holds one room type, and the AI Workspace entries
+      // preset theirs — no room-type filter is shown there.
+      if (!isFormsSection && !isPrivateSection && !isAiHubSection)
         filterOptions.push(...typeOptions);
 
       if (tags?.length > 0) {
@@ -1793,6 +1781,8 @@ const SectionFilterContent = ({
 
       if (isAiHubFolder) {
         newFilter.searchArea = RoomSearchArea.AiHub;
+        // The sidebar entry's room type is not a filter to clear.
+        newFilter.type = roomsFilter.type;
       }
 
       const path = getRoomsListBasePath(newFilter.searchArea);

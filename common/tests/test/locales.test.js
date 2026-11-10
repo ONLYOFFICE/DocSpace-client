@@ -320,7 +320,8 @@ beforeAll(() => {
   const pattern1 =
     "[.{\\s\\(]t[!?]?\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
   const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
-  const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
+  // A word boundary, or `sortKey: "title"` reads as the key "title".
+  const pattern3 = '\\btKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';
   const pattern5 = 'getCommonTranslation\\(\\s*"([a-zA-Z0-9_.:-]+)"[\\s,)]';
   const pattern6 = 'titleKey:\\s"([a-zA-Z0-9_.:-]+)"';
@@ -3156,7 +3157,7 @@ describe("Locales Tests", () => {
     // X against the explicit ns prop — no "Common:" prefix is needed there.
     const keyRegexps = [
       /[.{\s(]t\??\.?\(\s*["'`]([a-zA-Z0-9_.:\s{}/-]+)["'`]\s*[),]/gm,
-      /tKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+      /\btKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
       /getTitle\("([a-zA-Z0-9_.:-]+)"\)/gm,
       /getCommonTranslation\(\s*"([a-zA-Z0-9_.:-]+)"[\s,)]/gm,
       /titleKey:\s"([a-zA-Z0-9_.:-]+)"/gm,

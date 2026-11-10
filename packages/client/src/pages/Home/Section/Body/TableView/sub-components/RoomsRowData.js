@@ -52,6 +52,7 @@ import {
 
 const RoomsRowDataComponent = (props) => {
   const {
+    withoutTypeColumn,
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
     roomColumnTagsIsEnabled,
@@ -119,7 +120,11 @@ const RoomsRowDataComponent = (props) => {
         {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
-      {roomColumnTypeIsEnabled ? (
+      {/* A row has one cell per column of the header, an empty one for a
+          column switched off. A table without the Type column (the AI
+          section's lists) has no cell for it at all: the empty one would
+          take the next column's place and shift every cell after it. */}
+      {withoutTypeColumn ? null : roomColumnTypeIsEnabled ? (
         <TableCell
           dataTestId={`rooms-cell-type-${index}`}
           style={dragStyles.style}
@@ -252,8 +257,8 @@ export default inject(
       roomQuotaColumnIsEnable,
       // The AI section's lists have no Type column (see the header's
       // `getRoomsColumns`), whatever the Rooms table last left the flag at.
-      roomColumnTypeIsEnabled:
-        roomColumnTypeIsEnabled && !treeFoldersStore.isAiSectionFolder,
+      withoutTypeColumn: treeFoldersStore.isAiSectionFolder,
+      roomColumnTypeIsEnabled,
       roomColumnOwnerIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnActivityIsEnabled,

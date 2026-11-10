@@ -418,11 +418,13 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
     : undefined;
 
   // The same on the collapsed column's rail: a plus under the kind's logos.
+  // It has no label there, so what it adds is its tooltip (`title`;
+  // `titleText` is the label's own and shows nothing without one).
   const railAdd = (kind: RoomsKind, title: string) =>
     canAddRooms ? (
       <AddButton
         className={styles.addRoom}
-        titleText={title}
+        title={title}
         onClick={() => setRoomsPicker(kind)}
         testId={`ai-project-rail-${kind}-add`}
       />
@@ -693,7 +695,7 @@ export const ProjectSources = observer(({ store, project, compact = false }: Pro
             ) : (
               <AddButton
                 className={styles.addRoom}
-                titleText={t("Common:AIProjectAddFolder")}
+                title={t("Common:AIProjectAddFolder")}
                 onClick={() => setIsPickerVisible(true)}
                 testId="ai-project-rail-folder-add"
               />

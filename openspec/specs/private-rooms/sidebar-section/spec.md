@@ -13,29 +13,6 @@ Implementation: packages/client/src/components/ClientArticleSidebar, packages/cl
 
 ## Requirements
 
-### Requirement: Section availability
-The system SHALL make the Private section available only while two conditions hold: the private-rooms opt-in is set, and the E2E rooms app is on for the portal. Every app is on in SaaS. The opt-in is the browser-local flag, read once per page load, or, for the client in an embedded frame, the `privateRooms` property of the frame configuration, read once that configuration has arrived. Switching the app on or off in the apps settings SHALL take effect without a reload.
-
-#### Scenario: Opt-in set and app on
-- **WHEN** the page loads with the opt-in set on a portal where the E2E rooms app is on
-- **THEN** the Private section is available
-
-#### Scenario: Opt-in absent
-- **WHEN** the page loads without the browser-local flag, outside a frame or in a frame whose configuration does not carry the opt-in
-- **THEN** the Private section is not available, whatever the state of the app
-
-#### Scenario: Opt-in from the frame configuration
-- **WHEN** the client runs in an embedded frame whose configuration carries `privateRooms: true`, on a portal where the E2E rooms app is on
-- **THEN** the Private section is available once the configuration has arrived, without the browser-local flag
-
-#### Scenario: App switched off on a standalone portal
-- **WHEN** an administrator switches the E2E rooms app off while the section is shown
-- **THEN** the section disappears without a reload, and the Rooms section lists private rooms again
-
-#### Scenario: Opt-in set after load
-- **WHEN** the browser-local flag is set after the page loaded
-- **THEN** the section stays unavailable until the page is reloaded
-
 ### Requirement: Sidebar item
 The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI rooms (Common:AiRooms) when that item is shown. It SHALL have exactly one sub-item, Archive (Common:Archive).
 
@@ -71,13 +48,6 @@ The sidebar SHALL highlight Private on the list and room addresses, and its Arch
 #### Scenario: Archived room address
 - **WHEN** the user opens `/private/archived/filter?folder={roomId}` for an archived private room they belong to
 - **THEN** the room contents are shown and the Archive sub-item under Private is highlighted
-
-### Requirement: Section addresses fall back to Rooms when the section is not available
-The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
-
-#### Scenario: Link opened without the opt-in
-- **WHEN** a member of a private room opens `/private/{roomId}/filter` without the opt-in
-- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the room opens in the Rooms section
 
 ### Requirement: Section lists only private rooms
 The system SHALL request the section list as active rooms with the privacy filter Private, and its Archive as archived rooms with the privacy filter Private. Both values SHALL come from the address category, whatever privacy filter or search area the address query carries. A room without the private setting MUST NOT appear in either list.
@@ -436,13 +406,6 @@ The system SHALL redirect `/e2e-rooms` to `/private/filter`, and `/e2e-rooms?sec
 - **WHEN** the user opens `/e2e-rooms?section=archive` while the section is available
 - **THEN** the address is replaced with `/private/archived/filter`
 
-### Requirement: Apps catalog uses the section label
-The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.
-
-#### Scenario: Catalog with the flag
-- **WHEN** an administrator opens the apps settings with the opt-in set
-- **THEN** the E2E rooms app is listed as Common:Private with its description
-
 ### Requirement: Section is not a start page option
 The system SHALL NOT offer the Private section as a default start page in the file-management settings in this version.
 
@@ -460,3 +423,51 @@ The system SHALL read a room or folder that arrives through a live update withou
 #### Scenario: Private room updated
 - **WHEN** a private room the administrator is not a member of is renamed while the administrator has the Rooms list open
 - **THEN** no Access denied message is shown and the list is unchanged
+
+### Requirement: Private item carries the Beta badge
+The system SHALL show the Beta badge next to the label of the Private sidebar item while the sidebar is expanded. The badge tooltip SHALL show the title Common:PrivateRoomsBetaTitle and the text Common:PrivateRoomsBetaDescription, followed by the feedback links the other Beta badges of the client show. The Archive sub-item SHALL NOT carry the badge.
+
+#### Scenario: Beta badge shown
+- **WHEN** the expanded sidebar renders while the section is available
+- **THEN** the Private item shows the Beta badge, and the Archive sub-item shows none
+
+#### Scenario: Badge tooltip
+- **WHEN** the user opens the tooltip of the Beta badge of the Private item
+- **THEN** it shows Common:PrivateRoomsBetaTitle as its title and Common:PrivateRoomsBetaDescription with the feedback links, and no text of another beta feature
+
+### Requirement: Section availability follows the E2E rooms app
+The system SHALL make the Private section available while the E2E rooms app is on for the portal. Every app is on in SaaS, so the section is always available there. For the client in an embedded frame, the frame configuration SHALL also carry the `privateRooms` property, read once that configuration has arrived. Switching the app on or off in the apps settings SHALL take effect without a reload.
+
+#### Scenario: SaaS portal
+- **WHEN** the page loads on a SaaS portal outside a frame
+- **THEN** the Private section is available
+
+#### Scenario: Standalone portal with the app on
+- **WHEN** the page loads on a standalone portal where the E2E rooms app is on
+- **THEN** the Private section is available
+
+#### Scenario: Frame configuration carries the opt-in
+- **WHEN** the client runs in an embedded frame whose configuration carries `privateRooms: true`, on a portal where the E2E rooms app is on
+- **THEN** the Private section is available once the configuration has arrived
+
+#### Scenario: Frame configuration without the opt-in
+- **WHEN** the client runs in an embedded frame whose configuration does not carry the opt-in
+- **THEN** the Private section is not available in the frame
+
+#### Scenario: App switched off on a standalone portal
+- **WHEN** an administrator switches the E2E rooms app off while the section is shown
+- **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
+
+### Requirement: Private addresses open in Rooms while the section is not available
+The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
+
+#### Scenario: Link opened while the section is not available
+- **WHEN** a member of a private room opens `/private/{roomId}/filter` on a standalone portal where the E2E rooms app is off
+- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the room opens in the Rooms section
+
+### Requirement: Apps catalog titles the E2E rooms app Private
+The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.
+
+#### Scenario: Catalog on a standalone portal
+- **WHEN** an administrator of a standalone portal opens the apps settings
+- **THEN** the E2E rooms app is listed as Common:Private with its description, and can be switched off and on

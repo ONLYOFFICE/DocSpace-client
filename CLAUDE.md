@@ -219,8 +219,8 @@ commit messages.
 
 ### Git hooks (lefthook)
 
-`lefthook.yml` runs a blocking pre-push gate — two sequential commands, any
-failure aborts the push:
+`lefthook.yml` runs a blocking pre-push gate — up to three sequential
+commands, any failure aborts the push:
 
 1. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
    license-header and dependency checks (translation-completeness suites are
@@ -228,6 +228,12 @@ failure aborts the push:
 2. one `nx run-many -t tsc lint test --parallel=3` over the six packages —
    type checking and Biome for all of them, unit tests for shared, client
    (incl. store tests), sdk and doceditor
+3. only when the pushed commits touch `openspec/**`:
+   `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` — every
+   OpenSpec change and main spec, not only the ones you touched, so another
+   team's broken artifact blocks your push too. The CLI is not a repo
+   dependency: the first such push downloads the pinned version and needs
+   the network. Raise the pin here and in `lefthook.yml` together.
 
 `tsc`, `lint` and `test` are cached by Nx; their inputs are the named inputs
 in `nx.json`. Each reruns when its own package changed (minus E2E screenshots

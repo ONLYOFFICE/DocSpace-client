@@ -42,6 +42,7 @@ import {
   useAiChatStore,
   useStores as useAiChatStores,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { useStore } from "SRC_DIR/store/useStore";
 
@@ -136,6 +137,11 @@ const AiChatPageBridgeComponent = ({
     // Not cleared on re-run: the request is consumed already, so a re-run
     // has nothing else to do it with.
     window.setTimeout(() => {
+      // The entry's highlight fills to the end once its page is shown. A
+      // section does that when its list has loaded; the chat has no list,
+      // and from the agents list it is opened without a navigation at all,
+      // so it is done here, or the fill stops short of the end.
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
       if (consumed.threadId) {
         // A chosen conversation: opening must not start a fresh one.
         aiChatStore.open();

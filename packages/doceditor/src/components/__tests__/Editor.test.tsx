@@ -444,6 +444,30 @@ describe("Editor", () => {
     });
   });
 
+  describe("New document", () => {
+    it("New document from an encrypted file", async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+        filesSettings: { openEditorInSameTab: true } as EditorProps["filesSettings"],
+      });
+
+      expect(env.captured.config).toBeDefined();
+      expect(events().onRequestCreateNew).toBeUndefined();
+    });
+
+    it("New document from a file that is not encrypted", async () => {
+      await renderEditor({
+        config: makeConfig(false),
+        fileInfo: makeFileInfo(false),
+        filesSettings: { openEditorInSameTab: true } as EditorProps["filesSettings"],
+      });
+
+      expect(events().onRequestCreateNew).toBe(env.events.onSDKRequestCreateNew);
+    });
+  });
+
   describe("Rename", () => {
     it("Rename requested on an encrypted file: the rename event is absent", async () => {
       asEncrypted();

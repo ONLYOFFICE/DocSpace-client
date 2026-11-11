@@ -1188,7 +1188,11 @@ release, one user holding a key, the device remembered):
     entry; create-new from the editor goes through the encrypted creation
     path or is withheld (proposal decision 7); errors from the Document
     Server frame are shown as page text; the file pickers skip encrypted
-    files; mentions are decided by the owner (decision 7). Alternative:
+    files; mentions are decided by the owner (decision 7). Decided on
+    2026-11-10: create-new is withheld, the event is not attached for an
+    encrypted file, since the server refuses the plain file it would
+    create and an encrypted creation from the editor page is not built.
+    Alternative:
     leave the events generic and rely on the server to refuse; rejected,
     the server stores a plaintext name or a plaintext new file today.
 
@@ -1382,8 +1386,6 @@ the Document Server capability" (2026-11-10).
 - Mentions and comments on encrypted files: `onRequestSendNotify` carries
   the comment text to the portal; withhold, or accept as plaintext
   metadata? Owner: feature owner (proposal decision 7).
-- Create-new from the editor on an encrypted file: encrypted creation in
-  the same folder, or withheld? Owner: feature owner (proposal decision 7).
 - Inserted images: do `cryptoimg://` images reach the Document Server's media
   store or the portal in plaintext when a document is saved or co-edited?
   Task 4.4; owner: Document Server team for the answer, this change for the

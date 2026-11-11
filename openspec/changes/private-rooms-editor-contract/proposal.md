@@ -180,3 +180,6 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
    creates an encrypted file in the same folder or is withheld, and whether
    mention notifications, which carry the comment text to the portal, stay
    enabled. Found in the client read of 2026-10-30; owner: feature owner.
+   Decided by the owner on 2026-11-10: create-new is withheld for an
+   encrypted file, and a mention notification is sent without the comment
+   text.

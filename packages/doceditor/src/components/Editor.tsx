@@ -368,7 +368,9 @@ const EditorBody = ({
       if (!isEncryptedFile) {
         newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       }
+      // Spec: editor-integration, "New document from the editor withheld for encrypted files"
       if (
+        !isEncryptedFile &&
         !isPDFDocument(fileInfo) &&
         (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {

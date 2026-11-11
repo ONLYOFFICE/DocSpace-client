@@ -97,6 +97,7 @@ import {
   type FolderIds,
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
+import type { TAiChatRecentThread } from "SRC_DIR/store/DialogsStore";
 
 import styles from "./ClientArticleSidebar.module.scss";
 
@@ -118,7 +119,14 @@ type ClientArticleSidebarProps = FolderIds & {
   requestAiChatPage?: (
     page: "chat" | "history",
     afterLocationKey?: string | null,
+    threadId?: string,
   ) => void;
+  // The latest AI projects (most recently changed first) listed under
+  // Agents, and the latest conversations under Recent with the one the chat
+  // shows.
+  recentAiProjects?: { id: string; name: string }[];
+  recentAiChats?: TAiChatRecentThread[];
+  activeAiChatId?: string;
   // The portal-wide AI switch (Settings -> Integration -> AI services). With it
   // off there is no AI in the portal at all, so the AI Projects app is dropped
   // from the catalog rather than left pointing at a section that cannot work.
@@ -136,6 +144,18 @@ type ClientArticleSidebarProps = FolderIds & {
   onFolderNavigate: () => void;
 };
 
+/** How many AI projects Agents lists under it. */
+const RECENT_AI_PROJECTS_COUNT = 5;
+
+// A stable empty default, so the memoized groups are not rebuilt each render.
+const EMPTY_LIST: never[] = [];
+
+// Ids of the entries listed under Agents and Recent. NavMenu has no third
+// level: they are siblings of those entries, indented by the
+// `[data-item-id^="ai-nested-"]` rule of the module's stylesheet.
+const aiProjectItemId = (id: string | number) => `ai-nested-project-${id}`;
+const aiChatItemId = (id: string) => `ai-nested-chat-${id}`;
+
 const ClientArticleSidebar = ({
   userId,
   treeFolders,
@@ -145,6 +165,9 @@ const ClientArticleSidebar = ({
   isDocumentsFolder,
   isAiProjectRoomRoot,
   requestAiChatPage,
+  recentAiProjects = EMPTY_LIST,
+  recentAiChats = EMPTY_LIST,
+  activeAiChatId,
   isNavLoading,
   aiServicesEnabled = true,
   roomsInstalled = true,
@@ -259,32 +282,54 @@ const ClientArticleSidebar = ({
   const locationRef = React.useRef(location);
   locationRef.current = location;
   const openAiChatPage = React.useCallback(
-    (page: "chat" | "history") => () => {
+    (page: "chat" | "history", threadId?: string) => () => {
       const current = locationRef.current;
       const isOnAgentsList =
         current.pathname === "/ai-rooms/filter" &&
         !new URLSearchParams(current.search).has("type");
       if (isOnAgentsList) {
-        requestAiChatPage?.(page);
+        requestAiChatPage?.(page, null, threadId);
         return;
       }
-      requestAiChatPage?.(page, current.key);
+      requestAiChatPage?.(page, current.key, threadId);
       onFolderNavigateRef.current?.();
       navigate(aiAgentsUrl);
     },
     [requestAiChatPage, navigate, aiAgentsUrl],
   );
 
+  const shownAiProjects = React.useMemo(
+    () => recentAiProjects.slice(0, RECENT_AI_PROJECTS_COUNT),
+    [recentAiProjects],
+  );
+
   // While the chat covers the page, fullscreen, the entry it was opened as
-  // is the current one: Recent on its history, AI Chat otherwise. An AI
-  // project's own fullscreen chat belongs to the project (Agents).
-  const aiChatPageId =
-    aiChatStore?.isVisible &&
-    aiChatStore.effectiveFullscreen &&
-    !isAiProjectRoomRoot
-      ? aiChatStore.isOnHistoryPage
-        ? "ai-chat-recent"
-        : "ai-chat"
+  // is the current one: Recent on its history, the conversation when Recent
+  // lists it, AI Chat otherwise. An AI project's own fullscreen chat belongs
+  // to the project (Agents).
+  const getAiChatPageId = () => {
+    if (
+      !aiChatStore?.isVisible ||
+      !aiChatStore.effectiveFullscreen ||
+      isAiProjectRoomRoot
+    )
+      return undefined;
+    if (aiChatStore.isOnHistoryPage) return "ai-chat-recent";
+    if (
+      activeAiChatId &&
+      recentAiChats.some((thread) => thread.id === activeAiChatId)
+    )
+      return aiChatItemId(activeAiChatId);
+    return "ai-chat";
+  };
+  const aiChatPageId = getAiChatPageId();
+
+  // An open AI project that Agents lists is its own entry.
+  const openProjectId = /^\/ai-rooms\/(\d+)\//.exec(location.pathname)?.[1];
+  const aiProjectPageId =
+    openProjectId &&
+    shownAiProjects.some((project) => project.id === openProjectId)
+      ? aiProjectItemId(openProjectId)
       : undefined;
 
   const locationActiveId = React.useMemo(
@@ -305,7 +350,7 @@ const ClientArticleSidebar = ({
     ],
   );
 
-  const activeId = aiChatPageId ?? locationActiveId;
+  const activeId = aiChatPageId ?? aiProjectPageId ?? locationActiveId;
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     const find = (type: FolderType) =>
@@ -659,12 +704,23 @@ const ClientArticleSidebar = ({
             icon: CatalogAgentsReactSvgUrl,
             ...nav(aiAgentsUrl),
           },
+          // A project opens as its room, which shows its chat.
+          ...shownAiProjects.map((project) => ({
+            id: aiProjectItemId(project.id),
+            label: project.name,
+            ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
+          })),
           {
             id: "ai-chat-recent",
             label: t("Common:AIChatRecent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
             onClick: openAiChatPage("history"),
           },
+          ...recentAiChats.map((thread) => ({
+            id: aiChatItemId(thread.id),
+            label: thread.title,
+            onClick: openAiChatPage("chat", thread.id),
+          })),
           {
             id: "ai-rooms-skills",
             label: t("Common:SkillSets"),
@@ -705,6 +761,8 @@ const ClientArticleSidebar = ({
     aiHubTypeUrl,
     aiAgentsUrl,
     openAiChatPage,
+    shownAiProjects,
+    recentAiChats,
     treeFolders,
     isVisitor,
     canUseTemplates,
@@ -742,6 +800,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     clientLoadingStore,
     settingsStore,
     appsStore,
+    aiPresetsStore,
   }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
@@ -759,6 +818,9 @@ const ClientArticleSidebarConnected = inject<TStore>(
     isDocumentsFolder: treeFoldersStore.isDocumentsFolder,
     isAiProjectRoomRoot: treeFoldersStore.isAiProjectRoomRoot,
     requestAiChatPage: dialogsStore.requestAiChatPage,
+    recentAiProjects: aiPresetsStore.presets,
+    recentAiChats: dialogsStore.aiChatRecentThreads,
+    activeAiChatId: dialogsStore.aiChatActiveThreadId,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     roomsInstalled: appsStore.isInstalled("ai-rooms"),
     formsInstalled: appsStore.isInstalled("ai-forms"),

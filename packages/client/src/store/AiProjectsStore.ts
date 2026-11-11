@@ -398,6 +398,8 @@ class AiProjectsStore {
   createProject = async (data: TAiProjectRequest) => {
     const project = await createAiProject(data);
     showWarnings(project);
+    // The sidebar lists the latest projects under Agents.
+    void this.aiPresetsStore.fetchPresets();
     return project;
   };
 
@@ -414,6 +416,8 @@ class AiProjectsStore {
     showWarnings(project);
     runInAction(() => this.replaceProject(project));
     if (this.activeProject?.id === id) this.syncPreset(project);
+    // A rename shows under Agents, and a change moves the project up there.
+    void this.aiPresetsStore.fetchPresets();
     return project;
   };
 

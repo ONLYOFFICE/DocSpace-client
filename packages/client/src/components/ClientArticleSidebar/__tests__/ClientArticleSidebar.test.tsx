@@ -89,7 +89,15 @@ vi.mock("SRC_DIR/components/AppsSidebar", () => ({
 const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
-const renderSidebar = (extraFolders: unknown[] = []) =>
+type TRenderOptions = {
+  presets?: { id: string; name: string }[];
+  recentThreads?: { id: string; title: string }[];
+};
+
+const renderSidebar = (
+  extraFolders: unknown[] = [],
+  { presets = [], recentThreads = [] }: TRenderOptions = {},
+) =>
   render(
     <Provider
       authStore={{ isAdmin: true, isRoomAdmin: false }}
@@ -109,7 +117,13 @@ const renderSidebar = (extraFolders: unknown[] = []) =>
       }}
       filesStore={{ setSelection: vi.fn(), trashIsEmpty: true }}
       filesActionsStore={{ emptyTrashInProgress: false }}
-      dialogsStore={{ setEmptyTrashDialogVisible: vi.fn() }}
+      dialogsStore={{
+        setEmptyTrashDialogVisible: vi.fn(),
+        requestAiChatPage: vi.fn(),
+        aiChatRecentThreads: recentThreads,
+        aiChatActiveThreadId: "",
+      }}
+      aiPresetsStore={{ presets }}
       clientLoadingStore={{
         showArticleLoader: false,
         setIsSectionBodyLoading: vi.fn(),
@@ -171,6 +185,44 @@ describe("ClientArticleSidebar — AI Chat section", () => {
       "nav-ai-chat",
       "nav-ai-rooms",
       "nav-ai-chat-recent",
+      "nav-ai-rooms-skills",
+      "nav-ai-rooms-knowledge",
+    ]);
+  });
+});
+
+describe("ClientArticleSidebar — AI Chat section recent entries", () => {
+  it("lists the five latest projects under Agents and the conversations under Recent", () => {
+    const presets = Array.from({ length: 7 }, (_, index) => ({
+      id: String(100 + index),
+      name: `Project ${index}`,
+    }));
+    renderSidebar(
+      [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
+      {
+        presets,
+        recentThreads: [
+          { id: "t1", title: "First" },
+          { id: "t2", title: "Second" },
+        ],
+      },
+    );
+
+    const ids = screen
+      .getAllByTestId(/^nav-ai-/)
+      .map((item) => item.dataset.testid);
+
+    expect(ids).toEqual([
+      "nav-ai-chat",
+      "nav-ai-rooms",
+      "nav-ai-nested-project-100",
+      "nav-ai-nested-project-101",
+      "nav-ai-nested-project-102",
+      "nav-ai-nested-project-103",
+      "nav-ai-nested-project-104",
+      "nav-ai-chat-recent",
+      "nav-ai-nested-chat-t1",
+      "nav-ai-nested-chat-t2",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
     ]);

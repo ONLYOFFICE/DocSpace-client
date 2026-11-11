@@ -109,6 +109,14 @@ type TFilesStore = {
 export type TAiChatPageRequest = {
   page: "chat" | "history";
   afterLocationKey: Nullable<string>;
+  /** The conversation to show on the chat page; a fresh or the open one without. */
+  threadId?: string;
+};
+
+/** A conversation as the sidebar's Recent lists it. */
+export type TAiChatRecentThread = {
+  id: string;
+  title: string;
 };
 
 type TConnectItem = Partial<Omit<ThirdPartyAccountType, "provider_id">> & {
@@ -448,6 +456,12 @@ class DialogsStore {
   // on a phone) cannot close it again behind the opening.
   aiChatPageRequest: Nullable<TAiChatPageRequest> = null;
 
+  // The latest conversations and the one the chat shows, mirrored out of the
+  // chat library's stores by AiChatPageBridge for the sidebar's Recent.
+  aiChatRecentThreads: TAiChatRecentThread[] = [];
+
+  aiChatActiveThreadId = "";
+
   newFilesPanelFolderId: Nullable<number | string> = null;
 
   sortedDownloadFiles: TSortedDownloadFiles = {
@@ -587,8 +601,17 @@ class DialogsStore {
   requestAiChatPage = (
     page: TAiChatPageRequest["page"],
     afterLocationKey: Nullable<string> = null,
+    threadId?: string,
   ) => {
-    this.aiChatPageRequest = { page, afterLocationKey };
+    this.aiChatPageRequest = { page, afterLocationKey, threadId };
+  };
+
+  setAiChatRecentThreads = (threads: TAiChatRecentThread[]) => {
+    this.aiChatRecentThreads = threads;
+  };
+
+  setAiChatActiveThreadId = (threadId: string) => {
+    this.aiChatActiveThreadId = threadId;
   };
 
   // Read-and-clear, as `consumeAskAIFile`: a double-invoked effect opens the

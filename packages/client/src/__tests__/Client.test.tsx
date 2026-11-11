@@ -136,6 +136,7 @@ const renderInFrame = (showMenu: boolean) =>
       }}
       filesActionsStore={{ emptyTrashInProgress: false }}
       dialogsStore={{ setEmptyTrashDialogVisible: vi.fn() }}
+      aiPresetsStore={{ presets: [] }}
       clientLoadingStore={{
         isLoaded: true,
         isLoading: false,

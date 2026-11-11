@@ -45,25 +45,73 @@ import {
 
 import { useStore } from "SRC_DIR/store/useStore";
 
+/** How many conversations the sidebar's Recent lists. */
+const RECENT_THREADS_COUNT = 5;
+
+type AiChatPageBridgeProps = {
+  /**
+   * The session may use the AI API (Shell's `canUseAi`). Without it the
+   * conversations are not read: guests and anonymous sessions have none.
+   */
+  canLoadThreads?: boolean;
+};
+
 /**
- * Fulfils the requests recorded by `dialogsStore.requestAiChatPage`: the AI
- * section's sidebar entries AI Chat and Recent open the chat fullscreen, on
- * the conversation or on its history.
+ * Connects the sidebar's AI Chat section to the chat library's stores, which
+ * exist only inside `AiAgentProviders` (mounted once inside them):
  *
- * The page lives in the chat library's router, reachable only inside
- * `AiAgentProviders`, so the sidebar records the request and this component -
- * mounted once inside the providers - performs it.
+ * - fulfils the requests recorded by `dialogsStore.requestAiChatPage` - AI
+ *   Chat, Recent and a conversation under it open the chat fullscreen, on the
+ *   conversation, on its history or on that conversation;
+ * - mirrors the latest conversations and the open one into `dialogsStore`
+ *   for Recent's entries. They are read even while the chat is closed, since
+ *   the sidebar shows them all the time.
  */
-const AiChatPageBridgeComponent = () => {
+const AiChatPageBridgeComponent = ({
+  canLoadThreads = false,
+}: AiChatPageBridgeProps) => {
   const dialogsStore = useStore("dialogsStore");
   const request = dialogsStore.aiChatPageRequest;
 
   const location = useLocation();
   const aiChatStore = useAiChatStore();
-  const useRouter = useAiChatStores().useRouter;
+  const chatStores = useAiChatStores();
+  const { useRouter, useThreadsStore } = chatStores;
   const goToChat = useRouter((s) => s.goToChat);
   // Waits for the threads to be read, as the chat toolbar's history button.
   const openHistory = useRouter((s) => s.openHistory);
+  const switchToThread = useThreadsStore((s) => s.onSwitchToThread);
+  const threads = useThreadsStore((s) => s.threads);
+  const activeThreadId = useThreadsStore((s) => s.threadId);
+
+  // The list is read once per scope; the chat reads it the same way when it
+  // opens, so this costs it nothing then.
+  React.useEffect(() => {
+    if (!canLoadThreads) return;
+    void useThreadsStore
+      .getState()
+      .ensureThreads(chatStores.getEntityId())
+      .catch(() => {
+        // AI may be unavailable to the caller: Recent lists nothing.
+      });
+  }, [canLoadThreads, useThreadsStore, chatStores]);
+
+  // The store keeps them most recent first. A conversation without a title
+  // has not had its first message yet.
+  React.useEffect(() => {
+    dialogsStore.setAiChatRecentThreads(
+      canLoadThreads
+        ? threads
+            .filter((thread) => thread.title)
+            .slice(0, RECENT_THREADS_COUNT)
+            .map((thread) => ({ id: thread.threadId, title: thread.title ?? "" }))
+        : [],
+    );
+  }, [threads, canLoadThreads, dialogsStore]);
+
+  React.useEffect(() => {
+    dialogsStore.setAiChatActiveThreadId(activeThreadId);
+  }, [activeThreadId, dialogsStore]);
 
   React.useEffect(() => {
     if (!request) return;
@@ -83,6 +131,14 @@ const AiChatPageBridgeComponent = () => {
     // Not cleared on re-run: the request is consumed already, so a re-run
     // has nothing else to do it with.
     window.setTimeout(() => {
+      if (consumed.threadId) {
+        // A chosen conversation: opening must not start a fresh one.
+        aiChatStore.open();
+        aiChatStore.setFullscreen(true);
+        goToChat();
+        switchToThread(consumed.threadId);
+        return;
+      }
       // A closed panel starts a fresh conversation, an open one keeps its
       // thread - the same as every other way to open the chat.
       aiChatStore.openNewChat();
@@ -97,6 +153,7 @@ const AiChatPageBridgeComponent = () => {
     aiChatStore,
     goToChat,
     openHistory,
+    switchToThread,
   ]);
 
   return null;

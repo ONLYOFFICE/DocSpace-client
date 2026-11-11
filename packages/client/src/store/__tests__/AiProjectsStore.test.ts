@@ -69,7 +69,7 @@ const listed = (id: number) =>
     } as unknown as TAiProject["aiProject"],
   });
 
-const presets = { setActivePreset: vi.fn() };
+const presets = { setActivePreset: vi.fn(), fetchPresets: vi.fn(async () => {}) };
 const userStore = { user: { id: "me" } } as unknown as UserStore;
 const createStore = () => new AiProjectsStore(presets as unknown as AiPresetsStore, userStore);
 
@@ -305,6 +305,8 @@ describe("AiProjectsStore", () => {
       expect(result).toBe(created);
       expect(toastr.warning).toHaveBeenCalledWith("room 5 is gone");
       expect(store.activeProject).toBeNull();
+      // The sidebar's Agents lists the latest projects.
+      expect(presets.fetchPresets).toHaveBeenCalled();
     });
 
     it("replaces an updated open project and re-syncs the chat", async () => {

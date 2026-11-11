@@ -98,8 +98,8 @@ const FIRST_ITEM_SELECTOR =
 // values. Table view only; the other two carry no columns.
 const TABLE_HEADER_SELECTOR = '[data-testid="table-header"]';
 const SHARED_COLUMN_SELECTORS = [
-  '[data-testid="column-SharedByShareWithMe"]',
-  '[data-testid="column-AccessLevelShareWithMe"]',
+  '[data-testid="data-table-header-SharedByShareWithMe"]',
+  '[data-testid="data-table-header-AccessLevelShareWithMe"]',
   '[data-testid="shared-with-me-cell-shared-by-0"]',
   '[data-testid="shared-with-me-cell-access-level-0"]',
 ];

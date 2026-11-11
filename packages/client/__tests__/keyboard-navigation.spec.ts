@@ -126,8 +126,9 @@ const describeFocus = (page: Page) =>
         outer = outer.parentElement?.closest(".files-item")
       )
         row = outer;
-      return [...(row?.querySelectorAll(".table-container_cell") ?? [])].some(
-        (cell) => getComputedStyle(cell).borderTopColor === accent,
+      // The DataTable row draws its lines on a ::before strip behind the cells.
+      return [...(row?.querySelectorAll(".table-container_row") ?? [])].some(
+        (line) => getComputedStyle(line, "::before").borderTopColor === accent,
       );
     };
 

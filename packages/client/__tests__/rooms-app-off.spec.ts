@@ -127,7 +127,7 @@ const openShareSubmenu = async (page: Page) => {
 // The checkbox shows in place of the item icon while its cell is hovered.
 const selectRow = async (table: Locator, rowTestId: string) => {
   const row = table.getByTestId(rowTestId);
-  await row.locator(".table-container_element-wrapper").hover();
+  await row.locator('[data-testid^="files-cell-checkbox-"]').hover();
   await row.getByTestId("checkbox").first().click();
 };
 

@@ -225,7 +225,7 @@ async function readZip(download: Download) {
 
 // The checkbox shows in place of the item icon while its cell is hovered.
 async function selectRow(row: Locator) {
-  await row.locator(".table-container_element-wrapper").hover();
+  await row.locator('[data-testid^="files-cell-checkbox-"]').hover();
   await row.getByTestId("checkbox").first().click();
 }
 

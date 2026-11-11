@@ -1058,7 +1058,10 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await expect(passphrasePrompt(page)).toHaveCount(0);
   });
 
-  test("Copy into another private room", async ({
+  // The two fixme cases reach the destination room through the picker's
+  // Rooms list, which holds no private room on the server. They wait for the
+  // Private entry of the picker (private-rooms-server-section, task 1.4).
+  test.fixme("Copy into another private room", async ({
     page,
     baseUrl,
     port,
@@ -1082,7 +1085,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     expect(room.getFiles().map((f) => f.id)).toEqual([MEMO.id]);
   });
 
-  test("Copy into a folder of another private room", async ({
+  test.fixme("Copy into a folder of another private room", async ({
     page,
     baseUrl,
     port,

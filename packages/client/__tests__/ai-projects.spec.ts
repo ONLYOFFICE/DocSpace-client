@@ -118,7 +118,7 @@ test.describe("AI Chat section", () => {
       }
 
       // One AI section in the sidebar, AI Chat, with Agents, Recent, Skill
-      // sets, Knowledge bases and Trash and no Archive; the projects have no
+      // sets and Knowledge bases, no Trash or Archive; the projects have no
       // section of their own.
       await expect(sidebar(page)).toContainText("AI Chat");
       await expect(sidebar(page)).not.toContainText("AI Projects");

@@ -158,7 +158,7 @@ describe("ClientArticleSidebar — Private section", () => {
 });
 
 describe("ClientArticleSidebar — AI Chat section", () => {
-  it("lists AI Chat, then Agents, Recent, Skill sets, Knowledge bases and Trash", () => {
+  it("lists AI Chat, then Agents, Recent, Skill sets and Knowledge bases", () => {
     renderSidebar([
       { id: 2010, title: "AI", rootFolderType: FolderType.AiHub },
     ]);
@@ -173,7 +173,6 @@ describe("ClientArticleSidebar — AI Chat section", () => {
       "nav-ai-chat-recent",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
-      "nav-ai-rooms-trash",
     ]);
   });
 });

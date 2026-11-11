@@ -78,10 +78,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import {
-  AI_HUB_SECTION_FOLDER_TYPES,
-  ROOMS_SECTION_FOLDER_TYPES,
-} from "@docspace/shared/utils/rooms";
+import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
@@ -644,10 +641,10 @@ const ClientArticleSidebar = ({
     // section itself is AI Chat: the chat, fullscreen. Under it Agents lists
     // the AI projects (the section's root list; a project opens as its
     // chat), Recent is the chat's history, and Skill sets and Knowledge bases
-    // are the same list narrowed to Instructions and Knowledge rooms. A Trash
-    // scoped to those room types closes it; the server never archives them,
-    // so there is no Archive slot. The bare `/ai-rooms` is the Rooms app's
-    // SDK frame page: the section lives on the nested paths.
+    // are the same list narrowed to Instructions and Knowledge rooms. There
+    // is no Trash entry (its `/ai-rooms/trash` route stays) and no Archive
+    // one - the server never archives these rooms. The bare `/ai-rooms` is
+    // the Rooms app's SDK frame page: the section lives on the nested paths.
     if (aiHubFolder && aiServicesEnabled) {
       mainItems.push({
         id: "ai-chat",
@@ -679,20 +676,6 @@ const ClientArticleSidebar = ({
             label: t("Common:AIProjectKnowledgeRooms"),
             icon: CatalogKnowledgeReactSvgUrl,
             ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),
-          },
-          {
-            id: "ai-rooms-trash",
-            label: t("Common:TrashSection"),
-            icon: getCatalogIconUrlByType(FolderType.TRASH),
-            ...nav(
-              scopedUrl(
-                CategoryType.Trash,
-                "/ai-rooms/trash",
-                recycleBinFolderId,
-                AI_HUB_SECTION_FOLDER_TYPES,
-              ),
-            ),
-            withTopSeparator: true,
           },
         ],
       });

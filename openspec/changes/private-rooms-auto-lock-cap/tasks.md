@@ -8,7 +8,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Client
 
-- [ ] 2.1 Client: list the three presets in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/AutoLockSetting.tsx`, and remove `Common:AutoLockOff` and `Common:AutoLock1h` from `public/locales/*/Common.json` with their `.meta` files (design decision 4). Verify: case "Offered presets" in `__tests__/AutoLockSetting.test.tsx` next to the component; `cd packages/client && pnpm exec vitest run src/pages/Profile`; `cd common/tests && npx vitest run test/locales.test.js`; `pnpm exec tsc` in client
+- [x] 2.1 Client: list the three presets in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/AutoLockSetting.tsx`, and remove `Common:AutoLockOff` and `Common:AutoLock1h` from `public/locales/*/Common.json` with their `.meta` files (design decision 4). Verify: case "Offered presets" in `__tests__/AutoLockSetting.test.tsx` next to the component; `cd packages/client && pnpm exec vitest run src/pages/Profile`; `cd common/tests && npx vitest run test/locales.test.js`; `pnpm exec tsc` in client. Done 2026-11-11: three options in the setting; the two labels removed from 32 language files with their two `.meta` files by a script that checked every other key and value stayed as it was; case "Offered presets" in `AutoLockSetting.test.tsx`, the profile suites 86 of 86; `locales.test.js` 44 of 46, its two completeness cases on four keys of another feature; `tsc` and Biome clean in client. The `.meta` files of the three kept labels still quote the removed options in their usage snippets
 
 ## 3. Translations
 

@@ -37,6 +37,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 import { useRouter } from "next/navigation";
 import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 
@@ -62,7 +63,7 @@ const isFileType = (item: unknown): item is TFile =>
   !!item && typeof item === "object" && "fileExst" in item;
 
 const LibraryTemplateRoute = () => {
-  const { t } = useTranslation("Common");
+  const { t, i18n } = useTranslation("Common");
   const router = useRouter();
   const { templateId, templateType, langId, categoryId, roomId, libraryId } =
     useLibraryParams();
@@ -223,7 +224,8 @@ const LibraryTemplateRoute = () => {
 
   const title = template.title.replace(/\.pdf$/i, "");
   const updatedDate = template.updated
-    ? new Date(template.updated).toLocaleDateString(undefined, {
+    ? new Date(template.updated).toLocaleDateString(i18n.language, {
+        numberingSystem: LATIN_NUMBERING_SYSTEM,
         year: "numeric",
         month: "2-digit",
         day: "2-digit",

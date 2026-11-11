@@ -37,6 +37,7 @@ import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import type { RequestLog } from "../privacyroom";
+import { LATIN_NUMBERING_SYSTEM } from "../../../utils/latin-digits";
 import { getFilesSettings } from "./filesSettings";
 
 export type EncryptedFileKey = {
@@ -292,7 +293,7 @@ const filesSizeToString = (size: number) => {
     );
     result /= 1024 ** power;
   }
-  return `${result.toLocaleString("en-US", { maximumFractionDigits: 2 })} ${names[power]}`;
+  return `${result.toLocaleString("en-US", { numberingSystem: LATIN_NUMBERING_SYSTEM, maximumFractionDigits: 2 })} ${names[power]}`;
 };
 
 const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({

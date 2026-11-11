@@ -58,6 +58,7 @@ import {
 } from "@docspace/shared/utils/metadata";
 import type { TTranslation } from "@docspace/shared/types";
 import { isFile, isRoom } from "@docspace/shared/utils/typeGuards";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 
 import type {
   TCustomFieldDraft,
@@ -234,7 +235,9 @@ export const getFieldInputError = (
   if (error === "notWhole") return t("Metadata:WholeNumberError");
 
   if (error === "outOfRange") {
-    const { format } = new Intl.NumberFormat(locale);
+    const { format } = new Intl.NumberFormat(locale, {
+      numberingSystem: LATIN_NUMBERING_SYSTEM,
+    });
 
     return t("Metadata:NumberOutOfRangeError", {
       min: format(Number.MIN_SAFE_INTEGER),
@@ -256,7 +259,11 @@ export const formatMetadataValue = (
 
   switch (type) {
     case MetadataFieldType.Number:
-      return value.numberValue?.toLocaleString(locale) ?? "";
+      return (
+        value.numberValue?.toLocaleString(locale, {
+          numberingSystem: LATIN_NUMBERING_SYSTEM,
+        }) ?? ""
+      );
     case MetadataFieldType.Date:
       return formatDateLocalized(getMetadataDate(value.dateValue), "DATE_MED", {
         locale,

@@ -8,7 +8,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Client views
 
-- [ ] 2.1 Client: pass `keysLoaded` from `EncryptionProviderWrapper.jsx` and make its `DeviceSetupHintEffect` wait for it (decisions 1 and 6). Verify: cases "Key list not known" and "First private room this session" in a unit test of the wrapper; `cd packages/client && pnpm exec vitest run src/components`
+- [x] 2.1 Client: pass `keysLoaded` from `EncryptionProviderWrapper.jsx` and make its `DeviceSetupHintEffect` wait for it (decisions 1 and 6). Verify: cases "Key list not known" and "First private room this session" in a unit test of the wrapper; `cd packages/client && pnpm exec vitest run src/components`
 - [ ] 2.2 Client: show no no-access lock in `ItemIcon.tsx` and withhold no menu entry in `filesStore/contextOptions.helpers.ts` on account of keys while the list is unknown (decision 3). Verify: case "Key list not known" in the tests of both, the case "User without keys" unchanged; `pnpm exec vitest run src/components src/store/filesStore`
 
 ## 3. Client room entry and actions

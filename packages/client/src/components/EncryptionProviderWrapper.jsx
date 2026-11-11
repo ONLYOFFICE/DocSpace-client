@@ -162,11 +162,12 @@ const showDeviceSetupHint = (t) => {
   );
 };
 
-const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
+// Spec: private-rooms/key-management, "Device setup hint on entering a private room without keys"
+export const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   isPrivate: selectedFolderStore?.private,
 }))(
   observer(({ isPrivate }) => {
-    const { hasConfiguredKey } = useEncryption();
+    const { hasConfiguredKey, keysLoaded } = useEncryption();
     const { t } = useTranslation(["Common"]);
 
     React.useEffect(() => {
@@ -175,7 +176,7 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
     }, [t]);
 
     React.useEffect(() => {
-      if (!isPrivate || hasConfiguredKey) return;
+      if (!isPrivate || !keysLoaded || hasConfiguredKey) return;
       try {
         if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1")
           return;
@@ -183,7 +184,7 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
       } catch {}
 
       showDeviceSetupHint(t);
-    }, [isPrivate, hasConfiguredKey, t]);
+    }, [isPrivate, keysLoaded, hasConfiguredKey, t]);
 
     return null;
   }),
@@ -288,6 +289,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   return (
     <EncryptionProvider
       userKeys={userKeys}
+      keysLoaded={Array.isArray(keys)}
       PassphraseDialog={PassphraseUnlockAdapter}
       KeyChangeDialog={KeyChangeDialog}
     >

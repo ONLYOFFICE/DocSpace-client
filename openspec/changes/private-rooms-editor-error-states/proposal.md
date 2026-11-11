@@ -30,13 +30,12 @@ own message, and three of them can be retried without a page reload:
 
 The editor is still not mounted in any of them.
 
-New user-facing strings, English, for the owner's approval before they are
-translated:
+New user-facing strings, English, approved by the owner on 2026-11-11:
 
 | Key | Text |
 |-----|------|
 | `Common:EncryptedFileUnlockToOpen` | Unlock your encryption key to open this file. |
-| `Common:EncryptedFileNoAccessYet` | You do not have access to this encrypted file yet. Ask a room manager to open the room: access is granted when they do. |
+| `Common:EncryptedFileNoAccessYet` | You do not have access to this encrypted file yet. |
 
 Reused as they are: Common:UnlockKey ("Unlock"), Common:TryAgain,
 Common:EncryptionKeysLoadFailed, Common:EncryptionKeysNotConfigured and
@@ -51,13 +50,11 @@ Out of scope:
 - Telling a failed request from a refusal by its status code: the change
   does not rely on which status the server answers with.
 
-Decisions that need a human:
+Decisions taken by the owner on 2026-11-11:
 
-1. The two texts above. The second one names the way access appears
-   today: a room manager who opens the room re-wraps the file keys for the
-   members who have a key (main spec `room-membership`, backfill on room
-   entry). A shorter alternative without the advice: "You do not have
-   access to this encrypted file yet."
+1. The two texts above are approved. For the second one the short form
+   is taken; the longer form advised asking a room manager to open the
+   room, which re-wraps the file keys today, and is not used.
 
 Depends on: nothing in `../server` or the Document Server. The change
 states nothing about server behaviour.

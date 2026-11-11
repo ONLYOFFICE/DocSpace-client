@@ -81,6 +81,6 @@ Editor page, as read on 2026-11-11:
   → The retry is harmless, and the change does not guess which status
   means a refusal; a file the user may not read is not opened by the page
   in the first place.
-- [The no-access advice is true only while a manager's room entry
-  re-wraps keys] → It is the behaviour of the main spec today; the text is
-  a decision of the owner (proposal decision 1).
+- [The no-access message gives no advice] → The owner took the short
+  text (proposal decision 1); what the user should do next is left to
+  card C10.

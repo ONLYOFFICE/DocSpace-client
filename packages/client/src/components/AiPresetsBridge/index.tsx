@@ -212,7 +212,7 @@ const AiPresetsBridge = ({
       agents,
       selectedId: selectedAgentId,
       onSelect: onAgentSelect,
-      onOpen: aiPresetsStore.fetchPresets,
+      onOpen: aiPresetsStore.refreshPresets,
     });
     return () => aiChatStore.setAgentPicker(null);
   }, [aiChatStore, aiPresetsStore, agents, selectedAgentId, onAgentSelect, isInsideOpenProject]);
@@ -266,7 +266,7 @@ const AiPresetsBridge = ({
         () => aiChatStore.isVisible,
         (visible) => {
           if (visible) {
-            void aiPresetsStore.fetchPresets();
+            void aiPresetsStore.refreshPresets();
             return;
           }
           aiPresetsStore.cancelApply();

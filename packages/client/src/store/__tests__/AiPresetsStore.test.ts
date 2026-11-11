@@ -10,7 +10,7 @@ const api = vi.hoisted(() => ({
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 
-import AiPresetsStore, { toAiPreset } from "../AiPresetsStore";
+import AiPresetsStore, { PRESETS_FRESH_MS, toAiPreset } from "../AiPresetsStore";
 
 const room = (id: number, title: string, available = true): TAiProjectSource =>
   ({ id, title, available, roomType: 10 }) as TAiProjectSource;
@@ -119,6 +119,40 @@ describe("AiPresetsStore", () => {
     store.openSaveDialog(settings);
     await expect(store.savePreset("Contracts")).rejects.toThrow("403");
     expect(store.pendingSettings).toEqual(settings);
+  });
+
+  it("refreshes a list only once it is no longer current, and shares a read on its way", async () => {
+    try {
+      const store = new AiPresetsStore();
+      store.init("u1");
+      await flush();
+      expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+
+      // Read a moment ago: the chat and its menu opening read nothing.
+      await store.refreshPresets();
+      expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+
+      vi.setSystemTime(Date.now() + PRESETS_FRESH_MS);
+      await Promise.all([store.refreshPresets(), store.refreshPresets()]);
+      expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+
+      // A list known to have changed is read whatever its age.
+      await store.fetchPresets();
+      expect(api.getAiProjects).toHaveBeenCalledTimes(3);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("reads again after a failed read, however recent", async () => {
+    api.getAiProjects.mockRejectedValueOnce(new Error("offline"));
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    await store.refreshPresets();
+    expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+    expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
   });
 
   it("applies a picked project as it is now", async () => {

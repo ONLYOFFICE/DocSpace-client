@@ -68,6 +68,9 @@ export type { AiChatPresetRoom, AiChatPresetSettings };
  * gone, or overtaken by a later pick (or called off) before its read came
  * back - then it is dropped without a word.
  */
+/** How long a read list counts as current for the chat's own re-reads. */
+export const PRESETS_FRESH_MS = 10_000;
+
 export type TAiPresetApplyResult = "applied" | "gone" | "superseded";
 
 /** How many projects the chat panel's agents menu offers, the most recent first. */
@@ -132,11 +135,21 @@ class AiPresetsStore {
 
   private requestId = 0;
 
+  // When the list was last read, and the read on its way: the chat's own
+  // re-reads (`refreshPresets`) skip a list that is current or coming.
+  private lastReadAt = 0;
+
+  private reading: Promise<void> | null = null;
+
   // The latest pick: a read that comes back for an older one is dropped.
   private applyRequestId = 0;
 
   constructor() {
-    makeAutoObservable(this, { pendingApply: observable.ref });
+    makeAutoObservable<this, "lastReadAt" | "reading">(this, {
+      pendingApply: observable.ref,
+      lastReadAt: false,
+      reading: false,
+    });
   }
 
   init = (userId: string | null) => {
@@ -144,12 +157,37 @@ class AiPresetsStore {
     this.userId = userId;
     this.presets = [];
     this.activePreset = null;
+    this.lastReadAt = 0;
     if (userId) void this.fetchPresets();
   };
 
-  /** Re-reads the projects the picker offers; a failed read keeps the last list. */
-  fetchPresets = async () => {
-    if (!this.userId) return;
+  /**
+   * Re-reads the projects the menu offers; a failed read keeps the last
+   * list. Always reads: for a list known to have changed (a project created
+   * or edited here).
+   */
+  fetchPresets = (): Promise<void> => {
+    if (!this.userId) return Promise.resolve();
+    const read = this.readPresets();
+    this.reading = read;
+    void read.finally(() => {
+      if (this.reading === read) this.reading = null;
+    });
+    return read;
+  };
+
+  /**
+   * Re-reads the projects unless they were read a moment ago or a read is
+   * on its way: what the chat does when it or its agents menu opens, so
+   * opening the panel and then the menu reads once.
+   */
+  refreshPresets = (): Promise<void> => {
+    if (this.reading !== null) return this.reading;
+    if (Date.now() - this.lastReadAt < PRESETS_FRESH_MS) return Promise.resolve();
+    return this.fetchPresets();
+  };
+
+  private readPresets = async () => {
     const id = ++this.requestId;
     try {
       const page = await getAiProjects({
@@ -158,7 +196,9 @@ class AiPresetsStore {
         count: PICKER_PROJECTS_COUNT,
       });
       runInAction(() => {
-        if (id === this.requestId) this.presets = page.folders.map(toAiPreset);
+        if (id !== this.requestId) return;
+        this.presets = page.folders.map(toAiPreset);
+        this.lastReadAt = Date.now();
       });
     } catch {
       // AI or the projects may be unavailable to the caller: no picker entry.

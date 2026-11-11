@@ -3,7 +3,7 @@ import { Provider } from "mobx-react";
 import { makeAutoObservable } from "mobx";
 import { MemoryRouter } from "react-router";
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
 
@@ -106,7 +106,7 @@ vi.mock("SRC_DIR/components/GlobalEvents/sub-components/Dialog", () => ({
   ),
 }));
 
-import AiPresetsStore, { toAiPreset } from "SRC_DIR/store/AiPresetsStore";
+import AiPresetsStore, { PRESETS_FRESH_MS, toAiPreset } from "SRC_DIR/store/AiPresetsStore";
 
 import AiPresetsBridgeConnected from "../index";
 
@@ -162,11 +162,19 @@ const renderBridge = (
 
 const flush = () => act(async () => {});
 
+// Past the moment a read list counts as current, so the chat's own
+// re-reads read again.
+const later = () => vi.setSystemTime(Date.now() + PRESETS_FRESH_MS);
+
 describe("AiPresetsBridge", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     aiChatStore = new FakeAiChatStore();
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales")] });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("loads the signed-in user's projects, and reads them again whenever the chat opens", async () => {
@@ -176,14 +184,28 @@ describe("AiPresetsBridge", () => {
     expect(api.getAiProjects).toHaveBeenCalledTimes(1);
     expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
 
-    // A project created or shared elsewhere meanwhile reaches the agents
-    // menu, even for a user who had none (and so had no menu to open).
+    // Right after the first read the list is current: nothing is read.
+    act(() => aiChatStore.setIsVisible(true));
+    await flush();
+    expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+    act(() => aiChatStore.setIsVisible(false));
+
+    // Later, a project created or shared elsewhere meanwhile reaches the
+    // agents menu, even for a user who had none (and so had no menu to open).
+    later();
     act(() => aiChatStore.setIsVisible(true));
     await flush();
     expect(api.getAiProjects).toHaveBeenCalledTimes(2);
     act(() => aiChatStore.setIsVisible(false));
     await flush();
     expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+
+    // The agents menu opened right after the chat reads nothing more.
+    later();
+    act(() => aiChatStore.setIsVisible(true));
+    await flush();
+    await act(async () => aiChatStore.agentPicker?.onOpen?.());
+    expect(api.getAiProjects).toHaveBeenCalledTimes(3);
   });
 
   it("reads no projects while AI requests are off (unpaid portal, AI services off)", async () => {
@@ -328,7 +350,8 @@ describe("AiPresetsBridge", () => {
     expect(aiChatStore.agentPicker?.agents.map((a) => a.name)).toEqual(["Sales", "Legal"]);
     expect(aiChatStore.agentPicker?.selectedId).toBeNull();
 
-    // Opening the menu reads the projects again.
+    // Opening the menu reads the projects again, once they are not current.
+    later();
     await act(async () => aiChatStore.agentPicker?.onOpen?.());
     expect(api.getAiProjects).toHaveBeenCalledTimes(3);
   });
@@ -389,12 +412,14 @@ describe("AiPresetsBridge", () => {
 
     // Deleted or left elsewhere: the menu's next read no longer has it.
     api.getAiProjects.mockResolvedValue({ folders: [project(2, "Legal")] });
+    later();
     await act(async () => aiChatStore.agentPicker?.onOpen?.());
     expect(aiChatStore.agentPicker?.agents.map((a) => a.id)).toEqual(["1", "2"]);
     expect(aiChatStore.agentPicker?.selectedId).toBe("1");
 
     // The last project gone as well: the menu stays, to take the chat off it.
     api.getAiProjects.mockResolvedValue({ folders: [] });
+    later();
     await act(async () => aiChatStore.agentPicker?.onOpen?.());
     expect(aiChatStore.agentPicker?.agents.map((a) => a.id)).toEqual(["1"]);
 

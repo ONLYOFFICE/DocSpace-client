@@ -14,7 +14,7 @@ const api = vi.hoisted(() => ({
 }));
 
 const { toastr } = vi.hoisted(() => ({
-  toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
+  toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn(), info: vi.fn() },
 }));
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
@@ -30,11 +30,21 @@ class FakeAiChatStore {
 
   knowledgePickerHidden = false;
 
+  agentPicker: {
+    agents: { id: string; name: string }[];
+    selectedId: string | null;
+    onSelect: (id: string | null) => void;
+  } | null = null;
+
   applyPreset = vi.fn();
 
   constructor() {
-    makeAutoObservable(this, { applyPreset: false });
+    makeAutoObservable(this, { applyPreset: false, agentPicker: false });
   }
+
+  setAgentPicker = (picker: FakeAiChatStore["agentPicker"]) => {
+    this.agentPicker = picker;
+  };
 
   setIsVisible = (visible: boolean) => {
     this.isVisible = visible;
@@ -55,6 +65,11 @@ class FakeAiChatStore {
 }
 
 let aiChatStore = new FakeAiChatStore();
+
+// The project logos the agents menu draws.
+vi.mock("SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo", () => ({
+  ProjectLogo: () => <span data-testid="project-logo" />,
+}));
 
 // The bridge reads whether a chat profile exists to tell "AI is set up".
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
@@ -127,12 +142,14 @@ const renderBridge = (
     user = { id: "u1", isAdmin: true } as object | null,
     aiConfig = null as { vectorizationEnabled: boolean } | null,
     enabled = true,
+    activeProject = null as object | null,
   } = {},
 ) =>
   render(
     <MemoryRouter initialEntries={[path]}>
       <Provider
         aiPresetsStore={aiPresetsStore}
+        aiProjectsStore={{ activeProject }}
         userStore={{ user }}
         settingsStore={{ aiConfig, standalone: true, setAiReady }}
         paymentStore={{ isAIReady: false }}
@@ -294,5 +311,65 @@ describe("AiPresetsBridge", () => {
     setAiReady.mockClear();
     renderBridge(new AiPresetsStore());
     expect(setAiReady).toHaveBeenLastCalledWith(true);
+  });
+  it("offers the projects as the panel title's agents, none while there are none", async () => {
+    api.getAiProjects.mockResolvedValue({ folders: [] });
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+    expect(aiChatStore.agentPicker).toBeNull();
+
+    api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+    await act(() => store.fetchPresets());
+    expect(aiChatStore.agentPicker?.agents.map((a) => a.name)).toEqual(["Sales", "Legal"]);
+    expect(aiChatStore.agentPicker?.selectedId).toBeNull();
+  });
+
+  it("applies an agent picked in the title and goes back to the default agent", async () => {
+    api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+    api.getAiProject.mockResolvedValue(project(2, "Legal"));
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+
+    await act(async () => aiChatStore.agentPicker?.onSelect("2"));
+    await flush();
+    expect(store.activePreset?.id).toBe("2");
+    expect(aiChatStore.agentPicker?.selectedId).toBe("2");
+    expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith(
+      expect.objectContaining({ profileId: "p1", contextRooms: [{ cloud: "docspace", id: "12", name: "Skills" }] }),
+    );
+
+    act(() => aiChatStore.agentPicker?.onSelect(null));
+    expect(store.activePreset).toBeNull();
+    expect(aiChatStore.agentPicker?.selectedId).toBeNull();
+    expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith({
+      profileId: null,
+      profileName: null,
+      contextRooms: [],
+      knowledgeRooms: [],
+    });
+  });
+
+  it("reports an agent that is gone by the time it is picked", async () => {
+    api.getAiProject.mockRejectedValue({ response: { status: 404 } });
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+
+    await act(async () => aiChatStore.agentPicker?.onSelect("1"));
+    await flush();
+    expect(toastr.info).toHaveBeenCalledWith("Common:AIProjectNotAvailable");
+    expect(store.activePreset).toBeNull();
+    // The last project left the list, and the menu with it.
+    expect(aiChatStore.agentPicker).toBeNull();
+  });
+
+  it("offers no agents in an open project's own chat", async () => {
+    const store = new AiPresetsStore();
+    renderBridge(store, { path: "/ai-rooms/1/filter", activeProject: { id: 1 } });
+    await flush();
+    expect(store.presets).toHaveLength(1);
+    expect(aiChatStore.agentPicker).toBeNull();
   });
 });

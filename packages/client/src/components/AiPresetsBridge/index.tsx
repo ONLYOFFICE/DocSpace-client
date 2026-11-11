@@ -39,6 +39,8 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import { reaction } from "mobx";
 
+import type { AiChatAgentPickerItem } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
@@ -49,6 +51,9 @@ import DialogComponent from "SRC_DIR/components/GlobalEvents/sub-components/Dial
 import type AiPresetsStore from "SRC_DIR/store/AiPresetsStore";
 import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
 import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
+import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
+
+import styles from "./AiPresetsBridge.module.scss";
 
 // The folder/file naming dialog is plain JS; only the props this dialog
 // uses are typed here, the way CreatePluginFileEvent does it.
@@ -82,6 +87,19 @@ type AiPresetsBridgeProps = {
   /** SaaS: the AI service is on for the portal. */
   isAIReady: boolean;
   setAiReady: (aiReady: boolean | null) => void;
+  /** An AI project is open on the projects page (its room, with its own chat). */
+  isAiProjectOpen: boolean;
+};
+
+// A project read without its logo is drawn with its initials.
+const NO_PROJECT_LOGO = { color: "" };
+
+// The settings that take a chat off a project: the default model, no rooms.
+const NO_PRESET = {
+  profileId: null,
+  profileName: null,
+  contextRooms: [],
+  knowledgeRooms: [],
 };
 
 /**
@@ -101,6 +119,7 @@ const AiPresetsBridge = ({
   standalone,
   isAIReady,
   setAiReady,
+  isAiProjectOpen,
 }: AiPresetsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -131,6 +150,55 @@ const AiPresetsBridge = ({
     aiChatStore.setOnSavePreset(aiPresetsStore.openSaveDialog);
     return () => aiChatStore.setOnSavePreset(null);
   }, [aiChatStore, aiPresetsStore, isInsideProject, canCreateProjects]);
+
+  // The panel title's agents menu: the default agent, then the AI projects
+  // (the agents the sidebar lists), the most recent first. Picking one
+  // applies it to the open chat as the model picker's "Choose AI Project"
+  // does; the default agent takes the chat off its project. Not offered
+  // without projects, nor in an open project's own chat, which is that
+  // project.
+  const { presets, activePreset } = aiPresetsStore;
+  const selectedAgentId = activePreset?.id ?? null;
+  const isInsideOpenProject = isAiRoomsPage && isAiProjectOpen;
+  const agents = React.useMemo<AiChatAgentPickerItem[]>(
+    () =>
+      presets.map((preset) => ({
+        id: preset.id,
+        name: preset.name,
+        icon: (
+          <ProjectLogo
+            project={{ title: preset.name, logo: preset.logo ?? NO_PROJECT_LOGO }}
+            size="20px"
+            radius="4px"
+            className={styles.agentLogo}
+          />
+        ),
+      })),
+    [presets],
+  );
+
+  const onAgentSelect = React.useCallback(
+    (id: string | null) => {
+      if (id === null) {
+        if (!aiPresetsStore.activePreset) return;
+        aiPresetsStore.setActivePreset(null);
+        aiChatStore.applyPreset(NO_PRESET);
+        return;
+      }
+      const preset = aiPresetsStore.presets.find((p) => p.id === id);
+      if (!preset) return;
+      void aiPresetsStore.requestApply(preset).then((applied) => {
+        if (!applied) toastr.info(t("Common:AIProjectNotAvailable"));
+      });
+    },
+    [aiChatStore, aiPresetsStore, t],
+  );
+
+  React.useEffect(() => {
+    if (isInsideOpenProject || agents.length === 0) return undefined;
+    aiChatStore.setAgentPicker({ agents, selectedId: selectedAgentId, onSelect: onAgentSelect });
+    return () => aiChatStore.setAgentPicker(null);
+  }, [aiChatStore, agents, selectedAgentId, onAgentSelect, isInsideOpenProject]);
 
   // With vectorization off no Knowledge room can be searched, so the
   // composer loses its knowledge base picker; a base connected earlier
@@ -175,12 +243,7 @@ const AiPresetsBridge = ({
         (visible) => {
           if (visible || !aiPresetsStore.activePreset) return;
           aiPresetsStore.setActivePreset(null);
-          aiChatStore.applyPreset({
-            profileId: null,
-            profileName: null,
-            contextRooms: [],
-            knowledgeRooms: [],
-          });
+          aiChatStore.applyPreset(NO_PRESET);
         },
       ),
     [aiChatStore, aiPresetsStore],
@@ -215,8 +278,9 @@ const AiPresetsBridge = ({
   );
 };
 
-export default inject(({ aiPresetsStore, userStore, settingsStore, paymentStore }: TStore) => ({
+export default inject(({ aiPresetsStore, aiProjectsStore, userStore, settingsStore, paymentStore }: TStore) => ({
   aiPresetsStore,
+  isAiProjectOpen: aiProjectsStore.activeProject !== null,
   userId: userStore.user?.id ?? null,
   canCreateProjects: canManageProjects(userStore.user),
   // The AI config is read only while AI services are on; until it arrives

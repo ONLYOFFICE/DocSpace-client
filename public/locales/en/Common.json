@@ -701,6 +701,7 @@
   "Debit": "Debit",
   "DecryptionPortalTitle": "The decryption process in progress",
   "Default": "Default",
+  "DefaultAIAgent": "Default AI agent",
   "DefaultAISetupDescription": "Set the default model used in AI chat and agents.",
   "DefaultAISetupTitle": "Default AI model",
   "DefaultFolderDescription": "Drop files here or create new ones.",

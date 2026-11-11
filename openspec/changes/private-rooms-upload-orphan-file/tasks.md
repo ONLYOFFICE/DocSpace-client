@@ -9,7 +9,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Client and SDK
 
-- [ ] 2.1 Client: make `packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts` take the failed-row path, with the retry it offers and no listed file, for an upload whose stored file was removed, and keep "uploaded with error" for one whose deletion failed. Verify: cases "Entry cannot be written" and "Deletion fails" in the upload store tests under `packages/client/src/store/uploadDataStore/__tests__`; `cd packages/client && pnpm exec vitest run src/store/uploadDataStore`; `pnpm exec tsc` in client
+- [x] 2.1 Client: make `packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts` take the failed-row path, with the retry it offers and no listed file, for an upload whose stored file was removed, and keep "uploaded with error" for one whose deletion failed. Verify: cases "Entry cannot be written" and "Deletion fails" in the upload store tests under `packages/client/src/store/uploadDataStore/__tests__`; `cd packages/client && pnpm exec vitest run src/store/uploadDataStore`; `pnpm exec tsc` in client. Done 2026-11-11: cases "Entry cannot be written" and "Deletion fails" in `UploadDataStore.encryption.test.ts`, replacing the one earlier wrap case; the upload store suite 269 of 269; `tsc` and Biome clean in client
 - [ ] 2.2 SDK: check that `packages/sdk/src/app/(private)/_hooks/useEncryptedUpload.ts` fails the row with the message of the outcome and lists no file for a removed upload; change it only if it does not. Verify: a case "Upload through the SDK" next to the hook's tests; `pnpm test:sdk`; `pnpm exec tsc` in sdk
 
 ## 3. Translations

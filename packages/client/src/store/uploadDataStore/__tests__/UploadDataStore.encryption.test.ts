@@ -343,16 +343,39 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     pendingAccessStore.clear(7, "bob");
   });
 
-  it("marks the file and its history entry when wrapping rejects after upload", async () => {
+  const refuseOwnEntry = () => {
     const { store } = setupEncryptedPendingFile();
     vi.mocked(prepareEncryptedUpload).mockResolvedValue(
       preparedUpload(makeDek()) as never,
     );
     serveEncryptedUpload();
-    vi.mocked(filesApi.setFileEncryptionKeys).mockRejectedValueOnce({
+    vi.mocked(filesApi.setFileEncryptionKeys).mockRejectedValue({
       response: { status: 500 },
       message: "wrap exploded",
     });
+    return store;
+  };
+
+  it("Entry cannot be written", async () => {
+    const store = refuseOwnEntry();
+    vi.mocked(filesApi.deleteFile).mockResolvedValue([
+      { id: "op-1", finished: true, error: "", progress: 100 },
+    ] as never);
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.deleteFile).toHaveBeenCalledWith(555, false, true);
+    expect(store.files[0].error).toBe("Common:EncryptionUploadNotKept");
+    expect(store.files[0].action).not.toBe("uploaded");
+    expect(store.files[0].fileId).toBeNull();
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionUploadNotKept",
+    );
+  });
+
+  it("Deletion fails", async () => {
+    const store = refuseOwnEntry();
+    vi.mocked(filesApi.deleteFile).mockRejectedValue(new Error("403"));
 
     await store.startSessionFunc(0, t);
 

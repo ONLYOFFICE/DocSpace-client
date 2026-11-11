@@ -35,7 +35,7 @@
 
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const toast = vi.hoisted(() => ({ active: new Set<number>(), nextId: 1 }));
 
@@ -105,6 +105,13 @@ const pressTryAgain = async () => {
 describe("Entering a private room without keys warns", () => {
   beforeEach(() => {
     toast.active.clear();
+    vi.useFakeTimers({ toFake: ["Date"] });
+    // Each test starts past the grace of the toast raised by the one before.
+    vi.setSystemTime(Date.now() + 60_000 * toast.nextId);
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("Navigate into room", () => {
@@ -173,6 +180,18 @@ describe("Entering a private room without keys warns", () => {
     noticeOwnKeysOnRoomEntry(store);
     await settle();
     reportKeyListLoadFailed(store);
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("shows the error once for two failures reported together", async () => {
+    const store = storeWith(null, null, null);
+    // The toast module has not registered the first toast yet.
+    vi.mocked(toastr.isActive).mockReturnValue(false);
+
+    noticeOwnKeysOnRoomEntry(store);
+    noticeOwnKeysOnRoomEntry(store);
+    await settle();
 
     expect(toastr.error).toHaveBeenCalledTimes(1);
   });

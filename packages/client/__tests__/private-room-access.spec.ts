@@ -221,9 +221,18 @@ test.describe("Entering a private room without keys warns", () => {
     const loadFailed = toasts.filter({ hasText: LOAD_FAILED });
     await expect(loadFailed).toBeVisible({ timeout: 15000 });
 
+    const secondRead = page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        res.url().endsWith("/privacyroom/keys") &&
+        res.status() === 500,
+    );
     await loadFailed.getByText("Try again").click();
+    await secondRead;
 
-    await expect(loadFailed).toBeVisible({ timeout: 10000 });
+    // The closed toast leaves while the new one is raised.
+    await expect(loadFailed).toHaveCount(1, { timeout: 10000 });
+    await expect(loadFailed).toBeVisible();
     await expect(toasts.filter({ hasText: TOAST_KEY_FRAGMENT })).toBeHidden();
   });
 });

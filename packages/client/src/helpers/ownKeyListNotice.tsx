@@ -44,6 +44,15 @@ type TOwnKeysStore = {
 };
 
 let loadFailedToastId: ReturnType<typeof toastr.error> | null = null;
+let loadFailedShownAt = 0;
+
+/** A toast is not active yet in the moment after it is raised. */
+const RAISE_GRACE_MS = 1000;
+
+const isLoadFailedToastOpen = () =>
+  loadFailedToastId !== null &&
+  (Date.now() - loadFailedShownAt < RAISE_GRACE_MS ||
+    toastr.isActive(loadFailedToastId));
 
 const warnNotConfigured = () => {
   toastr.warning(i18n.t("Common:EncryptionKeysNotConfigured"));
@@ -66,7 +75,7 @@ const reportKeyList = (
  * stays until closed and is not stacked while one is open.
  */
 function showKeyListLoadFailed(userStore: TOwnKeysStore) {
-  if (loadFailedToastId !== null && toastr.isActive(loadFailedToastId)) return;
+  if (isLoadFailedToastOpen()) return;
 
   const retry = () => {
     if (loadFailedToastId !== null) toastr.clear(loadFailedToastId);
@@ -77,6 +86,7 @@ function showKeyListLoadFailed(userStore: TOwnKeysStore) {
       .then((keys) => reportKeyList(userStore, keys));
   };
 
+  loadFailedShownAt = Date.now();
   loadFailedToastId = toastr.error(
     <>
       {i18n.t("Common:EncryptionKeysLoadFailed")}{" "}

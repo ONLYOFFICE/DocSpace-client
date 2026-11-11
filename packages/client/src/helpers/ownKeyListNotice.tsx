@@ -118,3 +118,30 @@ export const reportKeyListLoadFailed = (
 ) => {
   if (userStore) showKeyListLoadFailed(userStore);
 };
+
+/**
+ * The user's keys for an action in a private room, an unknown list read
+ * first. Null, with its message shown, when the read failed or the list is
+ * known to be empty.
+ * Spec: private-rooms/file-operations, "An unknown key list is read again before an action is refused"
+ */
+export const resolveOwnKeysForAction = async <TKey,>(userStore: {
+  encryptionKeys: TKey[] | null;
+  ensureEncryptionKeys: () => Promise<TKey[] | null>;
+}): Promise<TKey[] | null> => {
+  const keys = Array.isArray(userStore.encryptionKeys)
+    ? userStore.encryptionKeys
+    : await userStore.ensureEncryptionKeys();
+
+  if (keys === null) {
+    showKeyListLoadFailed(userStore);
+    return null;
+  }
+
+  if (keys.length === 0) {
+    toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
+    return null;
+  }
+
+  return keys;
+};

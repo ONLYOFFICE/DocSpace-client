@@ -82,6 +82,7 @@ import type {
   TTranslation,
 } from "../../types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
+import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
 
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -336,10 +337,15 @@ export const getExpiredOptions = (
   onCalendarOpen: VoidFunction,
   locale: string,
 ) => {
-  const relativeTime = new Intl.RelativeTimeFormat(locale, {
+  const relativeTimeOptions: Intl.RelativeTimeFormatOptions & {
+    numberingSystem?: string;
+  } = {
+    numberingSystem: LATIN_NUMBERING_SYSTEM,
     numeric: "always",
     style: "long",
-  });
+  };
+  // biome-ignore lint/plugin/no-intl-without-latin-digits: relativeTimeOptions above sets numberingSystem
+  const relativeTime = new Intl.RelativeTimeFormat(locale, relativeTimeOptions);
 
   const oneDay = relativeTime.format(1, "day");
   const severalDays = relativeTime.format(7, "day");

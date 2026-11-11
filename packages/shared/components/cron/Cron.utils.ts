@@ -37,6 +37,8 @@ import capitalize from "lodash/capitalize";
 import type { TFunction } from "i18next";
 import { DateTime, Info } from "luxon";
 
+import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
+
 import { Options, PeriodOptionType, PeriodType, Unit } from "./Cron.types";
 
 export const parseNumber = (value: unknown) => {
@@ -116,6 +118,7 @@ export const getPeriodFromCronParts = (cronParts: number[][]): PeriodType => {
 
 export const fixFormatValue = (value: number, local: string) => {
   const result = value.toLocaleString(local, {
+    numberingSystem: LATIN_NUMBERING_SYSTEM,
     minimumIntegerDigits: 2,
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,

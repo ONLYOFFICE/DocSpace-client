@@ -53,9 +53,13 @@ import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
 
 import { TDataContext } from "@/types";
 
+import { installLatinDigits } from "@docspace/shared/utils/latin-digits";
+
 import pkgFile from "../../package.json";
 
 import ErrorBoundaryWrapper from "./ErrorBoundary";
+
+installLatinDigits();
 
 export const Providers = ({
   children,

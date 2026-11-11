@@ -23,7 +23,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 5. Gate
 
-- [ ] 5.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `npm --prefix ./common/tests run test:lefthook`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+- [x] 5.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `npm --prefix ./common/tests run test:lefthook`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+  - 2026-11-11: `pnpm exec tsc` clean in shared, client, sdk, doceditor, login and management. Unit suites: shared 2313, client 2132, sdk 498, all passed; the client helper, filesStore and filesActionsStore suites run again after the toast fix. Biome clean on the touched paths. `test:lefthook`: 61 passed, 3 skipped. Docker `tests-dev`: `private-room-access.spec.ts` 20 of 20 with `--repeat-each=4`; the private-room, encrypted-file, key-flow and keys-management specs 155 passed, 6 skipped, and the two wide-screen screenshot cases of `keys-management.spec.ts` failed as before this change (task 4.6 of `private-rooms-beta-release`). `openspec validate --all --strict`: 20 of 20; after a trial archive on a scratch copy, 19 of 19 with the main spec included.
 
 ## Workflow follow-up
 

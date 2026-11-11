@@ -149,11 +149,11 @@ The system SHALL offer Common:LockNow while the identity is unlocked; it SHALL w
 - **THEN** the identity is locked, the device is forgotten and the next operation prompts for the passphrase
 
 ### Requirement: Export a key
-The system SHALL export a registered key as a JSON file named after the key fingerprint after the user confirms the passphrase, confirming with Common:EncryptionKeyExported. The export contains the sealed envelope, never the raw private key.
+The system SHALL export a registered key as a JSON file named after the key fingerprint after the user confirms the passphrase, confirming with Common:EncryptionKeyExported. The export contains the sealed envelope, never the raw private key. The file name SHALL NOT carry a product or brand name.
 
 #### Scenario: Export
 - **WHEN** the user chooses export and enters the correct passphrase
-- **THEN** a `docspace-key-<fingerprint>.json` file is downloaded
+- **THEN** an `encryption-key-<fingerprint>.json` file is downloaded
 
 ### Requirement: Import a key
 The system SHALL import a key from a previously exported JSON file (Common:ImportKey) for a user who has no key: the user picks the file, enters its passphrase, and the key is registered for this account and unlocked, confirming with Common:EncryptionKeyImported. Over HTTP the import SHALL be refused with Common:EncryptionRequiresHttps. The action SHALL NOT be offered while the user has a key, nor while the user's key list is not known.
@@ -617,3 +617,21 @@ The system SHALL show a bar (Common:PrivateRoomLockedBarTitle, Common:PrivateRoo
 #### Scenario: User without a key
 - **WHEN** a user whose key list is known to hold no key, or is not known, opens a private room
 - **THEN** the bar is not shown
+
+### Requirement: Key-change dialog speaks the interface language
+The system SHALL show the dates and the duration of the key-change dialog in the interface language: the duration as a number with a unit word of that language, never with fixed Latin suffixes.
+
+#### Scenario: Duration in the interface language
+- **WHEN** the key-change dialog reports how long the known key was active
+- **THEN** Common:KeyChangedActiveFor carries a duration formatted in the interface language, such as "5 days" in English
+
+### Requirement: Key texts do not tie the key to a device
+The system SHALL describe the encryption key as the key of the user's account in the texts that prompt for the passphrase or the recovery phrase, report a missing key, or explain a changed key, and SHALL NOT say that the key is stored or configured per device.
+
+#### Scenario: Passphrase prompt
+- **WHEN** the unlock dialog shows Common:PassphraseHint
+- **THEN** the text asks for the passphrase of the key without naming a device
+
+#### Scenario: Reasons of a key change
+- **WHEN** the key-change dialog lists the legitimate reasons of a change
+- **THEN** it names a replaced key (Common:KeyChangedReasonReplaced), a recovery and a reset, and no reason that keys are stored per device

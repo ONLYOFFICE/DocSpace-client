@@ -9,7 +9,9 @@
 // Options kept in a variable cannot be read here and are flagged too: put the key
 // at the call. RelativeTimeFormat is the exception - this TS lib has no
 // numberingSystem in its options, so they live in a variable typed to allow it,
-// and the call carries a biome-ignore that names it. new Intl.DateTimeFormat().resolvedOptions() prints nothing and is
+// and the call carries a biome-ignore that names it. A formatter called without
+// new (Intl.NumberFormat(locale)) is the same formatter and is matched too.
+// new Intl.DateTimeFormat().resolvedOptions() prints nothing and is
 // left alone; Intl formatters that print no digits (Collator, PluralRules,
 // ListFormat, DisplayNames, Segmenter) are not matched; nor is a luxon
 // DateTime.toLocaleString(DateTime.DATE_*) or DateTime[preset], which installLatinDigits covers.
@@ -18,7 +20,7 @@
 // call prints no digits (a month name, a currency symbol alone).
 
 or {
-  `new Intl.$ctor($args)` as $call where {
+  or { `new Intl.$ctor($args)`, `Intl.$ctor($args)` } as $call where {
     $ctor <: or { `NumberFormat`, `DateTimeFormat`, `RelativeTimeFormat` },
     $args <: not contains `numberingSystem`,
     $call <: not within `$_.resolvedOptions($...)`,

@@ -14,7 +14,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Gate
 
-- [ ] 3.1 Run the gate, every command on its own with its exit code read: `pnpm exec tsc` in the six packages, the shared, client, sdk and doceditor unit suites, `npm --prefix ./common/tests run test:lefthook`, `locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+- [x] 3.1 Run the gate, every command on its own with its exit code read: `pnpm exec tsc` in the six packages, the shared, client, sdk and doceditor unit suites, `npm --prefix ./common/tests run test:lefthook`, `locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+  - 2026-11-11, each command run on its own with its exit code read: `pnpm exec tsc` exit 0 in shared, client, sdk, doceditor, login and management. Unit suites, all exit 0: shared 2315, client 2148, sdk 498, doceditor 78. Biome clean on `packages/doceditor/src`. `test:lefthook`: 61 passed, 3 skipped. `locales.test.js`: 44 of 46, the two completeness cases failing on the four foreign keys only. `openspec validate --all --strict`: 20 of 20; after a trial archive on a scratch copy, 19 of 19 with the main spec included. No E2E run: the doceditor image is not built, so the page is covered by unit tests only.
 
 ## Workflow follow-up
 

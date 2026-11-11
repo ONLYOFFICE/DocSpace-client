@@ -1,14 +1,14 @@
 {
   "key_path": "EncryptedSkippedKeyMismatch",
-  "content": "Skipped {{users}}: their encryption key has changed and was not trusted. Re-verify the key and retry from the Members panel.",
-  "content_en_sha1_hash": "7031e80ba4b5c877c4740cf3ff8a83c8812c6e1f",
-  "created_at": "2026-05-24T17:27:26.380Z",
-  "updated_at": "2026-11-09T09:26:33.384Z",
+  "content": "Skipped {{users}}: their encryption key has changed and was not trusted. Verify the new key with them and try again.",
+  "content_en_sha1_hash": "670596330b6cfad526ed291bb8f4fb867debfdff",
+  "created_at": "2026-11-11T18:49:04.094Z",
+  "updated_at": "2026-11-11T18:51:02.244Z",
   "comment": {
-    "text": "Warning toast message appearing when encryption keys for specific users are no longer trusted. The {{users}} variable contains a comma-separated list of names.",
+    "text": "Warning in the invitation results of a private room and after a retry for a member. The users variable is a comma-separated list of names of people whose changed encryption key the current user refused to trust.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:04:47.840Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-11T18:51:02.244Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
-      "line_number": 242,
+      "line_number": 266,
       "context": "});\n }\n if (mismatchNames.length > 0) {\n notices.push({\n level: \"warning\",\n text: t(\"Common:EncryptedSkippedKeyMismatch\", {\n users: mismatchNames.join(\", \"),\n }),\n });\n }\n return notices;",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
-      "line_number": 242,
+      "line_number": 266,
       "context": "});\n }\n if (mismatchNames.length > 0) {\n notices.push({\n level: \"warning\",\n text: t(\"Common:EncryptedSkippedKeyMismatch\", {\n users: mismatchNames.join(\", \"),\n }),\n });\n }\n return notices;",
       "module": "/packages/shared"
     }

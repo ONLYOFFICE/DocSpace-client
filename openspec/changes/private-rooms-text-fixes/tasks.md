@@ -15,7 +15,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 ## 2. Texts
 
 - [x] 2.1 Common: change the eleven English texts, rename `KeyChangedReasonDevice` to `KeyChangedReasonReplaced` with its call site and `.meta` (decision 1), and update the unit tests, mocks and E2E specs that assert on the old English. Verify: `grep` for each old English sentence under `packages` finds nothing; menu snapshots under `packages/client/src/store/**/__snapshots__` unchanged; the shared, client, sdk and doceditor unit suites
-- [ ] 2.2 Common: refresh the translator comments of the eleven keys (`translate-comments`) and retranslate them into the 31 other languages (`translate-locales`) (decision 7). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the four foreign keys; `translate-stale` reports none of the eleven keys; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
+- [x] 2.2 Common: refresh the translator comments of the eleven keys (`translate-comments`) and retranslate them into the 31 other languages (`translate-locales`) (decision 7). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the four foreign keys; `translate-stale` reports none of the eleven keys; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
 
 ## 3. E2E
 

@@ -40,6 +40,14 @@ const toTime = (date: string | null | undefined): number => {
 };
 
 /**
+ * Whether the user may hold a key: false only for a list known to be empty.
+ * A list that is not known (not read, or the read failed) may hold one.
+ */
+export const mayHoldEncryptionKey = (
+  keys: readonly unknown[] | null | undefined,
+): boolean => !Array.isArray(keys) || keys.length > 0;
+
+/**
  * The one key the client works with for a user: the envelope with the newest
  * server-set date, ties going to the last one listed, `null` for none.
  * Spec: private-rooms/encryption-core, "One selected key per user".

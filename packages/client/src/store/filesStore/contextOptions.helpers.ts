@@ -57,6 +57,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { default as FilesStore } from "../FilesStore";
 
 import type { TClientConfigWithPdfViewer, TItem } from "./types";
+import { mayHoldEncryptionKey } from "@docspace/shared/services/encryption/select-user-key";
 import {
   getEncryptedFileWithheld,
   PRIVATE_FOLDER_WITHHELD,
@@ -625,7 +626,7 @@ export const buildContextOptions = (
         withheldMenuKeys(
           getEncryptedFileWithheld({
             mustConvert,
-            hasKeys: Array.isArray(userKeys) && userKeys.length > 0,
+            hasKeys: mayHoldEncryptionKey(userKeys),
           }),
           PRIVATE_FILE_MENU_KEYS,
         ),

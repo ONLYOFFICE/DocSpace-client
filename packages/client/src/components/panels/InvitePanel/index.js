@@ -34,6 +34,7 @@
  */
 
 import { useEffect, useState, useMemo, useRef } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -1030,6 +1031,7 @@ const InvitePanel = ({
     isOwner,
     isAdmin,
     standalone,
+    isPrivateRoom,
   );
 
   const invitedUsers = useMemo(
@@ -1202,7 +1204,9 @@ const InvitePanel = ({
         {inviteOutcome ? (
           <InviteResult t={t} outcome={inviteOutcome} />
         ) : (
-          bodyInvitePanel
+          <PrivateRoomInviteContext.Provider value={isPrivateRoom}>
+            {bodyInvitePanel}
+          </PrivateRoomInviteContext.Provider>
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>

@@ -238,6 +238,27 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     expect(toastr.warning).toHaveBeenCalledTimes(1);
   });
 
+  it("Key list could not be loaded", async () => {
+    openAddress("/private/5/filter", "?folder=5", {
+      privateRoomsSectionDecided: true,
+    });
+    const ensureEncryptionKeys = vi.fn(async () => null);
+    const store = sectionStore(true, {
+      userStore: { encryptionKeys: null, ensureEncryptionKeys },
+    });
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      roomContents(true) as never,
+    );
+
+    await store.fetchFiles(5);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(ensureEncryptionKeys).toHaveBeenCalledTimes(1);
+    expect(store.files.map((f) => f.id)).toEqual([70]);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.warning).not.toHaveBeenCalled();
+  });
+
   it("moves an ordinary room opened under /private to Rooms", async () => {
     openAddress("/private/5/filter", "?folder=5");
     const store = sectionStore();

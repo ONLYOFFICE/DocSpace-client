@@ -58,7 +58,7 @@ import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const ROOM_ID = 9200;
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
-const TOAST_KEY_FRAGMENT = "Encryption keys are not configured";
+const TOAST_KEY_FRAGMENT = "Set it up in your profile";
 const CAROL = {
   id: "33333333-3333-3333-3333-333333333333",
   displayName: "Carol Jones",

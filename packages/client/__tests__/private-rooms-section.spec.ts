@@ -286,7 +286,7 @@ const navigateInApp = (page: Page, url: string, state?: unknown) =>
 const keysMissing = (page: Page) =>
   page
     .getByTestId("toast-content")
-    .filter({ hasText: /Encryption keys are not configured/ });
+    .filter({ hasText: /Set it up in your profile/ });
 
 /** The new-items counter of a sidebar item or of one of its sub-items. */
 const navBadge = (page: Page, id: string) =>

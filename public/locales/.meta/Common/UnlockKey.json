@@ -1,21 +1,21 @@
 {
-  "key_path": "KeyChangedReasonDevice",
-  "content": "The user generated a new key on a new device (this app stores keys per-device).",
-  "content_en_sha1_hash": "06b766de88cb5824ee51852ba22fd21cf215b770",
-  "created_at": "2026-05-24T17:27:30.358Z",
-  "updated_at": "2026-11-05T16:49:40.022Z",
+  "key_path": "UnlockKey",
+  "content": "Unlock",
+  "content_en_sha1_hash": "1526a17ee7570e6235eb76a6fef8ce4b6d9a3486",
+  "created_at": "2026-11-11T16:54:53.479Z",
+  "updated_at": "2026-11-11T16:56:26.897Z",
   "comment": {
-    "text": "List item text in the KeyChangeDialog explaining that a new key was created on a new device.",
+    "text": "Link label at the end of the locked-key bar in a private room; clicking it opens the passphrase dialog that unlocks the user's encryption key. Verb, imperative, one short word, no object.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:50:01.082Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-11T16:56:26.897Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
-      "line_number": 198,
-      "context": "{t(\"Common:KeyChangedReasonRecovery\")}\n </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonDevice\")}\n </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonAttack\")}",
-      "module": "/packages/shared"
+      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx",
+      "line_number": 91,
+      "context": "isHovered\n fontWeight={600}\n onClick={onUnlock}\n dataTestId=\"private_room_locked_bar_unlock\"\n >\n {t(\"Common:UnlockKey\")}\n </Link>\n </>\n }\n iconName={InfoReactSvgUrl}\n barIsVisible",
+      "module": "/packages/client"
     }
   ],
   "languages": {

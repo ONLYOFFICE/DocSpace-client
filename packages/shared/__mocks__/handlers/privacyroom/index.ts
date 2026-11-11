@@ -97,6 +97,11 @@ export type PrivacyroomHandlerHandle = {
    * (DemandKeyOwnerAsync); `reset` makes them a user again.
    */
   setGuest: (isGuest: boolean) => void;
+  /**
+   * Makes the read of the caller's key list fail with a 500. It stands for
+   * any failed request; no particular server error is modelled.
+   */
+  setListFails: (fails: boolean) => void;
   /** Drops every key and request, back to a user who never stored a key. */
   reset: () => void;
 };
@@ -108,6 +113,8 @@ export type PrivacyroomHandlersOptions = {
   userId?: string;
   /** The caller is a guest (see `setGuest`). */
   isGuest?: boolean;
+  /** The read of the key list fails (see `setListFails`). */
+  listFails?: boolean;
   /** Optional handle the caller can read after interaction. */
   handle?: { current: PrivacyroomHandlerHandle | null };
 };
@@ -150,6 +157,7 @@ export const privacyroomKeysHandlers = (
   const requests: RequestLog[] = [];
   const userId = opts.userId ?? DEFAULT_USER_ID;
   let isGuest = !!opts.isGuest;
+  let listFails = !!opts.listFails;
 
   if (opts.handle) {
     opts.handle.current = {
@@ -158,11 +166,15 @@ export const privacyroomKeysHandlers = (
       setGuest: (value) => {
         isGuest = value;
       },
+      setListFails: (value) => {
+        listFails = value;
+      },
       reset: () => {
         state.length = 0;
         requests.length = 0;
         hasRecord = false;
         isGuest = !!opts.isGuest;
+        listFails = !!opts.listFails;
       },
     };
   }
@@ -188,6 +200,7 @@ export const privacyroomKeysHandlers = (
      */
     http.get(base, () => {
       requests.push({ method: "GET", url: base });
+      if (listFails) return errorResponse(500, "Internal server error");
       return okResponse(hasRecord ? [...state] : null);
     }),
 

@@ -306,6 +306,27 @@ describe("getFilesContextOptions — encrypted file that needs conversion", () =
   });
 });
 
+describe("Opening without keys is withheld", () => {
+  const optionsWith = (encryptionKeys: unknown) =>
+    createTestFilesStore({
+      userStore: { encryptionKeys },
+    }).getFilesContextOptions(encryptedFile());
+
+  it("User without keys", () => {
+    const opts = optionsWith([]);
+
+    expect(opts).not.toContain("edit");
+    expect(opts).not.toContain("download");
+  });
+
+  it("Key list not known", () => {
+    const known = optionsWith([{ id: "key-1" }]);
+
+    expect(optionsWith(null)).toEqual(known);
+    expect(known).toContain("edit");
+  });
+});
+
 describe("getFilesContextOptions — room/folder with no permissions", () => {
   it("room with empty security keeps only ungated entries", () => {
     const store = createTestFilesStore();

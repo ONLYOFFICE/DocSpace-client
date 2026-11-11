@@ -56,6 +56,7 @@ const deferred = <T,>(): TDeferred<T> => {
 
 const mocks = vi.hoisted(() => ({
   runEncryptedFileCreation: vi.fn(),
+  isKeyListUnreadable: vi.fn(async () => false),
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
 }));
 
@@ -185,6 +186,7 @@ const createStores = ({
         publicKey: "public-key",
         publicKeyId: "key-1",
       }),
+      isKeyListUnreadable: mocks.isKeyListUnreadable,
     },
     oformsStore: { gallerySelected: null, setGallerySelected: vi.fn() },
     currentTariffStatusStore: { setPortalTariff: vi.fn() },
@@ -346,6 +348,21 @@ describe("CreateEvent - one create action makes one file", () => {
 
     expect(createdTitles()).toEqual(["Common:NewDocument"]);
     expect(stores.filesStore.openDocEditor).toHaveBeenCalledTimes(1);
+  });
+
+  it("Read fails", async () => {
+    mocks.isKeyListUnreadable.mockResolvedValueOnce(true);
+    const stores = createStores({ keepNewFileName: true });
+    const request = createRequest("docx");
+    renderCreateEvent(stores, request);
+    await flush();
+
+    expect(mocks.runEncryptedFileCreation).not.toHaveBeenCalled();
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptionKeysLoadFailed",
+    );
+    expect(stores.filesStore.openDocEditor).not.toHaveBeenCalled();
+    expect(request.onClose).toHaveBeenCalled();
   });
 
   it("Another file type requested during a creation", async () => {

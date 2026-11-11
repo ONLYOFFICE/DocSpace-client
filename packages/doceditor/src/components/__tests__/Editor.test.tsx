@@ -56,8 +56,18 @@ const env = vi.hoisted(() => {
   return {
     captured: { config: undefined as TEditorConfig | undefined },
     encryption: {
-      status: "off" as "off" | "loading" | "ready" | "error",
+      status: "off" as
+        | "off"
+        | "loading"
+        | "unlocking"
+        | "ready"
+        | "unlock-cancelled"
+        | "no-access"
+        | "no-key"
+        | "load-failed"
+        | "error",
       encryptionKeys: undefined as Record<string, unknown> | undefined,
+      retry: () => {},
     },
     keyHookCalls: 0,
     events: {
@@ -519,6 +529,72 @@ describe("Editor", () => {
       expect(events().onRequestSharingSettings).toBe(
         props.onSDKRequestSharingSettings,
       );
+    });
+  });
+
+  describe("Editor not mounted until keys are ready", () => {
+    const renderWithStatus = async (status: typeof env.encryption.status) => {
+      env.encryption.status = status;
+      env.encryption.encryptionKeys = undefined;
+      env.encryption.retry = vi.fn();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+      });
+    };
+
+    const retryButton = () =>
+      container?.querySelector<HTMLElement>(
+        '[data-testid="encryption-key-retry"]',
+      ) ?? null;
+
+    it.each([
+      ["Keys loading", "loading"],
+      ["Keys loading: unlocking", "unlocking"],
+    ] as const)("%s", async (_name, status) => {
+      await renderWithStatus(status);
+
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain("Common:LoadingProcessing");
+      expect(retryButton()).toBeNull();
+    });
+
+    it.each([
+      ["No access entry", "no-access", "Common:EncryptedFileNoAccessYet"],
+      ["No key", "no-key", "Common:EncryptionKeysNotConfigured"],
+      ["Key flow error", "error", "Common:SomethingWentWrong"],
+    ] as const)("%s", async (_name, status, message) => {
+      await renderWithStatus(status);
+
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain(message);
+      expect(retryButton()).toBeNull();
+    });
+
+    it.each([
+      [
+        "Unlock dismissed",
+        "unlock-cancelled",
+        "Common:EncryptedFileUnlockToOpen",
+        "Common:UnlockKey",
+      ],
+      [
+        "Request failed",
+        "load-failed",
+        "Common:EncryptionKeysLoadFailed",
+        "Common:TryAgain",
+      ],
+    ] as const)("%s", async (_name, status, message, action) => {
+      await renderWithStatus(status);
+
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain(message);
+      const button = retryButton();
+      expect(button?.textContent).toContain(action);
+
+      await act(async () => button?.click());
+
+      expect(env.encryption.retry).toHaveBeenCalledTimes(1);
     });
   });
 

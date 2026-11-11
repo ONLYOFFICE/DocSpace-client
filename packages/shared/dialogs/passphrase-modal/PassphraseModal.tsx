@@ -341,6 +341,22 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 </Text>
               ) : null}
 
+              {/* Spec: private-rooms/key-management, "Remember this device" */}
+              {showRememberDevice && !isNew ? (
+                <div className={styles.rememberRow}>
+                  <Checkbox
+                    id="rememberDevice"
+                    isChecked={rememberDevice}
+                    isDisabled={isLoading}
+                    onChange={(e) => setRememberDevice(e.target.checked)}
+                    label={t("Common:RememberDeviceLabel")}
+                  />
+                  <Text fontSize="12px" color="var(--text-secondary)">
+                    {t("Common:RememberDeviceHint")}
+                  </Text>
+                </div>
+              ) : null}
+
               {onForgotPassphrase && externalError ? (
                 <div className={styles.forgotRow}>
                   <Link
@@ -356,21 +372,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   >
                     {t("Common:ForgotPassphrase")}
                   </Link>
-                </div>
-              ) : null}
-
-              {showRememberDevice && !isNew ? (
-                <div className={styles.rememberRow}>
-                  <Checkbox
-                    id="rememberDevice"
-                    isChecked={rememberDevice}
-                    isDisabled={isLoading}
-                    onChange={(e) => setRememberDevice(e.target.checked)}
-                    label={t("Common:RememberDeviceLabel")}
-                  />
-                  <Text fontSize="12px" color="var(--text-secondary)">
-                    {t("Common:RememberDeviceHint")}
-                  </Text>
                 </div>
               ) : null}
 

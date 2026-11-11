@@ -598,16 +598,39 @@ export async function startSessionFuncImpl(
   const fileName = file.name;
   const isEncrypted = file.encrypted || false;
 
-  const { publicKey, userId } = self.getUserEncryptionKeys();
-  const gate = resolveUploadGate(
-    {
-      uploadContext: file.uploadContext,
-      alreadyEncrypted: isEncrypted,
-      publicKey,
-      userId,
-    },
-    item.target,
-  );
+  const readGate = () => {
+    const { publicKey, userId } = self.getUserEncryptionKeys();
+    return resolveUploadGate(
+      {
+        uploadContext: file.uploadContext,
+        alreadyEncrypted: isEncrypted,
+        publicKey,
+        userId,
+      },
+      item.target,
+    );
+  };
+
+  let gate = readGate();
+
+  // Spec: private-rooms/file-operations, "An unknown key list is read again before an action is refused"
+  if (
+    gate.action === "refuse" &&
+    gate.reason === "no-key" &&
+    self.userStore?.encryptionKeys === null
+  ) {
+    if (await self.isKeyListUnreadable()) {
+      failUploadItem(
+        self,
+        indexOfFile,
+        i18n.t("Common:EncryptionKeysLoadFailed"),
+        t,
+        createNewIfExist,
+      );
+      return;
+    }
+    gate = readGate();
+  }
 
   if (gate.action === "refuse") {
     // Spec: private-rooms/file-operations, "Uploads into a private room are encrypted on the client".

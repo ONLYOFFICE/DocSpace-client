@@ -573,6 +573,52 @@ describe("UploadDataStore.startSessionFunc — uploader without a key", () => {
     expect(finishUploadFiles.mock.calls).toEqual([[t, false]]);
   });
 
+  const setupUnknownListPendingFile = (read: unknown[] | null) => {
+    const ensureEncryptionKeys = vi.fn(async () => read);
+    const harness = createTestUploadDataStore({
+      userStore: {
+        user: { id: "user-1", isAdmin: false },
+        encryptionKeys: null,
+        ensureEncryptionKeys,
+      },
+    });
+    const { store } = harness;
+    const entry = makeUploadFile({
+      uniqueId: "unknown-list-pending",
+      file: makeBrowserFile("secret.docx", 3000),
+      toFolderId: 7,
+      target: makePrivateUploadTarget({ folderId: 7 }),
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    replaceAction(store, "finishUploadFiles");
+    return { ...harness, ensureEncryptionKeys };
+  };
+
+  it("Read fails", async () => {
+    const { store, ensureEncryptionKeys } = setupUnknownListPendingFile(null);
+
+    await store.startSessionFunc(0, t);
+
+    expect(ensureEncryptionKeys).toHaveBeenCalledTimes(1);
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(store.files[0].error).toBe("Common:EncryptionKeysLoadFailed");
+    expect(requestDeviceSetupHint).not.toHaveBeenCalled();
+  });
+
+  it("Read answers with an empty list", async () => {
+    const { store } = setupUnknownListPendingFile([]);
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].error).toBe("Common:EncryptionKeysRequiredForUpload");
+    expect(requestDeviceSetupHint).toHaveBeenCalledTimes(1);
+  });
+
   it("still uploads plaintext outside private rooms without keys", async () => {
     const { store } = createTestUploadDataStore({
       treeFoldersStore: { isPrivacyFolder: false },

@@ -1,14 +1,14 @@
 {
   "key_path": "PrivateRoomEmptyTitle",
-  "content": "Welcome to private room where every symbol you type is encrypted",
-  "content_en_sha1_hash": "6d90bce9d33f3c221471e20723386b049b8a070b",
-  "created_at": "2026-06-09T09:42:54.464Z",
-  "updated_at": "2026-11-05T16:49:39.812Z",
+  "content": "Welcome to the private room, where file contents and file names are encrypted",
+  "content_en_sha1_hash": "a387a948d678526dbb19b528e54595badcf92abe",
+  "created_at": "2026-11-11T18:49:42.736Z",
+  "updated_at": "2026-11-11T18:51:02.244Z",
   "comment": {
-    "text": "Heading for the empty state view of a private room, appearing when no content is present.",
+    "text": "Heading of the empty view of a private (end-to-end encrypted) room. A welcome phrase, no trailing period. It names what is encrypted: the contents of files and their names.",
     "is_auto": true,
-    "updated_at": "2026-06-09T09:58:09.553Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-11T18:51:02.244Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {

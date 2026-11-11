@@ -41,7 +41,8 @@ import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -168,6 +169,8 @@ const Item = ({
 
   const type = isEmailInvite ? userType : (getUserType(item) ?? userType);
 
+  const isPrivateRoom = useContext(PrivateRoomInviteContext);
+
   const accesses = getAccessOptions(
     t,
     roomType,
@@ -176,6 +179,7 @@ const Item = ({
     isOwner,
     isAdmin,
     standalone,
+    isPrivateRoom,
   );
 
   const isRolePaid = isPaidUserRole(access);

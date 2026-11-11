@@ -1060,7 +1060,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
 
   // The two fixme cases reach the destination room through the picker's
   // Rooms list, which holds no private room on the server. They wait for the
-  // Private entry of the picker (private-rooms-server-section, task 1.4).
+  // Private entry of the picker (private-rooms-server-section, task 3.5).
   test.fixme("Copy into another private room", async ({
     page,
     baseUrl,

@@ -22,18 +22,18 @@ The system SHALL offer private rooms on every portal, SaaS and standalone, with 
 - **THEN** no private-rooms surface appears and nothing is written to localStorage
 
 ### Requirement: Existing private rooms stay usable when the app is off
-The system SHALL keep rooms that are already private, and files that are already encrypted, readable and manageable for their members, who reach them by their address, when an administrator switches the E2E rooms app off. Only the creation of new private rooms is withheld. While the app is off, private rooms SHALL NOT be listed: the server leaves them out of the Rooms area, and the client does not ask for them.
+The system SHALL keep rooms that are already private, and files that are already encrypted, readable and manageable for their members, who reach them by their address, when an administrator switches the E2E rooms app off. Only the creation of new private rooms is withheld. While the app is off, private rooms SHALL NOT be listed: the server leaves them out of the Rooms area, and the client asks the shared Archive for non-private rooms only.
 
 #### Scenario: App switched off after rooms exist
 - **WHEN** an administrator switches the E2E rooms app off on a standalone portal with private rooms
-- **THEN** members no longer find their private rooms in Rooms, and a private room opened by its address still opens under Rooms and lets them download or upload encrypted files
+- **THEN** members no longer find their private rooms in Rooms or Rooms → Archive, and a private room opened by its address still opens under Rooms and lets them download or upload encrypted files
 
 #### Scenario: No new private room while off
 - **WHEN** the E2E rooms app is off
 - **THEN** no create entry offers the Private room type
 
 ### Requirement: E2E suite runs without the flag
-The system SHALL run the client E2E suite without any browser-local flag. The base fixture SHALL write no `privateRooms` entry, so every spec sees the Private section as a portal user does. A dedicated spec SHALL switch the E2E rooms app off on a standalone portal and assert that each entry point disappears and that existing private rooms are not listed in Rooms.
+The system SHALL run the client E2E suite without any browser-local flag. The base fixture SHALL write no `privateRooms` entry, so every spec sees the Private section as a portal user does. A dedicated spec SHALL switch the E2E rooms app off on a standalone portal and assert that each entry point disappears and that existing private rooms are listed neither in Rooms nor in Rooms → Archive.
 
 #### Scenario: Base fixture
 - **WHEN** a client E2E test gets its page from the base fixture
@@ -41,7 +41,7 @@ The system SHALL run the client E2E suite without any browser-local flag. The ba
 
 #### Scenario: App-off spec
 - **WHEN** the app-off spec mocks a standalone portal whose E2E rooms app is off
-- **THEN** the Private sidebar item, the E2E rooms app and the Private room type are absent, and an existing private room is not listed in Rooms
+- **THEN** the Private sidebar item, the E2E rooms app and the Private room type are absent, and an existing private room is listed neither in Rooms nor in Rooms → Archive
 
 ### Requirement: Private room type is offered only from the Private section
 The system SHALL offer the Private room type for creation only while the Private section is available, and then only through the Private section. The generic create-room chooser, its list and both dropdown variants, SHALL NOT offer it in any state. All other room types SHALL be offered whether or not the section is available.

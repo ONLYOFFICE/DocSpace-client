@@ -89,7 +89,7 @@ vi.mock("SRC_DIR/components/AppsSidebar", () => ({
 const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
-const renderSidebar = () =>
+const renderSidebar = (extraFolders: unknown[] = []) =>
   render(
     <Provider
       authStore={{ isAdmin: true, isRoomAdmin: false }}
@@ -99,6 +99,7 @@ const renderSidebar = () =>
           { id: 1, title: "My documents", rootFolderType: FolderType.USER },
           { id: 2002, title: "Rooms", rootFolderType: FolderType.Rooms },
           { id: 2003, title: "Archive", rootFolderType: FolderType.Archive },
+          ...extraFolders,
         ],
         roomsFolderId: 2002,
         archiveFolderId: 2003,
@@ -153,5 +154,26 @@ describe("ClientArticleSidebar — Private section", () => {
     );
     expect(badge).toHaveAttribute("data-title", "Common:PrivateRoomsBetaTitle");
     expect(badge).toHaveTextContent("Common:PrivateRoomsBetaDescription");
+  });
+});
+
+describe("ClientArticleSidebar — AI Chat section", () => {
+  it("lists AI Chat, then Agents, Recent, Skill sets, Knowledge bases and Trash", () => {
+    renderSidebar([
+      { id: 2010, title: "AI", rootFolderType: FolderType.AiHub },
+    ]);
+
+    const ids = screen
+      .getAllByTestId(/^nav-ai-/)
+      .map((item) => item.dataset.testid);
+
+    expect(ids).toEqual([
+      "nav-ai-chat",
+      "nav-ai-rooms",
+      "nav-ai-chat-recent",
+      "nav-ai-rooms-skills",
+      "nav-ai-rooms-knowledge",
+      "nav-ai-rooms-trash",
+    ]);
   });
 });

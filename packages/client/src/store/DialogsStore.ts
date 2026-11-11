@@ -106,6 +106,11 @@ type TFilesStore = {
   setSelected: (selected: "none") => void;
 };
 
+export type TAiChatPageRequest = {
+  page: "chat" | "history";
+  afterLocationKey: Nullable<string>;
+};
+
 type TConnectItem = Partial<Omit<ThirdPartyAccountType, "provider_id">> & {
   customer_title?: string;
   provider_id?: string | number;
@@ -433,6 +438,16 @@ class DialogsStore {
   // predicate reads may not survive the `getFileInfo` it goes through.
   askAIAnalyze = false;
 
+  // The AI section's sidebar entries that are the chat itself (AI Chat,
+  // Recent) open it fullscreen on one of its pages. Switching the page needs
+  // the chat library's router, which only exists inside the ai-chat
+  // providers, so the sidebar records the request and AiChatPageBridge
+  // performs it. `afterLocationKey` is the location the click left when it
+  // also navigated: the request waits until that navigation has landed, so
+  // what closes the chat on the way (leaving an AI project, a section change
+  // on a phone) cannot close it again behind the opening.
+  aiChatPageRequest: Nullable<TAiChatPageRequest> = null;
+
   newFilesPanelFolderId: Nullable<number | string> = null;
 
   sortedDownloadFiles: TSortedDownloadFiles = {
@@ -567,6 +582,21 @@ class DialogsStore {
     this.askAIFile = null;
     this.askAIAnalyze = false;
     return { file, analyze };
+  };
+
+  requestAiChatPage = (
+    page: TAiChatPageRequest["page"],
+    afterLocationKey: Nullable<string> = null,
+  ) => {
+    this.aiChatPageRequest = { page, afterLocationKey };
+  };
+
+  // Read-and-clear, as `consumeAskAIFile`: a double-invoked effect opens the
+  // chat once, and the same entry can be clicked twice in a row.
+  consumeAiChatPageRequest = () => {
+    const request = this.aiChatPageRequest;
+    this.aiChatPageRequest = null;
+    return request;
   };
 
   setEditRoomDialogProps = (props: TEditRoomDialogProps) => {

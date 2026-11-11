@@ -116,6 +116,7 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
+import { AiChatPageBridge } from "./components/AiChatPageBridge";
 import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
@@ -1082,6 +1083,7 @@ const Shell = ({ page = "home", ...rest }) => {
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
+          <AiChatPageBridge />
           <AiPresetsBridge enabled={canUseAi} />
 
           <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />

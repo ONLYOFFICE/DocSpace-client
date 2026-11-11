@@ -36,10 +36,11 @@
 import { RoomsType } from "@docspace/shared/enums";
 
 /**
- * The AI Workspace section is one rooms list (`/ai-rooms`) narrowed to a
- * room type by the `type` query: the agents (AI projects) on its root, the
- * Skills (Instructions rooms) and Knowledge (Knowledge rooms) entries. What
- * the list holds decides its title and what "New room" creates there.
+ * The AI Chat section's lists are one rooms list (`/ai-rooms`) narrowed to a
+ * room type by the `type` query: the Agents (AI projects) on its root, the
+ * Skill sets (Instructions rooms) and Knowledge bases (Knowledge rooms)
+ * entries. What the list holds decides its title and what "New room" creates
+ * there.
  */
 
 const LIST_TYPES = new Set<number>([
@@ -55,18 +56,18 @@ export const getAiWorkspaceListType = (search: string): RoomsType => {
   return LIST_TYPES.has(type) ? (type as RoomsType) : RoomsType.AiProjectRoom;
 };
 
-/** The list's title: the section's own name for the agents, the entry's name otherwise. */
+/** The list's title: the name of the sidebar entry that opens it. */
 export const getAiWorkspaceTitle = (
   t: (key: string) => string,
   search: string,
 ): string => {
   switch (getAiWorkspaceListType(search)) {
     case RoomsType.InstructionsRoom:
-      return t("Common:Skills");
+      return t("Common:SkillSets");
     case RoomsType.KnowledgeRoom:
-      return t("Common:AiWorkspaceKnowledge");
+      return t("Common:AIProjectKnowledgeRooms");
     default:
-      return t("Common:AiWorkspace");
+      return t("Common:Agents");
   }
 };
 

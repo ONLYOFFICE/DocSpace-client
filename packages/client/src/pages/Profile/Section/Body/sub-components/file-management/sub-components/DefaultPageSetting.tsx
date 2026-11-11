@@ -85,7 +85,7 @@ const StartPageSettingComponent = ({
         key: FolderType.Forms,
       },
       {
-        label: t("Common:AiWorkspace"),
+        label: t("Common:AIChat"),
         key: FolderType.AiHub,
       },
     ];

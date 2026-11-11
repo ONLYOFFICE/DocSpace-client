@@ -204,8 +204,11 @@ export const getSectionTrashUrl = (
 };
 
 /**
- * The AI Workspace section's entries are the `/ai-rooms` list narrowed to one
- * room type, so the active entry is read from the `type` filter in the query.
+ * The AI Chat section's list entries (Skill sets, Knowledge bases) are the
+ * `/ai-rooms` list narrowed to one room type, so the active entry is read
+ * from the `type` filter in the query; unnarrowed, it is Agents. AI Chat and
+ * Recent are the chat itself, not a location: the sidebar highlights them
+ * from the chat's state.
  */
 const AI_HUB_TYPE_ITEM_IDS: Record<string, string> = {
   [RoomsType.InstructionsRoom]: "ai-rooms-skills",

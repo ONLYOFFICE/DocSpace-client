@@ -82,7 +82,7 @@ const sidebar = (page: Page) => page.locator("#article-container");
 /** A fresh copy of the stock projects: the create handler adds to its list. */
 const stockProjects = () => [...AI_PROJECTS];
 
-test.describe("AI Workspace", () => {
+test.describe("AI Chat section", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -117,9 +117,10 @@ test.describe("AI Workspace", () => {
         await expect(table(page)).not.toContainText(room.title);
       }
 
-      // One AI section in the sidebar, with Skills, Knowledge
-      // and Trash and no Archive; the projects have no section of their own.
-      await expect(sidebar(page)).toContainText("AI Workspace");
+      // One AI section in the sidebar, AI Chat, with Agents, Recent, Skill
+      // sets, Knowledge bases and Trash and no Archive; the projects have no
+      // section of their own.
+      await expect(sidebar(page)).toContainText("AI Chat");
       await expect(sidebar(page)).not.toContainText("AI Projects");
 
       await expectScreenshot(page, [
@@ -143,7 +144,7 @@ test.describe("AI Workspace", () => {
       // section's own entry.
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
-      await sidebar(page).getByText("Knowledge", { exact: true }).click();
+      await sidebar(page).getByText("Knowledge bases", { exact: true }).click();
       await expect(table(page)).toContainText("Contracts archive");
 
       const knowledgeRow = table(page)
@@ -200,7 +201,7 @@ test.describe("AI Workspace", () => {
 
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
-      await sidebar(page).getByText("Knowledge", { exact: true }).click();
+      await sidebar(page).getByText("Knowledge bases", { exact: true }).click();
       await expect(table(page)).toContainText("Contracts archive");
 
       // The entry's room type is set and locked: no chooser, no project form.

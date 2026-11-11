@@ -955,6 +955,8 @@
   "EncryptedCopyFailed": "Failed to copy encrypted files: {{names}}",
   "EncryptedDownloadPartial": "These files could not be decrypted and were left out of the archive: {{fileNames}}",
   "EncryptedFile": "Encrypted file",
+  "EncryptedFileNoAccessYet": "You do not have access to this encrypted file yet.",
+  "EncryptedFileUnlockToOpen": "Unlock your encryption key to open this file.",
   "EncryptedInviteFailed": "Could not invite {{users}}. Try again.",
   "EncryptedInviteNoKey": "Not invited: {{users}}. They have not set up encryption keys yet. Ask them to create a key in their profile, then invite them again.",
   "EncryptedInviteResultTitle": "Invitation results",

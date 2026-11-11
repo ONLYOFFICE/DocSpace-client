@@ -404,6 +404,53 @@ test.describe("Private room — upload target fixed when the user starts the upl
     expect(sent).toHaveLength(2);
     expectOnlyCiphertext(sent, filesHandle.current!);
   });
+
+  test("Entry cannot be written", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { filesHandle, passphrase } = await openPrivateRoomWithKey(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const storedBefore = filesHandle.current!.getFiles().length;
+    // Mock-only: the server has no mode that refuses every access write.
+    mockRequest.use(
+      http.put(
+        `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/files/:fileId(\\d+)/access`,
+        () =>
+          new Response(
+            JSON.stringify({
+              error: { message: "Access write failed" },
+              status: 1,
+              statusCode: 500,
+            }),
+            { status: 500, headers: { "Content-Type": "application/json" } },
+          ),
+      ),
+    );
+
+    await page.locator("#customFileInput").first().setInputFiles(plaintextFiles(1));
+    await unlockIfPrompted(page, passphrase);
+
+    await expect
+      .poll(
+        () =>
+          filesHandle
+            .current!.getRequests()
+            .filter((r) => r.method === "DELETE").length,
+        { timeout: 30000 },
+      )
+      .toBe(1);
+    expect(filesHandle.current!.getFiles()).toHaveLength(storedBefore);
+
+    await page.locator(".layout-progress-bar").getByTestId("icon-upload").click();
+    await expect(
+      page.getByText(
+        "The file was not saved: its encryption could not be completed. Upload it again.",
+      ),
+    ).toBeVisible({ timeout: 10000 });
+    await expect(page.locator(".enter-password", { hasText: "Retry" })).toBeVisible();
+  });
 });
 
 type DropFile = { name: string; content: string };

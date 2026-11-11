@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "El mensaje de chat no se puede guardar en el espacio para rellenar formularios, ya que este tipo de espacio solo puede contener formularios en formato PDF.",
   "ChooseAIAgent": "Elija un agente de IA",
   "ChooseAIAgentDescription": "Seleccione el agente con el que desea chatear con la IA sobre el archivo seleccionado. Puede elegir un agente existente.",
-  "ChooseAIProject": "Elegir proyecto de IA",
   "ChooseAnother": "Elegir otro",
   "ChooseExpirationDate": "Limite el periodo de disponibilidad de este enlace estableciendo una fecha de vencimiento.",
   "ChooseFormatText": "Elija el formato de cada archivo que desea descargar",

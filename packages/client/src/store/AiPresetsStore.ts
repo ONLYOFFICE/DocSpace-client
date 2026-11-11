@@ -63,7 +63,7 @@ export type TAiPreset = AiChatPresetSettings & {
 
 export type { AiChatPresetRoom, AiChatPresetSettings };
 
-/** How many projects the chat's model picker offers, the most recent first. */
+/** How many projects the chat panel's agents menu offers, the most recent first. */
 const PICKER_PROJECTS_COUNT = 100;
 
 // A linked room the caller can no longer read is not connected.
@@ -95,8 +95,8 @@ const toRoomIds = (rooms: AiChatPresetRoom[]) =>
     .filter((id) => Number.isInteger(id) && id > 0);
 
 /**
- * The AI projects in a chat outside the projects page: the model picker's
- * "Choose AI Project" lists them (`ai/projects`), picking one carries its
+ * The AI projects in a chat outside the projects page: the panel title's
+ * agents menu lists them (`ai/projects`), picking one carries its
  * model, skills and knowledge bases into the open chat, and the panel
  * header's save button creates a project from the chat's setup.
  */
@@ -116,7 +116,7 @@ class AiPresetsStore {
   activePreset: TAiPreset | null = null;
 
   /**
-   * A project picked in the chat's model picker, waiting for AiPresetsBridge
+   * A project picked in the chat's agents menu, waiting for AiPresetsBridge
    * to apply it to the open chat; `null` once applied. The store only
    * records the request: applying needs the chat stores a MobX store cannot
    * reach.
@@ -194,7 +194,7 @@ class AiPresetsStore {
   };
 
   /**
-   * A project picked in the model picker: read again, so the chat gets the
+   * A project picked in the agents menu: read again, so the chat gets the
    * project as it is now, then handed to the bridge. A project that is gone
    * leaves the list and is not applied.
    */

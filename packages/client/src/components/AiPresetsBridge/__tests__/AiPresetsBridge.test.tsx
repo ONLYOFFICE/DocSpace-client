@@ -34,6 +34,7 @@ class FakeAiChatStore {
     agents: { id: string; name: string }[];
     selectedId: string | null;
     onSelect: (id: string | null) => void;
+    onOpen?: () => void;
   } | null = null;
 
   applyPreset = vi.fn();
@@ -175,8 +176,8 @@ describe("AiPresetsBridge", () => {
     expect(api.getAiProjects).toHaveBeenCalledTimes(1);
     expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
 
-    // The model picker refreshes the list itself when it opens
-    // (onProfilePickerOpen in Shell), so the chat's opening costs no read.
+    // The agents menu refreshes the list itself when it opens (its
+    // onOpen), so the chat's opening costs no read.
     act(() => aiChatStore.setIsVisible(true));
     await flush();
     expect(api.getAiProjects).toHaveBeenCalledTimes(1);
@@ -323,6 +324,10 @@ describe("AiPresetsBridge", () => {
     await act(() => store.fetchPresets());
     expect(aiChatStore.agentPicker?.agents.map((a) => a.name)).toEqual(["Sales", "Legal"]);
     expect(aiChatStore.agentPicker?.selectedId).toBeNull();
+
+    // Opening the menu reads the projects again.
+    await act(async () => aiChatStore.agentPicker?.onOpen?.());
+    expect(api.getAiProjects).toHaveBeenCalledTimes(3);
   });
 
   it("applies an agent picked in the title and goes back to the default agent", async () => {

@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Không thể lưu tin nhắn trò chuyện vào không gian Điền Biểu Mẫu vì loại không gian này chỉ có thể chứa các biểu mẫu PDF.",
   "ChooseAIAgent": "Chọn một tác nhân AI",
   "ChooseAIAgentDescription": "Chọn agent mà bạn muốn trò chuyện với AI về tệp đã chọn. Bạn có thể chọn một agent hiện có.",
-  "ChooseAIProject": "Chọn dự án AI",
   "ChooseAnother": "Chọn khác",
   "ChooseExpirationDate": "Giới hạn thời gian còn hiệu lực cho liên kết này bằng cách đặt ngày hết hạn.",
   "ChooseFormatText": "Chọn định dạng cho từng tệp được tải xuống",

@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Le message de chat ne peut pas être enregistré dans l'espace de remplissage de formulaires, car ce type d'espace ne peut contenir que des formulaires PDF.",
   "ChooseAIAgent": "Choisissez un agent IA",
   "ChooseAIAgentDescription": "Sélectionnez l'agent avec lequel vous souhaitez discuter avec l'IA au sujet du fichier sélectionné. Vous pouvez choisir un agent existant.",
-  "ChooseAIProject": "Choisir un projet IA",
   "ChooseAnother": "Choisir un autre",
   "ChooseExpirationDate": "Limitez la période de disponibilité de ce lien en fixant une date d'expiration.",
   "ChooseFormatText": "Choisissez le format de chaque fichier à télécharger",

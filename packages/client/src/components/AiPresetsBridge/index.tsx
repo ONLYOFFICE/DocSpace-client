@@ -104,10 +104,10 @@ const NO_PRESET = {
 
 /**
  * Wires the AI projects to a chat outside the projects page: the header's
- * save button creates a project from the chat's setup, the model picker's
- * project list is loaded for the signed-in user and read again whenever the
- * chat opens, and the project an open chat was started from is dropped when
- * the panel closes. Lives inside AiAgentProviders, where the panel store is
+ * save button creates a project from the chat's setup, the panel title's
+ * agents menu lists the projects (loaded for the signed-in user, read again
+ * whenever the menu opens), and the project an open chat was started from
+ * is dropped when the panel closes. Lives inside AiAgentProviders, where the panel store is
  * reachable.
  */
 const AiPresetsBridge = ({
@@ -153,8 +153,9 @@ const AiPresetsBridge = ({
 
   // The panel title's agents menu: the default agent, then the AI projects
   // (the agents the sidebar lists), the most recent first. Picking one
-  // applies it to the open chat as the model picker's "Choose AI Project"
-  // does; the default agent takes the chat off its project. Not offered
+  // applies it to the open chat; the default agent takes the chat off its
+  // project. The menu opens on the current project list: one created,
+  // renamed or left elsewhere meanwhile is picked up. Not offered
   // without projects, nor in an open project's own chat, which is that
   // project.
   const { presets, activePreset } = aiPresetsStore;
@@ -196,9 +197,14 @@ const AiPresetsBridge = ({
 
   React.useEffect(() => {
     if (isInsideOpenProject || agents.length === 0) return undefined;
-    aiChatStore.setAgentPicker({ agents, selectedId: selectedAgentId, onSelect: onAgentSelect });
+    aiChatStore.setAgentPicker({
+      agents,
+      selectedId: selectedAgentId,
+      onSelect: onAgentSelect,
+      onOpen: aiPresetsStore.fetchPresets,
+    });
     return () => aiChatStore.setAgentPicker(null);
-  }, [aiChatStore, agents, selectedAgentId, onAgentSelect, isInsideOpenProject]);
+  }, [aiChatStore, aiPresetsStore, agents, selectedAgentId, onAgentSelect, isInsideOpenProject]);
 
   // With vectorization off no Knowledge room can be searched, so the
   // composer loses its knowledge base picker; a base connected earlier
@@ -208,7 +214,7 @@ const AiPresetsBridge = ({
     return () => aiChatStore.setKnowledgePickerHidden(false);
   }, [aiChatStore, vectorizationEnabled]);
 
-  // A preset picked in the model picker: applied to the open chat as it
+  // A project picked in the agents menu: applied to the open chat as it
   // stands, and made the active preset so its skills rooms reach the chat
   // as the context rooms (see Shell's `contextRoom`).
   React.useEffect(

@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Nu se poate salva mesajul de chat în Spațiul de completare a formularelor deoarece acest spațiu poate conține numai formulare PDF.",
   "ChooseAIAgent": "Alege un agent IA",
   "ChooseAIAgentDescription": "Selectează agentul cu care dorești să discuți cu IA despre fișierul selectat. Poți alege un agent existent.",
-  "ChooseAIProject": "Alegeți proiectul IA",
   "ChooseAnother": "Alegeți altceva",
   "ChooseExpirationDate": "Indicați data expirării pentru a limita perioada de disponibilitate a acestui link.",
   "ChooseFormatText": "Selectați formatul pentru fiecare fișier de descărcat",

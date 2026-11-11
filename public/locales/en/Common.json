@@ -499,7 +499,6 @@
   "ChatMessageNotAllowedInFormRoom": "The chat message cannot be saved to the Form Filling space since this space type can only contain PDF forms.",
   "ChooseAIAgent": "Choose an AI agent",
   "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent.",
-  "ChooseAIProject": "Choose AI Project",
   "ChooseAnother": "Choose another",
   "ChooseExpirationDate": "Limit availability period for this link by setting an expiration date.",
   "ChooseFormatText": "Choose the format for each file to be downloaded",

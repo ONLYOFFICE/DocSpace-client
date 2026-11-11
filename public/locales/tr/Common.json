@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Sohbet mesajı Form Doldurma alanına kaydedilemez çünkü bu alan türü sadece PDF formlar içerebilir.",
   "ChooseAIAgent": "Bir AI ajanı seçin",
   "ChooseAIAgentDescription": "Seçtiğiniz dosya hakkında yapay zeka ile sohbet etmek istediğiniz aracı seçin. Mevcut bir aracı seçebilirsiniz.",
-  "ChooseAIProject": "AI projesi seç",
   "ChooseAnother": "Başka bir tane seçin",
   "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın.",
   "ChooseFormatText": "İndirilecek her bir dosyanın türünü seçin",

@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Chat-viestiä ei voi tallentaa Lomakkeentäyttötilaan, koska tämä tilatyyppi voi sisältää vain PDF-lomakkeita.",
   "ChooseAIAgent": "Valitse AI-agentti",
   "ChooseAIAgentDescription": "Valitse agentti, jossa haluat keskustella valitun tiedoston kanssa tekoälyn kanssa. Voit valita olemassa olevan agentin.",
-  "ChooseAIProject": "Valitse AI-projekti",
   "ChooseAnother": "Valitse toinen",
   "ChooseExpirationDate": "Rajoita saatavuusaika tälle linkille asettamalla viimeinen voimassaolopäivä.",
   "ChooseFormatText": "Valitse kunkin ladattavan tiedoston muoto",

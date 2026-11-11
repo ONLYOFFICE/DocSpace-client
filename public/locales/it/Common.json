@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Il messaggio della chat non può essere salvato nello Spazio di compilazione di moduli poiché questo tipo di spazio può contenere solo moduli PDF.",
   "ChooseAIAgent": "Scegli un agente IA",
   "ChooseAIAgentDescription": "Seleziona l'agente con cui desideri chattare con l'IA riguardo al file selezionato. Puoi scegliere un agente esistente.",
-  "ChooseAIProject": "Scegli progetto IA",
   "ChooseAnother": "Scegli un altro",
   "ChooseExpirationDate": "Limita il periodo di disponibilità per questo link impostando una data di scadenza.",
   "ChooseFormatText": "Scegli il formato per ogni file da scaricare",

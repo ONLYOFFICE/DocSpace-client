@@ -99,7 +99,6 @@ import "@docspace/shared/styles/theme.scss";
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
 import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
-import { useAiPresetsPickerActions } from "SRC_DIR/Hooks/useAiPresetsPickerActions";
 import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
@@ -187,9 +186,6 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormRoomRoot,
     isAIReady,
     aiPresetContextRooms,
-    aiPresets,
-    requestPresetApply,
-    fetchAiPresets,
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
@@ -914,22 +910,6 @@ const Shell = ({ page = "home", ...rest }) => {
     onChangeAiLimit,
   });
 
-  // "Choose AI Project" entry for the model picker: the user's AI projects,
-  // applied to the open chat by AiPresetsBridge (the chat stores live below
-  // AiAgentProviders). A project that is gone by now is only reported.
-  const onProjectPick = useCallback(
-    (preset) => {
-      void requestPresetApply(preset).then((applied) => {
-        if (!applied) toastr.info(t("Common:AIProjectNotAvailable"));
-      });
-    },
-    [requestPresetApply, t],
-  );
-  const profilePickerActions = useAiPresetsPickerActions(
-    aiPresets,
-    onProjectPick,
-  );
-
   // The chat's own scope is only ever an AI project: the AI service
   // recognises the project by this id and takes the round's model and
   // linked rooms from the project itself (`ai/projects/{id}/chat-context`).
@@ -1049,10 +1029,6 @@ const Shell = ({ page = "home", ...rest }) => {
           hideProfilePicker={false}
           profilePickerReadOnly={isInsideAiProject}
           isChatOpen={isChatOpen}
-          profilePickerActions={profilePickerActions}
-          // The picker opens on the current project list: one created,
-          // renamed or left elsewhere meanwhile is picked up.
-          onProfilePickerOpen={fetchAiPresets}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={
             isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
@@ -1266,9 +1242,6 @@ const ShellWrapper = inject(
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
       openEditAiProject: aiProjectsStore.openEditDialog,
-      aiPresets: aiPresetsStore.presets,
-      requestPresetApply: aiPresetsStore.requestApply,
-      fetchAiPresets: aiPresetsStore.fetchPresets,
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the
       // chat's attachments at one (see `attachmentLimit`).

@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Die Chat-Nachricht kann nicht im Formularausfüll-Space gespeichert werden, da dieser Space-Typ nur PDF-Formulare enthalten kann.",
   "ChooseAIAgent": "Wählen Sie einen KI-Agenten",
   "ChooseAIAgentDescription": "Wählen Sie den Agenten aus, mit dem Sie über die ausgewählte Datei mithilfe der KI chatten möchten. Sie können einen bereits vorhandenen Agenten auswählen.",
-  "ChooseAIProject": "KI-Projekt wählen",
   "ChooseAnother": "Anderes auswählen",
   "ChooseExpirationDate": "Begrenzen Sie den Verfügbarkeitszeitraum für diesen Link, indem Sie ein Verfallsdatum festlegen.",
   "ChooseFormatText": "Wählen Sie ein Format für das Herunterladen von Dateien aus",

@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "チャットメッセージは、フォーム記入スペースに保存できません。このスペースタイプにはPDFフォームのみを含めることができます。",
   "ChooseAIAgent": "AIエージェントを選択してください。",
   "ChooseAIAgentDescription": "選択したファイルについてAIとチャットしたいエージェントを選択してください。既存のエージェントを選択できます。",
-  "ChooseAIProject": "AIプロジェクトを選択",
   "ChooseAnother": "他のを選択してください",
   "ChooseExpirationDate": "有効期限を設定して、このリンクの利用可能期間を制限します。",
   "ChooseFormatText": "ダウンロードする各ファイルの形式を選択します。",

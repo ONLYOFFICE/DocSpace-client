@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Wiadomość czatu nie może zostać zapisana w obszarze do wypełniania formularzy, ponieważ ten typ obszaru może zawierać tylko formularze PDF.",
   "ChooseAIAgent": "Wybierz agenta AI",
   "ChooseAIAgentDescription": "Wybierz agenta, z którym chcesz porozmawiać o wybranym pliku. Możesz wybrać istniejącego agenta.",
-  "ChooseAIProject": "Wybierz projekt AI",
   "ChooseAnother": "Wybierz inne",
   "ChooseExpirationDate": "Ogranicz okres dostępności dla tego linku, ustawiając datę wygaśnięcia.",
   "ChooseFormatText": "Wybierz format dla każdego pobieranego pliku",

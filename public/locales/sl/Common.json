@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Sporočila iz klepeta ni mogoče shraniti v prostor za izpolnjevanje obrazcev, ker ta vrsta prostora lahko vsebuje samo obrazce PDF.",
   "ChooseAIAgent": "Izberite agenta AI",
   "ChooseAIAgentDescription": "Izberite agenta, kjer želite klepetati z umetno inteligenco o izbrani datoteki. Lahko izberete obstoječega agenta.",
-  "ChooseAIProject": "Izberi projekt AI",
   "ChooseAnother": "Izberi drugo",
   "ChooseExpirationDate": "Omejite obdobje razpoložljivosti te povezave tako, da nastavite datum poteka.",
   "ChooseFormatText": "Izberite format za vsako datoteko, ki jo želite prenesti",

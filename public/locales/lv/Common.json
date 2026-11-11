@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Tērzēšanas ziņojumu nevar saglabāt Veidlapu aizpildīšanas telpā, jo šajā telpas tipā var saglabāt tikai PDF veidlapas.",
   "ChooseAIAgent": "Izvēlieties MI aģentu",
   "ChooseAIAgentDescription": "Izvēlieties aģentu, kurā vēlaties saņemt MI sarunu par atlasīto failu. Jūs varat izvēlēties esošu aģentu.",
-  "ChooseAIProject": "Izvēlēties MI projektu",
   "ChooseAnother": "Izvēlēties citu",
   "ChooseExpirationDate": "Ierobežojiet šīs saites pieejamības periodu, iestatot derīguma termiņu.",
   "ChooseFormatText": "Izvēlieties katra lejupielādējamā faila formātu",

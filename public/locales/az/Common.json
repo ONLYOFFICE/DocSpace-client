@@ -493,7 +493,6 @@
   "ChatMessageNotAllowedInFormRoom": "Çat mesajını Forma Doldurma sahəsində saxlamaq mümkün deyil, çünki bu sahə növü yalnız PDF formalarını ehtiva edə bilər.",
   "ChooseAIAgent": "AI agenti seçin",
   "ChooseAIAgentDescription": "Seçilmiş fayl haqqında süni intellektlə söhbət etmək istədiyiniz agenti seçin. Mövcud agentlərdən birini seçə bilərsiniz.",
-  "ChooseAIProject": "AI layihəsi seçin",
   "ChooseAnother": "Başqasını seçin",
   "ChooseExpirationDate": "İstifadə müddəti təyin etməklə bu keçidin mövcudluğunu məhdudlaşdırın.",
   "ChooseFormatText": "Yüklənəcək hər bir faylın formatını seçin",

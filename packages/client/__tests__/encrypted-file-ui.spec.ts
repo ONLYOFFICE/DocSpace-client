@@ -365,6 +365,74 @@ test.describe("Encrypted file UI in private room", () => {
     expect(historyRequests).toEqual([]);
   });
 
+  test("Version comment of an encrypted file in the info panel", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        initialFiles: [seedEncryptedFile],
+      }),
+    );
+
+    const historyRequests: string[] = [];
+    page.on("request", (req) => {
+      if (/\/files\/file\/8800\/(history|comment)/.test(req.url())) {
+        historyRequests.push(req.url());
+      }
+    });
+
+    const listed = page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        /\/files\/9400(\?|$)/.test(res.url()) &&
+        res.ok(),
+      { timeout: 15000 },
+    );
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    const { security } = (await (await listed).json()).response.files[0];
+    expect(security).toMatchObject({ EditHistory: true });
+
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 10000 });
+
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
+    if (await passphrasePrompt.isVisible()) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
+    await row.getByTestId("context-menu-button").first().click();
+    await page.locator("#option_show-info").click();
+
+    const panel = page.getByTestId("info_panel_files_view_container");
+    await expect(panel).toBeVisible({ timeout: 10000 });
+    const detailsTab = page.getByText("Details", { exact: true }).first();
+    if (await detailsTab.isVisible().catch(() => false)) {
+      await detailsTab.click();
+    }
+
+    await expect(panel.getByText("Comments", { exact: true })).toBeVisible({
+      timeout: 10000,
+    });
+    await expect(
+      page.getByTestId("info_panel_details_comment_edit_toggle"),
+    ).toHaveCount(0);
+    expect(historyRequests).toEqual([]);
+  });
+
   test("Menu of an encrypted spreadsheet", async ({
     page,
     mockRequest,

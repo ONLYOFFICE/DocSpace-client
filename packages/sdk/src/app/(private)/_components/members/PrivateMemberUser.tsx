@@ -51,6 +51,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 import {
   ComboBoxSize,
   type TOption,
@@ -185,7 +186,12 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
         toastr.success(t("Common:AccessRightsChanged"));
         onRoleChanged?.();
       } catch (error) {
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Spec: private-rooms/sdk-surface, "SDK explains a refused access change in a private room"
+        toastr.error(
+          isAccessChangeRefused(error)
+            ? t("Common:EncryptedAccessChangeRefused")
+            : getEncryptionErrorMessage(t, error),
+        );
       } finally {
         setIsRoleChanging(false);
       }
@@ -213,8 +219,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
       userId,
       displayName,
       onConfirm: async () => {
-        await remove({ roomId, userId });
-        onRemoved?.();
+        if (await remove({ roomId, userId })) onRemoved?.();
       },
     });
   }, [

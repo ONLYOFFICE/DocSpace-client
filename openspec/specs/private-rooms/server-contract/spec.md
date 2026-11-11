@@ -344,18 +344,22 @@ The server SHALL refuse a batch copy of a file or a folder from inside a private
 - **THEN** no folder, not even an empty one, lands outside
 
 ### Requirement: Rooms list privacy filter
-The server SHALL accept the `privacyFilter` query parameter on the rooms list and apply it with any search area:
-- `Private` (1) returns only rooms with the private setting;
-- `NotPrivate` (2) returns only rooms without it;
-- an absent value or `None` (0) applies no privacy filter.
+The server SHALL split the rooms list by the private setting:
+- `searchArea=Active` returns no private room, whether the privacy filter is absent, `None` (0) or `NotPrivate` (2);
+- `searchArea=Active` with `privacyFilter=Private` (1) is read as `searchArea=PrivateRooms` and returns the section;
+- on every other search area the filter applies as given: `Private` only private rooms, `NotPrivate` none, absent or `None` no filter.
+
+#### Scenario: Active rooms without a filter
+- **WHEN** the rooms list is requested with `searchArea=Active` and no privacy filter
+- **THEN** no room with the private setting is returned
 
 #### Scenario: Private rooms only
 - **WHEN** the rooms list is requested with `searchArea=Active&privacyFilter=Private`
-- **THEN** only active rooms with the private setting are returned
+- **THEN** only active rooms with the private setting are returned, as with `searchArea=PrivateRooms`
 
 #### Scenario: Archived private rooms
 - **WHEN** the rooms list is requested with `searchArea=Archive&privacyFilter=Private`
-- **THEN** only archived rooms with the private setting are returned
+- **THEN** only archived rooms with the private setting are returned from the shared Archive
 
 #### Scenario: Non-private rooms only
 - **WHEN** the rooms list is requested with `searchArea=Active&privacyFilter=NotPrivate`

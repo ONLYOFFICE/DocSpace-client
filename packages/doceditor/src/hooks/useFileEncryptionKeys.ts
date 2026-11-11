@@ -55,23 +55,41 @@ import {
 import { loadFileSenderKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import type { TUser } from "@docspace/shared/api/people/types";
 
-import { useEncryptionKeysReady } from "@/components/EncryptionProviderWrapper";
+import {
+  useEncryptionKeysLoad,
+  useEncryptionKeysReady,
+} from "@/components/EncryptionProviderWrapper";
 import type { IInitialConfig } from "@/types";
 
 export type TEditorEncryptionKeys = NonNullable<
   EditorConfigBase["encryptionKeys"]
 >;
 
+/**
+ * Where the key flow of an encrypted file stands. The last five are its ends
+ * without a key: the unlock dialog was dismissed, the file holds no wrap for
+ * the user, the user holds no key, a request failed, or anything else.
+ * Spec: private-rooms/editor-integration, "Editor not mounted until keys are ready"
+ */
 export type TFileEncryptionStatus =
   | "off"
   | "loading"
   | "unlocking"
   | "ready"
+  | "unlock-cancelled"
+  | "no-access"
+  | "no-key"
+  | "load-failed"
   | "error";
 
-export type TUseFileEncryptionKeys = {
+type TFileEncryptionState = {
   status: TFileEncryptionStatus;
   encryptionKeys?: TEditorEncryptionKeys;
+};
+
+export type TUseFileEncryptionKeys = TFileEncryptionState & {
+  /** Runs the flow again; a failed read of the user's key list is repeated first. */
+  retry: () => void;
 };
 
 const HEADER_FETCH_BYTES = 4096;
@@ -116,9 +134,10 @@ const useFileEncryptionKeys = (
 ): TUseFileEncryptionKeys => {
   const isEncrypted = !!config?.file?.encrypted;
 
-  const [state, setState] = React.useState<TUseFileEncryptionKeys>({
+  const [state, setState] = React.useState<TFileEncryptionState>({
     status: isEncrypted ? "loading" : "off",
   });
+  const [attempt, setAttempt] = React.useState(0);
 
   const fileId = config?.file?.id;
   const fileViewUrl = config?.file?.viewUrl;
@@ -134,7 +153,11 @@ const useFileEncryptionKeys = (
 
   const encryption = useEncryptionOptional();
   const requireIdentity = encryption?.requireIdentity;
+  const hasEncryptionContext = !!encryption;
+  const hasConfiguredKey = !!encryption?.hasConfiguredKey;
   const keysReady = useEncryptionKeysReady();
+  const { failed: keysLoadFailed, reload: reloadKeys } =
+    useEncryptionKeysLoad();
 
   React.useEffect(() => {
     if (!isEncrypted) {
@@ -161,12 +184,33 @@ const useFileEncryptionKeys = (
 
         setState({ status: "loading" });
 
-        const info = await getFileEncryptionAccess(numericFileId);
+        // The user's key list comes first: without a key no wrap can exist.
+        if (hasEncryptionContext && keysReady) {
+          if (keysLoadFailed) {
+            setState({ status: "load-failed" });
+            return;
+          }
+          if (!hasConfiguredKey) {
+            setState({ status: "no-key" });
+            return;
+          }
+        }
+
+        let info: Awaited<ReturnType<typeof getFileEncryptionAccess>>;
+        try {
+          info = await getFileEncryptionAccess(numericFileId);
+        } catch (error) {
+          console.error("[ENCRYPTION] editor access entries failed:", error);
+          if (!cancelled) setState({ status: "load-failed" });
+          return;
+        }
+
         const hasOwnEntry = info?.fileKeys?.some(
           (k) => String(k.userId) === currentUserId,
         );
         if (!info?.fileKeys || !hasOwnEntry) {
-          throw new Error("No encryption access for the current user");
+          if (!cancelled) setState({ status: "no-access" });
+          return;
         }
 
         if (cancelled) return;
@@ -174,9 +218,13 @@ const useFileEncryptionKeys = (
 
         const identity = (await requireIdentity?.()) ?? null;
         if (!identity) {
-          if (!cancelled) {
-            setState({ status: keysReady ? "error" : "unlocking" });
-          }
+          if (cancelled) return;
+          // The flow runs again when the key list arrives.
+          if (!keysReady) setState({ status: "unlocking" });
+          else
+            setState({
+              status: hasEncryptionContext ? "unlock-cancelled" : "error",
+            });
           return;
         }
         if (cancelled) return;
@@ -236,10 +284,19 @@ const useFileEncryptionKeys = (
     userId,
     roomId,
     requireIdentity,
+    hasEncryptionContext,
+    hasConfiguredKey,
     keysReady,
+    keysLoadFailed,
+    attempt,
   ]);
 
-  return state;
+  const retry = React.useCallback(() => {
+    if (keysLoadFailed) reloadKeys();
+    setAttempt((current) => current + 1);
+  }, [keysLoadFailed, reloadKeys]);
+
+  return React.useMemo(() => ({ ...state, retry }), [state, retry]);
 };
 
 export default useFileEncryptionKeys;

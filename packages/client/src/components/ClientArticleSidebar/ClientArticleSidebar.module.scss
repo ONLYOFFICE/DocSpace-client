@@ -89,6 +89,13 @@
   }
 }
 
+// The projects' logos are larger than the menu's 16px icons, as on the
+// projects list; their text moves along with them.
+:global(:is(a, button)[data-item-id^="ai-nested-project-"] > div:first-child) {
+  width: 20px;
+  height: 20px;
+}
+
 // Show more is a link, not a row: the text only, in the menu's colour and
 // weight, underlined with dashes as an action link (ui-kit Link), with no
 // row highlight - NavMenu draws that on the row's first element, which is

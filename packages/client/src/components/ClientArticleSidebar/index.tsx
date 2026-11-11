@@ -98,6 +98,8 @@ import {
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import type { TAiChatRecentThread } from "SRC_DIR/store/DialogsStore";
+import type { TAiPreset } from "SRC_DIR/store/AiPresetsStore";
+import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 
 import styles from "./ClientArticleSidebar.module.scss";
 
@@ -124,7 +126,7 @@ type ClientArticleSidebarProps = FolderIds & {
   // The latest AI projects (most recently changed first) listed under
   // Agents, and the latest conversations under Recent with the one the chat
   // shows.
-  recentAiProjects?: { id: string; name: string }[];
+  recentAiProjects?: Pick<TAiPreset, "id" | "name" | "logo">[];
   recentAiChats?: TAiChatRecentThread[];
   hasMoreAiChats?: boolean;
   activeAiChatId?: string;
@@ -150,6 +152,9 @@ const RECENT_AI_PROJECTS_COUNT = 5;
 
 // A stable empty default, so the memoized groups are not rebuilt each render.
 const EMPTY_LIST: never[] = [];
+
+// A project read without its logo is drawn with its initials.
+const NO_PROJECT_LOGO = { color: "" };
 
 // Ids of the entries listed under Agents and Recent, Show more included.
 // NavMenu has no third level: they are siblings of those entries, indented
@@ -707,10 +712,20 @@ const ClientArticleSidebar = ({
             icon: CatalogAgentsReactSvgUrl,
             ...nav(aiAgentsUrl),
           },
-          // A project opens as its room, which shows its chat.
+          // A project opens as its room, which shows its chat. Its logo is
+          // the one the projects list shows; without one, its initials.
           ...shownAiProjects.map((project) => ({
             id: aiProjectItemId(project.id),
             label: project.name,
+            iconNode: (
+              <ProjectLogo
+                project={{
+                  title: project.name,
+                  logo: project.logo ?? NO_PROJECT_LOGO,
+                }}
+                size="20px"
+              />
+            ),
             ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
           })),
           // The rest are on the agents list.

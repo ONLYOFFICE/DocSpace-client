@@ -45,6 +45,7 @@ import {
   getAiProject,
   getAiProjects,
   type TAiProject,
+  type TAiProjectLogo,
   type TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
 
@@ -56,6 +57,8 @@ export type TAiPreset = AiChatPresetSettings & {
   id: string;
   name: string;
   createdAt: string;
+  /** The project's logo, for the sidebar's list under Agents. */
+  logo?: TAiProjectLogo;
 };
 
 export type { AiChatPresetRoom, AiChatPresetSettings };
@@ -75,6 +78,7 @@ export const toAiPreset = (project: TAiProject): TAiPreset => {
     id: String(project.id),
     name: project.title,
     createdAt: project.created,
+    logo: project.logo,
     profileId: profile?.id ?? null,
     profileName: profile?.name ?? null,
     contextRooms: toChatRooms(instructionsRooms),

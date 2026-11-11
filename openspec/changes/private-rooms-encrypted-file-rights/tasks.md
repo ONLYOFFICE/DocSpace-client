@@ -15,7 +15,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Gate
 
-- [ ] 3.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `cd common/tests && npx vitest run test/locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date
+- [x] 3.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `cd common/tests && npx vitest run test/locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date. Done 2026-11-11: `tsc` clean in the six packages; unit suites shared 2287 of 2287, client 2085 of 2085, sdk 493 of 493, doceditor 55 of 55; `locales.test.js` 44 of 46, the two completeness cases failing on four keys of another feature only, as before this change; the pre-push source checks (`test:lefthook` of `common/tests`) 61 passed and 3 skipped; Biome clean on the touched directories; OpenSpec validation 20 of 20. E2E as recorded in 1.2 and 2.3
 
 ## Workflow follow-up
 

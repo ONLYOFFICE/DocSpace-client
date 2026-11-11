@@ -46,6 +46,7 @@ import {
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 import api from "@docspace/shared/api";
 import { ShareAccessRights } from "@onlyoffice/apps-ui-kit/enums";
 
@@ -137,7 +138,13 @@ const LeaveRoomDialog = observer(
           else if (sectionRootId !== undefined) openFolder(sectionRootId, "");
         }
       } catch (e) {
-        toastr.error(e as Error);
+        // Spec: private-rooms/sdk-surface, "SDK explains a refused access change in a private room"
+        if (isPrivate && isAccessChangeRefused(e)) {
+          toastr.error(t("Common:EncryptedAccessChangeRefused"));
+          onClose();
+        } else {
+          toastr.error(e as Error);
+        }
       } finally {
         setIsLoading(false);
       }

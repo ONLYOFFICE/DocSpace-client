@@ -10,7 +10,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. SDK
 
-- [ ] 2.1 SDK: make the leave dialog (`packages/sdk/src/app/(rooms)/_components/leave-room-dialog/index.tsx`) show `Common:EncryptedAccessChangeRefused` and close after the refusal of a private room, staying open with the error after any other failure (design decision 4). Verify: cases "Leave refused" and "Leave fails for another reason" in `index.test.tsx` next to it; `pnpm test:sdk`; `pnpm exec tsc` in sdk
+- [x] 2.1 SDK: make the leave dialog (`packages/sdk/src/app/(rooms)/_components/leave-room-dialog/index.tsx`) show `Common:EncryptedAccessChangeRefused` and close after the refusal of a private room, staying open with the error after any other failure (design decision 4). Verify: cases "Leave refused" and "Leave fails for another reason" in `index.test.tsx` next to it; `pnpm test:sdk`; `pnpm exec tsc` in sdk. Done 2026-11-11: the dialog cases 7 of 7, with a third new case "Refusal in an ordinary room"; the SDK suite 493 of 493; `tsc` clean in sdk
 - [ ] 2.2 SDK: make the role update of the private members view (`packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx`) show `Common:EncryptedAccessChangeRefused` for the refusal. Verify: case "Removal or role change refused" in a test next to `PrivateMemberUser.removal.test.tsx`; `pnpm test:sdk`; `pnpm exec tsc` in sdk
 
 ## 3. Translations

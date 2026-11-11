@@ -104,7 +104,7 @@ export const AICard = ({
       return (
         <Trans
           t={t}
-          ns="InfoPanel"
+          ns={["InfoPanel", "Common"]}
           i18nKey="FormRoomAIProviderNotConnectedAskAdmin"
           components={{
             1: <strong />,
@@ -122,7 +122,7 @@ export const AICard = ({
       return (
         <Trans
           t={t}
-          ns="InfoPanel"
+          ns={["InfoPanel", "Common"]}
           i18nKey="FormRoomConnectDatabaseAskAdmin"
           components={{
             1: <strong />,

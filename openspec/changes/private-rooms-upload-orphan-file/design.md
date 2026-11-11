@@ -25,10 +25,27 @@ Client, as read on 2026-11-11:
   answers a list of operations. The encrypted-files mock serves the route
   and removes the file at once.
 
-Server: not read yet for this change. Task 1.1 reads the delete route, the
-right of the user who created a file to delete it in a private room, and
-whether the answer already carries a finished operation, and records the
-source here before the code is written.
+Server, `../server` at `a7d94e4b81`, read on 2026-11-11 (task 1.1):
+
+- `FilesController.DeleteFile`
+  (`products/ASC.Files/Server/Api/FilesController.cs`, `HttpDelete
+  "file/{fileId}"`) queues a delete operation
+  (`fileOperationsManager.Publish`) and answers the operations of the
+  caller, narrowed to this one with `returnSingleOperation`. The work is
+  done by `FileDeleteOperation`
+  (`products/ASC.Files/Core/Services/WCFService/FileOperations/FileDeleteOperation.cs`),
+  so the answer can carry an operation that is still running; its outcome
+  is read from `GET files/fileops`, the `finished` and `error` fields.
+- A refusal is not an HTTP error of the delete request: the operation
+  records the message of the failed permission check in its `error`.
+- Who may delete, by the remarks of the action: the room admin, a DocSpace
+  admin acting as room manager and a content creator acting on their own
+  file; editing access alone does not delete. A user who can upload into a
+  private room is one of the first three, and the file is their own. The
+  rule was read in the action's documentation, not followed into
+  `FileSecurity`.
+- With `immediately` the file is deleted for good; the remarks add that
+  inside a room there is no Trash and deletion is always final.
 
 ## Goals / Non-Goals
 
@@ -60,12 +77,14 @@ source here before the code is written.
    The client then takes its existing failed-row path, which offers a
    retry, and lists no file. A deletion that fails keeps the id and
    today's "uploaded with error" path.
-4. **The deletion is permanent and not awaited beyond its answer.**
-   Deletion in a private room bypasses the recycle bin (main spec
-   `file-operations`, "Deletion bypasses the recycle bin"). What the answer
-   of the route means for an operation that is still running is settled by
-   the reading of task 1.1; if the operation can outlive the answer, the
-   orchestrator waits for it within a bound before reporting.
+4. **The deletion is permanent, and its operation is awaited within a
+   bound.** Deletion in a private room bypasses the recycle bin (main spec
+   `file-operations`, "Deletion bypasses the recycle bin"). The delete
+   request only queues an operation (Context), so the orchestrator reads
+   the operation until it is finished, for a few seconds at most, and
+   counts the file as removed only when it finished without an error. An
+   operation that reports an error, does not finish in time or cannot be
+   read counts as a failed deletion.
 5. **The members' entries keep their path.** With the uploader's entry
    written the file is readable and recoverable; a failed fan-out stays a
    share failure with pending-access marks.

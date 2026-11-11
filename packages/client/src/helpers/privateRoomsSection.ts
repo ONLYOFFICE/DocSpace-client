@@ -111,11 +111,16 @@ export const isPrivateRoomsListRoot = (
 ) =>
   getCategoryType(location) === CategoryType.PrivateRooms && !!isRoomsFolder;
 
-/** Keys management is offered while the section is, and to every key holder. */
+/**
+ * Keys management is offered while the section is, and to every key holder,
+ * but never to a guest.
+ */
+// Spec: private-rooms/key-management, "Key generation is withheld from guests"
 export const isKeysManagementAvailable = (
   isSectionAvailable: boolean,
   encryptionKeys: readonly unknown[] | null | undefined,
-) => isSectionAvailable || !!encryptionKeys?.length;
+  isGuest: boolean | undefined,
+) => !isGuest && (isSectionAvailable || !!encryptionKeys?.length);
 
 /** The Private section address an `/e2e-rooms` bookmark of the former app stands for. */
 export const getPrivateAddressOfE2eRoomsAddress = (search: string) =>

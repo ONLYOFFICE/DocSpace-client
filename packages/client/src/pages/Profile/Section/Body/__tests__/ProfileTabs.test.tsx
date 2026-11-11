@@ -108,11 +108,13 @@ const SectionBodyContent = (await import("../index"))
 type TKeysState = {
   isSectionAvailable?: boolean;
   encryptionKeys?: { id: string }[] | null;
+  isGuest?: boolean;
 };
 
 const renderProfileTabs = ({
   isSectionAvailable = true,
   encryptionKeys = [],
+  isGuest = false,
 }: TKeysState = {}) =>
   render(
     <Provider
@@ -143,7 +145,11 @@ const renderProfileTabs = ({
       setup={{ getSessions: vi.fn() }}
       filesStore={{ resetSelections: vi.fn() }}
       telegramStore={{ checkTg: vi.fn() }}
-      userStore={{ getEncryptionKeys: vi.fn(), encryptionKeys }}
+      userStore={{
+        getEncryptionKeys: vi.fn(),
+        encryptionKeys,
+        user: { isVisitor: isGuest },
+      }}
       appsStore={{ isPrivateRoomsSectionAvailable: isSectionAvailable }}
     >
       <SectionBodyContent />
@@ -199,5 +205,22 @@ describe("Keys management tab follows the Private section", () => {
     });
 
     expect(screen.getByTestId("tab-keys-management")).toBeInTheDocument();
+  });
+
+  it("Guest", () => {
+    renderProfileTabs({ isSectionAvailable: true, isGuest: true });
+
+    expect(screen.queryByTestId("tab-keys-management")).toBeNull();
+    expect(screen.getByTestId("tab-login")).toBeInTheDocument();
+  });
+
+  it("Guest holding a key", () => {
+    renderProfileTabs({
+      isSectionAvailable: false,
+      encryptionKeys: [{ id: "key-1" }],
+      isGuest: true,
+    });
+
+    expect(screen.queryByTestId("tab-keys-management")).toBeNull();
   });
 });

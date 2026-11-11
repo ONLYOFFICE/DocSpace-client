@@ -49,6 +49,7 @@ type KeysManagementRouteProps = {
   /** The user's keys; null until they are read, and after a failed read. */
   encryptionKeys: readonly unknown[] | null;
   getEncryptionKeys: () => Promise<unknown>;
+  isGuest?: boolean;
   children: React.ReactNode;
 };
 
@@ -62,6 +63,7 @@ const KeysManagementRoute = ({
   canManageApps,
   encryptionKeys,
   getEncryptionKeys,
+  isGuest,
   children,
 }: KeysManagementRouteProps) => {
   const [isKeysReadSettled, setIsKeysReadSettled] = useState(false);
@@ -77,7 +79,10 @@ const KeysManagementRoute = ({
 
   // The keys read at start-up may still be running, or may have failed.
   const mustReadKeys =
-    !isAppsPending && !isSectionAvailable && encryptionKeys === null;
+    !isGuest &&
+    !isAppsPending &&
+    !isSectionAvailable &&
+    encryptionKeys === null;
 
   useEffect(() => {
     if (!mustReadKeys) return;
@@ -97,7 +102,7 @@ const KeysManagementRoute = ({
 
   if (isAppsPending) return null;
 
-  if (isKeysManagementAvailable(isSectionAvailable, encryptionKeys))
+  if (isKeysManagementAvailable(isSectionAvailable, encryptionKeys, isGuest))
     return children;
 
   if (mustReadKeys && !isKeysReadSettled) return null;
@@ -114,4 +119,5 @@ export default inject<TStore>(({ appsStore, userStore }) => ({
   canManageApps: appsStore.canManageApps,
   encryptionKeys: userStore.encryptionKeys,
   getEncryptionKeys: userStore.getEncryptionKeys,
+  isGuest: userStore.user?.isVisitor,
 }))(observer(KeysManagementRoute));

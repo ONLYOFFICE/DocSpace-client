@@ -4,7 +4,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 1. Client
 
-- [ ] 1.1 Client: make `isKeysManagementAvailable` in `packages/client/src/helpers/privateRoomsSection.ts` answer false for a guest, and pass the guest flag of the user from the profile body (`pages/Profile/Section/Body/index.tsx`) and from `components/KeysManagementRoute` (design decisions 1, 2 and 4). Verify: cases for a guest with the section available and for a guest holding a key in the helper's unit test next to it; case "Guest" in `packages/client/src/pages/Profile/Section/Body/__tests__/ProfileTabs.test.tsx` and in the test of `KeysManagementRoute`; `cd packages/client && pnpm exec vitest run src/helpers src/pages/Profile src/components/KeysManagementRoute`; `pnpm exec tsc` in client
+- [x] 1.1 Client: make `isKeysManagementAvailable` in `packages/client/src/helpers/privateRoomsSection.ts` answer false for a guest, and pass the guest flag of the user from the profile body (`pages/Profile/Section/Body/index.tsx`) and from `components/KeysManagementRoute` (design decisions 1, 2 and 4). Verify: cases for a guest with the section available and for a guest holding a key in the helper's unit test next to it; case "Guest" in `packages/client/src/pages/Profile/Section/Body/__tests__/ProfileTabs.test.tsx` and in the test of `KeysManagementRoute`; `cd packages/client && pnpm exec vitest run src/helpers src/pages/Profile src/components/KeysManagementRoute`; `pnpm exec tsc` in client
 
 ## 2. Shared and SDK
 

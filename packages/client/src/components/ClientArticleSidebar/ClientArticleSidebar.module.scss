@@ -96,6 +96,14 @@
   height: 20px;
 }
 
+// RoomIcon sets the initials for its 32px default (14px); at 20px two
+// letters would not fit, so they shrink in proportion, as the info panel and
+// the room dialogs size them for their own logos.
+.agentLogo :global(.room-title) {
+  font-size: 9px;
+  line-height: 12px;
+}
+
 // Show more is a link, not a row: the text only, in the menu's colour and
 // weight, underlined with dashes as an action link (ui-kit Link), with no
 // row highlight - NavMenu draws that on the row's first element, which is

@@ -725,6 +725,8 @@ const ClientArticleSidebar = ({
                   logo: project.logo ?? NO_PROJECT_LOGO,
                 }}
                 size="20px"
+                radius="4px"
+                className={styles.agentLogo}
               />
             ),
             ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),

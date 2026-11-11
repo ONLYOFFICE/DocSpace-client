@@ -221,8 +221,10 @@ export const privateRoomListHandler = (
    * the Rooms root otherwise, and FileStorageService.GetFolderItemsAsync
    * answers that section as `current` and as the only breadcrumb, titled by
    * FilesMappingAction (FilesUCResource.Archive or VirtualRooms). Both areas
-   * list the same rooms. `privacyFilter` keeps the private room or the
-   * ordinary ones (withRoomPrivacyFilter).
+   * hold the same rooms; which of them an area lists follows the private
+   * setting (withRoomPrivacyFilter): the Rooms area leaves the private rooms
+   * out unless `privacyFilter` asks for them, the Archive takes the filter as
+   * given.
    */
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,

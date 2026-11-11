@@ -12,6 +12,12 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 615,
+      "context": "icon: CatalogSkillsReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),\n },\n {\n id: \"ai-rooms-knowledge\",\n label: t(\"Common:Knowledge\"),\n icon: CatalogKnowledgeReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),\n },\n {\n id: \"ai-rooms-trash\",",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
       "line_number": 168,
       "context": "<div className={styles.sources}>\n {instructionsRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:AIProjectInstructions\")} rooms={instructionsRooms} kind=\"instructions\" />\n ) : null}\n {knowledgeRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:Knowledge\")} rooms={knowledgeRooms} kind=\"knowledge\" />\n ) : null}\n </div>\n ) : null}\n </div>\n );",
@@ -24,20 +30,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 359,
-      "context": "</Section>\n );\n \n const knowledgeSection = knowledgeRooms.length === 0 ? null : (\n <Section\n title={t(\"Common:Knowledge\")}\n menuTitle={t(\"Common:Knowledge\")}\n testId=\"ai-project-knowledge\"\n headless={compact}\n >\n {knowledgeRooms.map((room) => {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 359,
-      "context": "</Section>\n );\n \n const knowledgeSection = knowledgeRooms.length === 0 ? null : (\n <Section\n title={t(\"Common:Knowledge\")}\n menuTitle={t(\"Common:Knowledge\")}\n testId=\"ai-project-knowledge\"\n headless={compact}\n >\n {knowledgeRooms.map((room) => {",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 241,
+      "line_number": 240,
       "context": "onClick: makeOnClick(TAB_IDS.WEB_SEARCH),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.KNOWLEDGE,\n name: t(\"Common:Knowledge\"),\n content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,\n onClick: makeOnClick(TAB_IDS.KNOWLEDGE),\n isDisabled: disableNonAiModels,\n },\n ...(standalone",
       "module": "/packages/client"
     },

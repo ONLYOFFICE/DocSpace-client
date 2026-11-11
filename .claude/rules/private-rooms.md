@@ -50,8 +50,11 @@ Workflow:
 3. A bug fix that changes observable behaviour still goes through a change,
    even a small one; a pure refactor sets `skip_specs: true`.
 4. `npx -y @fission-ai/openspec@latest validate --all --strict` must pass
-   before a push that touches `openspec/`. The CLI is not a repo dependency;
-   `npx` fetches it (set `OPENSPEC_TELEMETRY=0`).
+   before a push that touches `openspec/`. The pre-push gate runs it for such
+   a push with the version pinned in `lefthook.yml` (see CLAUDE.md, "Git
+   hooks"); run it yourself before committing a task so the push does not
+   find it. The CLI is not a repo dependency; `npx` fetches it (set
+   `OPENSPEC_TELEMETRY=0`).
 5. Specs own the what and the why. Do not restate a requirement or a
    design decision in code or test comments; where the behaviour is
    counter-intuitive on its own (fail closed, a withheld action), leave at most

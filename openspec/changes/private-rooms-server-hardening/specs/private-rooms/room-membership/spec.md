@@ -88,13 +88,6 @@ The system SHALL remove a member of a private room through the role update alone
 - **WHEN** a member is removed from the Members tab of a private room selected in the Private or Rooms list
 - **THEN** the same role update runs as for a removal from inside the room, and nothing more
 
-### Requirement: Removing a group revokes each member
-The system SHALL remove a group from a private room through the role update alone; the server removes the keys of every user the update takes out of the room, and the client SHALL NOT run a revocation of its own.
-
-#### Scenario: Group removed
-- **WHEN** a group is removed from a private room
-- **THEN** the server removes the keys of every user who loses the room, and the client writes no access entry
-
 ### Requirement: Leaving a room revokes own access first
 The system SHALL drop the leaver's role without a revocation of its own when a member leaves a private room; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
 

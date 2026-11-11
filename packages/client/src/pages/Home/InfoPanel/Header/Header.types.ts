@@ -54,6 +54,7 @@ export type HeaderProps = {
   enablePlugins: SettingsStore["enablePlugins"];
 
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
+  isPrivacyFolder: TreeFoldersStore["isPrivacyFolder"];
 };
 
 export type InfoPanelHeaderContentProps =

@@ -191,6 +191,33 @@ describe("FilesActionsStore.changeRoomOwner on a private room", () => {
     updateRoomMemberRole.mockRestore();
   });
 
+  it("Leave after an owner change refused", async () => {
+    const updateRoomMemberRole = vi
+      .spyOn(api.rooms, "updateRoomMemberRole")
+      .mockRejectedValue(refusal(403));
+    const filesStore = {
+      selection: [{ id: 9, private: true }],
+      bufferSelection: null,
+      setSelected: vi.fn(),
+      setFolder: vi.fn(),
+      removeFiles: vi.fn(),
+    };
+    const store = createTestFilesActionsStore({
+      filesStore,
+      selectedFolderStore: { isRootFolder: true, id: 9 },
+    });
+
+    await store.changeRoomOwner(t, "user-2", true);
+
+    expect(setFileOwner).toHaveBeenCalledWith("user-2", [9]);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedAccessChangeRefused",
+    );
+    expect(filesStore.removeFiles).not.toHaveBeenCalled();
+    updateRoomMemberRole.mockRestore();
+  });
+
   it("Ordinary room", async () => {
     const { store, selectedFolderStore } = roomStores({ id: 9, private: false });
 

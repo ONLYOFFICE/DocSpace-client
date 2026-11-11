@@ -27,11 +27,23 @@ Picking a project SHALL read it again from the server (its room, sources and mod
 - its available Instructions rooms as the skills rooms;
 - its available Knowledge rooms as the knowledge bases.
 
-The chat SHALL show the project's name as its title. If the re-read fails for any reason other than 404 or 403, the picker's copy SHALL be applied instead.
-
 #### Scenario: Apply a project
 - **WHEN** the user picks the "Sales" project in the model picker
-- **THEN** the chat switches to the project's model, connects its Instructions and Knowledge rooms and shows "Sales" as its title
+- **THEN** the chat switches to the project's model and connects its Instructions and Knowledge rooms, in the same thread
+
+### Requirement: A failed re-read applies the picker's copy
+If reading a picked project again fails for any reason other than 404 or 403, the system SHALL apply the copy of the project the picker already holds.
+
+#### Scenario: Re-read fails
+- **WHEN** the user picks a project and reading it again fails with an error other than 404 or 403
+- **THEN** the picker's copy of the project is applied to the open chat
+
+### Requirement: The chat keeps its title in a project
+The chat panel SHALL keep its "AI Chat" title, whatever project the chat runs in.
+
+#### Scenario: Title after applying a project
+- **WHEN** the user picks the "Sales" project in the model picker
+- **THEN** the chat panel is still titled "AI Chat"
 
 ### Requirement: A gone project is not applied
 A picked project that is gone (404) or no longer readable (403) SHALL NOT be applied, SHALL drop from the picker, and SHALL trigger a "project not available" notice.

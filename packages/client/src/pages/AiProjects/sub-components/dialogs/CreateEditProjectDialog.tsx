@@ -121,8 +121,10 @@ const ROOM_ICONS: Record<TRoomType, "instructionsRoom.svg" | "knowledgeRoom.svg"
 /**
  * The create / edit aside of a project, as the mockups draw it: the logo
  * with its colour next to the name, the owner row (edit only), the model
- * with its note under the field, then the rooms of each kind as tags with
- * the "Select rooms" button in the same line and the hint below.
+ * with its note under the field, the rooms of each kind as tags with the
+ * "Select rooms" button in the same line and the hint below. The
+ * project's instructions and suggestions are not edited here: the form
+ * leaves them out of what it saves, so the server keeps what it has.
  */
 const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogProps) => {
   const { t } = useTranslation(["Common"]);
@@ -504,7 +506,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
             </div>
             <TagInput
               t={t}
-              title={`${t("Common:Tags")}:`}
+              title={t("Common:Tags")}
               tagHandler={tagHandler}
               setIsScrollLocked={() => {}}
               isDisabled={isSaving}

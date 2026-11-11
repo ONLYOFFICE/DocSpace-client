@@ -36,26 +36,14 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 331,
-      "context": "{\n id: \"portal-settings_catalog-backup\",\n key: \"2\",\n type: PageType.backup,\n link: \"backup\",\n tKey: \"Common:Backup\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-data-backup\",\n key: \"2-0\",",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 698,
+      "line_number": 692,
       "context": "operationsAlert={Boolean(backupProgressError)}\n operationsCompleted={operationsCompleted}\n operations={[\n {\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 795,
-      "context": "operationsCanceled={isCancelOperation}\n operations={[\n {\n label: isCancelOperation\n ? t(\"Common:CanceledOperation\", {\n operationName: t(\"Common:Backup\"),\n })\n : downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 795,
+      "line_number": 789,
       "context": "operationsCanceled={isCancelOperation}\n operations={[\n {\n label: isCancelOperation\n ? t(\"Common:CanceledOperation\", {\n operationName: t(\"Common:Backup\"),\n })\n : downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")",
       "module": "/packages/shared"
     },

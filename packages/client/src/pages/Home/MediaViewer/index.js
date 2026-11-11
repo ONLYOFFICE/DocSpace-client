@@ -44,7 +44,10 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isSameId } from "SRC_DIR/helpers/plugins/utils";
+
+import { resolveMediaDownload } from "./mediaDownload.helpers";
 import { usePlugin } from "./hooks/usePlugin";
 
 const FilesMediaViewer = (props) => {
@@ -253,12 +256,22 @@ const FilesMediaViewer = (props) => {
 
   const onDownloadMediaFile = useCallback(
     (id) => {
-      if (playlist.length > 0) {
-        const viewUrlFile = playlist.find((file) => file.fileId === id).src;
-        return openUrl(viewUrlFile, UrlActionType.Download);
+      const download = resolveMediaDownload({
+        id,
+        playlist,
+        files,
+        previewFile,
+      });
+
+      if (download.kind === "decrypt") return onClickDownload(download.file, t);
+      if (download.kind === "missing") {
+        return toastr.error(t("Common:EncryptionDownloadFailed"));
+      }
+      if (download.kind === "plain") {
+        return openUrl(download.src, UrlActionType.Download);
       }
     },
-    [playlist],
+    [playlist, files, previewFile, onClickDownload, openUrl, t],
   );
 
   const onMediaViewerClose = useCallback(async () => {
@@ -564,5 +577,5 @@ export default inject(
         (selectedFolderStore?.isRoom ? selectedFolderStore.id : null),
     };
   },
-)(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));
+)(withTranslation(["Files", "Translations", "Common"])(observer(FilesMediaViewer)));
 

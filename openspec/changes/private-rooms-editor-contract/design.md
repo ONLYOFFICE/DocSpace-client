@@ -1108,6 +1108,14 @@ release, one user holding a key, the device remembered):
    contract item for the Document Server team, in two parts: a bundle built
    after ff9f51aeffb, and the add-on passing the form flag of the container it
    opened to `encryptFile` when it saves.
+   What landed, read through CodeGraph on `a7d94e4b81` (2026-11-10): the
+   save callback refuses a user submit of a file located in a private room
+   before storing anything (`DocumentServiceTracker.cs:428-443`); the editor
+   configuration hides the submit action for any encrypted file
+   (`Configuration.cs`, `SubmitFormDto.Visible`); StartFilling is denied
+   inside a private room (`FileSecurity.cs:1712-1720`). The callback guard is
+   keyed on the private room, not on the encrypted flag, so the requirement
+   and its scenario say so.
    Role-based filling in a private virtual data room is server-compatible but
    unverified in the editor, and stays an open question. Landed 2026-11-05
    (`1259577f63`): the server refuses the submit callback of a file in a
@@ -1249,6 +1257,11 @@ BLOCKED or "after <x>" waits.
 - **Decisions pending.** Proposal decisions 5, 6 and 7 and decision 16
   above are the owner's; tasks 9.4, 9.6, 9.10 and 9.11 wait for them and are
   not decided by the implementing session.
+
+The requirement "SDK does not open encrypted files in the editor" now
+describes the opposite of its name (the SDK opens them when the capability
+is present), so the delta renames it to "SDK opens encrypted files only with
+the Document Server capability" (2026-11-10).
 
 ## Risks / Trade-offs
 

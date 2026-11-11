@@ -108,12 +108,16 @@ The SDK SHALL recover the decrypted names of encrypted files whenever the file l
 - **WHEN** an encrypted file appears in the open folder through a socket event or a navigation while the identity is unlocked
 - **THEN** its decrypted name is recovered and shown without reloading the page
 
-### Requirement: Member removal warning and group expansion
-When a member is removed from a private room in the SDK, the removal dialog SHALL warn that the member will lose access to encrypted files, and a removed group SHALL be expanded to its members before the revocation runs. The server keeps the wraps of removed members; access ends only through the lost read access.
+### Requirement: Member removal warning
+When a member is removed from a private room in the SDK, the removal dialog SHALL warn that the member will lose access to encrypted files, and the removal SHALL run through the role update alone, without a revocation of the SDK's own; the server removes the member's wrapped keys with the share.
+
+#### Scenario: Remove a member
+- **WHEN** a member is removed from a private room
+- **THEN** the warning is shown, the role update runs and the SDK writes no access entry
 
 #### Scenario: Remove a group
 - **WHEN** a group is removed from a private room
-- **THEN** a revocation runs for every member of the group, and their wrap entries remain stored on the server
+- **THEN** the role update runs for the group alone, without expanding it into its members, and the SDK writes no access entry
 
 ### Requirement: Members grouped without groups and guests
 The SDK members view of a private room SHALL bucket members into administrators, users and expected members, and SHALL NOT list groups or guests because they hold no encryption identity.
@@ -402,30 +406,38 @@ The SDK SHALL run the private-room flows (invite with re-wrap, owner change with
 - **WHEN** the user picks edit, invite or change owner in the info panel menu of an open private room
 - **THEN** the private flow of that action starts, as from the private rooms list
 
-### Requirement: Invite panel offers people only and closes before re-encryption
-The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups, and SHALL close once the room security update succeeds, showing the re-encryption progress afterwards.
+### Requirement: Invite panel offers people only and reports the invitation result
+The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups. It SHALL grant room access to the verified invitees before wrapping their file keys, and SHALL stay open after sending with the result of each invitee (granted, pending access, or skipped with Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch) until the user closes it, as the client does.
 
 #### Scenario: People selector
 - **WHEN** the user opens "choose from list" in the invite panel of a private room
 - **THEN** no Guests tab and no group is shown
 
 #### Scenario: Order of operations
-- **WHEN** the room security update succeeds
-- **THEN** the panel closes and the re-encryption progress is shown until the file keys are wrapped
+- **WHEN** an invitation to a private room is sent from the SDK
+- **THEN** room access is granted to the verified invitees before their file keys are wrapped, and each granted invitee ends up holding an access entry for every encrypted file in the room or shown as pending access
+
+#### Scenario: Mixed invitation
+- **WHEN** some invitees have verified keys and others are skipped
+- **THEN** only the verified invitees are granted access, and the panel stays open listing the skipped ones with the reason
 
 ### Requirement: Leaving a private room revokes own access first
-The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, run a revocation of the user's own access entries before dropping the role, on a best-effort basis that never blocks leaving.
+The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, drop the role without a revocation of its own; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
 
 #### Scenario: Member leaves
 - **WHEN** a member leaves a private room
-- **THEN** the revocation of their own entries runs before their role is dropped, and the entries remain stored on the server
+- **THEN** the role is dropped, the SDK writes no access entry, and the leaver's keys are gone from every encrypted file of the room
 
 ### Requirement: Member removal is blocked during active uploads
-The SDK SHALL refuse to start removing a member of a private room while uploads into the room are in progress on this device, showing Common:CannotRemoveMemberWhileUploads with the upload count, and SHALL let the removal start once they finish.
+The SDK SHALL refuse to start removing a member of a private room while uploads into the room or any folder inside it are in progress on this device, showing Common:CannotRemoveMemberWhileUploads with the upload count, and SHALL let the removal start once they finish.
 
 #### Scenario: Uploads in flight
 - **WHEN** the user removes a member while an upload into the room is running
 - **THEN** Common:CannotRemoveMemberWhileUploads is shown and no removal starts
+
+#### Scenario: Uploads into a subfolder
+- **WHEN** the user removes a member while an upload into a subfolder of the room is running
+- **THEN** Common:CannotRemoveMemberWhileUploads counts that upload and no removal starts
 
 ### Requirement: Private room creation gate
 The SDK SHALL refuse to start private room creation when the browser does not expose WebCrypto, with Common:EncryptionRequiresHttps. It SHALL re-fetch the keys before creating, refuse with Common:EncryptionKeysRequiredForPrivateRoom when none exist, and close the creation when the user cancels or key generation fails. A key list that failed to load SHALL NOT count as an empty one.
@@ -525,3 +537,36 @@ The SDK SHALL invite into a private room as the room-membership requirements "Pr
 #### Scenario: One invitee has never registered a key
 - **WHEN** the SDK invite panel invites A, who holds a key, and B, who never registered one, into a private room
 - **THEN** A becomes a member and receives the file keys, and the result names B with Common:EncryptedInviteNoKey
+
+### Requirement: Pending access in the SDK members list
+The SDK SHALL show a member of a private room for whom some files could not be re-wrapped as pending access (Common:EncryptedAccessPending), with a retry action for a user who may edit the room that re-wraps the missing files, as the client does.
+
+#### Scenario: Retry from the SDK members list
+- **WHEN** a user who may edit the room retries a pending member and every missing file is re-wrapped
+- **THEN** the pending marker disappears and Common:EncryptedAccessRestored is shown
+
+### Requirement: Private room creation needs a Document Server that encrypts
+The SDK SHALL refuse to start private room creation when its files settings report that the connected Document Server cannot work with encrypted files, with Common:PrivateRoomDocServiceNotSupported, and SHALL show the same key when the server refuses the creation for that reason.
+
+#### Scenario: Document Server without encryption
+- **WHEN** a user starts creating a private room and the files settings report no encrypted-editing support
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown and no dialog opens
+
+#### Scenario: Creation refused by the server
+- **WHEN** the server refuses the creation of a private room because the Document Server cannot encrypt
+- **THEN** Common:PrivateRoomDocServiceNotSupported is shown instead of the server's message
+
+### Requirement: SDK explains a refused access change in a private room
+The SDK SHALL show Common:EncryptedAccessChangeRefused when the server refuses with 403 a leave, a member's removal or a member's role change in a private room, MUST NOT show the server's own message text for it, and SHALL close its leave dialog after a refused leave, as the client does. Any other failure SHALL be shown as before, the leave dialog staying open.
+
+#### Scenario: Leave refused
+- **WHEN** a member confirms leaving a private room in the SDK and the server answers 403
+- **THEN** Common:EncryptedAccessChangeRefused is shown, the dialog closes, and no text of the server appears
+
+#### Scenario: Removal or role change refused
+- **WHEN** a manager removes a member of a private room or changes the member's role in the SDK and the server answers 403
+- **THEN** Common:EncryptedAccessChangeRefused is shown, the member stays as listed, and no text of the server appears
+
+#### Scenario: Leave fails for another reason
+- **WHEN** a member confirms leaving a private room in the SDK and the request fails without a 403
+- **THEN** the failure is shown and the dialog stays open

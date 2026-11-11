@@ -494,7 +494,12 @@ replaces a read.
   private room. The client's invite panel offers people only
   (`private-rooms/room-membership`, "Invite panel offers people only"), so
   the client never sends a group share; the API and the SDK generic panel
-  do not stop one, which is why 6.4 stays.
+  do not stop one, which is why 6.4 stays. Superseded on 2026-11-10: the
+  owner decided that groups and guests are not supported in private rooms in
+  this version, and the server already refuses a group's share with 403 (its
+  key check finds no key for a group, `FileSharing.cs:270-276`), so tasks 6.4
+  and 6.5 and the group revocation requirement were removed
+  (`private-rooms-spec-consistency`).
 - Deactivation: deactivating a user revokes no keys; the reply counts it
   as offboarding (task 8.1), as this change does.
 - `PUT files/rooms/{id}/share` still stops at the first invitee without a
@@ -936,9 +941,10 @@ six encrypted files, no subfolder); no data was changed:
     needs the owner part. A group's removal revokes nothing yet:
     `SetAceObjectAsync` leaves group subjects out of the users it collects
     (`!w.SubjectGroup`, `FileSharing.cs:444`), so a user who loses the
-    room with the group's share keeps their keys; task 6.4 asks the
-    server to revoke them, and the client runs no revocation for a group
-    either, since its run could not remove them. Alternative: keep the client run as a belt and
+    room with the group's share keeps their keys. No group can join a
+    private room, though (the share is refused with 403, and groups are not
+    supported in this version by the owner's decision of 2026-11-10), so no
+    group revocation is planned, and the client runs none either. Alternative: keep the client run as a belt and
     braces; rejected, it only re-writes entries the server deletes anyway
     and shows a notice about work it did not do.
 
@@ -1061,8 +1067,8 @@ six encrypted files, no subfolder); no data was changed:
   the user leaves it, is removed from it, has their access cleared or
   their personal data deleted, audited as `RoomFileKeysRevoked`. No
   manager route. Task 6.3 adapts the client; task 8.1 keeps the owner part
-  of offboarding; task 6.4 covers the users who lose the room with a
-  group's removal, which the server does not revoke yet.
+  of offboarding. A group's removal needs no revocation: no group can be a
+  member of a private room.
 - Server refusal of plaintext written into a private room: closed on
   2026-11-05, decision 21, at the upload session and on the file write
   path, after `copyas` output (decision 15) and folders (decision 16) on

@@ -3,7 +3,7 @@
   "content": "Private rooms",
   "content_en_sha1_hash": "9a2ea678656f317a4c8a199c21fa0c78c7870d16",
   "created_at": "2026-11-03T18:13:00.546Z",
-  "updated_at": "2026-11-03T18:15:04.691Z",
+  "updated_at": "2026-11-09T09:36:33.222Z",
   "comment": {
     "text": "Title of the tooltip that opens from the BETA badge next to the Private item in the left sidebar and on the Keys management tab of the user profile; the beta description and bug-report links follow it. Short noun phrase naming the feature: private rooms are end-to-end encrypted rooms, so keep the word used for the Private sidebar section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 551,
+      "line_number": 567,
       "context": "icon: CatalogPrivateReactSvgUrl,\n ...nav(searchAreaUrl(\"/private/filter\", RoomSearchArea.Active)),\n badgeComponent: (\n <BetaBadge\n place=\"right-start\"\n title={t(\"Common:PrivateRoomsBetaTitle\")}\n description={t(\"Common:PrivateRoomsBetaDescription\")}\n dataTestId=\"private_rooms_beta_badge\"\n />\n ),\n children: [",
       "module": "/packages/client"
     },

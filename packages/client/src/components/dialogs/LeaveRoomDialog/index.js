@@ -37,6 +37,7 @@ import { useEffect, useState } from "react";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
@@ -64,9 +65,15 @@ const LeaveRoomDialog = (props) => {
       onClose();
     } else {
       setIsLoading(true);
-      await onLeaveRoomAction(t, isRoomOwner, isFormFiller);
-      setIsLoading(false);
-      onClose();
+      try {
+        await onLeaveRoomAction(t, isRoomOwner, isFormFiller);
+        onClose();
+      } catch (e) {
+        // Spec: private-rooms/room-membership, "Leaving a room revokes own access first"
+        toastr.error(e);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 

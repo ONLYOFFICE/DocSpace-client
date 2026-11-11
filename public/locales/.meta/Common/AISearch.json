@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 234,
+      "line_number": 233,
       "context": "onClick: makeOnClick(TAB_IDS.MCP_SERVERS),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.WEB_SEARCH,\n name: t(\"Common:AISearch\"),\n content: standalone ? <WebSearch /> : <WebSearchSaas />,\n onClick: makeOnClick(TAB_IDS.WEB_SEARCH),\n isDisabled: disableNonAiModels,\n },\n {",
       "module": "/packages/client"
     },

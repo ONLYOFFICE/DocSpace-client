@@ -57,6 +57,7 @@ describe("getAvailableInfoPanelTabs", () => {
       selection: listItemOf(privateRoomDto()),
       isTrash: false,
       isRecentFolder: false,
+      isPrivacyFolder: false,
       enablePlugins: false,
       infoPanelItemsList: [],
     });
@@ -86,11 +87,16 @@ const room = (roomType: RoomsType) =>
     security: {},
   }) as unknown as TFile;
 
-const tabsFor = (selection: TFile, item: Partial<IInfoPanelItemClient>) =>
+const tabsFor = (
+  selection: TFile,
+  item: Partial<IInfoPanelItemClient>,
+  { isPrivacyFolder = false } = {},
+) =>
   getAvailableInfoPanelTabs({
     selection,
     isTrash: false,
     isRecentFolder: false,
+    isPrivacyFolder,
     enablePlugins: true,
     infoPanelItemsList: [
       {
@@ -148,5 +154,41 @@ describe("getAvailableInfoPanelTabs: plugin roomType", () => {
 
   it("does not check a file against it", () => {
     expect(tabsFor(file(), { roomType })).toContain(TAB);
+  });
+});
+
+describe("getAvailableInfoPanelTabs: plugin tabs and private rooms", () => {
+  const folder = () =>
+    ({
+      id: 30,
+      isFolder: true,
+      rootFolderType: FolderType.Rooms,
+      security: {},
+    }) as unknown as TFile;
+
+  it("Info panel of a private room", () => {
+    const privateRoom = listItemOf(privateRoomDto()) as unknown as TFile;
+
+    expect(tabsFor(privateRoom, {})).not.toContain(TAB);
+  });
+
+  it("Info panel of a folder inside a private room", () => {
+    expect(tabsFor(folder(), {}, { isPrivacyFolder: true })).not.toContain(
+      TAB,
+    );
+  });
+
+  it("Info panel of an encrypted file", () => {
+    const encryptedFile = { ...file(), encrypted: true } as unknown as TFile;
+
+    expect(tabsFor(encryptedFile, {})).not.toContain(TAB);
+  });
+
+  it.each([
+    ["room", () => room(RoomsType.CustomRoom)],
+    ["folder", folder],
+    ["file", () => file()],
+  ])("Info panel of an item outside private rooms (%s)", (_, item) => {
+    expect(tabsFor(item(), {})).toContain(TAB);
   });
 });

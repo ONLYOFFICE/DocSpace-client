@@ -34,7 +34,14 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { FileStatus, FolderType } from "@docspace/shared/enums";
+import { runInAction } from "mobx";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import {
+  FileStatus,
+  FolderType,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -80,6 +87,54 @@ describe("FilesStore.isFiltered — characterization", () => {
   it("is falsy for the default (unfiltered) view", () => {
     const store = createTestFilesStore();
     expect(store.isFiltered).toBeFalsy();
+  });
+});
+
+describe("FilesStore.isFiltered — AI Workspace list type", () => {
+  const aiStore = (search?: string) => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isAiSectionFolder: true },
+    });
+    const filter = search
+      ? RoomsFilter.getFilter({ search } as Location)!
+      : RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+    runInAction(() => {
+      store.roomsFilter = filter;
+    });
+    return store;
+  };
+
+  it("the agents list with its preset type is not filtered", () => {
+    expect(aiStore().isFiltered).toBeFalsy();
+  });
+
+  it("the Skills and Knowledge lists are not filtered by their type", () => {
+    expect(
+      aiStore(`?searchArea=AiHub&type=${RoomsType.InstructionsRoom}`).isFiltered,
+    ).toBeFalsy();
+    expect(
+      aiStore(`?searchArea=AiHub&type=${RoomsType.KnowledgeRoom}`).isFiltered,
+    ).toBeFalsy();
+  });
+
+  it("a search in the list still counts as a filter", () => {
+    const store = aiStore();
+    runInAction(() => {
+      store.roomsFilter.filterValue = "plan";
+    });
+    expect(store.isFiltered).toBeTruthy();
+  });
+
+  it("a room type still filters the Rooms list", () => {
+    const store = createTestFilesStore({
+      treeFoldersStore: { isRoomsFolder: true },
+    });
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.Active);
+    filter.type = String(RoomsType.CustomRoom);
+    runInAction(() => {
+      store.roomsFilter = filter;
+    });
+    expect(store.isFiltered).toBeTruthy();
   });
 });
 

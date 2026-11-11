@@ -77,7 +77,7 @@ afterEach(() => server.resetHandlers());
 
 afterAll(() => server.close());
 
-describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonController.GetRoomsFolder, FolderDao.BuildRoomsQuery)", () => {
+describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonController.GetRoomsFolder, FileSecurity.GetVirtualRoomsAsync, FolderDao.BuildRoomsQuery)", () => {
   const useList = () =>
     server.use(
       privateRoomListHandler(PORT, {
@@ -86,10 +86,22 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
       }),
     );
 
-  it("lists every room without a privacy filter", async () => {
+  it.each(["?searchArea=Active", ""])(
+    "Active rooms without a filter (%s)",
+    async (query) => {
+      useList();
+
+      const list = await getRooms(query);
+
+      expect(list.folders.map((room) => room.id)).toEqual([ORDINARY_ROOM_ID]);
+      expect(list).toMatchObject({ total: 1, count: 1 });
+    },
+  );
+
+  it("Archive without a filter lists every room", async () => {
     useList();
 
-    const list = await getRooms("?searchArea=Active");
+    const list = await getRooms("?searchArea=Archive");
 
     expect(list.folders.map((room) => room.id)).toEqual([
       PRIVATE_ROOM_ID,
@@ -133,7 +145,7 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
   it("Rights reported", async () => {
     useList();
 
-    const list = (await getRooms("?searchArea=Active")) as unknown as {
+    const list = (await getRooms("?searchArea=Archive")) as unknown as {
       folders: { id: number; security: Record<string, boolean> }[];
     };
     const securityOf = (id: number) =>
@@ -161,7 +173,9 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
       }),
     );
 
-    const list = (await getRooms("?searchArea=Active")) as unknown as {
+    const list = (await getRooms(
+      `?searchArea=Active&privacyFilter=${PRIVATE}`,
+    )) as unknown as {
       folders: { id: number; foldersCount: number }[];
     };
 
@@ -173,16 +187,19 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
     ]);
   });
 
-  it("NotPrivate leaves the private room out", async () => {
-    useList();
+  it.each(["Active", "Archive"])(
+    "NotPrivate leaves the private room out, with searchArea=%s",
+    async (searchArea) => {
+      useList();
 
-    const list = await getRooms(
-      `?searchArea=Active&privacyFilter=${NOT_PRIVATE}`,
-    );
+      const list = await getRooms(
+        `?searchArea=${searchArea}&privacyFilter=${NOT_PRIVATE}`,
+      );
 
-    expect(list.folders.map((room) => room.id)).toEqual([ORDINARY_ROOM_ID]);
-    expect(list).toMatchObject({ total: 1, count: 1 });
-  });
+      expect(list.folders.map((room) => room.id)).toEqual([ORDINARY_ROOM_ID]);
+      expect(list).toMatchObject({ total: 1, count: 1 });
+    },
+  );
 });
 
 describe("roomListHandler — privacyFilter and third-party rooms (mirrors FileSecurity.GetVirtualRoomsAsync)", () => {

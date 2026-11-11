@@ -228,15 +228,11 @@ The server SHALL refuse with 403 an upload session into a private room, or into 
 - **THEN** the server accepts it as before
 
 ### Requirement: File keys follow the share
-The server SHALL remove a user's file keys from every encrypted file of a private room, subfolders included, when the user loses access to it (their own or their group's share removed or set to none, a leave, a clearing), and from every file on the portal when their personal data is deleted, keeping the keys of the room's creator and of a share removed before a change of owner; each room revocation SHALL be audited with the room and the users and SHALL NOT appear in the file or folder history.
+The server SHALL remove a user's file keys from every encrypted file of a private room, subfolders included, when the user loses access to it (their share removed or set to none, a leave, a clearing), and from every file on the portal when their personal data is deleted, keeping the keys of the room's creator and of a share removed before a change of owner; each room revocation SHALL be audited with the room and the users and SHALL NOT appear in the file or folder history.
 
 #### Scenario: Member removed
 - **WHEN** a room manager removes a member from a private room
 - **THEN** the member's keys are gone from every encrypted file of the room and the other members keep theirs
-
-#### Scenario: Group removed
-- **WHEN** a room manager removes a group from a private room
-- **THEN** every member of the group who loses access to the room with it loses their keys on every encrypted file of the room, and a member who keeps access through another share keeps theirs
 
 #### Scenario: Member leaves
 - **WHEN** a member leaves a private room
@@ -312,7 +308,7 @@ The server SHALL answer the editor configuration of an encrypted file with the A
 ## MODIFIED Requirements
 
 ### Requirement: File access entries write
-The server SHALL, when the caller can read the file, the file's parent room is private and the caller can create content in it, store the submitted entries of the listed users who can read the file, replacing their previous entries and keeping every other user's entry, and SHALL answer the ids of the listed users it skipped because they cannot read the file; otherwise it SHALL answer 403 and store nothing. Each listed user SHALL be checked on a fresh read of the file. Leaving a user out never revokes their entry.
+The server SHALL store the submitted entries of the listed users who can read the file, replacing their previous entries and keeping every other user's entry, and SHALL answer the ids of the users it skipped because they cannot read the file. It SHALL do so only when the caller can read the file and create content in its parent room, which is private; otherwise it SHALL answer 403 and store nothing. Each listed user SHALL be checked on a fresh read of the file.
 
 #### Scenario: Authorised replace
 - **WHEN** a room member with create rights submits entries for users who can all read the file
@@ -350,15 +346,15 @@ The server SHALL refuse a conversion started through the conversion check, the d
 - **THEN** the server answers 403 and creates no copy
 
 ### Requirement: Server-side copy out of a private room is refused
-The server SHALL refuse a batch copy of a file or a folder from inside a private room to a folder outside that room, whether the room is active or archived, before the operation is queued, so no copy and no folder tree is created; it SHALL refuse a batch move or copy of a folder from outside into a private room; and only a move within the same private room SHALL pass the private-room check.
+The server SHALL refuse a batch copy of a file or a folder from inside a private room to a folder outside that room, whether the room is active or archived, before the operation is queued, so no copy and no folder tree is created; it SHALL refuse a batch move or copy of a folder from outside into a private room; and only a move within the same private room SHALL pass the private-room check. A refusal before the operation is queued is a 403 with the message "Access denied".
 
 #### Scenario: Copy out of an archived private room
 - **WHEN** a member requests a batch copy of an encrypted file from an archived private room to My documents
-- **THEN** the server refuses the request with "You don't have enough permission to move the file", queues no operation and creates no file
+- **THEN** the server refuses the request with 403 "Access denied", queues no operation and creates no file
 
 #### Scenario: Copy out of an active private room
 - **WHEN** a member requests a batch copy of an encrypted file from an active private room to My documents
-- **THEN** the server refuses the request with "You don't have enough permission to copy the file" and creates no file
+- **THEN** the server refuses the request with 403 "Access denied" and creates no file
 
 #### Scenario: Copy within the same private room
 - **WHEN** a member requests a batch copy of an encrypted file into a subfolder of the same private room
@@ -366,7 +362,7 @@ The server SHALL refuse a batch copy of a file or a folder from inside a private
 
 #### Scenario: Move into another private room
 - **WHEN** a member of two private rooms requests a batch move of an encrypted file from one into the other
-- **THEN** the server refuses the file with "You don't have enough permission to move the file" and moves nothing
+- **THEN** the server refuses the request with 403 "Access denied" and moves nothing
 
 #### Scenario: Subfolder moved out
 - **WHEN** the owner requests a batch move of a subfolder of a private room to a folder in My documents
@@ -385,7 +381,7 @@ The server SHALL refuse a batch copy of a file or a folder from inside a private
 - **THEN** no folder, not even an empty one, lands outside
 
 ### Requirement: File public keys
-The server SHALL return, for one file in a private room, active or archived, the keys of every user with a direct user share on the file, its parent folders or its room, plus the owner, skipping groups and users without stored keys, with the private half only on the caller's own entries; it SHALL answer 415 for a file outside a private room. Existing access entries are not consulted.
+The server SHALL return, for one file in a private room, active or archived, the keys of every user holding a share record of their own (not a group or a link) on the file or on any folder above it up to the room, plus the file's creator even without a record; it SHALL skip users without stored keys or a public key, keep the private half only on the caller's entries, and answer 415 outside a private room. Existing access entries are not consulted.
 
 #### Scenario: Keys of a file
 - **WHEN** a reader of the file requests its public keys
@@ -394,6 +390,14 @@ The server SHALL return, for one file in a private room, active or archived, the
 #### Scenario: File in an archived private room
 - **WHEN** a reader requests the public keys of a file in an archived private room
 - **THEN** the keys are returned as for a file in an active private room, and the server MUST NOT answer 415
+
+#### Scenario: Room owner who did not create the file
+- **WHEN** the public keys of a file that another member created are requested, and the room owner holds no share record of their own
+- **THEN** the room owner's keys are not in the answer
+
+#### Scenario: Creator who left the room
+- **WHEN** the public keys of a file are requested after its creator left the room
+- **THEN** the creator's keys are still in the answer
 
 ### Requirement: Copy right inside archived private rooms
 The server SHALL deny the copy right on a private room, on a file inside it and on a subfolder of it, to every user, room owner included, whether the room is active or archived. In an archived private room the other rights follow the rules of every archived room.
@@ -464,7 +468,7 @@ The server SHALL NOT include the plaintext title of a private room or of its fol
 - **THEN** they carry its title
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, and on the AI hub room types (Knowledge, Instructions and AI project rooms). It SHALL otherwise store the room with the requested room type and the private setting; an AI agent created with the flag is stored as a private agent under the same key and Document Server checks as a room.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, and on the AI hub room types (Knowledge, Instructions and AI project rooms). It SHALL otherwise store the room with the requested room type and the private setting.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -496,6 +500,6 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 
 ## REMOVED Requirements
 
-### Requirement: No recovery, offboarding or file-key audit endpoints
+### Requirement: No recovery or offboarding endpoints
 **Reason**: Replaced by the administrative recovery, offboarding and per-file access history requirements above.
 **Migration**: Implement the endpoints on the server; the client enrolment and recovery flows follow in the keys-management tab.

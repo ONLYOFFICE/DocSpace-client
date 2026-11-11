@@ -37,6 +37,7 @@ import { request } from "../client";
 import type {
   TPrivacyRoomRequest,
   TEncryptionKeyPair,
+  TMemberEncryptionKey,
   TRoomCandidateKey,
   TRoomMissingFileKeys,
 } from "./types";
@@ -73,7 +74,7 @@ export async function getRoomEncryptionKeys(roomId: string | number) {
   const res = (await request({
     method: "get",
     url: `privacyroom/${roomId}/access`,
-  })) as TEncryptionKeyPair[];
+  })) as TMemberEncryptionKey[];
   return res ?? [];
 }
 
@@ -110,15 +111,14 @@ export async function getFilePublicKeys(fileId: string | number) {
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/publickeys`,
-  })) as TEncryptionKeyPair[];
+  })) as TMemberEncryptionKey[];
   return res;
 }
 
-export async function deleteEncryptionKey(keyId: string) {
-  const res = (await request({
+/** `PrivacyRoomController.DeleteKeys` answers 204 without a body. */
+export async function deleteEncryptionKey(keyId: string): Promise<void> {
+  await request({
     method: "delete",
     url: `privacyroom/keys/${keyId}`,
-  })) as TEncryptionKeyPair[];
-
-  return res ?? [];
+  });
 }

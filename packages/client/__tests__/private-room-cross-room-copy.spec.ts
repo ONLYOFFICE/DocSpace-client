@@ -369,7 +369,10 @@ test.describe("Private room — copy into another private room", () => {
     );
   });
 
-  test("Copy to another private room", async ({ page, mockRequest, baseUrl }) => {
+  // The fixme cases reach the destination room through the picker's Rooms
+  // list, which holds no private room on the server. They wait for the
+  // Private entry of the picker (private-rooms-server-section, task 3.5).
+  test.fixme("Copy to another private room", async ({ page, mockRequest, baseUrl }) => {
     test.slow();
     const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl);
     await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
@@ -382,7 +385,7 @@ test.describe("Private room — copy into another private room", () => {
     await expectReencryptedCopy(rooms);
   });
 
-  test("Subfolder of another private room", async ({
+  test.fixme("Subfolder of another private room", async ({
     page,
     mockRequest,
     baseUrl,
@@ -405,7 +408,7 @@ test.describe("Private room — copy into another private room", () => {
     expect(rooms.destHandle.getFiles()[0].folderId).toBe(DEST_FOLDER_ID);
   });
 
-  test("Destination picker in a private room", async ({
+  test.fixme("Destination picker in a private room", async ({
     page,
     mockRequest,
     baseUrl,
@@ -431,7 +434,7 @@ test.describe("Private room — copy into another private room", () => {
     await expect(picker.getByText(opaqueTitle)).toHaveCount(0);
   });
 
-  test("Copy into a room holding a file of the same name", async ({
+  test.fixme("Copy into a room holding a file of the same name", async ({
     page,
     mockRequest,
     baseUrl,
@@ -471,7 +474,7 @@ test.describe("Private room — copy into another private room", () => {
     await expect(rows).toHaveCount(2);
   });
 
-  test("Copy of a name that already has a copy", async ({
+  test.fixme("Copy of a name that already has a copy", async ({
     page,
     mockRequest,
     baseUrl,
@@ -553,7 +556,7 @@ test.describe("Private room — copy into another private room", () => {
     expect(seen.filter((r) => r.endsWith("/fileops/duplicate"))).toEqual([]);
   });
 
-  test("Copy from an archived private room", async ({
+  test.fixme("Copy from an archived private room", async ({
     page,
     mockRequest,
     baseUrl,

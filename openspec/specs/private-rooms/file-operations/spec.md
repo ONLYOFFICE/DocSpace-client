@@ -247,11 +247,19 @@ The system SHALL list "New PDF form" among the create entries of a private room 
 - **THEN** the entries are document, spreadsheet, presentation, PDF form, folder and upload files
 
 ### Requirement: Rename withheld for encrypted files
-The system SHALL NOT offer rename for an encrypted file, neither in the context menu nor via the F2 hotkey.
+The system SHALL NOT offer rename for an encrypted file, neither in the context menu, nor in the media viewer menu, nor via the F2 hotkey.
 
 #### Scenario: F2 on encrypted file
 - **WHEN** the user presses F2 with an encrypted file selected
 - **THEN** no rename editor opens
+
+#### Scenario: Media viewer menu of an encrypted file
+- **WHEN** the user opens the menu of an encrypted file in the media viewer, on a desktop or on a mobile device, including the menu of a PDF
+- **THEN** rename is absent, whatever rename right the server reports for the file
+
+#### Scenario: Media viewer menu of a file that is not encrypted
+- **WHEN** the user opens the media viewer menu of a file that is not encrypted and may be renamed
+- **THEN** rename is present
 
 ### Requirement: Transfer into a private room is refused
 The system SHALL refuse to copy or move items from outside into a private room, showing Common:CannotTransferToPrivateRoom, and SHALL exclude private rooms from the destination picker for such operations.
@@ -314,7 +322,7 @@ The system SHALL allow copying an encrypted file to the root of the same private
 - **THEN** the copy is stored as "Report (2).docx" and no conflict dialog is shown
 
 #### Scenario: Duplicate started outside the room
-- **WHEN** an encrypted file is duplicated from a list outside its room, such as Recent
+- **WHEN** an encrypted file is duplicated while the open folder is not its private room
 - **THEN** the copy is encrypted for the file's room as a Duplicate inside the room would be, and its content MUST NOT be sent as plaintext
 
 ### Requirement: Duplicate of an encrypted file follows the move right
@@ -347,6 +355,14 @@ The system SHALL download an encrypted file by fetching the ciphertext, decrypti
 #### Scenario: No own access entry
 - **WHEN** the user downloads one encrypted file for which they hold no access entry
 - **THEN** nothing is downloaded and Common:EncryptionDownloadFailed is shown
+
+#### Scenario: Download from the media viewer
+- **WHEN** the user downloads an encrypted file from the media viewer with its download button or Ctrl+S, and the identity is unlocked
+- **THEN** the browser saves the plaintext file under its original name, and the ciphertext MUST NOT be handed to the browser as the download
+
+#### Scenario: Download from the media viewer of a file that cannot be found
+- **WHEN** the user downloads an encrypted file from the media viewer, and the file is neither in the current folder list nor the file the viewer was opened for
+- **THEN** Common:EncryptionDownloadFailed is shown, nothing is downloaded, and the ciphertext MUST NOT be handed to the browser as the download
 
 ### Requirement: Multiple encrypted files download as a decrypted zip
 The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, a decrypted name that clashes with another taking the lowest numbered suffix no other entry has. A selected folder that lies in a private room SHALL be included as its decrypted subtree under the folder's name, and no server archive SHALL be requested for it. Non-encrypted files and folders outside private rooms of the same selection download through the standard path.
@@ -409,11 +425,27 @@ The system SHALL delete items in a private room permanently, never moving them t
 - **THEN** the confirmation dialog is shown before anything is deleted, and nothing MUST be deleted without it
 
 ### Requirement: Version operations withheld
-The system SHALL NOT offer version history, finalize version, version list or version blocking for an encrypted file.
+The system SHALL NOT offer version history, finalize version, version list, version blocking or editing of the version comment for an encrypted file. The version badge of an encrypted file MAY show the version count, but SHALL NOT open the version history or carry the Common:ShowVersionHistory tooltip, whatever history rights the server reports for the file.
 
 #### Scenario: Context menu of an encrypted file
 - **WHEN** the context menu of an encrypted file is opened
 - **THEN** show-version-history, finalize-version, version and block-unblock-version are absent
+
+#### Scenario: Version badge of an encrypted file
+- **WHEN** the user clicks the version badge of an encrypted file that has several versions, in a list, table or tile view, and the server reports the ReadHistory right on it
+- **THEN** the version history panel MUST NOT open, no version list is requested, and the badge has no Common:ShowVersionHistory tooltip
+
+#### Scenario: Version badge of a file that is not encrypted
+- **WHEN** the user clicks the version badge of a file that is not encrypted and has several versions, and the server reports the ReadHistory right on it
+- **THEN** the version history panel opens, and the badge carries the Common:ShowVersionHistory tooltip
+
+#### Scenario: Version comment of an encrypted file in the info panel
+- **WHEN** the Details view of the info panel shows an encrypted file and the server reports the EditHistory right on it
+- **THEN** the comment has no Common:EditButton or Common:AddButton control, no version list is requested, and a comment MUST NOT be sent to the server
+
+#### Scenario: Version comment of a file that is not encrypted in the info panel
+- **WHEN** the Details view of the info panel shows a file that is not encrypted and the server reports the EditHistory right on it
+- **THEN** the comment carries the Common:EditButton or Common:AddButton control
 
 ### Requirement: Favorites, conversion and download-as withheld
 The system SHALL NOT offer mark-as-favorite, convert or download-as for an encrypted file, nor favorites for a folder in a private room.
@@ -480,7 +512,7 @@ The system SHALL, for "Open location" on an encrypted file, navigate to the pare
 - **THEN** the parent folder opens with the file highlighted via client-side search
 
 ### Requirement: Feeds show resolved names
-The system SHALL show the decrypted display name of encrypted files in Recent, History and New-files feeds and in notifications that name a file, recovering the name from the file header when it is not cached and the identity is unlocked; while locked or before recovery completes the opaque name is shown.
+The system SHALL show the decrypted display name of encrypted files in the History and New-files feeds and in notifications that name a file, recovering the name from the file header when it is not cached and the identity is unlocked; while locked or before recovery completes the opaque name is shown. Recent is not one of these feeds: the server never records an encrypted file as recent.
 
 #### Scenario: History tab
 - **WHEN** the History tab of a private room is opened with the identity unlocked
@@ -493,6 +525,10 @@ The system SHALL show the decrypted display name of encrypted files in Recent, H
 #### Scenario: Identity locked
 - **WHEN** a feed lists encrypted files while the identity is locked
 - **THEN** the opaque names are shown and no unlock prompt is raised by the feed itself
+
+#### Scenario: Recent after opening an encrypted file
+- **WHEN** the user opens an encrypted file and then opens Recent
+- **THEN** the encrypted file is not listed there
 
 ### Requirement: Forms are not fillable in private rooms
 The system SHALL NOT offer fill-form, start-filling, filling-status, stop-filling, make-form or submit-to-gallery for an encrypted file.
@@ -774,3 +810,10 @@ The SDK SHALL take the cancel signal of every file of an encrypted upload batch 
 #### Scenario: File cancelled while waiting
 - **WHEN** a user uploads two files into a private room through the SDK and cancels the second while the first is still uploading
 - **THEN** the second file is not uploaded, no file is created for it, and its row is gone
+
+### Requirement: Key writes are left out of the History tab
+The system SHALL leave the file-keys-issued entry the server lists in a file's and a folder's history (action FileKeysSet, 5164) out of the History tab of a private room and of its files, rendering the other entries as before; the write stays in the audit trail with its recipients.
+
+#### Scenario: Key write listed
+- **WHEN** the history of a private room or of one of its files carries a file-keys-issued entry
+- **THEN** the tab shows nothing for it and the other entries as usual

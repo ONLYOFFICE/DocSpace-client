@@ -60,6 +60,7 @@ import EmptyAccessLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.right
 import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
 
 import { ProjectSources } from "./sub-components/project/ProjectSources";
+import { readProjectFolder, writeProjectFolder } from "./folderContextMemory";
 import styles from "./AiProjectView.module.scss";
 
 type AiProjectViewProps = {
@@ -124,46 +125,57 @@ const AiProjectView = ({
         profileName: profile?.name ?? null,
         instructionsRooms: toChatRooms(instructionsRooms),
         knowledgeRooms: toChatRooms(knowledgeRooms),
+        // The folder this project's chat last worked in comes back with it.
+        folderContext: readProjectFolder(userId, roomId),
       });
     });
     return () => {
       cancelled = true;
     };
-  }, [store, aiChatStore, roomId, inRoom]);
+  }, [store, aiChatStore, roomId, inRoom, userId]);
 
   // Set while the view unmounts, so closing the project on the way out is
   // not taken for a project that dropped under it.
   const isLeavingRef = React.useRef(false);
 
+  // The project's settings leave the chat with it: the model goes back to
+  // the default and its Instructions and Knowledge rooms are disconnected,
+  // and the panel closes, which drops the fullscreen flag the view kept set,
+  // so a chat opened elsewhere starts clean and as a side panel.
+  const releaseChat = React.useCallback(() => {
+    aiChatStore.applyPreset({ profileId: null, profileName: null, contextRooms: [], knowledgeRooms: [] });
+    aiChatStore.close();
+  }, [aiChatStore]);
+
   // Leaving the room (Back, another section, a deleted room) drops the open
-  // project with it, and takes its settings out of the chat: the model goes
-  // back to the default and its Instructions and Knowledge rooms are
-  // disconnected, so a chat opened elsewhere starts clean.
+  // project with it.
   React.useEffect(() => {
     isLeavingRef.current = false;
     return () => {
       isLeavingRef.current = true;
       if (store.activeProject) {
         store.closeProject();
-        aiChatStore.applyPreset({ profileId: null, profileName: null, contextRooms: [], knowledgeRooms: [] });
-        aiChatStore.close();
+        releaseChat();
       }
     };
-  }, [store, aiChatStore]);
+  }, [store, releaseChat]);
 
   // The project dropped under the open chat (left, or handed over without
-  // staying in it): the section goes back to the list.
+  // staying in it): the section goes back to the list. The project is
+  // already closed by then, so the unmount above has nothing to close and
+  // the chat is released here.
   React.useEffect(
     () =>
       reaction(
         () => store.activeProject,
         (project, previous) => {
           if (project === null && previous !== null && !isLeavingRef.current) {
+            releaseChat();
             navigate(getCategoryUrl(CategoryType.AiHub));
           }
         },
       ),
-    [store, navigate],
+    [store, navigate, releaseChat],
   );
 
   // An edit of the open project (here or by someone else) reaches its chat in
@@ -255,16 +267,43 @@ const AiProjectView = ({
     };
   }, [inRoom, roomId, setInRoom, userId, navigate, t]);
 
-  // The sources column replaces the composer's chips while it is on screen.
+  // The project's chat fills the section body, and the chat reads that from
+  // its fullscreen flag: only then the history opens as a column beside the
+  // conversation, otherwise it replaces it. Opening the project sets the
+  // flag, but whatever closes the side chat panel drops it with the project
+  // still on screen - the info panel opening (`usePanelExclusivity`), a
+  // sidebar click - and nothing put it back. The view keeps it set.
+  const isProjectOnScreen = inRoom && isAiChatAvailable && store.activeProject?.id === roomId;
+  const isChatFullscreen = aiChatStore.effectiveFullscreen;
+  React.useEffect(() => {
+    if (isProjectOnScreen && !isChatFullscreen) aiChatStore.setFullscreen(true);
+  }, [aiChatStore, isProjectOnScreen, isChatFullscreen]);
+
+  // The sources column, expanded or collapsed to its rail, replaces the
+  // composer's chips while the project is on screen.
   React.useEffect(() => {
     aiChatStore.setComposerContextHidden(true);
     return () => aiChatStore.setComposerContextHidden(false);
   }, [aiChatStore]);
 
-  // The context folder is picked only in the project's sources column. Once
-  // the project view is left, the folder would keep scoping every round with
-  // nothing on screen to show or remove it, so it goes with the view.
-  React.useEffect(() => () => useCloudsStore.getState().clearFolderContext(), [useCloudsStore]);
+  // The folder the chat works in is remembered for the project while it is
+  // open: picked or swapped in the composer, it is kept; disconnected, it is
+  // forgotten. Once the project view is left, the folder would keep scoping
+  // every round with nothing on screen to show or remove it, so it goes with
+  // the view - after the memory stops listening, so leaving is not taken
+  // for disconnecting.
+  React.useEffect(() => {
+    if (!inRoom) return undefined;
+    const unsubscribe = useCloudsStore.subscribe((state, previous) => {
+      if (state.selectedFolderContext === previous.selectedFolderContext) return;
+      const selected = state.selectedFolderContext;
+      writeProjectFolder(userId, roomId, selected ? { cloud: selected.cloud, ...selected.room } : null);
+    });
+    return () => {
+      unsubscribe();
+      useCloudsStore.getState().clearFolderContext();
+    };
+  }, [useCloudsStore, inRoom, roomId, userId]);
 
   if (!inRoom) {
     return (
@@ -288,11 +327,12 @@ const AiProjectView = ({
         <ProjectSources store={store} project={project} compact />
       ) : null}
       <div className={classnames(styles.panelBody, styles.projectBody)}>
-        {/* The history and the info panel each take the sources' place. */}
-        {isDesktop && !isHistoryOpen && !infoPanelVisible ? <ProjectSources store={store} project={project} /> : null}
         <div className={styles.panelChat}>
           <AiChatPanelBody />
         </div>
+        {/* The sources stand after the chat. The history opens before it and
+            the info panel after it: while either is open the sources hide. */}
+        {isDesktop && !isHistoryOpen && !infoPanelVisible ? <ProjectSources store={store} project={project} /> : null}
       </div>
     </div>
   );

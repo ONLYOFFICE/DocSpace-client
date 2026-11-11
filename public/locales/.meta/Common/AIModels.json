@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 202,
-      "context": "const disableNonAiModels = gateNonAiModelsTabs;\n \n const data: TTabItem[] = [\n {\n id: TAB_IDS.AI_MODELS,\n name: t(\"Common:AIModels\"),\n content: standalone ? <AiModels /> : <AiModelsSaas />,\n onClick: makeOnClick(TAB_IDS.AI_MODELS),\n },\n ...(standalone\n ? []",
+      "line_number": 211,
+      "context": "const disableNonAiModels = gateNonAiModelsTabs;\n \n const data: TTabItem[] = [\n {\n id: TAB_IDS.AI_MODELS,\n name: t(\"Common:AIModels\"),\n content: standalone ? <AiModels /> : <AiModelsSaas />,\n onClick: makeOnClick(TAB_IDS.AI_MODELS),\n },\n {\n id: TAB_IDS.MODEL_ASSIGNMENT,",
       "module": "/packages/client"
     }
   ],

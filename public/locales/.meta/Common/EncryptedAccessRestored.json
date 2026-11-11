@@ -3,7 +3,7 @@
   "content": "{{user}} now has access to every encrypted file in the room.",
   "content_en_sha1_hash": "12a4737be0b1d26256b0fc8c7eab5be0d60a1db1",
   "created_at": "2026-10-28T12:52:53.980Z",
-  "updated_at": "2026-11-06T10:45:55.608Z",
+  "updated_at": "2026-11-09T09:26:33.741Z",
   "comment": {
     "text": "Success toast in the Members tab of a private room, shown after the user clicks Try again on a member marked as having pending access and every missing file key was written; {{user}} is that member's display name. Full sentence stating that the member can now open all encrypted files of the room.",
     "is_auto": true,

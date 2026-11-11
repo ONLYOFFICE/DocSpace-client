@@ -1,0 +1,21 @@
+{
+  "key_path": "AIProjectAddKnowledge",
+  "content": "Add knowledge",
+  "content_en_sha1_hash": "24e9e92419383e810237345fa5a4f05254e77d75",
+  "created_at": "2026-11-10T13:41:17.008Z",
+  "updated_at": "2026-11-10T13:41:17.008Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

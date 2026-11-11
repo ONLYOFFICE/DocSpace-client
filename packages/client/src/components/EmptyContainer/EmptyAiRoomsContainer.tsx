@@ -52,6 +52,10 @@ import {
   type ChatNoAccessStoreProps,
 } from "SRC_DIR/Hooks/useChatNoAccess";
 import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
+import {
+  getAiWorkspaceCreatePayload,
+  type TAiWorkspaceCreatePayload,
+} from "SRC_DIR/helpers/aiWorkspace";
 import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
 
 import {
@@ -101,8 +105,9 @@ const EmptyAiRoomsContainer = ({
     }
     const event = new CustomEvent(Events.ROOM_CREATE, {
       detail: { parentId: selectedFolderId, context: "empty_state" },
-    }) as CustomEvent & { payload?: { isAiRoomsCreate?: boolean } };
-    event.payload = { isAiRoomsCreate: true };
+    }) as CustomEvent & { payload?: TAiWorkspaceCreatePayload };
+    // The list creates what it holds: the entry's room type, or an agent.
+    event.payload = getAiWorkspaceCreatePayload(window.location.search);
     window.dispatchEvent(event);
   };
 

@@ -45,6 +45,7 @@ import { EMPTY_ARRAY } from "@docspace/shared/constants";
 
 import { removeOptions, removeSeparator } from "SRC_DIR/helpers/filesUtils";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import { isMarkdownFile } from "SRC_DIR/helpers/plugins/markdown";
 import type { TMetadataAIItem } from "SRC_DIR/components/panels/MetadataAIPanel/types";
 import {
   getMetadataAIOptions,
@@ -257,8 +258,13 @@ export const buildContextOptions = (
 
     const canSubmitToFormGallery = item.security?.SubmitToFormGallery;
 
-    const canEditFile =
-      item.security!.Edit && item.viewAccessibility!.WebEdit;
+    // A Markdown file is edited by the Markdown plugin, never by the
+    // document editor: "Edit" is there only while the plugin is enabled.
+    const canEditFile = isMarkdownFile(item.fileExst)
+      ? !!item.security!.Edit &&
+        !isEncrypted &&
+        deps.pluginStore.isMarkdownEditorAvailable
+      : item.security!.Edit && item.viewAccessibility!.WebEdit;
     const canOpenPlayer =
       item.viewAccessibility!.ImageView || item.viewAccessibility!.MediaView;
     const canViewFile = item.viewAccessibility!.WebView;

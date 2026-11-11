@@ -398,6 +398,117 @@ test.describe("Private room — member removal during uploads", () => {
   });
 });
 
+test.describe("Private room — refused access change", () => {
+  const REFUSED = "Access not changed: the member has no encryption keys.";
+  const SERVER_SENTENCE = "The user does not have an encryption key";
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Removal refused", async ({ page, mockRequest, baseUrl }) => {
+    const membersHandle: { current: RoomMembersHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          {
+            id: CAROL.id,
+            displayName: CAROL.displayName,
+            email: CAROL.email,
+            access: ShareAccessRights.Editing,
+          },
+        ],
+        withoutKeys: [CAROL.id],
+        handle: membersHandle,
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await page.locator(".info-panel-toggle").click();
+    await row.click();
+    await page.getByTestId("info_members_tab").click();
+    await page
+      .getByTestId("info_panel_members_user_role_combobox")
+      .first()
+      .click();
+    await page.getByText("Remove", { exact: true }).last().click();
+    await page.getByTestId("remove_user_confirmation_dialog_ok_button").click();
+
+    await expect(page.getByText(REFUSED)).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(SERVER_SENTENCE)).toHaveCount(0);
+    await expect(page.getByText("Access denied")).toHaveCount(0);
+    await expect(
+      page.getByTestId("info_panel_members_user_role_combobox").first(),
+    ).toBeVisible();
+    expect(
+      membersHandle.current!.getRequests().some(
+        (r) =>
+          r.method === "PUT" && JSON.stringify(r.body).includes(CAROL.id),
+      ),
+    ).toBe(true);
+  });
+
+  // The mocked user is a member of Carol's room and has no key.
+  test("Leave refused", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          { id: CAROL.id, displayName: CAROL.displayName, email: CAROL.email },
+          { id: TEST_USER_ID, access: ShareAccessRights.Editing },
+        ],
+        withoutKeys: [TEST_USER_ID],
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: CAROL.id,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: CAROL.id,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+
+    await row.click({ button: "right" });
+    await page.getByText("Leave the room", { exact: true }).click();
+    await page.getByRole("button", { name: "OK", exact: true }).click();
+
+    await expect(page.getByText(REFUSED)).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("leave_room_modal_submit")).toHaveCount(0);
+    await expect(page.getByText(SERVER_SENTENCE)).toHaveCount(0);
+    await expect(page.getByTestId("table-row-0")).toContainText(
+      "Private Test Room",
+    );
+    // The shell answers a 403 with its own toast after half a second unless
+    // the caller reported the failure.
+    await page.waitForTimeout(1000);
+    await expect(page.getByText("Access denied")).toHaveCount(0);
+  });
+});
+
 test.describe("Private room — leaving", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(

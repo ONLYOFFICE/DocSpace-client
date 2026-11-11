@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/delete.helpers.ts",
-      "line_number": 690,
+      "line_number": 695,
       "context": "items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Common:RoomRemoved\"),\n successRemoveRooms: t(\"Common:RoomsRemoved\"),\n };\n \n self.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     },

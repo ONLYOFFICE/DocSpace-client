@@ -3,7 +3,7 @@
   "content": "Try again",
   "content_en_sha1_hash": "042c862e4467d7d057cced262e6869dd75c22b7d",
   "created_at": "2025-10-27T16:14:24.460Z",
-  "updated_at": "2026-11-06T10:45:55.081Z",
+  "updated_at": "2026-11-09T09:26:33.620Z",
   "comment": {
     "text": "This is a button label that appears when an error occurs or a service is unavailable, allowing the user to retry the action or check availability.",
     "is_auto": true,

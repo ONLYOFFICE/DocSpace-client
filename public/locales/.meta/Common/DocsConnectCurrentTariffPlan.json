@@ -3,7 +3,7 @@
   "content": "Current subscription: {{price}}/month (Users: {{count}})",
   "content_en_sha1_hash": "3af376f6688c2fcb40b8a6376b568b59e230b61d",
   "created_at": "2026-11-06T10:44:15.320Z",
-  "updated_at": "2026-11-06T10:44:15.320Z",
+  "updated_at": "2026-11-09T09:25:15.855Z",
   "comment": {
     "text": "",
     "is_auto": false,

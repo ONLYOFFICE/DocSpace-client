@@ -458,6 +458,43 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     expect(body.response[0].privateKeyEnc).toBe("ENC-A");
     expect(body.response[1]).not.toHaveProperty("privateKeyEnc");
   });
+
+  const key = (userId: string, id: string) => ({
+    id,
+    userId,
+    publicKey: `PK-${id}`,
+    privateKeyEnc: "",
+    date: "",
+    cryptoEngineId: "",
+  });
+  const userIdsOf = async (fileId: number) =>
+    (
+      (await (await fetch(PUBLIC_KEYS_URL(fileId))).json()) as {
+        response: Array<{ userId: string }>;
+      }
+    ).response
+      .map((k) => k.userId)
+      .sort();
+
+  it("Room owner who did not create the file", async () => {
+    handle.current!.setFiles([
+      { id: 9, title: "s.txt", encrypted: true, createdBy: BOB_ID },
+    ]);
+    handle.current!.setRoomUserKeys([key(ALICE_ID, "a"), key(BOB_ID, "b")]);
+
+    expect(await userIdsOf(9)).toEqual([BOB_ID]);
+  });
+
+  it("Creator who left the room", async () => {
+    const creatorId = "44444444-4444-4444-4444-444444444444";
+    handle.current!.setFiles([
+      { id: 10, title: "s.txt", encrypted: true, createdBy: creatorId },
+    ]);
+    handle.current!.setRoomUserKeys([key(ALICE_ID, "a"), key(BOB_ID, "b")]);
+    handle.current!.setNonMemberKeys([key(creatorId, "c")]);
+
+    expect(await userIdsOf(10)).toEqual([BOB_ID, creatorId].sort());
+  });
 });
 
 const CAROL_ID = "33333333-3333-3333-3333-333333333333";
@@ -808,6 +845,172 @@ describe("encryptedFiles mock — the copy right (mirrors FileSecurity.FilterEnt
       title: "Archive",
       folderType: 20,
     });
+  });
+});
+
+describe("encryptedFiles mock — the room owner's rights and the versions (mirrors FileSecurity.FilterEntryAsync and FileDto)", () => {
+  type Listing = {
+    response: {
+      files: (Record<string, unknown> & {
+        security: Record<string, boolean>;
+      })[];
+    };
+  };
+  const list = async (roomId: number) =>
+    (await (
+      await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/${roomId}`)
+    ).json()) as Listing;
+  const seed = { id: 1, title: "secret.docx", encrypted: true, fileKeys: [] };
+
+  it("File in an active private room reports the owner's rename, lock, link and history rights", async () => {
+    handle.current!.setFiles([seed]);
+
+    const { files } = (await list(ROOM_ID)).response;
+
+    expect(files[0].security).toMatchObject({
+      Rename: true,
+      Lock: true,
+      CopyLink: true,
+      ReadHistory: true,
+      EditHistory: true,
+    });
+  });
+
+  it("File in an archived private room reports ReadHistory and none of the others", async () => {
+    archivedHandle.current!.setFiles([seed]);
+
+    const { files } = (await list(ARCHIVED_ROOM_ID)).response;
+
+    expect(files[0].security).toMatchObject({
+      Rename: false,
+      Lock: false,
+      CopyLink: false,
+      ReadHistory: true,
+      EditHistory: false,
+    });
+  });
+
+  const rightsOf = async (
+    title: string,
+    roomId = ROOM_ID,
+    bytes?: Uint8Array,
+  ) => {
+    const target = roomId === ROOM_ID ? handle : archivedHandle;
+    target.current!.setFiles([{ ...seed, title, bytes }]);
+    return (await list(roomId)).response.files[0].security;
+  };
+  /** A DSE3 header start: magic, version, reserved byte, flags. */
+  const dse3 = (flags: number) =>
+    new Uint8Array([0x44, 0x53, 0x45, 0x33, 2, 0, flags, 0]);
+
+  it("Owner rights on a spreadsheet", async () => {
+    expect(await rightsOf("secret.xlsx")).toMatchObject({
+      Comment: true,
+      Review: true,
+      CustomFilter: true,
+      EditHistory: true,
+      SubmitToFormGallery: true,
+      FillForms: false,
+      StartFilling: false,
+      FillingStatus: false,
+      ResetFilling: false,
+      StopFilling: false,
+      OpenForm: false,
+      AskAi: false,
+      Convert: false,
+      Embed: false,
+      Vectorization: false,
+    });
+  });
+
+  it("Owner rights on a PDF", async () => {
+    expect(await rightsOf("secret.pdf", ROOM_ID, dse3(0))).toMatchObject({
+      OpenForm: true,
+      FillForms: false,
+      SubmitToFormGallery: false,
+    });
+  });
+
+  it("Owner rights on a PDF form", async () => {
+    expect(await rightsOf("secret.pdf", ROOM_ID, dse3(0x02))).toMatchObject({
+      OpenForm: true,
+      FillForms: false,
+      SubmitToFormGallery: true,
+    });
+  });
+
+  it("Owner rights on an image", async () => {
+    expect(await rightsOf("secret.png")).toMatchObject({
+      Comment: true,
+      SubmitToFormGallery: false,
+      OpenForm: false,
+    });
+  });
+
+  it("Owner rights in an archived room", async () => {
+    expect(await rightsOf("secret.xlsx", ARCHIVED_ROOM_ID)).toMatchObject({
+      Comment: false,
+      Review: false,
+      CustomFilter: false,
+      EditHistory: false,
+      SubmitToFormGallery: false,
+      OpenForm: false,
+    });
+    expect(
+      await rightsOf("secret.pdf", ARCHIVED_ROOM_ID, dse3(0x02)),
+    ).toMatchObject({ SubmitToFormGallery: false, OpenForm: false });
+  });
+
+  it("Every right key is present", async () => {
+    const keys = Object.keys(await rightsOf("secret.docx")).sort();
+
+    expect(keys).toEqual(
+      [
+        "Read",
+        "Comment",
+        "FillForms",
+        "Review",
+        "Edit",
+        "Delete",
+        "CustomFilter",
+        "Rename",
+        "ReadHistory",
+        "Lock",
+        "EditHistory",
+        "Copy",
+        "Move",
+        "Duplicate",
+        "SubmitToFormGallery",
+        "Download",
+        "Convert",
+        "CreateRoomFrom",
+        "CopyLink",
+        "Embed",
+        "StartFilling",
+        "FillingStatus",
+        "ResetFilling",
+        "StopFilling",
+        "OpenForm",
+        "Vectorization",
+        "AskAi",
+      ].sort(),
+    );
+    expect(
+      Object.keys(await rightsOf("secret.docx", ARCHIVED_ROOM_ID)).sort(),
+    ).toEqual(keys);
+  });
+
+  it("Seeded version group", async () => {
+    handle.current!.setFiles([seed, { ...seed, id: 2, versionGroup: 3 }]);
+
+    const { files } = (await list(ROOM_ID)).response;
+
+    expect(
+      files.map((f) => [f.id, f.version, f.versionGroup]),
+    ).toEqual([
+      [1, 1, 1],
+      [2, 3, 3],
+    ]);
   });
 });
 
@@ -1674,7 +1877,7 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
 
     expect(status).toBe(403);
     expect(body.error.message).toBe(
-      "You don't have enough permission to move the folder",
+      "Access denied",
     );
   });
 
@@ -1686,7 +1889,7 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
 
     expect(status).toBe(403);
     expect(body.error.message).toBe(
-      "You don't have enough permission to move the folder",
+      "Access denied",
     );
   });
 

@@ -272,6 +272,19 @@ export const getFolderModelImpl = (
     icon: ActionsPresentationReactSvgUrl,
   };
 
+  // Markdown is created and edited through the Markdown plugin, so it is
+  // offered only while the plugin is enabled.
+  const createNewMarkdown: TContextOption = {
+    id: "personal_new-markdown",
+    key: "new-markdown",
+    label: t("Common:MarkdownFile"),
+    icon: ActionsDocumentsReactSvgUrl,
+    onClick: () => self.onCreate("md", t),
+  };
+  const markdownActions = self.isCreateMarkdownAvailable
+    ? [createNewMarkdown]
+    : [];
+
   const createTemplateForm = {
     id: "personal_template_black",
     key: "new-form",
@@ -351,10 +364,11 @@ export const getFolderModelImpl = (
   }
 
   // Instructions and Knowledge rooms are flat and hold one kind of file: no
-  // folders and no folder upload. An Instructions room uploads Markdown
-  // skills (a new empty file has no frontmatter, which the server refuses);
-  // a Knowledge room uploads files to index, never edited, and not at all
-  // while vectorization is off.
+  // folders and no folder upload. An Instructions room takes Markdown
+  // skills: uploaded, or created with their frontmatter while the Markdown
+  // plugin is enabled (the server refuses a skill without it); a Knowledge
+  // room uploads files to index, never edited, and not at all while
+  // vectorization is off.
   if (
     roomType === RoomsType.InstructionsRoom ||
     roomType === RoomsType.KnowledgeRoom
@@ -386,14 +400,24 @@ export const getFolderModelImpl = (
       icon: AIReactSvgUrl,
       onClick: () => self.onShowGenerateSkillDialog(),
     };
+    // A new skill is created from the skill template by the AI service,
+    // whether or not the Markdown plugin is there to open it.
+    const createSkillOptions: TContextOption[] = self.isCreateSkillAvailable
+      ? [createNewMarkdown, { key: "separator", isSeparator: true }]
+      : [];
     const sourceRoomOptions: TContextOption[] =
       roomType === RoomsType.KnowledgeRoom
         ? vectorizationEnabled
           ? [uploadFromStorage, uploadFromDevice]
           : []
         : self.isCreateSkillWithAIAvailable
-          ? [uploadFromStorage, uploadFromDevice, createSkillWithAI]
-          : [uploadFromStorage, uploadFromDevice];
+          ? [
+              ...createSkillOptions,
+              uploadFromStorage,
+              uploadFromDevice,
+              createSkillWithAI,
+            ]
+          : [...createSkillOptions, uploadFromStorage, uploadFromDevice];
 
     return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
   }
@@ -461,6 +485,7 @@ export const getFolderModelImpl = (
               createNewSpreadsheet,
               createNewPresentation,
               ...formActions,
+              ...markdownActions,
               createNewFolder,
               ...templateGallery,
               { key: "separator", isSeparator: true },
@@ -485,7 +510,8 @@ export const getFolderModelImpl = (
       );
     });
 
-    options.splice(5, 0, {
+    // right after "Folder", wherever the file types before it end
+    options.splice(options.indexOf(createNewFolder) + 1, 0, {
       id: "actions_more-plugins",
       className: "main-button_drop-down",
       icon: PluginMoreReactSvgUrl,

@@ -126,6 +126,13 @@ place:
     12.1 and without a client guard. The beta release notes name it. The fix
     merged on the server on 2026-11-04 (`3b9c527a6e`), so the notes now name
     the server build that carries it instead of warning every user.
+11. **The Archive keeps the non-private filter while the app is off.** The
+    server leaves private rooms out of the Rooms area by itself, but the
+    shared Archive holds both kinds and takes the filter as given ("Rooms
+    list while the app is off"). The owner decided on 2026-11-11 to send the
+    non-private filter with Rooms → Archive whether the section is available
+    or not, in task 4.5, rather than wait for the listing task of
+    `private-rooms-server-section`, so "listed nowhere" holds now.
 
 ## Risks / Trade-offs
 
@@ -159,6 +166,34 @@ place:
    private E2E.
 4. Rollback: revert the client changes of this change. The flag and the
    hidden mode come back with the revert.
+
+## Rooms list while the app is off (read 2026-11-11 at `a7d94e4b81`)
+
+Read through CodeGraph and in the source of `../server`, and checked on
+`tests.onlyoffice.io` the same day (DocSpace 4.1.0.12366).
+
+- `VirtualRoomsCommonController.GetRoomsFolder` reads a missing search area
+  as `Active` (`products/ASC.Files/Server/Api/VirtualRoomsController.cs:1494`).
+- `FileSecurity.GetVirtualRoomsAsync`
+  (`products/ASC.Files/Core/Core/Security/FileSecurity.cs:2981-2993`) reads
+  `Active` with the private filter as the private rooms section, then forces
+  the filter by area: the section means private, `Active` means not private
+  whatever the request says, and every other area keeps the filter it was
+  given. `SearchAreaExtensions.MatchesRoom`
+  (`products/ASC.Files/Core/Core/VirtualRooms/SearchArea.cs:90-99`) splits
+  the rooms the same way, and
+  `PrivateRoomSectionTests.RoomsArea_LeavesPrivateRoomsOut` covers it.
+- The E2E rooms app takes no part in the listing: it closes only the root
+  listing and the section route (`private-rooms/server-contract`, "The E2E
+  rooms app gates only the private section listing").
+- On the stand `searchArea=Active` answered 95 rooms and no private one,
+  and the same area with the private filter answered the two private rooms
+  of the portal. The portal had no archived private room, so the Archive
+  half is read in the source only.
+
+So with the app off the Rooms list shows no private room without any
+filter, while Rooms → Archive, asked without a filter, would still list
+archived private rooms (decision 11).
 
 ## Open Questions
 

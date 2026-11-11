@@ -84,17 +84,17 @@ export function shouldShow(item: Selection): boolean {
 type AICardVisibility = {
   isStandalone: boolean;
   externalDbEnabled: boolean;
-  aiConnected: boolean;
   aiReady: boolean;
 };
 
 // In SaaS the external database integration is not offered, so the
 // "connect a database" prompt is hidden there; every other state stays.
+// AI connected to the room needs the external database enabled, so that
+// state is covered by externalDbEnabled.
 export function canShowAICard({
   isStandalone,
   externalDbEnabled,
-  aiConnected,
   aiReady,
 }: AICardVisibility): boolean {
-  return isStandalone || externalDbEnabled || aiConnected || !aiReady;
+  return isStandalone || externalDbEnabled || !aiReady;
 }

@@ -40,7 +40,6 @@ import { canShowAICard } from "../FormInfo.utils";
 const saas = {
   isStandalone: false,
   externalDbEnabled: false,
-  aiConnected: false,
   aiReady: true,
 };
 
@@ -59,9 +58,5 @@ describe("canShowAICard", () => {
 
   it("shows the card in SaaS once the external database is enabled", () => {
     expect(canShowAICard({ ...saas, externalDbEnabled: true })).toBe(true);
-  });
-
-  it("shows the card in SaaS when AI is connected to the room", () => {
-    expect(canShowAICard({ ...saas, aiConnected: true })).toBe(true);
   });
 });

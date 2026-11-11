@@ -82,7 +82,6 @@ function FormInfoComponent(props: FormRoomInfoBlocksProps) {
   const isAICardVisible = canShowAICard({
     isStandalone,
     externalDbEnabled,
-    aiConnected: state.aiConnected,
     aiReady,
   });
 

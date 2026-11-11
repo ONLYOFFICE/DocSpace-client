@@ -22,7 +22,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 5. Gate
 
-- [ ] 5.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `npm --prefix ./common/tests run test:lefthook`, `cd common/tests && npx vitest run test/locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date
+- [x] 5.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `npm --prefix ./common/tests run test:lefthook`, `cd common/tests && npx vitest run test/locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date. Done 2026-11-11: `tsc` clean in the six packages; unit suites shared 2298 of 2298, client 2089 of 2089, sdk 496 of 496; `test:lefthook` 61 passed and 3 skipped; `locales.test.js` 44 of 46, the two completeness cases failing on four keys of another feature only; OpenSpec validation 21 of 21. E2E: the thirteen client private-room specs under Docker `tests-dev` on the rebuilt image, 136 passed and 6 skipped (fixme); the SDK private-rooms spec locally against a fresh `test:build`, 34 passed and 5 skipped
 
 ## Workflow follow-up
 

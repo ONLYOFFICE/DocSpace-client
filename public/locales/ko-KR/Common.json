@@ -255,6 +255,7 @@
   "Amount": "금액",
   "AmountSelection": "금액 선택",
   "AmoutWithStorageUnit": "금액 ({{storageUnit}})",
+  "AnalyzeModeBanner": "'{{fileName}}' 분석 중",
   "AnalyzeModeSuggestionsHeader": "{{fileName}}의 응답에 대해 질문해 보세요. 이 채팅에는 다른 파일이 첨부되어 있지 않습니다.",
   "AnalyzeResponsesMode": "응답 분석",
   "AndMore": "및 <1>추가 {{count}}개</1>",

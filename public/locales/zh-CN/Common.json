@@ -255,6 +255,7 @@
   "Amount": "金额",
   "AmountSelection": "金额选择",
   "AmoutWithStorageUnit": "金额（{{storageUnit}}）",
+  "AnalyzeModeBanner": "正在分析“{{fileName}}”",
   "AnalyzeModeSuggestionsHeader": "可以询问 {{fileName}} 中的回复。本次聊天未附加其他文件。",
   "AnalyzeResponsesMode": "回复分析",
   "AndMore": "还有<1>{{count}}个</1>",

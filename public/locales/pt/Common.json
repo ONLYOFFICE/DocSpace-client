@@ -255,6 +255,7 @@
   "Amount": "Valor",
   "AmountSelection": "Seleção de valor",
   "AmoutWithStorageUnit": "Valor ({{storageUnit}})",
+  "AnalyzeModeBanner": "A analisar \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "Faça perguntas sobre as respostas em {{fileName}}. Não há outros ficheiros anexados a este chat.",
   "AnalyzeResponsesMode": "Análise de respostas",
   "AndMore": "e <1>{{count}} mais</1>",

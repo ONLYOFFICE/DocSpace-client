@@ -259,6 +259,7 @@
   "Amount": "Amount",
   "AmountSelection": "Amount selection",
   "AmoutWithStorageUnit": "Amount ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analyzing \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "Ask about the responses in {{fileName}}. Other files are not attached in this chat.",
   "AnalyzeResponsesMode": "Analyze responses",
   "AndMore": "and <1>{{count}} more</1>",

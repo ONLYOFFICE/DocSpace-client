@@ -255,6 +255,7 @@
   "Amount": "Сумма",
   "AmountSelection": "Выбор суммы",
   "AmoutWithStorageUnit": "Количество ({{storageUnit}})",
+  "AnalyzeModeBanner": "Анализируется «{{fileName}}»",
   "AnalyzeModeSuggestionsHeader": "Задайте вопросы об ответах в {{fileName}}. Другие файлы в этом чате не прикреплены.",
   "AnalyzeResponsesMode": "Анализ ответов",
   "AndMore": "и <1>еще {{count}}</1>",

@@ -255,6 +255,7 @@
   "Amount": "Bedrag",
   "AmountSelection": "Bedrag selectie",
   "AmoutWithStorageUnit": "Bedrag ({{storageUnit}})",
+  "AnalyzeModeBanner": "\"{{fileName}}\" wordt geanalyseerd",
   "AnalyzeModeSuggestionsHeader": "Stel vragen over de antwoorden in {{fileName}}. In deze chat zijn geen andere bestanden bijgevoegd.",
   "AnalyzeResponsesMode": "Antwoorden analyseren",
   "AndMore": "en nog <1>{{count}} meer</1>",

@@ -255,6 +255,7 @@
   "Amount": "Износ",
   "AmountSelection": "Избор износа",
   "AmoutWithStorageUnit": "Количина ({{storageUnit}})",
+  "AnalyzeModeBanner": "Анализира се „{{fileName}}“",
   "AnalyzeModeSuggestionsHeader": "Питајте о одговорима у датотеци {{fileName}}. У овом чату нису приложене друге датотеке.",
   "AnalyzeResponsesMode": "Анализа одговора",
   "AndMore": "и <1>{{count}} више </1>",

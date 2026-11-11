@@ -255,6 +255,7 @@
   "Amount": "Výška",
   "AmountSelection": "Výber sumy",
   "AmoutWithStorageUnit": "{Amount} ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analyzuje sa „{{fileName}}“",
   "AnalyzeModeSuggestionsHeader": "Spýtajte sa na odpovede v súbore {{fileName}}. V tomto chate nie sú pripojené žiadne ďalšie súbory.",
   "AnalyzeResponsesMode": "Analýza odpovedí",
   "AndMore": "a <1>{{count}} viac</1>",

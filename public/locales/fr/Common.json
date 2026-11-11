@@ -255,6 +255,7 @@
   "Amount": "Montant",
   "AmountSelection": "Sélection du montant",
   "AmoutWithStorageUnit": "Montant ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analyse de « {{fileName}} » en cours",
   "AnalyzeModeSuggestionsHeader": "Posez des questions sur les réponses de {{fileName}}. Aucun autre fichier n'est joint à ce chat.",
   "AnalyzeResponsesMode": "Analyse des réponses",
   "AndMore": "et <1>{{count}} de plus</1>",

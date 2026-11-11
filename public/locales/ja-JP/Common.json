@@ -255,6 +255,7 @@
   "Amount": "金額",
   "AmountSelection": "金額の選択",
   "AmoutWithStorageUnit": "金額（{{storageUnit}}）",
+  "AnalyzeModeBanner": "「{{fileName}}」を分析中",
   "AnalyzeModeSuggestionsHeader": "{{fileName}}の回答について質問できます。このチャットには他のファイルは添付されていません。",
   "AnalyzeResponsesMode": "回答の分析",
   "AndMore": "あと<1>{{count}}件</1>",

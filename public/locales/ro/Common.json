@@ -255,6 +255,7 @@
   "Amount": "Sumă",
   "AmountSelection": "Selectare sumă",
   "AmoutWithStorageUnit": "Suma ({{storageUnit}})",
+  "AnalyzeModeBanner": "Se analizează „{{fileName}}”",
   "AnalyzeModeSuggestionsHeader": "Puneți întrebări despre răspunsurile din {{fileName}}. În acest chat nu sunt atașate alte fișiere.",
   "AnalyzeResponsesMode": "Analiza răspunsurilor",
   "AndMore": "și <1>{{count}} mai multe</1>",

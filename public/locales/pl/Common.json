@@ -255,6 +255,7 @@
   "Amount": "Kwota",
   "AmountSelection": "Wybór kwoty",
   "AmoutWithStorageUnit": "Kwota ({{storageUnit}})",
+  "AnalyzeModeBanner": "Trwa analiza „{{fileName}}”",
   "AnalyzeModeSuggestionsHeader": "Zapytaj o odpowiedzi w pliku {{fileName}}. W tym czacie nie załączono innych plików.",
   "AnalyzeResponsesMode": "Analiza odpowiedzi",
   "AndMore": "i <1>{{count}} więcej</1>",

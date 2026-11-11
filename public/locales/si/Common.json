@@ -255,6 +255,7 @@
   "Amount": "මුදල",
   "AmountSelection": "මුදල තෝරා ගැනීම",
   "AmoutWithStorageUnit": "මුදල ({{storageUnit}})",
+  "AnalyzeModeBanner": "\"{{fileName}}\" විශ්ලේෂණය කරමින්",
   "AnalyzeModeSuggestionsHeader": "{{fileName}} හි ඇති ප්‍රතිචාර ගැන විමසන්න. මෙම කතාබසට වෙනත් ගොනු අමුණා නැත.",
   "AnalyzeResponsesMode": "ප්‍රතිචාර විශ්ලේෂණය",
   "AndMore": "සහ <1>තවත් {{count}} ක්</1>",

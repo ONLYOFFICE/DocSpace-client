@@ -255,6 +255,7 @@
   "Amount": "Số tiền",
   "AmountSelection": "Lựa chọn số tiền",
   "AmoutWithStorageUnit": "Số tiền ({{storageUnit}})",
+  "AnalyzeModeBanner": "Đang phân tích \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "Hãy hỏi về các phản hồi trong {{fileName}}. Không có tệp nào khác được đính kèm trong cuộc trò chuyện này.",
   "AnalyzeResponsesMode": "Phân tích phản hồi",
   "AndMore": "và <1> thêm {{count}} </1>",

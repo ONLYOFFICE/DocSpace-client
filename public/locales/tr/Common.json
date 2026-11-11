@@ -255,6 +255,7 @@
   "Amount": "Miktar",
   "AmountSelection": "Miktar seçimi",
   "AmoutWithStorageUnit": "Tutarı ({{storageUnit}})",
+  "AnalyzeModeBanner": "\"{{fileName}}\" analiz ediliyor",
   "AnalyzeModeSuggestionsHeader": "{{fileName}} dosyasındaki yanıtlar hakkında soru sorun. Bu sohbete başka dosya eklenmedi.",
   "AnalyzeResponsesMode": "Yanıt analizi",
   "AndMore": "ve <1>{{count}} daha fazla</1>",

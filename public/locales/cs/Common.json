@@ -255,6 +255,7 @@
   "Amount": "Částka",
   "AmountSelection": "Výběr částky",
   "AmoutWithStorageUnit": "Částka ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analyzuje se „{{fileName}}“",
   "AnalyzeModeSuggestionsHeader": "Zeptejte se na odpovědi v souboru {{fileName}}. V tomto chatu nejsou připojeny žádné další soubory.",
   "AnalyzeResponsesMode": "Analýza odpovědí",
   "AndMore": "a <1>{{count}} dalších</1>",

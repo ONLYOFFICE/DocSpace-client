@@ -255,6 +255,7 @@
   "Amount": "Cantidad",
   "AmountSelection": "Selección de cantidad",
   "AmoutWithStorageUnit": "Monto ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analizando \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "Pregunte sobre las respuestas de {{fileName}}. En este chat no hay otros archivos adjuntos.",
   "AnalyzeResponsesMode": "Análisis de respuestas",
   "AndMore": "y <1>{{count}} más</1>",

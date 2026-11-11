@@ -255,6 +255,7 @@
   "Amount": "Shuma",
   "AmountSelection": "Zgjedhja e shumës",
   "AmoutWithStorageUnit": "Shuma ({{storageUnit}})",
+  "AnalyzeModeBanner": "Po analizohet \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "Bëni pyetje për përgjigjet në {{fileName}}. Në këtë bisedë nuk janë bashkëngjitur skedarë të tjerë.",
   "AnalyzeResponsesMode": "Analiza e përgjigjeve",
   "AndMore": "dhe <1>{{count}} më shumë</1>",

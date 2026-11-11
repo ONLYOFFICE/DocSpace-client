@@ -255,6 +255,7 @@
   "Amount": "المبلغ",
   "AmountSelection": "اختيار المبلغ",
   "AmoutWithStorageUnit": "المبلغ ({{storageUnit}})",
+  "AnalyzeModeBanner": "جارٍ تحليل \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "اطرح أسئلة حول الاستجابات في {{fileName}}. لم يتم إرفاق ملفات أخرى في هذه الدردشة.",
   "AnalyzeResponsesMode": "تحليل الاستجابات",
   "AndMore": "و<1>{{count}} المزيد</1>",

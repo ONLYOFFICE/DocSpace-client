@@ -255,6 +255,7 @@
   "Amount": "Importo",
   "AmountSelection": "Selezione importo",
   "AmoutWithStorageUnit": "Importo ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analisi di \"{{fileName}}\" in corso",
   "AnalyzeModeSuggestionsHeader": "Fai domande sulle risposte in {{fileName}}. In questa chat non sono allegati altri file.",
   "AnalyzeResponsesMode": "Analisi delle risposte",
   "AndMore": "e <1>{{count}} altri</1>",

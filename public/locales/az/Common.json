@@ -255,6 +255,7 @@
   "Amount": "Müddət",
   "AmountSelection": "Müddət seçimi",
   "AmoutWithStorageUnit": "Məbləğ ({{storageUnit}})",
+  "AnalyzeModeBanner": "\"{{fileName}}\" təhlil edilir",
   "AnalyzeModeSuggestionsHeader": "{{fileName}} faylındakı cavablar barədə soruşun. Bu çatda başqa fayllar əlavə edilməyib.",
   "AnalyzeResponsesMode": "Cavabların analizi",
   "AndMore": "və <1>daha {{count}}</1>",

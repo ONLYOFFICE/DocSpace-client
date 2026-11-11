@@ -255,6 +255,7 @@
   "Amount": "Գումար",
   "AmountSelection": "Գումարի ընտրություն",
   "AmoutWithStorageUnit": "Գումար ({{storageUnit}})",
+  "AnalyzeModeBanner": "«{{fileName}}» ֆայլը վերլուծվում է",
   "AnalyzeModeSuggestionsHeader": "Հարցրեք {{fileName}} ֆայլում հավաքված պատասխանների մասին: Այս չաթում այլ ֆայլեր կցված չեն:",
   "AnalyzeResponsesMode": "Պատասխանների վերլուծություն",
   "AndMore": "և <1>{{count}} ավելին</1>",

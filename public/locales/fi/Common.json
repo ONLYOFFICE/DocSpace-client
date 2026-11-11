@@ -255,6 +255,7 @@
   "Amount": "Määrä",
   "AmountSelection": "Määrän valinta",
   "AmoutWithStorageUnit": "Summa ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analysoidaan \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "Kysy vastauksista tiedostossa {{fileName}}. Tähän keskusteluun ei ole liitetty muita tiedostoja.",
   "AnalyzeResponsesMode": "Vastausten analysointi",
   "AndMore": "ja <1>{{count}} lisää</1>",

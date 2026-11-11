@@ -255,6 +255,7 @@
   "Amount": "ຈຳນວນເງິນ",
   "AmountSelection": "ການເລືອກຈຳນວນ",
   "AmoutWithStorageUnit": "ຈຳນວນ ({{storageUnit}})",
+  "AnalyzeModeBanner": "ກຳລັງວິເຄາະ \"{{fileName}}\"",
   "AnalyzeModeSuggestionsHeader": "ຖາມກ່ຽວກັບຄຳຕອບໃນ {{fileName}}. ບໍ່ມີໄຟລ໌ອື່ນແນບມາໃນການສົນທະນານີ້.",
   "AnalyzeResponsesMode": "ການວິເຄາະຄຳຕອບ",
   "AndMore": "ແລະ <1>{{count}} ເພີ່ມເຕີມ</1>",

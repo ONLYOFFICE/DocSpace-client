@@ -255,6 +255,7 @@
   "Amount": "Summa",
   "AmountSelection": "Summas izvēle",
   "AmoutWithStorageUnit": "Summa ({{storageUnit}})",
+  "AnalyzeModeBanner": "Notiek \"{{fileName}}\" analīze",
   "AnalyzeModeSuggestionsHeader": "Uzdodiet jautājumus par atbildēm failā {{fileName}}. Šajā čatā citi faili nav pievienoti.",
   "AnalyzeResponsesMode": "Atbilžu analīze",
   "AndMore": "un <1>{{count}} vairāk</1>",

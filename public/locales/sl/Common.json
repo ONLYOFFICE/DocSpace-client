@@ -255,6 +255,7 @@
   "Amount": "Znesek",
   "AmountSelection": "Izbira zneska",
   "AmoutWithStorageUnit": "Spletna vrednost ({{storageUnit}})",
+  "AnalyzeModeBanner": "Poteka analiza »{{fileName}}«",
   "AnalyzeModeSuggestionsHeader": "Vprašaj o odgovorih v datoteki {{fileName}}. V tem klepetu ni pripetih drugih datotek.",
   "AnalyzeResponsesMode": "Analiza odgovorov",
   "AndMore": "in <1>{{count}} več</1>",

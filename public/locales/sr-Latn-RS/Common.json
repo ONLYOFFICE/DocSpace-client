@@ -255,6 +255,7 @@
   "Amount": "Iznos",
   "AmountSelection": "Izbor iznosa",
   "AmoutWithStorageUnit": "Iznos ({{storageUnit}})",
+  "AnalyzeModeBanner": "Analizira se „{{fileName}}“",
   "AnalyzeModeSuggestionsHeader": "Postavite pitanja o odgovorima u datoteci {{fileName}}. U ovom čatu nisu priložene druge datoteke.",
   "AnalyzeResponsesMode": "Analiza odgovora",
   "AndMore": "i <1>{{count}} više</1>",

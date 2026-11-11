@@ -691,6 +691,29 @@ six encrypted files, no subfolder); no data was changed:
     refuses neither at creation (`FileStorageService.cs:666-690`,
     `:1220-1230`), so task 12.8 stays open.
 
+### Landed after 2026-11-06 (read in `ae457bdff6`, `d8b46d2b9a` and `62419af921`)
+
+Read on 2026-11-11 with `git show` in `../server`, whose head is
+`a7d94e4b81`. None of the three changes a task of this change.
+
+- `ae457bdff6` (2026-11-06), upload sessions. A small upload, stored with
+  its one part, now removes its session
+  (`UploadController`, `products/ASC.Files/Server/Api/UploadController.cs`,
+  and `ChunkedUploaderHandler`,
+  `products/ASC.Files/Core/HttpHandlers/ChunkedUploaderHandler.cs`), so a
+  repeated finalize, an abort or another part of it answers 404, as a
+  finalized large session does. The encrypted-files mock and the main
+  `server-contract` were read against `a7d94e4b81` on 2026-11-10
+  (`private-rooms-server-contract-sync`, archived).
+- `d8b46d2b9a` (2026-11-08), documentation only. The webhook contract
+  (`common/ASC.Webhooks.Core/Contract/docspace-webhooks.yaml`) lists folder
+  type 42, PrivateRooms, among the root types.
+- `62419af921` (2026-11-08), primary external links. A revoked primary
+  link of a file or a folder is created anew by an explicit create request
+  and stays 404 for a read (`FileStorageService`, `FilesController`,
+  `FoldersController`). A private room and its content take no external
+  link, so nothing changes for them.
+
 ### Release stand check (2026-11-10, `tests.onlyoffice.io`)
 
 Observed by the review of 2026-11-10 (DocSpace `4.1.0.12351`, Document

@@ -44,7 +44,10 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isSameId } from "SRC_DIR/helpers/plugins/utils";
+
+import { resolveMediaDownload } from "./mediaDownload.helpers";
 import { usePlugin } from "./hooks/usePlugin";
 
 const FilesMediaViewer = (props) => {
@@ -253,25 +256,22 @@ const FilesMediaViewer = (props) => {
 
   const onDownloadMediaFile = useCallback(
     (id) => {
-      if (playlist.length > 0) {
-        const playlistItem = playlist.find((file) => file.fileId === id);
+      const download = resolveMediaDownload({
+        id,
+        playlist,
+        files,
+        previewFile,
+      });
 
-        // Spec: private-rooms/file-operations, "Download decrypts on the client"
-        if (playlistItem?.encrypted) {
-          const file =
-            files.find((item) => isSameId(item.id, id)) ??
-            (previewFile && isSameId(previewFile.id, id)
-              ? previewFile
-              : undefined);
-
-          if (file) onClickDownload(file, t);
-          return;
-        }
-
-        return openUrl(playlistItem.src, UrlActionType.Download);
+      if (download.kind === "decrypt") return onClickDownload(download.file, t);
+      if (download.kind === "missing") {
+        return toastr.error(t("Common:EncryptionDownloadFailed"));
+      }
+      if (download.kind === "plain") {
+        return openUrl(download.src, UrlActionType.Download);
       }
     },
-    [playlist, files, previewFile, onClickDownload, t],
+    [playlist, files, previewFile, onClickDownload, openUrl, t],
   );
 
   const onMediaViewerClose = useCallback(async () => {
@@ -577,5 +577,5 @@ export default inject(
         (selectedFolderStore?.isRoom ? selectedFolderStore.id : null),
     };
   },
-)(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));
+)(withTranslation(["Files", "Translations", "Common"])(observer(FilesMediaViewer)));
 

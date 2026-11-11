@@ -19,7 +19,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. E2E
 
-- [ ] 4.1 Client: add the cases "Key list could not be loaded" and "Retry succeeds" to `packages/client/__tests__/private-room-access.spec.ts` with a key-list handler that fails until told otherwise. Verify: the spec in Docker `tests-dev`
+- [x] 4.1 Client: add the cases "Key list could not be loaded" and "Retry succeeds" to `packages/client/__tests__/private-room-access.spec.ts` with a key-list handler that fails until told otherwise. Verify: the spec in Docker `tests-dev`
 
 ## 5. Gate
 

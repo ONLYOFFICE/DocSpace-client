@@ -156,7 +156,11 @@ export function setSelectionsImpl(
     self.setSelection(EMPTY_ARRAY);
   }
 
-  let newSelections: TItem[] = JSON.parse(JSON.stringify(self.selection));
+  // A copy of the array, not of the items: the items stay the ones in
+  // filesList, as `added` pushes them. A JSON clone dropped their undefined
+  // keys, so the next frame's deep compare saw a change, wrote the selection
+  // again and re-rendered every row.
+  let newSelections: TItem[] = [...self.selection];
 
   added.forEach((item) => {
     if (!item) return;

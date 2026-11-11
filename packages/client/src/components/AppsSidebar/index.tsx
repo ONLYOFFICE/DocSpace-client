@@ -89,6 +89,7 @@ import { ArticleProfileLoader } from "@onlyoffice/apps-ui-kit/components/article
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
 import { closeAfter } from "./closeAfter";
+import { endAnimationOnSamePage } from "./endAnimationOnSamePage";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import LiveChatBlock from "./LiveChatBlock";
@@ -229,10 +230,24 @@ export const AppsSidebarView = ({
   // navigation click. Wrap every item/sub-item onClick to run its own handler
   // first (navigate) and then close the article. Off mobile the article is
   // pinned, so handlers pass through untouched.
-  const mobileGroups = useMemo(() => {
-    if (!isMobile) return navGroups;
+  // An entry that reopens the page on screen finishes its highlight's fill
+  // itself, since that page loads nothing to report the end.
+  const animatedGroups = useMemo(
+    () =>
+      navGroups.map((group) => ({
+        ...group,
+        items: group.items.map((item: NavMenuItem) => ({
+          ...endAnimationOnSamePage(item),
+          children: item.children?.map(endAnimationOnSamePage),
+        })),
+      })),
+    [navGroups],
+  );
 
-    return navGroups.map((group) => ({
+  const mobileGroups = useMemo(() => {
+    if (!isMobile) return animatedGroups;
+
+    return animatedGroups.map((group) => ({
       ...group,
       items: group.items.map((item: NavMenuItem) => ({
         ...item,
@@ -243,7 +258,7 @@ export const AppsSidebarView = ({
         })),
       })),
     }));
-  }, [navGroups, isMobile, toggleArticleOpen]);
+  }, [animatedGroups, isMobile, toggleArticleOpen]);
 
   const articleContent = (
     <>

@@ -16,8 +16,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. E2E and gate
 
-- [ ] 4.1 E2E: run `packages/client/__tests__/keys-management.spec.ts`, `keys-management-advanced.spec.ts` and `key-flow-edge-cases.spec.ts` under Docker `tests-dev`; update a screenshot of the keys page only if it shows the selector's value, with `--update-snapshots`, and say so here. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test <specs> --reporter=line`
-- [ ] 4.2 Run the gate: `pnpm exec tsc` in the six packages, the shared and client unit suites, `npm --prefix ./common/tests run test:lefthook`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date
+- [x] 4.1 E2E: run `packages/client/__tests__/keys-management.spec.ts`, `keys-management-advanced.spec.ts` and `key-flow-edge-cases.spec.ts` under Docker `tests-dev`; update a screenshot of the keys page only if it shows the selector's value, with `--update-snapshots`, and say so here. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test <specs> --reporter=line`. Done 2026-11-11: the three specs under Docker `tests-dev`, 23 passed and 2 failed; the two failures are "Passphrase dialog on a wide screen" and "Delete warning on a wide screen" of `keys-management.spec.ts`, which failed before this change and are the open task 4.6 of `private-rooms-beta-release`. No screenshot was updated
+- [x] 4.2 Run the gate: `pnpm exec tsc` in the six packages, the shared and client unit suites, `npm --prefix ./common/tests run test:lefthook`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date. Done 2026-11-11: `tsc` clean in the six packages; unit suites shared 2303 of 2303, client 2093 of 2093; `test:lefthook` 61 passed and 3 skipped; OpenSpec validation 20 of 20
 
 ## Workflow follow-up
 

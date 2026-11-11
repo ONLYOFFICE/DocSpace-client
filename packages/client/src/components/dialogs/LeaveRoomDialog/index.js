@@ -69,7 +69,7 @@ const LeaveRoomDialog = (props) => {
         await onLeaveRoomAction(t, isRoomOwner, isFormFiller);
         onClose();
       } catch (e) {
-        // Spec: private-rooms/room-membership, "Leaving a room revokes own access first"
+        // Spec: private-rooms/room-membership, "Leaving a room drops the role without a client revocation"
         toastr.error(e);
       } finally {
         setIsLoading(false);

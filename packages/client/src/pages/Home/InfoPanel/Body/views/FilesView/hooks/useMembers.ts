@@ -46,6 +46,7 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import { loadPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
 import { Nullable } from "@docspace/shared/types";
 import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
@@ -218,6 +219,11 @@ export const useMembers = ({
     const isTemplate = room.isTemplate;
     const security = room.security;
 
+    // Spec: private-rooms/room-membership, "Partial re-encryption failure is reported"
+    if (room.private && security?.EditAccess) {
+      loadPendingAccess(Number(roomId));
+    }
+
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom ||
       roomType === RoomsType.CustomRoom ||
@@ -282,6 +288,7 @@ export const useMembers = ({
     room?.roomType,
     room?.isTemplate,
     room?.security,
+    room?.private,
     searchValue,
     getRoomMembers,
   ]);

@@ -9,6 +9,29 @@ The system SHALL, when the user accepts a member's changed key, wrap the file ke
 - **WHEN** files were uploaded into a private room while a member's changed key was refused, and the user later accepts that key
 - **THEN** the member gets access entries for those files right away, and can open them without the uploader re-entering the room in a new session
 
+### Requirement: Pending access is read from the server
+The system SHALL read the room's missing file keys from the server whenever the members list of a private room loads for a user who may change its access, and SHALL show the listed members as pending access (Common:EncryptedAccessPending) for the listed files and no other member of the room, so the state survives a reload and reaches other devices. What this device records between two loads SHALL hold until the next one.
+
+#### Scenario: Marker after a reload
+- **WHEN** a member of a private room lacks the key of some encrypted file and a user who may change the room's access reloads the page and opens the members list
+- **THEN** the member's row shows Common:EncryptedAccessPending, and its retry re-wraps the files the server listed
+
+#### Scenario: Another room manager
+- **WHEN** another user who may change the room's access opens the members list on another device
+- **THEN** the same member is shown as pending access
+
+#### Scenario: Member who misses nothing any more
+- **WHEN** the members list loads and the server lists no missing key for a member this device had recorded as pending
+- **THEN** the marker is gone from that member's row
+
+#### Scenario: User who may not change the access
+- **WHEN** a member who may not change the room's access opens the members list
+- **THEN** the missing keys are not requested and no marker changes
+
+#### Scenario: Record written while the list is loading
+- **WHEN** an invitation or an upload records a member as pending while the server's list is on its way
+- **THEN** that record is kept until the next load
+
 ## MODIFIED Requirements
 
 ### Requirement: Invited members receive re-wrapped file keys

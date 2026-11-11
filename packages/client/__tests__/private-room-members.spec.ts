@@ -218,17 +218,18 @@ test.describe("Private room — pending access", () => {
         { timeout: 30000 },
       )
       .toEqual([TEST_USER_ID]);
-    accessHandle.current!.setRoomKeys(ROOM_ID, [
-      ownKey,
-      {
-        id: "carol-1",
-        userId: CAROL.id,
-        publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
-        privateKeyEnc: "",
-        date: "2026-01-01T00:00:00.000Z",
-        cryptoEngineId: "",
-      },
-    ]);
+    const carolKey = {
+      id: "carol-1",
+      userId: CAROL.id,
+      publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
+      privateKeyEnc: "",
+      date: "2026-01-01T00:00:00.000Z",
+      cryptoEngineId: "",
+    };
+    accessHandle.current!.setRoomKeys(ROOM_ID, [ownKey, carolKey]);
+    // The members list reads the room's missing keys: the files mock answers
+    // them for the members it knows by their keys.
+    filesHandle.current!.setRoomUserKeys([carolKey]);
 
     // The key writes of the invitation fail.
     let failKeyWrites = true;

@@ -4,7 +4,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 1. Locales
 
-- [ ] 1.1 Common: add `PrivateRoomLockedBarTitle`, `PrivateRoomLockedBarText` and `UnlockKey` to `public/locales/en/Common.json` with their `.meta` and translator comments (`translate-comments`), and translate them into the 31 other languages (`translate-locales`). The keys are used by task 2.2; commit them together with it if the unused-key check requires a call site. Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no new failure beyond the four foreign keys; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
+- [x] 1.1 Common: add `PrivateRoomLockedBarTitle`, `PrivateRoomLockedBarText` and `UnlockKey` to `public/locales/en/Common.json` with their `.meta` and translator comments (`translate-comments`), and translate them into the 31 other languages (`translate-locales`). The keys are used by task 2.2; commit them together with it if the unused-key check requires a call site. Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no new failure beyond the four foreign keys; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
 
 ## 2. Client
 

@@ -12,7 +12,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Gate
 
-- [ ] 3.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `npm --prefix ./common/tests run test:lefthook`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+- [x] 3.1 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `npm --prefix ./common/tests run test:lefthook`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+  - 2026-11-11: `pnpm exec tsc` clean in shared, client, sdk, doceditor, login and management. Unit suites: shared 2304, client 2104, sdk 498, all passed. Biome clean on the touched paths. `test:lefthook`: 61 passed, 3 skipped. `openspec validate --all --strict`: 20 of 20; after a trial archive on a scratch copy, 19 of 19 with the main spec included.
 
 ## Workflow follow-up
 

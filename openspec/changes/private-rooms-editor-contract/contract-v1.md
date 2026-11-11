@@ -64,7 +64,8 @@ The client then replaces the field, after signing, with one object:
 ```
 
 Observed: the web client reads **`dek` only**. `cryptoEngineId` is not read.
-`contractVersion` does not exist yet and an unknown field is ignored.
+`contractVersion`, sent by the client since 2026-10-30, is not read either,
+and an unknown field is ignored.
 
 ### 3.2 Obligations
 

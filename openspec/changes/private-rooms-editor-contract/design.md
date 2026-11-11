@@ -881,7 +881,9 @@ release, one user holding a key, the device remembered):
   then once more after a minute), the editor shows "Something went wrong.
   An error has occurred while opening the file" and the console logs the
   Document Server error code -82. `GET files/file/{id}/openedit` answers
-  200 with a new document key, the encrypted flag and the key pairs;
+  200 with a new document key (corrected on 2026-11-11: the key for
+  editing is the one of the earlier version, see "Release stand check of
+  2026-11-10"), the encrypted flag and the key pairs;
   `GET files/file/{id}/history` lists both versions as encrypted. Opening
   `?version=1` in view mode shows the typed line, so the Document Server
   serves the held session of the first key on top of the first version,
@@ -1378,8 +1380,9 @@ the Document Server capability" (2026-11-10).
 ## Migration Plan
 
 1. Land the capability flag on the server with a default of `false`.
-2. Land the client refusal path; behind the feature flag nothing changes for
-   ordinary users.
+2. Land the client refusal path. (Written while the feature was behind a
+   flag; since 2026-11-03 it is a beta offered to every user, so the
+   refusal reaches everyone.)
 3. When the Document Server version ships, flip the capability on staging,
    run the new E2E suite and the recorded runs, then production.
 4. Rollback: turn the capability off; encrypted files stop opening in the
@@ -1419,11 +1422,6 @@ the Document Server capability" (2026-11-10).
   9.x images.
 - Will the Document Server publish a capability signal (health check or
   settings) to replace the library-path probe? Owner: Document Server team.
-- Role-based filling in a private virtual data room: does the encrypted
-  editor work in the embedded mode fillers get, and does every filler hold an
-  access entry for the form? A private virtual data room can only be created
-  through the API today. To be verified on a Document Server with the crypto
-  add-on before a policy is set.
 - When the last editor of an encrypted document leaves, which callback does
   the Document Server send (status 1 with no users, status 4, or none), and
   when does it drop the session? The portal's tracker and D7 depend on it.

@@ -137,6 +137,28 @@ describe("PassphraseModal", () => {
     expect(screen.getByText("Common:RememberDeviceHint")).toBeInTheDocument();
   });
 
+  it("Option placed with the passphrase field: reading order, unticked", () => {
+    renderModal({
+      showRememberDevice: true,
+      externalError: "Common:InvalidPassphrase",
+      onForgotPassphrase: vi.fn(),
+      onPasskeyUnlock: vi.fn(),
+    });
+
+    const option = screen.getByRole("checkbox", {
+      name: "Common:RememberDeviceLabel",
+    });
+    const forgot = screen.getByTestId("forgot_passphrase_link");
+    const passkey = screen.getByTestId("passkey_unlock_link");
+    const follows = (a: Element, b: Element) =>
+      !!(a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
+
+    expect(option).not.toBeChecked();
+    expect(follows(getPassphraseInput(), option)).toBe(true);
+    expect(follows(option, forgot)).toBe(true);
+    expect(follows(forgot, passkey)).toBe(true);
+  });
+
   it("shows no remember hint when the option is not offered", () => {
     renderModal();
     expect(screen.queryByText("Common:RememberDeviceHint")).toBeNull();
@@ -457,6 +479,29 @@ describe("PassphraseModal", () => {
       within(
         screen.getByRole("dialog", { name: "Common:CreatePassphrase" }),
       ).getAllByRole("button", { name: "Show" });
+
+    it("Option placed with the passphrase field: Tab order", async () => {
+      const user = userEvent.setup();
+      renderModal({
+        showRememberDevice: true,
+        externalError: "Common:InvalidPassphrase",
+        onForgotPassphrase: vi.fn(),
+        onPasskeyUnlock: vi.fn(),
+      });
+      const dialog = screen.getByRole("dialog");
+
+      getPassphraseInput().focus();
+      await user.tab();
+      expect(within(dialog).getByRole("button", { name: "Show" })).toHaveFocus();
+      await user.tab();
+      expect(
+        screen.getByRole("checkbox", { name: "Common:RememberDeviceLabel" }),
+      ).toHaveFocus();
+      await user.tab();
+      expect(screen.getByTestId("forgot_passphrase_link")).toHaveFocus();
+      await user.tab();
+      expect(screen.getByTestId("passkey_unlock_link")).toHaveFocus();
+    });
 
     it("Forward through the creation dialog", async () => {
       const user = userEvent.setup();

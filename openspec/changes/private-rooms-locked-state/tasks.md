@@ -13,7 +13,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Shared
 
-- [ ] 3.1 Shared: move the remember option under the passphrase field in `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx`, with the label weight of the field labels (decision 5). Verify: case "Option placed with the passphrase field" (reading order, Tab order, unticked) in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx`; `cd packages/shared && pnpm exec vitest run dialogs`; the sdk unit suite; `pnpm exec tsc` in the six packages
+- [x] 3.1 Shared: move the remember option under the passphrase field in `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx`, with the label weight of the field labels (decision 5). Verify: case "Option placed with the passphrase field" (reading order, Tab order, unticked) in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx`; `cd packages/shared && pnpm exec vitest run dialogs`; the sdk unit suite; `pnpm exec tsc` in the six packages
 
 ## 4. E2E
 

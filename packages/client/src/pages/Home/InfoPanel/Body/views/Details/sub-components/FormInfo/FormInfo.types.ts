@@ -48,6 +48,7 @@ export type InjectedFormInfoProps = Pick<
   Pick<TStore["settingsStore"], "externalDbEnabled"> & {
     isAdmin: boolean;
     aiReady: boolean;
+    isStandalone: boolean;
   };
 
 export interface ExternalFormInfoProps {

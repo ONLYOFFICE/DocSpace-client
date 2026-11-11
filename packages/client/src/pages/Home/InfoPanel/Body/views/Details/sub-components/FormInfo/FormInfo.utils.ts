@@ -80,3 +80,21 @@ export function isFormFolderItem(item: Selection): boolean {
 export function shouldShow(item: Selection): boolean {
   return isFormRoom(item) || isDoneFolder(item) || isFormFile(item);
 }
+
+type AICardVisibility = {
+  isStandalone: boolean;
+  externalDbEnabled: boolean;
+  aiConnected: boolean;
+  aiReady: boolean;
+};
+
+// In SaaS the external database integration is not offered, so the
+// "connect a database" prompt is hidden there; every other state stays.
+export function canShowAICard({
+  isStandalone,
+  externalDbEnabled,
+  aiConnected,
+  aiReady,
+}: AICardVisibility): boolean {
+  return isStandalone || externalDbEnabled || aiConnected || !aiReady;
+}

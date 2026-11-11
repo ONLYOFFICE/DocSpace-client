@@ -55,6 +55,7 @@ import {
 } from "../../services/encryption/secret-storage";
 import {
   getAutoLockTimeoutSeconds,
+  locksWhenTabHidden,
   setAutoLockScope,
 } from "../../services/encryption/auto-lock-preference";
 import {
@@ -330,7 +331,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (typeof document === "undefined") return undefined;
     if (autoLockSuspendCount > 0) return undefined;
     const handler = () => {
-      if (getAutoLockTimeoutSeconds() <= 0) return;
+      if (!locksWhenTabHidden()) return;
       if (document.visibilityState === "hidden") {
         SecretStorage.lock();
         clearEncryptedFilenameCache();

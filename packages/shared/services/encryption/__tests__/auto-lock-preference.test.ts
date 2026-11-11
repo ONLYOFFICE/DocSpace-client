@@ -42,6 +42,7 @@ import {
   DEFAULT_AUTO_LOCK_SECONDS,
   getAutoLockTimeoutSeconds,
   getCurrentAutoLockPresetId,
+  locksWhenTabHidden,
   setAutoLockPreset,
   setAutoLockScope,
   setAutoLockTimeoutSeconds,
@@ -53,9 +54,10 @@ describe("auto-lock preference storage", () => {
     setAutoLockScope(null);
   });
 
-  it("returns default (0) when nothing is stored", () => {
+  it("returns the default, 30 minutes, when nothing is stored", () => {
+    expect(DEFAULT_AUTO_LOCK_SECONDS).toBe(1800);
     expect(getAutoLockTimeoutSeconds()).toBe(DEFAULT_AUTO_LOCK_SECONDS);
-    expect(getCurrentAutoLockPresetId()).toBe("off");
+    expect(getCurrentAutoLockPresetId()).toBe("30m");
   });
 
   it("round-trips seconds through localStorage", () => {
@@ -63,19 +65,6 @@ describe("auto-lock preference storage", () => {
     expect(getAutoLockTimeoutSeconds()).toBe(900);
     expect(window.localStorage.getItem(AUTO_LOCK_TIMEOUT_KEY)).toBe("900");
     expect(getCurrentAutoLockPresetId()).toBe("15m");
-  });
-
-  it("clamps negative values to 0", () => {
-    setAutoLockTimeoutSeconds(-1);
-    expect(getAutoLockTimeoutSeconds()).toBe(0);
-  });
-
-  it("clamps stored values above 24h and the read-time whitelist falls back to default", () => {
-    // Setter clamps to MAX_AUTO_LOCK_SECONDS = 24h before writing, but the
-    // read-time whitelist (preset values only) further drops it to default
-    // since 24h is not a UI-offered preset.
-    setAutoLockTimeoutSeconds(10 * 24 * 60 * 60);
-    expect(getAutoLockTimeoutSeconds()).toBe(0);
   });
 
   it("floors fractional seconds (900 is a known preset)", () => {
@@ -94,46 +83,67 @@ describe("auto-lock preference storage", () => {
   });
 
   it("setAutoLockPreset writes the matching preset's seconds", () => {
+    setAutoLockPreset("5m");
+    expect(getAutoLockTimeoutSeconds()).toBe(300);
     setAutoLockPreset("30m");
     expect(getAutoLockTimeoutSeconds()).toBe(1800);
-    setAutoLockPreset("1h");
-    expect(getAutoLockTimeoutSeconds()).toBe(3600);
-    setAutoLockPreset("off");
-    expect(getAutoLockTimeoutSeconds()).toBe(0);
   });
 
   it("setAutoLockPreset ignores unknown preset ids", () => {
+    setAutoLockPreset("15m");
+    // @ts-expect-error: deliberately pass a removed id
     setAutoLockPreset("1h");
-    expect(getAutoLockTimeoutSeconds()).toBe(3600);
     // @ts-expect-error: deliberately pass an invalid id
     setAutoLockPreset("invalid");
-    expect(getAutoLockTimeoutSeconds()).toBe(3600);
+    expect(getAutoLockTimeoutSeconds()).toBe(900);
+  });
+
+  it("Preset off", () => {
+    for (const stored of ["0", "3600"]) {
+      window.localStorage.setItem(AUTO_LOCK_TIMEOUT_KEY, stored);
+
+      expect(getAutoLockTimeoutSeconds()).toBe(1800);
+      expect(getCurrentAutoLockPresetId()).toBe("30m");
+    }
   });
 
   it("Tampered auto-lock value", () => {
     window.localStorage.setItem(AUTO_LOCK_TIMEOUT_KEY, "999999");
 
-    expect(getAutoLockTimeoutSeconds()).toBe(0);
-    expect(getCurrentAutoLockPresetId()).toBe("off");
+    expect(getAutoLockTimeoutSeconds()).toBe(DEFAULT_AUTO_LOCK_SECONDS);
+    expect(getCurrentAutoLockPresetId()).toBe("30m");
   });
 
   it("getAutoLockTimeoutSeconds rejects non-preset values at read time (tamper defense)", () => {
     // Writing succeeds (legacy API), but read-time whitelist enforcement
-    // returns the safe default when the stored value isn't a known preset.
-    // Protects against localStorage tampering by extensions / hostile scripts.
+    // returns the default when the stored value isn't a known preset.
     setAutoLockTimeoutSeconds(42);
-    expect(getAutoLockTimeoutSeconds()).toBe(0);
-    expect(getCurrentAutoLockPresetId()).toBe("off");
+    expect(getAutoLockTimeoutSeconds()).toBe(DEFAULT_AUTO_LOCK_SECONDS);
+    setAutoLockTimeoutSeconds(10 * 24 * 60 * 60);
+    expect(getAutoLockTimeoutSeconds()).toBe(DEFAULT_AUTO_LOCK_SECONDS);
   });
 
-  it("AUTO_LOCK_PRESETS contains expected ids and ordering", () => {
-    expect(AUTO_LOCK_PRESETS.map((p) => p.id)).toEqual([
-      "off",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-    ]);
+  it("Offered presets", () => {
+    expect(AUTO_LOCK_PRESETS.map((p) => p.id)).toEqual(["5m", "15m", "30m"]);
+    expect(
+      Math.max(...AUTO_LOCK_PRESETS.map((p) => p.seconds)),
+    ).toBeLessThanOrEqual(30 * 60);
+  });
+
+  it("Tab hidden", () => {
+    for (const id of ["5m", "15m"] as const) {
+      setAutoLockPreset(id);
+
+      expect(locksWhenTabHidden()).toBe(true);
+    }
+  });
+
+  it("Tab hidden with the default preset", () => {
+    expect(locksWhenTabHidden()).toBe(false);
+
+    setAutoLockPreset("30m");
+
+    expect(locksWhenTabHidden()).toBe(false);
   });
 });
 
@@ -157,8 +167,8 @@ describe("auto-lock preference scoping", () => {
     setAutoLockTimeoutSeconds(300);
     setAutoLockScope("user-B");
     expect(getAutoLockTimeoutSeconds()).toBe(DEFAULT_AUTO_LOCK_SECONDS);
-    setAutoLockTimeoutSeconds(3600);
-    expect(getAutoLockTimeoutSeconds()).toBe(3600);
+    setAutoLockTimeoutSeconds(900);
+    expect(getAutoLockTimeoutSeconds()).toBe(900);
     setAutoLockScope("user-A");
     expect(getAutoLockTimeoutSeconds()).toBe(300);
   });

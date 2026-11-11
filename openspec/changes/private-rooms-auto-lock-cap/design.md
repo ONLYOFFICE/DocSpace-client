@@ -44,7 +44,7 @@ presets; the code is the source.
    read as the default. Alternative: rewrite the stored value on read.
    Rejected: nothing needs the stored value to change.
 2. **The tab-hidden lock applies to presets shorter than the session
-   limit (proposed, proposal decision 1).** The rule is stated on the
+   limit (decided by the owner on 2026-11-11, proposal decision 1).** The rule is stated on the
    preset, not on a magic number in the context: a preset carries whether
    it locks on a hidden tab. With the default at 30 minutes this keeps
    today's default experience, where a switch to another tab does not

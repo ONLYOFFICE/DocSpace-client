@@ -48,7 +48,9 @@ Decisions that need a human:
 2. The wording of `Common:AutoLockHint`.
 
 Decided by the owner on 2026-11-10: the 30-minute limit stays; the presets
-"Off" and "1 hour" are removed.
+"Off" and "1 hour" are removed. Decided by the owner on 2026-11-11:
+decision 1 as proposed, the 30-minute preset does not lock on a hidden
+tab; decision 2, the hint reads as proposed above.
 
 Depends on: nothing in `../server` or the Document Server.
 

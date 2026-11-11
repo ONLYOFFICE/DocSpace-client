@@ -10,7 +10,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Gate
 
-- [ ] 2.1 Run `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, and archive `private-rooms-server-hardening` on a scratch copy of `openspec/` after this change, to see that its copies still apply over the renamed requirements. Verify: both green, recorded here with the date
+- [x] 2.1 Run `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, and archive `private-rooms-server-hardening` on a scratch copy of `openspec/` after this change, to see that its copies still apply over the renamed requirements. Verify: both green, recorded here with the date. Done 2026-11-11: validation 21 of 21 before the archive; on a scratch copy of `openspec/` this change archives, the validation stays green (20 of 20), `private-rooms-server-hardening` then archives over the renamed requirements, the validation stays green (19 of 19), and no main spec says "creator excepted" or "revokes own access first" afterwards
 
 ## Workflow follow-up
 

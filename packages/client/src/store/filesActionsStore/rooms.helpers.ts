@@ -47,6 +47,7 @@ import {
   isPrivateRoomsRoute,
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
+import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 import { prepareNewOwner } from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
@@ -618,6 +619,12 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
         }
 
         toastr.success(successText);
+      })
+      .catch((error: unknown) => {
+        // Spec: private-rooms/room-membership, "Refused access change in a private room is explained"
+        if (room.private !== true || !isAccessChangeRefused(error)) throw error;
+
+        toastr.error(t("Common:EncryptedAccessChangeRefused"));
       })
       .finally(() => {
         setSelected("none");

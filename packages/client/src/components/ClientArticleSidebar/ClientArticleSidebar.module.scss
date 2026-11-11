@@ -89,6 +89,30 @@
   }
 }
 
+// Show more is a link, not a row: the text only, in the menu's colour and
+// weight, underlined with dashes as an action link (ui-kit Link), with no
+// row highlight - NavMenu draws that on the row's first element, which is
+// left out here.
+:global(:is(a, button)[data-item-id^="ai-nested-"][data-item-id$="-more"]) {
+  width: auto;
+
+  > span {
+    font-weight: 600;
+    color: var(--nav-menu-item-text-color);
+    text-decoration: underline dashed;
+    text-underline-offset: 2px;
+  }
+
+  &:hover > span,
+  &:focus-visible > span {
+    color: var(--nav-menu-item-text-active-color);
+  }
+}
+
+:global(li:has(> div > [data-item-id^="ai-nested-"][data-item-id$="-more"]) > div > div:first-child) {
+  display: none;
+}
+
 // The last of a group - its Show more, or its last entry without one - keeps
 // the next entry at the distance an expanded section keeps the next section
 // (NavMenu's `.subItems.expanded`).

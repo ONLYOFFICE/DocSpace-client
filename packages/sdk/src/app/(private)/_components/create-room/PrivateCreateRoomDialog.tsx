@@ -98,6 +98,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     userId,
     accountLabel: user?.email,
     hasExistingKeys: mayHoldKey,
+    isGuest: user?.isVisitor,
     refreshKeysFromServer,
     onKeyGenerationCancelled: onClose,
     onClose,
@@ -131,7 +132,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     if (!isCreation || !canCreate) return;
     if (keysLoaded && !hasKeys && !autoPromptedRef.current) {
       autoPromptedRef.current = true;
-      keyGate.offerKeyGeneration();
+      if (!keyGate.offerKeyGeneration()) onClose();
     }
   }, [visible, keysLoaded, hasKeys, isCreation, canCreate, keyGate]);
 

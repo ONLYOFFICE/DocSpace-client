@@ -8,7 +8,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Shared and SDK
 
-- [ ] 2.1 Shared: give `packages/shared/hooks/usePrivateRoomKeyGate.ts` the guest flag and make `offerKeyGeneration` decline for a guest without opening the offer (design decision 3); pass the flag from the client's `CreateRoomDialog` and the SDK's `PrivateCreateRoomDialog`. Verify: case "Guest reaches the key offer of room creation" in the hook's unit test; `cd packages/shared && pnpm exec vitest run hooks`; the creation dialog suites of client and sdk; `pnpm exec tsc` in the six packages
+- [x] 2.1 Shared: give `packages/shared/hooks/usePrivateRoomKeyGate.ts` the guest flag and make `offerKeyGeneration` decline for a guest without opening the offer (design decision 3); pass the flag from the client's `CreateRoomDialog` and the SDK's `PrivateCreateRoomDialog`. Verify: case "Guest reaches the key offer of room creation" in the hook's unit test; `cd packages/shared && pnpm exec vitest run hooks`; the creation dialog suites of client and sdk; `pnpm exec tsc` in the six packages
 
 ## 3. Gate
 

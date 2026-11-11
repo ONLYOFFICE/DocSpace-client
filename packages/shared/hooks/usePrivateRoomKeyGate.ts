@@ -51,6 +51,7 @@ export function usePrivateRoomKeyGate({
   userId,
   accountLabel,
   hasExistingKeys,
+  isGuest,
   refreshKeysFromServer,
   onKeyGenerated,
   onKeyGenerationCancelled,
@@ -61,6 +62,8 @@ export function usePrivateRoomKeyGate({
   accountLabel?: string;
   /** A user who already holds a key is never offered a second one. */
   hasExistingKeys?: boolean;
+  /** A guest is never offered a key: the server refuses a guest's key. */
+  isGuest?: boolean;
   refreshKeysFromServer: () => Promise<void>;
   onKeyGenerated?: () => void;
   /** The user cancelled inside key generation, after confirming the offer. */
@@ -89,9 +92,11 @@ export function usePrivateRoomKeyGate({
 
   /**
    * Offers key generation. Returns false, with the secure-context toast,
-   * where the browser has no WebCrypto.
+   * where the browser has no WebCrypto, and false without one for a guest.
    */
+  // Spec: private-rooms/key-management, "Key generation is withheld from guests"
   const offerKeyGeneration = () => {
+    if (isGuest) return false;
     if (!hasPrivateRoomSecureContext()) {
       toastr.error(t("Common:EncryptionRequiresHttps"));
       return false;
@@ -102,6 +107,7 @@ export function usePrivateRoomKeyGate({
 
   const confirmKeyGeneration = () => {
     setKeyConfirmVisible(false);
+    if (isGuest) return;
     generateKey.request();
   };
 

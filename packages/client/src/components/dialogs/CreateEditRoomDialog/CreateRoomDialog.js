@@ -90,6 +90,7 @@ const CreateRoomDialog = ({
   encryptionKeys,
   userId,
   accountEmail,
+  isGuest,
   setUserEncryptionKeys,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -172,6 +173,7 @@ const CreateRoomDialog = ({
     userId,
     accountLabel: accountEmail,
     hasExistingKeys: !!encryptionKeys?.length,
+    isGuest,
     refreshKeysFromServer,
     onKeyGenerated: () => {
       if (!isMountRef.current) return;

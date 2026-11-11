@@ -81,7 +81,7 @@ None.
   2026-11-06"). Not addressed there, as the commit says itself: a subfolder
   of a private room still goes to Trash, and a private room or its subfolder
   can still be added to Favorites.
-- **ui-kit (`docspace-ui-kit-react`, `release/v4.1.0`):** `FolderType.PrivateRooms = 42`.
+- **ui-kit (`docspace-ui-kit-react`, `release/v4.1.0`):** `FolderType.PrivateRooms = 42`, and a Private entry in the files selector, without which no private room can be picked as a copy destination (design decision 6).
 - **Client:**
   - `packages/client/src/components/ClientArticleSidebar`
   - `packages/client/src/pages/Home/Hooks/useFiles.ts` and

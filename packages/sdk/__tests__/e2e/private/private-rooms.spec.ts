@@ -935,7 +935,7 @@ test.describe("(private) — create / upload / download / preview", () => {
       .toBe(1);
   });
 
-  // Spec: editor-integration, "SDK does not open encrypted files in the editor"
+  // Spec: editor-integration, "SDK opens encrypted files only with the Document Server capability"
   test("Open from the SDK", async ({ page, baseUrl, port, mockBoth }) => {
     await serveRooms(mockBoth, port);
     mockBoth(

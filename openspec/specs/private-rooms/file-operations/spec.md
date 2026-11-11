@@ -322,7 +322,7 @@ The system SHALL allow copying an encrypted file to the root of the same private
 - **THEN** the copy is stored as "Report (2).docx" and no conflict dialog is shown
 
 #### Scenario: Duplicate started outside the room
-- **WHEN** an encrypted file is duplicated from a list outside its room, such as Recent
+- **WHEN** an encrypted file is duplicated while the open folder is not its private room
 - **THEN** the copy is encrypted for the file's room as a Duplicate inside the room would be, and its content MUST NOT be sent as plaintext
 
 ### Requirement: Duplicate of an encrypted file follows the move right
@@ -500,7 +500,7 @@ The system SHALL, for "Open location" on an encrypted file, navigate to the pare
 - **THEN** the parent folder opens with the file highlighted via client-side search
 
 ### Requirement: Feeds show resolved names
-The system SHALL show the decrypted display name of encrypted files in Recent, History and New-files feeds and in notifications that name a file, recovering the name from the file header when it is not cached and the identity is unlocked; while locked or before recovery completes the opaque name is shown.
+The system SHALL show the decrypted display name of encrypted files in the History and New-files feeds and in notifications that name a file, recovering the name from the file header when it is not cached and the identity is unlocked; while locked or before recovery completes the opaque name is shown. Recent is not one of these feeds: the server never records an encrypted file as recent.
 
 #### Scenario: History tab
 - **WHEN** the History tab of a private room is opened with the identity unlocked
@@ -513,6 +513,10 @@ The system SHALL show the decrypted display name of encrypted files in Recent, H
 #### Scenario: Identity locked
 - **WHEN** a feed lists encrypted files while the identity is locked
 - **THEN** the opaque names are shown and no unlock prompt is raised by the feed itself
+
+#### Scenario: Recent after opening an encrypted file
+- **WHEN** the user opens an encrypted file and then opens Recent
+- **THEN** the encrypted file is not listed there
 
 ### Requirement: Forms are not fillable in private rooms
 The system SHALL NOT offer fill-form, start-filling, filling-status, stop-filling, make-form or submit-to-gallery for an encrypted file.
@@ -794,3 +798,10 @@ The SDK SHALL take the cancel signal of every file of an encrypted upload batch 
 #### Scenario: File cancelled while waiting
 - **WHEN** a user uploads two files into a private room through the SDK and cancels the second while the first is still uploading
 - **THEN** the second file is not uploaded, no file is created for it, and its row is gone
+
+### Requirement: Key writes are left out of the History tab
+The system SHALL leave the file-keys-issued entry the server lists in a file's and a folder's history (action FileKeysSet, 5164) out of the History tab of a private room and of its files, rendering the other entries as before; the write stays in the audit trail with its recipients.
+
+#### Scenario: Key write listed
+- **WHEN** the history of a private room or of one of its files carries a file-keys-issued entry
+- **THEN** the tab shows nothing for it and the other entries as usual

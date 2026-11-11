@@ -157,6 +157,42 @@ recorded.
   not available, a Rooms request carries no filter and now lists no private
   room (proposal decision 5).
 
+### Destination picker, stand check of 2026-11-11
+
+Checked on `tests.onlyoffice.io` (DocSpace 4.1.0.12366, Document Server
+10.0.3.19) as an owner of two private rooms, after the rooms list mocks were
+made to mirror the server and six cases of
+`packages/client/__tests__/private-room-cross-room-copy.spec.ts` failed on
+them. Nothing was copied.
+
+- **No private room can be picked.** The Copy dialog opened on a file of a
+  private room shows the path "Apps → Rooms → the room". Its Rooms level
+  finds the other private room neither in the list nor by search, and the
+  root level lists rooms only, with no Private entry.
+- **The request.** The selector sent
+  `GET files/rooms?type=2&type=5&type=6&type=8&count=100&startIndex=0&filterValue=`,
+  with no search area and no privacy filter. The server reads a missing area
+  as `Active` (`VirtualRoomsController.cs:1494`) and forces the non-private
+  filter on it (`FileSecurity.GetVirtualRoomsAsync`, `FileSecurity.cs:2981-2993`),
+  so the answer held 95 rooms and no private one. The source room is not in
+  it either.
+- **The server side is there.** On the same portal `searchArea=PrivateRooms`
+  and `searchArea=Active&privacyFilter=1` both answer the two private rooms,
+  and `GET files/@root` lists the Private root (`rootFolderType` 42) with
+  them.
+- **Where the request is built.** In the kit: `useRoomsHelper`
+  (`selectors/utils/hooks/useRoomsHelper.tsx`) passes room types and a search
+  area only for the Forms and AI rooms sections, and `useRootHelper`
+  (`selectors/Files/hooks/useRootHelper.tsx`) builds the root list from the
+  root folder types it knows, adding Forms as an entry off the Rooms root.
+- **Also seen.** The root of the path is labelled "Apps" in the Russian
+  interface, and a search typed at the root level sends no request.
+
+So a copy into another private room, which the main spec `file-operations`
+offers ("Copy into another private room needs access to it"), has had no
+reachable destination on a real portal since `c866c055e1`. The former mocks
+listed private rooms in the Rooms area and hid it.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -225,6 +261,16 @@ recorded.
    `RoomSearchArea.PrivateRooms` is added in this repository's enums.
    Alternative: a local constant in shared. Rejected: the enum is shared by
    every app.
+6. **The destination picker lists private rooms under a Private entry, built
+   in the kit.** The files selector is the kit's, and it already shows a
+   section that lives off the Rooms root as an entry of its own: Forms. The
+   Private section takes the same shape, behind an opt-in of the host, and
+   lists through `searchArea=PrivateRooms` ("Destination picker, stand check
+   of 2026-11-11"). The client opts in for a Copy from a private room only:
+   a transfer into a private room from outside is refused, and a Move stays
+   in its room. Alternative: send `privacyFilter=Private` with the selector's
+   Rooms request for a private source. Rejected: it would show private rooms
+   under Rooms, where no other list of the client shows them.
 
 ## Risks / Trade-offs
 

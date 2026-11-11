@@ -34,12 +34,15 @@
  */
 
 import { getFilePublicKeys, getRoomEncryptionKeys } from "../../api/privacy";
-import type { TEncryptionKeyPair } from "../../api/privacy/types";
+import type {
+  TEncryptionKeyPair,
+  TMemberEncryptionKey,
+} from "../../api/privacy/types";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import { selectUserKey } from "../encryption/select-user-key";
 
 const toMemberKeys = (
-  keys: TEncryptionKeyPair[] | undefined,
+  keys: TMemberEncryptionKey[] | undefined,
 ): RoomMemberPublicKey[] => {
   const list: RoomMemberPublicKey[] = [];
   if (!Array.isArray(keys)) return list;

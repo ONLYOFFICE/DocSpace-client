@@ -92,6 +92,11 @@ export type PrivacyroomHandlerHandle = {
   getKeys: () => TEncryptionKeyPair[];
   /** All requests observed since this handler set was installed. */
   getRequests: () => RequestLog[];
+  /**
+   * Makes the caller a guest, whom the server refuses every key write
+   * (DemandKeyOwnerAsync); `reset` makes them a user again.
+   */
+  setGuest: (isGuest: boolean) => void;
   /** Drops every key and request, back to a user who never stored a key. */
   reset: () => void;
 };
@@ -101,6 +106,8 @@ export type PrivacyroomHandlersOptions = {
   initial?: TEncryptionKeyPair[];
   /** Auth user id to put on freshly created keys. */
   userId?: string;
+  /** The caller is a guest (see `setGuest`). */
+  isGuest?: boolean;
   /** Optional handle the caller can read after interaction. */
   handle?: { current: PrivacyroomHandlerHandle | null };
 };
@@ -120,6 +127,18 @@ const blankHalf = (body: KeyRequestBody): string | null => {
   return null;
 };
 
+/**
+ * EncryptionLoginProvider.MaxProfileLength: the stored sign-in profile holds
+ * the encrypted key set, and a longer one is refused (ArgumentException ->
+ * 400) before anything is stored. The mock cannot encrypt, so it measures the
+ * key set's JSON; the encrypted profile is longer, so the server refuses at
+ * least every set the mock refuses.
+ */
+const MAX_PROFILE_LENGTH = 65535;
+const tooLarge = (keys: TEncryptionKeyPair[]) =>
+  new TextEncoder().encode(JSON.stringify(keys)).length > MAX_PROFILE_LENGTH;
+const TOO_LARGE_MESSAGE = "The encryption keys are too large to be stored";
+
 export const privacyroomKeysHandlers = (
   port: string,
   opts: PrivacyroomHandlersOptions = {},
@@ -130,15 +149,20 @@ export const privacyroomKeysHandlers = (
   let hasRecord = state.length > 0;
   const requests: RequestLog[] = [];
   const userId = opts.userId ?? DEFAULT_USER_ID;
+  let isGuest = !!opts.isGuest;
 
   if (opts.handle) {
     opts.handle.current = {
       getKeys: () => [...state],
       getRequests: () => [...requests],
+      setGuest: (value) => {
+        isGuest = value;
+      },
       reset: () => {
         state.length = 0;
         requests.length = 0;
         hasRecord = false;
+        isGuest = !!opts.isGuest;
       },
     };
   }
@@ -169,19 +193,26 @@ export const privacyroomKeysHandlers = (
 
     /**
      * Mirrors PrivacyRoomControllerCommon.SetKeys -> CreateKeyPairAsync
-     * (HttpPost "keys"): 201 with the full list; 409 for an id already stored;
-     * 400 for a blank half. A missing id binds to Guid.Empty.
+     * (HttpPost "keys"): 201 with the full list; in the server's order, 403 for
+     * a guest (DemandKeyOwnerAsync), 400 for a blank half, 409 for an id
+     * already stored, 400 for a set too large to store (SetKeysAsync). A
+     * missing id binds to Guid.Empty.
      */
     http.post(base, async ({ request }) => {
       const body = (await request.json()) as KeyRequestBody;
       requests.push({ method: "POST", url: base, body });
+      if (isGuest) return errorResponse(403, "Access denied");
       const invalid = blankHalf(body);
       if (invalid) return errorResponse(400, invalid);
       const id = body.id ?? EMPTY_GUID;
       if (state.some((k) => k.id === id)) {
         return errorResponse(409, `The encryption key ${id} already exists`);
       }
-      state.push(toStored(id, body));
+      const stored = toStored(id, body);
+      if (tooLarge(state.concat(stored))) {
+        return errorResponse(400, TOO_LARGE_MESSAGE);
+      }
+      state.push(stored);
       hasRecord = true;
       return okResponse([...state], 201);
     }),
@@ -189,11 +220,13 @@ export const privacyroomKeysHandlers = (
     /**
      * Mirrors PrivacyRoomControllerCommon.ReplaceKey -> ReplaceKeyPairAsync
      * (HttpPut "keys"): replaces the entry in place and answers the full list;
-     * 404 for an id not stored; 400 for a blank half.
+     * in the server's order, 403 for a guest, 400 for a blank half, 404 for
+     * an id not stored, 400 for a set too large to store.
      */
     http.put(base, async ({ request }) => {
       const body = (await request.json()) as KeyRequestBody;
       requests.push({ method: "PUT", url: base, body });
+      if (isGuest) return errorResponse(403, "Access denied");
       const invalid = blankHalf(body);
       if (invalid) return errorResponse(400, invalid);
       const id = body.id ?? EMPTY_GUID;
@@ -201,17 +234,22 @@ export const privacyroomKeysHandlers = (
       if (index < 0) {
         return errorResponse(404, `The encryption key ${id} is not found`);
       }
-      state[index] = toStored(id, body);
+      const stored = toStored(id, body);
+      const next = state.map((k, i) => (i === index ? stored : k));
+      if (tooLarge(next)) return errorResponse(400, TOO_LARGE_MESSAGE);
+      state[index] = stored;
       return okResponse([...state]);
     }),
 
     /**
      * Mirrors PrivacyRoomControllerCommon.DeleteKeys -> DeleteAsync
-     * (HttpDelete "keys/{id}"): 204 with no body; 404 for an id not stored.
+     * (HttpDelete "keys/{id}"): 204 with no body; 403 for a guest
+     * (DemandKeyOwnerAsync), 404 for an id not stored.
      */
     http.delete(`${base}/:keyId`, ({ params }) => {
       const keyId = String(params.keyId);
       requests.push({ method: "DELETE", url: `${base}/${keyId}` });
+      if (isGuest) return errorResponse(403, "Access denied");
       const index = state.findIndex((k) => k.id === keyId);
       if (index < 0) {
         return errorResponse(404, `The encryption key ${keyId} is not found`);
@@ -363,7 +401,7 @@ export const privacyroomAccessHandlers = (
         }
         const members = new Set((keys ?? []).map((k) => String(k.userId)));
         if (!members.has(callerId) && !accessManagers.get(id)?.has(callerId)) {
-          return errorResponse(403, "You don't have enough permission to edit the file");
+          return errorResponse(403, "Access denied");
         }
         if (nonPrivateRooms.has(id)) {
           return errorResponse(400, "This action is only available in a private room");
@@ -373,7 +411,7 @@ export const privacyroomAccessHandlers = (
           ? managers.has(callerId)
           : members.has(callerId);
         if (archivedRooms.has(id) || !mayInvite) {
-          return errorResponse(403, "You don't have enough permission to perform the operation");
+          return errorResponse(403, "Access denied");
         }
         const guidRe =
           /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

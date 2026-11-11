@@ -952,6 +952,7 @@
   "EnableNotifications": "Omogući notifikacije",
   "EnableThirdPartyIntegration": "Zamolite vlasnika ili superadministratora da uključi odgovarajuću uslugu u odeljku Integracija u podešavanjima radnog prostora.",
   "EnableWebSearchInBilling": "Omogućite pretragu na webu u odeljku Računovanje",
+  "EncryptedAccessChangeRefused": "Pristup nije promenjen: član nema ključeve za šifrovanje.",
   "EncryptedAccessPending": "Pristup na čekanju",
   "EncryptedAccessRestored": "Korisnik {{user}} sada ima pristup svim šifrovanim fajlovima u sobi.",
   "EncryptedChangeOwnerKeyMismatch": "Nije moguće preneti vlasništvo na korisnika {{user}}: njihov ključ za šifrovanje se promenio i nije bio pouzdan. Ponovo verifikujte ključ i pokušajte ponovo.",

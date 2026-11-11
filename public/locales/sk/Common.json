@@ -952,6 +952,7 @@
   "EnableNotifications": "Vypnúť upozornenia",
   "EnableThirdPartyIntegration": "Požiadajte prosím majiteľa alebo supersprávcu, aby zapnul príslušnú službu v sekcii Integrácia v nastaveniach pracovného priestoru.",
   "EnableWebSearchInBilling": "Povoľte hľadanie v sieti v sekcii Fakturácia",
+  "EncryptedAccessChangeRefused": "Prístup nebol zmenený: člen nemá šifrovacie kľúče.",
   "EncryptedAccessPending": "Prístup čaká na vybavenie",
   "EncryptedAccessRestored": "Používateľ {{user}} má teraz prístup ku všetkým zašifrovaným súborom v miestnosti.",
   "EncryptedChangeOwnerKeyMismatch": "Nie je možné preniesť vlastníctvo na {{user}}: ich šifrovací kľúč sa zmenil a nebol dôveryhodný. Overte kľúč znova a skúste znova.",

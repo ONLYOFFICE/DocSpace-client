@@ -952,6 +952,7 @@
   "EnableNotifications": "Activare notificări",
   "EnableThirdPartyIntegration": "Rugați proprietarul sau superadministratorul să activeze serviciul corespunzător în secțiunea Integrare din setările spațiului de lucru.",
   "EnableWebSearchInBilling": "Activați căutarea web în Facturare",
+  "EncryptedAccessChangeRefused": "Accesul nu a fost modificat: membrul nu are chei de criptare.",
   "EncryptedAccessPending": "Acces în aşteptare",
   "EncryptedAccessRestored": "{{user}} are acum acces la toate fișierele criptate din sală.",
   "EncryptedChangeOwnerKeyMismatch": "Nu se poate transfera proprietatea către {{user}}: cheia lor de criptare s-a schimbat și nu a fost de încredere. Re-verificați cheia și încercați din nou.",

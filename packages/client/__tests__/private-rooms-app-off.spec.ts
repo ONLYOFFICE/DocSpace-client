@@ -129,14 +129,30 @@ test.describe("Private rooms with the E2E rooms app off", () => {
 
     await page.goto(`${baseUrl}${ROOMS_URL}filter`);
 
-    await expect(roomLink(page, "Existing Private Room")).toBeVisible({
+    await expect(roomLink(page, "Ordinary Room")).toBeVisible({
       timeout: 15000,
     });
-    await expect(roomLink(page, "Ordinary Room")).toBeVisible();
+    await expect(roomLink(page, "Existing Private Room")).toHaveCount(0);
     await expect(navItem(page, "forms")).toBeVisible();
     await expect(navItem(page, "private-rooms")).toHaveCount(0);
     for (const params of roomsRequests)
       expect(params.has("privacyFilter")).toBe(false);
+
+    // The shared Archive holds private rooms too, so its request keeps the
+    // non-private filter (RoomPrivacyFilter.NotPrivate).
+    roomsRequests.length = 0;
+    await page.goto(`${baseUrl}/rooms/archived/filter`);
+
+    await expect(roomLink(page, "Ordinary Room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(roomLink(page, "Existing Private Room")).toHaveCount(0);
+    const archiveRequests = roomsRequests.filter(
+      (params) => params.get("searchArea") === "Archive",
+    );
+    expect(archiveRequests.length).toBeGreaterThan(0);
+    for (const params of archiveRequests)
+      expect(params.get("privacyFilter")).toBe("2");
 
     await page.goto(`${baseUrl}/e2e-rooms`);
 

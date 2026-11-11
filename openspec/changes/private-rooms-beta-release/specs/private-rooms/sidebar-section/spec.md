@@ -34,7 +34,7 @@ The system SHALL make the Private section available while the E2E rooms app is o
 
 #### Scenario: App switched off on a standalone portal
 - **WHEN** an administrator switches the E2E rooms app off while the section is shown
-- **THEN** the section disappears without a reload, and the Rooms section lists private rooms again
+- **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
 
 ### Requirement: Private addresses open in Rooms while the section is not available
 The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
@@ -49,6 +49,31 @@ The system SHALL title the E2E rooms app Common:Private in the apps catalog, the
 #### Scenario: Catalog on a standalone portal
 - **WHEN** an administrator of a standalone portal opens the apps settings
 - **THEN** the E2E rooms app is listed as Common:Private with its description, and can be switched off and on
+
+## MODIFIED Requirements
+
+### Requirement: Rooms section excludes private rooms while the section is available
+The system SHALL request the Rooms list and Rooms → Archive with the privacy filter NotPrivate while the Private section is available, so a private room is listed only in its own section. While the section is not available, the Rooms list SHALL carry no privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive SHALL keep the filter NotPrivate, so private rooms are listed nowhere.
+
+#### Scenario: Section available
+- **WHEN** the user opens Rooms or Rooms → Archive while the section is available
+- **THEN** the request carries `privacyFilter=NotPrivate` and no private room is listed
+
+#### Scenario: Section not available
+- **WHEN** the user opens Rooms or Rooms → Archive while the section is not available
+- **THEN** the Rooms request carries no privacy filter, the Rooms → Archive request carries `privacyFilter=NotPrivate`, and no private room is listed
+
+#### Scenario: Address asks Rooms for private rooms
+- **WHEN** a Rooms address carrying `privacyFilter=Private` is opened while the section is available
+- **THEN** the request carries `privacyFilter=NotPrivate`
+
+#### Scenario: Room group opened in Rooms
+- **WHEN** a room group that contains private rooms is opened in Rooms while the section is available
+- **THEN** the private rooms of that group are not listed
+
+#### Scenario: Room group editor in Rooms
+- **WHEN** the user edits the room groups of the Rooms section while the Private section is available
+- **THEN** private rooms are not offered for grouping
 
 ## REMOVED Requirements
 

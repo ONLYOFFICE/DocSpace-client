@@ -458,6 +458,43 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     expect(body.response[0].privateKeyEnc).toBe("ENC-A");
     expect(body.response[1]).not.toHaveProperty("privateKeyEnc");
   });
+
+  const key = (userId: string, id: string) => ({
+    id,
+    userId,
+    publicKey: `PK-${id}`,
+    privateKeyEnc: "",
+    date: "",
+    cryptoEngineId: "",
+  });
+  const userIdsOf = async (fileId: number) =>
+    (
+      (await (await fetch(PUBLIC_KEYS_URL(fileId))).json()) as {
+        response: Array<{ userId: string }>;
+      }
+    ).response
+      .map((k) => k.userId)
+      .sort();
+
+  it("Room owner who did not create the file", async () => {
+    handle.current!.setFiles([
+      { id: 9, title: "s.txt", encrypted: true, createdBy: BOB_ID },
+    ]);
+    handle.current!.setRoomUserKeys([key(ALICE_ID, "a"), key(BOB_ID, "b")]);
+
+    expect(await userIdsOf(9)).toEqual([BOB_ID]);
+  });
+
+  it("Creator who left the room", async () => {
+    const creatorId = "44444444-4444-4444-4444-444444444444";
+    handle.current!.setFiles([
+      { id: 10, title: "s.txt", encrypted: true, createdBy: creatorId },
+    ]);
+    handle.current!.setRoomUserKeys([key(ALICE_ID, "a"), key(BOB_ID, "b")]);
+    handle.current!.setNonMemberKeys([key(creatorId, "c")]);
+
+    expect(await userIdsOf(10)).toEqual([BOB_ID, creatorId].sort());
+  });
 });
 
 const CAROL_ID = "33333333-3333-3333-3333-333333333333";
@@ -1730,7 +1767,7 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
 
     expect(status).toBe(403);
     expect(body.error.message).toBe(
-      "You don't have enough permission to move the folder",
+      "Access denied",
     );
   });
 
@@ -1742,7 +1779,7 @@ describe("encryptedFiles mock — moves inside a private room (mirrors Operation
 
     expect(status).toBe(403);
     expect(body.error.message).toBe(
-      "You don't have enough permission to move the folder",
+      "Access denied",
     );
   });
 

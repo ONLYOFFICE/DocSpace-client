@@ -956,6 +956,7 @@
   "EnableNotifications": "Enable notifications",
   "EnableThirdPartyIntegration": "Please ask the owner or Full admin to enable the corresponding service in the Integration section of the workspace Settings.",
   "EnableWebSearchInBilling": "Enable web search in Billing",
+  "EncryptedAccessChangeRefused": "Access not changed: the member has no encryption keys.",
   "EncryptedAccessPending": "Access pending",
   "EncryptedAccessRestored": "{{user}} now has access to every encrypted file in the room.",
   "EncryptedChangeOwnerKeyMismatch": "Cannot transfer ownership to {{user}}: their encryption key has changed and was not trusted. Re-verify the key and try again.",

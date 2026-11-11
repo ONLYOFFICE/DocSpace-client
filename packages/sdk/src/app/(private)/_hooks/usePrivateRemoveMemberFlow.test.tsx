@@ -109,7 +109,12 @@ describe("usePrivateRemoveMemberFlow", () => {
   it("Remove a member", async () => {
     render();
 
-    await act(() => flow.remove({ roomId: 10, userId: "bob" }));
+    let removed = false;
+    await act(async () => {
+      removed = await flow.remove({ roomId: 10, userId: "bob" });
+    });
+
+    expect(removed).toBe(true);
 
     expect(mocks.setRoomSecurity).toHaveBeenCalledWith(10, {
       invitations: [{ id: "bob", access: ShareAccessRights.None }],
@@ -139,8 +144,32 @@ describe("usePrivateRemoveMemberFlow", () => {
     });
     render();
 
-    await act(() => flow.remove({ roomId: 10, userId: "bob" }));
+    let removed = true;
+    await act(async () => {
+      removed = await flow.remove({ roomId: 10, userId: "bob" });
+    });
 
     expect(mocks.toastr.error).toHaveBeenCalledWith("Common:EncryptionError");
+    expect(removed).toBe(false);
+  });
+
+  it("Removal or role change refused", async () => {
+    mocks.setRoomSecurity.mockImplementation(async () => {
+      throw Object.assign(new Error("The user does not have an encryption key"), {
+        response: { status: 403 },
+      });
+    });
+    render();
+
+    let removed = true;
+    await act(async () => {
+      removed = await flow.remove({ roomId: 10, userId: "bob" });
+    });
+
+    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedAccessChangeRefused",
+    );
+    expect(removed).toBe(false);
   });
 });

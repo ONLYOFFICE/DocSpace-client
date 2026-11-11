@@ -306,8 +306,8 @@ export type TRoomsRequestScope = {
 /**
  * What a rooms-list request must carry for the address it was made from. The
  * Private section lists only private rooms, in the area its address names;
- * while that section is available, Rooms and Rooms -> Archive list none.
- * Templates, Forms and AI agents searches are left alone.
+ * Rooms and Rooms -> Archive list none, whether that section is available or
+ * not. Templates, Forms and AI agents searches are left alone.
  */
 const getRoomsRequestScope = (
   categoryType: ValueOf<typeof CategoryType>,
@@ -334,7 +334,16 @@ const getRoomsRequestScope = (
         !searchArea ||
         searchArea === RoomSearchArea.Active ||
         searchArea === RoomSearchArea.Archive;
-      return isPrivateRoomsSectionAvailable && isRoomsArea
+      if (!isRoomsArea) return null;
+
+      // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available"
+      const isArchive =
+        searchArea === RoomSearchArea.Archive ||
+        (!searchArea &&
+          (categoryType === CategoryType.Archive ||
+            categoryType === CategoryType.ArchivedRoom));
+
+      return isPrivateRoomsSectionAvailable || isArchive
         ? { privacyFilter: RoomPrivacyFilter.NotPrivate }
         : null;
     }

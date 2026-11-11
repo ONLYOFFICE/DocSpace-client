@@ -27,7 +27,7 @@ The system SHALL make the Private section available while the private rooms port
 
 #### Scenario: App switched off on a standalone portal
 - **WHEN** an administrator switches the E2E rooms app off while the section is shown
-- **THEN** the section disappears without a reload, and the Rooms section lists private rooms again
+- **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
 
 ## REMOVED Requirements
 

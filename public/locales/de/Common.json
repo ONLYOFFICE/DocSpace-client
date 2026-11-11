@@ -952,6 +952,7 @@
   "EnableNotifications": "Benachrichtigungen einschalten",
   "EnableThirdPartyIntegration": "Bitten Sie den Besitzer oder Super-Administrator, den entsprechenden Dienst im Abschnitt Integration der Arbeitsbereichseinstellungen zu aktivieren.",
   "EnableWebSearchInBilling": "Websuche in der Abrechnung aktivieren",
+  "EncryptedAccessChangeRefused": "Zugriff nicht geändert: Das Mitglied hat keine Verschlüsselungsschlüssel.",
   "EncryptedAccessPending": "Zugriff ausstehend",
   "EncryptedAccessRestored": "{{user}} hat jetzt Zugriff auf alle verschlüsselten Dateien im Raum.",
   "EncryptedChangeOwnerKeyMismatch": "Eigentumsübertragung an {{user}} nicht möglich: Ihr Verschlüsselungsschlüssel hat sich geändert und wurde nicht als vertrauenswürdig eingestuft. Überprüfen Sie den Schlüssel erneut und versuchen Sie es noch einmal.",

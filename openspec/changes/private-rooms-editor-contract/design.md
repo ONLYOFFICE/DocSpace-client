@@ -904,6 +904,46 @@ release, one user holding a key, the device remembered):
   browser. Recorded in `private-rooms-ai-integration` (design.md,
   Context) as a path that exists outside the client's control.
 
+### Release stand check of 2026-11-10
+
+Observed by the review of 2026-11-10 on `tests.onlyoffice.io` (DocSpace
+`4.1.0.12351`, Document Server `10.0.3.19`); recorded here on 2026-11-11
+without a new run.
+
+- **Reopening after a save (task 6.2).** After a save, `openedit` answers
+  the document key of version 1 for editing while the file is at version 2,
+  and another key for viewing. This holds for docx, xlsx, pptx and PDF, but
+  only a docx fails to open, with error -82, for the room owner and for an
+  invited member alike. A document saved on 2026-11-06 still did not open
+  for editing on 2026-11-10. The words "with a new document key" in the
+  record of 2026-11-06 are not exact: the key is the one of the earlier
+  version. Task 6.2 is accepted when a docx opens for editing after
+  "create, edit, save, close", and `document.key` of `openedit`, taken
+  before and after the save for the four types, belongs to the same
+  version as the document address it comes with.
+- **Question for the Document Server team (task 6.2).** Confirm that -82
+  comes from this mismatch of key and version, and say why a spreadsheet
+  and a presentation open with the same mismatch. Done when the answer is
+  recorded here with its date.
+- **Crypto library build (task 1.2).** The stand serves
+  `onlyoffice-crypto.js` with a SHA-256 starting `58cb7f48`, which
+  `contract-v1.md` lists as build 2.0.0. The contract asks for 2.1.0 or
+  later and the client is built against 2.2.0 (`LIBRARY_VERSION`). One
+  consequence seen: after a save in the editor the flags byte of a PDF form
+  changes from 3 to 1, and the form opens for commenting. Asked of the
+  Document Server team: ship 2.2.0, and give a way to read the library
+  version, so the server probe can compare a version and not only find the
+  file. Accepted when the hash on the stand is the one of build 2.2.0 and a
+  PDF form keeps its form flag over a save.
+- **Unstable spreadsheet opening (task 4.7), a weak observation.** One of
+  four reopenings of an xlsx answered "An error occurred while opening the
+  file"; a reload helped and the error code was not taken. It may be the
+  join race of DS-17. Nothing is asked yet; the next run of 4.7 takes the
+  code, or sees ten openings in a row without the failure.
+- **No answer on record (tasks 1.2 and 1.6).** The artifacts hold no reply
+  to the package of 2026-10-30, and "Minimum Document Server" in
+  `contract-v1.md` is empty.
+
 ## Goals / Non-Goals
 
 **Goals:**

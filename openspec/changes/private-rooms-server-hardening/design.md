@@ -691,6 +691,23 @@ six encrypted files, no subfolder); no data was changed:
     refuses neither at creation (`FileStorageService.cs:666-690`,
     `:1220-1230`), so task 12.8 stays open.
 
+### Release stand check (2026-11-10, `tests.onlyoffice.io`)
+
+Observed by the review of 2026-11-10 (DocSpace `4.1.0.12351`, Document
+Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
+
+- **AI tools in the editor (task 16.1).** For an encrypted docx, xlsx,
+  pptx and PDF form the editor configuration carries
+  `customization.ai.disabled: false`, and the editor shows its AI tools
+  tab. The task is accepted when the configuration of an encrypted file
+  carries `customization.ai.disabled: true` and the tab is gone.
+- **Letter labels (task 4.5).** The Russian interface shows the labels of
+  the server in English; `PrivateRoomTitle` and `PrivateFolderTitle` are
+  translated for the default culture only. The task is accepted when the
+  labels of the letters arrive in the user's language. The title of the
+  section root and the reason of a refusal are tasks of
+  `private-rooms-server-followups`.
+
 ## Goals / Non-Goals
 
 **Goals:**

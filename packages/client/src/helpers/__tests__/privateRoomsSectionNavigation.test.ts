@@ -52,6 +52,7 @@ import {
   getPrivateAddressOfE2eRoomsAddress,
   getRoomsAddressOfPrivateAddress,
   getSectionAddressCorrection,
+  isKeysManagementAvailable,
   isPrivateRoomsListRoot,
   type TSectionDecision,
 } from "../privateRoomsSection";
@@ -325,3 +326,19 @@ describe("E2E rooms bookmarks", () => {
   });
 });
 
+describe("Keys management tab follows the Private section", () => {
+  const KEYS = [{ id: "key-1" }];
+
+  it.each([
+    ["Section available", true, [], false, true],
+    ["App off, no key", false, [], false, false],
+    ["App off, key held", false, KEYS, false, true],
+    ["Guest", true, [], true, false],
+    ["Guest holding a key", false, KEYS, true, false],
+    ["user not loaded yet", true, null, undefined, true],
+  ])("%s", (_name, isSectionAvailable, keys, isGuest, expected) => {
+    expect(isKeysManagementAvailable(isSectionAvailable, keys, isGuest)).toBe(
+      expected,
+    );
+  });
+});

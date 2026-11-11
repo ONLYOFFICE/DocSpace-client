@@ -63,6 +63,7 @@ import {
   validateMembersForEncryption,
 } from "../room-encryption";
 import {
+  loadPendingAccess,
   prepareNewOwner,
   retryPendingAccess,
   rewrapForInvitedMembers,
@@ -776,5 +777,97 @@ describe("rewrapPendingAccessOfMember", () => {
     expect(second).toBeNull();
     expect((await first)?.level).toBe("success");
     expect(rewrapMissingFilesForMember).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("loadPendingAccess", () => {
+  const OTHER_ROOM_ID = 9200;
+  const forget = () => {
+    for (const roomId of [ROOM_ID, OTHER_ROOM_ID]) {
+      for (const userId of ["u-ann", "u-bob"]) {
+        pendingAccessStore.clear(roomId, userId);
+      }
+    }
+  };
+
+  beforeEach(forget);
+  afterEach(forget);
+
+  it("Marker after a reload", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2] },
+    ]);
+
+    await loadPendingAccess(ROOM_ID);
+
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(ROOM_ID);
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toEqual({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: [1, 2],
+    });
+    expect(pendingAccessStore.get(ROOM_ID, "u-ann")).toBeUndefined();
+  });
+
+  it("Member who misses nothing any more", async () => {
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: "all",
+    });
+    pendingAccessStore.record({
+      roomId: OTHER_ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: [7],
+    });
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([]);
+
+    await loadPendingAccess(ROOM_ID);
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeUndefined();
+    expect(pendingAccessStore.get(OTHER_ROOM_ID, "u-bob")?.missingFileIds).toEqual(
+      [7],
+    );
+  });
+
+  it("Caller who may not read the list", async () => {
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: [3],
+    });
+    vi.mocked(getRoomMissingFileKeys).mockRejectedValue({
+      response: { status: 403 },
+    });
+
+    await loadPendingAccess(ROOM_ID);
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toEqual([
+      3,
+    ]);
+  });
+
+  it("Record written while the list was loading", async () => {
+    let answer!: (list: { userId: string; fileIds: number[] }[]) => void;
+    vi.mocked(getRoomMissingFileKeys).mockReturnValue(
+      new Promise((resolve) => {
+        answer = resolve;
+      }),
+    );
+
+    const loading = loadPendingAccess(ROOM_ID);
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-ann",
+      missingFileIds: [5],
+    });
+    pendingAccessStore.clear(ROOM_ID, "u-bob");
+    answer([{ userId: "u-bob", fileIds: [1] }]);
+    await loading;
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-ann")?.missingFileIds).toEqual([
+      5,
+    ]);
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeUndefined();
   });
 });

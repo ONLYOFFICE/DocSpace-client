@@ -89,6 +89,22 @@ describe("usePrivateRoomKeyGate", () => {
     expect(onClose).not.toHaveBeenCalled();
   });
 
+  it("Guest reaches the key offer of room creation", () => {
+    renderGate({ hasExistingKeys: false, isGuest: true });
+
+    let offered = true;
+    act(() => {
+      offered = gate.offerKeyGeneration();
+    });
+
+    expect(offered).toBe(false);
+    expect(gate.keyConfirmVisible).toBe(false);
+
+    act(() => gate.confirmKeyGeneration());
+
+    expect(captured.passphrase).toBeNull();
+  });
+
   it("Key already exists", () => {
     renderGate({ hasExistingKeys: true });
 

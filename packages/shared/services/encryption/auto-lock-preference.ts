@@ -38,17 +38,18 @@ const LEGACY_AUTO_LOCK_TIMEOUT_KEY = "encryption-auto-lock-timeout-seconds";
 
 export const AUTO_LOCK_TIMEOUT_KEY = LEGACY_AUTO_LOCK_TIMEOUT_KEY;
 
+// Spec: private-rooms/key-management, "Auto-lock timeout presets"
 export const AUTO_LOCK_PRESETS = [
-  { id: "off", seconds: 0 },
-  { id: "5m", seconds: 300 },
-  { id: "15m", seconds: 900 },
-  { id: "30m", seconds: 1800 },
-  { id: "1h", seconds: 3600 },
+  { id: "5m", seconds: 300, locksWhenTabHidden: true },
+  { id: "15m", seconds: 900, locksWhenTabHidden: true },
+  { id: "30m", seconds: 1800, locksWhenTabHidden: false },
 ] as const;
 
 export type AutoLockPresetId = (typeof AUTO_LOCK_PRESETS)[number]["id"];
 
-export const DEFAULT_AUTO_LOCK_SECONDS = 0;
+const DEFAULT_AUTO_LOCK_PRESET_ID: AutoLockPresetId = "30m";
+
+export const DEFAULT_AUTO_LOCK_SECONDS = 1800;
 
 const MAX_AUTO_LOCK_SECONDS = 24 * 60 * 60;
 
@@ -119,5 +120,11 @@ export function setAutoLockPreset(id: AutoLockPresetId): void {
 export function getCurrentAutoLockPresetId(): AutoLockPresetId {
   const seconds = getAutoLockTimeoutSeconds();
   const exact = AUTO_LOCK_PRESETS.find((p) => p.seconds === seconds);
-  return exact?.id ?? "off";
+  return exact?.id ?? DEFAULT_AUTO_LOCK_PRESET_ID;
+}
+
+/** Whether the chosen preset locks the identity as soon as the tab is hidden. */
+export function locksWhenTabHidden(): boolean {
+  const id = getCurrentAutoLockPresetId();
+  return !!AUTO_LOCK_PRESETS.find((p) => p.id === id)?.locksWhenTabHidden;
 }

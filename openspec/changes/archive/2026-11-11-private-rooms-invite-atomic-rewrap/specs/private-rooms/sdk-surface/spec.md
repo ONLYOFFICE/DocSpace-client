@@ -37,6 +37,17 @@ The SDK SHALL show a member of a private room for whom some files could not be r
 - **WHEN** a user who may edit the room retries a pending member and every missing file is re-wrapped
 - **THEN** the pending marker disappears and Common:EncryptedAccessRestored is shown
 
+### Requirement: SDK reads pending access from the server
+The SDK SHALL read the room's missing file keys from the server whenever its private members list loads for a user who may invite into the room or edit its members, and SHALL show the listed members as pending access, as the client does.
+
+#### Scenario: Marker after a reload
+- **WHEN** a member of a private room lacks the key of some encrypted file and a user who may invite reloads the SDK page and opens the members list
+- **THEN** the member's row shows Common:EncryptedAccessPending
+
+#### Scenario: User who may neither invite nor edit
+- **WHEN** such a member opens the members list
+- **THEN** the missing keys are not requested
+
 ## RENAMED Requirements
 
 - FROM: `### Requirement: Invite panel offers people only and closes before re-encryption`

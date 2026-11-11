@@ -53,6 +53,30 @@ import {
 import { selectMemberKeys } from "./room-member-keys";
 import { pendingAccessStore } from "./pending-access";
 
+/**
+ * Reads the room's missing file keys from the server and marks the listed
+ * members as pending access. A caller the server refuses, or a failed
+ * request, leaves the marks as they are.
+ * Spec: private-rooms/room-membership, "Partial re-encryption failure is reported"
+ */
+export async function loadPendingAccess(roomId: number): Promise<void> {
+  const sinceLocalWrites = pendingAccessStore.localWrites;
+  let listed: Awaited<ReturnType<typeof getRoomMissingFileKeys>>;
+  try {
+    listed = await getRoomMissingFileKeys(roomId);
+  } catch {
+    return;
+  }
+  pendingAccessStore.applyServerList(
+    roomId,
+    listed.map((entry) => ({
+      userId: String(entry.userId),
+      fileIds: entry.fileIds ?? [],
+    })),
+    sinceLocalWrites,
+  );
+}
+
 /** A message a membership flow asks its caller to show. */
 export type TMemberFlowNotice = {
   level: "success" | "warning" | "error";

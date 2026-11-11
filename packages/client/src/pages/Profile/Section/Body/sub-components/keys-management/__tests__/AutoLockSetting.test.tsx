@@ -16,7 +16,27 @@ describe("AutoLockSetting", () => {
   it("Auto-lock selector", () => {
     render(<AutoLockSetting />);
 
-    expect(selector()).toHaveTextContent("Common:AutoLockOff");
+    expect(selector()).toHaveTextContent("Common:AutoLock30m");
+  });
+
+  it("Offered presets", async () => {
+    const user = userEvent.setup();
+    render(<AutoLockSetting />);
+
+    await user.click(selector());
+
+    const offered = screen
+      .getAllByText(/^Common:AutoLock/)
+      .map((node) => node.textContent);
+    expect(new Set(offered)).toEqual(
+      new Set([
+        "Common:AutoLock5m",
+        "Common:AutoLock15m",
+        "Common:AutoLock30m",
+        "Common:AutoLockLabel",
+        "Common:AutoLockHint",
+      ]),
+    );
   });
 
   // Spec: private-rooms/key-management, "The auto-lock list does not announce its highlight"

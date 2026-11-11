@@ -570,3 +570,14 @@ The SDK SHALL show Common:EncryptedAccessChangeRefused when the server refuses w
 #### Scenario: Leave fails for another reason
 - **WHEN** a member confirms leaving a private room in the SDK and the request fails without a 403
 - **THEN** the failure is shown and the dialog stays open
+
+### Requirement: SDK reads pending access from the server
+The SDK SHALL read the room's missing file keys from the server whenever its private members list loads for a user who may invite into the room or edit its members, and SHALL show the listed members as pending access, as the client does.
+
+#### Scenario: Marker after a reload
+- **WHEN** a member of a private room lacks the key of some encrypted file and a user who may invite reloads the SDK page and opens the members list
+- **THEN** the member's row shows Common:EncryptedAccessPending
+
+#### Scenario: User who may neither invite nor edit
+- **WHEN** such a member opens the members list
+- **THEN** the missing keys are not requested

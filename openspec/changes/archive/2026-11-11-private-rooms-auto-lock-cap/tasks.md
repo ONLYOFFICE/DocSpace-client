@@ -1,0 +1,24 @@
+# Tasks
+
+One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). The owner approved the tab-hidden rule and the wording of the hint on 2026-11-11 (proposal.md, decisions 1 and 2). Nothing in `../server` changes.
+
+## 1. Shared
+
+- [x] 1.1 Shared: in `packages/shared/services/encryption/auto-lock-preference.ts` keep the presets 5m, 15m and 30m, each saying whether it locks on a hidden tab, make 30 minutes the default, and export the read of that rule for the stored value (design decisions 1 and 2); in `packages/shared/context/encryption/EncryptionContext.tsx` lock on a hidden tab by that rule instead of by a non-zero timeout. Verify: cases "Offered presets", "Preset off" (stored 0 and stored 3600 read as 30 minutes), "Tab hidden" and "Tab hidden with the default preset" in `packages/shared/services/encryption/__tests__/auto-lock-preference.test.ts` and next to the context's tests; `cd packages/shared && pnpm exec vitest run services/encryption context/encryption`; `pnpm exec tsc` in the six packages. Done 2026-11-11: the presets carry `locksWhenTabHidden`, the default is 1800 seconds, and the context asks `locksWhenTabHidden()` on a hidden tab; cases "Offered presets", "Preset off", "Tab hidden" and "Tab hidden with the default preset" in `auto-lock-preference.test.ts`, the last one also in `EncryptionContext.test.tsx`; the encryption suites 400 of 400, `tsc` clean in the six packages. The keys page still lists the two removed options until 2.1; picking one changes nothing
+
+## 2. Client
+
+- [x] 2.1 Client: list the three presets in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/AutoLockSetting.tsx`, and remove `Common:AutoLockOff` and `Common:AutoLock1h` from `public/locales/*/Common.json` with their `.meta` files (design decision 4). Verify: case "Offered presets" in `__tests__/AutoLockSetting.test.tsx` next to the component; `cd packages/client && pnpm exec vitest run src/pages/Profile`; `cd common/tests && npx vitest run test/locales.test.js`; `pnpm exec tsc` in client. Done 2026-11-11: three options in the setting; the two labels removed from 32 language files with their two `.meta` files by a script that checked every other key and value stayed as it was; case "Offered presets" in `AutoLockSetting.test.tsx`, the profile suites 86 of 86; `locales.test.js` 44 of 46, its two completeness cases on four keys of another feature; `tsc` and Biome clean in client. The `.meta` files of the three kept labels still quote the removed options in their usage snippets
+
+## 3. Translations
+
+- [x] 3.1 Set `Common:AutoLockHint` to the approved wording, refresh its translator comment with the `translate-comments` skill and translate it again in every language with the `translate-key` skill, leaving the metadata of other keys as committed (design decision 5). Verify: `cd common/tests && npx vitest run test/locales.test.js`, and the `translate-stale` skill reports nothing for the key. Done 2026-11-11: the English hint set to the approved wording and rewritten in the 31 languages with the terms each language already used for keys, tab and the minute labels; the translator comment refreshed; `locales.test.js` 44 of 46, its two completeness cases on four keys of another feature; the stale-translation audit reports nothing. The metadata step rewrote 598 files of other keys, which were restored and are not in this commit. The translations were not read by native speakers
+
+## 4. E2E and gate
+
+- [x] 4.1 E2E: run `packages/client/__tests__/keys-management.spec.ts`, `keys-management-advanced.spec.ts` and `key-flow-edge-cases.spec.ts` under Docker `tests-dev`; update a screenshot of the keys page only if it shows the selector's value, with `--update-snapshots`, and say so here. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test <specs> --reporter=line`. Done 2026-11-11: the three specs under Docker `tests-dev`, 23 passed and 2 failed; the two failures are "Passphrase dialog on a wide screen" and "Delete warning on a wide screen" of `keys-management.spec.ts`, which failed before this change and are the open task 4.6 of `private-rooms-beta-release`. No screenshot was updated
+- [x] 4.2 Run the gate: `pnpm exec tsc` in the six packages, the shared and client unit suites, `npm --prefix ./common/tests run test:lefthook`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date. Done 2026-11-11: `tsc` clean in the six packages; unit suites shared 2303 of 2303, client 2093 of 2093; `test:lefthook` 61 passed and 3 skipped; OpenSpec validation 20 of 20
+
+## Workflow follow-up
+
+- Archive after 4.2; the archive rewrites "Auto-lock timeout presets" in `key-management`.

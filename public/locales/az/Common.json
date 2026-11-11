@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Şifrəli faylları kopyalamaq alınmadı: {{names}}",
   "EncryptedDownloadPartial": "Bu faylların şifrəsi açıla bilmədi və onlar arxivə daxil edilmədi: {{fileNames}}",
   "EncryptedFile": "Şifrəli fayl",
+  "EncryptedFileNoAccessYet": "Bu şifrəli fayla hələ girişiniz yoxdur.",
+  "EncryptedFileUnlockToOpen": "Bu faylı açmaq üçün şifrələmə açarınızı kiliddən çıxarın.",
   "EncryptedInviteFailed": "{{users}} dəvət etmək mümkün olmadı. Yenidən cəhd edin.",
   "EncryptedInviteNoKey": "Dəvət edilmədi: {{users}}. Onlar hələ şifrələmə açarlarını qurmayıblar. Onlardan profillərində açar yaratmalarını xahiş edin, sonra onları yenidən dəvət edin.",
   "EncryptedInviteResultTitle": "Dəvət nəticələri",

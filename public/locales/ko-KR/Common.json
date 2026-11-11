@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "암호화된 파일 복사 실패: {{names}}",
   "EncryptedDownloadPartial": "다음 파일은 복호화할 수 없어 아카이브에서 제외되었습니다: {{fileNames}}",
   "EncryptedFile": "암호화된 파일",
+  "EncryptedFileNoAccessYet": "아직 이 암호화된 파일에 액세스할 수 없습니다.",
+  "EncryptedFileUnlockToOpen": "이 파일을 열려면 암호화 키를 잠금 해제하세요.",
   "EncryptedInviteFailed": "{{users}}을(를) 초대할 수 없습니다. 다시 시도하세요.",
   "EncryptedInviteNoKey": "초대되지 않음: {{users}}. 아직 암호화 키를 설정하지 않았습니다. 프로필에서 키를 생성하도록 요청한 후 다시 초대하세요.",
   "EncryptedInviteResultTitle": "초대 결과",

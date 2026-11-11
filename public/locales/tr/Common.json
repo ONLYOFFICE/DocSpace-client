@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Şifrelenmiş dosyalar kopyalanamadı: {{names}}",
   "EncryptedDownloadPartial": "Bu dosyaların şifresi çözülemedi ve arşive eklenmedi: {{fileNames}}",
   "EncryptedFile": "Şifrelenmiş dosya",
+  "EncryptedFileNoAccessYet": "Bu şifrelenmiş dosyaya henüz erişiminiz yok.",
+  "EncryptedFileUnlockToOpen": "Bu dosyayı açmak için şifreleme anahtarınızın kilidini açın.",
   "EncryptedInviteFailed": "{{users}} davet edilemedi. Tekrar deneyin.",
   "EncryptedInviteNoKey": "Davet edilmedi: {{users}}. Henüz şifreleme anahtarı oluşturmadılar. Profillerinde bir anahtar oluşturmalarını isteyin, ardından onları yeniden davet edin.",
   "EncryptedInviteResultTitle": "Davet sonuçları",

@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Copierea fișierelor criptate a eșuat: {{names}}",
   "EncryptedDownloadPartial": "Aceste fișiere nu au putut fi decriptate și au fost excluse din arhivă: {{fileNames}}",
   "EncryptedFile": "Fișier criptat",
+  "EncryptedFileNoAccessYet": "Încă nu aveți acces la acest fișier criptat.",
+  "EncryptedFileUnlockToOpen": "Deblocați cheia dvs. de criptare pentru a deschide acest fișier.",
   "EncryptedInviteFailed": "Nu s-a putut invita {{users}}. Încercați din nou.",
   "EncryptedInviteNoKey": "Neinvitați: {{users}}. Aceștia nu au configurat încă chei de criptare. Rugați-i să creeze o cheie în profilul lor, apoi invitați-i din nou.",
   "EncryptedInviteResultTitle": "Rezultatele invitaţiei",

@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "暗号化ファイルのコピーに失敗しました：{{names}}",
   "EncryptedDownloadPartial": "次のファイルは復号できなかったため、アーカイブから除外されました：{{fileNames}}",
   "EncryptedFile": "暗号化ファイル",
+  "EncryptedFileNoAccessYet": "この暗号化ファイルへのアクセス権はまだありません。",
+  "EncryptedFileUnlockToOpen": "このファイルを開くには、暗号化キーのロックを解除してください。",
   "EncryptedInviteFailed": "{{users}}を招待できませんでした。もう一度お試しください。",
   "EncryptedInviteNoKey": "招待されていません：{{users}}。まだ暗号化キーを設定していません。プロフィールでキーを作成するよう伝えてから、もう一度招待してください。",
   "EncryptedInviteResultTitle": "招待の結果",

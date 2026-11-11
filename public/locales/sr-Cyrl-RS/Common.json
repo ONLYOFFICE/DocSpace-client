@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Неуспешно копирање шифрованих датотека: {{names}}",
   "EncryptedDownloadPartial": "Ове датотеке није могуће дешифровати и изостављене су из архиве: {{fileNames}}",
   "EncryptedFile": "Шифрована датотека",
+  "EncryptedFileNoAccessYet": "Још немате приступ овој шифрованој датотеци.",
+  "EncryptedFileUnlockToOpen": "Откључајте свој кључ за шифровање да бисте отворили ову датотеку.",
   "EncryptedInviteFailed": "Није могуће позвати {{users}}. Покушајте поново.",
   "EncryptedInviteNoKey": "Нису позвани: {{users}}. Још нису подесили кључеве за шифровање. Замолите их да направе кључ у свом профилу, а затим их поново позовите.",
   "EncryptedInviteResultTitle": "Резултати позива",

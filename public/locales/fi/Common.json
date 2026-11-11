@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Salattujen tiedostojen kopiointi epäonnistui: {{names}}",
   "EncryptedDownloadPartial": "Näiden tiedostojen salausta ei voitu purkaa, joten ne jätettiin pois arkistosta: {{fileNames}}",
   "EncryptedFile": "Salattu tiedosto",
+  "EncryptedFileNoAccessYet": "Sinulla ei ole vielä pääsyä tähän salattuun tiedostoon.",
+  "EncryptedFileUnlockToOpen": "Avaa salausavaimesi lukitus avataksesi tämän tiedoston.",
   "EncryptedInviteFailed": "Käyttäjiä {{users}} ei voitu kutsua. Yritä uudelleen.",
   "EncryptedInviteNoKey": "Ei kutsuttu: {{users}}. He eivät ole vielä ottaneet salausavaimia käyttöön. Pyydä heitä luomaan avain profiilissaan ja kutsu heidät sitten uudelleen.",
   "EncryptedInviteResultTitle": "Kutsun tulokset",

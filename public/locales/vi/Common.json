@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Không thể sao chép các tập tin được mã hoá: {{names}}",
   "EncryptedDownloadPartial": "Không thể giải mã các tệp này nên chúng đã bị loại khỏi tệp lưu trữ: {{fileNames}}",
   "EncryptedFile": "Tập tin được mã hoá",
+  "EncryptedFileNoAccessYet": "Bạn chưa có quyền truy cập tệp được mã hóa này.",
+  "EncryptedFileUnlockToOpen": "Hãy mở khóa khóa mã hóa của bạn để mở tệp này.",
   "EncryptedInviteFailed": "Không thể mời {{users}}. Hãy thử lại.",
   "EncryptedInviteNoKey": "Chưa được mời: {{users}}. Họ chưa thiết lập khoá mã hoá. Hãy yêu cầu họ tạo khoá trong hồ sơ cá nhân, sau đó mời lại.",
   "EncryptedInviteResultTitle": "Kết quả lời mời",

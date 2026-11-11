@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Nepodařilo se zkopírovat zašifrované soubory: {{names}}",
   "EncryptedDownloadPartial": "Tyto soubory se nepodařilo dešifrovat a nebyly zahrnuty do archivu: {{fileNames}}",
   "EncryptedFile": "Zašifrovaný soubor",
+  "EncryptedFileNoAccessYet": "K tomuto zašifrovanému souboru zatím nemáte přístup.",
+  "EncryptedFileUnlockToOpen": "Odemkněte svůj šifrovací klíč, abyste mohli tento soubor otevřít.",
   "EncryptedInviteFailed": "{{users}} se nepodařilo pozvat. Zkuste to znovu.",
   "EncryptedInviteNoKey": "Nepozváni: {{users}}. Dosud nemají nastaveny šifrovací klíče. Požádejte je, aby si ve svém profilu vytvořili klíč, a pak je pozvěte znovu.",
   "EncryptedInviteResultTitle": "Výsledky pozvání",

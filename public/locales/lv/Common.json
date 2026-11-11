@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Neizdevās kopēt šifrētos failus: {{names}}",
   "EncryptedDownloadPartial": "Šos failus neizdevās atšifrēt, un tie netika iekļauti arhīvā: {{fileNames}}",
   "EncryptedFile": "Šifrēts fails",
+  "EncryptedFileNoAccessYet": "Jums vēl nav piekļuves šim šifrētajam failam.",
+  "EncryptedFileUnlockToOpen": "Atbloķējiet savu šifrēšanas atslēgu, lai atvērtu šo failu.",
   "EncryptedInviteFailed": "Neizdevās uzaicināt {{users}}. Mēģiniet vēlreiz.",
   "EncryptedInviteNoKey": "Nav uzaicināti: {{users}}. Viņi vēl nav iestatījuši šifrēšanas atslēgas. Palūdziet viņiem izveidot atslēgu savā profilā un pēc tam uzaiciniet viņus vēlreiz.",
   "EncryptedInviteResultTitle": "Uzaicinājuma rezultāti",

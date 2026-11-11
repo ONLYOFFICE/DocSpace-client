@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Kopiëren van versleutelde bestanden mislukt: {{names}}",
   "EncryptedDownloadPartial": "Deze bestanden konden niet worden ontsleuteld en zijn niet in het archief opgenomen: {{fileNames}}",
   "EncryptedFile": "Versleuteld bestand",
+  "EncryptedFileNoAccessYet": "U hebt nog geen toegang tot dit versleutelde bestand.",
+  "EncryptedFileUnlockToOpen": "Ontgrendel uw versleutelingssleutel om dit bestand te openen.",
   "EncryptedInviteFailed": "Kon {{users}} niet uitnodigen. Probeer het opnieuw.",
   "EncryptedInviteNoKey": "Niet uitgenodigd: {{users}}. Zij hebben nog geen versleutelingssleutels ingesteld. Vraag hen een sleutel aan te maken in hun profiel en nodig hen daarna opnieuw uit.",
   "EncryptedInviteResultTitle": "Resultaten van de uitnodiging",

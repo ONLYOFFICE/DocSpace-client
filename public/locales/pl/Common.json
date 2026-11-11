@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Nie udało się skopiować zaszyfrowanych plików: {{names}}",
   "EncryptedDownloadPartial": "Nie udało się odszyfrować tych plików i zostały one pominięte w archiwum: {{fileNames}}",
   "EncryptedFile": "Zaszyfrowany plik",
+  "EncryptedFileNoAccessYet": "Nie masz jeszcze dostępu do tego zaszyfrowanego pliku.",
+  "EncryptedFileUnlockToOpen": "Odblokuj swój klucz szyfrowania, aby otworzyć ten plik.",
   "EncryptedInviteFailed": "Nie udało się zaprosić: {{users}}. Spróbuj ponownie.",
   "EncryptedInviteNoKey": "Nie zaproszono: {{users}}. Nie skonfigurowali jeszcze kluczy szyfrowania. Poproś ich o utworzenie klucza w profilu, a następnie zaproś ich ponownie.",
   "EncryptedInviteResultTitle": "Wyniki zaproszenia",

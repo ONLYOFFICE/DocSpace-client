@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Неуспешно копиране на криптирани файлове: {{names}}",
   "EncryptedDownloadPartial": "Тези файлове не можаха да бъдат декриптирани и бяха изключени от архива: {{fileNames}}",
   "EncryptedFile": "Криптиран файл",
+  "EncryptedFileNoAccessYet": "Все още нямате достъп до този криптиран файл.",
+  "EncryptedFileUnlockToOpen": "Отключете ключа си за шифроване, за да отворите този файл.",
   "EncryptedInviteFailed": "Неуспешно поканване на {{users}}. Опитайте отново.",
   "EncryptedInviteNoKey": "Не са поканени: {{users}}. Те все още не са настроили ключове за криптиране. Помолете ги да създадат ключ в своя профил и ги поканете отново.",
   "EncryptedInviteResultTitle": "Резултати от поканата",

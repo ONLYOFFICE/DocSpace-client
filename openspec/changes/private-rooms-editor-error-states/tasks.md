@@ -10,7 +10,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Locales
 
-- [ ] 2.1 Common: add the `.meta` and translator comments of the two keys (`translate-comments`) and translate them into the 31 other languages (`translate-locales`). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the four foreign keys; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
+- [x] 2.1 Common: add the `.meta` and translator comments of the two keys (`translate-comments`) and translate them into the 31 other languages (`translate-locales`). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the four foreign keys; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
 
 ## 3. Gate
 

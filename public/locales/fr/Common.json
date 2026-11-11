@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Échec de la copie des fichiers chiffrés : {{names}}",
   "EncryptedDownloadPartial": "Ces fichiers n'ont pas pu être déchiffrés et ont été exclus de l'archive : {{fileNames}}",
   "EncryptedFile": "Fichier chiffré",
+  "EncryptedFileNoAccessYet": "Vous n'avez pas encore accès à ce fichier chiffré.",
+  "EncryptedFileUnlockToOpen": "Déverrouillez votre clé de chiffrement pour ouvrir ce fichier.",
   "EncryptedInviteFailed": "Impossible d'inviter {{users}}. Réessayez.",
   "EncryptedInviteNoKey": "Non invités : {{users}}. Ils n'ont pas encore configuré de clés de chiffrement. Demandez-leur de créer une clé dans leur profil, puis invitez-les à nouveau.",
   "EncryptedInviteResultTitle": "Résultats de l'invitation",

@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "复制加密文件失败：{{names}}",
   "EncryptedDownloadPartial": "以下文件无法解密，已从压缩包中排除：{{fileNames}}",
   "EncryptedFile": "加密文件",
+  "EncryptedFileNoAccessYet": "您尚无权访问此加密文件。",
+  "EncryptedFileUnlockToOpen": "请解锁您的加密密钥以打开此文件。",
   "EncryptedInviteFailed": "无法邀请 {{users}}。请重试。",
   "EncryptedInviteNoKey": "未邀请：{{users}}。对方尚未设置加密密钥。请让其在个人资料中创建密钥，然后再次邀请。",
   "EncryptedInviteResultTitle": "邀请结果",

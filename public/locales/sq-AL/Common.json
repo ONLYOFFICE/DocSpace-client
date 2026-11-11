@@ -951,6 +951,8 @@
   "EncryptedCopyFailed": "Dështoi kopjimi i skedarëve të enkriptuar: {{names}}",
   "EncryptedDownloadPartial": "Këta skedarë nuk mund të deshifroheshin dhe u lanë jashtë arkivit: {{fileNames}}",
   "EncryptedFile": "Skedar i enkriptuar",
+  "EncryptedFileNoAccessYet": "Ende nuk keni akses në këtë skedar të enkriptuar.",
+  "EncryptedFileUnlockToOpen": "Zhbllokoni çelësin tuaj të kriptimit për të hapur këtë skedar.",
   "EncryptedInviteFailed": "Nuk mund të ftoheshin {{users}}. Provoni përsëri.",
   "EncryptedInviteNoKey": "Nuk u ftuan: {{users}}. Ata nuk kanë konfiguruar ende çelësa enkriptimi. Kërkojuni të krijojnë një çelës në profilin e tyre, pastaj ftojini përsëri.",
   "EncryptedInviteResultTitle": "Rezultatet e ftesës",

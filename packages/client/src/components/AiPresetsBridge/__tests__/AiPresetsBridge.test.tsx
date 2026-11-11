@@ -169,18 +169,21 @@ describe("AiPresetsBridge", () => {
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales")] });
   });
 
-  it("loads the signed-in user's projects once; opening the chat reads nothing more", async () => {
+  it("loads the signed-in user's projects, and reads them again whenever the chat opens", async () => {
     const store = new AiPresetsStore();
     renderBridge(store);
     await flush();
     expect(api.getAiProjects).toHaveBeenCalledTimes(1);
     expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
 
-    // The agents menu refreshes the list itself when it opens (its
-    // onOpen), so the chat's opening costs no read.
+    // A project created or shared elsewhere meanwhile reaches the agents
+    // menu, even for a user who had none (and so had no menu to open).
     act(() => aiChatStore.setIsVisible(true));
     await flush();
-    expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+    expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+    act(() => aiChatStore.setIsVisible(false));
+    await flush();
+    expect(api.getAiProjects).toHaveBeenCalledTimes(2);
   });
 
   it("reads no projects while AI requests are off (unpaid portal, AI services off)", async () => {
@@ -336,6 +339,8 @@ describe("AiPresetsBridge", () => {
     const store = new AiPresetsStore();
     renderBridge(store);
     await flush();
+    act(() => aiChatStore.setIsVisible(true));
+    await flush();
 
     await act(async () => aiChatStore.agentPicker?.onSelect("2"));
     await flush();
@@ -376,5 +381,89 @@ describe("AiPresetsBridge", () => {
     await flush();
     expect(store.presets).toHaveLength(1);
     expect(aiChatStore.agentPicker).toBeNull();
+  });
+
+  describe("a pick still being read", () => {
+    // getAiProject held open until the test lets it answer.
+    const holdProjectRead = () => {
+      const pending: Record<number, (value: TAiProject) => void> = {};
+      api.getAiProject.mockImplementation(
+        (id: number) =>
+          new Promise<TAiProject>((resolve) => {
+            pending[id] = resolve;
+          }),
+      );
+      return (id: number, title: string) =>
+        act(async () => {
+          pending[id](project(id, title));
+        });
+    };
+
+    const openChatWithProjects = async () => {
+      api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+      const store = new AiPresetsStore();
+      renderBridge(store);
+      await flush();
+      act(() => aiChatStore.setIsVisible(true));
+      await flush();
+      return store;
+    };
+
+    it("loses to a later pick whose read comes back first", async () => {
+      const answer = holdProjectRead();
+      const store = await openChatWithProjects();
+
+      act(() => aiChatStore.agentPicker?.onSelect("1"));
+      act(() => aiChatStore.agentPicker?.onSelect("2"));
+      await answer(2, "Legal");
+      await answer(1, "Sales");
+      await flush();
+
+      expect(store.activePreset?.id).toBe("2");
+      expect(aiChatStore.applyPreset).toHaveBeenCalledTimes(1);
+    });
+
+    it("is called off by the default agent", async () => {
+      const answer = holdProjectRead();
+      const store = await openChatWithProjects();
+
+      act(() => aiChatStore.agentPicker?.onSelect("1"));
+      act(() => aiChatStore.agentPicker?.onSelect(null));
+      await answer(1, "Sales");
+      await flush();
+
+      expect(store.activePreset).toBeNull();
+      expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
+    });
+
+    it("is called off by picking the agent the chat runs on again", async () => {
+      const answer = holdProjectRead();
+      const store = await openChatWithProjects();
+      act(() => aiChatStore.agentPicker?.onSelect("1"));
+      await answer(1, "Sales");
+      await flush();
+      expect(store.activePreset?.id).toBe("1");
+
+      act(() => aiChatStore.agentPicker?.onSelect("2"));
+      act(() => aiChatStore.agentPicker?.onSelect("1"));
+      await answer(2, "Legal");
+      await flush();
+
+      expect(store.activePreset?.id).toBe("1");
+      expect(aiChatStore.applyPreset).toHaveBeenCalledTimes(1);
+    });
+
+    it("is called off by closing the chat, which opens clean next time", async () => {
+      const answer = holdProjectRead();
+      const store = await openChatWithProjects();
+
+      act(() => aiChatStore.agentPicker?.onSelect("1"));
+      act(() => aiChatStore.setIsVisible(false));
+      await answer(1, "Sales");
+      await flush();
+
+      expect(store.activePreset).toBeNull();
+      expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
+    });
   });
 });

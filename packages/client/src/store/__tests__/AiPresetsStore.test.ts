@@ -127,7 +127,7 @@ describe("AiPresetsStore", () => {
     store.init("u1");
     await flush();
 
-    expect(await store.requestApply(store.presets[0])).toBe(true);
+    expect(await store.requestApply(store.presets[0])).toBe("applied");
     expect(api.getAiProject).toHaveBeenCalledWith(1);
     expect(store.pendingApply?.name).toBe("Sales (renamed)");
     expect(store.presets[0].name).toBe("Sales (renamed)");
@@ -141,9 +141,51 @@ describe("AiPresetsStore", () => {
     store.init("u1");
     await flush();
 
-    expect(await store.requestApply(store.presets[0])).toBe(false);
+    expect(await store.requestApply(store.presets[0])).toBe("gone");
     expect(store.pendingApply).toBeNull();
     expect(store.presets).toEqual([]);
+  });
+
+  it("applies only the latest pick, whichever read comes back first", async () => {
+    api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+    let resolveSales: (value: TAiProject) => void = () => {};
+    api.getAiProject.mockImplementation((id: number) =>
+      id === 1
+        ? new Promise<TAiProject>((resolve) => {
+            resolveSales = resolve;
+          })
+        : Promise.resolve(project(2, "Legal")),
+    );
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    const sales = store.requestApply(store.presets[0]);
+    expect(await store.requestApply(store.presets[1])).toBe("applied");
+    expect(store.pendingApply?.id).toBe("2");
+
+    resolveSales(project(1, "Sales"));
+    expect(await sales).toBe("superseded");
+    expect(store.pendingApply?.id).toBe("2");
+  });
+
+  it("drops a pick called off while its read is on its way", async () => {
+    let resolveSales: (value: TAiProject) => void = () => {};
+    api.getAiProject.mockImplementation(
+      () =>
+        new Promise<TAiProject>((resolve) => {
+          resolveSales = resolve;
+        }),
+    );
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    const sales = store.requestApply(store.presets[0]);
+    store.cancelApply();
+    resolveSales(project(1, "Sales"));
+    expect(await sales).toBe("superseded");
+    expect(store.pendingApply).toBeNull();
   });
 
   it("exposes the active project's Instructions rooms as the chat context rooms", () => {

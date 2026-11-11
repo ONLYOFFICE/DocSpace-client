@@ -178,18 +178,22 @@ const AiPresetsBridge = ({
     [presets],
   );
 
+  // Only the latest pick counts: picking the default agent or the agent the
+  // chat already runs on calls off a pick whose project is still being read.
   const onAgentSelect = React.useCallback(
     (id: string | null) => {
-      if (id === null) {
-        if (!aiPresetsStore.activePreset) return;
+      const { activePreset: current } = aiPresetsStore;
+      if (id === null || id === current?.id) {
+        aiPresetsStore.cancelApply();
+        if (id !== null || !current) return;
         aiPresetsStore.setActivePreset(null);
         aiChatStore.applyPreset(NO_PRESET);
         return;
       }
       const preset = aiPresetsStore.presets.find((p) => p.id === id);
       if (!preset) return;
-      void aiPresetsStore.requestApply(preset).then((applied) => {
-        if (!applied) toastr.info(t("Common:AIProjectNotAvailable"));
+      void aiPresetsStore.requestApply(preset).then((result) => {
+        if (result === "gone") toastr.info(t("Common:AIProjectNotAvailable"));
       });
     },
     [aiChatStore, aiPresetsStore, t],
@@ -224,7 +228,9 @@ const AiPresetsBridge = ({
         (pending) => {
           if (!pending) return;
           const preset = aiPresetsStore.consumePendingApply();
-          if (!preset) return;
+          // A closed chat takes no project (closing calls off a pick, this
+          // is the guard behind it).
+          if (!preset || !aiChatStore.isVisible) return;
           aiPresetsStore.setActivePreset(preset);
           aiChatStore.applyPreset({
             profileId: preset.profileId,
@@ -237,17 +243,27 @@ const AiPresetsBridge = ({
     [aiChatStore, aiPresetsStore],
   );
 
+  // Opening the chat reads the projects again, so one created or shared
+  // elsewhere meanwhile reaches the agents menu (and the sidebar), even for
+  // a user who had none - without projects there is no menu to open.
+  //
   // Closing the chat drops the project it runs on, all of it: the model goes
   // back to the default and the project's Instructions and Knowledge rooms
   // are disconnected, so the chat opens clean next time (as the projects page
-  // resets it when a project is left). A chat no project was applied to keeps
-  // the model and rooms the user chose.
+  // resets it when a project is left); a pick still being read is called
+  // off. A chat no project was applied to keeps the model and rooms the user
+  // chose.
   React.useEffect(
     () =>
       reaction(
         () => aiChatStore.isVisible,
         (visible) => {
-          if (visible || !aiPresetsStore.activePreset) return;
+          if (visible) {
+            void aiPresetsStore.fetchPresets();
+            return;
+          }
+          aiPresetsStore.cancelApply();
+          if (!aiPresetsStore.activePreset) return;
           aiPresetsStore.setActivePreset(null);
           aiChatStore.applyPreset(NO_PRESET);
         },

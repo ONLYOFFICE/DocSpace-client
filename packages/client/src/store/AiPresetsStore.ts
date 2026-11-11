@@ -63,6 +63,13 @@ export type TAiPreset = AiChatPresetSettings & {
 
 export type { AiChatPresetRoom, AiChatPresetSettings };
 
+/**
+ * How a pick ended: handed to the bridge, refused because the project is
+ * gone, or overtaken by a later pick (or called off) before its read came
+ * back - then it is dropped without a word.
+ */
+export type TAiPresetApplyResult = "applied" | "gone" | "superseded";
+
 /** How many projects the chat panel's agents menu offers, the most recent first. */
 const PICKER_PROJECTS_COUNT = 100;
 
@@ -124,6 +131,9 @@ class AiPresetsStore {
   pendingApply: TAiPreset | null = null;
 
   private requestId = 0;
+
+  // The latest pick: a read that comes back for an older one is dropped.
+  private applyRequestId = 0;
 
   constructor() {
     makeAutoObservable(this, { pendingApply: observable.ref });
@@ -196,9 +206,12 @@ class AiPresetsStore {
   /**
    * A project picked in the agents menu: read again, so the chat gets the
    * project as it is now, then handed to the bridge. A project that is gone
-   * leaves the list and is not applied.
+   * leaves the list and is not applied. Only the latest pick is applied: a
+   * read that comes back after another pick, or after `cancelApply`, is
+   * dropped.
    */
-  requestApply = async (preset: TAiPreset): Promise<boolean> => {
+  requestApply = async (preset: TAiPreset): Promise<TAiPresetApplyResult> => {
+    const id = ++this.applyRequestId;
     let fresh = preset;
     try {
       fresh = toAiPreset(await getAiProject(Number(preset.id)));
@@ -208,15 +221,26 @@ class AiPresetsStore {
         runInAction(() => {
           this.presets = this.presets.filter((p) => p.id !== preset.id);
         });
-        return false;
+        return id === this.applyRequestId ? "gone" : "superseded";
       }
       // Any other failure: the list's copy is applied.
     }
+    if (id !== this.applyRequestId) return "superseded";
     runInAction(() => {
       this.presets = this.presets.map((p) => (p.id === fresh.id ? fresh : p));
       this.pendingApply = fresh;
     });
-    return true;
+    return "applied";
+  };
+
+  /**
+   * Calls off a pick still being read, and one read but not yet applied:
+   * the default agent picked, the current agent picked again, the panel
+   * closed.
+   */
+  cancelApply = () => {
+    this.applyRequestId += 1;
+    this.pendingApply = null;
   };
 
   consumePendingApply = (): TAiPreset | null => {

@@ -21,6 +21,16 @@ See proposal.md for the motivation. What shapes the approach:
 - **The stand (2026-11-10, DocSpace 4.1.0.12351).** A member whose keys were
   reset could not leave, and the room owner could neither remove that member
   nor change the role: each request answered 403.
+- **The stand again (2026-11-11, DocSpace 4.1.0.12366).** As the room's
+  owner, a share request that names that member with the role they already
+  hold answered 403 "The user does not have an encryption key" while the
+  member had no key, and 200 after the member generated a key in the
+  profile; the roles did not change either time. So the refusal lasts only
+  while the key set is empty, and the member can end it. The member's own
+  leave after generating a key was not run; it passes the same check on the
+  same account. The 403 answer also carried the exception's type name,
+  which differs from that of a permission refusal; the client does not read
+  it (decision 1).
 - **The client today.**
   - Leave: the dialog
     (`packages/client/src/components/dialogs/LeaveRoomDialog/index.js`) awaits
@@ -87,21 +97,28 @@ No stashed design document covers this.
    serves both the removal and the role change, so one branch in its catch
    covers both. The member list is not touched on a failure today and stays
    so.
-4. **The SDK uses the same helper and the same key.** Its leave dialog
+4. **The SDK uses the same helper and the same keys.** Its leave dialog
    closes after the refusal; its private members view shows the message.
 5. **The shell's handler is left alone.** It defers to an error toast the
    caller shows, so the message replaces `Common:AccessDenied` without a
    second toast.
+6. **Two messages, chosen by the action.** A leave is always the user's
+   own, so `Common:EncryptedLeaveRefused` speaks about the user's keys; a
+   removal and a role change always concern another member, so
+   `Common:EncryptedMemberAccessRefused` speaks about theirs. Both say what
+   ends the refusal, as the stand check of 2026-11-11 showed. Alternative:
+   one neutral message for all three. Rejected: it cannot say whose keys
+   are missing, which is the one thing the user can act on.
 
 ## Risks / Trade-offs
 
 - [A 403 for another reason, such as rights lost a moment ago, gets a
-  message about keys] → The wording says when it happens rather than that it
-  happened; the server-side reason code, once there, lets a later change
-  narrow it.
+  message about keys] → The wording says when the refusal happens rather
+  than that keys are missing; the server-side reason code, once there, lets
+  a later change narrow it.
 - [A resolved leave action no longer means the user left] → The action is
   awaited by the dialog and the owner-change flow only, and neither does
   anything after it that assumes the leave; the tests of both pin that.
-- [The message promises a cause the user cannot fix from where they are] →
-  Accepted for the beta: the fix is the server's, and the message at least
-  names the cause in the user's language.
+- [A manager cannot end the refusal alone: only the member can generate the
+  keys] → Accepted for the beta: the server's check is the defect, and the
+  message tells the manager whom to ask.

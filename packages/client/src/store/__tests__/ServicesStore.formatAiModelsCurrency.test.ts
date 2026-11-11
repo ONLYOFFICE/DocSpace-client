@@ -71,9 +71,13 @@ describe("ServicesStore.formatAiModelsCurrency", () => {
     const price = createStore("USD").formatAiModelsCurrency(1234.5);
 
     expect(price).not.toMatch(ARABIC_INDIC_DIGIT);
-    expect(price).toContain(
-      `${FIRST_STRONG_ISOLATE}US$${POP_DIRECTIONAL_ISOLATE}`,
-    );
+    // How CLDR spells the symbol (US$ today) is data, not this code: check that the
+    // symbol is whole and isolated.
+    const isolated = new RegExp(
+      `${FIRST_STRONG_ISOLATE}([^${POP_DIRECTIONAL_ISOLATE}]+)${POP_DIRECTIONAL_ISOLATE}`,
+    ).exec(price);
+    expect(isolated?.[1]).toContain("US");
+    expect(isolated?.[1]).toContain("$");
     expect(price.replace(/\D/g, "")).toBe("123450");
   });
 

@@ -185,7 +185,7 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
                 </li>
                 <li>
                   <Text fontSize="12px" color="var(--text-secondary)">
-                    {t("Common:KeyChangedReasonDevice")}
+                    {t("Common:KeyChangedReasonReplaced")}
                   </Text>
                 </li>
                 <li>

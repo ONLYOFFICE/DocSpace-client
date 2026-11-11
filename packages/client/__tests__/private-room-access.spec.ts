@@ -58,7 +58,7 @@ const seedUserKey = {
   date: "2026-01-01T00:00:00.000Z",
 };
 
-const TOAST_KEY_FRAGMENT = /Encryption keys are not configured|EncryptionKeysNotConfigured/;
+const TOAST_KEY_FRAGMENT = /Set it up in your profile|EncryptionKeysNotConfigured/;
 
 test.describe("Private room — entry warning toast", () => {
   test.beforeEach(({ mockRequest }) => {

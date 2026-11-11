@@ -161,9 +161,16 @@ const AiPresetsBridge = ({
   const { presets, activePreset } = aiPresetsStore;
   const selectedAgentId = activePreset?.id ?? null;
   const isInsideOpenProject = isAiRoomsPage && isAiProjectOpen;
+  // The project the chat runs on stays in the menu, first, even once the
+  // list has lost it (deleted or left elsewhere, or past the projects the
+  // list reads): the title and the checkmark go on naming it, and the menu
+  // stays to take the chat off it with the default agent.
   const agents = React.useMemo<AiChatAgentPickerItem[]>(
     () =>
-      presets.map((preset) => ({
+      (activePreset && !presets.some((p) => p.id === activePreset.id)
+        ? [activePreset, ...presets]
+        : presets
+      ).map((preset) => ({
         id: preset.id,
         name: preset.name,
         icon: (
@@ -175,7 +182,7 @@ const AiPresetsBridge = ({
           />
         ),
       })),
-    [presets],
+    [presets, activePreset],
   );
 
   // Only the latest pick counts: picking the default agent or the agent the

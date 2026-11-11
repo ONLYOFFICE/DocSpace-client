@@ -375,6 +375,34 @@ describe("AiPresetsBridge", () => {
     expect(aiChatStore.agentPicker).toBeNull();
   });
 
+  it("keeps the project the chat runs on in the menu once the list has lost it", async () => {
+    api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+    api.getAiProject.mockResolvedValue(project(1, "Sales"));
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+    act(() => aiChatStore.setIsVisible(true));
+    await flush();
+    await act(async () => aiChatStore.agentPicker?.onSelect("1"));
+    await flush();
+    expect(store.activePreset?.id).toBe("1");
+
+    // Deleted or left elsewhere: the menu's next read no longer has it.
+    api.getAiProjects.mockResolvedValue({ folders: [project(2, "Legal")] });
+    await act(async () => aiChatStore.agentPicker?.onOpen?.());
+    expect(aiChatStore.agentPicker?.agents.map((a) => a.id)).toEqual(["1", "2"]);
+    expect(aiChatStore.agentPicker?.selectedId).toBe("1");
+
+    // The last project gone as well: the menu stays, to take the chat off it.
+    api.getAiProjects.mockResolvedValue({ folders: [] });
+    await act(async () => aiChatStore.agentPicker?.onOpen?.());
+    expect(aiChatStore.agentPicker?.agents.map((a) => a.id)).toEqual(["1"]);
+
+    act(() => aiChatStore.agentPicker?.onSelect(null));
+    expect(store.activePreset).toBeNull();
+    expect(aiChatStore.agentPicker).toBeNull();
+  });
+
   it("offers no agents in an open project's own chat", async () => {
     const store = new AiPresetsStore();
     renderBridge(store, { path: "/ai-rooms/1/filter", activeProject: { id: 1 } });

@@ -1,6 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { describe, it, expect, vi } from "vitest";
+import { afterEach, beforeEach, describe, it, expect, vi } from "vitest";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { createTestFilesActionsStore } from "./testHarness";
 // After the harness, which mocks the toast module.
@@ -13,6 +13,22 @@ declare function allowConsoleError(matcher: RegExp | string): void;
 // the download/copy pipeline. That guard is what these tests lock.
 
 describe("An unknown key list is read again before an action is refused", () => {
+  // The load error is not raised again within a second of the last one.
+  let clock = Date.now();
+  const passToastGrace = () => {
+    clock += 60_000;
+    vi.setSystemTime(clock);
+  };
+
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    passToastGrace();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   const progress = () => ({
     setSecondaryProgressBarData: vi.fn(),
     clearSecondaryProgressData: vi.fn(),
@@ -54,6 +70,7 @@ describe("An unknown key list is read again before an action is refused", () => 
       storeWith(null);
 
     await store.downloadEncryptedFile({ id: 1 } as never);
+    passToastGrace();
     await store.downloadEncryptedFilesAsZip([{ id: 1 }] as never);
 
     expect(ensureEncryptionKeys).toHaveBeenCalledTimes(2);

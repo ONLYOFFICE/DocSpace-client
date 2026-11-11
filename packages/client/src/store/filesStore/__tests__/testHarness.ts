@@ -123,6 +123,8 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
     error: vi.fn(),
     info: vi.fn(),
     warning: vi.fn(),
+    clear: vi.fn(),
+    isActive: vi.fn(() => false),
   },
 }));
 

@@ -79,5 +79,6 @@ export const fakeSettingsStore = (): FakeStore => ({
 export const fakeUserStore = (): FakeStore => ({
   user: { id: "user-1", isAdmin: false },
   encryptionKeys: [],
+  ensureEncryptionKeys: async () => [],
 });
 

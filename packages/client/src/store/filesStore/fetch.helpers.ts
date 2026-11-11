@@ -72,6 +72,7 @@ import {
   setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import { noticeOwnKeysOnRoomEntry } from "SRC_DIR/helpers/ownKeyListNotice";
 import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
 import {
   getSectionAddressCorrection,
@@ -323,10 +324,7 @@ export function fetchFilesImpl(
       }
 
       if (data.current.private) {
-        const keys = self.userStore?.encryptionKeys;
-        if (!Array.isArray(keys) || keys.length === 0) {
-          toastr.warning(i18n.t("Common:EncryptionKeysNotConfigured"));
-        }
+        noticeOwnKeysOnRoomEntry(self.userStore);
 
         // The room id may differ from data.current.id when navigating into
         // a sub-folder: pathParts[1] is the room, current is the sub-folder.

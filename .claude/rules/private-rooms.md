@@ -32,7 +32,7 @@ main specs, and every planned change is a change folder:
 - `openspec/specs/private-rooms/<capability>/spec.md` — current truth, one
   file per capability (feature-gating, encryption-core, key-management,
   room-membership, file-operations, editor-integration, sdk-surface,
-  server-contract). Deliberate v1 limitations are requirements phrased as
+  server-contract, sidebar-section). Deliberate v1 limitations are requirements phrased as
   SHALL NOT, so do not "fix" one without a change that modifies the spec.
 - `openspec/changes/<change>/` — proposal, delta specs, design, tasks for
   work that is not on the branch yet. `openspec list` shows them.

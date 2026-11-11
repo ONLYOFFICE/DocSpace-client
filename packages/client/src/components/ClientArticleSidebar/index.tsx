@@ -82,9 +82,10 @@ import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
-import CatalogAiChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
-import CatalogAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-import CatalogSkillSetsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
+import CatalogAiChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url";
+import CatalogAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents-bot.react.svg?url";
+import CatalogAiRecentReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
+import CatalogSkillSetsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import CatalogKnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
@@ -741,7 +742,7 @@ const ClientArticleSidebar = ({
           {
             id: "ai-chat-recent",
             label: t("Common:AIChatRecent"),
-            icon: getCatalogIconUrlByType(FolderType.Recent),
+            icon: CatalogAiRecentReactSvgUrl,
             onClick: openAiChatPage("history"),
           },
           ...recentAiChats.map((thread) => ({
@@ -818,6 +819,27 @@ const ClientArticleSidebar = ({
     emptyTrashInProgress,
     setEmptyTrashDialogVisible,
   ]);
+
+  // The projects and conversations are cut to the menu's width; hovering
+  // one shows its whole name. NavMenu gives a sub-item no title of its own,
+  // so it is set on the rendered entry, after every render (an entry the
+  // menu drew anew has none).
+  React.useEffect(() => {
+    const titles: [string, string][] = [
+      ...shownAiProjects.map(
+        (project) => [aiProjectItemId(project.id), project.name] as [string, string],
+      ),
+      ...recentAiChats.map(
+        (thread) => [aiChatItemId(thread.id), thread.title] as [string, string],
+      ),
+    ];
+    for (const [id, title] of titles) {
+      for (const entry of document.querySelectorAll<HTMLElement>(
+        `[data-item-id="${id}"]`,
+      ))
+        entry.title = title;
+    }
+  });
 
   return (
     <AppsSidebar

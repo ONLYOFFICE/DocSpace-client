@@ -77,7 +77,7 @@ vi.mock("SRC_DIR/components/AppsSidebar", () => ({
         .flatMap((group) => group.items)
         .flatMap((item) => [item, ...(item.children ?? [])])
         .map((item) => (
-          <li key={item.id} data-testid={`nav-${item.id}`}>
+          <li key={item.id} data-testid={`nav-${item.id}`} data-item-id={item.id}>
             {item.badgeComponent}
           </li>
         ))}
@@ -246,5 +246,26 @@ describe("ClientArticleSidebar — AI Chat section without more entries", () => 
 
     expect(screen.queryByTestId("nav-ai-nested-projects-more")).toBeNull();
     expect(screen.queryByTestId("nav-ai-nested-chats-more")).toBeNull();
+  });
+});
+
+describe("ClientArticleSidebar — AI Chat section full names", () => {
+  it("shows a project's and a conversation's whole name on hover", () => {
+    renderSidebar(
+      [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
+      {
+        presets: [{ id: "100", name: "A project with a very long name" }],
+        recentThreads: [{ id: "t1", title: "A conversation with a long title" }],
+      },
+    );
+
+    expect(screen.getByTestId("nav-ai-nested-project-100")).toHaveAttribute(
+      "title",
+      "A project with a very long name",
+    );
+    expect(screen.getByTestId("nav-ai-nested-chat-t1")).toHaveAttribute(
+      "title",
+      "A conversation with a long title",
+    );
   });
 });

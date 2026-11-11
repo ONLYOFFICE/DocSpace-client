@@ -121,7 +121,6 @@ const StateCell = observer(
       <ToggleButton
         dataTestId={`toggle_button_${webhook.name}`}
         className="toggle toggleButton"
-        id="toggle id"
         isChecked={webhook.enabled}
         onChange={onChange}
         isDisabled={isLoading}

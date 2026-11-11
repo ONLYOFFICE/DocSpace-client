@@ -62,6 +62,7 @@ import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getDate, isExpired } from "../share/Share.helpers";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { DATA_TABLE_ROW_ACTIONS_CLASS } from "@onlyoffice/apps-ui-kit/components/data-table";
 import { isRoom } from "../../utils/typeGuards";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
@@ -69,11 +70,9 @@ import type { QuickButtonsProps } from "./QuickButtons.types";
 import styles from "./QuickButtons.module.scss";
 import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
-// The DataTable's `DATA_TABLE_ROW_ACTIONS_CLASS`: a share button the item has
-// no link for yet shows only on a row under the pointer, selected or acted on.
-// Spelled out because the kit the shared package installs does not have it
-// yet; other views ignore the class.
-const ROW_ACTIONS_CLASS = "data-table-row-actions";
+// A share button the item has no link for yet shows only on a DataTable row
+// under the pointer, selected or acted on; other views ignore the class.
+const ROW_ACTIONS_CLASS = DATA_TABLE_ROW_ACTIONS_CLASS;
 
 export const QuickButtons = memo((props: QuickButtonsProps) => {
   const {

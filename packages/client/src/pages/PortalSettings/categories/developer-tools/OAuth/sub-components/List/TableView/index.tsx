@@ -139,13 +139,18 @@ const TableView = ({
   useEffect(() => () => setSelection?.(""), [setSelection]);
 
   // Read here, so that the observer re-renders when the selection, which the
-  // store changes in place, or an app changes.
-  const selected = selection?.slice() ?? [];
+  // store changes in place, or an app changes. The selection's contents are
+  // the key, so the rows are drawn again only when it really changes.
+  const selectionKey = selection?.join("\n") ?? "";
+  const selected = useMemo(
+    () => new Set(selectionKey ? selectionKey.split("\n") : []),
+    [selectionKey],
+  );
   const rows = items.slice();
 
   const getRowProps = useCallback(
     (item: IClientProps): DataTableRowState => ({
-      checked: selected.includes(item.clientId),
+      checked: selected.has(item.clientId),
       className: styles.oauthRow,
       testId: `${item.name}_table_row`,
       contextMenu: {

@@ -37,9 +37,19 @@
 const OLD_COLUMN_SIZES = "ColumnsSize";
 
 /**
- * Drops the column widths the old table kept as pixel strings. The DataTable
- * reads none of them and keeps shares under `…ColumnsWidths…` keys of its
- * own, so they would only stay behind in every browser that had them.
+ * The columns the old settings and profile tables showed, kept as
+ * `…Columns_ver-N=<user>`. Their DataTables keep no such record, so nothing
+ * reads these; the `…ColumnsWidths_ver-N` keys that replaced them do not match.
+ */
+const OLD_SETTINGS_COLUMNS =
+  /^(nextcloudSecond|nextcloudThird|nextcloudFourth|apiKeys|webhooksConfig|webhooksHistory|auditTable|historyTable|Sessions)Columns_ver-\d+/;
+
+/**
+ * Drops the column widths the old table kept as pixel strings, and the column
+ * lists of the old settings tables. The DataTable reads none of them and keeps
+ * shares under `…ColumnsWidths…` keys of its own, so they would only stay
+ * behind in every browser that had them. The files and contacts lists still
+ * read theirs (`filesTableColumns_ver-…` and the like), so those stay.
  */
 export const removeOldColumnSizes = (storage?: Storage) => {
   try {
@@ -47,7 +57,11 @@ export const removeOldColumnSizes = (storage?: Storage) => {
     const keys: string[] = [];
     for (let i = 0; i < store.length; i += 1) {
       const key = store.key(i);
-      if (key?.includes(OLD_COLUMN_SIZES)) keys.push(key);
+      if (
+        key?.includes(OLD_COLUMN_SIZES) ||
+        OLD_SETTINGS_COLUMNS.test(key ?? "")
+      )
+        keys.push(key as string);
     }
     keys.forEach((key) => store.removeItem(key));
   } catch {

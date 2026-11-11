@@ -72,7 +72,8 @@ const NameCell = ({
       className={classNames(styles.selection, "table-container_row-checkbox")}
       icon={
         icon ? (
-          <img className={styles.nameImage} src={icon} alt="App icon" />
+          // Decorative: the name follows it, and the checkbox carries it.
+          <img className={styles.nameImage} src={icon} alt="" />
         ) : null
       }
       checked={!!selection?.includes(clientId)}

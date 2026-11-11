@@ -3,7 +3,6 @@
   "packages/client/src/pages/Home/InfoPanel/Body/helpers/Common.module.scss": 1,
   "packages/sdk/src/app/(ai-agents)/AiAgentsLayout.module.scss": 4,
   "packages/sdk/src/app/(ai-agents)/_components/agents-list/AgentsList.module.scss": 1,
-  "packages/sdk/src/app/(docspace)/_components/data-table/SdkDataTable.module.scss": 1,
   "packages/sdk/src/app/(forms)/_components/forms-grid/FormsTile.module.scss": 3,
   "packages/sdk/src/app/(forms)/_components/forms-layout/FormsLayout.module.scss": 2,
   "packages/sdk/src/app/(forms)/_components/library-landing/LibraryLanding.module.scss": 1,

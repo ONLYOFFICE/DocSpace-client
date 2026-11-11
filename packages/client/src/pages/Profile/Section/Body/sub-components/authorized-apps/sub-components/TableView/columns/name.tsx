@@ -67,7 +67,8 @@ const NameCell = ({
       className={classNames(styles.selection, "table-container_row-checkbox")}
       icon={
         item.logo ? (
-          <img src={item.logo} alt="App icon" className={styles.styledImage} />
+          // Decorative: the name follows it, and the checkbox carries it.
+          <img src={item.logo} alt="" className={styles.styledImage} />
         ) : null
       }
       checked={checked}

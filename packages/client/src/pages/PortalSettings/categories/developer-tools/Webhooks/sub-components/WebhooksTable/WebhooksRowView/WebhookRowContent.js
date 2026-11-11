@@ -77,7 +77,6 @@ export const WebhookRowContent = ({
         <ToggleButton
           dataTestId={`toggle_button_${webhook.name}`}
           className="toggle toggleButton"
-          id="toggle id"
           isChecked={isChecked}
           isDisabled={isDisabled}
           onChange={handleToggleEnabled}

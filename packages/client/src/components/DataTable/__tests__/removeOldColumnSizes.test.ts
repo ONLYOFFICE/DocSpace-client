@@ -26,6 +26,25 @@ describe("removeOldColumnSizes", () => {
     ]);
   });
 
+  it("drops the old settings tables' column lists and keeps their widths", () => {
+    localStorage.setItem("webhooksConfigColumns_ver-5=user", "Name,URL");
+    localStorage.setItem("nextcloudThirdColumns_ver-6=user", "Name,Email");
+    localStorage.setItem("SessionsColumns_ver-5=user", "Platform");
+    localStorage.setItem("auditTableColumns_ver-5=user", "User");
+    localStorage.setItem("webhooksConfigColumnsWidths_ver-1=user", '{"v":2}');
+    localStorage.setItem("peopleTableColumns_ver-3=user", "Name,Type");
+
+    removeOldColumnSizes();
+
+    const keys = Array.from({ length: localStorage.length }, (_, i) =>
+      localStorage.key(i),
+    );
+    expect(keys.sort()).toEqual([
+      "peopleTableColumns_ver-3=user",
+      "webhooksConfigColumnsWidths_ver-1=user",
+    ]);
+  });
+
   it("does nothing when the storage cannot be read", () => {
     const blocked = {
       get length(): number {

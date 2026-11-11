@@ -54,9 +54,12 @@ import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { installLatinDigits } from "@docspace/shared/utils/latin-digits";
 
 import StoreProvider from "./StoreProvider";
 import { AppStateProvider } from "./AppStateProvider";
+
+installLatinDigits();
 
 export type TContextData = {
   user: TUser | undefined;

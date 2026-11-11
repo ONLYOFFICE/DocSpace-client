@@ -1190,7 +1190,7 @@ export const getEditorTheme = (theme?: ThemeKeys) => {
   }
 };
 
-const languages: string[] = ["ar-SA"];
+const languages: string[] = [];
 export const isBetaLanguage = (language: string): boolean => {
   return languages.includes(language);
 };

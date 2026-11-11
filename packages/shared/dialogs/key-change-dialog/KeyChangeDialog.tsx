@@ -45,6 +45,7 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { getPublicKeyFingerprint } from "../../services/encryption/identity";
+import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
 
 import type { KeyChangeDialogProps } from "./KeyChangeDialog.types";
 import styles from "./KeyChangeDialog.module.scss";
@@ -57,9 +58,11 @@ function formatFingerprint(hex: string): string {
   return groups.join(" ");
 }
 
-function formatDate(ts: number): string {
+function formatDate(ts: number, locale: string): string {
   try {
-    return new Date(ts).toLocaleString();
+    return new Date(ts).toLocaleString(locale, {
+      numberingSystem: LATIN_NUMBERING_SYSTEM,
+    });
   } catch {
     return "—";
   }
@@ -91,7 +94,7 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
   onAccept,
   onRefuse,
 }) => {
-  const { t, ready } = useTranslation(["Common"]);
+  const { t, ready, i18n } = useTranslation(["Common"]);
   const titleId = useId();
   const [knownFp, setKnownFp] = useState<string>("");
   const [newFp, setNewFp] = useState<string>("");
@@ -151,11 +154,11 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
               </Text>
               <Text className={styles.metaLine}>
                 {t("Common:KeyChangedFirstSeen", {
-                  date: formatDate(knownFirstSeenAt),
+                  date: formatDate(knownFirstSeenAt, i18n.language),
                 })}
                 {" | "}
                 {t("Common:KeyChangedLastSeen", {
-                  date: formatDate(knownLastSeenAt),
+                  date: formatDate(knownLastSeenAt, i18n.language),
                 })}
               </Text>
               <Text className={styles.activeFor}>

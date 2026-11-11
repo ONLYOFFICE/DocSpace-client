@@ -355,7 +355,7 @@
   "AutoLock5m": "5 Minuten",
   "AutoLock15m": "15 Minuten",
   "AutoLock30m": "30 Minuten",
-  "AutoLockHint": "Zeitgesteuerte Optionen sperren die Schlüssel auch, wenn der Tab ausgeblendet wird. Nach 30 Minuten ohne Nutzung werden die Schlüssel immer gesperrt.",
+  "AutoLockHint": "Die Optionen für 5 und 15 Minuten sperren die Schlüssel auch, wenn der Tab ausgeblendet wird.",
   "AutoLockLabel": "Automatische Sperre nach Inaktivität",
   "AutomaticallyAddCredits": "Guthaben automatisch hinzufügen, wenn das verfügbare Guthaben unter einen festgelegten Betrag fällt",
   "AutomaticTopUps": "Automatische Aufladungen",

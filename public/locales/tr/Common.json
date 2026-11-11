@@ -355,7 +355,7 @@
   "AutoLock5m": "5 dakika",
   "AutoLock15m": "15 dakika",
   "AutoLock30m": "30 dakika",
-  "AutoLockHint": "Süreli seçenekler, sekme gizlendiğinde de anahtarları kilitler. Anahtarlar 30 dakika kullanılmadığında her zaman kilitlenir.",
+  "AutoLockHint": "5 ve 15 dakika seçenekleri, sekme gizlendiğinde de anahtarları kilitler.",
   "AutoLockLabel": "Hareketsizlik sonrası otomatik kilitle",
   "AutomaticallyAddCredits": "Mevcut krediler belirtilen bir tutarın altına düştüğünde otomatik olarak kredi ekleyin",
   "AutomaticTopUps": "Otomatik yüklemeler",

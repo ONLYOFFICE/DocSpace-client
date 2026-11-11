@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minut",
   "AutoLock15m": "15 minut",
   "AutoLock30m": "30 minut",
-  "AutoLockHint": "Časovne možnosti zaklenejo ključe tudi, ko je zavihek skrit. Ključi se vedno zaklenejo po 30 minutah neuporabe.",
+  "AutoLockHint": "Možnosti 5 in 15 minut zakleneta ključe tudi, ko je zavihek skrit.",
   "AutoLockLabel": "Samodejno zaklepanje po nedejavnosti",
   "AutomaticallyAddCredits": "Samodejno dodaj kredite, ko dostopni krediti padejo pod določen znesek",
   "AutomaticTopUps": "Samodejna dopolnjevanja",

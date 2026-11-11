@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minute",
   "AutoLock15m": "15 minute",
   "AutoLock30m": "30 minute",
-  "AutoLockHint": "Opțiunile temporizate blochează cheile și atunci când fila este ascunsă. Cheile se blochează întotdeauna după 30 de minute de neutilizare.",
+  "AutoLockHint": "Opțiunile de 5 și 15 minute blochează cheile și atunci când fila este ascunsă.",
   "AutoLockLabel": "Blocare automată după inactivitate",
   "AutomaticallyAddCredits": "Adăugați automat credite când creditele disponibile scad sub o sumă specificată",
   "AutomaticTopUps": "Reîncărcări automate",

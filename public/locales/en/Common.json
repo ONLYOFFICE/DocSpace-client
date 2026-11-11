@@ -359,7 +359,7 @@
   "AutoLock5m": "5 minutes",
   "AutoLock15m": "15 minutes",
   "AutoLock30m": "30 minutes",
-  "AutoLockHint": "Timed options also lock keys when the tab is hidden. Keys always lock after 30 minutes without use.",
+  "AutoLockHint": "The 5 and 15 minute options also lock keys when the tab is hidden.",
   "AutoLockLabel": "Auto-lock after inactivity",
   "AutomaticallyAddCredits": "Automatically add credits when available credits drop below a specified amount",
   "AutomaticTopUps": "Automatic top-ups",

@@ -355,7 +355,7 @@
   "AutoLock5m": "5分",
   "AutoLock15m": "15分",
   "AutoLock30m": "30分",
-  "AutoLockHint": "時間指定オプションでは、タブが非表示になったときにもキーがロックされます。キーは30分間使用されないと必ずロックされます。",
+  "AutoLockHint": "5分と15分のオプションでは、タブが非表示になったときにもキーがロックされます。",
   "AutoLockLabel": "非操作時に自動ロック",
   "AutomaticallyAddCredits": "利用可能なクレジットが指定した金額を下回ると、自動的にクレジットを追加します",
   "AutomaticTopUps": "自動チャージ",

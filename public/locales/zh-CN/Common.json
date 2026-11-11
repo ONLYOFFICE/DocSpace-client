@@ -355,7 +355,7 @@
   "AutoLock5m": "5 分钟",
   "AutoLock15m": "15 分钟",
   "AutoLock30m": "30 分钟",
-  "AutoLockHint": "定时选项还会在标签页隐藏时锁定密钥。密钥在 30 分钟未使用后始终会被锁定。",
+  "AutoLockHint": "5 分钟和 15 分钟选项还会在标签页隐藏时锁定密钥。",
   "AutoLockLabel": "无操作后自动锁定",
   "AutomaticallyAddCredits": "当可用积分降至指定金额以下时自动添加积分",
   "AutomaticTopUps": "自动充值",

@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minuta",
   "AutoLock15m": "15 minuta",
   "AutoLock30m": "30 minuta",
-  "AutoLockHint": "Opcije sa tajmerom zaključavaju ključeve i kada se kartica sakrije. Ključevi se uvek zaključavaju nakon 30 minuta bez korišćenja.",
+  "AutoLockHint": "Opcije od 5 i 15 minuta zaključavaju ključeve i kada se kartica sakrije.",
   "AutoLockLabel": "Automatsko zaključavanje nakon neaktivnosti",
   "AutomaticallyAddCredits": "Automatski dodaj kredite kada dostupni krediti padnu ispod određenog iznosa",
   "AutomaticTopUps": "Automatske dopune",

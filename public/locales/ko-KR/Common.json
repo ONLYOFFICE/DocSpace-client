@@ -355,7 +355,7 @@
   "AutoLock5m": "5분",
   "AutoLock15m": "15분",
   "AutoLock30m": "30분",
-  "AutoLockHint": "시간 옵션은 탭이 숨겨질 때도 키를 잠급니다. 키는 30분 동안 사용하지 않으면 항상 잠깁니다.",
+  "AutoLockHint": "5분 및 15분 옵션은 탭이 숨겨질 때도 키를 잠급니다.",
   "AutoLockLabel": "비활성 후 자동 잠금",
   "AutomaticallyAddCredits": "사용 가능한 크레딧이 지정된 금액 미만으로 떨어지면 크레딧을 자동으로 추가합니다",
   "AutomaticTopUps": "자동 충전",

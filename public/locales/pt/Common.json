@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minutos",
   "AutoLock15m": "15 minutos",
   "AutoLock30m": "30 minutos",
-  "AutoLockHint": "As opções temporizadas também bloqueiam as chaves quando o separador fica oculto. As chaves são sempre bloqueadas após 30 minutos sem utilização.",
+  "AutoLockHint": "As opções de 5 e 15 minutos também bloqueiam as chaves quando o separador fica oculto.",
   "AutoLockLabel": "Bloqueio automático após inatividade",
   "AutomaticallyAddCredits": "Adicionar créditos automaticamente quando os créditos disponíveis descerem abaixo de um valor especificado",
   "AutomaticTopUps": "Recargas automáticas",

@@ -12,7 +12,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Translations
 
-- [ ] 3.1 Set `Common:AutoLockHint` to the approved wording, refresh its translator comment with the `translate-comments` skill and translate it again in every language with the `translate-key` skill, leaving the metadata of other keys as committed (design decision 5). Verify: `cd common/tests && npx vitest run test/locales.test.js`, and the `translate-stale` skill reports nothing for the key
+- [x] 3.1 Set `Common:AutoLockHint` to the approved wording, refresh its translator comment with the `translate-comments` skill and translate it again in every language with the `translate-key` skill, leaving the metadata of other keys as committed (design decision 5). Verify: `cd common/tests && npx vitest run test/locales.test.js`, and the `translate-stale` skill reports nothing for the key. Done 2026-11-11: the English hint set to the approved wording and rewritten in the 31 languages with the terms each language already used for keys, tab and the minute labels; the translator comment refreshed; `locales.test.js` 44 of 46, its two completeness cases on four keys of another feature; the stale-translation audit reports nothing. The metadata step rewrote 598 files of other keys, which were restored and are not in this commit. The translations were not read by native speakers
 
 ## 4. E2E and gate
 

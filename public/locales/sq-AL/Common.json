@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minuta",
   "AutoLock15m": "15 minuta",
   "AutoLock30m": "30 minuta",
-  "AutoLockHint": "Opsionet me kohë i kyçin çelësat edhe kur skeda fshihet. Çelësat kyçen gjithmonë pas 30 minutash pa përdorim.",
+  "AutoLockHint": "Opsionet 5 dhe 15 minuta i kyçin çelësat edhe kur skeda fshihet.",
   "AutoLockLabel": "Blloko automatikisht pas mosaktivitetit",
   "AutomaticallyAddCredits": "Shtoni automatikisht kredite kur kreditet e disponueshme bien nën një shumë të caktuar",
   "AutomaticTopUps": "Mbushjet automatike",

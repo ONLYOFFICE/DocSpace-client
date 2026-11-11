@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minūtes",
   "AutoLock15m": "15 minūtes",
   "AutoLock30m": "30 minūtes",
-  "AutoLockHint": "Laika opcijas bloķē atslēgas arī tad, kad cilne tiek paslēpta. Atslēgas vienmēr tiek bloķētas pēc 30 minūtēm bez lietošanas.",
+  "AutoLockHint": "5 un 15 minūšu opcijas bloķē atslēgas arī tad, kad cilne tiek paslēpta.",
   "AutoLockLabel": "Automātiskā bloķēšana pēc neaktivitātes",
   "AutomaticallyAddCredits": "Automātiski pievienot kredītus, kad pieejamie kredīti nokrīt zem noteiktas summas",
   "AutomaticTopUps": "Automātiskā papildināšana",

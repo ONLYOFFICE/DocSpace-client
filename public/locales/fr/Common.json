@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minutes",
   "AutoLock15m": "15 minutes",
   "AutoLock30m": "30 minutes",
-  "AutoLockHint": "Les options temporisées verrouillent également les clés lorsque l'onglet est masqué. Les clés sont toujours verrouillées après 30 minutes sans utilisation.",
+  "AutoLockHint": "Les options de 5 et 15 minutes verrouillent également les clés lorsque l'onglet est masqué.",
   "AutoLockLabel": "Verrouillage automatique après inactivité",
   "AutomaticallyAddCredits": "Ajouter automatiquement des crédits lorsque les crédits disponibles passent en dessous d'un montant spécifié",
   "AutomaticTopUps": "Rechargements automatiques",

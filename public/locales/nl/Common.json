@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minuten",
   "AutoLock15m": "15 minuten",
   "AutoLock30m": "30 minuten",
-  "AutoLockHint": "Getimede opties vergrendelen de sleutels ook wanneer het tabblad wordt verborgen. Na 30 minuten zonder gebruik worden de sleutels altijd vergrendeld.",
+  "AutoLockHint": "De opties van 5 en 15 minuten vergrendelen de sleutels ook wanneer het tabblad wordt verborgen.",
   "AutoLockLabel": "Automatisch vergrendelen na inactiviteit",
   "AutomaticallyAddCredits": "Automatisch credits toevoegen wanneer de beschikbare credits onder een bepaald bedrag dalen",
   "AutomaticTopUps": "Automatische aanvullingen",

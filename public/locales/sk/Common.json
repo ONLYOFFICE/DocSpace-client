@@ -355,7 +355,7 @@
   "AutoLock5m": "5 minút",
   "AutoLock15m": "15 minút",
   "AutoLock30m": "30 minút",
-  "AutoLockHint": "Časované možnosti zamknú kľúče aj pri skrytí karty. Po 30 minútach bez použitia sa kľúče zamknú vždy.",
+  "AutoLockHint": "Možnosti 5 a 15 minút zamknú kľúče aj pri skrytí karty.",
   "AutoLockLabel": "Automatické zamknutie po nečinnosti",
   "AutomaticallyAddCredits": "Automaticky pridať kredity, keď dostupné kredity klesnú pod stanovenú sumu",
   "AutomaticTopUps": "Automatické dobíjanie",

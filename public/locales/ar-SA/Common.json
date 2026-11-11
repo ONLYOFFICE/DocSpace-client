@@ -952,6 +952,7 @@
   "EnableNotifications": "تفعيل الاشعارات",
   "EnableThirdPartyIntegration": "يرجى الطلب من المالك أو المسؤول العام تفعيل الخدمة المقابلة في قسم التكامل من إعدادات مساحة العمل.",
   "EnableWebSearchInBilling": "قم بتمكين بحث الويب في قسم الفوترة",
+  "EncryptedAccessChangeRefused": "لم يتغيّر الوصول: العضو ليس لديه مفاتيح تشفير.",
   "EncryptedAccessPending": "الوصول قيد الانتظار",
   "EncryptedAccessRestored": "أصبح لدى {{user}} الآن حق الوصول إلى جميع الملفات المشفرة في الغرفة.",
   "EncryptedChangeOwnerKeyMismatch": "لا يمكن نقل الملكية إلى {{user}}: تغيّر مفتاح التشفير الخاص به ولم يُوثَّق. أعد التحقق من المفتاح وحاول مجدداً.",

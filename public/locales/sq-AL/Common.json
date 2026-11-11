@@ -952,6 +952,7 @@
   "EnableNotifications": "Aktivizoni njoftimet",
   "EnableThirdPartyIntegration": "Ju lutemi kërkojini pronarit ose superadministratorit të aktivizojë shërbimin përkatës në seksionin Integrimi të cilësimeve të hapësirës së punës.",
   "EnableWebSearchInBilling": "Aktivizoni kërkimin në internet te Faturimi",
+  "EncryptedAccessChangeRefused": "Aksesi nuk u ndryshua: anëtari nuk ka çelësa enkriptimi.",
   "EncryptedAccessPending": "Qasja në pritje",
   "EncryptedAccessRestored": "{{user}} tani ka qasje në të gjithë skedarët e enkriptuar të dhomës.",
   "EncryptedChangeOwnerKeyMismatch": "Nuk mund të transferohet pronësia te {{user}}: çelësi i tyre i enkriptimit ka ndryshuar dhe nuk u besua. Ri-verifikoni çelësin dhe provoni përsëri.",

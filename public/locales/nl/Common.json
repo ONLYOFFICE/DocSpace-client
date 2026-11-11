@@ -952,6 +952,7 @@
   "EnableNotifications": "Meldingen inschakelen",
   "EnableThirdPartyIntegration": "Vraag de eigenaar of superbeheerder om de bijbehorende dienst in de sectie Integratie van de werkruimte-instellingen in te schakelen.",
   "EnableWebSearchInBilling": "Schakel webzoekactie in bij Facturering",
+  "EncryptedAccessChangeRefused": "Toegang niet gewijzigd: het lid heeft geen versleutelingssleutels.",
   "EncryptedAccessPending": "Toegang in afwachting",
   "EncryptedAccessRestored": "{{user}} heeft nu toegang tot alle versleutelde bestanden in de kamer.",
   "EncryptedChangeOwnerKeyMismatch": "Kan eigendom niet overdragen aan {{user}}: hun versleutelingssleutel is gewijzigd en werd niet vertrouwd. Verifieer de sleutel opnieuw en probeer het nogmaals.",

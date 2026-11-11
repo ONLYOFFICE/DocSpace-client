@@ -952,6 +952,7 @@
   "EnableNotifications": "Abilita le notifiche",
   "EnableThirdPartyIntegration": "Chiedi al proprietario o al superamministratore di abilitare il servizio corrispondente nella sezione Integrazione delle impostazioni dello spazio di lavoro.",
   "EnableWebSearchInBilling": "Attiva la ricerca web in Fatturazione",
+  "EncryptedAccessChangeRefused": "Accesso non modificato: il membro non ha chiavi di cifratura.",
   "EncryptedAccessPending": "Accesso in attesa",
   "EncryptedAccessRestored": "{{user}} ora ha accesso a tutti i file cifrati della stanza.",
   "EncryptedChangeOwnerKeyMismatch": "Impossibile trasferire la proprietà a {{user}}: la sua chiave di cifratura è cambiata e non è stata ritenuta affidabile. Verificare nuovamente la chiave e riprovare.",

@@ -952,6 +952,7 @@
   "EnableNotifications": "Aktivizēt paziņojumus",
   "EnableThirdPartyIntegration": "Lūdziet īpašniekam vai superadministratoram iespējot attiecīgo pakalpojumu darbvietas iestatījumu sadaļā Integrācija.",
   "EnableWebSearchInBilling": "Iespējojiet tīmekļa meklēšanu sadaļā Maksājumi",
+  "EncryptedAccessChangeRefused": "Piekļuve nav mainīta: dalībniekam nav šifrēšanas atslēgu.",
   "EncryptedAccessPending": "Piekļuve tiek gaidīta",
   "EncryptedAccessRestored": "Lietotājam {{user}} tagad ir piekļuve visiem telpas šifrētajiem failiem.",
   "EncryptedChangeOwnerKeyMismatch": "Nevar nodot īpašumtiesības {{user}}: viņu šifrēšanas atslēga ir mainīta un nav uzticēta. Atkārtoti verificējiet atslēgu un mēģiniet vēlreiz.",

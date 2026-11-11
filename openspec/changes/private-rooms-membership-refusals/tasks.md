@@ -15,7 +15,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Translations
 
-- [ ] 3.1 Write the translator comment of `Common:EncryptedAccessChangeRefused` with the `translate-comments` skill from the call sites of 1.1 to 2.2, and translate the key with the `translate-locales` skill. Verify: `cd common/tests && npx vitest run test/locales.test.js`, and the `translate-stale` skill reports nothing for the key
+- [x] 3.1 Write the translator comment of `Common:EncryptedAccessChangeRefused` with the `translate-comments` skill from the call sites of 1.1 to 2.2, and translate the key with the `translate-locales` skill. Verify: `cd common/tests && npx vitest run test/locales.test.js`, and the `translate-stale` skill reports nothing for the key. Done 2026-11-11: the comment written with `translate-comments`, the key translated into the 31 languages with `translate-key`, the skill for a single key; `locales.test.js` passes except its two completeness cases, which list only four keys of another feature; the stale-translation check does not name the key. The metadata step of the comment skill also rewrote the usage of 352 other keys, which was left out of this commit
 
 ## 4. Records and gate
 

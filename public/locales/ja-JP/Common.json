@@ -952,6 +952,7 @@
   "EnableNotifications": "通知をオンにする",
   "EnableThirdPartyIntegration": "ワークスペース設定の「統合」セクションで該当のサービスを有効にするよう、所有者またはスーパー管理者にご依頼ください。",
   "EnableWebSearchInBilling": "「請求」でWeb検索を有効にしてください",
+  "EncryptedAccessChangeRefused": "アクセスは変更されませんでした：メンバーに暗号化キーがありません。",
   "EncryptedAccessPending": "アクセス保留中",
   "EncryptedAccessRestored": "{{user}}がルーム内のすべての暗号化ファイルにアクセスできるようになりました。",
   "EncryptedChangeOwnerKeyMismatch": "{{user}}への所有権の移転はできません：相手の暗号化キーが変更されており、信頼されていません。キーを再確認してから再試行してください。",

@@ -952,6 +952,7 @@
   "EnableNotifications": "Ativar notificações",
   "EnableThirdPartyIntegration": "Peça ao proprietário ou ao superadministrador para ativar o serviço correspondente na seção Integração das configurações do do espaço de trabalho.",
   "EnableWebSearchInBilling": "Ative a busca na Web em Cobrança",
+  "EncryptedAccessChangeRefused": "Acesso não alterado: o membro não tem chaves de criptografia.",
   "EncryptedAccessPending": "Acesso pendente",
   "EncryptedAccessRestored": "{{user}} agora tem acesso a todos os arquivos criptografados da sala.",
   "EncryptedChangeOwnerKeyMismatch": "Não é possível transferir a propriedade para {{user}}: a chave de criptografia deles mudou e não foi confiada. Verifique novamente a chave e tente de novo.",

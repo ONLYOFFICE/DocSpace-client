@@ -952,6 +952,7 @@
   "EnableNotifications": "Omogoči obvestila",
   "EnableThirdPartyIntegration": "Prosite lastnika ali superskrbnika, da vklopi ustrezno storitev v razdelku Integracija v nastavitvah delovnega prostora.",
   "EnableWebSearchInBilling": "Omogočite iskanje v spletu v razdelku Obračunovanje",
+  "EncryptedAccessChangeRefused": "Dostop ni bil spremenjen: član nima šifrirnih ključev.",
   "EncryptedAccessPending": "Dostop v čakanju",
   "EncryptedAccessRestored": "Uporabnik {{user}} ima zdaj dostop do vseh šifriranih datotek v sobi.",
   "EncryptedChangeOwnerKeyMismatch": "Lastništva ni mogoče prenesti na {{user}}: njihov šifrirni ključ se je spremenil in ni bil zaupan. Znova preverite ključ in poskusite znova.",

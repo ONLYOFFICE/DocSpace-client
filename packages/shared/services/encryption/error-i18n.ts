@@ -79,8 +79,9 @@ export function getEncryptionErrorMessage(
   ) {
     return t("Common:EncryptionUnsupportedKeyVersion");
   }
+  // Spec: private-rooms/file-operations, "A file without a wrap for the user is reported as no access"
   if (error instanceof NoAccessError) {
-    return t("Common:NoAccessToEncryptedFile");
+    return t("Common:EncryptedFileNoAccessYet");
   }
   if (error instanceof KeyNotFoundError) {
     return t("Common:NoEncryptionKey");

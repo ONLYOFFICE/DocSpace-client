@@ -890,6 +890,116 @@ describe("encryptedFiles mock — the room owner's rights and the versions (mirr
     });
   });
 
+  const rightsOf = async (
+    title: string,
+    roomId = ROOM_ID,
+    bytes?: Uint8Array,
+  ) => {
+    const target = roomId === ROOM_ID ? handle : archivedHandle;
+    target.current!.setFiles([{ ...seed, title, bytes }]);
+    return (await list(roomId)).response.files[0].security;
+  };
+  /** A DSE3 header start: magic, version, reserved byte, flags. */
+  const dse3 = (flags: number) =>
+    new Uint8Array([0x44, 0x53, 0x45, 0x33, 2, 0, flags, 0]);
+
+  it("Owner rights on a spreadsheet", async () => {
+    expect(await rightsOf("secret.xlsx")).toMatchObject({
+      Comment: true,
+      Review: true,
+      CustomFilter: true,
+      EditHistory: true,
+      SubmitToFormGallery: true,
+      FillForms: false,
+      StartFilling: false,
+      FillingStatus: false,
+      ResetFilling: false,
+      StopFilling: false,
+      OpenForm: false,
+      AskAi: false,
+      Convert: false,
+      Embed: false,
+      Vectorization: false,
+    });
+  });
+
+  it("Owner rights on a PDF", async () => {
+    expect(await rightsOf("secret.pdf", ROOM_ID, dse3(0))).toMatchObject({
+      OpenForm: true,
+      FillForms: false,
+      SubmitToFormGallery: false,
+    });
+  });
+
+  it("Owner rights on a PDF form", async () => {
+    expect(await rightsOf("secret.pdf", ROOM_ID, dse3(0x02))).toMatchObject({
+      OpenForm: true,
+      FillForms: false,
+      SubmitToFormGallery: true,
+    });
+  });
+
+  it("Owner rights on an image", async () => {
+    expect(await rightsOf("secret.png")).toMatchObject({
+      Comment: true,
+      SubmitToFormGallery: false,
+      OpenForm: false,
+    });
+  });
+
+  it("Owner rights in an archived room", async () => {
+    expect(await rightsOf("secret.xlsx", ARCHIVED_ROOM_ID)).toMatchObject({
+      Comment: false,
+      Review: false,
+      CustomFilter: false,
+      EditHistory: false,
+      SubmitToFormGallery: false,
+      OpenForm: false,
+    });
+    expect(
+      await rightsOf("secret.pdf", ARCHIVED_ROOM_ID, dse3(0x02)),
+    ).toMatchObject({ SubmitToFormGallery: false, OpenForm: false });
+  });
+
+  it("Every right key is present", async () => {
+    const keys = Object.keys(await rightsOf("secret.docx")).sort();
+
+    expect(keys).toEqual(
+      [
+        "Read",
+        "Comment",
+        "FillForms",
+        "Review",
+        "Edit",
+        "Delete",
+        "CustomFilter",
+        "Rename",
+        "ReadHistory",
+        "Lock",
+        "EditHistory",
+        "Copy",
+        "Move",
+        "Duplicate",
+        "SubmitToFormGallery",
+        "Download",
+        "Convert",
+        "CreateRoomFrom",
+        "CopyLink",
+        "Embed",
+        "StartFilling",
+        "FillingStatus",
+        "ResetFilling",
+        "StopFilling",
+        "OpenForm",
+        "Vectorization",
+        "AskAi",
+      ].sort(),
+    );
+    expect(
+      Object.keys(await rightsOf("secret.docx", ARCHIVED_ROOM_ID)).sort(),
+    ).toEqual(keys);
+  });
+
   it("Seeded version group", async () => {
     handle.current!.setFiles([seed, { ...seed, id: 2, versionGroup: 3 }]);
 

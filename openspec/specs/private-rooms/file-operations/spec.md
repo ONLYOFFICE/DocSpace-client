@@ -360,6 +360,10 @@ The system SHALL download an encrypted file by fetching the ciphertext, decrypti
 - **WHEN** the user downloads an encrypted file from the media viewer with its download button or Ctrl+S, and the identity is unlocked
 - **THEN** the browser saves the plaintext file under its original name, and the ciphertext MUST NOT be handed to the browser as the download
 
+#### Scenario: Download from the media viewer of a file that cannot be found
+- **WHEN** the user downloads an encrypted file from the media viewer, and the file is neither in the current folder list nor the file the viewer was opened for
+- **THEN** Common:EncryptionDownloadFailed is shown, nothing is downloaded, and the ciphertext MUST NOT be handed to the browser as the download
+
 ### Requirement: Multiple encrypted files download as a decrypted zip
 The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, a decrypted name that clashes with another taking the lowest numbered suffix no other entry has. A selected folder that lies in a private room SHALL be included as its decrypted subtree under the folder's name, and no server archive SHALL be requested for it. Non-encrypted files and folders outside private rooms of the same selection download through the standard path.
 
@@ -421,7 +425,7 @@ The system SHALL delete items in a private room permanently, never moving them t
 - **THEN** the confirmation dialog is shown before anything is deleted, and nothing MUST be deleted without it
 
 ### Requirement: Version operations withheld
-The system SHALL NOT offer version history, finalize version, version list or version blocking for an encrypted file. The version badge of an encrypted file MAY show the version count, but SHALL NOT open the version history or carry the Common:ShowVersionHistory tooltip, whatever history rights the server reports for the file.
+The system SHALL NOT offer version history, finalize version, version list, version blocking or editing of the version comment for an encrypted file. The version badge of an encrypted file MAY show the version count, but SHALL NOT open the version history or carry the Common:ShowVersionHistory tooltip, whatever history rights the server reports for the file.
 
 #### Scenario: Context menu of an encrypted file
 - **WHEN** the context menu of an encrypted file is opened
@@ -434,6 +438,14 @@ The system SHALL NOT offer version history, finalize version, version list or ve
 #### Scenario: Version badge of a file that is not encrypted
 - **WHEN** the user clicks the version badge of a file that is not encrypted and has several versions, and the server reports the ReadHistory right on it
 - **THEN** the version history panel opens, and the badge carries the Common:ShowVersionHistory tooltip
+
+#### Scenario: Version comment of an encrypted file in the info panel
+- **WHEN** the Details view of the info panel shows an encrypted file and the server reports the EditHistory right on it
+- **THEN** the comment has no Common:EditButton or Common:AddButton control, no version list is requested, and a comment MUST NOT be sent to the server
+
+#### Scenario: Version comment of a file that is not encrypted in the info panel
+- **WHEN** the Details view of the info panel shows a file that is not encrypted and the server reports the EditHistory right on it
+- **THEN** the comment carries the Common:EditButton or Common:AddButton control
 
 ### Requirement: Favorites, conversion and download-as withheld
 The system SHALL NOT offer mark-as-favorite, convert or download-as for an encrypted file, nor favorites for a folder in a private room.

@@ -20,7 +20,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 ## 4. Records and gate
 
 - [x] 4.1 Correct the record of `private-rooms-server-hardening` 6.7 in its tasks.md: before it the refused leave was reported by the shell's 403 handler with `Common:AccessDenied`, and the dialog stayed on its loader; since it the dialog showed the server's sentence, which this change replaces. Verify: `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Done 2026-11-11: a dated correction appended to the record of 6.7; validation 20 of 20
-- [ ] 4.2 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `cd common/tests && npx vitest run test/locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date
+- [x] 4.2 Run the gate: `pnpm exec tsc` in the six packages, the shared, client and sdk unit suites, `cd common/tests && npx vitest run test/locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date. Done 2026-11-11: `tsc` clean in the six packages; unit suites shared 2281 of 2281, client 2076 of 2076, sdk 493 of 493; `locales.test.js` 44 of 46, the two completeness cases failing on four keys of another feature only; OpenSpec validation 20 of 20. The E2E case of 1.3 passed under Docker; the SDK E2E suite was not run
 
 ## Workflow follow-up
 

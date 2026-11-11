@@ -19,7 +19,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. E2E
 
-- [ ] 3.1 Client: run the private-room, encrypted-file, key-flow and keys-management specs in Docker `tests-dev` after the text change. Verify: no failure beyond the two wide-screen screenshot cases of `keys-management.spec.ts`; a screenshot that changes because of a text is updated only through the Docker update script and named here
+- [x] 3.1 Client: run the private-room, encrypted-file, key-flow and keys-management specs in Docker `tests-dev` after the text change. Verify: no failure beyond the two wide-screen screenshot cases of `keys-management.spec.ts`; a screenshot that changes because of a text is updated only through the Docker update script and named here
+  - 2026-11-11: the first run took 9.2 minutes instead of about four and failed four cases with "element(s) not found" besides the two screenshots: "Ordinary room row" of `private-room-upload-target.spec.ts`, "App-off spec" and "Browser-local flag ignored" of `private-rooms-app-off.spec.ts`, "Base fixture" of `private-rooms-section.spec.ts`. The three specs alone: 78 of 78. The full set again, 4.1 minutes: 158 passed, 6 skipped, the two screenshot cases failed as before this change. The four failures did not repeat and are read as load on the machine, not as an effect of the texts. No screenshot was updated.
 
 ## 4. Gate
 

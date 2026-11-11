@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
@@ -107,6 +108,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 		setWidth(offsetWidth - 32);
 	}, [containerRef, containerRef?.current?.offsetWidth]);
 
+	const isPrivateRoom = useContext(PrivateRoomInviteContext);
+
 	const accessOptions = getAccessOptions(
 		t,
 		roomType as RoomsType,
@@ -115,6 +118,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 		isOwner,
 		isAdmin,
 		standalone,
+		isPrivateRoom,
 	);
 
 	const selectedOption = accessOptions.filter(

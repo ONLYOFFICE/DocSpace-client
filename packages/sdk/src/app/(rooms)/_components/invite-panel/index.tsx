@@ -61,6 +61,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import React, {
   useEffect,
   useState,
@@ -915,6 +916,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     isOwner,
     isAdmin,
     false, // standalone = false
+    isPrivateRoom,
   ) as (TOption & { access?: number })[];
 
   const invitedUsersArray = useMemo(
@@ -1170,7 +1172,9 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         {inviteOutcome ? (
           <InviteResult t={t} outcome={inviteOutcome} />
         ) : (
-          bodyInvitePanel
+          <PrivateRoomInviteContext.Provider value={isPrivateRoom}>
+            {bodyInvitePanel}
+          </PrivateRoomInviteContext.Provider>
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>

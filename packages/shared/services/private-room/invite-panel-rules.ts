@@ -33,6 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { createContext } from "react";
+
+/**
+ * Whether the open invite panel belongs to a private room. The panel provides
+ * it; its role lists read it to pick the description of the Editor role.
+ * Spec: private-rooms/room-membership, "Editor role of a private room does not promise form filling"
+ */
+export const PrivateRoomInviteContext = createContext(false);
+
 /**
  * Whether the invite panel of a room may offer guests: an invitation by email
  * and its language, and the Guests list. A private room takes neither,

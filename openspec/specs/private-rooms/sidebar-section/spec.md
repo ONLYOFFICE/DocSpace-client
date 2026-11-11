@@ -69,15 +69,15 @@ The system SHALL request the section list as active rooms with the privacy filte
 - **THEN** that room is never listed in the Private section
 
 ### Requirement: Rooms section excludes private rooms while the section is available
-The system SHALL request the Rooms list and Rooms → Archive with the privacy filter NotPrivate while the Private section is available, so a private room is listed only in its own section. While the section is not available, those lists SHALL carry no privacy filter and list private rooms as before.
+The system SHALL request the Rooms list and Rooms → Archive with the privacy filter NotPrivate while the Private section is available, so a private room is listed only in its own section. While the section is not available, the Rooms list SHALL carry no privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive SHALL keep the filter NotPrivate, so private rooms are listed nowhere.
 
 #### Scenario: Section available
 - **WHEN** the user opens Rooms or Rooms → Archive while the section is available
 - **THEN** the request carries `privacyFilter=NotPrivate` and no private room is listed
 
 #### Scenario: Section not available
-- **WHEN** the user opens Rooms while the section is not available
-- **THEN** the request carries no privacy filter and private rooms are listed with their private badge
+- **WHEN** the user opens Rooms or Rooms → Archive while the section is not available
+- **THEN** the Rooms request carries no privacy filter, the Rooms → Archive request carries `privacyFilter=NotPrivate`, and no private room is listed
 
 #### Scenario: Address asks Rooms for private rooms
 - **WHEN** a Rooms address carrying `privacyFilter=Private` is opened while the section is available

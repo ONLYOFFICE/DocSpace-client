@@ -24,7 +24,7 @@ card C10):
 
 ## What Changes
 
-### Reworded texts (English; for the owner's approval before translation)
+### Reworded texts (English; approved by the owner on 2026-11-11)
 
 | Key | Now | Proposed |
 |-----|-----|----------|
@@ -71,15 +71,14 @@ Out of scope:
 - The security wording of the disclosure and of the beta notice.
 - Review of the translations by native speakers.
 
-Decisions that need a human:
+Decisions taken by the owner on 2026-11-11:
 
-1. The eleven texts of the table.
-2. The rename of `KeyChangedReasonDevice` to `KeyChangedReasonReplaced`.
-   Proposed: rename, so the key does not keep the claim its text loses.
-   The alternative keeps the key name and changes the text only.
-3. The file name `encryption-key-<fingerprint>.json`. The alternative
-   takes the product name from `getBrandName()`, which puts a
-   white-label name into the file name.
+1. The eleven texts of the table are approved.
+2. `KeyChangedReasonDevice` is renamed `KeyChangedReasonReplaced`, so the
+   key does not keep the claim its text loses.
+3. The exported file is named `encryption-key-<fingerprint>.json`. Taking
+   the product name from `getBrandName()` was the alternative and is not
+   used.
 
 Depends on: nothing in `../server` or the Document Server. The change
 states nothing about server behaviour.

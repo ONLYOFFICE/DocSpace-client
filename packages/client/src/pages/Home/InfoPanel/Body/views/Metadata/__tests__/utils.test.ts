@@ -254,6 +254,15 @@ describe("formatMetadataValue", () => {
   it("shows nothing for an empty field", () => {
     expect(formatMetadataValue(field(MetadataFieldType.String), "en")).toBe("");
   });
+
+  it("writes numbers with Western digits in Arabic", () => {
+    expect(
+      formatMetadataValue(
+        field(MetadataFieldType.Number, { numberValue: 1250000 }),
+        "ar-SA",
+      ),
+    ).toBe("1,250,000");
+  });
 });
 
 describe("formatPreviousValue", () => {
@@ -348,6 +357,11 @@ describe("template form", () => {
     );
     expect(getFieldInputError(t, number, "54444444444444444444444", "en")).toBe(
       "Metadata:NumberOutOfRangeError:-9,007,199,254,740,991..9,007,199,254,740,991",
+    );
+    expect(
+      getFieldInputError(t, number, "54444444444444444444444", "ar-SA"),
+    ).toBe(
+      "Metadata:NumberOutOfRangeError:\u200E-9,007,199,254,740,991..9,007,199,254,740,991",
     );
     expect(getFieldInputError(t, number, "9007199254740991", "en")).toBe(null);
     expect(

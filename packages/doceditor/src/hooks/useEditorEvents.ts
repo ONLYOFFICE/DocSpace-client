@@ -81,6 +81,7 @@ import {
 import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 import { getRefreshFileAction } from "@/utils/refreshFileAction";
 
@@ -661,6 +662,7 @@ const useEditorEvents = ({
         changesModified.forEach((item) => {
           item.created = `${new Date(item.created).toLocaleString(
             config?.editorConfig.lang,
+            { numberingSystem: LATIN_NUMBERING_SYSTEM },
           )}`;
         });
 
@@ -668,6 +670,7 @@ const useEditorEvents = ({
           ...(changes.length !== 0 && { changes: changesModified }),
           created: `${new Date(fileHistory[i].created).toLocaleString(
             config?.editorConfig.lang,
+            { numberingSystem: LATIN_NUMBERING_SYSTEM },
           )}`,
           ...(serverVersion && { serverVersion }),
           key: fileHistory[i].key,
@@ -769,7 +772,8 @@ const useEditorEvents = ({
       const currEvent = event as TEvent;
 
       const actionData = currEvent.data.actionLink;
-      const comment = currEvent.data.message;
+      // Spec: editor-integration, "Mention notifications of an encrypted file carry no comment text"
+      const comment = fileInfo?.encrypted ? "" : currEvent.data.message;
       const emails = currEvent.data.emails;
 
       if (!fileInfo?.id) return;
@@ -802,7 +806,7 @@ const useEditorEvents = ({
         toastr.error(e as TData);
       }
     },
-    [fileInfo?.id, t, usersInRoom],
+    [fileInfo?.id, fileInfo?.encrypted, t, usersInRoom],
   );
 
   const onSDKRequestUsers = React.useCallback(

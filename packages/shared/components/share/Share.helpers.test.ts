@@ -39,11 +39,25 @@ import { ShareAccessRights, ShareRights } from "../../enums";
 import type { TTranslation } from "../../types";
 
 import {
+  getExpiredOptions,
   getLinkAccessRightOptions,
   getRoomLinkAccessOptions,
 } from "./Share.helpers";
 
 const t: TTranslation = (key) => key;
+
+describe("getExpiredOptions", () => {
+  it("writes the relative periods with Western digits in Arabic", () => {
+    const noop = () => {};
+    const labels = getExpiredOptions(t, noop, noop, noop, noop, noop, "ar-SA")
+      .slice(0, 3)
+      .map((option) => option.label);
+
+    labels.forEach((label) => expect(label).not.toMatch(/[٠-٩]/));
+    expect(labels[0]).toContain("12");
+    expect(labels[2]).toContain("7");
+  });
+});
 
 describe("getLinkAccessRightOptions", () => {
   it("builds the options from the available rights of a non-primary link", () => {

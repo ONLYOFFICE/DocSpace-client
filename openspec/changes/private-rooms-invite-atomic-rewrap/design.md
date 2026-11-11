@@ -42,7 +42,7 @@ Server constraints that bound the ordering (`../server` on `hotfix/v4.0.1`):
 
 ## Migration Plan
 
-No data migration. Behind the `privateRooms` flag. Rollback by revert.
+No data migration. The feature is a beta offered to every user since 2026-11-03, no longer behind a flag. Rollback by revert.
 
 ## Open Questions
 

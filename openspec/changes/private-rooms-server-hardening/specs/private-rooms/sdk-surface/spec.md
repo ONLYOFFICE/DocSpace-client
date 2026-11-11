@@ -23,11 +23,11 @@ When a member is removed from a private room in the SDK, the removal dialog SHAL
 - **THEN** the warning is shown, the role update runs and the SDK writes no access entry
 
 #### Scenario: Remove a group
-- **WHEN** a group is removed from a private room
+- **WHEN** the subject of a removal from a private room is a group, which the server does not let join one in this version
 - **THEN** the role update runs for the group alone, without expanding it into its members, and the SDK writes no access entry
 
-### Requirement: Leaving a private room revokes own access first
-The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, drop the role without a revocation of its own; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
+### Requirement: Leaving a private room drops the role without a revocation of its own
+The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, drop the role without a revocation of its own; the server removes the leaver's wrapped keys with the role, the room's current owner excepted.
 
 #### Scenario: Member leaves
 - **WHEN** a member leaves a private room

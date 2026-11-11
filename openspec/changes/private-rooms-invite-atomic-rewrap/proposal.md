@@ -2,7 +2,7 @@
 
 ## Why
 
-Inviting members to a private room today grants room access first and re-wraps the file keys afterwards. When the re-wrap is skipped (no key, refused key change) or fails for some files, the invitee is already a room member who can list the room but cannot read any file, and the only signal is a warning toast that disappears. There is no retry and no visible state. Independently, the guard that blocks removing a member while uploads are in flight only counts uploads into the room root, so an upload into a subfolder can still finish after the revoke and leave the removed member with a wrap. Both gaps are undocumented in the recovered design documents and both must close before the feature leaves its flag.
+Inviting members to a private room today grants room access first and re-wraps the file keys afterwards. When the re-wrap is skipped (no key, refused key change) or fails for some files, the invitee is already a room member who can list the room but cannot read any file, and the only signal is a warning toast that disappears. There is no retry and no visible state. Independently, the guard that blocks removing a member while uploads are in flight only counts uploads into the room root, so an upload into a subfolder can still finish after the revoke and leave the removed member with a wrap. Both gaps are undocumented in the recovered design documents and both must close before the feature is generally available (it has been a beta offered to every user, without a flag, since 2026-11-03).
 
 ## What Changes
 
@@ -43,7 +43,7 @@ Inviting members to a private room today grants room access first and re-wraps t
 
 ## Decisions needed
 
-1. (2026-11-05) Whether the pending-access marker is rebuilt from the server's missing-keys answer (`GET privacyroom/{roomId}/access/missing`, `private-rooms-server-hardening` 14.1), so it survives a reload and reaches other devices, or stays the in-memory record of design decision 2 for the beta. Owner: feature owner. Task 3.5 waits for it.
+1. (2026-11-05) Whether the pending-access marker is rebuilt from the server's missing-keys answer (`GET privacyroom/{roomId}/access/missing`, `private-rooms-server-hardening` 14.1), so it survives a reload and reaches other devices, or stays the in-memory record of design decision 2 for the beta. Owner: feature owner. Decided by the owner on 2026-11-10: the marker is rebuilt from the server's missing-keys answer; task 3.5 implements it.
 
 Decided on 2026-10-26: access is granted first and the wraps follow, with the pending-access state and retry; the backfill sweep re-wraps for every member when a room manager opens the room. A transactional grant-and-keys endpoint is the later target (`private-rooms-server-hardening`); wrap-first after a change to the server's access-entry authorization was not taken.
 

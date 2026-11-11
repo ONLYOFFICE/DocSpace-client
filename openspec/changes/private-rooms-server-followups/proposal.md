@@ -55,9 +55,10 @@ Out of scope:
 Decisions that need a human:
 
 1. Backend team: the answers of tasks 2.4 and 1.5.
-2. Owner: whether the comment and review rights stay granted on an
-   encrypted file. This proposal leaves them granted, since commenting and
-   reviewing happen inside the encrypted document.
+
+Decided by the owner on 2026-11-11: the comment and review rights stay
+granted on an encrypted file, since commenting and reviewing happen inside
+the encrypted document.
 
 Depends on: `../server` for every Backend task. The Document Server
 questions stay in `private-rooms-editor-contract` 1.2 and 1.6; no answer to

@@ -153,7 +153,8 @@ with `common/`.
    of the server as it is; the two meet when the work lands and this change
    is archived. Alternative: editing the main spec now. Rejected: it would
    describe a server that does not exist.
-3. **Comment and review stay granted on an encrypted file.** They are
+3. **Comment and review stay granted on an encrypted file (decided by the
+   owner on 2026-11-11).** They are
    editor permissions for work inside the encrypted document, which the
    server does not need to read. The other granted rights name operations
    the client withholds.

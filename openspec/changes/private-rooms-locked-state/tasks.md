@@ -17,7 +17,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. E2E
 
-- [ ] 4.1 Client: add the cases "Prompt cancelled on entry" and "Unlock from the bar cancelled" to `packages/client/__tests__/private-room-access.spec.ts`, and rerun the specs that show the unlock dialog. Verify: Docker `tests-dev` for `private-room-*.spec.ts`, `encrypted-file-ui.spec.ts`, `key-flow-edge-cases.spec.ts`, `keys-management*.spec.ts`; a screenshot of the unlock dialog that changes is updated only through the Docker update script and named here
+- [x] 4.1 Client: add the cases "Prompt cancelled on entry" and "Unlock from the bar cancelled" to `packages/client/__tests__/private-room-access.spec.ts`, and rerun the specs that show the unlock dialog. Verify: Docker `tests-dev` for `private-room-*.spec.ts`, `encrypted-file-ui.spec.ts`, `key-flow-edge-cases.spec.ts`, `keys-management*.spec.ts`; a screenshot of the unlock dialog that changes is updated only through the Docker update script and named here
 
 ## 5. Gate
 

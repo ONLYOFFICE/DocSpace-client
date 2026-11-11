@@ -14,7 +14,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Translations
 
-- [ ] 3.1 Write the translator comment of `Common:EncryptionUploadNotKept` with the `translate-comments` skill from its call sites and translate it with the `translate-key` skill, leaving the metadata of other keys as committed. Verify: `cd common/tests && npx vitest run test/locales.test.js`, and the `translate-stale` skill reports nothing for the key
+- [x] 3.1 Write the translator comment of `Common:EncryptionUploadNotKept` with the `translate-comments` skill from its call sites and translate it with the `translate-key` skill, leaving the metadata of other keys as committed. Verify: `cd common/tests && npx vitest run test/locales.test.js`, and the `translate-stale` skill reports nothing for the key. Done 2026-11-11: the comment written with `translate-comments`, the key translated into the 31 languages by the steps of `translate-key` with the terms of the neighbouring upload messages; `locales.test.js` 44 of 46, its two completeness cases listing four keys of another feature only; the stale-translation check does not name the key. The metadata step rewrote 557 files of other keys, which were restored and are not in this commit. The translations were not read by native speakers
 
 ## 4. E2E
 

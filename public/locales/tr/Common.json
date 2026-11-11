@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Şifrelemenin kilidinin açılması gerekiyor",
   "EncryptionUnsupportedKeyVersion": "Bu şifreleme anahtarı desteklenmeyen bir sürüm kullanıyor. Devam etmek için lütfen uygulamayı güncelleyin.",
   "EncryptionUploadCancelled": "Yükleme iptal edildi: şifreleme anahtarının kilidi açılmadı. Dosya gönderilmedi.",
+  "EncryptionUploadNotKept": "Dosya kaydedilmedi: şifrelemesi tamamlanamadı. Dosyayı yeniden yükleyin.",
   "EncryptionUploadWrapFailed": "Yüklenen dosya için şifreleme mühürleme başarısız oldu. Dosya açılamayabilir; lütfen dosyayı kaldırıp yeniden yükleyin.",
   "EnterAmount": "Bir tam sayı miktarı girin...",
   "EnterAnIntegerAmountBetween": "{{min}} ve {{max}} arasında bir tam sayı girin.",

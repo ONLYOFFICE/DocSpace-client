@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Cần mở khoá mã hoá",
   "EncryptionUnsupportedKeyVersion": "Khóa mã hóa này sử dụng phiên bản không được hỗ trợ. Vui lòng cập nhật ứng dụng để tiếp tục.",
   "EncryptionUploadCancelled": "Đã hủy tải lên: khóa mã hóa chưa được mở khóa. Tệp chưa được gửi.",
+  "EncryptionUploadNotKept": "Tệp chưa được lưu: không thể hoàn tất việc mã hóa tệp. Hãy tải tệp lên lại.",
   "EncryptionUploadWrapFailed": "Niêm phong mã hóa cho tệp đã tải lên không thành công. Có thể không mở được; vui lòng xóa và tải lên lại.",
   "EnterAmount": "Nhập một số nguyên...",
   "EnterAnIntegerAmountBetween": "Nhập một số nguyên nằm giữa {{min}} và {{max}}",

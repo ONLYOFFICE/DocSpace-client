@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "需要解锁加密",
   "EncryptionUnsupportedKeyVersion": "此加密密钥使用了不受支持的版本。请更新应用程序以继续。",
   "EncryptionUploadCancelled": "上传已取消：加密密钥未解锁。文件未发送。",
+  "EncryptionUploadNotKept": "文件未保存：无法完成加密。请重新上传。",
   "EncryptionUploadWrapFailed": "已上传文件的加密封装失败。可能无法打开;请删除后重新上传。",
   "EnterAmount": "请输入整数金额...",
   "EnterAnIntegerAmountBetween": "请输入{{min}}到{{max}}之间的整数金额",

@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Şifrələmənin kilidinin açılması tələb olunur",
   "EncryptionUnsupportedKeyVersion": "Bu şifrələmə açarı dəstəklənməyən versiyadan istifadə edir. Davam etmək üçün tətbiqi yeniləyin.",
   "EncryptionUploadCancelled": "Yükləmə ləğv edildi: şifrələmə açarının kilidi açılmadı. Fayl göndərilmədi.",
+  "EncryptionUploadNotKept": "Fayl saxlanılmadı: onun şifrələnməsini tamamlamaq alınmadı. Onu yenidən yükləyin.",
   "EncryptionUploadWrapFailed": "Yüklənmiş fayl üçün şifrələmənin möhürlənməsi alınmadı. Fayl açılmaya bilər; onu silin və yenidən yükləyin.",
   "EnterAmount": "Ədəd məbləği daxil edin...",
   "EnterAnIntegerAmountBetween": "{{min}} ilə {{max}} arasında tam ədəd məbləğ daxil edin.",

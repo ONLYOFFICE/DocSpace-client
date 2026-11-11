@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Déverrouillage du chiffrement requis",
   "EncryptionUnsupportedKeyVersion": "Cette clé de chiffrement utilise une version non prise en charge. Veuillez mettre à jour l'application pour continuer.",
   "EncryptionUploadCancelled": "Téléversement annulé : la clé de chiffrement n'a pas été déverrouillée. Le fichier n'a pas été envoyé.",
+  "EncryptionUploadNotKept": "Le fichier n'a pas été enregistré : son chiffrement n'a pas pu être terminé. Téléversez-le à nouveau.",
   "EncryptionUploadWrapFailed": "Échec du scellement du chiffrement pour le fichier téléversé. Il pourrait ne pas être ouvrable. Veuillez le supprimer et le téléverser à nouveau.",
   "EnterAmount": "Saisissez le montant entier...",
   "EnterAnIntegerAmountBetween": "Saisissez le montant entier entre {{min}} et {{max}}",

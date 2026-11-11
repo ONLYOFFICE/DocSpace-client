@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Este necesară deblocarea criptării",
   "EncryptionUnsupportedKeyVersion": "Această cheie de criptare folosește o versiune neacceptată. Actualizați aplicația pentru a continua.",
   "EncryptionUploadCancelled": "Încărcare anulată: cheia de criptare nu a fost deblocată. Fișierul nu a fost trimis.",
+  "EncryptionUploadNotKept": "Fișierul nu a fost salvat: criptarea sa nu a putut fi finalizată. Încărcați-l din nou.",
   "EncryptionUploadWrapFailed": "Sigilarea criptării a eșuat pentru fișierul încărcat. Este posibil să nu poată fi deschis; eliminați-l și încărcați-l din nou.",
   "EnterAmount": "Introduceți o valoare întreagă...",
   "EnterAnIntegerAmountBetween": "Introduceți o valoare întreagă între {{min}} și {{max}}",

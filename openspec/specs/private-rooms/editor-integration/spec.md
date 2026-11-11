@@ -232,3 +232,25 @@ The editor SHALL NOT offer "Share to fill out" for a PDF form in a private room,
 #### Scenario: Form opened in a private room
 - **WHEN** an encrypted PDF form is opened for editing in a private room
 - **THEN** the "Share to fill out" action is absent from the editor
+
+### Requirement: New document from the editor withheld for encrypted files
+The editor SHALL NOT offer its create-new action for an encrypted file: the action creates a file that is not encrypted in the folder of the open one, which the server refuses in a private room.
+
+#### Scenario: New document from an encrypted file
+- **WHEN** an encrypted file is opened in the editor
+- **THEN** the editor has no create-new action and no file creation is requested
+
+#### Scenario: New document from a file that is not encrypted
+- **WHEN** a file that is not encrypted is opened in the editor in the same tab
+- **THEN** the create-new action is offered as before
+
+### Requirement: Mention notifications of an encrypted file carry no comment text
+The editor SHALL send the mention notification of an encrypted file to the portal with an empty message, so the comment text never reaches the server; the mentioned addresses and the link to the place in the document SHALL be sent as for any file.
+
+#### Scenario: Mention in an encrypted file
+- **WHEN** a user mentions a room member in a comment of an encrypted file
+- **THEN** the notification request carries the addresses and the link, and its message MUST be empty
+
+#### Scenario: Mention in a file that is not encrypted
+- **WHEN** a user mentions someone in a comment of a file that is not encrypted
+- **THEN** the notification request carries the comment text as before

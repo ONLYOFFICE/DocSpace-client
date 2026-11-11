@@ -47,8 +47,8 @@ Client, as read:
    takes whether the user is a guest and answers false for one; both
    callers pass it from the user store, so the tab and the routes cannot
    drift apart. Alternative: a check in each caller. Rejected: two copies.
-2. **A guest who holds a key loses the tab too (proposed, proposal
-   decision 1).** Every action of the page that reaches the server is
+2. **A guest who holds a key loses the tab too (proposal decision 1,
+   taken on 2026-11-11).** Every action of the page that reaches the server is
    refused for a guest, and the key opens nothing.
 3. **The creation offer is guarded in the shared hook, silently.** A guest
    has no creation entry, so the guard is never met in normal use; when it

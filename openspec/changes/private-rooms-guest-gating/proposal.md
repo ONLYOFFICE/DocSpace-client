@@ -33,13 +33,12 @@ Out of scope:
   into a guest, asked in `private-rooms-server-followups` 1.5.
 - Users of the other types.
 
-Decisions that need a human:
+Decisions taken:
 
-1. A guest who holds a key from before loses the tab with it: they can no
-   longer unlock, export or look at that key in the client. Proposed: yes,
-   as the server refuses them every key write and no private room admits
-   them. The alternative keeps the tab for a guest who holds a key, read
-   only in effect.
+1. A guest who holds a key loses the tab with it. Decided by the owner on
+   2026-11-11: no guest holds a key from an earlier version, so the rule
+   stays unconditional. The server refuses a guest every key write and no
+   private room admits one.
 
 Depends on: nothing in `../server` or the Document Server.
 

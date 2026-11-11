@@ -33,13 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const encryption = vi.hoisted(() => ({
   hasConfiguredKey: false,
   keysLoaded: false,
+  isUnlocked: false,
+  requireIdentity: (() => Promise.resolve(null)) as () => Promise<unknown>,
   providerProps: null as Record<string, unknown> | null,
 }));
 
@@ -71,6 +73,8 @@ vi.mock("@docspace/shared/api/privacy", () => ({
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
+import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
+
 const wrapperModule = await import("../EncryptionProviderWrapper");
 const EncryptionProviderWrapper =
   wrapperModule.default as unknown as React.ComponentType<{
@@ -78,6 +82,8 @@ const EncryptionProviderWrapper =
   }>;
 const DeviceSetupHintEffect =
   wrapperModule.DeviceSetupHintEffect as unknown as React.ComponentType;
+const RoomUnlockEffect =
+  wrapperModule.RoomUnlockEffect as unknown as React.ComponentType;
 
 const KEY = { id: "key-1", publicKey: "pub", privateKeyEnc: "enc" };
 
@@ -136,6 +142,84 @@ describe("Device setup hint on entering a private room without keys", () => {
     renderHint();
 
     expect(toastr.info).not.toHaveBeenCalled();
+  });
+});
+
+describe("A locked key is shown in a private room: the entry request", () => {
+  const ROOM = 9100;
+
+  const renderEffect = (isPrivate = true) => {
+    const sync = vi.fn();
+    render(
+      <Provider
+        selectedFolderStore={{ private: isPrivate, id: ROOM }}
+        filesStore={{ syncEncryptedRoom: sync }}
+      >
+        <RoomUnlockEffect />
+      </Provider>,
+    );
+    return sync;
+  };
+
+  beforeEach(() => {
+    roomUnlockRequest.reset();
+    encryption.hasConfiguredKey = true;
+    encryption.keysLoaded = true;
+    encryption.isUnlocked = false;
+  });
+
+  it("pending while the entry request is open", async () => {
+    let answer!: (identity: unknown) => void;
+    encryption.requireIdentity = vi.fn(
+      () => new Promise((resolve) => (answer = resolve)),
+    );
+
+    renderEffect();
+
+    expect(encryption.requireIdentity).toHaveBeenCalledTimes(1);
+    expect(roomUnlockRequest.settledFolderId).toBeNull();
+
+    await act(async () => answer(null));
+
+    expect(roomUnlockRequest.settledFolderId).toBe(ROOM);
+  });
+
+  it("settled after a cancel, without the room sync", async () => {
+    encryption.requireIdentity = vi.fn(async () => null);
+
+    const sync = renderEffect();
+    await act(async () => {});
+
+    expect(roomUnlockRequest.settledFolderId).toBe(ROOM);
+    expect(sync).not.toHaveBeenCalled();
+  });
+
+  it("settled at once, without a prompt, when the key is unlocked", () => {
+    encryption.isUnlocked = true;
+    encryption.requireIdentity = vi.fn(async () => null);
+
+    renderEffect();
+
+    expect(encryption.requireIdentity).not.toHaveBeenCalled();
+    expect(roomUnlockRequest.settledFolderId).toBe(ROOM);
+  });
+
+  it("asks nothing of a user without a key", () => {
+    encryption.hasConfiguredKey = false;
+    encryption.requireIdentity = vi.fn(async () => null);
+
+    renderEffect();
+
+    expect(encryption.requireIdentity).not.toHaveBeenCalled();
+    expect(roomUnlockRequest.settledFolderId).toBeNull();
+  });
+
+  it("forgets the answer outside private rooms", () => {
+    roomUnlockRequest.settle(ROOM);
+
+    renderEffect(false);
+
+    expect(roomUnlockRequest.settledFolderId).toBeNull();
   });
 });
 

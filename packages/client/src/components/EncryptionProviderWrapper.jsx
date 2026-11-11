@@ -60,6 +60,8 @@ import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
+import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
+
 const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   recover: filesStore?.recoverEncryptedFilenamesForCurrentView,
 }))(
@@ -72,7 +74,8 @@ const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   }),
 );
 
-const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
+// Spec: private-rooms/key-management, "A locked key is shown in a private room"
+export const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
   isPrivate: selectedFolderStore?.private,
   folderId: selectedFolderStore?.id,
   sync: filesStore?.syncEncryptedRoom,
@@ -84,14 +87,22 @@ const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
     React.useEffect(() => {
       if (!isPrivate) {
         promptedIdRef.current = null;
+        roomUnlockRequest.reset();
         return undefined;
       }
-      if (isUnlocked || !hasConfiguredKey || folderId == null) return undefined;
+      if (!hasConfiguredKey || folderId == null) return undefined;
+      if (isUnlocked) {
+        // A key that locks later brings the bar, not a new prompt.
+        promptedIdRef.current = folderId;
+        roomUnlockRequest.settle(folderId);
+        return undefined;
+      }
       if (promptedIdRef.current === folderId) return undefined;
       promptedIdRef.current = folderId;
 
       let cancelled = false;
       requireIdentity().then((identity) => {
+        roomUnlockRequest.settle(folderId);
         if (!cancelled && identity) sync?.();
       });
       return () => {

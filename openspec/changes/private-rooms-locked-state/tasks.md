@@ -8,7 +8,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Client
 
-- [ ] 2.1 Client: keep whether the room's unlock request is pending in `EncryptionProviderWrapper.jsx` (`RoomUnlockEffect`) and expose it to the section body (design decisions 2 and 4). Verify: cases "pending while the entry request is open" and "settled after a cancel" in `packages/client/src/components/__tests__/EncryptionProviderWrapper.test.tsx`; `cd packages/client && pnpm exec vitest run src/components/__tests__`
+- [x] 2.1 Client: keep whether the room's unlock request is pending in `EncryptionProviderWrapper.jsx` (`RoomUnlockEffect`) and expose it to the section body (design decisions 2 and 4). Verify: cases "pending while the entry request is open" and "settled after a cancel" in `packages/client/src/components/__tests__/EncryptionProviderWrapper.test.tsx`; `cd packages/client && pnpm exec vitest run src/components/__tests__`
 - [ ] 2.2 Client: add the locked-key bar next to `KnowledgeVectorizationBar` and render it at both of its sites (decisions 1 to 3). Verify: cases "Prompt cancelled on entry", "Unlock from the bar", "Unlock from the bar cancelled", "Key locks while the room is open", "Remembered device", "Entry prompt open" and "User without a key" in a unit test next to the bar; `pnpm exec vitest run src/pages/Home/Section/Body`; `pnpm exec tsc` in client
 
 ## 3. Shared

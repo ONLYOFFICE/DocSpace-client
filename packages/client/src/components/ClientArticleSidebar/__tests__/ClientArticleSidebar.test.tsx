@@ -33,19 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
 import { FolderType } from "@docspace/shared/enums";
 
+const { navigateMock, chat } = vi.hoisted(() => ({
+  navigateMock: vi.fn(),
+  // The chat panel's store, or none (a host without the AI providers).
+  chat: { store: null as null | Record<string, unknown> },
+}));
+
 vi.mock("react-router", () => ({
   useLocation: () => ({ pathname: "/private/filter", search: "" }),
-  useNavigate: () => vi.fn(),
+  useNavigate: () => navigateMock,
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
-  useAiChatStoreOptional: () => null,
+  useAiChatStoreOptional: () => chat.store,
 }));
 
 vi.mock("SRC_DIR/components/NewFilesBadge", () => ({ default: () => null }));
@@ -66,6 +72,7 @@ vi.mock("SRC_DIR/components/BetaBadgeWrapper", () => ({
 
 type TNavEntry = {
   id: string;
+  onClick?: (item: TNavEntry, meta: { isLink: boolean }) => void;
   badgeComponent?: React.ReactNode;
   children?: TNavEntry[];
 };
@@ -77,7 +84,12 @@ vi.mock("SRC_DIR/components/AppsSidebar", () => ({
         .flatMap((group) => group.items)
         .flatMap((item) => [item, ...(item.children ?? [])])
         .map((item) => (
-          <li key={item.id} data-testid={`nav-${item.id}`} data-item-id={item.id}>
+          <li
+            key={item.id}
+            data-testid={`nav-${item.id}`}
+            data-item-id={item.id}
+            onClick={() => item.onClick?.(item, { isLink: false })}
+          >
             {item.badgeComponent}
           </li>
         ))}
@@ -267,5 +279,41 @@ describe("ClientArticleSidebar — AI Chat section full names", () => {
       "title",
       "A conversation with a long title",
     );
+  });
+});
+
+describe("ClientArticleSidebar — leaving the AI Chat page", () => {
+  const renderWithChat = (effectiveFullscreen: boolean) => {
+    const store = {
+      isVisible: true,
+      effectiveFullscreen,
+      isOnHistoryPage: false,
+      close: vi.fn(),
+      setFullscreen: vi.fn(),
+    };
+    chat.store = store;
+    renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }]);
+    return store;
+  };
+
+  it("closes the fullscreen chat when Agents is clicked, and opens the projects list", () => {
+    const store = renderWithChat(true);
+
+    fireEvent.click(screen.getByTestId("nav-ai-rooms"));
+
+    expect(store.close).toHaveBeenCalled();
+    expect(navigateMock).toHaveBeenCalledWith(
+      expect.stringMatching(/^\/ai-rooms\/filter\?/),
+    );
+    chat.store = null;
+  });
+
+  it("keeps a side-panel chat open across sections", () => {
+    const store = renderWithChat(false);
+
+    fireEvent.click(screen.getByTestId("nav-ai-rooms"));
+
+    expect(store.close).not.toHaveBeenCalled();
+    chat.store = null;
   });
 });

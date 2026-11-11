@@ -213,16 +213,22 @@ const ClientArticleSidebar = ({
   // navigates by itself (`meta.isLink`); navigating here too pushed the same
   // history entry twice. A section header with a sub-menu is a button and
   // still needs it.
+  //
+  // A fullscreen chat is the AI Chat page (or an AI project's own chat,
+  // which its view releases on the way out): going to another entry leaves
+  // it, so the chat closes rather than shrinking to the side panel over the
+  // entry's page - Agents shows the projects list, not the chat beside it.
+  // A side-panel chat stays open across sections, as before.
   const nav = React.useCallback(
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
       onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
-        aiChatStore?.setFullscreen(false);
+        if (aiChatStore?.effectiveFullscreen) aiChatStore.close();
         onFolderNavigateRef.current?.();
         if (!meta?.isLink) navigate(path);
       },
     }),
-    [navigate],
+    [navigate, aiChatStore],
   );
 
   const folderUrl = React.useCallback(

@@ -42,9 +42,16 @@ import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
 import { getUserType, getStringUserType } from "../utils/common";
 
+/** The key-list read in flight of a store, shared by its concurrent callers. */
+const keyListReads = new WeakMap<
+  object,
+  Promise<TEncryptionKeyPair[] | null>
+>();
+
 class UserStore {
   user: TUser | null = null;
 
+  /** The user's keys; null while the list is not known: not read, or the read failed. */
   encryptionKeys: TEncryptionKeyPair[] | null = null;
 
   isLoading = false;
@@ -152,6 +159,27 @@ class UserStore {
     });
 
     return keys;
+  };
+
+  /**
+   * The key list, read when it is not known. Resolves to null when the read
+   * fails; concurrent callers share one request.
+   */
+  ensureEncryptionKeys = (): Promise<TEncryptionKeyPair[] | null> => {
+    if (this.encryptionKeys) return Promise.resolve(this.encryptionKeys);
+
+    const reading = keyListReads.get(this);
+    if (reading) return reading;
+
+    const read = this.getEncryptionKeys()
+      .then((keys) => keys ?? null)
+      .catch(() => null)
+      .finally(() => {
+        keyListReads.delete(this);
+      });
+    keyListReads.set(this, read);
+
+    return read;
   };
 
   setUserEncryptionKeys = (keys: TEncryptionKeyPair[]) => {

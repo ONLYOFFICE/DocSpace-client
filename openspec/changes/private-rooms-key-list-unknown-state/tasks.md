@@ -4,7 +4,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 1. Shared
 
-- [ ] 1.1 Shared: add `ensureEncryptionKeys` to `packages/shared/store/UserStore.ts`: the known list at once, otherwise one shared read, resolving to the list or to `null` on failure (design decision 2). Verify: cases "known list", "unknown list read once for concurrent callers", "read fails", "read after a failure starts a new request" in a unit test next to the store; `cd packages/shared && pnpm exec vitest run store`; `pnpm exec tsc` in shared
+- [x] 1.1 Shared: add `ensureEncryptionKeys` to `packages/shared/store/UserStore.ts`: the known list at once, otherwise one shared read, resolving to the list or to `null` on failure (design decision 2). Verify: cases "known list", "unknown list read once for concurrent callers", "read fails", "read after a failure starts a new request" in a unit test next to the store; `cd packages/shared && pnpm exec vitest run store`; `pnpm exec tsc` in shared
 
 ## 2. Client views
 

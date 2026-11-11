@@ -17,18 +17,10 @@ to say what happened in the user's language.
 ## What Changes
 
 - A refused leave, removal or role change in a private room, answered with
-  403, is reported with a translated message in place of the server's text.
-  The message names the cause and the way out, which a check on the release
-  stand on 2026-11-11 confirmed: once the member has keys again, the same
-  request passes (design.md, Context). Proposed English wording, for the
-  owner to approve before it is translated:
-  - `Common:EncryptedLeaveRefused`, for the user's own leave: "Could not
-    leave the private room. This happens when you have no encryption keys:
-    generate keys in your profile, then try again."
-  - `Common:EncryptedMemberAccessRefused`, for a removal or a role change:
-    "Could not change this member's access to the private room. This happens
-    when they have no encryption keys: ask them to generate keys in their
-    profile, then try again."
+  403, is reported with one short translated message,
+  `Common:EncryptedAccessChangeRefused`, in place of the server's text.
+  Proposed English wording, for the owner to approve before it is
+  translated: "Access not changed: the member has no encryption keys."
 - The leave dialog closes after such a refusal, since trying again changes
   nothing. Any other failure of a leave (a network error, a server error) is
   shown as it is today and leaves the dialog open.
@@ -44,18 +36,16 @@ Decided by the owner on 2026-11-11:
 
 1. The dialog closes on a 403 in a private room and stays open on other
    failures.
-2. The translated text is shown for any 403 of these three actions in a
+2. One translated text is shown for any 403 of these three actions in a
    private room, with no comparison of server strings, until the server
    reports the reason in a stable way.
+3. The text is one short sentence for all three actions: a toast is read in
+   passing, so it names the cause and nothing else.
+4. The SDK part ships with this change.
 
 Decisions that need a human:
 
-- The English wording of the two messages above, and their split by action
-  (proposed: a leave speaks to the user about their own keys, a removal and
-  a role change about another member's; which applies follows from the
-  action, not from the server's answer).
-- Whether the SDK part ships with this change (proposed: yes, the flows are
-  the same and share the messages).
+- The English wording above.
 
 Out of scope:
 
@@ -98,8 +88,8 @@ None.
 - **SDK:** `packages/sdk/src/app/(rooms)/_components/leave-room-dialog`,
   `packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx`.
 - **Shared:** a helper next to the private-room services that recognises
-  the refusal; two new keys in `public/locales/*/Common.json`, translated
-  with the translation skills.
+  the refusal; a new key in `public/locales/*/Common.json`, translated with
+  the translation skills.
 - **E2E:** a case in `packages/client/__tests__/private-room-members.spec.ts`
   on the existing room members mock, which already refuses every entry of a
   member without keys as the server does.

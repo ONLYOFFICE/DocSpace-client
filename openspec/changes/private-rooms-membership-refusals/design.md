@@ -97,28 +97,28 @@ No stashed design document covers this.
    serves both the removal and the role change, so one branch in its catch
    covers both. The member list is not touched on a failure today and stays
    so.
-4. **The SDK uses the same helper and the same keys.** Its leave dialog
+4. **The SDK uses the same helper and the same key.** Its leave dialog
    closes after the refusal; its private members view shows the message.
 5. **The shell's handler is left alone.** It defers to an error toast the
    caller shows, so the message replaces `Common:AccessDenied` without a
    second toast.
-6. **Two messages, chosen by the action.** A leave is always the user's
-   own, so `Common:EncryptedLeaveRefused` speaks about the user's keys; a
-   removal and a role change always concern another member, so
-   `Common:EncryptedMemberAccessRefused` speaks about theirs. Both say what
-   ends the refusal, as the stand check of 2026-11-11 showed. Alternative:
-   one neutral message for all three. Rejected: it cannot say whose keys
-   are missing, which is the one thing the user can act on.
+6. **One short message for the three actions.** The owner decided on
+   2026-11-11 that the text is a single short sentence naming the cause,
+   because a toast is gone before a longer one is read. Alternative: two
+   messages, one for the user's own leave and one for another member, each
+   saying what ends the refusal (the member generates keys in the profile,
+   as the stand check showed). Rejected by the owner: too long to read in a
+   toast.
 
 ## Risks / Trade-offs
 
 - [A 403 for another reason, such as rights lost a moment ago, gets a
-  message about keys] → The wording says when the refusal happens rather
-  than that keys are missing; the server-side reason code, once there, lets
-  a later change narrow it.
+  message that names missing keys] → Accepted for a short text; the
+  server-side reason code, once there, lets a later change narrow it.
 - [A resolved leave action no longer means the user left] → The action is
   awaited by the dialog and the owner-change flow only, and neither does
   anything after it that assumes the leave; the tests of both pin that.
-- [A manager cannot end the refusal alone: only the member can generate the
-  keys] → Accepted for the beta: the server's check is the defect, and the
-  message tells the manager whom to ask.
+- [The message does not say how to end the refusal, and a manager cannot
+  end it alone: only the member can generate the keys] → Accepted for the
+  beta: the server's check is the defect, and the message names the cause
+  in the user's language.

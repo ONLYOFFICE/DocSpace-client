@@ -243,3 +243,14 @@ The editor SHALL NOT offer its create-new action for an encrypted file: the acti
 #### Scenario: New document from a file that is not encrypted
 - **WHEN** a file that is not encrypted is opened in the editor in the same tab
 - **THEN** the create-new action is offered as before
+
+### Requirement: Mention notifications of an encrypted file carry no comment text
+The editor SHALL send the mention notification of an encrypted file to the portal with an empty message, so the comment text never reaches the server; the mentioned addresses and the link to the place in the document SHALL be sent as for any file.
+
+#### Scenario: Mention in an encrypted file
+- **WHEN** a user mentions a room member in a comment of an encrypted file
+- **THEN** the notification request carries the addresses and the link, and its message MUST be empty
+
+#### Scenario: Mention in a file that is not encrypted
+- **WHEN** a user mentions someone in a comment of a file that is not encrypted
+- **THEN** the notification request carries the comment text as before

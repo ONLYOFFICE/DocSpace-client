@@ -1192,6 +1192,15 @@ release, one user holding a key, the device remembered):
     2026-11-10: create-new is withheld, the event is not attached for an
     encrypted file, since the server refuses the plain file it would
     create and an encrypted creation from the editor page is not built.
+    A mention notification of an encrypted file is sent with an empty
+    message: `FileStorageService.SendEditorNotifyAsync`
+    (`products/ASC.Files/Core/Core/FileStorageService.cs`) reads
+    `Message ?? ""`, trims it and passes it to the notification, so an
+    empty one is accepted and the recipients still get the link. The
+    link is built on the server from the file id and the action data of
+    the Document Server, which the page passes through unread; the
+    Document Server API describes that data as the address of the
+    comment, and no capture of it was taken for an encrypted file.
     Alternative:
     leave the events generic and rely on the server to refuse; rejected,
     the server stores a plaintext name or a plaintext new file today.
@@ -1383,9 +1392,6 @@ the Document Server capability" (2026-11-10).
   the join race of DS-17 and the duplicated replay of DS-19 remain; the
   first-open race and DS-18 are closed by that build. Owner: Document
   Server team.
-- Mentions and comments on encrypted files: `onRequestSendNotify` carries
-  the comment text to the portal; withhold, or accept as plaintext
-  metadata? Owner: feature owner (proposal decision 7).
 - Inserted images: do `cryptoimg://` images reach the Document Server's media
   store or the portal in plaintext when a document is saved or co-edited?
   Task 4.4; owner: Document Server team for the answer, this change for the

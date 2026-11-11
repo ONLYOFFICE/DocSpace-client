@@ -106,7 +106,11 @@ vi.mock("@/utils/aiProxy", () => ({
   abortAllRequests: vi.fn(),
 }));
 
-import { markAsFavorite, removeFromFavorite } from "@docspace/shared/api/files";
+import {
+  markAsFavorite,
+  removeFromFavorite,
+  sendEditorNotify,
+} from "@docspace/shared/api/files";
 import { getDocEditor } from "@/utils";
 
 import useEditorEvents from "../useEditorEvents";
@@ -164,6 +168,46 @@ describe("useEditorEvents", () => {
       });
 
       expect(markAsFavorite).toHaveBeenCalledWith([7], []);
+    });
+  });
+
+  describe("onSDKRequestSendNotify", () => {
+    const mention = {
+      data: {
+        actionLink: { action: { type: "comment", data: "comment-1" } },
+        message: "Quarterly figures, see page 3",
+        emails: ["member@example.com"],
+      },
+    };
+
+    it("Mention in an encrypted file", async () => {
+      render({ fileInfo: fileInfo(true) });
+
+      await act(async () => {
+        await events.onSDKRequestSendNotify(mention);
+      });
+
+      expect(sendEditorNotify).toHaveBeenCalledWith(
+        7,
+        mention.data.actionLink,
+        ["member@example.com"],
+        "",
+      );
+    });
+
+    it("Mention in a file that is not encrypted", async () => {
+      render({ fileInfo: fileInfo(false) });
+
+      await act(async () => {
+        await events.onSDKRequestSendNotify(mention);
+      });
+
+      expect(sendEditorNotify).toHaveBeenCalledWith(
+        7,
+        mention.data.actionLink,
+        ["member@example.com"],
+        "Quarterly figures, see page 3",
+      );
     });
   });
 

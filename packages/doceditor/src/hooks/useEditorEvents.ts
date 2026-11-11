@@ -769,7 +769,8 @@ const useEditorEvents = ({
       const currEvent = event as TEvent;
 
       const actionData = currEvent.data.actionLink;
-      const comment = currEvent.data.message;
+      // Spec: editor-integration, "Mention notifications of an encrypted file carry no comment text"
+      const comment = fileInfo?.encrypted ? "" : currEvent.data.message;
       const emails = currEvent.data.emails;
 
       if (!fileInfo?.id) return;
@@ -802,7 +803,7 @@ const useEditorEvents = ({
         toastr.error(e as TData);
       }
     },
-    [fileInfo?.id, t, usersInRoom],
+    [fileInfo?.id, fileInfo?.encrypted, t, usersInRoom],
   );
 
   const onSDKRequestUsers = React.useCallback(

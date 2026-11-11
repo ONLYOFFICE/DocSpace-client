@@ -39,7 +39,6 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Card } from "@onlyoffice/apps-ui-kit/components/card";
 import { ActionButton } from "@onlyoffice/apps-ui-kit/components/action-button";
-import { getBrandName } from "@onlyoffice/apps-ui-kit/constants/brands";
 
 import SettingsSvg from "PUBLIC_DIR/images/settings.desc.react.svg";
 
@@ -104,13 +103,10 @@ export const AICard = ({
       return (
         <Trans
           t={t}
-          ns={["InfoPanel", "Common"]}
+          ns="InfoPanel"
           i18nKey="FormRoomAIProviderNotConnectedAskAdmin"
           components={{
             1: <strong />,
-          }}
-          values={{
-            productName: getBrandName("ProductName"),
           }}
         />
       );
@@ -122,13 +118,10 @@ export const AICard = ({
       return (
         <Trans
           t={t}
-          ns={["InfoPanel", "Common"]}
+          ns="InfoPanel"
           i18nKey="FormRoomConnectDatabaseAskAdmin"
           components={{
             1: <strong />,
-          }}
-          values={{
-            productName: getBrandName("ProductName"),
           }}
         />
       );

@@ -259,7 +259,7 @@ The server SHALL remove a user's file keys from every encrypted file of a privat
 - **THEN** the new owner's share removed by the transfer costs them no key, and from then on the new owner is the one whose keys a removal keeps
 
 ### Requirement: Clearing the access of a private room
-The server SHALL refuse with 403 a portal administrator who is not a member clearing the access of a private room or of an entry inside one, while the clearing of an ordinary room by an administrator stays as it was; whoever loses access to a private room through a clearing SHALL lose their wrapped file keys, the room's creator excepted.
+The server SHALL refuse with 403 a portal administrator who is not a member clearing the access of a private room or of an entry inside one, while the clearing of an ordinary room by an administrator stays as it was; whoever loses access to a private room through a clearing SHALL lose their wrapped file keys, the room's current owner excepted.
 
 #### Scenario: Access cleared by an administrator outside the room
 - **WHEN** a portal administrator who is not a member clears the access of a private room

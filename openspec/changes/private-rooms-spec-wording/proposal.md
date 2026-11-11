@@ -13,7 +13,7 @@ wrong in such details misleads the next change written on top of it.
 
 ## What Changes
 
-No behaviour changes. The wording of eight requirements is brought in line
+No behaviour changes. The wording of nine requirements is brought in line
 with the server as read at `a7d94e4b81` and with the client on the branch.
 
 - `server-contract`, "File keys follow the share": the user who keeps the
@@ -21,6 +21,8 @@ with the server as read at `a7d94e4b81` and with the client on the branch.
   refused a leave, a removal and a role change with 403; a key removal that
   fails after the share is written leaves the share removed and the keys
   in place.
+- `server-contract`, "Clearing the access of a private room": "current
+  owner", found while applying this change.
 - `server-contract`, "Owner change requires the new owner's keys": an owner
   whose own key set is empty cannot hand the room over, since the share the
   owner gets instead passes the same key check; the reassignment of a
@@ -43,9 +45,11 @@ with the server as read at `a7d94e4b81` and with the client on the branch.
   cannot drop a scenario from a requirement it modifies.
 - `encryption-core`, "Revocation removes access-list entries only":
   "current owner".
-- `private-rooms-server-hardening` carries full copies of six of these
+- `private-rooms-server-hardening` carries full copies of seven of these
   requirements in its own delta; they get the same text, or its archive
-  would bring the old wording back. Two code comments that point at the
+  would bring the old wording back. `private-rooms-server-followups`
+  modifies the owner-change requirement and takes its new scenarios, with
+  the outcome that change asks of the server. Two code comments that point at the
   renamed requirements follow the new names.
 
 Out of scope:
@@ -80,7 +84,7 @@ None.
 
 ### Modified Capabilities
 
-- `private-rooms/server-contract`: four requirements reworded.
+- `private-rooms/server-contract`: five requirements reworded.
 - `private-rooms/room-membership`: the leave requirement renamed and
   reworded.
 - `private-rooms/sdk-surface`: the leave requirement renamed and reworded,

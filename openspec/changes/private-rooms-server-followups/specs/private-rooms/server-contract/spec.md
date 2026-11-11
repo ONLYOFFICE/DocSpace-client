@@ -93,6 +93,10 @@ The server SHALL refuse with 403 an ownership change of a private room when the 
 - **WHEN** ownership of a private room holding plain files only is given to a user with keys
 - **THEN** the room owner changes
 
+#### Scenario: Previous owner without keys
+- **WHEN** an owner whose own key set is empty gives the room to a user with keys
+- **THEN** the change succeeds, since keys are demanded only of a user who first gets access
+
 #### Scenario: Rooms of a deleted user
 - **WHEN** the rooms of a user being deleted are reassigned to a user with keys who lacks entries
 - **THEN** the reassignment completes

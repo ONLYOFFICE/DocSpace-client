@@ -93,3 +93,14 @@ The server SHALL refuse with 403 a guest who creates, replaces or deletes an enc
 #### Scenario: Guest deletes a key
 - **WHEN** a guest deletes an envelope by id
 - **THEN** the server answers 403
+
+### Requirement: Clearing the access of a private room
+The server SHALL refuse with 403 a portal administrator who is not a member clearing the access of a private room or of an entry inside one, while the clearing of an ordinary room by an administrator stays as it was; whoever loses access to a private room through a clearing SHALL lose their wrapped file keys, the room's current owner excepted.
+
+#### Scenario: Access cleared by an administrator outside the room
+- **WHEN** a portal administrator who is not a member clears the access of a private room
+- **THEN** the server answers 403 and nothing changes
+
+#### Scenario: Members cleared by the owner
+- **WHEN** the owner clears the access of a private room
+- **THEN** the members lose their keys on every encrypted file of the room and the owner keeps theirs

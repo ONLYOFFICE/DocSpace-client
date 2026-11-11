@@ -81,9 +81,9 @@ export const isDevToolsOffered = (
  *
  * The service is sold and hosted by us, so it exists in SaaS only - a
  * standalone portal has no Docs Connect at all, whoever is asking. Beyond that
- * it is a page of the Developer Tools section and opens for whoever the section
- * opens for; what an admin has and a room admin has not is the right to
- * *configure* it, which the page itself refuses (see `canManageDocsConnect`).
+ * it is a page of the Developer Tools section that only portal admins and the
+ * owner get: the server answers everyone else with 403, so the page is neither
+ * linked to nor opened for them (see `canManageDocsConnect`).
  */
 export const canOpenDocsConnect = (
   user:
@@ -92,15 +92,16 @@ export const canOpenDocsConnect = (
     | undefined,
   standalone?: boolean,
   limitedAccessDevToolsForUsers?: boolean,
-) => !standalone && hasDevToolsAccess(user, limitedAccessDevToolsForUsers);
+) =>
+  hasDevToolsAccess(user, limitedAccessDevToolsForUsers) &&
+  canManageDocsConnect(user, standalone);
 
 /**
  * Who may connect an editors instance.
  *
  * Connecting one is a portal-wide operation, so it stays with portal admins and
- * the owner. Everyone else reads the same page with the action disabled and an
- * explanation above it, which is why this is a separate question from
- * `canOpenDocsConnect` rather than a stricter version of it.
+ * the owner. The surfaces that only describe the service (the integrations card
+ * and its dialogs) stay visible to everyone else with the action disabled.
  */
 export const canManageDocsConnect = (
   user: { isAdmin?: boolean; isOwner?: boolean } | null | undefined,

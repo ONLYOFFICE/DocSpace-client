@@ -111,7 +111,7 @@ The system SHALL offer a passkey toggle (Common:PasskeyUnlockLabel) when the pla
 - **THEN** the passkey record is deleted and Common:PasskeyDisabled is shown
 
 ### Requirement: Auto-lock timeout presets
-The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes, 30 minutes by default, and SHALL NOT offer a preset that keeps the identity unlocked longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, scroll, touch); with the 5 or 15 minute preset it SHALL also lock as soon as the tab becomes hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
+The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes, 30 minutes by default, and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, scroll, touch); with the 5 or 15 minute preset it SHALL also lock as soon as the tab is hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
 
 #### Scenario: Idle lock
 - **WHEN** the preset is 5 minutes and the user is inactive for 5 minutes

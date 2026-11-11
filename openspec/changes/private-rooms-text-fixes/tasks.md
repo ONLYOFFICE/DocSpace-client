@@ -9,7 +9,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
   - 2026-11-11: the SDK's invite input shows the same texts and takes the same rule. The rule is one function, `offersGuestInvitation` in `packages/shared/services/private-room/invite-panel-rules.ts`, and the case "Portal allows inviting guests" is a unit test of that function; neither invite input has a render test, and none was added.
 - [x] 1.3 Shared: describe the Editor role of a private room with Common:EditorDescription where the role list is built (decision 4). Verify: cases "Role list of a private room" and "Role list of another room" in a unit test of `getAccessOptions`; `pnpm exec vitest run utils`; `pnpm exec tsc` in the six packages
 - [x] 1.4 Shared: format the duration of the key-change dialog with `Intl.NumberFormat` in the interface language (decision 5). Verify: case "Duration in the interface language" for seconds, days and years in `packages/shared/dialogs/key-change-dialog` tests; `pnpm exec vitest run dialogs/key-change-dialog`
-- [ ] 1.5 Client: name the exported key file `encryption-key-<fingerprint>.json` (decision 6). Verify: case "Export" in the test of `useExportKeyFlow`; the E2E specs and mocks that name the file found by the old name and updated; `pnpm exec vitest run src/pages/Profile`
+- [x] 1.5 Client: name the exported key file `encryption-key-<fingerprint>.json` (decision 6). Verify: case "Export" in the test of `useExportKeyFlow`; the E2E specs and mocks that name the file found by the old name and updated; `pnpm exec vitest run src/pages/Profile`
+  - 2026-11-11: the name is built by `getExportedKeyFileName` next to the flow, and the case "Export" tests that function; the flow itself has no unit test. No E2E spec or mock names the file. The translator metadata of Common:EncryptionKeyExported still quotes the old line of code in its generated usage context; it is rewritten when the metadata is next generated.
 
 ## 2. Texts
 

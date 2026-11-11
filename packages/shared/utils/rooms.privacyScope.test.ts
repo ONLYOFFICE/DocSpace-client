@@ -62,15 +62,35 @@ describe("getRoomsRequestScope", () => {
     [CategoryType.Shared, RoomSearchArea.Active],
     [CategoryType.SharedRoom, RoomSearchArea.Active],
     [CategoryType.Archive, RoomSearchArea.Archive],
-  ])(
-    "leaves private rooms out of Rooms category %s while the section is available",
-    (category, searchArea) => {
-      expect(getRoomsRequestScope(category, searchArea, true)).toEqual({
-        privacyFilter: RoomPrivacyFilter.NotPrivate,
-      });
+  ])("Section available (category %s)", (category, searchArea) => {
+    expect(getRoomsRequestScope(category, searchArea, true)).toEqual({
+      privacyFilter: RoomPrivacyFilter.NotPrivate,
+    });
+  });
+
+  describe("Section not available", () => {
+    it.each([
+      [CategoryType.Shared, RoomSearchArea.Active],
+      [CategoryType.SharedRoom, RoomSearchArea.Active],
+      [CategoryType.Shared, undefined],
+    ])("Rooms carries no privacy filter (%s, %s)", (category, searchArea) => {
       expect(getRoomsRequestScope(category, searchArea, false)).toBeNull();
-    },
-  );
+    });
+
+    it.each([
+      [CategoryType.Archive, RoomSearchArea.Archive],
+      [CategoryType.ArchivedRoom, RoomSearchArea.Archive],
+      [CategoryType.Archive, undefined],
+      [CategoryType.Shared, RoomSearchArea.Archive],
+    ])(
+      "Rooms -> Archive keeps the non-private filter (%s, %s)",
+      (category, searchArea) => {
+        expect(getRoomsRequestScope(category, searchArea, false)).toEqual({
+          privacyFilter: RoomPrivacyFilter.NotPrivate,
+        });
+      },
+    );
+  });
 
   it.each([
     RoomSearchArea.Templates,

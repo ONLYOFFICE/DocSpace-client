@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Vyžaduje sa odomknutie šifrovania",
   "EncryptionUnsupportedKeyVersion": "Tento šifrovací kľúč používa nepodporovanú verziu. Pre pokračovanie aktualizujte aplikáciu.",
   "EncryptionUploadCancelled": "Nahrávanie zrušené: šifrovací kľúč nebol odomknutý. Súbor nebol odoslaný.",
+  "EncryptionUploadNotKept": "Súbor nebol uložený: jeho šifrovanie sa nepodarilo dokončiť. Nahrajte ho znova.",
   "EncryptionUploadWrapFailed": "Zapečatenie šifrovania nahraného súboru zlyhalo. Súbor sa možno nebude dať otvoriť; odstráňte ho a nahrajte znova.",
   "EnterAmount": "Zadajte celočíselnú sumu...",
   "EnterAnIntegerAmountBetween": "Zadajte celé číslo medzi {{min}} a {{max}}.",

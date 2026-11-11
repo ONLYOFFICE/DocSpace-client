@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Entsperrung der Verschlüsselung erforderlich",
   "EncryptionUnsupportedKeyVersion": "Dieser Verschlüsselungsschlüssel verwendet eine nicht unterstützte Version. Bitte aktualisieren Sie die Anwendung, um fortzufahren.",
   "EncryptionUploadCancelled": "Hochladen abgebrochen: Der Verschlüsselungsschlüssel wurde nicht entsperrt. Die Datei wurde nicht gesendet.",
+  "EncryptionUploadNotKept": "Die Datei wurde nicht gespeichert: Ihre Verschlüsselung konnte nicht abgeschlossen werden. Laden Sie sie erneut hoch.",
   "EncryptionUploadWrapFailed": "Die Verschlüsselungsversiegelung der hochgeladenen Datei ist fehlgeschlagen. Sie kann möglicherweise nicht geöffnet werden. Bitte entfernen Sie sie und laden Sie sie erneut hoch.",
   "EnterAmount": "Geben Sie einen ganzzahligen Betrag ein ...",
   "EnterAnIntegerAmountBetween": "Geben Sie einen ganzzahligen Betrag zwischen {{min}} und {{max}} ein",

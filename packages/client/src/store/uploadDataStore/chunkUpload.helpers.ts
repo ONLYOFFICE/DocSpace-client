@@ -937,7 +937,10 @@ async function uploadEncryptedItem(
 
     if (!result.ok) {
       const message = getEncryptedUploadErrorMessage(i18n.t, result.error);
-      if (result.failedAt === "wrap") {
+      if (result.failedAt === "wrap" && result.fileId === undefined) {
+        // Spec: file-operations, "A stored upload without the uploader's entry is not kept"
+        failUploadItem(self, indexOfFile, message, t, createNewIfExist);
+      } else if (result.failedAt === "wrap") {
         markUploadedWithError(self, uniqueId, message);
         toastr.error(message);
       } else if (result.failedAt === "upload") {

@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Potrebno je otključavanje šifrovanja",
   "EncryptionUnsupportedKeyVersion": "Ovaj ključ za šifrovanje koristi nepodržanu verziju. Ažurirajte aplikaciju da biste nastavili.",
   "EncryptionUploadCancelled": "Otpremanje je otkazano: ključ za šifrovanje nije otključan. Datoteka nije poslata.",
+  "EncryptionUploadNotKept": "Datoteka nije sačuvana: njeno šifrovanje nije moglo da se dovrši. Otpremite je ponovo.",
   "EncryptionUploadWrapFailed": "Zapečaćivanje šifrovanja nije uspelo za otpremljenu datoteku. Možda se neće otvoriti; uklonite je i ponovo otpremite.",
   "EnterAmount": "Unesite ceo broj...",
   "EnterAnIntegerAmountBetween": "Unesite ceo broj između {{min}} i {{max}}",

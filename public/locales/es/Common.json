@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Se requiere desbloquear el cifrado",
   "EncryptionUnsupportedKeyVersion": "Esta clave de cifrado utiliza una versión no compatible. Actualice la aplicación para continuar.",
   "EncryptionUploadCancelled": "Carga cancelada: la clave de cifrado no se desbloqueó. El archivo no se envió.",
+  "EncryptionUploadNotKept": "El archivo no se ha guardado: no se pudo completar su cifrado. Vuelva a cargarlo.",
   "EncryptionUploadWrapFailed": "Error al sellar el cifrado del archivo cargado. Es posible que no se pueda abrir; elimínelo y vuelva a cargarlo.",
   "EnterAmount": "Introduzca una cantidad entera...",
   "EnterAnIntegerAmountBetween": "Introduzca una cantidad entera entre {{min}} y {{max}}",

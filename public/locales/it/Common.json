@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "È richiesto lo sblocco della crittografia",
   "EncryptionUnsupportedKeyVersion": "Questa chiave di cifratura utilizza una versione non supportata. Aggiorna l'applicazione per continuare.",
   "EncryptionUploadCancelled": "Caricamento annullato: la chiave di cifratura non è stata sbloccata. Il file non è stato inviato.",
+  "EncryptionUploadNotKept": "Il file non è stato salvato: non è stato possibile completarne la cifratura. Caricalo di nuovo.",
   "EncryptionUploadWrapFailed": "Sigillatura della cifratura non riuscita per il file caricato. Potrebbe non essere apribile; rimuovilo e ricaricalo.",
   "EnterAmount": "Inserisci un importo intero...",
   "EnterAnIntegerAmountBetween": "Inserisci un importo intero compreso tra {{min}} e {{max}}",

@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "É necessário desbloquear a criptografia",
   "EncryptionUnsupportedKeyVersion": "Esta chave de criptografia utiliza uma versão não suportada. Atualize o aplicativo para continuar.",
   "EncryptionUploadCancelled": "Upload cancelado: a chave de criptografia não foi desbloqueada. O arquivo não foi enviado.",
+  "EncryptionUploadNotKept": "O arquivo não foi salvo: não foi possível concluir a criptografia. Faça o upload novamente.",
   "EncryptionUploadWrapFailed": "Falha ao selar a criptografia do arquivo enviado. Pode não ser possível abri-lo; remova-o e envie novamente.",
   "EnterAmount": "Digite um valor inteiro...",
   "EnterAnIntegerAmountBetween": "Digite um valor inteiro entre {{min}} e {{max}}",

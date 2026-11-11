@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Wymagane odblokowanie szyfrowania",
   "EncryptionUnsupportedKeyVersion": "Ten klucz szyfrowania używa nieobsługiwanej wersji. Aby kontynuować, zaktualizuj aplikację.",
   "EncryptionUploadCancelled": "Anulowano przesyłanie: klucz szyfrowania nie został odblokowany. Plik nie został wysłany.",
+  "EncryptionUploadNotKept": "Plik nie został zapisany: nie udało się dokończyć jego szyfrowania. Wyślij go ponownie.",
   "EncryptionUploadWrapFailed": "Zapieczętowanie szyfrowania przesłanego pliku nie powiodło się. Może nie dać się go otworzyć; usuń go i prześlij ponownie.",
   "EnterAmount": "Wprowadź całkowitą kwotę...",
   "EnterAnIntegerAmountBetween": "Wprowadź liczbę całkowitą z zakresu od {{min}} do {{max}}.",

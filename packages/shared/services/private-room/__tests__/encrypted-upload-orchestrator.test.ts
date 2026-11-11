@@ -37,6 +37,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 import {
+  EncryptedUploadNotKeptError,
   EncryptedWrapError,
   getEncryptedUploadErrorMessage,
   getEncryptedUploadRefusalMessage,
@@ -77,6 +78,10 @@ vi.mock("../../../api/files", () => ({
     .fn()
     .mockResolvedValue({ fileKeys: [] }),
   setFileEncryptionKeys: vi.fn().mockResolvedValue(undefined),
+  deleteFile: vi.fn().mockResolvedValue([
+    { id: "op-1", finished: true, error: "", progress: 100 },
+  ]),
+  getProgress: vi.fn().mockResolvedValue([]),
 }));
 
 vi.mock("../../../api/privacy", () => ({
@@ -109,6 +114,7 @@ vi.mock("../../encryption/room-file-access", () => ({
 
 vi.mock("../encryption/filename-cache", () => ({
   rememberEncryptedFilename: vi.fn(),
+  forgetEncryptedFilename: vi.fn(),
 }));
 
 vi.mock("../encrypted-upload", async (io) => ({
@@ -756,42 +762,104 @@ describe("uploadEncryptedFile for a caller with its own queue", () => {
     expect(queued).toBe(1);
   });
 
-  it("a wrap refused for an erased key writes no access entry", async () => {
-    const api = await import("../../../api/files");
-    const access = await import("../../encryption/room-file-access");
-    const { InvalidFormatError } = await import("../../encryption/errors");
-    vi.mocked(access.wrapDekForRecipients).mockRejectedValueOnce(
-      new InvalidFormatError("erased private key"),
-    );
-
-    const result = await uploadEncryptedFile(
-      makeFile("doc.docx", 16),
-      ARGS,
-      "row-1",
-    );
-
-    expect(result).toMatchObject({ ok: false, fileId: 42, failedAt: "wrap" });
-    expect(api.setFileEncryptionKeys).not.toHaveBeenCalled();
-  });
-
-  it("a file stored without its access list fails with the wrap failure and keeps its id", async () => {
-    const api = await import("../../../api/files");
-    vi.mocked(api.setFileEncryptionKeys).mockRejectedValueOnce(
-      new Error("403"),
-    );
+  describe("A stored upload without the uploader's entry is not kept", () => {
     const t = ((key: string) => key) as never;
+    const refuseWrites = async (times: number) => {
+      const api = await import("../../../api/files");
+      const write = vi.mocked(api.setFileEncryptionKeys);
+      for (let i = 0; i < times; i += 1) {
+        write.mockRejectedValueOnce(new Error("403"));
+      }
+      return api;
+    };
+    const upload = () =>
+      uploadEncryptedFile(makeFile("doc.docx", 16), ARGS, "row-1");
 
-    const result = await uploadEncryptedFile(
-      makeFile("doc.docx", 16),
-      ARGS,
-      "row-1",
-    );
+    it("Entry written on a later try", async () => {
+      const api = await refuseWrites(1);
 
-    expect(result).toMatchObject({ ok: false, fileId: 42, failedAt: "wrap" });
-    expect(result.error).toBeInstanceOf(EncryptedWrapError);
-    expect(getEncryptedUploadErrorMessage(t, result.error)).toBe(
-      "Common:EncryptionUploadWrapFailed",
-    );
+      const result = await upload();
+
+      expect(result).toMatchObject({ ok: true, fileId: 42 });
+      expect(api.deleteFile).not.toHaveBeenCalled();
+    });
+
+    it("Entry cannot be written", async () => {
+      const api = await refuseWrites(3);
+
+      const result = await upload();
+
+      expect(api.setFileEncryptionKeys).toHaveBeenCalledTimes(3);
+      expect(api.deleteFile).toHaveBeenCalledWith(42, false, true);
+      expect(result).toMatchObject({ ok: false, failedAt: "wrap" });
+      expect(result.fileId).toBeUndefined();
+      expect(result.error).toBeInstanceOf(EncryptedUploadNotKeptError);
+      expect(getEncryptedUploadErrorMessage(t, result.error)).toBe(
+        "Common:EncryptionUploadNotKept",
+      );
+    });
+
+    it("Key cannot be wrapped", async () => {
+      const api = await import("../../../api/files");
+      const access = await import("../../encryption/room-file-access");
+      const { InvalidFormatError } = await import("../../encryption/errors");
+      vi.mocked(access.wrapDekForRecipients).mockRejectedValueOnce(
+        new InvalidFormatError("erased private key"),
+      );
+
+      const result = await upload();
+
+      expect(api.setFileEncryptionKeys).not.toHaveBeenCalled();
+      expect(api.deleteFile).toHaveBeenCalledWith(42, false, true);
+      expect(result).toMatchObject({ ok: false, failedAt: "wrap" });
+      expect(result.fileId).toBeUndefined();
+      expect(result.error).toBeInstanceOf(EncryptedUploadNotKeptError);
+    });
+
+    it("Entry written although the write reported a failure", async () => {
+      const api = await refuseWrites(3);
+      vi.mocked(api.getFileEncryptionAccess).mockResolvedValueOnce({
+        fileKeys: [
+          { userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "enc-data" },
+        ],
+      } as never);
+
+      const result = await upload();
+
+      expect(api.deleteFile).not.toHaveBeenCalled();
+      expect(result).toMatchObject({ ok: true, fileId: 42 });
+    });
+
+    it("Deletion fails", async () => {
+      const api = await refuseWrites(3);
+      vi.mocked(api.deleteFile).mockResolvedValueOnce([
+        { id: "op-1", finished: true, error: "Access denied", progress: 100 },
+      ] as never);
+
+      const result = await upload();
+
+      expect(result).toMatchObject({ ok: false, fileId: 42, failedAt: "wrap" });
+      expect(result.error).toBeInstanceOf(EncryptedWrapError);
+      expect(getEncryptedUploadErrorMessage(t, result.error)).toBe(
+        "Common:EncryptionUploadWrapFailed",
+      );
+    });
+
+    it("Deletion still running when it is answered", async () => {
+      const api = await refuseWrites(3);
+      vi.mocked(api.deleteFile).mockResolvedValueOnce([
+        { id: "op-1", finished: false, error: "", progress: 0 },
+      ] as never);
+      vi.mocked(api.getProgress).mockResolvedValueOnce([
+        { id: "op-1", finished: true, error: "", progress: 100 },
+      ] as never);
+
+      const result = await upload();
+
+      expect(api.getProgress).toHaveBeenCalledWith("op-1");
+      expect(result.fileId).toBeUndefined();
+      expect(result.error).toBeInstanceOf(EncryptedUploadNotKeptError);
+    });
   });
 });
 

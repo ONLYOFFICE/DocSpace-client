@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Zahtevano je odklepanje šifriranja",
   "EncryptionUnsupportedKeyVersion": "Ta šifrirni ključ uporablja nepodprto različico. Za nadaljevanje posodobite aplikacijo.",
   "EncryptionUploadCancelled": "Nalaganje preklicano: šifrirni ključ ni bil odklenjen. Datoteka ni bila poslana.",
+  "EncryptionUploadNotKept": "Datoteka ni bila shranjena: njenega šifriranja ni bilo mogoče dokončati. Naložite jo znova.",
   "EncryptionUploadWrapFailed": "Pečatenje šifriranja naložene datoteke ni uspelo. Morda je ne bo mogoče odpreti; odstranite jo in naložite znova.",
   "EnterAmount": "Vnesite celo količino...",
   "EnterAnIntegerAmountBetween": "Vnesite celo število med {{min}} in {{max}}.",

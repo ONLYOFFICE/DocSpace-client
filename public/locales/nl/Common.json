@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "Ontgrendelen van versleuteling vereist",
   "EncryptionUnsupportedKeyVersion": "Deze versleutelingssleutel gebruikt een niet-ondersteunde versie. Werk de applicatie bij om door te gaan.",
   "EncryptionUploadCancelled": "Uploaden geannuleerd: de versleutelingssleutel is niet ontgrendeld. Het bestand is niet verzonden.",
+  "EncryptionUploadNotKept": "Het bestand is niet opgeslagen: de versleuteling kon niet worden voltooid. Upload het opnieuw.",
   "EncryptionUploadWrapFailed": "Het verzegelen van de versleuteling voor het geüploade bestand is mislukt. Het kan mogelijk niet worden geopend. Verwijder het en upload het opnieuw.",
   "EnterAmount": "Voer een geheel getalbedrag in...",
   "EnterAnIntegerAmountBetween": "Voer een geheel getal in tussen {{min}} en {{max}}",

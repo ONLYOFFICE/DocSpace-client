@@ -996,6 +996,7 @@
   "EncryptionUnlockRequired": "暗号化のロック解除が必要です",
   "EncryptionUnsupportedKeyVersion": "この暗号化キーはサポートされていないバージョンを使用しています。続行するにはアプリケーションを更新してください。",
   "EncryptionUploadCancelled": "アップロードがキャンセルされました：暗号化キーのロックが解除されませんでした。ファイルは送信されませんでした。",
+  "EncryptionUploadNotKept": "ファイルは保存されませんでした。暗号化を完了できませんでした。もう一度アップロードしてください。",
   "EncryptionUploadWrapFailed": "アップロードされたファイルの暗号化の封印に失敗しました。開けない可能性があります。削除してから再度アップロードしてください。",
   "EnterAmount": "整数の金額を入力してください...",
   "EnterAnIntegerAmountBetween": "{{min}} から {{max}} までの整数を入力してください。",

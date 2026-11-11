@@ -4,7 +4,7 @@
 
 - [x] 1.1 `private-rooms-upload-fail-closed` archived; verify with `openspec list` showing it under `changes/archive`. Archived 2026-10-20 (`changes/archive/2026-10-20-private-rooms-upload-fail-closed`)
 - [x] 1.2 `private-rooms-tofu-on-upload` archived; verify with `openspec list`. Archived 2026-10-20 (`changes/archive/2026-10-20-private-rooms-tofu-on-upload`)
-- [ ] 1.3 `private-rooms-invite-atomic-rewrap` archived; verify with `openspec list`
+- [x] 1.3 `private-rooms-invite-atomic-rewrap` archived; verify with `openspec list`. Done 2026-11-11: `changes/archive/2026-11-11-private-rooms-invite-atomic-rewrap`
 - [ ] 1.4 `private-rooms-editor-contract` archived and the Document Server release named in its README; verify with `openspec list` and the README
 - [x] 1.5 `private-rooms-device-unlock-policy` and `private-rooms-dse3-header-authentication` archived, or deferred with an accepted-limitation requirement merged into the main spec; verify with `openspec show private-rooms/encryption-core --type spec`. `private-rooms-device-unlock-policy` archived 2026-10-20; `private-rooms-dse3-header-authentication` deferred to the next version by the owner on 2026-11-02, with the requirement "DSE3 header flags and name length are not authenticated" merged into `private-rooms/encryption-core` by the archive of `private-rooms-dse3-header-limitation` on 2026-11-03
 - [ ] 1.6 `private-rooms-sdk-gating-and-parity`, `private-rooms-ux-gaps`, `private-rooms-remove-dead-api-calls` archived; verify with `openspec list`

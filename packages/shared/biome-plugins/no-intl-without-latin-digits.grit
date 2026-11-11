@@ -1,0 +1,40 @@
+// Flags Intl formatters and toLocale*String() calls that do not ask for Latin digits.
+//
+// Intl picks the digits from the locale, and ar-SA prints Arabic-Indic ones.
+// The portal shows Western digits in every language: luxon gets them globally
+// (installLatinDigits), but Intl and toLocale*String() take no default, so every
+// call has to pass numberingSystem: LATIN_NUMBERING_SYSTEM itself. Without this
+// rule a new call brings the Arabic-Indic digits back, and nothing else notices.
+//
+// Options kept in a variable cannot be read here and are flagged too: put the key
+// at the call. RelativeTimeFormat is the exception - this TS lib has no
+// numberingSystem in its options, so they live in a variable typed to allow it,
+// and the call carries a biome-ignore that names it. new Intl.DateTimeFormat().resolvedOptions() prints nothing and is
+// left alone; Intl formatters that print no digits (Collator, PluralRules,
+// ListFormat, DisplayNames, Segmenter) are not matched; nor is a luxon
+// DateTime.toLocaleString(DateTime.DATE_*) or DateTime[preset], which installLatinDigits covers.
+//
+// Suppress with `// biome-ignore lint/plugin/no-intl-without-latin-digits` when a
+// call prints no digits (a month name, a currency symbol alone).
+
+or {
+  `new Intl.$ctor($args)` as $call where {
+    $ctor <: or { `NumberFormat`, `DateTimeFormat`, `RelativeTimeFormat` },
+    $args <: not contains `numberingSystem`,
+    $call <: not within `$_.resolvedOptions($...)`,
+    register_diagnostic(
+      span = $call,
+      message = "Intl formatters print the locale's digits (Arabic-Indic for ar-SA) - pass numberingSystem: LATIN_NUMBERING_SYSTEM from @docspace/shared/utils/latin-digits.",
+      severity = "error"
+    )
+  },
+  `$obj.$method($args)` as $call where {
+    $method <: or { `toLocaleString`, `toLocaleDateString`, `toLocaleTimeString` },
+    $args <: not contains or { `numberingSystem`, `DateTime.$_`, `DateTime[$_]` },
+    register_diagnostic(
+      span = $call,
+      message = "toLocale*String() prints the locale's digits (Arabic-Indic for ar-SA) - pass a locale and numberingSystem: LATIN_NUMBERING_SYSTEM from @docspace/shared/utils/latin-digits.",
+      severity = "error"
+    )
+  }
+}

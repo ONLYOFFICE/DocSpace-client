@@ -344,6 +344,7 @@ export const getExpiredOptions = (
     numeric: "always",
     style: "long",
   };
+  // biome-ignore lint/plugin/no-intl-without-latin-digits: relativeTimeOptions above sets numberingSystem
   const relativeTime = new Intl.RelativeTimeFormat(locale, relativeTimeOptions);
 
   const oneDay = relativeTime.format(1, "day");

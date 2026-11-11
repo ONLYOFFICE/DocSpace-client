@@ -32,8 +32,7 @@ ticking it by default.
   links, and its label is set in the weight of the dialog's field labels.
   It stays unticked by default and keeps its hint.
 
-New user-facing strings, English, for the owner's approval before they are
-translated:
+New user-facing strings, English, approved by the owner on 2026-11-11:
 
 | Key | Text |
 |-----|------|
@@ -52,14 +51,12 @@ Out of scope:
 - Ticking the remember option by default, declined in H7.
 - The wording of the other key texts, card C10.
 
-Decisions that need a human:
+Decisions taken by the owner on 2026-11-11:
 
-1. The three texts above.
-2. How far the remember option is raised. Proposed: moved under the
-   passphrase field with a semibold label, nothing else. The alternative
-   adds a tinted background behind the option and its hint; it draws the
-   eye more and makes the dialog heavier for a choice that should stay
-   deliberate.
+1. The three texts above are approved.
+2. The remember option is moved under the passphrase field with a
+   semibold label, nothing else. A tinted background behind the option
+   and its hint was the alternative and is not taken.
 
 Depends on: nothing in `../server` or the Document Server. The change
 states nothing about server behaviour.

@@ -47,6 +47,8 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getPublicKeyFingerprint } from "../../services/encryption/identity";
 import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
 
+import { formatDurationSince } from "./formatDuration";
+
 import type { KeyChangeDialogProps } from "./KeyChangeDialog.types";
 import styles from "./KeyChangeDialog.module.scss";
 
@@ -66,21 +68,6 @@ function formatDate(ts: number, locale: string): string {
   } catch {
     return "—";
   }
-}
-
-function formatDurationSince(ts: number, now: number = Date.now()): string {
-  const ms = Math.max(0, now - ts);
-  const seconds = Math.floor(ms / 1000);
-  if (seconds < 60) return `${seconds}s`;
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h`;
-  const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}d`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months}mo`;
-  return `${Math.floor(months / 12)}y`;
 }
 
 const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
@@ -163,7 +150,7 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
               </Text>
               <Text className={styles.activeFor}>
                 {t("Common:KeyChangedActiveFor", {
-                  duration: formatDurationSince(knownFirstSeenAt, Date.now()),
+                  duration: formatDurationSince(knownFirstSeenAt, i18n.language),
                 })}
               </Text>
             </div>

@@ -82,6 +82,8 @@ const AiChatPageBridgeComponent = ({
   const openHistory = useRouter((s) => s.openHistory);
   const switchToThread = useThreadsStore((s) => s.onSwitchToThread);
   const threads = useThreadsStore((s) => s.threads);
+  // More pages may be stored than the store has read.
+  const hasMoreThreads = useThreadsStore((s) => s.hasMoreThreads);
   const activeThreadId = useThreadsStore((s) => s.threadId);
 
   // The list is read once per scope; the chat reads it the same way when it
@@ -99,15 +101,18 @@ const AiChatPageBridgeComponent = ({
   // The store keeps them most recent first. A conversation without a title
   // has not had its first message yet.
   React.useEffect(() => {
+    if (!canLoadThreads) {
+      dialogsStore.setAiChatRecentThreads([]);
+      return;
+    }
+    const titled = threads.filter((thread) => thread.title);
     dialogsStore.setAiChatRecentThreads(
-      canLoadThreads
-        ? threads
-            .filter((thread) => thread.title)
-            .slice(0, RECENT_THREADS_COUNT)
-            .map((thread) => ({ id: thread.threadId, title: thread.title ?? "" }))
-        : [],
+      titled
+        .slice(0, RECENT_THREADS_COUNT)
+        .map((thread) => ({ id: thread.threadId, title: thread.title ?? "" })),
+      titled.length > RECENT_THREADS_COUNT || hasMoreThreads,
     );
-  }, [threads, canLoadThreads, dialogsStore]);
+  }, [threads, hasMoreThreads, canLoadThreads, dialogsStore]);
 
   React.useEffect(() => {
     dialogsStore.setAiChatActiveThreadId(activeThreadId);

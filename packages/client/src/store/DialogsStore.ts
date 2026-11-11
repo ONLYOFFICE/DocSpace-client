@@ -460,6 +460,9 @@ class DialogsStore {
   // chat library's stores by AiChatPageBridge for the sidebar's Recent.
   aiChatRecentThreads: TAiChatRecentThread[] = [];
 
+  // There are conversations past those: Recent offers Show more.
+  aiChatHasMoreThreads = false;
+
   aiChatActiveThreadId = "";
 
   newFilesPanelFolderId: Nullable<number | string> = null;
@@ -606,8 +609,12 @@ class DialogsStore {
     this.aiChatPageRequest = { page, afterLocationKey, threadId };
   };
 
-  setAiChatRecentThreads = (threads: TAiChatRecentThread[]) => {
+  setAiChatRecentThreads = (
+    threads: TAiChatRecentThread[],
+    hasMore = false,
+  ) => {
     this.aiChatRecentThreads = threads;
+    this.aiChatHasMoreThreads = hasMore;
   };
 
   setAiChatActiveThreadId = (threadId: string) => {

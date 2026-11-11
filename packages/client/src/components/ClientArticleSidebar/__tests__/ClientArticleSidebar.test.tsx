@@ -92,11 +92,12 @@ const ClientArticleSidebar = (await import("../index"))
 type TRenderOptions = {
   presets?: { id: string; name: string }[];
   recentThreads?: { id: string; title: string }[];
+  hasMoreThreads?: boolean;
 };
 
 const renderSidebar = (
   extraFolders: unknown[] = [],
-  { presets = [], recentThreads = [] }: TRenderOptions = {},
+  { presets = [], recentThreads = [], hasMoreThreads = false }: TRenderOptions = {},
 ) =>
   render(
     <Provider
@@ -121,6 +122,7 @@ const renderSidebar = (
         setEmptyTrashDialogVisible: vi.fn(),
         requestAiChatPage: vi.fn(),
         aiChatRecentThreads: recentThreads,
+        aiChatHasMoreThreads: hasMoreThreads,
         aiChatActiveThreadId: "",
       }}
       aiPresetsStore={{ presets }}
@@ -192,7 +194,7 @@ describe("ClientArticleSidebar — AI Chat section", () => {
 });
 
 describe("ClientArticleSidebar — AI Chat section recent entries", () => {
-  it("lists the five latest projects under Agents and the conversations under Recent", () => {
+  it("lists the five latest projects under Agents and the conversations under Recent, each with Show more", () => {
     const presets = Array.from({ length: 7 }, (_, index) => ({
       id: String(100 + index),
       name: `Project ${index}`,
@@ -205,6 +207,7 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
           { id: "t1", title: "First" },
           { id: "t2", title: "Second" },
         ],
+        hasMoreThreads: true,
       },
     );
 
@@ -220,11 +223,28 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
       "nav-ai-nested-project-102",
       "nav-ai-nested-project-103",
       "nav-ai-nested-project-104",
+      "nav-ai-nested-projects-more",
       "nav-ai-chat-recent",
       "nav-ai-nested-chat-t1",
       "nav-ai-nested-chat-t2",
+      "nav-ai-nested-chats-more",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
     ]);
+  });
+});
+
+describe("ClientArticleSidebar — AI Chat section without more entries", () => {
+  it("offers no Show more while everything is listed", () => {
+    renderSidebar(
+      [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
+      {
+        presets: [{ id: "100", name: "Only" }],
+        recentThreads: [{ id: "t1", title: "First" }],
+      },
+    );
+
+    expect(screen.queryByTestId("nav-ai-nested-projects-more")).toBeNull();
+    expect(screen.queryByTestId("nav-ai-nested-chats-more")).toBeNull();
   });
 });

@@ -126,6 +126,7 @@ type ClientArticleSidebarProps = FolderIds & {
   // shows.
   recentAiProjects?: { id: string; name: string }[];
   recentAiChats?: TAiChatRecentThread[];
+  hasMoreAiChats?: boolean;
   activeAiChatId?: string;
   // The portal-wide AI switch (Settings -> Integration -> AI services). With it
   // off there is no AI in the portal at all, so the AI Projects app is dropped
@@ -150,9 +151,10 @@ const RECENT_AI_PROJECTS_COUNT = 5;
 // A stable empty default, so the memoized groups are not rebuilt each render.
 const EMPTY_LIST: never[] = [];
 
-// Ids of the entries listed under Agents and Recent. NavMenu has no third
-// level: they are siblings of those entries, indented by the
-// `[data-item-id^="ai-nested-"]` rule of the module's stylesheet.
+// Ids of the entries listed under Agents and Recent, Show more included.
+// NavMenu has no third level: they are siblings of those entries, indented
+// and spaced by the `[data-item-id^="ai-nested-"]` rules of the module's
+// stylesheet.
 const aiProjectItemId = (id: string | number) => `ai-nested-project-${id}`;
 const aiChatItemId = (id: string) => `ai-nested-chat-${id}`;
 
@@ -167,6 +169,7 @@ const ClientArticleSidebar = ({
   requestAiChatPage,
   recentAiProjects = EMPTY_LIST,
   recentAiChats = EMPTY_LIST,
+  hasMoreAiChats = false,
   activeAiChatId,
   isNavLoading,
   aiServicesEnabled = true,
@@ -710,6 +713,16 @@ const ClientArticleSidebar = ({
             label: project.name,
             ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
           })),
+          // The rest are on the agents list.
+          ...(recentAiProjects.length > RECENT_AI_PROJECTS_COUNT
+            ? [
+                {
+                  id: "ai-nested-projects-more",
+                  label: t("Common:ShowMore"),
+                  ...nav(aiAgentsUrl),
+                },
+              ]
+            : []),
           {
             id: "ai-chat-recent",
             label: t("Common:AIChatRecent"),
@@ -721,6 +734,16 @@ const ClientArticleSidebar = ({
             label: thread.title,
             onClick: openAiChatPage("chat", thread.id),
           })),
+          // The rest are in the chat's history.
+          ...(hasMoreAiChats
+            ? [
+                {
+                  id: "ai-nested-chats-more",
+                  label: t("Common:ShowMore"),
+                  onClick: openAiChatPage("history"),
+                },
+              ]
+            : []),
           {
             id: "ai-rooms-skills",
             label: t("Common:SkillSets"),
@@ -762,7 +785,9 @@ const ClientArticleSidebar = ({
     aiAgentsUrl,
     openAiChatPage,
     shownAiProjects,
+    recentAiProjects,
     recentAiChats,
+    hasMoreAiChats,
     treeFolders,
     isVisitor,
     canUseTemplates,
@@ -820,6 +845,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     requestAiChatPage: dialogsStore.requestAiChatPage,
     recentAiProjects: aiPresetsStore.presets,
     recentAiChats: dialogsStore.aiChatRecentThreads,
+    hasMoreAiChats: dialogsStore.aiChatHasMoreThreads,
     activeAiChatId: dialogsStore.aiChatActiveThreadId,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     roomsInstalled: appsStore.isInstalled("ai-rooms"),

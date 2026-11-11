@@ -88,3 +88,10 @@
     font-weight: 400;
   }
 }
+
+// The last of a group - its Show more, or its last entry without one - keeps
+// the next entry at the distance an expanded section keeps the next section
+// (NavMenu's `.subItems.expanded`).
+:global(li:has(> div > [data-item-id^="ai-nested-"]):has(+ li:not(:has(> div > [data-item-id^="ai-nested-"])))) {
+  margin-bottom: 32px;
+}

@@ -63,6 +63,11 @@ const SNAPSHOT_ATTEMPTS = 3;
 // The editor closed from its own button waits this long at most for a read on its way.
 const CLOSE_READ_WAIT = 1000;
 
+// A report that failed is sent again on the next read; one that failed again waits this long, and twice as long after
+// each further failure, up to the longest wait.
+const REPORT_RETRY_DELAY = 1000;
+const MAX_REPORT_RETRY_DELAY = 30000;
+
 // The longest key the server accepts.
 const MAX_KEY_LENGTH = 255;
 
@@ -232,6 +237,10 @@ const useFormFieldChanges = (
   // The server refused the form, as when it is not the original form of a form-filling room: nothing more is sent in
   // this session.
   const refused = useRef(false);
+  // The reports that failed in a row as the document changed, and the time before which no other is sent: a server
+  // that keeps failing is not asked on every change. Leaving the editor sends the renames whatever the wait.
+  const failures = useRef(0);
+  const retryAt = useRef(0);
 
   // The form the reports are about; null while nothing is to be reported.
   const target = useCallback(() => {
@@ -242,6 +251,9 @@ const useFormFieldChanges = (
   }, []);
 
   const markReported = useCallback((report: string, sequence: number) => {
+    failures.current = 0;
+    retryAt.current = 0;
+
     if (sequence >= reported.current.sequence) {
       reported.current = { report, sequence };
     }
@@ -325,6 +337,9 @@ const useFormFieldChanges = (
       const last = sending.current ?? reported.current;
       if (!result || result.report === last.report) return;
 
+      // The server keeps failing: the renames wait for a later read, or for the editor to be left.
+      if (Date.now() < retryAt.current) return;
+
       const { to, renames, sequence, report } = result;
       sending.current = { report, sequence };
       try {
@@ -337,6 +352,16 @@ const useFormFieldChanges = (
         markReported(report, sequence);
       } catch (error) {
         onReportError(error);
+
+        failures.current += 1;
+        if (failures.current > 1) {
+          retryAt.current =
+            Date.now() +
+            Math.min(
+              REPORT_RETRY_DELAY * 2 ** (failures.current - 2),
+              MAX_REPORT_RETRY_DELAY,
+            );
+        }
       } finally {
         // A later report went out in the meantime: it is the one on its way now.
         if (sending.current?.sequence === sequence) sending.current = null;

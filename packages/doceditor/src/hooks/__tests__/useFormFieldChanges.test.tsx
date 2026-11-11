@@ -487,6 +487,107 @@ describe("useFormFieldChanges", () => {
     expect(report).toHaveBeenCalledTimes(2);
   });
 
+  describe("a server that keeps failing", () => {
+    // Two reports in a row fail; the renames stay unsent.
+    const failTwice = async () => {
+      render();
+      setForms(form("1", "name"));
+      await hook.takeSnapshot();
+
+      report.mockRejectedValueOnce(httpError(500));
+      report.mockRejectedValueOnce(httpError(500));
+      setForms(form("1", "fullName"));
+      await hook.reportFieldChanges();
+      await hook.reportFieldChanges();
+      expect(report).toHaveBeenCalledTimes(2);
+
+      failedAt = Date.now();
+      clock = vi.spyOn(Date, "now");
+    };
+
+    // The time since the second failure.
+    let failedAt = 0;
+    let clock: ReturnType<typeof vi.spyOn> | null = null;
+
+    const passTime = (ms: number) => {
+      clock?.mockImplementation(() => failedAt + ms);
+    };
+
+    afterEach(() => {
+      clock?.mockRestore();
+      clock = null;
+    });
+
+    it("Report failed twice in a row: the next changes are read and not sent", async () => {
+      await failTwice();
+
+      setForms(form("1", "fullerName"));
+      await hook.reportFieldChanges();
+      await hook.reportFieldChanges();
+
+      expect(report).toHaveBeenCalledTimes(2);
+    });
+
+    it("Wait over: the renames read then are sent", async () => {
+      await failTwice();
+
+      passTime(1000);
+      await hook.reportFieldChanges();
+
+      expect(report).toHaveBeenCalledTimes(3);
+      expect(report.mock.calls[2][1].renames).toEqual([
+        { oldKey: "name", newKey: "fullName" },
+      ]);
+    });
+
+    it("Each further failure: the wait is twice as long", async () => {
+      await failTwice();
+
+      report.mockRejectedValueOnce(httpError(500));
+      passTime(1000);
+      await hook.reportFieldChanges();
+      expect(report).toHaveBeenCalledTimes(3);
+
+      passTime(2500);
+      await hook.reportFieldChanges();
+      expect(report).toHaveBeenCalledTimes(3);
+
+      passTime(3000);
+      await hook.reportFieldChanges();
+      expect(report).toHaveBeenCalledTimes(4);
+    });
+
+    it("Report taken after the failures: the next failure is sent again at once", async () => {
+      await failTwice();
+
+      passTime(1000);
+      await hook.reportFieldChanges();
+      report.mockRejectedValueOnce(httpError(500));
+      setForms(form("1", "fullerName"));
+      await hook.reportFieldChanges();
+      await hook.reportFieldChanges();
+
+      expect(report).toHaveBeenCalledTimes(5);
+    });
+
+    it("Editor left during the wait: the renames read last still go", async () => {
+      await failTwice();
+
+      setForms(form("1", "fullerName"));
+      await hook.reportFieldChanges();
+      window.dispatchEvent(new Event("pagehide"));
+
+      expect(report).toHaveBeenCalledTimes(3);
+      expect(report).toHaveBeenLastCalledWith(
+        7,
+        expect.objectContaining({
+          renames: [{ oldKey: "name", newKey: "fullerName" }],
+        }),
+        true,
+      );
+    });
+  });
+
   it("Editor left with an unsent report: it goes with a request that outlives the page", async () => {
     render();
     setForms(form("1", "name"));

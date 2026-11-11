@@ -50,44 +50,31 @@ const formInFormRoom = (security: Record<string, unknown> = {}) =>
 
 const setup = () => {
   const askAIAction = vi.fn();
-  const setAskAIConnectDialogVisible = vi.fn();
   const store = createTestContextOptionsStore({
     filesActionsStore: { askAIAction },
-    dialogsStore: { setAskAIConnectDialogVisible },
-    filesStore: { addActiveItems: vi.fn() },
-    uploadDataStore: { clearActiveOperations: vi.fn() },
   });
-  // A form-filling room without an external database that the user may edit.
-  store._resolveRoom = vi.fn(async () => ({
-    id: 10,
-    title: "Room",
-    sendFormToExternalDB: false,
-    security: { EditRoom: true },
-  })) as never;
 
-  return { store, askAIAction, setAskAIConnectDialogVisible };
+  return { store, askAIAction };
 };
 
 describe("ContextOptionsStore.askAI", () => {
-  it("Responses already in a forms database: the chat opens without offering to connect one", async () => {
-    const { store, askAIAction, setAskAIConnectDialogVisible } = setup();
+  it("Responses already in a forms database: the chat opens at once", async () => {
+    const { store, askAIAction } = setup();
     const item = formInFormRoom({ AnalyzeResponses: true });
 
     await store.askAI(item, true);
 
     expect(askAIAction).toHaveBeenCalledWith(item, true);
-    expect(setAskAIConnectDialogVisible).not.toHaveBeenCalled();
   });
 
-  it("Responses in no database: connecting one is offered first", async () => {
-    const { store, askAIAction, setAskAIConnectDialogVisible } = setup();
+  // The forms are stored in the built-in database, so there is nothing to
+  // offer to connect: no dialog stands before the chat.
+  it("Responses in no database yet: the chat opens at once too", async () => {
+    const { store, askAIAction } = setup();
+    const item = formInFormRoom();
 
-    await store.askAI(formInFormRoom(), true);
+    await store.askAI(item, true);
 
-    expect(setAskAIConnectDialogVisible).toHaveBeenCalledWith(
-      true,
-      expect.any(Function),
-    );
-    expect(askAIAction).not.toHaveBeenCalled();
+    expect(askAIAction).toHaveBeenCalledWith(item, true);
   });
 });

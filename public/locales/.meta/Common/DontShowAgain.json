@@ -12,12 +12,6 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/AskAIConnectDialog/index.tsx",
-      "line_number": 96,
-      "context": "<Text fontSize=\"13px\" fontWeight={400}>\n {t(\"InfoPanel:FormRoomAIModalDescription\")}\n </Text>\n <Checkbox\n className={styles.checkbox}\n label={t(\"Common:DontShowAgain\")}\n isChecked={skipModal}\n onChange={() => setSkipModal((prev) => !prev)}\n />\n </ModalDialog.Body>\n <ModalDialog.Footer>",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreatedPDFFormDialog/CreatedPDFFormDialog.tsx",
       "line_number": 129,
       "context": "{isBase ? <HeaderIcon /> : <HeaderDarkIcon />}\n <span>{description}</span>\n <Checkbox\n className={styles.createdPdfCheckbox}\n onChange={handleChangeCheckbox}\n label={t(\"Common:DontShowAgain\")}\n dataTestId=\"created_pdf_form_dialog_dont_show_again\"\n />\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",

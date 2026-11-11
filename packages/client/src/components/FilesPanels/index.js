@@ -109,7 +109,6 @@ import ShareSelector from "../ShareSelector";
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
-import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
 import AiProjectDialog from "../dialogs/AiProjectDialog";
 import GenerateSkillDialog from "../dialogs/GenerateSkillDialog";
 
@@ -201,7 +200,6 @@ const Panels = (props) => {
     arrRoomGroups,
     addRoomToGroupDialogVisible,
     pauseSubmissionsDialogVisible,
-    askAIConnectDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -479,9 +477,6 @@ const Panels = (props) => {
     pauseSubmissionsDialogVisible && (
       <PauseSubmissionsDialog key="pause-submissions-dialog" />
     ),
-    askAIConnectDialogVisible && (
-      <AskAIConnectDialog key="ask-ai-connect-dialog" />
-    ),
     aiProjectDialogVisible && <AiProjectDialog key="ai-project-dialog" />,
     generateSkillDialogVisible && (
       <GenerateSkillDialog key="generate-skill-dialog" />
@@ -577,7 +572,6 @@ export default inject(
       setEditRoomGroupsDialogVisible,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
-      askAIConnectDialogVisible,
     } = dialogsStore;
 
     const { setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -715,7 +709,6 @@ export default inject(
       arrRoomGroups,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
-      askAIConnectDialogVisible,
     };
   },
 )(observer(Panels));

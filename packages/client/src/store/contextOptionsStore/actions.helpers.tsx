@@ -76,9 +76,7 @@ import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { TaskPollingError } from "@docspace/shared/utils/poll-task";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { PersistenceKeys, getPersisted } from "../utils/persistence";
-import { onEditRoomTemplate, systemFolders } from "./helpers";
+import { systemFolders } from "./helpers";
 import type { TContextItem, TStoreCustomEvent } from "./helpers";
 import type DialogsStore from "../DialogsStore";
 import type ContextOptionsStore from "../ContextOptionsStore";
@@ -786,81 +784,12 @@ export const handleCopyPrimaryLinkImpl = async (
   }
 };
 
-export const _resolveRoomImpl = async (
-  self: ContextOptionsStore,
-): Promise<TContextItem | null> => {
-  const { infoPanelRoom } = self.infoPanelStore;
-  const selectedFolder = self.selectedFolderStore.getSelectedFolder();
-
-  // rooms resolved here are TRoom/TSelectedFolder shapes
-  // consumed as .js view-models — the casts keep the original duck typing.
-  if (infoPanelRoom) return infoPanelRoom as unknown as TContextItem;
-  if (selectedFolder.isRoom) return selectedFolder as unknown as TContextItem;
-
-  const roomPath = selectedFolder.pathParts.find((path) => path.roomType);
-  if (!roomPath) return null;
-
-  const [room = null] = self.filesStore.getFilesListItems([
-    await getRoomInfo(roomPath.id),
-  ]);
-  return room;
-};
-
-export const _syncInfoPanelRoomImpl = (
-  self: ContextOptionsStore,
-  newRoom: TRoom,
-) => {
-  const { infoPanelStore } = self;
-  if (infoPanelStore.isVisible && infoPanelStore.isDetailsTabActive) {
-    infoPanelStore.setInfoPanelRoom(newRoom);
-  }
-};
-
-export const askAIImpl = async (
+export const askAIImpl = (
   self: ContextOptionsStore,
   item: TContextItem,
   // The request is about the form's responses, not the document — see
-  // `askAIActionImpl`. Passed through every branch below unchanged.
+  // `askAIActionImpl`.
   analyze = false,
 ) => {
-  const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
-
-  // The responses are already in a forms database the AI reads (the external
-  // one or the built-in one): there is nothing to connect.
-  if (
-    item.parentRoomType !== FolderType.FormRoom ||
-    skipAi ||
-    item.security?.AnalyzeResponses
-  ) {
-    self.filesActionsStore.askAIAction(item, analyze);
-    return;
-  }
-
-  const { addActiveItems } = self.filesStore;
-  const { clearActiveOperations } = self.uploadDataStore;
-  const { endLoader, startLoader } = createLoader();
-
-  try {
-    startLoader(() => addActiveItems([item.id], null));
-
-    const room = await self._resolveRoom();
-    if (!room) return;
-
-    if (room.sendFormToExternalDB || !room.security?.EditRoom) {
-      self.filesActionsStore.askAIAction(item, analyze);
-      return;
-    }
-
-    self.dialogsStore.setAskAIConnectDialogVisible(true, (action) => {
-      if (action === "connect") {
-        onEditRoomTemplate(room, self._syncInfoPanelRoom);
-      } else if (action === "continue") {
-        self.filesActionsStore.askAIAction(item, analyze);
-      }
-    });
-  } catch (error) {
-    toastr.error(error as string);
-  } finally {
-    endLoader(() => clearActiveOperations([item.id]));
-  }
+  self.filesActionsStore.askAIAction(item, analyze);
 };

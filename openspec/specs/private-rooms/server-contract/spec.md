@@ -387,27 +387,12 @@ The server SHALL NOT list a private room to a user who neither created it nor is
 - **WHEN** a DocSpace admin who was never invited requests the rooms list
 - **THEN** private rooms created by other users are not returned, and other users' non-private rooms are
 
-### Requirement: Private rooms have no section of their own on the server
-The server SHALL NOT provide private rooms with a root folder, search area or root-list entry of their own. A private room SHALL be created under the Rooms root, reporting that root's folder type as its root folder type. It SHALL be archived to and restored from the Archive root shared with every other room.
-
-#### Scenario: Root folders list
-- **WHEN** the client requests the root folders
-- **THEN** the response contains no folder dedicated to private rooms
-
-#### Scenario: Private room folder data
-- **WHEN** the client reads a private room
-- **THEN** its root folder type is the Rooms root type and its parent is the Rooms root
-
-#### Scenario: Archived private room
-- **WHEN** a private room is archived
-- **THEN** it moves to the same Archive root as every other archived room
-
 ### Requirement: New-items counts include private rooms
-The server SHALL count new items of private rooms the same way as new items of every other room. That covers the Rooms root's new-items count, the news listings of the Rooms root and of rooms, and mark-as-read on the Rooms root. None of them applies a privacy distinction.
+The server SHALL count new items of private rooms under the Private root: that root's new-items count, its news listing and mark-as-read on it. The Rooms root's count, news listing and mark-as-read SHALL NOT cover private rooms.
 
 #### Scenario: New file in a private room
 - **WHEN** a member uploads a file into a private room
-- **THEN** the Rooms root's new-items count of the other members grows, and the Rooms news listing includes the file
+- **THEN** the Private root's new-items count of the other members grows, the Rooms root's does not, and the Private root's news listing includes the file
 
 ### Requirement: Room socket events carry no private flag
 The server SHALL send room socket events (create, update and delete of a folder) with the room's id, parent, title, room type and creator only. The private setting is not part of the payload. Archiving or restoring a room SHALL be sent as a delete from the source followed by a create in the destination.
@@ -415,13 +400,6 @@ The server SHALL send room socket events (create, update and delete of a folder)
 #### Scenario: User invited into a private room
 - **WHEN** a user is added to a private room
 - **THEN** that user receives a create-folder event whose payload does not say the room is private
-
-### Requirement: Room groups ignore privacy
-The server SHALL NOT accept a privacy filter on the room-group endpoints. A group of the Rooms area SHALL list and count every readable, non-archived room of that area, private rooms included.
-
-#### Scenario: Group with a private room
-- **WHEN** a Rooms-area group holds a private room the user can read
-- **THEN** the group's room count and listing include that room
 
 ### Requirement: Server-built room links
 The server SHALL build links to an active room or a folder inside one as `rooms/shared/{id}/filter?folder={id}`. Links to an archived room or a folder inside one SHALL be built as `rooms/archived/filter?folder={id}`. Private rooms SHALL get the same forms.
@@ -770,3 +748,41 @@ The server SHALL report on a file of an active private room, to the room's owner
 #### Scenario: File in an archived private room
 - **WHEN** the owner of an archived private room lists an encrypted file in it
 - **THEN** the file reports Comment, Review, CustomFilter, EditHistory, SubmitToFormGallery and OpenForm as false
+
+### Requirement: Private root
+The server SHALL provide a root folder for the private rooms section, of folder type `PrivateRooms` (42), listed by the root folders request and read through `GET files/@private` while the E2E rooms app is on. The root SHALL hold no rooms: a private room stays under the Rooms root with its root folder type, and the section lists rooms by their private setting.
+
+#### Scenario: Root folders list
+- **WHEN** the client requests the root folders while the E2E rooms app is on
+- **THEN** the response contains the Private root, of folder type `PrivateRooms`
+
+#### Scenario: App turned off
+- **WHEN** the E2E rooms app is off
+- **THEN** the root folders list has no Private root and `GET files/@private` answers 404
+
+#### Scenario: Private room folder data
+- **WHEN** the client reads a private room
+- **THEN** its root folder type is the Rooms root type and its parent is the Rooms root
+
+#### Scenario: Section listing
+- **WHEN** the rooms list is requested with `searchArea=PrivateRooms`, or `GET files/@private` is read
+- **THEN** only the active private rooms the caller is a member of are returned, and an administrator outside a private room does not see it
+
+#### Scenario: Recent with the section's area
+- **WHEN** Recent is requested with `searchArea=PrivateRooms`
+- **THEN** the server answers 400
+
+### Requirement: Room groups belong to one section
+The server SHALL accept `PrivateRooms` as the area of a room group, and SHALL take into a group only rooms of its own section, answering 400 otherwise. A private room linked to a group of the Rooms area SHALL NOT be listed or counted there, and the link SHALL be kept. The server SHALL NOT accept a privacy filter on the room-group endpoints.
+
+#### Scenario: Private room added to a Rooms group
+- **WHEN** a private room is added to a group of the Rooms area
+- **THEN** the server answers 400
+
+#### Scenario: Group of the private section
+- **WHEN** a group is created with the `PrivateRooms` area and private rooms are added to it
+- **THEN** the group lists and counts those rooms
+
+#### Scenario: Older link to a Rooms group
+- **WHEN** a Rooms-area group still holds a link to a private room
+- **THEN** the group's room count and listing leave that room out

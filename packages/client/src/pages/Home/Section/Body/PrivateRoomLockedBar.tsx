@@ -40,12 +40,16 @@ import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 import { useEncryption } from "@docspace/shared/context/encryption";
 
-import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
+import {
+  getOpenRoomId,
+  roomUnlockRequest,
+} from "SRC_DIR/helpers/roomUnlockRequest";
 
 type PrivateRoomLockedBarProps = {
   /** The open folder is a private room or lies inside one. */
   isPrivate: boolean;
-  folderId: number | string | null | undefined;
+  /** The room the open folder belongs to. */
+  roomId: number | string | null | undefined;
   syncEncryptedRoom?: () => void;
 };
 
@@ -58,7 +62,7 @@ type PrivateRoomLockedBarProps = {
  */
 const PrivateRoomLockedBar = ({
   isPrivate,
-  folderId,
+  roomId,
   syncEncryptedRoom,
 }: PrivateRoomLockedBarProps) => {
   const { t } = useTranslation(["Common"]);
@@ -66,7 +70,7 @@ const PrivateRoomLockedBar = ({
     useEncryption();
 
   if (!isPrivate || !keysLoaded || !hasConfiguredKey || isUnlocked) return null;
-  if (folderId == null || roomUnlockRequest.settledFolderId !== folderId)
+  if (roomId == null || roomUnlockRequest.settledRoomId !== roomId)
     return null;
 
   const onUnlock = () => {
@@ -100,8 +104,11 @@ const PrivateRoomLockedBar = ({
   );
 };
 
-export default inject(({ selectedFolderStore, filesStore }: TStore) => ({
-  isPrivate: !!selectedFolderStore.private,
-  folderId: selectedFolderStore.id,
-  syncEncryptedRoom: filesStore.syncEncryptedRoom,
-}))(observer(PrivateRoomLockedBar));
+export default inject(
+  ({ selectedFolderStore, filesStore, treeFoldersStore }: TStore) => ({
+    // A folder inside a private room is not private itself; its room is.
+    isPrivate: !!treeFoldersStore.isPrivacyFolder,
+    roomId: getOpenRoomId(selectedFolderStore),
+    syncEncryptedRoom: filesStore.syncEncryptedRoom,
+  }),
+)(observer(PrivateRoomLockedBar));

@@ -94,7 +94,8 @@ const BAR = "private_room_locked_bar";
 const renderBar = ({ isPrivate = true } = {}) => {
   const syncEncryptedRoom = vi.fn();
   const stores = {
-    selectedFolderStore: { private: isPrivate, id: ROOM },
+    selectedFolderStore: { id: ROOM },
+    treeFoldersStore: { isPrivacyFolder: isPrivate },
     filesStore: { syncEncryptedRoom },
   };
   const view = render(
@@ -213,9 +214,9 @@ describe("A locked key is shown in a private room", () => {
     expect(screen.queryByTestId(BAR)).toBeNull();
   });
 
-  it("is not shown for another folder's answer", () => {
+  it("is not shown for another room's answer", () => {
     runInAction(() => {
-      roomUnlockRequest.settledFolderId = ROOM + 1;
+      roomUnlockRequest.settledRoomId = ROOM + 1;
     });
     renderBar();
 

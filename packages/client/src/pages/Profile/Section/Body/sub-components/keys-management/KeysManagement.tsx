@@ -396,26 +396,29 @@ const KeysManagement = ({
           ) : null}
           {rememberedUntil ? (
             <div className={styles.deviceRow}>
-              <Text fontSize="13px">
+              <Text fontSize="13px" dataTestId="device_remembered_until">
                 {t("Common:DeviceUnlockRememberedUntil", {
                   date: rememberedUntil,
                 })}
               </Text>
-              <Link
-                type={LinkType.action}
-                fontWeight="600"
-                fontSize="13px"
-                isHovered
-                onClick={() => {
-                  if (!busy) handleForgetDevice();
-                }}
-                role="button"
-                tabIndex={0}
-                onKeyDown={activateAsButton}
-                dataTestId="forget_device_link"
-              >
-                {t("Common:ForgetDeviceButton")}
-              </Link>
+              {/* Spec: private-rooms/key-management, "Forget device and Lock now are offered one at a time" */}
+              {isUnlocked ? null : (
+                <Link
+                  type={LinkType.action}
+                  fontWeight="600"
+                  fontSize="13px"
+                  isHovered
+                  onClick={() => {
+                    if (!busy) handleForgetDevice();
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={activateAsButton}
+                  dataTestId="forget_device_link"
+                >
+                  {t("Common:ForgetDeviceButton")}
+                </Link>
+              )}
             </div>
           ) : null}
           {isUnlocked ? (

@@ -149,11 +149,11 @@ The system SHALL offer Common:LockNow while the identity is unlocked; it SHALL w
 - **THEN** the identity is locked, the device is forgotten and the next operation prompts for the passphrase
 
 ### Requirement: Export a key
-The system SHALL export a registered key as a JSON file named after the key fingerprint after the user confirms the passphrase, confirming with Common:EncryptionKeyExported. The export contains the sealed envelope, never the raw private key.
+The system SHALL export a registered key as a JSON file named after the key fingerprint after the user confirms the passphrase, confirming with Common:EncryptionKeyExported. The export contains the sealed envelope, never the raw private key. The file name SHALL NOT carry a product or brand name.
 
 #### Scenario: Export
 - **WHEN** the user chooses export and enters the correct passphrase
-- **THEN** a `docspace-key-<fingerprint>.json` file is downloaded
+- **THEN** an `encryption-key-<fingerprint>.json` file is downloaded
 
 ### Requirement: Import a key
 The system SHALL import a key from a previously exported JSON file (Common:ImportKey) for a user who has no key: the user picks the file, enters its passphrase, and the key is registered for this account and unlocked, confirming with Common:EncryptionKeyImported. Over HTTP the import SHALL be refused with Common:EncryptionRequiresHttps. The action SHALL NOT be offered while the user has a key, nor while the user's key list is not known.
@@ -451,7 +451,11 @@ The system SHALL make every enabled control of the keys management page a tab st
 
 #### Scenario: Device section
 - **WHEN** the device is remembered, the identity is unlocked and the user tabs through the device section
-- **THEN** the focus visits the auto-lock selector, the passkey toggle when it is offered, Common:ForgetDeviceButton and Common:LockNow in their displayed order
+- **THEN** the focus visits the auto-lock selector, the passkey toggle when it is offered and Common:LockNow in their displayed order
+
+#### Scenario: Device section while locked
+- **WHEN** the device is remembered, the identity is locked and the user tabs through the device section
+- **THEN** the focus visits the auto-lock selector, the passkey toggle when it is offered and Common:ForgetDeviceButton in their displayed order
 
 #### Scenario: Action disabled during a deletion
 - **WHEN** a key is being deleted
@@ -617,3 +621,88 @@ The system SHALL show a bar (Common:PrivateRoomLockedBarTitle, Common:PrivateRoo
 #### Scenario: User without a key
 - **WHEN** a user whose key list is known to hold no key, or is not known, opens a private room
 - **THEN** the bar is not shown
+
+### Requirement: Key-change dialog speaks the interface language
+The system SHALL show the dates and the duration of the key-change dialog in the interface language: the duration as a number with a unit word of that language, never with fixed Latin suffixes.
+
+#### Scenario: Duration in the interface language
+- **WHEN** the key-change dialog reports how long the known key was active
+- **THEN** Common:KeyChangedActiveFor carries a duration formatted in the interface language, such as "5 days" in English
+
+### Requirement: Key texts do not tie the key to a device
+The system SHALL describe the encryption key as the key of the user's account in the texts that prompt for the passphrase or the recovery phrase, report a missing key, or explain a changed key, and SHALL NOT say that the key is stored or configured per device.
+
+#### Scenario: Passphrase prompt
+- **WHEN** the unlock dialog shows Common:PassphraseHint
+- **THEN** the text asks for the passphrase of the key without naming a device
+
+#### Scenario: Reasons of a key change
+- **WHEN** the key-change dialog lists the legitimate reasons of a change
+- **THEN** it names a replaced key (Common:KeyChangedReasonReplaced), a recovery and a reset, and no reason that keys are stored per device
+
+### Requirement: Passphrase composition rules
+The system SHALL accept a new passphrase, at key creation and at a passphrase change, only when it holds at least one Latin capital letter, one digit and one ASCII punctuation character, on top of the length and the common-pattern rules. The system SHALL NOT count a capital letter of another script as the capital letter.
+
+#### Scenario: No capital letter
+- **WHEN** the user enters a 16-character passphrase of lowercase letters, digits and punctuation
+- **THEN** the confirm button stays disabled
+
+#### Scenario: Capital letter of another script
+- **WHEN** the user enters a long passphrase whose only capital letters are Cyrillic
+- **THEN** the confirm button stays disabled
+
+#### Scenario: All rules met
+- **WHEN** the user enters a passphrase of 12 characters with a Latin capital letter, a digit and a punctuation character that matches no common pattern, and repeats it
+- **THEN** the confirm button is enabled
+
+### Requirement: A passphrase change keeps the key pair
+The system SHALL NOT generate a new key pair when the passphrase is changed or the key is recovered with the recovery phrase: only the envelope is sealed again. A copy of the key exported earlier, with the passphrase it was exported under, SHALL keep opening the user's files, so a leaked passphrase or export is not cured by a passphrase change. No action replaces the key pair of a user who keeps access to their files.
+
+#### Scenario: Old export after a passphrase change
+- **WHEN** the user exports the key, changes the passphrase, and the old export is later imported on another device with the old passphrase
+- **THEN** that device opens the user's encrypted files
+
+#### Scenario: Public key unchanged
+- **WHEN** the user changes the passphrase
+- **THEN** the public key registered on the server and the Key ID shown in Keys management are the same as before
+
+### Requirement: Forget device and Lock now are offered one at a time
+The system SHALL offer Common:ForgetDeviceButton only while the identity is locked on a remembered device, and SHALL NOT offer it while the identity is unlocked: there Common:LockNow is the one action, and it locks the identity and forgets the device. The line Common:DeviceUnlockRememberedUntil SHALL be shown in both states.
+
+#### Scenario: Remembered device, identity unlocked
+- **WHEN** the user opens Keys management on a remembered device while the identity is unlocked
+- **THEN** Common:DeviceUnlockRememberedUntil and Common:LockNow are shown, and Common:ForgetDeviceButton is not
+
+#### Scenario: Remembered device, identity locked
+- **WHEN** the identity of a remembered device is locked by the idle timeout or a hidden tab and the user opens Keys management
+- **THEN** Common:DeviceUnlockRememberedUntil and Common:ForgetDeviceButton are shown, and Common:LockNow is not
+
+#### Scenario: Lock now on a remembered device
+- **WHEN** the user clicks Common:LockNow on a remembered device
+- **THEN** the identity is locked, the remembered record is removed, and the next encrypted operation MUST NOT run without the passphrase or a passkey
+
+### Requirement: A newly picked auto-lock preset applies at once
+The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it: the idle time SHALL be counted from that moment with the new length, and the hidden-tab rule of the new preset SHALL hold from that moment, without a lock and a new unlock in between.
+
+#### Scenario: Shorter preset picked while unlocked
+- **WHEN** the identity was unlocked with the 30-minute preset and the user picks 5 minutes
+- **THEN** the identity locks after 5 minutes of inactivity counted from the pick, and MUST NOT stay unlocked for the rest of the earlier 30 minutes
+
+#### Scenario: Longer preset picked while unlocked
+- **WHEN** the identity was unlocked with the 5-minute preset and the user picks 30 minutes
+- **THEN** the identity stays unlocked through 5 minutes of inactivity and when the tab is hidden
+
+### Requirement: The unlock dialog on entry is raised once per private room
+The system SHALL raise the unlock dialog by itself once per private room that a user with a locked key enters, and SHALL NOT raise it again when the user moves between the folders of that room: after the first answer the locked-key bar is the way to unlock. Entering another private room SHALL raise the dialog again.
+
+#### Scenario: Subfolder after a cancelled prompt
+- **WHEN** a user with a locked key cancels the unlock dialog on entering a private room and then opens a folder of that room
+- **THEN** no unlock dialog is raised, and the locked-key bar is shown in the folder
+
+#### Scenario: Back to the root of the room
+- **WHEN** that user returns from the folder to the root of the same room
+- **THEN** no unlock dialog is raised and the bar is shown
+
+#### Scenario: Another private room
+- **WHEN** that user leaves the room and opens another private room
+- **THEN** the unlock dialog is raised once for that room

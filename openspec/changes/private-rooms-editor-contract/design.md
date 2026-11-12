@@ -1051,8 +1051,10 @@ without a new run.
    `dek` and `cryptoEngineId`; the Document Server ignores versions it does
    not know and reports an error instead of opening ciphertext.
 
-6. **The Document Server reads DSE3 versions 2 and 3 and writes version 3
-   (decided 2026-10-26).** `private-rooms-dse3-header-authentication`
+6. **The Document Server reads DSE3 versions 2 and 3 and writes the
+   version its library writes (decided 2026-10-26; the heading said
+   "writes version 3" until 2026-11-12, against the text below and §5.4 of
+   `contract-v1.md`).** `private-rooms-dse3-header-authentication`
    authenticates the header fields in a version-3 container and keeps
    version-2 files readable without migration. The Document Server decrypts
    and encrypts with its own copy of this repository's library, which writes
@@ -1247,6 +1249,16 @@ without a new run.
     leave the events generic and rely on the server to refuse; rejected,
     the server stores a plaintext name or a plaintext new file today.
 
+17. **The SDK does not hand an encrypted file to the host (owner,
+    2026-11-12).** A host that subscribed to `onEditorOpen` opens files
+    its own way, and only the portal's editor page runs the key flow, so
+    a host that opened an encrypted file would get a broken editor or
+    ciphertext. For an encrypted item the SDK skips the event and opens
+    the editor itself; the event is unchanged for other files. Handing
+    the item over with an `encrypted` mark was the alternative, left for a
+    later change if an integrator asks for it. Client-only: no server
+    behaviour is involved.
+
 ## Implementation notes
 
 For the session that implements this change: read proposal.md, this file and
@@ -1309,9 +1321,10 @@ BLOCKED or "after <x>" waits.
   container's `/etc/onlyoffice/documentserver/local.json`), its log is
   `docker logs` of the editors container; `info/info.json` answers only
   from inside that container.
-- **Decisions pending.** Proposal decisions 5, 6 and 7 and decision 16
-  above are the owner's; tasks 9.4, 9.6, 9.10 and 9.11 wait for them and are
-  not decided by the implementing session.
+- **Decisions pending.** Proposal decisions 5 and 6 are the owner's; task
+  9.10 waits for them and is not decided by the implementing session.
+  Tasks 9.4 and 9.6 were decided on 2026-11-10 and 9.11 on 2026-11-12
+  (decisions 16 and 17).
 
 The requirement "SDK does not open encrypted files in the editor" now
 describes the opposite of its name (the SDK opens them when the capability

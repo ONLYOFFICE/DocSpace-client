@@ -19,11 +19,13 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. E2E
 
-- [ ] 3.1 Client: run the private-room, encrypted-file, key-flow and keys-management specs in Docker `tests-dev` after the text change. Verify: no failure beyond the two wide-screen screenshot cases of `keys-management.spec.ts`; a screenshot that changes because of a text is updated only through the Docker update script and named here
+- [x] 3.1 Client: run the private-room, encrypted-file, key-flow and keys-management specs in Docker `tests-dev` after the text change. Verify: no failure beyond the two wide-screen screenshot cases of `keys-management.spec.ts`; a screenshot that changes because of a text is updated only through the Docker update script and named here
+  - 2026-11-11: the first run took 9.2 minutes instead of about four and failed four cases with "element(s) not found" besides the two screenshots: "Ordinary room row" of `private-room-upload-target.spec.ts`, "App-off spec" and "Browser-local flag ignored" of `private-rooms-app-off.spec.ts`, "Base fixture" of `private-rooms-section.spec.ts`. The three specs alone: 78 of 78. The full set again, 4.1 minutes: 158 passed, 6 skipped, the two screenshot cases failed as before this change. The four failures did not repeat and are read as load on the machine, not as an effect of the texts. No screenshot was updated.
 
 ## 4. Gate
 
-- [ ] 4.1 Run the gate, every command on its own with its exit code read: `pnpm exec tsc` in the six packages, the shared, client, sdk and doceditor unit suites, `npm --prefix ./common/tests run test:lefthook`, `locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+- [x] 4.1 Run the gate, every command on its own with its exit code read: `pnpm exec tsc` in the six packages, the shared, client, sdk and doceditor unit suites, `npm --prefix ./common/tests run test:lefthook`, `locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main spec included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+  - 2026-11-11, each command run on its own with its exit code read: `pnpm exec tsc` exit 0 in shared, client, sdk, doceditor, login and management. Unit suites, all exit 0: shared 2326, client 2149, sdk 498, doceditor 78; no menu snapshot changed. `test:lefthook`: 61 passed, 3 skipped. `locales.test.js`: 44 of 46, the two completeness cases failing on the four foreign keys only. `stale-translations.mjs` over the two text commits: no reworded English key with a translation left behind. E2E as recorded in 3.1. `openspec validate --all --strict`: 20 of 20; after a trial archive on a scratch copy, 19 of 19 with the main spec included.
 
 ## Workflow follow-up
 

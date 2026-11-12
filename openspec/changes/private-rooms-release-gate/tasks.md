@@ -22,7 +22,7 @@
 - [ ] 1.18 The rooms of a deleted user are reassigned with the key check: no private room ends up owned by a user who cannot open its files (`private-rooms-server-followups` 1.4); verify by that task done and its server test named in design.md
 - [ ] 1.19 No failure leaves an encrypted file on the server without the access entry of the user who uploaded it (main spec `file-operations`, "Cancelling an encrypted upload", scenario "Stored file never left without its entries"); verify with the change that closes the wrap-failure path of the upload archived (`openspec list`). The change is `private-rooms-upload-orphan-file`, archived 2026-11-11; what is left for this criterion is the case where the deletion of the stored file fails too, which is reported to the user and not cleaned up
 - [ ] 1.20 The client withholds no operation of an encrypted file by its own check alone where the server grants the right: the server denies those rights (`private-rooms-server-followups` 2.2 and 3.2), and the entry points found by the review of 2026-11-10 are closed (`private-rooms-entry-point-gaps` and `private-rooms-encrypted-file-rights`, archived); verify by 2.2 and 3.2 of that change done
-- [ ] 1.21 The threat model is written into the main specs: what the encryption protects against (a storage leak and a passive server, not an active server), what the server sees, the limits of search, sorting and downloads, and the key rules as the code has them. The owner approved the wording of the first point on 2026-11-10; verify with the change that adds these requirements archived (`openspec list`)
+- [x] 1.21 The threat model is written into the main specs: what the encryption protects against (a storage leak and a passive server, not an active server), what the server sees, the limits of search, sorting and downloads, and the key rules as the code has them. The owner approved the wording of the first point on 2026-11-10; verify with the change that adds these requirements archived (`openspec list`). Done 2026-11-12: `private-rooms-threat-model-spec` is archived as `2026-11-12-private-rooms-threat-model-spec`; "Forget device" while unlocked and the auto-lock preset picked while unlocked are not recorded there, the owner having decided to fix both with code
 
 ## 2. Remove the beta label
 
@@ -37,7 +37,7 @@
 
 ## 4. Integration
 
-- [ ] 4.1 Full pre-push gate plus the client, SDK and doceditor E2E suites on staging with the setting on and off; verify with green runs linked from the change README.md
+- [ ] 4.1 Full pre-push gate plus the client, SDK and doceditor E2E suites under Docker with the setting on and off, and a pass by hand on staging of the same flows with the setting on and off. The E2E suites run against mocks (`packages/shared/__mocks__`), not against a portal, so they cannot run "on staging" as this task said until 2026-11-12; the stand is covered by hand and by 1.15. Verify with the green runs and the record of the stand pass linked from the change README.md
 
 ## 5. Portal setting
 

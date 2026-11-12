@@ -70,6 +70,10 @@ No work on `../server` or the Document Server is needed.
    their own members view and invite flow and criterion 1.10 names the
    panels, not the application.
 
+Decided by the owner on 2026-11-12: (1) without axe, keyboard-driven cases
+and one manual pass with a screen reader; (2) kit faults are fixed in the
+kit's `release/v4.1.0`; (3) the SDK's private pages are in.
+
 ## Capabilities
 
 ### New Capabilities

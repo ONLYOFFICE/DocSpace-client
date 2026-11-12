@@ -40,6 +40,7 @@ import uniqueid from "lodash/uniqueId";
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { getCountTilesInGrid } from "@docspace/shared/utils";
 import { useGridColumns } from "@docspace/shared/hooks/useGridColumns";
+import { RoomsType } from "@docspace/shared/enums";
 
 import {
   StyledCard,
@@ -55,6 +56,11 @@ const HeaderItem = ({ children, className, ...rest }) => {
     </StyledHeaderItem>
   );
 };
+
+// An AI project is a room to the tile container, which wraps it as one; its
+// tile is taller, so its rows are told apart by the room type of the item.
+const isAgentTile = (child) =>
+  child?.props?.children?.props?.item?.roomType === RoomsType.AiProjectRoom;
 
 const Card = ({ children, ...rest }) => {
   const getItemSize = (child) => {
@@ -73,7 +79,9 @@ const Card = ({ children, ...rest }) => {
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
     const templateHeight = 126 + verticalRoomGap;
+    const agentHeight = 154 + verticalRoomGap;
 
+    if (isAgentTile(child)) return agentHeight;
     if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
@@ -91,7 +99,8 @@ const Card = ({ children, ...rest }) => {
 };
 
 const Item = ({ children, className, ...rest }) => {
-  const isRoom = className === "isRoom";
+  // A row of agents lays out as a row of rooms; only its height differs.
+  const isRoom = className === "isRoom" || className === "isAgent";
   const isTemplate = className === "isTemplate";
   return (
     <StyledItem
@@ -159,6 +168,12 @@ const InfiniteGrid = (props) => {
 
     if (isTemplate) return "isTemplate";
 
+    const isAgent = useTempList
+      ? isAgentTile(card.props.children)
+      : listItem.props.className.includes("isAgent");
+
+    if (isAgent) return "isAgent";
+
     return "isRoom";
   };
 
@@ -185,7 +200,9 @@ const InfiniteGrid = (props) => {
         const isTemplate = child?.props?.className?.includes("template");
         const cls = isFile
           ? "isFile"
-          : isRoom
+          : isAgentTile(child)
+            ? "isAgent"
+            : isRoom
             ? "isRoom"
             : isTemplate
               ? "isTemplate"
@@ -226,7 +243,7 @@ const InfiniteGrid = (props) => {
           key={key}
           className={`tiles-loader ${type}`}
           isFolder={type === "isFolder"}
-          isRoom={type === "isRoom"}
+          isRoom={type === "isRoom" || type === "isAgent"}
         />,
       );
     }

@@ -44,8 +44,10 @@ import {
   getAiProjectKnowledgeFiles,
   getAiProjectKnowledgeFilesCount,
   getAiProjectSkills,
+  getAiProjectSummary,
   refreshAiProjectSettings,
   toAiProject,
+  toAiProjectSummary,
   updateAiProject,
 } from "@docspace/shared/api/ai/projects";
 // A project is a room: what it shares with a room goes through the room routes.
@@ -62,6 +64,7 @@ import type {
   TAiProjectRoomDto,
   TAiProjectSkillsRoom,
   TAiProjectSource,
+  TAiProjectSummary,
 } from "@docspace/shared/api/ai/projects";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
@@ -114,6 +117,16 @@ class AiProjectsStore {
 
   skills: TAiProjectSkillsRoom[] = [];
 
+  /**
+   * What the tiles of the list say about their projects, by project id: the
+   * list answers the rooms without their settings, so each tile asks for
+   * its own (`fetchTileSummary`).
+   */
+  tileSummaries: Record<number, TAiProjectSummary> = {};
+
+  /** The summary reads in flight, by project id. */
+  private summaryRequests: Record<number, Promise<void>> = {};
+
   /** The files of each expanded Knowledge room, by room id. */
   knowledge: Record<number, TAiProjectKnowledgeFile[]> = {};
 
@@ -153,7 +166,7 @@ class AiProjectsStore {
   constructor(aiPresetsStore: AiPresetsStore, userStore: UserStore) {
     this.aiPresetsStore = aiPresetsStore;
     this.userStore = userStore;
-    makeAutoObservable(this, { aiPresetsStore: false, openRequest: false } as never);
+    makeAutoObservable(this, { aiPresetsStore: false, openRequest: false, summaryRequests: false } as never);
   }
 
   /* ------------------------------ Project ------------------------------ */
@@ -248,8 +261,32 @@ class AiProjectsStore {
     this.aiPresetsStore.setActivePreset(toAiPreset(project));
   };
 
+  /**
+   * Reads the summary a project's tile shows, once: later calls reuse the
+   * answer, and a failed read is tried again by the next tile that asks.
+   */
+  fetchTileSummary = (id: number): Promise<void> => {
+    if (this.tileSummaries[id]) return Promise.resolve();
+    const pending = this.summaryRequests[id];
+    if (pending) return pending;
+    const request = getAiProjectSummary(id)
+      .then((summary) => {
+        runInAction(() => {
+          this.tileSummaries[id] = summary;
+        });
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        delete this.summaryRequests[id];
+      });
+    this.summaryRequests[id] = request;
+    return request;
+  };
+
   /** The open project (and the one in the edit form), as the server has it now. */
   private replaceProject = (project: TAiProject) => {
+    // A project read in full is also what its tile shows.
+    if (!project.aiProject.partial) this.tileSummaries[project.id] = toAiProjectSummary(project);
     if (this.activeProject?.id === project.id) this.activeProject = project;
     if (this.projectDialog?.mode === "edit" && this.projectDialog.project.id === project.id) {
       this.projectDialog = { mode: "edit", project };

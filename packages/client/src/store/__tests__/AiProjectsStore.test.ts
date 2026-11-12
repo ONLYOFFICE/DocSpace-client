@@ -8,6 +8,13 @@ const api = vi.hoisted(() => ({
   getAiProjectKnowledgeFiles: vi.fn(),
   getAiProjectKnowledgeFilesCount: vi.fn(),
   getAiProjectSkills: vi.fn(),
+  getAiProjectSummary: vi.fn(),
+  toAiProjectSummary: vi.fn((p: { aiProject: { profile?: { name?: string } | null } }) => ({
+    model: p.aiProject.profile?.name ?? null,
+    modelAvailable: true,
+    skills: ["from project"],
+    knowledge: [],
+  })),
   refreshAiProjectSettings: vi.fn(),
   updateAiProject: vi.fn(),
   toAiProject: vi.fn((dto: Record<string, unknown>) => ({ ...dto, aiProject: {} })),
@@ -427,6 +434,40 @@ describe("AiProjectsStore", () => {
 
       expect(store.knowledge[30][0].vectorizationStatus).toBe(VectorizationStatus.Failed);
       expect(toastr.error).toHaveBeenCalledWith("busy");
+    });
+  });
+
+  describe("the tile summaries", () => {
+    const summary = { model: "Claude", modelAvailable: true, skills: ["Legal"], knowledge: ["Wiki"] };
+
+    it("reads a project's summary once, however many tiles ask", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      const store = createStore();
+      await Promise.all([store.fetchTileSummary(7), store.fetchTileSummary(7)]);
+      await store.fetchTileSummary(7);
+
+      expect(api.getAiProjectSummary).toHaveBeenCalledTimes(1);
+      expect(store.tileSummaries[7]).toEqual(summary);
+    });
+
+    it("tries a failed read again for the next tile that asks", async () => {
+      api.getAiProjectSummary.mockRejectedValueOnce(new Error("down")).mockResolvedValueOnce(summary);
+      const store = createStore();
+      await store.fetchTileSummary(7);
+      expect(store.tileSummaries[7]).toBeUndefined();
+
+      await store.fetchTileSummary(7);
+      expect(store.tileSummaries[7]).toEqual(summary);
+    });
+
+    it("takes the summary of a project saved in the form, without a read", async () => {
+      api.updateAiProject.mockResolvedValue(project(7));
+      const store = createStore();
+      await store.updateProject(7, { title: "Renamed" });
+
+      expect(store.tileSummaries[7]).toMatchObject({ model: "Claude", skills: ["from project"] });
+      await store.fetchTileSummary(7);
+      expect(api.getAiProjectSummary).not.toHaveBeenCalled();
     });
   });
 });

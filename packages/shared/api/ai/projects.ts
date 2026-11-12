@@ -738,6 +738,44 @@ export const getAiProject = async (id: number) => {
   return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, { instructions, suggestions }));
 };
 
+/** What a project's tile in the list says about it: its model and the names of its linked rooms. */
+export type TAiProjectSummary = {
+  /** The model's name; `null` when none is selected and the project runs on the portal default. */
+  model: string | null;
+  /** `false` when the stored model is gone or cannot chat. */
+  modelAvailable: boolean;
+  skills: string[];
+  knowledge: string[];
+};
+
+/** The summary of a project already read in full. */
+export const toAiProjectSummary = ({ aiProject }: TAiProject): TAiProjectSummary => ({
+  model: aiProject.profile?.name ?? null,
+  modelAvailable: aiProject.profile?.available !== false,
+  skills: aiProject.instructionsRooms.map((room) => room.title).filter(Boolean),
+  knowledge: aiProject.knowledgeRooms.map((room) => room.title).filter(Boolean),
+});
+
+/**
+ * The summary of a project of the list, which answers the rooms without
+ * their settings: its linked rooms and its model, without the room itself,
+ * the instructions or the suggestions.
+ */
+export const getAiProjectSummary = async (id: number): Promise<TAiProjectSummary> => {
+  const [sources, profile] = await Promise.all([
+    getSources(id),
+    // A model that cannot be read leaves the project on the portal default.
+    getModel(id).catch(() => null),
+  ]);
+  const titles = (rooms: TSourceDto[] | undefined) => (rooms ?? []).map((room) => room.title).filter(Boolean);
+  return {
+    model: profile?.name ?? null,
+    modelAvailable: profile?.available !== false,
+    skills: titles(sources.instructionsRooms),
+    knowledge: titles(sources.knowledgeRooms),
+  };
+};
+
 /**
  * The open project with its model and linked rooms as the server has them
  * now, after an edit made elsewhere (the room update announces it). The room

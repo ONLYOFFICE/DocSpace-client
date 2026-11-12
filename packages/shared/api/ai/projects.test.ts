@@ -29,6 +29,8 @@ import {
   getAiProjects,
   getAiProject,
   getAiProjectSkills,
+  getAiProjectSummary,
+  toAiProjectSummary,
   refreshAiProjectSettings,
   toAiProject,
   updateAiProject,
@@ -322,6 +324,36 @@ describe("the calls", () => {
   });
 
   const PROFILE = { id: "p1", name: "Claude", provider: "anthropic", available: true };
+
+  it("reads a tile's summary from the sources and the model alone", async () => {
+    route({
+      "GET /files/rooms/7/sources": {
+        instructionsRooms: [{ id: 1, title: "Legal" }, { id: 2, title: null }],
+        knowledgeRooms: [{ id: 3, title: "Wiki" }],
+      },
+      "GET /files/rooms/7/model": { profileId: "p1" },
+    });
+    expect(await getAiProjectSummary(7)).toEqual({
+      model: "Claude",
+      modelAvailable: true,
+      skills: ["Legal"],
+      knowledge: ["Wiki"],
+    });
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7" }));
+
+    // No model picked, or one that cannot be read: the portal default.
+    route({ "GET /files/rooms/7/sources": sources() });
+    expect(await getAiProjectSummary(7)).toEqual({ model: null, modelAvailable: true, skills: [], knowledge: [] });
+  });
+
+  it("derives the same summary from a project read in full", () => {
+    expect(toAiProjectSummary(toAiProject(folder()))).toEqual({
+      model: "Claude",
+      modelAvailable: true,
+      skills: [],
+      knowledge: ["Docs"],
+    });
+  });
 
   it("reads the project's model with the room, and the default when it cannot be read", async () => {
     route({

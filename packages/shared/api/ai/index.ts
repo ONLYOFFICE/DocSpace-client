@@ -60,7 +60,19 @@ import type {
   TEditAgentData,
   TGetAgents,
   TAIUserConfig,
+  TProfile,
   TProfilesList,
+  TMetadataAIFillRequest,
+  TMetadataAIFillResult,
+  TMetadataAIGenerateRequest,
+  TMetadataAIGenerateResult,
+  TCreateSkillRequest,
+  TCreateSkillResult,
+  TGenerateSkillRequest,
+  TGenerateSkillResult,
+  TDocumentAgentSettings,
+  TByokKey,
+  TByokProvider,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -72,6 +84,9 @@ const baseUrl = "/ai";
 // fire one (Bug 83181). Callers that self-toast skip it for 403 via this check.
 const isForbiddenError = (e: unknown): boolean =>
   (e as { response?: { status?: number } })?.response?.status === 403;
+
+const isNotFoundError = (e: unknown): boolean =>
+  (e as { response?: { status?: number } })?.response?.status === 404;
 
 const getAuthHeaders = async (): Promise<Record<string, string>> => {
   if (typeof window === "undefined") return {};
@@ -168,6 +183,37 @@ export const getKnowledgeConfig = async () => {
   }
 };
 
+// The document agent's tenant settings, kept by the AI service and reached
+// through the chat service's `/ai/document-agent/settings`. A profile or a
+// log folder that no longer exists comes back as null. A 403 (AI switched
+// off, a guest) and a 404 (a chat service without the route) leave the
+// caller on its defaults, with no toast.
+export const getDocumentAgentSettings = async () => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/document-agent/settings`,
+    });
+
+    return res as TDocumentAgentSettings;
+  } catch (e) {
+    console.log(e);
+    if (!isForbiddenError(e) && !isNotFoundError(e)) toastr.error(e as string);
+  }
+};
+
+export const updateDocumentAgentSettings = async (
+  settings: TDocumentAgentSettings,
+) => {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/document-agent/settings`,
+    data: settings,
+  });
+
+  return res as TDocumentAgentSettings;
+};
+
 export const updateKnowledgeConfig = async (
   type: KnowledgeType,
   key: string,
@@ -247,39 +293,6 @@ export const deleteAIAgent = async (id: TAgent["id"]) => {
   await request({ method: "DELETE", url: `${baseUrl}/agents/${id}`, data: {} });
 };
 
-export const resetAIAgentQuota = async (
-  roomIds: TAgent["id"] | TAgent["id"][],
-) => {
-  const data = {
-    roomIds,
-  };
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/resetquota`,
-    data,
-  };
-
-  return request(options);
-};
-
-export function setCustomAIAgentQuota(
-  roomIds: TAgent["id"] | TAgent["id"][],
-  quota: number,
-) {
-  const data = {
-    roomIds,
-    quota,
-  };
-
-  const options = {
-    method: "put",
-    url: `${baseUrl}/agents/agentquota`,
-    data,
-  };
-
-  return request(options);
-}
-
 export const getProfilesList = async () => {
   const response = await authFetch(`/api/2.0/ai/profiles/list`, {
     method: "GET",
@@ -291,6 +304,74 @@ export const getProfilesList = async () => {
   if (!response.ok) return [] as TProfilesList;
 
   return (await response.json()) as TProfilesList;
+};
+
+// One AI profile by id, as the chat's own `profiles/get-by-id` returns it
+// (without its key); `null` when it is gone or cannot be read.
+export const getProfileById = async (id: string) => {
+  const response = await authFetch(
+    `/api/2.0/ai/profiles/get-by-id?id=${encodeURIComponent(id)}`,
+    { method: "GET", headers: { "Content-Type": "application/json" } },
+  );
+
+  if (!response.ok) return null;
+
+  return (await response.json()) as TProfile;
+};
+
+// A draft attachment of the AI chat, as the chat's own
+// `attachments/save-files-many` route returns it: documents come with their
+// extracted text in `content`.
+export type TAIChatAttachment = {
+  id: string;
+  kind: "file" | "image";
+  title: string;
+  content?: string;
+};
+
+// Attaches portal files the way the AI chat does: the service reads each one
+// and extracts its text. `type` is the ONLYOFFICE file type code the chat
+// shows on the chip. Throws with the service's message when a file cannot be
+// attached (e.g. an unsupported format).
+export const createAIChatAttachments = async (
+  files: { id: number | string; title: string; type: number }[],
+) => {
+  const inputs = files.map((file) => ({
+    path: String(file.id),
+    title: file.title,
+    type: file.type,
+    content: "",
+  }));
+
+  // The route takes the library method's arguments: [inputs, entityId].
+  const response = await authFetch(
+    `/api/2.0/ai/attachments/save-files-many`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([inputs, null]),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Attaching failed (${response.status}): ${await response.text()}`,
+    );
+  }
+
+  return (await response.json()) as TAIChatAttachment[];
+};
+
+export const deleteAIChatAttachment = async (id: string) => {
+  await authFetch(`/api/2.0/ai/attachments/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
+  });
 };
 
 export const getWebSearchConfigured = async () => {
@@ -451,4 +532,121 @@ export const updateAIUserConfig = async (data: TAIUserConfig) => {
   const res = await request(options);
 
   return res as TAIUserConfig;
+};
+
+const postMetadataAI = async <T>(
+  route: "fill" | "generate",
+  data: TMetadataAIFillRequest | TMetadataAIGenerateRequest,
+  signal?: AbortSignal,
+) => {
+  const response = await authFetch(`/api/2.0/ai/meta/${route}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    signal,
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+      skipped: body?.skipped,
+      code: body?.code,
+      providerMessage: body?.providerMessage,
+    });
+  }
+
+  return body as T;
+};
+
+const byokFetch = async <T>(path: string, init: RequestInit = {}) => {
+  const response = await authFetch(`/api/2.0/ai/byok${path}`, {
+    ...init,
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) throw new Error(body?.error ?? response.statusText);
+
+  return body as T;
+};
+
+export const getByokProviders = () =>
+  byokFetch<TByokProvider[]>("/providers");
+
+export const getByokKeys = () => byokFetch<TByokKey[]>("");
+
+export const setByokKey = (id: string, provider: string, key: string) =>
+  byokFetch<TByokKey>(`/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ provider, key }),
+  });
+
+export const deleteByokKey = (id: string) =>
+  byokFetch<null>(`/${id}`, { method: "DELETE" });
+
+export const fillMetadataWithAI = (
+  data: TMetadataAIFillRequest,
+  signal?: AbortSignal,
+) => postMetadataAI<TMetadataAIFillResult>("fill", data, signal);
+
+export const generateMetadataWithAI = (
+  data: TMetadataAIGenerateRequest,
+  signal?: AbortSignal,
+) => postMetadataAI<TMetadataAIGenerateResult>("generate", data, signal);
+
+/** Write a skill with AI for an Instructions room; the caller saves it after review. */
+export const generateSkillWithAI = async (
+  data: TGenerateSkillRequest,
+  signal?: AbortSignal,
+) => {
+  const response = await authFetch(`/api/2.0/ai/skills/generate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    signal,
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+      code: body?.code,
+      providerMessage: body?.providerMessage,
+    });
+  }
+
+  return body as TGenerateSkillResult;
+};
+
+/**
+ * Create a skill in an Instructions room from the skill template. The AI
+ * service checks the title and that the folder is an Instructions room, and
+ * saves the file as `<title>.md`.
+ */
+export const createSkill = async (data: TCreateSkillRequest) => {
+  const response = await authFetch(`/api/2.0/ai/skills/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+    });
+  }
+
+  return body as TCreateSkillResult;
 };

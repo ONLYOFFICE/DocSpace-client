@@ -51,6 +51,7 @@ import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
+import { TaskPollingError } from "@docspace/shared/utils/poll-task";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -58,6 +59,7 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+import { toFrameEntity } from "@/utils/frameEntity";
 
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
@@ -88,6 +90,14 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
+      if (sdkConfig?.events?.onEditorOpen) {
+        frameCallEvent({
+          event: "onEditorOpen",
+          data: { ...toFrameEntity(file), action },
+        });
+        return;
+      }
+
       const openInSameTab =
         sdkConfig?.openEditorInSameTab ??
         filesSettingsStore.filesSettings?.openEditorInSameTab ??
@@ -112,6 +122,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     },
     [
       sdkConfig?.events?.onFileManagerClick,
+      sdkConfig?.events?.onEditorOpen,
       sdkConfig?.openEditorInSameTab,
       filesSettingsStore.filesSettings?.openEditorInSameTab,
       openEditor,
@@ -264,8 +275,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         } else {
           progressStore.start("other");
           progressStarted = true;
-          await XlsxUpdateService.poll(form.id, task.id, (progress) => {
-            progressStore.update(progress?.percentage ?? 0);
+          await XlsxUpdateService.poll(form.id, (progress) => {
+            progressStore.update(progress.percentage);
           });
           progressStore.finish();
         }
@@ -278,7 +289,13 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         );
       } catch (error) {
         if (progressStarted) progressStore.error();
-        toastr.error(error as string);
+        // A failure the server reports for the task carries its own message;
+        // one of the polling itself does not, and is not shown as is.
+        toastr.error(
+          error instanceof TaskPollingError
+            ? t("Common:UnexpectedError")
+            : (error as string),
+        );
         console.error(error);
       }
     },

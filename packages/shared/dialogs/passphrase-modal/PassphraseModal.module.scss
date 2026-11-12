@@ -65,6 +65,10 @@
 
 .rememberRow {
   margin-top: 8px;
+
+  :global(.checkbox-text) {
+    font-weight: 600;
+  }
 }
 
 .passkeyRow {
@@ -81,4 +85,5 @@
 .forgotRow {
   display: flex;
   justify-content: flex-start;
+  margin-top: 8px;
 }

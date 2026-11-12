@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-09-08T08:44:10.019Z",
+  "updated_at": "2026-11-09T09:26:33.289Z",
   "comment": {
     "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
-      "line_number": 223,
+      "line_number": 222,
       "context": "getIcon={getIcon!}\n withSearch={!!withSearch}\n withBreadCrumbs={!!withBreadCrumbs}\n withCancelButton={!!withCancelButton}\n cancelButtonLabel={cancelButtonLabel ?? t(\"Common:CancelButton\")}\n submitButtonLabel={submitButtonLabel ?? t(\"Common:AddButton\")}\n withCreate={!!withCreate}\n disabledCreatePublicRoom={disabledCreatePublicRoom}\n withFooterCheckbox={!!withFooterCheckbox}\n withFooterInput={!!withFooterInput}\n disabledItems={[]}",
       "module": "/packages/client"
     },
@@ -30,9 +30,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
+      "line_number": 132,
+      "context": "</div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={suggestion ? t(\"Common:SaveButton\") : t(\"Common:AddButton\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={!canSave}\n onClick={onSubmit}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
       "line_number": 149,
       "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
+      "line_number": 154,
+      "context": "{newField ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:AddButton\")}\n isDisabled={!canSubmitNewField}\n type=\"submit\"\n testId=\"metadata_custom_field_submit_button\"\n />\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
+      "line_number": 184,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || !!nameError}\n type=\"submit\"\n testId=\"metadata_field_submit_button\"\n />",
       "module": "/packages/client"
     },
     {
@@ -43,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 232,
+      "line_number": 252,
       "context": "fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n truncate\n >\n {t(\"Common:AddButton\")}\n </Text>\n <ArrowIcon />\n </div>\n </div>\n <AddButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 277,
+      "line_number": 275,
       "context": "/>\n </span>\n ) : (\n <span className={styles.timePickerCell}>\n <AddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </span>",
       "module": "/packages/client"
     },
@@ -73,13 +91,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 960,
+      "line_number": 1073,
       "context": "onClose={() => {\n handleClose();\n closeUsersPanel();\n }}\n onSubmit={peopleSelectorOnSubmit}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n withAccessRights\n accessRights={peopleSelectorAccessRights}\n selectedAccessRight={peopleSelectorSelectedAccess}\n onAccessRightsChange={() => {}}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 960,
+      "line_number": 1073,
       "context": "onClose={() => {\n handleClose();\n closeUsersPanel();\n }}\n onSubmit={peopleSelectorOnSubmit}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n withAccessRights\n accessRights={peopleSelectorAccessRights}\n selectedAccessRight={peopleSelectorSelectedAccess}\n onAccessRightsChange={() => {}}",
       "module": "/packages/sdk"
     }

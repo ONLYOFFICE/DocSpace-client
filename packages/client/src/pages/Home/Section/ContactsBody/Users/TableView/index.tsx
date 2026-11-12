@@ -69,6 +69,7 @@ const Table = ({
   infoPanelVisible,
   isUsersEmptyView,
   contactsTab,
+  showAISpendingInfo,
 
   fetchMoreUsers,
   hasMoreUsers,
@@ -81,6 +82,7 @@ const Table = ({
   emailPeopleColumnIsEnabled,
   groupPeopleColumnIsEnabled,
   storagePeopleColumnIsEnabled,
+  aiSpendingPeopleColumnIsEnabled,
 
   inviterGuestsColumnIsEnabled,
   emailGuestsColumnIsEnabled,
@@ -90,6 +92,7 @@ const Table = ({
   emailInsideGroupColumnIsEnabled,
   groupInsideGroupColumnIsEnabled,
   storageInsideGroupColumnIsEnabled,
+  aiSpendingInsideGroupColumnIsEnabled,
 
   columnStorageName,
   columnInfoPanelStorageName,
@@ -115,6 +118,7 @@ const Table = ({
         emailColumnIsEnabled: emailPeopleColumnIsEnabled ?? false,
         groupColumnIsEnabled: groupPeopleColumnIsEnabled ?? false,
         storageColumnIsEnabled: storagePeopleColumnIsEnabled ?? false,
+        aiSpendingColumnIsEnabled: aiSpendingPeopleColumnIsEnabled ?? false,
         inviterColumnIsEnabled: false,
         invitedDateColumnIsEnabled: false,
       };
@@ -126,6 +130,7 @@ const Table = ({
         emailColumnIsEnabled: emailGuestsColumnIsEnabled ?? false,
         groupColumnIsEnabled: false,
         storageColumnIsEnabled: false,
+        aiSpendingColumnIsEnabled: false,
         inviterColumnIsEnabled: inviterGuestsColumnIsEnabled ?? false,
         invitedDateColumnIsEnabled: invitedDateGuestsColumnIsEnabled ?? false,
       };
@@ -136,6 +141,7 @@ const Table = ({
       emailColumnIsEnabled: emailInsideGroupColumnIsEnabled ?? false,
       groupColumnIsEnabled: groupInsideGroupColumnIsEnabled ?? false,
       storageColumnIsEnabled: storageInsideGroupColumnIsEnabled ?? false,
+      aiSpendingColumnIsEnabled: aiSpendingInsideGroupColumnIsEnabled ?? false,
       inviterColumnIsEnabled: false,
       invitedDateColumnIsEnabled: false,
     };
@@ -153,7 +159,7 @@ const Table = ({
     >
       <TableHeader
         // rewrite to component did update
-        key={contactsTab || "people"}
+        key={`${contactsTab || "people"}_${showAISpendingInfo}`}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth!}
@@ -226,6 +232,7 @@ export default inject(
       isUsersEmptyView,
 
       contactsTab,
+      showAISpendingInfo,
     } = usersStore!;
 
     const { currentDeviceType } = settingsStore;
@@ -241,6 +248,7 @@ export default inject(
       emailPeopleColumnIsEnabled,
       groupPeopleColumnIsEnabled,
       storagePeopleColumnIsEnabled,
+      aiSpendingPeopleColumnIsEnabled,
 
       inviterGuestsColumnIsEnabled,
       emailGuestsColumnIsEnabled,
@@ -250,6 +258,7 @@ export default inject(
       emailInsideGroupColumnIsEnabled,
       groupInsideGroupColumnIsEnabled,
       storageInsideGroupColumnIsEnabled,
+      aiSpendingInsideGroupColumnIsEnabled,
 
       columnStorageName,
       columnInfoPanelStorageName,
@@ -272,6 +281,7 @@ export default inject(
 
       isUsersEmptyView,
       contactsTab,
+      showAISpendingInfo,
 
       infoPanelVisible,
 
@@ -288,6 +298,7 @@ export default inject(
       emailPeopleColumnIsEnabled,
       groupPeopleColumnIsEnabled,
       storagePeopleColumnIsEnabled,
+      aiSpendingPeopleColumnIsEnabled,
 
       inviterGuestsColumnIsEnabled,
       emailGuestsColumnIsEnabled,
@@ -297,6 +308,7 @@ export default inject(
       emailInsideGroupColumnIsEnabled,
       groupInsideGroupColumnIsEnabled,
       storageInsideGroupColumnIsEnabled,
+      aiSpendingInsideGroupColumnIsEnabled,
 
       columnStorageName,
       columnInfoPanelStorageName,

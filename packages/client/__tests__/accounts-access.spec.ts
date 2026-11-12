@@ -98,6 +98,35 @@ test.describe("Accounts Access Control", () => {
     await expect(tableContainer).toBeVisible();
   });
 
+  test("the profile menu Contacts link opens Contacts from a nested page", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "roomAdmin"),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+    );
+
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    await page.getByTestId("profile_user_icon_button").click();
+
+    // Middle-click, "Open link in new tab" and "Copy link address" use the
+    // href as is, bypassing the onClick handler - so a relative href resolves
+    // against /rooms/shared/ and lands on the 404 page.
+    const href = await page
+      .getByTestId("user-menu-accounts")
+      .locator("a")
+      .evaluate((el) => (el as HTMLAnchorElement).href);
+
+    expect(new URL(href).pathname).toBe("/accounts/people/filter");
+
+    await page.goto(href);
+
+    await expect(page.getByTestId("table-container")).toBeVisible();
+  });
+
   test("should show NoAccessContainer for visitor", async ({
     page,
     mockRequest,

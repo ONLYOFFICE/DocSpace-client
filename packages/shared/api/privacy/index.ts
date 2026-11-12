@@ -36,28 +36,11 @@
 import { request } from "../client";
 import type {
   TPrivacyRoomRequest,
-  TPrivacySettingsRequest,
   TEncryptionKeyPair,
+  TMemberEncryptionKey,
+  TRoomCandidateKey,
+  TRoomMissingFileKeys,
 } from "./types";
-
-export async function getPrivacySettings() {
-  const res = (await request({
-    method: "get",
-    url: "privacyroom",
-  })) as boolean;
-
-  return res;
-}
-
-export async function updatePrivacySettings(data: TPrivacySettingsRequest) {
-  const res = (await request({
-    method: "put",
-    url: "privacyroom",
-    data,
-  })) as boolean;
-
-  return res;
-}
 
 export async function setEncryptionKeys(data: TPrivacyRoomRequest) {
   const res = (await request({
@@ -91,7 +74,36 @@ export async function getRoomEncryptionKeys(roomId: string | number) {
   const res = (await request({
     method: "get",
     url: `privacyroom/${roomId}/access`,
-  })) as TEncryptionKeyPair[];
+  })) as TMemberEncryptionKey[];
+  return res ?? [];
+}
+
+export async function getRoomCandidateKeys(
+  roomId: string | number,
+  userIds: string[],
+) {
+  const params = new URLSearchParams();
+  for (const userId of userIds) params.append("userIds", userId);
+
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/${roomId}/access/candidates?${params.toString()}`,
+  })) as TRoomCandidateKey[];
+  return res ?? [];
+}
+
+export async function getRoomMissingFileKeys(
+  roomId: string | number,
+  userIds: string[] = [],
+) {
+  const params = new URLSearchParams();
+  for (const userId of userIds) params.append("userIds", userId);
+  const query = params.toString();
+
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/${roomId}/access/missing${query ? `?${query}` : ""}`,
+  })) as TRoomMissingFileKeys[];
   return res ?? [];
 }
 
@@ -99,15 +111,14 @@ export async function getFilePublicKeys(fileId: string | number) {
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/publickeys`,
-  })) as TEncryptionKeyPair[];
+  })) as TMemberEncryptionKey[];
   return res;
 }
 
-export async function deleteEncryptionKey(keyId: string) {
-  const res = (await request({
+/** `PrivacyRoomController.DeleteKeys` answers 204 without a body. */
+export async function deleteEncryptionKey(keyId: string): Promise<void> {
+  await request({
     method: "delete",
     url: `privacyroom/keys/${keyId}`,
-  })) as TEncryptionKeyPair[];
-
-  return res ?? [];
+  });
 }

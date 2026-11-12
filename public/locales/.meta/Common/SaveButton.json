@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-10-02T12:15:32.393Z",
+  "updated_at": "2026-11-09T17:07:34.695Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 204,
+      "line_number": 203,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"save\"\n key=\"ChangeNameSaveBtn\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onSaveClick}\n isLoading={isSaving}",
       "module": "/packages/client"
     },
@@ -48,26 +48,20 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/EditAgentDialog.tsx",
-      "line_number": 272,
-      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n (!agentParams.profileId && !agentParams.modelId) ||",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/EditGroupDialog.tsx",
-      "line_number": 247,
-      "context": "<ModalDialog.Footer>\n <Button\n id=\"edit-group-modal_submit\"\n testId=\"edit_group_save_button\"\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onEditGroup}\n isDisabled={!hasChanges || notEnoughParamsToEdit}",
+      "line_number": 246,
+      "context": "<ModalDialog.Footer>\n <Button\n id=\"edit-group-modal_submit\"\n testId=\"edit_group_save_button\"\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onEditGroup}\n isDisabled={!hasChanges || notEnoughParamsToEdit}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/EditRoomDialog.js",
-      "line_number": 350,
-      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onEditRoom}\n isDisabled={",
+      "line_number": 349,
+      "context": "/>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onEditRoom}\n isDisabled={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 426,
+      "line_number": 461,
       "context": "</ModalDialog.Body>\n \n {hasGroupingChanged ? (\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSaveGroupingChange}\n scale\n isLoading={isSaving}",
       "module": "/packages/client"
     },
@@ -78,6 +72,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
+      "line_number": 407,
+      "context": "</div>\n )}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n isLoading={isSaving}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.tsx",
       "line_number": 65,
       "context": "...saveButtonProps?.props,\n scale: true,\n isSaveButton: true,\n primary: true,\n size: \"normal\",\n label: saveButtonProps?.props?.label ?? t(\"Common:SaveButton\"),\n settingsModalRequestRunning: modalRequestRunning,\n setSettingsModalRequestRunning: setModalRequestRunning,\n onCloseAction,\n testId: \"settings_plugin_save_button\",\n } as IButton,",
@@ -85,19 +85,13 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 75,
-      "context": "if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };\n \n export const getAcceptButtonLabel = (\n t: TTranslation,\n isEditorDialog: boolean,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 75,
+      "line_number": 69,
       "context": "if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };\n \n export const getAcceptButtonLabel = (\n t: TTranslation,\n isEditorDialog: boolean,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 265,
+      "line_number": 261,
       "context": "id={\n createEntityType\n ? `shared_create-${createEntityType}-modal_submit`\n : undefined\n }\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
       "module": "/packages/client"
     },
@@ -108,9 +102,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 399,
-      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n testId=\"template_access_settings_save_button\"\n />\n <Button\n className=\"cancel-button\"",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 681,
+      "context": ") : null}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={project ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n isLoading={isSaving}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/SuggestionDialog.tsx",
+      "line_number": 132,
+      "context": "</div>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={suggestion ? t(\"Common:SaveButton\") : t(\"Common:AddButton\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={!canSave}\n onClick={onSubmit}",
       "module": "/packages/client"
     },
     {
@@ -120,14 +120,32 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/CustomFieldsPanel/index.tsx",
+      "line_number": 164,
+      "context": ") : (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n type=\"submit\"\n testId=\"metadata_custom_fields_save_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/sub-components/TemplatePanel/index.tsx",
+      "line_number": 134,
+      "context": "{form ? (\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={!canSave}\n isLoading={isSaving}\n type=\"submit\"\n testId=\"metadata_template_save_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 491,
+      "context": "<div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n testId=\"document-agent-save-button\"",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 367,
+      "line_number": 366,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 806,
+      "line_number": 847,
       "context": "/>\n \n <div className={appearanceStyles.buttonsContainer}>\n <Button\n className=\"save button\"\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n primary\n size={buttonSize}\n isDisabled={isDisabledSaveButton}\n testId=\"appearance_save_button\"",
       "module": "/packages/client"
     },
@@ -139,7 +157,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 294,
+      "line_number": 285,
       "context": "className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"ai_services_management_save_button\"",
       "module": "/packages/client"
     },
@@ -151,55 +169,73 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 284,
+      "line_number": 282,
       "context": "const buttonContainer = standalone ? (\n <Button\n {...buttonProps}\n size={currentDeviceType === DeviceType.desktop ? \"small\" : \"normal\"}\n label={t(\"Common:SaveButton\")}\n onClick={onSaveSettings}\n isDisabled={isLoading || isDefaultDNS || isError || !dnsName}\n isLoading={isLoading}\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 565,
+      "line_number": 559,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"\n additionalClassCancelButton=\"language-time-zone-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
       "line_number": 419,
-      "context": "tabIndex={11}\n id=\"buttonsPortalRenaming\"\n className=\"save-cancel-buttons\"\n onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}",
+      "context": "<SaveCancelButtons\n id=\"buttonsPortalRenaming\"\n className=\"save-cancel-buttons\"\n onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 424,
+      "line_number": 422,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n saveButtonDisabled={state.saveButtonDisabled}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/index.tsx",
+      "line_number": 184,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.normal}\n label={\n isNewField ? t(\"Common:AddButton\") : t(\"Common:SaveButton\")\n }\n isDisabled={!isValidField(fieldForm) || !!nameError}\n type=\"submit\"\n testId=\"metadata_field_submit_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/colorSchemeDialog.js",
-      "line_number": 119,
+      "line_number": 121,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n className=\"save\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onSaveColorSchemeDialog}\n isDisabled={!showSaveButtonDialog}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
+      "line_number": 221,
+      "context": "<IconButton\n className=\"import-check-container-button\"\n size={16}\n iconName={CheckSvgUrl}\n dataTestId=\"change_email_save_button\"\n ariaLabel={t(\"Common:SaveButton\")}\n onClick={handleSaveIconClick}\n />\n </div>\n \n <div className={styles.iconButtonWrapper} onClick={clearEmail}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
+      "line_number": 231,
+      "context": "<IconButton\n className=\"import-check-container-button\"\n size={16}\n iconName={CheckSvgUrl}\n dataTestId=\"import_check_button\"\n ariaLabel={t(\"Common:SaveButton\")}\n onClick={handleSaveIconClick}\n />\n </div>\n \n <div className={styles.iconButtonWrapper} onClick={clearEmail}>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 605,
+      "line_number": 608,
       "context": "onSaveClick={onSaveGeneral}\n onCancelClick={onCancelGeneral}\n saveButtonDisabled={!isGeneralValid}\n showReminder={hasChangesGeneral}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n isSaving={isSavingGeneral}\n displaySettings\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/index.tsx",
-      "line_number": 495,
+      "line_number": 508,
       "context": "errorFields={allErrorFields}\n requiredErrorFields={requiredErrorFields}\n onBlur={onBlur}\n />\n <ButtonsBlock\n saveLabel={t(\"Common:SaveButton\")}\n cancelLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n isRequestRunning={isRequestRunning}\n saveButtonDisabled={isEdit ? !isValid : false}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
-      "line_number": 278,
+      "line_number": 268,
       "context": "<ModalDialog.Footer>\n <div className={styles.footer}>\n <Button\n id={isSettingsModal ? \"save-button\" : \"create-button\"}\n label={\n isSettingsModal ? t(\"Common:SaveButton\") : t(\"Common:Create\")\n }\n size=\"normal\"\n primary\n onClick={handleSubmitClick}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 576,
+      "line_number": 571,
       "context": "</div>\n \n <SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading",
       "module": "/packages/client"
     },
@@ -241,8 +277,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 381,
-      "context": "className=\"save-cancel-buttons\"\n tabIndex={4}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"RestoreToDefault\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"brute-force-protection-save\"\n additionalClassCancelButton=\"brute-force-protection-cancel\"",
+      "line_number": 377,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"RestoreToDefault\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"brute-force-protection-save\"\n additionalClassCancelButton=\"brute-force-protection-cancel\"",
       "module": "/packages/client"
     },
     {
@@ -301,13 +337,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 273,
-      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n tabIndex={5}\n />\n <Button",
+      "line_number": 346,
+      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n />\n <Button\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 380,
+      "line_number": 379,
       "context": "isDisabled={isSavingComment}\n size=\"extraSmall\"\n scale\n primary\n onClick={onSaveClick}\n label={t(\"Common:SaveButton\")}\n testId=\"version_save_button\"\n />\n </div>\n <div className=\"version_edit-comment-button-second\">\n <Button",
       "module": "/packages/client"
     },
@@ -320,12 +356,12 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalOwnerChange/page.client.tsx",
       "line_number": 107,
-      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:SaveButton\")}\n tabIndex={2}\n isDisabled={false}\n onClick={onChangeOwnerClick}\n testId=\"save_change_owner_button\"\n />",
+      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:SaveButton\")}\n isDisabled={false}\n onClick={onChangeOwnerClick}\n testId=\"save_change_owner_button\"\n />\n <Button",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 386,
+      "line_number": 385,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"",
       "module": "/packages/sdk"
     },
@@ -337,8 +373,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/EditAgentDialog.tsx",
-      "line_number": 258,
-      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n !agentParams.profileId ||",
+      "line_number": 257,
+      "context": "/>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n !agentParams.profileId ||",
       "module": "/packages/sdk"
     },
     {
@@ -361,15 +397,9 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 622,
+      "line_number": 647,
       "context": "</div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n isLoading={isLoading}\n onClick={canStartKeySetup ? onRequestCreateKeys : onSave}",
       "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
-      "line_number": 53,
-      "context": "if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };\n \n export const getAcceptButtonLabel = (\n t: TTranslation,\n isSelect?: boolean,",
-      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
@@ -391,8 +421,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 425,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"save\"\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale={isAccount}\n onClick={onSave}\n isDisabled={isLoading}",
+      "line_number": 420,
+      "context": ") : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"save\"\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale={isAccount}\n onClick={onSave}\n isDisabled={isLoading}",
       "module": "/packages/shared"
     },
     {
@@ -403,7 +433,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 611,
+      "line_number": 627,
       "context": "<Button\n scale\n primary\n onClick={onSave}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabledSaveButton}\n testId=\"edit_link_panel_save_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
     },
@@ -427,7 +457,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 313,
+      "line_number": 315,
       "context": "styles.saveCancelButtons,\n \"save-cancel-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll",
       "module": "/packages/shared"
     },
@@ -436,6 +466,12 @@
       "line_number": 619,
       "context": "/>\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}",
       "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/byok/ByokEditCard.tsx",
+      "line_number": 145,
+      "context": "testId=\"byok-edit-cancel-button\"\n />\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n isLoading={isSaving}\n isDisabled={!apiKey.trim() || isDeleting}\n testId=\"byok-edit-save-button\"\n />",
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -141,7 +141,7 @@ const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
   const navigate = useNavigate();
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const dataSortBy = [
     { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
@@ -908,6 +908,7 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "Files",

@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { formatDateLocalized } from "@onlyoffice/apps-ui-kit/utils/date";
+
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -68,9 +70,14 @@ export const isDocsConnectLocked = (
     : isDocsConnectTrialExpired(info.tenant.endDate ?? "");
 };
 
+export const getDocsConnectPlanDevPack = (info: TDocsConnectInfo): boolean =>
+  info.deactivated
+    ? (info.previousPlan?.devPackEnabled ?? info.devPackEnabled)
+    : info.devPackEnabled;
+
 export const getDocsConnectPricePerUser = (
   info: TDocsConnectInfo,
-  devPackEnabled: boolean = info.devPackEnabled,
+  devPackEnabled: boolean = getDocsConnectPlanDevPack(info),
 ): number =>
   (info.prices?.pricePerUser ?? 0) +
   (devPackEnabled ? (info.prices?.devPackPrice ?? 0) : 0);
@@ -91,7 +98,8 @@ export const getDocsConnectScheduledState = (
   return {
     scheduledUsers: change?.nextUsers ?? null,
     scheduledDate: change?.dueDate ?? "",
-    nextDevPackEnabled: change?.nextDevPackEnabled ?? info.devPackEnabled,
+    nextDevPackEnabled:
+      change?.nextDevPackEnabled ?? getDocsConnectPlanDevPack(info),
     scheduledOnDevPack: change?.scheduledOnDevPack ?? false,
   };
 };
@@ -131,14 +139,12 @@ export const signDocsConnectToken = async (
   return `${header}.${body}.${base64UrlEncode(new Uint8Array(signature))}`;
 };
 
-export const formatDocsConnectDate = (iso?: string): string => {
-  if (!iso) return "";
-  const ms = new Date(iso).getTime();
-  if (Number.isNaN(ms)) return "";
-  const date = new Date(ms);
-  const dd = String(date.getDate()).padStart(2, "0");
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  return `${dd}.${mm}.${date.getFullYear()}`;
+export const formatDocsConnectDate = (
+  iso: string | undefined,
+  locale: string,
+): string => {
+  if (!iso || Number.isNaN(new Date(iso).getTime())) return "";
+  return formatDateLocalized(iso, "DATE_MED", { locale });
 };
 
 export const getDocsConnectDaysLeft = (endDate: string): number => {
@@ -148,14 +154,6 @@ export const getDocsConnectDaysLeft = (endDate: string): number => {
     0,
     Math.round((startOfDay(target) - startOfDay(Date.now())) / DAY_MS),
   );
-};
-
-export const getDocsConnectPeriodDays = (endDate: string): number => {
-  const end = new Date(endDate).getTime();
-  if (Number.isNaN(end)) return 0;
-
-  const start = addMonths(end, -1);
-  return Math.max(1, Math.round((startOfDay(end) - startOfDay(start)) / DAY_MS));
 };
 
 export const getDocsConnectNextBillingDate = (): string =>

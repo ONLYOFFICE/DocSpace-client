@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect } from "vitest";
 
-import { RoomsType } from "@docspace/shared/enums";
 
 import { getDialogContent } from "../DeleteDialog.helper";
 
@@ -45,7 +44,6 @@ type ContentArgs = {
   isRecycleBinFolder?: boolean;
   isRoom?: boolean;
   isPrivacyFolder?: boolean;
-  isAIAgent?: boolean;
 };
 
 const noteKeys = ({
@@ -53,7 +51,6 @@ const noteKeys = ({
   isRecycleBinFolder = false,
   isRoom = true,
   isPrivacyFolder = false,
-  isAIAgent = false,
 }: ContentArgs) =>
   keysOf(
     getDialogContent(
@@ -66,8 +63,6 @@ const noteKeys = ({
       isRoom,
       false, // isTemplatesFolder
       false, // isSharedWithMeFolderRoot
-      isAIAgent,
-      false, // isAIAgentsFolderRoot
       false, // unsubscribe
       isPrivacyFolder,
     ),
@@ -78,8 +73,7 @@ describe("getDialogContent — deleting from a private room", () => {
     const keys = noteKeys({ selection: [file], isPrivacyFolder: true });
 
     expect(keys).toContain("Common:DeleteItemForever");
-    expect(keys).not.toContain("DeleteItem");
-    expect(keys).not.toContain("FileDeletedAfter");
+    expect(keys).not.toContain("MoveItemToTrash");
     expect(keys).not.toContain("Common:TrashSection");
   });
 
@@ -96,15 +90,24 @@ describe("getDialogContent — deleting from a private room", () => {
     });
 
     expect(keys).toContain("Common:DeleteItemsForever");
-    expect(keys).not.toContain("ItemsDeletedAfter");
+    expect(keys).not.toContain("MoveFilesAndFoldersToTrash");
     expect(keys).not.toContain("Common:TrashSection");
   });
 
   it("still promises Trash in an ordinary room", () => {
     const keys = noteKeys({ selection: [file] });
 
-    expect(keys).toContain("DeleteItem");
-    expect(keys).toContain("FileDeletedAfter");
+    expect(keys).toContain("MoveItemToTrash");
+  });
+
+  it("picks the Trash wording that matches a mixed selection", () => {
+    expect(noteKeys({ selection: [file, file] })).toEqual(["MoveFilesToTrash"]);
+    expect(noteKeys({ selection: [folder, folder] })).toEqual([
+      "MoveFoldersToTrash",
+    ]);
+    expect(noteKeys({ selection: [file, folder] })).toEqual([
+      "MoveFilesAndFoldersToTrash",
+    ]);
   });
 
   it("leaves the recycle-bin wording untouched", () => {
@@ -116,49 +119,5 @@ describe("getDialogContent — deleting from a private room", () => {
 
     expect(keys).toContain("DeleteItemForeverConfirm");
     expect(keys).toContain("FilePermanentlyDeleted");
-  });
-});
-
-// Bug: the group menu in the AI agents section deletes every selected agent
-// (delete.helpers.ts: deleteRoomsImpl collects all ids), but the note named
-// only selection[0], so the user confirmed destroying N agents while reading
-// about one. The note must follow the same count as the delete call.
-
-const agent = (id: number, title: string) => ({
-  id,
-  title,
-  isAIAgent: true,
-  roomType: RoomsType.AIRoom,
-});
-
-describe("getDialogContent — deleting AI agents", () => {
-  it("names the agent when a single one is selected", () => {
-    const keys = noteKeys({
-      selection: [agent(1, "Support bot")],
-      isAIAgent: true,
-    });
-
-    expect(keys).toContain("DeleteAIAgentDescription");
-    expect(keys).not.toContain("DeleteAIAgentsDescription");
-  });
-
-  it("uses the counted plural wording for several agents", () => {
-    const keys = noteKeys({
-      selection: [agent(1, "Support bot"), agent(2, "Sales bot")],
-      isAIAgent: true,
-    });
-
-    expect(keys).toContain("DeleteAIAgentsDescription");
-    expect(keys).not.toContain("DeleteAIAgentDescription");
-  });
-
-  it("does not fall back to the room wording", () => {
-    const keys = noteKeys({
-      selection: [agent(1, "Support bot"), agent(2, "Sales bot")],
-      isAIAgent: true,
-    });
-
-    expect(keys).not.toContain("DeleteRooms");
-    expect(keys).toContain("Common:WantToContinue");
   });
 });

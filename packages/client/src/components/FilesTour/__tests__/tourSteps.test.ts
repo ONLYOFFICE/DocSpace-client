@@ -35,6 +35,7 @@
 
 import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
+import type { TourData } from "react-joyride";
 
 import { bullets } from "SRC_DIR/components/Tour/__tests__/bullets";
 
@@ -52,12 +53,20 @@ const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 
 const SEARCH_TARGET = "#filter_search-input .search-input-block";
 
+const FILTER_BUTTON_TARGET = "#filter-button";
+
+const SORT_AND_VIEW_TARGET = '#sort-by-button, [data-testid="view-selector"]';
+
 const SHARE_ICON_TARGET =
   '[data-testid^="table-row-"] .badge.copy-link, ' +
   '[data-testid^="files_row_"] .badge.copy-link, ' +
   '[data-testid^="tile_"] .badge.copy-link';
 
 const TABLE_HEADER_TARGET = '[data-testid="table-header"]';
+
+// The whole "+ New" pill, not just MainButton's own box (see the step file).
+const NEW_BUTTON_TARGET =
+  '#filter_search-input > div:has(> [data-testid="main-button"])';
 
 /**
  * A guest on the Files section: no personal space and no Trash, so the sidebar
@@ -99,24 +108,144 @@ const ownerFlags: TourStepFlags = {
   trashId: "13",
 };
 
+/** The same owner, on a list that is stood in for. */
+const ownerDemoFlags: TourStepFlags = {
+  ...ownerFlags,
+  isDemo: true,
+  demoHooks: { reveal: vi.fn(), restore: vi.fn() },
+};
+
+const placesOf = (flags: TourStepFlags) =>
+  steps(flags).find((step) => step.title === "FilesTour:TourPlacesTitle");
+
 describe("getTourSteps — owner", () => {
-  it("walks create, AI chat, upload, search, sharing and the sidebar", () => {
+  it("walks the section, create, AI chat, upload, the filter bar, sharing, the sidebar and the closing action", () => {
     expect(targets(ownerFlags)).toEqual([
+      '[data-item-id="5"]',
       '[data-testid="quick-actions"]',
       '[data-testid="quick-ai-chat"]',
       ".p-contextmenu",
       SEARCH_TARGET,
+      FILTER_BUTTON_TARGET,
+      SORT_AND_VIEW_TARGET,
       SHARE_ICON_TARGET,
       '[data-item-id="10"]',
+      NEW_BUTTON_TARGET,
     ]);
+  });
+
+  it("opens on the section item, saying what the section is for", () => {
+    const [overview] = steps(ownerFlags);
+
+    expect(overview.title).toBe("FilesTour:TourFilesOverviewTitle");
+    expect(overview.content).toBe("FilesTour:TourFilesOverview");
+    // The item itself, not the sub-list under it.
+    expect(overview.spotlightTarget).toBeUndefined();
+  });
+
+  it("keeps the opening step on a narrow screen, where the section item stays", () => {
+    expect(titles({ ...ownerFlags, isDesktop: false })[0]).toBe(
+      "FilesTour:TourFilesOverviewTitle",
+    );
+  });
+
+  it("splits the filter bar into search, the filter and the sort and view controls", () => {
+    const sortAndView = steps(ownerFlags).find(
+      (step) => step.target === SORT_AND_VIEW_TARGET,
+    );
+
+    expect(titles(ownerFlags)).toEqual(
+      expect.arrayContaining([
+        "FilesTour:TourFindFastTitle",
+        "FilesTour:TourFilterTitle",
+        "FilesTour:TourViewTitle",
+      ]),
+    );
+    // Two controls under one tooltip: the spotlight covers the pair.
+    expect(sortAndView?.spotlightTarget).toBeTypeOf("function");
+  });
+
+  it("ends on the New button, the action the tour has been leading to", () => {
+    const closing = steps(ownerFlags).at(-1);
+
+    // The title is the same "Now make it yours" the Rooms tour closes with.
+    expect(closing?.title).toBe("RoomsTour:RoomsCreateFirstTitle");
+    expect(closing?.target).toBe(NEW_BUTTON_TARGET);
+  });
+
+  it("names a stood-in list as a sample over its three rows, before any row step", () => {
+    const demoTitles = titles(ownerDemoFlags);
+    const sample = demoTitles.indexOf("RoomsTour:RoomsDemoPreviewTitle");
+
+    expect(sample).toBeGreaterThan(-1);
+    expect(demoTitles[sample + 1]).toBe("FilesTour:TourBringFilesTitle");
+    // One spotlight over the three rows, and the tooltip anchored on it.
+    const step = steps(ownerDemoFlags)[sample];
+    expect(step.spotlightTarget).toBeTypeOf("function");
+    expect(step.target).toBe(step.spotlightTarget);
+    // Not said on a list of the user's own.
+    expect(titles(ownerFlags)).not.toContain("RoomsTour:RoomsDemoPreviewTitle");
+  });
+
+  it("closes on the empty screen's own options when the list was stood in for", () => {
+    const closing = steps(ownerDemoFlags).at(-1);
+
+    expect(closing?.title).toBe("RoomsTour:RoomsCreateFirstTitle");
+    expect(closing?.content).toBe("FilesTour:TourCreateFirst");
+    expect(closing?.data).toEqual({ revealsTarget: true, presence: undefined });
+    expect(targets(ownerDemoFlags)).not.toContain(NEW_BUTTON_TARGET);
+  });
+
+  it("puts the stand-in files back when the closing step is walked out of", () => {
+    // Without it Back lands on steps whose anchors the empty screen lacks.
+    const closing = steps(ownerDemoFlags).at(-1);
+
+    closing?.after?.({ action: "prev", status: "running" } as TourData);
+
+    expect(ownerDemoFlags.demoHooks?.restore).toHaveBeenCalled();
   });
 
   it("spotlights the four format tiles, not the whole banner", () => {
     // The AI chat tile shares the banner and has its own step, so the create
     // step's spotlight has to stop at the fourth tile.
-    const [create] = steps(ownerFlags);
+    const create = steps(ownerFlags).find(
+      (step) => step.target === '[data-testid="quick-actions"]',
+    );
 
-    expect(create.spotlightTarget).toBeTypeOf("function");
+    expect(create?.spotlightTarget).toBeTypeOf("function");
+  });
+
+  it("rewinds the carousel before spotlighting the format tiles", async () => {
+    // Stepping back from the AI chat tile leaves the strip scrolled to it, with
+    // the first tile past its edge — the group spotlight then ran from off
+    // screen to the fourth tile.
+    document.body.innerHTML =
+      '<div data-testid="quick-actions">' +
+      '<div data-testid="quick-actions-track">' +
+      '<button data-testid="quick-docx"></button>' +
+      "</div>" +
+      "</div>";
+    // jsdom implements no scrolling, so `scrollTo` has to exist to be spied on.
+    Object.defineProperty(Element.prototype, "scrollTo", {
+      configurable: true,
+      writable: true,
+      value: () => {},
+    });
+    const scrollTo = vi.spyOn(Element.prototype, "scrollTo");
+
+    const create = steps(ownerFlags).find(
+      (step) => step.target === '[data-testid="quick-actions"]',
+    );
+    await create?.before?.({} as TourData);
+
+    expect(scrollTo).toHaveBeenCalledWith(
+      expect.objectContaining({ left: 0 }),
+    );
+    expect(scrollTo.mock.instances[0]).toBe(
+      document.querySelector('[data-testid="quick-actions-track"]'),
+    );
+
+    document.body.innerHTML = "";
   });
 
   it("lights up the New button together with the menu it opens", () => {
@@ -152,7 +281,7 @@ describe("getTourSteps — owner", () => {
   });
 
   it("names every sidebar shortcut it points at, one bullet each", () => {
-    const places = steps(ownerFlags).at(-1);
+    const places = placesOf(ownerFlags);
 
     expect(places?.title).toBe("FilesTour:TourPlacesTitle");
     // Shared with me, Recent, Favorites and Trash — a bullet apiece.
@@ -167,8 +296,8 @@ describe("getTourSteps — owner", () => {
   });
 
   it("drops the Trash point when there is no Trash item", () => {
-    const withTrash = steps(ownerFlags).at(-1);
-    const withoutTrash = steps({ ...ownerFlags, trashId: null }).at(-1);
+    const withTrash = placesOf(ownerFlags);
+    const withoutTrash = placesOf({ ...ownerFlags, trashId: null });
 
     expect(bullets(withTrash)).toContain("FilesTour:TourPlacesTrash");
     expect(bullets(withoutTrash)).not.toContain("FilesTour:TourPlacesTrash");
@@ -186,6 +315,10 @@ describe("getTourSteps — guest", () => {
   it("offers nothing that creates", () => {
     const guestTargets = targets(guestFlags);
 
+    // The opening step promises a space to create in, which a guest lacks.
+    expect(titles(guestFlags)).not.toContain(
+      "FilesTour:TourFilesOverviewTitle",
+    );
     expect(guestTargets).not.toContain('[data-testid="quick-actions"]');
     expect(guestTargets).not.toContain('[data-testid="quick-ai-chat"]');
     expect(guestTargets).not.toContain(".p-contextmenu");
@@ -209,11 +342,13 @@ describe("getTourSteps — guest", () => {
 });
 
 describe("getTourSteps — guest on Shared with me", () => {
-  it("walks what arrived, who sent it, finding it again and the sidebar", () => {
+  it("walks what arrived, who sent it, the filter bar and the sidebar", () => {
     expect(titles(sharedFlags)).toEqual([
       "FilesTour:TourSharedListTitle",
       "FilesTour:TourSharedAccessTitle",
       "FilesTour:TourFindFastTitle",
+      "FilesTour:TourFilterTitle",
+      "FilesTour:TourViewTitle",
       "FilesTour:TourPlacesTitle",
     ]);
   });
@@ -258,6 +393,11 @@ describe("getTourSteps — guest on Shared with me", () => {
     ).toEqual(["FilesTour:TourPlacesTitle"]);
   });
 
+  it("opens a stood-in Shared with me on the sample notice", () => {
+    expect(titles(sharedDemoFlags)[0]).toBe("RoomsTour:RoomsDemoPreviewTitle");
+    expect(titles(sharedFlags)).not.toContain("RoomsTour:RoomsDemoPreviewTitle");
+  });
+
   it("closes on the empty screen only when the list was stood in for", () => {
     expect(titles(sharedFlags)).not.toContain("FilesTour:TourSharedEmptyTitle");
     expect(titles(sharedDemoFlags).at(-1)).toBe(
@@ -280,13 +420,14 @@ describe("getTourSteps — guest on Shared with me", () => {
 describe("getTourSteps — what the page allows", () => {
   it("drops everything in the filter bar on an empty page", () => {
     // No filter bar and no banner: no search, no create tiles, no New button.
+    // The sidebar is still there, so its two steps stay.
     const emptyPage = targets({
       ...ownerFlags,
       showFilter: false,
       hasItems: false,
     });
 
-    expect(emptyPage).toEqual(['[data-item-id="10"]']);
+    expect(emptyPage).toEqual(['[data-item-id="5"]', '[data-item-id="10"]']);
   });
 
   it("drops the sharing step when the folder has no items", () => {
@@ -302,6 +443,12 @@ describe("getTourSteps — what the page allows", () => {
 
     expect(tablet).not.toContain('[data-item-id="10"]');
     expect(tablet).not.toContain(".p-contextmenu");
+  });
+
+  it("keeps the closing action off a narrow screen, where there is no New button", () => {
+    expect(targets({ ...ownerFlags, isDesktop: false })).not.toContain(
+      NEW_BUTTON_TARGET,
+    );
   });
 
   it("drops the whole sidebar block when the section item is missing", () => {

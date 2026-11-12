@@ -41,6 +41,11 @@ describe("InfoPanelBodyLoader", () => {
     expect(screen.getByTestId("no-item-loader")).toBeInTheDocument();
   });
 
+  it("renders metadata view", () => {
+    render(<InfoPanelBodyLoader view="metadata" />);
+    expect(screen.getByTestId("metadata-loader")).toBeInTheDocument();
+  });
+
   it("renders severalItems view", () => {
     render(<InfoPanelBodyLoader view="severalItems" />);
     expect(screen.getByTestId("several-items-loader")).toBeInTheDocument();

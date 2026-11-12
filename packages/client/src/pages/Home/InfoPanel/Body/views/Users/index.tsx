@@ -56,6 +56,7 @@ import { Nullable } from "@docspace/shared/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import AILimit from "SRC_DIR/components/AILimit";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import {
 	getContactsUrl,
@@ -83,6 +84,7 @@ type UsersProps = {
 	getUserContextOptions?: ContactsConextOptionsStore["getUserContextOptions"];
 
 	showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
+	showAISpendingInfo?: UsersStore["showAISpendingInfo"];
 
 	standalone?: SettingsStore["standalone"];
 
@@ -103,6 +105,7 @@ const Users = ({
 	getUserContextOptions,
 
 	showStorageInfo,
+	showAISpendingInfo,
 	standalone,
 	userSelection,
 	isGuests,
@@ -349,6 +352,23 @@ const Users = ({
 							/>
 						</>
 					) : null}
+					{!isGuests &&
+					showAISpendingInfo &&
+					userSelection.aiServicesLimit ? (
+						<>
+							<Text
+								className={styles.infoField}
+								title={t("Common:AISpending")}
+							>
+								{t("Common:AISpending")}
+							</Text>
+							<AILimit
+								item={userSelection}
+								className={styles.typeCombobox}
+								dataTestId="info_panel_contacts_user_ai_limit"
+							/>
+						</>
+					) : null}
 
 					{userSelection?.groups?.length && !isGuests ? (
 						<>
@@ -402,6 +422,7 @@ export default inject(
 
 			selection,
 			bufferSelection,
+			showAISpendingInfo,
 		} = usersStore!;
 
 		const { getUsersChangeTypeOptions, getUserContextOptions } =
@@ -426,6 +447,7 @@ export default inject(
 			getUsersChangeTypeOptions,
 
 			showStorageInfo,
+			showAISpendingInfo,
 			standalone,
 
 			userSelection,

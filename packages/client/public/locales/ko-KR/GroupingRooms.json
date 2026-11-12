@@ -8,6 +8,7 @@
   "DeleteGroup": "그룹 삭제",
   "DisablingRoomGroups": "룸 그룹 비활성화",
   "DisablingRoomGroupsDescription": "그룹은 저장되지만 숨겨집니다. 프로필 > 파일 관리에서 다시 활성화하십시오.",
+  "DisablingSpaceGroups": "공간 그룹 비활성화",
   "EditRoomGroups": "룸 그룹 편집",
   "EditSpaceGroups": "공간 그룹 편집",
   "EmptyGroupRoomsDescription": "여기에 방이 없습니다. 방을 추가하거나 이 그룹을 제거해 보세요.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "선택한 객실이 <1>{{groupName}}</1>에 추가되었습니다.",
   "RoomsRemovedFromGroup": "선택한 객실이 <1>{{groupName}}</1>에서 제거되었습니다.",
   "SpaceAddedToGroup": "선택한 공간이 <1>{{groupName}}</1>에 추가되었습니다.",
+  "SpaceGrouping": "공간 그룹화",
+  "SpaceGroupingDisabled": "공간 그룹화가 비활성화되었습니다",
+  "SpaceGroupingEnabled": "공간 그룹화가 활성화되었습니다",
+  "SpaceGroupingSettingDescription": "공간을 폴더로 그룹화하고 쉽게 전환할 수 있습니다.",
   "SpaceRemovedFromGroup": "선택한 공간이 <1>{{groupName}}</1>에서 제거되었습니다.",
   "SpacesAddedToGroup": "선택한 공간들이 <1>{{groupName}}</1>에 추가되었습니다.",
   "SpacesRemovedFromGroup": "선택한 공간들이 <1>{{groupName}}</1>에서 제거되었습니다."

@@ -74,7 +74,6 @@
   "ItemsCount": "Anzahl der Artikel",
   "ItemsCountDescription": "Sie können die Anzahl der Dateien/Ordner festlegen, die auf einer Seite angezeigt werden sollen, sowie die Seite festlegen, die angezeigt werden soll",
   "JavaScriptCodeDescription": "Einbetten des Arbeitsbereichs oder eines Teils davon mithilfe von JavaScript. Kopieren Sie den folgenden JavaScript-Code.",
-  "JavascriptSdk": "JavaScript-SDK",
   "LimitByTime": "Nach Zeitraum begrenzen",
   "LinkSetDescription": "Dieser Link ist durch {{parameter}} geschützt. Um den Link zu konfigurieren,",
   "LinkSetDescription2": "Für diesen Link sind die folgenden Parameter festgelegt: {{parameter1}} und {{parameter2}}. Um diese zu konfigurieren,",

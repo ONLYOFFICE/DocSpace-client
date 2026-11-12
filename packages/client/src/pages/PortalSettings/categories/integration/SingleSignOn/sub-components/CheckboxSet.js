@@ -105,7 +105,6 @@ const CheckboxSet = (props) => {
 				onChange={setCheckbox}
 				label={prefix === "idp" ? t("idpAuthRequest") : t("spAuthRequest")}
 				name={checkboxesNames[prefix][0]}
-				tabIndex={10}
 				isChecked={
 					prefix === "idp" ? idpVerifyAuthResponsesSign : spSignAuthRequests
 				}
@@ -124,7 +123,6 @@ const CheckboxSet = (props) => {
 					prefix === "idp" ? t("idpSignExitRequest") : t("spSignExitRequest")
 				}
 				name={checkboxesNames[prefix][1]}
-				tabIndex={11}
 				isChecked={
 					prefix === "idp" ? idpVerifyLogoutRequestsSign : spSignLogoutRequests
 				}
@@ -145,7 +143,6 @@ const CheckboxSet = (props) => {
 						: t("spSignResponseRequest")
 				}
 				name={checkboxesNames[prefix][2]}
-				tabIndex={12}
 				isChecked={
 					prefix === "idp"
 						? idpVerifyLogoutResponsesSign
@@ -162,7 +159,6 @@ const CheckboxSet = (props) => {
 					onChange={setCheckbox}
 					label={t("spDecryptStatements")}
 					name={checkboxesNames[prefix][3]}
-					tabIndex={13}
 					isChecked={spEncryptAssertions}
 					dataTestId={checkboxesDataTestId.encryptAssertionCheckbox[prefix]}
 				/>

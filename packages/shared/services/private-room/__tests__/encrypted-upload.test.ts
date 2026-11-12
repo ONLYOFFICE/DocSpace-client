@@ -41,6 +41,7 @@ import {
   createEncryptedFormData,
   estimateEncryptedUploadSize,
   isEncryptableRoomType,
+  makeOpaqueUploadName,
   prepareEncryptedUpload,
   prepareMultipleEncryptedUploads,
   shouldEncryptUpload,
@@ -284,6 +285,22 @@ describe("encryptedUpload", () => {
       expect(vi.mocked(encryptFile)).toHaveBeenCalledWith(
         decoy,
         expect.objectContaining({ isForm: false }),
+      );
+    });
+  });
+
+  describe("Encrypted file titles are validated", () => {
+    const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
+
+    it("Opaque title", () => {
+      expect(makeOpaqueUploadName("Q3 Report.DOCX")).toMatch(
+        new RegExp(`^${UUID}\\.docx$`),
+      );
+    });
+
+    it("Opaque title without an extension", () => {
+      expect(makeOpaqueUploadName("Makefile")).toMatch(
+        new RegExp(`^${UUID}$`),
       );
     });
   });

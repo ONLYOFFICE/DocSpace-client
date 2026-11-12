@@ -84,11 +84,36 @@ const EditRoomGroupsDialog = ({
   organizeRoomsGrouping,
   setOrganizeRoomsGrouping,
   searchArea,
+  getPrivateSectionRoomIds,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const navigate = useNavigate();
 
   const isFormsSection = searchArea === RoomSearchArea.Forms;
+
+  const [privateRoomIds, setPrivateRoomIds] = useState<number[] | null>(null);
+
+  useEffect(() => {
+    let isCurrent = true;
+
+    const fetchPrivateRoomIds = async () => {
+      try {
+        const ids = isFormsSection ? [] : await getPrivateSectionRoomIds();
+        if (isCurrent) setPrivateRoomIds(ids);
+      } catch (error) {
+        // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available".
+        if (!isCurrent) return;
+        toastr.error(error as Error);
+        setEditRoomGroupsDialogVisible(false);
+      }
+    };
+
+    fetchPrivateRoomIds();
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [isFormsSection, getPrivateSectionRoomIds, setEditRoomGroupsDialogVisible]);
 
   const [isOpenRoomList, setIsOpenRoomList] = useState(
     () => !!openInCreateMode,
@@ -164,7 +189,7 @@ const EditRoomGroupsDialog = ({
     setIsSaving(true);
     try {
       if (setOrganizeRoomsGrouping) {
-        await setOrganizeRoomsGrouping(localGroupingEnabled);
+        await setOrganizeRoomsGrouping(localGroupingEnabled, isFormsSection);
       }
 
       setHasGroupingChanged(false);
@@ -205,10 +230,14 @@ const EditRoomGroupsDialog = ({
     };
   }, [onKeyUpHandler]);
 
+  const selectedGroupRooms = (selectedGroup?.rooms || []).filter(
+    (room) => !privateRoomIds?.includes(room.id),
+  );
+
   const onSubmitRoom = async (items: TSelectorItem[]) => {
     if (selectedGroup) {
       const toIdKey = (id: string | number) => String(id);
-      const initialRoomIds = (selectedGroup.rooms || []).map((room) => room.id);
+      const initialRoomIds = selectedGroupRooms.map((room) => room.id);
       const initialRoomIdByKey = new Map<string, number>(
         initialRoomIds.map((id) => [toIdKey(id), id] as const),
       );
@@ -379,7 +408,9 @@ const EditRoomGroupsDialog = ({
                     lineHeight: "16px",
                   }}
                 >
-                  {t("GroupingRooms:DisablingRoomGroups")}
+                  {isFormsSection
+                    ? t("GroupingRooms:DisablingSpaceGroups")
+                    : t("GroupingRooms:DisablingRoomGroups")}
                 </span>
               }
               bodyText={
@@ -395,7 +426,9 @@ const EditRoomGroupsDialog = ({
           <div className={styles.settingRoomGroups}>
             <div className={styles.roomGroups}>
               <div className={styles.title}>
-                {t("GroupingRooms:RoomGrouping")}
+                {isFormsSection
+                  ? t("GroupingRooms:SpaceGrouping")
+                  : t("GroupingRooms:RoomGrouping")}
               </div>
               <ToggleButton
                 className={styles.roomGroupsToggle}
@@ -406,7 +439,9 @@ const EditRoomGroupsDialog = ({
             </div>
 
             <Text className={styles.description}>
-              {t("GroupingRooms:RoomGroupingSettingDescription")}
+              {isFormsSection
+                ? t("GroupingRooms:SpaceGroupingSettingDescription")
+                : t("GroupingRooms:RoomGroupingSettingDescription")}
             </Text>
           </div>
           <AddButton
@@ -443,7 +478,7 @@ const EditRoomGroupsDialog = ({
         ) : null}
       </ModalDialog>
 
-      {isOpenRoomList && selectedGroup && (
+      {isOpenRoomList && privateRoomIds && selectedGroup && (
         <Portal
           visible={isOpenRoomList}
           element={
@@ -452,18 +487,19 @@ const EditRoomGroupsDialog = ({
               onClose={onCloseGroupRoomList}
               onSubmit={onSubmitRoom}
               headerLabel={selectedGroup.name}
-              selectedRooms={selectedGroup.rooms || []}
+              selectedRooms={selectedGroupRooms}
               withSearch={false}
               disableSubmitUntilChanged
               sortSelectedFirst
               withoutBackdropBackground
               isFormsSection={isFormsSection}
+              excludeItems={privateRoomIds}
             />
           }
         />
       )}
 
-      {isOpenRoomList && !selectedGroup && (
+      {isOpenRoomList && privateRoomIds && !selectedGroup && (
         <Portal
           visible={isOpenRoomList}
           element={
@@ -478,6 +514,7 @@ const EditRoomGroupsDialog = ({
               disableSubmitUntilChanged
               withoutBackdropBackground
               isFormsSection={isFormsSection}
+              excludeItems={privateRoomIds}
             />
           }
         />
@@ -534,6 +571,7 @@ export default inject(
       deleteRoomGroup,
       createGroupFromRoomIds,
       openInCreateMode,
+      getPrivateSectionRoomIds,
     } = dialogsStore;
 
     const { roomsFilter, fetchRooms } = filesStore;
@@ -558,6 +596,7 @@ export default inject(
       searchArea: treeFoldersStore.isFormsFolder
         ? RoomSearchArea.Forms
         : RoomSearchArea.Active,
+      getPrivateSectionRoomIds,
     };
   },
 )(observer(EditRoomGroupsDialog));

@@ -61,6 +61,7 @@ import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
 
 import {
   formatDocsConnectDate,
+  getDocsConnectPlanDevPack,
   getDocsConnectPricePerUser,
   getDocsConnectTrialState,
 } from "../utils";
@@ -109,7 +110,7 @@ const Statistics = ({
   const trialLow = !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
   const currency = wallet?.currency ?? "USD";
-  const { devPackEnabled } = info;
+  const devPackEnabled = getDocsConnectPlanDevPack(info);
   const pricePerUser = getDocsConnectPricePerUser(info);
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;
@@ -168,7 +169,7 @@ const Statistics = ({
   const getSubscriptionNote = () => {
     if (!scheduledChange)
       return t("Common:RenewsOnDate", {
-        date: formatDocsConnectDate(tenant.endDate),
+        date: formatDocsConnectDate(tenant.endDate, i18n.language),
       });
 
     if (isCancellation)
@@ -362,12 +363,14 @@ const Statistics = ({
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:Start")}</Text>
                 <Text fontWeight={600}>
-                  {formatDocsConnectDate(trialStart)}
+                  {formatDocsConnectDate(trialStart, i18n.language)}
                 </Text>
               </div>
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("Common:ValidUntil")}</Text>
-                <Text fontWeight={600}>{formatDocsConnectDate(trialEnd)}</Text>
+                <Text fontWeight={600}>
+                  {formatDocsConnectDate(trialEnd, i18n.language)}
+                </Text>
               </div>
             </div>
             <div
@@ -510,7 +513,7 @@ const Statistics = ({
             <div className={styles.detailRow}>
               <Text className={styles.muted}>{t("DocsConnect:Released")}</Text>
               <Text fontWeight={600}>
-                {formatDocsConnectDate(tenantInfo.license.buildDate)}
+                {formatDocsConnectDate(tenantInfo.license.buildDate, i18n.language)}
               </Text>
             </div>
           </div>

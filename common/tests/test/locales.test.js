@@ -3223,7 +3223,7 @@ describe("Locales Tests", () => {
   });
 
   it("UiKitCommonResolverPrefixTest: Verify that keys resolved through ui-kit's Common-default helpers carry an explicit namespace prefix.", () => {
-    // ui-kit source is not scanned here (it ships as a prebuilt tarball from
+    // ui-kit source is not scanned here (it ships as an npm package from
     // its own repository), but the client calls these Common-defaulting ui-kit
     // helpers, so this test guards that blind spot on our side.
     //
@@ -3257,7 +3257,7 @@ describe("Locales Tests", () => {
     const isCommonKey = (k) =>
       keyNamespaces.has(k) && keyNamespaces.get(k).has("Common");
 
-    // ui-kit source is not available here (prebuilt tarball), so this runs
+    // ui-kit source is not available here (prebuilt npm package), so this runs
     // against the built bundle.
     const uiKitFiles = getAllFiles(resolveUiKitDist(), []).filter(
       (filePath) => filePath && filePath.endsWith(".js"),

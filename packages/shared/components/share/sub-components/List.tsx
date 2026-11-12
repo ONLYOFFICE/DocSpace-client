@@ -248,7 +248,7 @@ const List: FC<ListProps> = (props) => {
   }
 
   return (
-    <div className={styles.mainStyles}>
+    <div className={styles.mainStyles} data-testid="info_panel_members_list">
       {!withoutTitlesAndLinks ? (
         <div
           id="members-list-header"

@@ -126,8 +126,41 @@ describe("isChunkLoadError", () => {
   });
 });
 
+describe("isRscConnectionError", () => {
+  const MINIFIED_412 =
+    "Minified React error #412; visit https://react.dev/errors/412 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
+
+  it("detects the plain and the minified stream failure (production reports)", () => {
+    expect(mod.isRscConnectionError(chunkError("Connection closed."))).toBe(
+      true,
+    );
+    expect(mod.isRscConnectionError(chunkError(MINIFIED_412))).toBe(true);
+  });
+
+  it("ignores look-alike messages", () => {
+    const messages = [
+      "WebSocket connection closed.",
+      "Connection closed by peer",
+      "Minified React error #4120; visit https://react.dev/errors/4120",
+      "Minified React error #418; visit https://react.dev/errors/418",
+    ];
+
+    for (const message of messages) {
+      expect(mod.isRscConnectionError(chunkError(message))).toBe(false);
+    }
+    expect(mod.isRscConnectionError(null)).toBe(false);
+    expect(mod.isRscConnectionError("Connection closed.")).toBe(false);
+  });
+});
+
 describe("canReloadOnChunkError", () => {
   const error = chunkError("Loading chunk 1 failed.", "ChunkLoadError");
+
+  it("allows a reload for an interrupted RSC stream", () => {
+    expect(
+      mod.canReloadOnChunkError(chunkError("Connection closed."), RELOAD_KEY),
+    ).toBe(true);
+  });
 
   it("rejects non-chunk errors", () => {
     expect(mod.canReloadOnChunkError(new Error("boom"), RELOAD_KEY)).toBe(

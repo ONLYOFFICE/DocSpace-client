@@ -34,11 +34,11 @@
  */
 
 import { observer } from "mobx-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
-import { getCountTilesInRow } from "@docspace/shared/utils";
+import { useGridColumns } from "@docspace/shared/hooks/useGridColumns";
 import { InfiniteLoaderComponent } from "@onlyoffice/apps-ui-kit/components/infinite-loader";
 
 import type { InfiniteGridProps } from "../../TileView.types";
@@ -95,12 +95,16 @@ const Card = ({ children }: { children: React.ReactNode }) => {
 const Item = ({
   children,
   className,
+  ref,
 }: {
   children: React.ReactNode;
   className: string;
+  ref?: React.Ref<HTMLDivElement>;
 }) => {
   return (
-    <div className={classNames(styles.item, className, "Item")}>{children}</div>
+    <div ref={ref} className={classNames(styles.item, className, "Item")}>
+      {children}
+    </div>
   );
 };
 
@@ -116,6 +120,8 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
 
   const [countTilesInRow, setCountTilesInRow] = useState(0);
 
+  const observeRow = useGridColumns(setCountTilesInRow);
+
   let cards: React.ReactElement<{
     children: React.ReactElement<{
       className?: string;
@@ -128,7 +134,7 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
 
   const addItemToList = (key: string, cls: string, clear?: boolean) => {
     list.push(
-      <Item key={key} className={cls}>
+      <Item key={key} className={cls} ref={observeRow}>
         {cards}
       </Item>,
     );
@@ -145,21 +151,6 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
 
     return isFile ? "isFile" : "isFolder";
   };
-
-  const onResize = useCallback(() => {
-    const newCount = getCountTilesInRow();
-    setCountTilesInRow((prev) => (prev !== newCount ? newCount : prev));
-  }, []);
-
-  useEffect(() => {
-    onResize();
-
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [onResize]);
 
   if (children && React.isValidElement(children)) {
     React.Children.map(

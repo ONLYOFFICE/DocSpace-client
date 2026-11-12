@@ -34,7 +34,7 @@
  */
 
 import React from "react";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -474,7 +474,6 @@ const LanguageAndTimeZoneComponent = (props) => {
       >
         <div className="settings-block__wrapper-language">
           <ComboBox
-            tabIndex={1}
             id="comboBoxLanguage"
             options={cultureNamesNew}
             selectedOption={state.language}
@@ -499,7 +498,6 @@ const LanguageAndTimeZoneComponent = (props) => {
         isVertical
       >
         <ComboBox
-          tabIndex={2}
           id="comboBoxTimezone"
           options={timezones}
           directionY="both"
@@ -538,9 +536,6 @@ const LanguageAndTimeZoneComponent = (props) => {
         <Text fontSize="13px" fontWeight={400}>
           {t("TimeLanguageSettingsDescription")}
         </Text>
-        <Text>
-          <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
-        </Text>
         {languageAndTimeZoneSettingsUrl ? (
           <Link
             className="link-learn-more"
@@ -556,7 +551,6 @@ const LanguageAndTimeZoneComponent = (props) => {
       </div>
       {settingsBlock}
       <SaveCancelButtons
-        tabIndex={3}
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}

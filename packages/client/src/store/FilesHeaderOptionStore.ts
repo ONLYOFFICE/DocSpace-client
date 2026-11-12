@@ -57,6 +57,7 @@ import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?u
 import { isDesktop } from "@docspace/shared/utils";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { getEncryptedOperationErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoomGroup } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
@@ -94,6 +95,21 @@ export default class FilesHeaderOptionStore {
   private downloadAsHandle = () =>
     this.dialogsStore.setDownloadDialogVisible(true);
 
+  private downloadEncryptedHandle = () => {
+    const selection = this.filesStore.selection as unknown as TActionItem[];
+    const fileIds = selection.filter((i) => i.fileExst).map((i) => i.id);
+    const folderIds = selection.filter((i) => !i.fileExst).map((i) => i.id);
+
+    return this.filesActionsStore
+      .downloadFiles(fileIds, folderIds, {
+        label: this.t("Common:ArchivingData"),
+        errorMessage: (err) => getEncryptedOperationErrorMessage(this.t, err),
+      })
+      ?.catch((err) =>
+        toastr.error(getEncryptedOperationErrorMessage(this.t, err)),
+      );
+  };
+
   private moveToHandle = () => this.dialogsStore.setMoveToPanelVisible(true);
 
   private pinHandle = () => this.filesActionsStore.pinRooms(this.t);
@@ -114,31 +130,14 @@ export default class FilesHeaderOptionStore {
       this.filesStore.selection as unknown as TActionItem[],
     );
 
-  private changeAIAgentsQuotaHandle = () =>
-    this.filesActionsStore.changeAIAgentsQuota(
-      this.filesStore.selection as unknown as TActionItem[],
-    );
-
   private resetRoomQuotaHandle = () =>
     this.filesActionsStore.resetRoomQuota(
       this.filesStore.selection as unknown as TActionItem[],
       this.t,
     );
 
-  private resetAIAgentQuotaHandle = () =>
-    this.filesActionsStore.resetAIAgentQuota(
-      this.filesStore.selection as unknown as TActionItem[],
-      this.t,
-    );
-
   private disableRoomQuotaHandle = () =>
     this.filesActionsStore.disableRoomQuota(
-      this.filesStore.selection as unknown as TActionItem[],
-      this.t,
-    );
-
-  private disableAIAgentQuotaHandle = () =>
-    this.filesActionsStore.disableAIAgentQuota(
       this.filesStore.selection as unknown as TActionItem[],
       this.t,
     );
@@ -212,12 +211,8 @@ export default class FilesHeaderOptionStore {
 
   private deleteRooms = () => this.filesActionsStore.deleteRooms(this.t);
 
-  private deleteAgents = () => this.filesActionsStore.deleteRooms(this.t);
-
   private deleteAction = () => {
-    const { confirmDelete } = this.filesActionsStore.filesSettingsStore;
-
-    if (confirmDelete) {
+    if (this.filesActionsStore.isDeleteConfirmationForced) {
       this.dialogsStore.setDeleteDialogVisible(true);
     } else {
       const translations = {
@@ -282,6 +277,15 @@ export default class FilesHeaderOptionStore {
           id: "menu-download",
           label: t("Common:Download"),
           onClick: this.downloadHandle,
+          iconUrl: DownloadReactSvgUrl,
+        };
+
+      case "downloadEncrypted":
+        if (!this.isAvailableOption("download")) return null;
+        return {
+          id: "menu-download-encrypted",
+          label: t("Common:DownloadWithoutDecryption"),
+          onClick: this.downloadEncryptedHandle,
           iconUrl: DownloadReactSvgUrl,
         };
 
@@ -399,16 +403,6 @@ export default class FilesHeaderOptionStore {
           onClick: this.changeRoomQuotaHandle,
           disabled: !showStorageInfo,
         };
-      case "change-agent-quota":
-        if (!this.isAvailableOption("change-agent-quota")) return null;
-        return {
-          id: "menu-change-agent-quota",
-          key: "change-agent-quota",
-          label: t("Common:ChangeQuota"),
-          iconUrl: ChangQuotaReactSvgUrl,
-          onClick: this.changeAIAgentsQuotaHandle,
-          disabled: !showStorageInfo,
-        };
       case "default-quota":
         if (!this.isAvailableOption("default-quota")) return null;
         return {
@@ -417,16 +411,6 @@ export default class FilesHeaderOptionStore {
           label: t("Common:SetToDefault"),
           iconUrl: DefaultQuotaReactSvgUrl,
           onClick: this.resetRoomQuotaHandle,
-          disabled: !showStorageInfo,
-        };
-      case "default-agent-quota":
-        if (!this.isAvailableOption("default-agent-quota")) return null;
-        return {
-          id: "menu-default-agent-quota",
-          key: "default-agent-quota",
-          label: t("Common:SetToDefault"),
-          iconUrl: DefaultQuotaReactSvgUrl,
-          onClick: this.resetAIAgentQuotaHandle,
           disabled: !showStorageInfo,
         };
       case "disable-quota":
@@ -439,32 +423,12 @@ export default class FilesHeaderOptionStore {
           onClick: this.disableRoomQuotaHandle,
           disabled: !showStorageInfo,
         };
-      case "disable-agent-quota":
-        if (!this.isAvailableOption("disable-agent-quota")) return null;
-        return {
-          id: "menu-disable-agent-quota",
-          key: "disable-agent-quota",
-          label: t("Common:DisableQuota"),
-          iconUrl: DisableQuotaReactSvgUrl,
-          onClick: this.disableAIAgentQuotaHandle,
-          disabled: !showStorageInfo,
-        };
-
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
         return {
           id: "menu-delete-room",
           label: t("Common:Delete"),
           onClick: this.deleteRooms,
-          iconUrl: DeleteReactSvgUrl,
-        };
-
-      case "delete-agent":
-        if (!this.isAvailableOption("delete-agent")) return null;
-        return {
-          id: "menu-delete-agent",
-          label: t("Common:Delete"),
-          onClick: this.deleteAgents,
           iconUrl: DeleteReactSvgUrl,
         };
 

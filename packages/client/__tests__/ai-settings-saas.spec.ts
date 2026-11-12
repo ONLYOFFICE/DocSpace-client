@@ -55,6 +55,7 @@ test.use({ locale: "en-US", timezoneId: "UTC" });
 const AI_MODELS_ROUTE = "/portal-settings/ai-settings/ai-models";
 const WEB_SEARCH_ROUTE = "/portal-settings/ai-settings/web-search";
 const KNOWLEDGE_ROUTE = "/portal-settings/ai-settings/knowledge";
+const DOCUMENT_AGENT_ROUTE = "/portal-settings/ai-settings/document-agent";
 const AI_PRICES_PATH = "portal/payment/ai-prices";
 const RESTRICTIONS_PATH = "portal/payment/ai-model/restrictions";
 const FIRST_RENDER = { timeout: 15000 };
@@ -161,9 +162,9 @@ const trackRestrictionUpdates = (page: Page) => {
   return bodies;
 };
 
-const ACTIVATE_TITLE = "Activate AI features to get started";
+const ACTIVATE_TITLE = "Activate AI agents & tools to get started";
 const ACTIVATE_WEB_SEARCH_TITLE = "Activate AI Search to get started";
-const AI_ENABLED_TITLE = "AI features enabled";
+const AI_ENABLED_TITLE = "AI agents & tools enabled";
 const SEARCH_ENABLED_TITLE = "AI Search enabled";
 
 const activateButton = (page: Page) =>
@@ -329,7 +330,7 @@ test.describe("AI settings on SaaS", () => {
     await expect(page.getByText(AI_ENABLED_TITLE)).toBeVisible(FIRST_RENDER);
     await expect(
       page.getByText(
-        "service management are available in Billing > Services > AI features.",
+        "service management are available in Billing > Services > AI agents & tools.",
       ),
     ).toBeVisible();
     await expect(
@@ -512,6 +513,64 @@ test.describe("AI settings on SaaS", () => {
     ]);
   });
 
+  test("the Document Agent tab shows its defaults until the portal saves some", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${DOCUMENT_AGENT_ROUTE}`);
+
+    await expect(
+      page.getByText("Enable Document Agent", { exact: true }),
+    ).toBeVisible(FIRST_RENDER);
+    await expect(
+      page.getByTestId("document-agent-enabled-toggle"),
+    ).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByText("Model and reasoning")).toBeVisible();
+    await expect(page.getByText("Task limits")).toBeVisible();
+    await expect(
+      page.getByTestId("document-agent-maxToolCalls-input"),
+    ).toHaveValue("150");
+    await expect(
+      page.getByTestId("document-agent-maxFileMb-input"),
+    ).toHaveValue("32");
+    await expect(
+      page.getByTestId("document-agent-tasklog-toggle"),
+    ).toHaveAttribute("aria-checked", "false");
+    // Nothing changed yet: nothing to save.
+    await expect(page.getByTestId("document-agent-save-button")).toBeDisabled();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "ai-settings",
+      "document-agent.png",
+    ]);
+  });
+
+  test("switching task logs on offers where to save them", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${DOCUMENT_AGENT_ROUTE}`);
+    await expect(
+      page.getByText("Enable Document Agent", { exact: true }),
+    ).toBeVisible(FIRST_RENDER);
+
+    await page
+      .getByTestId("document-agent-tasklog-toggle")
+      .locator("label")
+      .click();
+
+    await expect(page.getByText("Save logs to")).toBeVisible();
+    await expect(
+      page.getByText("Next to the task's results", { exact: true }),
+    ).toBeVisible();
+    await expect(page.getByTestId("document-agent-save-button")).toBeEnabled();
+    await page.getByTestId("document-agent-tasklog-folder-custom").click();
+    // A folder has to be picked before the choice can be saved.
+    await expect(page.getByTestId("files-selector-input")).toBeVisible();
+    await expect(page.getByTestId("document-agent-save-button")).toBeDisabled();
+  });
+
   test("a failed price request shows the reload screen", async ({
     page,
     baseUrl,
@@ -676,3 +735,78 @@ test.describe("AI settings on a phone", () => {
   });
 });
 
+
+// The settings sections are WAI-ARIA tabs: the bar is one Tab stop with a
+// roving tabindex, the arrows and Home/End move along it, and the next Tab
+// goes into the selected tab's panel.
+test.describe("AI settings tabs from the keyboard", () => {
+  test.beforeEach(async ({ mockRequest, page }) => {
+    useSaasBilling(mockRequest);
+    mockRequest.use(
+      ...walletServicesHandler(),
+      serviceFeeHandler(),
+      serviceStateHandler(),
+      aiPricesHandler(),
+      ...restrictionsHandler(),
+      ...servicePageHandlers(),
+    );
+    await page.clock.setSystemTime(PAID_NOW);
+  });
+
+  test("the bar is a tablist tied to its panel, and Tab goes into it", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${AI_MODELS_ROUTE}`);
+
+    const tablist = page.getByRole("tablist").first();
+    const tabs = tablist.getByRole("tab");
+    await expect(tabs.first()).toBeVisible(FIRST_RENDER);
+    const count = await tabs.count();
+    expect(count).toBeGreaterThan(1);
+
+    // One tab stop, on the selected tab, which controls the panel.
+    const selected = tablist.getByRole("tab", { selected: true });
+    await expect(selected).toHaveAttribute("tabindex", "0");
+    await expect(tablist.locator('[role="tab"][tabindex="0"]')).toHaveCount(1);
+
+    const panel = page.getByRole("tabpanel");
+    await expect(panel).toBeVisible();
+    const panelId = await panel.getAttribute("id");
+    await expect(selected).toHaveAttribute("aria-controls", panelId ?? "");
+    await expect(panel).toHaveAttribute(
+      "aria-labelledby",
+      (await selected.getAttribute("id")) ?? "",
+    );
+
+    // No positive tabindex anywhere on the page.
+    const positive = await page.evaluate(
+      () =>
+        [...document.querySelectorAll<HTMLElement>("[tabindex]")].filter(
+          (el) => el.tabIndex > 0,
+        ).length,
+    );
+    expect(positive).toBe(0);
+
+    // The arrows move the focus along the bar without selecting.
+    const selectedName = await selected.textContent();
+    await selected.focus();
+    await page.keyboard.press("End");
+    await expect(tabs.nth(count - 1)).toBeFocused();
+    await page.keyboard.press("Home");
+    await expect(tabs.first()).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(tabs.nth(1)).toBeFocused();
+    await expect(tablist.getByRole("tab", { selected: true })).toHaveText(
+      selectedName ?? "",
+    );
+
+    // From the bar, Tab goes into the selected tab's panel.
+    await selected.focus();
+    await page.keyboard.press("Tab");
+    const inPanel = await panel.evaluate((el) =>
+      el.contains(document.activeElement),
+    );
+    expect(inPanel).toBe(true);
+  });
+});

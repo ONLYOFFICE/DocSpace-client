@@ -3,7 +3,7 @@
   "content": "Session lifetime",
   "content_en_sha1_hash": "61a1483685a7cc26afae0c0b1ff32000375060fb",
   "created_at": "2026-08-31T18:23:42.142Z",
-  "updated_at": "2026-08-31T20:20:20.601Z",
+  "updated_at": "2026-10-21T10:17:45.808Z",
   "comment": {
     "text": "Setting title in the Admin Portal security configuration that specifies the duration of user sessions.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 264,
+      "line_number": 281,
       "context": "{\n id: \"portal-settings_catalog-session-life-time\",\n key: \"1-0-8\",\n icon: \"\",\n link: \"lifetime\",\n tKey: \"SessionLifetime\",\n },\n {\n id: \"portal-settings_catalog-access-control\",\n key: \"1-0-9\",\n icon: \"\",",
       "module": "/packages/client"
     }

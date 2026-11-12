@@ -92,6 +92,8 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
     error: vi.fn(),
     info: vi.fn(),
     warning: vi.fn(),
+    clear: vi.fn(),
+    isActive: vi.fn(() => false),
   },
 }));
 
@@ -117,7 +119,6 @@ export type FakeStores = {
   currentQuotaStore: Record<string, unknown>;
   indexingStore: Record<string, unknown>;
   versionHistoryStore: Record<string, unknown>;
-  aiRoomStore: Record<string, unknown>;
 };
 
 const defaultFakes = (): FakeStores => ({
@@ -140,6 +141,12 @@ const defaultFakes = (): FakeStores => ({
     clearActiveOperations: vi.fn(),
     loopFilesOperations: vi.fn(async () => {}),
     itemOperationToFolder: vi.fn(async () => {}),
+    resolveOpenFolderTarget: vi.fn(() => ({
+      folderId: 1,
+      isPrivate: false,
+      roomType: null,
+      encryptionRoomId: null,
+    })),
   },
   treeFoldersStore: {
     treeFolders: [],
@@ -147,7 +154,6 @@ const defaultFakes = (): FakeStores => ({
     isArchiveFolder: false,
     isArchiveFolderRoot: false,
     isTemplatesFolder: false,
-    isAIAgentsFolder: false,
     isFormsFolder: false,
     isRecycleBinFolder: false,
     isPrivacyFolder: false,
@@ -176,7 +182,6 @@ const defaultFakes = (): FakeStores => ({
     getFilesChecked: vi.fn(),
     fetchFiles: vi.fn(async () => {}),
     fetchRooms: vi.fn(async () => {}),
-    fetchAgents: vi.fn(async () => {}),
     scrollToTop: vi.fn(),
     setScrollToItem: vi.fn(),
     activeFiles: [],
@@ -206,6 +211,11 @@ const defaultFakes = (): FakeStores => ({
     setMoveToPanelVisible: vi.fn(),
     setCopyPanelVisible: vi.fn(),
     setDownloadDialogVisible: vi.fn(),
+    // Stateful like the real store: a held transfer is read back on confirm.
+    encryptedTransferConfirm: null as unknown,
+    setEncryptedTransferConfirm(value: unknown) {
+      this.encryptedTransferConfirm = value;
+    },
   },
   mediaViewerDataStore: {
     setMediaViewerData: vi.fn(),
@@ -228,6 +238,8 @@ const defaultFakes = (): FakeStores => ({
   },
   userStore: {
     user: { id: "user-1", isAdmin: false },
+    encryptionKeys: [],
+    ensureEncryptionKeys: async () => [],
   },
   currentTariffStatusStore: {},
   peopleStore: {
@@ -242,9 +254,6 @@ const defaultFakes = (): FakeStores => ({
     setIsIndexEditingMode: vi.fn(),
   },
   versionHistoryStore: {},
-  aiRoomStore: {
-    setKnowledgeId: vi.fn(),
-  },
 });
 
 /**
@@ -280,7 +289,6 @@ export const createTestFilesActionsStore = (
     merged.currentQuotaStore,
     merged.indexingStore,
     merged.versionHistoryStore,
-    merged.aiRoomStore,
   ];
 
   return new FilesActionsStore(

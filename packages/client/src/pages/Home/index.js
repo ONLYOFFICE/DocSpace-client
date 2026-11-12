@@ -42,16 +42,12 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
-import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
 } from "SRC_DIR/Hooks/useChatNoAccess";
-import {
-  useIsAiChatAvailable,
-  useStores,
-} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import {
   addTagsToRoom,
@@ -62,9 +58,12 @@ import { createFolder } from "@docspace/shared/api/files";
 import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { getCategoryType } from "@docspace/shared/utils/common";
+import {
+  getCategoryType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -101,6 +100,7 @@ import {
 } from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
 import { useHideQuickActions } from "./Hooks/useHideQuickActions";
+import { useSectionDrop } from "./Hooks/useSectionDrop";
 
 import styles from "./Home.module.scss";
 
@@ -119,6 +119,7 @@ const PureHome = observer((props) => {
     selectedFolderStore,
     t,
     startUpload,
+    resolveOpenFolderTarget,
     setDragging,
     dragging,
     isChatDropTarget,
@@ -147,7 +148,6 @@ const PureHome = observer((props) => {
 
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
-    isErrorAIAgentNotAvailable,
     isIndexEditingMode,
 
     isSecondaryProgressVisbile,
@@ -211,9 +211,6 @@ const PureHome = observer((props) => {
     canCreateSecurity,
     startDropPreview,
 
-    aiConfig,
-    currentTab,
-    selectedResultFileId,
     setIsAboutDialogVisible,
 
     pluginFloatingOperationsArray,
@@ -225,16 +222,19 @@ const PureHome = observer((props) => {
     canCreateFiles,
     canCreateEncrypted,
     canCreateRooms,
+    onCreateRoom,
     isDocumentsFolder,
     isRoom,
+    isFormRoomFolder,
     isRoomsFolder,
     isFormsFolder,
+    isAiSectionFolder,
+    isAiProjectRoomRoot,
     isPrivacyFolder,
     isArchiveFolder,
     isTemplatesFolder,
     isFavoritesFolder,
     isRecentFolder,
-    isAIAgentsFolder,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
@@ -283,7 +283,6 @@ const PureHome = observer((props) => {
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     contactsTab === "groups" ? isEmptyGroups : isUsersEmptyView;
-  const isChat = currentClientView === "chat";
 
   // Availability is computed once by the host (Shell) and shared through
   // AiAgentProviders' context.
@@ -291,8 +290,11 @@ const PureHome = observer((props) => {
 
   usePanelExclusivity(infoPanelStore);
 
+  // An open AI project draws its chat in the section body (AiProjectView),
+  // so the side panel stays out of the way while a project room is shown.
   const isAiChatFullscreen =
     isAiChatAvailable &&
+    !isAiProjectRoomRoot &&
     aiChatPanel.isChatPanelVisible &&
     (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
@@ -328,17 +330,22 @@ const PureHome = observer((props) => {
   // asynchronously, so during navigation `isRoom` flips true before the form
   // type is known and the banner briefly flashes the regular-room file tiles.
   // The pathname changes atomically with the route, so this never lags.
-  const isFormRoom = getCategoryType(location) === CategoryType.Form;
+  //
+  // The URL alone is not enough, though: a form room can also be opened under
+  // `/rooms/shared/{id}` (the server reports its rootFolderType as Rooms), and
+  // there the banner offered the regular file tiles, which the server then
+  // refused with "only PDF forms can be uploaded to this room". So the store
+  // is consulted as well once it has loaded.
+  const isFormRoom =
+    getCategoryType(location) === CategoryType.Form || isFormRoomFolder;
 
-  // AI-agents create gating: AI must be ready and the user able to manage
-  // agents (admins / owners / room admins — same set as canCreateRooms).
-  // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
-  // treat the presence of profiles as ready too — same signal the agents
-  // EmptyView uses to decide whether to offer agent creation.
-  const { useProfilesStore } = useStores();
-  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
-  const canCreateAgents =
-    (aiConfig?.aiReady || hasAiProfiles) && canCreateRooms;
+  const isPrivateRoomsSection =
+    getCategoryType(location) === CategoryType.PrivateRooms;
+
+  const onCreatePrivateRoom = useCallback(
+    () => onCreateRoom(null, false, "sidebar"),
+    [onCreateRoom],
+  );
 
   // Quick-actions banner (ported from the SDK): create tiles above the
   // files/rooms list. The hook resolves which tile set applies (or none) from
@@ -348,54 +355,52 @@ const PureHome = observer((props) => {
     canCreateFiles,
     canCreateEncrypted,
     canCreateRooms,
-    canCreateAgents,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
     setCreateRoomFromTemplate,
+    onCreatePrivateRoom,
     isDocumentsFolder,
     isRoom,
     isFormRoom,
     isRoomsFolder,
+    // The AI Rooms root and an open AI project get no tile set.
+    // Neither AI section gets a tile set.
+    isAiProjectsSection: isAiSectionFolder || isAiProjectRoomRoot,
     isPrivacyFolder,
     isArchiveFolder,
     isRecycleBinFolder,
     isTemplatesFolder,
     isFavoritesFolder,
     isRecentFolder,
-    isAIAgentsFolder,
     isFormsSection,
+    isPrivateRoomsSection,
+    isPrivateRoute: isPrivateRoomsRoute(location.pathname),
     isContactsPage,
     isProfile,
     isSettingsPage,
   });
   const showQuickActions =
-    quickActionsEnabled && quickActions.show && !isChat && !isEmptyPage;
+    quickActionsEnabled && quickActions.show && !isEmptyPage;
 
   const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 
-  const onDrop = useEventCallback((f, uploadToFolder) => {
-    if (isContactsPage || isProfile) return;
-
-    if (
-      folderSecurity &&
-      hasOwnProperty(folderSecurity, "Create") &&
-      !folderSecurity.Create
-    )
-      return;
-
-    const dragged = dragging;
-    dragging && setDragging(false);
-
-    if (disableDrag) return;
-
-    createFoldersTree(t, f, uploadToFolder, dragged)
-      .then((fItem) => {
-        if (fItem.length > 0) startUpload(fItem, uploadToFolder, t);
-      })
-      .catch((err) => {
-        toastr.error(err, null, 0, true);
-      });
+  const { onDrop, onDropCapture } = useSectionDrop({
+    t,
+    canUpload:
+      !isContactsPage &&
+      !isProfile &&
+      !(
+        folderSecurity &&
+        hasOwnProperty(folderSecurity, "Create") &&
+        !folderSecurity.Create
+      ),
+    disableDrag,
+    dragging,
+    setDragging,
+    resolveOpenFolderTarget,
+    createFoldersTree,
+    startUpload,
   });
 
   useOperations({
@@ -540,7 +545,7 @@ const PureHome = observer((props) => {
 
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
-      sectionProps.uploadFiles = !isChat;
+      sectionProps.uploadFiles = true;
       sectionProps.onDrop = isRecycleBinFolder ? null : onDrop;
 
       sectionProps.viewAs = viewAs;
@@ -549,7 +554,11 @@ const PureHome = observer((props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
-      sectionProps.fullHeightBody = isChat || !!selectedResultFileId;
+      // An open AI project draws its chat in the body (AiProjectView): the
+      // body fills the section instead of sizing to its content, and has no
+      // footer spacer.
+      sectionProps.fullHeightBody = isAiProjectRoomRoot;
+      sectionProps.withoutFooter = isAiProjectRoomRoot;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -593,7 +602,7 @@ const PureHome = observer((props) => {
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
-  sectionProps.getContextModel = isChat ? null : getContextModel;
+  sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
@@ -618,8 +627,11 @@ const PureHome = observer((props) => {
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
 
-  sectionProps.isChatPanelAvailable = isAiChatAvailable;
-  sectionProps.isChatPanelVisible = aiChatPanel.isChatPanelVisible;
+  // An open AI project draws its chat in the section body (AiProjectView):
+  // the side panel is not there, and takes no width beside the body.
+  sectionProps.isChatPanelAvailable = isAiChatAvailable && !isAiProjectRoomRoot;
+  sectionProps.isChatPanelVisible =
+    aiChatPanel.isChatPanelVisible && !isAiProjectRoomRoot;
   sectionProps.chatPanelDropTargetLabel = isChatDropTarget
     ? t("Common:DropFilesToAttach")
     : undefined;
@@ -665,11 +677,7 @@ const PureHome = observer((props) => {
     setShouldShowFilter(shouldRenderSectionFilter);
   }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
 
-  const isDisabledKnowledge =
-    !aiConfig?.vectorizationEnabled && currentTab === "knowledge";
-
-  const isErrorAvailable =
-    isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
+  const isErrorAvailable = isErrorRoomNotAvailable;
 
   return (
     <>
@@ -701,10 +709,10 @@ const PureHome = observer((props) => {
           [styles.stickyBannerVars]: showQuickActions,
         })}
         data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
+        onDropCapture={onDropCapture}
       >
         <SectionWrapper
           {...sectionProps}
-          withoutFooter={isChat}
           scrollableBanner={showQuickActions}
           stickyTableHeader={showQuickActions}
         >
@@ -728,12 +736,9 @@ const PureHome = observer((props) => {
           </Section.SectionWarning>
 
           {!isPluginSection &&
-          !isChat &&
           !isErrorAvailable &&
-          !isDisabledKnowledge &&
           shouldShowFilter &&
           !isProfile &&
-          !selectedResultFileId &&
           (!isFrame || showFilter) ? (
             <Section.SectionFilter>
               <SectionFilterContent />
@@ -818,7 +823,6 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
-    aiRoomStore,
     profileActionsStore,
     pluginStore,
     infoPanelStore,
@@ -830,7 +834,6 @@ export const Component = inject(
       setSelectedFolder,
       security: folderSecurity,
       title: selectedFolderTitle,
-      chatSettings: selectedFolderChatSettings,
     } = selectedFolderStore;
 
     const canCreateSecurity = folderSecurity?.Create;
@@ -887,7 +890,6 @@ export const Component = inject(
 
       disableDrag,
       isErrorRoomNotAvailable,
-      isErrorAIAgentNotAvailable,
       setIsPreview,
       getRooms,
       scrollToTop,
@@ -914,8 +916,9 @@ export const Component = inject(
       isPrivacyFolder,
       isFavoritesFolder,
       isRecentFolder,
-      isAIAgentsFolder,
       isFormsFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
     } = treeFoldersStore;
 
     const {
@@ -943,7 +946,7 @@ export const Component = inject(
       cancelSecondaryOperationById,
     } = secondaryProgressDataStore;
 
-    const { startUpload } = uploadDataStore;
+    const { startUpload, resolveOpenFolderTarget } = uploadDataStore;
 
     const { createFoldersTree } = filesActionsStore;
 
@@ -1037,6 +1040,8 @@ export const Component = inject(
       isErrorRoomNotAvailable,
       isRoomsFolder,
       isFormsFolder,
+      isAiSectionFolder,
+      isAiProjectRoomRoot,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
 
@@ -1052,6 +1057,7 @@ export const Component = inject(
       fetchRooms,
 
       startUpload,
+      resolveOpenFolderTarget,
       createFoldersTree,
 
       setToPreviewFile,
@@ -1138,7 +1144,6 @@ export const Component = inject(
       dropTargetPreview,
       setDropTargetPreview,
       selectedFolderTitle,
-      selectedFolderChatSettings,
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
@@ -1149,22 +1154,21 @@ export const Component = inject(
       canCreateFiles: folderSecurity?.Create,
       canCreateEncrypted: uploadDataStore.shouldEncryptCurrentUpload(),
       canCreateRooms: isAdmin || isRoomAdmin,
+      onCreateRoom: contextOptionsStore.onCreateRoom,
       isDocumentsFolder,
       isRoom,
+      isFormRoomFolder:
+        selectedFolderStore.roomType === RoomsType.FormRoom ||
+        selectedFolderStore.parentRoomType === FolderType.FormRoom,
       isPrivacyFolder,
       isTemplatesFolder,
       isFavoritesFolder,
       isRecentFolder,
-      isAIAgentsFolder,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
       setOformFromFolderId: oformsStore.setOformFromFolderId,
       setCreateRoomFromTemplate: oformsStore.setCreateRoomFromTemplate,
 
-      isErrorAIAgentNotAvailable,
-      currentTab: aiRoomStore.currentTab,
-      selectedResultFileId: aiRoomStore.selectedResultFileId,
-      aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
 

@@ -92,7 +92,6 @@ exports[`getFilesContextOptions — room/folder with no permissions > room with 
   "link-for-room-members",
   "external-link",
   "edit-index",
-  "short-tour",
   "export-room-index",
   "separator1",
   "leave-room",

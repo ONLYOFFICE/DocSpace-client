@@ -3,18 +3,30 @@
   "content": "Retry",
   "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
   "created_at": "2026-05-24T17:27:18.516Z",
-  "updated_at": "2026-09-08T08:44:10.159Z",
+  "updated_at": "2026-10-26T13:44:40.973Z",
   "comment": {
-    "text": "Button label used to restart the AI arbiter process after an error or interruption.",
+    "text": "Button label for trying a failed action again: it restarts the AI arbiter after an error, and in the upload panel it sends a file whose upload failed once more. Translate as a short imperative verb.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:45:35.824Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-26T13:44:40.973Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
       "line_number": 624,
       "context": "<>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:ArbiterRetry\")}\n onClick={handleRetry}\n />\n <Button\n scale\n size={ButtonSize.normal}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/client/src/components/PanelComponents/ErrorFile.js",
+      "line_number": 59,
+      "context": "? t(\"Common:QuotaExceededTooltip\")\n : item.error || t(\"UploadingError\");\n \n const retryLabel = item.isQuotaError\n ? t(\"Common:RetryAfterQuotaUpgrade\")\n : t(\"Common:ArbiterRetry\");\n \n return (\n <div\n className=\"upload_panel-icon\"\n data-tooltip-id=\"system-tooltip\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/upload-panel/file-row.tsx",
+      "line_number": 138,
+      "context": "className={styles.retryLink}\n onClick={item.retry}\n >\n {item.isQuotaError\n ? t(\"Common:RetryAfterQuotaUpgrade\")\n : t(\"Common:ArbiterRetry\")}\n </Link>\n ) : null}\n </>\n ) : (\n <>",
       "module": "/packages/sdk"
     }
   ],

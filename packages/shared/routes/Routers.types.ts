@@ -48,6 +48,7 @@ export interface PrivateRouteProps
       | "wizardCompleted"
       | "tenantStatus"
       | "isPortalDeactivate"
+      | "isPortalBlocked"
       | "enablePortalRename"
       | "limitedAccessSpace"
       | "baseDomain"
@@ -75,5 +76,6 @@ export interface PublicRouteProps
       | "wizardCompleted"
       | "tenantStatus"
       | "isPortalDeactivate"
+      | "isPortalBlocked"
       | "isFirstLoaded"
     > {}

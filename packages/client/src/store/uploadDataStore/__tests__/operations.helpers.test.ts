@@ -116,6 +116,52 @@ describe("itemOperationToFolderImpl — routing", () => {
   });
 });
 
+describe("itemOperationToFolderImpl — hotkeys clipboard", () => {
+  const clipboard = [
+    { id: 5, title: "a.docx" },
+    { id: 6, title: "b.docx" },
+    { id: 7, title: "Folder", isFolder: true },
+  ];
+
+  it("drops the moved items from the clipboard", async () => {
+    const { store, filesStore } = createTestUploadDataStore();
+    filesStore.setHotkeysClipboard(clipboard as never);
+    vi.mocked(filesApi.moveToFolder).mockResolvedValue([
+      makeOperation({ finished: true, progress: 100 }),
+    ] as never);
+
+    await itemOperationToFolderImpl(store, {
+      destFolderId: 99,
+      folderIds: [7],
+      fileIds: [5],
+      deleteAfter: false,
+      isCopy: false,
+    });
+
+    expect(filesStore.hotkeysClipboard.map((item) => item.id)).toEqual([6]);
+  });
+
+  it("keeps the clipboard after a copy", async () => {
+    const { store, filesStore } = createTestUploadDataStore();
+    filesStore.setHotkeysClipboard(clipboard as never);
+    vi.mocked(filesApi.copyToFolder).mockResolvedValue([
+      makeOperation({ finished: true, progress: 100 }),
+    ] as never);
+
+    await itemOperationToFolderImpl(store, {
+      destFolderId: 99,
+      folderIds: [7],
+      fileIds: [5, 6],
+      deleteAfter: false,
+      isCopy: true,
+    });
+
+    expect(filesStore.hotkeysClipboard.map((item) => item.id)).toEqual([
+      5, 6, 7,
+    ]);
+  });
+});
+
 describe("clearActiveOperationsImpl", () => {
   it("drops only the passed ids from the real FilesStore active arrays", () => {
     const { store, filesStore } = createTestUploadDataStore();

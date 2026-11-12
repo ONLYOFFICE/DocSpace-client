@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsItemMember",
+  "content": "Each row is a form space you can access. Open it to find forms to fill in and your own drafts or submitted copies.",
+  "content_en_sha1_hash": "95224b657a3444d9dd8b270179e7c167365d6647",
+  "created_at": "2026-10-16T12:15:09.348Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
+  "comment": {
+    "text": "Body of the Forms onboarding tour step that highlights the first form space row; variant for users who cannot create spaces, such as form fillers (others see FormsItem).",
+    "is_auto": true,
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 204,
+      "context": "fileItemStep(\n FIRST_ITEM_SELECTOR,\n canCreate\n ? t(\"FormsTour:FormsItemTitle\")\n : t(\"FormsTour:FormsItemMemberTitle\"),\n canCreate ? t(\"FormsTour:FormsItem\") : t(\"FormsTour:FormsItemMember\"),\n callbacks,\n FORMS_TOUR_LABEL,\n leaveSpace,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

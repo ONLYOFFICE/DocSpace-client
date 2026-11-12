@@ -62,7 +62,6 @@ const TrashRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     tableStorageName,
     index,
@@ -89,7 +88,7 @@ const TrashRowDataComponent = (props) => {
           inProgress={inProgress}
           {...props}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
+        <StyledBadgesContainer>
           {badgesComponent}
         </StyledBadgesContainer>
       </TableCell>

@@ -173,9 +173,8 @@ const EmptyView = ({
         files: t("Common:Files"),
         rooms: t("Common:Rooms"),
         forms: t("Common:Forms"),
-        aiAgents: t("Common:AIAgents"),
         defaultValue:
-          "Add files from {{files}}, {{rooms}}, {{forms}}, or other {{aiAgents}}",
+          "Add files from {{files}}, {{rooms}}, {{forms}}, or other AI agents",
       }),
       icon: <UploadPDFFormIcon />,
       onClick: onUploadFromDocSpace,

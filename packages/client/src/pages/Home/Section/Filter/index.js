@@ -40,9 +40,10 @@ import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
-import { ROOMS_SECTION_TYPES } from "@docspace/shared/utils/rooms";
+import {
+  ROOMS_SECTION_TYPES,
+} from "@docspace/shared/utils/rooms";
 import FilterInput from "@onlyoffice/apps-ui-kit/components/filter";
-import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -65,7 +66,6 @@ import {
 
 import {
   DeviceType,
-  Events,
   FilterGroups,
   FilterKeys,
   FilterSubject,
@@ -76,7 +76,14 @@ import {
   RoomsType,
   SortByFieldName,
 } from "@docspace/shared/enums";
-import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
+import {
+  CategoryType,
+  ROOMS_PROVIDER_TYPE_NAME,
+} from "@docspace/shared/constants";
+import {
+  getCategoryType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -89,11 +96,25 @@ import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { FilterLoader } from "@onlyoffice/apps-ui-kit/components/filter/skeletons";
 import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
+import { getMetadataTemplates } from "@docspace/shared/api/metadata";
+import { isMetadataRootSupported } from "@docspace/shared/utils/metadata";
 
 import { useContactsFilter } from "./useContacts";
+import MetadataFilterSection from "./MetadataFilter";
+import {
+  METADATA_FILTER_GROUP,
+  addMetadataGroup,
+  applyMetadataFilter,
+  canFilterByMetadata,
+  dropMetadataChip,
+  getMetadataFilterState,
+  getMetadataFilterValue,
+  getMetadataSelectedItem,
+} from "./MetadataFilter/utils";
 
 const SectionFilterContent = ({
   t,
+  i18n,
   filter,
   roomsFilter,
   isRecentFolder,
@@ -148,11 +169,6 @@ const SectionFilterContent = ({
   isDefaultUsersQuotaSet,
   isTemplatesFolder,
   isSharedWithMeFolder,
-  isAIAgentsFolder,
-  aiReady,
-  isUserAdmin,
-  isOwner,
-  currentFolderId,
 
   getSelectedFolder,
   selectedFolderId,
@@ -160,7 +176,6 @@ const SectionFilterContent = ({
   getFolderModel,
   getContactsModel,
   onCreateRoom,
-  onCreateAgent,
 
   filesStore,
   groupsStore,
@@ -170,6 +185,7 @@ const SectionFilterContent = ({
   roomGroups,
   isRoomsFolder,
   isFormsFolder,
+  isAiHubFolder,
   organizeRoomsGrouping,
   getPinnedGroupId,
 }) => {
@@ -180,23 +196,41 @@ const SectionFilterContent = ({
   // Form Filling Rooms only, so the room-type filter is not offered there.
   const isFormsSection = location.pathname.startsWith("/forms");
 
+  // Spec: private-rooms/sidebar-section, "Section filter"
+  const isPrivateSection = isPrivateRoomsRoute(location.pathname);
+
+  // "AI Workspace" is a root of its own (searchArea=AiHub). Its room type is
+  // set by the sidebar entry (Agents, Skills, Knowledge base), so the filter
+  // neither offers a type nor shows the preset one as a chip, and keeps it
+  // while the other filters change. The bare `/ai-rooms` is the SDK frame
+  // page, not this section.
+  const isAiHubSection = location.pathname.startsWith("/ai-rooms/");
+
   // Trash is a single, centralized folder reached from several sections
   // (/files/trash, /rooms/trash, /forms/trash, ...). The "Room" filter only
-  // makes sense for Trash opened from the Rooms section.
-  const isRoomsTrash = location.pathname.startsWith("/rooms/trash");
+  // makes sense for Trash opened from a rooms section.
+  const isRoomsTrash =
+    location.pathname.startsWith("/rooms/trash") ||
+    location.pathname.startsWith("/ai-rooms/trash");
 
   // Base path for room-list navigation (sort/search/filter). The "Forms"
   // section keeps its own route instead of falling back to "rooms/shared".
   const getRoomsListBasePath = React.useCallback(
     (searchArea) => {
       if (isFormsSection) return "forms";
+      if (searchArea === RoomSearchArea.AiHub) return "ai-rooms";
+
+      if (isPrivateSection)
+        return getCategoryType(location) === CategoryType.PrivateArchive
+          ? "private/archived"
+          : "private";
 
       return searchArea === RoomSearchArea.Active ||
         searchArea === RoomSearchArea.Templates
         ? "rooms/shared"
         : "rooms/archived";
     },
-    [isFormsSection],
+    [isFormsSection, isPrivateSection, location],
   );
 
   const roomGroupsSearchArea = isFormsSection
@@ -220,18 +254,48 @@ const SectionFilterContent = ({
     isContactsGroupsPage,
     isContactsGuestsPage,
     isRoomsFolder,
-    isAIAgentsFolder,
+    isAiHubFolder,
     isFormsSection,
     isFormsFolder,
     selectedFolderId,
     getFolderModel,
     getContactsModel,
     onCreateRoom,
-    onCreateAgent,
     createGroup,
   });
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
+
+  const isMetadataFilterAvailable =
+    !isPublicRoom &&
+    !getSelectedFolder()?.providerKey &&
+    !getSelectedFolder()?.private &&
+    isMetadataRootSupported(getSelectedFolder()?.rootFolderType);
+
+  const hasMetadataFilter = isRooms
+    ? roomsFilter.hasMetadataFilter()
+    : filter.hasMetadataFilter();
+
+  const metadataTemplates = React.useRef([]);
+
+  const metadataFiltersKey = JSON.stringify(filter.metadataFilters ?? null);
+  const roomsMetadataFiltersKey = JSON.stringify(
+    roomsFilter.metadataFilters ?? null,
+  );
+
+  const getMetadataItem = async (listFilter) => {
+    if (!isMetadataFilterAvailable) return null;
+
+    const metadataState = getMetadataFilterState(listFilter);
+    if (!metadataState) return null;
+
+    const templates = await getMetadataTemplates().catch(() => []);
+    const template = templates.find(
+      ({ id }) => id === metadataState.templateId,
+    );
+
+    return getMetadataSelectedItem(t, metadataState, template, i18n.language);
+  };
 
   // Check if any filter or search is active (excluding sorting and groupId)
   // Room grouping should be hidden when filters/search are active
@@ -245,7 +309,8 @@ const SectionFilterContent = ({
       roomsFilter.provider ||
       roomsFilter.quotaFilter ||
       (roomsFilter.tags && roomsFilter.tags.length > 0) ||
-      roomsFilter.withoutTags
+      roomsFilter.withoutTags ||
+      roomsFilter.hasMetadataFilter()
     );
   }, [
     isRooms,
@@ -257,6 +322,8 @@ const SectionFilterContent = ({
     roomsFilter.quotaFilter,
     roomsFilter.tags,
     roomsFilter.withoutTags,
+    roomsFilter.metadataTemplateId,
+    roomsFilter.metadataFilters,
   ]);
 
   const {
@@ -300,7 +367,9 @@ const SectionFilterContent = ({
       if (isContactsPage) {
         onContactsFilter(data);
       } else if (isRooms) {
-        const type = getType(data) || null;
+        const type = isAiHubSection
+          ? roomsFilter.type
+          : getType(data) || null;
 
         const subjectId = getSubjectId(data) || null;
 
@@ -322,6 +391,8 @@ const SectionFilterContent = ({
         newFilter.subjectOwnerId = null;
 
         newFilter.quotaFilter = quota;
+
+        applyMetadataFilter(newFilter, getMetadataFilterValue(data));
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -353,50 +424,6 @@ const SectionFilterContent = ({
         navigate(
           `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
         );
-      } else if (isAIAgentsFolder) {
-        const subjectId = getSubjectId(data) || null;
-
-        const subjectOwnerId = getSubjectOwnerId(data) || null;
-
-        const tags = getTags(data) || null;
-
-        const newFilter = roomsFilter.clone();
-
-        newFilter.page = 0;
-
-        newFilter.subjectFilter = null;
-        newFilter.subjectId = null;
-        newFilter.subjectOwnerId = null;
-
-        if (subjectId) {
-          newFilter.subjectId = subjectId;
-
-          if (subjectId === FilterKeys.me) {
-            newFilter.subjectId = `${userId}`;
-          }
-        }
-
-        if (subjectOwnerId) {
-          newFilter.subjectOwnerId =
-            subjectOwnerId === FilterKeys.me ? `${userId}` : subjectOwnerId;
-        }
-
-        if (tags) {
-          if (!tags?.length) {
-            newFilter.tags = null;
-            newFilter.withoutTags = true;
-          } else {
-            newFilter.tags = tags;
-            newFilter.withoutTags = false;
-          }
-        } else {
-          newFilter.tags = null;
-          newFilter.withoutTags = false;
-        }
-
-        navigate(
-          `ai-agents/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
-        );
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -424,6 +451,8 @@ const SectionFilterContent = ({
 
         newFilter.sharedBy = sharedBy;
 
+        applyMetadataFilter(newFilter, getMetadataFilterValue(data));
+
         newFilter.withSubfolders =
           withSubfolders === FilterKeys.excludeSubfolders ? null : "true";
 
@@ -446,8 +475,8 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
-      isAIAgentsFolder,
       isTrash,
+      isAiHubFolder,
       isRoomsTrash,
       isPrivacyFolder,
       setIsLoading,
@@ -478,11 +507,6 @@ const SectionFilterContent = ({
       const path = getRoomsListBasePath(roomsFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
-    } else if (isAIAgentsFolder) {
-      const newFilter = RoomsFilter.clean();
-      newFilter.searchArea = RoomSearchArea.AIAgents;
-
-      navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = filter.clone();
 
@@ -495,7 +519,6 @@ const SectionFilterContent = ({
     }
   }, [
     isRooms,
-    isAIAgentsFolder,
     isPrivacyFolder,
     filesStore,
     setIsLoading,
@@ -551,13 +574,6 @@ const SectionFilterContent = ({
         const path = getRoomsListBasePath(newFilter.searchArea);
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
-      } else if (isAIAgentsFolder) {
-        const newFilter = roomsFilter.clone();
-
-        newFilter.page = 0;
-        newFilter.filterValue = searchValue;
-
-        navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const currentFilter = filesStore.filter;
         const newFilter = currentFilter.clone();
@@ -574,7 +590,6 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
-      isAIAgentsFolder,
       isContactsPage,
       isPrivacyFolder,
       filesStore,
@@ -602,7 +617,7 @@ const SectionFilterContent = ({
 
       let newFilter = null;
 
-      if (isRooms || isAIAgentsFolder) newFilter = roomsFilter.clone();
+      if (isRooms) newFilter = roomsFilter.clone();
       else newFilter = filter.clone();
 
       newFilter.page = 0;
@@ -613,9 +628,6 @@ const SectionFilterContent = ({
         const path = getRoomsListBasePath(newFilter.searchArea);
         setRoomsFilter(newFilter);
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
-      } else if (isAIAgentsFolder) {
-        setRoomsFilter(newFilter);
-        navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const path = location.pathname.split("/filter")[0];
 
@@ -624,7 +636,6 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
-      isAIAgentsFolder,
 
       isContactsPage,
       setIsLoading,
@@ -659,7 +670,7 @@ const SectionFilterContent = ({
 
     return isContactsPage
       ? getContactsSelectedInputValue()
-      : isRooms || isAIAgentsFolder
+      : isRooms
         ? roomsFilter.filterValue
           ? roomsFilter.filterValue
           : ""
@@ -668,7 +679,6 @@ const SectionFilterContent = ({
           : "";
   }, [
     isRooms,
-    isAIAgentsFolder,
     isContactsPage,
     isPrivacyFolder,
     filesStore.clientSearchQuery,
@@ -682,7 +692,7 @@ const SectionFilterContent = ({
   const getSelectedSortData = React.useCallback(() => {
     const currentFilter = isContactsPage
       ? getContactsSelectedSortData()
-      : isRooms || isAIAgentsFolder
+      : isRooms
         ? roomsFilter
         : filter;
     return {
@@ -691,7 +701,6 @@ const SectionFilterContent = ({
     };
   }, [
     isRooms,
-    isAIAgentsFolder,
     isContactsPage,
     filter.sortOrder,
     filter.sortBy,
@@ -764,7 +773,7 @@ const SectionFilterContent = ({
         });
       }
 
-      if (roomsFilter.type) {
+      if (roomsFilter.type && !isAiHubSection) {
         const key = +roomsFilter.type;
 
         const label = getRoomTypeName(key, t);
@@ -809,56 +818,9 @@ const SectionFilterContent = ({
           group: FilterGroups.roomFilterProviderType,
         });
       }
-    } else if (isAIAgentsFolder) {
-      if (roomsFilter.subjectId) {
-        const user = await getUser(roomsFilter.subjectId);
-        const isMe = userId === roomsFilter.subjectId;
 
-        const label = isMe ? t("Common:MeLabel") : user.displayName;
-
-        const subject = {
-          key: isMe ? FilterKeys.me : roomsFilter.subjectId,
-          group: FilterGroups.roomFilterSubject,
-          label,
-        };
-
-        if (roomsFilter.subjectFilter?.toString()) {
-          if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {
-            subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
-          }
-
-          filterValues.push(subject);
-
-          filterValues.push({
-            key: roomsFilter?.subjectFilter?.toString(),
-            group: FilterGroups.roomFilterOwner,
-          });
-        } else {
-          filterValues.push(subject);
-        }
-      }
-
-      if (roomsFilter.subjectOwnerId) {
-        const owner = await getUser(roomsFilter.subjectOwnerId);
-        const isMe = userId === roomsFilter.subjectOwnerId;
-
-        const label = isMe ? t("Common:MeLabel") : owner.displayName;
-
-        filterValues.push({
-          key: isMe ? FilterKeys.me : roomsFilter.subjectOwnerId,
-          group: FilterGroups.roomFilterOwner,
-          label,
-          selectedLabel: `${t("Common:Owner")}: ${label}`,
-        });
-      }
-
-      if (roomsFilter?.tags?.length > 0) {
-        filterValues.push({
-          key: roomsFilter.tags,
-          group: FilterGroups.roomFilterTags,
-          isMultiSelect: true,
-        });
-      }
+      const metadataItem = await getMetadataItem(roomsFilter);
+      if (metadataItem) filterValues.push(metadataItem);
     } else if (!isContactsPage) {
       if (filter.filterType) {
         let label = "";
@@ -954,6 +916,9 @@ const SectionFilterContent = ({
           label,
         });
       }
+
+      const metadataItem = await getMetadataItem(filter);
+      if (metadataItem) filterValues.push(metadataItem);
     }
 
     return filterValues;
@@ -963,8 +928,14 @@ const SectionFilterContent = ({
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
+    filter.metadataTemplateId,
+    metadataFiltersKey,
+    roomsFilter.metadataTemplateId,
+    roomsMetadataFiltersKey,
+    i18n.language,
     roomsFilter.provider,
     roomsFilter.type,
+    isAiHubSection,
     roomsFilter.subjectId,
     roomsFilter.subjectFilter,
     roomsFilter.subjectOwnerId,
@@ -977,7 +948,6 @@ const SectionFilterContent = ({
     // roomsFilter.searchInContent,
     userId,
     isRooms,
-    isAIAgentsFolder,
 
     isContactsPage,
 
@@ -1094,18 +1064,25 @@ const SectionFilterContent = ({
 
     if (isContactsPage) return getContactsFilterData(quotaFilter);
 
+    const templatesRequest = isMetadataFilterAvailable
+      ? getMetadataTemplates().catch(() => [])
+      : null;
+
     let tags = null;
     let providers = [];
-
-    if (isAIAgentsFolder) {
-      tags = await fetchTags();
-    }
 
     if (!isPublicRoom && isRooms) {
       const res = await Promise.all([fetchTags(), fetchThirdPartyProviders()]);
       tags = res[0];
       providers = res[1];
     }
+
+    metadataTemplates.current = (await templatesRequest) ?? [];
+
+    const withMetadataFilter =
+      isMetadataFilterAvailable &&
+      canFilterByMetadata(metadataTemplates.current, hasMetadataFilter);
+
     const connectedThirdParty = [];
 
     providers.forEach((item) => {
@@ -1114,7 +1091,10 @@ const SectionFilterContent = ({
     });
 
     const showThirdPartyFilter =
-      connectedThirdParty.length > 0 && !isTemplatesFolder && !isFormsSection;
+      connectedThirdParty.length > 0 &&
+      !isTemplatesFolder &&
+      !isFormsSection &&
+      !isPrivateSection;
 
     const isLastTypeOptionsRooms = !showThirdPartyFilter && !tags?.length;
 
@@ -1234,13 +1214,6 @@ const SectionFilterContent = ({
                   group: FilterGroups.roomFilterType,
                   label: t("Common:VirtualDataRoom"),
                 };
-              case RoomsType.AIRoom:
-                return {
-                  id: "filter_type-ai",
-                  key: RoomsType.AIRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:AIRoomTitle"),
-                };
               case RoomsType.CustomRoom:
               default:
                 return {
@@ -1309,7 +1282,6 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterSubject,
         label: isTemplatesFolder ? t("TemplateOwner") : t("Common:Contacts"),
         isHeader: true,
-        isLast: isAIAgentsFolder && !tags?.length,
         withMultiItems: true,
       },
       {
@@ -1412,9 +1384,10 @@ const SectionFilterContent = ({
       filterOptions.push(...ownerOptions);
       filterOptions.push(...subjectOptions);
 
-      // The "Forms" section is already scoped to Form Filling Rooms — no
-      // room-type filter is shown there.
-      if (!isFormsSection) filterOptions.push(...typeOptions);
+      // The "Forms" section holds one room type, and the AI Workspace entries
+      // preset theirs — no room-type filter is shown there.
+      if (!isFormsSection && !isPrivateSection && !isAiHubSection)
+        filterOptions.push(...typeOptions);
 
       if (tags?.length > 0) {
         const tagsOptions = tags.map((tag) => ({
@@ -1466,27 +1439,9 @@ const SectionFilterContent = ({
       showStorageInfo &&
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
-    } else if (isAIAgentsFolder) {
-      filterOptions.push(...subjectOptions);
-      filterOptions.push(...ownerOptions);
 
-      if (tags.length > 0) {
-        const tagsOptions = tags.map((tag) => ({
-          key: tag,
-          group: FilterGroups.roomFilterTags,
-          label: tag,
-          isMultiSelect: true,
-        }));
-
-        filterOptions.push({
-          key: FilterGroups.roomFilterTags,
-          group: FilterGroups.roomFilterTags,
-          label: t("Common:Tags"),
-          isHeader: true,
-          isLast: true,
-        });
-
-        filterOptions.push(...tagsOptions);
+      if (withMetadataFilter) {
+        addMetadataGroup(filterOptions, t("Common:SubmenuMetadata"));
       }
     } else {
       // The "Forms" section holds PDF forms only, so its Recent/Favorites
@@ -1527,6 +1482,10 @@ const SectionFilterContent = ({
         filterOptions.push(...roomOption);
       }
 
+      if (withMetadataFilter) {
+        addMetadataGroup(filterOptions, t("Common:SubmenuMetadata"));
+      }
+
       if (!withTypeOptions) {
         const lastHeader = filterOptions.findLast((option) => option.isHeader);
 
@@ -1539,7 +1498,7 @@ const SectionFilterContent = ({
     isPersonalRoom,
     isRooms,
     isFormsSection,
-    isAIAgentsFolder,
+    isPrivateSection,
     isContactsPage,
     isRecentFolder,
     isFavoritesFolder,
@@ -1549,10 +1508,23 @@ const SectionFilterContent = ({
     isTemplatesFolder,
     isCollaborator,
     isVisitor,
+    isMetadataFilterAvailable,
+    hasMetadataFilter,
     getContactsFilterData,
     getAuthorFilter,
     getSharedByFilter,
   ]);
+
+  const renderCustomItem = React.useCallback(
+    ({ group, ...props }) =>
+      group === METADATA_FILTER_GROUP ? (
+        <MetadataFilterSection
+          {...props}
+          templates={metadataTemplates.current}
+        />
+      ) : null,
+    [],
+  );
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [
@@ -1645,11 +1617,6 @@ const SectionFilterContent = ({
       commonOptions.push(owner);
       commonOptions.push(activityDate);
       showStorageInfo && commonOptions.push(sortByStorage);
-    } else if (isAIAgentsFolder) {
-      commonOptions.push(tags);
-      commonOptions.push(owner);
-      commonOptions.push(activityDate);
-      showStorageInfo && commonOptions.push(sortByStorage);
     } else if (isTrash) {
       // commonOptions.push(authorOption);
       // commonOptions.push(creationDate);
@@ -1667,7 +1634,6 @@ const SectionFilterContent = ({
     return commonOptions;
   }, [
     isRooms,
-    isAIAgentsFolder,
     isContactsPage,
 
     t,
@@ -1689,6 +1655,10 @@ const SectionFilterContent = ({
 
         if (group === FilterGroups.roomFilterProviderType) {
           newFilter.provider = null;
+        }
+
+        if (group === METADATA_FILTER_GROUP) {
+          dropMetadataChip(newFilter, key);
         }
 
         if (group === FilterGroups.roomFilterType) {
@@ -1741,41 +1711,6 @@ const SectionFilterContent = ({
         const path = getRoomsListBasePath(newFilter.searchArea);
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
-      } else if (isAIAgentsFolder) {
-        const newFilter = roomsFilter.clone();
-
-        if (group === FilterGroups.roomFilterSubject) {
-          newFilter.subjectId = null;
-          newFilter.excludeSubject = false;
-          newFilter.subjectFilter = null;
-        }
-
-        if (group === FilterGroups.roomFilterOwner) {
-          newFilter.subjectOwnerId = null;
-        }
-
-        if (group === FilterGroups.roomFilterTags) {
-          const newTags = newFilter.tags;
-
-          if (newTags?.length > 0) {
-            const idx = newTags.findIndex((tag) => tag === key);
-
-            if (idx > -1) {
-              newTags.splice(idx, 1);
-            }
-
-            newFilter.tags = newTags.length > 0 ? newTags : null;
-
-            newFilter.withoutTags = false;
-          } else {
-            newFilter.tags = null;
-            newFilter.withoutTags = false;
-          }
-        }
-
-        newFilter.page = 0;
-
-        navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
 
@@ -1795,6 +1730,10 @@ const SectionFilterContent = ({
           newFilter.roomId = null;
         }
 
+        if (group === METADATA_FILTER_GROUP) {
+          dropMetadataChip(newFilter, key);
+        }
+
         newFilter.page = 0;
 
         const path = location.pathname.split("/filter")[0];
@@ -1804,7 +1743,6 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
-      isAIAgentsFolder,
       isContactsPage,
       removeContactsSelectedItem,
       setIsLoading,
@@ -1841,18 +1779,20 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Forms;
       }
 
+      if (isAiHubFolder) {
+        newFilter.searchArea = RoomSearchArea.AiHub;
+        // The sidebar entry's room type is not a filter to clear.
+        newFilter.type = roomsFilter.type;
+      }
+
       const path = getRoomsListBasePath(newFilter.searchArea);
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
-    } else if (isAIAgentsFolder) {
-      const newFilter = RoomsFilter.clean();
-      newFilter.searchArea = RoomSearchArea.AIAgents;
-
-      navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
 
       newFilter.folder = filter.folder;
+      newFilter.folderType = filter.folderType;
 
       const path = location.pathname.split("/filter")[0];
 
@@ -1873,40 +1813,6 @@ const SectionFilterContent = ({
 
     navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
   };
-
-  // AI agents list — primary "New agent" button in the filter bar. Shown only
-  // on the agents root, when AI is ready and the user can manage agents.
-  // (The create-agent quick-action tile is rendered by the shared
-  // quick-actions banner — see useQuickActions / getQuickActionsSection.)
-  // `aiReady` (portal /ai/config) can lag behind the chat-lib profiles, so
-  // treat the presence of profiles as ready too — same signal the agents
-  // EmptyView uses to decide whether to offer agent creation.
-  const { useProfilesStore } = useStores();
-  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
-  const canManageAgents = !!(isUserAdmin || isOwner || isRoomAdmin);
-  const showAgentsCreate =
-    isAIAgentsFolder && (aiReady || hasAiProfiles) && canManageAgents;
-
-  // Local "create agent" action used by the AI Agents filter main button.
-  // Distinct from the `onCreateAgent` prop (from contextOptionsStore, consumed
-  // by getSectionCreateButton): this one dispatches an inline AGENT_CREATE
-  // event scoped to the current folder.
-  const onCreateAgentFromFilter = useCallback(() => {
-    const event = new CustomEvent(Events.AGENT_CREATE, {
-      detail: { parentId: currentFolderId, context: "filter" },
-    });
-    window.dispatchEvent(event);
-  }, [currentFolderId]);
-
-  const agentsMainButtonProps = React.useMemo(
-    () => ({
-      isDropdown: false,
-      model: [],
-      onAction: onCreateAgentFromFilter,
-      text: t("Common:NewAgent"),
-    }),
-    [t, onCreateAgentFromFilter],
-  );
 
   if (showFilterLoader) return <FilterLoader />;
 
@@ -1950,19 +1856,22 @@ const SectionFilterContent = ({
       isContactsGuestsPage={isContactsGuestsPage}
       isRecentFolder={isRecentFolder}
       renderSelector={renderFilterSelector}
+      renderCustomItem={renderCustomItem}
       setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
       getAllRoomGroups={getRoomGroupsForSection}
       roomGroups={roomGroups}
       onFilterByGroup={onFilterByGroup}
       currentGroupId={getPinnedGroupId() ? null : roomsFilter?.groupId}
-      withRoomGroups={(isRoomsFolder || isFormsFolder) && !getPinnedGroupId()}
+      withRoomGroups={
+        (isRoomsFolder || isFormsFolder) &&
+        !isPrivateSection &&
+        !getPinnedGroupId()
+      }
       isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
-      showMainButton={(showAgentsCreate || showMainButton) && isDesktopView}
-      mainButtonProps={
-        showAgentsCreate ? agentsMainButtonProps : mainButtonProps
-      }
+      showMainButton={showMainButton && isDesktopView}
+      mainButtonProps={mainButtonProps}
     />
   );
 
@@ -2010,7 +1919,7 @@ export default inject(
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
     const { user } = userStore;
-    const { standalone, currentDeviceType, aiConfig } = settingsStore;
+    const { standalone, currentDeviceType } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentFolder,
@@ -2021,12 +1930,17 @@ export default inject(
       isTrashFolder: isTrash,
       isTemplatesFolder,
       isSharedWithMeFolder,
-      isAIAgentsFolder,
       isFormsFolder,
+      isAiHubFolder,
+      isAiSectionFolder,
     } = treeFoldersStore;
 
     const isRooms =
-      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
+      isRoomsFolder ||
+      isArchiveFolder ||
+      isTemplatesFolder ||
+      isFormsFolder ||
+      isAiSectionFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet, isDefaultUsersQuotaSet } =
@@ -2038,9 +1952,7 @@ export default inject(
       getSelectedFolder,
       id: selectedFolderId,
     } = selectedFolderStore;
-    const currentFolderId = selectedFolderId;
-
-    const { getFolderModel, onCreateRoom, onCreateAgent } = contextOptionsStore;
+    const { getFolderModel, onCreateRoom } = contextOptionsStore;
 
     const {
       usersStore,
@@ -2083,7 +1995,6 @@ export default inject(
       getFolderModel,
       getContactsModel,
       onCreateRoom,
-      onCreateAgent,
 
       filter,
       roomsFilter,
@@ -2093,17 +2004,13 @@ export default inject(
       isRecentFolder,
       isRooms,
       isTrash,
+      isAiHubFolder,
       isArchiveFolder,
       isPrivacyFolder,
       isTemplatesFolder,
       isIndexing: isIndexedFolder,
       isIndexEditingMode,
       isSharedWithMeFolder,
-      isAIAgentsFolder,
-      aiReady: aiConfig?.aiReady,
-      isUserAdmin: user?.isAdmin,
-      isOwner: user?.isOwner,
-      currentFolderId,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
@@ -2160,6 +2067,7 @@ export default inject(
       "Files",
       "Settings",
       "Common",
+      "Metadata",
       "InfoPanel",
       "People",
       "PeopleTranslations",

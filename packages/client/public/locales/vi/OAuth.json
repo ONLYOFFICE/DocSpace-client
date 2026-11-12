@@ -14,6 +14,8 @@
   "ApplicationsEnabledSuccessfully": "Đã bật các ứng dụng thành công",
   "AppName": "Tên Ứng dụng",
   "Apps": "Các Ứng dụng",
+  "AppsLimitReached": "Bạn đã đạt số lượng ứng dụng tối đa có thể tạo. Hãy xóa một ứng dụng bạn không còn cần để thêm ứng dụng mới.",
+  "AppsLimitReachedWorkspace": "Không gian làm việc này đã đạt số lượng ứng dụng tối đa. Hãy xóa một ứng dụng không còn cần thiết để thêm ứng dụng mới.",
   "AuthButton": "Nút xác thực",
   "AuthenticationMethod": "Phương thức xác thực",
   "AuthorizedApps": "Ứng dụng được ủy quyền",

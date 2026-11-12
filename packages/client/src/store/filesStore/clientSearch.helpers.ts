@@ -178,19 +178,21 @@ async function awaitFilenameRecovery(self: FilesStore): Promise<void> {
   );
 }
 
-// Filters the already-built list items by the client search query. Items
-// arrive with resolved titles (decrypted names swapped in by
-// buildFilesListItems), so matching `item.title` matches what the user sees.
+// Filters the already-built list items by the client search query and, in a
+// private room, orders a name sort by the resolved titles. Items arrive with
+// resolved titles (decrypted names swapped in by buildFilesListItems), so
+// matching `item.title` matches what the user sees.
 export function applyClientSearchImpl(
   self: FilesStore,
   items: TItem[],
 ): TItem[] {
   const query = self.clientSearchQuery?.toLowerCase();
-  if (!query) return items;
+  const inPrivateRoom = !!self.treeFoldersStore.isPrivacyFolder;
+  if (!query && !inPrivateRoom) return items;
 
-  const matched = items.filter((item) =>
-    (item.title ?? "").toLowerCase().includes(query),
-  );
+  const matched = query
+    ? items.filter((item) => (item.title ?? "").toLowerCase().includes(query))
+    : items;
 
   if (self.filter.sortBy !== SortByFieldName.Name) return matched;
 

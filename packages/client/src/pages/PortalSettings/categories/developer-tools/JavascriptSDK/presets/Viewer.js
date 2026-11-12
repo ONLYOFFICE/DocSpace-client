@@ -89,7 +89,7 @@ const VIEWER_EVENT_TYPES = [
 const Viewer = (props) => {
   const { t, theme } = props;
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
 
@@ -253,7 +253,6 @@ const Viewer = (props) => {
                   filterParam={FilesSelectorFilterTypes.ALL}
                   isSelect
                   isDocumentIcon
-                  withAIAgentsTreeFolder
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
@@ -296,6 +295,7 @@ export const Component = inject(({ settingsStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "CreateEditRoomDialog",

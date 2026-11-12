@@ -56,10 +56,13 @@ import type { TRoom } from "../rooms/types";
 
 export type TFile = TFileBase & {
   encrypted?: boolean;
+  startFilling?: boolean;
+  hasMetadataFields?: boolean;
 };
 
 export type TFileEncryptionInfo = {
-  userKeys: Array<{
+  /** Absent for a user without keys: the server does not write a null property. */
+  userKeys?: Array<{
     id: string;
     userId: string;
     publicKey: string;
@@ -75,6 +78,12 @@ export type TFileEncryptionInfo = {
     fileId?: number;
     createOn?: string;
   }>;
+};
+
+/** `FileKeysWrittenDto`, the answer of a file access-entry write. */
+export type TFileKeysWritten = {
+  /** The listed users whose entry was not stored: they cannot read the file. */
+  skippedUserIds: string[];
 };
 
 export type TFileViewAccessibility = {
@@ -131,6 +140,7 @@ export type TShareSettings = {
 
 export type TOpenEditRequest = {
   documentType: string;
+  editorConfig: { mode: string };
   editorUrl: string;
   token: string;
   type: string;
@@ -338,6 +348,8 @@ export type TFilesSettings = {
   extsWebCustomFilterEditing: string[];
   extsWebEdited: string[];
   extsWebEncrypt: string[];
+  /** Whether the connected Document Server can edit encrypted files. */
+  docServiceEncryptionSupported?: boolean;
   extsWebPreviewed: string[];
   extsWebRestrictedEditing: string[];
   extsWebReviewed: string[];

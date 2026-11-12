@@ -180,37 +180,41 @@ checked out, vendored as source, or tracked as a git submodule here.
 - Internationalization support
 - TypeScript types and utilities
 
-**How it is consumed:** this repo depends only on the prebuilt tarball
-`onlyoffice-apps-ui-kit.tgz`, committed at the repository root and referenced
-by each app as `"file:../../onlyoffice-apps-ui-kit.tgz"`. A normal
-`git clone` plus `pnpm install` is all that is needed — there are no
+**How it is consumed:** each app installs the published package from npm,
+[`@onlyoffice/apps-ui-kit`](https://www.npmjs.com/package/@onlyoffice/apps-ui-kit),
+and the apps that render the AI agent also install
+[`@onlyoffice/ai-chat`](https://www.npmjs.com/package/@onlyoffice/ai-chat). A
+normal `git clone` plus `pnpm install` is all that is needed — there are no
 submodules to initialize.
 
-**Updating it:** build and pack the library in the ui-kit repository
+**Updating it:** once a new version is published, bump it in every app and
+commit the manifests together with the lockfile:
+
+```bash
+pnpm -r update @onlyoffice/apps-ui-kit@^<version>
+git add pnpm-lock.yaml packages/*/package.json
+```
+
+**Trying an unpublished build:** pack the library in the ui-kit repository
 (`pnpm build && pnpm pack` — it must be `pnpm pack`, since ui-kit's entry
-points live under `publishConfig`), then run the updater here:
+points live under `publishConfig`), then switch the apps to that tarball:
 
 ```bash
 pnpm run update-ui-kit          # newest pack in ../../docspace-ui-kit-react, or pass a path
-git add onlyoffice-apps-ui-kit.tgz onlyoffice-ai-chat-*.tgz pnpm-lock.yaml packages/*/package.json
+pnpm run update-ai-chat         # the same for ai-chat: newest pack in ../../onlyoffice-ai-chat, or a path
 ```
 
-Do not copy the tarball and run `pnpm install` yourself: the `file:` specifier
-never changes, so pnpm keeps the cached copy and the update silently does not
-happen. The updater rewrites the recorded integrity, drops the extracted copy,
-reinstalls, verifies every installed copy against the tarball, and keeps the
-vendored `@onlyoffice/ai-chat` tarball in step with what ui-kit requires.
-
-**Updating ai-chat alone** (an ai-chat fix that needs no ui-kit rebuild): pack
-it in the ai-chat repository (`npm run pack:docs -- <n>`), then:
+They copy the tarball to the repository root, point every app manifest at it
+(`file:../../<name>.tgz`), reinstall and verify every installed copy against
+the tarball. Do not copy the tarball and run `pnpm install` yourself: once the
+specifier is `file:`, pnpm keeps the cached copy and a new pack under the same
+name silently does not install. The Dockerfiles pick up root `*.tgz` files when
+they exist, so images build in this mode too. To go back to the registry:
 
 ```bash
-pnpm run update-ai-chat         # newest pack in ../../onlyoffice-ai-chat, or pass a path
-git add onlyoffice-ai-chat-*.tgz pnpm-lock.yaml packages/*/package.json
+pnpm -r update @onlyoffice/apps-ui-kit@^<version>   # or @onlyoffice/ai-chat
+rm onlyoffice-apps-ui-kit.tgz                       # or onlyoffice-ai-chat-*.tgz
 ```
-
-It replaces the vendored tarball, repoints every app manifest at the new
-filename, reinstalls and verifies the result the same way.
 
 **Working on the kit itself:** waiting for a build, a pack and an install on
 every edit is the cost of consuming a prebuilt package. `DOCSPACE_UI_KIT_SRC`
@@ -230,7 +234,7 @@ a bare clone is not enough.
 
 It is a dev-server switch only: `vite build` and `next build` both refuse to
 run while the variable is set, because a build must come from the installed
-package. Run the apps once without it before committing a new tarball — source
+package. Run the apps once without it before publishing a ui-kit release — source
 mode does not exercise the stylesheet order, `"use client"`, the exports
 wildcard or the generated types. Details in `.claude/rules/pnpm.md`.
 
@@ -251,7 +255,7 @@ wildcard or the generated types. Details in `.claude/rules/pnpm.md`.
 
 ### Quick Start
 
-> **Note:** The UI component library ships as a prebuilt tarball committed in this repository — there are no git submodules to initialize. See [UI Component Library](#ui-component-library) for details.
+> **Note:** The UI component library is installed from npm — there are no git submodules to initialize. See [UI Component Library](#ui-component-library) for details.
 
 **Terminal 1 - Start backend:**
 ```bash

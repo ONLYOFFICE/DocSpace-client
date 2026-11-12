@@ -43,6 +43,7 @@ import {
   settingsHandler,
   TypeSettings,
   type EncryptedFilesHandlerHandle,
+  type PrivacyroomHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
@@ -57,7 +58,7 @@ const seedUserKey = {
   date: "2026-01-01T00:00:00.000Z",
 };
 
-const TOAST_KEY_FRAGMENT = /Encryption keys are not configured|EncryptionKeysNotConfigured/;
+const TOAST_KEY_FRAGMENT = /Set it up in your profile|EncryptionKeysNotConfigured/;
 
 test.describe("Private room — entry warning toast", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -87,7 +88,7 @@ test.describe("Private room — entry warning toast", () => {
       }),
     );
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     await page.waitForResponse(
       (res) =>
         res.request().method() === "GET" &&
@@ -123,7 +124,7 @@ test.describe("Private room — entry warning toast", () => {
       }),
     );
 
-    await page.goto(`${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
 
     await page.waitForResponse(
       (res) =>
@@ -137,5 +138,242 @@ test.describe("Private room — entry warning toast", () => {
       .getByTestId("toast-content")
       .filter({ hasText: TOAST_KEY_FRAGMENT });
     await expect(toast).toBeHidden();
+  });
+});
+
+test.describe("Entering a private room without keys warns", () => {
+  const LOAD_FAILED = "Could not load your encryption keys";
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Key list could not be loaded, then Retry succeeds", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    const keysHandle: { current: PrivacyroomHandlerHandle | null } = {
+      current: null,
+    };
+
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+        listFails: true,
+        handle: keysHandle,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+
+    const toasts = page.getByTestId("toast-content");
+    const loadFailed = toasts.filter({ hasText: LOAD_FAILED });
+    await expect(loadFailed).toBeVisible({ timeout: 15000 });
+    await expect(toasts.filter({ hasText: TOAST_KEY_FRAGMENT })).toBeHidden();
+    await expect(page.getByTitle(/No access/i)).toHaveCount(0);
+
+    keysHandle.current!.setListFails(false);
+    await loadFailed.getByText("Try again").click();
+
+    await expect(loadFailed).toBeHidden();
+    await expect(
+      page.locator('input[name="passphrase"], #passphrase input').first(),
+    ).toBeVisible({ timeout: 10000 });
+  });
+
+  test("Retry fails", async ({ page, mockRequest, baseUrl }) => {
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+        listFails: true,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+
+    const toasts = page.getByTestId("toast-content");
+    const loadFailed = toasts.filter({ hasText: LOAD_FAILED });
+    await expect(loadFailed).toBeVisible({ timeout: 15000 });
+
+    const secondRead = page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        res.url().endsWith("/privacyroom/keys") &&
+        res.status() === 500,
+    );
+    await loadFailed.getByText("Try again").click();
+    await secondRead;
+
+    // The closed toast leaves while the new one is raised.
+    await expect(loadFailed).toHaveCount(1, { timeout: 10000 });
+    await expect(loadFailed).toBeVisible();
+    await expect(toasts.filter({ hasText: TOAST_KEY_FRAGMENT })).toBeHidden();
+  });
+});
+
+test.describe("A locked key is shown in a private room", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Prompt cancelled on entry, then Unlock from the bar cancelled", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+
+    const passphrase = page
+      .locator('input[name="passphrase"], #passphrase input')
+      .first();
+    const bar = page.getByTestId("private_room_locked_bar");
+    const cancel = page.getByRole("button", { name: "Cancel" });
+
+    // Entry prompt open
+    await expect(passphrase).toBeVisible({ timeout: 15000 });
+    await expect(bar).toHaveCount(0);
+
+    await cancel.click();
+
+    await expect(passphrase).toBeHidden();
+    await expect(bar).toBeVisible();
+    await expect(bar).toContainText("Your encryption key is locked");
+
+    await page.getByTestId("private_room_locked_bar_unlock").click();
+
+    await expect(passphrase).toBeVisible();
+
+    await cancel.click();
+
+    await expect(passphrase).toBeHidden();
+    await expect(bar).toBeVisible();
+  });
+
+  test("User without a key", async ({ page, mockRequest, baseUrl }) => {
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: TOAST_KEY_FRAGMENT }),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("private_room_locked_bar")).toHaveCount(0);
+  });
+});
+
+test.describe("Private room — upload without a key", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Uploader without a key: the file is refused and no bytes are sent", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+    );
+
+    const sessionRequests: string[] = [];
+    page.on("request", (req) => {
+      if (new RegExp(`/files/${ROOM_ID}/session`).test(req.url())) {
+        sessionRequests.push(req.url());
+      }
+    });
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        /\/files\/9100(\?|$)/.test(res.url()) &&
+        res.ok(),
+      { timeout: 15000 },
+    );
+
+    await page.locator("#customFileInput").first().setInputFiles({
+      name: "secret.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("must never leave the browser"),
+    });
+
+    const refusal = page.getByTestId("toast-content").filter({
+      hasText:
+        /Set up your encryption keys in Profile before uploading files to a private room|EncryptionKeysRequiredForUpload/,
+    });
+    await expect(refusal).toBeVisible({ timeout: 10000 });
+    expect(sessionRequests).toEqual([]);
+    expect(filesHandle.current!.getFiles()).toHaveLength(0);
   });
 });

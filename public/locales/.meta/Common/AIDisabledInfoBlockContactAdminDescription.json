@@ -1,23 +1,15 @@
 {
   "key_path": "AIDisabledInfoBlockContactAdminDescription",
-  "content": "Contact the Full admin to activate AI features and chat with your agents, access their knowledge base, and let them run tasks across your apps.",
-  "content_en_sha1_hash": "0433c6f0f511667267c1fd7aacdb6b459ab7594a",
-  "created_at": "2026-08-13T14:36:37.548Z",
-  "updated_at": "2026-08-14T14:58:32.927Z",
+  "content": "Contact the Full admin to activate AI and chat with your agents, access their knowledge base, and let them run tasks across your apps.",
+  "content_en_sha1_hash": "872a4c12c8e80a23bfbb80bf082544d44fee82fd",
+  "created_at": "2026-10-22T16:08:48.758Z",
+  "updated_at": "2026-10-22T16:08:48.758Z",
   "comment": {
-    "text": "Information block description text shown when AI features are disabled, instructing the user to contact their administrator to enable them.",
-    "is_auto": true,
-    "updated_at": "2026-08-13T14:57:20.182Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "@onlyoffice/apps-ui-kit/ai-agent/chat-info-block/index.tsx",
-      "line_number": 118,
-      "context": ")}\n </>\n ))\n // standalone/saas user\n .otherwise(() =>\n t(\"AIDisabledInfoBlockContactAdminDescription\"),\n );\n \n return (\n <PublicRoomBar\n className={styles.chatInfoBlock}",
-      "module": "@onlyoffice/apps-ui-kit"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

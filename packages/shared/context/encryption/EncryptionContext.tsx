@@ -45,6 +45,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 
+import { getUserById } from "../../api/people";
 import {
   SecretStorage,
   registerUnlockHandler,
@@ -54,6 +55,7 @@ import {
 } from "../../services/encryption/secret-storage";
 import {
   getAutoLockTimeoutSeconds,
+  locksWhenTabHidden,
   setAutoLockScope,
 } from "../../services/encryption/auto-lock-preference";
 import {
@@ -73,6 +75,9 @@ import {
   setFilenameCacheScope,
 } from "../../services/encryption/filename-cache";
 import { getEncryptionErrorMessage } from "../../services/encryption/error-i18n";
+import { onMemberKeyTrusted } from "../../services/private-room/member-key-verification";
+import { pendingAccessStore } from "../../services/private-room/pending-access";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type {
   IdentityKeyPair,
   SerializedIdentity,
@@ -83,6 +88,11 @@ export type EncryptionUserKeys = SerializedIdentity & { userId: string };
 export type EncryptionContextValue = {
   isUnlocked: boolean;
   hasConfiguredKey: boolean;
+  /**
+   * Whether the user's key list has been loaded, or failed to load; until
+   * then `hasConfiguredKey` being false says nothing.
+   */
+  keysLoaded: boolean;
   isUnlocking: boolean;
   unlockError: string | null;
   /**
@@ -104,6 +114,8 @@ export type EncryptionContextValue = {
 type EncryptionProviderProps = {
   children: ReactNode;
   userKeys: EncryptionUserKeys | null;
+  /** False while the wrapper is still loading the user's key list. */
+  keysLoaded?: boolean;
   PassphraseDialog?: React.ComponentType<PassphraseDialogProps>;
   KeyChangeDialog?: React.ComponentType<KeyChangeDialogModalProps>;
 };
@@ -134,6 +146,7 @@ const EncryptionContext = createContext<EncryptionContextValue | null>(null);
 export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   children,
   userKeys,
+  keysLoaded = true,
   PassphraseDialog,
   KeyChangeDialog,
 }) => {
@@ -159,9 +172,14 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   const [keyChangeRequest, setKeyChangeRequest] =
     useState<KeyMismatchInfo | null>(null);
-  const keyChangeResolveRef = useRef<
-    ((d: KeyMismatchDecision) => void) | null
-  >(null);
+  // Queue of mismatch requests; the first entry is the one on screen.
+  // Spec: private-rooms/key-management, "Key-change dialog".
+  const keyChangeQueueRef = useRef<
+    Array<{
+      info: KeyMismatchInfo;
+      resolvers: Array<(d: KeyMismatchDecision) => void>;
+    }>
+  >([]);
 
   const hasConfiguredKey = !!userKeys?.publicKey && !!userKeys?.privateKeyEnc;
 
@@ -179,7 +197,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setIsUnlocked(SecretStorage.hasUnlocked(userKeys.userId));
     setFilenameCacheScope(userKeys.userId);
     setAutoLockScope(userKeys.userId);
-  }, [hasConfiguredKey, userKeys?.publicKey, userKeys?.userId]);
+    // Spec: key-management, "Auto-lock timeout presets"
+  }, [
+    hasConfiguredKey,
+    userKeys?.publicKey,
+    userKeys?.privateKeyEnc,
+    userKeys?.userId,
+  ]);
 
   useEffect(() => {
     const userId = userKeys?.userId;
@@ -307,7 +331,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (typeof document === "undefined") return undefined;
     if (autoLockSuspendCount > 0) return undefined;
     const handler = () => {
-      if (getAutoLockTimeoutSeconds() <= 0) return;
+      if (!locksWhenTabHidden()) return;
       if (document.visibilityState === "hidden") {
         SecretStorage.lock();
         clearEncryptedFilenameCache();
@@ -372,13 +396,19 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
         }
         return "refuse";
       }
-      if (keyChangeResolveRef.current) {
-        keyChangeResolveRef.current("refuse");
-        keyChangeResolveRef.current = null;
-      }
       return new Promise<KeyMismatchDecision>((resolve) => {
-        keyChangeResolveRef.current = resolve;
-        setKeyChangeRequest(info);
+        const queue = keyChangeQueueRef.current;
+        const sameKey = queue.find(
+          (entry) =>
+            entry.info.userId === info.userId &&
+            entry.info.newKey === info.newKey,
+        );
+        if (sameKey) {
+          sameKey.resolvers.push(resolve);
+          return;
+        }
+        queue.push({ info, resolvers: [resolve] });
+        if (queue.length === 1) setKeyChangeRequest(info);
       });
     },
     [KeyChangeDialog],
@@ -391,17 +421,79 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     };
   }, [resolveKeyMismatch]);
 
-  const handleKeyChangeAccept = useCallback(() => {
-    keyChangeResolveRef.current?.("accept");
-    keyChangeResolveRef.current = null;
-    setKeyChangeRequest(null);
-  }, []);
+  // A request without the peer's name waits for it, so the dialog never names
+  // the peer by user id unless the lookup fails, as the skipped-member toast.
+  // Spec: private-rooms/key-management, "Key-change dialog"
+  useEffect(() => {
+    if (!keyChangeRequest || keyChangeRequest.displayName) return undefined;
+    const request = keyChangeRequest;
+    let cancelled = false;
+    // The server refuses another profile to some account types; that refusal
+    // is not the page losing access.
+    getUserById(request.userId, undefined, { skipForbidden: true })
+      .then((user) => user?.displayName)
+      .catch(() => undefined)
+      .then((name) => {
+        if (cancelled) return;
+        setKeyChangeRequest((current) =>
+          current === request
+            ? { ...request, displayName: name || request.userId }
+            : current,
+        );
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [keyChangeRequest]);
 
-  const handleKeyChangeRefuse = useCallback(() => {
-    keyChangeResolveRef.current?.("refuse");
-    keyChangeResolveRef.current = null;
-    setKeyChangeRequest(null);
-  }, []);
+  // Spec: private-rooms/room-membership, "Trusting a changed key wraps what the member missed"
+  useEffect(
+    () =>
+      onMemberKeyTrusted((memberId, scopeUserId) => {
+        const identity = SecretStorage.getCached(scopeUserId);
+        if (!identity || pendingAccessStore.listForUser(memberId).length === 0)
+          return;
+        void Promise.all([
+          import("../../services/private-room/room-member-flows"),
+          getUserById(memberId)
+            .then((user) => user?.displayName)
+            .catch(() => undefined),
+        ])
+          .then(([{ rewrapPendingAccessOfMember }, displayName]) =>
+            rewrapPendingAccessOfMember({
+              t,
+              member: { id: memberId, displayName },
+              currentUserId: scopeUserId,
+              identity,
+            }),
+          )
+          .then((notices) => {
+            for (const { level, text } of notices) toastr[level](text);
+          });
+      }),
+    [t],
+  );
+
+  // An answer settles only the request it was given for, so a second click
+  // or a repeated key cannot answer the request shown after it.
+  // Spec: private-rooms/key-management, "Key-change dialog"
+  const settleKeyChange = useCallback(
+    (decision: KeyMismatchDecision, answered: KeyMismatchInfo) => {
+      const queue = keyChangeQueueRef.current;
+      const head = queue[0];
+      if (
+        !head ||
+        head.info.userId !== answered.userId ||
+        head.info.newKey !== answered.newKey
+      ) {
+        return;
+      }
+      queue.shift();
+      for (const resolve of head.resolvers) resolve(decision);
+      setKeyChangeRequest(queue[0]?.info ?? null);
+    },
+    [],
+  );
 
   const handlePassphraseSubmit = useCallback(
     async (passphrase: string, rememberDevice?: boolean): Promise<void> => {
@@ -443,6 +535,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     () => ({
       isUnlocked,
       hasConfiguredKey,
+      keysLoaded,
       isUnlocking,
       unlockError,
       publicKey,
@@ -457,6 +550,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [
       isUnlocked,
       hasConfiguredKey,
+      keysLoaded,
       isUnlocking,
       unlockError,
       publicKey,
@@ -483,8 +577,11 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           onUnlocked={handlePassphraseUnlocked}
         />
       )}
-      {KeyChangeDialog && keyChangeRequest && (
+      {KeyChangeDialog && keyChangeRequest?.displayName && (
         <KeyChangeDialog
+          // A new instance per request takes the focus and shows its own
+          // fingerprints.
+          key={`${keyChangeRequest.userId}:${keyChangeRequest.newKey}`}
           visible
           userId={keyChangeRequest.userId}
           displayName={keyChangeRequest.displayName}
@@ -492,8 +589,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           newPublicKey={keyChangeRequest.newKey}
           knownFirstSeenAt={keyChangeRequest.knownFirstSeenAt}
           knownLastSeenAt={keyChangeRequest.knownLastSeenAt}
-          onAccept={handleKeyChangeAccept}
-          onRefuse={handleKeyChangeRefuse}
+          onAccept={() => settleKeyChange("accept", keyChangeRequest)}
+          onRefuse={() => settleKeyChange("refuse", keyChangeRequest)}
         />
       )}
     </EncryptionContext.Provider>

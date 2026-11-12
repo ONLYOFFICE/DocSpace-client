@@ -28,6 +28,8 @@
   "UserTariffLimitHeader": "The limit is reached for the number of admins: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "All users will be added with User permissions only. To be able to add further admins, contact the Full admin to upgrade the tariff plan.",
   "UserTariffReachedForAdmins": "All users will be added with User permissions only. To be able to add further admins, <1>click here</1> to upgrade your tariff plan.",
+  "UserTypeLoweredDescription": "Some actions on this page may no longer be available to you.",
+  "UserTypeLoweredHeader": "Your user type has been changed",
   "WalletLowBalanceContactPayer": "Contact the Payer (<1>{{payerContact}}</1>) to top up the wallet and avoid interruptions to paid services.",
   "WalletLowBalanceDescription": "Top up your wallet to avoid interruptions to paid services. <1>Top up</1>",
   "WalletLowBalanceHeader": "Your credits are running low: {{balance}}"

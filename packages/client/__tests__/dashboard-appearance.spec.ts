@@ -40,6 +40,7 @@ import {
   aiConfigHandler,
   freeQuotaHandler,
   quotaHandler,
+  rootHandler,
   selfActivationStatusHandler,
   selfByTypeHandler,
   settingsHandler,
@@ -81,6 +82,7 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  */
 
 const DASHBOARD_URL = "/dashboard";
+const FIRST_RENDER_TIMEOUT = 15_000;
 
 /**
  * The clock every case is taken at.
@@ -101,7 +103,6 @@ test.use({ timezoneId: "UTC" });
 const PROFILE_CARD = '[data-tour-id="dashboard-profile"]';
 const CREATE_SECTION = '[data-tour-id="dashboard-create"]';
 const INTEGRATIONS_CARD = '[data-tour-id="dashboard-integrations"]';
-const AGENTS_CARD_BUTTON = '[data-testid="dashboard-app-open-ai-agents"]';
 const DEVTOOLS_CARD = '[data-tour-id="dashboard-devtools"]';
 const APPS_SECTION = '[data-tour-id="dashboard-apps"]';
 const APP_CARDS = '[data-tour-id^="dashboard-app-card-"]';
@@ -110,17 +111,10 @@ const APP_CARDS = '[data-tour-id^="dashboard-app-card-"]';
 // `title` into a custom tooltip in the browser, so no title attribute is left
 // to match on.
 const PROFILE_RENAME_BUTTON = '[data-testid="dashboard-profile-rename"]';
-
-/**
- * The sidebar's AI Agents entry, matched by its label rather than by its
- * `data-item-id` — that id is the tree folder's, which says nothing about which
- * app it is. A plain string rather than an anchored regex: the item's text
- * content carries the newlines of its inlined icon markup, and only the string
- * form of `hasText` normalizes those away. Nothing else in the sidebar is
- * labelled with it, and the agents sub-items carry their own labels.
- */
-const sidebarAgentsItem = (page: Page) =>
-  page.locator("[data-item-id]").filter({ hasText: "AI agents" });
+// The reader's portal type on the profile card, and the help icon whose tooltip
+// describes it.
+const PROFILE_TYPE = '[data-testid="dashboard-profile-type"]';
+const PROFILE_TYPE_HELP = '[data-testid="dashboard-profile-type-help"]';
 
 /** The plan line, in either of the two wordings the header has for it. */
 const planLine = (page: Page) =>
@@ -134,6 +128,8 @@ type Role = {
   /** Names the case, in the test title and in the screenshot file name. */
   key: string;
   userType: UserType;
+  /** What the profile card names the type, in English. */
+  typeName: string;
   /** Portal admins and the owner: the profile card and the plan line. */
   isAdminOrOwner: boolean;
   /** The set allowed to create rooms — room admins are in it, users are not. */
@@ -145,6 +141,7 @@ const ROLES: Role[] = [
   {
     key: "owner",
     userType: "owner",
+    typeName: "Owner",
     isAdminOrOwner: true,
     canCreateRooms: true,
     isGuest: false,
@@ -152,6 +149,7 @@ const ROLES: Role[] = [
   {
     key: "full-admin",
     userType: "admin",
+    typeName: "Full admin",
     isAdminOrOwner: true,
     canCreateRooms: true,
     isGuest: false,
@@ -160,6 +158,7 @@ const ROLES: Role[] = [
     // Rooms are theirs to create, but the portal's settings and plan are not.
     key: "room-admin",
     userType: "roomAdmin",
+    typeName: "Room admin",
     isAdminOrOwner: false,
     canCreateRooms: true,
     isGuest: false,
@@ -167,6 +166,7 @@ const ROLES: Role[] = [
   {
     key: "user",
     userType: "regular",
+    typeName: "User",
     isAdminOrOwner: false,
     canCreateRooms: false,
     isGuest: false,
@@ -175,6 +175,7 @@ const ROLES: Role[] = [
     // Cannot create or upload anywhere, and holds no AI-capable role.
     key: "guest",
     userType: "visitor",
+    typeName: "Guest",
     isAdminOrOwner: false,
     canCreateRooms: false,
     isGuest: true,
@@ -384,7 +385,9 @@ const openDashboard = async (
 
   // Past the loader: everything below is decided by stores that are still
   // loading while the skeleton is up.
-  await expect(page.locator(CREATE_SECTION)).toBeVisible();
+  await expect(page.locator(CREATE_SECTION)).toBeVisible({
+    timeout: FIRST_RENDER_TIMEOUT,
+  });
 };
 
 /**
@@ -501,7 +504,6 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
   // nowhere. A feature that is switched off is absent; a feature that is not
   // yours is visible but closed.
   const isDevToolsOffered = !devToolsLimited || role.isAdminOrOwner;
-  const canOpenDevTools = isDevToolsOffered && !role.isGuest;
 
   test(name, async ({ page, baseUrl, mockRequest }) => {
     mockRequest.use(
@@ -514,6 +516,8 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       plan.tariff(),
       plan.quota(),
       aiConfigHandler(TEST_PORT, !ai.enabled),
+      // The server serves the "AI rooms" root to everyone but a guest.
+      rootHandler(TEST_PORT, { withAiHub: !role.isGuest }),
     );
 
     await openDashboard(page, baseUrl, viewport);
@@ -524,6 +528,14 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     await expect(page.locator(PROFILE_CARD)).toHaveCount(1);
     await expect(page.locator(PROFILE_RENAME_BUTTON)).toHaveCount(
       role.isAdminOrOwner ? 1 : 0,
+    );
+
+    // The card names the reader's type, as the profile page does, with a help
+    // icon describing it - for every type but the owner's, which has no
+    // description to show.
+    await expect(page.locator(PROFILE_TYPE)).toHaveText(role.typeName);
+    await expect(page.locator(PROFILE_TYPE_HELP)).toHaveCount(
+      role.userType === "owner" ? 0 : 1,
     );
 
     // The plan line is the admin/owner-only part of the header, and it names
@@ -566,8 +578,9 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     // inside it, appear together - both are offered on the portal switch alone,
     // so a guest is shown them and finds out on the way in. Docs Connect is
     // SaaS-only on top of that, whoever is asking, and the "or connect Docs"
-    // link is a navigation rather than a description, so it needs the section
-    // to actually open for its reader.
+    // link is a navigation rather than a description, so it needs the Docs
+    // Connect page to actually open for its reader - portal admins and the
+    // owner only.
     await expect(page.locator(DEVTOOLS_CARD)).toHaveCount(
       isDevToolsOffered ? 1 : 0,
     );
@@ -575,7 +588,7 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       !edition.standalone && isDevToolsOffered ? 1 : 0,
     );
     await expect(page.getByText(/or connect Docs/)).toHaveCount(
-      !edition.standalone && canOpenDevTools ? 1 : 0,
+      !edition.standalone && role.isAdminOrOwner ? 1 : 0,
     );
 
     // The chat is hidden rather than disabled where it cannot be held: a portal
@@ -585,22 +598,14 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       page.getByRole("button", { name: "AI Chat", exact: true }),
     ).toHaveCount(ai.enabled && !role.isGuest ? 1 : 0);
 
-    // A portal with AI switched off has no agents to open either, so the app is
-    // dropped from both the dashboard and the sidebar catalog rather than left
-    // pointing at a dead end. With AI on it is there for everyone, and only its
-    // button is worded by the create right.
-    if (viewport.withSidebar)
-      await expect(sidebarAgentsItem(page)).toHaveCount(ai.enabled ? 1 : 0);
-
-    if (ai.enabled) {
-      await expect(page.locator(AGENTS_CARD_BUTTON)).toHaveText(
-        role.canCreateRooms ? "Create AI agent" : "Open",
-      );
-    } else {
-      await expect(page.locator(AGENTS_CARD_BUTTON)).toHaveCount(0);
-    }
-
-    await expect(page.locator(APP_CARDS)).toHaveCount(ai.enabled ? 4 : 3);
+    // The "AI rooms" card joins the three apps where the sidebar has the
+    // section: AI services on and the root served, which a guest never is.
+    await expect(page.locator(APP_CARDS)).toHaveCount(
+      ai.enabled && !role.isGuest ? 4 : 3,
+    );
+    await expect(
+      page.locator('[data-tour-id="dashboard-app-card-ai-hub"]'),
+    ).toHaveCount(ai.enabled && !role.isGuest ? 1 : 0);
     await expectFilledRows(page, viewport.columns);
 
     if (!withScreenshot) return;

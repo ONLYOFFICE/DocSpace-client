@@ -84,6 +84,8 @@ class OformsStore {
 
   listRequestId = 0;
 
+  purposesRequestId = 0;
+
   oformsLoadError = false;
 
   oformsNetworkError = false;
@@ -435,15 +437,26 @@ class OformsStore {
   fetchPurposes = async (locale: string, extension: string) => {
     const url = combineUrl(this.oformsApiRoot, "/purposes");
 
+    this.purposesRequestId += 1;
+    const requestId = this.purposesRequestId;
+
+    let purposes: TOformPurpose[] = [];
+
     try {
-      this.setPurposes(await getOformPurposes(url, locale, extension));
+      purposes = await getOformPurposes(url, locale, extension);
     } catch {
       // Same as the locales: the taxonomy fails together with the list it
       // filters, and the error screen speaks for both.
-      this.setPurposes([]);
-    } finally {
-      this.setCategoryFilterLoaded(true);
     }
+
+    // A tab or language switched mid-flight answers for another type or
+    // locale, so only the latest request may replace the categories.
+    if (requestId !== this.purposesRequestId) return;
+
+    runInAction(() => {
+      this.setPurposes(purposes);
+      this.setCategoryFilterLoaded(true);
+    });
   };
 
   fetchOformsWithPurposes = (filter: OformsFilter) =>

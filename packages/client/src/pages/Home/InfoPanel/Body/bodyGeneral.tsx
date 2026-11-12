@@ -67,12 +67,12 @@ const InfoPanelBodyGeneral = ({
   getIsFiles,
   getIsRooms,
   getIsForms,
-  getIsAIAgent,
   getIsTrash,
 
   infoPanelItemsList,
   enablePlugins,
   isRecentFolder,
+  isPrivacyFolder,
 
   maxImageUploadSize,
 
@@ -88,12 +88,10 @@ const InfoPanelBodyGeneral = ({
   onChangeFile,
   setImage,
   checkIsExpiredLinkAsync,
-  editAgentDialogProps,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
   const isForms = getIsForms();
-  const isAgents = getIsAIAgent();
   const isTrash = getIsTrash();
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
@@ -125,10 +123,18 @@ const InfoPanelBodyGeneral = ({
         selection,
         isTrash,
         isRecentFolder,
+        isPrivacyFolder,
         enablePlugins,
         infoPanelItemsList,
       }),
-    [selection, isTrash, isRecentFolder, enablePlugins, infoPanelItemsList],
+    [
+      selection,
+      isTrash,
+      isRecentFolder,
+      isPrivacyFolder,
+      enablePlugins,
+      infoPanelItemsList,
+    ],
   );
 
   const currentView = useMemo(() => {
@@ -172,7 +178,6 @@ const InfoPanelBodyGeneral = ({
           isFiles={isFiles}
           isForms={isForms}
           isTemplatesRoom={isTemplatesRoom}
-          isAgents={isAgents}
           infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
@@ -217,7 +222,6 @@ const InfoPanelBodyGeneral = ({
 
       {avatarEditorDialogVisible &&
       !editRoomDialogProps.visible &&
-      !editAgentDialogProps.visible &&
       !createRoomDialogProps.visible &&
       !Array.isArray(selection) ? (
         <AvatarEditorDialog

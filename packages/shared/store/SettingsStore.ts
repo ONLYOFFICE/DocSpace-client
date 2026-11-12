@@ -206,9 +206,6 @@ class SettingsStore {
 
   isDesktopClientInit = false;
 
-  // isDesktopEncryption: desktopEncryption;
-  isEncryptionSupport = false;
-
   legacyEncryptionKeys: { [key: string]: string | boolean } = {};
 
   roomsMode = false;
@@ -374,6 +371,13 @@ class SettingsStore {
 
   aiConfig: Nullable<TAIConfig> = null;
 
+  /**
+   * Whether AI is set up on the portal, as the AI chat decides it: a chat
+   * profile exists (standalone) or the AI service is on (SaaS). `null` while
+   * it is not known yet; set by the client from inside the AI providers.
+   */
+  aiReady: Nullable<boolean> = null;
+
   /** Comes from the settings response, so a missed socket event is recovered. */
   walletLowBalance = false;
 
@@ -488,6 +492,12 @@ class SettingsStore {
 
   get licenseAgreementsUrl() {
     return this.externalResources?.common?.entries.license;
+  }
+
+  // The sign-up page links the same two entries: `license` as the terms,
+  // `legalterms` as the privacy statement.
+  get privacyPolicyUrl() {
+    return this.externalResources?.common?.entries.legalterms;
   }
 
   get ldapSettingsUrl() {
@@ -984,10 +994,9 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get docspaceManagingRoomsHelpUrl() {
-    return this.helpCenterDomain &&
-      this.helpCenterEntries?.docspacemanagingrooms
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
+  get customFilterHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.customfilter
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.customfilter}`
       : this.helpCenterDomain;
   }
 
@@ -1170,6 +1179,13 @@ class SettingsStore {
     return this.tenantStatus === TenantStatus.PortalDeactivate;
   }
 
+  // A portal blocked by the retention policy refuses every API request but
+  // settings, the confirm-link check and its own unblocking, and nobody can
+  // sign in to it, so the client treats it like a deactivated one.
+  get isPortalBlocked() {
+    return this.tenantStatus === TenantStatus.PortalBlocked;
+  }
+
   get isPortalRestoring() {
     return this.tenantStatus === TenantStatus.PortalRestore;
   }
@@ -1180,7 +1196,7 @@ class SettingsStore {
     try {
       await Promise.all([this.getPortalSettings(), this.getAppearanceTheme()]);
 
-      if (!this.isPortalDeactivate) {
+      if (!this.isPortalDeactivate && !this.isPortalBlocked) {
         await this.getBuildVersionInfo();
       }
     } catch (error) {
@@ -1246,15 +1262,6 @@ class SettingsStore {
       if (axios.isCancel(e)) return;
       throw e;
     }
-  };
-
-  setIsEncryptionSupport = (isEncryptionSupport: boolean) => {
-    this.isEncryptionSupport = isEncryptionSupport;
-  };
-
-  getIsEncryptionSupport = async () => {
-    const isEncryptionSupport = await api.files.getIsEncryptionSupport();
-    this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
   updateLegacyEncryptionKeys = (encryptionKeys: {
@@ -1761,6 +1768,10 @@ class SettingsStore {
   // starting value, and the one state a non-null setter could not restore.
   setAIConfig = (config: Nullable<TAIConfig>) => {
     this.aiConfig = config;
+  };
+
+  setAiReady = (aiReady: Nullable<boolean>) => {
+    this.aiReady = aiReady;
   };
 
   setInterfaceDirection = (direction: string) => {

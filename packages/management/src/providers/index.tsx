@@ -42,6 +42,7 @@ import type {
 } from "@docspace/shared/api/settings/types";
 import type { ThemeKeys } from "@docspace/shared/enums";
 import { RootTooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
+import ForeignTextGuard from "@docspace/shared/components/foreign-text-guard";
 import { ErrorBoundary } from "@onlyoffice/apps-ui-kit/providers/error-boundary";
 import { TranslationProvider } from "@onlyoffice/apps-ui-kit/providers/translation";
 import type {
@@ -53,9 +54,12 @@ import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { ApiProvider } from "@onlyoffice/apps-ui-kit/providers/api";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { installLatinDigits } from "@docspace/shared/utils/latin-digits";
 
 import StoreProvider from "./StoreProvider";
 import { AppStateProvider } from "./AppStateProvider";
+
+installLatinDigits();
 
 export type TContextData = {
   user: TUser | undefined;
@@ -109,6 +113,7 @@ const Providers = ({ children, contextData }: TProviders) => {
             <AppStateProvider {...contextData}>
               <StoreProvider>
                 <RootTooltip />
+                <ForeignTextGuard />
                 {children}
               </StoreProvider>
             </AppStateProvider>

@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { Page } from "@playwright/test";
+
 import {
   filesSettingsHandler,
   selfActivationStatusHandler,
@@ -33,13 +35,46 @@ import {
   updateUserCultureHandler,
   webPluginsHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import {
+  expectScreenshot,
+  type WorkerFixture,
+} from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "../fixtures/base";
 
 const PLUGIN_NAME = "locale-sample";
 const PLUGIN_TESTID = `plugin_${PLUGIN_NAME}`;
 const PLUGINS_URL = "/portal-settings/integration/plugins";
+const PLUGIN_SDK_URL = "/developer-tools/plugin-sdk";
 const PROFILE_URL = "/portal-settings/profile/login";
+
+const switchLanguage = async (
+  page: Page,
+  mockRequest: WorkerFixture,
+  baseUrl: string,
+  culture: string,
+) => {
+  await page.goto(`${baseUrl}${PROFILE_URL}`);
+
+  const languageSelector = page.getByTestId("language_combo_box").first();
+  await expect(languageSelector).toBeVisible();
+  await languageSelector.click();
+
+  mockRequest.use(
+    updateUserCultureHandler(TEST_PORT, culture),
+    selfHandlerWithCulture(TEST_PORT, culture),
+  );
+
+  await page.getByTestId(`drop_down_item_${culture}`).first().click();
+
+  await page.context().addCookies([
+    {
+      name: "asc_language",
+      value: culture,
+      domain: "localhost",
+      path: "/",
+    },
+  ]);
+};
 
 test.describe("Locale Sample Plugin — plugin metadata localization", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -314,6 +349,70 @@ test.describe("Locale Sample Plugin — plugin metadata localization", () => {
       "desktop",
       "plugins-locale",
       "plugins-locale-fallback-en-settings.png",
+    ]);
+  });
+});
+
+test.describe("Locale Sample Plugin — Plugin SDK samples localization", () => {
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+      filesSettingsHandler(TEST_PORT),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      webPluginsHandler(TEST_PORT, "withSystemLocaleSample"),
+    );
+  });
+
+  test("should display translated name and description for az locale", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await switchLanguage(page, mockRequest, baseUrl, "az");
+
+    await page.goto(`${baseUrl}${PLUGIN_SDK_URL}`);
+    await expect(
+      page.getByTestId(`${PLUGIN_NAME}_go_to_repo_button`),
+    ).toBeVisible();
+
+    await expect(
+      page.getByText("Lokal nümunəsi", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Plagin lokalizasiyasını nümayiş etdirən nümunə plagin"),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Sample plugin demonstrating plugin localization"),
+    ).toHaveCount(0);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-locale",
+      "plugin-sdk-locale-az.png",
+    ]);
+  });
+
+  test("should fall back to English name and description for unsupported locale", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await switchLanguage(page, mockRequest, baseUrl, "lv");
+
+    await page.goto(`${baseUrl}${PLUGIN_SDK_URL}`);
+    await expect(
+      page.getByTestId(`${PLUGIN_NAME}_go_to_repo_button`),
+    ).toBeVisible();
+
+    await expect(page.getByText(PLUGIN_NAME, { exact: true })).toBeVisible();
+    await expect(
+      page.getByText("Sample plugin demonstrating plugin localization"),
+    ).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-locale",
+      "plugin-sdk-locale-fallback-en.png",
     ]);
   });
 });

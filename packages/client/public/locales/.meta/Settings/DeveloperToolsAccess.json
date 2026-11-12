@@ -3,7 +3,7 @@
   "content": "Developer Tools visibility",
   "content_en_sha1_hash": "aa67b7688499b1efb91ddac3bfd42263f8936a19",
   "created_at": "2026-08-31T18:23:40.899Z",
-  "updated_at": "2026-08-31T20:35:26.998Z",
+  "updated_at": "2026-10-21T10:17:45.808Z",
   "comment": {
     "text": "A label for a settings item in the security access portal that controls the visibility of developer tools.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 229,
+      "line_number": 246,
       "context": "{\n id: \"portal-settings_catalog-access-dev-tools\",\n key: \"1-0-3\",\n icon: \"\",\n link: \"access-dev-tools\",\n tKey: \"DeveloperToolsAccess\",\n },\n {\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",",
       "module": "/packages/client"
     }

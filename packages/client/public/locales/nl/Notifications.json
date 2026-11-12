@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Badges markeren bestandsactiviteit zoals uploads, bewerkingen en gedeelde bestanden in de apps {{files}}, {{rooms}}, {{forms}} en {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Badges markeren bestandsactiviteit zoals uploads, bewerkingen en gedeelde bestanden in de apps {{files}}, {{rooms}}, {{forms}} en AI-agenten.",
   "AdminSetupRequired": "Admin setup vereist",
   "Badges": "Badges",
   "DailyFeed": "Dagelijkse {{organizationName}} {{productName}} feed",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Deze gebruikersaccount wordt geladen vanuit LDAP. Het e-mailadres van de gebruiker is niet gespecificeerd, en het huidige adres is automatisch gegenereerd en kan niet worden gebruikt om notificaties te verzenden.",
   "NotConfigured": "Niet geconfigureerd",
   "Notifications": "Meldingen",
-  "RoomsActivityDescription": "Ontvang direct e-mailmeldingen over nieuw gedeelde bestanden en mappen en over activiteit in {{files}}, {{rooms}}, {{forms}} en {{aiAgents}}.",
-  "RoomUpdateNotify": "Activiteit in {{files}}, {{rooms}}, {{forms}} en {{aiAgents}}",
+  "RoomsActivityDescription": "Ontvang direct e-mailmeldingen over nieuw gedeelde bestanden en mappen en over activiteit in {{files}}, {{rooms}}, {{forms}} en AI-agenten.",
+  "RoomUpdateNotify": "Activiteit in {{files}}, {{rooms}}, {{forms}} en AI-agenten",
   "SettingUpNotifications": "Meldingsinstellingen",
   "SuccessConnected": "{{serviceName}} is succesvol verbonden als notificatiekanaal. U ontvangt nu updates daar.",
   "SuccessDisconnected": "{{serviceName}} is succesvol losgekoppeld als notificatiekanaal. Er worden geen notificaties meer naar toe gestuurd.",

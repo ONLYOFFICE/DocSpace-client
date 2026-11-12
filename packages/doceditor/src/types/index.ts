@@ -38,6 +38,7 @@ import {
   TFilesSettings,
   TGetReferenceData,
   TGetReferenceDataRequest,
+  TOpenEditRequest,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -46,6 +47,8 @@ import { TSettings } from "@docspace/shared/api/settings/types";
 import { HeaderProps, TBreadCrumb } from "@onlyoffice/apps-ui-kit/components/selector";
 import type {
   TSelectedFileInfo,
+  TFilesSelectorFile,
+  TFilesSelectorLoadedFiles,
   FilesSettingsDto,
   FolderDtoInteger,
   SdkFolderType,
@@ -233,6 +236,8 @@ export type TError = {
   status?: "not-found" | "access-denied" | number | string;
   type?: string;
   editorUrl?: string;
+  /** What actually failed, for the error report only; never shown. */
+  cause?: string;
 };
 
 export type TResponse =
@@ -250,6 +255,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      /** Whether the connected Document Server can edit encrypted files. */
+      docServiceEncryptionSupported?: boolean;
     }
   | {
       error: TError;
@@ -265,6 +272,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+      /** False when the server refused an encrypted file for that reason. */
+      docServiceEncryptionSupported?: false;
     };
 
 export type EditorProps = {
@@ -279,6 +288,8 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
+  /** Whether the connected Document Server can edit encrypted files. */
+  docServiceEncryptionSupported?: boolean;
   organizationName?: string;
   shareKey?: string;
 
@@ -290,6 +301,7 @@ export type EditorProps = {
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
+  onAIRequestStorageFile?: () => Promise<TSelectedFileInfo | null>;
   onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   disconnectUsers?: () => Promise<void>;
@@ -326,7 +338,7 @@ export interface SelectFolderDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -366,7 +378,7 @@ export interface SelectFileDialogProps {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity
@@ -375,6 +387,7 @@ export interface SelectFileDialogProps {
     isDisabledFolder?: boolean,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => boolean;
   isVisible: boolean;
   onClose: () => void;
@@ -389,7 +402,13 @@ export interface SelectFileDialogProps {
     selectedFileInfo: TSelectedFileInfo,
     isInsideKnowledge?: boolean,
     isInsideResultStorage?: boolean,
+    isInsidePrivateRoom?: boolean,
   ) => void | Promise<void>;
+  onFilesLoaded?: (
+    files: TFilesSelectorFile[],
+    context: TFilesSelectorLoadedFiles,
+  ) => void;
+  disabledItems?: (string | number)[];
   fileInfo: TFile;
   filesSettings: FilesSettingsDto;
   selectedFolderId?: string | number;
@@ -466,6 +485,15 @@ export type TDocEditor = {
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
   createConnector?: () => TEditorConnector;
+  // Called with the payload the editor sent in its own request event, extended
+  // with the chosen file's url, type and token.
+  insertImage: (data: object) => void;
+  setRequestedSpreadsheet: (data: object) => void;
+  setRequestedDocument: (data: object) => void;
+  setReferenceSource: (data: TGetReferenceDataRequest) => void;
+  refreshFile: (config: TOpenEditRequest) => void;
+  denyEditingRights: (message?: string) => void;
+  downloadAs: (format?: string) => void;
 };
 
 export type TEditorConnector = {
@@ -504,7 +532,7 @@ export type StartFillingSelectorDialogProps = {
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | "agents" | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | FileEntryDtoIntegerAllOfSecurity

@@ -37,18 +37,23 @@ vi.mock("@docspace/shared/api/files", async (importOriginal) => {
     uploadChunkSequential: vi.fn(),
     uploadChunkParallel: vi.fn(),
     finalizeUploadSession: vi.fn(),
+    abortUploadSession: vi.fn(),
     copyToFolder: vi.fn(),
     moveToFolder: vi.fn(),
     fileCopyAs: vi.fn(),
     checkIsFileExist: vi.fn(),
     setFileEncryptionKeys: vi.fn(),
+    deleteFile: vi.fn(),
+    getProgress: vi.fn(),
     getFileEncryptionAccess: vi.fn(),
     getFileConversationProgress: vi.fn(),
+    removeFiles: vi.fn(),
   };
 });
 
 vi.mock("@docspace/shared/api/privacy", () => ({
   getRoomEncryptionKeys: vi.fn(),
+  getFilePublicKeys: vi.fn(),
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => {
@@ -68,6 +73,7 @@ vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   subscribeFilenameCache: vi.fn(),
   resolveDisplayTitle: ({ title }: { title?: string }) => title,
   rememberEncryptedFilename: vi.fn(),
+  forgetEncryptedFilename: vi.fn(),
 }));
 
 vi.mock("SRC_DIR/helpers/info-panel", () => ({
@@ -100,14 +106,15 @@ vi.mock("@docspace/shared/utils/getOperationProgress", () => ({
 // eslint-disable-next-line import/first
 import UploadDataStore from "../../UploadDataStore";
 // eslint-disable-next-line import/first
-import type { TUploadFile } from "../helpers";
+import type { TUploadFile, TUploadTarget } from "../helpers";
 // eslint-disable-next-line import/first
 import type { TFile } from "@docspace/shared/api/files/types";
+// eslint-disable-next-line import/first
+import { RoomsType } from "@docspace/shared/enums";
 // eslint-disable-next-line import/first
 import { createTestFilesStore } from "../../filesStore/__tests__/testHarness";
 // eslint-disable-next-line import/first
 import {
-  fakeAiRoomStore,
   fakeFilesSettingsStore,
   fakeSelectedFolderStore,
   fakeSettingsStore,
@@ -132,7 +139,6 @@ export type UploadFakeStores = {
   primaryProgressDataStore: FakeStore;
   dialogsStore: FakeStore;
   filesSettingsStore: FakeStore;
-  aiRoomStore: FakeStore;
   userStore: FakeStore;
 };
 
@@ -145,10 +151,10 @@ const defaultFakes = (): UploadFakeStores => ({
   selectedFolderStore: {
     ...fakeSelectedFolderStore(),
     roomType: null,
-    isAIRoom: false,
   },
   secondaryProgressDataStore: {
     setSecondaryProgressBarData: vi.fn(),
+    isOperationStopped: vi.fn(() => false),
     secondaryOperationsArray: [],
   },
   primaryProgressDataStore: {
@@ -173,10 +179,6 @@ const defaultFakes = (): UploadFakeStores => ({
     canConvert: vi.fn(() => false),
     hideConfirmConvertSave: false,
     storeOriginalFiles: false,
-  },
-  aiRoomStore: {
-    ...fakeAiRoomStore(),
-    knowledgeId: null,
   },
   userStore: fakeUserStore(),
 });
@@ -209,7 +211,6 @@ export const createTestUploadDataStore = (
       fakes.primaryProgressDataStore,
       fakes.dialogsStore,
       fakes.filesSettingsStore,
-      fakes.aiRoomStore,
       fakes.userStore,
     ] as unknown as ConstructorParameters<typeof UploadDataStore>),
   );
@@ -249,6 +250,27 @@ export const makeFileInfo = (overrides: Partial<TFile> = {}): TFile =>
     ...overrides,
   }) as unknown as TFile;
 
+export const makeUploadTarget = (
+  overrides: Partial<TUploadTarget> = {},
+): TUploadTarget => ({
+  folderId: 1,
+  isPrivate: false,
+  roomType: null,
+  encryptionRoomId: null,
+  ...overrides,
+});
+
+export const makePrivateUploadTarget = (
+  overrides: Partial<TUploadTarget> = {},
+): TUploadTarget =>
+  makeUploadTarget({
+    folderId: 50,
+    isPrivate: true,
+    roomType: RoomsType.CustomRoom,
+    encryptionRoomId: 50,
+    ...overrides,
+  });
+
 export const makeUploadFile = (
   overrides: Partial<TUploadFile> = {},
 ): TUploadFile => {
@@ -259,6 +281,7 @@ export const makeUploadFile = (
     uniqueId: `temp_${fixtureSeq}`,
     fileId: null,
     toFolderId: 1,
+    target: makeUploadTarget(),
     action: "upload",
     error: null,
     fileInfo: null,

@@ -39,6 +39,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
+  createFile,
   createFolder,
   startUploadSession,
   uploadChunkParallel,
@@ -46,12 +47,19 @@ import {
   checkIsFileExist,
 } from "@docspace/shared/api/files";
 import { ConflictResolveType } from "@docspace/shared/enums";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { createChunks, runWithConcurrency } from "@onlyoffice/apps-ui-kit/uploader";
 
 import { useTranslation } from "react-i18next";
 
+import {
+  getDisplayFileNames,
+  getUniqueFileTitle,
+} from "@docspace/shared/services/private-room/encrypted-create-rules";
+
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useUploadStore } from "@/app/(docspace)/_store/UploadStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
@@ -80,14 +88,45 @@ const getDefaultFileName = (
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
+export type TDocumentExtension = "docx" | "xlsx" | "pptx" | "pdf";
+
+const isDocumentType = (
+  type: CreateFileDialogType,
+): type is TDocumentExtension =>
+  type === "docx" || type === "xlsx" || type === "pptx" || type === "pdf";
+
+/** Files a private room creates, when it may create them. */
+export type TPrivateCreate = { canCreateFiles: boolean };
+
 type UseDocsActionsOptions = {
-  /** Replaces the default chunked upload (e.g., encrypted upload). */
-  uploadFilesToFolderOverride?: (files: FileList | File[]) => Promise<void>;
+  /**
+   * Replaces the default chunked upload (e.g., encrypted upload); gets the
+   * folder row the files were dropped on, if any.
+   */
+  uploadFilesToFolderOverride?: (
+    files: FileList | File[],
+    targetFolderId?: number | string,
+  ) => Promise<void>;
+  /**
+   * Creates documents in place of the editor's create route (private rooms
+   * create them encrypted); resolves to whether the file was created.
+   */
+  createFileOverride?: (
+    folderId: number | string,
+    title: string,
+    extension: TDocumentExtension,
+  ) => Promise<boolean>;
+  /**
+   * Set inside a private room: files are created only through
+   * createFileOverride, and only by a user with encryption keys.
+   */
+  privateCreate?: TPrivateCreate;
 };
 
 export default function useDocsActions(options?: UseDocsActionsOptions) {
   const router = useRouter();
   const navigationStore = useNavigationStore();
+  const filesListStore = useFilesListStore();
   const { filesSettings } = useFilesSettingsStore();
   const uploadStore = useUploadStore();
   const { sdkConfig } = useSDKConfig();
@@ -97,18 +136,6 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     sdkConfig?.openEditorInSameTab ??
     filesSettings?.openEditorInSameTab ??
     true;
-
-  const navigateToCreate = useCallback(
-    (folderId: number | string, fileTitle: string) => {
-      openDocEditor({
-        parentId: folderId,
-        fileTitle,
-        openInSameTab,
-        frameConfig: sdkConfig,
-      });
-    },
-    [openInSameTab, sdkConfig],
-  );
 
   const inputFilesRef = useRef<HTMLInputElement | null>(null);
   const inputFolderRef = useRef<HTMLInputElement | null>(null);
@@ -128,6 +155,37 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const [dialogType, setDialogType] = useState<CreateFileDialogType>("folder");
   const [isCreating, setIsCreating] = useState(false);
 
+  const navigateToCreate = useCallback(
+    (folderId: number | string, fileTitle: string) => {
+      if (sdkConfig?.events?.onEditorOpen) {
+        setIsCreating(true);
+        createFile(folderId, fileTitle)
+          .then((file) => {
+            frameCallEvent({
+              event: "onEditorOpen",
+              data: { ...file, action: "edit" },
+            });
+            router.refresh();
+          })
+          .catch((error: unknown) => {
+            toastr.error(
+              error instanceof Error ? error.message : String(error),
+            );
+          })
+          .finally(() => setIsCreating(false));
+        return;
+      }
+
+      openDocEditor({
+        parentId: folderId,
+        fileTitle,
+        openInSameTab,
+        frameConfig: sdkConfig,
+      });
+    },
+    [openInSameTab, sdkConfig, router],
+  );
+
   useEffect(() => {
     return () => {
       if (inputFilesRef.current) {
@@ -145,14 +203,51 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     return navigationStore.currentFolderId;
   }, [navigationStore]);
 
+  const createFileOverride = options?.createFileOverride;
+  const privateCreate = options?.privateCreate;
+  // Spec: private-rooms/sdk-surface, "Create menu inside a private room"
+  const isFileCreationWithheld =
+    !!privateCreate && (!createFileOverride || !privateCreate.canCreateFiles);
+
+  const createDocument = useCallback(
+    async (
+      folderId: number | string,
+      title: string,
+      extension: TDocumentExtension,
+    ) => {
+      if (!createFileOverride) return;
+      setIsCreating(true);
+      try {
+        if (await createFileOverride(folderId, title, extension))
+          router.refresh();
+      } finally {
+        setIsCreating(false);
+      }
+    },
+    [createFileOverride, router],
+  );
+
   const openCreateDialog = useCallback(
     (type: CreateFileDialogType) => {
       const folderId = getFolderId();
       if (!folderId) return;
+      if (type !== "folder" && isFileCreationWithheld) return;
 
       if (filesSettings?.keepNewFileName) {
         const name = getDefaultFileName(type, t);
-        if (type === "folder") {
+        if (createFileOverride && isDocumentType(type)) {
+          void createDocument(
+            folderId,
+            privateCreate
+              ? getUniqueFileTitle(
+                  name,
+                  type,
+                  getDisplayFileNames(filesListStore.items),
+                )
+              : name,
+            type,
+          );
+        } else if (type === "folder") {
           setIsCreating(true);
           createFolder(folderId, name)
             .then(() => router.refresh())
@@ -171,7 +266,18 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
       setDialogType(type);
       setDialogVisible(true);
     },
-    [getFolderId, t, filesSettings?.keepNewFileName, router, navigateToCreate],
+    [
+      getFolderId,
+      t,
+      filesSettings?.keepNewFileName,
+      router,
+      navigateToCreate,
+      createFileOverride,
+      createDocument,
+      isFileCreationWithheld,
+      privateCreate,
+      filesListStore,
+    ],
   );
 
   const closeCreateDialog = useCallback(() => {
@@ -182,6 +288,12 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     async (name: string) => {
       const folderId = getFolderId();
       if (!folderId) return;
+
+      if (createFileOverride && isDocumentType(dialogType)) {
+        setDialogVisible(false);
+        await createDocument(folderId, name, dialogType);
+        return;
+      }
 
       if (dialogType !== "folder") {
         setDialogVisible(false);
@@ -200,7 +312,14 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
         setIsCreating(false);
       }
     },
-    [getFolderId, dialogType, router, navigateToCreate],
+    [
+      getFolderId,
+      dialogType,
+      router,
+      navigateToCreate,
+      createFileOverride,
+      createDocument,
+    ],
   );
 
   const doUpload = useCallback(
@@ -358,7 +477,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const uploadFilesToFolder = useCallback(
     (files: FileList | File[], targetFolderId?: number | string) =>
       options?.uploadFilesToFolderOverride
-        ? options.uploadFilesToFolderOverride(files)
+        ? options.uploadFilesToFolderOverride(files, targetFolderId)
         : defaultUploadFilesToFolder(files, targetFolderId),
     [options?.uploadFilesToFolderOverride, defaultUploadFilesToFolder],
   );
@@ -444,10 +563,12 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     onUploadFiles,
     onUploadFolder,
     uploadFilesToFolder,
+    defaultUploadFilesToFolder,
     uploadConflictDialogVisible,
     uploadConflictItems,
     confirmUploadConflict,
     closeUploadConflictDialog,
+    privateCreate,
   };
 }
 

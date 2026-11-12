@@ -36,12 +36,24 @@
 import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
-import { PATH_ROOMS_LIST } from "./roomList";
+import { PATH_ROOMS_LIST, withRoomPrivacyFilter } from "./roomList";
 
 export type PrivateRoomListOptions = {
   roomId: number;
   title?: string;
   ownerId?: string;
+  /**
+   * More private rooms, listed right after the first one. `foldersCount` is
+   * the number of folders below the room, as FolderDtoHelper copies it from
+   * the stored counter (FolderQueries.UpdateFoldersCountAsync).
+   */
+  otherPrivateRooms?: { roomId: number; title: string; foldersCount?: number }[];
+  /** Rooms listed after the private ones, with `private: false`. */
+  ordinaryRooms?: { roomId: number; title: string }[];
+  /** The new-items count (`new`) of the first private room. */
+  newItems?: number;
+  /** Leaves the first private room out, for an area with no private rooms. */
+  withoutPrivateRoom?: boolean;
 };
 
 const okResponse = <T>(response: T): Response =>
@@ -56,31 +68,32 @@ export const privateRoomListHandler = (
   const ownerId = opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
   const title = opts.title ?? "Private Test Room";
 
-  const security = {
+  // FileSecurity.FilterEntryAsync denies Copy, Duplicate, IndexExport and
+  // UseChat on a private room before the section rules (bd89a24dcd).
+  const securityOf = (isPrivate: boolean) => ({
     Read: true,
     Create: true,
     Delete: true,
     EditRoom: true,
     Rename: true,
     CopyTo: true,
-    Copy: true,
+    Copy: !isPrivate,
     MoveTo: true,
     Move: true,
     Pin: true,
     Mute: true,
     EditAccess: true,
-    Duplicate: true,
+    Duplicate: !isPrivate,
     Download: true,
     CopySharedLink: false,
     CreateRoomFrom: false,
     CopyLink: false,
     Embed: false,
     Reconnect: false,
-    Disconnect: false,
     ChangeOwner: true,
     IndexExport: false,
     UseChat: false,
-  };
+  });
 
   const createdBy = {
     id: ownerId,
@@ -91,11 +104,17 @@ export const privateRoomListHandler = (
     hasAvatar: false,
   };
 
-  const folder = {
+  const roomDto = (
+    id: number,
+    roomTitle: string,
+    isPrivate: boolean,
+    newItems = 0,
+    foldersCount = 0,
+  ) => ({
     parentId: 2002,
     filesCount: 0,
-    foldersCount: 0,
-    new: 0,
+    foldersCount,
+    new: newItems,
     mute: false,
     tags: [],
     logo: {
@@ -107,17 +126,17 @@ export const privateRoomListHandler = (
     },
     pinned: false,
     roomType: 5,
-    private: true,
+    private: isPrivate,
     indexing: false,
     denyDownload: false,
     inRoom: true,
     usedSpace: 0,
     fileEntryType: 1,
-    id: opts.roomId,
+    id,
     rootFolderId: 2002,
     canShare: true,
-    security,
-    title,
+    security: securityOf(isPrivate),
+    title: roomTitle,
     access: 0,
     shared: false,
     sharedForUser: false,
@@ -129,12 +148,24 @@ export const privateRoomListHandler = (
     rootFolderType: 14,
     parentRoomType: 14,
     updatedBy: createdBy,
-  };
+  });
+
+  const folders = [
+    ...(opts.withoutPrivateRoom
+      ? []
+      : [roomDto(opts.roomId, title, true, opts.newItems)]),
+    ...(opts.otherPrivateRooms ?? []).map((room) =>
+      roomDto(room.roomId, room.title, true, 0, room.foldersCount),
+    ),
+    ...(opts.ordinaryRooms ?? []).map((room) =>
+      roomDto(room.roomId, room.title, false),
+    ),
+  ];
 
   const current = {
     parentId: 0,
     filesCount: 0,
-    foldersCount: 1,
+    foldersCount: folders.length,
     new: 0,
     mute: false,
     pinned: false,
@@ -158,23 +189,52 @@ export const privateRoomListHandler = (
     access: 1,
     shared: false,
     rootFolderType: 14,
-    folderType: 14,
-    isArchive: false,
   };
 
   const body = {
-    folders: [folder],
+    folders,
     files: [],
     current,
-    pathParts: [{ id: 2002, title: "Rooms" }],
+    pathParts: [{ id: 2002, title: "Rooms", folderType: 14 }],
     startIndex: 0,
-    total: 1,
-    count: 1,
+    total: folders.length,
+    count: folders.length,
     new: 0,
   };
 
+  // The Archive root has id 11244 in the root mock (root.ts).
+  const archiveBody = {
+    ...body,
+    current: {
+      ...current,
+      id: 11244,
+      rootFolderId: 11244,
+      title: "Archive",
+      rootFolderType: 20,
+    },
+    pathParts: [{ id: 11244, title: "Archive", folderType: 20 }],
+  };
+
+  /**
+   * Mirrors VirtualRoomsController.GetRoomsFolder (HttpGet "rooms"):
+   * GetRoomsSectionIdAsync picks the Archive root for searchArea=Archive and
+   * the Rooms root otherwise, and FileStorageService.GetFolderItemsAsync
+   * answers that section as `current` and as the only breadcrumb, titled by
+   * FilesMappingAction (FilesUCResource.Archive or VirtualRooms). Both areas
+   * hold the same rooms; which of them an area lists follows the private
+   * setting (withRoomPrivacyFilter): the Rooms area leaves the private rooms
+   * out unless `privacyFilter` asks for them, the Archive takes the filter as
+   * given.
+   */
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
-    () => okResponse(body),
+    ({ request }) => {
+      const isArchive =
+        new URL(request.url).searchParams.get("searchArea") === "Archive";
+
+      return okResponse(
+        withRoomPrivacyFilter(isArchive ? archiveBody : body, request),
+      );
+    },
   );
 };

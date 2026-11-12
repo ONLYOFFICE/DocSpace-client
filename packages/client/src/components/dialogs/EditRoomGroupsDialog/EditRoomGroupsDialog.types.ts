@@ -108,9 +108,14 @@ export interface EditRoomGroupsDialogProps {
   /** Whether room grouping is enabled in portal settings */
   organizeRoomsGrouping?: boolean;
   /** Function to toggle room grouping setting */
-  setOrganizeRoomsGrouping?: (enabled: boolean) => Promise<boolean>;
+  setOrganizeRoomsGrouping?: (
+    enabled: boolean,
+    isSpaces?: boolean,
+  ) => Promise<boolean>;
   /** Section the groups belong to: the Rooms section or the Forms section */
   searchArea: RoomSearchArea;
+  /** The rooms the Private section lists, kept out of the Rooms groups */
+  getPrivateSectionRoomIds: () => Promise<number[]>;
 }
 
 export interface IRoomItem {
@@ -148,4 +153,6 @@ export interface RoomListPanelProps {
   sortSelectedFirst?: boolean;
   withoutBackdropBackground?: boolean;
   isFormsSection?: boolean;
+  /** Rooms the list leaves out */
+  excludeItems?: number[];
 }

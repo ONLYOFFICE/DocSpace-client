@@ -9,7 +9,7 @@ paths:
 
 Rules below are enforced by `common/tests` suites (blocking pre-push gate) and
 Biome plugins, but are invisible until the push fails. ui-kit is **not** in
-scope: it ships as a prebuilt tarball from `docspace-ui-kit-react` and is not
+scope: it ships as an npm package built in `docspace-ui-kit-react` and is not
 checked out here, so its own checks run in that repository.
 
 ## No hardcoded hex colors — anywhere (colors.test.js)
@@ -48,6 +48,21 @@ literal is byte-identical afterwards.
 offenders (both in ui-kit) were fixed in `docspace-ui-kit-react`. The
 list must only ever shrink, so it stays empty: a new mixed-indentation file
 fails the push rather than being added to it.
+
+## No positive tabIndex (tabindex.test.js)
+
+No `.js/.jsx/.ts/.tsx` may set a `tabIndex` above zero (`tabIndex={2}`,
+`tabIndex: 2`, `tabindex="2"`). A positive value jumps its element ahead of
+every `0` one whatever the DOM order, and ui-kit's focus trap keeps that order
+inside dialogs, as the browser does - so a dialog with a few of them sent Tab
+to its footer past its settings. Drop the value; if the element comes in the
+wrong place, move it in the markup. `tabindex-allowlist.json` is **empty**
+and stays so: a new positive value fails the push rather than joining it.
+Directories are excluded by whole path segment, not by the shared walker's
+substring match, so `categories/common` and other `common`/`test`-named
+directories are scanned. The check reads values on the line itself: a literal,
+or an offset added to a counter (`tabIndex={index + 1}`). Any other computed
+value - a variable, a ternary - is not caught.
 
 ## Images (images.test.js)
 
@@ -145,6 +160,5 @@ with the change.
 
 ## Advisory-only tools (not gated)
 
-`pnpm check-circular` (madge) and `fallow` / `fallow:audit` (dead code,
-unused exports; config in `.fallowrc.json`) run manually — useful before
-large refactors, but nothing in lefthook/CI enforces them.
+`pnpm check-circular` (madge) runs manually — useful before large
+refactors, but nothing in lefthook/CI enforces it.

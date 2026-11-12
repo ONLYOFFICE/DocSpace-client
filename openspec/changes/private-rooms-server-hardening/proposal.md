@@ -1,0 +1,219 @@
+# Proposal
+
+## Why
+
+The client half of private rooms is finished, but several server behaviours it
+depends on are missing or leak metadata: owner changes do not touch the file
+access entries, invitation e-mails carry the plaintext room title, encrypted
+file titles are not validated, watermark/indexing/lifetime settings can be
+applied to a private room, audit events cover
+key envelopes only, no operation removes a user's file access entries (a
+removed member keeps them), and there is no administrative recovery, SCIM
+offboarding or file-key history. Archived private rooms lose the server's
+private-room guards: their files report the copy right, and a portal
+administrator who is not a member can read, copy, delete or unarchive them by
+id. Room events also carry private-room titles to every administrator. The stashed `AUDIT_BACKEND.md` (June 2026) listed these as
+P1/P2; the stashed `V1_RELEASE_PROGRESS.md` made admin recovery, audit log
+viewer and SCIM the P0 set for a B2B launch and decided that without them the
+feature ships to individuals and SMB owners only. None of it has landed on the
+server branch.
+
+This change tracks that backend work from the client's side: the server
+contract the client will code against, the MSW mocks and contract tests, and
+the client code that reads the new fields. The server tasks are listed with
+the file to change so the backend team can pick them up; nothing here is
+"done" until both sides merge.
+
+## What Changes
+
+- Owner change of a private room verifies the new owner's file access entries
+  and reports which files the new owner cannot read, so the client can run a
+  backfill before the hand-over.
+- Private-room availability becomes an explicit server decision (edition or
+  tariff rule, default allow) with a distinct error code the client shows.
+  Withdrawn on 2026-11-06: the server adds no rule until product decides
+  (decision 1, the backend team's reply of 2026-11-05).
+- Watermark, indexing and lifetime settings are refused on private rooms.
+- Encrypted file titles are validated to the opaque form: a UUID, plus the
+  file's extension when it has one.
+- Invitation e-mails for private rooms stop carrying the plaintext room title.
+- Audit events are written for file access-entry writes and member
+  revocations, and a per-file access history is exposed. The server has no
+  revocation (removal of a user's access entries) today; the operation that
+  will remove them is an open decision (see below), and the revocation audit
+  and offboarding depend on it.
+- Administrative (organisational) recovery and SCIM-driven offboarding are
+  specified as P1 for the B2B launch; the client exposes enrolment and
+  recovery flows once the endpoints exist.
+- The existing upload-session abort route is documented and used by the
+  client when an encrypted upload is cancelled.
+- Archived private rooms keep the private-room guards of active ones: no copy
+  right on their files and subfolders, and no administrator bypass for
+  administrators who are not members. A subfolder copied out of an
+  archived private room lands outside as an empty folder tree today; the
+  copy denial closes it (design.md, Context).
+- Socket events of a private room reach its members only, not every
+  administrator.
+- Found on a local portal on 2026-10-22: the public keys of a file in an archived private room are answered 415, because the file check knows only the VirtualRooms section; the server applies the room check's VirtualRooms-or-Archive condition (design decision 9).
+- A caller who may change the access of a private room can read the public keys of named users who are not members yet, so the client verifies invitees' keys before granting access (`private-rooms-invite-atomic-rewrap`, decided 2026-10-28; design decision 10). Today the room access keys cover members only.
+- Found when the server was re-checked on 2026-10-28 (`e618acc6c0`): saving a user's keys can delete another sign-in link of that user, such as Google or SSO; a private room accepts external and invitation links and can be duplicated, saved as a template or index-exported, each guarded by the client only; an empty key set passes every key check; the private flag is accepted with any room type; and a third-party room created as private is not key-checked. The server refuses or fixes each of these (design decisions 11-13).
+- Re-checked on 2026-11-02 against `release/v4.1.0` (`e9cfda8d43`): none of the backend items has landed; the key save can also fail once the other sign-in link is gone, template creation has its own gate, and the private flag also reaches AI agents, templates and rooms from templates (design Context).
+- Landed on the server on 2026-11-04 (`3b9c527a6e` and `bd89a24dcd`, re-checked 2026-11-05): the archived-room guards, the socket recipients, the public keys of files in archived rooms, the invitee keys route (`GET privacyroom/{roomId}/access/candidates`), the sign-in link fix, the link, duplicate, index-export and template refusals, and the metadata guards. The same commits refuse copy-as for encrypted files and for private-room sources and destinations, and keep folders from leaving or entering a private room (design decisions 15 and 16). Still open after them: the owner change, the availability rule, title validation, e-mail titles, audit and history, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-05 (`1259577f63`): the owner change answers 409 when the new owner lacks a file key, a new route `GET privacyroom/{roomId}/access/missing` lists which users miss keys on which files, the access write stores what it can and answers `skippedUserIds` (proposal decision 7 decided), every key write is audited and listed in the file history, and the letters and pushes name a private room "Private room" instead of its title (English only until translated). Still open: the availability rule, title validation, the revocation operation and its audit, the folder check of the abort route, recovery and offboarding, and the key-set, room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-05, later (`cc60512acd`, `20262fdcb5`): an upload session into a private room is refused without the encrypted flag (403) or with a readable name (400), and the file write path refuses any plain file in a private room (proposal decision 5 decided); the server removes the wrapped file keys of a user who leaves a private room, is removed, has the access cleared or has their personal data deleted, audited as `RoomFileKeysRevoked` (proposal decision 4 decided); an empty key set counts as no keys; an abort through another folder is 404 and keeps the session; webhook payloads of a private room no longer reach subscribers outside it. Still open: the availability rule, the e-mail title translations, the owner part of offboarding, and the room-type and third-party checks of room creation.
+- Landed on the server on 2026-11-05, last (`b562fc3fb1`): a private room on third-party storage is refused with 400 (proposal decision 6 decided); creating a private room answers 403 and opening an encrypted file in the editors 415 when the Document Server does not serve the crypto library; the audit trail and the what's-new letters name a private room and its folders "Private room". Still open: the availability rule, the e-mail title translations, the revocation for a group's removal, the owner part of offboarding, and the room-type, AI-agent and template checks of room creation.
+- Answered by the backend team on 2026-11-05 (its reply to the document of
+  2026-11-02, received 2026-11-06; design.md, "Answered by the backend
+  team"): the availability rule is withdrawn until product decides; the
+  private flag stays accepted with every room type the creation accepts,
+  the AI hub room types refuse it with 400 and a private AI agent is
+  created, which the server proposes to refuse (decision 8); the audit
+  trail of the client needs no change; a public or form-filling room
+  created as private is stored today, its link refused only on the first
+  read (task 12.8, read on 2026-11-06); a list of server behaviours no
+  test covers goes to a manual check (task 10.2); and one finding is new:
+  a portal backup carries neither the file keys nor the users' key
+  records, so a restore loses the content of private rooms (decision 9,
+  task group 15).
+- Found on the release stand on 2026-11-06: the editor shows its AI Tools
+  tab for an encrypted file, with the plugin's own provider settings. The
+  editor configuration already carries a switch that hides the AI tools
+  (`customization.ai.disabled`, set today for a portal without AI and for
+  anonymous visitors); the server sets it for an encrypted file as well
+  (task group 16, design decision 29). The same stand showed the
+  role-change letter naming a private room by its title, a call site the
+  neutral label of 2026-11-05 missed (task 4.7).
+
+## Capabilities
+
+### New Capabilities
+
+None.
+
+### Modified Capabilities
+
+- `private-rooms/room-membership`: the backfill sweep wraps the entries
+  the server lists as missing and keeps the others, falling back to the
+  blind re-wrap of every file for every member when that read fails
+  (decided 2026-11-05 with task 14.2, design decision 20); the owner
+  change wraps the candidate's missing files before it asks the server
+  and keeps the owner when some remain or the server answers 409 (task
+  2.2, design decision 1); the server now removes the file keys of a
+  member who leaves or is removed, so the client's own revocation run goes
+  (task 6.3, design decision 22); no private room is created while the
+  Document Server cannot encrypt (task 3.2c, design decision 26).
+- `private-rooms/sdk-surface`: the SDK removes a member and leaves a
+  private room through the role update alone, without its own
+  revocation run, and no longer expands a removed group (task 6.3,
+  design decision 22); its creation gate refuses while the Document
+  Server cannot encrypt (task 3.2c).
+- `private-rooms/file-operations`: the History tab leaves the
+  file-keys-issued entry out (task 6.2, design decision 19).
+- `private-rooms/key-management`: the backup and restore settings warn
+  that a backup carries no private-room keys and a restored portal cannot
+  open their files (task 15.2, design decision 28).
+- `private-rooms/server-contract`: owner change, invitation
+  e-mail, audit scope, recovery/offboarding
+  endpoints, the copy right in archived private rooms and the public keys
+  of files in archived private rooms, and private room creation (empty key
+  sets, AI hub room types, third-party rooms) change; new
+  requirements for metadata guards, title validation, upload-session abort,
+  access history, the administrator bypass in archived private rooms,
+  private-room event recipients, the public keys of prospective members,
+  sign-in links kept on a key save, no links on a private room, refused
+  room-level copies, a Document Server that encrypts, a neutral audit
+  trail, a backup that excludes the private-room keys and an editor
+  configuration that hides the AI tools for an encrypted file.
+
+## Impact
+
+- Server (`../server`): `FileStorageService.cs` (`ChangeOwnerAsync`,
+  `CreateRoomAsync`, `UpdateRoomAsync`, `SetEncryptionInfoAsync`),
+  `FileSharing.cs` / `StudioNotifyService` (invite e-mails),
+  `DocumentsActionMapper.cs` and the audit pipeline, `VirtualRoomsController.cs`,
+  new recovery and SCIM controllers, the Archive branch of
+  `FileSecurity.FilterEntryAsync`, `CopyPermissionsCheck.cs` (traced only),
+  `SocketManager.cs`, and `PrivacyRoomController.cs` with
+  `EncryptionKeyPairDto.cs` (invitee keys); `EncryptionLoginProvider.cs`
+  (key save, empty key sets), `CreateThirdPartyRoomAsync` and the room-level
+  private denials of `FileSecurity.cs`, the room link routes
+  (`VirtualRoomsController.cs`), and the other notifiers that carry a room
+  title (`ResendEmailInvitationsAsync`, `NotifyClient.cs`).
+- Client: `packages/shared/api/privacy`, `packages/shared/api/files`,
+  `packages/shared/services/private-room/room-encryption.ts` (owner hand-over
+  backfill), `packages/client/src/components/panels/ChangeRoomOwnerPanel`,
+  keys-management enrolment UI, MSW handlers and contract tests under
+  `packages/shared/__mocks__/handlers/{privacyroom,files}` (the archived
+  variant of `encryptedFilesHandlers` follows the copy right once the server
+  changes), and the invitee keys request in `packages/shared/api/privacy`
+  with its mock.
+- No Document Server dependency.
+
+## Out of scope
+
+- The Document Server contract (`private-rooms-editor-contract`).
+- A transactional endpoint that grants private-room access to invitees and
+  stores their file-key wraps in one request: the later target for
+  `private-rooms-invite-atomic-rewrap`, which ships grant-first (decided
+  2026-10-26). Not a release prerequisite.
+- Client-side TOFU and fail-closed fixes (separate changes).
+- The audit log viewer UI in the management app (follows once events exist).
+- (Landed 2026-11-05, now group 14 of tasks.md.) A route that tells a room
+  manager which members lack an access entry on which files. It makes the
+  backfill exact (`private-rooms-fanout-dialog-and-backfill`, archived) and
+  lets the pending-access marker of `private-rooms-invite-atomic-rewrap`
+  survive a reload and reach other devices, which that change decides.
+- A server-side Private section with its own root, search area and new-items
+  routing (`private-rooms-sidebar-section`, archived): a later target.
+
+## Decisions needed
+
+1. Edition rule for private rooms: available in all editions (recommended,
+   matches today) or Enterprise only. Product decides. The server added
+   no rule (reply of 2026-11-05) and the delta no longer asks for one; a
+   rule, once decided, gets a change of its own.
+2. Launch scope: individuals/SMB without admin recovery and SCIM (stashed
+   decision), or B2B with them. The spec marks recovery and offboarding as
+   required for the B2B launch only.
+3. Recovery model for admin recovery: recovery-admin public key wrapping the
+   user's private key (stashed design) versus key escrow. The spec assumes
+   the former.
+4. Revocation primitive (decided by the server on 2026-11-05): the server
+   removes a user's wrapped file keys itself when the user leaves a private
+   room, is removed from it, has the access cleared or has their personal
+   data deleted, audited as `RoomFileKeysRevoked` (design decision 22); no
+   route for room managers. The "member revoked" audit is that event; the
+   offboarding requirement keeps its owner part open.
+5. Server-side refusal of plaintext written into a private room (decided by
+   the server on 2026-11-05): an upload session into a private room is
+   refused without the encrypted flag or with a readable name, and the file
+   write path refuses any plain file (design decision 21), after `copyas`
+   conversion output and plaintext folders on 2026-11-04 (design decisions
+   15 and 16). `private-rooms-upload-fail-closed` has its server guard.
+6. Third-party private rooms (decided by the server on 2026-11-05): the
+   private flag is refused on third-party storage with 400, with or without
+   keys (design decision 13).
+7. Member removal racing an upload on another device (decided by the server
+   on 2026-11-05): the access write stores the entries of the users who can
+   read and reports the others in `skippedUserIds` (design decision 17);
+   the client reads that list (task 12.6).
+8. Private AI agents (proposed by the server on 2026-11-05): an AI agent
+   created with the private flag is accepted today, while the chat and the
+   vectorization are denied in a private room; the backend team proposes
+   to refuse it with 400 and waits for the feature owner (design decision
+   27). The client never creates one.
+9. Backup and restore (found by the backend team on 2026-11-05): a portal
+   backup carries neither `files_file_keys` nor the `e2e` records of
+   `account_links`, and a restore remaps the ids the wraps are bound to,
+   so a restored portal cannot open the files of its private rooms and
+   nobody is warned; a key the user exported beforehand restores their
+   identity only, not the wraps (design.md, "Answered by the backend
+   team"). Product with the backend team: warn that a restore loses that
+   content, back both tables up with the original ids kept so the client
+   can unwrap under the old ids and re-wrap under the new ones, or both.
+   Decided 2026-11-06 by the owner: warn about the loss for now; the
+   backup of the tables with the original ids stays a later option
+   (design decision 28). Task 15.2 adds the warning to the backup and
+   restore pages, 15.3 the records. Task group 15; a gate item of
+   `private-rooms-release-gate` (prerequisite 9) and a "Before users
+   start" item of the beta release notes until decided.

@@ -54,21 +54,15 @@ interface PromoPageProps {
   canceled?: boolean;
   startTrial?: () => Promise<void>;
   openBuyPlan?: (mode: "trial" | "edit") => void;
-  canManage?: boolean;
 }
 
-const PromoPage = ({
-  canceled,
-  startTrial,
-  openBuyPlan,
-  canManage,
-}: PromoPageProps) => {
+const PromoPage = ({ canceled, startTrial, openBuyPlan }: PromoPageProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
   const [submitting, setSubmitting] = useState(false);
 
   const onCreateTenant = async () => {
-    if (submitting || !canManage) return;
+    if (submitting) return;
     setSubmitting(true);
     try {
       await startTrial?.();
@@ -88,27 +82,6 @@ const PromoPage = ({
       <Heading level={HeadingLevel.h1} className={styles.title}>
         {t("DocsConnect:DocsConnect")}
       </Heading>
-
-      {/* The page opens for anyone the Developer Tools section opens for, but
-          connecting an instance is a portal-wide operation and stays with
-          admins. Rather than close the page, it says so once and refuses the
-          one action below - the description, the links and the API
-          documentation are the point of reading it. */}
-      {canManage ? null : (
-        <div
-          className={styles.accessNotice}
-          data-testid="docs_connect_access_notice"
-        >
-          <Text as="p" className={styles.accessNoticeTitle}>
-            {t("Common:AdminAccessRequired")}
-          </Text>
-          <Text as="p" className={styles.description}>
-            {t("DocsConnect:AdminAccessDescription", {
-              service: t("DocsConnect:DocsConnect"),
-            })}
-          </Text>
-        </div>
-      )}
 
       {canceled ? (
         <div className={styles.canceledText}>
@@ -197,7 +170,6 @@ const PromoPage = ({
               size={ButtonSize.small}
               label={t("Common:RenewSubscription")}
               onClick={() => openBuyPlan?.("edit")}
-              isDisabled={!canManage}
               className={styles.buyButton}
               testId="docs_connect_buy_button"
             />
@@ -220,7 +192,7 @@ const PromoPage = ({
             label={t("DocsConnect:StartFreeTrial")}
             onClick={onCreateTenant}
             isLoading={submitting}
-            isDisabled={submitting || !canManage}
+            isDisabled={submitting}
             testId="docs_connect_create_tenant_button"
           />
         )}
@@ -229,12 +201,7 @@ const PromoPage = ({
   );
 };
 
-export default inject(({ docsConnectStore, userStore }: TStore) => {
-  const { user } = userStore;
-
-  return {
-    startTrial: docsConnectStore.startTrial,
-    openBuyPlan: docsConnectStore.openBuyPlan,
-    canManage: (user?.isAdmin || user?.isOwner) ?? false,
-  };
-})(observer(PromoPage));
+export default inject(({ docsConnectStore }: TStore) => ({
+  startTrial: docsConnectStore.startTrial,
+  openBuyPlan: docsConnectStore.openBuyPlan,
+}))(observer(PromoPage));

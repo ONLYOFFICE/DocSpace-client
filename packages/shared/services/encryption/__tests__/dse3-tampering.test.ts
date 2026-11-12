@@ -50,6 +50,8 @@ import {
   AES_GCM_TAG_SIZE,
   DSE3_CHUNK_PLAINTEXT_SIZE,
   DSE3_FIXED_HEADER_SIZE,
+  DSE3_FLAG_HAS_ENCRYPTED_NAME,
+  DSE3_FLAG_IS_FORM,
 } from "../types";
 
 const CHUNK_OVERHEAD = AES_GCM_IV_SIZE + AES_GCM_TAG_SIZE;
@@ -248,5 +250,104 @@ describe("DSE3 v2 tamper tests — AAD binding", () => {
     tampered[32] = 0xff;
 
     expect(() => parseDSE3Header(tampered)).toThrow(InvalidFormatError);
+  });
+});
+
+// Spec: encryption-core, "DSE3 header flags, chunk size and name length are not authenticated"
+describe("DSE3 v2 header flags and name length", () => {
+  const FLAGS_OFFSET = 6;
+  const NAME_LEN_OFFSET = 31;
+
+  it("Form flag cleared in storage", async () => {
+    const dek = generateDEK();
+    const plaintext = fillRandom(new Uint8Array(256));
+    const { encryptedBlob } = await encryptFile(plaintext, {
+      dek,
+      isForm: true,
+    });
+    const encBytes = await blobToUint8Array(encryptedBlob);
+    expect(parseDSE3Header(encBytes).isForm).toBe(true);
+
+    const tampered = new Uint8Array(encBytes);
+    tampered[FLAGS_OFFSET] &= ~DSE3_FLAG_IS_FORM;
+
+    expect(parseDSE3Header(tampered).isForm).toBe(false);
+    const { data } = await decryptFile(tampered, dek);
+    expect(await blobToUint8Array(data)).toEqual(plaintext);
+  });
+
+  it("Encrypted name stripped in storage", async () => {
+    const dek = generateDEK();
+    const plaintext = fillRandom(new Uint8Array(256));
+    const { encryptedBlob } = await encryptFile(plaintext, {
+      dek,
+      fileName: "report.docx",
+    });
+    const encBytes = await blobToUint8Array(encryptedBlob);
+    const header = parseDSE3Header(encBytes);
+    expect(header.encryptedName).not.toBeNull();
+
+    const fixedHeader = encBytes.slice(0, DSE3_FIXED_HEADER_SIZE);
+    fixedHeader[FLAGS_OFFSET] &= ~DSE3_FLAG_HAS_ENCRYPTED_NAME;
+    fixedHeader[NAME_LEN_OFFSET] = 0;
+    fixedHeader[NAME_LEN_OFFSET + 1] = 0;
+    const chunks = encBytes.slice(getDSE3HeaderSize(header));
+    const tampered = new Uint8Array(fixedHeader.byteLength + chunks.byteLength);
+    tampered.set(fixedHeader, 0);
+    tampered.set(chunks, fixedHeader.byteLength);
+
+    expect(parseDSE3Header(tampered).encryptedName).toBeNull();
+    const { data, fileName } = await decryptFile(tampered, dek);
+    expect(fileName).toBeNull();
+    expect(await blobToUint8Array(data)).toEqual(plaintext);
+  });
+
+  it("Chunk size rewritten in storage", async () => {
+    const CHUNK_SIZE_OFFSET = 7;
+    const dek = generateDEK();
+    const tampered = new Uint8Array(await encryptN(dek, 2));
+    const halfChunk = DSE3_CHUNK_PLAINTEXT_SIZE / 2;
+    tampered[CHUNK_SIZE_OFFSET] = (halfChunk >>> 24) & 0xff;
+    tampered[CHUNK_SIZE_OFFSET + 1] = (halfChunk >>> 16) & 0xff;
+    tampered[CHUNK_SIZE_OFFSET + 2] = (halfChunk >>> 8) & 0xff;
+    tampered[CHUNK_SIZE_OFFSET + 3] = halfChunk & 0xff;
+
+    const error = await decryptFile(tampered, dek).then(
+      () => null,
+      (e: unknown) => e,
+    );
+
+    expect(
+      error instanceof DecryptionError || error instanceof InvalidFormatError,
+    ).toBe(true);
+  });
+});
+
+// Spec: encryption-core, "Older versions of a file are not detected"
+describe("DSE3 v2 versions of one file", () => {
+  it("Older version served", async () => {
+    const dek = generateDEK();
+    const older = fillRandom(new Uint8Array(256));
+    const current = fillRandom(new Uint8Array(256));
+    const olderVersion = await blobToUint8Array(
+      (await encryptFile(older, { dek })).encryptedBlob,
+    );
+    await encryptFile(current, { dek });
+
+    const { data } = await decryptFile(olderVersion, dek);
+
+    expect(await blobToUint8Array(data)).toEqual(older);
+  });
+
+  it("Another file served", async () => {
+    const dek = generateDEK();
+    const otherFile = await blobToUint8Array(
+      (await encryptFile(fillRandom(new Uint8Array(256)), { dek: generateDEK() }))
+        .encryptedBlob,
+    );
+
+    await expect(decryptFile(otherFile, dek)).rejects.toBeInstanceOf(
+      DecryptionError,
+    );
   });
 });

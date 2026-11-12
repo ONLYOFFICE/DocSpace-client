@@ -74,9 +74,11 @@ const CommentEditor = ({
 }: CommentEditorProps) => {
 	const { t } = useTranslation(["Common"]);
 
-	const { id, comment, version, security } = item;
+	const { id, comment, version, security, encrypted } = item;
 
-	const changeVersionHistoryAbility = !editing && security?.EditHistory;
+	// Spec: private-rooms/file-operations, "Version operations withheld"
+	const changeVersionHistoryAbility =
+		!editing && !encrypted && security?.EditHistory;
 
 	useEffect(() => {
 		setVerHistoryFileId?.(id);

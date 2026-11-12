@@ -54,8 +54,6 @@ export const getDialogContent = (
   isRoom,
   isTemplatesFolder,
   isSharedWithMeFolderRoot,
-  isAIAgent,
-  isAIAgentsFolderRoot,
   unsubscribe,
   isPrivacyFolder,
   isFormSpace = false,
@@ -83,32 +81,6 @@ export const getDialogContent = (
         values={{ count: selection.length }}
         components={{ 1: <Text fontWeight={600} as="span" /> }}
       />
-    );
-  }
-
-  if (isAIAgent) {
-    return isSingle ? (
-      <>
-        <Trans
-          t={t}
-          i18nKey="DeleteAIAgentDescription"
-          ns="Common"
-          values={{ agentName: selection[0]?.title }}
-          components={{ 1: <Text fontWeight={600} as="span" /> }}
-        />{" "}
-        {t("Common:WantToContinue")}
-      </>
-    ) : (
-      <>
-        <Trans
-          t={t}
-          i18nKey="DeleteAIAgentsDescription"
-          ns="Common"
-          values={{ count: selection.length }}
-          components={{ 1: <Text fontWeight={600} as="span" /> }}
-        />{" "}
-        {t("Common:WantToContinue")}
-      </>
     );
   }
 
@@ -251,28 +223,20 @@ export const getDialogContent = (
     }
   }
 
-  if (
-    isPersonalRoom ||
-    isRoom ||
-    isTemplatesFolder ||
-    isSharedWithMeFolderRoot ||
-    isAIAgentsFolderRoot
-  ) {
+  // Moving to Trash: third-party items never get here (handled above), so the
+  // 30-day restore period always applies.
+  if (isPersonalRoom || isRoom || isTemplatesFolder || isSharedWithMeFolderRoot) {
+    const bold = { 1: <strong /> };
+
     if (isSingle) {
       return (
-        <>
-          <Trans t={t} i18nKey="DeleteItem" ns="DeleteDialog">
-            You are about to move{" "}
-            <strong>{{ name: selection[0]?.title }}</strong>
-            to {{ trashSection: t("Common:TrashSection") }}.
-          </Trans>{" "}
-          {!isThirdParty
-            ? isFolder
-              ? t("FolderDeletedAfter")
-              : t("FileDeletedAfter")
-            : null}{" "}
-          {t("Common:WantToContinue")}
-        </>
+        <Trans
+          t={t}
+          i18nKey="MoveItemToTrash"
+          ns="DeleteDialog"
+          values={{ name: selection[0]?.title }}
+          components={bold}
+        />
       );
     }
 
@@ -282,42 +246,37 @@ export const getDialogContent = (
 
     if (filesCount && foldersCount) {
       return (
-        <>
-          <Trans t={t} i18nKey="DeleteFilesAndFolders" ns="DeleteDialog">
-            You are about to delete the{" "}
-            <strong>files ({{ filesCount }})</strong> and{" "}
-            <strong>folders ({{ foldersCount }})</strong> to{" "}
-            {{ trashSection: t("Common:TrashSection") }}.
-          </Trans>{" "}
-          {!isThirdParty ? t("ItemsDeletedAfter") : null}{" "}
-          {t("Common:WantToContinue")}
-        </>
+        <Trans
+          t={t}
+          i18nKey="MoveFilesAndFoldersToTrash"
+          ns="DeleteDialog"
+          values={{ filesCount, foldersCount }}
+          components={bold}
+        />
       );
     }
 
     if (filesCount) {
       return (
-        <>
-          <Trans t={t} i18nKey="DeleteFiles" ns="DeleteDialog">
-            You are about to move <strong>files ({{ filesCount }})</strong> to
-            {{ trashSection: t("Common:TrashSection") }}.{" "}
-          </Trans>{" "}
-          {!isThirdParty ? t("FilesDeletedAfter") : null}{" "}
-          {t("Common:WantToContinue")}
-        </>
+        <Trans
+          t={t}
+          i18nKey="MoveFilesToTrash"
+          ns="DeleteDialog"
+          values={{ filesCount }}
+          components={bold}
+        />
       );
     }
 
     if (foldersCount) {
       return (
-        <>
-          <Trans t={t} i18nKey="DeleteFolders" ns="DeleteDialog">
-            You are about to move <strong>folders ({{ foldersCount }})</strong>{" "}
-            to {{ trashSection: t("Common:TrashSection") }}.{" "}
-          </Trans>{" "}
-          {!isThirdParty ? t("FoldersDeletedAfter") : null}{" "}
-          {t("Common:WantToContinue")}
-        </>
+        <Trans
+          t={t}
+          i18nKey="MoveFoldersToTrash"
+          ns="DeleteDialog"
+          values={{ foldersCount }}
+          components={bold}
+        />
       );
     }
   }

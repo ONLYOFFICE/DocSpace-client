@@ -1,0 +1,21 @@
+{
+  "key_path": "AiWorkspaceKnowledge",
+  "content": "Knowledge",
+  "content_en_sha1_hash": "dec1fccaba73443d77f5cfc48dacf9d496399f53",
+  "created_at": "2026-11-10T13:41:19.746Z",
+  "updated_at": "2026-11-10T13:41:19.746Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

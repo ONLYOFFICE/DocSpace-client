@@ -36,6 +36,11 @@
 import type { TPathParts } from "../../types";
 import type { TFile, TFolder } from "../files/types";
 import type { TRoom } from "../rooms/types";
+import type {
+  TEntryMetadata,
+  TMetadataEntryKind,
+  TMetadataValue,
+} from "../metadata/types";
 import { KnowledgeType, ProviderType } from "./enums";
 
 import {
@@ -122,6 +127,33 @@ export type KnowledgeConfig = {
   needReset?: boolean;
 };
 
+/** How far the document agent's model thinks; `default` follows the profile. */
+export type TDocumentAgentReasoning =
+  | "default"
+  | "off"
+  | "low"
+  | "medium"
+  | "high"
+  | "max";
+
+/**
+ * Tenant settings of the document agent (Portal settings → AI settings →
+ * Document Agent). The AI service reads them when it builds the agent's
+ * request: the model and the limits go into `metadata.docagent`.
+ */
+export type TDocumentAgentSettings = {
+  enabled: boolean;
+  /** The profile the agent runs on; null means the chat's own model. */
+  profileId: string | null;
+  reasoning: TDocumentAgentReasoning;
+  maxToolCalls: number;
+  maxFileBytes: number;
+  /** Whether the full log of every task is saved as a file. */
+  taskLog: boolean;
+  /** The folder the log files go to; null means next to the task's results. */
+  taskLogFolderId: string | null;
+};
+
 // `profileId` is injected by the Node AI service on GET /ai/agents/:id
 // (resolved from the Chat-action assignment), so it isn't part of the base
 // room contract.
@@ -186,3 +218,132 @@ export type TAIUserConfig = {
   chatRecommendedModelVisible: boolean;
 };
 
+export type TMetadataAISource = {
+  id: string;
+  title: string;
+  truncated: boolean;
+};
+
+export type TMetadataAISkipped = {
+  id: string;
+  title?: string;
+  reason: "unsupported" | "limit" | "forbidden" | "not_found" | "empty" | "failed";
+};
+
+export type TMetadataAIFillRequest = {
+  kind: TMetadataEntryKind;
+  id: number;
+  prompt?: string;
+  overwrite?: boolean;
+  dryRun?: boolean;
+};
+
+export type TMetadataAIFilledField = {
+  fieldId?: number;
+  name: string;
+  value: TMetadataValue | string;
+};
+
+export type TMetadataAIUnresolvedField = {
+  fieldId?: number;
+  name: string;
+  reason:
+    | "already_set"
+    | "not_found"
+    | "invalid_value"
+    | "unknown_option"
+    | "write_failed";
+};
+
+export type TMetadataAIFillResult = {
+  metadata: TEntryMetadata;
+  filled: TMetadataAIFilledField[];
+  unresolved: TMetadataAIUnresolvedField[];
+  sources: TMetadataAISource[];
+  skipped: TMetadataAISkipped[];
+  dryRun: boolean;
+};
+
+export type TMetadataAIGenerateRequest = {
+  kind: TMetadataEntryKind;
+  id: number;
+  prompt?: string;
+};
+
+export type TMetadataAIField = {
+  name: string;
+  value: string | null;
+};
+
+export type TMetadataAIGenerateResult = {
+  fields: TMetadataAIField[];
+  sources: TMetadataAISource[];
+  skipped: TMetadataAISkipped[];
+};
+
+export type TMetadataAIError = Error & {
+  status?: number;
+  skipped?: TMetadataAISkipped[];
+  code?: string;
+  providerMessage?: string;
+};
+
+/** Limits of `POST ai/skills/generate`, as the skill frontmatter allows them. */
+export const SKILL_TITLE_MAX_LENGTH = 64;
+export const SKILL_DESCRIPTION_MAX_LENGTH = 2000;
+
+export type TGenerateSkillRequest = {
+  /** The Instructions room the skill is written for. */
+  destId: number | string;
+  /** The skill's title; its kebab-case form becomes the skill's name. */
+  title: string;
+  /** What the skill should do, in the user's words. */
+  description: string;
+};
+
+/** The generated skill, not saved yet: the user reviews it first. */
+export type TGenerateSkillResult = {
+  /** The skill's name; the file is saved as `<name>.md`. */
+  name: string;
+  /** The whole Markdown file, frontmatter included. */
+  content: string;
+};
+
+export type TCreateSkillRequest = {
+  /** The Instructions room the skill is created in. */
+  destId: number | string;
+  /** The file's title without the extension; the skill's name is derived from it. */
+  title: string;
+};
+
+/** The skill file created from the template. */
+export type TCreateSkillResult = {
+  id: string;
+  /** The title the file was saved under, extension included. */
+  title: string;
+};
+
+export type TGenerateSkillError = Error & {
+  status?: number;
+  code?: string;
+  providerMessage?: string;
+};
+
+
+export type TByokModel = {
+  id: string;
+  name: string;
+};
+
+export type TByokProvider = {
+  id: string;
+  name: string;
+  models: TByokModel[];
+};
+
+export type TByokKey = {
+  id: string;
+  name?: string;
+  provider: string;
+  image?: string;
+};

@@ -82,7 +82,6 @@ import ChatPanelView from "@onlyoffice/apps-ui-kit/components/section/sub-compon
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
-import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
 import {
   useChatNoAccess,
@@ -118,10 +117,6 @@ type DashboardProps = ChatNoAccessStoreProps & {
   isAdminOrOwner: boolean;
   /** Whether Docs Connect can be offered at all — SaaS, admin or owner. */
   canOpenDocsConnect: boolean;
-  /** Whether the portal's AI is set up, which agent creation also needs. */
-  aiReady: boolean;
-  /** The portal-wide AI switch: with it off the AI Agents card is dropped. */
-  aiServicesEnabled: boolean;
   /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
   isFreeTariff: boolean;
   /** Startup and Business are SaaS tariffs; standalone gets the neutral copy. */
@@ -129,6 +124,16 @@ type DashboardProps = ChatNoAccessStoreProps & {
   /** Rooms quota exhausted or portal in its grace period. */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
+  logoText: string;
+  /** Whether an app is switched on; always true in SaaS. */
+  isAppInstalled: (id: string) => boolean;
+  /** Apps can be switched on and off on this portal (standalone only). */
+  canManageApps: boolean;
+  /** Fetches the apps list once, which `isAppInstalled` reads. */
+  ensureAppsLoaded: () => void;
+  /** The AI rooms section is in the sidebar: AI is on and its root is served. */
+  isAiHubAvailable: boolean;
+  setShownInfoPanelWidth: (width: number) => void;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
@@ -144,15 +149,19 @@ const Dashboard = (props: DashboardProps) => {
     canCreateRooms,
     isAdminOrOwner,
     canOpenDocsConnect,
-    aiReady,
-    aiServicesEnabled,
     isFreeTariff,
     standalone,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    logoText,
+    isAppInstalled,
+    canManageApps,
+    ensureAppsLoaded,
+    isAiHubAvailable,
+    setShownInfoPanelWidth,
   } = props;
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:Home");
+  useDocumentTitle("Common:Home", logoText);
 
   // Gates every tour entry point on this page. The tours walk through desktop
   // chrome (`useTour` refuses to run on mobile outright), so on a phone the
@@ -182,18 +191,20 @@ const Dashboard = (props: DashboardProps) => {
 
   const createItems = useCreateActions(myFolderId, isGuest, isAiChatAvailable);
 
-  // Agent creation needs AI to be set up on top of the create right. `aiReady`
-  // (portal /ai/config) can lag behind the chat-lib profiles, so existing
-  // profiles count as ready too — the same signal Home and the agents EmptyView
-  // use to decide whether to offer agent creation.
-  const hasAiProfiles = useHasAiProfiles();
+  React.useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
+
   const moduleItems = useModuleItems({
     isGuest,
     canCreateRooms,
-    canCreateAgents: (aiReady || hasAiProfiles) && canCreateRooms,
-    aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
+    isAppInstalled,
+    // Settings -> Apps, where an app is switched on, is open to portal admins
+    // and the owner only.
+    canEnableApps: isAdminOrOwner && canManageApps,
+    isAiHubAvailable,
   });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
@@ -243,6 +254,11 @@ const Dashboard = (props: DashboardProps) => {
   React.useEffect(() => {
     if (!isAiChatAvailable && isChatPanelVisible) closeChatPanel();
   }, [isAiChatAvailable, isChatPanelVisible, closeChatPanel]);
+
+  const onChatShownWidthChange = React.useCallback(
+    (width?: number) => setShownInfoPanelWidth(width ?? 0),
+    [setShownInfoPanelWidth],
+  );
 
   const isDesktop = useIsDesktop();
   const isAiChatFullscreen =
@@ -373,7 +389,9 @@ const Dashboard = (props: DashboardProps) => {
                       key={mod.id}
                       mod={mod}
                       onTakeTour={
-                        isMobile
+                        // An app that is switched off has no section for its
+                        // tour to run in; ModuleCard disables the icon then.
+                        isMobile || mod.noTour
                           ? undefined
                           : () => {
                               requestAppTour(mod.id as AppId);
@@ -409,6 +427,7 @@ const Dashboard = (props: DashboardProps) => {
           <WelcomeDialog
             onTakeTour={onWelcomeTakeTour}
             onClose={onWelcomeClose}
+            organizationName={logoText}
           />
         ) : null}
 
@@ -426,6 +445,8 @@ const Dashboard = (props: DashboardProps) => {
           isFullscreen={isAiChatFullscreen}
           width={aiChatPanel.chatPanelWidth}
           onResize={aiChatPanel.setChatPanelWidth}
+          onLiveResize={setShownInfoPanelWidth}
+          onShownWidthChange={onChatShownWidthChange}
           onRequestFullscreen={aiChatPanel.setChatPanelFullscreen}
           onExitFullscreen={aiChatPanel.unsetChatPanelFullscreen}
         >
@@ -449,8 +470,10 @@ const DashboardConnected = inject((stores: TStore) => {
     filesTourStore,
     roomsTourStore,
     formsTourStore,
-    aiAgentsTourStore,
     dashboardTourStore,
+    appsStore,
+    infoPanelStore,
+    treeFoldersStore,
   } = stores;
 
   // The app cards an onboarding tour can be started from. An app that isn't
@@ -459,7 +482,6 @@ const DashboardConnected = inject((stores: TStore) => {
     "ai-files": filesTourStore,
     "ai-rooms": roomsTourStore,
     "ai-forms": formsTourStore,
-    "ai-agents": aiAgentsTourStore,
   } as const;
 
   return {
@@ -472,7 +494,7 @@ const DashboardConnected = inject((stores: TStore) => {
         appTourStores[appId as keyof typeof appTourStores].requestTour();
     },
     requestDashboardTour: dashboardTourStore.requestTour,
-    // Same set the Home quick actions and the agents header button gate on.
+    // Same set the Home quick actions gate on.
     canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
     // Room admins are excluded here: the apps subtitle names the portal's plan,
     // which only admins and the owner see. Same flags the Header and
@@ -486,16 +508,20 @@ const DashboardConnected = inject((stores: TStore) => {
       settingsStore.standalone,
       settingsStore.limitedAccessDevToolsForUsers,
     ),
-    aiReady: settingsStore.aiConfig?.aiReady ?? false,
-    // The portal's own AI switch, which is a stronger statement than `aiReady`:
-    // AI that is off is not "not set up yet", it is not on offer at all.
-    aiServicesEnabled: settingsStore.aiServicesEnabled,
     // Undefined until the tariff loads; the plan is free by default, matching
     // the header's own fallback.
     isFreeTariff: currentQuotaStore.isFreeTariff ?? true,
     standalone: settingsStore.standalone,
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+    logoText: settingsStore.logoText,
+    isAppInstalled: appsStore.isInstalled,
+    canManageApps: appsStore.canManageApps,
+    ensureAppsLoaded: appsStore.ensureLoaded,
+    // The same condition the sidebar shows the "AI rooms" section on.
+    isAiHubAvailable:
+      !!treeFoldersStore.aiHubFolder && settingsStore.aiServicesEnabled,
+    setShownInfoPanelWidth: infoPanelStore.setShownWidth,
   };
 })(observer(Dashboard));
 

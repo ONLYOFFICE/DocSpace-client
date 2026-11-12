@@ -132,6 +132,17 @@ describe("FilesActionsStore.isAvailableOption — characterization", () => {
     ).toBe(true);
   });
 
+  it("create-room: hidden while the Rooms app is off (bug 84823)", () => {
+    expect(
+      createTestFilesActionsStore({
+        filesStore: {
+          isRoomsSectionOff: true,
+          selection: [sec({ CreateRoomFrom: true })],
+        },
+      }).isAvailableOption("create-room"),
+    ).toBe(false);
+  });
+
   it("create-group / add-to-group / remove-from-group gating", () => {
     const on = {
       filesSettingsStore: { organizeRoomsGrouping: true },
@@ -166,13 +177,11 @@ describe("FilesActionsStore.isAvailableOption — characterization", () => {
     const store = createTestFilesActionsStore({
       filesStore: {
         hasRoomsToChangeQuota: true,
-        hasAIAgentsToChangeQuota: false,
         hasRoomsToDisableQuota: true,
         hasRoomsToResetQuota: false,
       },
     });
     expect(store.isAvailableOption("change-quota")).toBe(true);
-    expect(store.isAvailableOption("change-agent-quota")).toBe(false);
     expect(store.isAvailableOption("disable-quota")).toBe(true);
     expect(store.isAvailableOption("default-quota")).toBe(false);
   });

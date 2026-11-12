@@ -107,8 +107,18 @@ import type {
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserRole } from "../helpers/plugins/roles";
+import {
+  isSupersededPluginItem,
+  MARKDOWN_EXTENSION,
+} from "../helpers/plugins/markdown";
 import { createPluginApi } from "../helpers/plugins/react/api";
-import { toCurrentUser } from "../helpers/plugins/react/utils";
+import {
+  createModuleEvents,
+  releaseModuleEvents,
+  setModuleEventDispatcher,
+} from "../helpers/plugins/react/socket";
+import type { RoomsType } from "@docspace/shared/enums";
+import { pluginRoomTypes, toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
   PluginScopes,
@@ -229,6 +239,11 @@ class PluginStore {
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+
+    // messages returned by plugins' socket handlers go through the same dispatcher as any callback
+    setModuleEventDispatcher(({ message, pluginName }) =>
+      this.dispatchMessage({ message, pluginName }),
+    );
 
     makeAutoObservable(this, {
       reactPluginModalState: observable.ref,
@@ -868,6 +883,7 @@ class PluginStore {
       try {
         this.uninstallPluginCss(previous);
         this.unregisterPluginItems(previous);
+        releaseModuleEvents(previous.name);
       } catch (e) {
         console.error(`[Plugin: ${plugin.name}] Failed to unregister:`, e);
       }
@@ -905,6 +921,10 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.API)) {
       plugin.setAPI?.(origin, proxy, prefix);
     }
+
+    // the portal's socket for integration-module events, bound to this plugin; before onLoadCallback, like
+    // setAPI, so the plugin can subscribe while it registers its items
+    plugin.setModuleEvents?.(createModuleEvents(plugin.name));
 
     const { name } = plugin;
 
@@ -1007,6 +1027,9 @@ class PluginStore {
     this.uninstallPluginCss(plugin);
 
     this.unregisterPluginItems(plugin);
+
+    // a disabled plugin keeps no socket listeners or module rooms behind
+    releaseModuleEvents(plugin.name);
   };
 
   getUserRole = () => {
@@ -1040,10 +1063,25 @@ class PluginStore {
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];
-    const { type, fileExst, userRole, device, security, itemSecurity, itemId } =
-      ctx;
+    const {
+      type,
+      fileExst,
+      userRole,
+      device,
+      security,
+      itemSecurity,
+      itemId,
+      roomType,
+    } = ctx;
 
     if (type && item.fileType && !item.fileType.includes(type)) return;
+
+    if (
+      type === PluginFileType.room &&
+      item.roomType &&
+      !(roomType && item.roomType.includes(roomType))
+    )
+      return;
 
     if (fileExst && item.fileExt && !item.fileExt.includes(fileExst)) return;
 
@@ -1067,7 +1105,11 @@ class PluginStore {
     )
       return;
 
-    if (itemId !== undefined && item.itemId && !item.itemId.includes(itemId))
+    if (
+      itemId !== undefined &&
+      item.itemId &&
+      !item.itemId.some((id) => String(id) === String(itemId))
+    )
       return;
 
     if (item.items && item.items.length > 0) {
@@ -1101,6 +1143,7 @@ class PluginStore {
       | TFolderSecurity
       | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>,
     itemId?: number | string,
+    roomType?: RoomsType,
   ) => {
     if (this.contextMenuItems.size === 0) return;
 
@@ -1150,6 +1193,8 @@ class PluginStore {
             security,
             itemSecurity,
             itemId,
+            roomType:
+              roomType === undefined ? undefined : pluginRoomTypes[roomType],
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -1284,6 +1329,8 @@ class PluginStore {
 
     // Process all top-level items
     Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
+      if (isSupersededPluginItem(plugin, key)) return;
+
       const contextMenuItem = processContextMenuItem(value);
       this.contextMenuItems.set(key, contextMenuItem);
       actualKeys.add(key);
@@ -1388,6 +1435,8 @@ class PluginStore {
         : true;
 
       if (!correctUserType || !correctDevice) return;
+
+      if (isSupersededPluginItem(plugin, key)) return;
 
       const newItems: IMainButtonItemClient[] = [];
 
@@ -1855,6 +1904,23 @@ class PluginStore {
     return null;
   }
 
+  /**
+   * The enabled plugin item that opens `.md` files, or null: Markdown is
+   * edited and created only through it (see helpers/plugins/markdown).
+   */
+  get markdownFileItem() {
+    if (!this.settingsStore.enablePlugins) return null;
+
+    return this.fileItems.get(MARKDOWN_EXTENSION) ?? null;
+  }
+
+  get isMarkdownEditorAvailable() {
+    return !!this.markdownFileItem;
+  }
+
+  /** Opens a `.md` file in the Markdown plugin, for editing when allowed. */
+  openMarkdownFile = (file: TFile) => this.markdownFileItem?.onClick(file);
+
   get fileItemsList() {
     const items = Array.from(this.fileItems, ([key, value]) => {
       return {
@@ -2150,6 +2216,10 @@ class PluginStore {
   };
 
   get articleNavigationItemsList() {
+    // Plugins load in parallel and each adds its items once its bundle has loaded, so the map holds them in the
+    // order the downloads happened to finish - a different order after every reload. Sorting by plugin name gives a
+    // stable sidebar that an administrator can arrange by naming the plugins (numeric parts compare as numbers);
+    // the sort is stable, so the items of one plugin keep the order the plugin gave them.
     const items = Array.from(this.articleNavigationItems, ([key, value]) => {
       return {
         key,
@@ -2157,7 +2227,11 @@ class PluginStore {
           ...value,
         },
       };
-    });
+    }).sort((a, b) =>
+      a.value.pluginName.localeCompare(b.value.pluginName, "en", {
+        numeric: true,
+      }),
+    );
 
     if (items.length > 0) {
       return items;

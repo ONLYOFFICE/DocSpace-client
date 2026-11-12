@@ -3,12 +3,12 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2025-11-25T11:53:02.411Z",
-  "updated_at": "2026-10-06T10:42:37.460Z",
+  "updated_at": "2026-11-09T09:36:33.223Z",
   "comment": {
-    "text": "This is a label for the \"AI Chat\" feature, appearing as a noun within a sentence describing an empty knowledge base in an AI Room.",
+    "text": "Name of the AI Chat feature and of the AI Chat section (formerly \"AI rooms\") holding Instructions and Knowledge rooms: sidebar item, section header, folder title, dashboard card, default-page option, quick-action label. Noun phrase, no trailing punctuation.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:02:09.469Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-11-09T09:27:35.822Z",
+    "model": "claude-fable-5-1"
   },
   "usage": [
     {
@@ -18,33 +18,15 @@
       "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 596,
+      "context": "// archives them, so there is no Archive slot. The bare `/ai-rooms` is the\n // Rooms app's SDK frame page: the section lives on the nested paths.\n if (aiHubFolder && aiServicesEnabled) {\n mainItems.push({\n id: \"ai-rooms\",\n label: t(\"Common:AIChat\"),\n icon: getCatalogIconUrlByType(FolderType.Rooms),\n ...nav(searchAreaUrl(\"/ai-rooms/filter\", RoomSearchArea.AiHub)),\n ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),\n children: [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 130,
-      "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
+      "line_number": 374,
+      "context": "// Opens the AI chat panel — the same action the quick-action tiles and the\n // dashboard use. Only offered where the chat is actually reachable\n // (`isAiChatAvailable` already covers guests and portals without AI).\n const openAiChat = {\n title: t(\"Common:AIChat\"),\n description: t(\"EmptyView:AIChatOptionDescription\"),\n icon: <CreateChatIcon />,\n key: \"open-ai-chat\",\n onClick: actions.onOpenAiChat,\n disabled: false,",
       "module": "/packages/client"
     },
     {
@@ -54,21 +36,33 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 237,
+      "context": "// onboarding tour.\n if (isAiHubAvailable) {\n items.push({\n id: \"ai-hub\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:AIChat\"),\n description: t(\"Common:AiRoomsCreateDescription\"),\n installed: true,\n href: AI_HUB_PATH,\n buttonLabel: t(\"Common:Open\"),\n onAction: () => navigate(AI_HUB_PATH),",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 197,
+      "line_number": 187,
       "context": "const aiChatItems = React.useMemo<QuickActionItem>(\n () => ({\n id: \"quick-ai-chat\",\n dataTestId: \"quick-ai-chat\",\n icon: <AIChatIcon />,\n label: t(\"Common:AIChat\"),\n onClick: openChat,\n }),\n [t, openChat],\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
-      "line_number": 152,
-      "context": "};\n \n const items: TTabItem[] = [\n {\n id: \"chat\",\n name: t(\"AIChat\"),\n content: null,\n },\n {\n id: \"knowledge\",\n name: t(\"Knowledge\"),",
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 779,
+      "context": "if (isPrivateRoomsListRoot(location, isRoomsFolder))\n return t(\"Common:Private\");\n \n // The AI root is titled by the client, as the tree titles it.\n if (getCategoryType(location) === CategoryType.AiHub)\n return t(\"Common:AIChat\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 549,
-      "context": "ns=\"Common\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiAgent: t(\"Common:AIAgent\"), aiChat: t(\"Common:AIChat\") }}\n />,\n );\n }\n }, [\n selectedFolderStore.isInsideResultStorage,",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
+      "line_number": 88,
+      "context": "{\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n {\n label: t(\"Common:AIChat\"),\n key: FolderType.AiHub,\n },\n ];\n \n return options.filter((option) =>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
+      "line_number": 126,
+      "context": "break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n case FolderType.AiHub:\n folder.title = i18n.t(\"Common:AIChat\");\n break;\n default:\n break;\n }\n });",
       "module": "/packages/client"
     },
     {
@@ -91,7 +85,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
-      "line_number": 204,
+      "line_number": 203,
       "context": "const openChatOptions: EmptyViewOptionsType = [\n {\n key: \"result-empty-open-chat\",\n title: t(\"Common:CreateChat\", { defaultValue: \"Create chat\" }),\n description: t(\"Common:CreateChatDescription\", {\n aiChat: t(\"Common:AIChat\", { defaultValue: \"AI Chat\" }),\n defaultValue: \"Go to the {{aiChat}} tab to get started.\",\n }),\n icon: <CreateChatIcon />,\n onClick: onOpenChat,\n disabled: !canUseChat,",
       "module": "/packages/sdk"
     },

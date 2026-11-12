@@ -33,7 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { http } from "msw";
+import type { Locator, Page } from "@playwright/test";
+
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e/utils";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -48,7 +52,69 @@ import {
   updateRoomGroupHandler,
   deleteRoomGroupHandler,
   updateRoomGroupIconHandler,
+  roomListResolver,
 } from "@docspace/shared/__mocks__/handlers";
+
+// Rooms of the default list that get a file lifetime: a short title and the
+// one whose title is far wider than the selector.
+const SHORT_LIFETIME_ROOM_ID = 40;
+const LONG_LIFETIME_ROOM_ID = 33;
+
+const roomListWithLifetimeHandler = () =>
+  http.get(
+    `${BASE_URL}:${TEST_PORT}/${API_PREFIX}/files/rooms*`,
+    async ({ request }) => {
+      const { response } = await roomListResolver(
+        TypeRoomList.IsDefault,
+        undefined,
+        request,
+      ).json();
+
+      response.folders = response.folders.map((room: { id: number }) =>
+        room.id === SHORT_LIFETIME_ROOM_ID || room.id === LONG_LIFETIME_ROOM_ID
+          ? {
+              ...room,
+              lifetime: { value: 1, period: 0, deletePermanently: false },
+            }
+          : room,
+      );
+
+      return new Response(JSON.stringify({ response }));
+    },
+  );
+
+const openCreateGroupRoomSelector = async (page: Page, baseUrl: string) => {
+  await page.goto(`${baseUrl}/rooms/shared/`);
+  await expect(page.getByTestId("table-body")).toBeVisible();
+
+  await page.locator('[class*="groupManagementButton"]').click();
+
+  const dialog = page
+    .getByTestId("modal-dialog")
+    .filter({ hasText: "Edit room groups" });
+  await expect(dialog).toBeVisible();
+
+  await dialog.getByTestId("create_new_group_button").click();
+
+  const roomSelector = page.getByTestId("room_selector");
+  await expect(roomSelector).toBeVisible();
+
+  return roomSelector;
+};
+
+const getLifetimeRow = (roomSelector: Locator, roomId: number) => {
+  const iconSelector = `[data-tooltip-id="${roomId}_iconTooltip"]`;
+  const row = roomSelector
+    .locator('[data-testid^="selector-item-"]')
+    .filter({ has: roomSelector.page().locator(iconSelector) });
+
+  return {
+    row,
+    icon: row.locator(iconSelector),
+    label: row.locator('[class*="selectorItemLabel"]'),
+    checkbox: row.locator(".checkbox").first(),
+  };
+};
 
 test.describe("Room grouping", () => {
   // Set up authenticated user and room list for all tests in this suite
@@ -944,6 +1010,245 @@ test.describe("Room grouping", () => {
         "room-grouping",
         "edit-group-room-list.png",
       ]);
+    });
+  });
+
+  test.describe("Room list lifetime icon", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(
+        filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
+        roomGroupsHandler(TEST_PORT, true),
+        roomGroupByIdHandler(TEST_PORT),
+        roomListWithLifetimeHandler(),
+      );
+    });
+
+    // The multi-select row lays the title out without a flex wrapper unless
+    // the selector styles give it one; the icon then drops under the title.
+    test("should keep the lifetime icon on the title line", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const { icon, label } = getLifetimeRow(
+        roomSelector,
+        SHORT_LIFETIME_ROOM_ID,
+      );
+
+      await expect(icon).toBeVisible();
+
+      const labelBox = (await label.boundingBox())!;
+      const iconBox = (await icon.boundingBox())!;
+
+      // Same line: the icon sits after the title, vertically centred on it.
+      expect(iconBox.x).toBeGreaterThanOrEqual(labelBox.x + labelBox.width);
+      expect(
+        Math.abs(
+          iconBox.y + iconBox.height / 2 - (labelBox.y + labelBox.height / 2),
+        ),
+      ).toBeLessThanOrEqual(2);
+
+      // Park the cursor so no row is left in its hover state.
+      await page.mouse.move(0, 0);
+
+      // Screenshot: both lifetime rooms (short and long title) with the icon
+      // on the title line
+      await expect(roomSelector).toHaveScreenshot([
+        "desktop",
+        "room-grouping",
+        "room-list-lifetime-icon.png",
+      ]);
+    });
+
+    // A title wider than the panel must be ellipsised, not push the icon
+    // under the checkbox or out of the row.
+    test("should truncate a long title and keep the icon before the checkbox", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const { row, icon, label, checkbox } = getLifetimeRow(
+        roomSelector,
+        LONG_LIFETIME_ROOM_ID,
+      );
+
+      await expect(icon).toBeVisible();
+
+      // The text sits in an inner dir="auto" span that clips on its own, so
+      // the label's scrollWidth never exceeds its clientWidth; measure the
+      // laid-out text instead.
+      const isTruncated = await label.evaluate((el) => {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+
+        return (
+          range.getBoundingClientRect().width > el.getBoundingClientRect().width
+        );
+      });
+      expect(isTruncated).toBe(true);
+
+      const rowBox = (await row.boundingBox())!;
+      const labelBox = (await label.boundingBox())!;
+      const iconBox = (await icon.boundingBox())!;
+      const checkboxBox = (await checkbox.boundingBox())!;
+
+      expect(iconBox.x).toBeGreaterThanOrEqual(labelBox.x + labelBox.width);
+      expect(iconBox.x + iconBox.width).toBeLessThanOrEqual(checkboxBox.x);
+      expect(iconBox.x + iconBox.width).toBeLessThanOrEqual(
+        rowBox.x + rowBox.width,
+      );
+      expect(
+        Math.abs(
+          iconBox.y + iconBox.height / 2 - (labelBox.y + labelBox.height / 2),
+        ),
+      ).toBeLessThanOrEqual(2);
+    });
+
+    test("should show the lifetime tooltip on hover", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const { icon } = getLifetimeRow(roomSelector, SHORT_LIFETIME_ROOM_ID);
+
+      await icon.hover();
+
+      await expect(
+        page.getByText("The file lifetime is set to 1 days in this room"),
+      ).toBeVisible();
+    });
+  });
+
+  // The room selector picks several rooms: Space and Enter tick and untick
+  // the row the keyboard is on, and the rows' checkboxes are no Tab stops.
+  test.describe("Room selector from the keyboard", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(
+        filesSettingsHandler(TEST_PORT, { organizeRoomsGrouping: true }),
+        roomGroupsHandler(TEST_PORT, true),
+        roomGroupByIdHandler(TEST_PORT),
+      );
+    });
+
+    // The option the keyboard is on, as the list names it.
+    const activeOption = (roomSelector: Locator) =>
+      roomSelector.getByRole("listbox").evaluate((list) => {
+        const id = list.getAttribute("aria-activedescendant");
+        const option = id ? document.getElementById(id) : null;
+        return {
+          text: option?.textContent?.trim() ?? "",
+          selected: option?.getAttribute("aria-selected") ?? "",
+        };
+      });
+
+    test("the list takes the focus, and the arrows walk the rooms", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const list = roomSelector.getByRole("listbox");
+
+      await expect(list).toBeFocused();
+      await expect(list).toHaveAttribute("aria-label", /.+/);
+      await expect(list).toHaveAttribute("aria-activedescendant", /option/);
+
+      const options = roomSelector.getByRole("option");
+      await expect(options.first()).toBeVisible();
+      const first = (await activeOption(roomSelector)).text;
+      expect(first).not.toBe("");
+
+      await page.keyboard.press("ArrowDown");
+      const second = (await activeOption(roomSelector)).text;
+      expect(second).not.toBe(first);
+
+      await page.keyboard.press("ArrowUp");
+      expect((await activeOption(roomSelector)).text).toBe(first);
+
+      await page.keyboard.press("End");
+      expect((await activeOption(roomSelector)).text).not.toBe(first);
+      await page.keyboard.press("Home");
+      expect((await activeOption(roomSelector)).text).toBe(first);
+
+      // One Tab stop for the whole list: no row's checkbox takes the focus.
+      const rowStops = await list.evaluate(
+        (el) =>
+          [...el.querySelectorAll<HTMLElement>("input, button, [tabindex]")]
+            .filter((stop) => stop !== el && stop.tabIndex >= 0).length,
+      );
+      expect(rowStops).toBe(0);
+    });
+
+    test("Space and Enter tick and untick rooms, and Select takes them", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      await expect(roomSelector.getByRole("listbox")).toBeFocused();
+      const submit = roomSelector.getByTestId("selector_submit_button");
+
+      await page.keyboard.press(" ");
+      expect((await activeOption(roomSelector)).selected).toBe("true");
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("Enter");
+      expect((await activeOption(roomSelector)).selected).toBe("true");
+      await expect(roomSelector.getByRole("option", { selected: true })).toHaveCount(2);
+
+      // Enter on a ticked row unticks it: in a multi-select it is no submit.
+      await page.keyboard.press("Enter");
+      expect((await activeOption(roomSelector)).selected).toBe("false");
+      await expect(roomSelector.getByRole("option", { selected: true })).toHaveCount(1);
+
+      await expect(submit).toBeEnabled();
+      for (
+        let i = 0;
+        i < 10 && !(await submit.evaluate((el) => el === document.activeElement));
+        i += 1
+      )
+        await page.keyboard.press("Tab");
+      await expect(submit).toBeFocused();
+    });
+
+    // The list draws only the rows near the viewport: Enter used to do nothing
+    // once the wheel had scrolled the keyboard's row away.
+    test("Enter picks the keyboard's room even after the wheel scrolled it away", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      const list = roomSelector.getByRole("listbox");
+      await expect(list).toBeFocused();
+
+      await page.keyboard.press("End");
+      const optionId = await list.getAttribute("aria-activedescendant");
+      expect(optionId).toBeTruthy();
+      const lastRow = roomSelector.locator(`[id="${optionId}"]`);
+      await expect(lastRow).toBeVisible();
+
+      await list.hover();
+      await page.mouse.wheel(0, -10000);
+      await expect(lastRow).toHaveCount(0);
+      await expect(list).toBeFocused();
+
+      await page.keyboard.press("Enter");
+      await expect(lastRow).toHaveAttribute("aria-selected", "true");
+    });
+
+    test("Escape closes the room selector and gives the focus back to Create new group", async ({
+      page,
+      baseUrl,
+    }) => {
+      const roomSelector = await openCreateGroupRoomSelector(page, baseUrl);
+      await expect(roomSelector.getByRole("listbox")).toBeFocused();
+
+      await page.keyboard.press("Escape");
+      await expect(roomSelector).toBeHidden();
+      // The add button's wrapper is the control the focus goes back to; the
+      // Edit room groups dialog it sits in stays open.
+      await expect(
+        page
+          .getByTestId("selector-add-button-container")
+          .filter({ has: page.getByTestId("create_new_group_button") }),
+      ).toBeFocused();
     });
   });
 });

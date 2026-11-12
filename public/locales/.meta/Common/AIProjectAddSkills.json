@@ -1,0 +1,21 @@
+{
+  "key_path": "AIProjectAddSkills",
+  "content": "Add skills",
+  "content_en_sha1_hash": "5ff233cf5a0c94c0876a95653217f1c7b8ad711f",
+  "created_at": "2026-11-10T13:41:17.044Z",
+  "updated_at": "2026-11-10T13:41:17.044Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

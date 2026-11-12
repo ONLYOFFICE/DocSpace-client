@@ -46,6 +46,8 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { getAiChatInterruption } from "@docspace/shared/utils/ai";
+import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 
 type AiAgentProvidersProps = React.ComponentProps<typeof AiAgentProviders>;
 
@@ -68,23 +70,33 @@ const FormsAiChatProviders = ({
   const canUseAi = !!user && !user.isVisitor;
   const entityId = roomId ? String(roomId) : undefined;
 
+  // The SDK has no wallet page or AI settings to send the user to, so the
+  // notice above the composer only says what is going on; the error box
+  // keeps the past-tense note (see Shell.jsx in the client).
+  const {
+    composerNotice,
+    onStreamError,
+    onStreamEnd,
+  } = useAiChatNotice({
+    t,
+    language: i18n.language,
+    standalone: isStandalone,
+    isAdmin: !!(user?.isAdmin || user?.isOwner),
+    isPayer: false,
+  });
+
   const formatChatError = React.useCallback<
     NonNullable<AiAgentProvidersProps["formatChatError"]>
   >(
-    (payload) => {
-      if (payload?.code !== "insufficient_funds") return null;
-
-      return {
-        title: t("Common:WalletBalanceTooLow"),
-        description: t("Common:InsufficientFundsContactPayerShort"),
-        action: null,
-      };
-    },
-    [t],
+    (payload, context) =>
+      getAiChatInterruption(t, payload, context?.providerType, isStandalone),
+    [t, isStandalone],
   );
 
   const callbacks = React.useMemo<AiAgentProvidersProps["callbacks"]>(
     () => ({
+      onStreamError,
+      onStreamEnd,
       onWebSearchSaved: () =>
         toastr.success(t("Common:ChangesSavedSuccessfully")),
       onError: ({ type, error, context }) => {
@@ -98,7 +110,7 @@ const FormsAiChatProviders = ({
         if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
       },
     }),
-    [t],
+    [t, onStreamError, onStreamEnd],
   );
 
   return (
@@ -112,6 +124,7 @@ const FormsAiChatProviders = ({
       entityId={entityId}
       callbacks={callbacks}
       formatChatError={formatChatError}
+      composerNotice={composerNotice}
       hideProfilePicker={false}
     >
       {children}

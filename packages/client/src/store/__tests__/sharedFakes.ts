@@ -38,6 +38,8 @@ export const fakeSelectedFolderStore = (): FakeStore => ({
   foldersCount: 0,
   setSelectedFolder: vi.fn(),
   setFilesCount: vi.fn(),
+  countFileCreated: vi.fn(),
+  countFileDeleted: vi.fn(),
   setFoldersCount: vi.fn(),
 });
 
@@ -52,7 +54,6 @@ export const fakeTreeFoldersStore = (): FakeStore => ({
   isRecentFolder: false,
   isFavoritesFolder: false,
   isPrivacyFolder: false,
-  isAIAgentsFolder: false,
   sharedWithMeFolderId: undefined,
   recentFolderId: -101,
   favoritesFolderId: -102,
@@ -78,10 +79,6 @@ export const fakeSettingsStore = (): FakeStore => ({
 export const fakeUserStore = (): FakeStore => ({
   user: { id: "user-1", isAdmin: false },
   encryptionKeys: [],
+  ensureEncryptionKeys: async () => [],
 });
 
-export const fakeAiRoomStore = (): FakeStore => ({
-  setKnowledgeId: vi.fn(),
-  setResultId: vi.fn(),
-  setCurrentTab: vi.fn(),
-});

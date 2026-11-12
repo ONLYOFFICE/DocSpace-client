@@ -159,6 +159,10 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["7-0"]);
       }
 
+      if (location.pathname.includes("/portal-settings/apps")) {
+        setSelectedKeys(["8-0"]);
+      }
+
       if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
@@ -246,6 +250,8 @@ const ArticleBodyContent = (props) => {
         return t("Settings:AISettings");
       case "OAuth:Apps":
         return t("OAuth:Apps");
+      case "Common:AppsSectionTitle":
+        return t("Common:AppsSectionTitle");
       default:
         throw new Error("Unexpected translation key");
     }

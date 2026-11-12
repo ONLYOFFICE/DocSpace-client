@@ -101,6 +101,50 @@ describe("SelectedFolderStore.toDefault", () => {
   });
 });
 
+// Regression: an upload raised the room's file count both on upload finish
+// and on the socket "create" event, so one uploaded file counted as two.
+describe("SelectedFolderStore.countFileCreated", () => {
+  it("counts a file reported by both the upload and the socket once", () => {
+    const store = createStore();
+
+    store.setSelectedFolder({ id: 42, title: "Room", filesCount: 36 });
+
+    store.countFileCreated(100);
+    store.countFileCreated(100);
+
+    expect(store.filesCount).toBe(37);
+
+    store.countFileCreated(101);
+
+    expect(store.filesCount).toBe(38);
+  });
+
+  it("counts a file again when it comes back after being deleted", () => {
+    const store = createStore();
+
+    store.setSelectedFolder({ id: 42, title: "Room", filesCount: 36 });
+
+    store.countFileCreated(100);
+    store.countFileDeleted(100);
+    // restored from the trash with the same id
+    store.countFileCreated(100);
+
+    expect(store.filesCount).toBe(37);
+  });
+
+  it("counts the same id again after the folder is loaded anew", () => {
+    const store = createStore();
+
+    store.setSelectedFolder({ id: 42, title: "Room", filesCount: 36 });
+    store.countFileCreated(100);
+
+    store.setSelectedFolder({ id: 7, title: "Other", filesCount: 3 });
+    store.countFileCreated(100);
+
+    expect(store.filesCount).toBe(4);
+  });
+});
+
 describe("SelectedFolderStore.isRoomStorageQuotaExceeded", () => {
   const openRoom = (store: SelectedFolderStore, extra: object) =>
     store.setSelectedFolder({

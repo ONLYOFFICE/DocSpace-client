@@ -201,7 +201,6 @@ const ButtonContainer = (props: ButtonContainerProps) => {
           isDisabled={isButtonDisabled}
           isLoading={isLoadingButton}
           size={buttonSize}
-          tabIndex={10}
           testId="restore_backup_button"
         />
 

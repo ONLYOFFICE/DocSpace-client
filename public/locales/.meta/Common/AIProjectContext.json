@@ -1,0 +1,47 @@
+{
+  "key_path": "AIProjectContext",
+  "content": "Context",
+  "content_en_sha1_hash": "cc11b3a28fa30ae6d3d3ad1438824cbd5224ba5c",
+  "created_at": "2026-10-31T12:56:51.116Z",
+  "updated_at": "2026-11-10T09:58:15.953Z",
+  "comment": {
+    "text": "Title of the context column of an open AI project, which holds its Skills, Knowledge and Folder cards; also the accessible name of that column, of its collapsed rail and of its tab strip on phones. Noun, one word if possible.",
+    "is_auto": true,
+    "updated_at": "2026-11-10T09:58:15.953Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 610,
+      "context": " };\n\n return (\n <>\n {compact ? (\n <div className={styles.compact} aria-label={t(\"Common:AIProjectContext\")} data-testid=\"ai-project-sources-strip\">\n <div onClick={onTabsClick}>\n <Tabs\n type={TabsTypes.Secondary}\n items={tabs}\n // An id no tab has selects none; an empty one would select the first.",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 634,
+      "context": " // logos of the Skills rooms, of the Knowledge rooms and the folder,\n // each kind with its add button. A logo brings the cards back, as\n // the arrow above them does.\n <aside\n className={classNames(styles.column, styles.rail)}\n aria-label={t(\"Common:AIProjectContext\")}\n data-testid=\"ai-project-sources-rail\"\n >\n <div className={styles.railExpand}>\n <IconButton\n className={styles.expandArrow}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 704,
+      "context": " />\n )}\n </div>\n </aside>\n ) : (\n <aside className={styles.column} aria-label={t(\"Common:AIProjectContext\")}>\n <div className={styles.columnHead}>\n <Text fontSize=\"15px\" lineHeight=\"20px\" fontWeight={700} truncate noSelect>\n {t(\"Common:AIProjectContext\")}\n </Text>\n <IconButton",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 707,
+      "context": " </aside>\n ) : (\n <aside className={styles.column} aria-label={t(\"Common:AIProjectContext\")}>\n <div className={styles.columnHead}>\n <Text fontSize=\"15px\" lineHeight=\"20px\" fontWeight={700} truncate noSelect>\n {t(\"Common:AIProjectContext\")}\n </Text>\n <IconButton\n className={styles.collapseArrow}\n iconName={ArrowReactSvgUrl}\n size={16}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

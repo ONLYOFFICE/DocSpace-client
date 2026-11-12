@@ -781,8 +781,8 @@ const successRoot = {
         indexing: false,
         denyDownload: false,
         fileEntryType: 1,
-        id: 224866,
-        rootFolderId: 224866,
+        id: 224867,
+        rootFolderId: 224867,
         canShare: false,
         security: {
           Read: true,
@@ -809,7 +809,7 @@ const successRoot = {
           UseChat: false,
         },
         availableShareRights: {},
-        title: "AI agents",
+        title: "AI rooms",
         access: 0,
         shared: false,
         sharedForUser: false,
@@ -834,7 +834,7 @@ const successRoot = {
           isAnonim: false,
         },
         updated: "2025-11-12T14:31:29.0000000+00:00",
-        rootFolderType: 34,
+        rootFolderType: 41,
         updatedBy: {
           id: "00000000-0000-0000-0000-0000000000",
           displayName: "Administrator ",
@@ -855,9 +855,9 @@ const successRoot = {
       },
       pathParts: [
         {
-          id: 224866,
-          title: "AI agents",
-          folderType: 34,
+          id: 224867,
+          title: "AI rooms",
+          folderType: 41,
         },
       ],
       startIndex: 0,
@@ -877,12 +877,31 @@ const successRoot = {
   statusCode: 200,
 };
 
-export const rootResolve = (): Response => {
-  return new Response(JSON.stringify(successRoot));
+/** `FolderType.AiHub`: the "AI rooms" root. */
+const AI_HUB_FOLDER_TYPE = 41;
+
+export type RootOptions = {
+  /**
+   * Whether the "AI rooms" root is served. The server leaves it out for a
+   * guest, so a spec signed in as one passes `false`. Defaults to `true`.
+   */
+  withAiHub?: boolean;
 };
 
-export const rootHandler = (port: string) => {
+export const rootResolve = ({ withAiHub = true }: RootOptions = {}): Response => {
+  const body = withAiHub
+    ? successRoot
+    : {
+        ...successRoot,
+        response: successRoot.response.filter(
+          (root) => root.current.rootFolderType !== AI_HUB_FOLDER_TYPE,
+        ),
+      };
+  return new Response(JSON.stringify(body));
+};
+
+export const rootHandler = (port: string, options?: RootOptions) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${ROOT_PATH}`, () => {
-    return rootResolve();
+    return rootResolve(options);
   });
 };

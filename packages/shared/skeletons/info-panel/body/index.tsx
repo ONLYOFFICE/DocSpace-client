@@ -43,6 +43,7 @@ import NoItemLoader from "./views/NoItemLoader";
 import SeveralItemsLoader from "./views/SeveralItemsLoader";
 import GroupsLoader from "./views/GroupsLoader";
 import AIChatLoader from "./views/AIChatLoader";
+import MetadataLoader from "./views/MetadataLoader";
 
 import type { InfoPanelViewLoaderProps } from "./body.types";
 
@@ -66,6 +67,8 @@ const InfoPanelViewLoader = ({ view }: InfoPanelViewLoaderProps) => {
       return <SeveralItemsLoader />;
     case "aiChat":
       return <AIChatLoader />;
+    case "metadata":
+      return <MetadataLoader />;
     default:
       return <DetailsLoader />;
   }

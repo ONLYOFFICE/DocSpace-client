@@ -41,6 +41,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { AddButton } from "@onlyoffice/apps-ui-kit/components/add-button";
 import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 import { InputSize, InputType } from "@onlyoffice/apps-ui-kit/components/text-input";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
@@ -87,6 +88,7 @@ const MultiInputGroup = ({
   const [isError, setIsError] = React.useState(false);
 
   const addRef = React.useRef<null | HTMLDivElement>(null);
+  const inputRef = React.useRef<null | HTMLInputElement>(null);
   // const withoutSearch = name === "redirect_uris";
   const withoutSearch = true;
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,6 +137,16 @@ const MultiInputGroup = ({
     setIsError(false);
     setValue("");
   }, [isDisabled, isError, name, onAdd, value, withoutSearch]);
+
+  // The add block is a div: a button to the keyboard. It hides once it adds
+  // the value, so the focus goes back to the field for the next one rather
+  // than falling to the page's body - before the value is added: the field's
+  // focus handler shows the block again while it still holds a valid value.
+  const onAddKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) =>
+    activateOnButtonKey(e, () => {
+      inputRef.current?.focus();
+      onAddAction();
+    });
 
   React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -216,8 +228,16 @@ const MultiInputGroup = ({
             type={InputType.text}
             noIcon
             testId={`${dataTestId}_input`}
+            forwardedRef={inputRef}
           />
-          <div ref={addRef} className={styles.styledInputAddBlock} onClick={onAddAction}>
+          <div
+            ref={addRef}
+            className={styles.styledInputAddBlock}
+            onClick={onAddAction}
+            role="button"
+            tabIndex={0}
+            onKeyDown={onAddKeyDown}
+          >
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
               {value}
             </Text>

@@ -162,7 +162,22 @@ export function moveToActionImpl(
       }
 
       return self.loopFilesOperations(data, pbData)
-        .then((result) => {
+        .then(async (result) => {
+          const isCanceled =
+            result?.status === FileOperationStatus.Canceled ||
+            self.secondaryProgressDataStore.isOperationStopped(
+              pbData.operation,
+              operationId,
+            );
+
+          if (isCanceled) {
+            self.clearActiveOperations(fileIds, folderIds);
+            self.dialogsStore.setIsFolderActions(false);
+            self.filesStore.setSelected("close");
+            await self.filesStore.refreshFiles();
+            return result;
+          }
+
           self.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds);
           return result;
         })
@@ -234,6 +249,18 @@ export function itemOperationToFolderImpl(
   const operationId = uniqueid("operation_");
 
   const operation = isCopy ? OPERATIONS_NAME.copy : OPERATIONS_NAME.move;
+
+  if (!isCopy) {
+    const { hotkeysClipboard, setHotkeysClipboard } = self.filesStore;
+
+    setHotkeysClipboard(
+      hotkeysClipboard.filter((item) =>
+        item.isFolder
+          ? !folderIds.some((id) => id === item.id)
+          : !fileIds.some((id) => id === item.id),
+      ),
+    );
+  }
 
   setSecondaryProgressBarData({
     operation,
@@ -322,6 +349,7 @@ export async function loopFilesOperationsImpl(
           operationId: pbData.operationId,
           completed: true,
           alert: false,
+          stopped: true,
         });
         return { ...item, finished: true, error: "" };
       }
@@ -384,11 +412,16 @@ export async function navigateToNewFolderLocationImpl(
   filter.folder = folderId as string;
 
   try {
-    const { rootFolderType, parentId, roomType } =
-      await getFolderInfo(folderId!);
+    const {
+      rootFolderType,
+      parentId,
+      roomType,
+      private: isPrivate,
+    } = await getFolderInfo(folderId!);
     const path = getCategoryUrl(
       getCategoryTypeByFolderTypeInSection(rootFolderType, parentId, {
         roomType,
+        isPrivate: self.filesStore.isPrivateRoomsSectionAvailable && !!isPrivate,
       }),
       folderId,
     );

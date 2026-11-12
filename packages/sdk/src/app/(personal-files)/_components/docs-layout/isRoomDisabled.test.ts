@@ -46,7 +46,7 @@ import { describe, it, expect } from "vitest";
 //     → (room) => room?.private === true   [disable private rooms]
 //   isPrivate (private-room source)
 //     → undefined                          [allow all destinations;
-//                                           resolveEncryptedCopyDest governs]
+//                                           the shared resolveFolderTarget governs]
 //
 // Contract:
 //  - Non-private source + private room   → disabled (true)
@@ -114,7 +114,7 @@ describe("DocsLayout — isRoomDisabled predicate", () => {
     it("would NOT disable a private destination room (private→private path)", () => {
       // When isPrivate=true the predicate is undefined, meaning no rooms are
       // disabled at the selector level. Destination validation is handled by
-      // resolveEncryptedCopyDest inside the encrypted copy/move hook.
+      // the shared resolveFolderTarget inside the encrypted copy/move hook.
       const predicate = buildIsRoomDisabled(true);
       expect(predicate).toBeUndefined();
     });

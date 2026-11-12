@@ -166,7 +166,7 @@ test.describe("Billing usage", () => {
     await openUsage(page, baseUrl);
 
     await expect(
-      page.getByText("No spending activity for the selected period"),
+      page.getByText("No spending activity for this period"),
     ).toBeVisible();
     await expect(page.getByTestId("usage_download_report")).toHaveCount(0);
 

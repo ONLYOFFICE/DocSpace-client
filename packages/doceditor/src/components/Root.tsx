@@ -128,6 +128,7 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
+  docServiceEncryptionSupported,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -203,9 +204,12 @@ const Root = ({
     onSDKRequestReferenceSource,
     onSDKRequestSelectDocument,
     onSDKRequestSelectSpreadsheet,
+    onAIRequestStorageFile,
     onCloseSelectFileDialog,
     onSubmitSelectFileDialog,
     getIsDisabledSelectFileDialog,
+    onFilesLoadedSelectFileDialog,
+    selectFileDialogDisabledItems,
 
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
@@ -279,7 +283,10 @@ const Root = ({
       error.message !== "unavailable" &&
       !isSkipError
     ) {
-      throw new Error(error.message);
+      throw new Error(
+        error.message,
+        error.cause ? { cause: error.cause } : undefined,
+      );
     }
   }, [error, isSkipError]);
 
@@ -363,6 +370,7 @@ const Root = ({
           isSkipError={!!isSkipError}
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
+          docServiceEncryptionSupported={docServiceEncryptionSupported}
           shareKey={shareKey}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
@@ -370,6 +378,7 @@ const Root = ({
           onSDKRequestReferenceSource={onSDKRequestReferenceSource}
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
+          onAIRequestStorageFile={onAIRequestStorageFile}
           organizationName={organizationName}
           onOpenRoleMappingPanel={onOpenRoleMappingPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
@@ -403,6 +412,8 @@ const Root = ({
           onSubmit={onSubmitSelectFileDialog as SelectFileDialogProps["onSubmit"]}
           onClose={onCloseSelectFileDialog}
           getIsDisabled={getIsDisabledSelectFileDialog as SelectFileDialogProps["getIsDisabled"]}
+          onFilesLoaded={onFilesLoadedSelectFileDialog}
+          disabledItems={selectFileDialogDisabledItems}
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
           shareKey={shareKey}

@@ -1,0 +1,29 @@
+{
+  "key_path": "OperatorOn",
+  "content": "on",
+  "content_en_sha1_hash": "db3d405b10675998c030223177d42e71b4e7a312",
+  "created_at": "2026-10-21T10:17:41.287Z",
+  "updated_at": "2026-10-23T12:28:45.607Z",
+  "comment": {
+    "text": "Operator in the metadata filter for Date fields (exactly on the date); lowercase, inserted as {{operator}} into a chip like Due: on · Jan 5.",
+    "is_auto": true,
+    "updated_at": "2026-10-21T10:20:42.121Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/MetadataFilter/utils.ts",
+      "line_number": 371,
+      "context": "case \"greaterThan\":\n return t(\"Metadata:OperatorGreaterThan\");\n case \"lessThan\":\n return t(\"Metadata:OperatorLessThan\");\n case \"on\":\n return t(\"Metadata:OperatorOn\");\n case \"before\":\n return t(\"Metadata:OperatorBefore\");\n case \"after\":\n return t(\"Metadata:OperatorAfter\");\n default:",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

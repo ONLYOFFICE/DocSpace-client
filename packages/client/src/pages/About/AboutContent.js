@@ -45,6 +45,7 @@ const AboutContent = (props) => {
     previewData,
     standalone,
     licenseAgreementsUrl,
+    privacyPolicyUrl,
     isEnterprise,
     logoText,
     isBrandingAvailable,
@@ -61,6 +62,7 @@ const AboutContent = (props) => {
       previewData={previewData}
       standalone={standalone}
       licenseAgreementsUrl={licenseAgreementsUrl}
+      privacyPolicyUrl={privacyPolicyUrl}
       isEnterprise={isEnterprise}
       logoText={logoName}
     />
@@ -72,6 +74,7 @@ export default inject(({ settingsStore, currentTariffStatusStore }) => {
     companyInfoSettingsData,
     standalone,
     licenseAgreementsUrl,
+    privacyPolicyUrl,
     logoText,
   } = settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
@@ -80,6 +83,7 @@ export default inject(({ settingsStore, currentTariffStatusStore }) => {
     companyInfoSettingsData,
     standalone,
     licenseAgreementsUrl,
+    privacyPolicyUrl,
     isEnterprise,
     logoText,
   };

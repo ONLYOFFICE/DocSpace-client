@@ -8,6 +8,7 @@
   "DeleteGroup": "Čopiti skupino",
   "DisablingRoomGroups": "Onemrejevanje skupin sob",
   "DisablingRoomGroupsDescription": "Skupine bodo shranjene, vendar skrite. Ponovno aktivirajte v Profilu, upravljanje datotek.",
+  "DisablingSpaceGroups": "Onemogočanje skupin prostorov",
   "EditRoomGroups": "Ureditev skupin sob",
   "EditSpaceGroups": "Uredi skupine prostorov",
   "EmptyGroupRoomsDescription": "Ni sob v tem prostoru. Poskusite dodati sobo ali pa odstraniti skupino.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Izbrane sobe so dodane v <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Izbrane sobe so bile odstranjene iz <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Izbrani prostor je bil dodan v <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Združevanje prostorov",
+  "SpaceGroupingDisabled": "Združevanje prostorov je onemogočeno",
+  "SpaceGroupingEnabled": "Združevanje prostorov je omogočeno",
+  "SpaceGroupingSettingDescription": "Prostore lahko združite v mape in med njimi enostavno preklapljate.",
   "SpaceRemovedFromGroup": "Izbrani prostor je bil odstranjen iz <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Izbrani prostori so bili dodani v <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Izbrani prostori so bili odstranjeni iz <1>{{groupName}}</1>."

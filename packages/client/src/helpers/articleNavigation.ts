@@ -33,12 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
-import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
+import {
+  getCategoryType,
+  isPrivateRoomsRoute,
+} from "@docspace/shared/utils/common";
+import {
+  AI_HUB_SECTION_FOLDER_TYPES,
+  ROOMS_SECTION_FOLDER_TYPES,
+} from "@docspace/shared/utils/rooms";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
@@ -67,7 +74,6 @@ export type FolderIds = {
   favoritesFolderId?: number | null;
   recycleBinFolderId?: number | null;
   sharedWithMeFolderId?: number | null;
-  aiAgentsFolderId?: number | null;
 };
 
 /**
@@ -83,10 +89,6 @@ export const buildFolderUrl = (
   folderId: number,
   rootFolderType: FolderRootType,
   userId?: string,
-  // When true, the Recent/Favorites/Trash sections are routed under
-  // /ai-agents/* (agent-scoped) instead of their global file paths, scoped to
-  // AI-room content via folderType=AIAgent.
-  agentScoped = false,
 ): string => {
   const fileParams = (
     categoryType: (typeof CategoryType)[keyof typeof CategoryType],
@@ -112,18 +114,15 @@ export const buildFolderUrl = (
     return filter.toUrlParams(userId, false);
   };
 
-  // Scope of the Recent/Favorites/Trash aggregates: content of AI rooms in
-  // the agent-scoped sections, My Documents content otherwise.
-  const scopeTypes = agentScoped ? [FolderType.AIAgent] : [FolderType.USER];
+  // Scope of the Recent/Favorites/Trash aggregates: My Documents content.
+  const scopeTypes = [FolderType.USER];
 
   let path = "";
   let params = "";
 
   switch (rootFolderType) {
     case FolderType.Recent:
-      path = agentScoped
-        ? "/ai-agents/recent/filter"
-        : getCategoryUrl(CategoryType.Recent);
+      path = getCategoryUrl(CategoryType.Recent);
       params = fileParams(CategoryType.Recent, FILTER_RECENT, scopeTypes);
       break;
     case FolderType.USER:
@@ -135,28 +134,24 @@ export const buildFolderUrl = (
       params = fileParams(CategoryType.SharedWithMe, FILTER_SHARE);
       break;
     case FolderType.Favorites:
-      path = agentScoped
-        ? "/ai-agents/favorites/filter"
-        : getCategoryUrl(CategoryType.Favorite);
+      path = getCategoryUrl(CategoryType.Favorite);
       params = fileParams(CategoryType.Favorite, FILTER_FAVORITES, scopeTypes);
       break;
     case FolderType.TRASH:
-      path = agentScoped
-        ? "/ai-agents/trash/filter"
-        : getCategoryUrl(CategoryType.Trash);
+      path = getCategoryUrl(CategoryType.Trash);
       params = fileParams(CategoryType.Trash, FILTER_TRASH, scopeTypes);
       break;
     case FolderType.Archive:
       path = getCategoryUrl(CategoryType.Archive);
       params = roomParams(RoomSearchArea.Archive);
       break;
-    case FolderType.AIAgents:
-      path = getCategoryUrl(CategoryType.AIAgents);
-      params = roomParams(RoomSearchArea.AIAgents);
-      break;
     case FolderType.Forms:
       path = getCategoryUrl(CategoryType.Forms);
       params = roomParams(RoomSearchArea.Forms);
+      break;
+    case FolderType.AiHub:
+      path = getCategoryUrl(CategoryType.AiHub);
+      params = roomParams(RoomSearchArea.AiHub);
       break;
     default:
       path = getCategoryUrl(CategoryType.Shared);
@@ -173,10 +168,10 @@ export const getSectionTrashTarget = (
 ): { path: string; folderType: FolderType[] } => {
   if (pathname.startsWith("/forms"))
     return { path: "/forms/trash/filter", folderType: [FolderType.FormRoom] };
-  if (pathname.startsWith("/ai-agents"))
+  if (pathname.startsWith("/ai-rooms/"))
     return {
-      path: "/ai-agents/trash/filter",
-      folderType: [FolderType.AIAgent],
+      path: "/ai-rooms/trash/filter",
+      folderType: AI_HUB_SECTION_FOLDER_TYPES,
     };
   if (pathname.startsWith("/rooms") && !pathname.startsWith("/rooms/personal"))
     return {
@@ -209,6 +204,21 @@ export const getSectionTrashUrl = (
 };
 
 /**
+ * The AI Workspace section's entries are the `/ai-rooms` list narrowed to one
+ * room type, so the active entry is read from the `type` filter in the query.
+ */
+const AI_HUB_TYPE_ITEM_IDS: Record<string, string> = {
+  [RoomsType.InstructionsRoom]: "ai-rooms-skills",
+  [RoomsType.KnowledgeRoom]: "ai-rooms-knowledge",
+};
+
+/** The one room type a rooms filter query is narrowed to, if exactly one. */
+const getSingleRoomType = (search: string): string | undefined => {
+  const types = new URLSearchParams(search).getAll("type");
+  return types.length === 1 ? types[0] : undefined;
+};
+
+/**
  * Map the current location to the active NavMenu item id (a folder id).
  *
  * Templates share the `/rooms/shared` path with the Rooms list and are told
@@ -222,6 +232,7 @@ export const getClientActiveId = (
   ids: FolderIds,
   search: string = typeof window !== "undefined" ? window.location.search : "",
   isTemplatesContext = false,
+  isDocumentsContext = false,
 ): string | undefined => {
   const match = (folderId?: number | null) =>
     folderId != null ? String(folderId) : undefined;
@@ -234,12 +245,14 @@ export const getClientActiveId = (
   const isFormTemplates = searchArea === RoomSearchArea.FormTemplates;
 
   if (pathname.startsWith("/dashboard")) return "dashboard";
-  // Agent-scoped sections highlight their own sidebar sub-items (checked
-  // before the generic /ai-agents and the global /recent matchers — note
-  // "/ai-agents/recent" also contains the "/recent" substring).
-  if (pathname.includes("/ai-agents/recent")) return "agents-recent";
-  if (pathname.includes("/ai-agents/favorites")) return "agents-favorites";
-  if (pathname.includes("/ai-agents/trash")) return "agents-trash";
+  if (isPrivateRoomsRoute(pathname))
+    return getCategoryType({ pathname }) === CategoryType.PrivateArchive
+      ? "private-rooms-archive"
+      : "private-rooms";
+  if (pathname.startsWith("/ai-rooms/")) {
+    if (pathname.includes("/trash")) return "ai-rooms-trash";
+    return AI_HUB_TYPE_ITEM_IDS[getSingleRoomType(search) ?? ""] ?? "ai-rooms";
+  }
   if (pathname.startsWith("/forms")) {
     if (pathname.includes("/recent")) return "forms-recent";
     if (pathname.includes("/favorite")) return "forms-favorites";
@@ -247,13 +260,17 @@ export const getClientActiveId = (
     if (isFormTemplates) return "forms-templates";
     return "forms";
   }
-  if (pathname.includes("/ai-agents")) return match(ids.aiAgentsFolderId);
   if (pathname.includes("/rooms/recent")) return "rooms-recent";
   if (pathname.includes("/rooms/favorite")) return "rooms-favorites";
   if (pathname.includes("/rooms/trash")) return "rooms-trash";
   if (pathname.includes("/recent")) return match(ids.recentFolderId);
   if (pathname.includes("/rooms/templates")) return "rooms-templates";
   if (pathname.includes("/rooms/shared") && isTemplates) return "rooms-templates";
+  if (
+    isDocumentsContext &&
+    /\/rooms\/shared\/(?!filter(\/|$))[^/]+/.test(pathname)
+  )
+    return match(ids.myFolderId);
   if (pathname.includes("/rooms/shared")) return match(ids.roomsFolderId);
   if (pathname.includes("/rooms/archived")) return match(ids.archiveFolderId);
   if (pathname.includes("/rooms/personal")) return match(ids.myFolderId);

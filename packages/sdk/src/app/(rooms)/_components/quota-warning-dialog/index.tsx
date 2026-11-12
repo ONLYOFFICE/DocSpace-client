@@ -55,6 +55,8 @@ import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { useRoomsQuotaStore } from "../../_store/RoomsQuotaStore";
 
+import styles from "./QuotaWarningDialog.module.scss";
+
 type QuotaWarningDialogProps = {
   isPaymentPageAvailable: boolean;
   standalone: boolean;
@@ -191,6 +193,7 @@ const QuotaWarningDialog = observer(
 
     return (
       <ModalDialog
+        className={styles.dialog}
         isLarge={isGracePeriod}
         isLoading={!ready}
         visible={visible}

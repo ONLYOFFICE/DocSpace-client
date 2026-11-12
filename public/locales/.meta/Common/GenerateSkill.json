@@ -1,0 +1,29 @@
+{
+  "key_path": "GenerateSkill",
+  "content": "Generate skill",
+  "content_en_sha1_hash": "ea5079638f1e162457598ed7766b10031f3d805c",
+  "created_at": "2026-11-03T07:47:27.206Z",
+  "updated_at": "2026-11-05T16:49:39.881Z",
+  "comment": {
+    "text": "Button in the Create skill with AI panel that asks AI to write the skill from the entered name and description; the result then appears in an editor for review. Imperative verb, short button label.",
+    "is_auto": true,
+    "updated_at": "2026-11-03T11:24:37.937Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
+      "line_number": 391,
+      "context": "</div>\n <Button\n scale\n size={ButtonSize.small}\n icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}\n label={t(\"Common:GenerateSkill\")}\n isLoading={isGenerating}\n isDisabled={!canGenerate || isSaving}\n onClick={() => void onGenerate()}\n testId=\"generate-skill-run-button\"\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

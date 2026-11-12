@@ -3,7 +3,7 @@
   "content": "Access control",
   "content_en_sha1_hash": "b3e3bbc9103b04d543a6204da8e18664e43f77be",
   "created_at": "2026-08-31T18:23:40.208Z",
-  "updated_at": "2026-08-31T20:49:20.098Z",
+  "updated_at": "2026-10-21T10:17:45.808Z",
   "comment": {
     "text": "Section title for the access control settings category within the Portal Settings security menu.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 271,
+      "line_number": 288,
       "context": "{\n id: \"portal-settings_catalog-access-control\",\n key: \"1-0-9\",\n icon: \"\",\n link: \"access-control\",\n tKey: \"AccessControl\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-access-rights\",",
       "module": "/packages/client"
     }

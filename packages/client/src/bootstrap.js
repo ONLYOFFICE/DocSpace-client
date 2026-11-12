@@ -36,10 +36,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { installOAuthFetchInterceptor } from "@docspace/shared/utils/oauthFetchInterceptor";
+import { installForeignTextGuard } from "@docspace/shared/utils/foreign-text-guard";
+import { installLatinDigits } from "@docspace/shared/utils/latin-digits";
 import App from "./App";
 // import { registerSW } from "@docspace/shared/sw/helper";
 
 installOAuthFetchInterceptor();
+installForeignTextGuard();
+installLatinDigits();
 
 const container = document.getElementById("root");
 const root = createRoot(container);

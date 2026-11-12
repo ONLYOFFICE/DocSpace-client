@@ -3,7 +3,7 @@
   "content": "Document Service",
   "content_en_sha1_hash": "56cd1da1e1b8ef8da631a87da2db26079d5a2586",
   "created_at": "2025-05-19T21:30:51.251Z",
-  "updated_at": "2026-09-04T07:59:41.681Z",
+  "updated_at": "2026-10-21T10:17:45.799Z",
   "comment": {
     "text": "This is a category name in the portal settings, referring to the integration settings for the document editing service.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 429,
+      "line_number": 446,
       "context": "{\n id: \"portal-settings_catalog-document-service\",\n key: \"4-4\",\n icon: \"\",\n link: \"document-service\",\n tKey: \"DocumentService\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-smtp-settings\",\n key: \"4-5\",",
       "module": "/packages/client"
     }

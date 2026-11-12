@@ -8,6 +8,7 @@
   "DeleteGroup": "Delete group",
   "DisablingRoomGroups": "Disabling room groups",
   "DisablingRoomGroupsDescription": "Groups will be saved but hidden. Re-enable in Profile, File management.",
+  "DisablingSpaceGroups": "Disabling space groups",
   "EditRoomGroups": "Edit room groups",
   "EditSpaceGroups": "Edit space groups",
   "EmptyGroupRoomsDescription": "There are no rooms here. Try adding a room or remove this group.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "The selected rooms have been added to <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "The selected space has been added to <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Space grouping",
+  "SpaceGroupingDisabled": "Space grouping is disabled",
+  "SpaceGroupingEnabled": "Space grouping is enabled",
+  "SpaceGroupingSettingDescription": "You can group spaces into folders and easily switch between them.",
   "SpaceRemovedFromGroup": "The selected space has been removed from <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "The selected spaces have been added to <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "The selected spaces have been removed from <1>{{groupName}}</1>."

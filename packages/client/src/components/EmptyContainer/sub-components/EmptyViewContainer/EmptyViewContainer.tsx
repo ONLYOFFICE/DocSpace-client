@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -52,7 +52,12 @@ import type {
 } from "./EmptyViewContainer.types";
 
 const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
-  const { t } = useTranslation(["EmptyView", "Files", "Common", "Translations"]);
+  const { t } = useTranslation([
+    "EmptyView",
+    "Files",
+    "Common",
+    "Translations",
+  ]);
 
   const { isCardLinkedToPortal } = props;
 
@@ -118,20 +123,12 @@ const InjectedEmptyViewContainer = inject<
     paymentStore,
     settingsStore,
     authStore,
-    currentTariffStatusStore,
-    uploadDataStore,
-    filesActionsStore,
-    aiRoomStore,
     filesStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
-    const { isGracePeriod } = currentTariffStatusStore;
-    const { startUpload } = uploadDataStore;
-    const { createFoldersTree } = filesActionsStore;
-    const { knowledgeId } = aiRoomStore;
 
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText, standalone } = settingsStore;
+    const { isFrame, logoText } = settingsStore;
     const language = authStore.language ?? "en";
 
     const { myFolderId, myFolder, roomsFolder, isPrivacyFolder } =
@@ -152,18 +149,13 @@ const InjectedEmptyViewContainer = inject<
 
     const {
       setSelectFileFormRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
+      setGenerateSkillDialogVisible,
       setQuotaWarningDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
     } = dialogsStore;
 
-    const {
-      security,
-      access,
-      rootFolderType,
-      isInsideKnowledge,
-      isInsideResultStorage,
-    } = selectedFolderStore;
+    const { security, access, rootFolderType } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
@@ -195,34 +187,31 @@ const InjectedEmptyViewContainer = inject<
       setIsSectionFilterLoading,
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
+      setSelectFileKnowledgeRoomDialogVisible,
+      setGenerateSkillDialogVisible,
       setQuotaWarningDialogVisible,
-      setSelectFileAiKnowledgeDialogVisible,
       setTemplateAccessSettingsVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
       logoText,
-      isKnowledgeTab: isInsideKnowledge,
-      isResultsTab: isInsideResultStorage,
       filterFolderType: filesStore.filter.folderType,
       roomsFilterSearchArea: filesStore.roomsFilter.searchArea,
-      isPortalAdmin: authStore.isAdmin,
-      aiReady: paymentStore.isAIReady,
-      standalone,
       isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
       enableAIService: paymentStore.enableAIService,
       getAIConfig: settingsStore.getAIConfig,
       refreshCurrentFolder,
       refreshPaymentInfo: authStore.getPaymentInfo,
       language,
-      isGracePeriod,
-      knowledgeId,
-      startUpload,
-      createFoldersTree,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
+      vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
+      isCreateSkillWithAIAvailable:
+        contextOptionsStore.isCreateSkillWithAIAvailable,
+      isCreateSkillAvailable: contextOptionsStore.isCreateSkillAvailable,
+      isCreateMarkdownAvailable: contextOptionsStore.isCreateMarkdownAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
+      createRoom: contextOptionsStore.onCreateRoom,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);
 
 export default InjectedEmptyViewContainer;
-

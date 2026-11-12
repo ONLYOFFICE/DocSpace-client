@@ -19,6 +19,9 @@ pnpm test:store                # only client store tests (src/store, incl. Files
 # Unit tests (sdk package, Vitest)
 pnpm test:sdk
 
+# Unit tests (doceditor package, Vitest; __tests__/ there is Playwright E2E)
+pnpm test:doceditor
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
 cd packages/client && pnpm exec vitest run src/store/filesStore
@@ -69,20 +72,25 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
   for EE/DE). `pnpm deploy` writes to `../publish/web`; SSR apps expect
   `../buildtools/config` for appsettings
 
-### ui-kit: separate repo, consumed as a prebuilt tarball
+### ui-kit: separate repo, consumed from npm
 
 `@onlyoffice/apps-ui-kit` lives in its own repository (`docspace-ui-kit-react`)
 and is **not** a git submodule, a pnpm workspace member, or a checkout inside
-this repo. Its code is fixed there, never here. This repo consumes only the
-committed tarball `onlyoffice-apps-ui-kit.tgz` at the root, which the six apps
-depend on via `"file:../../onlyoffice-apps-ui-kit.tgz"`.
+this repo. Its code is fixed there, never here. The six apps install the
+published package from npm (`"@onlyoffice/apps-ui-kit": "^<version>"`); a new
+release is picked up with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`,
+committing the manifests together with `pnpm-lock.yaml`. Both first-party
+packages sit in `minimumReleaseAgeExclude`, since they are adopted on release
+day.
 
-The tarball is built **in the ui-kit repository** (`pnpm build && pnpm pack`
-there) and copied here. To pick up a new ui-kit version run
-`pnpm run update-ui-kit`, then commit `onlyoffice-apps-ui-kit.tgz` together
-with the `pnpm-lock.yaml` change. Do not copy the file and run `pnpm install`
-yourself - the specifier never changes, so pnpm keeps the cached copy and the
-update silently does not happen; see `.claude/rules/pnpm.md`.
+To try a ui-kit build **before it is published**, `pnpm run update-ui-kit`
+(newest `pnpm pack` in `../../docspace-ui-kit-react`, or a path) switches every
+app to `file:../../onlyoffice-apps-ui-kit.tgz` at the repo root, installs it
+and verifies by hash what landed. Do not do this by hand: once the specifier is
+`file:`, copying a new pack over and running `pnpm install` silently keeps the
+cached copy. The Dockerfiles copy root `*.tgz` optionally, so an image builds
+in either mode. Go back with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`
+and delete the tarball; see `.claude/rules/pnpm.md`.
 
 For local work on ui-kit itself, `pnpm run start:ui-kit-src` (root script, or
 the "Start (ui-kit src)" workspace button) points every app's dev server at a
@@ -93,24 +101,28 @@ path, and both `vite build` and `next build` refuse to run while it is set. In
 the client an import that escapes the checkout fails (any JS/TS import, and a
 bare `@docspace/shared` load in SCSS; sass resolves relative `@use` paths
 itself, unchecked); the Next apps have no such check. Run the apps once
-**without** the variable before committing a new tarball: source mode does not
+**without** the variable before publishing a ui-kit release: source mode does not
 exercise the stylesheet order, `"use client"`, the exports wildcard or the
 generated types. Details in `.claude/rules/pnpm.md`.
 
-The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
-`module`, `types` and `exports` fields live under `publishConfig`, which only
-pnpm promotes to the top level when packing. An npm-packed tarball has no entry
-points at all.
+A local tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's
+`main`, `module`, `types` and `exports` fields live under `publishConfig`, which
+only pnpm promotes to the top level when packing. An npm-packed tarball has no
+entry points at all.
 
 `@onlyoffice/ai-chat` is an **optional peer** of ui-kit that ui-kit statically
-imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. Its
-own tarball (`onlyoffice-ai-chat-<version>.tgz`) is therefore committed here
-too and declared by the apps that render the AI agent — that `file:` dependency
-is what satisfies ui-kit's peer, so it cannot be dropped while those subpaths
-are used. `update-ui-kit` moves it along with ui-kit; to bump it alone, from a
-`../../onlyoffice-ai-chat` checkout, run `pnpm run update-ai-chat`. ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must
-be declared by those same apps; their versions sit in the `catalog:` block of
+imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. The
+apps that render the AI agent (client, sdk) therefore declare it themselves,
+from npm as well — that dependency is what satisfies ui-kit's peer, so it
+cannot be dropped while those subpaths are used. `pnpm run update-ai-chat`
+switches them to a local pack from `../../onlyoffice-ai-chat` the same way
+(`update-ui-kit` also takes one that sits next to the ui-kit checkout).
+ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must be
+declared by those same apps; their versions sit in the `catalog:` block of
 `pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
+
+`@onlyoffice/docspace-plugin-sdk` is switched to an unpublished build the same
+way, with `pnpm run update-plugin-sdk` (a pack from `../../docspace-plugin-sdk`).
 
 ### buildtools sibling repo
 
@@ -164,10 +176,10 @@ hardcoded.
 ### Branch review
 
 Use the `review-branch` skill to review a branch against its parent. ui-kit is a
-separate repository that this repo consumes only as a prebuilt tarball, so a
+separate repository that this repo consumes only as a published package, so a
 ui-kit change must be reviewed inside a `docspace-ui-kit-react` checkout (its
 own base branch, via `git config branch.<name>.reviewBase` or auto-detect) —
-nothing in this repo's diff reflects it beyond the swapped tarball.
+nothing in this repo's diff reflects it beyond the version bump.
 
 ### Dependency audits
 
@@ -207,20 +219,52 @@ commit messages.
 
 ### Git hooks (lefthook)
 
-`lefthook.yml` runs a blocking pre-push gate — six sequential commands, any
-failure aborts the push:
+`lefthook.yml` runs a blocking pre-push gate — up to three sequential
+commands, any failure aborts the push:
 
-1. `pnpm run tsc` — type checking, all packages
-2. `pnpm run lint` — Biome, all packages
-3. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
+1. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
    license-header and dependency checks (translation-completeness suites are
    skipped here, so a green push does **not** mean locales are complete)
-4. `pnpm run test` — shared unit tests
-5. `pnpm run test:client` — client unit tests (incl. store tests)
-6. `pnpm run test:sdk` — sdk unit tests
+2. one `nx run-many -t tsc lint test --parallel=3` over the six packages —
+   type checking and Biome for all of them, unit tests for shared, client
+   (incl. store tests), sdk and doceditor
+3. only when the pushed commits touch `openspec/**`:
+   `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` — every
+   OpenSpec change and main spec, not only the ones you touched, so another
+   team's broken artifact blocks your push too. The CLI is not a repo
+   dependency: the first such push downloads the pinned version and needs
+   the network. Raise the pin here and in `lefthook.yml` together.
 
-Expect a push to take several minutes. To debug a blocked push, run the
-failing command individually. Never bypass the gate with `git push --no-verify`.
+`tsc`, `lint` and `test` are cached by Nx; their inputs are the named inputs
+in `nx.json`. Each reruns when its own package changed (minus E2E screenshots
+and Markdown) or `pnpm-lock.yaml` / `pnpm-workspace.yaml` changed. `tsc` and
+`test` also watch the non-test, non-story files of the packages they depend
+on and the root JSON they really import (`locales/.constants`, `locales/en`,
+`scripts/config.json`); `test` also watches `public/images` (svgr imports).
+`lint` watches only its own package plus shared's `biome.json` and
+`biome-plugins/`: Biome never reads a dependency's files, so an edit in
+`packages/shared` does not rerun another package's lint. A cold run takes a
+minute or a few depending on the machine, a push with nothing changed seconds.
+A new import of another root `public/` file into code or tests must be added
+to those inputs, or the cache hides it.
+
+Nx does not hash environment variables or the Node version: after switching
+Node, or when a test result depends on an env variable (`POOL`), run
+`pnpm nx reset` so the next push runs everything for real. Up to three Vitest
+suites run at once with `--parallel=3`; if tests time out only under the gate,
+rerun the same `nx run-many` command with `--parallel=1` to confirm it is load,
+not a real failure.
+
+The manual `pnpm run tsc`, `lint`, `test`, `test:client`, `test:sdk` and
+`test:doceditor` go through the same cache and replay a stored result when
+nothing changed. Nx prints only the output of failed tasks. To debug a blocked
+push, run the failing task on its own; `pnpm nx reset` drops the cache if a
+result looks stale. Never bypass the gate with `git push --no-verify`.
+
+The Vitest configs are `vitest.config.mts` (and the client's
+`config/plugins/jsx-in-js.mts` they import), so Vite loads them as ES modules
+without its `configLoader: 'native'` compatibility warning; use
+`import.meta.dirname` there, not `__dirname`.
 
 CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
 is **manual-dispatch only** — there is no automatic PR/push CI, so the
@@ -260,6 +304,7 @@ the translation skills use that comment as context.
 | `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
 | `.claude/rules/billing-access.md` | SaaS billing access (payer / owner / admin): `payments/**`, `BillingSidebar/**`, `MainBar/**`, `Route.private.tsx`, `libs/ui-kit/billing/**`, the billing specs |
 | `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
+| `.claude/rules/private-rooms.md` | private-room / encryption code, `openspec/**` — OpenSpec specs and workflow for the feature |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
 | `.claude/rules/claude-settings.md` | `.claude/settings*.json` |
 | `.claude/rules/vscode-tasks.md` | `.vscode/**`, `frontend.code-workspace` |

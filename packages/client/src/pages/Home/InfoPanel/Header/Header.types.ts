@@ -38,7 +38,6 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
-import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 
 export type HeaderProps = {
   selection: InfoPanelStore["infoPanelSelection"];
@@ -55,6 +54,7 @@ export type HeaderProps = {
   enablePlugins: SettingsStore["enablePlugins"];
 
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
+  isPrivacyFolder: TreeFoldersStore["isPrivacyFolder"];
 };
 
 export type InfoPanelHeaderContentProps =

@@ -53,6 +53,7 @@ const StorageManagementWrapper = (props) => {
     clearIntervalCheckRecalculate,
     standalone,
     showPortalSettingsLoader,
+    ensureAppsLoaded,
   } = props;
 
   useEffect(() => {
@@ -60,6 +61,12 @@ const StorageManagementWrapper = (props) => {
       clearIntervalCheckRecalculate();
     };
   }, []);
+
+  // The quotas and the statistics hide the parts of the sections switched off
+  // in Settings -> Apps, so the page needs the apps list.
+  useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -84,7 +91,7 @@ const StorageManagementWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ storageManagement, settingsStore, clientLoadingStore }) => {
+  ({ storageManagement, settingsStore, clientLoadingStore, appsStore }) => {
     const { clearIntervalCheckRecalculate } = storageManagement;
     const { standalone } = settingsStore;
     const { showPortalSettingsLoader } = clientLoadingStore;
@@ -93,6 +100,7 @@ export const Component = inject(
       clearIntervalCheckRecalculate,
       standalone,
       showPortalSettingsLoader,
+      ensureAppsLoaded: appsStore.ensureLoaded,
     };
   },
 )(observer(StorageManagementWrapper));

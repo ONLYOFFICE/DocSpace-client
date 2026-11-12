@@ -3,7 +3,7 @@
   "content": "This workspace is deactivated",
   "content_en_sha1_hash": "dfc28ba3ad7b117b34654d7003b6c384ea87e5b1",
   "created_at": "2026-08-13T22:44:04.003Z",
-  "updated_at": "2026-08-14T15:09:33.215Z",
+  "updated_at": "2026-10-22T16:09:36.978Z",
   "comment": {
     "text": "Error header displayed in the ErrorContainer when a user attempts to access a deactivated workspace.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/components/errors/ErrorUnavailable.tsx",
-      "line_number": 49,
-      "context": "return (\n ready && (\n <div className={styles.errorUnavailableWrapper}>\n <ErrorContainer\n headerText={t(\"ErrorDeactivatedText\")}\n />\n </div>\n )\n );\n };",
+      "line_number": 55,
+      "context": "<ErrorContainer\n headerText={t(\"ErrorBlockedText\")}\n bodyText={t(\"ErrorBlockedDescription\")}\n />\n ) : (\n <ErrorContainer headerText={t(\"ErrorDeactivatedText\")} />\n )}\n </div>\n )\n );\n };",
       "module": "/packages/shared"
     }
   ],

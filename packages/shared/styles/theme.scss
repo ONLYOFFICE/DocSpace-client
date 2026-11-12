@@ -561,14 +561,18 @@
 .light {
   --status-warning: #{$light-status-warning};
   --main-button-mobile-text-color: #{$light-gray-dark};
-  --main-button-mobile-button-color: #{$light-blue-main};
+  --main-button-mobile-button-color: var(--accent-main, #{$light-blue-main});
   --main-button-mobile-icon-fill: #{$white};
   --main-button-mobile-circle-background: #{$white};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-strong};
   --main-button-mobile-bar-icon: #{$gray};
   --main-button-mobile-button-wrapper-background: #{$white};
   --main-button-mobile-button-wrapper-uploading-background: #{$gray-light-mid};
-  --main-button-mobile-button-options-background-color: #{$blue-light-mid};
+  --main-button-mobile-button-options-background-color: color-mix(
+    in srgb,
+    var(--accent-main, #{$light-blue-main}) 70%,
+    black
+  );
   --main-button-mobile-button-options-color: #{$white};
 
   --main-button-mobile-dropdown-position: fixed;
@@ -581,15 +585,19 @@
   --main-button-mobile-dropdown-mobile-bottom: 40px;
   --main-button-mobile-dropdown-separator-background: #{$white};
   --main-button-mobile-dropdown-button-color: #{$white};
-  --main-button-mobile-dropdown-hover-button-color: #{$light-blue-main-pressed};
+  --main-button-mobile-dropdown-hover-button-color: color-mix(
+    in srgb,
+    var(--accent-main, #{$light-blue-main}) 90%,
+    black
+  );
   --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-  --main-button-mobile-progress-bar-color: #{$light-blue-main};
+  --main-button-mobile-progress-bar-color: var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
   --status-warning: #{$dark-status-warning};
   --main-button-mobile-text-color: #{$dark-gray-dark};
-  --main-button-mobile-button-color: #{$light-blue-main};
+  --main-button-mobile-button-color: var(--accent-main, #{$light-blue-main});
   --main-button-mobile-icon-fill: #{$black};
   --main-button-mobile-circle-background: #{$black};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-dark-strong};
@@ -603,7 +611,7 @@
   --main-button-mobile-dropdown-button-color: #{$white};
   --main-button-mobile-dropdown-hover-button-color: #{$black};
   --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-  --main-button-mobile-progress-bar-color: #{$light-blue-main};
+  --main-button-mobile-progress-bar-color: var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
@@ -686,12 +694,14 @@
   --info-block-background: #{$gray-light};
   --info-block-header-color: #{$black};
   --info-block-description-color: #{$gray-text};
+  --ai-callout-description-color: #{$light-gray-dark};
 }
 
 .dark {
   --info-block-background: #{$dark-gray-light};
   --info-block-header-color: #{$white};
   --info-block-description-color: #{$dark-gray-dark};
+  --ai-callout-description-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2153,10 +2163,12 @@
 
 .light {
   --about-logo-color: #{$black};
+  --about-secondary-text-color: #{$light-gray-dark};
 }
 
 .dark {
   --about-logo-color: #{$white};
+  --about-secondary-text-color: #{$dark-gray-dark};
 }
 
 .light {

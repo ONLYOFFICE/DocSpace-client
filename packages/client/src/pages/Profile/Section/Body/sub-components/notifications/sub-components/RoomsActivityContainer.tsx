@@ -78,7 +78,6 @@ const RoomsActivityContainer = ({
             files: t("Common:Files"),
             rooms: t("Common:Rooms"),
             forms: t("Common:Forms"),
-            aiAgents: t("Common:AIAgents"),
           })}
         </Text>
         <ToggleButton
@@ -93,7 +92,6 @@ const RoomsActivityContainer = ({
           files: t("Common:Files"),
           rooms: t("Common:Rooms"),
           forms: t("Common:Forms"),
-          aiAgents: t("Common:AIAgents"),
         })}
       </Text>
     </div>

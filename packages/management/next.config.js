@@ -47,7 +47,6 @@ const os = require("os");
 const packagePath = path.resolve(__dirname, "package.json");
 const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
 
-const BannerPlugin = require("webpack").BannerPlugin;
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -68,7 +67,7 @@ const banner = getBanner(version);
 
 const monorepoRoot = path.resolve(__dirname, "../..");
 // @onlyoffice/docspace-api-sdk is a dependency of @onlyoffice/apps-ui-kit
-// (installed from the tarball at the repo root), not of this app directly --
+// (installed from npm), not of this app directly --
 // resolve it starting from wherever ui-kit itself actually landed rather than
 // a hardcoded path.
 const uiKitDir = path.dirname(
@@ -102,9 +101,6 @@ const nextConfig = {
     "@aws-sdk/client-cloudwatch-logs",
     "@onlyoffice/docspace-api-sdk",
   ],
-  compiler: {
-    styledComponents: true,
-  },
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
     return `${pkg.name}-${pkg.version}-${new Date().getTime()}`;
@@ -130,7 +126,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
-  webpack(config) {
+  webpack(config, { webpack }) {
     const isProduction = config.mode === "production";
 
     // Add resolve configuration for shared package
@@ -184,7 +180,7 @@ module.exports = withBundleAnalyzer({
       };
 
       config.plugins.push(
-        new BannerPlugin({
+        new webpack.BannerPlugin({
           raw: true,
           banner,
         }),

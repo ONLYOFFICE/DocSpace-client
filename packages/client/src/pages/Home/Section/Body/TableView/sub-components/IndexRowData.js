@@ -65,7 +65,6 @@ const IndexRowDataComponent = (props) => {
     checkedProps,
     element,
     inProgress,
-    showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
 
@@ -138,7 +137,7 @@ const IndexRowDataComponent = (props) => {
           inProgress={inProgress}
           {...props}
         />
-        <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
+        <StyledBadgesContainer>
           {badgesComponent}
         </StyledBadgesContainer>
         {lastColumn === "Name" ? lastColumnContent : null}

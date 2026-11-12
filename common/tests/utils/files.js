@@ -48,7 +48,7 @@ const moduleWorkspaces = [
 	path.join("public", "locales"), // common
 ];
 
-// ui-kit ships as a prebuilt tarball from its own repository and is never
+// ui-kit ships as an npm package from its own repository and is never
 // part of the scanned workspaces.
 const getWorkSpaces = () => {
 	return moduleWorkspaces.map((ws) => path.resolve(BASE_DIR, ws));

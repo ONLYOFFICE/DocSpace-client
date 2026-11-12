@@ -64,8 +64,8 @@ import {
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import SocketHelper, { SocketEvents } from "@onlyoffice/apps-ui-kit/utils/socket";
+import { isEncryptedEditingAvailable } from "@docspace/shared/services/private-room/editor-capability";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import i18n from "../i18n";
@@ -193,7 +193,26 @@ class FilesSettingsStore {
   // resolves and overwrites it with the stored one.
   showQuickActions = true;
 
+  private quickActionsRequest = 0;
+
+  private quickActionsApplied = 0;
+
   extsFilesVectorized: string[] = [];
+
+  /** The `accept` list of a device upload into a Knowledge room. */
+  get knowledgeUploadAccept() {
+    return this.extsFilesVectorized.join(",");
+  }
+
+  /**
+   * The extension filter of the workspace selector feeding a Knowledge room,
+   * without the leading dots, as the files API takes them.
+   */
+  get knowledgeSelectorFilter() {
+    return this.extsFilesVectorized
+      .map((ext) => ext.replace(/^\./, ""))
+      .join(",");
+  }
 
   externalShare = true;
 
@@ -292,6 +311,11 @@ class FilesSettingsStore {
       this.storeForcesave !== null &&
       this.storeOriginalFiles !== null
     );
+  }
+
+  /** Whether the connected Document Server can edit encrypted files. */
+  get isEncryptedEditingAvailable() {
+    return isEncryptedEditingAvailable(this.filesSettings);
   }
 
   setFilesSettings = (settings: TFilesSettings) => {
@@ -421,31 +445,34 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e as string));
   };
 
-  // Applied before the request resolves: the caller hides the banner and
-  // raises its toast in the same gesture, so waiting for the round trip would
-  // leave the tiles on screen under a toast announcing they are gone. A
-  // rejected request puts the previous value back.
   setShowQuickActions = async (data: boolean) => {
-    const previous = this.showQuickActions;
-    this.showQuickActions = data;
+    const request = ++this.quickActionsRequest;
 
     try {
       const res = await api.files.changeShowQuickActions(data);
-      this.setFilesSetting("showQuickActions", res);
+      if (request > this.quickActionsApplied) {
+        this.quickActionsApplied = request;
+        this.setFilesSetting("showQuickActions", res);
+      }
+      return true;
     } catch (e) {
-      this.showQuickActions = previous;
-      toastr.error(e as string);
+      if (request === this.quickActionsRequest) toastr.error(e as string);
+      return false;
     }
   };
 
-  setOrganizeRoomsGrouping = async (data: boolean) => {
+  setOrganizeRoomsGrouping = async (data: boolean, isSpaces = false) => {
     try {
       const res = await setOrganizeGrouping(data);
       this.setFilesSetting("organizeRoomsGrouping", res);
 
-      const message = res
-        ? i18n.t("GroupingRooms:RoomGroupingEnabled")
-        : i18n.t("GroupingRooms:RoomGroupingDisabled");
+      const message = isSpaces
+        ? res
+          ? i18n.t("GroupingRooms:SpaceGroupingEnabled")
+          : i18n.t("GroupingRooms:SpaceGroupingDisabled")
+        : res
+          ? i18n.t("GroupingRooms:RoomGroupingEnabled")
+          : i18n.t("GroupingRooms:RoomGroupingDisabled");
       toastr.success(message);
 
       return res;
@@ -683,9 +710,6 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
-        case RoomsType.AIRoom:
-          path = "aiRoom.svg";
-          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;
@@ -697,6 +721,15 @@ class FilesSettingsStore {
           break;
         case RoomsType.FormRoom:
           path = "formRoom.svg";
+          break;
+        case RoomsType.InstructionsRoom:
+          path = "instructionsRoom.svg";
+          break;
+        case RoomsType.KnowledgeRoom:
+          path = "knowledgeRoom.svg";
+          break;
+        case RoomsType.AiProjectRoom:
+          path = "aiProjectRoom.svg";
           break;
         default:
           path = "customRoom.svg";
@@ -719,7 +752,7 @@ class FilesSettingsStore {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    if (!isAIAgents() && enablePlugins && fileItemsList) {
+    if (enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
         ({ value }) => value.extension === extension && value.fileIcon,
       );

@@ -49,38 +49,22 @@ export const NewFilesPanelItem = ({
   date,
   items,
   isRooms,
-  isAgents,
   isFirst,
   onClose,
 
   culture,
+  roomId,
 }: NewFilesPanelItemProps) => {
   return (
     <div
       className={classNames(styles.item, {
-        [styles.isRooms]: isRooms || isAgents,
+        [styles.isRooms]: isRooms,
         [styles.isFirst]: isFirst,
       })}
     >
       <NewFilesPanelItemDate date={date} culture={culture} />
-      {isRooms || isAgents ? (
+      {isRooms ? (
         items.map((value) => {
-          if ("agent" in value) {
-            return (
-              <div
-                key={`${date}-${value.agent.id}`}
-                className="room-items-container"
-              >
-                <NewFilesPanelItemRoom room={value.agent} onClose={onClose} />
-                <NewFilesPanelFileList
-                  items={value.items}
-                  isRooms
-                  onClose={onClose}
-                />
-              </div>
-            );
-          }
-
           if ("room" in value)
             return (
               <div
@@ -92,6 +76,7 @@ export const NewFilesPanelItem = ({
                   items={value.items}
                   isRooms
                   onClose={onClose}
+                  roomId={value.room.id}
                 />
               </div>
             );
@@ -104,6 +89,7 @@ export const NewFilesPanelItem = ({
           items={items as unknown as TFile[]}
           isRooms={false}
           onClose={onClose}
+          roomId={roomId}
         />
       )}
     </div>

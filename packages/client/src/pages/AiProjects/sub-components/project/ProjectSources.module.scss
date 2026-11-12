@@ -1,0 +1,457 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
+// Sits in the chat panel under its header, after the conversation. It is as
+// wide as the chat history (ui-kit NewChat `.splitView`, 380px), which opens
+// before the conversation while the column hides, with the divider on the
+// edge that faces the chat.
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 380px;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  border-inline-start: 1px solid
+    var(--info-panel-border-color, var(--files-section-table-view-row-border-color));
+}
+
+// The column's title and the arrow that collapses it to the rail.
+.columnHead {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  height: 52px;
+  padding-inline-start: 16px;
+  box-sizing: border-box;
+
+  > :first-child {
+    min-width: 0;
+  }
+}
+
+// The arrow of the column's head points the way the column goes: to the
+// chat's far edge to collapse it, back to the chat to bring the cards out.
+.collapseArrow {
+  @include mixins.flip-in-rtl;
+}
+
+.expandArrow {
+  transform: scaleX(-1);
+
+  [data-dir="rtl"] & {
+    transform: none;
+  }
+}
+
+// The collapsed column: a narrow rail of the connected rooms' logos, under
+// the arrow that brings the cards back.
+.rail {
+  flex-basis: 48px;
+  align-items: stretch;
+}
+
+.railRooms {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  min-height: 0;
+  padding-block: 0 16px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.railRoom {
+  display: flex;
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  // The logo's colour square is absolutely positioned (see `.roomItem`).
+  :global(.room-icon) {
+    position: relative;
+
+    :global(.room-image) {
+      border-radius: 6px;
+    }
+  }
+}
+
+// Between the kinds of sources, centred under the logos.
+.railDivider {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 1px;
+  margin-inline-end: 4px;
+  background: var(--files-section-table-view-row-border-color);
+}
+
+// As tall as the expanded column's head, so the arrow keeps its line, and
+// centred over the logos.
+.railExpand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  height: 52px;
+  padding-inline-end: 8px;
+}
+
+// The cards share the column's height (a kind without rooms has none).
+// Grid rows grow from 0 in equal shares up to their content, so a short
+// card keeps its full height and a long one takes what is left and scrolls
+// inside. `align-content: start` stops the rows from stretching.
+.sections {
+  display: grid;
+  grid-auto-rows: minmax(0, max-content);
+  align-content: start;
+  gap: 12px;
+  flex: 1 1 0;
+  min-height: 0;
+  padding-block: 0 16px;
+  padding-inline: 16px 0;
+  box-sizing: border-box;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 12px;
+  border: 1px solid var(--files-section-table-view-row-border-color);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+// The member note under a card's rooms stays in view while they scroll.
+.section > .note {
+  flex: 0 0 auto;
+}
+
+.sectionHead {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+
+  > :first-child {
+    min-width: 0;
+  }
+}
+
+// How many files a card's rooms hold together, at the end of its title's
+// row (before the menu, when the card has one): the title gives way, the
+// number stays whole.
+.sectionCount {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  color: var(--text-secondary);
+}
+
+.sectionMenu {
+  flex: 0 0 auto;
+}
+
+// A headless card keeps its menu at the end of its first row; the rows
+// leave it the room.
+.headless {
+  position: relative;
+
+  .cards {
+    padding-inline-end: 28px;
+  }
+
+  // Every row is as tall as the floating menu, so the menu stays centred on
+  // the first one also when it has no expander (the Context folder).
+  .roomItem {
+    height: 40px;
+  }
+}
+
+.sectionMenuFloating {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  min-height: 0;
+  gap: 10px;
+  // Rooms scroll down only: a long title is truncated, never scrolled to.
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+// A linked room in a section: its room row, and what it expands to.
+.roomCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+
+  .roomItem {
+    margin-bottom: 0;
+  }
+}
+
+.note {
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+// The room row of the new-files panel.
+.roomItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  height: 24px;
+  margin-bottom: 4px;
+  cursor: pointer;
+
+  &:hover {
+    :global(.room-item-title) {
+      text-decoration: underline dashed;
+    }
+  }
+
+  :global(.room-icon) {
+    // The logo's colour square is absolutely positioned: anchored here, it
+    // scrolls with its row and is clipped by the card instead of staying
+    // where the row first was.
+    position: relative;
+    min-width: 24px;
+
+    :global(.room-image) {
+      border-radius: 6px;
+    }
+  }
+}
+
+// A room with an expander: the folder tree's triangle, turned right while
+// the room is collapsed.
+.roomItemRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 40px;
+  cursor: pointer;
+
+  .roomItem {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+}
+
+.expander {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 40px;
+  margin-inline-start: -8px;
+  margin-inline-end: -8px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  // A click focuses it; only keyboard focus gets the ring.
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  @include mixins.flip-in-rtl;
+
+  svg {
+    width: 8px;
+    height: 8px;
+    transform: rotate(-90deg);
+    transition: transform 0.15s ease;
+
+    path {
+      fill: var(--text-secondary);
+    }
+  }
+
+  &.expanded svg {
+    transform: none;
+  }
+}
+
+// The skills and files a room expands to in its card: compact rows.
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Files of an expanded room start under its logo, past the expander.
+.nested {
+  padding-inline-start: 20px;
+}
+
+// The bar standing in for an expanded room's list while it loads.
+.skeleton {
+  padding-block: 6px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 0;
+}
+
+// A knowledge file: a link to the editor, read as a row, the name
+// underlined on hover as a room's is.
+.fileLink {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover :global(.file-title) {
+    text-decoration: underline dashed;
+  }
+}
+
+.rowName {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fileIcon {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+}
+
+// A file row holds the link (which grows) and the file's state after it.
+.row > .fileLink {
+  flex: 1 1 auto;
+  padding: 0;
+}
+
+// "In progress" after a queued file's name, in the muted text colour.
+.fileState {
+  flex: 0 0 auto;
+  color: var(--text-secondary);
+}
+
+// The failed badge of a file, and the warning badge at the end of a room row.
+.fileBadge,
+.roomBadge {
+  flex: 0 0 auto;
+}
+
+.roomTrailing {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-inline-start: auto;
+}
+
+
+// The chat toolbar inside the project's Navigation: no padding of its own,
+// its buttons follow the project menu.
+.chatToolbar {
+  --chat-toolbar-padding-inline: 0;
+  --chat-toolbar-padding-block: 0;
+
+  flex: 0 0 auto;
+}
+
+// The Navigation's buttons are a size container (`container: buttons /
+// inline-size`, SectionHeader.module.scss), and that containment makes their
+// width ignore their content: the column falls back to its 90px floor, which
+// is less than the project menu plus the chat toolbar, and the toolbar's
+// start (the history button) is clipped. The project header queries nothing
+// there, so the buttons are sized by their content again; the title gives way.
+.projectHeader :global(#control-buttons-container) {
+  container-type: normal;
+  min-width: max-content;
+}
+
+
+
+// Phone and tablet: the cards behind a row of tabs above the conversation;
+// the shown one is capped in height and its rooms scroll inside.
+// The row lines up with the Navigation above it: the chat container
+// cancels the body's padding, so it is given back here.
+.compact {
+  flex: 0 0 auto;
+  padding: 16px 0 0 24px;
+  box-sizing: border-box;
+
+  @include mixins.mobile {
+    padding: 16px 16px 0;
+  }
+}
+
+.compactCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 12px;
+
+  .section {
+    max-height: 25dvh;
+  }
+}

@@ -103,13 +103,13 @@ const PlanHeaderLoader = ({
   </div>
 );
 
-// Mirrors the profile card ({@link ./ProfileCard}): title + a 4-field grid,
+// Mirrors the profile card ({@link ./ProfileCard}): title + a 5-field grid,
 // each field being a label + value line.
 const ProfileCardLoader = () => (
   <div className={styles.profileCard}>
     <RectangleSkeleton width="160px" height="16px" borderRadius="3px" />
     <div className={styles.profileCardGrid}>
-      {Array.from({ length: 4 }, (_, index) => (
+      {Array.from({ length: 5 }, (_, index) => (
         <div key={index} className={styles.profileCardField}>
           <RectangleSkeleton width="80px" height="12px" borderRadius="3px" />
           <RectangleSkeleton width="120px" height="16px" borderRadius="3px" />
@@ -222,9 +222,6 @@ type DashboardLoaderProps = {
   // Admins/owners see the plan subline; everyone else doesn't. The profile card
   // itself is everyone's ({@link ./ProfileCard}).
   isAdminOrOwner?: boolean;
-  // With AI services off the AI Agents card is dropped from the grid
-  // ({@link ../hooks/useModuleItems}), leaving three apps instead of four.
-  aiServicesEnabled?: boolean;
   // Docs Connect is SaaS-only, and the card that advertises it follows the
   // Developer Tools card ({@link SRC_DIR/components/IntegrationsCard}).
   standalone?: boolean;
@@ -239,7 +236,6 @@ type DashboardLoaderProps = {
 
 const DashboardLoaderComponent = ({
   isAdminOrOwner = false,
-  aiServicesEnabled = true,
   standalone = false,
   currentDeviceType,
   showDevTools = false,
@@ -251,10 +247,9 @@ const DashboardLoaderComponent = ({
     typeof window === "undefined" ||
     localStorage.getItem(PROFILE_CARD_HIDDEN_KEY) !== "true";
 
-  // Four apps today; three once AI services are off and the AI Agents card goes
-  // with them. Not derived from the grid's column cap - that the two numbers
-  // agree today is a coincidence, not a rule.
-  const moduleCount = aiServicesEnabled ? 4 : 3;
+  // Files, Rooms and Forms ({@link ../hooks/useModuleItems}). Not derived from
+  // the grid's column cap.
+  const moduleCount = 3;
 
   const showTourButton = currentDeviceType !== DeviceType.mobile;
 

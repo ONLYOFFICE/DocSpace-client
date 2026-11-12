@@ -291,6 +291,7 @@ export type THelpCenterEntries = {
   connectzoom: string;
   creatingbackup: string;
   configuringsettings: string;
+  customfilter: string;
   docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;
@@ -487,6 +488,8 @@ export type TVersionBuild = {
   docSpace: string;
   communityServer: string;
   documentServer: string;
+  /** Present only where the AI Tools service is deployed. */
+  aiTools?: string;
 };
 
 export type TMailDomainSettings = {

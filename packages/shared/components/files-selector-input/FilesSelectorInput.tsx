@@ -95,7 +95,7 @@ const FilesSelectorInput = ({
   formProps,
   disabledCreatePublicRoom,
   dataTestId,
-  withAIAgentsTreeFolder,
+  withAIRoomsTreeFolder = false,
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
@@ -161,7 +161,7 @@ const FilesSelectorInput = ({
     return getIsDisabled(
       isFirstLoad,
       isSelectedParentFolder,
-      selectedItemType === "rooms" || selectedItemType === "agents",
+      selectedItemType === "rooms",
       isRoot,
       filterParam,
       !!selectedFileInfo,
@@ -239,7 +239,7 @@ const FilesSelectorInput = ({
       currentDeviceType={currentDeviceType ?? DeviceType.desktop}
       {...filesSelectorSettings}
       withFavoritesTreeFolder={isFilesSelection}
-      withAIAgentsTreeFolder={withAIAgentsTreeFolder}
+      withAIRoomsTreeFolder={withAIRoomsTreeFolder}
     />
   );
 

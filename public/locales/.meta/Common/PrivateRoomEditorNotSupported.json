@@ -1,20 +1,38 @@
 {
   "key_path": "PrivateRoomEditorNotSupported",
-  "content": "Encrypted files cannot be opened in the editor yet.",
-  "content_en_sha1_hash": "c48479a97952433df21422fd039eea9dd7027cdb",
-  "created_at": "2026-06-09T09:42:54.370Z",
-  "updated_at": "2026-10-01T08:23:21.902Z",
+  "content": "Encrypted files cannot be opened in this editor.",
+  "content_en_sha1_hash": "e971576ed9aabf632a9cd8aa044ede6b06961a31",
+  "created_at": "2026-11-05T14:16:02.730Z",
+  "updated_at": "2026-11-05T14:17:22.436Z",
   "comment": {
-    "text": "An info toast message that appears when a user attempts to open an encrypted file within a private room.",
+    "text": "Info toast in the file list of the client and of the SDK private page, and the message shown in place of the editor, when an encrypted file of a private room is opened while the connected Document Server cannot edit encrypted files; also the toast of the editor's file picker when an encrypted file is chosen to insert into a document. A full sentence; \"this editor\" means the Document Server the portal is connected to.",
     "is_auto": true,
-    "updated_at": "2026-06-09T10:00:31.014Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-05T14:17:22.436Z",
+    "model": "claude-fable-5-1"
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/store/filesStore/actions.helpers.ts",
+      "line_number": 150,
+      "context": "self.filesSettingsStore;\n const item = self.files.find((f) => f.id === id);\n \n // Spec: private-rooms/editor-integration, \"Document Server capability check before opening\"\n if (item?.encrypted && !isEncryptedEditingAvailable) {\n toastr.info(i18n.t(\"Common:PrivateRoomEditorNotSupported\"));\n return;\n }\n \n const share = shareKey || self.publicRoomStore.publicRoomKey;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/Editor.tsx",
+      "line_number": 497,
+      "context": "const EditorNotSupported = ({ config }: Pick<EditorProps, \"config\">) => {\n const { t } = useTranslation([\"Common\"]);\n return (\n <EditorMessage config={config}>\n {t(\"Common:PrivateRoomEditorNotSupported\")}\n </EditorMessage>\n );\n };\n \n // Spec: editor-integration, \"Document Server capability check before opening\"",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/doceditor/src/hooks/useSelectFileDialog.ts",
+      "line_number": 212,
+      "context": "async (file: TSelectedFileInfo, isInsidePrivateRoom?: boolean) => {\n try {\n if (!file) return;\n \n if (isEncryptedPick(file, isInsidePrivateRoom)) {\n toastr.info(t(\"Common:PrivateRoomEditorNotSupported\"));\n return;\n }\n \n if (filesType === aiAttachFileAction) {\n settleAIFileRequest(file);",
+      "module": "/packages/doceditor"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 498,
-      "context": "docsSettingsStore.filesSettings?.storeOriginalFiles ?? false;\n \n const openFileHandler = React.useCallback(\n (file: TFileItem, preview?: boolean) => {\n if (isPrivate && file.encrypted) {\n toastr.info(t(\"Common:PrivateRoomEditorNotSupported\"));\n return;\n }\n if (!preview && file.viewAccessibility?.MustConvert) {\n requestConvert(file);\n return;",
+      "line_number": 514,
+      "context": "portalFilesSettings?.storeOriginalFiles ?? false;\n \n const openFileHandler = React.useCallback(\n (file: TFileItem, preview?: boolean) => {\n if (refusesEncryptedOpen(isPrivate, file, portalFilesSettings)) {\n toastr.info(t(\"Common:PrivateRoomEditorNotSupported\"));\n return;\n }\n if (!preview && file.viewAccessibility?.MustConvert) {\n requestConvert(file);\n return;",
       "module": "/packages/sdk"
     }
   ],

@@ -61,7 +61,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 
 import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
@@ -132,6 +133,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
     setWidth(offsetWidth - 32);
   }, [containerRef, containerRef?.current?.offsetWidth]);
 
+  const isPrivateRoom = useContext(PrivateRoomInviteContext);
+
   // standalone = false always in SDK
   const accessOptions = getAccessOptions(
     t,
@@ -141,6 +144,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
     isOwner,
     isAdmin,
     false,
+    isPrivateRoom,
   );
 
   const selectedOption = (accessOptions as TOption[]).filter(

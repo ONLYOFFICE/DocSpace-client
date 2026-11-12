@@ -1,0 +1,171 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryType } from "@docspace/shared/utils/common";
+
+const PRIVATE_LIST = "/private";
+const PRIVATE_ARCHIVE = "/private/archived";
+const ROOMS_LIST = "/rooms/shared";
+
+const PRIVATE_CATEGORIES: number[] = [
+  CategoryType.PrivateRooms,
+  CategoryType.PrivateRoom,
+  CategoryType.PrivateArchive,
+];
+
+const ROOMS_CATEGORIES: number[] = [
+  CategoryType.Shared,
+  CategoryType.SharedRoom,
+  CategoryType.Archive,
+  CategoryType.ArchivedRoom,
+];
+
+/** The history state key of an address this decision has already corrected. */
+export const SECTION_DECIDED_STATE = "privateRoomsSectionDecided";
+
+/**
+ * The Rooms address a Private section address opens under while the section
+ * is not available: the list and rooms go to Rooms, the archive to Rooms ->
+ * Archive, with the query kept.
+ */
+export const getRoomsAddressOfPrivateAddress = ({
+  pathname,
+  search,
+}: {
+  pathname: string;
+  search: string;
+}) => {
+  const [from, to] =
+    getCategoryType({ pathname }) === CategoryType.PrivateArchive
+      ? [PRIVATE_ARCHIVE, "/rooms/archived"]
+      : [PRIVATE_LIST, "/rooms/shared"];
+
+  return `${to}${pathname.slice(from.length)}${search}`;
+};
+
+/**
+ * The Private section address of a Rooms address of a room or folder: an
+ * active one keeps its path under /private, an archived one opens in the
+ * private archive with its folder.
+ */
+export const getPrivateAddressOfRoomsAddress = (
+  { pathname, search }: { pathname: string; search: string },
+  folderId: number | string,
+) => {
+  const categoryType = getCategoryType({ pathname });
+
+  if (categoryType === CategoryType.Archive) {
+    const params = new URLSearchParams(search);
+    if (!params.has("folder")) params.set("folder", `${folderId}`);
+
+    return `${PRIVATE_ARCHIVE}/filter?${params.toString()}`;
+  }
+
+  // The Rooms list's row link names the room in its query only.
+  if (categoryType === CategoryType.Shared)
+    return `${PRIVATE_LIST}/${folderId}/filter${search}`;
+
+  return `${PRIVATE_LIST}${pathname.slice(ROOMS_LIST.length)}${search}`;
+};
+
+/**
+ * The Private list itself is shown: its address, with the rooms root loaded
+ * rather than a room named by the query.
+ */
+export const isPrivateRoomsListRoot = (
+  location: { pathname: string },
+  isRoomsFolder: boolean | undefined,
+) =>
+  getCategoryType(location) === CategoryType.PrivateRooms && !!isRoomsFolder;
+
+/**
+ * Keys management is offered while the section is, and to every key holder,
+ * but never to a guest.
+ */
+// Spec: private-rooms/key-management, "Key generation is withheld from guests"
+export const isKeysManagementAvailable = (
+  isSectionAvailable: boolean,
+  encryptionKeys: readonly unknown[] | null | undefined,
+  isGuest: boolean | undefined,
+) => !isGuest && (isSectionAvailable || !!encryptionKeys?.length);
+
+/** The Private section address an `/e2e-rooms` bookmark of the former app stands for. */
+export const getPrivateAddressOfE2eRoomsAddress = (search: string) =>
+  new URLSearchParams(search).get("section") === "archive"
+    ? `${PRIVATE_ARCHIVE}/filter`
+    : `${PRIVATE_LIST}/filter`;
+
+export type TSectionDecision = {
+  pathname: string;
+  search: string;
+  folderId: number | string;
+  /** The loaded folder is a private room or lies inside one. */
+  isPrivate: boolean;
+  isSectionAvailable: boolean;
+  /** Neither the Rooms nor the Forms app is on. */
+  isRoomsAppOff: boolean;
+  /** The address is the result of an earlier correction. */
+  isDecided: boolean;
+};
+
+/**
+ * Where a loaded room or folder must be shown instead of the address it was
+ * opened at, or null to show it there.
+ */
+export const getSectionAddressCorrection = (
+  decision: TSectionDecision,
+): string | null => {
+  const { isPrivate, isSectionAvailable, isRoomsAppOff, isDecided } = decision;
+
+  if (!isSectionAvailable || isDecided) return null;
+
+  const categoryType = getCategoryType(decision);
+  const isPrivateAddress = PRIVATE_CATEGORIES.includes(categoryType);
+  const isRoomsAddress = ROOMS_CATEGORIES.includes(categoryType);
+
+  if (!isPrivateAddress && !isRoomsAddress) return null;
+
+  if (isPrivate)
+    return isRoomsAddress
+      ? getPrivateAddressOfRoomsAddress(decision, decision.folderId)
+      : null;
+
+  // Rooms room addresses are let in with the Rooms app off only for the
+  // private rooms they may hold.
+  if (isRoomsAppOff) return "/dashboard";
+
+  return isPrivateAddress ? getRoomsAddressOfPrivateAddress(decision) : null;
+};

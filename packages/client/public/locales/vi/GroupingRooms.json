@@ -8,6 +8,7 @@
   "DeleteGroup": "Xóa nhóm",
   "DisablingRoomGroups": "Tắt nhóm phòng",
   "DisablingRoomGroupsDescription": "Các nhóm sẽ được lưu nhưng bị ẩn. Vui lòng bật lại trong Hồ sơ, Quản lý tệp.",
+  "DisablingSpaceGroups": "Tắt nhóm không gian",
   "EditRoomGroups": "Chỉnh sửa nhóm phòng",
   "EditSpaceGroups": "Chỉnh sửa nhóm không gian",
   "EmptyGroupRoomsDescription": "Không có phòng nào ở đây. Hãy thử thêm một phòng hoặc xóa nhóm này.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Các phòng đã chọn đã được thêm vào <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Các phòng đã chọn đã được xóa khỏi <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Không gian đã chọn đã được thêm vào <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Nhóm không gian",
+  "SpaceGroupingDisabled": "Nhóm không gian bị vô hiệu hóa",
+  "SpaceGroupingEnabled": "Nhóm không gian được bật",
+  "SpaceGroupingSettingDescription": "Bạn có thể nhóm các không gian thành thư mục và dễ dàng chuyển đổi giữa chúng.",
   "SpaceRemovedFromGroup": "Không gian đã chọn đã được xóa khỏi <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Các không gian đã chọn đã được thêm vào <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Các không gian đã chọn đã được xóa khỏi <1>{{groupName}}</1>."

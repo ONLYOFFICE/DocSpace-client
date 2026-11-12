@@ -33,7 +33,7 @@
 	* SPDX-License-Identifier: AGPL-3.0-only
 	*/
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useId } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -41,6 +41,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { EmailInput, TValidate } from "@onlyoffice/apps-ui-kit/components/email-input";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 
 import { isMobile } from "@docspace/shared/utils";
 
@@ -74,9 +75,16 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 		changeEmail,
 		setIsPrevEmailValid,
 	} = props as InjectedAddEmailRowContentProps;
-	const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+	const { t, ready } = useTranslation([
+		"SMTPSettings",
+		"Settings",
+		"Common",
+		"PeopleTranslations",
+	]);
 
 	const [prevEmail, setPrevEmail] = useState(email);
+	// Every row's button is "Change email": the user's name tells them apart.
+	const nameId = useId();
 	const [tempEmail, setTempEmail] = useState(email);
 	const [isEmailValid, setIsEmailValid] = useState(email.length > 0);
 
@@ -97,6 +105,21 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 
 	const openEmail = () => setOpenedEmailKey(id);
 
+	// Closed by its own save or cancel, the editor took the focus with it:
+	// give it back to the email rather than leave it on the page's body.
+	const wasEmailOpenRef = useRef(isEmailOpen);
+	useEffect(() => {
+		const wasOpen = wasEmailOpenRef.current;
+		wasEmailOpenRef.current = isEmailOpen;
+		const lost =
+			!document.activeElement || document.activeElement === document.body;
+		if (wasOpen && !isEmailOpen && lost) emailTextRef.current?.focus();
+	}, [isEmailOpen, emailTextRef]);
+
+	// The email to edit is a button to the keyboard.
+	const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) =>
+		activateOnButtonKey(e, openEmail);
+
 	const handleSaveEmail = () => {
 		setPrevEmail(tempEmail);
 		changeEmail(id, tempEmail);
@@ -110,6 +133,18 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 	const onValidateEmail = (res: TValidate) => {
 		setIsEmailValid(res.isValid);
 		return { isValid: res.isValid, errors: res.errors || [] };
+	};
+
+	// The icons' own clicks make them keyboard buttons; the box around each,
+	// which takes the pointer's click, must not run it a second time.
+	const handleSaveIconClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		handleSaveClick();
+	};
+
+	const handleClearIconClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		clearEmail();
 	};
 
 	const handleSaveClick = () => {
@@ -138,7 +173,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 	return (
 		<RowContent className={styles.styledRowContentEmail} sectionWidth={sectionWidth}>
 			<div className="import-accounts-name">
-				<Text fontWeight={600} fontSize="14px">
+				<Text id={nameId} fontWeight={600} fontSize="14px">
 					{displayName}
 				</Text>
 				<Text
@@ -183,6 +218,8 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 								size={16}
 								iconName={CheckSvgUrl}
 								dataTestId="change_email_save_button"
+								ariaLabel={t("Common:SaveButton")}
+								onClick={handleSaveIconClick}
 							/>
 						</div>
 
@@ -192,6 +229,8 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 								size={16}
 								iconName={CrossSvgUrl}
 								dataTestId="change_email_clear_button"
+								ariaLabel={t("Common:CancelButton")}
+								onClick={handleClearIconClick}
 							/>
 						</div>
 					</div>
@@ -202,6 +241,12 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 					className="user-email"
 					ref={emailTextRef}
 					data-testid="open_email_button"
+					role="button"
+					tabIndex={0}
+					// Only an icon shows: the name comes from here.
+					aria-label={t("PeopleTranslations:EmailChangeButton")}
+					aria-describedby={nameId}
+					onKeyDown={handleEmailKeyDown}
 				>
 					<EditSvg />
 				</span>

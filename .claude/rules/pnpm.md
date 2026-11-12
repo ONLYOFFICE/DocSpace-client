@@ -67,35 +67,50 @@ YAML file. Nx parses it for the project graph and has supported multiple
 documents since 22.7, so the pinned Nx must not drop below that. Any new script
 that reads the lockfile needs a multi-document loader.
 
-## The ui-kit tarball dependency
+## The ui-kit dependency
 
 `@onlyoffice/apps-ui-kit` is **not** a pnpm workspace package and ui-kit is not
-checked out inside this repo at all. The six apps that use it depend on a
-committed tarball at the repo root via
-`"file:../../onlyoffice-apps-ui-kit.tgz"`.
+checked out inside this repo at all. The six apps that use it install the
+published package from npm (`"^<version>"`). A release is picked up with
 
-The tarball is built and packed in the `docspace-ui-kit-react` repository
-(`pnpm build && pnpm pack`) and copied here; there is no build script on this
-side. The filename carries no version on purpose - the version lives in the
-package and shows up in the lockfile entry, so a bump touches no app manifest.
+```bash
+pnpm -r update @onlyoffice/apps-ui-kit@^<version>
+```
 
-**Do not update it by hand.** Copying the `.tgz` over and running `pnpm install`
-silently installs nothing: the `file:onlyoffice-apps-ui-kit.tgz` specifier is
-unchanged, pnpm matches the integrity already in `pnpm-lock.yaml` and keeps the
-cached copy. The install is green, the lockfile is untouched, and node_modules
-still holds the previous build. `pnpm install --force` does not help either,
-because the recorded integrity still matches what it has.
+which rewrites every manifest that names it; commit them together with
+`pnpm-lock.yaml`. ui-kit and ai-chat are listed in `minimumReleaseAgeExclude`
+without a version: both are first-party packages adopted the day they are
+published, so a new version is always younger than the release-age window.
+
+### Trying an unpublished build from a tarball
+
+A ui-kit build that is not on npm yet is packed in the `docspace-ui-kit-react`
+repository (`pnpm build && pnpm pack`) and switched in here:
 
 ```bash
 pnpm run update-ui-kit                 # newest pack in ../../docspace-ui-kit-react
 pnpm run update-ui-kit path/to/pack.tgz
 ```
 
-It copies the tarball, rewrites the recorded integrity, drops the extracted
-copy under `node_modules/.pnpm/`, reinstalls, and then verifies by hash that
-what landed in node_modules is what was copied in - the silent no-op above is
-precisely what it refuses to let pass. Commit `onlyoffice-apps-ui-kit.tgz`
-together with the `pnpm-lock.yaml` change it produces.
+It copies the pack to the repo root as `onlyoffice-apps-ui-kit.tgz`, points
+every app manifest at `file:../../onlyoffice-apps-ui-kit.tgz`, rewrites the
+recorded integrity, drops the extracted copy under `node_modules/.pnpm/`,
+reinstalls, and then verifies by hash that what landed in node_modules is what
+was copied in. Go back with the `pnpm -r update` above and delete the tarball;
+the manifests and the lockfile return to the registry entries.
+
+The Dockerfiles copy root `*.tgz` in the same `COPY` as the manifests, so an
+image builds in either mode: next to real sources a glob that matches nothing
+is not an error.
+
+**Do not switch or refresh the tarball by hand.** The filename carries no
+version, so once the apps point at it the specifier never changes again.
+Copying a new `.tgz` over and running `pnpm install` then silently installs
+nothing: pnpm matches the integrity already in `pnpm-lock.yaml` and keeps the
+cached copy. The install is green, the lockfile is untouched, and node_modules
+still holds the previous build. `pnpm install --force` does not help either,
+because the recorded integrity still matches what it has - the silent no-op is
+precisely what the script refuses to let pass.
 
 The verification digests **everything the tarball ships** in **every** extracted
 copy under `node_modules/.pnpm/@onlyoffice+apps-ui-kit@*` (skipping the
@@ -107,7 +122,9 @@ and which hundreds of the client's own `.module.scss` files `@use`; and checking
 only the copy the client resolves left a stale sibling in place, which is what
 the apps resolving to *that* copy would run. It also runs when the tarball is
 unchanged, because the install can die after the lockfile and the extracted
-copies were already rewritten. The `tar` binary is deliberately not used - the
+copies were already rewritten. A snapshot key longer than 1024 characters is
+written as an explicit YAML key (`? '<key>'`), and the lockfile check reads
+both spellings. The `tar` binary is deliberately not used - the
 GNU tar shipped with Git Bash reads a Windows path as a remote `host:path` spec
 and refuses it.
 
@@ -144,7 +161,7 @@ out to five apps through Nx, so the root is where the variable has to be set; a
 script in one package alone is never the one anyone runs. The path is resolved
 against the repo root, and nothing changes in the ui-kit repository; the
 checkout serves its own `assets/`, `styles/` and `locales/`, exactly as the
-tarball does.
+package does.
 
 **The checkout needs its own `pnpm install`.** It resolves its own
 dependencies, and a bare clone has none -- which is the state anyone is in the
@@ -160,8 +177,9 @@ pre-bundling would freeze the files being edited. The Next apps share
 `scripts/ui-kit-dev.cjs`, which each `next.config.js` calls twice: once to
 refuse a production build while the variable is set, once from its `webpack`
 hook to alias the package to the checkout, pin ui-kit's peers to the app's own
-copies, and add the checkout to the `next-swc-loader` rules so its TypeScript
-compiles. The CSS rules need nothing -- they key off the extension, so the
+copies, salt webpack's persistent cache with the checkout path (so switching
+modes never serves modules compiled in the other one), and add the checkout to
+the `next-swc-loader` rules so its TypeScript compiles. The CSS rules need nothing -- they key off the extension, so the
 checkout's `*.module.scss` go through the app's own CSS Modules pipeline and
 come out named by it rather than by ui-kit's rollup config.
 
@@ -191,18 +209,22 @@ Four properties keep it honest:
   extracted stylesheet and its cascade order, `"use client"` preservation, the
   exports wildcard and module shape, the generated `.d.mts`, or the type-only
   subpaths that have no runtime module. Run the client once **without** the
-  variable before committing a new tarball.
+  variable before publishing a ui-kit release.
 
 Both halves read the checkout's own `peerDependencies` rather than a hand-picked
-list -- Vite through `resolve.dedupe`, webpack by aliasing each peer to the
-app's copy. Every peer is a package both trees resolve separately, and a second
+list -- Vite through `resolve.dedupe`, webpack by resolving a peer imported
+from inside the checkout as if the app imported it (a `beforeResolve` hook that
+swaps the request context to the app directory). Not by aliasing the package
+directory: an absolute alias skips `exports`, so a package with nothing else
+(react-router) stops resolving, and a peer whose `package.json` is not exported
+used to be skipped silently, leaving a second copy. Every peer is a package both trees resolve separately, and a second
 copy of anything holding module state (a context, a store, a socket) is a silent
 behaviour change. A hand-picked subset rots on the next bump either side.
 
-The tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's `main`,
-`module`, `types` and `exports` fields live under `publishConfig`, which only
-pnpm promotes to the top level when packing. An npm-packed tarball has no
-entry points at all.
+A local tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's
+`main`, `module`, `types` and `exports` fields live under `publishConfig`,
+which only pnpm promotes to the top level when packing. An npm-packed tarball
+has no entry points at all.
 
 ui-kit's `exports` map is a single `"./*"` wildcard onto
 `dist/esm/*/index.js` — the package ships ESM only. That works only because
@@ -233,14 +255,12 @@ so including it does not interfere with the lazy AI chunking in
 
 `@onlyoffice/ai-chat` is an **optional peer** of ui-kit, and ui-kit statically
 imports it from its `ai-agent/*` and `api/ai` modules without bundling it. The
-client-side `file:../../onlyoffice-ai-chat-<version>.tgz` dependency is what
-satisfies that peer, so it must stay declared in every app that reaches those
-subpaths - dropping it resolves the peer to nothing and breaks the AI agent at
-runtime.
+apps' own npm dependency on it is what satisfies that peer, so it must stay
+declared in every app that reaches those subpaths - dropping it resolves the
+peer to nothing and breaks the AI agent at runtime.
 
-The tarball is versioned in its filename, so a bump rewrites the `file:`
-specifier in every app manifest. `update-ui-kit` does that when ui-kit moves,
-taking the ai-chat tarball next to the ui-kit checkout. To move ai-chat alone:
+An unpublished ai-chat build is switched in the same way as ui-kit, from a pack
+made in the ai-chat checkout (`npm run pack:docs -- <n>`):
 
 ```bash
 pnpm run update-ai-chat                 # newest pack in ../../onlyoffice-ai-chat
@@ -248,14 +268,17 @@ pnpm run update-ai-chat path/to/onlyoffice-ai-chat-<version>.tgz
 DOCSPACE_AI_CHAT_SRC=../elsewhere pnpm run update-ai-chat
 ```
 
-It removes the previous tarball, repoints the manifests, and for a repack under
-the same filename rewrites the recorded integrity and drops the extracted copy
-(the ui-kit trap above). After `pnpm install --force` it verifies by hash every
+`update-ui-kit` also moves ai-chat when an `onlyoffice-ai-chat-*.tgz` sits next
+to the ui-kit checkout. Its tarball is versioned in its filename, so the script
+removes any previous one, repoints the manifests, and for a repack under the
+same filename rewrites the recorded integrity and drops the extracted copy (the
+ui-kit trap above). After `pnpm install --force` it verifies by hash every
 extracted copy, that the lockfile references no other ai-chat tarball, and the
 lockfile entry's peers and dependencies against the packed manifest; a failed
 install restores the tarballs, manifests and lockfile. It warns when the
-filename and the packed version disagree. Both updaters share their helpers in
-`scripts/lib/vendored-tarball.mjs`.
+filename and the packed version disagree. Go back with
+`pnpm -r update @onlyoffice/ai-chat@^<version>` and delete the tarball. The
+updaters share their helpers in `scripts/lib/vendored-tarball.mjs`.
 
 Most of ai-chat's own peers are optional too (the assistant-ui widgets, the
 radix primitives, codemirror, the LLM vendor SDKs), so pnpm installs none of
@@ -273,3 +296,40 @@ peers as ai-chat's own `dependencies`. pnpm treats a name that is also an
 optional peer of the package as a peer: it resolves it from the dependent when
 it can and silently drops it when it cannot, so a fresh resolution loses the
 LLM SDKs while an incremental one appears to work. It was tried and reverted.
+
+## The plugin SDK dependency
+
+`@onlyoffice/docspace-plugin-sdk` (only `packages/client` depends on it) comes
+from npm as well. An SDK build that is not published yet - a client feature
+that needs new SDK typings - is packed in the `docspace-plugin-sdk` checkout
+under a **pre-release version dated by the pack day**, so the tarball never
+claims a release that is not on npm and the published `x.y.z` still outranks it
+under `^x.y.z`. Another pack the same day takes a counter - `3.1.0-20261106.2`,
+`.3` - and the script refuses a different build under a version already at the
+root, naming the next one (not `HHMM`: a semver numeric part cannot start with
+`0`):
+
+```bash
+# in the SDK checkout (restore package.json afterwards)
+npm version 3.1.0-20261106 --no-git-tag-version && npm run build && npm pack
+# here
+pnpm run update-plugin-sdk                 # newest pack in ../../docspace-plugin-sdk
+pnpm run update-plugin-sdk path/to/pack.tgz
+DOCSPACE_PLUGIN_SDK_SRC=../elsewhere pnpm run update-plugin-sdk
+```
+
+Pack from a checkout with `core.autocrlf=false`: npm packs the working-tree
+bytes, and a Windows checkout ships CRLF in the SDK's `npx/` scripts (a CRLF
+shebang breaks `npx` on Linux and macOS) and in the plugin template.
+
+As with ai-chat, the version is part of the filename -
+`onlyoffice-docspace-plugin-sdk-<version>.tgz` at the repo root - so a new pack
+is a new `file:` specifier and pnpm re-resolves it on its own; the script
+repoints the manifest, removes the previous SDK tarball (an unversioned
+`onlyoffice-docspace-plugin-sdk.tgz` included), rewrites the integrity for a
+same-name repack and verifies the install as `update-ui-kit` does. The
+Dockerfiles copy the root `*.tgz`, so they need no change. pnpm shortens the
+SDK's directory under `node_modules/.pnpm` to `@onlyoffice+docspace-plugin_<hash>`;
+the script matches that prefix. Go back with
+`pnpm -r update @onlyoffice/docspace-plugin-sdk@^<version>` once the release is
+on npm, and delete the tarball.

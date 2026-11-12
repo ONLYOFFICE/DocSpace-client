@@ -1,0 +1,29 @@
+{
+  "key_path": "MoveFilesToTrash",
+  "content": "<1>Files ({{filesCount}})</1> will be moved to Trash, where you can restore them for 30 days. After that, they're permanently deleted.",
+  "content_en_sha1_hash": "6f654d4a19bdccb5959d5287deefb7b479697cfe",
+  "created_at": "2026-11-05T18:23:44.408Z",
+  "updated_at": "2026-11-05T18:24:12.196Z",
+  "comment": {
+    "text": "Body text of the Move to Trash? confirmation dialog shown when a user deletes several files. {{filesCount}} is the number of files and <1></1> makes the count in bold; Trash is the name of the Trash section; they stay restorable for 30 days, after which they are deleted automatically.",
+    "is_auto": true,
+    "updated_at": "2026-11-05T18:24:12.196Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 263,
+      "context": "if (filesCount) {\n return (\n <Trans\n t={t}\n i18nKey=\"MoveFilesToTrash\"\n ns=\"DeleteDialog\"\n values={{ filesCount }}\n components={bold}\n />\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

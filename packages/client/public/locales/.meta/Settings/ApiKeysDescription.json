@@ -3,7 +3,7 @@
   "content": "As an owner or admin, you can view and manage all API keys for this workspace.",
   "content_en_sha1_hash": "f82a0abfc4fbb95c3301037685b1121cf4069c2b",
   "created_at": "2026-08-26T14:08:26.248Z",
-  "updated_at": "2026-08-26T14:12:46.468Z",
+  "updated_at": "2026-10-22T16:09:36.916Z",
   "comment": {
     "text": "Informational text in the API Keys settings section explaining the management permissions for owners and admins.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 168,
+      "line_number": 178,
       "context": "className={classNames(styles.apiKeysDescription, {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\")}\n </Text>\n <Text\n className={classNames(\n styles.apiKeysText,\n styles.apiKeysDescriptionText,",
       "module": "/packages/client"
     }

@@ -74,6 +74,7 @@ import {
 } from "@docspace/shared/utils/typeGuards";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
+import { TaskPollingError } from "@docspace/shared/utils/poll-task";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { PersistenceKeys, getPersisted } from "../utils/persistence";
@@ -221,7 +222,11 @@ export const onCopyLinkImpl = async (
 
   const isSystemFolder = systemFolders.includes(item.type as FolderType);
 
-  if (isShared && !isArchive && !isSystemFolder && item.canShare) {
+  // The server refuses external links in the AI rooms: the link for room
+  // members is copied below.
+  const isAiHub = item.rootFolderType === FolderType.AiHub;
+
+  if (isShared && !isArchive && !isSystemFolder && !isAiHub && item.canShare) {
     try {
       const itemLink = item.isFolder
         ? await getFolderLink(item.id)
@@ -296,8 +301,6 @@ export const onCopyLinkImpl = async (
     item.isRoom || item.isFolder,
     needConvert,
     canOpenPlayer,
-    "",
-    item.roomType === RoomsType.AIRoom,
   );
 
   copy(url);
@@ -491,8 +494,8 @@ export const onClickDeleteSelectedFolderImpl = (
 ) => {
   const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
     self.dialogsStore;
-  const { confirmDelete } = self.filesSettingsStore;
-  const { deleteAction, deleteRoomsAction } = self.filesActionsStore;
+  const { isDeleteConfirmationForced, deleteAction, deleteRoomsAction } =
+    self.filesActionsStore;
   const { id: selectedFolderId, getSelectedFolder } = self.selectedFolderStore;
   const { isThirdPartySelection, setBufferSelection } = self.filesStore;
 
@@ -500,7 +503,7 @@ export const onClickDeleteSelectedFolderImpl = (
 
   setIsFolderActions(true);
 
-  if (confirmDelete || isThirdPartySelection) {
+  if (isDeleteConfirmationForced || isThirdPartySelection) {
     setBufferSelection(selectedFolder);
     // the original .js passes `undefined` through here when
     // the caller omits isRoom — the cast keeps the exact runtime value.
@@ -704,11 +707,11 @@ export const onSyncXlsxDataImpl = async (
 
       setSecondaryProgressBarData({ ...basePayload, percent: 0 });
 
-      await XlsxUpdateService.poll(form.id, task.id, (progress) => {
+      await XlsxUpdateService.poll(form.id, (progress) => {
         setSecondaryProgressBarData({
           ...basePayload,
-          percent: progress?.percentage ?? 100,
-          completed: progress?.isCompleted ?? true,
+          percent: progress.percentage,
+          completed: progress.isCompleted,
         });
       }).catch((error) => {
         clearSecondaryProgressData(task.id, OPERATIONS_NAME.other);
@@ -724,7 +727,13 @@ export const onSyncXlsxDataImpl = async (
         : t("Common:SpreadsheetUpdated", messageVar),
     );
   } catch (error) {
-    toastr.error(error as string);
+    // A failure the server reports for the task carries its own message; one
+    // of the polling itself does not, and is not shown as is.
+    toastr.error(
+      error instanceof TaskPollingError
+        ? t("Common:UnexpectedError")
+        : (error as string),
+    );
     console.error(error);
   }
 };

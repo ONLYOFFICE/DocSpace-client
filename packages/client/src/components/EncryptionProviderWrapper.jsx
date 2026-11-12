@@ -41,14 +41,15 @@ import {
   EncryptionProvider,
   useEncryption,
 } from "@docspace/shared/context/encryption";
-import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import {
   registerGhostStateHandler,
   clearGhostStateHandler,
 } from "@docspace/shared/services/encryption/ghost-state-notifier";
+import {
+  registerDeviceSetupHintHandler,
+  clearDeviceSetupHintHandler,
+} from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import {
   PassphraseModal,
@@ -58,6 +59,8 @@ import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+
+import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
 
 const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   recover: filesStore?.recoverEncryptedFilenamesForCurrentView,
@@ -71,7 +74,8 @@ const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   }),
 );
 
-const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
+// Spec: private-rooms/key-management, "A locked key is shown in a private room"
+export const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
   isPrivate: selectedFolderStore?.private,
   folderId: selectedFolderStore?.id,
   sync: filesStore?.syncEncryptedRoom,
@@ -83,14 +87,22 @@ const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
     React.useEffect(() => {
       if (!isPrivate) {
         promptedIdRef.current = null;
+        roomUnlockRequest.reset();
         return undefined;
       }
-      if (isUnlocked || !hasConfiguredKey || folderId == null) return undefined;
+      if (!hasConfiguredKey || folderId == null) return undefined;
+      if (isUnlocked) {
+        // A key that locks later brings the bar, not a new prompt.
+        promptedIdRef.current = folderId;
+        roomUnlockRequest.settle(folderId);
+        return undefined;
+      }
       if (promptedIdRef.current === folderId) return undefined;
       promptedIdRef.current = folderId;
 
       let cancelled = false;
       requireIdentity().then((identity) => {
+        roomUnlockRequest.settle(folderId);
         if (!cancelled && identity) sync?.();
       });
       return () => {
@@ -135,54 +147,55 @@ const GhostStateToastEffect = () => {
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
-const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
+const showDeviceSetupHint = (t) => {
+  const setupLink = (
+    <Link
+      key="setup"
+      tag="a"
+      isHovered
+      color="accent"
+      onClick={() => {
+        toastr.clear();
+        window.location.href = "/profile/keys-management";
+      }}
+    />
+  );
+
+  toastr.info(
+    <Trans
+      i18nKey="Common:EncryptionDeviceSetupHint"
+      t={t}
+      components={[setupLink]}
+    />,
+    null,
+    30000,
+    true,
+  );
+};
+
+// Spec: private-rooms/key-management, "Device setup hint on entering a private room without keys"
+export const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   isPrivate: selectedFolderStore?.private,
-  accountKeysCount: userStore?.encryptionKeys?.length ?? 0,
 }))(
-  observer(({ isPrivate, accountKeysCount }) => {
-    const { hasConfiguredKey } = useEncryption();
+  observer(({ isPrivate }) => {
+    const { hasConfiguredKey, keysLoaded } = useEncryption();
     const { t } = useTranslation(["Common"]);
 
     React.useEffect(() => {
-      if (!isPrivate || hasConfiguredKey) return;
+      registerDeviceSetupHintHandler(() => showDeviceSetupHint(t));
+      return () => clearDeviceSetupHintHandler();
+    }, [t]);
+
+    React.useEffect(() => {
+      if (!isPrivate || !keysLoaded || hasConfiguredKey) return;
       try {
         if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1")
           return;
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
       } catch {}
 
-      const setupLink = (
-        <Link
-          key="setup"
-          tag="a"
-          isHovered
-          color="accent"
-          onClick={() => {
-            toastr.clear();
-            window.location.href = "/profile/keys-management";
-          }}
-        />
-      );
-
-      toastr.info(
-        accountKeysCount > 0 ? (
-          <Trans
-            i18nKey="Common:EncryptionChooseKeyHint"
-            t={t}
-            components={[setupLink]}
-          />
-        ) : (
-          <Trans
-            i18nKey="Common:EncryptionDeviceSetupHint"
-            t={t}
-            components={[setupLink]}
-          />
-        ),
-        null,
-        30000,
-        true,
-      );
-    }, [isPrivate, hasConfiguredKey, accountKeysCount, t]);
+      showDeviceSetupHint(t);
+    }, [isPrivate, keysLoaded, hasConfiguredKey, t]);
 
     return null;
   }),
@@ -273,7 +286,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   const ownerId = userStore?.user?.id;
   const ownerIdStr = ownerId ? String(ownerId) : undefined;
 
-  const chosen = selectActiveKey(keys, getActiveKeyId(ownerIdStr));
+  const chosen = selectUserKey(keys);
 
   const userKeys =
     chosen && ownerIdStr
@@ -287,6 +300,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   return (
     <EncryptionProvider
       userKeys={userKeys}
+      keysLoaded={Array.isArray(keys)}
       PassphraseDialog={PassphraseUnlockAdapter}
       KeyChangeDialog={KeyChangeDialog}
     >

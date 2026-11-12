@@ -50,6 +50,7 @@ const PrivateRouteWrapper = ({
   isLogout,
   isNotPaidPeriod,
   isPortalDeactivate,
+  isPortalBlocked,
   tenantStatus,
   user,
   restricted,
@@ -80,6 +81,7 @@ const PrivateRouteWrapper = ({
       isNotPaidPeriod={isNotPaidPeriod!}
       withCollaborator={withCollaborator}
       isPortalDeactivate={isPortalDeactivate!}
+      isPortalBlocked={isPortalBlocked!}
       enablePortalRename={enablePortalRename!}
       identityServerEnabled={identityServerEnabled}
       limitedAccessSpace={limitedAccessSpace ?? null}
@@ -111,6 +113,7 @@ export default inject<TStore>(
       wizardCompleted,
       tenantStatus,
       isPortalDeactivate,
+      isPortalBlocked,
       enablePortalRename,
       limitedAccessSpace,
       baseDomain,
@@ -122,6 +125,7 @@ export default inject<TStore>(
 
     return {
       isPortalDeactivate,
+      isPortalBlocked,
       isCommunity,
       isNotPaidPeriod,
       user,

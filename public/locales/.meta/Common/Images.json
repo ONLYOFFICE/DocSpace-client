@@ -3,7 +3,7 @@
   "content": "Images",
   "content_en_sha1_hash": "09e871c98fef3b901a775def173e4126aaf73b42",
   "created_at": "2025-05-19T21:30:45.836Z",
-  "updated_at": "2026-10-02T12:15:32.454Z",
+  "updated_at": "2026-11-05T16:49:39.924Z",
   "comment": {
     "text": "This is a filter option label, allowing users to display only image files in a list.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 883,
+      "line_number": 842,
       "context": "break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 883,
+      "line_number": 842,
       "context": "break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():",
       "module": "/packages/client"
     },
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 278,
+      "line_number": 282,
       "context": "},\n {\n id: \"filter_type-images\",\n key: FilterType.ImagesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Images\"),\n },\n {\n id: \"filter_type-media\",\n key: FilterType.MediaOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 278,
+      "line_number": 282,
       "context": "},\n {\n id: \"filter_type-images\",\n key: FilterType.ImagesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Images\"),\n },\n {\n id: \"filter_type-media\",\n key: FilterType.MediaOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
     },
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 320,
+      "line_number": 324,
       "context": "case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:",
       "module": "/packages/shared"
     }

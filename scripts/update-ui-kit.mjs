@@ -35,21 +35,26 @@
  */
 
 /**
- * Drops a freshly packed ui-kit tarball into this repo and makes pnpm actually
- * install it.
+ * Switches the apps from the npm release of @onlyoffice/apps-ui-kit to a
+ * locally packed tarball, for trying a ui-kit build before it is published,
+ * and makes pnpm actually install it.
  *
- * The naive procedure -- copy the .tgz over, run `pnpm install` -- silently
- * does nothing. The tarball keeps one filename across versions on purpose (so a
- * bump touches no app manifest), which means the `file:onlyoffice-apps-ui-kit.tgz`
- * specifier never changes. pnpm sees a specifier it already has, matches the
- * integrity recorded in pnpm-lock.yaml, and keeps the cached copy. `--force`
- * does not help either. The result is a green install, an unchanged lockfile,
- * and the previous build still in node_modules -- the failure mode this script
- * exists to remove.
+ * Every app manifest is repointed at `file:../../onlyoffice-apps-ui-kit.tgz`.
+ * The filename carries no version, so from the second run on the specifier no
+ * longer changes, and the naive procedure -- copy the .tgz over, run
+ * `pnpm install` -- silently does nothing: pnpm sees a specifier it already
+ * has, matches the integrity recorded in pnpm-lock.yaml, and keeps the cached
+ * copy. `--force` does not help either. The result is a green install, an
+ * unchanged lockfile, and the previous build still in node_modules -- the
+ * failure mode this script exists to remove.
  *
- * So: copy, rewrite the recorded integrity, drop the extracted copy, install,
- * then verify by hash that what landed in node_modules is what was copied in,
- * and that the lockfile's peers and dependencies match the packed manifest.
+ * So: copy, repoint the manifests, rewrite the recorded integrity, drop the
+ * extracted copy, install, then verify by hash that what landed in
+ * node_modules is what was copied in, and that the lockfile's peers and
+ * dependencies match the packed manifest.
+ *
+ * Back to the registry: `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`,
+ * then delete the tarball.
  *
  *   node scripts/update-ui-kit.mjs                     # newest pack in the sibling checkout
  *   node scripts/update-ui-kit.mjs path/to/pack.tgz    # an explicit tarball
@@ -70,10 +75,12 @@ import {
   packedManifest,
   placeAiChat,
   pnpmInstall,
+  repointManifests,
   verifyExtractedCopies,
 } from "./lib/vendored-tarball.mjs";
 
 const TARBALL = path.join(ROOT, "onlyoffice-apps-ui-kit.tgz");
+const SPECIFIER = "file:../../onlyoffice-apps-ui-kit.tgz";
 
 /** Set by findSource when it located a ui-kit checkout rather than a bare path. */
 let uiKitRoot = null;
@@ -139,19 +146,13 @@ const syncAiChat = (uiKitRoot) => {
   return placed;
 };
 
-// Checked before anything is written. Everything below overwrites tarballs and
-// app manifests, and the rollback that undoes them is only wired up once the
-// install is about to run -- so a precondition that fails after those writes
-// leaves exactly the half-updated tree this script exists to avoid. Read the
-// lockfile first and bail while there is still nothing to undo.
+// The lockfile has entries for the tarball only once the apps already use it;
+// coming from the registry there are none, and pnpm resolves the new
+// specifier fresh.
 const LOCK_PATTERN =
   /(integrity: )sha512-[A-Za-z0-9+/=]+(, tarball: file:onlyoffice-apps-ui-kit\.tgz)/g;
 const lock = fs.readFileSync(LOCKFILE, "utf8");
-const lockMatches = lock.match(LOCK_PATTERN);
-
-if (!lockMatches || lockMatches.length === 0) {
-  fail("No @onlyoffice/apps-ui-kit entry in pnpm-lock.yaml -- has the dependency been renamed?");
-}
+const lockMatches = lock.match(LOCK_PATTERN) ?? [];
 
 const source = findSource();
 const aiChat = syncAiChat(uiKitRoot);
@@ -164,6 +165,11 @@ const before = hadTarball ? integrityOf(TARBALL) : null;
 fs.copyFileSync(source, TARBALL);
 
 const after = integrityOf(TARBALL);
+const manifests = repointManifests("@onlyoffice/apps-ui-kit", SPECIFIER);
+
+if (manifests.touched.length > 0) {
+  console.log(`@onlyoffice/apps-ui-kit -> ${SPECIFIER} (${manifests.touched.join(", ")} repointed)`);
+}
 
 // An unchanged tarball still falls through to the verification below rather
 // than exiting here. The install step can die after the tarball, the lockfile
@@ -172,10 +178,10 @@ const after = integrityOf(TARBALL);
 // early on "same build" would report success over a tree with no ui-kit in it
 // at all.
 //
-// Nor does an unchanged ui-kit mean there is nothing to install: ai-chat may
-// have moved on its own, and the manifests rewritten above then need pnpm to
-// pick the new file up.
-if (before === after && aiChat === null) {
+// Nor does an unchanged ui-kit mean there is nothing to install: the apps may
+// have just been switched over from the registry, or ai-chat may have moved on
+// its own, and the manifests rewritten above then need pnpm to pick that up.
+if (before === after && aiChat === null && manifests.touched.length === 0) {
   console.log(
     `${path.relative(ROOT, TARBALL)} is already this build -- checking what is installed.`,
   );
@@ -184,6 +190,7 @@ if (before === after && aiChat === null) {
     fs.writeFileSync(LOCKFILE, lock);
     if (previousTarball === null) fs.rmSync(TARBALL, { force: true });
     else fs.writeFileSync(TARBALL, previousTarball);
+    manifests.restore();
     aiChat?.restore();
   };
 
@@ -200,18 +207,21 @@ if (before === after && aiChat === null) {
     }
   }
 
-  const rewritten = `${lockMatches.length} lockfile ${lockMatches.length === 1 ? "entry" : "entries"} rewritten`;
+  const rewritten =
+    lockMatches.length > 0
+      ? ` (${lockMatches.length} lockfile ${lockMatches.length === 1 ? "entry" : "entries"} rewritten)`
+      : "";
 
-  console.log(`Installing ${path.basename(source)} (${rewritten})...`);
+  console.log(`Installing ${path.basename(source)}${rewritten}...`);
   try {
     pnpmInstall();
   } catch (error) {
-    // The tarball, the lockfile and (when ai-chat moved) its tarball and the
-    // app manifests were already rewritten above, so a failed install leaves
+    // The tarball, the lockfile, the app manifests and (when ai-chat moved)
+    // its tarball were already rewritten above, so a failed install leaves
     // the tree claiming a version it does not have. Put all of it back.
     restore();
     fail(
-      `pnpm install failed; tarball, lockfile${aiChat ? ", ai-chat and manifests" : ""} restored: ${error.message}`,
+      `pnpm install failed; tarball, lockfile, manifests${aiChat ? " and ai-chat" : ""} restored: ${error.message}`,
     );
   }
 }
@@ -250,4 +260,7 @@ console.log(
   `@onlyoffice/apps-ui-kit ${version} installed and verified against the tarball ` +
     `(${copies.length} extracted ${copies.length === 1 ? "copy" : "copies"}).`,
 );
-console.log("Commit onlyoffice-apps-ui-kit.tgz together with pnpm-lock.yaml.");
+console.log(
+  "The apps now use the tarball instead of the npm release. To go back, run " +
+    "`pnpm -r update @onlyoffice/apps-ui-kit@^<version>` and delete onlyoffice-apps-ui-kit.tgz.",
+);

@@ -162,8 +162,8 @@ const Badges = ({
     lockedBy,
     locked,
     isFavorite,
-    isAIAgent,
     startFilling,
+    encrypted,
   } = item;
 
   const isTile = viewAs === "tile";
@@ -204,7 +204,6 @@ const Badges = ({
   const unpinIconProps = {
     "data-id": id,
     "data-action": "unpin",
-    "data-isaiagent": isAIAgent,
   };
 
   const commonBadgeProps = {
@@ -230,8 +229,15 @@ const Badges = ({
     "data-rootfolderid": rootFolderId,
     "data-new": newCount,
   };
+  // Spec: private-rooms/file-operations, "Version operations withheld"
+  const versionBadgeTitle = encrypted
+    ? undefined
+    : t("Common:ShowVersionHistory");
   const onShowVersionHistoryProp =
-    security && "ReadHistory" in security && security?.ReadHistory
+    !encrypted &&
+    security &&
+    "ReadHistory" in security &&
+    security?.ReadHistory
       ? { onClick: onShowVersionHistory }
       : {};
 
@@ -460,7 +466,7 @@ const Badges = ({
             })}
             {...onShowVersionHistoryProp}
             isVersionBadge
-            title={t("Common:ShowVersionHistory")}
+            title={versionBadgeTitle}
           />
         </BadgeWrapper>
       ) : null}

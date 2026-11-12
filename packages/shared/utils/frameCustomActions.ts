@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { createElement, type ReactNode } from "react";
+
 import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 
 import type {
@@ -134,6 +136,17 @@ export const getVisibleCreateActions = (
   (config?.createMenu ?? []).filter((action) =>
     inSection(action.section, section),
   );
+
+export const getCustomActionIconProps = (
+  icon?: string,
+): { icon: string; iconNode?: ReactNode } => {
+  if (!icon || icon.startsWith("data:")) return { icon: icon ?? "" };
+
+  return {
+    icon,
+    iconNode: createElement("img", { src: icon, alt: "", width: 16, height: 16 }),
+  };
+};
 
 export const sendCustomAction = (event: TFrameCustomActionEvent) => {
   frameCallEvent({ event: "onCustomAction", data: event });

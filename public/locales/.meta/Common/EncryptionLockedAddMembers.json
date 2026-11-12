@@ -3,7 +3,7 @@
   "content": "Encryption is locked — new members cannot access existing files until you unlock your key.",
   "content_en_sha1_hash": "5d791272ebbe4c70f921c5888c4e36faaed3fbae",
   "created_at": "2026-05-24T17:27:26.662Z",
-  "updated_at": "2026-08-26T14:08:33.023Z",
+  "updated_at": "2026-11-09T17:07:34.803Z",
   "comment": {
     "text": "Error toast message that appears when attempting to add new members to a private space while the user's encryption key is locked.",
     "is_auto": true,
@@ -13,32 +13,32 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 473,
-      "context": "let identity = null;\n if (isPrivateInvite && newMembers.length > 0) {\n identity = await requireUnlock(String(currentUserId));\n if (!identity) {\n setIsLoading(false);\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n }\n \n const result = !isRooms",
+      "line_number": 483,
+      "context": "let identity = null;\n if (isPrivateInvite && invitedMembers.length > 0) {\n identity = await requireUnlock(String(currentUserId));\n if (!identity) {\n setIsLoading(false);\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n }\n \n // Spec: private-rooms/room-membership, \"Invitees without usable keys are skipped with a warning\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/copyMove.helpers.ts",
-      "line_number": 202,
-      "context": "const userId = user?.id;\n if (!userId) return;\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {\n toastr.error(i18n.t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const sameRoomRoot =\n destInfo?.private === true &&",
+      "line_number": 308,
+      "context": "return;\n }\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {\n toastr.error(i18n.t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const copySourceRoomId =\n destInfo?.sourceRoomId ?? self.resolveRoomIdForFile(null);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
-      "line_number": 153,
+      "line_number": 109,
       "context": "toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const controller = registerCryptoOperation();\n try {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
-      "line_number": 153,
+      "line_number": 109,
       "context": "toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return;\n }\n \n const controller = registerCryptoOperation();\n try {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateInviteFlow.ts",
-      "line_number": 224,
-      "context": "// setRoomSecurity so that server access is never granted when encryption keys\n // are absent or locked. Mirrors packages/client InvitePanel:452-459 pattern.\n const onBeforeSubmit = React.useCallback(async (): Promise<boolean> => {\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return false;\n }\n return true;\n }, [requireIdentity, t]);",
+      "line_number": 179,
+      "context": ");\n \n const onBeforeSubmit = React.useCallback(async (): Promise<boolean> => {\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));\n return false;\n }\n return true;\n }, [requireIdentity, t]);",
       "module": "/packages/sdk"
     }
   ],

@@ -158,6 +158,13 @@ describe("Error Components", () => {
 			renderWithProviders(<ErrorUnavailable />);
 			expect(screen.getByText(/ErrorDeactivatedText/i)).toBeInTheDocument();
 		});
+
+		it("displays the blocked message for a blocked portal", () => {
+			renderWithProviders(<ErrorUnavailable isPortalBlocked />);
+			expect(screen.getByRole("heading")).toHaveTextContent(/ErrorBlockedText/i);
+			expect(screen.getByText(/ErrorBlockedDescription/i)).toBeInTheDocument();
+			expect(screen.queryByText(/ErrorDeactivatedText/i)).not.toBeInTheDocument();
+		});
 	});
 
 	describe("AccessRestricted", () => {

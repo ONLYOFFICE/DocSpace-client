@@ -3,7 +3,7 @@
   "content": "Reset settings",
   "content_en_sha1_hash": "9ba8d6e6aaec0b4ced7d02008b670d094f276531",
   "created_at": "2025-10-27T16:14:26.774Z",
-  "updated_at": "2026-07-30T16:14:11.194Z",
+  "updated_at": "2026-11-09T09:26:33.465Z",
   "comment": {
     "text": "This is the title of a dialog box and the label of a button. It appears when a user wants to revert AI settings (knowledge base or web search) to their default values.",
     "is_auto": true,
@@ -12,6 +12,12 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 500,
+      "context": "isDisabled={isSaveDisabled}\n testId=\"document-agent-save-button\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:ResetSettings\")}\n scale={false}\n onClick={onReset}\n isDisabled={saveRequestRunning}\n testId=\"document-agent-reset-button\"\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
       "line_number": 85,
       "context": "}\n };\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:ResetSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"ResetKnowledgeDescription\" ns=\"Common\" />\n </Text>\n </ModalDialog.Body>",
@@ -19,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 376,
+      "line_number": 375,
       "context": "isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:ResetSettings\")}\n scale={false}\n onClick={onRestoreToDefault}\n isDisabled={\n !knowledgeConfig ||\n knowledgeConfig?.type === KnowledgeType.None ||",
       "module": "/packages/client"
     },
@@ -31,7 +37,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 395,
+      "line_number": 394,
       "context": "isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:ResetSettings\")}\n scale={false}\n onClick={onRestoreToDefault}\n isDisabled={\n !knowledgeConfig ||\n knowledgeConfig?.type === KnowledgeType.None ||",
       "module": "/packages/sdk"
     }

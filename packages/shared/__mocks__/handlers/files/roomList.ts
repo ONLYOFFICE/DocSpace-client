@@ -3016,18 +3016,85 @@ const getContextMenuRoomList = ({
  * `Create: false`. `current` here is a single shared object that says `true`,
  * so a test standing in as anybody else has to say otherwise.
  */
-const withRootCreate = <T extends { current: { security?: object } }>(
+type RootParams = { canCreate?: boolean; rootAccess?: ShareAccessRights };
+
+const withRoot = <T extends { current: { access?: number; security?: object } }>(
   list: T,
-  canCreate?: boolean,
+  { canCreate, rootAccess }: RootParams,
 ): T => {
-  if (canCreate === undefined) return list;
+  if (canCreate === undefined && rootAccess === undefined) return list;
 
   return {
     ...list,
     current: {
       ...list.current,
-      security: { ...list.current.security, Create: canCreate },
+      ...(rootAccess !== undefined && { access: rootAccess }),
+      ...(canCreate !== undefined && {
+        security: { ...list.current.security, Create: canCreate },
+      }),
     },
+  };
+};
+
+// RoomPrivacyFilter (Core/Core/RoomPrivacyFilter.cs): None 0, Private 1,
+// NotPrivate 2. The client sends the number.
+const PRIVACY_FILTER_PRIVATE = 1;
+const PRIVACY_FILTER_NOT_PRIVATE = 2;
+
+const readPrivacyFilter = (request?: Request) => {
+  if (!request) return null;
+
+  const value = Number(new URL(request.url).searchParams.get("privacyFilter"));
+
+  return value === PRIVACY_FILTER_PRIVATE || value === PRIVACY_FILTER_NOT_PRIVATE
+    ? value
+    : null;
+};
+
+type TPrivacyFilteredList = {
+  folders: { private?: boolean; providerItem?: boolean }[];
+  total: number;
+  count: number;
+};
+
+/**
+ * The split of `GET files/rooms` by the private setting
+ * (VirtualRoomsCommonController.GetRoomsFolder ->
+ * FileSecurity.GetVirtualRoomsAsync). The Rooms area, `Active` or no area
+ * named, never lists a private room: the server forces `NotPrivate` on it,
+ * and reads `Private` on it as the private rooms section, which lists only
+ * private rooms. On every other area the filter applies as given:
+ * FolderDao.BuildRoomsQuery keeps the private rooms for `Private` and the
+ * others for `NotPrivate`. `Private` adds no room on third-party storage.
+ * The totals lose the rooms left out.
+ */
+export const withRoomPrivacyFilter = <T extends TPrivacyFilteredList>(
+  list: T,
+  request?: Request,
+): T => {
+  if (!request) return list;
+
+  const searchArea = new URL(request.url).searchParams.get("searchArea");
+  const isRoomsArea = !searchArea || searchArea === "Active";
+  const requested = readPrivacyFilter(request);
+  const privacyFilter =
+    isRoomsArea && requested !== PRIVACY_FILTER_PRIVATE
+      ? PRIVACY_FILTER_NOT_PRIVATE
+      : requested;
+  if (!privacyFilter) return list;
+
+  const folders = list.folders.filter((room) =>
+    privacyFilter === PRIVACY_FILTER_PRIVATE
+      ? !!room.private && !room.providerItem
+      : !room.private,
+  );
+  const dropped = list.folders.length - folders.length;
+
+  return {
+    ...list,
+    folders,
+    total: Math.max(0, list.total - dropped),
+    count: Math.max(0, list.count - dropped),
   };
 };
 
@@ -3038,32 +3105,46 @@ export const roomListResolver = (
     inRoom?: boolean;
     isDocAdmin?: boolean;
     canCreate?: boolean;
+    rootAccess?: ShareAccessRights;
   },
+  request?: Request,
 ) => {
-  const canCreate = params?.canCreate;
+  const root = { canCreate: params?.canCreate, rootAccess: params?.rootAccess };
 
   if (roomListType === TypeRoomList.IsFiltered) {
     return new Response(
-      JSON.stringify({ response: withRootCreate(getRoomList(true), canCreate) }),
+      JSON.stringify({
+        response: withRoomPrivacyFilter(
+          withRoot(getRoomList(true), root),
+          request,
+        ),
+      }),
     );
   }
 
   if (roomListType === TypeRoomList.IsDefault) {
     return new Response(
-      JSON.stringify({ response: withRootCreate(getRoomList(), canCreate) }),
+      JSON.stringify({
+        response: withRoomPrivacyFilter(withRoot(getRoomList(), root), request),
+      }),
     );
   }
 
   if (roomListType === TypeRoomList.ContextMenu) {
     return new Response(
       JSON.stringify({
-        response: withRootCreate(getContextMenuRoomList(params ?? {}), canCreate),
+        response: withRoomPrivacyFilter(
+          withRoot(getContextMenuRoomList(params ?? {}), root),
+          request,
+        ),
       }),
     );
   }
 
   return new Response(
-    JSON.stringify({ response: withRootCreate(getEmptyRoomList(), canCreate) }),
+    JSON.stringify({
+      response: withRoomPrivacyFilter(withRoot(getEmptyRoomList(), root), request),
+    }),
   );
 };
 
@@ -3079,6 +3160,7 @@ export const roomListHandler = (
      * stands.
      */
     canCreate?: boolean;
+    rootAccess?: ShareAccessRights;
   },
 ) => {
   let baseUrl;
@@ -3089,9 +3171,12 @@ export const roomListHandler = (
       typeof window !== "undefined" ? window.location.origin : `${BASE_URL}`;
   }
 
-  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`, () => {
-    return roomListResolver(roomListType, params);
-  });
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
+    ({ request }) => {
+      return roomListResolver(roomListType, params, request);
+    },
+  );
 };
 
 export const createRoomHandler = (port?: string) => {

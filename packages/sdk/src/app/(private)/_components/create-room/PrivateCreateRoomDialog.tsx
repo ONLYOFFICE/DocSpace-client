@@ -40,13 +40,16 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import type { TUser } from "@docspace/shared/api/people/types";
-import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
+import { useEncryption } from "@docspace/shared/context/encryption";
 import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
+import { usePrivateRoomKeyGate } from "@docspace/shared/hooks/usePrivateRoomKeyGate";
+import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import CreateEditRoomDialog, {
   type EditableRoom,
 } from "@/app/(rooms)/_components/create-edit-room-dialog";
+import { useDocsSettingsStore } from "@/app/(personal-files)/_store/DocsSettingsStore";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
@@ -69,13 +72,20 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   const { t } = useTranslation(["Common"]);
   const identityStore = useEncryptionIdentityStore();
   const docsUser = useDocsUserStore();
+  const docsSettings = useDocsSettingsStore();
   const user = docsUser.user as TUser | null;
   const userId = user?.id ? String(user.id) : undefined;
 
   const hasKeys = identityStore.hasKeys;
-  const keysLoaded = identityStore.keys !== null;
+  const { keysLoaded } = useEncryption();
+  // Spec: private-rooms/sdk-surface, "Private room creation waits for a known key list"
+  const mayHoldKey = !keysLoaded || hasKeys;
 
-  const [keyConfirmVisible, setKeyConfirmVisible] = React.useState(false);
+  const isCreation = !room;
+  const hasSecureContext = !isCreation || hasPrivateRoomSecureContext();
+  const editorsEncrypt =
+    !isCreation || docsSettings.isEncryptedEditingAvailable;
+  const canCreate = hasSecureContext && editorsEncrypt;
   const autoPromptedRef = React.useRef(false);
 
   const refreshKeysFromServer = React.useCallback(
@@ -83,65 +93,74 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     [identityStore],
   );
 
-  const generateKey = useGenerateKeyFlow({
+  const keyGate = usePrivateRoomKeyGate({
+    t,
     userId,
     accountLabel: user?.email,
+    hasExistingKeys: mayHoldKey,
+    isGuest: user?.isVisitor,
     refreshKeysFromServer,
+    onKeyGenerationCancelled: onClose,
+    onClose,
   });
 
-  const promptKeySetup = React.useCallback(() => {
-    if (!globalThis.crypto?.subtle) {
+  // null: the list could not be loaded, so whether a key exists is unknown.
+  const resolveEncryptionKeys = React.useCallback(async () => {
+    if (identityStore.keys?.length) return true;
+    await identityStore.loadKeys();
+    if (identityStore.keys === null) return null;
+    return identityStore.keys.length > 0;
+  }, [identityStore]);
+
+  // Spec: private-rooms/sdk-surface, "Private room creation gate"
+  React.useEffect(() => {
+    if (!visible || canCreate) return;
+    if (!hasSecureContext) {
       toastr.error(t("Common:EncryptionRequiresHttps"));
-      return;
+    } else {
+      // Spec: private-rooms/sdk-surface, "Private room creation needs a Document Server that encrypts"
+      toastr.error(t("Common:PrivateRoomDocServiceNotSupported"));
     }
-    setKeyConfirmVisible(true);
-  }, [t]);
-
-  const onRequestCreateKeys = promptKeySetup;
-
-  const onConfirmGenerateKey = React.useCallback(() => {
-    setKeyConfirmVisible(false);
-    generateKey.request();
-  }, [generateKey]);
-
-  const onCancelGenerateKey = React.useCallback(() => {
-    setKeyConfirmVisible(false);
-  }, []);
+    onClose();
+  }, [visible, canCreate, hasSecureContext, onClose, t]);
 
   React.useEffect(() => {
     if (!visible) {
       autoPromptedRef.current = false;
       return;
     }
-    if (room) return;
+    if (!isCreation || !canCreate) return;
     if (keysLoaded && !hasKeys && !autoPromptedRef.current) {
       autoPromptedRef.current = true;
-      promptKeySetup();
+      if (!keyGate.offerKeyGeneration()) onClose();
     }
-  }, [visible, keysLoaded, hasKeys, room, promptKeySetup]);
+  }, [visible, keysLoaded, hasKeys, isCreation, canCreate, keyGate]);
 
   return (
     <>
       <ConfirmationModal
-        visible={keyConfirmVisible}
+        visible={keyGate.keyConfirmVisible}
         title={t("Common:PrivateRoomKeyRequiredTitle")}
         message={t("Common:PrivateRoomKeyRequiredDescription")}
         confirmLabel={t("Common:ContinueButton")}
-        onConfirm={onConfirmGenerateKey}
-        onCancel={onCancelGenerateKey}
+        onConfirm={keyGate.confirmKeyGeneration}
+        onCancel={() => keyGate.cancelKeyGeneration(isCreation)}
         zIndex={410}
       />
-      {generateKey.modals}
-      <CreateEditRoomDialog
-        visible={visible}
-        onClose={onClose}
-        room={room}
-        isPrivate
-        hasEncryptionKeys={hasKeys}
-        onRequestCreateKeys={onRequestCreateKeys}
-        onRoomCreated={onCreated}
-        onRoomEdited={onEdited}
-      />
+      {keyGate.keyGenerationModals}
+      {canCreate ? (
+        <CreateEditRoomDialog
+          visible={visible}
+          onClose={onClose}
+          room={room}
+          isPrivate
+          hasEncryptionKeys={mayHoldKey}
+          onRequestCreateKeys={keyGate.offerKeyGeneration}
+          resolveEncryptionKeys={resolveEncryptionKeys}
+          onRoomCreated={onCreated}
+          onRoomEdited={onEdited}
+        />
+      ) : null}
     </>
   );
 };

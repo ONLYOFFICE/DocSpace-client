@@ -61,7 +61,6 @@ import {
   EmployeeStatus,
   EmployeeType,
   RoomsType,
-  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
@@ -74,6 +73,7 @@ import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?ur
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
+import { offersGuestInvitation } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "../InvitePanel.module.scss";
@@ -82,10 +82,8 @@ import AccessSelector from "../../../AccessSelector";
 import {
   fixAccess,
   getTopFreeRole,
-  getViewerRole,
   isPaidUserRole,
   makeFreeRole,
-  makeViewerRole,
 } from "../utils";
 
 const minSearchValue = 2;
@@ -118,9 +116,13 @@ const InviteInput = ({
   setInputValue,
   usersList,
   setUsersList,
-  allowInvitingGuests,
+  allowInvitingGuests: portalAllowsGuests,
   isPrivateRoom,
 }) => {
+  const allowInvitingGuests = offersGuestInvitation(
+    portalAllowsGuests,
+    isPrivateRoom,
+  );
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 
@@ -130,6 +132,9 @@ const InviteInput = ({
 
   const searchRef = useRef();
   const prevDropDownContent = useRef(null);
+  // The debounced search keeps its first closure; the room loads later.
+  const roomTypeRef = useRef(roomType);
+  roomTypeRef.current = roomType;
 
   useEffect(() => {
     setTimeout(() => {
@@ -284,13 +289,18 @@ const InviteInput = ({
               filter,
             );
 
+      // A project takes no guests, neither new nor existing ones, and no
+      // groups, which join as Member only.
+      const items =
+        roomTypeRef.current === RoomsType.AiProjectRoom
+          ? users.items.filter((u) => !u.isVisitor && !u.isGroup)
+          : users.items;
+
       setUsersList(
-        roomId === -1
-          ? users.items.map((u) => ({ ...u, shared: true }))
-          : users.items,
+        roomId === -1 ? items.map((u) => ({ ...u, shared: true })) : items,
       );
 
-      if (users.total) isBlocked = false;
+      if (items.length) isBlocked = false;
     }
 
     const parts = getParts(value);
@@ -330,14 +340,7 @@ const InviteInput = ({
   };
 
   const addUser = (item) => {
-    const {
-      shared,
-      status,
-      roomType,
-      access,
-      isVisitor,
-      isGroup = false,
-    } = item;
+    const { shared, status, roomType, access, isGroup = false } = item;
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
@@ -345,27 +348,14 @@ const InviteInput = ({
     } else if (shared) {
       toastr.warning(t("Common:UsersAlreadyAdded"));
     } else {
-      const guestWrongRoleInAgent =
-        isVisitor &&
-        roomType === RoomsType.AIRoom &&
-        access !== ShareAccessRights.ReadOnly;
-
       if (isGroup && checkIfAccessPaid(access)) {
         item = fixAccess(item, t, roomType);
       }
 
-      if (guestWrongRoleInAgent) {
-        item = makeViewerRole(item, t, getViewerRole(t, roomType));
-      }
-
-      if (
-        !guestWrongRoleInAgent &&
-        isPaidUserRole(access) &&
-        (item.isVisitor || item.isCollaborator)
-      ) {
+      if (isPaidUserRole(access) && (item.isVisitor || item.isCollaborator)) {
         const topFreeRole = getTopFreeRole(t, roomType);
 
-        if (access !== topFreeRole.access) {
+        if (access !== topFreeRole?.access) {
           item = makeFreeRole(item, t, topFreeRole);
 
           if (isUserTariffLimit) {
@@ -465,7 +455,8 @@ const InviteInput = ({
       return;
     }
 
-    if (isPrivateRoom) return;
+    // An e-mail invitation joins as a guest, which a project does not take.
+    if (isPrivateRoom || roomType === RoomsType.AiProjectRoom) return;
 
     const items = toUserItems(inputValue);
 
@@ -483,21 +474,11 @@ const InviteInput = ({
               ? isPaidUserAccess(item.access)
               : isPaidUserRole(item.access);
 
-          const shouldMakeViewerRole =
-            roomType === RoomsType.AIRoom &&
-            item.isEmailInvite &&
-            item.access !== ShareAccessRights.ReadOnly;
-
-          if (shouldMakeViewerRole) {
-            item = makeViewerRole(item, t, getViewerRole(t, roomType));
-            return item;
-          }
-
           if (isRolePaid && item.isEmailInvite) {
             const topFreeRole =
               roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
 
-            if (roomId !== -1 && item.access !== topFreeRole.access) {
+            if (roomId !== -1 && item.access !== topFreeRole?.access) {
               item = makeFreeRole(item, t, topFreeRole);
             }
           }
@@ -512,12 +493,7 @@ const InviteInput = ({
           checkIfAccessPaid(userItem.access) &&
           (userItem.isGroup || userItem.isVisitor || userItem.isCollaborator);
 
-        const shouldMakeViewerRole =
-          roomType === RoomsType.AIRoom &&
-          userItem.isVisitor &&
-          userItem.access !== ShareAccessRights.ReadOnly;
-
-        if (shouldMakeFreeRole || shouldMakeViewerRole) {
+        if (shouldMakeFreeRole) {
           userItem = fixAccess(userItem, t, roomType);
 
           if (isUserTariffLimit) {
@@ -788,7 +764,7 @@ const InviteInput = ({
 };
 
 export default inject(
-  ({ settingsStore, dialogsStore, userStore, currentQuotaStore }) => {
+  ({ settingsStore, dialogsStore, userStore, currentQuotaStore }, { roomType }) => {
     const { isOwner, isAdmin } = userStore.user;
     const {
       invitePanelOptions,
@@ -815,7 +791,9 @@ export default inject(
       isAdmin,
       isPaidUserAccess,
       isUserTariffLimit,
-      allowInvitingGuests,
+      // A project takes no guests: no e-mail invitation, which joins as one.
+      allowInvitingGuests:
+        allowInvitingGuests && roomType !== RoomsType.AiProjectRoom,
     };
   },
 )(

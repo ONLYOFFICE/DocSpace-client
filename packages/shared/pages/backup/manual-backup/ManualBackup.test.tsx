@@ -94,6 +94,7 @@ Object.defineProperty(window, "localStorage", { value: localStorageMock() });
 Object.defineProperty(window, "location", {
   value: {
     origin: "https://example.com",
+    href: "https://example.com/",
   },
 });
 
@@ -206,6 +207,22 @@ describe("ManualBackup", () => {
     expect(screen.getByText("Common:RoomsModule")).toBeInTheDocument();
     expect(screen.getByText("Common:ThirdPartyResource")).toBeInTheDocument();
     expect(screen.getByText("Common:ThirdPartyStorage")).toBeInTheDocument();
+  });
+
+  it("Section available", () => {
+    render(<ManualBackup {...defaultProps} showPrivateRoomsWarning />);
+
+    expect(
+      screen.getByText("Common:PrivateRoomsBackupWarning"),
+    ).toBeInTheDocument();
+  });
+
+  it("Section not available", () => {
+    render(<ManualBackup {...defaultProps} />);
+
+    expect(
+      screen.queryByText("Common:PrivateRoomsBackupWarning"),
+    ).not.toBeInTheDocument();
   });
 
   it("shows loader when isInitialLoading is true", () => {
@@ -477,6 +494,28 @@ describe("ManualBackup", () => {
 
       expect(saveDeposite).toHaveBeenCalled();
       expect(portalApi.startBackup).not.toHaveBeenCalled();
+    });
+
+    it("still creates the copy when the balance refresh fails after a top-up", async () => {
+      const saveDeposite = vi
+        .spyOn(portalApi, "saveDeposite")
+        .mockResolvedValue("ok");
+      const fetchWalletBalance = vi
+        .fn()
+        .mockRejectedValue(new Error("Internal error"));
+
+      render(
+        <ManualBackup
+          {...paidProps}
+          fetchWalletBalance={fetchWalletBalance}
+        />,
+      );
+
+      await userEvent.click(screen.getByText("Common:TopUpAndMakeCopy"));
+
+      expect(saveDeposite).toHaveBeenCalledTimes(1);
+      expect(fetchWalletBalance).toHaveBeenCalledWith(true);
+      expect(portalApi.startBackup).toHaveBeenCalledTimes(1);
     });
 
     it("keeps the plain button when the balance is enough", () => {

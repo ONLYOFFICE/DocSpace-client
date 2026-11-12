@@ -104,6 +104,13 @@ export const staticUrlPlugin = (): Plugin => {
 
           const urlPath =
             prefix + "/" + relativePath.split(path.sep).join("/");
+          // The hash lives in the importing module's transformed code, so
+          // it only moves when that module is transformed again. The dev
+          // server is told the asset is a dependency: an edited locale file
+          // invalidates its importer, the hash is recomputed and the browser
+          // asks for the new URL instead of serving the old file from its
+          // year-long immutable cache.
+          this.addWatchFile(resolved);
           const hash = fileHash(resolved);
           const url = hash ? `${urlPath}?hash=${hash}` : urlPath;
 

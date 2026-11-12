@@ -89,6 +89,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
 import { removeOptions } from "SRC_DIR/helpers/filesUtils";
+import type { TMetadataSelection } from "SRC_DIR/pages/Home/InfoPanel/Body/views/Metadata/types";
 import {
   RoomsType,
   FolderType,
@@ -99,7 +100,7 @@ import { isFolder } from "@docspace/shared/utils/typeGuards";
 import {
   createMenuGroup,
   filterModel,
-  onClickEditAgent,
+  layoutRoomOptions,
   onClickLinkForPortal,
   onEditRoomTemplate,
   onShowEditingToast,
@@ -108,6 +109,23 @@ import {
 import type { TContextItem, TContextOption, TMenuGroupConfig } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 import type { TSelectionItem } from "./types";
+
+// The room part and the file part of the option list each carry a
+// "separator1", and a room's list keeps both. The menu keys its rows by `key`,
+// so a repeated separator key is told apart by its position; a separator has
+// no identity of its own.
+const withUniqueSeparatorKeys = (options: ContextMenuModel[]) => {
+  const seen = new Set<string | number>();
+
+  return options.map((option, index) => {
+    if (!option.isSeparator) return option;
+    if (!seen.has(option.key)) {
+      seen.add(option.key);
+      return option;
+    }
+    return { ...option, key: `${option.key}-${index}` };
+  });
+};
 
 export const getFilesContextOptionsImpl = (
   self: ContextOptionsStore,
@@ -281,14 +299,7 @@ export const getFilesContextOptionsImpl = (
   }
 
   const isArchive = item.rootFolderType === FolderType.Archive;
-  const isAIAgent =
-    item.isAIAgent ??
-    (item.rootFolderType === FolderType.AIAgents &&
-      item.roomType === RoomsType.AIRoom);
   const isFormSpace = item.roomType === RoomsType.FormRoom;
-
-  const isKnowledgeOrResult =
-    item.isAIAgent && (item.isInsideKnowledge || item.isInsideResultStorage);
 
   const hasShareLinkRights = isPublicRoom
     ? item.security?.Read
@@ -458,14 +469,6 @@ export const getFilesContextOptionsImpl = (
       disabled: false,
     },
     {
-      id: "option_edit-agent",
-      key: "edit-agent",
-      label: t("Common:EditAgent"),
-      icon: SettingsReactSvgUrl,
-      onClick: () => onClickEditAgent(item),
-      disabled: false,
-    },
-    {
       id: "option_invite-users-to-room",
       key: "invite-users-to-room",
       label: t("Common:InviteContacts"),
@@ -479,9 +482,13 @@ export const getFilesContextOptionsImpl = (
       label: t("Common:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => self.onCopyLink(item, t),
+      // A shareable file copies its external link instead; the AI rooms
+      // have none, so their files keep this one.
       disabled: item.isTemplate
         ? false
-        : (!item.isRoom && item.canShare) ||
+        : (!item.isRoom &&
+            item.canShare &&
+            item.rootFolderType !== FolderType.AiHub) ||
           (isPublicRoomType && hasShareLinkRights) ||
           Boolean(
             item.external && (item.isLinkExpired || item.passwordProtected),
@@ -501,6 +508,36 @@ export const getFilesContextOptionsImpl = (
       label: t("Files:AnalyzeResponses"),
       icon: AISvgUrl,
       onClick: () => self.askAI(item, true),
+      disabled: false,
+    },
+    {
+      key: "separator-metadata-ai",
+      isSeparator: true,
+    },
+    {
+      id: "option_fill-metadata-ai",
+      key: "fill-metadata-ai",
+      label: t("Files:FillMetadata"),
+      icon: AISvgUrl,
+      onClick: () =>
+        self.dialogsStore.setMetadataAIPanelData({
+          visible: true,
+          item: item as TMetadataSelection,
+          mode: "fill",
+        }),
+      disabled: false,
+    },
+    {
+      id: "option_suggest-metadata-ai",
+      key: "suggest-metadata-ai",
+      label: t("Files:GenerateMetadata"),
+      icon: AISvgUrl,
+      onClick: () =>
+        self.dialogsStore.setMetadataAIPanelData({
+          visible: true,
+          item: item as TMetadataSelection,
+          mode: "suggest",
+        }),
       disabled: false,
     },
     {
@@ -659,7 +696,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_room-info",
       key: "room-info",
-      label: item.isAIAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
+      label: t("Common:RoomInfo"),
       icon: InfoOutlineReactSvgUrl,
       onClick: () => self.onShowInfoPanel(item),
       disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
@@ -765,7 +802,7 @@ export const getFilesContextOptionsImpl = (
         : t("Common:ChangeRoomOwner"),
       icon: ReconnectSvgUrl,
       onClick: self.onChangeRoomOwner,
-      disabled: isAIAgent,
+      disabled: false,
     },
     {
       id: "option_remove-from-group",
@@ -893,26 +930,15 @@ export const getFilesContextOptionsImpl = (
       disabled: false,
     },
     {
-      id: "option_change-room-owner",
-      key: "change-agent-owner",
-      label: t("Common:OwnerChange"),
-      icon: ReconnectSvgUrl,
-      onClick: self.onChangeRoomOwner,
-      disabled: !isAIAgent,
-    },
-    {
       id: "option_leave-room",
       key: "leave-room",
-      label: isAIAgent
-        ? t("Common:LeaveTheAgent")
-        : isFormSpace
-          ? t("Common:LeaveTheFormSpace")
-          : t("Common:LeaveTheRoom"),
+      label: isFormSpace
+        ? t("Common:LeaveTheFormSpace")
+        : t("Common:LeaveTheRoom"),
       icon: LeaveRoomSvgUrl,
       onClick: self.onLeaveRoom,
-      disabled: isKnowledgeOrResult
-        ? false
-        : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
+      disabled:
+        isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
     },
     {
       id: "option_archive-room",
@@ -947,16 +973,14 @@ export const getFilesContextOptionsImpl = (
       key: "delete",
       label: isRootThirdPartyFolder
         ? t("Common:Disconnect")
-        : isAIAgent
-          ? t("Common:DeleteAgent")
-          : item.isTemplate
-            ? t("Files:DeleteTemplateAction")
-            : item.isRoom
-              ? isFormSpace
-                ? t("Common:DeleteFormSpace")
-                : t("Common:DeleteRoom")
-              : t("Common:Delete"),
-      icon: item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
+        : item.isTemplate
+          ? t("Files:DeleteTemplateAction")
+          : item.isRoom
+            ? isFormSpace
+              ? t("Common:DeleteFormSpace")
+              : t("Common:DeleteRoom")
+            : t("Common:Delete"),
+      icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
       onClick: () => self.onDelete(item, t),
       disabled: item.isTemplate ? !isTemplateOwner : false,
     },
@@ -1029,22 +1053,7 @@ export const getFilesContextOptionsImpl = (
       !(isCollaborator && option.key === "create-room"),
   );
 
-  let minItemsCount = 3;
-  if (item.isAIAgent && item.inRoom) {
-    if (self.userStore?.user?.isAdmin || self.userStore?.user?.isOwner) {
-      if (
-        item.access === ShareAccessRights.RoomManager ||
-        item.access === ShareAccessRights.None
-      ) {
-        minItemsCount = 1;
-      }
-    } else if (
-      item.access === ShareAccessRights.RoomManager ||
-      item.access === ShareAccessRights.None
-    ) {
-      minItemsCount = 1;
-    }
-  }
+  const minItemsCount = 3;
 
   const showInfoOption = newOptions.find(
     (option) => option.key === "show-info",
@@ -1093,6 +1102,20 @@ export const getFilesContextOptionsImpl = (
       needsGrouping: true,
       minItemsCount: 1,
     });
+
+    menuGroupsConfig.push({
+      groupKey: "ai-tools",
+      groupLabel: t("Files:AITools"),
+      groupIcon: AISvgUrl,
+      itemKeys: [
+        "ask-ai",
+        "analyze-responses",
+        "fill-metadata-ai",
+        "suggest-metadata-ai",
+      ],
+      needsGrouping: false,
+      minItemsCount: 1,
+    });
   }
 
   const downloadOption = newOptions.find((option) => option.key === "download");
@@ -1130,7 +1153,7 @@ export const getFilesContextOptionsImpl = (
     });
   }
 
-  if (showInfoOption && showVersionHistoryOption) {
+  if (showVersionHistoryOption && (showInfoOption || isInfoPanel)) {
     menuGroupsConfig.push({
       groupKey: "info",
       groupLabel: t("Common:MoreOptions"),
@@ -1143,7 +1166,7 @@ export const getFilesContextOptionsImpl = (
         ],
       ],
       needsGrouping: true,
-      minItemsCount: 1,
+      minItemsCount: showInfoOption ? 1 : 0,
     });
   }
 
@@ -1222,17 +1245,7 @@ export const getFilesContextOptionsImpl = (
         });
         defaultPlugins.forEach((p) => moreOptionsGroup.items!.push(p));
       } else {
-        const externalLinkIdx = resultOptions.findIndex(
-          (o) => o.key === "external-link",
-        );
-        const roomMembersLinkIdx = resultOptions.findIndex(
-          (o) => o.key === "link-for-room-members",
-        );
-        const menuIdx =
-          externalLinkIdx !== -1 ? externalLinkIdx : roomMembersLinkIdx;
-        const pluginInsertIdx = menuIdx !== -1 ? menuIdx + 1 : 1;
-
-        resultOptions.splice(pluginInsertIdx, 0, {
+        resultOptions.push({
           id: "option_more-options",
           key: "more-options",
           label: t("Common:MoreOptions"),
@@ -1254,6 +1267,7 @@ export const getFilesContextOptionsImpl = (
     const groups = item.isFolder
       ? [
           ["select", "open", "mark-read", "open-location"],
+          ["ai-tools", "fill-metadata-ai", "suggest-metadata-ai"],
           [
             "update-xlsx-data",
             "share",
@@ -1265,7 +1279,7 @@ export const getFilesContextOptionsImpl = (
             "download-encrypted",
             "rename",
           ],
-          ["mark-as-favorite", "show-info"],
+          ["mark-as-favorite", "show-info", "more-options"],
           ["restore"],
           ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
         ]
@@ -1283,7 +1297,13 @@ export const getFilesContextOptionsImpl = (
             "open-location",
           ],
           ["filling-status", "reset-and-start-filling"],
-          ["ask-ai", "analyze-responses"],
+          [
+            "ai-tools",
+            "ask-ai",
+            "analyze-responses",
+            "fill-metadata-ai",
+            "suggest-metadata-ai",
+          ],
           [
             "update-xlsx-data",
             "share",
@@ -1301,6 +1321,7 @@ export const getFilesContextOptionsImpl = (
             "custom-filter",
             "info",
             "show-info",
+            "more-options",
           ],
           ["restore"],
           [
@@ -1342,7 +1363,11 @@ export const getFilesContextOptionsImpl = (
         const shouldAddSeparator =
           result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
 
-        if (group.includes("restore") || group.includes("ask-ai")) {
+        if (
+          group.includes("restore") ||
+          group.includes("ask-ai") ||
+          group.includes("suggest-metadata-ai")
+        ) {
           result.push({
             key: `separator${folderSeparatorIndex++}`,
             isSeparator: true,
@@ -1393,27 +1418,21 @@ export const getFilesContextOptionsImpl = (
     }
   }
 
-  if (frameActions.length > 0) {
-    const roomExitIndex = resultOptions.findIndex((option) =>
-      ["leave-room", "archive-room", "unarchive-room", "delete"].includes(
-        option.key,
-      ),
-    );
+  const usedSeparatorKeys = new Set<string>();
+  const roomOptions = layoutRoomOptions(resultOptions, frameActions).map(
+    (option, index) => {
+      if (!option.isSeparator) return option;
+      if (!usedSeparatorKeys.has(option.key)) {
+        usedSeparatorKeys.add(option.key);
+        return option;
+      }
+      return { ...option, key: `${option.key}_${index}` };
+    },
+  );
 
-    let insertIndex =
-      roomExitIndex === -1 ? resultOptions.length : roomExitIndex;
-    if (resultOptions[insertIndex - 1]?.isSeparator) insertIndex -= 1;
+  const newResult = placePlugins(roomOptions, pluginItems);
 
-    resultOptions.splice(
-      insertIndex,
-      0,
-      { key: "separator-custom-actions", isSeparator: true },
-      ...frameActions,
-      { key: "separator-after-custom-actions", isSeparator: true },
-    );
-  }
-
-  const newResult = placePlugins(resultOptions, pluginItems);
-
-  return trimSeparator(newResult as ContextMenuModel[]);
+  return withUniqueSeparatorKeys(
+    trimSeparator(newResult as ContextMenuModel[]),
+  );
 };

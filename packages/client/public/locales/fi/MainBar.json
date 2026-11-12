@@ -28,6 +28,8 @@
   "UserTariffLimitHeader": "Pääkäyttäjien määrän raja on saavutettu: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Kaikki käyttäjät lisätään vain Käyttäjä-oikeuksin. Jos haluat lisätä uusia ylläpitäjiä, ota yhteyttä pääjärjestelmänvalvojaan hinnoittelusuunnitelman päivittämiseksi.",
   "UserTariffReachedForAdmins": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi.",
+  "UserTypeLoweredDescription": "Jotkin tämän sivun toiminnot eivät ehkä ole enää käytettävissäsi.",
+  "UserTypeLoweredHeader": "Käyttäjätyyppisi on muutettu",
   "WalletLowBalanceContactPayer": "Ota yhteyttä maksajaan (<1>{{payerContact}}</1>), jotta hän lataa lompakon ja maksullisten palveluiden käyttö ei keskeydy.",
   "WalletLowBalanceDescription": "Lataa lompakkoasi välttääksesi maksullisten palveluiden keskeytykset. <1>Lisää saldoa</1>",
   "WalletLowBalanceHeader": "Kreditisi ovat vähissä: {{balance}}"

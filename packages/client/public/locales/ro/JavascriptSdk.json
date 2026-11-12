@@ -74,7 +74,6 @@
   "ItemsCount": "Număr de elemente",
   "ItemsCountDescription": "Puteți indica numărul fișierelor / folderelor pe o pagină, precum și număr de pagină de început afișaj.",
   "JavaScriptCodeDescription": "Incorporarea spațiului de lucru sau a unei părți a acestuia cu ajutorul JavaScript. Copiați codul JavaScript de mai jos.",
-  "JavascriptSdk": "SDK Javascript",
   "LimitByTime": "Setare limită de timp",
   "LinkSetDescription": "Acest link este protejat prin {{parameter}}. Pentru a configura link-ul,",
   "LinkSetDescription2": "Parametrii {{parameter1}} și {{parameter2}} sunt setate pentru acest link. Pentru a configura,",

@@ -31,21 +31,20 @@ vi.mock("@docspace/shared/api/rooms", async (io) => ({
   updateRoomMemberRole: vi.fn(),
 }));
 
-vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
-  revokeMemberFromEncryptedRoom: vi.fn(),
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  setFileEncryptionKeys: vi.fn(),
 }));
 
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
+import { setFileEncryptionKeys } from "@docspace/shared/api/files";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { createTestFilesActionsStore } from "./testHarness";
 // After the harness on purpose: the harness re-mocks the toast module, and
 // this import must resolve to the instance the store under test uses.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-
-declare function allowConsoleError(matcher: RegExp | string): void;
 
 const t = ((key: string) => key) as TTranslation;
 
@@ -55,15 +54,14 @@ const makeStore = (room: Record<string, unknown>) =>
     selectedFolderStore: { isRootFolder: true },
   });
 
-describe("FilesActionsStore — onLeaveRoom private-room key cleanup", () => {
+describe("FilesActionsStore — onLeaveRoom of a private room", () => {
   beforeEach(() => {
     vi.mocked(updateRoomMemberRole).mockResolvedValue(
       {} as Awaited<ReturnType<typeof updateRoomMemberRole>>,
     );
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([]);
   });
 
-  it("leaves a non-private room without touching encryption keys", async () => {
+  it("leaves a non-private room through the role update", async () => {
     const store = makeStore({ id: 42, title: "Room", private: false });
 
     await store.onLeaveRoom(t);
@@ -72,52 +70,196 @@ describe("FilesActionsStore — onLeaveRoom private-room key cleanup", () => {
       invitations: [{ id: "user-1", access: ShareAccessRights.None }],
       force: false,
     });
-    expect(revokeMemberFromEncryptedRoom).not.toHaveBeenCalled();
     expect(toastr.success).toHaveBeenCalled();
   });
 
-  it("revokes the leaver's own key entries before leaving a private room", async () => {
+  it("Leave succeeds", async () => {
     const store = makeStore({ id: 42, title: "Room", private: true });
 
     await store.onLeaveRoom(t);
 
-    expect(revokeMemberFromEncryptedRoom).toHaveBeenCalledWith(
-      42,
-      "user-1",
-      {},
+    expect(updateRoomMemberRole).toHaveBeenCalledWith(42, {
+      invitations: [{ id: "user-1", access: ShareAccessRights.None }],
+      force: false,
+    });
+    expect(setFileEncryptionKeys).not.toHaveBeenCalled();
+    expect(toastr.success).toHaveBeenCalled();
+  });
+
+  it("Cleanup fails", async () => {
+    vi.mocked(updateRoomMemberRole).mockRejectedValue(new Error("refused"));
+    const removeFiles = vi.fn();
+    const store = createTestFilesActionsStore({
+      filesStore: {
+        selection: [{ id: 42, title: "Room", private: true }],
+        removeFiles,
+      },
+      selectedFolderStore: { isRootFolder: true },
+    });
+
+    await expect(store.onLeaveRoom(t)).rejects.toThrow("refused");
+
+    expect(setFileEncryptionKeys).not.toHaveBeenCalled();
+    expect(removeFiles).not.toHaveBeenCalled();
+    expect(toastr.success).not.toHaveBeenCalled();
+  });
+});
+
+describe("FilesActionsStore — onLeaveRoom refused by the server", () => {
+  const refusal = (status: number) =>
+    Object.assign(new Error(String(status)), { response: { status } });
+
+  const storeOf = (room: Record<string, unknown>) => {
+    const removeFiles = vi.fn();
+    const store = createTestFilesActionsStore({
+      filesStore: { selection: [room], removeFiles },
+      selectedFolderStore: { isRootFolder: true },
+    });
+    return { store, removeFiles };
+  };
+
+  it("Leave refused", async () => {
+    vi.mocked(updateRoomMemberRole).mockRejectedValue(refusal(403));
+    const { store, removeFiles } = storeOf({ id: 42, private: true });
+
+    await expect(store.onLeaveRoom(t)).resolves.toBeUndefined();
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedAccessChangeRefused",
     );
-    expect(updateRoomMemberRole).toHaveBeenCalledTimes(1);
-    // The revoke needs file access, which the role change drops.
-    expect(
-      vi.mocked(revokeMemberFromEncryptedRoom).mock.invocationCallOrder[0],
-    ).toBeLessThan(vi.mocked(updateRoomMemberRole).mock.invocationCallOrder[0]);
-    expect(toastr.success).toHaveBeenCalled();
+    expect(removeFiles).not.toHaveBeenCalled();
+    expect(toastr.success).not.toHaveBeenCalled();
   });
 
-  it("still leaves when the key cleanup fails entirely", async () => {
-    allowConsoleError("[ENCRYPTION] revoke own access on leave failed");
-    vi.mocked(revokeMemberFromEncryptedRoom).mockRejectedValue(
-      new Error("boom"),
+  it("Leave fails for another reason", async () => {
+    const failure = refusal(500);
+    vi.mocked(updateRoomMemberRole).mockRejectedValue(failure);
+    const { store } = storeOf({ id: 42, private: true });
+
+    await expect(store.onLeaveRoom(t)).rejects.toBe(failure);
+
+    expect(toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("Refusal in an ordinary room", async () => {
+    const forbidden = refusal(403);
+    vi.mocked(updateRoomMemberRole).mockRejectedValue(forbidden);
+    const { store } = storeOf({ id: 42, private: false });
+
+    await expect(store.onLeaveRoom(t)).rejects.toBe(forbidden);
+
+    expect(toastr.error).not.toHaveBeenCalled();
+  });
+});
+
+describe("FilesActionsStore — onLeaveRoom from inside the room", () => {
+  let navigate: ReturnType<typeof vi.fn>;
+
+  beforeEach(() => {
+    vi.mocked(updateRoomMemberRole).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof updateRoomMemberRole>>,
     );
-    const store = makeStore({ id: 42, title: "Room", private: true });
+    navigate = vi.fn();
+  });
+
+  it.each([
+    ["/private/42/filter", true, "/private/filter?"],
+    ["/rooms/shared/42/filter", false, "rooms/shared/filter?"],
+  ])(
+    "Leave a private room: leaving %s opens the list of its section",
+    async (pathname, isPrivate, list) => {
+      (window as unknown as { DocSpace: unknown }).DocSpace = {
+        navigate,
+        location: { pathname, search: "?folder=42" },
+      };
+      const store = createTestFilesActionsStore({
+        filesStore: { selection: [], bufferSelection: null, removeFiles: vi.fn() },
+        selectedFolderStore: { id: 42, private: isPrivate, isRootFolder: false },
+      });
+
+      await store.onLeaveRoom(t);
+
+      expect(navigate).toHaveBeenCalledTimes(1);
+      expect(navigate.mock.calls[0][0].startsWith(list)).toBe(true);
+    },
+  );
+});
+
+describe("FilesActionsStore — onLeaveRoom as an administrator", () => {
+  const admin = { user: { id: "user-1", isAdmin: true }, encryptionKeys: [] };
+
+  beforeEach(() => {
+    vi.mocked(updateRoomMemberRole).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof updateRoomMemberRole>>,
+    );
+  });
+
+  it("Administrator leaves from the list", async () => {
+    const removeFiles = vi.fn();
+    const setInRoomFolder = vi.fn();
+    const store = createTestFilesActionsStore({
+      userStore: admin,
+      filesStore: {
+        selection: [{ id: 42, title: "Room", private: true }],
+        removeFiles,
+        setInRoomFolder,
+      },
+      selectedFolderStore: { isRootFolder: true },
+    });
 
     await store.onLeaveRoom(t);
 
-    expect(updateRoomMemberRole).toHaveBeenCalledTimes(1);
+    expect(removeFiles).toHaveBeenCalledWith(null, [42]);
+    expect(setInRoomFolder).not.toHaveBeenCalled();
     expect(toastr.success).toHaveBeenCalled();
   });
 
-  it("still leaves when some files could not be re-keyed", async () => {
-    allowConsoleError(/\[ENCRYPTION\] 1 file\(s\) kept the leaver's/);
-    vi.mocked(revokeMemberFromEncryptedRoom).mockResolvedValue([
-      { fileId: 1, success: true },
-      { fileId: 2, success: false, error: "x" },
-    ]);
-    const store = makeStore({ id: 42, title: "Room", private: true });
+  it("Administrator leaves from inside the room", async () => {
+    const navigate = vi.fn();
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      navigate,
+      location: { pathname: "/private/42/filter", search: "?folder=42" },
+    };
+    const setInRoom = vi.fn();
+    const store = createTestFilesActionsStore({
+      userStore: admin,
+      filesStore: { selection: [], bufferSelection: null, removeFiles: vi.fn() },
+      selectedFolderStore: {
+        id: 42,
+        private: true,
+        isRootFolder: false,
+        setInRoom,
+      },
+    });
+    const updateCurrentFolder = vi.fn();
+    (store as unknown as { updateCurrentFolder: unknown }).updateCurrentFolder =
+      updateCurrentFolder;
 
     await store.onLeaveRoom(t);
 
-    expect(updateRoomMemberRole).toHaveBeenCalledTimes(1);
-    expect(toastr.success).toHaveBeenCalled();
+    expect(navigate).toHaveBeenCalledTimes(1);
+    expect(navigate.mock.calls[0][0].startsWith("/private/filter?")).toBe(true);
+    expect(setInRoom).not.toHaveBeenCalled();
+    expect(updateCurrentFolder).not.toHaveBeenCalled();
+  });
+
+  it("Administrator leaves an ordinary room", async () => {
+    const removeFiles = vi.fn();
+    const setInRoomFolder = vi.fn();
+    const store = createTestFilesActionsStore({
+      userStore: admin,
+      filesStore: {
+        selection: [{ id: 42, title: "Room", private: false }],
+        removeFiles,
+        setInRoomFolder,
+      },
+      selectedFolderStore: { isRootFolder: true },
+    });
+
+    await store.onLeaveRoom(t);
+
+    expect(setInRoomFolder).toHaveBeenCalledWith(42, false);
+    expect(removeFiles).not.toHaveBeenCalled();
   });
 });

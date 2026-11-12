@@ -123,6 +123,8 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
     error: vi.fn(),
     info: vi.fn(),
     warning: vi.fn(),
+    clear: vi.fn(),
+    isActive: vi.fn(() => false),
   },
 }));
 
@@ -130,7 +132,6 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 import FilesStore from "../../FilesStore";
 // eslint-disable-next-line import/first
 import {
-  fakeAiRoomStore,
   fakeFilesSettingsStore,
   fakeSelectedFolderStore,
   fakeSettingsStore,
@@ -157,7 +158,6 @@ export type FakeStores = {
   currentTariffStatusStore: Record<string, unknown>;
   settingsStore: Record<string, unknown>;
   indexingStore: Record<string, unknown>;
-  aiRoomStore: Record<string, unknown>;
 };
 
 const defaultFakes = (): FakeStores => ({
@@ -195,7 +195,6 @@ const defaultFakes = (): FakeStores => ({
     isIndexEditingMode: false,
     setIsIndexEditingMode: vi.fn(),
   },
-  aiRoomStore: fakeAiRoomStore(),
 });
 
 /**
@@ -225,7 +224,6 @@ export const createTestFilesStore = (
     merged.currentTariffStatusStore,
     merged.settingsStore,
     merged.indexingStore,
-    merged.aiRoomStore,
   ];
 
   return new FilesStore(

@@ -50,7 +50,7 @@ export type FileInfoType = {
   inPublic?: boolean;
 };
 
-export type FilesSelectorSettings =
+export type FilesSelectorSettings = (
   | {
       getIcon: TGetIcon;
       filesSettings?: FilesSettingsDto & {
@@ -62,7 +62,12 @@ export type FilesSelectorSettings =
       filesSettings: FilesSettingsDto & {
         organizeRoomsGrouping?: boolean;
       };
-    };
+    }
+) & {
+  // Off when the portal has the Rooms / Forms app switched off.
+  withRoomsTreeFolder?: boolean;
+  withFormsTreeFolder?: boolean;
+};
 
 export type FilesSelectorInputProps = {
   newPath: string;
@@ -108,5 +113,6 @@ export type FilesSelectorInputProps = {
     options: BackupToPublicRoomOptionType,
   ) => void;
 
-  withAIAgentsTreeFolder?: boolean;
+  /** Lists the AI rooms section (Instructions and Knowledge rooms) at the root; off by default. */
+  withAIRoomsTreeFolder?: boolean;
 };

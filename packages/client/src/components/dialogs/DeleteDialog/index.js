@@ -41,6 +41,7 @@ import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
+import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { RoomsType } from "@docspace/shared/enums";
 
 import { getDialogContent } from "./DeleteDialog.helper";
@@ -71,10 +72,12 @@ const DeleteDialogComponent = (props) => {
     selection: selectionProps,
     onRemoveSharedFilesOrFolder,
     setUnsubscribe,
-    isAIAgentsFolderRoot,
+    confirmDelete,
+    setConfirmDelete,
   } = props;
 
   const [isChecked, setIsChecked] = useState(false);
+  const [dontAskAgain, setDontAskAgain] = useState(false);
 
   const selection = useMemo(
     () =>
@@ -85,8 +88,20 @@ const DeleteDialogComponent = (props) => {
   );
 
   const isTemplate = selection[0]?.isTemplate;
-  const isAIAgent = selection[0]?.isAIAgent;
   const isFormSpace = selection[0]?.roomType === RoomsType.FormRoom;
+
+  // Only a plain move to Trash is gated by the "confirm delete" profile setting;
+  // every other case (permanent, third-party, private room, rooms, templates,
+  // unsubscribe) always asks, so "Don't ask again" would be a lie there.
+  const canSkipConfirmation =
+    !!confirmDelete &&
+    !isTemplate &&
+    !isRoomDelete &&
+    !unsubscribe &&
+    !isRecycleBinFolder &&
+    !isPrivacyFolder &&
+    !selection[0]?.providerKey &&
+    !!(isPersonalRoom || isRoom || isTemplatesFolder || isSharedWithMeFolderRoot);
 
   const onClose = () => {
     if (
@@ -104,6 +119,10 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDelete = () => {
+    if (canSkipConfirmation && dontAskAgain) {
+      setConfirmDelete(false, "confirmDelete");
+    }
+
     setSelected("none");
     onClose();
 
@@ -129,11 +148,11 @@ const DeleteDialogComponent = (props) => {
 
   const onDeleteRoom = async () => {
     const translations = {
-      successRemoveRoom: isAIAgent
-        ? t("Common:AgentRemoved")
+      successRemoveRoom: isFormSpace
+        ? t("Common:SpaceRemoved")
         : t("Common:RoomRemoved"),
-      successRemoveRooms: isAIAgent
-        ? t("Common:AgentsRemoved")
+      successRemoveRooms: isFormSpace
+        ? t("Common:SpacesRemoved")
         : t("Common:RoomsRemoved"),
     };
 
@@ -152,7 +171,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDeleteAction = useCallback(() => {
-    if (isRoomDelete || isTemplate || isAIAgent) {
+    if (isRoomDelete || isTemplate) {
       if (!isChecked) return;
       onDeleteRoom();
       return;
@@ -166,7 +185,6 @@ const DeleteDialogComponent = (props) => {
     onDelete();
   }, [
     isRoomDelete,
-    isAIAgent,
     isTemplate,
     isChecked,
     onDeleteRoom,
@@ -177,10 +195,9 @@ const DeleteDialogComponent = (props) => {
 
   const onKeyUp = useCallback(
     (e) => {
-      if (e.keyCode === 27) onClose();
       if (e.keyCode === 13 || e.which === 13) onDeleteAction();
     },
-    [onClose, onDeleteAction],
+    [onDeleteAction],
   );
 
   useEffect(() => {
@@ -196,7 +213,7 @@ const DeleteDialogComponent = (props) => {
       return t("Common:Delete");
     }
 
-    if (isRoomDelete || isAIAgent) {
+    if (isRoomDelete) {
       return t("Common:DeletePermanently");
     }
 
@@ -211,12 +228,6 @@ const DeleteDialogComponent = (props) => {
   };
 
   const getDialogTitle = () => {
-    if (isAIAgent) {
-      return selection.length > 1
-        ? t("Common:DeleteAIAgentsTitle")
-        : t("Common:DeleteAIAgentTitle");
-    }
-
     if (isTemplate) {
       return `${t("Files:DeleteTemplateAction")}?`;
     }
@@ -249,8 +260,6 @@ const DeleteDialogComponent = (props) => {
     isRoom,
     isTemplatesFolder,
     isSharedWithMeFolderRoot,
-    isAIAgent,
-    isAIAgentsFolderRoot,
     unsubscribe,
     isPrivacyFolder,
     isFormSpace,
@@ -260,7 +269,7 @@ const DeleteDialogComponent = (props) => {
   const accessButtonLabel = getAccessButtonLabel();
 
   const isDisabledAccessButton =
-    isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
+    isRoomDelete || isTemplate ? !isChecked : !selection.length;
 
   return (
     <ModalDialog
@@ -273,24 +282,34 @@ const DeleteDialogComponent = (props) => {
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
-        {isRoomDelete || isTemplate || isAIAgent ? (
+        {isRoomDelete || isTemplate ? (
           <Checkbox
             style={{ marginTop: "16px" }}
             label={
-              isAIAgent
-                ? selection.length > 1
-                  ? t("Common:DeleteAIAgentsWarning")
-                  : t("Common:DeleteAIAgentWarning")
-                : isTemplate
-                  ? t("DeleteTemplateWarning")
-                  : isFormSpace
-                    ? t("Common:DeleteFormSpaceWarning")
-                    : t("Common:DeleteRoomWarning")
+              isTemplate
+                ? t("DeleteTemplateWarning")
+                : isFormSpace
+                  ? t("Common:DeleteFormSpaceWarning")
+                  : t("Common:DeleteRoomWarning")
             }
             dataTestId="delete_warning_checkbox"
             isChecked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
           />
+        ) : null}
+        {canSkipConfirmation ? (
+          <div className={styles.dontAskAgain}>
+            <Checkbox
+              label={t("DontAskAgainCheckbox")}
+              dataTestId="delete_dialog_dont_ask_again_checkbox"
+              isChecked={dontAskAgain}
+              onChange={() => setDontAskAgain(!dontAskAgain)}
+            />
+            <HelpButton
+              tooltipContent={<Text fontSize="12px">{t("DontAskAgainHint")}</Text>}
+              dataTestId="delete_dialog_dont_ask_again_help"
+            />
+          </div>
         ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -335,6 +354,7 @@ export default inject(
     filesActionsStore,
     treeFoldersStore,
     contextOptionsStore,
+    filesSettingsStore,
   }) => {
     const {
       selection,
@@ -349,9 +369,9 @@ export default inject(
       isRecycleBinFolder,
       isPersonalRoom,
       isRoom,
+      isAiHubFolderRoot,
       isTemplatesFolderRoot,
       isSharedWithMeFolderRoot,
-      isAIAgentsFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -366,6 +386,7 @@ export default inject(
     } = dialogsStore;
 
     const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
+    const { confirmDelete, setConfirmDelete } = filesSettingsStore;
 
     return {
       selection: removeMediaItem
@@ -391,11 +412,15 @@ export default inject(
       setIsRoomDelete,
       deleteRoomsAction,
       isPersonalRoom,
-      isRoom,
+      // Instructions and Knowledge rooms live under the "AI rooms" root, not
+      // under Rooms, but their files go to Trash the same way, so the room
+      // wording applies (without it the dialog had no text at all).
+      isRoom: isRoom || isAiHubFolderRoot,
       isTemplatesFolder: isTemplatesFolderRoot,
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
-      isAIAgentsFolderRoot,
+      confirmDelete,
+      setConfirmDelete,
     };
   },
 )(observer(DeleteDialog));

@@ -3,7 +3,7 @@
   "content": "Public room",
   "content_en_sha1_hash": "02f21f2d4127882b2b2ef75e41181154716ce237",
   "created_at": "2025-05-19T21:30:47.651Z",
-  "updated_at": "2026-10-02T12:15:32.401Z",
+  "updated_at": "2026-11-05T16:49:39.837Z",
   "comment": {
     "text": "This is a label for a room type, indicating a room that is publicly accessible. It appears in various contexts, such as room type filters and room type displays.",
     "is_auto": true,
@@ -19,31 +19,31 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/index.tsx",
-      "line_number": 196,
-      "context": "},\n {\n roomType: RoomsType.VirtualDataRoom,\n title: t(\"Common:VirtualDataRoom\"),\n },\n { roomType: RoomsType.PublicRoom, title: t(\"Common:PublicRoom\") },\n { roomType: RoomsType.CustomRoom, title: t(\"Common:CustomRoomTitle\") },\n ],\n owner: user as unknown as TCreatedBy,\n // What the members step is about: a room is people with different\n // reaches into it.",
+      "line_number": 184,
+      "context": "},\n {\n roomType: RoomsType.VirtualDataRoom,\n title: t(\"Common:VirtualDataRoom\"),\n },\n { roomType: RoomsType.PublicRoom, title: t(\"Common:PublicRoom\") },\n { roomType: RoomsType.CustomRoom, title: t(\"Common:CustomRoomTitle\") },\n ],\n owner: user as unknown as TCreatedBy,\n memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],\n }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 163,
-      "context": "// Common keys `useQuickActions` builds the banner from), so the\n // tooltip and the tiles under the spotlight never drift apart.\n t(\"RoomsTour:RoomsTypes\", {\n collaboration: t(\"Common:CollaborationRoomTitle\"),\n vdr: t(\"Common:VirtualDataRoom\"),\n publicRoom: t(\"Common:PublicRoom\"),\n custom: t(\"Common:CustomRoomTitle\"),\n }),\n callbacks,\n LOG_LABEL,\n 6,",
+      "line_number": 151,
+      "context": "}),\n t(\"RoomsTour:RoomsTypesVdr\", {\n roomType: t(\"Common:VirtualDataRoom\"),\n }),\n t(\"RoomsTour:RoomsTypesPublic\", {\n roomType: t(\"Common:PublicRoom\"),\n }),\n t(\"RoomsTour:RoomsTypesCustom\", {\n roomType: t(\"Common:CustomRoomTitle\"),\n }),\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 73,
+      "line_number": 70,
       "context": "case RoomsType.ReadOnlyRoom:\n return t(\"Common:ViewOnlyRooms\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 267,
+      "line_number": 257,
       "context": "},\n {\n id: \"quick-public-room\",\n dataTestId: \"quick-public-room\",\n icon: <QuickPublicRoomIcon />,\n label: t(\"Common:PublicRoom\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.PublicRoom),\n },\n {\n id: \"quick-custom-room\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1228,
+      "line_number": 1206,
       "context": "case RoomsType.PublicRoom:\n return {\n id: \"filter_type-public\",\n key: RoomsType.PublicRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:PublicRoom\"),\n };\n case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,",
       "module": "/packages/client"
     },
@@ -74,7 +74,7 @@
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 60,
-      "context": "case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n default:",
+      "context": "case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n case RoomsType.InstructionsRoom:",
       "module": "/packages/shared"
     }
   ],

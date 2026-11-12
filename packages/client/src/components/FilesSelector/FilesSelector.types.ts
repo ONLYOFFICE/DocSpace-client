@@ -45,6 +45,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/selector";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import type FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 
 export type FilesSelectorProps = TSelectorHeader & {
 	isPanelVisible: boolean;
@@ -62,6 +63,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	getIcon: (size: number, fileExst: string) => string;
 	isExternalShareEnabled: boolean;
 	disabledCreatePublicRoom?: boolean;
+	standalone?: boolean;
 
 	onClose?: () => void;
 
@@ -91,12 +93,14 @@ export type FilesSelectorProps = TSelectorHeader & {
 	treeFolders?: TFolder[];
 	withRecentTreeFolder?: boolean;
 	withFavoritesTreeFolder?: boolean;
-	withAIAgentsTreeFolder?: boolean;
+	withRoomsTreeFolder?: boolean;
 	withFormsTreeFolder?: boolean;
 
 	theme: TTheme;
 
 	selection: (TFolder | TFile)[];
+	extsFilesVectorized: string[];
+	vectorizationEnabled: boolean;
 	disabledItems: string[] | number[];
 	disabledFolderType?: FolderType;
 	setMoveToPanelVisible: (value: boolean) => void;
@@ -110,11 +114,20 @@ export type FilesSelectorProps = TSelectorHeader & {
 	copyEncryptedFilesToFolder: (
 		items: TFile[],
 		destFolderId: string | number,
-		destInfo: { private?: boolean; rootFolderId?: number; roomType?: number },
+		destInfo: {
+			private?: boolean;
+			rootFolderId?: number;
+			rootFolderType?: FolderType;
+			roomType?: number;
+			deleteSourceOnSuccess?: boolean;
+			sourceRoomId?: number | string | null;
+		},
 	) => Promise<void>;
-	sourceIsPrivate?: boolean;
+	planPrivateTransfer: FilesActionStore["planPrivateTransfer"];
+	runPrivateTransferPlan: FilesActionStore["runPrivateTransferPlan"];
 	sourceInPrivateRoom?: boolean;
 	privateRoomId?: number | string;
+	userId?: string;
 	clearActiveOperations: (
 		folderIds: string[] | number[],
 		fileIds: string[] | number[],

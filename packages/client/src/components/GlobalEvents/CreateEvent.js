@@ -37,7 +37,7 @@ import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
-import { AnalyticsEvents } from "@docspace/shared/enums";
+import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -49,14 +49,17 @@ import {
   getDefaultFileName,
   getDefaultFileTestIdPrefix,
 } from "SRC_DIR/helpers/filesUtils";
+import { runEncryptedFileCreation } from "SRC_DIR/helpers/encryptedFileCreation";
+import { createSkill } from "@docspace/shared/api/ai";
 import {
   getDisplayFileNames,
   getUniqueFileTitle,
-  runEncryptedFileCreation,
-} from "SRC_DIR/helpers/encryptedFileCreation";
+} from "@docspace/shared/services/private-room/encrypted-create-rules";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
+import { CryptoError } from "@docspace/shared/services/encryption/errors";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
@@ -100,10 +103,14 @@ const CreateEvent = ({
 
   isPrivacy,
   getUserEncryptionKeys,
+  isKeyListUnreadable,
   encryptionRoomId,
   filesList,
   fetchFiles,
   openDocEditor,
+  isInstructionsRoom,
+  openMarkdownFile,
+  isMarkdownEditorAvailable,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -176,6 +183,49 @@ const CreateEvent = ({
             clearActiveOperations(null, folderIds);
             onCloseAction();
           });
+      } else if (extension === "md" && !isPrivacy) {
+        // Markdown is edited by the Markdown plugin, not by the document
+        // editor: the file is created here and opened in the plugin, when
+        // it is enabled. A skill in an Instructions room is written by the
+        // AI service from the skill template, with the frontmatter the
+        // Files service requires of it.
+        const fileTitle = `${newValue.trimEnd()}.${extension}`;
+        // Without the plugin the new file opens view-only in the document
+        // editor, as any Markdown file does. A new tab is opened before the
+        // request: the browser blocks one opened after it.
+        const viewerWindow =
+          open && !isMarkdownEditorAvailable && openOnNewPage
+            ? window.open("", "_blank")
+            : null;
+
+        try {
+          const file = isInstructionsRoom
+            ? await createSkill({
+                destId: parentId,
+                title: newValue.trimEnd(),
+              }).then((skill) => api.files.getFileInfo(skill.id))
+            : await createFile(parentId, fileTitle);
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: AnalyticsEvents.FileCreated,
+            id: file.id,
+            parentId: file.folderId,
+            file_type: extension,
+          });
+
+          onCloseAction();
+
+          if (open) {
+            if (isMarkdownEditorAvailable) await openMarkdownFile(file);
+            else openDocEditor(file.id, true, null, false, false, viewerWindow);
+          }
+        } catch (error) {
+          viewerWindow?.close();
+          isPaymentRequiredError(error);
+          toastr.error(error);
+          onCloseAction();
+        }
       } else if (isPrivacy) {
         const withEditor =
           openEditor && !(isFrame && frameConfig?.events?.onEditorOpen);
@@ -183,6 +233,13 @@ const CreateEvent = ({
           withEditor && openOnNewPage ? window.open("", "_blank") : null;
 
         try {
+          // Spec: private-rooms/file-operations, "An unknown key list is read again before an action is refused"
+          if (await isKeyListUnreadable()) {
+            editorWindow?.close();
+            toastr.error(t("Common:EncryptionKeysLoadFailed"));
+            return;
+          }
+
           const keys = getUserEncryptionKeys();
 
           const created = await runEncryptedFileCreation({
@@ -211,14 +268,22 @@ const CreateEvent = ({
           if (withEditor) {
             openDocEditor(created.fileId, preview, null, actionEdit, false, editorWindow);
           } else if (isFrame && frameConfig?.events?.onEditorOpen) {
-            frameCallEvent({ event: "onEditorOpen", data: created });
+            const file = await api.files.getFileInfo(created.fileId);
+            frameCallEvent({
+              event: "onEditorOpen",
+              data: { ...file, action: "edit" },
+            });
           }
 
           fetchFiles(parentId).catch(() => {});
         } catch (error) {
           editorWindow?.close();
           isPaymentRequiredError(error);
-          toastr.error(error);
+          toastr.error(
+            error instanceof CryptoError
+              ? getEncryptionErrorMessage(t, error)
+              : error,
+          );
         } finally {
           onCloseAction();
         }
@@ -269,7 +334,7 @@ const CreateEvent = ({
           }
 
           await createFile(
-            +parentId,
+            parentId,
             `${newValue}.${extension}`,
             templateId,
             gallerySelected?.id,
@@ -285,7 +350,7 @@ const CreateEvent = ({
               if (isFrame && frameConfig?.events?.onEditorOpen) {
                 frameCallEvent({
                   event: "onEditorOpen",
-                  data,
+                  data: { ...data, action: "edit" },
                 });
               }
             })
@@ -303,10 +368,7 @@ const CreateEvent = ({
       parentId,
       extension,
       templateId,
-      title,
       fromTemplate,
-      withoutDialog,
-      keepNewFileName,
       gallerySelected?.id,
       openOnNewPage,
       openEditor,
@@ -321,10 +383,16 @@ const CreateEvent = ({
       encryptionRoomId,
       fetchFiles,
       openDocEditor,
-      actionEdit,
+      isInstructionsRoom,
+      openMarkdownFile,
+      isMarkdownEditorAvailable,
     ],
   );
 
+  const onSaveRef = React.useRef(onSave);
+  onSaveRef.current = onSave;
+
+  // Spec: private-rooms/file-operations, "One create action makes one file"
   React.useEffect(() => {
     const defaultName = getDefaultFileName(extension);
     const suggestedName =
@@ -351,13 +419,13 @@ const CreateEvent = ({
     if (!keepNewFileName && !withoutDialog) {
       setEventDialogVisible(true);
     } else {
-      onSave(null, title || suggestedName);
+      onSaveRef.current(null, title || suggestedName);
     }
 
     return () => {
       setEventDialogVisible(false);
     };
-  }, [extension, title, fromTemplate, withoutDialog, onSave]);
+  }, [extension, title, fromTemplate, withoutDialog]);
 
   return (
     <Dialog
@@ -389,6 +457,7 @@ export default inject(
     filesSettingsStore,
     currentTariffStatusStore,
     publicRoomStore,
+    pluginStore,
   }) => {
     const publicRoomKey = publicRoomStore.publicRoomKey;
 
@@ -407,12 +476,16 @@ export default inject(
 
     const { completeAction, openItemAction } = filesActionsStore;
 
-    const { clearActiveOperations, fileCopyAs, getUserEncryptionKeys } =
-      uploadDataStore;
+    const {
+      clearActiveOperations,
+      fileCopyAs,
+      getUserEncryptionKeys,
+      isKeyListUnreadable,
+    } = uploadDataStore;
 
     const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
 
-    const { id: parentId, isIndexedFolder } = selectedFolderStore;
+    const { id: parentId, isIndexedFolder, roomType } = selectedFolderStore;
 
     const encryptionRoomId =
       selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
@@ -467,10 +540,14 @@ export default inject(
       frameConfig,
 
       getUserEncryptionKeys,
+      isKeyListUnreadable,
       encryptionRoomId,
       filesList: files,
       fetchFiles,
       openDocEditor,
+      isInstructionsRoom: roomType === RoomsType.InstructionsRoom,
+      openMarkdownFile: pluginStore.openMarkdownFile,
+      isMarkdownEditorAvailable: pluginStore.isMarkdownEditorAvailable,
     };
   },
 )(observer(CreateEvent));

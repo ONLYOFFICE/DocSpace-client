@@ -1,0 +1,293 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import React, { act } from "react";
+import { createRoot, type Root } from "react-dom/client";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+(globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
+  true;
+
+// Stable across renders, like the real hooks, so the fetch effect stays idle.
+const mocks = vi.hoisted(() => ({
+  searchParams: new URLSearchParams(),
+  settings: {
+    setIsEmptyList: () => {},
+    filesViewAs: "table",
+    setFilesViewAs: () => {},
+    currentDeviceType: "desktop",
+  },
+  selection: { setSelection: () => {}, setBufferSelection: () => {} },
+  navigation: { setCurrentFolderId: () => {}, setCurrentTitle: () => {} },
+  icon: { getIcon: () => "" },
+  itemList: {
+    convertFileToItem: (file: object) => ({ ...file, isFolder: false }),
+    convertFolderToItem: (folder: object) => ({ ...folder, isFolder: true }),
+  },
+  fetchMoreFiles: null as (() => Promise<void>) | null,
+}));
+
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/private/7001",
+  useSearchParams: () => mocks.searchParams,
+}));
+
+vi.mock("@docspace/shared/api", () => ({
+  default: { files: { getFolder: vi.fn() } },
+}));
+
+vi.mock("@/app/(docspace)/_store/SettingsStore", () => ({
+  useSettingsStore: () => mocks.settings,
+}));
+
+vi.mock("@/app/(docspace)/_store/FilesSelectionStore", () => ({
+  useFilesSelectionStore: () => mocks.selection,
+}));
+
+vi.mock("@/app/(docspace)/_store/NavigationStore", () => ({
+  useNavigationStore: () => mocks.navigation,
+}));
+
+vi.mock("@/app/(docspace)/_hooks/useItemIcon", () => ({
+  default: () => mocks.icon,
+}));
+
+vi.mock("@/app/(docspace)/_hooks/useItemList", () => ({
+  default: () => mocks.itemList,
+}));
+
+vi.mock("@/app/(docspace)/_hooks/useFilesSocket", () => ({ default: vi.fn() }));
+
+vi.mock("./hooks/useResetSelectionClick", () => ({ default: vi.fn() }));
+
+vi.mock("../table-view", () => ({
+  default: ({
+    items,
+    fetchMoreFiles,
+  }: {
+    items: { id: number; title: string }[];
+    fetchMoreFiles: () => Promise<void>;
+  }) => {
+    mocks.fetchMoreFiles = fetchMoreFiles;
+    return (
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
+    );
+  },
+}));
+
+vi.mock("../tile-view", () => ({ default: () => null }));
+vi.mock("../row-view", () => ({ default: () => null }));
+vi.mock("../empty-view", () => ({ default: () => <p>empty folder</p> }));
+
+import api from "@docspace/shared/api";
+import useFilesSocket from "@/app/(docspace)/_hooks/useFilesSocket";
+import {
+  FilesListStore,
+  FilesListStoreContext,
+} from "@/app/(docspace)/_store/FilesListStore";
+
+import List from "./index";
+
+describe("List", () => {
+  let root: Root | null = null;
+  let container: HTMLDivElement;
+  let store: FilesListStore;
+
+  beforeEach(() => {
+    store = new FilesListStore();
+    container = document.createElement("div");
+    root = createRoot(container);
+    act(() =>
+      root?.render(
+        <FilesListStoreContext.Provider value={store}>
+          <List
+            total={1}
+            folders={[]}
+            files={[{ id: 8101, title: "memo.txt" } as never]}
+            filesSettings={{ displayFileExtension: true } as never}
+            filesFilter=""
+            portalSettings={{ timezone: "UTC", socketUrl: "" } as never}
+            current={{ id: 7001, title: "Room", rootFolderType: 14 } as never}
+          />
+        </FilesListStoreContext.Provider>,
+      ),
+    );
+  });
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+  });
+
+  it("drops the last item an action removed from the list", () => {
+    expect(container.textContent).toContain("memo.txt");
+
+    act(() => store.removeItem(8101));
+
+    expect(container.textContent).not.toContain("memo.txt");
+    expect(container.textContent).toContain("empty folder");
+  });
+
+  it("Upload without a socket connection: a file stored in the open folder is listed", () => {
+    act(() => {
+      store.addStoredFile({ id: 8102, title: "notes.txt", folderId: 7001 } as never);
+      store.addStoredFile({ id: 8103, title: "elsewhere.txt", folderId: 9999 } as never);
+    });
+
+    expect(container.textContent).toContain("notes.txt");
+    expect(container.textContent).toContain("memo.txt");
+    expect(container.textContent).not.toContain("elsewhere.txt");
+    expect(store.storedFiles).toEqual([]);
+  });
+
+  it("lists a stored file once when the list already shows it", () => {
+    act(() =>
+      store.addStoredFile({ id: 8101, title: "memo.txt", folderId: 7001 } as never),
+    );
+
+    expect(store.items.filter((i) => i.id === 8101)).toHaveLength(1);
+  });
+});
+
+describe("List with a further page", () => {
+  let root: Root | null = null;
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+  });
+
+  it("Upload without a socket connection, then load more: the stored file stays listed once", async () => {
+    vi.mocked(api.files.getFolder).mockResolvedValue({
+      files: [
+        { id: 8104, title: "agenda.txt" },
+        { id: 8102, title: "notes.txt" },
+      ],
+      folders: [],
+      total: 3,
+    } as never);
+    const store = new FilesListStore();
+    const container = document.createElement("div");
+    root = createRoot(container);
+    act(() =>
+      root?.render(
+        <FilesListStoreContext.Provider value={store}>
+          <List
+            total={2}
+            folders={[]}
+            files={[{ id: 8101, title: "memo.txt" } as never]}
+            filesSettings={{ displayFileExtension: true } as never}
+            filesFilter=""
+            portalSettings={{ timezone: "UTC", socketUrl: "" } as never}
+            current={{ id: 7001, title: "Room", rootFolderType: 14 } as never}
+          />
+        </FilesListStoreContext.Provider>,
+      ),
+    );
+    act(() =>
+      store.addStoredFile({ id: 8102, title: "notes.txt", folderId: 7001 } as never),
+    );
+    expect(container.textContent).toContain("notes.txt");
+
+    await act(async () => {
+      await mocks.fetchMoreFiles?.();
+    });
+
+    expect(api.files.getFolder).toHaveBeenCalledTimes(1);
+    expect(store.items.map((item) => item.id)).toEqual([8102, 8101, 8104]);
+    expect(container.textContent).toContain("notes.txt");
+    expect(container.textContent).toContain("agenda.txt");
+  });
+});
+
+describe("List in a private room", () => {
+  let root: Root | null = null;
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+    window.history.replaceState({}, "", "/");
+  });
+
+  it("Open location from the history: the folder request carries no search text", async () => {
+    vi.mocked(api.files.getFolder).mockResolvedValue({
+      files: [],
+      folders: [],
+      total: 0,
+      current: { id: 7002, title: "Drafts", rootFolderType: 14 },
+      pathParts: [],
+    } as never);
+
+    root = createRoot(document.createElement("div"));
+    act(() =>
+      root?.render(
+        <FilesListStoreContext.Provider value={new FilesListStore()}>
+          <List
+            total={0}
+            folders={[]}
+            files={[]}
+            filesSettings={{ displayFileExtension: true } as never}
+            filesFilter="folder=7001&search=Quarterly"
+            portalSettings={{ timezone: "UTC", socketUrl: "" } as never}
+            current={{ id: 7001, title: "Room", rootFolderType: 14 } as never}
+            isPrivate
+          />
+        </FilesListStoreContext.Provider>,
+      ),
+    );
+
+    window.history.replaceState(
+      {},
+      "",
+      "/private/7001?folder=7002&search=Quarterly",
+    );
+    const refetch = vi.mocked(useFilesSocket).mock.lastCall?.[2] as
+      | (() => Promise<void>)
+      | undefined;
+    await act(async () => {
+      await refetch?.();
+    });
+
+    expect(api.files.getFolder).toHaveBeenCalledTimes(1);
+    const [folderId, sentFilter] = vi.mocked(api.files.getFolder).mock
+      .calls[0];
+    expect(folderId).toBe("7002");
+    expect(sentFilter?.search ?? null).toBeNull();
+  });
+});

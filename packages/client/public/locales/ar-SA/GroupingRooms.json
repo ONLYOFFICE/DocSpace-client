@@ -8,6 +8,7 @@
   "DeleteGroup": "حذف المجموعة",
   "DisablingRoomGroups": "تعطيل مجموعات الغرف",
   "DisablingRoomGroupsDescription": "سيتم حفظ المجموعات ولكنها مخفية. أعد التمكين في الملف الشخصي، إدارة الملفات.",
+  "DisablingSpaceGroups": "تعطيل مجموعات المساحات",
   "EditRoomGroups": "تعديل مجموعات الغرفة",
   "EditSpaceGroups": "تعديل مجموعات المساحات",
   "EmptyGroupRoomsDescription": "لا توجد غرف هنا. حاول إضافة غرفة أو قم بإزالة هذه المجموعة.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "تمت إضافة الغرف المحددة إلى <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "تمت إزالة الغرف المحددة من <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "تمت إضافة المساحة المحددة إلى <1>{{groupName}}</1>.",
+  "SpaceGrouping": "تجميع المساحات",
+  "SpaceGroupingDisabled": "تجميع المساحات معطّل",
+  "SpaceGroupingEnabled": "تجميع المساحات مفعّل",
+  "SpaceGroupingSettingDescription": "يمكنكم تجميع المساحات في مجلدات والتبديل بينها بسهولة.",
   "SpaceRemovedFromGroup": "تمت إزالة المساحة المحددة من <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "تمت إضافة المساحات المحددة إلى <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "تمت إزالة المساحات المحددة من <1>{{groupName}}</1>."

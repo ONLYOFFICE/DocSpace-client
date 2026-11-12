@@ -33,11 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { copySelectedText } from "@docspace/shared/utils/copy";
+import { isContextMenuOpen, isKeyOwnedByFocus } from "SRC_DIR/helpers/hotkeys";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
@@ -48,6 +50,8 @@ interface AccountsHotkeysProps {
 
   selectBottom: () => void;
   selectUpper: () => void;
+  multiSelectBottom: () => void;
+  multiSelectUpper: () => void;
   activateHotkeys: (e: KeyboardEvent) => void;
   selectAll: () => void;
   deselectAll: () => void;
@@ -64,6 +68,8 @@ const useAccountsHotkeys = ({
   isUsersLoading,
   selectBottom,
   selectUpper,
+  multiSelectBottom,
+  multiSelectUpper,
   activateHotkeys,
   selectAll,
   deselectAll,
@@ -74,26 +80,29 @@ const useAccountsHotkeys = ({
   selection,
   openContextMenu,
 }: AccountsHotkeysProps) => {
-  const [isEnabled, setIsEnabled] = useState(true);
-
   const hotkeysFilter = {
     filter: (ev) => {
+      if (
+        checkDialogsOpen() ||
+        document.getElementsByClassName("p-contextmenu").length
+      )
+        return false;
+
       const eElement = ev.target as HTMLElement;
       const eInputElement = ev.target as HTMLInputElement;
       return (
-        eInputElement?.type === "checkbox" || eElement?.tagName !== "INPUT"
+        (eInputElement?.type === "checkbox" || eElement?.tagName !== "INPUT") &&
+        !isContextMenuOpen() &&
+        !isKeyOwnedByFocus(ev)
       );
     },
     filterPreventDefault: false,
     enableOnTags: ["INPUT"],
-    enabled: enabledHotkeys && !isUsersLoading && isEnabled,
+    enabled: enabledHotkeys && !isUsersLoading,
   } as Options;
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
-
       activateHotkeys(e);
     },
     [activateHotkeys],
@@ -115,11 +124,6 @@ const useAccountsHotkeys = ({
   useHotkeys(
     "*",
     (e) => {
-      const someDialogIsOpen = checkDialogsOpen();
-      const contextMenuIsOpen =
-        document.getElementsByClassName("p-contextmenu").length;
-      if (someDialogIsOpen || contextMenuIsOpen) return;
-
       if (
         (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
         ((e.key === "Meta" || e.key === "Control") && e.altKey)
@@ -129,7 +133,7 @@ const useAccountsHotkeys = ({
 
       if (e.shiftKey || e.ctrlKey || e.type === "keyup") return;
 
-      switch (e.key) {
+      switch (getHotkeyLetter(e)) {
         case "ArrowDown":
         case "j": {
           return selectBottom();
@@ -146,6 +150,12 @@ const useAccountsHotkeys = ({
     },
     { ...hotkeysFilter, keyup: true, keydown: true },
   );
+
+  // Expand selection down
+  useHotkeys("shift+DOWN", multiSelectBottom, hotkeysFilter);
+
+  // Expand selection up
+  useHotkeys("shift+UP", multiSelectUpper, hotkeysFilter);
 
   // Select all accounts
   useHotkeys(
@@ -181,10 +191,15 @@ const useAccountsHotkeys = ({
   );
 
   // Open context menu
-  useHotkeys("Shift+c", openContextMenu, {
-    ...hotkeysFilter,
-    ...{ keyup: true },
-  });
+  useHotkeys(
+    "Shift+c",
+    (e) => {
+      if (e.repeat) return;
+      e.preventDefault();
+      openContextMenu();
+    },
+    hotkeysFilter,
+  );
 };
 
 export default useAccountsHotkeys;

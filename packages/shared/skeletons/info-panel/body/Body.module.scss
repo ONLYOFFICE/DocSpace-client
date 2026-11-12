@@ -317,3 +317,39 @@
     gap: 4px;
   }
 }
+
+.metadataLoader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.metadataLoaderHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 8px 12px;
+}
+
+.metadataLoaderCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-block-start: 8px;
+  padding: 20px 16px;
+  border-radius: 6px;
+  background-color: var(--info-block-background);
+}
+
+.metadataLoaderCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: 8px;
+}
+
+.metadataLoaderProperty {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

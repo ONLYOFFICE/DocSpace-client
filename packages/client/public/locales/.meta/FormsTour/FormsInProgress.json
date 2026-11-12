@@ -1,20 +1,20 @@
 {
   "key_path": "FormsInProgress",
-  "content": "The moment someone opens the form they get a copy of their own, saved into {{inProgress}} as they type — nothing is lost if they close the tab, and nothing counts as an answer until they submit. Anyone you invite as {{formFiller}} sees only their own copy, never anyone else's.",
-  "content_en_sha1_hash": "a6d1ebd4078be876b83b0e040125e622a2e427aa",
-  "created_at": "2026-08-06T14:20:53.754Z",
-  "updated_at": "2026-08-13T10:58:03.049Z",
+  "content": "As someone fills in a form, a working copy is saved in {{inProgress}}. It counts as a response only after submission. People invited as {{formFiller}} see only their own responses.",
+  "content_en_sha1_hash": "2dd4ead4c4d4b0c99cddc89387f0735600c403a2",
+  "created_at": "2026-10-16T12:15:09.343Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "Description text within an onboarding tour step explaining the auto-save feature of forms; includes variables for a status name (`{{inProgress}}`) and a user role (`{{formFiller}}`).",
+    "text": "Body of the Forms onboarding tour step that highlights the In progress folder inside a sample form space. {{inProgress}} is the translated folder name; {{formFiller}} is the translated role name (Form filler).",
     "is_auto": true,
-    "updated_at": "2026-08-06T14:43:52.728Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 232,
-      "context": "// (Common:RoleFormFillerFormRoomDescription).\n showInsideSpace &&\n revealStep(\n IN_PROGRESS_SELECTOR,\n t(\"FormsTour:FormsInProgressTitle\"),\n t(\"FormsTour:FormsInProgress\", {\n inProgress: t(\"Common:InProgress\"),\n formFiller: t(\"Common:RoleFormFiller\"),\n }),\n callbacks,\n LOG_LABEL,",
+      "line_number": 282,
+      "context": "// 8. In progress.\n showInsideSpace &&\n revealStep(\n IN_PROGRESS_SELECTOR,\n t(\"FormsTour:FormsInProgressTitle\"),\n t(\"FormsTour:FormsInProgress\", {\n inProgress: t(\"Common:InProgress\"),\n formFiller: t(\"Common:RoleFormFiller\"),\n }),\n callbacks,\n FORMS_TOUR_LABEL,",
       "module": "/packages/client"
     }
   ],

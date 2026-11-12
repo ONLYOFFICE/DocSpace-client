@@ -190,6 +190,35 @@ export const aiChatReadMessagesHandler = (
     HttpResponse.json(messages),
   );
 
+export const aiChatSendWithStreamHandler = (port: string, events: unknown[]) =>
+  http.post(
+    `${BASE_URL}:${port}/${API_PREFIX}/ai/ai/send-with-stream`,
+    () =>
+      new HttpResponse(
+        `${events.map((event) => JSON.stringify(event)).join("\n")}\n`,
+        { headers: { "Content-Type": "application/x-ndjson" } },
+      ),
+  );
+
+export const aiChatServiceLimitExceededEvent = (until: string) => ({
+  type: "message-incomplete",
+  message: {
+    role: "assistant",
+    content: "",
+    status: {
+      type: "incomplete",
+      reason: "error",
+      error: {
+        code: "auth",
+        message:
+          "403 Service limit exceeded: Service limit exceeded for customer No.10000001. " +
+          `Service group 'ai-services', amount limit 1.0000000000, available 0.0287368797 until ${until}`,
+      },
+    },
+    id: "00000000-0000-0000-0000-000000000001",
+  },
+});
+
 /** `GET /api/2.0/ai/prompts/list` — no saved prompts. */
 export const aiChatPromptsListHandler = (port: string) =>
   http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/prompts/list`, () =>

@@ -1,20 +1,20 @@
 {
   "key_path": "FormsItem",
-  "content": "Every row is a whole collection. Open one to work inside it, pin the ones you are running, or use the three dots to invite people, copy the link that opens the form, and save the setup as a template.",
-  "content_en_sha1_hash": "bf1104c249cd4eaa03e8639f28644beeffddf258",
-  "created_at": "2026-08-06T14:20:53.755Z",
-  "updated_at": "2026-08-13T10:58:03.049Z",
+  "content": "Each row is a form space. Open one to manage its forms and responses, pin it for quick access, or use the three dots to invite people, copy a shared link and save the space as a template.",
+  "content_en_sha1_hash": "65fd97aa08a6bd7814a490703a3cc33126e8fa62",
+  "created_at": "2026-10-16T12:15:09.346Z",
+  "updated_at": "2026-10-16T12:17:13.826Z",
   "comment": {
-    "text": "Instructional text within a product tour step explaining how to interact with individual rows (collections) in the Forms interface.",
+    "text": "Body of the Forms onboarding tour step that highlights the first form space row; variant for users who can create spaces (others see FormsItemMember). The three dots are the row's menu button.",
     "is_auto": true,
-    "updated_at": "2026-08-06T14:42:57.217Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:17:13.826Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 202,
-      "context": "// worth doing to one without opening it.\n hasItems &&\n fileItemStep(\n FIRST_ITEM_SELECTOR,\n t(\"FormsTour:FormsItemTitle\"),\n t(\"FormsTour:FormsItem\"),\n callbacks,\n LOG_LABEL,\n leaveSpace,\n ),",
+      "line_number": 204,
+      "context": "fileItemStep(\n FIRST_ITEM_SELECTOR,\n canCreate\n ? t(\"FormsTour:FormsItemTitle\")\n : t(\"FormsTour:FormsItemMemberTitle\"),\n canCreate ? t(\"FormsTour:FormsItem\") : t(\"FormsTour:FormsItemMember\"),\n callbacks,\n FORMS_TOUR_LABEL,\n leaveSpace,\n ),",
       "module": "/packages/client"
     }
   ],

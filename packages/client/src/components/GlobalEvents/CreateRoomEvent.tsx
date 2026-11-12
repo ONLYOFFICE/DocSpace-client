@@ -58,6 +58,8 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import type OformsStore from "SRC_DIR/store/OformsStore";
 import type ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 
+import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+
 import { CreateRoomDialog } from "../dialogs";
 
 type CreateRoomEventProps = {
@@ -65,6 +67,8 @@ type CreateRoomEventProps = {
   visible: boolean;
   startRoomType: RoomsType;
   isFormsCreate?: boolean;
+  // The AI Rooms section's chooser: Instructions, Knowledge, AI project.
+  isAiRoomsCreate?: boolean;
   // Opens the dialog on the "from template" picker instead of the room-type
   // chooser.
   withTemplateSelector?: boolean;
@@ -81,6 +85,8 @@ type CreateRoomEventProps = {
   onShowTemplateGallery: ContextOptionsStore["onShowTemplateGallery"];
 
   fetchTags: TagsStore["fetchTags"];
+
+  openCreateAiProject: AiProjectsStore["openCreateDialog"];
 
   setRoomParams: CreateEditRoomStore["setRoomParams"];
   onCreateRoom: CreateEditRoomStore["onCreateRoom"];
@@ -113,6 +119,7 @@ type CreateRoomEventProps = {
   setUserEncryptionKeys: UserStore["setUserEncryptionKeys"];
   userId: string | undefined;
   accountEmail: string | undefined;
+  isGuest: boolean | undefined;
 };
 
 const CreateRoomEvent = ({
@@ -141,6 +148,8 @@ const CreateRoomEvent = ({
   deleteThirdParty,
   startRoomType,
   isFormsCreate,
+  isAiRoomsCreate,
+  openCreateAiProject,
   withTemplateSelector,
   isCorrectWatermark,
   processCreatingRoomFromData,
@@ -158,6 +167,7 @@ const CreateRoomEvent = ({
   setUserEncryptionKeys,
   userId,
   accountEmail,
+  isGuest,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -224,6 +234,15 @@ const CreateRoomEvent = ({
   // The gallery is the dialog's replacement, not a step inside it: close first
   // so the gallery is not stacked under the modal. Picking a template there
   // reopens this dialog on a form space built around it.
+  // An AI project has its own form (model, linked rooms): picking it in the
+  // chooser closes this dialog and opens the project form in its place.
+  const onOpenAiProjectForm = isAiRoomsCreate
+    ? () => {
+        onClose();
+        openCreateAiProject();
+      }
+    : undefined;
+
   const onOpenTemplateGallery =
     isFormsCreate && templateGalleryAvailable
       ? () => {
@@ -255,6 +274,8 @@ const CreateRoomEvent = ({
       onCreate={onCreate}
       startRoomType={startRoomType}
       isFormsCreate={isFormsCreate}
+      isAiRoomsCreate={isAiRoomsCreate}
+      onOpenAiProjectForm={onOpenAiProjectForm}
       onOpenTemplateGallery={onOpenTemplateGallery}
       withTemplateSelector={withTemplateSelector}
       fetchedTags={fetchedTags}
@@ -273,6 +294,7 @@ const CreateRoomEvent = ({
       setUserEncryptionKeys={setUserEncryptionKeys}
       userId={userId}
       accountEmail={accountEmail}
+      isGuest={isGuest}
       isExternalShareRestricted={isExternalShareRestricted}
       {...roomParams}
     />
@@ -292,6 +314,7 @@ export default inject(
     oformsStore,
     settingsStore,
     contextOptionsStore,
+    aiProjectsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -339,6 +362,7 @@ export default inject(
     return {
       fetchTags,
       setRoomParams,
+      openCreateAiProject: aiProjectsStore.openCreateDialog,
       onCreateRoom,
       createRoomConfirmDialogVisible,
       setCreateRoomConfirmDialogVisible,
@@ -368,6 +392,7 @@ export default inject(
       setUserEncryptionKeys,
       userId,
       accountEmail: user?.email,
+      isGuest: user?.isVisitor,
       isExternalShareRestricted:
         isExternalShareRestricted && externalShareApplyToRooms,
     };

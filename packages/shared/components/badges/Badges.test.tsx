@@ -244,6 +244,54 @@ describe("<Badges />", () => {
 		});
 	});
 
+	describe("Version badge", () => {
+		const versionedItem = { ...defaultItem, versionGroup: 3 };
+
+		it.each(["row", "tile"] as TViewAs[])(
+			"Version badge of an encrypted file (%s view)",
+			async (viewAs) => {
+				const onShowVersionHistory = vi.fn();
+				render(
+					<Badges
+						{...defaultProps}
+						item={{ ...versionedItem, encrypted: true }}
+						viewAs={viewAs}
+						showNew={false}
+						onShowVersionHistory={onShowVersionHistory}
+					/>,
+				);
+
+				const versionBadge = screen.getByText("Common:VersionBadge");
+				await userEvent.click(versionBadge);
+
+				expect(onShowVersionHistory).not.toHaveBeenCalled();
+				expect(
+					screen.queryByTitle("Common:ShowVersionHistory"),
+				).not.toBeInTheDocument();
+			},
+		);
+
+		it("Version badge of a file that is not encrypted", async () => {
+			const onShowVersionHistory = vi.fn();
+			render(
+				<Badges
+					{...defaultProps}
+					item={versionedItem}
+					showNew={false}
+					onShowVersionHistory={onShowVersionHistory}
+				/>,
+			);
+
+			expect(
+				screen.getByTitle("Common:ShowVersionHistory"),
+			).toBeInTheDocument();
+
+			await userEvent.click(screen.getByText("Common:VersionBadge"));
+
+			expect(onShowVersionHistory).toHaveBeenCalledTimes(1);
+		});
+	});
+
 	describe("Lock functionality", () => {
 		it("renders locked file icon when file is locked", () => {
 			const lockedItem = {

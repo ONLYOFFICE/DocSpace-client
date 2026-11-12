@@ -71,6 +71,7 @@ import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 import { PAGE_COUNT } from "@/utils/constants";
+import { scopeRoomsRequest } from "@/utils/roomsRequestScope";
 
 export type RoomsPageData = {
   filesSettings: TFilesSettings;
@@ -140,7 +141,7 @@ export async function loadRoomsPageData(
 
   const [filesSettings, roomsData, portalSettings, user] = await Promise.all([
     deps.getFilesSettings(),
-    deps.getRooms(filter),
+    deps.getRooms(scopeRoomsRequest(filter)),
     deps.getSettings(),
     deps.getSelf(),
   ]);

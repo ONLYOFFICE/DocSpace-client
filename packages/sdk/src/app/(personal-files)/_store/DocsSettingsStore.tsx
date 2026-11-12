@@ -42,13 +42,19 @@ import type {
   TFilesSettings,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
+import { isEncryptedEditingAvailable } from "@docspace/shared/services/private-room/editor-capability";
 
-class DocsSettingsStore {
+export class DocsSettingsStore {
   filesSettings: TFilesSettings | null = null;
   folderSecurity: TFolderSecurity | null = null;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  /** Whether the connected Document Server can edit encrypted files. */
+  get isEncryptedEditingAvailable() {
+    return isEncryptedEditingAvailable(this.filesSettings);
   }
 
   setFilesSettings = (settings: TFilesSettings) => {

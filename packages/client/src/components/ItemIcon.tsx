@@ -47,6 +47,8 @@ import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { RoomIcon, type TModel } from "@onlyoffice/apps-ui-kit/components";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
+import { mayHoldEncryptionKey } from "@docspace/shared/services/encryption/select-user-key";
+
 import styles from "./icons.module.scss";
 
 type ItemIconProps = {
@@ -72,7 +74,8 @@ type ItemIconProps = {
 	isTemplate?: boolean;
 	dataTestId?: string;
 	encrypted?: boolean;
-	hasEncryptionKeys?: boolean;
+	/** False only for a key list known to be empty. */
+	mayHoldKey?: boolean;
 };
 
 const ItemIcon = ({
@@ -98,7 +101,7 @@ const ItemIcon = ({
 	isTemplate,
 	dataTestId,
 	encrypted,
-	hasEncryptionKeys,
+	mayHoldKey,
 }: ItemIconProps) => {
 	const { t } = useTranslation(["Common"]);
 	const isLoadedRoomIcon = !!logo;
@@ -108,7 +111,8 @@ const ItemIcon = ({
 		(isPrivacy && !!fileExst) || (isRoom && !!isPrivateRoom && !isArchive);
 
 	const isEncryptedFile = !!encrypted && !!fileExst;
-	const showNoAccessBadge = isEncryptedFile && !hasEncryptionKeys;
+	// Spec: private-rooms/file-operations, "Opening without keys is withheld"
+	const showNoAccessBadge = isEncryptedFile && !mayHoldKey;
 
 	const showEncryptedBadge =
 		showLegacyEncryptedBadge || isEncryptedFile;
@@ -177,10 +181,7 @@ const ItemIcon = ({
 	);
 };
 
-export default inject(({ treeFoldersStore, userStore }: TStore) => {
-	const keys = userStore?.encryptionKeys;
-	return {
-		isPrivacy: treeFoldersStore.isPrivacyFolder,
-		hasEncryptionKeys: Array.isArray(keys) && keys.length > 0,
-	};
-})(observer(ItemIcon));
+export default inject(({ treeFoldersStore, userStore }: TStore) => ({
+	isPrivacy: treeFoldersStore.isPrivacyFolder,
+	mayHoldKey: mayHoldEncryptionKey(userStore?.encryptionKeys),
+}))(observer(ItemIcon));

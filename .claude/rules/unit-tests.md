@@ -4,7 +4,8 @@ paths:
   - "packages/client/src/**/__tests__/**"
   - "packages/shared/**/*.test.*"
   - "packages/shared/**/__tests__/**"
-  - "packages/*/vitest.config.ts"
+  - "packages/doceditor/src/**/*.test.*"
+  - "packages/*/vitest.config.mts"
   - "packages/*/vitest/**"
 ---
 
@@ -19,6 +20,13 @@ paths:
   E2E** — never put unit tests there.
 - **shared**: co-located next to the component
   (`SaveCancelButtons.test.tsx`), a few `__tests__/` dirs.
+- **doceditor**: co-located under `packages/doceditor/src/**`, either next to
+  the source or in a `__tests__/` dir inside `src/` (vitest `include` is
+  `src/**/*.{test,spec}.{js,ts,jsx,tsx}`). The top-level
+  `packages/doceditor/__tests__/` is **Playwright E2E** and is excluded. The
+  suite runs in `jsdom` with `vitest/setupTests.ts` (TextEncoder/TextDecoder
+  polyfills) and inlines `@onlyoffice/apps-ui-kit` so its CSS imports load;
+  none of shared's always-on mocks below apply.
 - **ui-kit** is a third, separate suite living in its own repository, with its own setup and
   mocks; shared's setup does not apply there, and its `include` is an explicit
   directory list — a test outside those dirs silently does not run.
@@ -38,6 +46,10 @@ paths:
   scope `vi.fn()` implementations are cleared between tests.
 - `console.error` containing `[ENCRYPTION]` **fails the test**; opt out with
   the global `allowConsoleError(/pattern/)`.
+- `silent: "passed-only"` in all four configs: console output of a passing
+  test is dropped, a failing test still prints its logs. A `console.log` you
+  add while debugging stays invisible until the test fails — run that file
+  with `--silent=false` to see it.
 - `__mocks__/handlers/**` + `__mocks__/e2e/**` are MSW for Playwright only;
   unit tests mock API modules with `vi.mock` instead.
 
@@ -82,6 +94,57 @@ the component needs theme; heavy child components are stubbed with
 `vi.mock` returning a `<div data-testid=… />`. Fixtures live in co-located
 `mockData.ts`.
 
+## Dialog and keyboard tests
+
+The key-dialog tests (`packages/shared/dialogs/**/__tests__`, the client's
+`keys-management/modals/__tests__`) render the real kit and set the pattern
+for testing what a keyboard or screen-reader user meets:
+
+- **Role and accessible name.** Find controls the way assistive technology
+  does: `getByRole("dialog", { name: "Common:CreatePassphrase" })`,
+  `getByRole("button", { name: "Common:CancelButton" })`,
+  `getByLabelText("Common:CurrentPassphrase")` for a field with a visible
+  label. `t` echoes the key, so the name is the key. An error is checked on its field:
+  `aria-invalid`, and the text its `aria-describedby` ids resolve to.
+- **Focus with `userEvent.tab`.** `const user = userEvent.setup()`, then
+  `await user.tab()` or `user.tab({ shift: true })` and `toHaveFocus()` after
+  each step. On open, assert `toHaveFocus()` on the field or on
+  `getByRole("dialog")`. For the focus return, render a trigger button in a
+  small host component, open the dialog from it, close it and assert
+  `toHaveFocus()` on the trigger.
+- **Keys.** Press them with `user.keyboard("{Enter}")`, `"{Escape}"` or
+  `"{Shift>}{Enter}{/Shift}"` and assert on the submit spy. A key handler on
+  its own takes a fake event: a `preventDefault` spy shows that it took the
+  key, `defaultPrevented: true` that it leaves a handled key alone
+  (`dialogs/__tests__/key-dialog-keys.test.ts`).
+- **Dialog chrome.** The backdrop is `#modal-onMouseDown-close`
+  (`fireEvent.mouseDown`); the hidden announcement region is
+  `data-testid="key-dialog-announcement"`, read with `waitFor`. Narrow screens
+  set `window.innerWidth` and restore it after each test
+  (`key-dialogs.a11y.test.tsx`). A dialog with the passphrase strength tooltip
+  needs a `ResizeObserver` stub.
+
+jsdom gaps these tests work around:
+
+- A closed `ModalDialog` stays mounted and `aria-hidden`: find a nested dialog
+  (the unsaved-changes confirmation) among `screen.queryAllByRole("dialog")`
+  by its text, never by `queryByText` alone.
+- jsdom ignores `inert`, so a hidden dialog's buttons still take part in
+  `user.tab()`: assert that the focus left a dialog, not where it went.
+- jsdom lays nothing out, and the kit's focus trap (in `ModalDialog` and
+  `Aside`) leaves out every control whose `getClientRects()` is empty - so in
+  jsdom it sees none and Tab moves nothing. A Tab-order test stubs
+  `Element.prototype.getClientRects` to return one rect in a `describe` of its
+  own and restores it after each test ("Tab order" in
+  `passphrase-modal/__tests__/PassphraseModal.test.tsx`). Put a control on the
+  page outside the dialog when testing the wrap: with nothing else on the page
+  `user.tab()` wraps by itself, trap or not.
+- `userEvent` sends no keys to a disabled element. To show that a handler's own
+  guard refuses a key, `fireEvent.keyDown` on the field.
+- That an async submit did not start cannot be shown by waiting: spy on its
+  first synchronous call instead (a partial mock returning
+  `vi.fn(actual.fn)`), so the assertion holds at once.
+
 ## Aliases available in test code
 
 client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
@@ -93,10 +156,21 @@ client: `SRC_DIR`, `PUBLIC_DIR`, `ASSETS_DIR`, `COMMON_DIR`, `PACKAGE_FILE`,
 ```bash
 pnpm test          # shared          pnpm test:client   # client
 pnpm test:sdk      # sdk             pnpm test:store    # client src/store only
+pnpm test:doceditor   # doceditor
 cd packages/client && pnpm exec vitest run src/store/filesStore   # single path
 ```
 
-All three suites are part of the blocking lefthook pre-push gate.
+All four suites are part of the blocking lefthook pre-push gate, run in one
+`nx run-many -t tsc lint test` call and cached by Nx: a suite reruns only when
+its own package, the non-test, non-story files of a package it depends on,
+`pnpm-lock.yaml` / `pnpm-workspace.yaml`, `public/images`, or the root JSON it
+imports (`locales/.constants`, `locales/en`, `scripts/config.json`) changed —
+see `CLAUDE.md` → "Git hooks". A test that starts reading another root
+`public/` file needs it added to the `test` inputs in `nx.json`.
+
+Vitest strips types without checking them: run `pnpm exec tsc --noEmit -p
+tsconfig.json` in the package before committing a test, or the pre-push `tsc`
+task finds the error later.
 
 ## Snapshots
 

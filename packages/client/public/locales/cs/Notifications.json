@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Odznaky zvýrazňují aktivitu souborů, jako je nahrávání, úpravy a sdílení, v aplikacích {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
+  "ActionsWithFilesDescription": "Odznaky zvýrazňují aktivitu souborů, jako je nahrávání, úpravy a sdílení, v aplikacích {{files}}, {{rooms}}, {{forms}} a AI agenti.",
   "AdminSetupRequired": "Požadovaná konfigurace administrace",
   "Badges": "Odznaky",
   "DailyFeed": "Denní kanál {{organizationName}} {{productName}}",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "Tento uživatelský účet je načten z LDAP. Uživatelova e-mailová adresa nebyla zadána a aktuální byla vygenerována automaticky a nelze ji použít k odesílání oznámení.",
   "NotConfigured": "Není nakonfigurováno",
   "Notifications": "Oznámení",
-  "RoomsActivityDescription": "Získejte okamžitá e-mailová upozornění na nové sdílené soubory a složky a na aktivitu v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}.",
-  "RoomUpdateNotify": "Aktivita v {{files}}, {{rooms}}, {{forms}} a {{aiAgents}}",
+  "RoomsActivityDescription": "Získejte okamžitá e-mailová upozornění na nové sdílené soubory a složky a na aktivitu v {{files}}, {{rooms}}, {{forms}} a AI agentech.",
+  "RoomUpdateNotify": "Aktivita v {{files}}, {{rooms}}, {{forms}} a AI agentech",
   "SettingUpNotifications": "Nastavení upozornění",
   "SuccessConnected": "{{serviceName}} bylo úspěšně připojeno jako notifikační kanál. Nyní tam budete dostávat aktualizace.",
   "SuccessDisconnected": "{{serviceName}} bylo úspěšně odpojeno jako notifikační kanál. Tam nebudou odesílány žádné další notifikace.",

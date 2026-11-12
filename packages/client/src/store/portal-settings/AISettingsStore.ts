@@ -35,10 +35,23 @@
 
 import { makeAutoObservable } from "mobx";
 
-import { type KnowledgeConfig } from "@docspace/shared/api/ai/types";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+
+import type {
+  KnowledgeConfig,
+  TByokKey,
+  TByokProvider,
+  TDocumentAgentSettings,
+} from "@docspace/shared/api/ai/types";
 import {
   updateKnowledgeConfig,
   getKnowledgeConfig,
+  getDocumentAgentSettings,
+  updateDocumentAgentSettings,
+  getByokKeys,
+  getByokProviders,
+  setByokKey,
+  deleteByokKey,
 } from "@docspace/shared/api/ai";
 import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 
@@ -46,10 +59,33 @@ import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 // web-search management that used to live here was built on the removed
 // C# AI API; those settings are now handled by the chat-lib (profiles,
 // tools and web-search engines of the Node AI service).
+/** What the Document Agent tab shows until the portal has saved anything. */
+export const DOCUMENT_AGENT_DEFAULTS: TDocumentAgentSettings = {
+  enabled: true,
+  profileId: null,
+  reasoning: "default",
+  maxToolCalls: 150,
+  maxFileBytes: 32 * 1024 * 1024,
+  taskLog: false,
+  taskLogFolderId: null,
+};
+
 class AISettingsStore {
   knowledgeConfig: KnowledgeConfig | null = null;
 
   knowledgeInitied = false;
+
+  documentAgentSettings: TDocumentAgentSettings = DOCUMENT_AGENT_DEFAULTS;
+
+  documentAgentInitied = false;
+
+  byokKeys: TByokKey[] = [];
+
+  byokProviders: TByokProvider[] = [];
+
+  byokProviderNames: Record<string, string> = {};
+
+  byokInitied = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -83,6 +119,81 @@ class AISettingsStore {
   restoreKnowledge = async () => {
     await updateKnowledgeConfig(KnowledgeType.None, "");
     this.setKnowledgeConfig(null);
+  };
+
+  // The same settings again keep their object: the tab rebuilds its draft
+  // on a new one, and a refetch on every visit must not throw edits away.
+  setDocumentAgentSettings = (settings: TDocumentAgentSettings) => {
+    if (JSON.stringify(settings) === JSON.stringify(this.documentAgentSettings)) return;
+    this.documentAgentSettings = settings;
+  };
+
+  setDocumentAgentInitied = (value: boolean) => {
+    this.documentAgentInitied = value;
+  };
+
+  // The AI service answers its own defaults for a portal that has never
+  // saved the settings; a read that fails leaves the ones above.
+  fetchDocumentAgentSettings = async () => {
+    try {
+      const res = await getDocumentAgentSettings();
+
+      if (res) this.setDocumentAgentSettings({ ...DOCUMENT_AGENT_DEFAULTS, ...res });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setDocumentAgentInitied(true);
+    }
+  };
+
+  updateDocumentAgentSettings = async (settings: TDocumentAgentSettings) => {
+    const res = await updateDocumentAgentSettings(settings);
+    this.setDocumentAgentSettings({ ...settings, ...(res ?? {}) });
+  };
+
+  /** The defaults, on the model the tab shows for them: the portal's default profile. */
+  resetDocumentAgentSettings = async (profileId: string | null = null) => {
+    await this.updateDocumentAgentSettings({
+      ...DOCUMENT_AGENT_DEFAULTS,
+      profileId,
+    });
+  };
+
+  setByokData = (keys: TByokKey[], providers: TByokProvider[]) => {
+    this.byokKeys = keys;
+    this.byokProviders = providers;
+    providers.forEach(({ id, name }) => {
+      this.byokProviderNames[id] = name;
+    });
+  };
+
+  setByokInitied = (value: boolean) => {
+    this.byokInitied = value;
+  };
+
+  fetchByok = async () => {
+    try {
+      const [keys, providers] = await Promise.all([
+        getByokKeys(),
+        getByokProviders(),
+      ]);
+
+      this.setByokData(keys ?? [], providers ?? []);
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      this.setByokInitied(true);
+    }
+  };
+
+  saveByokKey = async (modelId: string, provider: string, key: string) => {
+    await setByokKey(modelId, provider, key);
+    await this.fetchByok();
+  };
+
+  removeByokKey = async (modelId: string) => {
+    await deleteByokKey(modelId);
+    await this.fetchByok();
   };
 }
 

@@ -34,8 +34,9 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import type { SkippedMemberKey } from "@docspace/shared/services/private-room/member-key-verification";
 import { ConflictResolveType } from "@docspace/shared/enums";
-import { resolveItemRoomContext } from "@docspace/shared/services/private-room/encrypted-upload";
+import type { MoveSourceRef } from "@docspace/shared/services/private-room/encrypted-upload";
 import { getFileInfo } from "@docspace/shared/api/files";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -46,7 +47,6 @@ import type {
   TOperation,
 } from "@docspace/shared/api/files/types";
 import type FilesFilter from "@docspace/shared/api/files/filter";
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
@@ -55,7 +55,9 @@ import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/Conf
 import type {
   TUploadBrowserFile,
   TUploadFile,
+  TUploadTarget,
 } from "./uploadDataStore/helpers";
+import { resolveOpenFolderTarget } from "./uploadDataStore/target.helpers";
 import {
   getActiveUploadCountForRoomImpl,
   getConversationPercentImpl,
@@ -89,10 +91,9 @@ import {
 } from "./uploadDataStore/conversion.helpers";
 import {
   cancelEncryptedBatchUploadImpl,
-  encryptKeysForRoomMembersImpl,
+  deleteMovedEncryptedSourceImpl,
+  reportSkippedMembersImpl,
   ensureEncryptionUnlockedForBatchImpl,
-  prepareFileForEncryptedUploadImpl,
-  wrapForSelfThenRoomImpl,
 } from "./uploadDataStore/encryption.helpers";
 import {
   cancelUploadActionImpl,
@@ -101,10 +102,12 @@ import {
   handleFilesUploadImpl,
   handleUploadAndOptionalConversionImpl,
   handleUploadConflictsImpl,
+  keepBothPrivateNamesImpl,
   retryQuotaFailedFilesImpl,
   retryUploadFilesImpl,
   setConflictDialogDataImpl,
   startUploadImpl,
+  type TPrivateRename,
 } from "./uploadDataStore/start.helpers";
 import {
   asyncUploadImpl,
@@ -120,7 +123,6 @@ import {
   showFinishUploadToastrImpl,
 } from "./uploadDataStore/finish.helpers";
 
-import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
 import type FilesSettingsStore from "./FilesSettingsStore";
 import type PrimaryProgressDataStore from "./PrimaryProgressDataStore";
@@ -254,11 +256,18 @@ class UploadDataStore {
 
   filesSettingsStore: FilesSettingsStore;
 
-  aiRoomStore: AiRoomStore;
-
   userStore: UserStore;
 
   files: TUploadFile[] = [];
+
+  /** Member key changes refused during this session (`userId:publicKey`). */
+  memberKeyRefusals = new Set<string>();
+
+  /** Members already reported as left out of an upload this session. */
+  reportedSkippedMemberIds = new Set<string>();
+
+  /** Member fan-outs run one at a time; this is the tail of the chain. */
+  memberFanOutChain: Promise<void> = Promise.resolve();
 
   uploadedFilesHistory: TUploadFile[] = [];
 
@@ -319,10 +328,9 @@ class UploadDataStore {
     primaryProgressDataStore: PrimaryProgressDataStore,
     dialogsStore: DialogsStore,
     filesSettingsStore: FilesSettingsStore,
-    aiRoomStore: AiRoomStore,
     userStore: UserStore,
   ) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, { memberFanOutChain: false });
     this.settingsStore = settingsStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
@@ -331,73 +339,52 @@ class UploadDataStore {
     this.primaryProgressDataStore = primaryProgressDataStore;
     this.dialogsStore = dialogsStore;
     this.filesSettingsStore = filesSettingsStore;
-    this.aiRoomStore = aiRoomStore;
     this.userStore = userStore;
   }
 
-  wrapForSelfThenRoom = (
-    fileId: number,
-    currentUserId: string,
-    publicKeyBase64: string,
-    publicKeyId: string,
-    dek: Uint8Array,
-    roomId: number | string | null,
-  ) =>
-    wrapForSelfThenRoomImpl(
-      this,
-      fileId,
-      currentUserId,
-      publicKeyBase64,
-      publicKeyId,
-      dek,
-      roomId,
-    );
+  deleteMovedEncryptedSource = (moveSource: MoveSourceRef) =>
+    deleteMovedEncryptedSourceImpl(this, moveSource);
 
-  encryptKeysForRoomMembers = (
-    fileId: number,
-    currentUserId: string,
-    roomId: number | string | null,
-    dek: Uint8Array,
-    identity: IdentityKeyPair,
-  ) =>
-    encryptKeysForRoomMembersImpl(
-      this,
-      fileId,
-      currentUserId,
-      roomId,
-      dek,
-      identity,
+  reportSkippedMembers = (skipped: SkippedMemberKey[]) =>
+    reportSkippedMembersImpl(this, skipped);
+
+  /**
+   * Runs the room fan-outs of parallel uploads one at a time, so a changed
+   * member key is asked about once.
+   * Spec: private-rooms/encryption-core, "File access list holds one wrap per member".
+   */
+  queueMemberFanOut = <T,>(fanOut: () => Promise<T>): Promise<T> => {
+    const run = this.memberFanOutChain.then(fanOut, fanOut);
+    this.memberFanOutChain = run.then(
+      () => undefined,
+      () => undefined,
     );
+    return run;
+  };
 
   getUserEncryptionKeys = () => getUserEncryptionKeysImpl(this);
 
-  shouldEncryptCurrentUpload = () => shouldEncryptCurrentUploadImpl(this);
+  /**
+   * Whether the user's key list is not known and a new read of it fails. A
+   * list that the read brings in is in the user store afterwards.
+   * Spec: private-rooms/file-operations, "An unknown key list is read again before an action is refused"
+   */
+  isKeyListUnreadable = async () => {
+    if (this.userStore?.encryptionKeys !== null) return false;
 
-  getUploadFolderContext = () => ({
-    isPrivacyFolder: this.treeFoldersStore.isPrivacyFolder,
-    selectedRoomType: this.selectedFolderStore.roomType,
-  });
-
-  getUploadEncryptionContext = (item: TUploadFile | null | undefined) => {
-    return resolveItemRoomContext(
-      item?.file?.uploadContext,
-      this.getUploadFolderContext(),
-    );
+    return (await this.userStore.ensureEncryptionKeys()) === null;
   };
+
+  shouldEncryptCurrentUpload = () => shouldEncryptCurrentUploadImpl(this);
 
   willEncryptItem = (item: TUploadFile | null | undefined) =>
     willEncryptItemImpl(this, item);
 
-  ensureEncryptionUnlockedForBatch = () =>
-    ensureEncryptionUnlockedForBatchImpl(this);
+  ensureEncryptionUnlockedForBatch = (items?: TUploadFile[]) =>
+    ensureEncryptionUnlockedForBatchImpl(this, items);
 
-  cancelEncryptedBatchUpload = () => cancelEncryptedBatchUploadImpl(this);
-
-  prepareFileForEncryptedUpload = (
-    file: TUploadBrowserFile,
-    folderId: number | string | null | undefined,
-    onProgress?: (progress: number) => void,
-  ) => prepareFileForEncryptedUploadImpl(this, file, folderId, onProgress);
+  cancelEncryptedBatchUpload = (items?: TUploadFile[]) =>
+    cancelEncryptedBatchUploadImpl(this, items);
 
   removeFiles = (fileIds: number[]) => {
     fileIds.forEach((id) => {
@@ -567,7 +554,11 @@ class UploadDataStore {
     uploadData: TStartUploadData,
     t: TTranslation,
     createNewIfExist?: boolean,
+    privateRenames?: TPrivateRename[],
   ) => {
+    if (createNewIfExist && privateRenames) {
+      keepBothPrivateNamesImpl(uploadData, privateRenames);
+    }
     this.handleUploadAndOptionalConversion(uploadData, t, createNewIfExist);
   };
 
@@ -577,11 +568,13 @@ class UploadDataStore {
     uploadData: TStartUploadData,
   ) => handleUploadConflictsImpl(this, t, toFolderId, uploadData);
 
+  resolveOpenFolderTarget = () => resolveOpenFolderTarget(this);
+
   startUpload = (
     uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
-    folderId: number | string | null,
+    target: TUploadTarget,
     t: TTranslation,
-  ) => startUploadImpl(this, uploadFiles, folderId, t);
+  ) => startUploadImpl(this, uploadFiles, target, t);
 
   refreshFiles = (currentFile?: TUploadFile) =>
     refreshFilesImpl(this, currentFile);

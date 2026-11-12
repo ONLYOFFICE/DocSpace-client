@@ -1,0 +1,225 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@onlyoffice/apps-ui-kit/components/modal-dialog";
+import type { TMetadataTemplate } from "@docspace/shared/api/metadata/types";
+
+import ConfirmDeleteDialog from "SRC_DIR/components/ConfirmDeleteDialog";
+
+import { useTemplateEditor } from "../../hooks/useTemplateEditor";
+import {
+  isFieldNameTaken,
+  isNameFreedOnSave,
+  isTemplateNameReserved,
+  isTemplateNameTaken,
+  isValidField,
+} from "../../utils";
+import FieldForm from "./FieldForm";
+import TemplateForm from "./TemplateForm";
+
+type TemplatePanelProps = {
+  template: TMetadataTemplate | null;
+  templates: TMetadataTemplate[];
+  onClose: () => void;
+  onSaved: () => void;
+  onApplied: () => void;
+};
+
+const TemplatePanel = ({
+  template,
+  templates,
+  onClose,
+  onSaved,
+  onApplied,
+}: TemplatePanelProps) => {
+  const { t } = useTranslation(["Metadata", "Files", "Common"]);
+
+  const {
+    original,
+    draft,
+    fieldForm,
+    isNewField,
+    isSaving,
+    canSave,
+    hasRemovedFields,
+    changeDraft,
+    setFieldForm,
+    addField,
+    closeField,
+    submitField,
+    moveField,
+    removeField,
+    save,
+  } = useTemplateEditor(template, onSaved, onApplied);
+
+  const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
+
+  const onSave = () =>
+    hasRemovedFields ? setIsDeleteConfirmVisible(true) : save();
+
+  const saveAfterConfirm = () =>
+    save().finally(() => setIsDeleteConfirmVisible(false));
+
+  const getNameError = () => {
+    if (!fieldForm) return "";
+    if (isFieldNameTaken(draft.fields, fieldForm))
+      return t("Metadata:FieldNameExists");
+    if (isNameFreedOnSave(original, draft, fieldForm))
+      return t("Metadata:FieldNameFreedOnSave");
+
+    return "";
+  };
+
+  const nameError = getNameError();
+
+  const getTemplateNameError = () => {
+    if (isTemplateNameReserved(draft.name))
+      return t("Metadata:TemplateNameReserved");
+    if (isTemplateNameTaken(templates, draft.name, template?.id))
+      return t("Metadata:TemplateNameExists");
+
+    return "";
+  };
+
+  const templateNameError = getTemplateNameError();
+
+  const submit = () => {
+    if (fieldForm) {
+      if (isValidField(fieldForm) && !nameError) submitField();
+      return;
+    }
+
+    if (canSave && !templateNameError && !isSaving) onSave();
+  };
+
+  const getTitle = () => {
+    if (fieldForm)
+      return isNewField ? t("Metadata:AddField") : t("Metadata:EditField");
+
+    return template ? t("Files:EditTemplate") : t("Metadata:NewTemplate");
+  };
+
+  return (
+    <>
+      <ModalDialog
+        visible
+        withBodyScroll
+        withForm
+        displayType={ModalDialogType.aside}
+        isBackButton={!!fieldForm}
+        isCloseable={!isDeleteConfirmVisible && !isSaving}
+        onBackClick={closeField}
+        onClose={fieldForm ? closeField : onClose}
+        onSubmit={submit}
+        dataTestId="metadata_template_panel"
+      >
+        <ModalDialog.Header>{getTitle()}</ModalDialog.Header>
+
+        <ModalDialog.Body>
+          {fieldForm ? (
+            <FieldForm
+              value={fieldForm}
+              nameError={nameError}
+              onChange={setFieldForm}
+            />
+          ) : (
+            <TemplateForm
+              draft={draft}
+              nameError={templateNameError}
+              onChange={changeDraft}
+              onAddField={addField}
+              onEditField={setFieldForm}
+              onMoveField={moveField}
+              onRemoveField={removeField}
+            />
+          )}
+        </ModalDialog.Body>
+
+        <ModalDialog.Footer>
+          {fieldForm ? (
+            <Button
+              primary
+              scale
+              size={ButtonSize.normal}
+              label={
+                isNewField ? t("Common:AddButton") : t("Common:SaveButton")
+              }
+              isDisabled={!isValidField(fieldForm) || !!nameError}
+              type="submit"
+              testId="metadata_field_submit_button"
+            />
+          ) : (
+            <Button
+              primary
+              scale
+              size={ButtonSize.normal}
+              label={t("Common:SaveButton")}
+              isDisabled={!canSave || !!templateNameError}
+              isLoading={isSaving}
+              type="submit"
+              testId="metadata_template_save_button"
+            />
+          )}
+          <Button
+            scale
+            size={ButtonSize.normal}
+            label={t("Common:CancelButton")}
+            isDisabled={isSaving}
+            onClick={fieldForm ? closeField : onClose}
+            testId="metadata_cancel_button"
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+
+      {isDeleteConfirmVisible ? (
+        <ConfirmDeleteDialog
+          title={t("Metadata:DeleteFieldsTitle")}
+          description={t("Metadata:DeleteFieldsDescription")}
+          onDelete={saveAfterConfirm}
+          onClose={() => setIsDeleteConfirmVisible(false)}
+        />
+      ) : null}
+    </>
+  );
+};
+
+export default TemplatePanel;

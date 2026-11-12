@@ -298,7 +298,7 @@
 						<name>CompletedForm</name>
 						<children>
 							<concept_node>
-								<name>BackToRoom</name>
+								<name>BackToFormSpace</name>
 								<description/>
 								<comment/>
 								<translations>

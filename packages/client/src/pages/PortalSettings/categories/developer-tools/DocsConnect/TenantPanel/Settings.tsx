@@ -247,8 +247,10 @@ const Settings = ({
     general.anonymous !== baseline.anonymous ||
     maxDownloadBytes !== savedMaxDownload;
 
-  const isGeneralValid =
-    general.header.trim() !== "" && general.secret.trim() !== "";
+  const isHeaderEmpty = general.header.trim() === "";
+  const isSecretEmpty = general.secret.trim() === "";
+
+  const isGeneralValid = !isHeaderEmpty && !isSecretEmpty;
 
   const serverPayload = (anonymous: boolean, maxDownload: string) => ({
     isAnonymousSupport: anonymous,
@@ -440,6 +442,7 @@ const Settings = ({
               setGeneral((prev) => ({ ...prev, header: e.target.value }))
             }
             isDisabled={isBusy}
+            hasError={isHeaderEmpty}
             scale
             testId="docs_connect_settings_header_input"
           />
@@ -450,7 +453,7 @@ const Settings = ({
           labelVisible
           labelText={t("DocsConnect:SecretKeyLabel")}
         >
-          <div className={styles.secretField}>
+          <div className={styles.secretField} data-error={isSecretEmpty}>
             <TextInput
               // A text input avoids the browser password-manager prompt, and the
               // value is masked with CSS instead. Where that CSS is unsupported

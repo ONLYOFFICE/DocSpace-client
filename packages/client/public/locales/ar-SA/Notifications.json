@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "تُبرز الشارات أنشطة الملفات مثل التحميلات والتعديلات والمشاركات في تطبيقات {{files}} و{{rooms}} و{{forms}} و{{aiAgents}}.",
+  "ActionsWithFilesDescription": "تُبرز الشارات أنشطة الملفات مثل التحميلات والتعديلات والمشاركات في تطبيقات {{files}} و{{rooms}} و{{forms}} ووكلاء الذكاء الاصطناعي.",
   "AdminSetupRequired": "مطلوب إعداد من المسؤول",
   "Badges": "شارات",
   "DailyFeed": "أخبار {{organizationName}} {{productName}} اليومية",
@@ -9,8 +9,8 @@
   "LdapEmailTooltip": "تم تحميل حساب المستخدم هذا من LDAP. لم يتم تحديد عنوان البريد الإلكتروني للمستخدم، وقد تم إنشاء العنوان الحالي تلقائيًا ولا يمكن استخدامه لإرسال الإشعارات.",
   "NotConfigured": "غير مهيأ",
   "Notifications": "الإشعارات",
-  "RoomsActivityDescription": "احصل على إشعارات فورية بالبريد الإلكتروني عن الملفات والمجلدات المشتركة الجديدة وعن النشاط في {{files}} و{{rooms}} و{{forms}} و{{aiAgents}}.",
-  "RoomUpdateNotify": "نشاط {{files}} و{{rooms}} و{{forms}} و{{aiAgents}}",
+  "RoomsActivityDescription": "احصل على إشعارات فورية بالبريد الإلكتروني عن الملفات والمجلدات المشتركة الجديدة وعن النشاط في {{files}} و{{rooms}} و{{forms}} ووكلاء الذكاء الاصطناعي.",
+  "RoomUpdateNotify": "نشاط {{files}} و{{rooms}} و{{forms}} ووكلاء الذكاء الاصطناعي",
   "SettingUpNotifications": "إعدادات الإشعارات",
   "SuccessConnected": "تم توصيل {{serviceName}} بنجاح كقناة إشعارات. ستتلقون الآن التحديثات هناك.",
   "SuccessDisconnected": "تم فصل {{serviceName}} بنجاح كقناة إشعارات. لن يتم إرسال الإشعارات إلى هناك بعد الآن.",

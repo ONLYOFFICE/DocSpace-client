@@ -1,0 +1,22 @@
+{
+  "key_path": "SetSpendingLimit",
+  "content": "Set spending limit",
+  "content_en_sha1_hash": "e0e3154ea5480e0430555b947f9cb14c3d2ce2d2",
+  "created_at": "2026-10-22T16:09:30.374Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Link on the AI services pages of Payments / Services (next to 'See pricing') that opens the AI limits settings. Imperative verb phrase, short link label.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

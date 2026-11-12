@@ -42,7 +42,9 @@ import {
   updateTempContent,
 } from "@docspace/shared/utils/common";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import config from "PACKAGE_FILE";
+import i18n from "../../i18n";
 
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -130,34 +132,6 @@ export function scrollToTopImpl(self: FilesStore) {
   scrollElm && scrollElm.scrollTo(0, 0);
 }
 
-export async function fetchFavoritesFolderImpl(
-  self: FilesStore,
-  folderId: number | string,
-) {
-  // The live filter carries the section scope (folderType: Rooms/Forms/AI/
-  // MyDocs) along with sort and paging. It must be passed on: calling
-  // getFolder with the id alone skips the query string entirely, so the
-  // refreshed listing comes back unscoped and shows favorites belonging to
-  // every other section.
-  const requestFilter = self.filter.clone();
-  requestFilter.folder = folderId as string;
-
-  const favoritesFolder = await api.files.getFolder(folderId, requestFilter);
-
-  self.setFolders(favoritesFolder.folders);
-  self.setFiles(favoritesFolder.files);
-
-  const newFilter = self.filter.clone();
-  newFilter.total = favoritesFolder.total;
-  self.setFilter(newFilter);
-
-  self.selectedFolderStore.setSelectedFolder({
-    folders: favoritesFolder.folders,
-    ...favoritesFolder.current,
-    pathParts: favoritesFolder.pathParts,
-  });
-}
-
 export function openDocEditorImpl(
   self: FilesStore,
   id: number | string,
@@ -167,7 +141,15 @@ export function openDocEditorImpl(
   fillForm = false,
   targetWindow: Nullable<Window> = null,
 ) {
-  const { openOnNewPage } = self.filesSettingsStore;
+  const { openOnNewPage, isEncryptedEditingAvailable } =
+    self.filesSettingsStore;
+  const item = self.files.find((f) => f.id === id);
+
+  // Spec: private-rooms/editor-integration, "Document Server capability check before opening"
+  if (item?.encrypted && !isEncryptedEditingAvailable) {
+    toastr.info(i18n.t("Common:PrivateRoomEditorNotSupported"));
+    return;
+  }
 
   const share = shareKey || self.publicRoomStore.publicRoomKey;
 
@@ -199,8 +181,6 @@ export function openDocEditorImpl(
   );
 
   if (isFrame && frameConfig?.events?.onEditorOpen) {
-    const item = self.files.find((f) => f.id === id);
-
     frameCallEvent({
       event: "onEditorOpen",
       data: {

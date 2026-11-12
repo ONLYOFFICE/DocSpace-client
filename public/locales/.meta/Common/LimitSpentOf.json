@@ -1,0 +1,22 @@
+{
+  "key_path": "LimitSpentOf",
+  "content": "Spent {{spent}} of {{limit}}. Resets {{date}}.",
+  "content_en_sha1_hash": "03101287cc30bc3eadd01aed18dc16a61bf18494",
+  "created_at": "2026-10-22T16:09:09.568Z",
+  "updated_at": "2026-10-22T16:10:38.032Z",
+  "comment": {
+    "text": "Status under the portal AI spending limit form; {{spent}} and {{limit}} are formatted money amounts, {{date}} is the date and time the period resets. Second sentence: the limit resets on that date.",
+    "is_auto": true,
+    "updated_at": "2026-10-22T16:10:38.032Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

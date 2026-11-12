@@ -82,8 +82,10 @@ export const TableVersions = Object.freeze({
   Favorites: "1",
   Guests: "1",
   SharedWithMe: "2",
-  AIAgents: "1",
   InSharedFolder: "1",
+  // The AI section's lists (AI Workspace, Skills, Knowledge): their own
+  // version, so a change of their columns resets only what they stored.
+  AiRooms: "1",
 });
 
 /**
@@ -182,4 +184,3 @@ export const AI_SETTINGS_URL = "/portal-settings/ai-settings";
 
 export const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 export const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
-export const TABLE_AI_AGENTS_COLUMNS = `aiAgentsTableColumns_ver-${TableVersions.AIAgents}`;

@@ -1,20 +1,20 @@
 {
   "key_path": "InvitationToAgent",
-  "content": "<1>{{displayName}}</1> invites you to join the {{aiAgent}} <1>{{agentName}}</1>.",
-  "content_en_sha1_hash": "c291e936eeda4cfe61676f56a30dc6bdc0b1815d",
-  "created_at": "2026-06-01T21:20:22.142Z",
-  "updated_at": "2026-08-14T14:58:32.870Z",
+  "content": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
+  "content_en_sha1_hash": "219914f391293ff45a679d1db1a94472c58701ce",
+  "created_at": "2026-10-16T12:03:09.287Z",
+  "updated_at": "2026-10-16T12:03:59.839Z",
   "comment": {
-    "text": "An invitation message in the greeting container shown when a user is invited to an AI agent room; `displayName` is the inviter, `aiAgent` is the agent type, and `agentName` is the agent's name.",
+    "text": "Invitation shown on the sign-up page when a user is invited to an AI agent; {{displayName}} is the inviter, {{agentName}} the agent's name, and <1> makes both bold.",
     "is_auto": true,
-    "updated_at": "2026-06-01T21:36:10.185Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-10-16T12:03:59.839Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
       "line_number": 84,
-      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"Common:InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n aiAgent: t(\"Common:AIAgent\"),",
+      "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"Common:InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n }}",
       "module": "/packages/login"
     }
   ],

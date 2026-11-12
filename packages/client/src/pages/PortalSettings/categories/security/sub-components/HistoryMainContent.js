@@ -39,9 +39,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ComboBox } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { AuditReportFormat } from "@docspace/shared/enums";
@@ -85,8 +83,6 @@ const HistoryMainContent = (props) => {
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
   const [reportFormat, setReportFormat] = useState(getInitialReportFormat);
-
-  const theme = useTheme();
 
   const getSettings = () => {
     const storagePeriodSettings = getFromSessionStorage("storagePeriod");
@@ -142,17 +138,7 @@ const HistoryMainContent = (props) => {
         style={{ marginBottom: "20px" }}
       />
       {isSettingNotPaid ? (
-        <Badge
-          className="paid-badge"
-          fontWeight="700"
-          backgroundColor={
-            theme.isBase
-              ? globalColors.favoritesStatus
-              : globalColors.favoriteStatusDark
-          }
-          label={t("Common:Paid")}
-          isPaidBadge
-        />
+        <PaidBadge className="paid-badge" fontWeight="700" />
       ) : null}
       <div className="main-wrapper">
         <Text fontSize="13px" className="login-history-description">
@@ -221,7 +207,7 @@ const HistoryMainContent = (props) => {
       <div className={styles["download-wrapper"]}>
         <Button
           className="download-report_button"
-          dataTestId={
+          testId={
             loginHistory
               ? "login_history_download_report_button"
               : "audit_trail_download_report_button"

@@ -1,7 +1,4 @@
 {
-  "AgentCreated": "AI agent vytvorený",
-  "AgentDeleted": "AI Agent odstrnený",
-  "AgentUpdated": "Aktualizovaný AI agent",
   "Before": "Pred",
   "CreateWebhook": "Vytvoriť webhook",
   "DeleteHint": "Webhook bude natrvalo vymazaný.\nTento úkon nebude možné odvolať.",
@@ -96,5 +93,6 @@
   "WebhookRemoved": "Webhook odstránený",
   "Webhooks": "Webhooky",
   "WebhooksGuide": "Sprievodca webhookmi",
-  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v {{organizationName}} {{productName}}.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon."
+  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v {{organizationName}} {{productName}}.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon.",
+  "WebhookWasDeleted": "Tento webhook bol odstránený"
 }

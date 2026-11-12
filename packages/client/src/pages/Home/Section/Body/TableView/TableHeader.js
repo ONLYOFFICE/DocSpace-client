@@ -61,14 +61,10 @@ class FilesTableHeader extends React.Component {
       resetColumnsSize,
       columnStorageName: props.columnStorageName,
       columnInfoPanelStorageName: props.columnInfoPanelStorageName,
-      sortBy:
-        props.isRooms || props.isAIAgentsFolder
-          ? props.roomsFilter.sortBy
-          : props.filter.sortBy,
-      sortOrder:
-        props.isRooms || props.isAIAgentsFolder
-          ? props.roomsFilter.sortOrder
-          : props.filter.sortOrder,
+      sortBy: props.isRooms ? props.roomsFilter.sortBy : props.filter.sortBy,
+      sortOrder: props.isRooms
+        ? props.roomsFilter.sortOrder
+        : props.filter.sortOrder,
     };
 
     this.isBeginScrolling = false;
@@ -82,7 +78,6 @@ class FilesTableHeader extends React.Component {
   componentDidUpdate(prevProps) {
     const {
       isRooms,
-      isAIAgentsFolder,
       isTrashFolder,
       columnStorageName,
       columnInfoPanelStorageName,
@@ -101,10 +96,8 @@ class FilesTableHeader extends React.Component {
       isInSharedFolder,
     } = this.props;
 
-    const sortBy =
-      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder =
-      isRooms || isAIAgentsFolder ? roomsFilter.sortOrder : filter.sortOrder;
+    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     const { sortBy: stateSortBy, sortOrder: stateSortOrder } = this.state;
 
@@ -113,7 +106,6 @@ class FilesTableHeader extends React.Component {
       indexColumnSize !== prevProps.indexColumnSize ||
       isIndexEditingMode !== prevProps.isIndexEditingMode ||
       isRooms !== prevProps.isRooms ||
-      isAIAgentsFolder !== prevProps.isAIAgentsFolder ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
@@ -182,7 +174,6 @@ class FilesTableHeader extends React.Component {
   updateTableColumns = () => {
     const {
       isRooms,
-      isAIAgentsFolder,
       getColumns,
       columnStorageName,
       columnInfoPanelStorageName,
@@ -204,10 +195,8 @@ class FilesTableHeader extends React.Component {
       this.setTableColumns(tableColumns);
     }
 
-    const sortBy =
-      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder =
-      isRooms || isAIAgentsFolder ? roomsFilter.sortOrder : filter.sortOrder;
+    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     this.setState({
       columns,
@@ -229,14 +218,12 @@ class FilesTableHeader extends React.Component {
       isIndexing,
       isSharedWithMeFolder,
       isInSharedFolder,
-      isAIAgentsFolder,
     } = this.props;
 
     if (isSharedWithMeFolder || isInSharedFolder)
       return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
-    if (isAIAgentsFolder) return this.getAIAgentsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
     if (isRecentFolder) return this.getRecentFolderColumns();
     if (isFavoritesFolder) return this.getFavoritesFolderColumns();
@@ -724,6 +711,7 @@ class FilesTableHeader extends React.Component {
       roomQuotaColumnIsEnable,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
+      isAiSectionFolder,
     } = this.props;
 
     const columns = [
@@ -737,15 +725,22 @@ class FilesTableHeader extends React.Component {
         minWidth: 210,
         onClick: this.onRoomsFilter,
       },
-      {
-        key: "Type",
-        title: t("Common:Type"),
-        enable: roomColumnTypeIsEnabled,
-        resizable: true,
-        sortBy: SortByFieldName.RoomType,
-        onChange: this.onColumnChange,
-        onClick: this.onRoomsFilter,
-      },
+      // The lists of the AI section (AI Workspace, Skills, Knowledge) hold
+      // rooms of one type each, so they have no Type column: neither in the
+      // table nor among the columns to switch on.
+      ...(isAiSectionFolder
+        ? []
+        : [
+            {
+              key: "Type",
+              title: t("Common:Type"),
+              enable: roomColumnTypeIsEnabled,
+              resizable: true,
+              sortBy: SortByFieldName.RoomType,
+              onChange: this.onColumnChange,
+              onClick: this.onRoomsFilter,
+            },
+          ]),
       {
         key: "Tags",
         title: t("Common:Tags"),
@@ -784,75 +779,6 @@ class FilesTableHeader extends React.Component {
             ? t("Common:StorageAndQuota")
             : t("Common:Storage"),
         enable: roomQuotaColumnIsEnable,
-        sortBy: SortByFieldName.UsedSpace,
-        resizable: true,
-        onChange: this.onColumnChange,
-        onClick: this.onRoomsFilter,
-      });
-
-    return [...columns];
-  };
-
-  getAIAgentsColumns = () => {
-    const {
-      t,
-      isDefaultAIAgentsQuotaSet,
-      showStorageInfo,
-      aiAgentColumnNameIsEnabled,
-      aiAgentColumnTagsIsEnabled,
-      aiAgentColumnOwnerIsEnabled,
-      aiAgentColumnActivityIsEnabled,
-      aiAgentColumnQuotaIsEnable,
-    } = this.props;
-
-    const columns = [
-      {
-        key: "Name",
-        title: t("Common:Label"),
-        resizable: true,
-        enable: aiAgentColumnNameIsEnabled,
-        default: true,
-        sortBy: SortByFieldName.Name,
-        minWidth: 210,
-        onClick: this.onRoomsFilter,
-      },
-      {
-        key: "TagsAIAgents",
-        title: t("Common:Tags"),
-        enable: aiAgentColumnTagsIsEnabled,
-        resizable: true,
-        sortBy: SortByFieldName.Tags,
-        withTagRef: true,
-        onChange: this.onColumnChange,
-        onClick: this.onRoomsFilter,
-      },
-      {
-        key: "OwnerAIAgents",
-        title: t("Common:Owner"),
-        enable: aiAgentColumnOwnerIsEnabled,
-        resizable: true,
-        sortBy: SortByFieldName.Author,
-        onChange: this.onColumnChange,
-        onClick: this.onRoomsFilter,
-      },
-      {
-        key: "ActivityAIAgents",
-        title: t("LastActivity"),
-        enable: aiAgentColumnActivityIsEnabled,
-        resizable: true,
-        sortBy: SortByFieldName.ModifiedDate,
-        onChange: this.onColumnChange,
-        onClick: this.onRoomsFilter,
-      },
-    ];
-
-    showStorageInfo &&
-      columns.splice(columns.length, 0, {
-        key: "StorageAIAgents",
-        title: isDefaultAIAgentsQuotaSet
-          ? t("Common:StorageAndQuota")
-          : t("Common:Storage"),
-        enable: aiAgentColumnQuotaIsEnable,
         sortBy: SortByFieldName.UsedSpace,
         resizable: true,
         onChange: this.onColumnChange,
@@ -1066,11 +992,7 @@ export default inject(
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const {
-      isDefaultRoomsQuotaSet,
-      showStorageInfo,
-      isDefaultAIAgentsQuotaSet,
-    } = currentQuotaStore;
+    const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
 
@@ -1095,7 +1017,7 @@ export default inject(
       isFavoritesFolder,
       isSharedWithMeFolder,
       isInSharedFolder,
-      isAIAgentsFolder,
+      isAiSectionFolder,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -1125,12 +1047,6 @@ export default inject(
       roomColumnOwnerIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
-
-      aiAgentColumnNameIsEnabled,
-      aiAgentColumnTagsIsEnabled,
-      aiAgentColumnOwnerIsEnabled,
-      aiAgentColumnActivityIsEnabled,
-      aiAgentColumnQuotaIsEnable,
 
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
@@ -1215,12 +1131,6 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
-      aiAgentColumnNameIsEnabled,
-      aiAgentColumnTagsIsEnabled,
-      aiAgentColumnOwnerIsEnabled,
-      aiAgentColumnActivityIsEnabled,
-      aiAgentColumnQuotaIsEnable,
-
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
       sharedByShareWithMeColumnIsEnabled,
@@ -1261,7 +1171,6 @@ export default inject(
       publicRoomKey,
 
       isFrame,
-      isAIAgentsFolder,
       isRecentFolder,
       isInSharedFolder,
       isSharedWithMeFolder,
@@ -1270,7 +1179,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
-      isDefaultAIAgentsQuotaSet,
+      isAiSectionFolder,
       isIndexEditingMode,
 
       indexColumnSize,

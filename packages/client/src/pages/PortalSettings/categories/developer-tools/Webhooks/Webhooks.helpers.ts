@@ -100,12 +100,6 @@ export const getTriggerTranslate = (trigger: number, t: TTranslation) => {
       return t("FormStopped");
     case WebhookTriggers.FormSubmit:
       return t("FormSubmit");
-    case WebhookTriggers.AgentCreated:
-      return t("AgentCreated");
-    case WebhookTriggers.AgentUpdated:
-      return t("AgentUpdated");
-    case WebhookTriggers.AgentDeleted:
-      return t("AgentDeleted");
     case WebhookTriggers.FileDownloaded:
       return t("FileDownloaded");
     case WebhookTriggers.FolderDownloaded:

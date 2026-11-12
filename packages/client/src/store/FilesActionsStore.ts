@@ -81,6 +81,7 @@ import {
   nameWithoutExtension as nameWithoutExtensionHelper,
 } from "./filesActionsStore/helpers";
 import type { TTreeNode, TUploadTreeFile } from "./filesActionsStore/helpers";
+import type { TUploadTarget } from "./uploadDataStore/helpers";
 import {
   isAvailableOptionImpl,
   getOptionImpl,
@@ -92,7 +93,6 @@ import {
   getArchiveRoomsFolderOptionsImpl,
   getRoomsFolderOptionsImpl,
   getTemplatesFolderOptionsImpl,
-  getAIAgentsFolderOptionsImpl,
   getAnotherFolderOptionsImpl,
   getHeaderMenuImpl,
 } from "./filesActionsStore/menu.helpers";
@@ -126,24 +126,33 @@ import {
   resolveRoomIdForFileImpl,
   downloadEncryptedFileImpl,
   downloadEncryptedFilesAsZipImpl,
+  downloadEncryptedFolderImpl,
 } from "./filesActionsStore/download.helpers";
 import {
   duplicateActionImpl,
   duplicateEncryptedFileImpl,
   copyEncryptedFilesToFolderImpl,
+  runPrivateTransferPlanImpl,
   getItemsInfoImpl,
   checkFileConflictsImpl,
   setConflictDialogDataImpl,
   checkOperationConflictImpl,
   preparingDataForCopyingToRoomImpl,
   copyFromTemplateFormImpl,
-  copyFileToAiKnowledgeImpl,
+  copyFilesToKnowledgeRoomImpl,
   moveDragItemsImpl,
   getPublicKeyImpl,
+  confirmEncryptedTransferImpl,
+} from "./filesActionsStore/copyMove.helpers";
+import { planPrivateTransfer } from "@docspace/shared/services/private-room/private-transfer";
+import type {
+  TEncryptedTransferDest,
+  TPrivateTransferParams,
+  TPrivateTransferPlan,
+  TPrivateTransferRunOptions,
 } from "./filesActionsStore/copyMove.helpers";
 import {
   moveToRoomsPageImpl,
-  moveToAIAgentsPageImpl,
   moveToPublicRoomImpl,
   openLocationActionImpl,
   checkAndOpenLocationActionImpl,
@@ -165,9 +174,6 @@ import {
   changeRoomQuotaImpl,
   disableRoomQuotaImpl,
   resetRoomQuotaImpl,
-  changeAIAgentsQuotaImpl,
-  disableAIAgentQuotaImpl,
-  resetAIAgentQuotaImpl,
   onClickCreateRoomImpl,
   onCreateRoomFromTemplateImpl,
   onLeaveRoomImpl,
@@ -206,7 +212,6 @@ import type PluginStore from "./PluginStore";
 import type PeopleStore from "./contacts/PeopleStore";
 import type IndexingStore from "./IndexingStore";
 import type VersionHistoryStore from "./VersionHistoryStore";
-import type AiRoomStore from "./AiRoomStore";
 
 export type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
 
@@ -233,7 +238,6 @@ export type TActionItem = {
   providerKey?: string;
   isFolder?: boolean;
   isRoom?: boolean;
-  isAIAgent?: boolean;
   isTemplate?: boolean;
   encrypted?: boolean;
   private?: boolean;
@@ -260,6 +264,8 @@ export type TDownloadTranslations = {
   label?: string;
   error?: string;
   passwordError?: string;
+  /** The toast of a failed request that is not the server's own message. */
+  errorMessage?: (error: unknown) => string;
 };
 export type TRemoveTranslations = {
   successRemoveTemplate?: string;
@@ -315,15 +321,14 @@ type TFilesStore = {
   filter: FilesFilter;
   roomsFilter: RoomsFilter;
   categoryType: number;
+  isPrivateRoomsSectionAvailable: boolean;
+  isRoomsSectionOff: boolean;
   hasSelection: boolean;
   allFilesIsEditing: boolean;
   canConvertSelected: boolean;
   hasRoomsToChangeQuota: boolean;
   hasRoomsToDisableQuota: boolean;
   hasRoomsToResetQuota: boolean;
-  hasAIAgentsToChangeQuota: boolean;
-  hasAIAgentsToDisableQuota: boolean;
-  hasAIAgentsToResetQuota: boolean;
   fetchFiles: (
     folderId: number | string | null,
     filter: FilesFilter,
@@ -338,13 +343,6 @@ type TFilesStore = {
     clearFilter?: unknown,
     withFilterLocalStorage?: unknown,
   ) => Promise<unknown>;
-  fetchAgents: (
-    folderId: number | string | null,
-    filter: RoomsFilter,
-    withSubfolders?: boolean,
-    clearFilter?: boolean,
-  ) => Promise<unknown>;
-  fetchFavoritesFolder: (folderId: number | string) => Promise<unknown>;
   setPendingClientSearch: (
     pending: Nullable<{ folderId: number | string; query: string }>,
   ) => void;
@@ -399,12 +397,7 @@ type TFilesStore = {
     ids: (number | string)[],
     quota: number,
   ) => Promise<unknown>;
-  setCustomAIAgentQuota: (
-    ids: (number | string)[],
-    quota: number,
-  ) => Promise<unknown>;
   resetRoomQuota: (ids: (number | string)[]) => Promise<unknown>;
-  resetAIAgentQuota: (ids: (number | string)[]) => Promise<unknown>;
   setInRoomFolder: (roomId: number | string, inRoom: boolean) => void;
   refreshFiles: () => Promise<unknown>;
   clearFiles: () => void;
@@ -439,8 +432,6 @@ class FilesActionStore {
 
   versionHistoryStore: VersionHistoryStore;
 
-  aiRoomStore: AiRoomStore;
-
   filesHeaderOptionStore: FilesHeaderOptionStore;
 
   // unlike the other stores, pluginStore had no class-field
@@ -472,6 +463,14 @@ class FilesActionStore {
 
   alreadyExportingRoomIndex = false;
 
+  // Spec: private-rooms/file-operations, "Deletion bypasses the recycle bin"
+  get isDeleteConfirmationForced() {
+    return (
+      this.filesSettingsStore.confirmDelete ||
+      this.treeFoldersStore.isPrivacyFolder
+    );
+  }
+
   constructor(
     settingsStore: SettingsStore,
     uploadDataStore: UploadDataStore,
@@ -491,7 +490,6 @@ class FilesActionStore {
     currentQuotaStore: CurrentQuotasStore,
     indexingStore: IndexingStore,
     versionHistoryStore: VersionHistoryStore,
-    aiRoomStore: AiRoomStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -512,7 +510,6 @@ class FilesActionStore {
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
     this.versionHistoryStore = versionHistoryStore;
-    this.aiRoomStore = aiRoomStore;
 
     this.filesHeaderOptionStore = new FilesHeaderOptionStore(
       this,
@@ -545,9 +542,9 @@ class FilesActionStore {
   createFoldersTree = async (
     t: TTranslation,
     files: TUploadTreeFile[] | Record<string, TUploadTreeFile>,
-    folderId?: number | string | null,
+    target: TUploadTarget,
     dragged?: boolean,
-  )=> createFoldersTreeImpl(this, t, files, folderId, dragged);
+  )=> createFoldersTreeImpl(this, t, files, target, dragged);
 
   updateFilesAfterDelete = (operationId: string, operationName: TOperationName)=> updateFilesAfterDeleteImpl(this, operationId, operationName);
 
@@ -580,7 +577,12 @@ class FilesActionStore {
 
   downloadEncryptedFile = async (file: TActionItem)=> downloadEncryptedFileImpl(this, file);
 
-  downloadEncryptedFilesAsZip = async (encryptedFiles: TActionItem[])=> downloadEncryptedFilesAsZipImpl(this, encryptedFiles);
+  downloadEncryptedFilesAsZip = async (
+    encryptedFiles: TActionItem[],
+    folders: TActionItem[] = [],
+  ) => downloadEncryptedFilesAsZipImpl(this, encryptedFiles, folders);
+
+  downloadEncryptedFolder = async (folder: TActionItem)=> downloadEncryptedFolderImpl(this, folder);
 
   completeAction = async (
     selectedItem: { id: number; isFolder?: boolean },
@@ -627,12 +629,22 @@ class FilesActionStore {
   copyEncryptedFilesToFolder = async (
     items: TActionItem[],
     destFolderId: number | string | undefined,
-    destInfo?: {
-      private?: boolean;
-      rootFolderId?: number | string;
-      roomType?: Nullable<RoomsType>;
+    destInfo?: TEncryptedTransferDest & {
+      deleteSourceOnSuccess?: boolean;
+      sourceRoomId?: number | string | null;
     },
   )=> copyEncryptedFilesToFolderImpl(this, items, destFolderId, destInfo);
+
+  planPrivateTransfer = (params: TPrivateTransferParams)=> planPrivateTransfer(params);
+
+  runPrivateTransferPlan = (
+    plan: TPrivateTransferPlan,
+    destFolderId: number | string,
+    dest: TEncryptedTransferDest | null | undefined,
+    options: TPrivateTransferRunOptions,
+  )=> runPrivateTransferPlanImpl(this, plan, destFolderId, dest, options);
+
+  confirmEncryptedTransfer = ()=> confirmEncryptedTransferImpl(this);
 
   getItemsInfo = (items: TActionItem[])=> getItemsInfoImpl(this, items);
 
@@ -642,8 +654,7 @@ class FilesActionStore {
     action: string,
     id: number | number[],
     t: TTranslation,
-    isAIAgent = false,
-  )=> setPinActionImpl(this, action, id, t, isAIAgent);
+  )=> setPinActionImpl(this, action, id, t);
 
   setMuteAction = (action: string, item: TActionItem, t: TTranslation)=> setMuteActionImpl(this, action, item, t);
 
@@ -668,7 +679,6 @@ class FilesActionStore {
     id: number | string;
     isRoom?: boolean;
     isTemplate?: boolean;
-    isAIAgent?: boolean;
     title?: string;
     rootFolderType?: FolderType;
     roomType?: RoomsType;
@@ -758,31 +768,13 @@ class FilesActionStore {
     abortCallback?: (...args: unknown[]) => unknown,
   )=> changeRoomQuotaImpl(this, items, successCallback, abortCallback);
 
-  changeAIAgentsQuota = (
-    items: (TActionItem | number)[],
-    successCallback?: (...args: unknown[]) => unknown,
-    abortCallback?: (...args: unknown[]) => unknown,
-  )=> changeAIAgentsQuotaImpl(this, items, successCallback, abortCallback);
-
   disableRoomQuota = async (items: (TActionItem | number)[], t: TTranslation)=> disableRoomQuotaImpl(this, items, t);
 
-  disableAIAgentQuota = async (
-    items: (TActionItem | number)[],
-    t: TTranslation,
-  )=> disableAIAgentQuotaImpl(this, items, t);
-
   resetRoomQuota = async (items: (TActionItem | number)[], t: TTranslation)=> resetRoomQuotaImpl(this, items, t);
-
-  resetAIAgentQuota = async (
-    items: (TActionItem | number)[],
-    t: TTranslation,
-  )=> resetAIAgentQuotaImpl(this, items, t);
 
   getOption = (option: string, t: TTranslation)=> getOptionImpl(this, option, t);
 
   getRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getRoomsFolderOptionsImpl(this, itemsCollection, t);
-
-  getAIAgentsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getAIAgentsFolderOptionsImpl(this, itemsCollection, t);
 
   getArchiveRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getArchiveRoomsFolderOptionsImpl(this, itemsCollection, t);
 
@@ -826,8 +818,6 @@ class FilesActionStore {
 
   moveToRoomsPage = ()=> moveToRoomsPageImpl(this);
 
-  moveToAIAgentsPage = ()=> moveToAIAgentsPageImpl(this);
-
   moveToPublicRoom = (folderId?: number | string)=> moveToPublicRoomImpl(this, folderId);
 
   backToParentFolder = async ()=> backToParentFolderImpl(this);
@@ -854,7 +844,8 @@ class FilesActionStore {
 
   copyFromTemplateForm = async (fileInfo: TFile)=> copyFromTemplateFormImpl(this, fileInfo);
 
-  copyFileToAiKnowledge = async (filesInfo: TActionItem[])=> copyFileToAiKnowledgeImpl(this, filesInfo);
+  copyFilesToKnowledgeRoom = async (filesInfo: TActionItem[]) =>
+    copyFilesToKnowledgeRoomImpl(this, filesInfo);
 
   setListOrder = (
     startIndex: number,

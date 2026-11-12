@@ -135,11 +135,10 @@ test.describe("Wallet low balance banner", () => {
     await expect(header).toBeVisible();
     await expect(header).toHaveText("Your credits are running low: $0.60");
 
-    await expect(
-      banner(page).getByText(
-        "Top up your wallet to avoid interruptions to paid services.",
-      ),
-    ).toBeVisible();
+    // By test id: the banner's hidden announcement region repeats its text.
+    await expect(banner(page).getByTestId("snackbar-message")).toContainText(
+      "Top up your wallet to avoid interruptions to paid services.",
+    );
 
     await expectScreenshot(page, [
       "desktop",
@@ -187,11 +186,9 @@ test.describe("Wallet low balance banner", () => {
     await expect(header).toBeVisible();
     await expect(header).toHaveText("Your credits are running low: $0.60");
 
-    await expect(
-      banner(page).getByText(
-        "Contact the Payer (Test Payer) to top up the wallet and avoid interruptions to paid services.",
-      ),
-    ).toBeVisible();
+    await expect(banner(page).getByTestId("snackbar-message")).toContainText(
+      "Contact the Payer (Test Payer) to top up the wallet and avoid interruptions to paid services.",
+    );
 
     await expectScreenshot(page, [
       "desktop",
@@ -216,11 +213,9 @@ test.describe("Wallet low balance banner", () => {
     await expect(header).toBeVisible();
     await expect(header).toHaveText("Your credits are running low: $0.60");
 
-    await expect(
-      banner(page).getByText(
-        "Contact the Payer (gone.payer@example.com) to top up the wallet and avoid interruptions to paid services.",
-      ),
-    ).toBeVisible();
+    await expect(banner(page).getByTestId("snackbar-message")).toContainText(
+      "Contact the Payer (gone.payer@example.com) to top up the wallet and avoid interruptions to paid services.",
+    );
 
     const mailtoLink = banner(page).locator(
       'a[href="mailto:gone.payer@example.com"]',
@@ -249,8 +244,11 @@ test.describe("Wallet low balance banner", () => {
     await page.goto(`${baseUrl}${PAGE_URL}`);
 
     // Only the low balance banner matters: the shared mocks may render other
-    // quota bars of their own.
-    const header = page.getByText("Your credits are running low: $0.60");
+    // quota bars of their own. By the header test id: the snackbar also
+    // repeats its text in a visually hidden live region for screen readers.
+    const header = page
+      .getByTestId("snackbar-header")
+      .filter({ hasText: "Your credits are running low: $0.60" });
 
     await expect(page.getByTestId("table-body")).toBeVisible();
     await expect(header).toBeHidden();

@@ -185,11 +185,24 @@ const ClientForm = ({
         }
       )?.response?.data?.errors;
 
+      // The service sends no error code for the client limits, only this text.
+      const detail = (e as { response?: { data?: { detail?: unknown } } })
+        ?.response?.data?.detail;
+      const limitReached =
+        typeof detail === "string" &&
+        detail.includes("maximum allowed number of clients");
+
       if (serverErrors && serverErrors.length > 0) {
         setServerFieldErrors(
           Object.fromEntries(
             serverErrors.map((item) => [item.field, item.code]),
           ),
+        );
+      } else if (limitReached) {
+        toastr.error(
+          detail.startsWith("Tenant")
+            ? t("AppsLimitReachedWorkspace")
+            : t("AppsLimitReached"),
         );
       } else {
         toastr.error(e as unknown as TData);

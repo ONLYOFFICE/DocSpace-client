@@ -46,6 +46,7 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import { loadPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
 import { Nullable } from "@docspace/shared/types";
 import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
@@ -77,6 +78,7 @@ export const useMembers = ({
     "CreateEditRoomDialog",
   ]);
   const [searchValue, setSearchValue] = React.useState("");
+  const { getRoomMembers } = api.rooms;
   const [filter, setFilter] = React.useState({
     page: 0,
     startIndex: 0,
@@ -217,27 +219,30 @@ export const useMembers = ({
     const isTemplate = room.isTemplate;
     const security = room.security;
 
+    // Spec: private-rooms/room-membership, "Partial re-encryption failure is reported"
+    if (room.private && security?.EditAccess) {
+      loadPendingAccess(Number(roomId));
+    }
+
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom ||
       roomType === RoomsType.CustomRoom ||
       roomType === RoomsType.FormRoom;
 
     const requests = [
-      api.rooms
-        .getRoomMembers(
-          roomId,
-          {
-            filterType: 0,
-            startIndex: 0,
-            count: PAGE_COUNT,
-            filterValue: searchValue,
-          },
-          abortController.current?.signal,
-        )
-        .then((res) => {
-          setTotal(res.total);
-          return res.items;
-        }),
+      getRoomMembers(
+        roomId,
+        {
+          filterType: 0,
+          startIndex: 0,
+          count: PAGE_COUNT,
+          filterValue: searchValue,
+        },
+        abortController.current?.signal,
+      ).then((res) => {
+        setTotal(res.total);
+        return res.items;
+      }),
     ];
 
     // abortController.current = null;
@@ -250,17 +255,15 @@ export const useMembers = ({
       roomId
     ) {
       requests.push(
-        api.rooms
-          .getRoomMembers(
-            roomId,
-            {
-              filterType: 2,
-            },
-            abortController.current?.signal,
-          )
-          .then((res) => {
-            return res.items;
-          }),
+        getRoomMembers(
+          roomId,
+          {
+            filterType: 2,
+          },
+          abortController.current?.signal,
+        ).then((res) => {
+          return res.items;
+        }),
       );
     }
 
@@ -280,7 +283,15 @@ export const useMembers = ({
       if (axios.isCancel(error)) return;
       console.error(error);
     }
-  }, [room?.id, room?.roomType, room?.isTemplate, room?.security, searchValue]);
+    }, [
+    room?.id,
+    room?.roomType,
+    room?.isTemplate,
+    room?.security,
+    room?.private,
+    searchValue,
+    getRoomMembers,
+  ]);
 
   const fetchMoreMembers = async () => {
     setIsLoading(true);
@@ -293,7 +304,7 @@ export const useMembers = ({
     });
 
     try {
-      const data = await api.rooms.getRoomMembers(room.id, {
+      const data = await getRoomMembers(room.id, {
         filterType: 0,
         startIndex: newStartIndex,
         count: PAGE_COUNT,
@@ -396,7 +407,7 @@ export const useMembers = ({
           const newStartIndex = filter.startIndex + PAGE_COUNT - 1;
           const newPageCount = 1;
 
-          const data = await api.rooms.getRoomMembers(room.id, {
+          const data = await getRoomMembers(room.id, {
             filterType: 0,
             startIndex: newStartIndex,
             count: newPageCount,

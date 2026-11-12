@@ -3,7 +3,7 @@
   "content": "Try again",
   "content_en_sha1_hash": "042c862e4467d7d057cced262e6869dd75c22b7d",
   "created_at": "2025-10-27T16:14:24.460Z",
-  "updated_at": "2026-08-26T14:08:33.171Z",
+  "updated_at": "2026-11-09T09:26:33.620Z",
   "comment": {
     "text": "This is a button label that appears when an error occurs or a service is unavailable, allowing the user to retry the action or check availability.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 320,
+      "context": "</span>\n <Button\n className={styles.resetButton}\n size={ButtonSize.small}\n onClick={loadKeys}\n label={t(\"Common:TryAgain\")}\n />\n </div>\n ) : null}\n <div className={styles.contentBody}>\n {offerNewKey ? (",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/error.tsx",
       "line_number": 109,
@@ -30,6 +36,12 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
+      "line_number": 264,
+      "context": "fontSize=\"12px\"\n isSemitransparent={isRetrying}\n onClick={onRetryAccess}\n dataTestId=\"private_member_retry_access\"\n >\n {t(\"Common:TryAgain\")}\n </Link>\n ) : null}\n </div>\n ) : typeLabel ? (\n <Text className={styles.userSubtitle} truncate>",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(private)/error.tsx",
       "line_number": 82,
       "context": "<p style={{ margin: 0, opacity: 0.7 }}>\n {error.message || \"Unexpected error in private rooms client\"}\n </p>\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:TryAgain\")}\n onClick={reset}\n primary\n />\n </div>\n );",
@@ -37,8 +49,14 @@
     },
     {
       "file_path": "/packages/shared/components/failed-vectorization-badge/index.tsx",
-      "line_number": 85,
+      "line_number": 92,
       "context": "<Link\n type={LinkType.action}\n fontWeight={600}\n onClick={onRetryVectorization}\n >\n {t(\"Common:TryAgain\")}\n </Link>\n ) : null}\n </div>\n );\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/User.tsx",
+      "line_number": 270,
+      "context": "fontSize=\"12px\"\n isSemitransparent={isRetrying}\n onClick={handleRetryAccess}\n dataTestId=\"info_panel_members_user_retry_access\"\n >\n {t(\"Common:TryAgain\")}\n </Link>\n ) : null}\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }
   ],

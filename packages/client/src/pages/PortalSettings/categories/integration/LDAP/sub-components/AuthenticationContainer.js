@@ -105,7 +105,6 @@ const AuthenticationContainer = ({
 						value={login}
 						isDisabled={!isLdapEnabled || isUIDisabled || !authentication}
 						scale
-						tabIndex={18}
 					/>
 				</FieldContainer>
 
@@ -128,7 +127,6 @@ const AuthenticationContainer = ({
 						value={password}
 						isDisabled={!isLdapEnabled || isUIDisabled || !authentication}
 						scale
-						tabIndex={19}
 						simpleView
 						size={InputSize.base}
 						autoComplete="current-password"

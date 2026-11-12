@@ -48,8 +48,10 @@ import {
 
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { formatterCurrencyWithoutTranction } from "@onlyoffice/apps-ui-kit/billing/wallet/utils";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
+import { getEffectiveFraction } from "@onlyoffice/apps-ui-kit/billing/wallet/utils";
 
+import { formatCurrencyIsolated } from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { parseAiPrices } from "@onlyoffice/apps-ui-kit/billing/utils/parsers";
 import type { TAiToolsPrices } from "@onlyoffice/apps-ui-kit/billing/types";
 
@@ -118,11 +120,20 @@ class ServicesStore {
   formatAiModelsCurrency = (amount: number) => {
     const { language } = authStore;
 
-    return formatterCurrencyWithoutTranction(
-      language,
-      amount,
-      this.aiModelsCurrency,
+    const fractionDigits = Math.min(
+      Math.max(2, getEffectiveFraction(amount, /e/i.test(String(amount)))),
+      20,
     );
+
+    const formatter = new Intl.NumberFormat(language, {
+      numberingSystem: LATIN_NUMBERING_SYSTEM,
+      style: "currency",
+      currency: this.aiModelsCurrency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: fractionDigits,
+    });
+
+    return formatCurrencyIsolated(language, formatter, amount);
   };
 
   formatAiModelPrice = (amount?: number) =>

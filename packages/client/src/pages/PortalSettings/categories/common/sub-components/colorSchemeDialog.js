@@ -33,11 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { withTranslation } from "react-i18next";
+
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
-import { useEffect } from "react";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
-import { withTranslation } from "react-i18next";
+import { activateOnButtonKey } from "@onlyoffice/apps-ui-kit/utils/keyboard-activation";
 import styles from "./colorSchemeDialog.module.scss";
 
 const ColorSchemeDialog = (props) => {
@@ -56,6 +57,9 @@ const ColorSchemeDialog = (props) => {
     currentColorButtons,
   } = props;
 
+  // The colour swatches are buttons to the keyboard.
+  const onClickColorKeyDown = (e) => activateOnButtonKey(e, onClickColor);
+
   const accentBg = currentColorAccent
     ? currentColorAccent
     : `var(--settings-appearance-theme-add-bg) url(${PlusThemeSvgUrl}) no-repeat center`;
@@ -63,14 +67,6 @@ const ColorSchemeDialog = (props) => {
   const buttonsBg = currentColorButtons
     ? currentColorButtons
     : `var(--settings-appearance-theme-add-bg) url(${PlusThemeSvgUrl}) no-repeat center`;
-
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return () => window.removeEventListener("keyup", onKeyPress);
-  }, [onClose]);
 
   return (
     <ModalDialog
@@ -90,6 +86,10 @@ const ColorSchemeDialog = (props) => {
               className={styles.modalAddTheme}
               style={{ background: accentBg }}
               data-testid="color_scheme_dialog_accent"
+              role="button"
+              tabIndex={0}
+              aria-label={t("Settings:AccentColor")}
+              onKeyDown={onClickColorKeyDown}
               onClick={onClickColor}
             />
 
@@ -97,14 +97,16 @@ const ColorSchemeDialog = (props) => {
           </div>
 
           <div className={`${styles.flex} ${styles.relative}`}>
-            <div className={styles.nameColor}>
-              {t("Settings:ButtonsColor")}
-            </div>
+            <div className={styles.nameColor}>{t("Settings:ButtonsColor")}</div>
             <div
               id="buttons"
               className={styles.modalAddTheme}
               style={{ background: buttonsBg }}
               data-testid="color_scheme_dialog_buttons"
+              role="button"
+              tabIndex={0}
+              aria-label={t("Settings:ButtonsColor")}
+              onKeyDown={onClickColorKeyDown}
               onClick={onClickColor}
             />
 

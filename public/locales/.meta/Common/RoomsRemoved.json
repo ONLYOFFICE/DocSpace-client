@@ -3,7 +3,7 @@
   "content": "Rooms removed",
   "content_en_sha1_hash": "b7f6fbe672117d78dda530804dc9a74efcd4e510",
   "created_at": "2025-05-19T21:30:56.133Z",
-  "updated_at": "2026-10-02T12:15:32.418Z",
+  "updated_at": "2026-11-09T17:07:34.780Z",
   "comment": {
     "text": "This is a toast message confirming the successful removal of multiple rooms. It appears after a user deletes several rooms.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 137,
-      "context": "successRemoveRoom: isAIAgent\n ? t(\"Common:AgentRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Common:AgentsRemoved\")\n : t(\"Common:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");\n }",
+      "line_number": 156,
+      "context": "successRemoveRoom: isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isFormSpace\n ? t(\"Common:SpacesRemoved\")\n : t(\"Common:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 518,
+      "line_number": 521,
       "context": "let translations: Record<string, string>;\n \n if (isRoom) {\n translations = {\n successRemoveRoom: t(\"Common:RoomRemoved\"),\n successRemoveRooms: t(\"Common:RoomsRemoved\"),\n };\n \n deleteRoomsAction([selectedFolderId], translations).catch((err: unknown) =>\n toastr.error(err as string),\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/delete.helpers.ts",
-      "line_number": 705,
+      "line_number": 695,
       "context": "items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Common:RoomRemoved\"),\n successRemoveRooms: t(\"Common:RoomsRemoved\"),\n };\n \n self.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-list/index.tsx",
-      "line_number": 507,
+      "line_number": 510,
       "context": "setTotal((prev) => Math.max(0, prev - roomIds.length));\n setSelection([]);\n setBufferSelection(null);\n toastr.success(\n roomIds.length > 1\n ? t(\"Common:RoomsRemoved\")\n : t(\"Common:RoomRemoved\"),\n );\n } catch (e) {\n opAlert = true;\n toastr.error(e as Error);",
       "module": "/packages/sdk"
     }

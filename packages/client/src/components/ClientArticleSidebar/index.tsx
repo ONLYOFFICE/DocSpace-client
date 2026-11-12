@@ -63,6 +63,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import type {
   NavMenuGroup,
@@ -71,16 +72,24 @@ import type {
 } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
+import {
+  AI_HUB_SECTION_FOLDER_TYPES,
+  ROOMS_SECTION_FOLDER_TYPES,
+} from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
+import CatalogSkillsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import CatalogKnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 import {
   buildFolderUrl,
@@ -90,6 +99,8 @@ import {
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 
+import styles from "./ClientArticleSidebar.module.scss";
+
 type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
   treeFolders: TTreeFolder[];
@@ -98,11 +109,22 @@ type ClientArticleSidebarProps = FolderIds & {
   // former Rooms/Templates submenu (and the Use template quick action).
   canUseTemplates?: boolean;
   isTemplatesFolderRoot?: boolean;
+  isDocumentsFolder?: boolean;
   isNavLoading?: boolean;
   // The portal-wide AI switch (Settings -> Integration -> AI services). With it
-  // off there is no AI in the portal at all, so the AI Agents app is dropped
+  // off there is no AI in the portal at all, so the AI Projects app is dropped
   // from the catalog rather than left pointing at a section that cannot work.
   aiServicesEnabled?: boolean;
+  // Settings -> Apps (standalone only): a switched-off app is not on offer, so
+  // its section is left out of the sidebar altogether.
+  roomsInstalled?: boolean;
+  formsInstalled?: boolean;
+  privateRoomsSectionAvailable?: boolean;
+  ensureAppsLoaded?: () => void;
+  // The Trash item offers "Empty trash" while there is something to empty.
+  trashIsEmpty?: boolean;
+  emptyTrashInProgress?: boolean;
+  setEmptyTrashDialogVisible?: (visible: boolean) => void;
   onFolderNavigate: () => void;
 };
 
@@ -112,8 +134,16 @@ const ClientArticleSidebar = ({
   isVisitor,
   canUseTemplates,
   isTemplatesFolderRoot,
+  isDocumentsFolder,
   isNavLoading,
   aiServicesEnabled = true,
+  roomsInstalled = true,
+  formsInstalled = true,
+  privateRoomsSectionAvailable = false,
+  ensureAppsLoaded,
+  trashIsEmpty = true,
+  emptyTrashInProgress,
+  setEmptyTrashDialogVisible,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -130,17 +160,24 @@ const ClientArticleSidebar = ({
 
   const aiChatStore = useAiChatStoreOptional();
 
+  React.useEffect(() => {
+    ensureAppsLoaded?.();
+  }, [ensureAppsLoaded]);
+
   // Every sidebar entry is described by the URL it opens, so the same target
   // can be rendered as a real <a href> (Ctrl/Cmd-click and "Open link in new
   // tab" work) and still navigate in-app on a plain click. `nav()` builds the
-  // { linkData, onClick } pair every item spreads in.
+  // { linkData, onClick } pair every item spreads in. An entry drawn as a link
+  // navigates by itself (`meta.isLink`); navigating here too pushed the same
+  // history entry twice. A section header with a sub-menu is a button and
+  // still needs it.
   const nav = React.useCallback(
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
-      onClick: () => {
+      onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
         aiChatStore?.setFullscreen(false);
         onFolderNavigateRef.current?.();
-        navigate(path);
+        if (!meta?.isLink) navigate(path);
       },
     }),
     [navigate],
@@ -149,14 +186,6 @@ const ClientArticleSidebar = ({
   const folderUrl = React.useCallback(
     (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
       buildFolderUrl(folderId, rootFolderType, userId),
-    [userId],
-  );
-
-  // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
-  // /ai-agents/* so the sidebar keeps the selection under AI Agents.
-  const agentFolderUrl = React.useCallback(
-    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
-      buildFolderUrl(folderId, rootFolderType, userId, true),
     [userId],
   );
 
@@ -193,6 +222,19 @@ const ClientArticleSidebar = ({
     [userId],
   );
 
+  // The AI Workspace list narrowed to one of its room types: the section's
+  // Skills (Instructions rooms) and Knowledge (Knowledge rooms) entries
+  // are the same /ai-rooms list with the `type` filter preset.
+  const aiHubTypeUrl = React.useCallback(
+    (type: RoomsType) => {
+      const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
+      filter.searchArea = RoomSearchArea.AiHub;
+      filter.type = [String(type)];
+      return `/ai-rooms/filter?${filter.toUrlParams(userId, false)}`;
+    },
+    [userId],
+  );
+
   const activeId = React.useMemo(
     () =>
       getClientActiveId(
@@ -200,8 +242,15 @@ const ClientArticleSidebar = ({
         folderIds,
         location.search,
         isTemplatesFolderRoot,
+        isDocumentsFolder,
       ),
-    [location.pathname, location.search, folderIds, isTemplatesFolderRoot],
+    [
+      location.pathname,
+      location.search,
+      folderIds,
+      isTemplatesFolderRoot,
+      isDocumentsFolder,
+    ],
   );
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
@@ -224,7 +273,6 @@ const ClientArticleSidebar = ({
 
     const panelFolderId = (folder: TTreeFolder): string | number => {
       if (folder.rootFolderType === FolderType.Rooms) return "rooms";
-      if (folder.rootFolderType === FolderType.AIAgents) return "agents";
       if (folder.rootFolderType === FolderType.Forms) return "forms";
       return folder.id;
     };
@@ -285,8 +333,8 @@ const ClientArticleSidebar = ({
     const recentFolder = find(FolderType.Recent);
     const favFolder = find(FolderType.Favorites);
     const trashFolder = find(FolderType.TRASH);
-    const aiAgentsFolder = find(FolderType.AIAgents);
     const formsFolder = find(FolderType.Forms);
+    const aiHubFolder = find(FolderType.AiHub);
 
     const mainItems: NavMenuItem[] = [];
 
@@ -313,13 +361,32 @@ const ClientArticleSidebar = ({
       // Guests can't view or manage Files (their own files/Trash), so
       // that section is dropped and the top-level item opens Shared with me
       // instead of the (inaccessible) Files folder.
-      if (!isVisitor && myDocsFolder && trashFolder)
+      if (!isVisitor && myDocsFolder && trashFolder) {
+        const canEmptyTrash =
+          !trashIsEmpty && !emptyTrashInProgress && !!setEmptyTrashDialogVisible;
         children.push(
           navItem(trashFolder, {
             withTopSeparator: true,
-            ...sectionBadge(trashFolder.id, newCount(trashFolder)),
+            ...(canEmptyTrash
+              ? {
+                  showBadge: true,
+                  badgeComponent: (
+                    <button
+                      type="button"
+                      className={styles.emptyTrashBadge}
+                      title={t("Common:EmptyTrash")}
+                      aria-label={t("Common:EmptyTrash")}
+                      onClick={() => setEmptyTrashDialogVisible?.(true)}
+                      data-testid="empty-trash-badge"
+                    >
+                      <ReactSVG src={ClearTrashReactSvgUrl} aria-hidden="true" />
+                    </button>
+                  ),
+                }
+              : sectionBadge(trashFolder.id, newCount(trashFolder))),
           }),
         );
+      }
 
       const primaryFolder = myDocsFolder ?? sharedFolder;
 
@@ -342,7 +409,7 @@ const ClientArticleSidebar = ({
       });
     }
 
-    if (roomsFolder) {
+    if (roomsFolder && roomsInstalled) {
       mainItems.push({
         ...navItem(roomsFolder),
         ...sectionBadge(panelFolderId(roomsFolder), newCount(roomsFolder)),
@@ -420,7 +487,7 @@ const ClientArticleSidebar = ({
     // The backend serves them via `searchArea=Forms` (they are excluded from the
     // Active rooms listing), so the item points at the dedicated /forms route
     // scoped to that search area.
-    if (roomsFolder) {
+    if (roomsFolder && formsInstalled) {
       mainItems.push({
         id: "forms",
         label: t("Common:Forms"),
@@ -486,63 +553,79 @@ const ClientArticleSidebar = ({
       });
     }
 
-    // AI Agents sits right after Rooms as a top-level item, with the
-    // Recent/Favorites/Trash sections nested beneath it. These reuse the
-    // portal-wide aliases (@recent/@favorites/@trash) — the same targets as
-    // the My Documents sections — mirroring the SDK agents sections. Unique
-    // sidebar ids keep them distinct from the My Documents entries.
-    // The folder is served whether or not the portal has AI switched on, so
-    // the switch is asked here as well: with AI off the app is not on offer.
-    if (aiAgentsFolder && aiServicesEnabled) {
-      const agentChildren: NavSubItem[] = [];
-      if (recentFolder)
-        agentChildren.push(
-          navItem(recentFolder, {
-            id: "agents-recent",
-            ...sectionBadge(recentFolder.id, newCount(recentFolder)),
-            ...nav(
-              agentFolderUrl(recentFolder.id, recentFolder.rootFolderType),
-            ),
-          }),
-        );
-      if (favFolder)
-        agentChildren.push(
-          navItem(favFolder, {
-            id: "agents-favorites",
-            ...sectionBadge(favFolder.id, newCount(favFolder)),
-            ...nav(agentFolderUrl(favFolder.id, favFolder.rootFolderType)),
-          }),
-        );
-      if (trashFolder)
-        agentChildren.push(
-          navItem(trashFolder, {
-            id: "agents-trash",
-            withTopSeparator: true,
-            ...sectionBadge(trashFolder.id, newCount(trashFolder)),
-            ...nav(agentFolderUrl(trashFolder.id, trashFolder.rootFolderType)),
-          }),
-        );
-
-      const agentsItem: NavMenuItem = {
-        ...navItem(aiAgentsFolder),
-        ...sectionBadge(
-          panelFolderId(aiAgentsFolder),
-          newCount(aiAgentsFolder),
+    // Spec: private-rooms/sidebar-section, "No new-items counter on the section item"
+    if (roomsFolder && privateRoomsSectionAvailable) {
+      mainItems.push({
+        id: "private-rooms",
+        label: t("Common:Private"),
+        icon: CatalogPrivateReactSvgUrl,
+        ...nav(searchAreaUrl("/private/filter", RoomSearchArea.Active)),
+        badgeComponent: (
+          <BetaBadge
+            place="right-start"
+            title={t("Common:PrivateRoomsBetaTitle")}
+            description={t("Common:PrivateRoomsBetaDescription")}
+            dataTestId="private_rooms_beta_badge"
+          />
         ),
-      };
-      mainItems.push(
-        agentChildren.length > 0
-          ? {
-              ...agentsItem,
-              ...collapsedBadge(aiAgentsFolder, [
-                recentFolder,
-                favFolder,
-                trashFolder,
-              ]),
-              children: agentChildren,
-            }
-          : agentsItem,
-      );
+        children: [
+          {
+            id: "private-rooms-archive",
+            label: t("Common:Archive"),
+            icon: getCatalogIconUrlByType(FolderType.Archive),
+            ...nav(
+              searchAreaUrl("/private/archived/filter", RoomSearchArea.Archive),
+            ),
+          },
+        ],
+      });
+    }
+
+    // The AI sections close the apps, while the portal has AI switched on
+    // (the server only serves their roots then). "AI Workspace" holds the
+    // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`).
+    // Its root lists the agents (AI projects; a project opens as its chat),
+    // the entries are the same list narrowed to the other room types -
+    // Skills (Instructions rooms), Knowledge (Knowledge rooms) - plus a
+    // Trash scoped to those room types; the server never archives them, so
+    // there is no Archive slot. The bare `/ai-rooms` is the
+    // Rooms app's SDK frame page: the section lives on the nested paths.
+    if (aiHubFolder && aiServicesEnabled) {
+      mainItems.push({
+        id: "ai-rooms",
+        label: t("Common:AiWorkspace"),
+        icon: getCatalogIconUrlByType(FolderType.Rooms),
+        ...nav(searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub)),
+        ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),
+        children: [
+          {
+            id: "ai-rooms-skills",
+            label: t("Common:Skills"),
+            icon: CatalogSkillsReactSvgUrl,
+            ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),
+          },
+          {
+            id: "ai-rooms-knowledge",
+            label: t("Common:AiWorkspaceKnowledge"),
+            icon: CatalogKnowledgeReactSvgUrl,
+            ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),
+          },
+          {
+            id: "ai-rooms-trash",
+            label: t("Common:TrashSection"),
+            icon: getCatalogIconUrlByType(FolderType.TRASH),
+            ...nav(
+              scopedUrl(
+                CategoryType.Trash,
+                "/ai-rooms/trash",
+                recycleBinFolderId,
+                AI_HUB_SECTION_FOLDER_TYPES,
+              ),
+            ),
+            withTopSeparator: true,
+          },
+        ],
+      });
     }
 
     return [
@@ -564,17 +647,23 @@ const ClientArticleSidebar = ({
     t,
     nav,
     folderUrl,
-    agentFolderUrl,
     scopedUrl,
     searchAreaUrl,
+    aiHubTypeUrl,
     treeFolders,
     isVisitor,
     canUseTemplates,
     aiServicesEnabled,
+    roomsInstalled,
+    formsInstalled,
+    privateRoomsSectionAvailable,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
     userId,
+    trashIsEmpty,
+    emptyTrashInProgress,
+    setEmptyTrashDialogVisible,
   ]);
 
   return (
@@ -593,8 +682,11 @@ const ClientArticleSidebarConnected = inject<TStore>(
     userStore,
     treeFoldersStore,
     filesStore,
+    filesActionsStore,
+    dialogsStore,
     clientLoadingStore,
     settingsStore,
+    appsStore,
   }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
@@ -605,12 +697,19 @@ const ClientArticleSidebarConnected = inject<TStore>(
     favoritesFolderId: treeFoldersStore.favoritesFolderId,
     recycleBinFolderId: treeFoldersStore.recycleBinFolderId,
     sharedWithMeFolderId: treeFoldersStore.sharedWithMeFolderId,
-    aiAgentsFolderId: treeFoldersStore.aiAgentsFolderId,
     isVisitor: userStore.user?.isVisitor,
     // Matches Home's canCreateRooms — room admins and admins can use templates.
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
+    isDocumentsFolder: treeFoldersStore.isDocumentsFolder,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
+    roomsInstalled: appsStore.isInstalled("ai-rooms"),
+    formsInstalled: appsStore.isInstalled("ai-forms"),
+    privateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
+    ensureAppsLoaded: appsStore.ensureLoaded,
+    trashIsEmpty: filesStore.trashIsEmpty,
+    emptyTrashInProgress: filesActionsStore.emptyTrashInProgress,
+    setEmptyTrashDialogVisible: dialogsStore.setEmptyTrashDialogVisible,
     // Same signal the old article used to show <ArticleFolderLoader />.
     isNavLoading: clientLoadingStore.showArticleLoader,
     onFolderNavigate: () => {

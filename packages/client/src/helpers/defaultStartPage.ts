@@ -39,10 +39,13 @@ import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { getUrlByDefaultFolderType } from "./utils";
 
 export type TStartPageContext = {
-  /** The portal's AI switch. Gates the AI Agents section entirely. */
-  aiServicesEnabled?: boolean;
   /** Guests have no personal Files section. */
   isGuest?: boolean;
+  /**
+   * The portal has AI switched on. The "AI rooms" section exists only then,
+   * and never for a guest, who is barred from AI.
+   */
+  aiServicesEnabled?: boolean;
 };
 
 /**
@@ -50,16 +53,13 @@ export type TStartPageContext = {
  * user right now. Both the setting's own option list and entry routing ask
  * this, so a section that has been taken away can never stay selected in one
  * place while still being navigated to in the other.
- *
- * The AI Agents routes sit behind `PrivateRoute requireAIServices`, so sending
- * a user there with AI services off answers 404 rather than opening a section.
  */
 export const isStartPageAvailable = (
   folderType: FolderType,
-  { aiServicesEnabled = true, isGuest = false }: TStartPageContext = {},
+  { isGuest = false, aiServicesEnabled = false }: TStartPageContext = {},
 ) => {
-  if (folderType === FolderType.AIAgents) return aiServicesEnabled;
   if (folderType === FolderType.USER) return !isGuest;
+  if (folderType === FolderType.AiHub) return aiServicesEnabled && !isGuest;
 
   return true;
 };

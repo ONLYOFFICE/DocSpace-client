@@ -36,7 +36,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
+  DEVICE_UNLOCK_MAX_AGE_MS,
   forgetDeviceUnlock,
+  getDeviceUnlockWrittenAt,
   hasDeviceUnlock,
   persistDeviceUnlock,
   restoreDeviceUnlock,
@@ -109,6 +111,66 @@ describe("device-unlock-store", () => {
     expect(restored).not.toBeNull();
     expect(new Uint8Array(restored!.privateKey)).toEqual(kp.privateKey);
     expect(new Uint8Array(restored!.publicKey)).toEqual(kp.publicKey);
+  });
+
+  describe("record age", () => {
+    const DAY = 24 * 60 * 60 * 1000;
+    const T0 = Date.UTC(2026, 9, 1);
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    const persistAt = async (time: number) => {
+      vi.spyOn(Date, "now").mockReturnValue(time);
+      await persistDeviceUnlock("user-1", publicKeyB64, kp);
+    };
+    const restoreAt = (time: number) => {
+      vi.spyOn(Date, "now").mockReturnValue(time);
+      return restoreDeviceUnlock("user-1", publicKeyB64);
+    };
+
+    it("restores a record within the maximum age", async () => {
+      await persistAt(T0);
+
+      const restored = await restoreAt(T0 + 29 * DAY);
+
+      expect(restored).not.toBeNull();
+      expect(DEVICE_UNLOCK_MAX_AGE_MS).toBe(30 * DAY);
+    });
+
+    it("Record older than the maximum age: no key is returned and the record is deleted", async () => {
+      await persistAt(T0);
+
+      expect(await restoreAt(T0 + 31 * DAY)).toBeNull();
+      expect(fake.records.has("user-1")).toBe(false);
+    });
+
+    it("Record older than the maximum age: a timestamp in the future is treated as expired", async () => {
+      await persistAt(T0 + DAY);
+
+      expect(await restoreAt(T0)).toBeNull();
+      expect(fake.records.has("user-1")).toBe(false);
+    });
+
+    it("reports when a live record was written, and null for a missing or expired one", async () => {
+      vi.spyOn(Date, "now").mockReturnValue(T0);
+      expect(await getDeviceUnlockWrittenAt("user-1")).toBeNull();
+
+      await persistAt(T0);
+      vi.spyOn(Date, "now").mockReturnValue(T0 + 10 * DAY);
+      expect(await getDeviceUnlockWrittenAt("user-1")).toBe(T0);
+
+      vi.spyOn(Date, "now").mockReturnValue(T0 + 31 * DAY);
+      expect(await getDeviceUnlockWrittenAt("user-1")).toBeNull();
+    });
+
+    it("Successful passphrase unlock refreshes the record", async () => {
+      await persistAt(T0);
+      await persistAt(T0 + 31 * DAY);
+
+      expect(await restoreAt(T0 + 32 * DAY)).not.toBeNull();
+    });
   });
 
   it("hasDeviceUnlock reflects persisted state; forget clears it", async () => {

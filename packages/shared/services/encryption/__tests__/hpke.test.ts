@@ -460,3 +460,50 @@ describe("hpke input validation (size checks)", () => {
     );
   });
 });
+
+describe("Wrapping refuses an erased key", () => {
+  let alice: IdentityKeyPair;
+  let bob: IdentityKeyPair;
+
+  beforeAll(async () => {
+    alice = await generateIdentityKeyPair();
+    bob = await generateIdentityKeyPair();
+  });
+
+  it("All-zero private key", async () => {
+    await expect(
+      wrapDEK({
+        dek: generateDEK(),
+        senderPrivateKey: new Uint8Array(32),
+        senderPublicKey: alice.publicKey,
+        senderUserId: ALICE_ID,
+        recipientPublicKey: bob.publicKey,
+        recipientUserId: BOB_ID,
+        fileId: 42,
+      }),
+    ).rejects.toBeInstanceOf(InvalidFormatError);
+  });
+
+  it("refuses to unwrap with an all-zero private key", async () => {
+    const wrapped = await wrapDEK({
+      dek: generateDEK(),
+      senderPrivateKey: alice.privateKey,
+      senderPublicKey: alice.publicKey,
+      senderUserId: ALICE_ID,
+      recipientPublicKey: bob.publicKey,
+      recipientUserId: BOB_ID,
+      fileId: 42,
+    });
+
+    await expect(
+      unwrapDEK({
+        wrapped,
+        recipientPrivateKey: new Uint8Array(32),
+        recipientUserId: BOB_ID,
+        expectedSenderPublicKey: alice.publicKey,
+        expectedSenderUserId: ALICE_ID,
+        fileId: 42,
+      }),
+    ).rejects.toBeInstanceOf(InvalidFormatError);
+  });
+});

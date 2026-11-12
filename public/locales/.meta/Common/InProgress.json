@@ -3,7 +3,7 @@
   "content": "In progress",
   "content_en_sha1_hash": "b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18",
   "created_at": "2025-05-19T21:30:45.918Z",
-  "updated_at": "2026-09-14T20:38:41.351Z",
+  "updated_at": "2026-11-02T07:10:46.702Z",
   "comment": {
     "text": "This label indicates that an operation or process is currently running. It appears in a dialog showing the status of a data reassignment and as a section title in the forms module.",
     "is_auto": true,
@@ -19,20 +19,32 @@
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/index.tsx",
-      "line_number": 298,
-      "context": "ShareAccessRights.FormFilling,\n ],\n // The two system folders the tour walks the user through inside a space,\n // named by the labels the product already uses for them.\n contents: {\n inProgressTitle: t(\"Common:InProgress\"),\n completeTitle: t(\"Common:Complete\"),\n },\n });\n \n // Fetched whether or not the list is being stood in for. The stand-in",
+      "line_number": 375,
+      "context": "memberAccess: [\n ShareAccessRights.FormFilling,\n ShareAccessRights.FormFilling,\n ],\n contents: {\n inProgressTitle: t(\"Common:InProgress\"),\n completeTitle: t(\"Common:Complete\"),\n },\n }),\n [t, user, hasItems],\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 233,
-      "context": "showInsideSpace &&\n revealStep(\n IN_PROGRESS_SELECTOR,\n t(\"FormsTour:FormsInProgressTitle\"),\n t(\"FormsTour:FormsInProgress\", {\n inProgress: t(\"Common:InProgress\"),\n formFiller: t(\"Common:RoleFormFiller\"),\n }),\n callbacks,\n LOG_LABEL,\n spaceHooks,",
+      "line_number": 263,
+      "context": "launchHooks &&\n revealStep(\n LAUNCHED_BADGE_SELECTOR,\n t(\"FormsTour:FormsFillYourselfTitle\"),\n t(\"FormsTour:FormsFillYourself\", {\n inProgress: t(\"Common:InProgress\"),\n }),\n callbacks,\n FORMS_TOUR_LABEL,\n {\n reveal: () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 263,
+      "context": "launchHooks &&\n revealStep(\n LAUNCHED_BADGE_SELECTOR,\n t(\"FormsTour:FormsFillYourselfTitle\"),\n t(\"FormsTour:FormsFillYourself\", {\n inProgress: t(\"Common:InProgress\"),\n }),\n callbacks,\n FORMS_TOUR_LABEL,\n {\n reveal: () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 331,
+      "line_number": 315,
       "context": "onClick: handleAiFormsClick,\n children: aiFormsEnabled\n ? [\n {\n id: \"ai-forms-in-progress\",\n label: t(\"Common:InProgress\"),\n icon: FormFillRectSvgUrl,\n onClick: () => navigate(\"/ai-forms?section=in-progress\"),\n },\n {\n id: \"ai-forms-completed\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 168,
+      "context": "const { t } = useTranslation([\"Common\"]);\n switch (file.vectorizationStatus) {\n case VectorizationStatus.InProgress:\n return (\n <Text className={styles.fileState} fontSize=\"12px\" lineHeight=\"16px\" noSelect>\n {t(\"Common:InProgress\")}\n </Text>\n );\n case VectorizationStatus.Failed:\n return (\n <FailedVectorizationBadge",
       "module": "/packages/client"
     },
     {
@@ -61,7 +73,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 236,
+      "line_number": 240,
       "context": "case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:",
       "module": "/packages/shared"
     }

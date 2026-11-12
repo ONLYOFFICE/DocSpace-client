@@ -33,13 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-  TFileSecurity,
-  TFolderSecurity,
-} from "@docspace/shared/api/files/types";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { FilesSelectorFilterTypes, RoomsType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
 export const getHeaderLabel = (
@@ -100,61 +94,56 @@ export const getAcceptButtonLabel = (
   return t("Common:SaveHereButton");
 };
 
-export const getIsDisabled = (
-  isFirstLoad: boolean,
-  isSelectedParentFolder: boolean,
-  sameId?: boolean,
-  isRooms?: boolean,
-  isRoot?: boolean,
-  isCopy?: boolean,
-  isMove?: boolean,
-  isRestoreAll?: boolean,
-  isRequestRunning?: boolean,
-  security?: TFileSecurity | TFolderSecurity | TRoomSecurity,
-  filterParam?: string,
-  isFileSelected?: boolean,
-  includeFolder?: boolean,
-  isRestore?: boolean,
-  isDisabledFolder?: boolean,
-  isInsideKnowledge?: boolean,
-  isInsideResultStorage?: boolean,
-  isAgents?: boolean,
-  isInsidePrivateRoom?: boolean,
-  sourceIsPrivate?: boolean,
-) => {
-  if (isFirstLoad) return true;
-  if (isRequestRunning) return true;
-  if (isDisabledFolder) return true;
-  if (filterParam) return !isFileSelected;
-  if (sameId && !isCopy) return true;
-  if (sameId && isCopy && includeFolder) return true;
-  if (isRooms) return true;
-  if (isRoot) return true;
-  if (isSelectedParentFolder) return true;
-  if (
-    (isMove || isCopy || isRestore || isRestoreAll) &&
-    !sourceIsPrivate &&
-    isInsidePrivateRoom
-  )
-    return true;
-  if (isCopy) {
-    if (isInsideResultStorage || isAgents) return true;
+const ORDINARY_TARGET_ROOM_TYPES = [
+  RoomsType.EditingRoom,
+  RoomsType.CustomRoom,
+  RoomsType.PublicRoom,
+  RoomsType.VirtualDataRoom,
+];
 
-    if (sourceIsPrivate && isInsidePrivateRoom) {
-      return security && "Create" in security ? !security.Create : false;
-    }
+/**
+ * The room types the copy and move selector lists in its Rooms section.
+ * Besides the ordinary rooms, an Instructions room is offered when every
+ * selected item is a Markdown file, and a Knowledge room when every selected
+ * item is a file vectorization reads (and vectorization is on); folders
+ * disqualify both, since neither room holds any.
+ */
+export const getCopyTargetRoomTypes = (
+  selection: { isFolder?: boolean; fileExst?: string | null }[],
+  extsFilesVectorized: string[],
+  vectorizationEnabled: boolean,
+): RoomsType[] => {
+  const types = [...ORDINARY_TARGET_ROOM_TYPES];
+  if (selection.length === 0) return types;
 
-    return security && "CopyTo" in security
-      ? !security?.CopyTo || !security?.Create
-      : !security?.Copy;
-  }
-  if (isMove || isRestoreAll || isRestore) {
-    if (isInsideResultStorage || isAgents) return true;
-
-    return security && "MoveTo" in security
-      ? !security?.MoveTo || !security?.Create
-      : !security?.Move;
+  const exts: string[] = [];
+  for (const item of selection) {
+    if (item.isFolder || !item.fileExst) return types;
+    exts.push(item.fileExst.toLowerCase());
   }
 
-  return false;
+  if (exts.every((ext) => ext === ".md")) types.push(RoomsType.InstructionsRoom);
+
+  const vectorized = extsFilesVectorized.map((ext) => ext.toLowerCase());
+  if (vectorizationEnabled && exts.every((ext) => vectorized.includes(ext)))
+    types.push(RoomsType.KnowledgeRoom);
+
+  return types;
 };
+
+/**
+ * Which room sections the selector lists. A caller that names them keeps its
+ * choice; otherwise they follow the apps, as the sidebar does: a section
+ * switched off in Settings -> Apps is not offered, so nothing can be moved,
+ * copied or restored into a room - or a new room - nobody can open.
+ */
+export const getRoomSectionTreeFolders = (
+  isInstalled: (id: string) => boolean,
+  {
+    withRoomsTreeFolder,
+    withFormsTreeFolder,
+  }: { withRoomsTreeFolder?: boolean; withFormsTreeFolder?: boolean },
+) => ({
+  withRoomsTreeFolder: withRoomsTreeFolder ?? isInstalled("ai-rooms"),
+  withFormsTreeFolder: withFormsTreeFolder ?? isInstalled("ai-forms"),
+});

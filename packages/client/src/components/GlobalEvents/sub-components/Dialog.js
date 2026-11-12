@@ -117,8 +117,6 @@ const Dialog = ({
 
   const onKeyUpHandler = useCallback(
     (e) => {
-      if (e.keyCode === 27) onCancelAction(e);
-
       if (
         e.keyCode === 13 &&
         !withForm &&
@@ -129,7 +127,6 @@ const Dialog = ({
         onSaveAction(e);
     },
     [
-      onCancelAction,
       onSaveAction,
       withForm,
       isError,
@@ -216,7 +213,6 @@ const Dialog = ({
             value={value}
             isAutoFocussed
             hasError={Boolean(errorText)}
-            tabIndex={1}
             onChange={onChangeAction}
             onFocus={onFocus}
             isDisabled={isDisabled}

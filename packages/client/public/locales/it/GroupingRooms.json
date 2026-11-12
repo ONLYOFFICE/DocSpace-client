@@ -8,6 +8,7 @@
   "DeleteGroup": "Elimina gruppo",
   "DisablingRoomGroups": "Disabilitare i gruppi di stanze",
   "DisablingRoomGroupsDescription": "I gruppi verranno salvati ma nascosti. Riabilitare in Profilo, gestione file.",
+  "DisablingSpaceGroups": "Disabilitare i gruppi di spazi",
   "EditRoomGroups": "Modifica gruppi di stanze",
   "EditSpaceGroups": "Modifica gruppi di spazi",
   "EmptyGroupRoomsDescription": "Non ci sono stanze qui. Prova ad aggiungere una stanza o a rimuovere questo gruppo.",
@@ -33,6 +34,10 @@
   "RoomsAddedToGroup": "Le stanze selezionate sono state aggiunte a <1>{{groupName}}</1>.",
   "RoomsRemovedFromGroup": "Le stanze selezionate sono state rimosse da <1>{{groupName}}</1>.",
   "SpaceAddedToGroup": "Lo spazio selezionato è stato aggiunto a <1>{{groupName}}</1>.",
+  "SpaceGrouping": "Raggruppamento spazi",
+  "SpaceGroupingDisabled": "Il raggruppamento degli spazi è disabilitato",
+  "SpaceGroupingEnabled": "Il raggruppamento degli spazi è abilitato",
+  "SpaceGroupingSettingDescription": "È possibile raggruppare gli spazi in cartelle e passare facilmente tra di essi.",
   "SpaceRemovedFromGroup": "Lo spazio selezionato è stato rimosso da <1>{{groupName}}</1>.",
   "SpacesAddedToGroup": "Gli spazi selezionati sono stati aggiunti a <1>{{groupName}}</1>.",
   "SpacesRemovedFromGroup": "Gli spazi selezionati sono stati rimossi da <1>{{groupName}}</1>."

@@ -36,3 +36,11 @@
 export { getAiProviderIcon } from "./getAiProviderIcon";
 export { getServerIconUrl } from "./getServerIconUrl";
 export { getAiProviderLabel } from "./getAiProviderLabel";
+export { getServiceLimitChatError } from "./getServiceLimitChatError";
+export {
+  getAiChatBlock,
+  type TAiChatBlock,
+  type TAiChatStreamError,
+} from "./getAiChatBlock";
+export { getAiChatInterruption } from "./getAiChatInterruption";
+export { getServiceLimitDescription } from "./getServiceLimitDescription";

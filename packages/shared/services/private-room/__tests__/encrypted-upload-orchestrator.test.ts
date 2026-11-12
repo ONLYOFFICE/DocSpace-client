@@ -36,7 +36,33 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
-import { orchestrateEncryptedUpload } from "../encrypted-upload-orchestrator";
+import {
+  EncryptedUploadNotKeptError,
+  EncryptedWrapError,
+  getEncryptedUploadErrorMessage,
+  getEncryptedUploadRefusalMessage,
+  getEncryptedUploadRefusalNotice,
+  orchestrateEncryptedUpload,
+  retryEncryptedUploads,
+  uploadEncryptedFile,
+} from "../encrypted-upload-orchestrator";
+import {
+  EncryptedReimportError,
+  recoverDekForReimport,
+  sniffDse3Upload,
+} from "../encrypted-upload";
+import { listDecryptedFileNames } from "../encrypted-name-clash";
+import {
+  clearDeviceSetupHintHandler,
+  registerDeviceSetupHintHandler,
+} from "../../encryption/device-setup-hint-notifier";
+import {
+  getTofuStore,
+  registerKeyMismatchHandler,
+  resetTofuStores,
+  unregisterKeyMismatchHandler,
+} from "../../encryption/tofu-store";
+import { pendingAccessStore } from "../pending-access";
 
 // ---------------------------------------------------------------------------
 // Module mocks
@@ -45,11 +71,17 @@ import { orchestrateEncryptedUpload } from "../encrypted-upload-orchestrator";
 vi.mock("../../../api/files", () => ({
   startUploadSession: vi.fn().mockResolvedValue({ id: "session-1" }),
   uploadChunkSequential: vi.fn().mockResolvedValue({ data: { id: 42 } }),
+  uploadChunkParallel: vi.fn().mockResolvedValue({ id: 0 }),
   finalizeUploadSession: vi.fn().mockResolvedValue(undefined),
+  abortUploadSession: vi.fn().mockResolvedValue(undefined),
   getFileEncryptionAccess: vi
     .fn()
     .mockResolvedValue({ fileKeys: [] }),
   setFileEncryptionKeys: vi.fn().mockResolvedValue(undefined),
+  deleteFile: vi.fn().mockResolvedValue([
+    { id: "op-1", finished: true, error: "", progress: 100 },
+  ]),
+  getProgress: vi.fn().mockResolvedValue([]),
 }));
 
 vi.mock("../../../api/privacy", () => ({
@@ -82,6 +114,18 @@ vi.mock("../../encryption/room-file-access", () => ({
 
 vi.mock("../encryption/filename-cache", () => ({
   rememberEncryptedFilename: vi.fn(),
+  forgetEncryptedFilename: vi.fn(),
+}));
+
+vi.mock("../encrypted-upload", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  sniffDse3Upload: vi.fn(async () => null),
+  recoverDekForReimport: vi.fn(),
+}));
+
+vi.mock("../encrypted-name-clash", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  listDecryptedFileNames: vi.fn(async () => []),
 }));
 
 vi.mock("../encrypted-filename-recovery", () => ({
@@ -249,5 +293,972 @@ describe("orchestrateEncryptedUpload — setItemLabel (encrypting phase)", () =>
     });
 
     expect(result.aborted).toBe(false);
+  });
+});
+
+describe("orchestrateEncryptedUpload - batch gate", () => {
+  const deviceSetupHint = vi.fn();
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    registerDeviceSetupHintHandler(deviceSetupHint);
+  });
+
+  afterEach(() => {
+    clearDeviceSetupHintHandler();
+  });
+
+  const gatedUpload = (keys: {
+    publicKey: string | null;
+    requireIdentity: () => Promise<unknown>;
+  }) => {
+    const markRefused = vi.fn();
+    const result = orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16), makeFile("two.docx", 16)],
+      uploadIds: ["row-1", "row-2"],
+      folderId: 1,
+      roomId: 10,
+      userId: "user-1",
+      publicKey: keys.publicKey,
+      publicKeyId: keys.publicKey ? "key-1" : null,
+      requireIdentity: keys.requireIdentity as never,
+      uploadStore: { files: [], markRefused },
+    });
+    return { result, markRefused };
+  };
+
+  it("Uploader without a key: the rows fail before any byte is sent and the device-setup hint is requested", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const requireIdentity = vi.fn();
+
+    const { result, markRefused } = gatedUpload({
+      publicKey: null,
+      requireIdentity,
+    });
+
+    expect(await result).toMatchObject({
+      refused: "no-key",
+      results: [
+        { ok: false, uploadId: "row-1", refused: "no-key" },
+        { ok: false, uploadId: "row-2", refused: "no-key" },
+      ],
+    });
+    expect(markRefused.mock.calls).toEqual([
+      ["row-1", "no-key"],
+      ["row-2", "no-key"],
+    ]);
+    expect(requireIdentity).not.toHaveBeenCalled();
+    expect(deviceSetupHint).toHaveBeenCalledTimes(1);
+    expect(startUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("Uploader declines to unlock: the rows fail as locked and nothing is sent", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+
+    const { result, markRefused } = gatedUpload({
+      publicKey: "pk-own",
+      requireIdentity: async () => null,
+    });
+
+    expect((await result).refused).toBe("locked");
+    expect(markRefused.mock.calls).toEqual([
+      ["row-1", "locked"],
+      ["row-2", "locked"],
+    ]);
+    expect(deviceSetupHint).not.toHaveBeenCalled();
+    expect(startUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("an unlocked uploader's files go out under the panel's ids", async () => {
+    const reportProgress = vi.fn();
+
+    const { results, refused } = await orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16)],
+      uploadIds: ["row-1"],
+      folderId: 1,
+      roomId: 10,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+      requireIdentity: async () => makeIdentity() as never,
+      uploadStore: { files: [], reportProgress },
+    });
+
+    expect(refused).toBeUndefined();
+    expect(results).toMatchObject([{ ok: true, uploadId: "row-1" }]);
+    expect(reportProgress).toHaveBeenCalledWith("row-1", expect.any(Number));
+  });
+
+  it("names the refusals with the client's keys", () => {
+    const t = ((key: string) => key) as never;
+
+    expect(getEncryptedUploadRefusalMessage(t, "no-key")).toBe(
+      "Common:EncryptionKeysRequiredForUpload",
+    );
+    expect(getEncryptedUploadRefusalMessage(t, "locked")).toBe(
+      "Common:EncryptionLockedUpload",
+    );
+    expect(getEncryptedUploadRefusalNotice(t, "locked")).toBe(
+      "Common:EncryptionUploadCancelled",
+    );
+    expect(getEncryptedUploadRefusalNotice(t, "no-key")).toBeNull();
+  });
+});
+
+describe("orchestrateEncryptedUpload - batch rules", () => {
+  const KEYS = { userId: "user-1", publicKey: "pk-own", publicKeyId: "key-1" };
+  const t = ((key: string) => key) as never;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("Quota exceeded mid-batch: the files not started fail as quota failures", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const quota = Object.assign(new Error("Quota exceeded"), {
+      response: { status: 507 },
+    });
+    vi.mocked(startUploadSession)
+      .mockResolvedValueOnce({ id: "session-1" } as never)
+      .mockRejectedValueOnce(quota);
+    const markQuotaError = vi.fn();
+    const onQuotaError = vi.fn();
+
+    const { results, quotaErrorRaised } = await orchestrateEncryptedUpload({
+      files: [
+        makeFile("a.docx", 16),
+        makeFile("b.docx", 16),
+        makeFile("c.docx", 16),
+      ],
+      uploadIds: ["row-1", "row-2", "row-3"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      uploadStore: { files: [], markQuotaError },
+      onQuotaError,
+    });
+
+    expect(startUploadSession).toHaveBeenCalledTimes(2);
+    expect(results.map((r) => r.ok)).toEqual([true, false, false]);
+    expect(markQuotaError.mock.calls).toEqual([
+      ["row-2", quota],
+      ["row-3", quota],
+    ]);
+    expect(onQuotaError).toHaveBeenCalledTimes(1);
+    expect(quotaErrorRaised).toBe(true);
+  });
+
+  it("Retry after navigation: the file goes to the folder it was first queued for, after the unlock prompt", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const requireIdentity = vi.fn(async () => makeIdentity() as never);
+
+    const { results } = await retryEncryptedUploads({
+      items: [
+        { file: makeFile("b.docx", 16), uploadId: "row-2", folderId: 5, roomId: 10 },
+      ],
+      ...KEYS,
+      requireIdentity,
+    });
+
+    expect(requireIdentity).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(startUploadSession).mock.calls[0][0]).toBe(5);
+    expect(vi.mocked(startUploadSession).mock.calls[0][4]).toBe(true);
+    expect(results).toMatchObject([{ ok: true, uploadId: "row-2" }]);
+  });
+
+  it("Ciphertext re-uploaded: the file goes as it is, under its recovered key and name", async () => {
+    const { startUploadSession, uploadChunkSequential } = await import(
+      "../../../api/files"
+    );
+    const { encryptFile } = await import("../../encryption/file-keys");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    const dek = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
+    vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport).mockResolvedValueOnce({
+      dek,
+      realName: "Report.docx",
+      sourceFileId: 77,
+    });
+    const downloaded = makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [downloaded],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+    });
+
+    expect(results).toMatchObject([{ ok: true, originalName: "Report.docx" }]);
+    expect(encryptFile).not.toHaveBeenCalled();
+    const [, uploadName, size, , encrypted] =
+      vi.mocked(startUploadSession).mock.calls[0];
+    expect(uploadName).not.toBe(downloaded.name);
+    expect(uploadName).toMatch(/\.docx$/);
+    expect([size, encrypted]).toEqual([48, true]);
+    const form = vi.mocked(uploadChunkSequential).mock.calls[0][2] as FormData;
+    expect((form.get("file") as Blob).size).toBe(48);
+    expect(vi.mocked(wrapDekForRecipients).mock.calls[0][0]).toMatchObject({
+      dek,
+    });
+  });
+
+  it("Ciphertext re-uploaded without a recoverable key: nothing is sent and the row names the re-import failure", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport).mockRejectedValueOnce(
+      new EncryptedReimportError("no source file decrypts the blob"),
+    );
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+    });
+
+    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(results[0].ok).toBe(false);
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptionReimportFailed",
+    );
+    expect(getEncryptedUploadErrorMessage(t, new Error("network"))).toBe(
+      "Common:EncryptionPrepareFailed",
+    );
+  });
+
+  it("Upload with a clashing name: asked before any byte is sent; the kept file takes the first free suffix", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const { encryptFile } = await import("../../encryption/file-keys");
+    vi.mocked(listDecryptedFileNames).mockResolvedValueOnce([
+      "Report.docx",
+      "Report (1).docx",
+    ]);
+    let sessionsAtPrompt = -1;
+    const onNameClash = vi.fn(async () => {
+      sessionsAtPrompt = vi.mocked(startUploadSession).mock.calls.length;
+      return true;
+    });
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile("Report.docx", 16), makeFile("notes.txt", 16)],
+      uploadIds: ["row-1", "row-2"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash,
+    });
+
+    expect(onNameClash).toHaveBeenCalledWith([
+      { uploadId: "row-1", file: expect.any(File), renamed: "Report (2).docx" },
+    ]);
+    expect(sessionsAtPrompt).toBe(0);
+    expect(
+      vi.mocked(encryptFile).mock.calls.map(([, opts]) => opts?.fileName),
+    ).toEqual(["Report (2).docx", "notes.txt"]);
+    expect(results.map((r) => r.originalName)).toEqual([
+      "Report (2).docx",
+      "notes.txt",
+    ]);
+  });
+
+  it("Upload with a clashing name, cancelled: nothing is sent", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    vi.mocked(listDecryptedFileNames).mockResolvedValueOnce(["Report.docx"]);
+
+    const { results, aborted } = await orchestrateEncryptedUpload({
+      files: [makeFile("Report.docx", 16), makeFile("notes.txt", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash: async () => false,
+    });
+
+    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(aborted).toBe(true);
+    expect(results.every((r) => r.aborted)).toBe(true);
+  });
+});
+
+describe("uploadEncryptedFile", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("uploads one file under the caller's id, with no gate of its own", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const reportProgress = vi.fn();
+
+    const result = await uploadEncryptedFile(
+      makeFile("one.docx", 16),
+      {
+        folderId: 1,
+        roomId: 10,
+        identity: makeIdentity() as never,
+        userId: "user-1",
+        publicKey: "pk-own",
+        publicKeyId: "key-1",
+        uploadStore: { files: [], reportProgress },
+      },
+      "row-9",
+    );
+
+    expect(result).toMatchObject({ ok: true, uploadId: "row-9" });
+    expect(vi.mocked(startUploadSession).mock.calls[0][4]).toBe(true);
+    expect(reportProgress).toHaveBeenCalledWith("row-9", expect.any(Number));
+  });
+});
+
+describe("uploadEncryptedFile for a caller with its own queue", () => {
+  const ARGS = {
+    folderId: 1,
+    roomId: 10,
+    identity: makeIdentity() as never,
+    userId: "user-1",
+    publicKey: "pk-own",
+    publicKeyId: "key-1",
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("sends the parts as numbered chunks in parallel and answers the stored file and its path", async () => {
+    const api = await import("../../../api/files");
+    const stored = { id: 42, title: "5f0c9a52.docx", folderId: 1 };
+    vi.mocked(api.startUploadSession).mockResolvedValueOnce({
+      id: "session-1",
+      path: [2, 10, 1],
+    } as never);
+    vi.mocked(api.finalizeUploadSession).mockResolvedValueOnce({
+      id: 42,
+      uploaded: true,
+      file: stored,
+    } as never);
+    const reportProgress = vi.fn();
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      {
+        ...ARGS,
+        chunkSize: 24,
+        uploadThreads: 2,
+        uploadStore: { files: [], reportProgress },
+      },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({
+      ok: true,
+      fileId: 42,
+      file: stored,
+      path: [2, 10, 1],
+    });
+    const parts = vi.mocked(api.uploadChunkParallel).mock.calls;
+    expect(parts.map((call) => call[2]).sort()).toEqual([1, 2, 3]);
+    expect(api.uploadChunkSequential).not.toHaveBeenCalled();
+    expect(api.finalizeUploadSession).toHaveBeenCalledTimes(1);
+    expect(reportProgress).toHaveBeenLastCalledWith("row-1", 100);
+  });
+
+  it("reports the encryption progress and names the stage a failure stopped at", async () => {
+    const api = await import("../../../api/files");
+    const { wipeDek } = await import("../../encryption/file-keys");
+    vi.mocked(api.startUploadSession).mockRejectedValueOnce(
+      new Error("session down"),
+    );
+    const reportEncryptionProgress = vi.fn();
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, uploadStore: { files: [], reportEncryptionProgress } },
+      "row-1",
+    );
+
+    expect(reportEncryptionProgress).toHaveBeenCalledWith("row-1", 1);
+    expect(result).toMatchObject({ ok: false, failedAt: "upload" });
+    expect(result.fileId).toBeUndefined();
+    expect(wipeDek).toHaveBeenCalledTimes(1);
+  });
+
+  it("Cancelled encrypted upload", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    vi.mocked(api.uploadChunkSequential).mockImplementationOnce(async () => {
+      controller.abort();
+      return {} as never;
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 24, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, aborted: true });
+    expect(api.uploadChunkSequential).toHaveBeenCalledTimes(1);
+    expect(api.abortUploadSession).toHaveBeenCalledWith(1, "session-1");
+  });
+
+  it("cancelled before the session opened: there is nothing to abort", async () => {
+    const api = await import("../../../api/files");
+    const { encryptFile } = await import("../../encryption/file-keys");
+    const controller = new AbortController();
+    vi.mocked(encryptFile).mockImplementationOnce(async () => {
+      controller.abort();
+      return {
+        encryptedBlob: new Blob([new Uint8Array(64)]),
+        dek: new Uint8Array(AES_KEY_SIZE_BYTES),
+      };
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, aborted: true });
+    expect(api.startUploadSession).not.toHaveBeenCalled();
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("a chunk that fails without a cancel leaves the session to expire", async () => {
+    const api = await import("../../../api/files");
+    vi.mocked(api.uploadChunkSequential).mockRejectedValueOnce(
+      new Error("network down"),
+    );
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      ARGS,
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, failedAt: "upload" });
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
+  });
+
+  it("runs the room fan-out through the caller's queue", async () => {
+    let queued = 0;
+    const serializeFanOut = <T>(fanOut: () => Promise<T>) => {
+      queued += 1;
+      return fanOut();
+    };
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, serializeFanOut },
+      "row-1",
+    );
+
+    expect(result.ok).toBe(true);
+    expect(queued).toBe(1);
+  });
+
+  describe("A stored upload without the uploader's entry is not kept", () => {
+    const t = ((key: string) => key) as never;
+    const refuseWrites = async (times: number) => {
+      const api = await import("../../../api/files");
+      const write = vi.mocked(api.setFileEncryptionKeys);
+      for (let i = 0; i < times; i += 1) {
+        write.mockRejectedValueOnce(new Error("403"));
+      }
+      return api;
+    };
+    const upload = () =>
+      uploadEncryptedFile(makeFile("doc.docx", 16), ARGS, "row-1");
+
+    it("Entry written on a later try", async () => {
+      const api = await refuseWrites(1);
+
+      const result = await upload();
+
+      expect(result).toMatchObject({ ok: true, fileId: 42 });
+      expect(api.deleteFile).not.toHaveBeenCalled();
+    });
+
+    it("Entry cannot be written", async () => {
+      const api = await refuseWrites(3);
+
+      const result = await upload();
+
+      expect(api.setFileEncryptionKeys).toHaveBeenCalledTimes(3);
+      expect(api.deleteFile).toHaveBeenCalledWith(42, false, true);
+      expect(result).toMatchObject({ ok: false, failedAt: "wrap" });
+      expect(result.fileId).toBeUndefined();
+      expect(result.error).toBeInstanceOf(EncryptedUploadNotKeptError);
+      expect(getEncryptedUploadErrorMessage(t, result.error)).toBe(
+        "Common:EncryptionUploadNotKept",
+      );
+    });
+
+    it("Key cannot be wrapped", async () => {
+      const api = await import("../../../api/files");
+      const access = await import("../../encryption/room-file-access");
+      const { InvalidFormatError } = await import("../../encryption/errors");
+      vi.mocked(access.wrapDekForRecipients).mockRejectedValueOnce(
+        new InvalidFormatError("erased private key"),
+      );
+
+      const result = await upload();
+
+      expect(api.setFileEncryptionKeys).not.toHaveBeenCalled();
+      expect(api.deleteFile).toHaveBeenCalledWith(42, false, true);
+      expect(result).toMatchObject({ ok: false, failedAt: "wrap" });
+      expect(result.fileId).toBeUndefined();
+      expect(result.error).toBeInstanceOf(EncryptedUploadNotKeptError);
+    });
+
+    it("Entry written although the write reported a failure", async () => {
+      const api = await refuseWrites(3);
+      vi.mocked(api.getFileEncryptionAccess).mockResolvedValueOnce({
+        fileKeys: [
+          { userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "enc-data" },
+        ],
+      } as never);
+
+      const result = await upload();
+
+      expect(api.deleteFile).not.toHaveBeenCalled();
+      expect(result).toMatchObject({ ok: true, fileId: 42 });
+    });
+
+    it("Deletion fails", async () => {
+      const api = await refuseWrites(3);
+      vi.mocked(api.deleteFile).mockResolvedValueOnce([
+        { id: "op-1", finished: true, error: "Access denied", progress: 100 },
+      ] as never);
+
+      const result = await upload();
+
+      expect(result).toMatchObject({ ok: false, fileId: 42, failedAt: "wrap" });
+      expect(result.error).toBeInstanceOf(EncryptedWrapError);
+      expect(getEncryptedUploadErrorMessage(t, result.error)).toBe(
+        "Common:EncryptionUploadWrapFailed",
+      );
+    });
+
+    it("Deletion still running when it is answered", async () => {
+      const api = await refuseWrites(3);
+      vi.mocked(api.deleteFile).mockResolvedValueOnce([
+        { id: "op-1", finished: false, error: "", progress: 0 },
+      ] as never);
+      vi.mocked(api.getProgress).mockResolvedValueOnce([
+        { id: "op-1", finished: true, error: "", progress: 100 },
+      ] as never);
+
+      const result = await upload();
+
+      expect(api.getProgress).toHaveBeenCalledWith("op-1");
+      expect(result.fileId).toBeUndefined();
+      expect(result.error).toBeInstanceOf(EncryptedUploadNotKeptError);
+    });
+  });
+});
+
+describe("Cancelling an encrypted upload", () => {
+  const ARGS = {
+    folderId: 1,
+    roomId: 10,
+    identity: makeIdentity() as never,
+    userId: "user-1",
+    publicKey: "pk-own",
+    publicKeyId: "key-1",
+  };
+  const BOB = {
+    id: "b-1",
+    userId: "bob",
+    publicKey: "pk-b",
+    privateKeyEnc: "",
+    date: "2026-01-01T00:00:00",
+  };
+  /** What axios rejects a request with when its signal aborts. */
+  const transportCancel = () =>
+    Object.assign(new Error("canceled"), {
+      name: "CanceledError",
+      code: "ERR_CANCELED",
+    });
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    resetTofuStores();
+    pendingAccessStore.clear(10, "bob");
+  });
+
+  it("Cancelled while chunks are sent, in parallel: aborted, not failed", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    vi.mocked(api.uploadChunkParallel).mockImplementation(async () => {
+      controller.abort();
+      throw transportCancel();
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 1024, uploadThreads: 2, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: false, aborted: true });
+    expect(result.failedAt).toBeUndefined();
+    expect(api.abortUploadSession).toHaveBeenCalledWith(1, "session-1");
+    expect(api.finalizeUploadSession).not.toHaveBeenCalled();
+    vi.mocked(api.uploadChunkParallel).mockReset();
+  });
+
+  it("Cancelled after the file is stored: the last sequential chunk was sent", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    let sent = 0;
+    vi.mocked(api.uploadChunkSequential).mockImplementation(async () => {
+      sent += 1;
+      if (sent === 3) controller.abort();
+      return { data: { id: 42 } } as never;
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 24, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
+    expect(api.setFileEncryptionKeys).toHaveBeenCalled();
+    vi.mocked(api.uploadChunkSequential).mockReset();
+    vi.mocked(api.uploadChunkSequential).mockResolvedValue({
+      data: { id: 42 },
+    } as never);
+  });
+
+  it("Cancelled after the file is stored: the uploader's and the members' entries are written", async () => {
+    const api = await import("../../../api/files");
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([BOB] as never);
+    const controller = new AbortController();
+    vi.mocked(api.setFileEncryptionKeys).mockImplementationOnce(async () => {
+      controller.abort();
+      return undefined as never;
+    });
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    expect(result.aborted).toBeFalsy();
+    expect(api.setFileEncryptionKeys).toHaveBeenCalledTimes(2);
+    expect(pendingAccessStore.get(10, "bob")).toBeUndefined();
+  });
+
+  it("Sharing fails after a late cancel", async () => {
+    const api = await import("../../../api/files");
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([BOB] as never);
+    const controller = new AbortController();
+    vi.mocked(api.setFileEncryptionKeys)
+      .mockImplementationOnce(async () => {
+        controller.abort();
+        return undefined as never;
+      })
+      .mockRejectedValueOnce(new Error("403"));
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42, shareFailed: true });
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([42]);
+  });
+
+  it("Stored file never left without its entries", async () => {
+    const api = await import("../../../api/files");
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([BOB] as never);
+    const controller = new AbortController();
+    let fanOutStarted = false;
+    const serializeFanOut = async <T>(fanOut: () => Promise<T>) => {
+      // The cancel lands while the fan-out to the members waits in the queue.
+      controller.abort();
+      fanOutStarted = true;
+      return fanOut();
+    };
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, signal: controller.signal, serializeFanOut },
+      "row-1",
+    );
+
+    expect(fanOutStarted).toBe(true);
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    const recipients = vi
+      .mocked(wrapDekForRecipients)
+      .mock.calls.flatMap(([args]) =>
+        (args as { recipients: { userId: string }[] }).recipients.map(
+          (recipient) => recipient.userId,
+        ),
+      );
+    expect(recipients).toEqual(["user-1", "bob"]);
+    expect(api.setFileEncryptionKeys).toHaveBeenCalledTimes(2);
+  });
+
+  it("Cancelled while the file is finalized in parallel: the file is kept and shared", async () => {
+    const api = await import("../../../api/files");
+    const controller = new AbortController();
+    vi.mocked(api.finalizeUploadSession).mockImplementationOnce(
+      async (_folderId, _sessionId, signal?: AbortSignal) => {
+        controller.abort();
+        if (signal?.aborted) throw transportCancel();
+        return { id: 42, uploaded: true } as never;
+      },
+    );
+
+    const result = await uploadEncryptedFile(
+      makeFile("doc.docx", 16),
+      { ...ARGS, chunkSize: 24, uploadThreads: 2, signal: controller.signal },
+      "row-1",
+    );
+
+    expect(result).toMatchObject({ ok: true, fileId: 42 });
+    expect(api.abortUploadSession).not.toHaveBeenCalled();
+  });
+});
+
+describe("orchestrateEncryptedUpload - room fan-out", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    resetTofuStores();
+    unregisterKeyMismatchHandler();
+    pendingAccessStore.clear(10, "bob");
+  });
+
+  afterEach(() => {
+    unregisterKeyMismatchHandler();
+  });
+
+  const upload = () =>
+    orchestrateEncryptedUpload({
+      files: [makeFile("doc.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+  it("Member key mismatch on upload: no wrap is written for a refused key and the file is still uploaded", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    const handler = vi.fn(async () => "refuse" as const);
+    registerKeyMismatchHandler(handler);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(results[0].ok).toBe(true);
+    expect(results[0].skippedMembers).toEqual([
+      { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" },
+    ]);
+    const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
+    expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
+  });
+
+  it("Sharing with the members fails", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { setFileEncryptionKeys } = await import("../../../api/files");
+    pendingAccessStore.clear(10, "alice");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+    vi.mocked(setFileEncryptionKeys)
+      .mockResolvedValueOnce(undefined as never)
+      .mockRejectedValueOnce(new Error("403"));
+
+    const { results } = await upload();
+
+    expect(results[0]).toMatchObject({ ok: true, shareFailed: true });
+    const fileId = Number(results[0].fileId);
+    expect(pendingAccessStore.get(10, "alice")?.missingFileIds).toEqual([
+      fileId,
+    ]);
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([
+      fileId,
+    ]);
+  });
+
+  it("Listed user cannot read the file: the member the server skipped is recorded as pending access", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { setFileEncryptionKeys } = await import("../../../api/files");
+    pendingAccessStore.clear(10, "bob");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+    vi.mocked(setFileEncryptionKeys)
+      .mockResolvedValueOnce({ skippedUserIds: [] })
+      .mockResolvedValueOnce({ skippedUserIds: ["bob"] });
+
+    const { results } = await upload();
+
+    expect(results[0].ok).toBe(true);
+    expect(results[0].shareFailed).toBeUndefined();
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([
+      Number(results[0].fileId),
+    ]);
+    pendingAccessStore.clear(10, "bob");
+  });
+
+  it("a shared upload is not flagged", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(results[0].ok).toBe(true);
+    expect(results[0].shareFailed).toBeUndefined();
+    expect(pendingAccessStore.get(10, "bob")).toBeUndefined();
+  });
+
+  it("Key trusted after a refusal: the file a refused key was left out of is recorded for the member", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    registerKeyMismatchHandler(vi.fn(async () => "refuse" as const));
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([
+      Number(results[0].fileId),
+    ]);
+  });
+
+  it("asks once per refused key change across the files of one call", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    const handler = vi.fn(async () => "refuse" as const);
+    registerKeyMismatchHandler(handler);
+    const swapped = [
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never;
+    vi.mocked(getRoomEncryptionKeys)
+      .mockResolvedValueOnce(swapped)
+      .mockResolvedValueOnce(swapped);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16), makeFile("two.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(results.map((r) => r.skippedMembers?.map((m) => m.userId))).toEqual([
+      ["bob"],
+      ["bob"],
+    ]);
+  });
+
+  it("Member left out: the batch names the member once", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    registerKeyMismatchHandler(vi.fn(async () => "refuse" as const));
+    const swapped = [
+      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never;
+    vi.mocked(getRoomEncryptionKeys)
+      .mockResolvedValueOnce(swapped)
+      .mockResolvedValueOnce(swapped);
+
+    const { results, skippedMembers } = await orchestrateEncryptedUpload({
+      files: [makeFile("one.docx", 16), makeFile("two.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+    expect(results.every((r) => r.ok)).toBe(true);
+    expect(skippedMembers).toEqual([
+      { userId: "bob", displayName: undefined, reason: "key-mismatch-refused" },
+    ]);
+  });
+
+  it("Unpinned member at upload: the key is pinned and the wrap is produced", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(results[0].skippedMembers).toBeUndefined();
+    const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
+    expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
+    const pinned = await getTofuStore("user-1").getKeys("alice");
+    expect(pinned.map((k) => k.publicKey)).toEqual(["pk-a"]);
+  });
+
+  it("Member with two keys on the server: one recipient per member, for the selected key", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "key-1", userId: "user-1", publicKey: "pk-own", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-old", userId: "alice", publicKey: "pk-a-old", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-new", userId: "alice", publicKey: "pk-a-new", privateKeyEnc: "", date: "2026-10-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-03-01T00:00:00" },
+    ] as never);
+
+    await orchestrateEncryptedUpload({
+      files: [makeFile("doc.docx", 16)],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "pk-own",
+      publicKeyId: "key-1",
+    });
+
+    const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
+    expect(fanOut.recipients).toEqual([
+      { userId: "alice", publicKey: "pk-a-new", publicKeyId: "a-new" },
+      { userId: "bob", publicKey: "pk-b", publicKeyId: "b-1" },
+    ]);
   });
 });

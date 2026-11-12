@@ -194,7 +194,11 @@ const RoomsContextBtn = ({
 };
 
 export default inject(
-  ({ contextOptionsStore, filesSettingsStore, publicRoomStore }: TStore) => ({
+  ({
+    contextOptionsStore,
+    filesSettingsStore,
+    publicRoomStore,
+  }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
     externalShareApplyToRooms: filesSettingsStore.externalShareApplyToRooms,

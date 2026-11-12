@@ -171,6 +171,10 @@
   margin-inline-end: 8px;
 }
 
+.locationTooltipPath {
+  overflow-wrap: anywhere;
+}
+
 .badgesContainer {
   display: flex;
   align-items: center;

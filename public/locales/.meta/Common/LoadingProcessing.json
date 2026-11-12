@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2026-08-19T13:26:37.793Z",
+  "updated_at": "2026-11-09T17:07:34.982Z",
   "comment": {
     "text": "This is a button label that appears while an action is being processed, indicating that the system is busy.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 390,
-      "context": "padding: \"24px\",\n }}\n >\n {encryption.status === \"error\"\n ? t(\"Common:SomethingWentWrong\")\n : t(\"Common:LoadingProcessing\")}\n </div>\n </div>\n );\n }",
+      "line_number": 443,
+      "context": "if (isEncryptionGating) {\n return renderMessage(\n encryption.status === \"error\"\n ? t(\"Common:SomethingWentWrong\")\n : t(\"Common:LoadingProcessing\"),\n );\n }\n \n // Spec: editor-integration, \"Editor fails closed without the crypto library\"\n if (frameError !== null) {",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 301,
-      "context": "id=\"register-singup\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={isLoading ? t(\"Common:LoadingProcessing\") : t(\"SignUp\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"signup_button\"",
+      "line_number": 298,
+      "context": "id=\"register-singup\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={isLoading ? t(\"Common:LoadingProcessing\") : t(\"SignUp\")}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"signup_button\"\n />",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 295,
-      "context": "scale\n primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"SetAppButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"app_connect_button\"",
+      "line_number": 293,
+      "context": "<Button\n scale\n primary\n size={ButtonSize.medium}\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"SetAppButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"app_connect_button\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 182,
-      "context": "primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
+      "line_number": 180,
+      "context": "scale\n primary\n size={ButtonSize.medium}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 704,
-      "context": "className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:LoginButton\")\n }\n tabIndex={5}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
+      "line_number": 712,
+      "context": "className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:LoginButton\")\n }\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"login_button\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 269,
+      "line_number": 268,
       "context": "<Button\n id=\"forgot-password-modal_send\"\n className=\"modal-dialog-button\"\n key=\"ForgotSendBtn\"\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:SendButton\")\n }\n size={ButtonSize.normal}\n scale\n primary\n onClick={onSendPasswordInstructions}",
       "module": "/packages/login"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMembersView.tsx",
-      "line_number": 253,
+      "line_number": 254,
       "context": "{hasMore ? (\n <Button\n size={ButtonSize.small}\n label={\n isLoadingMore\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ShowMore\")\n }\n onClick={handleLoadMore}\n isDisabled={isLoadingMore}\n />",
       "module": "/packages/sdk"
     },

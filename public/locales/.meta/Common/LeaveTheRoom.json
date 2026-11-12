@@ -3,7 +3,7 @@
   "content": "Leave the room",
   "content_en_sha1_hash": "0494f65ff12e4895fbbc91bd002080a4361c346d",
   "created_at": "2025-05-19T21:30:55.737Z",
-  "updated_at": "2026-09-14T19:16:02.573Z",
+  "updated_at": "2026-11-09T09:26:33.354Z",
   "comment": {
     "text": "This is a button label or menu item. It allows a user to exit a room they are currently in.",
     "is_auto": true,
@@ -13,26 +13,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 91,
-      "context": "const titleText = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Common:LeaveRoomDescription\")\n : t(\"Common:WantLeaveRoom\");",
+      "line_number": 87,
+      "context": "};\n }, []);\n \n const titleText = isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const descriptionText = isRoomOwner\n ? t(\"Common:LeaveRoomDescription\")\n : t(\"Common:WantLeaveRoom\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 208,
-      "context": "const footerCheckboxLabel = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const selectorComponent = excludeReady ? (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
+      "line_number": 155,
+      "context": "const footerCheckboxLabel = isAIProject\n ? t(\"Common:AIProjectLeave\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const selectorComponent = excludeReady ? (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 910,
-      "context": "key: \"leave-room\",\n label: isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: self.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
+      "line_number": 937,
+      "context": "{\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: self.onLeaveRoom,\n disabled:\n isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
-      "line_number": 229,
-      "context": "// Checkbox props: only pass the complete set when the current user is owner.\n // WithFlag<\"withFooterCheckbox\", ...> requires either all props or none.\n const footerCheckboxProps = ownerIsCurrentUser\n ? ({\n withFooterCheckbox: true as const,\n footerCheckboxLabel: t(\"Common:LeaveTheRoom\"),\n isChecked: false,\n } as const)\n : {};\n \n const selectorContent = excludeReady ? (",
+      "line_number": 166,
+      "context": "// Checkbox props: only pass the complete set when the current user is owner.\n // WithFlag<\"withFooterCheckbox\", ...> requires either all props or none.\n const footerCheckboxProps = ownerIsCurrentUser\n ? ({\n withFooterCheckbox: true as const,\n footerCheckboxLabel: t(\"Common:LeaveTheRoom\"),\n isChecked: true,\n } as const)\n : {};\n \n const selectorContent = excludeReady ? (",
       "module": "/packages/sdk"
     },
     {
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/leave-room-dialog/index.tsx",
-      "line_number": 126,
+      "line_number": 152,
       "context": "<ModalDialog\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:LeaveTheRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{descriptionText}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 418,
+      "line_number": 452,
       "context": "mainItems.push({ key: \"separator-archive\", isSeparator: true });\n if (canLeave) {\n mainItems.push({\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: handleLeave,\n });\n }\n if (canArchive) {",
       "module": "/packages/sdk"
     }

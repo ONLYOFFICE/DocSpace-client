@@ -74,7 +74,6 @@
   "ItemsCount": "Liczba pozycji na jednej stronie",
   "ItemsCountDescription": "Możesz wybrać liczbę plików/katalogów wyświetlanych na stronie oraz zdecydować, od której strony rozpocząć wyświetlanie",
   "JavaScriptCodeDescription": "Osadzanie przestrzeni roboczej lub jej części za pomocą JavaScript. Skopiuj poniższy kod JavaScript.",
-  "JavascriptSdk": "SDK Javascript",
   "LimitByTime": "Ograniczenie czasowe",
   "LinkSetDescription": "Ten link jest chroniony przez parametr {{parameter}}. Aby skonfigurować link,",
   "LinkSetDescription2": "Dla danego linku ustawiono parametry {{parameter1}} i {{parameter2}}. Aby go skonfigurować,",

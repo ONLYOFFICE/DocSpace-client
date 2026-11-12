@@ -33,14 +33,70 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TCreatedBy } from "../types";
+import { TCreatedBy, ValueOf } from "../types";
 import { TRoom, TRoomLifetime, TWatermark } from "../api/rooms/types";
 import { TConnectingStorage } from "../api/files/types";
+import type RoomsFilter from "../api/rooms/filter";
 
-import { FolderType, RoomsType, RoomsTypePrivate } from "../enums";
+import {
+  FolderType,
+  RoomPrivacyFilter,
+  RoomSearchArea,
+  RoomsType,
+  RoomsTypePrivate,
+} from "../enums";
+import { CategoryType } from "../constants";
 
 import { RoomsTypeValues } from "./common";
-import { isPrivateRoomsEnabled } from "./privateRooms";
+
+/**
+ * Room types the "AI rooms" section lists, filters by and creates through
+ * `files/rooms`: the Instructions room (skills), the Knowledge room
+ * (knowledge base) and the AI project. The server keeps them under the
+ * `FolderType.AiHub` root (`searchArea=AiHub`), never in Rooms.
+ */
+export const AI_HUB_SECTION_TYPES: RoomsType[] = [
+  RoomsType.InstructionsRoom,
+  RoomsType.KnowledgeRoom,
+  RoomsType.AiProjectRoom,
+];
+
+/**
+ * The settings the server refuses (400) when an "AI rooms" type is created
+ * or edited: none of them applies to those types. A project takes no quota
+ * either.
+ */
+const AI_HUB_REFUSED_SETTINGS = [
+  "indexing",
+  "denyDownload",
+  "lifetime",
+  "watermark",
+  "chatSettings",
+  "sendFormToExternalDB",
+  "saveFormAsXLSX",
+] as const;
+
+/** The create / edit body of a room without the settings its "AI rooms" type refuses. */
+export const withoutSettingsRefusedForAiRooms = <T extends object>(
+  params: T,
+  roomType?: number,
+): T => {
+  if (roomType === undefined || !AI_HUB_SECTION_TYPES.includes(roomType)) return params;
+  const allowed = { ...params } as Record<string, unknown>;
+  AI_HUB_REFUSED_SETTINGS.forEach((key) => delete allowed[key]);
+  if (roomType === RoomsType.AiProjectRoom) delete allowed.quota;
+  return allowed as T;
+};
+
+/**
+ * `FolderType` values of the "AI rooms" section's rooms, for the `folderType`
+ * scope of its Recent/Favorites/Trash slots (see ROOMS_SECTION_FOLDER_TYPES).
+ */
+export const AI_HUB_SECTION_FOLDER_TYPES = [
+  FolderType.InstructionsRoom,
+  FolderType.KnowledgeRoom,
+  FolderType.AiProjectRoom,
+];
 
 /**
  * Room types offered as filter options in the "Rooms" section dropdown.
@@ -58,7 +114,10 @@ import { isPrivateRoomsEnabled } from "./privateRooms";
  * Rooms/Forms split is enforced server-side by the room's folder type.
  */
 export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
-  (type) => type !== RoomsType.FormRoom && type !== RoomsTypePrivate,
+  (type) =>
+    type !== RoomsType.FormRoom &&
+    type !== RoomsTypePrivate &&
+    !AI_HUB_SECTION_TYPES.includes(type),
 );
 
 /**
@@ -66,7 +125,8 @@ export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
  * `folderType` scope filter of the Recent/Favorites/Trash aggregates
  * (`GET files/{folderId}?folderType=...`, bound to `List<FolderType>` on the
  * server). Mirrors ROOMS_SECTION_TYPES: form-filling rooms belong to the
- * "Forms" section and AI rooms to "AI Agents", so both are excluded here.
+ * "Forms" section and the AI room types to "AI rooms", so both are excluded
+ * here.
  */
 export const ROOMS_SECTION_FOLDER_TYPES = [
   FolderType.EditingRoom,
@@ -76,17 +136,15 @@ export const ROOMS_SECTION_FOLDER_TYPES = [
 ];
 
 /**
- * Room types the create-room chooser may offer, in catalog order.
- *
- * Private rooms are still unreleased, so their card is only offered when the
- * tester opted in via the `privateRooms` localStorage flag (see
- * ./privateRooms.ts). Read this per render instead of caching it at module
- * scope: the flag is flipped from the console at runtime.
+ * Room types the create-room chooser of the Rooms section may offer, in
+ * catalog order. The AI room types are created from the "AI rooms" section's
+ * own chooser (AI_HUB_SECTION_TYPES).
+ * Spec: private-rooms/sidebar-section, "Generic chooser does not offer the Private type"
  */
 export const getCreateRoomTypes = () =>
-  isPrivateRoomsEnabled()
-    ? RoomsTypeValues
-    : RoomsTypeValues.filter((type) => type !== RoomsTypePrivate);
+  RoomsTypeValues.filter(
+    (type) => !AI_HUB_SECTION_TYPES.includes(type) && type !== RoomsTypePrivate,
+  );
 
 const getRoomCreationAdditionalParams = (roomType: RoomsType) => {
   const additionalParams = {
@@ -240,7 +298,75 @@ const getFetchedRoomParams = (
   return fetchedRoomParams;
 };
 
+export type TRoomsRequestScope = {
+  privacyFilter: RoomPrivacyFilter;
+  searchArea?: RoomSearchArea;
+};
+
+/**
+ * What a rooms-list request must carry for the address it was made from. The
+ * Private section lists only private rooms, in the area its address names;
+ * Rooms and Rooms -> Archive list none, whether that section is available or
+ * not. Templates, Forms and AI agents searches are left alone.
+ */
+const getRoomsRequestScope = (
+  categoryType: ValueOf<typeof CategoryType>,
+  searchArea: RoomSearchArea | string | undefined,
+  isPrivateRoomsSectionAvailable: boolean,
+): TRoomsRequestScope | null => {
+  switch (categoryType) {
+    case CategoryType.PrivateRooms:
+    case CategoryType.PrivateRoom:
+      return {
+        privacyFilter: RoomPrivacyFilter.Private,
+        searchArea: RoomSearchArea.Active,
+      };
+    case CategoryType.PrivateArchive:
+      return {
+        privacyFilter: RoomPrivacyFilter.Private,
+        searchArea: RoomSearchArea.Archive,
+      };
+    case CategoryType.Shared:
+    case CategoryType.SharedRoom:
+    case CategoryType.Archive:
+    case CategoryType.ArchivedRoom: {
+      const isRoomsArea =
+        !searchArea ||
+        searchArea === RoomSearchArea.Active ||
+        searchArea === RoomSearchArea.Archive;
+      if (!isRoomsArea) return null;
+
+      // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available"
+      const isArchive =
+        searchArea === RoomSearchArea.Archive ||
+        (!searchArea &&
+          (categoryType === CategoryType.Archive ||
+            categoryType === CategoryType.ArchivedRoom));
+
+      return isPrivateRoomsSectionAvailable || isArchive
+        ? { privacyFilter: RoomPrivacyFilter.NotPrivate }
+        : null;
+    }
+    default:
+      return null;
+  }
+};
+
+/** A copy of the filter for the request; the filter itself stays as the address has it. */
+const withRoomsRequestScope = (
+  filter: RoomsFilter,
+  scope: TRoomsRequestScope | null,
+): RoomsFilter => {
+  if (!scope) return filter;
+  const scoped = filter.clone();
+  scoped.privacyFilter = scope.privacyFilter;
+  if (scope.searchArea) scoped.searchArea = scope.searchArea;
+  return scoped;
+};
+
 export {
+  getRoomsRequestScope,
+  withRoomsRequestScope,
   getStartRoomParams,
   getRoomCreationAdditionalParams,
   getFetchedRoomParams,

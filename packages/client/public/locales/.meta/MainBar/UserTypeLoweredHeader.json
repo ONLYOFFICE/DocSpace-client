@@ -1,0 +1,35 @@
+{
+  "key_path": "UserTypeLoweredHeader",
+  "content": "Your user type has been changed",
+  "content_en_sha1_hash": "87d793b9b62e6f3e1bad684c81c9b6583f5cb76c",
+  "created_at": "2026-10-26T15:55:48.607Z",
+  "updated_at": "2026-10-26T15:56:03.597Z",
+  "comment": {
+    "text": "Heading of the warning bar at the top of the page, shown when an administrator has just lowered the current user's type (e.g. from Room admin to User) while the page was open; user type here is the portal-wide account type, not a role in a room. A short statement in the perfect tense, addressed to the user.",
+    "is_auto": true,
+    "updated_at": "2026-10-26T15:56:03.597Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/MainBar/UserTypeLoweredBar.js",
+      "line_number": 55,
+      "context": "const onReload = () => window.location.reload();\n \n return (\n tReady && (\n <SnackBar\n headerText={t(\"UserTypeLoweredHeader\")}\n text={\n <>\n {t(\"UserTypeLoweredDescription\")}{\" \"}\n <Link\n fontSize=\"12px\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

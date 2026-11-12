@@ -35,44 +35,43 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import styles from "./StyledComponent.module.scss";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
-import { QuotaPerAIAgentComponentSection } from "./sub-components/QuotaPerAIAgent";
 
-const QuotaPerItemsComponent = ({ isStatisticsAvailable, aiServicesEnabled }) => {
+const QuotaPerItemsComponent = ({ isStatisticsAvailable, showRoomQuota }) => {
   if (isMobile())
     return (
       <MobileQuotasComponent
         isDisabled={!isStatisticsAvailable}
-        aiServicesEnabled={aiServicesEnabled}
+        showRoomQuota={showRoomQuota}
       />
     );
 
   return (
     <>
-      <QuotaPerRoomComponentSection />
+      {showRoomQuota ? <QuotaPerRoomComponentSection /> : null}
       <QuotaPerUserComponentSection />
-      {aiServicesEnabled ? <QuotaPerAIAgentComponentSection /> : null}
     </>
   );
 };
 
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
-  const { isBase } = useTheme();
 
-  const { isStatisticsAvailable, storageManagementUrl, aiServicesEnabled } =
-    props;
+  const { isStatisticsAvailable, storageManagementUrl, isAppInstalled } = props;
+
+  // A quota for a section switched off in Settings -> Apps has nothing to
+  // apply to. Read during render so the observer re-renders once the apps
+  // list arrives.
+  const showRoomQuota = isAppInstalled("ai-rooms");
 
   return (
     <div className={styles.baseQuotaComponent}>
@@ -82,16 +81,7 @@ const QuotasComponent = (props) => {
         </Text>
 
         {!isStatisticsAvailable ? (
-          <Badge
-            backgroundColor={
-              isBase
-                ? globalColors.favoritesStatus
-                : globalColors.favoriteStatusDark
-            }
-            label={t("Common:Paid")}
-            className="paid-badge"
-            isPaidBadge
-          />
+          <PaidBadge className="paid-badge" />
         ) : null}
       </div>
       <Text className="quotas_description">
@@ -112,19 +102,19 @@ const QuotasComponent = (props) => {
 
       <QuotaPerItemsComponent
         isStatisticsAvailable={isStatisticsAvailable}
-        aiServicesEnabled={aiServicesEnabled}
+        showRoomQuota={showRoomQuota}
       />
     </div>
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, appsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
-  const { storageManagementUrl, aiServicesEnabled } = settingsStore;
+  const { storageManagementUrl } = settingsStore;
 
   return {
     isStatisticsAvailable,
     storageManagementUrl,
-    aiServicesEnabled,
+    isAppInstalled: appsStore.isInstalled,
   };
 })(observer(QuotasComponent));

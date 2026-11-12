@@ -44,6 +44,63 @@ const createClient = (statuses: number[]) => {
   return { client, headers };
 };
 
+describe("AxiosClient OAuth problem details", () => {
+  beforeEach(() => {
+    requestAuthTokenMock.mockResolvedValue("token");
+  });
+
+  const rejectWith = (data: unknown) => {
+    const client = new AxiosClient();
+    client.client!.defaults.adapter = () =>
+      Promise.reject({ response: { status: 400, data } });
+    return client;
+  };
+
+  const problem = {
+    type: "https://api.onlyoffice.com/docspace/api-backend/get-started/basic-concepts",
+    title: "Bad Request",
+    status: 400,
+    detail: "User has reached the maximum allowed number of clients",
+    instance: "/api/2.0/clients",
+  };
+
+  it("exposes the detail as error.message for OAuth requests", async () => {
+    const client = rejectWith(problem);
+
+    await expect(
+      client.request({ method: "post", url: "/oauth2/clients" }, false, true),
+    ).rejects.toMatchObject({
+      response: {
+        data: {
+          ...problem,
+          error: { message: problem.detail },
+        },
+      },
+    });
+  });
+
+  it("keeps an existing error envelope", async () => {
+    const data = { ...problem, error: { message: "Already set" } };
+    const client = rejectWith(data);
+
+    await expect(
+      client.request({ method: "post", url: "/oauth2/clients" }, false, true),
+    ).rejects.toMatchObject({ response: { data: { error: { message: "Already set" } } } });
+  });
+
+  it("leaves non-OAuth responses untouched", async () => {
+    const client = rejectWith(problem);
+
+    const error = await client
+      .request({ method: "post", url: "/files" })
+      ?.catch((e: { response: { data: unknown } }) => e);
+
+    expect((error as { response: { data: unknown } }).response.data).toEqual(
+      problem,
+    );
+  });
+});
+
 describe("AxiosClient in an OAuth frame", () => {
   beforeEach(() => {
     requestAuthTokenMock.mockReset();

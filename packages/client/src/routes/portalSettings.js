@@ -42,6 +42,7 @@ import componentLoader from "@docspace/shared/utils/component-loader";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { generalRoutes } from "./general";
 
+import ProtectedAppRoute from "../components/ProtectedAppRoute";
 import { ViewComponent } from "../pages/PortalSettings/View";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
@@ -76,22 +77,26 @@ const PaymentsRedirect = inject(({ settingsStore }) => ({
 
 const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
   aiServicesEnabled: settingsStore.aiServicesEnabled,
+  standalone: settingsStore.standalone,
 }))(
-  observer(({ aiServicesEnabled, children }) => {
-    return aiServicesEnabled ? (
-      children
-    ) : (
-      <Navigate to="/portal-settings" replace />
-    );
+  observer(({ aiServicesEnabled, standalone, hideOnStandalone, children }) => {
+    if (!aiServicesEnabled) return <Navigate to="/portal-settings" replace />;
+
+    if (hideOnStandalone && standalone)
+      return <Navigate to="/portal-settings/ai-settings/ai-models" replace />;
+
+    return children;
   }),
 );
 
-// Wraps a lazily loaded settings section in the AI switch guard, so a
-// bookmark or an old link cannot open a page the portal no longer has.
-const withAIServicesGuard = (Component) => () => (
-  <ProtectedAISettingsRoute>
-    <Component />
-  </ProtectedAISettingsRoute>
+// Apps can be switched off only on a standalone installation; in SaaS every
+// app is always on, so the Apps section does not exist there.
+const ProtectedAppsSettingsRoute = inject(({ appsStore }) => ({
+  canManageApps: appsStore.canManageApps,
+}))(
+  observer(({ canManageApps, children }) => {
+    return canManageApps ? children : <Navigate to="/portal-settings" replace />;
+  }),
 );
 
 const PortalSettingsRoutes = {
@@ -105,7 +110,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization",
-      element: <Navigate to="customization/general" replace />,
+      element: <Navigate to="/portal-settings/customization/general" replace />,
     },
     {
       path: "customization/general",
@@ -121,6 +126,10 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization/default-templates",
+      element: <ViewComponent />,
+    },
+    {
+      path: "customization/metadata-templates",
       element: <ViewComponent />,
     },
     {
@@ -246,7 +255,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "security",
-      element: <Navigate to="security/access-portal" replace />,
+      element: <Navigate to="/portal-settings/security/access-portal" replace />,
     },
     {
       path: "security/access-portal",
@@ -387,6 +396,14 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/byok",
+      element: (
+        <ProtectedAISettingsRoute hideOnStandalone>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
       path: "ai-settings/model-assignment",
       element: (
         <ProtectedAISettingsRoute>
@@ -419,8 +436,32 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/limits",
+      element: (
+        <ProtectedAISettingsRoute hideOnStandalone>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
+      path: "ai-settings/document-agent",
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
+      path: "apps",
+      element: (
+        <ProtectedAppsSettingsRoute>
+          <ViewComponent />
+        </ProtectedAppsSettingsRoute>
+      ),
+    },
+    {
       path: "integration",
-      element: <Navigate to="integration/third-party-services" replace />,
+      element: <Navigate to="/portal-settings/integration/third-party-services" replace />,
     },
     {
       path: "integration/ldap",
@@ -521,7 +562,13 @@ const PortalSettingsRoutes = {
             import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom"),
         );
 
-        return { Component: QuotaPerRoomComponentSection };
+        return {
+          Component: () => (
+            <ProtectedAppRoute appId="ai-rooms">
+              <QuotaPerRoomComponentSection />
+            </ProtectedAppRoute>
+          ),
+        };
       },
     },
     {
@@ -536,25 +583,12 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "management/disk-space/quota-per-ai-agent",
-      async lazy() {
-        const { QuotaPerAIAgentComponentSection } = await componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent"),
-        );
-
-        return {
-          Component: withAIServicesGuard(QuotaPerAIAgentComponentSection),
-        };
-      },
-    },
-    {
       path: "data-import",
       element: <ViewComponent />,
     },
     {
       path: "backup",
-      element: <Navigate to="backup/data-backup" replace />,
+      element: <Navigate to="/portal-settings/backup/data-backup" replace />,
     },
     {
       path: "backup/data-backup",
@@ -566,7 +600,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "delete-data",
-      element: <Navigate to="delete-data/deletion" replace />,
+      element: <Navigate to="/portal-settings/delete-data/deletion" replace />,
     },
     {
       path: "delete-data/deletion",
@@ -578,7 +612,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "restore",
-      element: <Navigate to="restore/restore-backup" replace />,
+      element: <Navigate to="/portal-settings/restore/restore-backup" replace />,
     },
     {
       path: "restore/restore-backup",

@@ -3,7 +3,7 @@
   "content": "30 minutes",
   "content_en_sha1_hash": "31bbe8890d28d183f8f7f2c160fa892c444c0ec7",
   "created_at": "2026-05-24T17:27:19.166Z",
-  "updated_at": "2026-05-24T18:33:18.046Z",
+  "updated_at": "2026-11-05T16:49:39.980Z",
   "comment": {
     "text": "Label for a selection option in the AutoLock settings menu, representing a specific time duration.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/AutoLockSetting.tsx",
-      "line_number": 65,
+      "line_number": 66,
       "context": "const options = useMemo<TOption[]>(\n () => [\n { key: \"off\", label: t(\"Common:AutoLockOff\") },\n { key: \"5m\", label: t(\"Common:AutoLock5m\") },\n { key: \"15m\", label: t(\"Common:AutoLock15m\") },\n { key: \"30m\", label: t(\"Common:AutoLock30m\") },\n { key: \"1h\", label: t(\"Common:AutoLock1h\") },\n ],\n [t],\n );",
       "module": "/packages/client"
     }

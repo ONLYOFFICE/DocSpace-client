@@ -43,6 +43,7 @@ import { Tabs, TabsTypes } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { EmptyView } from "@onlyoffice/apps-ui-kit/components/empty-view";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { DocumentEditor, type IConfig } from "@onlyoffice/apps-ui-kit/document-editor";
+import type { Lang } from "@onlyoffice/doceditor-types";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -102,7 +103,8 @@ const Preview = ({
         url: DOCS_CONNECT_PREVIEW.source,
       },
       editorConfig: {
-        lang: i18n.language,
+        // `Lang` is a literal union; the portal culture is passed through as before.
+        lang: i18n.language as Lang,
         user: user ? { id: user.id, name: user.displayName } : undefined,
       },
     };
@@ -213,6 +215,7 @@ const Preview = ({
                     height="100%"
                     onLoadComponentError={() => setEditorError("load")}
                     events_onDocumentReady={() => setDocumentReady(true)}
+                    events_onError={() => setEditorError("sign")}
                   />
                 ) : null}
               </>

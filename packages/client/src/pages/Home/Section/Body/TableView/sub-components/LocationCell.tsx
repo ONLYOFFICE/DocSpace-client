@@ -102,6 +102,7 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 			color={sideColor}
 			className={`${styles.styledText} row_update-text`}
 			truncate
+			dir="auto"
 			data-tooltip-id={`${id}`}
 			data-tip=""
 		>
@@ -115,12 +116,13 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 				id={`${id}`}
 				afterShow={getPath}
 				getContent={() => (
-					<span>
+					<span className={styles.locationTooltipPath}>
 						{isPathLoading ? (
 							<Loader
 								color={globalColors.black}
 								size="12px"
 								type={LoaderTypes.track}
+								isDecorative
 							/>
 						) : (
 							path.map((pathPart, i) => {

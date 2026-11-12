@@ -3,7 +3,7 @@
   "content": "Storage quota set per room. You can change this value or turn off storage limit.",
   "content_en_sha1_hash": "028c2307b0c0d07b470ccffd77f244eff388b098",
   "created_at": "2025-05-19T21:30:56.836Z",
-  "updated_at": "2026-08-17T17:23:21.679Z",
+  "updated_at": "2026-10-31T12:58:28.929Z",
   "comment": {
     "text": "This is a description displayed below the storage quota input field in room settings. It explains that the storage quota is set per room and can be changed or disabled.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
-      "line_number": 81,
-      "context": "description={\n isAgent\n ? t(\"StorageDescriptionAgent\")\n : isFormSpace\n ? t(\"StorageDescriptionFormSpace\")\n : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent\n ? t(\"DisableRoomQuotaAgent\")\n : isFormSpace",
+      "line_number": 76,
+      "context": "<QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={\n isFormSpace\n ? t(\"StorageDescriptionFormSpace\")\n : t(\"StorageDescription\")\n }\n checkboxLabel={\n isFormSpace ? t(\"DisableRoomQuotaFormSpace\") : t(\"DisableRoomQuota\")\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}",
       "module": "/packages/client"
     },
     {

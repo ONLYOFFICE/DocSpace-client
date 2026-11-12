@@ -41,6 +41,7 @@ import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 import { isOAuthFrame } from "../utils/oauthToken";
 import { isPortalNotFoundRedirectClaimed } from "../utils/portalNotFound";
+import { keepPageForLogin } from "../utils/referenceUrl";
 import {
   hasDevToolsAccess,
   canOpenDocsConnect,
@@ -58,6 +59,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     isNotPaidPeriod,
     isAuthenticated,
     isPortalDeactivate,
+    isPortalBlocked,
 
     withManager,
     withCollaborator,
@@ -81,6 +83,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
   const location = useLocation();
 
+  // Nobody can work in a deactivated or a blocked portal; both only show the
+  // unavailable page, which tells them apart by the status.
+  const isPortalUnavailable = isPortalDeactivate || isPortalBlocked;
+
   const renderComponent = () => {
     // A deleted portal fails every request, this route among them, so the
     // branches below would send the visitor to the login page — which bounces
@@ -90,7 +96,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isPortalNotFoundRedirectClaimed()) return null;
 
     if (!user && isAuthenticated) {
-      if (isPortalDeactivate) {
+      if (isPortalUnavailable) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
@@ -107,12 +113,25 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
       const redirectPath = sessionStorage.getItem("referenceUrl");
 
-      if (loggedOutUserId && redirectPath && loggedOutUserId === user.id) {
+      // A tab sent to the login page keeps its address in referenceUrl.
+      // Logging in in another tab sends such a tab to the portal root, so it
+      // is brought back from here. The address is followed for the user who
+      // was there, and also when nothing names that user (the session ran
+      // out, an open document lost its session); only another user's page
+      // is never opened.
+      if (
+        redirectPath &&
+        (!loggedOutUserId || loggedOutUserId === user.id) &&
+        redirectPath !== window.location.href
+      ) {
         window.location.href = redirectPath;
       }
 
       sessionStorage.removeItem("referenceUrl");
       sessionStorage.removeItem("loggedOutUserId");
+      // Read by keepPageForLogin, whose callers have no user of their own
+      // to name.
+      sessionStorage.setItem("sessionUserId", user.id);
     }
 
     const isAccountsPage = location.pathname.includes("/accounts");
@@ -126,6 +145,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments" ||
       location.pathname === "/billing/tariff-plan";
+    const isPaymentCompleteUrl =
+      location.pathname === "/billing/payment-complete";
     const isBackupUrl =
       location.pathname === "/portal-settings/backup/data-backup";
 
@@ -187,7 +208,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <AppLoader />;
       }
 
-      if (isPortalDeactivate) {
+      if (isPortalUnavailable) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
@@ -201,8 +222,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
       const isHomeUrl = location.pathname === "/";
 
+      // A session that ended without a 401 (its cookie is gone, the page is
+      // reloaded) lands here rather than in the 401 handler.
       if (wizardCompleted && !isHomeUrl && !isLogout) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
+        keepPageForLogin();
       }
 
       window.location.replace(
@@ -218,7 +241,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
         (isCommunity && isPaymentsSection) ||
-        (isEnterprise && isBonusPage))
+        ((isEnterprise || !standalone) && isBonusPage))
     ) {
       return <Navigate replace to="/" />;
     }
@@ -280,6 +303,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       isLoaded &&
       (user?.isOwner || user?.isAdmin) &&
       !isPaymentsUrl &&
+      !isPaymentCompleteUrl &&
       !isBackupUrl &&
       !isPortalDeletionUrl &&
       !location.pathname.includes("wallet")
@@ -318,7 +342,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     // if (!isLoaded) {
     //   return <AppLoader />;
 
-    if (isPortalDeactivate && location.pathname !== "/unavailable") {
+    if (isPortalUnavailable && location.pathname !== "/unavailable") {
       return (
         <Navigate
           to={combineUrl(window.ClientConfig?.proxy?.url, "/unavailable")}
@@ -375,10 +399,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       // Docs Connect is SaaS-only and admin/owner-only even when the rest of
       // the section is open, so a standalone portal, a room admin or a user who
       // guesses the URL is bounced too.
-      // Docs Connect is SaaS-only. Within SaaS it opens for whoever the
-      // section opens for - a room admin or a user reads it with the
-      // configure action refused and an explanation above it, which is the
-      // page's own job (see `canManageDocsConnect`).
       if (
         isDocsConnectPage &&
         !canOpenDocsConnect(user, standalone, limitedAccessDevToolsForUsers)

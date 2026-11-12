@@ -317,6 +317,25 @@ export const docsConnectPaymentQuotaSuccess = (preset: DocsConnectPreset) => {
   };
 };
 
+export const DOCS_CONNECT_UPGRADE_PRORATION = (20 * 24 + 4) / (30 * 24);
+
+export const docsConnectUpgradeCalcSuccess = (
+  quantity: Record<string, number>,
+) => {
+  const [product, count] = Object.entries(quantity)[0] ?? ["", 0];
+  const price =
+    product === "docsclouddevpack"
+      ? DOCS_CONNECT_DEVPACK_FULL_PRICE
+      : DOCS_CONNECT_PRICE_PER_USER;
+
+  return {
+    operationId: 0,
+    amount: count * price * DOCS_CONNECT_UPGRADE_PRORATION,
+    currency: "USD",
+    quantity: count,
+  };
+};
+
 export const docsConnectDevPackCalcSuccess = (quantity: number) => ({
   operationId: 1,
   amount: 90,

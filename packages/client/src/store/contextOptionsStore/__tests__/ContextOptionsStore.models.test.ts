@@ -33,7 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { afterEach, describe, it, expect, beforeEach, vi } from "vitest";
+
+import { RoomsType } from "@docspace/shared/enums";
 
 import { createTestContextOptionsStore, menuShape, t } from "./testHarness";
 
@@ -57,6 +59,100 @@ describe("ContextOptionsStore.getFolderModel — characterization", () => {
     const model = store.getFolderModel(t);
     expect(Array.isArray(model)).toBe(true);
     expect(menuShape(model as unknown[])).toMatchSnapshot();
+  });
+
+  it("Create menu opened", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { security: { Create: true } },
+      treeFoldersStore: { isPrivacyFolder: true },
+      uploadDataStore: { shouldEncryptCurrentUpload: () => true },
+    });
+    const model = store.getFolderModel(t) as { key: string }[];
+
+    expect(model.map((option) => option.key)).toEqual([
+      "new-document",
+      "new-spreadsheet",
+      "new-presentation",
+      "new-pdf-form",
+      "new-folder",
+      "separator",
+      "upload-files",
+    ]);
+  });
+});
+
+describe("ContextOptionsStore.getFolderModel — Knowledge room", () => {
+  const knowledgeRoom = { security: { Create: true }, roomType: RoomsType.KnowledgeRoom };
+
+  it("offers the workspace and device uploads, in the empty view's order", () => {
+    const store = createTestContextOptionsStore({ selectedFolderStore: knowledgeRoom });
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
+      { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
+      { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },
+    ]);
+  });
+
+  it("offers nothing while vectorization is off", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: knowledgeRoom,
+      settingsStore: { aiConfig: { vectorizationEnabled: false } },
+    });
+    expect(store.getFolderModel(t)).toBeNull();
+  });
+});
+
+describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
+  const instructionsRoom = { security: { Create: true }, roomType: RoomsType.InstructionsRoom };
+
+  it("offers a skill from the template, the workspace and device uploads, and a skill written by AI", () => {
+    const store = createTestContextOptionsStore({ selectedFolderStore: instructionsRoom });
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
+      { key: "new-markdown", label: "Common:MarkdownFile" },
+      { key: "separator", label: undefined },
+      { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
+      { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },
+      { key: "create-skill-with-ai", label: "Common:CreateSkillWithAI" },
+    ]);
+  });
+
+  it("keeps them all while vectorization is off", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: instructionsRoom,
+      settingsStore: { aiConfig: { vectorizationEnabled: false } },
+    });
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(5);
+  });
+
+  // The template needs the AI service, not a model; writing with AI needs both.
+  it.each([
+    [
+      "the template and the uploads while AI is not set up on the portal",
+      { aiReady: false },
+      ["new-markdown", "separator", "upload-from-storage", "upload-from-device"],
+    ],
+    [
+      "only the uploads while AI services are off",
+      { aiServicesEnabled: false },
+      ["upload-from-storage", "upload-from-device"],
+    ],
+  ])("keeps %s", (_, settingsStore, keys) => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: instructionsRoom,
+      settingsStore,
+    });
+    expect(
+      menuShape(store.getFolderModel(t) as unknown[]).map(
+        (item) => (item as { key: string }).key,
+      ),
+    ).toEqual(keys);
+  });
+
+  it("offers the skill while it is not known yet whether AI is set up", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: instructionsRoom,
+      settingsStore: { aiReady: null },
+    });
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(5);
   });
 });
 
@@ -83,6 +179,69 @@ describe("ContextOptionsStore.getGroupContextOptions — characterization", () =
     const model = store.getGroupContextOptions(t);
     expect(Array.isArray(model)).toBe(true);
     expect(menuShape(model)).toMatchSnapshot();
+  });
+
+  // Bug 84823: the server keeps granting CreateRoomFrom when the Rooms app is
+  // switched off; the entry is disabled, which the menu then leaves out.
+  it("disables create-room while the Rooms app is off", () => {
+    const createRoomDisabled = (isRoomsSectionOff: boolean) => {
+      const store = createTestContextOptionsStore({
+        filesStore: {
+          isRoomsSectionOff,
+          selection: [
+            {
+              id: 1,
+              fileExst: ".docx",
+              security: { CreateRoomFrom: true },
+              contextOptions: [],
+            },
+          ],
+        },
+      });
+      const option = (
+        store.getGroupContextOptions(t) as Array<{
+          key?: string;
+          disabled?: boolean;
+        }>
+      ).find((o) => o.key === "create-room");
+      return option?.disabled;
+    };
+
+    expect(createRoomDisabled(false)).toBe(false);
+    expect(createRoomDisabled(true)).toBe(true);
+  });
+});
+
+describe("ContextOptionsStore.getGroupContextOptions — Private section", () => {
+  const ROOM_GROUP_KEYS = ["create-group", "add-to-group", "remove-from-group"];
+
+  const keysFor = (pathname: string) => {
+    window.history.pushState({}, "", pathname);
+    const store = createTestContextOptionsStore({
+      treeFoldersStore: { isRoomsFolder: true },
+      filesSettingsStore: { organizeRoomsGrouping: true },
+      dialogsStore: { roomGroups: [{ id: "g1", name: "Team" }] },
+      filesStore: {
+        roomsFilter: { groupId: "g1" },
+        selection: [
+          { id: 1, private: true, security: {}, contextOptions: [] },
+          { id: 2, private: true, security: {}, contextOptions: [] },
+        ],
+      },
+    });
+    return menuShape(store.getGroupContextOptions(t)).map((m) => m.key);
+  };
+
+  afterEach(() => window.history.pushState({}, "", "/"));
+
+  it("Context menu of a private room in the section", () => {
+    const inRooms = keysFor("/rooms/shared/filter");
+    const inPrivate = keysFor("/private/filter");
+
+    expect(inRooms).toEqual(expect.arrayContaining(ROOM_GROUP_KEYS));
+    expect(inPrivate).toEqual(
+      inRooms.filter((key) => !ROOM_GROUP_KEYS.includes(key as string)),
+    );
   });
 });
 

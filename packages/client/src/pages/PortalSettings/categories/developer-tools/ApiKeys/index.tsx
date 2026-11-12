@@ -73,10 +73,20 @@ const ApiKeys = (props: ApiKeysProps) => {
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] = useState(
     () => searchParams.get("create") === "true",
   );
+
+  const onSetCreateKeyDialogVisible = (visible: boolean) => {
+    setCreateKeyDialogIsVisible(visible);
+
+    if (visible || !searchParams.has("create")) return;
+
+    const params = new URLSearchParams(searchParams);
+    params.delete("create");
+    setSearchParams(params, { replace: true });
+  };
   const [deleteKeyDialogIsVisible, setDeleteKeyDialogIsVisible] =
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);
@@ -232,7 +242,7 @@ const ApiKeys = (props: ApiKeysProps) => {
       {createKeyDialogIsVisible ? (
         <CreateApiKeyDialog
           isVisible={createKeyDialogIsVisible}
-          setIsVisible={setCreateKeyDialogIsVisible}
+          setIsVisible={onSetCreateKeyDialogVisible}
           setListItems={setApiKeys}
           permissions={permissions}
           setActionItem={setActionItem}

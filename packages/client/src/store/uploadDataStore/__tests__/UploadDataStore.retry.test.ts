@@ -26,13 +26,49 @@
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  makeOpaqueUploadName,
+  prepareEncryptedUpload,
+  sniffDse3Upload,
+} from "@docspace/shared/services/private-room/encrypted-upload";
 import type { TTranslation } from "@docspace/shared/types";
 
 import {
   createTestUploadDataStore,
   installWindowGlobals,
+  makeBrowserFile,
+  makePrivateUploadTarget,
   makeUploadFile,
 } from "./testHarness";
+import * as filesApi from "@docspace/shared/api/files";
+import type { TUploadFile } from "../helpers";
+import type UploadDataStore from "../../UploadDataStore";
+
+vi.mock("@docspace/shared/services/encryption/secret-storage", async (orig) => {
+  const actual = (await orig()) as Record<string, unknown>;
+  return { ...actual, requireUnlock: vi.fn() };
+});
+
+vi.mock(
+  "@docspace/shared/services/encryption/device-setup-hint-notifier",
+  async (orig) => {
+    const actual = (await orig()) as Record<string, unknown>;
+    return { ...actual, requestDeviceSetupHint: vi.fn() };
+  },
+);
+
+vi.mock(
+  "@docspace/shared/services/private-room/encrypted-upload",
+  async (orig) => {
+    const actual = (await orig()) as Record<string, unknown>;
+    return {
+      ...actual,
+      prepareEncryptedUpload: vi.fn(),
+      sniffDse3Upload: vi.fn(),
+    };
+  },
+);
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
@@ -50,7 +86,7 @@ beforeEach(() => {
 });
 
 describe("UploadDataStore.retryUploadFiles", () => {
-  it("re-queues a failed upload: resets error state on file and history, restarts uploading", () => {
+  it("re-queues a failed upload: resets error state on file and history, restarts uploading", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const parallelSpy = stubStoreMethod(store, "parallelUploading");
 
@@ -82,7 +118,7 @@ describe("UploadDataStore.retryUploadFiles", () => {
     store.uploaded = true;
     store.quotaErrorRaised = true;
 
-    store.retryUploadFiles(t, "u1");
+    await store.retryUploadFiles(t, "u1");
 
     expect(store.files[0]).toMatchObject({
       action: "upload",
@@ -121,7 +157,7 @@ describe("UploadDataStore.retryUploadFiles", () => {
     expect(parallelSpy).toHaveBeenCalledWith([store.files[0]], t);
   });
 
-  it("routes a failed conversion retry through convertFile and leaves upload state alone", () => {
+  it("routes a failed conversion retry through convertFile and leaves upload state alone", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const parallelSpy = stubStoreMethod(store, "parallelUploading");
     const convertSpy = stubStoreMethod(store, "convertFile");
@@ -147,7 +183,7 @@ describe("UploadDataStore.retryUploadFiles", () => {
     ];
     store.quotaErrorRaised = true;
 
-    store.retryUploadFiles(t, "c1");
+    await store.retryUploadFiles(t, "c1");
 
     expect(store.files[0].inConversion).toBe(false);
     expect(store.uploadedFilesHistory[0].inConversion).toBe(false);
@@ -164,7 +200,7 @@ describe("UploadDataStore.retryUploadFiles", () => {
     ).not.toHaveBeenCalled();
   });
 
-  it("skips the progress-bar reset when an upload batch is still running", () => {
+  it("skips the progress-bar reset when an upload batch is still running", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const parallelSpy = stubStoreMethod(store, "parallelUploading");
 
@@ -189,7 +225,7 @@ describe("UploadDataStore.retryUploadFiles", () => {
     store.convertFilesSize = 555;
     store.uploaded = false;
 
-    store.retryUploadFiles(t, "u1");
+    await store.retryUploadFiles(t, "u1");
 
     expect(store.files[0]).toMatchObject({
       action: "upload",
@@ -210,7 +246,7 @@ describe("UploadDataStore.retryUploadFiles", () => {
 });
 
 describe("UploadDataStore.retryQuotaFailedFiles", () => {
-  it("resets every quota-failed file in one pass and re-uploads exactly that set", () => {
+  it("resets every quota-failed file in one pass and re-uploads exactly that set", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const parallelSpy = stubStoreMethod(store, "parallelUploading");
 
@@ -261,7 +297,7 @@ describe("UploadDataStore.retryQuotaFailedFiles", () => {
     store.uploaded = true;
     store.quotaErrorRaised = true;
 
-    store.retryQuotaFailedFiles(t);
+    await store.retryQuotaFailedFiles(t);
 
     const resetShape = {
       action: "upload",
@@ -311,7 +347,7 @@ describe("UploadDataStore.retryQuotaFailedFiles", () => {
     );
   });
 
-  it("does nothing when no file failed with a quota error", () => {
+  it("does nothing when no file failed with a quota error", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const parallelSpy = stubStoreMethod(store, "parallelUploading");
 
@@ -320,7 +356,7 @@ describe("UploadDataStore.retryQuotaFailedFiles", () => {
     ];
     store.quotaErrorRaised = true;
 
-    store.retryQuotaFailedFiles(t);
+    await store.retryQuotaFailedFiles(t);
 
     expect(store.quotaErrorRaised).toBe(true);
     expect(parallelSpy).not.toHaveBeenCalled();
@@ -329,7 +365,7 @@ describe("UploadDataStore.retryQuotaFailedFiles", () => {
     ).not.toHaveBeenCalled();
   });
 
-  it("resets a quota-failed file with no history entry and skips progress while uploading", () => {
+  it("resets a quota-failed file with no history entry and skips progress while uploading", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const parallelSpy = stubStoreMethod(store, "parallelUploading");
 
@@ -351,7 +387,7 @@ describe("UploadDataStore.retryQuotaFailedFiles", () => {
     store.uploaded = false;
     store.quotaErrorRaised = true;
 
-    store.retryQuotaFailedFiles(t);
+    await store.retryQuotaFailedFiles(t);
 
     expect(store.files[0]).toMatchObject({
       action: "upload",
@@ -443,5 +479,225 @@ describe("UploadDataStore.retryConvertFiles", () => {
       store.displayedConversionFiles[0],
       t,
     );
+  });
+});
+
+describe("UploadDataStore retry — the private-room rules run again on the fixed target", () => {
+  const ROOM_ID = 50;
+  const OPAQUE_NAME =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/;
+  const userWithKeys = {
+    user: { id: "user-1", isAdmin: false },
+    encryptionKeys: [{ id: "key-1", publicKey: "pub-b64" }],
+  };
+
+  const failedPrivateItem = (
+    uniqueId: string,
+    overrides: Partial<TUploadFile> = {},
+  ) =>
+    makeUploadFile({
+      uniqueId,
+      file: makeBrowserFile(`${uniqueId}.docx`, 100),
+      action: "upload",
+      error: "Server error",
+      inAction: true,
+      toFolderId: ROOM_ID,
+      encryptionRoomId: ROOM_ID,
+      target: makePrivateUploadTarget({ folderId: ROOM_ID }),
+      ...overrides,
+    });
+
+  /** The Rooms list is open: nothing about the open folder is private. */
+  const storeWithFailed = (
+    items: TUploadFile[],
+    userStore: Record<string, unknown> = userWithKeys,
+  ) => {
+    const { store } = createTestUploadDataStore({
+      selectedFolderStore: { id: 2002, isRoom: false, navigationPath: [] },
+      treeFoldersStore: { isPrivacyFolder: false },
+      userStore,
+    });
+    store.files = items;
+    store.uploadedFilesHistory = items.map((i) => ({ ...i }));
+    store.uploaded = true;
+    return store;
+  };
+
+  const sessionCalls = () => vi.mocked(filesApi.startUploadSession).mock.calls;
+
+  const expectEncryptedIntoRoom = () => {
+    for (const [folderId, name, , , encrypted] of sessionCalls()) {
+      expect(folderId).toBe(ROOM_ID);
+      expect(name).toMatch(OPAQUE_NAME);
+      expect(encrypted).toBe(true);
+    }
+  };
+
+  beforeEach(() => {
+    vi.mocked(sniffDse3Upload).mockResolvedValue(null);
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+    vi.mocked(prepareEncryptedUpload).mockImplementation(
+      async (config) =>
+        ({
+          data: new Blob([new Uint8Array(config.file.size + 100)]),
+          encrypted: true,
+          dek: new Uint8Array([1, 2, 3]),
+          uploadFileName: makeOpaqueUploadName(config.file.name),
+          originalFileType: "application/octet-stream",
+          originalFileSize: config.file.size,
+          originalFileName: config.file.name,
+        }) as never,
+    );
+  });
+
+  it("Retry from another folder", async () => {
+    const store = storeWithFailed([failedPrivateItem("a")]);
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+
+    await store.retryUploadFiles(t, "a");
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(1));
+
+    expect(
+      new Set(vi.mocked(requireUnlock).mock.calls.map(([userId]) => userId)),
+    ).toEqual(new Set(["user-1"]));
+    expect(
+      vi.mocked(requireUnlock).mock.invocationCallOrder[0],
+    ).toBeLessThan(
+      vi.mocked(filesApi.startUploadSession).mock.invocationCallOrder[0],
+    );
+    expect(vi.mocked(prepareEncryptedUpload).mock.calls[0][0]).toMatchObject({
+      isPrivate: true,
+    });
+    expectEncryptedIntoRoom();
+  });
+
+  it("Retry still without a key", async () => {
+    const store = storeWithFailed(
+      [
+        failedPrivateItem("a", {
+          error: "Common:EncryptionKeysRequiredForUpload",
+        }),
+      ],
+      { user: { id: "user-1", isAdmin: false }, encryptionKeys: [] },
+    );
+    stubStoreMethod(store, "finishUploadFiles");
+
+    await store.retryUploadFiles(t, "a");
+    await vi.waitFor(() =>
+      expect(store.files[0].error).toBe(
+        "Common:EncryptionKeysRequiredForUpload",
+      ),
+    );
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+  });
+
+  it("Retry while locked", async () => {
+    const store = storeWithFailed([failedPrivateItem("a")]);
+    vi.mocked(requireUnlock).mockResolvedValue(null as never);
+    const finishUploadFiles = stubStoreMethod(store, "finishUploadFiles");
+
+    await store.retryUploadFiles(t, "a");
+
+    expect(store.files[0].error).toBe("Common:EncryptionLockedUpload");
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionLockedUpload",
+    );
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(filesApi.setFileEncryptionKeys).not.toHaveBeenCalled();
+    expect(finishUploadFiles).toHaveBeenCalledTimes(1);
+  });
+
+  it("Retry after a quota failure", async () => {
+    const store = storeWithFailed([
+      failedPrivateItem("a", { error: "Quota exceeded", isQuotaError: true }),
+      failedPrivateItem("b", { error: "Quota exceeded", isQuotaError: true }),
+    ]);
+    vi.mocked(requireUnlock).mockResolvedValue({ pub: "x" } as never);
+
+    await store.retryQuotaFailedFiles(t);
+    await vi.waitFor(() => expect(sessionCalls()).toHaveLength(2));
+
+    expect(
+      new Set(vi.mocked(requireUnlock).mock.calls.map(([userId]) => userId)),
+    ).toEqual(new Set(["user-1"]));
+    expectEncryptedIntoRoom();
+  });
+
+  describe("Retry while another upload is running", () => {
+    const answerLater = () => {
+      let answer!: (identity: unknown) => void;
+      vi.mocked(requireUnlock).mockReturnValue(
+        new Promise((resolve) => {
+          answer = resolve;
+        }) as never,
+      );
+      return (identity: unknown) => answer(identity);
+    };
+
+    /** What the queue does when one of its files finishes. */
+    const queueMovesOn = (store: UploadDataStore) => {
+      const next = store.files.findIndex((f) => !f.inAction);
+      if (next !== -1) store.startSessionFunc(next, t);
+    };
+
+    const settle = () => new Promise((resolve) => setTimeout(resolve, 50));
+
+    const storeWithRunningQueue = () => {
+      const store = storeWithFailed([
+        makeUploadFile({ uniqueId: "running", action: "upload", inAction: true }),
+        failedPrivateItem("a"),
+      ]);
+      store.uploaded = false;
+      return store;
+    };
+
+    it("starts no session before the prompt is answered and one after it is accepted", async () => {
+      const store = storeWithRunningQueue();
+      const answer = answerLater();
+
+      const retry = store.retryUploadFiles(t, "a");
+      await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+      queueMovesOn(store);
+      await settle();
+
+      expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+      expect(sessionCalls()).toHaveLength(0);
+
+      answer({ pub: "x" });
+      await retry;
+      await vi.waitFor(() => expect(sessionCalls()).toHaveLength(1));
+
+      queueMovesOn(store);
+      store.startSessionFunc(1, t);
+      await settle();
+
+      expect(sessionCalls()).toHaveLength(1);
+      expectEncryptedIntoRoom();
+    });
+
+    it("fails the file with Common:EncryptionLockedUpload when the prompt is declined", async () => {
+      const store = storeWithRunningQueue();
+      const answer = answerLater();
+
+      const retry = store.retryUploadFiles(t, "a");
+      await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+      queueMovesOn(store);
+      answer(null);
+      await retry;
+      queueMovesOn(store);
+      await settle();
+
+      expect(store.files[1].error).toBe("Common:EncryptionLockedUpload");
+      expect(store.uploadedFilesHistory[1].error).toBe(
+        "Common:EncryptionLockedUpload",
+      );
+      expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+      expect(sessionCalls()).toHaveLength(0);
+    });
   });
 });

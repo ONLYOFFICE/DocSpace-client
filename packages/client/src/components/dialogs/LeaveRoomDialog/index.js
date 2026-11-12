@@ -37,6 +37,7 @@ import { useEffect, useState } from "react";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
@@ -49,7 +50,6 @@ const LeaveRoomDialog = (props) => {
     setIsVisible,
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
-    isAIAgent,
     isFormSpace,
     isFormFiller,
     onLeaveRoomAction,
@@ -65,14 +65,19 @@ const LeaveRoomDialog = (props) => {
       onClose();
     } else {
       setIsLoading(true);
-      await onLeaveRoomAction(t, isRoomOwner, isFormFiller);
-      setIsLoading(false);
-      onClose();
+      try {
+        await onLeaveRoomAction(t, isRoomOwner, isFormFiller);
+        onClose();
+      } catch (e) {
+        // Spec: private-rooms/room-membership, "Leaving a room drops the role without a client revocation"
+        toastr.error(e);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
     if (e.keyCode === 13 || e.which === 13) onLeaveRoom();
   };
 
@@ -84,23 +89,15 @@ const LeaveRoomDialog = (props) => {
     };
   }, []);
 
-  const titleText = isAIAgent
-    ? t("Common:LeaveTheAgent")
-    : isFormSpace
-      ? t("Common:LeaveTheFormSpace")
-      : t("Common:LeaveTheRoom");
+  const titleText = isFormSpace
+    ? t("Common:LeaveTheFormSpace")
+    : t("Common:LeaveTheRoom");
 
-  const roomDescription = isRoomOwner
+  const descriptionText = isRoomOwner
     ? t("Common:LeaveRoomDescription")
     : t("Common:WantLeaveRoom");
 
-  const agentDescription = isRoomOwner
-    ? t("Common:LeaveAgentDescription")
-    : t("Common:WantLeaveAgent");
-
-  const descriptionText = isAIAgent ? agentDescription : roomDescription;
-
-  const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;
+  const showFormFillingWarning = isFormFiller && !isRoomOwner;
 
   const okButtonLabel = isRoomOwner
     ? t("Common:AssignOwner")
@@ -170,7 +167,6 @@ export default inject(
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
-    const isAIAgent = folderItem?.isAIAgent;
     const isFormSpace = folderItem?.roomType === RoomsType.FormRoom;
     const isFormFiller = folderItem?.access === ShareAccessRights.FormFilling;
 
@@ -179,7 +175,6 @@ export default inject(
       setIsVisible,
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
-      isAIAgent,
       isFormSpace,
       isFormFiller,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,

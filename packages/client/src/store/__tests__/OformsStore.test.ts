@@ -365,6 +365,23 @@ describe("OformsStore taxonomy loading", () => {
     expect(store.purposes).toEqual([]);
     expect(store.categoryFilterLoaded).toBe(true);
   });
+
+  it("keeps the taxonomy of the latest tab when an earlier one answers later", async () => {
+    const store = createStore();
+    const stale = deferred<TOformPurpose[]>();
+    const latest = [purposes[1]];
+    api.getOformPurposes
+      .mockReturnValueOnce(stale.promise)
+      .mockResolvedValueOnce(latest);
+
+    const spreadsheets = store.resetFilters(".xlsx");
+    await store.resetFilters(".docx");
+
+    stale.resolve(purposes);
+    await spreadsheets;
+
+    expect(store.purposes).toEqual(latest);
+  });
 });
 
 describe("OformsStore list loading", () => {

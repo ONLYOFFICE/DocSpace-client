@@ -39,84 +39,95 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
+import type {
+  TInviteOutcome,
+  TInviteeVerification,
+} from "@docspace/shared/services/private-room/room-member-flows";
+import type { SkippedRoomMember } from "@docspace/shared/services/private-room/room-encryption";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
+import { usePrivateDialogsStore } from "../_store/PrivateDialogsStore";
 import {
   registerCryptoOperation,
   releaseCryptoOperation,
 } from "../_utils/abort-registry";
 
-type InviteAfterSubmitArgs = {
+type InviteVerifyArgs = {
   roomId: number;
   memberIds: string[];
   displayNames: Record<string, string>;
 };
 
-/** Progress of the ongoing re-encryption fan-out. */
-export type ReencryptProgress = {
-  /** Number of files already processed (DEK re-wrapped). */
-  processed: number;
-  /** Total files to process. */
-  total: number;
+type InviteAfterSubmitArgs = InviteVerifyArgs & {
+  /** The invitees the verification before the grant left out. */
+  skipped?: SkippedRoomMember[];
 };
 
 type UsePrivateInviteFlowReturn = {
   /**
-   * Invoked AFTER setRoomSecurity succeeds. Requires unlock, then runs
-   * addMembersToEncryptedRoom to wrap existing file DEKs for the new members.
-   * Skipped recipients (no-key / TOFU-refused) surface as a toastr warning;
-   * other errors propagate so InvitePanel keeps itself open.
+   * Verifies the invitees' keys before the room security update, through
+   * the shared flow: the ones it skips are not granted the room.
+   */
+  onVerifyInvitees: (args: InviteVerifyArgs) => Promise<TInviteeVerification>;
+  /**
+   * Invoked once the room security update has succeeded: wraps the room's
+   * file keys for the new members through the shared flow, with the
+   * re-encryption progress in the dialogs store, and resolves with how the
+   * invitation ended for each of them, or `null` when there is nothing to
+   * report.
    */
   onInviteSubmitted: (
     args: InviteAfterSubmitArgs,
-  ) => Promise<void>;
+  ) => Promise<TInviteOutcome | null>;
   /**
-   * Pre-submit identity gate for use as InvitePanel's `onBeforeSubmit` prop.
-   * Calls requireIdentity(); on null (locked / user cancelled) shows the
-   * `EncryptionLockedAddMembers` toast and returns false, preventing
-   * setRoomSecurity from being called with locked keys.
+   * Pre-submit identity gate for InvitePanel's `onBeforeSubmit`: unlocks
+   * before the server grants room access, and refuses with
+   * `EncryptionLockedAddMembers` when the user cancels.
    */
   onBeforeSubmit: () => Promise<boolean>;
-  isLoading: boolean;
-  /**
-   * Live re-encryption progress, non-null while addMembersToEncryptedRoom is
-   * running. Resets to null in the finally block (success OR failure).
-   * Consumers render a progress bar while this is non-null.
-   */
-  reencryptProgress: ReencryptProgress | null;
 };
 
-const loadRoomEncryption = () =>
-  import("@docspace/shared/services/private-room/room-encryption");
-
-/**
- * Returns true when a re-encryption error should be treated as a silent
- * abort: either the controller was already aborted before the error was
- * thrown, or the error itself is a DOM/Node AbortError.
- *
- * Exported for unit testing.
- */
-export function isReencryptAbortError(
-  controller: AbortController,
-  error: unknown,
-): boolean {
-  if (controller.signal.aborted) return true;
-  if (error instanceof Error && error.name === "AbortError") return true;
-  return false;
-}
+const loadMemberFlows = () =>
+  import("@docspace/shared/services/private-room/room-member-flows");
 
 export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
   const { t } = useTranslation(["Common"]);
   const { requireIdentity } = useEncryption();
   const identityStore = useEncryptionIdentityStore();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [reencryptProgress, setReencryptProgress] =
-    React.useState<ReencryptProgress | null>(null);
+  const dialogs = usePrivateDialogsStore();
+
+  const onVerifyInvitees = React.useCallback(
+    async ({ roomId, memberIds, displayNames }: InviteVerifyArgs) => {
+      const userId = identityStore.userKeys?.userId;
+      if (!userId) {
+        throw new Error(t("Common:EncryptionKeysNotConfigured"));
+      }
+      const { verifyInvitees } = await loadMemberFlows();
+      return verifyInvitees({
+        roomId,
+        invitees: memberIds.map((id) => ({ id, displayName: displayNames[id] })),
+        currentUserId: userId,
+      });
+    },
+    [identityStore, t],
+  );
 
   const onInviteSubmitted = React.useCallback(
-    async ({ roomId, memberIds, displayNames }: InviteAfterSubmitArgs) => {
-      if (memberIds.length === 0) return;
+    async ({
+      roomId,
+      memberIds,
+      displayNames,
+      skipped = [],
+    }: InviteAfterSubmitArgs) => {
+      if (memberIds.length === 0) {
+        if (skipped.length === 0) return null;
+        const { skippedMemberNotices } = await loadMemberFlows();
+        for (const { level, text } of skippedMemberNotices(t, skipped)) {
+          toastr[level](text);
+        }
+        return { granted: [], pending: [], skipped };
+      }
 
       const userId = identityStore.userKeys?.userId;
       if (!userId) {
@@ -125,99 +136,43 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
 
       const identity = await requireIdentity();
       if (!identity) {
-        // Cancelled passphrase dialog — surface as user-actionable error so
-        // InvitePanel doesn't silently treat the invite as fully successful.
         throw new Error(t("Common:EncryptionUnlockRequired"));
       }
 
       const controller = registerCryptoOperation();
-      setIsLoading(true);
+      dialogs.setReencryptPercent(0);
       try {
-        const { addMembersToEncryptedRoom } = await loadRoomEncryption();
-        if (controller.signal.aborted) return;
-        const result = await addMembersToEncryptedRoom(
+        const { rewrapForInvitedMembers } = await loadMemberFlows();
+        let outcome: TInviteOutcome | null = null;
+        const notices = await rewrapForInvitedMembers({
+          t,
           roomId,
-          memberIds.map((id) => ({ id, displayName: displayNames[id] })),
-          {
-            currentUserId: userId,
-            identity,
-            onProgress: (processed, total) => {
-              setReencryptProgress({ processed, total });
-            },
+          newMembers: memberIds.map((id) => ({
+            id,
+            displayName: displayNames[id],
+          })),
+          skippedBeforeGrant: skipped,
+          currentUserId: userId,
+          identity,
+          onProgress: ({ percent, completed }) => {
+            if (!completed) dialogs.setReencryptPercent(percent);
           },
-        );
-        if (controller.signal.aborted) return;
-
-        // Split skipped members by reason and show separate toasts so the
-        // user understands exactly why each person was skipped.
-        const noKeyNames = result.skippedMembers
-          .filter((m) => m.reason === "no-key")
-          .map((m) => m.displayName || m.id);
-        const mismatchNames = result.skippedMembers
-          .filter((m) => m.reason === "key-mismatch-refused")
-          .map((m) => m.displayName || m.id);
-
-        if (noKeyNames.length > 0) {
-          toastr.warning(
-            t("Common:EncryptedSkippedNoKeys", {
-              users: noKeyNames.join(", "),
-            }),
-          );
-        }
-        if (mismatchNames.length > 0) {
-          toastr.warning(
-            t("Common:EncryptedSkippedKeyMismatch", {
-              users: mismatchNames.join(", "),
-            }),
-          );
-        }
-
-        // Per-file failures (DEK unwrap / re-wrap errors) are a separate
-        // partial-failure condition, independent of skipped members.
-        const failures = result.fileResults.filter((r) => !r.success);
-        if (failures.length > 0) {
-          toastr.warning(
-            t("Common:EncryptedReencryptPartialFailure", {
-              count: failures.length,
-            }),
-          );
-        } else if (result.skippedMembers.length === 0) {
-          // Zero skipped and zero file failures → fully successful invite.
-          toastr.success(t("Common:UsersInvited"));
-        }
-
-        // Silent follow-up: backfill envelopes for members who registered
-        // their keypair after the initial invite (their pre-existing files
-        // would otherwise stay inaccessible). Fire-and-forget; skip when
-        // the operation was already aborted (user navigated away).
-        if (!controller.signal.aborted) {
-          void loadRoomEncryption()
-            .then(({ backfillEncryptedFilesForRoomMembers }) =>
-              backfillEncryptedFilesForRoomMembers(roomId, {
-                currentUserId: userId,
-                identity,
-                onKeyChange: async () => "refuse",
-              }),
-            )
-            .catch(() => {});
-        }
-      } catch (error) {
-        // Abort (user locked / navigated away) is expected — stay silent.
-        if (!isReencryptAbortError(controller, error)) {
-          toastr.error(t("Common:EncryptedReencryptFailed"));
-        }
+          onOutcome: (value) => {
+            outcome = value;
+          },
+        });
+        // A lock or a navigation aborts the operation; nothing is reported.
+        if (controller.signal.aborted) return null;
+        for (const { level, text } of notices) toastr[level](text);
+        return outcome;
       } finally {
         releaseCryptoOperation(controller);
-        setIsLoading(false);
-        setReencryptProgress(null);
+        dialogs.setReencryptPercent(null);
       }
     },
-    [requireIdentity, identityStore, t],
+    [requireIdentity, identityStore, dialogs, t],
   );
 
-  // Pre-submit guard wired to InvitePanel's onBeforeSubmit prop. Runs BEFORE
-  // setRoomSecurity so that server access is never granted when encryption keys
-  // are absent or locked. Mirrors packages/client InvitePanel:452-459 pattern.
   const onBeforeSubmit = React.useCallback(async (): Promise<boolean> => {
     const identity = await requireIdentity();
     if (!identity) {
@@ -227,5 +182,5 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
     return true;
   }, [requireIdentity, t]);
 
-  return { onInviteSubmitted, onBeforeSubmit, isLoading, reencryptProgress };
+  return { onVerifyInvitees, onInviteSubmitted, onBeforeSubmit };
 };

@@ -36,6 +36,7 @@
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TTranslation } from "@docspace/shared/types";
 import FilesHeaderOptionStore from "../FilesHeaderOptionStore";
@@ -54,13 +55,12 @@ self: FilesActionStore,option: string
     hasRoomsToResetQuota,
     hasRoomsToDisableQuota,
     hasRoomsToChangeQuota,
-    hasAIAgentsToChangeQuota,
-    hasAIAgentsToDisableQuota,
-    hasAIAgentsToResetQuota,
   } = self.filesStore;
 
   const { rootFolderType } = self.selectedFolderStore;
   const canDownload = selection.every((s) => s.security?.Download);
+  // Spec: private-rooms/sidebar-section, "No room groups in the section"
+  const isPrivateSection = isPrivateRoomsRoute(window.location.pathname);
 
   switch (option) {
     case "copy": {
@@ -110,6 +110,8 @@ self: FilesActionStore,option: string
       return !allFilesIsEditing && canDelete && hasSelection;
     }
     case "create-room": {
+      if (self.filesStore.isRoomsSectionOff) return false;
+
       const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
       return canCreateRoom;
     }
@@ -119,6 +121,7 @@ self: FilesActionStore,option: string
       return (
         organizeRoomsGrouping &&
         (isRoomsFolder || isFormsFolder) &&
+        !isPrivateSection &&
         hasSelection
       );
     }
@@ -129,6 +132,7 @@ self: FilesActionStore,option: string
       return (
         organizeRoomsGrouping &&
         (isRoomsFolder || isFormsFolder) &&
+        !isPrivateSection &&
         hasSelection &&
         roomGroups &&
         roomGroups.length > 0
@@ -142,6 +146,7 @@ self: FilesActionStore,option: string
       return (
         organizeRoomsGrouping &&
         (isRoomsFolder || isFormsFolder) &&
+        !isPrivateSection &&
         hasSelection &&
         roomGroups &&
         roomGroups.length > 0 &&
@@ -150,16 +155,10 @@ self: FilesActionStore,option: string
     }
     case "change-quota":
       return hasRoomsToChangeQuota;
-    case "change-agent-quota":
-      return hasAIAgentsToChangeQuota;
     case "disable-quota":
       return hasRoomsToDisableQuota;
-    case "disable-agent-quota":
-      return hasAIAgentsToDisableQuota;
     case "default-quota":
       return hasRoomsToResetQuota;
-    case "default-agent-quota":
-      return hasAIAgentsToResetQuota;
     case "vectorization":
       return selection.some((s) => s.security?.Vectorization);
     default:
@@ -242,10 +241,12 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
   const moveTo = self.getOption("moveTo", t);
   const deleteOption = self.getOption("delete", t);
   const download = self.getOption("download", t);
+  const downloadEncrypted = self.getOption("downloadEncrypted", t);
   const showInfo = self.getOption("showInfo", t);
 
   itemsCollection
     .set("download", download)
+    .set("downloadEncrypted", downloadEncrypted)
     .set("moveTo", moveTo)
     .set("delete", deleteOption)
     .set("showInfo", showInfo);
@@ -327,8 +328,14 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
   let pinName = "unpin";
   const { selection } = self.filesStore;
 
+  // Form rooms and the AI types are never archived (the AI sections hold
+  // nothing else), so a selection holding one offers no "Archive".
   const hasFormRoom = selection.some(
-    (item) => item.roomType === RoomsType.FormRoom,
+    (item) =>
+      item.roomType === RoomsType.FormRoom ||
+      item.roomType === RoomsType.InstructionsRoom ||
+      item.roomType === RoomsType.KnowledgeRoom ||
+      item.roomType === RoomsType.AiProjectRoom,
   );
 
   selection.forEach((item) => {
@@ -373,32 +380,6 @@ self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
 };
 
 
-export const getAIAgentsFolderOptionsImpl = (
-self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
-)=> {
-  let pinName = "unpin";
-  const { selection } = self.filesStore;
-
-  selection.forEach((item) => {
-    if (!item.pinned) pinName = "pin";
-  });
-
-  const pin = self.getOption(pinName, t);
-  const changeQuota = self.getOption("change-agent-quota", t);
-  const disableQuota = self.getOption("disable-agent-quota", t);
-  const defaultQuota = self.getOption("default-agent-quota", t);
-  const deleteOption = self.getOption("delete-room", t);
-
-  itemsCollection
-    .set(pinName, pin)
-    .set("change-agent-quota", changeQuota)
-    .set("default-agent-quota", defaultQuota)
-    .set("disable-agent-quota", disableQuota)
-    .set("delete", deleteOption);
-
-  return convertToArray(itemsCollection);
-};
-
 
 export const getAnotherFolderOptionsImpl = (
 self: FilesActionStore,itemsCollection: TItemsCollection, t: TTranslation
@@ -438,8 +419,8 @@ self: FilesActionStore,t: TTranslation
     isArchiveFolder,
     isRecentFolder,
     isTemplatesFolder,
-    isAIAgentsFolder,
     isFormsFolder,
+    isAiSectionFolder,
   } = self.treeFoldersStore;
 
   const itemsCollection = new Map();
@@ -460,14 +441,11 @@ self: FilesActionStore,t: TTranslation
   if (isArchiveFolder)
     return self.getArchiveRoomsFolderOptions(itemsCollection, t);
 
-  if (isRoomsFolder || isFormsFolder)
+  if (isRoomsFolder || isFormsFolder || isAiSectionFolder)
     return self.getRoomsFolderOptions(itemsCollection, t);
 
   if (isTemplatesFolder)
     return self.getTemplatesFolderOptions(itemsCollection, t);
-
-  if (isAIAgentsFolder)
-    return self.getAIAgentsFolderOptions(itemsCollection, t);
 
   return self.getAnotherFolderOptions(itemsCollection, t);
 };

@@ -222,6 +222,7 @@ const TemplatesRow = ({
           fontWeight={700}
           lineHeight="100%"
           padding="2px 5px"
+          maxWidth="none"
         />
       </div>
       <ContextMenuButton
@@ -243,7 +244,6 @@ const TemplatesRow = ({
           isMultiSelect={false}
           withRecentTreeFolder
           withFavoritesTreeFolder
-          withAIAgentsTreeFolder
           openRoot
           isSelect
         />

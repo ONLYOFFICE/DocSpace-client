@@ -109,7 +109,7 @@ const SimpleRoom = (props) => {
   const { t, fetchExternalLinks, currentColorScheme, theme } = props;
   const navigate = useNavigate();
 
-  setDocumentTitle(t("JavascriptSdk"));
+  setDocumentTitle(t("Settings:EmbedSDK"));
 
   const [version, onSetVersion] = useState(sdkVersion[220]);
 
@@ -491,6 +491,7 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
 })(
   withTranslation([
     "JavascriptSdk",
+    "Settings",
     "Files",
     "Common",
     "Files",

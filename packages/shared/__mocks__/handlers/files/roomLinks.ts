@@ -100,9 +100,13 @@ export const roomContentHandler = (
   fileId: number | string,
   {
     security: securityOverrides,
+    pathParts: pathPartsOverride,
     ...currentOverrides
   }: Record<string, unknown> & {
-    security?: Record<string, boolean>;
+    // null drops the room's security from the response altogether
+    security?: Record<string, boolean> | null;
+    // serves a folder inside a room instead of the room itself
+    pathParts?: { id: number | string; title: string; folderType: number }[];
   } = {},
 ) =>
   http.get(
@@ -207,32 +211,35 @@ export const roomContentHandler = (
             roomType: 6,
             canShare: true,
             shareSettings: { ExternalLink: 6, PrimaryExternalLink: 1 },
-            security: {
-              Read: true,
-              Create: true,
-              Delete: false,
-              EditRoom: true,
-              Rename: true,
-              CopyTo: true,
-              Copy: true,
-              MoveTo: true,
-              Move: true,
-              Pin: true,
-              Mute: true,
-              EditAccess: true,
-              Duplicate: true,
-              Download: true,
-              CopySharedLink: true,
-              Reconnect: false,
-              CreateRoomFrom: false,
-              CopyLink: true,
-              Embed: true,
-              ChangeOwner: true,
-              IndexExport: false,
-              HistoryExport: true,
-              UseChat: false,
-              ...securityOverrides,
-            },
+            security:
+              securityOverrides === null
+                ? undefined
+                : {
+                    Read: true,
+                    Create: true,
+                    Delete: false,
+                    EditRoom: true,
+                    Rename: true,
+                    CopyTo: true,
+                    Copy: true,
+                    MoveTo: true,
+                    Move: true,
+                    Pin: true,
+                    Mute: true,
+                    EditAccess: true,
+                    Duplicate: true,
+                    Download: true,
+                    CopySharedLink: true,
+                    Reconnect: false,
+                    CreateRoomFrom: false,
+                    CopyLink: true,
+                    Embed: true,
+                    ChangeOwner: true,
+                    IndexExport: false,
+                    HistoryExport: true,
+                    UseChat: false,
+                    ...securityOverrides,
+                  },
             title: "Public Room",
             access: 0,
             shared: true,
@@ -245,7 +252,7 @@ export const roomContentHandler = (
             updatedBy: makeUser(),
             ...currentOverrides,
           },
-          pathParts: [
+          pathParts: pathPartsOverride ?? [
             { id: 2002, title: "Rooms", folderType: 14 },
             { id: roomId, title: "Public Room", folderType: 14 },
           ],
@@ -300,6 +307,63 @@ export const roomLinksHandler = (
         response: [makeRoomLink(internal)],
         count: 1,
       }),
+  );
+
+/**
+ * Mirrors VirtualRoomsController.SetRoomLink (HttpPut "{id}/links") ->
+ * FileStorageService.SetInvitationLinkAsync / SetExternalLinkAsync ->
+ * FileSharingAceHelper.SetAceObjectAsync: since bd89a24dcd a link with an
+ * access other than None on a private room is refused with 403
+ * (SecurityException, which ResponseWrapper answers with "Access denied"), whatever its kind; a revocation (access None) passes and the
+ * route answers null, the link being gone. An ordinary room answers the
+ * link as requested. The mock keeps no links: the answer is built from the
+ * request.
+ */
+export const roomLinkSetHandler = (
+  port: string,
+  roomId: number | string,
+  { isPrivate = false }: { isPrivate?: boolean } = {},
+) =>
+  http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/${roomId}/links`,
+    async ({ request }) => {
+      const body = (await request.json()) as {
+        access?: number;
+        internal?: boolean;
+        title?: string;
+        linkType?: number;
+      };
+      const access = body.access ?? ShareAccessRights.ReadOnly;
+      if (isPrivate && access !== ShareAccessRights.None) {
+        return HttpResponse.json(
+          {
+            error: {
+              message: "Access denied",
+            },
+            status: 1,
+            statusCode: 403,
+          },
+          { status: 403 },
+        );
+      }
+      if (access === ShareAccessRights.None) {
+        return HttpResponse.json({ response: null, status: 0, statusCode: 200 });
+      }
+      const link = makeRoomLink(!!body.internal);
+      return HttpResponse.json({
+        response: {
+          ...link,
+          access,
+          sharedTo: {
+            ...link.sharedTo,
+            title: body.title ?? link.sharedTo.title,
+            linkType: body.linkType ?? link.sharedTo.linkType,
+          },
+        },
+        status: 0,
+        statusCode: 200,
+      });
+    },
   );
 
 export const roomFileLinksHandler = (

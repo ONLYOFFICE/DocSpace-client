@@ -36,12 +36,14 @@
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TNewFilesItem, TRoom } from "@docspace/shared/api/rooms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { DeviceType } from "@docspace/shared/enums";
 import type { Nullable } from "@docspace/shared/types";
 
 import type FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
+import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 export type NewFilesBadgeProps = {
   newFilesCount: number;
@@ -72,6 +74,7 @@ type CheckAndOpenLocationAction =
 export type NewFilesPanelInjectStore = {
   settingsStore: SettingsStore;
   filesActionsStore: FilesActionStore;
+  selectedFolderStore: SelectedFolderStore;
 };
 
 export type NewFilesPanelProps = {
@@ -85,6 +88,8 @@ export type NewFilesPanelProps = {
 
   culture?: string;
   markAsRead?: MarkAsRead;
+  /** The room open in the files section, if any. */
+  openRoomId?: Nullable<string | number>;
 };
 
 export type TPanelDirection = "left" | "right" | "center" | "custom";
@@ -93,11 +98,12 @@ export type NewFilesPanelItemProps = {
   date: string;
   items: TNewFilesItem[];
   isRooms: boolean;
-  isAgents: boolean;
   isFirst: boolean;
   onClose: VoidFunction;
 
   culture?: string;
+  /** The room of the listed files when they are not grouped by room. */
+  roomId?: Nullable<string | number>;
 };
 
 export type NewFilesPanelItemDateProps = {
@@ -139,8 +145,15 @@ export type NewFilesPanelItemFileProps = {
   displayFileExtension?: boolean;
 };
 
+export type NewFilesPanelFileListInjectStore = {
+  userStore: UserStore;
+};
+
 export type NewFilesPanelFileListProps = {
   items: TFile[];
   isRooms: boolean;
   onClose: VoidFunction;
+  /** The room that holds the files. */
+  roomId?: Nullable<string | number>;
+  userId?: string;
 };

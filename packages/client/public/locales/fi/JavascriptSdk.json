@@ -74,7 +74,6 @@
   "ItemsCount": "Kohteiden määrä yhdellä sivulla",
   "ItemsCountDescription": "Voit määrittää sekä yhdellä sivulla näytettävien tiedostojen/kansioiden määrän että miltä sivulta näyttäminen aloitetaan",
   "JavaScriptCodeDescription": "Työtilan tai sen osan upotus käyttäen JavaScriptiä. Kopioi alla oleva JavaScript-koodi.",
-  "JavascriptSdk": "Javascript SDK",
   "LimitByTime": "Raja ajanjaksolla",
   "LinkSetDescription": "Tämä linkki on suojattu {{parameter}}lla. Määrittääksesi linkin,",
   "LinkSetDescription2": "{{parameter1}} ja {{parameter2}} asetetaan tälle linkille. Määrittääksesi sen,",

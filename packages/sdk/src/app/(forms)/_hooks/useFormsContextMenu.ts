@@ -35,7 +35,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 
@@ -51,6 +51,7 @@ import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
+  getCustomActionIconProps,
   getVisibleContextActions,
   sendCustomAction,
 } from "@docspace/shared/utils/frameCustomActions";
@@ -58,6 +59,7 @@ import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers
 
 import { FormsSection } from "@/types/forms";
 import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
+import { toFrameEntity } from "@/utils/frameEntity";
 
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
@@ -70,6 +72,7 @@ type ContextMenuItem = {
   key: string;
   label: string;
   icon: string;
+  iconNode?: ReactNode;
   onClick: () => void;
   disabled: boolean;
   isSeparator?: false;
@@ -161,16 +164,18 @@ export default function useFormsContextMenu() {
           id: `option_sdk-action-${action.key}`,
           key: `sdk-action-${action.key}`,
           label: action.label,
-          icon: action.icon ?? "",
+          ...getCustomActionIconProps(action.icon),
           disabled: false,
-          onClick: () =>
+          onClick: () => {
+            const entity = toFrameEntity(item);
             sendCustomAction({
               action: action.key,
               type,
-              item,
-              items: [item],
+              item: entity,
+              items: [entity],
               folderId,
-            }),
+            });
+          },
         }),
       ),
     [customActions, activeSection, folderId],

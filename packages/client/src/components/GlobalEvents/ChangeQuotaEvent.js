@@ -52,7 +52,6 @@ const ChangeQuotaEvent = (props) => {
 		headerTitle,
 		onClose,
 		setCustomRoomQuota,
-		setCustomAIAgentQuota,
 		successCallback,
 		abortCallback,
 
@@ -71,9 +70,7 @@ const ChangeQuotaEvent = (props) => {
 	const updateFunction = () => {
 		return type === "user"
 			? api.people.setCustomUserQuota(ids, size)
-			: type === "agent"
-				? setCustomAIAgentQuota(ids, size, inRoom)
-				: setCustomRoomQuota(ids, size, inRoom);
+			: setCustomRoomQuota(ids, size, inRoom);
 	};
 
 	const onSaveClick = async () => {
@@ -137,7 +134,6 @@ export default inject(
 		const { getPeopleListItem, needResetUserSelection } = usersStore;
 		const {
 			setCustomRoomQuota,
-			setCustomAIAgentQuota,
 			needResetFilesSelection,
 		} = filesStore;
 
@@ -151,7 +147,6 @@ export default inject(
 
 		return {
 			setCustomRoomQuota,
-			setCustomAIAgentQuota,
 			inRoom,
 			getPeopleListItem,
 			needResetSelection,

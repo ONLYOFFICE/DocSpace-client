@@ -1,0 +1,29 @@
+{
+  "key_path": "AIProjectContextNote",
+  "content": "Your folder only: members pick their own context.",
+  "content_en_sha1_hash": "efb0995ba7fadf3062c4b13cd11843272a5f459a",
+  "created_at": "2026-10-31T12:56:51.211Z",
+  "updated_at": "2026-10-31T12:59:25.206Z",
+  "comment": {
+    "text": "Note in the Context card of an AI project for members who cannot change it: each member chooses their own context folder.",
+    "is_auto": true,
+    "updated_at": "2026-10-31T12:59:25.206Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 425,
+      "context": "const contextSection = (\n <Section\n title={t(\"Common:AIProjectContext\")}\n menu={contextMenu}\n menuTitle={t(\"Common:AIProjectContext\")}\n note={canEdit ? undefined : t(\"Common:AIProjectContextNote\")}\n testId=\"ai-project-context\"\n headless={compact}\n >\n {folderContext ? (\n <RoomCard",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

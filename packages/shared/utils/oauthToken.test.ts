@@ -194,6 +194,36 @@ describe("oauthToken", () => {
       });
     });
 
+    it("resolves null and logs the host error from a rejected reply", async () => {
+      const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+      enterIframe();
+      const promise = requestAuthToken();
+
+      dispatchTokenReturn(lastCallId(), {
+        error: { code: "TOKEN_RESOLVE_FAILED", message: "getToken threw" },
+      });
+
+      await expect(promise).resolves.toBeNull();
+      expect(warn).toHaveBeenCalledWith(
+        "[OAuth] host rejected the token request: TOKEN_RESOLVE_FAILED getToken threw",
+      );
+      warn.mockRestore();
+    });
+
+    it("resolves null on an empty reply without logging", async () => {
+      const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+      enterIframe();
+      const promise = requestAuthToken();
+
+      dispatchTokenReturn(lastCallId(), {});
+
+      await expect(promise).resolves.toBeNull();
+      expect(warn).not.toHaveBeenCalledWith(
+        expect.stringContaining("host rejected the token request"),
+      );
+      warn.mockRestore();
+    });
+
     it("ignores a mismatched callId", async () => {
       vi.useFakeTimers();
       enterIframe();

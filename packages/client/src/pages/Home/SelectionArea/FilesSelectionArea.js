@@ -33,11 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useLayoutEffect, useMemo, useCallback } from "react";
+import React, { useMemo, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@onlyoffice/apps-ui-kit/components/selection-area";
-import { getCountTilesInRow } from "@docspace/shared/utils";
 
 const getCountOfMissingFilesTiles = (itemsLength, countTilesInRow) => {
   const division = itemsLength % countTilesInRow;
@@ -52,32 +51,11 @@ const SelectionArea = (props) => {
     isRooms,
     foldersLength,
     filesLength,
-    isInfoPanelVisible,
     isIndexEditingMode,
     selectionAreaIsEnabled,
     setWithContentSelection,
+    countTilesInRow,
   } = props;
-
-  const [countTilesInRow, setCountTilesInRow] = useState();
-
-  const setTilesCount = () => {
-    if (isRooms === undefined) return;
-    const newCount = getCountTilesInRow(isRooms);
-    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
-  };
-
-  const onResize = () => {
-    setTilesCount();
-  };
-
-  useLayoutEffect(() => {
-    setTilesCount();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [isInfoPanelVisible, onResize]);
 
   const onMove = useCallback(
     ({ added, removed, clear }) => {
@@ -141,20 +119,15 @@ const SelectionArea = (props) => {
 };
 
 export default inject(
-  ({
-    filesStore,
-    treeFoldersStore,
-    infoPanelStore,
-    indexingStore,
-    hotkeyStore,
-  }) => {
+  ({ filesStore, treeFoldersStore, indexingStore, hotkeyStore }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
-    const { isRoomsFolder, isArchiveFolder, isFormsFolder } = treeFoldersStore;
-    const { isVisible: isInfoPanelVisible } = infoPanelStore;
+    const { isRoomsFolder, isArchiveFolder, isFormsFolder, isAiSectionFolder } =
+      treeFoldersStore;
     const { isIndexEditingMode } = indexingStore;
-    const { selectionAreaIsEnabled, setWithContentSelection } = hotkeyStore;
+    const { selectionAreaIsEnabled, setWithContentSelection, countTilesInRow } =
+      hotkeyStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
     return {
       dragging,
@@ -163,10 +136,10 @@ export default inject(
       isRooms,
       foldersLength: folders.length,
       filesLength: files.length,
-      isInfoPanelVisible,
       isIndexEditingMode,
       selectionAreaIsEnabled,
       setWithContentSelection,
+      countTilesInRow,
     };
   },
 )(observer(SelectionArea));

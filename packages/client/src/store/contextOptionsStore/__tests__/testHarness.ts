@@ -62,7 +62,8 @@ const store = <T>(v: T) => v as unknown as Record<string, unknown>;
 export type FakeStores = Record<string, Record<string, unknown>>;
 
 const defaultFakes = () => ({
-  settingsStore: { isFrame: false, isDesktopClient: false },
+  // AI services are on unless a test says otherwise, as on a real portal.
+  settingsStore: { isFrame: false, isDesktopClient: false, aiServicesEnabled: true },
   dialogsStore: { setChangeOwnerDialogVisible: vi.fn(), roomGroups: [] },
   filesActionsStore: {},
   filesStore: {
@@ -83,7 +84,10 @@ const defaultFakes = () => ({
   },
   uploadDataStore: { shouldEncryptCurrentUpload: () => false },
   versionHistoryStore: {},
-  filesSettingsStore: { getIcon: () => "icon.svg" },
+  filesSettingsStore: {
+    getIcon: () => "icon.svg",
+    isEncryptedEditingAvailable: true,
+  },
   selectedFolderStore: { id: 1, security: {}, navigationPath: [] },
   publicRoomStore: { isPublicRoom: false },
   oformsStore: {},

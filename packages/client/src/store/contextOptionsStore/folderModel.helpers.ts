@@ -40,7 +40,6 @@ import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
-import CatalogAIAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -50,6 +49,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
+import AIReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 import { isMobile, isTablet } from "react-device-detect";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
@@ -63,7 +63,6 @@ import {
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import { onSuggestOformChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
@@ -113,7 +112,7 @@ export const getRoomsRootContextOptionsImpl = (
       key: "pin-room",
       label: t("Common:PinToTop"),
       icon: PinReactSvgUrl,
-      onClick: () => self.onClickPin("pin", item.id, t, item.isAIAgent),
+      onClick: () => self.onClickPin("pin", item.id, t),
       disabled:
         self.publicRoomStore.isPublicRoom ||
         Boolean(item.external && item.isLinkExpired),
@@ -123,7 +122,7 @@ export const getRoomsRootContextOptionsImpl = (
       key: "unpin-room",
       label: t("Common:Unpin"),
       icon: UnpinReactSvgUrl,
-      onClick: () => self.onClickPin("unpin", item.id, t, item.isAIAgent),
+      onClick: () => self.onClickPin("unpin", item.id, t),
       disabled:
         self.publicRoomStore.isPublicRoom ||
         Boolean(item.external && item.isLinkExpired),
@@ -212,7 +211,7 @@ export const getFolderModelImpl = (
   isSectionMenu?: boolean,
 ) => {
   const { isLoading } = self.clientLoadingStore;
-  const { security, roomType, parentRoomType, isFolder, isAIRoom } =
+  const { security, roomType, parentRoomType, isFolder } =
     self.selectedFolderStore;
   const { isPublicRoom } = self.publicRoomStore;
 
@@ -240,8 +239,8 @@ export const getFolderModelImpl = (
     isRoomsFolder,
     isPrivacyFolder,
     isFlowsFolder,
-    isAIAgentsFolder,
     isFormsFolder,
+    isAiHubFolder,
   } = self.treeFoldersStore;
   const { mainButtonItemsList } = self.pluginStore;
   const { enablePlugins, templateGalleryAvailable } = self.settingsStore;
@@ -272,6 +271,19 @@ export const getFolderModelImpl = (
     onClick: () => self.onCreate("pptx"),
     icon: ActionsPresentationReactSvgUrl,
   };
+
+  // Markdown is created and edited through the Markdown plugin, so it is
+  // offered only while the plugin is enabled.
+  const createNewMarkdown: TContextOption = {
+    id: "personal_new-markdown",
+    key: "new-markdown",
+    label: t("Common:MarkdownFile"),
+    icon: ActionsDocumentsReactSvgUrl,
+    onClick: () => self.onCreate("md", t),
+  };
+  const markdownActions = self.isCreateMarkdownAvailable
+    ? [createNewMarkdown]
+    : [];
 
   const createTemplateForm = {
     id: "personal_template_black",
@@ -323,7 +335,7 @@ export const getFolderModelImpl = (
 
   const templateGallery: TContextOption[] = templateGalleryAvailable
     ? [
-        { key: "separator", isSeparator: true },
+        { key: "separator-template-gallery", isSeparator: true },
         {
           key: "template-gallery",
           label: t("Common:TemplateGallery"),
@@ -351,35 +363,63 @@ export const getFolderModelImpl = (
     });
   }
 
-  if (isAIRoom) {
-    // The upload options below feed the agent's knowledge base, so they
-    // belong to the Knowledge tab only. Result Storage holds AI-generated
-    // results — manual uploads there are rejected by the server, and the
-    // "+ New" button rendered from this model only produced an error
-    // (Bug 83436). Coerced comparison: a filter parsed from the URL keeps
-    // searchArea as the raw query string ("6"), not a number.
-    const searchArea = self.filesStore.filter?.searchArea;
-    if (searchArea != null && Number(searchArea) === SearchArea.ResultStorage) {
-      return null;
-    }
-    return [
-      {
-        id: "actions_upload-files-product",
-        className: "main-button_drop-down",
-        icon: MoveReactSvgUrl,
-        label: t("EmptyView:UploadFromPortalTitle"),
-        onClick: self.onShowAiKnowledgeSelectFileDialog,
-        key: "upload-files-product",
-      },
-      {
-        id: "actions_upload-files",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("EmptyView:UploadDeviceOptionTitle"),
-        onClick: () => onUploadAction("file"),
-        key: "upload-files",
-      },
-    ];
+  // Instructions and Knowledge rooms are flat and hold one kind of file: no
+  // folders and no folder upload. An Instructions room takes Markdown
+  // skills: uploaded, or created with their frontmatter while the Markdown
+  // plugin is enabled (the server refuses a skill without it); a Knowledge
+  // room uploads files to index, never edited, and not at all while
+  // vectorization is off.
+  if (
+    roomType === RoomsType.InstructionsRoom ||
+    roomType === RoomsType.KnowledgeRoom
+  ) {
+    const vectorizationEnabled =
+      self.settingsStore.aiConfig?.vectorizationEnabled !== false;
+    // Both take files from the workspace (copied in, filtered to what the
+    // room holds) or from the device, in the order the empty view offers.
+    const uploadFromStorage: TContextOption = {
+      id: "personal_upload-from-storage",
+      key: "upload-from-storage",
+      label: t("EmptyView:UploadFromPortalTitle"),
+      icon: MoveReactSvgUrl,
+      onClick: () => self.onShowKnowledgeRoomSelectFileDialog(),
+    };
+    const uploadFromDevice: TContextOption = {
+      id: "personal_upload-from-device",
+      key: "upload-from-device",
+      label: t("EmptyView:UploadDeviceOptionTitle"),
+      icon: ActionsUploadReactSvgUrl,
+      onClick: () => onUploadAction("file"),
+    };
+    // An Instructions room can also have a skill written for it: the AI
+    // service turns a name and a description into the Markdown file.
+    const createSkillWithAI: TContextOption = {
+      id: "personal_create-skill-with-ai",
+      key: "create-skill-with-ai",
+      label: t("Common:CreateSkillWithAI"),
+      icon: AIReactSvgUrl,
+      onClick: () => self.onShowGenerateSkillDialog(),
+    };
+    // A new skill is created from the skill template by the AI service,
+    // whether or not the Markdown plugin is there to open it.
+    const createSkillOptions: TContextOption[] = self.isCreateSkillAvailable
+      ? [createNewMarkdown, { key: "separator", isSeparator: true }]
+      : [];
+    const sourceRoomOptions: TContextOption[] =
+      roomType === RoomsType.KnowledgeRoom
+        ? vectorizationEnabled
+          ? [uploadFromStorage, uploadFromDevice]
+          : []
+        : self.isCreateSkillWithAIAvailable
+          ? [
+              ...createSkillOptions,
+              uploadFromStorage,
+              uploadFromDevice,
+              createSkillWithAI,
+            ]
+          : [...createSkillOptions, uploadFromStorage, uploadFromDevice];
+
+    return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
   }
 
   const showUploadFolder = !(isMobile || isTablet);
@@ -408,16 +448,7 @@ export const getFolderModelImpl = (
     uploadFiles,
   ];
 
-  const options: TContextOption[] = isAIAgentsFolder
-    ? [
-        {
-          key: "new-agent",
-          label: t("Common:NewAgent"),
-          onClick: self.onCreateAgent,
-          icon: CatalogAIAgentsReactSvgUrl,
-        },
-      ]
-    : isFormsFolder
+  const options: TContextOption[] = isFormsFolder
       ? [
           {
             key: "create-form-set",
@@ -435,8 +466,9 @@ export const getFolderModelImpl = (
             icon: TemplateGalleryReactSvgUrl,
           },
         ]
-      : isRoomsFolder
-        ? isFlowsFolder
+      : isRoomsFolder || isAiHubFolder
+        ? // Nothing is created in "AI rooms" until AI is set up on the portal.
+          isFlowsFolder || (isAiHubFolder && self.settingsStore.aiReady === false)
           ? []
           : [
               {
@@ -453,6 +485,7 @@ export const getFolderModelImpl = (
               createNewSpreadsheet,
               createNewPresentation,
               ...formActions,
+              ...markdownActions,
               createNewFolder,
               ...templateGallery,
               { key: "separator", isSeparator: true },
@@ -460,11 +493,11 @@ export const getFolderModelImpl = (
               ...(showUploadFolder ? [uploadFolder] : []),
             ];
   if (
-    !isAIAgents() &&
     mainButtonItemsList &&
     enablePlugins &&
     !isRoomsFolder &&
     !isFormsFolder &&
+    !isAiHubFolder &&
     !isPrivacyFolder
   ) {
     const pluginItems: TContextOption[] = [];
@@ -477,7 +510,8 @@ export const getFolderModelImpl = (
       );
     });
 
-    options.splice(5, 0, {
+    // right after "Folder", wherever the file types before it end
+    options.splice(options.indexOf(createNewFolder) + 1, 0, {
       id: "actions_more-plugins",
       className: "main-button_drop-down",
       icon: PluginMoreReactSvgUrl,

@@ -39,6 +39,7 @@ import {
   defaultTemplatesSetHandler,
   defaultTemplatesResetHandler,
   roomListHandler,
+  selfHandlerWithCulture,
   TypeRoomList,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -107,17 +108,23 @@ test.describe("Default templates", () => {
     const selector = page.getByTestId("aside").first();
     await expect(selector).toBeVisible();
 
-    const roomsRow = selector.getByText("Rooms").first();
+    // Click the item, not the text inside it: the item's label sits over
+    // the text node's own box.
+    const selectorItem = (text: string) =>
+      selector
+        .locator('[data-testid^="selector-item-"]')
+        .filter({ hasText: text })
+        .first();
+
+    const roomsRow = selectorItem("Rooms");
     await expect(roomsRow).toBeVisible();
     await roomsRow.click();
 
-    const roomRow = selector.getByText("New room").first();
+    const roomRow = selectorItem("New room");
     await expect(roomRow).toBeVisible();
     await roomRow.click();
 
-    const documentRow = selector
-      .getByText("ONLYOFFICE Sample Document")
-      .first();
+    const documentRow = selectorItem("ONLYOFFICE Sample Document");
     await expect(documentRow).toBeVisible();
     await documentRow.click();
 
@@ -183,6 +190,56 @@ test.describe("Default templates", () => {
 
     const badge = row.getByTestId("badge-text");
     await expect(badge).toHaveText("Default");
+  });
+
+  // Ukrainian has the longest wording of both badge labels across the
+  // supported languages ("За замовчуванням", "Індивідуалізований"); the
+  // badge used to cap them at 50px and slice the text at both ends.
+  test("should fit long badge labels in uk-UA", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    const culture = "uk-UA";
+
+    mockRequest.use(
+      defaultTemplatesHandler(TEST_PORT, "customized"),
+      selfHandlerWithCulture(TEST_PORT, culture),
+    );
+    // `asc_language` sets the language on the first paint; the culture on
+    // /people/@self keeps it there after the stores load.
+    await page.context().addCookies([
+      { name: "asc_language", value: culture, domain: "localhost", path: "/" },
+    ]);
+    await page.goto(
+      `${baseUrl}/portal-settings/customization/default-templates`,
+    );
+
+    const container = page.getByTestId("default-templates");
+    await expect(container).toBeVisible();
+
+    const customizedBadge = page
+      .getByTestId("default-template-row-0")
+      .getByTestId("badge-text");
+    const defaultBadge = page
+      .getByTestId("default-template-row-1")
+      .getByTestId("badge-text");
+
+    await expect(customizedBadge).toHaveText("Індивідуалізований");
+    await expect(defaultBadge).toHaveText("За замовчуванням");
+
+    for (const badge of [customizedBadge, defaultBadge]) {
+      const isClipped = await badge.evaluate(
+        (el) => el.scrollWidth > el.clientWidth,
+      );
+      expect(isClipped).toBe(false);
+    }
+
+    await expectScreenshot(page, [
+      "desktop",
+      "default-templates",
+      "default-templates-uk-UA.png",
+    ]);
   });
 
   test("should navigate to default templates page with template width long title", async ({

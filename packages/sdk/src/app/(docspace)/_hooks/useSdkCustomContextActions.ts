@@ -35,7 +35,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, type ReactNode } from "react";
 
 import type {
   TFrameCustomActionEvent,
@@ -43,10 +43,16 @@ import type {
   TFrameCustomContextMenuAction,
 } from "@docspace/shared/types/Frame";
 import {
+  getCustomActionIconProps,
   getVisibleContextActions,
   getVisibleGroupContextActions,
   sendCustomAction,
 } from "@docspace/shared/utils/frameCustomActions";
+
+import {
+  ENCRYPTED_FILE_WITHHELD,
+  PRIVATE_ROOM_WITHHELD,
+} from "@docspace/shared/services/private-room/private-menu-rules";
 
 import { useSdkCustomActions } from "@/providers/SdkCustomActionsProvider";
 import {
@@ -54,6 +60,7 @@ import {
   toFrameEntity,
 } from "@/utils/frameEntity";
 
+import { useEncryptedFileActions } from "../_contexts/EncryptedFileActionsContext";
 import { useFilesListStore } from "../_store/FilesListStore";
 import type { TFileItem, TFolderItem } from "./useItemList";
 
@@ -64,12 +71,21 @@ type TCustomMenuItem = {
   key: string;
   label: string;
   icon: string;
+  iconNode?: ReactNode;
   disabled: boolean;
   onClick: () => void;
 };
 
 const getItemType = (item: TListItem): TFrameCustomActionType =>
   "isFolder" in item && item.isFolder ? "folder" : "file";
+
+/**
+ * Whether the host's custom actions are withheld for an item.
+ * Spec: private-rooms/sdk-surface, "Menu entries withheld for encrypted items".
+ */
+const isHeldFromHost = (item: TListItem, insidePrivateRoom: boolean) =>
+  (insidePrivateRoom && PRIVATE_ROOM_WITHHELD.has("plugins")) ||
+  (!!(item as TFileItem).encrypted && ENCRYPTED_FILE_WITHHELD.has("plugins"));
 
 const toMenuItem = (
   action: TFrameCustomContextMenuAction,
@@ -78,7 +94,7 @@ const toMenuItem = (
   id: `option_sdk-action-${action.key}`,
   key: `sdk-action-${action.key}`,
   label: action.label,
-  icon: action.icon ?? "",
+  ...getCustomActionIconProps(action.icon),
   disabled: false,
   onClick: () => sendCustomAction({ action: action.key, ...event }),
 });
@@ -86,10 +102,11 @@ const toMenuItem = (
 export default function useSdkCustomContextActions() {
   const { customActions } = useSdkCustomActions();
   const filesListStore = useFilesListStore();
+  const insidePrivateRoom = !!useEncryptedFileActions();
 
   const getItemCustomActions = useCallback(
     (item: TListItem): TCustomMenuItem[] => {
-      if (!customActions) return [];
+      if (!customActions || isHeldFromHost(item, insidePrivateRoom)) return [];
 
       const type = getItemType(item);
       const section =
@@ -107,12 +124,18 @@ export default function useSdkCustomContextActions() {
           }),
       );
     },
-    [customActions, filesListStore],
+    [customActions, filesListStore, insidePrivateRoom],
   );
 
   const getGroupCustomActions = useCallback(
     (items: TListItem[]): TCustomMenuItem[] => {
-      if (!customActions || !items.length) return [];
+      if (
+        !customActions ||
+        !items.length ||
+        items.some((item) => isHeldFromHost(item, insidePrivateRoom))
+      ) {
+        return [];
+      }
 
       const entries = items.map((item) => ({ type: getItemType(item), item }));
       const section =
@@ -129,7 +152,7 @@ export default function useSdkCustomContextActions() {
           }),
       );
     },
-    [customActions, filesListStore],
+    [customActions, filesListStore, insidePrivateRoom],
   );
 
   return { getItemCustomActions, getGroupCustomActions };

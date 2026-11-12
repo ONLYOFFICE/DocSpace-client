@@ -37,7 +37,7 @@
 
 ## 4. Integration
 
-- [ ] 4.1 Full pre-push gate plus the client, SDK and doceditor E2E suites on staging with the setting on and off; verify with green runs linked from the change README.md
+- [ ] 4.1 Full pre-push gate plus the client, SDK and doceditor E2E suites under Docker with the setting on and off, and a pass by hand on staging of the same flows with the setting on and off. The E2E suites run against mocks (`packages/shared/__mocks__`), not against a portal, so they cannot run "on staging" as this task said until 2026-11-12; the stand is covered by hand and by 1.15. Verify with the green runs and the record of the stand pass linked from the change README.md
 
 ## 5. Portal setting
 

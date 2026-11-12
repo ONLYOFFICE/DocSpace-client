@@ -45,7 +45,7 @@ import type { TAiProjectLogo } from "@docspace/shared/api/ai/projects";
 import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 
 import { coverLogo } from "../list/ProjectLogo";
-import styles from "./ProjectSources.module.scss";
+import styles from "./RoomItem.module.scss";
 
 type RoomItemProps = {
   id: number | string;

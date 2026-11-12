@@ -1,0 +1,120 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
+// A room of an AI project as one row: its logo and name, and for a room
+// that expands, the folder tree's triangle before it.
+.roomItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  height: 24px;
+  margin-bottom: 4px;
+  cursor: pointer;
+
+  &:hover {
+    :global(.room-item-title) {
+      text-decoration: underline dashed;
+    }
+  }
+
+  :global(.room-icon) {
+    // The logo's colour square is absolutely positioned: anchored here, it
+    // scrolls with its row and is clipped by the card instead of staying
+    // where the row first was.
+    position: relative;
+    min-width: 24px;
+
+    :global(.room-image) {
+      border-radius: 6px;
+    }
+  }
+}
+
+// A room with an expander: the folder tree's triangle, turned right while
+// the room is collapsed.
+.roomItemRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 40px;
+  cursor: pointer;
+
+  .roomItem {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+}
+
+.expander {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 40px;
+  margin-inline-start: -8px;
+  margin-inline-end: -8px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  // A click focuses it; only keyboard focus gets the ring.
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  @include mixins.flip-in-rtl;
+
+  svg {
+    width: 8px;
+    height: 8px;
+    transform: rotate(-90deg);
+    transition: transform 0.15s ease;
+
+    path {
+      fill: var(--text-secondary);
+    }
+  }
+
+  &.expanded svg {
+    transform: none;
+  }
+}
+
+
+.roomTrailing {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-inline-start: auto;
+}

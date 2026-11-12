@@ -2000,6 +2000,7 @@
   "Restricted": "Eingeschränkt",
   "RestrictionDownloadCopyRoom": "Sie können die Einschränkung beim Herunterladen und Kopieren von Daten nicht deaktivieren, da diese Einstellung auf Raumebene für alle Dateien erzwungen wird.",
   "ResultStorage": "Chat-Ausgaben",
+  "RetryAccessFor": "Erneut versuchen für {{name}}",
   "RetryAfterQuotaUpgrade": "Nach Kontingent-Upgrade erneut versuchen",
   "Review": "Review",
   "ReviewDescriptionDocument": "Anzeigen, Überprüfen, Kommentieren.",

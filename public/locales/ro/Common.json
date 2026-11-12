@@ -2000,6 +2000,7 @@
   "Restricted": "Restricționat",
   "RestrictionDownloadCopyRoom": "Nu puteți dezactiva blocarea descărcărilor și copierii datelor deoarece această setare este aplicată la nivelul de sală pentru toate fișierele.",
   "ResultStorage": "Rezultate din chat",
+  "RetryAccessFor": "Reîncercare pentru {{name}}",
   "RetryAfterQuotaUpgrade": "Reîncercați după actualizarea cotei",
   "Review": "Revizuire",
   "ReviewDescriptionDocument": "Vizualizare, revizuire, comentare.",

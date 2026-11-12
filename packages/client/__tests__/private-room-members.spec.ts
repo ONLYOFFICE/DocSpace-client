@@ -279,13 +279,28 @@ test.describe("Private room — pending access", () => {
     ]);
 
     failKeyWrites = false;
-    await page.getByTestId("info_panel_members_user_retry_access").click();
-    await unlockIfPrompted(page, passphrase);
+    const retry = page.getByRole("button", {
+      // The mocked members list names a member by its id.
+      name: `Try again for ${CAROL.id}`,
+    });
+    await test.step("Retry from the keyboard", async () => {
+      await retry.focus();
+      await page.keyboard.press("Enter");
+      await unlockIfPrompted(page, passphrase);
+    });
 
     await expect(
       page.getByText("now has access to every encrypted file in the room"),
     ).toBeVisible({ timeout: 30000 });
-    await expect(pending).toBeHidden();
+    await test.step("Retry succeeds", async () => {
+      await expect(pending).toBeHidden();
+      await expect(retry).toHaveCount(0);
+      await expect(
+        page
+          .getByTestId("info_panel_members_user")
+          .filter({ hasText: CAROL.id }),
+      ).toBeFocused();
+    });
     await expect
       .poll(() =>
         filesHandle

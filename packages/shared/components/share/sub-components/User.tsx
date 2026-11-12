@@ -34,7 +34,7 @@
  */
 
 import { decode } from "he";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly, isMobile } from "react-device-detect";
@@ -109,14 +109,32 @@ export const User = ({
 		});
 	};
 
+	const rowRef = useRef<HTMLDivElement>(null);
+	const retriedRef = useRef(false);
+
 	const handleRetryAccess = () => {
 		if (!onRetryAccess || isRetrying) return;
 
 		setIsRetrying(true);
+		retriedRef.current = true;
 		onRetryAccess().finally(() => {
 			setIsRetrying(false);
 		});
 	};
+
+	// A retry that succeeds takes its button away: the row keeps the focus.
+	useEffect(() => {
+		if (isAccessPending || !retriedRef.current) return;
+		retriedRef.current = false;
+		rowRef.current?.focus();
+	}, [isAccessPending]);
+
+	const memberName = decode(
+		("displayName" in user ? user.displayName : undefined) ||
+			("name" in user ? user.name : undefined) ||
+			("email" in user ? user.email : undefined) ||
+			"",
+	);
 
 	if (
 		"displayName" in user &&
@@ -197,6 +215,8 @@ export const User = ({
 			})}
 			key={user.id}
 			data-testid="info_panel_members_user"
+			ref={rowRef}
+			tabIndex={-1}
 		>
 			<Avatar
 				role={type as unknown as AvatarRole}
@@ -256,19 +276,33 @@ export const User = ({
 							dir="auto"
 						>
 							{isAccessPending
-								? `${t("Common:EncryptedAccessPending")}${onRetryAccess ? " |" : ""}`
+								? t("Common:EncryptedAccessPending")
 								: `${typeLabel} | ${(user as TUser).email}`}
 						</Text>
 						{isAccessPending && onRetryAccess ? (
-							<Link
-								type={LinkType.action}
-								fontSize="12px"
-								isSemitransparent={isRetrying}
-								onClick={handleRetryAccess}
-								dataTestId="info_panel_members_user_retry_access"
-							>
-								{t("Common:TryAgain")}
-							</Link>
+							<>
+								<Text
+									as="span"
+									className="label"
+									fontWeight={400}
+									fontSize="12px"
+									color="var(--info-panel-members-subtitle-color)"
+									aria-hidden="true"
+								>
+									|
+								</Text>
+								<Link
+									type={LinkType.action}
+									fontSize="12px"
+									isSemitransparent={isRetrying}
+									onClick={handleRetryAccess}
+									ariaLabel={t("Common:RetryAccessFor", { name: memberName })}
+									aria-busy={isRetrying}
+									dataTestId="info_panel_members_user_retry_access"
+								>
+									{t("Common:TryAgain")}
+								</Link>
+							</>
 						) : null}
 					</div>
 				) : null}
@@ -297,6 +331,10 @@ export const User = ({
 							// fixedDirection={isMobile}
 							shouldShowBackdrop={isMobile}
 							dataTestId="info_panel_members_user_role_combobox"
+							ariaLabel={t("Common:RoleOfUser", {
+								name: memberName,
+								role: selectedOption.label,
+							})}
 						/>
 					) : (
 						<TooltipContainer

@@ -1051,8 +1051,10 @@ without a new run.
    `dek` and `cryptoEngineId`; the Document Server ignores versions it does
    not know and reports an error instead of opening ciphertext.
 
-6. **The Document Server reads DSE3 versions 2 and 3 and writes version 3
-   (decided 2026-10-26).** `private-rooms-dse3-header-authentication`
+6. **The Document Server reads DSE3 versions 2 and 3 and writes the
+   version its library writes (decided 2026-10-26; the heading said
+   "writes version 3" until 2026-11-12, against the text below and §5.4 of
+   `contract-v1.md`).** `private-rooms-dse3-header-authentication`
    authenticates the header fields in a version-3 container and keeps
    version-2 files readable without migration. The Document Server decrypts
    and encrypts with its own copy of this repository's library, which writes

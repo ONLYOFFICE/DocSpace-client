@@ -33,674 +33,84 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-  useRef,
-  type JSX,
-} from "react";
+import { useCallback } from "react";
 
-import { isMobile as isMobileUtils, isTablet } from "../../utils";
-import { getFileExtension } from "../../utils/common";
-import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
-import { decodeTiff } from "../../utils/decodeTiff";
-import { isNullOrUndefined } from "../../utils/typeGuards";
+import KitMediaViewer from "@onlyoffice/apps-ui-kit/media-viewer/MediaViewer";
+import type { DecryptFileParams } from "@onlyoffice/apps-ui-kit/media-viewer/MediaViewer.types";
 
-import { ViewerWrapper } from "./sub-components/ViewerWrapper";
-
-import { getFileEncryptionAccess } from "../../api/files";
-import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
-import { decryptFile } from "../../services/encryption/file-keys";
 import {
-  unwrapDekForCurrentUser,
-  type RoomMemberPublicKey,
-} from "../../services/encryption/room-file-access";
-import { requireUnlock } from "../../services/encryption/secret-storage";
+  getDocumentServiceLocation,
+  getFileEncryptionAccess,
+} from "../../api/files";
+import { decryptFile as decryptFileContent } from "../../services/encryption/file-keys";
 import { resolveDisplayTitle } from "../../services/encryption/filename-cache";
+import { unwrapDekForCurrentUser } from "../../services/encryption/room-file-access";
+import { requireUnlock } from "../../services/encryption/secret-storage";
+import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
+import { combineUrl } from "../../utils/combineUrl";
 
-import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
-import { KeyboardEventKeys } from "./MediaViewer.enums";
-import { isHeic, isTiff } from "./MediaViewer.utils";
 
-import {
-  getDesktopMediaContextModel,
-  getMobileMediaContextModel,
-  getPDFContextModel,
-} from "./MediaViewer.helpers";
+const getPdfViewerScriptUrl = async () => {
+  const { docServiceUrl } = await getDocumentServiceLocation();
 
-const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
-  const {
-    files,
-    visible,
-    playlist,
-    userAccess,
-    playlistPos,
-    currentFileId,
-    isPreviewFile,
-    extsImagePreviewed,
-    deleteDialogVisible,
-    pluginContextMenuItems,
-    pluginViewerContent,
-    pluginFileId,
-    pluginTitle,
-    currentDeviceType,
-    isPublicFile = false,
-    autoPlay = false,
-    userId,
-    currentRoomId,
-    onDecryptionError,
+  return combineUrl(docServiceUrl, window.ClientConfig?.pdfViewerUrl);
+};
 
-    t,
-    getIcon,
-    onClose,
-    onDelete,
-    nextMedia,
-    prevMedia,
-    onDownload,
-    onChangeUrl,
-    setActiveFiles,
-    setBufferSelection,
-    onEmptyPlaylistError,
-
-    ...other
-  } = props;
-
-  const TiffAbortSignalRef = useRef<AbortController>(undefined);
-  const HeicAbortSignalRef = useRef<AbortController>(undefined);
-  const EncryptedAbortSignalRef = useRef<AbortController>(undefined);
-
-  const isWillUnmountRef = useRef(false);
-  const lastRemovedFileIdRefRef = useRef<number>(undefined);
-
-  const [title, setTitle] = useState<string>("");
-  const prevBlobUrlRef = useRef<string | null>(null);
-
-  const setFileUrl_ = useCallback((url: string | undefined) => {
-    // Revoke previous blob URL to prevent memory leaks
-    if (prevBlobUrlRef.current && prevBlobUrlRef.current.startsWith("blob:")) {
-      URL.revokeObjectURL(prevBlobUrlRef.current);
-    }
-    prevBlobUrlRef.current =
-      url && url.startsWith("blob:") ? url : null;
-    setFileUrlRaw(url);
-  }, []);
-
-  const [fileUrlRaw, setFileUrlRaw] = useState<string | undefined>(() => {
-    if (!currentFileId || !playlist.length) return undefined;
-    const item = playlist.find(
-      (file) => file.fileId?.toString() === currentFileId?.toString(),
-    );
-    if (item?.encrypted) return undefined;
-    return item?.src;
-  });
-  const fileUrl = fileUrlRaw;
-  const setFileUrl = setFileUrl_;
-
-  const [isDecrypting, setIsDecrypting] = useState(false);
-  // A file that cannot be decrypted has no URL to hand to the player, so the
-  // viewer would sit on a loader forever with the reason only in the console.
-  const [decryptionError, setDecryptionError] = useState<string | undefined>(
-    undefined,
-  );
-
-  const [targetFile, setTargetFile] = useState(() => {
-    if (!currentFileId) return undefined;
-    return files.find((item) => item.id === currentFileId);
-  });
-
-  const ext = useMemo(() => getFileExtension(title), [title]);
-  const audioIcon = useMemo(() => getIcon(96, ext), [ext, getIcon]);
-  const headerIcon = useMemo(() => getIcon(32, ext), [ext, getIcon]);
-
-  let isVideo = false;
-  let isAudio = false;
-  let canOpen = true;
-  let isImage = false;
-  let isPdf = false;
-
-  const archiveRoom =
-    other.archiveRoomsId === targetFile?.rootFolderId ||
-    (!targetFile?.security?.Rename && !targetFile?.security?.Delete);
-
-  const getContextModel = (isError?: boolean) => {
-    const {
-      onClickDownloadAs,
-      onClickLinkEdit,
-      onClickDownload,
-      onPreviewClick,
-      onClickRename,
-      onClickDelete,
-      onShowInfoPanel,
-      onMoveAction,
-      onCopyAction,
-      onDuplicate,
-      onCopyLink,
-    } = other;
-
-    const isMobile = isMobileUtils() || isTablet();
-
-    if (!targetFile) return [];
-
-    const desktopModel = getDesktopMediaContextModel(
-      t,
-      targetFile,
-      archiveRoom,
-      isPublicFile,
-      {
-        onClickDownload,
-        onClickRename,
-        onClickDelete,
-      },
-    );
-
-    const model = getMobileMediaContextModel(t, targetFile, isPublicFile, {
-      onShowInfoPanel,
-      onClickDownload,
-      onMoveAction,
-      onCopyAction,
-      onDuplicate,
-      onClickRename,
-      onClickDelete,
-    });
-
-    if (isPdf)
-      return getPDFContextModel(t, targetFile, {
-        onClickDownloadAs,
-        onMoveAction,
-        onCopyAction,
-        onClickRename,
-        onDuplicate,
-        onClickDelete,
-        onClickDownload,
-        onClickLinkEdit,
-        onPreviewClick,
-        onCopyLink,
-      });
-
-    if (pluginContextMenuItems && pluginContextMenuItems.length > 0) {
-      model.unshift({
-        key: "separator-plugin",
-        isSeparator: true,
-        disabled: false,
-      });
-
-      pluginContextMenuItems.forEach((item) => {
-        const onClick = async (): Promise<void> => {
-          onClose?.();
-
-          if (item.withActiveItem) setActiveFiles?.([targetFile.id]);
-
-          await item.onClick(targetFile.id);
-
-          if (item.withActiveItem) setActiveFiles?.([]);
-        };
-
-        model.unshift({
-          id: item.key,
-          disabled: false,
-          ...item,
-          onClick,
-        });
-
-        desktopModel.unshift({
-          disabled: false,
-          ...item,
-          onClick: () => {
-            onClick();
-          },
-        });
-      });
-    }
-
-    return isMobile
-      ? model
-      : isImage && !isMobile && !isError
-        ? desktopModel.filter((el) => el.key !== "download")
-        : desktopModel;
-  };
-
-  const canImageView = useCallback(
-    (extension: string) => extsImagePreviewed.indexOf(extension) !== -1,
-    [extsImagePreviewed],
-  );
-
-  const canPlay = useCallback(
-    (fileTitle: string) => {
-      const extensionension =
-        fileTitle[0] === "." ? fileTitle : getFileExtension(fileTitle);
-
-      const supply = mapSupplied[extensionension];
-
-      return !!supply && extsImagePreviewed.indexOf(extensionension) !== -1;
-    },
-    [extsImagePreviewed],
-  );
-
-  const onDeleteMediaMedia = useCallback(() => {
-    const tempCurrentFileId = playlist.find(
-      (file) => file.id === playlistPos,
-    )?.fileId;
-
-    if (tempCurrentFileId === lastRemovedFileIdRefRef.current) return;
-
-    const canDelete = targetFile?.security?.Delete;
-
-    if (!canDelete) return;
-
-    if (!isNullOrUndefined(tempCurrentFileId)) {
-      onDelete?.(tempCurrentFileId);
-      lastRemovedFileIdRefRef.current = tempCurrentFileId;
-    }
-  }, [onDelete, playlist, playlistPos, targetFile?.security?.Delete]);
-
-  const onDownloadMedia = useCallback(() => {
-    if (!targetFile?.security?.Download) return;
-
-    const tempCurrentFileId = playlist.find(
-      (file) => file.id === playlistPos,
-    )?.fileId;
-
-    if (!isNullOrUndefined(tempCurrentFileId)) onDownload?.(tempCurrentFileId);
-  }, [onDownload, playlist, playlistPos, targetFile?.security?.Download]);
-
-  const onKeydown = useCallback(
-    (event: KeyboardEvent) => {
-      const { code, ctrlKey } = event;
-
-      const someDialogIsOpen = checkDialogsOpen();
-      if (deleteDialogVisible || someDialogIsOpen) return;
-
-      if (code in KeyboardEventKeys) {
-        const includesKeyboardCode = [
-          KeyboardEventKeys.KeyS,
-          KeyboardEventKeys.Numpad1,
-          KeyboardEventKeys.Digit1,
-          KeyboardEventKeys.Space,
-        ].includes(code as KeyboardEventKeys);
-
-        if (!includesKeyboardCode || ctrlKey) event.preventDefault();
+const MediaViewer = ({ userId, ...props }: MediaViewerProps) => {
+  const decryptFile = useCallback(
+    async ({ src, fileId, roomId, signal }: DecryptFileParams) => {
+      if (!userId) {
+        throw new Error("User ID not available for decryption");
       }
 
-      switch (code) {
-        case KeyboardEventKeys.ArrowLeft:
-          if (document.fullscreenElement) return;
-
-          if (!ctrlKey) prevMedia?.();
-          break;
-
-        case KeyboardEventKeys.ArrowRight:
-          if (document.fullscreenElement) return;
-
-          if (!ctrlKey) nextMedia?.();
-
-          break;
-
-        case KeyboardEventKeys.Escape:
-          event.stopPropagation();
-          if (!deleteDialogVisible) onClose?.();
-          break;
-
-        case KeyboardEventKeys.KeyS:
-          if (ctrlKey) onDownloadMedia();
-          break;
-
-        case KeyboardEventKeys.Delete:
-          onDeleteMediaMedia();
-          break;
-
-        default:
-          break;
+      const encryptionInfo = await getFileEncryptionAccess(fileId);
+      if (signal.aborted) return null;
+      if (!encryptionInfo?.fileKeys) {
+        throw new Error("You don't have access to decrypt this file");
       }
-    },
-    [
-      deleteDialogVisible,
-      nextMedia,
-      onClose,
-      onDeleteMediaMedia,
-      onDownloadMedia,
-      prevMedia,
-    ],
-  );
 
-  const fetchAndSetTiffDataURL = useCallback((src: string) => {
-    TiffAbortSignalRef.current?.abort();
-    TiffAbortSignalRef.current = new AbortController();
+      const identity = await requireUnlock(String(userId));
+      if (signal.aborted || !identity) return null;
 
-    fetch(src, { signal: TiffAbortSignalRef.current.signal })
-      .then((response) => response.arrayBuffer())
-      .then(async (response) => {
-        const blob = await decodeTiff(response);
+      const response = await fetch(src, { signal });
 
-        if (blob) {
-          setFileUrl(URL.createObjectURL(blob));
-        }
-      })
-      .catch((error: Error) => {
-        if (error.name === "AbortError") {
-          return;
-        }
-
-        console.log(error);
-      });
-  }, []);
-
-  const fetchAndSetHeicDataURL = useCallback(async (src: string) => {
-    HeicAbortSignalRef.current?.abort();
-    HeicAbortSignalRef.current = new AbortController();
-
-    try {
-      const { default: heic2any } = await import("heic2any");
-      const response = await fetch(src, {
-        signal: HeicAbortSignalRef.current.signal,
-      });
-      const blob = await response.blob();
-      const conversionResult = await heic2any({ blob });
-
-      if (conversionResult && !Array.isArray(conversionResult)) {
-        setFileUrl(URL.createObjectURL(conversionResult));
+      if (!response.ok) {
+        throw new Error(`Failed to fetch file: ${response.status}`);
       }
-    } catch (error) {
-      if (error instanceof Error && error.name === "AbortError") {
-        return;
-      }
-      console.error(error);
-    }
-  }, []);
 
-  const onSetSelectionFile = useCallback(() => {
-    setBufferSelection?.(targetFile);
-  }, [setBufferSelection, targetFile]);
+      const encryptedData = await response.arrayBuffer();
+      if (signal.aborted) return null;
 
-  useEffect(() => {
-    isWillUnmountRef.current = false;
-    return () => {
-      isWillUnmountRef.current = true;
-    };
-  });
+      const roomMemberKeys = await loadRoomMemberKeysSafe(roomId);
+      if (signal.aborted) return null;
 
-  const {
-    src,
-    title: currentTitle,
-    fileId,
-    encrypted: isEncrypted,
-  } = playlist[playlistPos] || {};
-
-  useEffect(() => {
-    if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
-      onChangeUrl?.(fileId);
-    }
-  }, [fileId, onChangeUrl, currentFileId]);
-
-  const fetchAndDecryptFile = useCallback(
-    async (
-      src: string,
-      fileId: number,
-      title: string,
-      roomId: number | string | null | undefined,
-    ) => {
-      EncryptedAbortSignalRef.current?.abort();
-      const controller = new AbortController();
-      EncryptedAbortSignalRef.current = controller;
-      setIsDecrypting(true);
-      setDecryptionError(undefined);
-
-      const { signal } = controller;
-      const isStale = () => signal.aborted;
-
-      try {
-        if (!userId) {
-          throw new Error("User ID not available for decryption");
-        }
-        const encryptionInfo = await getFileEncryptionAccess(fileId);
-        if (isStale()) return;
-        if (!encryptionInfo?.fileKeys) {
-          throw new Error("You don't have access to decrypt this file");
-        }
-
-        const identity = await requireUnlock(String(userId));
-        if (isStale()) return;
-        if (!identity) {
-          // User dismissed the passphrase dialog without unlocking — close
-          // the viewer instead of leaving it stuck on a loader/error frame.
-          onClose?.();
-          return;
-        }
-
-        const response = await fetch(src, { signal });
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch file: ${response.status}`);
-        }
-
-        const encryptedData = await response.arrayBuffer();
-        if (isStale()) return;
-
-        const roomMemberKeys: RoomMemberPublicKey[] =
-          await loadRoomMemberKeysSafe(roomId);
-        if (isStale()) return;
-
-        const dek = await unwrapDekForCurrentUser({
-          fileKeys: encryptionInfo.fileKeys,
-          roomMemberKeys,
-          currentUserId: String(userId),
-          currentIdentity: identity,
-          fileId,
-        });
-        if (isStale()) return;
-
-        // Decrypt file (DSE3 format is self-describing)
-        const { data: decryptedBlob, fileName: decryptedName } =
-          await decryptFile(encryptedData, dek, {
-            cacheFilenameForFileId: fileId,
-          });
-        if (isStale()) return;
-
-        // Use decrypted name from DSE3 header for extension detection
-        const displayName = decryptedName || title;
-        if (decryptedName) {
-          setTitle(decryptedName);
-        }
-        const ext = getFileExtension(displayName).toLowerCase();
-        const mimeTypes: Record<string, string> = {
-          jpg: "image/jpeg",
-          jpeg: "image/jpeg",
-          png: "image/png",
-          gif: "image/gif",
-          webp: "image/webp",
-          tif: "image/tiff",
-          tiff: "image/tiff",
-          heic: "image/heic",
-          heif: "image/heif",
-          mp4: "video/mp4",
-          webm: "video/webm",
-          mp3: "audio/mpeg",
-          wav: "audio/wav",
-          ogg: "audio/ogg",
-          pdf: "application/pdf",
-        };
-        const mimeType = mimeTypes[ext] || "application/octet-stream";
-
-        const typedBlob = new Blob([decryptedBlob], { type: mimeType });
-        setFileUrl(URL.createObjectURL(typedBlob));
-      } catch (error) {
-        if (isStale()) return;
-        if (error instanceof Error) {
-          if (error.name === "AbortError") {
-            return;
-          }
-          console.error("[MediaViewer] Decryption error:", error.message);
-          onDecryptionError?.(error.message);
-          setDecryptionError(
-            t("Common:EncryptionDecryptPartialFailed", { fileNames: title }),
-          );
-        }
-      } finally {
-        if (EncryptedAbortSignalRef.current === controller) {
-          setIsDecrypting(false);
-        }
-      }
-    },
-    [t, userId, onClose, onDecryptionError],
-  );
-
-  useEffect(() => {
-    return () => {
-      TiffAbortSignalRef.current?.abort();
-      HeicAbortSignalRef.current?.abort();
-      EncryptedAbortSignalRef.current?.abort();
-      if (
-        prevBlobUrlRef.current &&
-        prevBlobUrlRef.current.startsWith("blob:")
-      ) {
-        URL.revokeObjectURL(prevBlobUrlRef.current);
-        prevBlobUrlRef.current = null;
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const extension = getFileExtension(currentTitle);
-
-    if (!src) {
-      onEmptyPlaylistError?.();
-      return;
-    }
-
-    // a failure belongs to the file that produced it, not to the next one
-    setDecryptionError(undefined);
-
-    if (isEncrypted) {
-      TiffAbortSignalRef.current?.abort();
-      HeicAbortSignalRef.current?.abort();
-      setFileUrl(undefined);
-      // `originRoomId` is set only for files moved out of a room (Recent /
-      // Trash views). For files opened inside their home private room it is
-      // undefined, so we fall back to the caller-provided currentRoomId from
-      // the navigation context.
-      const fileForRoom = files.find((file) => file.id === fileId);
-      fetchAndDecryptFile(
-        src,
+      const dek = await unwrapDekForCurrentUser({
+        fileKeys: encryptionInfo.fileKeys,
+        roomMemberKeys,
+        currentUserId: String(userId),
+        currentIdentity: identity,
         fileId,
-        currentTitle,
-        fileForRoom?.originRoomId ?? currentRoomId ?? null,
-      );
-    } else if (!isTiff(extension) && !isHeic(extension)) {
-      TiffAbortSignalRef.current?.abort();
-      HeicAbortSignalRef.current?.abort();
-      EncryptedAbortSignalRef.current?.abort();
-      setFileUrl(src);
-    } else if (isHeic(extension)) {
-      EncryptedAbortSignalRef.current?.abort();
-      setFileUrl(undefined);
-      fetchAndSetHeicDataURL(src);
-    } else if (isTiff(extension)) {
-      EncryptedAbortSignalRef.current?.abort();
-      setFileUrl(undefined);
-      fetchAndSetTiffDataURL(src);
-    }
+      });
+      if (signal.aborted) return null;
 
-    const foundFile = files.find((file) => file.id === fileId);
+      const { data, fileName } = await decryptFileContent(encryptedData, dek, {
+        cacheFilenameForFileId: fileId,
+      });
 
-    if (!isNullOrUndefined(foundFile)) {
-      setTargetFile(foundFile);
-      setBufferSelection?.(foundFile);
-    }
+      return { data, fileName: fileName ?? undefined };
+    },
+    [userId],
+  );
 
-    setTitle(
-      resolveDisplayTitle({
-        id: fileId,
-        title: currentTitle,
-        encrypted: isEncrypted,
-      }),
-    );
-  }, [
-    src,
-    files,
-    fileId,
-    currentTitle,
-    isEncrypted,
-    currentRoomId,
-    setBufferSelection,
-    onEmptyPlaylistError,
-    fetchAndSetTiffDataURL,
-    fetchAndSetHeicDataURL,
-    fetchAndDecryptFile,
-    pluginViewerContent,
-    pluginTitle,
-    pluginFileId,
-  ]);
-
-  useEffect(() => {
-    document.addEventListener("keydown", onKeydown);
-
-    return () => {
-      document.removeEventListener("keydown", onKeydown);
-    };
-  }, [onKeydown]);
-
-  if (pluginViewerContent) {
-    canOpen = true;
-  } else {
-    if (canPlay(ext) && canImageView(ext)) {
-      canOpen = false;
-      other.onError?.();
-    }
-
-    if (canImageView(ext)) {
-      isImage = true;
-    } else {
-      isImage = false;
-
-      isVideo = mapSupplied[ext]
-        ? mapSupplied[ext]?.type === mediaTypes.video
-        : false;
-
-      isAudio = mapSupplied[ext]
-        ? mapSupplied[ext]?.type === mediaTypes.audio
-        : false;
-
-      isPdf = mapSupplied[ext]
-        ? mapSupplied[ext]?.type === mediaTypes.pdf
-        : false;
-    }
-  }
-
-  return canOpen ? (
-    <ViewerWrapper
-      title={pluginTitle || title}
-      isPdf={isPdf}
-      visible={visible}
-      isImage={isImage}
-      isAudio={isAudio}
-      isVideo={isVideo}
-      fileUrl={fileUrl}
-      playlist={playlist}
-      audioIcon={audioIcon}
-      headerIcon={headerIcon}
-      targetFile={targetFile}
-      userAccess={userAccess}
-      playlistPos={playlistPos}
-      isPublicFile={isPublicFile}
-      isPreviewFile={isPreviewFile}
-      autoPlay={autoPlay}
-      currentDeviceType={currentDeviceType}
-      onClose={onClose}
-      onPrevClick={prevMedia}
-      onNextClick={nextMedia}
-      contextModel={getContextModel}
-      onDeleteClick={onDeleteMediaMedia}
-      onSetSelectionFile={onSetSelectionFile}
-      onDownloadClick={onDownloadMedia}
-      errorTitle={t("Common:MediaError")}
-      pluginViewerContent={pluginViewerContent}
-      isDecrypting={isDecrypting}
-      decryptionError={decryptionError}
+  return (
+    <KitMediaViewer
+      {...props}
+      decryptFile={decryptFile}
+      resolveTitle={resolveDisplayTitle}
+      getPdfViewerScriptUrl={getPdfViewerScriptUrl}
     />
-  ) : undefined;
+  );
 };
 
 export default MediaViewer;
-

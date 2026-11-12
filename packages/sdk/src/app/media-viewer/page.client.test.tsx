@@ -38,7 +38,7 @@ vi.mock("@docspace/shared/components/media-viewer/MediaViewer", () => ({
 }));
 
 vi.mock(
-  "@docspace/shared/components/media-viewer/sub-components/ViewerLoader",
+  "@onlyoffice/apps-ui-kit/media-viewer/sub-components/ViewerLoader",
   () => ({ ViewerLoader: () => <div data-testid="viewer-loader" /> }),
 );
 

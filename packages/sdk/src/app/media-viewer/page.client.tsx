@@ -49,7 +49,7 @@ import type {
 } from "@docspace/shared/api/files/types";
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import type { NumberOrString } from "@docspace/shared/components/media-viewer/MediaViewer.types";
-import { ViewerLoader } from "@docspace/shared/components/media-viewer/sub-components/ViewerLoader";
+import { ViewerLoader } from "@onlyoffice/apps-ui-kit/media-viewer/sub-components/ViewerLoader";
 import { DeviceType, UrlActionType } from "@docspace/shared/enums";
 import { getDeviceTypeByWidth } from "@docspace/shared/utils";
 import {

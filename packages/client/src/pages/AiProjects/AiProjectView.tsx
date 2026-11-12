@@ -46,7 +46,6 @@ import { AiChatPanelBody } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel"
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
-import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import { EmptyView } from "@onlyoffice/apps-ui-kit/components/empty-view";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
@@ -59,7 +58,6 @@ import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import EmptyAccessLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
 
-import { ProjectSources } from "./sub-components/project/ProjectSources";
 import { readProjectFolder, writeProjectFolder } from "./folderContextMemory";
 import styles from "./AiProjectView.module.scss";
 
@@ -74,7 +72,6 @@ type AiProjectViewProps = {
   inRoom: boolean;
   setInRoom: (inRoom: boolean) => void;
   userId?: string;
-  infoPanelVisible: boolean;
 };
 
 // The chat's shape of a project's linked rooms. A room the caller can no
@@ -99,17 +96,13 @@ const AiProjectView = ({
   inRoom,
   setInRoom,
   userId,
-  infoPanelVisible,
 }: AiProjectViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   const navigate = useNavigate();
   const aiChatStore = useAiChatStore();
   const isAiChatAvailable = useIsAiChatAvailable();
-  const isDesktop = useIsDesktop();
-  const { useRouter, useCloudsStore } = useStores();
-  // The chat history takes the sources' place: while it is open they hide.
-  const isHistoryOpen = useRouter((s: { currentPage: string }) => s.currentPage) === "history";
+  const { useCloudsStore } = useStores();
 
   // The room on screen is the project: read it and start its chat. Another
   // project room replaces it; the same room is left as it is. A project the
@@ -279,12 +272,18 @@ const AiProjectView = ({
     if (isProjectOnScreen && !isChatFullscreen) aiChatStore.setFullscreen(true);
   }, [aiChatStore, isProjectOnScreen, isChatFullscreen]);
 
-  // The sources column, expanded or collapsed to its rail, replaces the
-  // composer's chips while the project is on screen.
+  // The project's Skill sets and Knowledge bases are its settings: the
+  // chat's "+" menu lists them and its "Manage sources" opens the project's
+  // form - for those who may change the project; a member only sees the
+  // lists. The folders of Data sources stay the member's own pick.
+  const activeProject = store.activeProject;
+  const canEditSources = !!activeProject && activeProject.id === roomId && activeProject.aiProject.canEditSettings;
   React.useEffect(() => {
-    aiChatStore.setComposerContextHidden(true);
-    return () => aiChatStore.setComposerContextHidden(false);
-  }, [aiChatStore]);
+    aiChatStore.setSourcesManager({
+      onManage: canEditSources ? () => store.activeProject && store.openEditDialog(store.activeProject) : null,
+    });
+    return () => aiChatStore.setSourcesManager(null);
+  }, [aiChatStore, store, canEditSources]);
 
   // The folder the chat works in is remembered for the project while it is
   // open: picked or swapped in the composer, it is kept; disconnected, it is
@@ -323,26 +322,19 @@ const AiProjectView = ({
     // `chat-container` drops the body's vertical padding while the chat
     // shows, as for an agent's chat.
     <div className={classnames(styles.projectChat, "chat-container")}>
-      {!isDesktop && !isHistoryOpen && !infoPanelVisible ? (
-        <ProjectSources store={store} project={project} compact />
-      ) : null}
       <div className={classnames(styles.panelBody, styles.projectBody)}>
         <div className={styles.panelChat}>
           <AiChatPanelBody />
         </div>
-        {/* The sources stand after the chat. The history opens before it and
-            the info panel after it: while either is open the sources hide. */}
-        {isDesktop && !isHistoryOpen && !infoPanelVisible ? <ProjectSources store={store} project={project} /> : null}
       </div>
     </div>
   );
 };
 
-export default inject(({ aiProjectsStore, infoPanelStore, selectedFolderStore, userStore }: TStore) => ({
+export default inject(({ aiProjectsStore, selectedFolderStore, userStore }: TStore) => ({
   aiProjectsStore,
   roomId: Number(selectedFolderStore.id),
   inRoom: selectedFolderStore.inRoom,
   setInRoom: selectedFolderStore.setInRoom,
   userId: userStore.user?.id,
-  infoPanelVisible: infoPanelStore.isVisible,
 }))(observer(AiProjectView));

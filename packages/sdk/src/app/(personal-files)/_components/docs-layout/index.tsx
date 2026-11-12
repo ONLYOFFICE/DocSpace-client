@@ -213,6 +213,13 @@ type DocsLayoutAiBindings = AiChatPanelBindings & {
   onAskAI: (item: TFileItem) => void;
 };
 
+// The picker refetches its list whenever one of these props changes, and a
+// loaded list re-renders this layout (the decrypted names of the picker), so
+// they keep one identity: inline values would make it refetch without end.
+const NO_TREE_FOLDERS: FolderDtoInteger[] = [];
+const noArchiveError = () => "";
+const isPrivateRoom = (room: FolderDtoInteger) => room?.private === true;
+
 const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
   if (mode === "copy") return t("Common:CopyHere");
   if (mode === "move") return t("Common:MoveHere");
@@ -792,7 +799,7 @@ const DocsLayoutCore = observer(
                                   }
                                   treeFolders={
                                     (foldersTree ??
-                                      []) as unknown as FolderDtoInteger[]
+                                      NO_TREE_FOLDERS) as unknown as FolderDtoInteger[]
                                   }
                                   filesSettings={
                                     filesSettings as unknown as NonNullable<
@@ -805,6 +812,10 @@ const DocsLayoutCore = observer(
                                   isRoomsOnly={false}
                                   isThirdParty={false}
                                   openRoot={selectorMode === "restore"}
+                                  // Spec: private-rooms/sdk-surface, "SDK copy picker lists private rooms under a Private entry"
+                                  withPrivateTreeFolder={
+                                    !!isPrivate && selectorMode === "copy"
+                                  }
                                   // withInit
                                   // initItems={
                                   //   selectorInitData.items as unknown as FolderDtoInteger[]
@@ -849,12 +860,9 @@ const DocsLayoutCore = observer(
                                   }
                                   disabledItems={disabledItems}
                                   isRoomDisabled={
-                                    !isPrivate
-                                      ? (room: FolderDtoInteger) =>
-                                          room?.private === true
-                                      : undefined
+                                    !isPrivate ? isPrivateRoom : undefined
                                   }
-                                  getFilesArchiveError={() => ""}
+                                  getFilesArchiveError={noArchiveError}
                                   pinnedRootId={selectorPinnedRootId}
                                   getIsDisabled={
                                     getSelectorIsDisabled as unknown as FilesSelectorProps["getIsDisabled"]

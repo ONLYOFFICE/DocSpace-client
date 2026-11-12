@@ -347,6 +347,7 @@ const chooseTransfer = async (
  */
 const pickRoom = async (
   page: Page,
+  section: "Rooms" | "Private",
   roomTitle: string,
   submit: string,
   folderTitle?: string,
@@ -354,7 +355,9 @@ const pickRoom = async (
   const picker = page.getByTestId("aside").first();
   const item = (title: string) =>
     picker.locator("[data-testid^='selector-item-']").filter({ hasText: title });
-  await picker.getByText("Rooms", { exact: true }).click();
+  // The path starts at the Private entry; the sections are at the root.
+  await picker.getByText("Apps", { exact: true }).first().click();
+  await item(section).first().click();
   await item(roomTitle).click();
   if (folderTitle) await item(folderTitle).click();
   await picker.getByRole("button", { name: submit }).click();
@@ -1058,14 +1061,10 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await expect(passphrasePrompt(page)).toHaveCount(0);
   });
 
-  // The two fixme cases reach the destination room through the picker's
-  // Rooms list, which holds no private room on the server. The kit's picker
-  // has a Private entry for them (`withPrivateTreeFolder`), and with it they
-  // pass; the SDK does not turn it on yet, because its path then starts at
-  // Private and the root of the SDK's picker does not load its entries, so
-  // an ordinary room could no longer be reached ("Destination outside
-  // private rooms"). private-rooms-server-section, task 6.1.
-  test.fixme("Copy into another private room", async ({
+  // The Rooms list holds no private room on the server, so the destination
+  // room is reached through the Private entry at the picker's root.
+  // Spec: private-rooms/sdk-surface, "SDK copy picker lists private rooms under a Private entry"
+  test("Copy into another private room", async ({
     page,
     baseUrl,
     port,
@@ -1077,7 +1076,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await openRoom(page, baseUrl);
 
     await chooseTransfer(page, row(page, MEMO.serverTitle), "copy");
-    await pickRoom(page, SECOND_ROOM_TITLE, "Copy here");
+    await pickRoom(page, "Private", SECOND_ROOM_TITLE, "Copy here");
     await unlock(page);
 
     await expect.poll(() => secondRoom!.getFiles().length).toBe(1);
@@ -1089,7 +1088,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     expect(room.getFiles().map((f) => f.id)).toEqual([MEMO.id]);
   });
 
-  test.fixme("Copy into a folder of another private room", async ({
+  test("Copy into a folder of another private room", async ({
     page,
     baseUrl,
     port,
@@ -1101,7 +1100,13 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await openRoom(page, baseUrl);
 
     await chooseTransfer(page, row(page, MEMO.serverTitle), "copy");
-    await pickRoom(page, SECOND_ROOM_TITLE, "Copy here", SECOND_ROOM_FOLDER.title);
+    await pickRoom(
+      page,
+      "Private",
+      SECOND_ROOM_TITLE,
+      "Copy here",
+      SECOND_ROOM_FOLDER.title,
+    );
     await unlock(page);
 
     await expect.poll(() => secondRoom!.getFiles().length).toBe(1);
@@ -1152,7 +1157,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
         .first()
         .getByText("Encrypted files", { exact: true }),
     ).toBeVisible();
-    await pickRoom(page, SHARED_ROOM_TITLE, "Copy here");
+    await pickRoom(page, "Rooms", SHARED_ROOM_TITLE, "Copy here");
     await unlock(page);
 
     const conflict = page

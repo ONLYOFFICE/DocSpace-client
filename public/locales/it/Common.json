@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Nessun utente corrisponde alla tua ricerca. Modifica i parametri di ricerca o cancella il campo di ricerca per visualizzare l'elenco completo degli utenti.",
   "NoTimeLimit": "Nessun limite di tempo",
   "NotIncludedInYourCurrentPlan": "Non incluso nel tuo piano attuale",
+  "NotInvited": "Non invitati",
   "NoTransactionsFilter": "Nessuna transazione corrisponde a questo filtro. Prova con un altro o rimuovi il filtro per visualizzare tutte le transazioni.",
   "NotSupportedFormat": "Scusa, questo formato file non è supportato",
   "NoUpcomingPayments": "Nessun pagamento in arrivo",

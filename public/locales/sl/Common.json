@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Noben uporabnik ne ustreza vašemu iskanju. Za ogled celotnega seznama uporabnikov prilagodite iskalne parametre ali počistite iskalno polje.",
   "NoTimeLimit": "Ni časovne omejitve",
   "NotIncludedInYourCurrentPlan": "Ni vključeno v vaš načrt.",
+  "NotInvited": "Niso povabljeni",
   "NoTransactionsFilter": "Nobene transakcije ne ustreza temu filtru. Poskusite z drugim ali odstranite filter, da si ogledate vse transakcije.",
   "NotSupportedFormat": "Oprostite, ta format datoteke ni podprt",
   "NoUpcomingPayments": "Ni prihajajočih plačil",

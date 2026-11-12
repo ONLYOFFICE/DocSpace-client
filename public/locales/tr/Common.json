@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Aramanızla eşleşen kullanıcı yok. Lütfen arama parametrelerinizi düzenleyin veya kullanıcıların tam listesini görüntülemek için arama alanını temizleyin.",
   "NoTimeLimit": "Zaman sınırı yok",
   "NotIncludedInYourCurrentPlan": "Mevcut planınızda dahil değil",
+  "NotInvited": "Davet edilmedi",
   "NoTransactionsFilter": "Bu filtreyle eşleşen işlem bulunamadı. Başka bir filtre deneyin veya tüm işlemleri görmek için filtreyi kaldırın.",
   "NotSupportedFormat": "Üzgünüm, bu dosya biçimi desteklenmiyor",
   "NoUpcomingPayments": "Yaklaşan ödeme yok",

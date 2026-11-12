@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "검색어와 일치하는 사용자가 없습니다. 전체 사용자 목록을 보려면 검색 매개변수를 조정하거나 검색란을 삭제하세요.",
   "NoTimeLimit": "시간 제한이 없습니다",
   "NotIncludedInYourCurrentPlan": "현재 플랜에 포함되지 않았습니다.",
+  "NotInvited": "초대되지 않음",
   "NoTransactionsFilter": "이 필터에 일치하는 거래 내역이 없습니다. 다른 필터를 사용해 보거나 필터를 제거하여 모든 거래 내역을 확인해 보세요.",
   "NotSupportedFormat": "이 파일 형식은 지원 되지 않습니다",
   "NoUpcomingPayments": "예정된 결제 없음",

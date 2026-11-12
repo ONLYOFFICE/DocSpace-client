@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Vašemu hledání neodpovídají žádní uživatelé. Upravte prosím parametry vyhledávání nebo vymažte vyhledávací pole a zobrazte úplný seznam uživatelů.",
   "NoTimeLimit": "Bez časového omezení",
   "NotIncludedInYourCurrentPlan": "Nezahrnuto do vašeho aktuálního plánu",
+  "NotInvited": "Nepozváni",
   "NoTransactionsFilter": "Žádné transakce neodpovídají tomuto filtru. Zkuste jiný nebo filtr odstraňte, abyste zobrazili všechny transakce.",
   "NotSupportedFormat": "Omlouváme se, ale formát tohoto souboru není podporován",
   "NoUpcomingPayments": "Žádné nadcházející platby",

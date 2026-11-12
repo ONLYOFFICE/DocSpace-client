@@ -1659,6 +1659,7 @@
   "NotFoundUsersDescription": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
   "NoTimeLimit": "No time limit",
   "NotIncludedInYourCurrentPlan": "Not included in your current plan",
+  "NotInvited": "Not invited",
   "NoTransactionsFilter": "No transactions match this filter. Try another or remove the filter to view all transactions.",
   "NotSupportedFormat": "Sorry, this file format isn't supported",
   "NoUpcomingPayments": "No upcoming payments",

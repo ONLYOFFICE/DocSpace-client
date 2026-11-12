@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Yksikään käyttäjä ei vastaa hakuasi. Ole hyvä ja muokkaa hakuparametrejäsi tai tyhjennä hakukenttä nähdäksesi täyden listan käyttäjistä.",
   "NoTimeLimit": "Ei aikarajaa",
   "NotIncludedInYourCurrentPlan": "Ei sisälly nykyiseen suunnitelmaan",
+  "NotInvited": "Ei kutsuttu",
   "NoTransactionsFilter": "Ei löytynyt vastaavia tapahtumia tälle suodattimelle. Kokeile toista tai poista suodatin nähdäksesi kaikki tapahtumat.",
   "NotSupportedFormat": "Tätä tiedostomuotoa ei tueta",
   "NoUpcomingPayments": "Ei tulevia maksuja",

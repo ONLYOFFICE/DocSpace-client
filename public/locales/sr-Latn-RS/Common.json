@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Nema korisnika koji se poklapaju sa vašom pretragom. Molimo vas podesite vaše parametre pretrage ili obrišite polje pretrage da biste videli punu listu korisnika.",
   "NoTimeLimit": "Bez vremenskog ograničenja",
   "NotIncludedInYourCurrentPlan": "Nije uključeno u tvoj trenutni plan",
+  "NotInvited": "Nisu pozvani",
   "NoTransactionsFilter": "Nema transakcija koje odgovaraju ovom filteru. Probajte drugi ili uklonite filter da biste videli sve transakcije.",
   "NotSupportedFormat": "Izvinjavamo se, ovaj format datoteke nije podržan",
   "NoUpcomingPayments": "Nema predstojećih plaćanja",

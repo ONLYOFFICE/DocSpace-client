@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Không có người dùng nào phù hợp với tìm kiếm của bạn. Vui lòng điều chỉnh thông số tìm kiếm của bạn hoặc xóa trường tìm kiếm để xem toàn bộ danh sách người dùng.",
   "NoTimeLimit": "Không giới hạn thời gian",
   "NotIncludedInYourCurrentPlan": "Không nằm trong kế hoạch hiện tại",
+  "NotInvited": "Chưa được mời",
   "NoTransactionsFilter": "Không có giao dịch nào phù hợp với bộ lọc này. Hãy thử một bộ lọc khác hoặc bỏ qua bộ lọc để xem tất cả các giao dịch.",
   "NotSupportedFormat": "Rất tiếc, định dạng file này không được hỗ trợ",
   "NoUpcomingPayments": "Không có khoản thanh toán sắp tới",

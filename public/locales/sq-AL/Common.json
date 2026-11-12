@@ -1653,6 +1653,7 @@
   "NotFoundUsersDescription": "Asnjë përdorues nuk përputhet me kërkimin tuaj. Ju lutemi rregulloni parametrat e kërkimit ose pastroni fushën e kërkimit për të parë listën e plotë të përdoruesve.",
   "NoTimeLimit": "Nuk ka kufizim kohore",
   "NotIncludedInYourCurrentPlan": "Nuk përfshihet në planin tuaj aktual",
+  "NotInvited": "Nuk u ftuan",
   "NoTransactionsFilter": "Asnjë transaksion nuk përputhet me këtë filtër. Provoni një tjetër ose hiqni filtrin për të parë të gjitha transaksionet.",
   "NotSupportedFormat": "Na vjen keq, por ky format skedari nuk mbështetet",
   "NoUpcomingPayments": "Nuk ka pagesa të ardhshme",

@@ -349,6 +349,18 @@ test.describe("Private room — invite entry point", () => {
     await expect(page.getByTestId("invite_panel_result_skipped")).toContainText(
       DAN.displayName,
     );
+    await test.step("Result shown", async () => {
+      const result = page.getByRole("region", { name: "Invitation results" });
+      await expect(result).toBeFocused();
+      await expect(
+        result.getByRole("region", { name: "Invited", exact: true }),
+      ).toContainText(CAROL.displayName);
+    });
+    await test.step("Result with a skipped invitee", async () => {
+      await expect(
+        page.getByRole("region", { name: "Not invited" }),
+      ).toContainText(DAN.displayName);
+    });
     const storedFile = filesHandle.current!.getFiles()[0];
     expect(storedFile.fileKeys.map((k) => String(k.userId)).sort()).toEqual(
       [CAROL.id, TEST_USER_ID].sort(),

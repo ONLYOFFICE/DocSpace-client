@@ -191,10 +191,18 @@ export async function wsModifyFolderCreateImpl(
 
     // A form room is listed in Forms, not in the Rooms folder it belongs to.
     const isFormRoom = folder?.roomType === RoomsType.FormRoom;
+    // Nor is a private room: the Private list is open under a root of its
+    // own, while the room reports the Rooms folder as its parent. Which of
+    // the two lists takes the room is decided below, by its private setting.
+    const isRoomOfOpenPrivateList = (parentId: number | string) =>
+      !!folder?.roomType &&
+      !!self.treeFoldersStore.isPrivateRoomsFolder &&
+      self.treeFoldersStore.roomsFolderId == parentId;
     const isInSelectedFolder = (parentId: number | string) =>
       isFormRoom
         ? self.treeFoldersStore.isFormsFolder
-        : self.selectedFolderStore.id == parentId;
+        : self.selectedFolderStore.id == parentId ||
+          isRoomOfOpenPrivateList(parentId);
 
     // the parent folders are subscribed too, so a folder created in one of
     // them must not be counted here; a folder is counted where it is listed,
@@ -240,12 +248,11 @@ export async function wsModifyFolderCreateImpl(
       const scope = getRoomsRequestScope(
         getCategoryType(window.DocSpace?.location ?? window.location),
         self.roomsFilter.searchArea,
-        self.isPrivateRoomsSectionAvailable,
       );
       const isPrivate = !!folderInfo.private;
       if (
-        (scope?.privacyFilter === RoomPrivacyFilter.Private && !isPrivate) ||
-        (scope?.privacyFilter === RoomPrivacyFilter.NotPrivate && isPrivate)
+        (scope?.lists === "private" && !isPrivate) ||
+        (scope?.lists === "notPrivate" && isPrivate)
       ) {
         return;
       }

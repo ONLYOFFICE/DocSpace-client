@@ -193,6 +193,56 @@ offers ("Copy into another private room needs access to it"), has had no
 reachable destination on a real portal since `c866c055e1`. The former mocks
 listed private rooms in the Rooms area and hid it.
 
+### The section list under its own root (found on 2026-11-12)
+
+Decision 2 says that only the data source changes. That missed one thing:
+`searchArea=PrivateRooms` answers the list under the Private root (`current`
+with root folder type 42, `parentId` 0), not under the Rooms root, while every
+room in it still reports the Rooms root as its root and its parent. The first
+E2E run on such a list failed 11 cases of `private-rooms-section.spec.ts`: the
+row links, the filter block, the empty states, the creation entry points, the
+hotkey and the key prompt.
+
+The owner decided on 2026-11-12 to keep the area and teach the client the
+root, since the section is now a root category of its own, and asked for
+every place that leaned on the earlier shape to be accounted for. The
+alternative, to keep `searchArea=Active&privacyFilter=Private` for the
+section, stays rejected.
+
+An inventory of the client, the shared package and the SDK (every use of the
+Private route check, the Private categories, the privacy filter, the Rooms
+root type and the Rooms root id) gave two groups.
+
+**Decided by the address, not touched by the root.** Most of the section:
+the route guards, the article item and its active state, the section filter
+and sort, the empty-view texts, the header title, the create dialog and the
+key prompt, navigation between the section, its archive and a room, the
+no-access view, the info panel, the context and header menus. They read the
+pathname or the category of the address and keep working.
+
+**Decided by the root of the open list.** These needed the Private root:
+
+| Place | What it decided by | Change |
+| --- | --- | --- |
+| `getCategoryTypeByFolderType` (`helpers/utils.js`), which sets the list category after every fetch | the root folder type of `current`; an unknown type fell to Personal, and the row links, the filter, creation and the hotkeys followed it | type 42 gives the Private list category |
+| `TreeFoldersStore.isRoomsFolder` and `isRoomsFolderRoot` (over a hundred readers) | the id and the type of the Rooms root | true for the Private root as well: it is a rooms list, and the address tells the two apart |
+| `sortInDisplayOrder` (`shared/utils/common.tsx`), which builds the tree | a fixed list of root types; the Private root was dropped | the root is kept, after Forms |
+| `TreeFoldersStore.fetchTreeFolders` | the root's server title | titled Common:Private |
+| `FilesStore.canCreate` | the root folder type | the Private root creates as Rooms does |
+| the section header (`pages/Home/Section/Header`) | `rootFolderType === Rooms` | the Private root counts as the rooms root |
+| the empty view (`EmptyViewContainer`) | matchers on the Rooms root type | the Private root is read as the rooms root there |
+| live updates (`filesStore/socket.helpers.ts`) | a new room is counted and inserted when its parent is the open folder | a room's parent is the Rooms root, so the open Private list takes a room by that parent; its private setting then decides, as before |
+| the frame's custom actions (`shared/utils/frameCustomActions.ts`) | the host's section, read from the root of the open list | the Private root maps to the host's `rooms` section, which the list had under the Rooms root; the frame contract names no section of its own for it |
+
+Left as they are, on purpose: the AI suggestions map by root
+(`helpers/aiSuggestions.ts`), since the section offers no AI chat, and the
+catalog icon by root type, since the sidebar item of the section brings its
+own icon and a tree-built menu skips a root without one.
+
+Rooms and everything inside them keep the Rooms root type, so the checks made
+on an item or on a folder inside a room (sharing, links, quota, upload
+targets, the archive and restore destinations) are not affected.
+
 ## Goals / Non-Goals
 
 **Goals:**

@@ -101,7 +101,7 @@ const EditRoomGroupsDialog = ({
         const ids = isFormsSection ? [] : await getPrivateSectionRoomIds();
         if (isCurrent) setPrivateRoomIds(ids);
       } catch (error) {
-        // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available".
+        // Spec: private-rooms/sidebar-section, "Rooms section never lists private rooms".
         if (!isCurrent) return;
         toastr.error(error as Error);
         setEditRoomGroupsDialogVisible(false);

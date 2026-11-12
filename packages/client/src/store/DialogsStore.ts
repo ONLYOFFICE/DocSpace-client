@@ -1390,8 +1390,8 @@ class DialogsStore {
 
   /**
    * The ids of the rooms the Private section lists, none while it is not
-   * available. Spec: private-rooms/sidebar-section, "Rooms section excludes
-   * private rooms while the section is available"
+   * available. Spec: private-rooms/sidebar-section, "Rooms section never
+   * lists private rooms"
    */
   getPrivateSectionRoomIds = async () => {
     const ids: number[] = [];
@@ -1399,7 +1399,7 @@ class DialogsStore {
 
     const filter = withRoomsRequestScope(
       RoomsFilter.getDefault(),
-      getRoomsRequestScope(CategoryType.PrivateRooms, undefined, true),
+      getRoomsRequestScope(CategoryType.PrivateRooms, undefined),
     );
     filter.pageCount = 100;
 

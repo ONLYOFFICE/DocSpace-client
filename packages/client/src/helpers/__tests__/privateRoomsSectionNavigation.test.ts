@@ -194,6 +194,22 @@ describe("Private section of a room opened from elsewhere", () => {
   });
 });
 
+describe("The list answered under the Private root", () => {
+  it("is the Private list, with or without the address' say", () => {
+    expect(
+      getCategoryTypeByFolderTypeInSection(FolderType.PrivateRooms, 0, {
+        isPrivate: true,
+      }),
+    ).toBe(CategoryType.PrivateRooms);
+    expect(
+      getCategoryTypeByFolderTypeInSection(FolderType.PrivateRooms, 0, {
+        isPrivate: false,
+        pathname: "/private/filter",
+      }),
+    ).toBe(CategoryType.PrivateRooms);
+  });
+});
+
 describe("Frame opened in the Private section", () => {
   // The address the SDK JS manager builds from its root path:
   // `{rootPath}{id}/filter?...`, the id also given as `folder`.
@@ -204,9 +220,10 @@ describe("Frame opened in the Private section", () => {
     const categoryType = categoryOf(managerAddress("/private/"));
 
     expect(categoryType).toBe(CategoryType.PrivateRooms);
-    expect(getRoomsRequestScope(categoryType, undefined, true)).toEqual({
-      privacyFilter: RoomPrivacyFilter.Private,
-      searchArea: RoomSearchArea.Active,
+    expect(getRoomsRequestScope(categoryType, undefined)).toEqual({
+      privacyFilter: null,
+      searchArea: RoomSearchArea.PrivateRooms,
+      lists: "private",
     });
   });
 

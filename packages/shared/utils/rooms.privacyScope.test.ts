@@ -42,69 +42,79 @@ import { RoomPrivacyFilter, RoomSearchArea } from "../enums";
 import { getRoomsRequestScope, withRoomsRequestScope } from "./rooms";
 
 describe("getRoomsRequestScope", () => {
-  it.each([
-    [CategoryType.PrivateRooms, RoomSearchArea.Active],
-    [CategoryType.PrivateRoom, RoomSearchArea.Active],
-    [CategoryType.PrivateArchive, RoomSearchArea.Archive],
-  ])(
-    "asks for private rooms in the area of category %s",
-    (category, searchArea) => {
-      for (const available of [true, false]) {
-        expect(getRoomsRequestScope(category, undefined, available)).toEqual({
-          privacyFilter: RoomPrivacyFilter.Private,
-          searchArea,
-        });
-      }
+  // Spec: private-rooms/sidebar-section, "Section lists only private rooms"
+  it.each([CategoryType.PrivateRooms, CategoryType.PrivateRoom])(
+    "List opened (category %s)",
+    (category) => {
+      expect(getRoomsRequestScope(category, undefined)).toEqual({
+        privacyFilter: null,
+        searchArea: RoomSearchArea.PrivateRooms,
+        lists: "private",
+      });
     },
   );
 
+  it.each([RoomSearchArea.Active, RoomSearchArea.Archive])(
+    "Address carries another privacy value (searchArea %s)",
+    (searchArea) => {
+      expect(
+        getRoomsRequestScope(CategoryType.PrivateRooms, searchArea),
+      ).toEqual({
+        privacyFilter: null,
+        searchArea: RoomSearchArea.PrivateRooms,
+        lists: "private",
+      });
+    },
+  );
+
+  it("Archive address carries the active search area", () => {
+    expect(
+      getRoomsRequestScope(CategoryType.PrivateArchive, RoomSearchArea.Active),
+    ).toEqual({
+      privacyFilter: RoomPrivacyFilter.Private,
+      searchArea: RoomSearchArea.Archive,
+      lists: "private",
+    });
+  });
+
+  // Spec: private-rooms/sidebar-section, "Rooms section never lists private rooms"
   it.each([
     [CategoryType.Shared, RoomSearchArea.Active],
     [CategoryType.SharedRoom, RoomSearchArea.Active],
+    [CategoryType.Shared, undefined],
+  ])("Rooms carries no privacy filter (%s, %s)", (category, searchArea) => {
+    expect(getRoomsRequestScope(category, searchArea)).toEqual({
+      privacyFilter: null,
+      lists: "notPrivate",
+    });
+  });
+
+  it.each([
     [CategoryType.Archive, RoomSearchArea.Archive],
-  ])("Section available (category %s)", (category, searchArea) => {
-    expect(getRoomsRequestScope(category, searchArea, true)).toEqual({
-      privacyFilter: RoomPrivacyFilter.NotPrivate,
-    });
-  });
-
-  describe("Section not available", () => {
-    it.each([
-      [CategoryType.Shared, RoomSearchArea.Active],
-      [CategoryType.SharedRoom, RoomSearchArea.Active],
-      [CategoryType.Shared, undefined],
-    ])("Rooms carries no privacy filter (%s, %s)", (category, searchArea) => {
-      expect(getRoomsRequestScope(category, searchArea, false)).toBeNull();
-    });
-
-    it.each([
-      [CategoryType.Archive, RoomSearchArea.Archive],
-      [CategoryType.ArchivedRoom, RoomSearchArea.Archive],
-      [CategoryType.Archive, undefined],
-      [CategoryType.Shared, RoomSearchArea.Archive],
-    ])(
-      "Rooms -> Archive keeps the non-private filter (%s, %s)",
-      (category, searchArea) => {
-        expect(getRoomsRequestScope(category, searchArea, false)).toEqual({
-          privacyFilter: RoomPrivacyFilter.NotPrivate,
-        });
-      },
-    );
-  });
+    [CategoryType.ArchivedRoom, RoomSearchArea.Archive],
+    [CategoryType.Archive, undefined],
+    [CategoryType.Shared, RoomSearchArea.Archive],
+  ])(
+    "Rooms -> Archive carries the non-private filter (%s, %s)",
+    (category, searchArea) => {
+      expect(getRoomsRequestScope(category, searchArea)).toEqual({
+        privacyFilter: RoomPrivacyFilter.NotPrivate,
+        lists: "notPrivate",
+      });
+    },
+  );
 
   it.each([
     RoomSearchArea.Templates,
     RoomSearchArea.Forms,
     RoomSearchArea.AIAgents,
   ])("does not scope a %s search", (searchArea) => {
-    expect(getRoomsRequestScope(CategoryType.Shared, searchArea, true)).toBeNull();
+    expect(getRoomsRequestScope(CategoryType.Shared, searchArea)).toBeNull();
   });
 
   it("does not scope lists outside rooms", () => {
-    expect(
-      getRoomsRequestScope(CategoryType.Personal, undefined, true),
-    ).toBeNull();
-    expect(getRoomsRequestScope(CategoryType.Forms, undefined, true)).toBeNull();
+    expect(getRoomsRequestScope(CategoryType.Personal, undefined)).toBeNull();
+    expect(getRoomsRequestScope(CategoryType.Forms, undefined)).toBeNull();
   });
 });
 
@@ -116,7 +126,7 @@ describe("withRoomsRequestScope", () => {
 
     const scoped = withRoomsRequestScope(
       filter,
-      getRoomsRequestScope(CategoryType.PrivateArchive, filter.searchArea, true),
+      getRoomsRequestScope(CategoryType.PrivateArchive, filter.searchArea),
     );
 
     expect(scoped).not.toBe(filter);
@@ -126,12 +136,39 @@ describe("withRoomsRequestScope", () => {
     expect(filter.searchArea).toBe(RoomSearchArea.Active);
   });
 
+  it("Address asks Rooms for private rooms", () => {
+    const filter = RoomsFilter.getDefault();
+    filter.privacyFilter = RoomPrivacyFilter.Private;
+
+    const scoped = withRoomsRequestScope(
+      filter,
+      getRoomsRequestScope(CategoryType.Shared, filter.searchArea),
+    );
+
+    expect(scoped.privacyFilter).toBeNull();
+    expect(scoped.toApiUrlParams()).not.toContain("privacyFilter");
+  });
+
+  it("List opened: the request names the section's area and no privacy filter", () => {
+    const filter = RoomsFilter.getDefault();
+    filter.privacyFilter = RoomPrivacyFilter.NotPrivate;
+
+    const scoped = withRoomsRequestScope(
+      filter,
+      getRoomsRequestScope(CategoryType.PrivateRooms, filter.searchArea),
+    );
+
+    expect(scoped.toApiUrlParams()).toContain("searchArea=PrivateRooms");
+    expect(scoped.toApiUrlParams()).not.toContain("privacyFilter");
+  });
+
   it("keeps the search area when the scope names none", () => {
     const filter = RoomsFilter.getDefault();
     filter.searchArea = RoomSearchArea.Archive;
 
     const scoped = withRoomsRequestScope(filter, {
       privacyFilter: RoomPrivacyFilter.NotPrivate,
+      lists: "notPrivate",
     });
 
     expect(scoped.searchArea).toBe(RoomSearchArea.Archive);

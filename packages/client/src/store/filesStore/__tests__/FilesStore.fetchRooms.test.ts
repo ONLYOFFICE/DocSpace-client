@@ -255,10 +255,14 @@ describe("FilesStore rooms requests — Private section scope", () => {
   });
 
   it.each([
-    ["/private/filter", RoomSearchArea.Active],
-    ["/private/12/filter", RoomSearchArea.Active],
-    ["/private/archived/filter", RoomSearchArea.Archive],
-  ])("List opened: Private on %s", async (pathname, searchArea) => {
+    ["/private/filter", null, RoomSearchArea.PrivateRooms],
+    ["/private/12/filter", null, RoomSearchArea.PrivateRooms],
+    [
+      "/private/archived/filter",
+      RoomPrivacyFilter.Private,
+      RoomSearchArea.Archive,
+    ],
+  ])("List opened: Private on %s", async (pathname, privacyFilter, searchArea) => {
     openAddress(pathname);
     const store = storeOnRoomsList(true);
     const getRooms = vi
@@ -267,18 +271,19 @@ describe("FilesStore rooms requests — Private section scope", () => {
 
     await store.fetchRooms(0);
 
-    expect(sentFilter(getRooms)).toMatchObject({
-      privacyFilter: RoomPrivacyFilter.Private,
-      searchArea,
-    });
+    expect(sentFilter(getRooms)).toMatchObject({ privacyFilter, searchArea });
   });
 
   it.each([
-    ["/rooms/shared/filter", RoomSearchArea.Active],
-    ["/rooms/archived/filter", RoomSearchArea.Archive],
+    ["/rooms/shared/filter", RoomSearchArea.Active, null],
+    [
+      "/rooms/archived/filter",
+      RoomSearchArea.Archive,
+      RoomPrivacyFilter.NotPrivate,
+    ],
   ])(
-    "NotPrivate on %s while the section is available",
-    async (pathname, searchArea) => {
+    "Section available: %s",
+    async (pathname, searchArea, privacyFilter) => {
       openAddress(pathname);
       const store = storeOnRoomsList(true);
       const getRooms = vi
@@ -289,35 +294,42 @@ describe("FilesStore rooms requests — Private section scope", () => {
 
       await store.fetchRooms(0, filter);
 
-      expect(sentFilter(getRooms)).toMatchObject({
-        privacyFilter: RoomPrivacyFilter.NotPrivate,
-        searchArea,
-      });
+      expect(sentFilter(getRooms)).toMatchObject({ privacyFilter, searchArea });
     },
   );
 
   it.each([
     ["Search in Rooms", { filterValue: "budget" }],
     ["Room group opened in Rooms", { groupId: "group-1" }],
-  ])(
-    "%s: NotPrivate while the section is available",
-    async (_, query) => {
-      const store = storeOnRoomsList(true);
-      const getRooms = vi
-        .spyOn(api.rooms, "getRooms")
-        .mockResolvedValue(roomsPayload([room(1)]) as never);
-      const filter = Object.assign(store.roomsFilter.clone(), query);
+  ])("%s: no privacy filter", async (_, query) => {
+    const store = storeOnRoomsList(true);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+    const filter = Object.assign(store.roomsFilter.clone(), query);
 
-      await store.fetchRooms(0, filter);
+    await store.fetchRooms(0, filter);
 
-      expect(sentFilter(getRooms)).toMatchObject({
-        ...query,
-        privacyFilter: RoomPrivacyFilter.NotPrivate,
-      });
-    },
-  );
+    expect(sentFilter(getRooms)).toMatchObject({
+      ...query,
+      privacyFilter: null,
+    });
+  });
 
-  it("none while the section is not available", async () => {
+  it("Address asks Rooms for private rooms", async () => {
+    const store = storeOnRoomsList(true);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+    const filter = store.roomsFilter.clone();
+    filter.privacyFilter = RoomPrivacyFilter.Private;
+
+    await store.fetchRooms(0, filter);
+
+    expect(sentFilter(getRooms).privacyFilter).toBeNull();
+  });
+
+  it("Section not available: the same requests", async () => {
     const getRooms = vi
       .spyOn(api.rooms, "getRooms")
       .mockResolvedValue(roomsPayload([room(1)]) as never);
@@ -346,8 +358,8 @@ describe("FilesStore rooms requests — Private section scope", () => {
     await store.fetchRooms(0, filter);
 
     expect(sentFilter(getRooms)).toMatchObject({
-      privacyFilter: RoomPrivacyFilter.Private,
-      searchArea: RoomSearchArea.Active,
+      privacyFilter: null,
+      searchArea: RoomSearchArea.PrivateRooms,
     });
     expect(filter.privacyFilter).toBe(RoomPrivacyFilter.NotPrivate);
     expect(store.roomsFilter.privacyFilter).toBe(RoomPrivacyFilter.NotPrivate);
@@ -385,8 +397,8 @@ describe("FilesStore rooms requests — Private section scope", () => {
     await store.removeFiles(null, [1]);
 
     expect(sentFilter(getRooms)).toMatchObject({
-      privacyFilter: RoomPrivacyFilter.Private,
-      searchArea: RoomSearchArea.Active,
+      privacyFilter: null,
+      searchArea: RoomSearchArea.PrivateRooms,
     });
     expect(store.folders.map((f) => f.id)).toEqual([2, 3, 4]);
   });
@@ -412,9 +424,7 @@ describe("FilesStore rooms requests — Private section scope", () => {
       apps.isPrivateRoomsSectionAvailable = true;
     });
     await vi.waitFor(() => expect(getRooms).toHaveBeenCalledTimes(2));
-    expect(sentFilter(getRooms, 1).privacyFilter).toBe(
-      RoomPrivacyFilter.NotPrivate,
-    );
+    expect(sentFilter(getRooms, 1).privacyFilter).toBeNull();
   });
 
   it.each(["/private/filter", "/rooms/shared/12/filter"])(

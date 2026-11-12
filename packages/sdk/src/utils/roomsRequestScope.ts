@@ -65,5 +65,5 @@ export const scopeRoomsRequest = (
 ): RoomsFilter =>
   withRoomsRequestScope(
     filter,
-    getRoomsRequestScope(categoryOf(kind), filter.searchArea, true),
+    getRoomsRequestScope(categoryOf(kind), filter.searchArea),
   );

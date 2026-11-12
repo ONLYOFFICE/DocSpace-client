@@ -125,6 +125,9 @@ class TreeFoldersStore {
         case FolderType.AiHub:
           folder.title = i18n.t("Common:AiWorkspace");
           break;
+        case FolderType.PrivateRooms:
+          folder.title = i18n.t("Common:Private");
+          break;
         default:
           break;
       }
@@ -314,6 +317,27 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.AiHub);
   }
 
+  /** The root of the Private section; the server lists it while the E2E rooms app is on. */
+  get privateRoomsFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.PrivateRooms,
+    );
+  }
+
+  get privateRoomsFolderId() {
+    return this.privateRoomsFolder ? this.privateRoomsFolder.id : null;
+  }
+
+  /**
+   * The Private list is open. Only the root itself carries the type: a
+   * private room and everything in it report the Rooms root.
+   */
+  get isPrivateRoomsFolder() {
+    return (
+      this.selectedFolderStore.rootFolderType === FolderType.PrivateRooms
+    );
+  }
+
   get commonFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.COMMON);
   }
@@ -425,7 +449,14 @@ class TreeFoldersStore {
     return window.location.pathname.includes("/flows");
   }
 
+  /**
+   * The open folder is a list of rooms: the Rooms root, or the Private root,
+   * whose rooms stay under the Rooms root and are listed through their own
+   * section. The address tells the two lists apart.
+   */
   get isRoomsFolder() {
+    if (this.isPrivateRoomsFolder) return true;
+
     return (
       this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id
     );
@@ -502,7 +533,10 @@ class TreeFoldersStore {
   }
 
   get isRoomsFolderRoot() {
-    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
+    return (
+      FolderType.Rooms === this.selectedFolderStore.rootFolderType ||
+      this.isPrivateRoomsFolder
+    );
   }
 
   get isArchiveFolderRoot() {

@@ -820,6 +820,31 @@ describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => 
   });
 });
 
+describe("UploadDataStore.startSessionFunc — remembered session", () => {
+  it("drops the session remembered for a repeated finalize once a new session is opened for the row", async () => {
+    const { store } = createTestUploadDataStore();
+    replaceAction(store, "finishUploadFiles");
+    const entry = makeUploadFile({
+      uniqueId: "stale",
+      file: makeBrowserFile("stale.docx", 1024),
+      toFolderId: 1,
+      pendingFinalize: { sessionId: "old-session", path: [1] },
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    vi.mocked(filesApi.startUploadSession).mockRejectedValue(
+      new Error("boom"),
+    );
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1);
+    expect(store.files[0].pendingFinalize).toBeNull();
+  });
+});
+
 describe("UploadDataStore.startSessionFunc — session error", () => {
   it("marks the failed file, chains the next queued file and finishes with the aggregate error toast", async () => {
     const { store, fakes } = createTestUploadDataStore();

@@ -366,22 +366,38 @@ export async function retryFinalizeImpl(
   pendingFinalize: TPendingFinalize,
   t: TTranslation,
 ) {
-  const indexOfFile = self.files.findIndex((f) => f.uniqueId === uniqueId);
-  const row = self.files[indexOfFile];
-  if (!row) return;
+  const findRowIndex = () =>
+    self.files.findIndex((f) => f.uniqueId === uniqueId);
+
+  const startedRow = self.files[findRowIndex()];
+  if (!startedRow) return;
 
   runInAction(() => {
-    row.inAction = true;
+    startedRow.inAction = true;
     self.currentUploadNumber += 1;
   });
 
   try {
     const res = await finalizeUploadSession(
-      row.toFolderId!,
+      startedRow.toFolderId!,
       pendingFinalize.sessionId,
     );
     if (!isChunkUploadResponse(res)) {
       throw new Error(t("Common:UnexpectedError"));
+    }
+
+    const indexOfFile = findRowIndex();
+    const row = self.files[indexOfFile];
+    if (!row) return;
+
+    if (row.cancel) {
+      if (res.uploaded) {
+        restoreRowCancelledLate(self, uniqueId, {
+          fileId: res.id,
+          file: res.file,
+        });
+      }
+      return;
     }
 
     runInAction(() => {
@@ -397,6 +413,10 @@ export async function retryFinalizeImpl(
       resolve: () => Promise.resolve(),
     });
   } catch (error) {
+    const indexOfFile = findRowIndex();
+    const row = self.files[indexOfFile];
+    if (!row || row.cancel) return;
+
     if (isUploadSessionGone(error)) {
       runInAction(() => {
         row.pendingFinalize = null;
@@ -729,6 +749,8 @@ export async function startSessionFuncImpl(
   if (gate.action === "encrypt") {
     return uploadEncryptedItem(self, indexOfFile, t, createNewIfExist);
   }
+
+  item.pendingFinalize = null;
 
   const fileSize = fileToUpload.size;
   const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);

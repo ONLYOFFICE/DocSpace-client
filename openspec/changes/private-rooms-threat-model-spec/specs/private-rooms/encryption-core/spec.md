@@ -28,10 +28,14 @@ The system SHALL NOT protect the files of a private room against a server that a
 - **WHEN** the server lists a different key for a member whose key is already pinned on this device
 - **THEN** the key-change dialog is shown and no wrap is produced for the new key unless the user accepts it
 
-### Requirement: No out-of-band verification of peer keys
-The system SHALL NOT offer a way to compare a member's key with that member outside the portal: no fingerprint of another user is shown and no key can be marked as verified. Trust in a peer key rests on first use and on the key-change dialog alone.
+### Requirement: A first-seen peer key is not offered for verification
+The system SHALL NOT show the fingerprint of a peer key that is seen for the first time, and SHALL NOT let a user mark a peer key as verified. A user's own fingerprint is shown in Keys management, and a peer's known and new fingerprints only in the key-change dialog, so a key can be compared with its owner outside the portal only after it changed.
 
-#### Scenario: Looking for a member's fingerprint
+#### Scenario: Key of a new member
+- **WHEN** a file key is wrapped for a member whose key this device sees for the first time
+- **THEN** no fingerprint of that key is shown and nothing asks the user to compare it
+
+#### Scenario: Members of a private room
 - **WHEN** a user opens the members of a private room
 - **THEN** no key fingerprint of another member is shown and no action marks a member's key as verified
 

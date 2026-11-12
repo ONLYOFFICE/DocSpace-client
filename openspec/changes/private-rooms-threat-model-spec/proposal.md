@@ -20,8 +20,9 @@ read in the client code on 2026-11-12 (design.md, Context).
 - `encryption-core`, four new requirements: what the encryption protects
   against (a storage leak and a passive server); that it does not protect
   against an active server, which names the recipients and whose first key
-  for a member is pinned unasked; that there is no out-of-band verification
-  of a peer key; and which metadata the server sees (room and folder
+  for a member is pinned unasked; that a first-seen peer key is not offered
+  for verification, a fingerprint of a peer being shown only when its key
+  changed; and which metadata the server sees (room and folder
   titles, file size, name length, chunk count, the PDF form flag, the
   sender of each wrap, members and roles, times).
 - `key-management`: a new requirement for the composition rules of a

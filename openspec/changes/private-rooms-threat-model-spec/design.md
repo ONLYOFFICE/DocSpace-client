@@ -12,7 +12,7 @@ where they would disagree.
 | --- | --- |
 | The server names the recipients of a file key | `packages/shared/services/private-room/encrypted-upload-orchestrator.ts`: the member key list and the room's encryption info are requested and every listed member becomes a recipient |
 | A key seen for the first time is pinned unasked | `packages/shared/services/encryption/tofu-store.ts`, `checkKey`: no record gives `first-seen` and stores the key |
-| No out-of-band verification | `tofu-store.ts`, `markVerified`: no caller outside tests under `packages/` |
+| A first-seen key is not offered for verification | `tofu-store.ts`, `markVerified`: no caller outside tests under `packages/`; fingerprints are rendered by the keys list of Keys management (the user's own) and by `packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx` (a peer's known and new key), nowhere else |
 | Metadata in the clear | `packages/shared/services/encryption/streaming-encryption.ts` and `types.ts`: the 33-byte header carries flags, chunk count and name length; each chunk adds a 12-byte IV and a 16-byte tag; room and folder titles are sent by the ordinary room and folder requests |
 | Passphrase composition | `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx`, `PASSPHRASE_SETTINGS`: `[A-Z]`, a digit and an ASCII punctuation range; the confirm button needs these rules passed, and `isPassphraseAcceptable` on submit |
 | Key pair kept | `generateIdentityKeyPair` is called by the key generation flow only (`packages/shared/dialogs/key-generation/useGenerateKeyFlow.tsx`) |

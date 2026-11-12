@@ -8,7 +8,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Check against the branch
 
-- [ ] 2.1 Read each row of the table in design.md, Context, against the code once more at the commit of the day, and correct the delta where the code moved. Verify: the date and the commit recorded here; for the search cap and first-seen pinning, `cd packages/client && pnpm exec vitest run src/store/filesStore` and `cd packages/shared && pnpm exec vitest run services/encryption/__tests__/tofu-store.test.ts` pass
+- [x] 2.1 Read each row of the table in design.md, Context, against the code once more at the commit of the day, and correct the delta where the code moved. Verify: the date and the commit recorded here; for the search cap and first-seen pinning, `cd packages/client && pnpm exec vitest run src/store/filesStore` and `cd packages/shared && pnpm exec vitest run services/encryption/__tests__/tofu-store.test.ts` pass. Done 2026-11-12 at `3dea6020c98`: one statement was wrong and is corrected. The delta said no fingerprint of another user is shown anywhere; the key-change dialog shows a peer's known and new fingerprints, so the requirement is renamed "A first-seen peer key is not offered for verification" and says that. The other rows hold. Client `src/store/filesStore`: 248 of 248; shared `tofu-store.test.ts`: 29 of 29
 
 ## 3. Gate
 

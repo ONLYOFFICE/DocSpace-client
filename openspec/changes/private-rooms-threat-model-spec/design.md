@@ -16,7 +16,6 @@ where they would disagree.
 | Metadata in the clear | `packages/shared/services/encryption/streaming-encryption.ts` and `types.ts`: the 33-byte header carries flags, chunk count and name length; each chunk adds a 12-byte IV and a 16-byte tag; room and folder titles are sent by the ordinary room and folder requests |
 | Passphrase composition | `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx`, `PASSPHRASE_SETTINGS`: `[A-Z]`, a digit and an ASCII punctuation range; the confirm button needs these rules passed, and `isPassphraseAcceptable` on submit |
 | Key pair kept | `generateIdentityKeyPair` is called by the key generation flow only (`packages/shared/dialogs/key-generation/useGenerateKeyFlow.tsx`) |
-| Forget device | `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx`, `handleForgetDevice`: removes the device record and shows the toast; the in-memory key is not locked |
 | Search limit and scope | `packages/client/src/store/filesStore/clientSearch.helpers.ts`: `CLIENT_SEARCH_MAX_ITEMS = 10_000`, pages of the open folder only, `clientSearchCapped` shown by `ClientSearchProgress.tsx` as Files:ClientSearchPartialResults |
 | Name sort | `applyClientSearchImpl` in the same file sorts the items it is given, which are the loaded ones |
 | Zip in memory | `packages/shared/services/private-room/encrypted-download.ts`, `createZipFromBuffers`: all entries and the output as byte arrays |
@@ -33,12 +32,14 @@ desktop clients.
 
 ## Decisions
 
-1. New requirements where possible, a modified one only where the main spec
-   says something untrue. "Passphrase strength gate", "Change passphrase"
+1. New requirements only. "Passphrase strength gate", "Change passphrase"
    and "Client-side search over decrypted names" stay as they are and get
    companions, so no long requirement is copied and none grows past the
-   500-character rule. Only "Remember this device" is modified, because its
-   scenario "Forget device" promises a prompt that does not come.
+   500-character rule. "Remember this device" keeps its scenario "Forget
+   device": the code does not match it while the identity is unlocked
+   (`KeysManagement.tsx`, `handleForgetDevice` removes the device record
+   and leaves the in-memory key), and by the owner's decision of 2026-11-12
+   the code is brought to the spec in a change of its own.
 2. The active-server limitation is one requirement with three scenarios,
    including the case that is protected (a replaced key for a pinned
    member), so the boundary of the limitation is testable from both sides.
@@ -46,7 +47,8 @@ desktop clients.
    metadata requirement does not repeat it.
 4. The auto-lock preset picked while unlocked is left out (proposal,
    decision 4): the hidden-tab rule reads the preset at the event, the idle
-   timer when its effect next restarts, so there is no single rule to state.
+   timer when its effect next restarts, so there is no single rule to
+   state. It is fixed with code in the change of decision 1.
 
 ## Risks / Trade-offs
 

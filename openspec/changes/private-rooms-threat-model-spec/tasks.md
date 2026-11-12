@@ -4,7 +4,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 1. Decisions
 
-- [ ] 1.1 Record the owner's answers to decisions 2, 3 and 4 of proposal.md with their date, and bring the `key-management` delta in line with them (drop or keep the scenario "Forget device while unlocked" and the requirement "Passphrase composition rules"). Verify: `npx -y @fission-ai/openspec@1.17.0 validate private-rooms-threat-model-spec --strict`
+- [x] 1.1 Record the owner's answers to decisions 2, 3 and 4 of proposal.md with their date, and bring the `key-management` delta in line with them (drop or keep the scenario "Forget device while unlocked" and the requirement "Passphrase composition rules"). Verify: `npx -y @fission-ai/openspec@1.17.0 validate private-rooms-threat-model-spec --strict`. Done 2026-11-12: "Forget device" and the auto-lock preset are fixed with code in a change of their own, so the modified "Remember this device" left the delta; "Passphrase composition rules" stays; the validation passes
 
 ## 2. Check against the branch
 
@@ -18,4 +18,4 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 ## Workflow follow-up
 
 - Archive after 3.1; 3.2 is committed in `private-rooms-release-gate` after the archive.
-- Decisions 2 to 4 of proposal.md, where the owner chooses a fix, become changes of their own with code.
+- Decisions 2 and 4 of proposal.md become one change with code: "Forget device" locks the identity, and a newly picked auto-lock preset restarts the idle timer.

@@ -1,34 +1,5 @@
 # Spec Delta
 
-## MODIFIED Requirements
-
-### Requirement: Remember this device
-The system SHALL offer a "remember this device" option in the unlock dialog where enabled; when ticked, later identity requests on this device SHALL be served without a prompt until the user locks or forgets the device or the remembered record exceeds its maximum age (30 days by default). The option SHALL explain that it survives auto-lock and expires. The option SHALL sit directly under the passphrase field, before the other links of the dialog, and SHALL NOT be ticked by default.
-
-#### Scenario: Remembered
-- **WHEN** the user unlocks with the option ticked and reloads the page
-- **THEN** the next encrypted operation runs without a passphrase prompt
-
-#### Scenario: Forget device
-- **WHEN** the user clicks Common:ForgetDeviceButton in Keys management while the identity is locked
-- **THEN** the stored unlock is removed, Common:DeviceUnlockForgotten is shown, and the next operation prompts again
-
-#### Scenario: Forget device while unlocked
-- **WHEN** the user clicks Common:ForgetDeviceButton while the identity is unlocked in memory
-- **THEN** the stored unlock is removed and Common:DeviceUnlockForgotten is shown, the identity stays unlocked until it locks by Lock now, auto-lock or a page reload, and only then does an operation prompt again
-
-#### Scenario: Remembered record expired
-- **WHEN** a remembered device needs the identity more than 30 days after the record was written
-- **THEN** the record is discarded and the user is prompted for the passphrase (or passkey) as if the device had never been remembered
-
-#### Scenario: Option explains the trade-off
-- **WHEN** the unlock dialog shows the remember option
-- **THEN** its hint (Common:RememberDeviceHint) states that the key stays on this device across auto-lock and expires after 30 days
-
-#### Scenario: Option placed with the passphrase field
-- **WHEN** the unlock dialog opens with the remember option
-- **THEN** the option follows the passphrase field, comes before the forgot-passphrase and passkey links in the reading and the Tab order, and is not ticked
-
 ## ADDED Requirements
 
 ### Requirement: Passphrase composition rules

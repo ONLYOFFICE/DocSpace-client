@@ -90,6 +90,34 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
   }
 };
 
+// Moves through an open role list with the arrow keys until the named option
+// is the active one, then picks it with Enter.
+const pickRoleWithKeyboard = async (page: Page, option: string) => {
+  for (let step = 0; step < 12; step += 1) {
+    const active = await page.evaluate(() => {
+      const id = document.activeElement?.getAttribute("aria-activedescendant");
+      return id ? (document.getElementById(id)?.textContent ?? "") : "";
+    });
+    if (active.trim().startsWith(option)) break;
+    await page.keyboard.press("ArrowDown");
+  }
+  await page.keyboard.press("Enter");
+};
+
+const openInvitePanelWithInvitees = async (page: Page, baseUrl: string) => {
+  await page.goto(`${baseUrl}/private/filter`);
+  const row = page.getByTestId("table-row-0");
+  await expect(row).toBeVisible({ timeout: 15000 });
+  await row.getByTestId("context-menu-button").first().click();
+  await page.getByTestId("option_invite-users-to-room").click();
+  await page.getByTestId("invite_panel_choose_from_list_link").click();
+  const people = page.getByTestId("invite_panel_people_selector");
+  await people.getByTestId("selector-item-0").click();
+  await people.getByTestId("selector-item-1").click();
+  await people.getByTestId("selector_submit_button").click();
+  return page.getByRole("dialog", { name: "Invite", exact: true });
+};
+
 test.describe("Private room — invite entry point", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
@@ -167,6 +195,72 @@ test.describe("Private room — invite entry point", () => {
     const sendButton = page.getByTestId("invite_panel_send_button");
     await expect(sendButton).toBeVisible({ timeout: 5000 });
     await expect(sendButton).toBeDisabled();
+  });
+
+  test("Invitee removed from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await bootstrapEncryption(page, mockRequest, baseUrl);
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, DAN]),
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+    );
+    const panel = await openInvitePanelWithInvitees(page, baseUrl);
+
+    const roleList = panel.getByRole("button", {
+      name: `Role of ${CAROL.displayName}: Viewer`,
+    });
+    await roleList.focus();
+    await page.keyboard.press("Enter");
+    await pickRoleWithKeyboard(page, "Remove");
+
+    await expect(panel.getByText(CAROL.displayName)).toHaveCount(0);
+    await expect(panel.getByText(DAN.displayName)).toBeVisible();
+    await expect(page.getByTestId("invite_panel_search_input")).toBeFocused();
+  });
+
+  test("Role chosen from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await bootstrapEncryption(page, mockRequest, baseUrl);
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, DAN]),
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+    );
+    const panel = await openInvitePanelWithInvitees(page, baseUrl);
+
+    await panel
+      .getByRole("button", { name: `Role of ${DAN.displayName}: Viewer` })
+      .focus();
+    await page.keyboard.press("Enter");
+    await pickRoleWithKeyboard(page, "Content creator");
+
+    const picked = panel.getByRole("button", {
+      name: `Role of ${DAN.displayName}: Content creator`,
+    });
+    await expect(picked).toBeFocused();
+    await expect(
+      panel.getByRole("button", {
+        name: `Role of ${CAROL.displayName}: Viewer`,
+      }),
+    ).toBeVisible();
+    await expect(
+      panel.getByRole("button", { name: "Role: Viewer", exact: true }),
+    ).toBeVisible();
   });
 
   test("Mixed invitation: the panel lists the invited member and the one without keys, and invites the latter again", async ({

@@ -1087,6 +1087,11 @@ const InvitePanel = ({
       withBodyScroll
       isInvitePanelLoader
       id="invite_panel_modal"
+      aria-label={
+        inviteOutcome
+          ? t("Common:EncryptedInviteResultTitle")
+          : t("Common:Invite")
+      }
     >
       {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>

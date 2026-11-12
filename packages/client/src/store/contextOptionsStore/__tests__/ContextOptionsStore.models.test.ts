@@ -238,10 +238,9 @@ describe("ContextOptionsStore.getGroupContextOptions — Private section", () =>
     const inRooms = keysFor("/rooms/shared/filter");
     const inPrivate = keysFor("/private/filter");
 
+    // Spec: private-rooms/sidebar-section, "Room groups in the section"
     expect(inRooms).toEqual(expect.arrayContaining(ROOM_GROUP_KEYS));
-    expect(inPrivate).toEqual(
-      inRooms.filter((key) => !ROOM_GROUP_KEYS.includes(key as string)),
-    );
+    expect(inPrivate).toEqual(inRooms);
   });
 });
 

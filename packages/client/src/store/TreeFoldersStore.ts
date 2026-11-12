@@ -36,7 +36,7 @@
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, {
   SocketCommands,
@@ -447,6 +447,17 @@ class TreeFoldersStore {
 
   get isFlowsFolder() {
     return window.location.pathname.includes("/flows");
+  }
+
+  /**
+   * The area the room groups of the open list belong to. The server keeps
+   * groups per section: Rooms, Forms and Private each have their own.
+   * Spec: private-rooms/sidebar-section, "Room groups in the section"
+   */
+  get roomGroupsArea() {
+    if (this.isFormsFolder) return RoomSearchArea.Forms;
+    if (this.isPrivateRoomsFolder) return RoomSearchArea.PrivateRooms;
+    return RoomSearchArea.Active;
   }
 
   /**

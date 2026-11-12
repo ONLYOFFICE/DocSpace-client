@@ -109,6 +109,21 @@ The system SHALL apply the section's search area to every rooms-list request of 
 - **WHEN** the user restores a private room from Private → Archive
 - **THEN** the user stays in Private → Archive, whose refreshed list names the section's archive and no longer contains the room
 
+### Requirement: Section filter
+The system SHALL NOT offer the room-type group or the third-party storage group in the filter of the Private section list and its Archive. Search, owner, tags, quota and sorting SHALL work as in Rooms. The room-group controls SHALL be offered in the Private list as in Rooms, and SHALL NOT be offered in its Archive.
+
+#### Scenario: Filter opened in the section
+- **WHEN** the user opens the filter panel in the Private list
+- **THEN** no room-type or storage options are offered, and owner and tags filters are available
+
+#### Scenario: Room-group controls in the section
+- **WHEN** the user opens the Private list while room grouping is on
+- **THEN** the group chips of the section and the group management control are shown, with the groups of the Private section only
+
+#### Scenario: Room-group controls in the archive
+- **WHEN** the user opens Private → Archive
+- **THEN** no room-group controls are shown
+
 ## RENAMED Requirements
 
 - FROM: `### Requirement: Rooms section excludes private rooms while the section is available`

@@ -252,7 +252,7 @@ test.describe("Private section — sidebar", () => {
 
     const options = page.getByTestId("default_homepage_combobox_dropdown");
     await expect(options.getByText("Rooms", { exact: true })).toBeVisible();
-    await expect(options.getByText("Private", { exact: true })).toHaveCount(0);
+    await expect(options.getByText("Private", { exact: true })).toBeVisible();
   });
 });
 
@@ -1145,7 +1145,6 @@ test.describe("Private section — filter", () => {
     await expect(filterGroup(page, "filter-tags")).toBeVisible();
     await expect(filterGroup(page, "filter-type")).toHaveCount(0);
     await expect(filterGroup(page, "filter-provider-type")).toHaveCount(0);
-    await expect(page.locator('[class*="rowGroupingRooms"]')).toHaveCount(0);
 
     await applyTagFilter(page);
 
@@ -1198,8 +1197,30 @@ test.describe("Private section — room groups", () => {
       .click();
 
     await expect(page.getByTestId("pin-room")).toBeVisible();
-    await expect(page.getByTestId("create-group")).toHaveCount(0);
-    await expect(page.getByTestId("add-to-group")).toHaveCount(0);
+    await expect(page.getByTestId("create-group")).toBeVisible();
+    await expect(page.getByTestId("add-to-group")).toBeVisible();
+  });
+
+  test("Groups of the section only", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    // The mocked portal has groups in every section: group-4 is the Private one.
+    await expect(page.getByTestId("room_group_tag_group-4")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(page.getByTestId("room_group_tag_group-1")).toHaveCount(0);
+    await expect(page.getByTestId("room_group_tag_group-3")).toHaveCount(0);
+    await expect(page.locator('[class*="groupManagementButton"]')).toBeVisible();
+  });
+
+  test("Room-group controls in the archive", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/archived/filter`);
+    await expect(page.getByTestId("table-body")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(page.locator('[class*="rowGroupingRooms"]')).toHaveCount(0);
   });
 
   test("Room group editor in Rooms", async ({ page, mockRequest, baseUrl }) => {

@@ -94,7 +94,8 @@ const BAR = "private_room_locked_bar";
 const renderBar = ({ isPrivate = true } = {}) => {
   const syncEncryptedRoom = vi.fn();
   const stores = {
-    selectedFolderStore: { private: isPrivate, id: ROOM },
+    selectedFolderStore: { id: ROOM },
+    treeFoldersStore: { isPrivacyFolder: isPrivate },
     filesStore: { syncEncryptedRoom },
   };
   const view = render(

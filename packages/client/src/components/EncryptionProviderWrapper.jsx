@@ -78,11 +78,14 @@ const FilenameRecoveryEffect = inject(({ filesStore }) => ({
 );
 
 // Spec: private-rooms/key-management, "The unlock dialog on entry is raised once per private room"
-export const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
-  isPrivate: selectedFolderStore?.private,
+export const RoomUnlockEffect = inject(
+  ({ selectedFolderStore, filesStore, treeFoldersStore }) => ({
+  // A folder inside a private room is not private itself; its room is.
+  isPrivate: treeFoldersStore?.isPrivacyFolder,
   roomId: getOpenRoomId(selectedFolderStore),
   sync: filesStore?.syncEncryptedRoom,
-}))(
+}),
+)(
   observer(({ isPrivate, roomId, sync }) => {
     const { isUnlocked, hasConfiguredKey, requireIdentity } = useEncryption();
     const promptedIdRef = React.useRef(null);

@@ -153,7 +153,8 @@ describe("A locked key is shown in a private room: the entry request", () => {
     const sync = vi.fn();
     render(
       <Provider
-        selectedFolderStore={{ private: isPrivate, id: ROOM }}
+        selectedFolderStore={{ id: ROOM }}
+        treeFoldersStore={{ isPrivacyFolder: isPrivate }}
         filesStore={{ syncEncryptedRoom: sync }}
       >
         <RoomUnlockEffect />
@@ -229,10 +230,12 @@ describe("A locked key is shown in a private room: the entry request", () => {
   type TFolder = { id: number; rootRoomId: number };
 
   const renderAt = (start: TFolder) => {
-    const folder = observable({ private: true, ...start });
+    // The folder of a private room is not private itself; its room is.
+    const folder = observable({ private: false, ...start });
     render(
       <Provider
         selectedFolderStore={folder}
+        treeFoldersStore={{ isPrivacyFolder: true }}
         filesStore={{ syncEncryptedRoom: vi.fn() }}
       >
         <RoomUnlockEffect />

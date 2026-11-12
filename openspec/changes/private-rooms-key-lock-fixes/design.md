@@ -55,6 +55,18 @@ remembered record or to the presets themselves.
    id. The reset on leaving private rooms stays, so a second visit to the
    same room asks again.
 
+4. **"Inside a private room" is read from the room, not from the open
+   folder (found by task 1.4, 2026-11-12).** The entry request and the
+   locked-key bar read the `private` flag of the selected folder. A folder
+   inside a private room does not carry it: the mock, which mirrors
+   `FolderDtoHelper.GetAsync`, answers `private: false` for it, the flag
+   being the room's own setting. So in a subfolder the request was reset
+   and the bar was never shown, although "A locked key is shown in a
+   private room" names "a folder inside one". Both now read the tree
+   store's check that the open folder or a part of its path is private,
+   the one the client search already uses. The first run of the new E2E
+   case failed on exactly this.
+
 ## Risks / Trade-offs
 
 - A user who cancelled the dialog and does not notice the bar sees opaque

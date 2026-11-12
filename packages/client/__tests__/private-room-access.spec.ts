@@ -48,6 +48,8 @@ import {
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const ROOM_ID = 9100;
+const SUBFOLDER_ID = 9150;
+const SUBFOLDER_TITLE = "Reports";
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 
 const seedUserKey = {
@@ -295,6 +297,47 @@ test.describe("A locked key is shown in a private room", () => {
 
     await expect(passphrase).toBeHidden();
     await expect(bar).toBeVisible();
+  });
+
+  test("Subfolder after a cancelled prompt", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [seedUserKey],
+        userId: TEST_USER_ID,
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        folders: [{ id: SUBFOLDER_ID, title: SUBFOLDER_TITLE }],
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+
+    const passphrase = page
+      .locator('input[name="passphrase"], #passphrase input')
+      .first();
+    const bar = page.getByTestId("private_room_locked_bar");
+
+    await expect(passphrase).toBeVisible({ timeout: 15000 });
+    await page.getByRole("button", { name: "Cancel" }).click();
+    await expect(bar).toBeVisible();
+
+    const folderOpened = page.waitForResponse(
+      (res) =>
+        new RegExp(`/files/${SUBFOLDER_ID}(\\?|$)`).test(res.url()) &&
+        res.request().method() === "GET",
+    );
+    await page.getByText(SUBFOLDER_TITLE, { exact: true }).first().dblclick();
+    await folderOpened;
+
+    await expect(page).toHaveURL(new RegExp(`folder=${SUBFOLDER_ID}`));
+    await expect(bar).toBeVisible();
+    await expect(passphrase).toBeHidden();
   });
 
   test("User without a key", async ({ page, mockRequest, baseUrl }) => {

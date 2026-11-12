@@ -104,8 +104,11 @@ const PrivateRoomLockedBar = ({
   );
 };
 
-export default inject(({ selectedFolderStore, filesStore }: TStore) => ({
-  isPrivate: !!selectedFolderStore.private,
-  roomId: getOpenRoomId(selectedFolderStore),
-  syncEncryptedRoom: filesStore.syncEncryptedRoom,
-}))(observer(PrivateRoomLockedBar));
+export default inject(
+  ({ selectedFolderStore, filesStore, treeFoldersStore }: TStore) => ({
+    // A folder inside a private room is not private itself; its room is.
+    isPrivate: !!treeFoldersStore.isPrivacyFolder,
+    roomId: getOpenRoomId(selectedFolderStore),
+    syncEncryptedRoom: filesStore.syncEncryptedRoom,
+  }),
+)(observer(PrivateRoomLockedBar));

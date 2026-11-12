@@ -52,6 +52,7 @@ const DeleteGroupDialog = ({
   getAllRoomGroups,
   currentFilterGroupId,
   isFormsSection,
+  sectionListPath = isFormsSection ? "forms" : "rooms/shared",
 }: DeleteGroupDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -70,9 +71,7 @@ const DeleteGroupDialog = ({
         currentFilterGroupId != null &&
         String(currentFilterGroupId) === String(groupId)
       ) {
-        window.DocSpace.navigate(
-          isFormsSection ? "/forms/filter" : "/rooms/shared/filter",
-        );
+        window.DocSpace.navigate(`/${sectionListPath}/filter`);
       }
     } catch (error) {
       toastr.error(error as Error);
@@ -85,7 +84,7 @@ const DeleteGroupDialog = ({
     deleteRoomGroup,
     getAllRoomGroups,
     currentFilterGroupId,
-    isFormsSection,
+    sectionListPath,
     onClose,
     t,
   ]);

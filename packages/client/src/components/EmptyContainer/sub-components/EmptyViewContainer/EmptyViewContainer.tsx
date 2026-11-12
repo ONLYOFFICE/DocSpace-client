@@ -40,6 +40,7 @@ import { useTranslation } from "react-i18next";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import AIFeaturesDialog from "@onlyoffice/apps-ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
 import { getFolderInfo } from "@docspace/shared/api/files";
+import { FolderType } from "@docspace/shared/enums";
 import ClientSimpleTopUpDialog from "./ClientSimpleTopUpDialog";
 
 import EmptyPrivateRoomView from "../../EmptyPrivateRoomView";
@@ -155,7 +156,13 @@ const InjectedEmptyViewContainer = inject<
       setTemplateAccessSettingsVisible,
     } = dialogsStore;
 
-    const { security, access, rootFolderType } = selectedFolderStore;
+    const { security, access } = selectedFolderStore;
+    // The Private list is a rooms list under a root of its own. Its empty
+    // view is the rooms one, with the texts the Private address picks.
+    const rootFolderType =
+      selectedFolderStore.rootFolderType === FolderType.PrivateRooms
+        ? FolderType.Rooms
+        : selectedFolderStore.rootFolderType;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 

@@ -2,7 +2,11 @@ import { describe, expect, it } from "vitest";
 
 import { RoomsType } from "@docspace/shared/enums";
 
-import { getCopyTargetRoomTypes, getRoomSectionTreeFolders } from "../utils";
+import {
+  getCopyTargetRoomTypes,
+  getRoomSectionTreeFolders,
+  offersPrivateSection,
+} from "../utils";
 
 const VECTORIZED = [".txt", ".md", ".docx", ".pdf"];
 
@@ -98,5 +102,41 @@ describe("getRoomSectionTreeFolders", () => {
         withFormsTreeFolder: true,
       }),
     ).toEqual({ withRoomsTreeFolder: true, withFormsTreeFolder: true });
+  });
+});
+
+describe("offersPrivateSection", () => {
+  const copyFromPrivateRoom = {
+    isCopy: true,
+    sourceInPrivateRoom: true,
+    isPrivateRoomsSectionAvailable: true,
+  };
+
+  it("Destination picker in a private room", () => {
+    expect(offersPrivateSection(copyFromPrivateRoom)).toBe(true);
+  });
+
+  it("is off for a Move, which stays in its room", () => {
+    expect(
+      offersPrivateSection({ ...copyFromPrivateRoom, isCopy: false }),
+    ).toBe(false);
+  });
+
+  it("is off for a source outside private rooms", () => {
+    expect(
+      offersPrivateSection({
+        ...copyFromPrivateRoom,
+        sourceInPrivateRoom: false,
+      }),
+    ).toBe(false);
+  });
+
+  it("is off while the section is not available", () => {
+    expect(
+      offersPrivateSection({
+        ...copyFromPrivateRoom,
+        isPrivateRoomsSectionAvailable: false,
+      }),
+    ).toBe(false);
   });
 });

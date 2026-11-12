@@ -173,6 +173,11 @@ const useFiles = ({
         searchArea = RoomSearchArea.Archive;
         break;
 
+      case CategoryType.PrivateRooms:
+      case CategoryType.PrivateRoom:
+        searchArea = RoomSearchArea.PrivateRooms;
+        break;
+
       default:
         searchArea = RoomSearchArea.Active;
         break;

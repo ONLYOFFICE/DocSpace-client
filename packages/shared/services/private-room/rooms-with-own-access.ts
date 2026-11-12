@@ -45,13 +45,22 @@ const ROOM_CONCURRENCY = 4;
 
 export type TRoomRef = { id: number; title: string };
 
-/** Every private room the user can see, active and archived, each once. */
+/**
+ * Every private room the user can see, active and archived, each once. The
+ * active ones are the Private section's own area; the Archive is shared with
+ * the other rooms and takes the private filter.
+ */
 async function listPrivateRooms(signal?: AbortSignal): Promise<TRoomRef[]> {
   const rooms = new Map<number, TRoomRef>();
-  for (const searchArea of [RoomSearchArea.Active, RoomSearchArea.Archive]) {
+  for (const searchArea of [
+    RoomSearchArea.PrivateRooms,
+    RoomSearchArea.Archive,
+  ]) {
     for (let page = 0; ; page += 1) {
       const filter = RoomsFilter.getDefault(undefined, searchArea);
-      filter.privacyFilter = RoomPrivacyFilter.Private;
+      if (searchArea === RoomSearchArea.Archive) {
+        filter.privacyFilter = RoomPrivacyFilter.Private;
+      }
       filter.page = page;
       filter.pageCount = PAGE_SIZE;
 

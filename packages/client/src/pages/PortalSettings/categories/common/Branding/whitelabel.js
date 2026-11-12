@@ -36,14 +36,13 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
 
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
-import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
 import { brandingRedirectUrl } from "./constants";
@@ -67,7 +66,6 @@ const WhiteLabelComponent = (props) => {
     resetWhiteLabelLogos,
     brandingStore,
   } = props;
-  const navigate = useNavigate();
   const isMobileView = deviceType === DeviceType.mobile;
 
   const defaultProps = createDefaultHookSettingsProps({
@@ -79,7 +77,6 @@ const WhiteLabelComponent = (props) => {
 
   const [isSaving, setIsSaving] = useState(false);
   const showAbout = standalone && isManagement() && displayAbout;
-  const onPaidBadgeClick = () => navigate(PAYMENT_ROUTES.portalPayments);
 
   useEffect(() => {
     if (isMobileView) getCommonInitialValue();
@@ -122,7 +119,7 @@ const WhiteLabelComponent = (props) => {
       showAbout={showAbout}
       showNotAvailable={showNotAvailable}
       standalone={standalone}
-      onPaidBadgeClick={onPaidBadgeClick}
+      paidBadge={<PaidBadge className="paid-badge" fontWeight="700" />}
       onRestoreDefault={onRestoreDefault}
       isSaving={isSaving}
       enableRestoreButton={isDefaultLogos}

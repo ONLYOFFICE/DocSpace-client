@@ -914,10 +914,10 @@ export function fetchRoomsImpl(
 
 /**
  * The copy of a rooms filter a list request sends: the Private section asks
- * for private rooms only, and Rooms for none while that section exists.
+ * for its own area, and Rooms for none of the private rooms.
  */
 export const scopeRoomsRequest = (
-  self: FilesStore,
+  _self: FilesStore,
   filter: TRoomsFilter,
 ): TRoomsFilter =>
   withRoomsRequestScope(
@@ -925,7 +925,6 @@ export const scopeRoomsRequest = (
     getRoomsRequestScope(
       getCategoryType(window.DocSpace?.location ?? window.location),
       filter.searchArea,
-      !!self.appsStore?.isPrivateRoomsSectionAvailable,
     ),
   );
 

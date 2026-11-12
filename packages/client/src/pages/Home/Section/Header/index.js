@@ -1331,7 +1331,10 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
     const isTemplate = rootFolderType === FolderType.RoomTemplates;
-    const isRootRooms = rootFolderType === FolderType.Rooms;
+    // The Private list is a rooms list under a root of its own.
+    const isRootRooms =
+      rootFolderType === FolderType.Rooms ||
+      rootFolderType === FolderType.PrivateRooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 

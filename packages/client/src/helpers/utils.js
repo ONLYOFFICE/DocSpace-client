@@ -120,6 +120,11 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.Forms:
       return parentId > 0 ? CategoryType.Form : CategoryType.Forms;
 
+    // Only the Private root itself carries this type: a private room and
+    // everything in it report the Rooms root.
+    case FolderType.PrivateRooms:
+      return CategoryType.PrivateRooms;
+
     case FolderType.AiHub:
       return parentId > 0 ? CategoryType.AiHubRoom : CategoryType.AiHub;
 

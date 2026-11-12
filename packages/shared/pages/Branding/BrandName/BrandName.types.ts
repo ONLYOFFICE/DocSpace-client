@@ -33,13 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type React from "react";
+
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
 
 export interface IBrandNameProps {
   showNotAvailable: boolean;
   isSettingPaid: boolean;
   standalone: boolean;
-  onPaidBadgeClick?: () => void;
+  paidBadge?: React.ReactNode;
   onSave: (data: IWhiteLabelData) => void;
   isBrandNameLoaded: boolean;
   defaultBrandName: string;

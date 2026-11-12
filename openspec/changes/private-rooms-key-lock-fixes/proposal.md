@@ -9,7 +9,9 @@ Three small defects around a locked key, each found against the specs on
   memory, so the files keep opening without the passphrase until the
   auto-lock or a page reload, although "Remember this device" promises a
   prompt at the next operation. A user who forgets a device they are about
-  to leave is not protected.
+  to leave is not protected. Next to it "Lock now" already locks and
+  forgets the device, so a fixed "Forget device" would be a second link
+  for the same action.
 - A newly picked auto-lock preset is followed by the hidden-tab rule at
   once, but by the idle timer only when the timer is next restarted, so a
   user who shortens the timeout can stay unlocked for the old one.
@@ -20,8 +22,11 @@ Three small defects around a locked key, each found against the specs on
 
 ## What Changes
 
-- "Forget device" locks the identity as well: the in-memory key and the
-  filename cache are wiped with the remembered record.
+- "Forget device" and "Lock now" are offered one at a time: while the
+  identity is unlocked only "Lock now", which locks and forgets the
+  device; while it is locked on a remembered device only "Forget device".
+  The "remembered until" line stays in both states. "Forget device" is
+  then never pressed with a key in memory, so its code does not change.
 - Picking an auto-lock preset restarts the idle timer of an unlocked
   identity with the new length.
 - The unlock dialog on entry is raised once per private room; inside the
@@ -35,7 +40,6 @@ Out of scope:
 
 - The passphrase composition rules, which the owner kept as they are on
   2026-11-12 (`private-rooms-threat-model-spec`, decision 3).
-- Merging "Forget device" and "Lock now" (decision 2 below).
 - The SDK private pages: they have no entry prompt of their own and no
   Keys management page.
 
@@ -43,16 +47,13 @@ Out of scope:
 
 1. Taken, owner, 2026-11-12: "Forget device" while unlocked and the
    auto-lock preset picked while unlocked are fixed with code.
-2. Open. After this change "Forget device" and "Lock now" do the same
-   thing while the identity is unlocked on a remembered device: both lock
-   and both remove the record ("Lock now" already forgets the device by
-   its requirement). Proposed: keep both links, since each is shown in its
-   own state (remembered, unlocked) and the user looks for either word.
-   The alternative, "Lock now" keeping the remembered record, would turn
-   it into a no-op on a remembered device.
-3. Open. "Once per private room" for the entry dialog (proposed), or once
-   until the user leaves the Private section altogether. Per room keeps
-   the question tied to the place whose files need the key.
+2. Taken, owner, 2026-11-12: two links that do the same are not kept.
+   One is offered at a time, "Lock now" while unlocked and "Forget device"
+   while locked on a remembered device. No hint is added to say that
+   "Lock now" forgets the device: it would be a new text in every
+   language.
+3. Taken, owner, 2026-11-12: the entry dialog is raised once per private
+   room, not once per stay in the Private section.
 
 ## Capabilities
 
@@ -62,12 +63,14 @@ None.
 
 ### Modified Capabilities
 
-- `private-rooms/key-management`: three requirements added.
+- `private-rooms/key-management`: three requirements added; the scenario
+  "Device section" of "Keys management controls are reachable with Tab"
+  reworded and one added.
 
 ## Impact
 
 - `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx`
-  (forget device).
+  (which of the two links is shown).
 - `packages/shared/services/encryption/auto-lock-preference.ts` and
   `packages/shared/context/encryption/EncryptionContext.tsx` (preset
   change reaches the idle timer).
@@ -75,5 +78,7 @@ None.
   `packages/client/src/helpers/roomUnlockRequest.ts` and
   `packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx`
   (entry dialog per room).
-- Unit tests next to each, and a case in
-  `packages/client/__tests__/private-room-access.spec.ts`.
+- Unit tests next to each, a case in
+  `packages/client/__tests__/private-room-access.spec.ts`, and the case of
+  `packages/client/__tests__/keys-management-advanced.spec.ts` that looks
+  for the forget link while unlocked.

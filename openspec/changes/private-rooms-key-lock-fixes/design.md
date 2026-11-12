@@ -31,12 +31,15 @@ remembered record or to the presets themselves.
 
 ## Decisions
 
-1. **Forget device locks through the context after the record is
-   removed.** The lock already wipes the in-memory key and the filename
-   cache and flips the unlocked state, so the page and an open private
-   room follow without more code. Order: record first, then lock, so a
-   failed removal does not lock the user while the device is still
-   remembered.
+1. **One link at a time instead of a second lock.** The forget link is
+   rendered only while the identity is locked; the "remembered until"
+   line keeps its place in both states, and "Lock now" stays as it is.
+   Making "Forget device" lock as well was the first proposal; the owner
+   rejected two links with one effect on 2026-11-12. "Lock now" keeping
+   the record was rejected too: on a remembered device the key would come
+   back silently at the next operation. The line gets a test id, since the
+   E2E case that waited for the forget link while unlocked now waits for
+   the line.
 2. **The preference module announces a preset change, the context
    restarts its timer.** `auto-lock-preference` gets a small subscribe
    function called by `setAutoLockTimeoutSeconds`; the context keeps a

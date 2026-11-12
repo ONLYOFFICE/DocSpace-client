@@ -2,16 +2,20 @@
 
 ## ADDED Requirements
 
-### Requirement: Forget device locks the identity
-The system SHALL lock the identity when the user forgets the device: Common:ForgetDeviceButton SHALL wipe the in-memory key and the filename cache together with the remembered record, so the next encrypted operation asks for the passphrase whether or not the identity was unlocked at that moment.
+### Requirement: Forget device and Lock now are offered one at a time
+The system SHALL offer Common:ForgetDeviceButton only while the identity is locked on a remembered device, and SHALL NOT offer it while the identity is unlocked: there Common:LockNow is the one action, and it locks the identity and forgets the device. The line Common:DeviceUnlockRememberedUntil SHALL be shown in both states.
 
-#### Scenario: Forget device while unlocked
-- **WHEN** the user clicks Common:ForgetDeviceButton while the identity is unlocked in memory
-- **THEN** the remembered record is removed, the identity is locked, Common:DeviceUnlockForgotten is shown, and the next encrypted operation MUST NOT run without the passphrase or a passkey
+#### Scenario: Remembered device, identity unlocked
+- **WHEN** the user opens Keys management on a remembered device while the identity is unlocked
+- **THEN** Common:DeviceUnlockRememberedUntil and Common:LockNow are shown, and Common:ForgetDeviceButton is not
 
-#### Scenario: Forget device while locked
-- **WHEN** the user clicks Common:ForgetDeviceButton while the identity is locked
-- **THEN** the remembered record is removed and Common:DeviceUnlockForgotten is shown
+#### Scenario: Remembered device, identity locked
+- **WHEN** the identity of a remembered device is locked by the idle timeout or a hidden tab and the user opens Keys management
+- **THEN** Common:DeviceUnlockRememberedUntil and Common:ForgetDeviceButton are shown, and Common:LockNow is not
+
+#### Scenario: Lock now on a remembered device
+- **WHEN** the user clicks Common:LockNow on a remembered device
+- **THEN** the identity is locked, the remembered record is removed, and the next encrypted operation MUST NOT run without the passphrase or a passkey
 
 ### Requirement: A newly picked auto-lock preset applies at once
 The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it: the idle time SHALL be counted from that moment with the new length, and the hidden-tab rule of the new preset SHALL hold from that moment, without a lock and a new unlock in between.
@@ -38,3 +42,28 @@ The system SHALL raise the unlock dialog by itself once per private room that a 
 #### Scenario: Another private room
 - **WHEN** that user leaves the room and opens another private room
 - **THEN** the unlock dialog is raised once for that room
+
+## MODIFIED Requirements
+
+### Requirement: Keys management controls are reachable with Tab
+The system SHALL make every enabled control of the keys management page a tab stop, in the order the page displays them: the key card's change-passphrase, export and delete actions, the generate, import, recovery-phrase, delete-unused and reset actions, and the device section's auto-lock selector, passkey toggle, forget-device and lock-now actions. A disabled control SHALL NOT be a tab stop.
+
+#### Scenario: Tab across the key card
+- **WHEN** a user with a key moves the focus with Tab across the key card
+- **THEN** it visits the Common:ChangePassphrase, Common:ExportKey and Common:Delete actions in that order
+
+#### Scenario: No key yet
+- **WHEN** a user without a key moves the focus with Tab from Common:GenerateNewKey
+- **THEN** the next stop is Common:ImportKey, followed by Common:UseRecoveryPhrase when it is offered
+
+#### Scenario: Device section
+- **WHEN** the device is remembered, the identity is unlocked and the user tabs through the device section
+- **THEN** the focus visits the auto-lock selector, the passkey toggle when it is offered and Common:LockNow in their displayed order
+
+#### Scenario: Device section while locked
+- **WHEN** the device is remembered, the identity is locked and the user tabs through the device section
+- **THEN** the focus visits the auto-lock selector, the passkey toggle when it is offered and Common:ForgetDeviceButton in their displayed order
+
+#### Scenario: Action disabled during a deletion
+- **WHEN** a key is being deleted
+- **THEN** Tab skips that key card's actions

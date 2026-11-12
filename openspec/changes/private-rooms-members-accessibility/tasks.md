@@ -31,7 +31,7 @@ One task is one commit: the code, the tests, the locales and the tick.
 
 ## 7. Gate
 
-- [ ] 7.1 Run the private-room specs of the client under Docker, the SDK private suite, the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: green runs recorded in design.md
+- [x] 7.1 Run the private-room specs of the client under Docker, the SDK private suite, the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: green runs recorded in design.md. Done 2026-11-12: recorded in design.md, "Runs of 2026-11-12"; the whole client suite was run in place of the private-room specs alone, since the member row and the invite panel are shared with every room
 - [ ] 7.2 Manual pass with a screen reader on the owner's stand over the six surfaces, recorded in design.md with the reader and the browser. Verify: the record, and every requirement of the delta marked as heard or not
 - [ ] 7.3 Tick criterion 1.10 of `openspec/changes/private-rooms-release-gate/tasks.md`. Verify: the tick names this change
 

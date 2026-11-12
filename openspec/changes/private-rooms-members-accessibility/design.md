@@ -55,6 +55,22 @@ combo box, whose button took no accessible name. It takes `ariaLabel` since
 the toast take what the client does not pass. Finding 3 stays recorded for
 task 7.2.
 
+### Runs of 2026-11-12 (task 7.1)
+
+On `2b9b52d4d5b` and later, after the release branch was merged in, with the
+kit build of `dbde2052` and the client test image rebuilt on it:
+
+- The pre-push gate is green: `test:lefthook` (61 tests) and
+  `nx run-many -t tsc lint test` over the six packages.
+- Client, the whole E2E suite under Docker: 1242 passed, 1 failed. The failure
+  is `unpaid-portal-requests.spec.ts` (three AI price requests off its
+  allowlist), which failed before this change. No screenshot moved.
+- `private-room-invite.spec.ts` afterwards, with the two cases of task 4.3,
+  twice in a row: 16 of 16.
+- SDK `__tests__/e2e/private` on a build made with `test:build`: 36 passed, 14
+  fixme.
+- `openspec validate --all --strict`: 19 of 19.
+
 ## Goals / Non-Goals
 
 **Goals:**

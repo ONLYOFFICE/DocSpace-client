@@ -350,7 +350,7 @@ function markPendingFinalize(
 ) {
   runInAction(() => {
     const row = self.files.find((f) => f.file === file);
-    if (row) row.pendingFinalize = pendingFinalize;
+    if (row && !row.cancel) row.pendingFinalize = pendingFinalize;
   });
 }
 

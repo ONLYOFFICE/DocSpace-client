@@ -22,7 +22,7 @@ One task is one commit: the code, the tests, the locales and the tick.
 
 ## 5. ui-kit
 
-- [ ] 5.1 Only if 1.1 traces a finding to a kit component: fix it in `docspace-ui-kit-react` on `release/v4.1.0` with a unit test there, run `pnpm build && pnpm verify:package && pnpm pack`, take it with `pnpm run update-ui-kit` and rebuild the client and SDK test images. Verify: the kit's unit suite, and the client cases of groups 2 to 4 passing on the new build. If 1.1 finds none, tick this task with that note
+- [x] 5.1 Only if 1.1 traces a finding to a kit component: fix it in `docspace-ui-kit-react` on `release/v4.1.0` with a unit test there, run `pnpm build && pnpm verify:package && pnpm pack`, take it with `pnpm run update-ui-kit` and rebuild the client and SDK test images. Verify: the kit's unit suite, and the client cases of groups 2 to 4 passing on the new build. If 1.1 finds none, tick this task with that note. Done 2026-11-12: the kit's combo box and access-right select take `ariaLabel` (`64a733a1` on the kit's `release/v4.1.0`, with a unit test; its unit suite passes, 3319 tests, and `verify:package` too); the pack is taken with `update-ui-kit` and the client test image is rebuilt. Done before groups 2 to 4, which pass the name
 
 ## 6. SDK
 

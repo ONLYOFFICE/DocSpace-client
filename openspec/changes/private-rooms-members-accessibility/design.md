@@ -49,9 +49,11 @@ arrow keys. No screen reader was used; that is task 7.2.
 | 14 | Removal confirmation | The dialog has no accessible name; its title is a paragraph | the confirmation dialog of the client: it passes no `aria-label` |
 | 15 | Removal confirmation | The dialog takes the focus when it opens and keeps Tab inside; after Escape the focus is on the page body | the confirmation dialog and its opener |
 
-No finding is traced to a kit component that has to change: the kit dialog,
-the floating button and the toast take what the client does not pass. Task
-5.1 is ticked on that ground unless 7.2 reopens finding 3.
+One finding needs the kit: the role list (findings 2 and 12) is the kit's
+combo box, whose button took no accessible name. It takes `ariaLabel` since
+`64a733a1` of `docspace-ui-kit-react`. The kit dialog, the floating button and
+the toast take what the client does not pass. Finding 3 stays recorded for
+task 7.2.
 
 ## Goals / Non-Goals
 

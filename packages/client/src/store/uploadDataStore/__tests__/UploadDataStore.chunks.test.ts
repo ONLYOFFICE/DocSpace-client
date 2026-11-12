@@ -710,6 +710,70 @@ describe("UploadDataStore.uploadFileChunks — failed chunk", () => {
       path: [7, 42],
     });
   });
+
+  it("does not remember the session for a row cancelled before the finalize failure settles", async () => {
+    const { store } = createTestUploadDataStore({
+      filesSettingsStore: { uploadThreadCount: 2 },
+    });
+    const browserFile = makeBrowserFile("small.txt", 2000);
+    const entry = makeUploadFile({
+      uniqueId: "finalize-cancelled",
+      file: browserFile,
+      toFolderId: 42,
+      inAction: true,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    let failFinalize: (() => void) | undefined;
+    vi.mocked(filesApi.finalizeUploadSession).mockImplementation(
+      () =>
+        new Promise((_res, rej) => {
+          failFinalize = () => rej(new Error("timeout of 30000ms exceeded"));
+        }) as never,
+    );
+
+    const done = store.uploadFileChunks(
+      "sess-1",
+      42,
+      [new FormData(), new FormData()],
+      2000,
+      0,
+      browserFile,
+      [42],
+      t,
+      "op-1",
+      42,
+      true,
+    );
+    const settled = expect(done).rejects.toThrow("timeout of 30000ms exceeded");
+
+    await vi.waitFor(() => expect(failFinalize).toBeDefined());
+
+    const nextDropped = makeUploadFile({
+      uniqueId: "next-dropped",
+      file: makeBrowserFile("next.txt", 10),
+      toFolderId: 42,
+    });
+    store.files = [nextDropped, { ...store.files[0], cancel: true }];
+
+    failFinalize?.();
+    await settled;
+
+    const cancelledRow = store.files.find(
+      (f) => f.uniqueId === "finalize-cancelled",
+    );
+    expect(cancelledRow?.cancel).toBe(true);
+    expect(cancelledRow?.pendingFinalize).toBeUndefined();
+    expect(store.files[0].pendingFinalize).toBeUndefined();
+  });
 });
 
 describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => {

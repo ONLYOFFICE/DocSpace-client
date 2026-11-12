@@ -4,7 +4,7 @@ One task is one commit: the code, the tests, the locales and the tick.
 
 ## 1. Audit
 
-- [ ] 1.1 Walk the six surfaces of design decision 1 with the keyboard and read their accessibility tree (Playwright `ariaSnapshot` under the Docker `tests-dev` service with the mocks of `private-room-invite.spec.ts` and `private-room-members.spec.ts`): the invite panel of a private room before sending, an invitee row with a warning, the invitation result, the operations indicator during a re-encryption, a member row with pending access, the removal confirmation. Record per surface what is not reachable, not operable, not named or not announced, and whether the fault is in the client, the shared package or a kit component, as a table in design.md. Verify: the table is in design.md and names a file for every finding
+- [x] 1.1 Walk the six surfaces of design decision 1 with the keyboard and read their accessibility tree (Playwright `ariaSnapshot` under the Docker `tests-dev` service with the mocks of `private-room-invite.spec.ts` and `private-room-members.spec.ts`): the invite panel of a private room before sending, an invitee row with a warning, the invitation result, the operations indicator during a re-encryption, a member row with pending access, the removal confirmation. Record per surface what is not reachable, not operable, not named or not announced, and whether the fault is in the client, the shared package or a kit component, as a table in design.md. Verify: the table is in design.md and names a file for every finding. Done 2026-11-12: fifteen findings in design.md, "Audit of 2026-11-12", each with the file its fix goes to; none needs a kit change
 
 ## 2. Invite panel
 

@@ -24,6 +24,35 @@ reader:
 
 The server is not involved: the panels read and write what they already do.
 
+### Audit of 2026-11-12 (task 1.1)
+
+Run under the Docker `tests-dev` service with the mocks of
+`private-room-invite.spec.ts` and `private-room-members.spec.ts`: an
+accessibility-tree snapshot of each surface and a walk with Tab, Enter and the
+arrow keys. No screen reader was used; that is task 7.2.
+
+| # | Surface | Finding | Where the fix goes |
+|---|---------|---------|--------------------|
+| 1 | Invite panel | The dialog has no accessible name; its title is a heading inside it | `packages/client/src/components/panels/InvitePanel/index.js`: the kit dialog takes `aria-label`, the panel passes none |
+| 2 | Invite panel | The role list of every invitee, and the default one beside the search field, is a button named by its value only ("Viewer"), three alike in a row | `InvitePanel/sub-components/Item.js`, `InviteInput.js` |
+| 3 | Invite panel | The open role list is not in the accessibility tree as a list; it works from the keyboard (Enter opens, arrows move, Enter picks, the focus stays on the button) | Kit role list; recorded, fixed only if 7.2 shows the options are not read |
+| 4 | Invite panel | Removing an invitee is the last option of the role list, so it is reachable from the keyboard; the separate remove icon is shown only for a row without a role list and is an image with a click handler, not focusable | `Item.js` |
+| 5 | Invite panel | The Tab order follows the screen, and every stop stays inside the panel | none |
+| 6 | Invitation result | After the result replaces the list the focus is on the page body | `InvitePanel/index.js` |
+| 7 | Invitation result | The result is not a named region; the invited and pending groups have a heading, the refused and skipped groups are bare paragraphs | `InvitePanel/sub-components/InviteResult.js` |
+| 8 | Re-encryption end | The notice is a kit toast with the alert role, so the end is announced | none |
+| 9 | Re-encryption progress | The operations indicator is a progress bar named "dots button", the kit's default for its icon, with no name of the operation | the client component that renders the indicator passes no label |
+| 10 | Members view | The retry is focusable and has the button role, named "Try again" for every member | `packages/shared/components/share/sub-components/User.tsx` |
+| 11 | Members view | "Access pending" and the drawn " \|" are one text | the same file |
+| 12 | Members view | The role list of a member is a button named by its value only | the same file |
+| 13 | Members view | After a retry started with a click the focus is on the page body | the same file |
+| 14 | Removal confirmation | The dialog has no accessible name; its title is a paragraph | the confirmation dialog of the client: it passes no `aria-label` |
+| 15 | Removal confirmation | The dialog takes the focus when it opens and keeps Tab inside; after Escape the focus is on the page body | the confirmation dialog and its opener |
+
+No finding is traced to a kit component that has to change: the kit dialog,
+the floating button and the toast take what the client does not pass. Task
+5.1 is ticked on that ground unless 7.2 reopens finding 3.
+
 ## Goals / Non-Goals
 
 **Goals:**

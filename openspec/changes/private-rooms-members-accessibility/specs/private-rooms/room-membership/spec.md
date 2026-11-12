@@ -54,11 +54,11 @@ The system SHALL expose Common:EncryptedAccessPending as the state of the member
 - **THEN** the pending state is no longer exposed for that member and the focus is not lost
 
 ### Requirement: Member rows of a private room are operable from the keyboard
-The system SHALL let a user who may change access open the role list of a member of a private room with the keyboard, pick a role or the removal in it, and answer the removal confirmation, with the focus returning to the Members view when the confirmation closes. The role list SHALL be named after the member.
+The system SHALL let a user who may change access open the role list of a member of a private room with the keyboard, pick a role or the removal in it, and answer the removal confirmation, with the focus returning when the confirmation closes: to the role list when the removal is declined, to the tab of the Members view when the member is removed. The role list SHALL be named after the member.
 
 #### Scenario: Removal confirmed from the keyboard
 - **WHEN** the user picks the removal in a member's role list with the keyboard and confirms it with Enter
-- **THEN** the member is removed and the focus is inside the Members view
+- **THEN** the member is removed and the tab of the Members view has the focus
 
 #### Scenario: Removal declined from the keyboard
 - **WHEN** the user picks the removal with the keyboard and declines the confirmation

@@ -1061,6 +1061,11 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       containerVisible={addUsersPanelVisible || linkSettingsPanelVisible}
       withBodyScroll
       id="invite_panel_modal"
+      aria-label={
+        inviteOutcome
+          ? t("Common:EncryptedInviteResultTitle")
+          : t("Common:Invite")
+      }
     >
       {addUsersPanelVisible ? (
         <ModalDialog.Container>

@@ -363,6 +363,20 @@ const pickRoom = async (
   await picker.getByRole("button", { name: submit }).click();
 };
 
+// Moves through an open role list with the arrow keys until the named option
+// is the active one, then picks it with Enter.
+const pickRoleWithKeyboard = async (page: Page, option: string) => {
+  for (let step = 0; step < 12; step += 1) {
+    const active = await page.evaluate(() => {
+      const id = document.activeElement?.getAttribute("aria-activedescendant");
+      return id ? (document.getElementById(id)?.textContent ?? "") : "";
+    });
+    if (active.trim().startsWith(option)) break;
+    await page.keyboard.press("ArrowDown");
+  }
+  await page.keyboard.press("Enter");
+};
+
 /** The users a stored file's key is wrapped for, sorted. */
 const keyHolders = (handle: EncryptedFilesHandlerHandle, fileId: number) =>
   handle
@@ -1211,6 +1225,19 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     const people = page.getByTestId("invite_panel_people_selector");
     await people.getByTestId("selector-item-0").click();
     await people.getByTestId("selector_submit_button").click();
+    await test.step("Role chosen from the keyboard", async () => {
+      const panel = page.getByRole("dialog", { name: "Invite", exact: true });
+      await panel
+        .getByRole("button", { name: `Role of ${CAROL.displayName}: Viewer` })
+        .focus();
+      await page.keyboard.press("Enter");
+      await pickRoleWithKeyboard(page, "Content creator");
+      await expect(
+        panel.getByRole("button", {
+          name: `Role of ${CAROL.displayName}: Content creator`,
+        }),
+      ).toBeFocused();
+    });
     // The key writes wait until the re-encryption is seen in progress.
     let releaseKeyWrites = () => {};
     const keyWritesHeld = new Promise<void>((resolve) => {
@@ -1224,6 +1251,9 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     await unlock(page);
 
     await expect(page.getByTestId("reencrypt-progress-bar")).toBeVisible();
+    await expect(
+      page.getByRole("progressbar", { name: "Re-encrypting files" }),
+    ).toBeVisible();
     await expect(page.getByTestId("invite_panel_send_button")).toBeVisible();
     await expect(page.getByTestId("invite_panel_result")).toBeHidden();
     releaseKeyWrites();
@@ -1237,6 +1267,13 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
       CAROL.displayName,
     );
     await expect(page.getByTestId("invite_panel_result_skipped")).toHaveCount(0);
+    await test.step("Result shown", async () => {
+      const result = page.getByRole("region", { name: "Invitation results" });
+      await expect(result).toBeFocused();
+      await expect(
+        result.getByRole("region", { name: "Invited", exact: true }),
+      ).toContainText(CAROL.displayName);
+    });
 
     await page.getByTestId("invite_panel_close_button").click();
 

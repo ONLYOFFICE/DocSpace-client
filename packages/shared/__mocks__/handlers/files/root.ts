@@ -880,7 +880,64 @@ const successRoot = {
 /** `FolderType.AiHub`: the "AI rooms" root. */
 const AI_HUB_FOLDER_TYPE = 41;
 
+/** `FolderType.PrivateRooms`: the Private root. */
+const PRIVATE_ROOMS_FOLDER_TYPE = 42;
+const PRIVATE_ROOT_ID = 11246;
+const ROOMS_FOLDER_TYPE = 14;
+
+/**
+ * The Private root, as FoldersControllerCommon.GetRootFoldersIdsAsync lists it
+ * after Rooms and Forms while the `e2e-rooms` app is on. It holds no rooms of
+ * its own and counts the new items of the private rooms in `current.new`
+ * (FileMarker.SetTagsNewAsync). A member gets Read, Create and MoveTo on it
+ * and nothing else, as on the Forms root (FileSecurity.FilterEntryAsync).
+ */
+const privateRootOf = (rooms: (typeof successRoot.response)[number]) => ({
+  ...rooms,
+  folders: [],
+  files: [],
+  current: {
+    ...rooms.current,
+    id: PRIVATE_ROOT_ID,
+    rootFolderId: PRIVATE_ROOT_ID,
+    filesCount: 0,
+    foldersCount: 0,
+    new: 0,
+    title: "Private",
+    rootFolderType: PRIVATE_ROOMS_FOLDER_TYPE,
+  },
+  pathParts: [
+    {
+      id: PRIVATE_ROOT_ID,
+      title: "Private",
+      folderType: PRIVATE_ROOMS_FOLDER_TYPE,
+    },
+  ],
+  count: 0,
+  total: 0,
+  new: 0,
+});
+
+const withPrivateRootListed = (roots: typeof successRoot.response) => {
+  const roomsIndex = roots.findIndex(
+    (root) => root.current.rootFolderType === ROOMS_FOLDER_TYPE,
+  );
+  if (roomsIndex === -1) return roots;
+
+  return [
+    ...roots.slice(0, roomsIndex + 1),
+    privateRootOf(roots[roomsIndex]),
+    ...roots.slice(roomsIndex + 1),
+  ];
+};
+
 export type RootOptions = {
+  /**
+   * Whether the Private root is served. The server lists it only while the
+   * `e2e-rooms` app is on, which the mocked apps are by default, so a spec
+   * with the app off passes `false`. Defaults to `true`.
+   */
+  withPrivateRoot?: boolean;
   /**
    * Whether the "AI rooms" root is served. The server leaves it out for a
    * guest, so a spec signed in as one passes `false`. Defaults to `true`.
@@ -888,16 +945,22 @@ export type RootOptions = {
   withAiHub?: boolean;
 };
 
-export const rootResolve = ({ withAiHub = true }: RootOptions = {}): Response => {
-  const body = withAiHub
-    ? successRoot
-    : {
-        ...successRoot,
-        response: successRoot.response.filter(
-          (root) => root.current.rootFolderType !== AI_HUB_FOLDER_TYPE,
-        ),
-      };
-  return new Response(JSON.stringify(body));
+export const rootResolve = ({
+  withAiHub = true,
+  withPrivateRoot = true,
+}: RootOptions = {}): Response => {
+  const roots = withAiHub
+    ? successRoot.response
+    : successRoot.response.filter(
+        (root) => root.current.rootFolderType !== AI_HUB_FOLDER_TYPE,
+      );
+
+  return new Response(
+    JSON.stringify({
+      ...successRoot,
+      response: withPrivateRoot ? withPrivateRootListed(roots) : roots,
+    }),
+  );
 };
 
 export const rootHandler = (port: string, options?: RootOptions) => {

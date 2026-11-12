@@ -892,7 +892,10 @@ const ROOMS_FOLDER_TYPE = 14;
  * (FileMarker.SetTagsNewAsync). A member gets Read, Create and MoveTo on it
  * and nothing else, as on the Forms root (FileSecurity.FilterEntryAsync).
  */
-const privateRootOf = (rooms: (typeof successRoot.response)[number]) => ({
+const privateRootOf = (
+  rooms: (typeof successRoot.response)[number],
+  newItems: number,
+) => ({
   ...rooms,
   folders: [],
   files: [],
@@ -902,7 +905,7 @@ const privateRootOf = (rooms: (typeof successRoot.response)[number]) => ({
     rootFolderId: PRIVATE_ROOT_ID,
     filesCount: 0,
     foldersCount: 0,
-    new: 0,
+    new: newItems,
     title: "Private",
     rootFolderType: PRIVATE_ROOMS_FOLDER_TYPE,
   },
@@ -918,7 +921,10 @@ const privateRootOf = (rooms: (typeof successRoot.response)[number]) => ({
   new: 0,
 });
 
-const withPrivateRootListed = (roots: typeof successRoot.response) => {
+const withPrivateRootListed = (
+  roots: typeof successRoot.response,
+  newItems: number,
+) => {
   const roomsIndex = roots.findIndex(
     (root) => root.current.rootFolderType === ROOMS_FOLDER_TYPE,
   );
@@ -926,7 +932,7 @@ const withPrivateRootListed = (roots: typeof successRoot.response) => {
 
   return [
     ...roots.slice(0, roomsIndex + 1),
-    privateRootOf(roots[roomsIndex]),
+    privateRootOf(roots[roomsIndex], newItems),
     ...roots.slice(roomsIndex + 1),
   ];
 };
@@ -939,6 +945,12 @@ export type RootOptions = {
    */
   withPrivateRoot?: boolean;
   /**
+   * The new items of the private rooms, which the server writes to the
+   * Private root's own `current.new`; its top-level `new` stays 0. Defaults
+   * to 0.
+   */
+  privateRootNew?: number;
+  /**
    * Whether the "AI rooms" root is served. The server leaves it out for a
    * guest, so a spec signed in as one passes `false`. Defaults to `true`.
    */
@@ -948,6 +960,7 @@ export type RootOptions = {
 export const rootResolve = ({
   withAiHub = true,
   withPrivateRoot = true,
+  privateRootNew = 0,
 }: RootOptions = {}): Response => {
   const roots = withAiHub
     ? successRoot.response
@@ -958,7 +971,9 @@ export const rootResolve = ({
   return new Response(
     JSON.stringify({
       ...successRoot,
-      response: withPrivateRoot ? withPrivateRootListed(roots) : roots,
+      response: withPrivateRoot
+        ? withPrivateRootListed(roots, privateRootNew)
+        : roots,
     }),
   );
 };

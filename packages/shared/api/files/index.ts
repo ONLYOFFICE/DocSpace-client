@@ -248,7 +248,12 @@ export async function getFoldersTree() {
 
     const name = getFolderClassNameByType(type);
 
-    const newCount = type === FolderType.Forms ? current.new : newItems;
+    // Forms and Private are anchors with no children of their own: the
+    // server writes their count to the root itself, the top-level one is 0.
+    const newCount =
+      type === FolderType.Forms || type === FolderType.PrivateRooms
+        ? current.new
+        : newItems;
 
     return {
       ...current,

@@ -45,6 +45,7 @@ import {
   roomGroupsHandler,
   roomListHandler,
   roomMembersHandlers,
+  roomsNewsHandler,
   roomTagsHandler,
   rootHandler,
   selfActivationStatusHandler,
@@ -408,6 +409,39 @@ test.describe("Private section — rooms open inside it", () => {
         ],
       }),
     );
+  });
+
+  test("New-items counter", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT, { privateRootNew: 2 }),
+      roomsNewsHandler(TEST_PORT, [
+        { roomId: ROOM_ID, title: ROOM_TITLE, isPrivate: true },
+        { roomId: ORDINARY_ROOM_ID, title: "Team Room" },
+      ]),
+    );
+
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    const item = navItem(page, "private-rooms").locator("xpath=ancestor::li[1]");
+    const counter = item.locator(".new-items");
+    await expect(counter).toHaveText("2", { timeout: 15000 });
+    await expect(item.getByTestId("private_rooms_beta_badge")).toBeVisible();
+    // The Rooms item counts its own root only.
+    await expect(
+      navItem(page, ROOMS_ID).locator("xpath=ancestor::li[1]").locator(".new-items"),
+    ).toHaveCount(0);
+
+    await counter.click();
+
+    const panel = page.locator(".new-files-panel");
+    await expect(panel.getByText(ROOM_TITLE)).toBeVisible({ timeout: 15000 });
+    await expect(panel.getByText("Team Room")).toHaveCount(0);
+
+    await panel.getByText(ROOM_TITLE).click();
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe(`/private/${ROOM_ID}/filter`);
   });
 
   test("Room clicked in the section", async ({ page, baseUrl }) => {

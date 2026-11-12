@@ -112,6 +112,7 @@ import {
   privateRoomListHandler,
   privateSectionHandler,
 } from "./privateRoomList";
+import { roomsNewsHandler } from "./roomsNews";
 import {
   folderHistoryHandler,
   folderHistoryReportHandlers,
@@ -147,6 +148,7 @@ export {
   type PrivateRoomListOptions,
   type PrivateSectionOptions,
 } from "./privateRoomList";
+export { roomsNewsHandler, type RoomsNewsRoom } from "./roomsNews";
 export { emptyTemplateHandler } from "./emptyTemplate";
 
 export {

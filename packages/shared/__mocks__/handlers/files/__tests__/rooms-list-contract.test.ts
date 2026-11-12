@@ -46,6 +46,7 @@ import {
   privateSectionHandler,
 } from "../privateRoomList";
 import { recentHandler } from "../recent";
+import { roomsNewsHandler } from "../roomsNews";
 import { rootHandler } from "../root";
 import { BASE_URL, API_PREFIX } from "../../../e2e/utils";
 
@@ -312,6 +313,60 @@ describe("Private section (mirrors VirtualRoomsCommonController.GetRoomsSectionI
     server.use(rootHandler(PORT, { withPrivateRoot: false }));
 
     expect(await getRootTypes()).not.toContain(PRIVATE_ROOT);
+  });
+
+  it("Root listing carries the Private root's count in its own new", async () => {
+    server.use(rootHandler(PORT, { privateRootNew: 4 }));
+
+    const res = await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/@root`);
+    const roots = (
+      (await res.json()) as {
+        response: {
+          new: number;
+          current: { rootFolderType: number; new: number };
+        }[];
+      }
+    ).response;
+    const privateRoot = roots.find(
+      (root) => root.current.rootFolderType === PRIVATE_ROOT,
+    );
+
+    // FileMarker.SetTagsNewAsync writes the sum to the anchor itself.
+    expect(privateRoot?.current.new).toBe(4);
+    expect(privateRoot?.new).toBe(0);
+  });
+
+  it("Rooms news lists every room under the Rooms root, private ones marked", async () => {
+    server.use(
+      roomsNewsHandler(PORT, [
+        { roomId: PRIVATE_ROOM_ID, title: "Secret", isPrivate: true },
+        { roomId: ORDINARY_ROOM_ID, title: "Team" },
+      ]),
+    );
+
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/rooms/news`,
+    );
+    const groups = (
+      (await res.json()) as {
+        response: {
+          date: string;
+          items: {
+            room: { id: number; private: boolean; roomType: number };
+            items: { id: number }[];
+          }[];
+        }[];
+      }
+    ).response;
+
+    expect(groups).toHaveLength(1);
+    expect(
+      groups[0].items.map(({ room }) => [room.id, room.private]),
+    ).toEqual([
+      [PRIVATE_ROOM_ID, true],
+      [ORDINARY_ROOM_ID, false],
+    ]);
+    expect(groups[0].items.every(({ items }) => items.length === 1)).toBe(true);
   });
 
   it("Recent with the PrivateRooms area is a bad request", async () => {

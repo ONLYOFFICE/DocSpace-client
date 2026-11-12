@@ -274,6 +274,7 @@ const ClientArticleSidebar = ({
     const panelFolderId = (folder: TTreeFolder): string | number => {
       if (folder.rootFolderType === FolderType.Rooms) return "rooms";
       if (folder.rootFolderType === FolderType.Forms) return "forms";
+      if (folder.rootFolderType === FolderType.PrivateRooms) return "private";
       return folder.id;
     };
 
@@ -334,6 +335,7 @@ const ClientArticleSidebar = ({
     const favFolder = find(FolderType.Favorites);
     const trashFolder = find(FolderType.TRASH);
     const formsFolder = find(FolderType.Forms);
+    const privateRoomsFolder = find(FolderType.PrivateRooms);
     const aiHubFolder = find(FolderType.AiHub);
 
     const mainItems: NavMenuItem[] = [];
@@ -553,21 +555,37 @@ const ClientArticleSidebar = ({
       });
     }
 
-    // Spec: private-rooms/sidebar-section, "No new-items counter on the section item"
+    // Spec: private-rooms/sidebar-section, "New-items counter on the section item"
     if (roomsFolder && privateRoomsSectionAvailable) {
+      const privateNewCount = newCount(privateRoomsFolder);
+      const betaBadge = (
+        <BetaBadge
+          place="right-start"
+          title={t("Common:PrivateRoomsBetaTitle")}
+          description={t("Common:PrivateRoomsBetaDescription")}
+          dataTestId="private_rooms_beta_badge"
+        />
+      );
+
       mainItems.push({
         id: "private-rooms",
         label: t("Common:Private"),
         icon: CatalogPrivateReactSvgUrl,
         ...nav(searchAreaUrl("/private/filter", RoomSearchArea.PrivateRooms)),
-        badgeComponent: (
-          <BetaBadge
-            place="right-start"
-            title={t("Common:PrivateRoomsBetaTitle")}
-            description={t("Common:PrivateRoomsBetaDescription")}
-            dataTestId="private_rooms_beta_badge"
-          />
-        ),
+        ...(privateRoomsFolder && privateNewCount > 0
+          ? {
+              showBadge: true,
+              badgeComponent: (
+                <>
+                  <NewFilesBadge
+                    newFilesCount={privateNewCount}
+                    folderId={panelFolderId(privateRoomsFolder)}
+                  />
+                  {betaBadge}
+                </>
+              ),
+            }
+          : { badgeComponent: betaBadge }),
         children: [
           {
             id: "private-rooms-archive",

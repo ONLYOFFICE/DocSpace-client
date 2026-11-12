@@ -168,7 +168,6 @@
   "AIPaywallCallbackStepActivate": "Activating AI agents & tools",
   "AIPricePer1MNote": "{{price}} / 1M, {{provider}}",
   "AIPricingLowBalanceWithPricing": "Available credits: {{price}}. Credits running low | <1>See pricing</1>",
-  "AIProjectAddFolder": "Add folder",
   "AIProjectChangeOwner": "Change project owner",
   "AIProjectChangeOwnerInfo": "The new owner must be a {{productName}} admin or a room admin. Users and guests cannot own a project.",
   "AIProjectCreated": "AI project \"{{name}}\" created",

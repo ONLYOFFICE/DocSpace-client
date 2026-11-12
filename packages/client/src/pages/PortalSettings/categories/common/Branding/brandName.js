@@ -36,13 +36,12 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
 
 import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/BrandName";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
-import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
+import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { DeviceType } from "@docspace/shared/enums";
 
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
@@ -66,7 +65,6 @@ const BrandNameComponent = (props) => {
     brandingStore,
   } = props;
 
-  const navigate = useNavigate();
   const isMobileView = deviceType === DeviceType.mobile;
 
   useResponsiveNavigation({
@@ -81,8 +79,6 @@ const BrandNameComponent = (props) => {
   });
 
   const { getCommonInitialValue } = useCommon(defaultProps.common);
-
-  const onPaidBadgeClick = () => navigate(PAYMENT_ROUTES.portalPayments);
 
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState("");
@@ -128,7 +124,7 @@ const BrandNameComponent = (props) => {
       isSettingPaid={isSettingPaid}
       showNotAvailable={showNotAvailable}
       standalone={standalone}
-      onPaidBadgeClick={onPaidBadgeClick}
+      paidBadge={<PaidBadge className="paid-badge" fontWeight="700" />}
       isSaving={isSaving}
       isBrandNameLoaded={isBrandNameLoaded}
       defaultBrandName={defaultBrandName}

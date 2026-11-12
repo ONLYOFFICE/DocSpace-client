@@ -59,6 +59,8 @@ import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?u
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 import UploaderImgDark from "PUBLIC_DIR/images/sdk-presets_uploader_dark.react.svg?url";
+import MediaViewerImg from "PUBLIC_DIR/images/sdk-presets_media-viewer.react.svg?url";
+import MediaViewerImgDark from "PUBLIC_DIR/images/sdk-presets_media-viewer_dark.react.svg?url";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import Integration from "./sub-components/Integration";
@@ -83,6 +85,7 @@ const PortalIntegration = (props) => {
   const navigateToEditor = () => navigate("editor");
   const navigateToViewer = () => navigate("viewer");
   const navigateToUploader = () => navigate("uploader");
+  const navigateToMediaViewer = () => navigate("media-viewer");
 
   const presetsData = [
     {
@@ -132,6 +135,12 @@ const PortalIntegration = (props) => {
       description: t("UploaderDescription"),
       image: theme.isBase ? UploaderImg : UploaderImgDark,
       handleOnClick: navigateToUploader,
+    },
+    {
+      title: t("Common:MediaViewer"),
+      description: t("MediaViewerDescription"),
+      image: theme.isBase ? MediaViewerImg : MediaViewerImgDark,
+      handleOnClick: navigateToMediaViewer,
     },
   ];
 

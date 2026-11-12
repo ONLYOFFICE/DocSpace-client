@@ -64,6 +64,8 @@ const getSdkPresetTitle = (
       return t("Common:Custom");
     case "uploader":
       return t("Common:Uploader");
+    case "media-viewer":
+      return t("Common:MediaViewer");
     default:
       return null;
   }

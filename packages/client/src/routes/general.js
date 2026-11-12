@@ -231,6 +231,16 @@ export const generalClientRoutes = [
           ),
       },
       {
+        path: "javascript-sdk/media-viewer",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/MediaViewer"
+              ),
+          ),
+      },
+      {
         path: "plugin-sdk",
         lazy: () =>
           import(

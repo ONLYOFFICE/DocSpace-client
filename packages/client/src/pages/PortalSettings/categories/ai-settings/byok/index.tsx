@@ -105,7 +105,9 @@ const ByokKeys = ({
   return (
     <div>
       <Text className={styles.description}>
-        {t("Common:AIApiKeysDescription", { percent: aiToolsByokFeePercent })}
+        {aiToolsByokFeePercent != null
+          ? t("Common:AIApiKeysDescription", { percent: aiToolsByokFeePercent })
+          : t("Common:AIApiKeysDescriptionNoPercent")}
       </Text>
       {openForm === ADD_FORM ? (
         <ByokKeyForm

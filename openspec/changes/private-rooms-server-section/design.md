@@ -262,6 +262,21 @@ targets, the archive and restore destinations) are not affected.
   green.
 - Not done: the check on a stand with `c866c055e1`.
 
+Repeated the same day on `36ac056fc52`, after the release branch with a new
+ui-kit build was merged in, with the test images rebuilt:
+
+- The pre-push gate is green.
+- Client, the whole suite: again 907 passed and 330 failed, the same 329
+  screenshots and the same allowlist case; the merge added no failure. The
+  owner asked for the screenshots, so the 506 baselines of the 53 specs are
+  regenerated (`0847831ba8d`) and those specs pass, 680 of 680.
+  `unpaid-portal-requests.spec.ts` still fails.
+- SDK `__tests__/e2e/private`: 36 passed, 14 fixme.
+- Doceditor, Docker: `private-room-editor.spec.ts` passes. One case of
+  `form-field-changes.spec.ts`, which came with the merge, fails unsteadily
+  ("Report failed, then the editor closed"): on desktop and tablet in one
+  run, on desktop only in the next.
+
 ## Goals / Non-Goals
 
 **Goals:**

@@ -11,7 +11,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Gate
 
-- [ ] 2.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
+- [x] 2.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts. Done 2026-11-12, each command on its own: `test:lefthook` 8 files, 61 passed and 3 skipped; `nx run-many -t tsc lint test` over the six packages, all targets successful; `openspec validate --all --strict` 20 of 20 on the branch and 19 of 19 after a trial archive on a scratch copy
 
 ## Workflow follow-up
 

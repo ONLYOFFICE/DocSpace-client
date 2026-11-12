@@ -13,7 +13,7 @@ One task is one commit: the code, the tests, the locales and the tick.
 
 ## 3. Re-encryption progress
 
-- [ ] 3.1 After 1.1: give the operations indicator a name and a value for the re-encryption, and make its end announced once, through the toast if the audit shows the kit toast is a status or an alert, otherwise through the fix the audit names. Verify: a unit test next to the indicator and the cases "Re-encryption completes" and "Re-encryption fails" in `private-room-invite.spec.ts`
+- [x] 3.1 After 1.1: give the operations indicator a name and a value for the re-encryption, and make its end announced once, through the toast if the audit shows the kit toast is a status or an alert, otherwise through the fix the audit names. Verify: a unit test next to the indicator and the cases "Re-encryption completes" and "Re-encryption fails" in `private-room-invite.spec.ts`. Done 2026-11-12: the indicator is the kit's operations button, which named itself after its icon; it carries the label of the running operation now, `Common:ReEncryptingFiles` for a re-encryption, or the count of processes when several run (`dbde2052` of the kit, with a unit test for the name and the value). The end is announced by the notice the flow raises, a kit toast with the alert role; the whole failure raises `Common:EncryptedReencryptFailed` the same way (`room-member-flows.test.ts`). The steps "Re-encryption completes" of `private-room-invite.spec.ts` and "Re-encryption ends with a file left out" of `private-room-members.spec.ts` pass under Docker; there the upload is still listed, so the name is the count of two
 
 ## 4. Members view
 

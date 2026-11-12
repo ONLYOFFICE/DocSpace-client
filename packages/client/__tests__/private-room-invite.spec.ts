@@ -349,6 +349,15 @@ test.describe("Private room — invite entry point", () => {
     await expect(page.getByTestId("invite_panel_result_skipped")).toContainText(
       DAN.displayName,
     );
+    await test.step("Re-encryption completes", async () => {
+      await expect(
+        // The upload of the file is still listed, so the indicator counts both.
+        page.getByRole("progressbar", { name: "Processes: 2" }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("alert").filter({ hasText: DAN.displayName }),
+      ).toHaveCount(1);
+    });
     await test.step("Result shown", async () => {
       const result = page.getByRole("region", { name: "Invitation results" });
       await expect(result).toBeFocused();

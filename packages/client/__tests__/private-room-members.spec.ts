@@ -255,6 +255,17 @@ test.describe("Private room — pending access", () => {
     await expect(page.getByTestId("invite_panel_result_pending")).toBeVisible({
       timeout: 30000,
     });
+    await test.step("Re-encryption ends with a file left out", async () => {
+      await expect(
+        // The upload of the file is still listed, so the indicator counts both.
+        page.getByRole("progressbar", { name: "Processes: 2" }),
+      ).toBeVisible();
+      await expect(
+        page
+          .getByRole("alert")
+          .filter({ hasText: "could not be made available" }),
+      ).toHaveCount(1);
+    });
     await page.getByTestId("invite_panel_close_button").click();
 
     await page.locator(".info-panel-toggle").click();

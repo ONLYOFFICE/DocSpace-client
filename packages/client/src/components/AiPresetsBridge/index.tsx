@@ -218,8 +218,8 @@ const AiPresetsBridge = ({
   }, [aiChatStore, aiPresetsStore, agents, selectedAgentId, onAgentSelect, isInsideOpenProject]);
 
   // With vectorization off no Knowledge room can be searched, so the
-  // composer loses its knowledge base picker; a base connected earlier
-  // keeps its pill and can still be disconnected.
+  // "+" menu's Knowledge bases loses Manage; a base connected earlier stays
+  // listed there and can still be disconnected.
   React.useEffect(() => {
     aiChatStore.setKnowledgePickerHidden(!vectorizationEnabled);
     return () => aiChatStore.setKnowledgePickerHidden(false);

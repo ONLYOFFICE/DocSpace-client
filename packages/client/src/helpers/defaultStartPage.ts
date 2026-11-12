@@ -46,6 +46,8 @@ export type TStartPageContext = {
    * and never for a guest, who is barred from AI.
    */
   aiServicesEnabled?: boolean;
+  /** The Private section is shown: the E2E rooms app is on. */
+  isPrivateRoomsSectionAvailable?: boolean;
 };
 
 /**
@@ -56,10 +58,17 @@ export type TStartPageContext = {
  */
 export const isStartPageAvailable = (
   folderType: FolderType,
-  { isGuest = false, aiServicesEnabled = false }: TStartPageContext = {},
+  {
+    isGuest = false,
+    aiServicesEnabled = false,
+    isPrivateRoomsSectionAvailable = false,
+  }: TStartPageContext = {},
 ) => {
   if (folderType === FolderType.USER) return !isGuest;
   if (folderType === FolderType.AiHub) return aiServicesEnabled && !isGuest;
+  // Spec: private-rooms/sidebar-section, "Section is a start page option while available"
+  if (folderType === FolderType.PrivateRooms)
+    return isPrivateRoomsSectionAvailable;
 
   return true;
 };
@@ -79,7 +88,13 @@ export const getEffectiveDefaultFolderType = (
 ) => {
   const type = folderType ?? FolderType.DEFAULT;
 
-  return isStartPageAvailable(type, context) ? type : FolderType.DEFAULT;
+  if (isStartPageAvailable(type, context)) return type;
+
+  // A private room opens in Rooms while its section is not shown, so a
+  // start page set to Private opens Rooms then, not Home.
+  return type === FolderType.PrivateRooms
+    ? FolderType.Rooms
+    : FolderType.DEFAULT;
 };
 
 /**

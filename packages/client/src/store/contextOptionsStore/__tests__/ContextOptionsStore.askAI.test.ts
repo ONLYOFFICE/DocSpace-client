@@ -33,6 +33,48 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.checkbox {
-  margin-top: 16px;
-}
+import { describe, it, expect, vi } from "vitest";
+
+import { FolderType } from "@docspace/shared/enums";
+
+import { createTestContextOptionsStore } from "./testHarness";
+
+const formInFormRoom = (security: Record<string, unknown> = {}) =>
+  ({
+    id: 1,
+    isFolder: false,
+    fileExst: ".pdf",
+    parentRoomType: FolderType.FormRoom,
+    security,
+  }) as never;
+
+const setup = () => {
+  const askAIAction = vi.fn();
+  const store = createTestContextOptionsStore({
+    filesActionsStore: { askAIAction },
+  });
+
+  return { store, askAIAction };
+};
+
+describe("ContextOptionsStore.askAI", () => {
+  it("Responses already in a forms database: the chat opens at once", async () => {
+    const { store, askAIAction } = setup();
+    const item = formInFormRoom({ AnalyzeResponses: true });
+
+    await store.askAI(item, true);
+
+    expect(askAIAction).toHaveBeenCalledWith(item, true);
+  });
+
+  // The forms are stored in the built-in database, so there is nothing to
+  // offer to connect: no dialog stands before the chat.
+  it("Responses in no database yet: the chat opens at once too", async () => {
+    const { store, askAIAction } = setup();
+    const item = formInFormRoom();
+
+    await store.askAI(item, true);
+
+    expect(askAIAction).toHaveBeenCalledWith(item, true);
+  });
+});

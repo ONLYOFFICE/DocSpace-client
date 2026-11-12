@@ -136,8 +136,6 @@ import {
   onCreateTemplateImpl,
   onSyncXlsxDataImpl,
   handleCopyPrimaryLinkImpl,
-  _resolveRoomImpl,
-  _syncInfoPanelRoomImpl,
   askAIImpl,
 } from "./contextOptionsStore/actions.helpers";
 import type DialogsStore from "./DialogsStore";
@@ -974,10 +972,6 @@ class ContextOptionsStore {
   handleCopyPrimaryLink = async (item: TContextItem, t: TTranslation)=> handleCopyPrimaryLinkImpl(this, item, t);
 
   getManageLinkOptions = (item: TContextItem)=> getManageLinkOptionsImpl(this, item);
-
-  _resolveRoom = async (): Promise<TContextItem | null>=> _resolveRoomImpl(this);
-
-  _syncInfoPanelRoom = (newRoom: TRoom)=> _syncInfoPanelRoomImpl(this, newRoom);
 
   askAI = async (item: TContextItem, analyze = false)=>
     askAIImpl(this, item, analyze);

@@ -70,6 +70,7 @@ import useGoBackAndClose from "@/hooks/useGoBackAndClose";
 import useFileEncryptionKeys, {
   type TFileEncryptionStatus,
 } from "@/hooks/useFileEncryptionKeys";
+import useFormFieldChanges from "@/hooks/useFormFieldChanges";
 import { isPDFDocument } from "@/utils";
 
 import Bar from "./Bar";
@@ -184,6 +185,21 @@ const EditorBody = ({
   // file; shown in place of the editor.
   const [frameError, setFrameError] = React.useState<string | null>(null);
 
+  // Only the original form of a form-filling room open for editing: the server sets trackFormFieldChanges for such
+  // forms alone, unless the editors are Community Edition, and filled or completed forms are not open for editing.
+  const {
+    takeSnapshot: takeFieldsSnapshot,
+    reportFieldChanges,
+    scheduleFieldChanges,
+    closeFieldChanges,
+  } = useFormFieldChanges(
+    fileInfo?.id,
+    fileInfo?.version,
+    !!config?.trackFormFieldChanges &&
+      config?.editorConfig?.mode === "edit" &&
+      !!config?.document?.permissions?.edit,
+  );
+
   const {
     onDocumentReady,
     onSDKRequestOpen,
@@ -227,7 +243,11 @@ const EditorBody = ({
     openShareFormDialog,
     onOpenRoleMappingPanel,
     shareKey,
-      disconnectUsers,
+    disconnectUsers,
+    takeFieldsSnapshot,
+    reportFieldChanges,
+    scheduleFieldChanges,
+    closeFieldChanges,
   });
 
   // AI is not available to guests and anonymous viewers — the same rule the

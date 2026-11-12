@@ -1511,6 +1511,7 @@
   "ManageNotifications": "Manage",
   "ManagerSearchBlockDescription": "You can disable the search, filter and sort options.",
   "ManagerTypesDescription": "Admin account types and their privileges",
+  "ManageSources": "Manage sources",
   "ManageStorageQuota": "Manage storage quota",
   "ManualBackupDescription": "Download all the data in your workspace as a single file.",
   "ManyEmails": "Too many email addresses parsed",

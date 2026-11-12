@@ -1504,6 +1504,7 @@
   "ManageNotifications": "관리",
   "ManagerSearchBlockDescription": "검색, 필터, 정렬 옵션을 비활성화할 수 있습니다.",
   "ManagerTypesDescription": "주소 관리자 계정 유형 및 특권",
+  "ManageSources": "소스 관리",
   "ManageStorageQuota": "스토리지 할당량 관리",
   "ManualBackupDescription": "워크스페이스의 모든 데이터를 하나의 파일로 다운로드하세요.",
   "ManyEmails": "너무 많은 이메일이 파싱되었습니다",

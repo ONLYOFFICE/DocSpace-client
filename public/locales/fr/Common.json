@@ -1504,6 +1504,7 @@
   "ManageNotifications": "Gérer",
   "ManagerSearchBlockDescription": "Vous pouvez désactiver les options de recherche, de filtrage et de tri.",
   "ManagerTypesDescription": "Types de comptes administrateurs et leurs privilèges",
+  "ManageSources": "Gérer les sources",
   "ManageStorageQuota": "Gérer les quotas de stockage",
   "ManualBackupDescription": "Téléchargez toutes les données de votre espace de travail sous la forme d'un seul fichier.",
   "ManyEmails": "Trop d'e-mails à analyser",

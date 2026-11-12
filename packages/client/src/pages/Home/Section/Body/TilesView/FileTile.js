@@ -250,6 +250,7 @@ const FileTile = (props) => {
           key={item.id}
           badgeUrl={badgeUrl}
           thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
         />
       );
     if (item.isRoom)

@@ -35,10 +35,12 @@ vi.mock("@onlyoffice/apps-ui-kit/components/tiles/base-tile", () => ({
 
 import AiProjectTile from "../AiProjectTile";
 
+const openUser = vi.fn();
 const renderTile = (thumbnailClick = vi.fn()) => {
   render(
     <AiProjectTile
-      item={{ id: 7, title: "Legal Reviewer" } as never}
+      item={{ id: 7, title: "Legal Reviewer", createdBy: { displayName: "Alexey Bannov" } } as never}
+      openUser={openUser}
       contextOptions={[]}
       thumbnailClick={thumbnailClick}
       badges={<div className="badges" data-testid="badges" />}
@@ -87,6 +89,14 @@ describe("AiProjectTile", () => {
     renderTile();
     expect(value("model")).toBe("Common:Default");
     expect(value("skills")).toBe("—");
+  });
+
+  it("names the owner, whose name opens their profile and not the project", () => {
+    const thumbnailClick = renderTile();
+    expect(screen.getByText("Common:Owner")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Alexey Bannov"));
+    expect(openUser).toHaveBeenCalledTimes(1);
+    expect(thumbnailClick).not.toHaveBeenCalled();
   });
 
   it("opens the project on a click on the tile, but not on its badges", () => {

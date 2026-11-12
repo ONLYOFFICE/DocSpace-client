@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 
 import { BaseTile } from "@onlyoffice/apps-ui-kit/components/tiles/base-tile";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import { useStore } from "SRC_DIR/store/useStore";
 
@@ -49,6 +50,8 @@ type TBaseTileProps = React.ComponentProps<typeof BaseTile>;
 type AiProjectTileProps = Omit<TBaseTileProps, "topContent" | "bottomContent" | "className" | "onRoomClick"> & {
   /** Opens the project: a click anywhere on the tile but its controls. */
   thumbnailClick?: (e: React.MouseEvent) => void;
+  /** Opens the owner's profile, from the owner's name. */
+  openUser?: () => void;
   /** Badges beside the title, in the upper half. */
   badges?: React.ReactNode;
   /** The tile's content; only the first element is rendered, above the badges. */
@@ -56,16 +59,16 @@ type AiProjectTileProps = Omit<TBaseTileProps, "topContent" | "bottomContent" | 
 };
 
 /** The parts of the tile a click on which is theirs, not the project's. */
-const CONTROLS = ".checkbox, .badges, .expandButton, .p-contextmenu, #modal-dialog";
+const CONTROLS = ".checkbox, .badges, .expandButton, .p-contextmenu, #modal-dialog, .ai-project-tile-owner";
 
 /**
  * An AI project (an agent) in the tile view, laid out as a room template's
  * tile: the logo and the name above, and below them what the project is made
- * of - its model, its skill sets and its knowledge bases. The list answers
+ * of - its model, its skill sets and its knowledge bases - and its owner. The list answers
  * the rooms without those settings, so the tile reads its own summary once
  * and shows a dash until it lands.
  */
-const AiProjectTile = ({ item, children, badges, thumbnailClick, ...rest }: AiProjectTileProps) => {
+const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...rest }: AiProjectTileProps) => {
   const { t } = useTranslation(["Common"]);
   const aiProjectsStore = useStore("aiProjectsStore");
   const checkboxContainerRef = useRef<HTMLDivElement>(null);
@@ -96,6 +99,8 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, ...rest }: AiPr
   const list = (names: string[] | undefined) => (names?.length ? names.join(", ") : "\u2014");
   const model = !summary ? "\u2014" : (summary.model ?? t("Common:Default"));
 
+  const owner = (item as { createdBy?: { displayName?: string } }).createdBy?.displayName;
+
   const rows = [
     { key: "model", label: t("Common:AIAgentModel"), value: model },
     { key: "skills", label: t("Common:SkillSets"), value: list(summary?.skills) },
@@ -122,6 +127,25 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, ...rest }: AiPr
           </Text>
         </React.Fragment>
       ))}
+      <Text truncate fontSize="13px" fontWeight={400} className={styles.label}>
+        {t("Common:Owner")}
+      </Text>
+      {owner ? (
+        <Link
+          isHovered
+          truncate
+          fontSize="13px"
+          fontWeight={600}
+          className={`${styles.value} ai-project-tile-owner`}
+          title={owner}
+          onClick={openUser}
+          dataTestId="ai-project-tile-owner"
+        >
+          {owner}
+        </Link>
+      ) : (
+        <span />
+      )}
     </div>
   );
 

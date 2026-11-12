@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // The agent tile takes the room template's tile as its model: the same
-// paddings and rhythm, with a third line in the lower half.
+// paddings and rhythm, with four lines in the lower half.
 .aiProjectTile {
-  max-height: 156px;
+  max-height: 184px;
   row-gap: 12px;
   padding: 12px 0;
 
@@ -57,9 +57,9 @@
       }
     }
 
-    // Three lines of 20px and the two gaps between them.
+    // Four lines of 20px and the three gaps between them.
     .bottomContent {
-      height: 76px;
+      height: 104px;
       width: 100%;
       box-sizing: border-box;
       overflow: hidden;

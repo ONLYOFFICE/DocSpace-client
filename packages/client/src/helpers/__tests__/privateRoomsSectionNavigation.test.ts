@@ -119,6 +119,12 @@ describe("Private section addresses without the section", () => {
       "/rooms/shared/filter?searchArea=Active",
       CategoryType.Shared,
     ],
+    [
+      "/private/filter",
+      "?page=1&searchArea=PrivateRooms&sortby=DateAndTime",
+      "/rooms/shared/filter?page=1&searchArea=Active&sortby=DateAndTime",
+      CategoryType.Shared,
+    ],
     ["/private/123", "", "/rooms/shared/123", CategoryType.SharedRoom],
     [
       "/private/123/filter",

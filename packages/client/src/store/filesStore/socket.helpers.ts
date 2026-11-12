@@ -647,13 +647,16 @@ export function redirectToParentImpl(
         const categoryType = getCategoryType(window.DocSpace.location);
         const isForms = categoryType === CategoryType.Form;
 
+        const isPrivateRoom = categoryType === CategoryType.PrivateRoom;
+
         const roomsFilter = RoomsFilter.getDefault();
         if (isForms) roomsFilter.searchArea = RoomSearchArea.Forms;
+        if (isPrivateRoom) roomsFilter.searchArea = RoomSearchArea.PrivateRooms;
 
         const path = getCategoryUrl(
           isForms
             ? CategoryType.Forms
-            : categoryType === CategoryType.PrivateRoom
+            : isPrivateRoom
               ? CategoryType.PrivateRooms
               : CategoryType.Shared,
         );

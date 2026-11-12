@@ -337,8 +337,13 @@ const getRoomsRequestScope = (
     case CategoryType.SharedRoom:
     case CategoryType.Archive:
     case CategoryType.ArchivedRoom: {
+      // A Rooms address may still carry the section's area, when a Private
+      // address was opened while the section is not available: it is the
+      // Rooms list all the same.
+      const isSectionArea = searchArea === RoomSearchArea.PrivateRooms;
       const isRoomsArea =
         !searchArea ||
+        isSectionArea ||
         searchArea === RoomSearchArea.Active ||
         searchArea === RoomSearchArea.Archive;
       if (!isRoomsArea) return null;
@@ -352,6 +357,7 @@ const getRoomsRequestScope = (
 
       return {
         privacyFilter: isArchive ? RoomPrivacyFilter.NotPrivate : null,
+        ...(isSectionArea && { searchArea: RoomSearchArea.Active }),
         lists: "notPrivate",
       };
     }

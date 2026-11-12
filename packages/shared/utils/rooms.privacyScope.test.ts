@@ -89,6 +89,16 @@ describe("getRoomsRequestScope", () => {
     });
   });
 
+  it("Section not available: a Rooms address with the section's area lists Rooms", () => {
+    expect(
+      getRoomsRequestScope(CategoryType.Shared, RoomSearchArea.PrivateRooms),
+    ).toEqual({
+      privacyFilter: null,
+      searchArea: RoomSearchArea.Active,
+      lists: "notPrivate",
+    });
+  });
+
   it.each([
     [CategoryType.Archive, RoomSearchArea.Archive],
     [CategoryType.ArchivedRoom, RoomSearchArea.Archive],

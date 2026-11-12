@@ -344,7 +344,11 @@ class UsersStore {
 
       const roomsFilter = RoomsFilter.getDefault(
         id,
-        isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
+        isArchive
+          ? RoomSearchArea.Archive
+          : isPrivate
+            ? RoomSearchArea.PrivateRooms
+            : RoomSearchArea.Active,
       );
       // fetchRooms(folderId, filter) — this caller has
       // always passed the filter in the folderId slot (the filter argument

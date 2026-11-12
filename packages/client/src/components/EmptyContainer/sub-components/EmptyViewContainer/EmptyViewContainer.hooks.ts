@@ -256,7 +256,11 @@ export const useOptions = (
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
   const onGoToPrivate = useCallback((): LinkProps => {
-    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+    const newFilter = RoomsFilter.getDefault(
+      userId,
+      RoomSearchArea.PrivateRooms,
+    );
+    newFilter.searchArea = RoomSearchArea.PrivateRooms;
 
     return {
       to: {

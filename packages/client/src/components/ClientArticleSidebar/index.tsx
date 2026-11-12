@@ -559,7 +559,7 @@ const ClientArticleSidebar = ({
         id: "private-rooms",
         label: t("Common:Private"),
         icon: CatalogPrivateReactSvgUrl,
-        ...nav(searchAreaUrl("/private/filter", RoomSearchArea.Active)),
+        ...nav(searchAreaUrl("/private/filter", RoomSearchArea.PrivateRooms)),
         badgeComponent: (
           <BetaBadge
             place="right-start"

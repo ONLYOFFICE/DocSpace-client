@@ -232,7 +232,10 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  if (request.nextUrl.pathname.includes("public-room")) {
+  if (
+    request.nextUrl.pathname.includes("public-room") ||
+    request.nextUrl.pathname === "/media-viewer"
+  ) {
     const validationResult = await handlePublicRoomValidation(
       request,
       requestHeaders,
@@ -317,6 +320,7 @@ export const config = {
     "/archive/:path*",
     "/settings",
     "/uploader",
+    "/media-viewer",
   ],
 };
 

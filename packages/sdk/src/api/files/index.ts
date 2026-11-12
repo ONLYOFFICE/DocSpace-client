@@ -185,7 +185,7 @@ export async function getFolder(
 
 		if (!res.ok) {
 			logger.error(`GET /files/${params} failed: ${res.status}`);
-			throw new Error("Failed to get folder");
+			throw new Error("Failed to get folder", { cause: res.status });
 		}
 
 		const resJson = await res.json();

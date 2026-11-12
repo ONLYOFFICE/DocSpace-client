@@ -513,6 +513,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           tif: "image/tiff",
           tiff: "image/tiff",
           heic: "image/heic",
+          heif: "image/heif",
           mp4: "video/mp4",
           webm: "video/webm",
           mp3: "audio/mpeg",

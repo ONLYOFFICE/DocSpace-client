@@ -12,7 +12,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Gate
 
-- [ ] 3.1 Archive this change on a scratch copy of `openspec/` and run `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` there and on the branch, so that no requirement of the main specs passes 500 characters after the archive. Verify: both green, recorded here with the date and the counts
+- [x] 3.1 Archive this change on a scratch copy of `openspec/` and run `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` there and on the branch, so that no requirement of the main specs passes 500 characters after the archive. Verify: both green, recorded here with the date and the counts. Done 2026-11-12: on the scratch copy the change archives (ten requirements added) and the validation passes, 19 of 19; on the branch 20 of 20
 - [ ] 3.2 After the archive: tick criterion 1.21 of `private-rooms-release-gate` with the name of the archived change. Verify: `npx -y @fission-ai/openspec@1.17.0 validate private-rooms-release-gate --strict`
 
 ## Workflow follow-up

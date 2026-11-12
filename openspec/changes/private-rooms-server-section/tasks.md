@@ -43,7 +43,7 @@ The server landed the section in `c866c055e1` (1.1), and its shape is recorded i
 
 ## 7. Integration
 
-- [ ] 7.1 Full client E2E private-room suite under Docker with the sidebar screenshots regenerated (`tests-dev`, `--update-snapshots=changed`), the pre-push gate, `npx -y @fission-ai/openspec@latest validate --all --strict`, and a check on a stand with `c866c055e1`: the root list, the sidebar, the move and copy picker, and the Private item's counter. Verify: green runs and the stand check recorded in design.md
+- [ ] 7.1 Full client E2E private-room suite under Docker with the sidebar screenshots regenerated (`tests-dev`, `--update-snapshots=changed`), the pre-push gate, `npx -y @fission-ai/openspec@latest validate --all --strict`, and a check on a stand with `c866c055e1`: the root list, the sidebar, the move and copy picker, and the Private item's counter. Verify: green runs and the stand check recorded in design.md. Runs of 2026-11-12 are recorded in design.md, "Integration runs of 2026-11-12": everything but the stand check is done, and no sidebar screenshot needed regenerating for this change
 
 ## Workflow follow-up
 

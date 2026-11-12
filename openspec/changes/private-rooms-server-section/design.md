@@ -243,6 +243,25 @@ Rooms and everything inside them keep the Rooms root type, so the checks made
 on an item or on a folder inside a room (sharing, links, quota, upload
 targets, the archive and restore destinations) are not affected.
 
+### Integration runs of 2026-11-12 (task 7.1)
+
+- Client, Docker `tests-dev`: the private-room specs, the keys pages and
+  `encrypted-file-ui.spec.ts` pass, 163 of 163.
+- Client, the whole suite: 907 passed, 330 failed. None of the failures comes
+  from this change. 329 are screenshot comparisons that fail on wording changed
+  outside it: the sidebar item "AI rooms" is "AI Workspace" since
+  `d81d6fb6564`, and the Dashboard, AI settings and integration texts moved
+  too; the Private item itself matches in every screenshot. One is
+  `unpaid-portal-requests.spec.ts`, which meets three AI price requests that
+  are not on its allowlist. The screenshots were not regenerated here: the
+  baselines belong to those changes.
+- SDK, a local production build: `__tests__/e2e/private` passes, 36 of 50, the
+  other 14 are fixme: eleven of `private-security.spec.ts` and three of
+  `private-rooms.spec.ts`.
+- The pre-push gate and `openspec validate --all --strict` (19 of 19) are
+  green.
+- Not done: the check on a stand with `c866c055e1`.
+
 ## Goals / Non-Goals
 
 **Goals:**

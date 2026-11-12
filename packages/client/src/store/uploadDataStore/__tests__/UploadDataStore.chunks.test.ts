@@ -661,6 +661,54 @@ describe("UploadDataStore.uploadFileChunks — failed chunk", () => {
     expect(signals).toHaveLength(3);
     expect(signals.every((s) => s.aborted)).toBe(true);
     expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].pendingFinalize).toBeUndefined();
+  });
+
+  it("remembers the session on the row when every chunk is stored and only finalize fails", async () => {
+    const { store } = createTestUploadDataStore({
+      filesSettingsStore: { uploadThreadCount: 2 },
+    });
+    const browserFile = makeBrowserFile("small.txt", 2000);
+    const entry = makeUploadFile({
+      uniqueId: "finalize-fail",
+      file: browserFile,
+      toFolderId: 42,
+      inAction: true,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    vi.mocked(filesApi.finalizeUploadSession).mockRejectedValue(
+      new Error("timeout of 30000ms exceeded"),
+    );
+
+    await expect(
+      store.uploadFileChunks(
+        "sess-1",
+        42,
+        [new FormData(), new FormData()],
+        2000,
+        0,
+        browserFile,
+        [7, 42],
+        t,
+        "op-1",
+        42,
+        true,
+      ),
+    ).rejects.toThrow("timeout of 30000ms exceeded");
+
+    expect(store.files[0].pendingFinalize).toEqual({
+      sessionId: "sess-1",
+      path: [7, 42],
+    });
   });
 });
 

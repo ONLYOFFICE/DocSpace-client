@@ -38,6 +38,7 @@ import {
   createTestUploadDataStore,
   installWindowGlobals,
   makeBrowserFile,
+  makeFileInfo,
   makePrivateUploadTarget,
   makeUploadFile,
 } from "./testHarness";
@@ -155,6 +156,128 @@ describe("UploadDataStore.retryUploadFiles", () => {
 
     expect(parallelSpy).toHaveBeenCalledTimes(1);
     expect(parallelSpy).toHaveBeenCalledWith([store.files[0]], t);
+  });
+
+  it("finalizes the stored session again instead of re-uploading when only finalize failed", async () => {
+    const { store } = createTestUploadDataStore();
+    const parallelSpy = stubStoreMethod(store, "parallelUploading");
+    stubStoreMethod(store, "refreshFiles");
+    const finishSpy = stubStoreMethod(store, "finishUploadFiles");
+
+    const failed = makeUploadFile({
+      uniqueId: "f1",
+      action: "upload",
+      toFolderId: 42,
+      error: "timeout of 30000ms exceeded",
+      inAction: true,
+      pendingFinalize: { sessionId: "sess-1", path: [7, 42] },
+    });
+    store.files = [failed];
+    store.uploadedFilesHistory = [{ ...failed, errorShown: true }];
+    store.uploaded = true;
+
+    const serverFile = makeFileInfo({ id: 777, folderId: 42, version: 1 });
+    asMock(filesApi.finalizeUploadSession).mockResolvedValue({
+      uploaded: true,
+      id: 777,
+      file: serverFile,
+    });
+
+    await store.retryUploadFiles(t, "f1");
+
+    expect(asMock(filesApi.finalizeUploadSession).mock.calls).toEqual([
+      [42, "sess-1"],
+    ]);
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(filesApi.uploadChunkParallel).not.toHaveBeenCalled();
+    expect(parallelSpy).not.toHaveBeenCalled();
+
+    expect(store.files[0]).toMatchObject({
+      action: "uploaded",
+      fileId: 777,
+      error: "",
+      pendingFinalize: null,
+    });
+    expect(store.uploadedFilesHistory[0]).toMatchObject({
+      action: "uploaded",
+      fileId: 777,
+      error: "",
+    });
+    expect(store.currentUploadNumber).toBe(0);
+    expect(finishSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("falls back to a full re-upload when the session is already closed on the server", async () => {
+    const { store } = createTestUploadDataStore();
+    const parallelSpy = stubStoreMethod(store, "parallelUploading");
+    const finishSpy = stubStoreMethod(store, "finishUploadFiles");
+
+    const failed = makeUploadFile({
+      uniqueId: "f1",
+      action: "upload",
+      toFolderId: 42,
+      error: "timeout of 30000ms exceeded",
+      inAction: true,
+      pendingFinalize: { sessionId: "sess-1", path: [42] },
+    });
+    store.files = [failed];
+    store.uploadedFilesHistory = [{ ...failed, errorShown: true }];
+    store.uploaded = true;
+
+    asMock(filesApi.finalizeUploadSession).mockRejectedValue(
+      Object.assign(new Error("Not found"), {
+        isAxiosError: true,
+        response: { status: 404 },
+      }),
+    );
+
+    await store.retryUploadFiles(t, "f1");
+
+    expect(store.files[0]).toMatchObject({
+      action: "upload",
+      error: "",
+      inAction: false,
+      pendingFinalize: null,
+    });
+    expect(store.currentUploadNumber).toBe(0);
+    expect(parallelSpy).toHaveBeenCalledTimes(1);
+    expect(parallelSpy).toHaveBeenCalledWith([store.files[0]], t);
+    expect(finishSpy).not.toHaveBeenCalled();
+  });
+
+  it("keeps the session for the next retry when finalize fails again", async () => {
+    const { store } = createTestUploadDataStore();
+    const parallelSpy = stubStoreMethod(store, "parallelUploading");
+    const finishSpy = stubStoreMethod(store, "finishUploadFiles");
+
+    const failed = makeUploadFile({
+      uniqueId: "f1",
+      action: "upload",
+      toFolderId: 42,
+      error: "timeout of 30000ms exceeded",
+      inAction: true,
+      pendingFinalize: { sessionId: "sess-1", path: [42] },
+    });
+    store.files = [failed];
+    store.uploadedFilesHistory = [{ ...failed, errorShown: true }];
+    store.uploaded = true;
+
+    asMock(filesApi.finalizeUploadSession).mockRejectedValue(
+      new Error("Network Error"),
+    );
+
+    await store.retryUploadFiles(t, "f1");
+
+    expect(store.files[0]).toMatchObject({
+      action: "upload",
+      error: "Network Error",
+      pendingFinalize: { sessionId: "sess-1", path: [42] },
+    });
+    expect(store.uploadedFilesHistory[0].error).toBe("Network Error");
+    expect(store.currentUploadNumber).toBe(0);
+    expect(parallelSpy).not.toHaveBeenCalled();
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(finishSpy).toHaveBeenCalledTimes(1);
   });
 
   it("routes a failed conversion retry through convertFile and leaves upload state alone", async () => {

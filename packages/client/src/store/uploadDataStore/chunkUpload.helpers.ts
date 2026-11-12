@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import axios from "axios";
 import { runInAction, when } from "mobx";
 import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 import {
@@ -62,7 +63,11 @@ import type { TTranslation } from "@docspace/shared/types";
 import i18n from "../../i18n";
 
 import { acquireUploadAutoLockSuspension } from "./helpers";
-import type { TUploadBrowserFile, TUploadFile } from "./helpers";
+import type {
+  TPendingFinalize,
+  TUploadBrowserFile,
+  TUploadFile,
+} from "./helpers";
 import type {
   default as UploadDataStore,
   TAxiosLikeError,
@@ -338,6 +343,76 @@ export async function asyncUploadImpl(
   }
 }
 
+function markPendingFinalize(
+  self: UploadDataStore,
+  file: TUploadBrowserFile,
+  pendingFinalize: TPendingFinalize,
+) {
+  runInAction(() => {
+    const row = self.files.find((f) => f.file === file);
+    if (row) row.pendingFinalize = pendingFinalize;
+  });
+}
+
+const isChunkUploadResponse = (res: unknown): res is TChunkUploadResponse =>
+  typeof res === "object" && res !== null && "uploaded" in res;
+
+const isUploadSessionGone = (error: unknown) =>
+  axios.isAxiosError(error) && error.response?.status === 404;
+
+export async function retryFinalizeImpl(
+  self: UploadDataStore,
+  uniqueId: string,
+  pendingFinalize: TPendingFinalize,
+  t: TTranslation,
+) {
+  const indexOfFile = self.files.findIndex((f) => f.uniqueId === uniqueId);
+  const row = self.files[indexOfFile];
+  if (!row) return;
+
+  runInAction(() => {
+    row.inAction = true;
+    self.currentUploadNumber += 1;
+  });
+
+  try {
+    const res = await finalizeUploadSession(
+      row.toFolderId!,
+      pendingFinalize.sessionId,
+    );
+    if (!isChunkUploadResponse(res)) {
+      throw new Error(t("Common:UnexpectedError"));
+    }
+
+    runInAction(() => {
+      row.pendingFinalize = null;
+    });
+    self.checkChunkUpload({
+      t,
+      res,
+      index: 1,
+      indexOfFile,
+      path: pendingFinalize.path,
+      chunksLength: 1,
+      resolve: () => Promise.resolve(),
+    });
+  } catch (error) {
+    if (isUploadSessionGone(error)) {
+      runInAction(() => {
+        row.pendingFinalize = null;
+        row.inAction = false;
+        self.currentUploadNumber -= 1;
+      });
+      self.parallelUploading([row], t);
+      return;
+    }
+
+    failUploadSession(self, indexOfFile, error, t, true);
+  } finally {
+    settleUploadQueue(self, t);
+  }
+}
+
 export async function uploadFileChunksImpl(
   self: UploadDataStore,
   sessionId: string,
@@ -410,6 +485,10 @@ export async function uploadFileChunksImpl(
       await promise;
     } catch (error) {
       controller.abort();
+      const sentChunks = self.asyncUploadObj[operationId]?.chunksArray;
+      if (sentChunks?.every((x) => x.isFinalize || x.isFinished)) {
+        markPendingFinalize(self, file, { sessionId, path });
+      }
       throw error;
     } finally {
       stopWatchingCancel();

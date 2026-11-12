@@ -277,6 +277,29 @@ ui-kit build was merged in, with the test images rebuilt:
   ("Report failed, then the editor closed"): on desktop and tablet in one
   run, on desktop only in the next.
 
+### Stand check of 2026-11-12 (task 7.1)
+
+On the owner's local stand, through the browser, with the client of this
+branch:
+
+- `files/@root` lists the Private root (type 42) after Forms and
+  `files/@private` answers it. The Private list opens with
+  `searchArea=PrivateRooms` and is answered under that root, while its rooms
+  keep the Rooms root and parent. The Rooms list holds no private room.
+- The sidebar shows Private after Forms, with its Archive, which opens with
+  `searchArea=Archive`.
+- The move picker of a folder in a private room starts at the room and has
+  no root. The copy picker of a file starts at Private, its root lists
+  Files, Rooms, Forms and Private, Rooms lists the ordinary room only, and a
+  copy into another private room is stored there encrypted under a new
+  opaque name, readable in that room, with the source left in place.
+- Room groups: a group is created from the Private list out of private
+  rooms only, belongs to the `PrivateRooms` area, is not listed in Rooms,
+  filters the list by its chip, and add-to-group from a room's menu lists it
+  and adds the room.
+- Not checked: the count of new items on the Private item, which needs a
+  second user on the stand. Unit and E2E tests cover it.
+
 ## Goals / Non-Goals
 
 **Goals:**

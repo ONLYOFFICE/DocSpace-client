@@ -213,9 +213,9 @@ describe("A locked key is shown in a private room", () => {
     expect(screen.queryByTestId(BAR)).toBeNull();
   });
 
-  it("is not shown for another folder's answer", () => {
+  it("is not shown for another room's answer", () => {
     runInAction(() => {
-      roomUnlockRequest.settledFolderId = ROOM + 1;
+      roomUnlockRequest.settledRoomId = ROOM + 1;
     });
     renderBar();
 

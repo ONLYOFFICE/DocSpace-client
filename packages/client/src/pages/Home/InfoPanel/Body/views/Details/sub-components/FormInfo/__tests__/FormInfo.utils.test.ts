@@ -33,9 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export interface AskAIConnectDialogProps {
-  visible: boolean;
-  callback?: (event: string) => void;
-  setAskAIConnectDialogVisible: (visible: boolean) => void;
-}
+import { describe, expect, it } from "vitest";
 
+import { canShowAICard } from "../FormInfo.utils";
+
+const saas = {
+  isStandalone: false,
+  externalDbEnabled: false,
+  aiReady: true,
+};
+
+describe("canShowAICard", () => {
+  it("hides the connect-a-database prompt in SaaS", () => {
+    expect(canShowAICard(saas)).toBe(false);
+  });
+
+  it("keeps the connect-a-database prompt in standalone", () => {
+    expect(canShowAICard({ ...saas, isStandalone: true })).toBe(true);
+  });
+
+  it("shows the card in SaaS while no AI provider is connected", () => {
+    expect(canShowAICard({ ...saas, aiReady: false })).toBe(true);
+  });
+
+  it("shows the card in SaaS once the external database is enabled", () => {
+    expect(canShowAICard({ ...saas, externalDbEnabled: true })).toBe(true);
+  });
+});

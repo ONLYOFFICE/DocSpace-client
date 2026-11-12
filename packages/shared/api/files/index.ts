@@ -85,6 +85,7 @@ import type {
   TUploadBackup,
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
+  TFormFieldChangesRequest,
   TShareToUser,
   TDefaultTemplate,
   UpdateXlsxResponse,
@@ -1986,6 +1987,22 @@ export async function getConnectingStorages(paramsString?: string) {
   })) as TConnectingStorages;
 
   return res;
+}
+
+// keepalive: sent while the page is closing, the request outlives the page instead of being cancelled with it. The
+// filling waits for the report, so a server that does not answer is not waited for long.
+export async function reportFormFieldChanges(
+  fileId: string | number,
+  data: TFormFieldChangesRequest,
+  keepalive = false,
+): Promise<void> {
+  await request({
+    method: "put",
+    url: `files/file/${fileId}/fieldchanges`,
+    data,
+    timeout: 10000,
+    ...(keepalive && { adapter: "fetch", fetchOptions: { keepalive: true } }),
+  });
 }
 
 export async function startFilling(fileId: string | number): Promise<void> {

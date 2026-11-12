@@ -1620,6 +1620,7 @@ class FilesStore {
     switch (this.selectedFolderStore.rootFolderType) {
       case FolderType.USER:
       case FolderType.Rooms:
+      case FolderType.PrivateRooms:
         return true;
       case FolderType.SHARE: {
         const canCreateInSharedFolder = this.selectedFolderStore.access === 1;

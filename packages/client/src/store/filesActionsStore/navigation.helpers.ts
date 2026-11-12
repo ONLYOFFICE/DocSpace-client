@@ -130,6 +130,10 @@ self: FilesActionStore
     filter.searchArea = RoomSearchArea.Forms;
   }
 
+  if (correctCategoryType === CategoryType.PrivateRooms) {
+    filter.searchArea = RoomSearchArea.PrivateRooms;
+  }
+
   if (correctCategoryType === CategoryType.AiHub) {
     filter.searchArea = RoomSearchArea.AiHub;
   }

@@ -40,13 +40,23 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 
+/**
+ * The request of a private page's list. The active private rooms are the
+ * list of the Private section, asked through its own area; the Archive has
+ * no private area, so the archived ones keep the privacy filter.
+ * Spec: private-rooms/server-contract, "Rooms list privacy filter"
+ */
 export function applyPrivateRoomsFilter(
   filter: RoomsFilter,
   searchArea: RoomSearchArea = RoomSearchArea.Active,
 ): RoomsFilter {
+  const isArchive = searchArea === RoomSearchArea.Archive;
+
   filter.type = String(RoomsType.CustomRoom);
-  filter.searchArea = searchArea;
-  filter.privacyFilter = RoomPrivacyFilter.Private;
+  filter.searchArea = isArchive
+    ? RoomSearchArea.Archive
+    : RoomSearchArea.PrivateRooms;
+  filter.privacyFilter = isArchive ? RoomPrivacyFilter.Private : null;
   return filter;
 }
 

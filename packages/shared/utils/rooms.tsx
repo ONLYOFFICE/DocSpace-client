@@ -299,53 +299,67 @@ const getFetchedRoomParams = (
 };
 
 export type TRoomsRequestScope = {
-  privacyFilter: RoomPrivacyFilter;
+  /** The filter the request carries; `null` sends none. */
+  privacyFilter: RoomPrivacyFilter | null;
   searchArea?: RoomSearchArea;
+  /** Whether the list holds the private rooms or the others. */
+  lists: "private" | "notPrivate";
 };
 
 /**
  * What a rooms-list request must carry for the address it was made from. The
- * Private section lists only private rooms, in the area its address names;
- * Rooms and Rooms -> Archive list none, whether that section is available or
- * not. Templates, Forms and AI agents searches are left alone.
+ * Private section is the server's `PrivateRooms` area, and its Archive the
+ * shared Archive with the private filter. The Rooms area never returns a
+ * private room, so Rooms sends no filter, and Rooms -> Archive, which holds
+ * both, sends the non-private one. Templates, Forms and AI agents searches
+ * are left alone.
  */
 const getRoomsRequestScope = (
   categoryType: ValueOf<typeof CategoryType>,
   searchArea: RoomSearchArea | string | undefined,
-  isPrivateRoomsSectionAvailable: boolean,
 ): TRoomsRequestScope | null => {
   switch (categoryType) {
+    // Spec: private-rooms/sidebar-section, "Section lists only private rooms"
     case CategoryType.PrivateRooms:
     case CategoryType.PrivateRoom:
       return {
-        privacyFilter: RoomPrivacyFilter.Private,
-        searchArea: RoomSearchArea.Active,
+        privacyFilter: null,
+        searchArea: RoomSearchArea.PrivateRooms,
+        lists: "private",
       };
     case CategoryType.PrivateArchive:
       return {
         privacyFilter: RoomPrivacyFilter.Private,
         searchArea: RoomSearchArea.Archive,
+        lists: "private",
       };
     case CategoryType.Shared:
     case CategoryType.SharedRoom:
     case CategoryType.Archive:
     case CategoryType.ArchivedRoom: {
+      // A Rooms address may still carry the section's area, when a Private
+      // address was opened while the section is not available: it is the
+      // Rooms list all the same.
+      const isSectionArea = searchArea === RoomSearchArea.PrivateRooms;
       const isRoomsArea =
         !searchArea ||
+        isSectionArea ||
         searchArea === RoomSearchArea.Active ||
         searchArea === RoomSearchArea.Archive;
       if (!isRoomsArea) return null;
 
-      // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available"
+      // Spec: private-rooms/sidebar-section, "Rooms section never lists private rooms"
       const isArchive =
         searchArea === RoomSearchArea.Archive ||
         (!searchArea &&
           (categoryType === CategoryType.Archive ||
             categoryType === CategoryType.ArchivedRoom));
 
-      return isPrivateRoomsSectionAvailable || isArchive
-        ? { privacyFilter: RoomPrivacyFilter.NotPrivate }
-        : null;
+      return {
+        privacyFilter: isArchive ? RoomPrivacyFilter.NotPrivate : null,
+        ...(isSectionArea && { searchArea: RoomSearchArea.Active }),
+        lists: "notPrivate",
+      };
     }
     default:
       return null;

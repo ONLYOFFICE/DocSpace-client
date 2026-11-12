@@ -233,9 +233,12 @@ const SectionFilterContent = ({
     [isFormsSection, isPrivateSection, location],
   );
 
+  // Spec: private-rooms/sidebar-section, "Room groups in the section"
   const roomGroupsSearchArea = isFormsSection
     ? RoomSearchArea.Forms
-    : RoomSearchArea.Active;
+    : isPrivateSection
+      ? RoomSearchArea.PrivateRooms
+      : RoomSearchArea.Active;
 
   const getRoomGroupsForSection = React.useCallback(
     () => getAllRoomGroups(roomGroupsSearchArea),
@@ -1863,9 +1866,7 @@ const SectionFilterContent = ({
       onFilterByGroup={onFilterByGroup}
       currentGroupId={getPinnedGroupId() ? null : roomsFilter?.groupId}
       withRoomGroups={
-        (isRoomsFolder || isFormsFolder) &&
-        !isPrivateSection &&
-        !getPinnedGroupId()
+        (isRoomsFolder || isFormsFolder) && !getPinnedGroupId()
       }
       isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}

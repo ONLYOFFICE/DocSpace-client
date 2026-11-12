@@ -101,6 +101,16 @@ export function getAutoLockTimeoutSeconds(): number {
   return parsed;
 }
 
+const changeListeners = new Set<() => void>();
+
+// Spec: private-rooms/key-management, "A newly picked auto-lock preset applies at once"
+export function subscribeAutoLockChange(listener: () => void): () => void {
+  changeListeners.add(listener);
+  return () => {
+    changeListeners.delete(listener);
+  };
+}
+
 export function setAutoLockTimeoutSeconds(seconds: number): void {
   const storage = readStorage();
   if (!storage) return;
@@ -109,6 +119,7 @@ export function setAutoLockTimeoutSeconds(seconds: number): void {
     Math.min(MAX_AUTO_LOCK_SECONDS, Math.floor(seconds)),
   );
   storage.setItem(storageKey(), String(clamped));
+  Array.from(changeListeners).forEach((listener) => listener());
 }
 
 export function setAutoLockPreset(id: AutoLockPresetId): void {

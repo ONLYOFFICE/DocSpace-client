@@ -1,0 +1,19 @@
+# Tasks
+
+One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). No locale changes. Keep the pre-push gate in mind: tsc, biome, locale tests, shared, client and sdk unit tests must stay green.
+
+## 1. Fixes
+
+- [ ] 1.1 Client: make "Forget device" lock the identity after the remembered record is removed (design decision 1), in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx`. Verify: cases "Forget device while unlocked" and "Forget device while locked" in `keys-management/__tests__/KeysManagement.test.tsx` (`cd packages/client && pnpm exec vitest run src/pages/Profile/Section/Body/sub-components/keys-management`); `pnpm exec tsc` in client
+- [ ] 1.2 Shared: announce a preset change from `packages/shared/services/encryption/auto-lock-preference.ts` and restart the idle timer of `packages/shared/context/encryption/EncryptionContext.tsx` on it (design decision 2). Verify: a subscription case in `services/encryption/__tests__/auto-lock-preference.test.ts`, cases "Shorter preset picked while unlocked" and "Longer preset picked while unlocked" in `context/encryption/__tests__/EncryptionContext.test.tsx` with fake timers (`cd packages/shared && pnpm exec vitest run services/encryption/__tests__/auto-lock-preference.test.ts context/encryption`); `pnpm exec tsc` in shared, client, sdk, doceditor, login and management
+- [ ] 1.3 Client: key the entry request by the room (design decision 3) in `packages/client/src/components/EncryptionProviderWrapper.jsx`, `packages/client/src/helpers/roomUnlockRequest.ts` and `packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx`; check that the room id is known when a link opens a subfolder directly. Verify: cases "Subfolder after a cancelled prompt", "Back to the root of the room" and "Another private room" in `components/__tests__/EncryptionProviderWrapper.test.tsx`, the existing cases of the bar still passing (`cd packages/client && pnpm exec vitest run src/components/__tests__/EncryptionProviderWrapper.test.tsx src/pages/Home/Section/Body`); `pnpm exec tsc` in client
+- [ ] 1.4 E2E: add the case "Subfolder after a cancelled prompt" to `packages/client/__tests__/private-room-access.spec.ts`. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test __tests__/private-room-access.spec.ts --reporter=line`, run on its own
+
+## 2. Gate
+
+- [ ] 2.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
+
+## Workflow follow-up
+
+- Archive after 2.1.
+- Not checked by any test here: the three behaviours by hand in a browser.

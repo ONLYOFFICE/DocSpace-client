@@ -268,7 +268,7 @@ test.describe("Private room — invite entry point", () => {
     await expect(panel.getByText(DAN.displayName)).toBeVisible();
     await expect(panel.getByText(CAROL.displayName)).toHaveCount(0);
   });
-  test("Invitee without a key named: the panel names the invitee left out before the grant and shares the files with the one it added", async ({
+  test("Mixed invitation: the panel names the invitee left out before the grant and shares the files with the one it added", async ({
     page,
     mockRequest,
     baseUrl,

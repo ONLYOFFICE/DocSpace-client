@@ -1059,8 +1059,12 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
   });
 
   // The two fixme cases reach the destination room through the picker's
-  // Rooms list, which holds no private room on the server. They wait for the
-  // Private entry of the picker (private-rooms-server-section, task 3.5).
+  // Rooms list, which holds no private room on the server. The kit's picker
+  // has a Private entry for them (`withPrivateTreeFolder`), and with it they
+  // pass; the SDK does not turn it on yet, because its path then starts at
+  // Private and the root of the SDK's picker does not load its entries, so
+  // an ordinary room could no longer be reached ("Destination outside
+  // private rooms"). private-rooms-server-section, task 6.1.
   test.fixme("Copy into another private room", async ({
     page,
     baseUrl,

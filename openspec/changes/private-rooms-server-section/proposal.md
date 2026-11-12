@@ -74,6 +74,11 @@ None.
     section".
   - "New-items counts include private rooms" counts on the Private root.
   - "Server-built room links" is unchanged.
+- `private-rooms/file-operations`: "Destination picker lists private rooms
+  under a Private entry" is added, since the Rooms list of the picker holds
+  no private room on the server.
+- `private-rooms/sdk-surface`: "SDK copy picker lists private rooms under a
+  Private entry" is added for the same reason.
 
 ## Impact
 

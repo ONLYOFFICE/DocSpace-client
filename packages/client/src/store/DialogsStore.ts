@@ -497,10 +497,6 @@ class DialogsStore {
 
   pauseSubmissionsDialogVisible = false;
 
-  askAIConnectDialogVisible = false;
-
-  askAIConnectDialogCallback: Nullable<(res: string) => void> = null;
-
   pauseSubmissionsDialogCallback: Nullable<(res: boolean) => void> = null;
 
   roomGroups: IRoomGroup[] = [];
@@ -1421,14 +1417,6 @@ class DialogsStore {
 
   deleteRoomGroup = async (groupId: string) => {
     await deleteRoomGroup(groupId);
-  };
-
-  setAskAIConnectDialogVisible = (
-    visible: boolean,
-    callback: Nullable<(res: string) => void> = null,
-  ) => {
-    this.askAIConnectDialogVisible = visible;
-    this.askAIConnectDialogCallback = callback;
   };
 
   setSyncDbForms = (data: {

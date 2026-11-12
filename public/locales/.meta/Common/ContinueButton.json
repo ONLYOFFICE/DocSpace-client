@@ -18,12 +18,6 @@
       "module": "@onlyoffice/apps-ui-kit"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/AskAIConnectDialog/index.tsx",
-      "line_number": 117,
-      "context": "scale\n key=\"ContinueButton\"\n onClick={onContinue}\n size={ButtonSize.normal}\n id=\"ask-ai-connect-dialog_continue\"\n label={t(\"Common:ContinueButton\")}\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );\n };",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CloseEditIndexDialog/index.tsx",
       "line_number": 92,
       "context": "{t(\"Files:ExitWithoutSavingDescription\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onClickContinue}\n testId=\"close_edit_index_dialog_continue\"",

@@ -25,7 +25,10 @@ vi.mock("react-i18next", () => ({
 
 import { RoomsType } from "@docspace/shared/enums";
 
-import AiTemplatesCatalog, { groupTemplates } from "../index";
+import AiTemplatesCatalog, {
+  filterTemplates,
+  getTemplateCategories,
+} from "../index";
 
 const catalog = {
   agents: [
@@ -121,7 +124,7 @@ describe("AiTemplatesCatalog", () => {
   });
 });
 
-describe("groupTemplates", () => {
+describe("the catalog's categories and search", () => {
   const template = (name: string, category: string) =>
     ({ ...catalog.agents[0], id: name, name, category, description: `${name} does` }) as never;
   const list = [
@@ -129,22 +132,21 @@ describe("groupTemplates", () => {
     template("Pitch", "Presentation"),
     template("Writer", "Document"),
   ];
-  const shape = (search: string) =>
-    groupTemplates(list, search).map(({ category, templates }) => [
-      category,
-      templates.map(({ name }) => name),
-    ]);
+  const names = (search: string, category: string | null) =>
+    filterTemplates(list, search, category).map(({ name }) => name);
 
-  it("groups the templates by category, in the order the categories appear", () => {
-    expect(shape("")).toEqual([
-      ["Document", ["Reviewer", "Writer"]],
-      ["Presentation", ["Pitch"]],
-    ]);
+  it("lists the categories in the order they appear", () => {
+    expect(getTemplateCategories(list)).toEqual(["Document", "Presentation"]);
   });
 
-  it("keeps the templates whose name, description or category holds the search text", () => {
-    expect(shape(" writ ")).toEqual([["Document", ["Writer"]]]);
-    expect(shape("PRESENTATION")).toEqual([["Presentation", ["Pitch"]]]);
-    expect(shape("nothing")).toEqual([]);
+  it("keeps the templates of the chosen category, or all of them", () => {
+    expect(names("", null)).toEqual(["Reviewer", "Pitch", "Writer"]);
+    expect(names("", "Document")).toEqual(["Reviewer", "Writer"]);
+  });
+
+  it("combines the category with the search text", () => {
+    expect(names(" writ ", "Document")).toEqual(["Writer"]);
+    expect(names("writ", "Presentation")).toEqual([]);
+    expect(names("PRESENTATION", null)).toEqual(["Pitch"]);
   });
 });

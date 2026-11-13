@@ -39,6 +39,7 @@ import { useLocation, useNavigate } from "react-router";
 
 import { ReactSVG } from "react-svg";
 
+import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
@@ -102,31 +103,28 @@ export const getListTemplates = (
   }
 };
 
+/** The categories of the templates, in the order they first appear. */
+export const getTemplateCategories = (templates: TAiTemplate[]): string[] =>
+  Array.from(new Set(templates.map(({ category }) => category)));
+
 /**
- * The templates whose name, description or category holds the search text,
- * grouped by category in the order the categories first appear.
+ * The templates of a category (all of them for `null`) whose name,
+ * description or category holds the search text.
  */
-export const groupTemplates = (
+export const filterTemplates = (
   templates: TAiTemplate[],
   search: string,
-): { category: string; templates: TAiTemplate[] }[] => {
+  category: string | null,
+): TAiTemplate[] => {
   const query = search.trim().toLowerCase();
-  const groups = new Map<string, TAiTemplate[]>();
-  for (const template of templates) {
-    const { name, description, category } = template;
-    if (
-      query &&
-      ![name, description, category].some((text) =>
-        text.toLowerCase().includes(query),
-      )
-    )
-      continue;
-    groups.set(category, [...(groups.get(category) ?? []), template]);
-  }
-  return Array.from(groups, ([category, list]) => ({
-    category,
-    templates: list,
-  }));
+  return templates.filter(
+    (template) =>
+      (category === null || template.category === category) &&
+      (!query ||
+        [template.name, template.description, template.category].some((text) =>
+          text.toLowerCase().includes(query),
+        )),
+  );
 };
 
 /** What a card lists under the description: the linked templates of an agent, the files of the others. */
@@ -169,6 +167,7 @@ const AiTemplatesCatalog = () => {
   );
   const [failed, setFailed] = React.useState(false);
   const [search, setSearch] = React.useState("");
+  const [category, setCategory] = React.useState<string | null>(null);
   const [installingId, setInstallingId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -231,7 +230,27 @@ const AiTemplatesCatalog = () => {
     </Text>
   );
 
-  const groups = groupTemplates(getListTemplates(catalog, listType), search);
+  const listTemplates = getListTemplates(catalog, listType);
+  const categories = getTemplateCategories(listTemplates);
+  // A category the list does not have (the list changed) shows them all.
+  const activeCategory =
+    category !== null && categories.includes(category) ? category : null;
+  const shown = filterTemplates(listTemplates, search, activeCategory);
+
+  const tab = (value: string | null, label: string) => (
+    <SelectedItem
+      key={value ?? "all"}
+      propKey={value ?? "all"}
+      label={label}
+      onClick={() => setCategory(value)}
+      onClose={() => {}}
+      hideCross
+      clickable
+      isActive={activeCategory === value}
+      className={styles.tab}
+      dataTestId="ai-templates-category"
+    />
+  );
 
   const card = (template: TAiTemplate) => (
         <div
@@ -314,23 +333,17 @@ const AiTemplatesCatalog = () => {
         onChange={setSearch}
         onClearSearch={() => setSearch("")}
       />
-      {groups.length === 0 ? (
+      <div className={styles.tabs} data-testid="ai-templates-categories">
+        {tab(null, t("Common:All"))}
+        {categories.map((value) => tab(value, value))}
+      </div>
+      {shown.length === 0 ? (
         <Text className={styles.message} data-testid="ai-templates-empty">
           {t("Common:NotFoundTitle")}
         </Text>
-      ) : null}
-      {groups.map(({ category, templates }) => (
-        <section
-          key={category}
-          className={styles.group}
-          data-testid="ai-templates-group"
-        >
-          <Text as="h3" fontSize="16px" fontWeight={700} className={styles.heading}>
-            {category}
-          </Text>
-          <div className={styles.catalog}>{templates.map(card)}</div>
-        </section>
-      ))}
+      ) : (
+        <div className={styles.catalog}>{shown.map(card)}</div>
+      )}
     </div>
   );
 };

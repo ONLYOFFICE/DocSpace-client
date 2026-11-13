@@ -38,13 +38,13 @@ import { describe, expect, it } from "vitest";
 import { getQuickActionsSection } from "../quickActions";
 
 describe("getQuickActionsSection — Private section", () => {
-  it("Banner on a non-empty Private list: the Private list root", () => {
+  it("Banner on a non-empty Private list: the Private list root has none", () => {
     expect(
       getQuickActionsSection({
         isRoomsFolder: true,
         isPrivateRoomsSection: true,
       }),
-    ).toBe("private-rooms");
+    ).toBeNull();
   });
 
   it("Row link of the Rooms list: a room loaded under the Private list address gets no Private room tile", () => {
@@ -72,7 +72,7 @@ describe("getQuickActionsSection — Private section", () => {
     ).toBeNull();
   });
 
-  it("keeps the file tiles inside a private room", () => {
+  it("Banner inside a private room: keeps the file tiles", () => {
     expect(
       getQuickActionsSection({ isRoom: true, isPrivacyFolder: true }),
     ).toBe("private");

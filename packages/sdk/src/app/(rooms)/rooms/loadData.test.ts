@@ -54,8 +54,7 @@ describe("loadRoomsPageData", () => {
       {},
     );
 
-    expect(getRooms.mock.calls[0][0].privacyFilter).toBe(
-      RoomPrivacyFilter.NotPrivate,
-    );
+    // The Rooms area never returns a private room, so no filter is sent.
+    expect(getRooms.mock.calls[0][0].privacyFilter).toBeNull();
   });
 });

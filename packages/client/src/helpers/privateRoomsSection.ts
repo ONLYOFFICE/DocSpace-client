@@ -34,6 +34,7 @@
  */
 
 import { CategoryType } from "@docspace/shared/constants";
+import { RoomSearchArea } from "@docspace/shared/enums";
 import { getCategoryType } from "@docspace/shared/utils/common";
 
 const PRIVATE_LIST = "/private";
@@ -73,7 +74,14 @@ export const getRoomsAddressOfPrivateAddress = ({
       ? [PRIVATE_ARCHIVE, "/rooms/archived"]
       : [PRIVATE_LIST, "/rooms/shared"];
 
-  return `${to}${pathname.slice(from.length)}${search}`;
+  // The section's own area must not travel to Rooms: there it would ask
+  // for the private rooms again.
+  const roomsSearch = search.replace(
+    `searchArea=${RoomSearchArea.PrivateRooms}`,
+    `searchArea=${RoomSearchArea.Active}`,
+  );
+
+  return `${to}${pathname.slice(from.length)}${roomsSearch}`;
 };
 
 /**

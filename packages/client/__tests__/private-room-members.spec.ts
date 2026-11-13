@@ -53,6 +53,7 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import type { Page } from "@playwright/test";
+import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
@@ -255,6 +256,17 @@ test.describe("Private room — pending access", () => {
     await expect(page.getByTestId("invite_panel_result_pending")).toBeVisible({
       timeout: 30000,
     });
+    await test.step("Re-encryption ends with a file left out", async () => {
+      await expect(
+        // The upload of the file is still listed, so the indicator counts both.
+        page.getByRole("progressbar", { name: "Processes: 2" }),
+      ).toBeVisible();
+      await expect(
+        page
+          .getByRole("alert")
+          .filter({ hasText: "could not be made available" }),
+      ).toHaveCount(1);
+    });
     await page.getByTestId("invite_panel_close_button").click();
 
     await page.locator(".info-panel-toggle").click();
@@ -268,13 +280,28 @@ test.describe("Private room — pending access", () => {
     ]);
 
     failKeyWrites = false;
-    await page.getByTestId("info_panel_members_user_retry_access").click();
-    await unlockIfPrompted(page, passphrase);
+    const retry = page.getByRole("button", {
+      // The mocked members list names a member by its id.
+      name: `Try again for ${CAROL.id}`,
+    });
+    await test.step("Retry from the keyboard", async () => {
+      await retry.focus();
+      await page.keyboard.press("Enter");
+      await unlockIfPrompted(page, passphrase);
+    });
 
     await expect(
       page.getByText("now has access to every encrypted file in the room"),
     ).toBeVisible({ timeout: 30000 });
-    await expect(pending).toBeHidden();
+    await test.step("Retry succeeds", async () => {
+      await expect(pending).toBeHidden();
+      await expect(retry).toHaveCount(0);
+      await expect(
+        page
+          .getByTestId("info_panel_members_user")
+          .filter({ hasText: CAROL.id }),
+      ).toBeFocused();
+    });
     await expect
       .poll(() =>
         filesHandle
@@ -396,6 +423,117 @@ test.describe("Private room — member removal during uploads", () => {
     await expect
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(1);
+  });
+});
+
+test.describe("Private room — member removal from the keyboard", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  // Moves through an open role list with the arrow keys until the named
+  // option is the active one, then picks it with Enter.
+  const pickRoleWithKeyboard = async (page: Page, option: string) => {
+    for (let step = 0; step < 12; step += 1) {
+      const active = await page.evaluate(() => {
+        const id = document.activeElement?.getAttribute(
+          "aria-activedescendant",
+        );
+        return id ? (document.getElementById(id)?.textContent ?? "") : "";
+      });
+      if (active.trim().startsWith(option)) break;
+      await page.keyboard.press("ArrowDown");
+    }
+    await page.keyboard.press("Enter");
+  };
+
+  const openRemovalConfirmation = async (
+    page: Page,
+    mockRequest: WorkerFixture,
+    baseUrl: string,
+  ) => {
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          {
+            id: CAROL.id,
+            displayName: CAROL.displayName,
+            email: CAROL.email,
+            access: ShareAccessRights.Editing,
+          },
+        ],
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await page.locator(".info-panel-toggle").click();
+    await row.click();
+    await page.getByTestId("info_members_tab").click();
+
+    const roleList = page.getByRole("button", {
+      name: new RegExp(`^Role of ${CAROL.displayName}: `),
+    });
+    await roleList.focus();
+    await page.keyboard.press("Enter");
+    await pickRoleWithKeyboard(page, "Remove");
+
+    const confirmation = page.getByRole("dialog", { name: "Remove user" });
+    await expect(confirmation).toBeVisible();
+    return { roleList, confirmation };
+  };
+
+  test("Removal declined from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { roleList, confirmation } = await openRemovalConfirmation(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+
+    await page.getByTestId("remove_user_confirmation_dialog_cancel_button").focus();
+    await page.keyboard.press("Enter");
+
+    await expect(confirmation).toBeHidden();
+    await expect(roleList).toBeFocused();
+  });
+
+  test("Removal confirmed from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { roleList, confirmation } = await openRemovalConfirmation(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+
+    await page.getByTestId("remove_user_confirmation_dialog_ok_button").focus();
+    await page.keyboard.press("Enter");
+
+    await expect(confirmation).toBeHidden();
+    await expect(roleList).toHaveCount(0);
+    await expect(page.getByTestId("info_members_tab")).toBeFocused();
   });
 });
 

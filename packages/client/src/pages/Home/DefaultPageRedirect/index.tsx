@@ -44,25 +44,29 @@ type Props = {
   defaultFolderType?: SettingsStore["defaultFolderType"];
   isGuest?: boolean;
   aiServicesEnabled?: boolean;
+  isPrivateRoomsSectionAvailable?: boolean;
 };
 
 const DefaultPageRedirectComponent = ({
   defaultFolderType,
   isGuest,
   aiServicesEnabled,
+  isPrivateRoomsSectionAvailable,
 }: Props) => {
   const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
     isGuest,
     aiServicesEnabled,
+    isPrivateRoomsSectionAvailable,
   });
 
   return <Navigate to={defaultUrl} replace />;
 };
 
 export const DefaultPageRedirect = inject(
-  ({ settingsStore, userStore }: TStore) => ({
+  ({ settingsStore, userStore, appsStore }: TStore) => ({
     defaultFolderType: settingsStore.defaultFolderType,
     isGuest: userStore.user?.isVisitor ?? false,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
+    isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
   }),
 )(observer(DefaultPageRedirectComponent));

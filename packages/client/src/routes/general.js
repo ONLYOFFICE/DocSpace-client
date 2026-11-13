@@ -33,13 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Navigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
 import KeysManagementRoute from "SRC_DIR/components/KeysManagementRoute";
 
+// Every profile tab renders the same element tree, the keys-management guard
+// included (unguarded for the other tabs): with one tab wrapped differently,
+// moving to it would mount the whole profile page again.
 export const profileClientRoutes = [
   {
     path: "profile",
@@ -53,7 +56,9 @@ export const profileClientRoutes = [
     path: "profile/login",
     element: (
       <PrivateRouteWrapper>
-        <ViewComponent />
+        <KeysManagementRoute guarded={false}>
+          <ViewComponent />
+        </KeysManagementRoute>
       </PrivateRouteWrapper>
     ),
   },
@@ -61,7 +66,9 @@ export const profileClientRoutes = [
     path: "profile/notifications",
     element: (
       <PrivateRouteWrapper>
-        <ViewComponent />
+        <KeysManagementRoute guarded={false}>
+          <ViewComponent />
+        </KeysManagementRoute>
       </PrivateRouteWrapper>
     ),
   },
@@ -69,7 +76,9 @@ export const profileClientRoutes = [
     path: "profile/file-management",
     element: (
       <PrivateRouteWrapper>
-        <ViewComponent />
+        <KeysManagementRoute guarded={false}>
+          <ViewComponent />
+        </KeysManagementRoute>
       </PrivateRouteWrapper>
     ),
   },
@@ -87,7 +96,9 @@ export const profileClientRoutes = [
     path: "profile/interface-theme",
     element: (
       <PrivateRouteWrapper>
-        <ViewComponent />
+        <KeysManagementRoute guarded={false}>
+          <ViewComponent />
+        </KeysManagementRoute>
       </PrivateRouteWrapper>
     ),
   },
@@ -95,7 +106,9 @@ export const profileClientRoutes = [
     path: "profile/authorized-apps",
     element: (
       <PrivateRouteWrapper>
-        <ViewComponent />
+        <KeysManagementRoute guarded={false}>
+          <ViewComponent />
+        </KeysManagementRoute>
       </PrivateRouteWrapper>
     ),
   },
@@ -419,6 +432,28 @@ export const generalClientRoutes = [
   },
 ];
 
+// The profile page as one route component for every tab: the same type on
+// each tab keeps the page mounted while the user moves between them.
+let ProfilePage = null;
+
+const ProfileTab = () => {
+  const { pathname } = useLocation();
+  const Page = ProfilePage;
+
+  return (
+    <KeysManagementRoute guarded={pathname.includes("/keys-management")}>
+      <Page />
+    </KeysManagementRoute>
+  );
+};
+
+const loadProfileTab = async () => {
+  const loaded = await componentLoader(() => import("SRC_DIR/pages/Profile"));
+  ProfilePage = loaded.Component;
+
+  return { ...loaded, Component: ProfileTab };
+};
+
 const generalRoutes = [
   {
     path: "profile/",
@@ -435,39 +470,27 @@ const generalRoutes = [
       },
       {
         path: "login",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+        lazy: loadProfileTab,
       },
       {
         path: "notifications",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+        lazy: loadProfileTab,
       },
       {
         path: "file-management",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+        lazy: loadProfileTab,
       },
       {
         path: "keys-management",
-        lazy: async () => {
-          const { Component } = await componentLoader(
-            () => import("SRC_DIR/pages/Profile"),
-          );
-
-          return {
-            Component: () => (
-              <KeysManagementRoute>
-                <Component />
-              </KeysManagementRoute>
-            ),
-          };
-        },
+        lazy: loadProfileTab,
       },
       {
         path: "interface-theme",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+        lazy: loadProfileTab,
       },
       {
         path: "authorized-apps",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+        lazy: loadProfileTab,
       },
     ],
   },

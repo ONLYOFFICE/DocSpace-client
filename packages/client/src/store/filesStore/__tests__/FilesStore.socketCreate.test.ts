@@ -220,16 +220,26 @@ describe("FilesStore.wsModifyFolderCreate — Private section", () => {
   });
 
   const ROOMS_ROOT_ID = 8;
+  const PRIVATE_ROOT_ID = 9;
 
+  // The Private list is open under its own root; a room in it still reports
+  // the Rooms root as its parent.
   const roomArrives = async (
     pathname: string,
     isPrivate: boolean,
     createdBy = "other-user",
   ) => {
     window.history.pushState({}, "", pathname);
+    const isPrivateList = pathname.startsWith("/private");
     const store = createTestFilesStore({
-      selectedFolderStore: { id: ROOMS_ROOT_ID },
-      treeFoldersStore: { isFormsFolder: false },
+      selectedFolderStore: isPrivateList
+        ? { id: PRIVATE_ROOT_ID, rootFolderType: FolderType.PrivateRooms }
+        : { id: ROOMS_ROOT_ID, rootFolderType: FolderType.Rooms },
+      treeFoldersStore: {
+        isFormsFolder: false,
+        isPrivateRoomsFolder: isPrivateList,
+        roomsFolderId: ROOMS_ROOT_ID,
+      },
     });
     store.appsStore = {
       isPrivateRoomsSectionAvailable: true,

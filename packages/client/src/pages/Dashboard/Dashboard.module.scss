@@ -122,8 +122,10 @@
 }
 
 // Sizes the inner Scrollbar holder; the custom scrollbar needs explicit
-// dimensions (it doesn't grow from content).
+// dimensions (it doesn't grow from content). Also a size container, so
+// `.dashboardInner` can read the holder's width (see there).
 .dashboardScrollbar {
+  container-type: inline-size;
   width: 100%;
   height: 100%;
 }
@@ -131,15 +133,35 @@
 // Query container for the grids inside: their column counts must react to the
 // space the dashboard content actually gets, not to the viewport — the AI chat
 // panel takes 400px out of the row without changing the viewport width.
+//
+// The width is capped at the holder's width minus the scroll body's end
+// padding, i.e. what the content gets while there is nothing to scroll. While
+// the scrollbar is shown the ui-kit scroller over-compensates the native
+// scrollbar by 1px whenever the zoom level is not 1 (devicePixelRatio 2
+// included), so the content got 1px wider exactly when it overflowed. At some
+// heights that pixel unwrapped a module card's "Enabled" badge, the content
+// fit, the scrollbar went away, the badge wrapped again - and the layout
+// flipped between the two states on every frame (bug 85087). The holder does
+// not change with the scroller's state, so the cap keeps the width stable.
 .dashboardInner {
   container: dashboard-content / inline-size;
   display: flex;
   flex-direction: column;
   gap: 32px;
   width: 100%;
-  max-width: 1440px;
+  max-width: min(
+    1440px,
+    calc(100cqi - var(--scrollbar-padding-inline-end, 0px))
+  );
   padding: 20px;
   box-sizing: border-box;
+
+  @include mixins.mobile {
+    max-width: min(
+      1440px,
+      calc(100cqi - var(--scrollbar-padding-inline-end-mobile, 0px))
+    );
+  }
 }
 
 // Reopens the welcome modal (the dashboard tour). Sits at the far edge of the

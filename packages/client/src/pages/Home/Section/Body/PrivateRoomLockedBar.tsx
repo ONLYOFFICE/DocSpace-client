@@ -45,6 +45,8 @@ import {
   roomUnlockRequest,
 } from "SRC_DIR/helpers/roomUnlockRequest";
 
+import styles from "./PrivateRoomLockedBar.module.scss";
+
 type PrivateRoomLockedBarProps = {
   /** The open folder is a private room or lies inside one. */
   isPrivate: boolean;
@@ -99,6 +101,7 @@ const PrivateRoomLockedBar = ({
       iconName={InfoReactSvgUrl}
       barIsVisible
       live
+      className={styles.bar}
       dataTestId="private_room_locked_bar"
     />
   );

@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import React from "react";
 import { act, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -198,5 +199,58 @@ describe("KeysManagementRoute", () => {
 
     expect(screen.queryByTestId("redirect")).toBeNull();
     expect(screen.queryByTestId("keys-management")).toBeNull();
+  });
+});
+
+describe("KeysManagementRoute on the other profile tabs", () => {
+  it("lets an unguarded tab through without asking for the apps or the keys", () => {
+    const ensureAppsLoaded = vi.fn();
+    const getEncryptionKeys = vi.fn(async () => []);
+
+    renderRoute({
+      guarded: false,
+      isSectionAvailable: false,
+      isAppsLoaded: false,
+      encryptionKeys: null,
+      ensureAppsLoaded,
+      getEncryptionKeys,
+    });
+
+    expect(screen.getByTestId("keys-management")).toBeInTheDocument();
+    expect(screen.queryByTestId("redirect")).toBeNull();
+    expect(ensureAppsLoaded).not.toHaveBeenCalled();
+    expect(getEncryptionKeys).not.toHaveBeenCalled();
+  });
+
+  it("keeps the page mounted when the user moves from another tab to the keys tab", () => {
+    const mounted = vi.fn();
+    const Page = () => {
+      React.useEffect(() => {
+        mounted();
+      }, []);
+      return <div data-testid="profile-page" />;
+    };
+    const tab = (guarded: boolean) => (
+      <KeysManagementRoute
+        isSectionAvailable
+        isFrameOptInSettled
+        isAppsLoaded
+        isAppsLoadFailed={false}
+        ensureAppsLoaded={vi.fn()}
+        canManageApps
+        encryptionKeys={[KEY]}
+        getEncryptionKeys={vi.fn(async () => [])}
+        guarded={guarded}
+      >
+        <Page />
+      </KeysManagementRoute>
+    );
+
+    const { rerender } = render(tab(false));
+    rerender(tab(true));
+    rerender(tab(false));
+
+    expect(screen.getByTestId("profile-page")).toBeInTheDocument();
+    expect(mounted).toHaveBeenCalledTimes(1);
   });
 });

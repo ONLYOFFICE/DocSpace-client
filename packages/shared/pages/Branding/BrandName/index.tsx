@@ -39,18 +39,14 @@ import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 import { Nullable } from "../../../types";
 
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
-
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
   TextInput,
   InputType,
   InputSize,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { NotAvailable } from "../WhiteLabel/NotAvailable";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
@@ -62,7 +58,7 @@ export const BrandName = ({
   showNotAvailable,
   isSettingPaid,
   standalone,
-  onPaidBadgeClick,
+  paidBadge,
   onSave,
   isBrandNameLoaded,
   defaultBrandName,
@@ -71,8 +67,6 @@ export const BrandName = ({
   onValidate,
 }: IBrandNameProps) => {
   const { t } = useTranslation("Common");
-
-  const { isBase } = useTheme();
 
   const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
     useState<Nullable<string>>(null);
@@ -146,20 +140,7 @@ export const BrandName = ({
           {t("BrandName")}
         </Text>
 
-        {!isSettingPaid && !standalone ? (
-          <Badge
-            className={classNames(styles.paidBadge, "paid-badge")}
-            fontWeight="700"
-            label={t("Common:Paid")}
-            onClick={onPaidBadgeClick}
-            isPaidBadge
-            backgroundColor={
-              isBase
-                ? globalColors.favoritesStatus
-                : globalColors.favoriteStatusDark
-            }
-          />
-        ) : null}
+        {!isSettingPaid && !standalone ? paidBadge : null}
       </div>
 
       <Text

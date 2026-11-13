@@ -108,7 +108,11 @@ import {
   updateRoomGroupIconHandler,
 } from "./roomGroups";
 import { encryptedFilesHandlers } from "./encryptedFiles";
-import { privateRoomListHandler } from "./privateRoomList";
+import {
+  privateRoomListHandler,
+  privateSectionHandler,
+} from "./privateRoomList";
+import { roomsNewsHandler } from "./roomsNews";
 import {
   folderHistoryHandler,
   folderHistoryReportHandlers,
@@ -140,8 +144,11 @@ export {
 } from "./encryptedFiles";
 export {
   privateRoomListHandler,
+  privateSectionHandler,
   type PrivateRoomListOptions,
+  type PrivateSectionOptions,
 } from "./privateRoomList";
+export { roomsNewsHandler, type RoomsNewsRoom } from "./roomsNews";
 export { emptyTemplateHandler } from "./emptyTemplate";
 
 export {

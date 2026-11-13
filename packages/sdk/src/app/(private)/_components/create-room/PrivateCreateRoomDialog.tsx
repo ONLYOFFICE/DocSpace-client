@@ -87,6 +87,9 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     !isCreation || docsSettings.isEncryptedEditingAvailable;
   const canCreate = hasSecureContext && editorsEncrypt;
   const autoPromptedRef = React.useRef(false);
+  const [keyGenerated, setKeyGenerated] = React.useState(false);
+  // Spec: private-rooms/sdk-surface, "SDK private-room dialog waits for the key"
+  const waitsForKey = isCreation && !mayHoldKey && !keyGenerated;
 
   const refreshKeysFromServer = React.useCallback(
     () => identityStore.loadKeys(),
@@ -100,6 +103,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
     hasExistingKeys: mayHoldKey,
     isGuest: user?.isVisitor,
     refreshKeysFromServer,
+    onKeyGenerated: () => setKeyGenerated(true),
     onKeyGenerationCancelled: onClose,
     onClose,
   });
@@ -127,6 +131,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   React.useEffect(() => {
     if (!visible) {
       autoPromptedRef.current = false;
+      setKeyGenerated(false);
       return;
     }
     if (!isCreation || !canCreate) return;
@@ -150,7 +155,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
       {keyGate.keyGenerationModals}
       {canCreate ? (
         <CreateEditRoomDialog
-          visible={visible}
+          visible={visible && !waitsForKey}
           onClose={onClose}
           room={room}
           isPrivate

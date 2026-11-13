@@ -338,3 +338,60 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 });
+
+describe("KeyRotationDialog: a new passphrase equal to the current one is named", () => {
+  const SAME = "Correct1horse!battery";
+
+  const newFieldError = () =>
+    screen
+      .getByTestId("newPassphrase")
+      .closest("[data-error-message]")
+      ?.getAttribute("data-error-message");
+
+  it("Same passphrase typed", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", SAME);
+    typeInto("newPassphrase", SAME);
+
+    expect(screen.getByTestId("newPassphrase")).toHaveAttribute(
+      "data-has-error",
+      "true",
+    );
+    expect(newFieldError()).toBe("Common:PassphraseMustBeDifferent");
+    expect(screen.getByTestId("Common:SaveButton")).toBeDisabled();
+  });
+
+  it("Enter with the same passphrase", async () => {
+    const onSubmit = vi.fn().mockResolvedValue(undefined);
+    render(<KeyRotationDialog {...makeProps(onSubmit)} />);
+    typeInto("currentPassphrase", SAME);
+    typeInto("newPassphrase", SAME);
+    typeInto("confirmNewPassphrase", SAME);
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("Common:SaveButton"));
+    });
+
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it("Passphrase corrected", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", SAME);
+    typeInto("newPassphrase", SAME);
+    typeInto("newPassphrase", "Another1horse!battery");
+
+    expect(screen.getByTestId("newPassphrase")).toHaveAttribute(
+      "data-has-error",
+      "false",
+    );
+    expect(newFieldError()).toBe("");
+  });
+
+  it("No error before a new passphrase is typed", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", SAME);
+
+    expect(newFieldError()).toBe("");
+  });
+});

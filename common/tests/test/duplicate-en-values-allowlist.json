@@ -35,6 +35,8 @@
   "Common: OAuthProfilesName, Profile",
   "Common: OAuthRoomsName, Rooms",
   "Common: Other, OtherLabel",
+  "Common: Private, PrivateRoomType",
+  "Common: RecoveryKitPhraseLabel, RecoveryPhraseTitle",
   "Common: Restore, RestoreBackup",
   "Common: RoleViewer, Viewer",
   "Common: SelectAction, TitleSelectFile",

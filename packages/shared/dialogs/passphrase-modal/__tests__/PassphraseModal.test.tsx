@@ -238,6 +238,111 @@ describe("PassphraseModal", () => {
     expect(onSubmit).toHaveBeenCalledWith("Correct1horse!battery", undefined);
   });
 
+  describe("Forgot passphrase link", () => {
+    it("Link before any attempt", async () => {
+      const user = userEvent.setup();
+      const onForgotPassphrase = vi.fn();
+      renderModal({ onForgotPassphrase });
+
+      const link = screen.getByTestId("forgot_passphrase_link");
+      expect(link).toHaveTextContent("Common:ForgotPassphrase");
+
+      await user.click(link);
+      expect(onForgotPassphrase).toHaveBeenCalledTimes(1);
+    });
+
+    it("Link after failure", () => {
+      renderModal({
+        onForgotPassphrase: vi.fn(),
+        externalError: "Common:InvalidPassphrase",
+      });
+
+      expect(screen.getByTestId("forgot_passphrase_link")).toBeInTheDocument();
+    });
+
+    it("Link under the remember option", () => {
+      renderModal({ onForgotPassphrase: vi.fn(), showRememberDevice: true });
+
+      const hint = screen.getByText("Common:RememberDeviceHint");
+      const link = screen.getByTestId("forgot_passphrase_link");
+      expect(
+        hint.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).not.toBe(0);
+    });
+
+    it("Passphrase creation", () => {
+      renderModal({ isNew: true, onForgotPassphrase: vi.fn() });
+
+      expect(screen.queryByTestId("forgot_passphrase_link")).toBeNull();
+    });
+
+    it("shows no link where there is no recovery path", () => {
+      renderModal();
+
+      expect(screen.queryByTestId("forgot_passphrase_link")).toBeNull();
+    });
+  });
+
+  describe("A generated passphrase fills both fields", () => {
+    const generate = (user: ReturnType<typeof userEvent.setup>) =>
+      user.click(screen.getByTestId("generate_passphrase_link"));
+
+    const getSubmit = () =>
+      screen.getByRole("button", { name: "Common:ContinueButton" });
+
+    it("Generate", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal({ isNew: true });
+
+      await generate(user);
+
+      const generated = getPassphraseInput().value;
+      expect(generated.length).toBeGreaterThanOrEqual(12);
+      expect(getConfirmInput()).toHaveValue(generated);
+      expect(getPassphraseInput()).toHaveAttribute("type", "text");
+      await waitFor(() => expect(getSubmit()).toBeEnabled());
+
+      await user.click(getSubmit());
+      expect(onSubmit).toHaveBeenCalledWith(generated, undefined);
+    });
+
+    it("Generate over typed input", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "Correct1horse!battery");
+      await user.type(getConfirmInput(), "Different1horse!battery");
+      expect(getConfirmInput()).toHaveAttribute("aria-invalid", "true");
+
+      await generate(user);
+
+      expect(getConfirmInput()).toHaveValue(getPassphraseInput().value);
+      expect(getConfirmInput()).not.toHaveAttribute("aria-invalid", "true");
+      expect(describedText(getConfirmInput())).not.toContain(
+        "Common:PassphraseMismatch",
+      );
+    });
+
+    it("Edit after generating", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await generate(user);
+      const generated = getPassphraseInput().value;
+      await user.type(getPassphraseInput(), "x");
+
+      expect(getConfirmInput()).toHaveValue(generated);
+      expect(getConfirmInput()).toHaveAttribute("aria-invalid", "true");
+      expect(describedText(getConfirmInput())).toContain(
+        "Common:PassphraseMismatch",
+      );
+      expect(getSubmit()).toBeDisabled();
+
+      await user.type(getConfirmInput(), "x");
+      await waitFor(() => expect(getSubmit()).toBeEnabled());
+    });
+  });
+
   // Spec: private-rooms/key-management, "Key dialogs ignore a click beside them"
   it("Backdrop click on the unlock prompt", () => {
     const { onCancel } = renderModal();

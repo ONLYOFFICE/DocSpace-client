@@ -51,7 +51,10 @@ import EmptyPrivateRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.private
 import EmptyPrivateRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.dark.svg";
 import UploadDeviceIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import CreateNewFileIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
-import SecurityShieldIcon from "PUBLIC_DIR/images/icons/16/security.react.svg";
+import EncryptionIcon from "PUBLIC_DIR/images/icons/16/locked.react.svg";
+import FileKeyIcon from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg";
+import CollaborationIcon from "PUBLIC_DIR/images/icons/16/people.react.svg";
+import RecoveryIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg";
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -60,23 +63,31 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 
 import styles from "./EmptyPrivateRoomView.module.scss";
 
+export type EmptyPrivateFolderView = {
+  title: string;
+  icon: React.ReactElement;
+};
+
 type EmptyPrivateRoomViewProps = {
   security?: Nullable<TFolderSecurity | TRoomSecurity>;
   canCreateEncrypted?: boolean;
+  // Spec: private-rooms/file-operations, "Empty folder inside a private room shows a folder empty view"
+  folderView?: EmptyPrivateFolderView;
 };
 
 const EmptyPrivateRoomView = ({
   security,
   canCreateEncrypted,
+  folderView,
 }: EmptyPrivateRoomViewProps) => {
   const { t } = useTranslation(["EmptyView", "Common", "Translations"]);
   const { isBase } = useTheme();
 
   const items = [
-    t("Common:PrivateRoomEmptyBenefitE2EE"),
-    t("Common:PrivateRoomEmptyBenefitAEAD"),
-    t("Common:PrivateRoomEmptyBenefitHPKE"),
-    t("Common:PrivateRoomEmptyBenefitKDF"),
+    { text: t("Common:PrivateRoomEmptyBenefitE2EE"), Icon: EncryptionIcon },
+    { text: t("Common:PrivateRoomEmptyBenefitAEAD"), Icon: FileKeyIcon },
+    { text: t("Common:PrivateRoomEmptyBenefitHPKE"), Icon: CollaborationIcon },
+    { text: t("Common:PrivateRoomEmptyBenefitKDF"), Icon: RecoveryIcon },
   ];
 
   const dispatchCreate = useCallback(
@@ -106,13 +117,17 @@ const EmptyPrivateRoomView = ({
 
   const canCreate = !!security?.Create;
 
+  const createDescription = folderView
+    ? t("Common:PrivateRoomFolderEmptyDescription")
+    : t("EmptyView:CreateNewFileDescription");
+
   const options: EmptyViewOptionsType = [];
 
   if (canCreate) {
     if (canCreateEncrypted) {
       options.push({
         title: t("EmptyView:CreateNewFileTitle"),
-        description: t("EmptyView:CreateNewFileDescription"),
+        description: createDescription,
         icon: <CreateNewFileIcon />,
         key: "create-file",
         model: [
@@ -152,7 +167,7 @@ const EmptyPrivateRoomView = ({
     } else {
       options.push({
         title: t("Common:NewFolder"),
-        description: t("EmptyView:CreateNewFileDescription"),
+        description: createDescription,
         icon: <CreateNewFileIcon />,
         key: "create-folder",
         onClick: () => dispatchCreate(undefined),
@@ -173,15 +188,26 @@ const EmptyPrivateRoomView = ({
   const benefits = (
     <div className={styles.benefits}>
       <ul className={styles.list}>
-        {items.map((text) => (
+        {items.map(({ text, Icon }) => (
           <li key={text} className={styles.listItem}>
-            <SecurityShieldIcon />
+            <Icon aria-hidden="true" />
             <span>{text}</span>
           </li>
         ))}
       </ul>
     </div>
   );
+
+  if (folderView) {
+    return (
+      <EmptyView
+        icon={folderView.icon}
+        title={folderView.title || t("Common:EmptyScreenFolder")}
+        description={null}
+        options={options}
+      />
+    );
+  }
 
   return (
     <EmptyView

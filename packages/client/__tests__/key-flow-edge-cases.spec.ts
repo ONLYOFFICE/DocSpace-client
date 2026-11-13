@@ -69,7 +69,7 @@ test.describe("Keys management — edge cases", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await expect(generateBtn).toBeVisible({ timeout: 15000 });
@@ -109,7 +109,7 @@ test.describe("Keys management — edge cases", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
@@ -127,9 +127,9 @@ test.describe("Keys management — edge cases", () => {
     const acknowledge = page.locator("#recoveryPhraseAcknowledged");
     await expect(acknowledge).toBeVisible({ timeout: 5000 });
 
-    const recoveryDialog = page
-      .getByRole("dialog")
-      .filter({ hasText: "Save your recovery" });
+    const recoveryDialog = page.getByRole("dialog", {
+      name: "Recovery phrase",
+    });
     await recoveryDialog
       .getByRole("button", { name: "Cancel", exact: true })
       .click();
@@ -174,7 +174,7 @@ test.describe("Keys management — edge cases", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     await page.getByLabel("Passphrase", { exact: true })
@@ -258,7 +258,7 @@ test.describe("Keys management — edge cases", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
@@ -289,7 +289,7 @@ test.describe("Keys management — edge cases", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
@@ -331,7 +331,7 @@ test.describe("Keys management — edge cases", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await generateBtn.click();

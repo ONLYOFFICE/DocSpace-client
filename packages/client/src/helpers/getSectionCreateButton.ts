@@ -36,6 +36,7 @@
 import type { TTranslation } from "@docspace/shared/types";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
+import { getNewRoomLabel } from "./newRoomLabel";
 
 type TGetCreateModel = (
   t: TTranslation,
@@ -108,7 +109,7 @@ export const getSectionCreateButton = ({
     return {
       showMainButton: true,
       mainButtonProps: {
-        text: t("Common:NewRoom"),
+        text: getNewRoomLabel(t),
         isDropdown: false,
         model: [],
         onAction: () => onCreateRoom(),

@@ -48,7 +48,7 @@ import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
 import { TemplateTile } from "@onlyoffice/apps-ui-kit/components/tiles/template-tile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
-import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { getRoomTypeLabel } from "SRC_DIR/helpers/filesUtils";
 import { getFilesItemClassName } from "SRC_DIR/helpers/filesItemClassName";
 import { TagManagement } from "SRC_DIR/components/TagManagement";
 
@@ -253,7 +253,9 @@ const FileTile = (props) => {
           selectOption={onSelectOption}
           columnCount={columnCount}
           thumbnailClick={onFilesClick}
-          getRoomTypeName={getRoomTypeName}
+          getRoomTypeName={(_roomType, translate) =>
+            getRoomTypeLabel(item, translate)
+          }
           customBottomContent={(isHovered, tags) => {
             const isRestrictedPublicRoom =
               isExternalShareRestricted &&

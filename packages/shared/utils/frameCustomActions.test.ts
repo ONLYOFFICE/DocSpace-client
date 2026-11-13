@@ -136,6 +136,7 @@ describe("getVisibleCreateActions", () => {
 describe("getManagerSection", () => {
   it("names the Manager root folders", () => {
     expect(getManagerSection(FolderType.Rooms)).toBe("rooms");
+    expect(getManagerSection(FolderType.PrivateRooms)).toBe("rooms");
     expect(getManagerSection(FolderType.USER)).toBe("my-documents");
     expect(getManagerSection(FolderType.Archive)).toBe("archive");
     expect(getManagerSection(undefined)).toBeUndefined();

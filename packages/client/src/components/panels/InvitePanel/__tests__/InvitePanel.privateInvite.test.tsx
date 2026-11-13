@@ -338,8 +338,8 @@ describe("Invite opened from the list", () => {
     fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
     expect(
-      await screen.findByTestId("invite_panel_result_skipped"),
-    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+      await screen.findByTestId("invite_panel_result_refused"),
+    ).toHaveTextContent("Common:EncryptedInviteNoKey");
     expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(1);
     expect(mocks.setRoomSecurity.mock.calls[0][1].invitations).toEqual([
       { id: "ann", access: ShareAccessRights.Editing },
@@ -349,9 +349,8 @@ describe("Invite opened from the list", () => {
       [{ id: "ann", displayName: "ann keeper" }],
       expect.anything(),
     );
-    expect(mocks.toastr.warning).toHaveBeenCalledWith(
-      "Common:EncryptedSkippedNoKeys",
-    );
+    // Reason shown once
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
   });
 
   it("Every invitee skipped: nothing is sent and the panel lists them", async () => {
@@ -366,15 +365,71 @@ describe("Invite opened from the list", () => {
 
     fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
-    expect(
-      await screen.findByTestId("invite_panel_result_skipped"),
-    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+    // Only invitee has no key
+    await waitFor(() =>
+      expect(screen.getByTestId("invite_panel_not_invited")).toHaveTextContent(
+        "Common:EncryptedInviteNoKey",
+      ),
+    );
+    expect(screen.getByTestId("invite_panel_not_invited")).toHaveAttribute(
+      "role",
+      "status",
+    );
     expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
     expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
 
-    fireEvent.click(screen.getByTestId("invite_panel_invite_again_button"));
+    expect(screen.queryByTestId("invite_panel_result")).not.toBeInTheDocument();
+    expect(screen.getByTestId("invite_panel_send_button")).toBeInTheDocument();
+    expect(setInviteItems).not.toHaveBeenCalled();
+    // Reason shown once
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
+  });
 
-    expect(setInviteItems).toHaveBeenCalledWith([BOB_ITEM]);
+  it("List corrected and sent again: the earlier reason is gone once the list is sent again", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.validateMembersForEncryption.mockImplementationOnce(async () => ({
+      valid: [],
+      skipped: [{ id: "bob", displayName: "bob tester", reason: "no-key" }],
+    }));
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }));
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+    await waitFor(() =>
+      expect(screen.getByTestId("invite_panel_not_invited")).toHaveTextContent(
+        "Common:EncryptedInviteNoKey",
+      ),
+    );
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(
+      await screen.findByTestId("invite_panel_result_granted"),
+    ).toHaveTextContent("bob tester");
+    expect(screen.queryByText("Common:EncryptedInviteNoKey")).toBeNull();
+  });
+
+  it("Somebody was invited: the invite result is shown, not the form block", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      valid: [{ id: "ann", publicKey: "pk-ann" }],
+      skipped: [{ id: "bob", displayName: "bob tester", reason: "no-key" }],
+    }));
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }), [
+      ANN_ITEM,
+      BOB_ITEM,
+    ]);
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(await screen.findByTestId("invite_panel_result")).toBeInTheDocument();
+    expect(screen.getByTestId("invite_panel_result_refused")).toHaveTextContent(
+      "Common:EncryptedInviteNoKey",
+    );
+    expect(
+      screen.queryByTestId("invite_panel_not_invited"),
+    ).not.toBeInTheDocument();
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
+    expect(mocks.toastr.success).not.toHaveBeenCalled();
   });
 
   it("All invitees have verified keys: the panel lists them as invited and closes on Close", async () => {
@@ -393,6 +448,8 @@ describe("Invite opened from the list", () => {
     expect(
       await screen.findByTestId("invite_panel_result_granted"),
     ).toHaveTextContent("bob tester");
+    // The end of the re-wrap is still announced through its toast.
+    expect(mocks.toastr.success).toHaveBeenCalledWith("Common:UsersInvited");
     expect(setInvitePanelOptions).not.toHaveBeenCalledWith(closedPanel);
     expect(
       screen.queryByTestId("invite_panel_invite_again_button"),
@@ -512,20 +569,24 @@ describe("Invite opened from the list", () => {
 
     it("Every invitee refused", async () => {
       refuseBob(403);
-      const { setInviteItems } = renderInviteFromList(
+      renderInviteFromList(
         privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
       );
 
       fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
-      expect(
-        await screen.findByTestId("invite_panel_result_refused"),
-      ).toHaveTextContent("Common:EncryptedInviteNoKey");
+      await waitFor(() =>
+        expect(
+          screen.getByTestId("invite_panel_not_invited"),
+        ).toHaveTextContent("Common:EncryptedInviteNoKey"),
+      );
       expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
-
-      fireEvent.click(screen.getByTestId("invite_panel_invite_again_button"));
-
-      expect(setInviteItems).toHaveBeenCalledWith([BOB_ITEM]);
+      expect(
+        screen.queryByTestId("invite_panel_result"),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByTestId("invite_panel_send_button"),
+      ).toBeInTheDocument();
     });
   });
 

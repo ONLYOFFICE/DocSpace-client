@@ -61,6 +61,7 @@ import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import ChangeRoomOwner from "../../../ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
+import { getDisplayedRoomType } from "./displayedRoomType";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
 
@@ -442,7 +443,7 @@ const SetRoomParams = ({
       {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (
         <RoomType
           t={t}
-          roomType={roomParams.type}
+          roomType={getDisplayedRoomType(roomParams)}
           type="displayItem"
           isTemplateRoom={selection?.isTemplate || isTemplateSelected}
         />
@@ -462,7 +463,6 @@ const SetRoomParams = ({
           title={roomParams.title}
           isThirdparty={roomParams.isThirdparty}
           storageLocation={roomParams.storageLocation}
-          isPrivate={roomParams.isPrivate}
           isDisabled={isDisabled}
         />
       ) : null}

@@ -52,7 +52,13 @@
 }
 
 .phraseBox {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 4px 12px;
+  margin: 0;
   padding: 16px;
+  list-style: none;
+  counter-reset: recovery-word;
   background: var(--row-background-color);
   border-radius: 8px;
   border: 1px solid var(--divider-color);
@@ -61,26 +67,37 @@
   font-weight: 600;
   line-height: 1.8;
   color: var(--text-color);
-  overflow-wrap: break-word;
   user-select: all;
 }
 
-.saveActions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+.phraseWord {
+  counter-increment: recovery-word;
+  overflow-wrap: anywhere;
+
+  // The number is generated content, so it is neither selected nor copied.
+  &::before {
+    content: counter(recovery-word) ".";
+    display: inline-block;
+    min-width: 3ch;
+    margin-inline-end: 6px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-align: end;
+  }
 }
 
-.printButton {
-  grid-column: 1 / -1;
+.saveActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  > * {
+    flex: 1 1 auto;
+  }
 }
 
 .checkboxRow {
   display: flex;
   align-items: flex-start;
   margin-top: 4px;
-}
-
-.saveFirstHint {
-  color: var(--text-secondary);
 }

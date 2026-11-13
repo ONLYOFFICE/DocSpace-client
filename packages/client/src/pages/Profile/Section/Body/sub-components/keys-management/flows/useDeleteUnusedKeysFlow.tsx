@@ -150,7 +150,7 @@ export function useDeleteUnusedKeysFlow({
       {confirming ? (
         <ConfirmationModal
           visible
-          title={t("Common:DeleteUnusedEncryptionKeys")}
+          title={t("Common:UnusedEncryptionKeysTitle")}
           message={t("Common:UnusedEncryptionKeysNotice", {
             count: unused.length,
           })}

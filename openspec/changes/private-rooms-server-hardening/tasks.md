@@ -72,7 +72,7 @@ Withdrawn: the client operates with one key per user (`private-rooms-single-key`
 
 ## 8. Recovery and offboarding (B2B launch)
 
-- [ ] 8.1 Backend: recovery-administrator enrolment and retrieval routes with audit, and the deprovisioning hook that blocks owner deprovisioning; the part of the hook that revokes entries is BLOCKED on 6.0 (no removal operation exists today); verify with server unit tests
+- [ ] 8.1 Backend: recovery-administrator enrolment and retrieval routes with audit, and the deprovisioning hook that blocks owner deprovisioning; the part of the hook that revokes entries is BLOCKED on 6.0 (no removal operation exists today); verify with server unit tests. Required since 2026-11-12, when the owner set the launch scope to B2B (`private-rooms-release-gate`, decision 1); the revocation primitive of 6.0 was decided on 2026-11-05, so the hook is no longer blocked on that decision
 - [ ] 8.2 Client: once 8.1 has merged, add the enrolment, recovery and offboarding requests with their MSW handlers and contract tests, an enrolment step in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management` (opt-in by policy) and a recovery action for administrators, with locale keys translated; verify with hook unit tests next to the existing flows and `packages/client/__tests__/keys-management.spec.ts`
 
 ## 9. Archived private rooms and room events

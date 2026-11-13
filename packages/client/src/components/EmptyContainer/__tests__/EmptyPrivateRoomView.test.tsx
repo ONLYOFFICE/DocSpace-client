@@ -61,3 +61,96 @@ describe("EmptyPrivateRoomView", () => {
     expect(consoleError).not.toHaveBeenCalled();
   });
 });
+
+// Spec: private-rooms/file-operations, "Empty folder inside a private room shows a folder empty view"
+describe("Empty folder inside a private room", () => {
+  const folderView = {
+    title: "Common:EmptyScreenFolder",
+    icon: <svg data-testid="folder-illustration" />,
+  };
+
+  const renderView = ({
+    canCreate = true,
+    hasKeys = true,
+    inFolder = true,
+  }: { canCreate?: boolean; hasKeys?: boolean; inFolder?: boolean } = {}) =>
+    render(
+      <Provider
+        selectedFolderStore={{ security: { Create: canCreate } }}
+        uploadDataStore={{ shouldEncryptCurrentUpload: () => hasKeys }}
+      >
+        <EmptyPrivateRoomView folderView={inFolder ? folderView : undefined} />
+      </Provider>,
+    );
+
+  it("Empty folder with keys", () => {
+    const { container } = renderView();
+
+    expect(screen.getByText("Common:EmptyScreenFolder")).toBeInTheDocument();
+    expect(screen.getByTestId("folder-illustration")).toBeInTheDocument();
+    expect(screen.getByText("EmptyView:CreateNewFileTitle")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:PrivateRoomFolderEmptyDescription"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("EmptyView:UploadDeviceOptionTitle"),
+    ).toBeInTheDocument();
+
+    expect(screen.queryByText("Common:PrivateRoomEmptyTitle")).toBeNull();
+    expect(screen.queryByText("Common:PrivateRoomEmptyBenefitE2EE")).toBeNull();
+    expect(container.querySelector("ul")).toBeNull();
+  });
+
+  it("Empty folder without keys", () => {
+    renderView({ hasKeys: false });
+
+    expect(screen.queryByText("EmptyView:CreateNewFileTitle")).toBeNull();
+    expect(screen.getByText("Common:NewFolder")).toBeInTheDocument();
+    expect(
+      screen.getByText("EmptyView:UploadDeviceOptionTitle"),
+    ).toBeInTheDocument();
+  });
+
+  it("Empty folder without the create right", () => {
+    renderView({ canCreate: false });
+
+    expect(screen.getByText("Common:EmptyScreenFolder")).toBeInTheDocument();
+    expect(screen.queryByText("EmptyView:CreateNewFileTitle")).toBeNull();
+    expect(screen.queryByText("Common:NewFolder")).toBeNull();
+    expect(screen.queryByText("EmptyView:UploadDeviceOptionTitle")).toBeNull();
+  });
+
+  it("gives each welcome line an icon of its own", () => {
+    renderView({ inFolder: false });
+    const icons = Array.from(document.querySelectorAll("li svg")).map(
+      (icon) => icon.innerHTML,
+    );
+    expect(icons).toHaveLength(4);
+    expect(new Set(icons).size).toBe(4);
+  });
+
+  it("Room root", () => {
+    renderView({ inFolder: false });
+
+    expect(
+      screen.getByText("Common:PrivateRoomEmptyTitle"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:PrivateRoomEmptyBenefitE2EE"),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("Common:EmptyScreenFolder")).toBeNull();
+    expect(
+      screen.queryByText("Common:PrivateRoomFolderEmptyDescription"),
+    ).toBeNull();
+  });
+
+  // An archived room is read-only: its folders give no create right.
+  it("Folder of an archived private room", () => {
+    renderView({ canCreate: false, hasKeys: true });
+
+    expect(screen.getByText("Common:EmptyScreenFolder")).toBeInTheDocument();
+    expect(screen.queryByText("EmptyView:CreateNewFileTitle")).toBeNull();
+    expect(screen.queryByText("EmptyView:UploadDeviceOptionTitle")).toBeNull();
+    expect(screen.queryByText("Common:PrivateRoomEmptyBenefitE2EE")).toBeNull();
+  });
+});

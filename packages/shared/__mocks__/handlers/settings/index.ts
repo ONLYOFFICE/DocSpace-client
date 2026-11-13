@@ -77,6 +77,7 @@ import { paymentSettingsHandler } from "./paymentSettings";
 import { storageRegionsHandler } from "./storageRegions";
 import { tfaAppCodesHandler } from "./tfaAppCodes";
 import { tfaAppSettingsHandler } from "./tfaAppSettings";
+import { defaultFolderHandler } from "./defaultFolder";
 import { thirdPartyBackupHandler } from "./thirdpartyBackup";
 import {
   whiteLabelLogosAddHandler,
@@ -125,6 +126,7 @@ export {
   storageRegionsHandler,
   tfaAppCodesHandler,
   tfaAppSettingsHandler,
+  defaultFolderHandler,
   thirdPartyBackupHandler,
   whiteLabelLogosAddHandler,
   whiteLabelLogosIsDefaultHandler,

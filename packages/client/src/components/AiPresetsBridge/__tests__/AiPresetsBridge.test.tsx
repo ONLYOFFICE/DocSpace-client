@@ -216,7 +216,7 @@ describe("AiPresetsBridge", () => {
     expect(store.presets).toEqual([]);
   });
 
-  it("offers the save button to those who may create projects, outside a project", () => {
+  it("offers Save as new agent to those who may create projects, outside a project", () => {
     const store = new AiPresetsStore();
     const { unmount } = renderBridge(store);
     expect(aiChatStore.onSavePreset).toBe(store.openSaveDialog);
@@ -227,7 +227,7 @@ describe("AiPresetsBridge", () => {
     expect(aiChatStore.onSavePreset).toBeNull();
   });
 
-  it("hides the save button inside a project and keeps the chat title", () => {
+  it("offers no Save as new agent inside a project and keeps the chat title", () => {
     const store = new AiPresetsStore();
     renderBridge(store, { path: "/ai-rooms/1/filter" });
     expect(aiChatStore.onSavePreset).toBe(store.openSaveDialog);
@@ -338,12 +338,14 @@ describe("AiPresetsBridge", () => {
     renderBridge(new AiPresetsStore());
     expect(setAiReady).toHaveBeenLastCalledWith(true);
   });
-  it("offers the projects as the panel title's agents, none while there are none", async () => {
+  it("offers the projects as the panel title's agents, an empty menu while there are none", async () => {
     api.getAiProjects.mockResolvedValue({ folders: [] });
     const store = new AiPresetsStore();
     renderBridge(store);
     await flush();
-    expect(aiChatStore.agentPicker).toBeNull();
+    // The panel still opens it for a user who may save the chat as a new
+    // agent, and shows a plain title to anyone else.
+    expect(aiChatStore.agentPicker?.agents).toEqual([]);
 
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
     await act(() => store.fetchPresets());
@@ -394,8 +396,8 @@ describe("AiPresetsBridge", () => {
     await flush();
     expect(toastr.info).toHaveBeenCalledWith("Common:AIProjectNotAvailable");
     expect(store.activePreset).toBeNull();
-    // The last project left the list, and the menu with it.
-    expect(aiChatStore.agentPicker).toBeNull();
+    // The last project left the list: the menu has no agent left.
+    expect(aiChatStore.agentPicker?.agents).toEqual([]);
   });
 
   it("keeps the project the chat runs on in the menu once the list has lost it", async () => {
@@ -425,7 +427,7 @@ describe("AiPresetsBridge", () => {
 
     act(() => aiChatStore.agentPicker?.onSelect(null));
     expect(store.activePreset).toBeNull();
-    expect(aiChatStore.agentPicker).toBeNull();
+    expect(aiChatStore.agentPicker?.agents).toEqual([]);
   });
 
   it("offers no agents in an open project's own chat", async () => {

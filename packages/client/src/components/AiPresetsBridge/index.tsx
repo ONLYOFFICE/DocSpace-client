@@ -140,9 +140,10 @@ const AiPresetsBridge = ({
     aiPresetsStore.init(enabled ? userId : null);
   }, [aiPresetsStore, enabled, userId]);
 
-  // The save button creates a project from a plain chat, for those who may
-  // create one. A chat opened from a project in the AI rooms section already
-  // is that project, so the header hides it there.
+  // "Save as new agent", the last row of the panel title's menu, creates a
+  // project from a plain chat, for those who may create one. A chat opened
+  // from a project in the AI rooms section already is that project, so it
+  // is not offered there.
   const isAiRoomsPage = location.pathname.startsWith("/ai-rooms/");
   const isInsideProject = isAiRoomsPage && !!aiPresetsStore.activePreset;
   React.useEffect(() => {
@@ -155,9 +156,10 @@ const AiPresetsBridge = ({
   // (the agents the sidebar lists), the most recent first. Picking one
   // applies it to the open chat; the default agent takes the chat off its
   // project. The menu opens on the current project list: one created,
-  // renamed or left elsewhere meanwhile is picked up. Not offered
-  // without projects, nor in an open project's own chat, which is that
-  // project.
+  // renamed or left elsewhere meanwhile is picked up. Not offered in an
+  // open project's own chat, which is that project. Without projects it is
+  // handed over all the same: the panel shows it only to a user who may
+  // save the chat as a new agent, and a plain title to everyone else.
   const { presets, activePreset } = aiPresetsStore;
   const selectedAgentId = activePreset?.id ?? null;
   const isInsideOpenProject = isAiRoomsPage && isAiProjectOpen;
@@ -207,7 +209,7 @@ const AiPresetsBridge = ({
   );
 
   React.useEffect(() => {
-    if (isInsideOpenProject || agents.length === 0) return undefined;
+    if (isInsideOpenProject) return undefined;
     aiChatStore.setAgentPicker({
       agents,
       selectedId: selectedAgentId,

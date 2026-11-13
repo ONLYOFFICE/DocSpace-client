@@ -104,16 +104,16 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
       ? t("Common:CurrentPassphraseRequired")
       : "";
 
+  // Spec: private-rooms/key-management, "A new passphrase equal to the current one is named"
+  const sameAsCurrent = !!newPassphrase && currentPassphrase === newPassphrase;
+
   const newFieldError =
-    (attemptedSubmit
-      ? newPassphrase.length > 0 && newPassphrase.length < PASSPHRASE_MIN_LENGTH
-        ? t("Common:PassphraseTooShort", { length: PASSPHRASE_MIN_LENGTH })
-        : newPassphrase &&
-            currentPassphrase &&
-            currentPassphrase === newPassphrase
-          ? t("Common:PassphraseMustBeDifferent")
-          : ""
+    (attemptedSubmit &&
+    newPassphrase.length > 0 &&
+    newPassphrase.length < PASSPHRASE_MIN_LENGTH
+      ? t("Common:PassphraseTooShort", { length: PASSPHRASE_MIN_LENGTH })
       : "") ||
+    (sameAsCurrent ? t("Common:PassphraseMustBeDifferent") : "") ||
     (containsCommonPattern(newPassphrase)
       ? t("Common:PassphraseCommonPattern")
       : "");
@@ -227,6 +227,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   }}
                   placeholder={t("Common:EnterCurrentPassphrase")}
                   scale
+                  isFullWidth
                   size={InputSize.base}
                   simpleView
                   isDisabled={isLoading}
@@ -256,6 +257,12 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
               ) : null}
             </div>
 
+            <div
+              className={styles.divider}
+              aria-hidden="true"
+              data-testid="passphrase_change_divider"
+            />
+
             <div className={styles.inputGroup}>
               <FieldContainer
                 isVertical
@@ -277,6 +284,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   }}
                   placeholder={t("Common:EnterNewPassphrase")}
                   scale
+                  isFullWidth
                   size={InputSize.base}
                   simpleView={false}
                   passwordSettings={PASSPHRASE_SETTINGS}
@@ -320,6 +328,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   }}
                   placeholder={t("Common:ConfirmNewPassphrase")}
                   scale
+                  isFullWidth
                   size={InputSize.base}
                   simpleView
                   isDisabled={isLoading}

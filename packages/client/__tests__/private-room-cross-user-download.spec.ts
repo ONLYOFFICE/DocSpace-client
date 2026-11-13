@@ -425,7 +425,7 @@ test.describe("Private room — cross-user file exchange", () => {
     await downloadGroup.hover();
     await expect(
       page.getByRole("menuitem", {
-        name: "Download without decryption",
+        name: "Download encrypted copy",
         exact: true,
       }),
     ).toBeVisible({ timeout: 5000 });

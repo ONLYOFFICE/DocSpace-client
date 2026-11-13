@@ -14,7 +14,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Label of the download entry
 
-- [ ] 3.1 Common: reword Common:DownloadWithoutDecryption in English to "Download encrypted copy" and update the E2E specs that find the entry by its text (decision 4). Verify: case "Label of the entry" in `encrypted-file-ui.spec.ts`; the menu snapshots do not change (`cd packages/client && pnpm exec vitest run src/store/contextOptionsStore src/store/filesActionsStore`, `git diff` of `__snapshots__` empty)
+- [x] 3.1 Common: reword Common:DownloadWithoutDecryption in English to "Download encrypted copy" and update the E2E specs that find the entry by its text (decision 4). Verify: case "Label of the entry" in `encrypted-file-ui.spec.ts`; the menu snapshots do not change (`cd packages/client && pnpm exec vitest run src/store/contextOptionsStore src/store/filesActionsStore`, `git diff` of `__snapshots__` empty)
+  - 2026-11-13: only the English value changed; the key, its three readers and the menu snapshots are untouched (355 unit tests of the two stores pass, no snapshot written). The case of `encrypted-file-ui.spec.ts` is renamed "Label of the entry" and, like `private-room-cross-user-download.spec.ts`, finds the entry as "Download encrypted copy". The E2E run is task 5.1.
 
 ## 4. Texts
 

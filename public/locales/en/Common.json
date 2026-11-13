@@ -827,7 +827,7 @@
   "DownloadOperationTitle": "File downloading in progress",
   "DownloadOriginalFormat": "In original format",
   "DownloadReportBtnText": "Download report",
-  "DownloadWithoutDecryption": "Download without decryption",
+  "DownloadWithoutDecryption": "Download encrypted copy",
   "DropFilesToAttach": "Drop files here to attach them",
   "DropToLocation": "Drop to: {{folderName}}",
   "DropzoneFilesSecondary": "or drop files here",

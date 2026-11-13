@@ -442,7 +442,7 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       await page.keyboard.press("Enter");
 
       const recovery = page.getByRole("dialog", {
-        name: "Save your recovery phrase",
+        name: "Recovery phrase",
       });
       await expect(recovery).toBeVisible({ timeout: 15_000 });
       await page.keyboard.press("Tab");
@@ -572,7 +572,7 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     await page.keyboard.press("Enter");
 
     const recovery = page.getByRole("dialog", {
-      name: "Save your recovery phrase",
+      name: "Recovery phrase",
     });
     await expect(recovery).toBeVisible({ timeout: 15_000 });
     await page.keyboard.press("Escape");

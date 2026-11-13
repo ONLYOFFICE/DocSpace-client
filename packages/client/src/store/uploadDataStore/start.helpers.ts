@@ -51,7 +51,10 @@ import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/Conf
 import { releaseUploadAutoLockSuspension, removeDuplicate } from "./helpers";
 import type { TUploadBrowserFile, TUploadFile, TUploadTarget } from "./helpers";
 import { withItemUploadContext } from "./target.helpers";
-import { finishUploadIfSettled } from "./chunkUpload.helpers";
+import {
+  finishUploadIfSettled,
+  retryFinalizeImpl,
+} from "./chunkUpload.helpers";
 import type {
   default as UploadDataStore,
   TAxiosLikeError,
@@ -582,6 +585,12 @@ export async function retryUploadFilesImpl(
     };
 
     self.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
+  }
+
+  const { pendingFinalize } = retryFile;
+  if (pendingFinalize) {
+    await retryFinalizeImpl(self, uniqueId, pendingFinalize, t);
+    return;
   }
 
   sendRetriedFiles(self, [retryFile], t);

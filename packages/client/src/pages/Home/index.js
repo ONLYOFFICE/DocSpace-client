@@ -222,7 +222,6 @@ const PureHome = observer((props) => {
     canCreateFiles,
     canCreateEncrypted,
     canCreateRooms,
-    onCreateRoom,
     isDocumentsFolder,
     isRoom,
     isFormRoomFolder,
@@ -342,11 +341,6 @@ const PureHome = observer((props) => {
   const isPrivateRoomsSection =
     getCategoryType(location) === CategoryType.PrivateRooms;
 
-  const onCreatePrivateRoom = useCallback(
-    () => onCreateRoom(null, false, "sidebar"),
-    [onCreateRoom],
-  );
-
   // Quick-actions banner (ported from the SDK): create tiles above the
   // files/rooms list. The hook resolves which tile set applies (or none) from
   // the current section + create permission.
@@ -359,7 +353,6 @@ const PureHome = observer((props) => {
     setTemplateGalleryVisible,
     setOformFromFolderId,
     setCreateRoomFromTemplate,
-    onCreatePrivateRoom,
     isDocumentsFolder,
     isRoom,
     isFormRoom,
@@ -1154,7 +1147,6 @@ export const Component = inject(
       canCreateFiles: folderSecurity?.Create,
       canCreateEncrypted: uploadDataStore.shouldEncryptCurrentUpload(),
       canCreateRooms: isAdmin || isRoomAdmin,
-      onCreateRoom: contextOptionsStore.onCreateRoom,
       isDocumentsFolder,
       isRoom,
       isFormRoomFolder:

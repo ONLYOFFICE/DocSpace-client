@@ -66,6 +66,7 @@ import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { onSuggestOformChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
+import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 
 export const getFormGalleryContextOptionsImpl = (
   self: ContextOptionsStore,
@@ -473,7 +474,7 @@ export const getFolderModelImpl = (
           : [
               {
                 key: "new-room",
-                label: t("Common:NewRoom"),
+                label: getNewRoomLabel(t),
                 onClick: self.onCreateRoom,
                 icon: CatalogRoomsReactSvgUrl,
               },

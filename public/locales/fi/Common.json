@@ -1596,6 +1596,7 @@
   "NewPassphrase": "Uusi salauslause",
   "NewPDFForm": "Uusi PDF-lomake",
   "NewPresentation": "Uusi esitys",
+  "NewPrivateRoom": "Uusi yksityishuone",
   "NewRoom": "Uusi huone",
   "NewSpreadsheet": "Uusi laskentataulukko",
   "NewTotalStorage": "Uusi kokonaisvarastotila ({{storageUnit}})",

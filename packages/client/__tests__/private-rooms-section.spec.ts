@@ -1350,9 +1350,11 @@ test.describe("Private section — empty states", () => {
     await expect(emptyView(page)).toBeVisible({ timeout: 15000 });
     await expect(emptyView(page)).toContainText("No private rooms here yet");
     await expect(emptyView(page)).toContainText(
-      "Please create the first private room.",
+      "Private rooms are end-to-end encrypted.",
     );
-    await expect(emptyView(page).locator("#create-room")).toBeVisible();
+    await expect(emptyView(page).locator("#create-room")).toContainText(
+      "Create private room",
+    );
     await expect(emptyView(page).locator("#invite-root-room")).toHaveCount(0);
     await expect(emptyView(page).locator("#migration-data")).toHaveCount(0);
     await expect(emptyView(page).locator("#open-ai-chat")).toHaveCount(0);
@@ -1657,19 +1659,23 @@ test.describe("Private section — creation", () => {
     await page.goto(`${baseUrl}/private/filter`);
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
 
-    const tile = page.getByTestId("quick-private-room");
-    await expect(tile).toBeVisible();
-    for (const other of [
+    for (const tile of [
+      "quick-private-room",
       "quick-vdr-room",
       "quick-custom-room",
       "quick-use-template",
       "quick-ai-chat",
     ])
-      await expect(page.getByTestId(other)).toHaveCount(0);
+      await expect(page.getByTestId(tile)).toHaveCount(0);
+  });
 
-    await tile.click();
+  test("Create button in the Private list", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
 
-    await expectPrivateTypeLocked(page);
+    await expect(page.getByTestId("main-button").first()).toContainText(
+      "New private room",
+    );
   });
 
   test("Room admin without private rooms: the create button", async ({
@@ -1804,6 +1810,10 @@ test.describe("Private section — key prompt", () => {
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
     await page.getByTestId("main-button").first().click();
     await expect(keyPrompt(page)).toBeVisible({ timeout: 15000 });
+    // No dialog under the prompts: a closed panel stays mounted, off screen.
+    await expect(
+      page.getByTestId("create_room_dialog_save"),
+    ).not.toBeInViewport();
   };
 
   test("User accepts key generation", async ({ page, baseUrl }) => {

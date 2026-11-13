@@ -49,24 +49,17 @@ import { useQuickActions } from "../useQuickActions";
 describe("useQuickActions — Private section", () => {
   const privateList = { currentFolderId: 2002, isRoomsFolder: true };
 
-  it("Banner on a non-empty Private list: only the Private room tile", () => {
-    const onCreatePrivateRoom = vi.fn();
+  it("Banner on a non-empty Private list: no banner, whoever opens it", () => {
     const { result } = renderHook(() =>
       useQuickActions({
         ...privateList,
         isPrivateRoomsSection: true,
         canCreateRooms: true,
-        onCreatePrivateRoom,
       }),
     );
 
-    expect(result.current.show).toBe(true);
-    expect(result.current.items.map((item) => item.id)).toEqual([
-      "quick-private-room",
-    ]);
-
-    result.current.items[0].onClick?.({} as never);
-    expect(onCreatePrivateRoom).toHaveBeenCalledTimes(1);
+    expect(result.current.show).toBe(false);
+    expect(result.current.items).toEqual([]);
   });
 
   it("shows no banner to users who may not create rooms", () => {
@@ -81,7 +74,7 @@ describe("useQuickActions — Private section", () => {
     expect(result.current.show).toBe(false);
   });
 
-  it("Create menu opened", () => {
+  it("Banner inside a private room: Create menu opened", () => {
     const { result } = renderHook(() =>
       useQuickActions({
         currentFolderId: 50,

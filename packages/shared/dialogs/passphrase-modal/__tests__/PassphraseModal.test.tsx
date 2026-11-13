@@ -238,6 +238,51 @@ describe("PassphraseModal", () => {
     expect(onSubmit).toHaveBeenCalledWith("Correct1horse!battery", undefined);
   });
 
+  describe("Forgot passphrase link", () => {
+    it("Link before any attempt", async () => {
+      const user = userEvent.setup();
+      const onForgotPassphrase = vi.fn();
+      renderModal({ onForgotPassphrase });
+
+      const link = screen.getByTestId("forgot_passphrase_link");
+      expect(link).toHaveTextContent("Common:ForgotPassphrase");
+
+      await user.click(link);
+      expect(onForgotPassphrase).toHaveBeenCalledTimes(1);
+    });
+
+    it("Link after failure", () => {
+      renderModal({
+        onForgotPassphrase: vi.fn(),
+        externalError: "Common:InvalidPassphrase",
+      });
+
+      expect(screen.getByTestId("forgot_passphrase_link")).toBeInTheDocument();
+    });
+
+    it("Link under the remember option", () => {
+      renderModal({ onForgotPassphrase: vi.fn(), showRememberDevice: true });
+
+      const hint = screen.getByText("Common:RememberDeviceHint");
+      const link = screen.getByTestId("forgot_passphrase_link");
+      expect(
+        hint.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).not.toBe(0);
+    });
+
+    it("Passphrase creation", () => {
+      renderModal({ isNew: true, onForgotPassphrase: vi.fn() });
+
+      expect(screen.queryByTestId("forgot_passphrase_link")).toBeNull();
+    });
+
+    it("shows no link where there is no recovery path", () => {
+      renderModal();
+
+      expect(screen.queryByTestId("forgot_passphrase_link")).toBeNull();
+    });
+  });
+
   describe("A generated passphrase fills both fields", () => {
     const generate = (user: ReturnType<typeof userEvent.setup>) =>
       user.click(screen.getByTestId("generate_passphrase_link"));

@@ -1596,6 +1596,7 @@
   "NewPassphrase": "새 패스프레이즈",
   "NewPDFForm": "새로운 PDF 양식",
   "NewPresentation": "새 프레젠테이션",
+  "NewPrivateRoom": "새로운 비공개 룸",
   "NewRoom": "새로운 방",
   "NewSpreadsheet": "새 스프레드시트",
   "NewTotalStorage": "새 총 저장 공간 ({{storageUnit}})",

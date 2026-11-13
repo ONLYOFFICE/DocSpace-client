@@ -49,6 +49,7 @@ const mocks = vi.hoisted(() => ({
   confirm: null as TConfirmProps | null,
   keyFlow: null as TKeyFlowOptions | null,
   requestKey: vi.fn(),
+  panel: null as { visible?: boolean | null } | null,
   getEncryptionKeys: vi.fn(),
   toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
 }));
@@ -76,7 +77,10 @@ vi.mock("@docspace/shared/dialogs/key-generation", () => ({
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
-  const ModalDialog = () => null;
+  const ModalDialog = (props: { visible?: boolean | null }) => {
+    mocks.panel = props;
+    return null;
+  };
   ModalDialog.Container = () => null;
   ModalDialog.Header = () => null;
   ModalDialog.Body = () => null;
@@ -213,5 +217,78 @@ describe("Creating a private room before the key list is known", () => {
     );
     expect(mocks.confirm?.visible).toBe(false);
     expect(onClose).not.toHaveBeenCalled();
+    // Key list still loading: nothing is shown until the list is known.
+    expect(mocks.panel?.visible).toBeFalsy();
+  });
+});
+
+// Spec: room-membership, "Starting private room creation without a key starts key generation"
+describe("The create-room panel waits for the key", () => {
+  beforeEach(() => {
+    mocks.confirm = null;
+    mocks.keyFlow = null;
+    mocks.panel = null;
+  });
+
+  it("No dialog under the prompts", () => {
+    renderPrivateRoomCreation();
+
+    expect(mocks.confirm?.visible).toBe(true);
+    expect(mocks.panel?.visible).toBeFalsy();
+
+    act(() => mocks.confirm!.onConfirm());
+
+    expect(mocks.requestKey).toHaveBeenCalledTimes(1);
+    expect(mocks.panel?.visible).toBeFalsy();
+  });
+
+  it("User accepts key generation", async () => {
+    mocks.getEncryptionKeys.mockResolvedValue([]);
+    renderPrivateRoomCreation();
+
+    act(() => mocks.confirm!.onConfirm());
+    expect(mocks.panel?.visible).toBeFalsy();
+
+    await act(async () => {
+      mocks.keyFlow!.onSuccess();
+    });
+
+    await waitFor(() => expect(mocks.panel?.visible).toBe(true));
+  });
+
+  it("User cancels key generation", () => {
+    const { onClose } = renderPrivateRoomCreation();
+
+    act(() => mocks.confirm!.onCancel());
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(mocks.panel?.visible).toBeFalsy();
+  });
+
+  it("Key list still loading", async () => {
+    let resolveKeys: (keys: unknown[]) => void = () => {};
+    mocks.getEncryptionKeys.mockReturnValue(
+      new Promise<unknown[]>((resolve) => {
+        resolveKeys = resolve;
+      }),
+    );
+    renderPrivateRoomCreation({ encryptionKeys: null });
+
+    expect(mocks.panel?.visible).toBeFalsy();
+    expect(mocks.confirm?.visible).toBe(false);
+
+    await act(async () => {
+      resolveKeys([{ publicKey: "pk", privateKeyEnc: "enc", date: "2026-10-22" }]);
+    });
+    expect(mocks.confirm?.visible).toBe(false);
+  });
+
+  it("shows the panel at once to a user who holds a key", () => {
+    renderPrivateRoomCreation({
+      encryptionKeys: [{ publicKey: "pk", privateKeyEnc: "enc", date: "2026-10-22" }],
+    });
+
+    expect(mocks.panel?.visible).toBe(true);
+    expect(mocks.confirm?.visible).toBe(false);
   });
 });

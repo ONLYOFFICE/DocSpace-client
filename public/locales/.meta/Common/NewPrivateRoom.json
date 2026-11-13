@@ -1,20 +1,20 @@
 {
-  "key_path": "EmptyRootPrivateRoomsDescription",
-  "content": "Please create the first private room.",
-  "content_en_sha1_hash": "5436999ddf953e117602a596a1d05e76e03419ee",
-  "created_at": "2026-10-21T15:26:52.378Z",
-  "updated_at": "2026-11-05T16:49:39.818Z",
+  "key_path": "NewPrivateRoom",
+  "content": "New private room",
+  "content_en_sha1_hash": "667984098955dcf3e606a2dbf89a0de0951a435a",
+  "created_at": "2026-11-13T08:32:30.419Z",
+  "updated_at": "2026-11-13T08:33:40.333Z",
   "comment": {
-    "text": "Text under the heading of the empty Private section (end-to-end encrypted private rooms), shown to users who may create rooms; a create-room button follows it. A short polite request to create the first private room.",
+    "text": "Label of the create button of the Private section (the list of end-to-end encrypted rooms), also the name of its header action and of the only entry of its plus menu; pressing it opens the panel that creates a private room. Short noun phrase like the New room label of the Rooms section, not a sentence.",
     "is_auto": true,
-    "updated_at": "2026-10-21T15:27:35.951Z",
-    "model": "claude-opus-5-5"
+    "updated_at": "2026-11-13T08:33:40.333Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 305,
-      "context": "<span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n ))\n .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>\n access === ShareAccessRights.None\n ? t(\"EmptyView:EmptyRootPrivateRoomsDescription\")\n : t(\"EmptyView:EmptyRootPrivateRoomsUserDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.None], () =>\n t(\"Files:RoomEmptyContainerDescription\"),\n )",
+      "file_path": "/packages/client/src/helpers/newRoomLabel.ts",
+      "line_number": 49,
+      "context": "export const getNewRoomLabel = (\n t: TTranslation,\n pathname: string = window.location.pathname,\n ) =>\n isPrivateRoomsRoute(pathname)\n ? t(\"Common:NewPrivateRoom\")\n : t(\"Common:NewRoom\");",
       "module": "/packages/client"
     }
   ],

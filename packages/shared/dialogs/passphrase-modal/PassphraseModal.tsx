@@ -375,7 +375,8 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 </div>
               ) : null}
 
-              {onForgotPassphrase && externalError ? (
+              {/* Spec: private-rooms/key-management, "Forgot passphrase link" */}
+              {onForgotPassphrase && !isNew ? (
                 <div className={styles.forgotRow}>
                   <Link
                     type={LinkType.action}

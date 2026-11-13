@@ -168,6 +168,10 @@ test.describe("Encrypted file UI in private room", () => {
       .filter({ hasText: "Enter passphrase" });
     await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
     if (await passphrasePrompt.isVisible()) {
+      // Link before any attempt
+      await expect(
+        passphrasePrompt.getByTestId("forgot_passphrase_link"),
+      ).toBeVisible();
       await passphrasePrompt
         .getByRole("button", { name: "Cancel", exact: true })
         .click();

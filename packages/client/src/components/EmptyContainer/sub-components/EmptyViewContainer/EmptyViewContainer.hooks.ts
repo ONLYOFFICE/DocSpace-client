@@ -146,6 +146,7 @@ export const useEmptyView = (
       isRootEmptyPage,
       rootFolderType,
       isPublicRoom,
+      isPrivateScope,
     );
 
     return { description, title, icon };

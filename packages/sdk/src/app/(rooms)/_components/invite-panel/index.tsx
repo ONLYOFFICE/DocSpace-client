@@ -84,6 +84,7 @@ import {
 } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 import {
+  notInvitedReasons,
   sendPrivateRoomInvitations,
   type TInviteOutcome,
   type TInviteeVerification,
@@ -93,6 +94,7 @@ import type { SkippedRoomMember } from "@docspace/shared/services/private-room/r
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button/Button.enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -275,8 +277,15 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const [inviteOutcome, setInviteOutcome] = useState<TInviteOutcome | null>(
     null,
   );
+  // Spec: private-rooms/room-membership, "An invitation that invited nobody keeps the invite form"
+  const [notInvited, setNotInvited] = useState<string[]>([]);
   // Counts sends and closes, so a re-wrap that ends after a close shows nothing.
   const sendRunRef = useRef(0);
+
+  // The reasons describe the list as it was sent; a changed list is a new one.
+  useEffect(() => {
+    setNotInvited([]);
+  }, [inviteItems]);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [activeLink, setActiveLink] = useState<ShareLink>({});
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
@@ -298,6 +307,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const handleClose = () => {
     sendRunRef.current += 1;
     setInviteOutcome(null);
+    setNotInvited([]);
     setInviteItems([]);
     onClose();
   };
@@ -665,6 +675,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
     try {
       setIsLoading(true);
+      setNotInvited([]);
 
       // Pre-submit identity gate: callers (e.g. private rooms) can verify that
       // encryption keys are unlocked before the server grants room access.
@@ -759,6 +770,12 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       if (showsResult) {
         const run = ++sendRunRef.current;
 
+        if (memberIds.length === 0) {
+          setIsLoading(false);
+          setNotInvited(notInvitedReasons(t, verification.skipped, refused));
+          return;
+        }
+
         let outcome: TInviteOutcome | null = null;
         if (memberIds.length > 0 || verification.skipped.length > 0) {
           try {
@@ -773,7 +790,13 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         }
 
         setIsLoading(false);
-        if (run !== sendRunRef.current) return;
+        if (run !== sendRunRef.current) {
+          // The panel was closed or reused meanwhile and cannot show the result.
+          for (const { level, text } of outcome?.notices ?? []) {
+            toastr[level](text);
+          }
+          return;
+        }
         if (refused.length > 0) {
           setInviteOutcome({
             ...(outcome ?? { granted: [], pending: [], skipped: [] }),
@@ -1178,6 +1201,17 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
           <InviteResult t={t} outcome={inviteOutcome} />
         ) : (
           <PrivateRoomInviteContext.Provider value={isPrivateRoom}>
+            <div
+              role="status"
+              data-testid="invite_panel_not_invited"
+              className={notInvited.length ? styles.notInvited : undefined}
+            >
+              {notInvited.map((reason) => (
+                <Text key={reason} fontSize="13px" fontWeight={600}>
+                  {reason}
+                </Text>
+              ))}
+            </div>
             {bodyInvitePanel}
           </PrivateRoomInviteContext.Provider>
         )}

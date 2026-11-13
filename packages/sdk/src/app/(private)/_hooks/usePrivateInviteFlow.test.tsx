@@ -165,13 +165,15 @@ describe("usePrivateInviteFlow", () => {
       }),
     );
 
+    const notices = [{ level: "success", text: "Common:UsersInvited" }];
     await act(async () => {
-      finish([{ level: "success", text: "Common:UsersInvited" }]);
-      await expect(pending).resolves.toEqual(BOB_GRANTED);
+      finish(notices);
+      await expect(pending).resolves.toEqual({ ...BOB_GRANTED, notices });
     });
 
     expect(dialogs.reencryptPercent).toBeNull();
-    expect(mocks.toastr.success).toHaveBeenCalledWith("Common:UsersInvited");
+    // The panel shows the result; the hook raises no toast of its own.
+    expect(mocks.toastr.success).not.toHaveBeenCalled();
   });
 
   it("Mixed invitation: resolves with the skipped invitees the shared flow reports", async () => {
@@ -180,29 +182,21 @@ describe("usePrivateInviteFlow", () => {
       pending: [],
       skipped: [{ id: "dan", displayName: "Dan", reason: "no-key" }],
     };
+    const notices = [
+      { level: "warning", text: "Common:EncryptedSkippedNoKeys" },
+    ];
     mocks.rewrapForInvitedMembers.mockImplementation(
       async ({ onOutcome }: TRewrapArgs) => {
         onOutcome(outcome);
-        return [{ level: "warning", text: "Common:EncryptedSkippedNoKeys" }];
+        return notices;
       },
     );
 
     await act(async () => {
-      await expect(invite()).resolves.toEqual(outcome);
+      await expect(invite()).resolves.toEqual({ ...outcome, notices });
     });
-  });
-
-  it("reports the skipped members the shared flow names", async () => {
-    mocks.rewrapForInvitedMembers.mockImplementation(async () => [
-      { level: "warning", text: "Common:EncryptedSkippedNoKeys" },
-    ]);
-
-    await act(() => invite());
-
-    expect(mocks.toastr.warning).toHaveBeenCalledWith(
-      "Common:EncryptedSkippedNoKeys",
-    );
-    expect(mocks.toastr.success).not.toHaveBeenCalled();
+    // Reason shown once: the notices travel with the outcome, not as toasts.
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
   });
 
   it("reports nothing once a lock or a navigation aborted the re-encryption", async () => {
@@ -276,10 +270,6 @@ describe("usePrivateInviteFlow", () => {
     const skipped = [
       { id: "dan", displayName: "Dan", reason: "no-key" as const },
     ];
-    mocks.skippedMemberNotices.mockReturnValue([
-      { level: "warning", text: "Common:EncryptedSkippedNoKeys" },
-    ]);
-
     let outcome: unknown;
     await act(async () => {
       outcome = await flow.onInviteSubmitted({
@@ -292,9 +282,7 @@ describe("usePrivateInviteFlow", () => {
 
     expect(outcome).toEqual({ granted: [], pending: [], skipped });
     expect(mocks.rewrapForInvitedMembers).not.toHaveBeenCalled();
-    expect(mocks.toastr.warning).toHaveBeenCalledWith(
-      "Common:EncryptedSkippedNoKeys",
-    );
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
   });
 
   it("re-wraps nothing for a user without keys", async () => {

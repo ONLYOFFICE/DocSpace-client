@@ -262,7 +262,12 @@ describe("InvitePanel of a private room", () => {
   });
 
   it("Mixed invitation: the skipped invitee is left out of the security update, the panel stays open listing them with the reason, and Invite again sends only them", async () => {
-    const dan = { id: "dan", displayName: "Dan", reason: "no-key" as const };
+    const dan = {
+      id: "dan",
+      displayName: "Dan",
+      reason: "no-key" as const,
+      notInvited: true as const,
+    };
     const onVerifyInvitees = vi.fn(async () => ({
       verified: [{ id: "bob", displayName: "Bob" }],
       skipped: [dan],
@@ -298,8 +303,8 @@ describe("InvitePanel of a private room", () => {
       [dan],
     );
     expect(find("invite_panel_result_granted")?.textContent).toContain("Bob");
-    expect(find("invite_panel_result_skipped")?.textContent).toContain(
-      "Common:EncryptedSkippedNoKeys",
+    expect(find("invite_panel_result_refused")?.textContent).toContain(
+      "Common:EncryptedInviteNoKey",
     );
     expect(onClose).not.toHaveBeenCalled();
 
@@ -316,6 +321,39 @@ describe("InvitePanel of a private room", () => {
     expect(mocks.setRoomSecurity.mock.calls[1][1].invitations).toEqual([
       { id: "dan", access: ShareAccessRights.Editing },
     ]);
+  });
+
+  it("Nobody invited", async () => {
+    const dan = {
+      id: "dan",
+      displayName: "Dan",
+      reason: "no-key" as const,
+      notInvited: true as const,
+    };
+    const onVerifyInvitees = vi.fn(async () => ({
+      verified: [],
+      skipped: [dan],
+    }));
+    const onInviteSubmitted = vi.fn(async () => null);
+    const { onClose } = await renderPanel({
+      isPrivateRoom: true,
+      onBeforeSubmit: async () => true,
+      onVerifyInvitees,
+      onInviteSubmitted,
+    });
+
+    await click("add_bob_and_dan");
+    await click("invite_panel_send_button");
+
+    const block = find("invite_panel_not_invited");
+    expect(block?.getAttribute("role")).toBe("status");
+    expect(block?.textContent).toContain("Common:EncryptedInviteNoKey");
+    expect(find("invite_panel_result")).toBeNull();
+    expect(find("invite_panel_send_button")).not.toBeNull();
+    expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
+    expect(onInviteSubmitted).not.toHaveBeenCalled();
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
+    expect(onClose).not.toHaveBeenCalled();
   });
 
   it("One invitee has never registered a key", async () => {

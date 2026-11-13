@@ -215,6 +215,8 @@ export type TInviteOutcome = {
   failed?: true;
   /** Invitees the server refused, who never became members. */
   refused?: TRefusedInvitee[];
+  /** The messages of the re-wrap, for a caller that can no longer show the result. */
+  notices?: TMemberFlowNotice[];
 };
 
 const getInviteOutcome = (

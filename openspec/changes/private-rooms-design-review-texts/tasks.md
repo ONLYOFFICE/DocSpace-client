@@ -24,7 +24,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 5. E2E
 
-- [ ] 5.1 Client: run `encrypted-file-ui.spec.ts`, `private-room-cross-user-download.spec.ts` and `private-rooms-section.spec.ts` in Docker `tests-dev`. Verify: no failure beyond the ones known before this change; every screenshot that changes is updated only through the Docker update script, looked at and named here
+- [x] 5.1 Client: run `encrypted-file-ui.spec.ts`, `private-room-cross-user-download.spec.ts` and `private-rooms-section.spec.ts` in Docker `tests-dev`. Verify: no failure beyond the ones known before this change; every screenshot that changes is updated only through the Docker update script, looked at and named here
+  - 2026-11-13: Docker `tests-dev`, `WORKERS=3`: 82 of 82 in the three specs. No Playwright screenshot changed. On the local stand (Russian, dark theme) the edit panel of a private room shows the description on four lines with the block grown to fit, and the Download group of a room's menu shows the new label; the link has no entry to show it there.
 
 ## 6. Gate
 

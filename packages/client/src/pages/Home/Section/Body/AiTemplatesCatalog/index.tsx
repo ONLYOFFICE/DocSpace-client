@@ -39,6 +39,8 @@ import { useLocation, useNavigate } from "react-router";
 
 import { ReactSVG } from "react-svg";
 
+import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -100,6 +102,33 @@ export const getListTemplates = (
   }
 };
 
+/**
+ * The templates whose name, description or category holds the search text,
+ * grouped by category in the order the categories first appear.
+ */
+export const groupTemplates = (
+  templates: TAiTemplate[],
+  search: string,
+): { category: string; templates: TAiTemplate[] }[] => {
+  const query = search.trim().toLowerCase();
+  const groups = new Map<string, TAiTemplate[]>();
+  for (const template of templates) {
+    const { name, description, category } = template;
+    if (
+      query &&
+      ![name, description, category].some((text) =>
+        text.toLowerCase().includes(query),
+      )
+    )
+      continue;
+    groups.set(category, [...(groups.get(category) ?? []), template]);
+  }
+  return Array.from(groups, ([category, list]) => ({
+    category,
+    templates: list,
+  }));
+};
+
 /** What a card lists under the description: the linked templates of an agent, the files of the others. */
 export const getTemplateDetails = (
   template: TAiTemplate,
@@ -139,6 +168,7 @@ const AiTemplatesCatalog = () => {
     null,
   );
   const [failed, setFailed] = React.useState(false);
+  const [search, setSearch] = React.useState("");
   const [installingId, setInstallingId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -201,9 +231,9 @@ const AiTemplatesCatalog = () => {
     </Text>
   );
 
-  return (
-    <div className={styles.catalog} data-testid="ai-templates-catalog">
-      {getListTemplates(catalog, listType).map((template) => (
+  const groups = groupTemplates(getListTemplates(catalog, listType), search);
+
+  const card = (template: TAiTemplate) => (
         <div
           key={template.id}
           className={styles.card}
@@ -271,6 +301,35 @@ const AiTemplatesCatalog = () => {
             )}
           </div>
         </div>
+  );
+
+  return (
+    <div className={styles.wrapper} data-testid="ai-templates-catalog">
+      <SearchInput
+        className={styles.search}
+        scale
+        size={InputSize.base}
+        placeholder={t("Common:Search")}
+        value={search}
+        onChange={setSearch}
+        onClearSearch={() => setSearch("")}
+      />
+      {groups.length === 0 ? (
+        <Text className={styles.message} data-testid="ai-templates-empty">
+          {t("Common:NotFoundTitle")}
+        </Text>
+      ) : null}
+      {groups.map(({ category, templates }) => (
+        <section
+          key={category}
+          className={styles.group}
+          data-testid="ai-templates-group"
+        >
+          <Text as="h3" fontSize="16px" fontWeight={700} className={styles.heading}>
+            {category}
+          </Text>
+          <div className={styles.catalog}>{templates.map(card)}</div>
+        </section>
       ))}
     </div>
   );

@@ -25,7 +25,7 @@ vi.mock("react-i18next", () => ({
 
 import { RoomsType } from "@docspace/shared/enums";
 
-import AiTemplatesCatalog from "../index";
+import AiTemplatesCatalog, { groupTemplates } from "../index";
 
 const catalog = {
   agents: [
@@ -118,5 +118,33 @@ describe("AiTemplatesCatalog", () => {
     api.getAiTemplates.mockRejectedValue(new Error("down"));
     render(<AiTemplatesCatalog />);
     expect(await screen.findByTestId("ai-templates-error")).toBeTruthy();
+  });
+});
+
+describe("groupTemplates", () => {
+  const template = (name: string, category: string) =>
+    ({ ...catalog.agents[0], id: name, name, category, description: `${name} does` }) as never;
+  const list = [
+    template("Reviewer", "Document"),
+    template("Pitch", "Presentation"),
+    template("Writer", "Document"),
+  ];
+  const shape = (search: string) =>
+    groupTemplates(list, search).map(({ category, templates }) => [
+      category,
+      templates.map(({ name }) => name),
+    ]);
+
+  it("groups the templates by category, in the order the categories appear", () => {
+    expect(shape("")).toEqual([
+      ["Document", ["Reviewer", "Writer"]],
+      ["Presentation", ["Pitch"]],
+    ]);
+  });
+
+  it("keeps the templates whose name, description or category holds the search text", () => {
+    expect(shape(" writ ")).toEqual([["Document", ["Writer"]]]);
+    expect(shape("PRESENTATION")).toEqual([["Presentation", ["Pitch"]]]);
+    expect(shape("nothing")).toEqual([]);
   });
 });

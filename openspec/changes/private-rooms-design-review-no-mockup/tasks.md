@@ -33,7 +33,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 6. Texts
 
-- [ ] 6.1 Common: remove EmptyView:EmptyRootPrivateRoomsDescription with its `.meta` from the 32 languages, write the translator comment of Common:NewPrivateRoom (`translate-comments`) and translate it into the 31 other languages (`translate-locales`) (decision 8). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the keys foreign to this change; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
+- [x] 6.1 Common: remove EmptyView:EmptyRootPrivateRoomsDescription with its `.meta` from the 32 languages, write the translator comment of Common:NewPrivateRoom (`translate-comments`) and translate it into the 31 other languages (`translate-locales`) (decision 8). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the keys foreign to this change; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
+  - 2026-11-13: EmptyView:EmptyRootPrivateRoomsDescription is removed from the 32 `EmptyView.json` files of the client and from `.meta`. Common:NewPrivateRoom got its translator comment from the call site (model `claude-fable-5-2`) and its 31 translations, each built from the language's own words for "new room" and "private room". The metadata run rewrote 934 foreign `.meta` files and created two for foreign keys; all restored or removed. `locales.test.js`: 44 of 46, the two completeness cases failing on the six foreign AI keys only; `test:lefthook`: 61 passed, 3 skipped.
 
 ## 7. E2E
 

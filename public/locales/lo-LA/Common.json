@@ -1596,6 +1596,7 @@
   "NewPassphrase": "ລະຫັດລັບໃໝ່",
   "NewPDFForm": "ແບບຟອມ PDF ໃໝ່",
   "NewPresentation": "ບົດນຳສະເໜີໃໝ່",
+  "NewPrivateRoom": "ຫ້ອງສ່ວນຕົວໃຫມ່",
   "NewRoom": "ຫ້ອງໃຫມ່",
   "NewSpreadsheet": "ຕາຕະລາງໃໝ່",
   "NewTotalStorage": "ພທີ່ຈັດເກັບຂໍ້ມູນທັງໝົດໃໝ່ ({{storageUnit}})",

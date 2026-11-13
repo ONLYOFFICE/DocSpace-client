@@ -58,6 +58,13 @@
   margin: 0;
   padding: 7px 12px;
   border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+
+  // The chip sets no cursor of its own, and its label would show the text one.
+  * {
+    cursor: pointer;
+  }
 
   :global(.selected-item_label) {
     margin-inline-end: 0;

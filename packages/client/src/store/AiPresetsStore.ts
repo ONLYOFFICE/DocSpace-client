@@ -48,6 +48,7 @@ import {
   type TAiProjectLogo,
   type TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
+import { deleteRoom } from "@docspace/shared/api/rooms";
 
 /**
  * An AI project as the chat takes it: the model, its Instructions rooms as
@@ -59,6 +60,16 @@ export type TAiPreset = AiChatPresetSettings & {
   createdAt: string;
   /** The project's logo, for the sidebar's list under Agents. */
   logo?: TAiProjectLogo;
+  /** What the user may do with the project: the chat panel's "Agent actions". */
+  rights: TAiPresetRights;
+};
+
+export type TAiPresetRights = {
+  /** Change the project's settings (the owner and the project managers). */
+  edit: boolean;
+  /** Invite to the project and change its members. */
+  share: boolean;
+  delete: boolean;
 };
 
 export type { AiChatPresetRoom, AiChatPresetSettings };
@@ -93,6 +104,11 @@ export const toAiPreset = (project: TAiProject): TAiPreset => {
     profileName: profile?.name ?? null,
     contextRooms: toChatRooms(instructionsRooms),
     knowledgeRooms: toChatRooms(knowledgeRooms),
+    rights: {
+      edit: !!project.aiProject.canEditSettings,
+      share: !!project.security?.EditAccess,
+      delete: !!project.security?.Delete,
+    },
   };
 };
 
@@ -241,6 +257,19 @@ class AiPresetsStore {
 
   setActivePreset = (preset: TAiPreset | null) => {
     this.activePreset = preset;
+  };
+
+  /**
+   * Deletes a project for good, from the chat panel's "Agent actions": it
+   * leaves the list, and the chat if it runs on it. A refused delete
+   * rejects and changes nothing.
+   */
+  deletePreset = async (id: string) => {
+    await deleteRoom(Number(id));
+    runInAction(() => {
+      this.presets = this.presets.filter((preset) => preset.id !== id);
+      if (this.activePreset?.id === id) this.activePreset = null;
+    });
   };
 
   /**

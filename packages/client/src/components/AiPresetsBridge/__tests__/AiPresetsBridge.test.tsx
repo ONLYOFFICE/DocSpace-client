@@ -18,6 +18,24 @@ const { toastr } = vi.hoisted(() => ({
 }));
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
+
+const roomsApi = vi.hoisted(() => ({ deleteRoom: vi.fn() }));
+vi.mock("@docspace/shared/api/rooms", () => roomsApi);
+
+const infoPanel = vi.hoisted(() => ({ showInfoPanel: vi.fn() }));
+vi.mock("SRC_DIR/helpers/info-panel", () => infoPanel);
+
+vi.mock("../DeleteAgentDialog", () => ({
+  default: ({ agentName, onDelete, onClose }: { agentName: string; onDelete: () => void; onClose: () => void }) => (
+    <div data-testid="delete-agent-dialog" data-name={agentName}>
+      <button type="button" data-testid="delete-agent-confirm" onClick={onDelete} />
+      <button type="button" data-testid="delete-agent-cancel" onClick={onClose} />
+    </div>
+  ),
+}));
+
+const openEditAiProject = vi.fn();
+const inviteToRoom = vi.fn();
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 
 /** The slice of the panel store the bridge drives, observable so its reactions fire. */
@@ -37,11 +55,17 @@ class FakeAiChatStore {
     onOpen?: () => void;
   } | null = null;
 
+  agentActions: { id: string; label: string; isDanger?: boolean; onClick: () => void }[] | null = null;
+
   applyPreset = vi.fn();
 
   constructor() {
-    makeAutoObservable(this, { applyPreset: false, agentPicker: false });
+    makeAutoObservable(this, { applyPreset: false, agentPicker: false, agentActions: false });
   }
+
+  setAgentActions = (actions: FakeAiChatStore["agentActions"]) => {
+    this.agentActions = actions;
+  };
 
   setAgentPicker = (picker: FakeAiChatStore["agentPicker"]) => {
     this.agentPicker = picker;
@@ -150,7 +174,8 @@ const renderBridge = (
     <MemoryRouter initialEntries={[path]}>
       <Provider
         aiPresetsStore={aiPresetsStore}
-        aiProjectsStore={{ activeProject }}
+        aiProjectsStore={{ activeProject, openEditDialogById: openEditAiProject }}
+        contextOptionsStore={{ onClickInviteUsers: inviteToRoom }}
         userStore={{ user }}
         settingsStore={{ aiConfig, standalone: true, setAiReady }}
         paymentStore={{ isAIReady: false }}
@@ -428,6 +453,83 @@ describe("AiPresetsBridge", () => {
     act(() => aiChatStore.agentPicker?.onSelect(null));
     expect(store.activePreset).toBeNull();
     expect(aiChatStore.agentPicker?.agents).toEqual([]);
+  });
+
+  describe("the actions of the picked agent", () => {
+    const withRights = (security: object, canEditSettings: boolean) => ({
+      ...project(1, "Sales"),
+      security,
+      aiProject: { ...project(1, "Sales").aiProject, canEditSettings },
+    });
+    const pick = async (store: AiPresetsStore, picked: object) => {
+      api.getAiProject.mockResolvedValue(picked);
+      renderBridge(store);
+      await flush();
+      act(() => aiChatStore.setIsVisible(true));
+      await act(async () => aiChatStore.agentPicker?.onSelect("1"));
+      await flush();
+    };
+    const action = (id: string) => aiChatStore.agentActions?.find((a) => a.id === id);
+
+    it("are none on the default agent", async () => {
+      renderBridge(new AiPresetsStore());
+      await flush();
+      expect(aiChatStore.agentActions).toBeNull();
+    });
+
+    it("follow the owner's rights and open the agent's form, invite panel and page", async () => {
+      await pick(new AiPresetsStore(), withRights({ EditAccess: true, Delete: true }, true));
+      expect(aiChatStore.agentActions?.map((a) => a.id)).toEqual(["edit", "share", "info", "delete"]);
+      expect(action("delete")?.isDanger).toBe(true);
+
+      act(() => action("edit")?.onClick());
+      expect(openEditAiProject).toHaveBeenCalledWith(1);
+      act(() => action("share")?.onClick());
+      expect(inviteToRoom).toHaveBeenCalledWith(1, expect.anything());
+      act(() => action("info")?.onClick());
+      expect(infoPanel.showInfoPanel).toHaveBeenCalled();
+    });
+
+    it("leave a member with Agent info alone", async () => {
+      await pick(new AiPresetsStore(), withRights({ EditAccess: false, Delete: false }, false));
+      expect(aiChatStore.agentActions?.map((a) => a.id)).toEqual(["info"]);
+    });
+
+    it("delete the agent after a confirmation and take the chat back to the default agent", async () => {
+      const store = new AiPresetsStore();
+      await pick(store, withRights({ EditAccess: true, Delete: true }, true));
+      roomsApi.deleteRoom.mockResolvedValue({});
+
+      act(() => action("delete")?.onClick());
+      expect(screen.getByTestId("delete-agent-dialog")).toHaveAttribute("data-name", "Sales");
+      // Cancelled: nothing is deleted.
+      fireEvent.click(screen.getByTestId("delete-agent-cancel"));
+      expect(screen.queryByTestId("delete-agent-dialog")).toBeNull();
+      expect(roomsApi.deleteRoom).not.toHaveBeenCalled();
+
+      act(() => action("delete")?.onClick());
+      await act(async () => fireEvent.click(screen.getByTestId("delete-agent-confirm")));
+      expect(roomsApi.deleteRoom).toHaveBeenCalledWith(1);
+      expect(store.activePreset).toBeNull();
+      expect(store.presets.some((p) => p.id === "1")).toBe(false);
+      expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith(
+        expect.objectContaining({ profileId: null, contextRooms: [] }),
+      );
+      expect(aiChatStore.agentActions).toBeNull();
+      expect(screen.queryByTestId("delete-agent-dialog")).toBeNull();
+    });
+
+    it("keep the agent and the dialog when the delete is refused", async () => {
+      const store = new AiPresetsStore();
+      await pick(store, withRights({ EditAccess: true, Delete: true }, true));
+      roomsApi.deleteRoom.mockRejectedValue(new Error("refused"));
+
+      act(() => action("delete")?.onClick());
+      await act(async () => fireEvent.click(screen.getByTestId("delete-agent-confirm")));
+      expect(toastr.error).toHaveBeenCalled();
+      expect(store.activePreset?.id).toBe("1");
+      expect(screen.getByTestId("delete-agent-dialog")).toBeInTheDocument();
+    });
   });
 
   it("offers no agents in an open project's own chat", async () => {

@@ -36,22 +36,34 @@
 import React, { type ComponentType } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { reaction } from "mobx";
 
-import type { AiChatAgentPickerItem } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import type {
+  AiChatAgentAction,
+  AiChatAgentPickerItem,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import type { TTranslation } from "@docspace/shared/types";
+import { RoomsType } from "@docspace/shared/enums";
+
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import DialogComponent from "SRC_DIR/components/GlobalEvents/sub-components/Dialog";
 import type AiPresetsStore from "SRC_DIR/store/AiPresetsStore";
 import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
 import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
+import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
+
+import DeleteAgentDialog from "./DeleteAgentDialog";
 
 import styles from "./AiPresetsBridge.module.scss";
 
@@ -89,6 +101,10 @@ type AiPresetsBridgeProps = {
   setAiReady: (aiReady: boolean | null) => void;
   /** An AI project is open on the projects page (its room, with its own chat). */
   isAiProjectOpen: boolean;
+  /** Opens the edit form of a project, read first. */
+  openEditAiProject: (id: number) => void | Promise<void>;
+  /** Opens the invite panel of a room. */
+  inviteToRoom: (roomId: number, roomType: RoomsType) => void;
 };
 
 // A project read without its logo is drawn with its initials.
@@ -120,9 +136,12 @@ const AiPresetsBridge = ({
   isAIReady,
   setAiReady,
   isAiProjectOpen,
+  openEditAiProject,
+  inviteToRoom,
 }: AiPresetsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
+  const navigate = useNavigate();
   const aiChatStore = useAiChatStore();
 
   // Whether AI is set up, by the chat's own rule, for the AI rooms section
@@ -219,6 +238,83 @@ const AiPresetsBridge = ({
     return () => aiChatStore.setAgentPicker(null);
   }, [aiChatStore, aiPresetsStore, agents, selectedAgentId, onAgentSelect, isInsideOpenProject]);
 
+  // The "Agent actions" menu of the panel header, for the agent the chat
+  // runs on: what the user's rights in that project allow. The panel adds
+  // Expand and "Save as new agent" itself. Edit and Share open over the page
+  // the user is on; Agent info goes to the agent's own page.
+  const [agentToDelete, setAgentToDelete] = React.useState<{ id: string; name: string } | null>(null);
+  const activeAgentId = activePreset?.id ?? null;
+  const activeAgentName = activePreset?.name ?? "";
+  const canEditAgent = !!activePreset?.rights.edit;
+  const canShareAgent = !!activePreset?.rights.share;
+  const canDeleteAgent = !!activePreset?.rights.delete;
+  React.useEffect(() => {
+    if (isInsideOpenProject || activeAgentId === null) return undefined;
+    const id = activeAgentId;
+    const actions: AiChatAgentAction[] = [];
+    if (canEditAgent) {
+      actions.push({
+        id: "edit",
+        label: t("Common:EditAgent"),
+        icon: PencilReactSvgUrl,
+        onClick: () => void openEditAiProject(Number(id)),
+      });
+    }
+    if (canShareAgent) {
+      actions.push({
+        id: "share",
+        label: t("Common:ShareAgent"),
+        icon: ShareReactSvgUrl,
+        onClick: () => inviteToRoom(Number(id), RoomsType.AiProjectRoom),
+      });
+    }
+    actions.push({
+      id: "info",
+      label: t("Common:AgentInfo"),
+      icon: InfoOutlineReactSvgUrl,
+      onClick: () => {
+        navigate(`/ai-rooms/${id}/filter?folder=${id}`);
+        showInfoPanel();
+      },
+    });
+    if (canDeleteAgent) {
+      actions.push({
+        id: "delete",
+        label: t("Common:DeleteAgent"),
+        icon: TrashReactSvgUrl,
+        isDanger: true,
+        onClick: () => setAgentToDelete({ id, name: activeAgentName }),
+      });
+    }
+    aiChatStore.setAgentActions(actions);
+    return () => aiChatStore.setAgentActions(null);
+  }, [
+    aiChatStore,
+    t,
+    navigate,
+    openEditAiProject,
+    inviteToRoom,
+    isInsideOpenProject,
+    activeAgentId,
+    activeAgentName,
+    canEditAgent,
+    canShareAgent,
+    canDeleteAgent,
+  ]);
+
+  // The agent deleted from the panel: the chat goes back to the default one.
+  const onDeleteAgent = async () => {
+    if (!agentToDelete) return;
+    const wasActive = aiPresetsStore.activePreset?.id === agentToDelete.id;
+    try {
+      await aiPresetsStore.deletePreset(agentToDelete.id);
+      if (wasActive) aiChatStore.applyPreset(NO_PRESET);
+      setAgentToDelete(null);
+    } catch (e) {
+      toastr.error(errorMessage(e));
+    }
+  };
+
   // With vectorization off no Knowledge room can be searched, so the
   // "+" menu's Knowledge bases loses Manage; a base connected earlier stays
   // listed there and can still be disconnected.
@@ -292,6 +388,16 @@ const AiPresetsBridge = ({
     }
   };
 
+  if (agentToDelete) {
+    return (
+      <DeleteAgentDialog
+        agentName={agentToDelete.name}
+        onDelete={onDeleteAgent}
+        onClose={() => setAgentToDelete(null)}
+      />
+    );
+  }
+
   if (!aiPresetsStore.pendingSettings) return null;
 
   return (
@@ -309,9 +415,12 @@ const AiPresetsBridge = ({
   );
 };
 
-export default inject(({ aiPresetsStore, aiProjectsStore, userStore, settingsStore, paymentStore }: TStore) => ({
+export default inject(
+  ({ aiPresetsStore, aiProjectsStore, contextOptionsStore, userStore, settingsStore, paymentStore }: TStore) => ({
   aiPresetsStore,
   isAiProjectOpen: aiProjectsStore.activeProject !== null,
+  openEditAiProject: aiProjectsStore.openEditDialogById,
+  inviteToRoom: contextOptionsStore.onClickInviteUsers,
   userId: userStore.user?.id ?? null,
   canCreateProjects: canManageProjects(userStore.user),
   // The AI config is read only while AI services are on; until it arrives
@@ -320,4 +429,5 @@ export default inject(({ aiPresetsStore, aiProjectsStore, userStore, settingsSto
   standalone: !!settingsStore.standalone,
   isAIReady: !!paymentStore.isAIReady,
   setAiReady: settingsStore.setAiReady,
-}))(observer(AiPresetsBridge));
+  }),
+)(observer(AiPresetsBridge));

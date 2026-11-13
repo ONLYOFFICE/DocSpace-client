@@ -59,6 +59,8 @@ describe("AiPresetsStore", () => {
         { cloud: "docspace", id: "13", name: "Legal tone" },
       ],
       knowledgeRooms: [{ cloud: "docspace", id: "9", name: "Docs" }],
+      // The fixture may change the settings and carries no room rights.
+      rights: { edit: true, share: false, delete: false },
     });
     expect(toAiPreset(project(2, "Default", { profile: null })).profileId).toBeNull();
   });

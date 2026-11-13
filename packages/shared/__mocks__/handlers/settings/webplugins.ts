@@ -517,7 +517,6 @@ export const webPluginsWithArticleButtonPlugin = {
   statusCode: 200,
 };
 
-// Plugins list with article navigation sample plugin
 export const mockWorkspaceAppPlugin: TAPIPlugin = {
   ...mockPlugin1,
   name: "workspace-app",
@@ -550,6 +549,7 @@ const webPluginsList = (plugins: TAPIPlugin[]) => ({
   statusCode: 200,
 });
 
+// Plugins list with article navigation sample plugin
 export const webPluginsWithArticleNavigationPlugin = {
   response: [mockArticleNavigationPlugin],
   count: 1,

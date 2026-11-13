@@ -191,11 +191,13 @@ export const getIcon = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean = false,
+  isPrivateScope: boolean = false,
 ): JSX.Element => {
   if (isRootEmptyPage && isPublicRoom)
     return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
 
-  if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
+  if (isRootEmptyPage)
+    return getRootIcon(rootFolderType, access, isBaseTheme, isPrivateScope);
 
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
@@ -552,7 +554,9 @@ export const getOptions = (
       .returnType<EmptyViewOptionsType>()
       // Spec: private-rooms/sidebar-section, "Section empty state"
       .with([FolderType.Rooms, P.when(() => isPrivateScope), P._], () =>
-        access === ShareAccessRights.None ? [createRoom] : [],
+        access === ShareAccessRights.None
+          ? [{ ...createRoom, title: t("Common:CreatePrivateRoom") }]
+          : [],
       )
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,

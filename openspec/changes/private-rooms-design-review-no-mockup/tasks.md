@@ -23,7 +23,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. Section empty state
 
-- [ ] 4.1 Client: give the empty Private list the illustration of an empty private room, Common:PrivateRoomsListEmptyDescription and a create tile titled Common:CreatePrivateRoom (decision 6). Verify: cases "Room admin without private rooms", "User without private rooms", "Illustration of the section" and "Rooms section unchanged" in unit tests of the empty-view helpers; `pnpm exec vitest run src/components/EmptyContainer`; `cd common/tests && npx vitest run test/images.test.js`
+- [x] 4.1 Client: give the empty Private list the illustration of an empty private room, Common:PrivateRoomsListEmptyDescription and a create tile titled Common:CreatePrivateRoom (decision 6). Verify: cases "Room admin without private rooms", "User without private rooms", "Illustration of the section" and "Rooms section unchanged" in unit tests of the empty-view helpers; `pnpm exec vitest run src/components/EmptyContainer`; `cd common/tests && npx vitest run test/images.test.js`
+  - 2026-11-13: the illustration, the description and the options take the `isPrivateScope` flag the title already took; the create tile keeps the icon and the description of the shared tile and takes the title Common:CreatePrivateRoom. The four cases call the helpers of the view in `__tests__/privateSectionEmptyState.test.tsx`. EmptyView:EmptyRootPrivateRoomsDescription has no reader left; its removal from the locale files is task 6.1. `images.test.js` passes.
 
 ## 5. Forgot passphrase link
 

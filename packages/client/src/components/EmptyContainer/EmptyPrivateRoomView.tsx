@@ -51,7 +51,10 @@ import EmptyPrivateRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.private
 import EmptyPrivateRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.dark.svg";
 import UploadDeviceIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import CreateNewFileIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
-import SecurityShieldIcon from "PUBLIC_DIR/images/icons/16/security.react.svg";
+import EncryptionIcon from "PUBLIC_DIR/images/icons/16/locked.react.svg";
+import FileKeyIcon from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg";
+import CollaborationIcon from "PUBLIC_DIR/images/icons/16/people.react.svg";
+import RecoveryIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg";
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -81,10 +84,10 @@ const EmptyPrivateRoomView = ({
   const { isBase } = useTheme();
 
   const items = [
-    t("Common:PrivateRoomEmptyBenefitE2EE"),
-    t("Common:PrivateRoomEmptyBenefitAEAD"),
-    t("Common:PrivateRoomEmptyBenefitHPKE"),
-    t("Common:PrivateRoomEmptyBenefitKDF"),
+    { text: t("Common:PrivateRoomEmptyBenefitE2EE"), Icon: EncryptionIcon },
+    { text: t("Common:PrivateRoomEmptyBenefitAEAD"), Icon: FileKeyIcon },
+    { text: t("Common:PrivateRoomEmptyBenefitHPKE"), Icon: CollaborationIcon },
+    { text: t("Common:PrivateRoomEmptyBenefitKDF"), Icon: RecoveryIcon },
   ];
 
   const dispatchCreate = useCallback(
@@ -185,9 +188,9 @@ const EmptyPrivateRoomView = ({
   const benefits = (
     <div className={styles.benefits}>
       <ul className={styles.list}>
-        {items.map((text) => (
+        {items.map(({ text, Icon }) => (
           <li key={text} className={styles.listItem}>
-            <SecurityShieldIcon />
+            <Icon aria-hidden="true" />
             <span>{text}</span>
           </li>
         ))}

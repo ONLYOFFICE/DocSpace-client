@@ -120,6 +120,15 @@ describe("Empty folder inside a private room", () => {
     expect(screen.queryByText("EmptyView:UploadDeviceOptionTitle")).toBeNull();
   });
 
+  it("gives each welcome line an icon of its own", () => {
+    renderView({ inFolder: false });
+    const icons = Array.from(document.querySelectorAll("li svg")).map(
+      (icon) => icon.innerHTML,
+    );
+    expect(icons).toHaveLength(4);
+    expect(new Set(icons).size).toBe(4);
+  });
+
   it("Room root", () => {
     renderView({ inFolder: false });
 

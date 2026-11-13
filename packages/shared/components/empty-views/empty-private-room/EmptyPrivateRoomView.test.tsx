@@ -70,6 +70,15 @@ describe("EmptyPrivateRoomView (shared)", () => {
     ).toBeInTheDocument();
   });
 
+  it("gives each welcome line an icon of its own", () => {
+    renderView();
+    const icons = Array.from(document.querySelectorAll("li svg")).map(
+      (icon) => icon.innerHTML,
+    );
+    expect(icons).toHaveLength(4);
+    expect(new Set(icons).size).toBe(4);
+  });
+
   it("Empty folder with the create right", async () => {
     const user = userEvent.setup();
     const { onCreateFolder, onUploadFiles } = renderView({ isFolder: true });

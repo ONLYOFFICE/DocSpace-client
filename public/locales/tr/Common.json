@@ -817,6 +817,8 @@
   "DownloadApps": "Uygulamaları indir",
   "DownloadAs": "Olarak indir",
   "DownloadCopy": "Kopyayı indir",
+  "DownloadDecryptedCopy": "Şifresi çözülmüş kopya",
+  "DownloadEncryptedCopy": "Şifreli kopya",
   "DownloadOperationDescription": "Hazır olduğunda, dosyaları tarayıcınızın indirme klasöründe bulabilir ve bu sekmeyi kapatabilirsiniz.",
   "DownloadOperationTitle": "Dosya indirme işlemi devam ediyor",
   "DownloadOriginalFormat": "Orijinal formatta",

@@ -817,6 +817,8 @@
   "DownloadApps": "애플리케이션 다운로드",
   "DownloadAs": "다운로드 형식",
   "DownloadCopy": "복사본 다운로드",
+  "DownloadDecryptedCopy": "복호화된 사본",
+  "DownloadEncryptedCopy": "암호화된 사본",
   "DownloadOperationDescription": "준비가 되면 브라우저의 다운로드 폴더에서 파일을 찾고 이 탭을 닫을 수 있습니다.",
   "DownloadOperationTitle": "파일 다운로드 진행 중",
   "DownloadOriginalFormat": "원본 형식",

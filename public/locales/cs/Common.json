@@ -817,6 +817,8 @@
   "DownloadApps": "Aplikace ke staženi",
   "DownloadAs": "Stáhnout jako",
   "DownloadCopy": "Stáhnout kopii",
+  "DownloadDecryptedCopy": "Dešifrovaná kopie",
+  "DownloadEncryptedCopy": "Zašifrovaná kopie",
   "DownloadOperationDescription": "Po dokončení najdete soubory ve složce pro stahování v prohlížeči a zavřete tuto kartu.",
   "DownloadOperationTitle": "Probíhá stahování souborů",
   "DownloadOriginalFormat": "V původním formátu",

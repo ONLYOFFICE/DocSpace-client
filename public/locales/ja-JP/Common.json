@@ -817,6 +817,8 @@
   "DownloadApps": "アプリをダウンロードする",
   "DownloadAs": "としてダウンロード",
   "DownloadCopy": "コピーを保存",
+  "DownloadDecryptedCopy": "復号化されたコピー",
+  "DownloadEncryptedCopy": "暗号化されたコピー",
   "DownloadOperationDescription": "準備ができたら、ブラウザのダウンロードフォルダからファイルを見つけ、このタブを閉じます。",
   "DownloadOperationTitle": "ファイルのダウンロード中です",
   "DownloadOriginalFormat": "オリジナル形式で",

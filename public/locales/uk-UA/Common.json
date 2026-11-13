@@ -817,6 +817,8 @@
   "DownloadApps": "Завантажити програми",
   "DownloadAs": "Завантажити як",
   "DownloadCopy": "Завантажити копію",
+  "DownloadDecryptedCopy": "Розшифрована копія",
+  "DownloadEncryptedCopy": "Зашифрована копія",
   "DownloadOperationDescription": "Коли все буде готово, ви зможете знайти файли в папці завантажень браузера та закрити цю вкладку.",
   "DownloadOperationTitle": "Відбувається завантаження файлів",
   "DownloadOriginalFormat": "В оригінальному форматі",

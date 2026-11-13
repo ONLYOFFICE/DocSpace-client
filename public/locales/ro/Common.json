@@ -817,6 +817,8 @@
   "DownloadApps": "Descărcare aplicații",
   "DownloadAs": "Descărcare în formatul",
   "DownloadCopy": "Descărcare copie",
+  "DownloadDecryptedCopy": "Copie decriptată",
+  "DownloadEncryptedCopy": "Copie criptată",
   "DownloadOperationDescription": "Odată ce sunt gata, puteți găsi fișierele în folderul de descărcări al browserului și puteți închide această filă.",
   "DownloadOperationTitle": "Fișierul în curs de descărcare",
   "DownloadOriginalFormat": "În formatul original",

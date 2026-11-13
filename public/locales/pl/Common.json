@@ -817,6 +817,8 @@
   "DownloadApps": "Pobierz aplikacje",
   "DownloadAs": "Pobierz jako",
   "DownloadCopy": "Pobierz kopię",
+  "DownloadDecryptedCopy": "Odszyfrowana kopia",
+  "DownloadEncryptedCopy": "Zaszyfrowana kopia",
   "DownloadOperationDescription": "Gdy pliki będą gotowe, znajdziesz je w katalogu Pobrane swojej przeglądarki i będziesz w stanie zamknąć tę kartę.",
   "DownloadOperationTitle": "Trwa pobieranie pliku",
   "DownloadOriginalFormat": "W oryginalnym formacie",

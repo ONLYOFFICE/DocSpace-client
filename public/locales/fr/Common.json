@@ -817,6 +817,8 @@
   "DownloadApps": "Télécharger les applications",
   "DownloadAs": "Télécharger au format",
   "DownloadCopy": "Télécharger la copie",
+  "DownloadDecryptedCopy": "Copie déchiffrée",
+  "DownloadEncryptedCopy": "Copie chiffrée",
   "DownloadOperationDescription": "Une fois prêts, vous pouvez trouver les fichiers dans le dossier de téléchargement de votre navigateur et fermer cet onglet.",
   "DownloadOperationTitle": "Téléchargement de fichier en cours",
   "DownloadOriginalFormat": "Au format original",

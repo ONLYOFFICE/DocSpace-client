@@ -817,6 +817,8 @@
   "DownloadApps": "Download toepassingen",
   "DownloadAs": "Download als",
   "DownloadCopy": "Download de kopie",
+  "DownloadDecryptedCopy": "Ontsleutelde kopie",
+  "DownloadEncryptedCopy": "Versleutelde kopie",
   "DownloadOperationDescription": "Zodra u klaar bent, kunt u de bestanden terugvinden in de download map van uw browser en dit tabblad sluiten.",
   "DownloadOperationTitle": "Bestand wordt gedownload",
   "DownloadOriginalFormat": "In oorspronkelijk formaat",

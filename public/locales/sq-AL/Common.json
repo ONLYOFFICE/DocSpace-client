@@ -817,6 +817,8 @@
   "DownloadApps": "Shkarkoni aplikacionet",
   "DownloadAs": "Shkarkoni si",
   "DownloadCopy": "Shkarkoni kopje",
+  "DownloadDecryptedCopy": "Kopje e dekriptuar",
+  "DownloadEncryptedCopy": "Kopje e enkriptuar",
   "DownloadOperationDescription": "Pasi të jeni gati, mund t'i gjeni skedarët në dosjen e shkarkimit të shfletuesit tuaj dhe të mbyllni këtë tab.",
   "DownloadOperationTitle": "Shkarkimi i skedarit në vazhdim",
   "DownloadOriginalFormat": "Në formatin origjinal",

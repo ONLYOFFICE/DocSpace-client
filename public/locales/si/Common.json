@@ -817,6 +817,8 @@
   "DownloadApps": "යෙදුම් බාගන්න",
   "DownloadAs": "... ලෙස බාගත කරන්න",
   "DownloadCopy": "පිටපතක් බාගන්න",
+  "DownloadDecryptedCopy": "විකේතනය කළ පිටපත",
+  "DownloadEncryptedCopy": "සංකේතාංකිත පිටපත",
   "DownloadOperationDescription": "සූදානම් වූ පසු, ඔබට ඔබේ බ්‍රවුසරයේ බාගැනීම් ෆෝල්ඩරයේ ඇති ගොනු සොයා ගත හැකි අතර මෙම ටැබය වසා දමන්න",
   "DownloadOperationTitle": "ගොනුව බාගැනීම සිදුවෙමින් පවතී",
   "DownloadOriginalFormat": "මුල් ආකෘතියෙන්",

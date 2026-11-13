@@ -817,6 +817,8 @@
   "DownloadApps": "Apps herunterladen",
   "DownloadAs": "Herunterladen als",
   "DownloadCopy": "Die Sicherungskopie herunterladen",
+  "DownloadDecryptedCopy": "Entschlüsselte Kopie",
+  "DownloadEncryptedCopy": "Verschlüsselte Kopie",
   "DownloadOperationDescription": "Sobald fertig, können Sie die Dateien im Download-Ordner Ihres Browsers finden und diese Registerkarte schließen.",
   "DownloadOperationTitle": "Datei wird heruntergeladen",
   "DownloadOriginalFormat": "Im Originalformat",

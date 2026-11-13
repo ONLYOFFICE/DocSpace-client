@@ -817,6 +817,8 @@
   "DownloadApps": "Tətbiqləri endirin",
   "DownloadAs": "Kimi yüklə",
   "DownloadCopy": "Nüsxəni endirin",
+  "DownloadDecryptedCopy": "Deşifrə edilmiş surət",
+  "DownloadEncryptedCopy": "Şifrələnmiş surət",
   "DownloadOperationDescription": "Hazır olduqda, faylları brauzerinizin endirmə qovluğunda tapa və bu tabı bağlaya bilərsiniz.",
   "DownloadOperationTitle": "Fayl endirilir",
   "DownloadOriginalFormat": "Orijinal formatda",

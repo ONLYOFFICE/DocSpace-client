@@ -817,6 +817,8 @@
   "DownloadApps": "Изтегли приложенията",
   "DownloadAs": "Изтегли като",
   "DownloadCopy": "Изтеглете копието",
+  "DownloadDecryptedCopy": "Дешифровано копие",
+  "DownloadEncryptedCopy": "Шифровано копие",
   "DownloadOperationDescription": "След като сте готови, можете да откриете файловете в папката за изтегляне на браузъра си и да затворите тази таб.",
   "DownloadOperationTitle": "Изтегляне на файла в ход",
   "DownloadOriginalFormat": "В оригинален формат",

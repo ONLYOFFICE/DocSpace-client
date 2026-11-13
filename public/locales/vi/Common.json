@@ -817,6 +817,8 @@
   "DownloadApps": "Tải ứng dụng xuống",
   "DownloadAs": "Tải xuống dưới dạng",
   "DownloadCopy": "Tải xuống bản sao",
+  "DownloadDecryptedCopy": "Bản sao đã giải mã",
+  "DownloadEncryptedCopy": "Bản sao đã mã hoá",
   "DownloadOperationDescription": "Khi đã sẵn sàng, bạn có thể tìm thấy các tập tin trong thư mục tải xuống của trình duyệt và đóng tab này.",
   "DownloadOperationTitle": "Đang tải tập tin xuống",
   "DownloadOriginalFormat": "Ở định dạng gốc",

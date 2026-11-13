@@ -817,6 +817,8 @@
   "DownloadApps": "Lataa sovelluksia",
   "DownloadAs": "Lataa nimellä",
   "DownloadCopy": "Lataa kopio",
+  "DownloadDecryptedCopy": "Purettu kopio",
+  "DownloadEncryptedCopy": "Salattu kopio",
   "DownloadOperationDescription": "Kun tiedostot ovat valmiita, löydät ne selaimesi ladatut- kansiosta ja voit sulkea tämän välilehden.",
   "DownloadOperationTitle": "Ladataan tiedostoa",
   "DownloadOriginalFormat": "Alkuperäinen muoto",

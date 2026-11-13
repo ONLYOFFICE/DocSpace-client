@@ -817,6 +817,8 @@
   "DownloadApps": "ດາວໂຫລດແອັບພລິເຄຊັນ",
   "DownloadAs": "ດາວໂຫລດເປັນ",
   "DownloadCopy": "ດາວໂຫລດສຳເນົາ",
+  "DownloadDecryptedCopy": "ສຳເນົາທີ່ຖອດລະຫັດແລ້ວ",
+  "DownloadEncryptedCopy": "ສຳເນົາທີ່ເຂົ້າລະຫັດ",
   "DownloadOperationDescription": "ເມື່ອສຳເລັດແລ້ວ, ທ່ານສາມາດຊອກຫາເອກະສານໃນໂຟນເດີດາວໂຫຼດຂອງຕົວທ່ອງເວັບຂອງທ່ານ ແລະ ປິດແທັບນີ້ໄດ້.",
   "DownloadOperationTitle": "ການດາວໂຫຼດເອກະສານກຳລັງດຳເນີນຢູ່",
   "DownloadOriginalFormat": "ໃນຮູບແບບຕົ້ນສະບັບ",

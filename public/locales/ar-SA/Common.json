@@ -817,6 +817,8 @@
   "DownloadApps": "تنزيل التطبيقات",
   "DownloadAs": "تحميل بصيغة",
   "DownloadCopy": "تنزيل نسخة",
+  "DownloadDecryptedCopy": "نسخة مفكوكة التشفير",
+  "DownloadEncryptedCopy": "نسخة مشفّرة",
   "DownloadOperationDescription": "بمجرد أن تصبح جاهزًا، يمكنك العثور على الملفات في مجلد التنزيل بالمتصفح الخاص بك وإغلاق علامة التبويب.",
   "DownloadOperationTitle": "جاري تحميل الملف",
   "DownloadOriginalFormat": "بالصيغة الأصلية",

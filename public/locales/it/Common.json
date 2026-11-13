@@ -817,6 +817,8 @@
   "DownloadApps": "Scaricare applicazioni",
   "DownloadAs": "Scaricare come",
   "DownloadCopy": "Scaricare la copia",
+  "DownloadDecryptedCopy": "Copia decifrata",
+  "DownloadEncryptedCopy": "Copia crittografata",
   "DownloadOperationDescription": "Una volta pronti, puoi trovare i file nella cartella Download del tuo browser e chiudere questa scheda.",
   "DownloadOperationTitle": "Download dei file in corso",
   "DownloadOriginalFormat": "Nel formato originale",

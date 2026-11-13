@@ -817,6 +817,8 @@
   "DownloadApps": "Λήψη εφαρμογών",
   "DownloadAs": "Λήψη ως",
   "DownloadCopy": "Κατεβάστε το αντίγραφο",
+  "DownloadDecryptedCopy": "Αποκρυπτογραφημένο αντίγραφο",
+  "DownloadEncryptedCopy": "Κρυπτογραφημένο αντίγραφο",
   "DownloadOperationDescription": "Μόλις το κάνετε, μπορείτε να βρείτε τα αρχεία στον φάκελο λήψης του προγράμματος περιήγησής σας και να κλείσετε αυτήν την καρτέλα.",
   "DownloadOperationTitle": "Λήψη αρχείου σε εξέλιξη",
   "DownloadOriginalFormat": "Σε αρχική μορφή",

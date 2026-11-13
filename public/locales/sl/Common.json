@@ -817,6 +817,8 @@
   "DownloadApps": "Prenesi aplikacije",
   "DownloadAs": "Prenesi kot",
   "DownloadCopy": "Prenesi kopijo",
+  "DownloadDecryptedCopy": "Dešifrirana kopija",
+  "DownloadEncryptedCopy": "Šifrirana kopija",
   "DownloadOperationDescription": "Ko boste pripravljeni, lahko poiščete datoteke v mapi za prenos v brskalniku in zaprete ta zavihek.",
   "DownloadOperationTitle": "Prenos datoteke v teku",
   "DownloadOriginalFormat": "V originalnem formatu",

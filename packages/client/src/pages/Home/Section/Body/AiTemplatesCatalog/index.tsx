@@ -63,7 +63,7 @@ import ProjectLogo from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLog
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/check.round.react.svg?url";
+import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
 
 import styles from "./AiTemplatesCatalog.module.scss";
 

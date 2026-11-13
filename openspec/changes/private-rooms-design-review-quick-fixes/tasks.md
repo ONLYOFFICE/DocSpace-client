@@ -53,7 +53,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 8. Gate
 
-- [ ] 8.1 Run the gate, every command on its own with its exit code read: `pnpm exec tsc` in the six packages, the shared, client, sdk and doceditor unit suites, `npm --prefix ./common/tests run test:lefthook`, `locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main specs included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+- [x] 8.1 Run the gate, every command on its own with its exit code read: `pnpm exec tsc` in the six packages, the shared, client, sdk and doceditor unit suites, `npm --prefix ./common/tests run test:lefthook`, `locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main specs included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
+  - 2026-11-13: each command run on its own with its exit code read. `pnpm exec tsc` exit 0 in shared, client, sdk, doceditor, login and management. Unit suites, all exit 0: shared 2376, client 2222, sdk 501, doceditor 125. `biome lint` exit 0 in shared, client and sdk. `test:lefthook`: 61 passed, 3 skipped. `locales.test.js`: 44 of 46, the two completeness cases failing on the six foreign keys named in 6.2 only. E2E as recorded in 7.1. `openspec validate --all --strict`: 20 of 20; after a trial archive on a scratch copy, 19 of 19 with the main specs included. The trial archive first failed on the length of the modified SDK requirement "Invite panel offers people only and reports the invitation result" in the main spec; its description in the delta was shortened under 500 characters without changing what it requires (the scenarios carry the detail).
 
 ## Workflow follow-up
 

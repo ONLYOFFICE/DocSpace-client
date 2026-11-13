@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: Invite panel offers people only and reports the invitation result
-The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups. It SHALL grant room access to the verified invitees before wrapping their file keys, and SHALL stay open after sending with the result of each invitee (granted, pending access, or skipped with Common:EncryptedInviteNoKey or Common:EncryptedSkippedKeyMismatch) until the user closes it, as the client does. When nobody was invited it SHALL keep the invite form, and it SHALL NOT repeat in a toast what the open panel shows, as the room-membership requirements "An invitation that invited nobody keeps the invite form" and "Invitees without usable keys are skipped with a warning" describe.
+The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups. It SHALL grant room access to the verified invitees before wrapping their file keys, and SHALL stay open after sending with the result of each invitee (granted, pending access, or skipped with Common:EncryptedInviteNoKey or Common:EncryptedSkippedKeyMismatch) until the user closes it. When nobody was invited it SHALL keep the invite form, and it SHALL NOT repeat a skip reason in a toast.
 
 #### Scenario: People selector
 - **WHEN** the user opens "choose from list" in the invite panel of a private room

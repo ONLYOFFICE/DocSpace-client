@@ -106,11 +106,14 @@ type AiPresetsBridgeProps = {
   openEditAiProject: (id: number) => void | Promise<void>;
   /** Opens the invite panel of a room. */
   inviteToRoom: (roomId: number, roomType: RoomsType) => void;
-  /** Makes a room what the Info panel shows, in place of the list's selection. */
-  selectForInfoPanel: (room: ReturnType<typeof aiProjectToRoom>) => void;
+  /**
+   * Makes a room what the Info panel shows, in place of the list's
+   * selection; `null` hands the panel back to the list.
+   */
+  selectForInfoPanel: (room: ReturnType<typeof aiProjectToRoom> | null) => void;
   setInfoPanelView: (view: InfoPanelView) => void;
-  /** Whether the Info panel is on screen now. */
-  isInfoPanelVisible: () => boolean;
+  /** The Info panel: whether it is on screen (observable). */
+  infoPanelStore: { isVisible: boolean };
 };
 
 // A project read without its logo is drawn with its initials.
@@ -146,7 +149,7 @@ const AiPresetsBridge = ({
   inviteToRoom,
   selectForInfoPanel,
   setInfoPanelView,
-  isInfoPanelVisible,
+  infoPanelStore,
 }: AiPresetsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -253,6 +256,13 @@ const AiPresetsBridge = ({
   // the user is on. Agent info opens the Info panel on the agent where the
   // user is, in place of the chat (the two panels share the side of the
   // screen); only a page that has no Info panel goes to the agent's own page.
+  // Closing that Info panel brings the chat back, still on its agent: the
+  // chat it replaced is not the user's own close (see `agentInfoOpen`).
+  const agentInfoOpen = React.useRef(false);
+  // Handed over as a new function on every render: read through a ref, so
+  // the effects below do not run again for it.
+  const selectForInfoPanelRef = React.useRef(selectForInfoPanel);
+  selectForInfoPanelRef.current = selectForInfoPanel;
   const [agentToDelete, setAgentToDelete] = React.useState<{ id: string; name: string } | null>(null);
   const activeAgentId = activePreset?.id ?? null;
   const activeAgentName = activePreset?.name ?? "";
@@ -285,14 +295,19 @@ const AiPresetsBridge = ({
       icon: InfoOutlineReactSvgUrl,
       onClick: async () => {
         try {
-          selectForInfoPanel(aiProjectToRoom(await getAiProject(Number(id))));
+          selectForInfoPanelRef.current(aiProjectToRoom(await getAiProject(Number(id))));
         } catch (e) {
           toastr.error(errorMessage(e));
           return;
         }
         setInfoPanelView(InfoPanelView.infoDetails);
+        // Set first: the panel showing closes the chat at once.
+        agentInfoOpen.current = true;
         showInfoPanel();
-        if (isInfoPanelVisible()) return;
+        if (infoPanelStore.isVisible) return;
+        // No Info panel here: the agent's page has its own chat, and
+        // nothing comes back.
+        agentInfoOpen.current = false;
         navigate(`/ai-rooms/${id}/filter?folder=${id}`);
         showInfoPanel();
       },
@@ -314,9 +329,8 @@ const AiPresetsBridge = ({
     navigate,
     openEditAiProject,
     inviteToRoom,
-    selectForInfoPanel,
     setInfoPanelView,
-    isInfoPanelVisible,
+    infoPanelStore,
     isInsideOpenProject,
     activeAgentId,
     activeAgentName,
@@ -391,12 +405,32 @@ const AiPresetsBridge = ({
             return;
           }
           aiPresetsStore.cancelApply();
+          // Closed by "Agent info", not by the user: the chat comes back
+          // with its agent once the Info panel closes.
+          if (agentInfoOpen.current) return;
           if (!aiPresetsStore.activePreset) return;
           aiPresetsStore.setActivePreset(null);
           aiChatStore.applyPreset(NO_PRESET);
         },
       ),
     [aiChatStore, aiPresetsStore],
+  );
+
+  // The Info panel opened by "Agent info" closes: the list gets its
+  // selection back, and so does the chat its place - unless the user is
+  // already somewhere the chat does not follow (the agent's own page).
+  React.useEffect(
+    () =>
+      reaction(
+        () => infoPanelStore.isVisible,
+        (visible) => {
+          if (visible || !agentInfoOpen.current) return;
+          agentInfoOpen.current = false;
+          selectForInfoPanelRef.current(null);
+          if (!aiChatStore.isVisible) aiChatStore.open();
+        },
+      ),
+    [aiChatStore, infoPanelStore],
   );
 
   const onSave = async (_e: unknown, value: string) => {
@@ -454,12 +488,12 @@ export default inject(
   openEditAiProject: aiProjectsStore.openEditDialogById,
   inviteToRoom: contextOptionsStore.onClickInviteUsers,
   // The Info panel shows the list's selection: the agent takes its place.
-  selectForInfoPanel: (room: ReturnType<typeof aiProjectToRoom>) => {
-    filesStore.setSelection([]);
+  selectForInfoPanel: (room: ReturnType<typeof aiProjectToRoom> | null) => {
+    if (room) filesStore.setSelection([]);
     filesStore.setBufferSelection(room as unknown as Parameters<typeof filesStore.setBufferSelection>[0]);
   },
   setInfoPanelView: infoPanelStore.setView,
-  isInfoPanelVisible: () => infoPanelStore.isVisible,
+  infoPanelStore,
   userId: userStore.user?.id ?? null,
   canCreateProjects: canManageProjects(userStore.user),
   // The AI config is read only while AI services are on; until it arrives

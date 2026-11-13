@@ -24,13 +24,15 @@ const roomsApi = vi.hoisted(() => ({ deleteRoom: vi.fn() }));
 vi.mock("@docspace/shared/api/rooms", () => roomsApi);
 
 // The Info panel as a page that has one shows it: `showInfoPanel` makes it
-// visible only while `mounted`.
-const infoPanel = vi.hoisted(() => {
-  const state = { mounted: true, visible: false };
+// visible only while `mounted`. Observable, as the store's flag is.
+const infoPanel = await vi.hoisted(async () => {
+  const { observable, runInAction } = await import("mobx");
+  const state = observable({ mounted: true, isVisible: false });
   return {
     state,
+    hide: () => runInAction(() => (state.isVisible = false)),
     showInfoPanel: vi.fn(() => {
-      if (state.mounted) state.visible = true;
+      if (state.mounted) runInAction(() => (state.isVisible = true));
     }),
     InfoPanelView: { infoDetails: "info_details" },
   };
@@ -95,6 +97,10 @@ class FakeAiChatStore {
 
   setIsVisible = (visible: boolean) => {
     this.isVisible = visible;
+  };
+
+  open = () => {
+    this.isVisible = true;
   };
 
   setOnSavePreset = (hook: unknown) => {
@@ -199,12 +205,7 @@ const renderBridge = (
         aiProjectsStore={{ activeProject, openEditDialogById: openEditAiProject }}
         contextOptionsStore={{ onClickInviteUsers: inviteToRoom }}
         filesStore={{ setSelection, setBufferSelection }}
-        infoPanelStore={{
-          setView: setInfoPanelView,
-          get isVisible() {
-            return infoPanel.state.visible;
-          },
-        }}
+        infoPanelStore={Object.assign(infoPanel.state, { setView: setInfoPanelView })}
         userStore={{ user }}
         settingsStore={{ aiConfig, standalone: true, setAiReady }}
         paymentStore={{ isAIReady: false }}
@@ -519,7 +520,7 @@ describe("AiPresetsBridge", () => {
 
     it("open the Info panel on the agent where the user is, without leaving the page", async () => {
       infoPanel.state.mounted = true;
-      infoPanel.state.visible = false;
+      infoPanel.hide();
       const picked = withRights({ EditAccess: true, Delete: true }, true);
       await pick(new AiPresetsStore(), picked);
 
@@ -531,9 +532,34 @@ describe("AiPresetsBridge", () => {
       expect(mockNavigate).not.toHaveBeenCalled();
     });
 
+    it("bring the chat back on its agent when the Info panel of Agent info closes", async () => {
+      infoPanel.state.mounted = true;
+      infoPanel.hide();
+      const store = new AiPresetsStore();
+      await pick(store, withRights({ EditAccess: true, Delete: true }, true));
+      aiChatStore.applyPreset.mockClear();
+
+      await act(async () => action("info")?.onClick());
+      // The Info panel takes the chat's place, as the page does it.
+      act(() => aiChatStore.setIsVisible(false));
+      // Not the user's close: the chat stays on its agent.
+      expect(store.activePreset?.id).toBe("1");
+      expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
+
+      act(() => infoPanel.hide());
+      expect(aiChatStore.isVisible).toBe(true);
+      expect(store.activePreset?.id).toBe("1");
+      // The list gets its selection back.
+      expect(setBufferSelection).toHaveBeenLastCalledWith(null);
+
+      // A close by the user after that drops the agent, as always.
+      act(() => aiChatStore.setIsVisible(false));
+      expect(store.activePreset).toBeNull();
+    });
+
     it("go to the agent's page for Agent info where the page has no Info panel", async () => {
       infoPanel.state.mounted = false;
-      infoPanel.state.visible = false;
+      infoPanel.hide();
       await pick(new AiPresetsStore(), withRights({}, false));
 
       await act(async () => action("info")?.onClick());

@@ -33,7 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { TUser } from "@docspace/shared/api/people/types";
+
 import { PluginUserRole, PluginUsersType } from "./enums";
+import type { IArticleNavigationItem } from "./types";
 
 const LEGACY_USER_ROLES: Partial<Record<PluginUserRole, PluginUsersType[]>> = {
   [PluginUserRole.fullAdmin]: [PluginUsersType.docSpaceAdmin],
@@ -52,4 +55,18 @@ export const matchesUserRole = (
   const legacy = LEGACY_USER_ROLES[userRole];
 
   return !!legacy && legacy.some((type) => usersTypes.includes(type));
+};
+
+export const matchesUserAccess = (
+  { users, groups }: Pick<IArticleNavigationItem, "users" | "groups">,
+  user: Pick<TUser, "id" | "groups"> | null | undefined,
+): boolean => {
+  if (!users && !groups) return true;
+
+  if (!user) return false;
+
+  return (
+    !!users?.includes(user.id) ||
+    !!user.groups?.some(({ id }) => groups?.includes(id))
+  );
 };

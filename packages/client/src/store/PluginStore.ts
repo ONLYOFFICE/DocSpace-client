@@ -106,7 +106,7 @@ import type {
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
-import { matchesUserRole } from "../helpers/plugins/roles";
+import { matchesUserAccess, matchesUserRole } from "../helpers/plugins/roles";
 import {
   isSupersededPluginItem,
   MARKDOWN_EXTENSION,
@@ -1757,6 +1757,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
+    const { user } = this.userStore;
 
     const actualItems = new Map<string, IArticleNavigationItemClient>();
 
@@ -1767,7 +1768,9 @@ class PluginStore {
         ? value.devices.includes(device)
         : true;
 
-      if (!correctUserType || !correctDevice) continue;
+      const correctAccess = matchesUserAccess(value, user);
+
+      if (!correctUserType || !correctDevice || !correctAccess) continue;
 
       const icon = `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`;
 

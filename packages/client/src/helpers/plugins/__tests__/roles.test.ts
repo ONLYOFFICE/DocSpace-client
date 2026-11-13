@@ -35,7 +35,10 @@
 
 import { describe, it, expect } from "vitest";
 
-import { matchesUserRole } from "SRC_DIR/helpers/plugins/roles";
+import {
+  matchesUserAccess,
+  matchesUserRole,
+} from "SRC_DIR/helpers/plugins/roles";
 import { PluginUserRole, PluginUsersType } from "SRC_DIR/helpers/plugins/enums";
 
 describe("matchesUserRole", () => {
@@ -84,5 +87,33 @@ describe("matchesUserRole", () => {
     expect(matchesUserRole([PluginUsersType.user], PluginUserRole.user)).toBe(
       false,
     );
+  });
+});
+
+describe("matchesUserAccess", () => {
+  const user = { id: "director", groups: [{ id: "sales", manager: "", name: "Sales" }] };
+
+  it("matches an item that lists neither users nor groups", () => {
+    expect(matchesUserAccess({}, null)).toBe(true);
+  });
+
+  it("matches a user listed by id or through one of their groups", () => {
+    expect(matchesUserAccess({ users: ["director"] }, user)).toBe(true);
+    expect(matchesUserAccess({ groups: ["sales"] }, user)).toBe(true);
+    expect(matchesUserAccess({ users: ["other"], groups: ["sales"] }, user)).toBe(true);
+  });
+
+  it("rejects a user who is neither listed nor in a listed group", () => {
+    expect(matchesUserAccess({ users: ["other"], groups: ["support"] }, user)).toBe(false);
+    expect(matchesUserAccess({ groups: ["sales"] }, { id: "director" })).toBe(false);
+  });
+
+  it("treats an empty list as access for nobody", () => {
+    expect(matchesUserAccess({ users: [] }, user)).toBe(false);
+    expect(matchesUserAccess({ groups: [] }, user)).toBe(false);
+  });
+
+  it("rejects a restricted item while no user is loaded", () => {
+    expect(matchesUserAccess({ groups: ["sales"] }, null)).toBe(false);
   });
 });

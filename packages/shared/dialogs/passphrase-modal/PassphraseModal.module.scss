@@ -64,11 +64,21 @@
 }
 
 .rememberRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin-top: 8px;
 
   :global(.checkbox-text) {
     font-weight: 600;
   }
+}
+
+// The hint starts under the label: the 16px box plus the 12px gap of the
+// kit checkbox.
+.rememberHint {
+  padding-inline-start: 28px;
+  line-height: 16px;
 }
 
 .passkeyRow {

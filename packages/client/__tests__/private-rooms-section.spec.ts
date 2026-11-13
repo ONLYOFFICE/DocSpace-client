@@ -45,6 +45,7 @@ import {
   roomGroupsHandler,
   roomListHandler,
   roomMembersHandlers,
+  roomsNewsHandler,
   roomTagsHandler,
   rootHandler,
   selfActivationStatusHandler,
@@ -164,7 +165,7 @@ test.describe("Private section — sidebar", () => {
   test("Base fixture", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/rooms/shared/filter`);
 
-    await expect(navItem(page, "private-rooms")).toHaveText("Private");
+    await expect(navItem(page, "private-rooms")).toHaveText("Private rooms");
     expect(
       await page.evaluate(() => window.localStorage.getItem("privateRooms")),
     ).toBeNull();
@@ -195,7 +196,7 @@ test.describe("Private section — sidebar", () => {
   test("Section available", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/rooms/shared/filter`);
 
-    await expect(navItem(page, "private-rooms")).toHaveText("Private");
+    await expect(navItem(page, "private-rooms")).toHaveText("Private rooms");
 
     const ids = await navItemIds(page);
     const topLevel = ids.filter(
@@ -251,7 +252,7 @@ test.describe("Private section — sidebar", () => {
 
     const options = page.getByTestId("default_homepage_combobox_dropdown");
     await expect(options.getByText("Rooms", { exact: true })).toBeVisible();
-    await expect(options.getByText("Private", { exact: true })).toHaveCount(0);
+    await expect(options.getByText("Private rooms", { exact: true })).toBeVisible();
   });
 });
 
@@ -410,6 +411,39 @@ test.describe("Private section — rooms open inside it", () => {
     );
   });
 
+  test("New-items counter", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT, { privateRootNew: 2 }),
+      roomsNewsHandler(TEST_PORT, [
+        { roomId: ROOM_ID, title: ROOM_TITLE, isPrivate: true },
+        { roomId: ORDINARY_ROOM_ID, title: "Team Room" },
+      ]),
+    );
+
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    const item = navItem(page, "private-rooms").locator("xpath=ancestor::li[1]");
+    const counter = item.locator(".new-items");
+    await expect(counter).toHaveText("2", { timeout: 15000 });
+    await expect(item.getByTestId("private_rooms_beta_badge")).toBeVisible();
+    // The Rooms item counts its own root only.
+    await expect(
+      navItem(page, ROOMS_ID).locator("xpath=ancestor::li[1]").locator(".new-items"),
+    ).toHaveCount(0);
+
+    await counter.click();
+
+    const panel = page.locator(".new-files-panel");
+    await expect(panel.getByText(ROOM_TITLE)).toBeVisible({ timeout: 15000 });
+    await expect(panel.getByText("Team Room")).toHaveCount(0);
+
+    await panel.getByText(ROOM_TITLE).click();
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe(`/private/${ROOM_ID}/filter`);
+  });
+
   test("Room clicked in the section", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/private/filter`);
 
@@ -459,7 +493,7 @@ test.describe("Private section — rooms open inside it", () => {
       page.getByRole("heading", { name: ROOM_TITLE, exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Private", exact: true }),
+      page.getByRole("heading", { name: "Private rooms", exact: true }),
     ).toHaveCount(0);
     await expect(page.getByTestId("quick-private-room")).toHaveCount(0);
   });
@@ -529,7 +563,7 @@ test.describe("Private section — rooms open inside it", () => {
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
 
     await expect(
-      page.getByRole("heading", { name: "Private", exact: true }),
+      page.getByRole("heading", { name: "Private rooms", exact: true }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Rooms", exact: true }),
@@ -540,7 +574,7 @@ test.describe("Private section — rooms open inside it", () => {
     await page.goto(`${baseUrl}/private/filter`);
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
 
-    await expect(page).toHaveTitle(/^Private - /);
+    await expect(page).toHaveTitle(/^Private rooms - /);
   });
 
   test("Folder inside a private room", async ({ page, baseUrl }) => {
@@ -568,7 +602,7 @@ test.describe("Private section — rooms open inside it", () => {
     await page.getByRole("heading", { name: "Reports", exact: true }).click();
 
     const crumbs = page.locator('[class*="Navigation-module__box"]');
-    await expect(crumbs.getByText("Private", { exact: true })).toBeVisible();
+    await expect(crumbs.getByText("Private rooms", { exact: true })).toBeVisible();
     await expect(crumbs.getByText("Rooms", { exact: true })).toHaveCount(0);
   });
 
@@ -844,10 +878,10 @@ test.describe("Private section — ways out stay in it", () => {
 
     const view = page.getByTestId("empty-view");
     await expect(view).toContainText(
-      "redirected to the Private section automatically",
+      "redirected to the Private rooms section automatically",
       { timeout: 15000 },
     );
-    await view.getByText("Go to Private").click();
+    await view.getByText("Go to Private rooms").click();
 
     await expect
       .poll(() => pathOf(page), { timeout: 15000 })
@@ -868,7 +902,7 @@ test.describe("Private section — ways out stay in it", () => {
       `/private/${GONE_ROOM_ID}/filter?folder=${GONE_ROOM_ID}`,
     );
     await expect(page.getByTestId("empty-view")).toContainText(
-      "You will be redirected to the Private section automatically in 5 seconds.",
+      "You will be redirected to the Private rooms section automatically in 5 seconds.",
       { timeout: 15000 },
     );
 
@@ -1111,7 +1145,6 @@ test.describe("Private section — filter", () => {
     await expect(filterGroup(page, "filter-tags")).toBeVisible();
     await expect(filterGroup(page, "filter-type")).toHaveCount(0);
     await expect(filterGroup(page, "filter-provider-type")).toHaveCount(0);
-    await expect(page.locator('[class*="rowGroupingRooms"]')).toHaveCount(0);
 
     await applyTagFilter(page);
 
@@ -1164,8 +1197,30 @@ test.describe("Private section — room groups", () => {
       .click();
 
     await expect(page.getByTestId("pin-room")).toBeVisible();
-    await expect(page.getByTestId("create-group")).toHaveCount(0);
-    await expect(page.getByTestId("add-to-group")).toHaveCount(0);
+    await expect(page.getByTestId("create-group")).toBeVisible();
+    await expect(page.getByTestId("add-to-group")).toBeVisible();
+  });
+
+  test("Groups of the section only", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    // The mocked portal has groups in every section: group-4 is the Private one.
+    await expect(page.getByTestId("room_group_tag_group-4")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(page.getByTestId("room_group_tag_group-1")).toHaveCount(0);
+    await expect(page.getByTestId("room_group_tag_group-3")).toHaveCount(0);
+    await expect(page.locator('[class*="groupManagementButton"]')).toBeVisible();
+  });
+
+  test("Room-group controls in the archive", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/archived/filter`);
+    await expect(page.getByTestId("table-body")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(page.locator('[class*="rowGroupingRooms"]')).toHaveCount(0);
   });
 
   test("Room group editor in Rooms", async ({ page, mockRequest, baseUrl }) => {
@@ -1295,9 +1350,11 @@ test.describe("Private section — empty states", () => {
     await expect(emptyView(page)).toBeVisible({ timeout: 15000 });
     await expect(emptyView(page)).toContainText("No private rooms here yet");
     await expect(emptyView(page)).toContainText(
-      "Please create the first private room.",
+      "Private rooms are end-to-end encrypted.",
     );
-    await expect(emptyView(page).locator("#create-room")).toBeVisible();
+    await expect(emptyView(page).locator("#create-room")).toContainText(
+      "Create private room",
+    );
     await expect(emptyView(page).locator("#invite-root-room")).toHaveCount(0);
     await expect(emptyView(page).locator("#migration-data")).toHaveCount(0);
     await expect(emptyView(page).locator("#open-ai-chat")).toHaveCount(0);
@@ -1330,7 +1387,7 @@ test.describe("Private section — empty states", () => {
     await expect(emptyView(page)).toBeVisible({ timeout: 15000 });
     await expect(emptyView(page).locator('a[href*="/rooms/"]')).toHaveCount(0);
     const goBack = emptyView(page).locator("#empty-view-goto-shared");
-    await expect(goBack).toContainText("Go to Private");
+    await expect(goBack).toContainText("Go to Private rooms");
     await expect(goBack).not.toContainText("Go to rooms");
 
     await goBack.click();
@@ -1602,19 +1659,23 @@ test.describe("Private section — creation", () => {
     await page.goto(`${baseUrl}/private/filter`);
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
 
-    const tile = page.getByTestId("quick-private-room");
-    await expect(tile).toBeVisible();
-    for (const other of [
+    for (const tile of [
+      "quick-private-room",
       "quick-vdr-room",
       "quick-custom-room",
       "quick-use-template",
       "quick-ai-chat",
     ])
-      await expect(page.getByTestId(other)).toHaveCount(0);
+      await expect(page.getByTestId(tile)).toHaveCount(0);
+  });
 
-    await tile.click();
+  test("Create button in the Private list", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
 
-    await expectPrivateTypeLocked(page);
+    await expect(page.getByTestId("main-button").first()).toContainText(
+      "New private room",
+    );
   });
 
   test("Room admin without private rooms: the create button", async ({
@@ -1749,6 +1810,10 @@ test.describe("Private section — key prompt", () => {
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
     await page.getByTestId("main-button").first().click();
     await expect(keyPrompt(page)).toBeVisible({ timeout: 15000 });
+    // No dialog under the prompts: a closed panel stays mounted, off screen.
+    await expect(
+      page.getByTestId("create_room_dialog_save"),
+    ).not.toBeInViewport();
   };
 
   test("User accepts key generation", async ({ page, baseUrl }) => {

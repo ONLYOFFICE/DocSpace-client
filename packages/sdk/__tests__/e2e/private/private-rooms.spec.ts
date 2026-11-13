@@ -347,6 +347,7 @@ const chooseTransfer = async (
  */
 const pickRoom = async (
   page: Page,
+  section: "Rooms" | "Private",
   roomTitle: string,
   submit: string,
   folderTitle?: string,
@@ -354,10 +355,26 @@ const pickRoom = async (
   const picker = page.getByTestId("aside").first();
   const item = (title: string) =>
     picker.locator("[data-testid^='selector-item-']").filter({ hasText: title });
-  await picker.getByText("Rooms", { exact: true }).click();
+  // The path starts at the Private entry; the sections are at the root.
+  await picker.getByText("Apps", { exact: true }).first().click();
+  await item(section).first().click();
   await item(roomTitle).click();
   if (folderTitle) await item(folderTitle).click();
   await picker.getByRole("button", { name: submit }).click();
+};
+
+// Moves through an open role list with the arrow keys until the named option
+// is the active one, then picks it with Enter.
+const pickRoleWithKeyboard = async (page: Page, option: string) => {
+  for (let step = 0; step < 12; step += 1) {
+    const active = await page.evaluate(() => {
+      const id = document.activeElement?.getAttribute("aria-activedescendant");
+      return id ? (document.getElementById(id)?.textContent ?? "") : "";
+    });
+    if (active.trim().startsWith(option)) break;
+    await page.keyboard.press("ArrowDown");
+  }
+  await page.keyboard.press("Enter");
 };
 
 /** The users a stored file's key is wrapped for, sorted. */
@@ -1058,10 +1075,10 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await expect(passphrasePrompt(page)).toHaveCount(0);
   });
 
-  // The two fixme cases reach the destination room through the picker's
-  // Rooms list, which holds no private room on the server. They wait for the
-  // Private entry of the picker (private-rooms-server-section, task 3.5).
-  test.fixme("Copy into another private room", async ({
+  // The Rooms list holds no private room on the server, so the destination
+  // room is reached through the Private entry at the picker's root.
+  // Spec: private-rooms/sdk-surface, "SDK copy picker lists private rooms under a Private entry"
+  test("Copy into another private room", async ({
     page,
     baseUrl,
     port,
@@ -1073,7 +1090,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await openRoom(page, baseUrl);
 
     await chooseTransfer(page, row(page, MEMO.serverTitle), "copy");
-    await pickRoom(page, SECOND_ROOM_TITLE, "Copy here");
+    await pickRoom(page, "Private", SECOND_ROOM_TITLE, "Copy here");
     await unlock(page);
 
     await expect.poll(() => secondRoom!.getFiles().length).toBe(1);
@@ -1085,7 +1102,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     expect(room.getFiles().map((f) => f.id)).toEqual([MEMO.id]);
   });
 
-  test.fixme("Copy into a folder of another private room", async ({
+  test("Copy into a folder of another private room", async ({
     page,
     baseUrl,
     port,
@@ -1097,7 +1114,13 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     await openRoom(page, baseUrl);
 
     await chooseTransfer(page, row(page, MEMO.serverTitle), "copy");
-    await pickRoom(page, SECOND_ROOM_TITLE, "Copy here", SECOND_ROOM_FOLDER.title);
+    await pickRoom(
+      page,
+      "Private",
+      SECOND_ROOM_TITLE,
+      "Copy here",
+      SECOND_ROOM_FOLDER.title,
+    );
     await unlock(page);
 
     await expect.poll(() => secondRoom!.getFiles().length).toBe(1);
@@ -1148,7 +1171,7 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
         .first()
         .getByText("Encrypted files", { exact: true }),
     ).toBeVisible();
-    await pickRoom(page, SHARED_ROOM_TITLE, "Copy here");
+    await pickRoom(page, "Rooms", SHARED_ROOM_TITLE, "Copy here");
     await unlock(page);
 
     const conflict = page
@@ -1202,6 +1225,19 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     const people = page.getByTestId("invite_panel_people_selector");
     await people.getByTestId("selector-item-0").click();
     await people.getByTestId("selector_submit_button").click();
+    await test.step("Role chosen from the keyboard", async () => {
+      const panel = page.getByRole("dialog", { name: "Invite", exact: true });
+      await panel
+        .getByRole("button", { name: `Role of ${CAROL.displayName}: Viewer` })
+        .focus();
+      await page.keyboard.press("Enter");
+      await pickRoleWithKeyboard(page, "Content creator");
+      await expect(
+        panel.getByRole("button", {
+          name: `Role of ${CAROL.displayName}: Content creator`,
+        }),
+      ).toBeFocused();
+    });
     // The key writes wait until the re-encryption is seen in progress.
     let releaseKeyWrites = () => {};
     const keyWritesHeld = new Promise<void>((resolve) => {
@@ -1215,6 +1251,9 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     await unlock(page);
 
     await expect(page.getByTestId("reencrypt-progress-bar")).toBeVisible();
+    await expect(
+      page.getByRole("progressbar", { name: "Re-encrypting files" }),
+    ).toBeVisible();
     await expect(page.getByTestId("invite_panel_send_button")).toBeVisible();
     await expect(page.getByTestId("invite_panel_result")).toBeHidden();
     releaseKeyWrites();
@@ -1228,6 +1267,13 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
       CAROL.displayName,
     );
     await expect(page.getByTestId("invite_panel_result_skipped")).toHaveCount(0);
+    await test.step("Result shown", async () => {
+      const result = page.getByRole("region", { name: "Invitation results" });
+      await expect(result).toBeFocused();
+      await expect(
+        result.getByRole("region", { name: "Invited", exact: true }),
+      ).toContainText(CAROL.displayName);
+    });
 
     await page.getByTestId("invite_panel_close_button").click();
 

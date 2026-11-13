@@ -90,6 +90,15 @@ const EditRoomGroupsDialog = ({
   const navigate = useNavigate();
 
   const isFormsSection = searchArea === RoomSearchArea.Forms;
+  // Spec: private-rooms/sidebar-section, "Room groups in the section"
+  const isPrivateSection = searchArea === RoomSearchArea.PrivateRooms;
+  // The rooms a group of the Private section is built from: its own area.
+  const roomListArea = isPrivateSection ? searchArea : undefined;
+  const sectionListPath = isFormsSection
+    ? "forms"
+    : isPrivateSection
+      ? "private"
+      : "rooms/shared";
 
   const [privateRoomIds, setPrivateRoomIds] = useState<number[] | null>(null);
 
@@ -98,10 +107,13 @@ const EditRoomGroupsDialog = ({
 
     const fetchPrivateRoomIds = async () => {
       try {
-        const ids = isFormsSection ? [] : await getPrivateSectionRoomIds();
+        const ids =
+          isFormsSection || isPrivateSection
+            ? []
+            : await getPrivateSectionRoomIds();
         if (isCurrent) setPrivateRoomIds(ids);
       } catch (error) {
-        // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available".
+        // Spec: private-rooms/sidebar-section, "Rooms section never lists private rooms".
         if (!isCurrent) return;
         toastr.error(error as Error);
         setEditRoomGroupsDialogVisible(false);
@@ -113,7 +125,12 @@ const EditRoomGroupsDialog = ({
     return () => {
       isCurrent = false;
     };
-  }, [isFormsSection, getPrivateSectionRoomIds, setEditRoomGroupsDialogVisible]);
+  }, [
+    isFormsSection,
+    isPrivateSection,
+    getPrivateSectionRoomIds,
+    setEditRoomGroupsDialogVisible,
+  ]);
 
   const [isOpenRoomList, setIsOpenRoomList] = useState(
     () => !!openInCreateMode,
@@ -198,7 +215,7 @@ const EditRoomGroupsDialog = ({
       // If grouping was disabled and we're currently viewing a group,
       // navigate away to show all rooms instead of empty group placeholder
       if (!localGroupingEnabled && currentFilterGroupId) {
-        navigate(isFormsSection ? "forms" : "rooms/shared");
+        navigate(sectionListPath);
       }
     } catch (error) {
       toastr.error(error as Error);
@@ -306,8 +323,11 @@ const EditRoomGroupsDialog = ({
     try {
       const groupData = await getGroupById(groupId);
 
+      // A group of the Private section holds private rooms only.
       const rooms = (groupData.rooms || []).filter(
-        (room) => (room.roomType === RoomsType.FormRoom) === isFormsSection,
+        (room) =>
+          isPrivateSection ||
+          (room.roomType === RoomsType.FormRoom) === isFormsSection,
       );
 
       setSelectedGroup({
@@ -356,6 +376,7 @@ const EditRoomGroupsDialog = ({
         getAllRoomGroups={getAllRoomGroups}
         currentFilterGroupId={currentFilterGroupId}
         isFormsSection={isFormsSection}
+        sectionListPath={sectionListPath}
       />
     );
   }
@@ -493,6 +514,7 @@ const EditRoomGroupsDialog = ({
               sortSelectedFirst
               withoutBackdropBackground
               isFormsSection={isFormsSection}
+              searchArea={roomListArea}
               excludeItems={privateRoomIds}
             />
           }
@@ -514,6 +536,7 @@ const EditRoomGroupsDialog = ({
               disableSubmitUntilChanged
               withoutBackdropBackground
               isFormsSection={isFormsSection}
+              searchArea={roomListArea}
               excludeItems={privateRoomIds}
             />
           }
@@ -593,9 +616,7 @@ export default inject(
       roomsFilter,
       organizeRoomsGrouping,
       setOrganizeRoomsGrouping,
-      searchArea: treeFoldersStore.isFormsFolder
-        ? RoomSearchArea.Forms
-        : RoomSearchArea.Active,
+      searchArea: treeFoldersStore.roomGroupsArea,
       getPrivateSectionRoomIds,
     };
   },

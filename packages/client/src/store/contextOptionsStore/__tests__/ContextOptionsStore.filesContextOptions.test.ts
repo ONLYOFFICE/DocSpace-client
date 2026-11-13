@@ -608,3 +608,40 @@ describe("ContextOptionsStore.getFilesContextOptions — the members link", () =
     expect(membersLink(FolderType.Rooms)?.disabled ?? true).toBe(true);
   });
 });
+
+describe("ContextOptionsStore.getFilesContextOptions - the Download submenu", () => {
+  type TOption = { key?: string; label?: string; items?: TOption[] };
+  const find = (options: TOption[], key: string): TOption | undefined => {
+    for (const option of options) {
+      if (option.key === key) return option;
+      const nested = option.items && find(option.items, key);
+      if (nested) return nested;
+    }
+    return undefined;
+  };
+  const menu = (contextOptions: string[]) =>
+    createTestContextOptionsStore().getFilesContextOptions(
+      { ...fileItem(contextOptions), security: { Download: true } } as never,
+      t,
+    ) as TOption[];
+
+  it("Encrypted file", () => {
+    const model = menu(["download", "download-encrypted"]);
+
+    expect(find(model, "download-original")?.label).toBe(
+      "Common:DownloadDecryptedCopy",
+    );
+    expect(find(model, "download-encrypted")?.label).toBe(
+      "Common:DownloadEncryptedCopy",
+    );
+  });
+
+  it("File outside private rooms", () => {
+    const model = menu(["download", "download-as"]);
+
+    expect(find(model, "download-original")?.label).toBe(
+      "Common:OriginalFormat",
+    );
+    expect(find(model, "download-encrypted")).toBeUndefined();
+  });
+});

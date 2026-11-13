@@ -80,7 +80,12 @@ const RemoveUserConfirmationDialog: React.FC<
   }, [onConfirm, onClose]);
 
   return (
-    <ModalDialog isLoading={!ready} visible={visible} onClose={handleClose}>
+    <ModalDialog
+      isLoading={!ready}
+      visible={visible}
+      onClose={handleClose}
+      aria-label={t("Common:RoomMembersRemoveUser")}
+    >
       <ModalDialog.Header>{t("Common:RoomMembersRemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>

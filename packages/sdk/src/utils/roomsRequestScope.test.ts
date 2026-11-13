@@ -44,10 +44,14 @@ describe("scopeRoomsRequest", () => {
   it("Generic rooms list", () => {
     const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.Active);
 
+    filter.privacyFilter = RoomPrivacyFilter.Private;
+
     const scoped = scopeRoomsRequest(filter);
 
-    expect(scoped.privacyFilter).toBe(RoomPrivacyFilter.NotPrivate);
-    expect(filter.privacyFilter).not.toBe(RoomPrivacyFilter.NotPrivate);
+    // The server leaves private rooms out of the Rooms area by itself.
+    expect(scoped.privacyFilter).toBeNull();
+    expect(scoped.searchArea).toBe(RoomSearchArea.Active);
+    expect(filter.privacyFilter).toBe(RoomPrivacyFilter.Private);
   });
 
   it("leaves private rooms out of the generic archive", () => {
@@ -68,8 +72,8 @@ describe("scopeRoomsRequest", () => {
       isArchive: true,
     });
 
-    expect(active.privacyFilter).toBe(RoomPrivacyFilter.Private);
-    expect(active.searchArea).toBe(RoomSearchArea.Active);
+    expect(active.privacyFilter).toBeNull();
+    expect(active.searchArea).toBe(RoomSearchArea.PrivateRooms);
     expect(archived.privacyFilter).toBe(RoomPrivacyFilter.Private);
     expect(archived.searchArea).toBe(RoomSearchArea.Archive);
   });

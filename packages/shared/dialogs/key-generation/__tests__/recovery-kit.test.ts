@@ -76,9 +76,30 @@ describe("escapeHtml", () => {
 });
 
 describe("buildRecoveryKitHtml", () => {
-  it("renders the phrase as one plain space-separated line (matches the restore input)", () => {
-    const html = buildRecoveryKitHtml(baseParams());
-    expect(html).toContain(WORDS.join(" "));
+  const phraseListOf = (html: string) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.querySelector("ol.words") as HTMLOListElement;
+  };
+
+  it("Recovery kit: lists the words in order, numbered by the list", () => {
+    const list = phraseListOf(buildRecoveryKitHtml(baseParams()));
+
+    expect(list).not.toBeNull();
+    expect(
+      Array.from(list.querySelectorAll("li")).map((item) => item.textContent),
+    ).toEqual(WORDS);
+    expect(list.getAttribute("dir")).toBe("ltr");
+  });
+
+  it("keeps the text of the list the plain space-separated phrase (matches the restore input)", () => {
+    const list = phraseListOf(buildRecoveryKitHtml(baseParams()));
+    expect(list.textContent).toBe(WORDS.join(" "));
+  });
+
+  it("escapes a word of the phrase", () => {
+    const params = baseParams();
+    params.words = ["<b>", ...WORDS.slice(1)];
+    expect(buildRecoveryKitHtml(params)).toContain("<li>&lt;b&gt;</li>");
   });
 
   it("contains every localized string and the account label", () => {

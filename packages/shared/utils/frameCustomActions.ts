@@ -55,6 +55,9 @@ type TCustomActionItem = {
 
 const MANAGER_SECTION_BY_ROOT: Partial<Record<number, TFrameManagerSection>> = {
   [FolderType.Rooms]: "rooms",
+  // The Private list is a rooms list under a root of its own; the host
+  // names no section for it, so its actions for rooms apply there as before.
+  [FolderType.PrivateRooms]: "rooms",
   [FolderType.Archive]: "archive",
   [FolderType.USER]: "my-documents",
   [FolderType.Recent]: "recent",

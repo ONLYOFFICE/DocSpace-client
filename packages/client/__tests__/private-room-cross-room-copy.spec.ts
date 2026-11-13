@@ -309,7 +309,8 @@ const selectorItem = (page: Page, title: string | RegExp) =>
     .filter({ hasText: title });
 
 /**
- * Picks a room from Rooms at the picker's root, the destination room unless
+ * Picks a room from the Private entry at the picker's root, since the Rooms
+ * list holds no private room on the server: the destination room unless
  * another is named, or a folder of it, and confirms.
  */
 const copyToDestinationRoom = async (
@@ -318,7 +319,7 @@ const copyToDestinationRoom = async (
 ) => {
   const picker = selector(page);
   await picker.getByText("Apps", { exact: true }).first().click();
-  await selectorItem(page, /^Rooms$/).click();
+  await selectorItem(page, /^Private$/).click();
   await selectorItem(page, room).click();
   if (folder) await selectorItem(page, folder).click();
   await picker.getByRole("button", { name: "Copy here" }).click();
@@ -369,10 +370,7 @@ test.describe("Private room — copy into another private room", () => {
     );
   });
 
-  // The fixme cases reach the destination room through the picker's Rooms
-  // list, which holds no private room on the server. They wait for the
-  // Private entry of the picker (private-rooms-server-section, task 3.5).
-  test.fixme("Copy to another private room", async ({ page, mockRequest, baseUrl }) => {
+  test("Copy to another private room", async ({ page, mockRequest, baseUrl }) => {
     test.slow();
     const rooms = await serveTwoPrivateRooms(page, mockRequest, baseUrl);
     await openRoomInApp(page, SOURCE_ROOM_ID, activeRoomUrl(SOURCE_ROOM_ID));
@@ -385,7 +383,7 @@ test.describe("Private room — copy into another private room", () => {
     await expectReencryptedCopy(rooms);
   });
 
-  test.fixme("Subfolder of another private room", async ({
+  test("Subfolder of another private room", async ({
     page,
     mockRequest,
     baseUrl,
@@ -408,7 +406,7 @@ test.describe("Private room — copy into another private room", () => {
     expect(rooms.destHandle.getFiles()[0].folderId).toBe(DEST_FOLDER_ID);
   });
 
-  test.fixme("Destination picker in a private room", async ({
+  test("Destination picker in a private room", async ({
     page,
     mockRequest,
     baseUrl,
@@ -427,14 +425,14 @@ test.describe("Private room — copy into another private room", () => {
     const picker = selector(page);
     await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 10000 });
     await picker.getByText("Apps", { exact: true }).first().click();
-    await selectorItem(page, /^Rooms$/).click();
+    await selectorItem(page, /^Private$/).click();
     await selectorItem(page, DEST_ROOM_TITLE).click();
 
     await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 15000 });
     await expect(picker.getByText(opaqueTitle)).toHaveCount(0);
   });
 
-  test.fixme("Copy into a room holding a file of the same name", async ({
+  test("Copy into a room holding a file of the same name", async ({
     page,
     mockRequest,
     baseUrl,
@@ -474,7 +472,7 @@ test.describe("Private room — copy into another private room", () => {
     await expect(rows).toHaveCount(2);
   });
 
-  test.fixme("Copy of a name that already has a copy", async ({
+  test("Copy of a name that already has a copy", async ({
     page,
     mockRequest,
     baseUrl,
@@ -556,7 +554,7 @@ test.describe("Private room — copy into another private room", () => {
     expect(seen.filter((r) => r.endsWith("/fileops/duplicate"))).toEqual([]);
   });
 
-  test.fixme("Copy from an archived private room", async ({
+  test("Copy from an archived private room", async ({
     page,
     mockRequest,
     baseUrl,

@@ -120,8 +120,7 @@ test.describe("Keys management — advanced flows", () => {
     await phraseInput.fill(KNOWN_MNEMONIC);
 
     await page
-      .getByRole("dialog")
-      .filter({ hasText: "Use recovery phrase" })
+      .getByRole("dialog", { name: "Access recovery" })
       .getByRole("button", { name: "Continue", exact: true })
       .click();
 

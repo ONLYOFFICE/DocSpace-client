@@ -56,8 +56,6 @@ export const PersistenceKeys = {
   liveChatState: LIVE_CHAT_LOCAL_STORAGE_KEY,
   /** Presence flag set by the public room auth window (PublicRoomStore) */
   publicAuth: PUBLIC_STORAGE_KEY,
-  /** JSON boolean — skip the AI connect dialog (AskAIConnectDialog, ContextOptionsStore) */
-  skipAiModal: "formRoom.skipAIConnectModal",
   /** Presence flag — enterprise license alert dismissed (PaymentStore) */
   enterpriseAlertClose: "enterpriseAlertClose",
 } as const;

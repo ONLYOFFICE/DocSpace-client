@@ -497,10 +497,6 @@ class DialogsStore {
 
   pauseSubmissionsDialogVisible = false;
 
-  askAIConnectDialogVisible = false;
-
-  askAIConnectDialogCallback: Nullable<(res: string) => void> = null;
-
   pauseSubmissionsDialogCallback: Nullable<(res: boolean) => void> = null;
 
   roomGroups: IRoomGroup[] = [];
@@ -1390,8 +1386,8 @@ class DialogsStore {
 
   /**
    * The ids of the rooms the Private section lists, none while it is not
-   * available. Spec: private-rooms/sidebar-section, "Rooms section excludes
-   * private rooms while the section is available"
+   * available. Spec: private-rooms/sidebar-section, "Rooms section never
+   * lists private rooms"
    */
   getPrivateSectionRoomIds = async () => {
     const ids: number[] = [];
@@ -1399,7 +1395,7 @@ class DialogsStore {
 
     const filter = withRoomsRequestScope(
       RoomsFilter.getDefault(),
-      getRoomsRequestScope(CategoryType.PrivateRooms, undefined, true),
+      getRoomsRequestScope(CategoryType.PrivateRooms, undefined),
     );
     filter.pageCount = 100;
 
@@ -1421,14 +1417,6 @@ class DialogsStore {
 
   deleteRoomGroup = async (groupId: string) => {
     await deleteRoomGroup(groupId);
-  };
-
-  setAskAIConnectDialogVisible = (
-    visible: boolean,
-    callback: Nullable<(res: string) => void> = null,
-  ) => {
-    this.askAIConnectDialogVisible = visible;
-    this.askAIConnectDialogCallback = callback;
   };
 
   setSyncDbForms = (data: {

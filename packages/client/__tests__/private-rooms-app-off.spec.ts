@@ -108,7 +108,7 @@ const recordRoomsRequests = (page: Page) => {
 test.describe("Private rooms with the E2E rooms app off", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
-      rootHandler(TEST_PORT),
+      rootHandler(TEST_PORT, { withPrivateRoot: false }),
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       capabilitiesHandler(TEST_PORT, true),

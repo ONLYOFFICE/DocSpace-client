@@ -380,6 +380,8 @@ const Item: React.FC<ItemProps> = ({
   const removeItem = () => {
     const newItems = inviteItems.filter((inviteItem) => inviteItem.id !== id);
     setInviteItems(newItems);
+    // The control that removed the row goes with it: keep the focus in the panel.
+    inputsRef?.current?.querySelector("input")?.focus();
   };
 
   const selectItemAccess = (selected: AccessOption) => {
@@ -444,13 +446,18 @@ const Item: React.FC<ItemProps> = ({
             size={16}
             color="--warning-color"
           />
-          <DeleteIcon
+          <IconButton
             className={classNames(styles.rowIcons, {
               [styles.isClicked]: true,
             })}
-            size="medium"
+            iconNode={<DeleteIcon />}
+            size={16}
+            isClickable
             onClick={removeItem}
-            data-testid="invite_panel_item_delete_button"
+            ariaLabel={t("Common:RemoveInvitee", {
+              name: displayName || email,
+            })}
+            dataTestId="invite_panel_item_delete_button"
           />
         </div>
       ) : (
@@ -474,6 +481,7 @@ const Item: React.FC<ItemProps> = ({
             containerRef={inputsRef}
             isOwner={isOwner}
             withRemove
+            subjectName={displayName || email}
             filteredAccesses={filteredAccesses as TOption[]}
             setIsOpenItemAccess={setIsOpenItemAccessCast}
             isMobileView={isMobileView}

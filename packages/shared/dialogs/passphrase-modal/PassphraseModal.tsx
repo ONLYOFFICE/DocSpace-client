@@ -129,6 +129,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
   const [passphrase, setPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
+  // The kit input shows its own copy of the value and reads the prop only
+  // when it mounts, so a value set from outside needs a fresh mount.
+  const [confirmInputKey, setConfirmInputKey] = useState(0);
   const [error, setError] = useState("");
   const [rulesPassed, setRulesPassed] = useState(false);
   const [rememberDevice, setRememberDevice] = useState(false);
@@ -154,8 +157,15 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     onPasskeyUnlock();
   }, [visible, isNew, onPasskeyUnlock]);
 
+  // Spec: private-rooms/key-management, "A generated passphrase fills both fields"
+  const generatingRef = useRef(false);
   const handleGeneratePassword = useCallback((e: React.MouseEvent) => {
-    inputRef.current?.onGeneratePassword(e);
+    generatingRef.current = true;
+    try {
+      inputRef.current?.onGeneratePassword(e);
+    } finally {
+      generatingRef.current = false;
+    }
   }, []);
 
   const handleSubmit = useCallback(() => {
@@ -294,6 +304,10 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   inputValue={passphrase}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setPassphrase(e.target.value);
+                    if (generatingRef.current) {
+                      setConfirmPassphrase(e.target.value);
+                      setConfirmInputKey((key) => key + 1);
+                    }
                     setError("");
                   }}
                   placeholder={t("Common:Passphrase")}
@@ -351,13 +365,18 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     onChange={(e) => setRememberDevice(e.target.checked)}
                     label={t("Common:RememberDeviceLabel")}
                   />
-                  <Text fontSize="12px" color="var(--text-secondary)">
+                  <Text
+                    fontSize="12px"
+                    color="var(--text-secondary)"
+                    className={styles.rememberHint}
+                  >
                     {t("Common:RememberDeviceHint")}
                   </Text>
                 </div>
               ) : null}
 
-              {onForgotPassphrase && externalError ? (
+              {/* Spec: private-rooms/key-management, "Forgot passphrase link" */}
+              {onForgotPassphrase && !isNew ? (
                 <div className={styles.forgotRow}>
                   <Link
                     type={LinkType.action}
@@ -413,6 +432,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 className={styles.inputWrapper}
               >
                 <PasswordInput
+                  key={confirmInputKey}
                   id="confirmPassphrase"
                   inputName="confirmPassphrase"
                   inputValue={confirmPassphrase}

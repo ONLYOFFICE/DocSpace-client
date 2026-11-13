@@ -97,6 +97,7 @@ import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
 import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
 import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
+import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -1048,7 +1049,7 @@ const SectionHeaderContent = (props) => {
                 actions: isFormsSection
                   ? t("Common:CreateFormSet")
                   : isRoomsFolder || isAiHubFolder
-                    ? t("Common:NewRoom")
+                    ? getNewRoomLabel(t)
                     : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
@@ -1331,7 +1332,10 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
     const isTemplate = rootFolderType === FolderType.RoomTemplates;
-    const isRootRooms = rootFolderType === FolderType.Rooms;
+    // The Private list is a rooms list under a root of its own.
+    const isRootRooms =
+      rootFolderType === FolderType.Rooms ||
+      rootFolderType === FolderType.PrivateRooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 

@@ -41,7 +41,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import styles from "./CellStyles.module.scss";
 
-import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
+import { getRoomTypeLabel } from "../../../../../../helpers/filesUtils";
 
 const TypeCell = ({
   t,
@@ -81,7 +81,7 @@ const TypeCell = ({
     }
   };
 
-  const type = item.isRoom ? getRoomTypeName(roomType, t) : getItemType();
+  const type = item.isRoom ? getRoomTypeLabel(item, t) : getItemType();
   const Exst = fileExst ? fileExst.slice(1).toUpperCase() : "";
   const data = Exst ? `${Exst} ${type}` : type;
 

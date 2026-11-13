@@ -130,7 +130,8 @@ apply once that change is archived (prerequisite 1).
 
 1. Launch scope: individuals and SMB (prerequisite 4 without recovery and
    offboarding), or B2B (with them). The stashed V1 plan allowed the former,
-   with an explicit note in the release notes.
+   with an explicit note in the release notes. Decided by the owner on
+   2026-11-12: B2B, so recovery and offboarding are part of prerequisite 4.
 2. Whether frames and the SDK keep the host opt-in at general availability.
    `private-rooms-beta-release` keeps it for the beta.
 3. Default value of the portal setting on upgraded and new portals (product

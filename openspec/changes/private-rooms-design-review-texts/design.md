@@ -63,6 +63,15 @@ As read on 2026-11-13 (branch `release/v4.1.0`):
    written first. The label is a menu entry and stays short in every
    language.
 
+6. **Submenu labels are chosen where the submenu is built.** The grouping
+   step of `getFilesContextOptionsImpl` already renames the plain
+   download to Common:OriginalFormat when it moves it into the Download
+   group. The same step picks Common:DownloadDecryptedCopy instead when
+   the group holds `download-encrypted`, and relabels that entry with
+   Common:DownloadEncryptedCopy. The option itself keeps
+   Common:DownloadWithoutDecryption for a menu that is not grouped. The
+   header menu and the SDK build flat entries and are not touched.
+
 ## Risks
 
 - The description is long for a block that held one line. The panel

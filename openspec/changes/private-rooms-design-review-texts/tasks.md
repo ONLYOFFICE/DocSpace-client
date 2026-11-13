@@ -32,6 +32,12 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 - [x] 6.1 Run the gate, every command on its own with its exit code read: `pnpm exec tsc` in the six packages, the shared, client, sdk and doceditor unit suites, `biome lint` in the packages touched, `npm --prefix ./common/tests run test:lefthook`, `locales.test.js`, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`, the main specs included after a trial archive on a scratch copy. Verify: every command green, recorded here with the date
   - 2026-11-13: `nx run-many -t tsc lint test --parallel=3` over the six packages: 21 tasks, exit 0 (type check and Biome for all six, unit suites of shared, client, sdk and doceditor). `test:lefthook`: 61 passed, 3 skipped. `locales.test.js`: 44 of 46, the two completeness cases failing on the six foreign AI keys only. E2E as recorded in 5.1. `openspec validate --all --strict` with 1.17.0: 20 of 20; after a trial archive of this change on a scratch copy, 19 of 19 with the main specs included.
 
+## 7. Download submenu
+
+- [ ] 7.1 Client: add Common:DownloadDecryptedCopy and Common:DownloadEncryptedCopy in English and use them for the two entries of the Download submenu when it holds the download without decryption (design decision 6). Verify: cases "Encrypted file" and "File outside private rooms" in `ContextOptionsStore.filesContextOptions.test.ts`; the menu snapshots do not change; `cd packages/client && pnpm exec vitest run src/store/contextOptionsStore`
+- [ ] 7.2 Common: write the translator comments of the two keys and translate them into the 31 other languages. Verify: `locales.test.js` shows no failure beyond the keys foreign to this change; `test:lefthook`; foreign `.meta` files restored
+- [ ] 7.3 Client: run `encrypted-file-ui.spec.ts`, `private-room-cross-user-download.spec.ts` and `private-room-archived.spec.ts` in Docker `tests-dev`, then the gate of 6.1 again. Verify: every command green, recorded here with the date
+
 ## Workflow follow-up
 
 - The `privaterooms` entry of the help center is added in `../buildtools` when the article has an address; until then the link is not shown.

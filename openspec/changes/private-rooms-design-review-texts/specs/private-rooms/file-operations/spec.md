@@ -18,5 +18,18 @@ The system SHALL offer "Download without decryption" for encrypted files and for
 - **THEN** "Download without decryption" is offered next to "Download"
 
 #### Scenario: Label of the entry
-- **WHEN** the context menu of an encrypted file is opened in English
+- **WHEN** several encrypted files are selected in a private room and the header menu is opened in English
 - **THEN** the entry reads "Download encrypted copy"
+
+## ADDED Requirements
+
+### Requirement: Download submenu names both results
+The system SHALL label the two entries of the Download submenu of the client's context menu by what each saves when the submenu holds the download without decryption: Common:DownloadDecryptedCopy for the decrypting download and Common:DownloadEncryptedCopy for the ciphertext one. A Download submenu without that entry SHALL keep Common:OriginalFormat.
+
+#### Scenario: Encrypted file
+- **WHEN** the Download submenu of an encrypted file, of a folder in a private room or of a private room is opened
+- **THEN** it offers Common:DownloadDecryptedCopy and Common:DownloadEncryptedCopy, and neither Common:OriginalFormat nor a second "Download"
+
+#### Scenario: File outside private rooms
+- **WHEN** the Download submenu of a file outside private rooms is opened
+- **THEN** its plain download reads Common:OriginalFormat as before

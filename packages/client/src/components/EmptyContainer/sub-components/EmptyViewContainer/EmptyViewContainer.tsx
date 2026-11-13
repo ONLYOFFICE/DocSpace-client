@@ -77,7 +77,11 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
   const { description, title, icon } = emptyViewOptions;
 
   if (props.isPrivacyFolder) {
-    return <EmptyPrivateRoomView />;
+    return (
+      <EmptyPrivateRoomView
+        folderView={props.isFolder ? { title, icon } : undefined}
+      />
+    );
   }
 
   return (

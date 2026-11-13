@@ -40,6 +40,8 @@ import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import EmptyPrivateRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.light.svg";
 import EmptyPrivateRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.dark.svg";
+import DefaultFolderLightIcon from "PUBLIC_DIR/images/emptyview/empty.default.folder.light.svg";
+import DefaultFolderDarkIcon from "PUBLIC_DIR/images/emptyview/empty.default.folder.dark.svg";
 import UploadDeviceIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import CreateNewFolderIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import SecurityShieldIcon from "PUBLIC_DIR/images/icons/16/security.react.svg";
@@ -56,12 +58,18 @@ export type EmptyPrivateRoomViewProps = {
   onCreateFolder?: () => void;
   /** Invoked when the user clicks "Upload from device". */
   onUploadFiles?: () => void;
+  /**
+   * Whether the open folder lies below the room root. A folder shows the
+   * empty folder title and illustration, without the room's welcome.
+   */
+  isFolder?: boolean;
 };
 
 export const EmptyPrivateRoomView: React.FC<EmptyPrivateRoomViewProps> = ({
   canCreate = false,
   onCreateFolder,
   onUploadFiles,
+  isFolder = false,
 }) => {
   // Keys live in Common (root /public/locales) so the SDK can load them. The
   // main client also imports this component and resolves the same Common
@@ -76,20 +84,41 @@ export const EmptyPrivateRoomView: React.FC<EmptyPrivateRoomViewProps> = ({
     t("Common:PrivateRoomEmptyBenefitKDF"),
   ];
 
+  // Spec: private-rooms/file-operations, "Empty folder inside a private room shows a folder empty view"
+  const roomIcon = isBase ? (
+    <EmptyPrivateRoomLightIcon />
+  ) : (
+    <EmptyPrivateRoomDarkIcon />
+  );
+  const folderIcon = isBase ? (
+    <DefaultFolderLightIcon />
+  ) : (
+    <DefaultFolderDarkIcon />
+  );
+
   return (
-    <div className={styles.wrapper} data-testid="empty-private-room-view">
-      <div className={styles.icon}>
-        {isBase ? <EmptyPrivateRoomLightIcon /> : <EmptyPrivateRoomDarkIcon />}
-      </div>
-      <h3 className={styles.title}>{t("Common:PrivateRoomEmptyTitle")}</h3>
-      <ul className={styles.list}>
-        {items.map((text) => (
-          <li key={text} className={styles.listItem}>
-            <SecurityShieldIcon />
-            <span>{text}</span>
-          </li>
-        ))}
-      </ul>
+    <div
+      className={styles.wrapper}
+      data-testid={
+        isFolder ? "empty-private-folder-view" : "empty-private-room-view"
+      }
+    >
+      <div className={styles.icon}>{isFolder ? folderIcon : roomIcon}</div>
+      <h3 className={styles.title}>
+        {isFolder
+          ? t("Common:EmptyScreenFolder")
+          : t("Common:PrivateRoomEmptyTitle")}
+      </h3>
+      {isFolder ? null : (
+        <ul className={styles.list}>
+          {items.map((text) => (
+            <li key={text} className={styles.listItem}>
+              <SecurityShieldIcon />
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
+      )}
       {canCreate ? (
         <div className={styles.actions}>
           {onCreateFolder ? (
@@ -104,7 +133,9 @@ export const EmptyPrivateRoomView: React.FC<EmptyPrivateRoomViewProps> = ({
                   {t("Common:NewFolder")}
                 </span>
                 <span className={styles.actionDescription}>
-                  {t("Common:PrivateRoomEmptyCreateFolderDescription")}
+                  {isFolder
+                    ? t("Common:PrivateRoomFolderEmptyDescription")
+                    : t("Common:PrivateRoomEmptyCreateFolderDescription")}
                 </span>
               </span>
             </button>

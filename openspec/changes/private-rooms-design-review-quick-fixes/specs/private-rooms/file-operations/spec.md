@@ -7,7 +7,7 @@ The system SHALL show, for an empty folder below the root of a private room, an 
 
 #### Scenario: Empty folder with keys
 - **WHEN** a user with keys and the create right opens an empty folder inside a private room
-- **THEN** the view shows the empty folder title, the create entry with document, spreadsheet, presentation, PDF form and folder, and the upload-from-device entry, described with Common:PrivateRoomFolderEmptyDescription, and no list of encryption properties
+- **THEN** the view shows the empty folder title and the same create and upload entries as the empty room root shows that user, described with Common:PrivateRoomFolderEmptyDescription, and no list of encryption properties
 
 #### Scenario: Empty folder without keys
 - **WHEN** a user who has no encryption key opens an empty folder inside a private room

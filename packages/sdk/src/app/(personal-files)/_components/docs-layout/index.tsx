@@ -61,6 +61,7 @@ import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import WarningComponent from "@onlyoffice/apps-ui-kit/components/navigation/sub-components/WarningComponent";
 import EmptyPrivateRoomView from "@docspace/shared/components/empty-views/empty-private-room";
+import { isFolder as isFolderBelowRoom } from "@docspace/shared/utils/typeGuards";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -350,9 +351,16 @@ const DocsLayoutCore = observer(
           canCreate={isActionButtonEnabled}
           onCreateFolder={handleCreateFolder}
           onUploadFiles={onUploadFiles}
+          isFolder={isFolderBelowRoom(current)}
         />
       );
-    }, [isPrivate, isActionButtonEnabled, handleCreateFolder, onUploadFiles]);
+    }, [
+      isPrivate,
+      isActionButtonEnabled,
+      handleCreateFolder,
+      onUploadFiles,
+      current,
+    ]);
 
     useDocsFrameBridge({
       isReady: true,

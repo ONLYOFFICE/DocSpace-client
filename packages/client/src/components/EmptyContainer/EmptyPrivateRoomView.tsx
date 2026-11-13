@@ -60,14 +60,22 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 
 import styles from "./EmptyPrivateRoomView.module.scss";
 
+export type EmptyPrivateFolderView = {
+  title: string;
+  icon: React.ReactElement;
+};
+
 type EmptyPrivateRoomViewProps = {
   security?: Nullable<TFolderSecurity | TRoomSecurity>;
   canCreateEncrypted?: boolean;
+  // Spec: private-rooms/file-operations, "Empty folder inside a private room shows a folder empty view"
+  folderView?: EmptyPrivateFolderView;
 };
 
 const EmptyPrivateRoomView = ({
   security,
   canCreateEncrypted,
+  folderView,
 }: EmptyPrivateRoomViewProps) => {
   const { t } = useTranslation(["EmptyView", "Common", "Translations"]);
   const { isBase } = useTheme();
@@ -106,13 +114,17 @@ const EmptyPrivateRoomView = ({
 
   const canCreate = !!security?.Create;
 
+  const createDescription = folderView
+    ? t("Common:PrivateRoomFolderEmptyDescription")
+    : t("EmptyView:CreateNewFileDescription");
+
   const options: EmptyViewOptionsType = [];
 
   if (canCreate) {
     if (canCreateEncrypted) {
       options.push({
         title: t("EmptyView:CreateNewFileTitle"),
-        description: t("EmptyView:CreateNewFileDescription"),
+        description: createDescription,
         icon: <CreateNewFileIcon />,
         key: "create-file",
         model: [
@@ -152,7 +164,7 @@ const EmptyPrivateRoomView = ({
     } else {
       options.push({
         title: t("Common:NewFolder"),
-        description: t("EmptyView:CreateNewFileDescription"),
+        description: createDescription,
         icon: <CreateNewFileIcon />,
         key: "create-folder",
         onClick: () => dispatchCreate(undefined),
@@ -182,6 +194,17 @@ const EmptyPrivateRoomView = ({
       </ul>
     </div>
   );
+
+  if (folderView) {
+    return (
+      <EmptyView
+        icon={folderView.icon}
+        title={folderView.title || t("Common:EmptyScreenFolder")}
+        description={null}
+        options={options}
+      />
+    );
+  }
 
   return (
     <EmptyView

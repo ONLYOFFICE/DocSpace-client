@@ -38,7 +38,7 @@ import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import { VectorizationStatus } from "../../enums";
 import { request } from "../client";
 import { isChatCapableProfile } from "./enums";
-import { getProfileById } from "./index";
+import { getProfileAssignments, getProfileById } from "./index";
 import type { TOperation } from "../files/types";
 
 /**
@@ -755,6 +755,22 @@ export const toAiProjectSummary = ({ aiProject }: TAiProject): TAiProjectSummary
   skills: aiProject.instructionsRooms.map((room) => room.title).filter(Boolean),
   knowledge: aiProject.knowledgeRooms.map((room) => room.title).filter(Boolean),
 });
+
+/**
+ * The name of the model an agent without one of its own runs on: the profile
+ * bound to the `Chat` action, or to the `Default` slot when that action has
+ * none. `null` when neither is bound or the profile cannot be read.
+ */
+export const getDefaultChatModelName = async (): Promise<string | null> => {
+  try {
+    const assignments = await getProfileAssignments();
+    const profileId = assignments.Chat ?? assignments.Default;
+    if (!profileId) return null;
+    return (await getProfileById(profileId))?.name ?? null;
+  } catch {
+    return null;
+  }
+};
 
 /**
  * The summary of a project of the list, which answers the rooms without

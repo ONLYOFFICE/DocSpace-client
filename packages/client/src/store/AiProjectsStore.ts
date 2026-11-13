@@ -45,6 +45,7 @@ import {
   getAiProjectKnowledgeFilesCount,
   getAiProjectSkills,
   getAiProjectSummary,
+  getDefaultChatModelName,
   refreshAiProjectSettings,
   toAiProject,
   toAiProjectSummary,
@@ -123,6 +124,15 @@ class AiProjectsStore {
    * its own (`fetchTileSummary`).
    */
   tileSummaries: Record<number, TAiProjectSummary> = {};
+
+  /**
+   * The model an agent without one of its own runs on, by name: what its
+   * tile shows in place of a model. `null` until read, or when the portal
+   * has no chat model bound.
+   */
+  defaultModelName: string | null = null;
+
+  private defaultModelRequest: Promise<void> | null = null;
 
   /** The summary reads in flight, by project id. */
   private summaryRequests: Record<number, Promise<void>> = {};
@@ -311,6 +321,7 @@ class AiProjectsStore {
    * answer, and a failed read is tried again by the next tile that asks.
    */
   fetchTileSummary = (id: number): Promise<void> => {
+    void this.fetchDefaultModel();
     if (this.tileSummaries[id]) return Promise.resolve();
     const pending = this.summaryRequests[id];
     if (pending) return pending;
@@ -326,6 +337,21 @@ class AiProjectsStore {
       });
     this.summaryRequests[id] = request;
     return request;
+  };
+
+  /** Reads the portal's chat model once; a read that found none is tried again by the next tile. */
+  fetchDefaultModel = (): Promise<void> => {
+    if (this.defaultModelName) return Promise.resolve();
+    this.defaultModelRequest ??= getDefaultChatModelName()
+      .then((name) => {
+        runInAction(() => {
+          this.defaultModelName = name;
+        });
+      })
+      .finally(() => {
+        this.defaultModelRequest = null;
+      });
+    return this.defaultModelRequest;
   };
 
   /** The open project (and the one in the edit form), as the server has it now. */

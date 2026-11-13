@@ -97,7 +97,8 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
   const [content] = React.Children.toArray(children);
 
   const list = (names: string[] | undefined) => (names?.length ? names.join(", ") : "\u2014");
-  const model = !summary ? "\u2014" : (summary.model ?? t("Common:Default"));
+  // An agent without a model of its own runs on the portal's chat model.
+  const model = (summary && (summary.model ?? aiProjectsStore.defaultModelName)) || "\u2014";
 
   const owner = (item as { createdBy?: { displayName?: string } }).createdBy?.displayName;
 

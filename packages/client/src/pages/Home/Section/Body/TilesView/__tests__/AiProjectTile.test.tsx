@@ -6,6 +6,7 @@ type TSummary = { model: string | null; modelAvailable: boolean; skills: string[
 
 const store = vi.hoisted(() => ({
   tileSummaries: {} as Record<number, unknown>,
+  defaultModelName: null as string | null,
   fetchTileSummary: vi.fn(async () => {}),
 }));
 
@@ -84,11 +85,19 @@ describe("AiProjectTile", () => {
     expect(value("knowledge")).toBe("Wiki");
   });
 
-  it("says Default for a project without a model of its own, and a dash for no rooms", () => {
+  it("names the portal's chat model for a project without a model of its own, and a dash for no rooms", () => {
     store.tileSummaries = { 7: { model: null, modelAvailable: true, skills: [], knowledge: [] } };
+    store.defaultModelName = "GLM 5.3 Flash";
     renderTile();
-    expect(value("model")).toBe("Common:Default");
+    expect(value("model")).toBe("GLM 5.3 Flash");
     expect(value("skills")).toBe("—");
+  });
+
+  it("shows a dash while the portal's chat model is unknown, never Default", () => {
+    store.tileSummaries = { 7: { model: null, modelAvailable: true, skills: [], knowledge: [] } };
+    store.defaultModelName = null;
+    renderTile();
+    expect(value("model")).toBe("—");
   });
 
   it("names the owner, whose name opens their profile and not the project", () => {

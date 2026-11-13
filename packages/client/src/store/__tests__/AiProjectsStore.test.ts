@@ -9,6 +9,7 @@ const api = vi.hoisted(() => ({
   getAiProjectKnowledgeFilesCount: vi.fn(),
   getAiProjectSkills: vi.fn(),
   getAiProjectSummary: vi.fn(),
+  getDefaultChatModelName: vi.fn(async () => null as string | null),
   toAiProjectSummary: vi.fn((p: { aiProject: { profile?: { name?: string } | null } }) => ({
     model: p.aiProject.profile?.name ?? null,
     modelAvailable: true,
@@ -477,6 +478,16 @@ describe("AiProjectsStore", () => {
 
   describe("the tile summaries", () => {
     const summary = { model: "Claude", modelAvailable: true, skills: ["Legal"], knowledge: ["Wiki"] };
+
+    it("reads the portal's chat model once for the tiles of agents without their own", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      api.getDefaultChatModelName.mockResolvedValue("GLM 5.3 Flash");
+      const store = createStore();
+      await Promise.all([store.fetchTileSummary(1), store.fetchTileSummary(2)]);
+      await store.fetchDefaultModel();
+      expect(store.defaultModelName).toBe("GLM 5.3 Flash");
+      expect(api.getDefaultChatModelName).toHaveBeenCalledTimes(1);
+    });
 
     it("reads a project's summary once, however many tiles ask", async () => {
       api.getAiProjectSummary.mockResolvedValue(summary);

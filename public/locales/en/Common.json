@@ -823,6 +823,8 @@
   "DownloadApps": "Download applications",
   "DownloadAs": "Download as",
   "DownloadCopy": "Download copy",
+  "DownloadDecryptedCopy": "Decrypted copy",
+  "DownloadEncryptedCopy": "Encrypted copy",
   "DownloadOperationDescription": "Once ready, you can find the files in your browser's download folder and close this tab.",
   "DownloadOperationTitle": "File downloading in progress",
   "DownloadOriginalFormat": "In original format",

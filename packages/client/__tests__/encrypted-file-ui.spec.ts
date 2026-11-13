@@ -218,7 +218,7 @@ test.describe("Encrypted file UI in private room", () => {
     await expect(badge).toHaveClass(/noAccessIcon/);
   });
 
-  test("Label of the entry", async ({
+  test("Download submenu of an encrypted file", async ({
     page,
     mockRequest,
     baseUrl,

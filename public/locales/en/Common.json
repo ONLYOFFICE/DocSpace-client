@@ -1872,6 +1872,7 @@
   "PrivateRoomsListEmptyDescription": "Private rooms are end-to-end encrypted. Files are encrypted in your browser before upload and only the people you invite can read them.",
   "PrivateRoomsListEmptyTitle": "No private rooms yet",
   "PrivateRoomTitle": "Private Room",
+  "PrivateRoomType": "Private",
   "ProcessDetails": "Process details",
   "Processes": "Processes: {{count}}",
   "Profile": "Profile",

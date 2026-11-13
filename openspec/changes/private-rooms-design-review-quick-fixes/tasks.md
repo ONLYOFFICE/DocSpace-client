@@ -20,7 +20,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Room type label
 
-- [ ] 3.1 Client: add Common:PrivateRoomType in English and label a private room with it in the type cell of the table, the row content, the tile and the details of the info panel (decision 6); check whether the SDK shows a room's type anywhere and apply the same rule there, or record here that it does not. Verify: cases "Type column in the Private section", "Info panel" and "Archive holds both kinds" in unit tests of the label helper and the four callers; `pnpm exec vitest run src/helpers src/pages/Home src/components/InfoPanel`
+- [x] 3.1 Client: add Common:PrivateRoomType in English and label a private room with it in the type cell of the table, the row content, the tile and the details of the info panel (decision 6); check whether the SDK shows a room's type anywhere and apply the same rule there, or record here that it does not. Verify: cases "Type column in the Private section", "Info panel" and "Archive holds both kinds" in unit tests of the label helper and the four callers; `pnpm exec vitest run src/helpers src/pages/Home src/components/InfoPanel`
+  - 2026-11-13: one helper, `getRoomTypeLabel(room, t)` in `helpers/filesUtils.js`, reads the private flag of the room and is used by the type cell, the row content, the tile (through the kit's `getRoomTypeName` prop) and the details of the info panel; list items carry `private` (`filesStore/filesList.helpers.ts`). The three cases are unit tests of the helper in `helpers/__tests__/roomTypeLabel.test.ts`; none of the four callers has a render test, and none was added. The SDK shows no room type: its room tile passes an empty label (`rooms-tile-view/sub-components/RoomsTile.tsx`) and its lists have no type column, so nothing changes there. The filter's type group, hidden in the Private section, still labels by type alone.
 
 ## 4. Empty views
 

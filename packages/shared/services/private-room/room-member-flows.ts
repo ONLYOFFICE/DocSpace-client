@@ -286,6 +286,53 @@ export function skippedMemberNotices(
   return notices;
 }
 
+/**
+ * The sentences that name everyone an invitation left out when it invited
+ * nobody: the invitees the key check skipped and the ones the server refused.
+ */
+// Spec: private-rooms/room-membership, "An invitation that invited nobody keeps the invite form"
+export function notInvitedReasons(
+  t: TFunction,
+  skipped: SkippedRoomMember[],
+  refused: TRefusedInvitee[] = [],
+): string[] {
+  const nameOf = (m: { id: string; displayName?: string }) =>
+    m.displayName || m.id;
+  const namesOf = (members: { id: string; displayName?: string }[]) =>
+    members.map(nameOf).join(", ");
+
+  const withoutKey = [
+    ...skipped.filter((m) => m.reason === "no-key"),
+    ...refused.filter((entry) => entry.noKey).map((entry) => entry.member),
+  ];
+  const withRefusedKey = skipped.filter(
+    (m) => m.reason === "key-mismatch-refused",
+  );
+  const refusedOtherwise = refused
+    .filter((entry) => !entry.noKey)
+    .map((entry) => entry.member);
+
+  const reasons: string[] = [];
+  if (withoutKey.length > 0) {
+    reasons.push(
+      t("Common:EncryptedInviteNoKey", { users: namesOf(withoutKey) }),
+    );
+  }
+  if (withRefusedKey.length > 0) {
+    reasons.push(
+      t("Common:EncryptedSkippedKeyMismatch", {
+        users: namesOf(withRefusedKey),
+      }),
+    );
+  }
+  if (refusedOtherwise.length > 0) {
+    reasons.push(
+      t("Common:EncryptedInviteFailed", { users: namesOf(refusedOtherwise) }),
+    );
+  }
+  return reasons;
+}
+
 // Spec: private-rooms/room-membership, "Invited members receive re-wrapped file keys"
 export async function rewrapForInvitedMembers({
   t,

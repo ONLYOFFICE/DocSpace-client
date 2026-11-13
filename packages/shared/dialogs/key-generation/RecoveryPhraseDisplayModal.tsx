@@ -79,7 +79,6 @@ export const RecoveryPhraseDisplayModal: React.FC<
   const { t, ready, i18n } = useTranslation(["Common"]);
   const titleId = useId();
   const [acknowledged, setAcknowledged] = useState(false);
-  const [hasSaved, setHasSaved] = useState(false);
 
   const words = useMemo(() => mnemonic.trim().split(/\s+/), [mnemonic]);
   const wordCount = words.length;
@@ -87,14 +86,12 @@ export const RecoveryPhraseDisplayModal: React.FC<
   useEffect(() => {
     if (visible) {
       setAcknowledged(false);
-      setHasSaved(false);
     }
   }, [visible]);
 
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(mnemonic);
-      setHasSaved(true);
       toastr.success(t("Common:Copied"));
     } catch {
       toastr.error(t("Common:CopyFailed"));
@@ -137,15 +134,22 @@ export const RecoveryPhraseDisplayModal: React.FC<
 
   const handlePrintKit = useCallback(() => {
     printRecoveryKit(buildKitHtml());
-    setHasSaved(true);
   }, [buildKitHtml]);
 
   const handleDownloadKit = useCallback(() => {
     const productName = getBrandName("ProductName");
     const filename = `${productName.replace(/\s+/g, "-")}-recovery-kit.html`;
     downloadRecoveryKitHtml(buildKitHtml(), filename);
-    setHasSaved(true);
   }, [buildKitHtml]);
+
+  // A selection made by hand copies the phrase itself, on one line.
+  const handlePhraseCopy = useCallback(
+    (e: React.ClipboardEvent) => {
+      e.clipboardData.setData("text/plain", words.join(" "));
+      e.preventDefault();
+    },
+    [words],
+  );
 
   const handleCancel = useCallback(() => {
     setAcknowledged(false);
@@ -187,27 +191,36 @@ export const RecoveryPhraseDisplayModal: React.FC<
               </Text>
             </div>
 
-            <div className={styles.phraseBox}>{words.join(" ")}</div>
+            {/* Spec: private-rooms/key-management, "Recovery phrase is shown once and must be acknowledged" */}
+            <ol
+              role="list"
+              dir="ltr"
+              className={styles.phraseBox}
+              onCopy={handlePhraseCopy}
+              data-testid="recovery_phrase_words"
+            >
+              {words.map((word, index) => (
+                <React.Fragment key={index}>
+                  {index > 0 ? " " : null}
+                  <li className={styles.phraseWord}>{word}</li>
+                </React.Fragment>
+              ))}
+            </ol>
 
             <div className={styles.saveActions}>
               <Button
-                scale
-                primary
-                className={styles.printButton}
                 size={ButtonSize.small}
                 onClick={handlePrintKit}
                 label={t("Common:RecoveryKitPrint")}
                 isDisabled={isLoading}
               />
               <Button
-                scale
                 size={ButtonSize.small}
                 onClick={handleDownloadKit}
                 label={t("Common:Download")}
                 isDisabled={isLoading}
               />
               <Button
-                scale
                 size={ButtonSize.small}
                 onClick={handleCopy}
                 label={t("Common:CopyToClipboard")}
@@ -219,16 +232,11 @@ export const RecoveryPhraseDisplayModal: React.FC<
               <Checkbox
                 id="recoveryPhraseAcknowledged"
                 isChecked={acknowledged}
-                isDisabled={isLoading || !hasSaved}
+                isDisabled={isLoading}
                 onChange={(e) => setAcknowledged(e.target.checked)}
                 label={t("Common:RecoveryPhraseAcknowledge")}
               />
             </div>
-            {!hasSaved ? (
-              <Text className={styles.saveFirstHint} fontSize="12px">
-                {t("Common:RecoveryPhraseSaveFirst")}
-              </Text>
-            ) : null}
           </div>
         </ModalDialog.Body>
 

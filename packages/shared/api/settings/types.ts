@@ -304,6 +304,7 @@ export type THelpCenterEntries = {
   managingusers: string;
   oauth: string;
   passwordstrength: string;
+  privaterooms?: string;
   renaming: string;
   sessionlifetime: string;
   settings: string;

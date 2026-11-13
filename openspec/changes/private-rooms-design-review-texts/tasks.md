@@ -9,7 +9,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Learn more link
 
-- [ ] 2.1 Shared and client: add the `privateRoomsHelpUrl` getter to `SettingsStore`, the optional `helpUrl` prop to `RoomType`, and pass it from `SetRoomParams.js` for the Private type (decisions 2 and 3). Verify: cases "Help article configured" and "No help article" in `RoomType.test.tsx` and in a unit test of the getter (entry present, entry missing, domain missing); `cd packages/shared && pnpm exec vitest run components/room-type store`; `cd packages/client && pnpm exec vitest run src/components/dialogs/CreateEditRoomDialog`
+- [x] 2.1 Shared and client: add the `privateRoomsHelpUrl` getter to `SettingsStore`, the optional `helpUrl` prop to `RoomType`, and pass it from `SetRoomParams.js` for the Private type (decisions 2 and 3). Verify: cases "Help article configured" and "No help article" in `RoomType.test.tsx` and in a unit test of the getter (entry present, entry missing, domain missing); `cd packages/shared && pnpm exec vitest run components/room-type store`; `cd packages/client && pnpm exec vitest run src/components/dialogs/CreateEditRoomDialog`
+  - 2026-11-13: `SettingsStore.privateRoomsHelpUrl` joins the help-center domain and the entry `privaterooms` and is `undefined` when either is missing; the entry is an optional field of `THelpCenterEntries`. `RoomType` takes `helpUrl` and shows the link only in its display variant, which the type union now lists; `SetRoomParams.js` passes the address only when the displayed type is Private. The getter cases are in `SettingsStore.helpUrls.test.ts`; a third block case finds no link in the chooser variant.
 
 ## 3. Label of the download entry
 

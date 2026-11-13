@@ -214,8 +214,7 @@ describe("RoomType", () => {
   describe("Private room block", () => {
     const privateProps = {
       ...defaultProps,
-      // The panels pass a display variant the union does not list.
-      type: "displayItem" as never,
+      type: "displayItem" as const,
       roomType: RoomsTypePrivate,
     };
 
@@ -227,6 +226,42 @@ describe("RoomType", () => {
         screen.getByText("Common:PrivateRoomPanelDescription"),
       ).toBeInTheDocument();
       expect(screen.queryByText("Common:PrivateRoomDescription")).toBeNull();
+    });
+
+    it("Help article configured", () => {
+      render(
+        <RoomType
+          {...privateProps}
+          helpUrl="https://helpcenter.example/private-rooms.aspx"
+        />,
+      );
+
+      const link = screen.getByTestId("room-type-help-link");
+      expect(link).toHaveTextContent("Common:LearnMore");
+      expect(link).toHaveAttribute(
+        "href",
+        "https://helpcenter.example/private-rooms.aspx",
+      );
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
+    it("No help article", () => {
+      render(<RoomType {...privateProps} />);
+
+      expect(screen.queryByTestId("room-type-help-link")).toBeNull();
+    });
+
+    it("shows no link in the chooser variants", () => {
+      render(
+        <RoomType
+          {...privateProps}
+          type="listItem"
+          helpUrl="https://helpcenter.example/private-rooms.aspx"
+        />,
+      );
+
+      expect(screen.queryByTestId("room-type-help-link")).toBeNull();
     });
   });
 

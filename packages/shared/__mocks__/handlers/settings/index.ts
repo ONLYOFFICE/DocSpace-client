@@ -60,6 +60,8 @@ import {
 } from "./quotaSettings";
 import {
   webPluginsHandler,
+  webPluginsListHandler,
+  mockWorkspaceAppPlugin,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
@@ -107,6 +109,8 @@ export {
   settingsAdditionalHandler,
   culturesHandler,
   webPluginsHandler,
+  webPluginsListHandler,
+  mockWorkspaceAppPlugin,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,

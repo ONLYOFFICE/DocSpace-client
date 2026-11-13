@@ -414,6 +414,15 @@ export const selfByTypeHandler = (
   );
 };
 
+export const selfInGroupsHandler = (
+  port: string,
+  userType: UserType,
+  groups: { id: string; name: string }[],
+) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_DELETE_USER}`, () =>
+    Response.json({ response: { ...usersByType[userType], groups } }),
+  );
+
 export const selfHandlerWithCulture = (port: string, culture: string) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     const data = {

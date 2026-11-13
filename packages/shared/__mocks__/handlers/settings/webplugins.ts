@@ -518,6 +518,38 @@ export const webPluginsWithArticleButtonPlugin = {
 };
 
 // Plugins list with article navigation sample plugin
+export const mockWorkspaceAppPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "workspace-app",
+  version: "1.0.1",
+  minDocSpaceVersion: "4.0.0",
+  description:
+    "Sample plugin adding a sidebar entry, a Home page card and a Home page widget, shown only to the people and groups chosen in its settings",
+  pluginName: "WorkspaceAppSample",
+  scopes: "ArticleNavigation,DashboardWidget,Settings",
+  image: "plugin-icon.svg",
+  url: "/plugins/workspace-app/plugin.js",
+  runtime: "module",
+  settings: "",
+};
+
+export const mockRestrictedWorkspaceAppPlugin: TAPIPlugin = {
+  ...mockWorkspaceAppPlugin,
+  settings: JSON.stringify({
+    restricted: true,
+    users: [],
+    groups: ["sales-group-id"],
+  }),
+};
+
+const webPluginsList = (plugins: TAPIPlugin[]) => ({
+  response: plugins,
+  count: plugins.length,
+  links: [{ href: url, action: "GET" }],
+  status: 0,
+  statusCode: 200,
+});
+
 export const webPluginsWithArticleNavigationPlugin = {
   response: [mockArticleNavigationPlugin],
   count: 1,
@@ -747,6 +779,8 @@ type TWebPluginType =
   | "withMainButtonPlugin"
   | "withArticleButtonPlugin"
   | "withArticleNavigationPlugin"
+  | "withWorkspaceAppPlugin"
+  | "withRestrictedWorkspaceAppPlugin"
   | "withFileItemPlugin"
   | "withProfileMenuPlugin"
   | "withEventListenerPlugin"
@@ -792,6 +826,12 @@ export const webPluginsResolver = (type: TWebPluginType = "empty") => {
       break;
     case "withArticleNavigationPlugin":
       data = webPluginsWithArticleNavigationPlugin;
+      break;
+    case "withWorkspaceAppPlugin":
+      data = webPluginsList([mockWorkspaceAppPlugin]);
+      break;
+    case "withRestrictedWorkspaceAppPlugin":
+      data = webPluginsList([mockRestrictedWorkspaceAppPlugin]);
       break;
     case "withFileItemPlugin":
       data = webPluginsWithFileItemPlugin;
@@ -853,6 +893,11 @@ export const webPluginsDeleteResolver = () => {
 };
 
 // Handlers
+export const webPluginsListHandler = (port: string, plugins: TAPIPlugin[]) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`, () =>
+    Response.json(webPluginsList(plugins)),
+  );
+
 export const webPluginsHandler = (
   port: string,
   type: TWebPluginType = "empty",

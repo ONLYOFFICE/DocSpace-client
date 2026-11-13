@@ -94,7 +94,7 @@ test.describe("Profile > Keys Management", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
@@ -187,7 +187,7 @@ test.describe("Profile > Keys Management", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
@@ -243,7 +243,7 @@ test.describe("Profile > Keys Management", () => {
       "22222222-2222-2222-2222-222222222222",
     );
     await expect(
-      page.getByRole("button", { name: "Generate new key", exact: true }),
+      page.getByRole("button", { name: "Create key", exact: true }),
     ).toHaveCount(0);
     await expect(page.getByTestId("import_key_link")).toHaveCount(0);
     await expect(page.getByTestId("unused_keys_notice")).toBeVisible();
@@ -275,7 +275,7 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
   ) => {
     await page.goto(`${baseUrl}/profile/keys-management`);
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click({ timeout: 15_000 });
     const dialog = page.getByRole("dialog", { name: "Create passphrase" });
     await expect(dialog).toBeVisible({ timeout: 5_000 });
@@ -416,7 +416,7 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       await page.goto(`${baseUrl}/profile/keys-management`);
 
       const generateBtn = page.getByRole("button", {
-        name: "Generate new key",
+        name: "Create key",
         exact: true,
       });
       await expect(generateBtn).toBeVisible({ timeout: 15_000 });
@@ -546,7 +546,7 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
@@ -636,7 +636,7 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     await expect(field).toHaveAttribute("aria-invalid", "true", {
       timeout: 15_000,
     });
-    await expect(field).toHaveAccessibleDescription(/Invalid passphrase/);
+    await expect(field).toHaveAccessibleDescription(/Incorrect passphrase/);
     await expect(field).toBeEnabled();
     await expect(field).toBeFocused();
 
@@ -661,7 +661,7 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });

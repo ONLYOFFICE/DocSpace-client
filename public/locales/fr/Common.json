@@ -1927,7 +1927,6 @@
   "RecoveryPhrasePlaceholder": "mot1 mot2 mot3 ... mot24",
   "RecoveryPhraseRequired": "Saisissez les 24 mots de la phrase de récupération.",
   "RecoveryPhraseRestored": "Phrase de récupération acceptée. La phrase de passe a été mise à jour. Votre phrase de récupération reste valable.",
-  "RecoveryPhraseSaveFirst": "Imprimez, téléchargez ou copiez votre phrase de récupération pour continuer.",
   "RecoveryPhraseTitle": "Enregistrez votre phrase de récupération",
   "RecoveryPhraseWarning": "Toute personne disposant de cette phrase peut déchiffrer vos fichiers. Ne la partagez jamais. Nous ne pouvons pas la récupérer pour vous.",
   "ReducedAdmins": "Administrateurs réduits",

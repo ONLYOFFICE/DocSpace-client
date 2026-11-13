@@ -1927,7 +1927,6 @@
   "RecoveryPhrasePlaceholder": "từ1 từ2 từ3 ... từ24",
   "RecoveryPhraseRequired": "Nhập đầy đủ 24 từ của cụm từ khôi phục.",
   "RecoveryPhraseRestored": "Cụm từ khôi phục đã được chấp nhận. Mật khẩu bảo vệ đã được cập nhật. Cụm từ khôi phục của bạn vẫn còn hiệu lực.",
-  "RecoveryPhraseSaveFirst": "Hãy in, tải xuống hoặc sao chép cụm từ khôi phục của bạn để tiếp tục.",
   "RecoveryPhraseTitle": "Lưu cụm từ khôi phục của bạn",
   "RecoveryPhraseWarning": "Bất kỳ ai có cụm từ này đều có thể giải mã các tập tin của bạn. Tuyệt đối không chia sẻ. Chúng tôi không thể khôi phục nó cho bạn.",
   "ReducedAdmins": "Giảm quản trị viên",

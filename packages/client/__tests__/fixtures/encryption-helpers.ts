@@ -76,7 +76,7 @@ export async function bootstrapEncryption(
   await page.goto(`${baseUrl}/profile/keys-management`);
 
   const generateBtn = page.getByRole("button", {
-    name: "Generate new key",
+    name: "Create key",
     exact: true,
   });
   await expect(generateBtn).toBeVisible({ timeout: 15000 });

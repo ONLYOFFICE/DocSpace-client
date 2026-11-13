@@ -1927,7 +1927,6 @@
   "RecoveryPhrasePlaceholder": "slovo1 slovo2 slovo3 ... slovo24",
   "RecoveryPhraseRequired": "Zadejte všech 24 slov obnovovací fráze.",
   "RecoveryPhraseRestored": "Obnovovací fráze přijata. Přístupová fráze byla aktualizována. Vaše obnovovací fráze zůstává platná.",
-  "RecoveryPhraseSaveFirst": "Chcete-li pokračovat, vytiskněte, stáhněte nebo zkopírujte svou obnovovací frázi.",
   "RecoveryPhraseTitle": "Uložte svou obnovovací frázi",
   "RecoveryPhraseWarning": "Kdokoli s touto frází může dešifrovat vaše soubory. Nikdy ji nesdílejte. Nemůžeme ji za vás obnovit.",
   "ReducedAdmins": "Méně administrátorů",

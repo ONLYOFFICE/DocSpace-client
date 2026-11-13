@@ -1927,7 +1927,6 @@
   "RecoveryPhrasePlaceholder": "単語1 単語2 単語3 ... 単語24",
   "RecoveryPhraseRequired": "リカバリーフレーズの24語すべてを入力してください。",
   "RecoveryPhraseRestored": "リカバリーフレーズが受け付けられました。パスフレーズが更新されました。リカバリーフレーズは引き続き有効です。",
-  "RecoveryPhraseSaveFirst": "続行するには、リカバリーフレーズを印刷、ダウンロード、またはコピーしてください。",
   "RecoveryPhraseTitle": "リカバリーフレーズを保存してください",
   "RecoveryPhraseWarning": "このフレーズを持つ人は誰でもファイルを復号化できます。絶対に共有しないでください。弊社では復元できません。",
   "ReducedAdmins": "管理者の削減",

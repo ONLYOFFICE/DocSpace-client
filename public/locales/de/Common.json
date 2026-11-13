@@ -1927,7 +1927,6 @@
   "RecoveryPhrasePlaceholder": "wort1 wort2 wort3 ... wort24",
   "RecoveryPhraseRequired": "Geben Sie alle 24 Wörter der Wiederherstellungsphrase ein.",
   "RecoveryPhraseRestored": "Wiederherstellungsphrase akzeptiert. Passphrase wurde aktualisiert. Ihre Wiederherstellungsphrase bleibt gültig.",
-  "RecoveryPhraseSaveFirst": "Drucken Sie Ihre Wiederherstellungsphrase, laden Sie sie herunter oder kopieren Sie sie, um fortzufahren.",
   "RecoveryPhraseTitle": "Wiederherstellungsphrase speichern",
   "RecoveryPhraseWarning": "Jeder, der diese Phrase kennt, kann Ihre Dateien entschlüsseln. Teilen Sie sie niemals. Wir können sie nicht für Sie wiederherstellen.",
   "ReducedAdmins": "Reduzierte Admins",

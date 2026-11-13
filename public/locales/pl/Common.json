@@ -1927,7 +1927,6 @@
   "RecoveryPhrasePlaceholder": "słowo1 słowo2 słowo3 ... słowo24",
   "RecoveryPhraseRequired": "Wprowadź wszystkie 24 słowa frazy odzyskiwania.",
   "RecoveryPhraseRestored": "Fraza odzyskiwania zaakceptowana. Hasło dostępu zostało zaktualizowane. Twoja fraza odzyskiwania pozostaje ważna.",
-  "RecoveryPhraseSaveFirst": "Aby kontynuować, wydrukuj, pobierz lub skopiuj swoją frazę odzyskiwania.",
   "RecoveryPhraseTitle": "Zapisz swoją frazę odzyskiwania",
   "RecoveryPhraseWarning": "Każda osoba posiadająca tę frazę może odszyfrować Twoje pliki. Nigdy jej nie udostępniaj. Nie możemy jej odzyskać za Ciebie.",
   "ReducedAdmins": "Zredukowani administratorzy",

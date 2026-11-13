@@ -120,7 +120,11 @@ const sectionIcon = (isPrivateScope: boolean) =>
   ).container.innerHTML;
 
 const optionsOf = (list: ReturnType<typeof getOptions>) =>
-  (Array.isArray(list) ? list : []) as { title?: string; key?: string }[];
+  (Array.isArray(list) ? list : []) as {
+    title?: string;
+    description?: string;
+    key?: string;
+  }[];
 
 // Spec: private-rooms/sidebar-section, "Section empty state"
 describe("Empty state of the Private section", () => {
@@ -149,6 +153,7 @@ describe("Empty state of the Private section", () => {
     expect(options.map((option) => option.title)).toEqual([
       "Common:CreatePrivateRoom",
     ]);
+    expect(options[0].description).toBe("Common:PrivateRoomDescription");
   });
 
   it("User without private rooms", () => {

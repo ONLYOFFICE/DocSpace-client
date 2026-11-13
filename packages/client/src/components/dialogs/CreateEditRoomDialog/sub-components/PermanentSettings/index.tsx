@@ -67,7 +67,6 @@ const PermanentSettings = ({
     >
       {isThirdparty ? (
         <PermanentSetting
-          type="storageLocation"
           icon={storageLocation.iconSrc}
           title={thirdpartyTitle}
           isFull={false}

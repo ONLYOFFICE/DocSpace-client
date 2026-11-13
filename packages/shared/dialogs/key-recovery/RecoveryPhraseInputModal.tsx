@@ -160,7 +160,7 @@ export const RecoveryPhraseInputModal: React.FC<
         autoMaxHeight
       >
         <ModalDialog.Header>
-          <span id={titleId}>{t("Common:UseRecoveryPhrase")}</span>
+          <span id={titleId}>{t("Common:RecoverTitle")}</span>
         </ModalDialog.Header>
 
         <ModalDialog.Body>

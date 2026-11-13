@@ -555,7 +555,13 @@ export const getOptions = (
       // Spec: private-rooms/sidebar-section, "Section empty state"
       .with([FolderType.Rooms, P.when(() => isPrivateScope), P._], () =>
         access === ShareAccessRights.None
-          ? [{ ...createRoom, title: t("Common:CreatePrivateRoom") }]
+          ? [
+              {
+                ...createRoom,
+                title: t("Common:CreatePrivateRoom"),
+                description: t("Common:PrivateRoomDescription"),
+              },
+            ]
           : [],
       )
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [

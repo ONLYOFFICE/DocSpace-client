@@ -42,7 +42,7 @@ const dialogs = [
   },
   {
     name: "recovery phrase input",
-    title: "Common:UseRecoveryPhrase",
+    title: "Common:RecoverTitle",
     element: () => (
       <RecoveryPhraseInputModal visible onSubmit={vi.fn()} onCancel={vi.fn()} />
     ),

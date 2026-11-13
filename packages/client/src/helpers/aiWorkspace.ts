@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RoomsType } from "@docspace/shared/enums";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 /**
  * The AI Chat section's lists are one rooms list (`/ai-rooms`) narrowed to a
@@ -86,4 +87,27 @@ export const getAiWorkspaceCreatePayload = (
   return type === RoomsType.AiProjectRoom
     ? { isAiProjectCreate: true }
     : { startRoomType: type };
+};
+
+/** The list is on its Templates tab: the templates of its room type. */
+export const isAiWorkspaceTemplates = (search: string): boolean =>
+  new URLSearchParams(search).get("searchArea") === RoomSearchArea.Templates;
+
+/**
+ * The URL of a list's tab: its own rooms (the section's list, narrowed to the
+ * type) or the templates of its room type. Both
+ * stay on the section's path, so the title and the sidebar entry hold.
+ */
+export const getAiWorkspaceTabUrl = (
+  isTemplates: boolean,
+  type: RoomsType,
+  userId?: string,
+): string => {
+  const searchArea = isTemplates
+    ? RoomSearchArea.Templates
+    : RoomSearchArea.AiHub;
+  const filter = RoomsFilter.getDefault(userId, searchArea);
+  filter.searchArea = searchArea;
+  filter.type = [String(type)];
+  return `/ai-rooms/filter?${filter.toUrlParams(userId, false)}`;
 };

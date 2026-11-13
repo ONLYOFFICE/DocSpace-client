@@ -1,14 +1,14 @@
 {
   "key_path": "GenerateNewKey",
-  "content": "Generate new key",
-  "content_en_sha1_hash": "e963303ff3b0ffd06b14218564a3ed9952c017b6",
-  "created_at": "2026-05-24T17:27:28.874Z",
-  "updated_at": "2026-11-05T16:49:39.982Z",
+  "content": "Create key",
+  "content_en_sha1_hash": "e028cb09f2a481aec3b30e1b7d57d0e8976efb23",
+  "created_at": "2026-11-13T06:50:40.597Z",
+  "updated_at": "2026-11-13T06:52:24.797Z",
   "comment": {
-    "text": "Button label that triggers the creation of a new key in the keys management section.",
+    "text": "Label of the main button on the Keys management tab of the profile, shown while the user has no encryption key; it opens the dialog where a passphrase is typed or generated and the key is created. Verb, imperative; short button label.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:55:51.691Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-13T06:52:24.797Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {

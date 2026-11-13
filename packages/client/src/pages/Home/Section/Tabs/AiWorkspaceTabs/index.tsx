@@ -55,8 +55,8 @@ type AiWorkspaceTabsProps = { userId?: string };
 /**
  * The tabs over the filter of the AI Chat section's lists (Agents, Skill
  * sets, Knowledge bases): the user's own rooms of the list's type and the
- * templates of that type. Both stay on the list's path, so the sidebar entry
- * and the title do not change; the tab is read from the `searchArea` query.
+ * shipped templates of that kind. Both stay on the list's address, so the
+ * sidebar entry and the title do not change; the tab is read from its query.
  */
 const AiWorkspaceTabs = ({ userId }: AiWorkspaceTabsProps) => {
   const { t } = useTranslation(["Common"]);

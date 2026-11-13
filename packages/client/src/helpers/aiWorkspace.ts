@@ -89,25 +89,27 @@ export const getAiWorkspaceCreatePayload = (
     : { startRoomType: type };
 };
 
-/** The list is on its Templates tab: the templates of its room type. */
+const TAB_PARAM = "tab";
+const TEMPLATES_TAB = "templates";
+
+/** The list is on its Templates tab: the shipped templates of its kind. */
 export const isAiWorkspaceTemplates = (search: string): boolean =>
-  new URLSearchParams(search).get("searchArea") === RoomSearchArea.Templates;
+  new URLSearchParams(search).get(TAB_PARAM) === TEMPLATES_TAB;
 
 /**
- * The URL of a list's tab: its own rooms (the section's list, narrowed to the
- * type) or the templates of its room type. Both
- * stay on the section's path, so the title and the sidebar entry hold.
+ * The URL of a list's tab: its own rooms, or the templates of its kind. Both
+ * are the section's list narrowed to the type, so the title, the sidebar
+ * entry and the header hold; the Templates tab is marked by a query of its
+ * own and draws the catalog in place of the list.
  */
 export const getAiWorkspaceTabUrl = (
   isTemplates: boolean,
   type: RoomsType,
   userId?: string,
 ): string => {
-  const searchArea = isTemplates
-    ? RoomSearchArea.Templates
-    : RoomSearchArea.AiHub;
-  const filter = RoomsFilter.getDefault(userId, searchArea);
-  filter.searchArea = searchArea;
+  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
+  filter.searchArea = RoomSearchArea.AiHub;
   filter.type = [String(type)];
-  return `/ai-rooms/filter?${filter.toUrlParams(userId, false)}`;
+  const tab = isTemplates ? `&${TAB_PARAM}=${TEMPLATES_TAB}` : "";
+  return `/ai-rooms/filter?${filter.toUrlParams(userId, false)}${tab}`;
 };

@@ -39,35 +39,19 @@ describe("AI Chat section lists", () => {
 });
 
 describe("AI Chat section list tabs", () => {
-  const params = (url: string) => new URLSearchParams(url.split("?")[1]);
-
-  it("keeps both tabs on the section's path", () => {
-    for (const isTemplates of [false, true])
-      expect(
-        getAiWorkspaceTabUrl(isTemplates, RoomsType.KnowledgeRoom),
-      ).toMatch(/^\/ai-rooms\/filter\?/);
-  });
-
-  it("opens the agents' own tab on the section's list", () => {
-    const search = params(getAiWorkspaceTabUrl(false, RoomsType.AiProjectRoom));
-    expect(search.get("searchArea")).toBe("AiHub");
-    expect(search.getAll("type")).toEqual([String(RoomsType.AiProjectRoom)]);
-    expect(isAiWorkspaceTemplates(`?${search}`)).toBe(false);
-  });
+  const search = (url: string) => `?${url.split("?")[1]}`;
 
   it.each([
     RoomsType.AiProjectRoom,
     RoomsType.InstructionsRoom,
     RoomsType.KnowledgeRoom,
-  ])("opens the templates of type %s, still that list", (type) => {
-    const search = `?${params(getAiWorkspaceTabUrl(true, type))}`;
-    expect(isAiWorkspaceTemplates(search)).toBe(true);
-    expect(getAiWorkspaceListType(search)).toBe(type);
-  });
-
-  it("narrows a typed list's own tab to its type", () => {
-    const search = `?${params(getAiWorkspaceTabUrl(false, RoomsType.InstructionsRoom))}`;
-    expect(isAiWorkspaceTemplates(search)).toBe(false);
-    expect(getAiWorkspaceListType(search)).toBe(RoomsType.InstructionsRoom);
+  ])("keeps both tabs of type %s on that list of the section", (type) => {
+    for (const isTemplates of [false, true]) {
+      const url = getAiWorkspaceTabUrl(isTemplates, type);
+      expect(url).toMatch(/^\/ai-rooms\/filter\?/);
+      expect(new URLSearchParams(search(url)).get("searchArea")).toBe("AiHub");
+      expect(getAiWorkspaceListType(search(url))).toBe(type);
+      expect(isAiWorkspaceTemplates(search(url))).toBe(isTemplates);
+    }
   });
 });

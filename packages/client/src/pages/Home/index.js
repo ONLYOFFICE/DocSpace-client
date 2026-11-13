@@ -102,11 +102,15 @@ import { useQuickActions } from "./Hooks/useQuickActions";
 import { useHideQuickActions } from "./Hooks/useHideQuickActions";
 import { useSectionDrop } from "./Hooks/useSectionDrop";
 
+import { isAiWorkspaceTemplates } from "SRC_DIR/helpers/aiWorkspace";
+import AiTemplatesCatalog from "./Section/Body/AiTemplatesCatalog";
+
 import styles from "./Home.module.scss";
 
 // `observer` is required because we read MobX observables from the shared
 // AiChatStore directly here (via `useAiChatPanel`): without it, the AI chat
 // panel's visibility changes (e.g. closing) would not re-render Home.
+
 const PureHome = observer((props) => {
   const {
     currentClientView,
@@ -287,6 +291,12 @@ const PureHome = observer((props) => {
   // Availability is computed once by the host (Shell) and shared through
   // AiAgentProviders' context.
   const isAiChatAvailable = useIsAiChatAvailable();
+
+  // The Templates tab of an AI Chat section list draws the catalog of
+  // shipped templates in place of the list and its filter.
+  const isAiTemplatesTab =
+    getCategoryType(location) === CategoryType.AiHub &&
+    isAiWorkspaceTemplates(location.search);
 
   usePanelExclusivity(infoPanelStore);
 
@@ -738,6 +748,7 @@ const PureHome = observer((props) => {
           {!isPluginSection &&
           !isErrorAvailable &&
           shouldShowFilter &&
+          !isAiTemplatesTab &&
           !isProfile &&
           (!isFrame || showFilter) ? (
             <Section.SectionFilter>
@@ -761,7 +772,7 @@ const PureHome = observer((props) => {
           ) : null}
 
           <Section.SectionBody>
-            <Outlet />
+            {isAiTemplatesTab ? <AiTemplatesCatalog /> : <Outlet />}
           </Section.SectionBody>
 
           <Section.InfoPanelHeader>

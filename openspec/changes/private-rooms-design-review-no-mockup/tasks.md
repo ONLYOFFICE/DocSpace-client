@@ -11,7 +11,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Edit panel
 
-- [ ] 2.1 Client: show the Private type block in the edit panel of a private room and drop the private block of `PermanentSettings` (decision 3). Verify: cases "Edit dialog of a private room", "Create dialog of a private room" and "Edit dialog of an ordinary Custom room" in unit tests of `SetRoomParams` and `PermanentSettings`; `pnpm exec vitest run src/components/dialogs/CreateEditRoomDialog`
+- [x] 2.1 Client: show the Private type block in the edit panel of a private room and drop the private block of `PermanentSettings` (decision 3). Verify: cases "Edit dialog of a private room", "Create dialog of a private room" and "Edit dialog of an ordinary Custom room" in unit tests of `SetRoomParams` and `PermanentSettings`; `pnpm exec vitest run src/components/dialogs/CreateEditRoomDialog`
+  - 2026-11-13: the display block takes its type from one helper, `getDisplayedRoomType` (`sub-components/displayedRoomType.ts`), which the three cases test; `SetRoomParams` has no render test and none was added. `PermanentSettings` lost its private block and its `isPrivate` prop; a case renders it and finds no private title. The `privacy` variant of `PermanentSetting` and its style have no caller left and are not removed here.
 
 ## 3. Private list: quick actions and create label
 

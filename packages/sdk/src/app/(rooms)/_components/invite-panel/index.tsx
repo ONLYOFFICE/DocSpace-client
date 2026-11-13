@@ -790,13 +790,15 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         }
 
         setIsLoading(false);
-        if (run !== sendRunRef.current) {
-          // The panel was closed or reused meanwhile and cannot show the result.
-          for (const { level, text } of outcome?.notices ?? []) {
-            toastr[level](text);
+        // The open panel names the invitees left out itself; the end of the
+        // re-wrap is still announced. A closed panel shows nothing.
+        const showsOutcome = run === sendRunRef.current;
+        for (const notice of outcome?.notices ?? []) {
+          if (!showsOutcome || !notice.namesLeftOut) {
+            toastr[notice.level](notice.text);
           }
-          return;
         }
+        if (!showsOutcome) return;
         if (refused.length > 0) {
           setInviteOutcome({
             ...(outcome ?? { granted: [], pending: [], skipped: [] }),

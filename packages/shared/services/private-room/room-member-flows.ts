@@ -81,6 +81,8 @@ export async function loadPendingAccess(roomId: number): Promise<void> {
 export type TMemberFlowNotice = {
   level: "success" | "warning" | "error";
   text: string;
+  /** Names the invitees left out, which an open invite panel shows itself. */
+  namesLeftOut?: true;
 };
 
 /** An item of the invite list: a user, or a group when `isGroup` is set. */
@@ -267,6 +269,7 @@ export function skippedMemberNotices(
       text: t("Common:EncryptedInviteNoKey", {
         users: notInvitedNames.join(", "),
       }),
+      namesLeftOut: true,
     });
   }
   if (noKeyNames.length > 0) {
@@ -275,6 +278,7 @@ export function skippedMemberNotices(
       text: t("Common:EncryptedSkippedNoKeys", {
         users: noKeyNames.join(", "),
       }),
+      namesLeftOut: true,
     });
   }
   if (mismatchNames.length > 0) {
@@ -283,6 +287,7 @@ export function skippedMemberNotices(
       text: t("Common:EncryptedSkippedKeyMismatch", {
         users: mismatchNames.join(", "),
       }),
+      namesLeftOut: true,
     });
   }
   return notices;

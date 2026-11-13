@@ -371,10 +371,12 @@ describe("rewrapForInvitedMembers", () => {
       {
         level: "warning",
         text: `Common:EncryptedSkippedNoKeys ${JSON.stringify({ users: "Ann, u-zed" })}`,
+        namesLeftOut: true,
       },
       {
         level: "warning",
         text: `Common:EncryptedSkippedKeyMismatch ${JSON.stringify({ users: "Robert" })}`,
+        namesLeftOut: true,
       },
     ]);
     expect(onProgress).toHaveBeenLastCalledWith({
@@ -411,6 +413,7 @@ describe("rewrapForInvitedMembers", () => {
       {
         level: "warning",
         text: 'Common:EncryptedInviteNoKey {"users":"Dan"}',
+        namesLeftOut: true,
       },
     ]);
     expect(onOutcome).toHaveBeenCalledWith({

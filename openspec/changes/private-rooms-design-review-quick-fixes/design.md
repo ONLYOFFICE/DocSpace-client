@@ -125,11 +125,18 @@ As read on 2026-11-13 (branch `release/v4.1.0`, b58307d9500):
     notices to show above the list, in a block that is announced
     (`role="status"`). The block is cleared when the list changes or the
     next send starts. "Invite again" is then the ordinary send button.
-11. **Toasts only when the panel cannot show the outcome.** While the
-    panel is open, the notices go to the form block or to `InviteResult`.
-    The existing guard that compares the send run tells when the panel
-    was closed or reused during the wrap; only then are the notices
-    raised as toasts, as today.
+11. **An open panel does not repeat the names it shows.** The notices
+    that name the invitees left out are marked; while the panel is open
+    they go to the form block or to `InviteResult` and are not raised as
+    toasts. The existing guard that compares the send run tells when the
+    panel was closed or reused during the wrap; then they are raised as
+    toasts, as today. The notices about the end of the re-wrap (invited,
+    files left out, failed) stay toasts in both cases: the open change
+    `private-rooms-members-accessibility` announces the end of the
+    re-encryption through them ("Re-encryption progress is announced").
+    Alternative: no toast at all while the panel is open. Tried in tasks
+    5.2 and 5.3 and withdrawn in 7.1, because it silenced that
+    announcement.
 12. **Translation is one pass after approval**, as in
     `2026-11-11-private-rooms-text-fixes`: comments refreshed, 31
     languages retranslated from the approved English, `translate-stale`

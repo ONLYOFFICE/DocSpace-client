@@ -448,6 +448,8 @@ describe("Invite opened from the list", () => {
     expect(
       await screen.findByTestId("invite_panel_result_granted"),
     ).toHaveTextContent("bob tester");
+    // The end of the re-wrap is still announced through its toast.
+    expect(mocks.toastr.success).toHaveBeenCalledWith("Common:UsersInvited");
     expect(setInvitePanelOptions).not.toHaveBeenCalledWith(closedPanel);
     expect(
       screen.queryByTestId("invite_panel_invite_again_button"),

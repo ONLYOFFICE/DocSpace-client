@@ -619,16 +619,20 @@ const InvitePanel = ({
             outcome = value;
           },
         });
+        // The open panel names the invitees left out itself; the end of the
+        // re-wrap is still announced. A closed panel shows nothing.
+        const showsOutcome = run === sendRunRef.current;
+        notices
+          .filter((notice) => !showsOutcome || !notice.namesLeftOut)
+          .forEach(({ level, text }) => toastr[level](text));
+
         setIsLoading(false);
-        if (run === sendRunRef.current) {
+        if (showsOutcome) {
           setInviteOutcome(
             outcome
               ? { ...outcome, refused }
               : { granted: [], pending: [], skipped: [], refused },
           );
-        } else {
-          // The panel was closed or reused meanwhile and cannot show the result.
-          notices.forEach(({ level, text }) => toastr[level](text));
         }
         return;
       }

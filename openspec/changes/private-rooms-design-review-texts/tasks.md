@@ -4,7 +4,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 1. Description of the Private Room block
 
-- [ ] 1.1 Shared, client and SDK: add Common:PrivateRoomPanelDescription in English, return it from `getRoomTypeDescriptionTranslation` for the Private type and read it in the private row of the SDK dialog (design decision 1). Verify: cases "Edit dialog of a private room" and "Create dialog of a private room" in `RoomType.test.tsx`, "Creating a private room" in the unit test of the SDK dialog; `cd packages/shared && pnpm exec vitest run components/room-type`; `cd packages/sdk && pnpm exec vitest run "src/app/(rooms)"`
+- [x] 1.1 Shared, client and SDK: add Common:PrivateRoomPanelDescription in English, return it from `getRoomTypeDescriptionTranslation` for the Private type and read it in the private row of the SDK dialog (design decision 1). Verify: cases "Edit dialog of a private room" and "Create dialog of a private room" in `RoomType.test.tsx`, "Creating a private room" in the unit test of the SDK dialog; `cd packages/shared && pnpm exec vitest run components/room-type`; `cd packages/sdk && pnpm exec vitest run "src/app/(rooms)"`
+  - 2026-11-13: `getRoomTypeDescriptionTranslation` returns the new key for the Private type and the SDK row reads it; Common:PrivateRoomDescription keeps its tooltip and tile readers. The edit dialog shows the same component with the same type, so one unit case, "Create dialog of a private room" in `RoomType.test.tsx`, covers both panels; "Creating a private room" is in `index.private.test.tsx` of the SDK dialog and also finds no link there.
 
 ## 2. Learn more link
 

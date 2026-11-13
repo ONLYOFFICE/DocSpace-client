@@ -2,7 +2,7 @@ import React from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import { RoomsType } from "../../enums";
+import { RoomsType, RoomsTypePrivate } from "../../enums";
 import RoomType from "./index";
 import styles from "./RoomType.module.scss";
 
@@ -208,6 +208,25 @@ describe("RoomType", () => {
       expect(
         screen.getByText("Common:CollaborationRoomTitle"),
       ).toBeInTheDocument();
+    });
+  });
+
+  describe("Private room block", () => {
+    const privateProps = {
+      ...defaultProps,
+      // The panels pass a display variant the union does not list.
+      type: "displayItem" as never,
+      roomType: RoomsTypePrivate,
+    };
+
+    it("Create dialog of a private room", () => {
+      render(<RoomType {...privateProps} />);
+
+      expect(screen.getByText("Common:PrivateRoomTitle")).toBeInTheDocument();
+      expect(
+        screen.getByText("Common:PrivateRoomPanelDescription"),
+      ).toBeInTheDocument();
+      expect(screen.queryByText("Common:PrivateRoomDescription")).toBeNull();
     });
   });
 

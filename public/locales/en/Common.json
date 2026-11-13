@@ -1866,6 +1866,7 @@
   "PrivateRoomMixedDownloadNotSupported": "You cannot download encrypted and unencrypted files at the same time.",
   "PrivateRoomNotFoundDescription": "The private room you are looking for does not exist or you do not have access.",
   "PrivateRoomNotFoundTitle": "Not found",
+  "PrivateRoomPanelDescription": "A room for confidential files with end-to-end encryption: files are encrypted in your browser, and only room members can read them. A private room cannot be turned into a regular room.",
   "PrivateRoomRenameNotSupported": "Renaming encrypted files is not supported yet.",
   "PrivateRoomsBackupWarning": "Backups do not include the encryption keys of private rooms. A workspace restored from a backup cannot open the files in its private rooms.",
   "PrivateRoomsBackupWarningTitle": "Private rooms are not backed up",

@@ -36,24 +36,27 @@
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { Section } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionPath } from "SRC_DIR/helpers/plugins/navigation";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import type { ModuleItem } from "../sub-components/ModuleCard";
+import { getPluginCardSection } from "../utils";
 
 export const usePluginModuleItems = (): ModuleItem[] => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
   const { articleNavigationItemsList, dispatchMessage } =
     useStore("pluginStore");
+  const { user } = useStore("userStore");
 
   return (articleNavigationItemsList ?? []).flatMap(({ key, value }) => {
     const { dashboardCard, label, icon, appears, pluginName } = value;
 
-    if (!dashboardCard) return [];
+    const section = getPluginCardSection(appears, user);
 
-    const href = getPluginSectionPath(appears?.[0] ?? Section.Files, key);
+    if (!dashboardCard || !section) return [];
+
+    const href = getPluginSectionPath(section, key);
     const { onClick } = dashboardCard;
 
     return {

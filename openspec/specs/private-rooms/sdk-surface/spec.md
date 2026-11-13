@@ -407,7 +407,7 @@ The SDK SHALL run the private-room flows (invite with re-wrap, owner change with
 - **THEN** the private flow of that action starts, as from the private rooms list
 
 ### Requirement: Invite panel offers people only and reports the invitation result
-The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups. It SHALL grant room access to the verified invitees before wrapping their file keys, and SHALL stay open after sending with the result of each invitee (granted, pending access, or skipped with Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch) until the user closes it, as the client does.
+The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups. It SHALL grant room access to the verified invitees before wrapping their file keys, and SHALL stay open after sending with the result of each invitee (granted, pending access, or skipped with Common:EncryptedInviteNoKey or Common:EncryptedSkippedKeyMismatch) until the user closes it. When nobody was invited it SHALL keep the invite form, and it SHALL NOT repeat a skip reason in a toast.
 
 #### Scenario: People selector
 - **WHEN** the user opens "choose from list" in the invite panel of a private room
@@ -420,6 +420,10 @@ The SDK invite panel of a private room SHALL offer portal users only, with no Gu
 #### Scenario: Mixed invitation
 - **WHEN** some invitees have verified keys and others are skipped
 - **THEN** only the verified invitees are granted access, and the panel stays open listing the skipped ones with the reason
+
+#### Scenario: Nobody invited
+- **WHEN** the only invitee of an SDK invitation into a private room has no registered encryption key
+- **THEN** the invite form stays with that user in the list, Common:EncryptedInviteNoKey names them above the list, and neither an invite result nor a toast with the same sentence is shown
 
 ### Requirement: Leaving a private room drops the role without a revocation of its own
 The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, drop the role without a revocation of its own; the server removes the leaver's wrapped keys with the role, the room's current owner excepted.

@@ -45,6 +45,7 @@ import {
 } from "@docspace/shared/enums";
 
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
 import {
   UploadPanel,
@@ -290,7 +291,9 @@ const Panels = (props) => {
     (pluginDialogVisible || !!reactPluginModalState) && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
-    pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
+    pluginSelectorVisible && (
+      <Portal key="plugin-selector" element={<PluginSelector />} />
+    ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||

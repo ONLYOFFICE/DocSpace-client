@@ -121,18 +121,17 @@
   }
 }
 
-// The filled shield with a tick: the shield takes the accent colour, the tick
-// keeps its own.
+// The circle takes the accent colour; the tick keeps its own.
 .verified {
   display: flex;
   flex: 0 0 auto;
 
   svg {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
   }
 
-  :global(.security-shield) {
+  :global(.verified-circle) {
     fill: var(--accent-main);
   }
 }

@@ -46,6 +46,8 @@ export const enum InfoPanelView {
   infoShare = "info_share",
   infoAIChat = "info_ai_chat",
   infoMetadata = "info_metadata",
+  /** An agent's skill sets and knowledge bases. */
+  infoContext = "info_context",
 }
 
 export const showInfoPanel = () => {

@@ -121,6 +121,7 @@ const InfoPanelHeaderGeneral = ({
       .with(InfoPanelView.infoHistory, () => t("Common:SubmenuHistory"))
       .with(InfoPanelView.infoDetails, () => t("Common:SubmenuDetails"))
       .with(InfoPanelView.infoMetadata, () => t("Common:SubmenuMetadata"))
+      .with(InfoPanelView.infoContext, () => t("Common:Context"))
       .otherwise(() => {
         const key = id.replace("info_plugin-", "");
         return (

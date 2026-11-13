@@ -70,6 +70,19 @@ describe("getAvailableInfoPanelTabs", () => {
     ]);
     expect(useRoomsView).toBe(true);
   });
+
+  it("An agent has Details and Context only, plugins or not", () => {
+    const { tabs } = getAvailableInfoPanelTabs({
+      selection: { id: 7, isAIProject: true, rootFolderType: FolderType.AiHub } as never,
+      isTrash: false,
+      isRecentFolder: false,
+      isPrivacyFolder: false,
+      enablePlugins: true,
+      infoPanelItemsList: [],
+    });
+
+    expect(tabs).toEqual([InfoPanelView.infoDetails, InfoPanelView.infoContext]);
+  });
 });
 
 const TAB = "info_plugin-qr";

@@ -127,9 +127,9 @@ test.describe("Keys management — edge cases", () => {
     const acknowledge = page.locator("#recoveryPhraseAcknowledged");
     await expect(acknowledge).toBeVisible({ timeout: 5000 });
 
-    const recoveryDialog = page
-      .getByRole("dialog")
-      .filter({ hasText: "Save your recovery" });
+    const recoveryDialog = page.getByRole("dialog", {
+      name: "Recovery phrase",
+    });
     await recoveryDialog
       .getByRole("button", { name: "Cancel", exact: true })
       .click();

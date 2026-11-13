@@ -19,7 +19,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. Texts
 
-- [ ] 4.1 Common: write the translator comments of the two keys (`translate-comments`) and translate them into the 31 other languages (`translate-locales`) (decision 5). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the keys foreign to this change; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
+- [x] 4.1 Common: write the translator comments of the two keys (`translate-comments`) and translate them into the 31 other languages (`translate-locales`) (decision 5). Verify: `cd common/tests && npx vitest run test/locales.test.js` shows no failure beyond the keys foreign to this change; `npm --prefix ./common/tests run test:lefthook`; foreign `.meta` files restored
+  - 2026-11-13: both keys got translator comments from their call sites (model `claude-fable-5-2`) and 31 translations each, built from the words the same files already use for private rooms and end-to-end encryption. The French description uses a full stop where English has a colon. The metadata run rewrote 942 foreign `.meta` files and created two for foreign keys; all restored or removed. `locales.test.js`: 44 of 46, the two completeness cases failing on the six foreign AI keys only; `test:lefthook`: 61 passed, 3 skipped.
 
 ## 5. E2E
 

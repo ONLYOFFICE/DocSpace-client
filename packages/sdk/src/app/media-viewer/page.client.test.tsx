@@ -9,14 +9,11 @@ import {
 } from "vitest";
 import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import type {
-  TFile,
-  TFilesSettings,
-  TGetFolder,
-} from "@docspace/shared/api/files/types";
-import type { MediaViewerProps } from "@docspace/shared/components/media-viewer/MediaViewer.types";
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
+import type { MediaGalleryProps } from "@onlyoffice/apps-ui-kit/media-viewer/MediaGallery.types";
+import type { TFile } from "@onlyoffice/apps-ui-kit/media-viewer/MediaViewer.types";
 
-let viewerProps: MediaViewerProps | undefined;
+let galleryProps: MediaGalleryProps | undefined;
 
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
@@ -28,19 +25,12 @@ vi.mock("@docspace/shared/utils/common", () => ({
   openUrl: vi.fn(),
 }));
 
-vi.mock("@docspace/shared/api/files", () => ({ getFolder: vi.fn() }));
-
-vi.mock("@docspace/shared/components/media-viewer/MediaViewer", () => ({
-  default: (props: MediaViewerProps) => {
-    viewerProps = props;
-    return <div data-testid="media-viewer" />;
+vi.mock("@onlyoffice/apps-ui-kit/media-viewer/MediaGallery", () => ({
+  default: (props: MediaGalleryProps) => {
+    galleryProps = props;
+    return <div data-testid="media-gallery">{props.emptyContent}</div>;
   },
 }));
-
-vi.mock(
-  "@onlyoffice/apps-ui-kit/media-viewer/sub-components/ViewerLoader",
-  () => ({ ViewerLoader: () => <div data-testid="viewer-loader" /> }),
-);
 
 vi.mock("@onlyoffice/apps-ui-kit/components/empty-screen-container", () => ({
   EmptyScreenContainer: ({ headerText }: { headerText: string }) => (
@@ -52,6 +42,10 @@ vi.mock("@onlyoffice/apps-ui-kit/context/ThemeContext", () => ({
   useTheme: () => ({ isBase: true }),
 }));
 
+vi.mock("@/components/InvalidLinkError", () => ({
+  default: () => <div data-testid="invalid-link" />,
+}));
+
 vi.mock("@/providers/SDKConfigProvider", () => ({
   useSDKConfig: () => ({ sdkConfig: null }),
 }));
@@ -60,25 +54,13 @@ vi.mock("@/app/(docspace)/_hooks/useItemIcon", () => ({
   default: () => ({ getIcon: () => "icon.svg" }),
 }));
 
-import { getFolder } from "@docspace/shared/api/files";
 import { frameCallEvent, openUrl } from "@docspace/shared/utils/common";
+import { PAGE_COUNT } from "@/utils/constants";
 
 import MediaViewerClient from "./page.client";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
-
-const makeFile = (id: number, isMedia = true) =>
-  ({
-    id,
-    title: `file-${id}.png`,
-    fileExst: ".png",
-    viewUrl: `/view/${id}`,
-    viewAccessibility: { ImageView: isMedia, MediaView: false },
-  }) as unknown as TFile;
-
-const makeFolder = (files: TFile[], total = files.length) =>
-  ({ files, folders: [], total }) as unknown as TGetFolder;
 
 const filesSettings = { extsImagePreviewed: [".png"] } as TFilesSettings;
 
@@ -86,7 +68,7 @@ describe("media-viewer page client", () => {
   let root: Root | undefined;
   let container: HTMLDivElement | undefined;
 
-  const render = async (folderList: TGetFolder, startFileId?: string) => {
+  const render = async () => {
     container = document.createElement("div");
     document.body.appendChild(container);
     root = createRoot(container);
@@ -95,8 +77,8 @@ describe("media-viewer page client", () => {
       root!.render(
         <MediaViewerClient
           folderId="12"
-          startFileId={startFileId}
-          folderList={folderList}
+          requestToken="tok"
+          startFileId="7"
           filesSettings={filesSettings}
         />,
       ),
@@ -104,10 +86,9 @@ describe("media-viewer page client", () => {
   };
 
   beforeEach(() => {
-    viewerProps = undefined;
+    galleryProps = undefined;
     (frameCallEvent as Mock).mockReset();
     (openUrl as Mock).mockReset();
-    (getFolder as Mock).mockReset();
   });
 
   afterEach(() => {
@@ -118,7 +99,7 @@ describe("media-viewer page client", () => {
   });
 
   test("reports onAppReady to the sdk-js host once on mount", async () => {
-    await render(makeFolder([makeFile(1)]));
+    await render();
 
     expect(frameCallEvent as Mock).toHaveBeenCalledTimes(1);
     expect(frameCallEvent as Mock).toHaveBeenCalledWith({
@@ -127,74 +108,67 @@ describe("media-viewer page client", () => {
     });
   });
 
-  test("opens the first media file and skips the files it cannot play", async () => {
-    await render(
-      makeFolder([makeFile(1, false), makeFile(2), makeFile(3, false), makeFile(4)]),
-    );
+  test("hands the folder, the link key and the start file to the gallery", async () => {
+    await render();
 
-    expect(viewerProps?.playlist.map((item) => item.fileId)).toEqual([2, 4]);
-    expect(viewerProps?.currentFileId).toBe(2);
-    expect(viewerProps?.playlistPos).toBe(0);
+    expect(galleryProps).toMatchObject({
+      folderId: "12",
+      requestToken: "tok",
+      startFileId: "7",
+      pageSize: PAGE_COUNT,
+      extsImagePreviewed: [".png"],
+    });
+    expect(galleryProps?.getIcon(32, ".png")).toBe("icon.svg");
   });
 
-  test("opens the file given in fileId", async () => {
-    await render(makeFolder([makeFile(1), makeFile(2), makeFile(3)]), "3");
+  test("gives the gallery the empty state for a folder with no media files", async () => {
+    await render();
 
-    expect(viewerProps?.currentFileId).toBe(3);
-    expect(viewerProps?.playlistPos).toBe(2);
-  });
-
-  test("moves through the playlist and stops at its ends", async () => {
-    await render(makeFolder([makeFile(1), makeFile(2)]));
-
-    act(() => viewerProps?.prevMedia?.());
-    expect(viewerProps?.currentFileId).toBe(1);
-
-    act(() => viewerProps?.nextMedia?.());
-    expect(viewerProps?.currentFileId).toBe(2);
-
-    act(() => viewerProps?.nextMedia?.());
-    expect(viewerProps?.currentFileId).toBe(2);
-  });
-
-  test("loads the next page when the end of the playlist is near", async () => {
-    (getFolder as Mock).mockResolvedValue(makeFolder([makeFile(2)], 2));
-
-    await render(makeFolder([makeFile(1)], 2));
-
-    const [folderId, filter] = (getFolder as Mock).mock.calls[0];
-
-    expect(getFolder).toHaveBeenCalledTimes(1);
-    expect(folderId).toBe("12");
-    expect(filter.startIndex).toBe(1);
-    expect(viewerProps?.playlist.map((item) => item.fileId)).toEqual([1, 2]);
-  });
-
-  test("stops loading after a failed page request", async () => {
-    (getFolder as Mock).mockRejectedValue(new Error("network"));
-
-    await render(makeFolder([makeFile(1)], 5));
-
-    expect(getFolder).toHaveBeenCalledTimes(1);
-    expect(viewerProps?.playlist).toHaveLength(1);
-  });
-
-  test("shows the empty state when the folder has no media files", async () => {
-    await render(makeFolder([makeFile(1, false)]));
-
-    expect(viewerProps).toBeUndefined();
     expect(
       container?.querySelector("[data-testid='empty-screen']")?.textContent,
     ).toBe("Common:NoMediaFiles");
   });
 
-  test("downloads the current file by its view url", async () => {
-    await render(makeFolder([makeFile(1)]));
+  test("downloads a file by its view url", async () => {
+    await render();
 
-    act(() => viewerProps?.onDownload?.(1));
+    act(() => galleryProps?.onDownload?.({ viewUrl: "/view/1" } as TFile));
 
     expect(openUrl as Mock).toHaveBeenCalledWith(
       expect.objectContaining({ url: "/view/1", isFrame: true }),
     );
+  });
+
+  test("reports onNotFound and shows the invalid link screen for a missing folder", async () => {
+    await render();
+
+    act(() => galleryProps?.onLoadError?.({ response: { status: 404 } }));
+
+    expect(frameCallEvent as Mock).toHaveBeenLastCalledWith({
+      event: "onNotFound",
+    });
+    expect(
+      container?.querySelector("[data-testid='invalid-link']"),
+    ).not.toBeNull();
+    expect(container?.querySelector("[data-testid='media-gallery']")).toBeNull();
+  });
+
+  test("reports onNoAccess for any other failure", async () => {
+    await render();
+
+    act(() => galleryProps?.onLoadError?.({ response: { status: 403 } }));
+    expect(frameCallEvent as Mock).toHaveBeenLastCalledWith({
+      event: "onNoAccess",
+    });
+  });
+
+  test("reports onNoAccess when the request never got an answer", async () => {
+    await render();
+
+    act(() => galleryProps?.onLoadError?.(new Error("Network Error")));
+
+    expect(frameCallEvent as Mock).toHaveBeenLastCalledWith({
+      event: "onNoAccess",
+    });
   });
 });

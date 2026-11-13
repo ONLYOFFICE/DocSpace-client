@@ -35,39 +35,24 @@
 
 "use client";
 
-import { getFolder, getSettingsFiles } from "@docspace/shared/api/files";
+import { getSettingsFiles } from "@docspace/shared/api/files";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
 import OAuthPageLoader from "@/components/OAuthPageLoader";
 
 import MediaViewerClient, { type MediaViewerClientProps } from "./page.client";
-import { getMediaViewerFilter } from "./_utils";
 
-type MediaViewerOAuthPageProps = Omit<
-  MediaViewerClientProps,
-  "folderList" | "filesSettings"
->;
+type MediaViewerOAuthPageProps = Omit<MediaViewerClientProps, "filesSettings">;
 
 export default function MediaViewerOAuthPage(props: MediaViewerOAuthPageProps) {
-  const { folderId } = props;
-
   const { data, error } = useOAuthSSRData(async () => {
-    const [folderList, filesSettings] = await Promise.all([
-      getFolder(folderId, getMediaViewerFilter(folderId)),
-      getSettingsFiles(),
-    ]);
+    const filesSettings = await getSettingsFiles();
 
-    return filesSettings ? { folderList, filesSettings } : null;
-  }, folderId);
+    return filesSettings ? { filesSettings } : null;
+  });
 
   if (error) throw error;
   if (!data) return <OAuthPageLoader />;
 
-  return (
-    <MediaViewerClient
-      {...props}
-      folderList={data.folderList}
-      filesSettings={data.filesSettings}
-    />
-  );
+  return <MediaViewerClient {...props} filesSettings={data.filesSettings} />;
 }

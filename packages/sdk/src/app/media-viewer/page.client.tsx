@@ -35,21 +35,15 @@
 
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
 import EmptyScreenSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
 
-import { getFolder } from "@docspace/shared/api/files";
-import type {
-  TFile,
-  TFilesSettings,
-  TGetFolder,
-} from "@docspace/shared/api/files/types";
-import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
-import type { NumberOrString } from "@docspace/shared/components/media-viewer/MediaViewer.types";
-import { ViewerLoader } from "@onlyoffice/apps-ui-kit/media-viewer/sub-components/ViewerLoader";
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
+import MediaGallery from "@onlyoffice/apps-ui-kit/media-viewer/MediaGallery";
+import type { TFile } from "@onlyoffice/apps-ui-kit/media-viewer/MediaViewer.types";
 import { DeviceType, UrlActionType } from "@docspace/shared/enums";
 import { getDeviceTypeByWidth } from "@docspace/shared/utils";
 import {
@@ -63,25 +57,25 @@ import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import useItemIcon, {
   type TItemIconSizes,
 } from "@/app/(docspace)/_hooks/useItemIcon";
-import getPlayList from "@/app/(docspace)/_utils/get-play-list";
+import InvalidLinkError from "@/components/InvalidLinkError";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import { PAGE_COUNT } from "@/utils/constants";
 
-import { getMediaViewerFilter } from "./_utils";
+import { getFolderErrorEvent, type MediaViewerErrorEvent } from "./_utils";
 
-const PRELOAD_OFFSET = 3;
 const ICON_SIZES: TItemIconSizes[] = [24, 32, 64, 96];
 
 export type MediaViewerClientProps = {
   folderId: string;
+  requestToken?: string;
   startFileId?: string;
-  folderList: TGetFolder;
   filesSettings: TFilesSettings;
 };
 
 export default function MediaViewerClient({
   folderId,
+  requestToken,
   startFileId,
-  folderList,
   filesSettings,
 }: MediaViewerClientProps) {
   const { t } = useTranslation(["Common"]);
@@ -89,26 +83,16 @@ export default function MediaViewerClient({
   const { isBase } = useTheme();
   const { getIcon: getItemIcon } = useItemIcon({ filesSettings });
 
-  const [files, setFiles] = useState(folderList.files);
-  const [canLoadMore, setCanLoadMore] = useState(
-    folderList.files.length < folderList.total,
-  );
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [mediaId, setMediaId] = useState<NumberOrString | undefined>(
-    startFileId,
-  );
   const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>();
-
-  const playlist = useMemo(() => getPlayList(files), [files]);
-
-  const currentItem =
-    playlist.find((item) => String(item.fileId) === String(mediaId)) ??
-    playlist[0];
-  const playlistPos = currentItem?.id ?? 0;
+  const [errorEvent, setErrorEvent] = useState<MediaViewerErrorEvent>();
 
   useEffect(() => {
     frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
   }, []);
+
+  useEffect(() => {
+    if (errorEvent) frameCallEvent({ event: errorEvent });
+  }, [errorEvent]);
 
   useEffect(() => {
     const onResize = () => {
@@ -121,49 +105,13 @@ export default function MediaViewerClient({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  useEffect(() => {
-    if (!canLoadMore || isLoadingMore) return;
-    if (playlistPos < playlist.length - PRELOAD_OFFSET) return;
-
-    setIsLoadingMore(true);
-
-    getFolder(folderId, getMediaViewerFilter(folderId, files.length))
-      .then((res) => {
-        setFiles((prev) => [...prev, ...res.files]);
-        setCanLoadMore(
-          res.files.length > 0 && files.length + res.files.length < res.total,
-        );
-      })
-      .catch(() => setCanLoadMore(false))
-      .finally(() => setIsLoadingMore(false));
-  }, [
-    canLoadMore,
-    isLoadingMore,
-    playlistPos,
-    playlist.length,
-    folderId,
-    files.length,
-  ]);
-
-  const onNextClick = useCallback(() => {
-    const nextItem = playlist[playlistPos + 1];
-
-    if (nextItem) setMediaId(nextItem.fileId);
-  }, [playlist, playlistPos]);
-
-  const onPrevClick = useCallback(() => {
-    const prevItem = playlist[playlistPos - 1];
-
-    if (prevItem) setMediaId(prevItem.fileId);
-  }, [playlist, playlistPos]);
-
   const getIcon = useCallback(
     (size: number, ext: string) =>
       getItemIcon(ext, ICON_SIZES.find((iconSize) => iconSize === size)),
     [getItemIcon],
   );
 
-  const onClickDownload = useCallback(
+  const onDownload = useCallback(
     (file: TFile) =>
       openUrl({
         url: file.viewUrl,
@@ -174,45 +122,32 @@ export default function MediaViewerClient({
     [sdkConfig],
   );
 
-  const onDownload = useCallback(
-    (id: NumberOrString) => {
-      const file = files.find((item) => item.id === id);
-
-      if (file) onClickDownload(file);
-    },
-    [files, onClickDownload],
+  const onLoadError = useCallback(
+    (error: unknown) => setErrorEvent(getFolderErrorEvent(error)),
+    [],
   );
 
-  if (!currentDeviceType) return <ViewerLoader isLoading />;
-
-  if (!currentItem) {
-    if (canLoadMore) return <ViewerLoader isLoading />;
-
-    return (
-      <EmptyScreenContainer
-        imageSrc={isBase ? EmptyScreenSvgUrl : EmptyScreenSvgDarkUrl}
-        imageAlt=""
-        headerText={t("Common:NoMediaFiles")}
-      />
-    );
-  }
+  if (errorEvent) return <InvalidLinkError />;
 
   return (
-    <MediaViewer
+    <MediaGallery
       t={t}
-      visible
-      isPublicFile
-      files={files}
-      playlist={playlist}
-      playlistPos={playlistPos}
-      currentFileId={currentItem.fileId}
+      folderId={folderId}
+      requestToken={requestToken}
+      startFileId={startFileId}
+      pageSize={PAGE_COUNT}
       extsImagePreviewed={filesSettings.extsImagePreviewed ?? []}
       getIcon={getIcon}
       currentDeviceType={currentDeviceType}
-      nextMedia={onNextClick}
-      prevMedia={onPrevClick}
+      emptyContent={
+        <EmptyScreenContainer
+          imageSrc={isBase ? EmptyScreenSvgUrl : EmptyScreenSvgDarkUrl}
+          imageAlt=""
+          headerText={t("Common:NoMediaFiles")}
+        />
+      }
       onDownload={onDownload}
-      onClickDownload={onClickDownload}
+      onLoadError={onLoadError}
     />
   );
 }

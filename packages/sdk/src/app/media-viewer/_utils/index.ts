@@ -33,22 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { FilterType } from "@docspace/shared/enums";
-
-import { PAGE_COUNT } from "@/utils/constants";
-
 export type MediaViewerErrorEvent = "onNoAccess" | "onNotFound";
 
-export const getMediaViewerFilter = (folderId: string, startIndex = 0) => {
-  const filter = FilesFilter.getDefault({ pageCount: PAGE_COUNT });
+const getResponseStatus = (error: unknown) => {
+  if (typeof error !== "object" || error === null || !("response" in error))
+    return undefined;
 
-  filter.folder = folderId;
-  filter.filterType = FilterType.FilesOnly;
-  filter.startIndex = startIndex;
+  const { response } = error;
 
-  return filter;
+  if (
+    typeof response !== "object" ||
+    response === null ||
+    !("status" in response)
+  )
+    return undefined;
+
+  return response.status;
 };
 
 export const getFolderErrorEvent = (error: unknown): MediaViewerErrorEvent =>
-  error instanceof Error && error.cause === 404 ? "onNotFound" : "onNoAccess";
+  getResponseStatus(error) === 404 ? "onNotFound" : "onNoAccess";

@@ -35,14 +35,13 @@
 
 import { headers } from "next/headers";
 
-import { getFilesSettings, getFolder } from "@/api/files";
+import { getFilesSettings } from "@/api/files";
 import { OAUTH_FRAME_HEADER } from "@/utils/constants";
 import { logger } from "../../../logger.mjs";
 
 import MediaViewerClient from "./page.client";
 import MediaViewerOAuthPage from "./page.oauth.client";
 import MediaViewerError from "./page.error.client";
-import { getFolderErrorEvent, getMediaViewerFilter } from "./_utils";
 
 export default async function Page({
   searchParams,
@@ -51,31 +50,30 @@ export default async function Page({
 }) {
   logger.info("Media viewer page");
 
-  const { folder: folderId = "", fileId } = await searchParams;
+  const { folder: folderId = "", key, fileId } = await searchParams;
 
   const hdrs = await headers();
 
   if (hdrs.get(OAUTH_FRAME_HEADER)) {
-    return <MediaViewerOAuthPage folderId={folderId} startFileId={fileId} />;
-  }
-
-  try {
-    const [folderList, filesSettings] = await Promise.all([
-      getFolder(folderId, getMediaViewerFilter(folderId)),
-      getFilesSettings(),
-    ]);
-
-    if (!filesSettings) return <MediaViewerError event="onNoAccess" />;
-
     return (
-      <MediaViewerClient
+      <MediaViewerOAuthPage
         folderId={folderId}
+        requestToken={key}
         startFileId={fileId}
-        folderList={folderList}
-        filesSettings={filesSettings}
       />
     );
-  } catch (error) {
-    return <MediaViewerError event={getFolderErrorEvent(error)} />;
   }
+
+  const filesSettings = await getFilesSettings().catch(() => undefined);
+
+  if (!filesSettings) return <MediaViewerError event="onNoAccess" />;
+
+  return (
+    <MediaViewerClient
+      folderId={folderId}
+      requestToken={key}
+      startFileId={fileId}
+      filesSettings={filesSettings}
+    />
+  );
 }

@@ -41,6 +41,11 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 - [x] 7.3 Client: run `encrypted-file-ui.spec.ts`, `private-room-cross-user-download.spec.ts` and `private-room-archived.spec.ts` in Docker `tests-dev`, then the gate of 6.1 again. Verify: every command green, recorded here with the date
   - 2026-11-13: Docker `tests-dev`, `WORKERS=3`: 34 of 34 in the three specs, no screenshot changed. `nx run-many -t tsc lint test --parallel=3` over the six packages: exit 0. `test:lefthook`: 61 passed, 3 skipped. `openspec validate --all --strict` with 1.17.0: 20 of 20; after a trial archive of this change on a scratch copy, 19 of 19 with the main specs included.
 
+## 8. Section name
+
+- [x] 8.1 Common: reword Common:Private in English to "Private rooms", refresh its translator comment, update the duplicate-value baseline and the E2E cases that read the section name. Verify: `locales.test.js` shows no failure beyond the keys foreign to this change; `private-rooms-section.spec.ts` in Docker `tests-dev`; `npm --prefix ./common/tests run test:lefthook`; `nx run-many -t tsc lint test` over the six packages
+  - 2026-11-13: only the English value changed; the 31 other languages already equal their Common:PrivateRoomsBetaTitle. The baseline pair `Private, PrivateRoomType` gave way to `Private, PrivateRoomsBetaTitle`. `private-rooms-section.spec.ts` reads the new name in the sidebar, the header, the tab title, the breadcrumbs and the no-access view: 66 of 66 in Docker `tests-dev`. The sidebar is on many screenshots: the 58 screenshot specs were run with `--update-snapshots=changed` (740 passed) and 261 images were rewritten; compared with their committed versions, every one differs strongly only in a band at most 30px tall in the left column, the label of the section. A new section icon the designers sent was tried on the stand and is not taken for now. `nx run-many -t tsc lint test` over the six packages: exit 0; `test:lefthook`: 61 passed, 3 skipped; `locales.test.js`: 44 of 46, the foreign AI keys only; `openspec validate --all --strict`: 20 of 20.
+
 ## Workflow follow-up
 
 - The `privaterooms` entry of the help center is added in `../buildtools` when the article has an address; until then the link is not shown.

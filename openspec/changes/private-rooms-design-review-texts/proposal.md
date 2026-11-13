@@ -39,6 +39,12 @@ decided by the owner on 2026-11-13:
   entries stand on their own, keep "Download" and "Download encrypted
   copy".
 
+- **E. The section is called "Private rooms".** The designers approved
+  the name on 2026-11-13. Only the English value of Common:Private
+  changes: the 31 other languages already name the section with their
+  words for private rooms. The key, and every requirement that names it,
+  stays.
+
 ### Texts (English; approved by the owner on 2026-11-13)
 
 | Key | Now | Proposed |
@@ -47,6 +53,7 @@ decided by the owner on 2026-11-13:
 | `Common:DownloadWithoutDecryption` | Download without decryption | Download encrypted copy |
 | `Common:DownloadDecryptedCopy` (new) | | Decrypted copy |
 | `Common:DownloadEncryptedCopy` (new) | | Encrypted copy |
+| `Common:Private` | Private | Private rooms |
 
 Common:PrivateRoomDescription, Common:PrivateRoomTitle and
 Common:LearnMore exist and keep their texts.

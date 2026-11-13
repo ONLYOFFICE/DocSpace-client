@@ -462,9 +462,13 @@ test.describe("Keys management — advanced flows", () => {
 
     // Remembered: the hidden tab still locks, the device stays remembered.
     await navigate("/profile/keys-management");
+    // Unlocked, Lock now is the one action; the forget link comes with the lock.
+    const remembered = page.getByTestId("device_remembered_until");
     const forgetDevice = page.getByTestId("forget_device_link");
-    await expect(forgetDevice).toBeVisible({ timeout: 10000 });
+    await expect(remembered).toBeVisible({ timeout: 10000 });
+    await expect(forgetDevice).toHaveCount(0);
     await hideTabUntilLocked();
+    await expect(remembered).toBeVisible();
     await expect(forgetDevice).toBeVisible();
 
     // The next upload restores the key from the device record.

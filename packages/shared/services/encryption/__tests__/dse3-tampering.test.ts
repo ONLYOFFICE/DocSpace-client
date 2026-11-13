@@ -253,7 +253,7 @@ describe("DSE3 v2 tamper tests — AAD binding", () => {
   });
 });
 
-// Spec: encryption-core, "DSE3 header flags and name length are not authenticated"
+// Spec: encryption-core, "DSE3 header flags, chunk size and name length are not authenticated"
 describe("DSE3 v2 header flags and name length", () => {
   const FLAGS_OFFSET = 6;
   const NAME_LEN_OFFSET = 31;
@@ -300,5 +300,54 @@ describe("DSE3 v2 header flags and name length", () => {
     const { data, fileName } = await decryptFile(tampered, dek);
     expect(fileName).toBeNull();
     expect(await blobToUint8Array(data)).toEqual(plaintext);
+  });
+
+  it("Chunk size rewritten in storage", async () => {
+    const CHUNK_SIZE_OFFSET = 7;
+    const dek = generateDEK();
+    const tampered = new Uint8Array(await encryptN(dek, 2));
+    const halfChunk = DSE3_CHUNK_PLAINTEXT_SIZE / 2;
+    tampered[CHUNK_SIZE_OFFSET] = (halfChunk >>> 24) & 0xff;
+    tampered[CHUNK_SIZE_OFFSET + 1] = (halfChunk >>> 16) & 0xff;
+    tampered[CHUNK_SIZE_OFFSET + 2] = (halfChunk >>> 8) & 0xff;
+    tampered[CHUNK_SIZE_OFFSET + 3] = halfChunk & 0xff;
+
+    const error = await decryptFile(tampered, dek).then(
+      () => null,
+      (e: unknown) => e,
+    );
+
+    expect(
+      error instanceof DecryptionError || error instanceof InvalidFormatError,
+    ).toBe(true);
+  });
+});
+
+// Spec: encryption-core, "Older versions of a file are not detected"
+describe("DSE3 v2 versions of one file", () => {
+  it("Older version served", async () => {
+    const dek = generateDEK();
+    const older = fillRandom(new Uint8Array(256));
+    const current = fillRandom(new Uint8Array(256));
+    const olderVersion = await blobToUint8Array(
+      (await encryptFile(older, { dek })).encryptedBlob,
+    );
+    await encryptFile(current, { dek });
+
+    const { data } = await decryptFile(olderVersion, dek);
+
+    expect(await blobToUint8Array(data)).toEqual(older);
+  });
+
+  it("Another file served", async () => {
+    const dek = generateDEK();
+    const otherFile = await blobToUint8Array(
+      (await encryptFile(fillRandom(new Uint8Array(256)), { dek: generateDEK() }))
+        .encryptedBlob,
+    );
+
+    await expect(decryptFile(otherFile, dek)).rejects.toBeInstanceOf(
+      DecryptionError,
+    );
   });
 });

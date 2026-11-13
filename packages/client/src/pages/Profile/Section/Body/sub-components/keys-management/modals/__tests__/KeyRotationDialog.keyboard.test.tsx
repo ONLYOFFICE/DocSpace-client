@@ -37,7 +37,14 @@
 // behaviour that lives in the dialog chrome; KeyRotationDialog.test.tsx
 // stubs the kit and covers the validation rules.
 
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
@@ -142,6 +149,38 @@ describe("KeyRotationDialog", () => {
       "old horse battery",
       "Correct1horse!battery",
     );
+  });
+
+  // Spec: private-rooms/key-management, "A new passphrase equal to the current one is named"
+  it("Enter with the same passphrase", async () => {
+    const user = userEvent.setup();
+    const { onSubmit } = renderDialog();
+    const same = "Correct1horse!battery";
+    const newField = screen.getByLabelText("Common:NewPassphrase");
+
+    await user.type(screen.getByLabelText("Common:CurrentPassphrase"), same);
+    await user.type(newField, same);
+    await user.type(screen.getByLabelText("Common:ConfirmNewPassphrase"), same);
+
+    expect(newField).toHaveAttribute("aria-invalid", "true");
+    await waitFor(() =>
+      expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+        "Common:PassphraseMustBeDifferent",
+      ),
+    );
+
+    fireEvent.keyDown(newField, { key: "Enter" });
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it("Divider between the current and the new passphrase", () => {
+    renderDialog();
+    const divider = screen.getByTestId("passphrase_change_divider");
+    const follows = (node: Element) =>
+      divider.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING;
+
+    expect(follows(screen.getByLabelText("Common:CurrentPassphrase"))).toBe(0);
+    expect(follows(screen.getByLabelText("Common:NewPassphrase"))).not.toBe(0);
   });
 
   it("Enter while the action is disabled", async () => {

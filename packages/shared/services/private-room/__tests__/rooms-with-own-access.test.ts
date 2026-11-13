@@ -78,9 +78,19 @@ describe("findRoomsWithOwnAccess", () => {
       { id: 10, title: "Alpha" },
       { id: 12, title: "Gamma" },
     ]);
-    for (const [filter] of vi.mocked(getRooms).mock.calls) {
-      expect(filter.privacyFilter).toBe(RoomPrivacyFilter.Private);
-    }
+    // The section's own area for the active rooms, the shared Archive with
+    // the private filter for the archived ones.
+    expect(
+      vi
+        .mocked(getRooms)
+        .mock.calls.map(([filter]) => [
+          filter.searchArea,
+          filter.privacyFilter,
+        ]),
+    ).toEqual([
+      [RoomSearchArea.PrivateRooms, null],
+      [RoomSearchArea.Archive, RoomPrivacyFilter.Private],
+    ]);
   });
 
   it("names a room listed in both areas once", async () => {

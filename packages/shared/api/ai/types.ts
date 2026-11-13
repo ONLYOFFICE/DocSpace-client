@@ -127,6 +127,33 @@ export type KnowledgeConfig = {
   needReset?: boolean;
 };
 
+/** How far the document agent's model thinks; `default` follows the profile. */
+export type TDocumentAgentReasoning =
+  | "default"
+  | "off"
+  | "low"
+  | "medium"
+  | "high"
+  | "max";
+
+/**
+ * Tenant settings of the document agent (Portal settings → AI settings →
+ * Document Agent). The AI service reads them when it builds the agent's
+ * request: the model and the limits go into `metadata.docagent`.
+ */
+export type TDocumentAgentSettings = {
+  enabled: boolean;
+  /** The profile the agent runs on; null means the chat's own model. */
+  profileId: string | null;
+  reasoning: TDocumentAgentReasoning;
+  maxToolCalls: number;
+  maxFileBytes: number;
+  /** Whether the full log of every task is saved as a file. */
+  taskLog: boolean;
+  /** The folder the log files go to; null means next to the task's results. */
+  taskLogFolderId: string | null;
+};
+
 // `profileId` is injected by the Node AI service on GET /ai/agents/:id
 // (resolved from the Chat-action assignment), so it isn't part of the base
 // room contract.
@@ -282,9 +309,41 @@ export type TGenerateSkillResult = {
   content: string;
 };
 
+export type TCreateSkillRequest = {
+  /** The Instructions room the skill is created in. */
+  destId: number | string;
+  /** The file's title without the extension; the skill's name is derived from it. */
+  title: string;
+};
+
+/** The skill file created from the template. */
+export type TCreateSkillResult = {
+  id: string;
+  /** The title the file was saved under, extension included. */
+  title: string;
+};
+
 export type TGenerateSkillError = Error & {
   status?: number;
   code?: string;
   providerMessage?: string;
 };
 
+
+export type TByokModel = {
+  id: string;
+  name: string;
+};
+
+export type TByokProvider = {
+  id: string;
+  name: string;
+  models: TByokModel[];
+};
+
+export type TByokKey = {
+  id: string;
+  name?: string;
+  provider: string;
+  image?: string;
+};

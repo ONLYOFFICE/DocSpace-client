@@ -1,26 +1,26 @@
 {
   "key_path": "PrivateRoomEmptyBenefitKDF",
-  "content": "A 24-word recovery phrase keeps your access safe if you forget your passphrase.",
-  "content_en_sha1_hash": "f7eebc760b4c54d7144ecd89ae13cb0d1c10d68d",
-  "created_at": "2026-06-09T09:42:54.433Z",
-  "updated_at": "2026-07-28T07:30:59.797Z",
+  "content": "Restore access with your recovery phrase.",
+  "content_en_sha1_hash": "069b66678c2bfc554df68f7acf2364a266dcfd9b",
+  "created_at": "2026-11-13T06:51:07.683Z",
+  "updated_at": "2026-11-13T06:52:24.797Z",
   "comment": {
-    "text": "An informational list item displayed in an empty private room view as part of a list of security benefits.",
+    "text": "Fourth of four short points under the title of the empty private room view, next to a restore icon. Says that the 24-word recovery phrase brings access back when the passphrase is forgotten; recovery phrase is the product term used in the key dialogs.",
     "is_auto": true,
-    "updated_at": "2026-06-09T09:59:02.482Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-13T06:52:24.797Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
-      "line_number": 79,
-      "context": "const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n const dispatchCreate = useCallback(\n (extension?: string) => {\n if (extension === \"pdf\" && isMobile) {",
+      "line_number": 90,
+      "context": "const items = [\n { text: t(\"Common:PrivateRoomEmptyBenefitE2EE\"), Icon: EncryptionIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitAEAD\"), Icon: FileKeyIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitHPKE\"), Icon: CollaborationIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitKDF\"), Icon: RecoveryIcon },\n ];\n \n const dispatchCreate = useCallback(\n (extension?: string) => {\n if (extension === \"pdf\" && isMobile) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/empty-views/empty-private-room/index.tsx",
-      "line_number": 76,
-      "context": "const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n return (\n <div className={styles.wrapper} data-testid=\"empty-private-room-view\">\n <div className={styles.icon}>",
+      "line_number": 87,
+      "context": "const items = [\n { text: t(\"Common:PrivateRoomEmptyBenefitE2EE\"), Icon: EncryptionIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitAEAD\"), Icon: FileKeyIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitHPKE\"), Icon: CollaborationIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitKDF\"), Icon: RecoveryIcon },\n ];\n \n // Spec: private-rooms/file-operations, \"Empty folder inside a private room shows a folder empty view\"\n const roomIcon = isBase ? (\n <EmptyPrivateRoomLightIcon />",
       "module": "/packages/shared"
     }
   ],

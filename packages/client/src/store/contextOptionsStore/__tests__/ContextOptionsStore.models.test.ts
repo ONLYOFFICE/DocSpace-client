@@ -104,27 +104,38 @@ describe("ContextOptionsStore.getFolderModel — Knowledge room", () => {
 describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
   const instructionsRoom = { security: { Create: true }, roomType: RoomsType.InstructionsRoom };
 
-  it("offers the workspace and device uploads, as a Knowledge room does, and a skill written by AI", () => {
+  it("offers a skill from the template, the workspace and device uploads, and a skill written by AI", () => {
     const store = createTestContextOptionsStore({ selectedFolderStore: instructionsRoom });
     expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
+      { key: "new-markdown", label: "Common:MarkdownFile" },
+      { key: "separator", label: undefined },
       { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
       { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },
       { key: "create-skill-with-ai", label: "Common:CreateSkillWithAI" },
     ]);
   });
 
-  it("keeps all three while vectorization is off", () => {
+  it("keeps them all while vectorization is off", () => {
     const store = createTestContextOptionsStore({
       selectedFolderStore: instructionsRoom,
       settingsStore: { aiConfig: { vectorizationEnabled: false } },
     });
-    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(3);
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(5);
   });
 
+  // The template needs the AI service, not a model; writing with AI needs both.
   it.each([
-    ["AI is not set up on the portal", { aiReady: false }],
-    ["AI services are off", { aiServicesEnabled: false }],
-  ])("keeps only the uploads while %s", (_, settingsStore) => {
+    [
+      "the template and the uploads while AI is not set up on the portal",
+      { aiReady: false },
+      ["new-markdown", "separator", "upload-from-storage", "upload-from-device"],
+    ],
+    [
+      "only the uploads while AI services are off",
+      { aiServicesEnabled: false },
+      ["upload-from-storage", "upload-from-device"],
+    ],
+  ])("keeps %s", (_, settingsStore, keys) => {
     const store = createTestContextOptionsStore({
       selectedFolderStore: instructionsRoom,
       settingsStore,
@@ -133,7 +144,7 @@ describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
       menuShape(store.getFolderModel(t) as unknown[]).map(
         (item) => (item as { key: string }).key,
       ),
-    ).toEqual(["upload-from-storage", "upload-from-device"]);
+    ).toEqual(keys);
   });
 
   it("offers the skill while it is not known yet whether AI is set up", () => {
@@ -141,7 +152,7 @@ describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
       selectedFolderStore: instructionsRoom,
       settingsStore: { aiReady: null },
     });
-    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(3);
+    expect(menuShape(store.getFolderModel(t) as unknown[])).toHaveLength(5);
   });
 });
 
@@ -227,10 +238,9 @@ describe("ContextOptionsStore.getGroupContextOptions — Private section", () =>
     const inRooms = keysFor("/rooms/shared/filter");
     const inPrivate = keysFor("/private/filter");
 
+    // Spec: private-rooms/sidebar-section, "Room groups in the section"
     expect(inRooms).toEqual(expect.arrayContaining(ROOM_GROUP_KEYS));
-    expect(inPrivate).toEqual(
-      inRooms.filter((key) => !ROOM_GROUP_KEYS.includes(key as string)),
-    );
+    expect(inPrivate).toEqual(inRooms);
   });
 });
 

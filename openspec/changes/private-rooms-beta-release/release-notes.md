@@ -126,8 +126,6 @@ keys, the third-party refusal and the Document Server gate. Still open:
 - the translations of the "Private room" and "Private folder" labels of
   letters, pushes and the audit trail, which every language prints in
   English for now (4.5);
-- the revocation of file keys when a group is removed from a private room
-  (6.4);
 - recovery and offboarding for organisations (8); deactivating a user
   revokes no keys;
 - whether a private AI agent is refused (12.3, decision 8), and the

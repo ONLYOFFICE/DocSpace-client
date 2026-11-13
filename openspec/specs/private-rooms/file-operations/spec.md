@@ -247,11 +247,19 @@ The system SHALL list "New PDF form" among the create entries of a private room 
 - **THEN** the entries are document, spreadsheet, presentation, PDF form, folder and upload files
 
 ### Requirement: Rename withheld for encrypted files
-The system SHALL NOT offer rename for an encrypted file, neither in the context menu nor via the F2 hotkey.
+The system SHALL NOT offer rename for an encrypted file, neither in the context menu, nor in the media viewer menu, nor via the F2 hotkey.
 
 #### Scenario: F2 on encrypted file
 - **WHEN** the user presses F2 with an encrypted file selected
 - **THEN** no rename editor opens
+
+#### Scenario: Media viewer menu of an encrypted file
+- **WHEN** the user opens the menu of an encrypted file in the media viewer, on a desktop or on a mobile device, including the menu of a PDF
+- **THEN** rename is absent, whatever rename right the server reports for the file
+
+#### Scenario: Media viewer menu of a file that is not encrypted
+- **WHEN** the user opens the media viewer menu of a file that is not encrypted and may be renamed
+- **THEN** rename is present
 
 ### Requirement: Transfer into a private room is refused
 The system SHALL refuse to copy or move items from outside into a private room, showing Common:CannotTransferToPrivateRoom, and SHALL exclude private rooms from the destination picker for such operations.
@@ -314,7 +322,7 @@ The system SHALL allow copying an encrypted file to the root of the same private
 - **THEN** the copy is stored as "Report (2).docx" and no conflict dialog is shown
 
 #### Scenario: Duplicate started outside the room
-- **WHEN** an encrypted file is duplicated from a list outside its room, such as Recent
+- **WHEN** an encrypted file is duplicated while the open folder is not its private room
 - **THEN** the copy is encrypted for the file's room as a Duplicate inside the room would be, and its content MUST NOT be sent as plaintext
 
 ### Requirement: Duplicate of an encrypted file follows the move right
@@ -347,6 +355,14 @@ The system SHALL download an encrypted file by fetching the ciphertext, decrypti
 #### Scenario: No own access entry
 - **WHEN** the user downloads one encrypted file for which they hold no access entry
 - **THEN** nothing is downloaded and Common:EncryptionDownloadFailed is shown
+
+#### Scenario: Download from the media viewer
+- **WHEN** the user downloads an encrypted file from the media viewer with its download button or Ctrl+S, and the identity is unlocked
+- **THEN** the browser saves the plaintext file under its original name, and the ciphertext MUST NOT be handed to the browser as the download
+
+#### Scenario: Download from the media viewer of a file that cannot be found
+- **WHEN** the user downloads an encrypted file from the media viewer, and the file is neither in the current folder list nor the file the viewer was opened for
+- **THEN** Common:EncryptionDownloadFailed is shown, nothing is downloaded, and the ciphertext MUST NOT be handed to the browser as the download
 
 ### Requirement: Multiple encrypted files download as a decrypted zip
 The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, a decrypted name that clashes with another taking the lowest numbered suffix no other entry has. A selected folder that lies in a private room SHALL be included as its decrypted subtree under the folder's name, and no server archive SHALL be requested for it. Non-encrypted files and folders outside private rooms of the same selection download through the standard path.
@@ -409,11 +425,27 @@ The system SHALL delete items in a private room permanently, never moving them t
 - **THEN** the confirmation dialog is shown before anything is deleted, and nothing MUST be deleted without it
 
 ### Requirement: Version operations withheld
-The system SHALL NOT offer version history, finalize version, version list or version blocking for an encrypted file.
+The system SHALL NOT offer version history, finalize version, version list, version blocking or editing of the version comment for an encrypted file. The version badge of an encrypted file MAY show the version count, but SHALL NOT open the version history or carry the Common:ShowVersionHistory tooltip, whatever history rights the server reports for the file.
 
 #### Scenario: Context menu of an encrypted file
 - **WHEN** the context menu of an encrypted file is opened
 - **THEN** show-version-history, finalize-version, version and block-unblock-version are absent
+
+#### Scenario: Version badge of an encrypted file
+- **WHEN** the user clicks the version badge of an encrypted file that has several versions, in a list, table or tile view, and the server reports the ReadHistory right on it
+- **THEN** the version history panel MUST NOT open, no version list is requested, and the badge has no Common:ShowVersionHistory tooltip
+
+#### Scenario: Version badge of a file that is not encrypted
+- **WHEN** the user clicks the version badge of a file that is not encrypted and has several versions, and the server reports the ReadHistory right on it
+- **THEN** the version history panel opens, and the badge carries the Common:ShowVersionHistory tooltip
+
+#### Scenario: Version comment of an encrypted file in the info panel
+- **WHEN** the Details view of the info panel shows an encrypted file and the server reports the EditHistory right on it
+- **THEN** the comment has no Common:EditButton or Common:AddButton control, no version list is requested, and a comment MUST NOT be sent to the server
+
+#### Scenario: Version comment of a file that is not encrypted in the info panel
+- **WHEN** the Details view of the info panel shows a file that is not encrypted and the server reports the EditHistory right on it
+- **THEN** the comment carries the Common:EditButton or Common:AddButton control
 
 ### Requirement: Favorites, conversion and download-as withheld
 The system SHALL NOT offer mark-as-favorite, convert or download-as for an encrypted file, nor favorites for a folder in a private room.
@@ -441,18 +473,34 @@ The system SHALL fetch and decrypt an encrypted image, audio or video in the bro
 - **THEN** the viewer closes
 
 ### Requirement: Opening without keys is withheld
-The system SHALL NOT offer view, preview, edit, open or download entries for an encrypted file when the user has no encryption key, and SHALL show a "no access" badge on such files.
+The system SHALL NOT offer view, preview, edit, open or download entries for an encrypted file when the user's key list is known to hold no key, and SHALL show a "no access" badge on such files. While the key list is not known, because it has not loaded or failed to load, the system SHALL NOT show that badge or withhold those entries on account of keys.
 
 #### Scenario: User without keys
 - **WHEN** a user with no encryption key lists a private room
 - **THEN** every encrypted file shows the lock badge titled Common:NoAccessToEncryptedFile and its menu has no open or download entries
 
+#### Scenario: Key list not known
+- **WHEN** a user lists a private room while their key list has not loaded or failed to load
+- **THEN** no encrypted file shows the lock badge titled Common:NoAccessToEncryptedFile on account of keys, and the menus keep their open and download entries
+
 ### Requirement: Entering a private room without keys warns
-The system SHALL show Common:EncryptionKeysNotConfigured when a user without encryption keys navigates into a private room.
+The system SHALL show Common:EncryptionKeysNotConfigured when a user whose key list is known to hold no key navigates into a private room. When the key list is not known, the system SHALL read it again on entering the room and, when that read fails, SHALL show Common:EncryptionKeysLoadFailed with a Common:TryAgain action instead; the action SHALL read the list again.
 
 #### Scenario: Navigate into room
 - **WHEN** a user with no keys opens a private room
 - **THEN** the warning toast Common:EncryptionKeysNotConfigured is shown
+
+#### Scenario: Key list could not be loaded
+- **WHEN** a user opens a private room while their key list is not known, and the read of the list fails
+- **THEN** the error toast Common:EncryptionKeysLoadFailed is shown with Common:TryAgain, and Common:EncryptionKeysNotConfigured is not shown
+
+#### Scenario: Retry succeeds
+- **WHEN** the user presses Common:TryAgain and the read of the list succeeds with a key
+- **THEN** the room asks to unlock the key and shows the decrypted file names after the unlock, without a page reload
+
+#### Scenario: Retry fails
+- **WHEN** the user presses Common:TryAgain and the read of the list fails again
+- **THEN** Common:EncryptionKeysLoadFailed is shown again with Common:TryAgain
 
 ### Requirement: Encrypted names are recovered on every list update
 The system SHALL resolve the display names of encrypted files from their containers whenever the file list changes, including navigation, refresh and socket-driven updates, and SHALL cache resolved names for the session.
@@ -480,7 +528,7 @@ The system SHALL, for "Open location" on an encrypted file, navigate to the pare
 - **THEN** the parent folder opens with the file highlighted via client-side search
 
 ### Requirement: Feeds show resolved names
-The system SHALL show the decrypted display name of encrypted files in Recent, History and New-files feeds and in notifications that name a file, recovering the name from the file header when it is not cached and the identity is unlocked; while locked or before recovery completes the opaque name is shown.
+The system SHALL show the decrypted display name of encrypted files in the History and New-files feeds and in notifications that name a file, recovering the name from the file header when it is not cached and the identity is unlocked; while locked or before recovery completes the opaque name is shown. Recent is not one of these feeds: the server never records an encrypted file as recent.
 
 #### Scenario: History tab
 - **WHEN** the History tab of a private room is opened with the identity unlocked
@@ -493,6 +541,10 @@ The system SHALL show the decrypted display name of encrypted files in Recent, H
 #### Scenario: Identity locked
 - **WHEN** a feed lists encrypted files while the identity is locked
 - **THEN** the opaque names are shown and no unlock prompt is raised by the feed itself
+
+#### Scenario: Recent after opening an encrypted file
+- **WHEN** the user opens an encrypted file and then opens Recent
+- **THEN** the encrypted file is not listed there
 
 ### Requirement: Forms are not fillable in private rooms
 The system SHALL NOT offer fill-form, start-filling, filling-status, stop-filling, make-form or submit-to-gallery for an encrypted file.
@@ -774,3 +826,122 @@ The SDK SHALL take the cancel signal of every file of an encrypted upload batch 
 #### Scenario: File cancelled while waiting
 - **WHEN** a user uploads two files into a private room through the SDK and cancels the second while the first is still uploading
 - **THEN** the second file is not uploaded, no file is created for it, and its row is gone
+
+### Requirement: Key writes are left out of the History tab
+The system SHALL leave the file-keys-issued entry the server lists in a file's and a folder's history (action FileKeysSet, 5164) out of the History tab of a private room and of its files, rendering the other entries as before; the write stays in the audit trail with its recipients.
+
+#### Scenario: Key write listed
+- **WHEN** the history of a private room or of one of its files carries a file-keys-issued entry
+- **THEN** the tab shows nothing for it and the other entries as usual
+
+### Requirement: A stored upload without the uploader's entry is not kept
+The system SHALL, when the uploader's own access entry of a stored encrypted upload cannot be written, try the write again while the key is in memory, and SHALL then delete the stored file permanently and report the upload as failed, since nobody could decrypt it. It SHALL keep a file whose entry turns out to be written. When the deletion fails too, it SHALL report Common:EncryptionUploadWrapFailed for the stored file.
+
+#### Scenario: Entry written on a later try
+- **WHEN** the first write of the uploader's entry fails and a later try succeeds
+- **THEN** the upload is reported as uploaded and no error is shown
+
+#### Scenario: Entry cannot be written
+- **WHEN** every try to write the uploader's entry of a stored upload fails
+- **THEN** the stored file is deleted permanently, the row shows Common:EncryptionUploadNotKept as a failed upload that can be retried, and no file is listed for it
+
+#### Scenario: Key cannot be wrapped
+- **WHEN** wrapping the key for the uploader fails after the ciphertext is stored
+- **THEN** no write is tried, the stored file is deleted permanently and the upload is reported as failed
+
+#### Scenario: Entry written although the write reported a failure
+- **WHEN** the write reported a failure and the file turns out to hold the uploader's entry
+- **THEN** the file MUST NOT be deleted, and the upload is reported as uploaded
+
+#### Scenario: Deletion fails
+- **WHEN** the uploader's entry cannot be written and the deletion of the stored file fails as well
+- **THEN** the file stays listed, its row shows Common:EncryptionUploadWrapFailed, and the failure is not reported as a successful upload
+
+#### Scenario: Upload through the SDK
+- **WHEN** the uploader's entry cannot be written for an upload made through the SDK
+- **THEN** the stored file is deleted permanently and the row fails with Common:EncryptionUploadNotKept
+
+### Requirement: An unknown key list is read again before an action is refused
+The system SHALL read the user's key list again when a download, a copy or move, an upload or a file creation in a private room starts while the list is not known. It SHALL refuse the action as for a user without a key only when the list is known to be empty, and SHALL report Common:EncryptionKeysLoadFailed and do nothing when the read fails.
+
+#### Scenario: Read succeeds with a key
+- **WHEN** a user who holds a key downloads an encrypted file while the key list is not known, and the read of the list succeeds
+- **THEN** the download goes on as with a loaded list
+
+#### Scenario: Read fails
+- **WHEN** a user downloads, copies, moves, uploads or creates a file in a private room while the key list is not known, and the read of the list fails
+- **THEN** Common:EncryptionKeysLoadFailed is shown, nothing is sent, and neither Common:EncryptionKeysNotConfigured nor the device-setup hint is shown
+
+#### Scenario: Read answers with an empty list
+- **WHEN** the read of the list succeeds and holds no key
+- **THEN** the action is refused as for a user without a key
+
+### Requirement: A file without a wrap for the user is reported as no access
+The system SHALL report a file whose access entries hold no wrap for a user who has a key with Common:EncryptedFileNoAccessYet, and SHALL NOT advise that user to set up encryption keys.
+
+#### Scenario: Key holder without a wrap
+- **WHEN** a user who holds a key downloads, copies or opens an encrypted file that is not wrapped for them
+- **THEN** the message is Common:EncryptedFileNoAccessYet, not Common:NoAccessToEncryptedFile
+
+#### Scenario: User without a key
+- **WHEN** a user whose key list is known to hold no key lists a private room
+- **THEN** the lock badge keeps the title Common:NoAccessToEncryptedFile
+
+### Requirement: Client search covers the open folder up to 10,000 items
+The system SHALL NOT search a private room beyond the folder that is open: its subfolders and the other folders of the room are not searched. The system SHALL load at most 10,000 items of that folder for a search; when the folder holds more, it SHALL show Files:ClientSearchPartialResults and match only the loaded items.
+
+#### Scenario: Match in a subfolder
+- **WHEN** the user searches in a folder of a private room for a name that only a file in one of its subfolders has
+- **THEN** the file is not found
+
+#### Scenario: Folder above the limit
+- **WHEN** the user searches in a folder of a private room that holds more than 10,000 items
+- **THEN** Files:ClientSearchPartialResults is shown and a file beyond the loaded items is not found even though its name matches
+
+### Requirement: Name sort orders only the loaded items
+The system SHALL NOT order a whole folder of a private room by decrypted name while only a part of it is loaded: the server orders the pages by the opaque stored names, and the client re-orders the loaded items among themselves. An item of a page not loaded yet takes its place only once that page is loaded.
+
+#### Scenario: Folder larger than one page
+- **WHEN** a folder of a private room holds more items than one page and the list is sorted by name without a search
+- **THEN** the loaded items are in the order of their decrypted names, and scrolling to the next page can place a newly loaded item above items already shown
+
+### Requirement: Decrypted zip is assembled in memory
+The system SHALL NOT stream a decrypted zip to disk: every selected file is decrypted in memory, and the archive is built in memory from all of them before it is saved. No size limit is enforced on the selection.
+
+#### Scenario: Large selection
+- **WHEN** the user downloads a selection of encrypted files whose total size is close to the browser's memory limit
+- **THEN** the download may fail with a memory error, and no partial archive is saved
+
+### Requirement: An interrupted encrypted download starts over
+The system SHALL NOT resume the download of an encrypted file: the ciphertext is fetched as a whole before decryption, and a download that fails part-way SHALL be reported as failed, with nothing saved and no partial plaintext shown.
+
+#### Scenario: Connection lost during a download
+- **WHEN** the connection is lost while an encrypted file is being fetched for a decrypting download
+- **THEN** the download fails with an error, no file is saved, and a new download fetches the file from its start
+
+### Requirement: Destination picker lists private rooms under a Private entry
+The system SHALL list the private rooms a copy may go to under a Private entry at the root of the Copy dialog, since the Rooms list of the picker holds no private room. The entry SHALL be offered only for a copy whose source lies in a private room and only while the Private section is available. A Move SHALL NOT get it, and neither SHALL a source outside private rooms.
+
+#### Scenario: Destination picker in a private room
+- **WHEN** the user opens the Copy dialog on a file of a private room and goes to the root of the picker
+- **THEN** the root lists a Private entry beside Rooms, the entry lists the user's private rooms, and no private room is listed under Rooms
+
+#### Scenario: Copy to another private room
+- **WHEN** the user picks another private room under the Private entry and confirms
+- **THEN** the file is copied there re-encrypted for that room
+
+#### Scenario: Path of the open room
+- **WHEN** the Copy dialog opens inside a private room
+- **THEN** its path names Private above the room, and one level up lists the private rooms
+
+#### Scenario: Move dialog
+- **WHEN** the user opens the Move dialog on a file of a private room
+- **THEN** the picker stays pinned to that room and offers no Private entry
+
+#### Scenario: Source outside private rooms
+- **WHEN** the user copies a file that is not in a private room
+- **THEN** the picker offers no Private entry and no private room can be picked
+
+#### Scenario: Section not available
+- **WHEN** the Private section is not available
+- **THEN** the picker offers no Private entry

@@ -3,7 +3,7 @@
   "content": "AI settings",
   "content_en_sha1_hash": "6dcf51d7630d6e48c2162d10dfcc2c61485912c7",
   "created_at": "2025-10-27T16:14:27.398Z",
-  "updated_at": "2026-10-31T12:58:28.928Z",
+  "updated_at": "2026-11-09T17:07:34.726Z",
   "comment": {
     "text": "This is a label for a section or link related to artificial intelligence settings. It appears in dialogs and portal settings pages.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 139,
+      "line_number": 144,
       "context": "const navigate = useNavigate();\n const location = useLocation();\n const { t, ready } = useTranslation([\"Common\", \"Settings\"]);\n \n React.useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:AISettings\"));\n }, [ready, t]);\n \n const initKnowledge = React.useCallback(async () => {\n await fetchKnowledge?.();\n }, [fetchKnowledge]);",
       "module": "/packages/client"
     },
@@ -45,36 +45,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 250,
       "context": "case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"OAuth:Apps\":\n return t(\"OAuth:Apps\");\n case \"Common:AppsSectionTitle\":\n return t(\"Common:AppsSectionTitle\");\n default:",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 462,
-      "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 462,
-      "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 462,
-      "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 462,
-      "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 462,
-      "context": "{\n id: \"portal-settings_catalog-ai-settings\",\n key: \"4-6\",\n icon: \"\",\n link: \"ai-settings\",\n tKey: \"AISettings\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {

@@ -51,6 +51,7 @@ type Props = {
   updateDefaultFolderType?: SettingsStore["updateDefaultFolderType"];
   userType?: UserStore["userType"];
   aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
+  isPrivateRoomsSectionAvailable?: boolean;
 };
 
 const StartPageSettingComponent = ({
@@ -58,6 +59,7 @@ const StartPageSettingComponent = ({
   updateDefaultFolderType,
   userType,
   aiServicesEnabled,
+  isPrivateRoomsSectionAvailable,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -85,13 +87,21 @@ const StartPageSettingComponent = ({
         key: FolderType.Forms,
       },
       {
-        label: t("Common:AiRooms"),
+        label: t("Common:Private"),
+        key: FolderType.PrivateRooms,
+      },
+      {
+        label: t("Common:AiWorkspace"),
         key: FolderType.AiHub,
       },
     ];
 
     return options.filter((option) =>
-      isStartPageAvailable(option.key, { isGuest, aiServicesEnabled }),
+      isStartPageAvailable(option.key, {
+        isGuest,
+        aiServicesEnabled,
+        isPrivateRoomsSectionAvailable,
+      }),
     );
   };
 
@@ -134,7 +144,7 @@ const StartPageSettingComponent = ({
 };
 
 export const DefaultPageSetting = inject(
-  ({ settingsStore, userStore }: TStore) => {
+  ({ settingsStore, userStore, appsStore }: TStore) => {
     const { defaultFolderType, updateDefaultFolderType, aiServicesEnabled } =
       settingsStore;
 
@@ -145,6 +155,7 @@ export const DefaultPageSetting = inject(
       updateDefaultFolderType,
       userType,
       aiServicesEnabled,
+      isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
     };
   },
 )(observer(StartPageSettingComponent));

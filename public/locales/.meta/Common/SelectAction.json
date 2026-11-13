@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-11-06T10:45:53.785Z",
+  "updated_at": "2026-11-09T09:26:33.275Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -66,12 +66,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 58,
-      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\");\n }",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
       "line_number": 136,
       "context": "isLoading={isLoading}\n isDisabled={isDisabled || isLoading}\n hasError={isError}\n scale\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"SelectAction\")}\n />\n \n <Backdrop\n visible={isPanelVisible}\n isAside",
@@ -79,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 462,
+      "line_number": 560,
       "context": "withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}\n />\n </ModalDialog.Container>",
       "module": "/packages/client"
     },
@@ -108,9 +102,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1319,
-      "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const ownerOptions = [\n {",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
+      "line_number": 268,
+      "context": "// Nothing chosen yet, or a profile that is gone, shows as the portal's\n // default; the setting stays null until a model is picked by hand.\n const selectedProfile =\n profileOptions.find((option) => option.key === draft.profileId) ??\n profileOptions[0] ??\n ({ key: \"none\", label: t(\"Common:SelectAction\") } as TOption);\n // The effort follows the chosen model: its own depths to pick from, and\n // its default level until one is picked by hand (`reasoning` stays\n // \"default\" then). A level the model has not got falls back to its default.\n const activeProfile = (profiles as TProfileLike[]).find(\n (profile) => profile.id === String(selectedProfile.key),",
       "module": "/packages/client"
     },
     {
@@ -129,18 +123,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 195,
       "context": "frameId: \"ds-frame\",\n init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n withSubtitle: true,\n filterParam: FilesSelectorFilterTypes.ALL,\n isButtonMode: false,\n buttonWithLogo: true,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 195,
-      "context": "frameId: \"ds-frame\",\n init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n withSubtitle: true,\n filterParam: FilesSelectorFilterTypes.ALL,\n isButtonMode: false,\n buttonWithLogo: true,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 863,
-      "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
     {
@@ -186,18 +168,6 @@
       "module": "/packages/doceditor"
     },
     {
-      "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
-      "line_number": 65,
-      "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
-      "line_number": 279,
-      "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\", { defaultValue: \"Select\" }),\n });\n }\n \n const ownerOptions = [\n {",
-      "module": "/packages/sdk"
-    },
-    {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
       "line_number": 279,
       "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\", { defaultValue: \"Select\" }),\n });\n }\n \n const ownerOptions = [\n {",
@@ -240,18 +210,6 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
-      "line_number": 270,
-      "context": "if (!isCollaborator && !isVisitor) {\n ownerOptions.push({\n id: \"filter_owner-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const subjectOptions: unknown[] = [\n {",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 250,
-      "context": "if (isArchive) {\n const archiveItems: ContextMenuModel[] = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
-      "module": "/packages/sdk"
-    },
-    {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
       "line_number": 250,
       "context": "if (isArchive) {\n const archiveItems: ContextMenuModel[] = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
@@ -262,18 +220,6 @@
       "line_number": 262,
       "context": "const headerProps = baseConfig?.header\n ? {\n withHeader: true as const,\n headerProps: {\n headerLabel: t(\"SelectAction\"),\n isCloseable: false,\n onCloseClick: onCancel,\n },\n }\n : {};",
       "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(selectors)/file-selector/page.client.tsx",
-      "line_number": 262,
-      "context": "const headerProps = baseConfig?.header\n ? {\n withHeader: true as const,\n headerProps: {\n headerLabel: t(\"SelectAction\"),\n isCloseable: false,\n onCloseClick: onCancel,\n },\n }\n : {};",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
-      "line_number": 46,
-      "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
-      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
@@ -301,7 +247,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 271,
+      "line_number": 270,
       "context": "<FileInput\n scale\n size={InputSize.base}\n onInput={onLocalFileInputClick}\n accept={[\".tar\", \".gz\"]}\n placeholder={t(\"Common:SelectAction\")}\n className={classNames(\n styles.restoreBackupInput,\n \"restore-backup_input\",\n )}\n isDisabled={!isEnableRestore}",
       "module": "/packages/shared"
     }

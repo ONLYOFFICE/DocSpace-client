@@ -42,6 +42,7 @@ import {
   createAiProject,
   getAiProject,
   getAiProjectKnowledgeFiles,
+  getAiProjectKnowledgeFilesCount,
   getAiProjectSkills,
   refreshAiProjectSettings,
   toAiProject,
@@ -60,6 +61,7 @@ import type {
   TAiProjectRequest,
   TAiProjectRoomDto,
   TAiProjectSkillsRoom,
+  TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
@@ -116,6 +118,12 @@ class AiProjectsStore {
   knowledge: Record<number, TAiProjectKnowledgeFile[]> = {};
 
   /**
+   * How many files each linked Knowledge room holds, by room id: what the
+   * Knowledge card's title counts for a room whose files were not read.
+   */
+  knowledgeCounts: Record<number, number> = {};
+
+  /**
    * A sources read in flight (`*Pending`) and one in flight long enough to
    * show (`*Loading`): the skeleton appears after `SHOW_LOADER_TIMER` and
    * stays at least `MIN_LOADER_TIMER` (`createLoader`), so a fast answer
@@ -125,6 +133,9 @@ class AiProjectsStore {
   skillsPending = false;
 
   skillsLoading = false;
+
+  /** The latest skills read: only it ends `skills*`, an older one left over from another project or click does not. */
+  private skillsRequest = 0;
 
   /** As `skills*`, per Knowledge room. */
   knowledgePending: Record<number, boolean> = {};
@@ -147,6 +158,36 @@ class AiProjectsStore {
 
   /* ------------------------------ Project ------------------------------ */
 
+  /**
+   * Sets the rooms of one kind linked to the open project, as its sources
+   * column picked them. Only the links are written: the room itself, the
+   * model and the instructions stay as they are.
+   */
+  setActiveRooms = async (kind: "instructions" | "knowledge", rooms: TAiProjectSource[]) => {
+    const current = this.activeProject;
+    if (!current) return;
+    const instructions = kind === "instructions" ? rooms : current.aiProject.instructionsRooms;
+    const knowledge = kind === "knowledge" ? rooms : current.aiProject.knowledgeRooms;
+    try {
+      const project = await updateAiProject(
+        current.id,
+        {
+          aiProject: {
+            instructionsRoomIds: instructions.map((room) => room.id),
+            knowledgeRoomIds: knowledge.map((room) => room.id),
+            rooms: [...instructions, ...knowledge],
+          },
+        },
+        current,
+      );
+      showWarnings(project);
+      runInAction(() => this.replaceProject(project));
+      if (this.activeProject?.id === current.id) this.syncPreset(project);
+    } catch (e) {
+      toastr.error(errorMessage(e));
+    }
+  };
+
   // The sources (skills, knowledge files) are not read here: the cards read
   // a room's list when its row is expanded (fetchSkills / fetchKnowledgeFiles),
   // and the chat takes the current skills from the server on every round.
@@ -159,6 +200,7 @@ class AiProjectsStore {
     this.activeProject = project;
     this.skills = [];
     this.knowledge = {};
+    this.knowledgeCounts = {};
     let opened = project;
     if (project.aiProject.partial) {
       try {
@@ -193,6 +235,7 @@ class AiProjectsStore {
     this.activeProject = null;
     this.skills = [];
     this.knowledge = {};
+    this.knowledgeCounts = {};
     this.aiPresetsStore.setActivePreset(null);
   };
 
@@ -228,7 +271,7 @@ class AiProjectsStore {
    * Follows an edit of the open project made elsewhere (the server announces
    * it as an update of the project room): the model and the linked rooms are
    * read again and, when they changed, reach the project and its chat. A
-   * Knowledge room no longer linked drops its files.
+   * Knowledge room no longer linked drops its files and their count.
    */
   refreshActiveSettings = async () => {
     const project = this.activeProject;
@@ -243,6 +286,10 @@ class AiProjectsStore {
           .map(Number)
           .filter((id) => !linked.has(id))
           .forEach((id) => delete this.knowledge[id]);
+        Object.keys(this.knowledgeCounts)
+          .map(Number)
+          .filter((id) => !linked.has(id))
+          .forEach((id) => delete this.knowledgeCounts[id]);
       });
       this.syncPreset(updated);
     } catch {
@@ -250,20 +297,37 @@ class AiProjectsStore {
     }
   };
 
-  fetchSkills = async (id: number) => {
+  /**
+   * Reads the skills of the project's Instructions rooms. A read nobody
+   * asked for (`silent`: the card title's count) fails without a toast; an
+   * expanded room reads again and says why.
+   */
+  fetchSkills = async (id: number, options?: { silent?: boolean }) => {
     const { startLoader, endLoader } = createLoader();
+    this.skillsRequest += 1;
+    const request = this.skillsRequest;
     this.skillsPending = true;
-    startLoader(() => runInAction(() => (this.skillsLoading = true)));
+    startLoader(() =>
+      runInAction(() => {
+        if (request === this.skillsRequest) this.skillsLoading = true;
+      }),
+    );
     try {
       const rooms = await getAiProjectSkills(id);
       runInAction(() => {
         if (this.activeProject?.id === id) this.skills = rooms;
       });
     } catch (e) {
-      toastr.error(errorMessage(e));
+      if (!options?.silent) toastr.error(errorMessage(e));
     } finally {
-      runInAction(() => (this.skillsPending = false));
-      endLoader(() => runInAction(() => (this.skillsLoading = false)));
+      runInAction(() => {
+        if (request === this.skillsRequest) this.skillsPending = false;
+      });
+      endLoader(() =>
+        runInAction(() => {
+          if (request === this.skillsRequest) this.skillsLoading = false;
+        }),
+      );
     }
   };
 
@@ -285,6 +349,27 @@ class AiProjectsStore {
       runInAction(() => (this.knowledgePending[roomId] = false));
       endLoader(() => runInAction(() => (this.knowledgeLoading[roomId] = false)));
     }
+  };
+
+  /**
+   * Counts the files of the project's linked Knowledge rooms for the
+   * Knowledge card's title, without reading the files themselves. Silent: a
+   * room whose count cannot be read stays uncounted, and the title shows no
+   * number rather than a wrong one.
+   */
+  fetchKnowledgeCounts = async (projectId: number, roomIds: number[]) => {
+    await Promise.all(
+      roomIds.map(async (roomId) => {
+        try {
+          const count = await getAiProjectKnowledgeFilesCount(roomId);
+          runInAction(() => {
+            if (this.activeProject?.id === projectId) this.knowledgeCounts[roomId] = count;
+          });
+        } catch {
+          // Left uncounted.
+        }
+      }),
+    );
   };
 
   /**

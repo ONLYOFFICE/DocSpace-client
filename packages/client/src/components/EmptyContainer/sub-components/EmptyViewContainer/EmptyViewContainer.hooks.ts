@@ -58,6 +58,7 @@ import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { getAiWorkspaceCreatePayload } from "SRC_DIR/helpers/aiWorkspace";
 import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 
@@ -211,6 +212,8 @@ export const useOptions = (
     onShowTemplateGallery,
     vectorizationEnabled = true,
     isCreateSkillWithAIAvailable = true,
+    isCreateMarkdownAvailable = false,
+    isCreateSkillAvailable = false,
     createRoom,
   }: EmptyViewContainerProps,
   t: TTranslation,
@@ -253,7 +256,11 @@ export const useOptions = (
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
   const onGoToPrivate = useCallback((): LinkProps => {
-    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+    const newFilter = RoomsFilter.getDefault(
+      userId,
+      RoomSearchArea.PrivateRooms,
+    );
+    newFilter.searchArea = RoomSearchArea.PrivateRooms;
 
     return {
       to: {
@@ -344,12 +351,12 @@ export const useOptions = (
         isAiProjectCreate?: boolean;
       };
     };
-    // In the "Forms" section only Form Filling Rooms can be created; "AI
-    // rooms" offers its own chooser.
+    // In the "Forms" section only Form Filling Rooms can be created; the AI
+    // Workspace list creates what it holds.
     if (window.location.pathname.startsWith("/forms")) {
       event.payload = { startRoomType: RoomsType.FormRoom };
     } else if (window.location.pathname.startsWith("/ai-rooms/")) {
-      event.payload = { isAiRoomsCreate: true };
+      event.payload = getAiWorkspaceCreatePayload(window.location.search);
     }
     window.dispatchEvent(event);
   }, [
@@ -527,6 +534,8 @@ export const useOptions = (
         vectorizationEnabled,
         isCreateSkillWithAIAvailable,
         isPrivateRoomsRoute(pathname),
+        isCreateMarkdownAvailable,
+        isCreateSkillAvailable,
       ),
     [
       type,
@@ -566,6 +575,8 @@ export const useOptions = (
       templateGalleryAvailable,
       vectorizationEnabled,
       isCreateSkillWithAIAvailable,
+      isCreateMarkdownAvailable,
+      isCreateSkillAvailable,
       pathname,
     ],
   );

@@ -881,7 +881,9 @@ release, one user holding a key, the device remembered):
   then once more after a minute), the editor shows "Something went wrong.
   An error has occurred while opening the file" and the console logs the
   Document Server error code -82. `GET files/file/{id}/openedit` answers
-  200 with a new document key, the encrypted flag and the key pairs;
+  200 with a new document key (corrected on 2026-11-11: the key for
+  editing is the one of the earlier version, see "Release stand check of
+  2026-11-10"), the encrypted flag and the key pairs;
   `GET files/file/{id}/history` lists both versions as encrypted. Opening
   `?version=1` in view mode shows the typed line, so the Document Server
   serves the held session of the first key on top of the first version,
@@ -903,6 +905,46 @@ release, one user holding a key, the device remembered):
   would send the clear text of the document to that provider from the
   browser. Recorded in `private-rooms-ai-integration` (design.md,
   Context) as a path that exists outside the client's control.
+
+### Release stand check of 2026-11-10
+
+Observed by the review of 2026-11-10 on `tests.onlyoffice.io` (DocSpace
+`4.1.0.12351`, Document Server `10.0.3.19`); recorded here on 2026-11-11
+without a new run.
+
+- **Reopening after a save (task 6.2).** After a save, `openedit` answers
+  the document key of version 1 for editing while the file is at version 2,
+  and another key for viewing. This holds for docx, xlsx, pptx and PDF, but
+  only a docx fails to open, with error -82, for the room owner and for an
+  invited member alike. A document saved on 2026-11-06 still did not open
+  for editing on 2026-11-10. The words "with a new document key" in the
+  record of 2026-11-06 are not exact: the key is the one of the earlier
+  version. Task 6.2 is accepted when a docx opens for editing after
+  "create, edit, save, close", and `document.key` of `openedit`, taken
+  before and after the save for the four types, belongs to the same
+  version as the document address it comes with.
+- **Question for the Document Server team (task 6.2).** Confirm that -82
+  comes from this mismatch of key and version, and say why a spreadsheet
+  and a presentation open with the same mismatch. Done when the answer is
+  recorded here with its date.
+- **Crypto library build (task 1.2).** The stand serves
+  `onlyoffice-crypto.js` with a SHA-256 starting `58cb7f48`, which
+  `contract-v1.md` lists as build 2.0.0. The contract asks for 2.1.0 or
+  later and the client is built against 2.2.0 (`LIBRARY_VERSION`). One
+  consequence seen: after a save in the editor the flags byte of a PDF form
+  changes from 3 to 1, and the form opens for commenting. Asked of the
+  Document Server team: ship 2.2.0, and give a way to read the library
+  version, so the server probe can compare a version and not only find the
+  file. Accepted when the hash on the stand is the one of build 2.2.0 and a
+  PDF form keeps its form flag over a save.
+- **Unstable spreadsheet opening (task 4.7), a weak observation.** One of
+  four reopenings of an xlsx answered "An error occurred while opening the
+  file"; a reload helped and the error code was not taken. It may be the
+  join race of DS-17. Nothing is asked yet; the next run of 4.7 takes the
+  code, or sees ten openings in a row without the failure.
+- **No answer on record (tasks 1.2 and 1.6).** The artifacts hold no reply
+  to the package of 2026-10-30, and "Minimum Document Server" in
+  `contract-v1.md` is empty.
 
 ## Goals / Non-Goals
 
@@ -1009,8 +1051,10 @@ release, one user holding a key, the device remembered):
    `dek` and `cryptoEngineId`; the Document Server ignores versions it does
    not know and reports an error instead of opening ciphertext.
 
-6. **The Document Server reads DSE3 versions 2 and 3 and writes version 3
-   (decided 2026-10-26).** `private-rooms-dse3-header-authentication`
+6. **The Document Server reads DSE3 versions 2 and 3 and writes the
+   version its library writes (decided 2026-10-26; the heading said
+   "writes version 3" until 2026-11-12, against the text below and §5.4 of
+   `contract-v1.md`).** `private-rooms-dse3-header-authentication`
    authenticates the header fields in a version-3 container and keeps
    version-2 files readable without migration. The Document Server decrypts
    and encrypts with its own copy of this repository's library, which writes
@@ -1108,6 +1152,14 @@ release, one user holding a key, the device remembered):
    contract item for the Document Server team, in two parts: a bundle built
    after ff9f51aeffb, and the add-on passing the form flag of the container it
    opened to `encryptFile` when it saves.
+   What landed, read through CodeGraph on `a7d94e4b81` (2026-11-10): the
+   save callback refuses a user submit of a file located in a private room
+   before storing anything (`DocumentServiceTracker.cs:428-443`); the editor
+   configuration hides the submit action for any encrypted file
+   (`Configuration.cs`, `SubmitFormDto.Visible`); StartFilling is denied
+   inside a private room (`FileSecurity.cs:1712-1720`). The callback guard is
+   keyed on the private room, not on the encrypted flag, so the requirement
+   and its scenario say so.
    Role-based filling in a private virtual data room is server-compatible but
    unverified in the editor, and stays an open question. Landed 2026-11-05
    (`1259577f63`): the server refuses the submit callback of a file in a
@@ -1180,9 +1232,32 @@ release, one user holding a key, the device remembered):
     entry; create-new from the editor goes through the encrypted creation
     path or is withheld (proposal decision 7); errors from the Document
     Server frame are shown as page text; the file pickers skip encrypted
-    files; mentions are decided by the owner (decision 7). Alternative:
+    files; mentions are decided by the owner (decision 7). Decided on
+    2026-11-10: create-new is withheld, the event is not attached for an
+    encrypted file, since the server refuses the plain file it would
+    create and an encrypted creation from the editor page is not built.
+    A mention notification of an encrypted file is sent with an empty
+    message: `FileStorageService.SendEditorNotifyAsync`
+    (`products/ASC.Files/Core/Core/FileStorageService.cs`) reads
+    `Message ?? ""`, trims it and passes it to the notification, so an
+    empty one is accepted and the recipients still get the link. The
+    link is built on the server from the file id and the action data of
+    the Document Server, which the page passes through unread; the
+    Document Server API describes that data as the address of the
+    comment, and no capture of it was taken for an encrypted file.
+    Alternative:
     leave the events generic and rely on the server to refuse; rejected,
     the server stores a plaintext name or a plaintext new file today.
+
+17. **The SDK does not hand an encrypted file to the host (owner,
+    2026-11-12).** A host that subscribed to `onEditorOpen` opens files
+    its own way, and only the portal's editor page runs the key flow, so
+    a host that opened an encrypted file would get a broken editor or
+    ciphertext. For an encrypted item the SDK skips the event and opens
+    the editor itself; the event is unchanged for other files. Handing
+    the item over with an `encrypted` mark was the alternative, left for a
+    later change if an integrator asks for it. Client-only: no server
+    behaviour is involved.
 
 ## Implementation notes
 
@@ -1246,9 +1321,15 @@ BLOCKED or "after <x>" waits.
   container's `/etc/onlyoffice/documentserver/local.json`), its log is
   `docker logs` of the editors container; `info/info.json` answers only
   from inside that container.
-- **Decisions pending.** Proposal decisions 5, 6 and 7 and decision 16
-  above are the owner's; tasks 9.4, 9.6, 9.10 and 9.11 wait for them and are
-  not decided by the implementing session.
+- **Decisions pending.** Proposal decisions 5 and 6 are the owner's; task
+  9.10 waits for them and is not decided by the implementing session.
+  Tasks 9.4 and 9.6 were decided on 2026-11-10 and 9.11 on 2026-11-12
+  (decisions 16 and 17).
+
+The requirement "SDK does not open encrypted files in the editor" now
+describes the opposite of its name (the SDK opens them when the capability
+is present), so the delta renames it to "SDK opens encrypted files only with
+the Document Server capability" (2026-11-10).
 
 ## Risks / Trade-offs
 
@@ -1312,8 +1393,9 @@ BLOCKED or "after <x>" waits.
 ## Migration Plan
 
 1. Land the capability flag on the server with a default of `false`.
-2. Land the client refusal path; behind the feature flag nothing changes for
-   ordinary users.
+2. Land the client refusal path. (Written while the feature was behind a
+   flag; since 2026-11-03 it is a beta offered to every user, so the
+   refusal reaches everyone.)
 3. When the Document Server version ships, flip the capability on staging,
    run the new E2E suite and the recorded runs, then production.
 4. Rollback: turn the capability off; encrypted files stop opening in the
@@ -1353,11 +1435,6 @@ BLOCKED or "after <x>" waits.
   9.x images.
 - Will the Document Server publish a capability signal (health check or
   settings) to replace the library-path probe? Owner: Document Server team.
-- Role-based filling in a private virtual data room: does the encrypted
-  editor work in the embedded mode fillers get, and does every filler hold an
-  access entry for the form? A private virtual data room can only be created
-  through the API today. To be verified on a Document Server with the crypto
-  add-on before a policy is set.
 - When the last editor of an encrypted document leaves, which callback does
   the Document Server send (status 1 with no users, status 4, or none), and
   when does it drop the session? The portal's tracker and D7 depend on it.
@@ -1366,11 +1443,6 @@ BLOCKED or "after <x>" waits.
   the join race of DS-17 and the duplicated replay of DS-19 remain; the
   first-open race and DS-18 are closed by that build. Owner: Document
   Server team.
-- Mentions and comments on encrypted files: `onRequestSendNotify` carries
-  the comment text to the portal; withhold, or accept as plaintext
-  metadata? Owner: feature owner (proposal decision 7).
-- Create-new from the editor on an encrypted file: encrypted creation in
-  the same folder, or withheld? Owner: feature owner (proposal decision 7).
 - Inserted images: do `cryptoimg://` images reach the Document Server's media
   store or the portal in plaintext when a document is saved or co-edited?
   Task 4.4; owner: Document Server team for the answer, this change for the

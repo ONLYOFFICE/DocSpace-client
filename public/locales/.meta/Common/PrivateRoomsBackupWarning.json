@@ -3,7 +3,7 @@
   "content": "Backups do not include the encryption keys of private rooms. A workspace restored from a backup cannot open the files in its private rooms.",
   "content_en_sha1_hash": "53bbcd206bf4d2d6991b53e72f8dad35e984a03d",
   "created_at": "2026-11-06T10:44:58.242Z",
-  "updated_at": "2026-11-06T11:16:59.651Z",
+  "updated_at": "2026-11-09T17:07:35.051Z",
   "comment": {
     "text": "Notice on the Data backup, Automatic backup and Restore pages of the portal settings, shown only while private (end-to-end encrypted) rooms are available; on the Restore page it also sits in the warning above the restore confirmation checkbox and in the backups list dialog. Two full sentences telling administrators that a backup carries no encryption keys of private rooms, so the files in those rooms stay unreadable after a restore.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/sub-components/PrivateRoomsBackupWarning.tsx",
-      "line_number": 60,
-      "context": "<div className={styles.privateRoomsWarning}>\n <PublicRoomBar\n barIsVisible\n iconName={CatalogPrivateReactSvgUrl}\n headerText={t(\"Common:PrivateRoomsBackupWarningTitle\")}\n bodyText={t(\"Common:PrivateRoomsBackupWarning\")}\n dataTestId=\"private-rooms-backup-warning\"\n />\n </div>\n );\n };",
+      "line_number": 70,
+      "context": "<div className={classNames(styles.privateRoomsWarning, className)}>\n <PublicRoomBar\n barIsVisible\n iconName={CatalogPrivateReactSvgUrl}\n headerText={t(\"Common:PrivateRoomsBackupWarningTitle\")}\n bodyText={t(\"Common:PrivateRoomsBackupWarning\")}\n dataTestId=\"private-rooms-backup-warning\"\n style={barStyle}\n />\n </div>\n );",
       "module": "/packages/shared"
     }
   ],

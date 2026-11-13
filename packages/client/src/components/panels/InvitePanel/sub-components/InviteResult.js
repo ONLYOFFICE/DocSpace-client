@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useEffect, useId, useRef } from "react";
+
 import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
@@ -49,7 +51,16 @@ const InviteResult = ({ t, outcome }) => {
   const refusedOtherwise = refused
     .filter((entry) => !entry.noKey)
     .map((entry) => entry.member);
-  const withoutKey = skipped.filter((member) => member.reason === "no-key");
+  // Spec: private-rooms/room-membership, "Invitees without usable keys are skipped with a warning"
+  const notInvitedWithoutKey = [
+    ...refusedWithoutKey,
+    ...skipped.filter(
+      (member) => member.reason === "no-key" && member.notInvited,
+    ),
+  ];
+  const withoutKey = skipped.filter(
+    (member) => member.reason === "no-key" && !member.notInvited,
+  );
   const withRefusedKey = skipped.filter(
     (member) => member.reason === "key-mismatch-refused",
   );
@@ -57,18 +68,43 @@ const InviteResult = ({ t, outcome }) => {
     pending.flatMap((entry) => entry.missingFileIds),
   ).size;
 
+  const regionRef = useRef(null);
+  const grantedId = useId();
+  const pendingId = useId();
+
+  // The result replaces the list the user was in: without the focus a
+  // keyboard is left on the page body and a screen reader says nothing.
+  useEffect(() => {
+    regionRef.current?.focus();
+  }, []);
+
   return (
-    <div data-testid="invite_panel_result">
+    <div
+      data-testid="invite_panel_result"
+      ref={regionRef}
+      role="region"
+      aria-label={t("Common:EncryptedInviteResultTitle")}
+      tabIndex={-1}
+      className={styles.inviteResult}
+    >
       {granted.length ? (
-        <section data-testid="invite_panel_result_granted">
-          <Heading className={styles.subHeader}>{t("Common:Invited")}</Heading>
+        <section
+          data-testid="invite_panel_result_granted"
+          aria-labelledby={grantedId}
+        >
+          <Heading id={grantedId} className={styles.subHeader}>
+            {t("Common:Invited")}
+          </Heading>
           <Text>{namesOf(granted)}</Text>
         </section>
       ) : null}
 
       {pending.length ? (
-        <section data-testid="invite_panel_result_pending">
-          <Heading className={styles.subHeader}>
+        <section
+          data-testid="invite_panel_result_pending"
+          aria-labelledby={pendingId}
+        >
+          <Heading id={pendingId} className={styles.subHeader}>
             {t("Common:EncryptedAccessPending")}
           </Heading>
           <Text>{namesOf(pending.map((entry) => entry.member))}</Text>
@@ -82,12 +118,15 @@ const InviteResult = ({ t, outcome }) => {
         </section>
       ) : null}
 
-      {refused.length ? (
-        <section data-testid="invite_panel_result_refused">
-          {refusedWithoutKey.length ? (
+      {notInvitedWithoutKey.length || refusedOtherwise.length ? (
+        <section
+          data-testid="invite_panel_result_refused"
+          aria-label={t("Common:NotInvited")}
+        >
+          {notInvitedWithoutKey.length ? (
             <Text className={styles.description}>
               {t("Common:EncryptedInviteNoKey", {
-                users: namesOf(refusedWithoutKey),
+                users: namesOf(notInvitedWithoutKey),
               })}
             </Text>
           ) : null}
@@ -101,8 +140,11 @@ const InviteResult = ({ t, outcome }) => {
         </section>
       ) : null}
 
-      {skipped.length ? (
-        <section data-testid="invite_panel_result_skipped">
+      {withoutKey.length || withRefusedKey.length ? (
+        <section
+          data-testid="invite_panel_result_skipped"
+          aria-label={t("Common:NotInvited")}
+        >
           {withoutKey.length ? (
             <Text className={styles.description}>
               {t("Common:EncryptedSkippedNoKeys", {

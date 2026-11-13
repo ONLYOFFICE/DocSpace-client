@@ -64,7 +64,7 @@ hidden.
 - Write the contract down as `contract-v1.md` in this change folder (draft
   of 2026-10-29, from the add-on code of build 10.0.0.133, the server code
   and the live run), with numbered obligations for the Document Server
-  (DS-1 to DS-18), the portal server (P-1 to P-8) and the client, so the
+  (DS-1 to DS-20), the portal server (P-1 to P-8) and the client, so the
   Document Server team can sign off item by item.
 - Stamp the crypto bundle (library version and source commit as a banner
   and as exported constants), export the form-flag constant, and hand the
@@ -180,3 +180,6 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
    creates an encrypted file in the same folder or is withheld, and whether
    mention notifications, which carry the comment text to the portal, stay
    enabled. Found in the client read of 2026-10-30; owner: feature owner.
+   Decided by the owner on 2026-11-10: create-new is withheld for an
+   encrypted file, and a mention notification is sent without the comment
+   text.

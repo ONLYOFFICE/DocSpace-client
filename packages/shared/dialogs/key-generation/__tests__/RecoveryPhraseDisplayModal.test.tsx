@@ -33,13 +33,31 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import { RecoveryPhraseDisplayModal } from "../RecoveryPhraseDisplayModal";
 
-const MNEMONIC = Array.from({ length: 24 }, () => "abandon").join(" ");
+const WORDS = [
+  "expose", "afford", "math", "truly", "render", "kid", "critic", "army",
+  "attract", "dream", "peasant", "clerk", "vault", "combine", "carry",
+  "pudding", "truly", "hazard", "loud", "lizard", "vessel", "finger",
+  "creek", "cargo",
+];
+const MNEMONIC = WORDS.join(" ");
+
+const getAcknowledge = () =>
+  screen.getByRole("checkbox", { name: "Common:RecoveryPhraseAcknowledge" });
+
+const getContinue = () =>
+  screen.getByRole("button", { name: "Common:ContinueButton" });
+
+const SAVE_ACTIONS = [
+  "Common:RecoveryKitPrint",
+  "Common:Download",
+  "Common:CopyToClipboard",
+];
 
 const renderModal = () => {
   const onConfirm = vi.fn();
@@ -88,5 +106,72 @@ describe("RecoveryPhraseDisplayModal", () => {
 
     expect(onCancel).toHaveBeenCalledTimes(1);
     expect(onConfirm).not.toHaveBeenCalled();
+  });
+
+  it("Acknowledge before close", () => {
+    renderModal();
+    expect(getAcknowledge()).not.toBeChecked();
+    expect(getContinue()).toBeDisabled();
+  });
+
+  it("Words written down by hand", async () => {
+    const user = userEvent.setup();
+    const { onConfirm } = renderModal();
+
+    expect(getAcknowledge()).toBeEnabled();
+    await user.click(getAcknowledge());
+    expect(getContinue()).toBeEnabled();
+
+    await user.click(getContinue());
+    expect(onConfirm).toHaveBeenCalledTimes(1);
+  });
+
+  it("Save action does not acknowledge", async () => {
+    const user = userEvent.setup();
+    const { onConfirm } = renderModal();
+    const writeText = vi
+      .spyOn(navigator.clipboard, "writeText")
+      .mockResolvedValue(undefined);
+
+    await user.click(
+      screen.getByRole("button", { name: "Common:CopyToClipboard" }),
+    );
+
+    expect(writeText).toHaveBeenCalledWith(MNEMONIC);
+    expect(getAcknowledge()).not.toBeChecked();
+    expect(getContinue()).toBeDisabled();
+    expect(onConfirm).not.toHaveBeenCalled();
+  });
+
+  it("Save actions of equal weight", () => {
+    renderModal();
+    const classes = SAVE_ACTIONS.map(
+      (name) => screen.getByRole("button", { name }).className,
+    );
+    expect(new Set(classes).size).toBe(1);
+  });
+
+  it("Numbered words", () => {
+    renderModal();
+    const list = screen.getByTestId("recovery_phrase_words");
+
+    expect(list.tagName).toBe("OL");
+    expect(list).toHaveAttribute("dir", "ltr");
+    expect(
+      within(list)
+        .getAllByRole("listitem")
+        .map((item) => item.textContent),
+    ).toEqual(WORDS);
+  });
+
+  it("Numbers stay out of the copy", () => {
+    renderModal();
+    const list = screen.getByTestId("recovery_phrase_words");
+
+    expect(list.textContent).toBe(MNEMONIC);
+
+    const setData = vi.fn();
+    fireEvent.copy(list, { clipboardData: { setData } });
+    expect(setData).toHaveBeenCalledWith("text/plain", MNEMONIC);
   });
 });

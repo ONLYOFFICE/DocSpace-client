@@ -81,6 +81,7 @@ import {
 import { toastr, type TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { FolderType } from "@onlyoffice/apps-ui-kit/enums";
 import type { Nullable } from "@docspace/shared/types";
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 import { getRefreshFileAction } from "@/utils/refreshFileAction";
 
@@ -126,6 +127,10 @@ const useEditorEvents = ({
   openShareFormDialog,
   onOpenRoleMappingPanel,
   disconnectUsers,
+  takeFieldsSnapshot,
+  reportFieldChanges,
+  scheduleFieldChanges,
+  closeFieldChanges,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -272,6 +277,8 @@ const useEditorEvents = ({
     frameCallCommand("setIsLoaded");
 
     checkAndRequestRoles();
+
+    takeFieldsSnapshot?.();
 
     frameCallEvent({
       event: "onAppReady",
@@ -547,13 +554,16 @@ const useEditorEvents = ({
     t,
     successAuth,
     fileInfo?.id,
+    takeFieldsSnapshot,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");
   }, []);
 
-  const onSDKRequestClose = React.useCallback(() => {
+  const onSDKRequestClose = React.useCallback(async () => {
+    await closeFieldChanges?.();
+
     const editorGoBack = sdkConfig?.editorGoBack;
     const returnUrl = getSafeReturnUrl(sdkConfig?.returnUrl);
 
@@ -580,6 +590,7 @@ const useEditorEvents = ({
     sdkConfig?.returnUrl,
     config?.editorConfig?.customization?.goback?.url,
     fileInfo,
+    closeFieldChanges,
   ]);
 
   const getDefaultFileName = React.useCallback(
@@ -661,6 +672,7 @@ const useEditorEvents = ({
         changesModified.forEach((item) => {
           item.created = `${new Date(item.created).toLocaleString(
             config?.editorConfig.lang,
+            { numberingSystem: LATIN_NUMBERING_SYSTEM },
           )}`;
         });
 
@@ -668,6 +680,7 @@ const useEditorEvents = ({
           ...(changes.length !== 0 && { changes: changesModified }),
           created: `${new Date(fileHistory[i].created).toLocaleString(
             config?.editorConfig.lang,
+            { numberingSystem: LATIN_NUMBERING_SYSTEM },
           )}`,
           ...(serverVersion && { serverVersion }),
           key: fileHistory[i].key,
@@ -769,7 +782,8 @@ const useEditorEvents = ({
       const currEvent = event as TEvent;
 
       const actionData = currEvent.data.actionLink;
-      const comment = currEvent.data.message;
+      // Spec: editor-integration, "Mention notifications of an encrypted file carry no comment text"
+      const comment = fileInfo?.encrypted ? "" : currEvent.data.message;
       const emails = currEvent.data.emails;
 
       if (!fileInfo?.id) return;
@@ -802,7 +816,7 @@ const useEditorEvents = ({
         toastr.error(e as TData);
       }
     },
-    [fileInfo?.id, t, usersInRoom],
+    [fileInfo?.id, fileInfo?.encrypted, t, usersInRoom],
   );
 
   const onSDKRequestUsers = React.useCallback(
@@ -895,9 +909,14 @@ const useEditorEvents = ({
 
   const onDocumentStateChange = React.useCallback(
     (event: object) => {
+      // Before the readiness check: the editor keeps the handler of its first render. A rename shows as a change at
+      // once, while its save may come only when the editor is left, so the fields are read on both.
+      const modified = (event as { data: boolean }).data;
+      scheduleFieldChanges?.(modified);
+
       if (!documentReady) return;
 
-      setDocSaved(!(event as { data: boolean }).data);
+      setDocSaved(!modified);
 
       setTimeout(() => {
         if (docSaved) {
@@ -931,6 +950,7 @@ const useEditorEvents = ({
       documentReady,
       successAuth,
       organizationName,
+      scheduleFieldChanges,
     ],
   );
 
@@ -1120,6 +1140,8 @@ const useEditorEvents = ({
             onOpenRoleMappingPanel?.(event.data);
         })
         .with(StartFillingMode.StartFillingRoomForm, async () => {
+          await reportFieldChanges?.();
+
           await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
 
           await disconnectUsers?.();
@@ -1132,7 +1154,12 @@ const useEditorEvents = ({
           console.error("Unknown start filling mode");
         });
     },
-    [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
+    [
+      config?.startFillingMode,
+      openShareFormDialog,
+      onOpenRoleMappingPanel,
+      reportFieldChanges,
+    ],
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {

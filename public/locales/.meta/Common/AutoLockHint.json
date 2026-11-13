@@ -1,19 +1,19 @@
 {
   "key_path": "AutoLockHint",
-  "content": "Timed options also lock keys when the tab is hidden. Keys always lock after 30 minutes without use.",
-  "content_en_sha1_hash": "e65d87f9ca87f2cdce7743fc4790936af83fec2f",
-  "created_at": "2026-07-27T13:06:59.744Z",
-  "updated_at": "2026-11-05T16:49:39.980Z",
+  "content": "The 5 and 15 minute options also lock keys when the tab is hidden.",
+  "content_en_sha1_hash": "c1d4fa05020f1617c908de5a1daa4bf3667ab95a",
+  "created_at": "2026-11-11T14:26:20.239Z",
+  "updated_at": "2026-11-11T14:28:44.842Z",
   "comment": {
-    "text": "Instructional hint text located below the AutoLock setting label that explains how keys are locked based on tab visibility and inactivity.",
+    "text": "Hint under the auto-lock selector on the Keys management tab of the profile, which offers 5, 15 and 30 minutes. It says that the two shorter options lock the encryption keys not only after inactivity but also as soon as the browser tab is hidden; the 30 minute option does not. Keys means encryption keys, tab means a browser tab. One short sentence.",
     "is_auto": true,
-    "updated_at": "2026-07-27T13:41:04.599Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-11T14:28:44.842Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/AutoLockSetting.tsx",
-      "line_number": 90,
+      "line_number": 88,
       "context": "<div className={styles.label}>\n <Text id={labelId} fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:AutoLockLabel\")}\n </Text>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:AutoLockHint\")}\n </Text>\n </div>\n <ComboBox\n className={styles.select}\n options={options}",
       "module": "/packages/client"
     }

@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
@@ -67,6 +68,8 @@ interface AccessSelectorProps {
 	availableAccess?: number[];
 	scaledOptions?: boolean;
 	dataTestId?: string;
+	/** Whose role the list sets; without it the list sets the role of new invitees. */
+	subjectName?: string;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -93,6 +96,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 	availableAccess,
 	scaledOptions,
 	dataTestId,
+	subjectName,
 }) => {
 	const [horizontalOrientation, setHorizontalOrientation] = useState(false);
 	const [width, setWidth] = useState(manualWidth || 0);
@@ -107,6 +111,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 		setWidth(offsetWidth - 32);
 	}, [containerRef, containerRef?.current?.offsetWidth]);
 
+	const isPrivateRoom = useContext(PrivateRoomInviteContext);
+
 	const accessOptions = getAccessOptions(
 		t,
 		roomType as RoomsType,
@@ -115,6 +121,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 		isOwner,
 		isAdmin,
 		standalone,
+		isPrivateRoom,
 	);
 
 	const selectedOption = accessOptions.filter(
@@ -138,6 +145,12 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 	}, []);
 
 	const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
+
+	const selectedLabel =
+		selectedOption && "label" in selectedOption ? selectedOption.label : "";
+	const ariaLabel = subjectName
+		? t("Common:RoleOfUser", { name: subjectName, role: selectedLabel })
+		: t("Common:RoleWithValue", { role: selectedLabel });
 
 	return (
 		<div className="access-selector" style={{ marginInlineEnd: "16px" }}>
@@ -163,6 +176,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 					availableAccess={availableAccess}
 					scaledOptions={scaledOptions}
 					dataTestId={dataTestId}
+					ariaLabel={ariaLabel}
 					showDisabledItems={true}
 				/>
 			) : null}
@@ -192,6 +206,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 					availableAccess={availableAccess}
 					scaledOptions={scaledOptions}
 					dataTestId={dataTestId}
+					ariaLabel={ariaLabel}
 					showDisabledItems={true}
 				/>
 			) : null}

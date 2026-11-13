@@ -1620,6 +1620,7 @@ class FilesStore {
     switch (this.selectedFolderStore.rootFolderType) {
       case FolderType.USER:
       case FolderType.Rooms:
+      case FolderType.PrivateRooms:
         return true;
       case FolderType.SHARE: {
         const canCreateInSharedFolder = this.selectedFolderStore.access === 1;
@@ -2296,7 +2297,6 @@ class FilesStore {
       subjectId,
       subjectOwnerId,
       filterValue,
-      type,
       withSubfolders: withRoomsSubfolders,
       searchInContent: searchInContentRooms,
       tags,
@@ -2322,7 +2322,7 @@ class FilesStore {
       isAiSectionFolder ||
       isTemplatesFolder
         ? filterValue ||
-          type ||
+          this.roomsFilter.hasTypeFilter() ||
           provider ||
           withRoomsSubfolders ||
           searchInContentRooms ||

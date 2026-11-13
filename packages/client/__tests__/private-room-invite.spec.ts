@@ -51,6 +51,7 @@ import {
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import type { Page } from "@playwright/test";
+import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
@@ -88,6 +89,34 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
       .fill(passphrase);
     await prompt.getByRole("button", { name: "Confirm" }).click();
   }
+};
+
+// Moves through an open role list with the arrow keys until the named option
+// is the active one, then picks it with Enter.
+const pickRoleWithKeyboard = async (page: Page, option: string) => {
+  for (let step = 0; step < 12; step += 1) {
+    const active = await page.evaluate(() => {
+      const id = document.activeElement?.getAttribute("aria-activedescendant");
+      return id ? (document.getElementById(id)?.textContent ?? "") : "";
+    });
+    if (active.trim().startsWith(option)) break;
+    await page.keyboard.press("ArrowDown");
+  }
+  await page.keyboard.press("Enter");
+};
+
+const openInvitePanelWithInvitees = async (page: Page, baseUrl: string) => {
+  await page.goto(`${baseUrl}/private/filter`);
+  const row = page.getByTestId("table-row-0");
+  await expect(row).toBeVisible({ timeout: 15000 });
+  await row.getByTestId("context-menu-button").first().click();
+  await page.getByTestId("option_invite-users-to-room").click();
+  await page.getByTestId("invite_panel_choose_from_list_link").click();
+  const people = page.getByTestId("invite_panel_people_selector");
+  await people.getByTestId("selector-item-0").click();
+  await people.getByTestId("selector-item-1").click();
+  await people.getByTestId("selector_submit_button").click();
+  return page.getByRole("dialog", { name: "Invite", exact: true });
 };
 
 test.describe("Private room — invite entry point", () => {
@@ -167,6 +196,228 @@ test.describe("Private room — invite entry point", () => {
     const sendButton = page.getByTestId("invite_panel_send_button");
     await expect(sendButton).toBeVisible({ timeout: 5000 });
     await expect(sendButton).toBeDisabled();
+  });
+
+  test("Invitee removed from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await bootstrapEncryption(page, mockRequest, baseUrl);
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, DAN]),
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+    );
+    const panel = await openInvitePanelWithInvitees(page, baseUrl);
+
+    const roleList = panel.getByRole("button", {
+      name: `Role of ${CAROL.displayName}: Viewer`,
+    });
+    await roleList.focus();
+    await page.keyboard.press("Enter");
+    await pickRoleWithKeyboard(page, "Remove");
+
+    await expect(panel.getByText(CAROL.displayName)).toHaveCount(0);
+    await expect(panel.getByText(DAN.displayName)).toBeVisible();
+    await expect(page.getByTestId("invite_panel_search_input")).toBeFocused();
+  });
+
+  test("Role chosen from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await bootstrapEncryption(page, mockRequest, baseUrl);
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, DAN]),
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+    );
+    const panel = await openInvitePanelWithInvitees(page, baseUrl);
+
+    await panel
+      .getByRole("button", { name: `Role of ${DAN.displayName}: Viewer` })
+      .focus();
+    await page.keyboard.press("Enter");
+    await pickRoleWithKeyboard(page, "Content creator");
+
+    const picked = panel.getByRole("button", {
+      name: `Role of ${DAN.displayName}: Content creator`,
+    });
+    await expect(picked).toBeFocused();
+    await expect(
+      panel.getByRole("button", {
+        name: `Role of ${CAROL.displayName}: Viewer`,
+      }),
+    ).toBeVisible();
+    await expect(
+      panel.getByRole("button", { name: "Role: Viewer", exact: true }),
+    ).toBeVisible();
+  });
+
+  // Sets up a private room with one encrypted file wrapped for the inviter,
+  // invites Carol, who has a key, and holds the key writes of the
+  // re-encryption until `release` is called.
+  const startHeldInvitation = async (
+    page: Page,
+    mockRequest: WorkerFixture,
+    baseUrl: string,
+  ) => {
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const carol = await generateIdentityKeyPair();
+    const carolKey = {
+      id: "carol-1",
+      userId: CAROL.id,
+      publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
+      privateKeyEnc: "",
+      date: "2026-01-01T00:00:00.000Z",
+      cryptoEngineId: "",
+    };
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      // Ahead of the room list, whose pattern also takes the members request.
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL]),
+    );
+    const ownKey = { ...keysHandle.getKeys()[0], userId: TEST_USER_ID };
+    accessHandle.current!.setRoomKeys(ROOM_ID, [ownKey]);
+
+    await navigateInApp(page, `/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        new URL(res.url()).pathname.endsWith(`/files/${ROOM_ID}`) &&
+        res.ok(),
+      { timeout: 15000 },
+    );
+    await page.locator("#customFileInput").first().setInputFiles({
+      name: "memo.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("memo"),
+    });
+    await unlockIfPrompted(page, passphrase);
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(1);
+    // Carol's key reaches the room only after the upload has settled, or the
+    // client would wrap the new file for her on its own.
+    await page.waitForLoadState("networkidle");
+    accessHandle.current!.setRoomKeys(ROOM_ID, [ownKey, carolKey]);
+
+    let release = () => {};
+    const held = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let keyWriteSeen = false;
+    await page.route(/\/api\/2\.0\/files\/\d+\/access/, async (route) => {
+      if (route.request().method() === "PUT") {
+        keyWriteSeen = true;
+        await held;
+      }
+      await route.fallback().catch(() => {});
+    });
+
+    await navigateInApp(page, "/private/filter");
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await row.getByTestId("context-menu-button").first().click();
+    await page.getByTestId("option_invite-users-to-room").click();
+    await page.getByTestId("invite_panel_choose_from_list_link").click();
+    const people = page.getByTestId("invite_panel_people_selector");
+    await people.getByTestId("selector-item-0").click();
+    await people.getByTestId("selector_submit_button").click();
+    await page.getByTestId("invite_panel_send_button").click();
+    await unlockIfPrompted(page, passphrase);
+    await expect.poll(() => keyWriteSeen, { timeout: 30000 }).toBe(true);
+
+    const keyHolders = () =>
+      filesHandle
+        .current!.getFiles()[0]
+        .fileKeys.map((k) => String(k.userId))
+        .sort();
+    // The mocked missing-keys route takes the room's members from its key
+    // list. Carol joins it only now: earlier the upload would wrap for her.
+    const countCarolAsMember = () =>
+      filesHandle.current!.setRoomUserKeys([carolKey]);
+    return { release, keyHolders, passphrase, countCarolAsMember };
+  };
+
+  test("Re-encryption aborted: the panel is closed", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { release, keyHolders } = await startHeldInvitation(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    expect(keyHolders()).toEqual([TEST_USER_ID]);
+
+    const panel = page.getByRole("dialog", { name: "Invite", exact: true });
+    await panel.getByRole("button", { name: "Close" }).click();
+    await expect(panel).toBeHidden();
+    release();
+
+    await expect
+      .poll(keyHolders, { timeout: 30000 })
+      .toEqual([CAROL.id, TEST_USER_ID].sort());
+  });
+
+  test("Re-encryption aborted: the page is reloaded", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { keyHolders, passphrase, countCarolAsMember } =
+      await startHeldInvitation(page, mockRequest, baseUrl);
+    expect(keyHolders()).toEqual([TEST_USER_ID]);
+    countCarolAsMember();
+
+    await page.reload();
+    await unlockIfPrompted(page, passphrase);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    expect(keyHolders()).toEqual([TEST_USER_ID]);
+
+    await page.locator(".info-panel-toggle").click();
+    await row.click();
+    await page.getByTestId("info_members_tab").click();
+
+    await expect(
+      page.getByTestId("info_panel_members_user_access_pending"),
+    ).toContainText("Access pending", { timeout: 15000 });
   });
 
   test("Mixed invitation: the panel lists the invited member and the one without keys, and invites the latter again", async ({
@@ -252,9 +503,32 @@ test.describe("Private room — invite entry point", () => {
     await expect(page.getByTestId("invite_panel_result_granted")).toContainText(
       CAROL.displayName,
     );
-    await expect(page.getByTestId("invite_panel_result_skipped")).toContainText(
+    await expect(page.getByTestId("invite_panel_result_refused")).toContainText(
       DAN.displayName,
     );
+    await test.step("Re-encryption completes", async () => {
+      await expect(
+        // The upload of the file is still listed, so the indicator counts both.
+        page.getByRole("progressbar", { name: "Processes: 2" }),
+      ).toBeVisible();
+    });
+    await test.step("Reason shown once", async () => {
+      await expect(
+        page.getByRole("alert").filter({ hasText: DAN.displayName }),
+      ).toHaveCount(0);
+    });
+    await test.step("Result shown", async () => {
+      const result = page.getByRole("region", { name: "Invitation results" });
+      await expect(result).toBeFocused();
+      await expect(
+        result.getByRole("region", { name: "Invited", exact: true }),
+      ).toContainText(CAROL.displayName);
+    });
+    await test.step("Result with a skipped invitee", async () => {
+      await expect(
+        page.getByRole("region", { name: "Not invited" }),
+      ).toContainText(DAN.displayName);
+    });
     const storedFile = filesHandle.current!.getFiles()[0];
     expect(storedFile.fileKeys.map((k) => String(k.userId)).sort()).toEqual(
       [CAROL.id, TEST_USER_ID].sort(),
@@ -268,7 +542,7 @@ test.describe("Private room — invite entry point", () => {
     await expect(panel.getByText(DAN.displayName)).toBeVisible();
     await expect(panel.getByText(CAROL.displayName)).toHaveCount(0);
   });
-  test("Invitee without a key named: the panel names the invitee left out before the grant and shares the files with the one it added", async ({
+  test("Mixed invitation: the panel names the invitee left out before the grant and shares the files with the one it added", async ({
     page,
     mockRequest,
     baseUrl,
@@ -351,12 +625,12 @@ test.describe("Private room — invite entry point", () => {
       CAROL.displayName,
     );
     // The invitees are verified before the security update: Dan has no key,
-    // so he is left out of it and named among the skipped, not refused by the
-    // server.
-    await expect(page.getByTestId("invite_panel_result_skipped")).toContainText(
+    // so he is left out of it and named as not invited, with the sentence a
+    // refusal of the server would get.
+    await expect(page.getByTestId("invite_panel_result_refused")).toContainText(
       DAN.displayName,
     );
-    await expect(page.getByTestId("invite_panel_result_refused")).toHaveCount(0);
+    await expect(page.getByTestId("invite_panel_result_skipped")).toHaveCount(0);
     const storedFile = filesHandle.current!.getFiles()[0];
     expect(storedFile.fileKeys.map((k) => String(k.userId)).sort()).toEqual(
       [CAROL.id, TEST_USER_ID].sort(),

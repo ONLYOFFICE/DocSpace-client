@@ -70,6 +70,7 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { isMarkdownFile } from "SRC_DIR/helpers/plugins/markdown";
 import { CategoryType } from "@docspace/shared/constants";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -127,6 +128,10 @@ self: FilesActionStore
 
   if (correctCategoryType === CategoryType.Forms) {
     filter.searchArea = RoomSearchArea.Forms;
+  }
+
+  if (correctCategoryType === CategoryType.PrivateRooms) {
+    filter.searchArea = RoomSearchArea.PrivateRooms;
   }
 
   if (correctCategoryType === CategoryType.AiHub) {
@@ -672,12 +677,15 @@ self: FilesActionStore,
           !item.startFilling;
 
       // A Knowledge room's files are sources to index: read or replaced by
-      // an upload, never edited, whatever the caller's role.
-      const readOnlyRoom =
+      // an upload, never edited, whatever the caller's role. A Markdown file
+      // reaching this point has no Markdown plugin to edit it (the plugin
+      // opened it above otherwise), so it is only viewed.
+      const readOnly =
         self.selectedFolderStore.roomType === RoomsType.KnowledgeRoom ||
-        self.selectedFolderStore.parentRoomType === FolderType.KnowledgeRoom;
+        self.selectedFolderStore.parentRoomType === FolderType.KnowledgeRoom ||
+        isMarkdownFile(item.fileExst);
 
-      return openDocEditor(id, readOnlyRoom, shareKey, canEditForm && !readOnlyRoom);
+      return openDocEditor(id, readOnly, shareKey, canEditForm && !readOnly);
     }
 
     if (isMediaOrImage) {

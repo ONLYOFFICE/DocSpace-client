@@ -96,6 +96,37 @@ describe("KeysManagementRoute", () => {
     expect(screen.getByTestId("keys-management")).toBeInTheDocument();
   });
 
+  it("Guest", () => {
+    renderRoute({ isGuest: true });
+
+    expectProfileFallback();
+  });
+
+  it("Guest holding a key", () => {
+    const getEncryptionKeys = vi.fn(async () => []);
+    renderRoute({
+      isGuest: true,
+      isSectionAvailable: false,
+      encryptionKeys: [KEY],
+      getEncryptionKeys,
+    });
+
+    expectProfileFallback();
+  });
+
+  it("does not read the keys of a guest", () => {
+    const getEncryptionKeys = vi.fn(async () => []);
+    renderRoute({
+      isGuest: true,
+      isSectionAvailable: false,
+      encryptionKeys: null,
+      getEncryptionKeys,
+    });
+
+    expect(getEncryptionKeys).not.toHaveBeenCalled();
+    expectProfileFallback();
+  });
+
   it("reads the keys before deciding when they are not known yet", async () => {
     let finishRead!: () => void;
     const getEncryptionKeys = vi.fn(

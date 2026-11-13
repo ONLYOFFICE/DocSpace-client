@@ -62,7 +62,7 @@ export const getStepsData = (
           t={t}
           isMultipleUpload={false}
           migratorName="Nextcloud"
-          acceptedExtensions={[".zip"]}
+          acceptedExtensions={[".zip", ".tgz", ".tar.gz", ".gz"]}
         />
       ),
     },

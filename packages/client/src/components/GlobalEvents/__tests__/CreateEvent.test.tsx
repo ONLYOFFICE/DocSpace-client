@@ -39,6 +39,7 @@ import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
 import type React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createSkill } from "@docspace/shared/api/ai";
 
 type TDeferred<T> = {
   promise: Promise<T>;
@@ -55,8 +56,11 @@ const deferred = <T,>(): TDeferred<T> => {
 
 const mocks = vi.hoisted(() => ({
   runEncryptedFileCreation: vi.fn(),
+  isKeyListUnreadable: vi.fn(async () => false),
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
 }));
+
+vi.mock("@docspace/shared/api/ai", () => ({ createSkill: vi.fn() }));
 
 vi.mock("SRC_DIR/i18n", () => ({
   default: { t: (key: string) => key, exists: () => true, language: "en" },
@@ -100,6 +104,9 @@ vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   return { ModalDialog };
 });
 
+const { RoomsType } = await import("@docspace/shared/enums");
+const api = (await import("@docspace/shared/api")).default;
+
 const CreateEvent = (await import("../CreateEvent"))
   .default as unknown as React.ComponentType<Record<string, unknown>>;
 
@@ -110,7 +117,12 @@ const ROOM_ID = 20;
 const createStores = ({
   keepNewFileName = false,
   isPrivacy = true,
-}: { keepNewFileName?: boolean; isPrivacy?: boolean } = {}) => {
+  roomType = undefined,
+}: {
+  keepNewFileName?: boolean;
+  isPrivacy?: boolean;
+  roomType?: (typeof RoomsType)[keyof typeof RoomsType];
+} = {}) => {
   const filesSettingsStore = observable(
     {
       keepNewFileName,
@@ -163,6 +175,7 @@ const createStores = ({
       isIndexedFolder: false,
       navigationPath: [],
       isRoom: true,
+      roomType,
     },
     treeFoldersStore: { isRecycleBinFolder: false, isPrivacyFolder: isPrivacy },
     uploadDataStore: {
@@ -173,10 +186,15 @@ const createStores = ({
         publicKey: "public-key",
         publicKeyId: "key-1",
       }),
+      isKeyListUnreadable: mocks.isKeyListUnreadable,
     },
     oformsStore: { gallerySelected: null, setGallerySelected: vi.fn() },
     currentTariffStatusStore: { setPortalTariff: vi.fn() },
     publicRoomStore: { publicRoomKey: null },
+    pluginStore: {
+      openMarkdownFile: vi.fn(async () => undefined),
+      isMarkdownEditorAvailable: true,
+    },
   };
 };
 
@@ -332,6 +350,21 @@ describe("CreateEvent - one create action makes one file", () => {
     expect(stores.filesStore.openDocEditor).toHaveBeenCalledTimes(1);
   });
 
+  it("Read fails", async () => {
+    mocks.isKeyListUnreadable.mockResolvedValueOnce(true);
+    const stores = createStores({ keepNewFileName: true });
+    const request = createRequest("docx");
+    renderCreateEvent(stores, request);
+    await flush();
+
+    expect(mocks.runEncryptedFileCreation).not.toHaveBeenCalled();
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptionKeysLoadFailed",
+    );
+    expect(stores.filesStore.openDocEditor).not.toHaveBeenCalled();
+    expect(request.onClose).toHaveBeenCalled();
+  });
+
   it("Another file type requested during a creation", async () => {
     const stores = createStores({ keepNewFileName: true });
     const view = renderCreateEvent(stores, createRequest("pptx"));
@@ -366,5 +399,83 @@ describe("CreateEvent - one create action makes one file", () => {
 
     expect(stores.filesStore.createFile).toHaveBeenCalledTimes(1);
     expect(mocks.runEncryptedFileCreation).not.toHaveBeenCalled();
+  });
+});
+
+describe("CreateEvent - a Markdown file opens in the Markdown plugin", () => {
+  beforeEach(() => {
+    vi.spyOn(window, "open").mockImplementation(() => null);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("Folder: created empty and opened in the plugin", async () => {
+    const stores = createStores({ keepNewFileName: true, isPrivacy: false });
+    const file = { id: 40, folderId: ROOM_ID, fileExst: ".md" };
+    stores.filesStore.createFile.mockResolvedValue(file);
+    renderCreateEvent(stores, createRequest("md"));
+    await flush();
+
+    expect(stores.filesStore.createFile).toHaveBeenCalledWith(
+      ROOM_ID,
+      "Common:NewMarkdown.md",
+    );
+    expect(stores.pluginStore.openMarkdownFile).toHaveBeenCalledWith(file);
+    expect(window.open).not.toHaveBeenCalled();
+    expect(stores.filesStore.openDocEditor).not.toHaveBeenCalled();
+  });
+
+  it("Instructions room: created by the AI service from the skill template", async () => {
+    const stores = createStores({
+      keepNewFileName: true,
+      isPrivacy: false,
+      roomType: RoomsType.InstructionsRoom,
+    });
+    const file = { id: 41, folderId: ROOM_ID, fileExst: ".md" };
+    const insertFile = vi.spyOn(api.files, "insertFile");
+    const getFileInfo = vi
+      .spyOn(api.files, "getFileInfo")
+      .mockResolvedValue(file as never);
+    vi.mocked(createSkill).mockResolvedValue({
+      id: "41",
+      title: "Common:NewMarkdown.md",
+    });
+    renderCreateEvent(stores, createRequest("md"));
+    await flush();
+
+    expect(stores.filesStore.createFile).not.toHaveBeenCalled();
+    expect(insertFile).not.toHaveBeenCalled();
+    expect(createSkill).toHaveBeenCalledWith({
+      destId: ROOM_ID,
+      title: "Common:NewMarkdown",
+    });
+    expect(getFileInfo).toHaveBeenCalledWith("41");
+    expect(stores.pluginStore.openMarkdownFile).toHaveBeenCalledWith(file);
+  });
+
+  it("Instructions room without the plugin: the new skill opens view-only", async () => {
+    const stores = createStores({
+      keepNewFileName: true,
+      isPrivacy: false,
+      roomType: RoomsType.InstructionsRoom,
+    });
+    stores.pluginStore.isMarkdownEditorAvailable = false;
+    const file = { id: 42, folderId: ROOM_ID, fileExst: ".md" };
+    vi.spyOn(api.files, "getFileInfo").mockResolvedValue(file as never);
+    vi.mocked(createSkill).mockResolvedValue({ id: "42", title: "a.md" });
+    renderCreateEvent(stores, createRequest("md"));
+    await flush();
+
+    expect(stores.pluginStore.openMarkdownFile).not.toHaveBeenCalled();
+    expect(stores.filesStore.openDocEditor).toHaveBeenCalledWith(
+      42,
+      true,
+      null,
+      false,
+      false,
+      null,
+    );
   });
 });

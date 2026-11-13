@@ -3,7 +3,7 @@
   "content": "Spaces removed",
   "content_en_sha1_hash": "3b3d30afd2a0accd636851b2b3ba112f425e2330",
   "created_at": "2026-10-16T12:14:59.286Z",
-  "updated_at": "2026-11-06T10:45:53.838Z",
+  "updated_at": "2026-11-09T09:26:33.336Z",
   "comment": {
     "text": "Success toast shown after several form spaces (rooms of the Forms section) are deleted at once; short past-participle phrase. Singular counterpart: SpaceRemoved.",
     "is_auto": true,

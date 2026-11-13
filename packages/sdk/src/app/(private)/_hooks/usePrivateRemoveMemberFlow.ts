@@ -42,6 +42,7 @@ import api from "@docspace/shared/api";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
+import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 
 import { useActiveEncryptedUploadsForRoom } from "../_store/PrivateEncryptedUploadStore";
 
@@ -53,9 +54,10 @@ type RemoveArgs = {
 type UsePrivateRemoveMemberFlowReturn = {
   /**
    * Removes a member from the room through the role update; does nothing
-   * while uploads into the room are in flight (guard).
+   * while uploads into the room are in flight (guard). Resolves with whether
+   * the member was removed; a failure is reported here.
    */
-  remove: (args: RemoveArgs) => Promise<void>;
+  remove: (args: RemoveArgs) => Promise<boolean>;
   /**
    * Non-null while uploads are in flight: blocks the removal and surfaces a
    * localized reason for the disable state.
@@ -80,10 +82,10 @@ export const usePrivateRemoveMemberFlow = (
   );
 
   const remove = React.useCallback(
-    async ({ roomId: targetRoomId, userId }: RemoveArgs) => {
+    async ({ roomId: targetRoomId, userId }: RemoveArgs): Promise<boolean> => {
       if (guardReason) {
         toastr.warning(guardReason);
-        return;
+        return false;
       }
 
       setIsLoading(true);
@@ -94,8 +96,15 @@ export const usePrivateRemoveMemberFlow = (
           notify: false,
           message: "",
         });
+        return true;
       } catch (error) {
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Spec: private-rooms/sdk-surface, "SDK explains a refused access change in a private room"
+        toastr.error(
+          isAccessChangeRefused(error)
+            ? t("Common:EncryptedAccessChangeRefused")
+            : getEncryptionErrorMessage(t, error),
+        );
+        return false;
       } finally {
         setIsLoading(false);
       }

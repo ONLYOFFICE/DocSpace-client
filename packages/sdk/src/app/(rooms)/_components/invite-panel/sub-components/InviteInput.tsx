@@ -96,6 +96,7 @@ import {
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { getUserType } from "@docspace/shared/utils/common";
+import { offersGuestInvitation } from "@docspace/shared/services/private-room/invite-panel-rules";
 import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
 import type { InviteItem } from "../index";
@@ -156,8 +157,12 @@ const InviteInput: React.FC<InviteInputProps> = ({
   setUsersList,
   hideSelector,
   isPrivateRoom,
-  allowInvitingGuests,
+  allowInvitingGuests: portalAllowsGuests,
 }) => {
+  const allowInvitingGuests = offersGuestInvitation(
+    portalAllowsGuests,
+    isPrivateRoom,
+  );
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
   const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
   const [dropDownWidth, setDropDownWidth] = useState(0);

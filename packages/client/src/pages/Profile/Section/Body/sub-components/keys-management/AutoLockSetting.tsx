@@ -60,17 +60,15 @@ export const AutoLockSetting = () => {
 
   const options = useMemo<TOption[]>(
     () => [
-      { key: "off", label: t("Common:AutoLockOff") },
       { key: "5m", label: t("Common:AutoLock5m") },
       { key: "15m", label: t("Common:AutoLock15m") },
       { key: "30m", label: t("Common:AutoLock30m") },
-      { key: "1h", label: t("Common:AutoLock1h") },
     ],
     [t],
   );
 
   const selectedOption = useMemo(
-    () => options.find((o) => o.key === presetId) ?? options[0],
+    () => options.find((o) => o.key === presetId) ?? options[options.length - 1],
     [options, presetId],
   );
 

@@ -66,8 +66,13 @@ import type {
   TMetadataAIFillResult,
   TMetadataAIGenerateRequest,
   TMetadataAIGenerateResult,
+  TCreateSkillRequest,
+  TCreateSkillResult,
   TGenerateSkillRequest,
   TGenerateSkillResult,
+  TDocumentAgentSettings,
+  TByokKey,
+  TByokProvider,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -79,6 +84,9 @@ const baseUrl = "/ai";
 // fire one (Bug 83181). Callers that self-toast skip it for 403 via this check.
 const isForbiddenError = (e: unknown): boolean =>
   (e as { response?: { status?: number } })?.response?.status === 403;
+
+const isNotFoundError = (e: unknown): boolean =>
+  (e as { response?: { status?: number } })?.response?.status === 404;
 
 const getAuthHeaders = async (): Promise<Record<string, string>> => {
   if (typeof window === "undefined") return {};
@@ -173,6 +181,37 @@ export const getKnowledgeConfig = async () => {
     console.log(e);
     if (!isForbiddenError(e)) toastr.error(e as string);
   }
+};
+
+// The document agent's tenant settings, kept by the AI service and reached
+// through the chat service's `/ai/document-agent/settings`. A profile or a
+// log folder that no longer exists comes back as null. A 403 (AI switched
+// off, a guest) and a 404 (a chat service without the route) leave the
+// caller on its defaults, with no toast.
+export const getDocumentAgentSettings = async () => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/document-agent/settings`,
+    });
+
+    return res as TDocumentAgentSettings;
+  } catch (e) {
+    console.log(e);
+    if (!isForbiddenError(e) && !isNotFoundError(e)) toastr.error(e as string);
+  }
+};
+
+export const updateDocumentAgentSettings = async (
+  settings: TDocumentAgentSettings,
+) => {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/document-agent/settings`,
+    data: settings,
+  });
+
+  return res as TDocumentAgentSettings;
 };
 
 export const updateKnowledgeConfig = async (
@@ -523,6 +562,33 @@ const postMetadataAI = async <T>(
   return body as T;
 };
 
+const byokFetch = async <T>(path: string, init: RequestInit = {}) => {
+  const response = await authFetch(`/api/2.0/ai/byok${path}`, {
+    ...init,
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) throw new Error(body?.error ?? response.statusText);
+
+  return body as T;
+};
+
+export const getByokProviders = () =>
+  byokFetch<TByokProvider[]>("/providers");
+
+export const getByokKeys = () => byokFetch<TByokKey[]>("");
+
+export const setByokKey = (id: string, provider: string, key: string) =>
+  byokFetch<TByokKey>(`/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ provider, key }),
+  });
+
+export const deleteByokKey = (id: string) =>
+  byokFetch<null>(`/${id}`, { method: "DELETE" });
+
 export const fillMetadataWithAI = (
   data: TMetadataAIFillRequest,
   signal?: AbortSignal,
@@ -558,4 +624,29 @@ export const generateSkillWithAI = async (
   }
 
   return body as TGenerateSkillResult;
+};
+
+/**
+ * Create a skill in an Instructions room from the skill template. The AI
+ * service checks the title and that the folder is an Instructions room, and
+ * saves the file as `<title>.md`.
+ */
+export const createSkill = async (data: TCreateSkillRequest) => {
+  const response = await authFetch(`/api/2.0/ai/skills/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const body = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw Object.assign(new Error(body?.error ?? response.statusText), {
+      status: response.status,
+    });
+  }
+
+  return body as TCreateSkillResult;
 };

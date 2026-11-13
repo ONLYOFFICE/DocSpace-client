@@ -48,6 +48,8 @@ import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 
+import { getExportedKeyFileName } from "./exportedKeyFileName";
+
 import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 
 type Deps = {
@@ -95,7 +97,7 @@ export function useExportKeyFlow({ onForgotPassphrase }: Deps = {}): ExportKeyFl
         const fingerprint = await getPublicKeyFingerprint(target.publicKey);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `docspace-key-${fingerprint.slice(0, 8)}.json`;
+        a.download = getExportedKeyFileName(fingerprint);
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

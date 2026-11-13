@@ -47,6 +47,7 @@ import { EDITOR_ID } from "@docspace/shared/constants";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
 import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
@@ -66,7 +67,10 @@ import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 import useAIAttachFile from "@/hooks/useAIAttachFile";
 import useGoBackAndClose from "@/hooks/useGoBackAndClose";
-import useFileEncryptionKeys from "@/hooks/useFileEncryptionKeys";
+import useFileEncryptionKeys, {
+  type TFileEncryptionStatus,
+} from "@/hooks/useFileEncryptionKeys";
+import useFormFieldChanges from "@/hooks/useFormFieldChanges";
 import { isPDFDocument } from "@/utils";
 
 import Bar from "./Bar";
@@ -74,6 +78,33 @@ import Bar from "./Bar";
 type TCustomization = NonNullable<IConfig["editorConfig"]>["customization"];
 
 /** A message under the bar, in place of the editor. */
+type TKeyFlowEnd = {
+  /** i18n key of the message. */
+  message:
+    | "Common:EncryptedFileUnlockToOpen"
+    | "Common:EncryptedFileNoAccessYet"
+    | "Common:EncryptionKeysNotConfigured"
+    | "Common:EncryptionKeysLoadFailed"
+    | "Common:SomethingWentWrong";
+  /** i18n key of the button that repeats the step, where it can be repeated. */
+  action?: "Common:UnlockKey" | "Common:TryAgain";
+};
+
+// Spec: private-rooms/editor-integration, "Editor not mounted until keys are ready"
+const KEY_FLOW_ENDS: Partial<Record<TFileEncryptionStatus, TKeyFlowEnd>> = {
+  "unlock-cancelled": {
+    message: "Common:EncryptedFileUnlockToOpen",
+    action: "Common:UnlockKey",
+  },
+  "no-access": { message: "Common:EncryptedFileNoAccessYet" },
+  "no-key": { message: "Common:EncryptionKeysNotConfigured" },
+  "load-failed": {
+    message: "Common:EncryptionKeysLoadFailed",
+    action: "Common:TryAgain",
+  },
+  error: { message: "Common:SomethingWentWrong" },
+};
+
 const EditorMessage = ({
   config,
   children,
@@ -154,6 +185,21 @@ const EditorBody = ({
   // file; shown in place of the editor.
   const [frameError, setFrameError] = React.useState<string | null>(null);
 
+  // Only the original form of a form-filling room open for editing: the server sets trackFormFieldChanges for such
+  // forms alone, unless the editors are Community Edition, and filled or completed forms are not open for editing.
+  const {
+    takeSnapshot: takeFieldsSnapshot,
+    reportFieldChanges,
+    scheduleFieldChanges,
+    closeFieldChanges,
+  } = useFormFieldChanges(
+    fileInfo?.id,
+    fileInfo?.version,
+    !!config?.trackFormFieldChanges &&
+      config?.editorConfig?.mode === "edit" &&
+      !!config?.document?.permissions?.edit,
+  );
+
   const {
     onDocumentReady,
     onSDKRequestOpen,
@@ -197,7 +243,11 @@ const EditorBody = ({
     openShareFormDialog,
     onOpenRoleMappingPanel,
     shareKey,
-      disconnectUsers,
+    disconnectUsers,
+    takeFieldsSnapshot,
+    reportFieldChanges,
+    scheduleFieldChanges,
+    closeFieldChanges,
   });
 
   // AI is not available to guests and anonymous viewers — the same rule the
@@ -368,7 +418,9 @@ const EditorBody = ({
       if (!isEncryptedFile) {
         newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       }
+      // Spec: editor-integration, "New document from the editor withheld for encrypted files"
       if (
+        !isEncryptedFile &&
         !isPDFDocument(fileInfo) &&
         (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
@@ -432,15 +484,50 @@ const EditorBody = ({
     !isSkipError &&
     encryption.status !== "ready";
 
+  // The keys are spelled out so the locale scanner finds them.
+  const keyFlowMessage = (end: TKeyFlowEnd) => {
+    switch (end.message) {
+      case "Common:EncryptedFileUnlockToOpen":
+        return t("Common:EncryptedFileUnlockToOpen");
+      case "Common:EncryptedFileNoAccessYet":
+        return t("Common:EncryptedFileNoAccessYet");
+      case "Common:EncryptionKeysNotConfigured":
+        return t("Common:EncryptionKeysNotConfigured");
+      case "Common:EncryptionKeysLoadFailed":
+        return t("Common:EncryptionKeysLoadFailed");
+      default:
+        return t("Common:SomethingWentWrong");
+    }
+  };
+
+  const keyFlowAction = (action: NonNullable<TKeyFlowEnd["action"]>) =>
+    action === "Common:UnlockKey"
+      ? t("Common:UnlockKey")
+      : t("Common:TryAgain");
+
   const renderMessage = (message: React.ReactNode) => (
     <EditorMessage config={config}>{message}</EditorMessage>
   );
 
   if (isEncryptionGating) {
+    const end = KEY_FLOW_ENDS[encryption.status];
+    if (!end) return renderMessage(t("Common:LoadingProcessing"));
+
     return renderMessage(
-      encryption.status === "error"
-        ? t("Common:SomethingWentWrong")
-        : t("Common:LoadingProcessing"),
+      <>
+        <div data-testid="encryption-key-message">{keyFlowMessage(end)}</div>
+        {end.action ? (
+          <div style={{ marginTop: "16px" }}>
+            <Button
+              primary
+              size={ButtonSize.medium}
+              label={keyFlowAction(end.action)}
+              onClick={encryption.retry}
+              testId="encryption-key-retry"
+            />
+          </div>
+        ) : null}
+      </>,
     );
   }
 

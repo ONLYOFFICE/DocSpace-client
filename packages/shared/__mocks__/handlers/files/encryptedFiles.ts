@@ -37,6 +37,7 @@ import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import type { RequestLog } from "../privacyroom";
+import { LATIN_NUMBERING_SYSTEM } from "../../../utils/latin-digits";
 import { getFilesSettings } from "./filesSettings";
 
 export type EncryptedFileKey = {
@@ -56,14 +57,27 @@ export type EncryptedFileSeed = {
   encryptedNameHeader?: string;
   /** One of `folders`; the room itself when left out. */
   folderId?: number;
+  /** The file's `version` and `versionGroup`; 1 when left out. */
+  versionGroup?: number;
+  /** The user who created the file; the room's owner when left out. */
+  createdBy?: string;
 };
 
 export type EncryptedFileRecord = Required<
-  Omit<EncryptedFileSeed, "bytes" | "encryptedNameHeader" | "folderId">
+  Omit<
+    EncryptedFileSeed,
+    | "bytes"
+    | "encryptedNameHeader"
+    | "folderId"
+    | "versionGroup"
+    | "createdBy"
+  >
 > & {
   bytes?: Uint8Array;
   encryptedNameHeader?: string;
   folderId?: number;
+  versionGroup?: number;
+  createdBy?: string;
 };
 
 export type EncryptedFolderSeed = { id: number; title: string };
@@ -89,6 +103,12 @@ export type EncryptedFilesHandlerHandle = {
   setFiles: (files: EncryptedFileSeed[]) => void;
   setFileKeys: (fileId: number, keys: EncryptedFileKey[]) => void;
   setRoomUserKeys: (keys: RoomMemberKeyEntry[]) => void;
+  /**
+   * The stored keys of portal users who are not members of the room, such as
+   * a file's creator who left it: publickeys still answers with the
+   * creator's keys.
+   */
+  setNonMemberKeys: (keys: RoomMemberKeyEntry[]) => void;
   /** Marks a file as lying outside a private room (publickeys answers 415). */
   setFileOutsidePrivateRoom: (fileId: number) => void;
   /**
@@ -194,6 +214,25 @@ const DOCUMENT_TYPE_BY_EXTENSION = {
   pdf: "pdf",
 } as const;
 /**
+ * The extensions of the mock's seeds whose category File.FilterType reports
+ * as a document, a spreadsheet or a presentation.
+ */
+const OFFICE_EXTENSIONS = [".docx", ".xlsx", ".pptx"];
+/** FileChecker.Dse3Magic and Dse3FlagIsForm: the form bit of the flags byte. */
+const DSE3_MAGIC = [0x44, 0x53, 0x45, 0x33];
+const DSE3_FLAGS_OFFSET = 6;
+const DSE3_FLAG_IS_FORM = 0x02;
+/**
+ * Mirrors FileChecker.CheckExtendedPDFstream for an encrypted upload: the
+ * stored bytes start with the DSE3 magic and carry the form bit.
+ */
+const hasFormFlag = (bytes?: Uint8Array) =>
+  !!bytes &&
+  bytes.length > DSE3_FLAGS_OFFSET &&
+  DSE3_MAGIC.every((b, i) => bytes[i] === b) &&
+  (bytes[DSE3_FLAGS_OFFSET] & DSE3_FLAG_IS_FORM) !== 0;
+
+/**
  * Mirrors FileUtility.GetAccessibility: every entry is decided by the
  * extension of the stored title against the portal's extension lists (the
  * ones the files-settings mock serves), nothing by the encrypted flag.
@@ -254,7 +293,7 @@ const filesSizeToString = (size: number) => {
     );
     result /= 1024 ** power;
   }
-  return `${result.toLocaleString("en-US", { maximumFractionDigits: 2 })} ${names[power]}`;
+  return `${result.toLocaleString("en-US", { numberingSystem: LATIN_NUMBERING_SYSTEM, maximumFractionDigits: 2 })} ${names[power]}`;
 };
 
 const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
@@ -267,6 +306,8 @@ const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   bytes: seed.bytes,
   encryptedNameHeader: seed.encryptedNameHeader,
   folderId: seed.folderId,
+  versionGroup: seed.versionGroup,
+  createdBy: seed.createdBy,
 });
 
 /** EmployeeDto of a user the mock has no directory entry for. */
@@ -295,7 +336,9 @@ const buildFileDto = (
   const downloadOrigin = port ? `${BASE_URL}:${port}` : BASE_URL;
   const dotIdx = record.serverTitle.lastIndexOf(".");
   const fileExst = dotIdx > 0 ? record.serverTitle.slice(dotIdx) : "";
-  const creator = userDto(ownerId);
+  const creator = userDto(record.createdBy ?? ownerId);
+  const ext = fileExst.toLowerCase();
+  const isPdf = ext === ".pdf";
   return {
     id: record.id,
     title: record.serverTitle,
@@ -309,8 +352,8 @@ const buildFileDto = (
     ...(!archived && { parentRoomType: 19 }),
     pureContentLength: record.size,
     contentLength: `${record.size} bytes`,
-    version: 1,
-    versionGroup: 1,
+    version: record.versionGroup ?? 1,
+    versionGroup: record.versionGroup ?? 1,
     access: 0,
     canShare: true,
     shared: false,
@@ -326,8 +369,18 @@ const buildFileDto = (
     createdBy: creator,
     updatedBy: creator,
     viewAccessibility: viewAccessibilityOf(fileExst),
-    // FileSecurity.FilterEntryAsync denies Copy, Duplicate and Vectorization
-    // on a file of a private room before the section rules (bd89a24dcd).
+    // The 27 actions FileSecurity.SetSecurity asks FilterEntryAsync about for
+    // a file, as the room's owner gets them. In the Rooms branch the owner is
+    // granted every action not refused before HasFullAccessAsync. Refused for
+    // a file of a private room: Copy, Duplicate, Vectorization, StartFilling,
+    // Convert, AskAi and Embed. Refused whatever the room: FillForms outside
+    // a form-filling room, the filling rights outside a form-filling or
+    // virtual data room, OpenForm on a file that is not a PDF, and
+    // SubmitToFormGallery unless the stored category is a document, a
+    // spreadsheet, a presentation or a PDF form (the form bit of the DSE3
+    // header). The Archive branch admits Read, Download and ReadHistory of
+    // these and, for a room that is not private, Copy. AskAi in an ordinary
+    // room follows the portal's AI settings, which the mock does not model.
     security: {
       Read: true,
       Edit: true,
@@ -336,27 +389,43 @@ const buildFileDto = (
       Copy: !isPrivate,
       Move: true,
       Rename: true,
-      Comment: false,
+      Comment: true,
       FillForms: false,
-      Review: false,
-      CustomFilter: false,
-      ReadHistory: false,
-      Lock: false,
-      EditHistory: false,
+      Review: true,
+      CustomFilter: true,
+      ReadHistory: true,
+      Lock: true,
+      EditHistory: true,
       Duplicate: !isPrivate,
-      SubmitToFormGallery: false,
+      SubmitToFormGallery:
+        OFFICE_EXTENSIONS.includes(ext) ||
+        (isPdf && hasFormFlag(record.bytes)),
       Convert: false,
       CreateRoomFrom: false,
-      CopyLink: false,
+      CopyLink: true,
       Embed: false,
+      StartFilling: false,
+      FillingStatus: false,
+      ResetFilling: false,
+      StopFilling: false,
+      OpenForm: isPdf,
       Vectorization: false,
+      AskAi: false,
       ...(archived && {
         Edit: false,
         Delete: false,
         Move: false,
         Rename: false,
+        Comment: false,
+        Review: false,
+        CustomFilter: false,
         ReadHistory: true,
+        Lock: false,
+        EditHistory: false,
         Duplicate: false,
+        SubmitToFormGallery: false,
+        CopyLink: false,
+        OpenForm: false,
       }),
     },
   };
@@ -495,6 +564,7 @@ export const encryptedFilesHandlers = (
   const sessions = new Map<string, UploadSessionRecord>();
   const requests: RequestLog[] = [];
   let roomUserKeys: RoomMemberKeyEntry[] = [...(opts.roomUserKeys ?? [])];
+  let nonMemberKeys: RoomMemberKeyEntry[] = [];
   let currentUserId = opts.currentUserId ?? DEFAULT_CURRENT_USER_ID;
   let freeSpace: number | null = null;
   const createdOn = new Map<string, string>();
@@ -590,6 +660,9 @@ export const encryptedFilesHandlers = (
     setRoomUserKeys: (keys) => {
       roomUserKeys = [...keys];
     },
+    setNonMemberKeys: (keys) => {
+      nonMemberKeys = [...keys];
+    },
     setFileOutsidePrivateRoom: (fileId) => {
       outsidePrivateRoom.add(fileId);
     },
@@ -626,6 +699,7 @@ export const encryptedFilesHandlers = (
       accessManagers = null;
       requests.length = 0;
       roomUserKeys = [];
+      nonMemberKeys = [];
       nextFileId = 1000;
       nextSessionId = 1;
       operations.length = 0;
@@ -917,8 +991,13 @@ export const encryptedFilesHandlers = (
     /**
      * Mirrors SecurityController.GetEncryptionAccess ->
      * EncryptionKeyPairDtoHelper.GetKeyPairAsync(fileId)
-     * (HttpGet "file/{fileId}/publickeys"): the keys of the users who reach
-     * the file through a direct user share (here: the room's member keys).
+     * (HttpGet "file/{fileId}/publickeys"): the keys of the users holding a
+     * share record of their own on the file or a folder above it up to the
+     * room (FileSharing.GetSharedInfoAsync over SecurityDao.GetSharesAsync),
+     * plus the file's creator, whom GetSharedInfoAsync adds as the owner
+     * entry even after they left. The room's owner holds no share record of
+     * their own, so here the members are `roomUserKeys` without the owner,
+     * and the creator's keys come from `roomUserKeys` or `nonMemberKeys`.
      * 404 for a missing file, 415 for a file outside a private room
      * (NotSupportedException); SanitizeAccessKeys drops entries without a
      * public key and keeps the private half only on the caller's entries.
@@ -939,8 +1018,18 @@ export const encryptedFilesHandlers = (
         if (outsidePrivateRoom.has(fileId)) {
           return errorResponse(415, "Unsupported Media Type");
         }
+        const creatorId = String(f.createdBy ?? ownerId);
+        const holders = roomUserKeys.filter(
+          (k) => String(k.userId) !== ownerId || String(k.userId) === creatorId,
+        );
+        const creatorKeys = holders.some((k) => String(k.userId) === creatorId)
+          ? []
+          : roomUserKeys
+              .concat(nonMemberKeys)
+              .filter((k) => String(k.userId) === creatorId);
         return okResponse(
-          roomUserKeys
+          holders
+            .concat(creatorKeys)
             .filter((k) => !!k.publicKey?.trim())
             .map((k) => {
               if (String(k.userId) === currentUserId) return { ...k };
@@ -978,7 +1067,7 @@ export const encryptedFilesHandlers = (
           ...roomUserKeys.map((k) => String(k.userId)),
         ]);
         if (!members.has(currentUserId) && !accessManagers?.has(currentUserId)) {
-          return errorResponse(403, "You don't have enough permission to edit the file");
+          return errorResponse(403, "Access denied");
         }
         if (!isPrivate) {
           return errorResponse(400, "This action is only available in a private room");
@@ -987,7 +1076,7 @@ export const encryptedFilesHandlers = (
           ? accessManagers.has(currentUserId)
           : members.has(currentUserId);
         if (archived || !mayManage) {
-          return errorResponse(403, "You don't have enough permission to perform the operation");
+          return errorResponse(403, "Access denied");
         }
         const guidRe =
           /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -1573,8 +1662,8 @@ export const encryptedFilesHandlers = (
      * moves files between the room and its folders. CopyPermissionsCheck
      * judges a folder by the private rooms around it (since bd89a24dcd):
      * a subfolder of this room stays in it and a folder from outside does
-     * not enter it, either refused with "You don't have enough permission
-     * to move the folder"; a subfolder moved within the room passes, the
+     * not enter it, either refused with 403 "Access denied" (the
+     * SecurityException of CopyPermissionsCheck, as ResponseWrapper words it); a subfolder moved within the room passes, the
      * mock listing it without nesting its folders.
      *
      * The archived room itself moved to the Rooms section is restored: the
@@ -1635,13 +1724,13 @@ export const encryptedFilesHandlers = (
         });
         return errorResponse(
           403,
-          "You don't have enough permission to move the folder",
+          "Access denied",
         );
       }
       if (!holdsFolder(destFolderId) || fileIds.some((id) => !files.has(id))) {
         return withOtherRooms
           ? undefined
-          : errorResponse(403, "You don't have enough permission to move the file");
+          : errorResponse(403, "Access denied");
       }
       requests.push({
         method: "PUT",

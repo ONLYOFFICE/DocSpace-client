@@ -3,7 +3,7 @@
   "content": "Set the most the AI services may cost this user per period.",
   "content_en_sha1_hash": "db3a30378a610a754dca40be053eed1db4667d7f",
   "created_at": "2026-10-22T16:09:21.969Z",
-  "updated_at": "2026-10-22T16:10:38.032Z",
+  "updated_at": "2026-11-09T17:07:34.741Z",
   "comment": {
     "text": "Description at the top of the Change AI limit dialog for a user: the admin sets the maximum amount of money the AI services may cost this user per selected period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeAILimitDialog/index.tsx",
-      "line_number": 239,
+      "line_number": 232,
       "context": "autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:ChangeAILimit\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <Text>{t(\"Common:SetAILimitDescription\")}</Text>\n {spending ? (\n <div className={styles.currentPeriod}>\n <Text className={styles.status}>\n {t(\"Common:AILimitCurrentPeriod\")}\n </Text>",
       "module": "/packages/client"
     }

@@ -78,6 +78,10 @@
         color: var(--management-disable-color) !important;
       }
 
+      :global(.paid-badge) {
+        pointer-events: auto;
+      }
+
       :global(.paid-badge) p {
         color: #{$white} !important;
       }

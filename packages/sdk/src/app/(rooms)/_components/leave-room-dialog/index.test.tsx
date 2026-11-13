@@ -185,6 +185,57 @@ describe("LeaveRoomDialog", () => {
     expect(mocks.openFolder).not.toHaveBeenCalled();
   });
 
+  it("Leave refused", async () => {
+    mocks.updateRoomMemberRole.mockImplementation(async () => {
+      throw Object.assign(new Error("The user does not have an encryption key"), {
+        response: { status: 403 },
+      });
+    });
+    const onClose = vi.fn();
+
+    await leave({ room: mocks.room as never, onClose });
+
+    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedAccessChangeRefused",
+    );
+    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(mocks.toastr.success).not.toHaveBeenCalled();
+  });
+
+  it("Leave fails for another reason", async () => {
+    const failure = Object.assign(new Error("500"), {
+      response: { status: 500 },
+    });
+    mocks.updateRoomMemberRole.mockImplementation(async () => {
+      throw failure;
+    });
+    const onClose = vi.fn();
+
+    await leave({ room: mocks.room as never, onClose });
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(failure);
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("Refusal in an ordinary room", async () => {
+    const forbidden = Object.assign(new Error("403"), {
+      response: { status: 403 },
+    });
+    mocks.updateRoomMemberRole.mockImplementation(async () => {
+      throw forbidden;
+    });
+    const onClose = vi.fn();
+
+    await leave({
+      room: { ...mocks.room, private: false } as never,
+      onClose,
+    });
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(forbidden);
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
   it("leaves an ordinary room through the role update", async () => {
     mocks.room = { ...mocks.room, private: false };
 

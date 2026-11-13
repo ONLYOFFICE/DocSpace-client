@@ -5,8 +5,11 @@
 AI is withheld in private rooms and on encrypted files on every surface: the
 server denies the chat, the vectorization and the index export inside a
 private room, the client offers no AI chat on a private address, the SDK
-never offers it, and the editor does not initialise its AI plugin for an
-encrypted file. The reason is one promise: the server has no clear text of a
+never offers it, and the editor page skips its own AI plugin setup for an
+encrypted file. One surface is still open: the server's editor
+configuration does not disable the AI tools of the Document Server for an
+encrypted file, and the tab was seen on the stand on 2026-11-06 and
+2026-11-10 (`private-rooms-server-hardening` 16.1). The reason is one promise: the server has no clear text of a
 private room. Every AI path of the portal today carries clear text through
 the portal and stores part of it, so lifting the ban without a different
 architecture would void the promise. On 2026-11-06 the owner decided to keep

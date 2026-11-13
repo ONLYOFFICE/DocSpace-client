@@ -1,39 +1,33 @@
 {
   "key_path": "EncryptionKeysNotConfigured",
-  "content": "Encryption keys are not configured on this device. Set up your keys in Profile settings to work with encrypted files.",
-  "content_en_sha1_hash": "6b3faeb384f3604a99003a22e2502c60b08d1f1f",
-  "created_at": "2026-05-24T17:27:26.605Z",
-  "updated_at": "2026-11-05T16:49:39.998Z",
+  "content": "You don't have an encryption key yet. Set it up in your profile to work with encrypted files.",
+  "content_en_sha1_hash": "c5b0fd7b50af10337243e4b02b147374a9221685",
+  "created_at": "2026-11-11T18:49:05.009Z",
+  "updated_at": "2026-11-11T18:51:02.244Z",
   "comment": {
-    "text": "Error toast message appearing when a user attempts to download an encrypted file without having encryption keys configured on the device.",
+    "text": "Warning shown when a user who has no encryption key enters a private room or tries to download, copy, upload or open an encrypted file. Two sentences; the pronoun it refers to the encryption key.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:00:07.882Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-11T18:51:02.244Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/filesActionsStore/copyMove.helpers.ts",
-      "line_number": 252,
-      "context": ")=> {\n const { user, encryptionKeys } = self.userStore;\n \n if (!encryptionKeys || encryptionKeys.length === 0) {\n toastr.error(i18n.t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n \n const userId = user?.id;\n if (!userId) return;",
+      "file_path": "/packages/client/src/helpers/ownKeyListNotice.tsx",
+      "line_number": 58,
+      "context": "loadFailedToastId !== null &&\n (Date.now() - loadFailedShownAt < RAISE_GRACE_MS ||\n toastr.isActive(loadFailedToastId));\n \n const warnNotConfigured = () => {\n toastr.warning(i18n.t(\"Common:EncryptionKeysNotConfigured\"));\n };\n \n const reportKeyList = (\n userStore: TOwnKeysStore,\n keys: readonly unknown[] | null,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 340,
-      "context": "self: FilesActionStore,file: TActionItem\n )=> {\n const { encryptionKeys, user } = self.userStore;\n \n if (!encryptionKeys || encryptionKeys.length === 0) {\n toastr.error(i18n.t(\"Common:EncryptionKeysNotConfigured\"));\n return Promise.resolve();\n }\n \n const userId = user?.id;\n if (!userId) {",
+      "file_path": "/packages/client/src/helpers/ownKeyListNotice.tsx",
+      "line_number": 58,
+      "context": "loadFailedToastId !== null &&\n (Date.now() - loadFailedShownAt < RAISE_GRACE_MS ||\n toastr.isActive(loadFailedToastId));\n \n const warnNotConfigured = () => {\n toastr.warning(i18n.t(\"Common:EncryptionKeysNotConfigured\"));\n };\n \n const reportKeyList = (\n userStore: TOwnKeysStore,\n keys: readonly unknown[] | null,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 340,
-      "context": "self: FilesActionStore,file: TActionItem\n )=> {\n const { encryptionKeys, user } = self.userStore;\n \n if (!encryptionKeys || encryptionKeys.length === 0) {\n toastr.error(i18n.t(\"Common:EncryptionKeysNotConfigured\"));\n return Promise.resolve();\n }\n \n const userId = user?.id;\n if (!userId) {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
-      "line_number": 327,
-      "context": "}\n \n if (data.current.private) {\n const keys = self.userStore?.encryptionKeys;\n if (!Array.isArray(keys) || keys.length === 0) {\n toastr.warning(i18n.t(\"Common:EncryptionKeysNotConfigured\"));\n }\n \n // The room id may differ from data.current.id when navigating into\n // a sub-folder: pathParts[1] is the room, current is the sub-folder.\n const resolvedRoomId = data.pathParts?.[1]?.id ?? data.current.id;",
-      "module": "/packages/client"
+      "file_path": "/packages/doceditor/src/components/Editor.tsx",
+      "line_number": 85,
+      "context": "type TKeyFlowEnd = {\n /** i18n key of the message. */\n message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };",
+      "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
@@ -85,7 +79,7 @@
     },
     {
       "file_path": "/packages/shared/context/encryption/EncryptionContext.tsx",
-      "line_number": 234,
+      "line_number": 235,
       "context": "}, [showPassphraseDialog]);\n \n const unlock = useCallback(\n async (passphrase: string, rememberDevice?: boolean): Promise<boolean> => {\n if (!userKeys?.privateKeyEnc || !userKeys?.userId) {\n setUnlockError(t(\"Common:EncryptionKeysNotConfigured\"));\n return false;\n }\n setIsUnlocking(true);\n setUnlockError(null);\n try {",
       "module": "/packages/shared"
     },

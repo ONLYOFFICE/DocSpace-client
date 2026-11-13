@@ -51,6 +51,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 import {
   ComboBoxSize,
   type TOption,
@@ -185,7 +186,12 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
         toastr.success(t("Common:AccessRightsChanged"));
         onRoleChanged?.();
       } catch (error) {
-        toastr.error(getEncryptionErrorMessage(t, error));
+        // Spec: private-rooms/sdk-surface, "SDK explains a refused access change in a private room"
+        toastr.error(
+          isAccessChangeRefused(error)
+            ? t("Common:EncryptedAccessChangeRefused")
+            : getEncryptionErrorMessage(t, error),
+        );
       } finally {
         setIsRoleChanging(false);
       }
@@ -193,13 +199,24 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
     [access, roomId, userId, t, onRoleChanged],
   );
 
+  const rowRef = React.useRef<HTMLDivElement>(null);
+  const retriedRef = React.useRef(false);
+
   const onRetryAccess = React.useCallback(() => {
     if (isRetrying) return;
     setIsRetrying(true);
+    retriedRef.current = true;
     retryAccess({ id: userId, displayName }).finally(() => {
       setIsRetrying(false);
     });
   }, [isRetrying, retryAccess, userId, displayName]);
+
+  // A retry that succeeds takes its button away: the row keeps the focus.
+  React.useEffect(() => {
+    if (isAccessPending || !retriedRef.current) return;
+    retriedRef.current = false;
+    rowRef.current?.focus();
+  }, [isAccessPending]);
 
   const handleRemoveClick = React.useCallback(() => {
     // Spec: private-rooms/sdk-surface, "Member removal is blocked during active uploads"
@@ -213,8 +230,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
       userId,
       displayName,
       onConfirm: async () => {
-        await remove({ roomId, userId });
-        onRemoved?.();
+        if (await remove({ roomId, userId })) onRemoved?.();
       },
     });
   }, [
@@ -229,7 +245,7 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
   ]);
 
   return (
-    <div className={styles.userRow}>
+    <div className={styles.userRow} ref={rowRef} tabIndex={-1}>
       <Avatar
         size={AvatarSize.min}
         role={isOwner ? AvatarRole.owner : AvatarRole.user}
@@ -251,18 +267,29 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
             data-testid="private_member_access_pending"
           >
             <Text className={styles.userSubtitle} truncate>
-              {`${t("Common:EncryptedAccessPending")}${canInvite ? " |" : ""}`}
+              {t("Common:EncryptedAccessPending")}
             </Text>
             {canInvite ? (
-              <Link
-                type={LinkType.action}
-                fontSize="12px"
-                isSemitransparent={isRetrying}
-                onClick={onRetryAccess}
-                dataTestId="private_member_retry_access"
-              >
-                {t("Common:TryAgain")}
-              </Link>
+              <>
+                <Text
+                  as="span"
+                  className={styles.userSubtitle}
+                  aria-hidden="true"
+                >
+                  |
+                </Text>
+                <Link
+                  type={LinkType.action}
+                  fontSize="12px"
+                  isSemitransparent={isRetrying}
+                  onClick={onRetryAccess}
+                  ariaLabel={t("Common:RetryAccessFor", { name: displayName })}
+                  aria-busy={isRetrying}
+                  dataTestId="private_member_retry_access"
+                >
+                  {t("Common:TryAgain")}
+                </Link>
+              </>
             ) : null}
           </div>
         ) : typeLabel ? (
@@ -304,6 +331,10 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
               isMobileView={isMobileOnly}
               shouldShowBackdrop={isMobile}
               dataTestId="private_member_role_combobox"
+              ariaLabel={t("Common:RoleOfUser", {
+                name: displayName,
+                role: String(selectedRole.label ?? ""),
+              })}
             />
           ) : (
             <TooltipContainer

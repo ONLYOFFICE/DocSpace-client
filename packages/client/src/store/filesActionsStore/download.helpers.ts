@@ -64,6 +64,7 @@ import type {
 } from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
 import type { TFile, TOperation } from "@docspace/shared/api/files/types";
 import i18n from "../../i18n";
+import { resolveOwnKeysForAction } from "SRC_DIR/helpers/ownKeyListNotice";
 import type FilesActionStore from "../FilesActionsStore";
 import type { TActionItem, TDownloadTranslations } from "../FilesActionsStore";
 
@@ -334,12 +335,10 @@ self: FilesActionStore,file?: Nullable<TActionItem>
 export const downloadEncryptedFileImpl = async (
 self: FilesActionStore,file: TActionItem
 )=> {
-  const { encryptionKeys, user } = self.userStore;
+  const { user } = self.userStore;
 
-  if (!encryptionKeys || encryptionKeys.length === 0) {
-    toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
-    return Promise.resolve();
-  }
+  const ownKeys = await resolveOwnKeysForAction(self.userStore);
+  if (!ownKeys) return;
 
   const userId = user?.id;
   if (!userId) {
@@ -523,12 +522,10 @@ const downloadDecryptedZipImpl = async (
   listEntries: () => Promise<TDecryptedZipEntry[]>,
   partialWarning: (fileNames: string) => string,
 ) => {
-  const { encryptionKeys, user } = self.userStore;
+  const { user } = self.userStore;
 
-  if (!encryptionKeys || encryptionKeys.length === 0) {
-    toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
-    return;
-  }
+  const ownKeys = await resolveOwnKeysForAction(self.userStore);
+  if (!ownKeys) return;
 
   const userId = user?.id;
   if (!userId) return;

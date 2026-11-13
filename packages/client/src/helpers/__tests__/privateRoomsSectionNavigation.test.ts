@@ -52,6 +52,7 @@ import {
   getPrivateAddressOfE2eRoomsAddress,
   getRoomsAddressOfPrivateAddress,
   getSectionAddressCorrection,
+  isKeysManagementAvailable,
   isPrivateRoomsListRoot,
   type TSectionDecision,
 } from "../privateRoomsSection";
@@ -116,6 +117,12 @@ describe("Private section addresses without the section", () => {
       "/private/filter",
       "?searchArea=Active",
       "/rooms/shared/filter?searchArea=Active",
+      CategoryType.Shared,
+    ],
+    [
+      "/private/filter",
+      "?page=1&searchArea=PrivateRooms&sortby=DateAndTime",
+      "/rooms/shared/filter?page=1&searchArea=Active&sortby=DateAndTime",
       CategoryType.Shared,
     ],
     ["/private/123", "", "/rooms/shared/123", CategoryType.SharedRoom],
@@ -193,6 +200,22 @@ describe("Private section of a room opened from elsewhere", () => {
   });
 });
 
+describe("The list answered under the Private root", () => {
+  it("is the Private list, with or without the address' say", () => {
+    expect(
+      getCategoryTypeByFolderTypeInSection(FolderType.PrivateRooms, 0, {
+        isPrivate: true,
+      }),
+    ).toBe(CategoryType.PrivateRooms);
+    expect(
+      getCategoryTypeByFolderTypeInSection(FolderType.PrivateRooms, 0, {
+        isPrivate: false,
+        pathname: "/private/filter",
+      }),
+    ).toBe(CategoryType.PrivateRooms);
+  });
+});
+
 describe("Frame opened in the Private section", () => {
   // The address the SDK JS manager builds from its root path:
   // `{rootPath}{id}/filter?...`, the id also given as `folder`.
@@ -203,9 +226,10 @@ describe("Frame opened in the Private section", () => {
     const categoryType = categoryOf(managerAddress("/private/"));
 
     expect(categoryType).toBe(CategoryType.PrivateRooms);
-    expect(getRoomsRequestScope(categoryType, undefined, true)).toEqual({
-      privacyFilter: RoomPrivacyFilter.Private,
-      searchArea: RoomSearchArea.Active,
+    expect(getRoomsRequestScope(categoryType, undefined)).toEqual({
+      privacyFilter: null,
+      searchArea: RoomSearchArea.PrivateRooms,
+      lists: "private",
     });
   });
 
@@ -325,3 +349,19 @@ describe("E2E rooms bookmarks", () => {
   });
 });
 
+describe("Keys management tab follows the Private section", () => {
+  const KEYS = [{ id: "key-1" }];
+
+  it.each([
+    ["Section available", true, [], false, true],
+    ["App off, no key", false, [], false, false],
+    ["App off, key held", false, KEYS, false, true],
+    ["Guest", true, [], true, false],
+    ["Guest holding a key", false, KEYS, true, false],
+    ["user not loaded yet", true, null, undefined, true],
+  ])("%s", (_name, isSectionAvailable, keys, isGuest, expected) => {
+    expect(isKeysManagementAvailable(isSectionAvailable, keys, isGuest)).toBe(
+      expected,
+    );
+  });
+});

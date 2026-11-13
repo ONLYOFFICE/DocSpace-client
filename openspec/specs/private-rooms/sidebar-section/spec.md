@@ -13,29 +13,6 @@ Implementation: packages/client/src/components/ClientArticleSidebar, packages/cl
 
 ## Requirements
 
-### Requirement: Section availability
-The system SHALL make the Private section available only while two conditions hold: the private-rooms opt-in is set, and the E2E rooms app is on for the portal. Every app is on in SaaS. The opt-in is the browser-local flag, read once per page load, or, for the client in an embedded frame, the `privateRooms` property of the frame configuration, read once that configuration has arrived. Switching the app on or off in the apps settings SHALL take effect without a reload.
-
-#### Scenario: Opt-in set and app on
-- **WHEN** the page loads with the opt-in set on a portal where the E2E rooms app is on
-- **THEN** the Private section is available
-
-#### Scenario: Opt-in absent
-- **WHEN** the page loads without the browser-local flag, outside a frame or in a frame whose configuration does not carry the opt-in
-- **THEN** the Private section is not available, whatever the state of the app
-
-#### Scenario: Opt-in from the frame configuration
-- **WHEN** the client runs in an embedded frame whose configuration carries `privateRooms: true`, on a portal where the E2E rooms app is on
-- **THEN** the Private section is available once the configuration has arrived, without the browser-local flag
-
-#### Scenario: App switched off on a standalone portal
-- **WHEN** an administrator switches the E2E rooms app off while the section is shown
-- **THEN** the section disappears without a reload, and the Rooms section lists private rooms again
-
-#### Scenario: Opt-in set after load
-- **WHEN** the browser-local flag is set after the page loaded
-- **THEN** the section stays unavailable until the page is reloaded
-
 ### Requirement: Sidebar item
 The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI rooms (Common:AiRooms) when that item is shown. It SHALL have exactly one sub-item, Archive (Common:Archive).
 
@@ -72,57 +49,50 @@ The sidebar SHALL highlight Private on the list and room addresses, and its Arch
 - **WHEN** the user opens `/private/archived/filter?folder={roomId}` for an archived private room they belong to
 - **THEN** the room contents are shown and the Archive sub-item under Private is highlighted
 
-### Requirement: Section addresses fall back to Rooms when the section is not available
-The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
-
-#### Scenario: Link opened without the opt-in
-- **WHEN** a member of a private room opens `/private/{roomId}/filter` without the opt-in
-- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the room opens in the Rooms section
-
 ### Requirement: Section lists only private rooms
-The system SHALL request the section list as active rooms with the privacy filter Private, and its Archive as archived rooms with the privacy filter Private. Both values SHALL come from the address category, whatever privacy filter or search area the address query carries. A room without the private setting MUST NOT appear in either list.
+The system SHALL request the section list with the section's search area (`PrivateRooms`), and its Archive as the shared Archive with the private filter. Both SHALL come from the address category, whatever search area or privacy filter the address query carries. A room without the private setting MUST NOT appear in either list.
 
 #### Scenario: List opened
 - **WHEN** the user opens the Private list
-- **THEN** the rooms request carries `searchArea=Active` and `privacyFilter=Private`
+- **THEN** the rooms request names the section's search area and no privacy filter
 
 #### Scenario: Address carries another privacy value
-- **WHEN** the section list is opened with `privacyFilter=NotPrivate` in its address
-- **THEN** the request still carries `privacyFilter=Private` and no non-private room is listed
+- **WHEN** the section list is opened with `searchArea=Active` or `privacyFilter=NotPrivate` in its address
+- **THEN** the request still names the section's search area and no non-private room is listed
 
 #### Scenario: Archive address carries the active search area
 - **WHEN** `/private/archived/filter?searchArea=Active` is opened
-- **THEN** the request carries `searchArea=Archive` and only archived private rooms are listed
+- **THEN** the request names the Archive area with the private filter, and only archived private rooms are listed
 
 #### Scenario: Connected third-party room
 - **WHEN** the user has a room on connected third-party storage
 - **THEN** that room is never listed in the Private section
 
-### Requirement: Rooms section excludes private rooms while the section is available
-The system SHALL request the Rooms list and Rooms → Archive with the privacy filter NotPrivate while the Private section is available, so a private room is listed only in its own section. While the section is not available, those lists SHALL carry no privacy filter and list private rooms as before.
+### Requirement: Rooms section never lists private rooms
+The system SHALL request the Rooms list without a privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive with the non-private filter, since the shared Archive holds both, whether the Private section is available or not. While the section is not available, private rooms SHALL NOT be listed anywhere in the client.
 
 #### Scenario: Section available
 - **WHEN** the user opens Rooms or Rooms → Archive while the section is available
-- **THEN** the request carries `privacyFilter=NotPrivate` and no private room is listed
+- **THEN** the Rooms request carries no privacy filter, the Rooms → Archive request carries the non-private filter, and no private room is listed
 
 #### Scenario: Section not available
-- **WHEN** the user opens Rooms while the section is not available
-- **THEN** the request carries no privacy filter and private rooms are listed with their private badge
+- **WHEN** the user opens Rooms or Rooms → Archive while the section is not available
+- **THEN** no private room is listed, and the requests carry the same filters as while the section is available
 
 #### Scenario: Address asks Rooms for private rooms
 - **WHEN** a Rooms address carrying `privacyFilter=Private` is opened while the section is available
-- **THEN** the request carries `privacyFilter=NotPrivate`
+- **THEN** the request carries no privacy filter and lists the Rooms root only
 
 #### Scenario: Room group opened in Rooms
-- **WHEN** a room group that contains private rooms is opened in Rooms while the section is available
-- **THEN** the private rooms of that group are not listed
+- **WHEN** a room group of the Rooms area is opened while the section is available
+- **THEN** no private room is listed in it
 
 #### Scenario: Room group editor in Rooms
 - **WHEN** the user edits the room groups of the Rooms section while the Private section is available
 - **THEN** private rooms are not offered for grouping
 
 ### Requirement: Scope holds on every request of a list
-The system SHALL apply the section's privacy filter and search area to every rooms-list request of the Rooms and Private lists. That covers:
+The system SHALL apply the section's search area to every rooms-list request of the Private list and its Archive, and the Rooms area to every request of the Rooms lists. That covers:
 - the first page and further pages loaded on scroll;
 - search, sorting and filter changes;
 - refreshes after live updates;
@@ -130,19 +100,19 @@ The system SHALL apply the section's privacy filter and search area to every roo
 
 #### Scenario: Next page
 - **WHEN** the user scrolls the Private list to load the next page
-- **THEN** the next-page request carries the same `privacyFilter=Private`
+- **THEN** the next-page request names the section's search area
 
 #### Scenario: Search in Rooms
 - **WHEN** the user searches the Rooms list while the section is available
-- **THEN** the search request carries `privacyFilter=NotPrivate`
+- **THEN** the search request names the Rooms area and no privacy filter
 
 #### Scenario: Refill after archiving
 - **WHEN** the user archives a room in a Private list that has more rooms than one page
-- **THEN** the refill request carries `privacyFilter=Private` and only private rooms move up into the list
+- **THEN** the refill request names the section's search area and only private rooms move up into the list
 
 #### Scenario: Restore from the archive
 - **WHEN** the user restores a private room from Private → Archive
-- **THEN** the user stays in Private → Archive, whose refreshed list requests `searchArea=Archive` with `privacyFilter=Private` and no longer contains the room
+- **THEN** the user stays in Private → Archive, whose refreshed list names the section's archive and no longer contains the room
 
 ### Requirement: No Recent, Favorites, Templates or Trash under the section
 The system SHALL NOT offer Recent, Favorites, Templates or Trash under the Private section, because private content never reaches them:
@@ -154,20 +124,6 @@ The system SHALL NOT offer Recent, Favorites, Templates or Trash under the Priva
 #### Scenario: Section expanded
 - **WHEN** the user expands the Private item
 - **THEN** Archive is the only sub-item
-
-### Requirement: No new-items counter on the section item
-The system SHALL NOT show a new-items counter on the Private item or on its Archive sub-item in this version, because the section has no folder of its own to count against. A private room's own row in the list keeps its new-items badge.
-
-#### Scenario: New file in a private room
-- **WHEN** another member uploads a file into a private room the user belongs to
-- **THEN** the Private item shows no counter, and the room's row in the Private section list shows its new-items badge
-
-### Requirement: Rooms counter keeps counting private rooms
-The system SHALL keep counting new items of private rooms in this version, because the server counts them under the Rooms root. This covers the Rooms item's new-items counter, its new-items panel and its mark-all-as-read. An item opened from that panel SHALL open under the Private section.
-
-#### Scenario: New file in a private room
-- **WHEN** another member uploads a file into a private room while the section is available
-- **THEN** the Rooms item's counter grows, and opening that entry from its new-items panel shows the file under `/private`
 
 ### Requirement: Private rooms open inside the section
 The system SHALL open a private room, and every folder inside it, under the section addresses while the section is available, whatever entry point led there. A Rooms address (`/rooms/shared/{id}/filter`, `/rooms/shared/filter?folder={id}` or `/rooms/archived/filter?folder={id}`) that turns out to hold a private room or one of its folders SHALL be replaced with its `/private` counterpart. This SHALL hold even while the Rooms app is switched off.
@@ -360,18 +316,19 @@ The system SHALL NOT offer the AI chat button or any AI quick-action tile on a P
 - **THEN** no AI chat button or AI tile is shown
 
 ### Requirement: Section filter
-The system SHALL NOT offer the room-type group, the third-party storage group or the room-group controls in the filter of the Private section list and its Archive. Search, owner, tags, quota and sorting SHALL work as in Rooms.
+The system SHALL NOT offer the room-type group or the third-party storage group in the filter of the Private section list and its Archive. Search, owner, tags, quota and sorting SHALL work as in Rooms. The room-group controls SHALL be offered in the Private list as in Rooms, and SHALL NOT be offered in its Archive.
 
 #### Scenario: Filter opened in the section
 - **WHEN** the user opens the filter panel in the Private list
 - **THEN** no room-type or storage options are offered, and owner and tags filters are available
 
-### Requirement: No room groups in the section
-The system SHALL NOT offer room grouping in the Private section in this version. There is no grouping toggle, no group chips, no pinned group and no "add to group" action.
+#### Scenario: Room-group controls in the section
+- **WHEN** the user opens the Private list while room grouping is on
+- **THEN** the group chips of the section and the group management control are shown, with the groups of the Private section only
 
-#### Scenario: Context menu of a private room in the section
-- **WHEN** the user opens the context menu of a private room in the Private list
-- **THEN** no create-group or add-to-group entry is offered
+#### Scenario: Room-group controls in the archive
+- **WHEN** the user opens Private → Archive
+- **THEN** no room-group controls are shown
 
 ### Requirement: Section empty state
 The system SHALL show the Private section empty state when the unfiltered section list is empty:
@@ -436,20 +393,6 @@ The system SHALL redirect `/e2e-rooms` to `/private/filter`, and `/e2e-rooms?sec
 - **WHEN** the user opens `/e2e-rooms?section=archive` while the section is available
 - **THEN** the address is replaced with `/private/archived/filter`
 
-### Requirement: Apps catalog uses the section label
-The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.
-
-#### Scenario: Catalog with the flag
-- **WHEN** an administrator opens the apps settings with the opt-in set
-- **THEN** the E2E rooms app is listed as Common:Private with its description
-
-### Requirement: Section is not a start page option
-The system SHALL NOT offer the Private section as a default start page in the file-management settings in this version.
-
-#### Scenario: Default page setting
-- **WHEN** the user opens the default start page setting while the section is available
-- **THEN** Private is not among the options
-
 ### Requirement: Live updates skip rooms the user cannot read
 The system SHALL read a room or folder that arrives through a live update without the forbidden handling, and SHALL drop the update silently when the read is refused or fails. The server sends the events of every room in Rooms to all portal administrators, including private rooms they are not members of, so a refused read is an expected outcome, not an error the user caused.
 
@@ -460,3 +403,91 @@ The system SHALL read a room or folder that arrives through a live update withou
 #### Scenario: Private room updated
 - **WHEN** a private room the administrator is not a member of is renamed while the administrator has the Rooms list open
 - **THEN** no Access denied message is shown and the list is unchanged
+
+### Requirement: Private item carries the Beta badge
+The system SHALL show the Beta badge next to the label of the Private sidebar item while the sidebar is expanded. The badge tooltip SHALL show the title Common:PrivateRoomsBetaTitle and the text Common:PrivateRoomsBetaDescription, followed by the feedback links the other Beta badges of the client show. The Archive sub-item SHALL NOT carry the badge.
+
+#### Scenario: Beta badge shown
+- **WHEN** the expanded sidebar renders while the section is available
+- **THEN** the Private item shows the Beta badge, and the Archive sub-item shows none
+
+#### Scenario: Badge tooltip
+- **WHEN** the user opens the tooltip of the Beta badge of the Private item
+- **THEN** it shows Common:PrivateRoomsBetaTitle as its title and Common:PrivateRoomsBetaDescription with the feedback links, and no text of another beta feature
+
+### Requirement: Section availability follows the E2E rooms app
+The system SHALL make the Private section available while the E2E rooms app is on for the portal. Every app is on in SaaS, so the section is always available there. For the client in an embedded frame, the frame configuration SHALL also carry the `privateRooms` property, read once that configuration has arrived. Switching the app on or off in the apps settings SHALL take effect without a reload.
+
+#### Scenario: SaaS portal
+- **WHEN** the page loads on a SaaS portal outside a frame
+- **THEN** the Private section is available
+
+#### Scenario: Standalone portal with the app on
+- **WHEN** the page loads on a standalone portal where the E2E rooms app is on
+- **THEN** the Private section is available
+
+#### Scenario: Frame configuration carries the opt-in
+- **WHEN** the client runs in an embedded frame whose configuration carries `privateRooms: true`, on a portal where the E2E rooms app is on
+- **THEN** the Private section is available once the configuration has arrived
+
+#### Scenario: Frame configuration without the opt-in
+- **WHEN** the client runs in an embedded frame whose configuration does not carry the opt-in
+- **THEN** the Private section is not available in the frame
+
+#### Scenario: App switched off on a standalone portal
+- **WHEN** an administrator switches the E2E rooms app off while the section is shown
+- **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
+
+### Requirement: Private addresses open in Rooms while the section is not available
+The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
+
+#### Scenario: Link opened while the section is not available
+- **WHEN** a member of a private room opens `/private/{roomId}/filter` on a standalone portal where the E2E rooms app is off
+- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the room opens in the Rooms section
+
+### Requirement: Apps catalog titles the E2E rooms app Private
+The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.
+
+#### Scenario: Catalog on a standalone portal
+- **WHEN** an administrator of a standalone portal opens the apps settings
+- **THEN** the E2E rooms app is listed as Common:Private with its description, and can be switched off and on
+
+### Requirement: New-items counter on the section item
+The system SHALL show on the Private item the new-items count of the Private root, open that root's new-items panel from it and offer mark-all-as-read there, as the Rooms item does for the Rooms root. An item opened from that panel SHALL open under the Private section.
+
+#### Scenario: New file in a private room
+- **WHEN** another member uploads a file into a private room the user belongs to
+- **THEN** the Private item's counter grows, and opening that entry from its new-items panel shows the file under `/private`
+
+#### Scenario: Mark all as read
+- **WHEN** the user marks all as read on the Private item
+- **THEN** the Private item's counter is cleared and the badges of its rooms are gone
+
+### Requirement: Rooms counter leaves private rooms out
+The system SHALL show on the Rooms item the new-items count of the Rooms root only. A new item of a private room SHALL NOT grow that counter or appear in the Rooms item's new-items panel.
+
+#### Scenario: New file in a private room
+- **WHEN** another member uploads a file into a private room while the section is available
+- **THEN** the Rooms item's counter does not change and its new-items panel does not list the file
+
+### Requirement: Section is a start page option while available
+The system SHALL offer the Private section as a default start page in the file-management settings while the section is available, and SHALL open it at start when chosen. While the section is not available, the option SHALL NOT be offered, and a start page set to Private SHALL open Rooms.
+
+#### Scenario: Default page setting
+- **WHEN** the user opens the default start page setting while the section is available
+- **THEN** Private is among the options, and choosing it opens the Private list at the next start
+
+#### Scenario: Section not available
+- **WHEN** the start page is set to Private and the section is not available
+- **THEN** Rooms opens, and Private is not among the options
+
+### Requirement: Room groups in the section
+The system SHALL offer room grouping in the Private section as in Rooms: the grouping toggle, group chips, pinned groups and the create-group and add-to-group actions, with groups of the section's own area that hold private rooms only. A group of Rooms SHALL NOT offer or list a private room.
+
+#### Scenario: Context menu of a private room in the section
+- **WHEN** the user opens the context menu of a private room in the Private list
+- **THEN** create-group and add-to-group are offered, and add-to-group lists the groups of the Private section only
+
+#### Scenario: Group opened in the section
+- **WHEN** the user opens a room group in the Private section
+- **THEN** only private rooms are listed in it

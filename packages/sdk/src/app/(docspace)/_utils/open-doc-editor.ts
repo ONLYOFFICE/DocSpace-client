@@ -52,8 +52,8 @@ type OpenDocEditorParams = {
   /**
    * The SDK frame config, when available. When a host opted into the
    * `onEditorOpen` event, opening is delegated to the host instead of
-   * navigating. `sdkConfig` is null in the internal client embedding, so
-   * this branch is skipped there.
+   * navigating, except for an encrypted file. `sdkConfig` is null in the
+   * internal client embedding, so this branch is skipped there.
    */
   frameConfig?: TFrameConfig | null;
   /** Item payload forwarded to the host via the `onEditorOpen` event. */
@@ -114,7 +114,10 @@ export default function openDocEditor({
   };
 
   // 1. Host opted into onEditorOpen: delegate to the host (open flow only).
-  if (!isCreate && frameConfig?.events?.onEditorOpen) {
+  // Spec: private-rooms/editor-integration, "SDK does not hand an encrypted file to the host"
+  const isEncrypted = !!(file as { encrypted?: boolean } | undefined)
+    ?.encrypted;
+  if (!isCreate && !isEncrypted && frameConfig?.events?.onEditorOpen) {
     frameCallEvent({ event: "onEditorOpen", data: { ...file, share, action } });
     return;
   }

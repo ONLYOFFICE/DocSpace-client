@@ -494,7 +494,12 @@ replaces a read.
   private room. The client's invite panel offers people only
   (`private-rooms/room-membership`, "Invite panel offers people only"), so
   the client never sends a group share; the API and the SDK generic panel
-  do not stop one, which is why 6.4 stays.
+  do not stop one, which is why 6.4 stays. Superseded on 2026-11-10: the
+  owner decided that groups and guests are not supported in private rooms in
+  this version, and the server already refuses a group's share with 403 (its
+  key check finds no key for a group, `FileSharing.cs:270-276`), so tasks 6.4
+  and 6.5 and the group revocation requirement were removed
+  (`private-rooms-spec-consistency`).
 - Deactivation: deactivating a user revokes no keys; the reply counts it
   as offboarding (task 8.1), as this change does.
 - `PUT files/rooms/{id}/share` still stops at the first invitee without a
@@ -685,6 +690,46 @@ six encrypted files, no subfolder); no data was changed:
     form-filling room "are refused" as private. The code at `c866c055e1`
     refuses neither at creation (`FileStorageService.cs:666-690`,
     `:1220-1230`), so task 12.8 stays open.
+
+### Landed after 2026-11-06 (read in `ae457bdff6`, `d8b46d2b9a` and `62419af921`)
+
+Read on 2026-11-11 with `git show` in `../server`, whose head is
+`a7d94e4b81`. None of the three changes a task of this change.
+
+- `ae457bdff6` (2026-11-06), upload sessions. A small upload, stored with
+  its one part, now removes its session
+  (`UploadController`, `products/ASC.Files/Server/Api/UploadController.cs`,
+  and `ChunkedUploaderHandler`,
+  `products/ASC.Files/Core/HttpHandlers/ChunkedUploaderHandler.cs`), so a
+  repeated finalize, an abort or another part of it answers 404, as a
+  finalized large session does. The encrypted-files mock and the main
+  `server-contract` were read against `a7d94e4b81` on 2026-11-10
+  (`private-rooms-server-contract-sync`, archived).
+- `d8b46d2b9a` (2026-11-08), documentation only. The webhook contract
+  (`common/ASC.Webhooks.Core/Contract/docspace-webhooks.yaml`) lists folder
+  type 42, PrivateRooms, among the root types.
+- `62419af921` (2026-11-08), primary external links. A revoked primary
+  link of a file or a folder is created anew by an explicit create request
+  and stays 404 for a read (`FileStorageService`, `FilesController`,
+  `FoldersController`). A private room and its content take no external
+  link, so nothing changes for them.
+
+### Release stand check (2026-11-10, `tests.onlyoffice.io`)
+
+Observed by the review of 2026-11-10 (DocSpace `4.1.0.12351`, Document
+Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
+
+- **AI tools in the editor (task 16.1).** For an encrypted docx, xlsx,
+  pptx and PDF form the editor configuration carries
+  `customization.ai.disabled: false`, and the editor shows its AI tools
+  tab. The task is accepted when the configuration of an encrypted file
+  carries `customization.ai.disabled: true` and the tab is gone.
+- **Letter labels (task 4.5).** The Russian interface shows the labels of
+  the server in English; `PrivateRoomTitle` and `PrivateFolderTitle` are
+  translated for the default culture only. The task is accepted when the
+  labels of the letters arrive in the user's language. The title of the
+  section root and the reason of a refusal are tasks of
+  `private-rooms-server-followups`.
 
 ## Goals / Non-Goals
 
@@ -936,9 +981,10 @@ six encrypted files, no subfolder); no data was changed:
     needs the owner part. A group's removal revokes nothing yet:
     `SetAceObjectAsync` leaves group subjects out of the users it collects
     (`!w.SubjectGroup`, `FileSharing.cs:444`), so a user who loses the
-    room with the group's share keeps their keys; task 6.4 asks the
-    server to revoke them, and the client runs no revocation for a group
-    either, since its run could not remove them. Alternative: keep the client run as a belt and
+    room with the group's share keeps their keys. No group can join a
+    private room, though (the share is refused with 403, and groups are not
+    supported in this version by the owner's decision of 2026-11-10), so no
+    group revocation is planned, and the client runs none either. Alternative: keep the client run as a belt and
     braces; rejected, it only re-writes entries the server deletes anyway
     and shows a notice about work it did not do.
 
@@ -1061,8 +1107,8 @@ six encrypted files, no subfolder); no data was changed:
   the user leaves it, is removed from it, has their access cleared or
   their personal data deleted, audited as `RoomFileKeysRevoked`. No
   manager route. Task 6.3 adapts the client; task 8.1 keeps the owner part
-  of offboarding; task 6.4 covers the users who lose the room with a
-  group's removal, which the server does not revoke yet.
+  of offboarding. A group's removal needs no revocation: no group can be a
+  member of a private room.
 - Server refusal of plaintext written into a private room: closed on
   2026-11-05, decision 21, at the upload session and on the file write
   path, after `copyas` output (decision 15) and folders (decision 16) on

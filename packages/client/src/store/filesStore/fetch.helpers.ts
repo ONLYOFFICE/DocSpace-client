@@ -72,6 +72,8 @@ import {
   setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import { noticeOwnKeysOnRoomEntry } from "SRC_DIR/helpers/ownKeyListNotice";
+import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
 import {
   getSectionAddressCorrection,
   SECTION_DECIDED_STATE,
@@ -322,10 +324,7 @@ export function fetchFilesImpl(
       }
 
       if (data.current.private) {
-        const keys = self.userStore?.encryptionKeys;
-        if (!Array.isArray(keys) || keys.length === 0) {
-          toastr.warning(i18n.t("Common:EncryptionKeysNotConfigured"));
-        }
+        noticeOwnKeysOnRoomEntry(self.userStore);
 
         // The room id may differ from data.current.id when navigating into
         // a sub-folder: pathParts[1] is the room, current is the sub-folder.
@@ -808,13 +807,18 @@ export function fetchRoomsImpl(
           // Spec: private-rooms/sidebar-section, "Section titles and path labels"
           if (self.categoryType === CategoryType.PrivateRooms)
             setDocumentTitle(i18n.t("Common:Private"));
+          // The AI root is titled by the client, as the tree and the section
+          // header title it; the server's folder title is not shown anywhere.
+          if (self.categoryType === CategoryType.AiHub)
+            setDocumentTitle(
+              getAiWorkspaceTitle(i18n.t, window.location.search),
+            );
 
           const isEmptyList = data.folders.length === 0;
           if (filter && isEmptyList) {
             const {
               subjectId,
               filterValue,
-              type,
               withSubfolders: withRoomsSubfolders,
               searchInContent: searchInContentRooms,
               tags,
@@ -825,7 +829,7 @@ export function fetchRoomsImpl(
               subjectId ||
               filter.subjectOwnerId ||
               filterValue ||
-              type ||
+              filter.hasTypeFilter() ||
               filter.provider ||
               withRoomsSubfolders ||
               searchInContentRooms ||
@@ -910,10 +914,10 @@ export function fetchRoomsImpl(
 
 /**
  * The copy of a rooms filter a list request sends: the Private section asks
- * for private rooms only, and Rooms for none while that section exists.
+ * for its own area, and Rooms for none of the private rooms.
  */
 export const scopeRoomsRequest = (
-  self: FilesStore,
+  _self: FilesStore,
   filter: TRoomsFilter,
 ): TRoomsFilter =>
   withRoomsRequestScope(
@@ -921,7 +925,6 @@ export const scopeRoomsRequest = (
     getRoomsRequestScope(
       getCategoryType(window.DocSpace?.location ?? window.location),
       filter.searchArea,
-      !!self.appsStore?.isPrivateRoomsSectionAvailable,
     ),
   );
 

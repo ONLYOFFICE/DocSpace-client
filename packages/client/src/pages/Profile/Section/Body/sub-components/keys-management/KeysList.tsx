@@ -40,6 +40,8 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
+
+import { KEY_STATUS_BADGE_COLORS } from "./keyStatusBadgeColors";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@onlyoffice/apps-ui-kit/constants";
@@ -116,7 +118,8 @@ const KeyItem: React.FC<KeyItemProps> = ({
             <div className={styles.keyItemBadges}>
               <Badge
                 label={t("Common:Active")}
-                backgroundColor={globalColors.secondGreen}
+                backgroundColor={KEY_STATUS_BADGE_COLORS.active.background}
+                color={KEY_STATUS_BADGE_COLORS.active.text}
                 maxWidth="none"
               />
             </div>
@@ -224,7 +227,8 @@ export const KeysList: React.FC<KeysListProps> = ({
       <div className={styles.noKeys}>
         <Badge
           label={t("Common:NoKey")}
-          backgroundColor={globalColors.mainOrange}
+          backgroundColor={KEY_STATUS_BADGE_COLORS.noKey.background}
+          color={KEY_STATUS_BADGE_COLORS.noKey.text}
           maxWidth="none"
         />
         <Text fontSize="13px" color={globalColors.gray}>

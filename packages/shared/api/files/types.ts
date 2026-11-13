@@ -60,8 +60,23 @@ export type TFile = TFileBase & {
   hasMetadataFields?: boolean;
 };
 
+export type TFormFieldKeyChange = {
+  oldKey: string;
+  newKey: string;
+};
+
+export type TFormFieldChangesRequest = {
+  version: number;
+  // One editor session: the reports of a session replace each other, while the sessions of one user on one version
+  // that is not saved yet each keep their own renames.
+  sessionId: string;
+  sequence: number;
+  renames: TFormFieldKeyChange[];
+};
+
 export type TFileEncryptionInfo = {
-  userKeys: Array<{
+  /** Absent for a user without keys: the server does not write a null property. */
+  userKeys?: Array<{
     id: string;
     userId: string;
     publicKey: string;

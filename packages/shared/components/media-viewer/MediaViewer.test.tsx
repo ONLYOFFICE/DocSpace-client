@@ -45,6 +45,12 @@ import {
 } from "@testing-library/react";
 
 import MediaViewer from "./MediaViewer";
+import {
+  getDesktopMediaContextModel,
+  getMobileMediaContextModel,
+  getPDFContextModel,
+} from "./MediaViewer.helpers";
+import type { TFile } from "../../api/files/types";
 import { DeviceType, FileStatus, FileType, FolderType } from "../../enums";
 import { MediaViewerProps } from "./MediaViewer.types";
 import { NextButton } from "./sub-components/Buttons/NextButton";
@@ -426,4 +432,40 @@ describe("MediaViewer", () => {
     // Button may not be rendered in mocked component
     expect(contextMenuButton).toBeDefined();
   });
+});
+
+describe("Media viewer menu models", () => {
+  const t = ((key: string) => key) as unknown as TFunction;
+  const renamable = {
+    ...mockFile,
+    security: { ...mockFile.security, Rename: true },
+  } as unknown as TFile;
+
+  const visibleKeys = (model: { key: string | number; disabled?: boolean }[]) =>
+    model.filter((option) => !option.disabled).map((option) => option.key);
+
+  const models = {
+    desktop: (file: TFile) =>
+      getDesktopMediaContextModel(t, file, false, false, {}),
+    mobile: (file: TFile) => getMobileMediaContextModel(t, file, false, {}),
+    pdf: (file: TFile) => getPDFContextModel(t, file, {}),
+  };
+
+  it.each(Object.keys(models) as (keyof typeof models)[])(
+    "Media viewer menu of an encrypted file (%s)",
+    (kind) => {
+      const model = models[kind]({ ...renamable, encrypted: true });
+
+      expect(visibleKeys(model)).not.toContain("rename");
+    },
+  );
+
+  it.each(Object.keys(models) as (keyof typeof models)[])(
+    "Media viewer menu of a file that is not encrypted (%s)",
+    (kind) => {
+      const model = models[kind](renamable);
+
+      expect(visibleKeys(model)).toContain("rename");
+    },
+  );
 });

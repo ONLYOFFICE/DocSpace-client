@@ -156,6 +156,10 @@ type MockProjectOptions = {
   /** The room tags, by name. */
   tags?: string[];
   profile?: typeof PROFILE | null;
+  /** The project's instructions to the chat. */
+  instructions?: string;
+  /** The suggestion chips of the project's empty chat. */
+  suggestions?: { name: string; prompt: string }[];
   instructionsRooms?: (typeof INSTRUCTIONS_ROOMS)[keyof typeof INSTRUCTIONS_ROOMS][];
   knowledgeRooms?: (typeof KNOWLEDGE_ROOMS)[keyof typeof KNOWLEDGE_ROOMS][];
 };
@@ -176,6 +180,8 @@ export const aiProjectMock = ({
   pinned = false,
   tags = [],
   profile = PROFILE,
+  instructions = "",
+  suggestions = [],
   instructionsRooms = [],
   knowledgeRooms = [],
 }: MockProjectOptions) => {
@@ -207,6 +213,8 @@ export const aiProjectMock = ({
     security: sec,
     aiProject: {
       profile,
+      instructions,
+      suggestions,
       instructionsRooms,
       knowledgeRooms,
       canEditSettings: sec.EditRoom,
@@ -217,9 +225,10 @@ export const aiProjectMock = ({
 export type AiProjectMock = ReturnType<typeof aiProjectMock>;
 
 /**
- * The stock list: a project with both source kinds, one with skills only,
- * and one shared with the caller as a member, without sources at all. Dates
- * descend as the default sort lists them.
+ * The stock list: a project with both source kinds, instructions and three
+ * suggestion chips, one with skills only and a single chip, and one shared
+ * with the caller as a member, without sources, instructions or chips at
+ * all. Dates descend as the default sort lists them.
  */
 export const AI_PROJECTS: AiProjectMock[] = [
   aiProjectMock({
@@ -229,6 +238,13 @@ export const AI_PROJECTS: AiProjectMock[] = [
     created: "2026-10-22T10:00:00.0000000+00:00",
     pinned: true,
     tags: ["sales", "internal"],
+    instructions:
+      "You are a sales assistant. Answer briefly, cite the contract you rely on and flag every deadline.",
+    suggestions: [
+      { name: "Summarize contracts", prompt: "Summarize the contracts signed this month and list the main risks." },
+      { name: "Draft a follow-up", prompt: "Draft a follow-up email to a client after the first sales call." },
+      { name: "Find deadlines", prompt: "Find all payment and delivery deadlines in the knowledge base." },
+    ],
     instructionsRooms: [INSTRUCTIONS_ROOMS.sales, INSTRUCTIONS_ROOMS.legal],
     knowledgeRooms: [KNOWLEDGE_ROOMS.contracts],
   }),
@@ -238,6 +254,9 @@ export const AI_PROJECTS: AiProjectMock[] = [
     color: "FF6680",
     created: "2026-10-21T10:00:00.0000000+00:00",
     tags: ["legal"],
+    suggestions: [
+      { name: "Review a contract", prompt: "Review the attached contract and point out clauses that need a lawyer." },
+    ],
     instructionsRooms: [INSTRUCTIONS_ROOMS.legal],
   }),
   aiProjectMock({
@@ -414,6 +433,60 @@ export const aiProjectModelHandlers = (
       const id = new URL(request.url).searchParams.get("id");
       if (id !== PROFILE.id) return HttpResponse.json({ error: "Profile not found" }, { status: 404 });
       return HttpResponse.json({ id: PROFILE.id, name: PROFILE.name, providerType: PROFILE.provider, capabilities: 1 });
+    }),
+  ];
+};
+
+/**
+ * `GET` / `PUT files/rooms/:id/instructions`: the project's instructions to
+ * the chat ("" when none); a write replaces them, "" clears them.
+ */
+export const aiProjectInstructionsHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/instructions`;
+  const answer = (project: AiProjectMock) =>
+    HttpResponse.json({ response: { instructions: project.aiProject.instructions } });
+  return [
+    http.get(url, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      return answer(project);
+    }),
+    http.put(url, async ({ params, request }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      const { instructions } = (await request.json()) as { instructions?: string };
+      project.aiProject.instructions = instructions ?? "";
+      return answer(project);
+    }),
+  ];
+};
+
+/**
+ * `GET` / `PUT files/rooms/:id/suggestions`: the suggestion chips of the
+ * project's empty chat; a write replaces them, `[]` clears them.
+ */
+export const aiProjectSuggestionsHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/suggestions`;
+  const answer = (project: AiProjectMock) =>
+    HttpResponse.json({ response: { suggestions: project.aiProject.suggestions } });
+  return [
+    http.get(url, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      return answer(project);
+    }),
+    http.put(url, async ({ params, request }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return notFound();
+      const { suggestions } = (await request.json()) as { suggestions?: AiProjectMock["aiProject"]["suggestions"] };
+      project.aiProject.suggestions = suggestions ?? [];
+      return answer(project);
     }),
   ];
 };
@@ -733,6 +806,8 @@ export const aiProjectsHandlers = (
   aiProjectSkillsHandler(port, projects),
   ...aiProjectSourcesHandlers(port, projects),
   ...aiProjectModelHandlers(port, projects),
+  ...aiProjectInstructionsHandlers(port, projects),
+  ...aiProjectSuggestionsHandlers(port, projects),
   aiProjectGetByIdHandler(port, projects),
   aiProjectCreateHandler(port, projects),
   roomLogoUploadHandler(port),

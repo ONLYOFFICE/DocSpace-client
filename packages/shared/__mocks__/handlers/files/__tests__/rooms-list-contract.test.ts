@@ -41,7 +41,13 @@ import { describe, it, expect, beforeAll, afterAll, afterEach } from "vitest";
 
 import { setupServer } from "../../../e2e/msw-compat";
 import { roomListHandler, TypeRoomList } from "../roomList";
-import { privateRoomListHandler } from "../privateRoomList";
+import {
+  privateRoomListHandler,
+  privateSectionHandler,
+} from "../privateRoomList";
+import { recentHandler } from "../recent";
+import { roomsNewsHandler } from "../roomsNews";
+import { rootHandler } from "../root";
 import { BASE_URL, API_PREFIX } from "../../../e2e/utils";
 
 const PORT = "3300";
@@ -52,9 +58,15 @@ const ORDINARY_ROOM_ID = 9301;
 const PRIVATE = 1;
 const NOT_PRIVATE = 2;
 
+// FolderType (Core/Core/Entries/Folder.cs)
+const ROOMS_ROOT = 14;
+const PRIVATE_ROOT = 42;
+
 type TRoomsBody = {
   response: {
     folders: { id: number; private: boolean; providerItem?: boolean }[];
+    current: { id: number; title: string; rootFolderType: number; new: number };
+    pathParts: { id: number; title: string; folderType: number }[];
     total: number;
     count: number;
   };
@@ -77,7 +89,7 @@ afterEach(() => server.resetHandlers());
 
 afterAll(() => server.close());
 
-describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonController.GetRoomsFolder, FolderDao.BuildRoomsQuery)", () => {
+describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonController.GetRoomsFolder, FileSecurity.GetVirtualRoomsAsync, FolderDao.BuildRoomsQuery)", () => {
   const useList = () =>
     server.use(
       privateRoomListHandler(PORT, {
@@ -86,10 +98,22 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
       }),
     );
 
-  it("lists every room without a privacy filter", async () => {
+  it.each(["?searchArea=Active", ""])(
+    "Active rooms without a filter (%s)",
+    async (query) => {
+      useList();
+
+      const list = await getRooms(query);
+
+      expect(list.folders.map((room) => room.id)).toEqual([ORDINARY_ROOM_ID]);
+      expect(list).toMatchObject({ total: 1, count: 1 });
+    },
+  );
+
+  it("Archive without a filter lists every room", async () => {
     useList();
 
-    const list = await getRooms("?searchArea=Active");
+    const list = await getRooms("?searchArea=Archive");
 
     expect(list.folders.map((room) => room.id)).toEqual([
       PRIVATE_ROOM_ID,
@@ -133,7 +157,7 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
   it("Rights reported", async () => {
     useList();
 
-    const list = (await getRooms("?searchArea=Active")) as unknown as {
+    const list = (await getRooms("?searchArea=Archive")) as unknown as {
       folders: { id: number; security: Record<string, boolean> }[];
     };
     const securityOf = (id: number) =>
@@ -161,7 +185,9 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
       }),
     );
 
-    const list = (await getRooms("?searchArea=Active")) as unknown as {
+    const list = (await getRooms(
+      `?searchArea=Active&privacyFilter=${PRIVATE}`,
+    )) as unknown as {
       folders: { id: number; foldersCount: number }[];
     };
 
@@ -173,15 +199,184 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
     ]);
   });
 
-  it("NotPrivate leaves the private room out", async () => {
-    useList();
+  it.each(["Active", "Archive"])(
+    "NotPrivate leaves the private room out, with searchArea=%s",
+    async (searchArea) => {
+      useList();
+
+      const list = await getRooms(
+        `?searchArea=${searchArea}&privacyFilter=${NOT_PRIVATE}`,
+      );
+
+      expect(list.folders.map((room) => room.id)).toEqual([ORDINARY_ROOM_ID]);
+      expect(list).toMatchObject({ total: 1, count: 1 });
+    },
+  );
+});
+
+describe("Private section (mirrors VirtualRoomsCommonController.GetRoomsSectionIdAsync, FoldersControllerCommon.GetPrivateRoomsFolder and GetRootFoldersIdsAsync, EntryManager; PrivateRoomSectionTests)", () => {
+  const rooms = {
+    roomId: PRIVATE_ROOM_ID,
+    newItems: 3,
+    ordinaryRooms: [{ roomId: ORDINARY_ROOM_ID, title: "Ordinary" }],
+  };
+
+  it("PrivateRooms area lists only private rooms, under the Private root", async () => {
+    server.use(privateRoomListHandler(PORT, rooms));
+
+    const list = await getRooms("?searchArea=PrivateRooms");
+
+    expect(list.folders.map((room) => room.id)).toEqual([PRIVATE_ROOM_ID]);
+    expect(list).toMatchObject({ total: 1, count: 1 });
+    expect(list.current).toMatchObject({
+      title: "Private",
+      rootFolderType: PRIVATE_ROOT,
+      new: 3,
+    });
+    expect(list.pathParts).toEqual([
+      { id: list.current.id, title: "Private", folderType: PRIVATE_ROOT },
+    ]);
+  });
+
+  it("PrivateRooms area ignores a NotPrivate filter", async () => {
+    server.use(privateRoomListHandler(PORT, rooms));
 
     const list = await getRooms(
-      `?searchArea=Active&privacyFilter=${NOT_PRIVATE}`,
+      `?searchArea=PrivateRooms&privacyFilter=${NOT_PRIVATE}`,
     );
 
-    expect(list.folders.map((room) => room.id)).toEqual([ORDINARY_ROOM_ID]);
-    expect(list).toMatchObject({ total: 1, count: 1 });
+    expect(list.folders.map((room) => room.id)).toEqual([PRIVATE_ROOM_ID]);
+  });
+
+  it("Private filter on the Rooms area lists the same rooms under the Rooms root", async () => {
+    server.use(privateRoomListHandler(PORT, rooms));
+
+    const list = await getRooms(`?searchArea=Active&privacyFilter=${PRIVATE}`);
+
+    expect(list.folders.map((room) => room.id)).toEqual([PRIVATE_ROOM_ID]);
+    expect(list.current.rootFolderType).toBe(ROOMS_ROOT);
+  });
+
+  it("PrivateRooms area of the general rooms list is answered under the Private root", async () => {
+    server.use(roomListHandler(PORT, TypeRoomList.IsDefault));
+
+    const list = await getRooms("?searchArea=PrivateRooms");
+
+    expect(list.folders.every((room) => room.private)).toBe(true);
+    expect(list.current.rootFolderType).toBe(PRIVATE_ROOT);
+  });
+
+  const getSection = () =>
+    fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/@private`);
+
+  it("Section route lists only private rooms", async () => {
+    server.use(privateSectionHandler(PORT, rooms));
+
+    const res = await getSection();
+    const section = ((await res.json()) as TRoomsBody).response;
+
+    expect(res.status).toBe(200);
+    expect(section.folders.map((room) => room.id)).toEqual([PRIVATE_ROOM_ID]);
+    expect(section.current.rootFolderType).toBe(PRIVATE_ROOT);
+  });
+
+  it("Section route with the app off", async () => {
+    server.use(privateSectionHandler(PORT, { ...rooms, appOff: true }));
+
+    const res = await getSection();
+
+    expect(res.status).toBe(404);
+  });
+
+  type TRootBody = {
+    response: { current: { rootFolderType: number; title: string } }[];
+  };
+
+  const getRootTypes = async () => {
+    const res = await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/@root`);
+    return ((await res.json()) as TRootBody).response.map(
+      (root) => root.current.rootFolderType,
+    );
+  };
+
+  it("Root listing with the app on", async () => {
+    server.use(rootHandler(PORT));
+
+    const types = await getRootTypes();
+
+    // After Rooms, before Archive: the order of GetRootFoldersIdsAsync.
+    expect(types.indexOf(PRIVATE_ROOT)).toBe(types.indexOf(ROOMS_ROOT) + 1);
+    expect(types.indexOf(PRIVATE_ROOT)).toBeLessThan(types.indexOf(20));
+  });
+
+  it("Root listing with the app off", async () => {
+    server.use(rootHandler(PORT, { withPrivateRoot: false }));
+
+    expect(await getRootTypes()).not.toContain(PRIVATE_ROOT);
+  });
+
+  it("Root listing carries the Private root's count in its own new", async () => {
+    server.use(rootHandler(PORT, { privateRootNew: 4 }));
+
+    const res = await fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/@root`);
+    const roots = (
+      (await res.json()) as {
+        response: {
+          new: number;
+          current: { rootFolderType: number; new: number };
+        }[];
+      }
+    ).response;
+    const privateRoot = roots.find(
+      (root) => root.current.rootFolderType === PRIVATE_ROOT,
+    );
+
+    // FileMarker.SetTagsNewAsync writes the sum to the anchor itself.
+    expect(privateRoot?.current.new).toBe(4);
+    expect(privateRoot?.new).toBe(0);
+  });
+
+  it("Rooms news lists every room under the Rooms root, private ones marked", async () => {
+    server.use(
+      roomsNewsHandler(PORT, [
+        { roomId: PRIVATE_ROOM_ID, title: "Secret", isPrivate: true },
+        { roomId: ORDINARY_ROOM_ID, title: "Team" },
+      ]),
+    );
+
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/rooms/news`,
+    );
+    const groups = (
+      (await res.json()) as {
+        response: {
+          date: string;
+          items: {
+            room: { id: number; private: boolean; roomType: number };
+            items: { id: number }[];
+          }[];
+        }[];
+      }
+    ).response;
+
+    expect(groups).toHaveLength(1);
+    expect(
+      groups[0].items.map(({ room }) => [room.id, room.private]),
+    ).toEqual([
+      [PRIVATE_ROOM_ID, true],
+      [ORDINARY_ROOM_ID, false],
+    ]);
+    expect(groups[0].items.every(({ items }) => items.length === 1)).toBe(true);
+  });
+
+  it("Recent with the PrivateRooms area is a bad request", async () => {
+    server.use(recentHandler(PORT));
+
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/files/28934?searchArea=PrivateRooms`,
+    );
+
+    expect(res.status).toBe(400);
   });
 });
 

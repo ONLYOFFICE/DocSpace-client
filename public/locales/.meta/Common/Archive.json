@@ -3,7 +3,7 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2026-11-05T16:49:39.808Z",
+  "updated_at": "2026-11-09T09:36:33.223Z",
   "comment": {
     "text": "Noun used in two senses: the Archive section of archived rooms (sidebar item under Rooms and under Private, section and header title, archive and empty-archive dialogs, history entries), and the file type name shown in the Type column for compressed archive files such as ZIP. Use one noun that fits both.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 559,
+      "line_number": 575,
       "context": "/>\n ),\n children: [\n {\n id: \"private-rooms-archive\",\n label: t(\"Common:Archive\"),\n icon: getCatalogIconUrlByType(FolderType.Archive),\n ...nav(\n searchAreaUrl(\"/private/archived/filter\", RoomSearchArea.Archive),\n ),\n },",
       "module": "/packages/client"
     },

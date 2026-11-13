@@ -53,12 +53,13 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import type { Page } from "@playwright/test";
+import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const ROOM_ID = 9200;
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
-const TOAST_KEY_FRAGMENT = "Encryption keys are not configured";
+const TOAST_KEY_FRAGMENT = "Set it up in your profile";
 const CAROL = {
   id: "33333333-3333-3333-3333-333333333333",
   displayName: "Carol Jones",
@@ -218,17 +219,18 @@ test.describe("Private room — pending access", () => {
         { timeout: 30000 },
       )
       .toEqual([TEST_USER_ID]);
-    accessHandle.current!.setRoomKeys(ROOM_ID, [
-      ownKey,
-      {
-        id: "carol-1",
-        userId: CAROL.id,
-        publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
-        privateKeyEnc: "",
-        date: "2026-01-01T00:00:00.000Z",
-        cryptoEngineId: "",
-      },
-    ]);
+    const carolKey = {
+      id: "carol-1",
+      userId: CAROL.id,
+      publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
+      privateKeyEnc: "",
+      date: "2026-01-01T00:00:00.000Z",
+      cryptoEngineId: "",
+    };
+    accessHandle.current!.setRoomKeys(ROOM_ID, [ownKey, carolKey]);
+    // The members list reads the room's missing keys: the files mock answers
+    // them for the members it knows by their keys.
+    filesHandle.current!.setRoomUserKeys([carolKey]);
 
     // The key writes of the invitation fail.
     let failKeyWrites = true;
@@ -254,6 +256,17 @@ test.describe("Private room — pending access", () => {
     await expect(page.getByTestId("invite_panel_result_pending")).toBeVisible({
       timeout: 30000,
     });
+    await test.step("Re-encryption ends with a file left out", async () => {
+      await expect(
+        // The upload of the file is still listed, so the indicator counts both.
+        page.getByRole("progressbar", { name: "Processes: 2" }),
+      ).toBeVisible();
+      await expect(
+        page
+          .getByRole("alert")
+          .filter({ hasText: "could not be made available" }),
+      ).toHaveCount(1);
+    });
     await page.getByTestId("invite_panel_close_button").click();
 
     await page.locator(".info-panel-toggle").click();
@@ -267,13 +280,28 @@ test.describe("Private room — pending access", () => {
     ]);
 
     failKeyWrites = false;
-    await page.getByTestId("info_panel_members_user_retry_access").click();
-    await unlockIfPrompted(page, passphrase);
+    const retry = page.getByRole("button", {
+      // The mocked members list names a member by its id.
+      name: `Try again for ${CAROL.id}`,
+    });
+    await test.step("Retry from the keyboard", async () => {
+      await retry.focus();
+      await page.keyboard.press("Enter");
+      await unlockIfPrompted(page, passphrase);
+    });
 
     await expect(
       page.getByText("now has access to every encrypted file in the room"),
     ).toBeVisible({ timeout: 30000 });
-    await expect(pending).toBeHidden();
+    await test.step("Retry succeeds", async () => {
+      await expect(pending).toBeHidden();
+      await expect(retry).toHaveCount(0);
+      await expect(
+        page
+          .getByTestId("info_panel_members_user")
+          .filter({ hasText: CAROL.id }),
+      ).toBeFocused();
+    });
     await expect
       .poll(() =>
         filesHandle
@@ -395,6 +423,228 @@ test.describe("Private room — member removal during uploads", () => {
     await expect
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(1);
+  });
+});
+
+test.describe("Private room — member removal from the keyboard", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  // Moves through an open role list with the arrow keys until the named
+  // option is the active one, then picks it with Enter.
+  const pickRoleWithKeyboard = async (page: Page, option: string) => {
+    for (let step = 0; step < 12; step += 1) {
+      const active = await page.evaluate(() => {
+        const id = document.activeElement?.getAttribute(
+          "aria-activedescendant",
+        );
+        return id ? (document.getElementById(id)?.textContent ?? "") : "";
+      });
+      if (active.trim().startsWith(option)) break;
+      await page.keyboard.press("ArrowDown");
+    }
+    await page.keyboard.press("Enter");
+  };
+
+  const openRemovalConfirmation = async (
+    page: Page,
+    mockRequest: WorkerFixture,
+    baseUrl: string,
+  ) => {
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          {
+            id: CAROL.id,
+            displayName: CAROL.displayName,
+            email: CAROL.email,
+            access: ShareAccessRights.Editing,
+          },
+        ],
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await page.locator(".info-panel-toggle").click();
+    await row.click();
+    await page.getByTestId("info_members_tab").click();
+
+    const roleList = page.getByRole("button", {
+      name: new RegExp(`^Role of ${CAROL.displayName}: `),
+    });
+    await roleList.focus();
+    await page.keyboard.press("Enter");
+    await pickRoleWithKeyboard(page, "Remove");
+
+    const confirmation = page.getByRole("dialog", { name: "Remove user" });
+    await expect(confirmation).toBeVisible();
+    return { roleList, confirmation };
+  };
+
+  test("Removal declined from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { roleList, confirmation } = await openRemovalConfirmation(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+
+    await page.getByTestId("remove_user_confirmation_dialog_cancel_button").focus();
+    await page.keyboard.press("Enter");
+
+    await expect(confirmation).toBeHidden();
+    await expect(roleList).toBeFocused();
+  });
+
+  test("Removal confirmed from the keyboard", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { roleList, confirmation } = await openRemovalConfirmation(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+
+    await page.getByTestId("remove_user_confirmation_dialog_ok_button").focus();
+    await page.keyboard.press("Enter");
+
+    await expect(confirmation).toBeHidden();
+    await expect(roleList).toHaveCount(0);
+    await expect(page.getByTestId("info_members_tab")).toBeFocused();
+  });
+});
+
+test.describe("Private room — refused access change", () => {
+  const REFUSED = "Access not changed: the member has no encryption keys.";
+  const SERVER_SENTENCE = "The user does not have an encryption key";
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Removal refused", async ({ page, mockRequest, baseUrl }) => {
+    const membersHandle: { current: RoomMembersHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          {
+            id: CAROL.id,
+            displayName: CAROL.displayName,
+            email: CAROL.email,
+            access: ShareAccessRights.Editing,
+          },
+        ],
+        withoutKeys: [CAROL.id],
+        handle: membersHandle,
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await page.locator(".info-panel-toggle").click();
+    await row.click();
+    await page.getByTestId("info_members_tab").click();
+    await page
+      .getByTestId("info_panel_members_user_role_combobox")
+      .first()
+      .click();
+    await page.getByText("Remove", { exact: true }).last().click();
+    await page.getByTestId("remove_user_confirmation_dialog_ok_button").click();
+
+    await expect(page.getByText(REFUSED)).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(SERVER_SENTENCE)).toHaveCount(0);
+    await expect(page.getByText("Access denied")).toHaveCount(0);
+    await expect(
+      page.getByTestId("info_panel_members_user_role_combobox").first(),
+    ).toBeVisible();
+    expect(
+      membersHandle.current!.getRequests().some(
+        (r) =>
+          r.method === "PUT" && JSON.stringify(r.body).includes(CAROL.id),
+      ),
+    ).toBe(true);
+  });
+
+  // The mocked user is a member of Carol's room and has no key.
+  test("Leave refused", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID, {
+        initial: [
+          { id: CAROL.id, displayName: CAROL.displayName, email: CAROL.email },
+          { id: TEST_USER_ID, access: ShareAccessRights.Editing },
+        ],
+        withoutKeys: [TEST_USER_ID],
+      }),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: CAROL.id,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: CAROL.id,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/private/filter`);
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+
+    await row.click({ button: "right" });
+    await page.getByText("Leave the room", { exact: true }).click();
+    await page.getByRole("button", { name: "OK", exact: true }).click();
+
+    await expect(page.getByText(REFUSED)).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("leave_room_modal_submit")).toHaveCount(0);
+    await expect(page.getByText(SERVER_SENTENCE)).toHaveCount(0);
+    await expect(page.getByTestId("table-row-0")).toContainText(
+      "Private Test Room",
+    );
+    // The shell answers a 403 with its own toast after half a second unless
+    // the caller reported the failure.
+    await page.waitForTimeout(1000);
+    await expect(page.getByText("Access denied")).toHaveCount(0);
   });
 });
 

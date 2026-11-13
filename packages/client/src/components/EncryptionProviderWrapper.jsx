@@ -60,6 +60,11 @@ import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
+import {
+  getOpenRoomId,
+  roomUnlockRequest,
+} from "SRC_DIR/helpers/roomUnlockRequest";
+
 const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   recover: filesStore?.recoverEncryptedFilenamesForCurrentView,
 }))(
@@ -72,32 +77,44 @@ const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   }),
 );
 
-const RoomUnlockEffect = inject(({ selectedFolderStore, filesStore }) => ({
-  isPrivate: selectedFolderStore?.private,
-  folderId: selectedFolderStore?.id,
+// Spec: private-rooms/key-management, "The unlock dialog on entry is raised once per private room"
+export const RoomUnlockEffect = inject(
+  ({ selectedFolderStore, filesStore, treeFoldersStore }) => ({
+  // A folder inside a private room is not private itself; its room is.
+  isPrivate: treeFoldersStore?.isPrivacyFolder,
+  roomId: getOpenRoomId(selectedFolderStore),
   sync: filesStore?.syncEncryptedRoom,
-}))(
-  observer(({ isPrivate, folderId, sync }) => {
+}),
+)(
+  observer(({ isPrivate, roomId, sync }) => {
     const { isUnlocked, hasConfiguredKey, requireIdentity } = useEncryption();
     const promptedIdRef = React.useRef(null);
 
     React.useEffect(() => {
       if (!isPrivate) {
         promptedIdRef.current = null;
+        roomUnlockRequest.reset();
         return undefined;
       }
-      if (isUnlocked || !hasConfiguredKey || folderId == null) return undefined;
-      if (promptedIdRef.current === folderId) return undefined;
-      promptedIdRef.current = folderId;
+      if (!hasConfiguredKey || roomId == null) return undefined;
+      if (isUnlocked) {
+        // A key that locks later brings the bar, not a new prompt.
+        promptedIdRef.current = roomId;
+        roomUnlockRequest.settle(roomId);
+        return undefined;
+      }
+      if (promptedIdRef.current === roomId) return undefined;
+      promptedIdRef.current = roomId;
 
       let cancelled = false;
       requireIdentity().then((identity) => {
+        roomUnlockRequest.settle(roomId);
         if (!cancelled && identity) sync?.();
       });
       return () => {
         cancelled = true;
       };
-    }, [isPrivate, isUnlocked, hasConfiguredKey, folderId, requireIdentity, sync]);
+    }, [isPrivate, isUnlocked, hasConfiguredKey, roomId, requireIdentity, sync]);
 
     return null;
   }),
@@ -162,11 +179,12 @@ const showDeviceSetupHint = (t) => {
   );
 };
 
-const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
+// Spec: private-rooms/key-management, "Device setup hint on entering a private room without keys"
+export const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   isPrivate: selectedFolderStore?.private,
 }))(
   observer(({ isPrivate }) => {
-    const { hasConfiguredKey } = useEncryption();
+    const { hasConfiguredKey, keysLoaded } = useEncryption();
     const { t } = useTranslation(["Common"]);
 
     React.useEffect(() => {
@@ -175,7 +193,7 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
     }, [t]);
 
     React.useEffect(() => {
-      if (!isPrivate || hasConfiguredKey) return;
+      if (!isPrivate || !keysLoaded || hasConfiguredKey) return;
       try {
         if (sessionStorage.getItem(DEVICE_SETUP_HINT_SESSION_KEY) === "1")
           return;
@@ -183,7 +201,7 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
       } catch {}
 
       showDeviceSetupHint(t);
-    }, [isPrivate, hasConfiguredKey, t]);
+    }, [isPrivate, keysLoaded, hasConfiguredKey, t]);
 
     return null;
   }),
@@ -288,6 +306,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   return (
     <EncryptionProvider
       userKeys={userKeys}
+      keysLoaded={Array.isArray(keys)}
       PassphraseDialog={PassphraseUnlockAdapter}
       KeyChangeDialog={KeyChangeDialog}
     >

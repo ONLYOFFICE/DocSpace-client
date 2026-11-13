@@ -136,11 +136,19 @@ The system SHALL upload every encrypted file under an opaque random UUID name th
 - **THEN** their original names are not sent to the server's upload conflict check, and MUST NOT appear in any request before or during the upload
 
 ### Requirement: PDF form flag in the header
-The system SHALL set the IS_FORM header flag when the plaintext is detected as a PDF form, so the server can classify the encrypted file as a form without decrypting it.
+The system SHALL set the IS_FORM header flag when the plaintext is detected as a PDF form, so the server can classify the encrypted file as a form without decrypting it. The detection SHALL apply the server's own plaintext rule to the first 300 bytes of a `.pdf` upload (the PDF binary comment, the first object, the form signature before the stream marker), so an encrypted upload is classified exactly as its plaintext would be by the server.
 
 #### Scenario: Form uploaded
 - **WHEN** a PDF form is uploaded to a private room
 - **THEN** the DSE3 header carries the IS_FORM flag and the server lists the file as a form
+
+#### Scenario: Marker outside the server's window
+- **WHEN** a `.pdf` whose form marker lies beyond the first 300 bytes, or lacks the first-object prefix, is uploaded to a private room
+- **THEN** the flag is not set, because the server would not classify the plaintext as a form either
+
+#### Scenario: Non-PDF upload
+- **WHEN** a file whose extension is not `.pdf` is uploaded to a private room
+- **THEN** the flag is not set and the plaintext is not inspected for the form signature
 
 ### Requirement: Secure context required
 The system SHALL refuse every encryption operation when WebCrypto is unavailable (non-HTTPS origin or unsupported browser), and SHALL tell the user with Common:EncryptionRequiresHttps where a user action triggered it.
@@ -261,11 +269,11 @@ The system SHALL keep the auto-lock preset in localStorage and SHALL ignore valu
 - **THEN** the default preset is used
 
 ### Requirement: Revocation removes access-list entries only
-The system SHALL NOT generate a new DEK or re-encrypt file content when a member is removed from a private room. The server keeps the removed member's wraps in each file's access list, because an access-list write replaces only the users it names and never removes anyone else; access ends only because the server refuses the removed member read access.
+The system SHALL NOT generate a new DEK or re-encrypt file content when a member is removed from a private room. The server deletes the removed member's wrapped keys from the files of the room itself when their share of the room is removed, the room's current owner excepted; the ciphertext stays as it is, so what the member saved or decrypted before stays readable to them.
 
 #### Scenario: Member removed
 - **WHEN** a member is removed from a private room
-- **THEN** the ciphertext and each file's access list on the server are unchanged, and the server no longer lets the member read the files
+- **THEN** the ciphertext is unchanged, the member's entries are gone from each file's access list, and the server no longer lets the member read the files
 
 ### Requirement: No forward secrecy for already-decrypted content
 The system SHALL NOT attempt to revoke access to content a removed member already decrypted or to a DEK they already unwrapped; protection of such content rests on the server refusing further downloads.
@@ -331,8 +339,8 @@ The system SHALL operate with exactly one identity key per user. When the server
 - **WHEN** the user's only access entry on a file was wrapped for an envelope that is not the selected one
 - **THEN** the file cannot be unwrapped and the ghost-state notification applies
 
-### Requirement: DSE3 header flags and name length are not authenticated
-The system SHALL NOT authenticate the flags byte or the name length of a DSE3 header in this version; only the chunk payloads and the encrypted name are authenticated. Someone able to rewrite a stored ciphertext can change the flags the header carries or remove the encrypted name without decryption detecting it. The file content cannot be changed undetected.
+### Requirement: DSE3 header flags, chunk size and name length are not authenticated
+The system SHALL NOT authenticate the flags byte, the chunk size or the name length of a DSE3 version-2 header; only the chunk payloads with their count and position, the file nonce and the encrypted name are authenticated. Someone able to rewrite a stored ciphertext can change the flags the header carries or remove the encrypted name without decryption detecting it. A rewritten chunk size breaks the framing of the chunks, so decryption fails.
 
 #### Scenario: Form flag cleared in storage
 - **WHEN** the IS_FORM flag is cleared in the header of a stored encrypted PDF form
@@ -344,6 +352,10 @@ The system SHALL NOT authenticate the flags byte or the name length of a DSE3 he
 
 #### Scenario: Content still authenticated
 - **WHEN** the chunk bytes, the chunk count or the file nonce of a stored encrypted file are changed
+- **THEN** decryption fails with an authentication or format error and MUST NOT return any plaintext
+
+#### Scenario: Chunk size rewritten in storage
+- **WHEN** the chunk size in the header of a stored encrypted file of more than one chunk is changed
 - **THEN** decryption fails with an authentication or format error and MUST NOT return any plaintext
 
 ### Requirement: A lock wipes only the cache slot
@@ -363,3 +375,66 @@ The system SHALL refuse to wrap or unwrap a file key with a private key whose by
 #### Scenario: All-zero private key
 - **WHEN** a wrap is requested with a private key of 32 zero bytes
 - **THEN** the wrap fails and no access entry is written
+
+### Requirement: Older versions of a file are not detected
+The system SHALL NOT detect that the server returned an older version of the same file in place of the current one. Every version of a file is encrypted under that file's one data key, and the chunk authentication binds the version's file nonce, the chunk count and each chunk's position, but neither the file id nor a version number. The ciphertext of another file still fails, because it was encrypted under another key.
+
+#### Scenario: Older version served
+- **WHEN** the server returns an earlier stored version of an encrypted file in place of its current version
+- **THEN** the earlier version decrypts without an error and the user sees its content
+
+#### Scenario: Another file served
+- **WHEN** the server returns the ciphertext of another encrypted file in place of this one
+- **THEN** decryption fails with an authentication error and MUST NOT return any plaintext
+
+### Requirement: Encryption protects against a storage leak and a passive server
+The system SHALL keep the content and the original name of every file of a private room unreadable to anyone who holds the stored data without a member's unlocked key: a copy of the file storage, of the database or of a backup, and a server that stores and returns what clients send it without altering it. This is the protection the encryption is designed to give; the limits of it are requirements of their own.
+
+#### Scenario: Stored data copied
+- **WHEN** someone obtains the stored files, the access lists and the identity envelopes of a portal, and no member's passphrase or recovery phrase
+- **THEN** no file content and no original file name of a private room can be read from them
+
+#### Scenario: Server relays without altering
+- **WHEN** the server stores and returns ciphertext, wraps and public keys exactly as the clients sent them
+- **THEN** it MUST NOT be able to decrypt any file of a private room
+
+### Requirement: No protection against an active server
+The system SHALL NOT protect the files of a private room against a server that alters what it answers. The server names the members a file key is wrapped for and supplies their public keys, and a key seen for the first time is pinned without a question. A server that lists a key of its own for a member, or adds a member, receives a wrap of every file uploaded or re-wrapped after that.
+
+#### Scenario: Key supplied by the server for an unseen member
+- **WHEN** the server lists, for a member this device has never seen, a public key that is not that member's
+- **THEN** the key is pinned as first seen, no dialog is shown, and the files uploaded afterwards are wrapped for it
+
+#### Scenario: Member added by the server
+- **WHEN** the server lists among the members of a private room a user the room's people never invited
+- **THEN** the next upload wraps its file key for that user as for any member
+
+#### Scenario: Key replaced for a pinned member
+- **WHEN** the server lists a different key for a member whose key is already pinned on this device
+- **THEN** the key-change dialog is shown and no wrap is produced for the new key unless the user accepts it
+
+### Requirement: A first-seen peer key is not offered for verification
+The system SHALL NOT show the fingerprint of a peer key that is seen for the first time, and SHALL NOT let a user mark a peer key as verified. A user's own fingerprint is shown in Keys management, and a peer's known and new fingerprints only in the key-change dialog, so a key can be compared with its owner outside the portal only after it changed.
+
+#### Scenario: Key of a new member
+- **WHEN** a file key is wrapped for a member whose key this device sees for the first time
+- **THEN** no fingerprint of that key is shown and nothing asks the user to compare it
+
+#### Scenario: Members of a private room
+- **WHEN** a user opens the members of a private room
+- **THEN** no key fingerprint of another member is shown and no action marks a member's key as verified
+
+### Requirement: Metadata is visible to the server
+The system SHALL NOT hide from the server the title of a private room and of its folders, the size of each file, the length of its encrypted name, the number of its chunks, whether it is a PDF form, which user wrapped each file key, the room's members and roles, and the times of upload and change. Only the file content and the base name of a file are encrypted.
+
+#### Scenario: Room and folder titles
+- **WHEN** a private room or a folder in it is created or renamed
+- **THEN** its title is sent to the server and stored as plain text
+
+#### Scenario: File size
+- **WHEN** an encrypted file is stored
+- **THEN** the size of its content follows from the stored size, which adds a fixed header, the encrypted name and a fixed overhead per chunk
+
+#### Scenario: Sender of a wrap
+- **WHEN** a file key is wrapped for a member
+- **THEN** the access entry names the user who wrapped it

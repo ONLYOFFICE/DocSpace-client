@@ -32,7 +32,7 @@ main specs, and every planned change is a change folder:
 - `openspec/specs/private-rooms/<capability>/spec.md` — current truth, one
   file per capability (feature-gating, encryption-core, key-management,
   room-membership, file-operations, editor-integration, sdk-surface,
-  server-contract). Deliberate v1 limitations are requirements phrased as
+  server-contract, sidebar-section). Deliberate v1 limitations are requirements phrased as
   SHALL NOT, so do not "fix" one without a change that modifies the spec.
 - `openspec/changes/<change>/` — proposal, delta specs, design, tasks for
   work that is not on the branch yet. `openspec list` shows them.
@@ -50,8 +50,11 @@ Workflow:
 3. A bug fix that changes observable behaviour still goes through a change,
    even a small one; a pure refactor sets `skip_specs: true`.
 4. `npx -y @fission-ai/openspec@latest validate --all --strict` must pass
-   before a push that touches `openspec/`. The CLI is not a repo dependency;
-   `npx` fetches it (set `OPENSPEC_TELEMETRY=0`).
+   before a push that touches `openspec/`. The pre-push gate runs it for such
+   a push with the version pinned in `lefthook.yml` (see CLAUDE.md, "Git
+   hooks"); run it yourself before committing a task so the push does not
+   find it. The CLI is not a repo dependency; `npx` fetches it (set
+   `OPENSPEC_TELEMETRY=0`).
 5. Specs own the what and the why. Do not restate a requirement or a
    design decision in code or test comments; where the behaviour is
    counter-intuitive on its own (fail closed, a withheld action), leave at most

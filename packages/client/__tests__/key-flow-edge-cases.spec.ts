@@ -69,7 +69,7 @@ test.describe("Keys management — edge cases", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await expect(generateBtn).toBeVisible({ timeout: 15000 });
@@ -109,7 +109,7 @@ test.describe("Keys management — edge cases", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
@@ -174,7 +174,7 @@ test.describe("Keys management — edge cases", () => {
     await page.goto(`${baseUrl}/profile/keys-management`);
 
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     await page.getByLabel("Passphrase", { exact: true })
@@ -258,7 +258,7 @@ test.describe("Keys management — edge cases", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
@@ -289,7 +289,7 @@ test.describe("Keys management — edge cases", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
     await page
-      .getByRole("button", { name: "Generate new key", exact: true })
+      .getByRole("button", { name: "Create key", exact: true })
       .click();
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
@@ -331,7 +331,7 @@ test.describe("Keys management — edge cases", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
     const generateBtn = page.getByRole("button", {
-      name: "Generate new key",
+      name: "Create key",
       exact: true,
     });
     await generateBtn.click();

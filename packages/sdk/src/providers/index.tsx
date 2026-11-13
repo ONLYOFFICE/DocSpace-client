@@ -66,6 +66,7 @@ import {
   setWithCredentialsStatus,
 } from "@docspace/shared/api/client";
 import { installOAuthFetchInterceptor } from "@docspace/shared/utils/oauthFetchInterceptor";
+import { installLatinDigits } from "@docspace/shared/utils/latin-digits";
 import { getSystemTheme } from "@onlyoffice/apps-ui-kit/utils/get-system-theme";
 
 import {
@@ -76,6 +77,8 @@ import {
 import ErrorProvider from "./ErrorProvider";
 import { SDKConfigProvider } from "./SDKConfigProvider";
 import { SdkCustomActionsProvider } from "./SdkCustomActionsProvider";
+
+installLatinDigits();
 
 export const ThemeChangeContext = React.createContext<
   ((theme: ThemeKeys) => void) | null

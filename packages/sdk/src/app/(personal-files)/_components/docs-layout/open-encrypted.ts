@@ -41,7 +41,7 @@ import { isEncryptedEditingAvailable } from "@docspace/shared/services/private-r
  * Whether the private page keeps an encrypted file out of the editor, the
  * Document Server being unable to edit it; the user is told instead.
  */
-// Spec: private-rooms/editor-integration, "SDK does not open encrypted files in the editor"
+// Spec: private-rooms/editor-integration, "SDK opens encrypted files only with the Document Server capability"
 export const refusesEncryptedOpen = (
   isPrivate: boolean | undefined,
   file: Pick<TFileItem, "encrypted">,

@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-10-31T12:58:29.111Z",
+  "updated_at": "2026-11-09T17:07:34.830Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 615,
+      "context": "icon: CatalogSkillsReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),\n },\n {\n id: \"ai-rooms-knowledge\",\n label: t(\"Common:Knowledge\"),\n icon: CatalogKnowledgeReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),\n },\n {\n id: \"ai-rooms-trash\",",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
       "line_number": 168,
@@ -24,20 +30,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 359,
-      "context": "</Section>\n );\n \n const knowledgeSection = knowledgeRooms.length === 0 ? null : (\n <Section\n title={t(\"Common:Knowledge\")}\n menuTitle={t(\"Common:Knowledge\")}\n testId=\"ai-project-knowledge\"\n headless={compact}\n >\n {knowledgeRooms.map((room) => {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 359,
-      "context": "</Section>\n );\n \n const knowledgeSection = knowledgeRooms.length === 0 ? null : (\n <Section\n title={t(\"Common:Knowledge\")}\n menuTitle={t(\"Common:Knowledge\")}\n testId=\"ai-project-knowledge\"\n headless={compact}\n >\n {knowledgeRooms.map((room) => {",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 228,
+      "line_number": 240,
       "context": "onClick: makeOnClick(TAB_IDS.WEB_SEARCH),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.KNOWLEDGE,\n name: t(\"Common:Knowledge\"),\n content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,\n onClick: makeOnClick(TAB_IDS.KNOWLEDGE),\n isDisabled: disableNonAiModels,\n },\n ...(standalone",
       "module": "/packages/client"
     },

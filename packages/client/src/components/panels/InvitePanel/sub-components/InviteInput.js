@@ -73,6 +73,7 @@ import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?ur
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
+import { offersGuestInvitation } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import styles from "../InvitePanel.module.scss";
@@ -115,9 +116,13 @@ const InviteInput = ({
   setInputValue,
   usersList,
   setUsersList,
-  allowInvitingGuests,
+  allowInvitingGuests: portalAllowsGuests,
   isPrivateRoom,
 }) => {
+  const allowInvitingGuests = offersGuestInvitation(
+    portalAllowsGuests,
+    isPrivateRoom,
+  );
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 

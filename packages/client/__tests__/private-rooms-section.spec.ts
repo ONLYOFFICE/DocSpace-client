@@ -45,6 +45,7 @@ import {
   roomGroupsHandler,
   roomListHandler,
   roomMembersHandlers,
+  roomsNewsHandler,
   roomTagsHandler,
   rootHandler,
   selfActivationStatusHandler,
@@ -251,7 +252,7 @@ test.describe("Private section — sidebar", () => {
 
     const options = page.getByTestId("default_homepage_combobox_dropdown");
     await expect(options.getByText("Rooms", { exact: true })).toBeVisible();
-    await expect(options.getByText("Private", { exact: true })).toHaveCount(0);
+    await expect(options.getByText("Private", { exact: true })).toBeVisible();
   });
 });
 
@@ -286,7 +287,7 @@ const navigateInApp = (page: Page, url: string, state?: unknown) =>
 const keysMissing = (page: Page) =>
   page
     .getByTestId("toast-content")
-    .filter({ hasText: /Encryption keys are not configured/ });
+    .filter({ hasText: /Set it up in your profile/ });
 
 /** The new-items counter of a sidebar item or of one of its sub-items. */
 const navBadge = (page: Page, id: string) =>
@@ -408,6 +409,39 @@ test.describe("Private section — rooms open inside it", () => {
         ],
       }),
     );
+  });
+
+  test("New-items counter", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT, { privateRootNew: 2 }),
+      roomsNewsHandler(TEST_PORT, [
+        { roomId: ROOM_ID, title: ROOM_TITLE, isPrivate: true },
+        { roomId: ORDINARY_ROOM_ID, title: "Team Room" },
+      ]),
+    );
+
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+
+    const item = navItem(page, "private-rooms").locator("xpath=ancestor::li[1]");
+    const counter = item.locator(".new-items");
+    await expect(counter).toHaveText("2", { timeout: 15000 });
+    await expect(item.getByTestId("private_rooms_beta_badge")).toBeVisible();
+    // The Rooms item counts its own root only.
+    await expect(
+      navItem(page, ROOMS_ID).locator("xpath=ancestor::li[1]").locator(".new-items"),
+    ).toHaveCount(0);
+
+    await counter.click();
+
+    const panel = page.locator(".new-files-panel");
+    await expect(panel.getByText(ROOM_TITLE)).toBeVisible({ timeout: 15000 });
+    await expect(panel.getByText("Team Room")).toHaveCount(0);
+
+    await panel.getByText(ROOM_TITLE).click();
+
+    await expect
+      .poll(() => pathOf(page), { timeout: 15000 })
+      .toBe(`/private/${ROOM_ID}/filter`);
   });
 
   test("Room clicked in the section", async ({ page, baseUrl }) => {
@@ -940,7 +974,9 @@ test.describe("Private section — info panel", () => {
 
   /**
    * Opens a room from a list, shows a file of it in the info panel through
-   * the file's Info option and goes back to the list with the browser's Back.
+   * the file's Info option (under More options next to the version history,
+   * which the mock grants as the server does) and goes back to the list with
+   * the browser's Back.
    */
   const backToListAfterAFileShown = async (
     page: Page,
@@ -954,6 +990,7 @@ test.describe("Private section — info panel", () => {
     await expect(fileRow(page, file)).toBeVisible({ timeout: 15000 });
 
     await fileRow(page, file).click({ button: "right" });
+    await page.getByTestId("option_info").hover();
     await page.getByTestId("option_show-info").click();
     await expect(page.locator(".info-panel_header-text")).toContainText(
       file.replace(/\.txt$/, ""),
@@ -1108,7 +1145,6 @@ test.describe("Private section — filter", () => {
     await expect(filterGroup(page, "filter-tags")).toBeVisible();
     await expect(filterGroup(page, "filter-type")).toHaveCount(0);
     await expect(filterGroup(page, "filter-provider-type")).toHaveCount(0);
-    await expect(page.locator('[class*="rowGroupingRooms"]')).toHaveCount(0);
 
     await applyTagFilter(page);
 
@@ -1161,8 +1197,30 @@ test.describe("Private section — room groups", () => {
       .click();
 
     await expect(page.getByTestId("pin-room")).toBeVisible();
-    await expect(page.getByTestId("create-group")).toHaveCount(0);
-    await expect(page.getByTestId("add-to-group")).toHaveCount(0);
+    await expect(page.getByTestId("create-group")).toBeVisible();
+    await expect(page.getByTestId("add-to-group")).toBeVisible();
+  });
+
+  test("Groups of the section only", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    // The mocked portal has groups in every section: group-4 is the Private one.
+    await expect(page.getByTestId("room_group_tag_group-4")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(page.getByTestId("room_group_tag_group-1")).toHaveCount(0);
+    await expect(page.getByTestId("room_group_tag_group-3")).toHaveCount(0);
+    await expect(page.locator('[class*="groupManagementButton"]')).toBeVisible();
+  });
+
+  test("Room-group controls in the archive", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/archived/filter`);
+    await expect(page.getByTestId("table-body")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(page.locator('[class*="rowGroupingRooms"]')).toHaveCount(0);
   });
 
   test("Room group editor in Rooms", async ({ page, mockRequest, baseUrl }) => {

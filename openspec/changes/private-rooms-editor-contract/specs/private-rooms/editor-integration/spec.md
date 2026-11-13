@@ -157,11 +157,15 @@ When the editor saves an encrypted PDF form, the saved DSE3 container SHALL carr
 - **THEN** the header of the saved container carries the form flag
 
 ### Requirement: Encrypted forms are not submitted to form-data collection
-The system SHALL NOT accept a form submission of an encrypted file into form-data collection (a form-filling room). Such a submission would be stored without encryption and its field values reported in plaintext, so the server SHALL refuse it.
+The system SHALL NOT accept a form submission of an encrypted file into form-data collection, where it would be stored without encryption and its field values reported in plaintext. The editor configuration of an encrypted file SHALL NOT offer the submit action, and the server SHALL refuse a submit of a file in a private room before storing anything.
 
 #### Scenario: Submission refused
-- **WHEN** a filler submits an encrypted PDF form in a form-filling room
+- **WHEN** the editor sends a submit of an encrypted PDF form that lies in a private room
 - **THEN** the server refuses it, no result file is stored, and no field value MUST be indexed, exported or sent to an external database
+
+#### Scenario: Submit action absent
+- **WHEN** an encrypted PDF form is opened in the editor
+- **THEN** the editor configuration offers no submit action
 
 ### Requirement: Share to fill out hidden in a private room
 The editor SHALL NOT offer "Share to fill out" for a PDF form in a private room, since its destinations, a form-filling room and a virtual data room, take the form out of the private room.
@@ -169,6 +173,39 @@ The editor SHALL NOT offer "Share to fill out" for a PDF form in a private room,
 #### Scenario: Form opened in a private room
 - **WHEN** an encrypted PDF form is opened for editing in a private room
 - **THEN** the "Share to fill out" action is absent from the editor
+
+### Requirement: SDK does not hand an encrypted file to the host
+The SDK SHALL NOT pass the opening of an encrypted file to the embedding host: for such a file the `onEditorOpen` event is not sent even when the host subscribed to it, and the SDK opens the editor itself, since only the portal's editor page runs the key flow. The event SHALL be sent as before for a file that is not encrypted.
+
+#### Scenario: Host subscribed, encrypted file
+- **WHEN** a host that subscribed to `onEditorOpen` embeds the SDK and a user opens an encrypted file
+- **THEN** no `onEditorOpen` event is sent, no data of the file reaches the host, and the SDK opens the editor itself
+
+#### Scenario: Host subscribed, file not encrypted
+- **WHEN** the same host embeds the SDK and a user opens a file that is not encrypted
+- **THEN** the `onEditorOpen` event is sent with the file and the SDK opens no editor
+
+### Requirement: New document from the editor withheld for encrypted files
+The editor SHALL NOT offer its create-new action for an encrypted file: the action creates a file that is not encrypted in the folder of the open one, which the server refuses in a private room.
+
+#### Scenario: New document from an encrypted file
+- **WHEN** an encrypted file is opened in the editor
+- **THEN** the editor has no create-new action and no file creation is requested
+
+#### Scenario: New document from a file that is not encrypted
+- **WHEN** a file that is not encrypted is opened in the editor in the same tab
+- **THEN** the create-new action is offered as before
+
+### Requirement: Mention notifications of an encrypted file carry no comment text
+The editor SHALL send the mention notification of an encrypted file to the portal with an empty message, so the comment text never reaches the server; the mentioned addresses and the link to the place in the document SHALL be sent as for any file.
+
+#### Scenario: Mention in an encrypted file
+- **WHEN** a user mentions a room member in a comment of an encrypted file
+- **THEN** the notification request carries the addresses and the link, and its message MUST be empty
+
+#### Scenario: Mention in a file that is not encrypted
+- **WHEN** a user mentions someone in a comment of a file that is not encrypted
+- **THEN** the notification request carries the comment text as before
 
 ## MODIFIED Requirements
 
@@ -188,7 +225,7 @@ The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the
 - **WHEN** the server signs the editor configuration of an encrypted file
 - **THEN** the DEK is not part of the signed payload, and the Document Server accepts the configuration with the DEK beside it
 
-### Requirement: SDK does not open encrypted files in the editor
+### Requirement: SDK opens encrypted files only with the Document Server capability
 The SDK file list SHALL refuse to open an encrypted file in the editor while the Document Server capability is absent and SHALL show Common:PrivateRoomEditorNotSupported; when the capability is present it SHALL open the file through the same key flow as the client.
 
 #### Scenario: Open from the SDK
@@ -209,6 +246,11 @@ The server SHALL accept the encrypted flag from the Document Server callback and
 #### Scenario: Callback without the flag
 - **WHEN** the Document Server reports a save of an encrypted file without the encrypted flag
 - **THEN** the save is refused, no version MUST be stored as not encrypted, and the previous encrypted version stays current
+
+## RENAMED Requirements
+
+- FROM: `### Requirement: SDK does not open encrypted files in the editor`
+- TO: `### Requirement: SDK opens encrypted files only with the Document Server capability`
 
 ## REMOVED Requirements
 

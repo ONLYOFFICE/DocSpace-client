@@ -36,7 +36,14 @@
 import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
-import { PATH_ROOMS_LIST, withRoomPrivacyFilter } from "./roomList";
+import {
+  PATH_ROOMS_LIST,
+  PRIVATE_ROOMS_SEARCH_AREA,
+  withPrivateSection,
+  withRoomPrivacyFilter,
+} from "./roomList";
+
+export const PATH_PRIVATE_SECTION = "files/@private";
 
 export type PrivateRoomListOptions = {
   roomId: number;
@@ -61,10 +68,7 @@ const okResponse = <T>(response: T): Response =>
     headers: { "Content-Type": "application/json" },
   });
 
-export const privateRoomListHandler = (
-  port: string,
-  opts: PrivateRoomListOptions,
-) => {
+const privateRoomBodies = (opts: PrivateRoomListOptions) => {
   const ownerId = opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
   const title = opts.title ?? "Private Test Room";
 
@@ -215,14 +219,26 @@ export const privateRoomListHandler = (
     pathParts: [{ id: 11244, title: "Archive", folderType: 20 }],
   };
 
+  return { body, archiveBody };
+};
+
+export const privateRoomListHandler = (
+  port: string,
+  opts: PrivateRoomListOptions,
+) => {
+  const { body, archiveBody } = privateRoomBodies(opts);
+
   /**
    * Mirrors VirtualRoomsController.GetRoomsFolder (HttpGet "rooms"):
    * GetRoomsSectionIdAsync picks the Archive root for searchArea=Archive and
    * the Rooms root otherwise, and FileStorageService.GetFolderItemsAsync
    * answers that section as `current` and as the only breadcrumb, titled by
    * FilesMappingAction (FilesUCResource.Archive or VirtualRooms). Both areas
-   * list the same rooms. `privacyFilter` keeps the private room or the
-   * ordinary ones (withRoomPrivacyFilter).
+   * hold the same rooms; which of them an area lists follows the private
+   * setting (withRoomPrivacyFilter): the Rooms area leaves the private rooms
+   * out unless `privacyFilter` asks for them, the Archive takes the filter as
+   * given. `searchArea=PrivateRooms` picks the Private root and lists the
+   * private rooms only (withPrivateSection).
    */
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
@@ -231,8 +247,50 @@ export const privateRoomListHandler = (
         new URL(request.url).searchParams.get("searchArea") === "Archive";
 
       return okResponse(
-        withRoomPrivacyFilter(isArchive ? archiveBody : body, request),
+        withPrivateSection(
+          withRoomPrivacyFilter(isArchive ? archiveBody : body, request),
+          request,
+        ),
       );
     },
   );
+};
+
+export type PrivateSectionOptions = PrivateRoomListOptions & {
+  /** The `e2e-rooms` app is turned off on the portal. */
+  appOff?: boolean;
+};
+
+/**
+ * Mirrors FoldersControllerCommon.GetPrivateRoomsFolder (HttpGet "@private"):
+ * the content of the Private root, which is the private rooms the caller is
+ * a member of, with the root as `current` (root folder type 42). While the
+ * `e2e-rooms` app is off the action throws ItemNotFoundException with
+ * FilesCommonResource.ErrorMessage_FolderNotFound, a 404.
+ */
+export const privateSectionHandler = (
+  port: string,
+  opts: PrivateSectionOptions,
+) => {
+  const { body } = privateRoomBodies(opts);
+  const sectionUrl = `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}?searchArea=${PRIVATE_ROOMS_SEARCH_AREA}`;
+
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_PRIVATE_SECTION}`, () => {
+    if (opts.appOff) {
+      return new Response(
+        JSON.stringify({
+          error: { message: "The required folder was not found" },
+          status: 1,
+          statusCode: 404,
+        }),
+        { status: 404, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
+    const request = new Request(sectionUrl);
+
+    return okResponse(
+      withPrivateSection(withRoomPrivacyFilter(body, request), request),
+    );
+  });
 };

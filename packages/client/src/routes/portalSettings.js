@@ -396,6 +396,14 @@ const PortalSettingsRoutes = {
       ),
     },
     {
+      path: "ai-settings/byok",
+      element: (
+        <ProtectedAISettingsRoute hideOnStandalone>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
       path: "ai-settings/model-assignment",
       element: (
         <ProtectedAISettingsRoute>
@@ -431,6 +439,14 @@ const PortalSettingsRoutes = {
       path: "ai-settings/limits",
       element: (
         <ProtectedAISettingsRoute hideOnStandalone>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
+      path: "ai-settings/document-agent",
+      element: (
+        <ProtectedAISettingsRoute>
           <ViewComponent />
         </ProtectedAISettingsRoute>
       ),

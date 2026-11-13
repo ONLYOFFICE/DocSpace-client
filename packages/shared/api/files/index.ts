@@ -85,6 +85,7 @@ import type {
   TUploadBackup,
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
+  TFormFieldChangesRequest,
   TShareToUser,
   TDefaultTemplate,
   UpdateXlsxResponse,
@@ -248,7 +249,12 @@ export async function getFoldersTree() {
 
     const name = getFolderClassNameByType(type);
 
-    const newCount = type === FolderType.Forms ? current.new : newItems;
+    // Forms and Private are anchors with no children of their own: the
+    // server writes their count to the root itself, the top-level one is 0.
+    const newCount =
+      type === FolderType.Forms || type === FolderType.PrivateRooms
+        ? current.new
+        : newItems;
 
     return {
       ...current,
@@ -787,6 +793,32 @@ export async function startUploadSession(
   }) as TUploadOperation;
 }
 
+const CHUNK_UPLOAD_ATTEMPTS = 3;
+const CHUNK_RETRY_DELAY_MS = 1000;
+const CHUNK_RETRY_JITTER_MS = 500;
+
+const isRetryableChunkError = (error: unknown) => {
+  if (!axios.isAxiosError(error) || axios.isCancel(error)) return false;
+
+  const status = error.response?.status;
+
+  return !status || status === 502 || status === 503 || status === 504;
+};
+
+const waitBeforeChunkRetry = (attempt: number, signal?: AbortSignal) =>
+  new Promise<void>((resolve) => {
+    const done = () => {
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", done);
+      resolve();
+    };
+    const timer = setTimeout(
+      done,
+      CHUNK_RETRY_DELAY_MS * attempt + Math.random() * CHUNK_RETRY_JITTER_MS,
+    );
+    signal?.addEventListener("abort", done);
+  });
+
 export async function uploadChunkParallel(
   folderId: string | number,
   sessionId: string,
@@ -794,12 +826,25 @@ export async function uploadChunkParallel(
   data: FormData,
   signal?: AbortSignal,
 ) {
-  return request({
-    method: "post",
-    url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
-    data,
-    signal,
-  });
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await request({
+        method: "post",
+        url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
+        data,
+        signal,
+      });
+    } catch (error) {
+      if (
+        attempt >= CHUNK_UPLOAD_ATTEMPTS ||
+        signal?.aborted ||
+        !isRetryableChunkError(error)
+      )
+        throw error;
+
+      await waitBeforeChunkRetry(attempt, signal);
+    }
+  }
 }
 
 export async function uploadChunkSequential(
@@ -1947,6 +1992,22 @@ export async function getConnectingStorages(paramsString?: string) {
   })) as TConnectingStorages;
 
   return res;
+}
+
+// keepalive: sent while the page is closing, the request outlives the page instead of being cancelled with it. The
+// filling waits for the report, so a server that does not answer is not waited for long.
+export async function reportFormFieldChanges(
+  fileId: string | number,
+  data: TFormFieldChangesRequest,
+  keepalive = false,
+): Promise<void> {
+  await request({
+    method: "put",
+    url: `files/file/${fileId}/fieldchanges`,
+    data,
+    timeout: 10000,
+    ...(keepalive && { adapter: "fetch", fetchOptions: { keepalive: true } }),
+  });
 }
 
 export async function startFilling(fileId: string | number): Promise<void> {

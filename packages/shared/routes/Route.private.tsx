@@ -399,10 +399,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       // Docs Connect is SaaS-only and admin/owner-only even when the rest of
       // the section is open, so a standalone portal, a room admin or a user who
       // guesses the URL is bounced too.
-      // Docs Connect is SaaS-only. Within SaaS it opens for whoever the
-      // section opens for - a room admin or a user reads it with the
-      // configure action refused and an explanation above it, which is the
-      // page's own job (see `canManageDocsConnect`).
       if (
         isDocsConnectPage &&
         !canOpenDocsConnect(user, standalone, limitedAccessDevToolsForUsers)

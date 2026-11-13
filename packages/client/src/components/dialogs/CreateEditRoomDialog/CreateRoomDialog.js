@@ -159,6 +159,8 @@ const CreateRoomDialog = ({
     }));
   }, [setSelectedRoomType]);
 
+  const [keyGenerated, setKeyGenerated] = useState(false);
+
   const refreshKeysFromServer = useCallback(async () => {
     try {
       const fresh = await getEncryptionKeys();
@@ -177,6 +179,7 @@ const CreateRoomDialog = ({
     refreshKeysFromServer,
     onKeyGenerated: () => {
       if (!isMountRef.current) return;
+      setKeyGenerated(true);
       if (!roomParams.isPrivate) applyPrivateRoomType();
     },
     // A creation locked on the Private type cannot go on without a key; one
@@ -207,6 +210,11 @@ const CreateRoomDialog = ({
 
   const keyAutoPromptedRef = useRef(false);
   const isPrivateStart = startRoomType === RoomsTypePrivate;
+  // The panel of a creation locked on the Private type is not shown under
+  // the key prompts: it waits for a key list known to hold a key.
+  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  const waitsForKey =
+    isPrivateStart && !keyGenerated && !(encryptionKeys?.length > 0);
   React.useEffect(() => {
     if (!(isTemplateItem || isPrivateStart) || !roomParams.isPrivate) return;
     if (encryptionKeys && encryptionKeys.length > 0) return;
@@ -406,7 +414,7 @@ const CreateRoomDialog = ({
       <ModalDialog
         displayType="aside"
         withBodyScroll
-        visible={visible}
+        visible={visible && !waitsForKey}
         onClose={onCloseAndDisconnectThirdparty}
         isScrollLocked={isScrollLocked}
         hideContent={isOauthWindowOpen}

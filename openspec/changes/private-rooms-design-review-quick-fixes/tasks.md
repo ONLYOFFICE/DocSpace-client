@@ -15,7 +15,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Keys management page
 
-- [ ] 2.1 Client: give the Common:Active and Common:NoKey badges of `keys-management/KeysList.tsx` a background and a text token per theme (decision 5). Verify: a unit test that computes the contrast of the four pairs and fails under 4.5:1; `npm --prefix ./common/tests run test:lefthook` (no hex literal); the tokens chosen are named here
+- [x] 2.1 Client: give the Common:Active and Common:NoKey badges of `keys-management/KeysList.tsx` a background and a text token per theme (decision 5). Verify: a unit test that computes the contrast of the four pairs and fails under 4.5:1; `npm --prefix ./common/tests run test:lefthook` (no hex literal); the tokens chosen are named here
+  - 2026-11-13: the backgrounds stay `globalColors.secondGreen` and `globalColors.mainOrange`; the text is `globalColors.black` instead of the kit's default white: about 5.5:1 on the green and 4.7:1 on the orange (white gave 2.3:1 and 2.7:1). A kit badge keeps the colours it is given in both themes, so one pair per badge covers the light and the dark theme. White text would need a background as dark as `secondGreenDark`, and no orange token is dark enough for it. `colors.test.js`, `license.test.js` and `ascii.test.js` pass.
 
 ## 3. Room type label
 

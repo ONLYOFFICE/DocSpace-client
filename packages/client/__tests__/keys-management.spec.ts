@@ -125,14 +125,16 @@ test.describe("Profile > Keys Management", () => {
     const words = (phraseText ?? "").trim().split(/\s+/);
     expect(words).toHaveLength(24);
 
-    // The acknowledge checkbox unlocks only after the phrase is saved
-    // (printed, downloaded, or copied).
-    await expect(acknowledge).toBeDisabled();
+    // Words written down by hand: the acknowledgement does not wait for a
+    // save action, and a save action does not give it.
+    await expect(acknowledge).toBeEnabled();
     const downloadPromise = page.waitForEvent("download");
     await recoveryDialog
       .getByRole("button", { name: "Download", exact: true })
       .click();
     await downloadPromise;
+    await expect(acknowledge).not.toBeChecked();
+    await expect(continueBtn).toBeDisabled();
 
     await acknowledge.check();
     await expect(continueBtn).toBeEnabled();

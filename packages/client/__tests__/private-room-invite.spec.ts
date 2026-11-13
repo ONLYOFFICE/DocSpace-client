@@ -503,7 +503,7 @@ test.describe("Private room — invite entry point", () => {
     await expect(page.getByTestId("invite_panel_result_granted")).toContainText(
       CAROL.displayName,
     );
-    await expect(page.getByTestId("invite_panel_result_skipped")).toContainText(
+    await expect(page.getByTestId("invite_panel_result_refused")).toContainText(
       DAN.displayName,
     );
     await test.step("Re-encryption completes", async () => {
@@ -511,9 +511,11 @@ test.describe("Private room — invite entry point", () => {
         // The upload of the file is still listed, so the indicator counts both.
         page.getByRole("progressbar", { name: "Processes: 2" }),
       ).toBeVisible();
+    });
+    await test.step("Reason shown once", async () => {
       await expect(
         page.getByRole("alert").filter({ hasText: DAN.displayName }),
-      ).toHaveCount(1);
+      ).toHaveCount(0);
     });
     await test.step("Result shown", async () => {
       const result = page.getByRole("region", { name: "Invitation results" });
@@ -623,12 +625,12 @@ test.describe("Private room — invite entry point", () => {
       CAROL.displayName,
     );
     // The invitees are verified before the security update: Dan has no key,
-    // so he is left out of it and named among the skipped, not refused by the
-    // server.
-    await expect(page.getByTestId("invite_panel_result_skipped")).toContainText(
+    // so he is left out of it and named as not invited, with the sentence a
+    // refusal of the server would get.
+    await expect(page.getByTestId("invite_panel_result_refused")).toContainText(
       DAN.displayName,
     );
-    await expect(page.getByTestId("invite_panel_result_refused")).toHaveCount(0);
+    await expect(page.getByTestId("invite_panel_result_skipped")).toHaveCount(0);
     const storedFile = filesHandle.current!.getFiles()[0];
     expect(storedFile.fileKeys.map((k) => String(k.userId)).sort()).toEqual(
       [CAROL.id, TEST_USER_ID].sort(),

@@ -403,7 +403,10 @@ export const getFolderModelImpl = (
     // A new skill is created from the skill template by the AI service,
     // whether or not the Markdown plugin is there to open it.
     const createSkillOptions: TContextOption[] = self.isCreateSkillAvailable
-      ? [createNewMarkdown, { key: "separator", isSeparator: true }]
+      ? [
+          { ...createNewMarkdown, label: t("Common:NewSkill") },
+          { key: "separator", isSeparator: true },
+        ]
       : [];
     const sourceRoomOptions: TContextOption[] =
       roomType === RoomsType.KnowledgeRoom

@@ -258,6 +258,9 @@ class DialogsStore {
 
   generateSkillDialogVisible = false;
 
+  /** The skill file the "Edit skill" dialog is open on. */
+  editSkillFile: Nullable<TFile> = null;
+
   convertPasswordDialogVisible = false;
 
   inviteQuotaWarningDialogVisible = false;
@@ -1017,6 +1020,10 @@ class DialogsStore {
   /** The panel that writes a skill with AI into the current Instructions room. */
   setGenerateSkillDialogVisible = (visible: boolean) => {
     this.generateSkillDialogVisible = visible;
+  };
+
+  setEditSkillFile = (file: Nullable<TFile>) => {
+    this.editSkillFile = file;
   };
 
   createMasterForm = async (

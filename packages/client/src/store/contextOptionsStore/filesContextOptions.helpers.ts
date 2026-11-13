@@ -50,6 +50,8 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
+import type { TFile } from "@docspace/shared/api/files/types";
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
@@ -901,6 +903,15 @@ export const getFilesContextOptionsImpl = (
       disabled: false,
     },
     indexOptions,
+    {
+      id: "option_edit-skill",
+      key: "edit-skill",
+      label: t("Common:EditSkill"),
+      icon: PencilReactSvgUrl,
+      // A skill is a file: the option is offered for nothing else.
+      onClick: () => self.dialogsStore.setEditSkillFile(item as unknown as TFile),
+      disabled: false,
+    },
     {
       id: "option_rename",
       key: "rename",

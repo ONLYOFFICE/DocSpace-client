@@ -44,6 +44,7 @@ import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 
 import { removeOptions, removeSeparator } from "SRC_DIR/helpers/filesUtils";
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { isMarkdownFile } from "SRC_DIR/helpers/plugins/markdown";
 import type { TMetadataAIItem } from "SRC_DIR/components/panels/MetadataAIPanel/types";
@@ -342,6 +343,7 @@ export const buildContextOptions = (
       "copy-to",
       "duplicate",
       "restore",
+      "edit-skill",
       "rename",
       "edit-index",
       "separator2",
@@ -523,6 +525,11 @@ export const buildContextOptions = (
 
     if (!canRenameItem) {
       fileOptions = removeOptions(fileOptions, ["rename"]);
+    }
+
+    // A skill is edited as a skill by those who may edit and rename its file.
+    if (!isSkillFile(item) || !canRenameItem || !item.security?.Edit) {
+      fileOptions = removeOptions(fileOptions, ["edit-skill"]);
     }
 
     if (canOpenPlayer || !canEditFile) {

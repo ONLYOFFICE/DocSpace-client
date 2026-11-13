@@ -60,6 +60,7 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
 import { FormInfo } from "./sub-components/FormInfo";
+import { SkillInfo } from "./sub-components/SkillInfo";
 
 import DetailsHelper from "./Details.utils";
 
@@ -328,6 +329,7 @@ const Details = ({
         })}
       </div>
       <FormInfo selection={selection} />
+      <SkillInfo selection={selection} />
     </>
   );
 };

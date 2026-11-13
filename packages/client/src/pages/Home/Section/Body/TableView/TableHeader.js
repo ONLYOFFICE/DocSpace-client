@@ -37,7 +37,12 @@ import React from "react";
 import { TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events, SortByFieldName } from "@docspace/shared/enums";
+import {
+  Events,
+  FolderType,
+  RoomsType,
+  SortByFieldName,
+} from "@docspace/shared/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -94,6 +99,7 @@ class FilesTableHeader extends React.Component {
       withContent,
       headerBorder,
       isInSharedFolder,
+      isSkillSet,
     } = this.props;
 
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
@@ -114,6 +120,7 @@ class FilesTableHeader extends React.Component {
       isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       isInSharedFolder !== prevProps.isInSharedFolder ||
+      isSkillSet !== prevProps.isSkillSet ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
       (!changeDocumentsTabs && sortOrder !== stateSortOrder)
     ) {
@@ -243,6 +250,7 @@ class FilesTableHeader extends React.Component {
       modifiedColumnIsEnabled,
       erasureColumnIsEnabled,
       isPersonalReadOnly,
+      isSkillSet,
     } = this.props;
 
     const authorBlock = !isPublicRoom
@@ -311,7 +319,8 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "Type",
-        title: t("Common:Type"),
+        // A skill set lists skills: the type gives way to the command.
+        title: isSkillSet ? t("Common:SkillCommand") : t("Common:Type"),
         enable: typeColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
@@ -1093,6 +1102,9 @@ export default inject(
       isHeaderChecked,
       filter,
       selectedFolderId: selectedFolderStore.id,
+      isSkillSet:
+        selectedFolderStore.roomType === RoomsType.InstructionsRoom ||
+        selectedFolderStore.parentRoomType === FolderType.InstructionsRoom,
       withContent,
       sortingVisible,
 

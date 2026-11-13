@@ -28,7 +28,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 5. Forgot passphrase link
 
-- [ ] 5.1 Shared: show Common:ForgotPassphrase in the unlock dialog whenever a handler is passed, in `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx` (decision 7). Verify: cases "Link before any attempt", "Link after failure", "Link under the remember option" and "Passphrase creation" in `PassphraseModal.test.tsx`, with "Option placed with the passphrase field" still passing; `cd packages/shared && pnpm exec vitest run dialogs/passphrase-modal`
+- [x] 5.1 Shared: show Common:ForgotPassphrase in the unlock dialog whenever a handler is passed, in `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx` (decision 7). Verify: cases "Link before any attempt", "Link after failure", "Link under the remember option" and "Passphrase creation" in `PassphraseModal.test.tsx`, with "Option placed with the passphrase field" still passing; `cd packages/shared && pnpm exec vitest run dialogs/passphrase-modal`
+  - 2026-11-13: the link depends on the handler alone and is left out of the passphrase-creation dialog; its place in the markup, after the remember row, did not move, so "Option placed with the passphrase field" and the Tab-order cases pass unchanged. The link of the passphrase-change dialog keeps its own rule.
 
 ## 6. Texts
 

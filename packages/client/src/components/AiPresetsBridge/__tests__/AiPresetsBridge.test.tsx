@@ -11,6 +11,7 @@ const api = vi.hoisted(() => ({
   getAiProjects: vi.fn(),
   getAiProject: vi.fn(),
   createAiProject: vi.fn(),
+  aiProjectToRoom: (p: object) => ({ ...p, isRoom: true }),
 }));
 
 const { toastr } = vi.hoisted(() => ({
@@ -22,8 +23,29 @@ vi.mock("@docspace/shared/api/ai/projects", () => api);
 const roomsApi = vi.hoisted(() => ({ deleteRoom: vi.fn() }));
 vi.mock("@docspace/shared/api/rooms", () => roomsApi);
 
-const infoPanel = vi.hoisted(() => ({ showInfoPanel: vi.fn() }));
+// The Info panel as a page that has one shows it: `showInfoPanel` makes it
+// visible only while `mounted`.
+const infoPanel = vi.hoisted(() => {
+  const state = { mounted: true, visible: false };
+  return {
+    state,
+    showInfoPanel: vi.fn(() => {
+      if (state.mounted) state.visible = true;
+    }),
+    InfoPanelView: { infoDetails: "info_details" },
+  };
+});
 vi.mock("SRC_DIR/helpers/info-panel", () => infoPanel);
+
+const mockNavigate = vi.hoisted(() => vi.fn());
+vi.mock("react-router", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  useNavigate: () => mockNavigate,
+}));
+
+const setBufferSelection = vi.fn();
+const setSelection = vi.fn();
+const setInfoPanelView = vi.fn();
 
 vi.mock("../DeleteAgentDialog", () => ({
   default: ({ agentName, onDelete, onClose }: { agentName: string; onDelete: () => void; onClose: () => void }) => (
@@ -176,6 +198,13 @@ const renderBridge = (
         aiPresetsStore={aiPresetsStore}
         aiProjectsStore={{ activeProject, openEditDialogById: openEditAiProject }}
         contextOptionsStore={{ onClickInviteUsers: inviteToRoom }}
+        filesStore={{ setSelection, setBufferSelection }}
+        infoPanelStore={{
+          setView: setInfoPanelView,
+          get isVisible() {
+            return infoPanel.state.visible;
+          },
+        }}
         userStore={{ user }}
         settingsStore={{ aiConfig, standalone: true, setAiReady }}
         paymentStore={{ isAIReady: false }}
@@ -486,8 +515,30 @@ describe("AiPresetsBridge", () => {
       expect(openEditAiProject).toHaveBeenCalledWith(1);
       act(() => action("share")?.onClick());
       expect(inviteToRoom).toHaveBeenCalledWith(1, expect.anything());
-      act(() => action("info")?.onClick());
-      expect(infoPanel.showInfoPanel).toHaveBeenCalled();
+    });
+
+    it("open the Info panel on the agent where the user is, without leaving the page", async () => {
+      infoPanel.state.mounted = true;
+      infoPanel.state.visible = false;
+      const picked = withRights({ EditAccess: true, Delete: true }, true);
+      await pick(new AiPresetsStore(), picked);
+
+      await act(async () => action("info")?.onClick());
+      expect(setSelection).toHaveBeenCalledWith([]);
+      expect(setBufferSelection).toHaveBeenCalledWith(expect.objectContaining({ id: 1, isRoom: true }));
+      expect(setInfoPanelView).toHaveBeenCalledWith("info_details");
+      expect(infoPanel.showInfoPanel).toHaveBeenCalledTimes(1);
+      expect(mockNavigate).not.toHaveBeenCalled();
+    });
+
+    it("go to the agent's page for Agent info where the page has no Info panel", async () => {
+      infoPanel.state.mounted = false;
+      infoPanel.state.visible = false;
+      await pick(new AiPresetsStore(), withRights({}, false));
+
+      await act(async () => action("info")?.onClick());
+      expect(mockNavigate).toHaveBeenCalledWith("/ai-rooms/1/filter?folder=1");
+      expect(infoPanel.showInfoPanel).toHaveBeenCalledTimes(2);
     });
 
     it("leave a member with Agent info alone", async () => {

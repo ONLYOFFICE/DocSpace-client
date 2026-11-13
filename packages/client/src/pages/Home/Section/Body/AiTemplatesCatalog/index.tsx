@@ -41,6 +41,7 @@ import { ReactSVG } from "react-svg";
 
 import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RoomsType } from "@docspace/shared/enums";
@@ -67,8 +68,17 @@ import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/check.round.react.sv
 
 import styles from "./AiTemplatesCatalog.module.scss";
 
-/** A template has no logo of its own: its initials, on the default colour. */
-const NO_LOGO = { color: "" };
+/**
+ * A template has no logo of its own: its initials, as a room without a
+ * cover shows them, on one of the room logo colours. The colour is picked by
+ * the template's id, so a template keeps it between visits.
+ */
+export const getTemplateLogo = (id: string) => {
+  const { logoColors } = globalColors;
+  let hash = 0;
+  for (const char of id) hash = (hash * 31 + char.charCodeAt(0)) % 997;
+  return { color: logoColors[hash % logoColors.length] };
+};
 
 const DETAIL_ICONS = {
   skills: SkillSetReactSvgUrl,
@@ -202,9 +212,10 @@ const AiTemplatesCatalog = () => {
         >
           <div className={styles.head}>
             <ProjectLogo
-              project={{ title: template.name, logo: NO_LOGO }}
-              size="40px"
-              radius="8px"
+              project={{
+                title: template.name,
+                logo: getTemplateLogo(template.id),
+              }}
               className={styles.logo}
             />
             <div className={styles.title}>

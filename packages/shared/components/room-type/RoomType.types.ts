@@ -40,7 +40,7 @@ export type RoomTypeProps = {
   roomType?: RoomsType;
   isOpen: boolean;
 
-  type?: "listItem" | "dropdownButton" | "dropdownItem";
+  type?: "listItem" | "dropdownButton" | "dropdownItem" | "displayItem";
   id?: string;
   selectedId: string | number;
 
@@ -55,4 +55,6 @@ export type RoomTypeProps = {
   // Opens the OForms template gallery instead of a room type; the picked
   // template becomes the first form of a new form space.
   isTemplateGallery?: boolean;
+  /** Address of a help article, linked under the description of the display block. */
+  helpUrl?: string;
 };

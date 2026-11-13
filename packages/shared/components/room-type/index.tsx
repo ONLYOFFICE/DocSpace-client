@@ -46,6 +46,7 @@ import { RoomsType, RoomsTypePrivate } from "../../enums";
 
 import { RoomLogo } from "@onlyoffice/apps-ui-kit/components/room-logo";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
@@ -71,6 +72,7 @@ const RoomType = ({
   isTemplateRoom,
   isFormSection,
   isTemplateGallery,
+  helpUrl,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -161,6 +163,21 @@ const RoomType = ({
           <Text className="choose_room-title-text">{room.title}</Text>
         </div>
         <Text className="choose_room-description">{room.description}</Text>
+        {helpUrl && type === "displayItem" ? (
+          <Link
+            className="choose_room-help_link"
+            type={LinkType.page}
+            href={helpUrl}
+            target={LinkTarget.blank}
+            rel="noopener noreferrer"
+            fontSize="12px"
+            lineHeight="16px"
+            isHovered
+            dataTestId="room-type-help-link"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <IconButton

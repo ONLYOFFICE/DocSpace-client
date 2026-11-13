@@ -380,7 +380,7 @@ The system SHALL decrypt each selected encrypted file and deliver them together 
 - **THEN** one Files.zip is saved with the file under its decrypted name at the root and the folder's files under their decrypted names inside a directory named after the folder, and no server archive is requested
 
 ### Requirement: Download without decryption
-The system SHALL offer "Download without decryption" for encrypted files and for folders in a private room, in the item context menu and in the bulk header menu of a private room; for a file it SHALL save the ciphertext container, for a folder it SHALL request a server archive of the ciphertext.
+The system SHALL offer "Download without decryption" for encrypted files and for folders in a private room, in the item context menu and in the bulk header menu of a private room; for a file it SHALL save the ciphertext container, for a folder it SHALL request a server archive of the ciphertext. The entry SHALL be labelled Common:DownloadWithoutDecryption, which names what is saved ("Download encrypted copy"); the specs keep calling the action download without decryption.
 
 #### Scenario: Encrypted file
 - **WHEN** the user picks download-encrypted on a file
@@ -393,6 +393,10 @@ The system SHALL offer "Download without decryption" for encrypted files and for
 #### Scenario: Bulk header menu
 - **WHEN** several encrypted files are selected in a private room and the header menu is opened
 - **THEN** "Download without decryption" is offered next to "Download"
+
+#### Scenario: Label of the entry
+- **WHEN** several encrypted files are selected in a private room and the header menu is opened in English
+- **THEN** the entry reads "Download encrypted copy"
 
 ### Requirement: Decrypted folder download
 The system SHALL offer "Download" for a folder inside a private room and for the room itself, from its context menu or with the folder selected alone in the header menu; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, a name that clashes inside its folder taking the lowest numbered suffix no other entry has, with the same progress and error reporting as the multi-file decrypted download.
@@ -968,3 +972,14 @@ The system SHALL show, for an empty folder below the root of a private room, an 
 #### Scenario: Folder of an archived private room
 - **WHEN** a member opens an empty folder inside an archived private room
 - **THEN** the empty folder view is shown without create or upload entries
+
+### Requirement: Download submenu names both results
+The system SHALL label the two entries of the Download submenu of the client's context menu by what each saves when the submenu holds the download without decryption: Common:DownloadDecryptedCopy for the decrypting download and Common:DownloadEncryptedCopy for the ciphertext one. A Download submenu without that entry SHALL keep Common:OriginalFormat.
+
+#### Scenario: Encrypted file
+- **WHEN** the Download submenu of an encrypted file, of a folder in a private room or of a private room is opened
+- **THEN** it offers Common:DownloadDecryptedCopy and Common:DownloadEncryptedCopy, and neither Common:OriginalFormat nor a second "Download"
+
+#### Scenario: File outside private rooms
+- **WHEN** the Download submenu of a file outside private rooms is opened
+- **THEN** its plain download reads Common:OriginalFormat as before

@@ -81,3 +81,28 @@ describe("SettingsStore.customFilterHelpUrl", () => {
     expect(store.customFilterHelpUrl).toBe(DOMAIN);
   });
 });
+
+describe("SettingsStore.privateRoomsHelpUrl", () => {
+  it("Help article configured", () => {
+    const store = createStore({ privaterooms: "/docspace/private-rooms.aspx" });
+
+    expect(store.privateRoomsHelpUrl).toBe(
+      `${DOMAIN}/docspace/private-rooms.aspx`,
+    );
+  });
+
+  it("No help article: the entry is missing", () => {
+    const store = createStore({});
+
+    expect(store.privateRoomsHelpUrl).toBeUndefined();
+  });
+
+  it("No help article: the help-center domain is missing", () => {
+    const store = new SettingsStore();
+    store.externalResources = {
+      helpcenter: { entries: { privaterooms: "/docspace/private-rooms.aspx" } },
+    } as unknown as TExternalResources;
+
+    expect(store.privateRoomsHelpUrl).toBeUndefined();
+  });
+});

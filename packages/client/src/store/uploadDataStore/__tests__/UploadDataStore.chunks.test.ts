@@ -661,6 +661,118 @@ describe("UploadDataStore.uploadFileChunks — failed chunk", () => {
     expect(signals).toHaveLength(3);
     expect(signals.every((s) => s.aborted)).toBe(true);
     expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].pendingFinalize).toBeUndefined();
+  });
+
+  it("remembers the session on the row when every chunk is stored and only finalize fails", async () => {
+    const { store } = createTestUploadDataStore({
+      filesSettingsStore: { uploadThreadCount: 2 },
+    });
+    const browserFile = makeBrowserFile("small.txt", 2000);
+    const entry = makeUploadFile({
+      uniqueId: "finalize-fail",
+      file: browserFile,
+      toFolderId: 42,
+      inAction: true,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    vi.mocked(filesApi.finalizeUploadSession).mockRejectedValue(
+      new Error("timeout of 30000ms exceeded"),
+    );
+
+    await expect(
+      store.uploadFileChunks(
+        "sess-1",
+        42,
+        [new FormData(), new FormData()],
+        2000,
+        0,
+        browserFile,
+        [7, 42],
+        t,
+        "op-1",
+        42,
+        true,
+      ),
+    ).rejects.toThrow("timeout of 30000ms exceeded");
+
+    expect(store.files[0].pendingFinalize).toEqual({
+      sessionId: "sess-1",
+      path: [7, 42],
+    });
+  });
+
+  it("does not remember the session for a row cancelled before the finalize failure settles", async () => {
+    const { store } = createTestUploadDataStore({
+      filesSettingsStore: { uploadThreadCount: 2 },
+    });
+    const browserFile = makeBrowserFile("small.txt", 2000);
+    const entry = makeUploadFile({
+      uniqueId: "finalize-cancelled",
+      file: browserFile,
+      toFolderId: 42,
+      inAction: true,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+
+    vi.mocked(filesApi.uploadChunkParallel).mockResolvedValue({
+      uploaded: false,
+      id: null,
+      file: null,
+    } as never);
+    let failFinalize: (() => void) | undefined;
+    vi.mocked(filesApi.finalizeUploadSession).mockImplementation(
+      () =>
+        new Promise((_res, rej) => {
+          failFinalize = () => rej(new Error("timeout of 30000ms exceeded"));
+        }) as never,
+    );
+
+    const done = store.uploadFileChunks(
+      "sess-1",
+      42,
+      [new FormData(), new FormData()],
+      2000,
+      0,
+      browserFile,
+      [42],
+      t,
+      "op-1",
+      42,
+      true,
+    );
+    const settled = expect(done).rejects.toThrow("timeout of 30000ms exceeded");
+
+    await vi.waitFor(() => expect(failFinalize).toBeDefined());
+
+    const nextDropped = makeUploadFile({
+      uniqueId: "next-dropped",
+      file: makeBrowserFile("next.txt", 10),
+      toFolderId: 42,
+    });
+    store.files = [nextDropped, { ...store.files[0], cancel: true }];
+
+    failFinalize?.();
+    await settled;
+
+    const cancelledRow = store.files.find(
+      (f) => f.uniqueId === "finalize-cancelled",
+    );
+    expect(cancelledRow?.cancel).toBe(true);
+    expect(cancelledRow?.pendingFinalize).toBeUndefined();
+    expect(store.files[0].pendingFinalize).toBeUndefined();
   });
 });
 
@@ -769,6 +881,31 @@ describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => 
     expect(percents[3]).toBe(100);
     expect(store.percent).toBe(100);
     expect(store.uploadedFilesHistory[0].percent).toBe(100);
+  });
+});
+
+describe("UploadDataStore.startSessionFunc — remembered session", () => {
+  it("drops the session remembered for a repeated finalize once a new session is opened for the row", async () => {
+    const { store } = createTestUploadDataStore();
+    replaceAction(store, "finishUploadFiles");
+    const entry = makeUploadFile({
+      uniqueId: "stale",
+      file: makeBrowserFile("stale.docx", 1024),
+      toFolderId: 1,
+      pendingFinalize: { sessionId: "old-session", path: [1] },
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    vi.mocked(filesApi.startUploadSession).mockRejectedValue(
+      new Error("boom"),
+    );
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1);
+    expect(store.files[0].pendingFinalize).toBeNull();
   });
 });
 

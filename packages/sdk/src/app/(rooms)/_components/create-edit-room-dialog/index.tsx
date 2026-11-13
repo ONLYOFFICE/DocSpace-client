@@ -610,7 +610,7 @@ const CreateEditRoomDialog = ({
                     {t("Common:PrivateRoomTitle")}
                   </Text>
                   <Text fontSize="12px" className={styles.privacyDescription}>
-                    {t("Common:PrivateRoomDescription")}
+                    {t("Common:PrivateRoomPanelDescription")}
                   </Text>
                 </div>
               </div>

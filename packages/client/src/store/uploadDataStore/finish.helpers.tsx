@@ -147,7 +147,7 @@ export function showFinishUploadToastrImpl(
   filesWithErrors: TUploadFile[],
   filesWithAllErrors: number,
 ) {
-  if (totalErrorsCount === 0) {
+  if (filesWithAllErrors === 0) {
     toastr.success(
       t("Common:ItemsSuccessfullyUploaded", {
         count: filesWithoutErrors.length,
@@ -165,6 +165,8 @@ export function showFinishUploadToastrImpl(
   self.uploadedFilesHistory.forEach((f) => {
     f.errorShown = true;
   });
+
+  if (totalErrorsCount === 0) return;
 
   const hasQuotaError = filesWithErrors.some((f) => f.isQuotaError);
 
@@ -253,7 +255,7 @@ export function finishUploadFilesImpl(
 
   self.showFinishUploadToastr(
     t,
-    filesWithAllErrors.length,
+    filesWithErrors.length,
     filesWithoutErrors,
     filesWithErrors,
     filesWithAllErrors.length,

@@ -471,6 +471,7 @@
   "CannotRemoveMemberWhileUploads": "Cannot remove member while uploads are in progress ({{count}}). Wait for the batch to finish, then try again.",
   "CannotTransferFolderFromPrivateRoom": "Folders can't be moved or copied out of a private room.",
   "CannotTransferToPrivateRoom": "You can't move or copy items into a private room. Upload files directly to the room to keep them encrypted.",
+  "Category": "Category",
   "ChangeAILimit": "Change AI limit",
   "ChangeButton": "Change",
   "ChangeFormSpaceOwner": "Change space owner",

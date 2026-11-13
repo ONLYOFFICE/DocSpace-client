@@ -35,7 +35,7 @@
 
 .catalog {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
   padding-block: 16px;
 }
@@ -43,32 +43,97 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   box-sizing: border-box;
   min-width: 0;
   padding: 16px;
   border: 1px solid var(--files-section-table-view-row-border-color);
   border-radius: 12px;
+
+  &:hover,
+  &:focus-within {
+    border-color: var(--accent-main);
+  }
 }
 
-.category,
-.label {
-  color: var(--text-secondary);
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.logo {
+  flex: 0 0 auto;
+}
+
+.title {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .description {
-  flex: 1 1 auto;
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-secondary);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+  // The title's line is 22px tall.
+  min-height: 22px;
 }
 
 .details {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: 4px 12px;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 8px 12px;
+  align-items: center;
 }
 
-.install {
-  align-self: flex-start;
-  margin-block-start: 8px;
+.label {
+  color: var(--text-secondary);
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.icon {
+  display: flex;
+  flex: 0 0 auto;
+
+  svg {
+    width: 12px;
+    height: 12px;
+
+    path {
+      fill: var(--text-color);
+    }
+  }
+}
+
+.verified {
+  display: flex;
+  flex: 0 0 auto;
+
+  svg {
+    width: 12px;
+    height: 12px;
+
+    path {
+      fill: var(--accent-main);
+    }
+  }
 }
 
 .message {

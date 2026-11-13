@@ -37,10 +37,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
-import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { ReactSVG } from "react-svg";
+
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RoomsType } from "@docspace/shared/enums";
+import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   getAiTemplates,
   installAiTemplate,
@@ -54,7 +58,23 @@ import {
   getAiWorkspaceTabUrl,
 } from "SRC_DIR/helpers/aiWorkspace";
 
+import ProjectLogo from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
+
+import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
+import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/check.round.react.svg?url";
+
 import styles from "./AiTemplatesCatalog.module.scss";
+
+/** A template has no logo of its own: its initials, on the default colour. */
+const NO_LOGO = { color: "" };
+
+const DETAIL_ICONS = {
+  skills: SkillSetReactSvgUrl,
+  knowledge: KnowledgeReactSvgUrl,
+  files: undefined,
+};
 
 /** The templates of the catalog a list shows: those of its own room type. */
 export const getListTemplates = (
@@ -152,6 +172,25 @@ const AiTemplatesCatalog = () => {
     knowledge: t("Common:AIProjectKnowledgeRooms"),
     files: t("Common:Files"),
   };
+  const installLabel = t("Common:Install");
+  const isBusy = installingId !== null;
+
+  const row = (label: string, value: React.ReactNode, key: string) => (
+    <React.Fragment key={key}>
+      <Text fontSize="13px" className={styles.label} truncate>
+        {label}
+      </Text>
+      <div className={styles.value} data-testid={`ai-template-${key}`}>
+        {value}
+      </div>
+    </React.Fragment>
+  );
+
+  const text = (value: string) => (
+    <Text fontSize="13px" fontWeight={600} truncate title={value}>
+      {value}
+    </Text>
+  );
 
   return (
     <div className={styles.catalog} data-testid="ai-templates-catalog">
@@ -161,42 +200,81 @@ const AiTemplatesCatalog = () => {
           className={styles.card}
           data-testid="ai-template-card"
         >
-          <Text fontSize="12px" className={styles.category} truncate>
-            {template.category}
-          </Text>
-          <Text fontSize="16px" fontWeight={700} truncate title={template.name}>
-            {template.name}
-          </Text>
-          <Text fontSize="13px" className={styles.description}>
-            {template.description}
-          </Text>
-          <div className={styles.details}>
-            {getTemplateDetails(template, catalog).map(({ key, values }) => (
-              <React.Fragment key={key}>
-                <Text fontSize="13px" className={styles.label} truncate>
-                  {labels[key]}
-                </Text>
-                <Text
-                  fontSize="13px"
-                  fontWeight={600}
-                  truncate
-                  title={values.join(", ")}
-                >
-                  {values.join(", ")}
-                </Text>
-              </React.Fragment>
-            ))}
+          <div className={styles.head}>
+            <ProjectLogo
+              project={{ title: template.name, logo: NO_LOGO }}
+              size="40px"
+              radius="8px"
+              className={styles.logo}
+            />
+            <div className={styles.title}>
+              <Text
+                fontSize="16px"
+                fontWeight={700}
+                truncate
+                title={template.name}
+              >
+                {template.name}
+              </Text>
+              <Text
+                fontSize="13px"
+                className={styles.description}
+                title={template.description}
+              >
+                {template.description}
+              </Text>
+            </div>
+            <div className={styles.actions}>
+              <IconButton
+                iconName={CreateRoomReactSvgUrl}
+                size={16}
+                isFill
+                isClickable
+                isDisabled={isBusy}
+                title={installLabel}
+                onClick={() => onInstall(template)}
+                dataTestId="ai-template-install"
+              />
+              <ContextMenuButton
+                getData={() => [
+                  {
+                    key: "install",
+                    label: installLabel,
+                    icon: CreateRoomReactSvgUrl,
+                    disabled: isBusy,
+                    onClick: () => onInstall(template),
+                  },
+                ]}
+                title={t("Common:Actions")}
+                directionX="right"
+                isDisabled={isBusy}
+                testId="ai-template-actions"
+              />
+            </div>
           </div>
-          <Button
-            className={styles.install}
-            size={ButtonSize.small}
-            primary
-            label={t("Common:Install")}
-            isLoading={installingId === template.id}
-            isDisabled={installingId !== null && installingId !== template.id}
-            onClick={() => onInstall(template)}
-            testId="ai-template-install"
-          />
+          <div className={styles.details}>
+            {row(t("Common:Category"), text(template.category), "category")}
+            {getTemplateDetails(template, catalog).map(({ key, values }) =>
+              row(
+                labels[key],
+                <>
+                  {DETAIL_ICONS[key] ? (
+                    <ReactSVG src={DETAIL_ICONS[key]} className={styles.icon} />
+                  ) : null}
+                  {text(values.join(", "))}
+                </>,
+                key,
+              ),
+            )}
+            {row(
+              t("Common:Owner"),
+              <>
+                {text(getBrandName("OrganizationName"))}
+                <ReactSVG src={VerifiedReactSvgUrl} className={styles.verified} />
+              </>,
+              "owner",
+            )}
+          </div>
         </div>
       ))}
     </div>

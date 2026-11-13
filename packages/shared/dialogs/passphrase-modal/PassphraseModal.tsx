@@ -365,7 +365,11 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     onChange={(e) => setRememberDevice(e.target.checked)}
                     label={t("Common:RememberDeviceLabel")}
                   />
-                  <Text fontSize="12px" color="var(--text-secondary)">
+                  <Text
+                    fontSize="12px"
+                    color="var(--text-secondary)"
+                    className={styles.rememberHint}
+                  >
                     {t("Common:RememberDeviceHint")}
                   </Text>
                 </div>

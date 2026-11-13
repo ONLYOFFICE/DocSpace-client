@@ -79,6 +79,7 @@ export const messageActions = ({
   updateEventListenerItems,
   updateArticleButtonItems,
   updateArticleNavigationItems,
+  updateDashboardWidgetItems,
   updateFileItems,
   updateCreateDialogProps,
   updatePlugin,
@@ -258,6 +259,10 @@ export const messageActions = ({
         break;
       case PluginActions.updateArticleNavigationItems:
         updateArticleNavigationItems?.(pluginName);
+
+        break;
+      case PluginActions.updateDashboardWidgetItems:
+        updateDashboardWidgetItems?.(pluginName);
 
         break;
       case PluginActions.updateFileItems:

@@ -577,6 +577,12 @@
     background-color: $gray-dark-mid;
   }
 
+  img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+
   svg {
     width: 16px;
     height: 16px;

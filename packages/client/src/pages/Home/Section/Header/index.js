@@ -88,6 +88,7 @@ import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import AiChatAgentPicker from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-agent-picker";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
@@ -175,6 +176,7 @@ const SectionHeaderContent = (props) => {
     showMenu,
     onCreateAndCopySharedLink,
     showNavigationButton,
+    onClickInviteUsers,
     isFormRoomRoot,
     startUpload,
     resolveOpenFolderTarget,
@@ -508,6 +510,10 @@ const SectionHeaderContent = (props) => {
 
     onCreateAndCopySharedLink(shareTarget, t);
   }, [onCreateAndCopySharedLink, navigationPath, selectedFolder, t]);
+
+  const onShareAgentClick = React.useCallback(() => {
+    onClickInviteUsers(selectedFolder.id, RoomsType.AiProjectRoom);
+  }, [onClickInviteUsers, selectedFolder?.id]);
 
   const onCloseIndexMenu = React.useCallback(() => {
     const items = getIndexingArray();
@@ -912,11 +918,29 @@ const SectionHeaderContent = (props) => {
     [theme.isBase],
   );
 
-  const navigationButtonLabel = showNavigationButton
-    ? isFormRoomRoot
-      ? t("Files:ShareSpace")
-      : t("Files:ShareRoom")
-    : null;
+  // An agent's page has "Share agent" in that place: it invites, for those
+  // who may change the agent's members.
+  const showShareAgent =
+    isAiProjectRoomRoot &&
+    !!selectedFolder?.inRoom &&
+    !!selectedFolder?.security?.EditAccess;
+
+  const navigationButtonLabel = showShareAgent
+    ? t("Common:ShareAgent")
+    : showNavigationButton
+      ? isFormRoomRoot
+        ? t("Files:ShareSpace")
+        : t("Files:ShareRoom")
+      : null;
+
+  // A member's agent page is titled by the agents menu: the open agent,
+  // and the others to switch to.
+  const agentSwitcher =
+    isAiProjectRoomRoot &&
+    selectedFolder?.inRoom &&
+    aiChatStore?.hasAgentPicker ? (
+      <AiChatAgentPicker title={currentTitle} />
+    ) : undefined;
 
   const headerProps = React.useMemo(
     () => (isIndexEditingMode ? { headerLabel: t("Common:SortingIndex") } : {}),
@@ -1082,9 +1106,12 @@ const SectionHeaderContent = (props) => {
               isFrame={isFrame}
               showTitle={isFrame ? showTitle : true}
               navigationButtonLabel={navigationButtonLabel}
-              onNavigationButtonClick={onNavigationButtonClick}
+              onNavigationButtonClick={
+                showShareAgent ? onShareAgentClick : onNavigationButtonClick
+              }
+              titleContent={agentSwitcher}
               tariffBar={<TariffBar />}
-              showNavigationButton={!!showNavigationButton}
+              showNavigationButton={!!showNavigationButton || showShareAgent}
               badgeLabel={badgeLabel}
               onContextOptionsClick={onContextOptionsClick}
               onLogoClick={onLogoClick}
@@ -1265,6 +1292,7 @@ export default inject(
 
     const {
       onClickEditRoom,
+      onClickInviteUsers,
       onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
@@ -1459,6 +1487,7 @@ export default inject(
       getGroupContextOptions,
       onCreateAndCopySharedLink,
       showNavigationButton,
+      onClickInviteUsers,
       isFormRoomRoot,
       startUpload,
       resolveOpenFolderTarget,

@@ -37,7 +37,10 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-block: 8px 16px;
+  // The tabs above end with 20px of their own and the section body adds its
+  // top padding: pull the search up to where the list's filter sits.
+  margin-block-start: -12px;
+  padding-block: 0 16px;
 }
 
 .search {

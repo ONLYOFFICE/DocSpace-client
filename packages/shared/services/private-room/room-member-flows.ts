@@ -145,7 +145,10 @@ export async function verifyInvitees({
     ...member,
     displayName: displayNames[member.id],
   }));
-  return { verified, skipped };
+  return {
+    verified,
+    skipped: skipped.map((member) => ({ ...member, notInvited: true })),
+  };
 }
 
 /** How the per-invitee requests of a private-room invitation ended. */
@@ -246,12 +249,24 @@ export function skippedMemberNotices(
   if (skippedMembers.length === 0) return notices;
   const formatName = (m: { id: string; displayName?: string }) =>
     m.displayName || members.find((n) => n.id === m.id)?.displayName || m.id;
+  // Spec: private-rooms/room-membership, "Invitees without usable keys are skipped with a warning"
+  const notInvitedNames = skippedMembers
+    .filter((m) => m.reason === "no-key" && m.notInvited)
+    .map(formatName);
   const noKeyNames = skippedMembers
-    .filter((m) => m.reason === "no-key")
+    .filter((m) => m.reason === "no-key" && !m.notInvited)
     .map(formatName);
   const mismatchNames = skippedMembers
     .filter((m) => m.reason === "key-mismatch-refused")
     .map(formatName);
+  if (notInvitedNames.length > 0) {
+    notices.push({
+      level: "warning",
+      text: t("Common:EncryptedInviteNoKey", {
+        users: notInvitedNames.join(", "),
+      }),
+    });
+  }
   if (noKeyNames.length > 0) {
     notices.push({
       level: "warning",

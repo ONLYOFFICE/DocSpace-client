@@ -338,8 +338,8 @@ describe("Invite opened from the list", () => {
     fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
     expect(
-      await screen.findByTestId("invite_panel_result_skipped"),
-    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+      await screen.findByTestId("invite_panel_result_refused"),
+    ).toHaveTextContent("Common:EncryptedInviteNoKey");
     expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(1);
     expect(mocks.setRoomSecurity.mock.calls[0][1].invitations).toEqual([
       { id: "ann", access: ShareAccessRights.Editing },
@@ -350,7 +350,7 @@ describe("Invite opened from the list", () => {
       expect.anything(),
     );
     expect(mocks.toastr.warning).toHaveBeenCalledWith(
-      "Common:EncryptedSkippedNoKeys",
+      "Common:EncryptedInviteNoKey",
     );
   });
 
@@ -367,8 +367,8 @@ describe("Invite opened from the list", () => {
     fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
     expect(
-      await screen.findByTestId("invite_panel_result_skipped"),
-    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+      await screen.findByTestId("invite_panel_result_refused"),
+    ).toHaveTextContent("Common:EncryptedInviteNoKey");
     expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
     expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
 

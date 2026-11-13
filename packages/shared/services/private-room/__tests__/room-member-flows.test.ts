@@ -277,7 +277,9 @@ describe("verifyInvitees", () => {
     expect(keys?.has("u-bob")).toBe(false);
     expect(result).toEqual({
       verified: [{ id: "u-ann", publicKey: "pk-ann", displayName: "Ann" }],
-      skipped: [{ id: "u-bob", displayName: "Bob", reason: "no-key" }],
+      skipped: [
+        { id: "u-bob", displayName: "Bob", reason: "no-key", notInvited: true },
+      ],
     });
   });
 
@@ -395,7 +397,7 @@ describe("rewrapForInvitedMembers", () => {
       roomId: ROOM_ID,
       newMembers: [newMembers[0]],
       skippedBeforeGrant: [
-        { id: "u-dan", displayName: "Dan", reason: "no-key" },
+        { id: "u-dan", displayName: "Dan", reason: "no-key", notInvited: true },
       ],
       currentUserId: "u-me",
       identity,
@@ -403,16 +405,19 @@ describe("rewrapForInvitedMembers", () => {
       onOutcome,
     });
 
+    // Invitee has no key
     expect(notices).toEqual([
       {
         level: "warning",
-        text: 'Common:EncryptedSkippedNoKeys {"users":"Dan"}',
+        text: 'Common:EncryptedInviteNoKey {"users":"Dan"}',
       },
     ]);
     expect(onOutcome).toHaveBeenCalledWith({
       granted: [newMembers[0]],
       pending: [],
-      skipped: [{ id: "u-dan", displayName: "Dan", reason: "no-key" }],
+      skipped: [
+        { id: "u-dan", displayName: "Dan", reason: "no-key", notInvited: true },
+      ],
     });
     expect(onProgress).toHaveBeenLastCalledWith({
       percent: 100,

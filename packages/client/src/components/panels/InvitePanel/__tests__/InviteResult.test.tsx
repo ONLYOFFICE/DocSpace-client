@@ -33,7 +33,7 @@ describe("InviteResult", () => {
         outcome={{
           granted: [],
           pending: [{ member: carol, missingFileIds: [1] }],
-          skipped: [{ ...dan, reason: "no-key" }],
+          skipped: [{ ...dan, reason: "no-key", notInvited: true }],
           refused: [],
         }}
       />,
@@ -44,6 +44,43 @@ describe("InviteResult", () => {
     ).toHaveTextContent("Carol Jones");
     expect(
       screen.getByRole("region", { name: "Common:NotInvited" }),
-    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+    ).toHaveTextContent("Common:EncryptedInviteNoKey");
+    expect(screen.queryByText("Common:EncryptedSkippedNoKeys")).toBeNull();
+  });
+
+  it("Invitee has no key: skipped before the grant and refused by the server share one sentence", () => {
+    render(
+      <InviteResult
+        t={t}
+        outcome={{
+          granted: [carol],
+          pending: [],
+          skipped: [{ ...dan, reason: "no-key", notInvited: true }],
+          refused: [{ member: { id: "u-eve", displayName: "Eve" }, noKey: true }],
+        }}
+      />,
+    );
+
+    expect(screen.getAllByText("Common:EncryptedInviteNoKey")).toHaveLength(1);
+    expect(screen.queryByTestId("invite_panel_result_skipped")).toBeNull();
+  });
+
+  it("A member the wrap left out keeps the text about files", () => {
+    render(
+      <InviteResult
+        t={t}
+        outcome={{
+          granted: [carol],
+          pending: [],
+          skipped: [{ ...dan, reason: "no-key" }],
+          refused: [],
+        }}
+      />,
+    );
+
+    expect(screen.getByTestId("invite_panel_result_skipped")).toHaveTextContent(
+      "Common:EncryptedSkippedNoKeys",
+    );
+    expect(screen.queryByText("Common:EncryptedInviteNoKey")).toBeNull();
   });
 });

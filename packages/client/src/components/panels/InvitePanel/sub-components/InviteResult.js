@@ -51,7 +51,16 @@ const InviteResult = ({ t, outcome }) => {
   const refusedOtherwise = refused
     .filter((entry) => !entry.noKey)
     .map((entry) => entry.member);
-  const withoutKey = skipped.filter((member) => member.reason === "no-key");
+  // Spec: private-rooms/room-membership, "Invitees without usable keys are skipped with a warning"
+  const notInvitedWithoutKey = [
+    ...refusedWithoutKey,
+    ...skipped.filter(
+      (member) => member.reason === "no-key" && member.notInvited,
+    ),
+  ];
+  const withoutKey = skipped.filter(
+    (member) => member.reason === "no-key" && !member.notInvited,
+  );
   const withRefusedKey = skipped.filter(
     (member) => member.reason === "key-mismatch-refused",
   );
@@ -109,15 +118,15 @@ const InviteResult = ({ t, outcome }) => {
         </section>
       ) : null}
 
-      {refused.length ? (
+      {notInvitedWithoutKey.length || refusedOtherwise.length ? (
         <section
           data-testid="invite_panel_result_refused"
           aria-label={t("Common:NotInvited")}
         >
-          {refusedWithoutKey.length ? (
+          {notInvitedWithoutKey.length ? (
             <Text className={styles.description}>
               {t("Common:EncryptedInviteNoKey", {
-                users: namesOf(refusedWithoutKey),
+                users: namesOf(notInvitedWithoutKey),
               })}
             </Text>
           ) : null}
@@ -131,7 +140,7 @@ const InviteResult = ({ t, outcome }) => {
         </section>
       ) : null}
 
-      {skipped.length ? (
+      {withoutKey.length || withRefusedKey.length ? (
         <section
           data-testid="invite_panel_result_skipped"
           aria-label={t("Common:NotInvited")}

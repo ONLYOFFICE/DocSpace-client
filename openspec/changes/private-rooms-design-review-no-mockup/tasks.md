@@ -16,7 +16,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Private list: quick actions and create label
 
-- [ ] 3.1 Client: give the Private list root no quick-action section and remove the Private room tile, in `helpers/quickActions.ts` and `pages/Home/Hooks/useQuickActions.tsx` (decision 4). Verify: cases "Banner on a non-empty Private list" and "Banner inside a private room" in `helpers/__tests__/quickActions.test.ts` and `useQuickActions.test.tsx`; `pnpm exec vitest run src/helpers src/pages/Home/Hooks`
+- [x] 3.1 Client: give the Private list root no quick-action section and remove the Private room tile, in `helpers/quickActions.ts` and `pages/Home/Hooks/useQuickActions.tsx` (decision 4). Verify: cases "Banner on a non-empty Private list" and "Banner inside a private room" in `helpers/__tests__/quickActions.test.ts` and `useQuickActions.test.tsx`; `pnpm exec vitest run src/helpers src/pages/Home/Hooks`
+  - 2026-11-13: the section `private-rooms` and its tile are gone from `helpers/quickActions.ts` and `useQuickActions.tsx`, with the `onCreatePrivateRoom` callback and the `onCreateRoom` prop of `Home/index.js` that only fed it. The Private list is then laid out without the banner. The quick actions inside a private room are untouched.
 - [ ] 3.2 Client: add Common:NewPrivateRoom in English and use it for the create button, the header action and the "+ New" entry on a Private address (decision 5). Verify: cases "Create button in the Private list" and "Create button in the Rooms list" in the unit test of `getSectionCreateButton` and of the folder menu; the menu snapshot differs by that key only (`pnpm exec vitest run src/store/contextOptionsStore`, `git diff` of `__snapshots__`); `pnpm exec vitest run src/helpers src/store/contextOptionsStore`
 
 ## 4. Section empty state

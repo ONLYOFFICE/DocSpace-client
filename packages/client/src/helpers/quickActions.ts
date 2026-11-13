@@ -52,8 +52,6 @@ export type QuickActionsSection =
   | "form-room"
   // Private room: file-creation tiles wired to the client-side encryption flow.
   | "private"
-  // Private section list root: offer the single Private room tile.
-  | "private-rooms"
   // Archive / trash / templates / favorites / recent / contacts / profile /
   // settings: no quick-actions banner.
   | null;
@@ -121,9 +119,11 @@ export const getQuickActionsSection = (
   // Forms section root → collect-forms + from-template tiles.
   if (isFormsSection) return "forms";
 
-  // Private list root → the Private room tile. It is a Rooms list root too, so
-  // it must be checked first; a room named by the list address's query is not.
-  if (isPrivateRoomsSection && isRoomsFolder) return "private-rooms";
+  // Private list root → no banner: the create button of the section creates
+  // the private room. It is a Rooms list root too, so it must be checked
+  // first; a room named by the list address's query is not.
+  // Spec: private-rooms/sidebar-section, "Quick actions in the section"
+  if (isPrivateRoomsSection && isRoomsFolder) return null;
 
   // Rooms list root → room tiles. A `/private` address still holding the rooms
   // root, as under its no-access view, gets none.

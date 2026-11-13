@@ -51,6 +51,14 @@ The system SHALL offer to generate a key first when a user with no encryption ke
 - **WHEN** a user presses create in the Private section while their key list has not loaded, and fetching it again fails
 - **THEN** Common:EncryptionKeysLoadFailed is shown, no key-generation prompt is offered and no create-room dialog is left open
 
+#### Scenario: No dialog under the prompts
+- **WHEN** a key-less user presses create in the Private section and the key-generation prompt, the passphrase dialog or the recovery-phrase dialog is shown
+- **THEN** the create-room dialog is not shown behind it
+
+#### Scenario: Key list still loading
+- **WHEN** a user who holds a key presses create in the Private section before their key list has loaded
+- **THEN** the create-room dialog opens on the Private type once the list is known to hold a key, and no key-generation prompt is offered
+
 ### Requirement: Private rooms need a secure context
 The system SHALL refuse to start private room creation, or to auto-prompt for a key, when the browser does not expose WebCrypto, and SHALL show Common:EncryptionRequiresHttps.
 
@@ -73,11 +81,19 @@ The system SHALL NOT allow the room type or the private flag to be changed after
 - **THEN** the room type selector is disabled and saving changes neither the type nor the private flag
 
 ### Requirement: Private badge in permanent settings
-The system SHALL show a permanent "private room" setting block with Common:PrivateRoomTitle and Common:PrivateRoomDescription in the create and edit dialogs of a private room.
+The system SHALL show one "private room" block with Common:PrivateRoomTitle and Common:PrivateRoomDescription in the create and edit dialogs of a private room, in the place of the room type, and SHALL NOT show the Custom room block or a second private-room block there.
 
 #### Scenario: Edit dialog of a private room
 - **WHEN** the edit dialog of a private room is open
-- **THEN** the permanent settings area shows the private room icon, title and description
+- **THEN** the room type block shows the private room icon, Common:PrivateRoomTitle and Common:PrivateRoomDescription, and neither Common:CustomRoomTitle nor a second private-room block is shown
+
+#### Scenario: Create dialog of a private room
+- **WHEN** the create dialog is open on the Private type
+- **THEN** the same block is shown, with the same icon, title and description as in the edit dialog
+
+#### Scenario: Edit dialog of an ordinary Custom room
+- **WHEN** the edit dialog of a Custom room without the private setting is open
+- **THEN** the room type block shows Common:CustomRoomTitle as before
 
 ### Requirement: Invite panel hides external links for private rooms
 The system SHALL NOT render the shared-links block in the invite panel of a private room.

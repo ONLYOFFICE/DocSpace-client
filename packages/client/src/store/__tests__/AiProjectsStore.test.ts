@@ -328,6 +328,44 @@ describe("AiProjectsStore", () => {
       expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1" }));
     });
 
+    it("saves the Skill sets the chat connected and disconnected, one change after another", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      const linked = (ids: number[]) =>
+        project(1, "Project 1", {
+          aiProject: {
+            ...project(1).aiProject,
+            instructionsRooms: ids.map((id) => ({ id, title: `Room ${id}`, available: true })),
+          } as TAiProject["aiProject"],
+        });
+      api.updateAiProject.mockResolvedValueOnce(linked([12, 13])).mockResolvedValueOnce(linked([13]));
+
+      const first = store.changeActiveSkillRooms({ added: [{ id: "13" }], removed: [] });
+      const second = store.changeActiveSkillRooms({ added: [], removed: ["12"] });
+
+      expect(await first).toBe(true);
+      expect(await second).toBe(true);
+      expect(api.updateAiProject.mock.calls[0][1].aiProject.instructionsRoomIds).toEqual([12, 13]);
+      // The second change starts from what the first one saved.
+      expect(api.updateAiProject.mock.calls[1][1].aiProject.instructionsRoomIds).toEqual([13]);
+      expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([13]);
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1" }));
+    });
+
+    it("writes nothing for a Skill sets change the project already has, and reports a refused save", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      api.updateAiProject.mockClear();
+
+      expect(await store.changeActiveSkillRooms({ added: [{ id: "12" }], removed: ["99"] })).toBe(true);
+      expect(api.updateAiProject).not.toHaveBeenCalled();
+
+      api.updateAiProject.mockRejectedValueOnce(new Error("refused"));
+      expect(await store.changeActiveSkillRooms({ added: [], removed: ["12"] })).toBe(false);
+      expect(toastr.error).toHaveBeenCalled();
+      expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
+    });
+
     it("drops the uploaded logo after an update that removed it", async () => {
       const store = createStore();
       api.updateAiProject.mockResolvedValue(project(1));

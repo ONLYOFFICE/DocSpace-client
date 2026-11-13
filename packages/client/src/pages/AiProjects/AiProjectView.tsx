@@ -275,12 +275,31 @@ const AiProjectView = ({
   // The project's Skill sets and Knowledge bases are its settings: the
   // chat's "+" menu lists them and its "Manage sources" opens the project's
   // form - for those who may change the project; a member only sees the
-  // lists. The folders of Data sources stay the member's own pick.
+  // lists. The folders of Data sources stay the member's own pick. The
+  // composer's slash menu changes the Skill sets in place - a set
+  // disconnected from its row, the pick of "Manage skill sets" - and that
+  // change is saved to the project; when the save fails, the chat goes back
+  // to the rooms the project has.
   const activeProject = store.activeProject;
   const canEditSources = !!activeProject && activeProject.id === roomId && activeProject.aiProject.canEditSettings;
   React.useEffect(() => {
     aiChatStore.setSourcesManager({
       onManage: canEditSources ? () => store.activeProject && store.openEditDialog(store.activeProject) : null,
+      onSkillRoomsChange: canEditSources
+        ? (change) => {
+            void store.changeActiveSkillRooms(change).then((saved) => {
+              const project = store.activeProject;
+              if (saved || !project) return;
+              const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
+              aiChatStore.applyPreset({
+                profileId: profile?.id ?? null,
+                profileName: profile?.name ?? null,
+                contextRooms: toChatRooms(instructionsRooms),
+                knowledgeRooms: toChatRooms(knowledgeRooms),
+              });
+            });
+          }
+        : undefined,
     });
     return () => aiChatStore.setSourcesManager(null);
   }, [aiChatStore, store, canEditSources]);

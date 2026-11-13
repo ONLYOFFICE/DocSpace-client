@@ -201,6 +201,51 @@ class AiProjectsStore {
     }
   };
 
+  private skillRoomsSaves: Promise<unknown> = Promise.resolve();
+
+  /**
+   * Links and unlinks Instructions rooms of the open project, as the chat's
+   * slash menu connected and disconnected its Skill sets. Only the change is
+   * applied, so a room the chat does not list (one without skills) stays
+   * linked. Changes are saved one after another: each starts from the
+   * project the one before it left. Resolves to `false` when nothing was
+   * saved.
+   */
+  changeActiveSkillRooms = (change: { added: { id: string }[]; removed: string[] }): Promise<boolean> => {
+    const save = this.skillRoomsSaves.then(async () => {
+      const current = this.activeProject;
+      if (!current?.aiProject.canEditSettings) return false;
+      const { instructionsRooms, knowledgeRooms } = current.aiProject;
+      const removed = new Set(change.removed.map(Number));
+      const kept = instructionsRooms.map((room) => room.id).filter((id) => !removed.has(id));
+      const added = change.added.map((room) => Number(room.id)).filter((id) => Number.isFinite(id) && !kept.includes(id));
+      if (!added.length && kept.length === instructionsRooms.length) return true;
+      try {
+        const project = await updateAiProject(
+          current.id,
+          {
+            aiProject: {
+              instructionsRoomIds: [...kept, ...added],
+              knowledgeRoomIds: knowledgeRooms.map((room) => room.id),
+              // A newly linked room is not among these: it is read back.
+              rooms: [...instructionsRooms, ...knowledgeRooms],
+            },
+          },
+          current,
+        );
+        showWarnings(project);
+        runInAction(() => this.replaceProject(project));
+        if (this.activeProject?.id === current.id) this.syncPreset(project);
+        return true;
+      } catch (e) {
+        toastr.error(errorMessage(e));
+        return false;
+      }
+    });
+    this.skillRoomsSaves = save;
+    return save;
+  };
+
   // The sources (skills, knowledge files) are not read here: the cards read
   // a room's list when its row is expanded (fetchSkills / fetchKnowledgeFiles),
   // and the chat takes the current skills from the server on every round.

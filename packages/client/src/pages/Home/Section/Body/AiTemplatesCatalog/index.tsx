@@ -39,7 +39,6 @@ import { useLocation, useNavigate } from "react-router";
 
 import { ReactSVG } from "react-svg";
 
-import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -245,21 +244,6 @@ const AiTemplatesCatalog = () => {
                 title={installLabel}
                 onClick={() => onInstall(template)}
                 dataTestId="ai-template-install"
-              />
-              <ContextMenuButton
-                getData={() => [
-                  {
-                    key: "install",
-                    label: installLabel,
-                    icon: CreateRoomReactSvgUrl,
-                    disabled: isBusy,
-                    onClick: () => onInstall(template),
-                  },
-                ]}
-                title={t("Common:Actions")}
-                directionX="right"
-                isDisabled={isBusy}
-                testId="ai-template-actions"
               />
             </div>
           </div>

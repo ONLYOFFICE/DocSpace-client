@@ -13,7 +13,6 @@ through CodeGraph.
   under `/rooms/shared`, `/rooms/archived` and `/private`, which shows
   Common:AccessDenied and refreshes the rights (`Shell.jsx`). The server
   answers 403 to the read of a private room by a user who is not a member.
-  The server side of this is tracked outside the repository.
 - **Key cache.** `SecretStorage.getCached` returns `{ publicKey, privateKey }`
   that are the slot's own `Uint8Array`s; `clearState` zeroes them with
   `zeroBuffer`. `wrapDEK` uses the sender's private key (HPKE auth mode), so a

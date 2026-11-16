@@ -692,25 +692,13 @@ Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
   section root and the reason of a refusal are tasks of
   `private-rooms-server-followups`.
 
-### Read on 2026-11-16 (`6fb6dfb17a`): a public or form-filling room created as private
+### Decided on 2026-11-16
 
-The reading behind this item is kept outside the repository. Asked in task
-12.8, decided by the owner on 2026-11-16: the private flag is refused for
-these two room types before anything is stored, with 400, the status of
-the other refusals of a room type (the AI hub types, the third-party
-storage).
-
-### Read on 2026-11-16 (`6fb6dfb17a`): deactivation
-
-The reading behind this item is kept outside the repository. What is asked
-is task 8.1 and the offboarding decision 29.
-
-- The deletion of a user: `DeletePersonalDataAsync`
-  (`Core/Core/FileStorageService.cs`, line 3973) removes the user's file
-  keys (`IFileDao.DeleteFileKeysAsync` for a user), and the removal of the
-  user deletes the account links, the key pair among them
-  (`common/ASC.Core.Common/Data/DbUserService.cs`, line 508).
-- `../server` holds no SCIM code.
+The owner decided two things that day. The private flag is refused for a
+public and a form-filling room before anything is stored, with 400, the
+status of the other refusals of a room type (task 12.8). A deactivation
+removes the file keys of the user and keeps the membership and the key
+pair (task 8.1, decision 29).
 
 ### Hand-over to the backend team (2026-11-16)
 

@@ -55,12 +55,8 @@ Out of scope:
   rooms list filter contradicts: its replacement is in the delta of
   `private-rooms-server-section`.
 - Two statements about guests that the review reported and this change
-  could not confirm in the server source, one of them that the share
-  request of a room administrator may drop a guest silently with 200. The
-  other is a question to the backend
-  (`private-rooms-server-followups` 1.5); the scenario "Guest shared with a
-  private room" of `room-membership` stays as it is until one of them is
-  read.
+  could not confirm in the server source; the scenario "Guest shared with a
+  private room" of `room-membership` stays as it is until they are read.
 - The behaviour itself. What the server should do instead is asked in
   `private-rooms-server-followups`.
 

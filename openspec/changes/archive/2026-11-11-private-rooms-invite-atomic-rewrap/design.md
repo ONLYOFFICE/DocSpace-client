@@ -11,8 +11,7 @@ The stashed `V1_RELEASE_PROGRESS.md` (edge case #65) documents the root-only upl
 Server constraints that bound the ordering (`../server` on `hotfix/v4.0.1`):
 
 - Writing access entries (`PUT files/{fileId}/access`, `FileStorageService.SetEncryptionInfoAsync`, `products/ASC.Files/Core/Core/FileStorageService.cs:5268-5276`) checks read access of every *subject* user named in the body (`fileSecurity.CanReadAsync(file, k.UserId)`) and throws before storing anything if one fails. An invitee who is not yet a room member cannot read the room's files, so a wrap for them is refused, and the refusal rejects the whole request, including the entries for other users in it.
-- No server path removes a user's access entries: the only delete (`DeleteFileKeysAsync`, `products/ASC.Files/Core/Core/EF/Queries/AbstractQueries.cs:116`) is called only from `FileDao.SetFileKey` (`products/ASC.Files/Core/Core/Dao/TeamlabDao/FileDao.cs:2404`), which replaces the rows of the users listed in the request. Removing a member leaves their entries in place.
-- Granting a private room to an invitee who never registered a key is refused by the server (`ThrowIfKeysAreNotSetAsync` on the invitee). A user who registered keys and later deleted all of them still has a (now empty) key record and passes the check. The server side of this is tracked outside the repository; since task 2.1 the client verifies every invitee through the candidates route before the grant.
+- Granting a private room to an invitee who never registered a key is refused by the server (`ThrowIfKeysAreNotSetAsync` on the invitee). Since task 2.1 the client verifies every invitee through the candidates route before the grant.
 
 ## Goals / Non-Goals
 

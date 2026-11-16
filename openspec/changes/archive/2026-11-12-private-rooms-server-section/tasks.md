@@ -48,5 +48,4 @@ The server landed the section in `c866c055e1` (1.1), and its shape is recorded i
 ## Workflow follow-up
 
 - Former tasks 3.2 (section addresses by the root folder type) and 3.3 (live updates by the root) were dropped on 2026-11-06: a private room keeps the Rooms root, so the private setting stays the signal (design decision 3).
-- Trash and Favorites for subfolders of private rooms are not part of this change; the server side of this is tracked outside the repository.
 - Archive once both sides are on `release/v4.1.0`. The archive merges the `sidebar-section` and `server-contract` deltas and drops the "in this version" limitations of the main specs.

@@ -37,8 +37,7 @@ requirement's only scenario names the context menu.
   history panel as before, when the server grants ReadHistory, and keeps its
   tooltip.
 - The E2E mock of a private room reports the rights of an encrypted file for
-  the room owner as the server does (Rename, Lock, CopyLink, ReadHistory and
-  EditHistory in an active room; ReadHistory alone in an archived one), and
+  the room owner as the server does, and
   takes the file's version count as a seed, so that an E2E case can reach
   the badge.
 - The download button and Ctrl+S of the client's media viewer save an
@@ -91,9 +90,8 @@ None.
 - Mocks: `packages/shared/__mocks__/handlers/files/encryptedFiles.ts` (the
   file's `version` and `versionGroup`, and its Rename, Lock, CopyLink,
   ReadHistory and EditHistory rights) and cases in its contract test.
-- Server (`../server`): no work needed for this change. The server side
-  of this is tracked outside the repository. The client checks the
-  encrypted flag, not the right.
+- Server (`../server`): no work needed for this change. The client checks
+  the encrypted flag, not the right.
 - Locales: none. The badge only drops an existing string.
 
 ## Out of scope

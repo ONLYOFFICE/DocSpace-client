@@ -9,8 +9,7 @@ Server source: `../server` at `a7d94e4b81`, read through CodeGraph on
 `common/`.
 
 - **The key check of a share change.** The share request of a private room
-  checks the encryption keys of the user an entry names. The server side of
-  this is tracked outside the repository.
+  checks the encryption keys of the user an entry names.
 - **The check runs before an e-mail address is resolved.** The user of the
   entry is read from its id; the block that finds or creates the account
   behind an e-mail address comes later, after the key check. An entry that

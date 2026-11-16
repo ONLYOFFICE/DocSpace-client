@@ -19,5 +19,4 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## Workflow follow-up
 
-- The server side of this is tracked outside the repository.
 - Archive after 3.1; the archive merges the deltas into `file-operations` and `server-contract`.

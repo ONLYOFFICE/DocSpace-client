@@ -16,26 +16,9 @@ file is named.
   Duplicate, SubmitToFormGallery, Download, Convert, CreateRoomFrom,
   CopyLink, Embed, StartFilling, FillingStatus, ResetFilling, StopFilling,
   OpenForm, Vectorization, AskAi. The mock sends 21 of them.
-- **The owner's grant.** In the branch for the Rooms and Private sections
-  (`case FolderType.VirtualRooms ... FolderType.PrivateRooms`, line 1781)
-  `FilterEntryAsync` returns true at `HasFullAccessAsync` (line 2063) for
-  every action not refused above it. `HasFullAccessAsync` (line 3935) is
-  true for the creator of the parent room who is neither a guest nor of
-  the User type. The administrator shortcut above it is skipped for a
-  private room (line 1791).
 - **The private-room refusals.** Copy, Duplicate, IndexExport, UseChat,
   Vectorization and StartFilling (line 1712) and, for a file, Convert,
   AskAi, Embed, EditAccess and Copy (line 2033).
-- **SubmitToFormGallery.** Refused at line 1468 unless the file's category
-  is a document, a presentation, a spreadsheet or a PDF form; otherwise it
-  reaches the owner's grant. The category of a stored file is its type by
-  the extension of its title (`FileDao.SaveFileAsync`,
-  `Core/Dao/TeamlabDao/FileDao.cs` line 704, with `File.FilterType`,
-  `Core/Entries/File.cs` line 159). An encrypted upload keeps its
-  extension, so docx, xlsx and pptx give true. A PDF becomes a PDF form
-  when `FileChecker.CheckExtendedPDFstream` (`Utils/FileChecker.cs` line
-  57) finds bit 0x02 in the flags byte, offset 6, of a `DSE3` header;
-  otherwise its category is plain PDF and the right is false.
 - **FillForms.** False for a file that is not a PDF (line 1266); for a PDF,
   false in a room that is not a form-filling room (line 1880). The mock's
   room is a custom room.
@@ -43,8 +26,7 @@ file is named.
   1712); FillingStatus, ResetFilling and StopFilling are false for a file
   that is not a PDF (line 1691) and for a PDF outside a form-filling or
   virtual data room (line 1975).
-- **OpenForm.** False for a file that is not a PDF (line 1984); a PDF
-  reaches the owner's grant.
+- **OpenForm.** False for a file that is not a PDF.
 - **Archive.** The Archive branch (line 2068) passes only Read, Delete,
   ReadHistory, Copy, Move, Download, ReadLinks and IndexExport, so every
   right this change adds or flips is false in an archived room.

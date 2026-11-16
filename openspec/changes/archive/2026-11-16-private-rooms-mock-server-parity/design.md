@@ -12,8 +12,7 @@ Server source: `../server` at `6fb6dfb17a`, read on 2026-11-16.
 - After the checks the mock already mirrors (the creator's keys, the
   Document Server, then indexing, lifetime and watermark), the server
   answers 403 with the message "Access denied" to a public or a
-  form-filling room created as private. The server side of this is tracked
-  outside the repository.
+  form-filling room created as private.
 - The room types are `RoomType.FillingFormsRoom` (1) and
   `RoomType.PublicRoom` (6) of
   `products/ASC.Files/Core/ApiModels/RequestDto/CreateRoomRequestDto.cs`.

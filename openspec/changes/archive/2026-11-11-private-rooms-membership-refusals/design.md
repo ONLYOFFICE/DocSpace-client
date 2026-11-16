@@ -8,7 +8,6 @@ See proposal.md for the motivation. What shapes the approach:
   private room can be answered with 403 and the server's own English
   message. A permission refusal of the same request is a 403 too; the two
   differ only by the message text, and the answer carries no reason code.
-  The server side of this is tracked outside the repository.
 - **The client today.**
   - Leave: the dialog
     (`packages/client/src/components/dialogs/LeaveRoomDialog/index.js`) awaits

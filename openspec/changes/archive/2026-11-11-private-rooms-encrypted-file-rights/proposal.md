@@ -42,8 +42,7 @@ No new user-facing string is added.
 
 Out of scope:
 
-- The server. The server side of this is tracked outside the repository;
-  it is not changed here and not worked around in the mock.
+- The server. It is not changed here and not worked around in the mock.
 - Rights of members who are not the room owner. The mock keeps answering
   as the owner, as it does today.
 - The comment editor of the version history panel: the panel is not

@@ -63,8 +63,7 @@ entry of its menu. The two apps fill these differently:
 
 Rename comes from the menu models in `MediaViewer.helpers.tsx`, shared by
 both apps. `getMobileMediaContextModel` and `getPDFContextModel` show it
-unless `security.Rename` is false; the server reports Rename true to the
-room owner (above). `getDesktopMediaContextModel` hides it only in an
+unless `security.Rename` is false. `getDesktopMediaContextModel` hides it only in an
 archived room or for a public file and does not read the right at all. None
 of the three reads `encrypted`. On the test portal the rename dialog opened
 from the viewer showed the file's opaque name. `getPDFContextModel` is used

@@ -40,6 +40,7 @@ import { Tabs, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { RoomsType } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
+import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 
 import {
   getAiWorkspaceTabUrl,
@@ -50,22 +51,29 @@ import {
 const MY_TAB = "my";
 const TEMPLATES_TAB = "templates";
 
-type AiWorkspaceTabsProps = { userId?: string };
+type AiWorkspaceTabsProps = {
+  userId?: string;
+  /** The section is loading: the header, and the tabs with it, are skeletons. */
+  showLoader?: boolean;
+};
 
 /**
  * The tabs over the filter of the AI Chat section's Agents list: the user's
  * own agents and the shipped agent templates. Both stay on the list's
  * address, so the sidebar entry and the title do not change; the tab is read
  * from its query. Skill sets and Knowledge bases have no templates and so no
- * tabs.
+ * tabs. While the section loads - a reload, a slow change of section - the
+ * tabs are a skeleton, as the header above and the filter below them are.
  */
-const AiWorkspaceTabs = ({ userId }: AiWorkspaceTabsProps) => {
+export const AiWorkspaceTabs = ({ userId, showLoader }: AiWorkspaceTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
 
   if (getCategoryType(location) !== CategoryType.AiHub) return null;
   if (!hasAiWorkspaceTemplates(location.search)) return null;
+
+  if (showLoader) return <SectionSubmenuSkeleton />;
 
   const items: TTabItem[] = [
     { id: MY_TAB, name: t("Common:MyAgents"), content: null },
@@ -98,6 +106,8 @@ const AiWorkspaceTabs = ({ userId }: AiWorkspaceTabsProps) => {
   );
 };
 
-export default inject(({ userStore }: TStore) => ({
+export default inject(({ userStore, clientLoadingStore }: TStore) => ({
   userId: userStore.user?.id,
+  showLoader:
+    clientLoadingStore.showTabsLoader || clientLoadingStore.showArticleLoader,
 }))(observer(AiWorkspaceTabs));

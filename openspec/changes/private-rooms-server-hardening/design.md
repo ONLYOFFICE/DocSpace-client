@@ -788,6 +788,18 @@ creation refuses these rooms and that their link is made on the first read.
   (`common/ASC.Core.Common/Data/DbUserService.cs`, line 508).
 - `../server` holds no SCIM code.
 
+### Hand-over to the backend team (2026-11-16)
+
+The owner handed the open Backend tasks of this change to the backend team
+on 2026-11-16, in the same document as those of
+`private-rooms-server-followups`: tasks 4.5 (for the translators), 8.1,
+12.3, 12.8 and 16.1. The recovery administrator
+(`private-rooms-admin-recovery`) and the tasks of
+`private-rooms-editor-contract` were left out of it: the first waits for
+the decisions of the owner, the others for the Document Server team.
+`../server` was at `6fb6dfb17a` that day and held none of them. No reply
+is recorded yet.
+
 ## Goals / Non-Goals
 
 **Goals:**

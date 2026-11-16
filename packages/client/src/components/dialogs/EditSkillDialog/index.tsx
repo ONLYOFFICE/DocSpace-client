@@ -34,6 +34,7 @@
  */
 
 import React from "react";
+import type { EditorView } from "@uiw/react-codemirror";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -55,6 +56,9 @@ import {
 } from "@docspace/shared/utils/skillFile";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
+
+import MarkdownToolbar from "./MarkdownToolbar";
+import { getMarkdownEdit, type TMarkdownAction } from "./markdown";
 
 import styles from "./EditSkillDialog.module.scss";
 
@@ -97,6 +101,19 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
   const [name, setName] = React.useState(file ? titleOf(file) : "");
   const [description, setDescription] = React.useState("");
   const [body, setBody] = React.useState("");
+  const editorRef = React.useRef<EditorView | null>(null);
+
+  const onFormat = (action: TMarkdownAction) => {
+    const view = editorRef.current;
+    if (!view) return;
+    const { from, to } = view.state.selection.main;
+    const edit = getMarkdownEdit(view.state.doc.toString(), from, to, action);
+    view.dispatch({
+      changes: { from: edit.from, to: edit.to, insert: edit.insert },
+      selection: { anchor: edit.anchor, head: edit.head },
+    });
+    view.focus();
+  };
 
   React.useEffect(() => {
     if (!file) return undefined;
@@ -145,8 +162,9 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
   return (
     <ModalDialog
       visible
-      displayType={ModalDialogType.aside}
-      withBodyScroll
+      displayType={ModalDialogType.modal}
+      isHuge
+      autoMaxWidth
       withForm
       onSubmit={(e) => {
         e.preventDefault();
@@ -167,7 +185,7 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
             <div className={styles.field}>
               <InputParam
                 id="edit-skill-name"
-                title={`${t("Common:Name")}:`}
+                title={t("Common:Name")}
                 placeholder={t("Common:EnterName")}
                 value={name}
                 onChange={(e) => setName(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH))}
@@ -185,7 +203,7 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
               ) : null}
             </div>
             <div className={styles.field}>
-              <Label htmlFor="edit-skill-description" text={`${t("Common:DescriptionLabel")}:`} display="display" />
+              <Label htmlFor="edit-skill-description" text={t("Common:DescriptionLabel")} display="display" />
               <Textarea
                 id="edit-skill-description"
                 value={description}
@@ -201,15 +219,24 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
               </Text>
             </div>
             <div className={styles.field}>
-              <Label text={`${t("Common:SkillInstructions")}:`} display="display" />
-              {isLoading ? null : (
-                <React.Suspense fallback={null}>
-                  <SkillEditor value={body} isDisabled={isSaving} onChange={setBody} minHeight="320px" />
-                </React.Suspense>
-              )}
-              <Text fontSize="12px" lineHeight="16px" className={styles.hint}>
-                {t("Common:MarkdownSupported")}
-              </Text>
+              <Label text={t("Common:SkillInstructions")} display="display" />
+              <div className={styles.instructions}>
+                <MarkdownToolbar isDisabled={isLoading || isSaving} onAction={onFormat} />
+                {isLoading ? null : (
+                  <React.Suspense fallback={null}>
+                    <SkillEditor
+                      value={body}
+                      isDisabled={isSaving}
+                      onChange={setBody}
+                      minHeight="160px"
+                      maxHeight="max(160px, min(360px, calc(100vh - 480px)))"
+                      onCreateEditor={(view) => {
+                        editorRef.current = view;
+                      }}
+                    />
+                  </React.Suspense>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -219,7 +246,6 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
           label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           primary
-          scale
           type="submit"
           isLoading={isSaving}
           isDisabled={!canSave}
@@ -228,7 +254,6 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
-          scale
           onClick={onClose}
           isDisabled={isSaving}
           testId="edit-skill-cancel"

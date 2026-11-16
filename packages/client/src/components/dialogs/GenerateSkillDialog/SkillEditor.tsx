@@ -47,6 +47,10 @@ type SkillEditorProps = {
   onChange: (value: string) => void;
   /** The least height of the editor; the generation panel's whole body by default. */
   minHeight?: string;
+  /** The height the editor scrolls past; it grows with its text without one. */
+  maxHeight?: string;
+  /** Hands over the editor's view, for edits made from outside of it. */
+  onCreateEditor?: (view: EditorView) => void;
 };
 
 const extensions = [EditorView.lineWrapping];
@@ -75,7 +79,14 @@ const darkTheme = githubDarkInit({
 });
 
 /** The generated skill as Markdown text, editable before it is saved. */
-const SkillEditor = ({ value, isDisabled, onChange, minHeight = "calc(100vh - 220px)" }: SkillEditorProps) => {
+const SkillEditor = ({
+  value,
+  isDisabled,
+  onChange,
+  minHeight = "calc(100vh - 220px)",
+  maxHeight,
+  onCreateEditor,
+}: SkillEditorProps) => {
   const { isBase } = useTheme();
 
   return (
@@ -90,6 +101,8 @@ const SkillEditor = ({ value, isDisabled, onChange, minHeight = "calc(100vh - 22
         // The preview is the panel's whole body: a short skill still gets
         // the room of a long one, and a long one scrolls with the panel.
         minHeight={minHeight}
+        maxHeight={maxHeight}
+        onCreateEditor={onCreateEditor}
         basicSetup={{ foldGutter: false }}
       />
     </div>

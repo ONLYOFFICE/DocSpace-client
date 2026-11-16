@@ -29,7 +29,7 @@ vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   );
   return {
     ModalDialog: Object.assign(ModalDialog, { Header: Part, Body: Part, Footer: Part }),
-    ModalDialogType: { aside: "aside" },
+    ModalDialogType: { modal: "modal" },
   };
 });
 vi.mock("SRC_DIR/components/CreateEditDialogParams/InputParam", () => ({

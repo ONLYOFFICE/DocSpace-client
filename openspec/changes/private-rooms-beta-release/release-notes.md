@@ -24,11 +24,8 @@ Handover to the documentation team: not yet recorded.
   switches the feature off and on with the Private app in the apps settings.
   While it is off:
   - the Private section, the Private app and the Private room type are gone;
-  - existing private rooms stay usable by their address but are not listed
-    anywhere, since the Rooms list leaves them out (server, 2026-11-06).
-    The server is asked to close them by their address as well
-    (`private-rooms-server-followups` 2.5, 2026-11-16); until that lands
-    the switch hides private rooms and does not lock them;
+  - existing private rooms are not listed anywhere; nothing is deleted,
+    and they are back when the app is switched on again;
   - users who already hold a key keep the Keys management tab.
 - **Embedding:** an embedded client frame and the SDK private pages show
   private rooms only when the host sets `privateRooms` in the frame
@@ -102,13 +99,9 @@ What a private room and its files do not offer in this version, from
 - No private room on third-party storage.
 
 AI is not available in private rooms or on encrypted files: no AI chat in
-the room or the section, no vectorization and no AI agents. One surface is
-still open: the editor shows its AI tools tab for an encrypted file, seen
-again on the release stand on 2026-11-16, until the server turns it off in
-the editor configuration (`private-rooms-server-hardening` 16.1). Text
-sent from that tab leaves the browser unencrypted, so the tab has to be
-gone before users are told that AI does not see private rooms. The server has no clear text to work with,
-and every AI path of the portal would carry it through the portal. Kept by
+the room or the section, no vectorization and no AI agents. The server has
+no clear text to work with, and every AI path of the portal would carry it
+through the portal. Kept by
 decision of 2026-11-06; the options for a later integration are recorded
 in `private-rooms-ai-integration`.
 
@@ -164,16 +157,9 @@ had landed by `6fb6dfb17a` (read on 2026-11-16). Still open:
 - the translations of the "Private room" and "Private folder" labels of
   letters, pushes and the audit trail, which every language prints in
   English for now (4.5);
-- offboarding (8.1): deactivating a user revokes no keys, and the owner of
-  a private room can be deactivated with the room still theirs;
 - recovery of a lost key by an organisation, which is a change of its own
   (`private-rooms-admin-recovery`) and waits for decisions; in the beta a
   lost passphrase and recovery phrase cannot be made good by anybody;
-- a public or form-filling room created as private answers an error and
-  is stored all the same, without the link it exists for (12.8);
-- the editor's AI tools tab on an encrypted file (16.1), see above;
-- whether a private AI agent is refused (12.3, decision 8), and the
-  template paths of room creation;
 - the availability rule, withdrawn until product decides whether private
   rooms are limited by edition (decision 1);
 - backup and restore: the keys stay out of the backup (group 15, the
@@ -182,22 +168,7 @@ had landed by `6fb6dfb17a` (read on 2026-11-16). Still open:
 Server (`private-rooms-server-followups`), handed to the backend team on
 2026-11-16 with the open items above:
 
-- a member without a key cannot leave a private room, be removed from it
-  or get another role (1.1), and the refusal has no reason the interface
-  can tell from a refusal by rights (1.2);
-- the keys listed for one file miss the room owner when another member
-  created the file, and keep a creator who left the room (1.3);
-- the rooms of a deleted user pass to their new owner without a check of
-  that owner's keys (1.4);
-- a user turned into a guest keeps the key, the file keys, the membership
-  and the ownership of private rooms (1.6);
-- a private form-filling room is listed in the Forms section (2.1);
-- the server reports the rights to rename, to read and edit the history,
-  to lock, to copy a link and to use AI on encrypted content, which the
-  interface withholds by itself (2.2);
-- the Private section is titled in English for every language (2.3);
-- the switched-off Private app hides private rooms without closing them
-  (2.5), see "Who sees it".
+- the Private section is titled in English for every language (2.3).
 
 Client follow-ups of the merged server items: none open; the owner change
 prepared through the missing-keys route (2.2), the skipped recipients of a
@@ -210,6 +181,4 @@ Document Server and editor (`private-rooms-editor-contract`):
 - the stable document key and base while a session exists (6.2), fixed
   together with the Document Server; the public document address and the
   refused saves without the encrypted flag landed on 2026-11-05;
-- the key-pair list in the signed editor configuration (10.6), removed
-  once the Document Server team confirms the editor does not need it;
 - which editions ship the crypto add-on (see "Editors").

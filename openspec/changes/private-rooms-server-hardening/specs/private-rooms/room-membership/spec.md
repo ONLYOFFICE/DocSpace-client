@@ -100,5 +100,5 @@ The system SHALL drop the leaver's role without a revocation of its own when a m
 - **THEN** the member stays in the room with their keys and the failure is shown
 
 #### Scenario: Key removal fails on the server
-- **WHEN** the server has dropped the role and then fails to remove the leaver's keys
-- **THEN** the failure is shown, the member is no longer in the room, and their wrapped keys stay on the files
+- **WHEN** the server fails to remove the leaver's keys while it drops the role
+- **THEN** the failure is shown, and the server leaves no state in which the member is out of the room while their wrapped keys stay on the files

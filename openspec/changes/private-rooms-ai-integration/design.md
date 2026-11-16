@@ -12,8 +12,8 @@ Where the ban sits:
   on every entry inside one, active or archived
   (`products/ASC.Files/Core/Core/Security/FileSecurity.cs:1706-1718`); the
   comment there gives the reason: the server has no clear text to build an
-  index or a vector from. A private AI agent is created today and the server
-  proposes to refuse it (`private-rooms-server-hardening`, decision 27).
+  index or a vector from. The server proposes to refuse a private AI agent
+  (`private-rooms-server-hardening`, decision 27).
 - Client: the AI chat button and the AI quick-action tiles are withheld on a
   private address and inside a private room (`private-rooms/sidebar-section`
   "No AI chat in the section", `private-rooms/room-membership` "No AI chat
@@ -66,19 +66,10 @@ file key of an encrypted file for the editor
 `private-rooms/editor-integration`). Whether the library can call a provider
 without the gateway, and what it uses the SDKs for, is spike 1.
 
-Seen on the release stand `tests.onlyoffice.io` on 2026-11-06 (Document
-Server 10.0.3.19): the editor's AI Tools tab is shown for an encrypted file.
-Because the doceditor skips the plugin's initialisation, no portal model is
-connected and AI Chat asks to "Connect an AI Model", but the plugin's own
-Settings let the user add a provider key, after which Summarization,
-Translation and the chat would send the clear text of the open document
-from the browser to that provider. Option C below therefore already exists
-de facto through the plugin, outside the client's control and without the
-room-owner opt-in of decision 4. The editor configuration carries the
-switch: `customization.ai.disabled` (`AiConfigDto`, set by the server for a
-portal without AI and for anonymous visitors), so the ban reaches the
-editor once the server sets it for an encrypted file
-(`private-rooms-server-hardening`, task group 16, decision 29).
+The editor configuration carries a switch for the editor's AI tools:
+`customization.ai.disabled` (`AiConfigDto`, set by the server for a portal
+without AI and for anonymous visitors). The server sets it for an encrypted
+file in `private-rooms-server-hardening`, task group 16, decision 29.
 
 No stashed design document covers AI in private rooms; the ban predates the
 AI chat.
@@ -100,7 +91,7 @@ AI chat.
 1. **The ban stays (owner, 2026-11-06).** No phase is scheduled; this
    change holds the options. Alternative: schedule phase 1 for the beta;
    rejected, the beta's promise and its release notes would change while
-   the server hardening of the same week closes the last clear-text leaks.
+   the server hardening of the same week is still landing.
 
 2. **A future integration keeps the portal out of the clear text.** The
    options are judged by where the clear text goes and where it rests:

@@ -28,34 +28,18 @@ EditHistory and CopyLink). Rechecked after a pull to `a7d94e4b81`
 (2026-11-10): the commits since `b4cd1db402` touch only `ASC.AI` (document
 agent settings and skills), so the reads below stand.
 
-- `:1708-1721`: the refusal for every entry of a private room covers Copy,
-  Duplicate, IndexExport, UseChat, Vectorization and StartFilling. Rename,
-  Lock, CopyLink, ReadHistory and EditHistory are not in it.
-- `:1988-2018`, in the VirtualRooms branch (which also handles
-  `FolderType.PrivateRooms`, `:1785`): Rename, Lock and EditHistory are
-  refused only in the form-filling folders, and CopyLink only in the
-  form-filling system folders. Neither applies to a private room.
-- `:2033-2061`: the private-room refusals for a file cover Convert, AskAi,
-  Embed, EditAccess and Copy. The five rights above are not in them.
-- `:2063`: `HasFullAccessAsync` (`:3935`) grants the room owner (a user who
-  is neither a guest nor of the User type and who created the room) every
-  action that was not refused before. So the owner gets Rename, Lock,
-  CopyLink, ReadHistory and EditHistory on an encrypted file of an active
-  private room.
-- `:2068-2083`, the Archive branch, admits Read, Delete, ReadHistory, Copy,
-  Move, Download, ReadLinks and IndexExport, so of the five only ReadHistory
-  remains.
-- `FileDtoHelper` (`products/ASC.Files/Core/ApiModels/ResponseDto/FileDto.cs`)
-  overrides these rights only in Recent and Favorites (`:378-406`) and in a
-  form-filling room (`:567-585`), neither of which applies here.
+- The private-room refusals cover Copy, Duplicate, IndexExport, UseChat,
+  Vectorization and StartFilling for every entry and Convert, AskAi, Embed,
+  EditAccess and Copy for a file.
+- The Archive branch admits Read, Delete, ReadHistory, Copy, Move,
+  Download, ReadLinks and IndexExport.
 
 The file history endpoint behind `fetchFileVersions` is not read here. The
 client never calls it for an encrypted file after this change.
 
 Mock. `encryptedFilesHandlers` reports `version` and `versionGroup` 1 for
-every file. On a file of an active private room it reports Lock, CopyLink,
-ReadHistory and EditHistory false, which differs from the server for the
-room owner, the only viewpoint the mock serves. With either value, no E2E
+every file. It reports Lock, CopyLink, ReadHistory and EditHistory otherwise than the
+server does for the room owner, the only viewpoint the mock serves. With either value, no E2E
 case can reach the badge.
 
 Media viewer. The shared viewer
@@ -144,9 +128,9 @@ the info panel.
    shows. The check carries the one-line pointer
    `Spec: private-rooms/file-operations, "Version operations withheld"`.
    Alternatives:
-   - (a) Trust `security.ReadHistory`. Rejected: the server grants it on an
-     encrypted file (Context). Asking the server to refuse it is separate
-     backend work, and the client must not depend on it.
+   - (a) Trust `security.ReadHistory`. Rejected: the rule follows from the
+     file being encrypted, and the client must not depend on the right for
+     it.
    - (b) Guard the handlers (`withBadges.onShowVersionHistory` and the SDK's
      `versionHistoryHandler`) instead. Rejected: that needs two guards for
      one rule, and the badge would still promise the history in its tooltip.
@@ -157,9 +141,9 @@ the info panel.
    say "Show version history". This adds no new string. The hover style is
    left alone (see Risks).
 3. **The mock mirrors the owner's rights and takes a `versionGroup` seed.**
-   In an active private room Rename, Lock, CopyLink, ReadHistory and
-   EditHistory are true, as `FilterEntryAsync` answers them for the owner;
-   in the archived variant only ReadHistory is. A seed may set
+   It reports Rename, Lock, CopyLink, ReadHistory and EditHistory as
+   `FilterEntryAsync` answers them for the owner, in the active and in the
+   archived variant. A seed may set
    `versionGroup` (default 1), which the file reports as both `version` and
    `versionGroup`, so a spec can show a file with several versions. The
    contract test checks both. An E2E case can then fail without the fix.
@@ -199,9 +183,9 @@ the info panel.
 
 ## Risks / Trade-offs
 
-- [Every E2E spec that uses `encryptedFilesHandlers` now sees Lock,
-  CopyLink and the history rights on its files, so a client rule that
-  relied on those rights being false would show up as a failing spec.] →
+- [Every E2E spec that uses `encryptedFilesHandlers` now sees other
+  values of Lock, CopyLink and the history rights on its files, so a client
+  rule that relied on the old values would show up as a failing spec.] →
   The client E2E specs that use the mock are run in the E2E task. The SDK
   and doceditor specs that use it assert none of these rights. The run
   found two info-panel cases in `private-rooms-section.spec.ts` that open

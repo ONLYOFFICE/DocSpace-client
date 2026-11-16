@@ -2,21 +2,17 @@
 
 ## Why
 
-The E2E mock of a private room reports fewer rights on an encrypted file
-than the server does. The server gives the room owner the comment, review
-and custom-filter rights, the form-gallery right on documents, spreadsheets,
-presentations and PDF forms, and the open-form right on a PDF; the mock
-answers all of them with false and leaves six of the 27 right keys out. A
-mock that is stricter than the server hides every place where the client
-trusts a right the server does grant: until 2026-11-10 it also answered the
+The E2E mock of a private room does not report the rights of an encrypted
+file as the server does: it answers several of them differently and leaves
+six of the 27 right keys out. A mock that differs from the server hides
+every place where the client trusts a right the server reports: until 2026-11-10 it also answered the
 history rights with false, and two bypasses of that kind were found only by
 reading the code.
 
 One of them is still open. The version comment in the Details view of the
-info panel opens for editing on the edit-history right alone. For an
-encrypted file the server grants that right to the room owner, and saving
-the comment requests the version list and stores the text on the server in
-the clear, although version operations are withheld for encrypted files.
+info panel opens for editing on the edit-history right alone, without a
+look at whether the file is encrypted, although version operations are
+withheld for encrypted files.
 
 A second gap is in the media viewer: when the encrypted file to download is
 neither in the folder list nor the previewed file, the download does
@@ -25,10 +21,8 @@ nothing and says nothing.
 ## What Changes
 
 - The mock reports the rights of an encrypted file as the server computes
-  them for the room owner: comment, review and custom filter granted in an
-  active room; the form-gallery right by the file's category; the open-form
-  right on a PDF; the six missing keys present. In an archived room all of
-  these are denied, as the server denies them. Contract cases pin each
+  them for the room owner, by the room's state and the file's category,
+  with the six missing keys present. Contract cases pin each
   value to the server rule behind it.
 - Every client and SDK E2E spec that uses the mock is run on it. A menu
   entry, badge or action that appears for an encrypted file only because of
@@ -48,10 +42,8 @@ No new user-facing string is added.
 
 Out of scope:
 
-- The server. That it grants the edit-history, comment, review,
-  custom-filter and form-gallery rights on a file whose content it cannot
-  read is recorded for the backend, not changed here and not worked around
-  in the mock.
+- The server. The server side of this is tracked outside the repository;
+  it is not changed here and not worked around in the mock.
 - Rights of members who are not the room owner. The mock keeps answering
   as the owner, as it does today.
 - The comment editor of the version history panel: the panel is not

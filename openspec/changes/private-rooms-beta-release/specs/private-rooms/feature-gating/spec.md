@@ -22,11 +22,11 @@ The system SHALL offer private rooms on every portal, SaaS and standalone, with 
 - **THEN** no private-rooms surface appears and nothing is written to localStorage
 
 ### Requirement: Existing private rooms stay usable when the app is off
-The system SHALL keep rooms that are already private, and files that are already encrypted, readable and manageable for their members, who reach them by their address, when an administrator switches the E2E rooms app off. Only the creation of new private rooms is withheld. While the app is off, private rooms SHALL NOT be listed: the server leaves them out of the Rooms area, and the client asks the shared Archive for non-private rooms only.
+The system SHALL keep rooms that are already private, and files that are already encrypted, with their members and their keys when an administrator switches the E2E rooms app off, so that they are usable again once the app is on. While the app is off, the creation of new private rooms is withheld and private rooms SHALL NOT be listed: the server leaves them out of the Rooms area, and the client asks the shared Archive for non-private rooms only.
 
 #### Scenario: App switched off after rooms exist
 - **WHEN** an administrator switches the E2E rooms app off on a standalone portal with private rooms
-- **THEN** members no longer find their private rooms in Rooms or Rooms → Archive, and a private room opened by its address still opens under Rooms and lets them download or upload encrypted files
+- **THEN** members no longer find their private rooms in Rooms or Rooms → Archive, and nothing of the rooms, their files or their members is deleted
 
 #### Scenario: No new private room while off
 - **WHEN** the E2E rooms app is off

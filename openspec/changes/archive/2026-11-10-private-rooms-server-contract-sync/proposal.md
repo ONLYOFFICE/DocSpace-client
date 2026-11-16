@@ -90,9 +90,8 @@ None.
 
 - The private section on the server (root, privacy filter, room groups,
   new-items counts): `private-rooms-server-section`.
-- Refusing the private flag on public and form-filling rooms: an open backend
-  task of `private-rooms-server-hardening`; this change records only what the
-  server does today.
+- What `private-rooms-server-hardening` asks of the server and the server
+  does not have yet; this change records only what the server does today.
 - Client behaviour around these server rules.
 
 ## Decisions needed

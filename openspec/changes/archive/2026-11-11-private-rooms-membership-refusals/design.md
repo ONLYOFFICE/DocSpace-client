@@ -4,33 +4,11 @@
 
 See proposal.md for the motivation. What shapes the approach:
 
-- **The server (read 2026-11-11 at `a7d94e4b81`).**
-  `FileSharingAceHelper.SetAceObjectAsync`
-  (`products/ASC.Files/Core/Utils/FileSharing.cs:270-276`) calls
-  `EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync` for every entry of a
-  share request on a private room whose subject is a user, whatever access
-  the entry asks for, so a removal and a self-leave pass through it too.
-  The check throws `InvalidOperationException("The user does not have an
-  encryption key")` for a missing or empty key set
-  (`common/ASC.FederatedLogin/LoginProviders/EncryptionLoginProvider.cs:97-105`),
-  and `ResponseWrapper` answers that exception type with 403 and its own
-  message (`common/ASC.Api.Core/Middleware/ResponseWrapper.cs:86-88`). A
-  permission refusal of the same request is a `SecurityException`, answered
-  with 403 "Access denied" (`:71-76`). The two differ only by the message
-  text; the answer carries no reason code.
-- **The stand (2026-11-10, DocSpace 4.1.0.12351).** A member whose keys were
-  reset could not leave, and the room owner could neither remove that member
-  nor change the role: each request answered 403.
-- **The stand again (2026-11-11, DocSpace 4.1.0.12366).** As the room's
-  owner, a share request that names that member with the role they already
-  hold answered 403 "The user does not have an encryption key" while the
-  member had no key, and 200 after the member generated a key in the
-  profile; the roles did not change either time. So the refusal lasts only
-  while the key set is empty, and the member can end it. The member's own
-  leave after generating a key was not run; it passes the same check on the
-  same account. The 403 answer also carried the exception's type name,
-  which differs from that of a permission refusal; the client does not read
-  it (decision 1).
+- **The server (read 2026-11-11 at `a7d94e4b81`).** A share request on a
+  private room can be answered with 403 and the server's own English
+  message. A permission refusal of the same request is a 403 too; the two
+  differ only by the message text, and the answer carries no reason code.
+  The server side of this is tracked outside the repository.
 - **The client today.**
   - Leave: the dialog
     (`packages/client/src/components/dialogs/LeaveRoomDialog/index.js`) awaits
@@ -55,9 +33,8 @@ See proposal.md for the motivation. What shapes the approach:
   show the server's message the same way.
 - **The mocks.** The room members mock
   (`packages/shared/__mocks__/handlers/rooms/roomMembers.ts`, option
-  `withoutKeys`) already refuses every entry that names a member without
-  keys with the server's 403, a removal or a role change included, so it
-  needs no change.
+  `withoutKeys`) already answers such a request with the server's 403, so
+  it needs no change.
 
 No stashed design document covers this.
 
@@ -82,7 +59,7 @@ No stashed design document covers this.
    helper next to the private-room services answers whether an error of a
    share request is the refusal. Callers pass the error and already know
    whether the room is private. Alternative: compare the server's message
-   with "The user does not have an encryption key". Rejected by the owner
+   text. Rejected by the owner
    (proposal, decision 2): the text is not a contract, and a renamed
    sentence would silently bring the English text back.
 2. **The leave action reports the refusal and settles.** The store's leave
@@ -106,8 +83,7 @@ No stashed design document covers this.
    2026-11-11 that the text is a single short sentence naming the cause,
    because a toast is gone before a longer one is read. Alternative: two
    messages, one for the user's own leave and one for another member, each
-   saying what ends the refusal (the member generates keys in the profile,
-   as the stand check showed). Rejected by the owner: too long to read in a
+   saying what ends the refusal. Rejected by the owner: too long to read in a
    toast.
 
 ## Risks / Trade-offs
@@ -118,7 +94,5 @@ No stashed design document covers this.
 - [A resolved leave action no longer means the user left] → The action is
   awaited by the dialog and the owner-change flow only, and neither does
   anything after it that assumes the leave; the tests of both pin that.
-- [The message does not say how to end the refusal, and a manager cannot
-  end it alone: only the member can generate the keys] → Accepted for the
-  beta: the server's check is the defect, and the message names the cause
-  in the user's language.
+- [The message does not say how to end the refusal] → Accepted for the
+  beta: the message names the cause in the user's language.

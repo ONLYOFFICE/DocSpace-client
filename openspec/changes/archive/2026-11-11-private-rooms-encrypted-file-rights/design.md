@@ -23,9 +23,7 @@ file is named.
   true for the creator of the parent room who is neither a guest nor of
   the User type. The administrator shortcut above it is skipped for a
   private room (line 1791).
-- **Comment, Review, CustomFilter, EditHistory.** Nothing above line 2063
-  refuses them for a file of a private room, so the owner gets true. The
-  private-room refusals are Copy, Duplicate, IndexExport, UseChat,
+- **The private-room refusals.** Copy, Duplicate, IndexExport, UseChat,
   Vectorization and StartFilling (line 1712) and, for a file, Convert,
   AskAi, Embed, EditAccess and Copy (line 2033).
 - **SubmitToFormGallery.** Refused at line 1468 unless the file's category
@@ -55,8 +53,7 @@ Client, as found:
 
 - The mock (`buildFileDto` in
   `packages/shared/__mocks__/handlers/files/encryptedFiles.ts`) answers
-  Comment, Review, CustomFilter and SubmitToFormGallery with false in every
-  case and has no StartFilling, FillingStatus, ResetFilling, StopFilling,
+  several rights otherwise than the server and has no StartFilling, FillingStatus, ResetFilling, StopFilling,
   OpenForm or AskAi key.
 - The client menu removes the custom-filter, form and version entries of
   an encrypted file by intent, whatever the rights say
@@ -83,7 +80,7 @@ Client, as found:
 - The mock's file rights equal what the server computes for the room
   owner, key for key, for the cases the mock serves: active and archived,
   private and ordinary, by file type.
-- No path in the client or the SDK lets a right the server grants on an
+- No path in the client or the SDK lets a right the server reports on an
   encrypted file reach a withheld operation.
 
 **Non-Goals:**
@@ -103,9 +100,8 @@ Client, as found:
    `isForm`. Rejected: it would let a spec state a category the stored
    bytes contradict.
 2. **An ordinary room served by the same mock gets the same owner rights.**
-   The owner's grant does not depend on the room being private, so Comment,
-   Review and CustomFilter are true there too; only the private-room
-   refusals differ, as they do today.
+   The owner's grant does not depend on the room being private; only the
+   private-room refusals differ, as they do today.
 3. **The archived overrides are extended, not rebuilt.** The archived
    branch of the mock already lists what the Archive rules take away; the
    new and flipped keys are added to it as false.
@@ -115,8 +111,7 @@ Client, as found:
    Alternative: clearing `EditHistory` when the file list is built.
    Rejected: other code reads the right for what it is, and a rewritten
    right would hide the server's answer from the contract tests' reader.
-   The comment text itself stays visible: it is server metadata the client
-   already receives.
+   The comment text itself stays visible.
 5. **The media viewer reports the miss with the existing download error.**
    `Common:EncryptionDownloadFailed` is the message the download path
    already shows when nothing can be saved; the owner prefers one short
@@ -140,7 +135,5 @@ Client, as found:
   1.2 runs every spec on the mock, and tasks 2.1 and 2.2 add unit cases
   for the two places found by reading.
 - [The comment of an encrypted file can no longer be edited by anyone] →
-  Intended: the text would be stored in the clear. A comment set before
-  this change stays readable.
-- [The server keeps granting rights on content it cannot read] → Recorded
-  for the backend in the workflow follow-up of tasks.md.
+  Intended: version operations are withheld for encrypted files. A comment
+  set before this change stays readable.

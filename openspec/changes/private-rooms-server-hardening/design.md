@@ -145,11 +145,7 @@ Every item above still holds, and the re-check found:
   `CreateThirdPartyRoomAsync` passes `false` for `privacy` to
   `InternalCreateFolderAsync` (`:766`, signature `:1101-1105`) while it
   stores `Private = privacy` for the provider (`:780`), so a third-party
-  private room skips the key check. The private flag also reaches room
-  creation through `CreateAiAgentAsync` (`:698`, an AI room),
-  `CreateRoomTemplateAsync` (`:948`) and `CreateRoomFromTemplateAsync`
-  (`:1005`, the template's setting by default), none of which restricts the
-  room type (re-checked 2026-11-02).
+  private room skips the key check.
 - Access-entry read: `GET files/{fileId}/access`
   (`FilesController.GetEncryptionInfoAsync`,
   `products/ASC.Files/Server/Api/FilesController.cs:1247-1269`) reads
@@ -291,11 +287,9 @@ keys before that update and needs those keys first.
   `FileDao.GetFileIdsWithKeyAsync`) and throws
   `CustomHttpException(HttpStatusCode.Conflict, "The new owner holds no key
   for some encrypted files of the room")`, 409, leaving the owner as it was
-  (`FileStorageService.cs:5499-5506`). The reassignment of a deleted user's
-  rooms leaves `demandFileKeys` off, so it is never stopped by a missing key.
+  (`FileStorageService.cs:5499-5506`).
   The key check of the new owner (`ThrowIfKeysAreNotSetAsync`, 403) stays
-  before it. `PrivateRoomFileKeysTests`: `ChangeOwner_*`,
-  `ReassignOfADeletedUser_IsNotStoppedByAMissingFileKey`.
+  before it. `PrivateRoomFileKeysTests`: `ChangeOwner_*`.
 - Missing file keys (decision 18, not in the plan):
   `GET api/2.0/privacyroom/{roomId}/access/missing?userIds=…`
   (`PrivacyRoomControllerCommon.GetRoomMissingFileKeys`,
@@ -380,7 +374,7 @@ translations of the letter label (4.5).
   `getFileExtension` lowercases the extension.
 - File keys follow the share (decision 22): `FileSharingAceHelper
   .SetAceObjectAsync` collects the users whose share on a private room is
-  removed (not links, not groups, not the share removed before an owner
+  removed (not links, not the share removed before an owner
   change, not the room's creator) and `RevokeFileKeysAsync` deletes their
   keys on every file of the room, subfolders included, in one batched
   delete (`FileDao.DeleteFileKeysAsync(fileIds, userIds)`,
@@ -451,7 +445,7 @@ translations of the letter label (4.5).
   report, the users' names kept. The stored rows keep the titles: the
   history of the room reads them for its members. Room quota events name
   the rooms through `NotifyConstants.GetRoomTitle` when written
-  (`VirtualRoomsController`); events written before keep their titles. The
+  (`VirtualRoomsController`). The
   what's-new letters (`StudioWhatsNewNotify`) read the same repository and
   name the room neutrally (`AuditPrivateRoomTitleTests`). Nothing on the
   client reads the audit trail.
@@ -471,25 +465,14 @@ replaces a read.
   proposal decision 1 and leaves this change (decision 2 revised): the main
   spec's "No edition or licence gate on private rooms" describes the branch.
 - Room types (task 12.3, decision 13): the server did not restrict the
-  private flag to Custom and decided not to. Read in
-  `InternalCreateFolderAsync` (`FileStorageService.cs:1151-1366`): the flag
-  is stored with any room type after the Document Server check and the
-  metadata guards (`:1222-1232`, `:1253`); `CreateRoomAsync` refuses it with
-  400 for the AI hub room types, Knowledge, Instructions and AI project
-  rooms (`:672-676`); `CreateAiAgentAsync` (`:701`) passes it on, so a
-  private AI agent is created today. The reply says a public or
-  form-filling room created as private is refused because its creation
-  sets an external link, which the link refusal of decision 12 rejects; the
-  creation path read here sets no link. Read with task 12.4b on 2026-11-06:
-  nothing at creation refuses them; the primary link of a public or
-  form-filling room is made lazily by `GetPrimaryExternalLinkAsync` on the
-  first read (`FileStorageService.cs:4451-4500`, "entries that never had
-  one keep the lazy creation") and is refused there by the link refusal
-  of decision 12, so the room is stored and only its link read fails
-  (task 12.8). The reply proposes to refuse a
-  private AI agent with 400, the chat and the vectorization being denied in
-  a private room (`FileSecurity.cs:1706-1718`), and waits for confirmation:
-  proposal decision 8, decision 27.
+  private flag to Custom and decided not to: the flag stays with the room
+  types the creation accepts, and `CreateRoomAsync` refuses it with 400 for
+  the AI hub room types, Knowledge, Instructions and AI project rooms
+  (`FileStorageService.cs:672-676`). A public and a form-filling room are
+  task 12.8. For an AI agent the reply proposes to refuse the flag with
+  400, the chat and the vectorization being denied in a private room
+  (`FileSecurity.cs:1706-1718`), and waits for confirmation: proposal
+  decision 8, decision 27.
 - Groups (task 6.4): the reply asks whether a group can be added to a
   private room. The client's invite panel offers people only
   (`private-rooms/room-membership`, "Invite panel offers people only"), so
@@ -500,19 +483,13 @@ replaces a read.
   key check finds no key for a group, `FileSharing.cs:270-276`), so tasks 6.4
   and 6.5 and the group revocation requirement were removed
   (`private-rooms-spec-consistency`).
-- Deactivation: deactivating a user revokes no keys; the reply counts it
-  as offboarding (task 8.1), as this change does.
-- `PUT files/rooms/{id}/share` still stops at the first invitee without a
-  key, and the reply did not trace whether the invitees before it are
-  stored. `private-rooms-invite-atomic-rewrap` traced it (its design.md,
-  Context): each earlier invitee's share is stored in its own iteration,
-  and the client verifies the invitees through the candidates route before
-  the grant (its task 2.1, done).
+- Deactivation: the reply counts it as offboarding (task 8.1), as this
+  change does.
+- Invitations: the client verifies the invitees through the candidates
+  route before the grant (`private-rooms-invite-atomic-rewrap`, task 2.1,
+  done).
 - Letters (task 4.5): the "Private room" label exists in English only,
   confirmed.
-- `ShareRecord` reuse in `FileSecurity` (decision 24): the cause stays; the
-  reply adds that other loops over users, such as the letters of
-  `NotifyClient`, were not checked for the same reuse.
 - OpenSearch: the room title lies in the index as in the database; the
   reply expects the search to intersect its hits with the SQL rights and
   did not trace the query. Room and folder titles are never encrypted:
@@ -573,7 +550,7 @@ replaces a read.
 ### Release stand check (2026-11-06, `tests.onlyoffice.io`)
 
 The owner's SaaS stand runs DocSpace `4.1.0.12300`. Read through the API as
-the portal owner, a member of the one private room ("Pirate room", Custom,
+the portal owner, a member of the one private room (Custom,
 six encrypted files, no subfolder); no data was changed:
 
 - The build carries the commits of 2026-11-04 and 2026-11-05 through
@@ -588,10 +565,8 @@ six encrypted files, no subfolder); no data was changed:
   room; the only member is the owner.
 - Audit trail (task 6.6, decision 25): `GET security/audit/events/last`
   shows the rows of 2026-11-06 with the context "Rooms: Private room" to
-  the owner as well, and the rows of 2026-11-05 with "Rooms: Pirate room".
-  The mask applies to every reader of the audit API, the room's members
-  included, and the rows written before the commit keep their title, as
-  the backend team's reply said; the file names in the actions are the
+  the owner as well. The mask applies to every reader of the audit API,
+  the room's members included; the file names in the actions are the
   opaque upload names. The client's audit trail renders that context as
   text, so nothing to change.
 - File history: the file keys of the six files were written before
@@ -626,8 +601,7 @@ six encrypted files, no subfolder); no data was changed:
   "the room Private room"; a template variant for private rooms would
   read better, for the backend team with the translations of 4.5. The
   role-change letter the member received, however, names the room:
-  "You are assigned a new role in the Buy sandali room Probe
-  2026-11-06: Editor". Read in the source: on a share update
+  "You are assigned a new role in the <portal> room <room title>: Editor". Read in the source: on a share update
   `FileStorageService.SetAceObjectAsync` sends the Files notice through
   `notifyClient.SendRoomUpdateAccessForUser` (neutral since `1259577f63`)
   and then the web letter through
@@ -683,13 +657,7 @@ six encrypted files, no subfolder); no data was changed:
   - private rooms keep the Rooms root, so every rule here keyed on
     `VirtualRooms` still applies to them, among them the CopyTo refusal on
     their subfolders (`FileSecurity.cs:2055-2058`);
-  - the commit leaves two items open, as it says itself: a subfolder of a
-    private room still goes to Trash on deletion, and a private room or its
-    subfolder can still be added to Favorites. Neither is planned here;
-  - the backend's note of the same day says a public room and a
-    form-filling room "are refused" as private. The code at `c866c055e1`
-    refuses neither at creation (`FileStorageService.cs:666-690`,
-    `:1220-1230`), so task 12.8 stays open.
+  - task 12.8 stays open at this commit.
 
 ### Landed after 2026-11-06 (read in `ae457bdff6`, `d8b46d2b9a` and `62419af921`)
 
@@ -719,11 +687,10 @@ Read on 2026-11-11 with `git show` in `../server`, whose head is
 Observed by the review of 2026-11-10 (DocSpace `4.1.0.12351`, Document
 Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
 
-- **AI tools in the editor (task 16.1).** For an encrypted docx, xlsx,
-  pptx and PDF form the editor configuration carries
-  `customization.ai.disabled: false`, and the editor shows its AI tools
-  tab. The task is accepted when the configuration of an encrypted file
-  carries `customization.ai.disabled: true` and the tab is gone.
+- **AI tools in the editor (task 16.1).** The task is accepted when the
+  configuration of an encrypted file carries
+  `customization.ai.disabled: true` and the editor shows no AI tools tab
+  for it.
 - **Letter labels (task 4.5).** The Russian interface shows the labels of
   the server in English; `PrivateRoomTitle` and `PrivateFolderTitle` are
   translated for the default culture only. The task is accepted when the
@@ -733,55 +700,18 @@ Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
 
 ### Read on 2026-11-16 (`6fb6dfb17a`): a public or form-filling room created as private
 
-This corrects the reads of 2026-11-06 above, which say that nothing at
-creation refuses these rooms and that their link is made on the first read.
-
-- `FileStorageService.CreateRoomAsync` (`Core/Core/FileStorageService.cs`,
-  line 667) refuses the private flag for the AI hub room types only (lines
-  674-678) and passes a public or a form-filling room on to
-  `InternalCreateFolderAsync`, which checks the creator's keys and the
-  Document Server (`DemandPrivateRoomCanBeCreatedAsync`, line 1223) and
-  saves the room with the private setting (line 1249).
-- The private wrapper `CreateRoomAsync<T>` (line 1079) then sends the
-  room-created audit event and the `RoomCreated` webhook and, for a public
-  and a form-filling room outside the templates, sets the primary external
-  link at once (`SetExternalLinkAsync`, lines 1107-1114).
-- That link is refused: `FileSharingAceHelper.SetAceObjectAsync`
-  (`Core/Utils/FileSharing.cs`, lines 107-113) throws a `SecurityException`
-  for a link with an access in a private room, the refusal of decision 12.
-  The creation request therefore answers 403. No code removes the room
-  saved before, and the socket event of the creation is not sent.
-- The server test `CreateRoom_PrivateUnsupportedType_Forbidden`
-  (`Tests/Tests/08_Private/PrivateRoomCreateTests.cs`, line 91, last changed
-  on 2026-08-21) expects 403 for both room types and passes on it. It does
-  not read the rooms afterwards, so it does not see the stored one. This is
-  what the backend note of 2026-11-06 calls "are refused".
-- The result is a private room of the public or the form-filling type
-  without a link, recorded as created in the audit trail, whose creator got
-  an error. A private form-filling room made this way is the one the Forms
-  area lists (`private-rooms-server-followups` 2.1). The later read of the
-  link (`GetPrimaryExternalLinkAsync`, line 4465) is refused the same way.
-- Read from the code; the request was not sent to a server.
-- Asked in task 12.8, decided by the owner on 2026-11-16: the refusal
-  moves in front of the save and answers 400, the status of the other
-  refusals of a room type (the AI hub types, the third-party storage).
+The reading behind this item is kept outside the repository. Asked in task
+12.8, decided by the owner on 2026-11-16: the private flag is refused for
+these two room types before anything is stored, with 400, the status of
+the other refusals of a room type (the AI hub types, the third-party
+storage).
 
 ### Read on 2026-11-16 (`6fb6dfb17a`): deactivation
 
-- Three actions of `UserController`
-  (`products/ASC.People/Server/Api/UserController.cs`) deactivate a user:
-  `UpdateMember` with `disable` (line 2156), `UpdateUserStatus` for
-  several users (line 2344) and `DeleteProfile`, a user deactivating
-  themselves (line 834). Each sets the status to terminated, updates the
-  user and notifies; none calls into the files module, so the wrapped file
-  keys, the key pair and the shares of the user stay, and a private room
-  the user owns stays theirs. This agrees with the reply of 2026-11-05
-  ("deactivating a user revokes no keys").
-- A deactivated user cannot sign in, and a share change that would give
-  one access passes over the entry without an error (`FileSharing.cs`,
-  line 141); what stays is the stored file keys, which are back in use the
-  moment the user is activated again.
-- The deletion of a user is different: `DeletePersonalDataAsync`
+The reading behind this item is kept outside the repository. What is asked
+is task 8.1 and the offboarding decision 29.
+
+- The deletion of a user: `DeletePersonalDataAsync`
   (`Core/Core/FileStorageService.cs`, line 3973) removes the user's file
   keys (`IFileDao.DeleteFileKeysAsync` for a user), and the removal of the
   user deletes the account links, the key pair among them
@@ -939,12 +869,12 @@ is recorded yet.
     file keys and its string ids do not fit the client's wrapping, so the
     private flag is refused there with 400, with or without keys. The
     room-type part was not taken either (reply of 2026-11-05, Context
-    "Answered by the backend team"): the flag stays accepted with every
-    room type the room creation accepts, the AI hub room types refuse it
-    with 400 (`FileStorageService.cs:672-676`), and a private AI agent is
-    created, which the reply proposes to refuse (decision 27). The
-    template path (`CreateRoomTemplateAsync`, `CreateRoomFromTemplateAsync`)
-    stays as read on 2026-11-02.
+    "Answered by the backend team"): the flag stays accepted with the room
+    types the room creation accepts, and the AI hub room types refuse it
+    with 400 (`FileStorageService.cs:672-676`). An AI agent created with
+    the flag is decision 27, a public and a form-filling room task 12.8,
+    and the creation of a template and of a room from a template shall
+    apply the rules of a room's creation to the flag (task 12.3).
 
 14. **The opaque title form is the one the client sends (found 2026-10-28).**
     The client names every encrypted upload `makeOpaqueUploadName`: a
@@ -1046,14 +976,11 @@ is recorded yet.
     does not name, and the server now does it whether or not a client is
     online. A member who comes back holds no key until an invitation or
     the backfill sweep (decision 20) wraps the files again. No manager
-    route to revoke named users was added; offboarding (task 8.1) still
-    needs the owner part. A group's removal revokes nothing yet:
-    `SetAceObjectAsync` leaves group subjects out of the users it collects
-    (`!w.SubjectGroup`, `FileSharing.cs:444`), so a user who loses the
-    room with the group's share keeps their keys. No group can join a
-    private room, though (the share is refused with 403, and groups are not
-    supported in this version by the owner's decision of 2026-11-10), so no
-    group revocation is planned, and the client runs none either. Alternative: keep the client run as a belt and
+    route to revoke named users was added; offboarding is task 8.1. No
+    group can join a private room (the share is refused with 403, and
+    groups are not supported in this version by the owner's decision of
+    2026-11-10), so no group revocation is planned, and the client runs
+    none either. Alternative: keep the client run as a belt and
     braces; rejected, it only re-writes entries the server deletes anyway
     and shows a notice about work it did not do.
 
@@ -1067,9 +994,7 @@ is recorded yet.
 24. **Webhook payloads are judged per subscriber (landed 2026-11-05, not
     planned here).** The share record `FileSecurity` leaves on an entry is
     reset before each subscriber's check, so a private room's folder title
-    no longer reaches a subscription outside the room; the cause in
-    `FileSecurity` stays, being a hot path that also writes the entry's
-    access. Server only; the `server-contract` delta records the scenario
+    no longer reaches a subscription outside the room. Server only; the `server-contract` delta records the scenario
     under "Private-room events reach members only".
 
 25. **The audit trail names a private room neutrally (landed 2026-11-05,
@@ -1093,12 +1018,11 @@ is recorded yet.
     message through; rejected, it is English and comes after the dialog.
 
 27. **A private AI agent: proposed refusal, not decided (reply of
-    2026-11-05).** The server creates an AI agent with the private flag
-    today (`CreateAiAgentAsync`, `FileStorageService.cs:701`, through
-    `InternalCreateFolderAsync`), while the chat and the vectorization are
-    denied inside a private room (`FileSecurity.cs:1706-1718`), so the
-    agent cannot do what it is for. The backend team proposes to answer
-    400 and waits for confirmation (proposal decision 8). The client
+    2026-11-05).** The chat and the vectorization are denied inside a
+    private room (`FileSecurity.cs:1706-1718`), so an agent with the
+    private flag could not do what it is for. The backend team proposes to
+    answer 400 to an AI agent created with the flag and waits for
+    confirmation (proposal decision 8). The client
     creates a private room as a Custom room with the flag
     (`CreateEditRoomStore.onCreateRoom`) and sends no flag when it creates
     an agent, so the client is unaffected either way; the mock follows the
@@ -1124,21 +1048,12 @@ is recorded yet.
     the beta needs an honest warning now. A warning is cheaper than a
     silent loss and does not foreclose the later option.
 
-29. **The editor configuration hides the AI tools for an encrypted file
-    (found on the release stand, 2026-11-06).** The editor's AI Tools tab
-    was shown for an encrypted file on `tests.onlyoffice.io`; the doceditor
-    skips the plugin's initialisation, so no portal model is connected,
-    but the plugin's own settings let the user add a provider key and send
-    the clear text from the browser. The portal already tells the editor
-    to hide its AI tools: `AiConfigDto.Disabled`
-    (`products/ASC.Files/Core/ApiModels/ResponseDto/EditorConfigDto.cs:370-385`),
-    written into `customization.ai` by `CustomizationConfig.GetAIConfigAsync`
-    (`Configuration.cs:935-948`) when the portal's AI access setting is off
-    or the caller is an anonymous visitor; `editorConfig.plugins` carries an
-    empty `pluginsData` (`PluginsConfigDto`, `EditorConfigDto.cs:231-266`),
-    the AI plugin being the Document Server's own. The server sets the flag
-    for an encrypted file as well (task 16.1), and the client mirrors it
-    (task 16.2). Alternative: hide the plugin from the doceditor by
+29. **The editor configuration hides the AI tools for an encrypted
+    file.** The editor configuration already carries a switch that tells
+    the editor to hide its AI tools (`customization.ai.disabled`), set for
+    a portal whose AI access setting is off and for an anonymous visitor.
+    The server shall set it for an encrypted file as well, whatever the
+    portal's setting (task 16.1), and the client mirrors it (task 16.2). Alternative: hide the plugin from the doceditor by
     rewriting the configuration it receives; rejected, the configuration
     is signed by the server and the flag belongs with the other
     per-file customization getters there.

@@ -62,9 +62,8 @@ Client, as read:
 
 ## Risks / Trade-offs
 
-- [A guest who was a user loses the view of a key they still hold on the
-  server] → Proposal decision 1; the server keeps the key, and the answer
-  to `private-rooms-server-followups` 1.5 decides what becomes of it.
+- [A guest who was a user loses the view of a key they held] → Proposal
+  decision 1.
 - [A future flow adds a third way into key generation and forgets guests]
   → The requirement states the rule for key generation as a whole, not for
   the tab.

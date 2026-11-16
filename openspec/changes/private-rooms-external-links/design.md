@@ -92,10 +92,7 @@ team's statement of the behaviour and were read next to the code.
   (`ExternalShare.ValidateRecordAsync`, line 98).
 - **Password.** `POST files/share/{key}/password` checks it and counts
   wrong attempts per link and address (`BruteForceLoginManager`), with a
-  cookie for the session afterwards. The link keeps its password as a
-  signature made with a server key (`CreatePasswordKeyAsync`, line 170),
-  which the server reads back (`GetPasswordAsync`, line 177). The server
-  therefore knows the password of an ordinary link.
+  cookie for the session afterwards.
 - **Serving a file.** The file handler checks the key of the request
   (`FileHandler.CheckLinkAsync`,
   `products/ASC.Files/Core/HttpHandlers/FileHandler.ashx.cs`, line 730)
@@ -103,8 +100,7 @@ team's statement of the behaviour and were read next to the code.
 - **Editor.** `openedit` is open to a visitor who is not signed in
   (`EditorController`, `[AllowAnonymous]`). The configuration takes the
   visitor's link from the share record of the file and puts a share key
-  into the callback address, with the link's password in it
-  (`Configuration.cs`, lines 308-317).
+  into the callback address (`Configuration.cs`, lines 308-317).
 - **File keys.** A wrapped file key is a row of user id, public key id,
   file id and the wrap (`products/ASC.Files/Core/Core/EF/DbFileKeys.cs`).
   A link id is a Guid as a user id is.
@@ -114,10 +110,9 @@ What follows for this change:
 - A private Virtual Data Room gives links to DocSpace users only, and a
   private Collaboration room or Virtual Data Room no link to the room
   itself. The delta of `room-membership` says so.
-- The password of a link of a private item must not take the path of an
-  ordinary link's password, which the server can read back. It stays in
-  the browser, mixed into the sealing key and the proof (decision 2); the
-  server gets a flag that a password is needed and nothing else.
+- The password of a link of a private item stays in the browser, mixed
+  into the sealing key and the proof (decision 2); the server gets a flag
+  that a password is needed and nothing else.
 - The proof of decision 4 can ride on what exists: the share key names
   the link, the proof goes where the password goes today, and the counter
   of wrong attempts is the same.

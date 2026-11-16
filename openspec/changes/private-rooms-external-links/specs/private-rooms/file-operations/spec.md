@@ -22,15 +22,27 @@ The system SHALL open the address of an external link of a private item for a vi
 - **THEN** the page says the link no longer works and nothing is decrypted
 
 ### Requirement: What a visitor of an external link can do
-The system SHALL let a visitor with the viewer role read and download the files a link covers, and a visitor with the editor role also edit a document in the editor. It SHALL NOT let a visitor upload, delete, move, rename or share anything, or see the members of the room.
+The system SHALL let a visitor read and download the files a link covers, and open a document in the editor in the mode of the link's access: viewing, commenting, reviewing or editing. It SHALL NOT let a visitor upload, delete, move, rename or share anything, or see the members of the room.
 
-#### Scenario: Viewer opens a document
-- **WHEN** a visitor with the viewer role opens a text document, a spreadsheet or a presentation
+#### Scenario: Link with the access to view
+- **WHEN** a visitor of a link with the access to view opens a text document, a spreadsheet or a presentation
 - **THEN** it opens in the editor for viewing only
 
-#### Scenario: Editor edits a document
-- **WHEN** a visitor with the editor role opens a document
+#### Scenario: Link with the access to comment or review
+- **WHEN** a visitor of a link with the access to comment or to review opens a document
+- **THEN** it opens in that mode, and what the visitor adds is stored inside the encrypted file
+
+#### Scenario: Link with the access to edit
+- **WHEN** a visitor of a link with the access to edit opens a document
 - **THEN** it opens for editing, and a save stores the file encrypted under the same file key
+
+#### Scenario: Link for DocSpace users only
+- **WHEN** a signed-in user of the portal who is not a member opens a link made for DocSpace users only
+- **THEN** the item opens with the key of the link, and the user does not become a member of the room
+
+#### Scenario: Link for DocSpace users only opened without signing in
+- **WHEN** a visitor who is not signed in opens such a link
+- **THEN** the sign-in is asked first and nothing is decrypted before it
 
 #### Scenario: Visitor looks for other actions
 - **WHEN** a visitor opens the menu of an item reached through a link

@@ -27,16 +27,28 @@ The system SHALL offer external links for a private room, its folders and its fi
 
 ## ADDED Requirements
 
-### Requirement: External link of a private item is created with a role
-The system SHALL let the creator of an external link choose the viewer or the editor role, a password and an end date, and SHALL NOT offer a download ban. The address SHALL be shown for copying with its secret part, and SHALL NOT be sent to the server whole.
+### Requirement: External link of a private item keeps the link model of the portal
+The system SHALL offer for a private item the primary and the additional external links of an ordinary item, within the same limits, with the access to view, comment, review or edit and the settings title, end date, password, limit of uses and DocSpace users only. It SHALL NOT offer the access to fill forms or the download ban. The address SHALL be shown for copying with its secret part and SHALL NOT be sent to the server whole.
 
-#### Scenario: Viewer link
-- **WHEN** a member creates a link with the viewer role
-- **THEN** the address is shown for copying and the link is listed with its role and end date
+#### Scenario: Link with the access to view
+- **WHEN** a member creates a link with the access to view
+- **THEN** the address is shown for copying and the link is listed with its access, title and end date
+
+#### Scenario: Accesses offered
+- **WHEN** the access list of an external link of a private item is opened
+- **THEN** it offers viewing, commenting, reviewing and editing, and no form filling
 
 #### Scenario: Download ban
-- **WHEN** the options of an external link of a private item are shown
+- **WHEN** the settings of an external link of a private item are shown
 - **THEN** no option to forbid the download is offered
+
+#### Scenario: Limit of links reached
+- **WHEN** a private item already holds as many links as an ordinary item of its kind may hold
+- **THEN** no further link can be created
+
+#### Scenario: Room of a type without room links
+- **WHEN** the private room is of a type whose ordinary rooms have no link of the room itself
+- **THEN** links are offered for its files and folders only
 
 #### Scenario: Creator's key locked
 - **WHEN** a member creates a link while their key is locked

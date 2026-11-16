@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: No external or invitation links on a private room
-The server SHALL accept on a private room, active or archived, and on a folder or file inside one, only an external link that carries a link public key, a sealed private key and a proof hash, from a caller who may change the access, while the portal allows such links. It SHALL refuse with 403 any other external link and every invitation link. Revoking a link that exists SHALL stay possible.
+The server SHALL accept on a private room, active or archived, and on a folder or file inside one, only an external link that carries a link public key, a sealed private key and a proof hash, with an access other than form filling and no download ban, from a caller who may change the access, while the portal allows such links. It SHALL refuse with 403 any other external link and every invitation link. Revoking a link SHALL stay possible.
 
 #### Scenario: External link requested
 - **WHEN** a room manager requests an external link for a private room without the link's key material
@@ -19,7 +19,11 @@ The server SHALL accept on a private room, active or archived, and on a folder o
 
 #### Scenario: External link with key material requested
 - **WHEN** a room manager requests an external link for a private item with the link's public key, sealed private key and proof hash
-- **THEN** the link is stored with its role, password flag and end date
+- **THEN** the link is stored as an ordinary link is, primary or additional within the same limits, with its access, title, end date, password, limit of uses and internal flag
+
+#### Scenario: Form filling or a download ban requested
+- **WHEN** an external link of a private item is requested with the access to fill forms or with the download ban
+- **THEN** the server refuses it with 403
 
 #### Scenario: Portal forbids the links
 - **WHEN** the portal setting for external links of private rooms is off
@@ -58,15 +62,19 @@ The server SHALL give the sealed private key of a link, the wraps made for it an
 - **THEN** the server slows or blocks the requests as it does for a wrong link password
 
 ### Requirement: A visitor of a link gets the content as stored
-The server SHALL serve a file to a visitor of an external link of a private item as the stored ciphertext with its wrap for the link, and SHALL NOT convert it, build a preview or a thumbnail of it, or index it. It SHALL give a visitor the rights of the link's role and none of the rights of a member.
+The server SHALL serve a file to a visitor of an external link of a private item as the stored ciphertext with its wrap for the link, and SHALL NOT convert it, build a preview or a thumbnail of it, or index it. It SHALL give a visitor the rights of the link's access and none of the rights of a member.
 
-#### Scenario: File requested by a viewer
-- **WHEN** a visitor with the viewer role requests a file the link covers
+#### Scenario: File requested through a link with the access to view
+- **WHEN** a visitor of a link with the access to view requests a file the link covers
 - **THEN** the server answers with the ciphertext and the wrap, and reports no right to edit, delete, move, rename or share
 
-#### Scenario: Document opened by an editor
-- **WHEN** a visitor with the editor role opens a document the link covers
-- **THEN** the editor configuration allows editing, and a save is accepted only as an encrypted file
+#### Scenario: Document opened through a link with another access
+- **WHEN** a visitor of a link with the access to comment, review or edit opens a document the link covers
+- **THEN** the editor configuration carries that mode, and a save is accepted only as an encrypted file
+
+#### Scenario: Internal link opened without signing in
+- **WHEN** a request for a link made for DocSpace users only comes without a signed-in user
+- **THEN** the server refuses it whatever proof it carries
 
 #### Scenario: Item outside the link
 - **WHEN** a visitor requests an item of the same room that the link does not cover

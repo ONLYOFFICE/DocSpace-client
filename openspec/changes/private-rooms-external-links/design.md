@@ -5,13 +5,13 @@
 See proposal.md for the motivation. No stashed design document covers
 external links; the feature was ruled out in version 1.
 
-Reference: Proton Drive and Proton Docs, as their own pages describe them
-(read on 2026-11-16). The key of a share is encrypted with a password tied
-to the address of the link, made by the client or chosen by the user; the
-server stores the encrypted key and the address and never gets the
-password; a link can carry an end date and a password; a public link to a
-document is made with the viewer or the editor role and is opened without
-an account.
+Reference for the approach, not for the interface or the roles: Proton
+Drive and Proton Docs, as their own pages describe them (read on
+2026-11-16). The key of a share is encrypted with a password tied to the
+address of the link, made by the client or chosen by the user; the server
+stores the encrypted key and the address and never gets the password; a
+link can carry an end date and a password and is opened without an
+account.
 
 Client, as the main specs describe it:
 
@@ -36,6 +36,15 @@ Server, `../server` at `6fb6dfb17a`, read on 2026-11-16:
   (`products/ASC.Files/Core/Core/Security/ExternalShare.cs`) validates a
   link and its password and keeps the session of a visitor without an
   account.
+- The accesses a link can carry are `FileShare.Editing`, `FillForms`,
+  `Review`, `Comment`, `Read` and `None` (`FileSecurity.DefaultFileAccess`,
+  `products/ASC.Files/Core/Core/Security/FileSecurity.cs`, line 80), for
+  the primary and for an additional link alike.
+- The number of links is limited by tables of the same file: a room of the
+  Custom type holds one primary and five additional links (line 115), a
+  file or a folder up to six (line 144). The Editing and the virtual data
+  room types have no entry for links of the room itself, so only their
+  files and folders can be linked.
 - The storage service lets a caller through who is signed in or holds a
   link (`FileStorageService.DemandAuthenticatedOrLinkAsync`,
   `products/ASC.Files/Core/Core/FileStorageService.cs`, line 207).
@@ -49,7 +58,8 @@ Server, `../server` at `6fb6dfb17a`, read on 2026-11-16:
 
 **Goals:**
 
-- A visitor without an account reads, and with the editor role edits, an
+- A visitor reads, and with the access to do so comments on, reviews or
+  edits, an
   encrypted document, and the server holds no key that opens it.
 - The work reuses the wrap of a file key for a recipient, the backfill and
   the revocation that exist.
@@ -61,7 +71,7 @@ Server, `../server` at `6fb6dfb17a`, read on 2026-11-16:
 
 ## Decisions
 
-Decisions 1 to 6 of proposal.md are recorded as taken, with their date, by
+Decisions 1 to 4 of proposal.md are recorded as taken, with their date, by
 task 0.1 before any other task starts. The technical decisions below hold
 for the assumed answers.
 
@@ -93,20 +103,33 @@ for the assumed answers.
    id gives no ciphertext to try a password on. Alternative: serve the
    ciphertext to anybody who names the link. Rejected: with a password as
    the only unknown the stored envelope could be tried offline.
-5. **Viewer first, editor second.** A viewer gets the decrypted file in
-   the page: a preview where the browser can show it, a download
-   otherwise, and the editor in view mode for a document. An editor opens
-   the editor for editing; a save writes the file under the same file key,
-   so no wrap changes. The editor role starts only after
-   `private-rooms-editor-contract` 6.2 and the Document Server team's
-   answer on a visitor's session.
+5. **Viewing first, the other accesses second.** With the access to view
+   a visitor gets the decrypted file in the page: a preview where the
+   browser can show it, a download otherwise, and the editor in view mode
+   for a document. Commenting, reviewing and editing all happen inside the
+   encrypted document in the editor, so they come together; a save writes
+   the file under the same file key, and no wrap changes. They start only
+   after `private-rooms-editor-contract` 6.2 and the Document Server
+   team's answer on a visitor's session.
 6. **A download ban is not offered.** The visitor's browser holds the
    decrypted file whatever the interface hides, so the option of ordinary
    links would promise what encryption cannot keep.
-7. **A portal setting switches external links of private rooms.** It is
+7. **The link model is the portal's own (decided by the owner on
+   2026-11-16).** A link of a private item is the share record of an
+   ordinary link with three more fields, the public key, the sealed
+   private key and the proof hash, and it keeps the primary and additional
+   kinds, their limits, the title, the end date, the password, the limit
+   of uses and the internal flag. The access to fill forms is left out,
+   since forms are not filled in private rooms. A visitor of an internal
+   link is signed in and may hold a key of their own; the file is still
+   read with the key of the link, and the visitor does not become a
+   member. Alternative: two roles of its own, as Proton Docs has.
+   Rejected: the interface and the server already carry the richer model,
+   and a second one would have to be explained next to it.
+8. **A portal setting switches external links of private rooms.** It is
    read with the settings and applied on the server; the interface hides
    the control when it is off, and existing links stop being served.
-8. **The behaviour asked of the server is a delta of `server-contract`.**
+9. **The behaviour asked of the server is a delta of `server-contract`.**
    The main spec keeps describing the server as it is until the work
    lands, as in `private-rooms-server-followups` (decision 2).
 
@@ -123,18 +146,20 @@ for the assumed answers.
   for a member, whose passphrase the page also reads; recorded in
   `private-rooms/encryption-core`.
 - [The Document Server does not open an encrypted session for a visitor
-  without an account] → The editor role does not ship; the viewer role
-  does not depend on it for files the browser shows by itself.
+  without an account] → Commenting, reviewing and editing do not ship;
+  viewing does not depend on it for files the browser shows by itself.
 - [An organisation cannot inspect what leaves through a link] → The portal
-  setting of decision 7, and the audit events of creation, opening and
+  setting of decision 8, the internal flag, which keeps a link to signed-in
+  users of the portal, and the audit events of creation, opening and
   revocation.
-- [Links of a room multiply the wraps of every upload] → A room is limited
-  to a small number of links, set with the backend team in task 0.2.
+- [Links of a room multiply the wraps of every upload] → The limits of
+  decision 7 bound them: six links at most cover one file through the room
+  and six more through the file itself and each folder above it.
 
 ## Migration Plan
 
-No stored file changes. The portal setting ships on, or off, as decision 3
-says; a portal that never makes a link is unchanged. Switching the setting
+No stored file changes. The portal setting ships on, or off, as proposal
+decision 2 says; a portal that never makes a link is unchanged. Switching the setting
 off stops the links without deleting them.
 
 ## Open Questions
@@ -142,4 +167,3 @@ off stops the links without deleting them.
 - Whether the proof of the secret is a plain derived value or a
   password-authenticated exchange as Proton uses. It changes the route and
   not the behaviour stated in the delta.
-- How many links a room may hold.

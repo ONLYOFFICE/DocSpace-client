@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -83,6 +83,8 @@ const TariffBar = ({
     checkBar();
   }, [title]);
 
+  const wrapperRef = useRef(null);
+
   const tariffBar = !standalone
     ? getSaasBar(
         t,
@@ -104,9 +106,37 @@ const TariffBar = ({
         isCommunity,
       );
 
+  const label = tariffBar?.label;
+
+  // The row narrows without a title change - the info panel opens, the window
+  // shrinks - so the line is measured again on every resize. The section
+  // header is watched as well: once the line is hidden its own wrapper
+  // collapses and would never report the room coming back. The check runs a
+  // frame later, so hiding the line does not resize an observed box inside
+  // the observer's own callback ("ResizeObserver loop" error).
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!label || !wrapper || typeof ResizeObserver === "undefined") return;
+
+    let frame = 0;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(checkBar);
+    });
+
+    observer.observe(wrapper);
+    const header = wrapper.closest(".section-header");
+    if (header) observer.observe(header);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [label]);
+
   if (!tariffBar) return null;
   return (
-    <div className={styles.tariffBar}>
+    <div ref={wrapperRef} className={styles.tariffBar}>
       <Text
         id="tariff-bar-text"
         as="div"

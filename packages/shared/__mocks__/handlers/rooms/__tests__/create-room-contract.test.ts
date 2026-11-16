@@ -124,6 +124,29 @@ describe("createRoom mock — POST /files/rooms (mirrors FileStorageService.Inte
 
     expect(status).toBe(200);
   });
+
+  it.each([
+    ["form-filling", 1],
+    ["public", 6],
+  ])(
+    "Public or form-filling room created as private (%s)",
+    async (_name, roomType) => {
+      const { status, body } = await create({ private: true, roomType });
+
+      expect(status).toBe(403);
+      expect(body.error).toEqual({ message: "Access denied" });
+      expect(handle.current!.getPrivateRooms()).toEqual([
+        expect.objectContaining({ roomType, private: true }),
+      ]);
+    },
+  );
+
+  it("Public room without the flag", async () => {
+    const { status, body } = await create({ private: false, roomType: 6 });
+
+    expect(status).toBe(200);
+    expect(body.response.private).toBe(false);
+  });
 });
 
 describe("createRoom mock — a caller without keys (mirrors EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync since cc60512acd)", () => {
@@ -148,6 +171,14 @@ describe("createRoom mock — a caller without keys (mirrors EncryptionLoginProv
     expect(status).toBe(403);
     expect(body.error.message).toBe("The user does not have an encryption key");
     expect(body.error.type).toBe("System.InvalidOperationException");
+    expect(keyless.current!.getRooms()).toEqual([]);
+  });
+
+  it("Public room created as private without keys", async () => {
+    const { status, body } = await create({ private: true, roomType: 6 });
+
+    expect(status).toBe(403);
+    expect(body.error.message).toBe("The user does not have an encryption key");
     expect(keyless.current!.getRooms()).toEqual([]);
   });
 

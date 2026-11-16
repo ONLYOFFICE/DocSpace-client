@@ -590,7 +590,7 @@ test.describe("(private) — rooms list & unlock", () => {
 
     const header = page.locator(".header-container");
     await expect(
-      header.getByRole("heading", { name: "Private", exact: true }),
+      header.getByRole("heading", { name: "Private rooms", exact: true }),
     ).toBeVisible();
     await expect(page.getByText("Rooms E2E")).toHaveCount(0);
   });
@@ -614,7 +614,7 @@ test.describe("(private) — rooms list & unlock", () => {
       header.getByRole("heading", { name: "Archive", exact: true }),
     ).toBeVisible();
     await expect(
-      header.getByRole("heading", { name: "Private", exact: true }),
+      header.getByRole("heading", { name: "Private rooms", exact: true }),
     ).toHaveCount(0);
   });
 

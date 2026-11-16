@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Ενσωματώστε το {{organizationName}} {{productName}} στη δική σας πλατφόρμα και ενεργοποιήστε τη συνεργατική επεξεργασία σε πραγματικό χρόνο",
   "IntegrationsDescription": "Συνδέστε το <strong>{{docsName}}</strong> και το <strong>{{productName}}</strong> με την υποδομή σας μέσω έτοιμων προς χρήση ενσωματώσεων. Χωρίς προσαρμοσμένο κώδικα, χωρίς μετεγκατάσταση.",
   "IntegrationServiceHeader": "Δημιουργήστε, επεξεργαστείτε και συν-συντάξτε αρχεία γραφείου απευθείας στο {{serviceName}} σας",
+  "IntegrationsSectionTitle": "Ενσωματώσεις",
   "InterfaceElements": "Στοιχεία διεπαφής",
   "InterfaceTheme": "Θέμα διεπαφής",
   "InvalidLink": "Μη έγκυρος σύνδεσμος",

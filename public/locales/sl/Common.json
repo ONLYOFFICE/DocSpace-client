@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Vgradite {{organizationName}} {{productName}} v lastno platformo in omogočite sourejanje v realnem času",
   "IntegrationsDescription": "Povežite <strong>{{docsName}}</strong> in <strong>{{productName}}</strong> s svojo infrastrukturo z uporabo pripravljenih integracij. Brez kode po meri, brez migracije.",
   "IntegrationServiceHeader": "Ustvarjajte, urejajte in soustvarjajte pisarniške datoteke neposredno v svojem {{serviceName}}",
+  "IntegrationsSectionTitle": "Integracije",
   "InterfaceElements": "Elementi vmesnika",
   "InterfaceTheme": "Tema vmesnika",
   "InvalidLink": "Napotna povezava",

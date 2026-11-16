@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Вбудуйте {{organizationName}} {{productName}} у власну платформу та увімкніть спільне редагування в реальному часі",
   "IntegrationsDescription": "Підключіть <strong>{{docsName}}</strong> і <strong>{{productName}}</strong> до вашої інфраструктури за допомогою готових інтеграцій. Без власного коду, без міграції.",
   "IntegrationServiceHeader": "Створюйте, редагуйте та спільно працюйте над офісними файлами прямо у вашому {{serviceName}}",
+  "IntegrationsSectionTitle": "Інтеграції",
   "InterfaceElements": "Елементи інтерфейсу",
   "InterfaceTheme": "Тема інтерфейсу",
   "InvalidLink": "Недійсне посилання",

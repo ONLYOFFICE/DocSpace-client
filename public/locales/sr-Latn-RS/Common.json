@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Ugradite {{organizationName}} {{productName}} u sopstvenu platformu i omogućite zajedničko uređivanje u realnom vremenu",
   "IntegrationsDescription": "Povežite <strong>{{docsName}}</strong> i <strong>{{productName}}</strong> sa svojom infrastrukturom pomoću gotovih integracija. Bez prilagođenog koda, bez migracije.",
   "IntegrationServiceHeader": "Kreirajte, uređujte i zajednički uređujte kancelarijske datoteke direktno u svom {{serviceName}}",
+  "IntegrationsSectionTitle": "Integracije",
   "InterfaceElements": "Elementi interfejsa",
   "InterfaceTheme": "Tema interfejsa",
   "InvalidLink": "Nevažeći link",

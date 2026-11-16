@@ -1305,6 +1305,7 @@
   "IntegrationOwnHeader": "Embed {{organizationName}} {{productName}} into your own platform and enable real-time co-editing",
   "IntegrationsDescription": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
   "IntegrationServiceHeader": "Create, edit, and co-author office files right in your {{serviceName}}",
+  "IntegrationsSectionTitle": "Integrations",
   "InterfaceElements": "Interface elements",
   "InterfaceTheme": "Interface theme",
   "InvalidLink": "Invalid link",

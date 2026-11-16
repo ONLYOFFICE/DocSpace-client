@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Betten Sie {{organizationName}} {{productName}} in Ihre eigene Plattform ein und ermöglichen Sie die gemeinsame Bearbeitung in Echtzeit",
   "IntegrationsDescription": "Verbinden Sie <strong>{{docsName}}</strong> und <strong>{{productName}}</strong> über einsatzbereite Integrationen mit Ihrer Infrastruktur. Kein benutzerdefinierter Code, keine Migration.",
   "IntegrationServiceHeader": "Erstellen, bearbeiten und gemeinsam an Office-Dateien direkt in Ihrem {{serviceName}} arbeiten",
+  "IntegrationsSectionTitle": "Integrationen",
   "InterfaceElements": "Interface-Elemente",
   "InterfaceTheme": "Thema der Benutzeroberfläche",
   "InvalidLink": "Ungültiger Link",

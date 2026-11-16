@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Integroni {{organizationName}} {{productName}} në platformën tuaj dhe aktivizoni bashkëredaktimin në kohë reale",
   "IntegrationsDescription": "Lidhni <strong>{{docsName}}</strong> dhe <strong>{{productName}}</strong> me infrastrukturën tuaj me integrime të gatshme për përdorim. Pa kod të personalizuar, pa migrim.",
   "IntegrationServiceHeader": "Krijoni, redaktoni dhe bashkëredaktoni skedarë zyre drejtpërdrejt në {{serviceName}} tuaj",
+  "IntegrationsSectionTitle": "Integrimet",
   "InterfaceElements": "Elementet e ndërfaqes",
   "InterfaceTheme": "Tema e ndërfaqes",
   "InvalidLink": "Lidhje e pavlefshme",

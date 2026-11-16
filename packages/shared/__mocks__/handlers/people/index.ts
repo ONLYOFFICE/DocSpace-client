@@ -45,6 +45,7 @@ import {
   updateUserCultureHandler,
   selfByTypeHandler,
   selfHandlerWithCulture,
+  selfInGroupsHandler,
   userExistsHandler,
   usersByType,
 } from "./self";
@@ -54,6 +55,8 @@ import { peopleHandler } from "./people";
 import { peopleListHandler, peopleListAccessDeniedHandler } from "./list";
 import { themeProviderHandler } from "./theme";
 import { userPhotoHandler } from "./userPhoto";
+
+export { groupsHandler, groupHandler, salesGroup } from "./groups";
 
 export {
   usersWithRoomSharedHandler,
@@ -76,6 +79,7 @@ export {
   updateUserCultureHandler,
   selfByTypeHandler,
   selfHandlerWithCulture,
+  selfInGroupsHandler,
   themeProviderHandler,
   userPhotoHandler,
   userExistsHandler,

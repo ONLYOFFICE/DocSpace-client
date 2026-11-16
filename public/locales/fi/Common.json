@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Upota {{organizationName}} {{productName}} omaan alustaasi ja ota käyttöön reaaliaikainen yhteismuokkaus",
   "IntegrationsDescription": "Yhdistä <strong>{{docsName}}</strong> ja <strong>{{productName}}</strong> infrastruktuuriisi käyttövalmiiden integraatioiden avulla. Ei mukautettua koodia, ei siirtoja.",
   "IntegrationServiceHeader": "Luo, muokkaa ja yhteismuokkaa toimistotiedostoja suoraan {{serviceName}}-ympäristössäsi",
+  "IntegrationsSectionTitle": "Integraatiot",
   "InterfaceElements": "Käyttöliittymän elementit",
   "InterfaceTheme": "Käyttöliittymän teema",
   "InvalidLink": "Virheellinen linkki",

@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Nhúng {{organizationName}} {{productName}} vào nền tảng của riêng bạn và bật đồng chỉnh sửa theo thời gian thực",
   "IntegrationsDescription": "Kết nối <strong>{{docsName}}</strong> và <strong>{{productName}}</strong> với hạ tầng của bạn bằng các tích hợp sẵn có. Không cần mã tùy chỉnh, không cần di chuyển.",
   "IntegrationServiceHeader": "Tạo, chỉnh sửa và đồng tác giả các tệp văn phòng ngay trong {{serviceName}} của bạn",
+  "IntegrationsSectionTitle": "Tích hợp",
   "InterfaceElements": "Các thành phần giao diện người dùng",
   "InterfaceTheme": "Chủ đề giao diện\"",
   "InvalidLink": "Liên kết không hợp lệ",

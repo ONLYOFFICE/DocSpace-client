@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "{{organizationName}} {{productName}} çözümünü kendi platformunuza gömün ve gerçek zamanlı ortak düzenlemeyi etkinleştirin",
   "IntegrationsDescription": "Kullanıma hazır entegrasyonlarla <strong>{{docsName}}</strong> ve <strong>{{productName}}</strong> ürünlerini altyapınıza bağlayın. Özel kod yok, geçiş yok.",
   "IntegrationServiceHeader": "Ofis dosyalarını doğrudan {{serviceName}} ortamınızda oluşturun, düzenleyin ve birlikte yazın",
+  "IntegrationsSectionTitle": "Entegrasyonlar",
   "InterfaceElements": "Arayüz öğeleri",
   "InterfaceTheme": "Arayüz teması",
   "InvalidLink": "Geçersiz bağlantı",

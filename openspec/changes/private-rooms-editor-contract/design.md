@@ -895,6 +895,14 @@ without a new run.
   comes from this mismatch of key and version, and say why a spreadsheet
   and a presentation open with the same mismatch. Done when the answer is
   recorded here with its date.
+- **Answer of the editor developer (2026-11-16, relayed by the owner).**
+  It is enough that the portal passes the stable version of the document
+  in the document address when the file is reopened. This is the first
+  branch of decision 7: the stable key with `document.url` of the stable
+  version. Not answered: why a spreadsheet and a presentation open with
+  the mismatch, and what the portal shall serve once the Document Server
+  no longer holds the session, where the stable version alone would show
+  the content from before the save (the second branch of decision 7).
 - **Crypto library build (task 1.2).** The stand serves
   `onlyoffice-crypto.js` with a SHA-256 starting `58cb7f48`, which
   `contract-v1.md` lists as build 2.0.0. The contract asks for 2.1.0 or

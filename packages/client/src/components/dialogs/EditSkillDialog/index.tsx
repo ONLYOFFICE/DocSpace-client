@@ -169,6 +169,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
                     minHeight="0"
                     height="100%"
                     className={styles.editorFill}
+                    withLineNumbers={false}
                   />
                 </React.Suspense>
               )}
@@ -289,6 +290,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
                       minHeight="0"
                       height="100%"
                       className={styles.editorFill}
+                      withLineNumbers={false}
                       onCreateEditor={(view) => {
                         editorRef.current = view;
                       }}

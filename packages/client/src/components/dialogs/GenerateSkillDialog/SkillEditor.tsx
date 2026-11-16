@@ -53,6 +53,8 @@ type SkillEditorProps = {
   height?: string;
   /** Added to the editor's box, to size it from outside. */
   className?: string;
+  /** The numbers of the lines, in a gutter; on unless switched off. */
+  withLineNumbers?: boolean;
   /** Hands over the editor's view, for edits made from outside of it. */
   onCreateEditor?: (view: EditorView) => void;
 };
@@ -91,6 +93,7 @@ const SkillEditor = ({
   maxHeight,
   height,
   className,
+  withLineNumbers = true,
   onCreateEditor,
 }: SkillEditorProps) => {
   const { isBase } = useTheme();
@@ -114,7 +117,7 @@ const SkillEditor = ({
         maxHeight={maxHeight}
         height={height}
         onCreateEditor={onCreateEditor}
-        basicSetup={{ foldGutter: false }}
+        basicSetup={{ foldGutter: false, lineNumbers: withLineNumbers }}
       />
     </div>
   );

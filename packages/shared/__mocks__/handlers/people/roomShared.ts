@@ -47,10 +47,56 @@ export type RoomSharedUser = {
 };
 
 /**
+ * The profile EmployeeFullDtoHelper.GetShareCandidateAsync answers for
+ * another account to a caller with access to the contacts, which is
+ * GetFullAsync: the names, the states, the e-mail, the role flags and
+ * `shared` of CreateWithTypeAsync; the user name, `isLDAP` and `isSSO`; the
+ * id, the display name, the avatars and the profile link of
+ * EmployeeDtoHelper; the phone activation status, the culture, the
+ * department (empty for an account in no group) and the registration date.
+ * `workFrom` is never filled, `theme` and `loginEventId` belong to the
+ * caller's own profile (UserController.Self), and the quota fields are
+ * filled for a DocSpace administrator only, so none of them is here.
+ * @see server/common/ASC.Api.Core/Model/EmployeeFullDto.cs
+ */
+const shareCandidate = (user: RoomSharedUser) => ({
+  firstName: user.displayName.split(" ")[0],
+  lastName: user.displayName.split(" ").slice(1).join(" "),
+  status: 1,
+  activationStatus: 1,
+  email: user.email,
+  isVisitor: false,
+  isAdmin: false,
+  isRoomAdmin: false,
+  isOwner: false,
+  isCollaborator: true,
+  shared: user.shared ?? false,
+  userName: user.email.split("@")[0],
+  isLDAP: false,
+  isSSO: false,
+  id: user.id,
+  displayName: user.displayName,
+  hasAvatar: regularUser.hasAvatar,
+  isAnonim: false,
+  avatar: regularUser.avatar,
+  avatarOriginal: regularUser.avatarOriginal,
+  avatarMax: regularUser.avatarMax,
+  avatarMedium: regularUser.avatarMedium,
+  avatarSmall: regularUser.avatarSmall,
+  profileUrl: `${BASE_URL}/accounts/people/filter?search=${encodeURIComponent(user.email)}`,
+  mobilePhoneActivationStatus: 0,
+  cultureName: "en-GB",
+  department: "",
+  registrationDate: "2021-03-09T17:52:55.0000000+08:00",
+});
+
+/**
  * Mirrors UserController.GetUsersWithRoomShared (HttpGet "room/{id}"): the
- * accounts relevant to the room, each an EmployeeFullDto carrying `shared`,
- * with `count` and `total` set from the paging. The mock lists the given
- * users and ignores the search filters.
+ * accounts relevant to the room, each the profile of a share candidate
+ * carrying `shared`, with `count` and `total` set from the paging. The mock
+ * lists the given users and ignores the search filters; it has no caller,
+ * so it answers as to one who has access to the contacts and is not a
+ * DocSpace administrator.
  * @see server/products/ASC.People/Server/Api/UserController.cs
  */
 export const usersWithRoomSharedHandler = (
@@ -69,17 +115,7 @@ export const usersWithRoomSharedHandler = (
         JSON.stringify({
           count: page.length,
           total: users.length,
-          response: page.map((user) => ({
-            ...regularUser,
-            id: user.id,
-            displayName: user.displayName,
-            firstName: user.displayName.split(" ")[0],
-            lastName: user.displayName.split(" ").slice(1).join(" "),
-            userName: user.email.split("@")[0],
-            email: user.email,
-            profileUrl: `${BASE_URL}/accounts/people/filter?search=${encodeURIComponent(user.email)}`,
-            shared: user.shared ?? false,
-          })),
+          response: page.map(shareCandidate),
           status: 0,
           statusCode: 200,
         }),

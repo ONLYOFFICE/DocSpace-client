@@ -760,12 +760,12 @@ creates a new one; the other commands use the latest unless --dir is given.
 Examples:
   audit.mjs fields
   audit.mjs export --components "Files,Rooms" --sample 20 --name pilot
-  audit.mjs export --ids 83669,83750
+  audit.mjs export --ids <id>,<id>
   audit.mjs export --batch 20 --skip .claude/scripts/bugzilla/runs/<run>/decisions.json
   audit.mjs plan --model "Claude Opus 5.5"
   audit.mjs plan --model "Claude Opus 5.5" --lang en
   audit.mjs apply                                  # dry run
-  audit.mjs apply --only 83669 --confirm           # one bug first
+  audit.mjs apply --only <id> --confirm            # one bug first
   audit.mjs apply --confirm
   audit.mjs suggestions
   audit.mjs report

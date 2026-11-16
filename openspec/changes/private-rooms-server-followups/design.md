@@ -32,11 +32,11 @@ The owner handed the open Backend tasks of this change to the backend team
 on 2026-11-16, as one document with the open server tasks of
 `private-rooms-server-hardening` and the portal setting of
 `private-rooms-release-gate`: tasks 1.1 to 1.4, 1.6, 2.1 to 2.3 and 2.5,
-each with what is asked, what is expected and how it is accepted. No reply
-is recorded yet. Tasks 1.7 and 2.6 and an addition to 1.6 were added to
+each with what is asked, what is expected and how it is accepted. Tasks 1.7 and 2.6 and an addition to 1.6 were added to
 the document later that day. Task 1.8 and the server refusal of a
 guest in a project (`ai-projects`, tasks.md section 7) were added to it
-the same day and are not handed over yet.
+the same day, and the owner handed the updated document to the backend
+team that day. No reply is recorded yet.
 
 ### Read at `0396e6910f` (2026-11-16)
 

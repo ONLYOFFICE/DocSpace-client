@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "{{organizationName}} {{productName}} məhsulunu öz platformanıza inteqrasiya edin və real vaxt rejimində birgə redaktəni aktivləşdirin",
   "IntegrationsDescription": "Hazır inteqrasiyalarla <strong>{{docsName}}</strong> və <strong>{{productName}}</strong> məhsullarını infrastrukturunuza qoşun. Xüsusi kod yoxdur, miqrasiya yoxdur.",
   "IntegrationServiceHeader": "Ofis fayllarını birbaşa {{serviceName}} mühitinizdə yaradın, redaktə edin və birgə hazırlayın",
+  "IntegrationsSectionTitle": "İnteqrasiyalar",
   "InterfaceElements": "İnterfeys elementləri",
   "InterfaceTheme": "İnterfeys mövzusu",
   "InvalidLink": "Etibarsız keçid",

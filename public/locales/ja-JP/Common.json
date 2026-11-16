@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "{{organizationName}} {{productName}}を独自のプラットフォームに組み込み、リアルタイム共同編集を有効にします",
   "IntegrationsDescription": "すぐに使える連携機能で、<strong>{{docsName}}</strong>と<strong>{{productName}}</strong>をお使いのインフラに接続できます。カスタムコードも移行も不要です。",
   "IntegrationServiceHeader": "オフィスファイルを{{serviceName}}内で直接作成、編集、共同編集",
+  "IntegrationsSectionTitle": "連携",
   "InterfaceElements": "インターフェイス要素",
   "InterfaceTheme": "インターフェイスのテーマ",
   "InvalidLink": "無効なリンク",

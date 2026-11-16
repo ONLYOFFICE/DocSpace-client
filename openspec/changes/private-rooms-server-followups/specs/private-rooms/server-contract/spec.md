@@ -32,6 +32,25 @@ The server SHALL mark a refusal caused by missing encryption keys with a reason 
 - **WHEN** the same request is refused because the caller may not change the access
 - **THEN** the answer does not carry the missing-keys reason
 
+### Requirement: A user turned into a guest loses private rooms and keys
+The server SHALL, when a user is turned into a guest, remove the user from every private room, the rooms the user owned included once they have passed to the new owner, remove the wrapped file keys the user held for the files of those rooms, and delete the user's stored encryption key pair. It SHALL NOT restore any of them when the guest is made a user again.
+
+#### Scenario: Member turned into a guest
+- **WHEN** a member of a private room is turned into a guest
+- **THEN** the guest is not among the members of the room, holds no file key of it, and the request for the guest's own keys answers with no key
+
+#### Scenario: Owner turned into a guest
+- **WHEN** the owner of a private room is turned into a guest and the room passes to another user
+- **THEN** the room belongs to the new owner and the previous owner is not among its members
+
+#### Scenario: Guest invited afterwards
+- **WHEN** a share request of a private room names a guest who was a user with keys
+- **THEN** the server refuses it, since the guest holds no key
+
+#### Scenario: Guest made a user again
+- **WHEN** such a guest is made a user again
+- **THEN** the user holds no key and is in no private room until a key is created and an invitation is sent
+
 ### Requirement: Private rooms are not listed in the Forms area
 The server SHALL NOT list a private room in the Forms area or the form-template area of the rooms listing.
 

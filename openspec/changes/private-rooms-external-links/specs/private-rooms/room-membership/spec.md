@@ -62,11 +62,15 @@ The system SHALL let a member who may change the access revoke an external link 
 - **THEN** the link leaves the list and its address no longer opens anything
 
 ### Requirement: A link without a password is limited to one file to view
-The system SHALL require a password for an external link of a private item, except for a link to one file with the access to view, which SHALL carry an end date instead. It SHALL ask for the missing password or end date before the link is created or changed.
+The system SHALL require a password for an external link of a private item, except for a link to one file with the access to view, which SHALL carry an end date instead, preset to seven days from its creation. It SHALL ask for the missing password or end date before the link is created or changed.
 
 #### Scenario: Link to a file to view without a password
 - **WHEN** a member creates a link to one file with the access to view and no password
-- **THEN** an end date is required, and the link is created once it is set
+- **THEN** the end date is preset to seven days from now, and the link is created with it
+
+#### Scenario: End date cleared
+- **WHEN** the member clears the end date of such a link
+- **THEN** the link is not created or changed until a date or a password is set
 
 #### Scenario: Link to a folder or a room without a password
 - **WHEN** a member creates a link to a folder or a private room without a password

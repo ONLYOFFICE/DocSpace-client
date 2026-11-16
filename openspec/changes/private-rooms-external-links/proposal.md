@@ -64,7 +64,7 @@ Decisions that need a human: none open.
 Decided by the owner on 2026-11-16:
 
 - A link without a password is made only for one file, with the access to
-  view and an end date. Every other link, to a folder or a room or with
+  view and an end date, preset to seven days. Every other link, to a folder or a room or with
   the access to comment, review or edit, has a password. A link without a
   password is as strong as one with it against the server, the network
   and a guess of the secret; it does not protect against somebody who

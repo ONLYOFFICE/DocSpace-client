@@ -136,8 +136,9 @@ none is open. The technical decisions below follow from them.
     interface.** The server refuses a link without a password unless it is
     a link to one file with the access to view and an end date; the
     interface asks for the password, or for the end date, before it sends.
-    The default end date of such a link is proposed as seven days and is
-    set with the mock-up of task 0.4.
+    The end date of such a link is preset to seven days from its creation
+    (decided by the owner on 2026-11-16); the member can set another date
+    and cannot leave it empty.
 11. **The secret stays in the address, as at Proton (decided by the owner
     on 2026-11-16).** The page of a visitor reads the part after `#` and
     leaves it there, so a reload or a bookmark opens the item again. It

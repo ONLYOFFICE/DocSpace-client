@@ -71,9 +71,10 @@ Server, `../server` at `6fb6dfb17a`, read on 2026-11-16:
 
 ## Decisions
 
-Decisions 1 to 4 of proposal.md are recorded as taken, with their date, by
-task 0.1 before any other task starts. The technical decisions below hold
-for the assumed answers.
+The decisions of proposal.md the owner took on 2026-11-16 are recorded
+there. Its two open ones, the link without a password and the wording of
+the promise, are recorded by task 0.1 before any other task starts; the
+technical decisions below hold for the proposed answers.
 
 1. **A link is a recipient with a key pair of its own.** The browser of
    the creator makes an X25519 key pair for the link and wraps the file
@@ -158,8 +159,7 @@ for the assumed answers.
 
 ## Migration Plan
 
-No stored file changes. The portal setting ships on, or off, as proposal
-decision 2 says; a portal that never makes a link is unchanged. Switching the setting
+No stored file changes. The portal setting ships on; a portal that never makes a link is unchanged. Switching the setting
 off stops the links without deleting them.
 
 ## Open Questions

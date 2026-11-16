@@ -4,7 +4,7 @@ The Backend tasks are done in `../server` by the backend team, on its own branch
 
 ## 0. Decisions (before any other task)
 
-- [ ] 0.1 Record the owner's answers to decisions 1 to 4 of proposal.md with their date in proposal.md and design.md, and revise the deltas and the tasks below where an answer differs from the assumed one. Verify: `npx -y @fission-ai/openspec@1.17.0 validate private-rooms-external-links --strict`
+- [ ] 0.1 Record the owner's answers to the two open decisions of proposal.md, the link without a password and the wording of the promise, with their date in proposal.md and design.md, and revise the deltas and the tasks below where an answer differs from the assumed one. Verify: `npx -y @fission-ai/openspec@1.17.0 validate private-rooms-external-links --strict`
 - [ ] 0.2 Read in `../server`, through CodeGraph, how a file is served to a visitor of an external link and how the editor configuration is built for one, record both in design.md, then hand the `server-contract` delta to the backend team and record its reply with the date: the three fields added to the share record of a link, the routes, the proof and the name of the portal setting. Verify: those records, and the deltas revised where the reply differs
 - [ ] 0.3 Ask the Document Server team whether a visitor without an account can join an encrypted editing session and whether view mode opens an encrypted document for one, and record the answer in design.md with its date. Verify: that record; the tasks of group 5 start only on a yes
 - [ ] 0.4 Get from design the two screens the existing link controls lack, the notice at the creation of a link and the page of a visitor with its password prompt, and revise in the deltas of this change the main requirements that hide the Share tab and the link entries of the menus for private items (`room-membership`, "Share tab hidden for private items"; `file-operations`, "Context-menu entries withheld for encrypted files" and the one for folders). Verify: the screens linked from design.md and `validate --strict`
@@ -45,4 +45,4 @@ The Backend tasks are done in `../server` by the backend team, on its own branch
 ## Workflow follow-up
 
 - Archive when the Backend tasks have merged and the Client tasks are done.
-- The release notes and the documentation pack of `private-rooms-release-gate` state the promise of proposal decision 4.
+- The release notes and the documentation pack of `private-rooms-release-gate` state the promise of proposal decision 2.

@@ -51,8 +51,8 @@ Out of scope:
 
 - Links for members ("link for room members"), invitation links and
   embedding, which stay withheld.
-- A visitor who adds files through a link. Uploading needs a link that
-  wraps for the members and is left for a later change.
+- A visitor who adds files through a link. Decided by the owner on
+  2026-11-16: a link never lets a visitor upload.
 - Groups and guests as members of a private room.
 - The desktop application.
 - Any client code, mock or contract test before the server work has
@@ -60,22 +60,31 @@ Out of scope:
 
 Decisions that need a human, with the answer this proposal assumes:
 
-1. The order of the work. Assumed: the access to view first; commenting,
-   reviewing and editing together after the Document Server opens a saved
-   encrypted document again (`private-rooms-editor-contract` 6.2) and
-   confirms an encrypted session for a visitor.
-2. Who may create a link and who may forbid it. Assumed: whoever may
-   change the access of the room; a portal setting, on by default, that a
-   portal administrator can switch off.
-3. Whether a link can be made without a password. Assumed: yes, the secret
-   in the address is enough, and the password is a second factor sent by
-   another channel.
-4. What the marketing and the release notes say, since "only members who
-   hold a key can read" stops being true for a room with a link.
+1. Whether a link can be made without a password. The owner's answer of
+   2026-11-16: it can, if the safety of the information can be guaranteed.
+   A link without a password is as strong as one with it against the
+   server, the network and a guess of the secret, and it does not protect
+   against somebody who gets the address itself. Proposed and waiting for
+   the owner: no password only for a link to one file with the access to
+   view and an end date; a password for every other link.
+2. What the interface, the marketing and the release notes say, since
+   "only members who hold a key can read" stops being true for a room with
+   a link. Proposed and waiting for the owner: the promise is that only
+   the people the user gave access to can read, the members and the
+   holders of the links the user made, and that the service holds no key.
 
-Decided by the owner on 2026-11-16: the link types, the roles and the
-settings are the portal's own; Proton is the reference for the approach
-only.
+Decided by the owner on 2026-11-16:
+
+- The link types, the roles and the settings are the portal's own; Proton
+  is the reference for the approach only.
+- The access to view comes first; commenting, reviewing and editing
+  follow together, after the Document Server opens a saved encrypted
+  document again (`private-rooms-editor-contract` 6.2) and confirms an
+  encrypted session for a visitor.
+- Whoever may change the access of the room creates a link; a portal
+  setting, on by default, lets a portal administrator switch the links
+  off.
+- A link never lets a visitor upload files.
 
 Depends on: `../server` for the key material of a link, the proof of the
 secret, the routes a visitor reads through, the editor configuration for a

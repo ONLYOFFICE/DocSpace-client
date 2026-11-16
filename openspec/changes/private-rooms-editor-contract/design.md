@@ -967,10 +967,46 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
   the build 2.0.0 of `contract-v1.md`, the same as on 2026-11-10. The new
   Document Server build did not bring a newer library, so the form flag of
   a PDF form over a save is expected to behave as recorded then.
-- **Not checked.** The reopening of a saved document (task 6.2), the AI
-  tools tab (`private-rooms-server-hardening` 16.1) and
-  `docServiceEncryptionSupported` of `GET files/settings` (task 2.6) need
-  a signed-in session; `files/settings` answers 401 without one.
+- **Signed in, the same day**, as the portal owner, whose interface
+  language is Russian, with the key unlocked in the browser session.
+- **Reopening after a save (task 6.2): still fails.** A docx created in
+  the private room "Review probe 2026-11-10" at 12:57 (file 4597053), one
+  line typed, saved with Ctrl+S (version 2, 39164 bytes) and its editor
+  tab closed, answered at the next opening for editing, about a minute
+  later, "ONLYOFFICE Document Editor reports an error: code -82". Opened
+  with `action=view` it showed the saved line. `openedit` answered one
+  document key for editing and another for viewing, both with the file at
+  version 2; the document address carries no version (`action`, `fileid`,
+  `stream_auth`).
+- **A document saved six days earlier opens.** "Reopen docx.docx" of the
+  same room (file 4462431, version 2, saved on 2026-11-10), which did not
+  open for editing then, opened for editing with its text. The Document
+  Server of the stand was built or started on 2026-11-16 (`serverInfo.date`
+  above), so the sessions it held may have ended with it; this was not
+  told apart from a session that ends by itself after some days. It fits
+  D7: the failure lasts as long as the Document Server holds the session
+  of the saved document.
+- **Keys of the other files.** For every saved docx, xlsx, pptx and PDF of
+  the two private rooms of the portal (versions 2 to 7) `openedit` answers
+  different keys for editing and for viewing; for the one file still at
+  version 1 they are equal.
+- **Capability (task 2.6).** `GET files/settings` answers
+  `docServiceEncryptionSupported: true` with the library of build 2.0.0,
+  as on 2026-11-10: the probe finds the file and does not read its
+  version.
+- **AI tools (`private-rooms-server-hardening` 16.1).** `openedit` answers
+  `customization.ai.disabled: false` for every encrypted file read, and
+  the editor shows the AI tools tab, in editing and in viewing.
+- **Section root title (`private-rooms-server-followups` 2.3).**
+  `GET files/@private` answers the title "Private" to this user.
+- **Key pairs in the configuration (task 10.6).** `editorConfig.encryptionKeys`
+  of `openedit` is the list of the caller's key pairs, one here, with
+  `privateKeyEnc`.
+- **Left on the stand.** The file 4597053, "Reopen docx 2026-11-16", stays
+  in that room as the case to reopen after a fix.
+- **Not checked.** The form flag of a PDF form over a save, the spreadsheet
+  and the presentation after a new save, and a second member in a held
+  session.
 
 ## Goals / Non-Goals
 

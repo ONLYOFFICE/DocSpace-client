@@ -2,8 +2,9 @@
 
 Draft for the documentation team, written on 2026-11-03 from the main specs
 and the open changes, revised on 2026-11-06 after the backend commits of
-2026-11-04 and 2026-11-05 and the backend team's reply of 2026-11-05.
-Release: `release/v4.1.0`.
+2026-11-04 and 2026-11-05 and the backend team's reply of 2026-11-05, and
+on 2026-11-16 after a read of the server at `6fb6dfb17a` and a check of
+the release stand. Release: `release/v4.1.0`.
 
 Handover to the documentation team: not yet recorded.
 
@@ -24,7 +25,10 @@ Handover to the documentation team: not yet recorded.
   While it is off:
   - the Private section, the Private app and the Private room type are gone;
   - existing private rooms stay usable by their address but are not listed
-    anywhere, since the Rooms list leaves them out (server, 2026-11-06);
+    anywhere, since the Rooms list leaves them out (server, 2026-11-06).
+    The server is asked to close them by their address as well
+    (`private-rooms-server-followups` 2.5, 2026-11-16); until that lands
+    the switch hides private rooms and does not lock them;
   - users who already hold a key keep the Keys management tab.
 - **Embedding:** an embedded client frame and the SDK private pages show
   private rooms only when the host sets `privateRooms` in the frame
@@ -77,9 +81,33 @@ server stores and indexes them in the clear and shows them to the room's
 members; letters, pushes and the audit trail name a private room "Private
 room" to everyone else.
 
+What a private room and its files do not offer in this version, from
+`private-rooms/file-operations` and `private-rooms/room-membership`:
+
+- An encrypted file cannot be renamed. Its name is inside the encrypted
+  file, so a new name means writing the file again; decided on 2026-11-16
+  to leave it out of the beta.
+- No version history, no favourites, no conversion and no "download as"
+  for an encrypted file; a file that opens only after a conversion does not
+  open. The download is offered twice: decrypted, and as stored.
+- No links of any kind: no shared or public link to a private room, a
+  folder or a file of one, and no sending by e-mail.
+- Forms are not filled in a private room, and a private room is not a
+  public room or a form-filling room.
+- Groups and guests cannot be members. An invited person needs an
+  encryption key first.
+- A folder cannot be uploaded as a tree, and a folder cannot be moved or
+  copied out of a private room. A file that leaves a private room is
+  decrypted.
+- No private room on third-party storage.
+
 AI is not available in private rooms or on encrypted files: no AI chat in
-the room or the section, no AI in the editor for an encrypted file, no
-vectorization and no AI agents. The server has no clear text to work with,
+the room or the section, no vectorization and no AI agents. One surface is
+still open: the editor shows its AI tools tab for an encrypted file, seen
+again on the release stand on 2026-11-16, until the server turns it off in
+the editor configuration (`private-rooms-server-hardening` 16.1). Text
+sent from that tab leaves the browser unencrypted, so the tab has to be
+gone before users are told that AI does not see private rooms. The server has no clear text to work with,
 and every AI path of the portal would carry it through the portal. Kept by
 decision of 2026-11-06; the options for a later integration are recorded
 in `private-rooms-ai-integration`.
@@ -91,9 +119,18 @@ in `private-rooms-ai-integration`.
   cannot be reopened after that save while the Document Server still holds
   its editing session (the editor reports error -82). Known as
   `private-rooms-editor-contract` 6.2, fixed together with the Document
-  Server team; the beta must not ship with it.
-- **Document Server build:** not named yet (beta gate item 0.1, left open by
-  proposal decision 6). On a Document Server build without the crypto add-on,
+  Server team; the beta must not ship with it. Seen again on 2026-11-16
+  with Document Server 10.0.3.40: a text document saved and closed did not
+  open for editing a minute later and opened for viewing; a document saved
+  on 2026-11-10 opened for editing that day.
+- **Crypto library on the stand:** the Document Server of the stand
+  (10.0.3.40 on 2026-11-16) still serves the library of build 2.0.0, while
+  the editor contract asks for 2.1.0 or newer. With it a PDF form loses its
+  form flag when it is saved in the editor and opens for commenting.
+- **Document Server build:** on SaaS the release stand ran `10.0.3.19` on
+  2026-11-06 and `10.0.3.40` on 2026-11-16, both with the crypto add-on
+  (beta gate item 0.1); the build of the standalone package is not named
+  yet. On a Document Server build without the crypto add-on,
   private rooms cannot be created (the server answers 403 since `b562fc3fb1`)
   and encrypted files do not open in the editor (415). The backend team's
   check of 2026-11-05: among the images on its machine only the
@@ -121,19 +158,46 @@ neutral room name in letters (the role-change letter included since
 `4162789259`) and the audit trail, the neutral folder name in letters,
 the plaintext refusals
 and the title validation of uploads, the revocation of a leaving member's
-keys, the third-party refusal and the Document Server gate. Still open:
+keys, the third-party refusal and the Document Server gate. Nothing more
+had landed by `6fb6dfb17a` (read on 2026-11-16). Still open:
 
 - the translations of the "Private room" and "Private folder" labels of
   letters, pushes and the audit trail, which every language prints in
   English for now (4.5);
-- recovery and offboarding for organisations (8); deactivating a user
-  revokes no keys;
+- offboarding (8.1): deactivating a user revokes no keys, and the owner of
+  a private room can be deactivated with the room still theirs;
+- recovery of a lost key by an organisation, which is a change of its own
+  (`private-rooms-admin-recovery`) and waits for decisions; in the beta a
+  lost passphrase and recovery phrase cannot be made good by anybody;
+- a public or form-filling room created as private answers an error and
+  is stored all the same, without the link it exists for (12.8);
+- the editor's AI tools tab on an encrypted file (16.1), see above;
 - whether a private AI agent is refused (12.3, decision 8), and the
   template paths of room creation;
 - the availability rule, withdrawn until product decides whether private
   rooms are limited by edition (decision 1);
 - backup and restore: the keys stay out of the backup (group 15, the
   warning of 15.2 is on the branch), see "Before users start".
+
+Server (`private-rooms-server-followups`), handed to the backend team on
+2026-11-16 with the open items above:
+
+- a member without a key cannot leave a private room, be removed from it
+  or get another role (1.1), and the refusal has no reason the interface
+  can tell from a refusal by rights (1.2);
+- the keys listed for one file miss the room owner when another member
+  created the file, and keep a creator who left the room (1.3);
+- the rooms of a deleted user pass to their new owner without a check of
+  that owner's keys (1.4);
+- a user turned into a guest keeps the key, the file keys, the membership
+  and the ownership of private rooms (1.6);
+- a private form-filling room is listed in the Forms section (2.1);
+- the server reports the rights to rename, to read and edit the history,
+  to lock, to copy a link and to use AI on encrypted content, which the
+  interface withholds by itself (2.2);
+- the Private section is titled in English for every language (2.3);
+- the switched-off Private app hides private rooms without closing them
+  (2.5), see "Who sees it".
 
 Client follow-ups of the merged server items: none open; the owner change
 prepared through the missing-keys route (2.2), the skipped recipients of a

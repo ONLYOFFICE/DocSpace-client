@@ -731,6 +731,75 @@ Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
   section root and the reason of a refusal are tasks of
   `private-rooms-server-followups`.
 
+### Read on 2026-11-16 (`6fb6dfb17a`): a public or form-filling room created as private
+
+This corrects the reads of 2026-11-06 above, which say that nothing at
+creation refuses these rooms and that their link is made on the first read.
+
+- `FileStorageService.CreateRoomAsync` (`Core/Core/FileStorageService.cs`,
+  line 667) refuses the private flag for the AI hub room types only (lines
+  674-678) and passes a public or a form-filling room on to
+  `InternalCreateFolderAsync`, which checks the creator's keys and the
+  Document Server (`DemandPrivateRoomCanBeCreatedAsync`, line 1223) and
+  saves the room with the private setting (line 1249).
+- The private wrapper `CreateRoomAsync<T>` (line 1079) then sends the
+  room-created audit event and the `RoomCreated` webhook and, for a public
+  and a form-filling room outside the templates, sets the primary external
+  link at once (`SetExternalLinkAsync`, lines 1107-1114).
+- That link is refused: `FileSharingAceHelper.SetAceObjectAsync`
+  (`Core/Utils/FileSharing.cs`, lines 107-113) throws a `SecurityException`
+  for a link with an access in a private room, the refusal of decision 12.
+  The creation request therefore answers 403. No code removes the room
+  saved before, and the socket event of the creation is not sent.
+- The server test `CreateRoom_PrivateUnsupportedType_Forbidden`
+  (`Tests/Tests/08_Private/PrivateRoomCreateTests.cs`, line 91, last changed
+  on 2026-08-21) expects 403 for both room types and passes on it. It does
+  not read the rooms afterwards, so it does not see the stored one. This is
+  what the backend note of 2026-11-06 calls "are refused".
+- The result is a private room of the public or the form-filling type
+  without a link, recorded as created in the audit trail, whose creator got
+  an error. A private form-filling room made this way is the one the Forms
+  area lists (`private-rooms-server-followups` 2.1). The later read of the
+  link (`GetPrimaryExternalLinkAsync`, line 4465) is refused the same way.
+- Read from the code; the request was not sent to a server.
+- Asked in task 12.8, decided by the owner on 2026-11-16: the refusal
+  moves in front of the save and answers 400, the status of the other
+  refusals of a room type (the AI hub types, the third-party storage).
+
+### Read on 2026-11-16 (`6fb6dfb17a`): deactivation
+
+- Three actions of `UserController`
+  (`products/ASC.People/Server/Api/UserController.cs`) deactivate a user:
+  `UpdateMember` with `disable` (line 2156), `UpdateUserStatus` for
+  several users (line 2344) and `DeleteProfile`, a user deactivating
+  themselves (line 834). Each sets the status to terminated, updates the
+  user and notifies; none calls into the files module, so the wrapped file
+  keys, the key pair and the shares of the user stay, and a private room
+  the user owns stays theirs. This agrees with the reply of 2026-11-05
+  ("deactivating a user revokes no keys").
+- A deactivated user cannot sign in, and a share change that would give
+  one access passes over the entry without an error (`FileSharing.cs`,
+  line 141); what stays is the stored file keys, which are back in use the
+  moment the user is activated again.
+- The deletion of a user is different: `DeletePersonalDataAsync`
+  (`Core/Core/FileStorageService.cs`, line 3973) removes the user's file
+  keys (`IFileDao.DeleteFileKeysAsync` for a user), and the removal of the
+  user deletes the account links, the key pair among them
+  (`common/ASC.Core.Common/Data/DbUserService.cs`, line 508).
+- `../server` holds no SCIM code.
+
+### Hand-over to the backend team (2026-11-16)
+
+The owner handed the open Backend tasks of this change to the backend team
+on 2026-11-16, in the same document as those of
+`private-rooms-server-followups`: tasks 4.5 (for the translators), 8.1,
+12.3, 12.8 and 16.1. The recovery administrator
+(`private-rooms-admin-recovery`) and the tasks of
+`private-rooms-editor-contract` were left out of it: the first waits for
+the decisions of the owner, the others for the Document Server team.
+`../server` was at `6fb6dfb17a` that day and held none of them. No reply
+is recorded yet.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -1074,6 +1143,18 @@ Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
     is signed by the server and the flag belongs with the other
     per-file customization getters there.
 
+29. **Offboarding is the deactivation, and it removes the file keys only
+    (decided by the owner on 2026-11-16).** A deactivated user keeps the
+    membership and the key pair, so an activation brings back a member who
+    is re-keyed by an invitation or the backfill sweep (decision 20)
+    rather than invited to every room again. The owner of a private room
+    is not deactivated before the room has an owner with keys.
+    Alternative: remove the user from the private rooms as well. Rejected:
+    a deactivation is often temporary, and the file keys are what gives
+    access. The recovery administrator of decision 5 left this change for
+    `private-rooms-admin-recovery` the same day, with its open question on
+    a quorum.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client
@@ -1101,7 +1182,8 @@ Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
   key. Owner: product and security. Does not change the client specs.
 - SCIM availability on the platform (the stashed doc could not confirm it).
   Owner: platform team. Affects only whether the offboarding trigger is SCIM
-  or manual deactivation.
+  or manual deactivation. Read on 2026-11-16: `../server` has no SCIM, so
+  task 8.1 names the deactivation only.
 - Revocation primitive: decided by the server on 2026-11-05, decision 22:
   the server deletes a user's keys for every file of a private room when
   the user leaves it, is removed from it, has their access cleared or

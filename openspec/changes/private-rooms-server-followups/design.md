@@ -123,6 +123,90 @@ with `common/`.
   listing then (`private-rooms-beta-release` 4.5), but an address that
   carries the private filter itself is passed on and answered with private
   rooms.
+- Read again at `6fb6dfb17a` on 2026-11-16, which answers task 2.4: the
+  guard (now at line 1126) has the same two callers, lines 1116 and 1165,
+  and no other code asks the app. A private room, its folders and its
+  files are served by id with the app off, as the main spec requirement
+  "The E2E rooms app gates only the private section listing" records.
+
+### User turned into a guest
+
+Read at `6fb6dfb17a` on 2026-11-16, which answers task 1.5.
+
+- Code: the type change runs in `UpdateUserTypeProgressItem`
+  (`common/ASC.Data.Reassigns/UpdateUserTypeProgressItem.cs`). For a user
+  who becomes a guest it passes the user's rooms to another user
+  (`FileStorageService.ChangeRoomsOwnerAsync`, line 112), lowers the room
+  manager role to content creator (`DowngradeRoomManagerRoleAsync`, line
+  119), lowers the shares in AI rooms to read (line 123 and below) and moves
+  the user to the guest group. No step names the encryption keys, the file
+  keys or the membership of a private room.
+- Code: the stored key pair is removed in one place only,
+  `EncryptionLoginProvider.SetKeysAsync`, before it writes the new value
+  (`AccountLinker.RemoveProviderAsync`). A guest cannot reach it: the
+  creation, the replacement and the deletion of a key demand a caller who
+  is not a guest (`EncryptionKeyPairDtoHelper.DemandKeyOwnerAsync`,
+  `Core/Core/Entries/EncryptionKeyPairDto.cs`, line 118). So the pair of a
+  user turned into a guest stays as it was and can no longer be changed.
+- Code: the guest reads that pair. `GET privacyroom/keys`
+  (`PrivacyRoomController.GetUserKeys`) asks only for a signed-in caller,
+  and its description says a guest gets an empty answer "unless they had
+  keys before". The shares and the wrapped file keys are untouched, so the
+  guest goes on opening the files of the private rooms the user was in.
+- Code: the key check of a share change,
+  `EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync`, looks at the stored
+  keys and not at the user type, so a share request that names such a guest
+  passes it. The prospective-members answer leaves a guest out
+  (`GetKeyPairForRoomCandidatesAsync`, line 313), so the invite panel gets
+  no public key for the guest and cannot wrap the file keys; the request
+  sent without the panel is not stopped.
+- Code, corrected on 2026-11-16 by a second read: the private rooms the
+  user owns do not pass to anybody. `ChangeRoomsOwnerAsync`
+  (`Core/Core/FileStorageService.cs`, line 3804) collects the rooms with
+  `GetFolderItemsAsync` under the rooms root, whose search area is the
+  default, the Rooms area, and that area lists rooms that are not private
+  and not form-filling (`FileSecurity.cs`, lines 2988-2993,
+  `SearchArea.Active => RoomPrivacyFilter.NotPrivate`; the split of
+  `SearchAreaExtensions.MatchesRoom`). So a user turned into a guest stays
+  the owner of the user's private rooms, and of the form-filling ones. The
+  first read of this section assumed they pass through `ChangeOwnerAsync`
+  and leave the old owner a content creator share; that holds for the rooms
+  the listing returns only. For those, `ChangeOwnerAsync` (line 5510)
+  demands the new owner's keys when a room is private and is called without
+  the check of the new owner's file keys (`demandFileKeys` left false).
+- The removal of a share already removes the wrapped file keys of the user
+  (`FileSharingAceHelper.RevokeFileKeysAsync`, `Core/Utils/FileSharing.cs`,
+  line 670; `private-rooms-server-hardening`, design decision 22), so task
+  1.6 needs no new revocation.
+- Not run on the stand.
+
+### Read on 2026-11-16 (`6fb6dfb17a`): three behaviours without a task
+
+- **An invitation of several people stops at the first without a key.**
+  `FileSharingAceHelper.SetAceObjectAsync` (`Core/Utils/FileSharing.cs`)
+  goes through the entries one by one, groups first (line 131). The key
+  check throws at line 275 and the share of an entry is written at line
+  413, inside the same loop, so the entries before the one without a key
+  are already stored when the request answers 403, and the ones after it
+  are not looked at. No transaction was found in the helper; the caller
+  (`FileStorageService.SetAceObjectAsync`) was not read for one. The
+  invite panel leaves out an invitee without a key before it sends
+  (`private-rooms/room-membership`), so the panel does not reach this; a
+  request sent without it does.
+- **A private room and its folders can be marked as favourites.**
+  `FileStorageService.AddToFavoritesAsync` (line 4254) leaves encrypted
+  files out (`!file.Encrypted`) and takes every folder the caller may read,
+  a private room and a folder of one included.
+- **Trash.** An encrypted file of a room is deleted for good
+  (`FileDao.UseTrashForRemove`, `Core/Core/Dao/TeamlabDao/FileDao.cs`,
+  line 1971). A folder is not moved to Trash when it carries the private
+  setting (`FolderDao.UseTrashForRemoveAsync`, line 1723), and a folder
+  created in a private room is given the setting of its parent
+  (`InternalCreateFolderAsync`, line 1249). Whether a folder below the room
+  root holds the setting when it is read back was not traced, so the
+  observation of 2026-11-06 in `private-rooms-server-hardening` ("a
+  subfolder of a private room still goes to Trash") is neither confirmed
+  nor withdrawn; it needs a run on a stand.
 
 ### Not confirmed
 
@@ -130,6 +214,16 @@ with `common/`.
   (`Core/Core/Dao/TeamlabDao/FileDao.cs`, line 1154) removes them with
   `DeleteFileKeysByFileIdsAsync` in the same transaction as the file rows;
   the single-file delete goes through it. Nothing is asked.
+
+### Hand-over to the backend team
+
+The owner handed the open Backend tasks of this change to the backend team
+on 2026-11-16, as one document with the open server tasks of
+`private-rooms-server-hardening` and the portal setting of
+`private-rooms-release-gate`: tasks 1.1 to 1.4, 1.6, 2.1 to 2.3 and 2.5,
+each with what the server does today, what is asked, what is expected and
+how it is accepted. `../server` was at `6fb6dfb17a` that day and held none
+of them. No reply is recorded yet.
 
 ## Goals / Non-Goals
 
@@ -158,14 +252,41 @@ with `common/`.
    editor permissions for work inside the encrypted document, which the
    server does not need to read. The other granted rights name operations
    the client withholds.
-4. **Questions are tasks too.** The routes behind the app switch and the
-   keys of a user turned into a guest need an answer before a behaviour can
-   be asked; the task is done when the answer is recorded here with its
-   date.
+4. **Questions are tasks too.** A behaviour is asked only after the
+   server has been read or the backend team has answered; the task is done
+   when the answer is recorded here with its date. The keys of a user
+   turned into a guest and the routes behind the app switch were such
+   questions until 2026-11-16 (decisions 6 and 7).
 5. **A client task follows each server task that changes an answer.** It
    mirrors the merged behaviour in the mocks with contract cases and
    removes what the client no longer needs, on the pattern of
    `private-rooms-server-hardening` 16.1 and 16.2.
+
+6. **A user turned into a guest loses the private rooms and the keys
+   (decided by the owner on 2026-11-16).** The type change removes the
+   user's share in every private room, which removes the wrapped file keys,
+   and then deletes the stored key pair. What is expected afterwards: the
+   guest is in no private room and opens no encrypted file; the guest holds
+   no key, so the key check refuses an invitation with no rule about guests;
+   the rooms the user owned belong to the new owner, without the old owner
+   among the members; and a guest made a user again starts with no key,
+   creates one and is invited again. Alternative: keep the keys and refuse
+   a guest by a rule of its own. Rejected: the main spec already says a
+   guest holds no encryption key, and a kept pair that its holder can read
+   but never change or delete is a state no other path produces.
+
+7. **The switched-off E2E rooms app closes private rooms on the server
+   (decided by the owner on 2026-11-16).** Hidden means not reachable: no
+   rooms listing holds a private room, none can be created, and an existing
+   one, its folders and its files are refused by id, with their download,
+   their opening in the editors, their members and their keys. The routes
+   of a user's own key pair stay open, because the Keys management tab
+   stays for a key holder (main `key-management`, "Keys management tab
+   follows the Private section"). Nothing is deleted, so switching the app
+   on brings everything back. Alternative: close the listings and the
+   creation only and leave the direct access. Rejected by the owner: a
+   switch that leaves the rooms open at their addresses does not switch
+   the feature off.
 
 ## Risks / Trade-offs
 
@@ -174,11 +295,21 @@ with `common/`.
   private-room specs on the mirrored mock before anything is removed.
 - [The reason of a refusal lands under another name than the client
   expects] → Task 3.1 reads the merged server before it touches the client.
+- [A user is turned into a guest by mistake and loses the keys for good] →
+  Accepted with decision 6: the files stay readable to the other members,
+  and the user is invited again after a new key. The server cannot keep the
+  pair aside, since only its holder can open it.
+- [An administrator switches the app off while members work in a private
+  room] → Accepted with decision 7: their requests are refused from then
+  on, and nothing stored is lost. What happens to an editing session that
+  is open at that moment is not asked here and is for the backend team to
+  state when it takes 2.5.
 - [The tasks age while the server moves] → Each Backend task names its
   symbol, not a line; the lines above are a snapshot of `a7d94e4b81`.
 
 ## Open Questions
 
-- Keys of a user turned into a guest: the review of 2026-11-11 reported
-  that nothing removes the stored key pair when a user becomes a guest, so
-  such a guest would pass the key check. Not re-read here; task 1.5 asks.
+- Guests who were users before task 1.6 lands keep the key pair, the file
+  keys and the private rooms they had. Whether the server clears them once,
+  with the change or by a migration, is for the backend team to say when it
+  takes 1.6.

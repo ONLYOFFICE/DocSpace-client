@@ -31,9 +31,11 @@ keeps describing the server as it is until the work lands.
   filter and form gallery on the file, AI on the room; the version comment
   of an encrypted file is refused with them.
 - The private section root is titled in the user's language.
-- A question to the backend, with no behaviour asked yet: which routes the
-  switched-off E2E rooms app closes, and what happens to the keys of a user
-  turned into a guest.
+- A user turned into a guest loses the membership of every private room,
+  the file keys of those rooms and the stored key pair.
+- The switched-off E2E rooms app closes private rooms on the server:
+  they are in no rooms listing, cannot be created and cannot be reached by
+  id; only the routes of a user's own key pair stay open.
 - Client tasks that follow each merge: the mocks, their contract cases and
   the refusal message.
 
@@ -54,7 +56,13 @@ Out of scope:
 
 Decisions that need a human:
 
-1. Backend team: the answers of tasks 2.4 and 1.5.
+None open.
+
+Decided by the owner on 2026-11-16: a user turned into a guest has the
+private-room access revoked and the keys deleted (task 1.6), and the
+switched-off E2E rooms app closes private rooms on the server, the direct
+access to an existing room included (task 2.5). The questions of tasks 1.5
+and 2.4 were answered by reading the server that day.
 
 Decided by the owner on 2026-11-11: the comment and review rights stay
 granted on an encrypted file, since commenting and reviewing happen inside

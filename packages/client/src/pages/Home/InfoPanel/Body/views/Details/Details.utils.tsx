@@ -53,7 +53,6 @@ import type { TAiProjectSettings } from "@docspace/shared/api/ai/projects";
 import { RoomsType, VectorizationStatus } from "@docspace/shared/enums";
 import {
   getSkillNameByTitle,
-  isSkillFile,
   toSkillCommand,
 } from "@docspace/shared/utils/skillFile";
 
@@ -130,6 +129,8 @@ type DetailsHelperProps = {
   isAdmin: boolean;
   isArchiveFolder: boolean;
   roomLifetime: TRoomLifetime;
+  /** The item is a skill of a skill set, shown as one. */
+  isSkill?: boolean;
   /** The title of the skill set a selected skill is in, when it is the open one. */
   skillSetTitle?: string;
   /** The skill's name as its file states it; the title gives it otherwise. */
@@ -159,6 +160,8 @@ class DetailsHelper {
 
   roomLifetime: TRoomLifetime;
 
+  isSkill: boolean;
+
   skillSetTitle?: string;
 
   skillName?: string;
@@ -176,6 +179,7 @@ class DetailsHelper {
     this.isAdmin = props.isAdmin;
     this.isArchiveFolder = props.isArchiveFolder;
     this.roomLifetime = props.roomLifetime;
+    this.isSkill = !!props.isSkill;
     this.skillSetTitle = props.skillSetTitle;
     this.skillName = props.skillName;
     this.knowledgeStatus = props.knowledgeStatus;
@@ -197,7 +201,7 @@ class DetailsHelper {
 
     // A skill is shown as a skill, not as the Markdown file that holds it:
     // the set it is in and the command that calls it, no type or size.
-    if (isSkillFile(this.item as TFile))
+    if (this.isSkill)
       return [
         this.skillSetTitle && "Skill set",
         "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",

@@ -63,7 +63,10 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
-import { isSkillFile } from "@docspace/shared/utils/skillFile";
+import {
+  isSkillFile,
+  type TSkillFolder,
+} from "@docspace/shared/utils/skillFile";
 import type SkillsStore from "SRC_DIR/store/SkillsStore";
 import type KnowledgeBasesStore from "SRC_DIR/store/KnowledgeBasesStore";
 import { getKnowledgeBaseStatus } from "SRC_DIR/store/KnowledgeBasesStore";
@@ -103,8 +106,8 @@ type DetailsProps = {
 
   roomLifetime?: TRoomLifetime;
 
-  /** The open skill set: its title and id, for a skill selected in it. */
-  skillSet?: { id: number | string; title: string } | null;
+  /** The open folder: a skill is told by it, and named after it when it is a skill set. */
+  openFolder?: TSkillFolder & { title: string };
   getSkill?: SkillsStore["get"];
   fetchSkill?: SkillsStore["fetch"];
   setEditSkillFile?: DialogsStore["setEditSkillFile"];
@@ -129,7 +132,7 @@ const Details = ({
   onChangeFile,
   roomLifetime,
   onCreateRoomFromTemplate,
-  skillSet,
+  openFolder,
   getSkill,
   fetchSkill,
   setEditSkillFile,
@@ -150,14 +153,16 @@ const Details = ({
   const onThumbnailError = () => setIsThumbmailError(true);
 
   // A skill is described by its file's text, which the skills store reads.
-  const skillFile = isSkillFile(selection as TFile)
+  const skillFile = isSkillFile(selection as TFile, openFolder)
     ? (selection as TFile)
     : null;
   const skill = skillFile ? (getSkill?.(skillFile) ?? null) : null;
   const skillName = skill?.name;
   const skillSetTitle =
-    skillFile && skillSet && skillSet.id === skillFile.folderId
-      ? skillSet.title
+    skillFile &&
+    openFolder?.roomType === RoomsType.InstructionsRoom &&
+    String(openFolder.id) === String(skillFile.folderId)
+      ? openFolder.title
       : undefined;
 
   useEffect(() => {
@@ -477,16 +482,13 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-    const isSkillSetOpen =
-      selectedFolderStore.roomType === RoomsType.InstructionsRoom;
-
     return {
-      skillSet:
-        isSkillSetOpen && selectedFolderStore.id !== null
-          ? { id: selectedFolderStore.id, title: selectedFolderStore.title }
-          : null,
-      getKnowledgeBase: knowledgeBasesStore.get,
-      fetchKnowledgeBase: knowledgeBasesStore.fetch,
+      openFolder: {
+        id: selectedFolderStore.id,
+        roomType: selectedFolderStore.roomType,
+        parentRoomType: selectedFolderStore.parentRoomType,
+        title: selectedFolderStore.title,
+      },
       getSkill: skillsStore.get,
       fetchSkill: skillsStore.fetch,
       setEditSkillFile: dialogsStore.setEditSkillFile,

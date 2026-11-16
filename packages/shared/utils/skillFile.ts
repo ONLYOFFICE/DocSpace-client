@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FolderType } from "../enums";
+import { FolderType, RoomsType } from "../enums";
 
 /**
  * A skill is a Markdown file of an Instructions room (a skill set): a
@@ -80,13 +80,38 @@ export const getSkillNameByTitle = (title: string): string =>
 /** What the user types in the chat to call the skill. */
 export const toSkillCommand = (name: string): string => `/${name}`;
 
-/** A file of an Instructions room that the chat reads as a skill. */
-export const isSkillFile = (item: {
-  fileExst?: string;
+/** The folder the list is open on, as far as telling a skill needs it. */
+export type TSkillFolder = {
+  id?: number | string | null;
+  roomType?: RoomsType | null;
   parentRoomType?: FolderType | null;
-}): boolean =>
-  item.fileExst?.toLowerCase() === SKILL_EXTENSION &&
-  item.parentRoomType === FolderType.InstructionsRoom;
+};
+
+/**
+ * A file of an Instructions room that the chat reads as a skill. The file
+ * says what room it is in only when the server sends it so; a file listed
+ * in the open folder is also told by that folder being a skill set.
+ */
+export const isSkillFile = (
+  item: {
+    fileExst?: string;
+    folderId?: number | string;
+    parentRoomType?: FolderType | null;
+  },
+  openFolder?: TSkillFolder | null,
+): boolean => {
+  if (item.fileExst?.toLowerCase() !== SKILL_EXTENSION) return false;
+  if (item.parentRoomType === FolderType.InstructionsRoom) return true;
+  if (!openFolder) return false;
+  const isSkillSet =
+    openFolder.roomType === RoomsType.InstructionsRoom ||
+    openFolder.parentRoomType === FolderType.InstructionsRoom;
+  return (
+    isSkillSet &&
+    item.folderId !== undefined &&
+    String(item.folderId) === String(openFolder.id)
+  );
+};
 
 const unquote = (value: string): string => {
   const trimmed = value.trim();

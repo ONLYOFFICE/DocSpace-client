@@ -528,7 +528,11 @@ export const buildContextOptions = (
     }
 
     // A skill is edited as a skill by those who may edit and rename its file.
-    if (!isSkillFile(item) || !canRenameItem || !item.security?.Edit) {
+    if (
+      !isSkillFile(item, deps.selectedFolderStore) ||
+      !canRenameItem ||
+      !item.security?.Edit
+    ) {
       fileOptions = removeOptions(fileOptions, ["edit-skill"]);
     }
 

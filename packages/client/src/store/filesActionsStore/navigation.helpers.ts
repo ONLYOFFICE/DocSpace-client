@@ -71,6 +71,7 @@ import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { isMarkdownFile } from "SRC_DIR/helpers/plugins/markdown";
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
 import { CategoryType } from "@docspace/shared/constants";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -602,6 +603,15 @@ self: FilesActionStore,
   } else {
     if (isFrame && frameConfig?.events?.onFileManagerClick) {
       frameCallEvent({ event: "onFileManagerClick", data: item });
+      return;
+    }
+
+    // A skill opens as a skill, not as the Markdown file that holds it: the
+    // "Edit skill" dialog for those who may change it, its instructions
+    // alone for the others.
+    if (isSkillFile(item, self.selectedFolderStore)) {
+      const canEdit = !!item.security?.Edit && !!item.security?.Rename;
+      self.dialogsStore.setEditSkillFile(item as unknown as TFile, !canEdit);
       return;
     }
 

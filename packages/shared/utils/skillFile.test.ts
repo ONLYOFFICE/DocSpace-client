@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { FolderType } from "../enums";
+import { FolderType, RoomsType } from "../enums";
 import {
   buildSkillFile,
   getSkillNameByTitle,
@@ -24,6 +24,17 @@ describe("skill files", () => {
     expect(isSkillFile(skill)).toBe(true);
     expect(isSkillFile({ ...skill, fileExst: ".docx" })).toBe(false);
     expect(isSkillFile({ ...skill, parentRoomType: FolderType.KnowledgeRoom })).toBe(false);
+  });
+
+  it("knows a skill listed in the open skill set when the file names no room", () => {
+    const file = { fileExst: ".md", folderId: 12 };
+    const skillSet = { id: 12, roomType: RoomsType.InstructionsRoom };
+    expect(isSkillFile(file)).toBe(false);
+    expect(isSkillFile(file, skillSet)).toBe(true);
+    expect(isSkillFile(file, { id: "12", parentRoomType: FolderType.InstructionsRoom })).toBe(true);
+    expect(isSkillFile({ ...file, folderId: 13 }, skillSet)).toBe(false);
+    expect(isSkillFile(file, { id: 12, roomType: RoomsType.CustomRoom })).toBe(false);
+    expect(isSkillFile({ ...file, fileExst: ".docx" }, skillSet)).toBe(false);
   });
 
   it("reads the name, the description and the instructions", () => {

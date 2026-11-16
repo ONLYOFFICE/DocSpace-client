@@ -71,7 +71,7 @@ export const readThreadFiles = async (
 ): Promise<TThreadFiles> => {
   const [artifacts, attachments] = await Promise.allSettled([
     getAiThreadArtifacts(projectId, threadId),
-    getAiThreadAttachments(threadId),
+    getAiThreadAttachments(projectId, threadId),
   ]);
   if (artifacts.status === "rejected" && attachments.status === "rejected")
     throw artifacts.reason;
@@ -201,7 +201,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
         "attachments",
         t("Common:AiAttachments"),
         files.attachments,
-        false,
+        true,
       )}
     </div>
   );

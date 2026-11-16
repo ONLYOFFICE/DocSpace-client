@@ -54,7 +54,7 @@ describe("AiAgentContent", () => {
     render(<AiAgentContent projectId={7} />);
     await flush();
     expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-1");
-    expect(api.getAiThreadAttachments).toHaveBeenCalledWith("t-1");
+    expect(api.getAiThreadAttachments).toHaveBeenCalledWith(7, "t-1");
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
     expect(titles("ai-agent-content-attachments")).toEqual(["Agreement.docx", "Notes.jpg"]);
   });

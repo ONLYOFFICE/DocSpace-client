@@ -35,39 +35,38 @@
 
 import { request } from "../client";
 import type { TFile } from "../files/types";
-import { authFetch } from "./index";
 
 /**
- * The files of one conversation with an agent. What its replies produced
- * (the artifacts) is kept in the conversation's own folder inside the agent
- * and listed by the Files service. What the user attached is listed by the
- * AI service from the conversation's messages: an attachment is a file
- * wherever it already is. Both answer files as the Files service describes
- * them, and only for the conversation's author.
+ * The files of one conversation with an agent, which keeps them in two
+ * folders of its own inside the agent: what its replies produced (the
+ * artifacts) and what the user sent with the messages (the attachments).
+ * The Files service lists both, as files, and only for the conversation's
+ * author. A list is empty until the conversation has such a file.
  */
 
-/** The artifacts of a conversation, the newest first; empty while it has produced none. */
+const threadFilesUrl = (
+  projectId: number,
+  threadId: string,
+  kind: "artifacts" | "attachments",
+) =>
+  `/files/rooms/${projectId}/threads/${threadId}/${kind}?sortBy=DateAndTime&sortOrder=descending`;
+
+/** The artifacts of a conversation, the newest first. */
 export const getAiThreadArtifacts = async (
   projectId: number,
   threadId: string,
 ) =>
   ((await request({
     method: "GET",
-    url: `/files/rooms/${projectId}/threads/${threadId}/artifacts?sortBy=DateAndTime&sortOrder=descending`,
+    url: threadFilesUrl(projectId, threadId, "artifacts"),
   })) ?? []) as TFile[];
 
-/** The files the user attached in a conversation, in the order they were first attached. */
-export const getAiThreadAttachments = async (threadId: string) => {
-  const response = await authFetch(
-    `/api/2.0/ai/threads/attachments?threadId=${encodeURIComponent(threadId)}`,
-  );
-  const body = await response.json().catch(() => null);
-
-  if (!response.ok) {
-    throw Object.assign(new Error(body?.error ?? response.statusText), {
-      status: response.status,
-    });
-  }
-
-  return (Array.isArray(body) ? body : []) as TFile[];
-};
+/** The files the user attached in a conversation, the newest first. */
+export const getAiThreadAttachments = async (
+  projectId: number,
+  threadId: string,
+) =>
+  ((await request({
+    method: "GET",
+    url: threadFilesUrl(projectId, threadId, "attachments"),
+  })) ?? []) as TFile[];

@@ -59,7 +59,8 @@ The change MUST NOT be applied until all of the following hold:
      (`private-rooms-server-hardening` decision 1; the server added none
      and the portal setting of prerequisite 8 is the availability control
      of this change);
-   - if the launch scope is B2B: recovery and offboarding as well.
+   - if the launch scope is B2B: recovery and offboarding as well; since
+     2026-11-16 the recovery is `private-rooms-admin-recovery`, archived.
 5. External penetration test performed on the crypto core and the private
    room flows, with the summary published (stashed task #69).
 6. Accessibility pass on the key dialogs and the private-room panels.

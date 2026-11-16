@@ -731,6 +731,41 @@ Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.
   section root and the reason of a refusal are tasks of
   `private-rooms-server-followups`.
 
+### Read on 2026-11-16 (`6fb6dfb17a`): a public or form-filling room created as private
+
+This corrects the reads of 2026-11-06 above, which say that nothing at
+creation refuses these rooms and that their link is made on the first read.
+
+- `FileStorageService.CreateRoomAsync` (`Core/Core/FileStorageService.cs`,
+  line 667) refuses the private flag for the AI hub room types only (lines
+  674-678) and passes a public or a form-filling room on to
+  `InternalCreateFolderAsync`, which checks the creator's keys and the
+  Document Server (`DemandPrivateRoomCanBeCreatedAsync`, line 1223) and
+  saves the room with the private setting (line 1249).
+- The private wrapper `CreateRoomAsync<T>` (line 1079) then sends the
+  room-created audit event and the `RoomCreated` webhook and, for a public
+  and a form-filling room outside the templates, sets the primary external
+  link at once (`SetExternalLinkAsync`, lines 1107-1114).
+- That link is refused: `FileSharingAceHelper.SetAceObjectAsync`
+  (`Core/Utils/FileSharing.cs`, lines 107-113) throws a `SecurityException`
+  for a link with an access in a private room, the refusal of decision 12.
+  The creation request therefore answers 403. No code removes the room
+  saved before, and the socket event of the creation is not sent.
+- The server test `CreateRoom_PrivateUnsupportedType_Forbidden`
+  (`Tests/Tests/08_Private/PrivateRoomCreateTests.cs`, line 91, last changed
+  on 2026-08-21) expects 403 for both room types and passes on it. It does
+  not read the rooms afterwards, so it does not see the stored one. This is
+  what the backend note of 2026-11-06 calls "are refused".
+- The result is a private room of the public or the form-filling type
+  without a link, recorded as created in the audit trail, whose creator got
+  an error. A private form-filling room made this way is the one the Forms
+  area lists (`private-rooms-server-followups` 2.1). The later read of the
+  link (`GetPrimaryExternalLinkAsync`, line 4465) is refused the same way.
+- Read from the code; the request was not sent to a server.
+- Asked in task 12.8, decided by the owner on 2026-11-16: the refusal
+  moves in front of the save and answers 400, the status of the other
+  refusals of a room type (the AI hub types, the third-party storage).
+
 ## Goals / Non-Goals
 
 **Goals:**

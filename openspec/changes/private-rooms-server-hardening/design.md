@@ -777,9 +777,10 @@ creation refuses these rooms and that their link is made on the first read.
   keys, the key pair and the shares of the user stay, and a private room
   the user owns stays theirs. This agrees with the reply of 2026-11-05
   ("deactivating a user revokes no keys").
-- A deactivated user cannot sign in, and the share change refuses to give
-  access to one (`FileSharing.cs`, line 141); what stays is the stored
-  file keys, which are back in use the moment the user is activated again.
+- A deactivated user cannot sign in, and a share change that would give
+  one access passes over the entry without an error (`FileSharing.cs`,
+  line 141); what stays is the stored file keys, which are back in use the
+  moment the user is activated again.
 - The deletion of a user is different: `DeletePersonalDataAsync`
   (`Core/Core/FileStorageService.cs`, line 3973) removes the user's file
   keys (`IFileDao.DeleteFileKeysAsync` for a user), and the removal of the

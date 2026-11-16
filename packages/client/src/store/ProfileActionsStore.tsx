@@ -48,6 +48,7 @@ import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import AppsGridReactSvgUrl from "PUBLIC_DIR/images/icons/16/apps-grid.react.svg?url";
+import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
 
 import type {
   ComponentType,
@@ -84,6 +85,10 @@ import {
   getPersistedString,
   setPersistedString,
 } from "./utils/persistence";
+import {
+  groupProfilePluginItems,
+  placeProfilePluginItems,
+} from "./utils/profileMenu";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
@@ -676,23 +681,46 @@ class ProfileActionsStore {
       });
     }
 
-    if (this.pluginStore.profileMenuItemsList && enablePlugins) {
-      actions.unshift(
-        ...this.pluginStore.profileMenuItemsList.map((option) => ({
-          key: option.key,
-          // The Omit<> cast is type-only: at runtime the spread still carries
-          // option.value.key which overwrites option.key, exactly as before
-          // (it silences TS2783 "key is specified more than once").
-          ...(option.value as Omit<IProfileMenuItemClient, "key">),
-        })),
-      );
-    }
+    const pluginActions: TProfileAction[] =
+      this.pluginStore.profileMenuItemsList && enablePlugins
+        ? this.pluginStore.profileMenuItemsList.map((option) => ({
+            key: option.key,
+            // The Omit<> cast is type-only: at runtime the spread still carries
+            // option.value.key which overwrites option.key, exactly as before
+            // (it silences TS2783 "key is specified more than once").
+            ...(option.value as Omit<IProfileMenuItemClient, "key">),
+          }))
+        : [];
 
     // the returned items carry extra DropDownItem-only fields
     // (additionalElement, isButton, isPortal) and `items` may be null, which
     // ContextMenuType does not model — the cast preserves the old JS contract
     // expected by ArticleProfileProps.getActions.
-    return actions.filter(Boolean) as ContextMenuModel[];
+    const pluginBlock = groupProfilePluginItems(pluginActions, (items) => ({
+      key: "user-menu-plugins",
+      icon: DotsHorizontalUrl,
+      label: t("Common:MoreOptions"),
+      items,
+    }));
+
+    return placeProfilePluginItems(
+      actions.filter((action): action is TProfileAction => !!action),
+      pluginBlock,
+      [
+        { key: "separator-plugins", isSeparator: true },
+        { key: "separator-after-plugins", isSeparator: true },
+      ],
+      {
+        beforeKeys: [
+          "user-menu-live-chat",
+          "user-menu-support",
+          "user-menu-suggest-feature",
+          "user-menu-book-training",
+          "user-menu-about",
+        ],
+        endKey: "user-menu-logout",
+      },
+    ) as ContextMenuModel[];
   };
 
   checkUrlActions = () => {

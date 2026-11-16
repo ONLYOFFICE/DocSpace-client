@@ -89,6 +89,31 @@ test.describe("Profile Menu Sample Plugin", () => {
     await expect(accountInfoItem).toBeVisible();
     await expect(quickHelpItem).toBeVisible();
 
+    const menuOrder = await page.evaluate((ids) => {
+      const found = [...document.querySelectorAll("[data-testid]")]
+        .map((element) => element.getAttribute("data-testid"))
+        .filter((id): id is string => !!id && ids.includes(id));
+
+      return [...new Set(found)];
+    }, [
+      "user-menu-profile",
+      "user-menu-hotkeys",
+      "profile-menu-sample-account-info",
+      "profile-menu-sample-quick-help",
+      "user-menu-support",
+      "user-menu-logout",
+    ]);
+
+    // Plugin items get a block of their own, above the chat and support block.
+    expect(menuOrder).toEqual([
+      "user-menu-profile",
+      "user-menu-hotkeys",
+      "profile-menu-sample-account-info",
+      "profile-menu-sample-quick-help",
+      "user-menu-support",
+      "user-menu-logout",
+    ]);
+
     await expectScreenshot(page, [
       "desktop",
       "plugins-profile-menu",

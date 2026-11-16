@@ -77,6 +77,14 @@ const TABLE_AI_ROOMS_COLUMNS = `aiRoomsTableColumns_ver-${TableVersions.AiRooms}
 const TABLE_SKILL_SETS_COLUMNS = `skillSetsTableColumns_ver-${TableVersions.SkillSets}`;
 const COLUMNS_SKILL_SETS_SIZE = `skillSetsColumnsSize_ver-${TableVersions.SkillSets}`;
 const COLUMNS_SKILL_SETS_SIZE_INFO_PANEL = `skillSetsColumnsSizeInfoPanel_ver-${TableVersions.SkillSets}`;
+// The Knowledge bases list: the rooms of one type, without type or tags.
+const TABLE_KNOWLEDGE_BASES_COLUMNS = `knowledgeBasesTableColumns_ver-${TableVersions.KnowledgeBases}`;
+const COLUMNS_KNOWLEDGE_BASES_SIZE = `knowledgeBasesColumnsSize_ver-${TableVersions.KnowledgeBases}`;
+const COLUMNS_KNOWLEDGE_BASES_SIZE_INFO_PANEL = `knowledgeBasesColumnsSizeInfoPanel_ver-${TableVersions.KnowledgeBases}`;
+// An open knowledge base lists its files by size, who added them and when.
+const TABLE_KNOWLEDGE_FILES_COLUMNS = `knowledgeFilesTableColumns_ver-${TableVersions.KnowledgeFiles}`;
+const COLUMNS_KNOWLEDGE_FILES_SIZE = `knowledgeFilesColumnsSize_ver-${TableVersions.KnowledgeFiles}`;
+const COLUMNS_KNOWLEDGE_FILES_SIZE_INFO_PANEL = `knowledgeFilesColumnsSizeInfoPanel_ver-${TableVersions.KnowledgeFiles}`;
 // An open skill set lists skills, not files: its own columns and sizes.
 const TABLE_SKILLS_COLUMNS = `skillsTableColumns_ver-${TableVersions.Skills}`;
 const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
@@ -266,6 +274,16 @@ class TableStore {
   ownerSkillSetsColumnIsEnabled = true;
 
   activitySkillSetsColumnIsEnabled = true;
+
+  ownerKnowledgeBasesColumnIsEnabled = true;
+
+  activityKnowledgeBasesColumnIsEnabled = true;
+
+  sizeKnowledgeFileColumnIsEnabled = true;
+
+  authorKnowledgeFileColumnIsEnabled = true;
+
+  createdKnowledgeFileColumnIsEnabled = true;
 
   descriptionSkillColumnIsEnabled = true;
 
@@ -505,15 +523,53 @@ class TableStore {
     );
   }
 
-  /** The Skill sets list of the AI section: the rooms list narrowed to the Instructions rooms. */
-  get isSkillSetsList() {
-    if (!this.treeFoldersStore.isAiSectionFolder) return false;
+  /** The one room type the AI section's list is narrowed to; `null` elsewhere. */
+  private get aiSectionListType() {
+    if (!this.treeFoldersStore.isAiSectionFolder) return null;
     const type = this.filesStore?.roomsFilter.type;
     const types = Array.isArray(type) ? type : type ? [type] : [];
+    return types.length === 1 ? Number(types[0]) : null;
+  }
+
+  /** The Skill sets list of the AI section: the rooms list narrowed to the Instructions rooms. */
+  get isSkillSetsList() {
+    return this.aiSectionListType === RoomsType.InstructionsRoom;
+  }
+
+  /** The Knowledge bases list of the AI section: the rooms list narrowed to the Knowledge rooms. */
+  get isKnowledgeBasesList() {
+    return this.aiSectionListType === RoomsType.KnowledgeRoom;
+  }
+
+  /** An open knowledge base: the table lists its files by size, who added them and when. */
+  get isKnowledgeBase() {
+    const { roomType, parentRoomType } = this.selectedFolderStore;
     return (
-      types.length === 1 && Number(types[0]) === RoomsType.InstructionsRoom
+      !this.treeFoldersStore.isAiSectionFolder &&
+      (roomType === RoomsType.KnowledgeRoom ||
+        parentRoomType === FolderType.KnowledgeRoom)
     );
   }
+
+  setOwnerKnowledgeBasesColumn = (enable: boolean) => {
+    this.ownerKnowledgeBasesColumnIsEnabled = enable;
+  };
+
+  setActivityKnowledgeBasesColumn = (enable: boolean) => {
+    this.activityKnowledgeBasesColumnIsEnabled = enable;
+  };
+
+  setSizeKnowledgeFileColumn = (enable: boolean) => {
+    this.sizeKnowledgeFileColumnIsEnabled = enable;
+  };
+
+  setAuthorKnowledgeFileColumn = (enable: boolean) => {
+    this.authorKnowledgeFileColumnIsEnabled = enable;
+  };
+
+  setCreatedKnowledgeFileColumn = (enable: boolean) => {
+    this.createdKnowledgeFileColumnIsEnabled = enable;
+  };
 
   setSkillsSkillSetsColumn = (enable: boolean) => {
     this.skillsSkillSetsColumnIsEnabled = enable;
@@ -623,6 +679,16 @@ class TableStore {
         return;
       }
 
+      if (this.isKnowledgeBasesList) {
+        this.setOwnerKnowledgeBasesColumn(
+          splitColumns.includes("OwnerKnowledgeBases"),
+        );
+        this.setActivityKnowledgeBasesColumn(
+          splitColumns.includes("ActivityKnowledgeBases"),
+        );
+        return;
+      }
+
       if (isRooms) {
         this.setRoomColumnType(splitColumns.includes("Type"));
         this.setRoomColumnTags(splitColumns.includes("Tags"));
@@ -700,6 +766,19 @@ class TableStore {
         return;
       }
 
+      if (this.isKnowledgeBase) {
+        this.setSizeKnowledgeFileColumn(
+          splitColumns.includes("SizeKnowledgeFile"),
+        );
+        this.setAuthorKnowledgeFileColumn(
+          splitColumns.includes("AuthorKnowledgeFile"),
+        );
+        this.setCreatedKnowledgeFileColumn(
+          splitColumns.includes("CreatedKnowledgeFile"),
+        );
+        return;
+      }
+
       if (this.isSkillSet) {
         this.setDescriptionSkillColumn(
           splitColumns.includes("DescriptionSkill"),
@@ -752,6 +831,29 @@ class TableStore {
         return;
       case "ActivitySkillSets":
         this.setActivitySkillSetsColumn(!this.activitySkillSetsColumnIsEnabled);
+        return;
+      case "OwnerKnowledgeBases":
+        this.setOwnerKnowledgeBasesColumn(
+          !this.ownerKnowledgeBasesColumnIsEnabled,
+        );
+        return;
+      case "ActivityKnowledgeBases":
+        this.setActivityKnowledgeBasesColumn(
+          !this.activityKnowledgeBasesColumnIsEnabled,
+        );
+        return;
+      case "SizeKnowledgeFile":
+        this.setSizeKnowledgeFileColumn(!this.sizeKnowledgeFileColumnIsEnabled);
+        return;
+      case "AuthorKnowledgeFile":
+        this.setAuthorKnowledgeFileColumn(
+          !this.authorKnowledgeFileColumnIsEnabled,
+        );
+        return;
+      case "CreatedKnowledgeFile":
+        this.setCreatedKnowledgeFileColumn(
+          !this.createdKnowledgeFileColumnIsEnabled,
+        );
         return;
       case "DescriptionSkill":
         this.setDescriptionSkillColumn(!this.descriptionSkillColumnIsEnabled);
@@ -1045,6 +1147,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
+    else if (this.isKnowledgeBasesList)
+      tableStorageName = `${TABLE_KNOWLEDGE_BASES_COLUMNS}=${userId}`;
     else if (this.isSkillSetsList)
       tableStorageName = `${TABLE_SKILL_SETS_COLUMNS}=${userId}`;
     else if (isAiSectionFolder)
@@ -1068,6 +1172,8 @@ class TableStore {
       tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
     else if (isInSharedFolder)
       tableStorageName = `${TABLE_IN_SHARED_FOLDER_COLUMNS}=${userId}`;
+    else if (this.isKnowledgeBase)
+      tableStorageName = `${TABLE_KNOWLEDGE_FILES_COLUMNS}=${userId}`;
     else if (this.isSkillSet)
       tableStorageName = `${TABLE_SKILLS_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
@@ -1122,6 +1228,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
+    else if (this.isKnowledgeBasesList)
+      columnStorageName = `${COLUMNS_KNOWLEDGE_BASES_SIZE}=${userId}`;
     else if (this.isSkillSetsList)
       columnStorageName = `${COLUMNS_SKILL_SETS_SIZE}=${userId}`;
     else if (isAiSectionFolder)
@@ -1133,6 +1241,8 @@ class TableStore {
       columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
     else if (isFavoritesFolder)
       columnStorageName = `${COLUMNS_FAVORITES_SIZE}=${userId}`;
+    else if (this.isKnowledgeBase)
+      columnStorageName = `${COLUMNS_KNOWLEDGE_FILES_SIZE}=${userId}`;
     else if (this.isSkillSet)
       columnStorageName = `${COLUMNS_SKILLS_SIZE}=${userId}`;
     else if (isIndexedFolder)
@@ -1199,6 +1309,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;
+    else if (this.isKnowledgeBasesList)
+      columnInfoPanelStorageName = `${COLUMNS_KNOWLEDGE_BASES_SIZE_INFO_PANEL}=${userId}`;
     else if (this.isSkillSetsList)
       columnInfoPanelStorageName = `${COLUMNS_SKILL_SETS_SIZE_INFO_PANEL}=${userId}`;
     else if (isAiSectionFolder)
@@ -1211,6 +1323,8 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
     else if (isFavoritesFolder)
       columnInfoPanelStorageName = `${COLUMNS_FAVORITES_SIZE_INFO_PANEL}=${userId}`;
+    else if (this.isKnowledgeBase)
+      columnInfoPanelStorageName = `${COLUMNS_KNOWLEDGE_FILES_SIZE_INFO_PANEL}=${userId}`;
     else if (this.isSkillSet)
       columnInfoPanelStorageName = `${COLUMNS_SKILLS_SIZE_INFO_PANEL}=${userId}`;
     else if (isIndexedFolder)

@@ -114,3 +114,12 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+
+// A file of a knowledge base that could not be indexed.
+.indexingError {
+  margin-top: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--toast-error-bg);
+  color: var(--toastr-title-error-color);
+}

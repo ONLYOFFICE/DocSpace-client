@@ -102,6 +102,7 @@ import OAuthStore from "./OAuthStore";
 import DocsConnectStore from "./DocsConnectStore";
 import AiPresetsStore from "./AiPresetsStore";
 import SkillsStore from "./SkillsStore";
+import KnowledgeBasesStore from "./KnowledgeBasesStore";
 import AiProjectsStore from "./AiProjectsStore";
 import AppsStore from "./AppsStore";
 
@@ -114,6 +115,7 @@ import TelegramStore from "./TelegramStore";
 
 const aiPresetsStore = new AiPresetsStore();
 const skillsStore = new SkillsStore();
+const knowledgeBasesStore = new KnowledgeBasesStore();
 
 const aiProjectsStore = new AiProjectsStore(aiPresetsStore, userStore);
 
@@ -492,6 +494,7 @@ const store = {
 
   aiPresetsStore,
   skillsStore,
+  knowledgeBasesStore,
   aiProjectsStore,
   appsStore,
   aiSettingsStore,

@@ -41,7 +41,11 @@ import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { FileType, RoomsType } from "@docspace/shared/enums";
+import {
+  FileType,
+  RoomsType,
+  VectorizationStatus,
+} from "@docspace/shared/enums";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
@@ -61,6 +65,8 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
 import { isSkillFile } from "@docspace/shared/utils/skillFile";
 import type SkillsStore from "SRC_DIR/store/SkillsStore";
+import type KnowledgeBasesStore from "SRC_DIR/store/KnowledgeBasesStore";
+import { getKnowledgeBaseStatus } from "SRC_DIR/store/KnowledgeBasesStore";
 
 import { FormInfo } from "./sub-components/FormInfo";
 import { SkillSetInfo } from "./sub-components/SkillSetInfo";
@@ -102,6 +108,9 @@ type DetailsProps = {
   getSkill?: SkillsStore["get"];
   fetchSkill?: SkillsStore["fetch"];
   setEditSkillFile?: DialogsStore["setEditSkillFile"];
+
+  getKnowledgeBase?: KnowledgeBasesStore["get"];
+  fetchKnowledgeBase?: KnowledgeBasesStore["fetch"];
 };
 
 const Details = ({
@@ -124,6 +133,8 @@ const Details = ({
   getSkill,
   fetchSkill,
   setEditSkillFile,
+  getKnowledgeBase,
+  fetchKnowledgeBase,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -153,6 +164,42 @@ const Details = ({
     if (skillFile) fetchSkill?.(skillFile);
   }, [skillFile, fetchSkill]);
 
+  // How far a knowledge base is indexed is in its files: they are read
+  // again each time the base is selected, since indexing ends on its own.
+  const knowledgeBaseId =
+    "isRoom" in selection &&
+    selection.isRoom &&
+    selection.roomType === RoomsType.KnowledgeRoom
+      ? selection.id
+      : null;
+  const knowledgeBaseFilesCount =
+    knowledgeBaseId !== null && "filesCount" in selection
+      ? selection.filesCount
+      : undefined;
+  const knowledgeStatus =
+    knowledgeBaseId !== null
+      ? getKnowledgeBaseStatus(
+          getKnowledgeBase?.({
+            id: knowledgeBaseId,
+            filesCount: knowledgeBaseFilesCount,
+          }) ?? null,
+        )
+      : null;
+
+  useEffect(() => {
+    if (knowledgeBaseId !== null)
+      fetchKnowledgeBase?.(
+        { id: knowledgeBaseId, filesCount: knowledgeBaseFilesCount },
+        true,
+      );
+  }, [knowledgeBaseId, knowledgeBaseFilesCount, fetchKnowledgeBase]);
+
+  // A file of a knowledge base that could not be indexed says so first.
+  const isIndexingFailed =
+    !("isRoom" in selection && selection.isRoom) &&
+    (selection as { vectorizationStatus?: VectorizationStatus | null })
+      .vectorizationStatus === VectorizationStatus.Failed;
+
   const detailsHelper = new DetailsHelper({
     isCollaborator: isCollaborator!,
     isVisitor: isVisitor!,
@@ -166,6 +213,7 @@ const Details = ({
     roomLifetime: roomLifetime!,
     skillSetTitle,
     skillName,
+    knowledgeStatus,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -188,7 +236,7 @@ const Details = ({
       // erased cast preserves that no-op behavior.
       await createThumbnail?.(selection.id as unknown as TFile);
     }
-  }, [selection, skillName, skillSetTitle]);
+  }, [selection, skillName, skillSetTitle, knowledgeStatus]);
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChangeFile?.(e, t);
@@ -339,6 +387,17 @@ const Details = ({
           />
         </div>
       )}
+      {isIndexingFailed ? (
+        <Text
+          as="div"
+          fontSize="13px"
+          lineHeight="20px"
+          className={styles.indexingError}
+          dataTestId="info_panel_details_indexing_error"
+        >
+          {t("Common:PreparationForAIFailedInfo")}
+        </Text>
+      ) : null}
       {skill?.description ? (
         <>
           <div className={commonStyles.subtitle}>
@@ -401,6 +460,7 @@ export default inject(
     avatarEditorDialogStore,
     selectedFolderStore,
     skillsStore,
+    knowledgeBasesStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -425,6 +485,8 @@ export default inject(
         isSkillSetOpen && selectedFolderStore.id !== null
           ? { id: selectedFolderStore.id, title: selectedFolderStore.title }
           : null,
+      getKnowledgeBase: knowledgeBasesStore.get,
+      fetchKnowledgeBase: knowledgeBasesStore.fetch,
       getSkill: skillsStore.get,
       fetchSkill: skillsStore.fetch,
       setEditSkillFile: dialogsStore.setEditSkillFile,

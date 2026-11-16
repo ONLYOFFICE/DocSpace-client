@@ -54,4 +54,27 @@ describe("TableStore: skill sets", () => {
     expect(open.descriptionSkillColumnIsEnabled).toBe(false);
     expect(open.modifiedSkillColumnIsEnabled).toBe(true);
   });
+
+  it("keeps the columns of the Knowledge bases list and of an open base apart", () => {
+    const list = create({ isAiSectionFolder: true, type: [String(RoomsType.KnowledgeRoom)] });
+    expect(list.isKnowledgeBasesList).toBe(true);
+    expect(list.isSkillSetsList).toBe(false);
+    expect(list.tableStorageName).toContain("knowledgeBasesTableColumns");
+    expect(list.columnStorageName).toContain("knowledgeBasesColumnsSize");
+    list.setColumnEnable("OwnerKnowledgeBases");
+    expect(list.ownerKnowledgeBasesColumnIsEnabled).toBe(false);
+
+    const open = create({ roomType: RoomsType.KnowledgeRoom });
+    expect(open.isKnowledgeBase).toBe(true);
+    expect(open.isKnowledgeBasesList).toBe(false);
+    expect(open.isSkillSet).toBe(false);
+    expect(open.tableStorageName).toContain("knowledgeFilesTableColumns");
+    expect(open.columnInfoPanelStorageName).toContain("knowledgeFilesColumnsSizeInfoPanel");
+    open.setColumnEnable("SizeKnowledgeFile");
+    expect(open.sizeKnowledgeFileColumnIsEnabled).toBe(false);
+    expect(open.createdKnowledgeFileColumnIsEnabled).toBe(true);
+
+    const inFolder = create({ parentRoomType: FolderType.KnowledgeRoom });
+    expect(inFolder.isKnowledgeBase).toBe(true);
+  });
 });

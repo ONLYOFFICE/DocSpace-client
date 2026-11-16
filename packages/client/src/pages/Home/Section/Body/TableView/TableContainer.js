@@ -77,6 +77,8 @@ const Table = ({
   isIndexing,
   isSkillSet,
   isSkillSetsList,
+  isKnowledgeBasesList,
+  isKnowledgeBase,
   selectedFolderTitle,
   canCreateSecurity,
   setDropTargetPreview,
@@ -154,6 +156,8 @@ const Table = ({
         isIndexing={isIndexing}
         isSkillSet={isSkillSet}
         isSkillSetsList={isSkillSetsList}
+        isKnowledgeBasesList={isKnowledgeBasesList}
+        isKnowledgeBase={isKnowledgeBase}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
@@ -191,6 +195,8 @@ const Table = ({
     isIndexing,
     isSkillSet,
     isSkillSetsList,
+    isKnowledgeBasesList,
+    isKnowledgeBase,
     disableDrag,
   ]);
 
@@ -312,6 +318,8 @@ export default inject(
       isIndexing: isIndexedFolder,
       isSkillSet: tableStore.isSkillSet,
       isSkillSetsList: tableStore.isSkillSetsList,
+      isKnowledgeBasesList: tableStore.isKnowledgeBasesList,
+      isKnowledgeBase: tableStore.isKnowledgeBase,
       isTemplatesFolder,
       columnStorageName,
       columnInfoPanelStorageName,

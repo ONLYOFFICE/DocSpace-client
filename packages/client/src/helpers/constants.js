@@ -88,6 +88,10 @@ export const TableVersions = Object.freeze({
   AiRooms: "1",
   // The Skill sets list: Name, Skills, Owner, Last modified.
   SkillSets: "1",
+  // The Knowledge bases list: Name, Owner, Last modified.
+  KnowledgeBases: "1",
+  // The files of an open knowledge base: Name, Size, Added by, Added.
+  KnowledgeFiles: "1",
   // The skills of an open skill set: Name, Description, Last modified.
   Skills: "1",
 });

@@ -85,6 +85,12 @@ export type CreateRoomHandlerOptions = {
  */
 const AI_HUB_ROOM_TYPES = [10, 11, 12];
 
+/**
+ * The room types the server creates with a primary external link: RoomType
+ * .FillingFormsRoom (1) and .PublicRoom (6) of CreateRoomRequestDto.cs.
+ */
+const LINKED_ROOM_TYPES = [1, 6];
+
 const okResponse = <T>(response: T, status = 200): Response =>
   new Response(
     JSON.stringify({ response, status: 0, statusCode: status }),
@@ -159,8 +165,11 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
    * 400 "Bad request." indexing, or a lifetime or watermark whose
    * `enabled` is not false, an object without the flag counting as
    * enabled. A public or form-filling room created as private is stored
-   * like any other: nothing at creation refuses it, its primary link is
-   * made lazily on the first read and refused there.
+   * like any other, and then refused: the wrapper CreateRoomAsync<T> sets
+   * the primary external link of such a room at once, FileSharingAceHelper
+   * .SetAceObjectAsync throws a SecurityException for a link in a private
+   * room, and the CustomExceptionHandler answers 403 "Access denied".
+   * Nothing removes the room stored before the link.
    */
   const create = http.post(url, async ({ request }) => {
     const body = (await request.json()) as CreateRoomBody;
@@ -200,6 +209,10 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
       createdAt: new Date().toISOString(),
     };
     state.push(record);
+
+    if (record.private && LINKED_ROOM_TYPES.includes(Number(body.roomType))) {
+      return errorResponse(403, "Access denied");
+    }
 
     return okResponse(buildRoomResponse(record));
   });

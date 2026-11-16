@@ -984,6 +984,40 @@ Read from the release stand without signing in, on
   and the presentation after a new save, and a second member in a held
   session.
 
+### Run of 2026-11-16 on the local stack, the stable address (task 6.8)
+
+Local stack: the client of `release/v4.1.0` with task 6.7, the server
+answering build 3.1.0, Document Server 10.0.2.5 with the crypto add-on.
+Signed in as the portal owner, the owner of the private room, with the key
+unlocked in the browser.
+
+- **Server answers.** A docx of a private room at version 1 answered the
+  same document key for editing and for viewing. After one line typed and
+  Ctrl+S the file was at version 2 ("Edited with encrypt; Saved");
+  `openedit` for editing answered the key of version 1 with an address
+  without a version, `openedit?version=1&view=true` that key with
+  `version=1` in the address, and `openedit?version=2&view=true` and
+  `openedit?view=true` another key. After a second save, version 3, the
+  key for editing was still the one of version 1, and versions 2 and 3
+  had keys of their own.
+- **With the lookup of 6.7.** The editor closed and the file opened again
+  for editing: it opened in the editing mode with the saved line shown
+  once and no error. The browser fetched
+  `filehandler.ashx?action=stream&fileid=…&version=1&stream_auth=…`, so the
+  editor reads the address of the page's configuration, not the one
+  inside the token. After the second save the reopen showed both phrases
+  once, again from `version=1`.
+- **Control without the lookup.** With the call switched off in the
+  running client and nothing else changed, the same file at version 2
+  answered "Something went wrong. An error has occurred while opening the
+  file", the console logging Document Server error code -82; the browser
+  had fetched the address without a version. Switched on again, the next
+  opening worked.
+- **Not run.** A member who is not the owner, a reopen after another
+  member's save, a spreadsheet, a presentation and a PDF, a session that
+  has ended, and the release stand with its Document Server build. Task
+  6.8 stays open for them.
+
 ## Goals / Non-Goals
 
 **Goals:**

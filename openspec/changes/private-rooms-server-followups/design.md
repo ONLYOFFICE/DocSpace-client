@@ -160,18 +160,53 @@ Read at `6fb6dfb17a` on 2026-11-16, which answers task 1.5.
   (`GetKeyPairForRoomCandidatesAsync`, line 313), so the invite panel gets
   no public key for the guest and cannot wrap the file keys; the request
   sent without the panel is not stopped.
-- Code: a private room the user owned passes to the new owner through
-  `ChangeOwnerAsync` (`Core/Core/FileStorageService.cs`, line 5510), which
-  demands the new owner's keys and gives the previous owner a content
-  creator share. The user turned into a guest therefore stays a member of
-  the rooms the user owned. `ChangeRoomsOwnerAsync` does not ask for the
-  check of the new owner's file keys (`demandFileKeys` is left false). What
-  the type change does when the new owner has no keys was not traced.
+- Code, corrected on 2026-11-16 by a second read: the private rooms the
+  user owns do not pass to anybody. `ChangeRoomsOwnerAsync`
+  (`Core/Core/FileStorageService.cs`, line 3804) collects the rooms with
+  `GetFolderItemsAsync` under the rooms root, whose search area is the
+  default, the Rooms area, and that area lists rooms that are not private
+  and not form-filling (`FileSecurity.cs`, lines 2988-2993,
+  `SearchArea.Active => RoomPrivacyFilter.NotPrivate`; the split of
+  `SearchAreaExtensions.MatchesRoom`). So a user turned into a guest stays
+  the owner of the user's private rooms, and of the form-filling ones. The
+  first read of this section assumed they pass through `ChangeOwnerAsync`
+  and leave the old owner a content creator share; that holds for the rooms
+  the listing returns only. For those, `ChangeOwnerAsync` (line 5510)
+  demands the new owner's keys when a room is private and is called without
+  the check of the new owner's file keys (`demandFileKeys` left false).
 - The removal of a share already removes the wrapped file keys of the user
   (`FileSharingAceHelper.RevokeFileKeysAsync`, `Core/Utils/FileSharing.cs`,
   line 670; `private-rooms-server-hardening`, design decision 22), so task
   1.6 needs no new revocation.
 - Not run on the stand.
+
+### Read on 2026-11-16 (`6fb6dfb17a`): three behaviours without a task
+
+- **An invitation of several people stops at the first without a key.**
+  `FileSharingAceHelper.SetAceObjectAsync` (`Core/Utils/FileSharing.cs`)
+  goes through the entries one by one, groups first (line 131). The key
+  check throws at line 275 and the share of an entry is written at line
+  413, inside the same loop, so the entries before the one without a key
+  are already stored when the request answers 403, and the ones after it
+  are not looked at. No transaction was found in the helper; the caller
+  (`FileStorageService.SetAceObjectAsync`) was not read for one. The
+  invite panel leaves out an invitee without a key before it sends
+  (`private-rooms/room-membership`), so the panel does not reach this; a
+  request sent without it does.
+- **A private room and its folders can be marked as favourites.**
+  `FileStorageService.AddToFavoritesAsync` (line 4254) leaves encrypted
+  files out (`!file.Encrypted`) and takes every folder the caller may read,
+  a private room and a folder of one included.
+- **Trash.** An encrypted file of a room is deleted for good
+  (`FileDao.UseTrashForRemove`, `Core/Core/Dao/TeamlabDao/FileDao.cs`,
+  line 1971). A folder is not moved to Trash when it carries the private
+  setting (`FolderDao.UseTrashForRemoveAsync`, line 1723), and a folder
+  created in a private room is given the setting of its parent
+  (`InternalCreateFolderAsync`, line 1249). Whether a folder below the room
+  root holds the setting when it is read back was not traced, so the
+  observation of 2026-11-06 in `private-rooms-server-hardening` ("a
+  subfolder of a private room still goes to Trash") is neither confirmed
+  nor withdrawn; it needs a run on a stand.
 
 ### Not confirmed
 

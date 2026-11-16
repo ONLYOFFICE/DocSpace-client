@@ -14,7 +14,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Gate
 
-- [ ] 3.1 Run `pnpm exec tsc` in client and sdk, `biome lint` on the two spec files and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: clean runs recorded here with the date
+- [x] 3.1 Run `pnpm exec tsc` in client and sdk, `biome lint` on the two spec files and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: clean runs recorded here with the date
+  - 2026-11-16: `pnpm exec tsc` clean in client and sdk, `biome lint` clean on the two spec files, `openspec validate --all --strict` 22 of 22.
 
 ## Workflow follow-up
 

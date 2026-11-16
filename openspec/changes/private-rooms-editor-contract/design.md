@@ -946,6 +946,32 @@ without a new run.
   to the package of 2026-10-30, and "Minimum Document Server" in
   `contract-v1.md` is empty.
 
+### Release stand check of 2026-11-16
+
+Read from the stand `tests.onlyoffice.io` without signing in, on
+2026-11-16.
+
+- **Builds.** `GET api/2.0/settings/version/build` answers DocSpace
+  `4.1.0.12428` and Document Server `10.0.3.40`; the check of 2026-11-10
+  saw `4.1.0.12351` and `10.0.3.19`. The Document Server of the stand is
+  `https://doc-eu.onlyoffice.io/` (`GET api/2.0/files/docservice`, whose
+  `version` field came empty for a caller who is not signed in). Its
+  `healthcheck` answers `true`, and its `info/info.json` now answers 200
+  to anybody with `serverInfo.buildVersion` `10.0.3`, `buildNumber` 40 and
+  the date of 2026-11-16; on 2026-10-30 that address answered from
+  loopback only. Nothing in it names the crypto library.
+- **Crypto library (task 1.2).** `sdkjs/common/crypto/onlyoffice-crypto.js`
+  answers 200 with 223841 bytes and the SHA-256
+  `58cb7f487f764d029c0a50a101b63c1c1f43f0bed973cfcbcf18490115184c07`,
+  last modified on 2026-11-02, with no version banner on its first line:
+  the build 2.0.0 of `contract-v1.md`, the same as on 2026-11-10. The new
+  Document Server build did not bring a newer library, so the form flag of
+  a PDF form over a save is expected to behave as recorded then.
+- **Not checked.** The reopening of a saved document (task 6.2), the AI
+  tools tab (`private-rooms-server-hardening` 16.1) and
+  `docServiceEncryptionSupported` of `GET files/settings` (task 2.6) need
+  a signed-in session; `files/settings` answers 401 without one.
+
 ## Goals / Non-Goals
 
 **Goals:**

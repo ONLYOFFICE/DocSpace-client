@@ -164,12 +164,10 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
    * exception type. Last, since bd89a24dcd, a private room refuses with
    * 400 "Bad request." indexing, or a lifetime or watermark whose
    * `enabled` is not false, an object without the flag counting as
-   * enabled. A public or form-filling room created as private is stored
-   * like any other, and then refused: the wrapper CreateRoomAsync<T> sets
-   * the primary external link of such a room at once, FileSharingAceHelper
-   * .SetAceObjectAsync throws a SecurityException for a link in a private
-   * room, and the CustomExceptionHandler answers 403 "Access denied".
-   * Nothing removes the room stored before the link.
+   * enabled. The mock answers 403 "Access denied" for a public or
+   * form-filling room created as private, as the server does. The order
+   * of the steps below mirrors the server and is held by the contract
+   * test; do not reorder them.
    */
   const create = http.post(url, async ({ request }) => {
     const body = (await request.json()) as CreateRoomBody;

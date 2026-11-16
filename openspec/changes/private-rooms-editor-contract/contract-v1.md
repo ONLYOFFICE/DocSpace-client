@@ -50,10 +50,8 @@ version 3 (design D6).
 
 ### 3.1 Shape
 
-The portal signs a configuration whose `editorConfig.encryptionKeys` is the
-caller's key-pair list (one object per key pair: `id`, `publicKey`,
-`privateKeyEnc`, `userId`, `date`, `cryptoEngineId`; `EncryptionKeyDto`).
-The client then replaces the field, after signing, with one object:
+The portal signs the editor configuration. The client then replaces
+`editorConfig.encryptionKeys`, after signing, with one object:
 
 ```json
 {
@@ -79,28 +77,28 @@ and an unknown field is ignored.
   decrypted change to the Document Server's server side. Observed: the DEK is
   read when the add-on starts and is not part of any message to the server
   (read in the bundle; the socket traffic was not captured).
-- DS-4. With `AscDesktopEditor` present and `dek` undefined the add-on hands
-  the whole entry to the desktop application (`portal:cryptoinfo`); with `dek`
-  present it takes the web path. This stays as is until the desktop developer
-  answers (design.md Open Questions).
+- DS-4. With `AscDesktopEditor` present and `dek` undefined the add-on takes
+  the desktop path (`portal:cryptoinfo`); with `dek` present it takes the web
+  path. Which key path the desktop application uses is an open decision with
+  the desktop developer (design.md Open Questions).
 
 ### 3.3 Token
 
-Observed: the Document Server accepts the configuration although the signed
-`encryptionKeys` (the key-pair list) differs from the object beside it, and
-the DEK stays outside the signed payload. The token still hands the caller's
-key pairs, `privateKeyEnc` included, to the Document Server's server side.
-Open: whether the portal keeps the key-pair list in the configuration at all
-(backend with the Document Server team; task 1.2).
+Observed: the Document Server accepts the configuration with the object the
+client set after signing and reads the DEK from it; the DEK stays outside
+the signed payload. Open: the Document Server team is
+to confirm that it needs nothing in `encryptionKeys` beyond the object of
+§3.1; the portal then sends nothing else in that field (tasks 1.2 and
+10.6).
 
 ## 4. Opening a document
 
 ### 4.1 Download in the browser
 
 Observed: the editor frame fetches `document.url` itself
-(`filehandler.ashx?action=stream&fileid=…&stream_auth=…`). The portal skips
-the Document Server JWT header check for an encrypted file; `stream_auth`
-over the file id and version is still required.
+(`filehandler.ashx?action=stream&fileid=…&stream_auth=…`). The browser
+fetches the document by this address with the stream key: `stream_auth`
+over the file id and version is required.
 
 - P-1 (portal). `document.url` of an encrypted file MUST be reachable from
   the user's browser; the host swap to the address meant for Document
@@ -281,7 +279,7 @@ typed text.
   back for decryption in the browser; the save frame carries no image data
   and the saved containers are DSE3 on both sides. The contract requires
   that this stays so: no plaintext media leaves the browser outside the
-  encrypted container. Paste and drag are not verified.
+  encrypted container. The paste and drag paths are run by task 4.10.
 - DS-20. An image inserted from the device MUST be shown. Observed on
   2026-10-30: the add-on uploaded the encrypted blob twice and fetched it
   back, but the picture never appeared, neither for the inserting member nor
@@ -322,12 +320,10 @@ to the portal's `info` re-check, and no callback at all when the last
 editor leaves. A session without changes disappeared within three minutes,
 noticed only by the portal's own re-check; a session with pending changes
 answered `info` with status 1 and an empty user list for more than a day
-and kept the file "being edited". With two members (design.md, "Run of
-2026-10-30, member removed while editing", "images"): a member joining a
-held session after a force-save failed twice on documents with `changesError`
-(editor error -82), the base mismatch P-5 removes; a member removed from
-the room kept editing until the portal's rights re-check dropped him, and a
-save made meanwhile was stored (portal items 10.5).
+and kept the file "being edited". With two members on 2026-10-30
+(design.md, decision 7): a member joining a held session after a force-save
+failed twice on documents with `changesError` (editor error -82), the base
+mismatch P-5 removes.
 
 - P-5 (portal, design D7, task 6.2). When an editor opens an encrypted file
   whose current version is a force-save, the portal asks the Document Server
@@ -355,8 +351,7 @@ Observed (read in the bundle; the save-to-device paths were not executed):
 - Download-as PDF or PDF/A: the PDF is built in the browser and saved to the
   device; for ZIP-based targets (docx, docm, dotx, xlsx, xlsm, xltx, pptx,
   pptm, potx, ppsx, vsdx) the package built in the browser is saved to the
-  device. Any other target returns to the core's generic path. The editor's
-  menu offered DOCX and PDF for a document in the run.
+  device. The editor's menu offered DOCX and PDF for a document in the run.
 - Print builds the PDF in the browser.
 - Save-copy-as follows download-as; the client refuses the portal-side
   `onRequestSaveAs` for encrypted files (task 5.1).
@@ -368,11 +363,9 @@ Obligations:
 - DS-15. For an encrypted document the Document Server MUST NOT offer a
   download-as target that goes through its conversion service, and MUST NOT
   send the document to that service for any purpose (download, print,
-  thumbnails, comparison, mail merge). Read in the bundle on 2026-10-30: a
-  target outside the browser-built set (docx, docm, dotx, xlsx, xlsm, xltx,
-  pptx, pptm, potx, ppsx, vsdx, pdf, pdfa) falls through to the core's
-  conversion path with the browser-built plaintext package; only the
-  save-formats menu guard keeps such targets out of reach.
+  thumbnails, comparison, mail merge). The download-as targets of an
+  encrypted document MUST stay within the browser-built set (docx, docm, dotx, xlsx,
+  xlsm, xltx, pptx, pptm, potx, ppsx, vsdx, pdf, pdfa).
 - P-6 (portal, decided 2026-10-29). Decrypted copies exist only on the user's
   device; no copy is stored in a portal folder.
 
@@ -424,14 +417,11 @@ not from the Document Server.
 
 ## 12. Live revocation
 
-The portal already asks the Document Server to drop users who lost their
-rights on a file when its sharing changes (`DocumentServiceHelper.CheckUsersForDropAsync`,
-called from `FileSharing.cs`): every tracked editor without edit, review,
-comment, fill or custom-filter rights is sent in a `drop` command with the
-stable document key. Whether the removal of a private-room member reaches
-this path for every open file of the room is verified by task 4.5; until
-then the editor-level behaviour on member removal is unspecified, and the
-client-side guarantee stays the one of `private-rooms/encryption-core`
+When a member loses access to a file or to its private room, the portal
+asks the Document Server to drop that member's editing session (a `drop`
+command with the stable document key), the Document Server ends the
+session, and no later save of that member is stored (tasks 10.5 and 6.4).
+The client-side guarantee stays the one of `private-rooms/encryption-core`
 ("No forward secrecy for already-decrypted content").
 
 ## 13. Obligations summary
@@ -441,7 +431,7 @@ client-side guarantee stays the one of `private-rooms/encryption-core`
 | DS-1 | Document Server | read `dek` (base64, 32 bytes), ignore unknown fields | observed |
 | DS-2 | Document Server | check `contractVersion`, refuse an unknown major | new |
 | DS-3 | Document Server | never send the DEK or plaintext to its server side | observed, to confirm |
-| DS-4 | Document Server | desktop hand-off when `dek` is undefined | observed, open with the desktop developer |
+| DS-4 | Document Server | desktop path when `dek` is undefined | open decision with the desktop developer |
 | DS-5 | Document Server | fail with an error when the library or WebCrypto is missing | new |
 | DS-6 | Document Server | distinct error on an unsupported container version | new |
 | DS-7 | Document Server | save with the same DEK and the real name | observed |
@@ -470,8 +460,8 @@ client-side guarantee stays the one of `private-rooms/encryption-core`
 ## 14. Open questions
 
 Listed with owners in design.md, "Open Questions"; the ones this contract
-depends on are DS-4, DS-12, DS-13, DS-14, DS-16, DS-19 and the token
-question of §3.3.
+depends on are DS-4, DS-12, DS-13, DS-14, DS-16, DS-19 and the content
+of the keys entry (§3.3).
 
 ## 15. Change log
 

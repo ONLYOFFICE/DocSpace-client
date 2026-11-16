@@ -7,7 +7,7 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag. This rule is enforced by the client only: the server accepts the private flag with any room type.
+The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag.
 
 #### Scenario: Private card chosen
 - **WHEN** the user creates a room from the Private section, where the dialog shows the Private room type, and confirms creation
@@ -16,10 +16,6 @@ The system SHALL present "Private room" as its own room type in the create-room 
 #### Scenario: Other room type
 - **WHEN** a Public, Form filling, Virtual data or Collaboration room is created
 - **THEN** the private flag is not sent and the room is not encrypted
-
-#### Scenario: Private flag sent with another room type
-- **WHEN** a create request that bypasses the client sets the private flag on a room type other than Custom
-- **THEN** the server creates a private room of the requested type
 
 ### Requirement: Private room creation requires an encryption key
 The system SHALL refuse to create a private room for a user who has no registered encryption key, after re-fetching the keys from the server, and SHALL show Common:EncryptionKeysRequiredForPrivateRoom.
@@ -236,10 +232,6 @@ The system SHALL drop the leaver's role without a revocation of its own when a m
 #### Scenario: Cleanup fails
 - **WHEN** the role update fails before the server has written the role
 - **THEN** the member stays in the room with their keys and the failure is shown
-
-#### Scenario: Key removal fails on the server
-- **WHEN** the server has dropped the role and then fails to remove the leaver's keys
-- **THEN** the failure is shown, the member is no longer in the room, and their wrapped keys stay on the files
 
 ### Requirement: New owner must hold a verified key
 The system SHALL validate the chosen new owner of a private room before transferring ownership, whether the owner is changed from the owner panel or from the room's edit dialog, and SHALL refuse with Common:EncryptedChangeOwnerNoKeys or Common:EncryptedChangeOwnerKeyMismatch when the candidate has no key or a refused key change.

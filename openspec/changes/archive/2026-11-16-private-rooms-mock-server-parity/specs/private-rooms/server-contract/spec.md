@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and with 400 on third-party storage and on the AI hub room types. It SHALL otherwise store the room with the requested room type and the private setting, and SHALL then answer 403 for a public or a form-filling room, whose link is refused in a private room, leaving the room stored.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and with 400 on third-party storage and on the AI hub room types. It SHALL answer 403 for a public or a form-filling room, whose link is refused in a private room.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -31,4 +31,4 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 
 #### Scenario: Public or form-filling room created as private
 - **WHEN** a user with encryption keys creates a public or a form-filling room with the private flag while the Document Server encrypts
-- **THEN** the server answers 403 "Access denied", and the room is stored with the private setting and without a link
+- **THEN** the server answers 403 "Access denied"

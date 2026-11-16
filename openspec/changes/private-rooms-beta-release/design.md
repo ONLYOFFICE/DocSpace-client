@@ -127,12 +127,11 @@ place:
     merged on the server on 2026-11-04 (`3b9c527a6e`), so the notes now name
     the server build that carries it instead of warning every user.
 11. **The Archive keeps the non-private filter while the app is off.** The
-    server leaves private rooms out of the Rooms area by itself, but the
-    shared Archive holds both kinds and takes the filter as given ("Rooms
-    list while the app is off"). The owner decided on 2026-11-11 to send the
-    non-private filter with Rooms → Archive whether the section is available
-    or not, in task 4.5, rather than wait for the listing task of
-    `private-rooms-server-section`, so "listed nowhere" holds now.
+    server leaves private rooms out of the Rooms area by itself, and the
+    shared Archive holds both kinds ("Rooms list while the app is off").
+    The owner decided on 2026-11-11 to send the non-private filter with
+    Rooms → Archive whether the section is available or not, in task 4.5,
+    so private rooms are listed nowhere while the app is off.
 
 ## Risks / Trade-offs
 
@@ -170,7 +169,7 @@ place:
 ## Rooms list while the app is off (read 2026-11-11 at `a7d94e4b81`)
 
 Read through CodeGraph and in the source of `../server`, and checked on
-`tests.onlyoffice.io` the same day (DocSpace 4.1.0.12366).
+the release stand the same day (DocSpace 4.1.0.12366).
 
 - `VirtualRoomsCommonController.GetRoomsFolder` reads a missing search area
   as `Active` (`products/ASC.Files/Server/Api/VirtualRoomsController.cs:1494`).
@@ -183,17 +182,13 @@ Read through CodeGraph and in the source of `../server`, and checked on
   (`products/ASC.Files/Core/Core/VirtualRooms/SearchArea.cs:90-99`) splits
   the rooms the same way, and
   `PrivateRoomSectionTests.RoomsArea_LeavesPrivateRoomsOut` covers it.
-- The E2E rooms app takes no part in the listing: it closes only the root
-  listing and the section route (`private-rooms/server-contract`, "The E2E
-  rooms app gates only the private section listing").
 - On the stand `searchArea=Active` answered 95 rooms and no private one,
   and the same area with the private filter answered the two private rooms
   of the portal. The portal had no archived private room, so the Archive
   half is read in the source only.
 
-So with the app off the Rooms list shows no private room without any
-filter, while Rooms → Archive, asked without a filter, would still list
-archived private rooms (decision 11).
+So the Rooms list shows no private room without any filter, and the client
+sends the non-private filter with Rooms → Archive (decision 11).
 
 ## Open Questions
 
@@ -215,24 +210,22 @@ DocSpace server 3.1.0, Document Server 10.0.2.5 (not the build of gate item
   you have found a bug"); fixed in the shared BetaBadge (`2c2564cffcd`). The
   support address was empty on this stand.
 - The administrator switched the Private app off in the apps settings: the
-  Private section went without a reload, the private room "Pirate room" was
-  listed in Rooms with its private badge, and the Keys management tab and
+  Private section went without a reload, and the Keys management tab and
   page stayed, also after a full load of `/profile/keys-management`. The app
   was switched back on afterwards. Since the server's Private section
   (`c866c055e1`, 2026-11-06) the Rooms list leaves private rooms out, and the
   owner decided the same day to hide them while the section is not available
-  (`private-rooms-server-section`, proposal decision 5): with the app off a
-  private room is reached by its address only.
+  (`private-rooms-server-section`, proposal decision 5).
 
 ## Release stand check (2026-11-06, SaaS, part of task 6.2)
 
-The owner's SaaS stand `tests.onlyoffice.io`: DocSpace `4.1.0.12300`
-(`standalone: false`), Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`,
+The owner's SaaS release stand: DocSpace `4.1.0.12300`
+(`standalone: false`), Document Server `10.0.3.19` at the stand's Document Server host,
 the user the portal owner, holding one key. Read through the API and the
 browser, no data changed:
 
 - `GET files/settings` answers `docServiceEncryptionSupported: true`, and
-  `doc-eu.onlyoffice.io/sdkjs/common/crypto/onlyoffice-crypto.js` is served
+  `the stand's Document Server host/sdkjs/common/crypto/onlyoffice-crypto.js` is served
   (HPKE 1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3
   constants), so gate item 0.1 is met for SaaS: the release's Document
   Server carries the add-on and reads container version 2, as the client
@@ -262,8 +255,7 @@ browser, no data changed:
   private room becomes unopenable while the Document Server holds its
   session. Details in that change's design.md, "Release stand check of
   2026-11-06".
-- With a second user holding a key ("User Test", `fenran@yandex.ru`, a
-  user of the User type, key created by the owner at 12:38), the member
+- With a second user holding a key (a user of the User type, key created by the owner at 12:38), the member
   flows from the owner's side, each checked through the API after the UI:
   - an invitee without a key (a User-type account) is refused before the
     grant: the invite result shows Common:EncryptedUploadNotSharedWith-style
@@ -314,9 +306,9 @@ browser, no data changed:
   owner, the download that decrypts, the reopen of the saved document)
   is the owner's to check in the member's browser.
 - A deep link to a private room without its `/filter` segment
-  (`/private/9064440`) was rewritten by the client to
+  (`/private/<room id>`) was rewritten by the client to
   `/private/undefined/filter?...` and showed the Private list instead of
-  the room. `/rooms/shared/5735991` does the same
+  the room. `/rooms/shared/<room id>` does the same
   (`/rooms/shared/undefined/filter?...`), so it is the client's handling
   of a bare room address in every section, not a private-rooms matter;
   the addresses the client builds carry `/filter`.

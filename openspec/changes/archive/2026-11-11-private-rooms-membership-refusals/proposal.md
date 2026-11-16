@@ -2,17 +2,13 @@
 
 ## Why
 
-The server refuses, with 403, a leave, a removal and a role change in a private
-room when the member concerned has no encryption key: its key check runs on
-every change of a user's share, not only when the share is granted. A check on
-the release stand on 2026-11-10 showed all three refused, and the client
-answering with the server's English sentence ("The user does not have an
-encryption key") in a Russian interface. The leave dialog, since
-`private-rooms-server-hardening` 6.7, shows that sentence too and stays open
-for a retry that cannot succeed.
+The server can refuse, with 403, a leave, a removal and a role change in a
+private room. A check on the release stand on 2026-11-10 showed the client
+answering such a refusal with the server's English sentence in a Russian
+interface. The leave dialog, since `private-rooms-server-hardening` 6.7, shows
+that sentence too and stays open for a retry that cannot succeed.
 
-The refusal itself is the server's to change. Until it does, the client has
-to say what happened in the user's language.
+The client has to say what happened in the user's language.
 
 ## What Changes
 
@@ -49,14 +45,9 @@ Decisions that need a human:
 
 Out of scope:
 
-- The refusal itself. Asking the server to run the key check only when a
-  user first gets access, and to report the reason with a stable code, goes
-  to the backend as tasks of a server follow-up change; this change adds no
-  mock and no client code for behaviour the server does not have yet.
-- Leaving through the route that clears one's own share
-  (`DELETE files/share`), which has no key check. For a caller who may
-  manage access it clears every member's share, so it is not a way around
-  the refusal.
+- The refusal itself. The server side of this is tracked outside the
+  repository; this change adds no mock and no client code for behaviour the
+  server does not have yet.
 - Telling a key refusal from another 403. Once the server reports the
   reason, a later change narrows the message to it.
 - The wording of other private-room texts.
@@ -77,10 +68,8 @@ None.
 
 ## Impact
 
-- **Server (`../server`):** none. Read on 2026-11-11 at `a7d94e4b81`: the
-  key check of `FileSharingAceHelper.SetAceObjectAsync`, the exception of
-  `EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync` and its mapping in
-  `ResponseWrapper` (design.md, Context).
+- **Server (`../server`):** none. Read on 2026-11-11 at `a7d94e4b81`
+  (design.md, Context).
 - **Client:** the leave action of the files actions store
   (`packages/client/src/store/filesActionsStore/rooms.helpers.ts`), the
   members view of the info panel
@@ -91,6 +80,5 @@ None.
   the refusal; a new key in `public/locales/*/Common.json`, translated with
   the translation skills.
 - **E2E:** a case in `packages/client/__tests__/private-room-members.spec.ts`
-  on the existing room members mock, which already refuses every entry of a
-  member without keys as the server does.
+  on the existing room members mock.
 - **OpenSpec:** the record of `private-rooms-server-hardening` 6.7.

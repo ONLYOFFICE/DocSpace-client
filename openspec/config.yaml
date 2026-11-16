@@ -75,8 +75,10 @@ context: |
   design, task, delta or main spec, not in release notes, a mock comment, a
   test name or a commit message, and with no route, request, reproduction
   or consequence. This holds for the client, for ../server and for the
-  Document Server alike, and for a defect that is already fixed on a branch
-  but not yet released. Tell the user about it in the conversation; where
+  Document Server alike. A defect counts while a released version has it or
+  the next release will ship with it; one that was found and fixed before
+  any release carried it is described like any other fixed bug. Tell the
+  user about an open one in the conversation; where
   the details are kept is the owner's decision, never this repository. A
   task that asks for such a fix says what the behaviour shall be and how it
   is accepted, in neutral words, without saying what goes wrong today. A

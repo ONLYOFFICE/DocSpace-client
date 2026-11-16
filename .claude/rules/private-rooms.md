@@ -104,8 +104,10 @@ Workflow:
     any committed file before the fixing version is released: no spec,
     design, task, release note, mock comment, test name or commit message
     describes it, its route or its consequence. This covers the client,
-    `../server` and the Document Server, and a defect fixed on a branch but
-    not released. Tell the user in the conversation instead; the owner
+    `../server` and the Document Server. A defect counts while a released
+    version has it or the next release will ship with it; one fixed before
+    any release carried it is written up like any other fixed bug. Tell
+    the user about an open one in the conversation instead; the owner
     decides where the details are kept. A task for such a fix says what
     the behaviour shall be and how it is accepted, nothing about what goes
     wrong today. A deliberate limit of the design, written as SHALL NOT in

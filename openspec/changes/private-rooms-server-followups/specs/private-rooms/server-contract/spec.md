@@ -146,3 +146,39 @@ The server SHALL report on a file of an active private room, to the room's owner
 #### Scenario: AI right on a private room
 - **WHEN** the owner lists a private room
 - **THEN** the room reports CanUseAi as false
+
+### Requirement: The E2E rooms app gates private rooms
+The server SHALL serve private rooms only while the E2E rooms app of the portal is on. While the app is off, `GET files/@private` answers 404, the root folders request leaves the Private root out, no rooms listing holds a private room whatever area or filter it names, the creation of a private room is refused, and a request that names an existing private room, a folder or a file of it by id is refused: its content, its download, its opening in the editors, its members and share changes, and the keys of the room and of its files. The routes of the caller's own encryption key pair SHALL NOT depend on the app. Switching the app off SHALL NOT delete anything: with the app on again the rooms, their files, their members and their keys are as they were.
+
+#### Scenario: App off, section requested
+- **WHEN** the E2E rooms app is off and a client requests `GET files/@private`
+- **THEN** the server answers 404
+
+#### Scenario: App off, root folders
+- **WHEN** the E2E rooms app is off and a client requests the root folders
+- **THEN** the response has no Private root
+
+#### Scenario: App off, rooms listing
+- **WHEN** the E2E rooms app is off and a member with keys lists rooms with the private rooms area or the private filter
+- **THEN** the answer holds no private room
+
+#### Scenario: App off, private room created
+- **WHEN** the E2E rooms app is off and a user with keys creates a private room
+- **THEN** the server refuses and creates nothing
+
+#### Scenario: App off, private room requested by id
+- **WHEN** the E2E rooms app is off and a member requests a private room, a folder or a file of it by id, downloads an encrypted file, opens it in the editors or reads the keys of the room or of the file
+- **THEN** the server refuses and answers with nothing of the room
+
+#### Scenario: App off, other private-room routes
+- **WHEN** the E2E rooms app is off and a user who holds a key reads, replaces or deletes the user's own key pair
+- **THEN** the server handles the request as while the app is on
+
+#### Scenario: App switched on again
+- **WHEN** the E2E rooms app is switched on after it was off
+- **THEN** every private room, its files, its members and its keys are served as before the app was switched off
+
+## RENAMED Requirements
+
+- FROM: `### Requirement: The E2E rooms app gates only the private section listing`
+- TO: `### Requirement: The E2E rooms app gates private rooms`

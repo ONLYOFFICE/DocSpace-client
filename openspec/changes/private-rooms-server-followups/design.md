@@ -123,6 +123,11 @@ with `common/`.
   listing then (`private-rooms-beta-release` 4.5), but an address that
   carries the private filter itself is passed on and answered with private
   rooms.
+- Read again at `6fb6dfb17a` on 2026-11-16, which answers task 2.4: the
+  guard (now at line 1126) has the same two callers, lines 1116 and 1165,
+  and no other code asks the app. A private room, its folders and its
+  files are served by id with the app off, as the main spec requirement
+  "The E2E rooms app gates only the private section listing" records.
 
 ### User turned into a guest
 
@@ -202,10 +207,11 @@ Read at `6fb6dfb17a` on 2026-11-16, which answers task 1.5.
    editor permissions for work inside the encrypted document, which the
    server does not need to read. The other granted rights name operations
    the client withholds.
-4. **Questions are tasks too.** The routes behind the app switch need an
-   answer before a behaviour can be asked; the task is done when the answer
-   is recorded here with its date. The keys of a user turned into a guest
-   were such a question until 2026-11-16 (decision 6).
+4. **Questions are tasks too.** A behaviour is asked only after the
+   server has been read or the backend team has answered; the task is done
+   when the answer is recorded here with its date. The keys of a user
+   turned into a guest and the routes behind the app switch were such
+   questions until 2026-11-16 (decisions 6 and 7).
 5. **A client task follows each server task that changes an answer.** It
    mirrors the merged behaviour in the mocks with contract cases and
    removes what the client no longer needs, on the pattern of
@@ -224,6 +230,19 @@ Read at `6fb6dfb17a` on 2026-11-16, which answers task 1.5.
    guest holds no encryption key, and a kept pair that its holder can read
    but never change or delete is a state no other path produces.
 
+7. **The switched-off E2E rooms app closes private rooms on the server
+   (decided by the owner on 2026-11-16).** Hidden means not reachable: no
+   rooms listing holds a private room, none can be created, and an existing
+   one, its folders and its files are refused by id, with their download,
+   their opening in the editors, their members and their keys. The routes
+   of a user's own key pair stay open, because the Keys management tab
+   stays for a key holder (main `key-management`, "Keys management tab
+   follows the Private section"). Nothing is deleted, so switching the app
+   on brings everything back. Alternative: close the listings and the
+   creation only and leave the direct access. Rejected by the owner: a
+   switch that leaves the rooms open at their addresses does not switch
+   the feature off.
+
 ## Risks / Trade-offs
 
 - [The server denies Rename or Lock on an encrypted file and a client path
@@ -235,6 +254,11 @@ Read at `6fb6dfb17a` on 2026-11-16, which answers task 1.5.
   Accepted with decision 6: the files stay readable to the other members,
   and the user is invited again after a new key. The server cannot keep the
   pair aside, since only its holder can open it.
+- [An administrator switches the app off while members work in a private
+  room] → Accepted with decision 7: their requests are refused from then
+  on, and nothing stored is lost. What happens to an editing session that
+  is open at that moment is not asked here and is for the backend team to
+  state when it takes 2.5.
 - [The tasks age while the server moves] → Each Backend task names its
   symbol, not a line; the lines above are a snapshot of `a7d94e4b81`.
 

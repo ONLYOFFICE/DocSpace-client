@@ -51,22 +51,37 @@ const threadFilesUrl = (
 ) =>
   `/files/rooms/${projectId}/threads/${threadId}/${kind}?sortBy=DateAndTime&sortOrder=descending`;
 
+/**
+ * The files of a paged answer. The Files service counts these lists, and the
+ * API client hands a counted list over as `{ total, items }`, never as the
+ * array itself.
+ */
+const filesOf = (answer: unknown): TFile[] => {
+  if (Array.isArray(answer)) return answer as TFile[];
+  const items = (answer as { items?: unknown } | null)?.items;
+  return Array.isArray(items) ? (items as TFile[]) : [];
+};
+
 /** The artifacts of a conversation, the newest first. */
 export const getAiThreadArtifacts = async (
   projectId: number,
   threadId: string,
 ) =>
-  ((await request({
-    method: "GET",
-    url: threadFilesUrl(projectId, threadId, "artifacts"),
-  })) ?? []) as TFile[];
+  filesOf(
+    await request({
+      method: "GET",
+      url: threadFilesUrl(projectId, threadId, "artifacts"),
+    }),
+  );
 
 /** The files the user attached in a conversation, the newest first. */
 export const getAiThreadAttachments = async (
   projectId: number,
   threadId: string,
 ) =>
-  ((await request({
-    method: "GET",
-    url: threadFilesUrl(projectId, threadId, "attachments"),
-  })) ?? []) as TFile[];
+  filesOf(
+    await request({
+      method: "GET",
+      url: threadFilesUrl(projectId, threadId, "attachments"),
+    }),
+  );

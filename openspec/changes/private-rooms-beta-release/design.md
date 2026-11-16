@@ -169,7 +169,7 @@ place:
 ## Rooms list while the app is off (read 2026-11-11 at `a7d94e4b81`)
 
 Read through CodeGraph and in the source of `../server`, and checked on
-`tests.onlyoffice.io` the same day (DocSpace 4.1.0.12366).
+the release stand the same day (DocSpace 4.1.0.12366).
 
 - `VirtualRoomsCommonController.GetRoomsFolder` reads a missing search area
   as `Active` (`products/ASC.Files/Server/Api/VirtualRoomsController.cs:1494`).
@@ -219,13 +219,13 @@ DocSpace server 3.1.0, Document Server 10.0.2.5 (not the build of gate item
 
 ## Release stand check (2026-11-06, SaaS, part of task 6.2)
 
-The owner's SaaS stand `tests.onlyoffice.io`: DocSpace `4.1.0.12300`
-(`standalone: false`), Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`,
+The owner's SaaS release stand: DocSpace `4.1.0.12300`
+(`standalone: false`), Document Server `10.0.3.19` at the stand's Document Server host,
 the user the portal owner, holding one key. Read through the API and the
 browser, no data changed:
 
 - `GET files/settings` answers `docServiceEncryptionSupported: true`, and
-  `doc-eu.onlyoffice.io/sdkjs/common/crypto/onlyoffice-crypto.js` is served
+  `the stand's Document Server host/sdkjs/common/crypto/onlyoffice-crypto.js` is served
   (HPKE 1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3
   constants), so gate item 0.1 is met for SaaS: the release's Document
   Server carries the add-on and reads container version 2, as the client
@@ -306,9 +306,9 @@ browser, no data changed:
   owner, the download that decrypts, the reopen of the saved document)
   is the owner's to check in the member's browser.
 - A deep link to a private room without its `/filter` segment
-  (`/private/9064440`) was rewritten by the client to
+  (`/private/<room id>`) was rewritten by the client to
   `/private/undefined/filter?...` and showed the Private list instead of
-  the room. `/rooms/shared/5735991` does the same
+  the room. `/rooms/shared/<room id>` does the same
   (`/rooms/shared/undefined/filter?...`), so it is the client's handling
   of a bare room address in every section, not a private-rooms matter;
   the addresses the client builds carry `/filter`.

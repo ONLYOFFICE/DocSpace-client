@@ -149,7 +149,7 @@ recorded.
 
 ### Destination picker, stand check of 2026-11-11
 
-Checked on `tests.onlyoffice.io` (DocSpace 4.1.0.12366, Document Server
+Checked on the release stand (DocSpace 4.1.0.12366, Document Server
 10.0.3.19) as an owner of two private rooms, after the rooms list mocks were
 made to mirror the server and six cases of
 `packages/client/__tests__/private-room-cross-room-copy.spec.ts` failed on

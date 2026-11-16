@@ -676,8 +676,7 @@ Document Server tables were not read. Times in UTC.
 
 ### Run of 2026-10-30, two members (tasks 4.8 and 4.2)
 
-- **Second account (task 4.8).** "bob tester" (id
-  9a80c453-04d7-4ca3-8104-d9e3825b6c59), a room admin with the Editing
+- **Second account (task 4.8).** A test user, a room admin with the Editing
   access in room 10, keys registered on 2026-10-22 and the device
   remembered. Right after joining, the room listed opaque titles and the
   client reported that his identity could not unwrap the files; once the
@@ -834,8 +833,8 @@ not checked on the server.
 
 ### Release stand check of 2026-11-06
 
-The owner's SaaS stand `tests.onlyoffice.io` (DocSpace `4.1.0.12300`) uses
-Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`, which serves
+The owner's SaaS release stand (DocSpace `4.1.0.12300`) uses
+Document Server `10.0.3.19` at the stand's Document Server host, which serves
 `sdkjs/common/crypto/onlyoffice-crypto.js`: HPKE through `@hpke/common`
 1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3 header
 and chunk constants (`DSE3_FIXED_HEADER_SIZE`, `DSE3_CHUNK_PLAINTEXT_SIZE`,
@@ -866,7 +865,7 @@ release, one user holding a key, the device remembered):
   `?version=1` in view mode shows the typed line, so the Document Server
   serves the held session of the first key on top of the first version,
   while the open of version 2 under its new key fails. A file of the older
-  room that no editor had saved ("Test doc.docx", 34757 bytes) opens and
+  room that no editor had saved (a test document, 34757 bytes) opens and
   shows its content. This is the scenario of task 6.2 (P-5, the stable key
   and base while a session exists) on the release build: a document saved
   once in a private room cannot be reopened while the Document Server
@@ -877,7 +876,7 @@ release, one user holding a key, the device remembered):
 
 ### Release stand check of 2026-11-10
 
-Observed by the review of 2026-11-10 on `tests.onlyoffice.io` (DocSpace
+Observed by the review of 2026-11-10 on the release stand (DocSpace
 `4.1.0.12351`, Document Server `10.0.3.19`); recorded here on 2026-11-11
 without a new run.
 
@@ -917,13 +916,13 @@ without a new run.
 
 ### Release stand check of 2026-11-16
 
-Read from the stand `tests.onlyoffice.io` without signing in, on
+Read from the release stand without signing in, on
 2026-11-16.
 
 - **Builds.** `GET api/2.0/settings/version/build` answers DocSpace
   `4.1.0.12428` and Document Server `10.0.3.40`; the check of 2026-11-10
   saw `4.1.0.12351` and `10.0.3.19`. The Document Server of the stand is
-  `https://doc-eu.onlyoffice.io/` (`GET api/2.0/files/docservice`, whose
+  its own Document Server host (`GET api/2.0/files/docservice`, whose
   `version` field came empty for a caller who is not signed in). Its
   `healthcheck` answers `true`, and its `info/info.json` now answers 200
   to anybody with `serverInfo.buildVersion` `10.0.3`, `buildNumber` 40 and
@@ -939,7 +938,7 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
 - **Signed in, the same day**, as the portal owner, whose interface
   language is Russian, with the key unlocked in the browser session.
 - **Reopening after a save (task 6.2): still fails.** A docx created in
-  a private room of the stand at 12:57 (file 4597053), one
+  a private room of the stand at 12:57, one
   line typed, saved with Ctrl+S (version 2, 39164 bytes) and its editor
   tab closed, answered at the next opening for editing, about a minute
   later, "ONLYOFFICE Document Editor reports an error: code -82". Opened
@@ -947,8 +946,7 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
   document key for editing and another for viewing, both with the file at
   version 2; the document address carries no version (`action`, `fileid`,
   `stream_auth`).
-- **A document saved six days earlier opens.** "Reopen docx.docx" of the
-  same room (file 4462431, version 2, saved on 2026-11-10), which did not
+- **A document saved six days earlier opens.** A document of the same room (version 2, saved on 2026-11-10), which did not
   open for editing then, opened for editing with its text. The Document
   Server of the stand was built or started on 2026-11-16 (`serverInfo.date`
   above), so the sessions it held may have ended with it; this was not
@@ -965,7 +963,7 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
   version.
 - **Section root title (`private-rooms-server-followups` 2.3).**
   `GET files/@private` answers the title "Private" to this user.
-- **Left on the stand.** The file 4597053, "Reopen docx 2026-11-16", stays
+- **Left on the stand.** The test file of that run stays
   in that room as the case to reopen after a fix.
 - **Not checked.** The form flag of a PDF form over a save, the spreadsheet
   and the presentation after a new save, and a second member in a held

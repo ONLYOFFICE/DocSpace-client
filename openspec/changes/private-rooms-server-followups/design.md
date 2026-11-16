@@ -6,7 +6,7 @@ See proposal.md for the motivation. No stashed design document covers this.
 
 Server source: `../server`, read through CodeGraph on 2026-11-11 at
 `a7d94e4b81` and on 2026-11-16 at `6fb6dfb17a`. Stand:
-`tests.onlyoffice.io`, DocSpace 4.1.0.12351 with Document Server 10.0.3.19
+the release stand, DocSpace 4.1.0.12351 with Document Server 10.0.3.19
 on 2026-11-10, DocSpace 4.1.0.12366 on 2026-11-11.
 
 ### Section root title

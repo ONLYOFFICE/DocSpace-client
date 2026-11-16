@@ -541,7 +541,7 @@ replaces a read.
   provides; a member who opens the room after the restore with their own
   key can then re-wrap for the others.
 
-### Release stand check (2026-11-06, `tests.onlyoffice.io`)
+### Release stand check (2026-11-06, the release stand)
 
 The owner's SaaS stand runs DocSpace `4.1.0.12300`. Read through the API as
 the portal owner, a member of the one private room (Custom,
@@ -590,7 +590,7 @@ six encrypted files, no subfolder); no data was changed:
   too). The audit row of the owner change has an empty action text (to
   check on the server). The invitation letter the member received (task
   4.2) reads "... invited you to join the room Private room on
-  https://tests.onlyoffice.io." with the Join room link: the neutral
+  the release stand." with the Join room link: the neutral
   label stands where the title did, in English, so the sentence reads
   "the room Private room"; a template variant for private rooms would
   read better, for the backend team with the translations of 4.5. The
@@ -676,7 +676,7 @@ Read on 2026-11-11 with `git show` in `../server`, whose head is
   `FoldersController`). A private room and its content take no external
   link, so nothing changes for them.
 
-### Release stand check (2026-11-10, `tests.onlyoffice.io`)
+### Release stand check (2026-11-10, the release stand)
 
 Observed by the review of 2026-11-10 (DocSpace `4.1.0.12351`, Document
 Server `10.0.3.19`); recorded here on 2026-11-11 without a new run.

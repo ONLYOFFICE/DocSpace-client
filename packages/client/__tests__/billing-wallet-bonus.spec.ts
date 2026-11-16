@@ -155,15 +155,15 @@ const openWallet = async (page: Page, baseUrl: string) => {
   await expect(page.getByText("Available credits")).toBeVisible();
 };
 
-const openPromoCodeField = async (page: Page) => {
+const openPromoCodeTab = async (page: Page) => {
   await topUpButton(page).click();
-  await page.getByTestId("wallet_promo_code_toggle").click();
+  await page.getByTestId("promo_tab").click();
 
   await expect(page.getByTestId("wallet_promo_code_input")).toBeFocused();
 };
 
-const promoIcon = (page: Page, name: "Apply" | "Cancel") =>
-  page.getByTestId("wallet_promo_code_block").locator(`[aria-label="${name}"]`);
+const redeemButton = (page: Page) =>
+  page.getByTestId("wallet_promo_code_redeem");
 
 test.describe("Billing wallet: promo credits", () => {
   test.beforeEach(async ({ mockRequest, page }) => {
@@ -336,11 +336,11 @@ test.describe("Billing wallet: promo credits", () => {
     await openWallet(page, baseUrl);
     await expect(page.getByTestId("wallet_promo_credits")).toHaveCount(0);
 
-    await openPromoCodeField(page);
-    await expect(promoIcon(page, "Cancel")).toBeVisible();
+    await openPromoCodeTab(page);
+    await expect(redeemButton(page)).toBeDisabled();
 
     await page.getByTestId("wallet_promo_code_input").fill("welcome-10");
-    await expect(promoIcon(page, "Apply")).toBeVisible();
+    await expect(redeemButton(page)).toBeEnabled();
 
     await expectScreenshot(page, [
       "desktop",
@@ -354,7 +354,7 @@ test.describe("Billing wallet: promo credits", () => {
     await expect(
       page.getByText("in promo credits have been added to your wallet."),
     ).toBeVisible();
-    await expect(page.getByTestId("wallet_promo_code_toggle")).toBeVisible();
+    await expect(page.getByTestId("promo_tab")).toHaveCount(0);
     expect(JSON.parse(posts[0])).toEqual({ promoCode: "welcome-10" });
 
     await expectScreenshot(page, [
@@ -376,10 +376,10 @@ test.describe("Billing wallet: promo credits", () => {
     );
 
     await openWallet(page, baseUrl);
-    await openPromoCodeField(page);
+    await openPromoCodeTab(page);
 
     await page.getByTestId("wallet_promo_code_input").fill("WELCOME10");
-    await promoIcon(page, "Apply").click();
+    await redeemButton(page).click();
 
     await expect(
       page.getByText("This code has already been used."),
@@ -405,7 +405,7 @@ test.describe("Billing wallet: promo credits", () => {
     );
 
     await openWallet(page, baseUrl);
-    await openPromoCodeField(page);
+    await openPromoCodeTab(page);
 
     await page.getByTestId("wallet_promo_code_input").fill("WELCOME10");
     await page.getByTestId("wallet_promo_code_input").press("Enter");
@@ -415,16 +415,71 @@ test.describe("Billing wallet: promo credits", () => {
     ).toBeVisible();
   });
 
-  test("the cross closes the empty promo code field", async ({
+  test("without a linked card the Promo code tab offers to link one", async ({
     page,
     baseUrl,
+    mockRequest,
   }) => {
+    useSaasBilling(mockRequest, { payer: "none", plan: "startup" });
+
     await openWallet(page, baseUrl);
-    await openPromoCodeField(page);
+    await topUpButton(page).click();
+    await page.getByTestId("promo_tab").click();
 
-    await promoIcon(page, "Cancel").click();
+    await expect(page.getByText("Link a payment method first.")).toBeVisible();
+    await expect(page.getByTestId("wallet_promo_code_input")).toHaveCount(0);
+    await expect(redeemButton(page)).toHaveCount(0);
 
-    await expect(page.getByTestId("wallet_promo_code_toggle")).toBeVisible();
+    await expectScreenshot(page, [
+      "desktop",
+      "wallet-bonus",
+      "promo-code-no-card.png",
+    ]);
+
+    const popup = page.waitForEvent("popup");
+    await page.getByTestId("wallet_promo_code_link_card").click();
+    await popup;
+
+    await expect(page.getByTestId("promo_tab")).toHaveCount(0);
+  });
+
+  test("a portal billing does not know yet is asked to link a payment method", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      http.post(apiUrl(PROMO_CODE_PATH), () => apiError(402, "cannot find")),
+    );
+
+    await openWallet(page, baseUrl);
+    await openPromoCodeTab(page);
+
+    await page.getByTestId("wallet_promo_code_input").fill("WELCOME10");
+    await page.getByTestId("wallet_promo_code_input").press("Enter");
+
+    await expect(page.getByText("Link a payment method first.")).toBeVisible();
+    await expect(page.getByTestId("wallet_promo_code_input")).toHaveValue(
+      "WELCOME10",
+    );
+    await expect(redeemButton(page)).toBeEnabled();
+  });
+
+  test("the footer follows the tab", async ({ page, baseUrl }) => {
+    await openWallet(page, baseUrl);
+    await openPromoCodeTab(page);
+
+    await expect(redeemButton(page)).toBeVisible();
+    await expect(
+      page.getByTestId("first_topup_continue_to_stripe"),
+    ).toHaveCount(0);
+
+    await page.getByTestId("purchase_tab").click();
+
+    await expect(
+      page.getByTestId("first_topup_continue_to_stripe"),
+    ).toBeVisible();
+    await expect(redeemButton(page)).toHaveCount(0);
     await expect(page.getByTestId("wallet_promo_code_input")).toHaveCount(0);
   });
 

@@ -8,6 +8,7 @@ Server facts, looked up with CodeGraph in `../server` and read in the source (pa
 - `date` is set by the server: the request DTO has no date (`Core/ApiModels/RequestDto/EncryptionKeyRequestDto.cs`), the mapped `EncryptionKeyDto` defaults `Date = DateTime.Now` (`Core/ApiModels/ResponseDto/EncryptionKeyDto.cs`), so both create and replace stamp the current time. A legacy single-object record reads back as id `Guid.Empty` with `DateTime.MinValue`.
 - Room access (`privacyroom/{roomId}/access`) flattens every stored envelope of every directly shared member, so a member with several keys appears several times (`EncryptionKeyPairDto.cs` `GetUserKeysForRoomAsync`).
 - The file-key table holds at most one row per (tenant, file, user) (`Core/Core/EF/DbFileKeys.cs`); a write deletes the listed users' rows and inserts the new ones (`Core/Core/Dao/TeamlabDao/FileDao.cs` `SetFileKey`), so naming one user twice fails the write.
+- Deleting the last envelope stores `[]`, not null, so the server's "has keys" guard (`EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync`) still passes for room creation, invitation and owner change; the client has to keep its own key checks.
 - There is no server query for "files wrapped for user X or key Y"; only per file through `GET files/{fileId}/access`.
 - Server bug for the server team (not reproduced): every key save calls `accountLinker.RemoveProviderAsync(userId)` without a provider (`EncryptionLoginProvider.cs`), which removes whichever account link comes first and may drop a Google or SSO link.
 

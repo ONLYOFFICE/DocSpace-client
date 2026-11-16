@@ -67,6 +67,7 @@
 ## Workflow follow-up
 
 - Archive with `/opsx:archive` before `private-rooms-sidebar-section` ships its Private → Archive routes (its task 0.2 checks this). Archiving adds the requirements to `file-operations`, `room-membership` and `server-contract`.
-- Hand the findings in design.md ("Server findings outside this change") to `private-rooms-server-hardening` with `/opsx:update`:
-  - the Archive branch has no private-room guard.
+- Hand the two findings in design.md ("Server findings outside this change") to `private-rooms-server-hardening` with `/opsx:update`:
+  - the Archive branch has no private-room guard;
+  - folder copies out of an archived private room were not confirmed.
 - After archiving, the `private-rooms-sidebar-section` design no longer needs its risk line "`isPrivacyFolder` is false inside archived private rooms". Drop it with `/opsx:update` when that change is next revised.

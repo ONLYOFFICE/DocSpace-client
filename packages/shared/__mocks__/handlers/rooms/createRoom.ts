@@ -165,7 +165,9 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
    * 400 "Bad request." indexing, or a lifetime or watermark whose
    * `enabled` is not false, an object without the flag counting as
    * enabled. The mock answers 403 "Access denied" for a public or
-   * form-filling room created as private, as the server does.
+   * form-filling room created as private, as the server does. The order
+   * of the steps below mirrors the server and is held by the contract
+   * test; do not reorder them.
    */
   const create = http.post(url, async ({ request }) => {
     const body = (await request.json()) as CreateRoomBody;

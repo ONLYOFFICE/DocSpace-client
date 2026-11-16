@@ -131,7 +131,7 @@ place:
     shared Archive holds both kinds ("Rooms list while the app is off").
     The owner decided on 2026-11-11 to send the non-private filter with
     Rooms → Archive whether the section is available or not, in task 4.5,
-    so private rooms are listed in the Private section only.
+    so private rooms are listed nowhere while the app is off.
 
 ## Risks / Trade-offs
 

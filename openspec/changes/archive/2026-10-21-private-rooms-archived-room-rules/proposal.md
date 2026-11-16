@@ -76,8 +76,9 @@ None.
 - The SDK archive page (`packages/sdk/src/app/(private)`, `private-rooms-sdk-gating-and-parity`).
 - Changes to the archive's read-only rules. Creating, uploading, editing, renaming, moving and deleting inside an archived room stay denied by the server for every role. The create and upload consumers of the signal become stricter in archive, but stay unreachable there.
 - The badge rule ("Encrypted items carry a badge … outside Archive"). An archived private room keeps no badge in the Archive list, and encrypted files keep theirs.
-- Server gaps that remain and are noted for `private-rooms-server-hardening` (design.md, "Server findings outside this change"):
-  - the Archive branch of the server's rights grants the copy right in private rooms, and lets a non-member administrator read and copy an archived private room's files.
+- Two server gaps that remain and are noted for `private-rooms-server-hardening` (design.md, "Server findings outside this change"):
+  - the Archive branch of the server's rights grants the copy right in private rooms, and lets a non-member administrator read and copy an archived private room's files;
+  - whether a subfolder of an archived private room can be copied out by the server as an empty folder was not confirmed.
 - Two existing behaviours of active rooms that this change does not alter:
   - a pick of another private room as a copy destination is planned as a same-room transfer and refused by the server;
   - the bulk header menu of a private room offers no Copy, so copy-out of a selection goes through its context menu.

@@ -518,7 +518,7 @@ The server SHALL leave out of the prospective-members answer, without failing th
 - **THEN** the answer is an empty list
 
 ### Requirement: Missing file keys of a room
-The server SHALL report, to a caller who may change the access of an active private room, which of the named users, or of the room's direct members when none is named, hold no key on which encrypted files of the room, subfolders included, as identifiers only; a user who holds every key SHALL be absent, a file stored in the clear SHALL never be reported, and an id that names nobody on the portal SHALL be ignored. It SHALL apply the access rules of the prospective-members request.
+The server SHALL report, to a caller who may change the access of an active private room, which of the named users, or of the room's direct members and its creator when none is named, hold no key on which encrypted files of the room, subfolders included, as identifiers only; a user who holds every key SHALL be absent, a file stored in the clear SHALL never be reported, and an id that names nobody on the portal SHALL be ignored. It SHALL apply the access rules of the prospective-members request.
 
 #### Scenario: Member without a key on one file
 - **WHEN** the owner asks for the missing keys of a member who holds no key on one encrypted file
@@ -704,15 +704,15 @@ The server SHALL refuse with 400, and store nothing, a create or replace request
 - **THEN** the server answers 400 and the keys they already had stay as they were
 
 ### Requirement: File rights reported to the owner of a private room
-The server SHALL deny on a file of an active private room, to the room's owner, the fill-forms, form-filling, AI, conversion, embedding and vectorization rights. In an archived private room it SHALL also deny the comment, review, custom-filter, edit-history, form-gallery and open-form rights.
+The server SHALL report on a file of an active private room, to the room's owner, the comment and review rights as granted, and SHALL deny on such a file the fill-forms, form-filling, AI, conversion, embedding and vectorization rights. In an archived private room it SHALL also deny the comment, review, custom-filter, edit-history, form-gallery and open-form rights.
 
 #### Scenario: Spreadsheet in an active private room
 - **WHEN** the owner of an active private room lists an encrypted spreadsheet in it
-- **THEN** the file reports FillForms, StartFilling, FillingStatus, ResetFilling, StopFilling, OpenForm, AskAi, Convert, Embed and Vectorization as false
+- **THEN** the file reports Comment and Review as true, and FillForms, StartFilling, FillingStatus, ResetFilling, StopFilling, OpenForm, AskAi, Convert, Embed and Vectorization as false
 
 #### Scenario: PDF in an active private room
 - **WHEN** the owner of an active private room of the custom type lists an encrypted PDF in it
-- **THEN** the file reports FillForms as false, and SubmitToFormGallery as false unless the encrypted header marks the file as a PDF form
+- **THEN** the file reports OpenForm as true and FillForms as false, and SubmitToFormGallery as false unless the encrypted header marks the file as a PDF form
 
 #### Scenario: Image in an active private room
 - **WHEN** the owner of an active private room lists an encrypted image in it

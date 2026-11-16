@@ -154,6 +154,8 @@ and the title validation of uploads, the revocation of a leaving member's
 keys, the third-party refusal and the Document Server gate. Nothing more
 had landed by `6fb6dfb17a` (read on 2026-11-16). Still open:
 
+- tasks 8.1, 12.3, 12.8 and 16.1, each stated by the behaviour it asks in
+  the change's tasks.md;
 - the translations of the "Private room" and "Private folder" labels of
   letters, pushes and the audit trail, which every language prints in
   English for now (4.5);
@@ -168,6 +170,8 @@ had landed by `6fb6dfb17a` (read on 2026-11-16). Still open:
 Server (`private-rooms-server-followups`), handed to the backend team on
 2026-11-16 with the open items above:
 
+- tasks 1.1 to 1.4, 1.6, 1.7, 2.1, 2.2, 2.5 and 2.6, each stated by the
+  behaviour it asks in the change's tasks.md;
 - the Private section is titled in English for every language (2.3).
 
 Client follow-ups of the merged server items: none open; the owner change
@@ -177,6 +181,7 @@ key write (12.6) and the exact backfill (14.2) shipped on 2026-11-05.
 Document Server and editor (`private-rooms-editor-contract`):
 
 - written sign-off of the editor contract by the Document Server team (1.6);
+- the content of the editor configuration's encryption entry (1.2, 10.6);
 - DS-17 and DS-19 above (4.7);
 - the stable document key and base while a session exists (6.2), fixed
   together with the Document Server; the public document address and the

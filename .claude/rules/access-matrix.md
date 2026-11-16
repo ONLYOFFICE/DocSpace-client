@@ -251,9 +251,10 @@ re-derive it from a type or a role.
 
 ### Adding guests to groups
 
-Nobody. A guest is never a member of a group, so the group member selector
-offers the People area only and has no guests tab. That is the rule, not a
-selector left incomplete.
+Nobody. The group member selector (`CreateEditGroupDialog` ->
+`MembersSelector`) does not pass `withGuests`, so `PeopleSelector` shows no
+guests tab and queries the People area only. That is on purpose, not a
+selector left incomplete: do not add the tab.
 
 ## Using this
 

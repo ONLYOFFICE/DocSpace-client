@@ -55,7 +55,8 @@ export type RoomMembersHandlerOptions = {
   /**
    * Users who never registered an encryption key, for a private room. A
    * share request that names one of them is answered with 403, as the
-   * server answers it.
+   * server answers it. The order in which the handler walks the entries
+   * mirrors the server; do not reorder it.
    */
   withoutKeys?: string[];
   /**

@@ -114,7 +114,10 @@ private rooms changed; none of the tasks of this change has landed.
    of a user's own key pair stay open, because the Keys management tab
    stays for a key holder (main `key-management`, "Keys management tab
    follows the Private section"). Nothing is deleted, so switching the app
-   on brings everything back.
+   on brings everything back. Alternative: close the listings and the
+   creation only and leave the direct access. Rejected by the owner: a
+   switch that leaves the rooms open at their addresses does not switch
+   the feature off.
 
 8. **A share change is whole or nothing, and private rooms are not
    favourites (decided by the owner on 2026-11-16).** A request that names

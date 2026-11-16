@@ -68,8 +68,8 @@ without the gateway, and what it uses the SDKs for, is spike 1.
 
 The editor configuration carries a switch for the editor's AI tools:
 `customization.ai.disabled` (`AiConfigDto`, set by the server for a portal
-without AI and for anonymous visitors). The server sets it for an encrypted
-file in `private-rooms-server-hardening`, task group 16, decision 29.
+without AI and for anonymous visitors). The server is to set it for an
+encrypted file: `private-rooms-server-hardening`, task 16.1, decision 29.
 
 No stashed design document covers AI in private rooms; the ban predates the
 AI chat.

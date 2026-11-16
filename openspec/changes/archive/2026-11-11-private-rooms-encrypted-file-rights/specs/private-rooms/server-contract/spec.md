@@ -7,11 +7,11 @@ The server SHALL report on a file of a private room, to the room's owner, the fi
 
 #### Scenario: Spreadsheet in an active private room
 - **WHEN** the owner of an active private room lists an encrypted spreadsheet in it
-- **THEN** the file reports FillForms, StartFilling, FillingStatus, ResetFilling, StopFilling, OpenForm, AskAi, Convert, Embed and Vectorization as false
+- **THEN** the file reports Comment and Review as true, and FillForms, StartFilling, FillingStatus, ResetFilling, StopFilling, OpenForm, AskAi, Convert, Embed and Vectorization as false
 
 #### Scenario: PDF in an active private room
 - **WHEN** the owner of an active private room of the custom type lists an encrypted PDF in it
-- **THEN** the file reports FillForms as false, and SubmitToFormGallery as false unless the encrypted header marks the file as a PDF form
+- **THEN** the file reports OpenForm as true and FillForms as false, and SubmitToFormGallery as false unless the encrypted header marks the file as a PDF form
 
 #### Scenario: Image in an active private room
 - **WHEN** the owner of an active private room lists an encrypted image in it

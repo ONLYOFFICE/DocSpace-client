@@ -501,7 +501,7 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 
 #### Scenario: AI agent created as private
 - **WHEN** a user with encryption keys creates an AI agent with the private flag while the Document Server encrypts
-- **THEN** the server answers as the decision on private AI agents says; the server proposes 400 and no agent
+- **THEN** the server refuses the request with 400 and creates no agent, once decision 8 confirms the refusal the server proposes
 
 #### Scenario: Public or form-filling room created as private
 - **WHEN** a room creation request sets the private flag with the public or the form-filling room type, whose rooms exist through an external link

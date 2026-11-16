@@ -676,7 +676,7 @@ Document Server tables were not read. Times in UTC.
 
 ### Run of 2026-10-30, two members (tasks 4.8 and 4.2)
 
-- **Second account (task 4.8).** A test user, a room admin with the Editing
+- **Second account (task 4.8).** A test user, Bob below, a room admin with the Editing
   access in room 10, keys registered on 2026-10-22 and the device
   remembered. Right after joining, the room listed opaque titles and the
   client reported that his identity could not unwrap the files; once the

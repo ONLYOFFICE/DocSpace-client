@@ -70,8 +70,8 @@ the file to change so the backend team can pick them up; nothing here is
   AI hub room types refuse the private flag with 400; the answer to an AI agent
   created with the flag is decision 8, for which the server proposes a
   refusal; the audit trail of the client needs no change; a public or a
-  form-filling room refuses the private flag with 400 before anything is
-  stored (task 12.8, decided by the owner on 2026-11-16); a list of
+  form-filling room is to refuse the private flag with 400 before anything is
+  stored (task 12.8, asked by the owner on 2026-11-16, not part of the reply); a list of
   server behaviours no
   test covers goes to a manual check (task 10.2); and one finding is new:
   a portal backup carries neither the file keys nor the users' key
@@ -80,8 +80,8 @@ the file to change so the backend team can pick them up; nothing here is
 - The editor configuration of an encrypted file tells the editor to hide
   its AI tools: the configuration already carries a switch for it
   (`customization.ai.disabled`, set for a portal without AI and for
-  anonymous visitors), and the server sets it for an encrypted file as
-  well (task group 16, design decision 29). The release stand of
+  anonymous visitors), and the server is to set it for an encrypted file as
+  well (task 16.1, design decision 29). The release stand of
   2026-11-06 showed the role-change letter naming a private room by its
   title, a call site the neutral label of 2026-11-05 missed (task 4.7).
 

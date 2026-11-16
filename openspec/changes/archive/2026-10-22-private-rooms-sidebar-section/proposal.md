@@ -101,8 +101,9 @@ Private rooms are mixed into the Rooms list today, and the only place that shows
   - regenerated sidebar screenshots across the suite (Docker).
 - Server (`../server`): **no work required**. The change relies on behaviour already on `hotfix/v4.0.1`; design.md cites the source of each fact.
 
-  Server findings from the review are handed to `private-rooms-server-hardening`, its tasks 9.1 and 9.3 (design.md, "Server findings outside this change"):
-  - an administrator can delete or unarchive an archived private room by id.
+  Two server findings from the review are handed to `private-rooms-server-hardening`, its tasks 9.1 and 9.3 (design.md, "Server findings outside this change"):
+  - an administrator can delete or unarchive an archived private room by id;
+  - room socket events reach every administrator.
 - Document Server: none. Buildtools: none, since nginx already serves `/private` to the client through `location /`.
 
 ## Out of scope

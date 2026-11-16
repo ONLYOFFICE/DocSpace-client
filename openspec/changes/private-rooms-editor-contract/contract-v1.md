@@ -86,9 +86,10 @@ and an unknown field is ignored.
 
 Observed: the Document Server accepts the configuration with the object the
 client set after signing and reads the DEK from it; the DEK stays outside
-the signed payload. The Document Server needs nothing in
-`encryptionKeys` beyond the object of §3.1; the portal will stop sending
-anything else in that field (tasks 1.2 and 10.6).
+the signed payload. Open: the Document Server team is
+to confirm that it needs nothing in `encryptionKeys` beyond the object of
+§3.1; the portal then sends nothing else in that field (tasks 1.2 and
+10.6).
 
 ## 4. Opening a document
 
@@ -363,7 +364,7 @@ Obligations:
   download-as target that goes through its conversion service, and MUST NOT
   send the document to that service for any purpose (download, print,
   thumbnails, comparison, mail merge). The download-as targets of an
-  encrypted document are the browser-built set (docx, docm, dotx, xlsx,
+  encrypted document MUST stay within the browser-built set (docx, docm, dotx, xlsx,
   xlsm, xltx, pptx, pptm, potx, ppsx, vsdx, pdf, pdfa).
 - P-6 (portal, decided 2026-10-29). Decrypted copies exist only on the user's
   device; no copy is stored in a portal folder.

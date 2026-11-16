@@ -119,8 +119,8 @@ either way) versus which host the login server connects to (not fine). Every
 other SSR call does the same: `createRequest` forwards the incoming headers
 wholesale and `proxy.ts` forwards these two explicitly.
 
-The rule for every server-side fetch is the same: build the origin from the
-configured portal address, never from a request header.
+The rule for every new server-side fetch is the same: build the origin from
+the configured portal address, never from a request header.
 
 Never derive preview text from a resource addressed by a guessable id.
 `fileId` and `folderId` are sequential, so a title taken from them would leak

@@ -252,9 +252,9 @@ The full list comes from `grep -nE "(indexOf|includes|startsWith)\(\"/?(rooms|fo
 
 ## Server findings outside this change
 
-The review found server behaviours that do not block this change. They are handed to `private-rooms-server-hardening` (its tasks 9.1 and 9.3):
+The review found two server behaviours that do not block this change. They are handed to `private-rooms-server-hardening` (its tasks 9.1 and 9.3):
 - **Archived private rooms are open to administrators.** The Archive branch of the administrator bypass grants Move and Delete on any room, with no private guard (`Core/Core/Security/FileSecurity.cs:1949-1981`). The VirtualRooms branch has one (`:1650-1652`). An administrator who is not a member can delete or unarchive an archived private room by id.
-
+- **Room socket events reach every administrator.** For VirtualRooms and Archive, `WhoCanRead` adds every administrator to the recipients (`Core/Utils/SocketManager.cs:415-419`). Administrators who are not members therefore receive the titles of private rooms.
 
 ## Follow-up: server-backed section
 

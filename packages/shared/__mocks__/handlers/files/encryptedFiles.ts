@@ -1041,8 +1041,8 @@ export const encryptedFilesHandlers = (
      * Mirrors PrivacyRoomControllerCommon.GetRoomMissingFileKeys ->
      * EncryptionKeyPairDtoHelper.GetMissingFileKeysAsync (HttpGet
      * "{roomId:int}/access/missing", `userIds` repeated once per user): one
-     * RoomMissingFileKeysDto per named user, or per direct member when none
-     * is named, who lacks a key on an encrypted file of the
+     * RoomMissingFileKeysDto per named user, or per direct member and the
+     * creator when none is named, who lacks a key on an encrypted file of the
      * room, with those file ids; a user with every key is absent and a file
      * stored in the clear is never reported. 403 when the caller cannot read
      * the room, 400 for a room that is not private, 403 when the caller may

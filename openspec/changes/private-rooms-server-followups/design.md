@@ -180,6 +180,16 @@ Read at `6fb6dfb17a` on 2026-11-16, which answers task 1.5.
   `DeleteFileKeysByFileIdsAsync` in the same transaction as the file rows;
   the single-file delete goes through it. Nothing is asked.
 
+### Hand-over to the backend team
+
+The owner handed the open Backend tasks of this change to the backend team
+on 2026-11-16, as one document with the open server tasks of
+`private-rooms-server-hardening` and the portal setting of
+`private-rooms-release-gate`: tasks 1.1 to 1.4, 1.6, 2.1 to 2.3 and 2.5,
+each with what the server does today, what is asked, what is expected and
+how it is accepted. `../server` was at `6fb6dfb17a` that day and held none
+of them. No reply is recorded yet.
+
 ## Goals / Non-Goals
 
 **Goals:**

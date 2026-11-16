@@ -33,13 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// The dialog is as wide as the modal lets it be, whatever its fields hold.
+// The same top offset as the other side panels' forms.
 .body {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 698px;
-  max-width: 100%;
+  padding-top: 20px;
 }
 
 .field {
@@ -114,5 +113,6 @@
 }
 
 .message {
+  padding-top: 20px;
   color: var(--text-secondary);
 }

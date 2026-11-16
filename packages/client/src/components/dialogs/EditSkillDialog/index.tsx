@@ -148,9 +148,8 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
     return (
       <ModalDialog
         visible
-        displayType={ModalDialogType.modal}
-        isHuge
-        autoMaxWidth
+        displayType={ModalDialogType.aside}
+        withBodyScroll
         onClose={onClose}
         dataTestId="view-skill-dialog"
       >
@@ -168,8 +167,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
                     value={body}
                     isDisabled
                     onChange={setBody}
-                    minHeight="160px"
-                    maxHeight="max(160px, calc(100vh - 260px))"
+                    minHeight="calc(100vh - 220px)"
                   />
                 </React.Suspense>
               )}
@@ -182,6 +180,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
               label={t("Common:EditButton")}
               size={ButtonSize.normal}
               primary
+              scale
               onClick={() => setIsViewing(false)}
               isDisabled={isLoading}
               testId="view-skill-edit"
@@ -190,6 +189,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
           <Button
             label={t("Common:CloseButton")}
             size={ButtonSize.normal}
+            scale
             onClick={onClose}
             testId="view-skill-close"
           />
@@ -221,9 +221,8 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
   return (
     <ModalDialog
       visible
-      displayType={ModalDialogType.modal}
-      isHuge
-      autoMaxWidth
+      displayType={ModalDialogType.aside}
+      withBodyScroll
       withForm
       onSubmit={(e) => {
         e.preventDefault();
@@ -287,8 +286,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
                       value={body}
                       isDisabled={isSaving}
                       onChange={setBody}
-                      minHeight="160px"
-                      maxHeight="max(160px, min(360px, calc(100vh - 480px)))"
+                      minHeight="320px"
                       onCreateEditor={(view) => {
                         editorRef.current = view;
                       }}
@@ -305,6 +303,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
           label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           primary
+          scale
           type="submit"
           isLoading={isSaving}
           isDisabled={!canSave}
@@ -313,6 +312,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
+          scale
           onClick={onClose}
           isDisabled={isSaving}
           testId="edit-skill-cancel"

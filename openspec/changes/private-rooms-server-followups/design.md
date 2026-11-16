@@ -182,21 +182,28 @@ Read at `6fb6dfb17a` on 2026-11-16, which answers task 1.5.
 
 ### Read on 2026-11-16 (`6fb6dfb17a`): three behaviours without a task
 
+The first two got tasks 1.7 and 2.6 the same day (decision 8); the third
+waits for a run on a stand.
+
 - **An invitation of several people stops at the first without a key.**
   `FileSharingAceHelper.SetAceObjectAsync` (`Core/Utils/FileSharing.cs`)
   goes through the entries one by one, groups first (line 131). The key
   check throws at line 275 and the share of an entry is written at line
   413, inside the same loop, so the entries before the one without a key
   are already stored when the request answers 403, and the ones after it
-  are not looked at. No transaction was found in the helper; the caller
-  (`FileStorageService.SetAceObjectAsync`) was not read for one. The
+  are not looked at. No transaction was found in the helper, nor in its
+  caller (`FileStorageService.SetAceObjectAsync`, line 4560), which calls
+  it for each entry of the request in turn. The
   invite panel leaves out an invitee without a key before it sends
   (`private-rooms/room-membership`), so the panel does not reach this; a
   request sent without it does.
 - **A private room and its folders can be marked as favourites.**
   `FileStorageService.AddToFavoritesAsync` (line 4254) leaves encrypted
   files out (`!file.Encrypted`) and takes every folder the caller may read,
-  a private room and a folder of one included.
+  a private room and a folder of one included. The Favourites section
+  lists the folders that carry the mark and that the caller may read
+  (`Core/Utils/EntryManager.cs`, lines 507-509), so a private room shows
+  there, outside the Private section.
 - **Trash.** An encrypted file of a room is deleted for good
   (`FileDao.UseTrashForRemove`, `Core/Core/Dao/TeamlabDao/FileDao.cs`,
   line 1971). A folder is not moved to Trash when it carries the private
@@ -223,7 +230,8 @@ on 2026-11-16, as one document with the open server tasks of
 `private-rooms-release-gate`: tasks 1.1 to 1.4, 1.6, 2.1 to 2.3 and 2.5,
 each with what the server does today, what is asked, what is expected and
 how it is accepted. `../server` was at `6fb6dfb17a` that day and held none
-of them. No reply is recorded yet.
+of them. No reply is recorded yet. Tasks 1.7 and 2.6 and the correction of
+1.6 were added to the document later that day.
 
 ## Goals / Non-Goals
 
@@ -287,6 +295,18 @@ of them. No reply is recorded yet.
    creation only and leave the direct access. Rejected by the owner: a
    switch that leaves the rooms open at their addresses does not switch
    the feature off.
+
+8. **A share change is whole or nothing, and private rooms are not
+   favourites (decided by the owner on 2026-11-16).** A request that names
+   a user without a key gives access to nobody, since a half-applied
+   invitation leaves members the sender was told were refused. A private
+   room and its folders stay out of the favourites as an encrypted file
+   does: the Favourites section is outside the Private section and does
+   not follow the E2E rooms app, so a mark would show a private room where
+   the switch says there is none. Alternative for the invitation: add the
+   users who hold keys and report the others. Rejected: the answer of a
+   share change has no place for a list of refused users, and the invite
+   panel already leaves them out before it sends.
 
 ## Risks / Trade-offs
 

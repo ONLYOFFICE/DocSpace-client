@@ -51,6 +51,24 @@ The server SHALL, when a user is turned into a guest, remove the user from every
 - **WHEN** such a guest is made a user again
 - **THEN** the user holds no key and is in no private room until a key is created and an invitation is sent
 
+### Requirement: A share change of a private room is applied whole or not at all
+The server SHALL check, before it stores any share of a request that changes the access to a private room, that every user who would get access for the first time holds an encryption key, and SHALL refuse the whole request when one does not. It SHALL NOT give access to some users of a refused request.
+
+#### Scenario: Invitation with a user without a key
+- **WHEN** a request gives access to a private room to a user with a key and to a user without one, in either order
+- **THEN** the server refuses the request and neither user is among the members of the room
+
+#### Scenario: Same invitation without that user
+- **WHEN** the request names only the user with a key
+- **THEN** the user is added to the members
+
+### Requirement: Private rooms and their folders are not favourites
+The server SHALL NOT mark a private room or a folder of a private room as a favourite, as it does not mark an encrypted file, and SHALL NOT list one in the Favourites section.
+
+#### Scenario: Private room sent to the favourites
+- **WHEN** a member sends a private room or a folder of one to the favourites, alone or with other entries
+- **THEN** it is not marked, the other entries are, and the Favourites listing does not hold it
+
 ### Requirement: Private rooms are not listed in the Forms area
 The server SHALL NOT list a private room in the Forms area or the form-template area of the rooms listing.
 

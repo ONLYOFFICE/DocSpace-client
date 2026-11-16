@@ -66,6 +66,24 @@ context: |
   missing, stop and ask the user to set it up. Do not fall back to guessing,
   and do not write a server fact down as an "assumption" to move on.
 
+  Security defects stay out of the repository. The repository is public. A
+  defect that lets a caller read, change or delete what their rights do not
+  allow, that hands out a secret, key, token or personal data, that skips a
+  check or runs it for the wrong account or portal, or that breaks the
+  encryption a private room promises, is not described in any committed
+  file before the version that fixes it is released: not in a proposal,
+  design, task, delta or main spec, not in release notes, a mock comment, a
+  test name or a commit message, and with no route, request, reproduction
+  or consequence. This holds for the client, for ../server and for the
+  Document Server alike, and for a defect that is already fixed on a branch
+  but not yet released. Tell the user about it in the conversation; where
+  the details are kept is the owner's decision, never this repository. A
+  task that asks for such a fix says what the behaviour shall be and how it
+  is accepted, in neutral words, without saying what goes wrong today. A
+  main spec states the behaviour the product is meant to have there and
+  stays silent on the gap. A deliberate, documented limit of the design (a
+  SHALL NOT of the main specs) is not a defect and is written as before.
+
   Commits: work is committed as it goes, so uncommitted files never pile up.
   Every completed task (each `- [ ]` sub-item ticked in tasks.md) is one
   commit: its code, tests, locale and .meta files, mock changes and the
@@ -93,18 +111,21 @@ rules:
   proposal:
     - State explicitly what is out of scope and which decisions need a human.
     - Name the server-side (../server) or Document Server work the change depends on.
+    - Never state a security defect as the reason of a change (context, "Security defects stay out of the repository"); say what the behaviour shall be.
   specs:
     - One observable behaviour per requirement; keep descriptions under 500 characters.
     - Requirements never name classes, functions, stores or files; a short "Implementation" note in Purpose may point at the owning modules.
     - Deliberate v1 limitations are requirements too, phrased as SHALL NOT, so the limitation is visible and testable.
     - Security-relevant scenarios state what MUST NOT happen (no plaintext upload, no silent key acceptance), not only the happy path.
     - User-facing text in scenarios refers to a Common.json i18n key when one exists.
+    - No requirement or scenario records a security defect as current behaviour; where the product falls short of a protection, the spec states the protection or stays silent.
     - A requirement about server behaviour states what the ../server implementation does, as found through CodeGraph and read in the source; never what the client expects or what seems likely.
   design:
     - Record which stashed design document (if any) the decision comes from and whether the code still matches it.
     - Cite the ../server file (controller action, DTO, enum) found through CodeGraph behind every server-contract claim; a claim that cannot be traced to the server source is not written.
   tasks:
     - Every task names its verification (unit test path, E2E spec, or command).
+    - A task that fixes a security defect names the behaviour asked and its acceptance only, never the defect, its route or how to reach it.
     - Locale changes run the translation skills and the locale tests in the same task group.
     - "Keep the pre-push gate in mind: tsc, biome, locale tests, shared/client/sdk unit tests must stay green."
 

@@ -79,3 +79,18 @@ The system SHALL wrap the secret of an external link for the public key of the r
 #### Scenario: Member who does not manage links
 - **WHEN** a member with a lower role looks at a link of the room
 - **THEN** no wrap of its secret exists for them and the address cannot be shown
+
+### Requirement: The secret of a link is encoded for an address
+The system SHALL write the secret of a link after `#` as 43 characters of the URL-safe base64 alphabet without padding, and SHALL check the length and the alphabet of what it reads before any request to the server. A secret that fails the check SHALL be reported as an address copied incompletely, not as a wrong password or a missing link.
+
+#### Scenario: Secret cut short
+- **WHEN** a visitor opens an address whose part after `#` has fewer than 43 characters
+- **THEN** the page says the address was copied incompletely and sends nothing
+
+#### Scenario: Foreign character in the secret
+- **WHEN** the part after `#` holds a character outside the alphabet
+- **THEN** the page says the address was copied incompletely
+
+#### Scenario: Shortened address
+- **WHEN** the secret is appended to the shortened form of the link's address
+- **THEN** the address opens the item as the long one does

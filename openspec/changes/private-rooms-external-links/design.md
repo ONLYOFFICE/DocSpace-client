@@ -269,6 +269,27 @@ none is open. The technical decisions below follow from them.
     the proof cannot be guessed, and a plain comparison of its hash is
     enough.
 
+19. **A link to many files is not handed out half made.** Wrapping for a
+    link costs what inviting a member costs: one unwrap and one wrap for
+    each file it covers. The address of a link to a folder or a room is
+    offered only when every file has its wrap, and an interrupted run is
+    continued by any manager, with the backfill that exists. A link to
+    one file is ready at once.
+20. **The secret is 43 characters of URL-safe base64 without padding, and
+    the page checks it before it asks the server.** A message or a mail
+    client that cuts an address, or reads an underscore as markup, would
+    otherwise end in a failed decryption that looks like a wrong
+    password. The whole address stays near 200 characters, and near 70 in
+    its shortened form, to which the client appends the secret: the
+    server's short address redirects, and a browser keeps the part after
+    `#` across a redirect.
+21. **In an archived private room links are not served**, as for an
+    ordinary archived room, where the server answers a link as invalid.
+    They work again after a restore.
+22. **The SDK offers no links of private items in this change.** Its Share
+    tab and menus stay as the main `sdk-surface` has them; the page of a
+    visitor is the portal's own.
+
 ## Risks / Trade-offs
 
 - [The address leaks: a forwarded message, a browser history, a

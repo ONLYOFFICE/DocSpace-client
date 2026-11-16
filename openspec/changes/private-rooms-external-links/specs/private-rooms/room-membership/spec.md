@@ -25,6 +25,25 @@ The system SHALL offer external links for a private room, its folders and its fi
 - **WHEN** the portal setting for external links of private rooms is off
 - **THEN** no external-link entry and no link block is shown for a private item
 
+### Requirement: Share tab hidden for private items
+The system SHALL show the Share tab of the info panel for a private room, a folder inside it, or an encrypted file only to a member who may manage the room's links, while the portal allows external links of private rooms, and SHALL NOT show it to anybody else.
+
+#### Scenario: Encrypted file selected
+- **WHEN** an encrypted file is selected by a member who may not manage the room's links and the info panel opens
+- **THEN** the tabs do not include Share
+
+#### Scenario: Private room selected in a list
+- **WHEN** a private room is selected in the Private or Rooms list by a member who may not manage its links and the info panel opens
+- **THEN** the tabs do not include Share
+
+#### Scenario: Member who manages links
+- **WHEN** the owner or a room manager selects a private room, a folder inside it or an encrypted file
+- **THEN** the tabs include Share, with the external links of the item
+
+#### Scenario: Portal forbids the links
+- **WHEN** the portal setting for external links of private rooms is off
+- **THEN** the tabs do not include Share for anybody
+
 ## ADDED Requirements
 
 ### Requirement: External link of a private item keeps the link model of the portal
@@ -138,3 +157,29 @@ The system SHALL NOT offer an external link in a private room of the virtual dat
 #### Scenario: Restriction turned off
 - **WHEN** the restriction is turned off
 - **THEN** the links the room held work again
+
+### Requirement: A link to a folder or a room is ready when every file has its key
+The system SHALL, when a link to a folder or a room is created, wrap the keys of the files it covers for the link with a visible progress, and SHALL NOT offer the address for copying before every file has its wrap. An interrupted run SHALL leave the link listed as not ready and be continued by any member who manages links.
+
+#### Scenario: Link to a room with many files
+- **WHEN** a manager creates a link to a room
+- **THEN** the progress of the wrapping is shown, and the address can be copied once it has finished
+
+#### Scenario: Page closed during the wrapping
+- **WHEN** the manager closes the page before the wrapping has finished
+- **THEN** the link is listed as not ready, without an address to copy, and the wrapping goes on when a manager opens the room
+
+#### Scenario: Link to one file
+- **WHEN** a manager creates a link to one file
+- **THEN** the address can be copied at once
+
+### Requirement: External links stop in an archived private room
+The system SHALL NOT offer an external link in an archived private room, and SHALL show the links the room held as not working while it is archived.
+
+#### Scenario: Room archived
+- **WHEN** a private room that holds links is archived
+- **THEN** its links stop working and no link can be created
+
+#### Scenario: Room restored
+- **WHEN** the room is restored from the archive
+- **THEN** the links it held work again

@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: No external or invitation links on a private room
-The server SHALL accept on a private room, active or archived, and on a folder or file inside one, only an external link that carries a link public key, a sealed private key and a proof hash, with an access other than form filling and no download ban, from a caller who may change the access, while the portal allows such links. It SHALL refuse with 403 any other external link and every invitation link. Revoking a link SHALL stay possible.
+The server SHALL accept on an active private room, and on a folder or file inside one, only an external link that carries a link public key, a sealed private key and a proof hash, with an access other than form filling and no download ban, from a caller who may change the access, while the portal allows such links. It SHALL refuse with 403 any other external link and every invitation link. Revoking a link SHALL stay possible.
 
 #### Scenario: External link requested
 - **WHEN** a room manager requests an external link for a private room without the link's key material
@@ -30,6 +30,21 @@ The server SHALL accept on a private room, active or archived, and on a folder o
 - **THEN** the server refuses to create one and serves none that exists
 
 ## ADDED Requirements
+
+### Requirement: Links of an archived private room are not served
+The server SHALL refuse with 403 an external link on an archived private room or on an item of one, and SHALL serve the links the room held as invalid while it is archived, as it does for an ordinary archived room. It SHALL NOT delete them; they work again when the room is restored.
+
+#### Scenario: Link requested in the archive
+- **WHEN** a room manager requests a link on an archived private room
+- **THEN** the server answers 403
+
+#### Scenario: Visitor of a link of an archived room
+- **WHEN** a visitor opens a link the room held before it was archived
+- **THEN** the server answers as for an invalid link, with any proof
+
+#### Scenario: Room restored
+- **WHEN** the room is restored
+- **THEN** the link is served again
 
 ### Requirement: The secret of a link is stored wrapped for those who manage links
 The server SHALL store, for a link of a private item, a wrap of its secret for the room's owner and for each room manager, SHALL give a wrap only to the user it was made for while that user manages links, and SHALL delete the wraps of a user who stops managing them. It SHALL report which managers have no wrap of a link's secret.

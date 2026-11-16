@@ -234,3 +234,24 @@ and SHALL work again when the restriction is turned off.
 
 - **WHEN** the restriction is turned on in a room that holds a link, and then off
 - **THEN** the link answers as invalid while it is on and is served again after
+
+### Requirement: Links of an archived private room are not served
+
+Setting an external link on an archived private room, or on an item of one, MUST answer 403, and a link the room held MUST be
+served as an invalid link while it is archived, as for an open archived room. The links SHALL NOT be deleted and SHALL work again
+when the room is restored.
+
+#### Scenario: Link requested in the archive
+
+- **WHEN** a room manager sets a link on an archived private room
+- **THEN** the answer is 403
+
+#### Scenario: Visitor of a link of an archived room
+
+- **WHEN** a visitor opens a link the room held before it was archived, with a valid proof
+- **THEN** the answer is as for an invalid link
+
+#### Scenario: Room restored
+
+- **WHEN** the room is restored
+- **THEN** the link is served again

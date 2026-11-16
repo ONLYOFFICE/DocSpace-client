@@ -1,5 +1,21 @@
 # Spec Delta
 
+## MODIFIED Requirements
+
+### Requirement: Context-menu entries withheld for encrypted files
+The system SHALL NOT show the following entries for an encrypted file: link-for-room-members, copy-general-link, send-by-email, create-room, ask-ai, make-form, submit-to-gallery, docu-sign, custom-filter, update-xlsx-data, vectorization, embedding-settings, convert, download-as, mark-as-favorite, rename, edit-index, version entries and form-filling entries; it SHALL add download-encrypted.
+
+#### Scenario: Full menu of an encrypted file
+- **WHEN** the context menu of an encrypted file is built
+- **THEN** none of the listed entries is present and download-encrypted is present
+
+### Requirement: Context-menu entries withheld for folders in private rooms
+The system SHALL NOT show link-for-room-members, create-room, favorites, edit-index, copy-to or duplicate for a folder inside a private room, and SHALL add download-encrypted when the folder is downloadable; the standard download decrypts the folder on the client (Decrypted folder download).
+
+#### Scenario: Folder menu in a private room
+- **WHEN** the context menu of a folder inside a private room is built
+- **THEN** none of the listed entries is present
+
 ## ADDED Requirements
 
 ### Requirement: A visitor opens an external link without an account
@@ -47,3 +63,18 @@ The system SHALL let a visitor read and download the files a link covers, and op
 #### Scenario: Visitor looks for other actions
 - **WHEN** a visitor opens the menu of an item reached through a link
 - **THEN** it offers no upload, delete, move, rename, share or members entry
+
+### Requirement: Link entries of private items are shown to those who manage links
+The system SHALL show sharing-settings, copy-shared-link and manage-links for an encrypted file and for a folder inside an active private room only to a member who may manage the room's links, while the portal allows external links of private rooms.
+
+#### Scenario: Manager opens the menu of an encrypted file
+- **WHEN** the owner or a room manager opens the context menu of an encrypted file
+- **THEN** the three link entries are present
+
+#### Scenario: Other member opens the menu
+- **WHEN** a member who may not manage links opens the same menu
+- **THEN** none of the three entries is present
+
+#### Scenario: Archived room or links forbidden by the portal
+- **WHEN** the room is archived, or the portal setting for external links of private rooms is off
+- **THEN** none of the three entries is present for anybody

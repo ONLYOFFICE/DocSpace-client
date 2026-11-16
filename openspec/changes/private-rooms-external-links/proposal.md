@@ -52,6 +52,9 @@ Out of scope:
 
 - Links for members ("link for room members"), invitation links and
   embedding, which stay withheld.
+- The SDK. It offers no link controls for private items and serves no
+  page of a visitor in this change; a link made in the client works
+  whatever the SDK shows.
 - A visitor who adds files through a link. Decided by the owner on
   2026-11-16: a link never lets a visitor upload.
 - Groups and guests as members of a private room.
@@ -121,6 +124,8 @@ None.
   items; member links and embedding stay withheld.
 - `private-rooms/file-operations`: what a visitor of a link can do.
 - `private-rooms/server-contract`: the behaviour asked of the server.
+- `private-rooms/sdk-surface`: the SDK offers no external links of
+  private items.
 
 ## Impact
 
@@ -130,8 +135,8 @@ None.
   `packages/shared/services/private-room` (the link key and the wraps for
   it), `packages/shared/api` with its mocks and contract tests, the public
   pages of `packages/client` (`PublicRoom`, `PublicPreview`), the link
-  controls the client and the SDK already have for ordinary items, which
-  are withheld for private ones today, `packages/doceditor` for a visitor,
+  controls the client already has for ordinary items, which are withheld
+  for private ones today, `packages/doceditor` for a visitor,
   and Common locale keys.
 - `private-rooms-release-gate`: its documentation pack states the new
   promise.

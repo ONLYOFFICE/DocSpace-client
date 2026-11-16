@@ -49,6 +49,10 @@ type SkillEditorProps = {
   minHeight?: string;
   /** The height the editor scrolls past; it grows with its text without one. */
   maxHeight?: string;
+  /** A fixed height: the text scrolls inside the editor. */
+  height?: string;
+  /** Added to the editor's box, to size it from outside. */
+  className?: string;
   /** Hands over the editor's view, for edits made from outside of it. */
   onCreateEditor?: (view: EditorView) => void;
 };
@@ -85,12 +89,18 @@ const SkillEditor = ({
   onChange,
   minHeight = "calc(100vh - 220px)",
   maxHeight,
+  height,
+  className,
   onCreateEditor,
 }: SkillEditorProps) => {
   const { isBase } = useTheme();
 
   return (
-    <div className={styles.editor} dir="ltr" data-testid="generate-skill-editor">
+    <div
+      className={className ? `${styles.editor} ${className}` : styles.editor}
+      dir="ltr"
+      data-testid="generate-skill-editor"
+    >
       <CodeMirror
         value={value}
         theme={isBase ? lightTheme : darkTheme}
@@ -102,6 +112,7 @@ const SkillEditor = ({
         // the room of a long one, and a long one scrolls with the panel.
         minHeight={minHeight}
         maxHeight={maxHeight}
+        height={height}
         onCreateEditor={onCreateEditor}
         basicSetup={{ foldGutter: false }}
       />

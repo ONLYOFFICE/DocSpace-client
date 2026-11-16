@@ -149,7 +149,6 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
       <ModalDialog
         visible
         displayType={ModalDialogType.aside}
-        withBodyScroll
         onClose={onClose}
         dataTestId="view-skill-dialog"
       >
@@ -167,7 +166,9 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
                     value={body}
                     isDisabled
                     onChange={setBody}
-                    minHeight="calc(100vh - 220px)"
+                    minHeight="0"
+                    height="100%"
+                    className={styles.editorFill}
                   />
                 </React.Suspense>
               )}
@@ -222,7 +223,6 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
     <ModalDialog
       visible
       displayType={ModalDialogType.aside}
-      withBodyScroll
       withForm
       onSubmit={(e) => {
         e.preventDefault();
@@ -276,7 +276,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
                 {t("Common:SkillDescriptionHint")}
               </Text>
             </div>
-            <div className={styles.field}>
+            <div className={`${styles.field} ${styles.fieldFill}`}>
               <Label text={t("Common:SkillInstructions")} display="display" />
               <div className={styles.instructions}>
                 <MarkdownToolbar isDisabled={isLoading || isSaving} onAction={onFormat} />
@@ -286,7 +286,9 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
                       value={body}
                       isDisabled={isSaving}
                       onChange={setBody}
-                      minHeight="320px"
+                      minHeight="0"
+                      height="100%"
+                      className={styles.editorFill}
                       onCreateEditor={(view) => {
                         editorRef.current = view;
                       }}

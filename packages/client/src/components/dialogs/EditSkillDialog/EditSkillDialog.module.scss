@@ -33,19 +33,45 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// The same top offset as the other side panels' forms.
+// The form takes the panel's whole body, so the instructions get the height
+// the other fields leave and scroll inside their editor. The panel body is
+// the positioned box; its side padding is kept by the inline inset. Only a
+// panel too short for the fields scrolls as a whole.
 .body {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: var(--modal-dialog-padding-x, 16px);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-top: 20px;
+  box-sizing: border-box;
+  padding-block: 20px 16px;
+  overflow-y: auto;
+}
+
+// The editor's box and the editor in it fill the field; the text scrolls
+// in the editor.
+.editorFill {
+  flex: 1 1 0;
+  min-height: 0;
+
+  > div {
+    height: 100%;
+  }
 }
 
 .field {
   display: flex;
+  flex: none;
   flex-direction: column;
   gap: 4px;
   min-width: 0;
+}
+
+// The instructions: all the height that is left, never less than a few lines.
+.fieldFill {
+  flex: 1 1 0;
+  min-height: 180px;
 }
 
 .hint {
@@ -60,8 +86,10 @@
 // The toolbar and the editor under it are one bordered box.
 .instructions {
   display: flex;
+  flex: 1 1 0;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
 
   > div:last-child {
     border-start-start-radius: 0;

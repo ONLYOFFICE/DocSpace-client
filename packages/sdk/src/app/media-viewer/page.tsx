@@ -50,7 +50,9 @@ export default async function Page({
 }) {
   logger.info("Media viewer page");
 
-  const { folder: folderId = "", key, fileId } = await searchParams;
+  const { folder: folderId, key, fileId } = await searchParams;
+
+  if (!folderId) return <MediaViewerError event="onNotFound" />;
 
   const hdrs = await headers();
 

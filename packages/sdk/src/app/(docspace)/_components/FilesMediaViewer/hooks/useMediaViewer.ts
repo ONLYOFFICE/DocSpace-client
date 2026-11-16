@@ -37,6 +37,7 @@ import { useCallback, useContext, useMemo } from "react";
 
 import type { NumberOrString } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
+import { getPlaylist } from "@onlyoffice/apps-ui-kit/media-viewer/utils/getPlaylist";
 
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -47,7 +48,6 @@ import useItemIcon, {
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
-import getPlayList from "@/app/(docspace)/_utils/get-play-list";
 
 type UseMediaViewerProps = {
   filesSettings: TFilesSettings;
@@ -75,7 +75,7 @@ export function useMediaViewer({ filesSettings }: UseMediaViewerProps) {
 
   const files = useMemo(() => items.filter((item) => !item.isFolder), [items]);
 
-  const playlist = useMemo(() => getPlayList(files), [files]);
+  const playlist = useMemo(() => getPlaylist(files), [files]);
 
   const playlistPos = playlist.find((file) => file.fileId === mediaId)?.id || 0;
 

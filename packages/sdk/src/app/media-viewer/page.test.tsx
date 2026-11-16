@@ -67,6 +67,14 @@ describe("media-viewer page", () => {
     expect(element.props.event).toBe("onNoAccess");
   });
 
+  test("reports onNotFound without asking anything when no folder is given", async () => {
+    const element = await Page({ searchParams: Promise.resolve({}) });
+
+    expect(element.type).toBe(MediaViewerError);
+    expect(element.props.event).toBe("onNotFound");
+    expect(getFilesSettings).not.toHaveBeenCalled();
+  });
+
   test("loads the data on the client in an OAuth frame", async () => {
     requestHeaders.set(OAUTH_FRAME_HEADER, "1");
 

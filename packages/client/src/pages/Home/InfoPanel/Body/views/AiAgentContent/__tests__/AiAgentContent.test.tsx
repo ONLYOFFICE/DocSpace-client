@@ -1,6 +1,6 @@
 import React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { act, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 
 const api = vi.hoisted(() => ({
   getAiThreadArtifacts: vi.fn(),
@@ -10,6 +10,7 @@ const stores = vi.hoisted(() => ({
   dialogsStore: { aiChatActiveThreadId: "t-1" },
   filesSettingsStore: { getIcon: () => "icon.svg" },
   settingsStore: { culture: "en" },
+  filesActionsStore: { downloadFiles: vi.fn() },
 }));
 
 vi.mock("@docspace/shared/api/ai/threadFiles", () => api);
@@ -57,6 +58,23 @@ describe("AiAgentContent", () => {
     expect(api.getAiThreadAttachments).toHaveBeenCalledWith(7, "t-1");
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
     expect(titles("ai-agent-content-attachments")).toEqual(["Agreement.docx", "Notes.jpg"]);
+  });
+
+  it("downloads all the artifacts as one archive, once there is more than one", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    // One artifact has its own button only; the attachments never get the link.
+    expect(screen.queryByTestId("ai-agent-content-download-all")).toBeNull();
+  });
+
+  it("offers Download all for several artifacts", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([file(1, "Chart.png"), file(5, "Proposal.docx")]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    fireEvent.click(screen.getByTestId("ai-agent-content-download-all"));
+    expect(stores.filesActionsStore.downloadFiles).toHaveBeenCalledWith([1, 5], [], {
+      label: "Common:ArchivingData",
+    });
   });
 
   it("shows both sections empty for a new chat, without a request", async () => {

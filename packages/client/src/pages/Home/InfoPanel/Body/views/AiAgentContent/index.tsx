@@ -38,7 +38,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import {
@@ -94,10 +94,11 @@ type AiAgentContentProps = {
  * a new tab and is downloaded by its button.
  */
 const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "Files"]);
   const threadId = useStore("dialogsStore").aiChatActiveThreadId;
   const { getIcon } = useStore("filesSettingsStore");
   const culture = useStore("settingsStore").culture;
+  const { downloadFiles } = useStore("filesActionsStore");
 
   const [files, setFiles] = React.useState<TThreadFiles | null>(null);
   const [failed, setFailed] = React.useState(false);
@@ -133,10 +134,10 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
 
   if (!files) return null;
 
-  const row = (file: TFile, withDate: boolean) => {
+  const row = (file: TFile) => {
     const details = [
       file.contentLength,
-      withDate && file.created ? getCorrectDate(culture, file.created) : "",
+      file.created ? getCorrectDate(culture, file.created) : "",
     ]
       .filter(Boolean)
       .join(" \u00b7 ");
@@ -178,14 +179,40 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     key: string,
     label: string,
     list: TFile[],
-    withDate: boolean,
+    withDownloadAll: boolean,
   ) => (
     <section className={styles.section} data-testid={`ai-agent-content-${key}`}>
-      <Text as="h4" fontSize="12px" fontWeight={600} className={styles.heading}>
-        {label}
-      </Text>
+      <div className={styles.header}>
+        <Text
+          as="h4"
+          fontSize="12px"
+          fontWeight={600}
+          className={styles.heading}
+        >
+          {label}
+        </Text>
+        {withDownloadAll && list.length > 1 ? (
+          <Link
+            type={LinkType.action}
+            isHovered
+            fontSize="12px"
+            fontWeight={600}
+            // One archive, through the portal's download operation.
+            onClick={() =>
+              downloadFiles(
+                list.map((file) => file.id),
+                [],
+                { label: t("Common:ArchivingData") },
+              )
+            }
+            dataTestId="ai-agent-content-download-all"
+          >
+            {t("Files:DownloadAll")}
+          </Link>
+        ) : null}
+      </div>
       {list.length > 0 ? (
-        list.map((file) => row(file, withDate))
+        list.map((file) => row(file))
       ) : (
         <Text fontSize="13px" className={styles.empty}>
           {t("Common:AiContentEmpty")}
@@ -201,7 +228,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
         "attachments",
         t("Common:AiAttachments"),
         files.attachments,
-        true,
+        false,
       )}
     </div>
   );

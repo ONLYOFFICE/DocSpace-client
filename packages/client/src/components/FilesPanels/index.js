@@ -631,7 +631,9 @@ export default inject(
     return {
       aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
       generateSkillDialogVisible: dialogsStore.generateSkillDialogVisible,
-      editSkillDialogVisible: dialogsStore.editSkillFile !== null,
+      editSkillDialogVisible:
+        dialogsStore.editSkillFile !== null ||
+        dialogsStore.newSkillFolderId !== null,
       preparationPortalDialogVisible,
       uploadPanelVisible,
       copyPanelVisible,

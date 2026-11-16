@@ -261,6 +261,9 @@ class DialogsStore {
   /** The skill file the "Edit skill" dialog is open on. */
   editSkillFile: Nullable<TFile> = null;
 
+  /** The skill set the skill dialog creates a skill in: "New skill". */
+  newSkillFolderId: Nullable<number | string> = null;
+
   /** The dialog only shows the skill's instructions: "View instructions". */
   editSkillReadOnly = false;
 
@@ -1023,6 +1026,11 @@ class DialogsStore {
   /** The panel that writes a skill with AI into the current Instructions room. */
   setGenerateSkillDialogVisible = (visible: boolean) => {
     this.generateSkillDialogVisible = visible;
+  };
+
+  /** Opens the skill dialog empty, to create a skill in the skill set. */
+  setNewSkillFolderId = (folderId: Nullable<number | string>) => {
+    this.newSkillFolderId = folderId;
   };
 
   setEditSkillFile = (file: Nullable<TFile>, readOnly = false) => {

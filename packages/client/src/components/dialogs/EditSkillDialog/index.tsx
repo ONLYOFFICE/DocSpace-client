@@ -45,7 +45,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { SKILL_DESCRIPTION_MAX_LENGTH, SKILL_TITLE_MAX_LENGTH } from "@docspace/shared/api/ai/types";
-import { updateFile, updateFileStream } from "@docspace/shared/api/files";
+import { insertFile, updateFile, updateFileStream } from "@docspace/shared/api/files";
 import type { TFile } from "@docspace/shared/api/files/types";
 import {
   buildSkillFile,
@@ -80,6 +80,8 @@ export const readSkillText = async (file: Pick<TFile, "viewUrl">) => {
 
 type EditSkillDialogProps = {
   file?: TFile | null;
+  /** The skill set a new skill is created in: the dialog opens empty. */
+  folderId?: number | string | null;
   /** Opened by "View instructions": the instructions alone, not to be changed. */
   readOnly?: boolean;
   onClose?: () => void;
@@ -87,17 +89,19 @@ type EditSkillDialogProps = {
 };
 
 /**
- * Edits a skill of a skill set: its name, which is also the file's title
+ * Creates a skill in a skill set ("New skill", opened empty) or edits one: its name, which is also the file's title
  * and gives the command the chat calls it by, its description, which tells
  * the assistant when to use the skill on its own, and its instructions. The
  * file is rewritten in place as a new version and renamed when the name
  * changed; the Files service checks the frontmatter and names what it
  * refuses.
  */
-const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: EditSkillDialogProps) => {
+const EditSkillDialog = ({ file, folderId = null, readOnly = false, onClose, refreshFiles }: EditSkillDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const [isLoading, setIsLoading] = React.useState(true);
+  const isNew = !file && folderId !== null;
+  // A new skill has nothing to read: its form opens at once.
+  const [isLoading, setIsLoading] = React.useState(!isNew);
   const [isFailed, setIsFailed] = React.useState(false);
   const [isSaving, setIsSaving] = React.useState(false);
   // "Edit" in the instructions view turns the same dialog into the form.
@@ -140,11 +144,11 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
     };
   }, [file]);
 
-  if (!file) return null;
+  if (!file && !isNew) return null;
 
-  const canEdit = !!file.security?.Edit && !!file.security?.Rename;
+  const canEdit = !!file?.security?.Edit && !!file?.security?.Rename;
 
-  if (isViewing)
+  if (isViewing && file)
     return (
       <ModalDialog
         visible
@@ -208,9 +212,14 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
     setIsSaving(true);
     try {
       const text = buildSkillFile({ name: skillName, description, body });
-      await updateFileStream(file.id, new File([text], file.title, { type: "text/markdown" }), false, true);
       const title = name.trim();
-      if (title !== titleOf(file)) await updateFile(file.id, `${title}${SKILL_EXTENSION}`);
+      if (file) {
+        await updateFileStream(file.id, new File([text], file.title, { type: "text/markdown" }), false, true);
+        if (title !== titleOf(file)) await updateFile(file.id, `${title}${SKILL_EXTENSION}`);
+      } else {
+        // The Files service checks the frontmatter and the set's skill limit.
+        await insertFile(folderId as number | string, `${title}${SKILL_EXTENSION}`, new Blob([text], { type: "text/markdown" }));
+      }
       await refreshFiles?.();
       toastr.success(t("Common:SkillSaved"));
       onClose?.();
@@ -233,7 +242,7 @@ const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: Edit
       isCloseable={!isSaving}
       dataTestId="edit-skill-dialog"
     >
-      <ModalDialog.Header>{t("Common:EditSkill")}</ModalDialog.Header>
+      <ModalDialog.Header>{isNew ? t("Common:NewSkill") : t("Common:EditSkill")}</ModalDialog.Header>
       <ModalDialog.Body>
         {isFailed ? (
           <Text className={styles.message} data-testid="edit-skill-error">
@@ -330,7 +339,11 @@ export { EditSkillDialog as PureEditSkillDialog };
 
 export default inject(({ dialogsStore, filesStore }: TStore) => ({
   file: dialogsStore.editSkillFile,
+  folderId: dialogsStore.newSkillFolderId,
   readOnly: dialogsStore.editSkillReadOnly,
-  onClose: () => dialogsStore.setEditSkillFile(null),
+  onClose: () => {
+    dialogsStore.setEditSkillFile(null);
+    dialogsStore.setNewSkillFolderId(null);
+  },
   refreshFiles: filesStore.refreshFiles,
 }))(observer(EditSkillDialog));

@@ -39,7 +39,6 @@ import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
 import type React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createSkill } from "@docspace/shared/api/ai";
 
 type TDeferred<T> = {
   promise: Promise<T>;
@@ -59,7 +58,6 @@ const mocks = vi.hoisted(() => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
 }));
 
-vi.mock("@docspace/shared/api/ai", () => ({ createSkill: vi.fn() }));
 
 vi.mock("SRC_DIR/i18n", () => ({
   default: { t: (key: string) => key, exists: () => true, language: "en" },
@@ -144,8 +142,13 @@ const createStores = ({
       },
       setConvertPasswordDialogVisible: vi.fn(),
       setFormCreationInfo: vi.fn(),
+      setNewSkillFolderId: vi.fn(),
     },
-    { setConvertPasswordDialogVisible: false, setFormCreationInfo: false },
+    {
+      setConvertPasswordDialogVisible: false,
+      setFormCreationInfo: false,
+      setNewSkillFolderId: false,
+    },
   );
 
   const createFile = vi.fn();
@@ -410,55 +413,19 @@ describe("CreateEvent - a Markdown file opens in the Markdown plugin", () => {
     expect(stores.filesStore.openDocEditor).not.toHaveBeenCalled();
   });
 
-  it("Instructions room: created by the AI service from the skill template", async () => {
+  it("Instructions room: New skill opens the skill dialog and creates nothing itself", async () => {
     const stores = createStores({
-      keepNewFileName: true,
       isPrivacy: false,
       roomType: RoomsType.InstructionsRoom,
     });
-    const file = { id: 41, folderId: ROOM_ID, fileExst: ".md" };
     const insertFile = vi.spyOn(api.files, "insertFile");
-    const getFileInfo = vi
-      .spyOn(api.files, "getFileInfo")
-      .mockResolvedValue(file as never);
-    vi.mocked(createSkill).mockResolvedValue({
-      id: "41",
-      title: "Common:NewMarkdown.md",
-    });
     renderCreateEvent(stores, createRequest("md"));
     await flush();
 
+    expect(stores.dialogsStore.setNewSkillFolderId).toHaveBeenCalledWith(ROOM_ID);
+    expect(stores.dialogsStore.eventDialogVisible).toBe(false);
     expect(stores.filesStore.createFile).not.toHaveBeenCalled();
     expect(insertFile).not.toHaveBeenCalled();
-    expect(createSkill).toHaveBeenCalledWith({
-      destId: ROOM_ID,
-      title: "Common:NewMarkdown",
-    });
-    expect(getFileInfo).toHaveBeenCalledWith("41");
-    expect(stores.pluginStore.openMarkdownFile).toHaveBeenCalledWith(file);
-  });
-
-  it("Instructions room without the plugin: the new skill opens view-only", async () => {
-    const stores = createStores({
-      keepNewFileName: true,
-      isPrivacy: false,
-      roomType: RoomsType.InstructionsRoom,
-    });
-    stores.pluginStore.isMarkdownEditorAvailable = false;
-    const file = { id: 42, folderId: ROOM_ID, fileExst: ".md" };
-    vi.spyOn(api.files, "getFileInfo").mockResolvedValue(file as never);
-    vi.mocked(createSkill).mockResolvedValue({ id: "42", title: "a.md" });
-    renderCreateEvent(stores, createRequest("md"));
-    await flush();
-
     expect(stores.pluginStore.openMarkdownFile).not.toHaveBeenCalled();
-    expect(stores.filesStore.openDocEditor).toHaveBeenCalledWith(
-      42,
-      true,
-      null,
-      false,
-      false,
-      null,
-    );
   });
 });

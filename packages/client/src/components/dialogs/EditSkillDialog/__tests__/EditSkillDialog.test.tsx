@@ -2,7 +2,7 @@ import React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-const api = vi.hoisted(() => ({ updateFile: vi.fn(), updateFileStream: vi.fn() }));
+const api = vi.hoisted(() => ({ insertFile: vi.fn(), updateFile: vi.fn(), updateFileStream: vi.fn() }));
 const toastr = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn() }));
 
 vi.mock("@docspace/shared/api/files", () => api);
@@ -56,12 +56,14 @@ const open = async () => {
   return screen.findByTestId("editor");
 };
 
-const sentText = () =>
+const readText = (blob: Blob) =>
   new Promise<string>((resolve) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result));
-    reader.readAsText(api.updateFileStream.mock.calls[0][1] as File);
+    reader.readAsText(blob);
   });
+
+const sentText = () => readText(api.updateFileStream.mock.calls[0][1] as File);
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -118,6 +120,26 @@ describe("EditSkillDialog", () => {
     fireEvent.submit(screen.getByTestId("form"));
     await waitFor(() => expect(toastr.error).toHaveBeenCalled());
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("opens empty for New skill and creates the file in the skill set on Save", async () => {
+    api.insertFile.mockResolvedValue({ id: 9 });
+    render(<EditSkillDialog folderId={12} onClose={onClose} refreshFiles={refreshFiles} />);
+    const editor = await screen.findByTestId("editor");
+    expect(fetch).not.toHaveBeenCalled();
+    fireEvent.submit(screen.getByTestId("form"));
+    expect(api.insertFile).not.toHaveBeenCalled();
+    fireEvent.change(screen.getByTestId("edit-skill-name"), { target: { value: "Risk review" } });
+    fireEvent.change(screen.getByTestId("edit-skill-description"), { target: { value: "Flags risks" } });
+    fireEvent.change(editor, { target: { value: "# Steps" } });
+    fireEvent.submit(screen.getByTestId("form"));
+    await waitFor(() => expect(onClose).toHaveBeenCalled());
+    expect(api.insertFile).toHaveBeenCalledWith(12, "Risk review.md", expect.any(Blob));
+    expect(await readText(api.insertFile.mock.calls[0][2] as Blob)).toBe(
+      '---\nname: "risk-review"\ndescription: "Flags risks"\n---\n\n# Steps\n',
+    );
+    expect(api.updateFileStream).not.toHaveBeenCalled();
+    expect(refreshFiles).toHaveBeenCalled();
   });
 
   it("shows only the instructions for View instructions, and edits them on Edit", async () => {

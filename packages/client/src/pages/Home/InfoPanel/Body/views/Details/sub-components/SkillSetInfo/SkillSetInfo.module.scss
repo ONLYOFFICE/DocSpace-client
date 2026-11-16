@@ -33,31 +33,28 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.section {
+
+.list {
+  margin: 0;
+  padding: 0 0 20px;
+  list-style: none;
+}
+
+.item {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  height: 32px;
+}
+
+.name {
+  flex: 1 1 auto;
   min-width: 0;
 }
 
 .command {
+  flex: none;
   color: var(--text-secondary);
-}
-
-.text {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.instructions {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 12px;
-  border: 1px solid var(--files-section-table-view-row-border-color);
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 20px;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }

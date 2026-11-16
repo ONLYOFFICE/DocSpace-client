@@ -261,6 +261,9 @@ class DialogsStore {
   /** The skill file the "Edit skill" dialog is open on. */
   editSkillFile: Nullable<TFile> = null;
 
+  /** The dialog only shows the skill's instructions: "View instructions". */
+  editSkillReadOnly = false;
+
   convertPasswordDialogVisible = false;
 
   inviteQuotaWarningDialogVisible = false;
@@ -1022,8 +1025,9 @@ class DialogsStore {
     this.generateSkillDialogVisible = visible;
   };
 
-  setEditSkillFile = (file: Nullable<TFile>) => {
+  setEditSkillFile = (file: Nullable<TFile>, readOnly = false) => {
     this.editSkillFile = file;
+    this.editSkillReadOnly = !!file && readOnly;
   };
 
   createMasterForm = async (

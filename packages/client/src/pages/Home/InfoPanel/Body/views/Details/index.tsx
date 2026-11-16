@@ -59,8 +59,11 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
+import type SkillsStore from "SRC_DIR/store/SkillsStore";
+
 import { FormInfo } from "./sub-components/FormInfo";
-import { SkillInfo } from "./sub-components/SkillInfo";
+import { SkillSetInfo } from "./sub-components/SkillSetInfo";
 
 import DetailsHelper from "./Details.utils";
 
@@ -93,6 +96,12 @@ type DetailsProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
 
   roomLifetime?: TRoomLifetime;
+
+  /** The open skill set: its title and id, for a skill selected in it. */
+  skillSet?: { id: number | string; title: string } | null;
+  getSkill?: SkillsStore["get"];
+  fetchSkill?: SkillsStore["fetch"];
+  setEditSkillFile?: DialogsStore["setEditSkillFile"];
 };
 
 const Details = ({
@@ -111,6 +120,10 @@ const Details = ({
   onChangeFile,
   roomLifetime,
   onCreateRoomFromTemplate,
+  skillSet,
+  getSkill,
+  fetchSkill,
+  setEditSkillFile,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -125,6 +138,21 @@ const Details = ({
 
   const onThumbnailError = () => setIsThumbmailError(true);
 
+  // A skill is described by its file's text, which the skills store reads.
+  const skillFile = isSkillFile(selection as TFile)
+    ? (selection as TFile)
+    : null;
+  const skill = skillFile ? (getSkill?.(skillFile) ?? null) : null;
+  const skillName = skill?.name;
+  const skillSetTitle =
+    skillFile && skillSet && skillSet.id === skillFile.folderId
+      ? skillSet.title
+      : undefined;
+
+  useEffect(() => {
+    if (skillFile) fetchSkill?.(skillFile);
+  }, [skillFile, fetchSkill]);
+
   const detailsHelper = new DetailsHelper({
     isCollaborator: isCollaborator!,
     isVisitor: isVisitor!,
@@ -136,6 +164,8 @@ const Details = ({
     isAdmin: isAdmin!,
     isArchiveFolder: isArchive,
     roomLifetime: roomLifetime!,
+    skillSetTitle,
+    skillName,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -158,7 +188,7 @@ const Details = ({
       // erased cast preserves that no-op behavior.
       await createThumbnail?.(selection.id as unknown as TFile);
     }
-  }, [selection]);
+  }, [selection, skillName, skillSetTitle]);
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChangeFile?.(e, t);
@@ -309,6 +339,22 @@ const Details = ({
           />
         </div>
       )}
+      {skill?.description ? (
+        <>
+          <div className={commonStyles.subtitle}>
+            <Text fontWeight="600" fontSize="14px">
+              {t("Common:DescriptionLabel")}
+            </Text>
+          </div>
+          <Text
+            fontSize="13px"
+            className={styles.skillDescription}
+            dataTestId="info_panel_details_skill_description"
+          >
+            {skill.description}
+          </Text>
+        </>
+      ) : null}
       <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
           {t("Common:Properties")}
@@ -329,7 +375,16 @@ const Details = ({
         })}
       </div>
       <FormInfo selection={selection} />
-      <SkillInfo selection={selection} />
+      {skillFile ? (
+        <Button
+          label={t("Common:ViewInstructions")}
+          size={ButtonSize.small}
+          scale
+          onClick={() => setEditSkillFile?.(skillFile, true)}
+          testId="info_panel_details_view_instructions_button"
+        />
+      ) : null}
+      <SkillSetInfo selection={selection} />
     </>
   );
 };
@@ -345,6 +400,7 @@ export default inject(
     dialogsStore,
     avatarEditorDialogStore,
     selectedFolderStore,
+    skillsStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -361,7 +417,17 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
+    const isSkillSetOpen =
+      selectedFolderStore.roomType === RoomsType.InstructionsRoom;
+
     return {
+      skillSet:
+        isSkillSetOpen && selectedFolderStore.id !== null
+          ? { id: selectedFolderStore.id, title: selectedFolderStore.title }
+          : null,
+      getSkill: skillsStore.get,
+      fetchSkill: skillsStore.fetch,
+      setEditSkillFile: dialogsStore.setEditSkillFile,
       culture,
       createThumbnail,
       getInfoPanelItemIcon,

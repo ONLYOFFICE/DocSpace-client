@@ -75,6 +75,7 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
+  isSkillSet,
   selectedFolderTitle,
   canCreateSecurity,
   setDropTargetPreview,
@@ -150,6 +151,7 @@ const Table = ({
         onEditIndex={onEditIndex}
         isIndexEditingMode={isIndexEditingMode}
         isIndexing={isIndexing}
+        isSkillSet={isSkillSet}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
@@ -185,6 +187,7 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
+    isSkillSet,
     disableDrag,
   ]);
 
@@ -304,6 +307,7 @@ export default inject(
       isTrashFolder,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
+      isSkillSet: tableStore.isSkillSet,
       isTemplatesFolder,
       columnStorageName,
       columnInfoPanelStorageName,

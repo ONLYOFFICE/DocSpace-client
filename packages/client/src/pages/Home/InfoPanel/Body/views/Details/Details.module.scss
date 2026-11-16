@@ -108,3 +108,9 @@
     fill: var(--info-panel-links-bar-color);
   }
 }
+
+// A skill's description is read in full, as its author wrapped it.
+.skillDescription {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

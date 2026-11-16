@@ -33,103 +33,100 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { getFolder } from "@docspace/shared/api/files";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile } from "@docspace/shared/api/files/types";
+import { RoomsType } from "@docspace/shared/enums";
 import {
   getSkillNameByTitle,
-  isSkillFile,
-  parseSkillFile,
+  SKILL_EXTENSION,
   toSkillCommand,
-  type TSkillFile,
 } from "@docspace/shared/utils/skillFile";
 
 import commonStyles from "../../../../helpers/Common.module.scss";
 
-import styles from "./SkillInfo.module.scss";
+import styles from "./SkillSetInfo.module.scss";
 
-type SkillInfoProps = {
+type SkillSetInfoProps = {
   selection: unknown;
 };
 
-/**
- * What the Details of a skill add to those of a file: the command the chat
- * calls it by, its description and its instructions, read from the file.
- * Draws nothing for anything but a skill, and only the command when the file
- * cannot be read.
- */
-export const SkillInfo = ({ selection }: SkillInfoProps) => {
-  const { t } = useTranslation(["Common"]);
-  const file = selection as TFile;
-  const isSkill =
-    !!selection && !Array.isArray(selection) && isSkillFile(file);
-  const viewUrl = isSkill ? file.viewUrl : null;
-  const version = isSkill ? file.version : null;
+type TSkillSetRoom = {
+  id: number;
+  isRoom?: boolean;
+  roomType?: RoomsType;
+  filesCount?: number;
+};
 
-  const [skill, setSkill] = React.useState<TSkillFile | null>(null);
+const SKILLS_LIMIT = 100;
+
+const isSkillTitle = (title: string) =>
+  title.toLowerCase().endsWith(SKILL_EXTENSION);
+
+/**
+ * The skills of a skill set selected in the list: each by its name and the
+ * command that calls it in the chat. They are the Markdown files of the
+ * room, read when the set is selected and again when their number changes.
+ */
+export const SkillSetInfo = ({ selection }: SkillSetInfoProps) => {
+  const { t } = useTranslation(["Common"]);
+  const room = selection as TSkillSetRoom;
+  const isSkillSet =
+    !!selection &&
+    !Array.isArray(selection) &&
+    !!room.isRoom &&
+    room.roomType === RoomsType.InstructionsRoom;
+  const id = isSkillSet ? room.id : null;
+  const filesCount = isSkillSet ? room.filesCount : null;
+
+  const [skills, setSkills] = React.useState<Pick<TFile, "id" | "title">[]>(
+    [],
+  );
 
   React.useEffect(() => {
-    setSkill(null);
-    if (!viewUrl) return undefined;
+    setSkills([]);
+    if (id === null) return undefined;
     let cancelled = false;
-    fetch(viewUrl)
-      .then((response) =>
-        response.ok ? response.text() : Promise.reject(response),
-      )
-      .then((text) => !cancelled && setSkill(parseSkillFile(text)))
+    getFolder(id, FilesFilter.getDefault({ pageCount: SKILLS_LIMIT }))
+      .then(({ files }) => {
+        if (cancelled) return;
+        setSkills(files.filter((file) => isSkillTitle(file.title)));
+      })
+      // A set that cannot be read is shown without its skills.
       .catch(() => undefined);
     return () => {
       cancelled = true;
     };
-    // A new version is a new text behind the same address.
-  }, [viewUrl, version]);
+  }, [id, filesCount]);
 
-  if (!isSkill) return null;
-
-  const name = skill?.name || getSkillNameByTitle(file.title);
-
-  const section = (key: string, label: string, content: React.ReactNode) => (
-    <>
-      <div className={commonStyles.subtitle}>
-        <Text fontWeight="600" fontSize="14px">
-          {label}
-        </Text>
-      </div>
-      <div className={styles.section} data-testid={`skill-info-${key}`}>
-        {content}
-      </div>
-    </>
-  );
+  if (!isSkillSet || skills.length === 0) return null;
 
   return (
     <>
-      {section(
-        "command",
-        t("Common:SkillCommand"),
-        <Text fontSize="13px" fontWeight={600} className={styles.command}>
-          {toSkillCommand(name)}
-        </Text>,
-      )}
-      {skill?.description
-        ? section(
-            "description",
-            t("Common:DescriptionLabel"),
-            <Text fontSize="13px" className={styles.text}>
-              {skill.description}
-            </Text>,
-          )
-        : null}
-      {skill?.body
-        ? section(
-            "instructions",
-            t("Common:SkillInstructions"),
-            <pre className={styles.instructions}>{skill.body}</pre>,
-          )
-        : null}
+      <div className={commonStyles.subtitle}>
+        <Text fontWeight="600" fontSize="14px">
+          {t("Common:Skills")}
+        </Text>
+      </div>
+      <ul className={styles.list} data-testid="skill-set-info-skills">
+        {skills.map((skill) => (
+          <li key={skill.id} className={styles.item}>
+            <Text fontSize="13px" truncate className={styles.name}>
+              {skill.title.slice(0, -SKILL_EXTENSION.length)}
+            </Text>
+            <Text fontSize="11px" lineHeight="16px" className={styles.command}>
+              {toSkillCommand(getSkillNameByTitle(skill.title))}
+            </Text>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
 
-export default SkillInfo;
+export default SkillSetInfo;

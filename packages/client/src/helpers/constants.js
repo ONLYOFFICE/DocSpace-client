@@ -86,6 +86,8 @@ export const TableVersions = Object.freeze({
   // The AI section's lists (AI Workspace, Skills, Knowledge): their own
   // version, so a change of their columns resets only what they stored.
   AiRooms: "1",
+  // The skills of an open skill set: Name, Description, Last modified.
+  Skills: "1",
 });
 
 /**

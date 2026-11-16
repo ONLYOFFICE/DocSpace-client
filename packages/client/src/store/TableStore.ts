@@ -34,6 +34,7 @@
  */
 
 import { makeAutoObservable } from "mobx";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
@@ -71,6 +72,8 @@ const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVers
 // version (`TableVersions.AiRooms`): bump it when these columns change, and
 // what the browsers stored for the old set is no longer read.
 const TABLE_AI_ROOMS_COLUMNS = `aiRoomsTableColumns_ver-${TableVersions.AiRooms}`;
+// An open skill set lists skills, not files: its own columns and sizes.
+const TABLE_SKILLS_COLUMNS = `skillsTableColumns_ver-${TableVersions.Skills}`;
 const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
 const TABLE_IN_SHARED_FOLDER_COLUMNS = `inSharedFolderTableColumns_ver-${TableVersions.InSharedFolder}`;
 
@@ -86,6 +89,7 @@ const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_AI_ROOMS_SIZE = `aiRoomsColumnsSize_ver-${TableVersions.AiRooms}`;
+const COLUMNS_SKILLS_SIZE = `skillsColumnsSize_ver-${TableVersions.Skills}`;
 const COLUMNS_SHARED_WITH_ME_SIZE = `sharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 const COLUMNS_IN_SHARED_FOLDER_SIZE = `inSharedFolderColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
@@ -101,6 +105,7 @@ const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVe
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_AI_ROOMS_SIZE_INFO_PANEL = `aiRoomsColumnsSizeInfoPanel_ver-${TableVersions.AiRooms}`;
+const COLUMNS_SKILLS_SIZE_INFO_PANEL = `skillsColumnsSizeInfoPanel_ver-${TableVersions.Skills}`;
 const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 const COLUMNS_IN_SHARED_FOLDER_INFO_PANEL_SIZE = `infoPanelInSharedColumnsSize_ver-${TableVersions.InSharedFolder}`;
 
@@ -243,6 +248,10 @@ class TableStore {
   templateRoomColumnActivityIsEnabled = true;
 
   templateRoomQuotaColumnIsEnable = false;
+
+  descriptionSkillColumnIsEnabled = true;
+
+  modifiedSkillColumnIsEnabled = true;
 
   constructor(
     authStore: AuthStore,
@@ -468,6 +477,24 @@ class TableStore {
   setInsideGroupColumnAiSpending = (enable: boolean) =>
     (this.aiSpendingInsideGroupColumnIsEnabled = enable);
 
+  /** An open skill set: the table lists its skills by name, description and date. */
+  get isSkillSet() {
+    const { roomType, parentRoomType } = this.selectedFolderStore;
+    return (
+      !this.treeFoldersStore.isAiSectionFolder &&
+      (roomType === RoomsType.InstructionsRoom ||
+        parentRoomType === FolderType.InstructionsRoom)
+    );
+  }
+
+  setDescriptionSkillColumn = (enable: boolean) => {
+    this.descriptionSkillColumnIsEnabled = enable;
+  };
+
+  setModifiedSkillColumn = (enable: boolean) => {
+    this.modifiedSkillColumnIsEnabled = enable;
+  };
+
   setColumnsEnable = (frameTableColumns: string | null) => {
     const { contactsTab } = this.peopleStore.usersStore;
     const storageColumns = getPersistedString(this.tableStorageName);
@@ -624,6 +651,14 @@ class TableStore {
         return;
       }
 
+      if (this.isSkillSet) {
+        this.setDescriptionSkillColumn(
+          splitColumns.includes("DescriptionSkill"),
+        );
+        this.setModifiedSkillColumn(splitColumns.includes("ModifiedSkill"));
+        return;
+      }
+
       if (this.selectedFolderStore.isIndexedFolder) {
         this.setAuthorVDRColumn(splitColumns.includes("AuthorIndexing"));
         this.setCreatedVDRColumn(splitColumns.includes("CreatedIndexing"));
@@ -660,6 +695,12 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
     switch (key) {
+      case "DescriptionSkill":
+        this.setDescriptionSkillColumn(!this.descriptionSkillColumnIsEnabled);
+        return;
+      case "ModifiedSkill":
+        this.setModifiedSkillColumn(!this.modifiedSkillColumnIsEnabled);
+        return;
       case "Location":
         this.setLocationColumn(!this.locationColumnIsEnabled);
         return;
@@ -967,6 +1008,8 @@ class TableStore {
       tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
     else if (isInSharedFolder)
       tableStorageName = `${TABLE_IN_SHARED_FOLDER_COLUMNS}=${userId}`;
+    else if (this.isSkillSet)
+      tableStorageName = `${TABLE_SKILLS_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
     else if (isDocumentsFolder) tableStorageName = `${TABLE_COLUMNS}=${userId}`;
@@ -1028,6 +1071,8 @@ class TableStore {
       columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
     else if (isFavoritesFolder)
       columnStorageName = `${COLUMNS_FAVORITES_SIZE}=${userId}`;
+    else if (this.isSkillSet)
+      columnStorageName = `${COLUMNS_SKILLS_SIZE}=${userId}`;
     else if (isIndexedFolder)
       columnStorageName = `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`;
     else if (isContactsPeople)
@@ -1102,6 +1147,8 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
     else if (isFavoritesFolder)
       columnInfoPanelStorageName = `${COLUMNS_FAVORITES_SIZE_INFO_PANEL}=${userId}`;
+    else if (this.isSkillSet)
+      columnInfoPanelStorageName = `${COLUMNS_SKILLS_SIZE_INFO_PANEL}=${userId}`;
     else if (isIndexedFolder)
       columnInfoPanelStorageName = `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`;
     else if (isContactsPeople)

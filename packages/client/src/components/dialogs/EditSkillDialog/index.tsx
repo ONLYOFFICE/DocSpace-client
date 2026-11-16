@@ -80,6 +80,8 @@ export const readSkillText = async (file: Pick<TFile, "viewUrl">) => {
 
 type EditSkillDialogProps = {
   file?: TFile | null;
+  /** Opened by "View instructions": the instructions alone, not to be changed. */
+  readOnly?: boolean;
   onClose?: () => void;
   refreshFiles?: () => Promise<unknown>;
 };
@@ -92,12 +94,14 @@ type EditSkillDialogProps = {
  * changed; the Files service checks the frontmatter and names what it
  * refuses.
  */
-const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) => {
+const EditSkillDialog = ({ file, readOnly = false, onClose, refreshFiles }: EditSkillDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [isFailed, setIsFailed] = React.useState(false);
   const [isSaving, setIsSaving] = React.useState(false);
+  // "Edit" in the instructions view turns the same dialog into the form.
+  const [isViewing, setIsViewing] = React.useState(readOnly);
   const [name, setName] = React.useState(file ? titleOf(file) : "");
   const [description, setDescription] = React.useState("");
   const [body, setBody] = React.useState("");
@@ -137,6 +141,61 @@ const EditSkillDialog = ({ file, onClose, refreshFiles }: EditSkillDialogProps) 
   }, [file]);
 
   if (!file) return null;
+
+  const canEdit = !!file.security?.Edit && !!file.security?.Rename;
+
+  if (isViewing)
+    return (
+      <ModalDialog
+        visible
+        displayType={ModalDialogType.modal}
+        isHuge
+        autoMaxWidth
+        onClose={onClose}
+        dataTestId="view-skill-dialog"
+      >
+        <ModalDialog.Header>{titleOf(file)}</ModalDialog.Header>
+        <ModalDialog.Body>
+          {isFailed ? (
+            <Text className={styles.message} data-testid="edit-skill-error">
+              {t("Common:SomethingWentWrong")}
+            </Text>
+          ) : (
+            <div className={styles.body}>
+              {isLoading ? null : (
+                <React.Suspense fallback={null}>
+                  <SkillEditor
+                    value={body}
+                    isDisabled
+                    onChange={setBody}
+                    minHeight="160px"
+                    maxHeight="max(160px, calc(100vh - 260px))"
+                  />
+                </React.Suspense>
+              )}
+            </div>
+          )}
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          {canEdit && !isFailed ? (
+            <Button
+              label={t("Common:EditButton")}
+              size={ButtonSize.normal}
+              primary
+              onClick={() => setIsViewing(false)}
+              isDisabled={isLoading}
+              testId="view-skill-edit"
+            />
+          ) : null}
+          <Button
+            label={t("Common:CloseButton")}
+            size={ButtonSize.normal}
+            onClick={onClose}
+            testId="view-skill-close"
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+    );
 
   const skillName = toSkillName(name);
   const isValidName = skillName !== "";
@@ -267,6 +326,7 @@ export { EditSkillDialog as PureEditSkillDialog };
 
 export default inject(({ dialogsStore, filesStore }: TStore) => ({
   file: dialogsStore.editSkillFile,
+  readOnly: dialogsStore.editSkillReadOnly,
   onClose: () => dialogsStore.setEditSkillFile(null),
   refreshFiles: filesStore.refreshFiles,
 }))(observer(EditSkillDialog));

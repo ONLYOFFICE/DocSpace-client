@@ -50,6 +50,12 @@ import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TAiProjectSettings } from "@docspace/shared/api/ai/projects";
+import { RoomsType } from "@docspace/shared/enums";
+import {
+  getSkillNameByTitle,
+  isSkillFile,
+  toSkillCommand,
+} from "@docspace/shared/utils/skillFile";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -124,6 +130,10 @@ type DetailsHelperProps = {
   isAdmin: boolean;
   isArchiveFolder: boolean;
   roomLifetime: TRoomLifetime;
+  /** The title of the skill set a selected skill is in, when it is the open one. */
+  skillSetTitle?: string;
+  /** The skill's name as its file states it; the title gives it otherwise. */
+  skillName?: string;
 };
 
 class DetailsHelper {
@@ -147,6 +157,10 @@ class DetailsHelper {
 
   roomLifetime: TRoomLifetime;
 
+  skillSetTitle?: string;
+
+  skillName?: string;
+
   constructor(props: DetailsHelperProps) {
     this.t = props.t;
     this.item = props.item;
@@ -158,6 +172,8 @@ class DetailsHelper {
     this.isAdmin = props.isAdmin;
     this.isArchiveFolder = props.isArchiveFolder;
     this.roomLifetime = props.roomLifetime;
+    this.skillSetTitle = props.skillSetTitle;
+    this.skillName = props.skillName;
   }
 
   getPropertyList = () => {
@@ -173,12 +189,31 @@ class DetailsHelper {
     // An AI project shows as a room does; it holds no files of its own and
     // takes no storage, and its model comes from its settings block.
     const isAIProject = "isAIProject" in this.item && !!this.item.isAIProject;
+
+    // A skill is shown as a skill, not as the Markdown file that holds it:
+    // the set it is in and the command that calls it, no type or size.
+    if (isSkillFile(this.item as TFile))
+      return [
+        this.skillSetTitle && "Skill set",
+        "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
+        "Command",
+        "Date modified",
+        "Last modified by",
+        "Creation date",
+      ].filter((nP) => nP) as string[];
+
+    // A skill set holds skills only: its content is their number.
+    const isSkillSet =
+      "isRoom" in this.item &&
+      this.item.isRoom &&
+      this.item.roomType === RoomsType.InstructionsRoom;
+
     return (
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
             (this.item as TRoom).providerKey && "Storage Type",
-            "Type",
+            !isSkillSet && "Type",
             !isAIProject && "Content",
             "Date modified",
             "Last modified by",
@@ -193,7 +228,7 @@ class DetailsHelper {
                 this.isArchiveFolder,
               ).canCreate) &&
               "Tags",
-            !isAIProject && "Storage",
+            !isAIProject && !isSkillSet && "Storage",
             isAIProject && this.getAiProjectSettings()?.profile?.name && "Model",
           ]
         : "isFolder" in this.item && this.item.isFolder
@@ -295,6 +330,11 @@ class DetailsHelper {
       case "Model":
         return this.t("Common:AIAgentModel");
 
+      case "Skill set":
+        return this.t("Common:SkillSet");
+      case "Command":
+        return this.t("Common:SkillCommand");
+
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
           return this.isDefaultRoomsQuotaSet &&
@@ -364,6 +404,16 @@ class DetailsHelper {
         return this.getExternalDbTableName();
       case "Model":
         return text(this.getAiProjectSettings()?.profile?.name);
+      case "Skill set":
+        return text(this.skillSetTitle);
+      case "Command":
+        return (
+          <Text truncate className="property-content skill-command">
+            {toSkillCommand(
+              this.skillName || getSkillNameByTitle(this.item.title),
+            )}
+          </Text>
+        );
       default:
         break;
     }
@@ -431,6 +481,11 @@ class DetailsHelper {
   getItemContent = () => {
     if (!("foldersCount" in this.item) || !("filesCount" in this.item))
       return null;
+    if (
+      "roomType" in this.item &&
+      this.item.roomType === RoomsType.InstructionsRoom
+    )
+      return text(`${this.t("Common:Skills")}: ${this.item.filesCount}`);
     return text(
       `${this.t("Common:Folders")}: ${this.item.foldersCount} | ${this.t(
         "Common:Files",

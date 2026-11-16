@@ -37,12 +37,7 @@ import React from "react";
 import { TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import {
-  Events,
-  FolderType,
-  RoomsType,
-  SortByFieldName,
-} from "@docspace/shared/enums";
+import { Events, SortByFieldName } from "@docspace/shared/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -234,8 +229,48 @@ class FilesTableHeader extends React.Component {
     if (isTrashFolder) return this.getTrashFolderColumns();
     if (isRecentFolder) return this.getRecentFolderColumns();
     if (isFavoritesFolder) return this.getFavoritesFolderColumns();
+    if (this.props.isSkillSet) return this.getSkillsColumns();
     if (isIndexing) return this.getIndexingColumns();
     return this.getFilesColumns();
+  };
+
+  // An open skill set lists skills: what each is for, not what file it is.
+  getSkillsColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      descriptionSkillColumnIsEnabled,
+      modifiedSkillColumnIsEnabled,
+    } = this.props;
+
+    return [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      {
+        key: "DescriptionSkill",
+        title: t("Common:DescriptionLabel"),
+        enable: descriptionSkillColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedSkill",
+        title: t("Common:LastModified"),
+        enable: modifiedSkillColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
   };
 
   getFilesColumns = () => {
@@ -250,7 +285,6 @@ class FilesTableHeader extends React.Component {
       modifiedColumnIsEnabled,
       erasureColumnIsEnabled,
       isPersonalReadOnly,
-      isSkillSet,
     } = this.props;
 
     const authorBlock = !isPublicRoom
@@ -319,8 +353,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "Type",
-        // A skill set lists skills: the type gives way to the command.
-        title: isSkillSet ? t("Common:SkillCommand") : t("Common:Type"),
+        title: t("Common:Type"),
         enable: typeColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
@@ -1089,6 +1122,10 @@ export default inject(
       templateRoomColumnActivityIsEnabled,
       templateRoomQuotaColumnIsEnable,
 
+      descriptionSkillColumnIsEnabled,
+      modifiedSkillColumnIsEnabled,
+      isSkillSet,
+
       getColumns,
       setColumnEnable,
     } = tableStore;
@@ -1102,9 +1139,9 @@ export default inject(
       isHeaderChecked,
       filter,
       selectedFolderId: selectedFolderStore.id,
-      isSkillSet:
-        selectedFolderStore.roomType === RoomsType.InstructionsRoom ||
-        selectedFolderStore.parentRoomType === FolderType.InstructionsRoom,
+      isSkillSet,
+      descriptionSkillColumnIsEnabled,
+      modifiedSkillColumnIsEnabled,
       withContent,
       sortingVisible,
 

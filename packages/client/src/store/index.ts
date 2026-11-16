@@ -101,6 +101,7 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import OAuthStore from "./OAuthStore";
 import DocsConnectStore from "./DocsConnectStore";
 import AiPresetsStore from "./AiPresetsStore";
+import SkillsStore from "./SkillsStore";
 import AiProjectsStore from "./AiProjectsStore";
 import AppsStore from "./AppsStore";
 
@@ -112,6 +113,7 @@ import DefaultTemplatesStore from "./portal-settings/DefaultTemplatesStore";
 import TelegramStore from "./TelegramStore";
 
 const aiPresetsStore = new AiPresetsStore();
+const skillsStore = new SkillsStore();
 
 const aiProjectsStore = new AiProjectsStore(aiPresetsStore, userStore);
 
@@ -488,6 +490,7 @@ const store = {
   dashboardTourStore,
 
   aiPresetsStore,
+  skillsStore,
   aiProjectsStore,
   appsStore,
   aiSettingsStore,

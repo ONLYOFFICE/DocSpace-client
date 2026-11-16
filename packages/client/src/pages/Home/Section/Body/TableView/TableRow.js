@@ -54,6 +54,7 @@ import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
+import SkillsRowDataComponent from "./sub-components/SkillsRowData";
 import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
 import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
 
@@ -86,6 +87,7 @@ const FilesTableRow = memo((props) => {
     showHotkeyBorder,
     id,
     isRooms,
+    isSkillSet,
     isTemplates,
     isTrashFolder,
     isIndexEditingMode,
@@ -348,6 +350,13 @@ const FilesTableRow = memo((props) => {
           />
         ) : isFavoritesFolder ? (
           <FavoritesRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            {...props}
+          />
+        ) : isSkillSet ? (
+          <SkillsRowDataComponent
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}

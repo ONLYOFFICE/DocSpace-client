@@ -36,11 +36,6 @@
 import React from "react";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
-import {
-  getSkillNameByTitle,
-  isSkillFile,
-  toSkillCommand,
-} from "@docspace/shared/utils/skillFile";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
@@ -88,12 +83,7 @@ const TypeCell = ({
 
   const type = item.isRoom ? getRoomTypeName(roomType, t) : getItemType();
   const Exst = fileExst ? fileExst.slice(1).toUpperCase() : "";
-  // In a skill set the column reads "Command": what calls the skill in chat.
-  const data = isSkillFile(item)
-    ? toSkillCommand(getSkillNameByTitle(item.title))
-    : Exst
-      ? `${Exst} ${type}`
-      : type;
+  const data = Exst ? `${Exst} ${type}` : type;
 
   const isRestrictedRoom =
     isExternalShareRestricted &&

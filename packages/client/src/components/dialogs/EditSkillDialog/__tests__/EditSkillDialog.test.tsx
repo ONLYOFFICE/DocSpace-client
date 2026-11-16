@@ -120,6 +120,21 @@ describe("EditSkillDialog", () => {
     expect(onClose).not.toHaveBeenCalled();
   });
 
+  it("shows only the instructions for View instructions, and edits them on Edit", async () => {
+    const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
+    render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
+    expect(((await screen.findByTestId("editor")) as HTMLTextAreaElement).value).toBe("# Steps");
+    expect(screen.queryByTestId("edit-skill-name")).toBeNull();
+    fireEvent.click(screen.getByTestId("view-skill-edit"));
+    expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("Clause check");
+  });
+
+  it("offers no Edit in the instructions view to those who may not edit the skill", async () => {
+    render(<EditSkillDialog file={file} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
+    await screen.findByTestId("editor");
+    expect(screen.queryByTestId("view-skill-edit")).toBeNull();
+  });
+
   it("says so and offers no form when the skill cannot be read", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => ({ ok: false, statusText: "Forbidden" })));
     render(<EditSkillDialog file={file} onClose={onClose} refreshFiles={refreshFiles} />);

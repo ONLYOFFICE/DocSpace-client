@@ -256,6 +256,15 @@ const InfiniteGrid = (props) => {
     const listKey = `list-${key}`;
     addItemToList(listKey, type);
   }
+  // The grid caches its row heights and measures them again only when this
+  // key changes. The folder alone is not enough: Agents, Skill sets and
+  // Knowledge bases are one folder narrowed to a room type, and an agent's
+  // row is taller than a room's, so the kinds of rows shown are part of it.
+  const rowKinds = [
+    ...new Set(list.map((row) => row.props.className ?? "")),
+  ].join(" ");
+  const rowHeightsKey = `${currentFolderId}:${rowKinds}`;
+
   return (
     <StyledInfiniteLoader
       viewAs="tile"
@@ -265,7 +274,7 @@ const InfiniteGrid = (props) => {
       itemCount={hasMoreFiles ? list.length + 1 : list.length}
       loadMoreItems={fetchMoreFiles}
       className={`TileList ${className}`}
-      currentFolderId={currentFolderId}
+      currentFolderId={rowHeightsKey}
       {...rest}
     >
       {list}

@@ -126,6 +126,8 @@ What follows for this change:
 - The hand-over goes to the backend team as a change of its own specs,
   `private-rooms` ("No links to a private room") and `shared-links`,
   since its repository now routes behaviour changes through them.
+  Handed over by the owner on 2026-11-16 as the draft under
+  `server-change/` of this change; no reply is recorded yet.
 
 ## Goals / Non-Goals
 

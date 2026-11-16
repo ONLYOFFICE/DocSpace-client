@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import SkillIcon from "SRC_DIR/components/SkillIcon";
 import React, { useState, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -364,8 +365,17 @@ const SetRoomParams = ({
           !infoPanelSelection?.logo?.large) ||
         cover?.color;
 
+  // A skill set is always drawn with the skill set icon: the dialog shows
+  // it and offers no logo to upload and no cover to pick.
   const element =
-    isEdit || isTemplate || fromTemplate ? (
+    roomParams.type === RoomsType.InstructionsRoom ? (
+      <SkillIcon
+        kind="set"
+        size={isMobile() && !horizontalOrientation ? 96 : 64}
+        className="room-params-icon"
+        dataTestId="create_edit_room_icon"
+      />
+    ) : isEdit || isTemplate || fromTemplate ? (
       <ItemIcon
         id={selection?.id}
         fileExst={selection?.fileExst}

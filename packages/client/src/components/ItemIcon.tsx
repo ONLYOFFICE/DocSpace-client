@@ -114,7 +114,7 @@ const ItemIcon = ({
 
 	// Skill sets and their skills have icons of their own, the same for
 	// every one: no room colour or initials, no Markdown file icon.
-	const skillKind = isSkillSetIconRoom({ isRoom, roomType, logo })
+	const skillKind = isSkillSetIconRoom({ isRoom, roomType })
 		? "set"
 		: !isRoom && isSkillSetOpen && fileExst?.toLowerCase() === SKILL_EXTENSION
 			? "skill"

@@ -50,27 +50,15 @@ type SkillIconProps = {
   dataTestId?: string;
 };
 
-type TLogoLike = {
-  small?: string;
-  medium?: string;
-  large?: string;
-  original?: string;
-} | null;
-
 /**
- * A room drawn with the skill set icon: an Instructions room that has no
- * picture of its own. One uploaded for the room is shown as for any room.
+ * A room drawn with the skill set icon: every Instructions room. Skill sets
+ * are not told apart by a picture, a colour or initials, so a logo stored
+ * for the room is not shown, and none can be set.
  */
 export const isSkillSetIconRoom = (room: {
   isRoom?: boolean;
   roomType?: RoomsType | number | null;
-  logo?: TLogoLike | string;
-}): boolean => {
-  if (!room.isRoom || room.roomType !== RoomsType.InstructionsRoom) return false;
-  const { logo } = room;
-  if (!logo || typeof logo === "string") return true;
-  return !logo.medium && !logo.large && !logo.original;
-};
+}): boolean => !!room.isRoom && room.roomType === RoomsType.InstructionsRoom;
 
 const SET_PATHS = (
   <>

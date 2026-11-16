@@ -22,11 +22,10 @@ describe("SkillIcon", () => {
     expect(icon.querySelector("svg")?.getAttribute("width")).toBe("16");
   });
 
-  it("gives the icon to a skill set without a picture of its own only", () => {
+  it("gives the icon to every skill set, whatever logo is stored for it", () => {
     const set = { isRoom: true, roomType: RoomsType.InstructionsRoom };
     expect(isSkillSetIconRoom(set)).toBe(true);
-    expect(isSkillSetIconRoom({ ...set, logo: { medium: "", large: "" } })).toBe(true);
-    expect(isSkillSetIconRoom({ ...set, logo: { medium: "/logo.png" } })).toBe(false);
+    expect(isSkillSetIconRoom({ ...set, logo: { medium: "/logo.png" } } as never)).toBe(true);
     expect(isSkillSetIconRoom({ ...set, roomType: RoomsType.CustomRoom })).toBe(false);
     expect(isSkillSetIconRoom({ roomType: RoomsType.InstructionsRoom })).toBe(false);
   });

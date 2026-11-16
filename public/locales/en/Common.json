@@ -2261,6 +2261,8 @@
   "SkillSaved": "The skill has been saved",
   "SkillSet": "Skill set",
   "SkillSets": "Skill sets",
+  "SkillTemplateDescription": "Describe what this skill does. Use when the user asks to ...",
+  "SkillTemplateInstructions": "# Skill title\n\nSay in one or two sentences what the assistant should do when this skill is used.\n\n## Steps\n\n1. The first thing to do.\n2. The next thing to do.\n\n## Rules\n\n- What must always be done.\n- What must never be done.\n\n## Output\n\nDescribe the result: its structure, format and length.",
   "Skip": "Skip",
   "SkipDescription": "No file will be copied. The original file will be retained in the destination folder.",
   "SkipFolderDescription": "No folder will be copied",

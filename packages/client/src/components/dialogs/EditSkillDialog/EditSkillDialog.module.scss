@@ -74,6 +74,12 @@
   min-height: 180px;
 }
 
+// The name field keeps the height of a label and an input; with its error
+// under it, it grows instead of running into the next field.
+.nameField > div {
+  max-height: none;
+}
+
 .hint {
   color: var(--text-secondary);
 }

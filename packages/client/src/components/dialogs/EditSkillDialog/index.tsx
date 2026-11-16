@@ -106,9 +106,19 @@ const EditSkillDialog = ({ file, folderId = null, readOnly = false, onClose, ref
   const [isSaving, setIsSaving] = React.useState(false);
   // "Edit" in the instructions view turns the same dialog into the form.
   const [isViewing, setIsViewing] = React.useState(readOnly);
-  const [name, setName] = React.useState(file ? titleOf(file) : "");
-  const [description, setDescription] = React.useState("");
-  const [body, setBody] = React.useState("");
+  // A new skill opens filled in: a name to change, what a description is
+  // for, and the instructions laid out the way a skill is written.
+  const [name, setName] = React.useState(() =>
+    file ? titleOf(file) : isNew ? t("Common:NewSkill") : "",
+  );
+  const [description, setDescription] = React.useState(() =>
+    isNew ? t("Common:SkillTemplateDescription") : "",
+  );
+  const [body, setBody] = React.useState(() =>
+    isNew ? t("Common:SkillTemplateInstructions") : "",
+  );
+  // The name is not called wrong before the user has changed it.
+  const [isNameChanged, setIsNameChanged] = React.useState(false);
   const editorRef = React.useRef<EditorView | null>(null);
 
   const onFormat = (action: TMarkdownAction) => {
@@ -250,14 +260,17 @@ const EditSkillDialog = ({ file, folderId = null, readOnly = false, onClose, ref
           </Text>
         ) : (
           <div className={styles.body}>
-            <div className={styles.field}>
+            <div className={`${styles.field} ${styles.nameField}`}>
               <InputParam
                 id="edit-skill-name"
                 title={t("Common:Name")}
                 placeholder={t("Common:EnterName")}
                 value={name}
-                onChange={(e) => setName(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH))}
-                isValidTitle={isValidName}
+                onChange={(e) => {
+                  setName(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH));
+                  setIsNameChanged(true);
+                }}
+                isValidTitle={isValidName || !isNameChanged}
                 errorMessage={t("Common:SkillNameNeedsLetterOrDigit")}
                 isAutoFocussed
                 isDisabled={isSaving}

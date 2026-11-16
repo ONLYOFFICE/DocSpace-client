@@ -127,8 +127,10 @@ describe("EditSkillDialog", () => {
     render(<EditSkillDialog folderId={12} onClose={onClose} refreshFiles={refreshFiles} />);
     const editor = await screen.findByTestId("editor");
     expect(fetch).not.toHaveBeenCalled();
-    fireEvent.submit(screen.getByTestId("form"));
-    expect(api.insertFile).not.toHaveBeenCalled();
+    // The form opens filled in: a name, a description and the skill layout.
+    expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("Common:NewSkill");
+    expect((screen.getByTestId("edit-skill-description") as HTMLTextAreaElement).value).toBe("Common:SkillTemplateDescription");
+    expect((editor as HTMLTextAreaElement).value).toBe("Common:SkillTemplateInstructions");
     fireEvent.change(screen.getByTestId("edit-skill-name"), { target: { value: "Risk review" } });
     fireEvent.change(screen.getByTestId("edit-skill-description"), { target: { value: "Flags risks" } });
     fireEvent.change(editor, { target: { value: "# Steps" } });

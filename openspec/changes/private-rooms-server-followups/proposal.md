@@ -36,6 +36,10 @@ keeps describing the server as it is until the work lands.
 - The switched-off E2E rooms app closes private rooms on the server:
   they are in no rooms listing, cannot be created and cannot be reached by
   id; only the routes of a user's own key pair stay open.
+- An invitation of several people to a private room is applied whole or
+  not at all, where today it stops at the first without a key and keeps
+  the ones before.
+- A private room and its folders cannot be marked as favourites.
 - Client tasks that follow each merge: the mocks, their contract cases and
   the refusal message.
 

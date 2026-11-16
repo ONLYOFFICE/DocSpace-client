@@ -73,8 +73,8 @@ The server SHALL NOT mark a private room or a folder of a private room as a favo
 The server SHALL NOT list a private room in the Forms area or the form-template area of the rooms listing.
 
 #### Scenario: Forms area
-- **WHEN** the rooms of the Forms area or of the form-template area are requested
-- **THEN** no private room is in the answer
+- **WHEN** the rooms of the Forms area or of the form-template area are requested on a portal whose data holds a room of the form-filling type with the private setting
+- **THEN** that room is not in the answer, and a form-filling room without the setting is
 
 ### Requirement: Private section root is titled in the user's language
 The server SHALL answer the title of the private section root in the culture of the calling user.

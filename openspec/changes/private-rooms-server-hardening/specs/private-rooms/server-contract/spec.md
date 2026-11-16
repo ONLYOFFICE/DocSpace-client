@@ -381,25 +381,6 @@ The server SHALL refuse a batch copy of a file or a folder from inside a private
 - **WHEN** the owner requests a batch copy of a subfolder of an archived private room to a folder outside it
 - **THEN** no folder, not even an empty one, lands outside
 
-### Requirement: File public keys
-The server SHALL return, for one file in a private room, active or archived, the keys of every user holding a share record of their own (not a group or a link) on the file or on any folder above it up to the room, plus the file's creator, while they can read the file, even without a record; it SHALL skip users without stored keys or a public key, keep the private half only on the caller's entries, and answer 415 outside a private room. Existing access entries are not consulted.
-
-#### Scenario: Keys of a file
-- **WHEN** a reader of the file requests its public keys
-- **THEN** every user who reaches the file through a user share and has stored keys is returned, whether or not an access entry exists for them
-
-#### Scenario: File in an archived private room
-- **WHEN** a reader requests the public keys of a file in an archived private room
-- **THEN** the keys are returned as for a file in an active private room, and the server MUST NOT answer 415
-
-#### Scenario: Room owner who did not create the file
-- **WHEN** the public keys of a file that another member created are requested, and the room owner holds no share record of their own
-- **THEN** the room owner's keys are not in the answer
-
-#### Scenario: Creator who left the room
-- **WHEN** the public keys of a file are requested after its creator left the room
-- **THEN** the creator's keys are no longer in the answer
-
 ### Requirement: Copy right inside archived private rooms
 The server SHALL deny the copy right on a private room, on a file inside it and on a subfolder of it, to every user, room owner included, whether the room is active or archived. In an archived private room the other rights follow the rules of every archived room.
 

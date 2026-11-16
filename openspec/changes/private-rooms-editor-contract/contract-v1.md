@@ -326,12 +326,12 @@ failed twice on documents with `changesError` (editor error -82), the base
 mismatch P-5 removes.
 
 - P-5 (portal, design D7, task 6.2). When an editor opens an encrypted file
-  whose current version is a force-save, the portal asks the Document Server
-  (`info` command) whether the stable key still has a session. While it
-  does, the configuration carries the stable key and `document.url` of the
-  stable version (`stream&version=N`), so the replay lands on its own base.
-  Otherwise the current version is promoted to stable, which yields a new key
-  and a fresh session from the latest save.
+  whose current version is a force-save, the configuration carries the
+  stable key and `document.url` of the stable version (`stream&version=N`),
+  so the replay lands on its own base. Narrowed on 2026-11-16: the editor
+  developer confirmed this as sufficient, and the end of a session is the
+  editor's, whose next version assembles the document by itself; the
+  portal asks no `info` and promotes no version.
 - DS-14 (to answer, task 1.2). Which callback the Document Server sends when
   the last editor of an encrypted document leaves (status 1 with an empty
   user list, status 4, or none), when it drops the session and its changes,

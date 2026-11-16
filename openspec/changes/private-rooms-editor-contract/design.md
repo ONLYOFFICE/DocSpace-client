@@ -903,6 +903,13 @@ without a new run.
   the mismatch, and what the portal shall serve once the Document Server
   no longer holds the session, where the stable version alone would show
   the content from before the save (the second branch of decision 7).
+- **Second answer, the end of a session (2026-11-16, relayed by the
+  owner).** The next editor version assembles the document by itself
+  when a session ends, and carries the other editor and Document Server
+  fixes this change waits for. The portal therefore needs no `info`
+  check and no promotion of the version: the second branch of decision 7
+  is dropped, and task 6.2 is the stable address alone. The number and
+  the date of that version are not known yet.
 - **Crypto library build (task 1.2).** The stand serves
   `onlyoffice-crypto.js` with a SHA-256 starting `58cb7f48`, which
   `contract-v1.md` lists as build 2.0.0. The contract asks for 2.1.0 or
@@ -1163,6 +1170,19 @@ Read from the release stand without signing in, on
    -82 as well. This is the base mismatch this decision describes, now
    seen on documents and not only on spreadsheets, and the stable-base
    rule of 6.2 is the fix on the portal side.
+
+   Narrowed on 2026-11-16 by the editor developer's answers ("Release
+   stand check of 2026-11-10"): the stable key with the address of the
+   stable version is sufficient, and the end of a session is the
+   editor's, which will assemble the document by itself in its next
+   version. The `info` check and the promotion of the current version
+   are no longer asked of the portal. Read at `f31d7fd129`: the stable
+   version is chosen in `GetParamsAsync`
+   (`DocumentServiceHelper.cs:319-326`), while the address is built from
+   the current version without a version parameter (`Configuration.cs`
+   `GetUrl`, `PathProvider.GetFileStreamUrl`, lines 111-130, which signs
+   `stream_auth` over the id and the version); `SetUrl` replaces the
+   host for every file (line 222), which an encrypted file must not get.
 
 8. **The document address of an encrypted file stays public.** The editor
    downloads it in the browser. `document.url` is built from the public portal

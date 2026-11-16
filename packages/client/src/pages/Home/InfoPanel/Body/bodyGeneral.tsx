@@ -73,6 +73,7 @@ const InfoPanelBodyGeneral = ({
   enablePlugins,
   isRecentFolder,
   isPrivacyFolder,
+  aiChatProjectId,
 
   maxImageUploadSize,
 
@@ -124,6 +125,7 @@ const InfoPanelBodyGeneral = ({
         isTrash,
         isRecentFolder,
         isPrivacyFolder,
+        aiChatProjectId,
         enablePlugins,
         infoPanelItemsList,
       }),
@@ -132,6 +134,7 @@ const InfoPanelBodyGeneral = ({
       isTrash,
       isRecentFolder,
       isPrivacyFolder,
+      aiChatProjectId,
       enablePlugins,
       infoPanelItemsList,
     ],

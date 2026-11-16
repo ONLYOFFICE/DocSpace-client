@@ -48,6 +48,8 @@ export const enum InfoPanelView {
   infoMetadata = "info_metadata",
   /** An agent's skill sets and knowledge bases. */
   infoContext = "info_context",
+  /** The files of the conversation open on an agent's page. */
+  infoContent = "info_content",
 }
 
 export const showInfoPanel = () => {

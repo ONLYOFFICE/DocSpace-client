@@ -71,17 +71,32 @@ describe("getAvailableInfoPanelTabs", () => {
     expect(useRoomsView).toBe(true);
   });
 
-  it("An agent has Details and Context only, plugins or not", () => {
-    const { tabs } = getAvailableInfoPanelTabs({
-      selection: { id: 7, isAIProject: true, rootFolderType: FolderType.AiHub } as never,
+  const agentTabs = (selection: object, aiChatProjectId: number | null = null) =>
+    getAvailableInfoPanelTabs({
+      selection: selection as never,
       isTrash: false,
       isRecentFolder: false,
       isPrivacyFolder: false,
       enablePlugins: true,
       infoPanelItemsList: [],
-    });
+      aiChatProjectId,
+    }).tabs;
 
-    expect(tabs).toEqual([InfoPanelView.infoDetails, InfoPanelView.infoContext]);
+  it("An agent has Details and Context only, plugins or not", () => {
+    const expected = [InfoPanelView.infoDetails, InfoPanelView.infoContext];
+    expect(agentTabs({ id: 7, isAIProject: true, rootFolderType: FolderType.AiHub })).toEqual(expected);
+    // A selection of the list is known by its room type alone.
+    expect(agentTabs({ id: 7, roomType: RoomsType.AiProjectRoom, rootFolderType: FolderType.AiHub })).toEqual(expected);
+  });
+
+  it("An agent whose page is open has Content too, and no other agent has", () => {
+    const agent = { id: 7, roomType: RoomsType.AiProjectRoom, rootFolderType: FolderType.AiHub };
+    expect(agentTabs(agent, 7)).toEqual([
+      InfoPanelView.infoDetails,
+      InfoPanelView.infoContext,
+      InfoPanelView.infoContent,
+    ]);
+    expect(agentTabs(agent, 8)).not.toContain(InfoPanelView.infoContent);
   });
 });
 

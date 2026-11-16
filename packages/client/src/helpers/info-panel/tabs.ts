@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import {
   isFile as isFileUtil,
   isRoom as isRoomUtil,
@@ -63,6 +63,8 @@ export type TGetAvailableInfoPanelTabsParams = {
   isPrivacyFolder: boolean;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
+  /** The id of the agent whose page (its chat) is open: that agent gets the Content tab. */
+  aiChatProjectId?: number | null;
 };
 
 export type TInfoPanelTabsResult = {
@@ -84,6 +86,7 @@ export function getAvailableInfoPanelTabs({
   isPrivacyFolder,
   enablePlugins,
   infoPanelItemsList,
+  aiChatProjectId,
 }: TGetAvailableInfoPanelTabsParams): TInfoPanelTabsResult {
   const detailsOnly: TInfoPanelTabsResult = {
     tabs: [InfoPanelView.infoDetails],
@@ -105,12 +108,23 @@ export function getAvailableInfoPanelTabs({
     };
   }
 
-  // An agent (an AI project): its details and what it draws on.
-  if ("isAIProject" in selection && selection.isAIProject === true) {
-    return {
-      tabs: [InfoPanelView.infoDetails, InfoPanelView.infoContext],
-      useRoomsView: true,
-    };
+  // An agent (an AI project): its details and what it draws on. The server
+  // marks no room as one, so the room type decides for a selection of the
+  // list or of the agent's page. On the agent's own page, where its chat is
+  // open, the files of the conversation on screen follow.
+  const isAgent =
+    ("isAIProject" in selection && selection.isAIProject === true) ||
+    ("roomType" in selection &&
+      selection.roomType === RoomsType.AiProjectRoom);
+
+  if (isAgent) {
+    const tabs: InfoPanelViewType[] = [
+      InfoPanelView.infoDetails,
+      InfoPanelView.infoContext,
+    ];
+    if (aiChatProjectId != null && Number(selection.id) === aiChatProjectId)
+      tabs.push(InfoPanelView.infoContent);
+    return { tabs, useRoomsView: true };
   }
 
   const isRoomsType =

@@ -55,6 +55,8 @@ export type HeaderProps = {
 
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
   isPrivacyFolder: TreeFoldersStore["isPrivacyFolder"];
+  /** The id of the agent whose page (its chat) is open, or `null`. */
+  aiChatProjectId: number | null;
 };
 
 export type InfoPanelHeaderContentProps =

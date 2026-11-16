@@ -69,6 +69,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     enablePlugins,
     isRecentFolder,
     isPrivacyFolder,
+    aiChatProjectId,
   } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
 
   return (
@@ -96,6 +97,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       enablePlugins={enablePlugins}
       isRecentFolder={isRecentFolder}
       isPrivacyFolder={isPrivacyFolder}
+      aiChatProjectId={aiChatProjectId}
     />
   );
 };
@@ -110,6 +112,7 @@ export default inject(
     filesActionsStore,
     pluginStore,
     treeFoldersStore,
+    aiProjectsStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
 
@@ -160,6 +163,7 @@ export default inject(
       enablePlugins: settingsStore.enablePlugins,
       isRecentFolder: treeFoldersStore.isRecentFolder,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
+      aiChatProjectId: aiProjectsStore.activeProject?.id ?? null,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

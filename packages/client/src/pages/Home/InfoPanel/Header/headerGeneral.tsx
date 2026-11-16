@@ -63,6 +63,7 @@ const InfoPanelHeaderGeneral = ({
 
   isRecentFolder,
   isPrivacyFolder,
+  aiChatProjectId,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -103,6 +104,7 @@ const InfoPanelHeaderGeneral = ({
     isTrash,
     isRecentFolder,
     isPrivacyFolder,
+    aiChatProjectId,
     enablePlugins,
     infoPanelItemsList,
   });
@@ -122,6 +124,7 @@ const InfoPanelHeaderGeneral = ({
       .with(InfoPanelView.infoDetails, () => t("Common:SubmenuDetails"))
       .with(InfoPanelView.infoMetadata, () => t("Common:SubmenuMetadata"))
       .with(InfoPanelView.infoContext, () => t("Common:Context"))
+      .with(InfoPanelView.infoContent, () => t("Common:Content"))
       .otherwise(() => {
         const key = id.replace("info_plugin-", "");
         return (

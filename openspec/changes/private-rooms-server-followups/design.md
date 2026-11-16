@@ -233,6 +233,34 @@ how it is accepted. `../server` was at `6fb6dfb17a` that day and held none
 of them. No reply is recorded yet. Tasks 1.7 and 2.6 and the correction of
 1.6 were added to the document later that day.
 
+### Read at `0396e6910f` (2026-11-16)
+
+The pull of 2026-11-16 brought 37 commits after `6fb6dfb17a`. No code of
+private rooms changed; none of the tasks of this change has landed.
+
+- The server now carries OpenSpec specs of its own, 30 capabilities under
+  `../server/openspec/specs` with a register of known deviations
+  (`openspec/deviations.md`), and routes behaviour changes through them.
+  `private-rooms` holds 55 requirements.
+- Four test files of `Tests/08_Private` are new or longer: who may read
+  the encryption information of a file, the metadata filter of the private
+  section, the revocation of a link on a private room, and an
+  administrator outside a room who sees it in no area.
+- The server's register lists as open what this change and
+  `private-rooms-server-hardening` ask or note: a subfolder of a private
+  room that goes to Trash (PR1), a private room or its folder among the
+  favourites (PR2, task 2.6 here), the backup without keys (PR4) and the
+  neutral title in the default culture only (PR6, hardening 4.5).
+- Two statements of the server's `private-rooms` spec differ from what is
+  asked here. "Reassigning a deleted user's rooms ignores file keys" says
+  the reassignment must not be stopped by a missing file key, since nobody
+  is left to issue it; task 1.4 asks that no private room ends with an
+  owner who cannot open its files. "Room types that can be private" says a
+  public and a form-filling room are refused with 403, which is what the
+  server answers, and does not say that the room stays stored
+  (`private-rooms-server-hardening` 12.8). Both are to be raised with the
+  backend team against its spec.
+
 ## Goals / Non-Goals
 
 **Goals:**

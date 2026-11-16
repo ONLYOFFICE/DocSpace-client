@@ -62,27 +62,24 @@ The server SHALL list every stored write of a file's access entries in the file'
 - **WHEN** a key write skips every recipient
 - **THEN** no history entry and no audit event is recorded
 
-### Requirement: Administrative recovery of a user's identity
-For the B2B launch the server SHALL support organisational recovery: a user MAY enrol by wrapping their private key for a recovery administrator's public key, and a recovery administrator SHALL be able to retrieve that wrap for a user who lost every passphrase and recovery phrase, with every retrieval audited.
-
-#### Scenario: Enrolment
-- **WHEN** a user enrols in organisational recovery
-- **THEN** the server stores the wrap for the recovery administrator and never the raw private key
-
-#### Scenario: Recovery
-- **WHEN** a recovery administrator retrieves a user's wrap
-- **THEN** an audit event records the administrator, the user and the time
-
 ### Requirement: Offboarding revokes private-room access
-For the B2B launch the server SHALL, when a user is deprovisioned (SCIM or manual deactivation), remove that user's access entries from every encrypted file and, if the user owned private rooms, require an explicit new owner before the deactivation completes.
+For the B2B launch the server SHALL, when a user is deactivated, remove that user's wrapped file keys from every encrypted file and keep the user's membership and key pair. It SHALL refuse the deactivation of a user who owns a private room until the room has an owner with keys. A user activated again SHALL hold no file key until a member wraps the files for them.
 
 #### Scenario: Deprovisioned member
-- **WHEN** a member of private rooms is deprovisioned
-- **THEN** the user's access entries are removed from every encrypted file in those rooms
+- **WHEN** a member of private rooms is deactivated, by an administrator, in a status change of several users or by themselves
+- **THEN** the user's wrapped file keys are removed from every encrypted file in those rooms, the removal is in the audit trail, and the user stays among the members
 
 #### Scenario: Deprovisioned owner
-- **WHEN** the owner of a private room is deprovisioned without a new owner
-- **THEN** the deactivation is refused until a new owner with keys is named
+- **WHEN** the owner of a private room is deactivated while still its owner
+- **THEN** the deactivation is refused with a reason of its own and nothing changes
+
+#### Scenario: Owner after the room has passed on
+- **WHEN** the former owner is deactivated after the room has passed to a user with keys
+- **THEN** the deactivation succeeds as for a member
+
+#### Scenario: Member activated again
+- **WHEN** a deactivated member is activated again
+- **THEN** the user holds the key pair and no file key, and opens a file only after a member has wrapped its key for them
 
 ### Requirement: Administrator bypass excludes archived private rooms
 The server SHALL NOT grant a portal administrator, the portal owner included, who is not a member of an archived private room any right by role alone: no read, copy or download on its files and folders, and no move, delete or index export on the room. This SHALL match an active private room. An administrator who is a member SHALL keep the rights of their own share.
@@ -514,8 +511,14 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 - **WHEN** a room creation request sets the private flag with the public or the form-filling room type, whose rooms exist through an external link
 - **THEN** the server answers 400 and creates no room
 
-## REMOVED Requirements
+### Requirement: No administrative recovery endpoints
+The server SHALL NOT expose endpoints for administrative key recovery.
 
-### Requirement: No recovery or offboarding endpoints
-**Reason**: Replaced by the administrative recovery, offboarding and per-file access history requirements above.
-**Migration**: Implement the endpoints on the server; the client enrolment and recovery flows follow in the keys-management tab.
+#### Scenario: Recovery requested
+- **WHEN** a client calls an administrative recovery endpoint
+- **THEN** the server answers 404 because no such route exists
+
+## RENAMED Requirements
+
+- FROM: `### Requirement: No recovery or offboarding endpoints`
+- TO: `### Requirement: No administrative recovery endpoints`

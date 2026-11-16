@@ -766,6 +766,27 @@ creation refuses these rooms and that their link is made on the first read.
   moves in front of the save and answers 400, the status of the other
   refusals of a room type (the AI hub types, the third-party storage).
 
+### Read on 2026-11-16 (`6fb6dfb17a`): deactivation
+
+- Three actions of `UserController`
+  (`products/ASC.People/Server/Api/UserController.cs`) deactivate a user:
+  `UpdateMember` with `disable` (line 2156), `UpdateUserStatus` for
+  several users (line 2344) and `DeleteProfile`, a user deactivating
+  themselves (line 834). Each sets the status to terminated, updates the
+  user and notifies; none calls into the files module, so the wrapped file
+  keys, the key pair and the shares of the user stay, and a private room
+  the user owns stays theirs. This agrees with the reply of 2026-11-05
+  ("deactivating a user revokes no keys").
+- A deactivated user cannot sign in, and the share change refuses to give
+  access to one (`FileSharing.cs`, line 141); what stays is the stored
+  file keys, which are back in use the moment the user is activated again.
+- The deletion of a user is different: `DeletePersonalDataAsync`
+  (`Core/Core/FileStorageService.cs`, line 3973) removes the user's file
+  keys (`IFileDao.DeleteFileKeysAsync` for a user), and the removal of the
+  user deletes the account links, the key pair among them
+  (`common/ASC.Core.Common/Data/DbUserService.cs`, line 508).
+- `../server` holds no SCIM code.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -1109,6 +1130,18 @@ creation refuses these rooms and that their link is made on the first read.
     is signed by the server and the flag belongs with the other
     per-file customization getters there.
 
+29. **Offboarding is the deactivation, and it removes the file keys only
+    (decided by the owner on 2026-11-16).** A deactivated user keeps the
+    membership and the key pair, so an activation brings back a member who
+    is re-keyed by an invitation or the backfill sweep (decision 20)
+    rather than invited to every room again. The owner of a private room
+    is not deactivated before the room has an owner with keys.
+    Alternative: remove the user from the private rooms as well. Rejected:
+    a deactivation is often temporary, and the file keys are what gives
+    access. The recovery administrator of decision 5 left this change for
+    `private-rooms-admin-recovery` the same day, with its open question on
+    a quorum.
+
 ## Risks / Trade-offs
 
 - [Backend schedule] → every server task is independent, and each client
@@ -1136,7 +1169,8 @@ creation refuses these rooms and that their link is made on the first read.
   key. Owner: product and security. Does not change the client specs.
 - SCIM availability on the platform (the stashed doc could not confirm it).
   Owner: platform team. Affects only whether the offboarding trigger is SCIM
-  or manual deactivation.
+  or manual deactivation. Read on 2026-11-16: `../server` has no SCIM, so
+  task 8.1 names the deactivation only.
 - Revocation primitive: decided by the server on 2026-11-05, decision 22:
   the server deletes a user's keys for every file of a private room when
   the user leaves it, is removed from it, has their access cleared or

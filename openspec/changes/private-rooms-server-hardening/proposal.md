@@ -42,9 +42,11 @@ the file to change so the backend team can pick them up; nothing here is
   revocation (removal of a user's access entries) today; the operation that
   will remove them is an open decision (see below), and the revocation audit
   and offboarding depend on it.
-- Administrative (organisational) recovery and SCIM-driven offboarding are
-  specified as P1 for the B2B launch; the client exposes enrolment and
-  recovery flows once the endpoints exist.
+- Offboarding is specified for the B2B launch: a deactivation removes the
+  user's file keys and is refused for the owner of a private room (task
+  8.1, rewritten on 2026-11-16). Administrative (organisational) recovery
+  left this change that day for `private-rooms-admin-recovery`; SCIM is no
+  trigger, since `../server` has none.
 - The existing upload-session abort route is documented and used by the
   client when an encrypted upload is cancelled.
 - Archived private rooms keep the private-room guards of active ones: no copy
@@ -179,7 +181,8 @@ None.
    required for the B2B launch only.
 3. Recovery model for admin recovery: recovery-admin public key wrapping the
    user's private key (stashed design) versus key escrow. The spec assumes
-   the former.
+   the former. Moved on 2026-11-16 to `private-rooms-admin-recovery`, which
+   carries this decision and the ones it left open.
 4. Revocation primitive (decided by the server on 2026-11-05): the server
    removes a user's wrapped file keys itself when the user leaves a private
    room, is removed from it, has the access cleared or has their personal

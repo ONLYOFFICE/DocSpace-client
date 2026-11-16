@@ -684,3 +684,72 @@ test.describe("Several Home page plugins", () => {
     );
   });
 });
+
+test.describe("Several sidebar plugins", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      myHandler(TEST_PORT, true),
+      myDocumentsHandler(TEST_PORT, true),
+    );
+  });
+
+  const sidebarPlugin = (name: string, label: string): TFakePlugin => ({
+    name,
+    entry: { label },
+  });
+
+  test("The plugins' entries form a captioned block of their own under the apps", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    const plugins = [
+      sidebarPlugin("cws-01-chat", "Chat"),
+      sidebarPlugin("cws-02-mail", "Mail"),
+      sidebarPlugin("cws-03-projects", "Projects"),
+      sidebarPlugin("cws-04-crm", "CRM"),
+      sidebarPlugin("cws-05-wiki", "Wiki"),
+    ];
+    mockRequest.use(...fakePluginHandlers(plugins));
+
+    // A plugin page keeps the content area calm, and its entry shows the
+    // active state next to the inactive ones.
+    await openWithPlugins(page, `${baseUrl}/p/cws-02-mail-entry`, plugins);
+    await expect(page.locator("#cws-02-mail-entry-page")).toBeVisible();
+    // The page can render before the sidebar has finished loading its own
+    // items, and reading the keys does not wait.
+    await expect(fakeEntry(page, "cws-05-wiki")).toBeVisible();
+
+    expect(await entryKeys(page)).toEqual(
+      plugins.map(({ name }) => `${name}-entry`),
+    );
+
+    // The caption heads the plugins' group, so it sits between the products
+    // captioned "Apps" and the first plugin entry.
+    const sidebar = page.locator("#article-container");
+    const caption = sidebar.getByText("Integrations", { exact: true });
+    const appsCaption = sidebar.getByText("Apps", { exact: true });
+    await expect(caption).toBeVisible();
+
+    const captionBox = await caption.boundingBox();
+    const appsBox = await appsCaption.boundingBox();
+    const firstEntryBox = await fakeEntry(page, "cws-01-chat").boundingBox();
+
+    if (!captionBox || !appsBox || !firstEntryBox)
+      throw new Error("The sidebar is not laid out");
+
+    expect(captionBox.y).toBeGreaterThan(appsBox.y);
+    expect(captionBox.y).toBeLessThan(firstEntryBox.y);
+
+    await page.mouse.move(0, 0);
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-workspace-app",
+      "workspace-app_sidebar-several-plugins.png",
+    ]);
+  });
+});

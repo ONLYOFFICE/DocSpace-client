@@ -34,6 +34,7 @@
  */
 
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import type {
@@ -72,6 +73,7 @@ export const usePluginNavGroup = ({
   section,
   items,
 }: UsePluginNavGroupProps): UsePluginNavGroupResult => {
+  const { t } = useTranslation(["Common"]);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -104,8 +106,15 @@ export const usePluginNavGroup = ({
     );
 
     return {
-      pluginGroup: { id: PLUGIN_GROUP_ID, items: navItems },
+      // Captioned like the products above, so the plugins' entries - external
+      // services connected to the portal - read as a block of their own. The
+      // caption wraps rather than clips, and icon-only mode hides it.
+      pluginGroup: {
+        id: PLUGIN_GROUP_ID,
+        label: t("Common:IntegrationsSectionTitle"),
+        items: navItems,
+      },
       activePluginItemId: activeItem && getNavItemId(activeItem.key),
     };
-  }, [section, items, pathname, navigate]);
+  }, [section, items, pathname, navigate, t]);
 };

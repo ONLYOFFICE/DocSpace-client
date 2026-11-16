@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Iegultiet {{organizationName}} {{productName}} savā platformā un iespējojiet kopīgu rediģēšanu reāllaikā",
   "IntegrationsDescription": "Savienojiet <strong>{{docsName}}</strong> un <strong>{{productName}}</strong> ar savu infrastruktūru, izmantojot lietošanai gatavas integrācijas. Bez pielāgota koda, bez migrācijas.",
   "IntegrationServiceHeader": "Veidojiet, rediģējiet un kopīgi rediģējiet biroja failus tieši savā {{serviceName}}",
+  "IntegrationsSectionTitle": "Integrācijas",
   "InterfaceElements": "Saskarnes elementi",
   "InterfaceTheme": "Interfeisa dizains",
   "InvalidLink": "Nepareiza saite",

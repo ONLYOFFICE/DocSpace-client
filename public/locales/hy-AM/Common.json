@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Ներդրեք {{organizationName}} {{productName}}-ը ձեր սեփական հարթակում և միացրեք իրական ժամանակի համատեղ խմբագրումը",
   "IntegrationsDescription": "Միացրեք <strong>{{docsName}}</strong>-ը և <strong>{{productName}}</strong>-ը ձեր ենթակառուցվածքին պատրաստ ինտեգրումների միջոցով: Առանց հատուկ կոդի, առանց տեղափոխման:",
   "IntegrationServiceHeader": "Ստեղծեք, խմբագրեք և համատեղ խմբագրեք գրասենյակային ֆայլերն ուղղակիորեն ձեր {{serviceName}}-ում",
+  "IntegrationsSectionTitle": "Ինտեգրումներ",
   "InterfaceElements": "Ինտերֆեյսի տարրեր",
   "InterfaceTheme": "Միջերեսի ոճ",
   "InvalidLink": "Անվավեր հղում",

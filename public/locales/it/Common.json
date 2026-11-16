@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Integra {{organizationName}} {{productName}} nella tua piattaforma e abilita la co-modifica in tempo reale",
   "IntegrationsDescription": "Collega <strong>{{docsName}}</strong> e <strong>{{productName}}</strong> alla tua infrastruttura con integrazioni pronte all'uso. Nessun codice personalizzato, nessuna migrazione.",
   "IntegrationServiceHeader": "Crea, modifica e collabora sui file di office direttamente nel tuo {{serviceName}}",
+  "IntegrationsSectionTitle": "Integrazioni",
   "InterfaceElements": "Elementi dell'interfaccia",
   "InterfaceTheme": "Tema dell'interfaccia",
   "InvalidLink": "Link non valido",

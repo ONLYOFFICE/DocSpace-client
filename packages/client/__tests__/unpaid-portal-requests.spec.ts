@@ -159,6 +159,10 @@ const TARIFF_PAGE_ALLOWED = [...BOOT_ALLOWED, "PUT portal/payment/url"];
 
 const WALLET_PAGE_ALLOWED = [
   ...BOOT_ALLOWED,
+  "GET portal/payment/accounting/prices/ai-search",
+  "GET portal/payment/accounting/prices/ai-tools",
+  "GET portal/payment/accounting/prices/ai-tools-byok",
+  "GET portal/payment/customer/goodwill",
   "GET portal/payment/customer/operations",
   "GET portal/payment/customer/usage",
   "GET portal/payment/topupsettings",

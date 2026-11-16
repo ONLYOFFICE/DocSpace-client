@@ -97,3 +97,19 @@ Workflow:
    ES2015 and no `downlevelIteration`, so a spread of a `Set` or `Map` or a
    `for...of` over one fails there with TS2802 while shared, client, sdk
    and doceditor pass. Use `Array.from` in the mocks.
+10. Security defects stay out of the repository, which is public. A defect
+    that lets somebody read, change or delete what their rights do not
+    allow, hands out a key, secret, token or personal data, skips a check,
+    or breaks the encryption a private room promises is not written into
+    any committed file before the fixing version is released: no spec,
+    design, task, release note, mock comment, test name or commit message
+    describes it, its route or its consequence. This covers the client,
+    `../server` and the Document Server. A defect counts while a released
+    version has it or the next release will ship with it; one fixed before
+    any release carried it is written up like any other fixed bug. Tell
+    the user about an open one in the conversation instead; the owner
+    decides where the details are kept. A task for such a fix says what
+    the behaviour shall be and how it is accepted, nothing about what goes
+    wrong today. A deliberate limit of the design, written as SHALL NOT in
+    the main specs, is not a defect. Full wording: the "Security defects"
+    paragraph of `openspec/config.yaml`.

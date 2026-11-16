@@ -93,6 +93,7 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - Make Instructions and Knowledge rooms flat (refuse folder create, copy and move) and limit Instructions rooms to `.md` on upload, create, copy and move, with a user-facing message.
 - Drop `FileShare.Editing` from `AvailableRoomAccesses[KnowledgeRoom]` (no share migration: the feature is unreleased).
 - Refuse linking a Knowledge room while vectorization is disabled, in the .NET validation.
+- Refuse a guest as a member of a project (the client offers none, task 12.8); handed over with the server tasks of `private-rooms-server-followups`.
 - Take the uploaded `logo` in the create/update body and let the room routes (done with 96a4fdefca: projects are rooms of the shared routes) (`files/rooms/{id}/{pin,unpin,share,links,resend,logo}`, `files/folder/{id}/log`, `files/owner`, `files/fileops/duplicate`, `settings/notification/rooms`) accept the AI project room type with the project rules of `ai-projects-api`.
 - ~~On `PUT files/rooms/{id}/share` of a project, invite each new member to every linked room as Viewer with a `grantSkipped` warning.~~ *Superseded by the virtual access of 64c79db1dc.*
 

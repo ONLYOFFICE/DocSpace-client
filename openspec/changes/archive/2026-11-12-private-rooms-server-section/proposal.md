@@ -83,9 +83,7 @@ None.
 ## Impact
 
 - **Server (`../server`):** done in `c866c055e1` (design.md, "Landed on
-  2026-11-06"). Not addressed there, as the commit says itself: a subfolder
-  of a private room still goes to Trash, and a private room or its subfolder
-  can still be added to Favorites.
+  2026-11-06").
 - **ui-kit (`docspace-ui-kit-react`, `release/v4.1.0`):** `FolderType.PrivateRooms = 42`, and a Private entry in the files selector, without which no private room can be picked as a copy destination (design decision 6).
 - **Client:**
   - `packages/client/src/components/ClientArticleSidebar`
@@ -111,9 +109,8 @@ None.
 - Encryption, keys and the member flows: the section is navigation only
   (`private-rooms/sidebar-section`, "Encryption does not depend on the
   section").
-- Trash and Favorites for subfolders of private rooms, which the server
-  commit leaves open. The client already withholds Favorites for private
-  items.
+- Trash and Favorites for subfolders of private rooms. The client already
+  withholds Favorites for private items.
 - Section availability (`private-rooms/feature-gating`), unchanged.
 
 ## Decisions

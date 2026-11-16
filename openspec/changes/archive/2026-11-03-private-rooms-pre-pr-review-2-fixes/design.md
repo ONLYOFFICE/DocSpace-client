@@ -11,11 +11,8 @@ through CodeGraph.
   refreshed folder with `getFolderInfo(id)` (`refreshFolderImpl`), both
   without `skipRedirect`. The axios client calls the forbidden handler on 403
   under `/rooms/shared`, `/rooms/archived` and `/private`, which shows
-  Common:AccessDenied and refreshes the rights (`Shell.jsx`). On the server,
-  `SocketManager.WhoCanRead` adds every administrator to the recipients of an
-  entry in Rooms, Archive or AI rooms, while `FileSecurity` skips the
-  administrator bypass for a private room, so `GetFolderAsync` throws a
-  `SecurityException` (403) for an administrator who is not a member.
+  Common:AccessDenied and refreshes the rights (`Shell.jsx`). The server
+  answers 403 to the read of a private room by a user who is not a member.
 - **Key cache.** `SecretStorage.getCached` returns `{ publicKey, privateKey }`
   that are the slot's own `Uint8Array`s; `clearState` zeroes them with
   `zeroBuffer`. `wrapDEK` uses the sender's private key (HPKE auth mode), so a
@@ -23,12 +20,9 @@ through CodeGraph.
   against the real modules showed it: the wrap succeeds, the uploader's unwrap
   fails with `AuthenticationError`.
 - **Invitations.** The client `InvitePanel` and the SDK invite panel send all
-  invitees in one `setRoomSecurity`. `FileSharing.SetAceObjectAsync` walks the
-  invitees and saves each share inside the loop; for a private room it calls
-  `ThrowIfKeysAreNotSetAsync` on each invitee, which throws
-  `InvalidOperationException` ("The user does not have an encryption key"),
-  mapped to 403 by `UnhandledExceptionMiddleware`. Role refusals are the same
-  exception, so status alone does not tell them apart; the client already
+  invitees in one `setRoomSecurity`. For a private room the server
+  refuses an invitee without an encryption key with 403. Role refusals are
+  a 403 too, so status alone does not tell them apart; the client already
   offers only the roles an invitee may hold. No route returns the public key
   of a user who is not yet a member (`privacyroom/{roomId}/access` lists
   members only).
@@ -82,7 +76,7 @@ through CodeGraph.
    Common:EncryptedInviteNoKey; other failures as Common:EncryptedInviteFailed.
    Sequential requests keep the server load and the notification order as
    they were.
-   - *Alternative:* send one request, and on 403 read the members to find who was added.
+   - *Alternative:* keep one request and read the members after a 403.
    - *Why not:* it still cannot tell which invitee was refused, and it races with other changes to the room.
 
 5. **The SDK dialog treats an unknown key list as "may hold a key".** The key

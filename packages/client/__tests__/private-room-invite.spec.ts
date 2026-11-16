@@ -328,6 +328,17 @@ test.describe("Private room — invite entry point", () => {
     await expect
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(1);
+    // The upload writes the uploader's key after the file. It has to land
+    // before the key writes are held below, or it is held with them.
+    await expect
+      .poll(
+        () =>
+          filesHandle
+            .current!.getFiles()[0]
+            .fileKeys.map((k) => String(k.userId)),
+        { timeout: 30000 },
+      )
+      .toEqual([TEST_USER_ID]);
     // Carol's key reaches the room only after the upload has settled, or the
     // client would wrap the new file for her on its own.
     await page.waitForLoadState("networkidle");

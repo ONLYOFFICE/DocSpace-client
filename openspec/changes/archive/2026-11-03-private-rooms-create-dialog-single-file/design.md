@@ -108,7 +108,7 @@ No stashed design document covers the create dialog.
 
 2026-11-03, local stand (`localhost:8092`): client `release/v4.1.0` at
 `6a5c0b5291a` served by the Vite dev server, DocSpace server 3.1.0,
-Document Server 10.0.2.5. Administrator, private room "Pirate room" (id 11),
+Document Server 10.0.2.5. Administrator, a private room (id 11),
 editors opening in a new tab.
 
 - Common:DontAskAgain switched off, then "+ New" > "Presentation", the box

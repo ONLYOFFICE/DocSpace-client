@@ -2,7 +2,7 @@ import React from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import { RoomsType } from "../../enums";
+import { RoomsType, RoomsTypePrivate } from "../../enums";
 import RoomType from "./index";
 import styles from "./RoomType.module.scss";
 
@@ -208,6 +208,60 @@ describe("RoomType", () => {
       expect(
         screen.getByText("Common:CollaborationRoomTitle"),
       ).toBeInTheDocument();
+    });
+  });
+
+  describe("Private room block", () => {
+    const privateProps = {
+      ...defaultProps,
+      type: "displayItem" as const,
+      roomType: RoomsTypePrivate,
+    };
+
+    it("Create dialog of a private room", () => {
+      render(<RoomType {...privateProps} />);
+
+      expect(screen.getByText("Common:PrivateRoomTitle")).toBeInTheDocument();
+      expect(
+        screen.getByText("Common:PrivateRoomPanelDescription"),
+      ).toBeInTheDocument();
+      expect(screen.queryByText("Common:PrivateRoomDescription")).toBeNull();
+    });
+
+    it("Help article configured", () => {
+      render(
+        <RoomType
+          {...privateProps}
+          helpUrl="https://helpcenter.example/private-rooms.aspx"
+        />,
+      );
+
+      const link = screen.getByTestId("room-type-help-link");
+      expect(link).toHaveTextContent("Common:LearnMore");
+      expect(link).toHaveAttribute(
+        "href",
+        "https://helpcenter.example/private-rooms.aspx",
+      );
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
+    it("No help article", () => {
+      render(<RoomType {...privateProps} />);
+
+      expect(screen.queryByTestId("room-type-help-link")).toBeNull();
+    });
+
+    it("shows no link in the chooser variants", () => {
+      render(
+        <RoomType
+          {...privateProps}
+          type="listItem"
+          helpUrl="https://helpcenter.example/private-rooms.aspx"
+        />,
+      );
+
+      expect(screen.queryByTestId("room-type-help-link")).toBeNull();
     });
   });
 

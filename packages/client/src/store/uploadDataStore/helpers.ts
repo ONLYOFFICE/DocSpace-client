@@ -50,6 +50,11 @@ export type TUploadBrowserFile = File & {
   lastModifiedDate?: Date;
 };
 
+export type TPendingFinalize = {
+  sessionId: string;
+  path: number[];
+};
+
 export type TUploadFile = {
   file: TUploadBrowserFile;
   uniqueId: string;
@@ -74,6 +79,7 @@ export type TUploadFile = {
   needPassword?: boolean;
   convertProgress?: number;
   path?: number[];
+  pendingFinalize?: TPendingFinalize | null;
   password?: string | null;
   format?: string | null;
   index?: number;

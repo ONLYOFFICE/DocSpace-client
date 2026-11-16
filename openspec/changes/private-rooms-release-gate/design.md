@@ -68,8 +68,8 @@ proposal.md.
 ## Risks / Trade-offs
 
 - **Prerequisite changes are archived but regressions are found later.** →
-  The portal setting is the kill switch. Turning it off hides creation while
-  leaving data reachable.
+  The portal setting is the kill switch. Turning it off hides the feature;
+  nothing is deleted.
 - **The badge removal changes the sidebar screenshots once more.** →
   Regenerate them in the same task as the E2E update, and announce it to the
   teams that merge into the release branch.

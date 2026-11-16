@@ -1,14 +1,14 @@
 {
   "key_path": "DownloadWithoutDecryption",
-  "content": "Download without decryption",
-  "content_en_sha1_hash": "aee1006ca4da5eaffd975d51074dacd7bfb71bce",
-  "created_at": "2026-05-24T17:27:24.897Z",
-  "updated_at": "2026-11-09T17:07:34.963Z",
+  "content": "Download encrypted copy",
+  "content_en_sha1_hash": "e71cfd8a5a31f34dcbc7fa7d858190a80b2ec205",
+  "created_at": "2026-11-13T11:16:52.702Z",
+  "updated_at": "2026-11-13T11:18:36.816Z",
   "comment": {
-    "text": "Menu option label for downloading a file without performing decryption.",
+    "text": "Menu entry in the Download group of the context menu and of the header menu for encrypted files, folders and private rooms. Verb, imperative; a short menu label. It saves the file as it is stored, still encrypted, unlike the plain Download entry that saves a decrypted file. Name what is saved (an encrypted copy), not what is skipped.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:13:47.135Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-13T11:18:36.816Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {

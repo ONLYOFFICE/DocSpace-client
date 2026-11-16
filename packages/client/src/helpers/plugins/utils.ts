@@ -55,6 +55,7 @@ import {
   setRoomsView,
 } from "../info-panel";
 import { isPluginSectionPath } from "./navigation";
+import { showHtmlInFrame } from "./htmlFrame";
 
 import { TMessageActionsParams } from "./types";
 
@@ -79,6 +80,7 @@ export const messageActions = ({
   updateEventListenerItems,
   updateArticleButtonItems,
   updateArticleNavigationItems,
+  updateDashboardWidgetItems,
   updateFileItems,
   updateCreateDialogProps,
   updatePlugin,
@@ -260,6 +262,10 @@ export const messageActions = ({
         updateArticleNavigationItems?.(pluginName);
 
         break;
+      case PluginActions.updateDashboardWidgetItems:
+        updateDashboardWidgetItems?.(pluginName);
+
+        break;
       case PluginActions.updateFileItems:
         updateFileItems?.(pluginName);
 
@@ -281,6 +287,11 @@ export const messageActions = ({
 
         break;
       }
+      case PluginActions.showHtmlInFrame:
+        if (message.htmlFrameProps) showHtmlInFrame(message.htmlFrameProps);
+
+        break;
+
       case PluginActions.saveSettings:
         if (message.settings !== undefined) {
           updatePlugin?.(pluginName, null, message.settings);

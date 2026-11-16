@@ -158,6 +158,74 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
     expect(store.percent).toBe(0);
   });
 
+  it("stays silent after a successful retry while several already-shown errors remain", () => {
+    const { store, fakes } = createTestUploadDataStore();
+    store.files = [makeUploadFile({ action: "uploaded", toFolderId: 7 })];
+    store.uploadedFilesHistory = [
+      makeUploadFile({ action: "uploaded", error: "", errorShown: false }),
+      makeUploadFile({ error: "first failure", errorShown: true }),
+      makeUploadFile({ error: "second failure", errorShown: true }),
+    ];
+
+    store.finishUploadFiles(t);
+
+    expect(toastr.error).not.toHaveBeenCalled();
+    expect(toastr.warning).not.toHaveBeenCalled();
+    expect(toastr.success).not.toHaveBeenCalled();
+    expect(
+      fakes.primaryProgressDataStore.setPrimaryProgressBarData,
+    ).toHaveBeenCalledWith({
+      operation: OPERATIONS_NAME.upload,
+      alert: true,
+      errorCount: 2,
+    });
+    expect(store.uploaded).toBe(true);
+  });
+
+  it("finishes without throwing after a successful retry while one already-shown error remains", () => {
+    const { store, fakes } = createTestUploadDataStore();
+    store.files = [makeUploadFile({ action: "uploaded", toFolderId: 7 })];
+    store.uploadedFilesHistory = [
+      makeUploadFile({ action: "uploaded", error: "", errorShown: false }),
+      makeUploadFile({ error: "first failure", errorShown: true }),
+    ];
+    store.uploaded = false;
+
+    expect(() => store.finishUploadFiles(t)).not.toThrow();
+
+    expect(toastr.error).not.toHaveBeenCalled();
+    expect(toastr.success).not.toHaveBeenCalled();
+    expect(
+      fakes.primaryProgressDataStore.setPrimaryProgressBarData,
+    ).toHaveBeenCalledWith({
+      operation: OPERATIONS_NAME.upload,
+      alert: true,
+      errorCount: 1,
+    });
+    expect(store.uploaded).toBe(true);
+    expect(
+      fakes.primaryProgressDataStore.setPrimaryProgressBarData,
+    ).toHaveBeenCalledWith({
+      operation: OPERATIONS_NAME.upload,
+      completed: true,
+    });
+  });
+
+  it("toasts only the new error of a failed retry, not the already-shown ones", () => {
+    const { store } = createTestUploadDataStore();
+    store.files = [makeUploadFile({ toFolderId: 7 })];
+    store.uploadedFilesHistory = [
+      makeUploadFile({ error: "Broken pipe", errorShown: false }),
+      makeUploadFile({ error: "first failure", errorShown: true }),
+      makeUploadFile({ error: "second failure", errorShown: true }),
+    ];
+
+    store.finishUploadFiles(t);
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Broken pipe");
+  });
+
   it("deferred reset clobbers an upload that starts inside the TIMEOUT window (known race)", () => {
     const { store } = createTestUploadDataStore();
     store.files = [makeUploadFile({ action: "uploaded", toFolderId: 3 })];

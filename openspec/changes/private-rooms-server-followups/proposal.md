@@ -2,20 +2,16 @@
 
 ## Why
 
-The review of 2026-11-10 and the work of 2026-11-11 found server behaviour
-that the client can only describe or hide: a member without keys cannot
-leave a private room or be removed from it, the refusal carries no reason a
-client can read, the per-file key listing misses the room owner, the rooms
-of a deleted user pass to someone who cannot open them, and the server
-reports rights on files whose content it never sees. None of it is the
-client's to fix, and none of it has a task yet.
+The review of 2026-11-10 and the work of 2026-11-11 produced a list of
+behaviour to ask of the server: how the key check, the refusals, the key
+listing, the room listings and the reported rights of a private room shall
+work. None of it is the client's to change, and none of it had a task.
 
 ## What Changes
 
 This change is the hand-over to the backend team: one task per behaviour,
-each naming the server symbol, what should change and how to accept it. The
-delta of `server-contract` states the behaviour asked for; the main spec
-keeps describing the server as it is until the work lands.
+each stating the behaviour asked and how to accept it. The
+delta of `server-contract` states the behaviour asked for.
 
 - The key check of a share change runs only when a user first gets access
   to a private room; a leave, a removal and a role change of a member
@@ -31,17 +27,22 @@ keeps describing the server as it is until the work lands.
   filter and form gallery on the file, AI on the room; the version comment
   of an encrypted file is refused with them.
 - The private section root is titled in the user's language.
-- A question to the backend, with no behaviour asked yet: which routes the
-  switched-off E2E rooms app closes, and what happens to the keys of a user
-  turned into a guest.
+- A user turned into a guest loses the membership of every private room,
+  the file keys of those rooms and the stored key pair.
+- The switched-off E2E rooms app closes private rooms on the server:
+  they are in no rooms listing, cannot be created and cannot be reached by
+  id; only the routes of a user's own key pair stay open.
+- An invitation of several people to a private room is applied whole or
+  not at all.
+- A private room and its folders cannot be marked as favourites.
 - Client tasks that follow each merge: the mocks, their contract cases and
   the refusal message.
 
 Observations that belong to tasks of other changes are recorded there, in
 the same commit as this proposal: the reopening of a saved document, the
 crypto library build and the unstable spreadsheet opening in
-`private-rooms-editor-contract`; the AI tab of the editor and the untranslated
-labels in `private-rooms-server-hardening`.
+`private-rooms-editor-contract`; the untranslated labels in
+`private-rooms-server-hardening`.
 
 Out of scope:
 
@@ -54,7 +55,13 @@ Out of scope:
 
 Decisions that need a human:
 
-1. Backend team: the answers of tasks 2.4 and 1.5.
+None open.
+
+Decided by the owner on 2026-11-16: a user turned into a guest has the
+private-room access revoked and the keys deleted (task 1.6), and the
+switched-off E2E rooms app closes private rooms on the server, the direct
+access to an existing room included (task 2.5). The questions of tasks 1.5
+and 2.4 were answered by reading the server that day.
 
 Decided by the owner on 2026-11-11: the comment and review rights stay
 granted on an encrypted file, since commenting and reviewing happen inside

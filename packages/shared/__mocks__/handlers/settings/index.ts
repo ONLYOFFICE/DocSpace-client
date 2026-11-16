@@ -60,6 +60,10 @@ import {
 } from "./quotaSettings";
 import {
   webPluginsHandler,
+  webPluginsListHandler,
+  mockWorkspaceAppPlugin,
+  mockProfileMenuPlugin,
+  mockModalDialogPlugin,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
@@ -107,6 +111,10 @@ export {
   settingsAdditionalHandler,
   culturesHandler,
   webPluginsHandler,
+  webPluginsListHandler,
+  mockWorkspaceAppPlugin,
+  mockProfileMenuPlugin,
+  mockModalDialogPlugin,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,

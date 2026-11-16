@@ -1184,6 +1184,20 @@ Read from the release stand without signing in, on
    `stream_auth` over the id and the version); `SetUrl` replaces the
    host for every file (line 222), which an encrypted file must not get.
 
+   Tried on the client first (tasks 6.7 to 6.9, asked by the owner on
+   2026-11-16): the editor page finds the version of the document key
+   itself and swaps the address, so the theory can be run on a stand
+   before the server change. The server answers a past version with the
+   key and the signed address of that version
+   (`GetCurFileInfoAsync`, `DocumentServiceHelper.cs:62-81`;
+   `Configuration.GetUrl`), which is what the lookup compares and
+   copies. Its limits: one extra request for every such opening and one
+   more per version walked back; a member who may not read the history
+   is refused and keeps the address as it was; the token of the
+   configuration still carries the address of the current version, and
+   whether the editor reads the page's value is what the run of 6.8
+   tells. It is removed once 6.2 lands (6.9).
+
 8. **The document address of an encrypted file stays public.** The editor
    downloads it in the browser. `document.url` is built from the public portal
    address and then `ReplaceCommunityAddress` swaps its host for the address

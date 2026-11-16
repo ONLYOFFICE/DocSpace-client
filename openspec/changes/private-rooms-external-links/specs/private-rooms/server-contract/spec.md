@@ -31,6 +31,21 @@ The server SHALL accept on a private room, active or archived, and on a folder o
 
 ## ADDED Requirements
 
+### Requirement: A link of a private item without a password is limited
+The server SHALL refuse to store an external link of a private item without a password, unless the link is to one file, carries the access to view and has an end date. It SHALL apply the same rule when a link is changed.
+
+#### Scenario: Link to a file to view with an end date
+- **WHEN** a link to one file with the access to view, an end date and no password is requested
+- **THEN** the server stores it
+
+#### Scenario: Link without a password outside the rule
+- **WHEN** a link without a password is requested for a folder or a room, with another access, or without an end date
+- **THEN** the server refuses it and stores nothing
+
+#### Scenario: Password removed from a link
+- **WHEN** a change removes the password of a link that the rule does not allow without one
+- **THEN** the server refuses the change
+
 ### Requirement: External links of a private item are recipients of file keys
 The server SHALL list the public keys of the external links that cover a file with the public keys of its members, SHALL store a wrap of a file key for a link as for a member, and SHALL report which files a link has no wrap for.
 

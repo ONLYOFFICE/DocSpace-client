@@ -21,6 +21,7 @@ a key pair of its own.
 
 Nothing is built before the decisions below are taken. What is proposed:
 
+- A private item shows that it has active links, and how many.
 - A member who may manage the access of a private room creates an external
   link to a file, a folder or the room, as for an ordinary item: a primary
   link and additional ones within the limits the server has today, with the
@@ -58,23 +59,23 @@ Out of scope:
 - Any client code, mock or contract test before the server work has
   merged.
 
-Decisions that need a human, with the answer this proposal assumes:
-
-1. Whether a link can be made without a password. The owner's answer of
-   2026-11-16: it can, if the safety of the information can be guaranteed.
-   A link without a password is as strong as one with it against the
-   server, the network and a guess of the secret, and it does not protect
-   against somebody who gets the address itself. Proposed and waiting for
-   the owner: no password only for a link to one file with the access to
-   view and an end date; a password for every other link.
-2. What the interface, the marketing and the release notes say, since
-   "only members who hold a key can read" stops being true for a room with
-   a link. Proposed and waiting for the owner: the promise is that only
-   the people the user gave access to can read, the members and the
-   holders of the links the user made, and that the service holds no key.
+Decisions that need a human: none open.
 
 Decided by the owner on 2026-11-16:
 
+- A link without a password is made only for one file, with the access to
+  view and an end date. Every other link, to a folder or a room or with
+  the access to comment, review or edit, has a password. A link without a
+  password is as strong as one with it against the server, the network
+  and a guess of the secret; it does not protect against somebody who
+  gets the address itself, and the rule bounds what such a person reads
+  to one file for a limited time.
+- The promise is worded by who decides, not by who reads: only the people
+  the user gave access to can read, the members of the room and the
+  holders of the links the user made, and the service holds no key. The
+  interface says at the creation of a link that the link carries the key,
+  and at its revocation that what was opened stays with whoever opened
+  it.
 - The link types, the roles and the settings are the portal's own; Proton
   is the reference for the approach only.
 - The access to view comes first; commenting, reviewing and editing

@@ -71,10 +71,8 @@ Server, `../server` at `6fb6dfb17a`, read on 2026-11-16:
 
 ## Decisions
 
-The decisions of proposal.md the owner took on 2026-11-16 are recorded
-there. Its two open ones, the link without a password and the wording of
-the promise, are recorded by task 0.1 before any other task starts; the
-technical decisions below hold for the proposed answers.
+The decisions the owner took on 2026-11-16 are recorded in proposal.md;
+none is open. The technical decisions below follow from them.
 
 1. **A link is a recipient with a key pair of its own.** The browser of
    the creator makes an X25519 key pair for the link and wraps the file
@@ -134,12 +132,37 @@ technical decisions below hold for the proposed answers.
    The main spec keeps describing the server as it is until the work
    lands, as in `private-rooms-server-followups` (decision 2).
 
+10. **The password rule is enforced on the server and shown in the
+    interface.** The server refuses a link without a password unless it is
+    a link to one file with the access to view and an end date; the
+    interface asks for the password, or for the end date, before it sends.
+    The default end date of such a link is proposed as seven days and is
+    set with the mock-up of task 0.4.
+11. **The page of a visitor does not keep the secret.** It reads the part
+    after `#`, keeps it in memory for the visit and takes it out of the
+    address bar, writes it to no log, storage or statistics, and loads no
+    script from an origin other than the portal and its Document Server,
+    whose editor a document opens in. A reload therefore asks for the address
+    again. Alternative: leave the secret in the address, as Proton does.
+    Rejected: the address then stays in the history of the browser, which
+    is the leak the password rule is there to bound.
+12. **A private item shows its active links.** A room, a folder or a file
+    with a link that still works carries a mark with the number of links,
+    for the members who may see the room's access. A user who sees the
+    mark knows the item can be read from outside before reading the
+    promise anywhere.
+13. **The texts follow the promise of proposal.md.** They go through the
+    translations as Common keys, with the name of the service passed as a
+    variable. No text says "only members", "nobody else" or
+    "zero-knowledge" about an item that can carry a link.
+
 ## Risks / Trade-offs
 
 - [The address leaks: a forwarded message, a browser history, a
-  screenshot] → Stated as a requirement and in the interface where the
-  link is made; the password and the end date are offered there, and the
-  audit trail shows every opening.
+  screenshot] → The password rule of decision 10 bounds a link without a
+  password to one file for a limited time, decision 11 keeps the secret
+  out of the browser history, the mark of decision 12 and the audit trail
+  show the links and every opening.
 - [A revoked link is taken for a recalled document] → The interface says
   at the revocation that what was opened stays with whoever opened it;
   the same limit holds for a removed member.

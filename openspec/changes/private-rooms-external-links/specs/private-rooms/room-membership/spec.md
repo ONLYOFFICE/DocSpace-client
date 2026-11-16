@@ -60,3 +60,29 @@ The system SHALL let a member who may change the access revoke an external link 
 #### Scenario: Link revoked
 - **WHEN** the member confirms the revocation
 - **THEN** the link leaves the list and its address no longer opens anything
+
+### Requirement: A link without a password is limited to one file to view
+The system SHALL require a password for an external link of a private item, except for a link to one file with the access to view, which SHALL carry an end date instead. It SHALL ask for the missing password or end date before the link is created or changed.
+
+#### Scenario: Link to a file to view without a password
+- **WHEN** a member creates a link to one file with the access to view and no password
+- **THEN** an end date is required, and the link is created once it is set
+
+#### Scenario: Link to a folder or a room without a password
+- **WHEN** a member creates a link to a folder or a private room without a password
+- **THEN** the password is asked and no link is created without it
+
+#### Scenario: Access raised on a link without a password
+- **WHEN** a member changes a link without a password to the access to comment, review or edit
+- **THEN** the password is asked and the access is not changed without it
+
+### Requirement: A private item shows its active links
+The system SHALL mark a private room, a folder or a file that holds an external link which still works, with the number of such links, for a member who may see the access of the room.
+
+#### Scenario: Item with links
+- **WHEN** a member who may see the access looks at a private item with two links that work
+- **THEN** the item carries the mark with the number two
+
+#### Scenario: Last link revoked or expired
+- **WHEN** the last link of a private item is revoked or passes its end date
+- **THEN** the mark is gone

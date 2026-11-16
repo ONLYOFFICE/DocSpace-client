@@ -26,6 +26,8 @@
 
 import {
   filesSettingsHandler,
+  mockModalDialogPlugin,
+  mockProfileMenuPlugin,
   myDocumentsHandler,
   myHandler,
   rootHandler,
@@ -33,12 +35,15 @@ import {
   settingsHandler,
   TypeSettings,
   webPluginsHandler,
+  webPluginsListHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test, TEST_PORT } from "../fixtures/base";
 
 const PLUGIN_REQUEST_URL = "**/plugins/profile-menu/plugin.js";
+const MODAL_DIALOG_PLUGIN_REQUEST_URL =
+  "**/plugins/modal-dialog-sample/plugin.js";
 
 // Personal folder — app is fully authenticated here.
 const PERSONAL_FOLDER_URL = "/rooms/personal/filter?folder=12764";
@@ -54,17 +59,35 @@ async function openProfileMenu(
   await profileIconButton.click();
 }
 
+/** The data-testids from `ids` that the open menu shows, in menu order. */
+async function menuOrder(
+  page: import("@playwright/test").Page,
+  ids: string[],
+): Promise<string[]> {
+  return page.evaluate((wanted) => {
+    const found = [...document.querySelectorAll("[data-testid]")]
+      .map((element) => element.getAttribute("data-testid"))
+      .filter((id): id is string => !!id && wanted.includes(id));
+
+    return [...new Set(found)];
+  }, ids);
+}
+
+const portalHandlers = () => [
+  rootHandler(TEST_PORT),
+  filesSettingsHandler(TEST_PORT),
+  settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+  selfActivationStatusHandler(TEST_PORT, null, false, true),
+  myHandler(TEST_PORT, true),
+  myDocumentsHandler(TEST_PORT, true),
+];
+
 // ─── Test suite ───────────────────────────────────────────────────────────────
 
 test.describe("Profile Menu Sample Plugin", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
-      rootHandler(TEST_PORT),
-      filesSettingsHandler(TEST_PORT),
-      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
-      selfActivationStatusHandler(TEST_PORT, null, false, true),
-      myHandler(TEST_PORT, true),
-      myDocumentsHandler(TEST_PORT, true),
+      ...portalHandlers(),
       webPluginsHandler(TEST_PORT, "withProfileMenuPlugin"),
     );
   });
@@ -89,13 +112,7 @@ test.describe("Profile Menu Sample Plugin", () => {
     await expect(accountInfoItem).toBeVisible();
     await expect(quickHelpItem).toBeVisible();
 
-    const menuOrder = await page.evaluate((ids) => {
-      const found = [...document.querySelectorAll("[data-testid]")]
-        .map((element) => element.getAttribute("data-testid"))
-        .filter((id): id is string => !!id && ids.includes(id));
-
-      return [...new Set(found)];
-    }, [
+    const order = await menuOrder(page, [
       "user-menu-profile",
       "user-menu-hotkeys",
       "profile-menu-sample-account-info",
@@ -105,7 +122,7 @@ test.describe("Profile Menu Sample Plugin", () => {
     ]);
 
     // Plugin items get a block of their own, above the chat and support block.
-    expect(menuOrder).toEqual([
+    expect(order).toEqual([
       "user-menu-profile",
       "user-menu-hotkeys",
       "profile-menu-sample-account-info",
@@ -155,6 +172,80 @@ test.describe("Profile Menu Sample Plugin", () => {
       .filter({ hasText: "Quick help opened!" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "info");
+  });
+});
+
+test.describe("Profile menu with three plugin entries", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      ...portalHandlers(),
+      // Two entries from profile-menu and one from modal-dialog-sample.
+      webPluginsListHandler(TEST_PORT, [
+        mockProfileMenuPlugin,
+        mockModalDialogPlugin,
+      ]),
+    );
+  });
+
+  test("Three entries fold into More options, which opens on click", async ({
+    page,
+    baseUrl,
+  }) => {
+    const pluginsLoaded = Promise.all([
+      page.waitForResponse(PLUGIN_REQUEST_URL),
+      page.waitForResponse(MODAL_DIALOG_PLUGIN_REQUEST_URL),
+    ]);
+    await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
+    await pluginsLoaded;
+
+    await openProfileMenu(page);
+
+    const moreOptions = page.getByTestId("user-menu-plugins");
+    const accountInfoItem = page.getByTestId(
+      "profile-menu-sample-account-info",
+    );
+    const quickHelpItem = page.getByTestId("profile-menu-sample-quick-help");
+    const aboutItem = page.getByTestId("modal-dialog-sample-about");
+
+    await expect(moreOptions).toBeVisible();
+    await expect(moreOptions).toContainText("More options");
+    await expect(accountInfoItem).toBeHidden();
+    await expect(quickHelpItem).toBeHidden();
+    await expect(aboutItem).toBeHidden();
+
+    expect(
+      await menuOrder(page, [
+        "user-menu-hotkeys",
+        "user-menu-plugins",
+        "user-menu-support",
+        "user-menu-logout",
+      ]),
+    ).toEqual([
+      "user-menu-hotkeys",
+      "user-menu-plugins",
+      "user-menu-support",
+      "user-menu-logout",
+    ]);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-profile-menu",
+      "profile-menu_more-options.png",
+    ]);
+
+    await moreOptions.click();
+
+    await expect(accountInfoItem).toBeVisible();
+    await expect(quickHelpItem).toBeVisible();
+    await expect(aboutItem).toBeVisible();
+
+    await accountInfoItem.click();
+
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Account info requested!" });
+    await expect(toast).toBeVisible();
+    await expect(toast).toHaveAttribute("data-type", "success");
   });
 });
 

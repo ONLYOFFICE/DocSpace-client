@@ -120,7 +120,7 @@ The server SHALL accept an encrypted flag when an upload session is created, SHA
 - **THEN** the resulting file is marked encrypted; its title is the submitted name after invalid-character replacement and truncation, renamed only on a title clash
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, and on the AI hub room types (Knowledge, Instructions and AI project rooms). It SHALL otherwise store the room with the requested room type and the private setting.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and with 400 on third-party storage and on the AI hub room types. It SHALL otherwise store the room with the requested room type and the private setting, and SHALL then answer 403 for a public or a form-filling room, whose link is refused in a private room, leaving the room stored.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -145,6 +145,10 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 #### Scenario: AI agent created as private
 - **WHEN** a user with encryption keys creates an AI agent with the private flag while the Document Server encrypts
 - **THEN** the agent is created with the private setting
+
+#### Scenario: Public or form-filling room created as private
+- **WHEN** a user with encryption keys creates a public or a form-filling room with the private flag while the Document Server encrypts
+- **THEN** the server answers 403 "Access denied", and the room is stored with the private setting and without a link
 
 ### Requirement: No edition or licence gate on private rooms
 The server SHALL NOT apply an edition, licence or tariff check specific to private rooms; creating one is subject to the general room-creation rules (room-creation right, tariff room limit, quota) plus the caller's keys.

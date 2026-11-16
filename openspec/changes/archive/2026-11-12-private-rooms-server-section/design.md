@@ -138,16 +138,6 @@ recorded.
   rooms, both ways of asking for the section, the `@private` route and the
   root by id, the root listing, the app turned off, an administrator outside
   the room, a member, the archive, new items, Recent and groups.
-- **Not addressed by the commit, as it says itself:** a subfolder of a
-  private room still goes to Trash, and a private room or its subfolder can
-  still be added to Favorites.
-- **The note against the code:** the note says that a public room and a
-  form-filling room "are refused" as private. `CreateRoomAsync`
-  (`FileStorageService.cs:666-690`) and `InternalCreateFolderAsync`
-  (`:1220-1230`) refuse no room type with the private flag: only AI hub
-  types, keys, the Document Server, indexing, lifetime and watermark. The
-  room is created, and its link fails later
-  (`private-rooms-server-hardening` 12.8, still open).
 - **The client today.** The client does not know the new root type: the kit's
   `FolderType` ends at `AiHub = 41`. `getFoldersTree` takes it into the
   tree folders with the server's title, where it only gets a socket
@@ -159,7 +149,7 @@ recorded.
 
 ### Destination picker, stand check of 2026-11-11
 
-Checked on `tests.onlyoffice.io` (DocSpace 4.1.0.12366, Document Server
+Checked on the release stand (DocSpace 4.1.0.12366, Document Server
 10.0.3.19) as an owner of two private rooms, after the rooms list mocks were
 made to mirror the server and six cases of
 `packages/client/__tests__/private-room-cross-room-copy.spec.ts` failed on

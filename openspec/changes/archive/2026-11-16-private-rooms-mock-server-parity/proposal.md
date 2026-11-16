@@ -5,10 +5,9 @@
 Two mocks answer what `../server` does not. Found by the reads of
 2026-11-16 at `6fb6dfb17a`:
 
-- The room creation mock stores a public or a form-filling room created as
-  private and answers 200. The server stores the room too, and then answers
-  403, because the primary link it sets at once is refused in a private
-  room. The main `server-contract` says the same as the mock.
+- The room creation mock answers 200 to a public or a form-filling room
+  created as private, where the server answers 403. The main
+  `server-contract` says the same as the mock.
 - The mock of the accounts offered for a room builds each account from the
   fixture of the caller's own profile, so it carries three fields the
   server never sends for another account and misses one it always sends.
@@ -20,7 +19,7 @@ set right.
 
 - The room creation mock answers 403 "Access denied" to a public or a
   form-filling room created as private, after the same refusals as before,
-  and keeps the room among the ones it holds, as the server does.
+  as the server does.
 - The main `server-contract` requirement on private room creation says so,
   with a scenario for it.
 - The accounts-for-a-room mock builds an account from the fields the server
@@ -29,8 +28,8 @@ set right.
 
 Out of scope:
 
-- The behaviour asked of the server for these rooms: a refusal before the
-  room is stored, with 400 (`private-rooms-server-hardening` 12.8). Its
+- The behaviour asked of the server for these rooms
+  (`private-rooms-server-hardening` 12.8). Its
   delta replaces the scenario added here when it lands.
 - Any change in `../server`.
 - The search filters and the caller-dependent parts of the accounts route

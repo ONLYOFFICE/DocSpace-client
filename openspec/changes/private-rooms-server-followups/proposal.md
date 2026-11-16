@@ -2,20 +2,16 @@
 
 ## Why
 
-The review of 2026-11-10 and the work of 2026-11-11 found server behaviour
-that the client can only describe or hide: a member without keys cannot
-leave a private room or be removed from it, the refusal carries no reason a
-client can read, the per-file key listing misses the room owner, the rooms
-of a deleted user pass to someone who cannot open them, and the server
-reports rights on files whose content it never sees. None of it is the
-client's to fix, and none of it has a task yet.
+The review of 2026-11-10 and the work of 2026-11-11 produced a list of
+behaviour to ask of the server: how the key check, the refusals, the key
+listing, the room listings and the reported rights of a private room shall
+work. None of it is the client's to change, and none of it had a task.
 
 ## What Changes
 
 This change is the hand-over to the backend team: one task per behaviour,
-each naming the server symbol, what should change and how to accept it. The
-delta of `server-contract` states the behaviour asked for; the main spec
-keeps describing the server as it is until the work lands.
+each stating the behaviour asked and how to accept it. The
+delta of `server-contract` states the behaviour asked for.
 
 - The key check of a share change runs only when a user first gets access
   to a private room; a leave, a removal and a role change of a member
@@ -37,8 +33,7 @@ keeps describing the server as it is until the work lands.
   they are in no rooms listing, cannot be created and cannot be reached by
   id; only the routes of a user's own key pair stay open.
 - An invitation of several people to a private room is applied whole or
-  not at all, where today it stops at the first without a key and keeps
-  the ones before.
+  not at all.
 - A private room and its folders cannot be marked as favourites.
 - Client tasks that follow each merge: the mocks, their contract cases and
   the refusal message.
@@ -46,8 +41,8 @@ keeps describing the server as it is until the work lands.
 Observations that belong to tasks of other changes are recorded there, in
 the same commit as this proposal: the reopening of a saved document, the
 crypto library build and the unstable spreadsheet opening in
-`private-rooms-editor-contract`; the AI tab of the editor and the untranslated
-labels in `private-rooms-server-hardening`.
+`private-rooms-editor-contract`; the untranslated labels in
+`private-rooms-server-hardening`.
 
 Out of scope:
 

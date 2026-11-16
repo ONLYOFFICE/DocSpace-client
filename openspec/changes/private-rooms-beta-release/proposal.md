@@ -28,8 +28,8 @@ a beta, with the E2E rooms app as the switch on standalone portals.
   existing feedback channels. The shared `BetaBadge` gets a description and a
   title override for this, since both are specific to RTL languages today.
 - Keys management stays reachable for users who already hold a key when the
-  app is switched off. Existing private rooms stay usable by their address
-  and are listed nowhere, the Rooms section included (owner's decision,
+  app is switched off. Existing private rooms are kept and are listed
+  nowhere, the Rooms section included (owner's decision,
   confirmed 2026-11-10). The server leaves them out of the Rooms list; the
   client keeps the non-private filter on Rooms → Archive for that
   (2026-11-11).
@@ -85,8 +85,8 @@ None.
 
 - `private-rooms/feature-gating`: the browser-local opt-in is removed and the
   feature is offered on every portal, with the E2E rooms app as the standalone
-  switch. Existing rooms stay usable when the app is off. Frames take the host
-  opt-in alone. The E2E suite runs without the flag.
+  switch. Existing rooms are kept while the app is off and listed nowhere.
+  Frames take the host opt-in alone. The E2E suite runs without the flag.
 - `private-rooms/sidebar-section`: section availability follows the E2E rooms
   app instead of the flag, and the sidebar item carries the Beta badge with
   its own tooltip title.

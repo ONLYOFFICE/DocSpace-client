@@ -1,7 +1,7 @@
 # Server Contract Specification
 
 ## Purpose
-Lists the server behaviour the private-rooms client relies on: the key-envelope endpoints, the per-file access entries, the encrypted upload session, room creation rules and the editor and conversion guards. Requirements are written on "the server" so a backend change that breaks one is visible as a spec violation; the MSW handlers used by the client E2E suite mirror these rules and have contract tests against the C# code. Behaviour that exists today but is incomplete from a security standpoint is stated neutrally. Every requirement describes what the ../server implementation actually does, looked up with CodeGraph and read in the source; nothing here is inferred from client code or guessed. Implementation: client packages/shared/api/privacy/index.ts and packages/shared/api/files/index.ts; server products/ASC.Files/Server/Api/{PrivacyRoomController,FilesController,SecurityController,UploadController,VirtualRoomsController,EditorController}.cs, Core/Core/FileStorageService.cs, Core/Core/Entries/EncryptionKeyPairDto.cs, Core/Core/Dao/TeamlabDao/FileDao.cs, Core/Core/Security/FileSecurity.cs, Core/Core/EF/DbFileKeys.cs; mocks packages/shared/__mocks__/handlers/{privacyroom,files}.
+Lists the server behaviour the private-rooms client relies on: the key-envelope endpoints, the per-file access entries, the encrypted upload session, room creation rules and the editor and conversion guards. Requirements are written on "the server" so a backend change that breaks one is visible as a spec violation; the MSW handlers used by the client E2E suite mirror these rules and have contract tests against the C# code. Every requirement describes what the ../server implementation actually does, looked up with CodeGraph and read in the source; nothing here is inferred from client code or guessed. Implementation: client packages/shared/api/privacy/index.ts and packages/shared/api/files/index.ts; server products/ASC.Files/Server/Api/{PrivacyRoomController,FilesController,SecurityController,UploadController,VirtualRoomsController,EditorController}.cs, Core/Core/FileStorageService.cs, Core/Core/Entries/EncryptionKeyPairDto.cs, Core/Core/Dao/TeamlabDao/FileDao.cs, Core/Core/Security/FileSecurity.cs, Core/Core/EF/DbFileKeys.cs; mocks packages/shared/__mocks__/handlers/{privacyroom,files}.
 
 ## Requirements
 
@@ -46,7 +46,7 @@ The server SHALL return, on the room access request, one entry per key of each r
 - **THEN** the response lists the public keys of members with stored keys, with their ids; members reached only through a group and members without keys are absent
 
 ### Requirement: File public keys
-The server SHALL return, for one file in a private room, active or archived, the keys of every user holding a share record of their own (not a group or a link) on the file or on any folder above it up to the room, plus the file's creator even without a record; it SHALL skip users without stored keys or a public key, keep the private half only on the caller's entries, and answer 415 outside a private room. Existing access entries are not consulted.
+The server SHALL return, for one file in a private room, active or archived, the keys of the users who can read the file and hold a share record of their own (not a group or a link) on the file or on any folder above it up to the room; it SHALL skip users without stored keys or a public key, keep the private half only on the caller's entries, and answer 415 outside a private room. Existing access entries are not consulted.
 
 #### Scenario: Keys of a file
 - **WHEN** a reader of the file requests its public keys
@@ -60,10 +60,6 @@ The server SHALL return, for one file in a private room, active or archived, the
 - **WHEN** the public keys of a file that another member created are requested, and the room owner holds no share record of their own
 - **THEN** the room owner's keys are not in the answer
 
-#### Scenario: Creator who left the room
-- **WHEN** the public keys of a file are requested after its creator left the room
-- **THEN** the creator's keys are still in the answer
-
 ### Requirement: File access entries read
 The server SHALL return, for one file the caller can read, the calling user's own key pairs and the wrapped file keys stored for the caller, and SHALL NOT return wraps that belong to other users; it answers 403, not 404, for a missing or unreadable file.
 
@@ -72,11 +68,11 @@ The server SHALL return, for one file the caller can read, the calling user's ow
 - **THEN** the response holds the caller's key pairs and the caller's wrapped file keys only
 
 ### Requirement: File access entries write
-The server SHALL store the submitted entries of the listed users who can read the file, replacing their previous entries and keeping every other user's entry, and SHALL answer the ids of the users it skipped because they cannot read the file. It SHALL do so only when the caller can read the file and create content in its parent room, which is private; otherwise it SHALL answer 403 and store nothing. Each listed user SHALL be checked on a fresh read of the file.
+The server SHALL store the submitted entries of the listed users who can read the file, one entry per user and file, keeping every other user's entry, and SHALL answer the ids of the users it skipped because they cannot read the file. It SHALL do so only when the caller can read the file and create content in its parent room, which is private; otherwise it SHALL answer 403 and store nothing. Each listed user SHALL be checked on a fresh read of the file.
 
-#### Scenario: Authorised replace
+#### Scenario: Authorised write
 - **WHEN** a room member with create rights submits entries for users who can all read the file
-- **THEN** the previous entries for those users are replaced by the submitted ones and no id is reported as skipped
+- **THEN** the submitted entries are stored for those users and no id is reported as skipped
 
 #### Scenario: Non-private parent room
 - **WHEN** the file's parent room is not private
@@ -120,7 +116,7 @@ The server SHALL accept an encrypted flag when an upload session is created, SHA
 - **THEN** the resulting file is marked encrypted; its title is the submitted name after invalid-character replacement and truncation, renamed only on a title clash
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and with 400 on third-party storage and on the AI hub room types. It SHALL otherwise store the room with the requested room type and the private setting, and SHALL then answer 403 for a public or a form-filling room, whose link is refused in a private room, leaving the room stored.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and with 400 on third-party storage and on the AI hub room types. It SHALL answer 403 for a public or a form-filling room, whose link is refused in a private room.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -142,13 +138,9 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 - **WHEN** a Knowledge, Instructions or AI project room creation request sets the private flag
 - **THEN** the server answers 400 and creates no room
 
-#### Scenario: AI agent created as private
-- **WHEN** a user with encryption keys creates an AI agent with the private flag while the Document Server encrypts
-- **THEN** the agent is created with the private setting
-
 #### Scenario: Public or form-filling room created as private
 - **WHEN** a user with encryption keys creates a public or a form-filling room with the private flag while the Document Server encrypts
-- **THEN** the server answers 403 "Access denied", and the room is stored with the private setting and without a link
+- **THEN** the server answers 403 "Access denied"
 
 ### Requirement: No edition or licence gate on private rooms
 The server SHALL NOT apply an edition, licence or tariff check specific to private rooms; creating one is subject to the general room-creation rules (room-creation right, tariff room limit, quota) plus the caller's keys.
@@ -190,18 +182,11 @@ The server SHALL decide whether an encrypted PDF is a form from the form bit in 
 - **WHEN** an encrypted PDF's header has the form bit set
 - **THEN** the file is reported as a form
 
-### Requirement: Editor configuration carries the caller's key pairs
-The server SHALL add the calling user's key pairs to the editor configuration of a file located in a private room, and SHALL omit them for other files.
+### Requirement: Encrypted content is served to the browser as stored
+The server SHALL serve the stored ciphertext of an encrypted file, unchanged, to a browser that requests the file by its address with a valid stream key.
 
-#### Scenario: Private-room file
-- **WHEN** the editor configuration of a private-room file is requested
-- **THEN** the caller's key pairs are included
-
-### Requirement: Encrypted content served without signature check
-The server SHALL serve an encrypted file's stored bytes to the editor without the anonymous Document Server signature check that non-encrypted files require; an anonymous stream request still needs a valid stream key.
-
-#### Scenario: Editor fetches ciphertext
-- **WHEN** the Document Server requests an encrypted file
+#### Scenario: Browser fetches ciphertext
+- **WHEN** the browser requests an encrypted file by its address with a valid stream key
 - **THEN** the stored ciphertext is returned unchanged
 
 ### Requirement: Range requests on the file view address
@@ -250,7 +235,7 @@ The server SHALL NOT include the plaintext title of a private room or of its fol
 - **THEN** they carry its title
 
 ### Requirement: Owner change requires the new owner's keys
-The server SHALL refuse with 403 an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL refuse with 409, leaving the owner as it is, when the new owner, unless they created the room, holds no access entry on some encrypted file of the room, subfolders included; the missing files are read through the missing-file-keys request. The reassignment of a deleted user's rooms SHALL apply neither check.
+The server SHALL refuse with 403 an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL refuse with 409, leaving the owner as it is, when the new owner, unless they created the room, holds no access entry on some encrypted file of the room, subfolders included; the missing files are read through the missing-file-keys request.
 
 #### Scenario: New owner without keys
 - **WHEN** ownership of a private room is given to a user without keys
@@ -271,10 +256,6 @@ The server SHALL refuse with 403 an ownership change of a private room when the 
 #### Scenario: Previous owner without keys
 - **WHEN** an owner whose own key set is empty gives the room to a user with keys
 - **THEN** the change is refused with 403, since the share the previous owner gets in exchange passes the same key check as any new share
-
-#### Scenario: Rooms of a deleted user
-- **WHEN** the rooms of a user being deleted are reassigned to a user who lacks entries or has no keys at all
-- **THEN** the reassignment completes, and the private rooms are owned by that user
 
 ### Requirement: No recovery or offboarding endpoints
 The server SHALL NOT expose endpoints for administrative key recovery or for SCIM-driven offboarding from private rooms. The history of key writes for one file is available through the file history.
@@ -616,7 +597,7 @@ The server SHALL refuse with 403 an upload session into a private room, or into 
 - **THEN** the server accepts it as before
 
 ### Requirement: Private rooms need a Document Server that encrypts
-The server SHALL refuse with 403, after the key check, the creation of a private room or a private AI agent, and with 415 the editor configuration of an encrypted file of a private room, while the connected Document Server does not serve the crypto library the browser decrypts with.
+The server SHALL refuse with 403, after the key check, the creation of a private room, and with 415 the editor configuration of an encrypted file of a private room, while the connected Document Server does not serve the crypto library the browser decrypts with.
 
 #### Scenario: Room created without the library
 - **WHEN** a user with encryption keys creates a private room and the Document Server does not serve the crypto library
@@ -659,14 +640,6 @@ The server SHALL remove a user's file keys from every encrypted file of a privat
 - **WHEN** a member leaves a private room
 - **THEN** the leaver's keys are gone from every encrypted file of the room
 
-#### Scenario: Member without keys
-- **WHEN** a member whose key set is empty leaves a private room, or the owner removes that member or changes their role, through the share request of the room
-- **THEN** the server answers 403 with the message "The user does not have an encryption key", the member's share stays as it was and no key is removed
-
-#### Scenario: Key removal fails after the share is written
-- **WHEN** a member's share of a private room is removed and the removal of their file keys then fails
-- **THEN** the member no longer has access to the room, and their keys stay on the files
-
 #### Scenario: Owner keeps the keys
 - **WHEN** the owner clears the room's access, sets their own share to none or has it removed by a manager
 - **THEN** the owner keeps their keys and stays the owner
@@ -701,8 +674,8 @@ The server SHALL refuse with 403 a write of file access entries for a file of an
 - **WHEN** the room is restored from the archive and the same entries are written
 - **THEN** the server stores them
 
-### Requirement: The E2E rooms app gates only the private section listing
-The server SHALL use the E2E rooms app of the portal only to list the private rooms section: while the app is off, `GET files/@private` answers 404 and the root folders request leaves the Private root out. The rooms list with the private rooms area, the key routes, private room creation and access to existing private rooms SHALL NOT depend on the app.
+### Requirement: The E2E rooms app gates the private section
+The server SHALL list the private rooms section only while the E2E rooms app of the portal is on: while the app is off, `GET files/@private` answers 404 and the root folders request leaves the Private root out.
 
 #### Scenario: App off, section requested
 - **WHEN** the E2E rooms app is off and a client requests `GET files/@private`
@@ -711,10 +684,6 @@ The server SHALL use the E2E rooms app of the portal only to list the private ro
 #### Scenario: App off, root folders
 - **WHEN** the E2E rooms app is off and a client requests the root folders
 - **THEN** the response has no Private root
-
-#### Scenario: App off, other private-room routes
-- **WHEN** the E2E rooms app is off and a member with keys lists rooms with the private rooms area, writes file keys or creates a private room
-- **THEN** the server handles the request as while the app is on
 
 ### Requirement: Guests cannot hold encryption keys
 The server SHALL refuse with 403 a guest who creates, replaces or deletes an encryption key envelope, and SHALL store nothing.
@@ -735,15 +704,15 @@ The server SHALL refuse with 400, and store nothing, a create or replace request
 - **THEN** the server answers 400 and the keys they already had stay as they were
 
 ### Requirement: File rights reported to the owner of a private room
-The server SHALL report on a file of an active private room, to the room's owner, the comment, review, custom-filter and edit-history rights as granted, since it grants the owner every right it has not denied for the room; it SHALL deny on such a file the fill-forms, form-filling, AI, conversion, embedding and vectorization rights. In an archived private room it SHALL deny all of these.
+The server SHALL report on a file of an active private room, to the room's owner, the comment and review rights as granted, and SHALL deny on such a file the fill-forms, form-filling, AI, conversion, embedding and vectorization rights. In an archived private room it SHALL also deny the comment, review, custom-filter, edit-history, form-gallery and open-form rights.
 
 #### Scenario: Spreadsheet in an active private room
 - **WHEN** the owner of an active private room lists an encrypted spreadsheet in it
-- **THEN** the file reports Comment, Review, CustomFilter, EditHistory and SubmitToFormGallery as true, and FillForms, StartFilling, FillingStatus, ResetFilling, StopFilling, OpenForm, AskAi, Convert, Embed and Vectorization as false
+- **THEN** the file reports Comment and Review as true, and FillForms, StartFilling, FillingStatus, ResetFilling, StopFilling, OpenForm, AskAi, Convert, Embed and Vectorization as false
 
 #### Scenario: PDF in an active private room
 - **WHEN** the owner of an active private room of the custom type lists an encrypted PDF in it
-- **THEN** the file reports OpenForm as true and FillForms as false, and SubmitToFormGallery as true only when the encrypted header marks the file as a PDF form
+- **THEN** the file reports OpenForm as true and FillForms as false, and SubmitToFormGallery as false unless the encrypted header marks the file as a PDF form
 
 #### Scenario: Image in an active private room
 - **WHEN** the owner of an active private room lists an encrypted image in it

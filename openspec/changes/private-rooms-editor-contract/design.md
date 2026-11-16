@@ -7,18 +7,13 @@ browser (`packages/doceditor/src/hooks/useFileEncryptionKeys.ts:185-203`) and
 injects `{ dek, cryptoEngineId }` into `editorConfig.encryptionKeys` with
 `Object.assign` (`packages/doceditor/src/components/Editor.tsx:262-266`)
 because the field is not part of the `@onlyoffice/document-editor-react`
-typings. The server adds the caller's key pairs for private-room files
-(`server/products/ASC.Files/Server/Api/EditorController.cs:311`,
-`Configuration.cs:263`) and signs the configuration before the client adds
-the DEK. The signature covers that field: the token is computed over the
-whole configuration DTO (`ConfigurationDto.cs:592`,
-`result.Token = documentServiceHelper.GetSignature(result)`), whose
-`editorConfig.encryptionKeys` is the caller's key-pair list
-(`ConfigurationDto.cs:639`), each entry carrying `publicKey`,
-`privateKeyEnc` (the caller's encrypted private half) and `cryptoEngineId`
-(`EncryptionKeyDto.cs`). The client then overwrites the field with
-`{ dek, cryptoEngineId }`, so the signed value and the value in the
-configuration differ in shape and content. Co-editing is only a client flag (`packages/doceditor/src/utils/actions.ts:829`);
+typings. The server signs the configuration before the client adds the DEK:
+the token is computed over the whole configuration DTO
+(`ConfigurationDto.cs:592`,
+`result.Token = documentServiceHelper.GetSignature(result)`). The client
+then replaces `editorConfig.encryptionKeys` with `{ dek, cryptoEngineId }`,
+and the Document Server reads the DEK from there. Task 10.6 trims what the
+server puts into that field. Co-editing is only a client flag (`packages/doceditor/src/utils/actions.ts:829`);
 the server's co-editing configuration (`Configuration.cs:317-326`) does not
 look at the encrypted flag. The AI bridge is already disabled for encrypted
 files (`packages/doceditor/src/hooks/useEditorEvents.ts:317-319`).
@@ -72,8 +67,7 @@ not contain this code.
   and, in a browser or whenever `dek` is present, starts its web crypto path,
   which reads only `dek` (base64) and imports it as an AES-GCM key.
   `cryptoEngineId` is not read. In the desktop application without `dek` it
-  hands the whole entry to the application with the command
-  `portal:cryptoinfo` instead.
+  takes the desktop path (the command `portal:cryptoinfo`) instead.
 - **Crypto library.** The add-on calls `window.OnlyofficeCrypto`
   (`decryptFile`, `encryptFile`, `isDSE3Format`), which the Document Server
   ships as its own copy of this repository's library at
@@ -100,13 +94,11 @@ not contain this code.
   `http://host.docker.internal:8092/` on the local stack, read from
   `GET files/docservice` and the `openedit` response), which the browser
   could not reach until the host mapped that name to loopback.
-- **Token.** The Document Server accepted the configuration although the
-  signed `encryptionKeys` (the key-pair list) differs from the
-  `{ dek, cryptoEngineId }` beside it, and it read the DEK from the unsigned
-  part. In the bundle the entry is read only when the add-on starts and is
-  not part of any message to the Document Server server (read in the code;
-  the socket traffic was not captured). The signed token carries the key
-  pairs, `privateKeyEnc` included, to the Document Server.
+- **Token.** The Document Server accepted the configuration with the
+  `{ dek, cryptoEngineId }` the client set after signing, and it read the
+  DEK from there. In the bundle the entry is read only when the add-on
+  starts and is not part of any message to the Document Server server (read
+  in the code; the socket traffic was not captured).
 - **Save.** Ctrl+S and the Save button in the header both build the file in
   the browser, encrypt it with `encryptFile` under the same DEK and the real
   file name, and post it to the Document Server's `savefile` endpoint
@@ -162,7 +154,7 @@ Minified names are left out; the behaviour is what the contract
 
 - **Entry.** The core hands the encryption keys entry to one function. With
   `AscDesktopEditor` present and `dek` undefined it creates the desktop engine
-  and sends `portal:cryptoinfo` with the whole entry; otherwise it creates the
+  (`portal:cryptoinfo`); otherwise it creates the
   web engine, which starts only when `dek` is defined and, after the editor is
   ready, only when `window.OnlyofficeCrypto` and `crypto.subtle` exist. It
   then imports `dek` (base64) as a non-extractable AES-GCM key, sets the crypto
@@ -192,13 +184,11 @@ Minified names are left out; the behaviour is what the contract
   associated data is used and the key is the file's DEK.
 - **Download-as.** PDF and PDF/A are built in the browser and saved to the
   device; docx, docm, dotx, xlsx, xlsm, xltx, pptx, pptm, potx, ppsx and vsdx
-  take the package built in the browser to the device; any other target
-  returns to the core's generic path.
+  take the package built in the browser to the device.
 - **Images.** Pasted or chosen images become `cryptoimg://<n>.<ext>` entries
   with their bytes kept in memory; an image address fetched for display is
-  decrypted when it starts with `ENCRYPTED;`. Whether an inserted image reaches
-  the Document Server's media store in plaintext is not visible in the add-on
-  and was not exercised in the run.
+  decrypted when it starts with `ENCRYPTED;`. Where an inserted image is
+  stored is recorded by task 4.4.
 - **Capability.** `Asc.Addons.crypto` is set to true when the add-on is
   bundled; the engine's "has crypto" check is `!!window.OnlyofficeCrypto`.
 
@@ -207,12 +197,7 @@ Minified names are left out; the behaviour is what the contract
 Read through CodeGraph in `../server/products/ASC.Files` (files changed after
 the last index were read on disk):
 
-- "Private" is a flag on a room of any type (`Core/Core/Entries/Folder.cs:249`,
-  `Server/ApiModels/RequestDto/CreateRoomRequestDto.cs:131`); creating a
-  private room checks only that the creator holds encryption keys
-  (`Core/Core/FileStorageService.cs:1164-1185`), so a private form-filling
-  room or virtual data room is accepted by the API. Both private rooms the
-  client created on the stack are custom rooms.
+- Both private rooms the client created on the stack are custom rooms.
 - Fill rights exist only in form-filling rooms, virtual data rooms and the
   user's own folder (`Core/Helpers/DocSpaceHelper.cs:81-82`, enforced in
   `Core/Core/Security/FileSecurity.cs:1741`). Start filling, the filler's
@@ -283,9 +268,9 @@ on release/v4.1.0 (files changed after the last index were read on disk):
   is set (`Core/Services/DocumentService/DocumentServiceConnector.cs:482-524`).
   After a force-save the key names the stable version while the address
   serves the current one, which is the "changesError" of the run. The stream
-  action accepts `version` and checks `stream_auth` over id and version; for
-  an encrypted file it skips the JWT header check
-  (`Core/HttpHandlers/FileHandler.ashx.cs:589`, `603`, `616-626`).
+  action accepts `version` and checks `stream_auth` over id and version
+  (`Core/HttpHandlers/FileHandler.ashx.cs`); the browser fetches the
+  document by this address with the stream key.
 - **Callbacks** (`Core/Services/DocumentService/DocumentServiceTracker.cs:215-270`):
   status 1 tracks the listed users and drops the tracked ones missing from the
   list, so an empty list clears the tracker; a key that does not match the
@@ -477,11 +462,8 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
 `EditorController.cs:253-314`, `FileTracker.cs:417`) and adding:
 
 - **Configuration.** `editorConfig.encryptionKeys` is set only for a file
-  located in a private room, from the caller's own key list, unsanitized, so
-  `privateKeyEnc` is in it (`EditorController.cs:311-314`,
-  `EncryptionKeyPairDto.cs:153-162`, `EncryptionKeyDto.cs:49-87`); the token
-  signs the whole DTO (`ConfigurationDto.cs:592`) and nothing changes the
-  field afterwards, while other fields are mutated after signing
+  located in a private room; the token signs the whole DTO
+  (`ConfigurationDto.cs:592`), and other fields are mutated after signing
   (`:595-608`, `EditorController.cs:322-385`). The only encrypted or private
   branches of the configuration: permissions off for an encrypted file
   outside a private room (`DocumentServiceHelper.cs:268-274`),
@@ -501,8 +483,7 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
 - **Callbacks.** `TrackerData.Encrypted` is a plain bool parsed from the body
   or the JWT (`FileHandler.ashx.cs:1528-1533`, `1556-1598`); absent means
   false. Changes and history are stored only for non-force-saves (`:567`,
-  `SaveHistoryAsync` `:766-800`); `edit/history` and `edit/diff` have no
-  encrypted guard and serve the Document Server's diff as stored.
+  `SaveHistoryAsync` `:766-800`).
 - **Paths that treat ciphertext as plaintext.** `copyas` with the same
   extension copies through `CreateNewFileAsync`
   (`FileStorageService.cs:2025-2063`), which never copies
@@ -550,9 +531,8 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
   (`filesStore/actions.helpers.ts:133-194`) → `/doceditor?fileId=`; no
   capability check anywhere. SDK: `docs-layout/index.tsx:502-507` refuses
   unconditionally. Doceditor: `getData` (`utils/actions.ts:761-890`) calls
-  `openEdit` and sets `canCoAuthoring=false` for encrypted (`:828-830`); the
-  server's key-pair list stays in `config.token` and `config.editorConfig`
-  (`Editor.tsx:211-213`); `EncryptionProviderWrapper.tsx:140-211` loads the
+  `openEdit` and sets `canCoAuthoring=false` for encrypted (`:828-830`);
+  `EncryptionProviderWrapper.tsx:140-211` loads the
   envelopes; `useFileEncryptionKeys.ts` fetches the access entries (three
   times per open, seen on the stand), requires the identity, loads the
   sender keys, unwraps the DEK (`room-file-access.ts:59-165`), recovers the
@@ -566,8 +546,8 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
   the doceditor `useFilesSettings` (fetched after mount, so a doceditor gate
   has to come from `getData`).
 - **Desktop.** The key hook runs in the desktop too, so `dek` is present
-  and the add-on takes the web path; `initDesktop.ts:47-98` also hands the
-  key pairs to `portal:login`.
+  and the add-on takes the web path; which key path the desktop
+  application uses is an open decision (task 9.10).
 - **Tests.** `packages/doceditor` has no unit-test runner (Playwright
   only), so every "doceditor unit test" needs task 0.1 first.
 - **Editor events** wired in `Editor.tsx:270-360` that break or leak for an
@@ -606,8 +586,8 @@ the configuration the doceditor hands the editor component and the
   File menu shows Create New, Save, Download As (DOCX, PDF), Print,
   Protect, Info and Open file location, and no Save copy as, Rename or
   Version history. Clicking the favorite star sends no favorites request.
-- **Server answer for file 7.** `openedit` carries one key pair with
-  `privateKeyEnc`, the opaque title, `document.url` on
+- **Server answer for file 7.** `openedit` carries the opaque title,
+  `document.url` on
   `host.docker.internal:8092` (the ReplaceCommunityAddress swap of D8,
   reachable from this machine by chance), `referenceData` without
   `roomId`, `mentionShare` false, no `favorite`, and no
@@ -696,8 +676,7 @@ Document Server tables were not read. Times in UTC.
 
 ### Run of 2026-10-30, two members (tasks 4.8 and 4.2)
 
-- **Second account (task 4.8).** "bob tester" (id
-  9a80c453-04d7-4ca3-8104-d9e3825b6c59), a room admin with the Editing
+- **Second account (task 4.8).** A test user, Bob below, a room admin with the Editing
   access in room 10, keys registered on 2026-10-22 and the device
   remembered. Right after joining, the room listed opaque titles and the
   client reported that his identity could not unwrap the files; once the
@@ -724,7 +703,7 @@ Bob opened each file type on Document Server 10.0.2.5:
 
 | File | `openedit` | Editor |
 |------|------------|--------|
-| document 7 | mode view, modeWrite false, no callbackUrl, edit false, download and print true, one key pair | view mode, decrypted text with both members' lines, DEK and contract version 1 in the configuration |
+| document 7 | mode view, modeWrite false, no callbackUrl, edit false, download and print true | view mode, decrypted text with both members' lines, DEK and contract version 1 in the configuration |
 | spreadsheet 41 | the same | view mode, the decrypted cell |
 | presentation 42 | the same | view mode, the decrypted slide |
 | PDF form 40 | the same, fillForms false, startFilling still true | view mode, the decrypted field, no start-filling event |
@@ -802,7 +781,7 @@ hook on the editor frame's WebSocket. Times in UTC.
   Bob, who joined the session afterwards. The file-dialog path therefore
   encrypts too, and fails to render; an item for the Document Server
   team, not a leak.
-- **Paste and drag** were not exercised.
+- **Paste and drag** are run by task 4.10.
 
 Proposal decision 5 is not raised: on this build both exercised paths
 keep the image bytes encrypted on the Document Server and in the saved
@@ -817,8 +796,7 @@ unencrypted saves, hide room titles in letters") implemented the portal
 items P-1, P-3, P-7 and P-8 of `contract-v1.md` and tasks 2.1, 5.4, 6.3,
 6.4, 10.4, 10.5 and 10.7, each recorded at its task and decision (D2, D8,
 D9, D10). P-5, the stable key and base while a session exists (task 6.2),
-and the key-pair list in the signed configuration (task 10.6) did not
-land. The same commit changed the private-room file-key contract
+and task 10.6 did not land. The same commit changed the private-room file-key contract
 (`private-rooms-server-hardening`, "Landed on 2026-11-05").
 
 ### Reported by the backend team on 2026-11-05
@@ -848,16 +826,15 @@ edition carry the crypto add-on"), and gate item 0.1 of
 `private-rooms-beta-release` depends on it. For tests and development the
 server setting `files:docservice:encryption-assume-supported` skips the
 probe without adding the library. The reply keeps the stable key and base
-(task 6.2) and the key pairs in the signed configuration (task 10.6) with
-the Document Server team: the first is fixed together with it, the second
-removed once it confirms the editor does not need them. The list of
+(task 6.2) and task 10.6 with the Document Server team: the first is fixed
+together with it, the second follows its answer to task 1.2. The list of
 questions to the Document Server team in the document of 2026-11-02 was
 not checked on the server.
 
 ### Release stand check of 2026-11-06
 
-The owner's SaaS stand `tests.onlyoffice.io` (DocSpace `4.1.0.12300`) uses
-Document Server `10.0.3.19` at `doc-eu.onlyoffice.io`, which serves
+The owner's SaaS release stand (DocSpace `4.1.0.12300`) uses
+Document Server `10.0.3.19` at the stand's Document Server host, which serves
 `sdkjs/common/crypto/onlyoffice-crypto.js`: HPKE through `@hpke/common`
 1.10.1, `VERSION_HPKE_WRAP = 2`, `VERSION_IDENTITY = 2`, the DSE3 header
 and chunk constants (`DSE3_FIXED_HEADER_SIZE`, `DSE3_CHUNK_PLAINTEXT_SIZE`,
@@ -868,7 +845,7 @@ Later the same day, with the owner's go-ahead, a full run on the stand
 (DocSpace `4.1.0.12300`, Document Server `10.0.3.19`, the client of the
 release, one user holding a key, the device remembered):
 
-- A new private room ("Probe 2026-11-06"), a document created from the
+- A new private room, a document created from the
   empty template through the encrypted creation (`24c4fd94-...docx`,
   version 1, 7043 bytes, DSE3 version 2 with the name flag), the audit
   trail with "File keys issued for ... to: <user id>" next to "File
@@ -883,12 +860,12 @@ release, one user holding a key, the device remembered):
   Document Server error code -82. `GET files/file/{id}/openedit` answers
   200 with a new document key (corrected on 2026-11-11: the key for
   editing is the one of the earlier version, see "Release stand check of
-  2026-11-10"), the encrypted flag and the key pairs;
+  2026-11-10") and the encrypted flag;
   `GET files/file/{id}/history` lists both versions as encrypted. Opening
   `?version=1` in view mode shows the typed line, so the Document Server
   serves the held session of the first key on top of the first version,
   while the open of version 2 under its new key fails. A file of the older
-  room that no editor had saved ("Test doc.docx", 34757 bytes) opens and
+  room that no editor had saved (a test document, 34757 bytes) opens and
   shows its content. This is the scenario of task 6.2 (P-5, the stable key
   and base while a session exists) on the release build: a document saved
   once in a private room cannot be reopened while the Document Server
@@ -896,19 +873,10 @@ release, one user holding a key, the device remembered):
   day when the session has changes. Not traced further on the stand (the
   Document Server side is not reachable from the portal); the backend
   team's reply of 2026-11-05 keeps 6.2 with the Document Server team.
-- The editor's **AI Tools** tab is shown for the encrypted file, with AI
-  Chat, Summarization, Translation, Quick AI Action, Create AI assistant
-  and Grammar & Spelling. The doceditor skips the plugin's initialisation
-  for an encrypted file, so no portal model is connected: AI Chat asks to
-  "Connect an AI Model" and Settings lists none. The plugin still lets
-  the user add their own provider key there, after which its actions
-  would send the clear text of the document to that provider from the
-  browser. Recorded in `private-rooms-ai-integration` (design.md,
-  Context) as a path that exists outside the client's control.
 
 ### Release stand check of 2026-11-10
 
-Observed by the review of 2026-11-10 on `tests.onlyoffice.io` (DocSpace
+Observed by the review of 2026-11-10 on the release stand (DocSpace
 `4.1.0.12351`, Document Server `10.0.3.19`); recorded here on 2026-11-11
 without a new run.
 
@@ -948,13 +916,13 @@ without a new run.
 
 ### Release stand check of 2026-11-16
 
-Read from the stand `tests.onlyoffice.io` without signing in, on
+Read from the release stand without signing in, on
 2026-11-16.
 
 - **Builds.** `GET api/2.0/settings/version/build` answers DocSpace
   `4.1.0.12428` and Document Server `10.0.3.40`; the check of 2026-11-10
   saw `4.1.0.12351` and `10.0.3.19`. The Document Server of the stand is
-  `https://doc-eu.onlyoffice.io/` (`GET api/2.0/files/docservice`, whose
+  its own Document Server host (`GET api/2.0/files/docservice`, whose
   `version` field came empty for a caller who is not signed in). Its
   `healthcheck` answers `true`, and its `info/info.json` now answers 200
   to anybody with `serverInfo.buildVersion` `10.0.3`, `buildNumber` 40 and
@@ -970,7 +938,7 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
 - **Signed in, the same day**, as the portal owner, whose interface
   language is Russian, with the key unlocked in the browser session.
 - **Reopening after a save (task 6.2): still fails.** A docx created in
-  the private room "Review probe 2026-11-10" at 12:57 (file 4597053), one
+  a private room of the stand at 12:57, one
   line typed, saved with Ctrl+S (version 2, 39164 bytes) and its editor
   tab closed, answered at the next opening for editing, about a minute
   later, "ONLYOFFICE Document Editor reports an error: code -82". Opened
@@ -978,8 +946,7 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
   document key for editing and another for viewing, both with the file at
   version 2; the document address carries no version (`action`, `fileid`,
   `stream_auth`).
-- **A document saved six days earlier opens.** "Reopen docx.docx" of the
-  same room (file 4462431, version 2, saved on 2026-11-10), which did not
+- **A document saved six days earlier opens.** A document of the same room (version 2, saved on 2026-11-10), which did not
   open for editing then, opened for editing with its text. The Document
   Server of the stand was built or started on 2026-11-16 (`serverInfo.date`
   above), so the sessions it held may have ended with it; this was not
@@ -994,15 +961,9 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
   `docServiceEncryptionSupported: true` with the library of build 2.0.0,
   as on 2026-11-10: the probe finds the file and does not read its
   version.
-- **AI tools (`private-rooms-server-hardening` 16.1).** `openedit` answers
-  `customization.ai.disabled: false` for every encrypted file read, and
-  the editor shows the AI tools tab, in editing and in viewing.
 - **Section root title (`private-rooms-server-followups` 2.3).**
   `GET files/@private` answers the title "Private" to this user.
-- **Key pairs in the configuration (task 10.6).** `editorConfig.encryptionKeys`
-  of `openedit` is the list of the caller's key pairs, one here, with
-  `privateKeyEnc`.
-- **Left on the stand.** The file 4597053, "Reopen docx 2026-11-16", stays
+- **Left on the stand.** The test file of that run stays
   in that room as the case to reopen after a fix.
 - **Not checked.** The form flag of a PDF form over a save, the spreadsheet
   and the presentation after a new save, and a second member in a held
@@ -1309,7 +1270,7 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
     comment, and no capture of it was taken for an encrypted file.
     Alternative:
     leave the events generic and rely on the server to refuse; rejected,
-    the server stores a plaintext name or a plaintext new file today.
+    since the page is the one that knows the file is encrypted.
 
 17. **The SDK does not hand an encrypted file to the host (owner,
     2026-11-12).** A host that subscribed to `onEditorOpen` opens files
@@ -1365,7 +1326,7 @@ BLOCKED or "after <x>" waits.
   capability refusal in the doceditor needs its own state, not an error
   status. `useFilesSettings` resolves after the key hook starts, so the
   doceditor gate is fed from `getData`. `onRequestRefreshFile` hands
-  `refreshFile` a raw `openEdit` result (the server's key-pair list, no DEK);
+  `refreshFile` a raw `openEdit` result (no DEK);
   the DEK is wiped after the hand-over (`wipeDek`), so the event is withheld
   rather than re-fed. `files/{id}/access` is requested three times per open
   today; harmless, worth one call. The feature stays behind the
@@ -1400,10 +1361,9 @@ the Document Server capability" (2026-11-10).
   remain usable as encrypted storage, and the release gate stays shut.
 - [JWT signed before the client injects `encryptionKeys`] → observed: the
   Document Server accepts the configuration and reads the DEK from the
-  unsigned part, so the DEK stays out of the token and off the Document Server
-  server. The token still hands the key pairs, `privateKeyEnc` included, to
-  the Document Server; whether the server keeps them there is an open
-  question below.
+  entry the client set after signing, so the DEK stays out of the token and
+  off the Document Server server. Task 10.6 trims what the server puts into
+  that field.
 - [DEK handed as a base64 string to a third-party iframe] → accepted for v1,
   recorded in `private-rooms/encryption-core`; the editor runs same-origin
   through the Document Server proxy.
@@ -1421,9 +1381,6 @@ the Document Server capability" (2026-11-10).
   Server holds a session nobody uses] → the eviction re-probe keeps the users
   while `info` answers without error; task 6.5 records which callbacks arrive
   when the last editor leaves before D7 is implemented.
-- [A private form-filling room created through the API accepts submissions
-  today] → task 5.4 makes the server refuse them; until then the client does
-  not create such rooms.
 - [The form flag is lost on every editor save] → contract item; the API kept
   `isForm` in the run, so the form stays a form in the portal meanwhile.
 - [Withholding actions confuses users] → menu items are absent, not greyed;
@@ -1436,16 +1393,14 @@ the Document Server capability" (2026-11-10).
   signature] → the server rule has no unit test and the client test uses a
   synthetic prefix; task 5.7 adds a fixture produced by the editor to the
   client test, and the signature setting is named in the contract (§5.3).
-- [Inserted images or other media leave the browser in plaintext] → not
-  exercised; task 4.4 verifies it before release, and the contract requires
-  that they do not (DS-13).
+- [Media added to an encrypted document must stay encrypted] → the contract
+  requires it (DS-13); task 4.4 recorded the address and file-dialog paths,
+  and task 4.10 runs paste and drag before release.
 - [Spreadsheet co-editing silently diverges] → closed by Document Server
   10.0.2.5 (run of 2026-10-30); what remains for proposal decision 6 is the
   join race of DS-17 and the duplicated replay of DS-19.
-- [Editor events bypass the private-room rules of the file list] → tasks
-  9.1 to 9.9; until then a rename from the editor writes the real name to
-  the server and a new document from the editor is stored in plaintext
-  inside the private room.
+- [Editor events have to follow the private-room rules of the file list]
+  → tasks 9.1 to 9.9.
 - [Server paths store ciphertext as a plaintext file or send it to the
   Document Server] → tasks 10.2 to 10.4; `copyas`, restore by address and
   conversion are reachable through the API today. `copyas` closed on
@@ -1468,15 +1423,13 @@ the Document Server capability" (2026-11-10).
 - Desktop application: the desktop's new crypto engine
   (`{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`, see
   `private-rooms-remove-dead-api-calls` design) runs the editor inside the
-  desktop. Observed on 2026-10-29: without `dek` the editor hands the key
-  pairs to the application (`portal:cryptoinfo`); with `dek` it takes the
-  web path. Which of the two the new engine expects is for the desktop
-  developer. Until it is answered the editor page runs the same key path in
-  the desktop as in the browser.
-- Should the server keep the caller's key-pair list, with `privateKeyEnc`, in
-  `editorConfig.encryptionKeys` and in the signed token at all, given that the
-  web editor reads only `dek` and the Document Server server does not need
-  the encrypted private key? Owner: backend team with the Document Server team.
+  desktop. Which key path the desktop application uses (the desktop path
+  of `portal:cryptoinfo` or the web path with `dek`) is for the desktop
+  developer (task 9.10). Until it is answered the editor page runs the same
+  key path in the desktop as in the browser.
+- What does the editor read from `editorConfig.encryptionKeys` besides
+  `dek`? The answer sets what the server puts into that field (tasks 1.2
+  and 10.6). Owner: backend team with the Document Server team.
 - How does the Document Server end an encrypted editing session: does it
   close it after the last editor leaves, drop changes that a save already
   contains, and send a final callback? What happens to unsaved encrypted
@@ -1505,19 +1458,13 @@ the Document Server capability" (2026-11-10).
   the join race of DS-17 and the duplicated replay of DS-19 remain; the
   first-open race and DS-18 are closed by that build. Owner: Document
   Server team.
-- Inserted images: do `cryptoimg://` images reach the Document Server's media
-  store or the portal in plaintext when a document is saved or co-edited?
-  Task 4.4; owner: Document Server team for the answer, this change for the
-  recorded run.
+- Inserted images: where are `cryptoimg://` images stored when a document
+  is saved or co-edited? Task 4.4 recorded the address and file-dialog
+  paths, task 4.10 runs paste and drag; owner: Document Server team for the
+  answer, this change for the recorded run.
 - View-only members: a member with read rights opens the editor in view mode
   with the same key path; whether the add-on decrypts in the viewer and
   withholds the save path is unverified. Part of task 4.3.
-- Member removal and live sessions: the portal drops users who lost their
-  rights on a file when its sharing changes
-  (`DocumentServiceHelper.CheckUsersForDropAsync`, two callers in
-  `Core/Utils/FileSharing.cs`); whether a private-room member removal reaches
-  that path for every open file of the room, and what the removed member's
-  editor shows, is verified by task 4.5.
 - DS-12 (per-document change key and associated data): accepted or declined
   by the Document Server team; task 1.2 records the answer.
 - Why a second session joining a held session with many pending changes

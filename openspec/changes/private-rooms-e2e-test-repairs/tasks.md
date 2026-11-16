@@ -9,7 +9,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. SDK
 
-- [ ] 2.1 E2E: look for the heading "Private rooms" in "List header" and in the absence check of "Archive header" of `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`. Verify: `cd packages/sdk && pnpm exec playwright test __tests__/e2e/private/private-rooms.spec.ts` on a build made with `pnpm run test:build`, with no failed case
+- [x] 2.1 E2E: look for the heading "Private rooms" in "List header" and in the absence check of "Archive header" of `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`. Verify: `cd packages/sdk && pnpm exec playwright test __tests__/e2e/private/private-rooms.spec.ts` on a build made with `pnpm run test:build`, with no failed case
+  - 2026-11-16: both cases look for "Private rooms". Run locally on the build of `test:build` made the same day, without screenshots, since the machine has no SDK test image: 36 passed, 3 skipped, none failed.
 
 ## 3. Gate
 

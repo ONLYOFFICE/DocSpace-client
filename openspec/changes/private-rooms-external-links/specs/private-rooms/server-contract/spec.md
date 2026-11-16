@@ -31,6 +31,43 @@ The server SHALL accept on a private room, active or archived, and on a folder o
 
 ## ADDED Requirements
 
+### Requirement: The secret of a link is stored wrapped for those who manage links
+The server SHALL store, for a link of a private item, a wrap of its secret for the room's owner and for each room manager, SHALL give a wrap only to the user it was made for while that user manages links, and SHALL delete the wraps of a user who stops managing them. It SHALL report which managers have no wrap of a link's secret.
+
+#### Scenario: Wrap read by its manager
+- **WHEN** a room manager requests the wrap of a link's secret made for them
+- **THEN** the server answers with it
+
+#### Scenario: Member who does not manage links
+- **WHEN** a member with a lower role, or an administrator outside the room, requests a wrap of a link's secret
+- **THEN** the server refuses
+
+#### Scenario: Manager loses the role
+- **WHEN** a room manager is removed from the room or given a lower role
+- **THEN** the wraps of the secrets made for that user are deleted, and the links stay
+
+### Requirement: Password of a link of a private item is replaced with new key material
+The server SHALL accept, from a user who manages links, a new sealed private key and a new proof hash for an existing link of a private item, keeping its id, its public key and its wraps, and SHALL refuse from then on the proof of the earlier ones.
+
+#### Scenario: Password replaced
+- **WHEN** a manager sends a new sealed key and proof hash for a link
+- **THEN** the link keeps its address, the earlier proof is refused and the new one is served
+
+#### Scenario: Public key changed in the same request
+- **WHEN** the request also carries another public key for the link
+- **THEN** the server refuses it and changes nothing
+
+### Requirement: No link in a private virtual data room that restricts downloading
+The server SHALL refuse with 403 an external link on a private Virtual Data Room, or on an item of one, while the room-wide restriction on downloading is on, and SHALL serve none that the room holds until it is off. It SHALL NOT delete them.
+
+#### Scenario: Link requested with the restriction on
+- **WHEN** a room manager requests a link in such a room
+- **THEN** the server answers 403
+
+#### Scenario: Restriction turned on over existing links
+- **WHEN** the restriction is turned on in a room that holds links, and then off again
+- **THEN** the links are served as invalid while it is on and work again after
+
 ### Requirement: A link of a private item without a password is limited
 The server SHALL refuse to store an external link of a private item without a password, unless the link is to one file, carries the access to view and has an end date. It SHALL apply the same rule when a link is changed.
 

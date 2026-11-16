@@ -181,3 +181,56 @@ is deleted.
 
 - **WHEN** the setting is turned on again
 - **THEN** the links stored before work as they did
+
+### Requirement: The secret of a link is wrapped for those who manage links
+
+The server SHALL store a wrap of the link's secret for the room's owner and for each room manager, answer a wrap only to the
+user it was made for while that user manages links, and delete the wraps of a user who stops managing them; the links stay. It
+SHALL report the managers who have no wrap of a link's secret.
+
+#### Scenario: Wrap read by its manager
+
+- **WHEN** a room manager reads the wrap of a link's secret made for them
+- **THEN** the answer carries it
+
+#### Scenario: Caller who does not manage links
+
+- **WHEN** a member with a lower role, or a DocSpace admin outside the room, reads a wrap of a link's secret
+- **THEN** the answer is 403
+
+#### Scenario: Manager loses the role
+
+- **WHEN** a room manager is removed from the room or given a lower role
+- **THEN** the wraps made for that user are deleted and the links of the room keep working
+
+### Requirement: Replacing the password of a link of a private item
+
+A user who manages links SHALL replace `linkPrivateKeyEnc` and `linkProofHash` of an existing link, with `passwordRequired`; the
+link keeps its id, `linkPublicKey` and the wraps made for it, and the proof of the earlier hash MUST be refused from then on. A
+request that also changes `linkPublicKey` MUST be refused with 400.
+
+#### Scenario: Password replaced
+
+- **WHEN** a manager sends a new sealed key and proof hash for a link
+- **THEN** the earlier proof is answered as for an invalid link and the new one is served
+
+#### Scenario: Public key in the same request
+
+- **WHEN** the request carries another `linkPublicKey`
+- **THEN** the answer is 400 and nothing changes
+
+### Requirement: No link in a private Virtual Data Room that restricts downloading
+
+While the room-wide restriction on downloading and copying is on in a private Virtual Data Room, setting an external link on an
+item of the room MUST answer 403, and a link the room holds MUST be served as an invalid link. The links SHALL NOT be deleted
+and SHALL work again when the restriction is turned off.
+
+#### Scenario: Link requested with the restriction on
+
+- **WHEN** a room manager sets a link on a file of such a room
+- **THEN** the answer is 403
+
+#### Scenario: Restriction turned on and off
+
+- **WHEN** the restriction is turned on in a room that holds a link, and then off
+- **THEN** the link answers as invalid while it is on and is served again after

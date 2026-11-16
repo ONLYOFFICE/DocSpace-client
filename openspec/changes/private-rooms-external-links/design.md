@@ -123,10 +123,11 @@ What follows for this change:
   of wrong attempts is the same.
 - A wrap for a link fits the row of a file key with the link id in the
   place of the user id; the backend team says whether it reuses the row.
-- Open with the backend team: a private Virtual Data Room whose room-wide
-  restriction on downloading is on. A visitor has to fetch the ciphertext
-  to see anything, and `shared-links` ("Deny-download on links combines
-  with the VDR room setting") refuses the download through a link there.
+- A private Virtual Data Room whose room-wide restriction on downloading
+  is on: a visitor has to fetch the ciphertext to see anything, and
+  `shared-links` ("Deny-download on links combines with the VDR room
+  setting") refuses the download through a link there. Settled by decision
+  17: no link while the restriction is on.
 - The hand-over goes to the backend team as a change of its own specs,
   `private-rooms` ("No links to a private room") and `shared-links`,
   since its repository now routes behaviour changes through them.
@@ -236,6 +237,38 @@ none is open. The technical decisions below follow from them.
     variable. No text says "only members", "nobody else" or
     "zero-knowledge" about an item that can carry a link.
 
+14. **The secret of a link is wrapped for those who manage links (decided
+    by the owner on 2026-11-16).** The server cannot show an address
+    again, since it never has the part after `#`. The creator's browser
+    wraps the secret for the public key of the room's owner and of each
+    room manager, as it wraps a file key; any of them unwraps it to copy
+    the address. A manager named later gets the wrap from the browser of
+    another one, by the same backfill that covers a late member, and the
+    wraps of a member who stops managing are deleted. Alternatives: the
+    creator only, or the address shown once. Rejected by the owner: an
+    ordinary link can be copied by every manager, and a link nobody else
+    can hand out again would be made anew each time.
+15. **A member who knew the addresses leaves: the links stay and the
+    interface warns (decided by the owner on 2026-11-16).** Removing the
+    member, or taking the manager role away, shows the links that member
+    could copy and offers to revoke them in the same step. With decision
+    14 these are all the links of the room. Alternative: revoke them
+    without asking. Rejected by the owner: the recipients would lose
+    access for a change they have nothing to do with.
+16. **A password is replaced, never read (decided by the owner on
+    2026-11-16).** A new password seals the private key of the link again
+    and makes a new proof from the same secret, so the address does not
+    change and the old password stops working. A forgotten password is
+    replaced the same way by anybody who manages links.
+17. **No link in a private Virtual Data Room that restricts downloading
+    (decided by the owner on 2026-11-16).** While the room-wide
+    restriction is on, a link cannot be created there and the existing
+    ones are not served; they work again when it is turned off.
+18. **The proof is a value derived from the secret.** It is not a
+    password-authenticated exchange: the secret has 256 random bits, so
+    the proof cannot be guessed, and a plain comparison of its hash is
+    enough.
+
 ## Risks / Trade-offs
 
 - [The address leaks: a forwarded message, a browser history, a
@@ -268,6 +301,5 @@ off stops the links without deleting them.
 
 ## Open Questions
 
-- Whether the proof of the secret is a plain derived value or a
-  password-authenticated exchange as Proton uses. It changes the route and
-  not the behaviour stated in the delta.
+None that changes the specs. Field names, sizes and status codes are the
+backend team's to set (`server-change/`).

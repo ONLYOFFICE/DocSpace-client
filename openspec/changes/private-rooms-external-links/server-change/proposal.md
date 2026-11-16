@@ -35,6 +35,14 @@ The server never receives that secret, nor the password of such a link.
   and the stored ciphertext only against the proof.
 - The operations that list the public keys a file is wrapped for, store a
   wrap and report missing wraps also cover the links of the item.
+- The secret of a link is stored wrapped for the owner and the managers
+  of the room, so that any of them can show the address again; the wraps
+  of a user who stops managing links are deleted, and the links stay.
+- A new password of a link arrives as a new sealed key and a new proof
+  hash for the same link; its address and its wraps for files stay.
+- A private Virtual Data Room takes no external link while its room-wide
+  restriction on downloading is on, and serves none it holds until the
+  restriction is off.
 - A portal setting, on by default, switches external links of private
   rooms.
 - Creating, changing, revoking and opening such a link are audited.
@@ -79,10 +87,11 @@ whoever takes the draft.
   deny-download flag is refused instead of stored, and the password is not
   stored. Ordinary items are not affected.
 - `shared-links`, "Deny-download on links combines with the VDR room
-  setting". Open: in a private Virtual Data Room with the room-wide
-  restriction on, a visitor must still receive the ciphertext to see
-  anything. To be decided with the product owner before the delta is
-  final.
+  setting". In a private Virtual Data Room with the room-wide restriction
+  on, a link is refused at creation and an existing one is served as
+  invalid, where an open room stores the link and refuses the download.
+  Decided by the product owner on 2026-11-16: a visitor must receive the
+  ciphertext to see anything, so the restriction could not be kept.
 
 ## Deviations
 

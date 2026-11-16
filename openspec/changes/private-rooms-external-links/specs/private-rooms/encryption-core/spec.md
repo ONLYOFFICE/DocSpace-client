@@ -64,3 +64,18 @@ The system SHALL describe a private item that can carry an external link by who 
 #### Scenario: Link created
 - **WHEN** a link is created
 - **THEN** the interface says the link carries the key, so anybody who has it opens the item, and that the server does not get the key
+
+### Requirement: The secret of a link is wrapped for those who manage links
+The system SHALL wrap the secret of an external link for the public key of the room's owner and of each room manager, as a file key is wrapped, so that any of them can show the address again. It SHALL NOT store the secret anywhere else, and SHALL wrap it for a manager named later from the browser of one who holds it.
+
+#### Scenario: Address copied by another manager
+- **WHEN** a room manager who did not create the link copies its address
+- **THEN** the secret is unwrapped with that manager's key and the address is the one the creator got
+
+#### Scenario: Manager named later
+- **WHEN** a member becomes a room manager after a link was created
+- **THEN** the secret is wrapped for them the next time a manager who holds it opens the room
+
+#### Scenario: Member who does not manage links
+- **WHEN** a member with a lower role looks at a link of the room
+- **THEN** no wrap of its secret exists for them and the address cannot be shown

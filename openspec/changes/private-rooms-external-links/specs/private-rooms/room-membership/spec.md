@@ -94,3 +94,47 @@ The system SHALL mark a private room, a folder or a file that holds an external 
 #### Scenario: Last link revoked or expired
 - **WHEN** the last link of a private item is revoked or passes its end date
 - **THEN** the mark is gone
+
+### Requirement: Address of an existing link is copied by the owner and the managers
+The system SHALL let the owner and the room managers of a private room copy the address of any of its external links after unlocking their own key, and SHALL NOT offer the address to anybody else.
+
+#### Scenario: Manager copies the address
+- **WHEN** a room manager copies the address of a link another manager created
+- **THEN** the full address is copied, with its part after `#`
+
+#### Scenario: Key locked
+- **WHEN** the manager's key is locked
+- **THEN** the unlock is asked first and no address is shown before it succeeds
+
+### Requirement: Links are named when a member who knew them leaves
+The system SHALL, when a member who could copy the addresses of the room's links is removed, leaves or loses the manager role, name those links, say that the member still knows their addresses, and offer to revoke them in the same step. It SHALL NOT revoke them without that choice.
+
+#### Scenario: Manager removed
+- **WHEN** the owner removes a room manager from a private room that holds links
+- **THEN** the confirmation lists the links and offers to revoke them, and the removal goes on whatever is chosen
+
+#### Scenario: Room without links
+- **WHEN** the same is done in a private room that holds no link
+- **THEN** no notice about links is shown
+
+### Requirement: Password of a link is replaced, never shown
+The system SHALL let those who manage links set a new password for a link, which keeps the address and ends the old password, and SHALL NOT show the password of an existing link to anybody.
+
+#### Scenario: New password
+- **WHEN** a manager sets a new password on a link
+- **THEN** the address is unchanged, the old password no longer opens the link and the new one does
+
+#### Scenario: Looking for the old password
+- **WHEN** the settings of a link with a password are opened
+- **THEN** the password is not shown, and only its replacement is offered
+
+### Requirement: No link in a private virtual data room that restricts downloading
+The system SHALL NOT offer an external link in a private room of the virtual data room type while its room-wide restriction on downloading is on, and SHALL show its existing links as not working for that reason.
+
+#### Scenario: Restriction on
+- **WHEN** a manager opens the link controls of such a room
+- **THEN** no link can be created, and the reason is named
+
+#### Scenario: Restriction turned off
+- **WHEN** the restriction is turned off
+- **THEN** the links the room held work again

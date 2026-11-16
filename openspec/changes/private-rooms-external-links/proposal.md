@@ -76,6 +76,19 @@ Decided by the owner on 2026-11-16:
   interface says at the creation of a link that the link carries the key,
   and at its revocation that what was opened stays with whoever opened
   it.
+- A private Virtual Data Room whose room-wide restriction on downloading
+  is on takes no external link, and the links it holds stop working while
+  the restriction is on: a visitor has to receive the encrypted file to
+  see anything, and the restriction could not be kept.
+- The owner and the managers of the room can copy the address of an
+  existing link. The secret of the link is therefore stored wrapped for
+  each of them, as a file key is.
+- When a member who could copy the addresses leaves the room or stops
+  being a manager, the links stay, and the interface warns at that moment
+  that the member still knows them and offers to revoke them.
+- The password of a link can be replaced and not read: nobody, the server
+  included, stores it in a readable form. A new password leaves the
+  address as it is.
 - The link types, the roles and the settings are the portal's own; Proton
   is the reference for the approach only.
 - The access to view comes first; commenting, reviewing and editing

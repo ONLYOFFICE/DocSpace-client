@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Integreer {{organizationName}} {{productName}} in uw eigen platform en schakel realtime co-bewerking in",
   "IntegrationsDescription": "Verbind <strong>{{docsName}}</strong> en <strong>{{productName}}</strong> met uw infrastructuur via kant-en-klare integraties. Geen aangepaste code, geen migratie.",
   "IntegrationServiceHeader": "Maak, bewerk en co-auteur officebestanden rechtstreeks in uw {{serviceName}}",
+  "IntegrationsSectionTitle": "Integraties",
   "InterfaceElements": "Interface elementen",
   "InterfaceTheme": "Interface thema",
   "InvalidLink": "Ongeldige link",

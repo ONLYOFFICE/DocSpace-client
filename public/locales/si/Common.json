@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "{{organizationName}} {{productName}} ඔබේම වේදිකාවට කාවද්දා තත්‍ය කාලීන සම-සංස්කරණය සක්‍රීය කරන්න",
   "IntegrationsDescription": "භාවිතයට සූදානම් ඒකාබද්ධ කිරීම් සමඟ <strong>{{docsName}}</strong> සහ <strong>{{productName}}</strong> ඔබේ යටිතල පහසුකම් වලට සම්බන්ධ කරන්න. අභිරුචි කේතයක් නැත, සංක්‍රමණයක් නැත.",
   "IntegrationServiceHeader": "ඔබේ {{serviceName}} තුළම කාර්යාල ගොනු සාදන්න, සංස්කරණය කරන්න සහ එකට කර්තෘකරණය කරන්න",
+  "IntegrationsSectionTitle": "ඒකාබද්ධ කිරීම්",
   "InterfaceElements": "අතුරුමුහුණතේ අංග",
   "InterfaceTheme": "අතුරු මුහුණතේ තේමාව",
   "InvalidLink": "සබැඳිය වලංගු නොවේ",

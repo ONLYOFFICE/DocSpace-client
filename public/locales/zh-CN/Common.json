@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "将 {{organizationName}} {{productName}} 嵌入您自己的平台并启用实时协同编辑",
   "IntegrationsDescription": "通过开箱即用的集成，将 <strong>{{docsName}}</strong> 和 <strong>{{productName}}</strong> 接入您的基础架构。无需自定义代码，无需迁移。",
   "IntegrationServiceHeader": "直接在您的 {{serviceName}} 中创建、编辑和协同编写办公文件",
+  "IntegrationsSectionTitle": "集成",
   "InterfaceElements": "界面元素",
   "InterfaceTheme": "界面主题",
   "InvalidLink": "无效链接",

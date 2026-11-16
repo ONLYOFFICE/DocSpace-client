@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Integrați {{organizationName}} {{productName}} în propria platformă și activați co-editarea în timp real",
   "IntegrationsDescription": "Conectați <strong>{{docsName}}</strong> și <strong>{{productName}}</strong> la infrastructura dvs. folosind integrări gata de utilizare. Fără cod personalizat, fără migrare.",
   "IntegrationServiceHeader": "Creați, editați și co-editați fișiere office direct în {{serviceName}}",
+  "IntegrationsSectionTitle": "Integrări",
   "InterfaceElements": "Elemente de interfață",
   "InterfaceTheme": "Tema interfeței",
   "InvalidLink": "Link-ul invalid",

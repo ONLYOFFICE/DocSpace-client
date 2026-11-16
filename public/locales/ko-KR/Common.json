@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "{{organizationName}} {{productName}}을(를) 자체 플랫폼에 내장하고 실시간 공동 편집을 활성화하세요",
   "IntegrationsDescription": "바로 사용할 수 있는 연동 기능으로 <strong>{{docsName}}</strong> 및 <strong>{{productName}}</strong>을(를) 인프라에 연결하세요. 맞춤 코드 없음, 마이그레이션 없음.",
   "IntegrationServiceHeader": "{{serviceName}}에서 바로 오피스 파일을 만들고 편집하고 공동 작업하세요",
+  "IntegrationsSectionTitle": "통합",
   "InterfaceElements": "인터페이스 요소",
   "InterfaceTheme": "인터페이스 테마",
   "InvalidLink": "유효하지 않은 링크입니다",

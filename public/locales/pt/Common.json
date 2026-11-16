@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Incorpore o {{organizationName}} {{productName}} na sua própria plataforma e ative a coedição em tempo real",
   "IntegrationsDescription": "Ligue o <strong>{{docsName}}</strong> e o <strong>{{productName}}</strong> à sua infraestrutura com integrações prontas a usar. Sem código personalizado, sem migração.",
   "IntegrationServiceHeader": "Crie, edite e coedite ficheiros de escritório diretamente no seu {{serviceName}}",
+  "IntegrationsSectionTitle": "Integrações",
   "InterfaceElements": "Elementos de interface",
   "InterfaceTheme": "Tema da interface",
   "InvalidLink": "Link inválido",

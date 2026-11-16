@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "Začleňte {{organizationName}} {{productName}} do vlastnej platformy a umožnite spoluprácu v reálnom čase",
   "IntegrationsDescription": "Prepojte <strong>{{docsName}}</strong> a <strong>{{productName}}</strong> so svojou infrastruktúrou pomocou pripravených integrácií. Žiadny vlastný kód, žiadna migrácia.",
   "IntegrationServiceHeader": "Vytvárajte, upravujte a spoluvytvárajte kancelárske súbory priamo vo svojom {{serviceName}}",
+  "IntegrationsSectionTitle": "Integrácie",
   "InterfaceElements": "Prvky rozhrania",
   "InterfaceTheme": "Vzhľad prostredia",
   "InvalidLink": "Neplatný odkaz",

@@ -1299,6 +1299,7 @@
   "IntegrationOwnHeader": "ادمج {{organizationName}} {{productName}} في منصتك الخاصة وفعّل التحرير المشترك في الوقت الفعلي",
   "IntegrationsDescription": "اربط <strong>{{docsName}}</strong> و<strong>{{productName}}</strong> ببنيتك التحتية باستخدام تكاملات جاهزة للاستخدام. بدون كود مخصص، بدون هجرة.",
   "IntegrationServiceHeader": "أنشئ ملفات المكتب وحرّرها وشارك في تأليفها مباشرة في {{serviceName}} الخاص بك",
+  "IntegrationsSectionTitle": "التكاملات",
   "InterfaceElements": "عناصر الواجهة",
   "InterfaceTheme": "سمة الواجهة",
   "InvalidLink": "رابط غير صالح",

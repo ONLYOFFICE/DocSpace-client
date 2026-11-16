@@ -6,6 +6,7 @@ import {
   getAiWorkspaceCreatePayload,
   getAiWorkspaceListType,
   getAiWorkspaceTabUrl,
+  hasAiWorkspaceTemplates,
   getAiWorkspaceTitle,
   isAiWorkspaceTemplates,
 } from "../aiWorkspace";
@@ -41,17 +42,26 @@ describe("AI Chat section lists", () => {
 describe("AI Chat section list tabs", () => {
   const search = (url: string) => `?${url.split("?")[1]}`;
 
-  it.each([
-    RoomsType.AiProjectRoom,
-    RoomsType.InstructionsRoom,
-    RoomsType.KnowledgeRoom,
-  ])("keeps both tabs of type %s on that list of the section", (type) => {
+  it("keeps both tabs of the agents on that list of the section", () => {
     for (const isTemplates of [false, true]) {
-      const url = getAiWorkspaceTabUrl(isTemplates, type);
+      const url = getAiWorkspaceTabUrl(isTemplates, RoomsType.AiProjectRoom);
       expect(url).toMatch(/^\/ai-rooms\/filter\?/);
       expect(new URLSearchParams(search(url)).get("searchArea")).toBe("AiHub");
-      expect(getAiWorkspaceListType(search(url))).toBe(type);
+      expect(getAiWorkspaceListType(search(url))).toBe(RoomsType.AiProjectRoom);
+      expect(hasAiWorkspaceTemplates(search(url))).toBe(true);
       expect(isAiWorkspaceTemplates(search(url))).toBe(isTemplates);
     }
   });
+
+  it.each([RoomsType.InstructionsRoom, RoomsType.KnowledgeRoom])(
+    "gives the list of type %s no Templates tab",
+    (type) => {
+      const url = getAiWorkspaceTabUrl(true, type);
+      expect(new URLSearchParams(search(url)).has("tab")).toBe(false);
+      expect(getAiWorkspaceListType(search(url))).toBe(type);
+      expect(hasAiWorkspaceTemplates(search(url))).toBe(false);
+      // A stale address with the tab still shows the list.
+      expect(isAiWorkspaceTemplates(`${search(url)}&tab=templates`)).toBe(false);
+    },
+  );
 });

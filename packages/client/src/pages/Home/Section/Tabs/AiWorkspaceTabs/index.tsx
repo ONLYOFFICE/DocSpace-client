@@ -42,8 +42,8 @@ import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
 
 import {
-  getAiWorkspaceListType,
   getAiWorkspaceTabUrl,
+  hasAiWorkspaceTemplates,
   isAiWorkspaceTemplates,
 } from "SRC_DIR/helpers/aiWorkspace";
 
@@ -53,10 +53,11 @@ const TEMPLATES_TAB = "templates";
 type AiWorkspaceTabsProps = { userId?: string };
 
 /**
- * The tabs over the filter of the AI Chat section's lists (Agents, Skill
- * sets, Knowledge bases): the user's own rooms of the list's type and the
- * shipped templates of that kind. Both stay on the list's address, so the
- * sidebar entry and the title do not change; the tab is read from its query.
+ * The tabs over the filter of the AI Chat section's Agents list: the user's
+ * own agents and the shipped agent templates. Both stay on the list's
+ * address, so the sidebar entry and the title do not change; the tab is read
+ * from its query. Skill sets and Knowledge bases have no templates and so no
+ * tabs.
  */
 const AiWorkspaceTabs = ({ userId }: AiWorkspaceTabsProps) => {
   const { t } = useTranslation(["Common"]);
@@ -64,22 +65,10 @@ const AiWorkspaceTabs = ({ userId }: AiWorkspaceTabsProps) => {
   const navigate = useNavigate();
 
   if (getCategoryType(location) !== CategoryType.AiHub) return null;
-
-  const listType = getAiWorkspaceListType(location.search);
-
-  const myLabel = () => {
-    switch (listType) {
-      case RoomsType.InstructionsRoom:
-        return t("Common:MySkillSets");
-      case RoomsType.KnowledgeRoom:
-        return t("Common:MyKnowledgeBases");
-      default:
-        return t("Common:MyAgents");
-    }
-  };
+  if (!hasAiWorkspaceTemplates(location.search)) return null;
 
   const items: TTabItem[] = [
-    { id: MY_TAB, name: myLabel(), content: null },
+    { id: MY_TAB, name: t("Common:MyAgents"), content: null },
     { id: TEMPLATES_TAB, name: t("Common:Templates"), content: null },
   ];
 
@@ -91,7 +80,11 @@ const AiWorkspaceTabs = ({ userId }: AiWorkspaceTabsProps) => {
     if (item.id === selectedId) return;
 
     navigate(
-      getAiWorkspaceTabUrl(item.id === TEMPLATES_TAB, listType, userId),
+      getAiWorkspaceTabUrl(
+        item.id === TEMPLATES_TAB,
+        RoomsType.AiProjectRoom,
+        userId,
+      ),
     );
   };
 

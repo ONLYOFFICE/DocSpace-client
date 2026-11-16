@@ -92,15 +92,27 @@ export const getAiWorkspaceCreatePayload = (
 const TAB_PARAM = "tab";
 const TEMPLATES_TAB = "templates";
 
-/** The list is on its Templates tab: the shipped templates of its kind. */
+/**
+ * The list has a Templates tab: only the Agents do. Skill sets and Knowledge
+ * bases are plain lists, without tabs.
+ */
+export const hasAiWorkspaceTemplates = (search: string): boolean =>
+  getAiWorkspaceListType(search) === RoomsType.AiProjectRoom;
+
+/**
+ * The list is on its Templates tab: the shipped agent templates. A `tab`
+ * query on a list without the tab is ignored, so the list itself is shown.
+ */
 export const isAiWorkspaceTemplates = (search: string): boolean =>
+  hasAiWorkspaceTemplates(search) &&
   new URLSearchParams(search).get(TAB_PARAM) === TEMPLATES_TAB;
 
 /**
- * The URL of a list's tab: its own rooms, or the templates of its kind. Both
- * are the section's list narrowed to the type, so the title, the sidebar
- * entry and the header hold; the Templates tab is marked by a query of its
- * own and draws the catalog in place of the list.
+ * The URL of a list, or of the Agents' Templates tab. Both are the section's
+ * list narrowed to the type, so the title, the sidebar entry and the header
+ * hold; the Templates tab is marked by a query of its own and draws the
+ * catalog in place of the list. Only the Agents have it: for another type
+ * the list's own URL is returned.
  */
 export const getAiWorkspaceTabUrl = (
   isTemplates: boolean,
@@ -110,6 +122,9 @@ export const getAiWorkspaceTabUrl = (
   const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
   filter.searchArea = RoomSearchArea.AiHub;
   filter.type = [String(type)];
-  const tab = isTemplates ? `&${TAB_PARAM}=${TEMPLATES_TAB}` : "";
+  const tab =
+    isTemplates && type === RoomsType.AiProjectRoom
+      ? `&${TAB_PARAM}=${TEMPLATES_TAB}`
+      : "";
   return `/ai-rooms/filter?${filter.toUrlParams(userId, false)}${tab}`;
 };

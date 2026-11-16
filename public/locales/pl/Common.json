@@ -1368,6 +1368,7 @@
   "Last6Months": "Ostatnie 6 miesięcy",
   "Last12Months": "Ostatnie 12 miesięcy",
   "LastActivityDate": "Data ostatniej aktywności",
+  "LastModified": "Ostatnia modyfikacja",
   "LastModifiedBy": "Ostatnio zmodyfikowane przez",
   "LastModifiedDate": "Data ostatniej modyfikacji",
   "LastMonthWithHint": "Ostatni miesiąc <1>({{month}})</1>",

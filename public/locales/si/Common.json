@@ -1368,6 +1368,7 @@
   "Last6Months": "පසුගිය මාස 6",
   "Last12Months": "පසුගිය මාස 12",
   "LastActivityDate": "අවසාන ක්‍රියාකාරකම් දිනය",
+  "LastModified": "අන්තිම වශයෙන් වෙනස් කරන ලද්දේ",
   "LastModifiedBy": "අවසන් වරට සංස්කරණය කළේ",
   "LastModifiedDate": "අවසාන සංශෝධිත දිනය",
   "LastMonthWithHint": "පසුගිය මාසය <1>({{month}})</1>",

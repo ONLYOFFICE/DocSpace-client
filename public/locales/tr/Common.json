@@ -1368,6 +1368,7 @@
   "Last6Months": "Son 6 ay",
   "Last12Months": "Son 12 ay",
   "LastActivityDate": "Son faaliyet tarihi",
+  "LastModified": "Son değiştirilme tarihi",
   "LastModifiedBy": "Son değiştiren",
   "LastModifiedDate": "Son değiştirilme tarihi",
   "LastMonthWithHint": "Geçen ay <1>({{month}})</1>",

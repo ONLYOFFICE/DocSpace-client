@@ -116,6 +116,7 @@ class FilesTableHeader extends React.Component {
       showStorageInfo !== prevProps.showStorageInfo ||
       isInSharedFolder !== prevProps.isInSharedFolder ||
       isSkillSet !== prevProps.isSkillSet ||
+      this.props.isSkillSetsList !== prevProps.isSkillSetsList ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
       (!changeDocumentsTabs && sortOrder !== stateSortOrder)
     ) {
@@ -225,6 +226,7 @@ class FilesTableHeader extends React.Component {
     if (isSharedWithMeFolder || isInSharedFolder)
       return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
+    if (this.props.isSkillSetsList) return this.getSkillSetsColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
     if (isRecentFolder) return this.getRecentFolderColumns();
@@ -232,6 +234,55 @@ class FilesTableHeader extends React.Component {
     if (this.props.isSkillSet) return this.getSkillsColumns();
     if (isIndexing) return this.getIndexingColumns();
     return this.getFilesColumns();
+  };
+
+  // The Skill sets list: every row is a set, told by how many skills it has.
+  getSkillSetsColumns = () => {
+    const {
+      t,
+      roomColumnNameIsEnabled,
+      skillsSkillSetsColumnIsEnabled,
+      ownerSkillSetsColumnIsEnabled,
+      activitySkillSetsColumnIsEnabled,
+    } = this.props;
+
+    return [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: roomColumnNameIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "SkillsSkillSets",
+        title: t("Common:Skills"),
+        enable: skillsSkillSetsColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "OwnerSkillSets",
+        title: t("Common:Owner"),
+        enable: ownerSkillSetsColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "ActivitySkillSets",
+        title: t("Common:LastModified"),
+        enable: activitySkillSetsColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+    ];
   };
 
   // An open skill set lists skills: what each is for, not what file it is.
@@ -1125,6 +1176,10 @@ export default inject(
       descriptionSkillColumnIsEnabled,
       modifiedSkillColumnIsEnabled,
       isSkillSet,
+      isSkillSetsList,
+      skillsSkillSetsColumnIsEnabled,
+      ownerSkillSetsColumnIsEnabled,
+      activitySkillSetsColumnIsEnabled,
 
       getColumns,
       setColumnEnable,
@@ -1142,6 +1197,10 @@ export default inject(
       isSkillSet,
       descriptionSkillColumnIsEnabled,
       modifiedSkillColumnIsEnabled,
+      isSkillSetsList,
+      skillsSkillSetsColumnIsEnabled,
+      ownerSkillSetsColumnIsEnabled,
+      activitySkillSetsColumnIsEnabled,
       withContent,
       sortingVisible,
 

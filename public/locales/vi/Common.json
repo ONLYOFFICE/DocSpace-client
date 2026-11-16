@@ -1368,6 +1368,7 @@
   "Last6Months": "6 tháng qua",
   "Last12Months": "12 tháng qua",
   "LastActivityDate": "Ngày hoạt động cuối",
+  "LastModified": "Lần sửa đổi cuối",
   "LastModifiedBy": "Sửa đổi lần cuối bởi",
   "LastModifiedDate": "Ngày sửa đổi lần cuối",
   "LastMonthWithHint": "Tháng trước <1>({{month}})</1>",

@@ -1368,6 +1368,7 @@
   "Last6Months": "Zadnjih 6 mesecev",
   "Last12Months": "Zadnjih 12 mesecev",
   "LastActivityDate": "Datum zadnje aktivnosti",
+  "LastModified": "Zadnjič spremenjeno",
   "LastModifiedBy": "Nazadnje spremenil",
   "LastModifiedDate": "Datum zadnje spremembe",
   "LastMonthWithHint": "Prejšnji mesec <1>({{month}})</1>",

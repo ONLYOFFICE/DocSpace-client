@@ -1368,6 +1368,7 @@
   "Last6Months": "Pēdējie 6 mēneši",
   "Last12Months": "Pēdējie 12 mēneši",
   "LastActivityDate": "Pēdējās aktivitātes datums",
+  "LastModified": "Pēdējās izmaiņas",
   "LastModifiedBy": "Pēdējo reizi rediģēja",
   "LastModifiedDate": "Pēdējās modifikācijas datums",
   "LastMonthWithHint": "Pagājušais mēnesis <1>({{month}})</1>",

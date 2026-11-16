@@ -1368,6 +1368,7 @@
   "Last6Months": "Viimeiset 6 kuukautta",
   "Last12Months": "Viimeiset 12 kuukautta",
   "LastActivityDate": "Viimeinen toimintapäivä",
+  "LastModified": "Viimeksi muokattu",
   "LastModifiedBy": "Viimeksi muokannut",
   "LastModifiedDate": "Viimeisin muokkauspäivä",
   "LastMonthWithHint": "Viime kuukausi <1>({{month}})</1>",

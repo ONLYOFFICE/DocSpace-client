@@ -1368,6 +1368,7 @@
   "Last6Months": "Posledných 6 mesiacov",
   "Last12Months": "Posledných 12 mesiacov",
   "LastActivityDate": "Dátum poslednej aktivity",
+  "LastModified": "Naposledy upravený",
   "LastModifiedBy": "Naposledy upravené",
   "LastModifiedDate": "Dátum poslednej modifikácie",
   "LastMonthWithHint": "Minulý mesiac <1>({{month}})</1>",

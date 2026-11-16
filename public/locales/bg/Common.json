@@ -1368,6 +1368,7 @@
   "Last6Months": "Последните 6 месеца",
   "Last12Months": "Последните 12 месеца",
   "LastActivityDate": "Дата на последна дейност",
+  "LastModified": "Последно обновен",
   "LastModifiedBy": "Последно редактирано от",
   "LastModifiedDate": "Дата на последната промяна",
   "LastMonthWithHint": "Миналия месец <1>({{month}})</1>",

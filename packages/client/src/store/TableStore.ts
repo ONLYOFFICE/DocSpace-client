@@ -72,6 +72,11 @@ const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVers
 // version (`TableVersions.AiRooms`): bump it when these columns change, and
 // what the browsers stored for the old set is no longer read.
 const TABLE_AI_ROOMS_COLUMNS = `aiRoomsTableColumns_ver-${TableVersions.AiRooms}`;
+// The Skill sets list: the rooms of one type by the number of their skills,
+// without tags. Kept apart from the other lists of the AI section.
+const TABLE_SKILL_SETS_COLUMNS = `skillSetsTableColumns_ver-${TableVersions.SkillSets}`;
+const COLUMNS_SKILL_SETS_SIZE = `skillSetsColumnsSize_ver-${TableVersions.SkillSets}`;
+const COLUMNS_SKILL_SETS_SIZE_INFO_PANEL = `skillSetsColumnsSizeInfoPanel_ver-${TableVersions.SkillSets}`;
 // An open skill set lists skills, not files: its own columns and sizes.
 const TABLE_SKILLS_COLUMNS = `skillsTableColumns_ver-${TableVersions.Skills}`;
 const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
@@ -249,6 +254,19 @@ class TableStore {
 
   templateRoomQuotaColumnIsEnable = false;
 
+  /**
+   * The Files store, attached after construction: its rooms filter says
+   * which list of the AI section is shown.
+   */
+  filesStore: { roomsFilter: { type?: string | string[] | null } } | null =
+    null;
+
+  skillsSkillSetsColumnIsEnabled = true;
+
+  ownerSkillSetsColumnIsEnabled = true;
+
+  activitySkillSetsColumnIsEnabled = true;
+
   descriptionSkillColumnIsEnabled = true;
 
   modifiedSkillColumnIsEnabled = true;
@@ -262,7 +280,7 @@ class TableStore {
     selectedFolderStore: SelectedFolderStore,
     peopleStore: PeopleStore,
   ) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, { filesStore: false });
 
     this.authStore = authStore;
     this.treeFoldersStore = treeFoldersStore;
@@ -487,6 +505,28 @@ class TableStore {
     );
   }
 
+  /** The Skill sets list of the AI section: the rooms list narrowed to the Instructions rooms. */
+  get isSkillSetsList() {
+    if (!this.treeFoldersStore.isAiSectionFolder) return false;
+    const type = this.filesStore?.roomsFilter.type;
+    const types = Array.isArray(type) ? type : type ? [type] : [];
+    return (
+      types.length === 1 && Number(types[0]) === RoomsType.InstructionsRoom
+    );
+  }
+
+  setSkillsSkillSetsColumn = (enable: boolean) => {
+    this.skillsSkillSetsColumnIsEnabled = enable;
+  };
+
+  setOwnerSkillSetsColumn = (enable: boolean) => {
+    this.ownerSkillSetsColumnIsEnabled = enable;
+  };
+
+  setActivitySkillSetsColumn = (enable: boolean) => {
+    this.activitySkillSetsColumnIsEnabled = enable;
+  };
+
   setDescriptionSkillColumn = (enable: boolean) => {
     this.descriptionSkillColumnIsEnabled = enable;
   };
@@ -571,6 +611,15 @@ class TableStore {
         this.setSizeShareWithMeColumn(splitColumns.includes("SizeShareWithMe"));
         this.setTypeShareWithMeColumn(splitColumns.includes("TypeShareWithMe"));
 
+        return;
+      }
+
+      if (this.isSkillSetsList) {
+        this.setSkillsSkillSetsColumn(splitColumns.includes("SkillsSkillSets"));
+        this.setOwnerSkillSetsColumn(splitColumns.includes("OwnerSkillSets"));
+        this.setActivitySkillSetsColumn(
+          splitColumns.includes("ActivitySkillSets"),
+        );
         return;
       }
 
@@ -695,6 +744,15 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder || isAiSectionFolder;
 
     switch (key) {
+      case "SkillsSkillSets":
+        this.setSkillsSkillSetsColumn(!this.skillsSkillSetsColumnIsEnabled);
+        return;
+      case "OwnerSkillSets":
+        this.setOwnerSkillSetsColumn(!this.ownerSkillSetsColumnIsEnabled);
+        return;
+      case "ActivitySkillSets":
+        this.setActivitySkillSetsColumn(!this.activitySkillSetsColumnIsEnabled);
+        return;
       case "DescriptionSkill":
         this.setDescriptionSkillColumn(!this.descriptionSkillColumnIsEnabled);
         return;
@@ -987,6 +1045,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
+    else if (this.isSkillSetsList)
+      tableStorageName = `${TABLE_SKILL_SETS_COLUMNS}=${userId}`;
     else if (isAiSectionFolder)
       tableStorageName = `${TABLE_AI_ROOMS_COLUMNS}=${userId}`;
     else if (isRooms) tableStorageName = `${TABLE_ROOMS_COLUMNS}=${userId}`;
@@ -1062,6 +1122,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
+    else if (this.isSkillSetsList)
+      columnStorageName = `${COLUMNS_SKILL_SETS_SIZE}=${userId}`;
     else if (isAiSectionFolder)
       columnStorageName = `${COLUMNS_AI_ROOMS_SIZE}=${userId}`;
     else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
@@ -1137,6 +1199,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;
+    else if (this.isSkillSetsList)
+      columnInfoPanelStorageName = `${COLUMNS_SKILL_SETS_SIZE_INFO_PANEL}=${userId}`;
     else if (isAiSectionFolder)
       columnInfoPanelStorageName = `${COLUMNS_AI_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isRooms)

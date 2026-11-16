@@ -1368,6 +1368,7 @@
   "Last6Months": "最近 6 个月",
   "Last12Months": "最近 12 个月",
   "LastActivityDate": "上次活动日期",
+  "LastModified": "最后一次修改",
   "LastModifiedBy": "最后修改者",
   "LastModifiedDate": "上次修改日期",
   "LastMonthWithHint": "上个月 <1>（{{month}}）</1>",

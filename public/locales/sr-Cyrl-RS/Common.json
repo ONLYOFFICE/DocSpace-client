@@ -1368,6 +1368,7 @@
   "Last6Months": "Последњих 6 месеци",
   "Last12Months": "Последњих 12 месеци",
   "LastActivityDate": "Датум последње активности",
+  "LastModified": "Последња измена",
   "LastModifiedBy": "Последња измена од стране",
   "LastModifiedDate": "Датум последње измене",
   "LastMonthWithHint": "Прошли месец <1>({{month}})</1>",

@@ -1368,6 +1368,7 @@
   "Last6Months": "6 muajt e fundit",
   "Last12Months": "12 muajt e fundit",
   "LastActivityDate": "Data e fundit e aktivitetit",
+  "LastModified": "Ndryshuar së fundi",
   "LastModifiedBy": "Modifikuar së fundi nga",
   "LastModifiedDate": "Data e fundit e modifikimit",
   "LastMonthWithHint": "Muaji i fundit <1>({{month}})</1>",

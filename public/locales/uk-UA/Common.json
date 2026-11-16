@@ -1368,6 +1368,7 @@
   "Last6Months": "Останні 6 місяців",
   "Last12Months": "Останні 12 місяців",
   "LastActivityDate": "Дата останньої активності",
+  "LastModified": "Остання зміна",
   "LastModifiedBy": "Останній редактор",
   "LastModifiedDate": "Дата останньої зміни",
   "LastMonthWithHint": "Минулий місяць <1>({{month}})</1>",

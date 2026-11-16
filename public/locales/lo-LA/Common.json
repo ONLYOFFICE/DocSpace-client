@@ -1368,6 +1368,7 @@
   "Last6Months": "6 ເດືອນທີ່ຜ່ານມາ",
   "Last12Months": "12 ເດືອນທີ່ຜ່ານມາ",
   "LastActivityDate": "ວັນທີເຄື່ອນໄຫວຄັ້ງສຸດທ້າຍ",
+  "LastModified": "ຄັ້ງສຸດທະຍ້າຍແກ້ໄຂ",
   "LastModifiedBy": "ດັດແກ້ຫຼ້າສຸດໂດຍ",
   "LastModifiedDate": "ວັນທີດັດແກ້ຫຼ້າສຸດ",
   "LastMonthWithHint": "ເດືອນທີ່ຜ່ານມາ <1>({{month}})</1>",

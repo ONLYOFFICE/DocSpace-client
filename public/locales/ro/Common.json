@@ -1368,6 +1368,7 @@
   "Last6Months": "Ultimele 6 luni",
   "Last12Months": "Ultimele 12 luni",
   "LastActivityDate": "Data când a avut loc ultima activitate",
+  "LastModified": "Ultima modificare",
   "LastModifiedBy": "Modificat ultima dată de către",
   "LastModifiedDate": "Data ultimei modificări",
   "LastMonthWithHint": "Luna trecută <1>({{month}})</1>",

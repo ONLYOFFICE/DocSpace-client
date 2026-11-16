@@ -360,6 +360,7 @@ const tableStore = new TableStore(
 // typed in InfoPanelStore.ts). Candidate for constructor injection once the
 // construction order is revisited.
 infoPanelStore.selectedFolderStore = selectedFolderStore;
+tableStore.filesStore = filesStore;
 infoPanelStore.filesStore = filesStore;
 infoPanelStore.filesSettingsStore = filesSettingsStore;
 infoPanelStore.peopleStore = peopleStore;

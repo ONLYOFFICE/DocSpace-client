@@ -1368,6 +1368,7 @@
   "Last6Months": "آخر 6 أشهر",
   "Last12Months": "آخر 12 شهرًا",
   "LastActivityDate": "تاريخ آخر نشاط",
+  "LastModified": "آخر تعديل",
   "LastModifiedBy": "تم التعديل الأخير من قبل",
   "LastModifiedDate": "تاريخ التعديل الأخير",
   "LastMonthWithHint": "الشهر الماضي <1>({{month}})</1>",

@@ -1368,6 +1368,7 @@
   "Last6Months": "Վերջին 6 ամիսը",
   "Last12Months": "Վերջին 12 ամիսը",
   "LastActivityDate": "Վերջին գործողության ամսաթիվը",
+  "LastModified": "Վերջին փոփոխությունը",
   "LastModifiedBy": "Վերջին փոփոխողը",
   "LastModifiedDate": "Վերջին փոփոխության ամսաթիվը",
   "LastMonthWithHint": "Անցյալ ամիս <1>({{month}})</1>",

@@ -1368,6 +1368,7 @@
   "Last6Months": "Laatste 6 maanden",
   "Last12Months": "Laatste 12 maanden",
   "LastActivityDate": "Datum laatste activiteit",
+  "LastModified": "Laatst gewijzigd",
   "LastModifiedBy": "Laatst aangepast door",
   "LastModifiedDate": "Datum laatste wijziging",
   "LastMonthWithHint": "Vorige maand <1>({{month}})</1>",

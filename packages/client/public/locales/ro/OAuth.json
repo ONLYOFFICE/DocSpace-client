@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG sau SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "Token incorect",
-  "LastModified": "Ultima modificare",
   "NewApp": "Aplicația nouă",
   "NoAuthorizedApps": "Nicio aplicație autorizată",
   "NoOAuthAppHeader": "Nicio aplicație OAuth",

@@ -55,6 +55,7 @@ import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
 import SkillsRowDataComponent from "./sub-components/SkillsRowData";
+import SkillSetsRowDataComponent from "./sub-components/SkillSetsRowData";
 import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
 import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
 
@@ -88,6 +89,7 @@ const FilesTableRow = memo((props) => {
     id,
     isRooms,
     isSkillSet,
+    isSkillSetsList,
     isTemplates,
     isTrashFolder,
     isIndexEditingMode,
@@ -320,6 +322,12 @@ const FilesTableRow = memo((props) => {
             element={element}
             dragStyles={dragStyles}
             isHovered={isHovered}
+            {...props}
+          />
+        ) : isSkillSetsList ? (
+          <SkillSetsRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
             {...props}
           />
         ) : isRooms ? (

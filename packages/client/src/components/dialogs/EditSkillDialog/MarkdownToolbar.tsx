@@ -98,7 +98,7 @@ const MarkdownToolbar = ({ isDisabled, onAction }: MarkdownToolbarProps) => {
     { action: "bulleted", label: t("Common:MarkdownBulletedList") },
     { action: "numbered", label: t("Common:MarkdownNumberedList") },
     { action: "code", label: t("Common:MarkdownCode") },
-    { action: "link", label: t("Common:MarkdownLink") },
+    { action: "link", label: t("Common:Link") },
   ];
 
   return (

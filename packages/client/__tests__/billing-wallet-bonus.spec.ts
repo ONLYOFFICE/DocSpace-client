@@ -421,6 +421,11 @@ test.describe("Billing wallet: promo credits", () => {
     mockRequest,
   }) => {
     useSaasBilling(mockRequest, { payer: "none", plan: "startup" });
+    mockRequest.use(
+      http.get(apiUrl("portal/payment/checkoutsetupurl"), () =>
+        jsonResponse("https://example.com/checkout"),
+      ),
+    );
 
     await openWallet(page, baseUrl);
     await topUpButton(page).click();

@@ -198,5 +198,5 @@ The server SHALL serve private rooms only while the E2E rooms app of the portal 
 
 ## RENAMED Requirements
 
-- FROM: `### Requirement: The E2E rooms app gates only the private section listing`
+- FROM: `### Requirement: The E2E rooms app gates the private section`
 - TO: `### Requirement: The E2E rooms app gates private rooms`

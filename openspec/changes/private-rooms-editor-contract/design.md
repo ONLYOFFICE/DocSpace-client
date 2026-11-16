@@ -483,8 +483,7 @@ references of 2026-10-29 (moved: `ReplaceCommunityAddress` is
 - **Callbacks.** `TrackerData.Encrypted` is a plain bool parsed from the body
   or the JWT (`FileHandler.ashx.cs:1528-1533`, `1556-1598`); absent means
   false. Changes and history are stored only for non-force-saves (`:567`,
-  `SaveHistoryAsync` `:766-800`); `edit/history` and `edit/diff` have no
-  encrypted guard and serve the Document Server's diff as stored.
+  `SaveHistoryAsync` `:766-800`).
 - **Paths that treat ciphertext as plaintext.** `copyas` with the same
   extension copies through `CreateNewFileAsync`
   (`FileStorageService.cs:2025-2063`), which never copies

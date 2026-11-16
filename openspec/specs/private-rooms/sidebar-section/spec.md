@@ -401,14 +401,14 @@ The system SHALL redirect `/e2e-rooms` to `/private/filter`, and `/e2e-rooms?sec
 - **THEN** the address is replaced with `/private/archived/filter`
 
 ### Requirement: Live updates skip rooms the user cannot read
-The system SHALL read a room or folder that arrives through a live update without the forbidden handling, and SHALL drop the update silently when the read is refused or fails. The server sends the events of every room in Rooms to all portal administrators, including private rooms they are not members of, so a refused read is an expected outcome, not an error the user caused.
+The system SHALL read a room or folder that arrives through a live update without the forbidden handling, and SHALL drop the update silently when the read is refused or fails. A refused read is an expected outcome, not an error the user caused.
 
-#### Scenario: Administrator outside a new private room
-- **WHEN** a portal administrator has the Rooms list open and another user creates a private room the administrator is not a member of
+#### Scenario: Update of a room the user cannot read
+- **WHEN** a live update names a new room whose read is refused while the user has the Rooms list open
 - **THEN** no Access denied message is shown, the rights of the open list are not refreshed, and the room is not inserted
 
-#### Scenario: Private room updated
-- **WHEN** a private room the administrator is not a member of is renamed while the administrator has the Rooms list open
+#### Scenario: Unreadable room renamed
+- **WHEN** a live update reports the rename of a room whose read is refused while the user has the Rooms list open
 - **THEN** no Access denied message is shown and the list is unchanged
 
 ### Requirement: Private item carries the Beta badge
@@ -446,11 +446,11 @@ The system SHALL make the Private section available while the E2E rooms app is o
 - **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
 
 ### Requirement: Private addresses open in Rooms while the section is not available
-The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
+The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
 
 #### Scenario: Link opened while the section is not available
 - **WHEN** a member of a private room opens `/private/{roomId}/filter` on a standalone portal where the E2E rooms app is off
-- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the room opens in the Rooms section
+- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter`
 
 ### Requirement: Apps catalog titles the E2E rooms app Private
 The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.

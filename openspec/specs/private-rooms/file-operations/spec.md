@@ -691,7 +691,7 @@ The system SHALL offer the standard "Download" for a folder inside an archived p
 - **THEN** download and download-encrypted are present, and sharing-settings, copy-shared-link, manage-links, link-for-room-members, mark-as-favorite, copy-to and duplicate are absent
 
 ### Requirement: Copy hotkey withheld in an archived private room
-The system SHALL NOT put any item of an archived private room on the clipboard with Ctrl+C, although the server grants the copy right there. Copying out of such a room goes through the Copy dialog or drag-and-drop, where files are decrypted.
+The system SHALL NOT put any item of an archived private room on the clipboard with Ctrl+C. Copying out of such a room goes through the Copy dialog or drag-and-drop, where files are decrypted.
 
 #### Scenario: Ctrl+C on encrypted files
 - **WHEN** a member selects encrypted files in an archived private room and presses Ctrl+C

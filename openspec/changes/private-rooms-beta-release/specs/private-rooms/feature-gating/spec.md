@@ -21,7 +21,7 @@ The system SHALL offer private rooms on every portal, SaaS and standalone, with 
 - **WHEN** localStorage holds a `privateRooms` entry, or the address carries `?privateRooms=true`, on a standalone portal where the E2E rooms app is off
 - **THEN** no private-rooms surface appears and nothing is written to localStorage
 
-### Requirement: Existing private rooms stay usable when the app is off
+### Requirement: Private rooms are kept while the app is off
 The system SHALL keep rooms that are already private, and files that are already encrypted, with their members and their keys when an administrator switches the E2E rooms app off, so that they are usable again once the app is on. While the app is off, the creation of new private rooms is withheld and private rooms SHALL NOT be listed: the server leaves them out of the Rooms area, and the client asks the shared Archive for non-private rooms only.
 
 #### Scenario: App switched off after rooms exist
@@ -106,7 +106,7 @@ While the client runs inside an embedded frame, the client SHALL offer private r
 **Migration**: None.
 
 ### Requirement: Existing private rooms stay visible without the flag
-**Reason**: Replaced by "Existing private rooms stay usable when the app is off".
+**Reason**: Replaced by "Private rooms are kept while the app is off".
 **Migration**: None. The behaviour is kept under the new requirement.
 
 ### Requirement: Server API is not gated by the flag

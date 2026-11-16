@@ -103,12 +103,8 @@ Two things must stay true in that file:
 
 ## Security
 
-The image route's **internal** fetch must never take its origin from
-`getBaseUrl()`. That helper builds the URL out of `x-forwarded-proto` and
-`x-forwarded-host`, and nginx passes a client-supplied `X-Forwarded-Host`
-straight through (`map $http_x_forwarded_host $proxy_x_forwarded_host`), so the
-route would fetch whatever host the caller names and hand the body to sharp —
-an SSRF primitive on an endpoint that needs no session. The origin comes from
+The image route's **internal** fetch builds its origin from the configured
+portal address, never from a request header. The origin comes from
 `API_HOST`, which every real deployment sets (`install/docker/.env`); without
 it the route returns 404 in production and only falls back to `getBaseUrl()` in
 development. `getBaseUrl()` stays in use for the public `og:image` URL, where
@@ -123,9 +119,8 @@ either way) versus which host the login server connects to (not fine). Every
 other SSR call does the same: `createRequest` forwards the incoming headers
 wholesale and `proxy.ts` forwards these two explicitly.
 
-The same forwarded-host trust exists across `login`/`doceditor`
-(`getAPIUrl`, `createRequest`) and is tracked separately; fixing it belongs in
-nginx (`proxy_set_header X-Forwarded-Host $this_host;`), not here.
+The rule for every server-side fetch is the same: build the origin from the
+configured portal address, never from a request header.
 
 Never derive preview text from a resource addressed by a guessable id.
 `fileId` and `folderId` are sequential, so a title taken from them would leak

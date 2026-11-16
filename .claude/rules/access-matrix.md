@@ -251,11 +251,9 @@ re-derive it from a type or a role.
 
 ### Adding guests to groups
 
-Nobody, and it is enforced by omission: the group member selector
-(`CreateEditGroupDialog` -> `MembersSelector`) does not pass `withGuests`, so
-`PeopleSelector` never shows the guests tab and only queries the People area.
-Guests are not offered because they are not fetched, which is worth knowing
-before "fixing" a selector that looks incomplete.
+Nobody. A guest is never a member of a group, so the group member selector
+offers the People area only and has no guests tab. That is the rule, not a
+selector left incomplete.
 
 ## Using this
 

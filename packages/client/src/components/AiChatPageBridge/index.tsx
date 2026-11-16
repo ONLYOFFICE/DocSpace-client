@@ -46,6 +46,12 @@ import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { useStore } from "SRC_DIR/store/useStore";
 
+import {
+  readAiChatPage,
+  type TAiChatPageMemory,
+  writeAiChatPage,
+} from "./aiChatPageMemory";
+
 /** How many conversations the sidebar's Recent lists. */
 const RECENT_THREADS_COUNT = 5;
 
@@ -66,13 +72,18 @@ type AiChatPageBridgeProps = {
  *   conversation, on its history or on that conversation;
  * - mirrors the latest conversations and the open one into `dialogsStore`
  *   for Recent's entries. They are read even while the chat is closed, since
- *   the sidebar shows them all the time.
+ *   the sidebar shows them all the time;
+ * - remembers the fullscreen chat for the tab and opens it again after a
+ *   reload: the chat has no address, so the reload would show the page it
+ *   covered - the agents list - in its place.
  */
 const AiChatPageBridgeComponent = ({
   canLoadThreads = false,
 }: AiChatPageBridgeProps) => {
   const dialogsStore = useStore("dialogsStore");
   const request = dialogsStore.aiChatPageRequest;
+  const userId = useStore("userStore").user?.id;
+  const { isAiProjectRoomRoot } = useStore("treeFoldersStore");
 
   const location = useLocation();
   const aiChatStore = useAiChatStore();
@@ -86,6 +97,52 @@ const AiChatPageBridgeComponent = ({
   // More pages may be stored than the store has read.
   const hasMoreThreads = useThreadsStore((s) => s.hasMoreThreads);
   const activeThreadId = useThreadsStore((s) => s.threadId);
+  const threadsLoaded = useThreadsStore((s) => s.threadsLoaded);
+
+  // The chat a reload interrupted: `undefined` until it is read - the user
+  // and the right to use AI may arrive after the first render - and `null`
+  // once it is reopened or there was none. Until then the chat being closed
+  // is not a reason to forget it.
+  const [interrupted, setInterrupted] = React.useState<
+    TAiChatPageMemory | null | undefined
+  >(undefined);
+  const isRestoring = interrupted !== null;
+  React.useEffect(() => {
+    if (!userId || !canLoadThreads) return;
+    setInterrupted((current) =>
+      current === undefined ? readAiChatPage(userId) : current,
+    );
+  }, [userId, canLoadThreads]);
+
+  // Reopened once the conversations are read: one that is gone, or was never
+  // sent a message, is not asked for - the chat starts a fresh one.
+  React.useEffect(() => {
+    if (!interrupted || !threadsLoaded) return;
+    const threadId = threads.some(
+      (thread) => thread.threadId === interrupted.threadId && thread.title,
+    )
+      ? interrupted.threadId
+      : undefined;
+    dialogsStore.requestAiChatPage(interrupted.page, null, threadId);
+    setInterrupted(null);
+  }, [interrupted, threadsLoaded, threads, dialogsStore]);
+
+  // The chat as the sidebar's AI Chat section shows it: fullscreen, and not
+  // an AI project's own, which the project's address brings back.
+  const { isVisible, effectiveFullscreen, isOnHistoryPage } = aiChatStore;
+  const isChatPage = isVisible && effectiveFullscreen && !isAiProjectRoomRoot;
+  React.useEffect(() => {
+    if (isRestoring) return;
+    writeAiChatPage(
+      userId,
+      isChatPage
+        ? {
+            page: isOnHistoryPage ? "history" : "chat",
+            ...(activeThreadId ? { threadId: activeThreadId } : {}),
+          }
+        : null,
+    );
+  }, [isRestoring, userId, isChatPage, isOnHistoryPage, activeThreadId]);
 
   // The list is read once per scope; the chat reads it the same way when it
   // opens, so this costs it nothing then.
@@ -95,7 +152,9 @@ const AiChatPageBridgeComponent = ({
       .getState()
       .ensureThreads(chatStores.getEntityId())
       .catch(() => {
-        // AI may be unavailable to the caller: Recent lists nothing.
+        // AI may be unavailable to the caller: Recent lists nothing, and
+        // there is no chat to reopen.
+        setInterrupted(null);
       });
   }, [canLoadThreads, useThreadsStore, chatStores]);
 

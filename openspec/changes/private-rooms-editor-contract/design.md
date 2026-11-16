@@ -1013,10 +1013,26 @@ unlocked in the browser.
   file", the console logging Document Server error code -82; the browser
   had fetched the address without a version. Switched on again, the next
   opening worked.
-- **Not run.** A member who is not the owner, a reopen after another
-  member's save, a spreadsheet, a presentation and a PDF, a session that
-  has ended, and the release stand with its Document Server build. Task
-  6.8 stays open for them.
+- **A member who is not the owner.** A second user, of the User type,
+  with a key of their own, invited to the room with the Editor access
+  through the invite panel, in a browser profile of their own. The
+  server reports the edit and read-history rights of the file to them
+  and answers `openedit?version=N&view=true` for the earlier versions,
+  so the lookup finds the address. With the file at version 3 the member
+  opened it for editing, the browser fetching `version=1`, read both
+  phrases once, added a line and saved: version 4, updated by the member.
+- **After another member's save.** With the member's editor closed the
+  owner opened the file: the editing mode, the three phrases once, no
+  error, the address with `version=1`.
+- **Save and rejoin while another member edits.** With the owner's
+  editor left open the member opened the file, added a line, saved
+  (version 5), left and opened it again: the editing mode with two
+  users shown, the four phrases once, no error, `version=1` again. The
+  owner's open editor showed the member's line and logged no error.
+- **Not run.** A member without the read-history right, a spreadsheet,
+  a presentation and a PDF, a session that has ended, and the release
+  stand with its Document Server build. Task 6.8 stays open for the
+  release stand.
 
 ## Goals / Non-Goals
 

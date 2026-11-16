@@ -43,16 +43,16 @@ The system SHALL NOT claim that a private item with an external link is closed t
 - **WHEN** a member revokes an external link
 - **THEN** the interface says that what was opened through it stays with whoever opened it
 
-### Requirement: The page of a visitor does not keep the secret of a link
-The system SHALL keep the secret of an opened link in memory for the visit only: it takes the secret out of the address bar once read, and SHALL NOT write it to a log, to browser storage or to statistics, send it to any server, or load on that page a script from an origin other than the portal and its Document Server.
+### Requirement: The page of a visitor keeps the secret of a link to the address
+The system SHALL read the secret of an opened link from the part of the address after `#` and leave it there, so that the address opens the item again. It SHALL NOT write the secret to a log, to browser storage or to statistics, send it to any server, or load on that page a script from an origin other than the portal and its Document Server.
 
 #### Scenario: Link opened
 - **WHEN** a visitor opens the address of a link
-- **THEN** the address bar no longer shows the part after `#` once the item is shown
+- **THEN** the item is shown and no request of the page carries the part after `#`
 
 #### Scenario: Page reloaded
-- **WHEN** the visitor reloads the page after that
-- **THEN** nothing is decrypted and the page asks for the address of the link again
+- **WHEN** the visitor reloads the page
+- **THEN** the item opens again from the same address, after the password when the link has one
 
 ### Requirement: Texts name who was given access, not who is a member
 The system SHALL describe a private item that can carry an external link by who the user gave access to: the members of the room and the holders of the links the user made, with the service holding no key. It SHALL NOT say that only members can read, or use the term zero-knowledge.

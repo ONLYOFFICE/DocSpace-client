@@ -138,14 +138,16 @@ none is open. The technical decisions below follow from them.
     interface asks for the password, or for the end date, before it sends.
     The default end date of such a link is proposed as seven days and is
     set with the mock-up of task 0.4.
-11. **The page of a visitor does not keep the secret.** It reads the part
-    after `#`, keeps it in memory for the visit and takes it out of the
-    address bar, writes it to no log, storage or statistics, and loads no
-    script from an origin other than the portal and its Document Server,
-    whose editor a document opens in. A reload therefore asks for the address
-    again. Alternative: leave the secret in the address, as Proton does.
-    Rejected: the address then stays in the history of the browser, which
-    is the leak the password rule is there to bound.
+11. **The secret stays in the address, as at Proton (decided by the owner
+    on 2026-11-16).** The page of a visitor reads the part after `#` and
+    leaves it there, so a reload or a bookmark opens the item again. It
+    writes the secret to no log, storage or statistics and loads no script
+    from an origin other than the portal and its Document Server, whose
+    editor a document opens in. Alternative, written first and dropped:
+    take the secret out of the address bar and keep it in memory, so that
+    it does not stay in the history of the browser. Rejected by the owner:
+    a visitor who reloads the page would have to find the address again,
+    and the services people already use keep it in the address.
 12. **A private item shows its active links.** A room, a folder or a file
     with a link that still works carries a mark with the number of links,
     for the members who may see the room's access. A user who sees the
@@ -160,9 +162,10 @@ none is open. The technical decisions below follow from them.
 
 - [The address leaks: a forwarded message, a browser history, a
   screenshot] → The password rule of decision 10 bounds a link without a
-  password to one file for a limited time, decision 11 keeps the secret
-  out of the browser history, the mark of decision 12 and the audit trail
-  show the links and every opening.
+  password to one file for a limited time, and the mark of decision 12
+  and the audit trail show the links and every opening. The address stays
+  in the history of the visitor's browser (decision 11); the end date and
+  the revocation are what ends it.
 - [A revoked link is taken for a recalled document] → The interface says
   at the revocation that what was opened stays with whoever opened it;
   the same limit holds for a removed member.

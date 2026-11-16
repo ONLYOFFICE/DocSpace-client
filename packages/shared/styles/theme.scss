@@ -2997,6 +2997,9 @@
 .light {
   --text-secondary: #{$gray-text};
   --row-background-color: #{$light-gray-hover};
+  // The icon of a skill set and of a skill: the same for every one.
+  --skill-icon-background: #{$light-gray-hover};
+  --skill-icon-color: #{$light-gray-dark};
   --divider-color: #{$gray-light-mid};
   --background-secondary: #{$gray-light};
   --color-error: #{$light-error-status};
@@ -3006,6 +3009,8 @@
 .dark {
   --text-secondary: #{$dark-gray-dark};
   --row-background-color: #{$light-dark-gray-hover};
+  --skill-icon-background: #{$light-dark-gray-hover};
+  --skill-icon-color: #{$dark-gray-dark};
   --divider-color: #{$gray-dark-strong};
   --background-secondary: #{$gray-dark-mid};
   --color-error: #{$dark-error-status};

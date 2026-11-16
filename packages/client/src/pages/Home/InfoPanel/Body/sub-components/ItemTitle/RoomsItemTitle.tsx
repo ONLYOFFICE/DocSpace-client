@@ -57,6 +57,12 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
+import SkillIcon, { isSkillSetIconRoom } from "SRC_DIR/components/SkillIcon";
+import {
+  isSkillFile,
+  type TSkillFolder,
+} from "@docspace/shared/utils/skillFile";
+
 import commonStyles from "../../helpers/Common.module.scss";
 
 import Search, { SearchProps } from "../Search";
@@ -80,6 +86,8 @@ type RoomsItemHeaderProps = {
 
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
+  /** The open folder: a skill is told by it being a skill set. */
+  openFolder?: TSkillFolder;
   hasExternalLinks?: boolean;
   isExternalShareRestricted?: boolean;
 } & (
@@ -105,6 +113,7 @@ const RoomsItemHeader = ({
   onChangeFile,
   setTemplateAccessSettingsVisible,
   getIcon,
+  openFolder,
   searchProps,
   isRoomMembersPanel,
   hasExternalLinks,
@@ -212,6 +221,13 @@ const RoomsItemHeader = ({
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
+  // A skill set and a skill have icons of their own, as in the list.
+  const skillKind = isSkillSetIconRoom(selection as never)
+    ? "set"
+    : isSkillFile(selection as never, openFolder)
+      ? "skill"
+      : null;
+
   const color = "logo" in selection ? selection.logo?.color : undefined;
   // An AI project changes its logo in its own edit dialog, not here.
   const canEditLogo =
@@ -242,26 +258,30 @@ const RoomsItemHeader = ({
       ) : null}
 
       <div className="item-icon">
-        <RoomIcon
-          isTemplate={isRoom ? isTemplate : false}
-          color={color}
-          title={title}
-          isArchive={
-            "rootFolderType" in selection
-              ? selection.rootFolderType === FolderType.Archive
-              : false
-          }
-          showDefault={isFile || !isRoom ? false : showDefaultRoomIcon}
-          imgClassName={`icon ${isRoom && "is-room"}`}
-          logo={icon}
-          badgeUrl={badgeUrl || ""}
-          badgeIconColor={badgeIconColor}
-          tooltipContent={tooltipContent ?? undefined}
-          hoverSrc={canEditLogo ? Camera10ReactSvgUrl : undefined}
-          model={canEditLogo ? model : undefined}
-          onChangeFile={canEditLogo ? onChangeFileContext : undefined}
-          tooltipId="info-panel-title_icon-tooltip"
-        />
+        {skillKind ? (
+          <SkillIcon kind={skillKind} size={32} />
+        ) : (
+          <RoomIcon
+            isTemplate={isRoom ? isTemplate : false}
+            color={color}
+            title={title}
+            isArchive={
+              "rootFolderType" in selection
+                ? selection.rootFolderType === FolderType.Archive
+                : false
+            }
+            showDefault={isFile || !isRoom ? false : showDefaultRoomIcon}
+            imgClassName={`icon ${isRoom && "is-room"}`}
+            logo={icon}
+            badgeUrl={badgeUrl || ""}
+            badgeIconColor={badgeIconColor}
+            tooltipContent={tooltipContent ?? undefined}
+            hoverSrc={canEditLogo ? Camera10ReactSvgUrl : undefined}
+            model={canEditLogo ? model : undefined}
+            onChangeFile={canEditLogo ? onChangeFileContext : undefined}
+            tooltipId="info-panel-title_icon-tooltip"
+          />
+        )}
       </div>
 
       <Text
@@ -316,6 +336,7 @@ export default inject(
     filesSettingsStore,
     publicRoomStore,
     avatarEditorDialogStore,
+    selectedFolderStore,
   }: TStore) => {
     const { setIsMobileHidden } = infoPanelStore;
 
@@ -337,6 +358,11 @@ export default inject(
       isShareRestricted;
 
     return {
+      openFolder: {
+        id: selectedFolderStore.id,
+        roomType: selectedFolderStore.roomType,
+        parentRoomType: selectedFolderStore.parentRoomType,
+      },
       setIsMobileHidden,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,

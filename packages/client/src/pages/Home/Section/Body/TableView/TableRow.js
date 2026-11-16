@@ -131,6 +131,7 @@ const FilesTableRow = memo((props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      roomType={item.roomType}
       isPrivateRoom={item.isPrivateRoom}
       title={item.title}
       showDefault={

@@ -72,6 +72,8 @@ import type KnowledgeBasesStore from "SRC_DIR/store/KnowledgeBasesStore";
 import { getKnowledgeBaseStatus } from "SRC_DIR/store/KnowledgeBasesStore";
 
 import { FormInfo } from "./sub-components/FormInfo";
+import SkillIcon, { isSkillSetIconRoom } from "SRC_DIR/components/SkillIcon";
+
 import { SkillSetInfo } from "./sub-components/SkillSetInfo";
 
 import DetailsHelper from "./Details.utils";
@@ -358,38 +360,42 @@ const Details = ({
         </div>
       ) : (
         <div className={styles.noThumbnail}>
-          <RoomIcon
-            color={color}
-            title={title}
-            isArchive={isArchive}
-            size="96px"
-            radius="16px"
-            // isRoom={"isRoom" in selection ? selection.isRoom : false}
-            showDefault={showDefaultRoomIcon}
-            imgClassName={`no-thumbnail-img ${"isRoom" in selection && selection.isRoom && styles.isRoom} ${
-              "logo" in selection &&
-              !isArchive &&
-              selection.logo?.large &&
-              styles.customLogo
-            }`}
-            logo={currentIcon}
-            model={model}
-            dropDownManualX={isMobile() ? "-30px" : "-10px"}
-            onChangeFile={onChangeFileContext}
-            badgeUrl={badgeUrl ?? undefined}
-            badgeIconColor={badgeIconColor}
-            tooltipContent={tooltipContent ?? undefined}
-            tooltipId="info-panel-details_icon-tooltip"
-            // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
-            // An AI project changes its logo in its own edit dialog: the
-            // room cover flow here would save it as a room's.
-            withEditing={
-              "isRoom" in selection && selection.isRoom && !isAIProject
-                ? Boolean(selection.security?.EditRoom)
-                : false
-            }
-            dataTestId="info_panel_details_room_icon"
-          />
+          {skillFile || isSkillSetIconRoom(selection as never) ? (
+            <SkillIcon kind={skillFile ? "skill" : "set"} size={96} />
+          ) : (
+            <RoomIcon
+              color={color}
+              title={title}
+              isArchive={isArchive}
+              size="96px"
+              radius="16px"
+              // isRoom={"isRoom" in selection ? selection.isRoom : false}
+              showDefault={showDefaultRoomIcon}
+              imgClassName={`no-thumbnail-img ${"isRoom" in selection && selection.isRoom && styles.isRoom} ${
+                "logo" in selection &&
+                !isArchive &&
+                selection.logo?.large &&
+                styles.customLogo
+              }`}
+              logo={currentIcon}
+              model={model}
+              dropDownManualX={isMobile() ? "-30px" : "-10px"}
+              onChangeFile={onChangeFileContext}
+              badgeUrl={badgeUrl ?? undefined}
+              badgeIconColor={badgeIconColor}
+              tooltipContent={tooltipContent ?? undefined}
+              tooltipId="info-panel-details_icon-tooltip"
+              // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
+              // An AI project changes its logo in its own edit dialog: the
+              // room cover flow here would save it as a room's.
+              withEditing={
+                "isRoom" in selection && selection.isRoom && !isAIProject
+                  ? Boolean(selection.security?.EditRoom)
+                  : false
+              }
+              dataTestId="info_panel_details_room_icon"
+            />
+          )}
         </div>
       )}
       {isIndexingFailed ? (

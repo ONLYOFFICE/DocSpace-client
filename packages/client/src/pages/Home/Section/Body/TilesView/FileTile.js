@@ -159,6 +159,7 @@ const FileTile = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      roomType={item.roomType}
       isPrivateRoom={item.isPrivateRoom}
       showDefault={
         !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null

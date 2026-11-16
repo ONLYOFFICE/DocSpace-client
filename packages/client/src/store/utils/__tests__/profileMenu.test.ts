@@ -48,9 +48,10 @@ const separators: [TEntry, TEntry] = [
 ];
 const options = { beforeKeys: ["chat", "about"], endKey: "logout" };
 const keys = (entries: TEntry[]) => entries.map(({ key }) => key);
+// A name with a leading "-" is a separator: entries("help", "-s2", "chat").
 const entries = (...names: string[]): TEntry[] =>
-  names.map((key) =>
-    key.startsWith("s") && key.length === 2 ? { key, isSeparator: true } : { key },
+  names.map((name) =>
+    name.startsWith("-") ? { key: name.slice(1), isSeparator: true } : { key: name },
   );
 
 const place = (actions: TEntry[], plugins: string[]) =>
@@ -64,7 +65,7 @@ describe("placeProfilePluginItems", () => {
   });
 
   it("puts the plugin block above the chat block, with a separator on either side", () => {
-    expect(place(entries("profile", "s1", "help", "chat", "about", "logout"), ["mcp", "crm"])).toEqual([
+    expect(place(entries("profile", "-s1", "help", "chat", "about", "logout"), ["mcp", "crm"])).toEqual([
       "profile",
       "s1",
       "help",
@@ -79,7 +80,7 @@ describe("placeProfilePluginItems", () => {
   });
 
   it("reuses the separator that already closes the block above", () => {
-    expect(place(entries("help", "s2", "chat", "logout"), ["mcp"])).toEqual([
+    expect(place(entries("help", "-s2", "chat", "logout"), ["mcp"])).toEqual([
       "help",
       "s2",
       "mcp",
@@ -90,7 +91,7 @@ describe("placeProfilePluginItems", () => {
   });
 
   it("starts at the first item of the chat block that is shown", () => {
-    expect(place(entries("help", "s2", "about", "logout"), ["mcp"])).toEqual([
+    expect(place(entries("help", "-s2", "about", "logout"), ["mcp"])).toEqual([
       "help",
       "s2",
       "mcp",
@@ -101,7 +102,7 @@ describe("placeProfilePluginItems", () => {
   });
 
   it("goes right above sign out, without a separator there, when the chat block is empty", () => {
-    expect(place(entries("help", "s2", "logout"), ["mcp"])).toEqual(["help", "s2", "mcp", "logout"]);
+    expect(place(entries("help", "-s2", "logout"), ["mcp"])).toEqual(["help", "s2", "mcp", "logout"]);
   });
 
   it("ends the menu when there is neither a chat block nor sign out", () => {
@@ -117,15 +118,26 @@ describe("placeProfilePluginItems", () => {
 describe("groupProfilePluginItems", () => {
   const toSubmenu = (items: TEntry[]): TEntry => ({ key: "more-options", items });
 
-  it("keeps up to two plugin items in the menu itself", () => {
-    expect(keys(groupProfilePluginItems(entries("mcp"), toSubmenu))).toEqual(["mcp"]);
-    expect(keys(groupProfilePluginItems(entries("mcp", "crm"), toSubmenu))).toEqual(["mcp", "crm"]);
+  const twoInMenu = { maxInMenu: 2 };
+
+  it("keeps up to maxInMenu plugin items in the menu itself", () => {
+    expect(keys(groupProfilePluginItems(entries("mcp"), toSubmenu, twoInMenu))).toEqual(["mcp"]);
+    expect(keys(groupProfilePluginItems(entries("mcp", "crm"), toSubmenu, twoInMenu))).toEqual([
+      "mcp",
+      "crm",
+    ]);
   });
 
-  it("moves three and more into one submenu, in their order", () => {
-    const grouped = groupProfilePluginItems(entries("mcp", "crm", "wiki"), toSubmenu);
+  it("moves more than maxInMenu into one submenu, in their order", () => {
+    const grouped = groupProfilePluginItems(entries("mcp", "crm", "wiki"), toSubmenu, twoInMenu);
 
     expect(keys(grouped)).toEqual(["more-options"]);
     expect(keys(grouped[0].items ?? [])).toEqual(["mcp", "crm", "wiki"]);
+  });
+
+  it("never folds when maxInMenu is unbounded", () => {
+    expect(
+      keys(groupProfilePluginItems(entries("mcp", "crm", "wiki"), toSubmenu, { maxInMenu: Infinity })),
+    ).toEqual(["mcp", "crm", "wiki"]);
   });
 });

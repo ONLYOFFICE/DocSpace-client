@@ -396,8 +396,14 @@ class ProfileActionsStore {
     this.setIsDebugDialogVisible(true);
   };
 
+  /**
+   * The profile menu model. More than two plugin items fold into a "More
+   * options" submenu; `foldPluginItems: false` keeps them all in the menu, for
+   * a renderer that shows no submenus (the phone header's profile panel).
+   */
   getActions = (
     t: TTranslationFn = i18n.t.bind(i18n) as TTranslationFn,
+    { foldPluginItems = true }: { foldPluginItems?: boolean } = {},
   ): ContextMenuModel[] => {
     const {
       enablePlugins,
@@ -692,17 +698,21 @@ class ProfileActionsStore {
           }))
         : [];
 
+    const pluginBlock = groupProfilePluginItems(
+      pluginActions,
+      (items) => ({
+        key: "user-menu-plugins",
+        icon: DotsHorizontalUrl,
+        label: t("Common:MoreOptions"),
+        items,
+      }),
+      { maxInMenu: foldPluginItems ? 2 : Infinity },
+    );
+
     // the returned items carry extra DropDownItem-only fields
     // (additionalElement, isButton, isPortal) and `items` may be null, which
     // ContextMenuType does not model — the cast preserves the old JS contract
     // expected by ArticleProfileProps.getActions.
-    const pluginBlock = groupProfilePluginItems(pluginActions, (items) => ({
-      key: "user-menu-plugins",
-      icon: DotsHorizontalUrl,
-      label: t("Common:MoreOptions"),
-      items,
-    }));
-
     return placeProfilePluginItems(
       actions.filter((action): action is TProfileAction => !!action),
       pluginBlock,

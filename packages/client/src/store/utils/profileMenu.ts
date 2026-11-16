@@ -35,14 +35,22 @@
 
 type TMenuEntry = { key?: string | number; isSeparator?: boolean };
 
-const MAX_PLUGIN_ITEMS_IN_MENU = 2;
-
+/**
+ * Plugin items stay in the menu itself up to `maxInMenu`; more than that fold
+ * into the one submenu `toSubmenu` builds, in their order.
+ */
 export const groupProfilePluginItems = <T extends TMenuEntry>(
   items: T[],
   toSubmenu: (items: T[]) => T,
-): T[] =>
-  items.length > MAX_PLUGIN_ITEMS_IN_MENU ? [toSubmenu(items)] : items;
+  { maxInMenu }: { maxInMenu: number },
+): T[] => (items.length > maxInMenu ? [toSubmenu(items)] : items);
 
+/**
+ * Puts the plugin block above the first shown entry of `beforeKeys`, or above
+ * `endKey` when none of them is shown, or at the end of the menu. The block
+ * gets a separator on either side unless one is already there; none goes
+ * between it and `endKey`, which is never separated from what precedes it.
+ */
 export const placeProfilePluginItems = <T extends TMenuEntry>(
   actions: T[],
   pluginItems: T[],

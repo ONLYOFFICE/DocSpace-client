@@ -239,6 +239,12 @@ test.describe("Profile menu with three plugin entries", () => {
     await expect(quickHelpItem).toBeVisible();
     await expect(aboutItem).toBeVisible();
 
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins-profile-menu",
+      "profile-menu_more-options-open.png",
+    ]);
+
     await accountInfoItem.click();
 
     const toast = page
@@ -249,3 +255,80 @@ test.describe("Profile menu with three plugin entries", () => {
   });
 });
 
+/** At or below 600px the app is in its mobile layout (ui-kit/utils/device). */
+const PHONE = { width: 428, height: 830 };
+
+/**
+ * On a phone the profile menu is the header's panel, a flat list that cannot
+ * open a submenu, so a "More options" entry there would be a dead row. Every
+ * plugin entry stays in the panel itself instead, in the same block above the
+ * support entries.
+ */
+test.describe("Profile menu plugin entries on a phone", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      ...portalHandlers(),
+      webPluginsListHandler(TEST_PORT, [
+        mockProfileMenuPlugin,
+        mockModalDialogPlugin,
+      ]),
+    );
+  });
+
+  test("Three entries stay in the panel, unfolded", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.setViewportSize(PHONE);
+
+    const pluginsLoaded = Promise.all([
+      page.waitForResponse(PLUGIN_REQUEST_URL),
+      page.waitForResponse(MODAL_DIALOG_PLUGIN_REQUEST_URL),
+    ]);
+    await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
+    await pluginsLoaded;
+
+    await page.getByTestId("avatar").first().click();
+
+    const accountInfoItem = page.getByTestId(
+      "profile-menu-sample-account-info",
+    );
+    const quickHelpItem = page.getByTestId("profile-menu-sample-quick-help");
+    const aboutItem = page.getByTestId("modal-dialog-sample-about");
+
+    await expect(accountInfoItem).toBeVisible();
+    await expect(quickHelpItem).toBeVisible();
+    await expect(aboutItem).toBeVisible();
+    await expect(page.getByTestId("user-menu-plugins")).toHaveCount(0);
+
+    expect(
+      await menuOrder(page, [
+        "user-menu-hotkeys",
+        "profile-menu-sample-account-info",
+        "profile-menu-sample-quick-help",
+        "modal-dialog-sample-about",
+        "user-menu-support",
+      ]),
+    ).toEqual([
+      "user-menu-hotkeys",
+      "profile-menu-sample-account-info",
+      "profile-menu-sample-quick-help",
+      "modal-dialog-sample-about",
+      "user-menu-support",
+    ]);
+
+    await expectScreenshot(page, [
+      "mobile",
+      "plugins-profile-menu",
+      "profile-menu_phone.png",
+    ]);
+
+    await accountInfoItem.click();
+
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Account info requested!" });
+    await expect(toast).toBeVisible();
+    await expect(toast).toHaveAttribute("data-type", "success");
+  });
+});

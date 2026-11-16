@@ -11,8 +11,7 @@ work. None of it is the client's to change, and none of it had a task.
 
 This change is the hand-over to the backend team: one task per behaviour,
 each stating the behaviour asked and how to accept it. The
-delta of `server-contract` states the behaviour asked for; the main spec
-keeps describing the server as it is until the work lands.
+delta of `server-contract` states the behaviour asked for.
 
 - The key check of a share change runs only when a user first gets access
   to a private room; a leave, a removal and a role change of a member

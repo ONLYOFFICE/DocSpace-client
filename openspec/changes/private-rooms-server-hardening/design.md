@@ -140,8 +140,7 @@ Every item above still holds, and the re-check found:
   2026-11-02).
 - Room creation: `ThrowIfKeysAreNotSetAsync` checks for a null record only
   (`EncryptionLoginProvider.cs:97-103`), so an empty key set passes room
-  creation, invitation and owner change; the private setting is stored for
-  any folder type (`FileStorageService.cs:1164-1167`, `:1185`);
+  creation, invitation and owner change;
   `CreateThirdPartyRoomAsync` passes `false` for `privacy` to
   `InternalCreateFolderAsync` (`:766`, signature `:1101-1105`) while it
   stores `Private = privacy` for the provider (`:780`), so a third-party
@@ -464,15 +463,10 @@ replaces a read.
   restrictions for now". The rule waits for the product decision of
   proposal decision 1 and leaves this change (decision 2 revised): the main
   spec's "No edition or licence gate on private rooms" describes the branch.
-- Room types (task 12.3, decision 13): the server did not restrict the
-  private flag to Custom and decided not to: the flag stays with the room
-  types the creation accepts, and `CreateRoomAsync` refuses it with 400 for
-  the AI hub room types, Knowledge, Instructions and AI project rooms
-  (`FileStorageService.cs:672-676`). A public and a form-filling room are
-  task 12.8. For an AI agent the reply proposes to refuse the flag with
-  400, the chat and the vectorization being denied in a private room
-  (`FileSecurity.cs:1706-1718`), and waits for confirmation: proposal
-  decision 8, decision 27.
+- Room types (task 12.3, decision 13): `CreateRoomAsync` refuses the
+  private flag with 400 for the AI hub room types, Knowledge, Instructions
+  and AI project rooms. The rules for the other room types are tasks 12.3
+  and 12.8 and proposal decision 8 (decision 27).
 - Groups (task 6.4): the reply asks whether a group can be added to a
   private room. The client's invite panel offers people only
   (`private-rooms/room-membership`, "Invite panel offers people only"), so
@@ -868,10 +862,7 @@ is recorded yet.
     alternative on 2026-11-05 (`b562fc3fb1`): a third-party storage keeps no
     file keys and its string ids do not fit the client's wrapping, so the
     private flag is refused there with 400, with or without keys. The
-    room-type part was not taken either (reply of 2026-11-05, Context
-    "Answered by the backend team"): the flag stays accepted with the room
-    types the room creation accepts, and the AI hub room types refuse it
-    with 400 (`FileStorageService.cs:672-676`). An AI agent created with
+    AI hub room types refuse the flag with 400. An AI agent created with
     the flag is decision 27, a public and a form-filling room task 12.8,
     and the creation of a template and of a room from a template shall
     apply the rules of a room's creation to the flag (task 12.3).

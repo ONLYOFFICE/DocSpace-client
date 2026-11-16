@@ -53,11 +53,9 @@ export type RoomMembersHandlerOptions = {
   links?: unknown[];
   handle?: { current: RoomMembersHandlerHandle | null };
   /**
-   * Users who never registered an encryption key, for a private room. The
-   * server (`FileSharing.SetAceObjectAsync`) saves the invitees of a request
-   * one by one and calls `EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync`
-   * for each; its `InvalidOperationException` becomes a 403 in
-   * `UnhandledExceptionMiddleware`, after the invitees before it were saved.
+   * Users who never registered an encryption key, for a private room. A
+   * share request that names one of them is answered with 403, as the
+   * server answers it.
    */
   withoutKeys?: string[];
   /**

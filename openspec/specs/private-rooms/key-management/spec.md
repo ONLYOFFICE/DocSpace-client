@@ -598,7 +598,7 @@ The system SHALL show the Keys management tab (Common:KeysManagement) in the pro
 - **THEN** the Keys management tab is shown and its actions work as with the app on
 
 #### Scenario: Guest
-- **WHEN** a guest opens their profile, with the Private section available or holding a key from before they became a guest
+- **WHEN** a guest opens their profile, with the Private section available or not
 - **THEN** no Keys management tab is shown and `/profile/keys-management` does not resolve to the page
 
 ### Requirement: Keys management tab carries the Beta badge

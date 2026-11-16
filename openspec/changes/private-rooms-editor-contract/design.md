@@ -1272,7 +1272,7 @@ Read from the stand `tests.onlyoffice.io` without signing in, on
     comment, and no capture of it was taken for an encrypted file.
     Alternative:
     leave the events generic and rely on the server to refuse; rejected,
-    the server stores a plaintext name or a plaintext new file today.
+    since the page is the one that knows the file is encrypted.
 
 17. **The SDK does not hand an encrypted file to the host (owner,
     2026-11-12).** A host that subscribed to `onEditorOpen` opens files
@@ -1401,10 +1401,8 @@ the Document Server capability" (2026-11-10).
 - [Spreadsheet co-editing silently diverges] → closed by Document Server
   10.0.2.5 (run of 2026-10-30); what remains for proposal decision 6 is the
   join race of DS-17 and the duplicated replay of DS-19.
-- [Editor events bypass the private-room rules of the file list] → tasks
-  9.1 to 9.9; until then a rename from the editor writes the real name to
-  the server and a new document from the editor is stored in plaintext
-  inside the private room.
+- [Editor events have to follow the private-room rules of the file list]
+  → tasks 9.1 to 9.9.
 - [Server paths store ciphertext as a plaintext file or send it to the
   Document Server] → tasks 10.2 to 10.4; `copyas`, restore by address and
   conversion are reachable through the API today. `copyas` closed on

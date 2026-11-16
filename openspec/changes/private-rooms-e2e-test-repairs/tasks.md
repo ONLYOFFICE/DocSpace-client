@@ -4,7 +4,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 1. Client
 
-- [ ] 1.1 E2E: make `startHeldInvitation` of `packages/client/__tests__/private-room-invite.spec.ts` wait until the uploaded file holds the key of the uploader before it installs the route that holds key writes. Verify: the two "Re-encryption aborted" cases repeated ten times each under Docker `tests-dev` (`--repeat-each=10 -g "Re-encryption aborted"`) without a failure, then the whole spec once
+- [x] 1.1 E2E: make `startHeldInvitation` of `packages/client/__tests__/private-room-invite.spec.ts` wait until the uploaded file holds the key of the uploader before it installs the route that holds key writes. Verify: the two "Re-encryption aborted" cases repeated ten times each under Docker `tests-dev` (`--repeat-each=10 -g "Re-encryption aborted"`) without a failure, then the whole spec once
+  - 2026-11-16: the helper polls the file keys of the uploaded file until they hold the uploader alone, then waits for the quiet network as before. Docker `tests-dev`, `WORKERS=3`: the two cases repeated ten times each, 20 of 20; before the repair the same cases failed once in 8 and once in 12 runs. The whole spec: 8 of 8.
 
 ## 2. SDK
 

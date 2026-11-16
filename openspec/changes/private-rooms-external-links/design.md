@@ -50,9 +50,86 @@ Server, `../server` at `6fb6dfb17a`, read on 2026-11-16:
   `products/ASC.Files/Core/Core/FileStorageService.cs`, line 207).
 - The removal of a member's share removes the member's wrapped file keys
   (`FileSharingAceHelper.RevokeFileKeysAsync`).
-- Not read: how a file is served to a visitor of a link, and how the
-  editor configuration is built for one. Task 0.2 reads both before the
-  delta of `server-contract` is handed over.
+### Server read for task 0.2
+
+`../server` at `0396e6910f`, read on 2026-11-16. Since that pull the
+server carries OpenSpec specs of its own (`../server/openspec/specs`),
+among them `shared-links` and `private-rooms`; they are the backend
+team's statement of the behaviour and were read next to the code.
+
+- **Where a link is allowed** (`shared-links`, "Entities that accept a
+  shared link" and "Link count limits"). A Custom room takes one primary
+  and up to five additional links to the room, and up to six additional
+  links to a folder or a file. A Collaboration room and a Virtual Data
+  Room take no link to the room itself, and up to six to a folder or a
+  file. A private room is of one of these three types (`private-rooms`,
+  "Room types that can be private").
+- **Settings by room type** ("Link settings by room type"). A Custom and a
+  Collaboration room offer the access, the "who has access" choice, a
+  password, the download ban and a lifetime. In a Virtual Data Room the
+  audience is fixed to DocSpace users only, whatever the request asks.
+- **Who manages links** ("Roles that manage links"). The room owner and
+  the room managers only, for the room and for the files and folders in
+  it.
+- **A folder link and a file link are separate** ("Room links and item
+  links are independent"). A folder link opens the folder and every file
+  in it with the folder link's right; a file link opens that file only.
+- **Today's rule for private rooms** (`private-rooms`, "No links to a
+  private room"): `setRoomLink` answers 403 for an external and for an
+  invitation link, and revoking stays possible.
+- **Address and key.** `ExternalShare.GetLinkDataAsync`
+  (`products/ASC.Files/Core/Core/Security/ExternalShare.cs`, line 53)
+  builds `rooms/share?key=<key>` for a room or a folder and a preview or
+  download address with `share=<key>` for a file. The key is the link id
+  signed by the server (`CreateShareKeyAsync`, line 333). A request
+  carries it in a header or in the `share` query (`GetKey`, line 182).
+- **Validation.** `GET files/share/{key}`
+  (`SecurityController.GetExternalShareData`, anonymous) and
+  `ExternalLinkHelper.ValidateAsync` answer the status of the link, Ok,
+  Invalid, Expired, RequiredPassword, InvalidPassword or
+  ExternalAccessDenied, with its access and the entry; an internal link
+  answers ExternalAccessDenied to a visitor who is not signed in
+  (`ExternalShare.ValidateRecordAsync`, line 98).
+- **Password.** `POST files/share/{key}/password` checks it and counts
+  wrong attempts per link and address (`BruteForceLoginManager`), with a
+  cookie for the session afterwards. The link keeps its password as a
+  signature made with a server key (`CreatePasswordKeyAsync`, line 170),
+  which the server reads back (`GetPasswordAsync`, line 177). The server
+  therefore knows the password of an ordinary link.
+- **Serving a file.** The file handler checks the key of the request
+  (`FileHandler.CheckLinkAsync`,
+  `products/ASC.Files/Core/HttpHandlers/FileHandler.ashx.cs`, line 730)
+  and the right to download of the file, and serves the stored file.
+- **Editor.** `openedit` is open to a visitor who is not signed in
+  (`EditorController`, `[AllowAnonymous]`). The configuration takes the
+  visitor's link from the share record of the file and puts a share key
+  into the callback address, with the link's password in it
+  (`Configuration.cs`, lines 308-317).
+- **File keys.** A wrapped file key is a row of user id, public key id,
+  file id and the wrap (`products/ASC.Files/Core/Core/EF/DbFileKeys.cs`).
+  A link id is a Guid as a user id is.
+
+What follows for this change:
+
+- A private Virtual Data Room gives links to DocSpace users only, and a
+  private Collaboration room or Virtual Data Room no link to the room
+  itself. The delta of `room-membership` says so.
+- The password of a link of a private item must not take the path of an
+  ordinary link's password, which the server can read back. It stays in
+  the browser, mixed into the sealing key and the proof (decision 2); the
+  server gets a flag that a password is needed and nothing else.
+- The proof of decision 4 can ride on what exists: the share key names
+  the link, the proof goes where the password goes today, and the counter
+  of wrong attempts is the same.
+- A wrap for a link fits the row of a file key with the link id in the
+  place of the user id; the backend team says whether it reuses the row.
+- Open with the backend team: a private Virtual Data Room whose room-wide
+  restriction on downloading is on. A visitor has to fetch the ciphertext
+  to see anything, and `shared-links` ("Deny-download on links combines
+  with the VDR room setting") refuses the download through a link there.
+- The hand-over goes to the backend team as a change of its own specs,
+  `private-rooms` ("No links to a private room") and `shared-links`,
+  since its repository now routes behaviour changes through them.
 
 ## Goals / Non-Goals
 

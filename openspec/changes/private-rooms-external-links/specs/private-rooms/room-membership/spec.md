@@ -50,6 +50,10 @@ The system SHALL offer for a private item the primary and the additional externa
 - **WHEN** the private room is of a type whose ordinary rooms have no link of the room itself
 - **THEN** links are offered for its files and folders only
 
+#### Scenario: Private virtual data room
+- **WHEN** a link is created in a private room of the virtual data room type
+- **THEN** it is for DocSpace users only and the choice of who has access is not offered
+
 #### Scenario: Creator's key locked
 - **WHEN** a member creates a link while their key is locked
 - **THEN** the unlock is asked first and no link is created before it succeeds

@@ -623,9 +623,9 @@ const AiPresetsBridge = ({
       t={t}
       withForm
       visible
-      title={t("Common:SaveAIProject")}
+      title={t("Common:SaveAsNewAgent")}
       testIdPrefix="save_ai_preset"
-      startValue={t("Common:AIProjectDefaultName")}
+      startValue={t("Common:NewAgent")}
       onSave={onSave}
       onCancel={aiPresetsStore.closeSaveDialog}
       onClose={aiPresetsStore.closeSaveDialog}

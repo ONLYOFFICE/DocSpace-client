@@ -336,19 +336,19 @@ describe("AiPresetsBridge", () => {
 
   it("creates a project from the chat's setup through the naming dialog", async () => {
     api.createAiProject.mockResolvedValue(
-      project(5, "Common:AIProjectDefaultName 2", [{ code: "roomUnavailable", message: "Viewer skipped" }]),
+      project(5, "Common:NewAgent 2", [{ code: "roomUnavailable", message: "Viewer skipped" }]),
     );
     const store = new AiPresetsStore();
     renderBridge(store);
     expect(screen.queryByTestId("save-dialog")).toBeNull();
 
     act(() => store.openSaveDialog(settings));
-    expect(screen.getByTestId("save-dialog")).toHaveAttribute("data-title", "Common:SaveAIProject");
+    expect(screen.getByTestId("save-dialog")).toHaveAttribute("data-title", "Common:SaveAsNewAgent");
     fireEvent.click(screen.getByTestId("save"));
     await flush();
 
     expect(api.createAiProject).toHaveBeenCalledWith({
-      title: "Common:AIProjectDefaultName 2",
+      title: "Common:NewAgent 2",
       aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [] },
     });
     expect(toastr.success).toHaveBeenCalledWith("Common:AIProjectSaved");

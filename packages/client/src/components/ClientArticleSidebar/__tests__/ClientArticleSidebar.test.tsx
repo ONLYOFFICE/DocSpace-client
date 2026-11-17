@@ -78,15 +78,31 @@ type TNavEntry = {
   children?: TNavEntry[];
 };
 
+const flattenIds = (groups: { items: TNavEntry[] }[]) =>
+  groups
+    .flatMap((group) => group.items)
+    .flatMap((item) => [item, ...(item.children ?? [])])
+    .map((item) => item.id)
+    .join(" ");
+
 vi.mock("SRC_DIR/components/AppsSidebar", () => ({
   default: ({
     groups,
     activeId,
+    collapsedGroups,
+    collapsedActiveId,
   }: {
     groups: { items: TNavEntry[] }[];
     activeId?: string;
+    collapsedGroups?: { items: TNavEntry[] }[];
+    collapsedActiveId?: string;
   }) => (
-    <ul data-testid="nav" data-active-id={activeId}>
+    <ul
+      data-testid="nav"
+      data-active-id={activeId}
+      data-collapsed-ids={collapsedGroups ? flattenIds(collapsedGroups) : undefined}
+      data-collapsed-active-id={collapsedActiveId}
+    >
       {groups
         .flatMap((group) => group.items)
         .flatMap((item) => [item, ...(item.children ?? [])])
@@ -304,6 +320,35 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
       "nav-ai-nested-chats-more",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
+    ]);
+  });
+});
+
+describe("ClientArticleSidebar — collapsed", () => {
+  it("leaves the agents and conversations out of the collapsed sidebar, and highlights Agents on an agent's page", () => {
+    route.pathname = "/ai-rooms/100/filter";
+    route.search = "?folder=100";
+    try {
+      renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
+        presets: [{ id: "100", name: "Only" }],
+        recentThreads: [{ id: "t1", title: "First" }],
+        hasMoreThreads: true,
+      });
+    } finally {
+      route.pathname = "/private/filter";
+      route.search = "";
+    }
+
+    const nav = screen.getByTestId("nav");
+    expect(nav.dataset.activeId).toBe("ai-nested-project-100");
+    expect(nav.dataset.collapsedActiveId).toBe("ai-rooms");
+    const collapsed = (nav.dataset.collapsedIds ?? "").split(" ");
+    expect(collapsed.filter((id) => id.startsWith("ai-"))).toEqual([
+      "ai-chat",
+      "ai-rooms",
+      "ai-chat-recent",
+      "ai-rooms-skills",
+      "ai-rooms-knowledge",
     ]);
   });
 });

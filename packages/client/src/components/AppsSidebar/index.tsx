@@ -113,6 +113,13 @@ export type SidebarVariant = "primary" | "secondary";
 export type AppsSidebarProps = {
   groups: NavMenuGroup[];
   activeId?: string;
+  /**
+   * What the collapsed (icon-only) sidebar shows in place of `groups`, and
+   * its active entry: entries that only make sense with their text can be
+   * left out there. Without it the collapsed sidebar shows `groups`.
+   */
+  collapsedGroups?: NavMenuGroup[];
+  collapsedActiveId?: string;
   variant?: SidebarVariant;
   isNavLoading?: boolean;
   /** Hides the section "Back" button (secondary variant). */
@@ -143,8 +150,10 @@ type AppsSidebarViewProps = AppsSidebarProps & {
 };
 
 export const AppsSidebarView = ({
-  groups,
-  activeId,
+  groups: expandedGroups,
+  activeId: expandedActiveId,
+  collapsedGroups,
+  collapsedActiveId,
   variant = "primary",
   showText,
   toggleShowText,
@@ -162,6 +171,10 @@ export const AppsSidebarView = ({
   limitedAccessDevToolsForUsers,
   withDevTools,
 }: AppsSidebarViewProps) => {
+  const isCollapsedView = !showText && !!collapsedGroups;
+  const groups = isCollapsedView ? collapsedGroups : expandedGroups;
+  const activeId = isCollapsedView ? collapsedActiveId : expandedActiveId;
+
   const showBackButton = variant === "secondary" && !hideBack;
   const hideFooter = variant === "secondary";
 

@@ -176,6 +176,33 @@ const AI_ROOM_TYPES: Partial<Record<FolderType, RoomsType>> = {
 // stylesheet.
 const aiProjectItemId = (id: string | number) => `ai-nested-project-${id}`;
 const aiChatItemId = (id: string) => `ai-nested-chat-${id}`;
+const isAiNestedItemId = (id: string) => id.startsWith("ai-nested-");
+
+/**
+ * The collapsed sidebar draws the entries as icons, one under the other: the
+ * agents and conversations listed under Agents and Recent (and their Show
+ * more) are left out there, so Skill sets and Knowledge bases stay in reach
+ * without scrolling, and an agent or a conversation on screen highlights the
+ * entry it is listed under.
+ */
+const toCollapsedGroups = (groups: NavMenuGroup[]): NavMenuGroup[] =>
+  groups.map((group) => ({
+    ...group,
+    items: group.items.map((item) =>
+      item.children?.some((child) => isAiNestedItemId(child.id))
+        ? {
+            ...item,
+            children: item.children.filter((child) => !isAiNestedItemId(child.id)),
+          }
+        : item,
+    ),
+  }));
+
+const toCollapsedActiveId = (id: string | undefined) => {
+  if (id?.startsWith("ai-nested-project-")) return "ai-rooms";
+  if (id?.startsWith("ai-nested-chat-")) return "ai-chat-recent";
+  return id;
+};
 
 const ClientArticleSidebar = ({
   userId,
@@ -874,10 +901,14 @@ const ClientArticleSidebar = ({
     }
   });
 
+  const collapsedGroups = React.useMemo(() => toCollapsedGroups(groups), [groups]);
+
   return (
     <AppsSidebar
       groups={groups}
       activeId={activeId}
+      collapsedGroups={collapsedGroups}
+      collapsedActiveId={toCollapsedActiveId(activeId)}
       isNavLoading={isNavLoading}
       pluginSection={Section.Files}
     />

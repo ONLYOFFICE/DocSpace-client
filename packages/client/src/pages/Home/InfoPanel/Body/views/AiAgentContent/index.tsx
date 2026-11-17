@@ -37,7 +37,8 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
@@ -50,6 +51,7 @@ import type { TFile } from "@docspace/shared/api/files/types";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 
 import styles from "./AiAgentContent.module.scss";
 
@@ -91,7 +93,7 @@ type AiAgentContentProps = {
  * conversation on screen - Artifacts, what its replies produced, and
  * Attachments, what the user added to it. It follows the conversation: a new
  * chat shows both empty, another conversation its own files. A file opens in
- * a new tab and is downloaded by its button.
+ * a new tab; its "..." menu downloads it or saves a copy to a room.
  */
 const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -99,6 +101,9 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const { getIcon } = useStore("filesSettingsStore");
   const culture = useStore("settingsStore").culture;
   const { downloadFiles } = useStore("filesActionsStore");
+  const filesStore = useStore("filesStore");
+  const dialogsStore = useStore("dialogsStore");
+  const infoPanelStore = useStore("infoPanelStore");
 
   const [files, setFiles] = React.useState<TThreadFiles | null>(null);
   const [failed, setFailed] = React.useState(false);
@@ -134,6 +139,30 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
 
   if (!files) return null;
 
+  // A copy goes through the portal's copy panel, which copies the buffered
+  // item when nothing is selected: this file, not what a list held.
+  const saveToRoom = (file: TFile) => {
+    filesStore.setSelected("none");
+    filesStore.setBufferSelection(file as never);
+    infoPanelStore.setIsMobileHidden(true);
+    dialogsStore.setCopyPanelVisible(true);
+  };
+
+  const getRowOptions = (file: TFile): ContextMenuModel[] => [
+    {
+      key: "ai-agent-content-download",
+      label: t("Common:Download"),
+      icon: DownloadReactSvgUrl,
+      onClick: () => window.open(file.viewUrl, "_self"),
+    },
+    {
+      key: "ai-agent-content-save-to-room",
+      label: t("Common:SaveToRoom"),
+      icon: CopyToReactSvgUrl,
+      onClick: () => saveToRoom(file),
+    },
+  ];
+
   const row = (file: TFile) => {
     const details = [
       file.contentLength,
@@ -161,14 +190,11 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
           </Text>
         </div>
         <div className={styles.actions}>
-          <IconButton
-            iconName={DownloadReactSvgUrl}
-            size={16}
-            isFill
-            isClickable
-            title={t("Common:Download")}
-            onClick={() => window.open(file.viewUrl, "_self")}
-            dataTestId="ai-agent-content-download"
+          <ContextMenuButton
+            directionX="right"
+            title={t("Common:Actions")}
+            getData={() => getRowOptions(file)}
+            testId="ai-agent-content-menu"
           />
         </div>
       </div>

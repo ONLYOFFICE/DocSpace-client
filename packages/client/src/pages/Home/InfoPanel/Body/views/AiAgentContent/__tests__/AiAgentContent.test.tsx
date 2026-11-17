@@ -7,10 +7,12 @@ const api = vi.hoisted(() => ({
   getAiThreadAttachments: vi.fn(),
 }));
 const stores = vi.hoisted(() => ({
-  dialogsStore: { aiChatActiveThreadId: "t-1" },
+  dialogsStore: { aiChatActiveThreadId: "t-1", setCopyPanelVisible: vi.fn() },
   filesSettingsStore: { getIcon: () => "icon.svg" },
   settingsStore: { culture: "en" },
   filesActionsStore: { downloadFiles: vi.fn() },
+  filesStore: { setSelected: vi.fn(), setBufferSelection: vi.fn() },
+  infoPanelStore: { setIsMobileHidden: vi.fn() },
 }));
 
 vi.mock("@docspace/shared/api/ai/threadFiles", () => api);
@@ -20,6 +22,24 @@ vi.mock("SRC_DIR/store/useStore", () => ({
 vi.mock("mobx-react", () => ({ observer: (component: unknown) => component }));
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
+}));
+// The row's "..." menu, drawn open: its items as buttons.
+vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
+  ContextMenuButton: ({
+    getData,
+    testId,
+  }: {
+    getData: () => { key: string; label: string; onClick: () => void }[];
+    testId: string;
+  }) => (
+    <div data-testid={testId}>
+      {getData().map((item) => (
+        <button key={item.key} type="button" data-testid={item.key} onClick={item.onClick}>
+          {item.label}
+        </button>
+      ))}
+    </div>
+  ),
 }));
 
 import AiAgentContent, { REFRESH_MS } from "../index";
@@ -75,6 +95,29 @@ describe("AiAgentContent", () => {
     expect(stores.filesActionsStore.downloadFiles).toHaveBeenCalledWith([1, 5], [], {
       label: "Common:ArchivingData",
     });
+  });
+
+  it("gives each file a menu that downloads it or saves a copy of it to a room", async () => {
+    const open = vi.spyOn(window, "open").mockImplementation(() => null);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const [row] = screen.getByTestId("ai-agent-content-artifacts").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    const item = (key: string) => row.querySelector(`[data-testid="${key}"]`) as HTMLElement;
+    expect(item("ai-agent-content-download").textContent).toBe("Common:Download");
+    expect(item("ai-agent-content-save-to-room").textContent).toBe("Common:SaveToRoom");
+
+    fireEvent.click(item("ai-agent-content-download"));
+    expect(open).toHaveBeenCalledWith("/download/1", "_self");
+
+    fireEvent.click(item("ai-agent-content-save-to-room"));
+    // The copy panel copies this file, not what a list had selected.
+    expect(stores.filesStore.setSelected).toHaveBeenCalledWith("none");
+    expect(stores.filesStore.setBufferSelection).toHaveBeenCalledWith(expect.objectContaining({ id: 1 }));
+    expect(stores.dialogsStore.setCopyPanelVisible).toHaveBeenCalledWith(true);
+    expect(stores.filesStore.setBufferSelection.mock.invocationCallOrder[0]).toBeGreaterThan(
+      stores.filesStore.setSelected.mock.invocationCallOrder[0],
+    );
+    open.mockRestore();
   });
 
   it("shows both sections empty for a new chat, without a request", async () => {

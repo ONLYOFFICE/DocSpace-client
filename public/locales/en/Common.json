@@ -2141,6 +2141,7 @@
   "SaveOriginalFormatMessage": "Save the file copy in the original format",
   "SaveToPublicRoom": "Save to Public room",
   "ScheduleChange": "Schedule change",
+  "SaveToRoom": "Save to room...",
   "ScheduledChangeBillingPeriodNote": "Your current subscription remains unchanged until the end of your billing period (on {{date}}). The scheduled changes will take effect starting with the next billing period.",
   "Search": "Search",
   "SearchBlock": "Search block",

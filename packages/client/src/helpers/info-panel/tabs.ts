@@ -66,6 +66,11 @@ export type TGetAvailableInfoPanelTabsParams = {
   infoPanelItemsList: TPluginItem[];
   /** The id of the agent whose page (its chat) is open: that agent gets the Content tab. */
   aiChatProjectId?: number | null;
+  /**
+   * A template of the Agents list's Templates tab is selected: the panel
+   * shows it instead of the selection, which is the list's own folder there.
+   */
+  isAiTemplate?: boolean;
 };
 
 export type TInfoPanelTabsResult = {
@@ -88,11 +93,19 @@ export function getAvailableInfoPanelTabs({
   enablePlugins,
   infoPanelItemsList,
   aiChatProjectId,
+  isAiTemplate,
 }: TGetAvailableInfoPanelTabsParams): TInfoPanelTabsResult {
   const detailsOnly: TInfoPanelTabsResult = {
     tabs: [InfoPanelView.infoDetails],
     useRoomsView: false,
   };
+
+  // A template of an agent: what it is and what it brings, as an agent has.
+  if (isAiTemplate)
+    return {
+      tabs: [InfoPanelView.infoDetails, InfoPanelView.infoContext],
+      useRoomsView: true,
+    };
 
   if (!selection || Array.isArray(selection)) return detailsOnly;
 

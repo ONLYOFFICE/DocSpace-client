@@ -37,6 +37,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
+import classNames from "classnames";
 
 import { ReactSVG } from "react-svg";
 
@@ -61,11 +62,13 @@ import {
   getAiWorkspaceListType,
   getAiWorkspaceTitle,
 } from "SRC_DIR/helpers/aiWorkspace";
+import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import ProjectLogo from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 import AiCategoryTabs from "SRC_DIR/components/AiCategoryTabs";
 
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/verified.react.svg?url";
@@ -165,9 +168,10 @@ export const getInstallLabel = (
 
 /**
  * The Templates tab of the AI Chat section's lists: the shipped templates of
- * the list's kind as cards, each installed into the portal by its button or
- * its menu. Installing an agent brings the skill sets and knowledge bases it
- * is linked to; the list is then shown again, with the new room in it. Only
+ * the list's kind as cards, each installed into the portal by its button.
+ * Installing an agent brings the skill sets and knowledge bases it is linked
+ * to; the list is then shown again, with the new room in it. A card is
+ * selected by a click, and the Info panel shows the selected template. Only
  * those who may create an agent are offered to install one.
  */
 const AiTemplatesCatalog = () => {
@@ -180,13 +184,15 @@ const AiTemplatesCatalog = () => {
   const canInstall = useCanInstallAiTemplates();
   const install = useInstallAiTemplate();
 
-  const { catalog, failed, isInstalling } = aiTemplatesStore;
+  const { catalog, failed, selectedId, isInstalling } = aiTemplatesStore;
 
   const [search, setSearch] = React.useState("");
   const [category, setCategory] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     void aiTemplatesStore.fetchCatalog();
+    // A template stays selected while the tab is shown.
+    return () => aiTemplatesStore.select(null);
   }, [aiTemplatesStore]);
 
   const listType = getAiWorkspaceListType(location.search);
@@ -215,6 +221,13 @@ const AiTemplatesCatalog = () => {
   const activeCategory =
     category !== null && categories.includes(category) ? category : null;
   const shown = filterTemplates(listTemplates, search, activeCategory);
+
+  // A template the search or the category hides is no longer selected.
+  const isSelectionHidden =
+    selectedId !== null && !shown.some(({ id }) => id === selectedId);
+  React.useEffect(() => {
+    if (isSelectionHidden) aiTemplatesStore.select(null);
+  }, [isSelectionHidden, aiTemplatesStore]);
 
   if (failed)
     return (
@@ -261,10 +274,27 @@ const AiTemplatesCatalog = () => {
           },
         ]
       : []),
+    {
+      key: "info",
+      label: t("Common:Info"),
+      icon: InfoOutlineReactSvgUrl,
+      onClick: () => {
+        aiTemplatesStore.select(template.id);
+        showInfoPanel();
+      },
+    },
   ];
 
   const card = (template: TAiTemplate) => (
-    <div key={template.id} className={styles.card} data-testid="ai-template-card">
+    <div
+      key={template.id}
+      className={classNames(styles.card, {
+        [styles.selected]: selectedId === template.id,
+      })}
+      onClick={() => aiTemplatesStore.select(template.id)}
+      data-selected={selectedId === template.id}
+      data-testid="ai-template-card"
+    >
       <div className={styles.head}>
         <ProjectLogo
           project={{
@@ -305,13 +335,11 @@ const AiTemplatesCatalog = () => {
               dataTestId="ai-template-install"
             />
           ) : null}
-          {canInstall ? (
-            <ContextMenuButton
-              getData={() => getMenu(template)}
-              directionX="right"
-              testId="ai-template-menu"
-            />
-          ) : null}
+          <ContextMenuButton
+            getData={() => getMenu(template)}
+            directionX="right"
+            testId="ai-template-menu"
+          />
         </div>
       </div>
       <div className={styles.details}>
@@ -364,7 +392,15 @@ const AiTemplatesCatalog = () => {
           {t("Common:NotFoundTitle")}
         </Text>
       ) : (
-        <div className={styles.catalog}>{shown.map(card)}</div>
+        <div
+          className={styles.catalog}
+          // A click between the cards selects none of them.
+          onClick={(e) => {
+            if (e.target === e.currentTarget) aiTemplatesStore.select(null);
+          }}
+        >
+          {shown.map(card)}
+        </div>
       )}
     </div>
   );

@@ -98,6 +98,26 @@ describe("getAvailableInfoPanelTabs", () => {
     ]);
     expect(agentTabs(agent, 8)).not.toContain(InfoPanelView.infoContent);
   });
+
+  it("A template of the Templates tab has Details and Context, whatever else is selected", () => {
+    const templateTabs = (selection: object | null) =>
+      getAvailableInfoPanelTabs({
+        selection: selection as never,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder: false,
+        enablePlugins: true,
+        infoPanelItemsList: [],
+        isAiTemplate: true,
+      });
+    const expected = {
+      tabs: [InfoPanelView.infoDetails, InfoPanelView.infoContext],
+      useRoomsView: true,
+    };
+    // The list's own folder is the selection on the Templates tab.
+    expect(templateTabs({ id: 1, isFolder: true, rootFolderType: FolderType.AiHub })).toEqual(expected);
+    expect(templateTabs(null)).toEqual(expected);
+  });
 });
 
 const TAB = "info_plugin-qr";

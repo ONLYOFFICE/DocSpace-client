@@ -64,6 +64,7 @@ const InfoPanelHeaderGeneral = ({
   isRecentFolder,
   isPrivacyFolder,
   aiChatProjectId,
+  isAiTemplate,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -82,13 +83,15 @@ const InfoPanelHeaderGeneral = ({
   const external =
     selection && "external" in selection ? selection.external : false;
 
+  // A selected template has tabs of its own over the list's folder.
   const withTabs =
-    !isRoot &&
-    !Array.isArray(selection) &&
-    !isContacts &&
-    !isTrash &&
-    !isLockedSharedRoom(selection as TRoom) &&
-    !(external && isLinkExpired);
+    !!isAiTemplate ||
+    (!isRoot &&
+      !Array.isArray(selection) &&
+      !isContacts &&
+      !isTrash &&
+      !isLockedSharedRoom(selection as TRoom) &&
+      !(external && isLinkExpired));
 
   const isTemplate =
     selection &&
@@ -107,6 +110,7 @@ const InfoPanelHeaderGeneral = ({
     aiChatProjectId,
     enablePlugins,
     infoPanelItemsList,
+    isAiTemplate,
   });
 
   const rawView = useRoomsView ? roomsView : fileView;

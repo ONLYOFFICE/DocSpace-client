@@ -16,6 +16,7 @@ const filesStore = vi.hoisted(() => ({ fetchRooms: vi.fn(async () => {}) }));
 const setDocumentTitle = vi.hoisted(() => vi.fn());
 const user = vi.hoisted(() => ({ id: "user", isAdmin: true }));
 const stores = vi.hoisted(() => ({ templates: null as unknown }));
+const showInfoPanel = vi.hoisted(() => vi.fn());
 
 vi.mock("@docspace/shared/api/ai/templates", () => api);
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
@@ -28,6 +29,7 @@ vi.mock("SRC_DIR/store/useStore", () => ({
       filesStore,
     })[name] ?? { user },
 }));
+vi.mock("SRC_DIR/helpers/info-panel", () => ({ showInfoPanel }));
 // The menu's items as plain buttons, built as the menu opens.
 vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
   ContextMenuButton: ({
@@ -117,10 +119,13 @@ beforeEach(() => {
   filesStore.fetchRooms.mockClear();
   setDocumentTitle.mockClear();
   treeFoldersStore.isAiHubFolder = true;
+  showInfoPanel.mockReset();
   location.search = "";
   user.isAdmin = true;
   stores.templates = new AiTemplatesStore();
 });
+
+const templatesStore = () => stores.templates as AiTemplatesStore;
 
 describe("AiTemplatesCatalog", () => {
   it("shows the agents with the skill sets and knowledge bases they bring", async () => {
@@ -233,7 +238,8 @@ describe("AiTemplatesCatalog", () => {
     render(<AiTemplatesCatalog />);
     await cards();
     expect(screen.queryByTestId("ai-template-install")).toBeNull();
-    expect(screen.queryByTestId("ai-template-menu")).toBeNull();
+    expect(screen.queryByTestId("ai-template-menu-install")).toBeNull();
+    expect(screen.getByTestId("ai-template-menu-info")).toBeTruthy();
   });
 
   it("adds an agent template to the user's agents from the card's menu", async () => {
@@ -245,6 +251,42 @@ describe("AiTemplatesCatalog", () => {
     fireEvent.click(item);
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(api.installAiTemplate).toHaveBeenCalledWith("agents/document/reviewer");
+  });
+
+  it("selects a card by a click and none by a click between the cards", async () => {
+    render(<AiTemplatesCatalog />);
+    const [card] = await cards();
+    fireEvent.click(card);
+    expect(templatesStore().selected?.id).toBe("agents/document/reviewer");
+    expect(card.getAttribute("data-selected")).toBe("true");
+
+    fireEvent.click(card.parentElement as HTMLElement);
+    expect(templatesStore().selected).toBeNull();
+  });
+
+  it("opens the Info panel on the template from the card's menu", async () => {
+    render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-menu-info"));
+    expect(templatesStore().selectedId).toBe("agents/document/reviewer");
+    expect(showInfoPanel).toHaveBeenCalledTimes(1);
+  });
+
+  it("drops the selection when the search hides the template and when the tab closes", async () => {
+    const { unmount } = render(<AiTemplatesCatalog />);
+    const [card] = await cards();
+    fireEvent.click(card);
+    fireEvent.change(screen.getByRole("textbox") as HTMLInputElement, {
+      target: { value: "nothing like it" },
+    });
+    // The search reports its text a second after the typing stops.
+    await waitFor(() => expect(templatesStore().selectedId).toBeNull(), {
+      timeout: 2500,
+    });
+
+    templatesStore().select("agents/document/reviewer");
+    unmount();
+    expect(templatesStore().selectedId).toBeNull();
   });
 });
 

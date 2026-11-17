@@ -69,10 +69,17 @@
   padding: 16px;
   border: 1px solid var(--files-section-table-view-row-border-color);
   border-radius: 12px;
+  cursor: pointer;
 
   &:hover,
   &:focus-within {
     border-color: var(--accent-main);
+  }
+
+  // The template the Info panel shows, as a selected tile of the lists.
+  &.selected {
+    border-color: var(--accent-main);
+    background-color: var(--row-background-color);
   }
 }
 

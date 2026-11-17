@@ -61,6 +61,7 @@ const InfoPanelHeaderContent = ({
     isRecentFolder,
     isPrivacyFolder,
     aiChatProjectId,
+    isAiTemplate,
   } = restProps as Exclude<InfoPanelHeaderContentProps, { isGallery: true }>;
 
   return (
@@ -76,6 +77,7 @@ const InfoPanelHeaderContent = ({
       isRecentFolder={isRecentFolder}
       isPrivacyFolder={isPrivacyFolder}
       aiChatProjectId={aiChatProjectId}
+      isAiTemplate={isAiTemplate}
     />
   );
 };
@@ -87,6 +89,7 @@ export default inject(
     pluginStore,
     treeFoldersStore,
     aiProjectsStore,
+    aiTemplatesStore,
   }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
@@ -121,6 +124,7 @@ export default inject(
       isRecentFolder,
       isPrivacyFolder,
       aiChatProjectId: aiProjectsStore.activeProject?.id ?? null,
+      isAiTemplate: !!aiTemplatesStore.selected,
     };
   },
 )(observer(InfoPanelHeaderContent));

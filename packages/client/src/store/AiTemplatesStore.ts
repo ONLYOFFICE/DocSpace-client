@@ -45,14 +45,18 @@ import {
 
 /**
  * The Templates tab of the Agents list: the catalog of templates the AI
- * service ships and the one being installed. A card installs from its button
- * and from its menu, so both read here whether an installation is under way.
+ * service ships, the template selected on it, which the Info panel shows,
+ * and the one being installed. The card and the Info panel both install, so
+ * both read here whether an installation is under way.
  */
 class AiTemplatesStore {
   catalog: TAiTemplateCatalog | null = null;
 
   /** The catalog could not be read and none was read before. */
   failed = false;
+
+  /** The id of the template selected for the Info panel. */
+  selectedId: string | null = null;
 
   /** The id of the template being installed. */
   installingId: string | null = null;
@@ -77,6 +81,21 @@ class AiTemplatesStore {
         this.failed = !this.catalog;
       });
     }
+  };
+
+  /** The selected template, while the catalog holds it. */
+  get selected(): TAiTemplate | null {
+    if (!this.catalog || this.selectedId === null) return null;
+    const { agents, skillSets, knowledgeBases } = this.catalog;
+    return (
+      [...agents, ...skillSets, ...knowledgeBases].find(
+        ({ id }) => id === this.selectedId,
+      ) ?? null
+    );
+  }
+
+  select = (id: string | null) => {
+    this.selectedId = id;
   };
 
   get isInstalling() {

@@ -55,6 +55,7 @@ import Users from "./views/Users";
 import Groups from "./views/Groups";
 
 import FilesView from "./views/FilesView";
+import AiTemplate from "./views/AiTemplate";
 
 import commonStyles from "./helpers/Common.module.scss";
 
@@ -74,6 +75,7 @@ const InfoPanelBodyGeneral = ({
   isRecentFolder,
   isPrivacyFolder,
   aiChatProjectId,
+  isAiTemplate,
 
   maxImageUploadSize,
 
@@ -128,6 +130,7 @@ const InfoPanelBodyGeneral = ({
         aiChatProjectId,
         enablePlugins,
         infoPanelItemsList,
+        isAiTemplate,
       }),
     [
       selection,
@@ -137,6 +140,7 @@ const InfoPanelBodyGeneral = ({
       aiChatProjectId,
       enablePlugins,
       infoPanelItemsList,
+      isAiTemplate,
     ],
   );
 
@@ -167,6 +171,9 @@ const InfoPanelBodyGeneral = ({
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
 
     if (isGroups) return <Groups />;
+
+    // A template of the Templates tab, selected over the list's folder.
+    if (isAiTemplate) return <AiTemplate view={deferredCurrentView} />;
 
     if (isSeveralItems || Array.isArray(selection))
       return <SeveralItems selectedItems={selection} />;

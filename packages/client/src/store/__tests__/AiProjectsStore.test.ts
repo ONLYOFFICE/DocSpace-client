@@ -418,7 +418,7 @@ describe("AiProjectsStore", () => {
       const store = createStore();
 
       await store.openEditDialogById(5);
-      expect(api.getAiProject).toHaveBeenCalledWith(5);
+      expect(api.getAiProject).toHaveBeenCalledWith(5, { requireModel: true });
       expect(store.projectDialog).toEqual({ mode: "edit", project: project(5) });
 
       await store.openProject(project(1));
@@ -429,6 +429,34 @@ describe("AiProjectsStore", () => {
       api.getAiProject.mockRejectedValueOnce(new Error("no"));
       await store.openEditDialogById(7);
       expect(toastr.error).toHaveBeenCalledWith("no");
+    });
+
+    it("reads a project whose model could not be read before the form opens on it", async () => {
+      const unread = project(1, "Project 1", {
+        aiProject: { ...project(1).aiProject, profile: null, modelUnread: true },
+      });
+      api.getAiProject.mockResolvedValueOnce(project(1));
+      const store = createStore();
+
+      store.openEditDialog(unread);
+      expect(store.projectDialog).toBeNull();
+      await vi.waitFor(() => expect(store.projectDialog).toEqual({ mode: "edit", project: project(1) }));
+      expect(api.getAiProject).toHaveBeenCalledWith(1, { requireModel: true });
+    });
+
+    it("opens no form when the model still cannot be read", async () => {
+      const unread = project(1, "Project 1", {
+        aiProject: { ...project(1).aiProject, profile: null, modelUnread: true },
+      });
+      const store = createStore();
+      await store.openProject(unread);
+      api.getAiProject.mockRejectedValueOnce(new Error("model refused"));
+
+      await store.openEditDialogById(1);
+
+      expect(api.getAiProject).toHaveBeenCalledWith(1, { requireModel: true });
+      expect(toastr.error).toHaveBeenCalledWith("model refused");
+      expect(store.projectDialog).toBeNull();
     });
 
     it("keeps the edit form on the project as the server has it after a save", async () => {

@@ -367,7 +367,48 @@ describe("the calls", () => {
       "GET /files/rooms/7": folder({ aiProject: undefined }),
       "GET /files/rooms/7/sources": sources(),
     });
-    expect((await getAiProject(7)).aiProject.profile).toBeNull();
+    const unread = await getAiProject(7);
+    expect(unread.aiProject.profile).toBeNull();
+    // Told apart from a project without a model of its own.
+    expect(unread.aiProject.modelUnread).toBe(true);
+  });
+
+  it("fails the read the project form opens on when the model cannot be read", async () => {
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    await expect(getAiProject(7, { requireModel: true })).rejects.toThrow("unexpected GET /files/rooms/7/model");
+
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/model": { profileId: null },
+    });
+    const project = await getAiProject(7, { requireModel: true });
+    expect(project.aiProject.profile).toBeNull();
+    expect(project.aiProject.modelUnread).toBeUndefined();
+  });
+
+  it("keeps an unread model unread through a save that leaves the model, and drops the mark once read", async () => {
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    const opened = await getAiProject(7);
+
+    request.mockClear();
+    const saved = await updateAiProject(7, { aiProject: { instructionsRoomIds: [] } }, opened);
+    expect(saved.aiProject.modelUnread).toBe(true);
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7/model" }));
+
+    route({
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/model": { profileId: "p1" },
+    });
+    const refreshed = await refreshAiProjectSettings(opened);
+    expect(refreshed.aiProject.profile).toEqual(PROFILE);
+    expect(refreshed.aiProject.modelUnread).toBeUndefined();
   });
 
   it("re-reads only the model and sources of an open project, keeping it when nothing changed", async () => {

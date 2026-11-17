@@ -90,6 +90,10 @@ export const errorMessage = (e: unknown): string => {
   return String(e);
 };
 
+/** The project form can open on the project as it is: its settings and its model were read. */
+const canOpenInForm = (project: TAiProject) =>
+  !project.aiProject.partial && !project.aiProject.modelUnread;
+
 /** The non-fatal problems the server reports on a changed project (a skipped Viewer grant, ...). */
 const showWarnings = (project: TAiProject) => {
   project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
@@ -557,21 +561,32 @@ class AiProjectsStore {
 
   openCreateDialog = () => (this.projectDialog = { mode: "create" });
 
-  openEditDialog = (project: TAiProject) =>
-    (this.projectDialog = { mode: "edit", project });
+  /**
+   * Opens the form on a project. The form saves the model it shows, so a
+   * project read without its settings, or whose model could not be read, is
+   * read again first (`openEditDialogById`).
+   */
+  openEditDialog = (project: TAiProject) => {
+    if (!canOpenInForm(project)) {
+      void this.openEditDialogById(project.id);
+      return;
+    }
+    this.projectDialog = { mode: "edit", project };
+  };
 
   /**
    * "Edit" on a project room of the Files list: the room comes without its
    * `aiProject` block, so the project is read first and the form opens on
-   * the model and the rooms the server has.
+   * the model and the rooms the server has. A model that cannot be read
+   * opens no form: it would show none and could be saved over.
    */
   openEditDialogById = async (id: number) => {
-    if (this.activeProject?.id === id && !this.activeProject.aiProject.partial) {
+    if (this.activeProject?.id === id && canOpenInForm(this.activeProject)) {
       this.openEditDialog(this.activeProject);
       return;
     }
     try {
-      const project = await getAiProject(id);
+      const project = await getAiProject(id, { requireModel: true });
       runInAction(() => this.openEditDialog(project));
     } catch (e) {
       toastr.error(errorMessage(e));

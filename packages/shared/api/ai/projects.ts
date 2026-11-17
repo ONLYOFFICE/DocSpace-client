@@ -176,6 +176,12 @@ export type TAiProjectSettings = {
    * unknown until the project is read on its own.
    */
   partial?: true;
+  /**
+   * The model could not be read: `profile` is `null` for want of an answer,
+   * not because the project has no model of its own. The chat runs on as
+   * the server decides; the project form must not save over the real model.
+   */
+  modelUnread?: true;
 };
 
 /** The room security flags a project reads, plus `Leave`, which the client derives. */
@@ -725,18 +731,36 @@ export const deleteAiProjectLogo = async (id: number) => {
   return toAiProject(res as TAiProjectRoomDto);
 };
 
-export const getAiProject = async (id: number) => {
+/** The project with its `modelUnread` mark set or dropped. */
+const withModelUnread = (project: TAiProject, unread: boolean): TAiProject => {
+  const { modelUnread: _, ...aiProject } = project.aiProject;
+  return { ...project, aiProject: unread ? { ...aiProject, modelUnread: true } : aiProject };
+};
+
+/**
+ * Reads a project in full. A model that cannot be read leaves the project
+ * without one, marked `modelUnread`; with `requireModel` (the project form,
+ * which saves the model it shows) the read fails instead.
+ */
+export const getAiProject = async (id: number, options?: { requireModel?: boolean }) => {
+  let modelUnread = false;
   const [room, sources, profile, instructions, suggestions] = await Promise.all([
     request({ method: "GET", url: `${roomsUrl}/${id}` }),
     getSources(id),
-    // A model that cannot be read leaves the project on the portal default.
-    getModel(id).catch(() => null),
+    options?.requireModel
+      ? getModel(id)
+      : getModel(id).catch(() => {
+          modelUnread = true;
+          return null;
+        }),
     // Instructions or suggestions that cannot be read leave the chat without them.
     getAiProjectInstructions(id).catch(() => ""),
     getAiProjectSuggestions(id).catch(() => []),
   ]);
-  return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, { instructions, suggestions }));
+  const project = toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, { instructions, suggestions }));
+  return modelUnread ? withModelUnread(project, true) : project;
 };
+
 
 /** What a project's tile in the list says about it: its model and the names of its linked rooms. */
 export type TAiProjectSummary = {
@@ -801,9 +825,16 @@ export const refreshAiProjectSettings = async (project: TAiProject): Promise<TAi
   const known = project.aiProject.profile;
   const knownInstructions = project.aiProject.instructions;
   const knownSuggestions = project.aiProject.suggestions;
+  // A model still unread stays marked; one read now drops the mark.
+  let modelUnread = !!project.aiProject.modelUnread;
   const [sources, profile, instructions, readSuggestions] = await Promise.all([
     getSources(project.id),
-    getAiProjectModel(project.id, known).catch(() => known),
+    getAiProjectModel(project.id, known)
+      .then((read) => {
+        modelUnread = false;
+        return read;
+      })
+      .catch(() => known),
     getAiProjectInstructions(project.id).catch(() => knownInstructions),
     getAiProjectSuggestions(project.id).catch(() => knownSuggestions),
   ]);
@@ -815,16 +846,20 @@ export const refreshAiProjectSettings = async (project: TAiProject): Promise<TAi
   const ids = (rooms: TAiProjectSource[]) => rooms.map(({ id, title }) => `${id}:${title}`).join(",");
   if (
     profile === known &&
+    modelUnread === !!project.aiProject.modelUnread &&
     instructions === knownInstructions &&
     suggestions === knownSuggestions &&
     ids(instructionsRooms) === ids(project.aiProject.instructionsRooms) &&
     ids(knowledgeRooms) === ids(project.aiProject.knowledgeRooms)
   )
     return project;
-  return {
-    ...project,
-    aiProject: { ...project.aiProject, profile, instructions, suggestions, instructionsRooms, knowledgeRooms },
-  };
+  return withModelUnread(
+    {
+      ...project,
+      aiProject: { ...project.aiProject, profile, instructions, suggestions, instructionsRooms, knowledgeRooms },
+    },
+    modelUnread,
+  );
 };
 
 export const createAiProject = async (data: TAiProjectRequest) => {
@@ -909,10 +944,13 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
   const { warnings, removed, added } = await syncSources(id, data.aiProject, linked);
   const sources = await syncedSources(id, linked, removed, added, data.aiProject?.rooms);
   const profileId = data.aiProject?.profileId;
-  const model =
-    current && (profileId === undefined || profileId === (current.aiProject.profile?.id ?? null))
-      ? { profile: current.aiProject.profile, warnings: [] as TAiProjectWarning[] }
-      : await saveModel(id, profileId);
+  const keepModel =
+    !!current && (profileId === undefined || profileId === (current.aiProject.profile?.id ?? null));
+  const model = keepModel
+    ? { profile: current.aiProject.profile, warnings: [] as TAiProjectWarning[] }
+    : await saveModel(id, profileId);
+  // A model kept from a project whose model could not be read is still unknown.
+  const modelUnread = keepModel && !!current?.aiProject.modelUnread;
   // The instructions are written only when the form changed them; without
   // the opened project they are read back.
   const text = data.aiProject?.instructions;
@@ -946,9 +984,12 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
         allWarnings,
       ),
     );
-    return { ...current, aiProject };
+    return withModelUnread({ ...current, aiProject }, modelUnread);
   }
-  return toAiProject(withSources(room as TAiProjectRoomDto, sources, model.profile, chat, allWarnings));
+  return withModelUnread(
+    toAiProject(withSources(room as TAiProjectRoomDto, sources, model.profile, chat, allWarnings)),
+    modelUnread,
+  );
 };
 
 /** Starts the delete; the answer is the file operation to follow. */

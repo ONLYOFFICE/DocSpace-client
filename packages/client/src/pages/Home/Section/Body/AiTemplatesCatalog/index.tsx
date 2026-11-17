@@ -39,7 +39,6 @@ import { useLocation, useNavigate } from "react-router";
 
 import { ReactSVG } from "react-svg";
 
-import { SelectedItem } from "@onlyoffice/apps-ui-kit/components/selected-item";
 import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
@@ -65,6 +64,7 @@ import {
 } from "SRC_DIR/helpers/aiWorkspace";
 
 import ProjectLogo from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
+import AiCategoryTabs from "SRC_DIR/components/AiCategoryTabs";
 
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
@@ -270,21 +270,6 @@ const AiTemplatesCatalog = () => {
     category !== null && categories.includes(category) ? category : null;
   const shown = filterTemplates(listTemplates, search, activeCategory);
 
-  const tab = (value: string | null, label: string) => (
-    <SelectedItem
-      key={value ?? "all"}
-      propKey={value ?? "all"}
-      label={label}
-      onClick={() => setCategory(value)}
-      onClose={() => {}}
-      hideCross
-      clickable
-      isActive={activeCategory === value}
-      className={styles.tab}
-      dataTestId="ai-templates-category"
-    />
-  );
-
   const card = (template: TAiTemplate) => (
         <div
           key={template.id}
@@ -366,10 +351,14 @@ const AiTemplatesCatalog = () => {
         onChange={setSearch}
         onClearSearch={() => setSearch("")}
       />
-      <div className={styles.tabs} data-testid="ai-templates-categories">
-        {tab(null, t("Common:All"))}
-        {categories.map((value) => tab(value, value))}
-      </div>
+      <AiCategoryTabs
+        categories={categories}
+        selected={activeCategory}
+        onSelect={setCategory}
+        ariaLabel={t("Common:Category")}
+        dataTestId="ai-templates-categories"
+        itemTestId="ai-templates-category"
+      />
       {shown.length === 0 ? (
         <Text className={styles.message} data-testid="ai-templates-empty">
           {t("Common:NotFoundTitle")}

@@ -47,34 +47,6 @@
   flex: 0 0 auto;
 }
 
-// The row of categories, as the room groups under the rooms filter.
-.tabs {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-.tab {
-  box-sizing: border-box;
-  height: 34px;
-  margin: 0;
-  padding: 7px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  user-select: none;
-
-  // The chip sets no cursor of its own, and its label would show the text one.
-  * {
-    cursor: pointer;
-  }
-
-  :global(.selected-item_label) {
-    margin-inline-end: 0;
-    font-weight: 600;
-  }
-}
-
 .catalog {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

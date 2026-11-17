@@ -2030,6 +2030,72 @@ test.describe("Private section — key state indicator", () => {
     await expect(page.locator(".title-block-text")).toBeVisible();
   });
 
+  // WCAG 2.x contrast of two computed CSS colours ("rgb(r, g, b)").
+  const contrastOf = (a: string, b: string) => {
+    const luminance = (css: string) => {
+      const [r, g, bl] = (css.match(/[\d.]+/g) ?? [])
+        .slice(0, 3)
+        .map((c) => Number(c) / 255)
+        .map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+      return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+    };
+    const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return (light + 0.05) / (dark + 0.05);
+  };
+
+  const pillColours = (page: Page) =>
+    indicator(page).evaluate((element) => {
+      const style = getComputedStyle(element);
+      const path = element.querySelector("svg path");
+      const iconStyle = path ? getComputedStyle(path) : null;
+      return {
+        pill: style.backgroundColor,
+        text: style.color,
+        icon: iconStyle
+          ? iconStyle.fill !== "none"
+            ? iconStyle.fill
+            : iconStyle.stroke
+          : "",
+      };
+    });
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`Readable in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      await page.emulateMedia({ colorScheme });
+      await openRoomWithKey(page, mockRequest, baseUrl);
+
+      const unlocked = await pillColours(page);
+      await indicator(page).click();
+      await keyPopover(page).getByRole("button", { name: "Lock now" }).click();
+      await expect(indicator(page)).toHaveText("Key locked");
+      // The pointer still rests on the pill: read it without its hover tint.
+      await page.mouse.move(0, 0);
+      await expect
+        .poll(async () => (await pillColours(page)).pill)
+        .not.toBe(unlocked.pill);
+      const locked = await pillColours(page);
+
+      for (const [state, colours] of [
+        ["unlocked", unlocked],
+        ["locked", locked],
+      ] as const) {
+        expect(
+          contrastOf(colours.text, colours.pill),
+          `${state} text: ${colours.text} on ${colours.pill}`,
+        ).toBeGreaterThanOrEqual(4.5);
+        expect(
+          contrastOf(colours.icon, colours.pill),
+          `${state} icon: ${colours.icon} on ${colours.pill}`,
+        ).toBeGreaterThanOrEqual(3);
+      }
+    });
+  }
+
   test("Preset picked in the popover", async ({ page, mockRequest, baseUrl }) => {
     test.slow();
     await openRoomWithKey(page, mockRequest, baseUrl);

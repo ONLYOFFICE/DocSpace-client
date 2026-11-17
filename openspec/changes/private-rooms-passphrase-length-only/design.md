@@ -96,3 +96,30 @@ archived first.
 - Screenshots of the rules tooltip taken by `private-rooms-release-ux-fixes`
   task 1.3 change. → Updated under Docker in the task that changes the
   rules.
+
+## Verification (task 4.1)
+
+Run on 2026-11-17 on `release/v4.1.0` at 5e992e0706e, with the kit pack
+built from `docspace-ui-kit-react` `release/v4.1.0` at e4a58800:
+
+- Client Playwright under Docker (`tests-dev`): the private-room specs
+  (`private-room-*.spec.ts`, `private-rooms-app-off.spec.ts`,
+  `private-rooms-section.spec.ts`), the keys-management specs
+  (`keys-management.spec.ts`, `keys-management-advanced.spec.ts`,
+  `key-flow-edge-cases.spec.ts`) and `encrypted-file-ui.spec.ts`: 204
+  passed, none failed.
+- SDK private suite (`__tests__/e2e/private`) on a build made with
+  `pnpm run test:build`: 36 passed, 14 skipped (the `fixme` cases of
+  `private-security.spec.ts`).
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` with 61
+  passed and 3 skipped, then `nx run-many -t tsc lint test` over the six
+  packages: all 21 tasks green, none from the cache.
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 22 passed.
+
+Two places went past the wording of the tasks. The passphrase field lives
+in `PassphraseCreationFields.tsx` since the key setup dialog, so it passes
+the generator settings, and the rules were reduced in
+`meetsPassphraseRules`, the helper the branch has in place of
+`checkPassphraseRules`. The creation dialogs also keep their confirm action
+off for a passphrase with a common pattern, as "Common pattern still
+refused" asks: the composition rules used to catch such a passphrase first.

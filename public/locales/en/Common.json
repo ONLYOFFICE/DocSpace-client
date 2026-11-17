@@ -209,7 +209,7 @@
   "AiRoomsAIOffTitle": "AI isn’t active yet",
   "AiRoomsAIOffUserDescription": "AI projects, Instructions rooms and Knowledge rooms will be available once the Full admin sets up AI.",
   "AiRoomsAIOffUserTitle": "AI isn’t available yet",
-  "AiRoomsCreateDescription": "An Instructions room with skills, a Knowledge room the chat searches or an AI project that brings them together",
+  "AiRoomsCreateDescription": "A skill set with skills, a knowledge base the chat searches or an agent that brings them together",
   "AiRoomsEmpty": "No AI rooms yet",
   "AiRoomsEmptyDescription": "Instructions rooms hold skills, Knowledge rooms hold the files the chat searches, and AI projects bring them together with a model and share that setup with the people you invite.",
   "AiRoomsEmptyUser": "No AI rooms shared with you yet",

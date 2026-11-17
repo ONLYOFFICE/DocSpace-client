@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Încărcați de pe dispozitivul dvs.",
   "PrivateRoomFolderDownloadNotSupported": "Descărcarea folderelor nu este acceptată în camerele private.",
   "PrivateRoomFolderEmptyDescription": "Creați fișiere sau foldere pentru a începe lucrul în folder",
-  "PrivateRoomKeyRequiredDescription": "Camerele private folosesc criptare end-to-end. Pentru a continua, aveți nevoie de o cheie de criptare. Doriți să creați una acum?",
-  "PrivateRoomKeyRequiredTitle": "Cheie de criptare necesară",
   "PrivateRoomMixedDownloadNotSupported": "Nu puteți descărca simultan fișiere criptate și necriptate.",
   "PrivateRoomNotFoundDescription": "Camera privată pe care o căutați nu există sau nu aveți acces.",
   "PrivateRoomNotFoundTitle": "Nu a fost găsit",

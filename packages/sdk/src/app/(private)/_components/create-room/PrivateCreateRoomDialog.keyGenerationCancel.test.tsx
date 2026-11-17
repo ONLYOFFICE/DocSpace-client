@@ -40,14 +40,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
 
-type TConfirmProps = {
-  visible: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
-};
-
 const mocks = vi.hoisted(() => ({
-  confirm: null as TConfirmProps | null,
   setup: null as Record<string, unknown> | null,
 }));
 
@@ -62,12 +55,6 @@ vi.mock("@docspace/shared/context/encryption", () => ({
 }));
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn() },
-}));
-vi.mock("@docspace/shared/dialogs/confirmation-modal", () => ({
-  ConfirmationModal: (props: TConfirmProps) => {
-    mocks.confirm = props;
-    return null;
-  },
 }));
 // The real key-generation flow runs; only its dialogs and crypto are stubbed.
 vi.mock("@docspace/shared/dialogs/key-generation/KeySetupDialog", () => ({
@@ -133,7 +120,6 @@ describe("PrivateCreateRoomDialog with the real key-generation flow", () => {
       root?.render(<PrivateCreateRoomDialog visible onClose={onClose} />),
     );
 
-    act(() => mocks.confirm!.onConfirm());
     expect(mocks.setup).not.toBeNull();
 
     act(() => {

@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Uploaden vanaf uw apparaat",
   "PrivateRoomFolderDownloadNotSupported": "Mapdownload wordt niet ondersteund in privéruimtes.",
   "PrivateRoomFolderEmptyDescription": "Begin te werken in de map door bestanden of mappen aan te maken",
-  "PrivateRoomKeyRequiredDescription": "Privékamers gebruiken end-to-end-versleuteling. Om door te gaan heeft u een versleutelingssleutel nodig. Wilt u er nu een aanmaken?",
-  "PrivateRoomKeyRequiredTitle": "Versleutelingssleutel vereist",
   "PrivateRoomMixedDownloadNotSupported": "U kunt niet tegelijkertijd versleutelde en niet-versleutelde bestanden downloaden.",
   "PrivateRoomNotFoundDescription": "De privékamer die u zoekt bestaat niet of u hebt er geen toegang tot.",
   "PrivateRoomNotFoundTitle": "Niet gevonden",

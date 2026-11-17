@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Von Ihrem Gerät hochladen",
   "PrivateRoomFolderDownloadNotSupported": "Der Ordner-Download wird in privaten Räumen nicht unterstützt.",
   "PrivateRoomFolderEmptyDescription": "Beginnen Sie Ihre Arbeit im Ordner, indem Sie Dateien oder Ordner anlegen",
-  "PrivateRoomKeyRequiredDescription": "Private Räume verwenden Ende-zu-Ende-Verschlüsselung. Um fortzufahren, benötigen Sie einen Verschlüsselungsschlüssel. Möchten Sie jetzt einen erstellen?",
-  "PrivateRoomKeyRequiredTitle": "Verschlüsselungsschlüssel erforderlich",
   "PrivateRoomMixedDownloadNotSupported": "Sie können verschlüsselte und unverschlüsselte Dateien nicht gleichzeitig herunterladen.",
   "PrivateRoomNotFoundDescription": "Der private Raum, den Sie suchen, existiert nicht, oder Sie haben keinen Zugriff darauf.",
   "PrivateRoomNotFoundTitle": "Nicht gefunden",

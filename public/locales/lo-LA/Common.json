@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "ອັບໂຫຼດຈາກອຸປະກອນຂອງທ່ານ",
   "PrivateRoomFolderDownloadNotSupported": "ບໍ່ຮອງຮັບການດາວໂຫຼດໂຟນເດີໃນຫ້ອງສ່ວນຕົວ.",
   "PrivateRoomFolderEmptyDescription": "ເລີ່ມຕົ້ນເຮັດວຽກຢູ່ໃນໂຟນເດີໂດຍການສ້າງໄຟລ໌ ຫຼືໂຟນເດີ",
-  "PrivateRoomKeyRequiredDescription": "ຫ້ອງສ່ວນຕົວໃຊ້ການເຂົ້າລະຫັດແບບປາຍຫາປາຍ. ເພື່ອດຳເນີນຕໍ່, ທ່ານຕ້ອງມີກະແຈເຂົ້າລະຫັດ. ທ່ານຕ້ອງການສ້າງມັນດຽວນີ້ບໍ?",
-  "PrivateRoomKeyRequiredTitle": "ຕ້ອງການກະແຈເຂົ້າລະຫັດ",
   "PrivateRoomMixedDownloadNotSupported": "ທ່ານບໍ່ສາມາດດາວໂຫຼດໄຟລ໌ທີ່ເຂົ້າລະຫັດ ແລະ ບໍ່ໄດ້ເຂົ້າລະຫັດໃນເວລາດຽວກັນ.",
   "PrivateRoomNotFoundDescription": "ຫ້ອງສ່ວນຕົວທີ່ທ່ານກຳລັງຊອກຫາບໍ່ມີຢູ່ ຫຼື ທ່ານບໍ່ມີສິດເຂົ້າຫາ.",
   "PrivateRoomNotFoundTitle": "ບໍ່ພົບ",

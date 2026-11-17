@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Отпреми са свог уређаја",
   "PrivateRoomFolderDownloadNotSupported": "Преузимање фасцикле није подржано у приватним собама.",
   "PrivateRoomFolderEmptyDescription": "Започните рад у фолдеру креирањем датотека или фолдера",
-  "PrivateRoomKeyRequiredDescription": "Приватне собе користе шифровање од краја до краја. Да бисте наставили, потребан вам је кључ за шифровање. Желите ли да га направите сада?",
-  "PrivateRoomKeyRequiredTitle": "Потребан је кључ за шифровање",
   "PrivateRoomMixedDownloadNotSupported": "Не можете истовремено да преузимате шифроване и нешифроване фајлове.",
   "PrivateRoomNotFoundDescription": "Приватна соба коју тражите не постоји или немате приступ.",
   "PrivateRoomNotFoundTitle": "Није пронађено",

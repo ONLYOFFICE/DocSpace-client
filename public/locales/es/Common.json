@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Subir desde su dispositivo",
   "PrivateRoomFolderDownloadNotSupported": "La descarga de carpetas no es compatible dentro de las salas privadas.",
   "PrivateRoomFolderEmptyDescription": "Empiece a trabajar en la carpeta creando archivos o carpetas",
-  "PrivateRoomKeyRequiredDescription": "Las salas privadas utilizan cifrado de extremo a extremo. Para continuar, necesita una clave de cifrado. ¿Desea crear una ahora?",
-  "PrivateRoomKeyRequiredTitle": "Se requiere una clave de cifrado",
   "PrivateRoomMixedDownloadNotSupported": "No puede descargar archivos cifrados y no cifrados al mismo tiempo.",
   "PrivateRoomNotFoundDescription": "La sala privada que busca no existe o usted no tiene acceso.",
   "PrivateRoomNotFoundTitle": "No encontrado",

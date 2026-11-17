@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Ngarko nga pajisja juaj",
   "PrivateRoomFolderDownloadNotSupported": "Shkarkimi i dosjeve nuk mbështetet brenda dhomave private.",
   "PrivateRoomFolderEmptyDescription": "Filloni të punoni në dosje duke krijuar skedarë ose dosje",
-  "PrivateRoomKeyRequiredDescription": "Dhomat private përdorin kriptim nga skaji në skaj. Për të vazhduar, ju nevojitet një çelës kriptimi. Dëshironi të krijoni një tani?",
-  "PrivateRoomKeyRequiredTitle": "Kërkohet çelësi i kriptimit",
   "PrivateRoomMixedDownloadNotSupported": "Nuk mund të shkarkoni njëkohësisht skedarë të enkriptuar dhe të paenkriptuar.",
   "PrivateRoomNotFoundDescription": "Dhoma private që kërkoni nuk ekziston ose nuk keni akses në të.",
   "PrivateRoomNotFoundTitle": "Nuk u gjet",

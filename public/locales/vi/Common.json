@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Tải lên từ thiết bị của bạn",
   "PrivateRoomFolderDownloadNotSupported": "Không hỗ trợ tải xuống thư mục trong phòng riêng tư.",
   "PrivateRoomFolderEmptyDescription": "Bắt đầu làm việc trong thư mục bằng cách tạo tập tin hoặc thư mục",
-  "PrivateRoomKeyRequiredDescription": "Các phòng riêng tư sử dụng mã hóa đầu cuối. Để tiếp tục, bạn cần có khóa mã hóa. Bạn có muốn tạo một khóa ngay bây giờ không?",
-  "PrivateRoomKeyRequiredTitle": "Cần khóa mã hóa",
   "PrivateRoomMixedDownloadNotSupported": "Bạn không thể tải xuống đồng thời các tệp được mã hóa và không được mã hóa.",
   "PrivateRoomNotFoundDescription": "Phòng riêng tư bạn đang tìm không tồn tại hoặc bạn không có quyền truy cập.",
   "PrivateRoomNotFoundTitle": "Không tìm thấy",

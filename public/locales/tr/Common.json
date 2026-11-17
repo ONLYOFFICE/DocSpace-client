@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Cihazınızdan yükle",
   "PrivateRoomFolderDownloadNotSupported": "Özel odalarda klasör indirme desteklenmez.",
   "PrivateRoomFolderEmptyDescription": "Dosya veya klasör oluşturarak klasörde çalışmaya başlayın",
-  "PrivateRoomKeyRequiredDescription": "Özel odalar uçtan uca şifreleme kullanır. Devam etmek için bir şifreleme anahtarı gereklidir. Şimdi bir tane oluşturmak ister misiniz?",
-  "PrivateRoomKeyRequiredTitle": "Şifreleme anahtarı gerekli",
   "PrivateRoomMixedDownloadNotSupported": "Şifreli ve şifresiz dosyaları aynı anda indiremezsiniz.",
   "PrivateRoomNotFoundDescription": "Aradığınız özel oda mevcut değil veya erişim izniniz yok.",
   "PrivateRoomNotFoundTitle": "Bulunamadı",

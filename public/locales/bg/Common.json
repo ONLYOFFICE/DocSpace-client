@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Качване от вашето устройство",
   "PrivateRoomFolderDownloadNotSupported": "Изтеглянето на папки не се поддържа в частни стаи.",
   "PrivateRoomFolderEmptyDescription": "Започнете да работите в папката, като създадете файлове или папки",
-  "PrivateRoomKeyRequiredDescription": "Частните стаи използват шифроване от край до край. За да продължите, ви е нужен ключ за шифроване. Искате ли да създадете такъв сега?",
-  "PrivateRoomKeyRequiredTitle": "Изисква се ключ за шифроване",
   "PrivateRoomMixedDownloadNotSupported": "Не можете да изтегляте шифровани и нешифровани файлове едновременно.",
   "PrivateRoomNotFoundDescription": "Частната стая, която търсите, не съществува или нямате достъп до нея.",
   "PrivateRoomNotFoundTitle": "Не е намерена",

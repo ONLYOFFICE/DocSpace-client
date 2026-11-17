@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Carica dal tuo dispositivo",
   "PrivateRoomFolderDownloadNotSupported": "Il download delle cartelle non è supportato nelle stanze private.",
   "PrivateRoomFolderEmptyDescription": "Inizia a lavorare nella cartella creando file o cartelle",
-  "PrivateRoomKeyRequiredDescription": "Le stanze private utilizzano la crittografia end-to-end. Per continuare, è necessaria una chiave di crittografia. Vuoi crearne una ora?",
-  "PrivateRoomKeyRequiredTitle": "Chiave di crittografia richiesta",
   "PrivateRoomMixedDownloadNotSupported": "Non è possibile scaricare contemporaneamente file crittografati e non crittografati.",
   "PrivateRoomNotFoundDescription": "La stanza privata che stai cercando non esiste o non hai accesso.",
   "PrivateRoomNotFoundTitle": "Non trovato",

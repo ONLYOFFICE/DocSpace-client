@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "デバイスからアップロード",
   "PrivateRoomFolderDownloadNotSupported": "プライベートルーム内ではフォルダーのダウンロードはサポートされていません。",
   "PrivateRoomFolderEmptyDescription": "ファイルやフォルダを作成して、フォルダで作業を開始する",
-  "PrivateRoomKeyRequiredDescription": "プライベートルームはエンドツーエンド暗号化を使用します。続行するには暗号化キーが必要です。今すぐ作成しますか？",
-  "PrivateRoomKeyRequiredTitle": "暗号化キーが必要です",
   "PrivateRoomMixedDownloadNotSupported": "暗号化されたファイルと暗号化されていないファイルを同時にダウンロードすることはできません。",
   "PrivateRoomNotFoundDescription": "お探しのプライベートルームは存在しないか、アクセス権がありません。",
   "PrivateRoomNotFoundTitle": "見つかりません",

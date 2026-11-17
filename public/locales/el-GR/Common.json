@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Μεταφόρτωση από τη συσκευή σας",
   "PrivateRoomFolderDownloadNotSupported": "Η λήψη φακέλων δεν υποστηρίζεται σε ιδιωτικά δωμάτια.",
   "PrivateRoomFolderEmptyDescription": "Ξεκινήστε να εργάζεστε στον φάκελο δημιουργώντας αρχεία ή φακέλους",
-  "PrivateRoomKeyRequiredDescription": "Τα ιδιωτικά δωμάτια χρησιμοποιούν κρυπτογράφηση από άκρο σε άκρο. Για να συνεχίσετε, χρειάζεστε ένα κλειδί κρυπτογράφησης. Θέλετε να δημιουργήσετε ένα τώρα;",
-  "PrivateRoomKeyRequiredTitle": "Απαιτείται κλειδί κρυπτογράφησης",
   "PrivateRoomMixedDownloadNotSupported": "Δεν μπορείτε να κάνετε λήψη κρυπτογραφημένων και μη κρυπτογραφημένων αρχείων ταυτόχρονα.",
   "PrivateRoomNotFoundDescription": "Το ιδιωτικό δωμάτιο που αναζητάτε δεν υπάρχει ή δεν έχετε πρόσβαση σε αυτό.",
   "PrivateRoomNotFoundTitle": "Δεν βρέθηκε",

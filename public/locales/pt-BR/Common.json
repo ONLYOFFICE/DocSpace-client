@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Enviar do seu dispositivo",
   "PrivateRoomFolderDownloadNotSupported": "O download de pastas não é compatível dentro de salas privadas.",
   "PrivateRoomFolderEmptyDescription": "Comece a trabalhar na pasta criando arquivos ou pastas",
-  "PrivateRoomKeyRequiredDescription": "As salas privadas usam criptografia de ponta a ponta. Para continuar, você precisa de uma chave de criptografia. Deseja criar uma agora?",
-  "PrivateRoomKeyRequiredTitle": "Chave de criptografia necessária",
   "PrivateRoomMixedDownloadNotSupported": "Você não pode baixar arquivos criptografados e não criptografados ao mesmo tempo.",
   "PrivateRoomNotFoundDescription": "A sala privada que você está procurando não existe ou você não tem acesso.",
   "PrivateRoomNotFoundTitle": "Não encontrado",

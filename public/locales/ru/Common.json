@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Загрузить с вашего устройства",
   "PrivateRoomFolderDownloadNotSupported": "Скачивание папок не поддерживается в приватных комнатах.",
   "PrivateRoomFolderEmptyDescription": "Начните работать в папке, создавая файлы или папки",
-  "PrivateRoomKeyRequiredDescription": "Приватные комнаты используют сквозное шифрование. Чтобы продолжить, вам нужен ключ шифрования. Создать его сейчас?",
-  "PrivateRoomKeyRequiredTitle": "Требуется ключ шифрования",
   "PrivateRoomMixedDownloadNotSupported": "Нельзя одновременно скачивать зашифрованные и незашифрованные файлы.",
   "PrivateRoomNotFoundDescription": "Приватная комната, которую вы ищете, не существует, или у вас нет доступа.",
   "PrivateRoomNotFoundTitle": "Не найдено",

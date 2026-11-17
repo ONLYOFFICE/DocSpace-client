@@ -102,7 +102,7 @@ export function useGenerateKeyFlow({
     setMnemonic(null);
   }, []);
 
-  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  // Spec: room-membership, "Starting private room creation without a key opens key setup"
   const cancel = useCallback(() => {
     reset();
     onCancel?.();

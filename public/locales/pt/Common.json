@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Carregar do seu dispositivo",
   "PrivateRoomFolderDownloadNotSupported": "A transferência de pastas não é suportada em salas privadas.",
   "PrivateRoomFolderEmptyDescription": "Comece a trabalhar na pasta criando ficheiros ou pastas",
-  "PrivateRoomKeyRequiredDescription": "As salas privadas usam encriptação de ponta a ponta. Para continuar, precisa de uma chave de encriptação. Deseja criar uma agora?",
-  "PrivateRoomKeyRequiredTitle": "Chave de encriptação necessária",
   "PrivateRoomMixedDownloadNotSupported": "Não pode transferir ficheiros encriptados e não encriptados ao mesmo tempo.",
   "PrivateRoomNotFoundDescription": "A sala privada que procura não existe ou não tem acesso a ela.",
   "PrivateRoomNotFoundTitle": "Não encontrada",

@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Nahrát ze zařízení",
   "PrivateRoomFolderDownloadNotSupported": "Stahování složek není v soukromých místnostech podporováno.",
   "PrivateRoomFolderEmptyDescription": "Začněte pracovat ve složce vytvářením souborů nebo složek",
-  "PrivateRoomKeyRequiredDescription": "Soukromé místnosti používají koncové šifrování. Pro pokračování potřebujete šifrovací klíč. Chcete jej nyní vytvořit?",
-  "PrivateRoomKeyRequiredTitle": "Vyžaduje se šifrovací klíč",
   "PrivateRoomMixedDownloadNotSupported": "Nemůžete stahovat šifrované a nešifrované soubory současně.",
   "PrivateRoomNotFoundDescription": "Soukromá místnost, kterou hledáte, neexistuje nebo k ní nemáte přístup.",
   "PrivateRoomNotFoundTitle": "Nenalezeno",

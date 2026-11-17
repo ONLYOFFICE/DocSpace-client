@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "从您的设备上传",
   "PrivateRoomFolderDownloadNotSupported": "私人房间内不支持下载文件夹。",
   "PrivateRoomFolderEmptyDescription": "通过创建文件或文件夹开始在文件夹中工作",
-  "PrivateRoomKeyRequiredDescription": "私人房间使用端到端加密。要继续操作，您需要一个加密密钥。是否现在创建？",
-  "PrivateRoomKeyRequiredTitle": "需要加密密钥",
   "PrivateRoomMixedDownloadNotSupported": "您不能同时下载加密文件和未加密文件。",
   "PrivateRoomNotFoundDescription": "您查找的私人房间不存在，或者您没有访问权限。",
   "PrivateRoomNotFoundTitle": "未找到",

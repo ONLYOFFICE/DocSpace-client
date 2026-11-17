@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Վերբեռնել ձեր սարքից",
   "PrivateRoomFolderDownloadNotSupported": "Թղթապանակի ներբեռնումը չի աջակցվում մասնավոր սենյակներում։",
   "PrivateRoomFolderEmptyDescription": "Սկսեք աշխատել թղթապանակում՝ ստեղծելով ֆայլեր կամ թղթապանակներ",
-  "PrivateRoomKeyRequiredDescription": "Մասնավոր սենյակներն օգտագործում են ծայրից ծայր ծածկագրում: Շարունակելու համար ձեզ անհրաժեշտ է ծածկագրման բանալի: Ցանկանու՞մ եք ստեղծել այն հիմա:",
-  "PrivateRoomKeyRequiredTitle": "Անհրաժեշտ է ծածկագրման բանալի",
   "PrivateRoomMixedDownloadNotSupported": "Չեք կարող միաժամանակ ներբեռնել գաղտնագրված և չգաղտնագրված ֆայլեր։",
   "PrivateRoomNotFoundDescription": "Ձեր փնտրած մասնավոր սենյակը գոյություն չունի, կամ դուք մուտքի թույլտվություն չունեք։",
   "PrivateRoomNotFoundTitle": "Չի գտնվել",

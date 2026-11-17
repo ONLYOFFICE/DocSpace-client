@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Cihazınızdan yükləyin",
   "PrivateRoomFolderDownloadNotSupported": "Qovluğun yüklənməsi şəxsi otaqlarda dəstəklənmir.",
   "PrivateRoomFolderEmptyDescription": "Fayl və ya qovluq yaratmaqla qovluqda işə başlayın",
-  "PrivateRoomKeyRequiredDescription": "Şəxsi otaqlar uçdan-uca şifrələmə istifadə edir. Davam etmək üçün şifrələmə açarı lazımdır. İndi yaratmaq istəyirsiniz?",
-  "PrivateRoomKeyRequiredTitle": "Şifrələmə açarı tələb olunur",
   "PrivateRoomMixedDownloadNotSupported": "Şifrələnmiş və şifrələnməmiş faylları eyni vaxtda yükləyə bilməzsiniz.",
   "PrivateRoomNotFoundDescription": "Axtardığınız şəxsi otaq mövcud deyil və ya sizin ona girişiniz yoxdur.",
   "PrivateRoomNotFoundTitle": "Tapılmadı",

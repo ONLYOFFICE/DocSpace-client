@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "التحميل من جهازك",
   "PrivateRoomFolderDownloadNotSupported": "تنزيل المجلدات غير مدعوم داخل الغرف الخاصة.",
   "PrivateRoomFolderEmptyDescription": "ابدأ العمل في المجلد عن طريق إنشاء الملفات أو المجلدات",
-  "PrivateRoomKeyRequiredDescription": "تستخدم الغرف الخاصة التشفير من طرف إلى طرف. للمتابعة، تحتاج إلى مفتاح تشفير. هل تريد إنشاء واحد الآن؟",
-  "PrivateRoomKeyRequiredTitle": "مفتاح التشفير مطلوب",
   "PrivateRoomMixedDownloadNotSupported": "لا يمكنك تنزيل الملفات المشفرة وغير المشفرة في الوقت نفسه.",
   "PrivateRoomNotFoundDescription": "الغرفة الخاصة التي تبحث عنها غير موجودة أو ليس لديك حق الوصول إليها.",
   "PrivateRoomNotFoundTitle": "لم يتم العثور عليها",

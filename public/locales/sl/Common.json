@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Naloži iz naprave",
   "PrivateRoomFolderDownloadNotSupported": "Prenos map v zasebnih sobah ni podprt.",
   "PrivateRoomFolderEmptyDescription": "Začnite delati v mapi z ustvarjanjem datotek ali map",
-  "PrivateRoomKeyRequiredDescription": "Zasebne sobe uporabljajo šifriranje od konca do konca. Za nadaljevanje potrebujete ključ za šifriranje. Ali ga želite ustvariti zdaj?",
-  "PrivateRoomKeyRequiredTitle": "Potreben je ključ za šifriranje",
   "PrivateRoomMixedDownloadNotSupported": "Šifriranih in nešifriranih datotek ne morete prenašati hkrati.",
   "PrivateRoomNotFoundDescription": "Zasebna soba, ki jo iščete, ne obstaja ali pa do nje nimate dostopa.",
   "PrivateRoomNotFoundTitle": "Ni najdeno",

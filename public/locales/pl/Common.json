@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Wgraj z urządzenia",
   "PrivateRoomFolderDownloadNotSupported": "Pobieranie folderów nie jest obsługiwane w pokojach prywatnych.",
   "PrivateRoomFolderEmptyDescription": "Rozpocznij pracę w katalogu, tworząc pliki lub katalogi",
-  "PrivateRoomKeyRequiredDescription": "Pokoje prywatne używają szyfrowania end-to-end. Aby kontynuować, potrzebujesz klucza szyfrowania. Czy chcesz go teraz utworzyć?",
-  "PrivateRoomKeyRequiredTitle": "Wymagany klucz szyfrowania",
   "PrivateRoomMixedDownloadNotSupported": "Nie można jednocześnie pobierać zaszyfrowanych i niezaszyfrowanych plików.",
   "PrivateRoomNotFoundDescription": "Prywatny pokój, którego szukasz, nie istnieje lub nie masz do niego dostępu.",
   "PrivateRoomNotFoundTitle": "Nie znaleziono",

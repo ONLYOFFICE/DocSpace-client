@@ -38,6 +38,13 @@ vi.mock("@docspace/shared/context/encryption", () => ({
   useEncryption: () => ({ suspendAutoLock: () => () => {} }),
 }));
 
+import {
+  generateIdentityKeyPair,
+  serializeIdentity,
+} from "@docspace/shared/services/encryption/identity";
+import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
+import { setEncryptionKeys } from "@docspace/shared/api/privacy";
+
 import { usePrivateRoomKeyGate } from "./usePrivateRoomKeyGate";
 
 type TGate = ReturnType<typeof usePrivateRoomKeyGate>;
@@ -59,31 +66,88 @@ const renderGate = (deps: Partial<TGateDeps> = {}) =>
     />,
   );
 
-describe("usePrivateRoomKeyGate", () => {
+const call = (name: string, ...args: unknown[]) =>
+  act(async () => {
+    await (captured.setup![name] as (...a: unknown[]) => unknown)(...args);
+  });
+
+describe("Starting private room creation without a key opens key setup", () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     captured.setup = null;
   });
 
-  it("starts key generation for a user without a key", () => {
+  it("No prompt before key setup", () => {
     renderGate({ hasExistingKeys: false });
 
-    act(() => gate.confirmKeyGeneration());
+    let offered = false;
+    act(() => {
+      offered = gate.offerKeyGeneration();
+    });
 
-    expect(captured.setup).not.toBeNull();
+    expect(offered).toBe(true);
+    expect(captured.setup?.step).toBe("explanation");
   });
 
-  it("User cancels inside key generation", () => {
+  it("User cancels on the explanation", async () => {
     const onKeyGenerationCancelled = vi.fn();
     const onClose = vi.fn();
     renderGate({ hasExistingKeys: false, onKeyGenerationCancelled, onClose });
-    act(() => gate.confirmKeyGeneration());
-
     act(() => {
-      (captured.setup!.onCancel as () => void)();
+      gate.offerKeyGeneration();
     });
+
+    await call("onCancel");
 
     expect(onKeyGenerationCancelled).toHaveBeenCalledTimes(1);
     expect(onClose).not.toHaveBeenCalled();
+    expect(captured.setup).toBeNull();
+  });
+
+  it("User cancels inside key setup", async () => {
+    vi.mocked(generateIdentityKeyPair).mockResolvedValue({} as never);
+    vi.mocked(generateRecoveryMnemonic).mockResolvedValue("words");
+    const onKeyGenerationCancelled = vi.fn();
+    renderGate({ hasExistingKeys: false, onKeyGenerationCancelled });
+    act(() => {
+      gate.offerKeyGeneration();
+    });
+    await call("onContinue");
+    await call("onPassphraseSubmit", "secret");
+    expect(captured.setup?.step).toBe("recovery");
+
+    await call("onCancel");
+
+    expect(onKeyGenerationCancelled).toHaveBeenCalledTimes(1);
+    expect(setEncryptionKeys).not.toHaveBeenCalled();
+  });
+
+  it("User completes key setup", async () => {
+    vi.mocked(generateIdentityKeyPair).mockResolvedValue({} as never);
+    vi.mocked(generateRecoveryMnemonic).mockResolvedValue("words");
+    vi.mocked(serializeIdentity).mockResolvedValue({
+      publicKey: "pub",
+      privateKeyEnc: "enc",
+    });
+    vi.mocked(setEncryptionKeys).mockResolvedValue(undefined as never);
+    const onKeyGenerated = vi.fn();
+    renderGate({ hasExistingKeys: false, onKeyGenerated });
+    act(() => {
+      gate.offerKeyGeneration();
+    });
+
+    await call("onContinue");
+    await call("onPassphraseSubmit", "secret");
+    await call("onRecoveryConfirm");
+
+    expect(setEncryptionKeys).toHaveBeenCalledTimes(1);
+    expect(onKeyGenerated).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("usePrivateRoomKeyGate", () => {
+  beforeEach(() => {
+    captured.setup = null;
   });
 
   it("Guest reaches the key offer of room creation", () => {
@@ -95,17 +159,15 @@ describe("usePrivateRoomKeyGate", () => {
     });
 
     expect(offered).toBe(false);
-    expect(gate.keyConfirmVisible).toBe(false);
-
-    act(() => gate.confirmKeyGeneration());
-
     expect(captured.setup).toBeNull();
   });
 
   it("Key already exists", () => {
     renderGate({ hasExistingKeys: true });
 
-    act(() => gate.confirmKeyGeneration());
+    act(() => {
+      gate.offerKeyGeneration();
+    });
 
     expect(captured.setup).toBeNull();
   });

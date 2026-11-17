@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Lataa laitteeltasi",
   "PrivateRoomFolderDownloadNotSupported": "Kansioiden lataamista ei tueta yksityisissä huoneissa.",
   "PrivateRoomFolderEmptyDescription": "Aloita kansiossa työskentely luomalla tiedostoja tai kansioita",
-  "PrivateRoomKeyRequiredDescription": "Yksityishuoneet käyttävät päästä päähän -salausta. Jatkaaksesi tarvitset salausavaimen. Haluatko luoda sellaisen nyt?",
-  "PrivateRoomKeyRequiredTitle": "Salausavain vaaditaan",
   "PrivateRoomMixedDownloadNotSupported": "Et voi ladata salattuja ja salaamattomia tiedostoja samanaikaisesti.",
   "PrivateRoomNotFoundDescription": "Etsimääsi yksityishuonetta ei ole olemassa tai sinulla ei ole siihen käyttöoikeutta.",
   "PrivateRoomNotFoundTitle": "Ei löytynyt",

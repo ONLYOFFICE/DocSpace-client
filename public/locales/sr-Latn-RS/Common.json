@@ -1869,8 +1869,6 @@
   "PrivateRoomEmptyUploadTitle": "Otpremi sa svog uređaja",
   "PrivateRoomFolderDownloadNotSupported": "Preuzimanje fascikle nije podržano u privatnim sobama.",
   "PrivateRoomFolderEmptyDescription": "Započnite rad u folderu kreiranjem fajlova ili foldera",
-  "PrivateRoomKeyRequiredDescription": "Privatne sobe koriste šifrovanje od kraja do kraja. Da biste nastavili, potreban vam je ključ za šifrovanje. Želite li da ga napravite sada?",
-  "PrivateRoomKeyRequiredTitle": "Potreban je ključ za šifrovanje",
   "PrivateRoomMixedDownloadNotSupported": "Ne možete istovremeno da preuzimate šifrovane i nešifrovane fajlove.",
   "PrivateRoomNotFoundDescription": "Privatna soba koju tražite ne postoji ili nemate pristup.",
   "PrivateRoomNotFoundTitle": "Nije pronađeno",

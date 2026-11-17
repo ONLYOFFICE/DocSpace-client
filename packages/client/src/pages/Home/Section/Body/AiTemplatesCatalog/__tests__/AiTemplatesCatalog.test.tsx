@@ -9,11 +9,13 @@ const api = vi.hoisted(() => ({
 const navigate = vi.hoisted(() => vi.fn());
 const toastr = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn() }));
 const location = vi.hoisted(() => ({ search: "" }));
+const presetsStore = vi.hoisted(() => ({ fetchPresets: vi.fn(async () => {}) }));
 
 vi.mock("@docspace/shared/api/ai/templates", () => api);
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 vi.mock("SRC_DIR/store/useStore", () => ({
-  useStore: () => ({ user: { id: "user" } }),
+  useStore: (name: string) =>
+    name === "aiPresetsStore" ? presetsStore : { user: { id: "user" } },
 }));
 vi.mock("react-router", () => ({
   useLocation: () => location,
@@ -73,6 +75,7 @@ beforeEach(() => {
   navigate.mockReset();
   toastr.success.mockReset();
   toastr.error.mockReset();
+  presetsStore.fetchPresets.mockClear();
   location.search = "";
 });
 
@@ -106,6 +109,26 @@ describe("AiTemplatesCatalog", () => {
     expect(api.installAiTemplate).toHaveBeenCalledWith("agents/document/reviewer");
     expect(toastr.success).toHaveBeenCalledTimes(1);
     expect(navigate.mock.calls[0][0]).not.toContain("tab=templates");
+  });
+
+  it("re-reads the sidebar's agents after an agent is installed, not after a skill set", async () => {
+    api.installAiTemplate.mockResolvedValue({ kind: "agent", title: "Contract Reviewer" });
+    const { unmount } = render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
+    expect(presetsStore.fetchPresets).toHaveBeenCalledTimes(1);
+    unmount();
+
+    presetsStore.fetchPresets.mockClear();
+    navigate.mockReset();
+    location.search = `?type=${RoomsType.InstructionsRoom}&tab=templates`;
+    api.installAiTemplate.mockResolvedValue({ kind: "skillSet", title: "Contract review" });
+    render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
+    expect(presetsStore.fetchPresets).not.toHaveBeenCalled();
   });
 
   it("stays on the catalog and reports a refused install", async () => {

@@ -629,6 +629,9 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
           self.filesStore.setInRoomFolder(roomId, false);
         }
 
+        // A left agent leaves the sidebar and the chat's agents menu.
+        if (isAgent(room)) void self.aiPresetsStore?.fetchPresets();
+
         toastr.success(successText);
       })
       .catch((error: unknown) => {

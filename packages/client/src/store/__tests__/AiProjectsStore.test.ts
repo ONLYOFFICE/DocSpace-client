@@ -389,6 +389,7 @@ describe("AiProjectsStore", () => {
       await store.changeOwner(project(1), "u2", true);
       expect(filesApi.setFileOwner).toHaveBeenCalledWith("u2", [1]);
       expect(roomsApi.updateRoomMemberRole).not.toHaveBeenCalled();
+      expect(presets.fetchPresets).not.toHaveBeenCalled();
       expect(store.activeProject?.title).toBe("Handed over");
 
       await store.changeOwner(project(1), "u3", false);
@@ -396,6 +397,8 @@ describe("AiProjectsStore", () => {
         invitations: [{ id: "me", access: expect.anything() }],
       });
       expect(store.activeProject).toBeNull();
+      // The left project leaves the sidebar's agents.
+      expect(presets.fetchPresets).toHaveBeenCalledTimes(1);
     });
   });
 

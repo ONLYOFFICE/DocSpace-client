@@ -311,6 +311,7 @@ const filesActionsStore = new FilesActionsStore(
 );
 
 versionHistoryStore.filesActionsStore = filesActionsStore;
+filesActionsStore.aiPresetsStore = aiPresetsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,

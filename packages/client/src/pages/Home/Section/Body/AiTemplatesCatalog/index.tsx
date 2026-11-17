@@ -161,6 +161,7 @@ const AiTemplatesCatalog = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const userId = useStore("userStore").user?.id;
+  const aiPresetsStore = useStore("aiPresetsStore");
 
   const [catalog, setCatalog] = React.useState<TAiTemplateCatalog | null>(
     null,
@@ -189,6 +190,8 @@ const AiTemplatesCatalog = () => {
       toastr.success(
         t("Common:AiTemplateInstalled", { name: installed.title }),
       );
+      // A new agent shows in the sidebar and the chat's agents menu.
+      if (installed.kind === "agent") void aiPresetsStore.fetchPresets();
       navigate(getAiWorkspaceTabUrl(false, listType, userId));
     } catch (error) {
       toastr.error(error as Error);

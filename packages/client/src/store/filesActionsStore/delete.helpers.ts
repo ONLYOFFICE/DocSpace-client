@@ -728,6 +728,11 @@ self: FilesActionStore,
       pbData.operationId,
       pbData.operation,
     );
+    // An agent the sidebar and the chat's agents menu list leaves them.
+    const presets = self.aiPresetsStore;
+    const deleted = new Set(id.map(String));
+    if (presets?.presets.some((preset) => deleted.has(preset.id)))
+      void presets.fetchPresets();
   } catch (err) {
     setSecondaryProgressBarData({
       completed: true,

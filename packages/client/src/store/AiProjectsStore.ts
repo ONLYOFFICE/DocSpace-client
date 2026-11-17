@@ -538,6 +538,8 @@ class AiProjectsStore {
       invitations: [{ id: this.userStore.user?.id, access: ShareAccessRights.None }],
     });
     if (this.activeProject?.id === project.id) this.closeProject();
+    // A left project leaves the sidebar and the chat's agents menu.
+    void this.aiPresetsStore.fetchPresets();
   };
 
   /** The owner hands the project over from the project form or its intro. */

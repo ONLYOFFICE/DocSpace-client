@@ -199,8 +199,13 @@ describe("FilesActionsStore — onLeaveRoom from inside the room", () => {
       },
     });
 
+    const fetchPresets = vi.fn(async () => {});
+    store.aiPresetsStore = { fetchPresets } as never;
+
     await store.onLeaveRoom(t);
 
+    // The left agent leaves the sidebar and the chat's agents menu.
+    expect(fetchPresets).toHaveBeenCalledTimes(1);
     expect(navigate).toHaveBeenCalledTimes(1);
     const url = navigate.mock.calls[0][0] as string;
     expect(url.startsWith("/ai-rooms/filter?")).toBe(true);

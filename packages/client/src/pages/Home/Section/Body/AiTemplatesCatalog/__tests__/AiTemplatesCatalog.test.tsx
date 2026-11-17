@@ -7,7 +7,7 @@ const api = vi.hoisted(() => ({
   installAiTemplate: vi.fn(),
 }));
 const navigate = vi.hoisted(() => vi.fn());
-const toastr = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn() }));
+const toastr = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn(), warning: vi.fn() }));
 const location = vi.hoisted(() => ({ search: "" }));
 const presetsStore = vi.hoisted(() => ({ fetchPresets: vi.fn(async () => {}) }));
 
@@ -75,6 +75,7 @@ beforeEach(() => {
   navigate.mockReset();
   toastr.success.mockReset();
   toastr.error.mockReset();
+  toastr.warning.mockReset();
   presetsStore.fetchPresets.mockClear();
   location.search = "";
 });
@@ -129,6 +130,38 @@ describe("AiTemplatesCatalog", () => {
     fireEvent.click(screen.getByTestId("ai-template-install"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(presetsStore.fetchPresets).not.toHaveBeenCalled();
+  });
+
+  it("warns after the success when the template's model could not be set, and only then", async () => {
+    api.installAiTemplate.mockResolvedValue({
+      kind: "agent",
+      title: "Contract Reviewer",
+      warnings: ["instructionsNotSaved", "modelNotSaved"],
+    });
+    const { unmount } = render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
+    expect(toastr.success).toHaveBeenCalledTimes(1);
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+    expect(toastr.warning).toHaveBeenCalledWith("Common:AiTemplateModelNotSaved");
+    expect(toastr.success.mock.invocationCallOrder[0]).toBeLessThan(
+      toastr.warning.mock.invocationCallOrder[0],
+    );
+    unmount();
+
+    toastr.warning.mockReset();
+    navigate.mockReset();
+    api.installAiTemplate.mockResolvedValue({
+      kind: "agent",
+      title: "Contract Reviewer",
+      warnings: ["instructionsNotSaved"],
+    });
+    render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
+    expect(toastr.warning).not.toHaveBeenCalled();
   });
 
   it("stays on the catalog and reports a refused install", async () => {

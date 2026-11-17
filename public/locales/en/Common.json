@@ -232,6 +232,7 @@
   "AISpending": "AI spending",
   "AISpentOfLimit": "Spent {{spent}} of {{limit}} ({{percent}}%).",
   "AiTemplateInstalled": "{{name}} has been installed",
+  "AiTemplateModelNotSaved": "The template's model could not be set, so {{name}} uses the workspace's default model. You can choose another model in the agent's settings.",
   "AITextModels": "Text models",
   "AIToolsEnabled": "AI tools service successfully enabled.",
   "AIUsageChargedFromWallet": "AI usage is charged from your wallet balance.",

@@ -190,6 +190,13 @@ const AiTemplatesCatalog = () => {
       toastr.success(
         t("Common:AiTemplateInstalled", { name: installed.title }),
       );
+      // The agent is installed without the template's model: it runs on the
+      // workspace's own until one is chosen. (Skipped instructions are not
+      // shown: the agent form does not edit them.)
+      if (installed.warnings?.includes("modelNotSaved"))
+        toastr.warning(
+          t("Common:AiTemplateModelNotSaved", { name: installed.title }),
+        );
       // A new agent shows in the sidebar and the chat's agents menu.
       if (installed.kind === "agent") void aiPresetsStore.fetchPresets();
       navigate(getAiWorkspaceTabUrl(false, listType, userId));

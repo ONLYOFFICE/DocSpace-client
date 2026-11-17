@@ -26,7 +26,7 @@ and SDK unit tests must stay green.
 
 ## 4. Invitation result
 
-- [ ] 4.1 Show the reasons and the notes of `packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js`, and the reasons kept in the invite form, in the text colour and size of the names. Verify: a Playwright case in `packages/client/__tests__/private-room-invite.spec.ts` that reads the computed colours of the result in both themes and asserts 4.5:1, and its screenshots updated under Docker
+- [x] 4.1 Show the reasons and the notes of `packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js`, and the reasons kept in the invite form, in the text colour and size of the names. Verify: a Playwright case in `packages/client/__tests__/private-room-invite.spec.ts` that reads the computed colours of the result in both themes and asserts 4.5:1, and its screenshots updated under Docker
 
 ## 5. Media viewer
 

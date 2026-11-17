@@ -48,6 +48,7 @@ import {
   type EncryptedFilesHandlerHandle,
   type PrivacyroomAccessHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectElementScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import type { Page } from "@playwright/test";
@@ -648,3 +649,214 @@ test.describe("Private room — invite entry point", () => {
     );
   });
 });
+
+// Spec: private-rooms/room-membership, "The invitation result is readable".
+test.describe("Private room — invitation result is readable", () => {
+  test.use({ locale: "en-US", timezoneId: "UTC" });
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  // WCAG 2.x contrast of two computed CSS colours ("rgb(r, g, b)").
+  const contrastOf = (a: string, b: string) => {
+    const luminance = (css: string) => {
+      const [r, g, bl] = (css.match(/[\d.]+/g) ?? [])
+        .slice(0, 3)
+        .map((c) => Number(c) / 255)
+        .map((c) =>
+          c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4,
+        );
+      return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+    };
+    const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return (light + 0.05) / (dark + 0.05);
+  };
+
+  // The colour, the size and the colour behind one text of the panel.
+  const textStyle = (locator: ReturnType<Page["locator"]>) =>
+    locator.evaluate((element) => {
+      let background = "rgb(255, 255, 255)";
+      for (
+        let node: Element | null = element;
+        node;
+        node = node.parentElement
+      ) {
+        const colour = getComputedStyle(node).backgroundColor;
+        if (colour !== "rgba(0, 0, 0, 0)" && colour !== "transparent") {
+          background = colour;
+          break;
+        }
+      }
+      const style = getComputedStyle(element);
+      return {
+        colour: style.color,
+        size: parseFloat(style.fontSize),
+        background,
+      };
+    });
+
+  // Invites the listed people into a private room holding one encrypted
+  // file, with the key writes of the invitation failing, so a member with a
+  // key is left pending and one without a key is refused.
+  const inviteWithFailingKeyWrites = async (
+    page: Page,
+    mockRequest: Parameters<typeof bootstrapEncryption>[1],
+    baseUrl: string,
+    selectorItems: number[],
+  ) => {
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const carol = await generateIdentityKeyPair();
+    const filesHandle: { current: EncryptedFilesHandlerHandle | null } = {
+      current: null,
+    };
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        handle: filesHandle,
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, DAN]),
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+    );
+    const ownKey = { ...keysHandle.getKeys()[0], userId: TEST_USER_ID };
+    accessHandle.current!.setRoomKeys(ROOM_ID, [ownKey]);
+
+    await navigateInApp(page, `/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        new URL(res.url()).pathname.endsWith(`/files/${ROOM_ID}`) &&
+        res.ok(),
+      { timeout: 15000 },
+    );
+    await page.locator("#customFileInput").first().setInputFiles({
+      name: "memo.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("memo"),
+    });
+    await unlockIfPrompted(page, passphrase);
+    await expect
+      .poll(
+        () =>
+          filesHandle.current!.getFiles()[0]?.fileKeys.map((k) =>
+            String(k.userId),
+          ) ?? [],
+        { timeout: 30000 },
+      )
+      .toEqual([TEST_USER_ID]);
+    const carolKey = {
+      id: "carol-1",
+      userId: CAROL.id,
+      publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
+      privateKeyEnc: "",
+      date: "2026-01-01T00:00:00.000Z",
+      cryptoEngineId: "",
+    };
+    accessHandle.current!.setRoomKeys(ROOM_ID, [ownKey, carolKey]);
+    filesHandle.current!.setRoomUserKeys([carolKey]);
+
+    await page.route(/\/api\/2\.0\/files\/\d+\/access/, async (route) => {
+      if (route.request().method() === "PUT") {
+        await route.fulfill({ status: 500, body: "" });
+        return;
+      }
+      await route.fallback();
+    });
+
+    await navigateInApp(page, "/private/filter");
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await row.getByTestId("context-menu-button").first().click();
+    await page.getByTestId("option_invite-users-to-room").click();
+    await page.getByTestId("invite_panel_choose_from_list_link").click();
+    const people = page.getByTestId("invite_panel_people_selector");
+    for (const item of selectorItems) {
+      await people.getByTestId(`selector-item-${item}`).click();
+    }
+    await people.getByTestId("selector_submit_button").click();
+    await page.getByTestId("invite_panel_send_button").click();
+    await unlockIfPrompted(page, passphrase);
+  };
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`Invitee left out and files not shared in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      await page.emulateMedia({ colorScheme });
+      await inviteWithFailingKeyWrites(page, mockRequest, baseUrl, [0, 1]);
+
+      const pending = page.getByTestId("invite_panel_result_pending");
+      const refused = page.getByTestId("invite_panel_result_refused");
+      await expect(pending).toBeVisible({ timeout: 30000 });
+      await expect(refused).toContainText(DAN.displayName);
+
+      const names = await textStyle(pending.getByText(CAROL.displayName));
+      for (const [label, text] of [
+        [
+          "files not shared",
+          pending.getByText(/could not be made available|Failed to share/),
+        ],
+        ["invitee left out", refused.getByText(DAN.displayName)],
+      ] as const) {
+        const style = await textStyle(text);
+        expect(
+          contrastOf(style.colour, style.background),
+          `${label}: ${style.colour} on ${style.background}`,
+        ).toBeGreaterThanOrEqual(4.5);
+        expect(style.size, `${label} size`).toBeGreaterThanOrEqual(
+          names.size,
+        );
+      }
+      await expectElementScreenshot(
+        page.locator("#invite_panel_modal").getByRole("dialog"),
+        [
+          "desktop",
+          "private-room-invite",
+          `invite-result-${colorScheme}.png`,
+        ],
+      );
+    });
+
+    test(`Reasons kept in the invite form in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      await page.emulateMedia({ colorScheme });
+      await inviteWithFailingKeyWrites(page, mockRequest, baseUrl, [1]);
+
+      const reasons = page.getByTestId("invite_panel_not_invited");
+      await expect(reasons).toContainText(DAN.displayName, { timeout: 30000 });
+      const style = await textStyle(reasons.getByText(DAN.displayName));
+      expect(
+        contrastOf(style.colour, style.background),
+        `${style.colour} on ${style.background}`,
+      ).toBeGreaterThanOrEqual(4.5);
+    });
+  }
+});
+

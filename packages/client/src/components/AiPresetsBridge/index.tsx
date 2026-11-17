@@ -478,6 +478,38 @@ const AiPresetsBridge = ({
     }
   };
 
+  // An edit of the picked agent - in its form, opened from the panel or
+  // elsewhere, or a Skill set saved from the slash menu - reaches the chat in
+  // place, as on the agent's page: the model and the rooms follow, the
+  // conversation stays. A pick of another agent applies itself, and the
+  // agent's page follows its own edits.
+  const isInsideOpenProjectRef = React.useRef(isInsideOpenProject);
+  isInsideOpenProjectRef.current = isInsideOpenProject;
+  React.useEffect(
+    () =>
+      reaction(
+        () => {
+          const preset = aiPresetsStore.activePreset;
+          if (!preset) return null;
+          const rooms = (list: typeof preset.contextRooms) =>
+            list.map((room) => `${room.id}:${room.name}`).join(",");
+          return `${preset.id}|${preset.profileId ?? ""}|${rooms(preset.contextRooms)}|${rooms(preset.knowledgeRooms)}`;
+        },
+        (key, previous) => {
+          const preset = aiPresetsStore.activePreset;
+          if (!key || !previous || !preset || isInsideOpenProjectRef.current) return;
+          if (key.split("|")[0] !== previous.split("|")[0]) return;
+          aiChatStore.applyPreset({
+            profileId: preset.profileId,
+            profileName: preset.profileName,
+            contextRooms: preset.contextRooms,
+            knowledgeRooms: preset.knowledgeRooms,
+          });
+        },
+      ),
+    [aiChatStore, aiPresetsStore],
+  );
+
   // With vectorization off no Knowledge room can be searched, so the
   // "+" menu's Knowledge bases loses Manage; a base connected earlier stays
   // listed there and can still be disconnected.

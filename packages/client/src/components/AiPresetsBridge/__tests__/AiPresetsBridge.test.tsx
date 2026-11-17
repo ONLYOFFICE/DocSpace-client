@@ -752,17 +752,45 @@ describe("AiPresetsBridge", () => {
       expect(aiChatStore.sourcesManager).toBeNull();
     });
 
+    it("bring an edit of the picked agent to the chat in place", async () => {
+      const store = new AiPresetsStore();
+      await pick(store, withRights({ EditAccess: true }, true));
+      aiChatStore.applyPreset.mockClear();
+
+      // The agent's form, opened from the panel, linked another knowledge base.
+      const edited = withRights({ EditAccess: true }, true);
+      edited.aiProject = {
+        ...edited.aiProject,
+        knowledgeRooms: [{ id: 15, title: "Policies", available: true }],
+      } as typeof edited.aiProject;
+      act(() => store.setActivePreset(toAiPreset(edited as unknown as TAiProject)));
+      expect(aiChatStore.applyPreset).toHaveBeenCalledTimes(1);
+      expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith(
+        expect.objectContaining({ knowledgeRooms: [{ cloud: "docspace", id: "15", name: "Policies" }] }),
+      );
+      // The conversation stays.
+      expect(threads.onSwitchToNewThread).not.toHaveBeenCalled();
+
+      // Read again with nothing changed: nothing is applied.
+      act(() => store.setActivePreset(toAiPreset(edited as unknown as TAiProject)));
+      expect(aiChatStore.applyPreset).toHaveBeenCalledTimes(1);
+    });
+
     it("give a member the agent's sources with nothing to manage or remove", async () => {
       await pick(new AiPresetsStore(), withRights({ EditAccess: false }, false));
       expect(aiChatStore.sourcesManager).toEqual({ onManage: null, onSkillRoomsChange: undefined });
     });
 
-    it("leave the sources to the agent's page while it is open", async () => {
+    it("leave the sources and their edits to the agent's page while it is open", async () => {
       const store = new AiPresetsStore();
       renderBridge(store, { path: "/ai-rooms/1/filter", activeProject: { id: 1 } });
       await flush();
       act(() => store.setActivePreset(toAiPreset(project(1, "Sales"))));
       expect(aiChatStore.sourcesManager).toBeNull();
+      const unlinked = { ...project(1, "Sales") };
+      unlinked.aiProject = { ...unlinked.aiProject, knowledgeRooms: [] };
+      act(() => store.setActivePreset(toAiPreset(unlinked)));
+      expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
     });
 
     it("keep the agent and the dialog when the delete is refused", async () => {

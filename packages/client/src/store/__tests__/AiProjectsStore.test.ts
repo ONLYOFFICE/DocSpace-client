@@ -329,6 +329,18 @@ describe("AiProjectsStore", () => {
       expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1" }));
     });
 
+    it("re-syncs an agent picked in the chat panel when its form saves it, and no other", async () => {
+      const picked = { ...presets, activePreset: { id: "7" } };
+      const store = new AiProjectsStore(picked as unknown as AiPresetsStore, userStore);
+      api.updateAiProject.mockResolvedValue(project(8));
+      await store.updateProject(8, { title: "Other" } as never);
+      expect(presets.setActivePreset).not.toHaveBeenCalled();
+
+      api.updateAiProject.mockResolvedValue(project(7, "Renamed"));
+      await store.updateProject(7, { title: "Renamed" } as never);
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "7", name: "Renamed" }));
+    });
+
     it("saves the Skill sets the chat connected and disconnected, one change after another", async () => {
       const store = createStore();
       await store.openProject(project(1));

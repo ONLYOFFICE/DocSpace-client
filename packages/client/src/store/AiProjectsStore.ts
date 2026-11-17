@@ -306,8 +306,7 @@ class AiProjectsStore {
         );
         showWarnings(project);
         runInAction(() => this.replaceProject(project));
-        if (this.activeProject?.id === current.id || this.aiPresetsStore.activePreset?.id === String(current.id))
-          this.syncPreset(project);
+        if (this.isChatOn(current.id)) this.syncPreset(project);
         return true;
       } catch (e) {
         toastr.error(errorMessage(e));
@@ -377,6 +376,10 @@ class AiProjectsStore {
   private syncPreset = (project: TAiProject) => {
     this.aiPresetsStore.setActivePreset(toAiPreset(project));
   };
+
+  /** The chat runs on the project: open on its page, or picked in the chat panel. */
+  private isChatOn = (id: number) =>
+    this.activeProject?.id === id || this.aiPresetsStore.activePreset?.id === String(id);
 
   /**
    * Reads the summary a project's tile shows, once per read of the list:
@@ -634,7 +637,7 @@ class AiProjectsStore {
       // The form saved: it now stands on what the server has.
       if (this.formProject(id)) this.projectDialog = { mode: "edit", project };
     });
-    if (this.activeProject?.id === id) this.syncPreset(project);
+    if (this.isChatOn(id)) this.syncPreset(project);
     // A rename shows under Agents, and a change moves the project up there.
     void this.aiPresetsStore.fetchPresets();
     return project;

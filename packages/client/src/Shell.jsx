@@ -187,7 +187,6 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormsFolderRoot,
     isFormRoomRoot,
     isAIReady,
-    aiPresetContextRooms,
     aiChatContextRooms,
     aiActivePresetId,
     aiActivePresetSuggestions,
@@ -1258,12 +1257,10 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
-      // The Instructions rooms of the project the chat runs on, as its
-      // context rooms; a new array per render, the ui-kit provider memoizes
-      // it by id and name.
-      aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
-      // The same, else the skill sets "Use in chat" connected to the
-      // default agent's chat.
+      // The chat's context rooms: the Instructions rooms of the agent the
+      // chat runs on, else the skill sets "Use in chat" connected to the
+      // default agent's chat; a new array per render, the ui-kit provider
+      // memoizes it by id and name.
       aiChatContextRooms: aiPresetsStore.chatContextRooms,
       // The agent the chat runs on, picked in the panel or open on its page.
       aiActivePresetId: aiPresetsStore.activePreset?.id ?? null,

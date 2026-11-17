@@ -48,6 +48,8 @@ import {
   toSkillCommand,
 } from "@docspace/shared/utils/skillFile";
 
+import SkillIcon from "SRC_DIR/components/SkillIcon";
+
 import commonStyles from "../../../../helpers/Common.module.scss";
 
 import styles from "./SkillSetInfo.module.scss";
@@ -69,8 +71,8 @@ const isSkillTitle = (title: string) =>
   title.toLowerCase().endsWith(SKILL_EXTENSION);
 
 /**
- * The skills of a skill set selected in the list: each by its name and the
- * command that calls it in the chat. They are the Markdown files of the
+ * The skills of a skill set selected in the list: each by its icon, its name
+ * and the command that calls it in the chat. They are the Markdown files of the
  * room, read when the set is selected and again when their number changes.
  */
 export const SkillSetInfo = ({ selection }: SkillSetInfoProps) => {
@@ -116,6 +118,7 @@ export const SkillSetInfo = ({ selection }: SkillSetInfoProps) => {
       <ul className={styles.list} data-testid="skill-set-info-skills">
         {skills.map((skill) => (
           <li key={skill.id} className={styles.item}>
+            <SkillIcon kind="skill" size={32} />
             <Text fontSize="13px" truncate className={styles.name}>
               {skill.title.slice(0, -SKILL_EXTENSION.length)}
             </Text>

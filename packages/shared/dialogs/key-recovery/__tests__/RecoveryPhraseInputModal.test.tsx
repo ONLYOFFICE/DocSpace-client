@@ -355,4 +355,16 @@ describe("RecoveryPhraseInputModal", () => {
       }
     });
   });
+
+  describe("The recovery phrase input takes no input assistance", () => {
+    it("Recovery input", () => {
+      renderModal();
+
+      const field = getPhraseField();
+      expect(field).toHaveAttribute("spellcheck", "false");
+      expect(field).toHaveAttribute("autocorrect", "off");
+      expect(field).toHaveAttribute("autocapitalize", "off");
+      expect(field).toHaveAttribute("autocomplete", "off");
+    });
+  });
 });

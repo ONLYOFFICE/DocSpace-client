@@ -206,6 +206,11 @@ export const RecoveryPhraseInputModal: React.FC<
                   placeholder={t("Common:RecoveryPhrasePlaceholder")}
                   aria-labelledby={hintId}
                   aria-describedby={wordCountId}
+                  // Spec: private-rooms/key-management, "The recovery phrase input takes no input assistance"
+                  spellCheck={false}
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  autoComplete="off"
                   heightTextArea="120px"
                   isDisabled={isLoading || isValidating}
                   hasError={!!error}

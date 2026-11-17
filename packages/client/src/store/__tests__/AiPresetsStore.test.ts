@@ -281,4 +281,27 @@ describe("AiPresetsStore", () => {
     store.setActivePreset(null);
     expect(store.activePresetContextRooms).toBeNull();
   });
+  it("records a skill set's Use in chat once, as the chat's room", () => {
+    const store = new AiPresetsStore();
+    store.requestUseInChat({ id: 12, title: "Sales assistant" });
+    expect(store.consumeUseInChat()).toEqual({ cloud: "docspace", id: "12", name: "Sales assistant" });
+    expect(store.consumeUseInChat()).toBeNull();
+  });
+
+  it("makes the skill sets used in chat its context rooms until an agent is picked", () => {
+    const store = new AiPresetsStore();
+    expect(store.chatContextRooms).toBeNull();
+
+    store.setChatSkillRooms([{ cloud: "docspace", id: "12", name: "Sales assistant" }]);
+    expect(store.chatContextRooms).toEqual([{ id: "12", name: "Sales assistant" }]);
+
+    // An agent brings its own sets, and leaving it does not bring these back.
+    store.setActivePreset(toAiPreset(project(1, "Sales")));
+    expect(store.chatContextRooms).toEqual([
+      { id: "12", name: "Skills" },
+      { id: "13", name: "Legal tone" },
+    ]);
+    store.setActivePreset(null);
+    expect(store.chatContextRooms).toBeNull();
+  });
 });

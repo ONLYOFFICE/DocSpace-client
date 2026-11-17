@@ -116,6 +116,7 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
+import { SkillSetChatBridge } from "./components/SkillSetChatBridge";
 import { AiChatPageBridge } from "./components/AiChatPageBridge";
 import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
@@ -187,6 +188,7 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormRoomRoot,
     isAIReady,
     aiPresetContextRooms,
+    aiChatContextRooms,
     aiActivePresetId,
     aiActivePresetSuggestions,
     isAiProjectOpen,
@@ -1068,13 +1070,15 @@ const Shell = ({ page = "home", ...rest }) => {
             ) : undefined
           }
           // Instructions rooms are connected on their own only from an AI
-          // project (its linked rooms, see AiPresetsBridge); standing in an
-          // Instructions room does not connect it, the user picks it in the
-          // composer like a knowledge base.
-          contextRoom={canUseAi ? aiPresetContextRooms : undefined}
+          // project (its linked rooms, see AiPresetsBridge) or by a skill
+          // set's "Use in chat"; standing in an Instructions room does not
+          // connect it, the user picks it in the composer like a knowledge
+          // base.
+          contextRoom={canUseAi ? aiChatContextRooms : undefined}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
+          <SkillSetChatBridge />
           <AiChatPageBridge
             canLoadThreads={canUseAi}
             chatEntityId={chatEntityId}
@@ -1258,6 +1262,9 @@ const ShellWrapper = inject(
       // context rooms; a new array per render, the ui-kit provider memoizes
       // it by id and name.
       aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
+      // The same, else the skill sets "Use in chat" connected to the
+      // default agent's chat.
+      aiChatContextRooms: aiPresetsStore.chatContextRooms,
       // The agent the chat runs on, picked in the panel or open on its page.
       aiActivePresetId: aiPresetsStore.activePreset?.id ?? null,
       aiActivePresetSuggestions: aiPresetsStore.activePreset?.suggestions,

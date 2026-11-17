@@ -52,6 +52,7 @@ import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
 
 import { openShareTab } from "SRC_DIR/helpers/info-panel";
+import { getUseInChatSkillSet } from "SRC_DIR/helpers/skillSetChat";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -181,6 +182,19 @@ export default function withQuickButtons(WrappedComponent) {
       retryVectorization([item]);
     };
 
+    // A skill set, or the set of a skill, put to use in a new chat.
+    getUseInChatSkillSet = () => {
+      const { item, isArchiveFolder, canUseAiChat, openFolder } = this.props;
+      if (!canUseAiChat || isArchiveFolder) return null;
+      return getUseInChatSkillSet(item, openFolder);
+    };
+
+    onUseInChat = () => {
+      const { requestUseInChat } = this.props;
+      const skillSet = this.getUseInChatSkillSet();
+      if (skillSet) requestUseInChat(skillSet);
+    };
+
     openShareTab = () => {
       const {
         item,
@@ -245,6 +259,9 @@ export default function withQuickButtons(WrappedComponent) {
           onRetryVectorization={this.onRetryVectorization}
           isTrashFolder={isTrashFolder}
           openShareTab={this.openShareTab}
+          onUseInChat={
+            this.getUseInChatSkillSet() ? this.onUseInChat : undefined
+          }
         />
       );
 
@@ -271,6 +288,9 @@ export default function withQuickButtons(WrappedComponent) {
       contextOptionsStore,
       selectedFolderStore,
       filesSettingsStore,
+      aiPresetsStore,
+      userStore,
+      currentTariffStatusStore,
     }) => {
       const {
         setFavoriteAction,
@@ -326,6 +346,20 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder,
         showForcedInfoPanelLoader,
         isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
+        // Who may use the AI chat, as Shell decides it (`canUseAi`).
+        canUseAiChat:
+          authStore.isAuthenticated &&
+          !userStore?.user?.isVisitor &&
+          !currentTariffStatusStore?.isNotPaidPeriod &&
+          !!settingsStore.aiServicesEnabled,
+        // The open folder, which tells a skill of a skill set.
+        openFolder: {
+          id: selectedFolderStore.id,
+          title: selectedFolderStore.title,
+          roomType: selectedFolderStore.roomType,
+          parentRoomType: selectedFolderStore.parentRoomType,
+        },
+        requestUseInChat: aiPresetsStore.requestUseInChat,
       };
     },
   )(observer(WithQuickButtons));

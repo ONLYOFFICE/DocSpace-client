@@ -157,6 +157,20 @@ class AiPresetsStore {
    */
   pendingApply: TAiPreset | null = null;
 
+  /**
+   * A skill set "Use in chat" opens the chat with, waiting for
+   * AiPresetsBridge, which holds the chat stores; `null` once it is open.
+   */
+  pendingUseInChat: AiChatPresetRoom | null = null;
+
+  /**
+   * The skill sets "Use in chat" connected to the default agent's chat.
+   * They are the chat's context rooms while no agent is picked (Shell's
+   * `contextRoom`), so the chat keeps them when it mounts, until an agent is
+   * picked or another set is used.
+   */
+  chatSkillRooms: AiChatPresetRoom[] | null = null;
+
   private requestId = 0;
 
   // When the list was last read, and the read on its way: the chat's own
@@ -171,6 +185,8 @@ class AiPresetsStore {
   constructor() {
     makeAutoObservable<this, "lastReadAt" | "reading">(this, {
       pendingApply: observable.ref,
+      pendingUseInChat: observable.ref,
+      chatSkillRooms: observable.ref,
       lastReadAt: false,
       reading: false,
     });
@@ -181,6 +197,7 @@ class AiPresetsStore {
     this.userId = userId;
     this.presets = [];
     this.activePreset = null;
+    this.chatSkillRooms = null;
     this.lastReadAt = 0;
     if (userId) void this.fetchPresets();
   };
@@ -267,6 +284,31 @@ class AiPresetsStore {
 
   setActivePreset = (preset: TAiPreset | null) => {
     this.activePreset = preset;
+    // An agent brings its own skill sets: those used in the default agent's
+    // chat are not connected again when it is left.
+    if (preset) this.chatSkillRooms = null;
+  };
+
+  /**
+   * "Use in chat" on a skill set: the chat opens in a new conversation on the
+   * default agent with the set connected (see AiPresetsBridge).
+   */
+  requestUseInChat = (skillSet: { id: number | string; title: string }) => {
+    this.pendingUseInChat = {
+      cloud: "docspace",
+      id: String(skillSet.id),
+      name: skillSet.title,
+    };
+  };
+
+  consumeUseInChat = (): AiChatPresetRoom | null => {
+    const room = this.pendingUseInChat;
+    this.pendingUseInChat = null;
+    return room;
+  };
+
+  setChatSkillRooms = (rooms: AiChatPresetRoom[] | null) => {
+    this.chatSkillRooms = rooms;
   };
 
   /**
@@ -334,6 +376,19 @@ class AiPresetsStore {
   get activePresetContextRooms(): { id: string; name: string }[] | null {
     const rooms = this.activePreset?.contextRooms;
     return rooms ? rooms.map((room) => ({ id: room.id, name: room.name })) : null;
+  }
+
+  /**
+   * The chat's context rooms: the active project's Instructions rooms, else
+   * the skill sets "Use in chat" connected; `null` with neither.
+   */
+  get chatContextRooms(): { id: string; name: string }[] | null {
+    return (
+      this.activePresetContextRooms ??
+      (this.chatSkillRooms
+        ? this.chatSkillRooms.map((room) => ({ id: room.id, name: room.name }))
+        : null)
+    );
   }
 }
 

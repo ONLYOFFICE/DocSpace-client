@@ -42,6 +42,9 @@ import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import PrintIcon from "PUBLIC_DIR/images/icons/16/print.react.svg";
+import DownloadIcon from "PUBLIC_DIR/images/icons/16/download.react.svg";
+import CopyIcon from "PUBLIC_DIR/images/icons/16/copy.react.svg";
 import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
 
 import {
@@ -169,18 +172,21 @@ export const RecoveryPhraseContent = ({
           size={ButtonSize.small}
           onClick={handlePrintKit}
           label={t("Common:RecoveryKitPrint")}
+          icon={<PrintIcon aria-hidden="true" data-testid="recovery_save_icon" />}
           isDisabled={isLoading}
         />
         <Button
           size={ButtonSize.small}
           onClick={handleDownloadKit}
           label={t("Common:Download")}
+          icon={<DownloadIcon aria-hidden="true" data-testid="recovery_save_icon" />}
           isDisabled={isLoading}
         />
         <Button
           size={ButtonSize.small}
           onClick={handleCopy}
           label={t("Common:CopyToClipboard")}
+          icon={<CopyIcon aria-hidden="true" data-testid="recovery_save_icon" />}
           isDisabled={isLoading}
         />
       </div>

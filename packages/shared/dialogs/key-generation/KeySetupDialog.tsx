@@ -176,6 +176,7 @@ export const KeySetupDialog = ({
         aria-labelledby={titleId}
         isLoading={!ready}
         autoMaxHeight
+        isLarge
       >
         <ModalDialog.Header>
           <span id={titleId}>{title}</span>

@@ -99,6 +99,7 @@ export const RecoveryPhraseDisplayModal: React.FC<
         aria-labelledby={titleId}
         isLoading={!ready}
         autoMaxHeight
+        isLarge
       >
         <ModalDialog.Header>
           <span id={titleId}>{t("Common:RecoveryPhraseTitle")}</span>

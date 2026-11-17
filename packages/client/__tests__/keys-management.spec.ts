@@ -441,6 +441,99 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     ]);
   });
 
+  const openRecoveryStep = async (page: Page, baseUrl: string) => {
+    const dialog = await openPassphraseDialog(page, baseUrl);
+    const passphrase = "correct horse battery staple";
+    await dialog.getByLabel("Passphrase", { exact: true }).fill(passphrase);
+    await dialog
+      .getByLabel("Confirm passphrase", { exact: true })
+      .fill(passphrase);
+    await dialog.getByRole("button", { name: "Continue" }).click();
+    const words = page.getByTestId("recovery_phrase_words");
+    await expect(words).toBeVisible({ timeout: 5_000 });
+    return words;
+  };
+
+  const tileBoxes = async (words: Locator) =>
+    words.getByRole("listitem").evaluateAll((items) =>
+      items.map((item) => {
+        const box = item.getBoundingClientRect();
+        return {
+          top: Math.round(box.top),
+          height: Math.round(box.height),
+          cut: item.scrollWidth > item.clientWidth,
+        };
+      }),
+    );
+
+  for (const [screen, viewport, perRow] of [
+    ["Wide screen", { width: 1440, height: 1024 }, 4],
+    ["Phone", MOBILE, 2],
+  ] as const) {
+    test(`Recovery phrase tiles: ${screen}`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+      await page.setViewportSize(viewport);
+      const words = await openRecoveryStep(page, baseUrl);
+
+      const boxes = await tileBoxes(words);
+      expect(boxes).toHaveLength(24);
+      for (let row = 0; row < 24 / perRow; row += 1) {
+        const tops = boxes
+          .slice(row * perRow, (row + 1) * perRow)
+          .map((box) => box.top);
+        expect(new Set(tops).size, `row ${row + 1}`).toBe(1);
+        if (row > 0)
+          expect(tops[0]).toBeGreaterThan(boxes[(row - 1) * perRow].top);
+      }
+      // Longest word: every word on one line of its tile, none cut.
+      expect(new Set(boxes.map((box) => box.height)).size).toBe(1);
+      expect(boxes.filter((box) => box.cut)).toHaveLength(0);
+    });
+  }
+
+  for (const [screen, viewport] of [
+    ["one row", { width: 1440, height: 1024 }],
+    ["Long labels", MOBILE],
+  ] as const) {
+    test(`Recovery phrase save actions: ${screen}`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+      await page.setViewportSize(viewport);
+      await openRecoveryStep(page, baseUrl);
+
+      const actions = await Promise.all(
+        ["Print or save as PDF", "Download", "Copy to clipboard"].map(
+          async (name) => {
+            const button = page
+              .getByRole("dialog")
+              .getByRole("button", { name, exact: true });
+            await expect(button.locator("svg")).toBeVisible();
+            return button.evaluate((element) => {
+              const box = element.getBoundingClientRect();
+              const label = element.querySelector(".button-content");
+              return {
+                top: Math.round(box.top),
+                cut: label ? label.scrollWidth > label.clientWidth : false,
+              };
+            });
+          },
+        ),
+      );
+
+      expect(actions.filter((action) => action.cut)).toHaveLength(0);
+      const rows = new Set(actions.map((action) => action.top)).size;
+      if (screen === "one row") expect(rows).toBe(1);
+      else expect(rows).toBeGreaterThan(1);
+    });
+  }
+
   // WCAG 2.x contrast of two computed CSS colours ("rgb(r, g, b)").
   const contrastOf = (a: string, b: string) => {
     const luminance = (css: string) => {

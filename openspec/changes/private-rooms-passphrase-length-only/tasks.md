@@ -6,7 +6,7 @@ tests must stay green. No locale key is added or changed.
 
 ## 1. Generator settings in the kit
 
-- [ ] 1.1 In `docspace-ui-kit-react` on `release/v4.1.0` give `PasswordInput` an optional property with the settings of its generator, defaulting to `passwordSettings`, passed by `components/password-input/index.tsx` to `hooks/usePasswordGenerator.ts`; regenerate the README props; commit there, then `pnpm build && pnpm verify:package && pnpm pack` and `pnpm run update-ui-kit` here. Verify: kit cases in `components/password-input/PasswordInput.test.tsx` showing that the generator follows the new property when given and `passwordSettings` otherwise, `pnpm check:readme` in the kit, and `pnpm exec tsc` in shared, client, sdk and doceditor here
+- [x] 1.1 In `docspace-ui-kit-react` on `release/v4.1.0` give `PasswordInput` an optional property with the settings of its generator, defaulting to `passwordSettings`, passed by `components/password-input/index.tsx` to `hooks/usePasswordGenerator.ts`; regenerate the README props; commit there, then `pnpm build && pnpm verify:package && pnpm pack` and `pnpm run update-ui-kit` here. Verify: kit cases in `components/password-input/PasswordInput.test.tsx` showing that the generator follows the new property when given and `passwordSettings` otherwise, `pnpm check:readme` in the kit, and `pnpm exec tsc` in shared, client, sdk and doceditor here
 
 ## 2. Rules of a new passphrase
 

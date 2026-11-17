@@ -72,12 +72,18 @@ export const getAiWorkspaceListType = (search: string): RoomsType => {
   return LIST_TYPES.has(type) ? (type as RoomsType) : RoomsType.AiProjectRoom;
 };
 
-/** The list's title: the name of the sidebar entry that opens it. */
-export const getAiWorkspaceTitle = (
+/** The list a room of the AI Chat section is listed in: its room type; `null` for another room. */
+export const getAiRoomListType = (
+  roomType: RoomsType | number | null | undefined,
+): RoomsType | null =>
+  roomType != null && LIST_TYPES.has(roomType) ? (roomType as RoomsType) : null;
+
+/** The name of the list of a room type: the sidebar entry that opens it. */
+export const getAiListTitle = (
   t: (key: string) => string,
-  search: string,
+  type: RoomsType | null,
 ): string => {
-  switch (getAiWorkspaceListType(search)) {
+  switch (type) {
     case RoomsType.InstructionsRoom:
       return t("Common:SkillSets");
     case RoomsType.KnowledgeRoom:
@@ -104,6 +110,12 @@ export const getAiWorkspaceInfoPanelHint = (
       return t("Common:AIAgentsEmptyScreenTent");
   }
 };
+
+/** The list's title: the name of the sidebar entry that opens it. */
+export const getAiWorkspaceTitle = (
+  t: (key: string) => string,
+  search: string,
+): string => getAiListTitle(t, getAiWorkspaceListType(search));
 
 export type TAiWorkspaceCreatePayload =
   | { startRoomType: RoomsType }

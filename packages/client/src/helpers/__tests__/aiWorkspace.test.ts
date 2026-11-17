@@ -3,6 +3,8 @@ import { describe, expect, it } from "vitest";
 import { RoomsType } from "@docspace/shared/enums";
 
 import {
+  getAiListTitle,
+  getAiRoomListType,
   getAiWorkspaceCreatePayload,
   getAiWorkspaceInfoPanelHint,
   getAiWorkspaceListType,
@@ -51,6 +53,23 @@ describe("AI Chat section lists in the Info panel", () => {
     [`?type=${RoomsType.KnowledgeRoom}`, "InfoPanel:KnowledgeBasesEmptyScreenText"],
   ])("%s with nothing selected says %s", (search, hint) => {
     expect(getAiWorkspaceInfoPanelHint(t, search)).toBe(hint);
+  });
+});
+
+describe("The list of a room of the AI Chat section", () => {
+  it.each([
+    [RoomsType.InstructionsRoom, "Common:SkillSets"],
+    [RoomsType.KnowledgeRoom, "Common:AIProjectKnowledgeRooms"],
+    [RoomsType.AiProjectRoom, "Common:Agents"],
+  ])("a room of type %s is in %s", (type, title) => {
+    expect(getAiRoomListType(type)).toBe(type);
+    expect(getAiListTitle(t, type)).toBe(title);
+  });
+
+  it("knows no list for another room", () => {
+    expect(getAiRoomListType(RoomsType.CustomRoom)).toBeNull();
+    expect(getAiRoomListType(undefined)).toBeNull();
+    expect(getAiRoomListType(null)).toBeNull();
   });
 });
 

@@ -72,7 +72,11 @@ import {
   setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
-import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
+import {
+  getAiListTitle,
+  getAiRoomListType,
+  getAiWorkspaceTitle,
+} from "SRC_DIR/helpers/aiWorkspace";
 import {
   getSectionAddressCorrection,
   SECTION_DECIDED_STATE,
@@ -378,6 +382,16 @@ export function fetchFilesImpl(
 
       const currentFolder: TItem = data.current;
 
+      // A room of the AI Chat section: its list (Skill sets, Knowledge bases,
+      // Agents), which the root crumb names and leads back to.
+      const aiRoomListType =
+        data.current.rootFolderType === FolderType.AiHub
+          ? getAiRoomListType(
+              (data.pathParts[1] as TPathParts | undefined)?.roomType ??
+                data.current.roomType,
+            )
+          : null;
+
       const navigationPath = await Promise.all(
         data.pathParts.map(async (folder, idx) => {
           const { Rooms, Archive } = FolderType;
@@ -399,17 +413,23 @@ export function fetchFilesImpl(
           const { title, roomType, folderType } = folderInfo as TFolder &
             TPathParts;
 
+          const isAiListRoot = idx === 0 && aiRoomListType !== null;
+
           const isRootRoom =
-            idx === 0 &&
-            (data.current.rootFolderType === Rooms ||
-              data.current.rootFolderType === Archive);
+            (idx === 0 &&
+              (data.current.rootFolderType === Rooms ||
+                data.current.rootFolderType === Archive)) ||
+            isAiListRoot;
 
           // Form rooms live in the VirtualRooms tree, so the server names the
           // root path part "Rooms". On the /forms route that crumb already
           // navigates to the Forms list (see onClickFolder -> moveToRoomsPage),
           // so it must be labelled Forms to match where it leads.
-          const crumbTitle =
-            isRootRoom && window.location.pathname.startsWith("/forms")
+          // The server names the AI Chat section's root "AI rooms"; the crumb
+          // is the list the room is in, as the sidebar names it.
+          const crumbTitle = isAiListRoot
+            ? getAiListTitle(i18n.t, aiRoomListType)
+            : isRootRoom && window.location.pathname.startsWith("/forms")
               ? i18n.t("Common:Forms")
               : isRootRoom &&
                   folderType === Rooms &&

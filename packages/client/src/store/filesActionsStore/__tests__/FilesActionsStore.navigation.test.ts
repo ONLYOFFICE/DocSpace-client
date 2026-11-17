@@ -216,3 +216,34 @@ describe("FilesActionsStore — exits from the Private section", () => {
   });
 });
 
+
+describe("FilesActionsStore — back from a room of the AI Chat section", () => {
+  const openAiRoom = (store: Record<string, unknown>) => {
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      location: { pathname: "/ai-rooms/12/filter", search: "?folder=12", state: {} },
+      navigate,
+    };
+    return createTestFilesActionsStore({ selectedFolderStore: store });
+  };
+
+  it("returns from a skill set to the Skill sets list", () => {
+    openAiRoom({ roomType: 10, navigationPath: [] }).moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url.startsWith("/ai-rooms/filter?")).toBe(true);
+    expect(url).toContain(`searchArea=${RoomSearchArea.AiHub}`);
+    expect(url).toContain("type=10");
+  });
+
+  it("returns from a folder of a knowledge base to the Knowledge bases list", () => {
+    openAiRoom({
+      roomType: null,
+      navigationPath: [
+        { id: 12, title: "Contracts", isRoom: true, roomType: 11 },
+        { id: 2, title: "Common:AIProjectKnowledgeRooms", isRootRoom: true },
+      ],
+    }).moveToRoomsPage();
+
+    expect(navigate.mock.calls[0][0]).toContain("type=11");
+  });
+});

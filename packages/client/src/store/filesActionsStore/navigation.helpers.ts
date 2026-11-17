@@ -135,12 +135,17 @@ self: FilesActionStore
     filter.searchArea = RoomSearchArea.Forms;
   }
 
-  // The AI section opens the list of the room's kind (the Agents for an
-  // agent), or the list it is on: its list with no type draws the Rooms body.
+  // A room of the AI Chat section goes back to the list it is in (Skill
+  // sets, Knowledge bases, Agents), as the sidebar entry opens it, or to the
+  // list it is on: the section's list with no type draws the Rooms body.
   if (correctCategoryType === CategoryType.AiHub) {
     const roomType =
       self.selectedFolderStore.pathParts?.find((part) => part.roomType != null)
-        ?.roomType ?? getAiWorkspaceListType(window.DocSpace.location.search);
+        ?.roomType ??
+      self.selectedFolderStore.roomType ??
+      self.selectedFolderStore.navigationPath?.find((item) => item.isRoom)
+        ?.roomType ??
+      getAiWorkspaceListType(window.DocSpace.location.search);
 
     window.DocSpace.navigate(
       getAiWorkspaceListUrlOf(roomType, self.userStore?.user?.id),

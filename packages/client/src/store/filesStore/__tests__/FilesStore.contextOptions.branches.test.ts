@@ -436,6 +436,44 @@ describe("getFilesContextOptions — download in a private room", () => {
   });
 });
 
+describe("getFilesContextOptions — an agent's owner", () => {
+  const agent = (ownerId: string) =>
+    ({
+      id: 8,
+      title: "Legal Reviewer",
+      roomType: RoomsType.AiProjectRoom,
+      rootFolderType: FolderType.AiHub,
+      inRoom: true,
+      createdBy: { id: ownerId },
+      security: { Read: true, EditRoom: true, EditAccess: true, Delete: true },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  it("is offered no Leave agent, while a member is", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    expect(store.getFilesContextOptions(agent("user-1"))).not.toContain(
+      "leave-room",
+    );
+    expect(store.getFilesContextOptions(agent("user-2"))).toContain(
+      "leave-room",
+    );
+  });
+
+  it("keeps Leave the room for the owner of an ordinary room", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      ...agent("user-1"),
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+    } as unknown as TItem;
+
+    expect(store.getFilesContextOptions(room)).toContain("leave-room");
+  });
+});
+
 describe("getFilesContextOptions — room-level operations of a private room", () => {
   const ROOM_LEVEL_OPTIONS = [
     "edit-index",

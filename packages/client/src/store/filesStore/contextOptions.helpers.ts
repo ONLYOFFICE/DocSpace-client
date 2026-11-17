@@ -895,6 +895,12 @@ export const buildContextOptions = (
       roomOptions = removeOptions(roomOptions, ["duplicate-room"]);
     }
 
+    // The agent's owner hands the agent over through change owner before
+    // leaving it: no Leave agent is offered to them.
+    if (isAiProject && item.createdBy?.id === deps.userStore.user?.id) {
+      roomOptions = removeOptions(roomOptions, ["leave-room"]);
+    }
+
     if (!canRemoveRoom) {
       roomOptions = removeOptions(roomOptions, ["delete"]);
     }

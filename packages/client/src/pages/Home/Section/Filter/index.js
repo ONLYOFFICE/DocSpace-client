@@ -1612,7 +1612,8 @@ const SectionFilterContent = ({
     commonOptions.push(name);
 
     if (isRooms) {
-      commonOptions.push(roomType);
+      // Each list of the AI Chat section holds one room type: no Type sort.
+      if (!isAiHubFolder) commonOptions.push(roomType);
       commonOptions.push(tags);
       commonOptions.push(owner);
       commonOptions.push(activityDate);
@@ -1634,6 +1635,7 @@ const SectionFilterContent = ({
     return commonOptions;
   }, [
     isRooms,
+    isAiHubFolder,
     isContactsPage,
 
     t,

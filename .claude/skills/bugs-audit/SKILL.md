@@ -1,7 +1,7 @@
 ---
 name: bugs-audit
 description: Audit the open DocSpace Bugzilla backlog (all components — client, server, API, AI, SDK) — close fixed/obsolete bugs with a comment, raise priority + whiteboard on quick fixes, sort suggestions into a document, report the result (dry-run first, writes only after an explicit OK)
-argument-hint: "[sample=20 | batch=N | ids=1,2] [components=Files,Rooms,…] [lang=ru|en]"
+argument-hint: "[sample=20 | batch=N | ids=1,2] [components=Files,Rooms,…] [lang=ru|en] [agents=2..10]"
 ---
 
 # Audit the Bugzilla backlog
@@ -162,6 +162,59 @@ Other fields: `resolution` for `fixed`/`obsolete`; `estimate` + `area` for
 `complexity` (S/M/L/XL) + `value` (high/medium/low) + `rationale` for
 `valid` suggestions.
 
+### Parallel review (`agents=N`)
+
+Without `agents=`, review sequentially yourself, as above. Never start agents
+on your own: an explicit `agents=N` (2–10) from the user **is** the consent to
+run them, so do not ask again; without it, parallel review needs a separate yes.
+
+1. Split the run so each agent stays in one repo:
+
+   ```bash
+   node .claude/scripts/bugzilla/audit.mjs split --dir <dir> --parts <N>
+   ```
+
+   It writes `part-<k>.json` (whole side/component groups per part) and prints
+   the layout. Fewer parts than `N` come out when there are fewer component
+   groups — start only as many agents as parts.
+
+2. Start one `general-purpose` agent per part with the Agent tool, **all in one
+   message** so they run in parallel. Each prompt carries everything the agent
+   needs — it sees nothing of this conversation:
+   - the absolute paths of its `part-<k>.json` and of its output file (the
+     `output` field of the part);
+   - this SKILL.md's path, with the instruction to follow "Where each
+     component's code lives" and "Step 3" exactly: verdicts, evidence, `side`,
+     the `comment` table, the decision schema;
+   - the comment language (`ru`/`en`) and the agreed resolutions;
+   - the limits: read-only — no edits in any repo, no branch switching, no
+     `git fetch`, no `audit.mjs plan`/`apply`, no Bugzilla writes (`bz.mjs
+     --show` to read attachments is fine); write only its output file, a JSON
+     array with exactly one decision per bug of its part; when unsure, lower
+     `confidence` instead of closing;
+   - the reply it must return: the count by verdict and the ids it could not
+     settle — not the decisions themselves (they are in the file).
+
+3. When all agents are done:
+
+   ```bash
+   node .claude/scripts/bugzilla/audit.mjs merge --dir <dir>
+   ```
+
+   It refuses a bug decided twice and lists bugs no part covered — review those
+   yourself and append them to `decisions.json`.
+
+4. **Verify before Step 4.** Agents misjudge confidence more often than a single
+   reviewer. Re-check yourself every decision that will change a field — each
+   `fixed`/`obsolete`/`quickfix` with `confidence: high`: open its evidence (the
+   commit on the main line, the `file:line`) and confirm it. Anything you cannot
+   confirm goes down to `medium` (comment only). Spot-check a few `valid` ones
+   too. Tell the user how many decisions you downgraded.
+
+`--model` in Step 4 is the model that reviewed; subagents inherit yours unless
+the agent definition says otherwise — if any part ran on another model, name
+both (`"Claude Opus 5.5 + Claude Sonnet 5.5"`).
+
 ## Step 4 — dry-run plan
 
 ```bash
@@ -212,7 +265,8 @@ patterns noticed) and the full paths of `suggestions.md` and `report.md`.
 
 ## Scaling past the pilot
 
-After the pilot, ask how to continue: further `--batch` runs reviewed by you, or
-a Workflow that reviews batches in parallel — the latter only with the user's
-explicit consent, since it spends many tokens. Every batch goes through the
-same plan → OK → apply cycle.
+After the pilot, ask how to continue: further `batch=` runs reviewed by you, or
+the same with `agents=N` — the latter only when the user passes it or says yes,
+since it spends several times the tokens. Suggest 2–4 agents; split by side or
+component, not evenly by count. Every batch goes through the same
+plan → OK → apply cycle.

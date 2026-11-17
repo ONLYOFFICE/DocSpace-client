@@ -75,6 +75,11 @@ stays local and is never committed. A run keeps `index.json`, `bugs.json`,
 `decisions.json`, `actions.json`, `apply-log.json`, `suggestions.md` and
 `report.md`.
 
+For a parallel review (`/bugs-audit … agents=N`), `split --parts N` divides
+`bugs.json` into `part-<k>.json` by side/component, each agent writes
+`decisions.part-<k>.json`, and `merge` joins them into `decisions.json`,
+refusing a bug decided twice and listing bugs no part covered.
+
 The review between `export` and `plan` (writing `decisions.json`) is done by
 `/bugs-audit` — see its SKILL.md for the decision schema and evidence rules.
 `apply` skips bugs that changed after the export (`conflict`) or already carry

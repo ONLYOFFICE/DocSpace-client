@@ -372,6 +372,77 @@ async function cmdExport(args, key) {
   console.log(`exported with detail: ${detailed.length} -> ${path.join(dir, "bugs.json")}`);
 }
 
+/* ------------------------------------------------------------------ split / merge */
+
+// Parallel review: a whole side/component group goes to one part, so an agent
+// stays in one repo; largest groups first, each onto the lightest part.
+function cmdSplit(args) {
+  const dir = requireDir(args);
+  const parts = Number(args.parts);
+  if (!Number.isInteger(parts) || parts < 2 || parts > 10) {
+    console.error("--parts must be an integer from 2 to 10");
+    process.exit(2);
+  }
+  const exported = readJson(path.join(dir, "bugs.json"));
+  const groups = new Map();
+  for (const b of exported.bugs) {
+    const key = `${sideOf(null, b)}/${b.component}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(b);
+  }
+  const bins = Array.from({ length: Math.min(parts, groups.size) }, () => ({ groups: [], bugs: [] }));
+  const ordered = [...groups.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+  for (const [key, bugs] of ordered) {
+    const bin = bins.reduce((min, x) => (x.bugs.length < min.bugs.length ? x : min));
+    bin.groups.push(key);
+    bin.bugs.push(...bugs);
+  }
+  bins.forEach((bin, i) => {
+    const part = i + 1;
+    writeJson(path.join(dir, `part-${part}.json`), {
+      part,
+      groups: bin.groups,
+      output: path.join(dir, `decisions.part-${part}.json`),
+      bugs: bin.bugs,
+    });
+    console.log(`part-${part}.json  ${String(bin.bugs.length).padStart(3)} bugs  ${bin.groups.join(", ")}`);
+  });
+  if (bins.length < parts) console.log(`only ${bins.length} part(s): there are ${groups.size} component group(s)`);
+}
+
+function cmdMerge(args) {
+  const dir = requireDir(args);
+  const exported = readJson(path.join(dir, "bugs.json"));
+  const files = readdirSync(dir)
+    .filter((f) => /^decisions\.part-\d+\.json$/.test(f))
+    .sort();
+  if (!files.length) {
+    console.error(`no decisions.part-*.json in ${dir}`);
+    process.exit(2);
+  }
+  const seen = new Map();
+  const duplicates = [];
+  for (const f of files) {
+    for (const d of readJson(path.join(dir, f))) {
+      const id = Number(d.id);
+      if (seen.has(id)) duplicates.push(`#${id} (${seen.get(id)} and ${f})`);
+      else seen.set(id, f);
+    }
+  }
+  if (duplicates.length) {
+    console.error(`the same bug is decided twice:\n  ${duplicates.join("\n  ")}`);
+    process.exit(1);
+  }
+  const merged = files.flatMap((f) => readJson(path.join(dir, f)));
+  const expected = new Set(exported.bugs.map((b) => b.id));
+  const missing = [...expected].filter((id) => !seen.has(id));
+  const extra = [...seen.keys()].filter((id) => !expected.has(id));
+  writeJson(path.join(dir, "decisions.json"), merged);
+  console.log(`merged ${merged.length} decision(s) from ${files.length} file(s) -> ${path.join(dir, "decisions.json")}`);
+  if (missing.length) console.log(`not reviewed by any part: ${missing.map((id) => `#${id}`).join(", ")}`);
+  if (extra.length) console.log(`not in bugs.json (plan will reject): ${extra.map((id) => `#${id}`).join(", ")}`);
+}
+
 /* ------------------------------------------------------------------ plan */
 
 const commentOf = (d) => d.comment ?? d.comment_ru ?? "";
@@ -749,6 +820,8 @@ const USAGE = `Bugzilla backlog audit (run from the repo root)
 Commands (only "apply --confirm" writes to Bugzilla):
   fields        field values of this instance and the product components
   export        open bugs with signals -> <run>/index.json, <run>/bugs.json
+  split         divide <run>/bugs.json into part-<k>.json for parallel review (--parts N)
+  merge         join decisions.part-<k>.json into <run>/decisions.json, check coverage
   plan          check <run>/decisions.json, preview every change -> <run>/actions.json
   apply         re-read each bug and apply the plan; prints only, unless --confirm
   suggestions   suggestions document -> <run>/suggestions.md
@@ -762,6 +835,8 @@ Examples:
   audit.mjs export --components "Files,Rooms" --sample 20 --name pilot
   audit.mjs export --ids <id>,<id>
   audit.mjs export --batch 20 --skip .claude/scripts/bugzilla/runs/<run>/decisions.json
+  audit.mjs split --parts 3                        # parallel review: one part per agent
+  audit.mjs merge                                  # after the agents wrote their parts
   audit.mjs plan --model "Claude Opus 5.5"
   audit.mjs plan --model "Claude Opus 5.5" --lang en
   audit.mjs apply                                  # dry run
@@ -783,6 +858,7 @@ Flags:
            when omitted, required otherwise; every comment is checked)
            --dir <run>  --decisions <file>  --close-status RESOLVED
   apply    --dir <run>  --only 1,2  --confirm
+  split    --dir <run>  --parts 2..10
   others   --dir <run>  (suggestions also --out <file.md>)
 
 Setup: .claude/scripts/bugzilla/README.md (config.local.json + BZ_API_KEY).
@@ -791,7 +867,7 @@ decisions.json is written by the /bugs-audit skill; see its SKILL.md.`;
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const cmd = args._[0];
-  const offline = { suggestions: cmdSuggestions, report: cmdReport };
+  const offline = { split: cmdSplit, merge: cmdMerge, suggestions: cmdSuggestions, report: cmdReport };
   const online = { fields: cmdFields, export: cmdExport, plan: cmdPlan, apply: cmdApply };
 
   if (!cmd || cmd === "help" || args.help) {

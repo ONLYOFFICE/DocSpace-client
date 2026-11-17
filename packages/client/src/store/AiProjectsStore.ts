@@ -172,6 +172,14 @@ class AiProjectsStore {
   projectDialog: TProjectDialogState | null = null;
 
   /**
+   * Bumped, by project id, each time a project is taken over as the server
+   * has it after a change (a save here, an edit announced from elsewhere):
+   * views that read a project on their own, as the Info panel's Context tab
+   * does, read it again when its number moves.
+   */
+  projectRevisions: Record<number, number> = {};
+
+  /**
    * Bumped by every open and close: a read by id that lands after another
    * open, or after the project was left, opens nothing.
    */
@@ -360,6 +368,7 @@ class AiProjectsStore {
 
   /** The open project (and the one in the edit form), as the server has it now. */
   private replaceProject = (project: TAiProject) => {
+    this.projectRevisions[project.id] = (this.projectRevisions[project.id] ?? 0) + 1;
     // A project read in full is also what its tile shows.
     if (!project.aiProject.partial) this.tileSummaries[project.id] = toAiProjectSummary(project);
     if (this.activeProject?.id === project.id) this.activeProject = project;

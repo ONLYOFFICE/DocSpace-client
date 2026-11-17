@@ -34,6 +34,7 @@
  */
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
@@ -94,18 +95,31 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   const [failed, setFailed] = React.useState(false);
   const [expanded, setExpanded] = React.useState<Record<number, boolean>>({});
 
+  // Read again once the agent is saved ("Manage sources") or changed elsewhere.
+  const revision = aiProjectsStore.projectRevisions[id] ?? 0;
+  const shownId = React.useRef<number | null>(null);
+
   React.useEffect(() => {
     let cancelled = false;
-    setContext(null);
-    setFailed(false);
-    setExpanded({});
+    // Another agent starts afresh; the same one keeps what it shows until
+    // it is read again.
+    if (shownId.current !== id) {
+      shownId.current = id;
+      setContext(null);
+      setFailed(false);
+      setExpanded({});
+    }
     readAgentContext(id)
-      .then((data) => !cancelled && setContext(data))
+      .then((data) => {
+        if (cancelled) return;
+        setContext(data);
+        setFailed(false);
+      })
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
-  }, [id]);
+  }, [id, revision]);
 
   if (failed)
     return (
@@ -217,4 +231,4 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   );
 };
 
-export default AiAgentContext;
+export default observer(AiAgentContext);

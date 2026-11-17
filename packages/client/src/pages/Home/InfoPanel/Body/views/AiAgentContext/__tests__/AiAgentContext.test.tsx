@@ -1,12 +1,16 @@
 import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import { observable, runInAction } from "mobx";
 
 const api = vi.hoisted(() => ({
   getAiProject: vi.fn(),
   getAiProjectSkills: vi.fn(),
 }));
-const store = vi.hoisted(() => ({ openEditDialogById: vi.fn() }));
+const store = vi.hoisted(() => ({
+  openEditDialogById: vi.fn(),
+  projectRevisions: {} as Record<number, number>,
+}));
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 vi.mock("SRC_DIR/store/useStore", () => ({ useStore: () => store }));
@@ -42,6 +46,7 @@ beforeEach(() => {
     .mockReset()
     .mockResolvedValue([{ id: 1, skills: [{ id: "9", name: "clause-check", description: "Checks" }] }]);
   store.openEditDialogById.mockReset();
+  store.projectRevisions = observable({});
 });
 
 describe("AiAgentContext", () => {
@@ -68,6 +73,26 @@ describe("AiAgentContext", () => {
     render(<AiAgentContext id={7} />);
     fireEvent.click(await screen.findByTestId("ai-agent-context-manage"));
     expect(store.openEditDialogById).toHaveBeenCalledWith(7);
+  });
+
+  it("reads the agent again once it is saved, keeping what it shows meanwhile", async () => {
+    render(<AiAgentContext id={7} />);
+    await screen.findAllByTestId("room");
+    expect(api.getAiProject).toHaveBeenCalledTimes(1);
+
+    api.getAiProject.mockResolvedValue({
+      aiProject: { instructionsRooms: [room(1, "Legal")], knowledgeRooms: [room(4, "Policies")], canEditSettings: true },
+    });
+    act(() => {
+      runInAction(() => {
+        store.projectRevisions[7] = 1;
+      });
+    });
+    // The rooms stay on screen while the agent is read again.
+    expect(screen.getAllByTestId("room").length).toBeGreaterThan(0);
+
+    expect(await screen.findByText("Policies")).toBeTruthy();
+    expect(api.getAiProject).toHaveBeenCalledTimes(2);
   });
 
   it("offers a member no Manage sources", async () => {

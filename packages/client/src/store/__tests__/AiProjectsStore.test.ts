@@ -471,6 +471,8 @@ describe("AiProjectsStore", () => {
       await store.updateProject(1, { title: "Renamed" } as never);
 
       expect(store.projectDialog).toEqual({ mode: "edit", project: updated });
+      // The views that read the project themselves are told it moved.
+      expect(store.projectRevisions[1]).toBe(1);
     });
   });
 

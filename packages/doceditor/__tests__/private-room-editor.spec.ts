@@ -188,7 +188,7 @@ test.describe("Private room editor", () => {
       .locator('input[name="passphrase"], #passphrase input')
       .first()
       .fill(PASSPHRASE);
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
     await expect(prompt).toBeHidden({ timeout: 15000 });
 
     await expect

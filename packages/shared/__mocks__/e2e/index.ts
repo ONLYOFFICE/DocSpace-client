@@ -60,7 +60,7 @@ export {
 } from "./mswRequestInterceptor";
 export { createNextTestServer } from "./testServer";
 export { PlaywrightWebSocketMock } from "./playwrightWebSocketMock";
-export { expectScreenshot } from "./screenshots";
+export { expectElementScreenshot, expectScreenshot } from "./screenshots";
 
 export * from "./utils";
 

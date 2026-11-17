@@ -33,12 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { KEY_STATUS_BADGE_COLORS } from "./keyStatusBadgeColors";
@@ -50,6 +51,7 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
+import { splitFingerprint } from "@docspace/shared/services/encryption/fingerprint";
 import { activateAsButton } from "@docspace/shared/dialogs/key-dialog-keys";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
@@ -75,6 +77,9 @@ const KeyItem: React.FC<KeyItemProps> = ({
 }) => {
   const { t } = useTranslation(["Common", "People"]);
   const [fingerprint, setFingerprint] = useState<string>("");
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const detailsId = useId();
+  const fingerprintHintId = useId();
 
   useEffect(() => {
     const loadFingerprint = async () => {
@@ -123,9 +128,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
                 maxWidth="none"
               />
             </div>
-            <div className={styles.keyItemActions}>
+            <div className={styles.keyItemActions} data-testid="key_actions">
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={PencilReactSvgUrl}
                 size={16}
                 onClick={handleRotate}
@@ -138,6 +144,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
               />
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={DownloadReactSvgUrl}
                 size={16}
                 onClick={handleExport}
@@ -150,6 +157,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
               />
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={TrashReactSvgUrl}
                 size={16}
                 onClick={handleDelete}
@@ -173,23 +181,71 @@ const KeyItem: React.FC<KeyItemProps> = ({
           <Text fontSize="13px" className={styles.detailsLabel}>
             {t("Common:KeyFingerprint")}
           </Text>
-          <Text fontSize="13px" className={styles.monoValue}>
-            {fingerprint || "..."}
-          </Text>
-          {keyData.id ? (
-            <>
-              <Text fontSize="13px" className={styles.detailsLabel}>
-                {t("Common:KeyId")}
-              </Text>
-              <Text fontSize="13px" className={styles.monoValue}>
-                {keyData.id}
-              </Text>
-            </>
-          ) : null}
-          <Text fontSize="13px" className={styles.detailsLabel}>
-            {t("Common:Algorithm")}
-          </Text>
-          <Text fontSize="13px">X25519</Text>
+          <div className={styles.fingerprintCell}>
+            <Text
+              fontSize="13px"
+              className={`${styles.monoValue} ${styles.fingerprintValue}`}
+              aria-describedby={fingerprintHintId}
+              data-testid="key_fingerprint"
+            >
+              {fingerprint
+                ? splitFingerprint(fingerprint).map((group, index) => (
+                    <React.Fragment key={`${index}-${group}`}>
+                      {index > 0 ? " " : null}
+                      <span
+                        className={styles.fingerprintGroup}
+                        data-testid="key_fingerprint_group"
+                      >
+                        {group}
+                      </span>
+                    </React.Fragment>
+                  ))
+                : "..."}
+            </Text>
+            <Text
+              id={fingerprintHintId}
+              fontSize="12px"
+              className={styles.fingerprintHint}
+            >
+              {t("Common:KeyFingerprintHint")}
+            </Text>
+          </div>
+          <div className={styles.detailsToggleRow}>
+            <Link
+              type={LinkType.action}
+              fontSize="13px"
+              fontWeight={600}
+              isHovered
+              onClick={() => setDetailsOpen((open) => !open)}
+              tabIndex={isDeleting ? -1 : undefined}
+              aria-expanded={detailsOpen}
+              aria-controls={detailsId}
+              dataTestId="key_details_toggle"
+            >
+              {t("Common:Details")}
+            </Link>
+          </div>
+          <div
+            id={detailsId}
+            className={styles.detailsMore}
+            hidden={!detailsOpen}
+            data-testid="key_details_more"
+          >
+            {keyData.id ? (
+              <>
+                <Text fontSize="13px" className={styles.detailsLabel}>
+                  {t("Common:KeyId")}
+                </Text>
+                <Text fontSize="13px" className={styles.monoValue}>
+                  {keyData.id}
+                </Text>
+              </>
+            ) : null}
+            <Text fontSize="13px" className={styles.detailsLabel}>
+              {t("Common:Algorithm")}
+            </Text>
+            <Text fontSize="13px">X25519</Text>
+          </div>
         </div>
       </div>
       {isCurrentlyDeleting && (

@@ -101,6 +101,7 @@ vi.mock("@onlyoffice/apps-ui-kit/components/password-input", () => ({
     simpleView,
     passwordSettings,
     onValidateInput,
+    tooltipPasswordPlace,
   }: {
     inputValue?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -114,6 +115,7 @@ vi.mock("@onlyoffice/apps-ui-kit/components/password-input", () => ({
       specSymbolsRegexStr: string;
     };
     onValidateInput?: (rulesPassed: boolean) => void;
+    tooltipPasswordPlace?: string;
   }) =>
     React.createElement("input", {
       "data-testid": inputName,
@@ -134,6 +136,7 @@ vi.mock("@onlyoffice/apps-ui-kit/components/password-input", () => ({
         onChange?.(e);
       },
       "data-has-error": String(hasError),
+      "data-tooltip-place": tooltipPasswordPlace,
     }),
 }));
 
@@ -178,6 +181,7 @@ vi.mock("../KeyRotationDialog.module.scss", () => ({ default: {} }));
 // Import SUT after mocks are registered
 // ---------------------------------------------------------------------------
 import { KeyRotationDialog } from "../KeyRotationDialog";
+import { RULES_TOOLTIP_PLACE } from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -336,6 +340,44 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
       fireEvent.click(btn);
     });
     expect(onSubmit).not.toHaveBeenCalled();
+  });
+});
+
+describe("KeyRotationDialog: the strength grade does not contradict the passphrase rules", () => {
+  const strengthLine = () => screen.getByTestId("passphrase_strength");
+
+  it("Passphrase change", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "lorem ipsum dolor sitx");
+
+    expect(strengthLine()).toHaveTextContent("Common:PassphraseStrengthWeak");
+  });
+
+  it("All rules met", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "Tx7$kp!aL2nQz@vR");
+
+    expect(strengthLine()).toHaveTextContent("Common:PassphraseStrengthStrong");
+  });
+
+  it("No strength line before a new passphrase is typed", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+
+    expect(screen.queryByTestId("passphrase_strength")).not.toBeInTheDocument();
+  });
+});
+
+describe("KeyRotationDialog: the passphrase rules tooltip leaves the dialog readable", () => {
+  it("Passphrase change", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+
+    expect(screen.getByTestId("newPassphrase")).toHaveAttribute(
+      "data-tooltip-place",
+      RULES_TOOLTIP_PLACE,
+    );
   });
 });
 

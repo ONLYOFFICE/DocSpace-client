@@ -45,6 +45,8 @@ import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
+import enCommon from "PUBLIC_DIR/locales/en/Common.json";
+
 import { PassphraseModal } from "../PassphraseModal";
 
 beforeAll(() => {
@@ -207,18 +209,25 @@ describe("PassphraseModal", () => {
   });
 
   it.each([
-    { flow: "unlock", isNew: false, fields: ["Common:Passphrase"] },
+    {
+      flow: "unlock",
+      isNew: false,
+      action: "Common:UnlockKey",
+      fields: ["Common:Passphrase"],
+    },
     {
       flow: "key generation",
       isNew: true,
+      action: "Common:ContinueButton",
       fields: ["Common:Passphrase", "Common:ConfirmPassphrase"],
     },
-  ])("Busy reported to assistive technology: $flow", ({ isNew, fields }) => {
+  ])("Busy reported to assistive technology: $flow", ({ isNew, action, fields }) => {
     renderModal({ isNew, isLoading: true });
 
-    expect(
-      screen.getByRole("button", { name: "Common:ContinueButton" }),
-    ).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByRole("button", { name: action })).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
     for (const name of fields) {
       expect(screen.getByLabelText(name)).toBeDisabled();
     }
@@ -340,6 +349,35 @@ describe("PassphraseModal", () => {
 
       await user.type(getConfirmInput(), "x");
       await waitFor(() => expect(getSubmit()).toBeEnabled());
+    });
+  });
+
+  describe("The strength grade does not contradict the passphrase rules", () => {
+    const strengthLine = () => screen.getByTestId("passphrase_strength");
+
+    it("Long passphrase without a required character", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "lorem ipsum dolor sitx");
+
+      expect(
+        within(strengthLine()).getByText("Common:PassphraseStrengthWeak"),
+      ).toBeInTheDocument();
+      expect(
+        within(strengthLine()).queryByText("Common:PassphraseStrengthGood"),
+      ).not.toBeInTheDocument();
+    });
+
+    it("All rules met", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "Tx7$kp!aL2nQz@vR");
+
+      expect(
+        within(strengthLine()).getByText("Common:PassphraseStrengthStrong"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -688,6 +726,38 @@ describe("PassphraseModal", () => {
         await user.tab();
         expect(confirmation.contains(document.activeElement)).toBe(true);
       }
+    });
+  });
+
+  describe("Unlock with the passphrase", () => {
+    it("Confirm action names the unlock", () => {
+      renderModal();
+
+      expect(
+        screen.getByRole("button", { name: "Common:UnlockKey" }),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole("button", { name: "Common:ContinueButton" }),
+      ).toBeNull();
+    });
+
+    it("keeps Continue for a new passphrase", () => {
+      renderModal({ isNew: true });
+
+      expect(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe("Unlock prompt speaks about files", () => {
+    it("Hint of the unlock dialog", () => {
+      renderModal();
+
+      expect(screen.getByText("Common:PassphraseHint")).toBeInTheDocument();
+      expect(enCommon.PassphraseHint).toMatch(/encrypted files/i);
+      expect(enCommon.PassphraseHint).toMatch(/private rooms/i);
+      expect(enCommon.PassphraseHint).not.toMatch(/private key|device/i);
     });
   });
 });

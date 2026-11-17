@@ -454,7 +454,7 @@ test.describe("Keys management — advanced flows", () => {
       .getByLabel("Passphrase", { exact: true })
       .fill(passphrase);
     await prompt.getByText("Don't ask again on this device").click();
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
     await expect
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(1);

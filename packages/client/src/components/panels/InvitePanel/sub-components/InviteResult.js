@@ -108,7 +108,7 @@ const InviteResult = ({ t, outcome }) => {
             {t("Common:EncryptedAccessPending")}
           </Heading>
           <Text>{namesOf(pending.map((entry) => entry.member))}</Text>
-          <Text className={styles.description}>
+          <Text className={styles.resultReason}>
             {failed
               ? t("Common:EncryptedReencryptFailed")
               : t("Common:EncryptedReencryptPartialFailure", {
@@ -124,14 +124,14 @@ const InviteResult = ({ t, outcome }) => {
           aria-label={t("Common:NotInvited")}
         >
           {notInvitedWithoutKey.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedInviteNoKey", {
                 users: namesOf(notInvitedWithoutKey),
               })}
             </Text>
           ) : null}
           {refusedOtherwise.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedInviteFailed", {
                 users: namesOf(refusedOtherwise),
               })}
@@ -146,14 +146,14 @@ const InviteResult = ({ t, outcome }) => {
           aria-label={t("Common:NotInvited")}
         >
           {withoutKey.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedSkippedNoKeys", {
                 users: namesOf(withoutKey),
               })}
             </Text>
           ) : null}
           {withRefusedKey.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedSkippedKeyMismatch", {
                 users: namesOf(withRefusedKey),
               })}

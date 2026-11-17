@@ -55,7 +55,6 @@ import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
-import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 import { usePrivateRoomKeyGate } from "@docspace/shared/hooks/usePrivateRoomKeyGate";
 import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 
@@ -184,7 +183,7 @@ const CreateRoomDialog = ({
     },
     // A creation locked on the Private type cannot go on without a key; one
     // started from a room-type card keeps its dialog.
-    // Spec: room-membership, "Starting private room creation without a key starts key generation"
+    // Spec: room-membership, "Starting private room creation without a key opens key setup"
     onKeyGenerationCancelled: () => {
       if (startRoomType === RoomsTypePrivate || fetchedRoomParams) {
         onCloseRef.current?.();
@@ -195,7 +194,7 @@ const CreateRoomDialog = ({
 
   // A key list that has not loaded is unknown, never empty: it is fetched
   // first, and `null` comes back when that fails.
-  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  // Spec: room-membership, "Starting private room creation without a key opens key setup"
   const loadOwnKeys = useCallback(async () => {
     if (encryptionKeys) return encryptionKeys;
     try {
@@ -212,7 +211,7 @@ const CreateRoomDialog = ({
   const isPrivateStart = startRoomType === RoomsTypePrivate;
   // The panel of a creation locked on the Private type is not shown under
   // the key prompts: it waits for a key list known to hold a key.
-  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  // Spec: room-membership, "Starting private room creation without a key opens key setup"
   const waitsForKey =
     isPrivateStart && !keyGenerated && !(encryptionKeys?.length > 0);
   React.useEffect(() => {
@@ -269,12 +268,6 @@ const CreateRoomDialog = ({
       },
       ...additionalParams,
     }));
-  };
-
-  const onConfirmGenerateKey = keyGate.confirmKeyGeneration;
-
-  const onCancelGenerateKey = () => {
-    keyGate.cancelKeyGeneration(!!roomParams.isPrivate);
   };
 
   const isRoomTitleChanged = roomParams?.title?.trim() === "";
@@ -401,15 +394,6 @@ const CreateRoomDialog = ({
 
   return (
     <>
-      <ConfirmationModal
-        visible={keyGate.keyConfirmVisible}
-        title={t("Common:PrivateRoomKeyRequiredTitle")}
-        message={t("Common:PrivateRoomKeyRequiredDescription")}
-        confirmLabel={t("Common:ContinueButton")}
-        onConfirm={onConfirmGenerateKey}
-        onCancel={onCancelGenerateKey}
-        zIndex={410}
-      />
       {keyGate.keyGenerationModals}
       <ModalDialog
         displayType="aside"

@@ -97,6 +97,9 @@ describe("useGenerateKeyFlow with its dialogs", () => {
     });
 
     await user.click(trigger);
+    // Key setup opens on its explanation; Continue leads to the passphrase.
+    screen.getByRole("button", { name: "Common:ContinueButton" }).focus();
+    await user.keyboard("{Enter}");
     const field = screen.getByPlaceholderText("Common:Passphrase");
     expect(field).toHaveFocus();
     await user.type(field, "Correct1horse!battery");

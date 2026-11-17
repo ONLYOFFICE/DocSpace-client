@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   generateIdentityKeyPair,
@@ -49,6 +49,7 @@ import {
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+import { passKeySetupExplanation } from "./fixtures/encryption-helpers";
 
 test.describe("Profile > Keys Management", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -99,6 +100,7 @@ test.describe("Profile > Keys Management", () => {
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
+    await passKeySetupExplanation(page);
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5_000 });
@@ -194,13 +196,14 @@ test.describe("Profile > Keys Management", () => {
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
+    await passKeySetupExplanation(page);
 
-    const dialog = page
-      .getByRole("dialog")
-      .filter({ hasText: "Create passphrase" });
+    const dialog = page.getByRole("dialog", { name: "Create passphrase" });
     await expect(dialog).toBeVisible({ timeout: 5_000 });
-    await dialog.getByRole("button", { name: "Cancel" }).click();
-    await expect(dialog).toBeHidden();
+    await dialog.getByRole("button", { name: "Back" }).click();
+    const explanation = page.getByRole("dialog", { name: "Create key" });
+    await explanation.getByRole("button", { name: "Cancel" }).click();
+    await expect(explanation).toBeHidden();
 
     // Pin the handle first so a null fallback can't mask a real upload.
     expect(handleRef.current).not.toBeNull();
@@ -279,6 +282,7 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     await page
       .getByRole("button", { name: "Create key", exact: true })
       .click({ timeout: 15_000 });
+    await passKeySetupExplanation(page);
     const dialog = page.getByRole("dialog", { name: "Create passphrase" });
     await expect(dialog).toBeVisible({ timeout: 5_000 });
     return dialog;
@@ -349,6 +353,170 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
       "passphrase-create.png",
     ]);
   });
+
+  const boxOf = async (locator: Locator) => {
+    const box = await locator.boundingBox();
+    expect(box).not.toBeNull();
+    return box!;
+  };
+
+  type Box = Awaited<ReturnType<typeof boxOf>>;
+
+  const overlaps = (a: Box, b: Box) =>
+    a.x < b.x + b.width &&
+    b.x < a.x + a.width &&
+    a.y < b.y + b.height &&
+    b.y < a.y + a.height;
+
+  // The title, the hint, the generate action and the actions of the dialog.
+  const dialogTexts = (dialog: Locator) => [
+    dialog.getByText("Create passphrase", { exact: true }),
+    dialog.getByText(
+      "Create a strong passphrase to protect your encryption key.",
+      { exact: false },
+    ),
+    dialog.getByTestId("generate_passphrase_link"),
+    dialog.getByRole("button", { name: "Continue" }),
+    dialog.getByRole("button", { name: "Back" }),
+  ];
+
+  const openRulesTooltip = async (page: Page, baseUrl: string) => {
+    const dialog = await openPassphraseDialog(page, baseUrl);
+    await dialog.getByLabel("Passphrase", { exact: true }).fill("abc");
+    const tooltip = page
+      .locator(".__react_component_tooltip")
+      .filter({ hasText: "Passphrase must contain" });
+    await expect(tooltip).toBeVisible({ timeout: 5_000 });
+    return { dialog, tooltip };
+  };
+
+  test("Rules shown while typing", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    const { dialog, tooltip } = await openRulesTooltip(page, baseUrl);
+    const tooltipBox = await boxOf(tooltip);
+
+    for (const covered of [
+      ...dialogTexts(dialog),
+      // The passphrase field with its reveal button.
+      dialog.locator("#tooltipContent-passphrase"),
+      dialog.getByLabel("Confirm passphrase", { exact: true }),
+    ]) {
+      expect(overlaps(tooltipBox, await boxOf(covered))).toBe(false);
+    }
+    await expectScreenshot(page, [
+      "desktop",
+      "keys-management",
+      "passphrase-rules-tooltip.png",
+    ]);
+  });
+
+  test("Narrow screen", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.setViewportSize(MOBILE);
+    const { dialog, tooltip } = await openRulesTooltip(page, baseUrl);
+    const tooltipBox = await boxOf(tooltip);
+
+    const field = await boxOf(dialog.getByLabel("Passphrase", { exact: true }));
+    expect(tooltipBox.y).toBeGreaterThanOrEqual(field.y + field.height);
+    for (const covered of dialogTexts(dialog)) {
+      expect(overlaps(tooltipBox, await boxOf(covered))).toBe(false);
+    }
+    await expectScreenshot(page, [
+      "mobile",
+      "keys-management",
+      "passphrase-rules-tooltip.png",
+    ]);
+  });
+
+  // WCAG 2.x contrast of two computed CSS colours ("rgb(r, g, b)").
+  const contrastOf = (a: string, b: string) => {
+    const luminance = (css: string) => {
+      const [r, g, bl] = (css.match(/[\d.]+/g) ?? [])
+        .slice(0, 3)
+        .map((c) => Number(c) / 255)
+        .map((c) =>
+          c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4,
+        );
+      return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+    };
+    const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return (light + 0.05) / (dark + 0.05);
+  };
+
+  const openKeyCard = async (
+    page: Page,
+    baseUrl: string,
+    colorScheme: "light" | "dark",
+  ) => {
+    await page.emulateMedia({ colorScheme });
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    const card = page.getByTestId("key_details");
+    await expect(card).toBeVisible({ timeout: 15_000 });
+    const background = await card.evaluate((element) => {
+      for (
+        let node: Element | null = element;
+        node;
+        node = node.parentElement
+      ) {
+        const colour = getComputedStyle(node).backgroundColor;
+        if (colour !== "rgba(0, 0, 0, 0)" && colour !== "transparent")
+          return colour;
+      }
+      return "rgb(255, 255, 255)";
+    });
+    return { card, background };
+  };
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`Labels in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(...oneKey());
+      const { card, background } = await openKeyCard(
+        page,
+        baseUrl,
+        colorScheme,
+      );
+
+      for (const label of ["Status", "Created on", "Key fingerprint"]) {
+        const colour = await card
+          .getByText(label, { exact: true })
+          .evaluate((element) => getComputedStyle(element).color);
+        expect(
+          contrastOf(colour, background),
+          `${label}: ${colour} on ${background}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+
+    test(`Action icons in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(...oneKey());
+      const { card, background } = await openKeyCard(
+        page,
+        baseUrl,
+        colorScheme,
+      );
+
+      for (const name of ["Change passphrase", "Export key", "Delete"]) {
+        const icon = card.getByRole("button", { name }).locator("svg path").first();
+        await expect(icon).toBeAttached();
+        const colour = await icon.evaluate((element) => {
+          const style = getComputedStyle(element);
+          return style.fill !== "none" ? style.fill : style.stroke;
+        });
+        expect(
+          contrastOf(colour, background),
+          `${name}: ${colour} on ${background}`,
+        ).toBeGreaterThanOrEqual(3);
+      }
+    });
+  }
 
   test("Delete warning on a wide screen", async ({
     page,
@@ -423,6 +591,20 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       });
       await expect(generateBtn).toBeVisible({ timeout: 15_000 });
       await generateBtn.focus();
+      await page.keyboard.press("Enter");
+
+      // Key setup opens on its explanation: Tab past the close button to
+      // Continue, which leads to the passphrase.
+      const explanation = page.getByRole("dialog", { name: "Create key" });
+      await expect(explanation).toBeVisible({ timeout: 5_000 });
+      await page.keyboard.press("Tab");
+      await expect(
+        explanation.getByRole("button", { name: "Close" }),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
+        explanation.getByRole("button", { name: "Continue" }),
+      ).toBeFocused();
       await page.keyboard.press("Enter");
 
       const create = page.getByRole("dialog", { name: "Create passphrase" });
@@ -553,6 +735,18 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.focus();
+    await page.keyboard.press("Enter");
+
+    // Key setup opens on its explanation: Tab past the close button to
+    // Continue, which leads to the passphrase.
+    const explanation = page.getByRole("dialog", { name: "Create key" });
+    await expect(explanation).toBeVisible({ timeout: 5_000 });
+    await page.keyboard.press("Tab");
+    await expect(explanation.getByRole("button", { name: "Close" })).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(
+      explanation.getByRole("button", { name: "Continue" }),
+    ).toBeFocused();
     await page.keyboard.press("Enter");
 
     const create = page.getByRole("dialog", { name: "Create passphrase" });

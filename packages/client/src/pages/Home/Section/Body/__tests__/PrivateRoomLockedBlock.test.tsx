@@ -71,7 +71,9 @@ import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitl
 
 const { default: PrivateRoomLockedBlock } = (await import(
   "../PrivateRoomLockedBlock"
-)) as unknown as { default: React.ComponentType };
+)) as unknown as {
+  default: React.ComponentType<{ fallback?: React.ReactNode }>;
+};
 
 const ROOM = 9100;
 const BLOCK = "private_room_locked_block";
@@ -83,7 +85,17 @@ const FILE = { id: 9101, title: STORED_NAME, encrypted: true };
 /** A file row of the list, which shows a name the way the list does. */
 const FileRow = () => <span data-testid="file_row">{useResolvedFileTitle(FILE)}</span>;
 
-const renderBlock = ({ isPrivate = true, withRow = false } = {}) => {
+const EMPTY_VIEW = <div data-testid="empty_view" />;
+
+const renderBlock = ({
+  isPrivate = true,
+  withRow = false,
+  fallback,
+}: {
+  isPrivate?: boolean;
+  withRow?: boolean;
+  fallback?: React.ReactNode;
+} = {}) => {
   const syncEncryptedRoom = vi.fn();
   const stores = {
     selectedFolderStore: { id: ROOM },
@@ -98,7 +110,7 @@ const renderBlock = ({ isPrivate = true, withRow = false } = {}) => {
   const view = render(
     <MemoryRouter>
       <Provider {...stores}>
-        <PrivateRoomLockedBlock />
+        <PrivateRoomLockedBlock fallback={fallback} />
         {withRow ? <FileRow /> : null}
       </Provider>
     </MemoryRouter>,
@@ -218,6 +230,23 @@ describe("A locked key is reported by a block in a private room", () => {
     );
 
     expect(recovery.request).toHaveBeenCalledTimes(1);
+  });
+
+  it("Room without files", () => {
+    roomUnlockRequest.settle(ROOM);
+    renderBlock({ fallback: EMPTY_VIEW });
+
+    expect(block()).toBeInTheDocument();
+    expect(screen.queryByTestId("empty_view")).toBeNull();
+  });
+
+  it("shows the empty view of a room once the key is unlocked", () => {
+    encryption.isUnlocked = true;
+    roomUnlockRequest.settle(ROOM);
+    renderBlock({ fallback: EMPTY_VIEW });
+
+    expect(screen.queryByTestId(BLOCK)).toBeNull();
+    expect(screen.getByTestId("empty_view")).toBeInTheDocument();
   });
 
   it("is not shown outside private rooms", () => {

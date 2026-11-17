@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useId } from "react";
+import { type ReactNode, useCallback, useId } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -67,6 +67,8 @@ type PrivateRoomLockedBlockProps = {
   userId?: string;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
+  /** Shown instead while the block is not: the empty view of a room. */
+  fallback?: ReactNode;
 };
 
 /**
@@ -84,6 +86,7 @@ const PrivateRoomLockedBlock = ({
   userId,
   encryptionKeys,
   setUserEncryptionKeys,
+  fallback = null,
 }: PrivateRoomLockedBlockProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -115,10 +118,21 @@ const PrivateRoomLockedBlock = ({
     onClosed: onRecovered,
   });
 
-  if (!isPrivate || !keysLoaded || !hasConfiguredKey || isUnlocked)
-    return recover.modals;
-  if (roomId == null || roomUnlockRequest.settledRoomId !== roomId)
-    return recover.modals;
+  const isShown =
+    isPrivate &&
+    keysLoaded &&
+    hasConfiguredKey &&
+    !isUnlocked &&
+    roomId != null &&
+    roomUnlockRequest.settledRoomId === roomId;
+
+  if (!isShown)
+    return (
+      <>
+        {fallback}
+        {recover.modals}
+      </>
+    );
 
   const onUnlock = () => {
     void requireIdentity().then((identity) => {

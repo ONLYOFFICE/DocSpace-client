@@ -546,8 +546,10 @@ const SectionBodyContent = (props) => {
     return (
       <>
         <KnowledgeVectorizationBar />
-        <PrivateRoomLockedBlock />
-        <EmptyContainer isEmptyPage={isEmptyPage} />
+        {/* Spec: private-rooms/key-management, "A locked key is reported by a block in a private room" */}
+        <PrivateRoomLockedBlock
+          fallback={<EmptyContainer isEmptyPage={isEmptyPage} />}
+        />
       </>
     );
   }

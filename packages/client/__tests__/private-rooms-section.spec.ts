@@ -2053,3 +2053,45 @@ test.describe("Private section — key state indicator", () => {
     );
   });
 });
+
+test.describe("Private section — locked-key block", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [
+          {
+            id: "1",
+            userId: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+            publicKey: "BASE64_PUBLIC_KEY_FIXTURE_FOR_TEST",
+            privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_FIXTURE_FOR_TEST",
+            date: "2026-01-01T00:00:00.000Z",
+          },
+        ],
+      }),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+      ...encryptedFilesHandlers(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  test("Room without files", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+
+    const prompt = page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
+    await expect(prompt).toBeVisible({ timeout: 15000 });
+    await prompt.getByRole("button", { name: "Cancel" }).click();
+
+    const block = page.getByTestId("private_room_locked_block");
+    await expect(block).toBeVisible();
+    await expect(
+      block.getByRole("button", { name: "Unlock", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Files in this room are end-to-end encrypted"),
+    ).toHaveCount(0);
+  });
+});

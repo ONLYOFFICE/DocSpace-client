@@ -41,13 +41,16 @@ DocSpace components. The scope is **all components** (omit `--components`)
 unless the user narrows it with `components=…`. Agreed defaults: a suggestion
 is severity `enhancement`; "fixed" with a commit → `FIXED`, fixed in code
 without a commit → `WORKSFORME`, feature/screen removed or "works as designed"
-→ `WONTFIX`. Re-confirm only if `fields` shows these values have changed. The
+→ `WONTFIX`. These three are the only resolutions `plan` accepts (`DUPLICATE`
+and others need extra fields, so a duplicate is left to a human via
+`needs-info`). Re-confirm only if `fields` shows these values have changed. The
 comment language is the one thing to ask each run when `lang=` is not given.
 
 ### Where each component's code lives
 
-Repos are looked up next to this one (`C:\Github` here); a missing repo only
-means its bugs get lower confidence, never a guess.
+Sibling repos are looked up in the folder that holds the `DocSpace` folder
+(paths below are relative to the client root); a missing repo only means its
+bugs get lower confidence, never a guess.
 
 | Component | Repo (relative to the client root) | Read on |
 |---|---|---|
@@ -85,15 +88,19 @@ The last line of the output names the run folder — use it as `<dir>`.
 
 `--sample N` (pilot: a mix of bugs with `Bug <ID>` commits, suggestions and the
 longest idle), `--ids 1,2`, or `--batch N` for the next chunk. `--sample` and
-`--batch` leave out every bug already decided in an earlier run (any
-`runs/*/decisions.json`), so a later batch never comments twice or re-raises a
-priority; the output says how many were left out. `--skip <file,...>` adds
-more files (a missing one is an error); `--include-reviewed` turns the scan off
-— only on the user's request. `--ids` is never filtered. `index.json` holds every open bug in scope with signals;
+`--batch` leave out every bug an earlier run already wrote to Bugzilla
+(`applied`/`skipped` in its `apply-log.json`) and every bug of a run marked
+files-only (Step 5), so a later batch never comments twice or re-raises a
+priority, while bugs that hit a `conflict`, an error or a rejected decision
+come back. The output says how many were left out. `--skip <file,...>` adds
+decisions files (a missing one is an error); `--include-reviewed` turns the
+scan off — only on the user's request. `--ids` is never filtered. `index.json` holds every open bug in scope with signals;
 `bugs.json` holds the selected ones with description and the last comments.
 
 Signals per bug: `kind` (bug/suggestion), `ageDays`, `idleDays`, `commits`
-(commits in any of the repos above whose subject mentions the bug id).
+(commits in any of the repos above whose subject mentions the bug id — every id
+of "Bug 71360, 71316", each with `revert: true` when the subject starts with
+"Revert") and `fixReverted` (the latest of those commits is a revert).
 
 ## Step 3 — review every exported bug
 
@@ -104,7 +111,9 @@ component (table above), not from memory:
   when the text is not enough.
 - Check `commits`: a `Fix Bug <ID>` commit is strong evidence, but confirm it
   is on the main line (`git branch -a --contains <hash>`) and that the code it
-  touched still behaves as fixed.
+  touched still behaves as fixed. A commit with `revert: true`, or any bug with
+  `fixReverted: true`, is **not** evidence of a fix — the fix was taken back.
+  A revert whose subject has no bug id is not flagged, so still read the code.
 - Grep the code for the screen/string/endpoint the report names. For an
   `/api/2.0/...` route, find its controller in `../server` (or `ASC.AI.Chat`
   `app/routes.ts` for `/ai/*`) before judging the client.
@@ -183,9 +192,11 @@ run them, so do not ask again; without it, parallel review needs a separate yes.
    node .claude/scripts/bugzilla/audit.mjs split --dir <dir> --parts <N>
    ```
 
-   It writes `part-<k>.json` (whole side/component groups per part) and prints
-   the layout. Fewer parts than `N` come out when there are fewer component
-   groups — start only as many agents as parts.
+   It writes `part-<k>.json` and prints the layout. A component goes to one
+   part; one bigger than a part's share is cut into chunks (`Files#1`,
+   `Files#2`), so even a single-component run uses every agent. Fewer parts
+   than `N` come out only when there are fewer bugs than parts — start only as
+   many agents as parts.
 
 2. Start one `general-purpose` agent per part with the Agent tool, **all in one
    message** so they run in parallel. Each prompt carries everything the agent
@@ -211,14 +222,20 @@ run them, so do not ask again; without it, parallel review needs a separate yes.
    ```
 
    It refuses a bug decided twice and lists bugs no part covered — review those
-   yourself and append them to `decisions.json`.
+   yourself, write them to `<dir>/decisions.part-0.json` and run `merge` again.
+   Never edit `decisions.json` by hand in this mode: every `merge` rebuilds it
+   from the part files.
 
 4. **Verify before Step 4.** Agents misjudge confidence more often than a single
    reviewer. Re-check yourself every decision that will change a field — each
    `fixed`/`obsolete`/`quickfix` with `confidence: high`: open its evidence (the
    commit on the main line, the `file:line`) and confirm it. Anything you cannot
-   confirm goes down to `medium` (comment only). Spot-check a few `valid` ones
-   too. Tell the user how many decisions you downgraded.
+   confirm goes down to `medium` (comment only) **and its `comment` is rewritten
+   as a proposal** («Предлагаю закрыть, если…» / "Suggest closing if…") — the
+   agent wrote «Закрываю…», and that text must not reach a bug that stays open
+   (`plan` rejects it anyway). Make the change in the part file and run `merge`
+   again. Spot-check a few `valid` ones too. Tell the user how many decisions
+   you downgraded.
 
 `--model` in Step 4 is the model that reviewed; subagents inherit yours unless
 the agent definition says otherwise — if any part ran on another model, name
@@ -256,8 +273,18 @@ node .claude/scripts/bugzilla/bz.mjs --show <that id>
 node .claude/scripts/bugzilla/audit.mjs apply --dir <dir> --confirm
 ```
 
+If the user declines to write the run to Bugzilla (a files-only run), mark it
+instead, so the next batch moves on rather than picking the same bugs again:
+
+```bash
+node .claude/scripts/bugzilla/audit.mjs files-only --dir <dir>
+```
+
 Apply one bug first and check it with `bz.mjs --show`. Each bug is re-read
-before writing: a bug changed after the export is a `conflict` and is skipped;
+before writing. It is a `conflict`, and skipped, only when something that can
+overturn the decision happened after the export: status, resolution, priority,
+whiteboard or assignee changed, or someone other than the audit commented. A
+new CC or keyword is not a conflict;
 an action whose fields and comment are both already in place is `skipped` (the
 comment is matched by its exact text, so a rerun never posts it twice). Without
 `--confirm` apply only prints.

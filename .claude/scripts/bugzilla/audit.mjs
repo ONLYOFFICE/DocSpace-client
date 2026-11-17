@@ -108,6 +108,10 @@ const QUICKFIX_TAG = "[quickfix]";
 const COMMENT_FOOTER = "Generated with Claude Code";
 const FOOTER_RE = /[\s—-]*Generated with Claude Code(?: \([^)]*\))?\s*$/;
 const LANGS = ["ru", "en"];
+// The resolutions the audit may set; DUPLICATE and the like need extra fields.
+const CLOSE_RESOLUTIONS = ["FIXED", "WORKSFORME", "WONTFIX"];
+const WATCHED_FIELDS = ["status", "resolution", "priority", "whiteboard", "assigned_to"];
+const CLOSING_RE = /^\s*(Закрываю|Закрыто|Closing|Closed)(?!\p{L})/iu;
 const CYRILLIC = /[А-Яа-яЁё]/;
 const DAY_MS = 86_400_000;
 
@@ -126,7 +130,10 @@ function newRunDir(args) {
   if (args.out && args.out !== true) return path.resolve(args.out);
   const stamp = new Date().toISOString().slice(0, 16).replace("T", "-").replace(":", "");
   const name = args.name && args.name !== true ? `-${String(args.name).replace(/[^\w.-]+/g, "_")}` : "";
-  return path.join(RUNS_DIR, `${stamp}${name}`);
+  const base = path.join(RUNS_DIR, `${stamp}${name}`);
+  let dir = base;
+  for (let n = 2; existsSync(dir); n += 1) dir = `${base}-${n}`;
+  return dir;
 }
 
 // Where the fix belongs, as decided in review; the component is only the fallback.
@@ -220,7 +227,16 @@ async function cmdFields(args, key) {
 
 /* ------------------------------------------------------------------ export */
 
-const BUG_REF = /\bbug\s*#?\s*(\d{4,6})\b/gi;
+// "Fix Bug 71360, 71316 - …" and "fix bug 84685, 84686 and 84688": every id of
+// the chain after "bug" belongs to the commit, not just the first one.
+const BUG_REF = /\bbug\s*#?\s*(\d{4,6}(?:\s*(?:,|&|\/|\band\b)\s*#?\s*\d{4,6})*)\b/gi;
+const REVERT_RE = /^\s*revert\b/i;
+
+// git log lists newest first, so a stable sort by date keeps same-day order.
+function lastIsRevert(commits) {
+  if (!commits.some((c) => c.revert)) return false;
+  return [...commits].sort((a, b) => b.date.localeCompare(a.date))[0].revert;
+}
 
 function commitIndex(repos) {
   const index = new Map();
@@ -241,10 +257,11 @@ function commitIndex(repos) {
     for (const line of out.split("\n")) {
       if (!line) continue;
       const [hash, date, subject = ""] = line.split("\t");
-      for (const m of subject.matchAll(BUG_REF)) {
-        const id = Number(m[1]);
+      const revert = REVERT_RE.test(subject);
+      const ids = new Set([...subject.matchAll(BUG_REF)].flatMap((m) => m[1].match(/\d{4,6}/g).map(Number)));
+      for (const id of ids) {
         if (!index.has(id)) index.set(id, []);
-        index.get(id).push({ repo: name, hash, date, subject });
+        index.get(id).push({ repo: name, hash, date, subject, revert });
       }
     }
   }
@@ -255,7 +272,7 @@ async function searchOpen(key, product, components) {
   const all = [];
   const page = 500;
   for (let offset = 0; ; offset += page) {
-    const res = await bzGet("bug", key, {
+    const res = await withRetry(() => bzGet("bug", key, {
       product,
       component: components.length ? components : undefined,
       resolution: "---",
@@ -263,7 +280,7 @@ async function searchOpen(key, product, components) {
       limit: page,
       offset,
       order: "bug_id",
-    });
+    }));
     const bugs = res.bugs || [];
     all.push(...bugs);
     if (bugs.length < page) break;
@@ -289,8 +306,29 @@ function pickSample(bugs, n) {
   return [...chosen.values()];
 }
 
+async function withRetry(fn, attempts = 3) {
+  for (let i = 1; ; i += 1) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i >= attempts) throw e;
+      await new Promise((r) => setTimeout(r, 1000 * i));
+    }
+  }
+}
+
+function positiveInt(args, name) {
+  if (args[name] === undefined) return undefined;
+  const n = Number(args[name]);
+  if (!Number.isInteger(n) || n < 1) {
+    console.error(`--${name} must be a positive integer, got "${args[name]}"`);
+    process.exit(2);
+  }
+  return n;
+}
+
 async function withDetail(key, bug) {
-  const cm = await bzGet(`bug/${bug.id}/comment`, key);
+  const cm = await withRetry(() => bzGet(`bug/${bug.id}/comment`, key));
   const comments = cm.bugs?.[bug.id]?.comments || [];
   const text = (c) => decodeEntities(c?.text || "").trim();
   return {
@@ -305,9 +343,13 @@ async function withDetail(key, bug) {
   };
 }
 
-// Bugs already decided in earlier runs are left out of --sample/--batch, so a
-// later batch never comments on or re-raises the same bug. --skip adds files;
-// --include-reviewed turns the run scan off.
+const FILES_ONLY_MARK = "files-only.json";
+
+// A bug counts as reviewed - and is left out of --sample/--batch - when an
+// earlier run wrote it to Bugzilla (applied/skipped in apply-log.json) or the
+// whole run was marked files-only. A conflict, an error or a rejected decision
+// leaves the bug in the pool. --skip adds decisions files; --include-reviewed
+// turns the run scan off.
 function reviewedIds(args, currentDir) {
   const files = list(args.skip).map((f) => path.resolve(f));
   const missing = files.filter((f) => !existsSync(f));
@@ -315,19 +357,43 @@ function reviewedIds(args, currentDir) {
     console.error(`--skip file(s) not found:\n  ${missing.join("\n  ")}`);
     process.exit(2);
   }
-  if (!args["include-reviewed"] && existsSync(RUNS_DIR)) {
-    for (const e of readdirSync(RUNS_DIR, { withFileTypes: true })) {
-      const f = path.join(RUNS_DIR, e.name, "decisions.json");
-      if (e.isDirectory() && path.join(RUNS_DIR, e.name) !== currentDir && existsSync(f)) files.push(f);
+  const ids = new Set(files.flatMap((f) => readJson(f).map((d) => Number(d.id))));
+  if (args["include-reviewed"] || !existsSync(RUNS_DIR)) return ids;
+  for (const e of readdirSync(RUNS_DIR, { withFileTypes: true })) {
+    const run = path.join(RUNS_DIR, e.name);
+    if (!e.isDirectory() || run === currentDir) continue;
+    const decisions = path.join(run, "decisions.json");
+    const log = path.join(run, "apply-log.json");
+    if (existsSync(path.join(run, FILES_ONLY_MARK)) && existsSync(decisions)) {
+      for (const d of readJson(decisions)) ids.add(Number(d.id));
+    } else if (existsSync(log)) {
+      for (const [id, r] of Object.entries(readJson(log))) {
+        if (r.outcome === "applied" || r.outcome === "skipped") ids.add(Number(id));
+      }
     }
   }
-  return new Set(files.flatMap((f) => readJson(f).map((d) => Number(d.id))));
+  return ids;
 }
 
+// The user declined to write this run to Bugzilla: its bugs still count as
+// reviewed, so the next batch moves on instead of picking them again.
+function cmdFilesOnly(args) {
+  const dir = requireDir(args);
+  if (!existsSync(path.join(dir, "decisions.json"))) {
+    console.error(`no decisions.json in ${dir}`);
+    process.exit(2);
+  }
+  writeJson(path.join(dir, FILES_ONLY_MARK), { markedAt: new Date().toISOString() });
+  console.log(`marked files-only: ${dir}`);
+}
+
+// Nothing is written until every bug is fetched: a half-made run folder would
+// become the "latest run" for every later command.
 async function cmdExport(args, key) {
   const dir = newRunDir(args);
   const reviewed = reviewedIds(args, dir);
-  mkdirSync(dir, { recursive: true });
+  const sample = positiveInt(args, "sample");
+  const batch = positiveInt(args, "batch");
   const product = args.product || DEFAULT_PRODUCT;
   const components = list(args.components);
   const suggestionSeverities = list(args["suggestion-severity"]);
@@ -349,16 +415,9 @@ async function cmdExport(args, key) {
     ageDays: Math.floor((now - Date.parse(b.creation_time)) / DAY_MS),
     idleDays: Math.floor((now - Date.parse(b.last_change_time)) / DAY_MS),
     commits: commits.get(b.id) || [],
+    fixReverted: lastIsRevert(commits.get(b.id) || []),
     link: bugLink(b.id),
   }));
-
-  writeJson(path.join(dir, "index.json"), {
-    exportedAt: new Date(now).toISOString(),
-    host: HOST,
-    product,
-    components,
-    bugs,
-  });
 
   const unreviewed = bugs.filter((b) => !reviewed.has(b.id));
 
@@ -366,15 +425,23 @@ async function cmdExport(args, key) {
   if (args.ids) {
     const ids = new Set(list(args.ids).map(Number));
     selected = bugs.filter((b) => ids.has(b.id));
-  } else if (args.sample) {
-    selected = pickSample(unreviewed, Number(args.sample));
-  } else if (args.batch) {
-    selected = unreviewed.slice(0, Number(args.batch));
+  } else if (sample) {
+    selected = pickSample(unreviewed, sample);
+  } else if (batch) {
+    selected = unreviewed.slice(0, batch);
   } else {
     selected = unreviewed;
   }
 
   const detailed = await mapLimit(selected, 5, (b) => withDetail(key, b));
+  mkdirSync(dir, { recursive: true });
+  writeJson(path.join(dir, "index.json"), {
+    exportedAt: new Date(now).toISOString(),
+    host: HOST,
+    product,
+    components,
+    bugs,
+  });
   writeJson(path.join(dir, "bugs.json"), {
     exportedAt: new Date(now).toISOString(),
     host: HOST,
@@ -394,8 +461,10 @@ async function cmdExport(args, key) {
 
 /* ------------------------------------------------------------------ split / merge */
 
-// Parallel review: a whole side/component group goes to one part, so an agent
-// stays in one repo; largest groups first, each onto the lightest part.
+// Parallel review: a component group goes to one part, so an agent stays in one
+// repo; a group bigger than one part's share is cut into chunks of that share,
+// or a narrow run (one component) would leave a single agent. Largest first,
+// each onto the lightest part.
 function cmdSplit(args) {
   const dir = requireDir(args);
   const parts = Number(args.parts);
@@ -404,11 +473,20 @@ function cmdSplit(args) {
     process.exit(2);
   }
   const exported = readJson(path.join(dir, "bugs.json"));
-  const groups = new Map();
+  const byComponent = new Map();
   for (const b of exported.bugs) {
     const key = `${sideOf(null, b)}/${b.component}`;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(b);
+    if (!byComponent.has(key)) byComponent.set(key, []);
+    byComponent.get(key).push(b);
+  }
+  const share = Math.ceil(exported.bugs.length / parts);
+  const groups = new Map();
+  for (const [key, bugs] of byComponent) {
+    if (bugs.length <= share) {
+      groups.set(key, bugs);
+      continue;
+    }
+    for (let i = 0; i < bugs.length; i += share) groups.set(`${key}#${i / share + 1}`, bugs.slice(i, i + share));
   }
   const bins = Array.from({ length: Math.min(parts, groups.size) }, () => ({ groups: [], bugs: [] }));
   const ordered = [...groups.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
@@ -459,7 +537,10 @@ function cmdMerge(args) {
   const extra = [...seen.keys()].filter((id) => !expected.has(id));
   writeJson(path.join(dir, "decisions.json"), merged);
   console.log(`merged ${merged.length} decision(s) from ${files.length} file(s) -> ${path.join(dir, "decisions.json")}`);
-  if (missing.length) console.log(`not reviewed by any part: ${missing.map((id) => `#${id}`).join(", ")}`);
+  if (missing.length) {
+    console.log(`not reviewed by any part: ${missing.map((id) => `#${id}`).join(", ")}`);
+    console.log("review them, write decisions.part-0.json and run merge again");
+  }
   if (extra.length) console.log(`not in bugs.json (plan will reject): ${extra.map((id) => `#${id}`).join(", ")}`);
 }
 
@@ -469,8 +550,13 @@ const commentOf = (d) => d.comment ?? d.comment_ru ?? "";
 
 function validateDecision(d, bug, fields, lang) {
   const errors = [];
-  const resolutions = fields.resolution.filter((v) => v.active).map((v) => v.name);
+  const active = new Set(fields.resolution.filter((v) => v.active).map((v) => v.name));
+  const resolutions = CLOSE_RESOLUTIONS.filter((r) => active.has(r));
   const comment = commentOf(d);
+  const closes = (d.verdict === "fixed" || d.verdict === "obsolete") && d.confidence === "high";
+  if (comment && !closes && CLOSING_RE.test(comment)) {
+    errors.push("comment announces closing, but the bug stays open: rephrase it as a proposal");
+  }
   if (!bug) errors.push("not in bugs.json");
   if (!VERDICTS.includes(d.verdict)) errors.push(`verdict must be one of ${VERDICTS.join("|")}`);
   if (!CONFIDENCES.includes(d.confidence)) errors.push(`confidence must be one of ${CONFIDENCES.join("|")}`);
@@ -561,6 +647,7 @@ async function cmdPlan(args, key) {
       summary: bug.summary,
       verdict: d.verdict,
       expectLastChange: bug.last_change_time,
+      watch: Object.fromEntries(WATCHED_FIELDS.map((f) => [f, bug[f] ?? ""])),
       comment: withFooter(commentOf(d), model),
     };
     const closing = d.verdict === "fixed" || d.verdict === "obsolete";
@@ -595,6 +682,7 @@ async function cmdPlan(args, key) {
 
   writeJson(path.join(dir, "actions.json"), {
     createdAt: new Date().toISOString(),
+    exportedAt: exported.exportedAt,
     model,
     lang,
     host: HOST,
@@ -625,30 +713,40 @@ function fieldsApplied(a, live) {
   return Object.entries(a.set).every(([k, v]) => decodeEntities(live[k] ?? "") === String(v));
 }
 
-async function commentPosted(a, key) {
-  const res = await bzGet(`bug/${a.id}/comment`, key);
-  const comments = res.bugs?.[a.id]?.comments || [];
-  const body = commentCore(a.comment);
-  return comments.some((c) => commentCore(decodeEntities(c.text)) === body);
+// Only what can overturn the decision is a conflict: a watched field changed
+// after the export, or someone other than the audit commented since. A new CC
+// or keyword is not. Plans made before `watch` existed fall back to the
+// bug's last change time.
+function conflictOf(a, live, comments, exportedAt) {
+  if (!a.watch) {
+    return live.last_change_time !== a.expectLastChange ? `changed at ${live.last_change_time} after export` : null;
+  }
+  const changed = WATCHED_FIELDS.filter((f) => decodeEntities(live[f] ?? "") !== decodeEntities(a.watch[f] ?? ""));
+  if (changed.length) return `${changed.join(", ")} changed after export`;
+  const since = Date.parse(exportedAt);
+  const foreign = comments.find((c) => Date.parse(c.time) > since && !FOOTER_RE.test(decodeEntities(c.text)));
+  return foreign ? `new comment by ${foreign.creator} at ${foreign.time}` : null;
 }
 
-async function applyOne(a, key, confirm) {
+async function applyOne(a, key, confirm, exportedAt) {
   let live;
-  let commentDone;
+  let comments;
   try {
-    live = (await bzGet(`bug/${a.id}`, key, { include_fields: "id,status,resolution,priority,whiteboard,last_change_time" }))
-      .bugs?.[0];
-    commentDone = live ? await commentPosted(a, key) : false;
+    live = (
+      await bzGet(`bug/${a.id}`, key, { include_fields: ["id", "last_change_time", ...WATCHED_FIELDS].join(",") })
+    ).bugs?.[0];
+    comments = live ? (await bzGet(`bug/${a.id}/comment`, key)).bugs?.[a.id]?.comments || [] : [];
   } catch (e) {
     return { outcome: "error", message: `read failed: ${e.message}` };
   }
   if (!live) return { outcome: "error", message: "not found" };
 
+  const wanted = commentCore(a.comment);
+  const commentDone = comments.some((c) => commentCore(decodeEntities(c.text)) === wanted);
   const fieldsDone = fieldsApplied(a, live);
   if (fieldsDone && commentDone) return { outcome: "skipped", message: "already applied" };
-  if (live.last_change_time !== a.expectLastChange) {
-    return { outcome: "conflict", message: `changed at ${live.last_change_time} after export` };
-  }
+  const conflict = conflictOf(a, live, comments, exportedAt);
+  if (conflict) return { outcome: "conflict", message: conflict };
   const body = fieldsDone ? {} : { ...a.set };
   if (!commentDone) body.comment = { body: a.comment };
   const message = JSON.stringify({ ...(fieldsDone ? {} : a.set), ...(commentDone ? {} : { comment: true }) });
@@ -676,7 +774,7 @@ async function cmdApply(args, key) {
 
   if (!confirm) console.log("DRY RUN (pass --confirm to write)\n");
   for (const a of actions) {
-    const result = await applyOne(a, key, confirm);
+    const result = await applyOne(a, key, confirm, plan.exportedAt);
     console.log(`#${a.id}  ${a.type.padEnd(8)}  ${result.outcome.padEnd(11)}  ${result.message}`);
     if (!confirm) continue;
     // A rerun finds an applied action "skipped"; keep the record of what was written.
@@ -855,6 +953,7 @@ Commands (only "apply --confirm" writes to Bugzilla):
   export        open bugs with signals -> <run>/index.json, <run>/bugs.json
   split         divide <run>/bugs.json into part-<k>.json for parallel review (--parts N)
   merge         join decisions.part-<k>.json into <run>/decisions.json, check coverage
+  files-only    mark a run not written to Bugzilla as reviewed, so batches move on
   plan          check <run>/decisions.json, preview every change -> <run>/actions.json
   apply         re-read each bug and apply the plan; prints only, unless --confirm
   suggestions   suggestions document -> <run>/suggestions.md
@@ -882,8 +981,9 @@ Examples:
 Flags:
   export   --out <dir>  --name <label>  --product DocSpace  --components A,B
            --sample N | --ids 1,2 | --batch N
-           (--sample/--batch leave out bugs decided in any runs/*/decisions.json;
-           --skip <file,...> adds more, --include-reviewed turns that off)
+           (--sample/--batch leave out bugs an earlier run wrote to Bugzilla or
+           a run marked files-only; --skip <decisions.json,...> adds more,
+           --include-reviewed turns that off)
            --suggestion-severity enhancement  --repos <extra path,...>
            (commits are searched in client, ../server and the ../../ sibling repos
            onlyoffice-ai-chat, docspace-sdk-js, docspace-ui-kit-react, server,
@@ -902,7 +1002,13 @@ decisions.json is written by the /bugs-audit skill; see its SKILL.md.`;
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const cmd = args._[0];
-  const offline = { split: cmdSplit, merge: cmdMerge, suggestions: cmdSuggestions, report: cmdReport };
+  const offline = {
+    split: cmdSplit,
+    merge: cmdMerge,
+    "files-only": cmdFilesOnly,
+    suggestions: cmdSuggestions,
+    report: cmdReport,
+  };
   const online = { fields: cmdFields, export: cmdExport, plan: cmdPlan, apply: cmdApply };
 
   if (!cmd || cmd === "help" || args.help) {

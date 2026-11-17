@@ -76,16 +76,22 @@ stays local and is never committed. A run keeps `index.json`, `bugs.json`,
 `report.md`.
 
 For a parallel review (`/bugs-audit … agents=N`), `split --parts N` divides
-`bugs.json` into `part-<k>.json` by side/component, each agent writes
+`bugs.json` into `part-<k>.json` by component (a large one cut into chunks),
+each agent writes
 `decisions.part-<k>.json`, and `merge` joins them into `decisions.json`,
 refusing a bug decided twice and listing bugs no part covered.
 
 The review between `export` and `plan` (writing `decisions.json`) is done by
 `/bugs-audit` — see its SKILL.md for the decision schema and evidence rules.
-`export --sample/--batch` leave out every bug decided in an earlier run, so
-consecutive batches never review the same bug twice (`--include-reviewed` to
-override). `apply` refuses a plan made for another host, skips bugs that changed
-after the export (`conflict`) or already carry the change, and writes
+`export --sample/--batch` leave out every bug an earlier run wrote to Bugzilla
+or a run marked `files-only` (a run the user chose not to apply), so
+consecutive batches never review the same bug twice; a conflict, an error or a
+rejected decision brings the bug back (`--include-reviewed` to override).
+`export` also flags `Revert` commits and every id of a multi-id subject.
+`apply` refuses a plan made for another host, skips a bug when a watched field
+(status, resolution, priority, whiteboard, assignee) changed or someone else
+commented after the export (`conflict`; a new CC is not one) or it already
+carries the change, and writes
 `apply-log.json` after every bug, so it is safe to rerun or to resume after a
 failure. Every reviewed bug gets a comment with the
 finding, whatever the verdict (only high-confidence closes and quick fixes also

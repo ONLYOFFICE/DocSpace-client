@@ -62,20 +62,22 @@ Dependencies:
   passphrase form and Keys management, and this one moves a form that already
   behaves as that change specifies.
 
-## Decisions needed
+## Decisions
 
-1. The prompt before key setup. Proposed: drop it, since the first step of
-   the dialog says the same and more. The alternative keeps the prompt and
-   shows the explanation twice.
-2. A person marked as having no key in the invite list. Proposed: the person
-   stays selectable and is refused after sending, as today, so the invite
-   result keeps naming them. The alternative makes the row unselectable.
-3. Where the key state indicator is shown. Proposed: in the header of a
-   private room and of a folder inside one. The alternative adds the header
-   of the Private list.
-4. The locked-key block and the file list. Proposed: the block stands above
-   the list, which keeps the names as stored. The alternative replaces the
-   list with the block.
+Decided by the owner on 2026-11-17:
+
+1. The prompt before key setup is dropped. The first step of the dialog says
+   the same and more.
+2. A person marked as having no key in the invite list stays selectable and
+   is refused after sending, as today, so the invite result keeps naming
+   them. Making the row unselectable was the alternative.
+3. The key state indicator is shown in the header of a private room and of a
+   folder inside one, not in the header of the Private list.
+4. The locked-key block stands above the file list, which keeps the names as
+   stored. Replacing the list with the block was the alternative.
+
+No decision is open. The illustration of the block is left to the
+implementation (design.md, Open Questions).
 
 ## Capabilities
 

@@ -68,10 +68,16 @@ Order with `private-rooms-key-ux-refresh`: both touch the passphrase form
 and Keys management. This change goes first; the
 refresh then moves forms that already behave as specified here.
 
-## Decisions needed
+## Decisions
 
-1. What the strength line shows while a rule is unmet. Proposed: the weak
-   grade. The alternative shows no grade and names the missing rule there.
+Decided by the owner on 2026-11-17:
+
+1. While a rule of the passphrase is unmet, the strength line shows the weak
+   grade. Naming the missing rule in that line was the alternative; the list
+   of rules under the field does that.
+2. Key setup does not ask for words of the recovery phrase (Out of scope).
+
+No decision is open.
 
 ## Capabilities
 

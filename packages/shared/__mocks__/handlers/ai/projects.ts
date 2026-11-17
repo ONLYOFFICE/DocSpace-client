@@ -43,8 +43,8 @@ const AI_PROJECT_ROOM_TYPE = 12;
 export const AiProjectMockAccess = {
   None: 0,
   Owner: 1,
-  Member: 2,
   ProjectManager: 9,
+  Member: 11,
 } as const;
 
 type MockAccess =

@@ -39,9 +39,9 @@ describe("getAccessOptions for an AI project", () => {
     return option && "access" in option ? option.access : undefined;
   };
 
-  it("offers Project manager and Member, a member reading the project", () => {
+  it("offers Project manager and Member, a member being its Content creator", () => {
     expect(accessOf("projectManager")).toBe(ShareAccessRights.RoomManager);
-    expect(accessOf("projectMember")).toBe(ShareAccessRights.ReadOnly);
+    expect(accessOf("projectMember")).toBe(ShareAccessRights.Collaborator);
   });
 
   it("creates the invitation link as Project manager", () => {

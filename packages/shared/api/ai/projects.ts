@@ -66,12 +66,12 @@ const modelUrl = (id: number) => `${roomsUrl}/${id}/model`;
 const instructionsUrl = (id: number) => `${roomsUrl}/${id}/instructions`;
 const suggestionsUrl = (id: number) => `${roomsUrl}/${id}/suggestions`;
 
-/** `FileShare` on the server, limited to what a project uses: a Member is the room's Read. */
+/** `FileShare` on the server, limited to what a project uses: a Member is the room's Content creator. */
 export const AiProjectAccess = {
   None: 0,
   Owner: 1,
-  Member: 2,
   ProjectManager: 9,
+  Member: 11,
 } as const;
 export type TAiProjectAccess =
   (typeof AiProjectAccess)[keyof typeof AiProjectAccess];

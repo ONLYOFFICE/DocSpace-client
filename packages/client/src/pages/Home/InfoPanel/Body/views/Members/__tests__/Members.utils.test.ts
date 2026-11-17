@@ -33,7 +33,7 @@ describe("MembersHelper.getOptionByUserAccess", () => {
     new MembersHelper({ t }).getOptionByUserAccess(access, roomType)?.key;
 
   it("names the project roles in a project only", () => {
-    expect(keyOf(ShareAccessRights.ReadOnly, RoomsType.AiProjectRoom)).toBe("projectMember");
+    expect(keyOf(ShareAccessRights.Collaborator, RoomsType.AiProjectRoom)).toBe("projectMember");
     expect(keyOf(ShareAccessRights.RoomManager, RoomsType.AiProjectRoom)).toBe("projectManager");
   });
 
@@ -42,5 +42,9 @@ describe("MembersHelper.getOptionByUserAccess", () => {
       expect(keyOf(ShareAccessRights.ReadOnly, roomType)).toBe("viewer");
       expect(keyOf(ShareAccessRights.RoomManager, roomType)).toBe("roomAdmin");
     }
+  });
+
+  it("keeps Content creator in any other room", () => {
+    expect(keyOf(ShareAccessRights.Collaborator, RoomsType.CustomRoom)).toBe("collaborator");
   });
 });

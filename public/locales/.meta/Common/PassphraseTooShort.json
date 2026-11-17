@@ -3,7 +3,7 @@
   "content": "Passphrase must be at least {{length}} characters",
   "content_en_sha1_hash": "d37088ed7a023b4b8c7754841fdcd0edddc89181",
   "created_at": "2026-05-24T17:27:34.718Z",
-  "updated_at": "2026-11-05T16:49:39.985Z",
+  "updated_at": "2026-11-17T13:13:27.221Z",
   "comment": {
     "text": "Error message in passphrase or key rotation dialogs that appears when the input is too short. The {{length}} variable represents the minimum required character count.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 110,
-      "context": ": \"\";\n \n const newFieldError =\n (attemptedSubmit\n ? newPassphrase.length > 0 && newPassphrase.length < PASSPHRASE_MIN_LENGTH\n ? t(\"Common:PassphraseTooShort\", { length: PASSPHRASE_MIN_LENGTH })\n : newPassphrase &&\n currentPassphrase &&\n currentPassphrase === newPassphrase\n ? t(\"Common:PassphraseMustBeDifferent\")\n : \"\"",
+      "line_number": 114,
+      "context": "const newFieldError =\n (attemptedSubmit &&\n newPassphrase.length > 0 &&\n newPassphrase.length < PASSPHRASE_MIN_LENGTH\n ? t(\"Common:PassphraseTooShort\", { length: PASSPHRASE_MIN_LENGTH })\n : \"\") ||\n (sameAsCurrent ? t(\"Common:PassphraseMustBeDifferent\") : \"\") ||\n (containsCommonPattern(newPassphrase)\n ? t(\"Common:PassphraseCommonPattern\")\n : \"\");",
       "module": "/packages/client"
     }
   ],

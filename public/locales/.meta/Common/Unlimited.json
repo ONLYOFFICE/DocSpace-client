@@ -3,7 +3,7 @@
   "content": "Unlimited",
   "content_en_sha1_hash": "b8bef37b7153b5665e94cf9b212c8708eb06db1f",
   "created_at": "2025-05-19T21:30:49.415Z",
-  "updated_at": "2026-11-05T16:49:39.800Z",
+  "updated_at": "2026-11-17T13:13:26.956Z",
   "comment": {
     "text": "This is a label for an option in a dropdown or a button that indicates a feature or setting has no limits.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 366,
+      "line_number": 372,
       "context": "label: severalDays,\n onClick: () => setSevenDays(),\n },\n {\n key: \"unlimited\",\n label: t(\"Common:Unlimited\"),\n onClick: () => setUnlimited(),\n },\n {\n key: \"custom\",\n label: t(\"Common:Custom\"),",
       "module": "/packages/shared"
     },

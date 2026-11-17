@@ -3,7 +3,7 @@
   "content": "{{count}} encrypted file(s) could not be made available to the new members. Try again later.",
   "content_en_sha1_hash": "0582de86e19de12b1da24a95f5052467b6d9db8e",
   "created_at": "2026-11-11T18:49:04.047Z",
-  "updated_at": "2026-11-11T18:51:02.244Z",
+  "updated_at": "2026-11-17T13:13:27.082Z",
   "comment": {
     "text": "Warning shown after members were invited to a private room, or after a retry, when some encrypted files could not be made readable for them. The count variable is the number of files. Ends with advice to try again later.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js",
-      "line_number": 78,
+      "line_number": 114,
       "context": "</Heading>\n <Text>{namesOf(pending.map((entry) => entry.member))}</Text>\n <Text className={styles.description}>\n {failed\n ? t(\"Common:EncryptedReencryptFailed\")\n : t(\"Common:EncryptedReencryptPartialFailure\", {\n count: missingFileCount,\n })}\n </Text>\n </section>\n ) : null}",
       "module": "/packages/client"
     },
@@ -31,19 +31,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteResult.tsx",
-      "line_number": 87,
+      "line_number": 123,
       "context": "</Heading>\n <Text>{namesOf(pending.map((entry) => entry.member))}</Text>\n <Text className={styles.description}>\n {failed\n ? t(\"Common:EncryptedReencryptFailed\")\n : t(\"Common:EncryptedReencryptPartialFailure\", {\n count: missingFileCount,\n })}\n </Text>\n </section>\n ) : null}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
-      "line_number": 326,
+      "line_number": 395,
       "context": "const notices = skippedMemberNotices(t, allSkipped, newMembers);\n \n if (failures.length > 0) {\n notices.push({\n level: \"warning\",\n text: t(\"Common:EncryptedReencryptPartialFailure\", {\n count: failures.length,\n }),\n });\n } else if (allSkipped.length === 0) {\n notices.push({ level: \"success\", text: t(\"Common:UsersInvited\") });",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
-      "line_number": 326,
+      "line_number": 395,
       "context": "const notices = skippedMemberNotices(t, allSkipped, newMembers);\n \n if (failures.length > 0) {\n notices.push({\n level: \"warning\",\n text: t(\"Common:EncryptedReencryptPartialFailure\", {\n count: failures.length,\n }),\n });\n } else if (allSkipped.length === 0) {\n notices.push({ level: \"success\", text: t(\"Common:UsersInvited\") });",
       "module": "/packages/shared"
     }

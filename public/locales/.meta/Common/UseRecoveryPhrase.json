@@ -3,7 +3,7 @@
   "content": "Use recovery phrase",
   "content_en_sha1_hash": "8d7f041d531f2d7ac208f5ce3dcc4a7114eec8e4",
   "created_at": "2026-05-24T17:27:43.016Z",
-  "updated_at": "2026-11-05T16:49:39.983Z",
+  "updated_at": "2026-11-17T13:13:27.218Z",
   "comment": {
     "text": "Button label and modal dialog title used to initiate the process of recovering keys via a recovery phrase.",
     "is_auto": true,
@@ -21,12 +21,6 @@
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 124,
       "context": "organizationName: getBrandName(\"OrganizationName\"), productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),\n howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
-      "line_number": 163,
-      "context": "aria-labelledby={titleId}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n <span id={titleId}>{t(\"Common:UseRecoveryPhrase\")}</span>\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <div id={hintId}>",
       "module": "/packages/shared"
     }
   ],

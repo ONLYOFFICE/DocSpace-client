@@ -3,7 +3,7 @@
   "content": "Document Agent",
   "content_en_sha1_hash": "b5c188a494f453b71e515b6088f27a59906f9d23",
   "created_at": "2026-11-09T08:03:20.559Z",
-  "updated_at": "2026-11-09T08:04:46.527Z",
+  "updated_at": "2026-11-17T13:13:27.160Z",
   "comment": {
     "text": "Name of the Document Agent tab in Portal settings > AI settings, also its item in the settings navigation. Short noun phrase naming the feature (an AI agent that works on office documents), title case.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 257,
+      "line_number": 270,
       "context": "onClick: makeOnClick(TAB_IDS.LIMITS),\n },\n ]),\n {\n id: TAB_IDS.DOCUMENT_AGENT,\n name: t(\"Common:DocumentAgent\"),\n content: <DocumentAgent />,\n onClick: makeOnClick(TAB_IDS.DOCUMENT_AGENT),\n isDisabled: disableNonAiModels,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
       "line_number": 571,
-      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-document-agent\",\n key: \"7-6\",\n link: \"document-agent\",\n tKey: \"Common:DocumentAgent\",\n isCategory: true,\n },\n ],\n },\n {",
+      "context": "},\n {\n id: \"portal-settings_catalog-ai-settings-document-agent\",\n key: \"7-6\",\n link: \"document-agent\",\n tKey: \"Common:DocumentAgent\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-ai-settings-byok\",\n key: \"7-7\",",
       "module": "/packages/client"
     }
   ],

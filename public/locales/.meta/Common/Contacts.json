@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-11-05T16:49:39.839Z",
+  "updated_at": "2026-11-17T13:13:27.029Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1116,
+      "line_number": 1129,
       "context": "withGuests={showGuestsTab && roomType !== RoomsType.AiProjectRoom}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
@@ -37,19 +37,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 116,
+      "line_number": 118,
       "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoMetadata, () => t(\"Common:SubmenuMetadata\"))",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1295,
+      "line_number": 1286,
       "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Contacts\"),\n isHeader: true,\n withMultiItems: true,\n },\n {\n id: \"filter_author-me\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 883,
+      "line_number": 885,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 566,
+      "line_number": 577,
       "context": "const accounts: TProfileActionType | null =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n // The route constant has no leading slash; a relative href would\n // resolve against the current page on middle-click or \"Open link\n // in new tab\" (/rooms/shared/accounts/... -> 404).",
       "module": "/packages/client"
     },
@@ -115,13 +115,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 1089,
+      "line_number": 1121,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 1089,
+      "line_number": 1121,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },

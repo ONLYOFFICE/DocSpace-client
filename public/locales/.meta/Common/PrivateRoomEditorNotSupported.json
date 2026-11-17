@@ -3,7 +3,7 @@
   "content": "Encrypted files cannot be opened in this editor.",
   "content_en_sha1_hash": "e971576ed9aabf632a9cd8aa044ede6b06961a31",
   "created_at": "2026-11-05T14:16:02.730Z",
-  "updated_at": "2026-11-05T14:17:22.436Z",
+  "updated_at": "2026-11-17T13:13:27.242Z",
   "comment": {
     "text": "Info toast in the file list of the client and of the SDK private page, and the message shown in place of the editor, when an encrypted file of a private room is opened while the connected Document Server cannot edit encrypted files; also the toast of the editor's file picker when an encrypted file is chosen to insert into a document. A full sentence; \"this editor\" means the Document Server the portal is connected to.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 497,
+      "line_number": 584,
       "context": "const EditorNotSupported = ({ config }: Pick<EditorProps, \"config\">) => {\n const { t } = useTranslation([\"Common\"]);\n return (\n <EditorMessage config={config}>\n {t(\"Common:PrivateRoomEditorNotSupported\")}\n </EditorMessage>\n );\n };\n \n // Spec: editor-integration, \"Document Server capability check before opening\"",
       "module": "/packages/doceditor"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 514,
+      "line_number": 529,
       "context": "portalFilesSettings?.storeOriginalFiles ?? false;\n \n const openFileHandler = React.useCallback(\n (file: TFileItem, preview?: boolean) => {\n if (refusesEncryptedOpen(isPrivate, file, portalFilesSettings)) {\n toastr.info(t(\"Common:PrivateRoomEditorNotSupported\"));\n return;\n }\n if (!preview && file.viewAccessibility?.MustConvert) {\n requestConvert(file);\n return;",
       "module": "/packages/sdk"
     }

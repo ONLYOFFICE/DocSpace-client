@@ -3,7 +3,7 @@
   "content": "Access recovery",
   "content_en_sha1_hash": "27cdeed1252a2d59d9bf1278b5eb5a19975f0b4a",
   "created_at": "2025-05-19T21:30:47.772Z",
-  "updated_at": "2026-08-07T15:05:26.546Z",
+  "updated_at": "2026-11-17T13:13:27.286Z",
   "comment": {
     "text": "This is the title of a dialog box that appears when a user needs to recover access to their account or a specific document.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
+      "line_number": 163,
+      "context": "aria-labelledby={titleId}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n <span id={titleId}>{t(\"Common:RecoverTitle\")}</span>\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <div id={hintId}>",
+      "module": "/packages/shared"
+    },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
       "line_number": 265,

@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2026-11-09T17:07:34.754Z",
+  "updated_at": "2026-11-17T13:13:27.048Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears on buttons that create a new room, or as the title of a dialog for creating a room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 390,
+      "line_number": 400,
       "context": "const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : roomParams.type === RoomsType.FormRoom\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\");\n \n return (\n <>\n <ConfirmationModal\n visible={keyGate.keyConfirmVisible}",
       "module": "/packages/client"
     },
@@ -48,14 +48,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 588,
+      "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 274,
+      "line_number": 272,
       "context": "disabled: !favoriteItems.length,\n }, */\n {\n id: \"create_room\",\n key: \"create-room\",\n label: t(\"Common:CreateRoom\"),\n icon: CatalogRoomsReactSvgUrl,\n onClick: () => self.onCreateRoom(null, true),\n disabled: !canCreateRoom,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 271,
+      "line_number": 269,
       "context": "case \"create-room\":\n if (!this.isAvailableOption(\"create-room\")) return null;\n return {\n id: \"menu-create-room\",\n label: t(\"Common:CreateRoom\"),\n onClick: this.onClickCreateRoom,\n iconUrl: CatalogRoomsReactSvgUrl,\n };\n \n case \"download\":",
       "module": "/packages/client"
     },
@@ -67,7 +73,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 624,
+      "line_number": 632,
       "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
       "module": "/packages/shared"
     },

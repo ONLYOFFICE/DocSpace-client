@@ -3,7 +3,7 @@
   "content": "Passphrases do not match",
   "content_en_sha1_hash": "42a0ba82992be92edb99d0ae3a35c75971c1ab9c",
   "created_at": "2026-05-24T17:27:34.691Z",
-  "updated_at": "2026-11-05T16:49:39.985Z",
+  "updated_at": "2026-11-17T13:13:27.222Z",
   "comment": {
     "text": "Error text in a dialog that appears when the entered passphrase and the confirmation passphrase are not identical.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 227,
+      "line_number": 237,
       "context": "!!displayedError ||\n (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);\n \n const confirmMismatch = !!confirmPassphrase && passphrase !== confirmPassphrase;\n const announcedError =\n displayedError || (confirmMismatch ? t(\"Common:PassphraseMismatch\") : \"\");\n \n return (\n <>\n <ModalDialog\n zIndex={410}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 227,
+      "line_number": 237,
       "context": "!!displayedError ||\n (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);\n \n const confirmMismatch = !!confirmPassphrase && passphrase !== confirmPassphrase;\n const announcedError =\n displayedError || (confirmMismatch ? t(\"Common:PassphraseMismatch\") : \"\");\n \n return (\n <>\n <ModalDialog\n zIndex={410}",
       "module": "/packages/shared"
     }

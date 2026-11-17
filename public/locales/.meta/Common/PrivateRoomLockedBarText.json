@@ -3,7 +3,7 @@
   "content": "Unlock it to see file names and to open, upload and download files.",
   "content_en_sha1_hash": "2464555c4f9ce3c17a9301d9acad733db8877c14",
   "created_at": "2026-11-11T16:54:29.945Z",
-  "updated_at": "2026-11-11T16:56:26.897Z",
+  "updated_at": "2026-11-17T13:13:27.141Z",
   "comment": {
     "text": "Body sentence of the bar at the top of a private room while the user's encryption key is locked; it follows the title and is followed by the Unlock link. The pronoun it refers to the encryption key from the title. Verbs are imperative and infinitive.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx",
-      "line_number": 83,
+      "line_number": 89,
       "context": "return (\n <PublicRoomBar\n headerText={t(\"Common:PrivateRoomLockedBarTitle\")}\n bodyText={\n <>\n {t(\"Common:PrivateRoomLockedBarText\")}{\" \"}\n <Link\n type={LinkType.action}\n isHovered\n fontWeight={600}\n onClick={onUnlock}",
       "module": "/packages/client"
     }

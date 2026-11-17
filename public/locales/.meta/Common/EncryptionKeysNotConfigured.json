@@ -3,7 +3,7 @@
   "content": "You don't have an encryption key yet. Set it up in your profile to work with encrypted files.",
   "content_en_sha1_hash": "c5b0fd7b50af10337243e4b02b147374a9221685",
   "created_at": "2026-11-11T18:49:05.009Z",
-  "updated_at": "2026-11-11T18:51:02.244Z",
+  "updated_at": "2026-11-17T13:13:27.099Z",
   "comment": {
     "text": "Warning shown when a user who has no encryption key enters a private room or tries to download, copy, upload or open an encrypted file. Two sentences; the pronoun it refers to the encryption key.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 85,
+      "line_number": 86,
       "context": "type TKeyFlowEnd = {\n /** i18n key of the message. */\n message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };",
       "module": "/packages/doceditor"
     },
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/shared/context/encryption/EncryptionContext.tsx",
-      "line_number": 235,
+      "line_number": 236,
       "context": "}, [showPassphraseDialog]);\n \n const unlock = useCallback(\n async (passphrase: string, rememberDevice?: boolean): Promise<boolean> => {\n if (!userKeys?.privateKeyEnc || !userKeys?.userId) {\n setUnlockError(t(\"Common:EncryptionKeysNotConfigured\"));\n return false;\n }\n setIsUnlocking(true);\n setUnlockError(null);\n try {",
       "module": "/packages/shared"
     },

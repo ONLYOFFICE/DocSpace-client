@@ -3,7 +3,7 @@
   "content": "Add-ons",
   "content_en_sha1_hash": "41b634ed241336cc8b5e03729fd92977c540cc02",
   "created_at": "2026-06-25T11:54:43.546Z",
-  "updated_at": "2026-10-27T11:03:20.504Z",
+  "updated_at": "2026-11-17T13:13:26.964Z",
   "comment": {
     "text": "Tab label in the Portal Settings services section representing available extensions or extra features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/BillingSidebar/index.tsx",
-      "line_number": 85,
+      "line_number": 84,
       "context": "},\n {\n id: \"billing-addons\",\n path: \"/billing/addons\",\n icon: AddonsReactSvgUrl,\n translationKey: \"Common:Addons\" as const,\n hideWhenNotPaid: true,\n },\n {\n id: \"billing-payment-method\",\n path: \"/billing/payment-method\",",
       "module": "/packages/client"
     },

@@ -41,6 +41,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 const LeaveRoomDialog = (props) => {
   const {
@@ -51,6 +52,7 @@ const LeaveRoomDialog = (props) => {
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
     isFormSpace,
+    isAgentRoom,
     isFormFiller,
     onLeaveRoomAction,
   } = props;
@@ -89,13 +91,19 @@ const LeaveRoomDialog = (props) => {
     };
   }, []);
 
-  const titleText = isFormSpace
-    ? t("Common:LeaveTheFormSpace")
-    : t("Common:LeaveTheRoom");
+  const titleText = isAgentRoom
+    ? t("Common:LeaveTheAgent")
+    : isFormSpace
+      ? t("Common:LeaveTheFormSpace")
+      : t("Common:LeaveTheRoom");
 
-  const descriptionText = isRoomOwner
-    ? t("Common:LeaveRoomDescription")
-    : t("Common:WantLeaveRoom");
+  const descriptionText = isAgentRoom
+    ? isRoomOwner
+      ? t("Common:LeaveAgentDescription")
+      : t("Common:WantLeaveAgent")
+    : isRoomOwner
+      ? t("Common:LeaveRoomDescription")
+      : t("Common:WantLeaveRoom");
 
   const showFormFillingWarning = isFormFiller && !isRoomOwner;
 
@@ -168,6 +176,7 @@ export default inject(
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
     const isFormSpace = folderItem?.roomType === RoomsType.FormRoom;
+    const isAgentRoom = isAgent(folderItem);
     const isFormFiller = folderItem?.access === ShareAccessRights.FormFilling;
 
     return {
@@ -176,6 +185,7 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
       isFormSpace,
+      isAgentRoom,
       isFormFiller,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
     };

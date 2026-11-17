@@ -70,7 +70,7 @@ describe("FilesActionsStore — onLeaveRoom of a private room", () => {
       invitations: [{ id: "user-1", access: ShareAccessRights.None }],
       force: false,
     });
-    expect(toastr.success).toHaveBeenCalled();
+    expect(toastr.success).toHaveBeenCalledWith("Common:YouLeftTheRoom");
   });
 
   it("Leave succeeds", async () => {
@@ -206,6 +206,7 @@ describe("FilesActionsStore — onLeaveRoom from inside the room", () => {
 
     // The left agent leaves the sidebar and the chat's agents menu.
     expect(fetchPresets).toHaveBeenCalledTimes(1);
+    expect(toastr.success).toHaveBeenCalledWith("Common:YouLeftTheAgent");
     expect(navigate).toHaveBeenCalledTimes(1);
     const url = navigate.mock.calls[0][0] as string;
     expect(url.startsWith("/ai-rooms/filter?")).toBe(true);

@@ -120,7 +120,17 @@ self: FilesActionStore,
   t: TTranslation,
 
 )=> {
-  return setPinActionHelper(action, id, t);
+  // The notice speaks of agents when every pinned room is one: a room of
+  // the list, or the agent whose page is open.
+  const ids = (Array.isArray(id) ? id : [id]).map(String);
+  const { folders } = self.filesStore;
+  const { selectedFolderStore } = self;
+  const roomOf = (roomId: string) =>
+    folders.find((folder) => String(folder.id) === roomId) ??
+    (String(selectedFolderStore.id) === roomId ? selectedFolderStore : null);
+  const ofAgents = ids.length > 0 && ids.every((roomId) => isAgent(roomOf(roomId)));
+
+  return setPinActionHelper(action, id, t, ofAgents);
 };
 
 
@@ -154,8 +164,12 @@ self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
         (count as number) + (newCount as number);
   }
 
-  const notificationsDisabled = t("Common:RoomNotificationsDisabled");
-  const notificationsEnabled = t("Common:RoomNotificationsEnabled");
+  const notificationsDisabled = isAgent(item)
+    ? t("Common:AIAgentNotificationsDisabled")
+    : t("Common:RoomNotificationsDisabled");
+  const notificationsEnabled = isAgent(item)
+    ? t("Common:AIAgentNotificationsEnabled")
+    : t("Common:RoomNotificationsEnabled");
 
   (muteRoomNotification(id, muteStatus) as Promise<unknown>)
     .then(() =>
@@ -591,7 +605,9 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
 
   const successText = isOwner
     ? t("Common:LeftAndAppointNewOwner")
-    : t("Common:YouLeftTheRoom");
+    : isAgent(room)
+      ? t("Common:YouLeftTheAgent")
+      : t("Common:YouLeftTheRoom");
 
   const leave = () =>
     (

@@ -46,7 +46,8 @@ import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   getAiTemplates,
@@ -56,9 +57,11 @@ import {
 } from "@docspace/shared/api/ai/templates";
 
 import { useStore } from "SRC_DIR/store/useStore";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import {
   getAiWorkspaceListType,
   getAiWorkspaceTabUrl,
+  getAiWorkspaceTitle,
 } from "SRC_DIR/helpers/aiWorkspace";
 
 import ProjectLogo from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
@@ -162,6 +165,8 @@ const AiTemplatesCatalog = () => {
   const navigate = useNavigate();
   const userId = useStore("userStore").user?.id;
   const aiPresetsStore = useStore("aiPresetsStore");
+  const { isAiHubFolder } = useStore("treeFoldersStore");
+  const { fetchRooms } = useStore("filesStore");
 
   const [catalog, setCatalog] = React.useState<TAiTemplateCatalog | null>(
     null,
@@ -182,6 +187,24 @@ const AiTemplatesCatalog = () => {
   }, []);
 
   const listType = getAiWorkspaceListType(location.search);
+
+  // The tab draws no list, so nothing else reads the section for it, nor
+  // titles the browser tab. Reached from a room of the section (an opened
+  // skill set, then the tab's address), the header would go on showing that
+  // room: the section's root is read, as the list would read it.
+  React.useEffect(() => {
+    setDocumentTitle(getAiWorkspaceTitle(t, location.search));
+  }, [t, location.search]);
+
+  React.useEffect(() => {
+    if (isAiHubFolder) return;
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
+    filter.searchArea = RoomSearchArea.AiHub;
+    filter.type = [String(listType)];
+    fetchRooms(null, filter).catch(() => {
+      // The header stays as it was; the catalog does not need the list.
+    });
+  }, [isAiHubFolder, fetchRooms, userId, listType]);
 
   const onInstall = async (template: TAiTemplate) => {
     setInstallingId(template.id);

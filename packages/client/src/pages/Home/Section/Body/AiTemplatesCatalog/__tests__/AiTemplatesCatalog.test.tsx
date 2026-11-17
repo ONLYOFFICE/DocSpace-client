@@ -10,13 +10,20 @@ const navigate = vi.hoisted(() => vi.fn());
 const toastr = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn(), warning: vi.fn() }));
 const location = vi.hoisted(() => ({ search: "" }));
 const presetsStore = vi.hoisted(() => ({ fetchPresets: vi.fn(async () => {}) }));
+// The section's root is the open folder, unless a test opens a room of it.
+const treeFoldersStore = vi.hoisted(() => ({ isAiHubFolder: true }));
+const filesStore = vi.hoisted(() => ({ fetchRooms: vi.fn(async () => {}) }));
+const setDocumentTitle = vi.hoisted(() => vi.fn());
 
 vi.mock("@docspace/shared/api/ai/templates", () => api);
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: string) =>
-    name === "aiPresetsStore" ? presetsStore : { user: { id: "user" } },
+    ({ aiPresetsStore: presetsStore, treeFoldersStore, filesStore })[name] ?? {
+      user: { id: "user" },
+    },
 }));
+vi.mock("SRC_DIR/helpers/utils", () => ({ setDocumentTitle }));
 vi.mock("react-router", () => ({
   useLocation: () => location,
   useNavigate: () => navigate,
@@ -77,6 +84,9 @@ beforeEach(() => {
   toastr.error.mockReset();
   toastr.warning.mockReset();
   presetsStore.fetchPresets.mockClear();
+  filesStore.fetchRooms.mockClear();
+  setDocumentTitle.mockClear();
+  treeFoldersStore.isAiHubFolder = true;
   location.search = "";
 });
 
@@ -177,6 +187,31 @@ describe("AiTemplatesCatalog", () => {
     api.getAiTemplates.mockRejectedValue(new Error("down"));
     render(<AiTemplatesCatalog />);
     expect(await screen.findByTestId("ai-templates-error")).toBeTruthy();
+  });
+});
+
+describe("the Templates tab reached from a room of the section", () => {
+  it("reads the section's root for the header and titles the browser tab", async () => {
+    treeFoldersStore.isAiHubFolder = false;
+    location.search = `?searchArea=AiHub&type=${RoomsType.AiProjectRoom}&tab=templates`;
+    render(<AiTemplatesCatalog />);
+    await cards();
+
+    expect(setDocumentTitle).toHaveBeenCalledWith("Common:Agents");
+    expect(filesStore.fetchRooms).toHaveBeenCalledTimes(1);
+    const [folderId, filter] = filesStore.fetchRooms.mock.calls[0] as unknown as [
+      null,
+      { searchArea: string; type: string[] },
+    ];
+    expect(folderId).toBeNull();
+    expect(filter.searchArea).toBe("AiHub");
+    expect(filter.type).toEqual([String(RoomsType.AiProjectRoom)]);
+  });
+
+  it("reads nothing while the section's root is open already", async () => {
+    render(<AiTemplatesCatalog />);
+    await cards();
+    expect(filesStore.fetchRooms).not.toHaveBeenCalled();
   });
 });
 

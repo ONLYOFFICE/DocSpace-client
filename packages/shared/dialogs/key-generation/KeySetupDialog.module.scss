@@ -42,3 +42,30 @@
 .stepLabel {
   color: var(--text-secondary);
 }
+
+.explanation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.terms {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.term {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  dd {
+    margin: 0;
+  }
+}
+
+.notStored {
+  color: var(--text-secondary);
+}

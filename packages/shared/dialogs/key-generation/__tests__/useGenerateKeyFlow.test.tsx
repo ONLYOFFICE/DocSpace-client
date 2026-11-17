@@ -34,6 +34,7 @@
  */
 
 import { act, render, screen } from "@testing-library/react";
+import enCommon from "PUBLIC_DIR/locales/en/Common.json";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 import {
@@ -475,6 +476,31 @@ describe("Key setup dialog", () => {
       view.rerender(<KeySetupDialog step={step} {...props} />);
     return { show, props };
   };
+
+  it("Three terms explained", async () => {
+    await renderDialog();
+    const explanation = screen.getByTestId("key_setup_explanation");
+
+    for (const key of [
+      "Common:KeySetupKeyTitle",
+      "Common:KeySetupKeyDescription",
+      "Common:KeySetupPassphraseTitle",
+      "Common:KeySetupPassphraseDescription",
+      "Common:KeySetupRecoveryTitle",
+      "Common:KeySetupRecoveryDescription",
+      "Common:KeySetupNotStored",
+    ]) {
+      expect(explanation).toHaveTextContent(key);
+    }
+    expect(screen.getAllByRole("term")).toHaveLength(3);
+    expect(screen.getAllByRole("definition")).toHaveLength(3);
+  });
+
+  it("Key of the account", () => {
+    for (const key of ["KeySetupKeyTitle", "KeySetupKeyDescription"] as const) {
+      expect(enCommon[key]).not.toMatch(/browser|device/i);
+    }
+  });
 
   it("Step shown", async () => {
     const { show } = await renderDialog();

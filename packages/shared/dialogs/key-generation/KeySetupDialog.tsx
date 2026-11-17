@@ -193,7 +193,44 @@ export const KeySetupDialog = ({
             </Text>
 
             {step === "explanation" ? (
-              <div data-testid="key_setup_explanation" />
+              // Spec: private-rooms/key-management, "Key setup opens with an explanation"
+              <div
+                className={styles.explanation}
+                data-testid="key_setup_explanation"
+              >
+                <dl className={styles.terms}>
+                  {[
+                    [
+                      t("Common:KeySetupKeyTitle"),
+                      t("Common:KeySetupKeyDescription"),
+                    ],
+                    [
+                      t("Common:KeySetupPassphraseTitle"),
+                      t("Common:KeySetupPassphraseDescription"),
+                    ],
+                    [
+                      t("Common:KeySetupRecoveryTitle"),
+                      t("Common:KeySetupRecoveryDescription"),
+                    ],
+                  ].map(([term, description]) => (
+                    <div key={term} className={styles.term}>
+                      <dt>
+                        <Text as="span" fontSize="13px" fontWeight={600}>
+                          {term}
+                        </Text>
+                      </dt>
+                      <dd>
+                        <Text as="span" fontSize="13px">
+                          {description}
+                        </Text>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <Text fontSize="13px" className={styles.notStored}>
+                  {t("Common:KeySetupNotStored")}
+                </Text>
+              </div>
             ) : null}
 
             {step === "passphrase" ? (

@@ -1,0 +1,29 @@
+{
+  "key_path": "KeySetupPassphraseDescription",
+  "content": "Unlocks your key when you open encrypted files. Only you know it.",
+  "content_en_sha1_hash": "12b04d8a2e260b6d31486c099a17111d6926584d",
+  "created_at": "2026-11-17T10:34:32.965Z",
+  "updated_at": "2026-11-17T10:35:18.940Z",
+  "comment": {
+    "text": "One sentence under the heading Your passphrase on the explanation step of key setup: the passphrase unlocks the encryption key when encrypted files are opened, and only the user knows it.",
+    "is_auto": true,
+    "updated_at": "2026-11-17T10:35:18.940Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
+      "line_number": 209,
+      "context": "t(\"Common:KeySetupKeyTitle\"),\n t(\"Common:KeySetupKeyDescription\"),\n ],\n [\n t(\"Common:KeySetupPassphraseTitle\"),\n t(\"Common:KeySetupPassphraseDescription\"),\n ],\n [\n t(\"Common:KeySetupRecoveryTitle\"),\n t(\"Common:KeySetupRecoveryDescription\"),\n ],",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

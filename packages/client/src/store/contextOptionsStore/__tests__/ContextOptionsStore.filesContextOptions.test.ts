@@ -682,7 +682,7 @@ describe("ContextOptionsStore.getFilesContextOptions — an agent's menu", () =>
       "invite-users-to-room=Common:ShareAgent",
       "room-info=Common:AgentInfo",
       "link-for-room-members=Common:CopyLink",
-      "change-room-owner=Common:ChangeRoomOwner",
+      "change-room-owner=Common:AIProjectChangeOwner",
       "|",
       "delete=Common:DeleteAgent",
     ]);

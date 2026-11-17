@@ -806,9 +806,11 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_change-room-owner",
       key: "change-room-owner",
-      label: isFormSpace
-        ? t("Common:ChangeFormSpaceOwner")
-        : t("Common:ChangeRoomOwner"),
+      label: isAgent
+        ? t("Common:AIProjectChangeOwner")
+        : isFormSpace
+          ? t("Common:ChangeFormSpaceOwner")
+          : t("Common:ChangeRoomOwner"),
       icon: ReconnectSvgUrl,
       onClick: self.onChangeRoomOwner,
       disabled: false,

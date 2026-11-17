@@ -80,7 +80,7 @@ export type TAiInstalledTemplate = TAiInstalledRoom & {
   kind: TAiTemplate["kind"];
   skillSets: TAiInstalledRoom[];
   knowledgeBases: TAiInstalledRoom[];
-  /** What was skipped: `instructionsNotSaved`. */
+  /** What was skipped: `modelNotSaved`, `instructionsNotSaved`. */
   warnings: string[];
 };
 

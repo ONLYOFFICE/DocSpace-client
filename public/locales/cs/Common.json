@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Obnovovací fráze přijata. Přístupová fráze byla aktualizována. Vaše obnovovací fráze zůstává platná.",
   "RecoveryPhraseTitle": "Obnovovací fráze",
   "RecoveryPhraseWarning": "Kdokoli s touto frází může dešifrovat vaše soubory. Nikdy ji nesdílejte. Nemůžeme ji za vás obnovit.",
+  "RecoveryPhraseWordCount": "Slova: {{entered}} z {{total}}",
   "ReducedAdmins": "Méně administrátorů",
   "ReducedStorage": "Snížená úložiště",
   "ReEncryptingFiles": "Opětovné šifrování souborů",

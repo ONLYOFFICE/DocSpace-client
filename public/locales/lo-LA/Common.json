@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "ຍອມຮັບວະລີການກູ້ຄືນແລ້ວ. ອັບເດດລະຫັດລັບແລ້ວ. ວະລີການກູ້ຄືນຂອງທ່ານຍັງໃຊ້ໄດ້ຢູ່.",
   "RecoveryPhraseTitle": "ວະລີການກູ້ຄືນ",
   "RecoveryPhraseWarning": "ໃຜກໍຕາມທີ່ມີວະລີນີ້ສາມາດຖອດລະຫັດໄຟລ໌ຂອງທ່ານໄດ້. ຢ່າແບ່ງປັນມັນ. ພວກເຮົາບໍ່ສາມາດກູ້ຄືນໃຫ້ທ່ານໄດ້.",
+  "RecoveryPhraseWordCount": "ຄຳ: {{entered}} ຈາກ {{total}}",
   "ReducedAdmins": "ຜູ້ເບິ່ງແຍງຫຼຸດລົງ",
   "ReducedStorage": "ການເກັບຂໍ້ມູນຫຼຸດລົງ",
   "ReEncryptingFiles": "ກຳລັງເຂົ້າລະຫັດໄຟລ໌ຄືນໃໝ່",

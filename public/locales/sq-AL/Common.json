@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Fraza e rikuperimit u pranua. Frazëkalimi u përditësua. Fraza juaj e rikuperimit mbetet e vlefshme.",
   "RecoveryPhraseTitle": "Fraza e rikuperimit",
   "RecoveryPhraseWarning": "Çdo person me këtë frazë mund të dekriptojë skedarët tuaj. Mos e ndani kurrë. Ne nuk mund ta rikuperojmë për ju.",
+  "RecoveryPhraseWordCount": "Fjalë: {{entered}} nga {{total}}",
   "ReducedAdmins": "Më pak administratorë",
   "ReducedStorage": "Ruajtje e zvogëluar",
   "ReEncryptingFiles": "Rienkriptimi i skedarëve",

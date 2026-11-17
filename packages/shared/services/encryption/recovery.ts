@@ -130,3 +130,11 @@ export function splitMnemonicForDisplay(
 export function normalizeMnemonic(input: string): string {
   return input.normalize("NFKD").trim().toLowerCase().replace(/\s+/g, " ");
 }
+
+export const RECOVERY_PHRASE_WORD_COUNT = 24;
+
+/** Number of words in a typed recovery phrase, split as `normalizeMnemonic` splits it. */
+export function countMnemonicWords(input: string): number {
+  const normalized = normalizeMnemonic(input);
+  return normalized === "" ? 0 : normalized.split(" ").length;
+}

@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "恢复短语已验证。密码短语已更新。您的恢复短语仍然有效。",
   "RecoveryPhraseTitle": "恢复短语",
   "RecoveryPhraseWarning": "任何持有此短语的人均可解密您的文件。请勿分享。我们无法为您找回此短语。",
+  "RecoveryPhraseWordCount": "单词数：{{entered}} / {{total}}",
   "ReducedAdmins": "减少管理员",
   "ReducedStorage": "存储空间减少",
   "ReEncryptingFiles": "正在重新加密文件",

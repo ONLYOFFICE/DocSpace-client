@@ -41,6 +41,15 @@ import { describe, expect, it, vi } from "vitest";
 import { validateMnemonic } from "../../../services/encryption/recovery";
 import { RecoveryPhraseInputModal } from "../RecoveryPhraseInputModal";
 
+// The shared mock echoes the key alone; the word count is read from the
+// interpolation values, so they are printed after it.
+vi.mock("react-i18next", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-i18next")>();
+  const t = (key: string, options?: Record<string, unknown>) =>
+    options ? `${key} ${JSON.stringify(options)}` : key;
+  return { ...actual, useTranslation: () => ({ t, ready: true }) };
+});
+
 vi.mock("../../../services/encryption/recovery", async (importOriginal) => {
   const actual =
     await importOriginal<typeof import("../../../services/encryption/recovery")>();
@@ -211,5 +220,58 @@ describe("RecoveryPhraseInputModal", () => {
 
     expect(getPhraseField()).toHaveAttribute("aria-invalid", "true");
     expect(getPhraseField()).toHaveFocus();
+  });
+
+  describe("The recovery phrase input counts its words", () => {
+    const wordCount = () => screen.getByTestId("recovery_phrase_word_count");
+    const words = (count: number) => Array(count).fill("abandon").join(" ");
+
+    it("Count while typing", async () => {
+      const user = userEvent.setup();
+      renderModal();
+
+      expect(wordCount()).toHaveTextContent('"entered":0,"total":24');
+      await user.click(getPhraseField());
+      await user.paste(words(23));
+
+      expect(wordCount()).toHaveTextContent('"entered":23,"total":24');
+      expect(getPhraseField()).toHaveAccessibleDescription(
+        expect.stringContaining("Common:RecoveryPhraseWordCount"),
+      );
+    });
+
+    it("Too few words submitted", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+
+      await user.click(getPhraseField());
+      await user.paste(words(23));
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          "Common:RecoveryPhraseRequired",
+        ),
+      );
+      expect(validateMnemonic).not.toHaveBeenCalled();
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("Extra spaces and line breaks", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+      const spaced = `  ${words(12).replace(/ /g, "   ")}\n\n${words(11)}  art `;
+
+      await user.click(getPhraseField());
+      await user.paste(spaced);
+
+      expect(wordCount()).toHaveTextContent('"entered":24,"total":24');
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledWith(VALID_PHRASE));
+    });
   });
 });

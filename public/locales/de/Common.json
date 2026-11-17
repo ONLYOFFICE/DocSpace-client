@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Wiederherstellungsphrase akzeptiert. Passphrase wurde aktualisiert. Ihre Wiederherstellungsphrase bleibt gültig.",
   "RecoveryPhraseTitle": "Wiederherstellungsphrase",
   "RecoveryPhraseWarning": "Jeder, der diese Phrase kennt, kann Ihre Dateien entschlüsseln. Teilen Sie sie niemals. Wir können sie nicht für Sie wiederherstellen.",
+  "RecoveryPhraseWordCount": "Wörter: {{entered}} von {{total}}",
   "ReducedAdmins": "Reduzierte Admins",
   "ReducedStorage": "Reduzierter Speicherplatz",
   "ReEncryptingFiles": "Dateien werden erneut verschlüsselt",

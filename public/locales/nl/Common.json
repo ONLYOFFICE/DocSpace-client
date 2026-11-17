@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Herstelzin geaccepteerd. Wachtzin is bijgewerkt. Uw herstelzin blijft geldig.",
   "RecoveryPhraseTitle": "Herstelzin",
   "RecoveryPhraseWarning": "Iedereen met deze zin kan uw bestanden ontsleutelen. Deel hem nooit. Wij kunnen hem niet voor u herstellen.",
+  "RecoveryPhraseWordCount": "Woorden: {{entered}} van {{total}}",
   "ReducedAdmins": "Verminderde beheerders",
   "ReducedStorage": "Verminderde opslag",
   "ReEncryptingFiles": "Bestanden opnieuw versleutelen",

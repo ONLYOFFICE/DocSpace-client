@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Fraza za oporavak je prihvaćena. Lozinka je ažurirana. Vaša fraza za oporavak ostaje važeća.",
   "RecoveryPhraseTitle": "Fraza za oporavak",
   "RecoveryPhraseWarning": "Svako ko ima ovu frazu može dešifrovati vaše fajlove. Nikada je ne delite. Mi je ne možemo povratiti umesto vas.",
+  "RecoveryPhraseWordCount": "Reči: {{entered}} od {{total}}",
   "ReducedAdmins": "Smanjeni administratori",
   "ReducedStorage": "Smanjeno skladište",
   "ReEncryptingFiles": "Ponovno šifrovanje datoteka",

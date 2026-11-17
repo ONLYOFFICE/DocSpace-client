@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Atkopšanas frāze pieņemta. Ieejas frāze ir atjaunināta. Jūsu atkopšanas frāze joprojām ir derīga.",
   "RecoveryPhraseTitle": "Atkopšanas frāze",
   "RecoveryPhraseWarning": "Ikviens, kam ir šī frāze, var atšifrēt jūsu failus. Nekad nedalieties ar to. Mēs nevaram to atgūt jūsu vietā.",
+  "RecoveryPhraseWordCount": "Vārdi: {{entered}} no {{total}}",
   "ReducedAdmins": "Samazināts administratoru skaits",
   "ReducedStorage": "Samkurāts saglabāšanas telpa",
   "ReEncryptingFiles": "Failu atkārtota šifrēšana",

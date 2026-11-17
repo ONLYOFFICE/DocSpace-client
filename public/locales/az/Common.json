@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Bərpa ifadəsi qəbul edildi. Parol yeniləndi. Bərpa ifadəniz qüvvədə qalır.",
   "RecoveryPhraseTitle": "Bərpa ifadəsi",
   "RecoveryPhraseWarning": "Bu ifadəyə sahib olan hər kəs fayllarınızı deşifrə edə bilər. Heç vaxt paylaşmayın. Biz onu sizin üçün bərpa edə bilmərik.",
+  "RecoveryPhraseWordCount": "Sözlər: {{entered}} / {{total}}",
   "ReducedAdmins": "Azaldılmış adminlər",
   "ReducedStorage": "Azaldılmış saxlama",
   "ReEncryptingFiles": "Fayllar yenidən şifrələnir",

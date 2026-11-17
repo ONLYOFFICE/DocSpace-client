@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "リカバリーフレーズが受け付けられました。パスフレーズが更新されました。リカバリーフレーズは引き続き有効です。",
   "RecoveryPhraseTitle": "リカバリーフレーズ",
   "RecoveryPhraseWarning": "このフレーズを持つ人は誰でもファイルを復号化できます。絶対に共有しないでください。弊社では復元できません。",
+  "RecoveryPhraseWordCount": "単語数: {{entered}} / {{total}}",
   "ReducedAdmins": "管理者の削減",
   "ReducedStorage": "ストレージを削減",
   "ReEncryptingFiles": "ファイルを再暗号化しています",

@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Obnovitvena fraza je bila sprejeta. Geslo je bilo posodobljeno. Vaša obnovitvena fraza ostaja veljavna.",
   "RecoveryPhraseTitle": "Obnovitvena fraza",
   "RecoveryPhraseWarning": "Kdor koli s to frazo lahko dešifrira vaše datoteke. Nikoli je ne delite. Ne moremo je obnoviti namesto vas.",
+  "RecoveryPhraseWordCount": "Besede: {{entered}} od {{total}}",
   "ReducedAdmins": "Manj skrbnikov",
   "ReducedStorage": "Zmanjšano shranjevanje",
   "ReEncryptingFiles": "Ponovno šifriranje datotek",

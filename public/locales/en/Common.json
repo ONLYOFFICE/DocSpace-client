@@ -1941,6 +1941,7 @@
   "RecoveryPhraseRestored": "Recovery phrase accepted. Passphrase has been updated. Your recovery phrase remains valid.",
   "RecoveryPhraseTitle": "Recovery phrase",
   "RecoveryPhraseWarning": "Anyone with this phrase can decrypt your files. Never share it. We cannot recover it for you.",
+  "RecoveryPhraseWordCount": "Words: {{entered}} of {{total}}",
   "ReducedAdmins": "Reduced admins",
   "ReducedStorage": "Reduced storage",
   "ReEncryptingFiles": "Re-encrypting files",

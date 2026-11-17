@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "تم قبول عبارة الاسترداد. تم تحديث عبارة المرور. تظل عبارة الاسترداد الخاصة بك صالحة.",
   "RecoveryPhraseTitle": "عبارة الاسترداد",
   "RecoveryPhraseWarning": "يمكن لأي شخص يمتلك هذه العبارة فك تشفير ملفاتك. لا تشاركها أبداً. لا يمكننا استردادها نيابةً عنك.",
+  "RecoveryPhraseWordCount": "الكلمات: {{entered}} من {{total}}",
   "ReducedAdmins": "مسؤولون أقل",
   "ReducedStorage": "مساحة تخزين مُقلَّصة",
   "ReEncryptingFiles": "إعادة تشفير الملفات",

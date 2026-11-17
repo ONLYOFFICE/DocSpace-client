@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Cụm từ khôi phục đã được chấp nhận. Mật khẩu bảo vệ đã được cập nhật. Cụm từ khôi phục của bạn vẫn còn hiệu lực.",
   "RecoveryPhraseTitle": "Cụm từ khôi phục",
   "RecoveryPhraseWarning": "Bất kỳ ai có cụm từ này đều có thể giải mã các tập tin của bạn. Tuyệt đối không chia sẻ. Chúng tôi không thể khôi phục nó cho bạn.",
+  "RecoveryPhraseWordCount": "Số từ: {{entered}} / {{total}}",
   "ReducedAdmins": "Giảm quản trị viên",
   "ReducedStorage": "Giảm dung lượng lưu trữ",
   "ReEncryptingFiles": "Đang mã hoá lại tập tin",

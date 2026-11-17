@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Fraza odzyskiwania zaakceptowana. Hasło dostępu zostało zaktualizowane. Twoja fraza odzyskiwania pozostaje ważna.",
   "RecoveryPhraseTitle": "Fraza odzyskiwania",
   "RecoveryPhraseWarning": "Każda osoba posiadająca tę frazę może odszyfrować Twoje pliki. Nigdy jej nie udostępniaj. Nie możemy jej odzyskać za Ciebie.",
+  "RecoveryPhraseWordCount": "Słowa: {{entered}} z {{total}}",
   "ReducedAdmins": "Zredukowani administratorzy",
   "ReducedStorage": "Zredukowane miejsce na dysku",
   "ReEncryptingFiles": "Ponowne szyfrowanie plików",

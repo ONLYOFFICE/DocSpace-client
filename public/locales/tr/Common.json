@@ -1936,6 +1936,7 @@
   "RecoveryPhraseRestored": "Kurtarma ifadesi kabul edildi. Parola güncellendi. Kurtarma ifadeniz geçerliliğini korur.",
   "RecoveryPhraseTitle": "Kurtarma ifadesi",
   "RecoveryPhraseWarning": "Bu ifadeye sahip olan herkes dosyalarınızın şifresini çözebilir. Asla kimseyle paylaşmayın. Sizin için kurtaramayız.",
+  "RecoveryPhraseWordCount": "Kelime: {{entered}} / {{total}}",
   "ReducedAdmins": "Azaltılmış yöneticiler",
   "ReducedStorage": "Depolama alanı azaldı",
   "ReEncryptingFiles": "Dosyalar yeniden şifreleniyor",

@@ -59,6 +59,8 @@ import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-contain
 import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
+  RECOVERY_PHRASE_WORD_COUNT,
+  countMnemonicWords,
   normalizeMnemonic,
   validateMnemonic,
 } from "@docspace/shared/services/encryption/recovery";
@@ -79,6 +81,7 @@ export const RecoveryPhraseInputModal: React.FC<
   const { t, ready } = useTranslation(["Common"]);
   const titleId = useId();
   const hintId = useId();
+  const wordCountId = useId();
 
   const [phrase, setPhrase] = useState("");
   const [localError, setLocalError] = useState("");
@@ -96,9 +99,8 @@ export const RecoveryPhraseInputModal: React.FC<
   const handleSubmit = useCallback(async () => {
     setLocalError("");
     const normalized = normalizeMnemonic(phrase);
-    const wordCount = normalized.length === 0 ? 0 : normalized.split(" ").length;
 
-    if (wordCount !== 24) {
+    if (countMnemonicWords(phrase) !== RECOVERY_PHRASE_WORD_COUNT) {
       setLocalError(t("Common:RecoveryPhraseRequired"));
       return;
     }
@@ -171,32 +173,46 @@ export const RecoveryPhraseInputModal: React.FC<
               </Text>
             </div>
 
-            <FieldContainer
-              isVertical
-              labelFor="recoveryPhraseInput"
-              removeMargin
-              hasError={!!error}
-              errorMessage={error ?? ""}
-              errorMessageWidth="100%"
-            >
-              <Textarea
-                id="recoveryPhraseInput"
-                name="recoveryPhraseInput"
-                value={phrase}
-                onChange={(e) => {
-                  setPhrase(e.target.value);
-                  setLocalError("");
-                }}
-                onKeyDown={handleKeyDown}
-                placeholder={t("Common:RecoveryPhrasePlaceholder")}
-                aria-labelledby={hintId}
-                heightTextArea="120px"
-                isDisabled={isLoading || isValidating}
+            <div className={styles.field}>
+              <FieldContainer
+                isVertical
+                labelFor="recoveryPhraseInput"
+                removeMargin
                 hasError={!!error}
-                autoFocus
-                fontSize={13}
-              />
-            </FieldContainer>
+                errorMessage={error ?? ""}
+                errorMessageWidth="100%"
+              >
+                <Textarea
+                  id="recoveryPhraseInput"
+                  name="recoveryPhraseInput"
+                  value={phrase}
+                  onChange={(e) => {
+                    setPhrase(e.target.value);
+                    setLocalError("");
+                  }}
+                  onKeyDown={handleKeyDown}
+                  placeholder={t("Common:RecoveryPhrasePlaceholder")}
+                  aria-labelledby={hintId}
+                  aria-describedby={wordCountId}
+                  heightTextArea="120px"
+                  isDisabled={isLoading || isValidating}
+                  hasError={!!error}
+                  autoFocus
+                  fontSize={13}
+                />
+              </FieldContainer>
+              <Text
+                id={wordCountId}
+                className={styles.wordCount}
+                fontSize="12px"
+                dataTestId="recovery_phrase_word_count"
+              >
+                {t("Common:RecoveryPhraseWordCount", {
+                  entered: countMnemonicWords(phrase),
+                  total: RECOVERY_PHRASE_WORD_COUNT,
+                })}
+              </Text>
+            </div>
           </div>
           <KeyDialogAnnouncement text={error ?? ""} />
         </ModalDialog.Body>

@@ -125,7 +125,9 @@ describe("RecoveryPhraseInputModal", () => {
     await user.paste(VALID_PHRASE);
     await user.keyboard("{Enter}");
 
-    expect(validateMnemonic).toHaveBeenCalledWith(VALID_PHRASE);
+    await waitFor(() =>
+      expect(validateMnemonic).toHaveBeenCalledWith(VALID_PHRASE),
+    );
     await waitFor(() => expect(onSubmit).toHaveBeenCalledWith(VALID_PHRASE));
     expect(getPhraseField()).toHaveValue(VALID_PHRASE);
   });

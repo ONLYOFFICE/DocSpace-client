@@ -171,7 +171,9 @@ const EditSkillDialog = ({
     return (
       <ModalDialog
         visible
-        displayType={ModalDialogType.aside}
+        displayType={ModalDialogType.modal}
+        autoMaxHeight
+        className={styles.dialog}
         onClose={onClose}
         dataTestId="view-skill-dialog"
       >
@@ -252,7 +254,9 @@ const EditSkillDialog = ({
   return (
     <ModalDialog
       visible
-      displayType={ModalDialogType.aside}
+      displayType={ModalDialogType.modal}
+      autoMaxHeight
+      className={styles.dialog}
       withForm
       onSubmit={(e) => {
         e.preventDefault();

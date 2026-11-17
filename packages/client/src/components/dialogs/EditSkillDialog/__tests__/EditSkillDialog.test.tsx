@@ -19,17 +19,19 @@ vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   const ModalDialog = ({
     children,
     onSubmit,
+    displayType,
   }: {
     children: React.ReactNode;
     onSubmit: (e: React.FormEvent) => void;
+    displayType: string;
   }) => (
-    <form data-testid="form" onSubmit={onSubmit}>
+    <form data-testid="form" data-display-type={displayType} onSubmit={onSubmit}>
       {children}
     </form>
   );
   return {
     ModalDialog: Object.assign(ModalDialog, { Header: Part, Body: Part, Footer: Part }),
-    ModalDialogType: { aside: "aside" },
+    ModalDialogType: { aside: "aside", modal: "modal" },
   };
 });
 vi.mock("SRC_DIR/components/CreateEditDialogParams/InputParam", () => ({
@@ -160,6 +162,15 @@ describe("EditSkillDialog", () => {
     expect(screen.queryByTestId("edit-skill-name")).toBeNull();
     fireEvent.click(screen.getByTestId("view-skill-edit"));
     expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("Clause check");
+  });
+
+  it("opens as a modal dialog, to read and to edit", async () => {
+    const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
+    render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
+    await screen.findByTestId("editor");
+    expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
+    fireEvent.click(screen.getByTestId("view-skill-edit"));
+    expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
   });
 
   it("offers no Edit in the instructions view to those who may not edit the skill", async () => {

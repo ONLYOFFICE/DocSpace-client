@@ -137,6 +137,7 @@ const renderInFrame = (showMenu: boolean) =>
       filesActionsStore={{ emptyTrashInProgress: false }}
       dialogsStore={{ setEmptyTrashDialogVisible: vi.fn() }}
       aiPresetsStore={{ presets: [] }}
+      selectedFolderStore={{ id: 1, rootFolderType: FolderType.USER, isRootFolder: true }}
       clientLoadingStore={{
         isLoaded: true,
         isLoading: false,

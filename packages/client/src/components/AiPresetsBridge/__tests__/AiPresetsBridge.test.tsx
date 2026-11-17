@@ -182,6 +182,7 @@ const project = (id: number, title: string, warnings?: { code: "roomUnavailable"
     id,
     title,
     created: "2026-10-01T00:00:00.000Z",
+    inRoom: true,
     aiProject: {
       profile: { id: "p1", name: "Claude", available: true },
       instructionsRooms: [{ id: 12, title: "Skills", available: true }],

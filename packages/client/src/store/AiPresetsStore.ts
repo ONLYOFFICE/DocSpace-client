@@ -84,7 +84,7 @@ export const PRESETS_FRESH_MS = 10_000;
 
 export type TAiPresetApplyResult = "applied" | "gone" | "superseded";
 
-/** How many projects the chat panel's agents menu offers, the most recent first. */
+/** How many projects are read for the chat panel's agents menu, the most recent first. */
 const PICKER_PROJECTS_COUNT = 100;
 
 // A linked room the caller can no longer read is not connected.
@@ -122,7 +122,8 @@ const toRoomIds = (rooms: AiChatPresetRoom[]) =>
 
 /**
  * The AI projects in a chat outside the projects page: the panel title's
- * agents menu lists them (`ai/projects`), picking one carries its
+ * agents menu and the sidebar list those the user is a member of
+ * (`ai/projects`), picking one carries its
  * model, skills and knowledge bases into the open chat, and the panel
  * header's save button creates a project from the chat's setup.
  */
@@ -213,7 +214,9 @@ class AiPresetsStore {
       });
       runInAction(() => {
         if (id !== this.requestId) return;
-        this.presets = page.folders.map(toAiPreset);
+        // Only members chat with an agent: a DocSpace admin reads every
+        // project, and those they are not a member of are not offered.
+        this.presets = page.folders.filter((project) => project.inRoom).map(toAiPreset);
         this.lastReadAt = Date.now();
       });
     } catch {

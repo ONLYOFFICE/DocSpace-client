@@ -20,6 +20,7 @@ const project = (id: number, title: string, overrides: Partial<TAiProject["aiPro
     id,
     title,
     created: "2026-10-01T00:00:00.000Z",
+    inRoom: true,
     aiProject: {
       profile: { id: "p1", name: "Claude", available: true },
       instructionsRooms: [room(12, "Skills"), room(13, "Legal tone")],
@@ -75,6 +76,16 @@ describe("AiPresetsStore", () => {
     expect(api.getAiProjects).toHaveBeenCalledWith(
       expect.objectContaining({ sortBy: "DateAndTime", sortOrder: "descending" }),
     );
+    expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
+  });
+
+  it("offers a DocSpace admin outside an agent none of it", async () => {
+    api.getAiProjects.mockResolvedValue({
+      folders: [project(1, "Sales"), { ...project(2, "Legal Reviewer"), inRoom: false }],
+    });
+    const store = new AiPresetsStore();
+    store.init("admin");
+    await flush();
     expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
   });
 

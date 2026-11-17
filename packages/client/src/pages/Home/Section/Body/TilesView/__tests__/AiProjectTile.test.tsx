@@ -14,7 +14,9 @@ const store = vi.hoisted(() => ({
 vi.mock("SRC_DIR/store/useStore", () => ({ useStore: () => store }));
 
 vi.mock("react-i18next", () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
+  useTranslation: () => ({
+    t: (key: string, options?: { name?: string }) => (options?.name ? `${key}|${options.name}` : key),
+  }),
 }));
 
 // The tile's frame: the two halves it is handed, and the click on the tile.
@@ -134,6 +136,19 @@ describe("AiProjectTile", () => {
     fireEvent.click(screen.getByText("Alexey Bannov"));
     expect(openUser).toHaveBeenCalledTimes(1);
     expect(thumbnailClick).not.toHaveBeenCalled();
+  });
+
+  it("offers a member to open the agent's chat, once per click", () => {
+    const thumbnailClick = renderTile(vi.fn(), { inRoom: true });
+    const button = screen.getByTestId("ai-project-tile-open-chat");
+    expect(screen.getByTitle("Common:OpenChatWith|Legal Reviewer")).toBeInTheDocument();
+    fireEvent.click(button);
+    expect(thumbnailClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("offers no chat on an agent the user is not a member of", () => {
+    renderTile(vi.fn(), { inRoom: false });
+    expect(screen.queryByTestId("ai-project-tile-open-chat")).not.toBeInTheDocument();
   });
 
   it("opens the project on a click on the tile, but not on its badges", () => {

@@ -41,9 +41,11 @@ import { ReactSVG } from "react-svg";
 import { BaseTile } from "@onlyoffice/apps-ui-kit/components/tiles/base-tile";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 
 import { useStore } from "SRC_DIR/store/useStore";
 
+import ChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url";
 import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 
@@ -63,7 +65,7 @@ export const getShownSources = (names: string[] = []) => ({
 type TBaseTileProps = React.ComponentProps<typeof BaseTile>;
 
 type AiProjectTileProps = Omit<TBaseTileProps, "topContent" | "bottomContent" | "className" | "onRoomClick"> & {
-  /** Opens the project: a click anywhere on the tile but its controls. */
+  /** Opens the project, on its chat: a click anywhere on the tile but its controls, or Open chat. */
   thumbnailClick?: (e: React.MouseEvent) => void;
   /** Opens the owner's profile, from the owner's name. */
   openUser?: () => void;
@@ -74,7 +76,8 @@ type AiProjectTileProps = Omit<TBaseTileProps, "topContent" | "bottomContent" | 
 };
 
 /** The parts of the tile a click on which is theirs, not the project's. */
-const CONTROLS = ".checkbox, .badges, .expandButton, .p-contextmenu, #modal-dialog, .ai-project-tile-owner";
+const CONTROLS =
+  ".checkbox, .badges, .expandButton, .p-contextmenu, #modal-dialog, .ai-project-tile-owner, .ai-project-tile-open-chat";
 
 /**
  * An AI project (an agent) in the tile view, laid out as a room template's
@@ -116,7 +119,12 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
   // An agent without a model of its own runs on the portal's chat model.
   const model = (summary && (summary.model ?? aiProjectsStore.defaultModelName)) || DASH;
 
-  const { createdBy, tags } = item as { createdBy?: { displayName?: string }; tags?: string[] };
+  const { createdBy, tags, inRoom, title } = item as {
+    createdBy?: { displayName?: string };
+    tags?: string[];
+    inRoom?: boolean;
+    title?: string;
+  };
   const owner = createdBy?.displayName;
   // An agent's category is its first tag, as the list's category row reads it.
   const category = tags?.[0];
@@ -171,6 +179,21 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
     },
   ];
 
+  // Only a member chats with the agent: a DocSpace admin sees every agent of
+  // the portal but chats only in the ones they belong to.
+  const openChat = inRoom ? (
+    <div className={`${styles.openChat} ai-project-tile-open-chat not-selectable`}>
+      <IconButton
+        iconName={ChatReactSvgUrl}
+        size={16}
+        isFill
+        title={t("Common:OpenChatWith", { name: title })}
+        onClick={thumbnailClick}
+        dataTestId="ai-project-tile-open-chat"
+      />
+    </div>
+  ) : null;
+
   const bottomContent = (
     <div className={styles.wrapper} data-testid="ai-project-tile-summary">
       {rows.map(({ key, label, value }) => (
@@ -211,6 +234,7 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
         <>
           {content}
           {badges}
+          {openChat}
         </>
       }
       bottomContent={bottomContent}

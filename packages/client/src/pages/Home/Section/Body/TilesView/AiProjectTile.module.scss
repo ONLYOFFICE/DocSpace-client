@@ -57,6 +57,16 @@
       }
     }
 
+    .ai-project-tile-open-chat {
+      svg path {
+        fill: var(--tile-icon-color, var(--tile-icon-button-color));
+      }
+
+      &:hover svg path {
+        fill: var(--icon-button-hover-color);
+      }
+    }
+
     // Five rows and the four gaps between them, whether the agent has a
     // category or not and however many rooms it links: every card of the
     // list is as high. Rows are lines of 20px; Skill sets and Knowledge
@@ -93,6 +103,14 @@
   .label {
     color: var(--tile-sub-text);
   }
+}
+
+// Open chat sits at the end of the upper row, next to the actions menu.
+.openChat {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-inline-start: auto;
 }
 
 // The linked rooms of a kind, one per line.

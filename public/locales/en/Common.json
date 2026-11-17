@@ -1707,6 +1707,7 @@
   "OnlyServiceFeeCharged": "Only the service fee is charged to the wallet.",
   "Open": "Open",
   "OpenAISettings": "Open AI settings",
+  "OpenChatWith": "Open chat with {{name}}",
   "OpenFileMessage": "The document file you open will be converted to the Office Open XML format for quick viewing and editing.",
   "OpenGeneratedDocument": "Open the generated document",
   "OpenKeysManagement": "Open keys management",

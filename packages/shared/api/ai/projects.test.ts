@@ -1,6 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const request = vi.fn(async (_options: unknown): Promise<unknown> => ({}));
 
@@ -24,6 +24,7 @@ import {
   AI_PROJECT_ROOM_TYPE,
   aiProjectToRoom,
   createAiProject,
+  deleteAiProject,
   getAiProjectKnowledgeFiles,
   getAiProjectKnowledgeFilesCount,
   getAiProjects,
@@ -371,6 +372,59 @@ describe("the calls", () => {
     expect(unread.aiProject.profile).toBeNull();
     // Told apart from a project without a model of its own.
     expect(unread.aiProject.modelUnread).toBe(true);
+  });
+
+  describe("deleteAiProject", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("follows the queued delete until its operation ends", async () => {
+      vi.useFakeTimers();
+      let polls = 0;
+      route({
+        "DELETE /files/rooms/7": { id: "op1", finished: false, error: "" },
+        "get /files/fileops?id=op1": () => {
+          polls += 1;
+          return [{ id: "op1", finished: polls > 1, error: "" }];
+        },
+      });
+      let done = false;
+      const deleting = deleteAiProject(7).then(() => {
+        done = true;
+      });
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(done).toBe(false);
+      await vi.advanceTimersByTimeAsync(1000);
+      await deleting;
+      expect(polls).toBe(2);
+      expect(done).toBe(true);
+    });
+
+    it("rejects with the error the operation ended with", async () => {
+      vi.useFakeTimers();
+      route({
+        "DELETE /files/rooms/7": { id: "op1", finished: false, error: "" },
+        "get /files/fileops?id=op1": [{ id: "op1", finished: true, error: "Room is locked" }],
+      });
+      const deleting = expect(deleteAiProject(7)).rejects.toThrow("Room is locked");
+      await vi.advanceTimersByTimeAsync(1000);
+      await deleting;
+    });
+
+    it("takes an operation the server no longer lists, or one done at once, as ended", async () => {
+      vi.useFakeTimers();
+      route({
+        "DELETE /files/rooms/7": { id: "op1", finished: false, error: "" },
+        "get /files/fileops?id=op1": [],
+      });
+      const deleting = deleteAiProject(7);
+      await vi.advanceTimersByTimeAsync(1000);
+      await expect(deleting).resolves.toBeUndefined();
+
+      route({ "DELETE /files/rooms/7": { id: "op2", finished: true, error: "" } });
+      await expect(deleteAiProject(7)).resolves.toBeUndefined();
+    });
   });
 
   it("fails the read the project form opens on when the model cannot be read", async () => {

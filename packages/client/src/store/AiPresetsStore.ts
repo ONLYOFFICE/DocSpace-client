@@ -42,13 +42,13 @@ import type {
 
 import {
   createAiProject,
+  deleteAiProject,
   getAiProject,
   getAiProjects,
   type TAiProject,
   type TAiProjectLogo,
   type TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
-import { deleteRoom } from "@docspace/shared/api/rooms";
 
 /**
  * An AI project as the chat takes it: the model, its Instructions rooms as
@@ -260,12 +260,12 @@ class AiPresetsStore {
   };
 
   /**
-   * Deletes a project for good, from the chat panel's "Agent actions": it
-   * leaves the list, and the chat if it runs on it. A refused delete
-   * rejects and changes nothing.
+   * Deletes a project for good, from the chat panel's "Agent actions": once
+   * the server's delete operation has ended it leaves the list, and the chat
+   * if it runs on it. A refused or failed delete rejects and changes nothing.
    */
   deletePreset = async (id: string) => {
-    await deleteRoom(Number(id));
+    await deleteAiProject(Number(id));
     runInAction(() => {
       this.presets = this.presets.filter((preset) => preset.id !== id);
       if (this.activePreset?.id === id) this.activePreset = null;

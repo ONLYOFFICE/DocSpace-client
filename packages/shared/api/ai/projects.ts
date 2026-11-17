@@ -39,6 +39,7 @@ import { VectorizationStatus } from "../../enums";
 import { request } from "../client";
 import { isChatCapableProfile } from "./enums";
 import { getProfileAssignments, getProfileById } from "./index";
+import { getProgress } from "../files";
 import type { TOperation } from "../files/types";
 
 /**
@@ -992,14 +993,29 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
   );
 };
 
-/** Starts the delete; the answer is the file operation to follow. */
+/** How often a queued delete is asked how far it got. */
+export const AI_PROJECT_DELETE_POLL_MS = 1000;
+
+/**
+ * Deletes a project for good. The server queues the delete as a file
+ * operation: it is followed until it ends, as the Files list follows its
+ * own, and one that ends with an error rejects with it. An operation the
+ * server no longer lists has ended.
+ */
 export const deleteAiProject = async (id: number) => {
-  const res = await request({
+  let operation = (await request({
     method: "DELETE",
     url: `${roomsUrl}/${id}`,
     data: { deleteAfter: false },
-  });
-  return res as TOperation;
+  })) as TOperation | undefined;
+  while (operation?.id && !operation.finished && !operation.error) {
+    await new Promise((resolve) => {
+      setTimeout(resolve, AI_PROJECT_DELETE_POLL_MS);
+    });
+    const operationId: string = operation.id;
+    operation = (await getProgress(operationId))?.find((item) => item.id === operationId);
+  }
+  if (operation?.error) throw new Error(operation.error);
 };
 
 export const getAiProjectSkills = async (id: number) => {

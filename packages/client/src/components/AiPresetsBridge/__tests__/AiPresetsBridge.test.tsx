@@ -11,6 +11,7 @@ const api = vi.hoisted(() => ({
   getAiProjects: vi.fn(),
   getAiProject: vi.fn(),
   createAiProject: vi.fn(),
+  deleteAiProject: vi.fn(),
   aiProjectToRoom: (p: object) => ({ ...p, isRoom: true }),
 }));
 
@@ -20,8 +21,6 @@ const { toastr } = vi.hoisted(() => ({
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 
-const roomsApi = vi.hoisted(() => ({ deleteRoom: vi.fn() }));
-vi.mock("@docspace/shared/api/rooms", () => roomsApi);
 
 // The Info panel as a page that has one shows it: `showInfoPanel` makes it
 // visible only while `mounted`. Observable, as the store's flag is.
@@ -590,18 +589,18 @@ describe("AiPresetsBridge", () => {
     it("delete the agent after a confirmation and take the chat back to the default agent", async () => {
       const store = new AiPresetsStore();
       await pick(store, withRights({ EditAccess: true, Delete: true }, true));
-      roomsApi.deleteRoom.mockResolvedValue({});
+      api.deleteAiProject.mockResolvedValue({});
 
       act(() => action("delete")?.onClick());
       expect(screen.getByTestId("delete-agent-dialog")).toHaveAttribute("data-name", "Sales");
       // Cancelled: nothing is deleted.
       fireEvent.click(screen.getByTestId("delete-agent-cancel"));
       expect(screen.queryByTestId("delete-agent-dialog")).toBeNull();
-      expect(roomsApi.deleteRoom).not.toHaveBeenCalled();
+      expect(api.deleteAiProject).not.toHaveBeenCalled();
 
       act(() => action("delete")?.onClick());
       await act(async () => fireEvent.click(screen.getByTestId("delete-agent-confirm")));
-      expect(roomsApi.deleteRoom).toHaveBeenCalledWith(1);
+      expect(api.deleteAiProject).toHaveBeenCalledWith(1);
       expect(store.activePreset).toBeNull();
       expect(store.presets.some((p) => p.id === "1")).toBe(false);
       expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith(
@@ -614,7 +613,7 @@ describe("AiPresetsBridge", () => {
     it("keep the agent and the dialog when the delete is refused", async () => {
       const store = new AiPresetsStore();
       await pick(store, withRights({ EditAccess: true, Delete: true }, true));
-      roomsApi.deleteRoom.mockRejectedValue(new Error("refused"));
+      api.deleteAiProject.mockRejectedValue(new Error("refused"));
 
       act(() => action("delete")?.onClick());
       await act(async () => fireEvent.click(screen.getByTestId("delete-agent-confirm")));

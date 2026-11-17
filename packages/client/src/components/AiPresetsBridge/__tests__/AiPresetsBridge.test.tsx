@@ -145,9 +145,20 @@ const profiles = vi.hoisted(() => ({
     defaultProfile: { capabilities: 1 } as { capabilities?: number } | null,
   },
 }));
+// The chat's conversation: an id once it has messages, "" while it has none.
+const threads = vi.hoisted(() => {
+  const state = {
+    threadId: "",
+    onSwitchToNewThread: vi.fn((_opts?: { keepSessionProfile?: boolean }) => {
+      state.threadId = "";
+    }),
+  };
+  return state;
+});
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
   useStores: () => ({
     useProfilesStore: (select: (s: typeof profiles.state) => unknown) => select(profiles.state),
+    useThreadsStore: { getState: () => threads },
   }),
 }));
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
@@ -252,6 +263,7 @@ describe("AiPresetsBridge", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     aiChatStore = new FakeAiChatStore();
+    threads.threadId = "";
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales")] });
   });
 
@@ -497,6 +509,51 @@ describe("AiPresetsBridge", () => {
       contextRooms: [],
       knowledgeRooms: [],
     });
+  });
+
+  it("starts a new conversation on a picked agent when the chat has messages, and on the default agent again", async () => {
+    api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+    api.getAiProject.mockImplementation(async (id: number) => project(id, id === 1 ? "Sales" : "Legal"));
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+    act(() => aiChatStore.setIsVisible(true));
+
+    // An empty chat goes on, on the picked agent.
+    await act(async () => aiChatStore.agentPicker?.onSelect("1"));
+    await flush();
+    expect(store.activePreset?.id).toBe("1");
+    expect(threads.onSwitchToNewThread).not.toHaveBeenCalled();
+
+    // A chat with messages stays with its agent: the next one is new.
+    threads.threadId = "t1";
+    await act(async () => aiChatStore.agentPicker?.onSelect("2"));
+    await flush();
+    expect(store.activePreset?.id).toBe("2");
+    expect(threads.onSwitchToNewThread).toHaveBeenCalledTimes(1);
+    expect(threads.onSwitchToNewThread).toHaveBeenLastCalledWith({ keepSessionProfile: true });
+    // The new conversation runs on the picked agent's model and rooms.
+    expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith(expect.objectContaining({ profileId: "p1" }));
+
+    threads.threadId = "t2";
+    act(() => aiChatStore.agentPicker?.onSelect(null));
+    expect(threads.onSwitchToNewThread).toHaveBeenCalledTimes(2);
+    expect(store.activePreset).toBeNull();
+  });
+
+  it("leaves the conversation with its agent when the panel closes on it", async () => {
+    api.getAiProject.mockResolvedValue(project(1, "Sales"));
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+    act(() => aiChatStore.setIsVisible(true));
+    await act(async () => aiChatStore.agentPicker?.onSelect("1"));
+    await flush();
+
+    threads.threadId = "t1";
+    act(() => aiChatStore.setIsVisible(false));
+    expect(threads.onSwitchToNewThread).toHaveBeenCalledTimes(1);
+    expect(store.activePreset).toBeNull();
   });
 
   it("reports an agent that is gone by the time it is picked", async () => {

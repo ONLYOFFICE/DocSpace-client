@@ -918,12 +918,16 @@ const Shell = ({ page = "home", ...rest }) => {
     onChangeAiLimit,
   });
 
-  // The chat's own scope is only ever an AI project: the AI service
+  // The chat's own scope is only ever an AI project (an agent): the one
+  // whose page is open, or the one picked in the chat panel. The AI service
   // recognises the project by this id and takes the round's model and
-  // linked rooms from the project itself (`ai/projects/{id}/chat-context`).
-  // Threads are global per user, so no other location scopes the chat.
+  // linked rooms from the project itself (`ai/projects/{id}/chat-context`),
+  // and a conversation started on it belongs to it, so the history lists
+  // the agent's own conversations. No other location scopes the chat.
   const chatEntityId =
-    isInsideAiProject && aiActiveProject ? String(aiActiveProject.id) : undefined;
+    isInsideAiProject && aiActiveProject
+      ? String(aiActiveProject.id)
+      : (aiActivePresetId ?? undefined);
 
   // The location the rounds work in: the folder or room the chat is opened
   // in (the AI service's location line, generated files and uploads follow

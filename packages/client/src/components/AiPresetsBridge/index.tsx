@@ -176,7 +176,7 @@ const AiPresetsBridge = ({
   // Whether AI is set up, by the chat's own rule, for the AI rooms section
   // outside the providers: a profile that can chat on standalone (unknown
   // until the profiles are loaded), the AI service on SaaS.
-  const { useProfilesStore } = useStores();
+  const { useProfilesStore, useThreadsStore } = useStores();
   const profilesInitialized = useProfilesStore((s: { initialized: boolean }) => s.initialized);
   const hasChatProfiles = useProfilesStore((s: { hasChatProfiles: boolean }) => s.hasChatProfiles);
   const aiReady = standalone ? (profilesInitialized ? hasChatProfiles : null) : isAIReady;
@@ -250,6 +250,15 @@ const AiPresetsBridge = ({
     [presets, activePreset],
   );
 
+  // A conversation belongs to the agent it was started on: the chat going
+  // over to another agent, or back to the default one, leaves a conversation
+  // with messages in its agent's history and goes on in a new one. A chat
+  // with no messages yet just goes on, on the other agent.
+  const leaveConversation = React.useCallback(() => {
+    const threads = useThreadsStore.getState();
+    if (threads.threadId) threads.onSwitchToNewThread({ keepSessionProfile: true });
+  }, [useThreadsStore]);
+
   // Only the latest pick counts: picking the default agent or the agent the
   // chat already runs on calls off a pick whose project is still being read.
   const onAgentSelect = React.useCallback(
@@ -258,6 +267,7 @@ const AiPresetsBridge = ({
       if (id === null || id === current?.id) {
         aiPresetsStore.cancelApply();
         if (id !== null || !current) return;
+        leaveConversation();
         aiPresetsStore.setActivePreset(null);
         aiChatStore.applyPreset(NO_PRESET);
         return;
@@ -272,7 +282,7 @@ const AiPresetsBridge = ({
         // The agent could not be read: the chat stays as it is.
         .catch((e) => toastr.error(errorMessage(e)));
     },
-    [aiChatStore, aiPresetsStore, t],
+    [aiChatStore, aiPresetsStore, leaveConversation, t],
   );
 
   // On an agent's own page the same menu is the page title (the panel keeps
@@ -458,7 +468,10 @@ const AiPresetsBridge = ({
     const wasActive = aiPresetsStore.activePreset?.id === agentToDelete.id;
     try {
       await aiPresetsStore.deletePreset(agentToDelete.id);
-      if (wasActive) aiChatStore.applyPreset(NO_PRESET);
+      if (wasActive) {
+        leaveConversation();
+        aiChatStore.applyPreset(NO_PRESET);
+      }
       setAgentToDelete(null);
     } catch (e) {
       toastr.error(errorMessage(e));
@@ -473,9 +486,10 @@ const AiPresetsBridge = ({
     return () => aiChatStore.setKnowledgePickerHidden(false);
   }, [aiChatStore, vectorizationEnabled]);
 
-  // A project picked in the agents menu: applied to the open chat as it
-  // stands, and made the active preset so its skills rooms reach the chat
-  // as the context rooms (see Shell's `contextRoom`).
+  // A project picked in the agents menu: the chat goes over to it (a new
+  // conversation when the open one has messages), and it is made the active
+  // preset so its skills rooms reach the chat as the context rooms and the
+  // chat is scoped to it (see Shell's `contextRoom` and `chatEntityId`).
   React.useEffect(
     () =>
       reaction(
@@ -486,6 +500,7 @@ const AiPresetsBridge = ({
           // A closed chat takes no project (closing calls off a pick, this
           // is the guard behind it).
           if (!preset || !aiChatStore.isVisible) return;
+          leaveConversation();
           aiPresetsStore.setActivePreset(preset);
           aiChatStore.applyPreset({
             profileId: preset.profileId,
@@ -495,7 +510,7 @@ const AiPresetsBridge = ({
           });
         },
       ),
-    [aiChatStore, aiPresetsStore],
+    [aiChatStore, aiPresetsStore, leaveConversation],
   );
 
   // Opening the chat reads the projects again, so one created or shared
@@ -505,9 +520,9 @@ const AiPresetsBridge = ({
   // Closing the chat drops the project it runs on, all of it: the model goes
   // back to the default and the project's Instructions and Knowledge rooms
   // are disconnected, so the chat opens clean next time (as the projects page
-  // resets it when a project is left); a pick still being read is called
-  // off. A chat no project was applied to keeps the model and rooms the user
-  // chose.
+  // resets it when a project is left), and its conversation stays with the
+  // project; a pick still being read is called off. A chat no project was
+  // applied to keeps the model and rooms the user chose.
   React.useEffect(
     () =>
       reaction(
@@ -522,11 +537,12 @@ const AiPresetsBridge = ({
           // with its agent once the Info panel closes.
           if (agentInfoOpen.current) return;
           if (!aiPresetsStore.activePreset) return;
+          leaveConversation();
           aiPresetsStore.setActivePreset(null);
           aiChatStore.applyPreset(NO_PRESET);
         },
       ),
-    [aiChatStore, aiPresetsStore],
+    [aiChatStore, aiPresetsStore, leaveConversation],
   );
 
   // The Info panel opened by "Agent info" closes: the list gets its

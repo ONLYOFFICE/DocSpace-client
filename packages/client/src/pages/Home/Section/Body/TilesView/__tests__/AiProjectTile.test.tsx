@@ -38,10 +38,10 @@ vi.mock("@onlyoffice/apps-ui-kit/components/tiles/base-tile", () => ({
 import AiProjectTile from "../AiProjectTile";
 
 const openUser = vi.fn();
-const renderTile = (thumbnailClick = vi.fn()) => {
+const renderTile = (thumbnailClick = vi.fn(), item: Record<string, unknown> = {}) => {
   render(
     <AiProjectTile
-      item={{ id: 7, title: "Legal Reviewer", createdBy: { displayName: "Alexey Bannov" } } as never}
+      item={{ id: 7, title: "Legal Reviewer", createdBy: { displayName: "Alexey Bannov" }, ...item } as never}
       openUser={openUser}
       contextOptions={[]}
       thumbnailClick={thumbnailClick}
@@ -99,6 +99,18 @@ describe("AiProjectTile", () => {
     store.defaultModelName = null;
     renderTile();
     expect(value("model")).toBe("—");
+  });
+
+  it("names the agent's first tag as its category", () => {
+    renderTile(vi.fn(), { tags: ["Legal", "Reports"] });
+    expect(screen.getByText("Common:Category")).toBeInTheDocument();
+    expect(value("category")).toBe("Legal");
+  });
+
+  it("has no Category row for an agent without tags", () => {
+    renderTile(vi.fn(), { tags: [] });
+    expect(screen.queryByText("Common:Category")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("ai-project-tile-category")).not.toBeInTheDocument();
   });
 
   it("names the owner, whose name opens their profile and not the project", () => {

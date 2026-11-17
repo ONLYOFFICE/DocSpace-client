@@ -63,10 +63,11 @@ const CONTROLS = ".checkbox, .badges, .expandButton, .p-contextmenu, #modal-dial
 
 /**
  * An AI project (an agent) in the tile view, laid out as a room template's
- * tile: the logo and the name above, and below them what the project is made
- * of - its model, its skill sets and its knowledge bases - and its owner. The list answers
- * the rooms without those settings, so the tile reads its own summary once
- * and shows a dash until it lands.
+ * tile: the logo and the name above, and below them its category (its first
+ * tag, when it has one), what the project is made of - its model, its skill
+ * sets and its knowledge bases - and its owner. The list answers the rooms
+ * without those settings, so the tile reads its own summary once and shows a
+ * dash until it lands.
  */
 const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...rest }: AiProjectTileProps) => {
   const { t } = useTranslation(["Common"]);
@@ -101,9 +102,13 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
   // An agent without a model of its own runs on the portal's chat model.
   const model = (summary && (summary.model ?? aiProjectsStore.defaultModelName)) || "\u2014";
 
-  const owner = (item as { createdBy?: { displayName?: string } }).createdBy?.displayName;
+  const { createdBy, tags } = item as { createdBy?: { displayName?: string }; tags?: string[] };
+  const owner = createdBy?.displayName;
+  // An agent's category is its first tag, as the list's category row reads it.
+  const category = tags?.[0];
 
   const rows = [
+    ...(category ? [{ key: "category", label: t("Common:Category"), value: category }] : []),
     { key: "model", label: t("Common:AIAgentModel"), value: model },
     { key: "skills", label: t("Common:SkillSets"), value: list(summary?.skills) },
     { key: "knowledge", label: t("Common:AIProjectKnowledgeRooms"), value: list(summary?.knowledge) },

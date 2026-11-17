@@ -860,3 +860,150 @@ test.describe("Private room — invitation result is readable", () => {
   }
 });
 
+test.describe("Private room — people without a key are marked", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  /** Carol holds a key, Dan has none. Leaves the people list open. */
+  const openPeopleList = async (
+    page: Page,
+    mockRequest: WorkerFixture,
+    baseUrl: string,
+  ) => {
+    const { keysHandle, passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const carol = await generateIdentityKeyPair();
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, DAN]),
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+    );
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      { ...keysHandle.getKeys()[0], userId: TEST_USER_ID },
+    ]);
+    accessHandle.current!.setUserKeys(CAROL.id, [
+      {
+        id: "carol-1",
+        userId: CAROL.id,
+        publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
+        privateKeyEnc: "",
+        date: "2026-01-01T00:00:00.000Z",
+        cryptoEngineId: "",
+      },
+    ]);
+
+    await navigateInApp(page, "/private/filter");
+    const row = page.getByTestId("table-row-0");
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await row.getByTestId("context-menu-button").first().click();
+    await page.getByTestId("option_invite-users-to-room").click();
+    await page.getByTestId("invite_panel_choose_from_list_link").click();
+
+    const people = page.getByTestId("invite_panel_people_selector");
+    const personRow = (person: { displayName: string }) =>
+      people
+        .locator('[data-testid^="selector-item-"][style]')
+        .filter({ hasText: person.displayName });
+    await expect(personRow(DAN)).toBeVisible({ timeout: 15000 });
+    return { people, personRow, passphrase };
+  };
+
+  test("Person without a key is marked", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { personRow } = await openPeopleList(page, mockRequest, baseUrl);
+
+    const mark = personRow(DAN).getByText("No key", { exact: true });
+    await expect(mark).toBeVisible({ timeout: 15000 });
+    await expect(personRow(CAROL).getByText("No key")).toHaveCount(0);
+    await expect(personRow(DAN)).toHaveAccessibleDescription(
+      /cannot be invited until they create one/,
+    );
+
+    await mark.hover();
+    await expect(page.getByRole("tooltip")).toContainText(
+      "has not set up an encryption key",
+    );
+  });
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`People list with a marked person in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      await page.emulateMedia({ colorScheme });
+      const { people, personRow } = await openPeopleList(
+        page,
+        mockRequest,
+        baseUrl,
+      );
+      await expect(personRow(DAN).getByText("No key")).toBeVisible({
+        timeout: 15000,
+      });
+      await expect(personRow(CAROL)).toBeVisible();
+      await page.mouse.move(0, 0);
+
+      await expectElementScreenshot(people.getByRole("listbox"), [
+        "desktop",
+        "private-room-invite",
+        `people-list-marked-${colorScheme}.png`,
+      ]);
+    });
+  }
+
+  test("Marked person selected and sent", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { people, personRow, passphrase } = await openPeopleList(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    await expect(personRow(DAN).getByText("No key")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await personRow(DAN).click();
+    await people.getByTestId("selector_submit_button").click();
+    await page.getByTestId("invite_panel_send_button").click();
+    await unlockIfPrompted(page, passphrase);
+
+    await expect(page.getByTestId("invite_panel_not_invited")).toContainText(
+      DAN.displayName,
+      { timeout: 30000 },
+    );
+    await expect(page.getByTestId("invite_panel_not_invited")).toContainText(
+      "have not set up encryption keys",
+    );
+  });
+});

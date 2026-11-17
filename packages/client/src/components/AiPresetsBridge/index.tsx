@@ -238,9 +238,13 @@ const AiPresetsBridge = ({
       }
       const preset = aiPresetsStore.presets.find((p) => p.id === id);
       if (!preset) return;
-      void aiPresetsStore.requestApply(preset).then((result) => {
-        if (result === "gone") toastr.info(t("Common:AIProjectNotAvailable"));
-      });
+      void aiPresetsStore
+        .requestApply(preset)
+        .then((result) => {
+          if (result === "gone") toastr.info(t("Common:AIProjectNotAvailable"));
+        })
+        // The agent could not be read: the chat stays as it is.
+        .catch((e) => toastr.error(errorMessage(e)));
     },
     [aiChatStore, aiPresetsStore, t],
   );

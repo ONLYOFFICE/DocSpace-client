@@ -275,13 +275,14 @@ class AiPresetsStore {
   /**
    * A project picked in the agents menu: read again, so the chat gets the
    * project as it is now, then handed to the bridge. A project that is gone
-   * leaves the list and is not applied. Only the latest pick is applied: a
-   * read that comes back after another pick, or after `cancelApply`, is
-   * dropped.
+   * leaves the list and is not applied. A read that fails otherwise rejects
+   * with its error and applies nothing: the list's copy has neither the
+   * model nor the rooms. Only the latest pick is applied: a read that comes
+   * back after another pick, or after `cancelApply`, is dropped.
    */
   requestApply = async (preset: TAiPreset): Promise<TAiPresetApplyResult> => {
     const id = ++this.applyRequestId;
-    let fresh = preset;
+    let fresh: TAiPreset;
     try {
       fresh = toAiPreset(await getAiProject(Number(preset.id)));
     } catch (e) {
@@ -292,7 +293,8 @@ class AiPresetsStore {
         });
         return id === this.applyRequestId ? "gone" : "superseded";
       }
-      // Any other failure: the list's copy is applied.
+      if (id !== this.applyRequestId) return "superseded";
+      throw e;
     }
     if (id !== this.applyRequestId) return "superseded";
     runInAction(() => {

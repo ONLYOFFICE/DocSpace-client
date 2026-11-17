@@ -457,6 +457,19 @@ describe("AiPresetsBridge", () => {
     expect(aiChatStore.agentPicker?.agents).toEqual([]);
   });
 
+  it("reports an agent that cannot be read and leaves the chat as it is", async () => {
+    api.getAiProject.mockRejectedValue({ response: { status: 500, data: { error: "down" } } });
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    await flush();
+
+    await act(async () => aiChatStore.agentPicker?.onSelect("1"));
+    await flush();
+    expect(toastr.error).toHaveBeenCalledWith("down");
+    expect(store.activePreset).toBeNull();
+    expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
+  });
+
   it("keeps the project the chat runs on in the menu once the list has lost it", async () => {
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
     api.getAiProject.mockResolvedValue(project(1, "Sales"));

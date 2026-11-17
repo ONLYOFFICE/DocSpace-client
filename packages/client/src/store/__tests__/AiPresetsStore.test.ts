@@ -182,6 +182,37 @@ describe("AiPresetsStore", () => {
     expect(store.presets).toEqual([]);
   });
 
+  it("applies nothing and rejects with the error when the project cannot be read for another reason", async () => {
+    const failure = { response: { status: 500 }, message: "down" };
+    api.getAiProject.mockRejectedValue(failure);
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    await expect(store.requestApply(store.presets[0])).rejects.toBe(failure);
+    expect(store.pendingApply).toBeNull();
+    // The project stays in the list.
+    expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
+  });
+
+  it("drops a failed read quietly once another pick overtook it", async () => {
+    let failSales: (reason: unknown) => void = () => {};
+    api.getAiProject.mockImplementationOnce(
+      () =>
+        new Promise<TAiProject>((_, reject) => {
+          failSales = reject;
+        }),
+    );
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    const sales = store.requestApply(store.presets[0]);
+    store.cancelApply();
+    failSales({ response: { status: 500 } });
+    expect(await sales).toBe("superseded");
+  });
+
   it("applies only the latest pick, whichever read comes back first", async () => {
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
     let resolveSales: (value: TAiProject) => void = () => {};

@@ -130,6 +130,17 @@ class AiProjectsStore {
   tileSummaries: Record<number, TAiProjectSummary> = {};
 
   /**
+   * Bumped each time the agents' list is read again: every tile reads its
+   * summary again, showing the one it has until the answer lands.
+   */
+  tileSummariesRead = 0;
+
+  /** The `tileSummariesRead` each summary, and the portal's model, was read in. */
+  private summaryReads: Record<number, number> = {};
+
+  private defaultModelRead = -1;
+
+  /**
    * The model an agent without one of its own runs on, by name: what its
    * tile shows in place of a model. `null` until read, or when the portal
    * has no chat model bound.
@@ -188,7 +199,13 @@ class AiProjectsStore {
   constructor(aiPresetsStore: AiPresetsStore, userStore: UserStore) {
     this.aiPresetsStore = aiPresetsStore;
     this.userStore = userStore;
-    makeAutoObservable(this, { aiPresetsStore: false, openRequest: false, summaryRequests: false } as never);
+    makeAutoObservable(this, {
+      aiPresetsStore: false,
+      openRequest: false,
+      summaryRequests: false,
+      summaryReads: false,
+      defaultModelRead: false,
+    } as never);
   }
 
   /* ------------------------------ Project ------------------------------ */
@@ -329,18 +346,22 @@ class AiProjectsStore {
   };
 
   /**
-   * Reads the summary a project's tile shows, once: later calls reuse the
-   * answer, and a failed read is tried again by the next tile that asks.
+   * Reads the summary a project's tile shows, once per read of the list:
+   * later calls reuse the answer until the list is read again
+   * (`refreshTileSummaries`), and a failed read is tried again by the next
+   * tile that asks.
    */
   fetchTileSummary = (id: number): Promise<void> => {
     void this.fetchDefaultModel();
-    if (this.tileSummaries[id]) return Promise.resolve();
+    if (this.tileSummaries[id] && this.summaryReads[id] === this.tileSummariesRead) return Promise.resolve();
     const pending = this.summaryRequests[id];
     if (pending) return pending;
+    const read = this.tileSummariesRead;
     const request = getAiProjectSummary(id)
       .then((summary) => {
         runInAction(() => {
           this.tileSummaries[id] = summary;
+          this.summaryReads[id] = read;
         });
       })
       .catch(() => undefined)
@@ -351,13 +372,39 @@ class AiProjectsStore {
     return request;
   };
 
-  /** Reads the portal's chat model once; a read that found none is tried again by the next tile. */
+  /**
+   * The agents' list was read again: each tile reads its summary again, and
+   * the portal's chat model is read again with them.
+   */
+  refreshTileSummaries = () => {
+    this.tileSummariesRead += 1;
+  };
+
+  /** A project changed (its room was updated): its summary is read again if a tile showed it. */
+  refreshTileSummary = (id: number): Promise<void> => {
+    if (!this.tileSummaries[id]) return Promise.resolve();
+    delete this.summaryReads[id];
+    return this.fetchTileSummary(id);
+  };
+
+  /** A project is gone: its summary goes with it. */
+  forgetTileSummary = (id: number) => {
+    delete this.tileSummaries[id];
+    delete this.summaryReads[id];
+  };
+
+  /**
+   * Reads the portal's chat model once per read of the list; a read that
+   * found none is tried again by the next tile.
+   */
   fetchDefaultModel = (): Promise<void> => {
-    if (this.defaultModelName) return Promise.resolve();
+    if (this.defaultModelName && this.defaultModelRead === this.tileSummariesRead) return Promise.resolve();
+    const read = this.tileSummariesRead;
     this.defaultModelRequest ??= getDefaultChatModelName()
       .then((name) => {
         runInAction(() => {
           this.defaultModelName = name;
+          this.defaultModelRead = read;
         });
       })
       .finally(() => {
@@ -370,7 +417,10 @@ class AiProjectsStore {
   private replaceProject = (project: TAiProject) => {
     this.projectRevisions[project.id] = (this.projectRevisions[project.id] ?? 0) + 1;
     // A project read in full is also what its tile shows.
-    if (!project.aiProject.partial) this.tileSummaries[project.id] = toAiProjectSummary(project);
+    if (!project.aiProject.partial) {
+      this.tileSummaries[project.id] = toAiProjectSummary(project);
+      this.summaryReads[project.id] = this.tileSummariesRead;
+    }
     if (this.activeProject?.id === project.id) this.activeProject = project;
     if (this.projectDialog?.mode === "edit" && this.projectDialog.project.id === project.id) {
       this.projectDialog = { mode: "edit", project };

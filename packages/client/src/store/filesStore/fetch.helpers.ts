@@ -853,6 +853,10 @@ export function fetchRoomsImpl(
           self.setFiles(EMPTY_ARRAY);
         });
 
+        // The agents' tiles read their summaries again with the list.
+        if (self.categoryType === CategoryType.AiHub)
+          self.aiProjectsStore?.refreshTileSummaries();
+
         // Spec: private-rooms/sidebar-section, "Info panel in the section".
         const isListShown =
           shownFolderId === data.current.id &&

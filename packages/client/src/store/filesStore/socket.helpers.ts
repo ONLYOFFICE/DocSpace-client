@@ -369,6 +369,10 @@ export function refreshFolderImpl(
 
       self.setFolder(folderInfo);
 
+      // An agent's model or linked rooms change as an update of its room.
+      if (folderInfo.roomType === RoomsType.AiProjectRoom)
+        void self.aiProjectsStore?.refreshTileSummary(Number(folderInfo.id));
+
       refreshInfoPanel();
     })
     .catch(() => {
@@ -471,6 +475,9 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     }
 
     const foundFolder = self.folders[foundIndex];
+
+    if ("roomType" in foundFolder && foundFolder.roomType === RoomsType.AiProjectRoom)
+      self.aiProjectsStore?.forgetTileSummary(Number(foundFolder.id));
 
     self.selectedFolderStore.setFoldersCount(
       self.selectedFolderStore.foldersCount - 1,

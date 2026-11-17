@@ -551,5 +551,45 @@ describe("AiProjectsStore", () => {
       await store.fetchTileSummary(7);
       expect(api.getAiProjectSummary).not.toHaveBeenCalled();
     });
+
+    it("reads the summaries and the portal's model again once the list is read again, showing the old ones meanwhile", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      api.getDefaultChatModelName.mockResolvedValue("GLM 5.3 Flash");
+      const store = createStore();
+      await store.fetchTileSummary(7);
+      await store.fetchDefaultModel();
+
+      store.refreshTileSummaries();
+      expect(store.tileSummaries[7]).toEqual(summary);
+      const renamed = { ...summary, skills: ["Contracts"] };
+      api.getAiProjectSummary.mockResolvedValue(renamed);
+      api.getDefaultChatModelName.mockResolvedValue("Claude");
+      await store.fetchTileSummary(7);
+      await store.fetchDefaultModel();
+
+      expect(api.getAiProjectSummary).toHaveBeenCalledTimes(2);
+      expect(store.tileSummaries[7]).toEqual(renamed);
+      expect(store.defaultModelName).toBe("Claude");
+      // Read once per read of the list.
+      await store.fetchTileSummary(7);
+      expect(api.getAiProjectSummary).toHaveBeenCalledTimes(2);
+    });
+
+    it("reads a shown summary again when its project changes, and drops it when the project is gone", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      const store = createStore();
+      // Never shown: nothing to read again.
+      await store.refreshTileSummary(7);
+      expect(api.getAiProjectSummary).not.toHaveBeenCalled();
+
+      await store.fetchTileSummary(7);
+      const changed = { ...summary, model: "GPT" };
+      api.getAiProjectSummary.mockResolvedValue(changed);
+      await store.refreshTileSummary(7);
+      expect(store.tileSummaries[7]).toEqual(changed);
+
+      store.forgetTileSummary(7);
+      expect(store.tileSummaries[7]).toBeUndefined();
+    });
   });
 });

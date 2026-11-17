@@ -75,11 +75,12 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
 
   const id = Number(item.id);
   const summary = aiProjectsStore.tileSummaries[id];
-  const { fetchTileSummary } = aiProjectsStore;
+  const { fetchTileSummary, tileSummariesRead } = aiProjectsStore;
 
+  // Read again each time the list is.
   useEffect(() => {
     void fetchTileSummary(id);
-  }, [fetchTileSummary, id]);
+  }, [fetchTileSummary, id, tileSummariesRead]);
 
   const onRoomClick = useCallback(
     (e: React.MouseEvent) => {

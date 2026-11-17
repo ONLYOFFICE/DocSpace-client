@@ -178,6 +178,33 @@ describe("FilesStore.fetchRooms — AI Workspace empty list", () => {
   });
 });
 
+describe("FilesStore.fetchRooms — agents' tiles", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  const fetchIn = async (rootFolderType: FolderType) => {
+    const store = createTestFilesStore();
+    const aiProjectsStore = {
+      refreshTileSummaries: vi.fn(),
+      refreshTileSummary: vi.fn(),
+      forgetTileSummary: vi.fn(),
+    };
+    store.aiProjectsStore = aiProjectsStore;
+    const payload = roomsPayload([room(1)]);
+    payload.current.rootFolderType = rootFolderType;
+    vi.spyOn(api.rooms, "getRooms").mockResolvedValue(payload as never);
+    await store.fetchRooms(0);
+    return aiProjectsStore;
+  };
+
+  it("has the agents' tiles read their summaries again with the AI list", async () => {
+    expect((await fetchIn(FolderType.AiHub)).refreshTileSummaries).toHaveBeenCalledTimes(1);
+  });
+
+  it("leaves them alone for another list", async () => {
+    expect((await fetchIn(FolderType.Rooms)).refreshTileSummaries).not.toHaveBeenCalled();
+  });
+});
+
 describe("FilesStore.fetchRooms — last-page clamp", () => {
   afterEach(() => vi.restoreAllMocks());
 

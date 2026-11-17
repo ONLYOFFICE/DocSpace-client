@@ -7,6 +7,7 @@ type TSummary = { model: string | null; modelAvailable: boolean; skills: string[
 const store = vi.hoisted(() => ({
   tileSummaries: {} as Record<number, unknown>,
   defaultModelName: null as string | null,
+  tileSummariesRead: 0,
   fetchTileSummary: vi.fn(async () => {}),
 }));
 

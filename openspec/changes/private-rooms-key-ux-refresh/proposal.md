@@ -58,6 +58,9 @@ Dependencies:
   It needs one, on the kit's `release/v4.1.0`, before the mark can be shown.
 - No work on `../server` or the Document Server. The mark reads the existing
   route for the keys of invitation candidates.
+- `private-rooms-release-ux-fixes` is applied first: both changes touch the
+  passphrase form, the recovery phrase display and Keys management, and this
+  one moves forms that already behave as that change specifies.
 
 ## Decisions needed
 

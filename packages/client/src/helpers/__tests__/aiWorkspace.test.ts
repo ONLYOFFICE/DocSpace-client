@@ -4,6 +4,7 @@ import { RoomsType } from "@docspace/shared/enums";
 
 import {
   getAiWorkspaceCreatePayload,
+  getAiWorkspaceInfoPanelHint,
   getAiWorkspaceListType,
   getAiWorkspaceTabUrl,
   getAiWorkspaceListUrlOf,
@@ -39,6 +40,17 @@ describe("AI Chat section lists", () => {
     expect(getAiWorkspaceListType(search)).toBe(type);
     expect(getAiWorkspaceTitle(t, search)).toBe(title);
     expect(getAiWorkspaceCreatePayload(search)).toEqual(payload);
+  });
+});
+
+describe("AI Chat section lists in the Info panel", () => {
+  it.each([
+    ["", "Common:AIAgentsEmptyScreenTent"],
+    [`?type=${RoomsType.AiProjectRoom}&tab=templates`, "Common:AIAgentsEmptyScreenTent"],
+    [`?type=${RoomsType.InstructionsRoom}`, "InfoPanel:SkillSetsEmptyScreenText"],
+    [`?type=${RoomsType.KnowledgeRoom}`, "InfoPanel:KnowledgeBasesEmptyScreenText"],
+  ])("%s with nothing selected says %s", (search, hint) => {
+    expect(getAiWorkspaceInfoPanelHint(t, search)).toBe(hint);
   });
 });
 

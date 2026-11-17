@@ -87,6 +87,24 @@ export const getAiWorkspaceTitle = (
   }
 };
 
+/**
+ * What the Info panel says while nothing of the list is selected: that the
+ * details of its agents, skill sets or knowledge bases are shown there.
+ */
+export const getAiWorkspaceInfoPanelHint = (
+  t: (key: string) => string,
+  search: string,
+): string => {
+  switch (getAiWorkspaceListType(search)) {
+    case RoomsType.InstructionsRoom:
+      return t("InfoPanel:SkillSetsEmptyScreenText");
+    case RoomsType.KnowledgeRoom:
+      return t("InfoPanel:KnowledgeBasesEmptyScreenText");
+    default:
+      return t("Common:AIAgentsEmptyScreenTent");
+  }
+};
+
 export type TAiWorkspaceCreatePayload =
   | { startRoomType: RoomsType }
   | { isAiProjectCreate: true };

@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "See guests details here",
   "HistoryEmptyScreenText": "Activity history will be shown here",
   "HistoryThirdParty": "History display is not available for public rooms with connected third-party storages",
+  "KnowledgeBasesEmptyScreenText": "See knowledge base details here",
   "LastUpdateInfo": "Last update",
   "LifetimeEnds": "Lifetime ends",
   "MembersEmptyScreenText": "See members details here",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "See rooms details here",
   "SelectedGroups": "Selected groups",
   "SelectedUsers": "Selected accounts",
+  "SkillSetsEmptyScreenText": "See skill set details here",
   "StorageType": "Storage type",
   "Users": "Users"
 }

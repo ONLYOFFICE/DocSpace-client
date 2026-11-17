@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Še ni transakcij Docs Connect",
   "NoDocsConnectTransactionDescription": "Ko se naročite, bosta tukaj prikazana zgodovina transakcij in stroški.",
   "NoEncryptionKey": "Ni nastavljenega šifrirnega ključa. Ustvarite ali uvozite ključ za omogočanje šifriranja datotek.",
+  "NoEncryptionKeyMarkHint": "Ta oseba še ni nastavila šifrirnega ključa. Ni je mogoče povabiti, dokler ga ne ustvari.",
   "NoFindingsFound": "Nič ni najdeno",
   "NoFindingsFound2": "Nobenih ugotovitev ni bilo najdenih.",
   "NoGroupsHere": "Še ni skupin",

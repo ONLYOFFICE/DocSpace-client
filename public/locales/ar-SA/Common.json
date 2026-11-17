@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "لا توجد معاملات لـ Docs Connect حتى الآن",
   "NoDocsConnectTransactionDescription": "بمجرد اشتراكك، سيظهر سجل المعاملات والرسوم هنا.",
   "NoEncryptionKey": "لا يوجد مفتاح تشفير مهيأ. أنشئ مفتاحاً أو استورده لتفعيل تشفير الملفات.",
+  "NoEncryptionKeyMarkHint": "لم يُعدّ هذا الشخص مفتاح تشفير بعد. لا يمكن دعوته حتى ينشئ مفتاحًا.",
   "NoFindingsFound": "لم يتم العثور على نتائج",
   "NoFindingsFound2": "لم يتم العثور على نتائج.",
   "NoGroupsHere": "لا توجد مجموعات بعد",

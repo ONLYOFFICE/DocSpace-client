@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Docs Connect の取引はまだありません",
   "NoDocsConnectTransactionDescription": "サブスクリプションを開始すると、取引履歴と請求内容がここに表示されます。",
   "NoEncryptionKey": "暗号化キーが設定されていません。キーを作成またはインポートして、ファイルの暗号化を有効にしてください。",
+  "NoEncryptionKeyMarkHint": "このユーザーはまだ暗号化キーを設定していません。キーを作成するまで招待できません。",
   "NoFindingsFound": "何も見つかりません",
   "NoFindingsFound2": "何も見つかりませんでした",
   "NoGroupsHere": "グループはまだありません",

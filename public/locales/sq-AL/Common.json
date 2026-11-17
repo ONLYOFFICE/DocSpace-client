@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Ende nuk ka transaksione në Docs Connect",
   "NoDocsConnectTransactionDescription": "Pasi të abonoheni, historia e transaksioneve dhe pagesat do të shfaqen këtu.",
   "NoEncryptionKey": "Asnjë çelës enkriptimi i konfiguruar. Krijoni ose importoni një çelës për të aktivizuar enkriptimin e skedarëve.",
+  "NoEncryptionKeyMarkHint": "Ky person nuk ka konfiguruar ende një çelës kriptimi. Nuk mund të ftohet derisa të krijojë një të tillë.",
   "NoFindingsFound": "Asnjë gjetje",
   "NoFindingsFound2": "Nuk u gjetën gjetje",
   "NoGroupsHere": "Nuk ka ende grupe",

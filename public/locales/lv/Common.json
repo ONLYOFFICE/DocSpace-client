@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Vēl nav Docs Connect darījumu",
   "NoDocsConnectTransactionDescription": "Kad abonēsiet pakalpojumu, darījumu vēsture un maksājumi tiks atspoguļoti šeit.",
   "NoEncryptionKey": "Šifrēšanas atslēga nav konfigurēta. Izveidojiet vai importējiet atslēgu, lai iespējotu failu šifrēšanu.",
+  "NoEncryptionKeyMarkHint": "Šī persona vēl nav iestatījusi šifrēšanas atslēgu. To nevar uzaicināt, kamēr tā neizveido atslēgu.",
   "NoFindingsFound": "Nekas nav atrasts",
   "NoFindingsFound2": "Nav atrastu rezultātu",
   "NoGroupsHere": "Vēl nav nevienas grupas",

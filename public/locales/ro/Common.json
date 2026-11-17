@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Nicio tranzacție Docs Connect deocamdată",
   "NoDocsConnectTransactionDescription": "Odată ce vă abonați, istoricul tranzacțiilor și taxele vor apărea aici.",
   "NoEncryptionKey": "Nicio cheie de criptare configurată. Creați sau importați o cheie pentru a activa criptarea fișierelor.",
+  "NoEncryptionKeyMarkHint": "Această persoană nu și-a configurat încă o cheie de criptare. Nu poate fi invitată până nu își creează una.",
   "NoFindingsFound": "Nu s-au găsit rezultate",
   "NoFindingsFound2": "Nu s-au găsit rezultate",
   "NoGroupsHere": "Deocamdată niciun grup",

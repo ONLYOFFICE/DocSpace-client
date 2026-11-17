@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Brak transakcji Docs Connect",
   "NoDocsConnectTransactionDescription": "Gdy wykupisz subskrypcję, historia transakcji i opłat zostanie wyświetlona tutaj.",
   "NoEncryptionKey": "Nie skonfigurowano klucza szyfrowania. Utwórz lub zaimportuj klucz, aby włączyć szyfrowanie plików.",
+  "NoEncryptionKeyMarkHint": "Ta osoba nie skonfigurowała jeszcze klucza szyfrowania. Nie można jej zaprosić, dopóki go nie utworzy.",
   "NoFindingsFound": "Nic nie znaleziono",
   "NoFindingsFound2": "Brak znalezionych wyników",
   "NoGroupsHere": "Na razie brak grup",

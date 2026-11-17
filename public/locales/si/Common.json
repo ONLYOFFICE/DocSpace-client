@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "තවම Docs Connect ගනුදෙනු නොමැත",
   "NoDocsConnectTransactionDescription": "ඔබ දායක වූ පසු, ගනුදෙනු ඉතිහාසය සහ ගාස්තු මෙහි දිස්වනු ඇත.",
   "NoEncryptionKey": "සංකේතාංකන යතුරක් වින්‍යාස කර නොමැත. ගොනු සංකේතාංකනය සබල කිරීමට යතුරක් සාදන්න හෝ ආනයනය කරන්න.",
+  "NoEncryptionKeyMarkHint": "මෙම පුද්ගලයා තවම සංකේතන යතුරක් සකසා නැත. ඔවුන් යතුරක් සාදන තුරු ආරාධනා කළ නොහැක.",
   "NoFindingsFound": "සොයාගැනීම් නැත",
   "NoFindingsFound2": "තොරතුරු කිසිවක් සොයාගත නොහැකි විය.",
   "NoGroupsHere": "තවම කණ්ඩායම් නැත.",

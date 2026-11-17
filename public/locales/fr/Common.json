@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Aucune transaction Docs Connect pour l'instant",
   "NoDocsConnectTransactionDescription": "Une fois que vous serez abonné, l'historique des transactions et les frais s'afficheront ici.",
   "NoEncryptionKey": "Aucune clé de chiffrement configurée. Créez ou importez une clé pour activer le chiffrement des fichiers.",
+  "NoEncryptionKeyMarkHint": "Cette personne n'a pas encore configuré de clé de chiffrement. Elle ne peut pas être invitée tant qu'elle n'en a pas créé une.",
   "NoFindingsFound": "Aucun résultat trouvé",
   "NoFindingsFound2": "Aucun résultat trouvé",
   "NoGroupsHere": "Aucun groupe pour le moment",

@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Todavía no hay transacciones de Docs Connect",
   "NoDocsConnectTransactionDescription": "Una vez que se suscriba, el historial de transacciones y cargos aparecerá aquí.",
   "NoEncryptionKey": "No hay ninguna clave de cifrado configurada. Cree o importe una clave para habilitar el cifrado de archivos.",
+  "NoEncryptionKeyMarkHint": "Esta persona aún no ha configurado una clave de cifrado. No se puede invitar hasta que cree una.",
   "NoFindingsFound": "No se han encontrado resultados",
   "NoFindingsFound2": "No se han encontrado resultados",
   "NoGroupsHere": "Aún no hay grupos",

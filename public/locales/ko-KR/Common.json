@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "아직 Docs Connect 거래 내역이 없습니다",
   "NoDocsConnectTransactionDescription": "구독하면 거래 내역과 청구 내용이 여기에 표시됩니다.",
   "NoEncryptionKey": "암호화 키가 구성되지 않았습니다. 파일 암호화를 활성화하려면 키를 만들거나 가져오세요.",
+  "NoEncryptionKeyMarkHint": "이 사용자는 아직 암호화 키를 설정하지 않았습니다. 키를 만들 때까지 초대할 수 없습니다.",
   "NoFindingsFound": "검색 결과가 없습니다",
   "NoFindingsFound2": "결과가 없습니다",
   "NoGroupsHere": "아직 그룹이 없습니다",

@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Ainda não há transações do Docs Connect",
   "NoDocsConnectTransactionDescription": "Assim que subscrever, o histórico de transações e cobranças aparecerá aqui.",
   "NoEncryptionKey": "Nenhuma chave de encriptação configurada. Crie ou importe uma chave para ativar a encriptação de ficheiros.",
+  "NoEncryptionKeyMarkHint": "Esta pessoa ainda não configurou uma chave de encriptação. Não pode ser convidada até criar uma.",
   "NoFindingsFound": "Não foram encontrados resultados",
   "NoFindingsFound2": "Nenhuma descoberta encontrada",
   "NoGroupsHere": "Ainda não há grupos",

@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Henüz Docs Connect işlemi yok",
   "NoDocsConnectTransactionDescription": "Abone olduğunuzda işlem geçmişi ve ücretler burada görüntülenecektir.",
   "NoEncryptionKey": "Şifreleme anahtarı yapılandırılmamış. Dosya şifrelemeyi etkinleştirmek için bir anahtar oluşturun veya içe aktarın.",
+  "NoEncryptionKeyMarkHint": "Bu kişi henüz bir şifreleme anahtarı ayarlamadı. Bir anahtar oluşturana kadar davet edilemez.",
   "NoFindingsFound": "Herhangi bir bulguya rastlanmadı",
   "NoFindingsFound2": "Herhangi bir bulgu bulunamadı",
   "NoGroupsHere": "Henüz grup yok",

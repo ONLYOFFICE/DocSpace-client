@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Ještě žádné transakce Docs Connect",
   "NoDocsConnectTransactionDescription": "Jakmile si předplatíte službu, zobrazí se zde historie transakcí a poplatky.",
   "NoEncryptionKey": "Není nastaven žádný šifrovací klíč. Vytvořte nebo importujte klíč, abyste povolili šifrování souborů.",
+  "NoEncryptionKeyMarkHint": "Tato osoba si zatím nenastavila šifrovací klíč. Nelze ji pozvat, dokud si jej nevytvoří.",
   "NoFindingsFound": "Žádné nálezy",
   "NoFindingsFound2": "Nenalezena žádná zjištění.",
   "NoGroupsHere": "Zatím žádné skupiny",

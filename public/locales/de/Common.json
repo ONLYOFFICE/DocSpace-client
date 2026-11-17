@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Noch keine Docs Connect-Transaktionen",
   "NoDocsConnectTransactionDescription": "Sobald Sie ein Abonnement abschließen, werden hier der Transaktionsverlauf und die Gebühren angezeigt.",
   "NoEncryptionKey": "Kein Verschlüsselungsschlüssel konfiguriert. Erstellen oder importieren Sie einen Schlüssel, um die Dateiverschlüsselung zu aktivieren.",
+  "NoEncryptionKeyMarkHint": "Diese Person hat noch keinen Verschlüsselungsschlüssel eingerichtet. Sie kann erst eingeladen werden, wenn sie einen erstellt hat.",
   "NoFindingsFound": "Keine Ergebnisse gefunden",
   "NoFindingsFound2": "Keine Ergebnisse gefunden",
   "NoGroupsHere": "Noch keine Gruppen",

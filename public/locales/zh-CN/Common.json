@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "暂无 Docs Connect 交易记录",
   "NoDocsConnectTransactionDescription": "订阅后，交易记录和费用将显示在此处。",
   "NoEncryptionKey": "未配置加密密钥。请创建或导入密钥以启用文件加密。",
+  "NoEncryptionKeyMarkHint": "此人尚未设置加密密钥。在其创建密钥之前，无法邀请。",
   "NoFindingsFound": "未找到任何结果",
   "NoFindingsFound2": "未找到相关记录",
   "NoGroupsHere": "暂无群组",

@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "ຍັງບໍ່ມີທຸລະກຳ Docs Connect",
   "NoDocsConnectTransactionDescription": "ເມື່ອທ່ານສະໝັກໃຊ້, ປະຫວັດທຸລະກຳ ແລະ ຄ່າໃຊ້ຈ່າຍຈະປາກົດຢູ່ບ່ອນນີ້.",
   "NoEncryptionKey": "ບໍ່ໄດ້ຕັ້ງຄ່າກຸນແຈເຂົ້າລະຫັດ. ສ້າງ ຫຼືນຳເຂົ້າກຸນແຈເພື່ອເປີດໃຊ້ການເຂົ້າລະຫັດໄຟລ໌.",
+  "NoEncryptionKeyMarkHint": "ຜູ້ນີ້ຍັງບໍ່ໄດ້ຕັ້ງຄ່າຄີເຂົ້າລະຫັດ. ບໍ່ສາມາດເຊີນໄດ້ຈົນກວ່າເຂົາເຈົ້າຈະສ້າງຄີ.",
   "NoFindingsFound": "ບໍ່ເຫັນຜົນການຄົ້ນຫາໃດໆ",
   "NoFindingsFound2": "ບໍ່ພົບຜົນການຄົ້ນຫາ",
   "NoGroupsHere": "ຍັງບໍ່ມີກຸ່ມເທື່ອ",

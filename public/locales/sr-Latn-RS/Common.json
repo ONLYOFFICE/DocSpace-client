@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Još nema transakcija za Docs Connect",
   "NoDocsConnectTransactionDescription": "Kada se pretplatite, ovde će se pojaviti istorija transakcija i naplate.",
   "NoEncryptionKey": "Nije konfigurisan ključ za šifrovanje. Napravite ili uvezite ključ da biste omogućili šifrovanje fajlova.",
+  "NoEncryptionKeyMarkHint": "Ova osoba još nije podesila ključ za šifrovanje. Ne može biti pozvana dok ga ne napravi.",
   "NoFindingsFound": "Nema rezultata pretrage",
   "NoFindingsFound2": "Nema pronađenih rezultata",
   "NoGroupsHere": "Još nema grupa",

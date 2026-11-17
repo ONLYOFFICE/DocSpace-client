@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Ei vielä Docs Connect -tapahtumia",
   "NoDocsConnectTransactionDescription": "Kun tilaat palvelun, tapahtumahistoria ja veloitukset näkyvät täällä.",
   "NoEncryptionKey": "Salausavainta ei ole määritetty. Luo tai tuo avain ottaaksesi tiedostojen salauksen käyttöön.",
+  "NoEncryptionKeyMarkHint": "Tämä henkilö ei ole vielä määrittänyt salausavainta. Häntä ei voi kutsua ennen kuin hän luo sellaisen.",
   "NoFindingsFound": "Havaintoja ei löytynyt",
   "NoFindingsFound2": "Ei löydettyjä tuloksia",
   "NoGroupsHere": "Ei ryhmiä vielä",

@@ -1637,6 +1637,7 @@
   "NoDocsConnectTransaction": "Nog geen Docs Connect-transacties",
   "NoDocsConnectTransactionDescription": "Zodra u zich abonneert, verschijnen de transactiegeschiedenis en kosten hier.",
   "NoEncryptionKey": "Geen versleutelingssleutel geconfigureerd. Maak of importeer een sleutel om bestandsversleuteling in te schakelen.",
+  "NoEncryptionKeyMarkHint": "Deze persoon heeft nog geen versleutelingssleutel ingesteld. Hij of zij kan pas worden uitgenodigd nadat er een is aangemaakt.",
   "NoFindingsFound": "Geen bevindingen gevonden",
   "NoFindingsFound2": "Geen bevindingen gevonden",
   "NoGroupsHere": "Nog geen groepen",

@@ -1643,6 +1643,7 @@
   "NoDocsConnectTransaction": "No Docs Connect transactions yet",
   "NoDocsConnectTransactionDescription": "Once you subscribe, the transaction history and charges will appear here.",
   "NoEncryptionKey": "No encryption key configured. Create or import a key to enable file encryption.",
+  "NoEncryptionKeyMarkHint": "This person has not set up an encryption key yet. They cannot be invited until they create one.",
   "NoFindingsFound": "No findings",
   "NoFindingsFound2": "No findings found",
   "NoGroupsHere": "No groups yet",

@@ -234,6 +234,12 @@ export const KeySetupDialog = ({
             ) : null}
 
             {step === "passphrase" ? (
+              <Text className={styles.description}>
+                {t("Common:CreatePassphraseHint")}
+              </Text>
+            ) : null}
+
+            {step === "passphrase" ? (
               <PassphraseCreationFields
                 passphrase={passphrase}
                 confirmPassphrase={confirmPassphrase}

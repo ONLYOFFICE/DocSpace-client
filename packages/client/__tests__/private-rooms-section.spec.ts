@@ -1800,23 +1800,22 @@ test.describe("Private section — key prompt", () => {
     );
   });
 
+  // Key setup opens on its explanation step, with no question before it.
   const keyPrompt = (page: Page) =>
-    page
-      .getByRole("dialog")
-      .filter({ hasText: "Encryption key required" });
+    page.getByRole("dialog", { name: "Create key" });
 
   const openCreateFromSection = async (page: Page, baseUrl: string) => {
     await page.goto(`${baseUrl}/private/filter`);
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
     await page.getByTestId("main-button").first().click();
     await expect(keyPrompt(page)).toBeVisible({ timeout: 15000 });
-    // No dialog under the prompts: a closed panel stays mounted, off screen.
+    // No dialog under key setup: a closed panel stays mounted, off screen.
     await expect(
       page.getByTestId("create_room_dialog_save"),
     ).not.toBeInViewport();
   };
 
-  test("User accepts key generation", async ({ page, baseUrl }) => {
+  test("User completes key setup", async ({ page, baseUrl }) => {
     await openCreateFromSection(page, baseUrl);
 
     await keyPrompt(page).getByRole("button", { name: "Continue" }).click();
@@ -1858,7 +1857,7 @@ test.describe("Private section — key prompt", () => {
     await expect(dialog.getByText("Private Room", { exact: true })).toBeVisible();
   });
 
-  test("User cancels key generation", async ({ page, baseUrl }) => {
+  test("User cancels on the explanation", async ({ page, baseUrl }) => {
     const createRequests: string[] = [];
     page.on("request", (request) => {
       if (request.method() === "POST" && /\/files\/rooms$/.test(request.url()))

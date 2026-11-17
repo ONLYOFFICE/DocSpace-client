@@ -544,6 +544,13 @@ describe("Key setup dialog", () => {
     expect(counter()).toHaveTextContent('"step":3,"total":3');
   });
 
+  it("keeps the hint of the passphrase form on the passphrase step", async () => {
+    const { show } = await renderDialog();
+    show("passphrase");
+
+    expect(screen.getByText("Common:CreatePassphraseHint")).toBeVisible();
+  });
+
   it("Back from the recovery phrase", async () => {
     const user = userEvent.setup();
     const { show } = await renderDialog();

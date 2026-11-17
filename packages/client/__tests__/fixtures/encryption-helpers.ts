@@ -55,6 +55,13 @@ export type BootstrapOptions = {
 // length >= 12, uppercase, digits, special characters.
 const DEFAULT_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 
+/** Leaves the explanation step of key setup for its passphrase step. */
+export async function passKeySetupExplanation(page: Page) {
+  const explanation = page.getByRole("dialog", { name: "Create key" });
+  await expect(explanation).toBeVisible({ timeout: 5000 });
+  await explanation.getByRole("button", { name: "Continue" }).click();
+}
+
 export async function bootstrapEncryption(
   page: Page,
   mockRequest: WorkerFixture,
@@ -81,6 +88,7 @@ export async function bootstrapEncryption(
   });
   await expect(generateBtn).toBeVisible({ timeout: 15000 });
   await generateBtn.click();
+  await passKeySetupExplanation(page);
 
   const passphraseInput = page.getByLabel("Passphrase", { exact: true });
   await expect(passphraseInput).toBeVisible({ timeout: 5000 });

@@ -49,6 +49,7 @@ import {
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+import { passKeySetupExplanation } from "./fixtures/encryption-helpers";
 
 test.describe("Profile > Keys Management", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -99,6 +100,7 @@ test.describe("Profile > Keys Management", () => {
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
+    await passKeySetupExplanation(page);
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5_000 });
@@ -194,13 +196,14 @@ test.describe("Profile > Keys Management", () => {
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.click();
+    await passKeySetupExplanation(page);
 
-    const dialog = page
-      .getByRole("dialog")
-      .filter({ hasText: "Create passphrase" });
+    const dialog = page.getByRole("dialog", { name: "Create passphrase" });
     await expect(dialog).toBeVisible({ timeout: 5_000 });
-    await dialog.getByRole("button", { name: "Cancel" }).click();
-    await expect(dialog).toBeHidden();
+    await dialog.getByRole("button", { name: "Back" }).click();
+    const explanation = page.getByRole("dialog", { name: "Create key" });
+    await explanation.getByRole("button", { name: "Cancel" }).click();
+    await expect(explanation).toBeHidden();
 
     // Pin the handle first so a null fallback can't mask a real upload.
     expect(handleRef.current).not.toBeNull();
@@ -279,6 +282,7 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     await page
       .getByRole("button", { name: "Create key", exact: true })
       .click({ timeout: 15_000 });
+    await passKeySetupExplanation(page);
     const dialog = page.getByRole("dialog", { name: "Create passphrase" });
     await expect(dialog).toBeVisible({ timeout: 5_000 });
     return dialog;
@@ -373,7 +377,7 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     ),
     dialog.getByTestId("generate_passphrase_link"),
     dialog.getByRole("button", { name: "Continue" }),
-    dialog.getByRole("button", { name: "Cancel" }),
+    dialog.getByRole("button", { name: "Back" }),
   ];
 
   const openRulesTooltip = async (page: Page, baseUrl: string) => {
@@ -589,6 +593,20 @@ test.describe("Profile > Keys Management: keyboard only", () => {
       await generateBtn.focus();
       await page.keyboard.press("Enter");
 
+      // Key setup opens on its explanation: Tab past the close button to
+      // Continue, which leads to the passphrase.
+      const explanation = page.getByRole("dialog", { name: "Create key" });
+      await expect(explanation).toBeVisible({ timeout: 5_000 });
+      await page.keyboard.press("Tab");
+      await expect(
+        explanation.getByRole("button", { name: "Close" }),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
+        explanation.getByRole("button", { name: "Continue" }),
+      ).toBeFocused();
+      await page.keyboard.press("Enter");
+
       const create = page.getByRole("dialog", { name: "Create passphrase" });
       await expect(
         create.getByLabel("Passphrase", { exact: true }),
@@ -717,6 +735,18 @@ test.describe("Profile > Keys Management: keyboard only", () => {
     });
     await expect(generateBtn).toBeVisible({ timeout: 15_000 });
     await generateBtn.focus();
+    await page.keyboard.press("Enter");
+
+    // Key setup opens on its explanation: Tab past the close button to
+    // Continue, which leads to the passphrase.
+    const explanation = page.getByRole("dialog", { name: "Create key" });
+    await expect(explanation).toBeVisible({ timeout: 5_000 });
+    await page.keyboard.press("Tab");
+    await expect(explanation.getByRole("button", { name: "Close" })).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(
+      explanation.getByRole("button", { name: "Continue" }),
+    ).toBeFocused();
     await page.keyboard.press("Enter");
 
     const create = page.getByRole("dialog", { name: "Create passphrase" });

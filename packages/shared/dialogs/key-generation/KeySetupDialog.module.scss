@@ -43,6 +43,11 @@
   color: var(--text-secondary);
 }
 
+.description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 .explanation {
   display: flex;
   flex-direction: column;

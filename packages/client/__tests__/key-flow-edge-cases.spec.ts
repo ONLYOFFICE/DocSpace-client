@@ -44,7 +44,10 @@ import {
 } from "@docspace/shared/__mocks__/handlers";
 import { BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { bootstrapEncryption } from "./fixtures/encryption-helpers";
+import {
+  bootstrapEncryption,
+  passKeySetupExplanation,
+} from "./fixtures/encryption-helpers";
 
 // Must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
 // length >= 12, uppercase, digits, special characters.
@@ -74,6 +77,7 @@ test.describe("Keys management — edge cases", () => {
     });
     await expect(generateBtn).toBeVisible({ timeout: 15000 });
     await generateBtn.click();
+    await passKeySetupExplanation(page);
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
@@ -111,6 +115,7 @@ test.describe("Keys management — edge cases", () => {
     await page
       .getByRole("button", { name: "Create key", exact: true })
       .click();
+    await passKeySetupExplanation(page);
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
@@ -127,11 +132,14 @@ test.describe("Keys management — edge cases", () => {
     const acknowledge = page.locator("#recoveryPhraseAcknowledged");
     await expect(acknowledge).toBeVisible({ timeout: 5000 });
 
-    const recoveryDialog = page.getByRole("dialog", {
-      name: "Recovery phrase",
-    });
-    await recoveryDialog
-      .getByRole("button", { name: "Cancel", exact: true })
+    // Closing at this step asks first, since the shown phrase will not be
+    // valid; the close is confirmed.
+    await page.keyboard.press("Escape");
+    const confirmation = page
+      .getByRole("dialog")
+      .filter({ hasText: "Unsaved changes" });
+    await confirmation
+      .getByRole("button", { name: "Close menu", exact: true })
       .click();
 
     await expect(acknowledge).toBeHidden({ timeout: 5000 });
@@ -176,6 +184,7 @@ test.describe("Keys management — edge cases", () => {
     await page
       .getByRole("button", { name: "Create key", exact: true })
       .click();
+    await passKeySetupExplanation(page);
 
     await page.getByLabel("Passphrase", { exact: true })
       .fill(STRONG_PASSPHRASE);
@@ -260,6 +269,7 @@ test.describe("Keys management — edge cases", () => {
     await page
       .getByRole("button", { name: "Create key", exact: true })
       .click();
+    await passKeySetupExplanation(page);
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
@@ -291,6 +301,7 @@ test.describe("Keys management — edge cases", () => {
     await page
       .getByRole("button", { name: "Create key", exact: true })
       .click();
+    await passKeySetupExplanation(page);
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });
@@ -335,6 +346,7 @@ test.describe("Keys management — edge cases", () => {
       exact: true,
     });
     await generateBtn.click();
+    await passKeySetupExplanation(page);
 
     const passphraseInput = page.getByLabel("Passphrase", { exact: true });
     await expect(passphraseInput).toBeVisible({ timeout: 5000 });

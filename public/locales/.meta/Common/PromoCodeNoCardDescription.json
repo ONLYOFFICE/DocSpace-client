@@ -1,0 +1,22 @@
+{
+  "key_path": "PromoCodeNoCardDescription",
+  "content": "Here you can enter a promo code to add promo credits to your wallet.",
+  "content_en_sha1_hash": "827a22a749a5a6852a5944e2743025ca98f5e67e",
+  "created_at": "2026-11-17T13:13:03.321Z",
+  "updated_at": "2026-11-17T13:14:32.169Z",
+  "comment": {
+    "text": "Description at the top of the Promo code tab of the wallet top-up dialog when the portal has no saved card yet, above a notice asking to link one.",
+    "is_auto": true,
+    "updated_at": "2026-11-17T13:14:32.169Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

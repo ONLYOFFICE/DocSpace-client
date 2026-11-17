@@ -1,0 +1,22 @@
+{
+  "key_path": "PromoCodeCurrencyMismatch",
+  "content": "The currency of this code does not match your wallet currency.",
+  "content_en_sha1_hash": "170e5212ecb57c267ad1bd1c73668bb053533af0",
+  "created_at": "2026-11-17T13:13:03.169Z",
+  "updated_at": "2026-11-17T13:14:32.169Z",
+  "comment": {
+    "text": "Error shown under the promo code input when the code is issued in a different currency than the portal wallet.",
+    "is_auto": true,
+    "updated_at": "2026-11-17T13:14:32.169Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

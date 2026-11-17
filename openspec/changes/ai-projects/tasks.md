@@ -155,6 +155,11 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 12.9 Client: a project offers Member (Read, 2) again in the Invite panel and the members list; the invitation link stays Project manager only
 - [x] 12.10 Client: an AI room opened under `/rooms/shared/{id}` (an accepted invitation link) moves to `/ai-rooms/{id}`, so back leads to the AI rooms list
 
+- [x] 12.11 Client and ASC.AI.Chat: a Member is the room's Content creator (`access` 11) since server ecb2d0849a, which refuses Read in a project: `AiProjectAccess`, `getAccessOptions`, the members list of the Info panel, the mock, and the role notes of the Node service (client b71491aeef8, server 688c7a2978)
+- [x] 12.12 ASC.AI.Chat: a project without a model of its own runs on the `Default` slot when the `Chat` action has none (server 2945e945ad), and a project is recognised by `roomType` 12 as well as by the folder type, which `FolderDto` does not carry for it (server 9daff56fe2)
+- [ ] 12.13 Server (.NET): a project model whose profile was removed answers `{ profileId: null }`, so the round runs on the portal's model instead of being refused with 409 `projectModelUnavailable` ("Model lifecycle" against "Project model storage"); decide which of the two holds
+- [ ] 12.14 Server (.NET) and ASC.AI.Chat: a member who joined through a group reads `inRoom: false` and is refused the chat (`canChat` is `inRoom`); decide membership by the caller's `access`, or expose a flag for it
+
 ## Workflow follow-up
 
 - Archive the change with `/opsx:archive ai-projects` once 9.x passes, so the seven capabilities land in `openspec/specs/` as the baseline.

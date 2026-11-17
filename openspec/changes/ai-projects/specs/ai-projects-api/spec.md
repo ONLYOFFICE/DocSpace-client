@@ -44,11 +44,19 @@ A project SHALL carry tags as a room does: `tags` (names) in its DTO, bound and 
 - **THEN** the project is listed with `tags: ["sales"]` and "sales" is in `files/tags`
 
 ### Requirement: Roles
-A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only, never a group) and Member (`access` 2, the room's Read; any user type including guests, directly or through a group). A project SHALL NOT be duplicated.
+A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only, never a group) and Member (`access` 11, the room's Content creator; a user or a room or DocSpace admin, directly or through a group, never a guest). The room's Read (`access` 2) SHALL NOT be a project role: sharing a project at Read SHALL be refused with 403. A project SHALL NOT be duplicated.
+
+#### Scenario: User as Member
+- **WHEN** a Project manager invites a user as Member
+- **THEN** the user is accepted with `access` 11
+
+#### Scenario: Share at Read
+- **WHEN** a Project manager shares the project with a user or a group at `access` 2
+- **THEN** the request is refused with 403 and nobody is added
 
 #### Scenario: Guest as Member
 - **WHEN** a Project manager invites a guest as Member
-- **THEN** the guest is accepted with `access` 2
+- **THEN** the request is refused
 
 #### Scenario: Guest as Project manager
 - **WHEN** a Project manager tries to give a User or a group the Project manager role
@@ -167,11 +175,15 @@ A link or unlink the server refuses SHALL NOT fail the save: the project stays s
 - **THEN** the project is created without that room and a toast shows the server's message
 
 ### Requirement: Project model storage
-A project's model SHALL be served by the Files API at `files/rooms/{id}/model`, stored as the project-scoped `Chat` assignment. No stored model, or one whose profile was removed, SHALL mean the project runs on the portal's Chat model. A model SHALL only be replaced, never cleared. ASC.AI.Chat SHALL have no project route.
+A project's model SHALL be served by the Files API at `files/rooms/{id}/model`, stored as the project-scoped `Chat` assignment. No stored model, or one whose profile was removed, SHALL mean the project runs on the portal's chat model: the profile bound to the `Chat` action, or the one in the `Default` slot when that action has none. A model SHALL only be replaced, never cleared. ASC.AI.Chat SHALL have no project route.
 
 #### Scenario: No stored model
 - **WHEN** the client reads `GET files/rooms/{id}/model` of a project that never stored one
-- **THEN** the answer is `{ profileId: null }` and the project chats on the portal's default Chat model
+- **THEN** the answer is `{ profileId: null }` and the project chats on the portal's chat model
+
+#### Scenario: Portal without a Chat assignment
+- **WHEN** a project stores no model and the portal has nothing bound to the `Chat` action
+- **THEN** the project chats on the profile of the `Default` slot
 
 ### Requirement: Model read
 `GET files/rooms/{id}/model` SHALL answer `{ profileId }` to every member who can read the project. The client SHALL resolve the profile with `GET ai/profiles/get-by-id` into `{ id, name, provider, available }`, where a profile that is gone or cannot chat is unavailable.
@@ -239,7 +251,7 @@ A linked room readable only through a project SHALL NOT be listed in the member'
 - **THEN** the project is listed and its linked Knowledge room is not
 
 ### Requirement: Membership routes
-Members SHALL be managed through `GET/PUT files/rooms/{id}/share`, `POST .../resend` and `GET/PUT .../links`; leaving sets the caller's own `access` to 0. `access` SHALL be 0, 2 or 9; the owner SHALL NOT appear in a share change. A project SHALL have at most one invitation link, joining as Member. The owner and a group-only member SHALL NOT leave.
+Members SHALL be managed through `GET/PUT files/rooms/{id}/share`, `POST .../resend` and `GET/PUT .../links`; leaving sets the caller's own `access` to 0. `access` SHALL be 0, 9 or 11; the owner SHALL NOT appear in a share change. A project SHALL have at most one invitation link, joining as Project manager, the only role the server takes for a link. The owner and a group-only member SHALL NOT leave.
 
 #### Scenario: Owner leaves
 - **WHEN** the owner sets their own `access` to 0 through `PUT files/rooms/{id}/share` of a project
@@ -360,11 +372,40 @@ A project SHALL take an uploaded logo the way a room does: the picture is upload
 - **THEN** the project is listed with the picture's sizes, then again with its colour and cover only
 
 ### Requirement: Chat binding in Node
-For a round or thread whose `entityId` is a project, the Node service SHALL read, with the caller's forwarded credentials, `GET files/rooms/{id}` (the caller's `access` as the role, `inRoom` as `canChat`), `GET files/rooms/{id}/sources` and `GET files/rooms/{id}/skills`. The round's model SHALL be the project's scoped assignment, else the portal's Chat assignment. It is not a client route.
+For a round or thread whose `entityId` is a project, the Node service SHALL read, with the caller's forwarded credentials, `GET files/rooms/{id}` (the caller's `access` as the role, `inRoom` as `canChat`), `GET files/rooms/{id}/sources` and `GET files/rooms/{id}/skills`. The round's model SHALL be the project's scoped assignment, else the portal's `Chat` assignment, else the profile of the `Default` slot. It is not a client route.
 
 #### Scenario: Admin outside the project
 - **WHEN** a DocSpace admin who is not a member sends a message in the project
 - **THEN** the round is refused with 403
+
+### Requirement: Project recognition in Node
+The Node service SHALL recognise a project by the room's `roomType` 12 as well as by the folder type 40. `FolderDto` carries no `type` for a project, and only the chat-context snapshot of a round names the folder type, so a call outside a round (saving an attachment) knows the project by its room type alone.
+
+#### Scenario: Attachment saved before the round
+- **WHEN** a portal file is attached in a project's chat and saved before any message is sent
+- **THEN** the service takes the `entityId` for a project and copies the file into it
+
+### Requirement: Files inside a project
+A file or folder inside a project (a conversation's thread folders, their files, an uploaded file) SHALL be readable, downloadable and copyable by its creator alone, whatever anyone's role; every other action on it SHALL be refused. The project SHALL list no contents and its DTO SHALL carry no file or folder counters. DocSpace admins and the portal owner SHALL NOT receive the socket updates of such entries.
+
+#### Scenario: Another member's attachment
+- **WHEN** a Project manager asks for a file another Member attached in a conversation
+- **THEN** the request is refused
+
+#### Scenario: Project listing
+- **WHEN** a member reads the contents of the project
+- **THEN** the list is empty, although their conversations keep files in it
+
+### Requirement: Copying a file into a project
+A file SHALL be copyable into a project by a caller who may use AI in it, as an attachment: files only, an image or a format text is read from, a name already taken making a second file. Moving into a project SHALL be refused.
+
+#### Scenario: Copy into the project
+- **WHEN** a Member copies a document from My documents into the project
+- **THEN** the copy lies in the project and only that Member can read it
+
+#### Scenario: Move into the project
+- **WHEN** a Member moves a document into the project
+- **THEN** the request is refused
 
 ### Requirement: Linked room lifecycle
 When a linked room is deleted, moved to Trash or archived, the server SHALL unlink it from every project; restoring the room SHALL NOT link it again. Deleting a project SHALL drop its links. A project lists only the rooms that are linked and active, so a linked room is never reported as unavailable.
@@ -374,7 +415,7 @@ When a linked room is deleted, moved to Trash or archived, the server SHALL unli
 - **THEN** the project lists it in neither state until it is linked again
 
 ### Requirement: Model lifecycle
-A project runs on its stored model, else on the portal's Chat assignment. When that effective profile is missing, deleted or without the chat capability, rounds in the project SHALL be refused with 409 `projectModelUnavailable` until the model is changed.
+A project runs on its stored model, else on the portal's `Chat` assignment, else on the profile of the `Default` slot. When that effective profile is missing, deleted or without the chat capability, rounds in the project SHALL be refused with 409 `projectModelUnavailable` until the model is changed.
 
 #### Scenario: Portal model removed
 - **WHEN** an admin deletes the profile a project stores as its model
@@ -392,11 +433,11 @@ The server SHALL e-mail members on invitation, role change, removal and project 
 - **THEN** the history shows one "rooms linked" entry naming both rooms
 
 ### Requirement: Invitation link acceptance
-Joining through the project's invitation link SHALL add the user as Member, which gives them read access to the linked rooms through the project, and land them on `/ai-rooms/{id}/filter?folder={id}`.
+Joining through the project's invitation link SHALL add the user as Project manager, the only role a project's link carries, which gives them read access to the linked rooms through the project, and land them on `/ai-rooms/{id}/filter?folder={id}`.
 
 #### Scenario: Join by link
 - **WHEN** a user opens a valid project invitation link and signs in
-- **THEN** they become a Member and the project opens
+- **THEN** they become a Project manager and the project opens
 
 ### Requirement: Errors reach the client
 A refused request SHALL carry a user-facing, localised message, so the client can show it as a toast.

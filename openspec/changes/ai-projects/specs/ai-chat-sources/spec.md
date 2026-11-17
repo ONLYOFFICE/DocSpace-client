@@ -70,7 +70,7 @@ Inside a project the Context folder SHALL be picked by hand in the Context card,
 - **THEN** their next rounds use "Q4 drafts" as context
 
 ### Requirement: Project overrides the sources
-When a round is scoped to an AI project (its `entityId` is the project), the Node service SHALL replace the round's model and rooms with the project's: its stored model (else the portal's Chat model) and the rooms of `files/rooms/{id}/sources`, read with the caller's credentials, whatever the composer sent. The Context folder SHALL stay the one the caller picked in the project. A room unlinked from the project SHALL drop out of the next round.
+When a round is scoped to an AI project (its `entityId` is the project), the Node service SHALL replace the round's model and rooms with the project's: its stored model (else the portal's chat model) and the rooms of `files/rooms/{id}/sources`, read with the caller's credentials, whatever the composer sent. The Context folder SHALL stay the one the caller picked in the project. A room unlinked from the project SHALL drop out of the next round.
 
 #### Scenario: Composer values ignored
 - **WHEN** a client sends a project-scoped round with a different `profileId` and extra rooms

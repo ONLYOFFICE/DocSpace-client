@@ -40,7 +40,7 @@ The Home page SHALL draw the project workspace in place of the file list for a s
 - **THEN** the copied URL is `/ai-rooms/{id}/filter?folder={id}` of that project
 
 ### Requirement: Fixed model
-Inside a project the model picker SHALL be a read-only label for every role, showing the model the chat runs on: the project's stored model, or the portal's default Chat model when it stores none.
+Inside a project the model picker SHALL be a read-only label for every role, showing the model the chat runs on: the project's stored model, or the portal's chat model when it stores none (the profile of the `Chat` action, or of the `Default` slot when that action has none).
 
 #### Scenario: Member looks at the composer
 - **WHEN** a Member looks at the composer inside a project

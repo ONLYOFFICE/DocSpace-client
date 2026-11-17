@@ -12,7 +12,7 @@ and SDK unit tests must stay green.
 
 ## 2. Recovery phrase input
 
-- [ ] 2.1 Read whether the kit's text area passes the input-assistance attributes through to the field; record the answer in design.md. Verify: the note names the kit file, or states that the kit needs the pass-through
+- [x] 2.1 Read whether the kit's text area passes the input-assistance attributes through to the field; record the answer in design.md. Verify: the note names the kit file, or states that the kit needs the pass-through
 - [ ] 2.2 Count the words under the input of `packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx` and report another number than 24 on submit; add `Common:RecoveryPhraseWordCount`, write its translator comment with `translate-comments` and translate it with `translate-locales`. Verify: cases named after the scenarios of "The recovery phrase input counts its words" in `packages/shared/dialogs/key-recovery/__tests__/RecoveryPhraseInputModal.test.tsx`, and `cd common/tests && npx vitest run test/locales.test.js`
 - [ ] 2.3 Name the first word that is no recovery word with its position before the phrase is tried; add and translate `Common:RecoveryPhraseUnknownWord`. Verify: cases "Misspelled word" and "All words valid, phrase wrong" in `RecoveryPhraseInputModal.test.tsx` and in `useRecoverKeyFlow.test.tsx`, and the locale tests
 - [ ] 2.4 Reword `Common:InvalidRecoveryPhrase` in English without the name of the word-list standard, run `translate-stale` and retranslate it. Verify: a unit case "Wrong phrase" asserting the key, the locale tests, and no key of the recovery input naming a standard (`grep -n "BIP" public/locales/en/Common.json` returns nothing)

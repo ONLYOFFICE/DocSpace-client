@@ -115,6 +115,16 @@ capital letters and saved suggestions. If the kit's text area drops unknown
 attributes, the audit of task 2.1 says so and the pass-through is added to
 the kit.
 
+Audit of task 2.1 (`docspace-ui-kit-react` `release/v4.1.0`): the kit needs
+the pass-through. `components/textarea/Textarea.tsx` takes its props by name
+and renders the `textarea` of `react-autosize-textarea` with those alone;
+there is no rest spread, and `TextareaProps` in `Textarea.types.ts` is a
+closed type that says so ("this type is closed and accepts no arbitrary DOM
+attributes", on `aria-label`). `spellCheck`, `autoCorrect`, `autoCapitalize`
+and `autoComplete` are neither declared nor passed, so the recovery input
+cannot set them today. Task 2.5 adds them to the kit's text area as declared
+props passed to the field, the way `aria-label` and its siblings are.
+
 ### 5. Key details: a disclosure, a hint, two colours
 
 The key id and the algorithm move under a disclosure button; the hint of the

@@ -1501,6 +1501,7 @@
   "Location": "ロケーション",
   "LockedBy": "このファイルは {{userName}} によりロックされています",
   "LockNow": "今すぐロック",
+  "LockNowForgetsDevice": "このデバイスは記憶されています。キーをロックすると、次回はパスフレーズの入力が再び求められます。",
   "Login": "ログイン",
   "LoginButton": "サインイン",
   "LogoAbout": "「詳細情報」ページ用のロゴマーク",

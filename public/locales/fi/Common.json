@@ -1501,6 +1501,7 @@
   "Location": "Sijainti",
   "LockedBy": "Tämä tiedosto on lukittu {{userName}} -käyttäjän toimesta.",
   "LockNow": "Lukitse nyt",
+  "LockNowForgetsDevice": "Tämä laite on muistettu. Kun lukitset avaimen, se kysyy salauslauseesi uudelleen.",
   "Login": "Kirjaudu sisään",
   "LoginButton": "Kirjaudu sisään",
   "LogoAbout": "Tietoja-sivun logo",

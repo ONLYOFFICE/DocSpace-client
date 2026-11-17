@@ -1501,6 +1501,7 @@
   "Location": "Vendndodhja",
   "LockedBy": "Ky skedar është i bllokuar nga {{userName}}",
   "LockNow": "Bllokoj tani",
+  "LockNowForgetsDevice": "Kjo pajisje mbahet mend. Pasi të bllokoni çelësin, ajo do të kërkojë sërish frazëkalimin tuaj.",
   "Login": "Hyni",
   "LoginButton": "Identifikohuni",
   "LogoAbout": "Logo për faqen Rreth",

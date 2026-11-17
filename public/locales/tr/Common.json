@@ -1501,6 +1501,7 @@
   "Location": "Konum",
   "LockedBy": "Bu dosya {{userName}} tarafından kilitlenmiştir.",
   "LockNow": "Şimdi kilitle",
+  "LockNowForgetsDevice": "Bu cihaz hatırlanıyor. Anahtarı kilitledikten sonra parolanızı yeniden soracak.",
   "Login": "Giriş",
   "LoginButton": "Oturum aç",
   "LogoAbout": "Hakkında sayfası logosu",

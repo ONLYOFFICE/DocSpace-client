@@ -1507,6 +1507,7 @@
   "Location": "Location",
   "LockedBy": "This file is locked by {{userName}}",
   "LockNow": "Lock now",
+  "LockNowForgetsDevice": "This device is remembered. After you lock the key, it will ask for your passphrase again.",
   "Login": "Login",
   "LoginButton": "Sign in",
   "LogoAbout": "Logo for the About page",

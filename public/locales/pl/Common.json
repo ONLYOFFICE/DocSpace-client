@@ -1501,6 +1501,7 @@
   "Location": "Lokalizacja",
   "LockedBy": "Ten plik jest zablokowany przez {{userName}}",
   "LockNow": "Zablokuj teraz",
+  "LockNowForgetsDevice": "To urządzenie jest zapamiętane. Po zablokowaniu klucza ponownie poprosi o hasło dostępu.",
   "Login": "Logowanie",
   "LoginButton": "Zaloguj się",
   "LogoAbout": "Logo dla strony O nas",

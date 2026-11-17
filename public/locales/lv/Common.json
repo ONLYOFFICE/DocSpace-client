@@ -1501,6 +1501,7 @@
   "Location": "Atrašanās vieta",
   "LockedBy": "Šis fails ir bloķēts lietotāja {{userName}}",
   "LockNow": "Bloķēt tagad",
+  "LockNowForgetsDevice": "Šī ierīce ir atcerēta. Pēc atslēgas bloķēšanas tā atkal prasīs jūsu ieejas frāzi.",
   "Login": "Piesakieties",
   "LoginButton": "Ielogoties",
   "LogoAbout": "Logotips lapai Par",

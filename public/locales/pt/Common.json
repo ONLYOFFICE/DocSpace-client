@@ -1501,6 +1501,7 @@
   "Location": "Localização",
   "LockedBy": "Este arquivo está bloqueado por {{userName}}",
   "LockNow": "Bloquear agora",
+  "LockNowForgetsDevice": "Este dispositivo está memorizado. Depois de bloquear a chave, voltará a pedir a sua frase-passe.",
   "Login": "Entrar",
   "LoginButton": "Entrar",
   "LogoAbout": "Logótipo para a página Sobre",

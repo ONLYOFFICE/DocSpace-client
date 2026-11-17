@@ -34,7 +34,7 @@
  */
 
 
-import { type RefObject, useCallback } from "react";
+import { type RefObject, useCallback, useEffect, useId, useState } from "react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
@@ -42,6 +42,7 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { DropDown } from "@onlyoffice/apps-ui-kit/components/drop-down";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { getDeviceUnlockWrittenAt } from "@docspace/shared/services/encryption/device-unlock-store";
 
 import { AutoLockSetting } from "SRC_DIR/components/AutoLockSetting/AutoLockSetting";
 
@@ -55,6 +56,7 @@ type KeyStatePopoverProps = {
   /** Closes the popover; `returnFocus` sends the focus back to the indicator. */
   onClose: (returnFocus: boolean) => void;
   onLock: () => void;
+  userId?: string;
 };
 
 /**
@@ -65,9 +67,23 @@ const KeyStatePopover = ({
   anchorRef,
   onClose,
   onLock,
+  userId,
 }: KeyStatePopoverProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
+  const lockNoteId = useId();
+  const [isDeviceRemembered, setIsDeviceRemembered] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return undefined;
+    let cancelled = false;
+    void getDeviceUnlockWrittenAt(userId).then((writtenAt) => {
+      if (!cancelled) setIsDeviceRemembered(writtenAt !== null);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
   // The menu mounts its content after it has placed itself, so the focus
   // moves in when the content appears.
   const focusOnMount = useCallback((node: HTMLDivElement | null) => {
@@ -121,6 +137,7 @@ const KeyStatePopover = ({
             size={ButtonSize.small}
             label={t("Common:LockNow")}
             onClick={onLock}
+            aria-describedby={isDeviceRemembered ? lockNoteId : undefined}
             testId="key_state_lock_now"
           />
           <Link
@@ -135,6 +152,16 @@ const KeyStatePopover = ({
             {t("Common:KeysManagement")}
           </Link>
         </div>
+        {isDeviceRemembered ? (
+          <Text
+            id={lockNoteId}
+            fontSize="12px"
+            color="var(--text-secondary)"
+            dataTestId="key_state_lock_note"
+          >
+            {t("Common:LockNowForgetsDevice")}
+          </Text>
+        ) : null}
       </div>
     </DropDown>
   );

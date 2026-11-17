@@ -35,12 +35,13 @@
 
 
 import { createContext, type ComponentType } from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "mobx-react";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { getDeviceUnlockWrittenAt } from "@docspace/shared/services/encryption/device-unlock-store";
 import {
   getCurrentAutoLockPresetId,
   setAutoLockPreset,
@@ -53,6 +54,12 @@ type TestEncryption = {
   requireIdentity: () => Promise<unknown>;
   lock: () => void;
 };
+
+const device = vi.hoisted(() => ({ writtenAt: null as number | null }));
+
+vi.mock("@docspace/shared/services/encryption/device-unlock-store", () => ({
+  getDeviceUnlockWrittenAt: vi.fn(async () => device.writtenAt),
+}));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn() },
@@ -96,9 +103,10 @@ const renderIndicator = (
 ) => {
   const syncEncryptedRoom = vi.fn();
   const filesStore = { syncEncryptedRoom };
+  const userStore = { user: { id: "user-1" } };
   const tree = (value: TestEncryption) => (
     <MemoryRouter>
-      <Provider filesStore={filesStore}>
+      <Provider filesStore={filesStore} userStore={userStore}>
         <TestEncryptionContext.Provider value={value}>
           <KeyStateIndicator isPrivate={isPrivate} />
         </TestEncryptionContext.Provider>
@@ -173,6 +181,7 @@ describe("Key state is shown in the header of a private room", () => {
 describe("Key state indicator leads to the key actions", () => {
   beforeEach(() => {
     setAutoLockPreset("30m");
+    device.writtenAt = null;
   });
 
   const popover = () =>
@@ -302,5 +311,41 @@ describe("Key state indicator leads to the key actions", () => {
     update(encryptionState({ isUnlocked: false }));
 
     expect(popover()).toBeNull();
+  });
+});
+
+describe("Lock now in the popover names the remembered device", () => {
+  beforeEach(() => {
+    device.writtenAt = null;
+  });
+
+  const openPopover = async () => {
+    const user = userEvent.setup();
+    renderIndicator(encryptionState());
+    await user.click(screen.getByRole("button", { name: "Common:KeyUnlocked" }));
+    return screen.getByRole("dialog", { name: "Common:KeyUnlocked" });
+  };
+
+  it("Remembered device", async () => {
+    device.writtenAt = Date.now();
+
+    const dialog = await openPopover();
+
+    const note = await within(dialog).findByText("Common:LockNowForgetsDevice");
+    expect(
+      within(dialog).getByRole("button", { name: "Common:LockNow" }),
+    ).toHaveAccessibleDescription("Common:LockNowForgetsDevice");
+    expect(note).toBeVisible();
+  });
+
+  it("Device not remembered", async () => {
+    const dialog = await openPopover();
+
+    await waitFor(() =>
+      expect(getDeviceUnlockWrittenAt).toHaveBeenCalledWith("user-1"),
+    );
+    expect(
+      within(dialog).queryByText("Common:LockNowForgetsDevice"),
+    ).toBeNull();
   });
 });

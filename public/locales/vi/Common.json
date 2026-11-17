@@ -1501,6 +1501,7 @@
   "Location": "Vị trí",
   "LockedBy": "Tệp tin này đang bị khóa bởi {{userName}}",
   "LockNow": "Khoá ngay",
+  "LockNowForgetsDevice": "Thiết bị này đang được ghi nhớ. Sau khi khoá được khoá lại, thiết bị sẽ lại yêu cầu mật khẩu bảo vệ.",
   "Login": "Đăng nhập",
   "LoginButton": "Đăng nhập",
   "LogoAbout": "Logo cho trang Giới thiệu",

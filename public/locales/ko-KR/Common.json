@@ -1501,6 +1501,7 @@
   "Location": "위치",
   "LockedBy": "이 파일은 {{userName}}에 의해 잠겨 있습니다.",
   "LockNow": "지금 잠금",
+  "LockNowForgetsDevice": "이 기기는 기억되어 있습니다. 키를 잠그면 다시 패스프레이즈를 입력해야 합니다.",
   "Login": "로그인",
   "LoginButton": "로그인",
   "LogoAbout": "소개 페이지 로고",

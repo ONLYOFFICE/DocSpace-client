@@ -49,6 +49,7 @@ type KeyStateIndicatorProps = {
   isPrivate: boolean;
   className?: string;
   syncEncryptedRoom?: () => void;
+  userId?: string;
 };
 
 /**
@@ -60,6 +61,7 @@ const KeyStateIndicator = ({
   isPrivate,
   className,
   syncEncryptedRoom,
+  userId,
 }: KeyStateIndicatorProps) => {
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, hasConfiguredKey, keysLoaded, requireIdentity, lock } =
@@ -111,12 +113,14 @@ const KeyStateIndicator = ({
           anchorRef={anchorRef}
           onClose={closePopover}
           onLock={onLock}
+          userId={userId}
         />
       ) : null}
     </span>
   );
 };
 
-export default inject<TStore>(({ filesStore }) => ({
+export default inject<TStore>(({ filesStore, userStore }) => ({
   syncEncryptedRoom: filesStore.syncEncryptedRoom,
+  userId: userStore.user?.id ? String(userStore.user.id) : undefined,
 }))(observer(KeyStateIndicator));

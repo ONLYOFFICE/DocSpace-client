@@ -1501,6 +1501,7 @@
   "Location": "Yer",
   "LockedBy": "Bu fayl {{userName}} tərəfindən kilidi vurulub.",
   "LockNow": "İndi kilid",
+  "LockNowForgetsDevice": "Bu cihaz yadda saxlanılıb. Açarı kilidlədikdən sonra o, parolunuzu yenidən soruşacaq.",
   "Login": "Giriş edin",
   "LoginButton": "Daxil ol",
   "LogoAbout": "Haqqımızda səhifəsi üçün loqo",

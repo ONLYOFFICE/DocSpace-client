@@ -1501,6 +1501,7 @@
   "Location": "Umístění",
   "LockedBy": "Tento soubor uzamkl {{userName}}",
   "LockNow": "Uzamknout nyní",
+  "LockNowForgetsDevice": "Toto zařízení je zapamatováno. Po uzamčení klíče bude znovu vyžadovat vaši přístupovou frázi.",
   "Login": "Přihlášení",
   "LoginButton": "Přihlásit se",
   "LogoAbout": "Logo pro stránku O nás",

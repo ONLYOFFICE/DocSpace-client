@@ -1501,6 +1501,7 @@
   "Location": "Standort",
   "LockedBy": "Diese Datei ist von {{userName}} gesperrt",
   "LockNow": "Jetzt sperren",
+  "LockNowForgetsDevice": "Dieses Gerät ist gespeichert. Nachdem Sie den Schlüssel gesperrt haben, fragt es erneut nach Ihrer Passphrase.",
   "Login": "Anmeldung",
   "LoginButton": "Anmelden",
   "LogoAbout": "Logo für die Informationsseite",

@@ -1501,6 +1501,7 @@
   "Location": "Locația",
   "LockedBy": "Acest fișier este blocat de {{userName}}",
   "LockNow": "Blocare acum",
+  "LockNowForgetsDevice": "Acest dispozitiv este reținut. După ce blocați cheia, va cere din nou fraza de acces.",
   "Login": "Login",
   "LoginButton": "Autentificare",
   "LogoAbout": "Siglă pentru pagina Despre",

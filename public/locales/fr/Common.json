@@ -1501,6 +1501,7 @@
   "Location": "Emplacement",
   "LockedBy": "Ce fichier est verrouillé par {{userName}}",
   "LockNow": "Verrouiller maintenant",
+  "LockNowForgetsDevice": "Cet appareil est mémorisé. Après le verrouillage de la clé, il vous redemandera votre phrase de passe.",
   "Login": "Connexion",
   "LoginButton": "Se connecter",
   "LogoAbout": "Logo pour la page À propos",

@@ -1501,6 +1501,7 @@
   "Location": "Posizione",
   "LockedBy": "Questo file è bloccato da {{userName}}",
   "LockNow": "Blocca ora",
+  "LockNowForgetsDevice": "Questo dispositivo è ricordato. Dopo aver bloccato la chiave, chiederà di nuovo la tua passphrase.",
   "Login": "Accedi",
   "LoginButton": "Accedi",
   "LogoAbout": "Logo per la pagina Informazioni",

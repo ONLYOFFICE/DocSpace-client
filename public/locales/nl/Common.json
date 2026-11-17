@@ -1501,6 +1501,7 @@
   "Location": "Locatie",
   "LockedBy": "Dit bestand is vergrendeld door {{userName}}",
   "LockNow": "Nu vergrendelen",
+  "LockNowForgetsDevice": "Dit apparaat wordt onthouden. Nadat u de sleutel hebt vergrendeld, vraagt het opnieuw om uw wachtzin.",
   "Login": "Inloggen",
   "LoginButton": "Aanmelden",
   "LogoAbout": "Logo voor de Over pagina",

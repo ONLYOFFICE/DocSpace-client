@@ -1501,6 +1501,7 @@
   "Location": "Lokacija",
   "LockedBy": "Ovaj fajl je zaključao {{userName}}",
   "LockNow": "Zaključaj odmah",
+  "LockNowForgetsDevice": "Ovaj uređaj je zapamćen. Kada zaključate ključ, ponovo će tražiti vašu lozinku.",
   "Login": "Prijava",
   "LoginButton": "Prijavi se",
   "LogoAbout": "Logotip za stranicu 'O nama'",

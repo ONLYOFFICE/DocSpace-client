@@ -1501,6 +1501,7 @@
   "Location": "位置",
   "LockedBy": "此文件已被{{userName}}锁定",
   "LockNow": "立即锁定",
+  "LockNowForgetsDevice": "此设备已被记住。锁定密钥后，它将再次要求您输入密码短语。",
   "Login": "登录",
   "LoginButton": "登录",
   "LogoAbout": "关于页面徽标",

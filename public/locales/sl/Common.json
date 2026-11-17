@@ -1501,6 +1501,7 @@
   "Location": "Lokacija",
   "LockedBy": "Ta datoteka je zaklenjena s strani {{userName}}.",
   "LockNow": "Zakleni zdaj",
+  "LockNowForgetsDevice": "Ta naprava je zapomnjena. Ko zaklenete ključ, bo znova zahtevala vaše geslo.",
   "Login": "Prijava",
   "LoginButton": "Prijava",
   "LogoAbout": "Logotip za stran O nas",

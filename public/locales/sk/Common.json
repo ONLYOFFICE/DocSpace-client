@@ -1501,6 +1501,7 @@
   "Location": "Lokalita",
   "LockedBy": "Tento súbor je uzamknutý používateľom {{userName}}",
   "LockNow": "Zamknúť teraz",
+  "LockNowForgetsDevice": "Toto zariadenie je zapamätané. Po zamknutí kľúča bude znova vyžadovať vašu prístupovú frázu.",
   "Login": "Prihlásiť sa",
   "LoginButton": "Prihlásiť sa",
   "LogoAbout": "Logo pre stránku Informácie",

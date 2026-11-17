@@ -154,3 +154,28 @@ name for an error the mapping does not name.
   token, or a local token of the page; no shared token changes its value.
 - Screenshots of several Playwright specs change. → Updated in the task that
   changes the screen, under Docker.
+
+## Verification (task 6.1)
+
+Run on 2026-11-17 on `release/v4.1.0` at 34ec0d63a5c, with the kit pack
+built from `docspace-ui-kit-react` `release/v4.1.0` at 2b1be433:
+
+- Client Playwright under Docker (`tests-dev`): the private-room specs
+  (`private-room-*.spec.ts`, `private-rooms-app-off.spec.ts`,
+  `private-rooms-section.spec.ts`), the keys-management specs
+  (`keys-management.spec.ts`, `keys-management-advanced.spec.ts`,
+  `key-flow-edge-cases.spec.ts`) and `encrypted-file-ui.spec.ts`: 188
+  passed, none failed.
+- SDK private suite (`__tests__/e2e/private`) on a build made with
+  `pnpm run test:build`: 36 passed.
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` with 61
+  passed and 3 skipped (the translation-completeness suites the gate leaves
+  out), then `nx run-many -t tsc lint test` over the six packages: all 21
+  tasks green, none from the cache.
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 24 passed.
+
+The full locale suite still reports six Common keys without translations
+(`AIApiKeysDescriptionNoPercent`, `AIModelsDescriptionWithFeeNoPercent`,
+`AIProjectAddFolder`, `AIProjectAddKnowledge`, `AIProjectAddSkills`,
+`AiWorkspaceKnowledge`). They come from AI projects work committed on
+2026-11-10, not from this change, which translated each key it added.

@@ -140,10 +140,15 @@ type DetailsHelperProps = {
   knowledgeStatus?: VectorizationStatus | null;
   /**
    * The name of a selected agent's own model, when the selection does not
-   * carry the agent's settings (a room of the Files list); `null` when it
-   * has none.
+   * carry the agent's settings in full (a room of the Files list); `null`
+   * when it has none, `undefined` until it is read.
    */
   agentModelName?: string | null;
+  /**
+   * The portal's chat model, which an agent without a model of its own runs
+   * on; `null` when there is none or it is not read yet.
+   */
+  agentDefaultModelName?: string | null;
 };
 
 class DetailsHelper {
@@ -177,6 +182,8 @@ class DetailsHelper {
 
   agentModelName?: string | null;
 
+  agentDefaultModelName?: string | null;
+
   constructor(props: DetailsHelperProps) {
     this.t = props.t;
     this.item = props.item;
@@ -193,6 +200,7 @@ class DetailsHelper {
     this.skillName = props.skillName;
     this.knowledgeStatus = props.knowledgeStatus;
     this.agentModelName = props.agentModelName;
+    this.agentDefaultModelName = props.agentDefaultModelName;
   }
 
   getPropertyList = () => {
@@ -256,7 +264,9 @@ class DetailsHelper {
               ).canCreate) &&
               "Tags",
             !isAIProject && !isSkillSet && "Storage",
-            isAIProject && this.getAgentModelName() && "Model",
+            // Always: an agent without a model of its own runs on the
+            // portal's, as its card says.
+            isAIProject && "Model",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
@@ -433,7 +443,7 @@ class DetailsHelper {
       case "externalDbTableName":
         return this.getExternalDbTableName();
       case "Model":
-        return text(this.getAgentModelName());
+        return text(this.getAgentModelName() ?? "\u2014");
       case "Status":
         return this.getItemIndexingStatus();
       case "Skill set":
@@ -457,9 +467,21 @@ class DetailsHelper {
       ? (this.item.aiProject as TAiProjectSettings | undefined)
       : undefined;
 
-  /** The agent's own model: from its settings, else as its tile read it. */
-  getAgentModelName = () =>
-    this.getAiProjectSettings()?.profile?.name ?? this.agentModelName ?? undefined;
+  /**
+   * The model the agent runs on: its own, from its settings or as its tile
+   * read it, else the portal's chat model. `undefined` while its own is not
+   * read yet, or when it has none and the portal has none either.
+   */
+  getAgentModelName = (): string | undefined => {
+    const settings = this.getAiProjectSettings();
+    // Settings read in full say whether the agent has a model of its own.
+    const ownModel =
+      settings && !settings.partial && !settings.modelUnread
+        ? (settings.profile?.name ?? null)
+        : this.agentModelName;
+    if (ownModel === undefined) return undefined;
+    return ownModel ?? this.agentDefaultModelName ?? undefined;
+  };
 
   getExternalDbTableName = () => {
     if (!("externalDbTableName" in this.item)) return null;

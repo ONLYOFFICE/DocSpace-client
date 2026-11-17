@@ -44,7 +44,11 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import DetailsHelper from "../Details.utils";
 
-const helperFor = (item: Record<string, unknown>, agentModelName?: string | null) =>
+const helperFor = (
+  item: Record<string, unknown>,
+  agentModelName?: string | null,
+  agentDefaultModelName?: string | null,
+) =>
   new DetailsHelper({
     t: ((key: string) => key) as never,
     item: item as unknown as TRoom,
@@ -57,6 +61,7 @@ const helperFor = (item: Record<string, unknown>, agentModelName?: string | null
     isArchiveFolder: false,
     roomLifetime: null as never,
     agentModelName,
+    agentDefaultModelName,
   });
 
 const agentRoom = {
@@ -71,11 +76,11 @@ const agentRoom = {
 };
 
 describe("DetailsHelper of an agent", () => {
-  it("shows an agent of the Files list as an agent: no content, no storage", () => {
+  it("shows an agent of the Files list as an agent: no content, no storage, a model", () => {
     const properties = helperFor(agentRoom).getNeededProperties();
     expect(properties).not.toContain("Content");
     expect(properties).not.toContain("Storage");
-    expect(properties).not.toContain("Model");
+    expect(properties).toContain("Model");
   });
 
   it("names the model its tile read when the room carries no settings", () => {
@@ -90,6 +95,41 @@ describe("DetailsHelper of an agent", () => {
       "GPT",
     );
     expect(helper.getAgentModelName()).toBe("Claude");
+  });
+
+  it("names the portal's model for an agent without one of its own", () => {
+    // Read by its tile: none of its own.
+    expect(helperFor(agentRoom, null, "Portal GPT").getAgentModelName()).toBe("Portal GPT");
+    // Its settings say it has none.
+    expect(
+      helperFor(
+        { ...agentRoom, isAIProject: true, aiProject: { profile: null } },
+        undefined,
+        "Portal GPT",
+      ).getAgentModelName(),
+    ).toBe("Portal GPT");
+    // Neither its own nor the portal's: the row shows a dash.
+    expect(helperFor(agentRoom, null, null).getAgentModelName()).toBeUndefined();
+  });
+
+  it("waits for the agent's own model before falling back to the portal's", () => {
+    // Not read yet.
+    expect(helperFor(agentRoom, undefined, "Portal GPT").getAgentModelName()).toBeUndefined();
+    // Settings without the block, or with the model unread, do not say it has none.
+    expect(
+      helperFor(
+        { ...agentRoom, isAIProject: true, aiProject: { profile: null, partial: true } },
+        "GPT",
+        "Portal GPT",
+      ).getAgentModelName(),
+    ).toBe("GPT");
+    expect(
+      helperFor(
+        { ...agentRoom, isAIProject: true, aiProject: { profile: null, modelUnread: true } },
+        undefined,
+        "Portal GPT",
+      ).getAgentModelName(),
+    ).toBeUndefined();
   });
 
   it("still shows a custom room's content and storage", () => {

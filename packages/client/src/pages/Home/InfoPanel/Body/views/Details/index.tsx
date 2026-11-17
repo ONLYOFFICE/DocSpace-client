@@ -124,6 +124,8 @@ type DetailsProps = {
 
   agentSummaries?: AiProjectsStore["tileSummaries"];
   fetchAgentSummary?: AiProjectsStore["fetchTileSummary"];
+  agentDefaultModelName?: AiProjectsStore["defaultModelName"];
+  fetchAgentDefaultModel?: AiProjectsStore["fetchDefaultModel"];
 };
 
 const Details = ({
@@ -150,6 +152,8 @@ const Details = ({
   fetchKnowledgeBase,
   agentSummaries,
   fetchAgentSummary,
+  agentDefaultModelName,
+  fetchAgentDefaultModel,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -233,19 +237,32 @@ const Details = ({
     fetchKnowledgeBase,
   ]);
 
-  // An agent of the Files list comes without its settings: its model is
-  // what its tile reads.
+  // An agent of the Files list, or the one whose page is open, comes
+  // without its settings in full: its model is what its tile reads. One
+  // without a model of its own runs on the portal's chat model.
   const isAIProject = isAgent(selection);
+  const agentSettings =
+    isAIProject && "aiProject" in selection
+      ? (selection.aiProject as
+          | { partial?: true; modelUnread?: true }
+          | undefined)
+      : undefined;
   const agentSummaryId =
-    isAIProject && !("aiProject" in selection) ? Number(selection.id) : null;
-  const agentModelName =
-    agentSummaryId !== null
-      ? (agentSummaries?.[agentSummaryId]?.model ?? null)
+    isAIProject &&
+    (!agentSettings || agentSettings.partial || agentSettings.modelUnread)
+      ? Number(selection.id)
       : null;
+  const agentSummary =
+    agentSummaryId !== null ? agentSummaries?.[agentSummaryId] : undefined;
+  const agentModelName = agentSummary ? agentSummary.model : undefined;
 
   useEffect(() => {
     if (agentSummaryId !== null) void fetchAgentSummary?.(agentSummaryId);
   }, [agentSummaryId, fetchAgentSummary]);
+
+  useEffect(() => {
+    if (isAIProject) void fetchAgentDefaultModel?.();
+  }, [isAIProject, fetchAgentDefaultModel]);
 
   // A file of a knowledge base that could not be indexed says so first.
   const isIndexingFailed =
@@ -268,6 +285,7 @@ const Details = ({
     skillName,
     knowledgeStatus,
     agentModelName,
+    agentDefaultModelName,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -290,7 +308,14 @@ const Details = ({
       // erased cast preserves that no-op behavior.
       await createThumbnail?.(selection.id as unknown as TFile);
     }
-  }, [selection, skillName, skillSetTitle, knowledgeStatus, agentModelName]);
+  }, [
+    selection,
+    skillName,
+    skillSetTitle,
+    knowledgeStatus,
+    agentModelName,
+    agentDefaultModelName,
+  ]);
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChangeFile?.(e, t);
@@ -547,6 +572,8 @@ export default inject(
       fetchKnowledgeBase: knowledgeBasesStore.fetch,
       agentSummaries: aiProjectsStore.tileSummaries,
       fetchAgentSummary: aiProjectsStore.fetchTileSummary,
+      agentDefaultModelName: aiProjectsStore.defaultModelName,
+      fetchAgentDefaultModel: aiProjectsStore.fetchDefaultModel,
       fetchSkill: skillsStore.fetch,
       setEditSkillFile: dialogsStore.setEditSkillFile,
       culture,

@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Voer alle 24 woorden van de herstelzin in.",
   "RecoveryPhraseRestored": "Herstelzin geaccepteerd. Wachtzin is bijgewerkt. Uw herstelzin blijft geldig.",
   "RecoveryPhraseTitle": "Herstelzin",
+  "RecoveryPhraseUnknownWord": "Woord {{position}} ({{word}}) komt in geen enkele herstelzin voor. Controleer de spelling.",
   "RecoveryPhraseWarning": "Iedereen met deze zin kan uw bestanden ontsleutelen. Deel hem nooit. Wij kunnen hem niet voor u herstellen.",
   "RecoveryPhraseWordCount": "Woorden: {{entered}} van {{total}}",
   "ReducedAdmins": "Verminderde beheerders",

@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Wprowadź wszystkie 24 słowa frazy odzyskiwania.",
   "RecoveryPhraseRestored": "Fraza odzyskiwania zaakceptowana. Hasło dostępu zostało zaktualizowane. Twoja fraza odzyskiwania pozostaje ważna.",
   "RecoveryPhraseTitle": "Fraza odzyskiwania",
+  "RecoveryPhraseUnknownWord": "Słowo {{position}} ({{word}}) nie należy do żadnej frazy odzyskiwania. Sprawdź jego pisownię.",
   "RecoveryPhraseWarning": "Każda osoba posiadająca tę frazę może odszyfrować Twoje pliki. Nigdy jej nie udostępniaj. Nie możemy jej odzyskać za Ciebie.",
   "RecoveryPhraseWordCount": "Słowa: {{entered}} z {{total}}",
   "ReducedAdmins": "Zredukowani administratorzy",

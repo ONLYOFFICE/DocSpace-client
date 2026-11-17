@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "リカバリーフレーズの24語すべてを入力してください。",
   "RecoveryPhraseRestored": "リカバリーフレーズが受け付けられました。パスフレーズが更新されました。リカバリーフレーズは引き続き有効です。",
   "RecoveryPhraseTitle": "リカバリーフレーズ",
+  "RecoveryPhraseUnknownWord": "{{position}} 番目の単語（{{word}}）はリカバリーフレーズに使われる単語ではありません。綴りを確認してください。",
   "RecoveryPhraseWarning": "このフレーズを持つ人は誰でもファイルを復号化できます。絶対に共有しないでください。弊社では復元できません。",
   "RecoveryPhraseWordCount": "単語数: {{entered}} / {{total}}",
   "ReducedAdmins": "管理者の削減",

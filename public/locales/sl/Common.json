@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Vnesite vseh 24 besed obnovitvene fraze.",
   "RecoveryPhraseRestored": "Obnovitvena fraza je bila sprejeta. Geslo je bilo posodobljeno. Vaša obnovitvena fraza ostaja veljavna.",
   "RecoveryPhraseTitle": "Obnovitvena fraza",
+  "RecoveryPhraseUnknownWord": "Beseda {{position}} ({{word}}) ni del nobene obnovitvene fraze. Preverite njen zapis.",
   "RecoveryPhraseWarning": "Kdor koli s to frazo lahko dešifrira vaše datoteke. Nikoli je ne delite. Ne moremo je obnoviti namesto vas.",
   "RecoveryPhraseWordCount": "Besede: {{entered}} od {{total}}",
   "ReducedAdmins": "Manj skrbnikov",

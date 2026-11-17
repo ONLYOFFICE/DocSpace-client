@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Unesite svih 24 reči fraze za oporavak.",
   "RecoveryPhraseRestored": "Fraza za oporavak je prihvaćena. Lozinka je ažurirana. Vaša fraza za oporavak ostaje važeća.",
   "RecoveryPhraseTitle": "Fraza za oporavak",
+  "RecoveryPhraseUnknownWord": "Reč {{position}} ({{word}}) nije deo nijedne fraze za oporavak. Proverite kako je napisana.",
   "RecoveryPhraseWarning": "Svako ko ima ovu frazu može dešifrovati vaše fajlove. Nikada je ne delite. Mi je ne možemo povratiti umesto vas.",
   "RecoveryPhraseWordCount": "Reči: {{entered}} od {{total}}",
   "ReducedAdmins": "Smanjeni administratori",

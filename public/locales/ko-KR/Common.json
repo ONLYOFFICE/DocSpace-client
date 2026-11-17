@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "복구 문구의 24개 단어를 모두 입력하세요.",
   "RecoveryPhraseRestored": "복구 문구가 수락되었습니다. 패스프레이즈가 업데이트되었습니다. 복구 문구는 계속 유효합니다.",
   "RecoveryPhraseTitle": "복구 문구",
+  "RecoveryPhraseUnknownWord": "{{position}}번째 단어({{word}})는 복구 문구에 사용되는 단어가 아닙니다. 철자를 확인하세요.",
   "RecoveryPhraseWarning": "이 문구가 있으면 누구든 파일을 복호화할 수 있습니다. 절대 공유하지 마세요. 저희는 이를 복구해 드릴 수 없습니다.",
   "RecoveryPhraseWordCount": "단어 수: {{entered}} / {{total}}",
   "ReducedAdmins": "관리자 감소",

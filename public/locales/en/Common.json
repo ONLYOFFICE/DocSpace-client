@@ -1940,6 +1940,7 @@
   "RecoveryPhraseRequired": "Enter all 24 words of the recovery phrase.",
   "RecoveryPhraseRestored": "Recovery phrase accepted. Passphrase has been updated. Your recovery phrase remains valid.",
   "RecoveryPhraseTitle": "Recovery phrase",
+  "RecoveryPhraseUnknownWord": "Word {{position}} ({{word}}) is not part of any recovery phrase. Check its spelling.",
   "RecoveryPhraseWarning": "Anyone with this phrase can decrypt your files. Never share it. We cannot recover it for you.",
   "RecoveryPhraseWordCount": "Words: {{entered}} of {{total}}",
   "ReducedAdmins": "Reduced admins",

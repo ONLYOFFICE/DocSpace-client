@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Digite todas as 24 palavras da frase de recuperação.",
   "RecoveryPhraseRestored": "Frase de recuperação aceita. A senha de acesso foi atualizada. Sua frase de recuperação continua válida.",
   "RecoveryPhraseTitle": "Frase de recuperação",
+  "RecoveryPhraseUnknownWord": "A palavra {{position}} ({{word}}) não faz parte de nenhuma frase de recuperação. Verifique a grafia.",
   "RecoveryPhraseWarning": "Qualquer pessoa com esta frase pode descriptografar seus arquivos. Nunca a compartilhe. Não podemos recuperá-la para você.",
   "RecoveryPhraseWordCount": "Palavras: {{entered}} de {{total}}",
   "ReducedAdmins": "Administradores reduzidos",

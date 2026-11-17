@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Ievadiet visus 24 atkopšanas frāzes vārdus.",
   "RecoveryPhraseRestored": "Atkopšanas frāze pieņemta. Ieejas frāze ir atjaunināta. Jūsu atkopšanas frāze joprojām ir derīga.",
   "RecoveryPhraseTitle": "Atkopšanas frāze",
+  "RecoveryPhraseUnknownWord": "{{position}}. vārds ({{word}}) neietilpst nevienā atkopšanas frāzē. Pārbaudiet tā rakstību.",
   "RecoveryPhraseWarning": "Ikviens, kam ir šī frāze, var atšifrēt jūsu failus. Nekad nedalieties ar to. Mēs nevaram to atgūt jūsu vietā.",
   "RecoveryPhraseWordCount": "Vārdi: {{entered}} no {{total}}",
   "ReducedAdmins": "Samazināts administratoru skaits",

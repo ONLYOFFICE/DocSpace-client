@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "ໃສ່ 24 ຄຳທັງໝົດຂອງວະລີການກູ້ຄືນ.",
   "RecoveryPhraseRestored": "ຍອມຮັບວະລີການກູ້ຄືນແລ້ວ. ອັບເດດລະຫັດລັບແລ້ວ. ວະລີການກູ້ຄືນຂອງທ່ານຍັງໃຊ້ໄດ້ຢູ່.",
   "RecoveryPhraseTitle": "ວະລີການກູ້ຄືນ",
+  "RecoveryPhraseUnknownWord": "ຄຳທີ {{position}} ({{word}}) ບໍ່ແມ່ນສ່ວນໜຶ່ງຂອງວະລີການກູ້ຄືນໃດໆ. ກະລຸນາກວດສອບການສະກົດຄຳ.",
   "RecoveryPhraseWarning": "ໃຜກໍຕາມທີ່ມີວະລີນີ້ສາມາດຖອດລະຫັດໄຟລ໌ຂອງທ່ານໄດ້. ຢ່າແບ່ງປັນມັນ. ພວກເຮົາບໍ່ສາມາດກູ້ຄືນໃຫ້ທ່ານໄດ້.",
   "RecoveryPhraseWordCount": "ຄຳ: {{entered}} ຈາກ {{total}}",
   "ReducedAdmins": "ຜູ້ເບິ່ງແຍງຫຼຸດລົງ",

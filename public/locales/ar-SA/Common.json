@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "أدخل جميع الكلمات الـ 24 لعبارة الاسترداد.",
   "RecoveryPhraseRestored": "تم قبول عبارة الاسترداد. تم تحديث عبارة المرور. تظل عبارة الاسترداد الخاصة بك صالحة.",
   "RecoveryPhraseTitle": "عبارة الاسترداد",
+  "RecoveryPhraseUnknownWord": "الكلمة {{position}} ({{word}}) ليست جزءًا من أي عبارة استرداد. تحقق من تهجئتها.",
   "RecoveryPhraseWarning": "يمكن لأي شخص يمتلك هذه العبارة فك تشفير ملفاتك. لا تشاركها أبداً. لا يمكننا استردادها نيابةً عنك.",
   "RecoveryPhraseWordCount": "الكلمات: {{entered}} من {{total}}",
   "ReducedAdmins": "مسؤولون أقل",

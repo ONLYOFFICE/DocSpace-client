@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Nhập đầy đủ 24 từ của cụm từ khôi phục.",
   "RecoveryPhraseRestored": "Cụm từ khôi phục đã được chấp nhận. Mật khẩu bảo vệ đã được cập nhật. Cụm từ khôi phục của bạn vẫn còn hiệu lực.",
   "RecoveryPhraseTitle": "Cụm từ khôi phục",
+  "RecoveryPhraseUnknownWord": "Từ thứ {{position}} ({{word}}) không thuộc cụm từ khôi phục nào. Hãy kiểm tra chính tả của từ này.",
   "RecoveryPhraseWarning": "Bất kỳ ai có cụm từ này đều có thể giải mã các tập tin của bạn. Tuyệt đối không chia sẻ. Chúng tôi không thể khôi phục nó cho bạn.",
   "RecoveryPhraseWordCount": "Số từ: {{entered}} / {{total}}",
   "ReducedAdmins": "Giảm quản trị viên",

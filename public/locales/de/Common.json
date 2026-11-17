@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Geben Sie alle 24 Wörter der Wiederherstellungsphrase ein.",
   "RecoveryPhraseRestored": "Wiederherstellungsphrase akzeptiert. Passphrase wurde aktualisiert. Ihre Wiederherstellungsphrase bleibt gültig.",
   "RecoveryPhraseTitle": "Wiederherstellungsphrase",
+  "RecoveryPhraseUnknownWord": "Wort {{position}} ({{word}}) ist in keiner Wiederherstellungsphrase enthalten. Überprüfen Sie die Schreibweise.",
   "RecoveryPhraseWarning": "Jeder, der diese Phrase kennt, kann Ihre Dateien entschlüsseln. Teilen Sie sie niemals. Wir können sie nicht für Sie wiederherstellen.",
   "RecoveryPhraseWordCount": "Wörter: {{entered}} von {{total}}",
   "ReducedAdmins": "Reduzierte Admins",

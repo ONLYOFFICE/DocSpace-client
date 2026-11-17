@@ -274,4 +274,50 @@ describe("RecoveryPhraseInputModal", () => {
       await waitFor(() => expect(onSubmit).toHaveBeenCalledWith(VALID_PHRASE));
     });
   });
+
+  describe("A word that is no recovery word is named", () => {
+    const submit = async (user: ReturnType<typeof userEvent.setup>, text: string) => {
+      await user.click(getPhraseField());
+      await user.paste(text);
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+    };
+
+    it("Misspelled word", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+      const words = VALID_PHRASE.split(" ");
+      words[9] = "abandn";
+
+      await submit(user, words.join(" "));
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          'Common:RecoveryPhraseUnknownWord {"word":"abandn","position":10}',
+        ),
+      );
+      expect(validateMnemonic).not.toHaveBeenCalled();
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("All words valid, phrase wrong", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+
+      // Every word is a recovery word, but the last one breaks the checksum.
+      await submit(user, `${"abandon ".repeat(23)}zoo`);
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          "Common:InvalidRecoveryPhrase",
+        ),
+      );
+      expect(screen.getByTestId("key-dialog-announcement")).not.toHaveTextContent(
+        "Common:RecoveryPhraseUnknownWord",
+      );
+      expect(validateMnemonic).toHaveBeenCalled();
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
 });

@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Syötä kaikki palautuslauseen 24 sanaa.",
   "RecoveryPhraseRestored": "Palautuslause hyväksytty. Salauslause on päivitetty. Palautuslauseesi on edelleen voimassa.",
   "RecoveryPhraseTitle": "Palautuslause",
+  "RecoveryPhraseUnknownWord": "Sana {{position}} ({{word}}) ei kuulu mihinkään palautuslauseeseen. Tarkista sen kirjoitusasu.",
   "RecoveryPhraseWarning": "Kuka tahansa tämän lauseen tunteva voi purkaa tiedostojesi salauksen. Älä koskaan jaa sitä. Emme pysty palauttamaan sitä puolestasi.",
   "RecoveryPhraseWordCount": "Sanoja: {{entered}} / {{total}}",
   "ReducedAdmins": "Vähemmän ylläpitäjiä",

@@ -61,6 +61,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   RECOVERY_PHRASE_WORD_COUNT,
   countMnemonicWords,
+  findUnknownMnemonicWord,
   normalizeMnemonic,
   validateMnemonic,
 } from "@docspace/shared/services/encryption/recovery";
@@ -107,6 +108,17 @@ export const RecoveryPhraseInputModal: React.FC<
 
     setIsValidating(true);
     try {
+      const unknown = await findUnknownMnemonicWord(normalized);
+      if (unknown) {
+        setLocalError(
+          t("Common:RecoveryPhraseUnknownWord", {
+            word: unknown.word,
+            position: unknown.position,
+          }),
+        );
+        return;
+      }
+
       const ok = await validateMnemonic(normalized);
       if (!ok) {
         setLocalError(t("Common:InvalidRecoveryPhrase"));

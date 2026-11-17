@@ -138,3 +138,19 @@ export function countMnemonicWords(input: string): number {
   const normalized = normalizeMnemonic(input);
   return normalized === "" ? 0 : normalized.split(" ").length;
 }
+
+/**
+ * The first word of a typed recovery phrase that no recovery phrase can hold,
+ * with its position counted from 1, or null when every word is a recovery word.
+ */
+export async function findUnknownMnemonicWord(
+  input: string,
+): Promise<{ word: string; position: number } | null> {
+  const normalized = normalizeMnemonic(input);
+  if (normalized === "") return null;
+
+  const wordSet = new Set(await getWordlist());
+  const words = normalized.split(" ");
+  const index = words.findIndex((word) => !wordSet.has(word));
+  return index === -1 ? null : { word: words[index], position: index + 1 };
+}

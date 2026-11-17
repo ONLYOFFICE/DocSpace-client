@@ -1935,6 +1935,7 @@
   "RecoveryPhraseRequired": "Kurtarma ifadesinin 24 kelimesinin tamamını girin.",
   "RecoveryPhraseRestored": "Kurtarma ifadesi kabul edildi. Parola güncellendi. Kurtarma ifadeniz geçerliliğini korur.",
   "RecoveryPhraseTitle": "Kurtarma ifadesi",
+  "RecoveryPhraseUnknownWord": "{{position}}. kelime ({{word}}) hiçbir kurtarma ifadesinde yer almıyor. Yazımını kontrol edin.",
   "RecoveryPhraseWarning": "Bu ifadeye sahip olan herkes dosyalarınızın şifresini çözebilir. Asla kimseyle paylaşmayın. Sizin için kurtaramayız.",
   "RecoveryPhraseWordCount": "Kelime: {{entered}} / {{total}}",
   "ReducedAdmins": "Azaltılmış yöneticiler",

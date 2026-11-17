@@ -424,6 +424,96 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     ]);
   });
 
+  // WCAG 2.x contrast of two computed CSS colours ("rgb(r, g, b)").
+  const contrastOf = (a: string, b: string) => {
+    const luminance = (css: string) => {
+      const [r, g, bl] = (css.match(/[\d.]+/g) ?? [])
+        .slice(0, 3)
+        .map((c) => Number(c) / 255)
+        .map((c) =>
+          c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4,
+        );
+      return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+    };
+    const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return (light + 0.05) / (dark + 0.05);
+  };
+
+  const openKeyCard = async (
+    page: Page,
+    baseUrl: string,
+    colorScheme: "light" | "dark",
+  ) => {
+    await page.emulateMedia({ colorScheme });
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    const card = page.getByTestId("key_details");
+    await expect(card).toBeVisible({ timeout: 15_000 });
+    const background = await card.evaluate((element) => {
+      for (
+        let node: Element | null = element;
+        node;
+        node = node.parentElement
+      ) {
+        const colour = getComputedStyle(node).backgroundColor;
+        if (colour !== "rgba(0, 0, 0, 0)" && colour !== "transparent")
+          return colour;
+      }
+      return "rgb(255, 255, 255)";
+    });
+    return { card, background };
+  };
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`Labels in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(...oneKey());
+      const { card, background } = await openKeyCard(
+        page,
+        baseUrl,
+        colorScheme,
+      );
+
+      for (const label of ["Status", "Created on", "Key fingerprint"]) {
+        const colour = await card
+          .getByText(label, { exact: true })
+          .evaluate((element) => getComputedStyle(element).color);
+        expect(
+          contrastOf(colour, background),
+          `${label}: ${colour} on ${background}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+
+    test(`Action icons in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(...oneKey());
+      const { card, background } = await openKeyCard(
+        page,
+        baseUrl,
+        colorScheme,
+      );
+
+      for (const name of ["Change passphrase", "Export key", "Delete"]) {
+        const icon = card.getByRole("button", { name }).locator("svg path").first();
+        await expect(icon).toBeAttached();
+        const colour = await icon.evaluate((element) => {
+          const style = getComputedStyle(element);
+          return style.fill !== "none" ? style.fill : style.stroke;
+        });
+        expect(
+          contrastOf(colour, background),
+          `${name}: ${colour} on ${background}`,
+        ).toBeGreaterThanOrEqual(3);
+      }
+    });
+  }
+
   test("Delete warning on a wide screen", async ({
     page,
     mockRequest,

@@ -130,6 +130,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
             <div className={styles.keyItemActions} data-testid="key_actions">
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={PencilReactSvgUrl}
                 size={16}
                 onClick={handleRotate}
@@ -142,6 +143,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
               />
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={DownloadReactSvgUrl}
                 size={16}
                 onClick={handleExport}
@@ -154,6 +156,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
               />
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={TrashReactSvgUrl}
                 size={16}
                 onClick={handleDelete}

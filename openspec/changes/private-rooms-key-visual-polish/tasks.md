@@ -30,7 +30,7 @@ and SDK unit tests must stay green.
 
 ## 6. Mark of a missing key
 
-- [ ] 6.1 In `docspace-ui-kit-react` on `release/v4.1.0`: draw the mark of a selector item as a badge after the label, inside the label block, with the tooltip and its description tied to the badge, the label shortened before the badge, and a text contrast of at least 4.5:1 in both themes. Update the kit's unit tests and stories, run `pnpm build && pnpm verify:package && pnpm pack`, and take the pack with `pnpm run update-ui-kit`. Verify: the kit's unit suite passes and the client builds on the new pack
+- [x] 6.1 In `docspace-ui-kit-react` on `release/v4.1.0`: draw the mark of a selector item as a badge after the label, inside the label block, with the tooltip and its description tied to the badge, the label shortened before the badge, and a text contrast of at least 4.5:1 in both themes. Update the kit's unit tests and stories, run `pnpm build && pnpm verify:package && pnpm pack`, and take the pack with `pnpm run update-ui-kit`. Verify: the kit's unit suite passes and the client builds on the new pack
 - [ ] 6.2 After 6.1: add Playwright cases "Readable in both themes", "Next to an invited person" and "Long name" to the marked-people group of `packages/client/__tests__/private-room-invite.spec.ts`, reading computed colours and bounding boxes, and update the screenshots of the people list under Docker. Verify: the spec passes under Docker, "Person without a key is marked" and "Marked person selected and sent" unchanged
 
 ## 7. Gate

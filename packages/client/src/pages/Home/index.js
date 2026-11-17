@@ -677,9 +677,13 @@ const PureHome = observer((props) => {
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
 
+  // An agent's page draws its chat in the section body: a file uploaded from
+  // the chat lands in the root of the agent's room and makes its list
+  // non-empty, but the page still has no list to filter.
   const shouldRenderSectionFilter =
     (isContactsPage ? isValidContactsContent : isValidMainContent) &&
-    !isSettingsPage;
+    !isSettingsPage &&
+    !isAiProjectRoomRoot;
 
   React.useEffect(() => {
     if (isChangePageRequestRunning) return;

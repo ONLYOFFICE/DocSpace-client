@@ -19,6 +19,29 @@ describe("getMarkdownEdit", () => {
     expect(apply("read **the** file", 7, 10, "bold")).toEqual({ result: "read the file", selected: "the" });
   });
 
+  it("keeps the line break of a triple-clicked line outside the marks", () => {
+    const text = "1. The first thing to do.\n2. The next thing to do.";
+    const first = apply(text, 0, 26, "bold");
+    expect(first).toEqual({
+      result: "**1. The first thing to do.**\n2. The next thing to do.",
+      selected: "1. The first thing to do.",
+    });
+    expect(apply("  read it \nnext", 0, 11, "italic").result).toBe("  _read it_ \nnext");
+    expect(apply("see docs\nnext", 0, 9, "link").result).toBe("[see docs](https://)\nnext");
+  });
+
+  it("takes the marks off a triple-clicked marked line", () => {
+    const text = "**1. The first thing to do.**\n2. The next thing to do.";
+    expect(apply(text, 0, 30, "bold")).toEqual({
+      result: "1. The first thing to do.\n2. The next thing to do.",
+      selected: "1. The first thing to do.",
+    });
+  });
+
+  it("marks only the triple-clicked line, not the next one", () => {
+    expect(apply("one\ntwo", 0, 4, "heading").result).toBe("## one\ntwo");
+  });
+
   it("puts an empty pair at the caret", () => {
     expect(apply("ab", 1, 1, "bold")).toEqual({ result: "a****b", selected: "" });
   });

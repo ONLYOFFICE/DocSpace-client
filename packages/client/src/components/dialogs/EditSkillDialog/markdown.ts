@@ -82,49 +82,81 @@ export const getMarkdownEdit = (
   to: number,
   action: TMarkdownAction,
 ): TMarkdownEdit => {
+  // An inline mark goes around the text only: the spaces and line breaks
+  // at the ends of the selection, such as the break a triple click takes
+  // with its line, stay outside it, or the closing mark would open the
+  // next line.
   const selected = text.slice(from, to);
+  const lead = selected.length - selected.trimStart().length;
+  const inner = selected.trim();
+  // A selection of blanks only is marked where it starts.
+  const innerFrom = inner ? from + lead : from;
+  const innerTo = innerFrom + inner.length;
 
   const wrap = WRAPS[action];
   if (wrap) {
     const size = wrap.length;
     const isWrapped =
-      text.slice(from - size, from) === wrap &&
-      text.slice(to, to + size) === wrap;
+      text.slice(innerFrom - size, innerFrom) === wrap &&
+      text.slice(innerTo, innerTo + size) === wrap;
     if (isWrapped)
       return {
-        from: from - size,
-        to: to + size,
-        insert: selected,
-        anchor: from - size,
-        head: to - size,
+        from: innerFrom - size,
+        to: innerTo + size,
+        insert: inner,
+        anchor: innerFrom - size,
+        head: innerTo - size,
+      };
+    // A whole marked line, selected with its marks, is taken off too.
+    const unwrapped = inner.slice(size, -size);
+    const isMarkedText =
+      inner.length > size * 2 &&
+      inner.startsWith(wrap) &&
+      inner.endsWith(wrap) &&
+      !unwrapped.includes(wrap);
+    if (isMarkedText)
+      return {
+        from: innerFrom,
+        to: innerTo,
+        insert: unwrapped,
+        anchor: innerFrom,
+        head: innerFrom + unwrapped.length,
       };
     return {
-      from,
-      to,
-      insert: `${wrap}${selected}${wrap}`,
-      anchor: from + size,
-      head: to + size,
+      from: innerFrom,
+      to: innerTo,
+      insert: `${wrap}${inner}${wrap}`,
+      anchor: innerFrom + size,
+      head: innerTo + size,
     };
   }
 
   if (action === "link") {
-    const insert = `[${selected}](${LINK_URL})`;
+    const insert = `[${inner}](${LINK_URL})`;
     // With a text selected the address is what is left to type; without
     // one, the text is.
-    const urlStart = from + selected.length + 3;
-    return selected
+    const urlStart = innerFrom + inner.length + 3;
+    return inner
       ? {
-          from,
-          to,
+          from: innerFrom,
+          to: innerTo,
           insert,
           anchor: urlStart,
           head: urlStart + LINK_URL.length,
         }
-      : { from, to, insert, anchor: from + 1, head: from + 1 };
+      : {
+          from: innerFrom,
+          to: innerTo,
+          insert,
+          anchor: innerFrom + 1,
+          head: innerFrom + 1,
+        };
   }
 
+  // A selection that ends with a line break ends on the line before it.
+  const lineTo = to > from && text[to - 1] === "\n" ? to - 1 : to;
   const start = text.lastIndexOf("\n", from - 1) + 1;
-  const nextBreak = text.indexOf("\n", to);
+  const nextBreak = text.indexOf("\n", lineTo);
   const end = nextBreak === -1 ? text.length : nextBreak;
   const lines = text.slice(start, end).split("\n");
   const isMarked = lines.every(

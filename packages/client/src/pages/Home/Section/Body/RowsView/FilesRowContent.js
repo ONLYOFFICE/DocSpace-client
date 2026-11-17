@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isTablet } from "@docspace/shared/utils";
@@ -46,6 +47,12 @@ import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-uti
 
 import { SortByFieldName } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
+
+import { useStore } from "SRC_DIR/store/useStore";
+import KnowledgeBaseStatusBadge from "SRC_DIR/components/KnowledgeBaseStatusBadge";
+import { useKnowledgeBaseStatus } from "SRC_DIR/components/KnowledgeBaseStatusBadge/useKnowledgeBaseStatus";
+
+import { getAiRowInfo, getAiRowKind } from "./aiRowInfo";
 
 import {
   connectedCloudsTypeTitleTranslation,
@@ -71,6 +78,9 @@ const FilesRowContent = ({
   isIndexing,
   displayFileExtension,
   isPersonalReadOnly,
+  isAiSectionFolder,
+  isSkillSet,
+  isKnowledgeBase,
 }) => {
   const {
     contentLength,
@@ -86,6 +96,43 @@ const FilesRowContent = ({
     order,
     roomType,
   } = item;
+
+  // The rows of the AI section's lists, and of a skill set or a knowledge
+  // base opened from them, tell what their table rows tell.
+  const aiRowKind = getAiRowKind(item, {
+    isAiSectionFolder,
+    isSkillSet,
+    isKnowledgeBase,
+  });
+
+  // A skill is described in its file's text, read once per version.
+  const skillsStore = useStore("skillsStore");
+  const isSkill = aiRowKind === "skill";
+  const skill = isSkill ? skillsStore.get(item) : null;
+  const hasSkill = !!skill;
+  React.useEffect(() => {
+    if (isSkill && !hasSkill)
+      skillsStore.fetch({
+        id: item.id,
+        version: item.version,
+        viewUrl: item.viewUrl,
+      });
+  }, [skillsStore, isSkill, hasSkill, item.id, item.version, item.viewUrl]);
+
+  const knowledgeStatus = useKnowledgeBaseStatus(
+    aiRowKind === "knowledgeBase" ? item : null,
+  );
+
+  const aiRowInfo = aiRowKind
+    ? getAiRowInfo(aiRowKind, {
+        t,
+        item,
+        fileOwner,
+        updatedDate,
+        createdDate,
+        skillDescription: skill?.description,
+      })
+    : null;
 
   const contentComponent = () => {
     switch (filterSortBy) {
@@ -167,6 +214,12 @@ const FilesRowContent = ({
         ) : null}
       </Link>
       <div className="badges">
+        {knowledgeStatus !== null ? (
+          <KnowledgeBaseStatusBadge
+            status={knowledgeStatus}
+            themeIsBase={theme.isBase}
+          />
+        ) : null}
         {badgesComponent}
         {!isRoom && !isRooms ? quickButtons : null}
       </div>
@@ -182,7 +235,23 @@ const FilesRowContent = ({
           {`${t("Files:Index")} ${order}`}
         </Text>
       ) : null}
-      {mainInfo ? (
+      {aiRowInfo
+        ? aiRowInfo.map((value, index) => (
+            <Text
+              key={`ai-row-info-${index}`}
+              containerMinWidth="120px"
+              containerWidth="15%"
+              fontSize="12px"
+              fontWeight={400}
+              className="row_update-text"
+              title={value}
+              truncate
+            >
+              {value}
+            </Text>
+          ))
+        : null}
+      {!aiRowInfo && mainInfo ? (
         <Text
           containerMinWidth="200px"
           containerWidth="15%"
@@ -204,6 +273,7 @@ export default inject(
     treeFoldersStore,
     filesStore,
     selectedFolderStore,
+    tableStore,
   }) => {
     const { filter, roomsFilter } = filesStore;
     const {
@@ -230,12 +300,17 @@ export default inject(
       isDefaultRoomsQuotaSet,
       isIndexing: isIndexedFolder,
       isPersonalReadOnly,
+      isAiSectionFolder,
+      isSkillSet: tableStore.isSkillSet,
+      isKnowledgeBase: tableStore.isKnowledgeBase,
     };
   },
 )(
   observer(
     withTranslation(["Files", "Translations", "Notifications", "Common"])(
-      withContent(FilesRowContent),
+      // An observer of its own: a skill's description and a knowledge base's
+      // state are read from their stores as the row is drawn.
+      withContent(observer(FilesRowContent)),
     ),
   ),
 );

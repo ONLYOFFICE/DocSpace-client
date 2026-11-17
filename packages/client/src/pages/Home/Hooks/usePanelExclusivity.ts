@@ -59,9 +59,22 @@ import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
  * Unlike the SDK port this lives in the client where the Info Panel is a MobX
  * store passed in by the caller, and closing it uses `setIsVisible(false)`
  * (there is no dedicated `close()`).
+ *
+ * An agent's page draws its chat in the section body, not in the side area,
+ * so there the two do not compete (`isChatInSection`): opening the agent
+ * leaves the Info panel as it was, as opening a room does, and the Info
+ * panel opens beside the agent's chat.
  */
-export const usePanelExclusivity = (infoPanelStore: InfoPanelStore) => {
+export const usePanelExclusivity = (
+  infoPanelStore: InfoPanelStore,
+  isChatInSection: () => boolean = () => false,
+) => {
   const aiChatStore = useAiChatStore();
+
+  // Handed over as a new function on every render: read through a ref, so
+  // the reactions below are not set up again for it.
+  const isChatInSectionRef = React.useRef(isChatInSection);
+  isChatInSectionRef.current = isChatInSection;
 
   const isAiChatAvailable = useIsAiChatAvailable();
 
@@ -78,7 +91,11 @@ export const usePanelExclusivity = (infoPanelStore: InfoPanelStore) => {
     // chat panel is shared state that can also be opened on the dashboard,
     // where the Info Panel keeps its last `isVisible` untouched; coming back
     // would then show both. The chat is the newer of the two, so it wins.
-    if (aiChatStore.isVisible && infoPanelStore.isVisible) {
+    if (
+      aiChatStore.isVisible &&
+      infoPanelStore.isVisible &&
+      !isChatInSectionRef.current()
+    ) {
       infoPanelStore.setIsVisible(false);
     }
 
@@ -86,13 +103,14 @@ export const usePanelExclusivity = (infoPanelStore: InfoPanelStore) => {
       reaction(
         () => aiChatStore.isVisible,
         (visible) => {
-          if (visible) infoPanelStore.setIsVisible(false);
+          if (visible && !isChatInSectionRef.current())
+            infoPanelStore.setIsVisible(false);
         },
       ),
       reaction(
         () => infoPanelStore.isVisible,
         (visible) => {
-          if (visible) aiChatStore.close();
+          if (visible && !isChatInSectionRef.current()) aiChatStore.close();
         },
       ),
     ];

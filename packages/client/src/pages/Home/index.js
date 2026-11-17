@@ -245,6 +245,7 @@ const PureHome = observer((props) => {
     setCreateRoomFromTemplate,
 
     infoPanelStore,
+    getIsAiProjectRoomRoot,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -298,7 +299,9 @@ const PureHome = observer((props) => {
     getCategoryType(location) === CategoryType.AiHub &&
     isAiWorkspaceTemplates(location.search);
 
-  usePanelExclusivity(infoPanelStore);
+  // An agent's page draws its chat in the section body (AiProjectView),
+  // beside the Info panel rather than in its place.
+  usePanelExclusivity(infoPanelStore, getIsAiProjectRoomRoot);
 
   // An open AI project draws its chat in the section body (AiProjectView),
   // so the side panel stays out of the way while a project room is shown.
@@ -1193,6 +1196,8 @@ export const Component = inject(
       getPluginIconUrl,
 
       infoPanelStore,
+      // Read when the chat or the Info panel opens, not when Home renders.
+      getIsAiProjectRoomRoot: () => treeFoldersStore.isAiProjectRoomRoot,
     };
   },
 )(observer(HomeWithGuard));

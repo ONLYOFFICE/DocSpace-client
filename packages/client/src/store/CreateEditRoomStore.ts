@@ -879,7 +879,13 @@ class CreateEditRoomStore {
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    if (isDesktop()) {
+    // A skill set or a knowledge base is filled next, not shared: it opens
+    // with the Info panel as it was, not on its contacts.
+    const isAiSourceRoom =
+      room.roomType === RoomsType.InstructionsRoom ||
+      room.roomType === RoomsType.KnowledgeRoom;
+
+    if (isDesktop() && !isAiSourceRoom) {
       await when(() => selectedFolderStore.id === room.id, {
         timeout: 10000,
       }).catch((error) => {

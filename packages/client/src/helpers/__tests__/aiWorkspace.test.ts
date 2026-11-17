@@ -9,6 +9,7 @@ import {
   hasAiWorkspaceTemplates,
   getAiWorkspaceTitle,
   isAiWorkspaceTemplates,
+  isAgent,
 } from "../aiWorkspace";
 
 const t = (key: string) => key;
@@ -64,4 +65,18 @@ describe("AI Chat section list tabs", () => {
       expect(isAiWorkspaceTemplates(`${search(url)}&tab=templates`)).toBe(false);
     },
   );
+});
+
+describe("isAgent", () => {
+  it.each([
+    ["a project read through the projects API", { id: 1, isAIProject: true }, true],
+    ["an agent room of the Files list", { id: 1, isRoom: true, roomType: RoomsType.AiProjectRoom }, true],
+    ["a skill set", { id: 1, isRoom: true, roomType: RoomsType.InstructionsRoom }, false],
+    ["a knowledge base", { id: 1, isRoom: true, roomType: RoomsType.KnowledgeRoom }, false],
+    ["a custom room", { id: 1, isRoom: true, roomType: RoomsType.CustomRoom }, false],
+    ["a file", { id: 1, fileExst: ".docx" }, false],
+    ["nothing", null, false],
+  ])("tells %s", (_, item, expected) => {
+    expect(isAgent(item)).toBe(expected);
+  });
 });

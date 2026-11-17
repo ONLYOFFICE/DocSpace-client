@@ -44,6 +44,21 @@ import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
  * there.
  */
 
+/**
+ * The item is an agent (an AI project room). The server marks no room as
+ * one: `isAIProject` is set only on a project read through the projects API
+ * (`aiProjectToRoom`), so a room of the Files list, or the agent's own page,
+ * is told by its room type.
+ */
+export const isAgent = (item: unknown): boolean => {
+  if (typeof item !== "object" || item === null) return false;
+  const { isAIProject, roomType } = item as {
+    isAIProject?: unknown;
+    roomType?: unknown;
+  };
+  return isAIProject === true || roomType === RoomsType.AiProjectRoom;
+};
+
 const LIST_TYPES = new Set<number>([
   RoomsType.AiProjectRoom,
   RoomsType.InstructionsRoom,

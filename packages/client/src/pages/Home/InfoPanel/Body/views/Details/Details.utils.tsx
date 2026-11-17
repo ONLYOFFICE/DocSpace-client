@@ -67,6 +67,7 @@ import {
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 import CommentEditor from "../../sub-components/CommentEditor";
 
@@ -137,6 +138,12 @@ type DetailsHelperProps = {
   skillName?: string;
   /** How far a selected knowledge base is indexed; `null` until it is read. */
   knowledgeStatus?: VectorizationStatus | null;
+  /**
+   * The name of a selected agent's own model, when the selection does not
+   * carry the agent's settings (a room of the Files list); `null` when it
+   * has none.
+   */
+  agentModelName?: string | null;
 };
 
 class DetailsHelper {
@@ -168,6 +175,8 @@ class DetailsHelper {
 
   knowledgeStatus?: VectorizationStatus | null;
 
+  agentModelName?: string | null;
+
   constructor(props: DetailsHelperProps) {
     this.t = props.t;
     this.item = props.item;
@@ -183,6 +192,7 @@ class DetailsHelper {
     this.skillSetTitle = props.skillSetTitle;
     this.skillName = props.skillName;
     this.knowledgeStatus = props.knowledgeStatus;
+    this.agentModelName = props.agentModelName;
   }
 
   getPropertyList = () => {
@@ -197,7 +207,7 @@ class DetailsHelper {
   getNeededProperties = () => {
     // An AI project shows as a room does; it holds no files of its own and
     // takes no storage, and its model comes from its settings block.
-    const isAIProject = "isAIProject" in this.item && !!this.item.isAIProject;
+    const isAIProject = isAgent(this.item);
 
     // A skill is shown as a skill, not as the Markdown file that holds it:
     // the set it is in and the command that calls it, no type or size.
@@ -246,7 +256,7 @@ class DetailsHelper {
               ).canCreate) &&
               "Tags",
             !isAIProject && !isSkillSet && "Storage",
-            isAIProject && this.getAiProjectSettings()?.profile?.name && "Model",
+            isAIProject && this.getAgentModelName() && "Model",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
@@ -423,7 +433,7 @@ class DetailsHelper {
       case "externalDbTableName":
         return this.getExternalDbTableName();
       case "Model":
-        return text(this.getAiProjectSettings()?.profile?.name);
+        return text(this.getAgentModelName());
       case "Status":
         return this.getItemIndexingStatus();
       case "Skill set":
@@ -446,6 +456,10 @@ class DetailsHelper {
     "aiProject" in this.item
       ? (this.item.aiProject as TAiProjectSettings | undefined)
       : undefined;
+
+  /** The agent's own model: from its settings, else as its tile read it. */
+  getAgentModelName = () =>
+    this.getAiProjectSettings()?.profile?.name ?? this.agentModelName ?? undefined;
 
   getExternalDbTableName = () => {
     if (!("externalDbTableName" in this.item)) return null;

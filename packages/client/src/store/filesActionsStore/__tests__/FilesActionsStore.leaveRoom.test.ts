@@ -37,7 +37,7 @@ vi.mock("@docspace/shared/api/files", async (io) => ({
 }));
 
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { setFileEncryptionKeys } from "@docspace/shared/api/files";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -184,6 +184,30 @@ describe("FilesActionsStore — onLeaveRoom from inside the room", () => {
       expect(navigate.mock.calls[0][0].startsWith(list)).toBe(true);
     },
   );
+
+  it("Leave an agent from its page: the agents' list opens, not the rooms", async () => {
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      navigate,
+      location: { pathname: "/ai-rooms/42/filter", search: "?folder=42" },
+    };
+    const store = createTestFilesActionsStore({
+      filesStore: { selection: [], bufferSelection: null, removeFiles: vi.fn() },
+      selectedFolderStore: {
+        id: 42,
+        roomType: RoomsType.AiProjectRoom,
+        isRootFolder: false,
+      },
+    });
+
+    await store.onLeaveRoom(t);
+
+    expect(navigate).toHaveBeenCalledTimes(1);
+    const url = navigate.mock.calls[0][0] as string;
+    expect(url.startsWith("/ai-rooms/filter?")).toBe(true);
+    expect(new URLSearchParams(url.split("?")[1]).getAll("type")).toEqual([
+      String(RoomsType.AiProjectRoom),
+    ]);
+  });
 });
 
 describe("FilesActionsStore — onLeaveRoom as an administrator", () => {

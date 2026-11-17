@@ -58,6 +58,7 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import SkillIcon, { isSkillSetIconRoom } from "SRC_DIR/components/SkillIcon";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 import {
   isSkillFile,
   type TSkillFolder,
@@ -232,7 +233,7 @@ const RoomsItemHeader = ({
   // An AI project changes its logo in its own edit dialog, not here.
   const canEditLogo =
     isRoom &&
-    !("isAIProject" in selection && selection.isAIProject) &&
+    !isAgent(selection) &&
     !!selection?.security &&
     "EditRoom" in selection.security &&
     !!selection.security.EditRoom;

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 import {
   isFile as isFileUtil,
   isRoom as isRoomUtil,
@@ -46,6 +46,7 @@ import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
 import { pluginRoomTypes } from "SRC_DIR/helpers/plugins/react/utils";
 import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 import { InfoPanelView } from "./index";
 
@@ -112,12 +113,7 @@ export function getAvailableInfoPanelTabs({
   // marks no room as one, so the room type decides for a selection of the
   // list or of the agent's page. On the agent's own page, where its chat is
   // open, the files of the conversation on screen follow.
-  const isAgent =
-    ("isAIProject" in selection && selection.isAIProject === true) ||
-    ("roomType" in selection &&
-      selection.roomType === RoomsType.AiProjectRoom);
-
-  if (isAgent) {
+  if (isAgent(selection)) {
     const tabs: InfoPanelViewType[] = [
       InfoPanelView.infoDetails,
       InfoPanelView.infoContext,

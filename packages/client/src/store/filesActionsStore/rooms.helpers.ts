@@ -38,6 +38,7 @@ import { getRoomMissingFileKeys } from "@docspace/shared/api/privacy";
 import {
   AnalyticsEvents,
   Events,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -57,6 +58,7 @@ import { FileOperationStatus } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile, TOperation } from "@docspace/shared/api/files/types";
 import type { UserStore } from "@docspace/shared/store/UserStore";
+import { getAiWorkspaceTabUrl, isAgent } from "SRC_DIR/helpers/aiWorkspace";
 import { setPinAction as setPinActionHelper } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
 import type { TActionItem } from "../FilesActionsStore";
@@ -601,11 +603,20 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
       .then(() => {
         if (!keepsReading) {
           if (!isRoot) {
-            const filter = RoomsFilter.getDefault();
-            const list = isPrivateRoomsRoute(window.DocSpace.location.pathname)
-              ? "/private/filter"
-              : "rooms/shared/filter";
-            window.DocSpace.navigate(`${list}?${filter.toUrlParams()}`);
+            // An agent's page is left for the agents' list it came from.
+            if (isAgent(room)) {
+              window.DocSpace.navigate(
+                getAiWorkspaceTabUrl(false, RoomsType.AiProjectRoom, user?.id),
+              );
+            } else {
+              const filter = RoomsFilter.getDefault();
+              const list = isPrivateRoomsRoute(
+                window.DocSpace.location.pathname,
+              )
+                ? "/private/filter"
+                : "rooms/shared/filter";
+              window.DocSpace.navigate(`${list}?${filter.toUrlParams()}`);
+            }
           } else {
             self.filesStore.removeFiles(null, [roomId]);
           }

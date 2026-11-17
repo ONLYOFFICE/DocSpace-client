@@ -50,6 +50,7 @@ import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/ro
 import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -246,7 +247,7 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
-      isAIProject: room?.isAIProject,
+      isAIProject: isAgent(room),
       changeAiProjectOwner: (newOwnerId, keepAsManager) =>
         aiProjectsStore.changeOwner(room, newOwnerId, keepAsManager),
       isFormSpace: room?.roomType === RoomsType.FormRoom,

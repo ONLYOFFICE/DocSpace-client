@@ -69,6 +69,8 @@ import {
 } from "@docspace/shared/utils/skillFile";
 import type SkillsStore from "SRC_DIR/store/SkillsStore";
 import type KnowledgeBasesStore from "SRC_DIR/store/KnowledgeBasesStore";
+import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 import { getKnowledgeBaseStatus } from "SRC_DIR/store/KnowledgeBasesStore";
 
 import { FormInfo } from "./sub-components/FormInfo";
@@ -116,6 +118,9 @@ type DetailsProps = {
 
   getKnowledgeBase?: KnowledgeBasesStore["get"];
   fetchKnowledgeBase?: KnowledgeBasesStore["fetch"];
+
+  agentSummaries?: AiProjectsStore["tileSummaries"];
+  fetchAgentSummary?: AiProjectsStore["fetchTileSummary"];
 };
 
 const Details = ({
@@ -140,6 +145,8 @@ const Details = ({
   setEditSkillFile,
   getKnowledgeBase,
   fetchKnowledgeBase,
+  agentSummaries,
+  fetchAgentSummary,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -201,6 +208,20 @@ const Details = ({
       );
   }, [knowledgeBaseId, knowledgeBaseFilesCount, fetchKnowledgeBase]);
 
+  // An agent of the Files list comes without its settings: its model is
+  // what its tile reads.
+  const isAIProject = isAgent(selection);
+  const agentSummaryId =
+    isAIProject && !("aiProject" in selection) ? Number(selection.id) : null;
+  const agentModelName =
+    agentSummaryId !== null
+      ? (agentSummaries?.[agentSummaryId]?.model ?? null)
+      : null;
+
+  useEffect(() => {
+    if (agentSummaryId !== null) void fetchAgentSummary?.(agentSummaryId);
+  }, [agentSummaryId, fetchAgentSummary]);
+
   // A file of a knowledge base that could not be indexed says so first.
   const isIndexingFailed =
     !("isRoom" in selection && selection.isRoom) &&
@@ -221,6 +242,7 @@ const Details = ({
     skillSetTitle,
     skillName,
     knowledgeStatus,
+    agentModelName,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -243,7 +265,7 @@ const Details = ({
       // erased cast preserves that no-op behavior.
       await createThumbnail?.(selection.id as unknown as TFile);
     }
-  }, [selection, skillName, skillSetTitle, knowledgeStatus]);
+  }, [selection, skillName, skillSetTitle, knowledgeStatus, agentModelName]);
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChangeFile?.(e, t);
@@ -301,7 +323,6 @@ const Details = ({
     "roomType" in selection && selection.roomType === RoomsType.FormRoom;
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
-  const isAIProject = "isAIProject" in selection && !!selection.isAIProject;
   const resolvedTitle = useResolvedFileTitle(
     selection as { id?: number | string; title?: string; encrypted?: boolean },
   );
@@ -472,6 +493,7 @@ export default inject(
     selectedFolderStore,
     skillsStore,
     knowledgeBasesStore,
+    aiProjectsStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -496,6 +518,8 @@ export default inject(
         title: selectedFolderStore.title,
       },
       getSkill: skillsStore.get,
+      agentSummaries: aiProjectsStore.tileSummaries,
+      fetchAgentSummary: aiProjectsStore.fetchTileSummary,
       fetchSkill: skillsStore.fetch,
       setEditSkillFile: dialogsStore.setEditSkillFile,
       culture,

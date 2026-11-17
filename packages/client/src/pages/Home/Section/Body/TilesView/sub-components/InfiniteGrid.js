@@ -312,10 +312,11 @@ export default inject(
 
     const currentFolderId = selectedFolderStore.id;
 
-    // The Agents list of the AI Chat section: its rows are agent cards.
+    // The lists of the AI Chat section: their rows are agent-sized cards,
+    // for agents, skill sets and knowledge bases alike (see isAgentTile).
     const isAgents =
       isAiSectionFolder &&
-      filesList.some((item) => item.roomType === RoomsType.AiProjectRoom);
+      filesList.some((item) => AI_TILE_ROOM_TYPES.includes(item.roomType));
 
     return {
       filesList,

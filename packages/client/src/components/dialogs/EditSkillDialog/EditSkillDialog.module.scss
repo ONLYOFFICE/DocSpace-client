@@ -55,11 +55,17 @@
     flex: 1 1 auto;
     min-height: 0;
   }
+
+  // The header of a modal keeps its own distance to the form.
+  .body {
+    padding-block: 0 8px;
+  }
 }
 
-// The form takes the dialog's whole body, so the instructions get the height
-// the other fields leave and scroll inside their editor. The dialog body is
-// the positioned box; its side padding is kept by the inline inset. Only a
+// The form takes the dialog's whole body, in the Edit skill modal and in the
+// panel of a generated skill, so the instructions get the height the other
+// fields leave and scroll inside their editor. The dialog body is the
+// positioned box; its side padding is kept by the inline inset. Only a
 // dialog too short for the fields scrolls as a whole.
 .body {
   position: absolute;
@@ -69,7 +75,7 @@
   flex-direction: column;
   gap: 16px;
   box-sizing: border-box;
-  padding-block: 0 8px;
+  padding-block: 20px 16px;
   overflow-y: auto;
 }
 

@@ -53,7 +53,6 @@ import {
   SKILL_DESCRIPTION_MAX_LENGTH,
   SKILL_TITLE_MAX_LENGTH,
   type TGenerateSkillError,
-  type TGenerateSkillResult,
 } from "@docspace/shared/api/ai/types";
 import { getFileInfo, insertFile } from "@docspace/shared/api/files";
 import type { TTranslation } from "@docspace/shared/types";
@@ -61,13 +60,19 @@ import {
   getServiceLimitChatError,
   getServiceLimitDescription,
 } from "@docspace/shared/utils/ai";
+import {
+  buildSkillFile,
+  parseSkillFile,
+  SKILL_EXTENSION,
+  toSkillName,
+  type TSkillFile,
+} from "@docspace/shared/utils/skillFile";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 
-import styles from "./GenerateSkillDialog.module.scss";
+import SkillForm from "../EditSkillDialog/SkillForm";
 
-// CodeMirror is loaded with the first generated skill, not with the panels.
-const SkillEditor = React.lazy(() => import("./SkillEditor"));
+import styles from "./GenerateSkillDialog.module.scss";
 
 const WIDTH_STORAGE_KEY = "generate-skill-panel-width";
 // The default aside width is the narrowest the panel goes.
@@ -171,10 +176,11 @@ const getGenerateError = (
 /**
  * "Create skill with AI" in an Instructions room, laid out as the metadata AI
  * panel: the user names the skill and describes it, "Generate skill" has the
- * AI service write the Markdown file, and the result opens in an editor.
- * Nothing is stored until Save, which uploads the text as edited; the Files
- * service validates its frontmatter then, and the file reaches the list
- * through the socket.
+ * AI service write the Markdown file, and the result opens in the fields of
+ * the Edit skill form, named as the user typed it. Nothing is stored until
+ * Save, which writes the skill as edited into `<name>.md`, as "New skill"
+ * does; the Files service validates its frontmatter then, and the file
+ * reaches the list through the socket.
  */
 const GenerateSkillDialog = ({
   roomId,
@@ -193,7 +199,9 @@ const GenerateSkillDialog = ({
   const [isGenerating, setIsGenerating] = React.useState(false);
   const [isSaving, setIsSaving] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [skill, setSkill] = React.useState<TGenerateSkillResult | null>(null);
+  // The generated skill as the form shows it: the name is the typed title,
+  // the file's own name is made from it again on Save.
+  const [skill, setSkill] = React.useState<TSkillFile | null>(null);
   const abortRef = React.useRef<AbortController | null>(null);
   const { width, onPointerDown } = usePanelWidth();
 
@@ -202,7 +210,11 @@ const GenerateSkillDialog = ({
   const isBusy = isGenerating || isSaving;
   const canGenerate =
     !!title.trim() && !!description.trim() && targetRoomId != null;
-  const canSave = !!skill?.content.trim() && targetRoomId != null;
+  const canSave =
+    !!skill &&
+    toSkillName(skill.name) !== "" &&
+    !!skill.description.trim() &&
+    targetRoomId != null;
 
   const onClose = () => {
     abortRef.current?.abort();
@@ -265,16 +277,18 @@ const GenerateSkillDialog = ({
     setIsGenerating(true);
 
     try {
-      setSkill(
-        await generateSkillWithAI(
-          {
-            destId: targetRoomId!,
-            title: trimmedTitle,
-            description: description.trim(),
-          },
-          abort.signal,
-        ),
+      const generated = await generateSkillWithAI(
+        {
+          destId: targetRoomId!,
+          title: trimmedTitle,
+          description: description.trim(),
+        },
+        abort.signal,
       );
+      const { description: skillDescription, body } = parseSkillFile(
+        generated.content,
+      );
+      setSkill({ name: trimmedTitle, description: skillDescription, body });
     } catch (e) {
       if (abort.signal.aborted) return;
       setError(
@@ -290,10 +304,15 @@ const GenerateSkillDialog = ({
     setIsSaving(true);
 
     try {
+      const text = buildSkillFile({
+        name: toSkillName(skill.name),
+        description: skill.description,
+        body: skill.body,
+      });
       const file = await insertFile(
         targetRoomId!,
-        `${skill.name}.md`,
-        new Blob([skill.content], { type: "text/markdown" }),
+        `${skill.name.trim()}${SKILL_EXTENSION}`,
+        new Blob([text], { type: "text/markdown" }),
       );
       setGenerateSkillDialogVisible?.(false);
       showCreated(file.id, file.title);
@@ -309,7 +328,9 @@ const GenerateSkillDialog = ({
     <ModalDialog
       visible
       displayType={ModalDialogType.aside}
-      withBodyScroll
+      // The form of a generated skill fills the body and scrolls inside its
+      // editor; the panel scrolls the fields that come before it.
+      withBodyScroll={!skill}
       withForm
       onSubmit={(e) => {
         e.preventDefault();
@@ -317,8 +338,9 @@ const GenerateSkillDialog = ({
       }}
       onClose={onClose}
       isCloseable={!isSaving}
-      // The preview hides the form; the back arrow returns to it and drops
-      // the generated text, which "Generate skill" writes anew.
+      // The generated skill hides the form it was asked for with; the back
+      // arrow returns to it and drops the skill, which "Generate skill"
+      // writes anew.
       isBackButton={!!skill}
       onBackClick={isSaving ? undefined : () => setSkill(null)}
       // `style` lands on the dialog element, below the root that resolves
@@ -337,15 +359,21 @@ const GenerateSkillDialog = ({
           data-testid="generate-skill-resizer"
         />
         {skill ? (
-          <div className={styles.body}>
-            <React.Suspense fallback={null}>
-              <SkillEditor
-                value={skill.content}
-                isDisabled={isBusy}
-                onChange={(content) => setSkill({ ...skill, content })}
-              />
-            </React.Suspense>
-          </div>
+          <SkillForm
+            name={skill.name}
+            onNameChange={(name) =>
+              setSkill((current) => current && { ...current, name })
+            }
+            description={skill.description}
+            onDescriptionChange={(value) =>
+              setSkill((current) => current && { ...current, description: value })
+            }
+            body={skill.body}
+            onBodyChange={(body) =>
+              setSkill((current) => current && { ...current, body })
+            }
+            isSaving={isBusy}
+          />
         ) : (
           <div className={styles.body}>
             <Text className={styles.description} fontSize="12px" lineHeight="16px">

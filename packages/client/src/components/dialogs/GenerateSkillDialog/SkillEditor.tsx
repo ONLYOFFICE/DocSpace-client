@@ -45,7 +45,7 @@ type SkillEditorProps = {
   value: string;
   isDisabled: boolean;
   onChange: (value: string) => void;
-  /** The least height of the editor; the generation panel's whole body by default. */
+  /** The least height of the editor; most of the window by default. */
   minHeight?: string;
   /** The height the editor scrolls past; it grows with its text without one. */
   maxHeight?: string;
@@ -84,7 +84,7 @@ const darkTheme = githubDarkInit({
   },
 });
 
-/** The generated skill as Markdown text, editable before it is saved. */
+/** A skill's text as Markdown, in the Edit skill form and its read-only view. */
 const SkillEditor = ({
   value,
   isDisabled,
@@ -111,8 +111,6 @@ const SkillEditor = ({
         editable={!isDisabled}
         readOnly={isDisabled}
         onChange={onChange}
-        // The preview is the panel's whole body: a short skill still gets
-        // the room of a long one, and a long one scrolls with the panel.
         minHeight={minHeight}
         maxHeight={maxHeight}
         height={height}

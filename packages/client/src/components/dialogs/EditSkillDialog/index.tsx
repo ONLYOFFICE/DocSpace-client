@@ -34,31 +34,23 @@
  */
 
 import React from "react";
-import type { EditorView } from "@uiw/react-codemirror";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { ModalDialog, ModalDialogType } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
-import { Label } from "@onlyoffice/apps-ui-kit/components/label";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { Textarea } from "@onlyoffice/apps-ui-kit/components/textarea";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { SKILL_DESCRIPTION_MAX_LENGTH, SKILL_TITLE_MAX_LENGTH } from "@docspace/shared/api/ai/types";
 import { insertFile, updateFile, updateFileStream } from "@docspace/shared/api/files";
 import type { TFile } from "@docspace/shared/api/files/types";
 import {
   buildSkillFile,
   parseSkillFile,
   SKILL_EXTENSION,
-  toSkillCommand,
   toSkillName,
 } from "@docspace/shared/utils/skillFile";
 
-import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
-
-import MarkdownToolbar from "./MarkdownToolbar";
-import { getMarkdownEdit, type TMarkdownAction } from "./markdown";
+import SkillForm from "./SkillForm";
 
 import styles from "./EditSkillDialog.module.scss";
 
@@ -128,19 +120,6 @@ const EditSkillDialog = ({
   );
   // The name is not called wrong before the user has changed it.
   const [isNameChanged, setIsNameChanged] = React.useState(false);
-  const editorRef = React.useRef<EditorView | null>(null);
-
-  const onFormat = (action: TMarkdownAction) => {
-    const view = editorRef.current;
-    if (!view) return;
-    const { from, to } = view.state.selection.main;
-    const edit = getMarkdownEdit(view.state.doc.toString(), from, to, action);
-    view.dispatch({
-      changes: { from: edit.from, to: edit.to, insert: edit.insert },
-      selection: { anchor: edit.anchor, head: edit.head },
-    });
-    view.focus();
-  };
 
   React.useEffect(() => {
     if (!file) return undefined;
@@ -273,69 +252,20 @@ const EditSkillDialog = ({
             {t("Common:SomethingWentWrong")}
           </Text>
         ) : (
-          <div className={styles.body}>
-            <div className={`${styles.field} ${styles.nameField}`}>
-              <InputParam
-                id="edit-skill-name"
-                title={t("Common:Name")}
-                placeholder={t("Common:EnterName")}
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH));
-                  setIsNameChanged(true);
-                }}
-                isValidTitle={isValidName || !isNameChanged}
-                errorMessage={t("Common:SkillNameNeedsLetterOrDigit")}
-                isAutoFocussed
-                isDisabled={isSaving}
-                dataTestId="edit-skill-name"
-              />
-              {isValidName ? (
-                <Text fontSize="12px" lineHeight="16px" className={styles.hint} data-testid="edit-skill-command">
-                  {`${t("Common:SkillCommandInChat")} `}
-                  <span className={styles.command}>{toSkillCommand(skillName)}</span>
-                </Text>
-              ) : null}
-            </div>
-            <div className={styles.field}>
-              <Label htmlFor="edit-skill-description" text={t("Common:DescriptionLabel")} display="display" />
-              <Textarea
-                id="edit-skill-description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                maxLength={SKILL_DESCRIPTION_MAX_LENGTH}
-                heightTextArea="72px"
-                fontSize={13}
-                isDisabled={isLoading || isSaving}
-                dataTestId="edit-skill-description"
-              />
-              <Text fontSize="12px" lineHeight="16px" className={styles.hint}>
-                {t("Common:SkillDescriptionHint")}
-              </Text>
-            </div>
-            <div className={`${styles.field} ${styles.fieldFill}`}>
-              <Label text={t("Common:SkillInstructions")} display="display" />
-              <div className={styles.instructions}>
-                <MarkdownToolbar isDisabled={isLoading || isSaving} onAction={onFormat} />
-                {isLoading ? null : (
-                  <React.Suspense fallback={null}>
-                    <SkillEditor
-                      value={body}
-                      isDisabled={isSaving}
-                      onChange={setBody}
-                      minHeight="0"
-                      height="100%"
-                      className={styles.editorFill}
-                      withLineNumbers={false}
-                      onCreateEditor={(view) => {
-                        editorRef.current = view;
-                      }}
-                    />
-                  </React.Suspense>
-                )}
-              </div>
-            </div>
-          </div>
+          <SkillForm
+            name={name}
+            onNameChange={(value) => {
+              setName(value);
+              setIsNameChanged(true);
+            }}
+            isNameChanged={isNameChanged}
+            description={description}
+            onDescriptionChange={setDescription}
+            body={body}
+            onBodyChange={setBody}
+            isLoading={isLoading}
+            isSaving={isSaving}
+          />
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>

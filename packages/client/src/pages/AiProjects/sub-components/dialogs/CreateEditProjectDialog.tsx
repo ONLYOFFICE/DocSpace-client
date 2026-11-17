@@ -471,7 +471,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               withSearch
               withHeader
               headerProps={{
-                headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t("Common:InstructionsRooms") : t("Common:AIProjectKnowledgeRooms"),
+                headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t("Common:SkillSets") : t("Common:AIProjectKnowledgeRooms"),
                 onCloseClick: () => setSelector(null),
                 onBackClick: () => setSelector(null),
                 withoutBackButton: false,
@@ -488,7 +488,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
           </ModalDialog.Container>
         ) : null}
         <ModalDialog.Header>
-          {project ? t("Common:AIProjectEditTitle") : t("Common:AIProjectCreateTitle")}
+          {project ? t("Common:EditAgent") : t("Common:CreateAgent")}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.body}>
@@ -509,7 +509,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               />
               <InputParam
                 id="ai-project-title"
-                title={`${t("Common:Label")}:`}
+                title={`${t("Common:AgentName")}:`}
                 placeholder={t("Common:EnterName")}
                 value={title}
                 onChange={(e) => {
@@ -551,7 +551,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                 {t("Common:AIProjectModelHint")}
               </Text>
             </div>
-            {roomsBlock(t("Common:InstructionsRooms"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
+            {roomsBlock(t("Common:SkillSets"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
             {roomsBlock(t("Common:AIProjectKnowledgeRooms"), t("Common:AIProjectKnowledgeHint"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}
             {project?.createdBy ? (
               <div className={styles.owner}>
@@ -559,7 +559,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                   roomOwner={project.createdBy as never}
                   canChangeOwner={project.security.ChangeOwner}
                   onOwnerChange={onOwnerChange}
-                  label={t("Common:AIProjectOwner")}
+                  label={t("Common:AgentOwner")}
                 />
               </div>
             ) : null}

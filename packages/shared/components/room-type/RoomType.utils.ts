@@ -67,7 +67,7 @@ export const getRoomTypeTitleTranslation = (
     case RoomsType.KnowledgeRoom:
       return t("Common:KnowledgeRoomTitle");
     case RoomsType.AiProjectRoom:
-      return t("Common:AIProjectRoomTitle");
+      return t("Common:AIAgent");
     default:
       return "";
   }

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   generateIdentityKeyPair,
@@ -347,6 +347,80 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
       "mobile",
       "keys-management",
       "passphrase-create.png",
+    ]);
+  });
+
+  const boxOf = async (locator: Locator) => {
+    const box = await locator.boundingBox();
+    expect(box).not.toBeNull();
+    return box!;
+  };
+
+  type Box = Awaited<ReturnType<typeof boxOf>>;
+
+  const overlaps = (a: Box, b: Box) =>
+    a.x < b.x + b.width &&
+    b.x < a.x + a.width &&
+    a.y < b.y + b.height &&
+    b.y < a.y + a.height;
+
+  // The title, the hint, the generate action and the actions of the dialog.
+  const dialogTexts = (dialog: Locator) => [
+    dialog.getByText("Create passphrase", { exact: true }),
+    dialog.getByText(
+      "Create a strong passphrase to protect your encryption key.",
+      { exact: false },
+    ),
+    dialog.getByTestId("generate_passphrase_link"),
+    dialog.getByRole("button", { name: "Continue" }),
+    dialog.getByRole("button", { name: "Cancel" }),
+  ];
+
+  const openRulesTooltip = async (page: Page, baseUrl: string) => {
+    const dialog = await openPassphraseDialog(page, baseUrl);
+    await dialog.getByLabel("Passphrase", { exact: true }).fill("abc");
+    const tooltip = page
+      .locator(".__react_component_tooltip")
+      .filter({ hasText: "Passphrase must contain" });
+    await expect(tooltip).toBeVisible({ timeout: 5_000 });
+    return { dialog, tooltip };
+  };
+
+  test("Rules shown while typing", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    const { dialog, tooltip } = await openRulesTooltip(page, baseUrl);
+    const tooltipBox = await boxOf(tooltip);
+
+    for (const covered of [
+      ...dialogTexts(dialog),
+      // The passphrase field with its reveal button.
+      dialog.locator("#tooltipContent-passphrase"),
+      dialog.getByLabel("Confirm passphrase", { exact: true }),
+    ]) {
+      expect(overlaps(tooltipBox, await boxOf(covered))).toBe(false);
+    }
+    await expectScreenshot(page, [
+      "desktop",
+      "keys-management",
+      "passphrase-rules-tooltip.png",
+    ]);
+  });
+
+  test("Narrow screen", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.setViewportSize(MOBILE);
+    const { dialog, tooltip } = await openRulesTooltip(page, baseUrl);
+    const tooltipBox = await boxOf(tooltip);
+
+    const field = await boxOf(dialog.getByLabel("Passphrase", { exact: true }));
+    expect(tooltipBox.y).toBeGreaterThanOrEqual(field.y + field.height);
+    for (const covered of dialogTexts(dialog)) {
+      expect(overlaps(tooltipBox, await boxOf(covered))).toBe(false);
+    }
+    await expectScreenshot(page, [
+      "mobile",
+      "keys-management",
+      "passphrase-rules-tooltip.png",
     ]);
   });
 

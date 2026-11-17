@@ -94,6 +94,9 @@ type PassphraseModalProps = {
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
 
+// Spec: private-rooms/key-management, "The passphrase rules tooltip leaves the dialog readable"
+export const RULES_TOOLTIP_PLACE = "right";
+
 export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   visible,
   onSubmit,
@@ -292,6 +295,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
                   tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
                   tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
+                  tooltipPasswordPlace={RULES_TOOLTIP_PLACE}
                   isDisabled={isLoading}
                   hasError={passphraseHasError}
                   isAutoFocussed

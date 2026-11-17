@@ -353,7 +353,7 @@ const GenerateSkillDialog = ({
             </Text>
             <InputParam
               id="generate-skill-title"
-              title={`${t("Common:Name")}:`}
+              title={t("Common:Name")}
               placeholder={t("Common:EnterName")}
               value={title}
               onChange={(e) => {
@@ -369,7 +369,7 @@ const GenerateSkillDialog = ({
             <div className={styles.field}>
               <Label
                 htmlFor="generate-skill-description"
-                text={`${t("Common:DescriptionLabel")}:`}
+                text={t("Common:DescriptionLabel")}
                 display="display"
               />
               <Textarea

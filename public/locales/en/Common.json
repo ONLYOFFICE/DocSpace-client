@@ -1905,6 +1905,7 @@
   "PromoCodePending": "<1>{{amount}}</1> in promo credits will be added to your wallet shortly.",
   "PromoCodePlaceholder": "Enter your promo code",
   "PromoCodeTooManyAttempts": "Too many attempts. Try again later.",
+  "PromoCodeUnconfirmed": "Could not confirm the code. Try again later.",
   "PromoCredits": "Promo",
   "PromoCreditsExpiresIn": "Expires {{date}} (in {{remaining}})",
   "PromoCreditsExpireWarning": "<1>{{amount}} of promo credits expire on {{date}}.</1> Unused promo credits are written off and cannot be refunded.",

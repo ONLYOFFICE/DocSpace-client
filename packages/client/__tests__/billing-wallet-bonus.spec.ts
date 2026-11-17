@@ -448,7 +448,7 @@ test.describe("Billing wallet: promo credits", () => {
     await expect(page.getByTestId("promo_tab")).toHaveCount(0);
   });
 
-  test("a portal billing does not know yet is asked to link a payment method", async ({
+  test("a code billing could not confirm asks to check the promo credits", async ({
     page,
     baseUrl,
     mockRequest,
@@ -463,7 +463,9 @@ test.describe("Billing wallet: promo credits", () => {
     await page.getByTestId("wallet_promo_code_input").fill("WELCOME10");
     await page.getByTestId("wallet_promo_code_input").press("Enter");
 
-    await expect(page.getByText("Link a payment method first.")).toBeVisible();
+    await expect(
+      page.getByText("Could not confirm the code. Try again later."),
+    ).toBeVisible();
     await expect(page.getByTestId("wallet_promo_code_input")).toHaveValue(
       "WELCOME10",
     );

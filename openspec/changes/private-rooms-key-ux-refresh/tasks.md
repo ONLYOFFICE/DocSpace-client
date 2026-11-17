@@ -31,7 +31,7 @@ and SDK unit tests must stay green.
 
 ## 5. Locked-key block
 
-- [ ] 5.1 Replace `packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx` with the block: illustration, `Common:PrivateRoomLockedBarTitle`, `Common:PrivateRoomLockedBarText`, the primary `Common:UnlockKey`, `Common:ForgotPassphrase`, under the same conditions as the bar and above the file list. Verify: the test of the bar rewritten for the block with every scenario of "A locked key is reported by a block in a private room" and of "File names stay as stored while the key is locked"
+- [x] 5.1 Replace `packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx` with the block: illustration, `Common:PrivateRoomLockedBarTitle`, `Common:PrivateRoomLockedBarText`, the primary `Common:UnlockKey`, `Common:ForgotPassphrase`, under the same conditions as the bar and above the file list. Verify: the test of the bar rewritten for the block with every scenario of "A locked key is reported by a block in a private room" and of "File names stay as stored while the key is locked"
 - [ ] 5.2 Show the block in place of the empty view in a private room without files while the key is locked. Verify: a unit case "Room without files" and a Playwright case in `packages/client/__tests__/private-rooms-section.spec.ts`
 - [ ] 5.3 Update the screenshots of the specs that show a locked private room. Verify: `private-room-access.spec.ts`, `private-rooms-section.spec.ts` and `encrypted-file-ui.spec.ts` pass under Docker and the screenshot diff holds only the block
 

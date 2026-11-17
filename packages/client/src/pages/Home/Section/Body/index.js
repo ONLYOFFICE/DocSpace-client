@@ -57,7 +57,7 @@ import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import ClientSearchProgress from "./ClientSearchProgress";
 import KnowledgeVectorizationBar from "./KnowledgeVectorizationBar";
-import PrivateRoomLockedBar from "./PrivateRoomLockedBar";
+import PrivateRoomLockedBlock from "./PrivateRoomLockedBlock";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
@@ -546,7 +546,7 @@ const SectionBodyContent = (props) => {
     return (
       <>
         <KnowledgeVectorizationBar />
-        <PrivateRoomLockedBar />
+        <PrivateRoomLockedBlock />
         <EmptyContainer isEmptyPage={isEmptyPage} />
       </>
     );
@@ -557,7 +557,7 @@ const SectionBodyContent = (props) => {
   return (
     <>
       <KnowledgeVectorizationBar />
-      <PrivateRoomLockedBar />
+      <PrivateRoomLockedBlock />
       <ClientSearchProgress />
       {/* Where the list is for useRowFocus in every layout: the mobile one
           has no section scroller to find it by. No box of its own, so the

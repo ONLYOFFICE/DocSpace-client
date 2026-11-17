@@ -25,16 +25,69 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
+.block {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-block: 4px 16px;
+  padding: 16px 24px;
+  border: 1px solid var(--border-service-color);
+  border-radius: 6px;
+  background-color: var(--background-color);
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+  }
+}
+
+.illustration {
+  flex-shrink: 0;
+  display: flex;
+
+  svg {
+    width: 150px;
+    height: 105px;
+  }
+
+  @include mixins.mobile {
+    justify-content: center;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.text {
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
 // Without the quick-actions banner the table header is fixed and the table
-// pulls itself 25px up, to sit right under the filter above the list. A bar
+// pulls itself 25px up, to sit right under the filter above the list. A block
 // between the two is then covered along its bottom edge, and once the list
-// scrolls the header stays under the place the bar left, with the rows
-// showing above it. Next to the bar the header sticks to the top of the list
+// scrolls the header stays under the place the block left, with the rows
+// showing above it. Next to the block the header sticks to the top of the list
 // instead, as the section's own sticky mode does it; with the banner shown
 // these rules repeat that mode. Without it the header rests where the fixed
 // one does: 6px under the bottom of the 109px block of the section header
 // and the filter, which the table view shows on desktop widths only.
-.bar ~ [data-files-list] {
+.block ~ [data-files-list] {
   :global(.table-container_header) {
     position: sticky;
     top: var(--section-filter-bottom, 103px);

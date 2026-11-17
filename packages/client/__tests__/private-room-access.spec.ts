@@ -250,7 +250,7 @@ test.describe("A locked key is shown in a private room", () => {
     );
   });
 
-  test("Prompt cancelled on entry, then Unlock from the bar cancelled", async ({
+  test("Prompt cancelled on entry, then Unlock from the block cancelled", async ({
     page,
     mockRequest,
     baseUrl,
@@ -276,27 +276,27 @@ test.describe("A locked key is shown in a private room", () => {
     const passphrase = page
       .locator('input[name="passphrase"], #passphrase input')
       .first();
-    const bar = page.getByTestId("private_room_locked_bar");
+    const block = page.getByTestId("private_room_locked_block");
     const cancel = page.getByRole("button", { name: "Cancel" });
 
     // Entry prompt open
     await expect(passphrase).toBeVisible({ timeout: 15000 });
-    await expect(bar).toHaveCount(0);
+    await expect(block).toHaveCount(0);
 
     await cancel.click();
 
     await expect(passphrase).toBeHidden();
-    await expect(bar).toBeVisible();
-    await expect(bar).toContainText("Your encryption key is locked");
+    await expect(block).toBeVisible();
+    await expect(block).toContainText("Your encryption key is locked");
 
-    await page.getByTestId("private_room_locked_bar_unlock").click();
+    await page.getByTestId("private_room_locked_block_unlock").click();
 
     await expect(passphrase).toBeVisible();
 
     await cancel.click();
 
     await expect(passphrase).toBeHidden();
-    await expect(bar).toBeVisible();
+    await expect(block).toBeVisible();
   });
 
   test("Subfolder after a cancelled prompt", async ({
@@ -321,11 +321,11 @@ test.describe("A locked key is shown in a private room", () => {
     const passphrase = page
       .locator('input[name="passphrase"], #passphrase input')
       .first();
-    const bar = page.getByTestId("private_room_locked_bar");
+    const block = page.getByTestId("private_room_locked_block");
 
     await expect(passphrase).toBeVisible({ timeout: 15000 });
     await page.getByRole("button", { name: "Cancel" }).click();
-    await expect(bar).toBeVisible();
+    await expect(block).toBeVisible();
 
     const folderOpened = page.waitForResponse(
       (res) =>
@@ -336,7 +336,7 @@ test.describe("A locked key is shown in a private room", () => {
     await folderOpened;
 
     await expect(page).toHaveURL(new RegExp(`folder=${SUBFOLDER_ID}`));
-    await expect(bar).toBeVisible();
+    await expect(block).toBeVisible();
     await expect(passphrase).toBeHidden();
   });
 
@@ -358,7 +358,7 @@ test.describe("A locked key is shown in a private room", () => {
     await expect(
       page.getByTestId("toast-content").filter({ hasText: TOAST_KEY_FRAGMENT }),
     ).toBeVisible({ timeout: 15000 });
-    await expect(page.getByTestId("private_room_locked_bar")).toHaveCount(0);
+    await expect(page.getByTestId("private_room_locked_block")).toHaveCount(0);
   });
 });
 

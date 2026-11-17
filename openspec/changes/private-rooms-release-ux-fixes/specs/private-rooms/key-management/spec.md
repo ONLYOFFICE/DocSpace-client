@@ -18,11 +18,11 @@ The system SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStreng
 - **THEN** its strength line shows Common:PassphraseStrengthWeak
 
 ### Requirement: The passphrase rules tooltip leaves the dialog readable
-The system SHALL show the rules a new passphrase must meet in the tooltip of the passphrase field, as the other password forms of the product do. On a wide screen the tooltip SHALL open beside the dialog and cover none of it; on a narrow screen it SHALL open below the passphrase field and SHALL NOT cover the title, the hint, Common:GenerateLogoButton or the actions of the dialog.
+The system SHALL show the rules a new passphrase must meet in the tooltip of the passphrase field, as the other password forms of the product do. On a wide screen the tooltip SHALL open beside the passphrase field and cover none of the texts, fields and actions of the dialog; on a narrow screen it SHALL open below the passphrase field and SHALL NOT cover the title, the hint, Common:GenerateLogoButton or the actions of the dialog.
 
 #### Scenario: Rules shown while typing
 - **WHEN** the user types in the passphrase field of the creation dialog on a wide screen
-- **THEN** the rules tooltip lies outside the dialog, and the hint and Common:GenerateLogoButton stay visible and can be used
+- **THEN** the rules tooltip covers neither the title, the hint, Common:GenerateLogoButton, the passphrase field with its reveal button, the confirmation field nor the actions
 
 #### Scenario: Narrow screen
 - **WHEN** the same happens in the aside presentation on a narrow screen

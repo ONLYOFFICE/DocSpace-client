@@ -61,8 +61,15 @@ password change, registration and activation pages of login and the
 password of a shared link. The kit's input opens that tooltip above the
 field, over the hint and the generate action. The kit gains an optional
 property for that placement, defaulting to the top, so the other forms do
-not change, and the key dialogs ask for the right side. On a wide screen the
-dialog leaves room there and the tooltip covers nothing of it. Where there
+not change, and the key dialogs ask for the right side. The kit anchored the
+tooltip to the bare text field, so on the right side it opened over the
+reveal button of the field and inside the dialog (measured by the Playwright
+case of task 1.3: field ending at x 878, tooltip starting at x 882, dialog
+ending at x 920). The kit therefore anchors it to the whole field, reveal
+button included; on a wide screen it then starts past the field and covers
+at most the empty right padding of the dialog, none of its texts, fields or
+actions. The owner chose that on 2026-11-17 over an offset tied to the
+dialog's layout and over the bottom side on every screen. Where there
 is no room, in the aside on a narrow screen or on a tablet, the flip
 middleware of the kit's `Tooltip` (`components/tooltip/index.tsx`, whose
 first fallback after the right side is the bottom) moves it below the

@@ -348,6 +348,21 @@ describe("PassphraseModal", () => {
       );
     });
 
+    it("Generated characters", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      for (let round = 0; round < 30; round += 1) {
+        await generate(user);
+        const generated = getPassphraseInput().value;
+
+        expect(generated).toHaveLength(12);
+        expect(generated).toMatch(/[A-Z]/);
+        expect(generated).toMatch(/\d/);
+        expect(generated).toMatch(/[!@#$%^&*]/);
+      }
+    });
+
     it("Edit after generating", async () => {
       const user = userEvent.setup();
       renderModal({ isNew: true });

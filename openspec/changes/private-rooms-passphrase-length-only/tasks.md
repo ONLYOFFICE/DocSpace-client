@@ -11,7 +11,7 @@ tests must stay green. No locale key is added or changed.
 ## 2. Rules of a new passphrase
 
 - [x] 2.1 Switch the capital letter, the digit and the punctuation off in `PASSPHRASE_SETTINGS` of `packages/shared/services/encryption/passphrase-strength.ts`, reduce `checkPassphraseRules` to the length, export the generator settings with today's values, and pass them from `packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx`; drop the tooltip texts of the removed rules from that dialog and from `KeyRotationDialog.tsx`. Verify: cases named after the scenarios of "A new passphrase needs no particular characters" and "The strength grade does not contradict the passphrase rules" in `services/encryption/__tests__/passphrase-strength.test.ts`, `dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx` and `keys-management/modals/__tests__/KeyRotationDialog.test.tsx`, with the cases that expected the composition rules rewritten to these scenarios
-- [ ] 2.2 Keep the generated passphrase as it is. Verify: a case "Generated characters" in `PassphraseModal.test.tsx` that generates many times and asserts 12 characters with a Latin capital letter, a digit and a punctuation character each time, and the cases of "A generated passphrase fills both fields" unchanged
+- [x] 2.2 Keep the generated passphrase as it is. Verify: a case "Generated characters" in `PassphraseModal.test.tsx` that generates many times and asserts 12 characters with a Latin capital letter, a digit and a punctuation character each time, and the cases of "A generated passphrase fills both fields" unchanged
 
 ## 3. End to end
 

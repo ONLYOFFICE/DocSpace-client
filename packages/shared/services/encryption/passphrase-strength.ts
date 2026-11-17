@@ -197,36 +197,21 @@ export function isPassphraseAcceptable(
   return result.strength !== "weak";
 }
 
-export type PassphraseRules = {
-  length: boolean;
-  capital: boolean;
-  digits: boolean;
-  special: boolean;
-};
-
-const CAPITAL_RULE = new RegExp(PASSPHRASE_SETTINGS.upperCaseRegexStr);
-const DIGITS_RULE = new RegExp(PASSPHRASE_SETTINGS.digitsRegexStr);
-const SPECIAL_RULE = new RegExp(PASSPHRASE_SETTINGS.specSymbolsRegexStr);
+const COMPOSITION_RULES: ReadonlyArray<RegExp> = [
+  PASSPHRASE_SETTINGS.upperCaseRegexStr,
+  PASSPHRASE_SETTINGS.digitsRegexStr,
+  PASSPHRASE_SETTINGS.specSymbolsRegexStr,
+].map((rule) => new RegExp(rule));
 
 /**
- * Which length and composition rules a new passphrase meets, checked as the
- * kit's password input checks them with PASSPHRASE_SETTINGS.
+ * Whether a new passphrase meets the length, the composition and the
+ * common-pattern rule, checked as the kit's password input checks the first
+ * two with PASSPHRASE_SETTINGS.
  */
-export function checkPassphraseRules(passphrase: string): PassphraseRules {
-  return {
-    length: passphrase.trim().length >= PASSPHRASE_SETTINGS.minLength,
-    capital: CAPITAL_RULE.test(passphrase),
-    digits: DIGITS_RULE.test(passphrase),
-    special: SPECIAL_RULE.test(passphrase),
-  };
-}
-
-/** Whether a new passphrase meets the length, composition and common-pattern rules. */
 export function meetsPassphraseRules(passphrase: string): boolean {
-  const rules = checkPassphraseRules(passphrase);
-  return (
-    Object.values(rules).every(Boolean) && !containsCommonPattern(passphrase)
-  );
+  if (passphrase.trim().length < PASSPHRASE_SETTINGS.minLength) return false;
+  if (!COMPOSITION_RULES.every((rule) => rule.test(passphrase))) return false;
+  return !containsCommonPattern(passphrase);
 }
 
 // Spec: private-rooms/key-management, "The strength grade does not contradict the passphrase rules"

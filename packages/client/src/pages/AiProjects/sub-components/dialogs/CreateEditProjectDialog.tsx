@@ -405,6 +405,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               <IconButton
                 iconName={CrossReactSvgUrl}
                 size={12}
+                title={t("Common:RemoveSource", { name: room.title })}
+                ariaLabel={t("Common:RemoveSource", { name: room.title })}
                 onClick={() => setRooms(rooms.filter((r) => r.id !== room.id))}
                 dataTestId="ai-project-remove-room"
               />

@@ -72,6 +72,9 @@ import { createLoader } from "@docspace/shared/utils/createLoader";
 import type AiPresetsStore from "./AiPresetsStore";
 import { toAiPreset } from "./AiPresetsStore";
 
+/** The Skill sets connected and disconnected in the chat's composer. */
+type TSkillRoomsChange = { added: { id: string }[]; removed: string[] };
+
 export type TProjectDialogState =
   | { mode: "create" }
   | { mode: "edit"; project: TAiProject };
@@ -257,9 +260,31 @@ class AiProjectsStore {
    * project the one before it left. Resolves to `false` when nothing was
    * saved.
    */
-  changeActiveSkillRooms = (change: { added: { id: string }[]; removed: string[] }): Promise<boolean> => {
+  changeActiveSkillRooms = (change: TSkillRoomsChange): Promise<boolean> =>
+    this.queueSkillRoomsSave(() => Promise.resolve(this.activeProject), change);
+
+  /**
+   * The same for an agent picked in the chat panel, which is not the open
+   * project: the agent is read first, so the change starts from what the
+   * server has, and the picked agent then follows the saved one.
+   */
+  changeSkillRooms = (id: number, change: TSkillRoomsChange): Promise<boolean> =>
+    this.queueSkillRoomsSave(async () => {
+      if (this.activeProject?.id === id) return this.activeProject;
+      try {
+        return await getAiProject(id);
+      } catch (e) {
+        toastr.error(errorMessage(e));
+        return null;
+      }
+    }, change);
+
+  private queueSkillRoomsSave = (
+    read: () => Promise<TAiProject | null>,
+    change: TSkillRoomsChange,
+  ): Promise<boolean> => {
     const save = this.skillRoomsSaves.then(async () => {
-      const current = this.activeProject;
+      const current = await read();
       if (!current?.aiProject.canEditSettings) return false;
       const { instructionsRooms, knowledgeRooms } = current.aiProject;
       const removed = new Set(change.removed.map(Number));
@@ -281,7 +306,8 @@ class AiProjectsStore {
         );
         showWarnings(project);
         runInAction(() => this.replaceProject(project));
-        if (this.activeProject?.id === current.id) this.syncPreset(project);
+        if (this.activeProject?.id === current.id || this.aiPresetsStore.activePreset?.id === String(current.id))
+          this.syncPreset(project);
         return true;
       } catch (e) {
         toastr.error(errorMessage(e));

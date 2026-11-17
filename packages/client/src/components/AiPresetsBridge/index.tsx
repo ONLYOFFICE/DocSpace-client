@@ -42,6 +42,8 @@ import { reaction } from "mobx";
 import type {
   AiChatAgentAction,
   AiChatAgentPickerItem,
+  AiChatSkillRoomsChange,
+  AiChatSourcesManager,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -110,6 +112,11 @@ type AiPresetsBridgeProps = {
   requestAiChatPage: (page: "chat" | "history", afterLocationKey?: string | null) => void;
   /** Opens the edit form of a project, read first. */
   openEditAiProject: (id: number) => void | Promise<void>;
+  /**
+   * Saves a change of the Skill sets made in the chat to the project;
+   * resolves to `false` when nothing was saved.
+   */
+  changeAgentSkillRooms: (id: number, change: AiChatSkillRoomsChange) => Promise<boolean>;
   /** Opens the invite panel of a room. */
   inviteToRoom: (roomId: number, roomType: RoomsType) => void;
   /**
@@ -155,6 +162,7 @@ const AiPresetsBridge = ({
   openProjectId,
   requestAiChatPage,
   openEditAiProject,
+  changeAgentSkillRooms,
   inviteToRoom,
   selectForInfoPanel,
   setInfoPanelView,
@@ -402,6 +410,48 @@ const AiPresetsBridge = ({
     canDeleteAgent,
   ]);
 
+  // A picked agent's Skill sets and Knowledge bases are its settings, as on
+  // its page (AiProjectView): the composer lists them as they are, "Manage
+  // ..." opens the agent's form and a Skill set changed in the slash menu is
+  // saved to the agent - for those who may edit it. A member gets the lists
+  // with no remove control and no Manage row, and no one may drop a
+  // knowledge base from the chat alone. When a save fails, the chat goes
+  // back to the rooms the agent has. Cleared only while it is this one: the
+  // agent's page sets its own.
+  React.useEffect(() => {
+    if (isInsideOpenProject || activeAgentId === null) return undefined;
+    const id = Number(activeAgentId);
+    const manager: AiChatSourcesManager = {
+      onManage: canEditAgent ? () => void openEditAiProject(id) : null,
+      onSkillRoomsChange: canEditAgent
+        ? (change) => {
+            void changeAgentSkillRooms(id, change).then((saved) => {
+              const preset = aiPresetsStore.activePreset;
+              if (saved || preset?.id !== String(id)) return;
+              aiChatStore.applyPreset({
+                profileId: preset.profileId,
+                profileName: preset.profileName,
+                contextRooms: preset.contextRooms,
+                knowledgeRooms: preset.knowledgeRooms,
+              });
+            });
+          }
+        : undefined,
+    };
+    aiChatStore.setSourcesManager(manager);
+    return () => {
+      if (aiChatStore.sourcesManager === manager) aiChatStore.setSourcesManager(null);
+    };
+  }, [
+    aiChatStore,
+    aiPresetsStore,
+    openEditAiProject,
+    changeAgentSkillRooms,
+    isInsideOpenProject,
+    activeAgentId,
+    canEditAgent,
+  ]);
+
   // The agent deleted from the panel: the chat goes back to the default one.
   const onDeleteAgent = async () => {
     if (!agentToDelete) return;
@@ -552,6 +602,7 @@ export default inject(
   openProjectId: aiProjectsStore.activeProject ? String(aiProjectsStore.activeProject.id) : null,
   requestAiChatPage: dialogsStore.requestAiChatPage,
   openEditAiProject: aiProjectsStore.openEditDialogById,
+  changeAgentSkillRooms: aiProjectsStore.changeSkillRooms,
   inviteToRoom: contextOptionsStore.onClickInviteUsers,
   // The Info panel shows the list's selection: the agent takes its place.
   selectForInfoPanel: (room: ReturnType<typeof aiProjectToRoom> | null) => {

@@ -367,6 +367,36 @@ describe("AiProjectsStore", () => {
       expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
     });
 
+    it("saves a Skill sets change of an agent picked in the chat panel from the agent as the server has it", async () => {
+      const store = createStore();
+      const picked = { ...presets, activePreset: { id: "7" } };
+      const panelStore = new AiProjectsStore(picked as unknown as AiPresetsStore, userStore);
+      api.getAiProject.mockResolvedValueOnce(project(7));
+      api.updateAiProject.mockResolvedValueOnce(
+        project(7, "Project 7", {
+          aiProject: { ...project(7).aiProject, instructionsRooms: [] } as TAiProject["aiProject"],
+        }),
+      );
+
+      expect(await panelStore.changeSkillRooms(7, { added: [], removed: ["12"] })).toBe(true);
+      expect(api.getAiProject).toHaveBeenCalledWith(7);
+      expect(api.updateAiProject.mock.calls[0][1].aiProject.instructionsRoomIds).toEqual([]);
+      // The picked agent follows the saved one.
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "7", contextRooms: [] }));
+
+      // An agent the user may not change is not saved, nor one that cannot be read.
+      api.getAiProject.mockResolvedValueOnce(
+        project(8, "Project 8", {
+          aiProject: { ...project(8).aiProject, canEditSettings: false } as TAiProject["aiProject"],
+        }),
+      );
+      expect(await store.changeSkillRooms(8, { added: [], removed: ["12"] })).toBe(false);
+      api.getAiProject.mockRejectedValueOnce(new Error("gone"));
+      expect(await store.changeSkillRooms(9, { added: [], removed: ["12"] })).toBe(false);
+      expect(toastr.error).toHaveBeenCalled();
+      expect(api.updateAiProject).toHaveBeenCalledTimes(1);
+    });
+
     it("drops the uploaded logo after an update that removed it", async () => {
       const store = createStore();
       api.updateAiProject.mockResolvedValue(project(1));

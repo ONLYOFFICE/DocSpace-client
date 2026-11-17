@@ -58,6 +58,7 @@ vi.mock("../DeleteAgentDialog", () => ({
 }));
 
 const openEditAiProject = vi.fn();
+const changeSkillRooms = vi.fn();
 const inviteToRoom = vi.fn();
 const requestAiChatPage = vi.fn();
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
@@ -81,11 +82,20 @@ class FakeAiChatStore {
 
   agentActions: { id: string; label: string; isDanger?: boolean; onClick: () => void }[] | null = null;
 
+  sourcesManager: {
+    onManage: (() => void) | null;
+    onSkillRoomsChange?: (change: { added: { id: string; name: string }[]; removed: string[] }) => void;
+  } | null = null;
+
   applyPreset = vi.fn();
 
   constructor() {
-    makeAutoObservable(this, { applyPreset: false, agentPicker: false, agentActions: false });
+    makeAutoObservable(this, { applyPreset: false, agentPicker: false, agentActions: false, sourcesManager: false });
   }
+
+  setSourcesManager = (manager: FakeAiChatStore["sourcesManager"]) => {
+    this.sourcesManager = manager;
+  };
 
   setAgentActions = (actions: FakeAiChatStore["agentActions"]) => {
     this.agentActions = actions;
@@ -213,7 +223,12 @@ const renderBridge = (
     <MemoryRouter initialEntries={[path]}>
       <Provider
         aiPresetsStore={aiPresetsStore}
-        aiProjectsStore={{ activeProject, openEditDialogById: openEditAiProject, setPortalHasChatModel }}
+        aiProjectsStore={{
+          activeProject,
+          openEditDialogById: openEditAiProject,
+          changeSkillRooms,
+          setPortalHasChatModel,
+        }}
         contextOptionsStore={{ onClickInviteUsers: inviteToRoom }}
         dialogsStore={{ requestAiChatPage }}
         filesStore={{ setSelection, setBufferSelection }}
@@ -650,6 +665,47 @@ describe("AiPresetsBridge", () => {
       );
       expect(aiChatStore.agentActions).toBeNull();
       expect(screen.queryByTestId("delete-agent-dialog")).toBeNull();
+    });
+
+    it("make the agent the owner of the chat's sources, managed by its form for an Agent manager", async () => {
+      const store = new AiPresetsStore();
+      await pick(store, withRights({ EditAccess: true }, true));
+      const manager = aiChatStore.sourcesManager;
+      expect(manager).not.toBeNull();
+
+      act(() => manager?.onManage?.());
+      expect(openEditAiProject).toHaveBeenCalledWith(1);
+
+      // A Skill set changed in the slash menu is saved to the agent.
+      changeSkillRooms.mockResolvedValue(true);
+      aiChatStore.applyPreset.mockClear();
+      await act(async () => manager?.onSkillRoomsChange?.({ added: [], removed: ["12"] }));
+      expect(changeSkillRooms).toHaveBeenCalledWith(1, { added: [], removed: ["12"] });
+      expect(aiChatStore.applyPreset).not.toHaveBeenCalled();
+
+      // A refused save takes the chat back to the rooms the agent has.
+      changeSkillRooms.mockResolvedValue(false);
+      await act(async () => manager?.onSkillRoomsChange?.({ added: [], removed: ["12"] }));
+      expect(aiChatStore.applyPreset).toHaveBeenLastCalledWith(
+        expect.objectContaining({ contextRooms: [{ cloud: "docspace", id: "12", name: "Skills" }] }),
+      );
+
+      // The default agent picked: the chat's sources are its own again.
+      act(() => aiChatStore.agentPicker?.onSelect(null));
+      expect(aiChatStore.sourcesManager).toBeNull();
+    });
+
+    it("give a member the agent's sources with nothing to manage or remove", async () => {
+      await pick(new AiPresetsStore(), withRights({ EditAccess: false }, false));
+      expect(aiChatStore.sourcesManager).toEqual({ onManage: null, onSkillRoomsChange: undefined });
+    });
+
+    it("leave the sources to the agent's page while it is open", async () => {
+      const store = new AiPresetsStore();
+      renderBridge(store, { path: "/ai-rooms/1/filter", activeProject: { id: 1 } });
+      await flush();
+      act(() => store.setActivePreset(toAiPreset(project(1, "Sales"))));
+      expect(aiChatStore.sourcesManager).toBeNull();
     });
 
     it("keep the agent and the dialog when the delete is refused", async () => {

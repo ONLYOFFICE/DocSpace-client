@@ -3,11 +3,11 @@
 ## ADDED Requirements
 
 ### Requirement: People without a key are marked before the invitation is sent
-The system SHALL mark, in the people list of the invite panel of a private room, each listed person who has no registered encryption key with Common:NoEncryptionKeyMark and an explanation (Common:NoEncryptionKeyMarkHint) that the person cannot be invited until they create a key. A person who holds a key SHALL carry no mark. The mark SHALL be a text, not colour alone. A marked person SHALL stay selectable, and what follows the sending is unchanged.
+The system SHALL mark, in the people list of the invite panel of a private room, each listed person who has no registered encryption key with Common:NoKey and an explanation (Common:NoEncryptionKeyMarkHint) that the person cannot be invited until they create a key. A person who holds a key SHALL carry no mark. The mark SHALL be a text, not colour alone. A marked person SHALL stay selectable, and what follows the sending is unchanged.
 
 #### Scenario: Person without a key
 - **WHEN** the people list of a private room's invite panel shows a person who has no registered key
-- **THEN** the row carries Common:NoEncryptionKeyMark
+- **THEN** the row carries Common:NoKey
 
 #### Scenario: Person with a key
 - **WHEN** the list shows a person who holds a key

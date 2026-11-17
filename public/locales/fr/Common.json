@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Empreinte de la clé",
   "KeyFingerprintHint": "Vos collègues peuvent vous demander cette empreinte pour confirmer que votre clé a changé.",
   "KeyId": "Identifiant de la clé",
+  "KeySetupDiscardRecovery": "Si vous fermez maintenant la configuration de la clé, la phrase de récupération affichée ici ne sera pas valide. Vous en obtiendrez une nouvelle en recommençant.",
   "KeySetupKeyDescription": "Chiffre les fichiers que vous conservez dans les salles privées. Elle est liée à votre compte et fonctionne donc partout où vous vous connectez.",
   "KeySetupKeyTitle": "Votre clé de chiffrement",
   "KeySetupNotStored": "Aucune des deux phrases n'est stockée sur le serveur : personne, pas même un administrateur, ne peut les récupérer pour vous.",

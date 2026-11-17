@@ -299,7 +299,13 @@ export const KeySetupDialog = ({
           )}
         </ModalDialog.Footer>
       </ModalDialog>
-      <UnsavedChangesDialog {...confirmation} />
+      <UnsavedChangesDialog
+        {...confirmation}
+        // Spec: private-rooms/key-management, "Discarding key setup names what is lost"
+        description={
+          step === "recovery" ? t("Common:KeySetupDiscardRecovery") : undefined
+        }
+      />
     </>
   );
 };

@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Dấu vân tay khoá",
   "KeyFingerprintHint": "Đồng nghiệp có thể hỏi bạn dấu vân tay này để xác nhận rằng khoá của bạn đã thay đổi.",
   "KeyId": "ID khoá",
+  "KeySetupDiscardRecovery": "Nếu bạn đóng phần thiết lập khoá bây giờ, cụm từ khôi phục hiển thị ở đây sẽ không còn hiệu lực. Bạn sẽ nhận cụm từ mới khi bắt đầu lại.",
   "KeySetupKeyDescription": "Mã hoá các tệp bạn lưu trong phòng riêng tư. Khoá thuộc về tài khoản của bạn nên hoạt động ở bất cứ nơi nào bạn đăng nhập.",
   "KeySetupKeyTitle": "Khoá mã hoá của bạn",
   "KeySetupNotStored": "Không cụm từ nào được lưu trên máy chủ: không ai, kể cả quản trị viên, có thể khôi phục chúng giúp bạn.",

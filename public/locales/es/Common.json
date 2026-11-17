@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Huella digital de la clave",
   "KeyFingerprintHint": "Sus compañeros pueden pedirle esta huella digital para confirmar que su clave ha cambiado.",
   "KeyId": "ID de clave",
+  "KeySetupDiscardRecovery": "Si cierra ahora la configuración de la clave, la frase de recuperación que se muestra aquí no será válida. Recibirá una nueva cuando vuelva a empezar.",
   "KeySetupKeyDescription": "Cifra los archivos que guarda en las salas privadas. Pertenece a su cuenta, así que funciona allí donde inicie sesión.",
   "KeySetupKeyTitle": "Su clave de cifrado",
   "KeySetupNotStored": "Ninguna de las dos frases se guarda en el servidor: nadie, ni siquiera los administradores, puede recuperarlas por usted.",

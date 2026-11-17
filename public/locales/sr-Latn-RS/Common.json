@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Otisak ključa",
   "KeyFingerprintHint": "Kolege mogu da vas pitaju za ovaj otisak da bi potvrdile da se vaš ključ promenio.",
   "KeyId": "ID ključa",
+  "KeySetupDiscardRecovery": "Ako sada zatvorite podešavanje ključa, fraza za oporavak prikazana ovde neće važiti. Dobićete novu kada počnete ponovo.",
   "KeySetupKeyDescription": "Šifruje datoteke koje čuvate u privatnim sobama. Pripada vašem nalogu, pa radi svuda gde se prijavite.",
   "KeySetupKeyTitle": "Vaš ključ za šifrovanje",
   "KeySetupNotStored": "Nijedna fraza se ne čuva na serveru: niko, ni administratori, ne može da ih povrati umesto vas.",

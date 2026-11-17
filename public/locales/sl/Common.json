@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Prstni odtis ključa",
   "KeyFingerprintHint": "Sodelavci vas lahko prosijo za ta prstni odtis, da potrdijo, da se je vaš ključ spremenil.",
   "KeyId": "ID ključa",
+  "KeySetupDiscardRecovery": "Če zdaj zaprete nastavitev ključa, tukaj prikazana obnovitvena fraza ne bo veljavna. Ko začnete znova, boste dobili novo.",
   "KeySetupKeyDescription": "Šifrira datoteke, ki jih hranite v zasebnih sobah. Pripada vašemu računu, zato deluje povsod, kjer se prijavite.",
   "KeySetupKeyTitle": "Vaš šifrirni ključ",
   "KeySetupNotStored": "Nobena od obeh fraz se ne shrani na strežniku: nihče, niti skrbniki, ju ne more obnoviti namesto vas.",

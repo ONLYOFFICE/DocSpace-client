@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Impressão digital da chave",
   "KeyFingerprintHint": "Os colegas podem pedir-lhe esta impressão digital para confirmar que a sua chave foi alterada.",
   "KeyId": "ID da chave",
+  "KeySetupDiscardRecovery": "Se fechar agora a configuração da chave, a frase de recuperação aqui mostrada não será válida. Receberá uma nova quando recomeçar.",
   "KeySetupKeyDescription": "Encripta os ficheiros que guarda nas salas privadas. Pertence à sua conta, por isso funciona onde quer que inicie sessão.",
   "KeySetupKeyTitle": "A sua chave de encriptação",
   "KeySetupNotStored": "Nenhuma das frases é guardada no servidor: ninguém, nem mesmo os administradores, as pode recuperar por si.",

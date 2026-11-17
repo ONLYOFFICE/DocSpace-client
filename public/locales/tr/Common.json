@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Anahtar parmak izi",
   "KeyFingerprintHint": "İş arkadaşlarınız, anahtarınızın değiştiğini doğrulamak için sizden bu parmak izini isteyebilir.",
   "KeyId": "Anahtar Kimliği",
+  "KeySetupDiscardRecovery": "Anahtar kurulumunu şimdi kapatırsanız burada gösterilen kurtarma ifadesi geçerli olmaz. Yeniden başladığınızda yenisini alırsınız.",
   "KeySetupKeyDescription": "Özel odalarda tuttuğunuz dosyaları şifreler. Hesabınıza aittir, bu yüzden oturum açtığınız her yerde çalışır.",
   "KeySetupKeyTitle": "Şifreleme anahtarınız",
   "KeySetupNotStored": "İfadelerin hiçbiri sunucuda saklanmaz: yöneticiler dahil hiç kimse bunları sizin yerinize kurtaramaz.",

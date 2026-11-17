@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Sleutelvingerafdruk",
   "KeyFingerprintHint": "Collega's kunnen u om deze vingerafdruk vragen om te bevestigen dat uw sleutel is gewijzigd.",
   "KeyId": "Sleutel-ID",
+  "KeySetupDiscardRecovery": "Als u de sleutelinstelling nu sluit, is de hier getoonde herstelzin niet geldig. U krijgt een nieuwe wanneer u opnieuw begint.",
   "KeySetupKeyDescription": "Versleutelt de bestanden die u in privékamers bewaart. Hij hoort bij uw account en werkt dus overal waar u zich aanmeldt.",
   "KeySetupKeyTitle": "Uw versleutelingssleutel",
   "KeySetupNotStored": "Geen van beide zinnen wordt op de server bewaard: niemand, ook geen beheerder, kan ze voor u herstellen.",

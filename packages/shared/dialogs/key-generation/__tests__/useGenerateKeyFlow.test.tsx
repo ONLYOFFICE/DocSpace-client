@@ -502,6 +502,37 @@ describe("Key setup dialog", () => {
     }
   });
 
+  // A closed ModalDialog stays mounted, hidden from assistive technology, so
+  // the confirmation is looked up among the dialogs that are actually open.
+  const openConfirmation = () =>
+    screen
+      .queryAllByRole("dialog")
+      .find((dialog) => dialog.textContent?.includes("Common:UnsavedChanges")) ??
+    null;
+
+  it("Closed on the recovery phrase step", async () => {
+    const user = userEvent.setup();
+    const { show, props } = await renderDialog();
+    show("recovery");
+
+    await user.keyboard("{Escape}");
+
+    expect(openConfirmation()).toHaveTextContent(
+      "Common:KeySetupDiscardRecovery",
+    );
+    expect(props.onCancel).not.toHaveBeenCalled();
+  });
+
+  it("Closed on the explanation", async () => {
+    const user = userEvent.setup();
+    const { props } = await renderDialog();
+
+    await user.keyboard("{Escape}");
+
+    expect(props.onCancel).toHaveBeenCalledTimes(1);
+    expect(openConfirmation()).toBeNull();
+  });
+
   it("Step shown", async () => {
     const { show } = await renderDialog();
     const counter = () => screen.getByTestId("key_setup_step");

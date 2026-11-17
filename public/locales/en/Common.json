@@ -1358,6 +1358,7 @@
   "KeyFingerprint": "Key fingerprint",
   "KeyFingerprintHint": "Colleagues may ask you for this fingerprint to confirm that your key has changed.",
   "KeyId": "Key ID",
+  "KeySetupDiscardRecovery": "If you close key setup now, the recovery phrase shown here will not be valid. You will get a new one when you start again.",
   "KeySetupKeyDescription": "Encrypts the files you keep in private rooms. It belongs to your account, so it works wherever you sign in.",
   "KeySetupKeyTitle": "Your encryption key",
   "KeySetupNotStored": "Neither phrase is stored on the server: nobody, administrators included, can restore them for you.",

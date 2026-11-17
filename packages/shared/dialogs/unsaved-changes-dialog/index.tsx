@@ -49,6 +49,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
   onCancel,
   onConfirm,
   zIndex = 401,
+  description,
 }) => {
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
@@ -75,7 +76,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
     >
       <ModalDialog.Header>{t("Common:UnsavedChanges")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("Common:UnsavedChangesDescription")}</Text>
+        <Text>{description ?? t("Common:UnsavedChangesDescription")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

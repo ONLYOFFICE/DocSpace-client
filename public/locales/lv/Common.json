@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Atslēgas nospiedums",
   "KeyFingerprintHint": "Kolēģi var lūgt jums šo nospiedumu, lai pārliecinātos, ka jūsu atslēga ir mainīta.",
   "KeyId": "Atslēgas ID",
+  "KeySetupDiscardRecovery": "Ja tagad aizvērsiet atslēgas iestatīšanu, šeit parādītā atkopšanas frāze nebūs derīga. Sākot no jauna, saņemsiet jaunu.",
   "KeySetupKeyDescription": "Šifrē failus, ko glabājat privātajās telpās. Tā pieder jūsu kontam, tāpēc darbojas visur, kur pierakstāties.",
   "KeySetupKeyTitle": "Jūsu šifrēšanas atslēga",
   "KeySetupNotStored": "Neviena no frāzēm netiek glabāta serverī: neviens, arī administratori, nevar tās atjaunot jūsu vietā.",

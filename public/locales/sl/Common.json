@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Odklepanje s ključem za dostop",
   "Passphrase": "Geslo",
   "PassphraseCommonPattern": "Izogibajte se pogostim besedam in predvidljivim zaporedjem znakov.",
-  "PassphraseHint": "Vnesite geslo za dešifriranje zasebnega ključa.",
+  "PassphraseHint": "Vnesite geslo, da odprete šifrirane datoteke v svojih zasebnih sobah.",
   "PassphraseLimitMessage": "Geslo mora vsebovati",
   "PassphraseMismatch": "Gesli se ne ujemata",
   "PassphraseMustBeDifferent": "Novo geslo mora biti drugačno od trenutnega",

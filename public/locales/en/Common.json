@@ -1740,7 +1740,7 @@
   "PasskeyUnlockLabel": "Passkey unlock",
   "Passphrase": "Passphrase",
   "PassphraseCommonPattern": "Avoid common words and predictable character sequences.",
-  "PassphraseHint": "Enter your passphrase to decrypt your private key.",
+  "PassphraseHint": "Enter your passphrase to open the encrypted files in your private rooms.",
   "PassphraseLimitMessage": "Passphrase must contain",
   "PassphraseMismatch": "Passphrases do not match",
   "PassphraseMustBeDifferent": "New passphrase must be different from current",

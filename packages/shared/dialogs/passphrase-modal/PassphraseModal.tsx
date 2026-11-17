@@ -340,7 +340,11 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
             key="SubmitButton"
             onClick={handleSubmit}
             size={ButtonSize.normal}
-            label={submitLabel ?? t("Common:ContinueButton")}
+            label={
+              submitLabel ??
+              // Spec: private-rooms/key-management, "Unlock with the passphrase"
+              (isNew ? t("Common:ContinueButton") : t("Common:UnlockKey"))
+            }
             isDisabled={isDisabled}
             isLoading={isLoading}
           />

@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Passkey-Entsperrung",
   "Passphrase": "Passphrase",
   "PassphraseCommonPattern": "Vermeiden Sie gängige Wörter und vorhersehbare Zeichenfolgen.",
-  "PassphraseHint": "Geben Sie Ihre Passphrase ein, um Ihren privaten Schlüssel zu entschlüsseln.",
+  "PassphraseHint": "Geben Sie Ihre Passphrase ein, um die verschlüsselten Dateien in Ihren privaten Räumen zu öffnen.",
   "PassphraseLimitMessage": "Die Passphrase muss enthalten",
   "PassphraseMismatch": "Passphrasen stimmen nicht überein",
   "PassphraseMustBeDifferent": "Die neue Passphrase muss sich von der aktuellen unterscheiden",

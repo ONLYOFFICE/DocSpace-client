@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Odblokowywanie kluczem dostępu",
   "Passphrase": "Hasło dostępu",
   "PassphraseCommonPattern": "Unikaj popularnych słów i przewidywalnych sekwencji znaków.",
-  "PassphraseHint": "Wprowadź swoje hasło dostępu, aby odszyfrować swój klucz prywatny.",
+  "PassphraseHint": "Wprowadź hasło dostępu, aby otworzyć zaszyfrowane pliki w swoich prywatnych pokojach.",
   "PassphraseLimitMessage": "Hasło dostępu musi zawierać",
   "PassphraseMismatch": "Hasła dostępu nie są zgodne",
   "PassphraseMustBeDifferent": "Nowe hasło dostępu musi różnić się od bieżącego",

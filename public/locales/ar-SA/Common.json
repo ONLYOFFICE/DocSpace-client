@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "فتح القفل بمفتاح المرور",
   "Passphrase": "عبارة المرور",
   "PassphraseCommonPattern": "تجنب الكلمات الشائعة وتسلسلات الأحرف المتوقعة.",
-  "PassphraseHint": "أدخل عبارة مرورك لفك تشفير مفتاحك الخاص.",
+  "PassphraseHint": "أدخل عبارة المرور لفتح الملفات المشفرة في غرفك الخاصة.",
   "PassphraseLimitMessage": "يجب أن تحتوي عبارة المرور على",
   "PassphraseMismatch": "عبارتا المرور غير متطابقتين",
   "PassphraseMustBeDifferent": "يجب أن تختلف عبارة المرور الجديدة عن الحالية",

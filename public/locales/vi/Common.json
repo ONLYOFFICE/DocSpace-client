@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Mở khóa bằng khóa truy cập",
   "Passphrase": "Mật khẩu bảo vệ",
   "PassphraseCommonPattern": "Tránh các từ thông dụng và chuỗi ký tự dễ đoán.",
-  "PassphraseHint": "Nhập mật khẩu bảo vệ của bạn để giải mã khoá riêng tư của bạn.",
+  "PassphraseHint": "Nhập mật khẩu bảo vệ để mở các tệp đã mã hoá trong phòng riêng tư của bạn.",
   "PassphraseLimitMessage": "Mật khẩu bảo vệ cần phải bao gồm",
   "PassphraseMismatch": "Mật khẩu bảo vệ không khớp",
   "PassphraseMustBeDifferent": "Mật khẩu bảo vệ mới phải khác mật khẩu hiện tại",

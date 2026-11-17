@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "ການປົດລັອກດ້ວຍກະແຈຜ່ານ",
   "Passphrase": "ລະຫັດລັບ",
   "PassphraseCommonPattern": "ຫຼີກເວັ້ນຄຳສັບທົ່ວໄປ ແລະ ລຳດັບຕົວອັກສອນທີ່ຄາດເດົາໄດ້ງ່າຍ.",
-  "PassphraseHint": "ໃສ່ລະຫັດລັບຂອງທ່ານເພື່ອຖອດລະຫັດກຸນແຈສ່ວນຕົວ.",
+  "PassphraseHint": "ໃສ່ລະຫັດລັບຂອງທ່ານເພື່ອເປີດໄຟລ໌ທີ່ເຂົ້າລະຫັດໃນຫ້ອງສ່ວນຕົວຂອງທ່ານ.",
   "PassphraseLimitMessage": "ລະຫັດລັບຕ້ອງມີ",
   "PassphraseMismatch": "ລະຫັດລັບບໍ່ກົງກັນ",
   "PassphraseMustBeDifferent": "ລະຫັດລັບໃໝ່ຕ້ອງແຕກຕ່າງຈາກລະຫັດລັບປັດຈຸບັນ",

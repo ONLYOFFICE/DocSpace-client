@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Deblocare cu cheie de acces",
   "Passphrase": "Frază de acces",
   "PassphraseCommonPattern": "Evitați cuvintele comune și secvențele previzibile de caractere.",
-  "PassphraseHint": "Introduceți fraza de acces pentru a decripta cheia dvs. privată.",
+  "PassphraseHint": "Introduceți fraza de acces pentru a deschide fișierele criptate din sălile dvs. private.",
   "PassphraseLimitMessage": "Fraza de acces trebuie să conțină",
   "PassphraseMismatch": "Frazele de acces nu coincid",
   "PassphraseMustBeDifferent": "Noua frază de acces trebuie să fie diferită de cea curentă",

@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Giriş açarı ilə kiliddən çıxarma",
   "Passphrase": "Parol",
   "PassphraseCommonPattern": "Geniş yayılmış sözlərdən və proqnozlaşdırıla bilən simvol ardıcıllıqlarından çəkinin.",
-  "PassphraseHint": "Şəxsi açarınızı deşifrə etmək üçün parolunuzu daxil edin.",
+  "PassphraseHint": "Şəxsi otaqlarınızdakı şifrələnmiş faylları açmaq üçün parolunuzu daxil edin.",
   "PassphraseLimitMessage": "Parol aşağıdakıları ehtiva etməlidir",
   "PassphraseMismatch": "Parollar uyğun gəlmir",
   "PassphraseMustBeDifferent": "Yeni parol cariindən fərqli olmalıdır",

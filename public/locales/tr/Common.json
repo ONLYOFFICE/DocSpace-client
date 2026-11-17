@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Geçiş anahtarıyla kilit açma",
   "Passphrase": "Parola",
   "PassphraseCommonPattern": "Yaygın kelimelerden ve tahmin edilebilir karakter dizilerinden kaçının.",
-  "PassphraseHint": "Özel anahtarınızın şifresini çözmek için parolanızı girin.",
+  "PassphraseHint": "Özel odalarınızdaki şifrelenmiş dosyaları açmak için parolanızı girin.",
   "PassphraseLimitMessage": "Parola şunları içermelidir",
   "PassphraseMismatch": "Parolalar eşleşmiyor",
   "PassphraseMustBeDifferent": "Yeni parola mevcut paroladan farklı olmalıdır",

@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "通行密钥解锁",
   "Passphrase": "密码短语",
   "PassphraseCommonPattern": "避免使用常见单词和可预测的字符序列。",
-  "PassphraseHint": "输入您的密码短语以解密您的私钥。",
+  "PassphraseHint": "输入您的密码短语以打开私人房间中的加密文件。",
   "PassphraseLimitMessage": "密码短语必须包含",
   "PassphraseMismatch": "两次输入的密码短语不一致",
   "PassphraseMustBeDifferent": "新密码短语必须与当前密码短语不同",

@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Lukituksen avaus pääsyavaimella",
   "Passphrase": "Salauslause",
   "PassphraseCommonPattern": "Vältä yleisiä sanoja ja ennalta arvattavia merkkijonoja.",
-  "PassphraseHint": "Syötä salauslauseesi purkaaksesi yksityisavaimesi salauksen.",
+  "PassphraseHint": "Anna salauslauseesi avataksesi yksityishuoneidesi salatut tiedostot.",
   "PassphraseLimitMessage": "Salauslauseen on sisällettävä",
   "PassphraseMismatch": "Salauslauseet eivät täsmää",
   "PassphraseMustBeDifferent": "Uuden salauslauseen on oltava erilainen kuin nykyinen",

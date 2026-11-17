@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "パスキーによるロック解除",
   "Passphrase": "パスフレーズ",
   "PassphraseCommonPattern": "一般的な単語や推測されやすい文字列は避けてください。",
-  "PassphraseHint": "パスフレーズを入力して、秘密鍵を復号化してください。",
+  "PassphraseHint": "パスフレーズを入力して、プライベートルームの暗号化されたファイルを開きます。",
   "PassphraseLimitMessage": "パスフレーズには、以下が含まれていなければなりません。",
   "PassphraseMismatch": "パスフレーズが一致しません",
   "PassphraseMustBeDifferent": "新しいパスフレーズは現在のものと異なる必要があります",

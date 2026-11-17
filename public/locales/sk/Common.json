@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Odomykanie prístupovým kľúčom",
   "Passphrase": "Prístupová fráza",
   "PassphraseCommonPattern": "Vyhnite sa bežným slovám a predvídateľným postupnostiam znakov.",
-  "PassphraseHint": "Zadajte svoju prístupovú frázu na dešifrovanie vášho súkromného kľúča.",
+  "PassphraseHint": "Zadajte prístupovú frázu, aby ste otvorili šifrované súbory vo svojich súkromných miestnostiach.",
   "PassphraseLimitMessage": "Prístupová fráza musí obsahovať",
   "PassphraseMismatch": "Prístupové frázy sa nezhodujú",
   "PassphraseMustBeDifferent": "Nová prístupová fráza musí byť odlišná od aktuálnej",

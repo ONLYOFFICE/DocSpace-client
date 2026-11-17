@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "패스키 잠금 해제",
   "Passphrase": "패스프레이즈",
   "PassphraseCommonPattern": "흔한 단어와 예측 가능한 문자 조합은 피하세요.",
-  "PassphraseHint": "개인 키를 복호화하려면 패스프레이즈를 입력하세요.",
+  "PassphraseHint": "비공개 룸의 암호화된 파일을 열려면 패스프레이즈를 입력하세요.",
   "PassphraseLimitMessage": "패스프레이즈에는 반드시 다음이 포함되어야 합니다:",
   "PassphraseMismatch": "패스프레이즈가 일치하지 않습니다",
   "PassphraseMustBeDifferent": "새 패스프레이즈는 현재 것과 달라야 합니다",

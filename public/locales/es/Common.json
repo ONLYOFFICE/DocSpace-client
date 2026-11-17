@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Desbloqueo con llave de acceso",
   "Passphrase": "Frase de contraseña",
   "PassphraseCommonPattern": "Evite palabras comunes y secuencias de caracteres predecibles.",
-  "PassphraseHint": "Introduzca su frase de contraseña para descifrar su clave privada.",
+  "PassphraseHint": "Introduzca su frase de contraseña para abrir los archivos cifrados de sus salas privadas.",
   "PassphraseLimitMessage": "La frase de contraseña debe contener",
   "PassphraseMismatch": "Las frases de contraseña no coinciden",
   "PassphraseMustBeDifferent": "La nueva frase de contraseña debe ser diferente a la actual",

@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Ontgrendelen met toegangssleutel",
   "Passphrase": "Wachtzin",
   "PassphraseCommonPattern": "Vermijd veelvoorkomende woorden en voorspelbare tekenreeksen.",
-  "PassphraseHint": "Voer uw wachtzin in om uw privésleutel te ontsleutelen.",
+  "PassphraseHint": "Voer uw wachtzin in om de versleutelde bestanden in uw privékamers te openen.",
   "PassphraseLimitMessage": "Wachtzin moet bevatten",
   "PassphraseMismatch": "Wachtzinnen komen niet overeen",
   "PassphraseMustBeDifferent": "Nieuwe wachtzin moet verschillen van de huidige",

@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Shkyçja me çelës kalimi",
   "Passphrase": "Frazëkalim",
   "PassphraseCommonPattern": "Shmangni fjalët e zakonshme dhe sekuencat e parashikueshme të karaktereve.",
-  "PassphraseHint": "Vendosni frazëkalimin tuaj për të dekriptuar çelësin tuaj privat.",
+  "PassphraseHint": "Vendosni frazëkalimin tuaj për të hapur skedarët e enkriptuar në dhomat tuaja private.",
   "PassphraseLimitMessage": "Frazëkalimi duhet të përmbajë",
   "PassphraseMismatch": "Frazëkalimet nuk përputhen",
   "PassphraseMustBeDifferent": "Frazëkalimi i ri duhet të jetë i ndryshëm nga ai aktual",

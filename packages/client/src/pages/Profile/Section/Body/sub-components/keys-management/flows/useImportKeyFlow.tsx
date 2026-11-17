@@ -180,6 +180,7 @@ export function useImportKeyFlow({
           onSubmit={onPassphraseSubmit}
           onCancel={reset}
           isNew={false}
+          submitLabel={t("Common:ContinueButton")}
           isLoading={isPending}
         />
       ) : null}

@@ -15,7 +15,7 @@ and SDK unit tests must stay green.
 
 ## 2. Unlock dialog wording
 
-- [ ] 2.1 Label the confirm action of the unlock prompt `Common:UnlockKey` and reword `Common:PassphraseHint` in English so it names the encrypted files of private rooms and neither a private key nor a device; run `translate-stale` and retranslate the key. Verify: a case "Confirm action names the unlock" in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx`, the locale tests, and the screenshots of the unlock dialog updated under Docker
+- [x] 2.1 Label the confirm action of the unlock prompt `Common:UnlockKey` and reword `Common:PassphraseHint` in English so it names the encrypted files of private rooms and neither a private key nor a device; run `translate-stale` and retranslate the key. Verify: a case "Confirm action names the unlock" in `packages/shared/dialogs/passphrase-modal/__tests__/PassphraseModal.test.tsx`, the locale tests, and the screenshots of the unlock dialog updated under Docker
 
 ## 3. Fingerprint in groups
 

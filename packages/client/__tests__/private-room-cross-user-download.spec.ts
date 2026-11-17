@@ -207,7 +207,7 @@ async function enterPassphrase(prompt: Locator, passphrase: string) {
       .locator('input[name="passphrase"], #passphrase input')
       .first()
       .fill(passphrase);
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
   } catch {}
 }
 
@@ -392,7 +392,7 @@ test.describe("Private room — cross-user file exchange", () => {
         .first();
       await passphraseField.fill(bobPassphrase);
       await passphrasePrompt
-        .getByRole("button", { name: "Confirm" })
+        .getByRole("button", { name: "Unlock", exact: true })
         .click();
     } catch {}
 

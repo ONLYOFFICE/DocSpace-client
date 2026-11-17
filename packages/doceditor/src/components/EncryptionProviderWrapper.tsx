@@ -36,7 +36,6 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 import {
   EncryptionProvider,
@@ -74,7 +73,6 @@ const PassphraseUnlockAdapter = ({
   onCancel,
   onUnlocked,
 }: PassphraseDialogProps) => {
-  const { t } = useTranslation(["Common"]);
   const { userId, encryptionKeys, refreshKeysFromServer } = React.useContext(
     EncryptionKeysDataContext,
   );
@@ -119,7 +117,6 @@ const PassphraseUnlockAdapter = ({
       onSubmit={onSubmit}
       onCancel={onCancel}
       onForgotPassphrase={handleForgotPassphrase}
-      submitLabel={t("Common:Confirm")}
       showRememberDevice
       onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}
       isPasskeyUnlocking={passkey.isUnlocking}

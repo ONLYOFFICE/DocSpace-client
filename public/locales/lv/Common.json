@@ -1737,7 +1737,7 @@
   "PasskeyUnlockLabel": "Atbloķēšana ar piekļuves atslēgu",
   "Passphrase": "Ieejas frāze",
   "PassphraseCommonPattern": "Izvairieties no izplatītiem vārdiem un paredzamām rakstzīmju virknēm.",
-  "PassphraseHint": "Ievadiet savu ieejas frāzi, lai atšifrētu savu privāto atslēgu.",
+  "PassphraseHint": "Ievadiet ieejas frāzi, lai atvērtu šifrētos failus savās privātajās telpās.",
   "PassphraseLimitMessage": "Ieejas frāzei ir jāsatur",
   "PassphraseMismatch": "Ieejas frāzes nesakrīt",
   "PassphraseMustBeDifferent": "Jaunajai ieejas frāzei jāatšķiras no pašreizējās",

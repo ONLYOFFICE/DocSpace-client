@@ -424,7 +424,11 @@ class AiProjectsStore {
     return this.defaultModelRequest;
   };
 
-  /** The open project (and the one in the edit form), as the server has it now. */
+  /**
+   * The open project as the server has it now. The edit form keeps the
+   * project it was opened on: it saves what changed against that one, so a
+   * change made elsewhere meanwhile is not written back over.
+   */
   private replaceProject = (project: TAiProject) => {
     this.projectRevisions[project.id] = (this.projectRevisions[project.id] ?? 0) + 1;
     // A project read in full is also what its tile shows.
@@ -433,10 +437,13 @@ class AiProjectsStore {
       this.summaryReads[project.id] = this.tileSummariesRead;
     }
     if (this.activeProject?.id === project.id) this.activeProject = project;
-    if (this.projectDialog?.mode === "edit" && this.projectDialog.project.id === project.id) {
-      this.projectDialog = { mode: "edit", project };
-    }
   };
+
+  /** The edit form open on the project, if it is. */
+  private formProject = (id: number) =>
+    this.projectDialog?.mode === "edit" && this.projectDialog.project.id === id
+      ? this.projectDialog.project
+      : null;
 
   refreshActiveProject = async () => {
     if (!this.activeProject) return;
@@ -596,7 +603,11 @@ class AiProjectsStore {
       project = { ...room, aiProject: project.aiProject };
     }
     showWarnings(project);
-    runInAction(() => this.replaceProject(project));
+    runInAction(() => {
+      this.replaceProject(project);
+      // The form saved: it now stands on what the server has.
+      if (this.formProject(id)) this.projectDialog = { mode: "edit", project };
+    });
     if (this.activeProject?.id === id) this.syncPreset(project);
     // A rename shows under Agents, and a change moves the project up there.
     void this.aiPresetsStore.fetchPresets();
@@ -623,7 +634,17 @@ class AiProjectsStore {
     }
     try {
       const updated = await getAiProject(project.id);
-      runInAction(() => this.replaceProject(updated));
+      runInAction(() => {
+        this.replaceProject(updated);
+        // The form shows the new owner and the rights left; what it edits
+        // stays as it was opened.
+        const opened = this.formProject(updated.id);
+        if (opened)
+          this.projectDialog = {
+            mode: "edit",
+            project: { ...opened, createdBy: updated.createdBy, access: updated.access, security: updated.security },
+          };
+      });
     } catch (e) {
       toastr.error(errorMessage(e));
     }

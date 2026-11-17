@@ -434,6 +434,34 @@ describe("AiProjectsStore", () => {
       expect(toastr.error).toHaveBeenCalledWith("no");
     });
 
+    it("keeps the edit form on the project it opened while the project changes elsewhere", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      store.openEditDialog(project(1));
+      const elsewhere = project(1, "Renamed elsewhere");
+      api.refreshAiProjectSettings.mockResolvedValue(elsewhere);
+
+      await store.refreshActiveSettings();
+
+      expect(store.activeProject?.title).toBe("Renamed elsewhere");
+      expect(store.projectDialog).toEqual({ mode: "edit", project: project(1) });
+    });
+
+    it("shows the new owner in the open form, keeping what it edits", async () => {
+      const store = createStore();
+      store.openEditDialog(project(1));
+      api.getAiProject.mockResolvedValue(
+        project(1, "Renamed elsewhere", { createdBy: { id: "u2" }, access: 9 } as Partial<TAiProject>),
+      );
+
+      await store.changeOwner(project(1), "u2", true);
+
+      const form = store.projectDialog?.mode === "edit" ? store.projectDialog.project : null;
+      expect(form?.createdBy).toEqual({ id: "u2" });
+      expect(form?.access).toBe(9);
+      expect(form?.title).toBe("Project 1");
+    });
+
     it("reads a project whose model could not be read before the form opens on it", async () => {
       const unread = project(1, "Project 1", {
         aiProject: { ...project(1).aiProject, profile: null, modelUnread: true },

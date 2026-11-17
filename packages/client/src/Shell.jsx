@@ -1075,7 +1075,10 @@ const Shell = ({ page = "home", ...rest }) => {
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
-          <AiChatPageBridge canLoadThreads={canUseAi} />
+          <AiChatPageBridge
+            canLoadThreads={canUseAi}
+            chatEntityId={chatEntityId}
+          />
           <AiPresetsBridge enabled={canUseAi} />
 
           <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />

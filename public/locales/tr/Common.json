@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Sohbet, seçilen bilgi odalarındaki dosyalarda arama yapar. Birden fazla oda seçilebilir.",
   "AIProjectKnowledgeRooms": "Bilgi tabanları",
   "AIProjectKnowledgeRoomsLimit": "Bir proje en fazla {{limit}} bilgi tabanı içerebilir.",
-  "AIProjectManager": "Proje yöneticisi",
   "AIProjectManagerDescription": "Modeli ve kaynakları değiştirir, üyeleri davet eder ve kaldırır, projeyi yeniden adlandırır.",
   "AIProjectMemberDescription": "Projede sohbet eder ve projeye dosya ekler.",
   "AIProjectModelHint": "Projedeki herkes bu modelle sohbet eder. Üyeler bunu sohbetten değiştiremez.",

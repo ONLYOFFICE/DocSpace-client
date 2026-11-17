@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Chat hakee valittujen tietohuoneiden tiedostoista. Voit valita useita huoneita.",
   "AIProjectKnowledgeRooms": "Tietokannat",
   "AIProjectKnowledgeRoomsLimit": "Projektiin voi sisällyttää enintään {{limit}} tietokantaa.",
-  "AIProjectManager": "Projektin hallinnoija",
   "AIProjectManagerDescription": "Vaihtaa mallin ja lähteet, kutsuu ja poistaa jäseniä sekä nimeää projektin uudelleen.",
   "AIProjectMemberDescription": "Chattaa projektissa ja lisää siihen tiedostoja.",
   "AIProjectModelHint": "Kaikki projektin jäsenet chattaavat tämän mallin kanssa. Jäsenet eivät voi vaihtaa sitä chatista.",

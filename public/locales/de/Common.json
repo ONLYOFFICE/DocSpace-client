@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Dateien in den ausgewählten Wissensräumen werden vom Chat durchsucht. Es können mehrere Räume ausgewählt werden.",
   "AIProjectKnowledgeRooms": "Wissensdatenbanken",
   "AIProjectKnowledgeRoomsLimit": "Ein Projekt kann bis zu {{limit}} Wissensdatenbanken enthalten.",
-  "AIProjectManager": "Projekt-Manager",
   "AIProjectManagerDescription": "Ändert das Modell und die Quellen, lädt Mitglieder ein und entfernt sie, benennt das Projekt um.",
   "AIProjectMemberDescription": "Chattet im Projekt und fügt ihm Dateien hinzu.",
   "AIProjectModelHint": "Alle im Projekt chatten mit diesem Modell. Mitglieder können es im Chat nicht ändern.",

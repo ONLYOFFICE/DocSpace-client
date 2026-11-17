@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Söhbət seçilmiş Bilik otaqlarındakı fayllarda axtarış aparır. Bir neçə otaq seçmək olar.",
   "AIProjectKnowledgeRooms": "Bilik bazaları",
   "AIProjectKnowledgeRoomsLimit": "Layihəyə ən çox {{limit}} bilik bazası daxil edilə bilər.",
-  "AIProjectManager": "Layihə meneceri",
   "AIProjectManagerDescription": "Modeli və mənbələri dəyişir, üzvləri dəvət edir və silir, layihənin adını dəyişir.",
   "AIProjectMemberDescription": "Layihədə söhbət edir və ona fayllar əlavə edir.",
   "AIProjectModelHint": "Layihədəki hər kəs bu modellə söhbət edir. Üzvlər onu söhbətdən dəyişə bilməz.",

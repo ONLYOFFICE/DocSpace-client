@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Tērzēšana meklē atlasīto zināšanu telpu failos. Var atlasīt vairākas telpas.",
   "AIProjectKnowledgeRooms": "Zināšanu bāzes",
   "AIProjectKnowledgeRoomsLimit": "Projektā var iekļaut ne vairāk kā {{limit}} zināšanu bāzes.",
-  "AIProjectManager": "Projekta pārvaldnieks",
   "AIProjectManagerDescription": "Maina modeli un avotus, uzaicina un noņem dalībniekus, pārdēvē projektu.",
   "AIProjectMemberDescription": "Tērzē projektā un pievieno tam failus.",
   "AIProjectModelHint": "Visi projekta dalībnieki tērzē ar šo modeli. Dalībnieki to nevar mainīt no tērzēšanas.",

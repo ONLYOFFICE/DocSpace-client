@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Ћаскање претражује датотеке у изабраним собама знања. Можете изабрати више соба.",
   "AIProjectKnowledgeRooms": "Базе знања",
   "AIProjectKnowledgeRoomsLimit": "Пројекат може да садржи највише {{limit}} база знања.",
-  "AIProjectManager": "Менаџер пројекта",
   "AIProjectManagerDescription": "Мења модел и изворе, позива и уклања чланове, преименује пројекат.",
   "AIProjectMemberDescription": "Ћаска у пројекту и додаје датотеке у њега.",
   "AIProjectModelHint": "Сви у пројекту ћаскају са овим моделом. Чланови не могу да га промене из ћаскања.",

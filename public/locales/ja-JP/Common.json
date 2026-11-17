@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "選択したナレッジルーム内のファイルがチャットで検索されます。複数のルームを選択できます。",
   "AIProjectKnowledgeRooms": "ナレッジベース",
   "AIProjectKnowledgeRoomsLimit": "1つのプロジェクトに追加できるナレッジベースは最大 {{limit}} 件です。",
-  "AIProjectManager": "プロジェクトマネージャー",
   "AIProjectManagerDescription": "モデルとソースを変更し、メンバーを招待・削除し、プロジェクトの名前を変更します。",
   "AIProjectMemberDescription": "プロジェクトでチャットし、ファイルを追加します。",
   "AIProjectModelHint": "プロジェクトの全員がこのモデルとチャットします。メンバーはチャットからモデルを変更できません。",

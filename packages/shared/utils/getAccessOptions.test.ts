@@ -39,9 +39,21 @@ describe("getAccessOptions for an AI project", () => {
     return option && "access" in option ? option.access : undefined;
   };
 
-  it("offers Project manager and Member, a member being its Content creator", () => {
+  it("offers Agent manager and Member, a member being its Content creator", () => {
     expect(accessOf("projectManager")).toBe(ShareAccessRights.RoomManager);
     expect(accessOf("projectMember")).toBe(ShareAccessRights.Collaborator);
+  });
+
+  it("names the roles in agent terms", () => {
+    const option = (key: string) =>
+      getAccessOptions(t, RoomsType.AiProjectRoom).find(
+        (item) => "key" in item && item.key === key,
+      ) as { label?: string; tooltip?: string } | undefined;
+    expect(option("projectManager")?.label).toBe("Common:AgentManager");
+    expect(option("projectManager")?.tooltip).toBe(
+      "Common:UserAgentMaxAvailableRoleWarning",
+    );
+    expect(option("projectMember")?.label).toBe("Common:Member");
   });
 
   it("creates the invitation link as Project manager", () => {

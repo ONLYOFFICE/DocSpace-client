@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "කතාබහ තෝරාගත් දැනුම් කාමරවල ගොනු තුළ සොයයි. කාමර කිහිපයක් තෝරා ගත හැක.",
   "AIProjectKnowledgeRooms": "දැනුම් පදනම්",
   "AIProjectKnowledgeRoomsLimit": "ව්‍යාපෘතියකට දැනුම් පදනම් {{limit}} ක් දක්වා ඇතුළත් කළ හැක.",
-  "AIProjectManager": "ව්‍යාපෘති කළමනාකරු",
   "AIProjectManagerDescription": "ආකෘතිය සහ මූලාශ්‍ර වෙනස් කරයි, සාමාජිකයින්ට ආරාධනා කර ඉවත් කරයි, ව්‍යාපෘතිය නැවත නම් කරයි.",
   "AIProjectMemberDescription": "ව්‍යාපෘතිය තුළ කතාබහ කර එයට ගොනු එක් කරයි.",
   "AIProjectModelHint": "ව්‍යාපෘතියේ සියලු දෙනා මෙම ආකෘතිය සමඟ කතාබහ කරයි. සාමාජිකයින්ට එය කතාබහෙන් වෙනස් කළ නොහැක.",

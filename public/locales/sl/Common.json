@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Klepet preiskuje datoteke v izbranih sobah znanja. Izberete lahko več sob.",
   "AIProjectKnowledgeRooms": "Zbirke znanja",
   "AIProjectKnowledgeRoomsLimit": "Projekt lahko vključuje največ {{limit}} zbirk znanja.",
-  "AIProjectManager": "Upravljalec projekta",
   "AIProjectManagerDescription": "Spreminja model in vire, vabi in odstranjuje člane ter preimenuje projekt.",
   "AIProjectMemberDescription": "Klepeta v projektu in vanj dodaja datoteke.",
   "AIProjectModelHint": "Vsi v projektu klepetajo s tem modelom. Člani ga v klepetu ne morejo spremeniti.",

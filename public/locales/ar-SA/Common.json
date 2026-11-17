@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "تبحث الدردشة في ملفات غرف المعرفة المحددة. يمكن تحديد عدة غرف.",
   "AIProjectKnowledgeRooms": "قواعد المعرفة",
   "AIProjectKnowledgeRoomsLimit": "يمكن أن يتضمن المشروع ما يصل إلى {{limit}} من قواعد المعرفة.",
-  "AIProjectManager": "مدير المشروع",
   "AIProjectManagerDescription": "يغيّر النموذج والمصادر، ويدعو الأعضاء ويزيلهم، ويعيد تسمية المشروع.",
   "AIProjectMemberDescription": "يدردش في المشروع ويضيف إليه الملفات.",
   "AIProjectModelHint": "يدردش جميع أعضاء المشروع مع هذا النموذج. لا يمكن للأعضاء تغييره من الدردشة.",

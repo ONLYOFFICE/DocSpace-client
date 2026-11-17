@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Czat przeszukuje pliki w wybranych pokojach wiedzy. Można wybrać kilka pokoi.",
   "AIProjectKnowledgeRooms": "Bazy wiedzy",
   "AIProjectKnowledgeRoomsLimit": "Projekt może zawierać maksymalnie {{limit}} baz wiedzy.",
-  "AIProjectManager": "Menedżer projektu",
   "AIProjectManagerDescription": "Zmienia model i źródła, zaprasza i usuwa członków, zmienia nazwę projektu.",
   "AIProjectMemberDescription": "Czatuje w projekcie i dodaje do niego pliki.",
   "AIProjectModelHint": "Wszyscy w projekcie czatują z tym modelem. Członkowie nie mogą go zmienić z poziomu czatu.",

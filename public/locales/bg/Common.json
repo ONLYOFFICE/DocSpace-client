@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Чатът търси във файловете в избраните стаи със знания. Можете да изберете няколко стаи.",
   "AIProjectKnowledgeRooms": "Бази знания",
   "AIProjectKnowledgeRoomsLimit": "Един проект може да включва до {{limit}} бази знания.",
-  "AIProjectManager": "Мениджър на проекта",
   "AIProjectManagerDescription": "Променя модела и източниците, кани и премахва членове, преименува проекта.",
   "AIProjectMemberDescription": "Пише в чата на проекта и добавя файлове в него.",
   "AIProjectModelHint": "Всички в проекта разговарят с този модел. Членовете не могат да го сменят от чата.",

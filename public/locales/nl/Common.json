@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "De chat doorzoekt de bestanden in de geselecteerde kenniskamers. U kunt meerdere kamers selecteren.",
   "AIProjectKnowledgeRooms": "Kennisbanken",
   "AIProjectKnowledgeRoomsLimit": "Een project kan maximaal {{limit}} kennisbanken bevatten.",
-  "AIProjectManager": "Projectbeheerder",
   "AIProjectManagerDescription": "Wijzigt het model en de bronnen, nodigt leden uit en verwijdert ze, wijzigt de naam van het project.",
   "AIProjectMemberDescription": "Chat in het project en voegt er bestanden aan toe.",
   "AIProjectModelHint": "Iedereen in het project chat met dit model. Leden kunnen het niet vanuit de chat wijzigen.",

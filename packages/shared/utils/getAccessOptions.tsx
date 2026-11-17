@@ -196,9 +196,9 @@ export const getAccessOptions = (
 		},
 		projectManager: {
 			key: "projectManager",
-			label: t("Common:AIProjectManager"),
+			label: t("Common:AgentManager"),
 			description: t("Common:AIProjectManagerDescription"),
-			tooltip: t("Common:UserMaxAvailableRoleWarning"),
+			tooltip: t("Common:UserAgentMaxAvailableRoleWarning"),
 			color: globalColors.favoritesStatus,
 			access: ShareAccessRights.RoomManager,
 			type: EmployeeType.RoomAdmin,

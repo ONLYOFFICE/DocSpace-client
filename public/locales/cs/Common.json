@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Chat prohledává soubory ve vybraných znalostních místnostech. Lze vybrat více místností.",
   "AIProjectKnowledgeRooms": "Znalostní báze",
   "AIProjectKnowledgeRoomsLimit": "Projekt může obsahovat nejvýše {{limit}} znalostních bází.",
-  "AIProjectManager": "Správce projektu",
   "AIProjectManagerDescription": "Mění model a zdroje, zve a odebírá členy, přejmenovává projekt.",
   "AIProjectMemberDescription": "Chatuje v projektu a přidává do něj soubory.",
   "AIProjectModelHint": "Všichni v projektu chatují s tímto modelem. Členové ho nemohou v chatu změnit.",

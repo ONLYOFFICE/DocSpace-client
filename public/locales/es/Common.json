@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "El chat busca en los archivos de las salas de conocimiento seleccionadas. Se pueden seleccionar varias salas.",
   "AIProjectKnowledgeRooms": "Bases de conocimientos",
   "AIProjectKnowledgeRoomsLimit": "Un proyecto puede incluir hasta {{limit}} bases de conocimientos.",
-  "AIProjectManager": "Gestor de proyecto",
   "AIProjectManagerDescription": "Cambia el modelo y las fuentes, invita y elimina miembros, cambia el nombre del proyecto.",
   "AIProjectMemberDescription": "Chatea en el proyecto y le añade archivos.",
   "AIProjectModelHint": "Todos en el proyecto chatean con este modelo. Los miembros no pueden cambiarlo desde el chat.",

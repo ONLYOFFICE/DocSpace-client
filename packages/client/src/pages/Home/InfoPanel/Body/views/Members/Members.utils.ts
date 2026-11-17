@@ -60,8 +60,8 @@ class MembersHelper {
       },
       projectManager: {
         key: "projectManager",
-        label: this.t("Common:AIProjectManager"),
-        tooltip: this.t("Common:UserMaxAvailableRoleWarning"),
+        label: this.t("Common:AgentManager"),
+        tooltip: this.t("Common:UserAgentMaxAvailableRoleWarning"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },

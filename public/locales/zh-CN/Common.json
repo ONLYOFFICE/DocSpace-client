@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "对话将搜索所选知识房间中的文件。可以选择多个房间。",
   "AIProjectKnowledgeRooms": "知识库",
   "AIProjectKnowledgeRoomsLimit": "一个项目最多可包含 {{limit}} 个知识库。",
-  "AIProjectManager": "项目经理",
   "AIProjectManagerDescription": "更改模型和来源，邀请和移除成员，重命名项目。",
   "AIProjectMemberDescription": "在项目中对话并向其中添加文件。",
   "AIProjectModelHint": "项目中的所有人都使用此模型对话。成员无法在对话中更改模型。",

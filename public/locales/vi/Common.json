@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Cuộc trò chuyện sẽ tìm kiếm trong các tệp của các Phòng kiến thức đã chọn. Có thể chọn nhiều phòng.",
   "AIProjectKnowledgeRooms": "Cơ sở kiến thức",
   "AIProjectKnowledgeRoomsLimit": "Một dự án có thể bao gồm tối đa {{limit}} cơ sở kiến thức.",
-  "AIProjectManager": "Quản lý dự án",
   "AIProjectManagerDescription": "Thay đổi mô hình và nguồn, mời và xóa thành viên, đổi tên dự án.",
   "AIProjectMemberDescription": "Trò chuyện trong dự án và thêm tệp vào dự án.",
   "AIProjectModelHint": "Mọi người trong dự án đều trò chuyện với mô hình này. Thành viên không thể thay đổi mô hình từ cuộc trò chuyện.",

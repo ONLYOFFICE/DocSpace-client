@@ -335,7 +335,8 @@ const InviteInput = ({
   };
 
   const addUser = (item) => {
-    const { shared, status, roomType, access, isGroup = false } = item;
+    // The roles are those of the panel's room: a user or a group carries no room type.
+    const { shared, status, access, isGroup = false } = item;
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
@@ -351,7 +352,7 @@ const InviteInput = ({
         const topFreeRole = getTopFreeRole(t, roomType);
 
         if (access !== topFreeRole?.access) {
-          item = makeFreeRole(item, t, topFreeRole);
+          item = makeFreeRole(item, t, topFreeRole, roomType);
 
           if (isUserTariffLimit) {
             toastr.error(<PaidQuotaLimitError />);
@@ -474,7 +475,7 @@ const InviteInput = ({
               roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
 
             if (roomId !== -1 && item.access !== topFreeRole?.access) {
-              item = makeFreeRole(item, t, topFreeRole);
+              item = makeFreeRole(item, t, topFreeRole, roomType);
             }
           }
 
@@ -641,9 +642,11 @@ const InviteInput = ({
       >
         {roomId === -1
           ? t("InviteMembersManuallyDescription")
-          : !allowInvitingGuests
-            ? t("Common:InviteToRoomManuallyInfoMembers")
-            : t("Common:InviteToRoomManuallyInfoGuest")}
+          : roomType === RoomsType.AiProjectRoom
+            ? t("Common:InviteToAgentManuallyInfoMembers")
+            : !allowInvitingGuests
+              ? t("Common:InviteToRoomManuallyInfoMembers")
+              : t("Common:InviteToRoomManuallyInfoGuest")}
       </Text>
       {roomId === -1 || allowInvitingGuests ? (
         <div className={styles.inviteLanguage}>

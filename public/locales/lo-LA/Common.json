@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "ການສົນທະນາຈະຄົ້ນຫາໄຟລ໌ໃນຫ້ອງຄວາມຮູ້ທີ່ເລືອກ. ສາມາດເລືອກໄດ້ຫຼາຍຫ້ອງ.",
   "AIProjectKnowledgeRooms": "ຖານຄວາມຮູ້",
   "AIProjectKnowledgeRoomsLimit": "ໂຄງການໜຶ່ງສາມາດມີຖານຄວາມຮູ້ໄດ້ສູງສຸດ {{limit}} ຖານ.",
-  "AIProjectManager": "ຜູ້ຈັດການໂຄງການ",
   "AIProjectManagerDescription": "ປ່ຽນຮູບແບບ ແລະ ແຫຼ່ງຂໍ້ມູນ, ເຊີນ ແລະ ລຶບສະມາຊິກ, ປ່ຽນຊື່ໂຄງການ.",
   "AIProjectMemberDescription": "ສົນທະນາໃນໂຄງການ ແລະ ເພີ່ມໄຟລ໌ເຂົ້າໃນໂຄງການ.",
   "AIProjectModelHint": "ທຸກຄົນໃນໂຄງການສົນທະນາກັບຮູບແບບນີ້. ສະມາຊິກບໍ່ສາມາດປ່ຽນມັນຈາກການສົນທະນາໄດ້.",

@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Чат шукає у файлах вибраних кімнат знань. Можна вибрати кілька кімнат.",
   "AIProjectKnowledgeRooms": "Бази знань",
   "AIProjectKnowledgeRoomsLimit": "До проєкту можна додати не більше {{limit}} баз знань.",
-  "AIProjectManager": "Менеджер проєкту",
   "AIProjectManagerDescription": "Змінює модель і джерела, запрошує та видаляє учасників, перейменовує проєкт.",
   "AIProjectMemberDescription": "Спілкується в чаті проєкту та додає до нього файли.",
   "AIProjectModelHint": "Усі в проєкті спілкуються з цією моделлю. Учасники не можуть змінити її з чату.",

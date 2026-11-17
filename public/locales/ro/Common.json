@@ -178,7 +178,6 @@
   "AIProjectKnowledgeHint": "Chatul caută în fișierele din sălile de cunoștințe selectate. Puteți selecta mai multe săli.",
   "AIProjectKnowledgeRooms": "Baze de cunoștințe",
   "AIProjectKnowledgeRoomsLimit": "Un proiect poate include cel mult {{limit}} baze de cunoștințe.",
-  "AIProjectManager": "Manager de proiect",
   "AIProjectManagerDescription": "Schimbă modelul și sursele, invită și elimină membri, redenumește proiectul.",
   "AIProjectMemberDescription": "Discută în proiect și adaugă fișiere în el.",
   "AIProjectModelHint": "Toți cei din proiect discută cu acest model. Membrii nu îl pot schimba din chat.",

@@ -496,6 +496,27 @@ describe("Key setup dialog", () => {
     expect(screen.getAllByRole("definition")).toHaveLength(3);
   });
 
+  it("Three icons", async () => {
+    await renderDialog();
+
+    expect(screen.getAllByTestId("key_setup_term_icon")).toHaveLength(3);
+  });
+
+  it("Read aloud", async () => {
+    await renderDialog();
+
+    for (const icon of screen.getAllByTestId("key_setup_term_icon")) {
+      expect(icon.closest("[aria-hidden=\"true\"]")).not.toBeNull();
+    }
+    expect(
+      screen.getAllByRole("term").map((term) => term.textContent),
+    ).toEqual([
+      "Common:KeySetupKeyTitle",
+      "Common:KeySetupPassphraseTitle",
+      "Common:KeySetupRecoveryTitle",
+    ]);
+  });
+
   it("Key of the account", () => {
     for (const key of ["KeySetupKeyTitle", "KeySetupKeyDescription"] as const) {
       expect(enCommon[key]).not.toMatch(/browser|device/i);

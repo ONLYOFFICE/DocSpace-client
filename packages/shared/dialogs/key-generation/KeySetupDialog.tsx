@@ -52,6 +52,10 @@ import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
 import { submitOnEnter } from "../key-dialog-keys";
 import { KeyDialogAnnouncement } from "../key-dialog-announcement";
+import KeyIcon from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg";
+import PadlockIcon from "PUBLIC_DIR/images/icons/16/padlock.react.svg";
+import RestoreIcon from "PUBLIC_DIR/images/restore.auth.react.svg";
+
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { PassphraseCreationFields } from "../passphrase-modal/PassphraseCreationFields";
 
@@ -202,31 +206,42 @@ export const KeySetupDialog = ({
                 data-testid="key_setup_explanation"
               >
                 <dl className={styles.terms}>
-                  {[
+                  {(
                     [
-                      t("Common:KeySetupKeyTitle"),
-                      t("Common:KeySetupKeyDescription"),
-                    ],
-                    [
-                      t("Common:KeySetupPassphraseTitle"),
-                      t("Common:KeySetupPassphraseDescription"),
-                    ],
-                    [
-                      t("Common:KeySetupRecoveryTitle"),
-                      t("Common:KeySetupRecoveryDescription"),
-                    ],
-                  ].map(([term, description]) => (
+                      [
+                        KeyIcon,
+                        t("Common:KeySetupKeyTitle"),
+                        t("Common:KeySetupKeyDescription"),
+                      ],
+                      [
+                        PadlockIcon,
+                        t("Common:KeySetupPassphraseTitle"),
+                        t("Common:KeySetupPassphraseDescription"),
+                      ],
+                      [
+                        RestoreIcon,
+                        t("Common:KeySetupRecoveryTitle"),
+                        t("Common:KeySetupRecoveryDescription"),
+                      ],
+                    ] as const
+                  ).map(([Icon, term, description]) => (
+                    // Spec: private-rooms/key-management, "Key setup terms carry icons"
                     <div key={term} className={styles.term}>
-                      <dt>
-                        <Text as="span" fontSize="13px" fontWeight={600}>
-                          {term}
-                        </Text>
-                      </dt>
-                      <dd>
-                        <Text as="span" fontSize="13px">
-                          {description}
-                        </Text>
-                      </dd>
+                      <span className={styles.termIcon} aria-hidden="true">
+                        <Icon data-testid="key_setup_term_icon" />
+                      </span>
+                      <div className={styles.termText}>
+                        <dt>
+                          <Text as="span" fontSize="13px" fontWeight={600}>
+                            {term}
+                          </Text>
+                        </dt>
+                        <dd>
+                          <Text as="span" fontSize="13px">
+                            {description}
+                          </Text>
+                        </dd>
+                      </div>
                     </div>
                   ))}
                 </dl>

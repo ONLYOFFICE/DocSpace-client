@@ -63,12 +63,34 @@
 
 .term {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: flex-start;
+  gap: 12px;
 
   dd {
     margin: 0;
   }
+}
+
+.termIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent-main) 15%, transparent);
+
+  svg path {
+    fill: var(--accent-main);
+  }
+}
+
+.termText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .notStored {

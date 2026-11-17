@@ -18,7 +18,7 @@ and SDK unit tests must stay green.
 
 ## 3. Explanation step
 
-- [ ] 3.1 Put an icon before each of the three terms of the explanation step in `packages/shared/dialogs/key-generation/KeySetupDialog.tsx`, hidden from assistive technology, the `dl` unchanged. Verify: unit cases "Three icons" and "Read aloud" in `packages/shared/dialogs/key-generation/__tests__/useGenerateKeyFlow.test.tsx`, the existing "Three terms explained" unchanged, and the image test if an icon was added
+- [x] 3.1 Put an icon before each of the three terms of the explanation step in `packages/shared/dialogs/key-generation/KeySetupDialog.tsx`, hidden from assistive technology, the `dl` unchanged. Verify: unit cases "Three icons" and "Read aloud" in `packages/shared/dialogs/key-generation/__tests__/useGenerateKeyFlow.test.tsx`, the existing "Three terms explained" unchanged, and the image test if an icon was added
 
 ## 4. Fingerprint
 

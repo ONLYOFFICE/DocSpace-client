@@ -520,6 +520,8 @@ export default inject(
         title: selectedFolderStore.title,
       },
       getSkill: skillsStore.get,
+      getKnowledgeBase: knowledgeBasesStore.get,
+      fetchKnowledgeBase: knowledgeBasesStore.fetch,
       agentSummaries: aiProjectsStore.tileSummaries,
       fetchAgentSummary: aiProjectsStore.fetchTileSummary,
       fetchSkill: skillsStore.fetch,

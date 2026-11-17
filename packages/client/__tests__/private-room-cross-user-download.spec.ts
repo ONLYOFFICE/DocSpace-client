@@ -375,7 +375,7 @@ test.describe("Private room — cross-user file exchange", () => {
     await downloadGroup.hover();
 
     const downloadDecrypt = page.getByRole("menuitem", {
-      name: "Original format",
+      name: "Decrypted copy",
       exact: true,
     });
     await expect(downloadDecrypt).toBeVisible({ timeout: 5000 });
@@ -425,12 +425,12 @@ test.describe("Private room — cross-user file exchange", () => {
     await downloadGroup.hover();
     await expect(
       page.getByRole("menuitem", {
-        name: "Download without decryption",
+        name: "Encrypted copy",
         exact: true,
       }),
     ).toBeVisible({ timeout: 5000 });
     await page
-      .getByRole("menuitem", { name: "Original format", exact: true })
+      .getByRole("menuitem", { name: "Decrypted copy", exact: true })
       .click();
 
     await enterPassphrase(passphrasePrompt, passphrase);

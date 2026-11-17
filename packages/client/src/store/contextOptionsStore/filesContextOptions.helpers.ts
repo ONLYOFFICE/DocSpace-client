@@ -1128,14 +1128,23 @@ export const getFilesContextOptionsImpl = (
   );
 
   if (downloadOption && (downloadAsOption || downloadEncryptedOption)) {
+    // Spec: private-rooms/file-operations, "Download submenu names both results"
     const originalDownloadOption = {
       ...downloadOption,
       key: "download-original",
-      label: t("Common:OriginalFormat"),
+      label: downloadEncryptedOption
+        ? t("Common:DownloadDecryptedCopy")
+        : t("Common:OriginalFormat"),
     };
 
     newOptions = [
-      ...newOptions.filter((option) => option.key !== "download"),
+      ...newOptions
+        .filter((option) => option.key !== "download")
+        .map((option) =>
+          option.key === "download-encrypted"
+            ? { ...option, label: t("Common:DownloadEncryptedCopy") }
+            : option,
+        ),
       originalDownloadOption,
     ];
 

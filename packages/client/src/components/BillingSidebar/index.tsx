@@ -55,7 +55,6 @@ import AppsSidebar from "SRC_DIR/components/AppsSidebar";
 
 type BillingSidebarProps = {
   isNotPaidPeriod: boolean;
-  isStripePortalAvailable: boolean;
 };
 
 const ITEMS = [
@@ -97,7 +96,6 @@ const ITEMS = [
     path: "/billing/invoice-history",
     icon: InvoiceHistoryReactSvgUrl,
     translationKey: "Common:Invoices" as const,
-    ownerOrPayerOnly: true,
   },
   {
     id: "billing-usage",
@@ -108,18 +106,13 @@ const ITEMS = [
   },
 ];
 
-const BillingSidebar = ({
-  isNotPaidPeriod,
-  isStripePortalAvailable,
-}: BillingSidebarProps) => {
+const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
 
   const visibleItems = ITEMS.filter(
-    (item) =>
-      (!item.hideWhenNotPaid || !isNotPaidPeriod) &&
-      (!item.ownerOrPayerOnly || isStripePortalAvailable),
+    (item) => !item.hideWhenNotPaid || !isNotPaidPeriod,
   );
 
   const activeId = React.useMemo(() => {
@@ -164,13 +157,10 @@ const BillingSidebar = ({
   );
 };
 
-export default inject(({ currentTariffStatusStore, paymentStore }: TStore) => {
+export default inject(({ currentTariffStatusStore }: TStore) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { isStripePortalAvailable } = paymentStore;
 
   return {
     isNotPaidPeriod,
-    isStripePortalAvailable,
   };
 })(observer(BillingSidebar));
-

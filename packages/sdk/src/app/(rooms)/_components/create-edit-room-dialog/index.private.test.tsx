@@ -234,6 +234,15 @@ describe("CreateEditRoomDialog of a private room", () => {
     expect(container.textContent).toContain("Common:PrivateRoomTitle");
   });
 
+  it("Creating a private room", async () => {
+    await render({ isPrivate: true });
+
+    expect(container.textContent).toContain(
+      "Common:PrivateRoomPanelDescription",
+    );
+    expect(container.querySelector("a")).toBeNull();
+  });
+
   it("shows the private badge when a private room is edited from any entry", async () => {
     await render({
       room: { id: 10, title: "Vault", private: true } as React.ComponentProps<

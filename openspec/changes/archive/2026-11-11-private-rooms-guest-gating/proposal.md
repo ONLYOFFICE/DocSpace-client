@@ -29,8 +29,6 @@ Out of scope:
 - Hiding the Private section from guests. It is empty for them, since a
   guest cannot be a member of a private room; whether to hide it is a
   question of the sidebar, not of key generation.
-- What the server does with the stored key pair of a user who is turned
-  into a guest, asked in `private-rooms-server-followups` 1.5.
 - Users of the other types.
 
 Decisions taken:

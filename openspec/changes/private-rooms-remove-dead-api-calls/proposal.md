@@ -18,11 +18,10 @@ contract tests cannot mirror routes that do not exist.
   client shell that only this request fed.
 - Remove the privacy settings read and write requests and their types.
 - Keep the desktop encryption bridge and point its sharing-keys request at a
-  route the server exposes. The bridge hands the user's key pair to the
-  desktop application's new crypto engine, whose id
-  (`{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`) the desktop developer asked for
-  to tell it from the old desktop engine; the route and the key-write
-  contract are agreed with the desktop developer (decision 1).
+  route the server exposes. The desktop application's new crypto engine has
+  the id `{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`, which the desktop
+  developer asked for to tell it from the old desktop engine; the route and
+  the key-write contract are agreed with the desktop developer (decision 1).
 - Delete the matching MSW handlers and contract-test entries, if any, and
   update the server-contract spec so it no longer lists routes the client
   does not call.
@@ -40,9 +39,8 @@ None.
   surface matches the server routes.
 - `private-rooms/editor-integration`: the requirement "Legacy desktop path
   uses editor-provided keys" is renamed "Desktop path uses editor-provided
-  keys" and changes so the bridge passes the key pair with its crypto engine
-  id and answers the desktop's sharing-keys request through a route the
-  server exposes.
+  keys" and changes so the bridge answers the desktop's sharing-keys request
+  through a route the server exposes.
 
 ## Impact
 

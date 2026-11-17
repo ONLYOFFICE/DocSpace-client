@@ -102,6 +102,3 @@ No stashed design document covers these topics.
 - [`private-rooms-dse3-header-authentication` archives after this change with
   version 3 binding the header] → It must then modify or remove the renamed
   limitation for version-3 containers. A note in its tasks records that.
-- [A guest who held a key before their type changed] → Not read; the server's
-  key check would let such a user in. Recorded as an open question for the
-  backend, not as behaviour.

@@ -1000,6 +1000,16 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  /**
+   * Help article about private rooms. Empty until the resources carry the
+   * entry: the bare help-center domain explains nothing about them.
+   */
+  get privateRoomsHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.privaterooms
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.privaterooms}`
+      : undefined;
+  }
+
   get templateGalleryAvailable() {
     return !!(this.formGallery && this.formGallery.domain !== "");
   }

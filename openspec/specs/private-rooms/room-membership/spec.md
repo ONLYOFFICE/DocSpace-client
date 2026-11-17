@@ -7,7 +7,7 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag. This rule is enforced by the client only: the server accepts the private flag with any room type.
+The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag.
 
 #### Scenario: Private card chosen
 - **WHEN** the user creates a room from the Private section, where the dialog shows the Private room type, and confirms creation
@@ -16,10 +16,6 @@ The system SHALL present "Private room" as its own room type in the create-room 
 #### Scenario: Other room type
 - **WHEN** a Public, Form filling, Virtual data or Collaboration room is created
 - **THEN** the private flag is not sent and the room is not encrypted
-
-#### Scenario: Private flag sent with another room type
-- **WHEN** a create request that bypasses the client sets the private flag on a room type other than Custom
-- **THEN** the server creates a private room of the requested type
 
 ### Requirement: Private room creation requires an encryption key
 The system SHALL refuse to create a private room for a user who has no registered encryption key, after re-fetching the keys from the server, and SHALL show Common:EncryptionKeysRequiredForPrivateRoom.
@@ -81,11 +77,11 @@ The system SHALL NOT allow the room type or the private flag to be changed after
 - **THEN** the room type selector is disabled and saving changes neither the type nor the private flag
 
 ### Requirement: Private badge in permanent settings
-The system SHALL show one "private room" block with Common:PrivateRoomTitle and Common:PrivateRoomDescription in the create and edit dialogs of a private room, in the place of the room type, and SHALL NOT show the Custom room block or a second private-room block there.
+The system SHALL show one "private room" block with Common:PrivateRoomTitle and Common:PrivateRoomPanelDescription in the create and edit dialogs of a private room, in the place of the room type, and SHALL NOT show the Custom room block or a second private-room block there. Under the description it SHALL show a Common:LearnMore link to the help-center entry `privaterooms` when the portal's resources carry that entry, and no link otherwise.
 
 #### Scenario: Edit dialog of a private room
 - **WHEN** the edit dialog of a private room is open
-- **THEN** the room type block shows the private room icon, Common:PrivateRoomTitle and Common:PrivateRoomDescription, and neither Common:CustomRoomTitle nor a second private-room block is shown
+- **THEN** the room type block shows the private room icon, Common:PrivateRoomTitle and Common:PrivateRoomPanelDescription, and neither Common:CustomRoomTitle nor a second private-room block is shown
 
 #### Scenario: Create dialog of a private room
 - **WHEN** the create dialog is open on the Private type
@@ -94,6 +90,14 @@ The system SHALL show one "private room" block with Common:PrivateRoomTitle and 
 #### Scenario: Edit dialog of an ordinary Custom room
 - **WHEN** the edit dialog of a Custom room without the private setting is open
 - **THEN** the room type block shows Common:CustomRoomTitle as before
+
+#### Scenario: Help article configured
+- **WHEN** the help-center resources of the portal carry the entry `privaterooms` and the create dialog is open on the Private type
+- **THEN** a Common:LearnMore link under the description opens that article in a new tab
+
+#### Scenario: No help article
+- **WHEN** the help-center resources carry no entry `privaterooms`, or no help-center domain
+- **THEN** the block shows no link
 
 ### Requirement: Invite panel hides external links for private rooms
 The system SHALL NOT render the shared-links block in the invite panel of a private room.
@@ -228,10 +232,6 @@ The system SHALL drop the leaver's role without a revocation of its own when a m
 #### Scenario: Cleanup fails
 - **WHEN** the role update fails before the server has written the role
 - **THEN** the member stays in the room with their keys and the failure is shown
-
-#### Scenario: Key removal fails on the server
-- **WHEN** the server has dropped the role and then fails to remove the leaver's keys
-- **THEN** the failure is shown, the member is no longer in the room, and their wrapped keys stay on the files
 
 ### Requirement: New owner must hold a verified key
 The system SHALL validate the chosen new owner of a private room before transferring ownership, whether the owner is changed from the owner panel or from the room's edit dialog, and SHALL refuse with Common:EncryptedChangeOwnerNoKeys or Common:EncryptedChangeOwnerKeyMismatch when the candidate has no key or a refused key change.

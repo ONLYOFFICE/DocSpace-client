@@ -33,34 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { inject, observer } from "mobx-react";
-import { Navigate } from "react-router";
-
 import { InvoiceHistory } from "@onlyoffice/apps-ui-kit/billing";
 
-import { PAYMENT_ROUTES } from "../../utils";
-
-type InvoiceHistoryPageProps = {
-  isStripePortalAvailable?: boolean;
-  isPayerInfoLoaded?: boolean;
-};
-
-const InvoiceHistoryPage = ({
-  isStripePortalAvailable,
-  isPayerInfoLoaded,
-}: InvoiceHistoryPageProps) => {
-  if (isPayerInfoLoaded && !isStripePortalAvailable)
-    return <Navigate to={PAYMENT_ROUTES.wallet} replace />;
-
+const InvoiceHistoryPage = () => {
   return <InvoiceHistory />;
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
-  const { isStripePortalAvailable } = paymentStore;
-  const { isPayerInfoLoaded } = currentTariffStatusStore;
-
-  return {
-    isStripePortalAvailable,
-    isPayerInfoLoaded,
-  };
-})(observer(InvoiceHistoryPage));
+export default InvoiceHistoryPage;

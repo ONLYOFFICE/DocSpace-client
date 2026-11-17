@@ -50,6 +50,7 @@ const HeaderNav = ({
   setUserIsUpdate,
   getActions,
   isShowLiveChat,
+  profileMenuItemsList,
   hideProfileMenu,
 }) => {
   const { t } = useTranslation(["Common"]);
@@ -58,10 +59,13 @@ const HeaderNav = ({
   // untracked, so the `checked` it reads there subscribes no one, and a memo
   // keyed only on the stable function would hold the switch at whatever it was
   // when the header first rendered. Same reason AppsSidebar/ProfileBlock
-  // observes the flag.
+  // observes the flag. `profileMenuItemsList` is a dependency for the same
+  // reason: plugins register their items after the header has rendered.
+  // The panel below draws a flat list and cannot open a submenu, so plugin
+  // items are never folded into "More options" here.
   const userActions = useMemo(
-    () => getActions(t),
-    [getActions, t, isShowLiveChat],
+    () => getActions(t, { foldPluginItems: false }),
+    [getActions, t, isShowLiveChat, profileMenuItemsList],
   );
 
   return (
@@ -87,20 +91,24 @@ HeaderNav.propTypes = {
   setUserIsUpdate: PropTypes.func,
   getActions: PropTypes.func,
   isShowLiveChat: PropTypes.bool,
+  profileMenuItemsList: PropTypes.array,
   hideProfileMenu: PropTypes.bool,
 };
 
-export default inject(({ authStore, profileActionsStore, userStore }) => {
-  const { isAuthenticated } = authStore;
-  const { user, userIsUpdate, setUserIsUpdate } = userStore;
-  const { getActions, isShowLiveChat } = profileActionsStore;
+export default inject(
+  ({ authStore, profileActionsStore, userStore, pluginStore }) => {
+    const { isAuthenticated } = authStore;
+    const { user, userIsUpdate, setUserIsUpdate } = userStore;
+    const { getActions, isShowLiveChat } = profileActionsStore;
 
-  return {
-    user,
-    isAuthenticated,
-    userIsUpdate,
-    setUserIsUpdate,
-    getActions,
-    isShowLiveChat,
-  };
-})(observer(HeaderNav));
+    return {
+      user,
+      isAuthenticated,
+      userIsUpdate,
+      setUserIsUpdate,
+      getActions,
+      isShowLiveChat,
+      profileMenuItemsList: pluginStore.profileMenuItemsList,
+    };
+  },
+)(observer(HeaderNav));

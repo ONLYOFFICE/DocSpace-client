@@ -90,7 +90,7 @@ The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the
 - **AND** the document URL is unchanged and still references the encrypted blob
 
 #### Scenario: Engine id taken from the server
-- **WHEN** the server configuration lists key pairs with a crypto engine id
+- **WHEN** the server configuration names a crypto engine id
 - **THEN** that engine id is used; otherwise the client default is used
 
 #### Scenario: Token handling
@@ -135,12 +135,12 @@ The editor SHALL NOT register the AI editor-tool bridge for an encrypted file, e
 - **WHEN** an encrypted file is opened by an authenticated user
 - **THEN** the AI tool connector is not initialised for that session
 
-### Requirement: Server attaches the caller's key pairs to the editor configuration
-The server SHALL include the calling user's encryption key pairs in the editor configuration for a file located in a private room.
+### Requirement: Editor configuration carries the file key object
+The client SHALL set the encryption keys entry of the editor configuration to the file key object the editor reads, for an encrypted file located in a private room.
 
 #### Scenario: File in a private room
-- **WHEN** an editor configuration is requested for a file whose room is private
-- **THEN** the response carries the caller's key pairs with their crypto engine id
+- **WHEN** the editor is configured for an encrypted file whose room is private
+- **THEN** the encryption keys entry holds the file key object the editor reads
 
 ### Requirement: Document Server save keeps the encrypted flag
 The server SHALL accept the encrypted flag from the Document Server callback and SHALL store the returned content as an encrypted version of the file. A save of a file whose current version is encrypted that arrives without the encrypted flag SHALL be refused, and the previous version SHALL stay current.
@@ -154,10 +154,10 @@ The server SHALL accept the encrypted flag from the Document Server callback and
 - **THEN** the save is refused, no version MUST be stored as not encrypted, and the previous encrypted version stays current
 
 ### Requirement: File handler serves ciphertext for encrypted files
-The server SHALL serve the stored bytes of an encrypted file unchanged when the editor or client downloads it, and SHALL skip the anonymous Document Server signature check that applies to non-encrypted files.
+The server SHALL serve the stored ciphertext of an encrypted file unchanged when the browser downloads it by its address with a valid stream key.
 
 #### Scenario: Encrypted file requested
-- **WHEN** the file handler is asked for an encrypted file
+- **WHEN** the browser requests an encrypted file by its address with a valid stream key
 - **THEN** the stored ciphertext is returned as is
 
 ### Requirement: Conversion refused for private rooms
@@ -183,11 +183,11 @@ The server SHALL classify an encrypted PDF as a form by reading the form flag fr
 - **THEN** the file is treated as a plain PDF
 
 ### Requirement: Legacy desktop path uses editor-provided keys
-When the editor runs inside the desktop application, the editor SHALL pass the key pairs from the server configuration to the desktop encryption bridge and SHALL request file access through the desktop-specific access call, which has no server route and is answered with 404.
+When the editor runs inside the desktop application, the editor SHALL request file access through the desktop-specific access call, which has no server route and is answered with 404.
 
 #### Scenario: Desktop session
-- **WHEN** the editor is initialised in the desktop application with key pairs in the configuration
-- **THEN** the key pairs are handed to the desktop bridge and the desktop access call is sent, which the server answers with 404, so no file keys are obtained through it
+- **WHEN** the editor is initialised in the desktop application for an encrypted file
+- **THEN** the desktop access call is sent, which the server answers with 404, so no file keys are obtained through it
 
 ### Requirement: SDK opens encrypted files only with the Document Server capability
 The SDK file list SHALL refuse to open an encrypted file in the editor while the Document Server capability is absent and SHALL show Common:PrivateRoomEditorNotSupported; when the capability is present it SHALL open the file through the same key flow as the client.

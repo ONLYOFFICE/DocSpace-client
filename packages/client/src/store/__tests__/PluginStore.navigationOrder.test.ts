@@ -57,23 +57,33 @@ import PluginStore from "../PluginStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
 import type { TPlugin } from "../../helpers/plugins/types";
 
-const navigationPlugin = (name: string, keys: string[]) => ({
+const navigationPlugin = (
+  name: string,
+  keys: string[],
+  access: { users?: string[]; groups?: string[] } = {},
+) => ({
   name,
   enabled: true,
   version: "1.0.0",
   iconUrl: `https://portal.test/plugins/${name}`,
   getArticleNavigationItems: () =>
     new Map(
-      keys.map((key) => [key, { key, label: key, icon: `${key}.svg` }]),
+      keys.map((key) => [
+        key,
+        { key, label: key, icon: `${key}.svg`, ...access },
+      ]),
     ),
 });
 
 // The plugins in the order their bundles finished loading, which is not the order they were installed in.
-const withLoadedPlugins = (loaded: ReturnType<typeof navigationPlugin>[]) => {
+const withLoadedPlugins = (
+  loaded: ReturnType<typeof navigationPlugin>[],
+  user: { id: string; groups?: { id: string }[] } | null = null,
+) => {
   const store = new PluginStore(
     { culture: "en" } as unknown as SettingsStore,
     {} as unknown as SelectedFolderStore,
-    { user: null } as unknown as UserStore,
+    { user } as unknown as UserStore,
     {} as unknown as CurrentTariffStatusStore,
   );
 
@@ -113,5 +123,17 @@ describe("PluginStore article navigation order", () => {
     ]);
 
     expect(keys).toEqual(["chat", "search", "my-day"]);
+  });
+
+  it("drops an item the user has no access to and keeps the others in order", () => {
+    const loaded = [
+      navigationPlugin("cws-03-wiki", ["wiki"]),
+      navigationPlugin("cws-02-crm", ["crm"], { groups: ["sales"], users: ["director"] }),
+      navigationPlugin("cws-01-chat", ["chat"]),
+    ];
+
+    expect(withLoadedPlugins(loaded, { id: "employee", groups: [{ id: "support" }] })).toEqual(["chat", "wiki"]);
+    expect(withLoadedPlugins(loaded, { id: "seller", groups: [{ id: "sales" }] })).toEqual(["chat", "crm", "wiki"]);
+    expect(withLoadedPlugins(loaded, { id: "director" })).toEqual(["chat", "crm", "wiki"]);
   });
 });

@@ -398,7 +398,7 @@ test.describe("Private room — archived", () => {
     await openContextMenu(page, BUDGET.name);
     await page.locator("#option_download").hover();
     await page
-      .getByRole("menuitem", { name: "Original format", exact: true })
+      .getByRole("menuitem", { name: "Decrypted copy", exact: true })
       .click();
     await unlockIfPrompted(page, passphrase);
 

@@ -74,7 +74,7 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  *  - `frames` takes one clipped screenshot of the header per language, width
  *    and room-name length. These are the frames to hand to design.
  *  - `invariants` states, as assertions, the five things the header should do
- *    when it runs out of room. One of them does not hold today and carries
+ *    when it runs out of room. An invariant that does not hold carries
  *    `test.fail()` with the reason - when a fix lands, Playwright reports
  *    "expected to fail but passed" and the marker comes off.
  *
@@ -440,22 +440,17 @@ test.describe("Room header crowding - invariants", () => {
 
   /**
    * The tariff line is built to disappear whole rather than truncate - that is
-   * what the `hidden` class in tariff-bar.module.scss is for. It does not,
-   * because `checkBar()` runs on mount and on a title change only
-   * (packages/client/src/components/TariffBar/helpers.js), so opening the info
-   * panel or resizing the window leaves a measured-once line in a row that has
-   * since become narrower.
+   * what the `hidden` class in tariff-bar.module.scss is for. `checkBar()`
+   * (packages/client/src/components/TariffBar/helpers.js) used to run on mount
+   * and on a title change only, so opening the info panel left a measured-once
+   * line truncating in a row that had since become narrower; it now also runs
+   * whenever the section header or the line's wrapper resizes.
    */
   test("the tariff line disappears instead of truncating", async ({
     page,
     baseUrl,
     mockRequest,
   }) => {
-    test.fail(
-      true,
-      "known: checkBar() never re-runs, so the line truncates instead of hiding",
-    );
-
     await openRoom(page, baseUrl, mockRequest, {
       key: "ru-short-1280-info-panel",
       culture: "ru-RU",

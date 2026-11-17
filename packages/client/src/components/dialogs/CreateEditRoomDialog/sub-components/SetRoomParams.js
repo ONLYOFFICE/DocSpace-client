@@ -37,7 +37,7 @@ import React, { useState, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, RoomsTypePrivate } from "@docspace/shared/enums";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
@@ -96,6 +96,7 @@ const SetRoomParams = ({
   setAvatarEditorDialogVisible,
   roomLogoCoverDialogVisible,
   currentColorScheme,
+  privateRoomsHelpUrl,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
   cover,
@@ -446,6 +447,11 @@ const SetRoomParams = ({
           roomType={getDisplayedRoomType(roomParams)}
           type="displayItem"
           isTemplateRoom={selection?.isTemplate || isTemplateSelected}
+          helpUrl={
+            getDisplayedRoomType(roomParams) === RoomsTypePrivate
+              ? privateRoomsHelpUrl
+              : undefined
+          }
         />
       ) : (
         <RoomTypeDropdown
@@ -613,6 +619,7 @@ export default inject(
       maxImageUploadSize,
       currentColorScheme,
       externalDbEnabled,
+      privateRoomsHelpUrl,
     } = settingsStore;
 
     const isRoomAdmin = authStore.isRoomAdmin;
@@ -670,6 +677,7 @@ export default inject(
       roomCoverDialogProps,
       roomLogoCoverDialogVisible,
       currentColorScheme,
+      privateRoomsHelpUrl,
       image,
       cover,
       covers,

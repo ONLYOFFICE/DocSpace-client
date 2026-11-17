@@ -62,6 +62,9 @@
 import type { CSSProperties } from "react";
 
 import { AnalyticsEvents } from "@docspace/shared/enums";
+import type { TUser } from "@docspace/shared/api/people/types";
+
+import { Section } from "SRC_DIR/helpers/plugins/enums";
 
 /**
  * Columns the apps grid uses at its widest.
@@ -138,4 +141,22 @@ export const pushDashboardFileCreated = (
 export type AiFormsSettings = {
   roomId: number;
   libraryId?: number;
+};
+
+export const getPluginCardSection = (
+  appears: Section[] | undefined,
+  user:
+    | Pick<TUser, "isOwner" | "isAdmin" | "isVisitor" | "isCollaborator">
+    | null
+    | undefined,
+): Section | undefined => {
+  const isAdmin = !!user?.isOwner || !!user?.isAdmin;
+  const canOpen: Record<Section, boolean> = {
+    [Section.Files]: !!user,
+    [Section.Accounts]:
+      isAdmin || (!!user && !user.isVisitor && !user.isCollaborator),
+    [Section.Settings]: isAdmin,
+  };
+
+  return (appears ?? [Section.Files]).find((section) => canOpen[section]);
 };

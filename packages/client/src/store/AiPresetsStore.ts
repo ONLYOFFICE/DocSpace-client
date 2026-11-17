@@ -48,6 +48,7 @@ import {
   type TAiProject,
   type TAiProjectLogo,
   type TAiProjectSource,
+  type TAiProjectSuggestion,
 } from "@docspace/shared/api/ai/projects";
 
 /**
@@ -62,6 +63,11 @@ export type TAiPreset = AiChatPresetSettings & {
   logo?: TAiProjectLogo;
   /** What the user may do with the project: the chat panel's "Agent actions". */
   rights: TAiPresetRights;
+  /**
+   * The project's own suggestion chips; empty when it has none, or when it
+   * was read with the list, which answers the rooms without their settings.
+   */
+  suggestions: TAiProjectSuggestion[];
 };
 
 export type TAiPresetRights = {
@@ -109,6 +115,7 @@ export const toAiPreset = (project: TAiProject): TAiPreset => {
       share: !!project.security?.EditAccess,
       delete: !!project.security?.Delete,
     },
+    suggestions: project.aiProject.suggestions ?? [],
   };
 };
 

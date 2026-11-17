@@ -62,8 +62,13 @@ describe("AiPresetsStore", () => {
       knowledgeRooms: [{ cloud: "docspace", id: "9", name: "Docs" }],
       // The fixture may change the settings and carries no room rights.
       rights: { edit: true, share: false, delete: false },
+      suggestions: [],
     });
     expect(toAiPreset(project(2, "Default", { profile: null })).profileId).toBeNull();
+    expect(
+      toAiPreset(project(3, "Legal", { suggestions: [{ name: "Review", prompt: "Review this contract" }] }))
+        .suggestions,
+    ).toEqual([{ name: "Review", prompt: "Review this contract" }]);
   });
 
   it("lists the user's projects, the most recent first, and none without a user", async () => {

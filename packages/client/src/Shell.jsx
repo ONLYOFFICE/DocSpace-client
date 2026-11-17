@@ -188,6 +188,7 @@ const Shell = ({ page = "home", ...rest }) => {
     isAIReady,
     aiPresetContextRooms,
     aiActivePresetId,
+    aiActivePresetSuggestions,
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
@@ -1045,14 +1046,14 @@ const Shell = ({ page = "home", ...rest }) => {
             isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
           }
           composerNotice={aiComposerNotice}
-          // A chat inside a project offers the project's own chips; one
-          // opened from an AI preset starts with none: its sources are the
-          // subject, not the page.
+          // A chat inside a project offers the project's own chips. An agent
+          // picked in the panel offers its own as well, and the chips of the
+          // section the panel is open in when it has none.
           suggestions={
             isInsideAiProject
               ? (aiActiveProject?.aiProject.suggestions ?? NO_SUGGESTIONS)
-              : aiPresetContextRooms
-                ? NO_SUGGESTIONS
+              : aiActivePresetSuggestions?.length
+                ? aiActivePresetSuggestions
                 : aiSuggestions
           }
           // An empty project chat opens with the project's logo, name and
@@ -1252,6 +1253,7 @@ const ShellWrapper = inject(
       aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
       // The agent the chat runs on, picked in the panel or open on its page.
       aiActivePresetId: aiPresetsStore.activePreset?.id ?? null,
+      aiActivePresetSuggestions: aiPresetsStore.activePreset?.suggestions,
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
       portalHasChatModel: aiProjectsStore.portalHasChatModel,

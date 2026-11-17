@@ -383,11 +383,21 @@ const CreateRoomDialog = ({
     ? t("ChooseSetType")
     : t("ChooseRoomType");
 
-  const dialogHeader = !roomParams.type
-    ? chooseTypeHeader
-    : roomParams.type === RoomsType.FormRoom
-      ? t("Common:CreateFormSpaceAction")
-      : t("Common:CreateRoom");
+  // The AI Chat section creates skill sets and knowledge bases, not rooms.
+  const getCreateHeader = () => {
+    switch (roomParams.type) {
+      case RoomsType.FormRoom:
+        return t("Common:CreateFormSpaceAction");
+      case RoomsType.InstructionsRoom:
+        return t("Common:CreateSkillSet");
+      case RoomsType.KnowledgeRoom:
+        return t("Common:CreateKnowledgeBase");
+      default:
+        return t("Common:CreateRoom");
+    }
+  };
+
+  const dialogHeader = !roomParams.type ? chooseTypeHeader : getCreateHeader();
 
   return (
     <>

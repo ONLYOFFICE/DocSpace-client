@@ -36,6 +36,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import { BaseTile } from "@onlyoffice/apps-ui-kit/components/tiles/base-tile";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -43,7 +44,21 @@ import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 
 import { useStore } from "SRC_DIR/store/useStore";
 
+import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+
 import styles from "./AiProjectTile.module.scss";
+
+const DASH = "\u2014";
+
+/** How many linked rooms of a kind a card names; the rest it counts. */
+const SHOWN_SOURCES = 2;
+
+/** The linked rooms of a kind a card names, and how many more it counts as "+N". */
+export const getShownSources = (names: string[] = []) => ({
+  shown: names.slice(0, SHOWN_SOURCES),
+  rest: Math.max(0, names.length - SHOWN_SOURCES),
+});
 
 type TBaseTileProps = React.ComponentProps<typeof BaseTile>;
 
@@ -98,20 +113,62 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
 
   const [content] = React.Children.toArray(children);
 
-  const list = (names: string[] | undefined) => (names?.length ? names.join(", ") : "\u2014");
   // An agent without a model of its own runs on the portal's chat model.
-  const model = (summary && (summary.model ?? aiProjectsStore.defaultModelName)) || "\u2014";
+  const model = (summary && (summary.model ?? aiProjectsStore.defaultModelName)) || DASH;
 
   const { createdBy, tags } = item as { createdBy?: { displayName?: string }; tags?: string[] };
   const owner = createdBy?.displayName;
   // An agent's category is its first tag, as the list's category row reads it.
   const category = tags?.[0];
 
+  const text = (key: string, value: string) => (
+    <Text
+      truncate
+      fontSize="13px"
+      fontWeight={600}
+      className={styles.value}
+      title={value}
+      dir="auto"
+      data-testid={`ai-project-tile-${key}`}
+    >
+      {value}
+    </Text>
+  );
+
+  // The linked rooms of a kind, one per line with the kind's icon: the
+  // first two, then how many more. A kind with none shows a dash.
+  const sources = (key: string, icon: string, names: string[] | undefined) => {
+    if (!names?.length) return text(key, DASH);
+    const { shown, rest } = getShownSources(names);
+    return (
+      <div className={`${styles.value} ${styles.sources}`} data-testid={`ai-project-tile-${key}`}>
+        {shown.map((name, index) => (
+          // Two linked rooms may share a title.
+          <div key={`${index}-${name}`} className={styles.source} data-testid={`ai-project-tile-${key}-item`}>
+            <ReactSVG src={icon} className={styles.icon} />
+            <Text truncate fontSize="13px" fontWeight={600} title={name} dir="auto">
+              {name}
+            </Text>
+          </div>
+        ))}
+        {rest ? (
+          <Text fontSize="13px" fontWeight={600} className={styles.more} data-testid={`ai-project-tile-${key}-more`}>
+            {`+${rest}`}
+          </Text>
+        ) : null}
+      </div>
+    );
+  };
+
   const rows = [
-    ...(category ? [{ key: "category", label: t("Common:Category"), value: category }] : []),
-    { key: "model", label: t("Common:AIAgentModel"), value: model },
-    { key: "skills", label: t("Common:SkillSets"), value: list(summary?.skills) },
-    { key: "knowledge", label: t("Common:AIProjectKnowledgeRooms"), value: list(summary?.knowledge) },
+    ...(category ? [{ key: "category", label: t("Common:Category"), value: text("category", category) }] : []),
+    { key: "model", label: t("Common:AIAgentModel"), value: text("model", model) },
+    { key: "skills", label: t("Common:SkillSets"), value: sources("skills", SkillSetReactSvgUrl, summary?.skills) },
+    {
+      key: "knowledge",
+      label: t("Common:AIProjectKnowledgeRooms"),
+      value: sources("knowledge", KnowledgeReactSvgUrl, summary?.knowledge),
+    },
   ];
 
   const bottomContent = (
@@ -121,17 +178,7 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
           <Text truncate fontSize="13px" fontWeight={400} className={styles.label}>
             {label}
           </Text>
-          <Text
-            truncate
-            fontSize="13px"
-            fontWeight={600}
-            className={styles.value}
-            title={value}
-            dir="auto"
-            data-testid={`ai-project-tile-${key}`}
-          >
-            {value}
-          </Text>
+          {value}
         </React.Fragment>
       ))}
       <Text truncate fontSize="13px" fontWeight={400} className={styles.label}>

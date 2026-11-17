@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // The agent tile takes the room template's tile as its model: the same
-// paddings and rhythm, with up to five lines in the lower half.
+// paddings and rhythm, with up to five rows in the lower half.
 .aiProjectTile {
-  max-height: 212px;
+  max-height: 292px;
   row-gap: 12px;
   padding: 12px 0;
 
@@ -57,10 +57,12 @@
       }
     }
 
-    // Five lines of 20px and the four gaps between them, whether the agent
-    // has a category or not: every card of the list is as high.
+    // Five rows and the four gaps between them, whether the agent has a
+    // category or not and however many rooms it links: every card of the
+    // list is as high. Rows are lines of 20px; Skill sets and Knowledge
+    // bases take three each (two rooms and "+N").
     .bottomContent {
-      height: 132px;
+      height: 212px;
       width: 100%;
       box-sizing: border-box;
       overflow: hidden;
@@ -91,4 +93,37 @@
   .label {
     color: var(--tile-sub-text);
   }
+}
+
+// The linked rooms of a kind, one per line.
+.sources {
+  display: flex;
+  flex-direction: column;
+}
+
+.source {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  line-height: 20px;
+}
+
+.icon {
+  display: flex;
+  flex: 0 0 auto;
+
+  svg {
+    width: 12px;
+    height: 12px;
+
+    path {
+      fill: var(--text-color);
+    }
+  }
+}
+
+.more {
+  line-height: 20px;
+  color: var(--tile-sub-text);
 }

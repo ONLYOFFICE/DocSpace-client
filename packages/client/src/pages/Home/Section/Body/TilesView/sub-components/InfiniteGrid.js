@@ -79,7 +79,7 @@ const Card = ({ children, ...rest }) => {
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
     const templateHeight = 126 + verticalRoomGap;
-    const agentHeight = 210 + verticalRoomGap;
+    const agentHeight = 290 + verticalRoomGap;
 
     if (isAgentTile(child)) return agentHeight;
     if (isRoom) return roomHeight;

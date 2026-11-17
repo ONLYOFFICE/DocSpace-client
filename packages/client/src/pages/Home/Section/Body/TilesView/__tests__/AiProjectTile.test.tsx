@@ -54,6 +54,8 @@ const renderTile = (thumbnailClick = vi.fn(), item: Record<string, unknown> = {}
 };
 
 const value = (key: string) => screen.getByTestId(`ai-project-tile-${key}`).textContent;
+const items = (key: string) =>
+  screen.queryAllByTestId(`ai-project-tile-${key}-item`).map((item) => item.textContent);
 
 describe("AiProjectTile", () => {
   beforeEach(() => {
@@ -82,8 +84,21 @@ describe("AiProjectTile", () => {
     expect(screen.getByText("Common:SkillSets")).toBeInTheDocument();
     expect(screen.getByText("Common:AIProjectKnowledgeRooms")).toBeInTheDocument();
     expect(value("model")).toBe("GLM 5.3 Flash");
-    expect(value("skills")).toBe("Legal, Sales");
-    expect(value("knowledge")).toBe("Wiki");
+    expect(items("skills")).toEqual(["Legal", "Sales"]);
+    expect(items("knowledge")).toEqual(["Wiki"]);
+    expect(screen.queryByTestId("ai-project-tile-skills-more")).not.toBeInTheDocument();
+  });
+
+  it("names the first two skill sets one per line, then counts the rest", () => {
+    store.tileSummaries = {
+      7: { model: null, modelAvailable: true, skills: ["Legal", "Sales", "HR", "Finance"], knowledge: [] },
+    };
+    renderTile();
+    expect(items("skills")).toEqual(["Legal", "Sales"]);
+    expect(screen.getByTestId("ai-project-tile-skills-more")).toHaveTextContent("+2");
+    // No knowledge base: a dash.
+    expect(items("knowledge")).toEqual([]);
+    expect(value("knowledge")).toBe("—");
   });
 
   it("names the portal's chat model for a project without a model of its own, and a dash for no rooms", () => {

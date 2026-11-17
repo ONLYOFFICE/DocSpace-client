@@ -11,7 +11,9 @@ What the code does today:
 - The passphrase form computes a strength grade from a meter and validates
   length, composition and common patterns separately; the two results are
   shown side by side. The list of rules is the tooltip of the kit's
-  password input.
+  password input, opened above the field.
+- The passphrase change dialog validates the same rules and enables its
+  action only when they pass, but shows no strength line.
 - The recovery input is one text area; a phrase is validated as a whole and
   every failure maps to `Common:InvalidRecoveryPhrase`.
 - The key card of Keys management prints status, creation date,
@@ -37,8 +39,8 @@ What the code does today:
 
 - A check that the recovery phrase was saved (proposal.md, Out of scope).
 - A new layout of the dialogs: `private-rooms-key-ux-refresh` owns that.
-- Any change to the kit's components beyond what an audit task proves is
-  needed.
+- Any change to the kit's components beyond the placement property of
+  decision 2 and what an audit task proves is needed.
 
 ## Decisions
 
@@ -46,18 +48,34 @@ What the code does today:
 
 The grade shown is the meter's grade when the validation passes and the weak
 grade otherwise. The form asks one function for it, so creation and the
-passphrase change cannot drift apart.
+passphrase change cannot drift apart. The passphrase change dialog, which
+showed no grade, shows the same strength line as key creation; the owner
+chose that on 2026-11-17 over dropping the change dialog from the
+requirement.
 
-### 2. The rules are listed inside the form
+### 2. The rules stay in the tooltip of the password input, opened where it covers nothing
 
-The creation and change forms list the rules under the passphrase field,
-each marked met or unmet as the user types, and stop using the tooltip of
-the kit's password input for them. If the kit's input cannot be shown
-without that tooltip, the audit of task 1.1 says so and the switch is added
-to the kit.
+The creation and change forms keep the rules in the tooltip of the kit's
+password input, as every other password form of the product does: the
+password change, registration and activation pages of login and the
+password of a shared link. The kit's input opens that tooltip above the
+field, over the hint and the generate action. The kit gains an optional
+property for that placement, defaulting to the top, so the other forms do
+not change, and the key dialogs ask for the right side. On a wide screen the
+dialog leaves room there and the tooltip covers nothing of it. Where there
+is no room, in the aside on a narrow screen or on a tablet, the flip
+middleware of the kit's `Tooltip` (`components/tooltip/index.tsx`, whose
+first fallback after the right side is the bottom) moves it below the
+field, where it covers the confirmation field while the passphrase is
+typed. The owner accepted that on 2026-11-17.
 
-Alternative considered: moving the tooltip to the side. Rejected: in the
-aside presentation on a narrow screen there is no side.
+Alternatives considered:
+
+- A list of the rules in the form, under the field. Implemented as task 1.3
+  in aba912004ff and reverted in 93eba409c24: it is a second way to show
+  password rules, used by the key dialogs alone.
+- The tooltip above the field on a narrow screen. Rejected: it covers the
+  hint and the generate action, which is what the review found.
 
 Audit of task 1.1 (`docspace-ui-kit-react` `release/v4.1.0`, the version
 4.1.0 the client installs): the kit needs no switch. In
@@ -68,8 +86,9 @@ Validation does not depend on it: `hooks/usePasswordInput.ts` calls
 `checkPassword` of `hooks/usePasswordValidation.ts` on every change outside
 `simpleView`, and that calls `onValidateInput(progressScore,
 passwordValidation)` with the result of each rule (`length`, `digits`,
-`capital`, `special`, `allowed`). The forms set `isDisableTooltip`, keep
-`simpleView` off, and draw the list from that second argument.
+`capital`, `special`, `allowed`). The tooltip opens above the field:
+`place="top"` is fixed in `index.tsx`, and no property of `PasswordInput`
+changes it, so decision 2 needs a property in the kit.
 
 ### 3. The recovery input checks the words before the phrase
 
@@ -110,8 +129,10 @@ name for an error the mapping does not name.
 
 ## Risks / Trade-offs
 
-- Listing the rules inside the form makes the dialog taller. → The list is
-  short and the dialog already scrolls in the aside presentation.
+- On a narrow screen the tooltip covers the confirmation field while the
+  passphrase is typed. → The kit closes it once the passphrase is long
+  enough and the field shows no error, or on a click outside it
+  (`components/password-input/index.tsx`).
 - Colours are tokens shared with other pages. → A new use of an existing
   token, or a local token of the page; no shared token changes its value.
 - Screenshots of several Playwright specs change. → Updated in the task that

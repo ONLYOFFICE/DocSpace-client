@@ -27,7 +27,10 @@ What the review saw:
 ## What Changes
 
 - The strength line never shows a passing grade while a rule of the
-  passphrase is unmet, and the list of rules no longer covers the dialog.
+  passphrase is unmet, and the passphrase change dialog shows the same
+  strength line as key creation.
+- The tooltip with the rules of a new passphrase opens where it covers
+  neither the text of the dialog nor its generate action.
 - The recovery phrase input shows how many words it holds, names a word
   that is not part of any recovery phrase, and speaks without the name of
   the word-list standard.
@@ -60,9 +63,10 @@ Out of scope:
 Dependencies:
 
 - No work on `../server` or the Document Server.
-- `docspace-ui-kit-react` only if task 3.3 traces the colour of the action
-  icons to the kit's icon button, or tasks 1.1 and 2.1 find a switch missing
-  in the kit's password input or text area.
+- `docspace-ui-kit-react`: a property for the placement of the rules tooltip
+  of the password input (task 1.3). Also, only if task 3.3 traces the colour
+  of the action icons to the kit's icon button, or task 2.1 finds the
+  pass-through missing in the kit's text area.
 
 Order with `private-rooms-key-ux-refresh`: both touch the passphrase form
 and Keys management. This change goes first; the
@@ -76,6 +80,16 @@ Decided by the owner on 2026-11-17:
    grade. Naming the missing rule in that line was the alternative; the list
    of rules under the field does that.
 2. Key setup does not ask for words of the recovery phrase (Out of scope).
+3. The passphrase change dialog, which shows no strength line, gets the same
+   line as key creation, so the requirement on the grade holds for both.
+   Dropping the change dialog from that requirement was the alternative.
+4. The rules of a new passphrase stay in the tooltip of the kit's password
+   input, the way every other password form of the product shows them. A
+   list of the rules under the field was implemented and reverted for that
+   reason. The kit gets a property for the placement of that tooltip: the
+   key dialogs open it beside the dialog on a wide screen, and below the
+   passphrase field on a narrow one, where it may cover the confirmation
+   field while the passphrase is typed.
 
 No decision is open.
 
@@ -98,6 +112,8 @@ None.
 - `packages/shared/dialogs/passphrase-modal`,
   `packages/shared/dialogs/key-recovery`: the strength line and the recovery
   input. The SDK takes the shared dialogs.
+- `docspace-ui-kit-react` `components/password-input`: the placement
+  property of the rules tooltip; a new kit release adopted here.
 - `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management`:
   the key details.
 - `packages/client/src/components/panels/InvitePanel`: the result texts.

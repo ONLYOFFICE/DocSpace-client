@@ -17,16 +17,20 @@ The system SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStreng
 - **WHEN** the new passphrase of the passphrase-change dialog fails a rule
 - **THEN** its strength line shows Common:PassphraseStrengthWeak
 
-### Requirement: The list of passphrase rules leaves the dialog readable
-The system SHALL show the list of rules a new passphrase must meet without covering the title of the dialog, its hint, its generate action or its fields, on wide and on narrow screens.
+### Requirement: The passphrase rules tooltip leaves the dialog readable
+The system SHALL show the rules a new passphrase must meet in the tooltip of the passphrase field, as the other password forms of the product do. On a wide screen the tooltip SHALL open beside the dialog and cover none of it; on a narrow screen it SHALL open below the passphrase field and SHALL NOT cover the title, the hint, Common:GenerateLogoButton or the actions of the dialog.
 
 #### Scenario: Rules shown while typing
-- **WHEN** the user types in the passphrase field of the creation dialog and the list of rules is shown
-- **THEN** the hint of the dialog and Common:GenerateLogoButton stay visible and can be used
+- **WHEN** the user types in the passphrase field of the creation dialog on a wide screen
+- **THEN** the rules tooltip lies outside the dialog, and the hint and Common:GenerateLogoButton stay visible and can be used
 
 #### Scenario: Narrow screen
 - **WHEN** the same happens in the aside presentation on a narrow screen
-- **THEN** the list covers neither the fields nor the actions of the dialog
+- **THEN** the tooltip opens below the passphrase field and covers neither the title, the hint, Common:GenerateLogoButton nor the actions; it may cover the confirmation field while the passphrase is typed
+
+#### Scenario: Passphrase change
+- **WHEN** the user types a new passphrase in the passphrase-change dialog
+- **THEN** its rules tooltip opens in the same way
 
 ### Requirement: The recovery phrase input counts its words
 The system SHALL show under the recovery phrase input how many words it holds out of 24 (Common:RecoveryPhraseWordCount) as the user types, and SHALL report a phrase submitted with another number of words with Common:RecoveryPhraseRequired.

@@ -423,6 +423,27 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     ]);
   });
 
+  test("Rules shown while typing at 1024 px", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await page.setViewportSize({ width: 1024, height: 768 });
+    const { dialog, tooltip } = await openRulesTooltip(page, baseUrl);
+    const tooltipBox = await boxOf(tooltip);
+
+    expect(tooltipBox.x).toBeGreaterThanOrEqual(0);
+    expect(tooltipBox.x + tooltipBox.width).toBeLessThanOrEqual(1024);
+    for (const covered of [
+      ...dialogTexts(dialog),
+      dialog.locator("#tooltipContent-passphrase"),
+      dialog.getByLabel("Confirm passphrase", { exact: true }),
+    ]) {
+      expect(overlaps(tooltipBox, await boxOf(covered))).toBe(false);
+    }
+  });
+
   test("Narrow screen", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
     await page.setViewportSize(MOBILE);

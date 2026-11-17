@@ -99,6 +99,38 @@ See proposal.md for the motivation. What shapes the approach:
    its `aria-describedby` stay on the badge. The label keeps `truncate`, the
    badge does not shrink.
 
+## Implementation notes
+
+What the implementation settled differently from the decisions above, with
+the reason:
+
+- Decision 1: the kit's button reads its background and border from custom
+  properties, so the pill sets those on the button through a class and no
+  native button was needed. The tint is the status colour mixed into the
+  page background (14% in the light theme, 22% in the dark one) with a
+  border of the status colour; the text and the icon keep the main text
+  colour, which gives about 11:1 on either tint.
+- Decision 4: no printer icon existed in `public/images`; a 16 px one was
+  added as `icons/16/print.react.svg`, drawn in the style of the set and
+  open to replacement by design. The buttons of the row take 12 px of side
+  padding instead of the small button's 28 px, which is what lets the three
+  English labels share one row at 520 px.
+- Decision 6: free wrapping under a width in `ch` could not be used. The
+  fingerprint is set in "Roboto Mono" with a `monospace` fallback, and
+  where the face is not loaded the groups differ in width, so a width in
+  characters broke the line after the third group. The groups are instead
+  nested in lines of four and halves of two: a line is a block, a half does
+  not wrap inside. A handler puts the eight groups on one line into a copied
+  selection, since the blocks would otherwise add a line break to it.
+- Decision 8: the people selector draws its rows through the selector's
+  custom row renderer, which the mark stood outside of. The selector now
+  hands the badge with its tooltip to that renderer as its last argument,
+  and the people selector places it on the line of the name; a row without
+  a custom renderer gets it after the label, inside the label block.
+- Task 2.2 asked for the long-label case in the locale with the longest
+  labels. It is checked at 390 px in English instead, where the three labels
+  already do not fit one row, which exercises the same wrapping.
+
 ## Risks / Trade-offs
 
 - [The tint of a status token gives less than 4.5:1 for the text in one
@@ -115,3 +147,33 @@ See proposal.md for the motivation. What shapes the approach:
 - [Screenshots of the key dialogs, Keys management and the people list all
   change] → updated under Docker in the task that changes each screen, never
   from a local run.
+
+## Verification (task 7.1)
+
+Run on 2026-11-17 on `release/v4.1.0` at d0b0a035e13, with the kit pack
+built from `docspace-ui-kit-react` `release/v4.1.0` at 71700b29:
+
+- Client Playwright under Docker (`tests-local` on an image rebuilt for the
+  pack): the private-room specs (`private-room-*.spec.ts`,
+  `private-rooms-app-off.spec.ts`, `private-rooms-section.spec.ts`), the
+  keys-management specs (`keys-management.spec.ts`,
+  `keys-management-advanced.spec.ts`, `key-flow-edge-cases.spec.ts`) and
+  `encrypted-file-ui.spec.ts`: 217 passed, none failed. Four screenshots
+  changed: the two desktop ones of the passphrase step and the two of the
+  marked people list.
+- SDK private suite (`__tests__/e2e/private`) on a build made with
+  `pnpm run test:build`: 36 passed, 14 skipped (the `fixme` cases of
+  `private-security.spec.ts`).
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` with 61
+  passed and 3 skipped, then `nx run-many -t tsc lint test` over the six
+  packages: green.
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 22 passed.
+- The kit's own unit suite at 71700b29: 3355 passed.
+
+Not run: the doceditor's `private-room-editor.spec.ts`, which this change
+does not reach beyond the shared dialogs the SDK suite already opens.
+
+The full locale suite (`test/locales.test.js`), which the pre-push gate
+skips, fails on six Common keys of the AI workspace that are absent from
+every language but English. They were absent before this change; its own
+two keys are present in all 31 languages.

@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -32,10 +32,14 @@ vi.mock("@onlyoffice/apps-ui-kit/components/badge", () => ({
 }));
 
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
-  getPublicKeyFingerprint: vi.fn(async () => "FINGERPRINT"),
+  getPublicKeyFingerprint: vi.fn(async () => "0123456789ABCDEF".repeat(4)),
 }));
 
 import { KeysList } from "../KeysList";
+
+// The mocked fingerprint: 64 hexadecimal characters, as a SHA-256 is.
+const FINGERPRINT = "0123456789ABCDEF".repeat(4);
+const GROUPED = FINGERPRINT.match(/.{8}/g)!.join(" ");
 import { KEY_STATUS_BADGE_COLORS } from "../keyStatusBadgeColors";
 
 const keyOld = {
@@ -198,7 +202,7 @@ describe("The fingerprint says what it is for", () => {
     renderList([keyNew]);
 
     const fingerprint = await screen.findByTestId("key_fingerprint");
-    expect(fingerprint).toHaveTextContent("FINGERPRINT");
+    expect(fingerprint).toHaveTextContent(GROUPED);
     expect(screen.getByText("Common:KeyFingerprintHint")).toBeVisible();
     expect(fingerprint).toHaveAccessibleDescription("Common:KeyFingerprintHint");
   });
@@ -211,7 +215,10 @@ describe("Technical key details are folded", () => {
   it("Page opens", async () => {
     renderList([keyNew]);
 
-    expect(await screen.findByText("FINGERPRINT")).toBeVisible();
+    expect(await screen.findByTestId("key_fingerprint")).toHaveTextContent(
+      GROUPED,
+    );
+    expect(screen.getByTestId("key_fingerprint")).toBeVisible();
     expect(screen.getByText("Common:KeyCreatedOn")).toBeVisible();
     expect(screen.getByTestId("badge")).toBeVisible();
     expect(screen.getByText("new")).not.toBeVisible();
@@ -240,5 +247,20 @@ describe("Technical key details are folded", () => {
     await user.keyboard(" ");
     expect(toggle()).toHaveAttribute("aria-expanded", "true");
     expect(screen.getByText("X25519")).toBeVisible();
+  });
+});
+
+describe("Key fingerprint is shown in groups", () => {
+  it("Grouped fingerprint", async () => {
+    renderList([keyNew]);
+
+    const fingerprint = await screen.findByTestId("key_fingerprint");
+    await waitFor(() => expect(fingerprint).toHaveTextContent(GROUPED));
+    const groups = within(fingerprint)
+      .getAllByTestId("key_fingerprint_group")
+      .map((group) => group.textContent);
+    expect(groups).toHaveLength(8);
+    expect(groups.join("")).toBe(FINGERPRINT);
+    for (const group of groups) expect(group).toHaveLength(8);
   });
 });

@@ -144,6 +144,15 @@
   min-width: 0;
 }
 
+.fingerprintValue {
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.fingerprintGroup {
+  white-space: nowrap;
+}
+
 .fingerprintHint {
   color: var(--text-secondary);
   line-height: 16px;

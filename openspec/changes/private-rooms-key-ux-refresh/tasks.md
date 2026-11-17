@@ -19,7 +19,7 @@ and SDK unit tests must stay green.
 
 ## 3. Fingerprint in groups
 
-- [ ] 3.1 Move the grouping of a fingerprint from `packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx` to `packages/shared/services/encryption` and use it in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx`, with a style that wraps only between groups. Verify: a unit test of the function, a case "Grouped fingerprint" in `keys-management/__tests__/KeysList.test.tsx`, the key-change dialog tests unchanged, and the Keys management screenshots updated under Docker
+- [x] 3.1 Move the grouping of a fingerprint from `packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx` to `packages/shared/services/encryption` and use it in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx`, with a style that wraps only between groups. Verify: a unit test of the function, a case "Grouped fingerprint" in `keys-management/__tests__/KeysList.test.tsx`, the key-change dialog tests unchanged, and the Keys management screenshots updated under Docker
 
 ## 4. Key state indicator
 

@@ -51,6 +51,7 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
+import { splitFingerprint } from "@docspace/shared/services/encryption/fingerprint";
 import { activateAsButton } from "@docspace/shared/dialogs/key-dialog-keys";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
@@ -183,11 +184,23 @@ const KeyItem: React.FC<KeyItemProps> = ({
           <div className={styles.fingerprintCell}>
             <Text
               fontSize="13px"
-              className={styles.monoValue}
+              className={`${styles.monoValue} ${styles.fingerprintValue}`}
               aria-describedby={fingerprintHintId}
               data-testid="key_fingerprint"
             >
-              {fingerprint || "..."}
+              {fingerprint
+                ? splitFingerprint(fingerprint).map((group, index) => (
+                    <React.Fragment key={`${index}-${group}`}>
+                      {index > 0 ? " " : null}
+                      <span
+                        className={styles.fingerprintGroup}
+                        data-testid="key_fingerprint_group"
+                      >
+                        {group}
+                      </span>
+                    </React.Fragment>
+                  ))
+                : "..."}
             </Text>
             <Text
               id={fingerprintHintId}

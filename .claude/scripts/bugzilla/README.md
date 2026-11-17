@@ -82,19 +82,21 @@ refusing a bug decided twice and listing bugs no part covered.
 
 The review between `export` and `plan` (writing `decisions.json`) is done by
 `/bugs-audit` — see its SKILL.md for the decision schema and evidence rules.
-`apply` skips bugs that changed after the export (`conflict`) or already carry
-the change, so it is safe to rerun. Every reviewed bug gets a comment with the
+`export --sample/--batch` leave out every bug decided in an earlier run, so
+consecutive batches never review the same bug twice (`--include-reviewed` to
+override). `apply` refuses a plan made for another host, skips bugs that changed
+after the export (`conflict`) or already carry the change, and writes
+`apply-log.json` after every bug, so it is safe to rerun or to resume after a
+failure. Every reviewed bug gets a comment with the
 finding, whatever the verdict (only high-confidence closes and quick fixes also
 change fields), and every comment ends with
 "— Generated with Claude Code (<model>)" — `plan` requires `--model`. Comments
 are posted in Russian or English: `plan --lang ru|en`, or, run in a terminal
 without the flag, `plan` asks on the console (the `/bugs-audit` skill asks with a
 choice dialog instead). `plan` rejects a comment that is not in the chosen
-language. `report.md` and
-`suggestions.md` stay in Russian.
-`report.md` and `suggestions.md` are split by where the fix belongs (client,
-server, editors, ai-chat, ui-kit, other) — the `side` the review set, not the
-Bugzilla component.
+language. `report.md` and `suggestions.md` stay in Russian and are split by
+where the fix belongs (client, server, editors, ai-chat, ui-kit, other) — the
+`side` the review set, not the Bugzilla component.
 
 ## Instance note
 

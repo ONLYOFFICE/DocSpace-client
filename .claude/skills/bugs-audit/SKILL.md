@@ -84,8 +84,12 @@ node .claude/scripts/bugzilla/audit.mjs export --components "API,Server" --sampl
 The last line of the output names the run folder — use it as `<dir>`.
 
 `--sample N` (pilot: a mix of bugs with `Bug <ID>` commits, suggestions and the
-longest idle), `--ids 1,2`, or `--batch N --skip <dir>/decisions.json` for the
-next unreviewed chunk. `index.json` holds every open bug in scope with signals;
+longest idle), `--ids 1,2`, or `--batch N` for the next chunk. `--sample` and
+`--batch` leave out every bug already decided in an earlier run (any
+`runs/*/decisions.json`), so a later batch never comments twice or re-raises a
+priority; the output says how many were left out. `--skip <file,...>` adds
+more files (a missing one is an error); `--include-reviewed` turns the scan off
+— only on the user's request. `--ids` is never filtered. `index.json` holds every open bug in scope with signals;
 `bugs.json` holds the selected ones with description and the last comments.
 
 Signals per bug: `kind` (bug/suggestion), `ageDays`, `idleDays`, `commits`
@@ -125,7 +129,7 @@ Write `<dir>/decisions.json` — an array:
 
 ```json
 {
-  "id": 12345, "kind": "bug", "side": "client", "verdict": "fixed", "confidence": "high",
+  "id": 12345, "side": "client", "verdict": "fixed", "confidence": "high",
   "evidence": "commit abc1234 on release/v4.1.0; packages/client/src/…:42",
   "resolution": "FIXED",
   "comment": "Исправлено в коммите abc1234 (…). Закрыто по итогам аудита бэклога.",
@@ -158,9 +162,14 @@ back to the component (API/Server/AI → `server`, the rest → `client`). The
 report and the suggestions document are split into sections by `side`.
 
 Other fields: `resolution` for `fixed`/`obsolete`; `estimate` + `area` for
-`quickfix` (whiteboard becomes `[quickfix] ~<estimate>, <area>`);
+`quickfix` (whiteboard becomes `[quickfix] ~<estimate>, <area>`; priority goes
+one step up the instance scale, P1 stays P1, an unset `---` becomes the step
+above the middle — P2 on P1..P5; a bug whose whiteboard already has
+`[quickfix]` keeps its priority, so it is never raised twice);
 `complexity` (S/M/L/XL) + `value` (high/medium/low) + `rationale` for
-`valid` suggestions.
+`valid` suggestions. Whether a bug is a suggestion is not part of the decision:
+the script takes it from the export (`kind` in `bugs.json`, by severity), so it
+cannot be mistyped; a `kind` left in a decision is ignored.
 
 ### Parallel review (`agents=N`)
 

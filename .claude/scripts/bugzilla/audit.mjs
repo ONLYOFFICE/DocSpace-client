@@ -305,8 +305,28 @@ async function withDetail(key, bug) {
   };
 }
 
+// Bugs already decided in earlier runs are left out of --sample/--batch, so a
+// later batch never comments on or re-raises the same bug. --skip adds files;
+// --include-reviewed turns the run scan off.
+function reviewedIds(args, currentDir) {
+  const files = list(args.skip).map((f) => path.resolve(f));
+  const missing = files.filter((f) => !existsSync(f));
+  if (missing.length) {
+    console.error(`--skip file(s) not found:\n  ${missing.join("\n  ")}`);
+    process.exit(2);
+  }
+  if (!args["include-reviewed"] && existsSync(RUNS_DIR)) {
+    for (const e of readdirSync(RUNS_DIR, { withFileTypes: true })) {
+      const f = path.join(RUNS_DIR, e.name, "decisions.json");
+      if (e.isDirectory() && path.join(RUNS_DIR, e.name) !== currentDir && existsSync(f)) files.push(f);
+    }
+  }
+  return new Set(files.flatMap((f) => readJson(f).map((d) => Number(d.id))));
+}
+
 async function cmdExport(args, key) {
   const dir = newRunDir(args);
+  const reviewed = reviewedIds(args, dir);
   mkdirSync(dir, { recursive: true });
   const product = args.product || DEFAULT_PRODUCT;
   const components = list(args.components);
@@ -340,19 +360,18 @@ async function cmdExport(args, key) {
     bugs,
   });
 
+  const unreviewed = bugs.filter((b) => !reviewed.has(b.id));
+
   let selected;
   if (args.ids) {
     const ids = new Set(list(args.ids).map(Number));
     selected = bugs.filter((b) => ids.has(b.id));
   } else if (args.sample) {
-    selected = pickSample(bugs, Number(args.sample));
+    selected = pickSample(unreviewed, Number(args.sample));
   } else if (args.batch) {
-    const skip = new Set(
-      args.skip && existsSync(args.skip) ? readJson(args.skip).map((d) => Number(d.id)) : [],
-    );
-    selected = bugs.filter((b) => !skip.has(b.id)).slice(0, Number(args.batch));
+    selected = unreviewed.slice(0, Number(args.batch));
   } else {
-    selected = bugs;
+    selected = unreviewed;
   }
 
   const detailed = await mapLimit(selected, 5, (b) => withDetail(key, b));
@@ -369,6 +388,7 @@ async function cmdExport(args, key) {
   console.log(`open in scope: ${bugs.length}  (bugs ${count(bugs, (b) => b.kind === "bug")}, suggestions ${count(bugs, (b) => b.kind === "suggestion")})`);
   console.log(`with "Bug <ID>" commits: ${count(bugs, (b) => b.commits.length)}`);
   console.log(`idle > 365 days: ${count(bugs, (b) => b.idleDays > 365)}`);
+  if (!args.ids) console.log(`left out as reviewed in earlier runs: ${count(bugs, (b) => reviewed.has(b.id))}`);
   console.log(`exported with detail: ${detailed.length} -> ${path.join(dir, "bugs.json")}`);
 }
 
@@ -463,7 +483,7 @@ function validateDecision(d, bug, fields, lang) {
     errors.push(`resolution must be one of ${resolutions.join("|")}`);
   }
   if (d.verdict === "quickfix" && (!d.estimate || !d.area)) errors.push("quickfix needs estimate and area");
-  if (d.kind === "suggestion" && d.verdict === "valid") {
+  if (bug?.kind === "suggestion" && d.verdict === "valid") {
     if (!COMPLEXITIES.includes(d.complexity)) errors.push(`complexity must be one of ${COMPLEXITIES.join("|")}`);
     if (!VALUES.includes(d.value)) errors.push(`value must be one of ${VALUES.join("|")}`);
     if (!d.rationale) errors.push("rationale is required for a suggestion");
@@ -556,7 +576,8 @@ async function cmdPlan(args, key) {
         from: { status: bug.status, resolution: bug.resolution || "" },
       });
     } else if (d.verdict === "quickfix" && confident) {
-      const priority = raisePriority(scale, bug.priority);
+      const tagged = bug.whiteboard.includes(QUICKFIX_TAG);
+      const priority = tagged ? bug.priority : raisePriority(scale, bug.priority);
       const whiteboard = quickfixWhiteboard(bug.whiteboard, d);
       const set = {};
       if (priority !== bug.priority) set.priority = priority;
@@ -611,9 +632,42 @@ async function commentPosted(a, key) {
   return comments.some((c) => commentCore(decodeEntities(c.text)) === body);
 }
 
+async function applyOne(a, key, confirm) {
+  let live;
+  let commentDone;
+  try {
+    live = (await bzGet(`bug/${a.id}`, key, { include_fields: "id,status,resolution,priority,whiteboard,last_change_time" }))
+      .bugs?.[0];
+    commentDone = live ? await commentPosted(a, key) : false;
+  } catch (e) {
+    return { outcome: "error", message: `read failed: ${e.message}` };
+  }
+  if (!live) return { outcome: "error", message: "not found" };
+
+  const fieldsDone = fieldsApplied(a, live);
+  if (fieldsDone && commentDone) return { outcome: "skipped", message: "already applied" };
+  if (live.last_change_time !== a.expectLastChange) {
+    return { outcome: "conflict", message: `changed at ${live.last_change_time} after export` };
+  }
+  const body = fieldsDone ? {} : { ...a.set };
+  if (!commentDone) body.comment = { body: a.comment };
+  const message = JSON.stringify({ ...(fieldsDone ? {} : a.set), ...(commentDone ? {} : { comment: true }) });
+  if (!confirm) return { outcome: "would-apply", message };
+  try {
+    await bzPut(`bug/${a.id}`, key, body);
+    return { outcome: "applied", message };
+  } catch (e) {
+    return { outcome: "error", message: e.message };
+  }
+}
+
 async function cmdApply(args, key) {
   const dir = requireDir(args);
   const plan = readJson(path.join(dir, "actions.json"));
+  if (plan.host && plan.host !== HOST) {
+    console.error(`plan was made for ${plan.host}, but the configured host is ${HOST}; refusing to write`);
+    process.exit(2);
+  }
   const only = new Set(list(args.only).map(Number));
   const actions = plan.actions.filter((a) => !only.size || only.has(a.id));
   const confirm = Boolean(args.confirm);
@@ -622,34 +676,14 @@ async function cmdApply(args, key) {
 
   if (!confirm) console.log("DRY RUN (pass --confirm to write)\n");
   for (const a of actions) {
-    const live = (await bzGet(`bug/${a.id}`, key, { include_fields: "id,status,resolution,priority,whiteboard,last_change_time" }))
-      .bugs?.[0];
-    const fieldsDone = live ? fieldsApplied(a, live) : false;
-    const commentDone = live ? await commentPosted(a, key) : false;
-    const body = fieldsDone ? {} : { ...a.set };
-    if (!commentDone) body.comment = { body: a.comment };
-    const message = JSON.stringify({ ...(fieldsDone ? {} : a.set), ...(commentDone ? {} : { comment: true }) });
-    let result;
-    if (!live) {
-      result = { outcome: "error", message: "not found" };
-    } else if (fieldsDone && commentDone) {
-      result = { outcome: "skipped", message: "already applied" };
-    } else if (live.last_change_time !== a.expectLastChange) {
-      result = { outcome: "conflict", message: `changed at ${live.last_change_time} after export` };
-    } else if (!confirm) {
-      result = { outcome: "would-apply", message };
-    } else {
-      try {
-        await bzPut(`bug/${a.id}`, key, body);
-        result = { outcome: "applied", message };
-      } catch (e) {
-        result = { outcome: "error", message: e.message };
-      }
-    }
+    const result = await applyOne(a, key, confirm);
     console.log(`#${a.id}  ${a.type.padEnd(8)}  ${result.outcome.padEnd(11)}  ${result.message}`);
-    if (confirm) log[a.id] = { type: a.type, verdict: a.verdict, at: new Date().toISOString(), ...result };
+    if (!confirm) continue;
+    // A rerun finds an applied action "skipped"; keep the record of what was written.
+    if (result.outcome === "skipped" && log[a.id]?.outcome === "applied") continue;
+    log[a.id] = { type: a.type, verdict: a.verdict, at: new Date().toISOString(), ...result };
+    writeJson(logFile, log);
   }
-  if (confirm) writeJson(logFile, log);
 
   const tally = {};
   for (const r of Object.values(log)) tally[r.outcome] = (tally[r.outcome] || 0) + 1;
@@ -669,9 +703,8 @@ function cmdSuggestions(args) {
   const out = path.resolve(args.out && args.out !== true ? args.out : path.join(dir, "suggestions.md"));
 
   const items = decisions
-    .filter((d) => d.kind === "suggestion")
     .map((d) => ({ d, b: byId.get(Number(d.id)) }))
-    .filter((x) => x.b);
+    .filter((x) => x.b?.kind === "suggestion");
 
   const lines = [
     `# Разбор предложений ${exported.product}`,
@@ -834,7 +867,7 @@ Examples:
   audit.mjs fields
   audit.mjs export --components "Files,Rooms" --sample 20 --name pilot
   audit.mjs export --ids <id>,<id>
-  audit.mjs export --batch 20 --skip .claude/scripts/bugzilla/runs/<run>/decisions.json
+  audit.mjs export --batch 20                      # next 20 not reviewed in any earlier run
   audit.mjs split --parts 3                        # parallel review: one part per agent
   audit.mjs merge                                  # after the agents wrote their parts
   audit.mjs plan --model "Claude Opus 5.5"
@@ -848,7 +881,9 @@ Examples:
 
 Flags:
   export   --out <dir>  --name <label>  --product DocSpace  --components A,B
-           --sample N | --ids 1,2 | --batch N --skip <decisions.json>
+           --sample N | --ids 1,2 | --batch N
+           (--sample/--batch leave out bugs decided in any runs/*/decisions.json;
+           --skip <file,...> adds more, --include-reviewed turns that off)
            --suggestion-severity enhancement  --repos <extra path,...>
            (commits are searched in client, ../server and the ../../ sibling repos
            onlyoffice-ai-chat, docspace-sdk-js, docspace-ui-kit-react, server,

@@ -142,3 +142,57 @@ describe("DetailsHelper of an agent", () => {
     expect(properties).not.toContain("Model");
   });
 });
+
+const skillFile = {
+  id: 21,
+  title: "Document summary.md",
+  fileExst: ".md",
+  folderId: 5,
+  contentLength: "1 KB",
+  version: 2,
+  createdBy: { displayName: "Owner" },
+};
+
+const skillHelper = (props: Record<string, unknown>) =>
+  new DetailsHelper({
+    t: ((key: string) => key) as never,
+    item: skillFile as unknown as TRoom,
+    openUser: (() => undefined) as never,
+    culture: "en",
+    isVisitor: false,
+    isCollaborator: false,
+    isDefaultRoomsQuotaSet: true,
+    isAdmin: true,
+    isArchiveFolder: false,
+    roomLifetime: null as never,
+    ...props,
+  });
+
+describe("DetailsHelper of a skill", () => {
+  it("shows a skill by its set and command, with no type, extension, size or versions", () => {
+    const properties = skillHelper({
+      isSkill: true,
+      skillSetTitle: "Document assistant",
+    }).getNeededProperties();
+    expect(properties).toEqual([
+      "Skill set",
+      "Owner",
+      "Command",
+      "Date modified",
+      "Last modified by",
+      "Creation date",
+    ]);
+  });
+
+  it("leaves out the set when the skill is not in the open one", () => {
+    expect(
+      skillHelper({ isSkill: true }).getNeededProperties(),
+    ).not.toContain("Skill set");
+  });
+
+  it("shows the same Markdown file outside a skill set as a file", () => {
+    const properties = skillHelper({}).getNeededProperties();
+    expect(properties).not.toContain("Command");
+    expect(properties).toContain("Size");
+  });
+});

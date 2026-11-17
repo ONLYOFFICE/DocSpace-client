@@ -172,6 +172,7 @@ const Details = ({
   const skillFile = isSkillFile(selection as TFile, openFolder)
     ? (selection as TFile)
     : null;
+  const isSkill = !!skillFile;
   const skill = skillFile ? (getSkill?.(skillFile) ?? null) : null;
   const skillName = skill?.name;
   const skillSetTitle =
@@ -281,6 +282,7 @@ const Details = ({
     isAdmin: isAdmin!,
     isArchiveFolder: isArchive,
     roomLifetime: roomLifetime!,
+    isSkill,
     skillSetTitle,
     skillName,
     knowledgeStatus,
@@ -310,6 +312,7 @@ const Details = ({
     }
   }, [
     selection,
+    isSkill,
     skillName,
     skillSetTitle,
     knowledgeStatus,

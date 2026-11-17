@@ -90,6 +90,7 @@ import {
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { HeadingWithTooltip } from "@onlyoffice/apps-ui-kit/components/heading";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import AiChatAgentPicker from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-agent-picker";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
@@ -945,13 +946,24 @@ const SectionHeaderContent = (props) => {
       : null;
 
   // A member's agent page is titled by the agents menu: the open agent,
-  // and the others to switch to.
-  const agentSwitcher =
-    isAiProjectRoomRoot &&
-    selectedFolder?.inRoom &&
-    aiChatStore?.hasAgentPicker ? (
-      <AiChatAgentPicker title={currentTitle} />
-    ) : undefined;
+  // and the others to switch to. Anyone else reads the agent's name as plain
+  // text: the navigation's own title would open the breadcrumb drop box.
+  let agentTitle;
+  if (isAiProjectRoomRoot) {
+    agentTitle =
+      selectedFolder?.inRoom && aiChatStore?.hasAgentPicker ? (
+        <AiChatAgentPicker title={currentTitle} />
+      ) : (
+        <HeadingWithTooltip
+          className={styles.agentTitle}
+          title={currentTitle}
+          truncate
+          data-testid="agent-page-title"
+        >
+          {currentTitle}
+        </HeadingWithTooltip>
+      );
+  }
 
   const headerProps = React.useMemo(
     () => (isIndexEditingMode ? { headerLabel: t("Common:SortingIndex") } : {}),
@@ -1120,7 +1132,7 @@ const SectionHeaderContent = (props) => {
               onNavigationButtonClick={
                 showShareAgent ? onShareAgentClick : onNavigationButtonClick
               }
-              titleContent={agentSwitcher}
+              titleContent={agentTitle}
               tariffBar={<TariffBar />}
               showNavigationButton={!!showNavigationButton || showShareAgent}
               badgeLabel={badgeLabel}

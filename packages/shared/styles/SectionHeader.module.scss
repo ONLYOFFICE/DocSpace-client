@@ -71,6 +71,25 @@
     margin-inline-start: 8px;
   }
 
+  // The plain title of an agent's page for a non-member, sized as the
+  // navigation's own title. The heading takes its size from its variables.
+  .agentTitle {
+    --heading-font-size-medium: 18px;
+    --heading-weight: 700;
+    line-height: 24px;
+    min-width: 0;
+
+    @include mixins.tablet-and-below {
+      --heading-font-size-medium: 21px;
+      line-height: 28px;
+    }
+
+    @include mixins.mobile {
+      --heading-font-size-medium: 18px;
+      line-height: 24px;
+    }
+  }
+
   :global(.table-container_group-menu) {
     margin-block: 0;
     margin-inline: -20px 0;

@@ -51,7 +51,7 @@ import {
 import { expectElementScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { bootstrapEncryption } from "./fixtures/encryption-helpers";
@@ -876,6 +876,7 @@ test.describe("Private room — people without a key are marked", () => {
     page: Page,
     mockRequest: WorkerFixture,
     baseUrl: string,
+    dan: typeof DAN = DAN,
   ) => {
     const { keysHandle, passphrase } = await bootstrapEncryption(
       page,
@@ -897,7 +898,7 @@ test.describe("Private room — people without a key are marked", () => {
         ownerId: TEST_USER_ID,
       }),
       ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
-      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, DAN]),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL, dan]),
       ...roomMembersHandlers(TEST_PORT, ROOM_ID),
     );
     accessHandle.current!.setRoomKeys(ROOM_ID, [
@@ -926,7 +927,7 @@ test.describe("Private room — people without a key are marked", () => {
       people
         .locator('[data-testid^="selector-item-"][style]')
         .filter({ hasText: person.displayName });
-    await expect(personRow(DAN)).toBeVisible({ timeout: 15000 });
+    await expect(personRow(dan)).toBeVisible({ timeout: 15000 });
     return { people, personRow, passphrase };
   };
 
@@ -977,6 +978,111 @@ test.describe("Private room — people without a key are marked", () => {
       ]);
     });
   }
+
+  const markOf = (row: Locator) => row.locator('[data-testid$="-mark"]');
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`Badge readable in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      await page.emulateMedia({ colorScheme });
+      const { personRow } = await openPeopleList(page, mockRequest, baseUrl);
+      const mark = markOf(personRow(DAN));
+      await expect(mark).toBeVisible({ timeout: 15000 });
+
+      const ratio = await mark.evaluate((element) => {
+        const luminance = (css: string) => {
+          const [r, g, b] = (css.match(/[\d.]+/g) ?? [])
+            .slice(0, 3)
+            .map((c) => Number(c) / 255)
+            .map((c) =>
+              c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4,
+            );
+          return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        };
+        const nodes = [element, ...element.querySelectorAll("*")];
+        const text = nodes.find(
+          (node) =>
+            node.children.length === 0 && node.textContent?.trim() === "No key",
+        ) as Element;
+        let badge: Element | null = text;
+        while (
+          badge &&
+          getComputedStyle(badge).backgroundColor === "rgba(0, 0, 0, 0)"
+        )
+          badge = badge.parentElement;
+        const [light, dark] = [
+          luminance(getComputedStyle(text).color),
+          luminance(getComputedStyle(badge as Element).backgroundColor),
+        ].sort((x, y) => y - x);
+        return {
+          inside: element.contains(badge),
+          value: (light + 0.05) / (dark + 0.05),
+        };
+      });
+
+      expect(ratio.inside, "the background is the badge's own").toBe(true);
+      expect(ratio.value).toBeGreaterThanOrEqual(4.5);
+    });
+  }
+
+  test("Badge next to the name", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { personRow } = await openPeopleList(page, mockRequest, baseUrl);
+    const mark = markOf(personRow(DAN));
+    await expect(mark).toBeVisible({ timeout: 15000 });
+
+    const name = await personRow(DAN)
+      .getByText(DAN.displayName, { exact: true })
+      .first()
+      .boundingBox();
+    const badge = await mark.boundingBox();
+    const checkbox = await personRow(DAN).getByRole("checkbox").boundingBox();
+    expect(name && badge && checkbox).toBeTruthy();
+    // On the line of the name, right after it, away from the checkbox where
+    // the note of an invited person stands.
+    expect(badge!.y + badge!.height / 2).toBeGreaterThan(name!.y);
+    expect(badge!.y + badge!.height / 2).toBeLessThan(name!.y + name!.height);
+    expect(badge!.x - (name!.x + name!.width)).toBeLessThan(16);
+    expect(checkbox!.x - (badge!.x + badge!.width)).toBeGreaterThan(40);
+  });
+
+  test("Long name", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const longDan = {
+      ...DAN,
+      displayName:
+        "Dan Bartholomew Montgomery-Featherstonehaugh of the Remote Northern Office",
+    };
+    const { personRow } = await openPeopleList(
+      page,
+      mockRequest,
+      baseUrl,
+      longDan,
+    );
+    const row = personRow(longDan);
+    const mark = markOf(row);
+    await expect(mark).toBeVisible({ timeout: 15000 });
+
+    const badge = await mark.boundingBox();
+    const rowBox = await row.boundingBox();
+    const checkbox = await row.getByRole("checkbox").boundingBox();
+    expect(badge!.x + badge!.width).toBeLessThanOrEqual(checkbox!.x);
+    expect(badge!.x).toBeGreaterThan(rowBox!.x);
+    await expect(mark).toHaveText("No key");
+    const cut = await mark.evaluate(
+      (element) => element.scrollWidth > element.clientWidth,
+    );
+    expect(cut).toBe(false);
+    const nameCut = await row
+      .getByText(longDan.displayName, { exact: true })
+      .first()
+      .evaluate((element) => element.scrollWidth > element.clientWidth);
+    expect(nameCut).toBe(true);
+  });
 
   test("Marked person selected and sent", async ({
     page,

@@ -43,6 +43,7 @@ import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { RoomsType } from "@docspace/shared/enums";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 import { getDialogContent } from "./DeleteDialog.helper";
 import styles from "./DeleteDialog.module.scss";
@@ -89,6 +90,11 @@ const DeleteDialogComponent = (props) => {
 
   const isTemplate = selection[0]?.isTemplate;
   const isFormSpace = selection[0]?.roomType === RoomsType.FormRoom;
+  // Every room deleted is an agent: the dialog and its notice speak of agents.
+  const isAgentDelete =
+    !!isRoomDelete &&
+    selection.length > 0 &&
+    selection.every((item) => isAgent(item));
 
   // Only a plain move to Trash is gated by the "confirm delete" profile setting;
   // every other case (permanent, third-party, private room, rooms, templates,
@@ -148,12 +154,16 @@ const DeleteDialogComponent = (props) => {
 
   const onDeleteRoom = async () => {
     const translations = {
-      successRemoveRoom: isFormSpace
-        ? t("Common:SpaceRemoved")
-        : t("Common:RoomRemoved"),
-      successRemoveRooms: isFormSpace
-        ? t("Common:SpacesRemoved")
-        : t("Common:RoomsRemoved"),
+      successRemoveRoom: isAgentDelete
+        ? t("Common:AgentRemoved")
+        : isFormSpace
+          ? t("Common:SpaceRemoved")
+          : t("Common:RoomRemoved"),
+      successRemoveRooms: isAgentDelete
+        ? t("Common:AgentsRemoved")
+        : isFormSpace
+          ? t("Common:SpacesRemoved")
+          : t("Common:RoomsRemoved"),
     };
 
     if (isTemplate) {
@@ -232,6 +242,12 @@ const DeleteDialogComponent = (props) => {
       return `${t("Files:DeleteTemplateAction")}?`;
     }
 
+    if (isAgentDelete) {
+      return selection.length > 1
+        ? t("Common:DeleteAIAgentsTitle")
+        : t("Common:DeleteAIAgentTitle");
+    }
+
     if (isRoomDelete) {
       if (selection.length > 1) return t("Common:DeleteRoomsTitle");
       if (isFormSpace) return t("Common:DeleteFormSpaceTitle");
@@ -263,6 +279,7 @@ const DeleteDialogComponent = (props) => {
     unsubscribe,
     isPrivacyFolder,
     isFormSpace,
+    isAgentDelete,
   );
 
   const title = getDialogTitle();
@@ -288,9 +305,11 @@ const DeleteDialogComponent = (props) => {
             label={
               isTemplate
                 ? t("DeleteTemplateWarning")
-                : isFormSpace
-                  ? t("Common:DeleteFormSpaceWarning")
-                  : t("Common:DeleteRoomWarning")
+                : isAgentDelete
+                  ? t("Common:DeleteAgentWarning")
+                  : isFormSpace
+                    ? t("Common:DeleteFormSpaceWarning")
+                    : t("Common:DeleteRoomWarning")
             }
             dataTestId="delete_warning_checkbox"
             isChecked={isChecked}

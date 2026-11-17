@@ -121,3 +121,46 @@ describe("getDialogContent — deleting from a private room", () => {
     expect(keys).toContain("FilePermanentlyDeleted");
   });
 });
+
+// ai-agent-naming, "Agent dialogs use the agent texts".
+describe("getDialogContent — deleting agents", () => {
+  const agent = { id: 4, title: "Legal Reviewer", isFolder: true, roomType: 12 };
+
+  const roomNoteKeys = (selection: object[], isAgentDelete: boolean) =>
+    keysOf(
+      getDialogContent(
+        t,
+        selection,
+        false, // isTemplate
+        true, // isRoomDelete
+        false, // isRecycleBinFolder
+        false, // isPersonalRoom
+        true, // isRoom
+        false, // isTemplatesFolder
+        false, // isSharedWithMeFolderRoot
+        false, // unsubscribe
+        false, // isPrivacyFolder
+        false, // isFormSpace
+        isAgentDelete,
+      ),
+    );
+
+  it("names the agent that will be deleted", () => {
+    const keys = roomNoteKeys([agent], true);
+
+    expect(keys).toContain("DeleteAIAgentDescription");
+    expect(keys).toContain("Common:WantToContinue");
+    expect(keys).not.toContain("DeleteRoomConfirm");
+  });
+
+  it("counts several agents as agents", () => {
+    const keys = roomNoteKeys([agent, { ...agent, id: 5 }], true);
+
+    expect(keys).toContain("DeleteAIAgents");
+    expect(keys).not.toContain("DeleteRooms");
+  });
+
+  it("keeps the room note for a room", () => {
+    expect(roomNoteKeys([agent], false)).toContain("DeleteRoomConfirm");
+  });
+});

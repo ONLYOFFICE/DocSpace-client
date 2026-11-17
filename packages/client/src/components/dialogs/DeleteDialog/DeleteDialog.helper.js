@@ -57,6 +57,7 @@ export const getDialogContent = (
   unsubscribe,
   isPrivacyFolder,
   isFormSpace = false,
+  isAgentDelete = false,
 ) => {
   if (!selection) return null;
 
@@ -95,6 +96,32 @@ export const getDialogContent = (
       />
     ) : (
       t("DeleteTemplates")
+    );
+  }
+
+  // Every room deleted is an agent: the note speaks of agents.
+  if (isRoomDelete && isAgentDelete) {
+    return (
+      <>
+        {isSingle ? (
+          <Trans
+            t={t}
+            i18nKey="DeleteAIAgentDescription"
+            ns="Common"
+            values={{ agentName: selection[0]?.title }}
+            components={{ 1: <strong /> }}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="DeleteAIAgents"
+            ns="Common"
+            values={{ count: selection.length }}
+            components={{ 1: <strong /> }}
+          />
+        )}{" "}
+        {t("Common:WantToContinue")}
+      </>
     );
   }
 

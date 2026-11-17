@@ -30,7 +30,7 @@ and SDK unit tests must stay green.
 
 ## 5. Media viewer
 
-- [ ] 5.1 Pass the decryption error of `packages/shared/components/media-viewer/MediaViewer.tsx` to the shared mapping of encryption errors and show its message, keeping `Common:EncryptionDecryptPartialFailed` for the errors it does not name. Verify: unit cases named after the scenarios of "The media viewer reports a file that is not shared yet as no access" next to the viewer, and a Playwright case in `packages/client/__tests__/private-room-cross-user-download.spec.ts` where a member opens an image that is not wrapped for them
+- [x] 5.1 Pass the decryption error of `packages/shared/components/media-viewer/MediaViewer.tsx` to the shared mapping of encryption errors and show its message, keeping `Common:EncryptionDecryptPartialFailed` for the errors it does not name. Verify: unit cases named after the scenarios of "The media viewer reports a file that is not shared yet as no access" next to the viewer, and a Playwright case in `packages/client/__tests__/private-room-cross-user-download.spec.ts` where a member opens an image that is not wrapped for them
 
 ## 6. Gate
 

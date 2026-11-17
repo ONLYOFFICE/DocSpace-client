@@ -79,6 +79,7 @@ type Seed = {
   text: string;
   forBob: boolean;
   folderId?: number;
+  serverTitle?: string;
 };
 
 // Two files Bob can open and one wrapped for Alice alone, which the zip
@@ -115,7 +116,7 @@ async function openReportsRoom(
   const alice = await generateIdentityKeyPair();
 
   const initialFiles = await Promise.all(
-    seeds.map(async ({ id, name, text, forBob, folderId }) => {
+    seeds.map(async ({ id, name, text, forBob, folderId, serverTitle }) => {
       const plainBytes = new TextEncoder().encode(text);
       const { encryptedBlob, dek } = await encryptFile(plainBytes, {
         fileName: name,
@@ -133,7 +134,7 @@ async function openReportsRoom(
       return {
         id,
         title: name,
-        serverTitle: `obfuscated-${id}.txt`,
+        serverTitle: serverTitle ?? `obfuscated-${id}.txt`,
         size: plainBytes.byteLength,
         encrypted: true,
         fileKeys,
@@ -501,3 +502,52 @@ test.describe("Private room — cross-user file exchange", () => {
     expect(archiveRequests).toEqual([]);
   });
 });
+
+// Spec: private-rooms/file-operations, "The media viewer reports a file that is not shared yet as no access"
+test.describe("Private room — media viewer of a file not shared yet", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Image not shared with the user yet", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { passphrase, passphrasePrompt } = await openReportsRoom(
+      page,
+      mockRequest,
+      baseUrl,
+      [
+        {
+          id: 8730,
+          name: "photo.png",
+          text: "Alice only",
+          forBob: false,
+          serverTitle: "obfuscated-8730.png",
+        },
+      ],
+    );
+
+    await page
+      .getByTestId("table-body")
+      .getByTestId("files-cell-name-1")
+      .locator(".item-file-name")
+      .click();
+    await expect(page).toHaveURL(/\/media\/view\//);
+    await enterPassphrase(passphrasePrompt, passphrase);
+
+    await expect(
+      page.getByText("You do not have access to this encrypted file yet."),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(/Failed to decrypt/)).toHaveCount(0);
+  });
+});
+

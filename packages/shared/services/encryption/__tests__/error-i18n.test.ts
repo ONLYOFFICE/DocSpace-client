@@ -36,8 +36,11 @@
 import type { TFunction } from "i18next";
 import { describe, expect, it } from "vitest";
 
-import { getEncryptionErrorMessage } from "../error-i18n";
-import { KeyNotFoundError, NoAccessError } from "../errors";
+import {
+  getEncryptionErrorMessage,
+  getSpecificEncryptionErrorMessage,
+} from "../error-i18n";
+import { DecryptionError, KeyNotFoundError, NoAccessError } from "../errors";
 
 const t = ((key: string) => key) as unknown as TFunction;
 
@@ -52,6 +55,24 @@ describe("A file without a wrap for the user is reported as no access", () => {
   it("keeps the missing-key message for a missing key", () => {
     expect(getEncryptionErrorMessage(t, new KeyNotFoundError())).toBe(
       "Common:NoEncryptionKey",
+    );
+  });
+});
+
+describe("getSpecificEncryptionErrorMessage", () => {
+  it("names an error that has a message of its own", () => {
+    expect(getSpecificEncryptionErrorMessage(t, new NoAccessError("u"))).toBe(
+      "Common:EncryptedFileNoAccessYet",
+    );
+  });
+
+  it("returns null where only the general message applies", () => {
+    expect(
+      getSpecificEncryptionErrorMessage(t, new DecryptionError("tag")),
+    ).toBeNull();
+    expect(getSpecificEncryptionErrorMessage(t, new Error("x"))).toBeNull();
+    expect(getEncryptionErrorMessage(t, new DecryptionError("tag"))).toBe(
+      "Common:EncryptionError",
     );
   });
 });

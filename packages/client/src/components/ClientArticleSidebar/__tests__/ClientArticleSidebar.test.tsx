@@ -33,20 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 
-const { navigateMock, chat } = vi.hoisted(() => ({
+const { navigateMock, chat, route } = vi.hoisted(() => ({
   navigateMock: vi.fn(),
   // The chat panel's store, or none (a host without the AI providers).
   chat: { store: null as null | Record<string, unknown> },
+  route: { pathname: "/private/filter", search: "" },
 }));
 
 vi.mock("react-router", () => ({
-  useLocation: () => ({ pathname: "/private/filter", search: "" }),
+  useLocation: () => route,
   useNavigate: () => navigateMock,
 }));
 
@@ -78,8 +79,14 @@ type TNavEntry = {
 };
 
 vi.mock("SRC_DIR/components/AppsSidebar", () => ({
-  default: ({ groups }: { groups: { items: TNavEntry[] }[] }) => (
-    <ul>
+  default: ({
+    groups,
+    activeId,
+  }: {
+    groups: { items: TNavEntry[] }[];
+    activeId?: string;
+  }) => (
+    <ul data-testid="nav" data-active-id={activeId}>
       {groups
         .flatMap((group) => group.items)
         .flatMap((item) => [item, ...(item.children ?? [])])
@@ -105,11 +112,17 @@ type TRenderOptions = {
   presets?: { id: string; name: string }[];
   recentThreads?: { id: string; title: string }[];
   hasMoreThreads?: boolean;
+  selectedFolder?: Record<string, unknown>;
 };
 
 const renderSidebar = (
   extraFolders: unknown[] = [],
-  { presets = [], recentThreads = [], hasMoreThreads = false }: TRenderOptions = {},
+  {
+    presets = [],
+    recentThreads = [],
+    hasMoreThreads = false,
+    selectedFolder = { id: 1, rootFolderType: FolderType.USER, isRootFolder: true },
+  }: TRenderOptions = {},
 ) =>
   render(
     <Provider
@@ -138,6 +151,7 @@ const renderSidebar = (
         aiChatActiveThreadId: "",
       }}
       aiPresetsStore={{ presets }}
+      selectedFolderStore={selectedFolder}
       clientLoadingStore={{
         showArticleLoader: false,
         setIsSectionBodyLoading: vi.fn(),
@@ -202,6 +216,54 @@ describe("ClientArticleSidebar — AI Chat section", () => {
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
     ]);
+  });
+});
+
+describe("ClientArticleSidebar — an opened AI room on its short address", () => {
+  const aiHub = [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }];
+
+  const renderAt = (search: string, selectedFolder: Record<string, unknown>) => {
+    route.pathname = "/ai-rooms/32/filter";
+    route.search = search;
+    try {
+      renderSidebar(aiHub, { selectedFolder });
+    } finally {
+      route.pathname = "/private/filter";
+      route.search = "";
+    }
+    return screen.getByTestId("nav").dataset.activeId;
+  };
+
+  it("highlights Skill sets for an opened skill set and Knowledge bases inside a knowledge base", () => {
+    expect(
+      renderAt("?folder=32", {
+        id: 32,
+        rootFolderType: FolderType.AiHub,
+        isRootFolder: false,
+        roomType: RoomsType.InstructionsRoom,
+      }),
+    ).toBe("ai-rooms-skills");
+    cleanup();
+    expect(
+      renderAt("?folder=40", {
+        id: 40,
+        rootFolderType: FolderType.AiHub,
+        isRootFolder: false,
+        roomType: null,
+        parentRoomType: FolderType.KnowledgeRoom,
+      }),
+    ).toBe("ai-rooms-knowledge");
+  });
+
+  it("keeps to the address while the room being left is still in the store", () => {
+    expect(
+      renderAt("?folder=55", {
+        id: 32,
+        rootFolderType: FolderType.AiHub,
+        isRootFolder: false,
+        roomType: RoomsType.InstructionsRoom,
+      }),
+    ).toBe("ai-rooms");
   });
 });
 

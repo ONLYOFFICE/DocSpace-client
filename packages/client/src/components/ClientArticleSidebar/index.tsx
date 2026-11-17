@@ -116,6 +116,11 @@ type ClientArticleSidebarProps = FolderIds & {
   // An AI project room is open: its chat fills the section, fullscreen, as
   // the project's own view - not the AI Chat entry.
   isAiProjectRoomRoot?: boolean;
+  // The AI section room on screen (an opened skill set, knowledge base or
+  // agent, or a folder inside one) and its room type: the entry that lists
+  // it is highlighted even on its short address, which has no `type`.
+  aiOpenFolderId?: number | string | null;
+  aiOpenRoomType?: RoomsType | null;
   isNavLoading?: boolean;
   // AI Chat / Recent open the chat fullscreen on one of its pages; the chat
   // library's router is switched by AiChatPageBridge.
@@ -157,6 +162,14 @@ const EMPTY_LIST: never[] = [];
 // A project read without its logo is drawn with its initials.
 const NO_PROJECT_LOGO = { color: "" };
 
+// The room type of an AI section room told by the folder type of the room
+// a folder inside it sits in.
+const AI_ROOM_TYPES: Partial<Record<FolderType, RoomsType>> = {
+  [FolderType.InstructionsRoom]: RoomsType.InstructionsRoom,
+  [FolderType.KnowledgeRoom]: RoomsType.KnowledgeRoom,
+  [FolderType.AiProjectRoom]: RoomsType.AiProjectRoom,
+};
+
 // Ids of the entries listed under Agents and Recent, Show more included.
 // NavMenu has no third level: they are siblings of those entries, indented
 // and spaced by the `[data-item-id^="ai-nested-"]` rules of the module's
@@ -172,6 +185,8 @@ const ClientArticleSidebar = ({
   isTemplatesFolderRoot,
   isDocumentsFolder,
   isAiProjectRoomRoot,
+  aiOpenFolderId,
+  aiOpenRoomType,
   requestAiChatPage,
   recentAiProjects = EMPTY_LIST,
   recentAiChats = EMPTY_LIST,
@@ -347,6 +362,14 @@ const ClientArticleSidebar = ({
       ? aiProjectItemId(openProjectId)
       : undefined;
 
+  // The open room counts only once it is the folder the address names: on
+  // the way to another one the store still holds the room being left.
+  const shownAiRoomType =
+    aiOpenFolderId != null &&
+    new URLSearchParams(location.search).get("folder") === String(aiOpenFolderId)
+      ? aiOpenRoomType
+      : null;
+
   const locationActiveId = React.useMemo(
     () =>
       getClientActiveId(
@@ -355,6 +378,7 @@ const ClientArticleSidebar = ({
         location.search,
         isTemplatesFolderRoot,
         isDocumentsFolder,
+        shownAiRoomType,
       ),
     [
       location.pathname,
@@ -362,6 +386,7 @@ const ClientArticleSidebar = ({
       folderIds,
       isTemplatesFolderRoot,
       isDocumentsFolder,
+      shownAiRoomType,
     ],
   );
 
@@ -871,6 +896,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     settingsStore,
     appsStore,
     aiPresetsStore,
+    selectedFolderStore,
   }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
@@ -887,6 +913,18 @@ const ClientArticleSidebarConnected = inject<TStore>(
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
     isDocumentsFolder: treeFoldersStore.isDocumentsFolder,
     isAiProjectRoomRoot: treeFoldersStore.isAiProjectRoomRoot,
+    ...(selectedFolderStore.rootFolderType === FolderType.AiHub &&
+    !selectedFolderStore.isRootFolder
+      ? {
+          aiOpenFolderId: selectedFolderStore.id,
+          aiOpenRoomType:
+            selectedFolderStore.roomType ??
+            (selectedFolderStore.parentRoomType != null
+              ? AI_ROOM_TYPES[selectedFolderStore.parentRoomType]
+              : undefined) ??
+            null,
+        }
+      : {}),
     requestAiChatPage: dialogsStore.requestAiChatPage,
     recentAiProjects: aiPresetsStore.presets,
     recentAiChats: dialogsStore.aiChatRecentThreads,

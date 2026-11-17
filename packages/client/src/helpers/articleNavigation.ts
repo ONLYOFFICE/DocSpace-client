@@ -206,9 +206,10 @@ export const getSectionTrashUrl = (
 /**
  * The AI Chat section's list entries (Skill sets, Knowledge bases) are the
  * `/ai-rooms` list narrowed to one room type, so the active entry is read
- * from the `type` filter in the query; unnarrowed, it is Agents. AI Chat and
- * Recent are the chat itself, not a location: the sidebar highlights them
- * from the chat's state.
+ * from the `type` filter in the query; unnarrowed, it is Agents. Inside an
+ * opened room the entry is the one that lists the room, told by its type,
+ * as its short address has no `type`. AI Chat and Recent are the chat
+ * itself, not a location: the sidebar highlights them from the chat's state.
  */
 const AI_HUB_TYPE_ITEM_IDS: Record<string, string> = {
   [RoomsType.InstructionsRoom]: "ai-rooms-skills",
@@ -236,6 +237,8 @@ export const getClientActiveId = (
   search: string = typeof window !== "undefined" ? window.location.search : "",
   isTemplatesContext = false,
   isDocumentsContext = false,
+  /** The type of the AI section room open on screen (or of the room the open folder is in). */
+  aiOpenRoomType?: RoomsType | null,
 ): string | undefined => {
   const match = (folderId?: number | null) =>
     folderId != null ? String(folderId) : undefined;
@@ -254,6 +257,8 @@ export const getClientActiveId = (
       : "private-rooms";
   if (pathname.startsWith("/ai-rooms/")) {
     if (pathname.includes("/trash")) return "ai-rooms-trash";
+    if (aiOpenRoomType != null)
+      return AI_HUB_TYPE_ITEM_IDS[aiOpenRoomType] ?? "ai-rooms";
     return AI_HUB_TYPE_ITEM_IDS[getSingleRoomType(search) ?? ""] ?? "ai-rooms";
   }
   if (pathname.startsWith("/forms")) {

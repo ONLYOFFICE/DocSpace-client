@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Tema interfeței",
   "InvalidLink": "Link-ul invalid",
   "InvalidPassphrase": "Frază de acces incorectă",
-  "InvalidRecoveryPhrase": "Fraza de recuperare este invalidă. Verificați că toate cele 24 de cuvinte sunt scrise corect și fac parte din lista de cuvinte BIP-39.",
+  "InvalidRecoveryPhrase": "Fraza de recuperare este incorectă. Verificați cuvintele și ordinea lor.",
   "InvitationMessage": "Mesaj de invitație",
   "InvitationToAgent": "<1>{{displayName}}</1> vă invită să vă alăturați agentului IA <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> vă invită să vă alăturați spațiului de lucru <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor.",

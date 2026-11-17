@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Tema de interfaz",
   "InvalidLink": "Enlace no válido",
   "InvalidPassphrase": "Frase de contraseña incorrecta",
-  "InvalidRecoveryPhrase": "La frase de recuperación no es válida. Compruebe que las 24 palabras estén escritas correctamente y pertenezcan a la lista de palabras BIP-39.",
+  "InvalidRecoveryPhrase": "La frase de recuperación es incorrecta. Compruebe las palabras y su orden.",
   "InvitationMessage": "Mensaje de invitación",
   "InvitationToAgent": "<1>{{displayName}}</1> le invita a unirse al agente de IA <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> le invita a unirse al espacio de trabajo <1>{{spaceAddress}}</1> para una colaboración segura en documentos.",

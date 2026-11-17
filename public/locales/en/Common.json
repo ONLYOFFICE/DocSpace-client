@@ -1310,7 +1310,7 @@
   "InterfaceTheme": "Interface theme",
   "InvalidLink": "Invalid link",
   "InvalidPassphrase": "Incorrect passphrase",
-  "InvalidRecoveryPhrase": "Recovery phrase is invalid. Check that all 24 words are spelled correctly and from the BIP-39 wordlist.",
+  "InvalidRecoveryPhrase": "The recovery phrase is incorrect. Check the words and their order.",
   "InvitationMessage": "Invitation message",
   "InvitationToAgent": "<1>{{displayName}}</1> invites you to join the AI agent <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> invites you to join the workspace <1>{{spaceAddress}}</1> for secure document collaboration.",

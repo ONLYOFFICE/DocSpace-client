@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "界面主题",
   "InvalidLink": "无效链接",
   "InvalidPassphrase": "密码短语不正确",
-  "InvalidRecoveryPhrase": "恢复短语无效。请检查全部 24 个单词的拼写是否正确，并确认它们来自 BIP-39 词表。",
+  "InvalidRecoveryPhrase": "恢复短语不正确。请检查单词及其顺序。",
   "InvitationMessage": "邀请消息",
   "InvitationToAgent": "<1>{{displayName}}</1> 邀请您加入 AI 智能体 <1>{{agentName}}</1>。",
   "InvitationToPortal": "<1>{{displayName}}</1>邀请您加入工作区<1>{{spaceAddress}}</1>进行安全的文档协作。",

@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Vzhľad prostredia",
   "InvalidLink": "Neplatný odkaz",
   "InvalidPassphrase": "Nesprávna prístupová fráza",
-  "InvalidRecoveryPhrase": "Obnovovacia fráza je neplatná. Skontrolujte, či je všetkých 24 slov správne napísaných a pochádza zo zoznamu slov BIP-39.",
+  "InvalidRecoveryPhrase": "Obnovovacia fráza je nesprávna. Skontrolujte slová a ich poradie.",
   "InvitationMessage": "Správa pozvánky",
   "InvitationToAgent": "<1>{{displayName}}</1> vás pozýva pripojiť sa k AI agentovi <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> vás pozýva, aby ste sa pripojili k pracovnému priestoru <1>{{spaceAddress}}</1> na bezpečnú spoluprácu na dokumentoch.",

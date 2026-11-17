@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Interface thema",
   "InvalidLink": "Ongeldige link",
   "InvalidPassphrase": "Onjuiste wachtzin",
-  "InvalidRecoveryPhrase": "Herstelzin is ongeldig. Controleer of alle 24 woorden correct zijn gespeld en afkomstig zijn uit de BIP-39 woordenlijst.",
+  "InvalidRecoveryPhrase": "De herstelzin is onjuist. Controleer de woorden en hun volgorde.",
   "InvitationMessage": "Uitnodigingsbericht",
   "InvitationToAgent": "<1>{{displayName}}</1> nodigt u uit om lid te worden van de AI-agent <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> nodigt u uit om lid te worden van de werkruimte <1>{{spaceAddress}}</1> om veilig samen te werken aan documenten.",

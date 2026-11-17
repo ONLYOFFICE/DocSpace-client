@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Thema der Benutzeroberfläche",
   "InvalidLink": "Ungültiger Link",
   "InvalidPassphrase": "Falsche Passphrase",
-  "InvalidRecoveryPhrase": "Die Wiederherstellungsphrase ist ungültig. Überprüfen Sie, ob alle 24 Wörter korrekt geschrieben sind und aus der BIP-39-Wortliste stammen.",
+  "InvalidRecoveryPhrase": "Die Wiederherstellungsphrase ist falsch. Überprüfen Sie die Wörter und ihre Reihenfolge.",
   "InvitationMessage": "Einladungsmeldung",
   "InvitationToAgent": "<1>{{displayName}}</1> lädt Sie ein, dem KI-Agenten <1>{{agentName}}</1> beizutreten.",
   "InvitationToPortal": "<1>{{displayName}}</1> lädt Sie ein, dem Arbeitsbereich <1>{{spaceAddress}}</1> für die sichere Zusammenarbeit an Dokumenten beizutreten.",

@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "سمة الواجهة",
   "InvalidLink": "رابط غير صالح",
   "InvalidPassphrase": "عبارة المرور غير صحيحة",
-  "InvalidRecoveryPhrase": "عبارة الاسترداد غير صالحة. تحقق من أن جميع الكلمات الـ 24 مكتوبة بشكل صحيح ومن قائمة كلمات BIP-39.",
+  "InvalidRecoveryPhrase": "عبارة الاسترداد غير صحيحة. تحقق من الكلمات وترتيبها.",
   "InvitationMessage": "رسالة دعوة",
   "InvitationToAgent": "<1>{{displayName}}</1> يدعوك للانضمام إلى وكيل الذكاء الاصطناعي <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> يدعوك للانضمام الى مساحة العمل <1>{{spaceAddress}}</1> للتعاون الآمن في المستندات.",

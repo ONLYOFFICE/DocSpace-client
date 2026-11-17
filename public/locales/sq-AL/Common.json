@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Tema e ndërfaqes",
   "InvalidLink": "Lidhje e pavlefshme",
   "InvalidPassphrase": "Frazëkalim i pasaktë",
-  "InvalidRecoveryPhrase": "Fraza e rikuperimit është e pavlefshme. Kontrolloni që të gjitha 24 fjalët janë të shkruara saktë dhe janë nga lista e fjalëve BIP-39.",
+  "InvalidRecoveryPhrase": "Fraza e rikuperimit është e pasaktë. Kontrolloni fjalët dhe renditjen e tyre.",
   "InvitationMessage": "Mesazh ftonimi",
   "InvitationToAgent": "<1>{{displayName}}</1> ju fton të bashkoheni me agjentin IA <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> ju fton të bashkoheni në hapësirën e punës <1>{{spaceAddress}}</1> për bashkëpunim të sigurt të dokumentit.",

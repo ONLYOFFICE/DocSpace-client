@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Chủ đề giao diện\"",
   "InvalidLink": "Liên kết không hợp lệ",
   "InvalidPassphrase": "Mật khẩu bảo vệ không đúng",
-  "InvalidRecoveryPhrase": "Cụm từ khôi phục không hợp lệ. Hãy kiểm tra xem tất cả 24 từ có được viết đúng chính tả và thuộc danh sách từ BIP-39 không.",
+  "InvalidRecoveryPhrase": "Cụm từ khôi phục không chính xác. Hãy kiểm tra các từ và thứ tự của chúng.",
   "InvitationMessage": "Tin nhắn mời",
   "InvitationToAgent": "<1>{{displayName}}</1> mời bạn tham gia tác nhân AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> mời bạn tham gia không gian làm việc <1>{{spaceAddress}}</1> để cùng làm việc trên tài liệu một cách an toàn.",

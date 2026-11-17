@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Tema interfejsa",
   "InvalidLink": "Nevažeći link",
   "InvalidPassphrase": "Netačna lozinka",
-  "InvalidRecoveryPhrase": "Fraza za oporavak je nevažeća. Proverite da li su svih 24 reči ispravno napisane i da se nalaze na BIP-39 listi reči.",
+  "InvalidRecoveryPhrase": "Fraza za oporavak nije ispravna. Proverite reči i njihov redosled.",
   "InvitationMessage": "Poruka pozivnice",
   "InvitationToAgent": "<1>{{displayName}}</1> vas poziva da se pridružite AI agentu <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> vas poziva da pristupite radnom prostoru <1>{{spaceAddress}}</1> za sigurnu dokument saradnju.",

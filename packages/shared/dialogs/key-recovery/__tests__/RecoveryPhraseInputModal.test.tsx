@@ -38,6 +38,8 @@ import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 
+import enCommon from "PUBLIC_DIR/locales/en/Common.json";
+
 import { validateMnemonic } from "../../../services/encryption/recovery";
 import { RecoveryPhraseInputModal } from "../RecoveryPhraseInputModal";
 
@@ -320,6 +322,37 @@ describe("RecoveryPhraseInputModal", () => {
       );
       expect(validateMnemonic).toHaveBeenCalled();
       expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("Recovery messages use plain words", () => {
+    it("Wrong phrase", async () => {
+      const user = userEvent.setup();
+      renderModal();
+
+      await user.click(getPhraseField());
+      await user.paste(`${"abandon ".repeat(23)}zoo`);
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          "Common:InvalidRecoveryPhrase",
+        ),
+      );
+      expect(enCommon.InvalidRecoveryPhrase).toMatch(/words/i);
+      expect(enCommon.InvalidRecoveryPhrase).toMatch(/order/i);
+      for (const key of [
+        "InvalidRecoveryPhrase",
+        "RecoveryPhraseRequired",
+        "RecoveryPhraseUnknownWord",
+        "RecoveryPhraseWordCount",
+        "RecoveryPhraseInputHint",
+        "RecoveryPhrasePlaceholder",
+      ] as const) {
+        expect(enCommon[key]).not.toMatch(/BIP|mnemonic|wordlist|checksum/i);
+      }
     });
   });
 });

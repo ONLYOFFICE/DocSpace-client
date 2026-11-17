@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "අතුරු මුහුණතේ තේමාව",
   "InvalidLink": "සබැඳිය වලංගු නොවේ",
   "InvalidPassphrase": "වැරදි මුරවාක්‍යයකි",
-  "InvalidRecoveryPhrase": "ප්‍රතිසාධන වාක්‍යය අවලංගුයි. සියලු වචන 24 නිවැරදිව අක්ෂර ලේඛනය කර BIP-39 වචන ලැයිස්තුවෙන් ඇති බව පරීක්ෂා කරන්න.",
+  "InvalidRecoveryPhrase": "ප්‍රතිසාධන වාක්‍යය වැරදියි. වචන සහ ඒවායේ අනුපිළිවෙල පරීක්ෂා කරන්න.",
   "InvitationMessage": "ආරාධනා පණිවිඩය",
   "InvitationToAgent": "<1>{{displayName}}</1> විසින් ඔබට AI නියෝජිත <1>{{agentName}}</1> හා සම්බන්ධ වීමට ආරාධනා කරයි.",
   "InvitationToPortal": "<1>{{displayName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{spaceAddress}}</1> වැඩ අවකාශය වෙත ආරාධනා කර ඇත.",

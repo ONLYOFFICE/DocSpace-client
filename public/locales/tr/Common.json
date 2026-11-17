@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Arayüz teması",
   "InvalidLink": "Geçersiz bağlantı",
   "InvalidPassphrase": "Yanlış parola",
-  "InvalidRecoveryPhrase": "Kurtarma ifadesi geçersiz. 24 kelimenin tamamının doğru yazıldığından ve BIP-39 kelime listesinde yer aldığından emin olun.",
+  "InvalidRecoveryPhrase": "Kurtarma ifadesi yanlış. Kelimeleri ve sıralarını kontrol edin.",
   "InvitationMessage": "Davet mesajı",
   "InvitationToAgent": "<1>{{displayName}}</1> sizi <1>{{agentName}}</1> AI ajanına katılmaya davet ediyor.",
   "InvitationToPortal": "<1>{{displayName}}</1> sizi güvenli belge iş birliği için <1>{{spaceAddress}}</1> çalışma alanına katılmaya davet ediyor.",

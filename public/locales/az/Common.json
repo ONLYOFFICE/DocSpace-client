@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "İnterfeys mövzusu",
   "InvalidLink": "Etibarsız keçid",
   "InvalidPassphrase": "Parol yanlışdır",
-  "InvalidRecoveryPhrase": "Bərpa ifadəsi yanlışdır. Bütün 24 sözün düzgün yazıldığını və BIP-39 söz siyahısından olduğunu yoxlayın.",
+  "InvalidRecoveryPhrase": "Bərpa ifadəsi yanlışdır. Sözləri və onların ardıcıllığını yoxlayın.",
   "InvitationMessage": "Dəvət mesajı",
   "InvitationToAgent": "<1>{{displayName}}</1> sizi <1>{{agentName}}</1> AI agentinə qoşulmağa dəvət edir.",
   "InvitationToPortal": "<1>{{displayName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün sizi iş sahəsi <1>{{spaceAddress}}</1>-ə qoşulmağa dəvət edir.",

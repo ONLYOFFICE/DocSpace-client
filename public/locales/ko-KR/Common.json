@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "인터페이스 테마",
   "InvalidLink": "유효하지 않은 링크입니다",
   "InvalidPassphrase": "패스프레이즈가 올바르지 않습니다",
-  "InvalidRecoveryPhrase": "복구 문구가 유효하지 않습니다. 24개 단어 모두 올바르게 철자되었고 BIP-39 단어 목록에 있는지 확인하세요.",
+  "InvalidRecoveryPhrase": "복구 문구가 올바르지 않습니다. 단어와 순서를 확인하세요.",
   "InvitationMessage": "초대 메시지",
   "InvitationToAgent": "<1>{{displayName}}</1>님이 AI 에이전트 <1>{{agentName}}</1>에 참여하도록 초대합니다.",
   "InvitationToPortal": "<1>{{displayName}}</1>님이 안전한 문서 공동작업을 위해 귀하를 워크스페이스 <1>{{spaceAddress}}</1>에 초대했습니다.",

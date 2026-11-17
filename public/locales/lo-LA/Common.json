@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "ຮູບແບບຂອງອິນເຕີເຟດ",
   "InvalidLink": "ລິ້ງບໍ່ຖືກຕ້ອງ",
   "InvalidPassphrase": "ລະຫັດລັບບໍ່ຖືກຕ້ອງ",
-  "InvalidRecoveryPhrase": "ວະລີການກູ້ຄືນບໍ່ຖືກຕ້ອງ. ກວດໃຫ້ແນ່ໃຈວ່າຄຳທັງ 24 ຄຳຖືກສະກົດຢ່າງຖືກຕ້ອງ ແລະຢູ່ໃນລາຍຄຳ BIP-39.",
+  "InvalidRecoveryPhrase": "ວະລີການກູ້ຄືນບໍ່ຖືກຕ້ອງ. ກະລຸນາກວດສອບຄຳ ແລະ ລຳດັບຂອງມັນ.",
   "InvitationMessage": "ຂໍ້ຄວາມເຊີນ",
   "InvitationToAgent": "<1>{{displayName}}</1> ຂໍເຊີນທ່ານໃຫ້ເຂົ້າຮ່ວມຕົວແທນ AI <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> ຂໍເຊີນທ່ານເຂົ້າຮ່ວມພື້ນທີ່ເຮັດວຽກ <1>{{spaceAddress}}</1> ເພື່ອການຮ່ວມມືເອກະສານຢ່າງປອດໄພ.",

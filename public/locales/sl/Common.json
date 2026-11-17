@@ -1304,7 +1304,7 @@
   "InterfaceTheme": "Tema vmesnika",
   "InvalidLink": "Napotna povezava",
   "InvalidPassphrase": "Napačno geslo",
-  "InvalidRecoveryPhrase": "Obnovitvena fraza je neveljavna. Preverite, ali je vseh 24 besed pravilno napisanih in iz besednjaka BIP-39.",
+  "InvalidRecoveryPhrase": "Obnovitvena fraza je napačna. Preverite besede in njihov vrstni red.",
   "InvitationMessage": "Pozivno sporočilo",
   "InvitationToAgent": "<1>{{displayName}}</1> vas vabi, da se pridružite AI agentu <1>{{agentName}}</1>.",
   "InvitationToPortal": "<1>{{displayName}}</1> vas vabi, da se pridružite delovnemu prostoru <1>{{spaceAddress}}</1> za varno sodelovanje pri dokumentih.",

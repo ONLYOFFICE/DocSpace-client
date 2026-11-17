@@ -5,6 +5,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import {
   getAiListTitle,
   getAiRoomListType,
+  getAiWorkspaceCreateLabel,
   getAiWorkspaceCreatePayload,
   getAiWorkspaceInfoPanelHint,
   getAiWorkspaceListType,
@@ -42,6 +43,15 @@ describe("AI Chat section lists", () => {
     expect(getAiWorkspaceListType(search)).toBe(type);
     expect(getAiWorkspaceTitle(t, search)).toBe(title);
     expect(getAiWorkspaceCreatePayload(search)).toEqual(payload);
+  });
+
+  it.each([
+    ["", "Common:NewAgent"],
+    [`?type=${RoomsType.AiProjectRoom}`, "Common:NewAgent"],
+    [`?type=${RoomsType.InstructionsRoom}`, "Common:New"],
+    [`?type=${RoomsType.KnowledgeRoom}`, "Common:New"],
+  ])("labels the create button of %s %s, not New room", (search, label) => {
+    expect(getAiWorkspaceCreateLabel(t, search)).toBe(label);
   });
 });
 

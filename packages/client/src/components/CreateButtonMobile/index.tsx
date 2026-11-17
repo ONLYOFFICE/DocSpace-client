@@ -96,6 +96,7 @@ const CreateButtonMobile = ({
     isContactsGuestsPage,
     isRoomsFolder: !!isRoomsFolder,
     isAiHubFolder: !!isAiHubFolder,
+    search: location.search,
     isFormsSection,
     isFormsFolder: !!isFormsFolder,
     selectedFolderId,

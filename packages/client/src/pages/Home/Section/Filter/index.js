@@ -255,6 +255,7 @@ const SectionFilterContent = ({
     isContactsGuestsPage,
     isRoomsFolder,
     isAiHubFolder,
+    search: location.search,
     isFormsSection,
     isFormsFolder,
     selectedFolderId,

@@ -171,9 +171,9 @@ test.describe("AI Chat section", () => {
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
 
-      // The list creates what it holds: on the root, an agent, so New room
+      // The list creates what it holds: on the root, an agent, so New agent
       // opens the project form with no room type to choose.
-      await page.getByText("New room", { exact: true }).first().click();
+      await page.getByText("New agent", { exact: true }).first().click();
       await expect(page.getByTestId("room-type-list-item")).toHaveCount(0);
       // The modal root is a zero-size wrapper; the aside's fields are what shows.
       await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
@@ -205,7 +205,7 @@ test.describe("AI Chat section", () => {
       await expect(table(page)).toContainText("Contracts archive");
 
       // The entry's room type is set and locked: no chooser, no project form.
-      await page.getByText("New room", { exact: true }).first().click();
+      await page.getByText("New", { exact: true }).first().click();
       await expect(page.getByTestId("create_room_dialog_save")).toBeVisible();
       await expect(page.getByTestId("room-type-list-item")).toHaveCount(0);
       await expect(page.getByTestId("ai-project-dialog")).toHaveCount(0);
@@ -225,7 +225,7 @@ test.describe("AI Chat section", () => {
 
       await expect(emptyView(page)).toBeVisible();
       await expect(emptyView(page)).toContainText("No AI rooms yet");
-      await expect(emptyView(page)).toContainText("New room");
+      await expect(emptyView(page)).toContainText("New agent");
 
       await expectScreenshot(page, [
         "desktop",
@@ -250,7 +250,7 @@ test.describe("AI Chat section", () => {
       await expect(emptyView(page)).toContainText(
         "No AI rooms shared with you yet",
       );
-      await expect(emptyView(page)).not.toContainText("New room");
+      await expect(emptyView(page)).not.toContainText("New agent");
 
       await expectScreenshot(page, [
         "desktop",
@@ -270,8 +270,8 @@ test.describe("AI Chat section", () => {
       );
 
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
-      // The empty root creates an agent: New room opens the project form.
-      await emptyView(page).getByText("New room", { exact: true }).click();
+      // The empty root creates an agent: New agent opens the project form.
+      await emptyView(page).getByText("New agent", { exact: true }).click();
       await page.getByTestId("ai-project-title").fill("Sales");
 
       // A picture goes through the icon's hidden file input into the crop

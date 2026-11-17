@@ -79,6 +79,7 @@ import {
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import { isPrivateRoomsListRoot } from "SRC_DIR/helpers/privateRoomsSection";
 import {
+  getAiWorkspaceCreateLabel,
   getAiWorkspaceTitle,
   isAiWorkspaceCreateRefused,
 } from "SRC_DIR/helpers/aiWorkspace";
@@ -1094,9 +1095,11 @@ const SectionHeaderContent = (props) => {
                   : undefined,
                 actions: isFormsSection
                   ? t("Common:CreateFormSet")
-                  : isRoomsFolder || isAiHubFolder
-                    ? t("Common:NewRoom")
-                    : t("Common:Actions"),
+                  : isAiHubFolder
+                    ? getAiWorkspaceCreateLabel(t, location.search)
+                    : isRoomsFolder
+                      ? t("Common:NewRoom")
+                      : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
                 aiChat: t("Common:AIChatButton"),

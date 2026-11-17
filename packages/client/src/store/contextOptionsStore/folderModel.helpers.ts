@@ -63,6 +63,7 @@ import {
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
+import { getAiWorkspaceCreateLabel } from "SRC_DIR/helpers/aiWorkspace";
 import { onSuggestOformChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
@@ -476,7 +477,11 @@ export const getFolderModelImpl = (
           : [
               {
                 key: "new-room",
-                label: t("Common:NewRoom"),
+                // An AI Chat list creates what it holds: an agent, a skill
+                // set or a knowledge base.
+                label: isAiHubFolder
+                  ? getAiWorkspaceCreateLabel(t, window.location.search)
+                  : t("Common:NewRoom"),
                 onClick: self.onCreateRoom,
                 icon: CatalogRoomsReactSvgUrl,
               },

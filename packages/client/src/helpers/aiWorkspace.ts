@@ -40,8 +40,8 @@ import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
  * The AI Chat section's lists are one rooms list (`/ai-rooms`) narrowed to a
  * room type by the `type` query: the Agents (AI projects) on its root, the
  * Skill sets (Instructions rooms) and Knowledge bases (Knowledge rooms)
- * entries. What the list holds decides its title and what "New room" creates
- * there.
+ * entries. What the list holds decides its title, what its create button
+ * creates there and what the button reads.
  */
 
 /**
@@ -117,13 +117,25 @@ export const getAiWorkspaceTitle = (
   search: string,
 ): string => getAiListTitle(t, getAiWorkspaceListType(search));
 
+/**
+ * The label of the list's create button: "New agent" on the Agents, "New"
+ * on Skill sets and Knowledge bases.
+ */
+export const getAiWorkspaceCreateLabel = (
+  t: (key: string) => string,
+  search: string,
+): string =>
+  getAiWorkspaceListType(search) === RoomsType.AiProjectRoom
+    ? t("Common:NewAgent")
+    : t("Common:New");
+
 export type TAiWorkspaceCreatePayload =
   | { startRoomType: RoomsType }
   | { isAiProjectCreate: true };
 
 /**
- * What "New room" creates in the list: the entry's room type, with the type
- * chooser locked, or an agent through the project form on the root.
+ * What the create button creates in the list: the entry's room type, with
+ * the type chooser locked, or an agent through the project form on the root.
  */
 export const getAiWorkspaceCreatePayload = (
   search: string,
@@ -135,7 +147,7 @@ export const getAiWorkspaceCreatePayload = (
 };
 
 /**
- * "New room" of the list creates nothing: the Knowledge bases list while
+ * The create button of the list creates nothing: the Knowledge bases list while
  * vectorization is off, as a Knowledge room cannot be created then (the
  * server refuses it, and the type list greys it out).
  */

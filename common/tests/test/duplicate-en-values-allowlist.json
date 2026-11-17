@@ -9,7 +9,7 @@
   "AiSuggestions: FormsTemplatesSaveAsTemplate, RoomsTemplatesSaveAsTemplate",
   "AiSuggestions: FormsTrashDeletePermanently, RoomsTrashDeletePermanently",
   "AiSuggestions: FormsTrashWhatSDeleted, RoomsTrashWhatSDeleted",
-  "Common: AIChat, AIChatButton",
+  "Common: AIChat, AIChatButton, AiWorkspace",
   "Common: AboutCompanyTitle, AboutHeader",
   "Common: AddTag, TagsPlaceholder",
   "Common: ArbiterRemoveExpert, RemoveSource",

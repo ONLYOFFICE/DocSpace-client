@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "mobx-react";
 import { makeAutoObservable } from "mobx";
 import { MemoryRouter } from "react-router";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { TAiProject } from "@docspace/shared/api/ai/projects";
@@ -124,11 +124,20 @@ vi.mock("SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo", () => ({
   ProjectLogo: () => <span data-testid="project-logo" />,
 }));
 
-// The bridge reads whether a chat profile exists to tell "AI is set up".
+// The bridge reads whether a profile that can chat exists to tell "AI is
+// set up", and whether the portal has a chat model for an agent without one.
+const profiles = vi.hoisted(() => ({
+  state: {
+    initialized: true,
+    hasProfiles: true,
+    hasChatProfiles: true,
+    chatProfile: null as { capabilities?: number } | null,
+    defaultProfile: { capabilities: 1 } as { capabilities?: number } | null,
+  },
+}));
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
   useStores: () => ({
-    useProfilesStore: (select: (s: { initialized: boolean; hasProfiles: boolean }) => unknown) =>
-      select({ initialized: true, hasProfiles: true }),
+    useProfilesStore: (select: (s: typeof profiles.state) => unknown) => select(profiles.state),
   }),
 }));
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
@@ -163,6 +172,7 @@ import AiPresetsStore, { PRESETS_FRESH_MS, toAiPreset } from "SRC_DIR/store/AiPr
 import AiPresetsBridgeConnected from "../index";
 
 const setAiReady = vi.fn();
+const setPortalHasChatModel = vi.fn();
 
 // `inject` supplies the store props; the test renders it under a Provider.
 const AiPresetsBridge = AiPresetsBridgeConnected as unknown as React.FC<{ enabled: boolean }>;
@@ -202,7 +212,7 @@ const renderBridge = (
     <MemoryRouter initialEntries={[path]}>
       <Provider
         aiPresetsStore={aiPresetsStore}
-        aiProjectsStore={{ activeProject, openEditDialogById: openEditAiProject }}
+        aiProjectsStore={{ activeProject, openEditDialogById: openEditAiProject, setPortalHasChatModel }}
         contextOptionsStore={{ onClickInviteUsers: inviteToRoom }}
         dialogsStore={{ requestAiChatPage }}
         filesStore={{ setSelection, setBufferSelection }}
@@ -393,6 +403,37 @@ describe("AiPresetsBridge", () => {
     setAiReady.mockClear();
     renderBridge(new AiPresetsStore());
     expect(setAiReady).toHaveBeenLastCalledWith(true);
+  });
+
+  it("does not take a portal whose profiles cannot chat for AI set up on standalone", () => {
+    profiles.state = { ...profiles.state, hasProfiles: true, hasChatProfiles: false };
+    try {
+      renderBridge(new AiPresetsStore());
+      expect(setAiReady).toHaveBeenLastCalledWith(false);
+    } finally {
+      profiles.state = { ...profiles.state, hasChatProfiles: true };
+    }
+  });
+
+  it("tells the stores whether the portal has a chat model for an agent without its own", () => {
+    const initial = profiles.state;
+    try {
+      renderBridge(new AiPresetsStore());
+      expect(setPortalHasChatModel).toHaveBeenLastCalledWith(true);
+
+      cleanup();
+      // The Default slot holds an image model only, and no Chat model is assigned.
+      profiles.state = { ...initial, chatProfile: null, defaultProfile: { capabilities: 2 } };
+      renderBridge(new AiPresetsStore());
+      expect(setPortalHasChatModel).toHaveBeenLastCalledWith(false);
+
+      cleanup();
+      profiles.state = { ...initial, initialized: false };
+      renderBridge(new AiPresetsStore());
+      expect(setPortalHasChatModel).toHaveBeenLastCalledWith(null);
+    } finally {
+      profiles.state = initial;
+    }
   });
   it("offers the projects as the panel title's agents, an empty menu while there are none", async () => {
     api.getAiProjects.mockResolvedValue({ folders: [] });

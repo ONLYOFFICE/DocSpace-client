@@ -60,7 +60,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DialogComponent from "SRC_DIR/components/GlobalEvents/sub-components/Dialog";
 import type AiPresetsStore from "SRC_DIR/store/AiPresetsStore";
 import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
-import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
+import { canManageProjects, hasPortalChatModel } from "SRC_DIR/pages/AiProjects/utils";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 import { InfoPanelView, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { aiProjectToRoom, getAiProject } from "@docspace/shared/api/ai/projects";
@@ -101,6 +101,8 @@ type AiPresetsBridgeProps = {
   /** SaaS: the AI service is on for the portal. */
   isAIReady: boolean;
   setAiReady: (aiReady: boolean | null) => void;
+  /** Hands over whether the portal has a chat model for an agent without its own. */
+  setPortalHasChatModel: (value: boolean | null) => void;
   /** An AI project is open on the projects page (its room, with its own chat). */
   isAiProjectOpen: boolean;
   /** The id of the agent whose page is open, as the agents menu carries ids. */
@@ -148,6 +150,7 @@ const AiPresetsBridge = ({
   standalone,
   isAIReady,
   setAiReady,
+  setPortalHasChatModel,
   isAiProjectOpen,
   openProjectId,
   requestAiChatPage,
@@ -163,15 +166,30 @@ const AiPresetsBridge = ({
   const aiChatStore = useAiChatStore();
 
   // Whether AI is set up, by the chat's own rule, for the AI rooms section
-  // outside the providers: a chat profile on standalone (unknown until the
-  // profiles are loaded), the AI service on SaaS.
+  // outside the providers: a profile that can chat on standalone (unknown
+  // until the profiles are loaded), the AI service on SaaS.
   const { useProfilesStore } = useStores();
   const profilesInitialized = useProfilesStore((s: { initialized: boolean }) => s.initialized);
-  const hasProfiles = useProfilesStore((s: { hasProfiles: boolean }) => s.hasProfiles);
-  const aiReady = standalone ? (profilesInitialized ? hasProfiles : null) : isAIReady;
+  const hasChatProfiles = useProfilesStore((s: { hasChatProfiles: boolean }) => s.hasChatProfiles);
+  const aiReady = standalone ? (profilesInitialized ? hasChatProfiles : null) : isAIReady;
   React.useEffect(() => {
     setAiReady(aiReady);
   }, [setAiReady, aiReady]);
+
+  // The model an agent without one of its own runs on (Shell blocks its
+  // chat when there is none). The assignments are the portal's whatever
+  // the chat's scope.
+  const portalChatModel = useProfilesStore(
+    (s: {
+      initialized: boolean;
+      chatProfile: { capabilities?: number } | null;
+      defaultProfile: { capabilities?: number } | null;
+    }) =>
+      s.initialized ? hasPortalChatModel(s.chatProfile, s.defaultProfile) : null,
+  );
+  React.useEffect(() => {
+    setPortalHasChatModel(portalChatModel);
+  }, [setPortalHasChatModel, portalChatModel]);
 
   React.useEffect(() => {
     aiPresetsStore.init(enabled ? userId : null);
@@ -550,5 +568,6 @@ export default inject(
   standalone: !!settingsStore.standalone,
   isAIReady: !!paymentStore.isAIReady,
   setAiReady: settingsStore.setAiReady,
+  setPortalHasChatModel: aiProjectsStore.setPortalHasChatModel,
   }),
 )(observer(AiPresetsBridge));

@@ -147,6 +147,13 @@ class AiProjectsStore {
    */
   defaultModelName: string | null = null;
 
+  /**
+   * Whether the portal has a chat model for an agent without one of its
+   * own (the `Chat` assignment, else the `Default` slot), as the chat's
+   * profiles read it (AiPresetsBridge); `null` until they are read.
+   */
+  portalHasChatModel: boolean | null = null;
+
   private defaultModelRequest: Promise<void> | null = null;
 
   /** The summary reads in flight, by project id. */
@@ -391,6 +398,10 @@ class AiProjectsStore {
   forgetTileSummary = (id: number) => {
     delete this.tileSummaries[id];
     delete this.summaryReads[id];
+  };
+
+  setPortalHasChatModel = (value: boolean | null) => {
+    this.portalHasChatModel = value;
   };
 
   /**

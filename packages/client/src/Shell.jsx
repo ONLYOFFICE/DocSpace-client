@@ -99,6 +99,7 @@ import "@docspace/shared/styles/theme.scss";
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
 import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
+import { isAgentModelUnavailable } from "SRC_DIR/pages/AiProjects/utils";
 import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
@@ -189,6 +190,7 @@ const Shell = ({ page = "home", ...rest }) => {
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
+    portalHasChatModel,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -964,10 +966,13 @@ const Shell = ({ page = "home", ...rest }) => {
     [t, standalone, aiActiveProject, openEditAiProject],
   );
 
-  // Inside a project whose model is unavailable nothing can be sent until
+  // Inside a project whose model is unavailable - its own one gone, or none
+  // of its own on a portal without a chat model - nothing can be sent until
   // the model is changed; the intro says so and offers the change.
   const isProjectModelUnavailable =
-    isInsideAiProject && aiActiveProject?.aiProject.profile?.available === false;
+    isInsideAiProject &&
+    !!aiActiveProject &&
+    isAgentModelUnavailable(aiActiveProject, portalHasChatModel);
 
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
@@ -1241,6 +1246,7 @@ const ShellWrapper = inject(
       aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
+      portalHasChatModel: aiProjectsStore.portalHasChatModel,
       openEditAiProject: aiProjectsStore.openEditDialog,
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the

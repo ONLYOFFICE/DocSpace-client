@@ -4,6 +4,8 @@ import { AiProjectAccess, type TAiProject } from "@docspace/shared/api/ai/projec
 
 import {
   canManageProjects,
+  hasPortalChatModel,
+  isAgentModelUnavailable,
   isManager,
   isOwner,
   projectLink,
@@ -66,5 +68,34 @@ describe("AiProjects utils", () => {
     expect(roomLinkRefusal(managed, true, false)).toBe("vectorizationOff");
     // Vectorization does not concern skill sets.
     expect(roomLinkRefusal(managed, false, false)).toBeNull();
+  });
+
+  it("tells an agent that cannot chat: its own model unusable, or none on a portal without a chat model", () => {
+    const agent = (aiProject: Record<string, unknown>) => ({ id: 7, aiProject }) as unknown as TAiProject;
+    const own = (available: boolean) => agent({ profile: { id: "p1", name: "Claude", available } });
+    const none = agent({ profile: null });
+
+    expect(isAgentModelUnavailable(own(false), true)).toBe(true);
+    // Its own model is what it runs on, whatever the portal has.
+    expect(isAgentModelUnavailable(own(true), false)).toBe(false);
+    expect(isAgentModelUnavailable(none, true)).toBe(false);
+    expect(isAgentModelUnavailable(none, false)).toBe(true);
+    // Not known yet: the chat is not blocked.
+    expect(isAgentModelUnavailable(none, null)).toBe(false);
+    // A project read without its settings, or whose model could not be read, is not judged.
+    expect(isAgentModelUnavailable(agent({ profile: null, partial: true }), false)).toBe(false);
+    expect(isAgentModelUnavailable(agent({ profile: null, modelUnread: true }), false)).toBe(false);
+  });
+
+  it("takes the portal's Chat model, else the Default slot, as its chat model when it can chat", () => {
+    const chat = { capabilities: 1 };
+    const image = { capabilities: 2 };
+    expect(hasPortalChatModel(chat, null)).toBe(true);
+    expect(hasPortalChatModel(null, chat)).toBe(true);
+    // A profile reporting no capabilities is taken as one that chats.
+    expect(hasPortalChatModel(null, {})).toBe(true);
+    expect(hasPortalChatModel(image, chat)).toBe(false);
+    expect(hasPortalChatModel(null, image)).toBe(false);
+    expect(hasPortalChatModel(null, null)).toBe(false);
   });
 });

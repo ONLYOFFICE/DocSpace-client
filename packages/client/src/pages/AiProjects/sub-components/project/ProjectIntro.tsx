@@ -46,7 +46,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { ProjectLogo } from "../list/ProjectLogo";
 import RoomItem from "./RoomItem";
-import { isManager } from "../../utils";
+import { hasPortalChatModel, isAgentModelUnavailable, isManager } from "../../utils";
 import styles from "./ProjectIntro.module.scss";
 
 /** Rooms of a kind shown before the rest fold into a "+N" chip. */
@@ -111,10 +111,14 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
   const { t } = useTranslation(["Common"]);
   const { useProfilesStore } = useStores();
   const aiProjectsStore = useStore("aiProjectsStore");
-  // The stored model is gone or cannot chat: no round can run until it is
-  // changed, so the intro says so instead of the model line. Owner and
-  // managers get the Edit project action, members are told to ask one.
-  const modelUnavailable = project.aiProject.profile?.available === false;
+  // The stored model is gone or cannot chat, or there is none and the portal
+  // has no chat model to run on: no round can run until it is changed, so
+  // the intro says so instead of the model line. Owner and managers get the
+  // Edit project action, members are told to ask one.
+  const portalChatModel = useProfilesStore((s) =>
+    s.initialized ? hasPortalChatModel(s.chatProfile, s.defaultProfile) : null,
+  );
+  const modelUnavailable = isAgentModelUnavailable(project, portalChatModel);
   const canEdit = isManager(project);
   // The model the composer shows: the one picked for this chat, else the
   // chat default, else the portal default (ai-chat's current chat profile).

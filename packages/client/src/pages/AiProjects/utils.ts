@@ -34,6 +34,7 @@
  */
 
 import { AiProjectAccess, type TAiProject } from "@docspace/shared/api/ai/projects";
+import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 
 export const isManager = (project: TAiProject) =>
   project.access === AiProjectAccess.Owner ||
@@ -48,6 +49,32 @@ export const canManageProjects = (user?: {
   isAdmin?: boolean;
   isRoomAdmin?: boolean;
 } | null) => !!user && (!!user.isOwner || !!user.isAdmin || !!user.isRoomAdmin);
+
+/**
+ * The agent cannot chat, and nothing can be sent in its chat until its model
+ * is changed: its own model is gone or cannot chat, or it has none and the
+ * portal has no chat model for it to run on (the `Chat` assignment, else the
+ * `Default` slot, as the server picks the round's model). `portalHasChatModel`
+ * is `null` while unknown; a project read without its settings, or whose
+ * model could not be read, is not judged.
+ */
+export const isAgentModelUnavailable = (
+  project: TAiProject,
+  portalHasChatModel: boolean | null,
+) => {
+  const { profile, partial, modelUnread } = project.aiProject;
+  if (profile) return profile.available === false;
+  return !partial && !modelUnread && portalHasChatModel === false;
+};
+
+/** Whether the portal's chat model (`Chat`, else `Default`) exists and can chat. */
+export const hasPortalChatModel = (
+  chatProfile: { capabilities?: number } | null,
+  defaultProfile: { capabilities?: number } | null,
+) => {
+  const profile = chatProfile ?? defaultProfile;
+  return !!profile && isChatCapableProfile(profile);
+};
 
 /** The project's address in the AI Rooms section, as a room's "Copy link" gives it. */
 export const projectLink = (project: TAiProject) =>

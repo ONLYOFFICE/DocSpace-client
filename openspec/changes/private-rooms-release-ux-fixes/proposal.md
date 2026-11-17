@@ -9,8 +9,6 @@ covers those findings that the client can close on its own.
 
 What the review saw:
 
-- Key setup registers a key once the acknowledgement is ticked, whether or
-  not the recovery phrase was kept anywhere.
 - While a new passphrase misses a required character the strength line can
   still read "Good", and the list of rules opens over the text of the
   dialog and its generate action.
@@ -28,8 +26,6 @@ What the review saw:
 
 ## What Changes
 
-- Key setup asks for three words of the recovery phrase by their position
-  before it registers the key.
 - The strength line never shows a passing grade while a rule of the
   passphrase is unmet, and the list of rules no longer covers the dialog.
 - The recovery phrase input shows how many words it holds, names a word
@@ -45,6 +41,10 @@ What the review saw:
 
 Out of scope:
 
+- A check that the recovery phrase was saved, such as asking for some of its
+  words at key setup. The owner decided against it on 2026-11-17: an earlier
+  version of the feature asked for words of the phrase and users disliked it.
+  The acknowledgement tick stays the only gate, as the main spec describes.
 - Inviting a person who has no key and telling them about it. It needs the
   server and is a feature, not a fix.
 - A passphrase generator built from words. It changes how strong a
@@ -60,20 +60,17 @@ Out of scope:
 Dependencies:
 
 - No work on `../server` or the Document Server.
-- `docspace-ui-kit-react` only if the audit of task 6.1 traces the colour of
-  the action icons to the kit's icon button.
+- `docspace-ui-kit-react` only if task 3.3 traces the colour of the action
+  icons to the kit's icon button, or tasks 1.1 and 2.1 find a switch missing
+  in the kit's password input or text area.
 
-Order with `private-rooms-key-ux-refresh`: both touch the passphrase form,
-the recovery phrase display and Keys management. This change goes first; the
+Order with `private-rooms-key-ux-refresh`: both touch the passphrase form
+and Keys management. This change goes first; the
 refresh then moves forms that already behave as specified here.
 
 ## Decisions needed
 
-1. How many words key setup asks for. Proposed: three, at positions picked
-   at random for each setup. Two is quicker and catches less.
-2. Whether the acknowledgement tick stays next to the check. Proposed: it
-   stays, since it is the promise and the check is the proof.
-3. What the strength line shows while a rule is unmet. Proposed: the weak
+1. What the strength line shows while a rule is unmet. Proposed: the weak
    grade. The alternative shows no grade and names the missing rule there.
 
 ## Capabilities
@@ -84,22 +81,21 @@ None.
 
 ### Modified Capabilities
 
-- `private-rooms/key-management`: the check of the recovery phrase at key
-  setup, the strength line and the list of rules, the recovery phrase
-  input, the key details of Keys management.
+- `private-rooms/key-management`: the strength line and the list of rules,
+  the recovery phrase input, the key details of Keys management.
 - `private-rooms/room-membership`: the contrast of the invitation result.
 - `private-rooms/file-operations`: the message of the media viewer for a
   file that is not shared with the user yet.
 
 ## Impact
 
-- `packages/shared/dialogs/key-generation`, `packages/shared/dialogs/passphrase-modal`,
-  `packages/shared/dialogs/key-recovery`: the check, the strength line, the
-  recovery input. The SDK takes the shared dialogs.
+- `packages/shared/dialogs/passphrase-modal`,
+  `packages/shared/dialogs/key-recovery`: the strength line and the recovery
+  input. The SDK takes the shared dialogs.
 - `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management`:
   the key details.
 - `packages/client/src/components/panels/InvitePanel`: the result texts.
 - `packages/shared/components/media-viewer`: the message.
 - `public/locales`: new Common keys and one reworded, in every language.
-- Playwright screenshots of key setup, the recovery dialog, Keys management
-  and the invite result change.
+- Playwright screenshots of the passphrase dialog, the recovery dialog, Keys
+  management and the invite result change.

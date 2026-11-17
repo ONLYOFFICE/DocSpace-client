@@ -2,29 +2,6 @@
 
 ## ADDED Requirements
 
-### Requirement: The recovery phrase is checked before the key is registered
-The system SHALL ask the user, after the recovery phrase is acknowledged, to enter three of its words named by their positions, picked at random for each key setup, and SHALL register the key only when all three match. The check SHALL compare the words without regard to letter case and surrounding spaces. A way back to the phrase SHALL be offered, and the same phrase SHALL be shown again.
-
-#### Scenario: Words match
-- **WHEN** the user enters the three asked words correctly
-- **THEN** the key is registered and Common:EncryptionKeyGenerated is shown
-
-#### Scenario: A word does not match
-- **WHEN** one of the entered words differs from the word at its position
-- **THEN** its field is marked invalid with Common:RecoveryCheckMismatch, the confirm action stays unavailable and no key is registered
-
-#### Scenario: Back to the phrase
-- **WHEN** the user goes back from the check
-- **THEN** the same 24 words are shown, and the next check asks for three positions picked anew
-
-#### Scenario: Case and spaces
-- **WHEN** the user enters an asked word in capital letters with a space after it
-- **THEN** the word is accepted
-
-#### Scenario: Check abandoned
-- **WHEN** the user closes key setup during the check and confirms the question
-- **THEN** no key is registered
-
 ### Requirement: The strength grade does not contradict the passphrase rules
 The system SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStrengthGood or Common:PassphraseStrengthStrong for a new passphrase that fails the length, the composition or the common-pattern rule, at key creation and at a passphrase change alike. Such a passphrase SHALL be graded Common:PassphraseStrengthWeak.
 
@@ -85,15 +62,11 @@ The system SHALL word Common:InvalidRecoveryPhrase and the other messages of the
 - **THEN** the text asks to check the words and their order and names no standard
 
 ### Requirement: The recovery phrase input takes no input assistance
-The system SHALL ask the browser for no spelling check, no automatic correction, no automatic capital letters and no saved suggestions in the field the recovery phrase is entered into, and in the fields of the check of the recovery phrase at key setup.
+The system SHALL ask the browser for no spelling check, no automatic correction, no automatic capital letters and no saved suggestions in the field the recovery phrase is entered into.
 
 #### Scenario: Recovery input
 - **WHEN** the recovery phrase input is shown
 - **THEN** the field declares spelling check, automatic correction, automatic capital letters and saved suggestions off
-
-#### Scenario: Check at key setup
-- **WHEN** the fields of the three asked words are shown
-- **THEN** each declares the same
 
 ### Requirement: Technical key details are folded
 The system SHALL show the key id and the algorithm of a key in Keys management under a control named Common:Details that is closed when the page opens, and SHALL keep the status, the creation date and the fingerprint in view. The control SHALL be operable from the keyboard and SHALL expose whether it is open.

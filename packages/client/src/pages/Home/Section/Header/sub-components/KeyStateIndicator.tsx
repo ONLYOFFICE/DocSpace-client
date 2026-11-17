@@ -34,11 +34,15 @@
  */
 
 
+import { useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useEncryption } from "@docspace/shared/context/encryption";
+
+import KeyStatePopover from "./KeyStatePopover";
 
 type KeyStateIndicatorProps = {
   /** The open folder is a private room or lies inside one. */
@@ -48,7 +52,8 @@ type KeyStateIndicatorProps = {
 };
 
 /**
- * The state of the user's key in the header of a private room.
+ * The state of the user's key in the header of a private room, and the key
+ * actions it opens.
  * Spec: private-rooms/key-management, "Key state is shown in the header of a private room"
  */
 const KeyStateIndicator = ({
@@ -57,29 +62,58 @@ const KeyStateIndicator = ({
   syncEncryptedRoom,
 }: KeyStateIndicatorProps) => {
   const { t } = useTranslation(["Common"]);
-  const { isUnlocked, hasConfiguredKey, keysLoaded, requireIdentity } =
+  const { isUnlocked, hasConfiguredKey, keysLoaded, requireIdentity, lock } =
     useEncryption();
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const buttonRef = useRef<HTMLElement>(null);
+  const anchorRef = useRef<HTMLSpanElement>(null);
 
   if (!isPrivate || !keysLoaded || !hasConfiguredKey) return null;
 
   const label = isUnlocked ? t("Common:KeyUnlocked") : t("Common:KeyLocked");
+  const showPopover = isPopoverOpen && isUnlocked;
+
+  const closePopover = (returnFocus: boolean) => {
+    setIsPopoverOpen(false);
+    if (returnFocus) buttonRef.current?.focus();
+  };
 
   const onClick = () => {
-    if (isUnlocked) return;
+    if (isUnlocked) {
+      setIsPopoverOpen((open) => !open);
+      return;
+    }
 
     void requireIdentity().then((identity) => {
       if (identity) syncEncryptedRoom?.();
     });
   };
 
+  const onLock = () => {
+    lock();
+    closePopover(true);
+    toastr.success(t("Common:EncryptionLocked"));
+  };
+
   return (
-    <Button
-      className={className}
-      size={ButtonSize.extraSmall}
-      label={label}
-      onClick={onClick}
-      testId="key_state_indicator"
-    />
+    <span ref={anchorRef} className={className}>
+      <Button
+        ref={buttonRef}
+        size={ButtonSize.extraSmall}
+        label={label}
+        onClick={onClick}
+        aria-haspopup={isUnlocked ? "dialog" : undefined}
+        aria-expanded={isUnlocked ? showPopover : undefined}
+        testId="key_state_indicator"
+      />
+      {showPopover ? (
+        <KeyStatePopover
+          anchorRef={anchorRef}
+          onClose={closePopover}
+          onLock={onLock}
+        />
+      ) : null}
+    </span>
   );
 };
 

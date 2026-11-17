@@ -51,7 +51,12 @@ import {
 
 import styles from "./AutoLockSetting.module.scss";
 
-export const AutoLockSetting = () => {
+type AutoLockSettingProps = {
+  /** Opens the list in place, for a host that is a popover of its own. */
+  inPlace?: boolean;
+};
+
+export const AutoLockSetting = ({ inPlace = false }: AutoLockSettingProps) => {
   const { t } = useTranslation(["Common"]);
   const labelId = useId();
   const [presetId, setPresetId] = useState<AutoLockPresetId>(() =>
@@ -97,7 +102,7 @@ export const AutoLockSetting = () => {
         scaled={false}
         manualWidth="auto"
         displaySelectedOption
-        isDefaultMode={!isMobile()}
+        isDefaultMode={!inPlace && !isMobile()}
         dataTestId="auto_lock_timeout_combobox"
         dropDownTestId="auto_lock_timeout_combobox_dropdown"
       />

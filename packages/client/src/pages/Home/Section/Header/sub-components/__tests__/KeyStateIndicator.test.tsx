@@ -35,17 +35,28 @@
 
 
 import { createContext, type ComponentType } from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "mobx-react";
-import { describe, expect, it, vi } from "vitest";
+import { MemoryRouter } from "react-router";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import {
+  getCurrentAutoLockPresetId,
+  setAutoLockPreset,
+} from "@docspace/shared/services/encryption/auto-lock-preference";
 
 type TestEncryption = {
   isUnlocked: boolean;
   hasConfiguredKey: boolean;
   keysLoaded: boolean;
   requireIdentity: () => Promise<unknown>;
+  lock: () => void;
 };
+
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
+  toastr: { success: vi.fn() },
+}));
 
 vi.mock("@docspace/shared/context/encryption", async () => {
   const { createContext: create, useContext } = await import("react");
@@ -75,6 +86,7 @@ const encryptionState = (
   hasConfiguredKey: true,
   keysLoaded: true,
   requireIdentity: vi.fn(async () => null),
+  lock: vi.fn(),
   ...overrides,
 });
 
@@ -85,11 +97,13 @@ const renderIndicator = (
   const syncEncryptedRoom = vi.fn();
   const filesStore = { syncEncryptedRoom };
   const tree = (value: TestEncryption) => (
-    <Provider filesStore={filesStore}>
-      <TestEncryptionContext.Provider value={value}>
-        <KeyStateIndicator isPrivate={isPrivate} />
-      </TestEncryptionContext.Provider>
-    </Provider>
+    <MemoryRouter>
+      <Provider filesStore={filesStore}>
+        <TestEncryptionContext.Provider value={value}>
+          <KeyStateIndicator isPrivate={isPrivate} />
+        </TestEncryptionContext.Provider>
+      </Provider>
+    </MemoryRouter>
   );
   const view = render(tree(encryption));
 
@@ -153,5 +167,140 @@ describe("Key state is shown in the header of a private room", () => {
 
     expect(requireIdentity).toHaveBeenCalledTimes(1);
     expect(syncEncryptedRoom).not.toHaveBeenCalled();
+  });
+});
+
+describe("Key state indicator leads to the key actions", () => {
+  beforeEach(() => {
+    setAutoLockPreset("30m");
+  });
+
+  const popover = () =>
+    screen.queryByRole("dialog", { name: "Common:KeyUnlocked" });
+
+  it("Popover of an unlocked key", async () => {
+    const user = userEvent.setup();
+    renderIndicator(encryptionState());
+
+    await user.click(screen.getByRole("button", { name: "Common:KeyUnlocked" }));
+
+    const dialog = popover();
+    expect(dialog).not.toBeNull();
+    const inside = within(dialog as HTMLElement);
+    expect(inside.getByText("Common:KeyUnlocked")).toBeInTheDocument();
+    const preset = within(
+      inside.getByRole("group", { name: "Common:AutoLockLabel" }),
+    ).getByRole("button");
+    await user.click(preset);
+    const offered = inside
+      .getAllByText(/^Common:AutoLock\d+m$/)
+      .map((node) => node.textContent);
+    expect(new Set(offered)).toEqual(
+      new Set(["Common:AutoLock5m", "Common:AutoLock15m", "Common:AutoLock30m"]),
+    );
+    expect(
+      inside.getByRole("button", { name: "Common:LockNow" }),
+    ).toBeInTheDocument();
+    expect(
+      inside.getByRole("link", { name: "Common:KeysManagement" }),
+    ).toHaveAttribute("href", "/profile/keys-management");
+  });
+
+  it("Preset picked in the popover", async () => {
+    const user = userEvent.setup();
+    renderIndicator(encryptionState());
+
+    await user.click(screen.getByRole("button", { name: "Common:KeyUnlocked" }));
+    const inside = within(popover() as HTMLElement);
+    await user.click(
+      within(inside.getByRole("group", { name: "Common:AutoLockLabel" })).getByRole(
+        "button",
+      ),
+    );
+    await user.click(inside.getByText("Common:AutoLock5m"));
+
+    expect(getCurrentAutoLockPresetId()).toBe("5m");
+    expect(popover()).not.toBeNull();
+  });
+
+  it("Lock from the popover", async () => {
+    const user = userEvent.setup();
+    const lock = vi.fn();
+    const { update } = renderIndicator(encryptionState({ lock }));
+    lock.mockImplementation(() =>
+      update(encryptionState({ isUnlocked: false, lock })),
+    );
+
+    await user.click(screen.getByRole("button", { name: "Common:KeyUnlocked" }));
+    await user.click(
+      within(popover() as HTMLElement).getByRole("button", {
+        name: "Common:LockNow",
+      }),
+    );
+
+    expect(lock).toHaveBeenCalledTimes(1);
+    expect(popover()).toBeNull();
+    expect(screen.getByTestId(INDICATOR)).toHaveTextContent("Common:KeyLocked");
+  });
+
+  it("Locked key", async () => {
+    const user = userEvent.setup();
+    const requireIdentity = vi.fn(async () => null);
+    renderIndicator(encryptionState({ isUnlocked: false, requireIdentity }));
+
+    await user.click(screen.getByRole("button", { name: "Common:KeyLocked" }));
+
+    expect(requireIdentity).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it.each([["{Enter}"], [" "]])("Keyboard: %s", async (key) => {
+    const user = userEvent.setup();
+    renderIndicator(encryptionState());
+    const indicator = screen.getByRole("button", { name: "Common:KeyUnlocked" });
+
+    indicator.focus();
+    await user.keyboard(key);
+
+    const dialog = popover() as HTMLElement;
+    expect(dialog).not.toBeNull();
+    expect(indicator).toHaveAttribute("aria-expanded", "true");
+    expect(dialog.contains(document.activeElement)).toBe(true);
+
+    await user.keyboard("{Escape}");
+
+    expect(popover()).toBeNull();
+    expect(indicator).toHaveFocus();
+    expect(indicator).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("leaves the first Escape to an open preset list", async () => {
+    const user = userEvent.setup();
+    renderIndicator(encryptionState());
+
+    await user.click(screen.getByRole("button", { name: "Common:KeyUnlocked" }));
+    const preset = within(
+      within(popover() as HTMLElement).getByRole("group", {
+        name: "Common:AutoLockLabel",
+      }),
+    ).getByRole("button");
+    preset.focus();
+    await user.keyboard("{ArrowDown}");
+    expect(preset).toHaveAttribute("aria-expanded", "true");
+
+    await user.keyboard("{Escape}");
+
+    expect(preset).toHaveAttribute("aria-expanded", "false");
+    expect(popover()).not.toBeNull();
+  });
+
+  it("closes when the key locks while it is open", async () => {
+    const user = userEvent.setup();
+    const { update } = renderIndicator(encryptionState());
+
+    await user.click(screen.getByRole("button", { name: "Common:KeyUnlocked" }));
+    update(encryptionState({ isUnlocked: false }));
+
+    expect(popover()).toBeNull();
   });
 });

@@ -168,3 +168,34 @@ None. The illustration of the locked-key block was settled on 2026-11-17:
 a new image from design, a folder with a shield and a raised hand, in a
 light and a dark version of 150 by 105 pixels, added as
 `public/images/emptyview/private.room.locked.light.svg` and `.dark.svg`.
+
+## Verification (task 7.1)
+
+Run on 2026-11-17 on `release/v4.1.0` at 884f74e691a, with the kit pack
+built from `docspace-ui-kit-react` `release/v4.1.0` at a4873523:
+
+- Client Playwright under Docker (`tests-dev`): the private-room specs
+  (`private-room-*.spec.ts`, `private-rooms-app-off.spec.ts`,
+  `private-rooms-section.spec.ts`), the keys-management specs
+  (`keys-management.spec.ts`, `keys-management-advanced.spec.ts`,
+  `key-flow-edge-cases.spec.ts`) and `encrypted-file-ui.spec.ts`: 203
+  passed, none failed.
+- SDK private suite (`__tests__/e2e/private`) on a build made with
+  `pnpm run test:build`: 36 passed, 14 skipped (the `fixme` cases of
+  `private-security.spec.ts`).
+- Doceditor `private-room-editor.spec.ts` on its own `test:build`: 2
+  passed, 4 skipped (the tablet and phone projects, which get the deep link
+  page instead of the editor).
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` with 61
+  passed and 3 skipped, then `nx run-many -t tsc lint test` over the six
+  packages: all 21 tasks green, none from the cache.
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 23 passed.
+
+`next build` of Next.js 16.4.3 stops once with a notice of a known
+vulnerability and an upgrade recommendation, then builds when run again;
+both builds above are the second run. The upgrade is left to a separate
+decision.
+
+The full locale suite still reports the six Common keys without
+translations recorded in the previous change; every key this change added
+is translated.

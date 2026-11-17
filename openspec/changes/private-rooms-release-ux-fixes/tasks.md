@@ -20,7 +20,7 @@ and SDK unit tests must stay green.
 
 ## 3. Key details in Keys management
 
-- [ ] 3.1 Fold the key id and the algorithm under `Common:Details` in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx`, closed on open, operable from the keyboard and exposed as expanded or collapsed. Verify: cases "Page opens" and "Details opened" in `keys-management/__tests__/KeysList.test.tsx`
+- [x] 3.1 Fold the key id and the algorithm under `Common:Details` in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx`, closed on open, operable from the keyboard and exposed as expanded or collapsed. Verify: cases "Page opens" and "Details opened" in `keys-management/__tests__/KeysList.test.tsx`
 - [ ] 3.2 Add `Common:KeyFingerprintHint` next to the fingerprint, tied to it as its description; translate it. Verify: a unit case "Hint shown" and the locale tests
 - [ ] 3.3 Give the labels of the key details a colour of at least 4.5:1 and the action icons one of at least 3:1 in both themes, in `KeysManagement.module.scss` and `KeysList.tsx`; if the icon colour comes from the kit's icon button and cannot be set by the page, fix it in the kit. Verify: a Playwright case in `packages/client/__tests__/keys-management.spec.ts` that reads the computed colours in the light and in the dark theme and asserts the two ratios, and the Keys management screenshots updated under Docker
 

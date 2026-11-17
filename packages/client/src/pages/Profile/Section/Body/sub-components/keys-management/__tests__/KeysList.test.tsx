@@ -153,10 +153,19 @@ describe("KeysList", () => {
     // title reaches the DOM only under NODE_ENV=test, so the name is read from
     // aria-label itself.
     expect(
-      within(screen.getByTestId("key_details"))
+      within(screen.getByTestId("key_actions"))
         .getAllByRole("button")
         .map((button) => button.getAttribute("aria-label")),
     ).toEqual(["Common:ChangePassphrase", "Common:ExportKey", "Common:Delete"]);
+    // The Details disclosure is a button of the card, not one of its actions.
+    expect(
+      within(screen.getByTestId("key_details")).getAllByRole("button"),
+    ).toHaveLength(4);
+    expect(
+      within(screen.getByTestId("key_actions")).queryByRole("button", {
+        name: "Common:Details",
+      }),
+    ).toBeNull();
   });
 
   it("Action disabled during a deletion", async () => {
@@ -181,5 +190,44 @@ describe("KeysList", () => {
     expect(onDelete).toHaveBeenCalledWith(keyNew);
     expect(onExport).toHaveBeenCalledTimes(1);
     expect(onRotate).not.toHaveBeenCalled();
+  });
+});
+
+describe("Technical key details are folded", () => {
+  const toggle = () =>
+    screen.getByRole("button", { name: "Common:Details" });
+
+  it("Page opens", async () => {
+    renderList([keyNew]);
+
+    expect(await screen.findByText("FINGERPRINT")).toBeVisible();
+    expect(screen.getByText("Common:KeyCreatedOn")).toBeVisible();
+    expect(screen.getByTestId("badge")).toBeVisible();
+    expect(screen.getByText("new")).not.toBeVisible();
+    expect(screen.getByText("X25519")).not.toBeVisible();
+    expect(toggle()).toHaveAttribute("aria-expanded", "false");
+    expect(toggle()).toHaveAttribute(
+      "aria-controls",
+      screen.getByTestId("key_details_more").id,
+    );
+  });
+
+  it("Details opened", async () => {
+    const user = userEvent.setup();
+    renderList([keyNew]);
+
+    await user.click(toggle());
+    expect(toggle()).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText("new")).toBeVisible();
+    expect(screen.getByText("X25519")).toBeVisible();
+
+    toggle().focus();
+    await user.keyboard("{Enter}");
+    expect(toggle()).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getByText("X25519")).not.toBeVisible();
+
+    await user.keyboard(" ");
+    expect(toggle()).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText("X25519")).toBeVisible();
   });
 });

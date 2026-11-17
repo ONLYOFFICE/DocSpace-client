@@ -137,6 +137,16 @@
   white-space: nowrap;
 }
 
+.detailsToggleRow {
+  grid-column: 1 / -1;
+}
+
+// The rows under Details take part in the grid of the card; [hidden] keeps
+// them out while the disclosure is closed.
+.detailsMore:not([hidden]) {
+  display: contents;
+}
+
 .monoValue {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;

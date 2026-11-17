@@ -96,6 +96,7 @@ import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHea
 import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
 import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
+import KeyStateIndicator from "./sub-components/KeyStateIndicator";
 import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 
@@ -1108,9 +1109,17 @@ const SectionHeaderContent = (props) => {
                     />
                   ) : null
                 ) : (
-                  <AnalyzeResponsesButton
-                    className={styles.analyzeResponsesButton}
-                  />
+                  <>
+                    <KeyStateIndicator
+                      isPrivate={
+                        !!isPrivacyFolder &&
+                        !isPrivateRoomsListRoot(location, isRoomsFolder)
+                      }
+                    />
+                    <AnalyzeResponsesButton
+                      className={styles.analyzeResponsesButton}
+                    />
+                  </>
                 )
               }
             />

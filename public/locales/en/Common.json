@@ -2575,6 +2575,7 @@
   "UseCustomFilter": "use custom filter",
   "UsedLimits": "Used / Limits",
   "UseHttp": "Use Http",
+  "UseInChat": "Use in chat",
   "User": "User",
   "UserAdjustment": "User adjustment, {{fromCount}} → {{toCount}}",
   "UserAgentMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Agent managers. Only Room and Full admins are suitable for the specified role.",

@@ -50,6 +50,7 @@ import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url"
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
+import ChatBubbleReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import {
@@ -91,6 +92,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
     onRetryVectorization,
     isTrashFolder,
     openShareTab,
+    onUseInChat,
   } = props;
 
   const { id, shared, security } = item;
@@ -116,11 +118,16 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
 
-  const isAvailableShareFile = item.canShare && !isRoom(item);
+  // A skill set or a skill is put to use in the chat, not shared by a link.
+  const showUseInChat = !!onUseInChat;
+
+  const isAvailableShareFile =
+    item.canShare && !isRoom(item) && !showUseInChat;
 
   const isAvailableShareForUser =
     item.canShare &&
     !isRoom(item) &&
+    !showUseInChat &&
     (item.rootFolderType === FolderType.USER ||
       item.rootFolderType === FolderType.SHARE);
 
@@ -280,6 +287,17 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}
+            />
+          ) : null}
+          {showUseInChat ? (
+            <IconButton
+              iconName={ChatBubbleReactSvgUrl}
+              className="badge use-in-chat icons-group"
+              size={sizeQuickButton}
+              onClick={onUseInChat}
+              isDisabled={isDisabled}
+              hoverColor="accent"
+              title={t("Common:UseInChat")}
             />
           ) : null}
           {isAvailableShareFile && !isAvailableShareForUser ? (

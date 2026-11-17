@@ -55,10 +55,7 @@ import { KeyDialogAnnouncement } from "../key-dialog-announcement";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
-import {
-  PasswordInput,
-  type PasswordInputHandle,
-} from "@onlyoffice/apps-ui-kit/components/password-input";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
@@ -67,14 +64,16 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   PASSPHRASE_MIN_LENGTH,
   PASSPHRASE_SETTINGS,
-  containsCommonPattern,
   isPassphraseAcceptable,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 
-import { PassphraseStrengthLine } from "./PassphraseStrengthLine";
+import {
+  PassphraseCreationFields,
+  RULES_TOOLTIP_PLACE,
+} from "./PassphraseCreationFields";
 import styles from "./PassphraseModal.module.scss";
 
-export { PASSPHRASE_SETTINGS };
+export { PASSPHRASE_SETTINGS, RULES_TOOLTIP_PLACE };
 
 type PassphraseModalProps = {
   visible: boolean;
@@ -94,9 +93,6 @@ type PassphraseModalProps = {
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
 
-// Spec: private-rooms/key-management, "The passphrase rules tooltip leaves the dialog readable"
-export const RULES_TOOLTIP_PLACE = "right";
-
 export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   visible,
   onSubmit,
@@ -114,13 +110,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const titleId = useId();
-  const inputRef = useRef<PasswordInputHandle>(null);
 
   const [passphrase, setPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
-  // The kit input shows its own copy of the value and reads the prop only
-  // when it mounts, so a value set from outside needs a fresh mount.
-  const [confirmInputKey, setConfirmInputKey] = useState(0);
   const [error, setError] = useState("");
   const [rulesPassed, setRulesPassed] = useState(false);
   const [rememberDevice, setRememberDevice] = useState(false);
@@ -145,17 +137,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     passkeyAutoTriedRef.current = true;
     onPasskeyUnlock();
   }, [visible, isNew, onPasskeyUnlock]);
-
-  // Spec: private-rooms/key-management, "A generated passphrase fills both fields"
-  const generatingRef = useRef(false);
-  const handleGeneratePassword = useCallback((e: React.MouseEvent) => {
-    generatingRef.current = true;
-    try {
-      inputRef.current?.onGeneratePassword(e);
-    } finally {
-      generatingRef.current = false;
-    }
-  }, []);
 
   const handleSubmit = useCallback(() => {
     if (isNew && !isPassphraseAcceptable(passphrase)) {
@@ -197,9 +178,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
   const displayedError = externalError || error;
 
-  const passphraseHasError =
-    !!displayedError ||
-    (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);
+  const passphraseHasError = !!displayedError;
 
   const confirmMismatch = !!confirmPassphrase && passphrase !== confirmPassphrase;
   const announcedError =
@@ -236,181 +215,119 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   : t("Common:PassphraseHint"))}
             </Text>
 
-            <div className={styles.passphraseField}>
-              {isNew ? (
-                <div className={styles.generateRow}>
-                  <Link
-                    type={LinkType.action}
-                    role="button"
-                    tabIndex={0}
-                    fontWeight="600"
-                    fontSize="13px"
-                    isHovered
-                    onClick={handleGeneratePassword}
-                    onKeyDown={activateAsButton}
-                    dataTestId="generate_passphrase_link"
-                  >
-                    {t("Common:GenerateLogoButton")}
-                  </Link>
-                </div>
-              ) : null}
-
-              <FieldContainer
-                isVertical
-                labelVisible
-                labelText={t("Common:Passphrase")}
-                labelFor="passphrase"
-                removeMargin
-                hasError={passphraseHasError}
-                errorMessage={displayedError ?? ""}
-                errorMessageWidth="100%"
-                className={styles.inputWrapper}
-              >
-                <PasswordInput
-                  ref={inputRef}
-                  id="passphrase"
-                  inputName="passphrase"
-                  inputValue={passphrase}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setPassphrase(e.target.value);
-                    if (generatingRef.current) {
-                      setConfirmPassphrase(e.target.value);
-                      setConfirmInputKey((key) => key + 1);
-                    }
-                    setError("");
-                  }}
-                  placeholder={t("Common:Passphrase")}
-                  scale
-                  size={InputSize.base}
-                  simpleView={!isNew}
-                  isFullWidth
-                  passwordSettings={PASSPHRASE_SETTINGS}
-                  onValidateInput={(progressScore) =>
-                    setRulesPassed(progressScore)
-                  }
-                  tooltipPasswordTitle={`${t("Common:PassphraseLimitMessage")}:`}
-                  tooltipPasswordLength={`${t(
-                    "Common:PasswordMinimumLength",
-                  )}: ${MIN_LENGTH}`}
-                  tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-                  tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-                  tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
-                  tooltipPasswordPlace={RULES_TOOLTIP_PLACE}
-                  isDisabled={isLoading}
+            {isNew ? (
+              <PassphraseCreationFields
+                passphrase={passphrase}
+                confirmPassphrase={confirmPassphrase}
+                onPassphraseChange={(value, generated) => {
+                  setPassphrase(value);
+                  if (generated) setConfirmPassphrase(value);
+                  setError("");
+                }}
+                onConfirmPassphraseChange={(value) => {
+                  setConfirmPassphrase(value);
+                  setError("");
+                }}
+                onRulesPassedChange={setRulesPassed}
+                error={displayedError ?? ""}
+                rulesPassed={rulesPassed}
+                isLoading={isLoading}
+                onKeyDown={handleKeyDown}
+              />
+            ) : (
+              <div className={styles.passphraseField}>
+                <FieldContainer
+                  isVertical
+                  labelVisible
+                  labelText={t("Common:Passphrase")}
+                  labelFor="passphrase"
+                  removeMargin
                   hasError={passphraseHasError}
-                  isAutoFocussed
-                  autoComplete="new-password"
-                  onKeyDown={handleKeyDown}
-                  tabIndex={0}
-                />
-              </FieldContainer>
-
-              {isNew ? <PassphraseStrengthLine passphrase={passphrase} /> : null}
-              {isNew && containsCommonPattern(passphrase) ? (
-                <Text fontSize="12px" color="var(--status-error)">
-                  {t("Common:PassphraseCommonPattern")}
-                </Text>
-              ) : null}
-
-              {/* Spec: private-rooms/key-management, "Remember this device" */}
-              {showRememberDevice && !isNew ? (
-                <div className={styles.rememberRow}>
-                  <Checkbox
-                    id="rememberDevice"
-                    isChecked={rememberDevice}
-                    isDisabled={isLoading}
-                    onChange={(e) => setRememberDevice(e.target.checked)}
-                    label={t("Common:RememberDeviceLabel")}
-                  />
-                  <Text
-                    fontSize="12px"
-                    color="var(--text-secondary)"
-                    className={styles.rememberHint}
-                  >
-                    {t("Common:RememberDeviceHint")}
-                  </Text>
-                </div>
-              ) : null}
-
-              {/* Spec: private-rooms/key-management, "Forgot passphrase link" */}
-              {onForgotPassphrase && !isNew ? (
-                <div className={styles.forgotRow}>
-                  <Link
-                    type={LinkType.action}
-                    role="button"
-                    tabIndex={0}
-                    fontWeight="600"
-                    fontSize="12px"
-                    isHovered
-                    onClick={onForgotPassphrase}
-                    onKeyDown={activateAsButton}
-                    dataTestId="forgot_passphrase_link"
-                  >
-                    {t("Common:ForgotPassphrase")}
-                  </Link>
-                </div>
-              ) : null}
-
-              {onPasskeyUnlock && !isNew ? (
-                <div className={styles.passkeyRow}>
-                  <Link
-                    type={LinkType.action}
-                    role="button"
-                    tabIndex={0}
-                    fontWeight="600"
-                    fontSize="12px"
-                    isHovered
-                    onClick={() => {
-                      if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();
+                  errorMessage={displayedError ?? ""}
+                  errorMessageWidth="100%"
+                  className={styles.inputWrapper}
+                >
+                  <PasswordInput
+                    id="passphrase"
+                    inputName="passphrase"
+                    inputValue={passphrase}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setPassphrase(e.target.value);
+                      setError("");
                     }}
-                    onKeyDown={activateAsButton}
-                    dataTestId="passkey_unlock_link"
-                  >
-                    {t("Common:PasskeyUnlockButton")}
-                  </Link>
-                </div>
-              ) : null}
-            </div>
+                    placeholder={t("Common:Passphrase")}
+                    scale
+                    size={InputSize.base}
+                    simpleView
+                    isFullWidth
+                    isDisabled={isLoading}
+                    hasError={passphraseHasError}
+                    isAutoFocussed
+                    autoComplete="new-password"
+                    onKeyDown={handleKeyDown}
+                    tabIndex={0}
+                  />
+                </FieldContainer>
 
-            {isNew && (
-              <FieldContainer
-                isVertical
-                labelVisible
-                labelText={t("Common:ConfirmPassphrase")}
-                labelFor="confirmPassphrase"
-                removeMargin
-                hasError={!!confirmPassphrase && passphrase !== confirmPassphrase}
-                errorMessage={
-                  confirmPassphrase && passphrase !== confirmPassphrase
-                    ? t("Common:PassphraseMismatch")
-                    : ""
-                }
-                errorMessageWidth="100%"
-                className={styles.inputWrapper}
-              >
-                <PasswordInput
-                  key={confirmInputKey}
-                  id="confirmPassphrase"
-                  inputName="confirmPassphrase"
-                  inputValue={confirmPassphrase}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setConfirmPassphrase(e.target.value);
-                    setError("");
-                  }}
-                  placeholder={t("Common:ConfirmPassphrase")}
-                  scale
-                  isFullWidth
-                  size={InputSize.base}
-                  simpleView
-                  isDisabled={isLoading}
-                  hasError={
-                    !!confirmPassphrase && passphrase !== confirmPassphrase
-                  }
-                  autoComplete="new-password"
-                  onKeyDown={handleKeyDown}
-                  tabIndex={0}
-                />
-              </FieldContainer>
+                {/* Spec: private-rooms/key-management, "Remember this device" */}
+                {showRememberDevice ? (
+                  <div className={styles.rememberRow}>
+                    <Checkbox
+                      id="rememberDevice"
+                      isChecked={rememberDevice}
+                      isDisabled={isLoading}
+                      onChange={(e) => setRememberDevice(e.target.checked)}
+                      label={t("Common:RememberDeviceLabel")}
+                    />
+                    <Text
+                      fontSize="12px"
+                      color="var(--text-secondary)"
+                      className={styles.rememberHint}
+                    >
+                      {t("Common:RememberDeviceHint")}
+                    </Text>
+                  </div>
+                ) : null}
+
+                {/* Spec: private-rooms/key-management, "Forgot passphrase link" */}
+                {onForgotPassphrase ? (
+                  <div className={styles.forgotRow}>
+                    <Link
+                      type={LinkType.action}
+                      role="button"
+                      tabIndex={0}
+                      fontWeight="600"
+                      fontSize="12px"
+                      isHovered
+                      onClick={onForgotPassphrase}
+                      onKeyDown={activateAsButton}
+                      dataTestId="forgot_passphrase_link"
+                    >
+                      {t("Common:ForgotPassphrase")}
+                    </Link>
+                  </div>
+                ) : null}
+
+                {onPasskeyUnlock ? (
+                  <div className={styles.passkeyRow}>
+                    <Link
+                      type={LinkType.action}
+                      role="button"
+                      tabIndex={0}
+                      fontWeight="600"
+                      fontSize="12px"
+                      isHovered
+                      onClick={() => {
+                        if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();
+                      }}
+                      onKeyDown={activateAsButton}
+                      dataTestId="passkey_unlock_link"
+                    >
+                      {t("Common:PasskeyUnlockButton")}
+                    </Link>
+                  </div>
+                ) : null}
+              </div>
             )}
           </div>
           <KeyDialogAnnouncement text={announcedError} />

@@ -50,7 +50,7 @@ import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { SKILL_EXTENSION } from "@docspace/shared/utils/skillFile";
 
-import SkillIcon, { isSkillSetIconRoom } from "./SkillIcon";
+import SkillIcon, { getAiRoomIconKind } from "./SkillIcon";
 import styles from "./icons.module.scss";
 
 type ItemIconProps = {
@@ -112,19 +112,20 @@ const ItemIcon = ({
 }: ItemIconProps) => {
 	const { t } = useTranslation(["Common"]);
 
-	// Skill sets and their skills have icons of their own, the same for
-	// every one: no room colour or initials, no Markdown file icon.
-	const skillKind = isSkillSetIconRoom({ isRoom, roomType })
-		? "set"
-		: !isRoom && isSkillSetOpen && fileExst?.toLowerCase() === SKILL_EXTENSION
+	// Skill sets, their skills and knowledge bases have icons of their own,
+	// the same for every one: no room colour or initials, no Markdown file
+	// icon.
+	const skillKind =
+		getAiRoomIconKind({ isRoom, roomType }) ??
+		(!isRoom && isSkillSetOpen && fileExst?.toLowerCase() === SKILL_EXTENSION
 			? "skill"
-			: null;
+			: null);
 
 	if (skillKind)
 		return (
 			<div
 				className={classNames(styles.iconWrapper, {
-					[styles.isRoom]: skillKind === "set",
+					[styles.isRoom]: skillKind !== "skill",
 				})}
 			>
 				<SkillIcon

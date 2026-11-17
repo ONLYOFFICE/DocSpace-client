@@ -41,9 +41,14 @@ import { RoomsType } from "@docspace/shared/enums";
 
 import styles from "./SkillIcon.module.scss";
 
+export type TSkillIconKind = "set" | "skill" | "knowledge";
+
 type SkillIconProps = {
-  /** A skill set (the book on a tinted square) or one skill of a set (the scroll). */
-  kind: "set" | "skill";
+  /**
+   * A skill set (the book on a tinted square), one skill of a set (the
+   * scroll) or a knowledge base (the page on a tinted square).
+   */
+  kind: TSkillIconKind;
   /** The side of the icon's box, in pixels. */
   size?: number;
   className?: string;
@@ -59,6 +64,27 @@ export const isSkillSetIconRoom = (room: {
   isRoom?: boolean;
   roomType?: RoomsType | number | null;
 }): boolean => !!room.isRoom && room.roomType === RoomsType.InstructionsRoom;
+
+/**
+ * A room drawn with the knowledge base icon: every Knowledge room, as a skill
+ * set is with its own. Knowledge bases are not told apart by a picture, a
+ * colour or initials either, so a logo stored for the room is not shown.
+ */
+export const isKnowledgeBaseIconRoom = (room: {
+  isRoom?: boolean;
+  roomType?: RoomsType | number | null;
+}): boolean => !!room.isRoom && room.roomType === RoomsType.KnowledgeRoom;
+
+/** The icon of its own a room is drawn with, if any: a skill set's or a knowledge base's. */
+export const getAiRoomIconKind = (room: {
+  isRoom?: boolean;
+  roomType?: RoomsType | number | null;
+}): "set" | "knowledge" | null =>
+  isSkillSetIconRoom(room)
+    ? "set"
+    : isKnowledgeBaseIconRoom(room)
+      ? "knowledge"
+      : null;
 
 const SET_PATHS = (
   <>
@@ -76,27 +102,44 @@ const SKILL_PATHS = (
   </>
 );
 
+// A page with its corner folded and three lines of text, as the sidebar's
+// Knowledge bases entry draws it.
+const KNOWLEDGE_PATHS = (
+  <>
+    <path d="M4.3 2h5.6l2.6 2.7v8.1c0 .7-.5 1.2-1.2 1.2H4.3c-.7 0-1.2-.5-1.2-1.2V3.2c0-.7.5-1.2 1.2-1.2Z" />
+    <path d="M5.8 6h3.4M5.8 8.4h4.4M5.8 10.8h4.4" />
+  </>
+);
+
+const PATHS: Record<TSkillIconKind, React.ReactNode> = {
+  set: SET_PATHS,
+  skill: SKILL_PATHS,
+  knowledge: KNOWLEDGE_PATHS,
+};
+
 /**
- * The icon of a skill set or of a skill, the same for every one of them:
- * the sets are not told apart by a colour or initials, as rooms are, and a
- * skill is not shown as the Markdown file that holds it.
+ * The icon of a skill set, of a skill or of a knowledge base, the same for
+ * every one of them: the sets and the bases are not told apart by a colour
+ * or initials, as rooms are, and a skill is not shown as the Markdown file
+ * that holds it.
  */
 const SkillIcon = ({ kind, size = 32, className, dataTestId }: SkillIconProps) => {
-  const isSet = kind === "set";
-  // The book takes half of its square; the scroll, with no square behind
-  // it, three quarters of a large box and half of a row's one.
-  const glyph = isSet || size <= 32 ? size / 2 : size * 0.75;
+  // A skill set and a knowledge base sit on a tinted square; a skill does not.
+  const onSquare = kind !== "skill";
+  // The book and the page take half of their square; the scroll, with no
+  // square behind it, three quarters of a large box and half of a row's one.
+  const glyph = onSquare || size <= 32 ? size / 2 : size * 0.75;
   // The lines stay about a pixel and a half thick whatever the size.
   const strokeWidth = Math.max(0.9, (1.6 * 16) / Math.max(glyph, 16));
 
   return (
     <span
       aria-hidden="true"
-      className={classNames(styles.icon, { [styles.set]: isSet }, className)}
+      className={classNames(styles.icon, { [styles.set]: onSquare }, className)}
       style={{
         width: size,
         height: size,
-        borderRadius: isSet ? Math.round(size / 6) : undefined,
+        borderRadius: onSquare ? Math.round(size / 6) : undefined,
       }}
       data-testid={dataTestId ?? `skill-icon-${kind}`}
     >
@@ -110,7 +153,7 @@ const SkillIcon = ({ kind, size = 32, className, dataTestId }: SkillIconProps) =
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        {isSet ? SET_PATHS : SKILL_PATHS}
+        {PATHS[kind]}
       </svg>
     </span>
   );

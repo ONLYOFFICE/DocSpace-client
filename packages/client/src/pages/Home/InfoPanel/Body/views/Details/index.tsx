@@ -77,7 +77,7 @@ import {
 } from "SRC_DIR/store/KnowledgeBasesStore";
 
 import { FormInfo } from "./sub-components/FormInfo";
-import SkillIcon, { isSkillSetIconRoom } from "SRC_DIR/components/SkillIcon";
+import SkillIcon, { getAiRoomIconKind } from "SRC_DIR/components/SkillIcon";
 
 import { SkillSetInfo } from "./sub-components/SkillSetInfo";
 
@@ -375,6 +375,9 @@ const Details = ({
   const isFormSpaceTemplate =
     "roomType" in selection && selection.roomType === RoomsType.FormRoom;
 
+  // A skill set and a knowledge base are drawn with their own icons.
+  const aiRoomIconKind = getAiRoomIconKind(selection as never);
+
   const color = "logo" in selection ? selection.logo?.color : undefined;
   const resolvedTitle = useResolvedFileTitle(
     selection as { id?: number | string; title?: string; encrypted?: boolean },
@@ -434,8 +437,8 @@ const Details = ({
         </div>
       ) : (
         <div className={styles.noThumbnail}>
-          {skillFile || isSkillSetIconRoom(selection as never) ? (
-            <SkillIcon kind={skillFile ? "skill" : "set"} size={96} />
+          {skillFile || aiRoomIconKind ? (
+            <SkillIcon kind={aiRoomIconKind ?? "skill"} size={96} />
           ) : (
             <RoomIcon
               color={color}

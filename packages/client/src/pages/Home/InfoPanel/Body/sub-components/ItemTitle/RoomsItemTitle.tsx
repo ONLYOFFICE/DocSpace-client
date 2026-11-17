@@ -57,7 +57,7 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
-import SkillIcon, { isSkillSetIconRoom } from "SRC_DIR/components/SkillIcon";
+import SkillIcon, { getAiRoomIconKind } from "SRC_DIR/components/SkillIcon";
 import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 import {
   isSkillFile,
@@ -222,12 +222,11 @@ const RoomsItemHeader = ({
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
-  // A skill set and a skill have icons of their own, as in the list.
-  const skillKind = isSkillSetIconRoom(selection as never)
-    ? "set"
-    : isSkillFile(selection as never, openFolder)
-      ? "skill"
-      : null;
+  // A skill set, a skill and a knowledge base have icons of their own, as
+  // in the list.
+  const skillKind =
+    getAiRoomIconKind(selection as never) ??
+    (isSkillFile(selection as never, openFolder) ? "skill" : null);
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
   // An AI project changes its logo in its own edit dialog, not here.

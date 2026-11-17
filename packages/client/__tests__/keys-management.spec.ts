@@ -49,7 +49,10 @@ import {
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { passKeySetupExplanation } from "./fixtures/encryption-helpers";
+import {
+  bootstrapEncryption,
+  passKeySetupExplanation,
+} from "./fixtures/encryption-helpers";
 
 test.describe("Profile > Keys Management", () => {
   test.beforeEach(async ({ mockRequest }) => {
@@ -172,6 +175,16 @@ test.describe("Profile > Keys Management", () => {
     expect(stored.privateKeyEnc).toBe(body.privateKeyEnc);
 
     await expect(acknowledge).toBeHidden({ timeout: 5_000 });
+  });
+
+  // Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+  test("Lowercase words", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { keysHandle } = await bootstrapEncryption(page, mockRequest, baseUrl, {
+      passphrase: "lorem ipsum dolor sitx",
+    });
+
+    expect(keysHandle.getKeys()).toHaveLength(1);
   });
 
   test("cancel passphrase modal does NOT upload anything", async ({

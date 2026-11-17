@@ -15,7 +15,7 @@ tests must stay green. No locale key is added or changed.
 
 ## 3. End to end
 
-- [ ] 3.1 Add a Playwright case "Lowercase words" to `packages/client/__tests__/keys-management.spec.ts` that creates a key with a passphrase of lowercase words, correct the comments on the rules in `key-flow-edge-cases.spec.ts` and `keys-management-advanced.spec.ts`, and update the screenshots of the rules tooltip under Docker. Verify: `keys-management*.spec.ts` and `key-flow-edge-cases.spec.ts` green under Docker
+- [x] 3.1 Add a Playwright case "Lowercase words" to `packages/client/__tests__/keys-management.spec.ts` that creates a key with a passphrase of lowercase words, correct the comments on the rules in `key-flow-edge-cases.spec.ts` and `keys-management-advanced.spec.ts`, and update the screenshots of the rules tooltip under Docker. Verify: `keys-management*.spec.ts` and `key-flow-edge-cases.spec.ts` green under Docker
 
 ## 4. Gate
 

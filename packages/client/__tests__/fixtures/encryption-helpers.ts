@@ -51,8 +51,8 @@ export type BootstrapOptions = {
   passphrase?: string;
 };
 
-// Must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
-// length >= 12, uppercase, digits, special characters.
+// Must satisfy the rules of a new passphrase (PASSPHRASE_SETTINGS): at
+// least 12 characters and no common pattern.
 const DEFAULT_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 
 /** Leaves the explanation step of key setup for its passphrase step. */

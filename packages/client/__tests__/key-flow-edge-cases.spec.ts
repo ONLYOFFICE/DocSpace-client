@@ -49,8 +49,8 @@ import {
   passKeySetupExplanation,
 } from "./fixtures/encryption-helpers";
 
-// Must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
-// length >= 12, uppercase, digits, special characters.
+// Must satisfy the rules of a new passphrase (PASSPHRASE_SETTINGS): at
+// least 12 characters and no common pattern.
 const STRONG_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 
 test.describe("Keys management — edge cases", () => {

@@ -83,10 +83,12 @@ const SkillsRowDataComponent = (props) => {
   } = props;
 
   const { id, version, viewUrl } = item;
+  // A saved skill is dropped from the store and read again.
+  const hasSkill = !!skill;
 
   React.useEffect(() => {
-    fetchSkill({ id, version, viewUrl });
-  }, [fetchSkill, id, version, viewUrl]);
+    if (!hasSkill) fetchSkill({ id, version, viewUrl });
+  }, [fetchSkill, id, version, viewUrl, hasSkill]);
 
   const lastColumn = getLastColumn(tableStorageName);
 

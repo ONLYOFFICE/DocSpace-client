@@ -86,6 +86,8 @@ type EditSkillDialogProps = {
   readOnly?: boolean;
   onClose?: () => void;
   refreshFiles?: () => Promise<unknown>;
+  /** Drops what the list and the Info panel read of the skill, so they read it again. */
+  forgetSkill?: (id: number | string) => void;
 };
 
 /**
@@ -96,7 +98,14 @@ type EditSkillDialogProps = {
  * changed; the Files service checks the frontmatter and names what it
  * refuses.
  */
-const EditSkillDialog = ({ file, folderId = null, readOnly = false, onClose, refreshFiles }: EditSkillDialogProps) => {
+const EditSkillDialog = ({
+  file,
+  folderId = null,
+  readOnly = false,
+  onClose,
+  refreshFiles,
+  forgetSkill,
+}: EditSkillDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
   const isNew = !file && folderId !== null;
@@ -226,6 +235,7 @@ const EditSkillDialog = ({ file, folderId = null, readOnly = false, onClose, ref
       if (file) {
         await updateFileStream(file.id, new File([text], file.title, { type: "text/markdown" }), false, true);
         if (title !== titleOf(file)) await updateFile(file.id, `${title}${SKILL_EXTENSION}`);
+        forgetSkill?.(file.id);
       } else {
         // The Files service checks the frontmatter and the set's skill limit.
         await insertFile(folderId as number | string, `${title}${SKILL_EXTENSION}`, new Blob([text], { type: "text/markdown" }));
@@ -350,7 +360,7 @@ const EditSkillDialog = ({ file, folderId = null, readOnly = false, onClose, ref
 
 export { EditSkillDialog as PureEditSkillDialog };
 
-export default inject(({ dialogsStore, filesStore }: TStore) => ({
+export default inject(({ dialogsStore, filesStore, skillsStore }: TStore) => ({
   file: dialogsStore.editSkillFile,
   folderId: dialogsStore.newSkillFolderId,
   readOnly: dialogsStore.editSkillReadOnly,
@@ -359,4 +369,5 @@ export default inject(({ dialogsStore, filesStore }: TStore) => ({
     dialogsStore.setNewSkillFolderId(null);
   },
   refreshFiles: filesStore.refreshFiles,
+  forgetSkill: skillsStore.forget,
 }))(observer(EditSkillDialog));

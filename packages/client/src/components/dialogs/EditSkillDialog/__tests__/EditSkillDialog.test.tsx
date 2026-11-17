@@ -94,6 +94,15 @@ describe("EditSkillDialog", () => {
     expect(refreshFiles).toHaveBeenCalled();
   });
 
+  it("has the list and the Info panel read the saved skill again", async () => {
+    const forgetSkill = vi.fn();
+    render(<EditSkillDialog file={file} onClose={onClose} refreshFiles={refreshFiles} forgetSkill={forgetSkill} />);
+    await screen.findByTestId("editor");
+    fireEvent.submit(screen.getByTestId("form"));
+    await waitFor(() => expect(onClose).toHaveBeenCalled());
+    expect(forgetSkill).toHaveBeenCalledWith(7);
+  });
+
   it("renames the file and the command with the name", async () => {
     await open();
     fireEvent.change(screen.getByTestId("edit-skill-name"), { target: { value: "Risk review" } });

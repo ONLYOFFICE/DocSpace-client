@@ -88,6 +88,21 @@ class SkillsStore {
       // A file that cannot be read keeps its row without a description.
       .catch(() => undefined);
   };
+
+  /**
+   * Drops what was read of a file, whatever its version: its skill was
+   * saved, and a save can keep the version (a repeated force-save), so the
+   * file is read again by whoever shows it next.
+   */
+  forget = (id: number | string): void => {
+    const prefix = `${id}:`;
+    Object.keys(this.skills)
+      .filter((key) => key.startsWith(prefix))
+      .forEach((key) => delete this.skills[key]);
+    [...this.requests]
+      .filter((key) => key.startsWith(prefix))
+      .forEach((key) => this.requests.delete(key));
+  };
 }
 
 export default SkillsStore;

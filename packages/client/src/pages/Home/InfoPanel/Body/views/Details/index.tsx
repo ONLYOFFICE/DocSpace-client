@@ -174,9 +174,11 @@ const Details = ({
       ? openFolder.title
       : undefined;
 
+  // A saved skill is dropped from the store and read again.
+  const hasSkill = !!skill;
   useEffect(() => {
-    if (skillFile) fetchSkill?.(skillFile);
-  }, [skillFile, fetchSkill]);
+    if (skillFile && !hasSkill) fetchSkill?.(skillFile);
+  }, [skillFile, fetchSkill, hasSkill]);
 
   // How far a knowledge base is indexed is in its files: they are read
   // again each time the base is selected, since indexing ends on its own.

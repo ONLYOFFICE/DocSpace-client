@@ -47,6 +47,7 @@
     "update-ui-kit": "node scripts/update-ui-kit.mjs",
     "update-ai-chat": "node scripts/update-ai-chat.mjs",
     "update-plugin-sdk": "node scripts/update-plugin-sdk.mjs",
+    "update-sdk-js": "node scripts/update-sdk-js.mjs",
     "start:ui-kit-src": "node scripts/start-ui-kit-src.mjs"
   },
   "devDependencies": {

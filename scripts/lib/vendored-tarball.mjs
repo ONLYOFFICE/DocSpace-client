@@ -34,8 +34,9 @@
  */
 
 /**
- * Shared by update-ui-kit.mjs, update-ai-chat.mjs and update-plugin-sdk.mjs.
- * ui-kit, ai-chat and the plugin SDK are normally installed from npm; the
+ * Shared by update-ui-kit.mjs, update-ai-chat.mjs, update-plugin-sdk.mjs and
+ * update-sdk-js.mjs. ui-kit, ai-chat, the plugin SDK and the Embed SDK are
+ * normally installed from npm; the
  * scripts switch the apps over to a locally packed tarball at the repo root
  * instead, make pnpm install it, and then prove that what landed in
  * node_modules and pnpm-lock.yaml is what was copied in.
@@ -371,6 +372,9 @@ export const repointManifests = (packageName, specifier) => {
  */
 export const PLUGIN_SDK_TARBALL = /^onlyoffice-docspace-plugin-sdk-(.+)\.tgz$/;
 export const PLUGIN_SDK_AT_ROOT = /^onlyoffice-docspace-plugin-sdk(?:-.+)?\.tgz$/;
+
+/** `onlyoffice-docspace-sdk-js-<version>.tgz`, versioned like the plugin SDK. */
+export const SDK_JS_TARBALL = /^onlyoffice-docspace-sdk-js-(.+)\.tgz$/;
 
 /**
  * Puts `source` at the repo root as the only tarball of `packageName` there

@@ -187,6 +187,7 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormRoomRoot,
     isAIReady,
     aiPresetContextRooms,
+    aiActivePresetId,
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
@@ -254,6 +255,10 @@ const Shell = ({ page = "home", ...rest }) => {
   // chips are the project's own rather than the section's.
   const isInsideAiProject =
     isAiProjectOpen && location.pathname.startsWith("/ai-rooms/");
+
+  // The chat runs on an agent: on the agent's page, or picked in the title
+  // menu of the chat panel (the agent's page sets it as well).
+  const isChatOnAgent = isInsideAiProject || !!aiActivePresetId;
 
   useCreateFileError({
     setPortalTariff,
@@ -1028,11 +1033,12 @@ const Shell = ({ page = "home", ...rest }) => {
           contextEntityId={chatContextEntityId}
           // The picker area is always present (an explicit `false` also
           // overrides the lib's entityId default-hide heuristic — the chat
-          // is always entity-scoped here). Inside an AI project the model
-          // is fixed by the project, so the picker is a read-only label.
+          // is always entity-scoped here). A chat on an agent, on its page
+          // or in the panel, runs on the agent's model, so the picker is a
+          // read-only label.
           formatChatError={formatChatError}
           hideProfilePicker={false}
-          profilePickerReadOnly={isInsideAiProject}
+          profilePickerReadOnly={isChatOnAgent}
           isChatOpen={isChatOpen}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={
@@ -1244,6 +1250,8 @@ const ShellWrapper = inject(
       // context rooms; a new array per render, the ui-kit provider memoizes
       // it by id and name.
       aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
+      // The agent the chat runs on, picked in the panel or open on its page.
+      aiActivePresetId: aiPresetsStore.activePreset?.id ?? null,
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
       portalHasChatModel: aiProjectsStore.portalHasChatModel,

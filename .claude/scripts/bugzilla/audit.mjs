@@ -44,7 +44,7 @@
 // apply only prints what it would change.
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { createInterface } from "node:readline/promises";
 import { fileURLToPath } from "node:url";
@@ -230,7 +230,13 @@ async function cmdFields(args, key) {
 // "Fix Bug 71360, 71316 - …" and "fix bug 84685, 84686 and 84688": every id of
 // the chain after "bug" belongs to the commit, not just the first one.
 const BUG_REF = /\bbug\s*#?\s*(\d{4,6}(?:\s*(?:,|&|\/|\band\b)\s*#?\s*\d{4,6})*)\b/gi;
-const REVERT_RE = /^\s*revert\b/i;
+const REVERT_CHAIN = /^(?:\s*revert\b\s*"?)+/i;
+
+// Revert "Revert …" puts the fix back: only an odd number of reverts undoes it.
+function isRevert(subject) {
+  const chain = subject.match(REVERT_CHAIN)?.[0] || "";
+  return (chain.match(/revert/gi) || []).length % 2 === 1;
+}
 
 // git log lists newest first, so a stable sort by date keeps same-day order.
 function lastIsRevert(commits) {
@@ -257,7 +263,7 @@ function commitIndex(repos) {
     for (const line of out.split("\n")) {
       if (!line) continue;
       const [hash, date, subject = ""] = line.split("\t");
-      const revert = REVERT_RE.test(subject);
+      const revert = isRevert(subject);
       const ids = new Set([...subject.matchAll(BUG_REF)].flatMap((m) => m[1].match(/\d{4,6}/g).map(Number)));
       for (const id of ids) {
         if (!index.has(id)) index.set(id, []);
@@ -306,12 +312,13 @@ function pickSample(bugs, n) {
   return [...chosen.values()];
 }
 
+// Only a network failure or a 5xx is worth repeating; a 4xx answer stays the same.
 async function withRetry(fn, attempts = 3) {
   for (let i = 1; ; i += 1) {
     try {
       return await fn();
     } catch (e) {
-      if (i >= attempts) throw e;
+      if (i >= attempts || (e.status && e.status < 500)) throw e;
       await new Promise((r) => setTimeout(r, 1000 * i));
     }
   }
@@ -340,6 +347,7 @@ async function withDetail(key, bug) {
       text: text(c).slice(0, 2000),
     })),
     commentCount: Math.max(0, comments.length - 1),
+    seenComments: comments.length,
   };
 }
 
@@ -347,7 +355,8 @@ const FILES_ONLY_MARK = "files-only.json";
 
 // A bug counts as reviewed - and is left out of --sample/--batch - when an
 // earlier run wrote it to Bugzilla (applied/skipped in apply-log.json) or the
-// whole run was marked files-only. A conflict, an error or a rejected decision
+// whole run was marked files-only; export adds the bugs that carry an audit
+// comment (auditedIds). A conflict, an error or a rejected decision
 // leaves the bug in the pool. --skip adds decisions files; --include-reviewed
 // turns the run scan off.
 function reviewedIds(args, currentDir) {
@@ -373,6 +382,20 @@ function reviewedIds(args, currentDir) {
     }
   }
   return ids;
+}
+
+// runs/ is local to one checkout: a bug that already carries an audit comment
+// in Bugzilla counts as reviewed for everyone, whoever ran the audit.
+async function auditedIds(key, product) {
+  const res = await withRetry(() => bzGet("bug", key, {
+    product,
+    resolution: "---",
+    f1: "longdesc",
+    o1: "substring",
+    v1: `${COMMENT_FOOTER} (`,
+    include_fields: "id",
+  }));
+  return (res.bugs || []).map((b) => b.id);
 }
 
 // The user declined to write this run to Bugzilla: its bugs still count as
@@ -407,6 +430,7 @@ async function cmdExport(args, key) {
   const now = Date.now();
   const commits = commitIndex(repos);
   const raw = await searchOpen(key, product, components);
+  if (!args["include-reviewed"]) for (const id of await auditedIds(key, product)) reviewed.add(id);
   const bugs = raw.map((b) => ({
     ...b,
     summary: decodeEntities(b.summary),
@@ -457,6 +481,7 @@ async function cmdExport(args, key) {
   console.log(`idle > 365 days: ${count(bugs, (b) => b.idleDays > 365)}`);
   if (!args.ids) console.log(`left out as reviewed in earlier runs: ${count(bugs, (b) => reviewed.has(b.id))}`);
   console.log(`exported with detail: ${detailed.length} -> ${path.join(dir, "bugs.json")}`);
+  console.log(`run: ${dir}`);
 }
 
 /* ------------------------------------------------------------------ split / merge */
@@ -472,6 +497,14 @@ function cmdSplit(args) {
     console.error("--parts must be an integer from 2 to 10");
     process.exit(2);
   }
+  // A new layout would not match decisions already written for the old one.
+  const files = readdirSync(dir);
+  const decided = files.filter((f) => /^decisions\.part-\d+\.json$/.test(f));
+  if (decided.length) {
+    console.error(`agents already wrote ${decided.join(", ")}; merge them, or delete them to split again`);
+    process.exit(2);
+  }
+  for (const f of files.filter((f) => /^part-\d+\.json$/.test(f))) unlinkSync(path.join(dir, f));
   const exported = readJson(path.join(dir, "bugs.json"));
   const byComponent = new Map();
   for (const b of exported.bugs) {
@@ -635,7 +668,14 @@ async function cmdPlan(args, key) {
   const actions = [];
   const needsHuman = [];
   const invalid = [];
+  // Which of two decisions is meant is not for the plan to guess: both are rejected.
+  const times = new Map();
+  for (const d of decisions) times.set(Number(d.id), (times.get(Number(d.id)) || 0) + 1);
+  for (const [id, n] of times) {
+    if (n > 1) invalid.push({ id, errors: [`decided ${n} times in decisions.json; keep one`] });
+  }
   for (const d of decisions) {
+    if (times.get(Number(d.id)) > 1) continue;
     const bug = byId.get(Number(d.id));
     const errors = validateDecision(d, bug, fields, lang);
     if (errors.length) {
@@ -648,6 +688,7 @@ async function cmdPlan(args, key) {
       verdict: d.verdict,
       expectLastChange: bug.last_change_time,
       watch: Object.fromEntries(WATCHED_FIELDS.map((f) => [f, bug[f] ?? ""])),
+      seenComments: bug.seenComments,
       comment: withFooter(commentOf(d), model),
     };
     const closing = d.verdict === "fixed" || d.verdict === "obsolete";
@@ -715,8 +756,10 @@ function fieldsApplied(a, live) {
 
 // Only what can overturn the decision is a conflict: a watched field changed
 // after the export, or someone other than the audit commented since. A new CC
-// or keyword is not. Plans made before `watch` existed fall back to the
-// bug's last change time.
+// or keyword is not. New comments are the ones past the count seen at export,
+// so local and server clocks never meet. Plans made before `watch` existed
+// fall back to the bug's last change time, before `seenComments` to the
+// export time.
 function conflictOf(a, live, comments, exportedAt) {
   if (!a.watch) {
     return live.last_change_time !== a.expectLastChange ? `changed at ${live.last_change_time} after export` : null;
@@ -724,7 +767,10 @@ function conflictOf(a, live, comments, exportedAt) {
   const changed = WATCHED_FIELDS.filter((f) => decodeEntities(live[f] ?? "") !== decodeEntities(a.watch[f] ?? ""));
   if (changed.length) return `${changed.join(", ")} changed after export`;
   const since = Date.parse(exportedAt);
-  const foreign = comments.find((c) => Date.parse(c.time) > since && !FOOTER_RE.test(decodeEntities(c.text)));
+  const fresh = Number.isInteger(a.seenComments)
+    ? comments.slice(a.seenComments)
+    : comments.filter((c) => Date.parse(c.time) > since);
+  const foreign = fresh.find((c) => !FOOTER_RE.test(decodeEntities(c.text)));
   return foreign ? `new comment by ${foreign.creator} at ${foreign.time}` : null;
 }
 
@@ -766,6 +812,11 @@ async function cmdApply(args, key) {
     console.error(`plan was made for ${plan.host}, but the configured host is ${HOST}; refusing to write`);
     process.exit(2);
   }
+  // Plans from before signed comments lack a comment on some actions.
+  if (!plan.model) {
+    console.error("actions.json was made by an older audit.mjs; run plan again");
+    process.exit(2);
+  }
   const only = new Set(list(args.only).map(Number));
   const actions = plan.actions.filter((a) => !only.size || only.has(a.id));
   const confirm = Boolean(args.confirm);
@@ -774,11 +825,15 @@ async function cmdApply(args, key) {
 
   if (!confirm) console.log("DRY RUN (pass --confirm to write)\n");
   for (const a of actions) {
+    // Written once is final: a later conflict or read error must not erase the
+    // record, or the bug drops out of "reviewed" and gets a second comment.
+    if (log[a.id]?.outcome === "applied") {
+      console.log(`#${a.id}  ${a.type.padEnd(8)}  ${"applied".padEnd(11)}  already in apply-log.json (${log[a.id].at})`);
+      continue;
+    }
     const result = await applyOne(a, key, confirm, plan.exportedAt);
     console.log(`#${a.id}  ${a.type.padEnd(8)}  ${result.outcome.padEnd(11)}  ${result.message}`);
     if (!confirm) continue;
-    // A rerun finds an applied action "skipped"; keep the record of what was written.
-    if (result.outcome === "skipped" && log[a.id]?.outcome === "applied") continue;
     log[a.id] = { type: a.type, verdict: a.verdict, at: new Date().toISOString(), ...result };
     writeJson(logFile, log);
   }
@@ -981,9 +1036,9 @@ Examples:
 Flags:
   export   --out <dir>  --name <label>  --product DocSpace  --components A,B
            --sample N | --ids 1,2 | --batch N
-           (--sample/--batch leave out bugs an earlier run wrote to Bugzilla or
-           a run marked files-only; --skip <decisions.json,...> adds more,
-           --include-reviewed turns that off)
+           (--sample/--batch leave out bugs an earlier run wrote to Bugzilla,
+           a run marked files-only, and bugs that carry an audit comment;
+           --skip <decisions.json,...> adds more, --include-reviewed turns that off)
            --suggestion-severity enhancement  --repos <extra path,...>
            (commits are searched in client, ../server and the ../../ sibling repos
            onlyoffice-ai-chat, docspace-sdk-js, docspace-ui-kit-react, server,
@@ -993,7 +1048,8 @@ Flags:
            when omitted, required otherwise; every comment is checked)
            --dir <run>  --decisions <file>  --close-status RESOLVED
   apply    --dir <run>  --only 1,2  --confirm
-  split    --dir <run>  --parts 2..10
+  split    --dir <run>  --parts 2..10  (replaces part-<k>.json; refuses once
+           decisions.part-<k>.json exist)
   others   --dir <run>  (suggestions also --out <file.md>)
 
 Setup: .claude/scripts/bugzilla/README.md (config.local.json + BZ_API_KEY).

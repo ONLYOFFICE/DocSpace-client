@@ -84,15 +84,17 @@ node .claude/scripts/bugzilla/audit.mjs export --sample 20 --name <label>
 node .claude/scripts/bugzilla/audit.mjs export --components "API,Server" --sample 20 --name <label>
 ```
 
-The last line of the output names the run folder — use it as `<dir>`.
+The last line of the output, `run: <folder>`, names the run folder — use that
+folder as `<dir>`.
 
 `--sample N` (pilot: a mix of bugs with `Bug <ID>` commits, suggestions and the
 longest idle), `--ids 1,2`, or `--batch N` for the next chunk. `--sample` and
 `--batch` leave out every bug an earlier run already wrote to Bugzilla
-(`applied`/`skipped` in its `apply-log.json`) and every bug of a run marked
-files-only (Step 5), so a later batch never comments twice or re-raises a
-priority, while bugs that hit a `conflict`, an error or a rejected decision
-come back. The output says how many were left out. `--skip <file,...>` adds
+(`applied`/`skipped` in its `apply-log.json`), every bug of a run marked
+files-only (Step 5) and every open bug that already carries an audit comment
+in Bugzilla (found by its footer, so runs made on another machine count too).
+A later batch thus never comments twice or re-raises a priority, while bugs
+that hit a `conflict`, an error or a rejected decision come back. The output says how many were left out. `--skip <file,...>` adds
 decisions files (a missing one is an error); `--include-reviewed` turns the
 scan off — only on the user's request. `--ids` is never filtered. `index.json` holds every open bug in scope with signals;
 `bugs.json` holds the selected ones with description and the last comments.
@@ -100,7 +102,7 @@ scan off — only on the user's request. `--ids` is never filtered. `index.json`
 Signals per bug: `kind` (bug/suggestion), `ageDays`, `idleDays`, `commits`
 (commits in any of the repos above whose subject mentions the bug id — every id
 of "Bug 71360, 71316", each with `revert: true` when the subject starts with
-"Revert") and `fixReverted` (the latest of those commits is a revert).
+"Revert" — `Revert "Revert …"` puts the fix back and is not one) and `fixReverted` (the latest of those commits is a revert).
 
 ## Step 3 — review every exported bug
 
@@ -194,9 +196,12 @@ run them, so do not ask again; without it, parallel review needs a separate yes.
 
    It writes `part-<k>.json` and prints the layout. A component goes to one
    part; one bigger than a part's share is cut into chunks (`Files#1`,
-   `Files#2`), so even a single-component run uses every agent. Fewer parts
-   than `N` come out only when there are fewer bugs than parts — start only as
-   many agents as parts.
+   `Files#2`), so even a single-component run uses every agent. It can still
+   come out with fewer parts than `N` — with few bugs, or when the chunks round
+   up (5 bugs of one component, `--parts 4`: chunks of 2, so 3 parts) — so
+   start exactly as many agents as parts it lists. A rerun replaces the old
+   `part-<k>.json` files, but refuses once any `decisions.part-<k>.json` exists:
+   a new layout would not match decisions written for the old one.
 
 2. Start one `general-purpose` agent per part with the Agent tool, **all in one
    message** so they run in parallel. Each prompt carries everything the agent
@@ -261,7 +266,8 @@ Pass your own exact model name as the system prompt gives it (e.g.
 `"Claude Opus 5.5"`), never a guess or a default.
 
 Validates the decisions against the instance fields and prints every change
-(status/resolution/priority/whiteboard and the comment text). Fix any
+(status/resolution/priority/whiteboard and the comment text). A bug decided
+more than once is rejected as a whole — keep one decision. Fix any
 "invalid decisions" and rerun. Show the preview to the user and **wait for an
 explicit OK**. A question or silence is not an OK.
 
@@ -283,11 +289,13 @@ node .claude/scripts/bugzilla/audit.mjs files-only --dir <dir>
 Apply one bug first and check it with `bz.mjs --show`. Each bug is re-read
 before writing. It is a `conflict`, and skipped, only when something that can
 overturn the decision happened after the export: status, resolution, priority,
-whiteboard or assignee changed, or someone other than the audit commented. A
-new CC or keyword is not a conflict;
+whiteboard or assignee changed, or someone other than the audit commented
+(counted from the number of comments seen at export, not by clock). A new CC
+or keyword is not a conflict;
 an action whose fields and comment are both already in place is `skipped` (the
-comment is matched by its exact text, so a rerun never posts it twice). Without
-`--confirm` apply only prints.
+comment is matched by its exact text, so a rerun never posts it twice). A bug
+already `applied` in `apply-log.json` is not read again, so a later conflict or
+read error cannot erase that record. Without `--confirm` apply only prints.
 
 ## Step 6 — suggestions document and report
 

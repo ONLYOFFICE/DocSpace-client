@@ -150,7 +150,9 @@ async function bzRequest(method, pathname, key, query, body) {
   });
   const json = await res.json().catch(() => ({}));
   if (!res.ok || json.error) {
-    throw new Error(`[${res.status}] ${json.message || res.statusText}`);
+    const err = new Error(`[${res.status}] ${json.message || res.statusText}`);
+    err.status = res.status;
+    throw err;
   }
   return json;
 }

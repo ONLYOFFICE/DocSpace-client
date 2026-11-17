@@ -34,32 +34,31 @@
  */
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 import { ReactSVG } from "react-svg";
 
 import { SearchInput } from "@onlyoffice/apps-ui-kit/components/search-input";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
+import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import {
-  getAiTemplates,
-  installAiTemplate,
-  type TAiTemplate,
-  type TAiTemplateCatalog,
+import type {
+  TAiTemplate,
+  TAiTemplateCatalog,
 } from "@docspace/shared/api/ai/templates";
 
 import { useStore } from "SRC_DIR/store/useStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import {
   getAiWorkspaceListType,
-  getAiWorkspaceTabUrl,
   getAiWorkspaceTitle,
 } from "SRC_DIR/helpers/aiWorkspace";
 
@@ -71,6 +70,10 @@ import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.re
 import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/verified.react.svg?url";
 
+import {
+  useCanInstallAiTemplates,
+  useInstallAiTemplate,
+} from "./useInstallAiTemplate";
 import styles from "./AiTemplatesCatalog.module.scss";
 
 /**
@@ -153,38 +156,38 @@ export const getTemplateDetails = (
   ];
 };
 
+/** The label of a template's install action: an agent is added to the user's agents. */
+export const getInstallLabel = (
+  t: (key: string) => string,
+  template: TAiTemplate,
+) =>
+  template.kind === "agent" ? t("Common:AddToMyAgents") : t("Common:Install");
+
 /**
  * The Templates tab of the AI Chat section's lists: the shipped templates of
- * the list's kind as cards, each installed into the portal by its button.
- * Installing an agent brings the skill sets and knowledge bases it is linked
- * to; the list is then shown again, with the new room in it.
+ * the list's kind as cards, each installed into the portal by its button or
+ * its menu. Installing an agent brings the skill sets and knowledge bases it
+ * is linked to; the list is then shown again, with the new room in it. Only
+ * those who may create an agent are offered to install one.
  */
 const AiTemplatesCatalog = () => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
-  const navigate = useNavigate();
   const userId = useStore("userStore").user?.id;
-  const aiPresetsStore = useStore("aiPresetsStore");
+  const aiTemplatesStore = useStore("aiTemplatesStore");
   const { isAiHubFolder } = useStore("treeFoldersStore");
   const { fetchRooms } = useStore("filesStore");
+  const canInstall = useCanInstallAiTemplates();
+  const install = useInstallAiTemplate();
 
-  const [catalog, setCatalog] = React.useState<TAiTemplateCatalog | null>(
-    null,
-  );
-  const [failed, setFailed] = React.useState(false);
+  const { catalog, failed, isInstalling } = aiTemplatesStore;
+
   const [search, setSearch] = React.useState("");
   const [category, setCategory] = React.useState<string | null>(null);
-  const [installingId, setInstallingId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    let cancelled = false;
-    getAiTemplates()
-      .then((data) => !cancelled && setCatalog(data))
-      .catch(() => !cancelled && setFailed(true));
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    void aiTemplatesStore.fetchCatalog();
+  }, [aiTemplatesStore]);
 
   const listType = getAiWorkspaceListType(location.search);
 
@@ -206,28 +209,12 @@ const AiTemplatesCatalog = () => {
     });
   }, [isAiHubFolder, fetchRooms, userId, listType]);
 
-  const onInstall = async (template: TAiTemplate) => {
-    setInstallingId(template.id);
-    try {
-      const installed = await installAiTemplate(template.id);
-      toastr.success(
-        t("Common:AiTemplateInstalled", { name: installed.title }),
-      );
-      // The agent is installed without the template's model: it runs on the
-      // workspace's own until one is chosen. (Skipped instructions are not
-      // shown: the agent form does not edit them.)
-      if (installed.warnings?.includes("modelNotSaved"))
-        toastr.warning(
-          t("Common:AiTemplateModelNotSaved", { name: installed.title }),
-        );
-      // A new agent shows in the sidebar and the chat's agents menu.
-      if (installed.kind === "agent") void aiPresetsStore.fetchPresets();
-      navigate(getAiWorkspaceTabUrl(false, listType, userId));
-    } catch (error) {
-      toastr.error(error as Error);
-      setInstallingId(null);
-    }
-  };
+  const listTemplates = catalog ? getListTemplates(catalog, listType) : [];
+  const categories = getTemplateCategories(listTemplates);
+  // A category the list does not have (the list changed) shows them all.
+  const activeCategory =
+    category !== null && categories.includes(category) ? category : null;
+  const shown = filterTemplates(listTemplates, search, activeCategory);
 
   if (failed)
     return (
@@ -244,7 +231,6 @@ const AiTemplatesCatalog = () => {
     files: t("Common:Files"),
   };
   const installLabel = t("Common:Install");
-  const isBusy = installingId !== null;
 
   const row = (label: string, value: React.ReactNode, key: string) => (
     <React.Fragment key={key}>
@@ -263,81 +249,95 @@ const AiTemplatesCatalog = () => {
     </Text>
   );
 
-  const listTemplates = getListTemplates(catalog, listType);
-  const categories = getTemplateCategories(listTemplates);
-  // A category the list does not have (the list changed) shows them all.
-  const activeCategory =
-    category !== null && categories.includes(category) ? category : null;
-  const shown = filterTemplates(listTemplates, search, activeCategory);
+  const getMenu = (template: TAiTemplate): ContextMenuModel[] => [
+    ...(canInstall
+      ? [
+          {
+            key: "install",
+            label: getInstallLabel(t, template),
+            icon: CreateRoomReactSvgUrl,
+            disabled: isInstalling,
+            onClick: () => void install(template),
+          },
+        ]
+      : []),
+  ];
 
   const card = (template: TAiTemplate) => (
-        <div
-          key={template.id}
-          className={styles.card}
-          data-testid="ai-template-card"
-        >
-          <div className={styles.head}>
-            <ProjectLogo
-              project={{
-                title: template.name,
-                logo: getTemplateLogo(template.id),
-              }}
-              className={styles.logo}
+    <div key={template.id} className={styles.card} data-testid="ai-template-card">
+      <div className={styles.head}>
+        <ProjectLogo
+          project={{
+            title: template.name,
+            logo: getTemplateLogo(template.id),
+          }}
+          className={styles.logo}
+        />
+        <div className={styles.title}>
+          <div className={styles.name}>
+            <Text fontSize="16px" fontWeight={700} truncate title={template.name}>
+              {template.name}
+            </Text>
+            <ReactSVG
+              src={VerifiedReactSvgUrl}
+              className={styles.verified}
+              data-testid="ai-template-verified"
             />
-            <div className={styles.title}>
-              <Text
-                fontSize="16px"
-                fontWeight={700}
-                truncate
-                title={template.name}
-              >
-                {template.name}
-              </Text>
-              <Text
-                fontSize="13px"
-                className={styles.description}
-                title={template.description}
-              >
-                {template.description}
-              </Text>
-            </div>
-            <div className={styles.actions}>
-              <IconButton
-                iconName={CreateRoomReactSvgUrl}
-                size={16}
-                isFill
-                isClickable
-                isDisabled={isBusy}
-                title={installLabel}
-                onClick={() => onInstall(template)}
-                dataTestId="ai-template-install"
-              />
-            </div>
           </div>
-          <div className={styles.details}>
-            {row(t("Common:Category"), text(template.category), "category")}
-            {getTemplateDetails(template, catalog).map(({ key, values }) =>
-              row(
-                labels[key],
-                <>
-                  {DETAIL_ICONS[key] ? (
-                    <ReactSVG src={DETAIL_ICONS[key]} className={styles.icon} />
-                  ) : null}
-                  {text(values.join(", "))}
-                </>,
-                key,
-              ),
-            )}
-            {row(
-              t("Common:Owner"),
-              <>
-                {text(getBrandName("OrganizationName"))}
-                <ReactSVG src={VerifiedReactSvgUrl} className={styles.verified} />
-              </>,
-              "owner",
-            )}
-          </div>
+          <Text
+            fontSize="13px"
+            className={styles.description}
+            title={template.description}
+          >
+            {template.description}
+          </Text>
         </div>
+        <div className={styles.actions}>
+          {canInstall ? (
+            <IconButton
+              iconName={CreateRoomReactSvgUrl}
+              size={16}
+              isFill
+              isClickable
+              isDisabled={isInstalling}
+              title={installLabel}
+              onClick={() => void install(template)}
+              dataTestId="ai-template-install"
+            />
+          ) : null}
+          {canInstall ? (
+            <ContextMenuButton
+              getData={() => getMenu(template)}
+              directionX="right"
+              testId="ai-template-menu"
+            />
+          ) : null}
+        </div>
+      </div>
+      <div className={styles.details}>
+        {row(t("Common:Category"), text(template.category), "category")}
+        {getTemplateDetails(template, catalog).map(({ key, values }) =>
+          row(
+            labels[key],
+            <>
+              {DETAIL_ICONS[key] ? (
+                <ReactSVG src={DETAIL_ICONS[key]} className={styles.icon} />
+              ) : null}
+              {text(values.join(", "))}
+            </>,
+            key,
+          ),
+        )}
+        {row(
+          t("Common:Owner"),
+          <>
+            {text(getBrandName("OrganizationName"))}
+            <ReactSVG src={VerifiedReactSvgUrl} className={styles.verified} />
+          </>,
+          "owner",
+        )}
+      </div>
+    </div>
   );
 
   return (
@@ -370,4 +370,4 @@ const AiTemplatesCatalog = () => {
   );
 };
 
-export default AiTemplatesCatalog;
+export default observer(AiTemplatesCatalog);

@@ -104,6 +104,7 @@ import AiPresetsStore from "./AiPresetsStore";
 import SkillsStore from "./SkillsStore";
 import KnowledgeBasesStore from "./KnowledgeBasesStore";
 import AiProjectsStore from "./AiProjectsStore";
+import AiTemplatesStore from "./AiTemplatesStore";
 import AppsStore from "./AppsStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
@@ -118,6 +119,7 @@ const skillsStore = new SkillsStore();
 const knowledgeBasesStore = new KnowledgeBasesStore();
 
 const aiProjectsStore = new AiProjectsStore(aiPresetsStore, userStore);
+const aiTemplatesStore = new AiTemplatesStore();
 
 const appsStore = new AppsStore(settingsStore);
 
@@ -498,6 +500,7 @@ const store = {
   skillsStore,
   knowledgeBasesStore,
   aiProjectsStore,
+  aiTemplatesStore,
   appsStore,
   aiSettingsStore,
   telegramStore,

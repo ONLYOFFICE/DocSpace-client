@@ -1,6 +1,6 @@
 import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const api = vi.hoisted(() => ({
   getAiTemplates: vi.fn(),
@@ -14,14 +14,43 @@ const presetsStore = vi.hoisted(() => ({ fetchPresets: vi.fn(async () => {}) }))
 const treeFoldersStore = vi.hoisted(() => ({ isAiHubFolder: true }));
 const filesStore = vi.hoisted(() => ({ fetchRooms: vi.fn(async () => {}) }));
 const setDocumentTitle = vi.hoisted(() => vi.fn());
+const user = vi.hoisted(() => ({ id: "user", isAdmin: true }));
+const stores = vi.hoisted(() => ({ templates: null as unknown }));
 
 vi.mock("@docspace/shared/api/ai/templates", () => api);
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: string) =>
-    ({ aiPresetsStore: presetsStore, treeFoldersStore, filesStore })[name] ?? {
-      user: { id: "user" },
-    },
+    ({
+      aiPresetsStore: presetsStore,
+      aiTemplatesStore: stores.templates,
+      treeFoldersStore,
+      filesStore,
+    })[name] ?? { user },
+}));
+// The menu's items as plain buttons, built as the menu opens.
+vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
+  ContextMenuButton: ({
+    getData,
+    testId,
+  }: {
+    getData: () => { key: string; label: string; disabled?: boolean; onClick?: () => void }[];
+    testId?: string;
+  }) => (
+    <div data-testid={testId}>
+      {getData().map((item) => (
+        <button
+          key={item.key}
+          type="button"
+          data-testid={`ai-template-menu-${item.key}`}
+          disabled={item.disabled}
+          onClick={() => item.onClick?.()}
+        >
+          {item.label}
+        </button>
+      ))}
+    </div>
+  ),
 }));
 vi.mock("SRC_DIR/helpers/utils", () => ({ setDocumentTitle }));
 vi.mock("react-router", () => ({
@@ -33,6 +62,7 @@ vi.mock("react-i18next", () => ({
 }));
 
 import { RoomsType } from "@docspace/shared/enums";
+import AiTemplatesStore from "SRC_DIR/store/AiTemplatesStore";
 
 import AiTemplatesCatalog, {
   filterTemplates,
@@ -88,6 +118,8 @@ beforeEach(() => {
   setDocumentTitle.mockClear();
   treeFoldersStore.isAiHubFolder = true;
   location.search = "";
+  user.isAdmin = true;
+  stores.templates = new AiTemplatesStore();
 });
 
 describe("AiTemplatesCatalog", () => {
@@ -187,6 +219,32 @@ describe("AiTemplatesCatalog", () => {
     api.getAiTemplates.mockRejectedValue(new Error("down"));
     render(<AiTemplatesCatalog />);
     expect(await screen.findByTestId("ai-templates-error")).toBeTruthy();
+  });
+
+  it("marks a template's name as verified, beside the name", async () => {
+    render(<AiTemplatesCatalog />);
+    const [card] = await cards();
+    const name = within(card).getByTitle("Contract Reviewer");
+    expect(name.parentElement?.querySelector("[data-testid='ai-template-verified']")).toBeTruthy();
+  });
+
+  it("offers neither Install nor Add to my agents to a user who may not create agents", async () => {
+    user.isAdmin = false;
+    render(<AiTemplatesCatalog />);
+    await cards();
+    expect(screen.queryByTestId("ai-template-install")).toBeNull();
+    expect(screen.queryByTestId("ai-template-menu")).toBeNull();
+  });
+
+  it("adds an agent template to the user's agents from the card's menu", async () => {
+    api.installAiTemplate.mockResolvedValue({ kind: "agent", title: "Contract Reviewer" });
+    render(<AiTemplatesCatalog />);
+    await cards();
+    const item = screen.getByTestId("ai-template-menu-install");
+    expect(item.textContent).toBe("Common:AddToMyAgents");
+    fireEvent.click(item);
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
+    expect(api.installAiTemplate).toHaveBeenCalledWith("agents/document/reviewer");
   });
 });
 

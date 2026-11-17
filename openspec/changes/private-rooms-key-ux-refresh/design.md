@@ -164,5 +164,7 @@ Alternatives considered:
 
 ## Open Questions
 
-- The illustration of the locked-key block: a new image or one the product
-  already ships. It does not change the specs or the tasks.
+None. The illustration of the locked-key block was settled on 2026-11-17:
+a new image from design, a folder with a shield and a raised hand, in a
+light and a dark version of 150 by 105 pixels, added as
+`public/images/emptyview/private.room.locked.light.svg` and `.dark.svg`.

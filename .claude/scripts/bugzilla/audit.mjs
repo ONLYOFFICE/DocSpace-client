@@ -227,9 +227,10 @@ async function cmdFields(args, key) {
 
 /* ------------------------------------------------------------------ export */
 
-// "Fix Bug 71360, 71316 - …" and "fix bug 84685, 84686 and 84688": every id of
-// the chain after "bug" belongs to the commit, not just the first one.
-const BUG_REF = /\bbug\s*#?\s*(\d{4,6}(?:\s*(?:,|&|\/|\band\b)\s*#?\s*\d{4,6})*)\b/gi;
+// "Fix Bug 71360, 71316 - …", "Bugs 71558, 71591" and "fix bug 84685, 84686
+// and 84688": every id of the chain after "bug" belongs to the commit, not just
+// the first one.
+const BUG_REF = /\bbugs?\s*#?\s*(\d{4,6}(?:\s*(?:,|&|\/|\band\b)\s*#?\s*\d{4,6})*)\b/gi;
 const REVERT_CHAIN = /^(?:\s*revert\b\s*"?)+/i;
 
 // Revert "Revert …" puts the fix back: only an odd number of reverts undoes it.
@@ -252,7 +253,7 @@ function commitIndex(repos) {
     try {
       out = execFileSync(
         "git",
-        ["log", "--all", "-i", "-E", "--grep=bug ?#? ?[0-9]{4,6}", "--date=short", "--format=%h%x09%ad%x09%s"],
+        ["log", "--all", "-i", "-E", "--grep=bugs? ?#? ?[0-9]{4,6}", "--date=short", "--format=%h%x09%ad%x09%s"],
         { cwd: repo, encoding: "utf8", maxBuffer: 512 * 1024 * 1024 },
       );
     } catch (e) {
@@ -929,15 +930,17 @@ function cmdReport(args) {
   };
 
   const applied = Object.entries(log);
+  // "skipped" means the change was already in place: it is done all the same.
+  const done = (r) => r.outcome === "applied" || r.outcome === "skipped";
   const entries = [
     ...applied
-      .filter(([, r]) => r.type === "close" && r.outcome === "applied")
+      .filter(([, r]) => r.type === "close" && done(r))
       .map(([id, r]) => ({ id, section: "Закрыто", text: row(id, r.verdict) })),
     ...applied
-      .filter(([, r]) => r.type === "quickfix" && r.outcome === "applied")
+      .filter(([, r]) => r.type === "quickfix" && done(r))
       .map(([id, r]) => ({ id, section: "Поднят приоритет (quickfix)", text: row(id, r.message) })),
     ...applied
-      .filter(([, r]) => r.type === "comment" && r.outcome === "applied")
+      .filter(([, r]) => r.type === "comment" && done(r))
       .map(([id, r]) => ({ id, section: "Оставлен комментарий с разбором (поля не менялись)", text: row(id, r.verdict) })),
     ...applied
       .filter(([, r]) => r.outcome === "conflict" || r.outcome === "error")

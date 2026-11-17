@@ -102,7 +102,7 @@ the user's request. `--ids` is never filtered. `index.json` holds every open bug
 
 Signals per bug: `kind` (bug/suggestion), `ageDays`, `idleDays`, `commits`
 (commits in any of the repos above whose subject mentions the bug id — every id
-of "Bug 71360, 71316", each with `revert: true` when the subject starts with
+of "Bug 71360, 71316" or "Bugs 71558 and 71591", each with `revert: true` when the subject starts with
 "Revert" — `Revert "Revert …"` puts the fix back and is not one) and `fixReverted` (the latest of those commits is a revert).
 
 ## Step 3 — review every exported bug

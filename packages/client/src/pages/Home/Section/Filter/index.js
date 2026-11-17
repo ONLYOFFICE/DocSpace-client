@@ -89,6 +89,7 @@ import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { createGroup } from "SRC_DIR/helpers/contacts";
 import { getSectionCreateButton } from "SRC_DIR/helpers/getSectionCreateButton";
+import { getAiWorkspaceListType } from "SRC_DIR/helpers/aiWorkspace";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -101,6 +102,7 @@ import { isMetadataRootSupported } from "@docspace/shared/utils/metadata";
 
 import { useContactsFilter } from "./useContacts";
 import MetadataFilterSection from "./MetadataFilter";
+import AgentCategories from "./AgentCategories";
 import {
   METADATA_FILTER_GROUP,
   addMetadataGroup,
@@ -1878,7 +1880,19 @@ const SectionFilterContent = ({
     />
   );
 
-  return filterInput;
+  // The Agents list draws its category row under the filter.
+  const isAgentsList =
+    isAiHubFolder &&
+    getAiWorkspaceListType(location.search) === RoomsType.AiProjectRoom;
+
+  if (!isAgentsList) return filterInput;
+
+  return (
+    <>
+      {filterInput}
+      <AgentCategories />
+    </>
+  );
 };
 
 export default inject(

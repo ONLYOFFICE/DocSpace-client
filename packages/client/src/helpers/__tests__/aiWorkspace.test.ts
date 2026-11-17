@@ -1,8 +1,14 @@
 import { describe, expect, it } from "vitest";
 
-import { RoomsType } from "@docspace/shared/enums";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 import {
+  getAgentCategories,
+  getAgentCategory,
+  getAgentCategoryUrl,
+  getVisibleAgentsFilter,
+  isAgentListNarrowed,
   getAiListTitle,
   getAiRoomListType,
   getAiWorkspaceCreateLabel,
@@ -153,3 +159,89 @@ describe("isAiWorkspaceCreateRefused", () => {
     expect(isAiWorkspaceCreateRefused(`?type=${type}`, vectorizationEnabled)).toBe(refused);
   });
 });
+
+describe("Agents list categories", () => {
+  const agent = (tags: string[]) => ({ isRoom: true, roomType: RoomsType.AiProjectRoom, tags });
+  const agentsFilter = () => {
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+    filter.searchArea = RoomSearchArea.AiHub;
+    return filter;
+  };
+  const params = (url: string) => new URLSearchParams(url.split("?")[1]);
+
+  it("reads the agents' tags, each once, in the order they appear", () => {
+    expect(
+      getAgentCategories([
+        agent(["Legal", "Reports"]),
+        agent([]),
+        agent(["HR docs", "Legal"]),
+        { roomType: RoomsType.InstructionsRoom, tags: ["Skills"] },
+      ]),
+    ).toEqual(["Legal", "Reports", "HR docs"]);
+  });
+
+  it("has no categories when no agent carries a tag", () => {
+    expect(getAgentCategories([agent([]), agent([])])).toEqual([]);
+  });
+
+  it("maps a category onto the tag of the rooms filter, kept in the address", () => {
+    const filter = agentsFilter();
+    filter.filterValue = "review";
+    filter.page = 3;
+
+    const url = getAgentCategoryUrl(filter, "Legal");
+    expect(url).toMatch(/^\/ai-rooms\/filter\?/);
+    const query = params(url);
+    expect(JSON.parse(query.get("tags") ?? "null")).toEqual(["Legal"]);
+    // The search stays; the list starts again from its first page.
+    expect(query.get("filterValue")).toBe("review");
+    expect(query.get("page")).toBe("1");
+    expect(getAiWorkspaceListType(`?${query}`)).toBe(RoomsType.AiProjectRoom);
+
+    // Read back from the address, the filter names the same category.
+    const read = RoomsFilter.getFilter({ search: `?${query}` } as Location);
+    expect(read && getAgentCategory(read)).toBe("Legal");
+  });
+
+  it("maps All onto no tag", () => {
+    const filter = agentsFilter();
+    filter.tags = ["Legal"];
+
+    const query = params(getAgentCategoryUrl(filter, null));
+    expect(query.has("tags")).toBe(false);
+    const read = RoomsFilter.getFilter({ search: `?${query}` } as Location);
+    expect(read).not.toBeNull();
+    expect(read && getAgentCategory(read)).toBe(null);
+  });
+
+  it.each([
+    [{ tags: null, withoutTags: false }, null],
+    [{ tags: ["Legal"], withoutTags: false }, "Legal"],
+    [{ tags: "Legal", withoutTags: false }, "Legal"],
+    [{ tags: ["Legal", "HR docs"], withoutTags: false }, undefined],
+    [{ tags: null, withoutTags: "true" }, undefined],
+  ])("reads the category of the filter %o as %s", (filter, category) => {
+    expect(getAgentCategory(filter as never)).toBe(category);
+  });
+
+  it("tells a list narrowed beyond its room type", () => {
+    const filter = agentsFilter();
+    expect(isAgentListNarrowed(filter)).toBe(false);
+
+    filter.tags = ["Legal"];
+    expect(isAgentListNarrowed(filter)).toBe(true);
+
+    filter.tags = null;
+    filter.filterValue = "review";
+    expect(isAgentListNarrowed(filter)).toBe(true);
+  });
+
+  it("reads every agent the user can see without a tag or a search", () => {
+    const filter = getVisibleAgentsFilter();
+    expect(filter.searchArea).toBe(RoomSearchArea.AiHub);
+    expect(filter.type).toEqual([String(RoomsType.AiProjectRoom)]);
+    expect(filter.pageCount).toBe(100);
+    expect(isAgentListNarrowed(filter)).toBe(false);
+  });
+});
+

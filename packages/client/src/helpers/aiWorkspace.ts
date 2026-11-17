@@ -216,3 +216,85 @@ export const getAiWorkspaceListUrlOf = (
     userId,
   );
 };
+
+/** The tags of a filter as a list: none, one or several. */
+const toTagList = (tags: unknown): string[] => {
+  if (Array.isArray(tags)) return tags.map(String).filter(Boolean);
+  return typeof tags === "string" && tags ? [tags] : [];
+};
+
+/**
+ * The categories of the agents: their tags, each once, in the order they
+ * first appear. An agent's category is a tag of its room, so the rooms
+ * filter that the list uses narrows it by one.
+ */
+export const getAgentCategories = (
+  agents: readonly { roomType?: unknown; tags?: readonly string[] | null }[],
+): string[] =>
+  Array.from(
+    new Set(
+      agents
+        .filter(isAgent)
+        .flatMap((agent) => agent.tags ?? [])
+        .filter(Boolean),
+    ),
+  );
+
+/**
+ * The list is narrowed beyond its room type - by search, tags, owner or
+ * another filter - so the agents it holds are not all the user can see.
+ */
+export const isAgentListNarrowed = (filter: RoomsFilter): boolean =>
+  Boolean(
+    filter.filterValue ||
+      filter.subjectId ||
+      filter.subjectOwnerId ||
+      filter.provider ||
+      filter.quotaFilter ||
+      toTagList(filter.tags).length ||
+      filter.withoutTags === true ||
+      filter.withoutTags === "true" ||
+      filter.hasMetadataFilter(),
+  );
+
+/**
+ * The category the list is narrowed to: its one tag, or `null` ("All") with
+ * none. `undefined` when it is narrowed to several tags or to agents without
+ * tags, which no single category stands for.
+ */
+export const getAgentCategory = (
+  filter: Pick<RoomsFilter, "tags" | "withoutTags">,
+): string | null | undefined => {
+  if (filter.withoutTags === true || filter.withoutTags === "true")
+    return undefined;
+  const tags = toTagList(filter.tags);
+  if (!tags.length) return null;
+  return tags.length === 1 ? tags[0] : undefined;
+};
+
+/**
+ * The address of the agents' list narrowed to a category (all agents for
+ * `null`). The rest of its filter - the search, the sort - stays, and the
+ * list starts again from its first page.
+ */
+export const getAgentCategoryUrl = (
+  filter: RoomsFilter,
+  category: string | null,
+  userId?: string,
+): string => {
+  const next = filter.clone();
+  next.page = 0;
+  next.tags = category === null ? null : [category];
+  next.withoutTags = false;
+  return `/ai-rooms/filter?${next.toUrlParams(userId)}`;
+};
+
+/**
+ * Every agent the user can see, as far as the categories need: the agents'
+ * list with nothing but its room type, on a first page of 100.
+ */
+export const getVisibleAgentsFilter = (): RoomsFilter => {
+  const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+  filter.pageCount = 100;
+  return filter;
+};

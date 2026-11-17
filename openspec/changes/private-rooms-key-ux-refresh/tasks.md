@@ -33,7 +33,7 @@ and SDK unit tests must stay green.
 
 - [x] 5.1 Replace `packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx` with the block: illustration, `Common:PrivateRoomLockedBarTitle`, `Common:PrivateRoomLockedBarText`, the primary `Common:UnlockKey`, `Common:ForgotPassphrase`, under the same conditions as the bar and above the file list. Verify: the test of the bar rewritten for the block with every scenario of "A locked key is reported by a block in a private room" and of "File names stay as stored while the key is locked"
 - [x] 5.2 Show the block in place of the empty view in a private room without files while the key is locked. Verify: a unit case "Room without files" and a Playwright case in `packages/client/__tests__/private-rooms-section.spec.ts`
-- [ ] 5.3 Update the screenshots of the specs that show a locked private room. Verify: `private-room-access.spec.ts`, `private-rooms-section.spec.ts` and `encrypted-file-ui.spec.ts` pass under Docker and the screenshot diff holds only the block
+- [ ] 5.3 Add screenshots of the locked-key block to `private-room-access.spec.ts`: the block alone, in the light and the dark theme, on a wide screen and on a phone. No existing screenshot shows a locked private room (checked 2026-11-17: the three specs below have none, and the other private-room specs pass unchanged after 5.1 and 5.2). Verify: `private-room-access.spec.ts`, `private-rooms-section.spec.ts` and `encrypted-file-ui.spec.ts` pass under Docker, and the new screenshots show the block only
 
 ## 6. Mark of a missing key in the invite panel
 

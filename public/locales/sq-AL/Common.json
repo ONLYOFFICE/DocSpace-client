@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Pse ndodh kjo?",
   "KeyCreatedOn": "Krijuar më",
   "KeyFingerprint": "Gjurma dixhitale e çelësit",
+  "KeyFingerprintHint": "Kolegët mund t'ju kërkojnë këtë gjurmë dixhitale për të konfirmuar që çelësi juaj ka ndryshuar.",
   "KeyId": "ID e çelësit",
   "KeysManagement": "Menaxhimi i çelësave",
   "Kilobyte": "KB",

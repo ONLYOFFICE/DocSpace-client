@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Зашто се ово дешава?",
   "KeyCreatedOn": "Креирано",
   "KeyFingerprint": "Отисак прста кључа",
+  "KeyFingerprintHint": "Колеге могу да вас питају за овај отисак да би потврдиле да се ваш кључ променио.",
   "KeyId": "ИД кључа",
   "KeysManagement": "Управљање кључевима",
   "Kilobyte": "КБ",

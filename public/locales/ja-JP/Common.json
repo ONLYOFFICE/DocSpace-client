@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "なぜこのようなことが起きるのですか？",
   "KeyCreatedOn": "作成日",
   "KeyFingerprint": "キーフィンガープリント",
+  "KeyFingerprintHint": "キーが変更されたことを確認するため、同僚からこのフィンガープリントを求められることがあります。",
   "KeyId": "キーID",
   "KeysManagement": "キー管理",
   "Kilobyte": "KB",

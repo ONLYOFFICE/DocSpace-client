@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Dlaczego to się dzieje?",
   "KeyCreatedOn": "Utworzono",
   "KeyFingerprint": "Odcisk palca klucza",
+  "KeyFingerprintHint": "Współpracownicy mogą poprosić Cię o ten odcisk, aby potwierdzić, że Twój klucz się zmienił.",
   "KeyId": "Identyfikator klucza",
   "KeysManagement": "Zarządzanie kluczami",
   "Kilobyte": "KB",

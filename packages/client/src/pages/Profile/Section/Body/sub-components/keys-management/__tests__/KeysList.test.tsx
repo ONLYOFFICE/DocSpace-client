@@ -193,6 +193,17 @@ describe("KeysList", () => {
   });
 });
 
+describe("The fingerprint says what it is for", () => {
+  it("Hint shown", async () => {
+    renderList([keyNew]);
+
+    const fingerprint = await screen.findByTestId("key_fingerprint");
+    expect(fingerprint).toHaveTextContent("FINGERPRINT");
+    expect(screen.getByText("Common:KeyFingerprintHint")).toBeVisible();
+    expect(fingerprint).toHaveAccessibleDescription("Common:KeyFingerprintHint");
+  });
+});
+
 describe("Technical key details are folded", () => {
   const toggle = () =>
     screen.getByRole("button", { name: "Common:Details" });

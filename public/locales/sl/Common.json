@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Zakaj se to zgodi?",
   "KeyCreatedOn": "Ustvarjeno",
   "KeyFingerprint": "Prstni odtis ključa",
+  "KeyFingerprintHint": "Sodelavci vas lahko prosijo za ta prstni odtis, da potrdijo, da se je vaš ključ spremenil.",
   "KeyId": "ID ključa",
   "KeysManagement": "Upravljanje ključev",
   "Kilobyte": "KB",

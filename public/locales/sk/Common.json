@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Prečo sa to deje?",
   "KeyCreatedOn": "Vytvorené dňa",
   "KeyFingerprint": "Odtlačok kľúča",
+  "KeyFingerprintHint": "Kolegovia vás môžu požiadať o tento odtlačok, aby si overili, že sa váš kľúč zmenil.",
   "KeyId": "ID kľúča",
   "KeysManagement": "Správa kľúčov",
   "Kilobyte": "KB",

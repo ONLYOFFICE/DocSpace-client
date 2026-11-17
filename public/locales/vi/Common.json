@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Tại sao điều này xảy ra?",
   "KeyCreatedOn": "Tạo vào",
   "KeyFingerprint": "Dấu vân tay khoá",
+  "KeyFingerprintHint": "Đồng nghiệp có thể hỏi bạn dấu vân tay này để xác nhận rằng khoá của bạn đã thay đổi.",
   "KeyId": "ID khoá",
   "KeysManagement": "Quản lý khoá",
   "Kilobyte": "KB",

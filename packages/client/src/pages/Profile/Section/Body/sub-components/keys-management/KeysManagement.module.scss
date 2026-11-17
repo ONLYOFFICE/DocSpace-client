@@ -137,6 +137,18 @@
   white-space: nowrap;
 }
 
+.fingerprintCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fingerprintHint {
+  color: var(--text-secondary);
+  line-height: 16px;
+}
+
 .detailsToggleRow {
   grid-column: 1 / -1;
 }

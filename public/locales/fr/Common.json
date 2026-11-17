@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Pourquoi cela se produit-il ?",
   "KeyCreatedOn": "Créée le",
   "KeyFingerprint": "Empreinte de la clé",
+  "KeyFingerprintHint": "Vos collègues peuvent vous demander cette empreinte pour confirmer que votre clé a changé.",
   "KeyId": "Identifiant de la clé",
   "KeysManagement": "Gestion des clés",
   "Kilobyte": "Ko",

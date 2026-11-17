@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "왜 이런 일이 발생합니까?",
   "KeyCreatedOn": "생성일",
   "KeyFingerprint": "키 지문",
+  "KeyFingerprintHint": "동료가 키가 변경되었는지 확인하기 위해 이 지문을 요청할 수 있습니다.",
   "KeyId": "키 ID",
   "KeysManagement": "키 관리",
   "Kilobyte": "KB",

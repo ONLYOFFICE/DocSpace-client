@@ -1356,6 +1356,7 @@
   "KeyChangedWhyTitle": "Why does this happen?",
   "KeyCreatedOn": "Created on",
   "KeyFingerprint": "Key fingerprint",
+  "KeyFingerprintHint": "Colleagues may ask you for this fingerprint to confirm that your key has changed.",
   "KeyId": "Key ID",
   "KeysManagement": "Keys management",
   "Kilobyte": "KB",

@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Por que é que isto acontece?",
   "KeyCreatedOn": "Criada em",
   "KeyFingerprint": "Impressão digital da chave",
+  "KeyFingerprintHint": "Os colegas podem pedir-lhe esta impressão digital para confirmar que a sua chave foi alterada.",
   "KeyId": "ID da chave",
   "KeysManagement": "Gestão de chaves",
   "Kilobyte": "KB",

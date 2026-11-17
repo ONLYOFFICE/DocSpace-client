@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Ինչու է դա պատահում:",
   "KeyCreatedOn": "Ստեղծված",
   "KeyFingerprint": "Բանալու մատնահետք",
+  "KeyFingerprintHint": "Գործընկերները կարող են ձեզնից խնդրել այս մատնահետքը՝ հաստատելու, որ ձեր բանալին փոխվել է:",
   "KeyId": "Բանալու ID",
   "KeysManagement": "Բանալիների կառավարում",
   "Kilobyte": "ԿԲ",

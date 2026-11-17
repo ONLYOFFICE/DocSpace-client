@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Kāpēc tas notiek?",
   "KeyCreatedOn": "Izveidots",
   "KeyFingerprint": "Atslēgas nospiedums",
+  "KeyFingerprintHint": "Kolēģi var lūgt jums šo nospiedumu, lai pārliecinātos, ka jūsu atslēga ir mainīta.",
   "KeyId": "Atslēgas ID",
   "KeysManagement": "Atslēgu pārvaldība",
   "Kilobyte": "KB",

@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "لماذا يحدث هذا؟",
   "KeyCreatedOn": "تاريخ الإنشاء",
   "KeyFingerprint": "بصمة أصبع المفتاح",
+  "KeyFingerprintHint": "قد يطلب منك الزملاء هذه البصمة للتأكد من أن مفتاحك قد تغيّر.",
   "KeyId": "معرّف المفتاح",
   "KeysManagement": "إدارة المفاتيح",
   "Kilobyte": "كيلو بايت",

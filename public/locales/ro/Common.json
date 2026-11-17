@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "De ce se întâmplă acest lucru?",
   "KeyCreatedOn": "Creat la",
   "KeyFingerprint": "Amprentă digitală a cheii",
+  "KeyFingerprintHint": "Colegii vă pot cere această amprentă pentru a confirma că cheia dvs. s-a schimbat.",
   "KeyId": "ID cheie",
   "KeysManagement": "Gestionare chei",
   "Kilobyte": "KB",

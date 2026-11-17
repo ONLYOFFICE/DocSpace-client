@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Bu neden olur?",
   "KeyCreatedOn": "Oluşturulma tarihi",
   "KeyFingerprint": "Anahtar parmak izi",
+  "KeyFingerprintHint": "İş arkadaşlarınız, anahtarınızın değiştiğini doğrulamak için sizden bu parmak izini isteyebilir.",
   "KeyId": "Anahtar Kimliği",
   "KeysManagement": "Anahtar yönetimi",
   "Kilobyte": "KB",

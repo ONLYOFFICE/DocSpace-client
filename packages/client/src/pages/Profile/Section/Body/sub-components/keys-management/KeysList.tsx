@@ -78,6 +78,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
   const [fingerprint, setFingerprint] = useState<string>("");
   const [detailsOpen, setDetailsOpen] = useState(false);
   const detailsId = useId();
+  const fingerprintHintId = useId();
 
   useEffect(() => {
     const loadFingerprint = async () => {
@@ -176,9 +177,23 @@ const KeyItem: React.FC<KeyItemProps> = ({
           <Text fontSize="13px" className={styles.detailsLabel}>
             {t("Common:KeyFingerprint")}
           </Text>
-          <Text fontSize="13px" className={styles.monoValue}>
-            {fingerprint || "..."}
-          </Text>
+          <div className={styles.fingerprintCell}>
+            <Text
+              fontSize="13px"
+              className={styles.monoValue}
+              aria-describedby={fingerprintHintId}
+              data-testid="key_fingerprint"
+            >
+              {fingerprint || "..."}
+            </Text>
+            <Text
+              id={fingerprintHintId}
+              fontSize="12px"
+              className={styles.fingerprintHint}
+            >
+              {t("Common:KeyFingerprintHint")}
+            </Text>
+          </div>
           <div className={styles.detailsToggleRow}>
             <Link
               type={LinkType.action}

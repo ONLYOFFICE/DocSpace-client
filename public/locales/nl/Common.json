@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Waarom gebeurt dit?",
   "KeyCreatedOn": "Aangemaakt op",
   "KeyFingerprint": "Sleutelvingerafdruk",
+  "KeyFingerprintHint": "Collega's kunnen u om deze vingerafdruk vragen om te bevestigen dat uw sleutel is gewijzigd.",
   "KeyId": "Sleutel-ID",
   "KeysManagement": "Sleutelbeheer",
   "Kilobyte": "KB",

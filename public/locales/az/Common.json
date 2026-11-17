@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Bu nə üçün baş verir?",
   "KeyCreatedOn": "Yaradılma tarixi",
   "KeyFingerprint": "Açarın barmaq izi",
+  "KeyFingerprintHint": "Həmkarlarınız açarınızın dəyişdiyini təsdiqləmək üçün sizdən bu barmaq izini istəyə bilər.",
   "KeyId": "Açar İD",
   "KeysManagement": "Açarların idarə edilməsi",
   "Kilobyte": "KB",

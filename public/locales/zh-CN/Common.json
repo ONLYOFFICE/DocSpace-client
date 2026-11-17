@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "为什么会发生这种情况？",
   "KeyCreatedOn": "创建于",
   "KeyFingerprint": "密钥指纹",
+  "KeyFingerprintHint": "同事可能会向您索取此指纹，以确认您的密钥已更改。",
   "KeyId": "密钥 ID",
   "KeysManagement": "密钥管理",
   "Kilobyte": "KB",

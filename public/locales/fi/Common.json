@@ -1350,6 +1350,7 @@
   "KeyChangedWhyTitle": "Miksi tämä tapahtuu?",
   "KeyCreatedOn": "Luotu",
   "KeyFingerprint": "Avaimen sormenjälki",
+  "KeyFingerprintHint": "Kollegasi voivat pyytää sinulta tätä sormenjälkeä varmistaakseen, että avaimesi on vaihtunut.",
   "KeyId": "Avaimen tunnus",
   "KeysManagement": "Avainten hallinta",
   "Kilobyte": "KB",

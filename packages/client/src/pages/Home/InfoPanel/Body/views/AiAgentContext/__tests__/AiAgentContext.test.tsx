@@ -69,9 +69,19 @@ describe("AiAgentContext", () => {
     expect(screen.queryByTestId("toggle-Legal")).toBeNull();
   });
 
-  it("offers Manage sources to those who may edit the agent, which opens its form", async () => {
+  it("offers a Manage row under each section to those who may edit the agent, which opens its form", async () => {
     render(<AiAgentContext id={7} />);
-    fireEvent.click(await screen.findByTestId("ai-agent-context-manage"));
+    const skills = await screen.findByTestId("ai-agent-context-manage-skills");
+    const knowledge = screen.getByTestId("ai-agent-context-manage-knowledge");
+    expect(skills.textContent).toBe("Common:ManageSkillSets");
+    expect(knowledge.textContent).toBe("Common:ManageKnowledgeBases");
+    // Each row sits in its own section, under its rooms.
+    expect(screen.getByTestId("ai-agent-context-skills").contains(skills)).toBe(true);
+    expect(screen.getByTestId("ai-agent-context-knowledge").contains(knowledge)).toBe(true);
+
+    fireEvent.click(skills);
+    fireEvent.click(knowledge);
+    expect(store.openEditDialogById).toHaveBeenCalledTimes(2);
     expect(store.openEditDialogById).toHaveBeenCalledWith(7);
   });
 
@@ -95,11 +105,12 @@ describe("AiAgentContext", () => {
     expect(api.getAiProject).toHaveBeenCalledTimes(2);
   });
 
-  it("offers a member no Manage sources", async () => {
+  it("offers a member no Manage rows", async () => {
     api.getAiProject.mockResolvedValue(project(false));
     render(<AiAgentContext id={7} />);
     await screen.findAllByTestId("room");
-    expect(screen.queryByTestId("ai-agent-context-manage")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-context-manage-skills")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-context-manage-knowledge")).toBeNull();
   });
 
   it("says so when the agent cannot be read", async () => {

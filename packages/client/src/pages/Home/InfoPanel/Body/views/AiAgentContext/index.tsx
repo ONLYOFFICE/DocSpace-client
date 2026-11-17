@@ -84,7 +84,8 @@ type AiAgentContextProps = {
 /**
  * The Context tab of an agent's Info panel: the skill sets the agent is
  * linked to, each unfolding to its skills, and its knowledge bases. A name
- * opens its room. Those who may edit the agent get "Manage sources", which
+ * opens its room. Those who may edit the agent get a "Manage ..." row under
+ * each section ("Manage skill sets...", "Manage knowledge bases..."), which
  * opens the agent's form.
  */
 const AiAgentContext = ({ id }: AiAgentContextProps) => {
@@ -95,7 +96,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   const [failed, setFailed] = React.useState(false);
   const [expanded, setExpanded] = React.useState<Record<number, boolean>>({});
 
-  // Read again once the agent is saved ("Manage sources") or changed elsewhere.
+  // Read again once the agent is saved (a "Manage ..." row) or changed elsewhere.
   const revision = aiProjectsStore.projectRevisions[id] ?? 0;
   const shownId = React.useRef<number | null>(null);
 
@@ -130,11 +131,28 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
 
   if (!context) return null;
 
+  // The section's own "Manage ..." row, for those who may edit the agent.
+  const manageRow = (testId: string, label: string) =>
+    context.canEdit ? (
+      <Link
+        className={styles.manage}
+        type={LinkType.action}
+        isHovered
+        fontSize="13px"
+        fontWeight={600}
+        onClick={() => aiProjectsStore.openEditDialogById(id)}
+        dataTestId={testId}
+      >
+        {label}
+      </Link>
+    ) : null;
+
   const section = (
     testId: string,
     label: string,
     rooms: TAiProjectSource[],
     row: (room: TAiProjectSource) => React.ReactNode,
+    manage: React.ReactNode,
   ) => (
     <section className={styles.section} data-testid={testId}>
       <Text
@@ -152,6 +170,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
           {"—"}
         </Text>
       )}
+      {manage}
     </section>
   );
 
@@ -200,6 +219,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
             </React.Fragment>
           );
         },
+        manageRow("ai-agent-context-manage-skills", t("Common:ManageSkillSets")),
       )}
       {section(
         "ai-agent-context-knowledge",
@@ -214,19 +234,11 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
             icon="knowledgeRoom.svg"
           />
         ),
+        manageRow(
+          "ai-agent-context-manage-knowledge",
+          t("Common:ManageKnowledgeBases"),
+        ),
       )}
-      {context.canEdit ? (
-        <Link
-          className={styles.manage}
-          type={LinkType.action}
-          isHovered
-          fontWeight={600}
-          onClick={() => aiProjectsStore.openEditDialogById(id)}
-          dataTestId="ai-agent-context-manage"
-        >
-          {t("Common:ManageSources")}
-        </Link>
-      ) : null}
     </div>
   );
 };

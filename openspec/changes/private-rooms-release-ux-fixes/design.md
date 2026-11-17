@@ -68,8 +68,11 @@ Validation does not depend on it: `hooks/usePasswordInput.ts` calls
 `checkPassword` of `hooks/usePasswordValidation.ts` on every change outside
 `simpleView`, and that calls `onValidateInput(progressScore,
 passwordValidation)` with the result of each rule (`length`, `digits`,
-`capital`, `special`, `allowed`). The forms set `isDisableTooltip`, keep
-`simpleView` off, and draw the list from that second argument.
+`capital`, `special`, `allowed`). The forms set `isDisableTooltip` and keep
+`simpleView` off. The list and the shown grade read the rules from one
+function of the passphrase strength service, which checks them with the
+same settings and expressions as the kit, so the list, the grade and the
+enabled confirm action cannot disagree.
 
 ### 3. The recovery input checks the words before the phrase
 

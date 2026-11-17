@@ -71,6 +71,7 @@ import {
   isPassphraseAcceptable,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 
+import { PassphraseRulesList } from "./PassphraseRulesList";
 import { PassphraseStrengthLine } from "./PassphraseStrengthLine";
 import styles from "./PassphraseModal.module.scss";
 
@@ -285,13 +286,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   onValidateInput={(progressScore) =>
                     setRulesPassed(progressScore)
                   }
-                  tooltipPasswordTitle={`${t("Common:PassphraseLimitMessage")}:`}
-                  tooltipPasswordLength={`${t(
-                    "Common:PasswordMinimumLength",
-                  )}: ${MIN_LENGTH}`}
-                  tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-                  tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-                  tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
+                  isDisableTooltip
                   isDisabled={isLoading}
                   hasError={passphraseHasError}
                   isAutoFocussed
@@ -301,6 +296,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 />
               </FieldContainer>
 
+              {isNew ? <PassphraseRulesList passphrase={passphrase} /> : null}
               {isNew ? <PassphraseStrengthLine passphrase={passphrase} /> : null}
               {isNew && containsCommonPattern(passphrase) ? (
                 <Text fontSize="12px" color="var(--status-error)">

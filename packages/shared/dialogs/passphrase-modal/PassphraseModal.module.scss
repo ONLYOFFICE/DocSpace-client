@@ -92,6 +92,53 @@
   margin-top: 4px;
 }
 
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.rulesList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ruleMark {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--text-secondary);
+  border-radius: 50%;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  svg path {
+    fill: var(--status-icon-color-positive);
+  }
+}
+
+.ruleMet .ruleMark {
+  border-color: transparent;
+}
+
 .forgotRow {
   display: flex;
   justify-content: flex-start;

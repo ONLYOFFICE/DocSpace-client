@@ -39,4 +39,14 @@ describe("AiProjects utils", () => {
     expect(savedProjectProfileId("p9", ["default", "p9"], "p9", false)).toBe("p9");
     expect(savedProjectProfileId(null, ["default"], "default", false)).toBe("default");
   });
+
+  it("leaves an edited agent without a model of its own on the portal model", () => {
+    // Nothing stored and nothing picked: no model is sent.
+    expect(savedProjectProfileId(null, ["default"], "default", true, true)).toBeUndefined();
+    // A model picked in the form, the default included, is the agent's own.
+    expect(savedProjectProfileId("default", ["default"], "default", true, true)).toBe("default");
+    expect(savedProjectProfileId("p9", ["default", "p9"], "p9", true, true)).toBe("p9");
+    // A stored model that is gone is still replaced by the one shown.
+    expect(savedProjectProfileId("p9", ["default"], "default", true, true)).toBe("default");
+  });
 });

@@ -141,6 +141,10 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const profiles = useProfilesStore((s) => s.profiles);
   const ensureProfiles = useProfilesStore((s) => s.ensureProfiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
+  const chatProfile = useProfilesStore((s) => s.chatProfile);
+  // The model an agent without one of its own runs on, as the server picks
+  // it (and the tiles name it): the portal's Chat model, else the Default slot.
+  const portalProfile = chatProfile ?? defaultProfile;
   const profilesLoaded = useProfilesStore((s) => s.profilesLoaded);
   // The chat starts knowing only its assigned profiles; the model combo
   // box lists the whole catalogue.
@@ -168,7 +172,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const [imageRemoved, setImageRemoved] = React.useState(false);
   const storedImage = !imageRemoved && project ? uploadedLogo(project.logo) : null;
   const hasImage = !!previewIcon || !!storedImage;
-  // `null` until a model is picked: the portal default is preselected.
+  // `null` until a model is picked: the portal's chat model is preselected.
   const [profileId, setProfileId] = React.useState<string | null>(project?.aiProject.profile?.id ?? null);
   const [instructions, setInstructions] = React.useState<TAiProjectSource[]>(project?.aiProject.instructionsRooms ?? []);
   const [knowledge, setKnowledge] = React.useState<TAiProjectSource[]>(project?.aiProject.knowledgeRooms ?? []);
@@ -249,27 +253,29 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   // uploaded, like a new room.
   const isEmptyIcon = !project && !title && !dialogsStore.cover && !hasImage;
 
-  // The default profile of the portal first, then every chat-capable
-  // profile, each by its name only. Whichever is picked is stored as the
-  // project's own model, the default included.
+  // The portal's chat model first, then every chat-capable profile, each by
+  // its name only. Whichever is picked is stored as the project's own model,
+  // the portal's included; a new project stores the one shown. An agent
+  // edited without a model of its own keeps none until one is picked.
   const profileOptions = React.useMemo<TOption[]>(
     () => [
-      ...(defaultProfile ? [{ key: defaultProfile.id, value: defaultProfile.id, label: defaultProfile.name }] : []),
+      ...(portalProfile ? [{ key: portalProfile.id, value: portalProfile.id, label: portalProfile.name }] : []),
       ...chatProfiles
-        .filter((profile) => profile.id !== defaultProfile?.id)
+        .filter((profile) => profile.id !== portalProfile?.id)
         .map((profile) => ({ key: profile.id, value: profile.id, label: profile.name })),
     ],
-    [chatProfiles, defaultProfile],
+    [chatProfiles, portalProfile],
   );
   const selectedProfileOption =
     profileOptions.find((option) => option.key === profileId) ?? (profileOptions[0] as TOption);
-  // A stored model that is gone, or none at all, shows as the default, so
-  // the default is what gets saved; one not read yet is kept.
+  // A stored model that is gone shows as the default, so the default is
+  // what gets saved; one not read yet is kept, and none at all stays none.
   const savedProfileId = savedProjectProfileId(
     profileId,
     profileOptions.map((option) => String(option.key)),
     selectedProfileOption ? String(selectedProfileOption.key) : undefined,
     profilesLoaded,
+    !!project,
   );
 
   if (!state) return null;

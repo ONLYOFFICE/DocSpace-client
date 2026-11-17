@@ -54,17 +54,23 @@ export const projectLink = (project: TAiProject) =>
   `${window.location.origin}/ai-rooms/${project.id}/filter?folder=${project.id}`;
 
 /**
- * The model the project form saves. A stored model missing from the model
- * list is gone (removed, disabled, no longer chat-capable), so the option
- * shown in its place, the default, is saved instead. Until the whole list is
- * in, a missing model may only be one not read yet: it is saved as it is.
+ * The model the project form saves. An agent edited without a model of its
+ * own (`isEdit` with no `profileId`: none stored, none picked in the form)
+ * saves none, so it stays on the portal's chat model and follows it; the
+ * default the form shows is not written. A stored model missing from the
+ * model list is gone (removed, disabled, no longer chat-capable), so the
+ * option shown in its place, the default, is saved instead. Until the whole
+ * list is in, a missing model may only be one not read yet: it is saved as
+ * it is. `undefined` leaves the model as it is.
  */
 export const savedProjectProfileId = (
   profileId: string | null,
   optionKeys: string[],
   shownKey: string | undefined,
   profilesLoaded: boolean,
-) => {
+  isEdit = false,
+): string | null | undefined => {
+  if (isEdit && profileId === null) return undefined;
   if (!profilesLoaded && profileId && !optionKeys.includes(profileId)) return profileId;
   return shownKey ?? profileId;
 };

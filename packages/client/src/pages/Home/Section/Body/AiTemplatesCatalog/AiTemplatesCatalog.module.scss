@@ -33,14 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
 .wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  // The tabs above end with 20px of their own and the section body adds its
-  // top padding: pull the search up to where the list's filter sits.
-  margin-block-start: -12px;
   padding-block: 0 16px;
+
+  // The tabs above end with 20px of their own and on a desktop the section
+  // body adds its top padding: pull the search up to where the list's filter
+  // sits. A narrower section body has no top padding, and the tabs stick
+  // over it, so there the search stays where it is, or its top is cut off.
+  @include mixins.desktop {
+    margin-block-start: -12px;
+  }
 }
 
 .search {

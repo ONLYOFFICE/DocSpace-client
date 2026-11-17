@@ -120,7 +120,7 @@ import {
   releaseModuleEvents,
   setModuleEventDispatcher,
 } from "../helpers/plugins/react/socket";
-import type { RoomsType } from "@docspace/shared/enums";
+import { DeviceType, type RoomsType } from "@docspace/shared/enums";
 import { pluginRoomTypes, toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
@@ -339,7 +339,14 @@ class PluginStore {
       setPluginMediaViewerProps: this.setPluginMediaViewerProps,
       setReactPluginModalState: this.setReactPluginModalState,
       reactPluginCurrentFile: currentFile,
+      closeMobileArticle: this.closeMobileArticle,
     });
+  };
+
+  closeMobileArticle = () => {
+    if (this.settingsStore.currentDeviceType === DeviceType.mobile) {
+      this.settingsStore.setArticleOpen(false);
+    }
   };
 
   setReactPluginModalState = (

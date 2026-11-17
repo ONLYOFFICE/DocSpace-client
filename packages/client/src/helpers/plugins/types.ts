@@ -329,6 +329,7 @@ export interface TMessageActionsParams {
   updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
   updateDashboardWidgetItems?: PluginStore["updateDashboardWidgetItems"];
   updateArticleWidgetItem?: PluginStore["updateArticleWidgetItem"];
+  closeMobileArticle?: PluginStore["closeMobileArticle"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];
   setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];

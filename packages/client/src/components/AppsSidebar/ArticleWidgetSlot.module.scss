@@ -1,19 +1,22 @@
+.slot,
+.collapsedSlot {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 3;
+  background-color: var(--article-catalog-background);
+}
+
 .slot {
-  flex-shrink: 0;
   padding-block: 4px 12px;
-  padding-inline: 20px;
 }
 
 .collapsedSlot {
-  position: relative;
-  flex-shrink: 0;
   padding-block-end: 8px;
 }
 
 .dropdownAnchor {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-end: -8px;
+  position: fixed;
+  inset-inline-start: calc(var(--article-tablet-width-collapsed-v) + 8px);
   inline-size: 0;
   block-size: 0;
 }

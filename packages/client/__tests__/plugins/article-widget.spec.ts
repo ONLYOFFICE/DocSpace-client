@@ -44,11 +44,13 @@ import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "../fixtures/base";
 
 const PERSONAL_FOLDER_URL = "/rooms/personal/filter?folder=12764";
+const PORTAL_SETTINGS_URL = "/portal-settings/integration/plugins";
 const PHONE = { width: 428, height: 830 };
 
 type TFakeWidgetPlugin = {
   name: string;
   withIcon?: boolean;
+  appears?: string[];
   access?: { usersTypes?: string[]; users?: string[]; groups?: string[] };
 };
 
@@ -115,6 +117,7 @@ export default {
   articleWidgetItem: {
     component: SearchWidget,
     ...(config.withIcon && { icon: "icon.svg" }),
+    ...(config.appears && { appears: config.appears }),
     ...config.access,
   },
   setArticleWidgetItem(item) {
@@ -294,7 +297,69 @@ test.describe("Article Widget plugin scope", () => {
     await expect(searchInput(page, "search-a")).toHaveCount(0);
   });
 
-  // ── 3. Collapsed sidebar ─────────────────────────────────────────────────────
+  // ── 3. Sections ──────────────────────────────────────────────────────────────
+
+  test("A widget shows only in the sections it lists, under the back arrow there", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    const plugins = [{ name: "settings-search", appears: ["Settings"] }];
+    mockRequest.use(...fakePluginHandlers(plugins));
+
+    await openWithPlugins(page, `${baseUrl}${PERSONAL_FOLDER_URL}`, plugins);
+    await expect(
+      page.locator('#article-container [data-item-id^="plugin-navigation-"]'),
+    ).toBeVisible();
+    await expect(slot(page)).toHaveCount(0);
+
+    await openWithPlugins(page, `${baseUrl}${PORTAL_SETTINGS_URL}`, plugins);
+    await expect(searchInput(page, "settings-search")).toBeVisible();
+
+    const backBox = await page
+      .locator('#article-container [class*="backButtonWrapper"]')
+      .boundingBox();
+    const slotBox = await slot(page).boundingBox();
+
+    if (!backBox || !slotBox) throw new Error("The sidebar is not laid out");
+
+    expect(slotBox.y).toBeGreaterThanOrEqual(backBox.y + backBox.height);
+
+    await page.mouse.move(0, 0);
+    await expectScreenshot(
+      page,
+      ["desktop", "plugins-article-widget", "article-widget_settings.png"],
+      { clip: await sidebarTop(page, 260) },
+    );
+  });
+
+  test("The widget stays at the top while a long menu scrolls under it", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    const plugins = [{ name: "settings-search", appears: ["Settings"] }];
+    mockRequest.use(...fakePluginHandlers(plugins));
+    await page.setViewportSize({ width: 1280, height: 480 });
+
+    await openWithPlugins(page, `${baseUrl}${PORTAL_SETTINGS_URL}`, plugins);
+    await expect(searchInput(page, "settings-search")).toBeVisible();
+
+    const scroller = page.locator("#article-container .article-scroller");
+    await scroller.evaluate((element) => {
+      element.scrollTop = element.scrollHeight;
+    });
+
+    const scrollerBox = await scroller.boundingBox();
+    const slotBox = await slot(page).boundingBox();
+
+    if (!scrollerBox || !slotBox) throw new Error("The sidebar is not laid out");
+
+    expect(Math.round(slotBox.y)).toBe(Math.round(scrollerBox.y));
+    await expect(searchInput(page, "settings-search")).toBeInViewport();
+  });
+
+  // ── 4. Collapsed sidebar ─────────────────────────────────────────────────────
 
   test("In a collapsed sidebar the icon opens the widget in a dropdown", async ({
     page,
@@ -359,7 +424,7 @@ test.describe("Article Widget plugin scope", () => {
     await expect(slot(page)).toHaveCount(0);
   });
 
-  // ── 4. Phone ─────────────────────────────────────────────────────────────────
+  // ── 5. Phone ─────────────────────────────────────────────────────────────────
 
   test("On a phone the widget heads the drawer, which closes once it navigates", async ({
     page,

@@ -94,7 +94,7 @@ describe("PluginStore sidebar widget", () => {
   it("shows the widget of the first plugin by name, whatever order they loaded in", () => {
     const store = createStore([plugin("search10"), plugin("search2")]);
 
-    expect(store.articleWidgetItem).toEqual({
+    expect(store.articleWidgetItemsList[0]?.value).toEqual({
       component: Widget,
       pluginName: "search2",
     });
@@ -107,7 +107,7 @@ describe("PluginStore sidebar widget", () => {
       plugin("c-everyone"),
     ]);
 
-    expect(store.articleWidgetItem?.pluginName).toBe("c-everyone");
+    expect(store.articleWidgetItemsList[0]?.value.pluginName).toBe("c-everyone");
   });
 
   it("gives the slot to the next plugin once the first clears its widget", () => {
@@ -117,6 +117,6 @@ describe("PluginStore sidebar widget", () => {
     first.clearWidget();
     store.updateArticleWidgetItem(first.name);
 
-    expect(store.articleWidgetItem?.pluginName).toBe("b-search");
+    expect(store.articleWidgetItemsList[0]?.value.pluginName).toBe("b-search");
   });
 });

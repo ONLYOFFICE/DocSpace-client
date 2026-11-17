@@ -164,6 +164,10 @@
   min-height: 100%;
 }
 
+.articleFlex:global(#article-container) .scrollBody {
+  overflow-x: clip !important;
+}
+
 // ArticleProfile renders profileWrapper with position:absolute; bottom:0 —
 // override to place it in normal flex flow.
 .profileBlockWrapper {

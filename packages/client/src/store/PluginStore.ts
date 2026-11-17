@@ -2363,8 +2363,8 @@ class PluginStore {
     return listByPluginName(this.dashboardWidgetItems);
   }
 
-  get articleWidgetItem() {
-    return listByPluginName(this.articleWidgetItems)[0]?.value ?? null;
+  get articleWidgetItemsList() {
+    return listByPluginName(this.articleWidgetItems);
   }
 }
 

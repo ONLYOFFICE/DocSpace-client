@@ -7,6 +7,7 @@ import {
   hasPortalChatModel,
   isAgentModelUnavailable,
   isManager,
+  isTagBeingTyped,
   isOwner,
   projectLink,
   roomLinkRefusal,
@@ -97,5 +98,30 @@ describe("AiProjects utils", () => {
     expect(hasPortalChatModel(image, chat)).toBe(false);
     expect(hasPortalChatModel(null, image)).toBe(false);
     expect(hasPortalChatModel(null, null)).toBe(false);
+  });
+
+  it("holds the form's submit back while a tag is typed in the focused Tags field", () => {
+    const form = document.createElement("form");
+    const tagInput = document.createElement("input");
+    tagInput.name = "tagInput";
+    const title = document.createElement("input");
+    form.append(title, tagInput);
+    document.body.append(form);
+
+    tagInput.value = "QA";
+    tagInput.focus();
+    expect(isTagBeingTyped(form)).toBe(true);
+    // Only spaces: Enter adds no tag, so it saves the form.
+    tagInput.value = "  ";
+    expect(isTagBeingTyped(form)).toBe(false);
+    // A tag left typed while another field has the focus does not hold it back.
+    tagInput.value = "QA";
+    title.focus();
+    expect(isTagBeingTyped(form)).toBe(false);
+    // A form without the field, or none, is submitted.
+    expect(isTagBeingTyped(document.createElement("form"))).toBe(false);
+    expect(isTagBeingTyped(null)).toBe(false);
+
+    form.remove();
   });
 });

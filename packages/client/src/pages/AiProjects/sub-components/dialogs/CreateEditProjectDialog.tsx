@@ -82,7 +82,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import { SourceRoomLogo } from "../project/RoomItem";
-import { roomLinkRefusal, savedProjectProfileId } from "../../utils";
+import { isTagBeingTyped, roomLinkRefusal, savedProjectProfileId } from "../../utils";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -443,6 +443,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         withForm
         onSubmit={(e) => {
           e.preventDefault();
+          // Enter in the Tags field adds the typed tag instead.
+          if (isTagBeingTyped(e.currentTarget)) return;
           void onSubmit();
         }}
         onClose={store.closeProjectDialog}

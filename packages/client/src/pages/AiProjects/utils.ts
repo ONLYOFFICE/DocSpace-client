@@ -117,3 +117,18 @@ export const roomLinkRefusal = (
   if (!room.security?.EditRoom) return "noManageRights";
   return null;
 };
+
+/**
+ * Enter in the agent form's Tags field adds the typed tag (the tag dropdown
+ * takes it on keyup), and it also submits the form before that. The submit
+ * saves the form only while the field is not being typed in: unfocused or
+ * empty, as in the room form.
+ */
+export const isTagBeingTyped = (form: HTMLFormElement | null | undefined) => {
+  const input = form?.elements.namedItem("tagInput");
+  return (
+    input instanceof HTMLInputElement &&
+    input === document.activeElement &&
+    input.value.trim().length > 0
+  );
+};

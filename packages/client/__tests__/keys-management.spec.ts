@@ -573,6 +573,46 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     return { card, background };
   };
 
+  for (const [screen, viewport, perLine] of [
+    ["a wide screen", { width: 1440, height: 1024 }, 4],
+    ["a phone", MOBILE, 2],
+  ] as const) {
+    test(`Even lines on ${screen}`, async ({ page, mockRequest, baseUrl }) => {
+      const sealed = await serializeIdentity(
+        await generateIdentityKeyPair(),
+        "Test-Horse-Battery-Staple-99!",
+      );
+      mockRequest.use(
+        ...privacyroomKeysHandlers(TEST_PORT, {
+          initial: [
+            {
+              id: "22222222-2222-2222-2222-222222222222",
+              userId: USER_ID,
+              publicKey: sealed.publicKey,
+              privateKeyEnc: sealed.privateKeyEnc,
+              date: "2026-10-01T00:00:00",
+            },
+          ],
+        }),
+      );
+      await page.setViewportSize(viewport);
+      await page.goto(`${baseUrl}/profile/keys-management`);
+
+      const groups = page.getByTestId("key_fingerprint_group");
+      await expect(groups).toHaveCount(8, { timeout: 15_000 });
+      const tops = await groups.evaluateAll((items) =>
+        items.map((item) => Math.round(item.getBoundingClientRect().top)),
+      );
+      const lines = [...new Set(tops)].map(
+        (top) => tops.filter((value) => value === top).length,
+      );
+      // A phone breaks a line in two only where four groups do not fit.
+      expect(new Set(lines).size).toBe(1);
+      if (perLine === 4) expect(lines).toEqual([4, 4]);
+      else expect([2, 4]).toContain(lines[0]);
+    });
+  }
+
   for (const colorScheme of ["light", "dark"] as const) {
     test(`Labels in the ${colorScheme} theme`, async ({
       page,

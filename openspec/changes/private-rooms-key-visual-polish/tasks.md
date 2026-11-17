@@ -22,7 +22,7 @@ and SDK unit tests must stay green.
 
 ## 4. Fingerprint
 
-- [ ] 4.1 Lay the groups of the fingerprint out in lines of four, and of two where four do not fit, in `keys-management/KeysList.tsx` and `KeysManagement.module.scss`. Verify: a Playwright case "Even lines" in `keys-management.spec.ts` that asserts from the bounding boxes of the groups two lines of four at 1440 px and four lines of two at 390 px, the unit case "Grouped fingerprint" unchanged, and the Keys management screenshots updated under Docker
+- [x] 4.1 Lay the groups of the fingerprint out in lines of four, and of two where four do not fit, in `keys-management/KeysList.tsx` and `KeysManagement.module.scss`. Verify: a Playwright case "Even lines" in `keys-management.spec.ts` that asserts from the bounding boxes of the groups two lines of four at 1440 px and even lines of four or two at 390 px, and the unit case "Grouped fingerprint" unchanged. No screenshot shows a fingerprint (the mocked key of the screenshot cases has none), so none changed under Docker
 
 ## 5. Question that closes key setup
 

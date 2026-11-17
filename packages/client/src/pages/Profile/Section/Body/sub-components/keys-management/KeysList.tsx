@@ -58,6 +58,16 @@ import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import styles from "./KeysManagement.module.scss";
 
+// Lines of four groups, each of two halves, so a narrow screen breaks a
+// line between its halves and never elsewhere.
+const fingerprintLines = (groups: string[]) => {
+  const halves: string[][] = [];
+  for (let i = 0; i < groups.length; i += 2) halves.push(groups.slice(i, i + 2));
+  const lines: string[][][] = [];
+  for (let i = 0; i < halves.length; i += 2) lines.push(halves.slice(i, i + 2));
+  return lines;
+};
+
 type KeyItemProps = {
   keyData: TEncryptionKeyPair;
   onDelete: (keyData: TEncryptionKeyPair) => void;
@@ -188,19 +198,48 @@ const KeyItem: React.FC<KeyItemProps> = ({
               aria-describedby={fingerprintHintId}
               data-testid="key_fingerprint"
             >
-              {fingerprint
-                ? splitFingerprint(fingerprint).map((group, index) => (
-                    <React.Fragment key={`${index}-${group}`}>
-                      {index > 0 ? " " : null}
-                      <span
-                        className={styles.fingerprintGroup}
-                        data-testid="key_fingerprint_group"
-                      >
-                        {group}
-                      </span>
-                    </React.Fragment>
-                  ))
-                : "..."}
+              {fingerprint ? (
+                // A selection copies the groups on one line, whatever the layout.
+                <span
+                  onCopy={(event) => {
+                    event.clipboardData.setData(
+                      "text/plain",
+                      splitFingerprint(fingerprint).join(" "),
+                    );
+                    event.preventDefault();
+                  }}
+                >
+                  {fingerprintLines(splitFingerprint(fingerprint)).map(
+                    (line, lineIndex) => (
+                      <React.Fragment key={lineIndex}>
+                        {lineIndex > 0 ? " " : null}
+                        <span className={styles.fingerprintLine}>
+                          {line.map((half, halfIndex) => (
+                            <React.Fragment key={halfIndex}>
+                              {halfIndex > 0 ? " " : null}
+                              <span className={styles.fingerprintHalf}>
+                                {half.map((group, index) => (
+                                  <React.Fragment key={`${index}-${group}`}>
+                                    {index > 0 ? " " : null}
+                                    <span
+                                      className={styles.fingerprintGroup}
+                                      data-testid="key_fingerprint_group"
+                                    >
+                                      {group}
+                                    </span>
+                                  </React.Fragment>
+                                ))}
+                              </span>
+                            </React.Fragment>
+                          ))}
+                        </span>
+                      </React.Fragment>
+                    ),
+                  )}
+                </span>
+              ) : (
+                "..."
+              )}
             </Text>
             <Text
               id={fingerprintHintId}

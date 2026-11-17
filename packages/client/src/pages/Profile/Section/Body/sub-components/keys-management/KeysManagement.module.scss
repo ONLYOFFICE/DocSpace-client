@@ -144,9 +144,19 @@
   min-width: 0;
 }
 
+// Spec: private-rooms/key-management, "Key fingerprint is shown in groups"
 .fingerprintValue {
   word-break: normal;
   overflow-wrap: normal;
+}
+
+.fingerprintLine {
+  display: block;
+}
+
+.fingerprintHalf {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .fingerprintGroup {

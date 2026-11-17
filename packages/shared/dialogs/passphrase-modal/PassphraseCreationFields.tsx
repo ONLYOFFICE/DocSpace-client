@@ -48,6 +48,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import {
   PASSPHRASE_MIN_LENGTH,
+  PASSPHRASE_GENERATOR_SETTINGS,
   PASSPHRASE_SETTINGS,
   containsCommonPattern,
 } from "@docspace/shared/services/encryption/passphrase-strength";
@@ -155,6 +156,7 @@ export const PassphraseCreationFields = ({
             size={InputSize.base}
             isFullWidth
             passwordSettings={PASSPHRASE_SETTINGS}
+            generatorSettings={PASSPHRASE_GENERATOR_SETTINGS}
             onValidateInput={(progressScore) =>
               onRulesPassedChange(progressScore)
             }
@@ -162,9 +164,6 @@ export const PassphraseCreationFields = ({
             tooltipPasswordLength={`${t(
               "Common:PasswordMinimumLength",
             )}: ${PASSPHRASE_MIN_LENGTH}`}
-            tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-            tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-            tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
             tooltipPasswordPlace={RULES_TOOLTIP_PLACE}
             isDisabled={isLoading}
             hasError={passphraseHasError}

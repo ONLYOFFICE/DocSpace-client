@@ -36,14 +36,24 @@
 export const PASSPHRASE_MIN_LENGTH = 12;
 
 /** The rules of a new passphrase, in the shape the kit's password input takes. */
+// Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
 export const PASSPHRASE_SETTINGS = {
   minLength: PASSPHRASE_MIN_LENGTH,
-  upperCase: true,
-  digits: true,
-  specSymbols: true,
+  upperCase: false,
+  digits: false,
+  specSymbols: false,
   digitsRegexStr: "(?=.*\\d)",
   upperCaseRegexStr: "(?=.*[A-Z])",
   specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+} as const;
+
+/** What the generator draws a passphrase by. */
+// Spec: private-rooms/key-management, "A generated passphrase fills both fields"
+export const PASSPHRASE_GENERATOR_SETTINGS = {
+  ...PASSPHRASE_SETTINGS,
+  upperCase: true,
+  digits: true,
+  specSymbols: true,
 } as const;
 
 export type PassphraseStrength = "weak" | "fair" | "good" | "strong";
@@ -197,20 +207,12 @@ export function isPassphraseAcceptable(
   return result.strength !== "weak";
 }
 
-const COMPOSITION_RULES: ReadonlyArray<RegExp> = [
-  PASSPHRASE_SETTINGS.upperCaseRegexStr,
-  PASSPHRASE_SETTINGS.digitsRegexStr,
-  PASSPHRASE_SETTINGS.specSymbolsRegexStr,
-].map((rule) => new RegExp(rule));
-
 /**
- * Whether a new passphrase meets the length, the composition and the
- * common-pattern rule, checked as the kit's password input checks the first
- * two with PASSPHRASE_SETTINGS.
+ * Whether a new passphrase meets the length and the common-pattern rule; the
+ * kit's password input checks the length with PASSPHRASE_SETTINGS.
  */
 export function meetsPassphraseRules(passphrase: string): boolean {
   if (passphrase.trim().length < PASSPHRASE_SETTINGS.minLength) return false;
-  if (!COMPOSITION_RULES.every((rule) => rule.test(passphrase))) return false;
   return !containsCommonPattern(passphrase);
 }
 

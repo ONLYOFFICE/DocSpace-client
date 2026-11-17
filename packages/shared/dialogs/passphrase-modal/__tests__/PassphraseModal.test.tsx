@@ -47,6 +47,22 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vite
 
 import enCommon from "PUBLIC_DIR/locales/en/Common.json";
 
+// The props the dialog hands to the kit's password input, which still renders.
+const passwordInputProps: Array<Record<string, unknown>> = vi.hoisted(() => []);
+
+vi.mock("@onlyoffice/apps-ui-kit/components/password-input", async (io) => {
+  const actual = (await io()) as typeof import("@onlyoffice/apps-ui-kit/components/password-input");
+  const { createElement } = await import("react");
+  const Spy = (props: Record<string, unknown>) => {
+    passwordInputProps.push(props);
+    return createElement(
+      actual.PasswordInput as unknown as React.ComponentType<Record<string, unknown>>,
+      props,
+    );
+  };
+  return { ...actual, PasswordInput: Spy };
+});
+
 import { PassphraseModal } from "../PassphraseModal";
 
 beforeAll(() => {
@@ -352,6 +368,50 @@ describe("PassphraseModal", () => {
     });
   });
 
+  describe("A new passphrase needs no particular characters", () => {
+    const getSubmit = () =>
+      screen.getByRole("button", { name: "Common:ContinueButton" });
+
+    it("Lowercase words", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "lorem ipsum dolor sitx");
+      await user.type(getConfirmInput(), "lorem ipsum dolor sitx");
+
+      await waitFor(() => expect(getSubmit()).toBeEnabled());
+    });
+
+    it("Common pattern still refused", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "my password is long");
+      await user.type(getConfirmInput(), "my password is long");
+
+      expect(getSubmit()).toBeDisabled();
+    });
+
+    it("Rules tooltip", () => {
+      passwordInputProps.length = 0;
+      renderModal({ isNew: true });
+
+      const field = passwordInputProps.find((p) => p.inputName === "passphrase");
+      expect(field?.tooltipPasswordLength).toBe(
+        "Common:PasswordMinimumLength: 12",
+      );
+      expect(field?.passwordSettings).toMatchObject({
+        minLength: 12,
+        upperCase: false,
+        digits: false,
+        specSymbols: false,
+      });
+      expect(field?.tooltipPasswordDigits).toBeUndefined();
+      expect(field?.tooltipPasswordCapital).toBeUndefined();
+      expect(field?.tooltipPasswordSpecial).toBeUndefined();
+    });
+  });
+
   describe("The strength grade does not contradict the passphrase rules", () => {
     const strengthLine = () => screen.getByTestId("passphrase_strength");
 
@@ -361,12 +421,21 @@ describe("PassphraseModal", () => {
 
       await user.type(getPassphraseInput(), "lorem ipsum dolor sitx");
 
+      // The grade the meter gives it, no longer held at weak.
+      expect(
+        within(strengthLine()).getByText("Common:PassphraseStrengthGood"),
+      ).toBeInTheDocument();
+    });
+
+    it("Passphrase too short", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "Tx7$kp!aL2n");
+
       expect(
         within(strengthLine()).getByText("Common:PassphraseStrengthWeak"),
       ).toBeInTheDocument();
-      expect(
-        within(strengthLine()).queryByText("Common:PassphraseStrengthGood"),
-      ).not.toBeInTheDocument();
     });
 
     it("All rules met", async () => {

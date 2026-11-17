@@ -161,7 +161,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   });
 
   const isValid = isNew
-    ? rulesPassed && passphrase === confirmPassphrase
+    ? rulesPassed &&
+      isPassphraseAcceptable(passphrase) &&
+      passphrase === confirmPassphrase
     : passphrase.length >= MIN_LENGTH;
 
   const isDisabled = !isValid || isLoading;

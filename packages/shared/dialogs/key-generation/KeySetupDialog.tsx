@@ -102,7 +102,9 @@ export const KeySetupDialog = ({
   }, [step]);
 
   const isPassphraseValid =
-    rulesPassed && passphrase !== "" && passphrase === confirmPassphrase;
+    rulesPassed &&
+    isPassphraseAcceptable(passphrase) &&
+    passphrase === confirmPassphrase;
 
   const submitPassphrase = useCallback(() => {
     if (!isPassphraseAcceptable(passphrase)) {

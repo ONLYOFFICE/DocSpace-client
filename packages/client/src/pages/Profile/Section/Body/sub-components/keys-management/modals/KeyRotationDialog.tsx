@@ -299,9 +299,6 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tooltipPasswordLength={`${t(
                     "Common:PasswordMinimumLength",
                   )}: ${PASSPHRASE_MIN_LENGTH}`}
-                  tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-                  tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-                  tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
                   tooltipPasswordPlace={RULES_TOOLTIP_PLACE}
                   isDisabled={isLoading}
                   hasError={!!newFieldError}

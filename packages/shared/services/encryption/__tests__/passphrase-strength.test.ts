@@ -37,6 +37,7 @@ import { describe, it, expect } from "vitest";
 
 import {
   PASSPHRASE_MIN_LENGTH,
+  PASSPHRASE_SETTINGS,
   checkPassphraseStrength,
   containsCommonPattern,
   getShownPassphraseStrength,
@@ -186,13 +187,46 @@ describe("isPassphraseAcceptable", () => {
   });
 });
 
+describe("A new passphrase needs no particular characters", () => {
+  it("Lowercase words", () => {
+    const passphrase = "lorem ipsum dolor sitx";
+    expect(passphrase).toHaveLength(22);
+
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+    expect(isPassphraseAcceptable(passphrase)).toBe(true);
+  });
+
+  it("Common pattern still refused", () => {
+    const passphrase = "my password is long";
+
+    expect(meetsPassphraseRules(passphrase)).toBe(false);
+    expect(isPassphraseAcceptable(passphrase)).toBe(false);
+  });
+
+  it("asks for no capital letter, digit or punctuation", () => {
+    expect(PASSPHRASE_SETTINGS).toMatchObject({
+      minLength: 12,
+      upperCase: false,
+      digits: false,
+      specSymbols: false,
+    });
+  });
+});
+
 describe("The strength grade does not contradict the passphrase rules", () => {
   it("Long passphrase without a required character", () => {
     const passphrase = "lorem ipsum dolor sitx";
-    expect(passphrase).toHaveLength(22);
-    expect(checkPassphraseStrength(passphrase).strength).not.toBe("weak");
 
-    expect(meetsPassphraseRules(passphrase)).toBe(false);
+    expect(getShownPassphraseStrength(passphrase)).toBe(
+      checkPassphraseStrength(passphrase).strength,
+    );
+    expect(getShownPassphraseStrength(passphrase)).not.toBe("weak");
+  });
+
+  it("Passphrase too short", () => {
+    const passphrase = "Tx7$kp!aL2n";
+    expect(passphrase).toHaveLength(11);
+
     expect(getShownPassphraseStrength(passphrase)).toBe("weak");
   });
 
@@ -205,10 +239,6 @@ describe("The strength grade does not contradict the passphrase rules", () => {
   });
 
   it.each([
-    ["no capital letter", "tx7$kp!al2nqz@vr"],
-    ["a capital letter of another script only", "\u0416x7$kp!al2nqz@vr"],
-    ["no digit", "Txa$kp!aLbnQz@vR"],
-    ["no punctuation", "Tx7akpzaL2nQzbvR"],
     ["too short", "Tx7$kp!aL2n"],
     ["a common pattern", "Qwerty123456!"],
   ])("grades a passphrase with %s as weak", (_, passphrase) => {

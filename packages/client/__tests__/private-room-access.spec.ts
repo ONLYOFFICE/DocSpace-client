@@ -45,6 +45,7 @@ import {
   type EncryptedFilesHandlerHandle,
   type PrivacyroomHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectElementScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const ROOM_ID = 9100;
@@ -239,7 +240,7 @@ test.describe("Entering a private room without keys warns", () => {
   });
 });
 
-test.describe("A locked key is shown in a private room", () => {
+test.describe("A locked key is reported by a block in a private room", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -298,6 +299,48 @@ test.describe("A locked key is shown in a private room", () => {
     await expect(passphrase).toBeHidden();
     await expect(block).toBeVisible();
   });
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    for (const [device, viewport] of [
+      ["desktop", { width: 1280, height: 720 }],
+      ["mobile", { width: 375, height: 800 }],
+    ] as const) {
+      test(`Block in the ${colorScheme} theme on ${device}`, async ({
+        page,
+        mockRequest,
+        baseUrl,
+      }) => {
+        await page.emulateMedia({ colorScheme });
+        await page.setViewportSize(viewport);
+        mockRequest.use(
+          ...privacyroomKeysHandlers(TEST_PORT, {
+            initial: [seedUserKey],
+            userId: TEST_USER_ID,
+          }),
+          ...encryptedFilesHandlers(TEST_PORT, {
+            roomId: ROOM_ID,
+            ownerId: TEST_USER_ID,
+          }),
+        );
+
+        await page.goto(
+          `${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+        );
+        await expect(
+          page.locator('input[name="passphrase"], #passphrase input').first(),
+        ).toBeVisible({ timeout: 15000 });
+        await page.getByRole("button", { name: "Cancel" }).click();
+
+        const block = page.getByTestId("private_room_locked_block");
+        await expect(block).toBeVisible();
+        await expectElementScreenshot(block, [
+          device,
+          "private-room-access",
+          `locked-key-block-${colorScheme}.png`,
+        ]);
+      });
+    }
+  }
 
   test("Subfolder after a cancelled prompt", async ({
     page,

@@ -48,6 +48,7 @@ import type {
   IModalDialog,
   TSelector,
   IMediaViewer,
+  IHtmlFrame,
   IFloatingOperationsButton,
 } from "@onlyoffice/docspace-plugin-sdk";
 
@@ -2118,6 +2119,14 @@ class PluginStore {
         closeMediaViewer: () =>
           this.dispatchMessage({
             message: { actions: [Actions.closeMediaViewer] },
+            pluginName,
+          }),
+        showHtmlInFrame: (props: IHtmlFrame) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showHtmlInFrame],
+              htmlFrameProps: props,
+            },
             pluginName,
           }),
         updateMediaViewer: (props: IMediaViewer) =>

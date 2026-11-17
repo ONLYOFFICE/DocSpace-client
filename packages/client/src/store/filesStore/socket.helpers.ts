@@ -64,6 +64,7 @@ import {
   refreshInfoPanel,
   setInfoPanelSelectedRoom,
 } from "SRC_DIR/helpers/info-panel";
+import { getAiWorkspaceListUrlOf } from "SRC_DIR/helpers/aiWorkspace";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import i18n from "../../i18n";
@@ -614,13 +615,16 @@ export function redirectToParentImpl(
 
   switch (rootFolderType) {
     case FolderType.AiHub: {
-      const searchArea = RoomSearchArea.AiHub;
-      const aiFilter = RoomsFilter.getDefault(userId as string, searchArea);
-      aiFilter.searchArea = searchArea;
-      const params = aiFilter.toUrlParams(userId as string, true);
-      const path = getCategoryUrl(CategoryType.AiHub);
+      // Back to the list of the room's kind: the Agents for an agent. The
+      // path's only room is the one of the section.
+      const roomType =
+        pathParts.find((part) => part.roomType != null)?.roomType ??
+        self.selectedFolderStore.roomType;
 
-      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
+      return window.DocSpace.navigate(
+        getAiWorkspaceListUrlOf(roomType, userId ?? undefined),
+        { replace: true },
+      );
     }
     case FolderType.Archive: {
       const archiveFilter = RoomsFilter.getDefault(

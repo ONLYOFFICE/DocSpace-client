@@ -1,7 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import { createTestFilesActionsStore } from "./testHarness";
 
 // Mutable filter fake with the bits selectTag/selectOption touch.
@@ -97,6 +97,35 @@ describe("FilesActionsStore — navigation/filter (batch 6)", () => {
     const [url] = navigate.mock.calls[0];
     expect(url).toContain("/rooms/shared/filter?");
     expect(url).toContain(`searchArea=${RoomSearchArea.Templates}`);
+  });
+
+  it.each([
+    ["an agent", RoomsType.AiProjectRoom],
+    ["a skill set", RoomsType.InstructionsRoom],
+    ["a knowledge base", RoomsType.KnowledgeRoom],
+  ])("moveToRoomsPage returns from %s to the AI section's list of its kind", (_, roomType) => {
+    (
+      window as unknown as { DocSpace: { location: { pathname: string } } }
+    ).DocSpace.location.pathname = "/ai-rooms/123/filter";
+
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        navigationPath: [],
+        pathParts: [
+          { id: 1, title: "AI rooms" },
+          { id: 123, title: "Room", roomType },
+        ],
+        rootFolderType: FolderType.AiHub,
+      },
+    });
+
+    store.moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url.startsWith("/ai-rooms/filter?")).toBe(true);
+    expect(new URLSearchParams(url.split("?")[1]).getAll("type")).toEqual([
+      String(roomType),
+    ]);
   });
 
   it("onClickBack closes the media viewer when it is open", () => {

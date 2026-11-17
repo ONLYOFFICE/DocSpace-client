@@ -6,6 +6,7 @@ import {
   getAiWorkspaceCreatePayload,
   getAiWorkspaceListType,
   getAiWorkspaceTabUrl,
+  getAiWorkspaceListUrlOf,
   hasAiWorkspaceTemplates,
   getAiWorkspaceTitle,
   isAiWorkspaceCreateRefused,
@@ -66,6 +67,25 @@ describe("AI Chat section list tabs", () => {
       expect(isAiWorkspaceTemplates(`${search(url)}&tab=templates`)).toBe(false);
     },
   );
+});
+
+describe("getAiWorkspaceListUrlOf", () => {
+  const typeOf = (url: string) =>
+    new URLSearchParams(url.split("?")[1]).getAll("type");
+
+  it.each([
+    [RoomsType.AiProjectRoom, RoomsType.AiProjectRoom],
+    [RoomsType.InstructionsRoom, RoomsType.InstructionsRoom],
+    [RoomsType.KnowledgeRoom, RoomsType.KnowledgeRoom],
+    [undefined, RoomsType.AiProjectRoom],
+    [null, RoomsType.AiProjectRoom],
+    [RoomsType.AIRoom, RoomsType.AiProjectRoom],
+  ])("narrows the section's list of a room of type %s to type %s", (roomType, listType) => {
+    const url = getAiWorkspaceListUrlOf(roomType, "user-1");
+    expect(url).toMatch(/^\/ai-rooms\/filter\?/);
+    expect(typeOf(url)).toEqual([String(listType)]);
+    expect(isAiWorkspaceTemplates(`?${url.split("?")[1]}`)).toBe(false);
+  });
 });
 
 describe("isAgent", () => {

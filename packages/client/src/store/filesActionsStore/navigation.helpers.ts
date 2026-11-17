@@ -57,6 +57,10 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { getSectionTrashTarget } from "SRC_DIR/helpers/articleNavigation";
+import {
+  getAiWorkspaceListType,
+  getAiWorkspaceListUrlOf,
+} from "SRC_DIR/helpers/aiWorkspace";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
@@ -131,8 +135,18 @@ self: FilesActionStore
     filter.searchArea = RoomSearchArea.Forms;
   }
 
+  // The AI section opens the list of the room's kind (the Agents for an
+  // agent), or the list it is on: its list with no type draws the Rooms body.
   if (correctCategoryType === CategoryType.AiHub) {
-    filter.searchArea = RoomSearchArea.AiHub;
+    const roomType =
+      self.selectedFolderStore.pathParts?.find((part) => part.roomType != null)
+        ?.roomType ?? getAiWorkspaceListType(window.DocSpace.location.search);
+
+    window.DocSpace.navigate(
+      getAiWorkspaceListUrlOf(roomType, self.userStore?.user?.id),
+      { state, replace: true },
+    );
+    return;
   }
 
   if (

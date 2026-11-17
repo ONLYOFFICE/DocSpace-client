@@ -155,3 +155,22 @@ export const getAiWorkspaceTabUrl = (
       : "";
   return `/ai-rooms/filter?${filter.toUrlParams(userId, false)}${tab}`;
 };
+
+/**
+ * The URL of the list a room of the section belongs to: the Agents for an
+ * agent, the Skill sets or the Knowledge bases for those rooms, and the
+ * Agents for anything else. A room that is left, deleted or stepped out of
+ * returns here: the section's list with no type draws the Rooms body under
+ * the Agents title.
+ */
+export const getAiWorkspaceListUrlOf = (
+  roomType: unknown,
+  userId?: string,
+): string => {
+  const type = Number(roomType);
+  return getAiWorkspaceTabUrl(
+    false,
+    LIST_TYPES.has(type) ? (type as RoomsType) : RoomsType.AiProjectRoom,
+    userId,
+  );
+};

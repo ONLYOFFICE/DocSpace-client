@@ -346,19 +346,17 @@ async function withDetail(key, bug) {
       date: fmtDate(c.time),
       text: text(c).slice(0, 2000),
     })),
-    commentCount: Math.max(0, comments.length - 1),
     seenComments: comments.length,
   };
 }
 
 const FILES_ONLY_MARK = "files-only.json";
 
-// A bug counts as reviewed - and is left out of --sample/--batch - when an
-// earlier run wrote it to Bugzilla (applied/skipped in apply-log.json) or the
-// whole run was marked files-only; export adds the bugs that carry an audit
-// comment (auditedIds). A conflict, an error or a rejected decision
-// leaves the bug in the pool. --skip adds decisions files; --include-reviewed
-// turns the run scan off.
+// A bug counts as reviewed - and is left out of --sample/--batch - while its
+// last comment is an audit comment (auditedIds), or when its run was marked
+// files-only. A reply after the audit comment, a conflict, an error or a
+// rejected decision returns it to the pool. --skip adds decisions files;
+// --include-reviewed turns all of it off.
 function reviewedIds(args, currentDir) {
   const files = list(args.skip).map((f) => path.resolve(f));
   const missing = files.filter((f) => !existsSync(f));
@@ -372,20 +370,16 @@ function reviewedIds(args, currentDir) {
     const run = path.join(RUNS_DIR, e.name);
     if (!e.isDirectory() || run === currentDir) continue;
     const decisions = path.join(run, "decisions.json");
-    const log = path.join(run, "apply-log.json");
     if (existsSync(path.join(run, FILES_ONLY_MARK)) && existsSync(decisions)) {
       for (const d of readJson(decisions)) ids.add(Number(d.id));
-    } else if (existsSync(log)) {
-      for (const [id, r] of Object.entries(readJson(log))) {
-        if (r.outcome === "applied" || r.outcome === "skipped") ids.add(Number(id));
-      }
     }
   }
   return ids;
 }
 
-// runs/ is local to one checkout: a bug that already carries an audit comment
-// in Bugzilla counts as reviewed for everyone, whoever ran the audit.
+// Bugzilla, not the local runs/, is what every checkout shares: a bug whose
+// last comment is an audit comment is reviewed whoever ran the audit, and a
+// reply after it (an answer to needs-info, say) brings the bug back.
 async function auditedIds(key, product) {
   const res = await withRetry(() => bzGet("bug", key, {
     product,
@@ -395,7 +389,13 @@ async function auditedIds(key, product) {
     v1: `${COMMENT_FOOTER} (`,
     include_fields: "id",
   }));
-  return (res.bugs || []).map((b) => b.id);
+  const ids = (res.bugs || []).map((b) => b.id);
+  const lastIsAudit = await mapLimit(ids, 5, async (id) => {
+    const cm = await withRetry(() => bzGet(`bug/${id}/comment`, key));
+    const comments = cm.bugs?.[id]?.comments || [];
+    return FOOTER_RE.test(decodeEntities(comments.at(-1)?.text || ""));
+  });
+  return ids.filter((_, i) => lastIsAudit[i]);
 }
 
 // The user declined to write this run to Bugzilla: its bugs still count as
@@ -413,6 +413,11 @@ function cmdFilesOnly(args) {
 // Nothing is written until every bug is fetched: a half-made run folder would
 // become the "latest run" for every later command.
 async function cmdExport(args, key) {
+  const modes = ["ids", "sample", "batch"].filter((m) => args[m] !== undefined);
+  if (modes.length > 1) {
+    console.error(`pick one of --ids, --sample, --batch; got ${modes.map((m) => `--${m}`).join(", ")}`);
+    process.exit(2);
+  }
   const dir = newRunDir(args);
   const reviewed = reviewedIds(args, dir);
   const sample = positiveInt(args, "sample");
@@ -430,7 +435,7 @@ async function cmdExport(args, key) {
   const now = Date.now();
   const commits = commitIndex(repos);
   const raw = await searchOpen(key, product, components);
-  if (!args["include-reviewed"]) for (const id of await auditedIds(key, product)) reviewed.add(id);
+  if (!args.ids && !args["include-reviewed"]) for (const id of await auditedIds(key, product)) reviewed.add(id);
   const bugs = raw.map((b) => ({
     ...b,
     summary: decodeEntities(b.summary),
@@ -579,7 +584,7 @@ function cmdMerge(args) {
 
 /* ------------------------------------------------------------------ plan */
 
-const commentOf = (d) => d.comment ?? d.comment_ru ?? "";
+const commentOf = (d) => d.comment ?? "";
 
 function validateDecision(d, bug, fields, lang) {
   const errors = [];
@@ -686,7 +691,6 @@ async function cmdPlan(args, key) {
       id: bug.id,
       summary: bug.summary,
       verdict: d.verdict,
-      expectLastChange: bug.last_change_time,
       watch: Object.fromEntries(WATCHED_FIELDS.map((f) => [f, bug[f] ?? ""])),
       seenComments: bug.seenComments,
       comment: withFooter(commentOf(d), model),
@@ -757,24 +761,15 @@ function fieldsApplied(a, live) {
 // Only what can overturn the decision is a conflict: a watched field changed
 // after the export, or someone other than the audit commented since. A new CC
 // or keyword is not. New comments are the ones past the count seen at export,
-// so local and server clocks never meet. Plans made before `watch` existed
-// fall back to the bug's last change time, before `seenComments` to the
-// export time.
-function conflictOf(a, live, comments, exportedAt) {
-  if (!a.watch) {
-    return live.last_change_time !== a.expectLastChange ? `changed at ${live.last_change_time} after export` : null;
-  }
+// so local and server clocks never meet.
+function conflictOf(a, live, comments) {
   const changed = WATCHED_FIELDS.filter((f) => decodeEntities(live[f] ?? "") !== decodeEntities(a.watch[f] ?? ""));
   if (changed.length) return `${changed.join(", ")} changed after export`;
-  const since = Date.parse(exportedAt);
-  const fresh = Number.isInteger(a.seenComments)
-    ? comments.slice(a.seenComments)
-    : comments.filter((c) => Date.parse(c.time) > since);
-  const foreign = fresh.find((c) => !FOOTER_RE.test(decodeEntities(c.text)));
+  const foreign = comments.slice(a.seenComments).find((c) => !FOOTER_RE.test(decodeEntities(c.text)));
   return foreign ? `new comment by ${foreign.creator} at ${foreign.time}` : null;
 }
 
-async function applyOne(a, key, confirm, exportedAt) {
+async function applyOne(a, key, confirm) {
   let live;
   let comments;
   try {
@@ -791,7 +786,7 @@ async function applyOne(a, key, confirm, exportedAt) {
   const commentDone = comments.some((c) => commentCore(decodeEntities(c.text)) === wanted);
   const fieldsDone = fieldsApplied(a, live);
   if (fieldsDone && commentDone) return { outcome: "skipped", message: "already applied" };
-  const conflict = conflictOf(a, live, comments, exportedAt);
+  const conflict = conflictOf(a, live, comments);
   if (conflict) return { outcome: "conflict", message: conflict };
   const body = fieldsDone ? {} : { ...a.set };
   if (!commentDone) body.comment = { body: a.comment };
@@ -812,12 +807,13 @@ async function cmdApply(args, key) {
     console.error(`plan was made for ${plan.host}, but the configured host is ${HOST}; refusing to write`);
     process.exit(2);
   }
-  // Plans from before signed comments lack a comment on some actions.
-  if (!plan.model) {
+  if (!plan.model || plan.actions.some((a) => !a.comment || !a.watch || !Number.isInteger(a.seenComments))) {
     console.error("actions.json was made by an older audit.mjs; run plan again");
     process.exit(2);
   }
   const only = new Set(list(args.only).map(Number));
+  const unknown = [...only].filter((id) => !plan.actions.some((a) => a.id === id));
+  if (unknown.length) console.error(`not in the plan, ignored: ${unknown.map((id) => `#${id}`).join(", ")}`);
   const actions = plan.actions.filter((a) => !only.size || only.has(a.id));
   const confirm = Boolean(args.confirm);
   const logFile = path.join(dir, "apply-log.json");
@@ -826,12 +822,12 @@ async function cmdApply(args, key) {
   if (!confirm) console.log("DRY RUN (pass --confirm to write)\n");
   for (const a of actions) {
     // Written once is final: a later conflict or read error must not erase the
-    // record, or the bug drops out of "reviewed" and gets a second comment.
+    // record the report is built from.
     if (log[a.id]?.outcome === "applied") {
       console.log(`#${a.id}  ${a.type.padEnd(8)}  ${"applied".padEnd(11)}  already in apply-log.json (${log[a.id].at})`);
       continue;
     }
-    const result = await applyOne(a, key, confirm, plan.exportedAt);
+    const result = await applyOne(a, key, confirm);
     console.log(`#${a.id}  ${a.type.padEnd(8)}  ${result.outcome.padEnd(11)}  ${result.message}`);
     if (!confirm) continue;
     log[a.id] = { type: a.type, verdict: a.verdict, at: new Date().toISOString(), ...result };
@@ -1036,8 +1032,8 @@ Examples:
 Flags:
   export   --out <dir>  --name <label>  --product DocSpace  --components A,B
            --sample N | --ids 1,2 | --batch N
-           (--sample/--batch leave out bugs an earlier run wrote to Bugzilla,
-           a run marked files-only, and bugs that carry an audit comment;
+           (one of the three; --sample/--batch leave out bugs whose last comment
+           is an audit comment and the bugs of a run marked files-only;
            --skip <decisions.json,...> adds more, --include-reviewed turns that off)
            --suggestion-severity enhancement  --repos <extra path,...>
            (commits are searched in client, ../server and the ../../ sibling repos

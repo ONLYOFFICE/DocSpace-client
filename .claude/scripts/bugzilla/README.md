@@ -83,11 +83,11 @@ refusing a bug decided twice and listing bugs no part covered.
 
 The review between `export` and `plan` (writing `decisions.json`) is done by
 `/bugs-audit` — see its SKILL.md for the decision schema and evidence rules.
-`export --sample/--batch` leave out every bug an earlier run wrote to Bugzilla,
-a run marked `files-only` (a run the user chose not to apply) and every open
-bug that already carries an audit comment (so runs from another machine
-count too); consecutive batches never review the same bug twice, and a
-conflict, an error or a rejected decision brings the bug back
+`export --sample/--batch` leave out every open bug whose last comment is an
+audit comment (looked up in Bugzilla, so runs from another machine count too)
+and the bugs of a run marked `files-only` (a run the user chose not to apply);
+consecutive batches never review the same bug twice, and a reply after the
+audit comment, a conflict, an error or a rejected decision brings the bug back
 (`--include-reviewed` to override). `export` also flags `Revert` commits
 (`Revert "Revert …"` is not one) and every id of a multi-id subject.
 `plan` rejects a bug decided twice. `apply` refuses a plan made for another

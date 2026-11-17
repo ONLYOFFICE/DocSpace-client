@@ -88,15 +88,16 @@ The last line of the output, `run: <folder>`, names the run folder — use that
 folder as `<dir>`.
 
 `--sample N` (pilot: a mix of bugs with `Bug <ID>` commits, suggestions and the
-longest idle), `--ids 1,2`, or `--batch N` for the next chunk. `--sample` and
-`--batch` leave out every bug an earlier run already wrote to Bugzilla
-(`applied`/`skipped` in its `apply-log.json`), every bug of a run marked
-files-only (Step 5) and every open bug that already carries an audit comment
-in Bugzilla (found by its footer, so runs made on another machine count too).
-A later batch thus never comments twice or re-raises a priority, while bugs
-that hit a `conflict`, an error or a rejected decision come back. The output says how many were left out. `--skip <file,...>` adds
-decisions files (a missing one is an error); `--include-reviewed` turns the
-scan off — only on the user's request. `--ids` is never filtered. `index.json` holds every open bug in scope with signals;
+longest idle), `--ids 1,2`, or `--batch N` for the next chunk — one of them,
+never two. `--sample` and `--batch` leave out every open bug whose **last**
+comment is an audit comment (found in Bugzilla by its footer, so runs made on
+another machine count too) and every bug of a run marked files-only (Step 5).
+A later batch thus never comments twice or re-raises a priority, while a bug
+someone answered after the audit comment (a `needs-info` reply, say), or one
+that hit a `conflict`, an error or a rejected decision, comes back. The output
+says how many were left out. `--skip <file,...>` adds decisions files (a
+missing one is an error); `--include-reviewed` turns the filter off — only on
+the user's request. `--ids` is never filtered. `index.json` holds every open bug in scope with signals;
 `bugs.json` holds the selected ones with description and the last comments.
 
 Signals per bug: `kind` (bug/suggestion), `ageDays`, `idleDays`, `commits`
@@ -112,7 +113,8 @@ component (table above), not from memory:
 - Read the description and comments. Open attachments with `/bug <id>` only
   when the text is not enough.
 - Check `commits`: a `Fix Bug <ID>` commit is strong evidence, but confirm it
-  is on the main line (`git branch -a --contains <hash>`) and that the code it
+  is on the main line (`git -C <repo> branch -a --contains <hash>`, `<repo>`
+  being the one the commit's `repo` field names) and that the code it
   touched still behaves as fixed. A commit with `revert: true`, or any bug with
   `fixReverted: true`, is **not** evidence of a fix — the fix was taken back.
   A revert whose subject has no bug id is not flagged, so still read the code.
@@ -149,8 +151,7 @@ Write `<dir>/decisions.json` — an array:
 }
 ```
 
-`comment` (in the chosen language; the older name `comment_ru` is still read)
-is **required for every decision**: every reviewed bug gets a comment, whatever
+`comment` (in the chosen language) is **required for every decision**: every reviewed bug gets a comment, whatever
 the verdict, so it is visible in Bugzilla that it was reviewed. `plan` appends
 the "— Generated with Claude Code (<model>)" line itself; do not write it in
 `comment`. `estimate` goes into the whiteboard, so write it in the same

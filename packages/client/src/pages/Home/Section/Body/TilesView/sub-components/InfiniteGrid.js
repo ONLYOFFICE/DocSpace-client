@@ -57,10 +57,17 @@ const HeaderItem = ({ children, className, ...rest }) => {
   );
 };
 
-// An AI project is a room to the tile container, which wraps it as one; its
-// tile is taller, so its rows are told apart by the room type of the item.
+// The rooms of the AI section - an agent, a skill set, a knowledge base - are
+// rooms to the tile container, which wraps them as one; their tiles are
+// taller, so their rows are told apart by the room type of the item.
+const AI_TILE_ROOM_TYPES = [
+  RoomsType.AiProjectRoom,
+  RoomsType.InstructionsRoom,
+  RoomsType.KnowledgeRoom,
+];
+
 const isAgentTile = (child) =>
-  child?.props?.children?.props?.item?.roomType === RoomsType.AiProjectRoom;
+  AI_TILE_ROOM_TYPES.includes(child?.props?.children?.props?.item?.roomType);
 
 const Card = ({ children, ...rest }) => {
   const getItemSize = (child) => {

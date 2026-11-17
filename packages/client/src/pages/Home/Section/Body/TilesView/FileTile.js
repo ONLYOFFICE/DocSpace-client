@@ -47,6 +47,7 @@ import { FolderTile } from "@onlyoffice/apps-ui-kit/components/tiles/folder-tile
 import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
 import { TemplateTile } from "@onlyoffice/apps-ui-kit/components/tiles/template-tile";
 import AiProjectTile from "./AiProjectTile";
+import AiSourceRoomTile from "./AiSourceRoomTile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -247,6 +248,21 @@ const FileTile = (props) => {
     if (item.isRoom && item.roomType === RoomsType.AiProjectRoom)
       return (
         <AiProjectTile
+          {...commonProps}
+          key={item.id}
+          badgeUrl={badgeUrl}
+          thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
+        />
+      );
+    // A skill set and a knowledge base tell what their table rows tell.
+    if (
+      item.isRoom &&
+      (item.roomType === RoomsType.InstructionsRoom ||
+        item.roomType === RoomsType.KnowledgeRoom)
+    )
+      return (
+        <AiSourceRoomTile
           {...commonProps}
           key={item.id}
           badgeUrl={badgeUrl}

@@ -49,7 +49,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/room-member-flows";
 import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 const ChangeRoomOwner = (props) => {
@@ -111,8 +110,8 @@ const ChangeRoomOwner = (props) => {
     }
 
     if (isAIProject) {
-      // The checkbox reads "leave the project": unchecked keeps the former
-      // owner in it as a project manager.
+      // The checkbox reads "Leave agent": unchecked keeps the former owner
+      // in it as an Agent manager.
       await changeAiProjectOwner(candidate.id, !isChecked);
       updateInfoPanelMembers();
     } else {
@@ -146,11 +145,11 @@ const ChangeRoomOwner = (props) => {
     : t("Common:ChangeTheRoomOwner");
 
   const infoText = isAIProject
-    ? t("Common:AIProjectChangeOwnerInfo", { productName: getBrandName("ProductName") })
+    ? t("Common:AIProjectChangeOwnerInfo")
     : t("Common:PeopleSelectorInfo");
 
   const footerCheckboxLabel = isAIProject
-    ? t("Common:AIProjectLeave")
+    ? t("Common:LeaveTheAgent")
     : isFormSpace
       ? t("Common:LeaveTheFormSpace")
       : t("Common:LeaveTheRoom");

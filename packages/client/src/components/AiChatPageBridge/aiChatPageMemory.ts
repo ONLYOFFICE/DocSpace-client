@@ -37,19 +37,26 @@ const STORAGE_PREFIX = "aiChatPage";
 
 const storageKey = (userId: string) => `${STORAGE_PREFIX}:${userId}`;
 
-/** The chat page the sidebar's AI Chat section had open, and its conversation. */
+/**
+ * The chat page the sidebar's AI Chat section had open, its conversation,
+ * and the address of the page the chat covered.
+ */
 export type TAiChatPageMemory = {
   page: "chat" | "history";
   threadId?: string;
+  /** The path and query of the page under the chat. */
+  address?: string;
 };
 
 /**
  * The fullscreen chat the user was in, kept per user for the browser tab: the
  * chat is not an address of its own - it covers the page it was opened over -
  * so a reload would otherwise land on that page (the agents list, when it was
- * opened from the sidebar). Closing the chat forgets it. Storage may be
- * unavailable (a private window, blocked site data): then nothing is
- * remembered and a reload shows the page under the chat.
+ * opened from the sidebar). Closing the chat forgets it. Only a reload of
+ * the page the chat covered brings it back: another address opened in the
+ * tab shows that page (`isAiChatPageAt`). Storage may be unavailable (a
+ * private window, blocked site data): then nothing is remembered and a
+ * reload shows the page under the chat.
  */
 export const readAiChatPage = (
   userId: string | undefined,
@@ -64,6 +71,9 @@ export const readAiChatPage = (
       page: saved.page,
       ...(typeof saved.threadId === "string" && saved.threadId
         ? { threadId: saved.threadId }
+        : {}),
+      ...(typeof saved.address === "string" && saved.address
+        ? { address: saved.address }
         : {}),
     };
   } catch {
@@ -84,3 +94,9 @@ export const writeAiChatPage = (
     // Nothing to remember without storage.
   }
 };
+
+/** The chat was remembered over the page at `address` (path and query). */
+export const isAiChatPageAt = (
+  memory: TAiChatPageMemory,
+  address: string,
+): boolean => memory.address === address;

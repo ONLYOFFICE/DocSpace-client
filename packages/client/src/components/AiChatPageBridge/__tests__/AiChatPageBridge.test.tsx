@@ -115,9 +115,9 @@ const titled = (count: number, prefix: string) =>
     title: `${prefix} ${index}`,
   }));
 
-const renderBridge = (chatEntityId?: string) =>
+const renderBridge = (chatEntityId?: string, path = "/rooms/shared") =>
   render(
-    <MemoryRouter initialEntries={["/rooms/shared"]}>
+    <MemoryRouter initialEntries={[path]}>
       <AiChatPageBridge canLoadThreads chatEntityId={chatEntityId} />
     </MemoryRouter>,
   );
@@ -195,5 +195,37 @@ describe("AiChatPageBridge — tab title", () => {
     chat.store.isVisible = true;
     renderBridge();
     expect(document.title).toBe("Rooms - Product");
+  });
+});
+
+describe("AiChatPageBridge — a reload", () => {
+  const agents = "/ai-rooms/filter?searchArea=AiHub&type=12";
+  const remember = () =>
+    sessionStorage.setItem(
+      "aiChatPage:u1",
+      JSON.stringify({ page: "chat", threadId: "plain0", address: agents }),
+    );
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    sessionStorage.clear();
+    chat.threads.threads = titled(1, "plain");
+  });
+
+  afterEach(cleanup);
+
+  it("brings the fullscreen chat back over the page it covered", async () => {
+    remember();
+    renderBridge(undefined, agents);
+    await flush();
+    expect(dialogsStore.requestAiChatPage).toHaveBeenCalledWith("chat", null, "plain0");
+  });
+
+  it("shows another address opened in the tab with no chat over it, and forgets the chat", async () => {
+    remember();
+    renderBridge(undefined, `${agents}&tab=templates`);
+    await flush();
+    expect(dialogsStore.requestAiChatPage).not.toHaveBeenCalled();
+    expect(sessionStorage.getItem("aiChatPage:u1")).toBeNull();
   });
 });

@@ -50,6 +50,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import {
+  isAiChatPageAt,
   readAiChatPage,
   type TAiChatPageMemory,
   writeAiChatPage,
@@ -106,6 +107,9 @@ const AiChatPageBridgeComponent = ({
   const { isAiProjectRoomRoot } = useStore("treeFoldersStore");
 
   const location = useLocation();
+  const address = `${location.pathname}${location.search}`;
+  const addressRef = React.useRef(address);
+  addressRef.current = address;
   const aiChatStore = useAiChatStore();
   const chatStores = useAiChatStores();
   // Read through a ref: a rebuilt API is no reason to read Recent again.
@@ -126,16 +130,22 @@ const AiChatPageBridgeComponent = ({
   // The chat a reload interrupted: `undefined` until it is read - the user
   // and the right to use AI may arrive after the first render - and `null`
   // once it is reopened or there was none. Until then the chat being closed
-  // is not a reason to forget it.
+  // is not a reason to forget it. A chat remembered over another page than
+  // the one the tab loaded (another address of the section opened by URL)
+  // is forgotten: that page is shown, with no chat over it.
   const [interrupted, setInterrupted] = React.useState<
     TAiChatPageMemory | null | undefined
   >(undefined);
   const isRestoring = interrupted !== null;
   React.useEffect(() => {
     if (!userId || !canLoadThreads) return;
-    setInterrupted((current) =>
-      current === undefined ? readAiChatPage(userId) : current,
-    );
+    setInterrupted((current) => {
+      if (current !== undefined) return current;
+      const saved = readAiChatPage(userId);
+      if (!saved || isAiChatPageAt(saved, addressRef.current)) return saved;
+      writeAiChatPage(userId, null);
+      return null;
+    });
   }, [userId, canLoadThreads]);
 
   // Reopened once the conversations are read: one that is gone, or was never
@@ -163,10 +173,18 @@ const AiChatPageBridgeComponent = ({
         ? {
             page: isOnHistoryPage ? "history" : "chat",
             ...(activeThreadId ? { threadId: activeThreadId } : {}),
+            address,
           }
         : null,
     );
-  }, [isRestoring, userId, isChatPage, isOnHistoryPage, activeThreadId]);
+  }, [
+    isRestoring,
+    userId,
+    isChatPage,
+    isOnHistoryPage,
+    activeThreadId,
+    address,
+  ]);
 
   // The tab is titled after the fullscreen chat, not after the page under
   // it - whose own reads title it again meanwhile (the agents list loading

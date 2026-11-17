@@ -35,7 +35,11 @@
 
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { readAiChatPage, writeAiChatPage } from "../aiChatPageMemory";
+import {
+  isAiChatPageAt,
+  readAiChatPage,
+  writeAiChatPage,
+} from "../aiChatPageMemory";
 
 describe("AI chat page memory", () => {
   beforeEach(() => sessionStorage.clear());
@@ -44,6 +48,17 @@ describe("AI chat page memory", () => {
     writeAiChatPage("u1", { page: "chat", threadId: "t1" });
     expect(readAiChatPage("u1")).toEqual({ page: "chat", threadId: "t1" });
     expect(readAiChatPage("u2")).toBeNull();
+  });
+
+  it("remembers the address of the page under the chat, and is brought back only there", () => {
+    const address = "/ai-rooms/filter?searchArea=AiHub&type=12";
+    writeAiChatPage("u1", { page: "chat", threadId: "t1", address });
+    const saved = readAiChatPage("u1");
+    expect(saved).toEqual({ page: "chat", threadId: "t1", address });
+    expect(saved && isAiChatPageAt(saved, address)).toBe(true);
+    expect(saved && isAiChatPageAt(saved, `${address}&tab=templates`)).toBe(false);
+    // A record of no address belongs to no page.
+    expect(isAiChatPageAt({ page: "chat" }, address)).toBe(false);
   });
 
   it("remembers the history without a conversation", () => {

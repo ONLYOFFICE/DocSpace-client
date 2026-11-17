@@ -99,14 +99,16 @@ const Card = ({ children, ...rest }) => {
 };
 
 const Item = ({ children, className, ...rest }) => {
-  // A row of agents lays out as a row of rooms; only its height differs.
-  const isRoom = className === "isRoom" || className === "isAgent";
+  // A row of agents lays out as a row of rooms, with wider and taller cards.
+  const isAgent = className === "isAgent";
+  const isRoom = className === "isRoom" || isAgent;
   const isTemplate = className === "isTemplate";
   return (
     <StyledItem
       className={`Item ${className}`}
       isRoom={isRoom}
       isTemplate={isTemplate}
+      isAgent={isAgent}
       {...rest}
     >
       {children}
@@ -124,13 +126,14 @@ const InfiniteGrid = (props) => {
     currentFolderId,
     isRooms,
     isTemplates,
+    isAgents,
     tilesGridColumns,
     setTilesGridColumns,
     ...rest
   } = props;
 
   const countTilesInRow =
-    tilesGridColumns || getCountTilesInGrid(isRooms, isTemplates);
+    tilesGridColumns || getCountTilesInGrid(isRooms, isTemplates, isAgents);
 
   const observeRow = useGridColumns(setTilesGridColumns);
 
@@ -302,8 +305,14 @@ export default inject(
 
     const currentFolderId = selectedFolderStore.id;
 
+    // The Agents list of the AI Chat section: its rows are agent cards.
+    const isAgents =
+      isAiSectionFolder &&
+      filesList.some((item) => item.roomType === RoomsType.AiProjectRoom);
+
     return {
       filesList,
+      isAgents,
       hasMoreFiles,
       filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,

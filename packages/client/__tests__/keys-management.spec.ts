@@ -879,10 +879,10 @@ test.describe("Profile > Keys Management: keyboard only", () => {
 
     const confirmation = page
       .getByRole("dialog")
-      .filter({ hasText: "Unsaved changes" });
+      .filter({ hasText: "Close key setup?" });
     await expect(confirmation).toBeVisible({ timeout: 5_000 });
     const discard = confirmation.getByRole("button", {
-      name: "Close menu",
+      name: "Close setup",
       exact: true,
     });
     for (let i = 0; i < 5; i++) {

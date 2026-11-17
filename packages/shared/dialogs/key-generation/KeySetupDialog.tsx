@@ -329,6 +329,9 @@ export const KeySetupDialog = ({
         description={
           step === "recovery" ? t("Common:KeySetupDiscardRecovery") : undefined
         }
+        // Spec: private-rooms/key-management, "The question that closes key setup names key setup"
+        title={t("Common:KeySetupDiscardTitle")}
+        confirmLabel={t("Common:KeySetupDiscardConfirm")}
       />
     </>
   );

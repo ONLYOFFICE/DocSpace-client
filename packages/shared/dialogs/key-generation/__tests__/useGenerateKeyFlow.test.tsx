@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import enCommon from "PUBLIC_DIR/locales/en/Common.json";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
@@ -528,7 +528,7 @@ describe("Key setup dialog", () => {
   const openConfirmation = () =>
     screen
       .queryAllByRole("dialog")
-      .find((dialog) => dialog.textContent?.includes("Common:UnsavedChanges")) ??
+      .find((dialog) => dialog.textContent?.includes("Common:KeySetupDiscardTitle")) ??
     null;
 
   it("Closed on the recovery phrase step", async () => {
@@ -538,10 +538,36 @@ describe("Key setup dialog", () => {
 
     await user.keyboard("{Escape}");
 
-    expect(openConfirmation()).toHaveTextContent(
-      "Common:KeySetupDiscardRecovery",
-    );
+    const confirmation = openConfirmation();
+    expect(confirmation).toHaveTextContent("Common:KeySetupDiscardRecovery");
+    expect(
+      within(confirmation as HTMLElement).getByRole("button", {
+        name: "Common:KeySetupDiscardConfirm",
+      }),
+    ).toBeInTheDocument();
+    expect(confirmation).not.toHaveTextContent("Common:UnsavedChanges");
     expect(props.onCancel).not.toHaveBeenCalled();
+  });
+
+  it("Closed on the passphrase step with typed input", async () => {
+    const user = userEvent.setup();
+    const { show } = await renderDialog();
+    show("passphrase");
+    await user.type(
+      screen.getByPlaceholderText("Common:Passphrase"),
+      "typed input",
+    );
+
+    await user.keyboard("{Escape}");
+
+    const confirmation = openConfirmation();
+    expect(confirmation).not.toBeNull();
+    expect(
+      within(confirmation as HTMLElement).getByRole("button", {
+        name: "Common:KeySetupDiscardConfirm",
+      }),
+    ).toBeInTheDocument();
+    expect(confirmation).not.toHaveTextContent("Common:CloseMenu");
   });
 
   it("Closed on the explanation", async () => {

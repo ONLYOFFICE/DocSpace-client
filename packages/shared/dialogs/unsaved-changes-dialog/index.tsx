@@ -50,6 +50,8 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
   onConfirm,
   zIndex = 401,
   description,
+  title,
+  confirmLabel,
 }) => {
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
@@ -74,7 +76,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
       isLoading={!ready}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("Common:UnsavedChanges")}</ModalDialog.Header>
+      <ModalDialog.Header>{title ?? t("Common:UnsavedChanges")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{description ?? t("Common:UnsavedChangesDescription")}</Text>
       </ModalDialog.Body>
@@ -85,7 +87,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
           key="OKButton"
           onClick={onConfirm}
           size={ButtonSize.normal}
-          label={t("Common:CloseMenu")}
+          label={confirmLabel ?? t("Common:CloseMenu")}
         />
         <Button
           scale

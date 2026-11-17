@@ -26,7 +26,7 @@ and SDK unit tests must stay green.
 
 ## 5. Question that closes key setup
 
-- [ ] 5.1 Give `packages/shared/dialogs/unsaved-changes-dialog` an optional title and an optional label of the confirming action; add `Common:KeySetupDiscardTitle` and `Common:KeySetupDiscardConfirm` to `public/locales/en/Common.json`, write their translator comments with `translate-comments`, translate them with `translate-locales`, and pass them from `KeySetupDialog.tsx`. Verify: unit cases "Closed on the recovery phrase step" and "Closed on the passphrase step with typed input" in `useGenerateKeyFlow.test.tsx`, a case "Passphrase change dialog" in `keys-management/modals/__tests__/KeyRotationDialog.test.tsx` asserting the general labels, and `cd common/tests && npx vitest run test/locales.test.js`
+- [x] 5.1 Give `packages/shared/dialogs/unsaved-changes-dialog` an optional title and an optional label of the confirming action; add `Common:KeySetupDiscardTitle` and `Common:KeySetupDiscardConfirm` to `public/locales/en/Common.json`, write their translator comments with `translate-comments`, translate them with `translate-locales`, and pass them from `KeySetupDialog.tsx`. Verify: unit cases "Closed on the recovery phrase step" and "Closed on the passphrase step with typed input" in `useGenerateKeyFlow.test.tsx`, a case "Passphrase change dialog" in `keys-management/modals/__tests__/KeyRotationDialog.keyboard.test.tsx` (the suite that renders the real dialog) asserting the general labels, and `cd common/tests && npx vitest run test/locales.test.js`
 
 ## 6. Mark of a missing key
 

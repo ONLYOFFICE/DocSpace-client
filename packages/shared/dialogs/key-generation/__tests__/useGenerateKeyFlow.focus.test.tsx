@@ -106,7 +106,7 @@ describe("useGenerateKeyFlow with its dialogs", () => {
 
     await user.keyboard("{Escape}");
     expect(
-      screen.getByRole("button", { name: "Common:CloseMenu" }),
+      screen.getByRole("button", { name: "Common:KeySetupDiscardConfirm" }),
     ).toBeInTheDocument();
     await user.keyboard("{Enter}");
 

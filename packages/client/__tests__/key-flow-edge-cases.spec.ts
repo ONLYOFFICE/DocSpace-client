@@ -137,9 +137,9 @@ test.describe("Keys management — edge cases", () => {
     await page.keyboard.press("Escape");
     const confirmation = page
       .getByRole("dialog")
-      .filter({ hasText: "Unsaved changes" });
+      .filter({ hasText: "Close key setup?" });
     await confirmation
-      .getByRole("button", { name: "Close menu", exact: true })
+      .getByRole("button", { name: "Close setup", exact: true })
       .click();
 
     await expect(acknowledge).toBeHidden({ timeout: 5000 });
@@ -279,7 +279,7 @@ test.describe("Keys management — edge cases", () => {
 
     const confirmation = page
       .getByRole("dialog")
-      .filter({ hasText: "Unsaved changes" });
+      .filter({ hasText: "Close key setup?" });
     await expect(confirmation).toBeVisible({ timeout: 5000 });
     await confirmation
       .getByRole("button", { name: "Cancel", exact: true })
@@ -311,7 +311,7 @@ test.describe("Keys management — edge cases", () => {
 
     const confirmation = page
       .getByRole("dialog")
-      .filter({ hasText: "Unsaved changes" });
+      .filter({ hasText: "Close key setup?" });
     await expect(confirmation).toBeVisible({ timeout: 5000 });
     const cancel = confirmation.getByRole("button", {
       name: "Cancel",
@@ -356,10 +356,10 @@ test.describe("Keys management — edge cases", () => {
 
     const confirmation = page
       .getByRole("dialog")
-      .filter({ hasText: "Unsaved changes" });
+      .filter({ hasText: "Close key setup?" });
     await expect(confirmation).toBeVisible({ timeout: 5000 });
     await confirmation
-      .getByRole("button", { name: "Close menu", exact: true })
+      .getByRole("button", { name: "Close setup", exact: true })
       .click();
 
     await expect(confirmation).toBeHidden({ timeout: 5000 });

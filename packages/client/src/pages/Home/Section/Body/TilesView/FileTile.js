@@ -41,6 +41,7 @@ import { useNavigate } from "react-router";
 
 import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 import { RoomsType } from "@docspace/shared/enums";
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
 
 import { FileTile as FileTileComponent } from "@onlyoffice/apps-ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@onlyoffice/apps-ui-kit/components/tiles/folder-tile";
@@ -48,6 +49,7 @@ import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
 import { TemplateTile } from "@onlyoffice/apps-ui-kit/components/tiles/template-tile";
 import AiProjectTile from "./AiProjectTile";
 import AiSourceRoomTile from "./AiSourceRoomTile";
+import SkillTilePreview from "./SkillTilePreview";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -110,6 +112,7 @@ const FileTile = (props) => {
     disableDrag,
     canCreateSecurity,
     documentTitle,
+    isSkill,
   } = props;
 
   const navigate = useNavigate();
@@ -317,6 +320,21 @@ const FileTile = (props) => {
     if (item.isFolder)
       return <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />;
 
+    // A skill shows the command that calls it and its description, as its
+    // table row and the Info panel do, instead of a Markdown thumbnail.
+    if (isSkill)
+      return (
+        <FileTileComponent
+          {...commonProps}
+          key={item.id}
+          temporaryIcon={<SkillTilePreview file={item} />}
+          thumbnail=""
+          thumbSize={thumbSize}
+          contentElement={quickButtonsComponent}
+          thumbnailClick={onFilesClick}
+        />
+      );
+
     return (
       <FileTileComponent
         {...commonProps}
@@ -371,6 +389,7 @@ export default inject(
       treeFoldersStore,
       infoPanelStore,
       currentQuotaStore,
+      selectedFolderStore,
     },
     { item },
   ) => {
@@ -398,6 +417,14 @@ export default inject(
       isHighlight,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
+      isSkill:
+        !item?.isFolder &&
+        !item?.isRoom &&
+        isSkillFile(item ?? {}, {
+          id: selectedFolderStore.id,
+          roomType: selectedFolderStore.roomType,
+          parentRoomType: selectedFolderStore.parentRoomType,
+        }),
     };
   },
 )(

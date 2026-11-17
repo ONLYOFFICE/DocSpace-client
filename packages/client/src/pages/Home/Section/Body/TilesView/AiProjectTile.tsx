@@ -57,7 +57,7 @@ const DASH = "\u2014";
 const SHOWN_SOURCES = 2;
 
 /** The linked rooms of a kind a card names, and how many more it counts as "+N". */
-export const getShownSources = (names: string[] = []) => ({
+const getShownSources = (names: string[] = []) => ({
   shown: names.slice(0, SHOWN_SOURCES),
   rest: Math.max(0, names.length - SHOWN_SOURCES),
 });

@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Impressão digital da chave",
   "KeyFingerprintHint": "Os colegas podem pedir esta impressão digital para confirmar que sua chave foi alterada.",
   "KeyId": "ID da chave",
+  "KeySetupStep": "Etapa {{step}} de {{total}}",
   "KeysManagement": "Gerenciamento de chaves",
   "Kilobyte": "KB",
   "Knowledge": "Base de Conhecimento",

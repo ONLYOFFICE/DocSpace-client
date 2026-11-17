@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Otisk klíče",
   "KeyFingerprintHint": "Kolegové vás mohou požádat o tento otisk, aby si ověřili, že se váš klíč změnil.",
   "KeyId": "ID klíče",
+  "KeySetupStep": "Krok {{step}} z {{total}}",
   "KeysManagement": "Správa klíčů",
   "Kilobyte": "KB",
   "Knowledge": "Znalostní báze",

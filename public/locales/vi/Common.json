@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Dấu vân tay khoá",
   "KeyFingerprintHint": "Đồng nghiệp có thể hỏi bạn dấu vân tay này để xác nhận rằng khoá của bạn đã thay đổi.",
   "KeyId": "ID khoá",
+  "KeySetupStep": "Bước {{step}}/{{total}}",
   "KeysManagement": "Quản lý khoá",
   "Kilobyte": "KB",
   "Knowledge": "Cơ sở kiến thức",

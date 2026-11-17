@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "密钥指纹",
   "KeyFingerprintHint": "同事可能会向您索取此指纹，以确认您的密钥已更改。",
   "KeyId": "密钥 ID",
+  "KeySetupStep": "第 {{step}} 步，共 {{total}} 步",
   "KeysManagement": "密钥管理",
   "Kilobyte": "KB",
   "Knowledge": "知识库",

@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Schlüssel-Fingerabdruck",
   "KeyFingerprintHint": "Kollegen können Sie nach diesem Fingerabdruck fragen, um zu bestätigen, dass sich Ihr Schlüssel geändert hat.",
   "KeyId": "Schlüssel-ID",
+  "KeySetupStep": "Schritt {{step}} von {{total}}",
   "KeysManagement": "Schlüsselverwaltung",
   "Kilobyte": "KB",
   "Knowledge": "Wissensdatenbank",

@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "بصمة أصبع المفتاح",
   "KeyFingerprintHint": "قد يطلب منك الزملاء هذه البصمة للتأكد من أن مفتاحك قد تغيّر.",
   "KeyId": "معرّف المفتاح",
+  "KeySetupStep": "الخطوة {{step}} من {{total}}",
   "KeysManagement": "إدارة المفاتيح",
   "Kilobyte": "كيلو بايت",
   "Knowledge": "قاعدة المعرفة",

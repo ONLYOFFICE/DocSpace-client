@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "キーフィンガープリント",
   "KeyFingerprintHint": "キーが変更されたことを確認するため、同僚からこのフィンガープリントを求められることがあります。",
   "KeyId": "キーID",
+  "KeySetupStep": "ステップ {{step}}/{{total}}",
   "KeysManagement": "キー管理",
   "Kilobyte": "KB",
   "Knowledge": "ナレッジベース",

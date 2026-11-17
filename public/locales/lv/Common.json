@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Atslēgas nospiedums",
   "KeyFingerprintHint": "Kolēģi var lūgt jums šo nospiedumu, lai pārliecinātos, ka jūsu atslēga ir mainīta.",
   "KeyId": "Atslēgas ID",
+  "KeySetupStep": "{{step}}. darbība no {{total}}",
   "KeysManagement": "Atslēgu pārvaldība",
   "Kilobyte": "KB",
   "Knowledge": "Zināšanu bāze",

@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Otisak ključa",
   "KeyFingerprintHint": "Kolege mogu da vas pitaju za ovaj otisak da bi potvrdile da se vaš ključ promenio.",
   "KeyId": "ID ključa",
+  "KeySetupStep": "Korak {{step}} od {{total}}",
   "KeysManagement": "Upravljanje ključevima",
   "Kilobyte": "KB",
   "Knowledge": "Baza znanja",

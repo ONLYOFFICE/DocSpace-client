@@ -47,7 +47,7 @@ type TConfirmProps = {
 
 const mocks = vi.hoisted(() => ({
   confirm: null as TConfirmProps | null,
-  passphrase: null as Record<string, unknown> | null,
+  setup: null as Record<string, unknown> | null,
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -60,12 +60,12 @@ vi.mock("@docspace/shared/dialogs/confirmation-modal", () => ({
   },
 }));
 // The real key-generation flow runs; only its dialogs and crypto are stubbed.
-vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
-  PassphraseModal: (props: Record<string, unknown>) => {
-    mocks.passphrase = props;
+vi.mock("@docspace/shared/dialogs/key-generation/KeySetupDialog", () => ({
+  KeySetupDialog: (props: Record<string, unknown>) => {
+    mocks.setup = props;
     useEffect(
       () => () => {
-        mocks.passphrase = null;
+        mocks.setup = null;
       },
       [],
     );
@@ -116,7 +116,7 @@ const CreateRoomDialog = CreateRoomDialogComponent as unknown as React.Component
 describe("Cancelling key generation started from the Private section", () => {
   beforeEach(() => {
     mocks.confirm = null;
-    mocks.passphrase = null;
+    mocks.setup = null;
   });
 
   it("User cancels inside key generation", () => {
@@ -138,10 +138,10 @@ describe("Cancelling key generation started from the Private section", () => {
     );
 
     act(() => mocks.confirm!.onConfirm());
-    expect(mocks.passphrase).not.toBeNull();
+    expect(mocks.setup).not.toBeNull();
 
     act(() => {
-      (mocks.passphrase!.onCancel as () => void)();
+      (mocks.setup!.onCancel as () => void)();
     });
 
     expect(onClose).toHaveBeenCalledTimes(1);

@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "ລາຍນິ້ວມືກຸນແຈ",
   "KeyFingerprintHint": "ເພື່ອນຮ່ວມງານອາດຈະຂໍລາຍນິ້ວມືນີ້ຈາກທ່ານ ເພື່ອຢືນຢັນວ່າກຸນແຈຂອງທ່ານໄດ້ປ່ຽນແລ້ວ.",
   "KeyId": "ລະຫັດກຸນແຈ",
+  "KeySetupStep": "ຂັ້ນຕອນ {{step}} ຈາກ {{total}}",
   "KeysManagement": "ການຈັດການກຸນແຈ",
   "Kilobyte": "KB",
   "Knowledge": "ຖານຄວາມຮູ້",

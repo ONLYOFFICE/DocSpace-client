@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Amprentă digitală a cheii",
   "KeyFingerprintHint": "Colegii vă pot cere această amprentă pentru a confirma că cheia dvs. s-a schimbat.",
   "KeyId": "ID cheie",
+  "KeySetupStep": "Pasul {{step}} din {{total}}",
   "KeysManagement": "Gestionare chei",
   "Kilobyte": "KB",
   "Knowledge": "Baza de cunoștințe",

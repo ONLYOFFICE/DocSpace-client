@@ -1358,6 +1358,7 @@
   "KeyFingerprint": "Key fingerprint",
   "KeyFingerprintHint": "Colleagues may ask you for this fingerprint to confirm that your key has changed.",
   "KeyId": "Key ID",
+  "KeySetupStep": "Step {{step}} of {{total}}",
   "KeysManagement": "Keys management",
   "Kilobyte": "KB",
   "Knowledge": "Knowledge base",

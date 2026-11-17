@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Sleutelvingerafdruk",
   "KeyFingerprintHint": "Collega's kunnen u om deze vingerafdruk vragen om te bevestigen dat uw sleutel is gewijzigd.",
   "KeyId": "Sleutel-ID",
+  "KeySetupStep": "Stap {{step}} van {{total}}",
   "KeysManagement": "Sleutelbeheer",
   "Kilobyte": "KB",
   "Knowledge": "Kennisbank",

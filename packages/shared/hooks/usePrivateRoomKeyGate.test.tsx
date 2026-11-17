@@ -3,23 +3,20 @@ import { useEffect } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const captured = {
-  passphrase: null as Record<string, unknown> | null,
+  setup: null as Record<string, unknown> | null,
 };
 
-vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
-  PassphraseModal: (props: Record<string, unknown>) => {
-    captured.passphrase = props;
+vi.mock("../dialogs/key-generation/KeySetupDialog", () => ({
+  KeySetupDialog: (props: Record<string, unknown>) => {
+    captured.setup = props;
     useEffect(
       () => () => {
-        captured.passphrase = null;
+        captured.setup = null;
       },
       [],
     );
     return null;
   },
-}));
-vi.mock("../dialogs/key-generation/RecoveryPhraseDisplayModal", () => ({
-  RecoveryPhraseDisplayModal: () => null,
 }));
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
@@ -64,7 +61,7 @@ const renderGate = (deps: Partial<TGateDeps> = {}) =>
 
 describe("usePrivateRoomKeyGate", () => {
   beforeEach(() => {
-    captured.passphrase = null;
+    captured.setup = null;
   });
 
   it("starts key generation for a user without a key", () => {
@@ -72,7 +69,7 @@ describe("usePrivateRoomKeyGate", () => {
 
     act(() => gate.confirmKeyGeneration());
 
-    expect(captured.passphrase).not.toBeNull();
+    expect(captured.setup).not.toBeNull();
   });
 
   it("User cancels inside key generation", () => {
@@ -82,7 +79,7 @@ describe("usePrivateRoomKeyGate", () => {
     act(() => gate.confirmKeyGeneration());
 
     act(() => {
-      (captured.passphrase!.onCancel as () => void)();
+      (captured.setup!.onCancel as () => void)();
     });
 
     expect(onKeyGenerationCancelled).toHaveBeenCalledTimes(1);
@@ -102,7 +99,7 @@ describe("usePrivateRoomKeyGate", () => {
 
     act(() => gate.confirmKeyGeneration());
 
-    expect(captured.passphrase).toBeNull();
+    expect(captured.setup).toBeNull();
   });
 
   it("Key already exists", () => {
@@ -110,6 +107,6 @@ describe("usePrivateRoomKeyGate", () => {
 
     act(() => gate.confirmKeyGeneration());
 
-    expect(captured.passphrase).toBeNull();
+    expect(captured.setup).toBeNull();
   });
 });

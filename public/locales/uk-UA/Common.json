@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Відбиток ключа",
   "KeyFingerprintHint": "Колеги можуть попросити у вас цей відбиток, щоб переконатися, що ваш ключ змінився.",
   "KeyId": "Ідентифікатор ключа",
+  "KeySetupStep": "Крок {{step}} з {{total}}",
   "KeysManagement": "Керування ключами",
   "Kilobyte": "KB",
   "Knowledge": "База знань",

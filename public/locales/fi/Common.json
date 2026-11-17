@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "Avaimen sormenjälki",
   "KeyFingerprintHint": "Kollegasi voivat pyytää sinulta tätä sormenjälkeä varmistaakseen, että avaimesi on vaihtunut.",
   "KeyId": "Avaimen tunnus",
+  "KeySetupStep": "Vaihe {{step}}/{{total}}",
   "KeysManagement": "Avainten hallinta",
   "Kilobyte": "KB",
   "Knowledge": "Tietämyskanta",

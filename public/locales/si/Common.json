@@ -1352,6 +1352,7 @@
   "KeyFingerprint": "යතුරු ඇඟිලි සලකුණ",
   "KeyFingerprintHint": "ඔබගේ යතුර වෙනස් වූ බව තහවුරු කිරීමට සගයන් ඔබෙන් මෙම ඇඟිලි සලකුණ ඉල්ලිය හැක.",
   "KeyId": "යතුරු හැඳුනුම්පත",
+  "KeySetupStep": "පියවර {{step}} / {{total}}",
   "KeysManagement": "යතුරු කළමනාකරණය",
   "Kilobyte": "කි.බ.",
   "Knowledge": "දැනුම් පදනම",

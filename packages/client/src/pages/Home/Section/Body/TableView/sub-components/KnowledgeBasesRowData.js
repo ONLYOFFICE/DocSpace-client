@@ -38,9 +38,13 @@ import { inject, observer } from "mobx-react";
 
 import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
+import { VectorizationStatus } from "@docspace/shared/enums";
 
 import KnowledgeBaseStatusBadge from "SRC_DIR/components/KnowledgeBaseStatusBadge";
-import { getKnowledgeBaseStatus } from "SRC_DIR/store/KnowledgeBasesStore";
+import {
+  getKnowledgeBaseStatus,
+  KNOWLEDGE_BASE_REREAD_MS,
+} from "SRC_DIR/store/KnowledgeBasesStore";
 
 import FileNameCell from "./FileNameCell";
 import AuthorCell from "./AuthorCell";
@@ -86,6 +90,19 @@ const KnowledgeBasesRowDataComponent = (props) => {
   React.useEffect(() => {
     fetchState({ id, filesCount });
   }, [fetchState, id, filesCount]);
+
+  // Indexing ends without the room changing: a base being indexed is read
+  // again while its row is shown.
+  const isIndexing =
+    getKnowledgeBaseStatus(state) === VectorizationStatus.InProgress;
+  React.useEffect(() => {
+    if (!isIndexing) return undefined;
+    const timer = setInterval(
+      () => fetchState({ id, filesCount }, true),
+      KNOWLEDGE_BASE_REREAD_MS,
+    );
+    return () => clearInterval(timer);
+  }, [isIndexing, fetchState, id, filesCount]);
 
   const storageColumns = localStorage.getItem(tableStorageName);
   const lastColumn = useMemo(

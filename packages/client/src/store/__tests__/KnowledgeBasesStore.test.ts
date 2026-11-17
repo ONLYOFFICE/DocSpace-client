@@ -66,7 +66,7 @@ describe("KnowledgeBasesStore", () => {
     expect(getAiProjectKnowledgeFiles).toHaveBeenCalledTimes(2);
   });
 
-  it("reads a base again when forced, and not after a failed read", async () => {
+  it("reads a base again when forced, and after a failed read", async () => {
     getAiProjectKnowledgeFiles.mockResolvedValueOnce([
       file(VectorizationStatus.InProgress),
     ]);
@@ -82,13 +82,19 @@ describe("KnowledgeBasesStore", () => {
     await flush();
     expect(store.get(room)).toEqual({ total: 1, inProgress: 0, failed: 0 });
 
-    getAiProjectKnowledgeFiles.mockRejectedValue(new Error("403"));
+    getAiProjectKnowledgeFiles.mockRejectedValueOnce(new Error("down"));
     const closed = { id: 8, filesCount: 1 };
     store.fetch(closed);
     await flush();
-    store.fetch(closed, true);
-    await flush();
-    expect(getAiProjectKnowledgeFiles).toHaveBeenCalledTimes(3);
     expect(store.get(closed)).toBeNull();
+
+    // A failed read is not remembered: the next ask reads the base again.
+    getAiProjectKnowledgeFiles.mockResolvedValueOnce([
+      file(VectorizationStatus.Completed),
+    ]);
+    store.fetch(closed);
+    await flush();
+    expect(getAiProjectKnowledgeFiles).toHaveBeenCalledTimes(4);
+    expect(store.get(closed)).toEqual({ total: 1, inProgress: 0, failed: 0 });
   });
 });

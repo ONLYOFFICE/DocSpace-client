@@ -71,7 +71,10 @@ import type SkillsStore from "SRC_DIR/store/SkillsStore";
 import type KnowledgeBasesStore from "SRC_DIR/store/KnowledgeBasesStore";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
-import { getKnowledgeBaseStatus } from "SRC_DIR/store/KnowledgeBasesStore";
+import {
+  getKnowledgeBaseStatus,
+  KNOWLEDGE_BASE_REREAD_MS,
+} from "SRC_DIR/store/KnowledgeBasesStore";
 
 import { FormInfo } from "./sub-components/FormInfo";
 import SkillIcon, { isSkillSetIconRoom } from "SRC_DIR/components/SkillIcon";
@@ -209,6 +212,26 @@ const Details = ({
         true,
       );
   }, [knowledgeBaseId, knowledgeBaseFilesCount, fetchKnowledgeBase]);
+
+  // ... and while they are being indexed, again every little while.
+  const isIndexingBase = knowledgeStatus === VectorizationStatus.InProgress;
+  useEffect(() => {
+    if (knowledgeBaseId === null || !isIndexingBase) return undefined;
+    const timer = setInterval(
+      () =>
+        fetchKnowledgeBase?.(
+          { id: knowledgeBaseId, filesCount: knowledgeBaseFilesCount },
+          true,
+        ),
+      KNOWLEDGE_BASE_REREAD_MS,
+    );
+    return () => clearInterval(timer);
+  }, [
+    knowledgeBaseId,
+    knowledgeBaseFilesCount,
+    isIndexingBase,
+    fetchKnowledgeBase,
+  ]);
 
   // An agent of the Files list comes without its settings: its model is
   // what its tile reads.

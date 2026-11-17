@@ -64,17 +64,20 @@ export const getKnowledgeBaseStatus = (
   return VectorizationStatus.Completed;
 };
 
+/** How often a base shown while its files are indexed is read again. */
+export const KNOWLEDGE_BASE_REREAD_MS = 10_000;
+
 /**
  * How far each knowledge base of the list is indexed. A room's list entry
  * does not say it, so the files of the room are read: once per number of
- * its files when a row first asks, and again when the Info panel shows the
- * base.
+ * its files when a row first asks, again when the Info panel shows the
+ * base, and every `KNOWLEDGE_BASE_REREAD_MS` while a shown base is indexed.
  */
 class KnowledgeBasesStore {
   /** The bases read so far, by room id and number of files. */
   states: Record<string, TKnowledgeBaseState> = {};
 
-  /** The reads in flight and the ones that failed: neither is started again. */
+  /** The reads in flight: one is not started twice. */
   private requests = new Set<string>();
 
   constructor() {
@@ -107,12 +110,14 @@ class KnowledgeBasesStore {
             inProgress: count(VectorizationStatus.InProgress),
             failed: count(VectorizationStatus.Failed),
           };
-          // A read that succeeded may be asked for again.
-          this.requests.delete(key);
         });
       })
-      // A base that cannot be read keeps its row without a status.
-      .catch(() => undefined);
+      // A base that cannot be read keeps its row without a status, until
+      // it is asked for again.
+      .catch(() => undefined)
+      .finally(() => {
+        this.requests.delete(key);
+      });
   };
 }
 

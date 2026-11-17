@@ -71,9 +71,11 @@
   }
 }
 
+// The labels take the width of the longest one, so none is cut; the values
+// take the rest of the line.
 .wrapper {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
   gap: 8px 12px;
   width: 100%;
   box-sizing: border-box;

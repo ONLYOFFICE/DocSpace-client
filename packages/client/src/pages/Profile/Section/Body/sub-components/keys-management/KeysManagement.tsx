@@ -63,7 +63,7 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
-import { AutoLockSetting } from "./AutoLockSetting";
+import { AutoLockSetting } from "SRC_DIR/components/AutoLockSetting/AutoLockSetting";
 import { KeysList } from "./KeysList";
 import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";

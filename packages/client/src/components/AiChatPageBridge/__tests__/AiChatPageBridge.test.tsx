@@ -92,6 +92,12 @@ vi.mock("@onlyoffice/apps-ui-kit/hooks/useAnimation", () => ({
   AnimationEvents: { END_ANIMATION: "end-animation" },
 }));
 
+vi.mock("SRC_DIR/helpers/utils", () => ({
+  setDocumentTitle: (subTitle: string) => {
+    document.title = `${subTitle} - Product`;
+  },
+}));
+
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: string) =>
     name === "dialogsStore"
@@ -157,5 +163,37 @@ describe("AiChatPageBridge — Recent", () => {
       expect.arrayContaining([expect.objectContaining({ id: "agent0" })]),
       expect.anything(),
     );
+  });
+});
+
+describe("AiChatPageBridge — tab title", () => {
+  afterEach(() => {
+    cleanup();
+    sessionStorage.clear();
+    chat.store.isVisible = false;
+    chat.store.effectiveFullscreen = false;
+  });
+
+  it("titles the tab after the fullscreen chat, keeps it over the page's own title and gives it back", async () => {
+    document.title = "Agents - Product";
+    chat.store.isVisible = true;
+    chat.store.effectiveFullscreen = true;
+    const { unmount } = renderBridge();
+    expect(document.title).toBe("Common:AIChat - Product");
+
+    // The list under the chat finishes loading and titles the tab.
+    document.title = "Agents - Product";
+    await act(async () => {});
+    expect(document.title).toBe("Common:AIChat - Product");
+
+    unmount();
+    expect(document.title).toBe("Agents - Product");
+  });
+
+  it("leaves the title to the page under a side-panel chat", () => {
+    document.title = "Rooms - Product";
+    chat.store.isVisible = true;
+    renderBridge();
+    expect(document.title).toBe("Rooms - Product");
   });
 });

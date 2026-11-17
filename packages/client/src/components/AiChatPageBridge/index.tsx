@@ -37,6 +37,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import {
   useAiChatStore,
@@ -46,6 +47,7 @@ import {
 import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { useStore } from "SRC_DIR/store/useStore";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import {
   readAiChatPage,
@@ -90,12 +92,14 @@ type TRecentSource = {
  *   the chat's own list;
  * - remembers the fullscreen chat for the tab and opens it again after a
  *   reload: the chat has no address, so the reload would show the page it
- *   covered - the agents list - in its place.
+ *   covered - the agents list - in its place;
+ * - titles the browser tab after the fullscreen chat while it is shown.
  */
 const AiChatPageBridgeComponent = ({
   canLoadThreads = false,
   chatEntityId,
 }: AiChatPageBridgeProps) => {
+  const { t } = useTranslation(["Common"]);
   const dialogsStore = useStore("dialogsStore");
   const request = dialogsStore.aiChatPageRequest;
   const userId = useStore("userStore").user?.id;
@@ -163,6 +167,31 @@ const AiChatPageBridgeComponent = ({
         : null,
     );
   }, [isRestoring, userId, isChatPage, isOnHistoryPage, activeThreadId]);
+
+  // The tab is titled after the fullscreen chat, not after the page under
+  // it - whose own reads title it again meanwhile (the agents list loading
+  // after the chat opened over it): their title is kept for when the chat
+  // goes, and the chat's put back.
+  React.useEffect(() => {
+    if (!isChatPage) return undefined;
+    let underlying = document.title;
+    setDocumentTitle(t("Common:AIChat"));
+    const chatTitle = document.title;
+    const observer = new MutationObserver(() => {
+      if (document.title === chatTitle) return;
+      underlying = document.title;
+      document.title = chatTitle;
+    });
+    observer.observe(document.head, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+    return () => {
+      observer.disconnect();
+      if (document.title === chatTitle) document.title = underlying;
+    };
+  }, [isChatPage, t]);
 
   // Recent lists the conversations of no agent. Outside an agent they are
   // the chat's own list, read once per scope (the chat reads it the same way

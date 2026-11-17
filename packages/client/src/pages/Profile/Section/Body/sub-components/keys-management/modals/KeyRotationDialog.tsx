@@ -59,6 +59,7 @@ import {
   isPassphraseAcceptable,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 import { PASSPHRASE_SETTINGS } from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
+import { PassphraseStrengthLine } from "@docspace/shared/dialogs/passphrase-modal/PassphraseStrengthLine";
 
 import styles from "./KeyRotationDialog.module.scss";
 
@@ -305,6 +306,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tabIndex={0}
                 />
               </FieldContainer>
+              <PassphraseStrengthLine passphrase={newPassphrase} />
             </div>
 
             <div className={styles.inputGroup}>

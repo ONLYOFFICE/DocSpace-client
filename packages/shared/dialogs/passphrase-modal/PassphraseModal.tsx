@@ -66,12 +66,15 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import {
   PASSPHRASE_MIN_LENGTH,
-  checkPassphraseStrength,
+  PASSPHRASE_SETTINGS,
+  containsCommonPattern,
   isPassphraseAcceptable,
-  type PassphraseStrength,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 
+import { PassphraseStrengthLine } from "./PassphraseStrengthLine";
 import styles from "./PassphraseModal.module.scss";
+
+export { PASSPHRASE_SETTINGS };
 
 type PassphraseModalProps = {
   visible: boolean;
@@ -90,23 +93,6 @@ type PassphraseModalProps = {
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
-
-const STRENGTH_COLOR: Record<PassphraseStrength, string> = {
-  weak: "var(--status-error)",
-  fair: "var(--status-warning)",
-  good: "var(--status-icon-color-positive)",
-  strong: "var(--status-icon-color-positive)",
-};
-
-export const PASSPHRASE_SETTINGS = {
-  minLength: MIN_LENGTH,
-  upperCase: true,
-  digits: true,
-  specSymbols: true,
-  digitsRegexStr: "(?=.*\\d)",
-  upperCaseRegexStr: "(?=.*[A-Z])",
-  specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
-} as const;
 
 export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   visible,
@@ -189,26 +175,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     dirty: isNew && (passphrase !== "" || confirmPassphrase !== ""),
     onCancel: handleCancel,
   });
-
-  const strengthResult = useMemo(
-    () => (isNew && passphrase ? checkPassphraseStrength(passphrase) : null),
-    [isNew, passphrase],
-  );
-
-  const strengthLabel = (strength: PassphraseStrength): string => {
-    switch (strength) {
-      case "weak":
-        return t("Common:PassphraseStrengthWeak");
-      case "fair":
-        return t("Common:PassphraseStrengthFair");
-      case "good":
-        return t("Common:PassphraseStrengthGood");
-      case "strong":
-        return t("Common:PassphraseStrengthStrong");
-      default:
-        return "";
-    }
-  };
 
   const isValid = isNew
     ? rulesPassed && passphrase === confirmPassphrase
@@ -335,21 +301,8 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 />
               </FieldContainer>
 
-              {strengthResult ? (
-                <div className={styles.strengthRow}>
-                  <Text fontSize="12px" color="var(--text-secondary)">
-                    {t("Common:PassphraseStrengthLabel")}:{" "}
-                  </Text>
-                  <Text
-                    fontSize="12px"
-                    fontWeight={600}
-                    color={STRENGTH_COLOR[strengthResult.strength]}
-                  >
-                    {strengthLabel(strengthResult.strength)}
-                  </Text>
-                </div>
-              ) : null}
-              {strengthResult?.containsCommonPattern ? (
+              {isNew ? <PassphraseStrengthLine passphrase={passphrase} /> : null}
+              {isNew && containsCommonPattern(passphrase) ? (
                 <Text fontSize="12px" color="var(--status-error)">
                   {t("Common:PassphraseCommonPattern")}
                 </Text>

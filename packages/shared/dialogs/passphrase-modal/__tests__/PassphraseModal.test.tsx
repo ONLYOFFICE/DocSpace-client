@@ -343,6 +343,35 @@ describe("PassphraseModal", () => {
     });
   });
 
+  describe("The strength grade does not contradict the passphrase rules", () => {
+    const strengthLine = () => screen.getByTestId("passphrase_strength");
+
+    it("Long passphrase without a required character", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "lorem ipsum dolor sitx");
+
+      expect(
+        within(strengthLine()).getByText("Common:PassphraseStrengthWeak"),
+      ).toBeInTheDocument();
+      expect(
+        within(strengthLine()).queryByText("Common:PassphraseStrengthGood"),
+      ).not.toBeInTheDocument();
+    });
+
+    it("All rules met", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "Tx7$kp!aL2nQz@vR");
+
+      expect(
+        within(strengthLine()).getByText("Common:PassphraseStrengthStrong"),
+      ).toBeInTheDocument();
+    });
+  });
+
   // Spec: private-rooms/key-management, "Key dialogs ignore a click beside them"
   it("Backdrop click on the unlock prompt", () => {
     const { onCancel } = renderModal();

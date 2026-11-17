@@ -339,6 +339,33 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
   });
 });
 
+describe("KeyRotationDialog: the strength grade does not contradict the passphrase rules", () => {
+  const strengthLine = () => screen.getByTestId("passphrase_strength");
+
+  it("Passphrase change", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "lorem ipsum dolor sitx");
+
+    expect(strengthLine()).toHaveTextContent("Common:PassphraseStrengthWeak");
+  });
+
+  it("All rules met", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "Tx7$kp!aL2nQz@vR");
+
+    expect(strengthLine()).toHaveTextContent("Common:PassphraseStrengthStrong");
+  });
+
+  it("No strength line before a new passphrase is typed", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+
+    expect(screen.queryByTestId("passphrase_strength")).not.toBeInTheDocument();
+  });
+});
+
 describe("KeyRotationDialog: a new passphrase equal to the current one is named", () => {
   const SAME = "Correct1horse!battery";
 

@@ -39,7 +39,9 @@ import {
   PASSPHRASE_MIN_LENGTH,
   checkPassphraseStrength,
   containsCommonPattern,
+  getShownPassphraseStrength,
   isPassphraseAcceptable,
+  meetsPassphraseRules,
 } from "../passphrase-strength";
 
 describe("PASSPHRASE_MIN_LENGTH", () => {
@@ -181,5 +183,35 @@ describe("isPassphraseAcceptable", () => {
     const r = checkPassphraseStrength("abcdefghijkl");
     expect(["fair", "good"]).toContain(r.strength);
     expect(isPassphraseAcceptable("abcdefghijkl")).toBe(true);
+  });
+});
+
+describe("The strength grade does not contradict the passphrase rules", () => {
+  it("Long passphrase without a required character", () => {
+    const passphrase = "lorem ipsum dolor sitx";
+    expect(passphrase).toHaveLength(22);
+    expect(checkPassphraseStrength(passphrase).strength).not.toBe("weak");
+
+    expect(meetsPassphraseRules(passphrase)).toBe(false);
+    expect(getShownPassphraseStrength(passphrase)).toBe("weak");
+  });
+
+  it("All rules met", () => {
+    const passphrase = "Tx7$kp!aL2nQz@vR";
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+    expect(getShownPassphraseStrength(passphrase)).toBe(
+      checkPassphraseStrength(passphrase).strength,
+    );
+  });
+
+  it.each([
+    ["no capital letter", "tx7$kp!al2nqz@vr"],
+    ["a capital letter of another script only", "\u0416x7$kp!al2nqz@vr"],
+    ["no digit", "Txa$kp!aLbnQz@vR"],
+    ["no punctuation", "Tx7akpzaL2nQzbvR"],
+    ["too short", "Tx7$kp!aL2n"],
+    ["a common pattern", "Qwerty123456!"],
+  ])("grades a passphrase with %s as weak", (_, passphrase) => {
+    expect(getShownPassphraseStrength(passphrase)).toBe("weak");
   });
 });

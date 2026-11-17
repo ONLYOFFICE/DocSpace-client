@@ -82,7 +82,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import { SourceRoomLogo } from "../project/RoomItem";
-import { savedProjectProfileId } from "../../utils";
+import { roomLinkRefusal, savedProjectProfileId } from "../../utils";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -420,6 +420,21 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
 
   const selected = selector === INSTRUCTIONS_ROOM_TYPE ? instructions : knowledge;
 
+  // Why a room of the selector cannot be linked, or `null` when it can. The
+  // server links only rooms the user may manage, and refuses the whole save
+  // over one that is not: those are listed greyed out. A room linked already
+  // stays selected and is kept.
+  const getRoomDisabledReason = (room: { security?: { EditRoom?: boolean } | null }) => {
+    switch (roomLinkRefusal(room, selector === KNOWLEDGE_ROOM_TYPE, vectorizationEnabled)) {
+      case "vectorizationOff":
+        return t("Common:KnowledgeRoomsNeedVectorization");
+      case "noManageRights":
+        return t("Common:YouDontHaveEnoughPermission");
+      default:
+        return null;
+    }
+  };
+
   return (
     <ModalDialog
         visible
@@ -449,12 +464,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               // Instructions and Knowledge rooms live under the "AI rooms"
               // root, not in Rooms.
               searchArea={RoomSearchArea.AiHub}
-              isRoomDisabled={() => selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled}
-              getRoomDisabledText={() =>
-                selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled
-                  ? t("Common:KnowledgeRoomsNeedVectorization")
-                  : undefined
-              }
+              isRoomDisabled={(room) => getRoomDisabledReason(room) !== null}
+              getRoomDisabledText={(room) => getRoomDisabledReason(room) ?? undefined}
               withSearch
               withHeader
               headerProps={{

@@ -74,3 +74,19 @@ export const savedProjectProfileId = (
   if (!profilesLoaded && profileId && !optionKeys.includes(profileId)) return profileId;
   return shownKey ?? profileId;
 };
+
+/**
+ * Why a room of the agent form's room picker cannot be linked, or `null`
+ * when it can: a Knowledge room while vectorization is off, or a room the
+ * user may not manage - the server links only those, and refuses the whole
+ * save over one that is not.
+ */
+export const roomLinkRefusal = (
+  room: { security?: { EditRoom?: boolean } | null },
+  isKnowledge: boolean,
+  vectorizationEnabled: boolean,
+): "vectorizationOff" | "noManageRights" | null => {
+  if (isKnowledge && !vectorizationEnabled) return "vectorizationOff";
+  if (!room.security?.EditRoom) return "noManageRights";
+  return null;
+};

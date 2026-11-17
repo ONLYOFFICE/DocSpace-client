@@ -2,7 +2,14 @@ import { describe, expect, it } from "vitest";
 
 import { AiProjectAccess, type TAiProject } from "@docspace/shared/api/ai/projects";
 
-import { canManageProjects, isManager, isOwner, projectLink, savedProjectProfileId } from "../utils";
+import {
+  canManageProjects,
+  isManager,
+  isOwner,
+  projectLink,
+  roomLinkRefusal,
+  savedProjectProfileId,
+} from "../utils";
 
 const withAccess = (access: number) => ({ id: 7, access }) as unknown as TAiProject;
 
@@ -48,5 +55,16 @@ describe("AiProjects utils", () => {
     expect(savedProjectProfileId("p9", ["default", "p9"], "p9", true, true)).toBe("p9");
     // A stored model that is gone is still replaced by the one shown.
     expect(savedProjectProfileId("p9", ["default"], "default", true, true)).toBe("default");
+  });
+
+  it("offers only rooms the user may manage, and no Knowledge room while vectorization is off", () => {
+    const managed = { security: { EditRoom: true } };
+    expect(roomLinkRefusal(managed, false, true)).toBeNull();
+    expect(roomLinkRefusal(managed, true, true)).toBeNull();
+    expect(roomLinkRefusal({ security: { EditRoom: false } }, false, true)).toBe("noManageRights");
+    expect(roomLinkRefusal({}, true, true)).toBe("noManageRights");
+    expect(roomLinkRefusal(managed, true, false)).toBe("vectorizationOff");
+    // Vectorization does not concern skill sets.
+    expect(roomLinkRefusal(managed, false, false)).toBeNull();
   });
 });

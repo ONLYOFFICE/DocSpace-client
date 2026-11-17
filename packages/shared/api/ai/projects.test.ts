@@ -670,6 +670,7 @@ describe("the calls", () => {
       },
     });
     const files = await getAiProjectKnowledgeFiles(9);
+    // Fewer files than a page: one request.
     expect(request).toHaveBeenCalledTimes(1);
     expect(files.map((file) => file.indexed)).toEqual([true, false, false]);
     expect(files[1]).toEqual({
@@ -680,6 +681,41 @@ describe("the calls", () => {
       vectorizationStatus: 2,
       security: { Vectorization: false },
     });
+  });
+
+  it("pages through a Knowledge room's files until its total is read", async () => {
+    const page = (from: number, count: number) =>
+      Array.from({ length: count }, (_, i) => ({ id: from + i, title: `f${from + i}.pdf`, vectorizationStatus: 1 }));
+    route({
+      "GET /files/9?filterType=1&count=100": { total: 230, files: page(0, 100) },
+      "GET /files/9?filterType=1&startIndex=100&count=100": { total: 230, files: page(100, 100) },
+      "GET /files/9?filterType=1&startIndex=200&count=100": { total: 230, files: page(200, 30) },
+    });
+    const files = await getAiProjectKnowledgeFiles(9);
+    expect(request).toHaveBeenCalledTimes(3);
+    expect(files).toHaveLength(230);
+    expect(new Set(files.map((file) => file.id)).size).toBe(230);
+  });
+
+  it("stops at a page the total completes, and reads an envelope that reports its total", async () => {
+    const page = (from: number, count: number) =>
+      Array.from({ length: count }, (_, i) => ({ id: from + i, title: `f${from + i}.pdf` }));
+    route({
+      // The API client answers `{ total, items }` for an envelope with a total.
+      "GET /files/9?filterType=1&count=100": { total: 200, items: { total: 200, files: page(0, 100) } },
+      "GET /files/9?filterType=1&startIndex=100&count=100": { total: 200, items: { total: 200, files: page(100, 100) } },
+    });
+    expect(await getAiProjectKnowledgeFiles(9)).toHaveLength(200);
+    expect(request).toHaveBeenCalledTimes(2);
+  });
+
+  it("reads at most fifty pages of a Knowledge room", async () => {
+    request.mockImplementation(async () => ({
+      total: 100_000,
+      files: Array.from({ length: 100 }, (_, i) => ({ id: i, title: "f.pdf" })),
+    }));
+    expect(await getAiProjectKnowledgeFiles(9)).toHaveLength(5000);
+    expect(request).toHaveBeenCalledTimes(50);
   });
 
   it("counts a Knowledge room's files from the total of a one-row read", async () => {

@@ -457,8 +457,10 @@ const toRoomFields = ({ title, tags, logo }: TAiProjectRequest) => {
 
 /** `FilterType.FilesOnly`. */
 const FILTER_FILES_ONLY = 1;
-/** Page size of the Files API, also the most files a Knowledge room keeps; a larger `count` answers 400. */
+/** Page size of the Files API; a larger `count` answers 400. */
 const FILES_PAGE_SIZE = 100;
+/** The most pages of a Knowledge room's files read in one go (5,000 files). */
+const KNOWLEDGE_FILES_MAX_PAGES = 50;
 
 /** A linked room as `GET files/rooms/{id}/sources` answers it. */
 type TSourceDto = { id: number; title: string; logo?: Partial<TAiProjectLogo> | null };
@@ -1034,18 +1036,33 @@ type TKnowledgeFileDto = {
   security?: { Vectorization?: boolean };
 };
 
+/** A page of a folder's files; an envelope that reports `total` reaches here as `{ total, items }`. */
+const readFilesPage = async (roomId: number, startIndex: number, count: number) => {
+  const res = await request({
+    method: "GET",
+    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, startIndex: startIndex || undefined, count })}`,
+  });
+  const page = (
+    res && typeof res === "object" && "items" in res ? (res as { items: unknown }).items : res
+  ) as { files?: TKnowledgeFileDto[]; total?: number } | null;
+  return { files: page?.files ?? [], total: page?.total };
+};
+
 /**
  * A linked Knowledge room's files (`GET files/{roomId}`, files only) with
- * their vectorization state, read when its row in the Knowledge card is
- * expanded. One page holds them all: a Knowledge room keeps at most 100
- * files.
+ * their vectorization state: the Knowledge card's expanded row and the state
+ * of a knowledge base. The room is read page by page until its `total` is
+ * in, up to `KNOWLEDGE_FILES_MAX_PAGES` pages.
  */
 export const getAiProjectKnowledgeFiles = async (roomId: number): Promise<TAiProjectKnowledgeFile[]> => {
-  const page = (await request({
-    method: "GET",
-    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: FILES_PAGE_SIZE })}`,
-  })) as { files?: TKnowledgeFileDto[] };
-  return (page.files ?? []).map((file) => {
+  const files: TKnowledgeFileDto[] = [];
+  for (let pageIndex = 0; pageIndex < KNOWLEDGE_FILES_MAX_PAGES; pageIndex += 1) {
+    const page = await readFilesPage(roomId, files.length, FILES_PAGE_SIZE);
+    files.push(...page.files);
+    // The last page: shorter than asked, or the total reached.
+    if (page.files.length < FILES_PAGE_SIZE || (page.total !== undefined && files.length >= page.total)) break;
+  }
+  return files.map((file) => {
     const status = file.vectorizationStatus ?? null;
     return {
       id: file.id,
@@ -1063,10 +1080,5 @@ export const getAiProjectKnowledgeFiles = async (roomId: number): Promise<TAiPro
  * only: one row is asked for, the answer's `total` is what is read), for the
  * number in the Knowledge card's title before the room is expanded.
  */
-export const getAiProjectKnowledgeFilesCount = async (roomId: number): Promise<number> => {
-  const page = (await request({
-    method: "GET",
-    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: 1 })}`,
-  })) as { total?: number };
-  return page.total ?? 0;
-};
+export const getAiProjectKnowledgeFilesCount = async (roomId: number): Promise<number> =>
+  (await readFilesPage(roomId, 0, 1)).total ?? 0;

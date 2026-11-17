@@ -50,8 +50,9 @@ Out of scope:
   The acknowledgement tick stays the only gate, as the main spec describes.
 - Inviting a person who has no key and telling them about it. It needs the
   server and is a feature, not a fix.
-- A passphrase generator built from words. It changes how strong a
-  generated passphrase is and needs the owner of the encryption design.
+- A passphrase generator built from words. The owner decided against it on
+  2026-11-17: the generator keeps building a passphrase from characters,
+  under the same rules as a typed one.
 - The confirmation of deleting a key. It is followed by a passphrase
   confirmation, which is why it does not ask for a typed word as the reset
   does; the review took the two for one kind of action by mistake.
@@ -90,6 +91,8 @@ Decided by the owner on 2026-11-17:
    key dialogs open it beside the dialog on a wide screen, and below the
    passphrase field on a narrow one, where it may cover the confirmation
    field while the passphrase is typed.
+5. The passphrase generator keeps building a passphrase from characters. A
+   generator built from words was the alternative (Out of scope).
 
 No decision is open.
 

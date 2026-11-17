@@ -75,6 +75,8 @@ Decided by the owner on 2026-11-17:
    folder inside one, not in the header of the Private list.
 4. The locked-key block stands above the file list, which keeps the names as
    stored. Replacing the list with the block was the alternative.
+5. The passphrase generator keeps building a passphrase from characters. A
+   generator built from words was the alternative (Out of scope).
 
 No decision is open. The illustration of the block is left to the
 implementation (design.md, Open Questions).

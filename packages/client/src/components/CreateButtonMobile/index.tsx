@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, RoomsType } from "@docspace/shared/enums";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import { createGroup } from "SRC_DIR/helpers/contacts";
@@ -57,6 +57,8 @@ type CreateButtonMobileProps = {
   isRoomsFolder?: boolean;
   isAiHubFolder?: boolean;
   isFormsFolder?: boolean;
+  /** An open knowledge base: its button adds files. */
+  isKnowledgeBase?: boolean;
   selectedFolderId?: number | string;
   currentDeviceType?: DeviceType;
   showBodyLoader?: boolean;
@@ -72,6 +74,7 @@ const CreateButtonMobile = ({
   isRoomsFolder,
   isAiHubFolder,
   isFormsFolder,
+  isKnowledgeBase,
   selectedFolderId,
   currentDeviceType,
   showBodyLoader,
@@ -99,6 +102,7 @@ const CreateButtonMobile = ({
     search: location.search,
     isFormsSection,
     isFormsFolder: !!isFormsFolder,
+    isKnowledgeBase: !!isKnowledgeBase,
     selectedFolderId,
     getFolderModel,
     getContactsModel,
@@ -140,6 +144,7 @@ export default inject(
     isRoomsFolder: treeFoldersStore.isRoomsFolder,
     isAiHubFolder: treeFoldersStore.isAiHubFolder,
     isFormsFolder: treeFoldersStore.isFormsFolder,
+    isKnowledgeBase: selectedFolderStore.roomType === RoomsType.KnowledgeRoom,
     selectedFolderId: selectedFolderStore.id,
     currentDeviceType: settingsStore.currentDeviceType,
     showBodyLoader: clientLoadingStore.showBodyLoader,

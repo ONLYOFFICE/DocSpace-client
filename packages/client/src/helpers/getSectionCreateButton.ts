@@ -60,6 +60,8 @@ export type GetSectionCreateButtonParams = {
   search?: string;
   isFormsSection: boolean;
   isFormsFolder: boolean;
+  /** An open knowledge base (a Knowledge room): its button adds files. */
+  isKnowledgeBase?: boolean;
 
   selectedFolderId?: number | string;
 
@@ -86,6 +88,7 @@ export const getSectionCreateButton = ({
   search = "",
   isFormsSection,
   isFormsFolder,
+  isKnowledgeBase = false,
   selectedFolderId,
   getFolderModel,
   getContactsModel,
@@ -160,7 +163,8 @@ export const getSectionCreateButton = ({
   return {
     showMainButton: true,
     mainButtonProps: {
-      text: t("Common:New"),
+      // A knowledge base only takes files: from the storage or the device.
+      text: isKnowledgeBase ? t("Common:AddFiles") : t("Common:New"),
       isDropdown: true,
       model,
     },

@@ -174,6 +174,7 @@ const SectionFilterContent = ({
 
   getSelectedFolder,
   selectedFolderId,
+  selectedFolderRoomType,
 
   getFolderModel,
   getContactsModel,
@@ -260,6 +261,7 @@ const SectionFilterContent = ({
     search: location.search,
     isFormsSection,
     isFormsFolder,
+    isKnowledgeBase: selectedFolderRoomType === RoomsType.KnowledgeRoom,
     selectedFolderId,
     getFolderModel,
     getContactsModel,
@@ -1968,6 +1970,7 @@ export default inject(
       isIndexedFolder,
       getSelectedFolder,
       id: selectedFolderId,
+      roomType: selectedFolderRoomType,
     } = selectedFolderStore;
     const { getFolderModel, onCreateRoom } = contextOptionsStore;
 
@@ -2008,6 +2011,7 @@ export default inject(
       isVisitor: user?.isVisitor,
       getSelectedFolder,
       selectedFolderId,
+      selectedFolderRoomType,
 
       getFolderModel,
       getContactsModel,

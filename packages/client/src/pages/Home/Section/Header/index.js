@@ -78,7 +78,10 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import { isPrivateRoomsListRoot } from "SRC_DIR/helpers/privateRoomsSection";
-import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
+import {
+  getAiWorkspaceTitle,
+  isAiWorkspaceCreateRefused,
+} from "SRC_DIR/helpers/aiWorkspace";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -110,6 +113,7 @@ const SectionHeaderContent = (props) => {
     isAiSectionFolder,
     isAiProjectRoomRoot,
     isAiOff,
+    vectorizationEnabled,
     security,
     setIsIndexEditingMode,
     tReady,
@@ -874,8 +878,15 @@ const SectionHeaderContent = (props) => {
     selectedFolder?.type,
   ]);
 
-  // Nothing is created in "AI rooms" until AI is set up on the portal.
-  const currentCanCreate = security?.Create && !(isAiHubFolder && isAiOff);
+  // Nothing is created in "AI rooms" until AI is set up on the portal, nor
+  // in the Knowledge bases list while vectorization is off.
+  const currentCanCreate =
+    security?.Create &&
+    !(
+      isAiHubFolder &&
+      (isAiOff ||
+        isAiWorkspaceCreateRefused(location.search, vectorizationEnabled))
+    );
 
   const currentRootRoomTitle =
     navigationPath &&
@@ -1445,6 +1456,8 @@ export default inject(
       isAiSectionFolder,
       isAiProjectRoomRoot,
       isAiOff: settingsStore.aiReady === false,
+      vectorizationEnabled:
+        settingsStore.aiConfig?.vectorizationEnabled !== false,
 
       selectedFolder,
 

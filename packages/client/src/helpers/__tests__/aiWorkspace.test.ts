@@ -8,6 +8,7 @@ import {
   getAiWorkspaceTabUrl,
   hasAiWorkspaceTemplates,
   getAiWorkspaceTitle,
+  isAiWorkspaceCreateRefused,
   isAiWorkspaceTemplates,
   isAgent,
 } from "../aiWorkspace";
@@ -78,5 +79,16 @@ describe("isAgent", () => {
     ["nothing", null, false],
   ])("tells %s", (_, item, expected) => {
     expect(isAgent(item)).toBe(expected);
+  });
+});
+
+describe("isAiWorkspaceCreateRefused", () => {
+  it.each([
+    [RoomsType.KnowledgeRoom, false, true],
+    [RoomsType.KnowledgeRoom, true, false],
+    [RoomsType.InstructionsRoom, false, false],
+    [RoomsType.AiProjectRoom, false, false],
+  ])("the list of type %s with vectorization on: %s refuses New room: %s", (type, vectorizationEnabled, refused) => {
+    expect(isAiWorkspaceCreateRefused(`?type=${type}`, vectorizationEnabled)).toBe(refused);
   });
 });

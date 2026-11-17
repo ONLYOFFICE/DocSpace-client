@@ -104,6 +104,18 @@ export const getAiWorkspaceCreatePayload = (
     : { startRoomType: type };
 };
 
+/**
+ * "New room" of the list creates nothing: the Knowledge bases list while
+ * vectorization is off, as a Knowledge room cannot be created then (the
+ * server refuses it, and the type list greys it out).
+ */
+export const isAiWorkspaceCreateRefused = (
+  search: string,
+  vectorizationEnabled: boolean,
+): boolean =>
+  !vectorizationEnabled &&
+  getAiWorkspaceListType(search) === RoomsType.KnowledgeRoom;
+
 const TAB_PARAM = "tab";
 const TEMPLATES_TAB = "templates";
 

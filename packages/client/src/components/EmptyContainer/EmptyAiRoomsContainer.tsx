@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -54,6 +54,7 @@ import {
 import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 import {
   getAiWorkspaceCreatePayload,
+  isAiWorkspaceCreateRefused,
   type TAiWorkspaceCreatePayload,
 } from "SRC_DIR/helpers/aiWorkspace";
 import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
@@ -67,6 +68,8 @@ type EmptyAiRoomsContainerProps = {
   aiNoAccessStores: ChatNoAccessStoreProps;
   /** AI is not set up on the portal (`settingsStore.aiReady === false`). */
   isAiOff: boolean;
+  /** Vectorization is on: a Knowledge room can be created. */
+  vectorizationEnabled: boolean;
   canManage: boolean;
   isAdmin: boolean;
   isWarningRoomsDialog: boolean;
@@ -85,6 +88,7 @@ type EmptyAiRoomsContainerProps = {
 const EmptyAiRoomsContainer = ({
   aiNoAccessStores,
   isAiOff,
+  vectorizationEnabled,
   canManage,
   isAdmin,
   isWarningRoomsDialog,
@@ -94,6 +98,7 @@ const EmptyAiRoomsContainer = ({
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
   // The chat's activation flow (SaaS) and top-up dialog.
   const { activation, topUpDialog } = useChatNoAccess(aiNoAccessStores);
   const standalone = !!aiNoAccessStores.standalone;
@@ -158,7 +163,12 @@ const EmptyAiRoomsContainer = ({
     );
   }
 
-  const options: EmptyViewOptionsType = canManage
+  // The Knowledge bases list creates nothing while vectorization is off: it
+  // says why, as the room type list does.
+  const isCreateRefused =
+    canManage && isAiWorkspaceCreateRefused(location.search, vectorizationEnabled);
+
+  const options: EmptyViewOptionsType = canManage && !isCreateRefused
     ? [
         {
           key: "create-ai-room",
@@ -175,9 +185,13 @@ const EmptyAiRoomsContainer = ({
       icon={icon}
       title={canManage ? t("Common:AiRoomsEmpty") : t("Common:AiRoomsEmptyUser")}
       description={
-        canManage
-          ? t("Common:AiRoomsEmptyDescription")
-          : t("Common:AiRoomsEmptyUserDescription")
+        isCreateRefused
+          ? isAdmin
+            ? t("Common:KnowledgeRoomCreationNeedsVectorizationAdmin")
+            : t("Common:KnowledgeRoomCreationNeedsVectorizationUser")
+          : canManage
+            ? t("Common:AiRoomsEmptyDescription")
+            : t("Common:AiRoomsEmptyUserDescription")
       }
       options={options}
     />
@@ -201,6 +215,7 @@ export default inject(
       authStore,
     } as TStore),
     isAiOff: settingsStore.aiReady === false,
+    vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
     canManage: canManageProjects(userStore.user),
     isAdmin: !!(userStore.user?.isOwner || userStore.user?.isAdmin),
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,

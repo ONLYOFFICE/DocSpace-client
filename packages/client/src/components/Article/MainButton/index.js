@@ -77,6 +77,7 @@ import {
 } from "@docspace/shared/enums";
 
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
+import { isAiWorkspaceCreateRefused } from "SRC_DIR/helpers/aiWorkspace";
 
 import MobileView from "./MobileView";
 
@@ -118,6 +119,7 @@ const ArticleMainButtonContent = (props) => {
     currentRoomType,
     vectorizationEnabled,
     isAiRoomsOff,
+    isAiHubFolder,
     isRoomsFolder,
     isArchiveFolder,
 
@@ -195,6 +197,10 @@ const ArticleMainButtonContent = (props) => {
 
   const isAccountsPage = location.pathname.includes("/accounts");
   const isSettingsPage = location.pathname.includes("settings");
+  // "New room" in the Knowledge bases list would create a Knowledge room.
+  const isKnowledgeCreateOff =
+    !!isAiHubFolder &&
+    isAiWorkspaceCreateRefused(location.search, vectorizationEnabled);
   const contactsView = getContactsView(location);
   const isContactsGroupsPage = contactsView === "groups";
 
@@ -755,8 +761,9 @@ const ArticleMainButtonContent = (props) => {
 
     // A Knowledge room with vectorization off has nothing to offer: no
     // upload, no create.
-    // Nothing is created in "AI rooms" until AI is set up on the portal.
-    if (isAiRoomsOff) visibilityValue = false;
+    // Nothing is created in "AI rooms" until AI is set up on the portal,
+    // nor in the Knowledge bases list while vectorization is off.
+    if (isAiRoomsOff || isKnowledgeCreateOff) visibilityValue = false;
 
     if (currentRoomType === RoomsType.KnowledgeRoom && !vectorizationEnabled)
       visibilityValue = false;
@@ -790,7 +797,10 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else {
     isDisabled =
-      (isFrame && disableActionButton) || !security?.Create || isAiRoomsOff;
+      (isFrame && disableActionButton) ||
+      !security?.Create ||
+      isAiRoomsOff ||
+      isKnowledgeCreateOff;
   }
 
   if (showArticleLoader)
@@ -968,6 +978,7 @@ export default inject(
     return {
       isAiRoomsOff:
         treeFoldersStore.isAiHubFolder && settingsStore.aiReady === false,
+      isAiHubFolder: treeFoldersStore.isAiHubFolder,
       setQuotaWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,

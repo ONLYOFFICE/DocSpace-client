@@ -608,3 +608,156 @@ describe("ContextOptionsStore.getFilesContextOptions — the members link", () =
     expect(membersLink(FolderType.Rooms)?.disabled ?? true).toBe(true);
   });
 });
+
+// ai-agent-page, "Actions menu of an agent" and "Actions menu on a card".
+describe("ContextOptionsStore.getFilesContextOptions — an agent's menu", () => {
+  const shape = (model: unknown[]) =>
+    (model as { key: string; label?: string; isSeparator?: boolean }[]).map(
+      (option) => (option.isSeparator ? "|" : `${option.key}=${option.label}`),
+    );
+
+  const agent = (contextOptions: string[], extra: Record<string, unknown> = {}) => ({
+    id: 7,
+    parentId: 1,
+    title: "Legal Reviewer",
+    isRoom: true,
+    isFolder: true,
+    inRoom: true,
+    roomType: RoomsType.AiProjectRoom,
+    rootFolderType: FolderType.AiHub,
+    security: { Read: true, Mute: true },
+    viewAccessibility: {},
+    ...extra,
+    contextOptions,
+  });
+
+  const ALL_ROOM_OPTIONS = [
+    "select",
+    "open",
+    "separator0",
+    "link-for-room-members",
+    "edit-room",
+    "invite-users-to-room",
+    "room-info",
+    "pin-room",
+    "mute-room",
+    "separator1",
+    "change-room-owner",
+    "leave-room",
+    "delete",
+  ];
+
+  // What a Member's rights take out of the room's option list.
+  const MANAGE_KEYS = [
+    "edit-room",
+    "invite-users-to-room",
+    "change-room-owner",
+    "delete",
+  ];
+
+  it("words and orders the owner's menu on the agent's page", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { id: 7, security: {}, navigationPath: [{ id: 7 }] },
+    });
+
+    const menu = store.getFilesContextOptions(
+      agent(
+        [
+          "link-for-room-members",
+          "edit-room",
+          "invite-users-to-room",
+          "room-info",
+          "change-room-owner",
+          "delete",
+        ],
+        { createdBy: { id: "user-1" } },
+      ) as never,
+      t,
+      false,
+      true,
+    );
+
+    expect(shape(menu)).toEqual([
+      "edit-room=Common:EditAgent",
+      "invite-users-to-room=Common:ShareAgent",
+      "room-info=Common:AgentInfo",
+      "link-for-room-members=Common:CopyLink",
+      "change-room-owner=Common:ChangeRoomOwner",
+      "|",
+      "delete=Common:DeleteAgent",
+    ]);
+  });
+
+  it("gives a Member's card select, open, Agent info, pin, notifications, copy link and Leave agent", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { id: 1, rootFolderId: 1, security: {}, navigationPath: [] },
+    });
+
+    const keys = shape(
+      store.getFilesContextOptions(
+        agent(ALL_ROOM_OPTIONS.filter((key) => !MANAGE_KEYS.includes(key))) as never,
+        t,
+      ),
+    ).map((entry) => entry.split("=")[0]);
+
+    expect(keys).toEqual([
+      "select",
+      "open",
+      "|",
+      "room-info",
+      "pin-room",
+      "mute-room",
+      "link-for-room-members",
+      "leave-room",
+    ]);
+  });
+
+  it("puts Delete agent last, after a separator, on a card with every item", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { id: 1, rootFolderId: 1, security: {}, navigationPath: [] },
+    });
+
+    const keys = shape(
+      store.getFilesContextOptions(agent(ALL_ROOM_OPTIONS) as never, t),
+    ).map((entry) => entry.split("=")[0]);
+
+    expect(keys).toEqual([
+      "select",
+      "open",
+      "|",
+      "edit-room",
+      "invite-users-to-room",
+      "room-info",
+      "pin-room",
+      "mute-room",
+      "link-for-room-members",
+      "change-room-owner",
+      "leave-room",
+      "|",
+      "delete",
+    ]);
+  });
+
+  it("keeps the room wording for an ordinary room", () => {
+    const store = createTestContextOptionsStore();
+    const labels = shape(
+      store.getFilesContextOptions(
+        agent(["edit-room", "invite-users-to-room", "room-info", "leave-room", "delete"], {
+          roomType: RoomsType.CustomRoom,
+          rootFolderType: FolderType.Rooms,
+        }) as never,
+        t,
+      ),
+    );
+
+    expect(labels).toEqual(
+      expect.arrayContaining([
+        "edit-room=Common:EditRoom",
+        "invite-users-to-room=Common:InviteContacts",
+        "room-info=Common:RoomInfo",
+        "leave-room=Common:LeaveTheRoom",
+        "delete=Common:DeleteRoom",
+      ]),
+    );
+  });
+});

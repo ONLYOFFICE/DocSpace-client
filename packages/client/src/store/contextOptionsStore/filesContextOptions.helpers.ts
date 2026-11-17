@@ -102,6 +102,7 @@ import { isFolder } from "@docspace/shared/utils/typeGuards";
 import {
   createMenuGroup,
   filterModel,
+  layoutAgentOptions,
   layoutRoomOptions,
   onClickLinkForPortal,
   onEditRoomTemplate,
@@ -302,6 +303,8 @@ export const getFilesContextOptionsImpl = (
 
   const isArchive = item.rootFolderType === FolderType.Archive;
   const isFormSpace = item.roomType === RoomsType.FormRoom;
+  // A room of type 12 is an agent: its menu speaks of an agent.
+  const isAgent = item.roomType === RoomsType.AiProjectRoom;
 
   const hasShareLinkRights = isPublicRoom
     ? item.security?.Read
@@ -465,7 +468,11 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_edit-room",
       key: "edit-room",
-      label: isFormSpace ? t("Common:EditFormSpace") : t("Common:EditRoom"),
+      label: isAgent
+        ? t("Common:EditAgent")
+        : isFormSpace
+          ? t("Common:EditFormSpace")
+          : t("Common:EditRoom"),
       icon: SettingsReactSvgUrl,
       onClick: () => self.onClickEditRoom(item),
       disabled: false,
@@ -473,7 +480,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_invite-users-to-room",
       key: "invite-users-to-room",
-      label: t("Common:InviteContacts"),
+      label: isAgent ? t("Common:ShareAgent") : t("Common:InviteContacts"),
       icon: PersonReactSvgUrl,
       onClick: () => self.onClickInviteUsers(item.id, item.roomType),
       disabled: false,
@@ -698,7 +705,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_room-info",
       key: "room-info",
-      label: t("Common:RoomInfo"),
+      label: isAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
       icon: InfoOutlineReactSvgUrl,
       onClick: () => self.onShowInfoPanel(item),
       disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
@@ -943,9 +950,11 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_leave-room",
       key: "leave-room",
-      label: isFormSpace
-        ? t("Common:LeaveTheFormSpace")
-        : t("Common:LeaveTheRoom"),
+      label: isAgent
+        ? t("Common:LeaveTheAgent")
+        : isFormSpace
+          ? t("Common:LeaveTheFormSpace")
+          : t("Common:LeaveTheRoom"),
       icon: LeaveRoomSvgUrl,
       onClick: self.onLeaveRoom,
       disabled:
@@ -987,9 +996,11 @@ export const getFilesContextOptionsImpl = (
         : item.isTemplate
           ? t("Files:DeleteTemplateAction")
           : item.isRoom
-            ? isFormSpace
-              ? t("Common:DeleteFormSpace")
-              : t("Common:DeleteRoom")
+            ? isAgent
+              ? t("Common:DeleteAgent")
+              : isFormSpace
+                ? t("Common:DeleteFormSpace")
+                : t("Common:DeleteRoom")
             : t("Common:Delete"),
       icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
       onClick: () => self.onDelete(item, t),
@@ -1086,16 +1097,20 @@ export const getFilesContextOptionsImpl = (
     [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
   ];
 
-  const menuGroupsConfig: TMenuGroupConfig[] = [
-    {
-      groupKey: "more-options",
-      groupLabel: t("Common:MoreOptions"),
-      groupIcon: DotsHorizontalUrl,
-      itemKeys: moreOptionsItemKeys,
-      needsGrouping: true,
-      minItemsCount,
-    },
-  ];
+  // An agent's menu keeps its items in its own order, none of them folded
+  // under More options.
+  const menuGroupsConfig: TMenuGroupConfig[] = isAgent
+    ? []
+    : [
+        {
+          groupKey: "more-options",
+          groupLabel: t("Common:MoreOptions"),
+          groupIcon: DotsHorizontalUrl,
+          itemKeys: moreOptionsItemKeys,
+          needsGrouping: true,
+          minItemsCount,
+        },
+      ];
 
   if (!item.isRoom) {
     menuGroupsConfig.push({
@@ -1427,6 +1442,17 @@ export const getFilesContextOptionsImpl = (
       const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
       resultOptions.splice(moveIndex, 0, downloadGroup);
     }
+  }
+
+  if (isAgent) {
+    return withUniqueSeparatorKeys(
+      trimSeparator(
+        placePlugins(
+          layoutAgentOptions(resultOptions, frameActions),
+          pluginItems,
+        ) as ContextMenuModel[],
+      ),
+    );
   }
 
   const usedSeparatorKeys = new Set<string>();

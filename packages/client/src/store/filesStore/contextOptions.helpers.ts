@@ -891,8 +891,14 @@ export const buildContextOptions = (
       roomOptions = removeOptions(roomOptions, ["save-as-template"]);
     }
 
+    // The agent's menu has no Download (ai-agent-page, "Actions menu of an
+    // agent").
     if (isAiProject) {
-      roomOptions = removeOptions(roomOptions, ["duplicate-room"]);
+      roomOptions = removeOptions(roomOptions, [
+        "duplicate-room",
+        "download",
+        "download-encrypted",
+      ]);
     }
 
     // The agent's owner hands the agent over through change owner before

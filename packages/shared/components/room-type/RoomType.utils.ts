@@ -73,6 +73,25 @@ export const getRoomTypeTitleTranslation = (
   }
 };
 
+/**
+ * The AI Chat section's word for a room of type 10 or 11, which it lists as
+ * a skill set or a knowledge base; `null` for any other type. The type
+ * chooser and the type filter keep the room type's own name.
+ */
+export const getAiSourceTitleTranslation = (
+  t: TTranslation,
+  roomType?: RoomsType,
+): string | null => {
+  switch (roomType) {
+    case RoomsType.InstructionsRoom:
+      return t("Common:SkillSet");
+    case RoomsType.KnowledgeRoom:
+      return t("Common:Knowledge");
+    default:
+      return null;
+  }
+};
+
 export const getRoomTypeDescriptionTranslation = (
   t: TTranslation,
   roomType: RoomsType = 1,

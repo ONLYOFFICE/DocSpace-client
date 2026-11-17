@@ -27,7 +27,7 @@ and SDK unit tests must stay green.
 - [x] 4.2 Add the indicator to the header of a private room and of a folder inside one (`packages/client/src/pages/Home/Section/Header`): `Common:KeyUnlocked` or `Common:KeyLocked`, hidden without a key or while the key list is not known, raising the unlock dialog when locked. Add and translate the two keys. Verify: a unit test next to the component with the scenarios of "Key state is shown in the header of a private room", and the locale tests
 - [x] 4.3 Add the popover of an unlocked key: the state, the auto-lock setting, `Common:LockNow`, a link to Keys management, operable from the keyboard with the focus returned on close. Verify: unit cases named after the scenarios of "Key state indicator leads to the key actions"
 - [x] 4.4 Show `Common:LockNowForgetsDevice` in the popover on a remembered device; add and translate the key. Verify: unit cases "Remembered device" and "Device not remembered", and the locale tests
-- [ ] 4.5 Add Playwright cases for the indicator to `packages/client/__tests__/private-rooms-section.spec.ts`: shown unlocked, locked from the popover, unlocked from the indicator, absent in a room that is not private. Verify: the spec passes under Docker
+- [x] 4.5 Add Playwright cases for the indicator to `packages/client/__tests__/private-rooms-section.spec.ts`: shown unlocked, locked from the popover, unlocked from the indicator, absent in a room that is not private. Verify: the spec passes under Docker
 
 ## 5. Locked-key block
 

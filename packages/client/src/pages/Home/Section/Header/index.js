@@ -1111,6 +1111,7 @@ const SectionHeaderContent = (props) => {
                 ) : (
                   <>
                     <KeyStateIndicator
+                      className={styles.keyStateIndicator}
                       isPrivate={
                         !!isPrivacyFolder &&
                         !isPrivateRoomsListRoot(location, isRoomsFolder)

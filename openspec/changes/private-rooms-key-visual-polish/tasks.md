@@ -6,7 +6,7 @@ and SDK unit tests must stay green.
 
 ## 1. Key state indicator
 
-- [ ] 1.1 Draw the indicator of `packages/client/src/pages/Home/Section/Header/sub-components/KeyStateIndicator.tsx` as a pill coloured by the state, with colours from kit tokens for both themes and the same padlock in both states. Verify: unit cases "Unlocked and locked differ" and "Same icon" in `sub-components/__tests__/KeyStateIndicator.test.tsx`, and the existing indicator cases unchanged
+- [x] 1.1 Draw the indicator of `packages/client/src/pages/Home/Section/Header/sub-components/KeyStateIndicator.tsx` as a pill coloured by the state, with colours from kit tokens for both themes and the same padlock in both states. Verify: unit cases "Unlocked and locked differ" and "Same icon" in `sub-components/__tests__/KeyStateIndicator.test.tsx`, and the existing indicator cases unchanged
 - [ ] 1.2 Add a Playwright case "Readable in both themes" to the key state indicator group of `packages/client/__tests__/private-rooms-section.spec.ts` that reads the computed colours of the text, the icon and the pill in both states and both themes and asserts 4.5:1 and 3:1. Verify: the spec passes under Docker, "Shown whole on a phone" included
 
 ## 2. Recovery phrase

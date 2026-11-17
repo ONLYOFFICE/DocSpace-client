@@ -35,6 +35,7 @@
 
 
 import { useRef, useState } from "react";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -44,6 +45,7 @@ import { useEncryption } from "@docspace/shared/context/encryption";
 import PadlockIcon from "PUBLIC_DIR/images/icons/16/padlock.react.svg";
 
 import KeyStatePopover from "./KeyStatePopover";
+import styles from "./KeyStateIndicator.module.scss";
 
 type KeyStateIndicatorProps = {
   /** The open folder is a private room or lies inside one. */
@@ -102,6 +104,7 @@ const KeyStateIndicator = ({
     <span ref={anchorRef} className={className}>
       <Button
         ref={buttonRef}
+        className={classNames(styles.pill, { [styles.locked]: !isUnlocked })}
         size={ButtonSize.extraSmall}
         icon={<PadlockIcon aria-hidden="true" data-testid="key_state_icon" />}
         label={label}

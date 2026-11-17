@@ -152,6 +152,29 @@ describe("Key state is shown in the header of a private room", () => {
     );
   });
 
+  it("Unlocked and locked differ", () => {
+    const { update } = renderIndicator(encryptionState());
+    const unlockedClass = screen.getByTestId(INDICATOR).className;
+
+    update(encryptionState({ isUnlocked: false }));
+
+    const lockedClass = screen.getByTestId(INDICATOR).className;
+    expect(lockedClass).not.toBe(unlockedClass);
+    expect(lockedClass).toContain("locked");
+    expect(unlockedClass).not.toContain("locked");
+  });
+
+  it("Same icon", () => {
+    const { update } = renderIndicator(encryptionState());
+    const icon = () =>
+      within(screen.getByTestId(INDICATOR)).getByTestId("key_state_icon");
+    const unlockedIcon = icon().outerHTML;
+
+    update(encryptionState({ isUnlocked: false }));
+
+    expect(icon().outerHTML).toBe(unlockedIcon);
+  });
+
   it.each([
     ["known to hold no key", true],
     ["not known", false],

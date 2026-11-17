@@ -895,6 +895,21 @@ without a new run.
   comes from this mismatch of key and version, and say why a spreadsheet
   and a presentation open with the same mismatch. Done when the answer is
   recorded here with its date.
+- **Answer of the editor developer (2026-11-16, relayed by the owner).**
+  It is enough that the portal passes the stable version of the document
+  in the document address when the file is reopened. This is the first
+  branch of decision 7: the stable key with `document.url` of the stable
+  version. Not answered: why a spreadsheet and a presentation open with
+  the mismatch, and what the portal shall serve once the Document Server
+  no longer holds the session, where the stable version alone would show
+  the content from before the save (the second branch of decision 7).
+- **Second answer, the end of a session (2026-11-16, relayed by the
+  owner).** The next editor version assembles the document by itself
+  when a session ends, and carries the other editor and Document Server
+  fixes this change waits for. The portal therefore needs no `info`
+  check and no promotion of the version: the second branch of decision 7
+  is dropped, and task 6.2 is the stable address alone. The number and
+  the date of that version are not known yet.
 - **Crypto library build (task 1.2).** The stand serves
   `onlyoffice-crypto.js` with a SHA-256 starting `58cb7f48`, which
   `contract-v1.md` lists as build 2.0.0. The contract asks for 2.1.0 or
@@ -968,6 +983,56 @@ Read from the release stand without signing in, on
 - **Not checked.** The form flag of a PDF form over a save, the spreadsheet
   and the presentation after a new save, and a second member in a held
   session.
+
+### Run of 2026-11-16 on the local stack, the stable address (task 6.8)
+
+Local stack: the client of `release/v4.1.0` with task 6.7, the server
+answering build 3.1.0, Document Server 10.0.2.5 with the crypto add-on.
+Signed in as the portal owner, the owner of the private room, with the key
+unlocked in the browser.
+
+- **Server answers.** A docx of a private room at version 1 answered the
+  same document key for editing and for viewing. After one line typed and
+  Ctrl+S the file was at version 2 ("Edited with encrypt; Saved");
+  `openedit` for editing answered the key of version 1 with an address
+  without a version, `openedit?version=1&view=true` that key with
+  `version=1` in the address, and `openedit?version=2&view=true` and
+  `openedit?view=true` another key. After a second save, version 3, the
+  key for editing was still the one of version 1, and versions 2 and 3
+  had keys of their own.
+- **With the lookup of 6.7.** The editor closed and the file opened again
+  for editing: it opened in the editing mode with the saved line shown
+  once and no error. The browser fetched
+  `filehandler.ashx?action=stream&fileid=…&version=1&stream_auth=…`, so the
+  editor reads the address of the page's configuration, not the one
+  inside the token. After the second save the reopen showed both phrases
+  once, again from `version=1`.
+- **Control without the lookup.** With the call switched off in the
+  running client and nothing else changed, the same file at version 2
+  answered "Something went wrong. An error has occurred while opening the
+  file", the console logging Document Server error code -82; the browser
+  had fetched the address without a version. Switched on again, the next
+  opening worked.
+- **A member who is not the owner.** A second user, of the User type,
+  with a key of their own, invited to the room with the Editor access
+  through the invite panel, in a browser profile of their own. The
+  server reports the edit and read-history rights of the file to them
+  and answers `openedit?version=N&view=true` for the earlier versions,
+  so the lookup finds the address. With the file at version 3 the member
+  opened it for editing, the browser fetching `version=1`, read both
+  phrases once, added a line and saved: version 4, updated by the member.
+- **After another member's save.** With the member's editor closed the
+  owner opened the file: the editing mode, the three phrases once, no
+  error, the address with `version=1`.
+- **Save and rejoin while another member edits.** With the owner's
+  editor left open the member opened the file, added a line, saved
+  (version 5), left and opened it again: the editing mode with two
+  users shown, the four phrases once, no error, `version=1` again. The
+  owner's open editor showed the member's line and logged no error.
+- **Not run.** A member without the read-history right, a spreadsheet,
+  a presentation and a PDF, a session that has ended, and the release
+  stand with its Document Server build. Task 6.8 stays open for the
+  release stand.
 
 ## Goals / Non-Goals
 
@@ -1155,6 +1220,33 @@ Read from the release stand without signing in, on
    -82 as well. This is the base mismatch this decision describes, now
    seen on documents and not only on spreadsheets, and the stable-base
    rule of 6.2 is the fix on the portal side.
+
+   Narrowed on 2026-11-16 by the editor developer's answers ("Release
+   stand check of 2026-11-10"): the stable key with the address of the
+   stable version is sufficient, and the end of a session is the
+   editor's, which will assemble the document by itself in its next
+   version. The `info` check and the promotion of the current version
+   are no longer asked of the portal. Read at `f31d7fd129`: the stable
+   version is chosen in `GetParamsAsync`
+   (`DocumentServiceHelper.cs:319-326`), while the address is built from
+   the current version without a version parameter (`Configuration.cs`
+   `GetUrl`, `PathProvider.GetFileStreamUrl`, lines 111-130, which signs
+   `stream_auth` over the id and the version); `SetUrl` replaces the
+   host for every file (line 222), which an encrypted file must not get.
+
+   Tried on the client first (tasks 6.7 to 6.9, asked by the owner on
+   2026-11-16): the editor page finds the version of the document key
+   itself and swaps the address, so the theory can be run on a stand
+   before the server change. The server answers a past version with the
+   key and the signed address of that version
+   (`GetCurFileInfoAsync`, `DocumentServiceHelper.cs:62-81`;
+   `Configuration.GetUrl`), which is what the lookup compares and
+   copies. Its limits: one extra request for every such opening and one
+   more per version walked back; a member who may not read the history
+   is refused and keeps the address as it was; the token of the
+   configuration still carries the address of the current version, and
+   whether the editor reads the page's value is what the run of 6.8
+   tells. It is removed once 6.2 lands (6.9).
 
 8. **The document address of an encrypted file stays public.** The editor
    downloads it in the browser. `document.url` is built from the public portal

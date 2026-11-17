@@ -200,6 +200,21 @@ The system SHALL prompt for the passphrase (Common:EnterPassphrase) whenever an 
 - **WHEN** the unlock dialog opens
 - **THEN** its confirm action is labelled Common:UnlockKey
 
+### Requirement: The unlock dialog on entry is raised once per private room
+The system SHALL raise the unlock dialog by itself once per private room that a user with a locked key enters, and SHALL NOT raise it again when the user moves between the folders of that room: after the first answer the locked-key block is the way to unlock. Entering another private room SHALL raise the dialog again.
+
+#### Scenario: Subfolder after a cancelled prompt
+- **WHEN** a user with a locked key cancels the unlock dialog on entering a private room and then opens a folder of that room
+- **THEN** no unlock dialog is raised, and the locked-key block is shown in the folder
+
+#### Scenario: Back to the root of the room
+- **WHEN** that user returns from the folder to the root of the same room
+- **THEN** no unlock dialog is raised and the block is shown
+
+#### Scenario: Another private room
+- **WHEN** that user leaves the room and opens another private room
+- **THEN** the unlock dialog is raised once for that room
+
 ## REMOVED Requirements
 
 ### Requirement: A locked key is shown in a private room

@@ -59,6 +59,18 @@ to the kit.
 Alternative considered: moving the tooltip to the side. Rejected: in the
 aside presentation on a narrow screen there is no side.
 
+Audit of task 1.1 (`docspace-ui-kit-react` `release/v4.1.0`, the version
+4.1.0 the client installs): the kit needs no switch. In
+`components/password-input/index.tsx` the rules are the content of a
+`Tooltip` rendered only when the property `isDisableTooltip` (declared in
+`PasswordInput.types.ts`, covered by `PasswordInput.test.tsx`) is false.
+Validation does not depend on it: `hooks/usePasswordInput.ts` calls
+`checkPassword` of `hooks/usePasswordValidation.ts` on every change outside
+`simpleView`, and that calls `onValidateInput(progressScore,
+passwordValidation)` with the result of each rule (`length`, `digits`,
+`capital`, `special`, `allowed`). The forms set `isDisableTooltip`, keep
+`simpleView` off, and draw the list from that second argument.
+
 ### 3. The recovery input checks the words before the phrase
 
 The client already ships the list of words a recovery phrase is built from.

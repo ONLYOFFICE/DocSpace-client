@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useEncryption } from "@docspace/shared/context/encryption";
+import PadlockIcon from "PUBLIC_DIR/images/icons/16/padlock.react.svg";
 
 import KeyStatePopover from "./KeyStatePopover";
 
@@ -102,6 +103,7 @@ const KeyStateIndicator = ({
       <Button
         ref={buttonRef}
         size={ButtonSize.extraSmall}
+        icon={<PadlockIcon aria-hidden="true" data-testid="key_state_icon" />}
         label={label}
         onClick={onClick}
         aria-haspopup={isUnlocked ? "dialog" : undefined}

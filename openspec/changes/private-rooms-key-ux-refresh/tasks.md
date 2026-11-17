@@ -28,7 +28,7 @@ and SDK unit tests must stay green.
 - [x] 4.3 Add the popover of an unlocked key: the state, the auto-lock setting, `Common:LockNow`, a link to Keys management, operable from the keyboard with the focus returned on close. Verify: unit cases named after the scenarios of "Key state indicator leads to the key actions"
 - [x] 4.4 Show `Common:LockNowForgetsDevice` in the popover on a remembered device; add and translate the key. Verify: unit cases "Remembered device" and "Device not remembered", and the locale tests
 - [x] 4.5 Add Playwright cases for the indicator to `packages/client/__tests__/private-rooms-section.spec.ts`: shown unlocked, locked from the popover, unlocked from the indicator, absent in a room that is not private. Verify: the spec passes under Docker
-- [ ] 4.6 Show a padlock icon from design before the text of the indicator, the same in both states (owner 2026-11-17; the text tells the state), hidden from assistive technology and coloured as the text. Verify: a unit case that the icon is present and hidden in both states, and the indicator cases of `private-rooms-section.spec.ts` pass under Docker
+- [x] 4.6 Show a padlock icon from design before the text of the indicator, the same in both states (owner 2026-11-17; the text tells the state), hidden from assistive technology and coloured as the text. Verify: a unit case that the icon is present and hidden in both states, and the indicator cases of `private-rooms-section.spec.ts` pass under Docker
 
 ## 5. Locked-key block
 

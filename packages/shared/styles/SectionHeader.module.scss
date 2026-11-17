@@ -233,6 +233,10 @@
 .keyStateIndicator {
   display: inline-flex;
   flex-shrink: 0;
+
+  svg path {
+    fill: currentColor;
+  }
 }
 
 @container buttons (width < 300px) {

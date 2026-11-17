@@ -139,6 +139,20 @@ describe("Key state is shown in the header of a private room", () => {
   });
 
   it.each([
+    ["unlocked", true],
+    ["locked", false],
+  ])("shows the padlock, hidden from assistive technology, when %s", (_s, isUnlocked) => {
+    renderIndicator(encryptionState({ isUnlocked }));
+
+    const indicator = screen.getByTestId(INDICATOR);
+    const icon = within(indicator).getByTestId("key_state_icon");
+    expect(icon).toHaveAttribute("aria-hidden", "true");
+    expect(indicator).toHaveAccessibleName(
+      isUnlocked ? "Common:KeyUnlocked" : "Common:KeyLocked",
+    );
+  });
+
+  it.each([
     ["known to hold no key", true],
     ["not known", false],
   ])("User without a key: key list %s", (_name, keysLoaded) => {

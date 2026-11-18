@@ -103,8 +103,8 @@ const PAGES: BillingPage[] = [
     ready: (page) => page.getByText("Test Payer", { exact: true }),
   },
   {
-    key: "invoice-history",
-    route: "/billing/invoice-history",
+    key: "invoices",
+    route: "/billing/invoices",
     ready: (page) =>
       page.getByText("View invoices for your completed wallet top-ups."),
   },
@@ -321,7 +321,7 @@ test.describe("Billing in the dark theme", () => {
       "tariff-plan",
       "addons",
       "disk-storage",
-      "invoice-history",
+      "invoices",
     ].includes(item.key),
   )) {
     test(`the ${billingPage.key} page follows the dark theme`, async ({

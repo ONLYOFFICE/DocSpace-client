@@ -128,7 +128,7 @@ const trackQueries = (page: Page, path: string) => {
 };
 
 const openInvoices = async (page: Page, baseUrl: string) => {
-  await page.goto(`${baseUrl}/billing/invoice-history`);
+  await page.goto(`${baseUrl}/billing/invoices`);
 
   await expect(
     page.getByText("Invoices", { exact: true }).first(),

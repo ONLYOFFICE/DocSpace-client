@@ -118,6 +118,7 @@ import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
 import { SkillSetChatBridge } from "./components/SkillSetChatBridge";
 import { AiChatPageBridge } from "./components/AiChatPageBridge";
+import { getAiThreadFilesCallbacks } from "./components/AiChatPageBridge/aiThreadFilesCallbacks";
 import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
@@ -194,6 +195,7 @@ const Shell = ({ page = "home", ...rest }) => {
     aiActiveProject,
     openEditAiProject,
     portalHasChatModel,
+    notifyAiChatThreadFilesChanged,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -985,6 +987,11 @@ const Shell = ({ page = "home", ...rest }) => {
     !!aiActiveProject &&
     isAgentModelUnavailable(aiActiveProject, portalHasChatModel);
 
+  const threadFiles = useMemo(
+    () => getAiThreadFilesCallbacks(notifyAiChatThreadFilesChanged),
+    [notifyAiChatThreadFilesChanged],
+  );
+
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
   const aiChatCallbacks = useMemo(
@@ -1008,10 +1015,21 @@ const Shell = ({ page = "home", ...rest }) => {
           status === 403 || /\bHTTP\s+403\b/.test(error?.message ?? "");
         if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
       },
-      onStreamError: onAiStreamError,
-      onStreamEnd: onAiStreamEnd,
+      // The round's events also tell the agent page's Content tab that
+      // the conversation may have new files (see getAiThreadFilesCallbacks).
+      onStreamStart: threadFiles.onStreamStart,
+      onStreamStop: threadFiles.onStreamStop,
+      onToolCallResult: threadFiles.onToolCallResult,
+      onStreamError: (event) => {
+        onAiStreamError(event);
+        threadFiles.onStreamError(event);
+      },
+      onStreamEnd: (event) => {
+        onAiStreamEnd(event);
+        threadFiles.onStreamEnd(event);
+      },
     }),
-    [t, onAiStreamError, onAiStreamEnd],
+    [t, onAiStreamError, onAiStreamEnd, threadFiles],
   );
 
   // Defer mounting AiAgentProviders until authStore is loaded — otherwise
@@ -1270,6 +1288,8 @@ const ShellWrapper = inject(
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
       portalHasChatModel: aiProjectsStore.portalHasChatModel,
+      notifyAiChatThreadFilesChanged:
+        dialogsStore.notifyAiChatThreadFilesChanged,
       openEditAiProject: aiProjectsStore.openEditDialog,
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the

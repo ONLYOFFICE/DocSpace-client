@@ -91,6 +91,7 @@ import type {
 } from "SRC_DIR/components/dialogs/EditRoomGroupsDialog/EditRoomGroupsDialog.types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 import type { TMetadataAIPanelData } from "SRC_DIR/components/panels/MetadataAIPanel/types";
+import type { TRemoveUserReason } from "SRC_DIR/components/dialogs/RemoveUserConfirmationDialog/RemoveUserConfirmationDialog.types";
 import type { TEncryptedTransferConfirm } from "./filesActionsStore/copyMove.helpers";
 import type { TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
@@ -474,6 +475,13 @@ class DialogsStore {
 
   aiChatActiveThreadId = "";
 
+  // The last conversation whose files may have changed, and a counter that
+  // moves on every such change. The server announces no new artifact or
+  // attachment over the socket, so the chat's round events (Shell's
+  // callbacks to the chat) stand in for one; the Info panel's Content tab
+  // reads its lists again when the counter moves for its conversation.
+  aiChatThreadFilesChange = { threadId: "", seq: 0 };
+
   newFilesPanelFolderId: Nullable<number | string> = null;
 
   sortedDownloadFiles: TSortedDownloadFiles = {
@@ -497,11 +505,11 @@ class DialogsStore {
   removeUserConfirmation: {
     visible: boolean;
     callback: Nullable<() => Promise<void>> | undefined;
-    isEncryptedRoom: boolean;
+    reason: TRemoveUserReason;
   } = {
     visible: false,
     callback: null,
-    isEncryptedRoom: false,
+    reason: "formFilling",
   };
 
   isShareFormData: {
@@ -624,6 +632,15 @@ class DialogsStore {
 
   setAiChatActiveThreadId = (threadId: string) => {
     this.aiChatActiveThreadId = threadId;
+  };
+
+  notifyAiChatThreadFilesChanged = (threadId: string) => {
+    // A chat not sent yet has no files on the server.
+    if (!threadId) return;
+    this.aiChatThreadFilesChange = {
+      threadId,
+      seq: this.aiChatThreadFilesChange.seq + 1,
+    };
   };
 
   // Read-and-clear, as `consumeAskAIFile`: a double-invoked effect opens the
@@ -1376,15 +1393,20 @@ class DialogsStore {
     };
   };
 
+  /**
+   * The reason picks the warning the dialog shows. `formFilling` is the
+   * default: the server refused a plain removal because the user takes part
+   * in form filling.
+   */
   setRemoveUserConfirmation = (
     visible: boolean,
     callback: Nullable<() => Promise<void>> = null,
-    isEncryptedRoom = false,
+    reason: TRemoveUserReason = "formFilling",
   ) => {
     this.removeUserConfirmation = {
       visible,
       callback,
-      isEncryptedRoom,
+      reason,
     };
   };
 

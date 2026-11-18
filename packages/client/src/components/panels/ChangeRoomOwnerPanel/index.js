@@ -144,8 +144,11 @@ const ChangeRoomOwner = (props) => {
     ? t("Common:AIProjectChangeOwner")
     : t("Common:ChangeTheRoomOwner");
 
+  // Spec: ai-agent-access, "Who may own an agent"
   const infoText = isAIProject
-    ? t("Common:AIProjectChangeOwnerInfo")
+    ? ownerIsCurrentUser && !showBackButton
+      ? t("Common:AIProjectChangeOwnerLeaveInfo")
+      : t("Common:AIProjectChangeOwnerInfo")
     : t("Common:PeopleSelectorInfo");
 
   const footerCheckboxLabel = isAIProject

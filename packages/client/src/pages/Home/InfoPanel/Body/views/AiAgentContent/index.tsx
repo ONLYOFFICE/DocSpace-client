@@ -56,12 +56,32 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.s
 
 import styles from "./AiAgentContent.module.scss";
 
-/** How often the lists are read again while the tab is shown: a reply may have produced a file. */
-export const REFRESH_MS = 15000;
+/**
+ * How long a signal that the conversation's files changed waits before the
+ * lists are read again: a round reports a tool result and then its end, and
+ * the burst becomes one pair of requests.
+ */
+export const REFRESH_DELAY_MS = 400;
 
 type TThreadFiles = { artifacts: TFile[]; attachments: TFile[] };
 
 const NO_FILES: TThreadFiles = { artifacts: [], attachments: [] };
+
+const sameList = (a: TFile[], b: TFile[]) =>
+  a.length === b.length &&
+  a.every(
+    (file, i) =>
+      file.id === b[i].id &&
+      file.title === b[i].title &&
+      file.contentLength === b[i].contentLength &&
+      file.updated === b[i].updated,
+  );
+
+/** The same files as shown: kept as they are, so no row is drawn again. */
+const sameFiles = (a: TThreadFiles | null, b: TThreadFiles) =>
+  !!a &&
+  sameList(a.artifacts, b.artifacts) &&
+  sameList(a.attachments, b.attachments);
 
 /**
  * The files of a conversation. The attachments do not hold the artifacts
@@ -96,6 +116,12 @@ type AiAgentContentProps = {
  * chat shows both empty, another conversation its own files. A file opens in
  * a new tab; its "..." menu downloads it, saves a copy to a room or opens
  * the room or folder it is in.
+ *
+ * The server announces no new file, so the lists are read again when the
+ * chat reports a round of this conversation that may have produced one
+ * (dialogsStore.aiChatThreadFilesChange, fed from the chat's callbacks in
+ * Shell), and when the browser tab is shown again: a round finished out of
+ * sight, or on another device, reports nothing here.
  */
 const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -108,30 +134,77 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const dialogsStore = useStore("dialogsStore");
   const infoPanelStore = useStore("infoPanelStore");
 
+  // A change reported for another conversation is none of this tab's.
+  const change = dialogsStore.aiChatThreadFilesChange;
+  const refreshKey =
+    threadId && change.threadId === threadId ? change.seq : 0;
+
   const [files, setFiles] = React.useState<TThreadFiles | null>(null);
   const [failed, setFailed] = React.useState(false);
 
+  const filesRef = React.useRef(files);
+  filesRef.current = files;
+  // Only the latest read may show its answer: an earlier one, of this
+  // conversation or of the one before, may come back after it.
+  const latestRef = React.useRef(0);
+  const prevThreadRef = React.useRef(threadId);
+  // The last change already covered by a read, so a change seen again on
+  // coming back to a conversation does not read it twice.
+  const handledSeqRef = React.useRef(0);
+
+  const read = React.useCallback(() => {
+    if (!threadId) return;
+    latestRef.current += 1;
+    const id = latestRef.current;
+    readThreadFiles(projectId, threadId)
+      .then((data) => {
+        if (id !== latestRef.current) return;
+        // A read again may recover from a first read that failed.
+        setFailed(false);
+        setFiles((shown) => (sameFiles(shown, data) ? shown : data));
+      })
+      .catch(() => {
+        // A read again that fails keeps what is shown.
+        if (id === latestRef.current && !filesRef.current) setFailed(true);
+      });
+  }, [projectId, threadId]);
+
+  const readRef = React.useRef(read);
+  readRef.current = read;
+
   React.useEffect(() => {
+    // Whatever is still on its way belongs to what was shown before.
+    latestRef.current += 1;
+    handledSeqRef.current = dialogsStore.aiChatThreadFilesChange.seq;
     setFailed(false);
+    const prevThreadId = prevThreadRef.current;
+    prevThreadRef.current = threadId;
     // A chat not sent yet is no conversation: nothing to read.
     if (!threadId) {
       setFiles(NO_FILES);
-      return undefined;
+      return;
     }
-    setFiles(null);
-    let cancelled = false;
-    const read = (isRefresh: boolean) =>
-      readThreadFiles(projectId, threadId)
-        .then((data) => !cancelled && setFiles(data))
-        // A refresh that fails keeps what is shown.
-        .catch(() => !cancelled && !isRefresh && setFailed(true));
-    void read(false);
-    const timer = setInterval(() => void read(true), REFRESH_MS);
-    return () => {
-      cancelled = true;
-      clearInterval(timer);
-    };
+    // Another conversation hides the files of the last one. The one a new
+    // chat has just become keeps its empty lists until its files come.
+    if (prevThreadId) setFiles(null);
+    read();
   }, [projectId, threadId]);
+
+  React.useEffect(() => {
+    if (!refreshKey || refreshKey <= handledSeqRef.current) return undefined;
+    handledSeqRef.current = refreshKey;
+    const timer = setTimeout(() => readRef.current(), REFRESH_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [refreshKey]);
+
+  React.useEffect(() => {
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") readRef.current();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
 
   if (failed)
     return (

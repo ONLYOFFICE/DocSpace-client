@@ -7,7 +7,11 @@ const api = vi.hoisted(() => ({
   getAiThreadAttachments: vi.fn(),
 }));
 const stores = vi.hoisted(() => ({
-  dialogsStore: { aiChatActiveThreadId: "t-1", setCopyPanelVisible: vi.fn() },
+  dialogsStore: {
+    aiChatActiveThreadId: "t-1",
+    aiChatThreadFilesChange: { threadId: "", seq: 0 },
+    setCopyPanelVisible: vi.fn(),
+  },
   filesSettingsStore: { getIcon: () => "icon.svg" },
   settingsStore: { culture: "en" },
   filesActionsStore: { downloadFiles: vi.fn(), checkAndOpenLocationAction: vi.fn() },
@@ -42,7 +46,7 @@ vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
   ),
 }));
 
-import AiAgentContent, { REFRESH_MS } from "../index";
+import AiAgentContent, { REFRESH_DELAY_MS } from "../index";
 
 const file = (id: number, title: string) => ({
   id,
@@ -61,9 +65,29 @@ const titles = (testId: string) =>
 
 const flush = () => act(async () => {});
 
+/** The chat reports that a conversation may have new files. */
+const signal = (threadId: string) => {
+  const { seq } = stores.dialogsStore.aiChatThreadFilesChange;
+  stores.dialogsStore.aiChatThreadFilesChange = { threadId, seq: seq + 1 };
+};
+
+const wait = (ms: number) =>
+  act(async () => {
+    await vi.advanceTimersByTimeAsync(ms);
+  });
+
+const deferred = <T,>() => {
+  let resolve!: (value: T) => void;
+  const promise = new Promise<T>((r) => {
+    resolve = r;
+  });
+  return { promise, resolve };
+};
+
 beforeEach(() => {
   vi.clearAllMocks();
   stores.dialogsStore.aiChatActiveThreadId = "t-1";
+  stores.dialogsStore.aiChatThreadFilesChange = { threadId: "", seq: 0 };
   api.getAiThreadArtifacts.mockResolvedValue([file(1, "Chart.png")]);
   api.getAiThreadAttachments.mockResolvedValue([file(2, "Agreement.docx"), file(3, "Notes.jpg")]);
 });
@@ -170,18 +194,160 @@ describe("AiAgentContent", () => {
     expect(screen.getByTestId("ai-agent-content-error")).toBeTruthy();
   });
 
-  it("reads the lists again while it is shown, and keeps them when a refresh fails", async () => {
+  it("reads the lists again when the chat reports new files in its conversation, keeping the rows meanwhile", async () => {
     vi.useFakeTimers();
-    render(<AiAgentContent projectId={7} />);
-    await act(async () => {
-      await vi.advanceTimersByTimeAsync(0);
-    });
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    const panel = screen.getByTestId("ai-agent-content");
+    const next = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(next.promise);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+    // Nothing goes blank while the new lists are on their way.
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+    next.resolve([file(1, "Chart.png"), file(6, "Report.docx")]);
+    await wait(0);
+    expect(screen.getByTestId("ai-agent-content")).toBe(panel);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png", "Report.docx"]);
+  });
+
+  it("ignores a change in another conversation", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    signal("t-other");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS * 2);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
+  });
+
+  it("reads once for a burst of changes", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    for (let i = 0; i < 3; i += 1) {
+      signal("t-1");
+      rerender(<AiAgentContent projectId={7} />);
+      await wait(REFRESH_DELAY_MS / 4);
+    }
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+  });
+
+  it("shows the newer lists when two reads come back in reverse order", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    const older = deferred<unknown[]>();
+    const newer = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(older.promise).mockReturnValueOnce(newer.promise);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    newer.resolve([file(8, "Newer.docx")]);
+    await wait(0);
+    older.resolve([file(9, "Older.docx")]);
+    await wait(0);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Newer.docx"]);
+  });
+
+  it("drops a read of the last conversation that comes back after a switch", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    const late = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(late.promise);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    stores.dialogsStore.aiChatActiveThreadId = "t-2";
+    api.getAiThreadArtifacts.mockResolvedValue([file(4, "Other.pdf")]);
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(0);
+    late.resolve([file(9, "Late.docx")]);
+    await wait(0);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Other.pdf"]);
+  });
+
+  it("shows the lists when a read again succeeds after the first one failed", async () => {
+    vi.useFakeTimers();
+    api.getAiThreadArtifacts.mockRejectedValueOnce(new Error("down"));
+    api.getAiThreadAttachments.mockRejectedValueOnce(new Error("down"));
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    expect(screen.getByTestId("ai-agent-content-error")).toBeTruthy();
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    expect(screen.queryByTestId("ai-agent-content-error")).toBeNull();
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+  });
+
+  it("keeps the lists when a read again fails", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
     api.getAiThreadArtifacts.mockRejectedValue(new Error("down"));
     api.getAiThreadAttachments.mockRejectedValue(new Error("down"));
-    await act(async () => {
-      await vi.advanceTimersByTimeAsync(REFRESH_MS);
-    });
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
     expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(screen.queryByTestId("ai-agent-content-error")).toBeNull();
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+  });
+
+  it("goes from the empty lists of a new chat to its files without going blank", async () => {
+    stores.dialogsStore.aiChatActiveThreadId = "";
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await flush();
+    const answer = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(answer.promise);
+    stores.dialogsStore.aiChatActiveThreadId = "t-new";
+    rerender(<AiAgentContent projectId={7} />);
+    await flush();
+    // Still the empty lists, not nothing, while its files are on their way.
+    expect(screen.getAllByText("Common:AiContentEmpty")).toHaveLength(2);
+    answer.resolve([file(1, "Chart.png")]);
+    await flush();
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-new");
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+    expect(titles("ai-agent-content-attachments")).toHaveLength(2);
+  });
+
+  it("does not read again on coming back to a conversation whose change it has seen", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    stores.dialogsStore.aiChatActiveThreadId = "t-2";
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(0);
+    stores.dialogsStore.aiChatActiveThreadId = "t-1";
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS * 2);
+    // The first read, the change, t-2, and coming back: no second read for the change.
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(4);
+  });
+
+  it("reads the lists again when the browser tab is shown again", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    api.getAiThreadArtifacts.mockResolvedValue([file(1, "Chart.png"), file(6, "Report.docx")]);
+    await act(async () => {
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await flush();
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png", "Report.docx"]);
   });
 });

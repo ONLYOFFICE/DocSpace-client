@@ -100,7 +100,7 @@ const LeaveRoomDialog = (props) => {
   const descriptionText = isAgentRoom
     ? isRoomOwner
       ? t("Common:LeaveAgentDescription")
-      : t("Common:WantLeaveAgent")
+      : t("Common:LeaveAgentConversationsWarning")
     : isRoomOwner
       ? t("Common:LeaveRoomDescription")
       : t("Common:WantLeaveRoom");

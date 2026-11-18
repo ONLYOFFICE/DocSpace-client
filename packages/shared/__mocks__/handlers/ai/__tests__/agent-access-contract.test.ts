@@ -120,7 +120,7 @@ describe("agentInviteSearchHandler (AccountsController.GetAccountsEntriesWithRoo
   const search = (value: string, id = 777001) =>
     fetch(
       api(
-        `accounts/room/${id}/search?filterValue=${encodeURIComponent(value)}&filterSeparator=,`,
+        `accounts/room/${id}/search?filtervalue=${encodeURIComponent(value)}&filterSeparator=,`,
       ),
     );
 

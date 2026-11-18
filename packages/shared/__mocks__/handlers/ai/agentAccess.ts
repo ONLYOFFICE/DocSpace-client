@@ -182,8 +182,12 @@ export const agentInviteSearchHandler = (
     `${BASE_URL}:${port}/${API_PREFIX}/accounts/room/:id/search`,
     ({ params, request }) => {
       if (String(params.id) !== String(agentId)) return undefined;
+      // The client sends `filtervalue`; the server binds it case-insensitively.
+      const { searchParams } = new URL(request.url);
       const query = (
-        new URL(request.url).searchParams.get("filterValue") ?? ""
+        searchParams.get("filtervalue") ??
+        searchParams.get("filterValue") ??
+        ""
       )
         .trim()
         .toLowerCase();

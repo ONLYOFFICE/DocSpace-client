@@ -263,7 +263,7 @@ test.describe("AI Chat: Knowledge bases", () => {
       await openKnowledgeBases(page, baseUrl);
 
       await row(page, FAILED_BASE)
-        .getByTestId("quick-button-use-in-chat")
+        .getByTestId("quick-buttons-use-in-chat")
         .click();
 
       // The chat opens on the default agent, in a new conversation.
@@ -282,7 +282,7 @@ test.describe("AI Chat: Knowledge bases", () => {
 
       for (const base of KNOWLEDGE_BASES) {
         await expect(
-          row(page, base.title).getByTestId("quick-button-use-in-chat"),
+          row(page, base.title).getByTestId("quick-buttons-use-in-chat"),
         ).toHaveCount(0);
       }
     });

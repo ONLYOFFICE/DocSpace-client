@@ -106,7 +106,8 @@ const SIDE_TITLES = {
 const SERVER_COMPONENTS = new Set(["API", "Server", "AI"]);
 const QUICKFIX_TAG = "[quickfix]";
 const COMMENT_FOOTER = "Generated with Claude Code";
-const FOOTER_RE = /[\s—-]*Generated with Claude Code(?: \([^)]*\))?\s*$/;
+// The model name may carry its own parentheses ("Claude Opus 5.5 (1M)").
+const FOOTER_RE = /[\s—-]*Generated with Claude Code(?: \(.*\))?\s*$/;
 const LANGS = ["ru", "en"];
 // The resolutions the audit may set; DUPLICATE and the like need extra fields.
 const CLOSE_RESOLUTIONS = ["FIXED", "WORKSFORME", "WONTFIX"];
@@ -327,7 +328,8 @@ async function withRetry(fn, attempts = 3) {
 
 function positiveInt(args, name) {
   if (args[name] === undefined) return undefined;
-  const n = Number(args[name]);
+  // A bare flag parses as true, and Number(true) would pass as 1.
+  const n = args[name] === true ? Number.NaN : Number(args[name]);
   if (!Number.isInteger(n) || n < 1) {
     console.error(`--${name} must be a positive integer, got "${args[name]}"`);
     process.exit(2);

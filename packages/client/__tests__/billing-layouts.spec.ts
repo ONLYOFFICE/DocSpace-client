@@ -207,6 +207,7 @@ const DEPOSITS = [
     currency: "USD",
     status: "Completed",
     hasInvoice: true,
+    initiator: "Manual",
   },
   {
     id: 15100,
@@ -215,6 +216,7 @@ const DEPOSITS = [
     currency: "USD",
     status: "Completed",
     hasInvoice: true,
+    initiator: "Automatic",
   },
 ];
 

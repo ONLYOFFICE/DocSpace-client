@@ -30,5 +30,5 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 - `docspace-ui-kit-react`: a slot beside the title of the header component, so the line of the Private list can stand where the canvas has it.
 - Stand: compare the three places with the canvas of 2026-11-18 on the local stack, in both themes, before the archive.
-- `private-rooms-release-gate` 2.1 removes the Beta badges; add the dashboard card to it when this change is archived.
+- `private-rooms-release-gate` 2.1 removes the Beta badges; the dashboard card was added to its tasks 2.1 and 2.2 and to its sidebar-section delta with the archive of 2026-11-18.
 - Archive after 4.3 and the stand comparison; the archive merges the deltas into `private-rooms/sidebar-section` and `private-rooms/key-management`.

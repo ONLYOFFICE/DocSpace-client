@@ -106,22 +106,30 @@ While the project's model is unavailable, the composer SHALL stay disabled for s
 - **THEN** the composer cannot send
 
 ### Requirement: Chats are private
-A chat (thread) SHALL belong to the user who started it and SHALL never be visible to anyone else: not to other members of the same project, not to the project owner, not to admins. There SHALL be no way to share, hand over or jointly edit a chat. Deleting a project SHALL delete only the threads scoped to it; leaving a project SHALL keep the user's threads for the case they are invited again.
+A chat (thread) SHALL belong to the user who started it and SHALL never be visible to anyone else: not to other members of the same project, not to the project owner, not to admins. There SHALL be no way to share, hand over or jointly edit a chat. Deleting a project SHALL delete only the threads scoped to it. Leaving or being removed from a project SHALL delete the user's threads in it for good (`ai-projects-api` "Losing access deletes the member's conversations").
 
 #### Scenario: Another member's thread
 - **WHEN** a Member chats inside a project and another member opens the same project's chat history
 - **THEN** the first Member's thread is not listed
+
+#### Scenario: Left and invited again
+- **WHEN** a Member who chatted in a project leaves it and is invited again
+- **THEN** their earlier threads of that project are not listed and cannot be opened
 
 #### Scenario: Owner looks for members' chats
 - **WHEN** the project owner opens the chat history inside the project
 - **THEN** only the owner's own threads are listed
 
 ### Requirement: Thread scope
-Threads SHALL have one global scope per user. The project or location id a round is scoped to SHALL select the round's context, not a separate thread list, so the chat history shows the user's threads from everywhere. Creating a thread SHALL require that the scoped entity is accessible to the caller and that a chat model is resolvable.
+A thread started in a project SHALL be listed in that project's chat history only (`ai-projects-api` "Conversations of a project"). Every other thread SHALL share one scope per user: the room or location id of a round selects its context, not a thread list, so the history outside projects lists the user's threads of no project from everywhere. Creating a thread SHALL require that the scoped entity is accessible and a chat model resolvable.
 
 #### Scenario: History inside a project
 - **WHEN** a user who has chatted both in Rooms and inside a project opens the chat history inside the project
-- **THEN** both threads are listed
+- **THEN** only the project's thread is listed
+
+#### Scenario: History outside projects
+- **WHEN** the same user opens the chat history in Rooms
+- **THEN** the Rooms thread is listed and the project's thread is not
 
 ### Requirement: Applying a project outside its page
 A project applied to a plain chat (from the model picker) SHALL connect its model, available Instructions rooms and available Knowledge rooms in place, keeping the current thread. Closing that chat SHALL drop them all, so the next chat starts on the default model with no project rooms.

@@ -165,7 +165,7 @@ Members of every AI room and project SHALL be managed through the room panels (I
 - **THEN** Project manager is offered by default, the invitation goes to `files/rooms/{id}/share` with `access` 9 and the user appears in Contacts
 
 ### Requirement: Project roles and who may be invited
-An AI project SHALL offer two roles, Project manager (`access` 9) and Member (`access` 11, the room's Content creator): the Invite panel offers both, with Project manager by default, and the Contacts role menu offers both and removal. Its invitation link SHALL join as Project manager only, the only role the server takes for a link. The Invite panel SHALL offer portal users only: no guests, new or existing, and no groups.
+An AI project SHALL offer two roles, Project manager (`access` 9) and Member (`access` 11, the room's Content creator): the Invite panel offers both, with Project manager by default, and the Contacts role menu offers both and removal. Its invitation link SHALL join as Project manager only, the only role the server takes for a link. The Invite panel SHALL offer portal users only: no guests, new or existing, no groups and no Viewer role, all refused by the server.
 
 #### Scenario: Invite a member from the list
 - **WHEN** a Project manager picks a user in the people list of a project's Invite panel and sets Member
@@ -190,6 +190,17 @@ An AI project SHALL offer two roles, Project manager (`access` 9) and Member (`a
 #### Scenario: An existing member
 - **WHEN** the project already has a member with `access` 11
 - **THEN** Contacts shows them as Member
+
+### Requirement: Removal and leaving warn that conversations are deleted
+Because the server deletes a member's conversations of a project, with their files, when their access ends, the client SHALL say so before it sends the change: a removal from the members list SHALL ask for confirmation with that warning, and the leave confirmation of a manager or member and the change-owner panel, while the owner may also leave, SHALL carry it. The wording is that of `ai-agent-access` in `ai-chat-agents-design`.
+
+#### Scenario: Remove a member
+- **WHEN** a Project manager chooses removal for a Member in the project's members list
+- **THEN** a confirmation says the Member's conversations with it and their files will be permanently deleted, and nothing is sent until it is confirmed
+
+#### Scenario: Leave
+- **WHEN** a Member chooses to leave the project
+- **THEN** the confirmation says their conversations with it and their files will be permanently deleted and not restored by a new invitation
 
 ### Requirement: Linked rooms note in the Invite panel
 The Invite panel of an AI project, and of no other room, SHALL open with an info bar saying that everyone invited gets the Viewer role in all of the project's Instructions and Knowledge rooms.
@@ -233,4 +244,3 @@ A file under the AI rooms root SHALL offer no external link: its menu SHALL drop
 #### Scenario: Copy link
 - **WHEN** a Room manager picks "Copy link" on a file in a Knowledge room
 - **THEN** the internal link is copied and no external file link is requested
-

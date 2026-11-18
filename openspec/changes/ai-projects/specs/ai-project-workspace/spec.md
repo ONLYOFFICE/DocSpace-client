@@ -39,6 +39,13 @@ The Home page SHALL draw the project workspace in place of the file list for a s
 - **WHEN** a member chooses "Copy link" on a project
 - **THEN** the copied URL is `/ai-rooms/{id}/filter?folder={id}` of that project
 
+### Requirement: Conversation files stay out of the Files views
+The files a project's conversations keep inside it SHALL NOT be listed or counted in the Files views, as the server lists a project as empty. A file the user uploads into the project from the chat SHALL NOT be added to the Files list, its count or the "file created" analytics, although its socket `create-file` reaches the uploader.
+
+#### Scenario: Upload from the chat
+- **WHEN** a Member attaches a file from the device in the chat of an open project
+- **THEN** the file goes into the project, and the Files store under the workspace gains no item and no count
+
 ### Requirement: Fixed model
 Inside a project the model picker SHALL be a read-only label for every role, showing the model the chat runs on: the project's stored model, or the portal's chat model when it stores none (the profile of the `Chat` action, or of the `Default` slot when that action has none).
 

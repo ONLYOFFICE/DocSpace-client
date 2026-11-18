@@ -9,11 +9,15 @@ Everything a project shares with a room (pin, mute, leave, owner change, logo, m
 ## ADDED Requirements
 
 ### Requirement: Project entity
-An AI project SHALL be a room of type 12 (`FolderType.AiProjectRoom` 40) under the AI rooms root (`FolderType.AiHub` 41), beside the Instructions and Knowledge rooms. It SHALL hold no files. The server SHALL store its linked rooms as one set of room ids per project (`files_ai_project_room`), each an active Instructions room (type 10) or Knowledge room (type 11), told apart by the room's type. Linked rooms are references by id, never nested rooms.
+An AI project SHALL be a room of type 12 (`FolderType.AiProjectRoom` 40) under the AI rooms root (`FolderType.AiHub` 41), beside the Instructions and Knowledge rooms. The server SHALL store its linked rooms as one set of room ids per project (`files_ai_project_room`), each an active Instructions room (type 10) or Knowledge room (type 11), told apart by the room's type. Linked rooms are references by id, never nested rooms. It SHALL hold no files of its own (see "Files inside a project").
 
-#### Scenario: Upload into a project
-- **WHEN** a client tries to create a file or folder inside a project
-- **THEN** the request is refused: a project holds no content
+#### Scenario: Folder or one-request upload into a project
+- **WHEN** a client tries to create a folder inside a project, or to upload a file into it with `uploadFile`
+- **THEN** the request is refused with 403
+
+#### Scenario: Attachment uploaded through a session
+- **WHEN** a Member opens a chunked upload session in the project for `notes.txt`
+- **THEN** the file is stored in the project and only that Member can read it
 
 ### Requirement: Project room routes
 A project SHALL be created with `POST files/rooms` and `roomType: 12`, read, changed and deleted with `GET/PUT/DELETE files/rooms/{id}`, and listed with `GET files/rooms?searchArea=AiHub` (with `type=12` for projects only). There SHALL be no project-specific create, read or list route.
@@ -44,15 +48,19 @@ A project SHALL carry tags as a room does: `tags` (names) in its DTO, bound and 
 - **THEN** the project is listed with `tags: ["sales"]` and "sales" is in `files/tags`
 
 ### Requirement: Roles
-A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only, never a group) and Member (`access` 11, the room's Content creator; a user or a room or DocSpace admin, directly or through a group, never a guest). The room's Read (`access` 2) SHALL NOT be a project role: sharing a project at Read SHALL be refused with 403. A project SHALL NOT be duplicated.
+A project SHALL have three roles: project owner (`access` 1, the room's `createdBy`), Project manager (`access` 9, portal owner, DocSpace admin or room admin only) and Member (`access` 11, the room's Content creator; a user or a room or DocSpace admin, never a guest). A group SHALL NOT be a member in any role (server d2e3fe02c9). Read (`access` 2) SHALL NOT be a project role and SHALL be refused with 403 (server ecb2d0849a). A project SHALL NOT be duplicated.
 
 #### Scenario: User as Member
 - **WHEN** a Project manager invites a user as Member
 - **THEN** the user is accepted with `access` 11
 
 #### Scenario: Share at Read
-- **WHEN** a Project manager shares the project with a user or a group at `access` 2
+- **WHEN** a Project manager shares the project with a user at `access` 2
 - **THEN** the request is refused with 403 and nobody is added
+
+#### Scenario: Group as Member
+- **WHEN** a Project manager shares the project with a group at `access` 11
+- **THEN** the request is refused and nobody is added
 
 #### Scenario: Guest as Member
 - **WHEN** a Project manager invites a guest as Member
@@ -251,7 +259,7 @@ A linked room readable only through a project SHALL NOT be listed in the member'
 - **THEN** the project is listed and its linked Knowledge room is not
 
 ### Requirement: Membership routes
-Members SHALL be managed through `GET/PUT files/rooms/{id}/share`, `POST .../resend` and `GET/PUT .../links`; leaving sets the caller's own `access` to 0. `access` SHALL be 0, 9 or 11; the owner SHALL NOT appear in a share change. A project SHALL have at most one invitation link, joining as Project manager, the only role the server takes for a link. The owner and a group-only member SHALL NOT leave.
+Members SHALL be managed through `GET/PUT files/rooms/{id}/share`, `POST .../resend` and `GET/PUT .../links`; leaving sets the caller's own `access` to 0. `access` SHALL be 0, 9 or 11; the owner SHALL NOT appear in a share change. A project SHALL have at most one invitation link, joining as Project manager, the only role the server takes for a link. The owner SHALL NOT leave.
 
 #### Scenario: Owner leaves
 - **WHEN** the owner sets their own `access` to 0 through `PUT files/rooms/{id}/share` of a project
@@ -261,12 +269,35 @@ Members SHALL be managed through `GET/PUT files/rooms/{id}/share`, `POST .../res
 - **WHEN** a Project manager creates an invitation link while one exists
 - **THEN** the answer is 403
 
+### Requirement: Losing access deletes the member's conversations
+When a member's own access to a project is removed (a share change to `access` 0 by a Project manager or by the member leaving, or `removeSecurityInfo` by the owner), the conversations that member started in the project SHALL be deleted with their files, as a conversation deletion is (server 18cb4ed823e, BREAKING). Other members' conversations SHALL stay, and a later invitation SHALL NOT restore the deleted ones.
+
+#### Scenario: Member leaves
+- **WHEN** a Member with a conversation in the project sets their own `access` to 0
+- **THEN** reading that conversation answers 404 and its files are removed by the background pass
+
+#### Scenario: Member removed by a manager
+- **WHEN** a Project manager sets a Member's `access` to 0
+- **THEN** the Member's conversations in the project answer 404, and another member's conversations stay
+
+#### Scenario: Invited again
+- **WHEN** the removed Member is invited to the project again as Member
+- **THEN** their earlier conversations and their file lists still answer 404
+
+#### Scenario: Member takes the project off their list
+- **WHEN** a Member calls `removeSecurityInfo` for the project
+- **THEN** the Member is still in the project and their conversations stay
+
 ### Requirement: Change owner
-`PUT files/owner` with the project id SHALL hand the project to an active portal owner, DocSpace admin or room admin, who need not be a member yet. The former owner stays as Project manager, as a room keeps its former owner as a room manager; the client leaves the project in a separate share change when the user asked not to stay. Handing to the current owner SHALL be refused with 400.
+`PUT files/owner` with the project id SHALL hand the project to an active portal owner, DocSpace admin or room admin, who need not be a member yet. The former owner stays as Project manager, as a room keeps its former owner as a room manager, and keeps their conversations. The client leaves the project in a separate share change when the user asked not to stay, which deletes the former owner's conversations as any leave does. Handing to the current owner SHALL be refused with 400.
 
 #### Scenario: Hand over and stay
 - **WHEN** the owner hands the project to a room admin and stays
 - **THEN** the room admin is the owner and the former owner is listed with `access` 9
+
+#### Scenario: Hand over and leave
+- **WHEN** the owner hands the project to a room admin and the client then sets the former owner's `access` to 0
+- **THEN** the former owner's conversations in the project answer 404, and the new owner's stay
 
 ### Requirement: Delete
 Delete (`DELETE files/rooms/{id}`, sent with `deleteAfter: false`) SHALL be permanent (no archive), answered as a file operation to poll, and SHALL remove the project's links and the members' threads while leaving the linked rooms untouched.
@@ -386,7 +417,7 @@ The Node service SHALL recognise a project by the room's `roomType` 12 as well a
 - **THEN** the service takes the `entityId` for a project and copies the file into it
 
 ### Requirement: Files inside a project
-A file or folder inside a project (a conversation's thread folders, their files, an uploaded file) SHALL be readable, downloadable and copyable by its creator alone, whatever anyone's role; every other action on it SHALL be refused. The project SHALL list no contents and its DTO SHALL carry no file or folder counters. DocSpace admins and the portal owner SHALL NOT receive the socket updates of such entries.
+A file or folder inside a project (a conversation's thread folders, their files, an uploaded file) SHALL be readable, downloadable and copyable by its creator alone, whatever anyone's role; every other action on it SHALL be refused. The project SHALL list no contents to anyone, its creator, owner and admins included, and its DTO SHALL carry no file or folder counters, or 0 (server 3fc2dbf741).
 
 #### Scenario: Another member's attachment
 - **WHEN** a Project manager asks for a file another Member attached in a conversation
@@ -395,6 +426,45 @@ A file or folder inside a project (a conversation's thread folders, their files,
 #### Scenario: Project listing
 - **WHEN** a member reads the contents of the project
 - **THEN** the list is empty, although their conversations keep files in it
+
+### Requirement: Uploads into a project are told to the uploader only
+The socket `create-file` of an upload into a project SHALL reach the uploader only, not the owner, DocSpace admins, the portal owner or other members (server 15b42be860). The upload SHALL NOT mark the file as new and SHALL NOT send the "file uploaded to a room" notification (server e4d6f32d52), and `getSharedUsers` of such a file SHALL answer an empty list.
+
+#### Scenario: Upload seen by the owner
+- **WHEN** a Member uploads an attachment into the project while the owner has the project open
+- **THEN** the owner receives no socket event for it and the project gets no new mark
+
+### Requirement: Conversations of a project
+`aiThreadsList` with a project as `entityId` SHALL list the caller's conversations started in that project only, and a conversation started in a project SHALL NOT be listed for another project, for any other `entityId` or without one. A conversation stored before this rule belongs to no project and stays in the list without an entity.
+
+#### Scenario: Listed in its project only
+- **WHEN** a Member starts a conversation in a project and lists conversations for that project, for another project and without an entity
+- **THEN** only the list of that project holds it
+
+### Requirement: Deleting a conversation of a project
+Deleting a conversation of a project (`aiThreadsDelete`) SHALL answer at once: the conversation leaves every list and search, and reading, renaming or sending into it and both file lists answer 404. Its files SHALL be removed afterwards by a background pass, which returns their size to the project's used space.
+
+#### Scenario: Deleted conversation
+- **WHEN** a Member deletes a conversation that has an artifact
+- **THEN** the delete answers at once, the conversation is gone from the project's list, and its artifact list answers 404
+
+### Requirement: Files of a conversation
+A conversation of a project SHALL keep two sets of files inside the project, its own and never shared with another conversation: its artifacts, saved by the chat tools (`POST internal/ai/threads/{id}/artifacts`), and its attachments, the files sent with its messages, moved there when an attachment is linked to a message. An attachment uploaded and never sent stays in the project, unlisted, and counts against its space.
+
+#### Scenario: Attachment not sent
+- **WHEN** a Member uploads a file into the project and attaches it without sending
+- **THEN** the attachments list of the conversation is empty with total 0
+
+### Requirement: Listing the files of a conversation
+`GET files/rooms/{id}/threads/{threadId}/artifacts` and `.../attachments` SHALL answer the conversation's author one page with the total (`count` 1 to 100, 100 by default; `startIndex` 0 or more; anything else 400), 404 for a conversation of another user, the owner included, of another project or deleted, and 403 to a caller outside the project. No socket event SHALL announce a new artifact or attachment: the lists change only on a new request.
+
+#### Scenario: Owner asks for a member's files
+- **WHEN** the project's owner calls both lists for a Member's conversation that has an artifact and a sent attachment
+- **THEN** both answer 404, while the Member's own calls list the files
+
+#### Scenario: Count above the maximum
+- **WHEN** the author calls either list with `count` 101
+- **THEN** the answer is 400
 
 ### Requirement: Copying a file into a project
 A file SHALL be copyable into a project by a caller who may use AI in it, as an attachment: files only, an image or a format text is read from, a name already taken making a second file. Moving into a project SHALL be refused.

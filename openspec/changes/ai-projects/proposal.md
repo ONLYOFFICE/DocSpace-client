@@ -8,6 +8,10 @@ AI Agents tied a model, instructions and knowledge to a single agent room. Teams
 
 The target behavior is set by the product decisions in this change and by the .NET code in `../server` after 96a4fdefca, c48b5391fc and 64c79db1dc (2026-10-31), which moved AI projects under the AI rooms root, serve them through the shared `files/rooms` routes and replaced the internal ASC.AI project routes; the earlier C# contract `AiProjects-API-for-CSharp.md` (2026-10-28) is superseded where they differ. The code on the branch is the current state; tasks.md lists what is still owed (the Docker screenshots, the server-side limits of the project model).
 
+## Superseded in part
+
+The redesign around agents, the change `ai-chat-agents-design`, builds on this one and replaces part of it: an AI project is called an agent, conversations belong to an agent, the project picker and the sources column are gone, and the AI section is three lists (Agents, Skill sets, Knowledge bases) with columns and Info panels of their own. Its design.md, "Relationship to `ai-projects`", lists each requirement of this change it replaces, reverses or keeps. This change is archived first, and those requirements are then removed or reworded by deltas of that change.
+
 ## What Changes
 
 - **Two source room types**, created in the "AI rooms" section like any other room:

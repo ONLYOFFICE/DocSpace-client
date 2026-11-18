@@ -159,7 +159,14 @@ These come from the specs but are owned by `../server` C#; they are listed so th
 - [x] 12.11 Client and ASC.AI.Chat: a Member is the room's Content creator (`access` 11) since server ecb2d0849a, which refuses Read in a project: `AiProjectAccess`, `getAccessOptions`, the members list of the Info panel, the mock, and the role notes of the Node service (client b71491aeef8, server 688c7a2978)
 - [x] 12.12 ASC.AI.Chat: a project without a model of its own runs on the `Default` slot when the `Chat` action has none (server 2945e945ad), and a project is recognised by `roomType` 12 as well as by the folder type, which `FolderDto` does not carry for it (server 9daff56fe2)
 - [ ] 12.13 Server (.NET): a project model whose profile was removed answers `{ profileId: null }`, so the round runs on the portal's model instead of being refused with 409 `projectModelUnavailable` ("Model lifecycle" against "Project model storage"); decide which of the two holds
-- [ ] 12.14 Server (.NET) and ASC.AI.Chat: a member who joined through a group reads `inRoom: false` and is refused the chat (`canChat` is `inRoom`); decide membership by the caller's `access`, or expose a flag for it
+- [x] 12.14 Server (.NET) and ASC.AI.Chat: a member who joined through a group reads `inRoom: false` and is refused the chat (`canChat` is `inRoom`); decide membership by the caller's `access`, or expose a flag for it — *Superseded: server d2e3fe02c9 refuses a group as a member of a project, so no member joins through one.*
+
+## 13. Conversation files and losing access (server 2026-11-16..18, archived change `2026-11-18-add-ai-project-thread-files`)
+
+- [x] 13.1 Record the server contract in `ai-projects-api`: groups and Read refused as members, losing access deletes the member's conversations (change of owner deletes none), conversations of a project listed in it only, the two file lists, immediate deletion, unlisted contents and uploader-only upload events; correct `ai-chat-sources` "Chats are private" and "Thread scope"
+- [x] 13.2 Client: confirm before removing a member of a project and say in the leave dialog and the change-owner panel that the member's conversations and files will be deleted (`ai-projects-catalog` "Removal and leaving warn that conversations are deleted"); built as `ai-chat-agents-design` tasks 9.4–9.6
+- [ ] 13.3 Client: skip the socket `create-file` of the user's own upload into an open project in the Files store (no item, no count, no `FileCreated` analytics), and drop the stale comment in `pages/Home/index.js` that a file uploaded from the chat makes the project's list non-empty; verify with a case in the socket helpers' tests (`ai-project-workspace` "Workspace in place of the file list")
+- [ ] 13.4 Client: add MSW handlers for `GET files/rooms/:id/threads/:threadId/artifacts` and `.../attachments` in `packages/shared/__mocks__/handlers/ai/`, answering 404 for a deleted conversation; verify by an E2E case of the Content tab in `ai-projects.spec.ts`
 
 ## Workflow follow-up
 

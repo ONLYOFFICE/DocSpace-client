@@ -1145,21 +1145,16 @@ const SectionHeaderContent = (props) => {
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
+              beforeContextButton={
+                // An agent's page reads name, Chat history, New chat, "⋮",
+                // Share agent: the agent's chat toolbar goes before the room
+                // menu. An agent the caller is not a member of has no chat.
+                isAiProjectRoomRoot && selectedFolder?.inRoom ? (
+                  <ChatToolbar keepSessionProfile />
+                ) : undefined
+              }
               analyzeResponsesButton={
-                isAiProjectRoomRoot ? (
-                  // The project's chat toolbar (history, new chat) takes the
-                  // slot after the room menu, as the agents' header did. A
-                  // project the caller is not a member of has no chat.
-                  selectedFolder?.inRoom ? (
-                    <ChatToolbar
-                      className={classnames(
-                        styles.analyzeResponsesButton,
-                        styles.projectChatToolbar,
-                      )}
-                      keepSessionProfile
-                    />
-                  ) : null
-                ) : (
+                isAiProjectRoomRoot ? null : (
                   <AnalyzeResponsesButton
                     className={styles.analyzeResponsesButton}
                   />

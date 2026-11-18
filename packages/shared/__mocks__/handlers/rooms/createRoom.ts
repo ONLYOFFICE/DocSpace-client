@@ -85,6 +85,12 @@ export type CreateRoomHandlerOptions = {
  */
 const AI_HUB_ROOM_TYPES = [10, 11, 12];
 
+/**
+ * The room types the server creates with a primary external link: RoomType
+ * .FillingFormsRoom (1) and .PublicRoom (6) of CreateRoomRequestDto.cs.
+ */
+const LINKED_ROOM_TYPES = [1, 6];
+
 const okResponse = <T>(response: T, status = 200): Response =>
   new Response(
     JSON.stringify({ response, status: 0, statusCode: status }),
@@ -158,9 +164,10 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
    * exception type. Last, since bd89a24dcd, a private room refuses with
    * 400 "Bad request." indexing, or a lifetime or watermark whose
    * `enabled` is not false, an object without the flag counting as
-   * enabled. A public or form-filling room created as private is stored
-   * like any other: nothing at creation refuses it, its primary link is
-   * made lazily on the first read and refused there.
+   * enabled. The mock answers 403 "Access denied" for a public or
+   * form-filling room created as private, as the server does. The order
+   * of the steps below mirrors the server and is held by the contract
+   * test; do not reorder them.
    */
   const create = http.post(url, async ({ request }) => {
     const body = (await request.json()) as CreateRoomBody;
@@ -200,6 +207,10 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
       createdAt: new Date().toISOString(),
     };
     state.push(record);
+
+    if (record.private && LINKED_ROOM_TYPES.includes(Number(body.roomType))) {
+      return errorResponse(403, "Access denied");
+    }
 
     return okResponse(buildRoomResponse(record));
   });

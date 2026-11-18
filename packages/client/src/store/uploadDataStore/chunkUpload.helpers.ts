@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import axios from "axios";
 import { runInAction, when } from "mobx";
 import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 import {
@@ -62,7 +63,11 @@ import type { TTranslation } from "@docspace/shared/types";
 import i18n from "../../i18n";
 
 import { acquireUploadAutoLockSuspension } from "./helpers";
-import type { TUploadBrowserFile, TUploadFile } from "./helpers";
+import type {
+  TPendingFinalize,
+  TUploadBrowserFile,
+  TUploadFile,
+} from "./helpers";
 import type {
   default as UploadDataStore,
   TAxiosLikeError,
@@ -338,6 +343,96 @@ export async function asyncUploadImpl(
   }
 }
 
+function markPendingFinalize(
+  self: UploadDataStore,
+  file: TUploadBrowserFile,
+  pendingFinalize: TPendingFinalize,
+) {
+  runInAction(() => {
+    const row = self.files.find((f) => f.file === file);
+    if (row && !row.cancel) row.pendingFinalize = pendingFinalize;
+  });
+}
+
+const isChunkUploadResponse = (res: unknown): res is TChunkUploadResponse =>
+  typeof res === "object" && res !== null && "uploaded" in res;
+
+const isUploadSessionGone = (error: unknown) =>
+  axios.isAxiosError(error) && error.response?.status === 404;
+
+export async function retryFinalizeImpl(
+  self: UploadDataStore,
+  uniqueId: string,
+  pendingFinalize: TPendingFinalize,
+  t: TTranslation,
+) {
+  const findRowIndex = () =>
+    self.files.findIndex((f) => f.uniqueId === uniqueId);
+
+  const startedRow = self.files[findRowIndex()];
+  if (!startedRow) return;
+
+  runInAction(() => {
+    startedRow.inAction = true;
+    self.currentUploadNumber += 1;
+  });
+
+  try {
+    const res = await finalizeUploadSession(
+      startedRow.toFolderId!,
+      pendingFinalize.sessionId,
+    );
+    if (!isChunkUploadResponse(res)) {
+      throw new Error(t("Common:UnexpectedError"));
+    }
+
+    const indexOfFile = findRowIndex();
+    const row = self.files[indexOfFile];
+    if (!row) return;
+
+    if (row.cancel) {
+      if (res.uploaded) {
+        restoreRowCancelledLate(self, uniqueId, {
+          fileId: res.id,
+          file: res.file,
+        });
+      }
+      return;
+    }
+
+    runInAction(() => {
+      row.pendingFinalize = null;
+    });
+    self.checkChunkUpload({
+      t,
+      res,
+      index: 1,
+      indexOfFile,
+      path: pendingFinalize.path,
+      chunksLength: 1,
+      resolve: () => Promise.resolve(),
+    });
+  } catch (error) {
+    const indexOfFile = findRowIndex();
+    const row = self.files[indexOfFile];
+    if (!row || row.cancel) return;
+
+    if (isUploadSessionGone(error)) {
+      runInAction(() => {
+        row.pendingFinalize = null;
+        row.inAction = false;
+        self.currentUploadNumber -= 1;
+      });
+      self.parallelUploading([row], t);
+      return;
+    }
+
+    failUploadSession(self, indexOfFile, error, t, true);
+  } finally {
+    settleUploadQueue(self, t);
+  }
+}
+
 export async function uploadFileChunksImpl(
   self: UploadDataStore,
   sessionId: string,
@@ -410,6 +505,10 @@ export async function uploadFileChunksImpl(
       await promise;
     } catch (error) {
       controller.abort();
+      const sentChunks = self.asyncUploadObj[operationId]?.chunksArray;
+      if (sentChunks?.every((x) => x.isFinalize || x.isFinished)) {
+        markPendingFinalize(self, file, { sessionId, path });
+      }
       throw error;
     } finally {
       stopWatchingCancel();
@@ -598,16 +697,39 @@ export async function startSessionFuncImpl(
   const fileName = file.name;
   const isEncrypted = file.encrypted || false;
 
-  const { publicKey, userId } = self.getUserEncryptionKeys();
-  const gate = resolveUploadGate(
-    {
-      uploadContext: file.uploadContext,
-      alreadyEncrypted: isEncrypted,
-      publicKey,
-      userId,
-    },
-    item.target,
-  );
+  const readGate = () => {
+    const { publicKey, userId } = self.getUserEncryptionKeys();
+    return resolveUploadGate(
+      {
+        uploadContext: file.uploadContext,
+        alreadyEncrypted: isEncrypted,
+        publicKey,
+        userId,
+      },
+      item.target,
+    );
+  };
+
+  let gate = readGate();
+
+  // Spec: private-rooms/file-operations, "An unknown key list is read again before an action is refused"
+  if (
+    gate.action === "refuse" &&
+    gate.reason === "no-key" &&
+    self.userStore?.encryptionKeys === null
+  ) {
+    if (await self.isKeyListUnreadable()) {
+      failUploadItem(
+        self,
+        indexOfFile,
+        i18n.t("Common:EncryptionKeysLoadFailed"),
+        t,
+        createNewIfExist,
+      );
+      return;
+    }
+    gate = readGate();
+  }
 
   if (gate.action === "refuse") {
     // Spec: private-rooms/file-operations, "Uploads into a private room are encrypted on the client".
@@ -627,6 +749,8 @@ export async function startSessionFuncImpl(
   if (gate.action === "encrypt") {
     return uploadEncryptedItem(self, indexOfFile, t, createNewIfExist);
   }
+
+  item.pendingFinalize = null;
 
   const fileSize = fileToUpload.size;
   const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);
@@ -937,7 +1061,10 @@ async function uploadEncryptedItem(
 
     if (!result.ok) {
       const message = getEncryptedUploadErrorMessage(i18n.t, result.error);
-      if (result.failedAt === "wrap") {
+      if (result.failedAt === "wrap" && result.fileId === undefined) {
+        // Spec: file-operations, "A stored upload without the uploader's entry is not kept"
+        failUploadItem(self, indexOfFile, message, t, createNewIfExist);
+      } else if (result.failedAt === "wrap") {
         markUploadedWithError(self, uniqueId, message);
         toastr.error(message);
       } else if (result.failedAt === "upload") {

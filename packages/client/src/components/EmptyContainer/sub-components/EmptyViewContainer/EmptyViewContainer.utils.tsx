@@ -43,6 +43,8 @@ import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 
 import EmptyRoomsRootDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.dark.svg";
 import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg";
+import EmptyPrivateRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.light.svg";
+import EmptyPrivateRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.dark.svg";
 
 import EmptyRecentDarkIcon from "PUBLIC_DIR/images/emptyview/empty.recent.dark.svg";
 import EmptyRecentLightIcon from "PUBLIC_DIR/images/emptyview/empty.recent.light.svg";
@@ -302,7 +304,7 @@ export const getRootDescription = (
     ))
     .with([FolderType.Rooms, P.when(() => isPrivateScope)], () =>
       access === ShareAccessRights.None
-        ? t("EmptyView:EmptyRootPrivateRoomsDescription")
+        ? t("Common:PrivateRoomsListEmptyDescription")
         : t("EmptyView:EmptyRootPrivateRoomsUserDescription"),
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
@@ -624,7 +626,16 @@ export const getRootIcon = (
   rootFolderType: Nullable<FolderType>,
   access: AccessType,
   isBaseTheme: boolean,
+  isPrivateScope: boolean = false,
 ) => {
+  // Spec: private-rooms/sidebar-section, "Section empty state"
+  if (isPrivateScope && rootFolderType === FolderType.Rooms)
+    return isBaseTheme ? (
+      <EmptyPrivateRoomLightIcon />
+    ) : (
+      <EmptyPrivateRoomDarkIcon />
+    );
+
   return match([rootFolderType, access])
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,

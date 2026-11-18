@@ -64,7 +64,7 @@ hidden.
 - Write the contract down as `contract-v1.md` in this change folder (draft
   of 2026-10-29, from the add-on code of build 10.0.0.133, the server code
   and the live run), with numbered obligations for the Document Server
-  (DS-1 to DS-18), the portal server (P-1 to P-8) and the client, so the
+  (DS-1 to DS-20), the portal server (P-1 to P-8) and the client, so the
   Document Server team can sign off item by item.
 - Stamp the crypto bundle (library version and source commit as a banner
   and as exported constants), export the form-flag constant, and hand the
@@ -120,10 +120,10 @@ None.
 - Server (`../server`): editor configuration (the document address of an
   encrypted file, the document key after an encrypted save), the Document
   Server capability, the refusal of encrypted form submissions into
-  form-data collection, whether the signed configuration keeps the
-  caller's key-pair list, and the parity items of the server read of
-  2026-10-30 (copy-as, restore by address, the drop of a removed member's
-  sessions). The server already refuses to
+  form-data collection, an `encryptionKeys` entry of the editor
+  configuration that carries only what the editor reads, and the parity
+  items of the server read of 2026-10-30 (copy-as, restore by address, the
+  drop of a removed member's sessions). The server already refuses to
   convert encrypted or private-room files.
 - Document Server team: owns the contract, the end of an encrypted editing
   session, the form flag on save, and the crypto library build each release
@@ -167,10 +167,10 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
 4. Whether the Document Server team adopts the recommended change-key
    derivation and associated data (contract DS-12) in the first release or
    later; the client needs no change either way.
-5. What the policy is if task 4.4 finds that inserted images reach the
-   Document Server or the portal in plaintext: block image insertion for
-   encrypted documents until fixed, or hold the release. Owner: feature
-   owner with the Document Server team.
+5. What the policy is if a stand run (tasks 4.4 and 4.10) does not confirm
+   that media added to an encrypted document is stored encrypted: block
+   image insertion for encrypted documents, or hold the release. Owner:
+   feature owner with the Document Server team.
 6. Whether encrypted spreadsheets and presentations ship in v1 before the
    Document Server closes the join race of DS-17 and the duplicated replay
    of DS-19 (build 10.0.2.5 closed DS-18 and the first-open race), or the
@@ -180,3 +180,6 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
    creates an encrypted file in the same folder or is withheld, and whether
    mention notifications, which carry the comment text to the portal, stay
    enabled. Found in the client read of 2026-10-30; owner: feature owner.
+   Decided by the owner on 2026-11-10: create-new is withheld for an
+   encrypted file, and a mention notification is sent without the comment
+   text.

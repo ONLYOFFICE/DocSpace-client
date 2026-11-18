@@ -63,11 +63,13 @@ import {
   validateMembersForEncryption,
 } from "../room-encryption";
 import {
+  loadPendingAccess,
   prepareNewOwner,
   retryPendingAccess,
   rewrapForInvitedMembers,
   rewrapPendingAccessOfMember,
   sendPrivateRoomInvitations,
+  notInvitedReasons,
   verifyInvitees,
 } from "../room-member-flows";
 import { pendingAccessStore } from "../pending-access";
@@ -276,7 +278,9 @@ describe("verifyInvitees", () => {
     expect(keys?.has("u-bob")).toBe(false);
     expect(result).toEqual({
       verified: [{ id: "u-ann", publicKey: "pk-ann", displayName: "Ann" }],
-      skipped: [{ id: "u-bob", displayName: "Bob", reason: "no-key" }],
+      skipped: [
+        { id: "u-bob", displayName: "Bob", reason: "no-key", notInvited: true },
+      ],
     });
   });
 
@@ -367,10 +371,12 @@ describe("rewrapForInvitedMembers", () => {
       {
         level: "warning",
         text: `Common:EncryptedSkippedNoKeys ${JSON.stringify({ users: "Ann, u-zed" })}`,
+        namesLeftOut: true,
       },
       {
         level: "warning",
         text: `Common:EncryptedSkippedKeyMismatch ${JSON.stringify({ users: "Robert" })}`,
+        namesLeftOut: true,
       },
     ]);
     expect(onProgress).toHaveBeenLastCalledWith({
@@ -394,7 +400,7 @@ describe("rewrapForInvitedMembers", () => {
       roomId: ROOM_ID,
       newMembers: [newMembers[0]],
       skippedBeforeGrant: [
-        { id: "u-dan", displayName: "Dan", reason: "no-key" },
+        { id: "u-dan", displayName: "Dan", reason: "no-key", notInvited: true },
       ],
       currentUserId: "u-me",
       identity,
@@ -402,16 +408,20 @@ describe("rewrapForInvitedMembers", () => {
       onOutcome,
     });
 
+    // Invitee has no key
     expect(notices).toEqual([
       {
         level: "warning",
-        text: 'Common:EncryptedSkippedNoKeys {"users":"Dan"}',
+        text: 'Common:EncryptedInviteNoKey {"users":"Dan"}',
+        namesLeftOut: true,
       },
     ]);
     expect(onOutcome).toHaveBeenCalledWith({
       granted: [newMembers[0]],
       pending: [],
-      skipped: [{ id: "u-dan", displayName: "Dan", reason: "no-key" }],
+      skipped: [
+        { id: "u-dan", displayName: "Dan", reason: "no-key", notInvited: true },
+      ],
     });
     expect(onProgress).toHaveBeenLastCalledWith({
       percent: 100,
@@ -776,5 +786,132 @@ describe("rewrapPendingAccessOfMember", () => {
     expect(second).toBeNull();
     expect((await first)?.level).toBe("success");
     expect(rewrapMissingFilesForMember).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("loadPendingAccess", () => {
+  const OTHER_ROOM_ID = 9200;
+  const forget = () => {
+    for (const roomId of [ROOM_ID, OTHER_ROOM_ID]) {
+      for (const userId of ["u-ann", "u-bob"]) {
+        pendingAccessStore.clear(roomId, userId);
+      }
+    }
+  };
+
+  beforeEach(forget);
+  afterEach(forget);
+
+  it("Marker after a reload", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1, 2] },
+    ]);
+
+    await loadPendingAccess(ROOM_ID);
+
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(ROOM_ID);
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toEqual({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: [1, 2],
+    });
+    expect(pendingAccessStore.get(ROOM_ID, "u-ann")).toBeUndefined();
+  });
+
+  it("Member who misses nothing any more", async () => {
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: "all",
+    });
+    pendingAccessStore.record({
+      roomId: OTHER_ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: [7],
+    });
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([]);
+
+    await loadPendingAccess(ROOM_ID);
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeUndefined();
+    expect(pendingAccessStore.get(OTHER_ROOM_ID, "u-bob")?.missingFileIds).toEqual(
+      [7],
+    );
+  });
+
+  it("Caller who may not read the list", async () => {
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-bob",
+      missingFileIds: [3],
+    });
+    vi.mocked(getRoomMissingFileKeys).mockRejectedValue({
+      response: { status: 403 },
+    });
+
+    await loadPendingAccess(ROOM_ID);
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toEqual([
+      3,
+    ]);
+  });
+
+  it("Record written while the list was loading", async () => {
+    let answer!: (list: { userId: string; fileIds: number[] }[]) => void;
+    vi.mocked(getRoomMissingFileKeys).mockReturnValue(
+      new Promise((resolve) => {
+        answer = resolve;
+      }),
+    );
+
+    const loading = loadPendingAccess(ROOM_ID);
+    pendingAccessStore.record({
+      roomId: ROOM_ID,
+      userId: "u-ann",
+      missingFileIds: [5],
+    });
+    pendingAccessStore.clear(ROOM_ID, "u-bob");
+    answer([{ userId: "u-bob", fileIds: [1] }]);
+    await loading;
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-ann")?.missingFileIds).toEqual([
+      5,
+    ]);
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeUndefined();
+  });
+});
+
+// Spec: private-rooms/room-membership, "An invitation that invited nobody keeps the invite form"
+describe("notInvitedReasons", () => {
+  it("Only invitee has no key", () => {
+    expect(
+      notInvitedReasons(t, [
+        { id: "u-bob", displayName: "Bob", reason: "no-key", notInvited: true },
+      ]),
+    ).toEqual(['Common:EncryptedInviteNoKey {"users":"Bob"}']);
+  });
+
+  it("Every invitee refused: a missing key is one sentence, whoever found it", () => {
+    expect(
+      notInvitedReasons(
+        t,
+        [
+          { id: "u-bob", displayName: "Bob", reason: "no-key", notInvited: true },
+          { id: "u-kim", displayName: "Kim", reason: "key-mismatch-refused" },
+        ],
+        [
+          { member: { id: "u-eve", displayName: "Eve" }, noKey: true },
+          { member: { id: "u-sam" }, noKey: false },
+        ],
+      ),
+    ).toEqual([
+      'Common:EncryptedInviteNoKey {"users":"Bob, Eve"}',
+      'Common:EncryptedSkippedKeyMismatch {"users":"Kim"}',
+      'Common:EncryptedInviteFailed {"users":"u-sam"}',
+    ]);
+  });
+
+  it("names nobody when nobody was left out", () => {
+    expect(notInvitedReasons(t, [], [])).toEqual([]);
   });
 });

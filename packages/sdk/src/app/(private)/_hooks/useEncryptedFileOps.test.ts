@@ -127,7 +127,7 @@ describe("useEncryptedDownload — error key selection", () => {
 
   it("uses getEncryptionErrorMessage for a NoAccessError (typed crypto)", () => {
     const result = selectDownloadMessage(t, new NoAccessError("u1"));
-    expect(result).toBe("Common:NoAccessToEncryptedFile");
+    expect(result).toBe("Common:EncryptedFileNoAccessYet");
   });
 
   it("uses getEncryptionErrorMessage for a KeyNotFoundError (typed crypto)", () => {
@@ -197,7 +197,7 @@ describe("useEncryptedCopyMove — error key selection", () => {
 
   it("uses getEncryptionErrorMessage for a NoAccessError (typed crypto)", () => {
     const result = selectCopyMessage(t, new NoAccessError(), "file.pdf");
-    expect(result).toBe("Common:NoAccessToEncryptedFile");
+    expect(result).toBe("Common:EncryptedFileNoAccessYet");
   });
 
   it("uses getEncryptionErrorMessage for a KeyNotFoundError (typed crypto)", () => {
@@ -239,7 +239,7 @@ describe("useEncryptedUpload — error key selection", () => {
 
   it("uses getEncryptionErrorMessage for a NoAccessError (typed crypto)", () => {
     const result = selectUploadMessage(t, new NoAccessError());
-    expect(result).toBe("Common:NoAccessToEncryptedFile");
+    expect(result).toBe("Common:EncryptedFileNoAccessYet");
   });
 
   it("uses getEncryptionErrorMessage for a KeyNotFoundError (typed crypto)", () => {

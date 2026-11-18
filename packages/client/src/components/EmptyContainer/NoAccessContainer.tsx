@@ -90,7 +90,11 @@ const NoAccessContainer = (props: Props) => {
       case NoAccessContainerType.Room:
       case NoAccessContainerType.Account:
         {
-          const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
+          const searchArea = isPrivateSection
+            ? RoomSearchArea.PrivateRooms
+            : RoomSearchArea.Active;
+          const filter = RoomsFilter.getDefault(userId, searchArea);
+          filter.searchArea = searchArea;
           filterParamsStr = filter.toUrlParams();
           path = getCategoryUrl(
             isPrivateSection ? CategoryType.PrivateRooms : CategoryType.Shared,

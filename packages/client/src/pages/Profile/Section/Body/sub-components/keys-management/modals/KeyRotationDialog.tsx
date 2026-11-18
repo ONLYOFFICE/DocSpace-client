@@ -58,7 +58,11 @@ import {
   containsCommonPattern,
   isPassphraseAcceptable,
 } from "@docspace/shared/services/encryption/passphrase-strength";
-import { PASSPHRASE_SETTINGS } from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
+import {
+  PASSPHRASE_SETTINGS,
+  RULES_TOOLTIP_PLACE,
+} from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
+import { PassphraseStrengthLine } from "@docspace/shared/dialogs/passphrase-modal/PassphraseStrengthLine";
 
 import styles from "./KeyRotationDialog.module.scss";
 
@@ -104,16 +108,16 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
       ? t("Common:CurrentPassphraseRequired")
       : "";
 
+  // Spec: private-rooms/key-management, "A new passphrase equal to the current one is named"
+  const sameAsCurrent = !!newPassphrase && currentPassphrase === newPassphrase;
+
   const newFieldError =
-    (attemptedSubmit
-      ? newPassphrase.length > 0 && newPassphrase.length < PASSPHRASE_MIN_LENGTH
-        ? t("Common:PassphraseTooShort", { length: PASSPHRASE_MIN_LENGTH })
-        : newPassphrase &&
-            currentPassphrase &&
-            currentPassphrase === newPassphrase
-          ? t("Common:PassphraseMustBeDifferent")
-          : ""
+    (attemptedSubmit &&
+    newPassphrase.length > 0 &&
+    newPassphrase.length < PASSPHRASE_MIN_LENGTH
+      ? t("Common:PassphraseTooShort", { length: PASSPHRASE_MIN_LENGTH })
       : "") ||
+    (sameAsCurrent ? t("Common:PassphraseMustBeDifferent") : "") ||
     (containsCommonPattern(newPassphrase)
       ? t("Common:PassphraseCommonPattern")
       : "");
@@ -227,6 +231,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   }}
                   placeholder={t("Common:EnterCurrentPassphrase")}
                   scale
+                  isFullWidth
                   size={InputSize.base}
                   simpleView
                   isDisabled={isLoading}
@@ -256,6 +261,12 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
               ) : null}
             </div>
 
+            <div
+              className={styles.divider}
+              aria-hidden="true"
+              data-testid="passphrase_change_divider"
+            />
+
             <div className={styles.inputGroup}>
               <FieldContainer
                 isVertical
@@ -277,6 +288,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   }}
                   placeholder={t("Common:EnterNewPassphrase")}
                   scale
+                  isFullWidth
                   size={InputSize.base}
                   simpleView={false}
                   passwordSettings={PASSPHRASE_SETTINGS}
@@ -287,9 +299,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tooltipPasswordLength={`${t(
                     "Common:PasswordMinimumLength",
                   )}: ${PASSPHRASE_MIN_LENGTH}`}
-                  tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-                  tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-                  tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
+                  tooltipPasswordPlace={RULES_TOOLTIP_PLACE}
                   isDisabled={isLoading}
                   hasError={!!newFieldError}
                   autoComplete="new-password"
@@ -297,6 +307,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tabIndex={0}
                 />
               </FieldContainer>
+              <PassphraseStrengthLine passphrase={newPassphrase} />
             </div>
 
             <div className={styles.inputGroup}>
@@ -320,6 +331,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   }}
                   placeholder={t("Common:ConfirmNewPassphrase")}
                   scale
+                  isFullWidth
                   size={InputSize.base}
                   simpleView
                   isDisabled={isLoading}

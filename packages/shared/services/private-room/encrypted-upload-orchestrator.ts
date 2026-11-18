@@ -38,18 +38,23 @@ import type { TFunction } from "i18next";
 import { RoomsType } from "../../enums";
 import {
   abortUploadSession,
+  deleteFile,
   finalizeUploadSession,
   getFileEncryptionAccess,
+  getProgress,
   setFileEncryptionKeys,
   startUploadSession,
   uploadChunkParallel,
   uploadChunkSequential,
 } from "../../api/files";
-import type { TFile } from "../../api/files/types";
+import type { TFile, TOperation } from "../../api/files/types";
 import { getUserById } from "../../api/people";
 import { getRoomEncryptionKeys } from "../../api/privacy";
 import { requestDeviceSetupHint } from "../encryption/device-setup-hint-notifier";
-import { rememberEncryptedFilename } from "../encryption/filename-cache";
+import {
+  forgetEncryptedFilename,
+  rememberEncryptedFilename,
+} from "../encryption/filename-cache";
 import { wipeDek } from "../encryption/file-keys";
 import { wrapDekForRecipients } from "../encryption/room-file-access";
 import { getEncryptionErrorMessage } from "../encryption/error-i18n";
@@ -252,6 +257,23 @@ export class EncryptedWrapError extends Error {
   }
 }
 
+/**
+ * The file was stored, its uploader's entry could not be written, and the
+ * stored file was removed again.
+ */
+export class EncryptedUploadNotKeptError extends Error {
+  constructor(cause: unknown) {
+    super("The uploaded file could not be sealed and was removed");
+    this.name = "EncryptedUploadNotKeptError";
+    this.cause = cause;
+  }
+}
+
+const OWN_ENTRY_WRITE_ATTEMPTS = 3;
+const OWN_ENTRY_RETRY_DELAY_MS = 250;
+const REMOVAL_CHECKS = 20;
+const REMOVAL_CHECK_DELAY_MS = 300;
+
 export interface OrchestrateResult {
   results: UploadFileResult[];
   quotaErrorRaised: boolean;
@@ -337,6 +359,9 @@ export async function nameSkippedMembers(
 export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => {
   if (error instanceof EncryptedReimportError) {
     return t("Common:EncryptionReimportFailed");
+  }
+  if (error instanceof EncryptedUploadNotKeptError) {
+    return t("Common:EncryptionUploadNotKept");
   }
   if (error instanceof EncryptedWrapError) {
     return t("Common:EncryptionUploadWrapFailed");
@@ -489,6 +514,63 @@ function extractFileFromUploadResponse(res: unknown): TFile | undefined {
   return candidate.data?.file ?? candidate.file ?? candidate.response?.file;
 }
 
+const pause = (ms: number) =>
+  new Promise<void>((resolve) => {
+    setTimeout(resolve, ms);
+  });
+
+/**
+ * Writes the uploader's own entry, trying the request again when it fails.
+ * A write whose answer was lost may still have landed, so the last word is
+ * the entry the server holds for the caller.
+ */
+async function writeOwnEntry(
+  fileId: number | string,
+  ownWraps: Awaited<ReturnType<typeof wrapDekForRecipients>>,
+): Promise<boolean> {
+  for (let attempt = 1; attempt <= OWN_ENTRY_WRITE_ATTEMPTS; attempt += 1) {
+    try {
+      await setFileEncryptionKeys(fileId, ownWraps);
+      return true;
+    } catch {
+      if (attempt < OWN_ENTRY_WRITE_ATTEMPTS) {
+        await pause(OWN_ENTRY_RETRY_DELAY_MS);
+      }
+    }
+  }
+  try {
+    const access = await getFileEncryptionAccess(fileId);
+    return (access?.fileKeys ?? []).length > 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Deletes a stored upload nobody can decrypt. The request only queues the
+ * deletion, so the file counts as removed once its operation has finished
+ * without an error.
+ */
+async function removeStoredUpload(fileId: number | string): Promise<boolean> {
+  try {
+    const queued = await deleteFile(Number(fileId), false, true);
+    let operation: TOperation | undefined = queued?.[0];
+    for (
+      let check = 0;
+      operation && !operation.finished && check < REMOVAL_CHECKS;
+      check += 1
+    ) {
+      await pause(REMOVAL_CHECK_DELAY_MS);
+      const operationId: string = operation.id;
+      const progress: TOperation[] | undefined = await getProgress(operationId);
+      operation = progress?.find((candidate) => candidate.id === operationId);
+    }
+    return !!operation?.finished && !operation.error;
+  } catch {
+    return false;
+  }
+}
+
 async function wrapDekForSelfAndRoom(args: {
   fileId: number | string;
   dek: Uint8Array;
@@ -516,14 +598,27 @@ async function wrapDekForSelfAndRoom(args: {
 
   // 1. Self-wrap first — guarantees the uploader can decrypt even if the room
   // member fanout fails mid-flight.
-  const ownWraps = await wrapDekForRecipients({
-    dek,
-    senderIdentity: identity,
-    senderUserId: userId,
-    recipients: [{ userId, publicKey, publicKeyId }],
-    fileId: fileIdNumeric,
-  });
-  await setFileEncryptionKeys(fileId, ownWraps);
+  // Spec: file-operations, "A stored upload without the uploader's entry is not kept"
+  let ownEntryWritten = false;
+  let ownEntryError: unknown;
+  try {
+    const ownWraps = await wrapDekForRecipients({
+      dek,
+      senderIdentity: identity,
+      senderUserId: userId,
+      recipients: [{ userId, publicKey, publicKeyId }],
+      fileId: fileIdNumeric,
+    });
+    ownEntryWritten = await writeOwnEntry(fileId, ownWraps);
+  } catch (error) {
+    ownEntryError = error;
+  }
+  if (!ownEntryWritten) {
+    const removed = await removeStoredUpload(fileId);
+    throw removed
+      ? new EncryptedUploadNotKeptError(ownEntryError)
+      : new EncryptedWrapError(ownEntryError);
+  }
 
   const fanOutToRoom = async (): Promise<TRoomShare> => {
     let readMembers: string[] = [];
@@ -736,7 +831,14 @@ export async function uploadEncryptedFile(
         serializeFanOut,
       });
     } catch (error) {
-      throw new EncryptedWrapError(error);
+      if (error instanceof EncryptedUploadNotKeptError) {
+        forgetEncryptedFilename(fileId);
+        stored = {};
+        throw error;
+      }
+      throw error instanceof EncryptedWrapError
+        ? error
+        : new EncryptedWrapError(error);
     }
     const skippedMembers = share.skipped;
     // Spec: private-rooms/room-membership, "Trusting a changed key wraps what the member missed"

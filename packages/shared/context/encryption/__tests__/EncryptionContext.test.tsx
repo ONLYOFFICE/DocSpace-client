@@ -70,12 +70,29 @@ vi.mock("../../../services/encryption/device-unlock-store", () => ({
   forgetDeviceUnlock: vi.fn(async () => undefined),
 }));
 
+const autoLockListeners = vi.hoisted(() => new Set<() => void>());
+
 vi.mock("../../../services/encryption/auto-lock-preference", () => ({
   getAutoLockTimeoutSeconds: vi.fn(() => 0),
+  locksWhenTabHidden: vi.fn(() => false),
   setAutoLockTimeoutSeconds: vi.fn(),
   setAutoLockScope: vi.fn(),
+  subscribeAutoLockChange: (listener: () => void) => {
+    autoLockListeners.add(listener);
+    return () => {
+      autoLockListeners.delete(listener);
+    };
+  },
   AUTO_LOCK_OPTIONS: [],
 }));
+
+const pickAutoLockSeconds = (seconds: number, hidden: boolean) => {
+  vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(seconds);
+  vi.mocked(locksWhenTabHidden).mockReturnValue(hidden);
+  act(() => {
+    autoLockListeners.forEach((listener) => listener());
+  });
+};
 
 vi.mock("../../../api/people", () => ({
   getUserById: vi.fn(),
@@ -109,7 +126,10 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 import { getUserById } from "../../../api/people";
 import { pendingAccessStore } from "../../../services/private-room/pending-access";
 import { unlockWithPassphrase } from "../../../services/encryption/identity";
-import { getAutoLockTimeoutSeconds } from "../../../services/encryption/auto-lock-preference";
+import {
+  getAutoLockTimeoutSeconds,
+  locksWhenTabHidden,
+} from "../../../services/encryption/auto-lock-preference";
 import {
   persistDeviceUnlock,
   restoreDeviceUnlock,
@@ -467,6 +487,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
         store.restoreDeviceUnlock,
       );
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       now = vi.spyOn(Date, "now").mockReturnValue(T0);
       await store.persistDeviceUnlock("user-42", realPublicKey, dummyKeyPair);
     });
@@ -475,6 +496,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
       now.mockRestore();
       vi.mocked(restoreDeviceUnlock).mockResolvedValue(null);
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
       vi.unstubAllGlobals();
       Object.defineProperty(document, "visibilityState", {
         value: "visible",
@@ -541,6 +563,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
   describe("auto-lock on tab hidden", () => {
     afterEach(() => {
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
       Object.defineProperty(document, "visibilityState", {
         value: "visible",
         configurable: true,
@@ -549,6 +572,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
 
     it("locks SecretStorage when document.visibilityState becomes hidden", async () => {
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);
@@ -564,8 +588,9 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
     });
 
-    it("does not lock on tab hide when auto-lock is Off", async () => {
+    it("Tab hidden with the default preset", async () => {
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);
@@ -586,11 +611,13 @@ describe("EncryptionContext / EncryptionProvider", () => {
     afterEach(() => {
       vi.useRealTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
     });
 
     it("locks after configured timeout when no activity arrives", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);
@@ -606,6 +633,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     it("Idle lock after recovery", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       const tree = (userKeys: EncryptionUserKeys) => (
         <EncryptionProvider
           userKeys={userKeys}
@@ -630,9 +658,65 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
     });
 
+    it("Shorter preset picked while unlocked", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(1800);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      pickAutoLockSeconds(300, true);
+
+      act(() => {
+        vi.advanceTimersByTime(299_000);
+      });
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(latest.isUnlocked).toBe(false);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("Longer preset picked while unlocked", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(300);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      pickAutoLockSeconds(1800, false);
+
+      act(() => {
+        vi.advanceTimersByTime(300_000);
+        Object.defineProperty(document, "visibilityState", {
+          configurable: true,
+          get: () => "hidden",
+        });
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      Object.defineProperty(document, "visibilityState", {
+        configurable: true,
+        get: () => "visible",
+      });
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(1_500_000);
+      });
+      expect(latest.isUnlocked).toBe(false);
+    });
+
     it("activity resets the timer (no lock if event arrives before timeout)", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
 
@@ -653,6 +737,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     it("does not register listeners when timeoutSeconds is 0 (off)", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
       const addSpy = vi.spyOn(document, "addEventListener");
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
@@ -669,6 +754,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     it("does not register listeners when not unlocked", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       const addSpy = vi.spyOn(document, "addEventListener");
       renderTree({ userKeys: null });
 
@@ -684,6 +770,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     it("cleanup removes idle listeners on unmount", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       const removeSpy = vi.spyOn(document, "removeEventListener");
       const tree = renderTree();
@@ -703,6 +790,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     afterEach(() => {
       vi.useRealTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
       Object.defineProperty(document, "visibilityState", {
         value: "visible",
         configurable: true,
@@ -725,6 +813,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
 
     it("suspends tab-hidden auto-lock until the handle is released", async () => {
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);
@@ -759,6 +848,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     it("suspends idle auto-lock until the handle is released", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);

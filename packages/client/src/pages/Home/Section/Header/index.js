@@ -102,7 +102,9 @@ import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHea
 import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
 import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
+import KeyStateIndicator from "./sub-components/KeyStateIndicator";
 import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
+import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -1098,7 +1100,7 @@ const SectionHeaderContent = (props) => {
                   : isAiHubFolder
                     ? getAiWorkspaceCreateLabel(t, location.search)
                     : isRoomsFolder
-                      ? t("Common:NewRoom")
+                      ? getNewRoomLabel(t)
                       : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
@@ -1155,9 +1157,18 @@ const SectionHeaderContent = (props) => {
               }
               analyzeResponsesButton={
                 isAiProjectRoomRoot ? null : (
-                  <AnalyzeResponsesButton
-                    className={styles.analyzeResponsesButton}
-                  />
+                  <>
+                    <KeyStateIndicator
+                      className={styles.keyStateIndicator}
+                      isPrivate={
+                        !!isPrivacyFolder &&
+                        !isPrivateRoomsListRoot(location, isRoomsFolder)
+                      }
+                    />
+                    <AnalyzeResponsesButton
+                      className={styles.analyzeResponsesButton}
+                    />
+                  </>
                 )
               }
             />
@@ -1380,7 +1391,10 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
     const isTemplate = rootFolderType === FolderType.RoomTemplates;
-    const isRootRooms = rootFolderType === FolderType.Rooms;
+    // The Private list is a rooms list under a root of its own.
+    const isRootRooms =
+      rootFolderType === FolderType.Rooms ||
+      rootFolderType === FolderType.PrivateRooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 

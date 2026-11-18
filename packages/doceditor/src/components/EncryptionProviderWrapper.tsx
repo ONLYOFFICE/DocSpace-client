@@ -36,7 +36,6 @@
 "use client";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 import {
   EncryptionProvider,
@@ -74,7 +73,6 @@ const PassphraseUnlockAdapter = ({
   onCancel,
   onUnlocked,
 }: PassphraseDialogProps) => {
-  const { t } = useTranslation(["Common"]);
   const { userId, encryptionKeys, refreshKeysFromServer } = React.useContext(
     EncryptionKeysDataContext,
   );
@@ -119,7 +117,6 @@ const PassphraseUnlockAdapter = ({
       onSubmit={onSubmit}
       onCancel={onCancel}
       onForgotPassphrase={handleForgotPassphrase}
-      submitLabel={t("Common:Confirm")}
       showRememberDevice
       onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}
       isPasskeyUnlocking={passkey.isUnlocking}
@@ -132,6 +129,19 @@ export const EncryptionKeysReadyContext = React.createContext(false);
 export const useEncryptionKeysReady = () =>
   React.useContext(EncryptionKeysReadyContext);
 
+export type TEncryptionKeysLoad = {
+  /** The read of the user's key list failed; the list is not known. */
+  failed: boolean;
+  /** Reads the list again. */
+  reload: () => void;
+};
+
+export const EncryptionKeysLoadContext =
+  React.createContext<TEncryptionKeysLoad>({ failed: false, reload: () => {} });
+
+export const useEncryptionKeysLoad = () =>
+  React.useContext(EncryptionKeysLoadContext);
+
 type TEncryptionProviderWrapperProps = {
   user?: TUser;
   children: React.ReactNode;
@@ -143,6 +153,8 @@ const EncryptionProviderWrapper = ({
 }: TEncryptionProviderWrapperProps) => {
   const [keys, setKeys] = React.useState<TEncryptionKeyPair[] | null>(null);
   const [keysReady, setKeysReady] = React.useState(false);
+  const [keysLoadFailed, setKeysLoadFailed] = React.useState(false);
+  const [loadAttempt, setLoadAttempt] = React.useState(0);
 
   const userId = user?.id ? String(user.id) : undefined;
 
@@ -154,12 +166,15 @@ const EncryptionProviderWrapper = ({
 
     let cancelled = false;
 
+    // Spec: private-rooms/editor-integration, "Editor loads the caller's key envelopes before opening an encrypted file"
     getEncryptionKeys()
       .then((res) => {
-        if (!cancelled) setKeys(res ?? []);
+        if (cancelled) return;
+        setKeys(res ?? []);
+        setKeysLoadFailed(false);
       })
       .catch(() => {
-        if (!cancelled) setKeys([]);
+        if (!cancelled) setKeysLoadFailed(true);
       })
       .finally(() => {
         if (!cancelled) setKeysReady(true);
@@ -168,7 +183,19 @@ const EncryptionProviderWrapper = ({
     return () => {
       cancelled = true;
     };
-  }, [userId]);
+  }, [userId, loadAttempt]);
+
+  const keysLoad = React.useMemo<TEncryptionKeysLoad>(
+    () => ({
+      failed: keysLoadFailed,
+      reload: () => {
+        setKeysReady(false);
+        setKeysLoadFailed(false);
+        setLoadAttempt((attempt) => attempt + 1);
+      },
+    }),
+    [keysLoadFailed],
+  );
 
   const chosen = selectUserKey(keys);
 
@@ -199,11 +226,14 @@ const EncryptionProviderWrapper = ({
     <EncryptionKeysDataContext.Provider value={keysData}>
       <EncryptionProvider
         userKeys={userKeys}
+        keysLoaded={keys !== null}
         PassphraseDialog={PassphraseUnlockAdapter}
         KeyChangeDialog={KeyChangeDialog}
       >
         <EncryptionKeysReadyContext.Provider value={keysReady}>
-          {children}
+          <EncryptionKeysLoadContext.Provider value={keysLoad}>
+            {children}
+          </EncryptionKeysLoadContext.Provider>
         </EncryptionKeysReadyContext.Provider>
       </EncryptionProvider>
     </EncryptionKeysDataContext.Provider>

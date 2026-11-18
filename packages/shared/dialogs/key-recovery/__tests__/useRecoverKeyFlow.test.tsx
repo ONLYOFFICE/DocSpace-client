@@ -168,6 +168,28 @@ describe("useRecoverKeyFlow", () => {
       expect(unlockWithRecoveryPhrase).toHaveBeenCalledTimes(1);
     });
 
+    it("All words valid, phrase wrong", async () => {
+      vi.mocked(unlockWithRecoveryPhrase).mockRejectedValue(
+        new InvalidRecoveryPhraseError(),
+      );
+      render(
+        <Harness
+          userId="42"
+          encryptionKeys={makeKeys(1)}
+          refreshKeysFromServer={vi.fn()}
+        />,
+      );
+      act(() => latest.request());
+      // Recovery words with a valid checksum: the input passes it on, and only
+      // the key refuses it.
+      await act(async () => {
+        await (captured.phrase!.onSubmit as (p: string) => Promise<void>)(
+          `${"abandon ".repeat(23)}art`,
+        );
+      });
+      expect(captured.phrase?.error).toBe("Common:InvalidRecoveryPhrase");
+    });
+
     it("shows the generic EncryptionError on non-recoverable failures (network/crypto throw)", async () => {
       vi.mocked(unlockWithRecoveryPhrase).mockRejectedValueOnce(
         new Error("network timeout"),

@@ -72,6 +72,7 @@ import {
   setDocumentTitle,
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
+import { noticeOwnKeysOnRoomEntry } from "SRC_DIR/helpers/ownKeyListNotice";
 import {
   getAiListTitle,
   getAiRoomListType,
@@ -327,10 +328,7 @@ export function fetchFilesImpl(
       }
 
       if (data.current.private) {
-        const keys = self.userStore?.encryptionKeys;
-        if (!Array.isArray(keys) || keys.length === 0) {
-          toastr.warning(i18n.t("Common:EncryptionKeysNotConfigured"));
-        }
+        noticeOwnKeysOnRoomEntry(self.userStore);
 
         // The room id may differ from data.current.id when navigating into
         // a sub-folder: pathParts[1] is the room, current is the sub-folder.
@@ -940,10 +938,10 @@ export function fetchRoomsImpl(
 
 /**
  * The copy of a rooms filter a list request sends: the Private section asks
- * for private rooms only, and Rooms for none while that section exists.
+ * for its own area, and Rooms for none of the private rooms.
  */
 export const scopeRoomsRequest = (
-  self: FilesStore,
+  _self: FilesStore,
   filter: TRoomsFilter,
 ): TRoomsFilter =>
   withRoomsRequestScope(
@@ -951,7 +949,6 @@ export const scopeRoomsRequest = (
     getRoomsRequestScope(
       getCategoryType(window.DocSpace?.location ?? window.location),
       filter.searchArea,
-      !!self.appsStore?.isPrivateRoomsSectionAvailable,
     ),
   );
 

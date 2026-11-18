@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import type { TFunction } from "i18next";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -42,15 +42,17 @@ import { useGenerateKeyFlow } from "../dialogs/key-generation";
 import { hasPrivateRoomSecureContext } from "../services/private-room/create-room-gate";
 
 /**
- * The key-generation step of private room creation: a user without a key is
- * offered one before the room is created, and the creation closes when the
- * generation fails or, for a private room, when the offer is declined.
+ * The key-setup step of private room creation: a user without a key goes
+ * through key setup before the room is created, and the creation closes
+ * when the setup fails or is left, as the caller decides.
+ * Spec: private-rooms/room-membership, "Starting private room creation without a key opens key setup"
  */
 export function usePrivateRoomKeyGate({
   t,
   userId,
   accountLabel,
   hasExistingKeys,
+  isGuest,
   refreshKeysFromServer,
   onKeyGenerated,
   onKeyGenerationCancelled,
@@ -61,13 +63,14 @@ export function usePrivateRoomKeyGate({
   accountLabel?: string;
   /** A user who already holds a key is never offered a second one. */
   hasExistingKeys?: boolean;
+  /** A guest is never offered a key: the server refuses a guest's key. */
+  isGuest?: boolean;
   refreshKeysFromServer: () => Promise<void>;
   onKeyGenerated?: () => void;
-  /** The user cancelled inside key generation, after confirming the offer. */
+  /** The user left key setup on any of its steps. */
   onKeyGenerationCancelled?: () => void;
   onClose?: () => void;
 }) {
-  const [keyConfirmVisible, setKeyConfirmVisible] = useState(false);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
   const onCancelledRef = useRef(onKeyGenerationCancelled);
@@ -88,34 +91,23 @@ export function usePrivateRoomKeyGate({
   });
 
   /**
-   * Offers key generation. Returns false, with the secure-context toast,
-   * where the browser has no WebCrypto.
+   * Opens key setup at once, with no question before it. Returns false, with
+   * the secure-context toast, where the browser has no WebCrypto, and false
+   * without one for a guest.
    */
+  // Spec: private-rooms/key-management, "Key generation is withheld from guests"
   const offerKeyGeneration = () => {
+    if (isGuest) return false;
     if (!hasPrivateRoomSecureContext()) {
       toastr.error(t("Common:EncryptionRequiresHttps"));
       return false;
     }
-    setKeyConfirmVisible(true);
+    generateKey.request();
     return true;
   };
 
-  const confirmKeyGeneration = () => {
-    setKeyConfirmVisible(false);
-    generateKey.request();
-  };
-
-  /** Declines the offer; `closeCreation` closes the creation as well. */
-  const cancelKeyGeneration = (closeCreation: boolean) => {
-    setKeyConfirmVisible(false);
-    if (closeCreation) onCloseRef.current?.();
-  };
-
   return {
-    keyConfirmVisible,
     offerKeyGeneration,
-    confirmKeyGeneration,
-    cancelKeyGeneration,
     keyGenerationModals: generateKey.modals,
   };
 }

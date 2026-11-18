@@ -35,7 +35,7 @@
 
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -595,9 +595,10 @@ export default function useFileOperations({
   }, []);
 
   // Compute disabled items (can't move folder into itself)
-  const disabledItems = pendingItems
-    .filter((i) => i.isFolder)
-    .map((i) => i.id as number);
+  const disabledItems = useMemo(
+    () => pendingItems.filter((i) => i.isFolder).map((i) => i.id as number),
+    [pendingItems],
+  );
 
   // Spec: private-rooms/sdk-surface, "Moves stay inside the private room"
   const selectorPinnedRootId =

@@ -37,6 +37,7 @@ import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import type { RequestLog } from "../privacyroom";
+import { LATIN_NUMBERING_SYSTEM } from "../../../utils/latin-digits";
 import { getFilesSettings } from "./filesSettings";
 
 export type EncryptedFileKey = {
@@ -103,9 +104,7 @@ export type EncryptedFilesHandlerHandle = {
   setFileKeys: (fileId: number, keys: EncryptedFileKey[]) => void;
   setRoomUserKeys: (keys: RoomMemberKeyEntry[]) => void;
   /**
-   * The stored keys of portal users who are not members of the room, such as
-   * a file's creator who left it: publickeys still answers with the
-   * creator's keys.
+   * The stored keys of portal users who are not members of the room.
    */
   setNonMemberKeys: (keys: RoomMemberKeyEntry[]) => void;
   /** Marks a file as lying outside a private room (publickeys answers 415). */
@@ -292,7 +291,7 @@ const filesSizeToString = (size: number) => {
     );
     result /= 1024 ** power;
   }
-  return `${result.toLocaleString("en-US", { maximumFractionDigits: 2 })} ${names[power]}`;
+  return `${result.toLocaleString("en-US", { numberingSystem: LATIN_NUMBERING_SYSTEM, maximumFractionDigits: 2 })} ${names[power]}`;
 };
 
 const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
@@ -993,10 +992,9 @@ export const encryptedFilesHandlers = (
      * (HttpGet "file/{fileId}/publickeys"): the keys of the users holding a
      * share record of their own on the file or a folder above it up to the
      * room (FileSharing.GetSharedInfoAsync over SecurityDao.GetSharesAsync),
-     * plus the file's creator, whom GetSharedInfoAsync adds as the owner
-     * entry even after they left. The room's owner holds no share record of
-     * their own, so here the members are `roomUserKeys` without the owner,
-     * and the creator's keys come from `roomUserKeys` or `nonMemberKeys`.
+     * plus the file's owner entry GetSharedInfoAsync adds. The room's owner
+     * holds no share record of their own, so here the members are
+     * `roomUserKeys` without the owner.
      * 404 for a missing file, 415 for a file outside a private room
      * (NotSupportedException); SanitizeAccessKeys drops entries without a
      * public key and keeps the private half only on the caller's entries.
@@ -1185,9 +1183,8 @@ export const encryptedFilesHandlers = (
      * file key and the instance id only, since RoomId is set for a virtual
      * data room alone), the editor configuration (mode "edit" unless the
      * caller asks `view` or the room is archived; the callback address while
-     * the session may write; the caller's full key list with privateKeyEnc
-     * in encryptionKeys when the file lies in a private room, as
-     * EncryptionKeyPairDtoHelper.GetKeyPairAsync() returns it; mentionShare
+     * the session may write; encryptionKeys when the file lies in a private
+     * room; mentionShare
      * false and no favorite for an encrypted file), the signature token and
      * the file as FileDtoHelper reports it. A missing file is 404.
      */

@@ -85,6 +85,12 @@ export const getRoomTypeName = (room, t) => {
   }
 };
 
+// Spec: private-rooms/room-membership, "Private room type is labelled Private"
+export const getRoomTypeLabel = (room, t) =>
+  room?.private
+    ? t("Common:PrivateRoomType")
+    : getRoomTypeName(room?.roomType, t);
+
 export const getDefaultFileName = (format) => {
   switch (format) {
     case "docx":

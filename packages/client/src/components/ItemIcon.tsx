@@ -48,6 +48,7 @@ import { RoomIcon, type TModel } from "@onlyoffice/apps-ui-kit/components";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { mayHoldEncryptionKey } from "@docspace/shared/services/encryption/select-user-key";
 import { SKILL_EXTENSION } from "@docspace/shared/utils/skillFile";
 
 import SkillIcon, { getAiRoomIconKind } from "./SkillIcon";
@@ -76,7 +77,8 @@ type ItemIconProps = {
 	isTemplate?: boolean;
 	dataTestId?: string;
 	encrypted?: boolean;
-	hasEncryptionKeys?: boolean;
+	/** False only for a key list known to be empty. */
+	mayHoldKey?: boolean;
 	/** The room's type: a skill set is drawn with its own icon. */
 	roomType?: RoomsType | number | null;
 	/** The open folder is a skill set: its Markdown files are skills. */
@@ -106,7 +108,7 @@ const ItemIcon = ({
 	isTemplate,
 	dataTestId,
 	encrypted,
-	hasEncryptionKeys,
+	mayHoldKey,
 	roomType,
 	isSkillSetOpen,
 }: ItemIconProps) => {
@@ -144,7 +146,8 @@ const ItemIcon = ({
 		(isPrivacy && !!fileExst) || (isRoom && !!isPrivateRoom && !isArchive);
 
 	const isEncryptedFile = !!encrypted && !!fileExst;
-	const showNoAccessBadge = isEncryptedFile && !hasEncryptionKeys;
+	// Spec: private-rooms/file-operations, "Opening without keys is withheld"
+	const showNoAccessBadge = isEncryptedFile && !mayHoldKey;
 
 	const showEncryptedBadge =
 		showLegacyEncryptedBadge || isEncryptedFile;
@@ -213,13 +216,12 @@ const ItemIcon = ({
 	);
 };
 
-export default inject(({ treeFoldersStore, userStore, selectedFolderStore }: TStore) => {
-	const keys = userStore?.encryptionKeys;
-	return {
+export default inject(
+	({ treeFoldersStore, userStore, selectedFolderStore }: TStore) => ({
 		isSkillSetOpen:
 			selectedFolderStore.roomType === RoomsType.InstructionsRoom ||
 			selectedFolderStore.parentRoomType === FolderType.InstructionsRoom,
 		isPrivacy: treeFoldersStore.isPrivacyFolder,
-		hasEncryptionKeys: Array.isArray(keys) && keys.length > 0,
-	};
-})(observer(ItemIcon));
+		mayHoldKey: mayHoldEncryptionKey(userStore?.encryptionKeys),
+	}),
+)(observer(ItemIcon));

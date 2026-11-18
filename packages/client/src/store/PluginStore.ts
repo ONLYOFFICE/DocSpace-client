@@ -48,6 +48,7 @@ import type {
   IModalDialog,
   TSelector,
   IMediaViewer,
+  IHtmlFrame,
   IFloatingOperationsButton,
 } from "@onlyoffice/docspace-plugin-sdk";
 
@@ -95,6 +96,8 @@ import type {
   IArticleButtonItemClient,
   IArticleNavigationItem,
   IArticleNavigationItemClient,
+  IDashboardWidgetItemClient,
+  IArticleWidgetItemClient,
   IframeWindow,
   TPlugin,
   TPluginError,
@@ -106,7 +109,7 @@ import type {
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
-import { matchesUserRole } from "../helpers/plugins/roles";
+import { matchesUserAccess, matchesUserRole } from "../helpers/plugins/roles";
 import {
   isSupersededPluginItem,
   MARKDOWN_EXTENSION,
@@ -117,7 +120,7 @@ import {
   releaseModuleEvents,
   setModuleEventDispatcher,
 } from "../helpers/plugins/react/socket";
-import type { RoomsType } from "@docspace/shared/enums";
+import { DeviceType, type RoomsType } from "@docspace/shared/enums";
 import { pluginRoomTypes, toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
@@ -143,6 +146,20 @@ const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 // One client for every plugin: it holds no per-plugin state, and a plugin that
 // lists `api` in a dependency array must not see a new object on every render.
 const pluginApi = createPluginApi();
+
+// Plugins load in parallel and each adds its items once its bundle has loaded, so a map holds them in the order the
+// downloads happened to finish - a different order after every reload. Sorting by plugin name gives a stable order
+// that an administrator can arrange by naming the plugins (numeric parts compare as numbers); the sort is stable,
+// so the items of one plugin keep the order the plugin gave them.
+const listByPluginName = <T extends { pluginName: string }>(
+  items: Map<string, T>,
+) =>
+  Array.from(items, ([key, value]) => ({ key, value: { ...value } })).sort(
+    (a, b) =>
+      a.value.pluginName.localeCompare(b.value.pluginName, "en", {
+        numeric: true,
+      }),
+  );
 
 type TDispatchMessage = Pick<
   TMessageActionsParams,
@@ -181,6 +198,10 @@ class PluginStore {
   articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
   articleNavigationItems: Map<string, IArticleNavigationItemClient> = new Map();
+
+  dashboardWidgetItems: Map<string, IDashboardWidgetItemClient> = new Map();
+
+  articleWidgetItems: Map<string, IArticleWidgetItemClient> = new Map();
 
   pluginFrame: HTMLIFrameElement | null = null;
 
@@ -248,6 +269,7 @@ class PluginStore {
     makeAutoObservable(this, {
       reactPluginModalState: observable.ref,
       reactSettingsSaveButtonState: observable.ref,
+      articleWidgetItems: observable.shallow,
     });
 
     // Subscribe to plugin state changes via WebSocket
@@ -303,6 +325,8 @@ class PluginStore {
       updateEventListenerItems: this.updateEventListenerItems,
       updateArticleButtonItems: this.updateArticleButtonItems,
       updateArticleNavigationItems: this.updateArticleNavigationItems,
+      updateDashboardWidgetItems: this.updateDashboardWidgetItems,
+      updateArticleWidgetItem: this.updateArticleWidgetItem,
       updateFileItems: this.updateFileItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
@@ -315,7 +339,14 @@ class PluginStore {
       setPluginMediaViewerProps: this.setPluginMediaViewerProps,
       setReactPluginModalState: this.setReactPluginModalState,
       reactPluginCurrentFile: currentFile,
+      closeMobileArticle: this.closeMobileArticle,
     });
+  };
+
+  closeMobileArticle = () => {
+    if (this.settingsStore.currentDeviceType === DeviceType.mobile) {
+      this.settingsStore.setArticleOpen(false);
+    }
   };
 
   setReactPluginModalState = (
@@ -788,6 +819,14 @@ class PluginStore {
     if (scopes.includes(PluginScopes.ArticleNavigation)) {
       this.updateArticleNavigationItems(name);
     }
+
+    if (scopes.includes(PluginScopes.DashboardWidget)) {
+      this.updateDashboardWidgetItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleWidget)) {
+      this.updateArticleWidgetItem(name);
+    }
   };
 
   /** Takes back everything `registerPluginItems` published. */
@@ -824,6 +863,14 @@ class PluginStore {
 
     if (scopes.includes(PluginScopes.ArticleNavigation)) {
       this.deactivateArticleNavigationItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.DashboardWidget)) {
+      this.deactivateDashboardWidgetItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleWidget)) {
+      this.articleWidgetItems.delete(plugin.name);
     }
   };
 
@@ -1757,6 +1804,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
+    const { user } = this.userStore;
 
     const actualItems = new Map<string, IArticleNavigationItemClient>();
 
@@ -1767,7 +1815,9 @@ class PluginStore {
         ? value.devices.includes(device)
         : true;
 
-      if (!correctUserType || !correctDevice) continue;
+      const correctAccess = matchesUserAccess(value, user);
+
+      if (!correctUserType || !correctDevice || !correctAccess) continue;
 
       const icon = `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`;
 
@@ -1775,6 +1825,11 @@ class PluginStore {
         ...value,
         icon,
         pluginName: plugin.name,
+        dashboardCard: value.dashboardCard && {
+          ...value.dashboardCard,
+          description:
+            value.dashboardCard.description ?? plugin.descriptionLocale,
+        },
       });
     }
 
@@ -1787,6 +1842,75 @@ class PluginStore {
     actualItems.forEach((value, key) => {
       this.articleNavigationItems.set(key, value);
     });
+  };
+
+  updateDashboardWidgetItems = (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items = plugin.getDashboardWidgetItems?.();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const { user } = this.userStore;
+
+    const actualItems = new Map<string, IDashboardWidgetItemClient>();
+
+    items.forEach((item, key) => {
+      if (
+        !matchesUserRole(item.usersTypes, userRole) ||
+        !matchesUserAccess(item, user)
+      )
+        return;
+
+      actualItems.set(key, {
+        ...item,
+        title: item.title ?? plugin.nameLocale,
+        pluginName: plugin.name,
+      });
+    });
+
+    this.removeMissingItems(
+      this.dashboardWidgetItems,
+      plugin.name,
+      new Set(actualItems.keys()),
+    );
+
+    actualItems.forEach((value, key) =>
+      this.dashboardWidgetItems.set(key, value),
+    );
+  };
+
+  updateArticleWidgetItem = (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const item = plugin.getArticleWidgetItem?.();
+
+    if (
+      item &&
+      matchesUserRole(item.usersTypes, this.getUserRole()) &&
+      (!item.devices || item.devices.includes(this.getCurrentDevice())) &&
+      matchesUserAccess(item, this.userStore.user)
+    ) {
+      this.articleWidgetItems.set(name, {
+        ...item,
+        icon: item.icon && this.getPluginIconUrl(name, item.icon),
+        label: plugin.nameLocale,
+        pluginName: name,
+      });
+    } else {
+      this.articleWidgetItems.delete(name);
+    }
+  };
+
+  deactivateDashboardWidgetItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    this.removeMissingItems(this.dashboardWidgetItems, plugin.name, new Set());
   };
 
   deactivateArticleNavigationItems = (plugin: TPlugin) => {
@@ -2041,6 +2165,14 @@ class PluginStore {
             message: { actions: [Actions.closeMediaViewer] },
             pluginName,
           }),
+        showHtmlInFrame: (props: IHtmlFrame) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showHtmlInFrame],
+              htmlFrameProps: props,
+            },
+            pluginName,
+          }),
         updateMediaViewer: (props: IMediaViewer) =>
           this.dispatchMessage({
             message: {
@@ -2083,6 +2215,8 @@ class PluginStore {
         updateArticleNavigationItems: redraw(
           Actions.updateArticleNavigationItems,
         ),
+        updateDashboardWidgetItems: redraw(Actions.updateDashboardWidgetItems),
+        updateArticleWidgetItem: redraw(Actions.updateArticleWidgetItem),
       },
       api: pluginApi,
       settings: {
@@ -2216,28 +2350,21 @@ class PluginStore {
   };
 
   get articleNavigationItemsList() {
-    // Plugins load in parallel and each adds its items once its bundle has loaded, so the map holds them in the
-    // order the downloads happened to finish - a different order after every reload. Sorting by plugin name gives a
-    // stable sidebar that an administrator can arrange by naming the plugins (numeric parts compare as numbers);
-    // the sort is stable, so the items of one plugin keep the order the plugin gave them.
-    const items = Array.from(this.articleNavigationItems, ([key, value]) => {
-      return {
-        key,
-        value: {
-          ...value,
-        },
-      };
-    }).sort((a, b) =>
-      a.value.pluginName.localeCompare(b.value.pluginName, "en", {
-        numeric: true,
-      }),
-    );
+    const items = listByPluginName(this.articleNavigationItems);
 
     if (items.length > 0) {
       return items;
     }
 
     return null;
+  }
+
+  get dashboardWidgetItemsList() {
+    return listByPluginName(this.dashboardWidgetItems);
+  }
+
+  get articleWidgetItemsList() {
+    return listByPluginName(this.articleWidgetItems);
   }
 }
 

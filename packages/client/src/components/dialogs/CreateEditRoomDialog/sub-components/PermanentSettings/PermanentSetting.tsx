@@ -42,7 +42,6 @@ import styles from "../../CreateEditRoomDialog.module.scss";
 
 type PermanentSettingProps = {
   isFull: boolean;
-  type: string;
   icon: string;
   title: string;
   content: React.ReactNode;
@@ -50,14 +49,13 @@ type PermanentSettingProps = {
 
 const PermanentSetting = ({
   isFull,
-  type,
   icon,
   title,
   content,
 }: PermanentSettingProps) => {
   return (
     <div
-      className={`${styles.permanentSetting}${isFull ? ` ${styles.isFull}` : ""}${type === "privacy" ? ` ${styles.privacyType}` : ""}`}
+      className={`${styles.permanentSetting}${isFull ? ` ${styles.isFull}` : ""}`}
     >
       <div className="permanent_setting-main_info">
         <ReactSVG className="permanent_setting-main_info-icon" src={icon} />

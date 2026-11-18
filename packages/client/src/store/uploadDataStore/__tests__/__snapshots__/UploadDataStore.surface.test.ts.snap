@@ -49,6 +49,7 @@ exports[`UploadDataStore — public surface > exposes a stable set of public mem
   "handleFilesUpload",
   "handleUploadAndOptionalConversion",
   "handleUploadConflicts",
+  "isKeyListUnreadable",
   "isUploading",
   "isUploadingAndConversion",
   "itemOperationToFolder",

@@ -43,7 +43,7 @@ import { useFormInfoActions } from "./hooks/useFormInfoActions";
 import { useFormInfoState } from "./hooks/useFormInfoState";
 
 import styles from "./FormInfo.module.scss";
-import { shouldShow } from "./FormInfo.utils";
+import { canShowAICard, shouldShow } from "./FormInfo.utils";
 import type {
   ExternalFormInfoProps,
   FormRoomInfoBlocksProps,
@@ -60,6 +60,7 @@ function FormInfoComponent(props: FormRoomInfoBlocksProps) {
     infoPanelRoomSelection,
     openLocationAction,
     onClickLinkFillForm,
+    isStandalone,
   } = props;
 
   const state = useFormInfoState({
@@ -78,17 +79,26 @@ function FormInfoComponent(props: FormRoomInfoBlocksProps) {
 
   if (!shouldShow(selection)) return null;
 
+  const isAICardVisible = canShowAICard({
+    isStandalone,
+    externalDbEnabled,
+    aiReady,
+  });
+
   return (
     <div className={styles.container}>
-      <AICard
-        selection={selection}
-        state={state}
-        isAdmin={isAdmin}
-        aiReady={aiReady}
-        externalDbEnabled={externalDbEnabled}
-        askAIAction={askAIAction}
-        onConnect={actions.handleConnect}
-      />
+      {isAICardVisible ? (
+        <AICard
+          selection={selection}
+          state={state}
+          isAdmin={isAdmin}
+          aiReady={aiReady}
+          externalDbEnabled={externalDbEnabled}
+          askAIAction={askAIAction}
+          onConnect={actions.handleConnect}
+        />
+      ) : null}
+
       <CollectionCard
         selection={selection}
         state={state}
@@ -116,9 +126,9 @@ export const FormInfo = inject<
     openLocationAction: filesActionsStore.openLocationAction,
     externalDbEnabled: settingsStore.externalDbEnabled,
     aiReady: Boolean(settingsStore.aiConfig?.aiReady),
+    isStandalone: settingsStore.standalone,
     onClickLinkFillForm: contextOptionsStore.onClickLinkFillForm,
     infoPanelRoomSelection: infoPanelStore.infoPanelRoomSelection,
     isAdmin: !!(userStore?.user?.isAdmin || userStore?.user?.isOwner),
   }),
 )(observer(FormInfoComponent as FC<ExternalFormInfoProps>));
-

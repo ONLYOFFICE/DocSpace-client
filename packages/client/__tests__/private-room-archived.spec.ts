@@ -248,7 +248,7 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
     .locator('input[name="passphrase"], #passphrase input')
     .first()
     .fill(passphrase);
-  await prompt.getByRole("button", { name: "Confirm" }).click();
+  await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
 };
 
 /** Records every request the page sends, as "METHOD pathname?search". */
@@ -398,7 +398,7 @@ test.describe("Private room — archived", () => {
     await openContextMenu(page, BUDGET.name);
     await page.locator("#option_download").hover();
     await page
-      .getByRole("menuitem", { name: "Original format", exact: true })
+      .getByRole("menuitem", { name: "Decrypted copy", exact: true })
       .click();
     await unlockIfPrompted(page, passphrase);
 

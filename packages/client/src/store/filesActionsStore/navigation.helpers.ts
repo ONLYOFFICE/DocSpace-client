@@ -135,6 +135,10 @@ self: FilesActionStore
     filter.searchArea = RoomSearchArea.Forms;
   }
 
+  if (correctCategoryType === CategoryType.PrivateRooms) {
+    filter.searchArea = RoomSearchArea.PrivateRooms;
+  }
+
   // A room of the AI Chat section goes back to the list it is in (Skill
   // sets, Knowledge bases, Agents), as the sidebar entry opens it, or to the
   // list it is on: the section's list with no type draws the Rooms body.

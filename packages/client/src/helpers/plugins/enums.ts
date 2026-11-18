@@ -58,6 +58,8 @@ enum PluginScopes {
   PostMessage = "PostMessage",
   ArticleButton = "ArticleButton",
   ArticleNavigation = "ArticleNavigation",
+  DashboardWidget = "DashboardWidget",
+  ArticleWidget = "ArticleWidget",
 }
 
 export {

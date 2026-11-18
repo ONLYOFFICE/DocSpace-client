@@ -1,0 +1,22 @@
+{
+  "key_path": "AnalyzeModeBanner",
+  "content": "Analyzing \"{{fileName}}\"",
+  "content_en_sha1_hash": "c75e225c54543dae15b20b1c943e3dad58ab1df5",
+  "created_at": "2026-11-11T15:28:59.762Z",
+  "updated_at": "2026-11-11T15:30:33.317Z",
+  "comment": {
+    "text": "Bold one-line bar at the top of the AI chat panel while the Analyze responses mode is on, naming the PDF form whose collected responses the chat analyzes. {{fileName}} is the form's file name (e.g. Leave request.pdf), kept inside the quotes; use the quotation marks of your language. Present participle describing an ongoing state (the chat is analyzing), not an imperative command; keep it short.",
+    "is_auto": true,
+    "updated_at": "2026-11-11T15:30:33.317Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

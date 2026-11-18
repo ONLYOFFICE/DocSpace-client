@@ -70,7 +70,10 @@ vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   );
   ModalDialog.Body = () => null;
   ModalDialog.Footer = () => null;
-  return { ModalDialog };
+  return {
+    ModalDialog,
+    ModalDialogType: { aside: "aside", modal: "modal" },
+  };
 });
 vi.mock("@onlyoffice/apps-ui-kit/selectors/Room", () => ({
   default: () => null,

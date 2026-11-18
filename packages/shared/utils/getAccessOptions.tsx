@@ -103,6 +103,8 @@ export const getAccessOptions = (
 	isOwner = false,
 	isAdmin = false,
 	standalone = false,
+	/** A private room has no forms to fill: its Editor role does not name them. */
+	isPrivateRoom = false,
 ) => {
 	let options: Array<AccessOptionType | SeparatorOptionType> = [];
 
@@ -169,7 +171,9 @@ export const getAccessOptions = (
 		editor: {
 			key: "editor",
 			label: t("Common:Editor"),
-			description: t("Common:RoleEditorDescription"),
+			description: isPrivateRoom
+				? t("Common:EditorDescription")
+				: t("Common:RoleEditorDescription"),
 			access: ShareAccessRights.Editing,
 			type: EmployeeType.User,
 		},

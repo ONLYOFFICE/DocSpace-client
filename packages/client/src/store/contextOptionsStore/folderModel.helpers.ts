@@ -67,6 +67,7 @@ import { getAiWorkspaceCreateLabel } from "SRC_DIR/helpers/aiWorkspace";
 import { onSuggestOformChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
+import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 
 export const getFormGalleryContextOptionsImpl = (
   self: ContextOptionsStore,
@@ -481,7 +482,7 @@ export const getFolderModelImpl = (
                 // set or a knowledge base.
                 label: isAiHubFolder
                   ? getAiWorkspaceCreateLabel(t, window.location.search)
-                  : t("Common:NewRoom"),
+                  : getNewRoomLabel(t),
                 onClick: self.onCreateRoom,
                 icon: CatalogRoomsReactSvgUrl,
               },

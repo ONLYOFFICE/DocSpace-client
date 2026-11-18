@@ -47,6 +47,7 @@ import api from "@docspace/shared/api";
 import type { RoomMember, TGetRoomMembers } from "@docspace/shared/api/rooms/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
+import { loadPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
 import {
   getUserType,
   getUserTypeTranslation,
@@ -118,6 +119,8 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
   React.useEffect(() => {
     const controller = new AbortController();
     setIsLoading(true);
+    // Spec: private-rooms/sdk-surface, "Pending access in the SDK members list"
+    if (canInvite || canEditMembers) loadPendingAccess(roomId);
     fetchMembers(0, controller.signal)
       .then((data) => {
         if (controller.signal.aborted) return;
@@ -129,7 +132,14 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
         if (!controller.signal.aborted) setIsLoading(false);
       });
     return () => controller.abort();
-  }, [fetchMembers, refreshKey, internalRefreshKey]);
+  }, [
+    fetchMembers,
+    refreshKey,
+    internalRefreshKey,
+    roomId,
+    canInvite,
+    canEditMembers,
+  ]);
 
   const handleLoadMore = React.useCallback(async () => {
     setIsLoadingMore(true);

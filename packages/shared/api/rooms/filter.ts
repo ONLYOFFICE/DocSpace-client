@@ -167,8 +167,10 @@ class RoomsFilter {
     if (searchArea === RoomSearchArea.AiHub) defaultFilter.type = AI_HUB_DEFAULT_TYPE;
 
     if (userId) {
+      // The Private list keeps the sort it shares with Rooms.
       const storageKey =
-        defaultFilter.searchArea === RoomSearchArea.Active
+        defaultFilter.searchArea === RoomSearchArea.Active ||
+        defaultFilter.searchArea === RoomSearchArea.PrivateRooms
           ? `${FILTER_SHARED_ROOM}=${userId}`
           : defaultFilter.searchArea === RoomSearchArea.Archive
             ? `${FILTER_ARCHIVE_ROOM}=${userId}`
@@ -532,7 +534,8 @@ class RoomsFilter {
     }
 
     const currentStorageFilter =
-      dtoFilter.searchArea === RoomSearchArea.Active
+      dtoFilter.searchArea === RoomSearchArea.Active ||
+      dtoFilter.searchArea === RoomSearchArea.PrivateRooms
         ? sharedStorageFilter
         : dtoFilter.searchArea === RoomSearchArea.Archive
           ? archivedStorageFilter

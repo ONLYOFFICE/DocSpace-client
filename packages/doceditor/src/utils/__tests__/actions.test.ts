@@ -76,16 +76,43 @@ describe("getData", () => {
   let openEditRefused: boolean;
   /** What GET /files/file/7 says of the file. */
   let fileEncrypted: boolean;
+  /** What openedit answers for `?version=N`: a document, or a refusal. */
+  let versions: Record<string, { key: string; url: string } | "refused">;
+  /** The versions openedit was asked for, in order. */
+  let versionsRead: string[];
 
   beforeEach(() => {
     filesSettings = { docServiceEncryptionSupported: true };
     openedConfig = encryptedConfig(true);
     openEditRefused = false;
     fileEncrypted = true;
+    versions = {};
+    versionsRead = [];
     vi.stubGlobal(
       "fetch",
       vi.fn(async (request: Request) => {
-        const { pathname } = new URL(request.url);
+        const { pathname, searchParams } = new URL(request.url);
+        const version = searchParams.get("version");
+        if (pathname.endsWith("/files/file/7/openedit") && version) {
+          versionsRead.push(version);
+          const past = versions[version];
+          return !past || past === "refused"
+            ? new Response(
+                JSON.stringify({
+                  error: { message: "refused", type: "System.Security.SecurityException" },
+                  status: 1,
+                  statusCode: 403,
+                }),
+                { status: 403, headers: { "Content-Type": "application/json" } },
+              )
+            : json({
+                response: {
+                  ...openedConfig,
+                  document: { ...openedConfig.document, ...past },
+                  editorConfig: { ...openedConfig.editorConfig, mode: "view" },
+                },
+              });
+        }
         if (pathname.endsWith("/files/file/7/openedit")) {
           return openEditRefused
             ? new Response(
@@ -135,6 +162,59 @@ describe("getData", () => {
     expect(result.error).toBeUndefined();
     expect(result.config?.file.encrypted).toBe(true);
     expect(result.config?.editorConfig.canCoAuthoring).toBe(true);
+  });
+
+  // Spec: editor-integration, "Saved encrypted file reopens without replaying its changes"
+  describe("Document address of a saved encrypted file", () => {
+    const currentUrl = "http://portal.test/filehandler.ashx?action=stream&fileid=7";
+    const stableUrl = `${currentUrl}&version=1`;
+
+    beforeEach(() => {
+      Object.assign(openedConfig.document, { key: "key-1", url: currentUrl });
+      Object.assign(openedConfig.file, { version: 3 });
+      versions = {
+        "3": { key: "key-3", url: currentUrl },
+        "2": { key: "key-2", url: `${currentUrl}&version=2` },
+        "1": { key: "key-1", url: stableUrl },
+      };
+    });
+
+    it("Reopen after save", async () => {
+      const result = await getData("7");
+
+      expect(result.config?.document.key).toBe("key-1");
+      expect(result.config?.document.url).toBe(stableUrl);
+      expect(versionsRead).toEqual(["3", "2", "1"]);
+    });
+
+    it("keeps the address when the key is the one of the current version", async () => {
+      versions["3"] = { key: "key-1", url: currentUrl };
+
+      const result = await getData("7");
+
+      expect(result.config?.document.url).toBe(currentUrl);
+      expect(versionsRead).toEqual(["3"]);
+    });
+
+    it("keeps the address when an earlier version cannot be read", async () => {
+      versions["2"] = "refused";
+
+      const result = await getData("7");
+
+      expect(result.error).toBeUndefined();
+      expect(result.config?.document.url).toBe(currentUrl);
+      expect(versionsRead).toEqual(["3", "2"]);
+    });
+
+    it("reads no version for a viewing, a plain file or a first version", async () => {
+      await getData("7", undefined, undefined, "view");
+      Object.assign(openedConfig.file, { encrypted: false });
+      await getData("7");
+      Object.assign(openedConfig.file, { encrypted: true, version: 1 });
+      await getData("7");
+
+      expect(versionsRead).toEqual([]);
+    });
   });
 
   // Spec: editor-integration, "Document Server capability check before opening"

@@ -2,10 +2,10 @@
 
 ## Why
 
-AI is withheld in private rooms and on encrypted files on every surface: the
+AI is withheld in private rooms and on encrypted files: the
 server denies the chat, the vectorization and the index export inside a
 private room, the client offers no AI chat on a private address, the SDK
-never offers it, and the editor does not initialise its AI plugin for an
+never offers it, and the editor page skips its own AI plugin setup for an
 encrypted file. The reason is one promise: the server has no clear text of a
 private room. Every AI path of the portal today carries clear text through
 the portal and stores part of it, so lifting the ban without a different

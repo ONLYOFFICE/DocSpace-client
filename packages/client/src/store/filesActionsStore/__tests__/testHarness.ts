@@ -92,6 +92,8 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
     error: vi.fn(),
     info: vi.fn(),
     warning: vi.fn(),
+    clear: vi.fn(),
+    isActive: vi.fn(() => false),
   },
 }));
 
@@ -236,6 +238,8 @@ const defaultFakes = (): FakeStores => ({
   },
   userStore: {
     user: { id: "user-1", isAdmin: false },
+    encryptionKeys: [],
+    ensureEncryptionKeys: async () => [],
   },
   currentTariffStatusStore: {},
   peopleStore: {

@@ -61,7 +61,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 
 import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@onlyoffice/apps-ui-kit/components/access-right-select";
@@ -93,6 +94,8 @@ interface AccessSelectorProps {
   availableAccess?: number[];
   scaledOptions?: boolean;
   dataTestId?: string;
+  /** Whose role the list sets; without it the list sets the role of new invitees. */
+  subjectName?: string;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -118,6 +121,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   availableAccess,
   scaledOptions,
   dataTestId,
+  subjectName,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
@@ -132,6 +136,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
     setWidth(offsetWidth - 32);
   }, [containerRef, containerRef?.current?.offsetWidth]);
 
+  const isPrivateRoom = useContext(PrivateRoomInviteContext);
+
   // standalone = false always in SDK
   const accessOptions = getAccessOptions(
     t,
@@ -141,6 +147,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
     isOwner,
     isAdmin,
     false,
+    isPrivateRoom,
   );
 
   const selectedOption = (accessOptions as TOption[]).filter(
@@ -164,6 +171,14 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   }, []);
 
   const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
+
+  const selectedLabel =
+    selectedOption && "label" in selectedOption
+      ? String(selectedOption.label ?? "")
+      : "";
+  const ariaLabel = subjectName
+    ? t("Common:RoleOfUser", { name: subjectName, role: selectedLabel })
+    : t("Common:RoleWithValue", { role: selectedLabel });
 
   return (
     <div className="access-selector" style={{ marginInlineEnd: "16px" }}>
@@ -189,6 +204,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
           dataTestId={dataTestId}
+          ariaLabel={ariaLabel}
           showDisabledItems={true}
         />
       ) : null}
@@ -218,6 +234,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
           dataTestId={dataTestId}
+          ariaLabel={ariaLabel}
           showDisabledItems={true}
         />
       ) : null}

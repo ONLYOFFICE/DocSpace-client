@@ -34,6 +34,7 @@
  */
 
 import { useEffect, useState, useMemo, useRef } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -56,7 +57,7 @@ import {
   getMembersToRewrap,
   rewrapForInvitedMembers,
   sendPrivateRoomInvitations,
-  skippedMemberNotices,
+  notInvitedReasons,
   verifyInvitees,
 } from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
@@ -79,6 +80,7 @@ import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { fixAccess } from "./utils";
+import { useMissingKeyMarks } from "./useMissingKeyMarks";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
@@ -139,6 +141,8 @@ const InvitePanel = ({
   const [shareLinks, setShareLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [inviteOutcome, setInviteOutcome] = useState(null);
+  // Spec: private-rooms/room-membership, "An invitation that invited nobody keeps the invite form"
+  const [notInvited, setNotInvited] = useState([]);
   // Counts sends and closes, so a re-wrap that ends after a close shows nothing.
   const sendRunRef = useRef(0);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
@@ -168,6 +172,7 @@ const InvitePanel = ({
   const onClose = () => {
     sendRunRef.current += 1;
     setInviteOutcome(null);
+    setNotInvited([]);
     setInviteLanguage({ key: "", label: "" });
     setInfoPanelIsMobileHidden(false);
     setInvitePanelOptions({
@@ -442,7 +447,13 @@ const InvitePanel = ({
     );
   };
 
+  // The reasons describe the list as it was sent; a changed list is a new one.
+  useEffect(() => {
+    setNotInvited([]);
+  }, [inviteItems]);
+
   const onClickSend = async () => {
+    setNotInvited([]);
     const invitations = inviteItems.map((item) => {
       const newItem = {};
 
@@ -576,15 +587,7 @@ const InvitePanel = ({
 
       if (showsResult && newMembers.length === 0) {
         setIsLoading(false);
-        skippedMemberNotices(t, verification.skipped).forEach(
-          ({ level, text }) => toastr[level](text),
-        );
-        setInviteOutcome({
-          granted: [],
-          pending: [],
-          skipped: verification.skipped,
-          refused,
-        });
+        setNotInvited(notInvitedReasons(t, verification.skipped, refused));
         return;
       }
 
@@ -617,10 +620,15 @@ const InvitePanel = ({
             outcome = value;
           },
         });
-        notices.forEach(({ level, text }) => toastr[level](text));
+        // The open panel names the invitees left out itself; the end of the
+        // re-wrap is still announced. A closed panel shows nothing.
+        const showsOutcome = run === sendRunRef.current;
+        notices
+          .filter((notice) => !showsOutcome || !notice.namesLeftOut)
+          .forEach(({ level, text }) => toastr[level](text));
 
         setIsLoading(false);
-        if (run === sendRunRef.current) {
+        if (showsOutcome) {
           setInviteOutcome(
             outcome
               ? { ...outcome, refused }
@@ -916,6 +924,8 @@ const InvitePanel = ({
   // A private room takes none either.
   const hasLinkInvites =
     !isPrivateRoom && roomType !== RoomsType.AiProjectRoom;
+  // Spec: private-rooms/room-membership, "People without a key are marked before the invitation is sent"
+  const getItemMarks = useMissingKeyMarks({ roomId, isPrivateRoom, t });
 
   const bodyInvitePanel = useMemo(() => {
     return (
@@ -1035,6 +1045,7 @@ const InvitePanel = ({
     isOwner,
     isAdmin,
     standalone,
+    isPrivateRoom,
   );
 
   const invitedUsers = useMemo(
@@ -1090,6 +1101,11 @@ const InvitePanel = ({
       withBodyScroll
       isInvitePanelLoader
       id="invite_panel_modal"
+      aria-label={
+        inviteOutcome
+          ? t("Common:EncryptedInviteResultTitle")
+          : t("Common:Invite")
+      }
     >
       {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
@@ -1129,6 +1145,7 @@ const InvitePanel = ({
               },
             }}
             currentUserId={currentUserId}
+            getItemMarks={getItemMarks}
           />
         </ModalDialog.Container>
       ) : null}
@@ -1207,7 +1224,20 @@ const InvitePanel = ({
         {inviteOutcome ? (
           <InviteResult t={t} outcome={inviteOutcome} />
         ) : (
-          bodyInvitePanel
+          <PrivateRoomInviteContext.Provider value={isPrivateRoom}>
+            <div
+              role="status"
+              data-testid="invite_panel_not_invited"
+              className={notInvited.length ? styles.notInvited : undefined}
+            >
+              {notInvited.map((reason) => (
+                <Text key={reason} fontSize="13px" fontWeight={600}>
+                  {reason}
+                </Text>
+              ))}
+            </div>
+            {bodyInvitePanel}
+          </PrivateRoomInviteContext.Provider>
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>

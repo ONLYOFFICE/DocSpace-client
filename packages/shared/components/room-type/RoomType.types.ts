@@ -59,4 +59,6 @@ export type RoomTypeProps = {
   // Opens the OForms template gallery instead of a room type; the picked
   // template becomes the first form of a new form space.
   isTemplateGallery?: boolean;
+  /** Address of a help article, linked under the description of the display block. */
+  helpUrl?: string;
 };

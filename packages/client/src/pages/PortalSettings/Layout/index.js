@@ -58,11 +58,18 @@ const Layout = ({
   enablePlugins,
   isInitPlugins,
   initPlugins,
+  needPageReload,
   setIsPortalSettingsLoading,
 
   currentDeviceType,
 }) => {
   const location = useLocation();
+
+  useEffect(() => {
+    if (!needPageReload) return;
+
+    return () => window.location.reload();
+  }, [needPageReload]);
 
   useEffect(() => {
     const sel = window.getSelection?.();
@@ -121,7 +128,11 @@ export default inject(
       enablePlugins,
       currentDeviceType,
     } = settingsStore;
-    const { isInit: isInitPlugins, initPlugins } = pluginStore;
+    const {
+      isInit: isInitPlugins,
+      initPlugins,
+      needPageReload,
+    } = pluginStore;
     const { setIsPortalSettingsLoading } = clientLoadingStore;
 
     return {
@@ -132,6 +143,7 @@ export default inject(
       enablePlugins,
       isInitPlugins,
       initPlugins,
+      needPageReload,
       setIsPortalSettingsLoading,
 
       currentDeviceType,

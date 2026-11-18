@@ -153,6 +153,10 @@ export const buildFolderUrl = (
       path = getCategoryUrl(CategoryType.AiHub);
       params = roomParams(RoomSearchArea.AiHub);
       break;
+    case FolderType.PrivateRooms:
+      path = getCategoryUrl(CategoryType.PrivateRooms);
+      params = roomParams(RoomSearchArea.PrivateRooms);
+      break;
     default:
       path = getCategoryUrl(CategoryType.Shared);
       params = roomParams(RoomSearchArea.Active);

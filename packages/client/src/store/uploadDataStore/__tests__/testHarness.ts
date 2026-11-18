@@ -43,6 +43,8 @@ vi.mock("@docspace/shared/api/files", async (importOriginal) => {
     fileCopyAs: vi.fn(),
     checkIsFileExist: vi.fn(),
     setFileEncryptionKeys: vi.fn(),
+    deleteFile: vi.fn(),
+    getProgress: vi.fn(),
     getFileEncryptionAccess: vi.fn(),
     getFileConversationProgress: vi.fn(),
     removeFiles: vi.fn(),

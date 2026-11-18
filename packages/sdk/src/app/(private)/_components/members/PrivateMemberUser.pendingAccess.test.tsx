@@ -179,6 +179,21 @@ describe("PrivateMemberUser pending access", () => {
     expect(find("private_member_access_pending")).not.toBeNull();
   });
 
+  it("exposes the pending state apart from the drawn separator and names the retry", () => {
+    render();
+
+    const pending = find("private_member_access_pending");
+    const separator = pending?.querySelector('[aria-hidden="true"]');
+    expect(separator?.textContent).toBe("|");
+    expect(pending?.firstElementChild?.textContent).toBe(
+      "Common:EncryptedAccessPending",
+    );
+
+    const retry = find("private_member_retry_access");
+    expect(retry?.getAttribute("aria-label")).toBe("Common:RetryAccessFor");
+    expect(retry?.getAttribute("aria-busy")).toBe("false");
+  });
+
   it("offers the retry only to a user who may invite into the room", () => {
     render({ canInvite: false });
 

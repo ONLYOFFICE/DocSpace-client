@@ -41,7 +41,8 @@ import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -61,6 +62,7 @@ import {
 } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -168,6 +170,8 @@ const Item = ({
 
   const type = isEmailInvite ? userType : (getUserType(item) ?? userType);
 
+  const isPrivateRoom = useContext(PrivateRoomInviteContext);
+
   const accesses = getAccessOptions(
     t,
     roomType,
@@ -176,6 +180,7 @@ const Item = ({
     isOwner,
     isAdmin,
     standalone,
+    isPrivateRoom,
   );
 
   const isRolePaid = isPaidUserRole(access);
@@ -299,6 +304,8 @@ const Item = ({
     const newItems = inviteItems.filter((inviteItem) => inviteItem.id !== id);
 
     setInviteItems(newItems);
+    // The control that removed the row goes with it: keep the focus in the panel.
+    inputsRef?.current?.querySelector("input")?.focus();
   };
 
   const selectItemAccess = (selected) => {
@@ -358,24 +365,30 @@ const Item = ({
             size={16}
             color="--warning-color"
           />
-          <DeleteIcon
+          <IconButton
             className={classNames(styles.rowIcons, {
               [styles.isClicked]: true,
             })}
-            size="medium"
+            iconNode={<DeleteIcon />}
+            size={16}
+            isClickable
             onClick={removeItem}
-            data-testid="invite_panel_item_delete_button"
+            ariaLabel={t("Common:RemoveInvitee", { name: displayName || email })}
+            dataTestId="invite_panel_item_delete_button"
           />
         </div>
       ) : hideSelector ? (
         <div className={styles.deleteWrapper}>
-          <DeleteIcon
+          <IconButton
             className={classNames(styles.rowIcons, {
               [styles.isClicked]: true,
             })}
-            size="medium"
+            iconNode={<DeleteIcon />}
+            size={16}
+            isClickable
             onClick={removeItem}
-            data-testid="invite_panel_item_delete_button"
+            ariaLabel={t("Common:RemoveInvitee", { name: displayName || email })}
+            dataTestId="invite_panel_item_delete_button"
           />
         </div>
       ) : (
@@ -399,6 +412,7 @@ const Item = ({
             containerRef={inputsRef}
             isOwner={isOwner}
             withRemove
+            subjectName={displayName || email}
             filteredAccesses={filteredAccesses}
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}

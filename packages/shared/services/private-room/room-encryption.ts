@@ -74,6 +74,8 @@ export interface SkippedRoomMember {
   id: string;
   displayName?: string;
   reason: SkippedMemberReason;
+  /** Left out before room access was granted: they never became a member. */
+  notInvited?: true;
 }
 
 export interface RoomRewrapResult {

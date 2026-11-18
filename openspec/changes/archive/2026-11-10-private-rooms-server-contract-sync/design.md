@@ -23,8 +23,7 @@ and then the source by line range.
   (`common/ASC.FederatedLogin/LoginProviders/EncryptionLoginProvider.cs:97-104`),
   which treats a missing record and an empty set alike and throws
   `InvalidOperationException`, mapped to 403 by `ResponseWrapper`
-  (`common/ASC.Api.Core/Middleware/ResponseWrapper.cs:86-88`). No check of the
-  public or form-filling room type exists.
+  (`common/ASC.Api.Core/Middleware/ResponseWrapper.cs:86-88`).
 - Copy and move. `FileMoveCopyOperationsManager.Publish`
   (`products/ASC.Files/Core/Services/WCFService/FileOperations/FileOperationsManager.cs:517-568`)
   runs `CopyPermissionsCheck.RunPermissionCheckAsync` before it queues the
@@ -108,9 +107,9 @@ No stashed design document covers these server rules.
 ## Decisions
 
 1. **Write today's server, not the planned one.** "Private room creation
-   requires keys" leaves out the public and form-filling refusal, which the
-   server does not have; `private-rooms-server-hardening` keeps that scenario
-   in its delta until its backend task lands.
+   requires keys" states only what the server has;
+   `private-rooms-server-hardening` keeps the rest in its delta until its
+   backend task lands.
 2. **Name the refusal by status and message as a client sees it.** The copy
    scenarios say 403 "Access denied", since the server-side texts are
    replaced by `ResponseWrapper`.

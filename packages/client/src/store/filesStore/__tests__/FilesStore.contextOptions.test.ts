@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { afterEach, describe, it, expect, beforeEach } from "vitest";
-import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
+import {
+  FileType,
+  FolderType,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -284,24 +289,44 @@ describe("FilesStore.getFilesContextOptions — characterization", () => {
 describe("FilesStore.getFilesContextOptions — Private section", () => {
   afterEach(() => window.history.pushState({}, "", "/"));
 
-  it("Context menu of a private room in the section", () => {
+  const optionsIn = (roomGroupsArea: RoomSearchArea, room: TItem) => {
     const store = createTestFilesStore({
       filesSettingsStore: { organizeRoomsGrouping: true },
+      treeFoldersStore: { roomGroupsArea },
     });
     store.dialogsStore = { roomGroups: [{ id: "g1" }] } as never;
-    const privateRoom = { ...customRoom(), private: true } as TItem;
 
-    window.history.pushState({}, "", "/rooms/shared/filter");
-    const inRooms = store.getFilesContextOptions(privateRoom);
+    return store.getFilesContextOptions(room);
+  };
 
-    window.history.pushState({}, "", "/private/filter");
-    const inPrivate = store.getFilesContextOptions(privateRoom);
+  const privateRoom = () => ({ ...customRoom(), private: true }) as TItem;
 
-    expect(inRooms).toEqual(
+  it("Context menu of a private room in the section", () => {
+    const options = optionsIn(RoomSearchArea.PrivateRooms, privateRoom());
+
+    expect(options).toEqual(
       expect.arrayContaining(["create-group", "add-to-group"]),
     );
-    expect(inPrivate).not.toContain("create-group");
-    expect(inPrivate).not.toContain("add-to-group");
-    expect(inPrivate).not.toContain("remove-from-group");
+  });
+
+  it("keeps the groups of another section away from a room", () => {
+    // A private room is never listed in Rooms; its groups are the section's.
+    const privateInRooms = optionsIn(RoomSearchArea.Active, privateRoom());
+    const ordinaryInPrivate = optionsIn(
+      RoomSearchArea.PrivateRooms,
+      customRoom() as TItem,
+    );
+
+    for (const options of [privateInRooms, ordinaryInPrivate]) {
+      expect(options).not.toContain("create-group");
+      expect(options).not.toContain("add-to-group");
+      expect(options).not.toContain("remove-from-group");
+    }
+  });
+
+  it("offers the groups of Rooms to an ordinary room", () => {
+    expect(optionsIn(RoomSearchArea.Active, customRoom() as TItem)).toEqual(
+      expect.arrayContaining(["create-group", "add-to-group"]),
+    );
   });
 });

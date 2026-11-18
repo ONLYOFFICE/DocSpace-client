@@ -353,6 +353,7 @@ export default inject(
       showKeysManagement: isKeysManagementAvailable(
         appsStore.isPrivateRoomsSectionAvailable,
         userStore.encryptionKeys,
+        userStore.user?.isVisitor,
       ),
     };
   },

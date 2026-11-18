@@ -364,6 +364,17 @@ class UploadDataStore {
 
   getUserEncryptionKeys = () => getUserEncryptionKeysImpl(this);
 
+  /**
+   * Whether the user's key list is not known and a new read of it fails. A
+   * list that the read brings in is in the user store afterwards.
+   * Spec: private-rooms/file-operations, "An unknown key list is read again before an action is refused"
+   */
+  isKeyListUnreadable = async () => {
+    if (this.userStore?.encryptionKeys !== null) return false;
+
+    return (await this.userStore.ensureEncryptionKeys()) === null;
+  };
+
   shouldEncryptCurrentUpload = () => shouldEncryptCurrentUploadImpl(this);
 
   willEncryptItem = (item: TUploadFile | null | undefined) =>

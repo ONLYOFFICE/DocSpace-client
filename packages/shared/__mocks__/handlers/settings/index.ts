@@ -60,6 +60,10 @@ import {
 } from "./quotaSettings";
 import {
   webPluginsHandler,
+  webPluginsListHandler,
+  mockWorkspaceAppPlugin,
+  mockProfileMenuPlugin,
+  mockModalDialogPlugin,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
@@ -77,6 +81,7 @@ import { paymentSettingsHandler } from "./paymentSettings";
 import { storageRegionsHandler } from "./storageRegions";
 import { tfaAppCodesHandler } from "./tfaAppCodes";
 import { tfaAppSettingsHandler } from "./tfaAppSettings";
+import { defaultFolderHandler } from "./defaultFolder";
 import { thirdPartyBackupHandler } from "./thirdpartyBackup";
 import {
   whiteLabelLogosAddHandler,
@@ -106,6 +111,10 @@ export {
   settingsAdditionalHandler,
   culturesHandler,
   webPluginsHandler,
+  webPluginsListHandler,
+  mockWorkspaceAppPlugin,
+  mockProfileMenuPlugin,
+  mockModalDialogPlugin,
   webPluginsAddHandler,
   webPluginsUpdateHandler,
   webPluginsDeleteHandler,
@@ -125,6 +134,7 @@ export {
   storageRegionsHandler,
   tfaAppCodesHandler,
   tfaAppSettingsHandler,
+  defaultFolderHandler,
   thirdPartyBackupHandler,
   whiteLabelLogosAddHandler,
   whiteLabelLogosIsDefaultHandler,

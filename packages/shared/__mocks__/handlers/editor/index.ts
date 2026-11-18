@@ -33,21 +33,28 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { openEditFailedHandler, openEditHandler } from "./openedit";
+import {
+  openEditFailedHandler,
+  openEditFormHandler,
+  openEditHandler,
+} from "./openedit";
 import { fileByIdHandler } from "./fileById";
 import { fillingStatusHandler } from "./formFillingStatus";
 import { fillingSessionHandler } from "./fillingSession";
 import { editorPagePassthroughHandler } from "./editorPage";
 import { createFileBadGatewayHandler } from "./createFile";
+import { formFillingRecorder } from "./fieldChanges";
 
 export {
   openEditHandler,
   openEditFailedHandler,
+  openEditFormHandler,
   fileByIdHandler,
   fillingStatusHandler,
   fillingSessionHandler,
   editorPagePassthroughHandler,
   createFileBadGatewayHandler,
+  formFillingRecorder,
 };
 
 export const editorHandlers = (port: string) => [

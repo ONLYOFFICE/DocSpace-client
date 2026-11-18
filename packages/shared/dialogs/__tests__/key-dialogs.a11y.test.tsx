@@ -42,7 +42,7 @@ const dialogs = [
   },
   {
     name: "recovery phrase input",
-    title: "Common:UseRecoveryPhrase",
+    title: "Common:RecoverTitle",
     element: () => (
       <RecoveryPhraseInputModal visible onSubmit={vi.fn()} onCancel={vi.fn()} />
     ),
@@ -147,7 +147,7 @@ describe("key dialogs", () => {
       screen.getByRole("checkbox", { name: "Common:RememberDeviceLabel" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Common:ContinueButton" }),
+      screen.getByRole("button", { name: "Common:UnlockKey" }),
     ).toBeInTheDocument();
   });
 

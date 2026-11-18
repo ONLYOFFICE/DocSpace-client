@@ -92,7 +92,7 @@ export const usePrivateOwnerChangeFlow =
       [t],
     );
 
-    // Spec: private-rooms/sdk-surface, "Leaving a private room revokes own access first"
+    // Spec: private-rooms/sdk-surface, "Leaving a private room drops the role without a revocation of its own"
     const leaveRoom = React.useCallback(
       async ({ roomId, userId }: LeaveRoomArgs): Promise<void> => {
         await api.rooms.updateRoomMemberRole(roomId, {

@@ -209,9 +209,64 @@ const mockRoomGroups = [
       },
     ],
   },
+  {
+    id: "group-4",
+    name: "Vault",
+    searchArea: "PrivateRooms",
+    totalRooms: 1,
+    icon: {
+      id: "folder",
+      data: {
+        small: FOLDER_ICON_SVG_SMALL,
+        medium: FOLDER_ICON_SVG_MEDIUM,
+        default: FOLDER_ICON_SVG,
+      },
+    },
+    rooms: [
+      {
+        id: 401,
+        title: "Private Room 1",
+        roomType: 5,
+        logo: mockRoomLogo,
+        shared: false,
+        parentId: 2002,
+        filesCount: 0,
+        foldersCount: 0,
+        rootFolderType: 14,
+        security: { Read: true },
+        tags: [],
+        pinned: false,
+        private: true,
+        indexing: false,
+        denyDownload: false,
+        inRoom: true,
+      },
+    ],
+  },
 ];
 
 const emptyRoomGroups: typeof mockRoomGroups = [];
+
+/**
+ * The areas a room group may belong to (GroupsController.ValidateSearchArea):
+ * Rooms, Forms and the Private section. A missing value means Rooms.
+ */
+const ROOM_GROUP_AREAS = ["Active", "Forms", "PrivateRooms"];
+
+export type CreateRoomGroupOptions = {
+  /**
+   * The section each room belongs to, by room id. A group takes rooms of its
+   * own section only, so a room of another one makes the request a bad one.
+   * Rooms left out are taken as rooms of the group's area.
+   */
+  roomAreas?: Record<number, string>;
+};
+
+const badRequest = (message: string) =>
+  new Response(
+    JSON.stringify({ error: { message }, status: 1, statusCode: 400 }),
+    { status: 400, headers: { "Content-Type": "application/json" } },
+  );
 
 export const roomGroupsHandler = (port: string, withGroups: boolean = true) => {
   return http.get(
@@ -265,15 +320,44 @@ export const roomGroupByIdHandler = (port: string) => {
   );
 };
 
-export const createRoomGroupHandler = (port: string) => {
+/**
+ * Mirrors GroupsController.AddRoomGroup (HttpPost "group"). The group's area
+ * comes with the request (`searchArea`, Rooms when absent) and is answered
+ * back; an area outside Rooms, Forms and the Private section is a 400, and so
+ * is a room that belongs to another section than the group
+ * (PrivateRoomSectionTests.Group_TakesRoomsOfItsOwnSectionOnly).
+ */
+export const createRoomGroupHandler = (
+  port: string,
+  { roomAreas }: CreateRoomGroupOptions = {},
+) => {
   return http.post(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOM_GROUPS}`,
-    async () => {
+    async ({ request }) => {
+      const body = (await request.json().catch(() => ({}))) as {
+        searchArea?: string;
+        rooms?: (number | string)[];
+      };
+      const searchArea = body.searchArea ?? "Active";
+
+      if (!ROOM_GROUP_AREAS.includes(searchArea)) {
+        return badRequest(`"${searchArea}" is not a valid room group area.`);
+      }
+
+      const isOfAnotherSection = (body.rooms ?? []).some((room) => {
+        const area = roomAreas?.[Number(room)];
+        return area !== undefined && area !== searchArea;
+      });
+      if (isOfAnotherSection) {
+        return badRequest("A room belongs to another section.");
+      }
+
       return new Response(
         JSON.stringify({
           response: {
             id: "group-new",
             name: "New Group",
+            searchArea,
             totalRooms: 0,
             icon: {
               id: "folder",

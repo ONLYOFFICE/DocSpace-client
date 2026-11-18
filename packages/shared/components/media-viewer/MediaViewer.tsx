@@ -53,6 +53,7 @@ import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 import { getFileEncryptionAccess } from "../../api/files";
 import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
 import { decryptFile } from "../../services/encryption/file-keys";
+import { getSpecificEncryptionErrorMessage } from "../../services/encryption/error-i18n";
 import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
@@ -513,6 +514,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           tif: "image/tiff",
           tiff: "image/tiff",
           heic: "image/heic",
+          heif: "image/heif",
           mp4: "video/mp4",
           webm: "video/webm",
           mp3: "audio/mpeg",
@@ -533,7 +535,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           console.error("[MediaViewer] Decryption error:", error.message);
           onDecryptionError?.(error.message);
           setDecryptionError(
-            t("Common:EncryptionDecryptPartialFailed", { fileNames: title }),
+            getSpecificEncryptionErrorMessage(t, error) ??
+              t("Common:EncryptionDecryptPartialFailed", { fileNames: title }),
           );
         }
       } finally {

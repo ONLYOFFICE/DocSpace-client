@@ -505,6 +505,39 @@ describe("useEncryptedUpload", () => {
     );
   });
 
+  it("Upload through the SDK", async () => {
+    const { EncryptedUploadNotKeptError } = await import(
+      "@docspace/shared/services/private-room/encrypted-upload-orchestrator"
+    );
+    const error = new EncryptedUploadNotKeptError(new Error("403"));
+    env.orchestrate.mockImplementationOnce(async (options: TBatchOptions) => {
+      options.uploadIds.forEach((uploadId, index) =>
+        options.onFileError(options.files[index], error, uploadId),
+      );
+      return batchResult([], {
+        results: options.uploadIds.map((uploadId) => ({
+          ok: false,
+          uploadId,
+          originalName: uploadId,
+          error,
+          failedAt: "wrap",
+        })),
+      });
+    });
+
+    await upload(["a.docx"]);
+
+    expect(rows()).toEqual([
+      {
+        status: "error",
+        error: "Common:EncryptionUploadNotKept",
+        isQuotaError: false,
+        retry: true,
+      },
+    ]);
+    expect(filesList.items).toEqual([]);
+  });
+
   it("Sharing with the members fails", async () => {
     env.orchestrate.mockImplementation(async (options: TBatchOptions) =>
       batchResult(options.uploadIds, {

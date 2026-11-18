@@ -102,6 +102,7 @@ const CreateEvent = ({
 
   isPrivacy,
   getUserEncryptionKeys,
+  isKeyListUnreadable,
   encryptionRoomId,
   filesList,
   fetchFiles,
@@ -226,6 +227,13 @@ const CreateEvent = ({
           withEditor && openOnNewPage ? window.open("", "_blank") : null;
 
         try {
+          // Spec: private-rooms/file-operations, "An unknown key list is read again before an action is refused"
+          if (await isKeyListUnreadable()) {
+            editorWindow?.close();
+            toastr.error(t("Common:EncryptionKeysLoadFailed"));
+            return;
+          }
+
           const keys = getUserEncryptionKeys();
 
           const created = await runEncryptedFileCreation({
@@ -470,8 +478,12 @@ export default inject(
 
     const { completeAction, openItemAction } = filesActionsStore;
 
-    const { clearActiveOperations, fileCopyAs, getUserEncryptionKeys } =
-      uploadDataStore;
+    const {
+      clearActiveOperations,
+      fileCopyAs,
+      getUserEncryptionKeys,
+      isKeyListUnreadable,
+    } = uploadDataStore;
 
     const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
 
@@ -530,6 +542,7 @@ export default inject(
       frameConfig,
 
       getUserEncryptionKeys,
+      isKeyListUnreadable,
       encryptionRoomId,
       filesList: files,
       fetchFiles,

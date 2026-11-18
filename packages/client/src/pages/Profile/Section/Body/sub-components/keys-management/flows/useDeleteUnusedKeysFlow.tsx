@@ -150,7 +150,7 @@ export function useDeleteUnusedKeysFlow({
       {confirming ? (
         <ConfirmationModal
           visible
-          title={t("Common:DeleteUnusedEncryptionKeys")}
+          title={t("Common:UnusedEncryptionKeysTitle")}
           message={t("Common:UnusedEncryptionKeysNotice", {
             count: unused.length,
           })}
@@ -162,6 +162,7 @@ export function useDeleteUnusedKeysFlow({
         <PassphraseModal
           visible
           isNew={false}
+          submitLabel={t("Common:ContinueButton")}
           onSubmit={onPassphraseSubmit}
           onCancel={() => {
             setVerifying(false);

@@ -226,6 +226,9 @@ export interface IInitialConfig {
   message?: undefined;
   startFilling?: boolean;
   startFillingMode?: StartFillingMode;
+  // True when the editor reports the fields renamed in the original form of a form-filling room. False with Document
+  // Server Community Edition, whose editors cannot tell the fields of the open form.
+  trackFormFieldChanges?: boolean;
   fillingSessionId?: string;
   fillingStatus?: boolean;
   quotaExceededScope?: number;
@@ -441,6 +444,12 @@ export interface UseEventsProps {
   openShareFormDialog?: VoidFunction;
   onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   disconnectUsers?: () => Promise<void>;
+  takeFieldsSnapshot?: () => Promise<void>;
+  reportFieldChanges?: () => Promise<void>;
+  // modified: the document has changes not saved yet.
+  scheduleFieldChanges?: (modified: boolean) => void;
+  // Sends the renames as the editor is closed, after a short wait for a read on its way.
+  closeFieldChanges?: () => Promise<void>;
 }
 
 export interface UseInitProps {
@@ -504,6 +513,13 @@ export type TEditorConnector = {
     params: object[],
     callback: (response: object | { error: string }) => void,
   ) => void;
+  // Runs the command inside the editor, where Api is the document builder API; isNoCalc skips recalculating the document.
+  callCommand?: (
+    command: () => unknown,
+    callback: (result: unknown) => void,
+    isNoCalc?: boolean,
+  ) => void;
+  disconnect?: () => void;
 };
 
 export type TCatchError =

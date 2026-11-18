@@ -42,6 +42,9 @@ import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getAuthToken, resolveOAuthToken } from "@docspace/shared/api/client";
 import { isOAuthFrame, onAuthTokenPush } from "@docspace/shared/utils/oauthToken";
+import { installLatinDigits } from "@docspace/shared/utils/latin-digits";
+
+installLatinDigits();
 
 const getApiUrl = () => {
   if (typeof window === "undefined") {

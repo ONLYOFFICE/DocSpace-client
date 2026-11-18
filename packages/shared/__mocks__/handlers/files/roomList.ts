@@ -3036,6 +3036,63 @@ const withRoot = <T extends { current: { access?: number; security?: object } }>
   };
 };
 
+/** `SearchArea.PrivateRooms`, serialized by name. */
+export const PRIVATE_ROOMS_SEARCH_AREA = "PrivateRooms";
+
+/** `FolderType.PrivateRooms` (Core/Core/Entries/Folder.cs). */
+export const PRIVATE_ROOMS_FOLDER_TYPE = 42;
+
+/** The Private root of the mocked portal, next to Rooms 2002 and Archive 11244 (root.ts). */
+export const PRIVATE_ROOT_ID = 11246;
+
+/** The root's title, from FilesUCResource.PrivateRooms (FilesMappingAction). */
+export const PRIVATE_ROOT_TITLE = "Private";
+
+type TSectionList = {
+  folders: { new?: number }[];
+  current: object;
+  pathParts?: object[];
+};
+
+/**
+ * The section a rooms listing is answered under
+ * (VirtualRoomsCommonController.GetRoomsSectionIdAsync): `searchArea=
+ * PrivateRooms` picks the Private root, which becomes `current` and the only
+ * breadcrumb, with root folder type 42. The root holds no rooms of its own;
+ * the private rooms keep the Rooms root as their parent. Its `new` is the sum
+ * of the marks of the private rooms (FileMarker.SetTagsNewAsync). `Active`
+ * with the `Private` filter lists the same rooms under the Rooms root, since
+ * the section id follows the area alone.
+ */
+export const withPrivateSection = <T extends TSectionList>(
+  list: T,
+  request?: Request,
+): T => {
+  if (!request) return list;
+
+  const searchArea = new URL(request.url).searchParams.get("searchArea");
+  if (searchArea !== PRIVATE_ROOMS_SEARCH_AREA) return list;
+
+  return {
+    ...list,
+    current: {
+      ...list.current,
+      id: PRIVATE_ROOT_ID,
+      rootFolderId: PRIVATE_ROOT_ID,
+      title: PRIVATE_ROOT_TITLE,
+      rootFolderType: PRIVATE_ROOMS_FOLDER_TYPE,
+      new: list.folders.reduce((sum, room) => sum + (room.new ?? 0), 0),
+    },
+    pathParts: [
+      {
+        id: PRIVATE_ROOT_ID,
+        title: PRIVATE_ROOT_TITLE,
+        folderType: PRIVATE_ROOMS_FOLDER_TYPE,
+      },
+    ],
+  };
+};
+
 // RoomPrivacyFilter (Core/Core/RoomPrivacyFilter.cs): None 0, Private 1,
 // NotPrivate 2. The client sends the number.
 const PRIVACY_FILTER_PRIVATE = 1;
@@ -3066,7 +3123,8 @@ type TPrivacyFilteredList = {
  * private rooms. On every other area the filter applies as given:
  * FolderDao.BuildRoomsQuery keeps the private rooms for `Private` and the
  * others for `NotPrivate`. `Private` adds no room on third-party storage.
- * The totals lose the rooms left out.
+ * The `PrivateRooms` area means `Private` whatever the filter says. The
+ * totals lose the rooms left out.
  */
 export const withRoomPrivacyFilter = <T extends TPrivacyFilteredList>(
   list: T,
@@ -3078,9 +3136,11 @@ export const withRoomPrivacyFilter = <T extends TPrivacyFilteredList>(
   const isRoomsArea = !searchArea || searchArea === "Active";
   const requested = readPrivacyFilter(request);
   const privacyFilter =
-    isRoomsArea && requested !== PRIVACY_FILTER_PRIVATE
-      ? PRIVACY_FILTER_NOT_PRIVATE
-      : requested;
+    searchArea === PRIVATE_ROOMS_SEARCH_AREA
+      ? PRIVACY_FILTER_PRIVATE
+      : isRoomsArea && requested !== PRIVACY_FILTER_PRIVATE
+        ? PRIVACY_FILTER_NOT_PRIVATE
+        : requested;
   if (!privacyFilter) return list;
 
   const folders = list.folders.filter((room) =>
@@ -3114,8 +3174,8 @@ export const roomListResolver = (
   if (roomListType === TypeRoomList.IsFiltered) {
     return new Response(
       JSON.stringify({
-        response: withRoomPrivacyFilter(
-          withRoot(getRoomList(true), root),
+        response: withPrivateSection(
+          withRoomPrivacyFilter(withRoot(getRoomList(true), root), request),
           request,
         ),
       }),
@@ -3125,7 +3185,10 @@ export const roomListResolver = (
   if (roomListType === TypeRoomList.IsDefault) {
     return new Response(
       JSON.stringify({
-        response: withRoomPrivacyFilter(withRoot(getRoomList(), root), request),
+        response: withPrivateSection(
+          withRoomPrivacyFilter(withRoot(getRoomList(), root), request),
+          request,
+        ),
       }),
     );
   }
@@ -3133,8 +3196,11 @@ export const roomListResolver = (
   if (roomListType === TypeRoomList.ContextMenu) {
     return new Response(
       JSON.stringify({
-        response: withRoomPrivacyFilter(
-          withRoot(getContextMenuRoomList(params ?? {}), root),
+        response: withPrivateSection(
+          withRoomPrivacyFilter(
+            withRoot(getContextMenuRoomList(params ?? {}), root),
+            request,
+          ),
           request,
         ),
       }),
@@ -3143,7 +3209,10 @@ export const roomListResolver = (
 
   return new Response(
     JSON.stringify({
-      response: withRoomPrivacyFilter(withRoot(getEmptyRoomList(), root), request),
+      response: withPrivateSection(
+        withRoomPrivacyFilter(withRoot(getEmptyRoomList(), root), request),
+        request,
+      ),
     }),
   );
 };

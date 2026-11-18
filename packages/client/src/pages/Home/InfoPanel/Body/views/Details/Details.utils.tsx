@@ -58,7 +58,7 @@ import {
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
-  getRoomTypeName,
+  getRoomTypeLabel,
 } from "SRC_DIR/helpers/filesUtils";
 import {
   TagManagement,
@@ -516,7 +516,7 @@ class DetailsHelper {
 
   getItemType = (t: TTranslation) => {
     if ("isRoom" in this.item && this.item.isRoom)
-      return text(getRoomTypeName(this.item.roomType, t));
+      return text(getRoomTypeLabel(this.item, t));
 
     if ("fileType" in this.item)
       return text(getFileTypeName(this.item.fileType, t));

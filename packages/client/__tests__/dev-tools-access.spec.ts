@@ -86,7 +86,6 @@ const EMBED_SDK_TILE = '[data-testid="dashboard-devtool-embed-sdk"]';
 /** The REST API tile, which points at the public documentation site. */
 const REST_API_TILE = '[data-testid="dashboard-devtool-rest-api"]';
 
-const ACCESS_NOTICE = '[data-testid="docs_connect_access_notice"]';
 /**
  * The toast itself, which is what a refused tile produces.
  *
@@ -206,31 +205,39 @@ test.describe("Developer Tools without the rights", () => {
     await expect(page.locator(REST_API_TILE)).toHaveAttribute("href", /.+/);
   });
 
-  test("a user opens Docs Connect and finds the action refused", async ({
+  test("a user is kept out of Docs Connect by URL", async ({
     page,
     baseUrl,
     mockRequest,
   }) => {
-    // The page opens for whoever the section opens for. Connecting an instance
-    // is portal-wide, so that one action is refused with an explanation while
-    // everything else on the page stays readable.
+    // The rest of the section opens for a user, but the server answers every
+    // Docs Connect request below a portal admin with 403, so the page is not
+    // opened for them at all.
     mockRequest.use(...mockPortal("regular"));
 
     await page.goto(`${baseUrl}${DOCS_CONNECT_URL}`);
 
-    await expect(page.locator(ACCESS_NOTICE)).toBeVisible();
-    await expect(page.locator(ACCESS_NOTICE)).toContainText(
-      "Only admins can configure Docs Connect",
-    );
-    await expect(page.locator(CREATE_INSTANCE_BUTTON)).toBeDisabled();
-
-    // The documentation the notice promises is on the page and not disabled.
-    const apiDocs = page.getByRole("link", { name: "Read API documentation" });
-    await expect(apiDocs).toBeVisible();
-    await expect(apiDocs).toHaveAttribute("href", /.+/);
+    await expect.poll(() => new URL(page.url()).pathname).toBe("/error/403");
   });
 
-  test("an admin gets the page without the notice", async ({
+  test("a user is told why the Docs Connect tile does not open", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(...mockPortal("regular"));
+
+    await openDashboard(page, baseUrl, "regular");
+    await page.locator(DOCS_CONNECT_TILE).click();
+
+    await expect(page.getByText("Admin access required")).toBeVisible();
+    expect(new URL(page.url()).pathname).toBe(DASHBOARD_URL);
+
+    // The tiles the section does open for stay plain links.
+    await expect(page.locator(EMBED_SDK_TILE)).toHaveAttribute("href", /.+/);
+  });
+
+  test("an admin gets the Docs Connect page", async ({
     page,
     baseUrl,
     mockRequest,
@@ -240,7 +247,6 @@ test.describe("Developer Tools without the rights", () => {
     await page.goto(`${baseUrl}${DOCS_CONNECT_URL}`);
 
     await expect(page.locator(CREATE_INSTANCE_BUTTON)).toBeEnabled();
-    await expect(page.locator(ACCESS_NOTICE)).toHaveCount(0);
   });
 
   test("a guest is still kept out of the section by URL", async ({

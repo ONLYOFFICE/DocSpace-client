@@ -87,4 +87,70 @@ describe("usersWithRoomSharedHandler (mirrors UserController.GetUsersWithRoomSha
       }),
     ]);
   });
+
+  const firstAccount = async () => {
+    const res = await fetch(
+      `${BASE_URL}:${PORT}/${API_PREFIX}/people/room/${ROOM_ID}?count=1`,
+    );
+    const body = (await res.json()) as {
+      response: Record<string, unknown>[];
+    };
+    return body.response[0];
+  };
+
+  it("Fields of an offered account", async () => {
+    const account = await firstAccount();
+
+    expect(Object.keys(account).sort()).toEqual(
+      [
+        "activationStatus",
+        "avatar",
+        "avatarMax",
+        "avatarMedium",
+        "avatarOriginal",
+        "avatarSmall",
+        "cultureName",
+        "department",
+        "displayName",
+        "email",
+        "firstName",
+        "hasAvatar",
+        "id",
+        "isAdmin",
+        "isAnonim",
+        "isCollaborator",
+        "isLDAP",
+        "isOwner",
+        "isRoomAdmin",
+        "isSSO",
+        "isVisitor",
+        "lastName",
+        "mobilePhoneActivationStatus",
+        "profileUrl",
+        "registrationDate",
+        "shared",
+        "status",
+        "userName",
+      ].sort(),
+    );
+    expect(account).toEqual(
+      expect.objectContaining({
+        id: "u-1",
+        firstName: "Carol",
+        lastName: "Jones",
+        userName: "carol",
+        department: "",
+        shared: false,
+      }),
+    );
+  });
+
+  it("Fields of the caller's own profile are absent", async () => {
+    const account = await firstAccount();
+
+    expect(account).not.toHaveProperty("theme");
+    expect(account).not.toHaveProperty("loginEventId");
+    expect(account).not.toHaveProperty("workFrom");
+    expect(account).not.toHaveProperty("usedSpace");
+  });
 });

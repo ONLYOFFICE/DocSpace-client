@@ -55,6 +55,7 @@ import {
   setRoomsView,
 } from "../info-panel";
 import { isPluginSectionPath } from "./navigation";
+import { showHtmlInFrame } from "./htmlFrame";
 
 import { TMessageActionsParams } from "./types";
 
@@ -79,6 +80,8 @@ export const messageActions = ({
   updateEventListenerItems,
   updateArticleButtonItems,
   updateArticleNavigationItems,
+  updateDashboardWidgetItems,
+  updateArticleWidgetItem,
   updateFileItems,
   updateCreateDialogProps,
   updatePlugin,
@@ -86,6 +89,7 @@ export const messageActions = ({
   setPluginMediaViewerProps,
   setReactPluginModalState,
   reactPluginCurrentFile,
+  closeMobileArticle,
 }: TMessageActionsParams): void => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -260,6 +264,14 @@ export const messageActions = ({
         updateArticleNavigationItems?.(pluginName);
 
         break;
+      case PluginActions.updateDashboardWidgetItems:
+        updateDashboardWidgetItems?.(pluginName);
+
+        break;
+      case PluginActions.updateArticleWidgetItem:
+        updateArticleWidgetItem?.(pluginName);
+
+        break;
       case PluginActions.updateFileItems:
         updateFileItems?.(pluginName);
 
@@ -281,18 +293,29 @@ export const messageActions = ({
 
         break;
       }
+      case PluginActions.showHtmlInFrame:
+        if (message.htmlFrameProps) showHtmlInFrame(message.htmlFrameProps);
+
+        break;
+
       case PluginActions.saveSettings:
         if (message.settings !== undefined) {
           updatePlugin?.(pluginName, null, message.settings);
         }
         break;
 
-      case PluginActions.navigate:
+      case PluginActions.navigate: {
         if (!message.navigatePath) return;
 
-        window.DocSpace.navigate(message.navigatePath);
+        const { pathname, search, hash } = window.location;
+
+        window.DocSpace.navigate(message.navigatePath, {
+          replace: message.navigatePath === `${pathname}${search}${hash}`,
+        });
+        closeMobileArticle?.();
 
         break;
+      }
 
       case PluginActions.openInfoPanel:
         setPluginDialogVisible?.(false);

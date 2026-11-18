@@ -343,16 +343,39 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     pendingAccessStore.clear(7, "bob");
   });
 
-  it("marks the file and its history entry when wrapping rejects after upload", async () => {
+  const refuseOwnEntry = () => {
     const { store } = setupEncryptedPendingFile();
     vi.mocked(prepareEncryptedUpload).mockResolvedValue(
       preparedUpload(makeDek()) as never,
     );
     serveEncryptedUpload();
-    vi.mocked(filesApi.setFileEncryptionKeys).mockRejectedValueOnce({
+    vi.mocked(filesApi.setFileEncryptionKeys).mockRejectedValue({
       response: { status: 500 },
       message: "wrap exploded",
     });
+    return store;
+  };
+
+  it("Entry cannot be written", async () => {
+    const store = refuseOwnEntry();
+    vi.mocked(filesApi.deleteFile).mockResolvedValue([
+      { id: "op-1", finished: true, error: "", progress: 100 },
+    ] as never);
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.deleteFile).toHaveBeenCalledWith(555, false, true);
+    expect(store.files[0].error).toBe("Common:EncryptionUploadNotKept");
+    expect(store.files[0].action).not.toBe("uploaded");
+    expect(store.files[0].fileId).toBeNull();
+    expect(store.uploadedFilesHistory[0].error).toBe(
+      "Common:EncryptionUploadNotKept",
+    );
+  });
+
+  it("Deletion fails", async () => {
+    const store = refuseOwnEntry();
+    vi.mocked(filesApi.deleteFile).mockRejectedValue(new Error("403"));
 
     await store.startSessionFunc(0, t);
 
@@ -548,6 +571,52 @@ describe("UploadDataStore.startSessionFunc — uploader without a key", () => {
     expect(store.currentUploadNumber).toBe(0);
     expect(store.finishUploadFilesCalled).toBe(true);
     expect(finishUploadFiles.mock.calls).toEqual([[t, false]]);
+  });
+
+  const setupUnknownListPendingFile = (read: unknown[] | null) => {
+    const ensureEncryptionKeys = vi.fn(async () => read);
+    const harness = createTestUploadDataStore({
+      userStore: {
+        user: { id: "user-1", isAdmin: false },
+        encryptionKeys: null,
+        ensureEncryptionKeys,
+      },
+    });
+    const { store } = harness;
+    const entry = makeUploadFile({
+      uniqueId: "unknown-list-pending",
+      file: makeBrowserFile("secret.docx", 3000),
+      toFolderId: 7,
+      target: makePrivateUploadTarget({ folderId: 7 }),
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    replaceAction(store, "finishUploadFiles");
+    return { ...harness, ensureEncryptionKeys };
+  };
+
+  it("Read fails", async () => {
+    const { store, ensureEncryptionKeys } = setupUnknownListPendingFile(null);
+
+    await store.startSessionFunc(0, t);
+
+    expect(ensureEncryptionKeys).toHaveBeenCalledTimes(1);
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(store.files[0].error).toBe("Common:EncryptionKeysLoadFailed");
+    expect(requestDeviceSetupHint).not.toHaveBeenCalled();
+  });
+
+  it("Read answers with an empty list", async () => {
+    const { store } = setupUnknownListPendingFile([]);
+
+    await store.startSessionFunc(0, t);
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0].error).toBe("Common:EncryptionKeysRequiredForUpload");
+    expect(requestDeviceSetupHint).toHaveBeenCalledTimes(1);
   });
 
   it("still uploads plaintext outside private rooms without keys", async () => {

@@ -121,12 +121,8 @@
     width: 16px;
     height: 16px;
 
-    :global(.security-shield) {
+    path {
       fill: colors.$light-status-positive;
-    }
-
-    :global(.security-check) {
-      fill: var(--background-color);
     }
   }
 }

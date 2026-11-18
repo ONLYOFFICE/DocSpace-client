@@ -55,6 +55,7 @@ const defaultProps = {
   defaultBrandName: "Default Brand",
   brandName: "Current Brand",
   isEqualText: false,
+  paidBadge: <span>Common:Paid</span>,
 };
 
 const renderComponent = (props = {}) => {

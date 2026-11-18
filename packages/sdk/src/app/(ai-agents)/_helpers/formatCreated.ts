@@ -59,14 +59,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { LATIN_NUMBERING_SYSTEM } from "@docspace/shared/utils/latin-digits";
+
 // Shared "created date" formatter used by AgentsList.
 // Falls back to empty string on undefined/invalid input so callers can render
 // the result unchecked.
-export const formatCreated = (created: string | undefined) => {
+export const formatCreated = (created: string | undefined, locale: string) => {
   if (!created) return "";
   try {
     const d = new Date(created);
-    return `${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+    const numberingSystem = LATIN_NUMBERING_SYSTEM;
+    return `${d.toLocaleDateString(locale, { numberingSystem })} ${d.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", numberingSystem })}`;
   } catch {
     return "";
   }

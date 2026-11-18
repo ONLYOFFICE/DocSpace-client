@@ -73,12 +73,17 @@ const ModelsDescription = ({
     />
   );
 
+  const feeDescription =
+    aiToolsByokFeePercent != null
+      ? t("Common:AIModelsDescriptionWithFee", {
+          percent: aiToolsByokFeePercent,
+        })
+      : t("Common:AIModelsDescriptionWithFeeNoPercent");
+
   return (
     <Text className={className}>
       {hasByok ? (
-        t("Common:AIModelsDescriptionWithFee", {
-          percent: aiToolsByokFeePercent,
-        })
+        feeDescription
       ) : (
         <CommonTrans
           i18nKey="AIModelsDescriptionNoByok"

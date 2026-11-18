@@ -63,7 +63,7 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
-import { AutoLockSetting } from "./AutoLockSetting";
+import { AutoLockSetting } from "SRC_DIR/components/AutoLockSetting/AutoLockSetting";
 import { KeysList } from "./KeysList";
 import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
@@ -396,26 +396,29 @@ const KeysManagement = ({
           ) : null}
           {rememberedUntil ? (
             <div className={styles.deviceRow}>
-              <Text fontSize="13px">
+              <Text fontSize="13px" dataTestId="device_remembered_until">
                 {t("Common:DeviceUnlockRememberedUntil", {
                   date: rememberedUntil,
                 })}
               </Text>
-              <Link
-                type={LinkType.action}
-                fontWeight="600"
-                fontSize="13px"
-                isHovered
-                onClick={() => {
-                  if (!busy) handleForgetDevice();
-                }}
-                role="button"
-                tabIndex={0}
-                onKeyDown={activateAsButton}
-                dataTestId="forget_device_link"
-              >
-                {t("Common:ForgetDeviceButton")}
-              </Link>
+              {/* Spec: private-rooms/key-management, "Forget device and Lock now are offered one at a time" */}
+              {isUnlocked ? null : (
+                <Link
+                  type={LinkType.action}
+                  fontWeight="600"
+                  fontSize="13px"
+                  isHovered
+                  onClick={() => {
+                    if (!busy) handleForgetDevice();
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={activateAsButton}
+                  dataTestId="forget_device_link"
+                >
+                  {t("Common:ForgetDeviceButton")}
+                </Link>
+              )}
             </div>
           ) : null}
           {isUnlocked ? (

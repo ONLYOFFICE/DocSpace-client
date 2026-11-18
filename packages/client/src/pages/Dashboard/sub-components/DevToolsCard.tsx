@@ -68,6 +68,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
+  canOpenDocsConnect,
   hasDevToolsAccess,
   isDevToolsOffered,
 } from "@docspace/shared/utils/devToolsAccess";
@@ -86,6 +87,8 @@ type DevTool = {
   linkTitle: string;
 };
 
+const DOCS_CONNECT_ID = "docs-connect";
+
 interface DevToolsCardProps {
   apiBasicLink?: string;
   // Whether the portal offers the section at all. It stops offering it to
@@ -99,8 +102,11 @@ interface DevToolsCardProps {
    */
   canOpenDevTools?: boolean;
   // Docs Connect is sold and hosted by us, so its tile exists in SaaS only.
-  // Who may configure it is a separate question, answered by the page itself.
   isStandalone?: boolean;
+  // The Docs Connect page opens for portal admins and the owner only, so its
+  // tile is refused for a room admin or a user the rest of the section opens
+  // for.
+  canOpenDocsConnect?: boolean;
 }
 
 const useDevTools = (props: DevToolsCardProps): DevTool[] => {
@@ -122,7 +128,7 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
   const docsConnect: DevTool[] = !isStandalone
     ? [
         {
-          id: "docs-connect",
+          id: DOCS_CONNECT_ID,
           title: t("DocsConnect:DocsConnect"),
           description: t("DocsConnect:CardDescription", {
             productName: docsName,
@@ -266,7 +272,11 @@ const DevToolTile = ({
 };
 
 const DevToolsCardComponent = (props: DevToolsCardProps) => {
-  const { showDevTools, canOpenDevTools = true } = props;
+  const {
+    showDevTools,
+    canOpenDevTools = true,
+    canOpenDocsConnect = true,
+  } = props;
   const { t } = useTranslation(["Common"]);
   const tools = useDevTools(props);
   const organizationName = getBrandName("OrganizationName");
@@ -301,7 +311,11 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
             <DevToolTile
               key={tool.id}
               tool={tool}
-              canOpen={canOpenDevTools}
+              canOpen={
+                tool.id === DOCS_CONNECT_ID
+                  ? canOpenDocsConnect
+                  : canOpenDevTools
+              }
               onRefused={showAdminOnlyToast}
             />
           ))}
@@ -324,6 +338,11 @@ export const DevToolsCard = inject<TStore>(({ settingsStore, userStore }) => ({
     settingsStore.limitedAccessDevToolsForUsers,
   ),
   isStandalone: settingsStore.standalone,
+  canOpenDocsConnect: canOpenDocsConnect(
+    userStore.user,
+    settingsStore.standalone,
+    settingsStore.limitedAccessDevToolsForUsers,
+  ),
 }))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;

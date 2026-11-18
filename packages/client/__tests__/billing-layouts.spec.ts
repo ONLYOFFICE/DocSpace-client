@@ -102,6 +102,12 @@ const PAGES: BillingPage[] = [
     route: "/billing/payment-method",
     ready: (page) => page.getByText("Test Payer", { exact: true }),
   },
+  {
+    key: "invoices",
+    route: "/billing/invoices",
+    ready: (page) =>
+      page.getByText("View invoices for your completed wallet top-ups."),
+  },
 ];
 
 const TRANSACTIONS = [
@@ -158,8 +164,20 @@ const USAGE = [
 ];
 
 const MONTHLY_USAGE = [
-  { year: 2025, month: 12, currency: "USD", totalAmount: 21.5, operationCount: 9 },
-  { year: 2025, month: 11, currency: "USD", totalAmount: 20, operationCount: 1 },
+  {
+    year: 2025,
+    month: 12,
+    currency: "USD",
+    totalAmount: 21.5,
+    operationCount: 9,
+  },
+  {
+    year: 2025,
+    month: 11,
+    currency: "USD",
+    totalAmount: 20,
+    operationCount: 1,
+  },
 ];
 
 const ACTIVE_SERVICES = [
@@ -178,6 +196,27 @@ const ACTIVE_SERVICES = [
     title: "AI services",
     limit: 0,
     used: null,
+  },
+];
+
+const DEPOSITS = [
+  {
+    id: 15342,
+    date: "2025-12-01T08:00:00.0000000Z",
+    amount: 100,
+    currency: "USD",
+    status: "Completed",
+    hasInvoice: true,
+    initiator: "Manual",
+  },
+  {
+    id: 15100,
+    date: "2025-11-12T09:05:00.0000000Z",
+    amount: 25,
+    currency: "USD",
+    status: "Completed",
+    hasInvoice: true,
+    initiator: "Automatic",
   },
 ];
 
@@ -211,6 +250,16 @@ const billingHandlers = () => [
     jsonResponse(MONTHLY_USAGE),
   ),
   http.get(apiUrl("portal/tariff/upcoming"), () => jsonResponse(UPCOMING)),
+  http.get(apiUrl("portal/payment/customer/deposits"), () =>
+    jsonResponse({
+      collection: DEPOSITS,
+      offset: 0,
+      limit: 25,
+      totalQuantity: DEPOSITS.length,
+      totalPage: 1,
+      currentPage: 1,
+    }),
+  ),
   http.get(apiUrl("portal/payment/activeservices"), () =>
     jsonResponse(ACTIVE_SERVICES),
   ),
@@ -219,7 +268,11 @@ const billingHandlers = () => [
   ),
 ];
 
-const openPage = async (page: Page, baseUrl: string, billingPage: BillingPage) => {
+const openPage = async (
+  page: Page,
+  baseUrl: string,
+  billingPage: BillingPage,
+) => {
   await page.goto(`${baseUrl}${billingPage.route}`);
   await expect(billingPage.ready(page)).toBeVisible(FIRST_RENDER);
 };
@@ -262,7 +315,14 @@ test.describe("Billing in the dark theme", () => {
   });
 
   for (const billingPage of PAGES.filter((item) =>
-    ["overview", "wallet", "tariff-plan", "addons", "disk-storage"].includes(item.key),
+    [
+      "overview",
+      "wallet",
+      "tariff-plan",
+      "addons",
+      "disk-storage",
+      "invoices",
+    ].includes(item.key),
   )) {
     test(`the ${billingPage.key} page follows the dark theme`, async ({
       page,
@@ -270,7 +330,11 @@ test.describe("Billing in the dark theme", () => {
     }) => {
       await openPage(page, baseUrl, billingPage);
 
-      await expectScreenshot(page, ["dark", "billing", `${billingPage.key}.png`]);
+      await expectScreenshot(page, [
+        "dark",
+        "billing",
+        `${billingPage.key}.png`,
+      ]);
     });
   }
 });

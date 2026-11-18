@@ -129,7 +129,7 @@ describe("KeysManagement", () => {
     const { unmount } = renderPage([KEY]);
 
     expect(
-      await screen.findByRole("button", { name: "Common:ForgetDeviceButton" }),
+      await screen.findByText("Common:DeviceUnlockRememberedUntil"),
     ).toBeInTheDocument();
     expect(action("Common:LockNow")).toBeInTheDocument();
     expect(action("Common:UseRecoveryPhrase")).toBeInTheDocument();
@@ -177,6 +177,22 @@ describe("KeysManagement", () => {
     const toggle = await screen.findByRole("checkbox", {
       name: "Common:PasskeyUnlockLabel",
     });
+    await screen.findByText("Common:DeviceUnlockRememberedUntil");
+
+    within(screen.getByRole("group", { name: "Common:AutoLockLabel" }))
+      .getByRole("button")
+      .focus();
+    await user.tab();
+    expect(toggle).toHaveFocus();
+    await user.tab();
+    expect(action("Common:LockNow")).toHaveFocus();
+  });
+
+  it("Device section while locked", async () => {
+    const user = userEvent.setup();
+    mocks.encryption.isUnlocked = false;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
     const forget = await screen.findByRole("button", {
       name: "Common:ForgetDeviceButton",
     });
@@ -185,11 +201,34 @@ describe("KeysManagement", () => {
       .getByRole("button")
       .focus();
     await user.tab();
-    expect(toggle).toHaveFocus();
-    await user.tab();
     expect(forget).toHaveFocus();
-    await user.tab();
-    expect(action("Common:LockNow")).toHaveFocus();
+  });
+
+  it("Remembered device, identity unlocked", async () => {
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+
+    expect(
+      await screen.findByText("Common:DeviceUnlockRememberedUntil"),
+    ).toBeInTheDocument();
+    expect(action("Common:LockNow")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Common:ForgetDeviceButton" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("Remembered device, identity locked", async () => {
+    mocks.encryption.isUnlocked = false;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+
+    expect(
+      await screen.findByText("Common:DeviceUnlockRememberedUntil"),
+    ).toBeInTheDocument();
+    expect(action("Common:ForgetDeviceButton")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Common:LockNow" }),
+    ).not.toBeInTheDocument();
   });
 });
 

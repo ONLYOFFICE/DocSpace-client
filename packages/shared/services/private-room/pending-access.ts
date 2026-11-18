@@ -45,16 +45,67 @@ export type TPendingAccess = {
 
 const keyOf = (roomId: number, userId: string) => `${roomId}:${userId}`;
 
-/** Pending access recorded on this device for the page session. */
+/**
+ * Pending access of room members. The server's list of missing keys is the
+ * source when a members list loads; what this device records in between
+ * (after an invitation, an upload or a retry) holds until the next load.
+ */
 class PendingAccessStore {
   entries = new Map<string, TPendingAccess>();
+
+  /** Counts the local writes, so a server list never undoes a later one. */
+  private writes = 0;
+
+  private writtenAt = new Map<string, number>();
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  /** The number of local writes so far; taken before a server list is asked. */
+  get localWrites() {
+    return this.writes;
+  }
+
+  private touch = (key: string) => {
+    this.writes += 1;
+    this.writtenAt.set(key, this.writes);
+  };
+
   record = (entry: TPendingAccess) => {
-    this.entries.set(keyOf(entry.roomId, entry.userId), entry);
+    const key = keyOf(entry.roomId, entry.userId);
+    this.entries.set(key, entry);
+    this.touch(key);
+  };
+
+  /**
+   * Takes the server's list for a room: the listed members are pending for
+   * the listed files, every other member of the room is not. A record written
+   * on this device after `sinceLocalWrites` was taken is left as it is.
+   */
+  applyServerList = (
+    roomId: number,
+    listed: { userId: string; fileIds: number[] }[],
+    sinceLocalWrites: number,
+  ) => {
+    const untouched = (key: string) =>
+      (this.writtenAt.get(key) ?? 0) <= sinceLocalWrites;
+    const missing = new Map<string, number[]>();
+    for (const { userId, fileIds } of listed) {
+      if (fileIds.length > 0) missing.set(keyOf(roomId, userId), fileIds);
+    }
+    for (const [key, entry] of Array.from(this.entries)) {
+      if (entry.roomId === roomId && !missing.has(key) && untouched(key)) {
+        this.entries.delete(key);
+      }
+    }
+    for (const { userId } of listed) {
+      const key = keyOf(roomId, userId);
+      const fileIds = missing.get(key);
+      if (fileIds && untouched(key)) {
+        this.entries.set(key, { roomId, userId, missingFileIds: fileIds });
+      }
+    }
   };
 
   /** Adds files to what the member misses; a record of every file stays so. */
@@ -69,7 +120,9 @@ class PendingAccessStore {
   };
 
   clear = (roomId: number, userId: string) => {
-    this.entries.delete(keyOf(roomId, userId));
+    const key = keyOf(roomId, userId);
+    this.entries.delete(key);
+    this.touch(key);
   };
 
   get = (roomId: number, userId: string): TPendingAccess | undefined =>

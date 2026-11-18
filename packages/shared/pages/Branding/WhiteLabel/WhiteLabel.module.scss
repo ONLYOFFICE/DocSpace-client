@@ -69,11 +69,6 @@
     }
   }
 
-  .paidBadge {
-    cursor: auto;
-    background-color: var(--settings-common-white-label-paid-badge-bg);
-  }
-
   @include mixins.mobile {
     .headerContainer {
       display: none;

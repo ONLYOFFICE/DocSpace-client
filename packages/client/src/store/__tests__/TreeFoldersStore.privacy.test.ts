@@ -118,3 +118,51 @@ describe("TreeFoldersStore.isPrivacyFolder — Private-room rules follow the roo
     ).toBe(false);
   });
 });
+
+describe("TreeFoldersStore — the Private list is a rooms list under its own root", () => {
+  const ROOMS_ROOT_ID = 8;
+  const PRIVATE_ROOT_ID = 9;
+
+  const storeAt = (folder: { id: number; rootFolderType: FolderType }) => {
+    const store = new TreeFoldersStore(
+      ...([folder, {}, {}] as unknown as ConstructorParameters<
+        typeof TreeFoldersStore
+      >),
+    );
+    store.treeFolders = [
+      { id: ROOMS_ROOT_ID, rootFolderType: FolderType.Rooms },
+      { id: PRIVATE_ROOT_ID, rootFolderType: FolderType.PrivateRooms },
+    ] as never;
+    return store;
+  };
+
+  it("Private root open", () => {
+    const store = storeAt({
+      id: PRIVATE_ROOT_ID,
+      rootFolderType: FolderType.PrivateRooms,
+    });
+
+    expect(store.isPrivateRoomsFolder).toBe(true);
+    expect(store.isRoomsFolder).toBe(true);
+    expect(store.isRoomsFolderRoot).toBe(true);
+    expect(store.privateRoomsFolderId).toBe(PRIVATE_ROOT_ID);
+  });
+
+  it("Rooms root open", () => {
+    const store = storeAt({
+      id: ROOMS_ROOT_ID,
+      rootFolderType: FolderType.Rooms,
+    });
+
+    expect(store.isPrivateRoomsFolder).toBe(false);
+    expect(store.isRoomsFolder).toBe(true);
+    expect(store.isRoomsFolderRoot).toBe(true);
+  });
+
+  it("Private room open: it reports the Rooms root, so it is not the list", () => {
+    const store = storeAt({ id: 100, rootFolderType: FolderType.Rooms });
+
+    expect(store.isPrivateRoomsFolder).toBe(false);
+    expect(store.isRoomsFolder).toBeFalsy();
+  });
+});

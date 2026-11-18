@@ -56,7 +56,7 @@ import { getAiRowInfo, getAiRowKind } from "./aiRowInfo";
 
 import {
   connectedCloudsTypeTitleTranslation,
-  getRoomTypeName,
+  getRoomTypeLabel,
 } from "../../../../../helpers/filesUtils";
 
 const FilesRowContent = ({
@@ -94,7 +94,6 @@ const FilesRowContent = ({
     quotaLimit,
     usedSpace,
     order,
-    roomType,
   } = item;
 
   // The rows of the AI section's lists, and of a skill set or a knowledge
@@ -150,7 +149,7 @@ const FilesRowContent = ({
         return getFileTypeName(fileType, t);
 
       case SortByFieldName.RoomType:
-        return getRoomTypeName(roomType, t);
+        return getRoomTypeLabel(item, t);
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "";

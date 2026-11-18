@@ -61,6 +61,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { PrivateRoomInviteContext } from "@docspace/shared/services/private-room/invite-panel-rules";
 import React, {
   useEffect,
   useState,
@@ -83,6 +84,7 @@ import {
 } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
 import {
+  notInvitedReasons,
   sendPrivateRoomInvitations,
   type TInviteOutcome,
   type TInviteeVerification,
@@ -92,6 +94,7 @@ import type { SkippedRoomMember } from "@docspace/shared/services/private-room/r
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { ButtonSize } from "@onlyoffice/apps-ui-kit/components/button/Button.enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
@@ -274,8 +277,15 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const [inviteOutcome, setInviteOutcome] = useState<TInviteOutcome | null>(
     null,
   );
+  // Spec: private-rooms/room-membership, "An invitation that invited nobody keeps the invite form"
+  const [notInvited, setNotInvited] = useState<string[]>([]);
   // Counts sends and closes, so a re-wrap that ends after a close shows nothing.
   const sendRunRef = useRef(0);
+
+  // The reasons describe the list as it was sent; a changed list is a new one.
+  useEffect(() => {
+    setNotInvited([]);
+  }, [inviteItems]);
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [activeLink, setActiveLink] = useState<ShareLink>({});
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
@@ -297,6 +307,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
   const handleClose = () => {
     sendRunRef.current += 1;
     setInviteOutcome(null);
+    setNotInvited([]);
     setInviteItems([]);
     onClose();
   };
@@ -664,6 +675,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
 
     try {
       setIsLoading(true);
+      setNotInvited([]);
 
       // Pre-submit identity gate: callers (e.g. private rooms) can verify that
       // encryption keys are unlocked before the server grants room access.
@@ -758,6 +770,12 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       if (showsResult) {
         const run = ++sendRunRef.current;
 
+        if (memberIds.length === 0) {
+          setIsLoading(false);
+          setNotInvited(notInvitedReasons(t, verification.skipped, refused));
+          return;
+        }
+
         let outcome: TInviteOutcome | null = null;
         if (memberIds.length > 0 || verification.skipped.length > 0) {
           try {
@@ -772,7 +790,15 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         }
 
         setIsLoading(false);
-        if (run !== sendRunRef.current) return;
+        // The open panel names the invitees left out itself; the end of the
+        // re-wrap is still announced. A closed panel shows nothing.
+        const showsOutcome = run === sendRunRef.current;
+        for (const notice of outcome?.notices ?? []) {
+          if (!showsOutcome || !notice.namesLeftOut) {
+            toastr[notice.level](notice.text);
+          }
+        }
+        if (!showsOutcome) return;
         if (refused.length > 0) {
           setInviteOutcome({
             ...(outcome ?? { granted: [], pending: [], skipped: [] }),
@@ -915,6 +941,7 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
     isOwner,
     isAdmin,
     false, // standalone = false
+    isPrivateRoom,
   ) as (TOption & { access?: number })[];
 
   const invitedUsersArray = useMemo(
@@ -1059,6 +1086,11 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
       containerVisible={addUsersPanelVisible || linkSettingsPanelVisible}
       withBodyScroll
       id="invite_panel_modal"
+      aria-label={
+        inviteOutcome
+          ? t("Common:EncryptedInviteResultTitle")
+          : t("Common:Invite")
+      }
     >
       {addUsersPanelVisible ? (
         <ModalDialog.Container>
@@ -1170,7 +1202,20 @@ const InvitePanel: React.FC<InvitePanelProps> = ({
         {inviteOutcome ? (
           <InviteResult t={t} outcome={inviteOutcome} />
         ) : (
-          bodyInvitePanel
+          <PrivateRoomInviteContext.Provider value={isPrivateRoom}>
+            <div
+              role="status"
+              data-testid="invite_panel_not_invited"
+              className={notInvited.length ? styles.notInvited : undefined}
+            >
+              {notInvited.map((reason) => (
+                <Text key={reason} fontSize="13px" fontWeight={600}>
+                  {reason}
+                </Text>
+              ))}
+            </div>
+            {bodyInvitePanel}
+          </PrivateRoomInviteContext.Provider>
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>

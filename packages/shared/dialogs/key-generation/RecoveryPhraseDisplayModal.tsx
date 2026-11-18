@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useMemo, useState, useCallback, useId } from "react";
+import React, { useEffect, useState, useCallback, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -44,17 +44,8 @@ import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
-import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
-import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
-import {
-  buildRecoveryKitHtml,
-  downloadRecoveryKitHtml,
-  printRecoveryKit,
-} from "./recovery-kit";
-import styles from "./RecoveryPhraseDisplayModal.module.scss";
+import { RecoveryPhraseContent } from "./RecoveryPhraseContent";
 
 type RecoveryPhraseDisplayModalProps = {
   visible: boolean;
@@ -75,74 +66,15 @@ export const RecoveryPhraseDisplayModal: React.FC<
   isLoading = false,
   accountLabel,
 }) => {
-  const { t, ready, i18n } = useTranslation(["Common"]);
+  const { t, ready } = useTranslation(["Common"]);
   const titleId = useId();
   const [acknowledged, setAcknowledged] = useState(false);
-  const [hasSaved, setHasSaved] = useState(false);
-
-  const words = useMemo(() => mnemonic.trim().split(/\s+/), [mnemonic]);
-  const wordCount = words.length;
 
   useEffect(() => {
     if (visible) {
       setAcknowledged(false);
-      setHasSaved(false);
     }
   }, [visible]);
-
-  const handleCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(mnemonic);
-      setHasSaved(true);
-      toastr.success(t("Common:Copied"));
-    } catch {
-      toastr.error(t("Common:CopyFailed"));
-    }
-  }, [mnemonic, t]);
-
-  const buildKitHtml = useCallback(() => {
-    const productName = getBrandName("ProductName");
-    return buildRecoveryKitHtml({
-      words,
-      createdDate: new Date().toLocaleDateString(i18n.language),
-      lang: i18n.language,
-      dir: i18n.dir(),
-      accountLabel,
-      strings: {
-        title: t("Common:RecoveryKitTitle", { organizationName: getBrandName("OrganizationName"), productName }),
-        subtitle: t("Common:RecoveryKitSubtitle"),
-        createdLabel: t("Common:ByCreation"),
-        accountLabel: t("Common:Account"),
-        phraseLabel: t("Common:RecoveryKitPhraseLabel"),
-        whatTitle: t("Common:RecoveryKitWhatTitle"),
-        whatText: t("Common:RecoveryKitWhatText", {
-          organizationName: getBrandName("OrganizationName"), productName,
-          wordCount,
-        }),
-        howTitle: t("Common:RecoveryKitHowTitle"),
-        howText: t("Common:RecoveryKitHowText", {
-          action: t("Common:UseRecoveryPhrase"),
-          wordCount,
-        }),
-        storageTitle: t("Common:RecoveryKitStorageTitle"),
-        storageText: t("Common:RecoveryKitStorageText"),
-        warning: t("Common:RecoveryPhraseWarning"),
-        footer: t("Common:RecoveryKitFooter", { organizationName: getBrandName("OrganizationName"), productName }),
-      },
-    });
-  }, [words, wordCount, accountLabel, i18n, t]);
-
-  const handlePrintKit = useCallback(() => {
-    printRecoveryKit(buildKitHtml());
-    setHasSaved(true);
-  }, [buildKitHtml]);
-
-  const handleDownloadKit = useCallback(() => {
-    const productName = getBrandName("ProductName");
-    const filename = `${productName.replace(/\s+/g, "-")}-recovery-kit.html`;
-    downloadRecoveryKitHtml(buildKitHtml(), filename);
-    setHasSaved(true);
-  }, [buildKitHtml]);
 
   const handleCancel = useCallback(() => {
     setAcknowledged(false);
@@ -167,66 +99,20 @@ export const RecoveryPhraseDisplayModal: React.FC<
         aria-labelledby={titleId}
         isLoading={!ready}
         autoMaxHeight
+        isLarge
       >
         <ModalDialog.Header>
           <span id={titleId}>{t("Common:RecoveryPhraseTitle")}</span>
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          <div className={styles.container}>
-            <Text className={styles.description}>
-              {t("Common:RecoveryPhraseHint")}
-            </Text>
-
-            <div className={styles.warningBox}>
-              <Text fontSize="13px" fontWeight={600}>
-                {t("Common:RecoveryPhraseWarning")}
-              </Text>
-            </div>
-
-            <div className={styles.phraseBox}>{words.join(" ")}</div>
-
-            <div className={styles.saveActions}>
-              <Button
-                scale
-                primary
-                className={styles.printButton}
-                size={ButtonSize.small}
-                onClick={handlePrintKit}
-                label={t("Common:RecoveryKitPrint")}
-                isDisabled={isLoading}
-              />
-              <Button
-                scale
-                size={ButtonSize.small}
-                onClick={handleDownloadKit}
-                label={t("Common:Download")}
-                isDisabled={isLoading}
-              />
-              <Button
-                scale
-                size={ButtonSize.small}
-                onClick={handleCopy}
-                label={t("Common:CopyToClipboard")}
-                isDisabled={isLoading}
-              />
-            </div>
-
-            <div className={styles.checkboxRow}>
-              <Checkbox
-                id="recoveryPhraseAcknowledged"
-                isChecked={acknowledged}
-                isDisabled={isLoading || !hasSaved}
-                onChange={(e) => setAcknowledged(e.target.checked)}
-                label={t("Common:RecoveryPhraseAcknowledge")}
-              />
-            </div>
-            {!hasSaved ? (
-              <Text className={styles.saveFirstHint} fontSize="12px">
-                {t("Common:RecoveryPhraseSaveFirst")}
-              </Text>
-            ) : null}
-          </div>
+          <RecoveryPhraseContent
+            mnemonic={mnemonic}
+            acknowledged={acknowledged}
+            onAcknowledgedChange={setAcknowledged}
+            isLoading={isLoading}
+            accountLabel={accountLabel}
+          />
         </ModalDialog.Body>
 
         <ModalDialog.Footer>

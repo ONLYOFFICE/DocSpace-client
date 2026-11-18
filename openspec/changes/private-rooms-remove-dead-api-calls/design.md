@@ -45,9 +45,8 @@ The desktop bridge, as found on 2026-10-20:
   (`DefaultCryptoEngineId` in
   `server/products/ASC.Files/Core/ApiModels/ResponseDto/EncryptionKeyDto.cs`).
 - The editor-side bridge (`packages/doceditor/src/utils/initDesktop.ts`, since
-  2026-07-28) picks the user's key pair from the server configuration and
-  hands it, with that engine id, to the desktop in `portal:login`
-  (`packages/shared/utils/desktop.ts`). The desktop asks for the sharing keys
+  2026-07-28) signs the desktop in with that engine id (`portal:login`,
+  `packages/shared/utils/desktop.ts`). The desktop asks for the sharing keys
   of a file through `cloudCryptoCommand("getsharingkeys")`, which the bridge
   answers with the per-file privacy access call, the route that does not
   exist; it writes keys through `"encryptionKeys"` / `"updateEncryptionKeys"`,

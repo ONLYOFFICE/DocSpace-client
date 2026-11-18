@@ -58,6 +58,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { default as FilesStore } from "../FilesStore";
 
 import type { TClientConfigWithPdfViewer, TItem } from "./types";
+import { mayHoldEncryptionKey } from "@docspace/shared/services/encryption/select-user-key";
 import {
   getEncryptedFileWithheld,
   PRIVATE_FOLDER_WITHHELD,
@@ -636,7 +637,7 @@ export const buildContextOptions = (
         withheldMenuKeys(
           getEncryptedFileWithheld({
             mustConvert,
-            hasKeys: Array.isArray(userKeys) && userKeys.length > 0,
+            hasKeys: mayHoldEncryptionKey(userKeys),
           }),
           PRIVATE_FILE_MENU_KEYS,
         ),
@@ -952,24 +953,23 @@ export const buildContextOptions = (
     // store/index.js; the non-null assertion keeps the old unchecked read.
     const { roomGroups } = deps.dialogsStore!;
     const currentGroupId = deps.roomsFilter?.groupId;
+    // Spec: private-rooms/sidebar-section, "Room groups in the section"
     const itemGroupsArea =
       item.roomType === RoomsType.FormRoom
         ? RoomSearchArea.Forms
-        : RoomSearchArea.Active;
-    const sectionGroupsArea = deps.treeFoldersStore.isFormsFolder
-      ? RoomSearchArea.Forms
-      : RoomSearchArea.Active;
-    // Room groups are kept per Rooms / Forms area; the AI sections have
-    // none.
+        : item.private
+          ? RoomSearchArea.PrivateRooms
+          : RoomSearchArea.Active;
+    const sectionGroupsArea = deps.treeFoldersStore.roomGroupsArea;
+    // Room groups are kept per Rooms / Forms / Private area; the AI sections
+    // have none.
     if (
       !organizeRoomsGrouping ||
       isArchiveFolder ||
       item.rootFolderType === FolderType.Archive ||
       item.rootFolderType === FolderType.AiHub ||
       deps.treeFoldersStore.isAiSectionFolder ||
-      itemGroupsArea !== sectionGroupsArea ||
-      // Spec: private-rooms/sidebar-section, "No room groups in the section"
-      isPrivateRoomsRoute(window.location.pathname)
+      itemGroupsArea !== sectionGroupsArea
     ) {
       roomOptions = removeOptions(roomOptions, [
         "create-group",

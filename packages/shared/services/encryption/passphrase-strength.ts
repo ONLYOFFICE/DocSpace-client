@@ -35,6 +35,27 @@
 
 export const PASSPHRASE_MIN_LENGTH = 12;
 
+/** The rules of a new passphrase, in the shape the kit's password input takes. */
+// Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+export const PASSPHRASE_SETTINGS = {
+  minLength: PASSPHRASE_MIN_LENGTH,
+  upperCase: false,
+  digits: false,
+  specSymbols: false,
+  digitsRegexStr: "(?=.*\\d)",
+  upperCaseRegexStr: "(?=.*[A-Z])",
+  specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+} as const;
+
+/** What the generator draws a passphrase by. */
+// Spec: private-rooms/key-management, "A generated passphrase fills both fields"
+export const PASSPHRASE_GENERATOR_SETTINGS = {
+  ...PASSPHRASE_SETTINGS,
+  upperCase: true,
+  digits: true,
+  specSymbols: true,
+} as const;
+
 export type PassphraseStrength = "weak" | "fair" | "good" | "strong";
 
 /**
@@ -184,4 +205,21 @@ export function isPassphraseAcceptable(
   if (passphrase.length < minLength) return false;
   const result = checkPassphraseStrength(passphrase, minLength);
   return result.strength !== "weak";
+}
+
+/**
+ * Whether a new passphrase meets the length and the common-pattern rule; the
+ * kit's password input checks the length with PASSPHRASE_SETTINGS.
+ */
+export function meetsPassphraseRules(passphrase: string): boolean {
+  if (passphrase.trim().length < PASSPHRASE_SETTINGS.minLength) return false;
+  return !containsCommonPattern(passphrase);
+}
+
+// Spec: private-rooms/key-management, "The strength grade does not contradict the passphrase rules"
+export function getShownPassphraseStrength(
+  passphrase: string,
+): PassphraseStrength {
+  if (!meetsPassphraseRules(passphrase)) return "weak";
+  return checkPassphraseStrength(passphrase).strength;
 }

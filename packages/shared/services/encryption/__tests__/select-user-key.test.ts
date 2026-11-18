@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, expect, it } from "vitest";
 
-import { selectUserKey } from "../select-user-key";
+import { mayHoldEncryptionKey, selectUserKey } from "../select-user-key";
 
 const key = (id: string, date?: string | null) => ({ id, date });
 
@@ -55,5 +55,16 @@ describe("selectUserKey", () => {
       selectUserKey([key("dated", "2026-05-05T10:00:00"), key("none", null)])?.id,
     ).toBe("dated");
     expect(selectUserKey([key("a", "nope"), key("b", undefined)])?.id).toBe("b");
+  });
+});
+
+describe("mayHoldEncryptionKey", () => {
+  it.each([
+    ["list not read or failed to load", null, true],
+    ["list absent", undefined, true],
+    ["known empty list", [], false],
+    ["known list with a key", [{ id: "a" }], true],
+  ])("%s", (_name, keys, expected) => {
+    expect(mayHoldEncryptionKey(keys)).toBe(expected);
   });
 });

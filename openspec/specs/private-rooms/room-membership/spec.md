@@ -7,7 +7,7 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag. This rule is enforced by the client only: the server accepts the private flag with any room type.
+The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag.
 
 #### Scenario: Private card chosen
 - **WHEN** the user creates a room from the Private section, where the dialog shows the Private room type, and confirms creation
@@ -16,10 +16,6 @@ The system SHALL present "Private room" as its own room type in the create-room 
 #### Scenario: Other room type
 - **WHEN** a Public, Form filling, Virtual data or Collaboration room is created
 - **THEN** the private flag is not sent and the room is not encrypted
-
-#### Scenario: Private flag sent with another room type
-- **WHEN** a create request that bypasses the client sets the private flag on a room type other than Custom
-- **THEN** the server creates a private room of the requested type
 
 ### Requirement: Private room creation requires an encryption key
 The system SHALL refuse to create a private room for a user who has no registered encryption key, after re-fetching the keys from the server, and SHALL show Common:EncryptionKeysRequiredForPrivateRoom.
@@ -32,24 +28,36 @@ The system SHALL refuse to create a private room for a user who has no registere
 - **WHEN** the user confirms creation and at least one encryption key is registered
 - **THEN** the room is created with the private flag
 
-### Requirement: Starting private room creation without a key starts key generation
-The system SHALL offer to generate a key first when a user with no encryption key starts creating a private room from the Private section. The dialog SHALL open on the Private type only after generation succeeds. Cancelling SHALL close the private-room creation, and no dialog SHALL be left open. A user whose key list is not known, because it has not loaded or failed to load, SHALL NOT be treated as a user with no key.
+### Requirement: Starting private room creation without a key opens key setup
+The system SHALL open key setup when a user with no encryption key starts creating a private room from the Private section, on its explanation step and without a prompt before it. The create-room dialog SHALL open on the Private type only after generation succeeds. Leaving key setup SHALL close the private-room creation, and no dialog SHALL be left open. A user whose key list is not known, because it has not loaded or failed to load, SHALL NOT be treated as a user with no key.
 
-#### Scenario: User accepts key generation
-- **WHEN** a key-less user presses create in the Private section and confirms the key-generation prompt
-- **THEN** the key-generation flow runs and, on success, the create-room dialog opens on the Private type
+#### Scenario: User completes key setup
+- **WHEN** a key-less user presses create in the Private section and completes key setup
+- **THEN** the create-room dialog opens on the Private type
 
-#### Scenario: User cancels key generation
-- **WHEN** a key-less user presses create in the Private section and cancels the prompt
+#### Scenario: User cancels on the explanation
+- **WHEN** a key-less user presses create in the Private section and cancels key setup on its explanation step
 - **THEN** no create-room dialog is left open and no room is created
 
-#### Scenario: User cancels inside key generation
-- **WHEN** a key-less user confirms the key-generation prompt and then cancels or discards the passphrase dialog or the recovery-phrase dialog
+#### Scenario: User cancels inside key setup
+- **WHEN** a key-less user cancels or discards key setup on the passphrase step or on the recovery phrase step
 - **THEN** no create-room dialog is left open, no room is created and no key is registered
 
 #### Scenario: Key list could not be loaded
 - **WHEN** a user presses create in the Private section while their key list has not loaded, and fetching it again fails
-- **THEN** Common:EncryptionKeysLoadFailed is shown, no key-generation prompt is offered and no create-room dialog is left open
+- **THEN** Common:EncryptionKeysLoadFailed is shown, key setup is not opened and no create-room dialog is left open
+
+#### Scenario: No dialog under key setup
+- **WHEN** a key-less user presses create in the Private section and key setup is shown
+- **THEN** the create-room dialog is not shown behind it
+
+#### Scenario: Key list still loading
+- **WHEN** a user who holds a key presses create in the Private section before their key list has loaded
+- **THEN** the create-room dialog opens on the Private type once the list is known to hold a key, and key setup is not opened
+
+#### Scenario: No prompt before key setup
+- **WHEN** a key-less user presses create in the Private section
+- **THEN** key setup opens at once and no question about creating a key is asked before it
 
 ### Requirement: Private rooms need a secure context
 The system SHALL refuse to start private room creation, or to auto-prompt for a key, when the browser does not expose WebCrypto, and SHALL show Common:EncryptionRequiresHttps.
@@ -73,11 +81,27 @@ The system SHALL NOT allow the room type or the private flag to be changed after
 - **THEN** the room type selector is disabled and saving changes neither the type nor the private flag
 
 ### Requirement: Private badge in permanent settings
-The system SHALL show a permanent "private room" setting block with Common:PrivateRoomTitle and Common:PrivateRoomDescription in the create and edit dialogs of a private room.
+The system SHALL show one "private room" block with Common:PrivateRoomTitle and Common:PrivateRoomPanelDescription in the create and edit dialogs of a private room, in the place of the room type, and SHALL NOT show the Custom room block or a second private-room block there. Under the description it SHALL show a Common:LearnMore link to the help-center entry `privaterooms` when the portal's resources carry that entry, and no link otherwise.
 
 #### Scenario: Edit dialog of a private room
 - **WHEN** the edit dialog of a private room is open
-- **THEN** the permanent settings area shows the private room icon, title and description
+- **THEN** the room type block shows the private room icon, Common:PrivateRoomTitle and Common:PrivateRoomPanelDescription, and neither Common:CustomRoomTitle nor a second private-room block is shown
+
+#### Scenario: Create dialog of a private room
+- **WHEN** the create dialog is open on the Private type
+- **THEN** the same block is shown, with the same icon, title and description as in the edit dialog
+
+#### Scenario: Edit dialog of an ordinary Custom room
+- **WHEN** the edit dialog of a Custom room without the private setting is open
+- **THEN** the room type block shows Common:CustomRoomTitle as before
+
+#### Scenario: Help article configured
+- **WHEN** the help-center resources of the portal carry the entry `privaterooms` and the create dialog is open on the Private type
+- **THEN** a Common:LearnMore link under the description opens that article in a new tab
+
+#### Scenario: No help article
+- **WHEN** the help-center resources carry no entry `privaterooms`, or no help-center domain
+- **THEN** the block shows no link
 
 ### Requirement: Invite panel hides external links for private rooms
 The system SHALL NOT render the shared-links block in the invite panel of a private room.
@@ -87,11 +111,15 @@ The system SHALL NOT render the shared-links block in the invite panel of a priv
 - **THEN** no external link, link settings or copy-link control is shown
 
 ### Requirement: Invite panel offers people only
-The system SHALL hide the Guests tab, exclude groups and limit search to portal users when inviting into a private room.
+The system SHALL hide the Guests tab, exclude groups and limit search to portal users when inviting into a private room. The panel SHALL describe the invitation as adding existing members (Common:InviteToRoomManuallyInfoMembers, placeholder Common:InviteToRoomAddPlaceholder) and SHALL NOT offer an invitation language, whatever the portal's guest setting.
 
 #### Scenario: Searching invitees
 - **WHEN** the user types in the invite input of a private room
 - **THEN** only portal users are suggested; groups and guests do not appear and the Guests tab is absent
+
+#### Scenario: Portal allows inviting guests
+- **WHEN** the invite panel of a private room opens on a portal that allows inviting guests
+- **THEN** its description and placeholder are those of adding existing members, with no mention of an invitation by email or of the Guests list, and no invitation-language choice is shown
 
 ### Requirement: Invite requires an unlocked identity
 The system SHALL require the encryption identity of the inviter to be unlocked before any invitation into a private room is sent, and SHALL abort with Common:EncryptionLockedAddMembers when unlocking is declined.
@@ -124,11 +152,11 @@ The system SHALL wrap the key of every encrypted file in the room for each newly
 - **THEN** no invitee is left as a room member without either an access entry for every encrypted file or the pending-access marker, and the access entries already written stay in place
 
 ### Requirement: Invitees without usable keys are skipped with a warning
-The system SHALL skip an invitee who has no encryption key or whose key changed and was refused, SHALL NOT grant them room access, and SHALL list them inline in the invite panel with the reason (Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch) and an option to invite them again later.
+The system SHALL skip an invitee who has no encryption key or whose key changed and was refused, SHALL NOT grant them room access, and SHALL name them in the invite panel with the reason (Common:EncryptedInviteNoKey or Common:EncryptedSkippedKeyMismatch) and a way to invite them again. While the panel is open, the system SHALL NOT repeat that reason in a toast.
 
 #### Scenario: Invitee has no key
 - **WHEN** an invitee has no registered encryption key
-- **THEN** the invitee does not become a room member, no file access entry is created for them, and the panel lists their name under Common:EncryptedSkippedNoKeys
+- **THEN** the invitee does not become a room member, no file access entry is created for them, and the panel names them with Common:EncryptedInviteNoKey
 
 #### Scenario: Invitee key mismatch refused
 - **WHEN** the current public key of an invitee differs from the pinned one and the inviter refuses it
@@ -137,6 +165,10 @@ The system SHALL skip an invitee who has no encryption key or whose key changed 
 #### Scenario: Mixed invitation
 - **WHEN** some invitees have verified keys and others are skipped
 - **THEN** only the verified invitees are granted access and the skipped ones are listed inline without closing the panel
+
+#### Scenario: Reason shown once
+- **WHEN** an invitee is skipped while the invite panel is open
+- **THEN** the reason appears in the panel and no toast with the same sentence is shown
 
 ### Requirement: Partial re-encryption failure is reported
 The system SHALL report Common:EncryptedReencryptPartialFailure with the failure count when some files could not be re-wrapped, and Common:EncryptedReencryptFailed when the whole re-encryption fails. A member for whom some or all files could not be re-wrapped SHALL be shown in the Members panel as pending access (Common:EncryptedAccessPending) with a retry action that re-wraps the missing files, or every encrypted file of the room when the re-encryption failed as a whole.
@@ -194,15 +226,15 @@ The system SHALL remove a member of a private room through the role update alone
 - **WHEN** a member is removed from the Members tab of a private room selected in the Private or Rooms list
 - **THEN** the same role update runs as for a removal from inside the room, and nothing more
 
-### Requirement: Leaving a room revokes own access first
-The system SHALL drop the leaver's role without a revocation of its own when a member leaves a private room; the server removes the leaver's wrapped keys with the role, the room's creator excepted.
+### Requirement: Leaving a room drops the role without a client revocation
+The system SHALL drop the leaver's role without a revocation of its own when a member leaves a private room; the server removes the leaver's wrapped keys with the role, the room's current owner excepted.
 
 #### Scenario: Leave succeeds
 - **WHEN** a member confirms leaving a private room
 - **THEN** the role is dropped and the leaver's keys are gone from every encrypted file of the room
 
 #### Scenario: Cleanup fails
-- **WHEN** the role update fails
+- **WHEN** the role update fails before the server has written the role
 - **THEN** the member stays in the room with their keys and the failure is shown
 
 ### Requirement: New owner must hold a verified key
@@ -366,7 +398,7 @@ The system SHALL send the invitations of a private room one invitee per room sec
 - **THEN** no re-wrap runs
 
 ### Requirement: Refused invitees are named in the invite result
-The system SHALL name each refused invitee of a private-room invitation in the invite result: with Common:EncryptedInviteNoKey when the server refused with 403, which it does for a user who never registered a key, and with Common:EncryptedInviteFailed otherwise.
+The system SHALL name each refused invitee of a private-room invitation in the invite result: with Common:EncryptedInviteNoKey when the server refused with 403, which it does for a user who never registered a key, and with Common:EncryptedInviteFailed otherwise. When no invitee was invited, the same names and texts SHALL appear in the invite form, as "An invitation that invited nobody keeps the invite form" describes.
 
 #### Scenario: Invitee without a key named
 - **WHEN** the server refuses an invitee of a private room with 403
@@ -375,6 +407,10 @@ The system SHALL name each refused invitee of a private-room invitation in the i
 #### Scenario: Other refusal named
 - **WHEN** the request of an invitee fails with another error
 - **THEN** the invite result names that invitee with Common:EncryptedInviteFailed
+
+#### Scenario: Every invitee refused
+- **WHEN** the server refuses every invitee of a private-room invitation
+- **THEN** the invite form stays and names them with Common:EncryptedInviteNoKey or Common:EncryptedInviteFailed
 
 ### Requirement: Leaving a private room ends its listing
 The system SHALL treat a portal administrator or the portal owner who leaves a private room as any other member: the room SHALL leave the open list at once, and a user who leaves from inside the room SHALL be taken to the Private list without it. This covers the room's own leave action and the leave ticked in an ownership transfer. An ordinary room an administrator leaves SHALL stay listed, as before.
@@ -488,3 +524,143 @@ The system SHALL close the leave dialog when the server refuses with 403 the lea
 #### Scenario: Leave fails for another reason
 - **WHEN** a member confirms leaving a room and the request fails without a 403
 - **THEN** the failure is shown and the dialog stays open with its buttons enabled
+
+### Requirement: Pending access is read from the server
+The system SHALL read the room's missing file keys from the server whenever the members list of a private room loads for a user who may change its access, and SHALL show the listed members as pending access (Common:EncryptedAccessPending) for the listed files and no other member of the room, so the state survives a reload and reaches other devices. What this device records between two loads SHALL hold until the next one.
+
+#### Scenario: Marker after a reload
+- **WHEN** a member of a private room lacks the key of some encrypted file and a user who may change the room's access reloads the page and opens the members list
+- **THEN** the member's row shows Common:EncryptedAccessPending, and its retry re-wraps the files the server listed
+
+#### Scenario: Another room manager
+- **WHEN** another user who may change the room's access opens the members list on another device
+- **THEN** the same member is shown as pending access
+
+#### Scenario: Member who misses nothing any more
+- **WHEN** the members list loads and the server lists no missing key for a member this device had recorded as pending
+- **THEN** the marker is gone from that member's row
+
+#### Scenario: User who may not change the access
+- **WHEN** a member who may not change the room's access opens the members list
+- **THEN** the missing keys are not requested and no marker changes
+
+#### Scenario: Record written while the list is loading
+- **WHEN** an invitation or an upload records a member as pending while the server's list is on its way
+- **THEN** that record is kept until the next load
+
+### Requirement: Editor role of a private room does not promise form filling
+The system SHALL describe the Editor role in the role list of a private room with Common:EditorDescription, which names viewing, editing, reviewing and commenting, and SHALL NOT use the description that adds form filling.
+
+#### Scenario: Role list of a private room
+- **WHEN** a room manager opens the role list for a member of a private room
+- **THEN** the Editor role is described by Common:EditorDescription
+
+#### Scenario: Role list of another room
+- **WHEN** the role list is opened in a room that is not private
+- **THEN** the Editor role keeps Common:RoleEditorDescription
+
+### Requirement: An invitation that invited nobody keeps the invite form
+The system SHALL keep the invite form of a private room, with its invitees still in the list, when an invitation ends with every invitee skipped or refused, SHALL show the reasons above the list and announce them to assistive technology, and SHALL NOT replace the form with the invite result.
+
+#### Scenario: Only invitee has no key
+- **WHEN** the inviter sends an invitation to one user who has no registered encryption key
+- **THEN** the invite form stays with that user in the list, Common:EncryptedInviteNoKey names them above the list, and no invite result is shown
+
+#### Scenario: List corrected and sent again
+- **WHEN** the inviter then removes that user, adds a user who holds a verified key and sends again
+- **THEN** the new user is invited and the earlier reason is no longer shown
+
+#### Scenario: Somebody was invited
+- **WHEN** at least one invitee of the invitation was granted access
+- **THEN** the invite result is shown with the invited, the pending and the left-out invitees, as before
+
+### Requirement: Private room type is labelled Private
+The system SHALL label a private room with Common:PrivateRoomType wherever the client shows the type of a room: the type column of the room list, the room row, the room tile and the type line of the info panel. A room without the private setting SHALL keep the label of its type, and the room type sent to and read from the server SHALL stay Custom.
+
+#### Scenario: Type column in the Private section
+- **WHEN** a user opens the Private section in the table view with the type column shown
+- **THEN** the type of each private room reads Common:PrivateRoomType
+
+#### Scenario: Info panel
+- **WHEN** a user selects a private room and opens the details of the info panel
+- **THEN** the type line reads Common:PrivateRoomType
+
+#### Scenario: Archive holds both kinds
+- **WHEN** a user opens the Archive, which holds an archived private room and an archived Custom room without the private setting
+- **THEN** the first is labelled Common:PrivateRoomType and the second Common:CustomRooms
+
+### Requirement: The invitation result is readable
+The system SHALL show every text of the invitation result of a private room, the names, the reasons and the notes about files that could not be shared, with a contrast of at least 4.5:1 against the panel, in the light and in the dark theme. A reason SHALL NOT be shown in a smaller size than the name it belongs to.
+
+#### Scenario: Invitee left out
+- **WHEN** the result names an invitee with Common:EncryptedInviteNoKey in the light theme
+- **THEN** the sentence has a contrast of at least 4.5:1 and is not smaller than the names of the result
+
+#### Scenario: Files not shared
+- **WHEN** the result shows Common:EncryptedReencryptPartialFailure under a pending invitee in the dark theme
+- **THEN** the sentence has a contrast of at least 4.5:1
+
+#### Scenario: Reasons kept in the invite form
+- **WHEN** nobody was invited and the reasons are shown above the list of the invite form
+- **THEN** they have a contrast of at least 4.5:1 there as well
+
+### Requirement: People without a key are marked before the invitation is sent
+The system SHALL mark, in the people list of the invite panel of a private room, each listed person who has no registered encryption key with Common:NoKey and an explanation (Common:NoEncryptionKeyMarkHint) that the person cannot be invited until they create a key. A person who holds a key SHALL carry no mark. The mark SHALL be a text, not colour alone. A marked person SHALL stay selectable, and what follows the sending is unchanged.
+
+#### Scenario: Person without a key
+- **WHEN** the people list of a private room's invite panel shows a person who has no registered key
+- **THEN** the row carries Common:NoKey
+
+#### Scenario: Person with a key
+- **WHEN** the list shows a person who holds a key
+- **THEN** the row carries no mark
+
+#### Scenario: Explanation
+- **WHEN** the mark is hovered or takes the keyboard focus
+- **THEN** Common:NoEncryptionKeyMarkHint is shown and is read as the description of the mark
+
+#### Scenario: Marked person selected and sent
+- **WHEN** the inviter selects a marked person and sends the invitation
+- **THEN** the person is left out and named with Common:EncryptedInviteNoKey, as before this change
+
+#### Scenario: Room that is not private
+- **WHEN** the invite panel opens for a room that is not private
+- **THEN** no mark is shown and no key is read
+
+### Requirement: The mark of a missing key follows the server's answer
+The system SHALL decide the mark from the route of the keys of invitation candidates, which answers with the public keys of the listed users who hold one and leaves out the users who do not. The system SHALL ask it for every loaded page of the people list and SHALL NOT mark a person before the answer for their page has arrived. When the request fails the system SHALL show no mark for that page and the invitation SHALL work as without marks.
+
+#### Scenario: Answer not yet arrived
+- **WHEN** a page of people is shown and the answer about their keys is on its way
+- **THEN** no row of that page carries the mark
+
+#### Scenario: Next page
+- **WHEN** the inviter scrolls and another page of people loads
+- **THEN** the keys of the people of that page are asked for and their rows are marked when the answer arrives
+
+#### Scenario: Search
+- **WHEN** the inviter types in the search field and the list is replaced
+- **THEN** the marks are decided for the people of the new list
+
+#### Scenario: Request fails
+- **WHEN** the request for the keys of a page fails
+- **THEN** no row of that page is marked, no error is shown, and an invitation can still be sent
+
+### Requirement: The mark of a missing key is a badge next to the name
+The system SHALL draw the mark of a person without a key (Common:NoKey), in the people list of the invite panel of a private room, as a badge next to the person's name. The text of the badge SHALL have a contrast of at least 4.5:1 against the badge in the light and in the dark theme. The mark SHALL NOT be drawn like the note of a person already invited. A long name SHALL be shortened before the badge is.
+
+#### Scenario: Badge next to the name
+- **WHEN** the people list shows a person who has no registered key
+- **THEN** Common:NoKey stands in a badge after the name, on the line of the name
+
+#### Scenario: Readable in both themes
+- **WHEN** the badge is shown in the light or in the dark theme
+- **THEN** its text has a contrast of at least 4.5:1 against the badge
+
+#### Scenario: Next to an invited person
+- **WHEN** the list shows a person already invited and a person without a key
+- **THEN** the mark and the note of the invited person differ in place and in colour
+
+#### Scenario: Long name
+- **WHEN** the name of a marked person does not fit in the row
+- **THEN** the name is shortened and the badge is shown whole

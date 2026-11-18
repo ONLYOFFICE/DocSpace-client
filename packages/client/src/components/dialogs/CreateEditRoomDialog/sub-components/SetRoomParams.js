@@ -38,7 +38,7 @@ import React, { useState, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, RoomsTypePrivate } from "@docspace/shared/enums";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
@@ -62,6 +62,7 @@ import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import ChangeRoomOwner from "../../../ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
+import { getDisplayedRoomType } from "./displayedRoomType";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
 
@@ -96,6 +97,7 @@ const SetRoomParams = ({
   setAvatarEditorDialogVisible,
   roomLogoCoverDialogVisible,
   currentColorScheme,
+  privateRoomsHelpUrl,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
   cover,
@@ -458,9 +460,14 @@ const SetRoomParams = ({
       {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (
         <RoomType
           t={t}
-          roomType={roomParams.type}
+          roomType={getDisplayedRoomType(roomParams)}
           type="displayItem"
           isTemplateRoom={selection?.isTemplate || isTemplateSelected}
+          helpUrl={
+            getDisplayedRoomType(roomParams) === RoomsTypePrivate
+              ? privateRoomsHelpUrl
+              : undefined
+          }
         />
       ) : (
         <RoomTypeDropdown
@@ -478,7 +485,6 @@ const SetRoomParams = ({
           title={roomParams.title}
           isThirdparty={roomParams.isThirdparty}
           storageLocation={roomParams.storageLocation}
-          isPrivate={roomParams.isPrivate}
           isDisabled={isDisabled}
         />
       ) : null}
@@ -629,6 +635,7 @@ export default inject(
       maxImageUploadSize,
       currentColorScheme,
       externalDbEnabled,
+      privateRoomsHelpUrl,
     } = settingsStore;
 
     const isRoomAdmin = authStore.isRoomAdmin;
@@ -686,6 +693,7 @@ export default inject(
       roomCoverDialogProps,
       roomLogoCoverDialogVisible,
       currentColorScheme,
+      privateRoomsHelpUrl,
       image,
       cover,
       covers,

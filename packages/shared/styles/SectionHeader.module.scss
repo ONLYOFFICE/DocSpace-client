@@ -226,6 +226,24 @@
   container: buttons / inline-size;
 }
 
+// The key state indicator of a private room keeps its whole label: the
+// button row is as wide as its content and the room name gives way. Size
+// containment would make that width zero, and the row's one query only
+// concerns the analyze button, which a private room does not have.
+.headerContainer:has(.keyStateIndicator) :global(#control-buttons-container) {
+  container-type: normal;
+  min-width: min-content;
+}
+
+.keyStateIndicator {
+  display: inline-flex;
+  flex-shrink: 0;
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
 @container buttons (width < 300px) {
   .analyzeResponsesButton {
     span {

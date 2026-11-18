@@ -40,7 +40,10 @@ import { Tooltip } from "@onlyoffice/apps-ui-kit/components";
 import { Card } from "@onlyoffice/apps-ui-kit/components/card";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ActionButton } from "@onlyoffice/apps-ui-kit/components/action-button";
-import { Link as LinkButton, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import {
+  Link as LinkButton,
+  LinkType,
+} from "@onlyoffice/apps-ui-kit/components/link";
 import type { TFile } from "@onlyoffice/apps-ui-kit/types";
 
 import SpreadsheetReactSvg from "PUBLIC_DIR/images/icons/16/spreadsheet.svg";

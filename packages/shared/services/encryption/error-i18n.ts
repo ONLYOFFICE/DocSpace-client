@@ -36,9 +36,7 @@
 import type { TFunction } from "i18next";
 
 import {
-  AuthenticationError,
   CryptoError,
-  DecryptionError,
   EncryptedCreateError,
   InvalidFormatError,
   InvalidPassphraseError,
@@ -50,10 +48,14 @@ import {
   WebCryptoUnavailableError,
 } from "./errors";
 
-export function getEncryptionErrorMessage(
+/**
+ * The message of an encryption error that has a message of its own, or null
+ * for an error only the general Common:EncryptionError describes.
+ */
+export function getSpecificEncryptionErrorMessage(
   t: TFunction,
   error: unknown,
-): string {
+): string | null {
   if (error instanceof EncryptedCreateError) {
     return error.code === "UNSUPPORTED_EXTENSION"
       ? t("Common:PrivateRoomCreateNotSupported", {
@@ -79,20 +81,23 @@ export function getEncryptionErrorMessage(
   ) {
     return t("Common:EncryptionUnsupportedKeyVersion");
   }
+  // Spec: private-rooms/file-operations, "A file without a wrap for the user is reported as no access"
   if (error instanceof NoAccessError) {
-    return t("Common:NoAccessToEncryptedFile");
+    return t("Common:EncryptedFileNoAccessYet");
   }
   if (error instanceof KeyNotFoundError) {
     return t("Common:NoEncryptionKey");
   }
-  if (
-    error instanceof AuthenticationError ||
-    error instanceof DecryptionError ||
-    error instanceof CryptoError
-  ) {
-    return t("Common:EncryptionError");
-  }
-  return t("Common:EncryptionError");
+  return null;
+}
+
+export function getEncryptionErrorMessage(
+  t: TFunction,
+  error: unknown,
+): string {
+  return (
+    getSpecificEncryptionErrorMessage(t, error) ?? t("Common:EncryptionError")
+  );
 }
 
 /**

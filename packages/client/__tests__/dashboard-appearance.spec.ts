@@ -504,7 +504,6 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
   // nowhere. A feature that is switched off is absent; a feature that is not
   // yours is visible but closed.
   const isDevToolsOffered = !devToolsLimited || role.isAdminOrOwner;
-  const canOpenDevTools = isDevToolsOffered && !role.isGuest;
 
   test(name, async ({ page, baseUrl, mockRequest }) => {
     mockRequest.use(
@@ -579,8 +578,9 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     // inside it, appear together - both are offered on the portal switch alone,
     // so a guest is shown them and finds out on the way in. Docs Connect is
     // SaaS-only on top of that, whoever is asking, and the "or connect Docs"
-    // link is a navigation rather than a description, so it needs the section
-    // to actually open for its reader.
+    // link is a navigation rather than a description, so it needs the Docs
+    // Connect page to actually open for its reader - portal admins and the
+    // owner only.
     await expect(page.locator(DEVTOOLS_CARD)).toHaveCount(
       isDevToolsOffered ? 1 : 0,
     );
@@ -588,7 +588,7 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       !edition.standalone && isDevToolsOffered ? 1 : 0,
     );
     await expect(page.getByText(/or connect Docs/)).toHaveCount(
-      !edition.standalone && canOpenDevTools ? 1 : 0,
+      !edition.standalone && role.isAdminOrOwner ? 1 : 0,
     );
 
     // The chat is hidden rather than disabled where it cannot be held: a portal

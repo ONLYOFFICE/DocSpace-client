@@ -78,6 +78,8 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  */
 
 const ROOMS_URL = "/rooms/shared/";
+// The rooms list writes its filter into the URL once it loads.
+const ROOMS_LIST_PATH = /^\/rooms\/shared\/(filter)?$/;
 const DESKTOP = { width: 1440, height: 1024 };
 
 const SOURCES = AI_PROJECT_WITH_SOURCES.aiProject;
@@ -459,9 +461,13 @@ test.describe("AI chat: the agent menu", () => {
       await openAgentActions(page);
       await agentAction(page, "edit").click();
 
-      await expect(page.getByTestId("ai-project-dialog")).toBeVisible();
+      // The modal wrapper has no box of its own; its dialog does.
+      await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
+      await expect(
+        page.getByRole("dialog").filter({ hasText: "Edit agent" }),
+      ).toBeVisible();
       await expect(page.getByTestId("ai-project-title")).toHaveValue(LEGAL);
-      expect(new URL(page.url()).pathname).toBe(ROOMS_URL);
+      expect(new URL(page.url()).pathname).toMatch(ROOMS_LIST_PATH);
     });
 
     // Spec: ai-chat-agent-menu, "What the panel's agent actions open"
@@ -510,7 +516,7 @@ test.describe("AI chat: the agent menu", () => {
       await expect(infoPanel(page)).toContainText(LEGAL);
       await expect(page.getByTestId("info_details_tab")).toBeVisible();
       await expect(slot(page)).toHaveAttribute("data-open", "false");
-      expect(new URL(page.url()).pathname).toBe(ROOMS_URL);
+      expect(new URL(page.url()).pathname).toMatch(ROOMS_LIST_PATH);
 
       // Closing that Info panel brings the chat back, still on the agent.
       await infoPanelToggle(page).click();

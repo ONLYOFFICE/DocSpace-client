@@ -242,12 +242,18 @@ test.describe("Content of an agent's conversation", () => {
       page.getByTestId("ai-agent-content-save-to-room_item"),
     ).toContainText("Save to room...");
     await expect(page.getByRole("menuitem", { name: "Open location" })).toHaveCount(0);
-    await page.keyboard.press("Escape");
+    // A second click on the same button closes its menu; the closed menu
+    // stays in the DOM, hidden.
+    await fileRow(page, BRIEF.title).getByTestId("ai-agent-content-menu").click();
+    await expect(page.getByTestId("ai-agent-content-save-to-room_item")).toBeHidden();
 
     await fileRow(page, SALES_CHART.title)
       .getByTestId("ai-agent-content-menu")
       .click();
-    await page.getByTestId("ai-agent-content-save-to-room_item").click();
+    await page
+      .getByTestId("ai-agent-content-save-to-room_item")
+      .filter({ visible: true })
+      .click();
     await expect(page.getByTestId("selector_submit_button").first()).toBeVisible();
   });
 

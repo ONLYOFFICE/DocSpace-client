@@ -813,6 +813,46 @@ export type AiThreadFilesMock = {
   attachments: AiThreadFileMock[];
 };
 
+/** The rights of the author on a file of their conversation: read-only. */
+const AI_THREAD_FILE_SECURITY = {
+  Read: true,
+  Download: true,
+  Copy: true,
+  Comment: false,
+  FillForms: false,
+  Review: false,
+  Edit: false,
+  Delete: false,
+  CustomFilter: false,
+  Rename: false,
+  ReadHistory: false,
+  Lock: false,
+  EditHistory: false,
+  Duplicate: false,
+  Move: false,
+  SubmitToFormGallery: false,
+  CopyLink: false,
+  Embed: false,
+  Vectorization: false,
+};
+
+/** How a file of a conversation opens, by its extension: an image is viewed, a document read. */
+const aiThreadFileViewAccessibility = (fileExst: string) => {
+  const isImage = [".png", ".jpg", ".jpeg", ".gif", ".webp"].includes(fileExst);
+  return {
+    ImageView: isImage,
+    MediaView: false,
+    WebView: !isImage,
+    WebEdit: false,
+    WebReview: false,
+    WebCustomFilterEditing: false,
+    WebRestrictedEditing: false,
+    WebComment: false,
+    CanConvert: false,
+    MustConvert: false,
+  };
+};
+
 /**
  * `GET files/rooms/:id/threads/:threadId/artifacts` and `.../attachments`:
  * the files of one conversation of an agent, as a counted list
@@ -840,6 +880,10 @@ export const aiThreadFilesHandlers = (
         const files = (threads[threadId]?.[kind] ?? []).map((file) => ({
           folderId: Number(params.id),
           created: "2026-11-18T10:00:00.0000000+00:00",
+          // A FileDto always carries both; the conversation's folders are
+          // read-only to their author, who may read, download and copy.
+          security: AI_THREAD_FILE_SECURITY,
+          viewAccessibility: aiThreadFileViewAccessibility(file.fileExst),
           ...file,
         }));
         return HttpResponse.json({

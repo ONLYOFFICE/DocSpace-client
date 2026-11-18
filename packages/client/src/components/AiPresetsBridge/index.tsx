@@ -623,6 +623,10 @@ const AiPresetsBridge = ({
       const saved = await aiPresetsStore.savePreset(value);
       if (!saved) return;
       toastr.success(t("Common:AIProjectSaved", { name: saved.preset.name }));
+      // A room the user may not link: the agent was made without it.
+      saved.notLinked.forEach((room) =>
+        toastr.warning(t("Common:AgentRoomNotLinked", { roomName: room.name })),
+      );
       // A linked room that could not be shared with a member, and the like.
       saved.project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
     } catch (e) {

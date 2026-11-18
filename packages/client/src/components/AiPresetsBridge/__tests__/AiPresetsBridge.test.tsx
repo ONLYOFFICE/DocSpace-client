@@ -21,6 +21,12 @@ const { toastr } = vi.hoisted(() => ({
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 
+// Whether the user may link a room to an agent: rooms 12 and 9 they manage.
+const roomsApi = vi.hoisted(() => ({
+  getRoomInfo: vi.fn(async (id: number) => ({ id, security: { EditRoom: id === 12 || id === 9 } })),
+}));
+vi.mock("@docspace/shared/api/rooms", () => roomsApi);
+
 
 // The Info panel as a page that has one shows it: `showInfoPanel` makes it
 // visible only while `mounted`. Observable, as the store's flag is.
@@ -366,6 +372,36 @@ describe("AiPresetsBridge", () => {
     expect(toastr.success).toHaveBeenCalledWith("Common:AIProjectSaved");
     expect(toastr.warning).toHaveBeenCalledWith("Viewer skipped");
     expect(screen.queryByTestId("save-dialog")).toBeNull();
+  });
+
+  it("names each room the user may not link once the agent is saved without it", async () => {
+    api.createAiProject.mockResolvedValue(project(6, "Legal Reviewer (EU)"));
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    act(() => {
+      store.setActivePreset({
+        ...toAiPreset(project(3, "Legal Reviewer")),
+        contextRooms: [
+          { cloud: "docspace", id: "12", name: "Skills" },
+          { cloud: "docspace", id: "13", name: "Legal tone" },
+        ],
+        knowledgeRooms: [{ cloud: "docspace", id: "15", name: "Contracts" }],
+      });
+      store.openSaveDialog(settings);
+    });
+    fireEvent.click(screen.getByTestId("save"));
+    await flush();
+
+    expect(api.createAiProject).toHaveBeenCalledWith(
+      expect.objectContaining({
+        aiProject: expect.objectContaining({ instructionsRoomIds: [12], knowledgeRoomIds: [] }),
+      }),
+    );
+    expect(toastr.success).toHaveBeenCalledWith("Common:AIProjectSaved");
+    expect(toastr.warning.mock.calls).toEqual([
+      ["Common:AgentRoomNotLinked"],
+      ["Common:AgentRoomNotLinked"],
+    ]);
   });
 
   it("reports a refused create and keeps the dialog, and closes it on cancel", async () => {

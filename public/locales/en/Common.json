@@ -96,6 +96,7 @@
   "AgentProfileDescription": "Choose the AI model this agent will use in chats.",
   "AgentRemoved": "Agent removed",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
+  "AgentRoomNotLinked": "The agent was saved without \"{{roomName}}\": only someone who can manage this room can add it to an agent.",
   "AgentUnpinned": "Agent unpinned",
   "Agents": "Agents",
   "AgentsPinned": "Agents pinned: {{count}}",

@@ -50,6 +50,7 @@ import {
   type TAiProjectSource,
   type TAiProjectSuggestion,
 } from "@docspace/shared/api/ai/projects";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { toSkillCommand } from "@docspace/shared/utils/skillFile";
 
 /**
@@ -167,11 +168,64 @@ const toRoomIds = (rooms: AiChatPresetRoom[]) =>
     .filter((id) => Number.isInteger(id) && id > 0);
 
 /**
+ * Whether the user may link a room to an agent: the server links only rooms
+ * the caller may edit (`AiHubService.LinkSourcesAsync`, `CanEditRoomAsync`),
+ * and refuses the whole list for one it may not. A room that cannot be read
+ * is not linkable either.
+ */
+const canLinkRoom = async (roomId: number) => {
+  try {
+    const info = await getRoomInfo(roomId);
+    return !!info?.security?.EditRoom;
+  } catch {
+    return false;
+  }
+};
+
+/**
+ * Splits the DocSpace rooms of a chat into those the user may link to a new
+ * agent and those left out, each room read once.
+ */
+const splitLinkableRooms = async (settings: AiChatPresetSettings) => {
+  const docspaceRooms = [...settings.contextRooms, ...settings.knowledgeRooms].filter(
+    (room) => toRoomIds([room]).length > 0,
+  );
+  const ids = [...new Set(docspaceRooms.map((room) => Number(room.id)))];
+  const linkable = new Set<number>();
+  await Promise.all(
+    ids.map(async (id) => {
+      if (await canLinkRoom(id)) linkable.add(id);
+    }),
+  );
+  const seen = new Set<number>();
+  const notLinked = docspaceRooms.filter((room) => {
+    const id = Number(room.id);
+    if (linkable.has(id) || seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
+  const keep = (rooms: AiChatPresetRoom[]) => toRoomIds(rooms).filter((id) => linkable.has(id));
+  return {
+    instructionsRoomIds: keep(settings.contextRooms),
+    knowledgeRoomIds: keep(settings.knowledgeRooms),
+    notLinked,
+  };
+};
+
+/** A saved agent, and the chat's rooms the user may not link that it was made without. */
+export type TAiPresetSaveResult = {
+  preset: TAiPreset;
+  project: TAiProject;
+  notLinked: AiChatPresetRoom[];
+};
+
+/**
  * The AI projects in a chat outside the projects page: the panel title's
  * agents menu and the sidebar list those the user is a member of
  * (`ai/projects`), picking one carries its
- * model, skills and knowledge bases into the open chat, and the panel
- * header's save button creates a project from the chat's setup.
+ * model, skills and knowledge bases into the open chat, and "Save as new
+ * agent" in the title menu creates a project from the chat's setup or from
+ * the picked agent.
  */
 class AiPresetsStore {
   presets: TAiPreset[] = [];
@@ -289,8 +343,22 @@ class AiPresetsStore {
     }
   };
 
+  /**
+   * "Save as new agent" from the chat: with an agent picked the new one is
+   * made from the picked agent's model, skill sets and knowledge bases (the
+   * chat runs on the agent's model; an agent the server keeps no model for
+   * takes the one the chat shows), else from the chat's own setup.
+   */
   openSaveDialog = (settings: AiChatPresetSettings) => {
-    this.pendingSettings = settings;
+    const agent = this.activePreset;
+    this.pendingSettings = agent
+      ? {
+          profileId: agent.profileId ?? settings.profileId,
+          profileName: agent.profileId ? agent.profileName : settings.profileName,
+          contextRooms: agent.contextRooms,
+          knowledgeRooms: agent.knowledgeRooms,
+        }
+      : settings;
   };
 
   closeSaveDialog = () => {
@@ -298,21 +366,24 @@ class AiPresetsStore {
   };
 
   /**
-   * Creates an AI project from the chat's setup. Resolves to the new
-   * project, or `null` without a name or an open dialog; a refused create
-   * rejects and leaves the dialog open.
+   * Creates an AI project from the setup the dialog was opened with, owned by
+   * the user. A room the user may not link is left out instead of failing
+   * the link of every room, and comes back in `notLinked` for a notice.
+   * Resolves to the new project, or `null` without a name or an open
+   * dialog; a refused create rejects and leaves the dialog open.
    */
-  savePreset = async (name: string): Promise<{ preset: TAiPreset; project: TAiProject } | null> => {
+  savePreset = async (name: string): Promise<TAiPresetSaveResult | null> => {
     const settings = this.pendingSettings;
     const title = name.trim();
     if (!settings || !title) return null;
 
+    const { instructionsRoomIds, knowledgeRoomIds, notLinked } = await splitLinkableRooms(settings);
     const project = await createAiProject({
       title,
       aiProject: {
         profileId: settings.profileId,
-        instructionsRoomIds: toRoomIds(settings.contextRooms),
-        knowledgeRoomIds: toRoomIds(settings.knowledgeRooms),
+        instructionsRoomIds,
+        knowledgeRoomIds,
       },
     });
     const preset = toAiPreset(project);
@@ -320,7 +391,7 @@ class AiPresetsStore {
       this.presets = [preset, ...this.presets.filter((p) => p.id !== preset.id)];
       this.pendingSettings = null;
     });
-    return { preset, project };
+    return { preset, project, notLinked };
   };
 
   setActivePreset = (preset: TAiPreset | null) => {

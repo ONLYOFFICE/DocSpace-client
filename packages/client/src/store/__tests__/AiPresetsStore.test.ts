@@ -10,6 +10,10 @@ const api = vi.hoisted(() => ({
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 
+const roomsApi = vi.hoisted(() => ({ getRoomInfo: vi.fn() }));
+
+vi.mock("@docspace/shared/api/rooms", () => roomsApi);
+
 import AiPresetsStore, {
   PICKER_PROJECTS_MAX_PAGES,
   PICKER_PROJECTS_PAGE_SIZE,
@@ -51,6 +55,8 @@ describe("AiPresetsStore", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales")] });
+    // The user manages every room unless a case says otherwise.
+    roomsApi.getRoomInfo.mockImplementation(async (id: number) => ({ id, security: { EditRoom: true } }));
   });
 
   it("takes a project's model and its readable rooms", () => {
@@ -177,8 +183,91 @@ describe("AiPresetsStore", () => {
       aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [9] },
     });
     expect(saved?.preset.id).toBe("5");
+    expect(saved?.notLinked).toEqual([]);
     expect(store.pendingSettings).toBeNull();
     expect(store.presets.map((p) => p.name)).toEqual(["Contracts", "Sales"]);
+  });
+
+  it("saves a picked agent as a new one with its model and rooms, and leaves the agent as it was", async () => {
+    api.createAiProject.mockResolvedValue(project(6, "Legal Reviewer (EU)"));
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+    const agent = toAiPreset(project(3, "Legal Reviewer", { profile: { id: "p2", name: "GPT", provider: "OpenAI", available: true } }));
+    store.setActivePreset(agent);
+
+    // The chat hands over what it shows; the picked agent decides.
+    store.openSaveDialog({ ...settings, profileId: "p1", contextRooms: [], knowledgeRooms: [] });
+    const saved = await store.savePreset("Legal Reviewer (EU)");
+
+    expect(api.createAiProject).toHaveBeenCalledWith({
+      title: "Legal Reviewer (EU)",
+      aiProject: { profileId: "p2", instructionsRoomIds: [12, 13], knowledgeRoomIds: [9] },
+    });
+    expect(saved?.notLinked).toEqual([]);
+    expect(store.activePreset).toEqual(agent);
+    expect(store.activePreset?.name).toBe("Legal Reviewer");
+    expect(store.presets.map((p) => p.name)).toEqual(["Legal Reviewer (EU)", "Sales"]);
+  });
+
+  it("takes the chat's model for a picked agent the server keeps no model for", async () => {
+    api.createAiProject.mockResolvedValue(project(6, "Copy"));
+    const store = new AiPresetsStore();
+    store.init("u1");
+    store.setActivePreset(toAiPreset(project(3, "Legal Reviewer", { profile: null })));
+    store.openSaveDialog(settings);
+    expect(store.pendingSettings).toEqual(
+      expect.objectContaining({ profileId: "p1", profileName: "Claude" }),
+    );
+  });
+
+  it("creates the agent without the rooms the user may not link and names each of them", async () => {
+    api.createAiProject.mockResolvedValue(project(6, "Legal Reviewer (EU)"));
+    // A Member of the agent reads "Legal tone" and "Docs" only through it,
+    // and "Gone" cannot be read at all.
+    roomsApi.getRoomInfo.mockImplementation(async (id: number) => {
+      if (id === 14) throw new Error("404");
+      return { id, security: { EditRoom: id === 12 } };
+    });
+    const store = new AiPresetsStore();
+    store.init("u1");
+    store.setActivePreset({
+      ...toAiPreset(project(3, "Legal Reviewer")),
+      knowledgeRooms: [
+        { cloud: "docspace", id: "9", name: "Docs" },
+        { cloud: "docspace", id: "14", name: "Gone" },
+      ],
+    });
+
+    store.openSaveDialog(settings);
+    const saved = await store.savePreset("Legal Reviewer (EU)");
+
+    expect(api.createAiProject).toHaveBeenCalledWith({
+      title: "Legal Reviewer (EU)",
+      aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [] },
+    });
+    expect(saved?.notLinked.map((room) => room.name)).toEqual(["Legal tone", "Docs", "Gone"]);
+    // Each room is read once.
+    expect(roomsApi.getRoomInfo).toHaveBeenCalledTimes(4);
+  });
+
+  it("still creates the agent with the model when no room may be linked", async () => {
+    api.createAiProject.mockResolvedValue(project(5, "Contracts"));
+    roomsApi.getRoomInfo.mockResolvedValue({ security: { EditRoom: false } });
+    const store = new AiPresetsStore();
+    store.init("u1");
+    store.openSaveDialog(settings);
+    const saved = await store.savePreset("Contracts");
+
+    expect(api.createAiProject).toHaveBeenCalledWith({
+      title: "Contracts",
+      aiProject: { profileId: "p1", instructionsRoomIds: [], knowledgeRoomIds: [] },
+    });
+    // A room of another cloud is never linked, and so never named.
+    expect(saved?.notLinked).toEqual([
+      { cloud: "docspace", id: "12", name: "Skills" },
+      { cloud: "docspace", id: "9", name: "Docs" },
+    ]);
   });
 
   it("refuses an empty name and a save without an open dialog", async () => {

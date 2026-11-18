@@ -12,7 +12,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 2. Gate
 
-- [ ] 2.1 Run `pnpm exec tsc` in `packages/doceditor`, `pnpm run test:doceditor`, Biome on `packages/doceditor/src`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date and the counts
+- [x] 2.1 Run `pnpm exec tsc` in `packages/doceditor`, `pnpm run test:doceditor`, Biome on `packages/doceditor/src`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date and the counts
+  - 2026-11-18, each command with its exit code read: `pnpm exec tsc --noEmit` in `packages/doceditor` exit 0; Biome on `packages/doceditor/src`, 101 files, no finding; `pnpm run test:doceditor` exit 0, 135 tests in 11 files; `npm --prefix ./common/tests run test:lefthook` exit 0; `openspec validate --all --strict` 22 of 22. No E2E run: the doceditor spec does not reach the key requests or the editor error page, which unit cases and the stand run of 1.4 cover.
 
 ## Workflow follow-up
 

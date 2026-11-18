@@ -148,6 +148,31 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
+export {
+  AI_CHAT_PLACEHOLDER_TITLE,
+  aiChatAssistantMessage,
+  aiChatAttachmentsGetHandler,
+  aiChatCreatedDocumentPart,
+  aiChatGeneratedImagePart,
+  aiChatMessageId,
+  aiChatReplyEvents,
+  aiChatRequestLog,
+  aiChatThreadId,
+  aiChatThreadsHandlers,
+  aiChatToolCallPart,
+  aiChatUserMessage,
+} from "./chatThreads";
+export type {
+  AiChatContentPart,
+  AiChatMessageMock,
+  AiChatReplyMock,
+  AiChatRequestLog,
+  AiChatSendRequest,
+  AiChatTextPart,
+  AiChatThreadMock,
+  AiChatThreadsMockOptions,
+  AiChatToolCallPart,
+} from "./chatThreads";
 export type {
   AiProjectMock,
   AiHubRoomMock,

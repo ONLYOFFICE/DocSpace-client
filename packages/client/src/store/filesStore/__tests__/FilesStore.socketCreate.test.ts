@@ -369,6 +369,56 @@ describe("FilesStore.wsModifyFolderCreate — deferred queue add", () => {
   });
 });
 
+describe("FilesStore.wsModifyFolderCreate — conversation files of an agent", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
+  it("skips the uploader's own file created in the open agent", async () => {
+    vi.useFakeTimers();
+    const countFileCreated = vi.fn();
+    const store = createTestFilesStore({
+      selectedFolderStore: {
+        id: 12,
+        roomType: RoomsType.AiProjectRoom,
+        countFileCreated,
+      },
+    });
+    store.files = [];
+    const dataLayer: unknown[] = [];
+    (window as unknown as { dataLayer: unknown[] }).dataLayer = dataLayer;
+    const getFileInfo = vi.spyOn(api.files, "getFileInfo");
+
+    await store.wsModifyFolderCreate({
+      type: "file",
+      id: 7,
+      data: JSON.stringify({ id: 7, folderId: 12, title: "Notes.docx" }),
+    } as never);
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(countFileCreated).not.toHaveBeenCalled();
+    expect(dataLayer).toHaveLength(0);
+    expect(getFileInfo).not.toHaveBeenCalled();
+    expect(store.files).toHaveLength(0);
+  });
+
+  it("does not count a file created inside an agent listed in the Agents list", async () => {
+    const store = createTestFilesStore();
+    store.folders = [
+      { id: 50, filesCount: 0, roomType: RoomsType.AiProjectRoom } as TItem,
+    ] as never;
+
+    await store.wsModifyFolderCreate({
+      type: "file",
+      id: 1,
+      data: JSON.stringify({ folderId: 50 }),
+    } as never);
+
+    expect((store.folders[0] as { filesCount: number }).filesCount).toBe(0);
+  });
+});
+
 // The harness wraps its fakes in MobX, so spies are kept by reference here.
 const createCountingStore = () => {
   const counts = { setFilesCount: vi.fn(), setFoldersCount: vi.fn() };

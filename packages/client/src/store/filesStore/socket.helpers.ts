@@ -127,9 +127,23 @@ export async function wsModifyFolderCreateImpl(
     // (JSON.parse of possibly-undefined data, user possibly null).
     const file = JSON.parse(opt?.data as string);
 
+    // An agent keeps the files of its conversations to itself and is listed
+    // as empty: the uploader's own create-file of a chat attachment is not
+    // an item, a count or a created file of the Files views.
+    if (
+      self.selectedFolderStore.roomType === RoomsType.AiProjectRoom &&
+      self.selectedFolderStore.id === file.folderId
+    )
+      return;
+
     if (self.selectedFolderStore.id !== file.folderId) {
       const movedToIndex = self.getFolderIndex(file.folderId);
-      if (movedToIndex > -1) self.folders[movedToIndex].filesCount++;
+      const movedTo = movedToIndex > -1 ? self.folders[movedToIndex] : null;
+      if (
+        movedTo &&
+        !("roomType" in movedTo && movedTo.roomType === RoomsType.AiProjectRoom)
+      )
+        movedTo.filesCount++;
       return;
     }
 

@@ -105,3 +105,14 @@ The page SHALL NOT show a column or a strip of sources beside the chat. The agen
 #### Scenario: Desktop
 - **WHEN** a Member opens an agent's page on desktop with the Info panel closed
 - **THEN** the chat fills the section body with no sources column beside it
+
+### Requirement: Conversation files stay out of the Files views
+The files an agent's conversations keep inside it SHALL NOT be listed or counted in the Files views, as the server lists an agent as empty. A file the user uploads into the agent from the chat SHALL NOT be added to the Files list, its count or the "file created" analytics, although its socket `create-file` reaches the uploader.
+
+#### Scenario: Upload from the chat
+- **WHEN** a Member attaches a file from the device in the chat on an agent's page
+- **THEN** the file goes into the agent, and the Files store under the page gains no item and no count
+
+#### Scenario: Agent in the Agents list
+- **WHEN** a file is created inside an agent while the Agents list is open
+- **THEN** the agent's file count in the list does not change

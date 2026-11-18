@@ -347,6 +347,18 @@ describe("AiPresetsStore", () => {
     expect(store.consumeUseInChat()).toEqual({
       room: { cloud: "docspace", id: "12", name: "Sales assistant" },
       draft: null,
+      knowledge: false,
+    });
+    expect(store.consumeUseInChat()).toBeNull();
+  });
+
+  it("records a knowledge base's Use in chat as a knowledge base", () => {
+    const store = new AiPresetsStore();
+    store.requestUseInChat({ id: 21, title: "Company policies", knowledge: true });
+    expect(store.consumeUseInChat()).toEqual({
+      room: { cloud: "docspace", id: "21", name: "Company policies" },
+      draft: null,
+      knowledge: true,
     });
     expect(store.consumeUseInChat()).toBeNull();
   });

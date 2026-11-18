@@ -53,6 +53,7 @@ import { FolderType } from "@docspace/shared/enums";
 
 import { openShareTab } from "SRC_DIR/helpers/info-panel";
 import { getUseInChatSkillSet } from "SRC_DIR/helpers/skillSetChat";
+import { getUseInChatKnowledgeBase } from "SRC_DIR/helpers/knowledgeBaseChat";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -182,17 +183,27 @@ export default function withQuickButtons(WrappedComponent) {
       retryVectorization([item]);
     };
 
-    // A skill set, or the set of a skill, put to use in a new chat.
-    getUseInChatSkillSet = () => {
-      const { item, isArchiveFolder, canUseAiChat, openFolder } = this.props;
+    // A skill set, the set of a skill, or a knowledge base put to use in a
+    // new chat.
+    getUseInChatRoom = () => {
+      const {
+        item,
+        isArchiveFolder,
+        canUseAiChat,
+        openFolder,
+        vectorizationEnabled,
+      } = this.props;
       if (!canUseAiChat || isArchiveFolder) return null;
-      return getUseInChatSkillSet(item, openFolder);
+      return (
+        getUseInChatSkillSet(item, openFolder) ??
+        getUseInChatKnowledgeBase(item, vectorizationEnabled)
+      );
     };
 
     onUseInChat = () => {
       const { requestUseInChat } = this.props;
-      const skillSet = this.getUseInChatSkillSet();
-      if (skillSet) requestUseInChat(skillSet);
+      const room = this.getUseInChatRoom();
+      if (room) requestUseInChat(room);
     };
 
     openShareTab = () => {
@@ -260,7 +271,7 @@ export default function withQuickButtons(WrappedComponent) {
           isTrashFolder={isTrashFolder}
           openShareTab={this.openShareTab}
           onUseInChat={
-            this.getUseInChatSkillSet() ? this.onUseInChat : undefined
+            this.getUseInChatRoom() ? this.onUseInChat : undefined
           }
         />
       );
@@ -360,6 +371,9 @@ export default function withQuickButtons(WrappedComponent) {
           parentRoomType: selectedFolderStore.parentRoomType,
         },
         requestUseInChat: aiPresetsStore.requestUseInChat,
+        // Knowledge bases are put to use only while vectorization is on.
+        vectorizationEnabled:
+          settingsStore.aiConfig?.vectorizationEnabled !== false,
       };
     },
   )(observer(WithQuickButtons));

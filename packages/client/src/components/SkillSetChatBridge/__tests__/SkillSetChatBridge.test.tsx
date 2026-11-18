@@ -78,6 +78,29 @@ describe("SkillSetChatBridge", () => {
     );
   });
 
+  it("opens a new chat on the default agent with a knowledge base connected", () => {
+    const store = new AiPresetsStore();
+    store.setActivePreset(toAiPreset(agent));
+    store.setChatSkillRooms([{ cloud: "docspace", id: "12", name: "Sales assistant" }]);
+    renderBridge(store);
+
+    act(() =>
+      store.requestUseInChat({ id: 21, title: "Company policies", knowledge: true }),
+    );
+
+    expect(chat.store.openPreset).toHaveBeenCalledWith({
+      profileId: null,
+      profileName: null,
+      contextRooms: [],
+      knowledgeRooms: [{ cloud: "docspace", id: "21", name: "Company policies" }],
+    });
+    expect(chat.setCurrentPage).toHaveBeenCalledWith("chat");
+    expect(store.activePreset).toBeNull();
+    // No skill set used before stays connected beside the knowledge base.
+    expect(store.chatContextRooms).toBeNull();
+    expect(store.pendingUseInChatKnowledge).toBe(false);
+  });
+
   it("opens the chat once per request", () => {
     const store = new AiPresetsStore();
     const { rerender } = renderBridge(store);

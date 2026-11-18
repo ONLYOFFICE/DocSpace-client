@@ -205,6 +205,9 @@ class AiPresetsStore {
   /** The skill's call the chat opened by "Use in chat" starts with, if any. */
   pendingUseInChatDraft: string | null = null;
 
+  /** Whether the room "Use in chat" connects is a knowledge base, not a skill set. */
+  pendingUseInChatKnowledge = false;
+
   /**
    * The skill sets "Use in chat" connected to the default agent's chat.
    * They are the chat's context rooms while no agent is picked (Shell's
@@ -330,12 +333,14 @@ class AiPresetsStore {
   /**
    * "Use in chat" on a skill set: the chat opens in a new conversation on the
    * default agent with the set connected (see SkillSetChatBridge). On a
-   * skill's row the composer also starts with the skill's call.
+   * skill's row the composer also starts with the skill's call. With
+   * `knowledge` the room is a knowledge base, connected as one.
    */
   requestUseInChat = (skillSet: {
     id: number | string;
     title: string;
     skill?: string;
+    knowledge?: boolean;
   }) => {
     this.pendingUseInChat = {
       cloud: "docspace",
@@ -345,17 +350,21 @@ class AiPresetsStore {
     this.pendingUseInChatDraft = skillSet.skill
       ? `${toSkillCommand(skillSet.skill)} `
       : null;
+    this.pendingUseInChatKnowledge = !!skillSet.knowledge;
   };
 
   consumeUseInChat = (): {
     room: AiChatPresetRoom;
     draft: string | null;
+    knowledge: boolean;
   } | null => {
     const room = this.pendingUseInChat;
     const draft = this.pendingUseInChatDraft;
+    const knowledge = this.pendingUseInChatKnowledge;
     this.pendingUseInChat = null;
     this.pendingUseInChatDraft = null;
-    return room ? { room, draft } : null;
+    this.pendingUseInChatKnowledge = false;
+    return room ? { room, draft, knowledge } : null;
   };
 
   setChatSkillRooms = (rooms: AiChatPresetRoom[] | null) => {

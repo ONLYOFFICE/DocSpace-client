@@ -44,11 +44,11 @@ import {
 import { useStore } from "SRC_DIR/store/useStore";
 
 /**
- * Fulfils the "Use in chat" of a skill set, recorded by
+ * Fulfils the "Use in chat" of a skill set or a knowledge base, recorded by
  * `aiPresetsStore.requestUseInChat`: the chat opens in a new conversation on
- * the default agent, with that skill set connected and nothing else. The
- * set also becomes the chat's context room (Shell's `contextRoom`), so the
- * chat keeps it connected when it mounts.
+ * the default agent, with that skill set or knowledge base connected and
+ * nothing else. A set also becomes the chat's context room (Shell's
+ * `contextRoom`), so the chat keeps it connected when it mounts.
  *
  * The chat stores are reachable only inside `AiAgentProviders`, which a
  * MobX store cannot call into, so the row records the request and this
@@ -66,17 +66,18 @@ const SkillSetChatBridgeComponent = () => {
     // Read-and-clear, so the same request is not performed twice.
     const request = aiPresetsStore.consumeUseInChat();
     if (!request) return;
-    const { room, draft } = request;
+    const { room, draft, knowledge } = request;
 
     // The default agent: a pick of another one still being read is called off.
     aiPresetsStore.cancelApply();
     aiPresetsStore.setActivePreset(null);
-    aiPresetsStore.setChatSkillRooms([room]);
+    // A knowledge base is connected as one, with no skill set beside it.
+    aiPresetsStore.setChatSkillRooms(knowledge ? null : [room]);
     aiChatStore.openPreset({
       profileId: null,
       profileName: null,
-      contextRooms: [room],
-      knowledgeRooms: [],
+      contextRooms: knowledge ? [] : [room],
+      knowledgeRooms: knowledge ? [room] : [],
       // A skill's row starts the composer with the skill's call.
       ...(draft ? { draft } : {}),
     });

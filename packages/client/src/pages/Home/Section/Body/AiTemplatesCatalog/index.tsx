@@ -48,6 +48,8 @@ import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-me
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { EmptyView } from "@docspace/shared/components/empty-view";
 import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -72,6 +74,9 @@ import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url
 import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/verified.react.svg?url";
+import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+import EmptyFilterAIAgentsLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.ai.agents.light.svg";
+import EmptyFilterAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.ai.agents.dark.svg";
 
 import {
   getInstallLabel,
@@ -178,6 +183,7 @@ const AiTemplatesCatalog = () => {
   const { isAiHubFolder } = useStore("treeFoldersStore");
   const { fetchRooms } = useStore("filesStore");
   const canInstall = useCanInstallAiTemplates();
+  const { isBase } = useTheme();
 
   const { catalog, failed, selectedId, isInstalling, requestInstall } =
     aiTemplatesStore;
@@ -237,6 +243,14 @@ const AiTemplatesCatalog = () => {
     );
 
   if (!catalog) return null;
+
+  // The empty search shows the lists' "no findings" view; clearing its
+  // filter drops the search and the category, so all the templates show.
+  const onClearFilter = (event: React.MouseEvent) => {
+    event.preventDefault();
+    setSearch("");
+    setCategory(null);
+  };
 
   const labels = {
     skills: t("Common:SkillSets"),
@@ -388,9 +402,28 @@ const AiTemplatesCatalog = () => {
         itemTestId="ai-templates-category"
       />
       {shown.length === 0 ? (
-        <Text className={styles.message} data-testid="ai-templates-empty">
-          {t("Common:NotFoundTitle")}
-        </Text>
+        <div data-testid="ai-templates-empty">
+          <EmptyView
+            icon={
+              isBase ? (
+                <EmptyFilterAIAgentsLightIcon />
+              ) : (
+                <EmptyFilterAIAgentsDarkIcon />
+              )
+            }
+            title={t("Common:NoFindingsFound")}
+            description={t("Common:EmptyFilterAIAgentsDescription")}
+            options={[
+              {
+                key: "empty-view-filter",
+                to: "",
+                description: t("Common:ClearFilter"),
+                icon: <ClearEmptyFilterSvg />,
+                onClick: onClearFilter,
+              },
+            ]}
+          />
+        </div>
       ) : (
         <div
           className={styles.catalog}

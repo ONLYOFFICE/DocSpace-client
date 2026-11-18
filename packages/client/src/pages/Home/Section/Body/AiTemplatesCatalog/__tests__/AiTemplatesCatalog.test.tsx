@@ -58,6 +58,12 @@ vi.mock("SRC_DIR/helpers/utils", () => ({ setDocumentTitle }));
 vi.mock("react-router", () => ({
   useLocation: () => location,
   useNavigate: () => navigate,
+  // The empty view's "Clear filter" is a router link.
+  Link: ({ children, onClick }: { children: React.ReactNode; onClick?: React.MouseEventHandler }) => (
+    <a href="#" onClick={onClick}>
+      {children}
+    </a>
+  ),
 }));
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
@@ -308,6 +314,81 @@ describe("AiTemplatesCatalog", () => {
     fireEvent.click(screen.getByTestId("ai-template-menu-info"));
     expect(templatesStore().selectedId).toBe("agents/document/reviewer");
     expect(showInfoPanel).toHaveBeenCalledTimes(1);
+  });
+
+  it("shows only the templates whose name holds the typed text", async () => {
+    api.getAiTemplates.mockResolvedValue({
+      ...catalog,
+      agents: [
+        ...catalog.agents,
+        {
+          ...catalog.agents[0],
+          id: "agents/sales/writer",
+          name: "Sales Writer",
+          description: "Writes offers",
+          category: "Sales",
+        },
+      ],
+    });
+    render(<AiTemplatesCatalog />);
+    expect(await cards()).toHaveLength(2);
+    fireEvent.change(screen.getByRole("textbox") as HTMLInputElement, {
+      target: { value: "sales wr" },
+    });
+    await waitFor(
+      () => {
+        const shown = screen.getAllByTestId("ai-template-card");
+        expect(shown).toHaveLength(1);
+        expect(shown[0].textContent).toContain("Sales Writer");
+      },
+      { timeout: 2500 },
+    );
+  });
+
+  it("searches within the category picked before and keeps it", async () => {
+    api.getAiTemplates.mockResolvedValue({
+      ...catalog,
+      agents: [
+        ...catalog.agents,
+        {
+          ...catalog.agents[0],
+          id: "agents/sales/writer",
+          name: "Sales Writer",
+          description: "Writes offers",
+          category: "Sales",
+        },
+      ],
+    });
+    render(<AiTemplatesCatalog />);
+    await cards();
+    const sales = within(screen.getByTestId("ai-templates-categories")).getByText(
+      "Sales",
+    );
+    fireEvent.click(sales);
+    fireEvent.change(screen.getByRole("textbox") as HTMLInputElement, {
+      target: { value: "contract" },
+    });
+    await screen.findByTestId("ai-templates-empty", {}, { timeout: 2500 });
+    fireEvent.change(screen.getByRole("textbox") as HTMLInputElement, {
+      target: { value: "writer" },
+    });
+    await waitFor(
+      () => {
+        const shown = screen.getAllByTestId("ai-template-card");
+        expect(shown).toHaveLength(1);
+        expect(shown[0].textContent).toContain("Sales Writer");
+      },
+      { timeout: 2500 },
+    );
+
+    // The empty view's "Clear filter" drops the search and the category.
+    fireEvent.change(screen.getByRole("textbox") as HTMLInputElement, {
+      target: { value: "nothing like it" },
+    });
+    await screen.findByTestId("ai-templates-empty", {}, { timeout: 2500 });
+    fireEvent.click(screen.getByText("Common:ClearFilter"));
+    expect(screen.getAllByTestId("ai-template-card")).toHaveLength(2);
+    expect(screen.getByRole("textbox")).toHaveValue("");
   });
 
   it("drops the selection when the search hides the template and when the tab closes", async () => {

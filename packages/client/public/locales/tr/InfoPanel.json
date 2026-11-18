@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Konukların ayrıntılarını burada görün",
   "HistoryEmptyScreenText": "Etkinlik geçmişi burada gösterilecek",
   "HistoryThirdParty": "Geçmiş ekranı, bağlı üçüncü taraf depoları olan genel odalar için kullanılamaz",
+  "KnowledgeBasesEmptyScreenText": "Bilgi tabanı ayrıntılarına buradan bakın",
   "LastUpdateInfo": "Son güncelleme",
   "LifetimeEnds": "Yaşam süresi sona eriyor",
   "MembersEmptyScreenText": "Üye ayrıntılarını burada görüntüleyin",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Oda detaylarını buradan gör",
   "SelectedGroups": "Seçili gruplar",
   "SelectedUsers": "Seçili hesaplar",
+  "SkillSetsEmptyScreenText": "Beceri seti ayrıntılarına buradan bakın",
   "StorageType": "Depolama türü",
   "Users": "Kullanıcılar"
 }

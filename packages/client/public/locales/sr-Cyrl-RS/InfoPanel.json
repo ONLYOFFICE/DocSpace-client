@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Овде погледајте детаље о гостима",
   "HistoryEmptyScreenText": "Историја активности ће бити приказана овде",
   "HistoryThirdParty": "Приказ Историје није доступан за јавне просторије са повезаним складиштима треће стране",
+  "KnowledgeBasesEmptyScreenText": "Погледајте детаље базе знања овде",
   "LastUpdateInfo": "Последње ажурирање",
   "LifetimeEnds": "Век трајања истиче",
   "MembersEmptyScreenText": "Погледајте детаље о члановима овде",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Види детаље собе овде",
   "SelectedGroups": "Изабране групе",
   "SelectedUsers": "Одабрани налози",
+  "SkillSetsEmptyScreenText": "Погледајте детаље скупа вештина овде",
   "StorageType": "Тип складишта",
   "Users": "Корисници"
 }

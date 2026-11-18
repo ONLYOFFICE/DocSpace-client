@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Katso vieraiden tiedot täältä",
   "HistoryEmptyScreenText": "Toimintahistoria näytetään tässä",
   "HistoryThirdParty": "Historian näyttö ei ole saatavilla julkisiin huoneisiin, jotka ovat yhteydessä kolmansien osapuolien muisteihin.",
+  "KnowledgeBasesEmptyScreenText": "Katso tietämyskannan tiedot täältä",
   "LastUpdateInfo": "Viimeisin päivitys",
   "LifetimeEnds": "Käyttöikä päättyy",
   "MembersEmptyScreenText": "Katso jäsentiedot täältä",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Katso huonetiedot täältä",
   "SelectedGroups": "Valitut ryhmät",
   "SelectedUsers": "Valitut tilit",
+  "SkillSetsEmptyScreenText": "Katso taitokokoelman tiedot täältä",
   "StorageType": "Muistityyppi",
   "Users": "Käyttäjät"
 }

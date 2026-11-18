@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "ເບິ່ງລາຍລະອຽດແຂກຢູ່ທີ່ນີ້",
   "HistoryEmptyScreenText": "ປະຫວັດການເຄື່ອນໄຫວຈະປາກົດຢູ່ບ່ອນນີ້",
   "HistoryThirdParty": "ປະຫວັດການສະແດງຂໍ້ມູນບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບຫ້ອງສາທາລະນະທີ່ມີການເຊື່ອມຕໍ່ກັບບ່ອນເກັບຂໍ້ມູນຂອງພາກສ່ວນທີສາມ",
+  "KnowledgeBasesEmptyScreenText": "ເບິ່ງລາຍລະອຽດຖານຄວາມຮູ້ທີ່ນີ້",
   "LastUpdateInfo": "ອັບເດດລ່າສຸດ",
   "LifetimeEnds": "ຊີວິດສິ້ນສຸດ",
   "MembersEmptyScreenText": "ເບິ່ງລາຍລະອຽດສະມາຊິກຢູ່ທີ່ນີ້",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "ເບິ່ງລາຍລະອຽດຫ້ອງຢູ່ທີ່ນີ້",
   "SelectedGroups": "ກຸ່ມທີ່ຄັດເລືອກ",
   "SelectedUsers": "ບັນຊີທີ່ເລືອກ",
+  "SkillSetsEmptyScreenText": "ເບິ່ງລາຍລະອຽດຊຸດທັກສະທີ່ນີ້",
   "StorageType": "ປະເພດການເກັບຮັກສາ",
   "Users": "ຜູ້ໃຊ້"
 }

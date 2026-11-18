@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Ovde pogledajte detalje o gostima",
   "HistoryEmptyScreenText": "Istorija aktivnosti će biti prikazana ovde",
   "HistoryThirdParty": "Prikaz Istorije nije dostupan za javne prostorije sa povezanim skladištima treće strane",
+  "KnowledgeBasesEmptyScreenText": "Pogledajte detalje baze znanja ovde",
   "LastUpdateInfo": "Poslednje ažuriranje",
   "LifetimeEnds": "Vek trajanja ističe",
   "MembersEmptyScreenText": "Pogledajte detalje o članovima ovde",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Vidi detalje sobe ovde",
   "SelectedGroups": "Izabrane grupe",
   "SelectedUsers": "Odabrani nalozi",
+  "SkillSetsEmptyScreenText": "Pogledajte detalje skupa veština ovde",
   "StorageType": "Tip skladišta",
   "Users": "Korisnici"
 }

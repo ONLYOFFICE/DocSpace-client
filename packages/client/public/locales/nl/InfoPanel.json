@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Bekijk hier de details van de gasten",
   "HistoryEmptyScreenText": "De activiteitsgeschiedenis wordt hier getoond",
   "HistoryThirdParty": "Geschiedenisweergave is niet beschikbaar voor openbare kamers met aangesloten opslagruimten van derden",
+  "KnowledgeBasesEmptyScreenText": "Bekijk hier de details van de kennisbank",
   "LastUpdateInfo": "Laatste update",
   "LifetimeEnds": "Einde levensduur",
   "MembersEmptyScreenText": "Bekijk hier de details van de leden",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Bekijk hier de details van de kamers",
   "SelectedGroups": "Geselecteerde groepen",
   "SelectedUsers": "Geselecteerde accounts",
+  "SkillSetsEmptyScreenText": "Bekijk hier de details van de vaardighedenset",
   "StorageType": "Type opslag",
   "Users": "Gebruikers"
 }

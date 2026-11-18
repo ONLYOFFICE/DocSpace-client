@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Xem thông tin khách tại đây",
   "HistoryEmptyScreenText": "Lịch sử hoạt động sẽ được hiển thị ở đây",
   "HistoryThirdParty": "Hiển thị lịch sử không khả dụng cho các phòng công cộng có kho lưu trữ của bên thứ ba được kết nối",
+  "KnowledgeBasesEmptyScreenText": "Xem chi tiết cơ sở kiến thức tại đây",
   "LastUpdateInfo": "Cập nhật lần cuối",
   "LifetimeEnds": "Thời gian tồn tại kết thúc",
   "MembersEmptyScreenText": "Xem chi tiết thành viên tại đây",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Xem chi tiết phòng tại đây",
   "SelectedGroups": "Các nhóm được chọn",
   "SelectedUsers": "Tài khoản đã chọn",
+  "SkillSetsEmptyScreenText": "Xem chi tiết bộ kỹ năng tại đây",
   "StorageType": "Kiểu lưu trữ",
   "Users": "Người dùng"
 }

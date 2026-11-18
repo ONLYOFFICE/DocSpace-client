@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Oglejte si podrobnosti o gostih tukaj",
   "HistoryEmptyScreenText": "Tukaj bo prikazana zgodovina aktivnosti",
   "HistoryThirdParty": "Prikaz zgodovine ni na voljo za javne sobe s povezanimi shrambami tretjih oseb",
+  "KnowledgeBasesEmptyScreenText": "Oglejte si podrobnosti zbirke znanja tukaj",
   "LastUpdateInfo": "Zadnja posodobitev",
   "LifetimeEnds": "Življenjska doba se je zaključila",
   "MembersEmptyScreenText": "Oglejte si podrobnosti članov tukaj",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Oglej si podrobnosti o sobah tukaj",
   "SelectedGroups": "Izbrane skupine",
   "SelectedUsers": "Izbrani računi",
+  "SkillSetsEmptyScreenText": "Oglejte si podrobnosti nabora veščin tukaj",
   "StorageType": "Vrsta shranjevanja",
   "Users": "Uporabniki"
 }

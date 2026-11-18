@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Podrobnosti o hostech naleznete zde",
   "HistoryEmptyScreenText": "Historie aktivit se zobrazí zde",
   "HistoryThirdParty": "Zobrazení historie není k dispozici pro veřejné místnosti s připojenými úložišti třetích stran.",
+  "KnowledgeBasesEmptyScreenText": "Podrobnosti o znalostní bázi naleznete zde",
   "LastUpdateInfo": "Poslední aktualizace",
   "LifetimeEnds": "Konec životnosti",
   "MembersEmptyScreenText": "Podrobnosti o členech naleznete zde",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Podrobnosti o místnostech najdete zde",
   "SelectedGroups": "Vybrané skupiny",
   "SelectedUsers": "Vybrané účty",
+  "SkillSetsEmptyScreenText": "Podrobnosti o sadě dovedností naleznete zde",
   "StorageType": "Typ úložiště",
   "Users": "Uživatelé"
 }

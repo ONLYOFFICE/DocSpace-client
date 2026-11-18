@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Afișare detalii invitaților aici",
   "HistoryEmptyScreenText": "Istoricul activităților va fi afișat aici",
   "HistoryThirdParty": "Afișarea istoricului nu este disponibilă pentru sălile publice care sunt conectate la servicii terțe de stocare",
+  "KnowledgeBasesEmptyScreenText": "Detalii despre baza de cunoștințe aici",
   "LastUpdateInfo": "Ultima actualizare",
   "LifetimeEnds": "Durată de viață se încheie",
   "MembersEmptyScreenText": "Detaliile membrilor aici",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Detaliile sălilor aici",
   "SelectedGroups": "Grupele selectate",
   "SelectedUsers": "Conturi selectate",
+  "SkillSetsEmptyScreenText": "Detalii despre setul de abilități aici",
   "StorageType": "Tip de stocare",
   "Users": "Utilizatori"
 }

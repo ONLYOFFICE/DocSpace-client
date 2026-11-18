@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Podrobnosti o hosťoch nájdete tu",
   "HistoryEmptyScreenText": "Tu sa zobrazí história aktivít",
   "HistoryThirdParty": "Zobrazenie histórie nie je možné pre verejné miestnosti s pripojenými úložiskami tretích strán",
+  "KnowledgeBasesEmptyScreenText": "Podrobnosti o znalostnej báze nájdete tu",
   "LastUpdateInfo": "Posledná aktualizácia",
   "LifetimeEnds": "Doba používania sa končí",
   "MembersEmptyScreenText": "Tu nájdete podrobnosti o členoch",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Podrobnosti o miestnosti nájdete tu",
   "SelectedGroups": "Vybrané skupiny",
   "SelectedUsers": "Vybrané účty",
+  "SkillSetsEmptyScreenText": "Podrobnosti o sade zručností nájdete tu",
   "StorageType": "Typ úložného priestoru",
   "Users": "Používatelia"
 }

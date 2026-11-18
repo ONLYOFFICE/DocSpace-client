@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "Հյուրերի մասին մանրամասները կարող եք տեսնել այստեղ",
   "HistoryEmptyScreenText": "Գործողությունների պատմությունը կցուցադրվի այստեղ",
   "HistoryThirdParty": "Պատմության ցուցադրումը հասանելի չէ երրորդ կողմի միացված պահեստարաններով հանրային սենյակների համար",
+  "KnowledgeBasesEmptyScreenText": "Տեսեք գիտելիքների բազայի մանրամասները այստեղ",
   "LastUpdateInfo": "Վերջին թարմացում",
   "LifetimeEnds": "Մշտական լիցենզիան ավարտվում է",
   "MembersEmptyScreenText": "Անդամների մանրամասները կարող եք տեսնել այստեղ",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "Սենյակների մանրամասները տես",
   "SelectedGroups": "Ընտրված խմբեր",
   "SelectedUsers": "Ընտրել էջ",
+  "SkillSetsEmptyScreenText": "Տեսեք հմտությունների հավաքածուի մանրամասները այստեղ",
   "StorageType": "Պահպանման տեսակը",
   "Users": "Օգտատերեր"
 }

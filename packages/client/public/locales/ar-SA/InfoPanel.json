@@ -39,6 +39,7 @@
   "GuestsEmptyScreenText": "عرض تفاصيل الضيوف هنا",
   "HistoryEmptyScreenText": "سيتم عرض سجل النشاط هنا",
   "HistoryThirdParty": "عرض السجل غير متاح للغرف العامة التي بها مخازن متصلة تابعة لجهات خارجية",
+  "KnowledgeBasesEmptyScreenText": "راجع تفاصيل قاعدة المعرفة هنا",
   "LastUpdateInfo": "آخر تحديث",
   "LifetimeEnds": "تنتهي مدة العمر",
   "MembersEmptyScreenText": "شاهد تفاصيل الأعضاء هنا",
@@ -47,6 +48,7 @@
   "RoomsEmptyScreenTent": "انظر تفاصيل الغرف هنا",
   "SelectedGroups": "المجموعات المحددة",
   "SelectedUsers": "الحسابات المحددة",
+  "SkillSetsEmptyScreenText": "راجع تفاصيل مجموعة المهارات هنا",
   "StorageType": "نوع التخزين",
   "Users": "المستخدمين"
 }

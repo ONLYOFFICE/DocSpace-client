@@ -1,5 +1,26 @@
 # Spec Delta
 
+## ADDED Requirements
+
+### Requirement: Editor error of an encrypted file offers a reload
+When the editor reports an error for an encrypted file, the page SHALL show Common:SomethingWentWrong with the error description in place of the editor and SHALL offer Common:TryAgain, which loads the page again with a new configuration and a new key flow. The page SHALL NOT repeat the opening by itself.
+
+#### Scenario: Editor error with the button
+- **WHEN** the editor reports an error for an encrypted file
+- **THEN** the page shows Common:SomethingWentWrong, the error description and the button Common:TryAgain, and no editor component
+
+#### Scenario: Try again after an editor error
+- **WHEN** the user presses Common:TryAgain on that page
+- **THEN** the page is loaded again
+
+#### Scenario: No repeat without the user
+- **WHEN** the editor reports an error for an encrypted file and the user does nothing
+- **THEN** the page stays on the error and is not loaded again
+
+#### Scenario: Editor error on a plain file
+- **WHEN** the editor reports an error for a file that is not encrypted
+- **THEN** the editor stays mounted and no button is added
+
 ## MODIFIED Requirements
 
 ### Requirement: Editor fetches the file's access entries

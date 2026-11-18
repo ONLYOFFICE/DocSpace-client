@@ -27,6 +27,7 @@ limit, the network), an error with one carries the status.
 
 - One request for the access entries per file and attempt.
 - One silent repeat of a request without an answer.
+- A way out of the editor error page of an encrypted file.
 
 **Non-Goals:**
 
@@ -57,8 +58,27 @@ limit, the network), an error with one carries the status.
    failure shows the load-failed state again without a request; only `retry`
    asks again. This keeps a failing server from being asked on every change
    of the key state.
+5. **A button that reloads the page, not a repeat by itself** (decided by
+   the owner on 2026-11-18). An editor error arrives after the editor has
+   mounted. The document key and address come from the server render of the
+   page, the refresh event is withheld for an encrypted file
+   (`private-rooms-editor-contract` D16) and the DEK is wiped after the
+   hand-over, so repeating the opening means loading the page again. The
+   button calls `window.location.reload()` and is the Common:TryAgain button
+   the key-flow states of the same page already show. A repeat by itself was
+   rejected: on a device that is not remembered it would ask for the
+   passphrase again with no explanation, it needs a counter kept across
+   loads against a loop and a list of error codes, and it does not help the
+   case seen most on the stand, a member who only views while another holds
+   the session. The error code is not read: the button is shown for every
+   editor error of an encrypted file, also where a reload cannot help (a
+   missing crypto library), which costs the user one press.
 
 ## Risks / Trade-offs
+
+- [The reload fails the same way while another member holds the session] →
+  the page shows the error and the button again; the cause is on the server
+  (`private-rooms-editor-contract` task 6.2).
 
 - [The entries change while the page is opening, for example the user is
   given access a second after the first request] → the flow ends in the

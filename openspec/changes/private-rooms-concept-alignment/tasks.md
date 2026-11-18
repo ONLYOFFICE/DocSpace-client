@@ -15,10 +15,10 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. Keys management
 
-- [ ] 3.1 Client: show Common:KeysManagementIntro at the top of Keys management, with and without a key. Verify: cases "User with a key" and "User without a key" in the unit tests of `keys-management`; `pnpm exec vitest run src/pages/Profile`
-- [ ] 3.2 Client: show the state of the key, Common:KeyLocked or Common:KeyUnlocked, beside the heading of the key, from the encryption context, with token colours that keep 4.5:1 in both themes (design decisions 5 and 7). Verify: cases "Locked key", "Key locks while the page is open" and "User without a key", and a contrast case beside the existing one for the status badges; `pnpm exec vitest run src/pages/Profile`
-- [ ] 3.3 Client: while the key is locked, show Common:PrivateRoomLockedBarText under the heading and the primary action Common:UnlockKey under the key, calling the shared unlock (design decision 6). Verify: cases "Unlock from the page", "Unlock cancelled" and "Unlocked key"; `pnpm exec vitest run src/pages/Profile`
-- [ ] 3.4 Client: put Common:UseRecoveryPhrase under the heading Common:RecoveryPhraseTitle and the sentence Common:RecoveryPhraseSectionText. Verify: case "User with a key" of the recovery block; `pnpm exec vitest run src/pages/Profile`
+- [x] 3.1 Client: show Common:KeysManagementIntro at the top of Keys management, with and without a key. Verify: cases "User with a key" and "User without a key" in the unit tests of `keys-management`; `pnpm exec vitest run src/pages/Profile`
+- [x] 3.2 Client: show the state of the key, Common:KeyLocked or Common:KeyUnlocked, beside the heading of the key, from the encryption context, with token colours that keep 4.5:1 in both themes (design decisions 5 and 7). Verify: cases "Locked key", "Key locks while the page is open" and "User without a key", and a contrast case beside the existing one for the status badges; `pnpm exec vitest run src/pages/Profile`
+- [x] 3.3 Client: while the key is locked, show Common:PrivateRoomLockedBarText under the heading and the primary action Common:UnlockKey under the key, calling the shared unlock (design decision 6). Verify: cases "Unlock from the page", "Unlock cancelled" and "Unlocked key"; `pnpm exec vitest run src/pages/Profile`
+- [x] 3.4 Client: put Common:UseRecoveryPhrase under the heading Common:RecoveryPhraseTitle and the sentence Common:RecoveryPhraseSectionText. Verify: case "User with a key" of the recovery block; `pnpm exec vitest run src/pages/Profile`
 
 ## 4. E2E and gate
 

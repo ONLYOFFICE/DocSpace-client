@@ -264,3 +264,31 @@ describe("Key fingerprint is shown in groups", () => {
     for (const group of groups) expect(group).toHaveLength(8);
   });
 });
+
+describe("Keys management shows whether the key is locked", () => {
+  it("Locked key: the heading names the state and says what unlocking gives", () => {
+    renderList([keyNew], { keyState: "locked" });
+
+    expect(screen.getByTestId("key_lock_state")).toHaveTextContent(
+      "Common:KeyLocked",
+    );
+    expect(screen.getByTestId("key_locked_note")).toHaveTextContent(
+      "Common:PrivateRoomLockedBarText",
+    );
+  });
+
+  it("Unlocked key: the state is named and nothing is asked", () => {
+    renderList([keyNew], { keyState: "unlocked" });
+
+    expect(screen.getByTestId("key_lock_state")).toHaveTextContent(
+      "Common:KeyUnlocked",
+    );
+    expect(screen.queryByTestId("key_locked_note")).toBeNull();
+  });
+
+  it("User without a key: no state beside the heading", () => {
+    renderList([], { keyState: undefined });
+
+    expect(screen.queryByTestId("key_lock_state")).toBeNull();
+  });
+});

@@ -44,6 +44,8 @@ import type { TAiProjectLogo } from "@docspace/shared/api/ai/projects";
 
 import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 
+import SkillIcon from "SRC_DIR/components/SkillIcon";
+
 import { coverLogo } from "../list/ProjectLogo";
 import styles from "./RoomItem.module.scss";
 
@@ -51,7 +53,10 @@ type RoomItemProps = {
   id: number | string;
   title: string;
   logo?: TAiProjectLogo;
-  /** Drawn while the room carries no logo. */
+  /**
+   * The kind of room: a skill set and a knowledge base are drawn with their
+   * own icon, a folder with this one while it carries no logo.
+   */
   icon: "instructionsRoom.svg" | "knowledgeRoom.svg" | "folder.svg";
   /** Called before the room opens, e.g. to close the aside the item sits in. */
   onOpen?: () => void;
@@ -74,8 +79,26 @@ type SourceRoomLogoProps = {
   className?: string;
 };
 
-/** A linked room's own logo: the uploaded picture, the cover in its colour, or its initials; `icon` while it carries no logo. */
+// The icon of its own a linked room is drawn with, as the lists draw it.
+const SKILL_ICON_KINDS: Partial<Record<RoomItemProps["icon"], "set" | "knowledge">> = {
+  "instructionsRoom.svg": "set",
+  "knowledgeRoom.svg": "knowledge",
+};
+
+/**
+ * A linked room's picture. A skill set and a knowledge base are drawn with
+ * the skill set icon and the knowledge base icon, as the lists, the Info
+ * panel and Details draw them: a logo stored for such a room is not shown.
+ * Any other room shows its own logo: the uploaded picture, the cover in its
+ * colour, or its initials; `icon` while it carries no logo.
+ */
 export const SourceRoomLogo = ({ title, logo, icon, size = "24px", className }: SourceRoomLogoProps) => {
+  const kind = SKILL_ICON_KINDS[icon];
+  if (kind)
+    return (
+      <SkillIcon kind={kind} size={Number.parseInt(size, 10)} className={classNames("room-icon", className)} />
+    );
+
   const color = logo?.color.replace("#", "") ?? "";
 
   return (

@@ -214,6 +214,12 @@ export type {
 } from "./chatSources";
 export { aiCopyToRoomHandlers } from "./saveToRoom";
 export type { AiCopyRequest, AiCopyTargetRoomMock } from "./saveToRoom";
+export {
+  aiAgentReadDeniedHandlers,
+  aiHubRoomsAsUserHandler,
+  agentInviteSearchHandler,
+} from "./agentAccess";
+export type { AgentInviteAccount } from "./agentAccess";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),

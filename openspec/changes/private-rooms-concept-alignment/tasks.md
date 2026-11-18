@@ -1,6 +1,6 @@
 # Tasks
 
-One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). The change states nothing about `../server`; nothing there changes. Decisions 3 to 5 of the proposal are confirmed by the owner before 1.1 starts.
+One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). The change states nothing about `../server`; nothing there changes. Decisions 3 to 5 of the proposal were confirmed by the owner on 2026-11-18.
 
 ## 1. Dashboard
 

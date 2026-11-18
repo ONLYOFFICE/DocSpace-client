@@ -57,8 +57,8 @@ Taken by the owner on 2026-11-18, with the variants on the canvas
    stand as it is.
 2. The three new English texts of the table below.
 
-Proposed here and open until the owner confirms them with the go-ahead to
-apply:
+Proposed here and confirmed by the owner on 2026-11-18 with the go-ahead
+to apply:
 
 3. The button of the card. For a user who may create rooms it reads
    Common:CreatePrivateRoom, opens the Private list and starts the creation

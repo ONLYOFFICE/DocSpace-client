@@ -60,6 +60,8 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import TelegramStore from "SRC_DIR/store/TelegramStore";
 
+import { getProfileTabId } from "./profileTabs";
+
 export type UseProfileBodyProps = {
   isFirstSubscriptionsLoad?: boolean;
   tfaSettings?: TfaStore["tfaSettings"];
@@ -217,20 +219,17 @@ const useProfileBody = ({
   const getProfileInitialValue = React.useCallback(
     async (portalSettings = false) => {
       const actions = [initialLoad()];
-      if (window.location.pathname.includes("login"))
-        actions.push(openLoginTab());
+      const tabId = getProfileTabId(window.location.pathname);
 
-      if (window.location.pathname.includes("notifications"))
-        actions.push(getNotificationsData());
+      if (tabId === "login") actions.push(openLoginTab());
 
-      if (window.location.pathname.includes("file-management"))
-        actions.push(getFileManagementData());
+      if (tabId === "notifications") actions.push(getNotificationsData());
 
-      if (window.location.pathname.includes("keys-management"))
-        actions.push(getEncryptionKeysData());
+      if (tabId === "file-management") actions.push(getFileManagementData());
 
-      if (window.location.pathname.includes("authorized-apps"))
-        actions.push(getConsentList());
+      if (tabId === "keys-management") actions.push(getEncryptionKeysData());
+
+      if (tabId === "authorized-apps") actions.push(getConsentList());
 
       await Promise.all(actions);
       if (portalSettings) {

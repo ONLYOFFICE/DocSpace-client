@@ -51,6 +51,13 @@ describe("getProfileTabId", () => {
     );
   });
 
+  it("keeps a plugin tab named like a portal tab apart from it", () => {
+    expect(
+      getProfileTabId("/portal-settings/profile/p/keys-management"),
+    ).not.toBe("keys-management");
+    expect(getProfileTabId("/profile/p/my-login-sync")).not.toBe("login");
+  });
+
   it("decodes the key the router percent-encoded, a space or a non-Latin letter", () => {
     expect(getProfileTabId("/profile/p/calendar%20sync")).toBe("p/calendar sync");
     expect(getProfileTabId("/profile/p/%D0%BA%D0%B0%D0%BB")).toBe(

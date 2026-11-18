@@ -100,16 +100,14 @@ describe("AiTemplate", () => {
     expect(screen.getByTestId("info_panel_ai_template_category").textContent).toContain("Document");
   });
 
-  it("ends Details with Add to my agents, which installs the template", async () => {
-    api.installAiTemplate.mockResolvedValue({ kind: "agent", title: "Contract Reviewer" });
+  it("ends Details with Add to my agents, which asks to confirm the install", () => {
     render(<AiTemplate view={InfoPanelView.infoDetails} />);
     const button = screen.getByTestId("info_panel_ai_template_install");
     expect(button.textContent).toContain("Common:AddToMyAgents");
     fireEvent.click(button);
-    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
-    expect(api.installAiTemplate).toHaveBeenCalledWith("agents/document/reviewer");
-    expect(toastr.success).toHaveBeenCalledTimes(1);
-    expect(presetsStore.fetchPresets).toHaveBeenCalled();
+    // The catalog's confirmation dialog installs it once the user agrees.
+    expect(templatesStore().confirmingId).toBe("agents/document/reviewer");
+    expect(api.installAiTemplate).not.toHaveBeenCalled();
   });
 
   it("offers no Add to my agents to a user who may not create agents", () => {

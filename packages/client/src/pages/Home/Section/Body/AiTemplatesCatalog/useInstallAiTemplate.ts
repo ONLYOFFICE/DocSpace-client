@@ -46,6 +46,13 @@ import {
 } from "SRC_DIR/helpers/aiWorkspace";
 import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
 
+/** The label of a template's install action: an agent is added to the user's agents. */
+export const getInstallLabel = (
+  t: (key: string) => string,
+  template: TAiTemplate,
+) =>
+  template.kind === "agent" ? t("Common:AddToMyAgents") : t("Common:Install");
+
 /**
  * Who may install a template: whoever may create an agent (the portal owner,
  * DocSpace admins and room admins), as installing one creates an agent.
@@ -54,10 +61,12 @@ export const useCanInstallAiTemplates = () =>
   canManageProjects(useStore("userStore").user);
 
 /**
- * Installs a template as the card's Install and the Info panel's "Add to my
- * agents" both do: the user is told, warned when the agent came without a
- * model, and returned to the list, where the new room is; a refusal is shown
- * and the catalog stays.
+ * Installs a template once the user confirmed it (AiTemplateInstallDialog,
+ * opened by the card's Install, its menu and the Info panel's "Add to my
+ * agents"): the user is told, warned when the agent came without a model,
+ * and returned to the list, where the new room is; a refusal is shown and the
+ * catalog stays. Nothing is installed while another installation runs, so a
+ * second click does not install the template again.
  */
 export const useInstallAiTemplate = () => {
   const { t } = useTranslation(["Common"]);
@@ -68,6 +77,7 @@ export const useInstallAiTemplate = () => {
   const aiTemplatesStore = useStore("aiTemplatesStore");
 
   return async (template: TAiTemplate) => {
+    if (aiTemplatesStore.isInstalling) return;
     try {
       const installed = await aiTemplatesStore.install(template);
       toastr.success(

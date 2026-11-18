@@ -43,11 +43,27 @@ import {
   type TAiTemplateCatalog,
 } from "@docspace/shared/api/ai/templates";
 
+/** The template of the catalog with this id, of any kind. */
+const findTemplate = (
+  catalog: TAiTemplateCatalog | null,
+  id: string | null,
+): TAiTemplate | null => {
+  if (!catalog || id === null) return null;
+  const { agents, skillSets, knowledgeBases } = catalog;
+  return (
+    [...agents, ...skillSets, ...knowledgeBases].find(
+      (template) => template.id === id,
+    ) ?? null
+  );
+};
+
 /**
  * The Templates tab of the Agents list: the catalog of templates the AI
  * service ships, the template selected on it, which the Info panel shows,
- * and the one being installed. The card and the Info panel both install, so
- * both read here whether an installation is under way.
+ * the one whose installation waits for the user's confirmation and the one
+ * being installed. The card, its menu and the Info panel all install, so all
+ * of them ask here for the confirmation and read whether an installation is
+ * under way.
  */
 class AiTemplatesStore {
   catalog: TAiTemplateCatalog | null = null;
@@ -57,6 +73,9 @@ class AiTemplatesStore {
 
   /** The id of the template selected for the Info panel. */
   selectedId: string | null = null;
+
+  /** The id of the template whose installation waits for the user's confirmation. */
+  confirmingId: string | null = null;
 
   /** The id of the template being installed. */
   installingId: string | null = null;
@@ -85,13 +104,12 @@ class AiTemplatesStore {
 
   /** The selected template, while the catalog holds it. */
   get selected(): TAiTemplate | null {
-    if (!this.catalog || this.selectedId === null) return null;
-    const { agents, skillSets, knowledgeBases } = this.catalog;
-    return (
-      [...agents, ...skillSets, ...knowledgeBases].find(
-        ({ id }) => id === this.selectedId,
-      ) ?? null
-    );
+    return findTemplate(this.catalog, this.selectedId);
+  }
+
+  /** The template whose installation waits for the user's confirmation. */
+  get confirming(): TAiTemplate | null {
+    return findTemplate(this.catalog, this.confirmingId);
   }
 
   select = (id: string | null) => {
@@ -101,6 +119,20 @@ class AiTemplatesStore {
   get isInstalling() {
     return this.installingId !== null;
   }
+
+  /**
+   * An install control was pressed: the installation asks first. Nothing is
+   * asked while an installation runs, so a second click installs nothing.
+   */
+  requestInstall = (template: TAiTemplate) => {
+    if (this.isInstalling) return;
+    this.confirmingId = template.id;
+  };
+
+  /** The confirmation is closed, the installation confirmed or called off. */
+  closeInstallConfirmation = () => {
+    this.confirmingId = null;
+  };
 
   /** Installs the template into the portal as new rooms. */
   install = async (template: TAiTemplate): Promise<TAiInstalledTemplate> => {

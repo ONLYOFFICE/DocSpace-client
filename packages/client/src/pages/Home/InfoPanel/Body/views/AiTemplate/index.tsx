@@ -52,13 +52,10 @@ import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import SkillIcon from "SRC_DIR/components/SkillIcon";
 import ProjectLogo from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
+import { getTemplateLogo } from "SRC_DIR/pages/Home/Section/Body/AiTemplatesCatalog";
 import {
   getInstallLabel,
-  getTemplateLogo,
-} from "SRC_DIR/pages/Home/Section/Body/AiTemplatesCatalog";
-import {
   useCanInstallAiTemplates,
-  useInstallAiTemplate,
 } from "SRC_DIR/pages/Home/Section/Body/AiTemplatesCatalog/useInstallAiTemplate";
 
 import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/verified.react.svg?url";
@@ -91,7 +88,8 @@ type AiTemplateProps = {
  * A template is not a room: the panel is built from its catalog entry.
  * Details tells what it is - its description, the organization that ships
  * it, its type and category - and ends with "Add to my agents", which
- * installs it as the card's Install does, for those who may create agents.
+ * installs it as the card's Install does, once the user confirmed it, for
+ * those who may create agents.
  * Context lists the skill sets, with their skills, and the knowledge bases
  * the agent brings.
  */
@@ -99,10 +97,14 @@ const AiTemplate = ({ view }: AiTemplateProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const aiTemplatesStore = useStore("aiTemplatesStore");
   const canInstall = useCanInstallAiTemplates();
-  const install = useInstallAiTemplate();
 
-  const { selected: template, catalog, isInstalling, installingId } =
-    aiTemplatesStore;
+  const {
+    selected: template,
+    catalog,
+    isInstalling,
+    installingId,
+    requestInstall,
+  } = aiTemplatesStore;
 
   if (!template || !catalog) return null;
 
@@ -184,7 +186,7 @@ const AiTemplate = ({ view }: AiTemplateProps) => {
           primary
           isDisabled={isInstalling}
           isLoading={installingId === template.id}
-          onClick={() => void install(template)}
+          onClick={() => requestInstall(template)}
           testId="info_panel_ai_template_install"
         />
       ) : null}

@@ -61,6 +61,8 @@ vi.mock("react-router", () => ({
 }));
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
+  // The install confirmation renders its text as the key.
+  Trans: ({ i18nKey }: { i18nKey: string }) => i18nKey,
 }));
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -153,6 +155,7 @@ describe("AiTemplatesCatalog", () => {
     render(<AiTemplatesCatalog />);
     await cards();
     fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(api.installAiTemplate).toHaveBeenCalledWith("agents/document/reviewer");
     expect(toastr.success).toHaveBeenCalledTimes(1);
@@ -164,6 +167,7 @@ describe("AiTemplatesCatalog", () => {
     const { unmount } = render(<AiTemplatesCatalog />);
     await cards();
     fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(presetsStore.fetchPresets).toHaveBeenCalledTimes(1);
     unmount();
@@ -175,6 +179,7 @@ describe("AiTemplatesCatalog", () => {
     render(<AiTemplatesCatalog />);
     await cards();
     fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(presetsStore.fetchPresets).not.toHaveBeenCalled();
   });
@@ -188,6 +193,7 @@ describe("AiTemplatesCatalog", () => {
     const { unmount } = render(<AiTemplatesCatalog />);
     await cards();
     fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(toastr.success).toHaveBeenCalledTimes(1);
     expect(toastr.warning).toHaveBeenCalledTimes(1);
@@ -207,6 +213,7 @@ describe("AiTemplatesCatalog", () => {
     render(<AiTemplatesCatalog />);
     await cards();
     fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(toastr.warning).not.toHaveBeenCalled();
   });
@@ -216,8 +223,38 @@ describe("AiTemplatesCatalog", () => {
     render(<AiTemplatesCatalog />);
     await cards();
     fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(toastr.error).toHaveBeenCalledTimes(1));
     expect(navigate).not.toHaveBeenCalled();
+  });
+
+  it("asks before installing and installs nothing when the user cancels", async () => {
+    render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    expect(api.installAiTemplate).not.toHaveBeenCalled();
+    expect(
+      (await screen.findByTestId("ai-template-install-description")).textContent,
+    ).toContain("Common:AiTemplateInstallAgentDescription");
+    fireEvent.click(screen.getByTestId("ai-template-install-cancel"));
+    await waitFor(() =>
+      expect(screen.queryByTestId("ai-template-install-confirm")).toBeNull(),
+    );
+    expect(api.installAiTemplate).not.toHaveBeenCalled();
+  });
+
+  it("starts no second installation while one runs", async () => {
+    let finish: (value: unknown) => void = () => {};
+    api.installAiTemplate.mockReturnValue(new Promise((resolve) => { finish = resolve; }));
+    render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
+    fireEvent.click(screen.getByTestId("ai-template-install-confirm"));
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    expect(api.installAiTemplate).toHaveBeenCalledTimes(1);
+    finish({ kind: "agent", title: "Contract Reviewer" });
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
   });
 
   it("says so when the catalog cannot be read", async () => {
@@ -249,6 +286,7 @@ describe("AiTemplatesCatalog", () => {
     const item = screen.getByTestId("ai-template-menu-install");
     expect(item.textContent).toBe("Common:AddToMyAgents");
     fireEvent.click(item);
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(api.installAiTemplate).toHaveBeenCalledWith("agents/document/reviewer");
   });

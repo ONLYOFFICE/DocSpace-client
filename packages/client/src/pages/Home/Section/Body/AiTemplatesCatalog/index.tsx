@@ -74,9 +74,10 @@ import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.r
 import VerifiedReactSvgUrl from "PUBLIC_DIR/images/icons/16/verified.react.svg?url";
 
 import {
+  getInstallLabel,
   useCanInstallAiTemplates,
-  useInstallAiTemplate,
 } from "./useInstallAiTemplate";
+import AiTemplateInstallDialog from "./AiTemplateInstallDialog";
 import styles from "./AiTemplatesCatalog.module.scss";
 
 /**
@@ -159,20 +160,15 @@ export const getTemplateDetails = (
   ];
 };
 
-/** The label of a template's install action: an agent is added to the user's agents. */
-export const getInstallLabel = (
-  t: (key: string) => string,
-  template: TAiTemplate,
-) =>
-  template.kind === "agent" ? t("Common:AddToMyAgents") : t("Common:Install");
-
 /**
  * The Templates tab of the AI Chat section's lists: the shipped templates of
- * the list's kind as cards, each installed into the portal by its button.
- * Installing an agent brings the skill sets and knowledge bases it is linked
- * to; the list is then shown again, with the new room in it. A card is
- * selected by a click, and the Info panel shows the selected template. Only
- * those who may create an agent are offered to install one.
+ * the list's kind as cards, each installed into the portal by its button,
+ * once the user confirmed it. Installing an agent brings the skill sets and
+ * knowledge bases it is linked to; the list is then shown again, with the new
+ * room in it. While an installation runs, no install control can start
+ * another. A card is selected by a click, and the Info panel shows the
+ * selected template. Only those who may create an agent are offered to
+ * install one.
  */
 const AiTemplatesCatalog = () => {
   const { t } = useTranslation(["Common"]);
@@ -182,17 +178,21 @@ const AiTemplatesCatalog = () => {
   const { isAiHubFolder } = useStore("treeFoldersStore");
   const { fetchRooms } = useStore("filesStore");
   const canInstall = useCanInstallAiTemplates();
-  const install = useInstallAiTemplate();
 
-  const { catalog, failed, selectedId, isInstalling } = aiTemplatesStore;
+  const { catalog, failed, selectedId, isInstalling, requestInstall } =
+    aiTemplatesStore;
 
   const [search, setSearch] = React.useState("");
   const [category, setCategory] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     void aiTemplatesStore.fetchCatalog();
-    // A template stays selected while the tab is shown.
-    return () => aiTemplatesStore.select(null);
+    // A template stays selected, and its confirmation open, while the tab
+    // is shown.
+    return () => {
+      aiTemplatesStore.select(null);
+      aiTemplatesStore.closeInstallConfirmation();
+    };
   }, [aiTemplatesStore]);
 
   const listType = getAiWorkspaceListType(location.search);
@@ -270,7 +270,7 @@ const AiTemplatesCatalog = () => {
             label: getInstallLabel(t, template),
             icon: CreateRoomReactSvgUrl,
             disabled: isInstalling,
-            onClick: () => void install(template),
+            onClick: () => requestInstall(template),
           },
         ]
       : []),
@@ -331,7 +331,7 @@ const AiTemplatesCatalog = () => {
               isClickable
               isDisabled={isInstalling}
               title={installLabel}
-              onClick={() => void install(template)}
+              onClick={() => requestInstall(template)}
               dataTestId="ai-template-install"
             />
           ) : null}
@@ -402,6 +402,7 @@ const AiTemplatesCatalog = () => {
           {shown.map(card)}
         </div>
       )}
+      <AiTemplateInstallDialog />
     </div>
   );
 };

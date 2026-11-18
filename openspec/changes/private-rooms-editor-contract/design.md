@@ -1128,7 +1128,12 @@ a User with the Viewer access. The room and the files of the runs before
   edit mode only, and the Viewer has no read-history right. After the
   session had ended (version 6) the Viewer opened the document in the view
   mode with its three lines. The run of 2026-10-30 had not opened a file
-  for a Viewer in a held session after a save.
+  for a Viewer in a held session after a save. Later the same day
+  (`private-rooms-editor-access-request` task 1.4) the failure turned out
+  to depend on what the session holds: with one line typed into an
+  existing paragraph and saved, the Viewer got the same key and an address
+  with the current version and the document opened with the line once;
+  after a new paragraph and another save the opening failed again.
 - **An opening that meets a save.** The member's editor page was requested
   a moment after the owner pressed Ctrl+S. The browser fetched the address
   without a version and the opening failed with error code -82

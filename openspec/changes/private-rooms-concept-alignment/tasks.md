@@ -11,7 +11,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 ## 2. Private list
 
 - [ ] 2.1 Locales: add Common:PrivateRoomsSectionNote, Common:KeysManagementIntro and Common:RecoveryPhraseSectionText to `public/locales/en/Common.json` with the texts of the proposal, write their translator comments with `/translate-comments` and translate them with `/translate-locales`. Verify: `cd common/tests && npx vitest run test/locales.test.js`; `npm --prefix ./common/tests run test:lefthook`
-- [ ] 2.2 Client: show Common:PrivateRoomsSectionNote with the encryption mark beside the title of the Private list and of its Archive, not inside a room, giving way on a narrow header (design decision 4). Verify: cases "Private list", "Inside a room" and "Narrow window" in a unit test next to the header; `pnpm exec vitest run src/pages/Home/Section/Header`
+- [x] 2.2 Client: show Common:PrivateRoomsSectionNote with the encryption mark in the header of the Private list and of its Archive, not inside a room, giving way on a narrow header (design decision 4). Verify: cases "Private list", "Inside a room" and "Narrow window" in a unit test next to the header; `pnpm exec vitest run src/pages/Home/Section/Header`. Done 2026-11-18 with the English text of the key added here; the line stands in the controls slot at the end of the header row (design decision 4), and the narrow header is covered by the style alone: a unit test lays nothing out
 
 ## 3. Keys management
 
@@ -28,6 +28,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## Workflow follow-up
 
+- `docspace-ui-kit-react`: a slot beside the title of the header component, so the line of the Private list can stand where the canvas has it.
 - Stand: compare the three places with the canvas of 2026-11-18 on the local stack, in both themes, before the archive.
 - `private-rooms-release-gate` 2.1 removes the Beta badges; add the dashboard card to it when this change is archived.
 - Archive after 4.3 and the stand comparison; the archive merges the deltas into `private-rooms/sidebar-section` and `private-rooms/key-management`.

@@ -66,7 +66,12 @@ What the code has today:
 3. **The badge of the card is the shared Beta badge**, the component the
    sidebar item uses, with its title and description options. The card
    model gets an optional slot for it; no other card uses it.
-4. **The line of the list is part of the header title row.** It is shown
+4. **The line of the list stands in the slot of the header controls**, the
+   one that holds the key state indicator inside a room, so it is drawn at
+   the end of the header row, not beside the title as on the canvas: the
+   header component of the kit has no slot beside the title that takes
+   content, only a text badge. A slot there is a change of
+   `docspace-ui-kit-react` and is left as a follow-up. The line is shown
    for the root of the section and of its Archive only, takes the mark the
    room icon uses, and gives way first when the row is narrow: the title
    and the header actions do not shrink for it. On a phone width it is not

@@ -1898,6 +1898,7 @@
   "PrivateRoomsBetaTitle": "Private rooms",
   "PrivateRoomsListEmptyDescription": "Private rooms are end-to-end encrypted. Files are encrypted in your browser before upload and only the people you invite can read them.",
   "PrivateRoomsListEmptyTitle": "No private rooms yet",
+  "PrivateRoomsSectionNote": "Files here are end-to-end encrypted: only room members can read them.",
   "PrivateRoomTitle": "Private Room",
   "PrivateRoomType": "Private",
   "ProcessDetails": "Process details",

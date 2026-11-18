@@ -41,16 +41,16 @@ The system SHALL show the Beta badge beside the title of the card, the same badg
 - **THEN** the Beta badge stands beside its title
 
 ### Requirement: Private list says that its files are encrypted
-The system SHALL show in the header of the Private list, beside the title, the line Common:PrivateRoomsSectionNote with an encryption mark. The line SHALL speak about the files, not about everything in the section: the names of rooms and their members are not encrypted. The line SHALL NOT be shown in the header of a room or of a folder inside one.
+The system SHALL show in the header of the Private list the line Common:PrivateRoomsSectionNote with an encryption mark. The line SHALL speak about the files, not about everything in the section: the names of rooms and their members are not encrypted. The line SHALL NOT be shown in the header of a room or of a folder inside one.
 
 #### Scenario: Private list
 - **WHEN** the user opens the Private list or its Archive
-- **THEN** the header shows Common:PrivateRoomsSectionNote beside the title
+- **THEN** the header shows Common:PrivateRoomsSectionNote
 
 #### Scenario: Inside a room
 - **WHEN** the user opens a private room
 - **THEN** the header shows no such line
 
 #### Scenario: Narrow window
-- **WHEN** the header has no room for the line beside the title
+- **WHEN** the header has no room for the whole line
 - **THEN** the line is cut with an ellipsis or dropped, and the title and the header actions stay whole

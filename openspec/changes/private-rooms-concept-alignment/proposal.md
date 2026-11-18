@@ -15,8 +15,7 @@ chose that variant.
   the icon and the name of the sidebar item, the Beta badge and the
   description of the apps catalog. Its button creates a private room for a
   user who may create rooms and opens the section for everybody else.
-- **Private list.** The header of the list shows a line beside the title
-  saying that the files of the section are end-to-end encrypted and readable
+- **Private list.** The header of the list shows a line saying that the files of the section are end-to-end encrypted and readable
   by room members only.
 - **Keys management.** The page opens with a sentence on what the key, the
   passphrase and the recovery phrase are for. The heading of the key shows

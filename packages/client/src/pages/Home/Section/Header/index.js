@@ -77,7 +77,10 @@ import {
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
-import { isPrivateRoomsListRoot } from "SRC_DIR/helpers/privateRoomsSection";
+import {
+  isPrivateRoomsListRoot,
+  isPrivateRoomsSectionRoot,
+} from "SRC_DIR/helpers/privateRoomsSection";
 import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
@@ -97,6 +100,7 @@ import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
 import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
 import KeyStateIndicator from "./sub-components/KeyStateIndicator";
+import PrivateSectionNote from "./sub-components/PrivateSectionNote";
 import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 
@@ -1110,6 +1114,13 @@ const SectionHeaderContent = (props) => {
                   ) : null
                 ) : (
                   <>
+                    <PrivateSectionNote
+                      isSectionRoot={isPrivateRoomsSectionRoot(
+                        location,
+                        isRoomsFolder,
+                        isArchiveFolder,
+                      )}
+                    />
                     <KeyStateIndicator
                       className={styles.keyStateIndicator}
                       isPrivate={

@@ -1034,6 +1034,8 @@ const Shell = ({ page = "home", ...rest }) => {
           // mounted for useStores() consumers; only hydration and the chat
           // UI are switched off.
           canUseAi={canUseAi}
+          // Scopes the chat's per-conversation source records to the user.
+          userId={userId ? String(userId) : undefined}
           callbacks={aiChatCallbacks}
           entityId={chatEntityId}
           contextEntityId={chatContextEntityId}

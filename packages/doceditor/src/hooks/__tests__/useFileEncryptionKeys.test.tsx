@@ -112,14 +112,19 @@ describe("useFileEncryptionKeys", () => {
   let root: Root | null = null;
   let state: TUseFileEncryptionKeys | undefined;
 
+  let Probe: React.FC = () => null;
+
   const render = (initialConfig: IInitialConfig) => {
-    const Probe = () => {
+    Probe = () => {
       state = useFileEncryptionKeys(initialConfig, user);
       return null;
     };
     root = createRoot(document.createElement("div"));
     act(() => root?.render(<Probe />));
   };
+
+  /** Renders the hook again, so it reads the mocked context anew. */
+  const rerender = () => act(() => root?.render(<Probe />));
 
   const settled = async () => {
     for (let i = 0; i < 20 && state?.status !== "ready"; i += 1) {
@@ -203,13 +208,39 @@ describe("useFileEncryptionKeys", () => {
     expect(requireIdentity).not.toHaveBeenCalled();
   });
 
+  it("Key flow restarts within one attempt", async () => {
+    keysLoad.ready = false;
+    encryptionContext.requireIdentity = vi.fn(async () => null);
+    render(config([{ userId: USER_ID }]));
+    await settledAt("unlocking");
+
+    keysLoad.ready = true;
+    rerender();
+    await settledAt("unlock-cancelled");
+
+    encryptionContext.requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
+    rerender();
+
+    expect(await settledAt("ready")).toBe("ready");
+    expect(getFileEncryptionAccess).toHaveBeenCalledTimes(1);
+  });
+
   it("Access entries could not be fetched, then Retry after a failed request", async () => {
     vi.mocked(getFileEncryptionAccess).mockImplementationOnce(async () => {
-      throw new Error("network");
+      throw Object.assign(new Error("refused"), { response: { status: 500 } });
     });
     render(config([{ userId: USER_ID }]));
 
     expect(await settledAt("load-failed")).toBe("load-failed");
+
+    encryptionContext.requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
+    rerender();
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    expect(state?.status).toBe("load-failed");
+    expect(getFileEncryptionAccess).toHaveBeenCalledTimes(1);
 
     act(() => state?.retry());
 

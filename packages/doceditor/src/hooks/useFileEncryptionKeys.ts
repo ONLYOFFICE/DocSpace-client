@@ -92,6 +92,10 @@ export type TUseFileEncryptionKeys = TFileEncryptionState & {
   retry: () => void;
 };
 
+type TFileEncryptionAccess = Awaited<
+  ReturnType<typeof getFileEncryptionAccess>
+>;
+
 const HEADER_FETCH_BYTES = 4096;
 
 // The real filename of an encrypted file exists only inside its DSE3 header;
@@ -138,6 +142,11 @@ const useFileEncryptionKeys = (
     status: isEncrypted ? "loading" : "off",
   });
   const [attempt, setAttempt] = React.useState(0);
+  // Spec: private-rooms/editor-integration, "Editor fetches the file's access entries"
+  const accessRequest = React.useRef<{
+    key: string;
+    entries: Promise<TFileEncryptionAccess>;
+  } | null>(null);
 
   const fileId = config?.file?.id;
   const fileViewUrl = config?.file?.viewUrl;
@@ -196,9 +205,17 @@ const useFileEncryptionKeys = (
           }
         }
 
-        let info: Awaited<ReturnType<typeof getFileEncryptionAccess>>;
+        const accessKey = `${numericFileId}:${attempt}`;
+        if (accessRequest.current?.key !== accessKey) {
+          accessRequest.current = {
+            key: accessKey,
+            entries: getFileEncryptionAccess(numericFileId),
+          };
+        }
+
+        let info: TFileEncryptionAccess;
         try {
-          info = await getFileEncryptionAccess(numericFileId);
+          info = await accessRequest.current.entries;
         } catch (error) {
           console.error("[ENCRYPTION] editor access entries failed:", error);
           if (!cancelled) setState({ status: "load-failed" });

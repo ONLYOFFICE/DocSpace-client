@@ -866,3 +866,94 @@ export const aiProjectsHandlers = (
   roomLogoUploadHandler(port),
   ...aiThreadFilesHandlers(port, projects),
 ];
+
+/** The rights of a member in an Instructions or Knowledge room: they read it and may not edit it. */
+const AI_HUB_ROOM_READER_SECURITY = {
+  Read: true,
+  Create: false,
+  Rename: false,
+  EditRoom: false,
+  EditAccess: false,
+  ChangeOwner: false,
+  Delete: false,
+  Duplicate: false,
+  Pin: true,
+  Mute: true,
+  CopyLink: true,
+  Download: true,
+  UseChat: true,
+};
+
+/**
+ * An Instructions or Knowledge room as a member who only reads it sees it:
+ * no `EditRoom`, so the server refuses to link it to an agent
+ * (`AiHubService.LinkSourcesAsync`, `CanEditRoomAsync`).
+ */
+export const aiHubRoomAsReader = (room: AiHubRoomMock): AiHubRoomMock => ({
+  ...room,
+  security: { ...AI_HUB_ROOM_READER_SECURITY },
+});
+
+/**
+ * `GET files/rooms/:id` for an Instructions or Knowledge room: the room with
+ * the caller's rights, as the client reads it before linking the room to a
+ * new agent. Any other room is left to the project and rooms handlers.
+ */
+export const aiHubRoomGetByIdHandler = (
+  port: string,
+  rooms: AiHubRoomMock[] = AI_HUB_ROOMS,
+) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id`, ({ params }) => {
+    const room = rooms.find((r) => String(r.id) === String(params.id));
+    return room ? HttpResponse.json({ response: room }) : undefined;
+  });
+
+/** `FileOperationType.Delete` and `FileOperationStatus.Finished`, as the operations list answers them. */
+const DELETE_OPERATION = 2;
+const OPERATION_FINISHED = 2;
+
+/**
+ * `DELETE files/rooms/:id` for a project and the `GET files/fileops` that
+ * follows it. The server queues the delete and answers the operation not
+ * finished yet (`VirtualRoomsController.DeleteRoom`); the next read of the
+ * operations list finds it finished, and the project leaves `projects`
+ * then. A caller without `Delete` in the project's `security` gets 403, an
+ * unknown project 404. Any other room, and any other operation, is left to
+ * the other handlers.
+ */
+export const aiProjectDeleteHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const queued: Record<string, number> = {};
+  const operation = (id: string, finished: boolean) => ({
+    id,
+    Operation: DELETE_OPERATION,
+    progress: finished ? 100 : 0,
+    error: "",
+    processed: finished ? "1" : "0",
+    finished,
+    ...(finished ? { status: OPERATION_FINISHED } : {}),
+  });
+  return [
+    http.delete(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id`, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return undefined;
+      if (!project.security.Delete)
+        return HttpResponse.json(
+          { error: { message: "You don't have enough permission to delete the room." } },
+          { status: 403 },
+        );
+      const id = `mock-delete-room-${project.id}`;
+      queued[id] = project.id;
+      return HttpResponse.json({ response: operation(id, false) });
+    }),
+    http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/fileops`, ({ request }) => {
+      const id = new URL(request.url).searchParams.get("id");
+      if (!id || queued[id] === undefined) return undefined;
+      const index = projects.findIndex((p) => p.id === queued[id]);
+      if (index >= 0) projects.splice(index, 1);
+      return HttpResponse.json({ response: [operation(id, true)] });
+    }),
+  ];
+};

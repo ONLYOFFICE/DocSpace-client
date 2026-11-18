@@ -216,3 +216,8 @@ export const aiHandlers = (port: string) => [
   aiTemplatesHandler(port),
   aiTemplateInstallHandler(port),
 ];
+export {
+  aiHubRoomAsReader,
+  aiHubRoomGetByIdHandler,
+  aiProjectDeleteHandlers,
+} from "./projects";

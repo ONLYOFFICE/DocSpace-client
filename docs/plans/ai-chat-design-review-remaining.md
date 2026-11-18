@@ -39,7 +39,7 @@ linters and unit tests only.
   field. Keeping them on the server needs a thread metadata field: C# thread
   storage first, then ASC.AI.Chat `app/storage/threadsStorage.ts`.
   Review: lines 281-285, 338-339
-- [ ] **A member who joined through a group is missing from the agent menu.**
+- [x] **A member who joined through a group is missing from the agent menu.** *Superseded: server d2e3fe02c9c refuses groups as members of an agent.*
   Such a member reads `inRoom: false` (tasks.md group 11, a server item). Every
   agent of a direct member is now offered: the list is read page by page,
   not just the first 100. Review: lines 585-589

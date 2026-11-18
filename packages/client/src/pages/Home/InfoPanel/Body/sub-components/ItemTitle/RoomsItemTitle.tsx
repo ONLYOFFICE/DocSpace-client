@@ -60,6 +60,10 @@ import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import SkillIcon, { getAiRoomIconKind } from "SRC_DIR/components/SkillIcon";
 import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 import {
+  getAgentRights,
+  type TAgentRightsSource,
+} from "SRC_DIR/helpers/agentRights";
+import {
   isSkillFile,
   type TSkillFolder,
 } from "@docspace/shared/utils/skillFile";
@@ -133,8 +137,10 @@ const RoomsItemHeader = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon;
 
   const security = selection.security;
-  const canInviteUserInRoomAbility =
-    security && "EditAccess" in security && security?.EditAccess;
+  // An agent invites through its rights helper, as its menus do.
+  const canInviteUserInRoomAbility = isAgent(selection)
+    ? getAgentRights(selection as TAgentRightsSource).share
+    : security && "EditAccess" in security && security?.EditAccess;
   const isTemplate =
     ("isTemplate" in selection && selection.isTemplate) ||
     selection?.rootFolderType === FolderType.RoomTemplates;

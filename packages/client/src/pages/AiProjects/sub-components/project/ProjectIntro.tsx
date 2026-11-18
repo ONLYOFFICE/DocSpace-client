@@ -46,7 +46,9 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { ProjectLogo } from "../list/ProjectLogo";
 import RoomItem from "./RoomItem";
-import { hasPortalChatModel, isAgentModelUnavailable, isManager } from "../../utils";
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
+
+import { hasPortalChatModel, isAgentModelUnavailable } from "../../utils";
 import styles from "./ProjectIntro.module.scss";
 
 /** Rooms of a kind shown before the rest fold into a "+N" chip. */
@@ -118,7 +120,7 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
     s.initialized ? hasPortalChatModel(s.chatProfile, s.defaultProfile) : null,
   );
   const modelUnavailable = isAgentModelUnavailable(project, portalChatModel);
-  const canEdit = isManager(project);
+  const canEdit = getAgentRights(project).edit;
   // The model the composer shows: the one picked for this chat, else the
   // chat default, else the portal default (ai-chat's current chat profile).
   const currentModel = useProfilesStore((s) => (s.sessionChatProfile ?? s.chatProfile ?? s.defaultProfile)?.name);

@@ -58,6 +58,8 @@ import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
 import EmptyAccessLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
 
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
+
 import { readProjectFolder, writeProjectFolder } from "./folderContextMemory";
 import styles from "./AiProjectView.module.scss";
 
@@ -284,7 +286,7 @@ const AiProjectView = ({
   // change is saved to the project; when the save fails, the chat goes back
   // to the rooms the project has.
   const activeProject = store.activeProject;
-  const canEditSources = !!activeProject && activeProject.id === roomId && activeProject.aiProject.canEditSettings;
+  const canEditSources = !!activeProject && activeProject.id === roomId && getAgentRights(activeProject).edit;
   React.useEffect(() => {
     aiChatStore.setSourcesManager({
       onManage: canEditSources ? () => store.activeProject && store.openEditDialog(store.activeProject) : null,

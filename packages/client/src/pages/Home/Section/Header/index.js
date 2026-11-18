@@ -105,6 +105,7 @@ import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
 import KeyStateIndicator from "./sub-components/KeyStateIndicator";
 import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -935,10 +936,10 @@ const SectionHeaderContent = (props) => {
 
   // An agent's page has "Share agent" in that place: it invites, for those
   // who may change the agent's members.
-  const showShareAgent =
-    isAiProjectRoomRoot &&
-    !!selectedFolder?.inRoom &&
-    !!selectedFolder?.security?.EditAccess;
+  const agentRights = isAiProjectRoomRoot
+    ? getAgentRights(selectedFolder)
+    : null;
+  const showShareAgent = !!agentRights?.share;
 
   const navigationButtonLabel = showShareAgent
     ? t("Common:ShareAgent")
@@ -954,7 +955,7 @@ const SectionHeaderContent = (props) => {
   let agentTitle;
   if (isAiProjectRoomRoot) {
     agentTitle =
-      selectedFolder?.inRoom && aiChatStore?.hasAgentPicker ? (
+      agentRights?.chat && aiChatStore?.hasAgentPicker ? (
         <AiChatAgentPicker title={currentTitle} />
       ) : (
         <HeadingWithTooltip
@@ -1151,7 +1152,7 @@ const SectionHeaderContent = (props) => {
                 // An agent's page reads name, Chat history, New chat, "⋮",
                 // Share agent: the agent's chat toolbar goes before the room
                 // menu. An agent the caller is not a member of has no chat.
-                isAiProjectRoomRoot && selectedFolder?.inRoom ? (
+                agentRights?.chat ? (
                   <ChatToolbar keepSessionProfile />
                 ) : undefined
               }

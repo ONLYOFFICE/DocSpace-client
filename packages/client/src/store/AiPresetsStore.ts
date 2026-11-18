@@ -53,6 +53,8 @@ import {
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { toSkillCommand } from "@docspace/shared/utils/skillFile";
 
+import { getAgentRights, type TAgentRights } from "SRC_DIR/helpers/agentRights";
+
 /**
  * An AI project as the chat takes it: the model, its Instructions rooms as
  * the skills (context) rooms and its Knowledge rooms as the knowledge bases.
@@ -139,6 +141,14 @@ const toChatRooms = (rooms: TAiProjectSource[]): AiChatPresetRoom[] =>
     .filter((room) => room.available && room.title)
     .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
 
+// The chat panel's "Agent actions" ask the same rights helper as every
+// other entry point of the agent.
+const pickPresetRights = ({ edit, share, delete: canDelete }: TAgentRights): TAiPresetRights => ({
+  edit,
+  share,
+  delete: canDelete,
+});
+
 export const toAiPreset = (project: TAiProject): TAiPreset => {
   const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
   return {
@@ -150,11 +160,7 @@ export const toAiPreset = (project: TAiProject): TAiPreset => {
     profileName: profile?.name ?? null,
     contextRooms: toChatRooms(instructionsRooms),
     knowledgeRooms: toChatRooms(knowledgeRooms),
-    rights: {
-      edit: !!project.aiProject.canEditSettings,
-      share: !!project.security?.EditAccess,
-      delete: !!project.security?.Delete,
-    },
+    rights: pickPresetRights(getAgentRights(project)),
     suggestions: project.aiProject.suggestions ?? [],
   };
 };

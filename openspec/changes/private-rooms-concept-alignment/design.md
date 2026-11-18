@@ -53,9 +53,11 @@ What the code has today:
    does: the section has no onboarding tour (main spec, "No onboarding
    tour in the section").
 2. **Creation starts in the section, not on the dashboard.** The button
-   navigates to `/private/filter` with a marker in the navigation state,
-   and the list, once shown, starts its own create entry point and clears
-   the marker. The dashboard never dispatches the create-room event for the
+   leaves a request in the memory of the page and navigates to
+   `/private/filter`, and the list, once shown, takes the request and
+   starts its own create entry point. The request is kept outside the
+   navigation state, which the list rewrites while it settles its filter,
+   and lives for a few seconds only. The dashboard never dispatches the create-room event for the
    Private type: the main spec keeps that type out of every chooser opened
    outside the section, and the section already handles a user without a
    key. Alternative considered: dispatch the event from the dashboard with
@@ -97,9 +99,10 @@ What the code has today:
 - [The line of the list is a third place that states the encryption, after
   the empty state and the room panel] → it is the only one visible on a
   list that holds rooms.
-- [The marker in the navigation state survives a reload of the list] → the
-  list clears it when it has used it, and ignores it for a user who cannot
-  create rooms.
+- [The request outlives a navigation that never reaches the list] → it
+  expires after a few seconds, is taken once, and is dropped for a user who
+  cannot create rooms. A reload of the page loses it, which is the wanted
+  result.
 
 ## Open Questions
 

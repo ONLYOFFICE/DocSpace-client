@@ -40,6 +40,8 @@ const navigate = vi.fn();
 
 vi.mock("react-router", () => ({ useNavigate: () => navigate }));
 
+import { takePrivateRoomCreateRequest } from "SRC_DIR/helpers/privateRoomCreateRequest";
+
 import { useModuleItems, type UseModuleItemsProps } from "../useModuleItems";
 
 const baseProps: UseModuleItemsProps = {
@@ -62,6 +64,27 @@ const privateCard = (props: Partial<UseModuleItemsProps> = {}) =>
 describe("useModuleItems: the card of private rooms", () => {
   beforeEach(() => {
     navigate.mockReset();
+    takePrivateRoomCreateRequest();
+  });
+
+  it("Room admin: the button opens the Private list and leaves the request to create", () => {
+    const card = privateCard({ canCreateRooms: true });
+
+    expect(card?.buttonLabel).toBe("Common:CreatePrivateRoom");
+
+    card?.onAction();
+    expect(navigate).toHaveBeenCalledWith("/private/filter");
+    expect(takePrivateRoomCreateRequest()).toBe(true);
+  });
+
+  it("User who cannot create rooms: the button reads Open and leaves no request", () => {
+    const card = privateCard({ canCreateRooms: false });
+
+    expect(card?.buttonLabel).toBe("Common:Open");
+
+    card?.onAction();
+    expect(navigate).toHaveBeenCalledWith("/private/filter");
+    expect(takePrivateRoomCreateRequest()).toBe(false);
   });
 
   it("Section available: the card follows Forms and precedes AI Workspace", () => {

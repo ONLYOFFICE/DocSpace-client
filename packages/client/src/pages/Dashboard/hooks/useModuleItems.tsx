@@ -44,6 +44,8 @@ import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
 import CatalogPrivateIcon from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg";
 
+import { requestPrivateRoomCreate } from "SRC_DIR/helpers/privateRoomCreateRequest";
+
 import type { ModuleItem } from "../sub-components/ModuleCard";
 import { DASHBOARD_ANALYTICS_CONTEXT } from "../utils";
 
@@ -246,10 +248,19 @@ export const useModuleItems = ({
         title: t("Common:Private"),
         description: t("Common:DashboardE2eRoomsDescription"),
         href: PRIVATE_ROOMS_PATH,
-        ...withInstallState(privateRooms === "on", {
-          buttonLabel: t("Common:Open"),
-          onAction: () => navigate(PRIVATE_ROOMS_PATH),
-        }),
+        // Spec: private-rooms/sidebar-section, "Dashboard card of private rooms creates or opens"
+        ...withInstallState(
+          privateRooms === "on",
+          createOrOpen(
+            canCreateRooms,
+            PRIVATE_ROOMS_PATH,
+            t("Common:CreatePrivateRoom"),
+            () => {
+              requestPrivateRoomCreate();
+              navigate(PRIVATE_ROOMS_PATH);
+            },
+          ),
+        ),
         noTour: true,
       });
     }

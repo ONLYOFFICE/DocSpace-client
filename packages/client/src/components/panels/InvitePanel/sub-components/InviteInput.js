@@ -63,6 +63,7 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { isInviteeOffered } from "@docspace/shared/utils/inviteRoles";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
@@ -291,10 +292,9 @@ const InviteInput = ({
 
       // A project takes no guests, neither new nor existing ones, and no
       // groups, which join as Member only.
-      const items =
-        roomTypeRef.current === RoomsType.AiProjectRoom
-          ? users.items.filter((u) => !u.isVisitor && !u.isGroup)
-          : users.items;
+      const items = users.items.filter((u) =>
+        isInviteeOffered(roomTypeRef.current, u),
+      );
 
       setUsersList(
         roomId === -1 ? items.map((u) => ({ ...u, shared: true })) : items,

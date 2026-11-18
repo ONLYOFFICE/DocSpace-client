@@ -37,7 +37,10 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import type { TAiTemplate } from "@docspace/shared/api/ai/templates";
+import type {
+  TAiInstalledTemplate,
+  TAiTemplate,
+} from "@docspace/shared/api/ai/templates";
 
 import { useStore } from "SRC_DIR/store/useStore";
 import {
@@ -54,6 +57,26 @@ export const getInstallLabel = (
   template.kind === "agent" ? t("Common:AddToMyAgents") : t("Common:Install");
 
 /**
+ * The steps an installation skipped (`warnings` of the install answer), each
+ * told in a sentence naming the new room: the agent's instructions, which the
+ * portal has no route to store yet, and its model, which the portal could not
+ * give it. Warnings the client does not know are left out.
+ */
+export const getInstallWarnings = (
+  t: (key: string, options?: Record<string, unknown>) => string,
+  installed: Pick<TAiInstalledTemplate, "title" | "warnings">,
+) => {
+  const name = installed.title;
+  const warnings = installed.warnings ?? [];
+  const messages: string[] = [];
+  if (warnings.includes("instructionsNotSaved"))
+    messages.push(t("Common:AiTemplateInstructionsNotSaved", { name }));
+  if (warnings.includes("modelNotSaved"))
+    messages.push(t("Common:AiTemplateModelNotSaved", { name }));
+  return messages;
+};
+
+/**
  * Who may install a template: whoever may create an agent (the portal owner,
  * DocSpace admins and room admins), as installing one creates an agent.
  */
@@ -63,8 +86,8 @@ export const useCanInstallAiTemplates = () =>
 /**
  * Installs a template once the user confirmed it (AiTemplateInstallDialog,
  * opened by the card's Install, its menu and the Info panel's "Add to my
- * agents"): the user is told, warned when the agent came without a model,
- * and returned to the list, where the new room is; a refusal is shown and the
+ * agents"): the user is told, or warned of what the installation skipped
+ * (the agent's instructions or model), and returned to the list, where the new room is; a refusal is shown and the
  * catalog stays. Nothing is installed while another installation runs, so a
  * second click does not install the template again.
  */
@@ -80,15 +103,13 @@ export const useInstallAiTemplate = () => {
     if (aiTemplatesStore.isInstalling) return;
     try {
       const installed = await aiTemplatesStore.install(template);
-      toastr.success(
-        t("Common:AiTemplateInstalled", { name: installed.title }),
-      );
-      // The agent is installed without the template's model: it runs on the
-      // workspace's own until one is chosen. (Skipped instructions are not
-      // shown: the agent form does not edit them.)
-      if (installed.warnings?.includes("modelNotSaved"))
-        toastr.warning(
-          t("Common:AiTemplateModelNotSaved", { name: installed.title }),
+      // An installation that skipped a step is reported by what it
+      // skipped instead of the plain confirmation.
+      const warnings = getInstallWarnings(t, installed);
+      if (warnings.length) toastr.warning(warnings.join(" "));
+      else
+        toastr.success(
+          t("Common:AiTemplateInstalled", { name: installed.title }),
         );
       // A new agent shows in the sidebar and the chat's agents menu.
       if (installed.kind === "agent") void aiPresetsStore.fetchPresets();

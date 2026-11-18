@@ -240,6 +240,7 @@
   "AiTemplateInstallKnowledgeBaseDescription": "The template <1>\"{{name}}\"</1> creates a new knowledge base with its files.",
   "AiTemplateInstallSkillSetDescription": "The template <1>\"{{name}}\"</1> creates a new skill set with its skills.",
   "AiTemplateInstallTitle": "Install this template?",
+  "AiTemplateInstructionsNotSaved": "{{name}} has been installed without the template's instructions, as they could not be saved.",
   "AiTemplateModelNotSaved": "The template's model could not be set, so {{name}} uses the workspace's default model. You can choose another model in the agent's settings.",
   "AITextModels": "Text models",
   "AIToolsEnabled": "AI tools service successfully enabled.",

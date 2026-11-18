@@ -1,6 +1,6 @@
 import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const api = vi.hoisted(() => ({
   getAiTemplates: vi.fn(),
@@ -190,27 +190,47 @@ describe("AiTemplatesCatalog", () => {
     expect(presetsStore.fetchPresets).not.toHaveBeenCalled();
   });
 
-  it("warns after the success when the template's model could not be set, and only then", async () => {
+  const installWith = async (warnings?: string[]) => {
     api.installAiTemplate.mockResolvedValue({
       kind: "agent",
       title: "Contract Reviewer",
-      warnings: ["instructionsNotSaved", "modelNotSaved"],
+      warnings,
     });
-    const { unmount } = render(<AiTemplatesCatalog />);
+    const view = render(<AiTemplatesCatalog />);
     await cards();
     fireEvent.click(screen.getByTestId("ai-template-install"));
     fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
-    expect(toastr.success).toHaveBeenCalledTimes(1);
-    expect(toastr.warning).toHaveBeenCalledTimes(1);
-    expect(toastr.warning).toHaveBeenCalledWith("Common:AiTemplateModelNotSaved");
-    expect(toastr.success.mock.invocationCallOrder[0]).toBeLessThan(
-      toastr.warning.mock.invocationCallOrder[0],
-    );
-    unmount();
-
-    toastr.warning.mockReset();
+    view.unmount();
     navigate.mockReset();
+  };
+
+  it("shows what the installation skipped instead of the confirmation", async () => {
+    await installWith(["instructionsNotSaved", "modelNotSaved"]);
+    expect(toastr.success).not.toHaveBeenCalled();
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+    expect(toastr.warning).toHaveBeenCalledWith(
+      "Common:AiTemplateInstructionsNotSaved Common:AiTemplateModelNotSaved",
+    );
+  });
+
+  it.each([
+    ["instructionsNotSaved", "Common:AiTemplateInstructionsNotSaved"],
+    ["modelNotSaved", "Common:AiTemplateModelNotSaved"],
+  ])("warns of %s alone", async (warning, key) => {
+    await installWith([warning]);
+    expect(toastr.success).not.toHaveBeenCalled();
+    expect(toastr.warning).toHaveBeenCalledWith(key);
+  });
+
+  it("confirms an installation with no warnings or only unknown ones", async () => {
+    await installWith([]);
+    await installWith(["somethingElse"]);
+    expect(toastr.warning).not.toHaveBeenCalled();
+    expect(toastr.success).toHaveBeenCalledTimes(2);
+  });
+
+  it("warns after an install from the Info panel's Add to my agents too", async () => {
     api.installAiTemplate.mockResolvedValue({
       kind: "agent",
       title: "Contract Reviewer",
@@ -218,10 +238,13 @@ describe("AiTemplatesCatalog", () => {
     });
     render(<AiTemplatesCatalog />);
     await cards();
-    fireEvent.click(screen.getByTestId("ai-template-install"));
+    // The Info panel's button asks the store, as the card does.
+    act(() => templatesStore().requestInstall(catalog.agents[0] as never));
     fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
     await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
-    expect(toastr.warning).not.toHaveBeenCalled();
+    expect(toastr.warning).toHaveBeenCalledWith(
+      "Common:AiTemplateInstructionsNotSaved",
+    );
   });
 
   it("stays on the catalog and reports a refused install", async () => {

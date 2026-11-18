@@ -78,10 +78,27 @@ const SkillSetsRowDataComponent = (props) => {
     t,
   } = props;
 
+  // The header stores the columns only once it is drawn, after the first
+  // rows; until then the quick buttons go in the last column switched on, or
+  // a list opened for the first time would never show them.
   const storageColumns = localStorage.getItem(tableStorageName);
   const lastColumn = useMemo(
-    () => getLastColumn(tableStorageName),
-    [tableStorageName, storageColumns],
+    () =>
+      getLastColumn(tableStorageName) ??
+      (activitySkillSetsColumnIsEnabled
+        ? "ActivitySkillSets"
+        : ownerSkillSetsColumnIsEnabled
+          ? "OwnerSkillSets"
+          : skillsSkillSetsColumnIsEnabled
+            ? "SkillsSkillSets"
+            : "Name"),
+    [
+      tableStorageName,
+      storageColumns,
+      skillsSkillSetsColumnIsEnabled,
+      ownerSkillSetsColumnIsEnabled,
+      activitySkillSetsColumnIsEnabled,
+    ],
   );
 
   const quickButtonsComponentNode = (

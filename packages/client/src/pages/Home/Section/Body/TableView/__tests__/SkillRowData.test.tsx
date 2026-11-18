@@ -71,6 +71,13 @@ describe("SkillSetsRowData", () => {
     expect(screen.queryByTestId("skill-sets-cell-activity-0")).toBeNull();
   });
 
+  it("puts the quick buttons in the last column switched on before any are stored", () => {
+    renderSet({ activitySkillSetsColumnIsEnabled: false });
+    const owner = screen.getByTestId("skill-sets-cell-owner-0");
+    expect(within(owner).getByRole("button", { name: "Use in chat" })).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: "Use in chat" })).toHaveLength(1);
+  });
+
   it("puts the quick buttons in the last column the user keeps", () => {
     setStoredColumns(["Name", "SkillsSkillSets", "false", "false"]);
     renderSet();

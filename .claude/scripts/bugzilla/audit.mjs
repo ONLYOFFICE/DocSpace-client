@@ -49,12 +49,17 @@ import path from "node:path";
 import { createInterface } from "node:readline/promises";
 import { fileURLToPath } from "node:url";
 import {
+  BACKEND_TEAM,
+  FRONT_TEAM,
   HOST,
+  TEST_PORTAL,
   bugLink,
   bzGet,
   bzPut,
   decodeEntities,
   fmtDate,
+  isBackend,
+  isFront,
   parseArgs,
   requireAuth,
 } from "./lib.mjs";
@@ -115,6 +120,64 @@ const WATCHED_FIELDS = ["status", "resolution", "priority", "whiteboard", "assig
 const CLOSING_RE = /^\s*(Закрываю|Закрыто|Closing|Closed)(?!\p{L})/iu;
 const CYRILLIC = /[А-Яа-яЁё]/;
 const DAY_MS = 86_400_000;
+// A remote branch that counts as the main line for an e2e commit a close links to.
+const MAIN_LINE_RE = /^origin\/(master|develop|release\/.+|hotfix\/.+)$/;
+
+// Who may be assigned a bug, by the side its fix belongs to.
+const TEAMS = {
+  client: { name: "frontTeam", members: FRONT_TEAM, has: isFront },
+  server: { name: "backendTeam", members: BACKEND_TEAM, has: isBackend },
+};
+
+const git = (args, cwd = ROOT) =>
+  execFileSync("git", args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+
+// The e2e commit a client close rests on: it must exist here, carry the spec,
+// and say "Bug <ID>" (the server-side git action then comments on the bug with
+// it) without "Fix Bug <ID>", which is the fix convention, not a test.
+function e2eCommitErrors(id, e2e) {
+  if (!e2e?.spec || !e2e?.commit) return ["e2e needs spec and commit"];
+  let full;
+  let subject;
+  try {
+    full = git(["rev-parse", "--verify", `${e2e.commit}^{commit}`]);
+    subject = git(["log", "-1", "--format=%s", full]);
+  } catch {
+    return [`e2e commit ${e2e.commit} not found in this repo`];
+  }
+  const errors = [];
+  try {
+    git(["cat-file", "-e", `${full}:${e2e.spec}`]);
+  } catch {
+    errors.push(`e2e spec ${e2e.spec} is not in commit ${e2e.commit}`);
+  }
+  if (!new RegExp(`\\bBug\\s+${id}\\b`, "i").test(subject)) errors.push(`e2e commit subject must mention "Bug ${id}"`);
+  if (/^\s*fix\s+bug\b/i.test(subject)) errors.push('e2e commit subject must not start with "Fix Bug" (that is the fix convention)');
+  return errors;
+}
+
+function e2eFullHash(commit) {
+  return git(["rev-parse", "--verify", `${commit}^{commit}`]);
+}
+
+function onMainLine(hash) {
+  try {
+    return git(["branch", "-r", "--contains", hash])
+      .split("\n")
+      .map((s) => s.trim())
+      .some((b) => MAIN_LINE_RE.test(b));
+  } catch {
+    return false;
+  }
+}
+
+// git@host:Org/Repo.git or https://host/Org/Repo(.git) -> https://host/Org/Repo/commit/<hash>
+function commitUrl(hash) {
+  const remote = git(["remote", "get-url", "origin"]);
+  const m = remote.match(/^https?:\/\/(?:[^@/]+@)?([^/]+)\/(.+?)(?:\.git)?$/) || remote.match(/^(?:[\w.-]+@)?([\w.-]+):(.+?)(?:\.git)?$/);
+  if (!m) throw new Error(`cannot build a commit link from remote ${remote}`);
+  return `https://${m[1]}/${m[2]}/commit/${hash}`;
+}
 
 const list = (v) =>
   v === undefined || v === true
@@ -254,7 +317,7 @@ function commitIndex(repos) {
     try {
       out = execFileSync(
         "git",
-        ["log", "--all", "-i", "-E", "--grep=bugs? ?#? ?[0-9]{4,6}", "--date=short", "--format=%h%x09%ad%x09%s"],
+        ["log", "--all", "-i", "-E", "--grep=bugs? ?#? ?[0-9]{4,6}", "--date=short", "--format=%h%x09%ad%x09%ae%x09%s"],
         { cwd: repo, encoding: "utf8", maxBuffer: 512 * 1024 * 1024 },
       );
     } catch (e) {
@@ -264,12 +327,12 @@ function commitIndex(repos) {
     const name = path.relative(path.resolve(ROOT, "../.."), repo).replace(/\\/g, "/");
     for (const line of out.split("\n")) {
       if (!line) continue;
-      const [hash, date, subject = ""] = line.split("\t");
+      const [hash, date, author = "", subject = ""] = line.split("\t");
       const revert = isRevert(subject);
       const ids = new Set([...subject.matchAll(BUG_REF)].flatMap((m) => m[1].match(/\d{4,6}/g).map(Number)));
       for (const id of ids) {
         if (!index.has(id)) index.set(id, []);
-        index.get(id).push({ repo: name, hash, date, subject, revert });
+        index.get(id).push({ repo: name, hash, date, author, front: isFront(author), backend: isBackend(author), subject, revert });
       }
     }
   }
@@ -350,6 +413,19 @@ async function withDetail(key, bug) {
       text: text(c).slice(0, 2000),
     })),
     seenComments: comments.length,
+    // Who on each team already touched the bug: a hint for side and for whom
+    // to assign, never a verdict by itself.
+    front: touchedBy(isFront, bug, comments),
+    backend: touchedBy(isBackend, bug, comments),
+  };
+}
+
+function touchedBy(inTeam, bug, comments) {
+  return {
+    assignee: inTeam(bug.assigned_to),
+    creator: inTeam(bug.creator),
+    commenters: [...new Set(comments.map((c) => c.creator).filter(inTeam))],
+    commitAuthors: [...new Set(bug.commits.map((c) => c.author).filter(inTeam))],
   };
 }
 
@@ -423,6 +499,17 @@ async function cmdExport(args, key) {
   }
   const dir = newRunDir(args);
   const reviewed = reviewedIds(args, dir);
+  // --team front|backend: only the bugs assigned to someone on that team.
+  const TEAM_FLAG = { front: TEAMS.client, backend: TEAMS.server };
+  const team = args.team === undefined ? null : TEAM_FLAG[args.team];
+  if (args.team !== undefined && !team) {
+    console.error(`--team must be one of ${Object.keys(TEAM_FLAG).join("|")}`);
+    process.exit(2);
+  }
+  if (team && !team.members.size) {
+    console.error(`--team ${args.team} needs "${team.name}" in config.local.json`);
+    process.exit(2);
+  }
   const sample = positiveInt(args, "sample");
   const batch = positiveInt(args, "batch");
   const product = args.product || DEFAULT_PRODUCT;
@@ -434,12 +521,15 @@ async function cmdExport(args, key) {
     ),
   );
   const repos = [...COMMIT_REPOS, ...list(args.repos).map((r) => path.resolve(r))];
+  for (const t of Object.values(TEAMS)) {
+    if (!t.members.size) console.error(`warning: no "${t.name}" in config.local.json - its signals stay empty and assign_to to it cannot be used`);
+  }
 
   const now = Date.now();
   const commits = commitIndex(repos);
   const raw = await searchOpen(key, product, components);
   if (!args.ids && !args["include-reviewed"]) for (const id of await auditedIds(key, product)) reviewed.add(id);
-  const bugs = raw.map((b) => ({
+  const bugs = (team ? raw.filter((b) => team.has(b.assigned_to)) : raw).map((b) => ({
     ...b,
     summary: decodeEntities(b.summary),
     whiteboard: decodeEntities(b.whiteboard || ""),
@@ -610,6 +700,25 @@ function validateDecision(d, bug, fields, lang) {
     errors.push(`resolution must be one of ${resolutions.join("|")}`);
   }
   if (d.verdict === "quickfix" && (!d.estimate || !d.area)) errors.push("quickfix needs estimate and area");
+  // "Fixed" is closed only once the scenario was replayed and no longer
+  // reproduces: an e2e on mocks (client), or, where mocks cannot show it, the
+  // test portal. Neither possible -> below high, comment only.
+  if (closes && d.verdict === "fixed" && !d.e2e && !d.portal) {
+    errors.push("closing as fixed needs a replay: e2e {spec, commit} or portal {version, steps, result}; without one lower confidence to medium");
+  }
+  if (d.e2e && bug) errors.push(...e2eCommitErrors(bug.id, d.e2e));
+  if (d.portal) {
+    if (!TEST_PORTAL.url) errors.push('portal check needs "testPortal" in config.local.json');
+    for (const f of ["version", "steps", "result"]) if (!d.portal[f]) errors.push(`portal needs ${f}`);
+  }
+  if (d.assign_to !== undefined) {
+    const t = TEAMS[sideOf(d, bug)];
+    if (!t) errors.push(`assign_to is only for side ${Object.keys(TEAMS).join("|")}`);
+    else if (!t.members.size) errors.push(`assign_to needs "${t.name}" in config.local.json`);
+    else if (!t.has(d.assign_to)) errors.push(`assign_to ${d.assign_to} is not in ${t.name}`);
+    if (d.confidence !== "high") errors.push("assign_to needs confidence high");
+    if (closes) errors.push("assign_to makes no sense on a bug being closed");
+  }
   if (bug?.kind === "suggestion" && d.verdict === "valid") {
     if (!COMPLEXITIES.includes(d.complexity)) errors.push(`complexity must be one of ${COMPLEXITIES.join("|")}`);
     if (!VALUES.includes(d.value)) errors.push(`value must be one of ${VALUES.join("|")}`);
@@ -622,8 +731,18 @@ function commentCore(text) {
   return text.replace(FOOTER_RE, "").trim();
 }
 
-function withFooter(comment, model) {
-  return `${commentCore(comment)}\n\n— ${COMMENT_FOOTER} (${model})`;
+const PORTAL_LINE = {
+  ru: (v) => `Не воспроизводится на тестовом портале, версия ${v}.`,
+  en: (v) => `Does not reproduce on the test portal, version ${v}.`,
+};
+
+function withFooter(comment, model, { e2eLink, portalVersion, lang } = {}) {
+  const extra = [
+    portalVersion ? PORTAL_LINE[lang](portalVersion) : "",
+    e2eLink ? `E2E: ${e2eLink}` : "",
+  ].filter(Boolean);
+  const tail = extra.length ? `\n\n${extra.join("\n")}` : "";
+  return `${commentCore(comment)}${tail}\n\n— ${COMMENT_FOOTER} (${model})`;
 }
 
 function quickfixWhiteboard(current, d) {
@@ -690,14 +809,26 @@ async function cmdPlan(args, key) {
       invalid.push({ id: d.id, errors });
       continue;
     }
+    const e2eCommit = d.e2e ? e2eFullHash(d.e2e.commit) : undefined;
     const base = {
       id: bug.id,
       summary: bug.summary,
       verdict: d.verdict,
       watch: Object.fromEntries(WATCHED_FIELDS.map((f) => [f, bug[f] ?? ""])),
       seenComments: bug.seenComments,
-      comment: withFooter(commentOf(d), model),
+      comment: withFooter(commentOf(d), model, {
+        e2eLink: e2eCommit && commitUrl(e2eCommit),
+        portalVersion: d.portal?.version,
+        lang,
+      }),
+      ...(e2eCommit ? { e2eCommit, e2eSpec: d.e2e.spec } : {}),
+      ...(d.portal ? { portal: d.portal } : {}),
     };
+    // Reassigning within the side's team rides on any action that keeps the bug open.
+    const assign =
+      d.assign_to && d.assign_to.toLowerCase() !== String(bug.assigned_to).toLowerCase()
+        ? { set: { assigned_to: d.assign_to }, from: { assigned_to: bug.assigned_to } }
+        : null;
     const closing = d.verdict === "fixed" || d.verdict === "obsolete";
     const confident = d.confidence === "high";
     if (((closing || d.verdict === "quickfix") && !confident) || d.verdict === "needs-info") {
@@ -720,9 +851,11 @@ async function cmdPlan(args, key) {
       actions.push({
         ...base,
         type: "quickfix",
-        set,
-        from: { priority: bug.priority, whiteboard: bug.whiteboard },
+        set: { ...set, ...assign?.set },
+        from: { priority: bug.priority, whiteboard: bug.whiteboard, ...assign?.from },
       });
+    } else if (assign) {
+      actions.push({ ...base, type: "reassign", ...assign });
     } else {
       actions.push({ ...base, type: "comment", set: {}, from: {} });
     }
@@ -743,11 +876,18 @@ async function cmdPlan(args, key) {
   for (const a of actions) {
     console.log(`#${a.id}  ${a.summary}\n  ${bugLink(a.id)}`);
     for (const [k, v] of Object.entries(a.set)) console.log(`  ${k}: "${a.from[k] ?? ""}" -> "${v}"`);
+    if (a.e2eCommit) {
+      console.log(`  e2e: ${a.e2eSpec} @ ${a.e2eCommit.slice(0, 10)}${onMainLine(a.e2eCommit) ? "" : "  (not on a remote main line yet: push before apply)"}`);
+    }
+    if (a.portal) console.log(`  portal ${a.portal.version}: ${a.portal.steps} -> ${a.portal.result}`);
     if (a.comment) console.log(`  comment:\n    ${a.comment.replace(/\n/g, "\n    ")}`);
     console.log();
   }
   const byType = (t) => actions.filter((a) => a.type === t).length;
-  console.log(`actions: ${actions.length} (close ${byType("close")}, quickfix ${byType("quickfix")}, comment only ${byType("comment")})`);
+  console.log(
+    `actions: ${actions.length} (close ${byType("close")}, quickfix ${byType("quickfix")}, ` +
+      `reassign ${byType("reassign")}, comment only ${byType("comment")})`,
+  );
   console.log(`needs a human: ${needsHuman.length}`);
   if (invalid.length) {
     console.log(`\ninvalid decisions: ${invalid.length}`);
@@ -758,7 +898,14 @@ async function cmdPlan(args, key) {
 /* ------------------------------------------------------------------ apply */
 
 function fieldsApplied(a, live) {
-  return Object.entries(a.set).every(([k, v]) => decodeEntities(live[k] ?? "") === String(v));
+  const norm = (k, v) => (k === "assigned_to" ? String(v).toLowerCase() : String(v));
+  return Object.entries(a.set).every(([k, v]) => norm(k, decodeEntities(live[k] ?? "")) === norm(k, v));
+}
+
+// The git action comments on the bug when the "Bug <ID>" e2e commit is pushed:
+// that comment is part of the plan, not news that overturns it.
+function isOwnE2eNote(a, c) {
+  return Boolean(a.e2eCommit) && decodeEntities(c.text).includes(a.e2eCommit.slice(0, 7));
 }
 
 // Only what can overturn the decision is a conflict: a watched field changed
@@ -768,7 +915,9 @@ function fieldsApplied(a, live) {
 function conflictOf(a, live, comments) {
   const changed = WATCHED_FIELDS.filter((f) => decodeEntities(live[f] ?? "") !== decodeEntities(a.watch[f] ?? ""));
   if (changed.length) return `${changed.join(", ")} changed after export`;
-  const foreign = comments.slice(a.seenComments).find((c) => !FOOTER_RE.test(decodeEntities(c.text)));
+  const foreign = comments
+    .slice(a.seenComments)
+    .find((c) => !FOOTER_RE.test(decodeEntities(c.text)) && !isOwnE2eNote(a, c));
   return foreign ? `new comment by ${foreign.creator} at ${foreign.time}` : null;
 }
 
@@ -791,6 +940,10 @@ async function applyOne(a, key, confirm) {
   if (fieldsDone && commentDone) return { outcome: "skipped", message: "already applied" };
   const conflict = conflictOf(a, live, comments);
   if (conflict) return { outcome: "conflict", message: conflict };
+  // The comment links the e2e commit, so it must already be reachable for everyone.
+  if (a.e2eCommit && !onMainLine(a.e2eCommit)) {
+    return { outcome: "error", message: `e2e commit ${a.e2eCommit.slice(0, 10)} is not on a remote main line; push it first` };
+  }
   const body = fieldsDone ? {} : { ...a.set };
   if (!commentDone) body.comment = { body: a.comment };
   const message = JSON.stringify({ ...(fieldsDone ? {} : a.set), ...(commentDone ? {} : { comment: true }) });
@@ -942,6 +1095,9 @@ function cmdReport(args) {
       .filter(([, r]) => r.type === "quickfix" && done(r))
       .map(([id, r]) => ({ id, section: "Поднят приоритет (quickfix)", text: row(id, r.message) })),
     ...applied
+      .filter(([, r]) => r.type === "reassign" && done(r))
+      .map(([id, r]) => ({ id, section: "Переназначено", text: row(id, r.message) })),
+    ...applied
       .filter(([, r]) => r.type === "comment" && done(r))
       .map(([id, r]) => ({ id, section: "Оставлен комментарий с разбором (поля не менялись)", text: row(id, r.verdict) })),
     ...applied
@@ -962,6 +1118,7 @@ function cmdReport(args) {
   const sectionOrder = [
     "Закрыто",
     "Поднят приоритет (quickfix)",
+    "Переназначено",
     "Оставлен комментарий с разбором (поля не менялись)",
     "Конфликты и ошибки",
     "В плане, но не применено",
@@ -1040,6 +1197,7 @@ Flags:
            (one of the three; --sample/--batch leave out bugs whose last comment
            is an audit comment and the bugs of a run marked files-only;
            --skip <decisions.json,...> adds more, --include-reviewed turns that off)
+           --team front|backend  (only bugs assigned to that team from config.local.json)
            --suggestion-severity enhancement  --repos <extra path,...>
            (commits are searched in client, ../server and the ../../ sibling repos
            onlyoffice-ai-chat, docspace-sdk-js, docspace-ui-kit-react, server,
@@ -1052,6 +1210,19 @@ Flags:
   split    --dir <run>  --parts 2..10  (replaces part-<k>.json; refuses once
            decisions.part-<k>.json exist)
   others   --dir <run>  (suggestions also --out <file.md>)
+
+Decision extras checked by plan:
+  e2e {spec, commit}   a replay on mocks; the commit must hold the spec and say
+                       "Bug <ID>" (not "Fix Bug"); the comment links it and
+                       apply waits until it is pushed to origin
+                       master/develop/release/*/hotfix/*
+  portal {version, steps, result}
+                       a replay on the test portal (portal.mjs) when mocks
+                       cannot show it; the comment names the version
+                       (closing as fixed with confidence high needs e2e or portal)
+  assign_to <email>    reassign an open bug (confidence high, not closing) to
+                       its side's team in config.local.json: client -> frontTeam,
+                       server -> backendTeam
 
 Setup: .claude/scripts/bugzilla/README.md (config.local.json + BZ_API_KEY).
 decisions.json is written by the /bugs-audit skill; see its SKILL.md.`;

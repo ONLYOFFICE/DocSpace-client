@@ -81,6 +81,29 @@ each agent writes
 `decisions.part-<k>.json`, and `merge` joins them into `decisions.json`,
 refusing a bug decided twice and listing bugs no part covered.
 
+A bug is closed as fixed only after its scenario was replayed. Either an e2e
+on mocks: the decision carries `e2e: {spec, commit}`, the commit subject says
+`E2E: Bug <ID>: …` (never `Fix Bug`), `plan` adds the commit link to the
+comment, and `apply` closes only once the commit is on an `origin` main line.
+Or, where mocks cannot show it, the test portal: `portal.mjs` (`version`,
+`api <METHOD> <path>`, `cookie` for a browser session) talks only to
+`testPortal` from `config.local.json`, and the decision carries
+`portal: {version, steps, result}`. The portal password is stored like the
+API key:
+
+```bash
+security add-generic-password -s docspace-test-portal -a <portal user> -w '<password>'
+```
+
+(Windows / Linux: `BZ_PORTAL_PASSWORD`.) The session token is cached with mode
+600 in `~/.cache/docspace-bugzilla/portal-token.json`.
+`frontTeam` and `backendTeam` in `config.local.json` (the teams' Bugzilla
+addresses - personal data, so local only; or `BZ_FRONT_TEAM` /
+`BZ_BACKEND_TEAM`) feed the `front` / `backend` signals of `export` and limit
+`assign_to`, which reassigns an open bug to the person who should fix it: a
+`client` bug to someone in `frontTeam`, a `server` bug to someone in
+`backendTeam`.
+
 The review between `export` and `plan` (writing `decisions.json`) is done by
 `/bugs-audit` — see its SKILL.md for the decision schema and evidence rules.
 `export --sample/--batch` leave out every open bug whose last comment is an

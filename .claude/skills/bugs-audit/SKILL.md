@@ -123,6 +123,19 @@ component (table above), not from memory:
   `app/routes.ts` for `/ai/*`) before judging the client.
 - Server, API and AI bugs often reproduce only on a stand. If the code does not
   settle it, use `needs-info` or `confidence: medium` rather than closing.
+- **Never call a bug `server` on the component or the error text alone.** A 500
+  or a wrong answer is often the client's doing: a wrong URL, a missing or
+  malformed parameter, a request sent twice or in the wrong order, a stale id.
+  Before setting `side: server`, find the client call site that sends the
+  request (`packages/shared/api/**`, the store that calls it) and check what it
+  really sends against what the server controller expects. Write both ends in
+  `evidence` (`client: <file:line> sends …; server: <file:line> expects …`).
+  If the client is at fault, the bug is `client` whatever its component.
+- **Team signals** (`front` and `backend` in `bugs.json`, from `frontTeam` and
+  `backendTeam` in `config.local.json`): whether the assignee or reporter is
+  on that team, which of its members commented, which of them authored
+  `Bug <ID>` commits. A hint for `side`, never a verdict by itself — a bug a
+  backend developer "fixed" may still be the client's, and the other way round.
 
 Verdicts:
 
@@ -159,7 +172,8 @@ language (`2ч` / `2h`). The comment must match what actually happens to the bug
 
 | Decision | What `apply` does | What `comment` says (ru / en) |
 |---|---|---|
-| `fixed`/`obsolete`, `high` | closes + comment | «Закрываю по итогам аудита бэклога…» / "Closing after the backlog audit…" + the evidence |
+| `fixed`/`obsolete`, `high` | closes + comment (`fixed` only with `e2e` or `portal`, Step 3b; `plan` adds the link / version) | «Закрываю по итогам аудита бэклога…» / "Closing after the backlog audit…" + the evidence and how the replay went |
+| `assign_to` on an open `client`/`server` bug, `high` | reassigns + comment | why it moves and to whom |
 | `quickfix`, `high` | priority/whiteboard + comment | where the cause is (`file:line`) and what to change |
 | `valid` | comment only | that it is still relevant, where it lives, what blocks it |
 | `needs-info` | comment only | what is missing and who should re-check it |
@@ -182,6 +196,88 @@ above the middle — P2 on P1..P5; a bug whose whiteboard already has
 `valid` suggestions. Whether a bug is a suggestion is not part of the decision:
 the script takes it from the export (`kind` in `bugs.json`, by severity), so it
 cannot be mistyped; a `kind` left in a decision is ignored.
+
+`assign_to` — the person who should really fix a bug that stays open, when
+that is not the current assignee (a client bug sitting on a backend developer,
+a server bug on a frontend one, or someone who does not work on that area).
+Pick from the team of the bug's side — `frontTeam` for `client`, `backendTeam`
+for `server` — by who owns the code: the authors of the recent commits in the
+files where the cause lives (`git -C <repo> log --format=%ae -10 -- <files>`,
+first author on the list) and the members already in `front.*` / `backend.*`
+(`commitAuthors`, `commenters`). `plan` accepts it only for `side: client` or
+`server`, `confidence: high`, a bug that is not being closed, and an address on
+that side's list; the comment says why the bug moves (`… переназначаю на
+<name>, автора <area>`).
+
+`e2e` — `{ "spec": "packages/client/__tests__/<file>.spec.ts", "commit":
+"<hash>" }`; `portal` — `{ "version": "<docSpace build>", "steps": "…",
+"result": "…" }`. A `fixed` close with `confidence: high` needs one of them,
+whatever the side (Step 3b); `plan` adds the e2e link or the portal version to
+the comment.
+
+## Step 3b — replay before closing as fixed
+
+A bug is closed as `fixed` only when its scenario was replayed on the current
+code and no longer reproduces — and the code has (or had) the fix. For every
+decision that would close as `fixed` with `high`, in this order:
+
+1. **e2e on mocks — first choice for `client`.** The client e2e run against
+   mocked APIs (MSW, see `.claude/rules/e2e-tests.md`): they prove what the
+   client does with a given answer, not what the server answers. They cannot
+   replay a bug where the server's answer was wrong, a third-party service,
+   real timing between two tabs or a native window — go to the test portal
+   (step 7) for those.
+2. **Write the spec** in the existing spec of that feature, or a new
+   `packages/client/__tests__/<feature>.spec.ts`, as
+   `test("Bug <ID>: <what must hold>", …)`, replaying the steps of the report
+   and asserting the expected result. Functional assertions only — no
+   `toHaveScreenshot` (screenshots are valid only from the Docker image). Add
+   any mock handler it needs to `packages/shared/__mocks__/handlers/`.
+3. **Run it** with `cd packages/client && pnpm exec playwright test
+   __tests__/<file>.spec.ts -g "Bug <ID>"`. It must pass. If it fails, the bug
+   is still there: change the verdict to `valid`/`quickfix` and keep the spec
+   out of the commit (or turn it into the fix's red test later via `/fix-bug`).
+   When the fix commit is recent enough to build, also check the spec fails on
+   the fix's parent — the strongest evidence; skip it for old fixes.
+4. **Commit** each spec on its own, on the branch the audit runs from (the main
+   line), with the subject `E2E: Bug <ID>: <EN what it checks>`. "Bug <ID>"
+   makes the server-side git action comment on the bug with the commit;
+   **never** `Fix Bug <ID>` — that is the fix convention, and this commit
+   fixes nothing. Do not push yet: pushing is part of the OK in Step 4.
+5. Put `"e2e": { "spec": …, "commit": … }` in the decision. `plan` checks the
+   commit exists, holds the spec and has that subject, and adds the commit link
+   to the comment itself (`E2E: <link>`), so do not write the link in
+   `comment`.
+6. Prefer e2e whenever it can show the bug: it stays in the suite and guards
+   the fix; a portal check is a one-off.
+7. **Test portal — when mocks cannot show it** (server answers, server-side
+   effects, editors, real third-party, anything in a `server` / `editors` /
+   `ai-chat` bug). Only the portal configured as `testPortal` in
+   `config.local.json`, never a production portal; if none is configured, ask
+   the user for one, and without it lower the decision to `medium`.
+   - `node .claude/scripts/bugzilla/portal.mjs version` first: the build you
+     check is what goes into the comment.
+   - API scenarios: `portal.mjs api <METHOD> <path> [--data '<json>']` — it logs
+     in with the stored password and prints status and body.
+   - UI scenarios: the Playwright browser tools. Log in without typing the
+     password: `portal.mjs cookie` prints the session cookie; add it with
+     `browser_run_code_unsafe` (`await page.context().addCookies(<cookie>)`)
+     before `browser_navigate` to the portal. The cookie is a session token —
+     do not paste it anywhere else.
+   - Replay the report's steps as written, with data you create for the test
+     (a room or folder named `bugs-audit <ID>`), and delete what you created
+     afterwards. Never touch data you did not create.
+   - Reproduces → the bug is alive: `valid`/`quickfix`, and put what you saw in
+     `evidence`. Does not reproduce, and the code has the fix → put
+     `"portal": { "version": "<docSpace build>", "steps": "<what you did>",
+     "result": "<what you saw>" }` in the decision; `plan` adds «Не
+     воспроизводится на тестовом портале, версия …» to the comment.
+8. **Neither possible** (needs hardware, a specific customer setup, data you
+   cannot create): lower to `medium` (a proposal, no close) and say in
+   `evidence` why no replay was possible.
+
+`obsolete` (the feature or screen is gone) needs no replay: the evidence is
+what was removed.
 
 ### Parallel review (`agents=N`)
 
@@ -242,6 +338,11 @@ run them, so do not ask again; without it, parallel review needs a separate yes.
    (`plan` rejects it anyway). Make the change in the part file and run `merge`
    again. Spot-check a few `valid` ones too. Tell the user how many decisions
    you downgraded.
+5. **Step 3b is yours, not the agents'.** Agents stay read-only, so they never
+   write or commit an e2e and never act on the test portal: a `fixed` close
+   comes back from them without `e2e`/`portal`, and `plan` rejects it. Replay
+   those yourself (Step 3b), add `e2e` or `portal` in the part file, and run
+   `merge` again.
 
 `--model` in Step 4 is the model that reviewed; subagents inherit yours unless
 the agent definition says otherwise — if any part ran on another model, name
@@ -267,14 +368,24 @@ Pass your own exact model name as the system prompt gives it (e.g.
 `"Claude Opus 5.5"`), never a guess or a default.
 
 Validates the decisions against the instance fields and prints every change
-(status/resolution/priority/whiteboard and the comment text). A bug decided
-more than once is rejected as a whole — keep one decision. Fix any
-"invalid decisions" and rerun. Show the preview to the user and **wait for an
-explicit OK**. A question or silence is not an OK.
+(status/resolution/priority/whiteboard/assignee, the e2e commit and the
+comment text). A bug decided more than once is rejected as a whole — keep one
+decision. Fix any "invalid decisions" and rerun. Show the preview to the user,
+together with the list of e2e commits waiting to be pushed (`git log
+@{u}..HEAD --oneline`), and **wait for an explicit OK**. A question or silence
+is not an OK. The OK covers both the push and the Bugzilla writes.
 
-## Step 5 — apply (after the OK)
+## Step 5 — push, then apply (after the OK)
+
+If the run has e2e commits, push them first — a close links its commit, and
+`apply` refuses a close (as `error`) until the commit is on `origin`
+master/develop/release/*/hotfix/*. The push goes through the pre-push gate; if
+the gate fails, fix it, never `--no-verify`. After the push the git action adds
+its own comment to each such bug; `apply` recognises it by the commit hash and
+does not count it as a conflict.
 
 ```bash
+git push
 node .claude/scripts/bugzilla/audit.mjs apply --dir <dir> --only <one id> --confirm
 node .claude/scripts/bugzilla/bz.mjs --show <that id>
 node .claude/scripts/bugzilla/audit.mjs apply --dir <dir> --confirm

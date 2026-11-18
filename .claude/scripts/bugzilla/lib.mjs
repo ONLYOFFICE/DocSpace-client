@@ -57,6 +57,44 @@ export const HOST = (process.env.BZ_HOST || cfg.host || "").replace(/\/$/, "");
 export const DEFAULT_ASSIGNED = process.env.BZ_ASSIGNED || cfg.assigned || "";
 export const KEYCHAIN_SERVICE =
   process.env.BZ_KEYCHAIN_SERVICE || cfg.keychainService || "bugzilla";
+// The people who fix the client (frontend) and the server (backend). Personal
+// data: only in config.local.json ("frontTeam" / "backendTeam": [...]) or
+// BZ_FRONT_TEAM / BZ_BACKEND_TEAM (comma-separated).
+const team = (env, list) =>
+  new Set(
+    (env ? env.split(",") : list || [])
+      .map((e) => String(e).trim().toLowerCase())
+      .filter(Boolean),
+  );
+const norm = (email) => String(email || "").trim().toLowerCase();
+export const FRONT_TEAM = team(process.env.BZ_FRONT_TEAM, cfg.frontTeam);
+export const BACKEND_TEAM = team(process.env.BZ_BACKEND_TEAM, cfg.backendTeam);
+export const isFront = (email) => FRONT_TEAM.has(norm(email));
+export const isBackend = (email) => BACKEND_TEAM.has(norm(email));
+
+// A DocSpace test portal to replay what the mocked e2e cannot. url + user come
+// from config.local.json ("testPortal": {"url", "user", "keychainService"}) or
+// BZ_PORTAL_URL / BZ_PORTAL_USER; the password, like the API key, never sits in
+// a file: BZ_PORTAL_PASSWORD, or the macOS Keychain under keychainService.
+const portalCfg = cfg.testPortal || {};
+export const TEST_PORTAL = {
+  url: (process.env.BZ_PORTAL_URL || portalCfg.url || "").replace(/\/$/, ""),
+  user: process.env.BZ_PORTAL_USER || portalCfg.user || "",
+  keychainService: portalCfg.keychainService || "docspace-test-portal",
+};
+
+export function getPortalPassword() {
+  if (process.env.BZ_PORTAL_PASSWORD) return process.env.BZ_PORTAL_PASSWORD;
+  try {
+    return execFileSync(
+      "security",
+      ["find-generic-password", "-s", TEST_PORTAL.keychainService, "-a", TEST_PORTAL.user, "-w"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    ).replace(/\n$/, "");
+  } catch {
+    return null;
+  }
+}
 export const ATTACH_DIR =
   process.env.BZ_ATTACH_DIR ||
   cfg.attachDir ||

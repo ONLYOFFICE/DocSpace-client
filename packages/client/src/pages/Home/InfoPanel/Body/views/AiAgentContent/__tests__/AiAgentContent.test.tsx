@@ -10,7 +10,7 @@ const stores = vi.hoisted(() => ({
   dialogsStore: { aiChatActiveThreadId: "t-1", setCopyPanelVisible: vi.fn() },
   filesSettingsStore: { getIcon: () => "icon.svg" },
   settingsStore: { culture: "en" },
-  filesActionsStore: { downloadFiles: vi.fn() },
+  filesActionsStore: { downloadFiles: vi.fn(), checkAndOpenLocationAction: vi.fn() },
   filesStore: { setSelected: vi.fn(), setBufferSelection: vi.fn() },
   infoPanelStore: { setIsMobileHidden: vi.fn() },
 }));
@@ -118,6 +118,20 @@ describe("AiAgentContent", () => {
       stores.filesStore.setSelected.mock.invocationCallOrder[0],
     );
     open.mockRestore();
+  });
+
+  it("opens the room or folder a file is in from its menu", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const [, row] = screen
+      .getByTestId("ai-agent-content-attachments")
+      .querySelectorAll('[data-testid="ai-agent-content-file"]');
+    const item = row.querySelector('[data-testid="ai-agent-content-open-location"]') as HTMLElement;
+    expect(item.textContent).toBe("Common:OpenLocation");
+    fireEvent.click(item);
+    expect(stores.filesActionsStore.checkAndOpenLocationAction).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 3, title: "Notes.jpg" }),
+    );
   });
 
   it("shows both sections empty for a new chat, without a request", async () => {

@@ -52,6 +52,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import styles from "./AiAgentContent.module.scss";
 
@@ -93,14 +94,16 @@ type AiAgentContentProps = {
  * conversation on screen - Artifacts, what its replies produced, and
  * Attachments, what the user added to it. It follows the conversation: a new
  * chat shows both empty, another conversation its own files. A file opens in
- * a new tab; its "..." menu downloads it or saves a copy to a room.
+ * a new tab; its "..." menu downloads it, saves a copy to a room or opens
+ * the room or folder it is in.
  */
 const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const { t } = useTranslation(["Common", "Files"]);
   const threadId = useStore("dialogsStore").aiChatActiveThreadId;
   const { getIcon } = useStore("filesSettingsStore");
   const culture = useStore("settingsStore").culture;
-  const { downloadFiles } = useStore("filesActionsStore");
+  const { downloadFiles, checkAndOpenLocationAction } =
+    useStore("filesActionsStore");
   const filesStore = useStore("filesStore");
   const dialogsStore = useStore("dialogsStore");
   const infoPanelStore = useStore("infoPanelStore");
@@ -160,6 +163,14 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
       label: t("Common:SaveToRoom"),
       icon: CopyToReactSvgUrl,
       onClick: () => saveToRoom(file),
+    },
+    {
+      // The folder the file lies in, opened with the file highlighted, as
+      // "Open location" does elsewhere.
+      key: "ai-agent-content-open-location",
+      label: t("Common:OpenLocation"),
+      icon: FolderLocationReactSvgUrl,
+      onClick: () => void checkAndOpenLocationAction(file),
     },
   ];
 

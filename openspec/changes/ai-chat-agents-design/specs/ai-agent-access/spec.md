@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Says who is offered which agent action in the redesigned interface, by portal user type (portal owner, DocSpace admin, room admin, User, Guest) and by role in the agent (Agent owner, Agent manager, Member), so that every entry point (a card, a menu, a header, the chat panel, the Info panel) answers the way the server does. The rights themselves are the server's, as `ai-projects-api` of the `ai-projects` change records them; this capability is about what the interface offers.
+Says who is offered which agent action in the redesigned interface, by portal user type (portal owner, DocSpace admin, room admin, User, Guest) and by role in the agent (Agent owner, Agent manager, Member), so that every entry point (a card, a menu, a header, the chat panel, the Info panel) answers the way the server does. The rights themselves are the server's; this capability is about what the interface offers.
 
 Implementation: the room's rights carried with the agent, the context option helpers, the invite panel and the role helpers in the client and shared; the chat store's agent actions in ui-kit.
 

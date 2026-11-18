@@ -2,19 +2,19 @@
 
 ## Why
 
-The designer's "DocSpace — AI Chat" boards redraw the AI section around agents. The chat panel title is an agent menu, an agent has its own page with an actions menu, a Share button and an Info panel of Context, Content and Details, the Agents list has My agents and Templates tabs with cards under category tabs, Skill sets and Knowledge bases are lists of their own with their own columns, a skill is read and edited in dialogs, the composer's "+" and slash menus manage skill sets, knowledge bases and data sources, and replies carry the agent's logo and file cards. The branch calls the same thing an AI project, keeps one conversation list per user and lacks most of those surfaces. This change records the target behaviour, by portal user type and by role in the agent, on top of the removed AI Agents feature and the `ai-projects` change.
+The designer's "DocSpace — AI Chat" boards redraw the AI section around agents. The chat panel title is an agent menu, an agent has its own page with an actions menu, a Share button and an Info panel of Context, Content and Details, the Agents list has My agents and Templates tabs with cards under category tabs, Skill sets and Knowledge bases are lists of their own with their own columns, a skill is read and edited in dialogs, the composer's "+" and slash menus manage skill sets, knowledge bases and data sources, and replies carry the agent's logo and file cards. The branch calls the same thing an AI project, keeps one conversation list per user and lacks most of those surfaces. This change records the target behaviour, by portal user type and by role in the agent, on top of the removed AI Agents feature and the code on the branch.
 
 ## Source of truth
 
 - **Design**: the claude.ai Design artifact `RjERC5xvn5xwMr73vSvB2q` ("DocSpace — AI Chat"), version `1794687729-e1b1`, fifteen boards, read on 2026-11-16 as HTML source (first read on 2026-11-12 at version `1794490827-6127`). design.md maps each board to the requirements that cover it and lists what changed between the two versions.
-- **New projects**: the `ai-projects` change and the code on `feature/new-ai-concept` (client `41831eb79f1`, ui-kit `7accde9d`, ai-chat `a2301965` packed as `1.0.2-progress.54`). An agent is the AI project of that change: a room of type 12 with linked Instructions and Knowledge rooms and a model.
+- **New projects**: the code on `feature/new-ai-concept` (client `41831eb79f1`, ui-kit `7accde9d`, ai-chat `a2301965` packed as `1.0.2-progress.54`). An agent is a room of type 12 with linked Instructions and Knowledge rooms and a model.
 - **Old agents**: the AI Agents feature as it was before client commit `fac66aa42ba`: its words (110 of its keys, `AIAgent`, `AgentOwner`, `AgentManager`, `EditAgent`, `AgentInfo`, `DeleteAgent` among them, are still in `Common.json`), its rule that the chat inside an agent is scoped to that agent, and its limit of the Agent manager role to admins. design.md sets the old agents and the new ones side by side.
 - **Decisions taken on 2026-11-12** by the feature owner: conversations belong to an agent; generated files are saved at once and "Save to room…" copies them; the interface says "agent" everywhere; no new statement about `../server` is written without CodeGraph.
 
 ## What Changes
 
 - **Vocabulary.** Every user-facing text calls a room of type 12 an agent: the room type "AI agent", the roles Agent owner, Agent manager and Member, the create and edit dialogs, menus, toasts and views.
-- **Conversations belong to an agent.** **BREAKING** for the `ai-projects` rule "one global scope per user": a conversation belongs to the agent it was started on, or to the default agent. An agent's history lists that agent's conversations; the default agent's history and the sidebar's Recent list all of the user's conversations. Picking an agent switches the chat to it instead of applying its settings to the conversation in progress, and a chat on an agent follows the agent's settings on its page and in the chat panel alike.
+- **Conversations belong to an agent.** **BREAKING** for the old rule "one global scope per user": a conversation belongs to the agent it was started on, or to the default agent. An agent's history lists that agent's conversations; the default agent's history and the sidebar's Recent list all of the user's conversations. Picking an agent switches the chat to it instead of applying its settings to the conversation in progress, and a chat on an agent follows the agent's settings on its page and in the chat panel alike.
 - **Chat panel.** The title menu shows the picked agent's logo, ends with "Save as new agent" (the header's save icon goes), and a picked agent gets an "Agent actions" menu with its own history list; the header changes with it.
 - **Agent page.** The title is an agent switcher, followed by chat history, new chat, the agent's actions and a "Share agent" button; the actions are worded for agents.
 - **Agents list.** Category tabs (All, My agents, tags) and cards with a description, an "Open chat" button and stacked skill sets and knowledge bases.
@@ -76,7 +76,7 @@ Each item is a contract of `../server`; what has landed is read in its source an
 - `ai-chat-messages`: the agent's logo beside replies, attachments inside the user's message, and cards for generated files.
 
 ### Modified Capabilities
-<!-- None: openspec/specs/ holds no AI capability yet. The requirements of the unarchived `ai-projects` change that this change replaces are listed in design.md. -->
+<!-- None: openspec/specs/ holds no AI capability yet. -->
 
 ## Impact
 

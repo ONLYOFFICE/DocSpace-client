@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Defines the Agents list of the AI section: what it lists for each user, its My agents and Templates tabs, the templates catalog, its category tabs, the agent card and the agent's description. The list itself, its views, filters, live updates and creation flow come from `ai-projects-catalog` of the `ai-projects` change, narrowed to agents.
+Defines the Agents list of the AI section: what it lists for each user, its My agents and Templates tabs, the templates catalog, its category tabs, the agent card and the agent's description.
 
 Implementation: the Home section in the client (the filter, the section's submenu slot, the agent tile), `AiProjectsStore` for what a card shows, and the agent form.
 

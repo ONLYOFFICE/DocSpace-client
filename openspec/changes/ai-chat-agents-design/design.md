@@ -6,10 +6,9 @@ See proposal.md (Why, Source of truth) for the motivation and the three bases. T
 
 - **Three repositories.** The chat is drawn by the ai-chat library (`onlyoffice-ai-chat`, branch `feature/composer-plus-menu`), wrapped by ui-kit's `ai-agent/*` (`docspace-ui-kit-react`, branch `feature/new-ai-concept`), and steered by the client through the props `Shell.jsx` passes and the chat store ui-kit exposes. The client consumes both as local tarballs (ai-chat `1.0.2-progress.54`, ui-kit 4.1.0 with the peer range `>=1.0.2-progress.54`). A new library option reaches the client only after a library pack, a ui-kit build with a raised peer range, and the client's lockfile.
 - **The library has other hosts** (the desktop editors' plugin among them). Whatever this change adds to it is switched on through its widget configuration and leaves the default as it is.
-- **An agent is the AI project of `ai-projects`**: a room of type 12 with linked Instructions and Knowledge rooms and a model; its roles, rights and visibility are the ones `ai-projects-api` records. Nothing in this change alters them; `ai-agent-access` says what the interface offers on top of them.
-- **Where `ai-projects` lags the branch.** Three of its statements are no longer what the code does, and this change builds on the code: the sidebar is an "AI Chat" tree (Agents, Recent, Skill sets, Knowledge bases) and not an "AI rooms" item with slots; agents are picked in the title of the chat panel and not in the model picker; the sources column of the open-project view is gone, a chat takes up to 20 data sources picked by hand, and the "+" menu lists the sources.
+- **An agent is a room of type 12** with linked Instructions and Knowledge rooms and a model; its roles, rights and visibility are the server's. Nothing in this change alters them; `ai-agent-access` says what the interface offers on top of them.
 - **What the removed AI Agents feature gives.** Its words: 110 of its `Common` keys are still in `Common.json`, translated in every language. Its rule that the chat inside an agent is scoped to that agent. Its limit of the Agent manager role to admins. Its room type, quota, knowledge files, result storage and MCP list are not brought back; the table below sets the two side by side.
-- **No CodeGraph on the authoring machine** (no `codegraph` CLI, no `.codegraph/` in `../server`). By the decision of 2026-11-12 this change states no new fact about `../server`. Everything it needs from the server is listed in proposal.md as an expected contract, and tasks.md gates the dependent tasks on confirming it through CodeGraph. The one server statement used below, that conversations have a single scope per user, is the one `ai-projects` already records (its design.md, "Threads are never shared and have one global scope per user").
+- **No CodeGraph on the authoring machine** (no `codegraph` CLI, no `.codegraph/` in `../server`). By the decision of 2026-11-12 this change states no new fact about `../server`. Everything it needs from the server is listed in proposal.md as an expected contract, and tasks.md gates the dependent tasks on confirming it through CodeGraph.
 
 ### Old agents and agents now
 
@@ -20,7 +19,7 @@ The left column is the client as it was before commit `fac66aa42ba`, read from t
 | What an agent is | A room of type 9 with files of its own: a knowledge base and a result storage, a quota, MCP servers. | A room of type 12 with no files: a model plus linked skill sets and knowledge bases. |
 | Roles | Agent manager, Content creator, Viewer; a Viewer had no chat. | Agent manager and Member; every member chats. |
 | Who may be Agent manager | Portal owner, DocSpace admins, room admins; disabled for a User with a note. | The same, and the same note (`UserAgentMaxAvailableRoleWarning`). |
-| Guests and groups | A guest as Viewer only, a group up to Content creator. | Not offered in the invite panel, as `ai-projects-catalog` has it. |
+| Guests and groups | A guest as Viewer only, a group up to Content creator. | Not offered in the invite panel. |
 | Who creates | Portal owner, DocSpace admins, room admins. | The same. |
 | Admin who is not a member | View-only: the results of others, a notice, no chat. | The "not a member" view, no chat. |
 | Model in the composer | Changed there by those who may edit the agent; a label for others. | A label for everyone; changed in the agent's form. |
@@ -49,7 +48,7 @@ Version `1794687729-e1b1` of the design, read on 2026-11-16, has fifteen boards.
 | 12 Skill set open | `ai-skill-sets` (Skills of an opened skill set, Skill in the Info panel, View instructions, Use a skill set in the chat) | — |
 | 13 Edit skill | `ai-skill-sets` (Edit skill, Markdown toolbar, What the toolbar buttons do, Saving a skill) | The instructions are a code editor, not a plain text field. |
 | 14 Knowledge bases | `ai-knowledge-bases` (Columns, Indexing state of a knowledge base, Knowledge base in the Info panel, Use a knowledge base in the chat) | "Used by", "Used by agents", the description, and "Last indexed" (the list shows Last modified): server item 5. The state is marked in the table view only. |
-| 15 Knowledge base open | `ai-knowledge-bases` (Files of an opened knowledge base, Indexing state of a file, File in the Info panel) | The reason a file failed (server item 5): a fixed note says it could not be prepared. The "Add files" button: the create menu keeps "Upload from storage" and "Upload from device" (`knowledge-room` "Adding files" of `ai-projects`). |
+| 15 Knowledge base open | `ai-knowledge-bases` (Files of an opened knowledge base, Indexing state of a file, File in the Info panel) | The reason a file failed (server item 5): a fixed note says it could not be prepared. The "Add files" button: the create menu keeps "Upload from storage" and "Upload from device". |
 
 ## Goals / Non-Goals
 
@@ -147,7 +146,7 @@ So the client says it before it sends, in three places:
 
 The keys say "agent manager", the role's name in `ai-agent-naming`, where the old `WantLeaveAgent` says "agent admin".
 
-The knowledge files with their vectorization state and the retry action, which the sources column of `ai-project-workspace` had, are not carried into the panel: the boards list knowledge bases as plain rows. They remain inside the Knowledge room itself.
+The knowledge files with their vectorization state and the retry action, which the removed sources column had, are not carried into the panel: the boards list knowledge bases as plain rows. They remain inside the Knowledge room itself.
 
 ### Composer lists: library pieces, host content
 - A row of a host list gets a trailing action (icon, label, handler) and a link tone; the dropdown item draws the action without running the row's own handler or closing the menu.
@@ -184,7 +183,7 @@ Board 04 also selects a template in the Info panel (Details with Owner, Type "Te
 ### Skill sets and Knowledge bases are lists of their own
 The three lists of the AI section are one folder, the AI section root, narrowed by the rooms filter to one room type. The table view picks its columns by that type: Skill sets (Name, Skills, Owner, Last modified) and Knowledge bases (Name, Owner, Last modified) each get their own columns and their own stored column choice and widths, versioned like the other tables; Agents keep the room columns. An opened skill set (Name, Description, Last modified) and an opened knowledge base (Name, Size, Added by, Added) are told by their room type, or by the parent room's type inside a folder, and get their own columns too. The tile grid keys its measured row heights by the kinds of rows shown, since agent tiles are taller than room tiles and the three lists share one folder (client `096d247c84f`).
 
-Every column is read from what the rooms list and the folder listing already answer: the number of skills of a set is the room's file count (an Instructions room holds Markdown files only, as `instructions-room` of `ai-projects` records). Two things need more reads:
+Every column is read from what the rooms list and the folder listing already answer: the number of skills of a set is the room's file count (an Instructions room holds Markdown files only). Two things need more reads:
 
 - **The indexing state of a knowledge base** is derived from its files: any failed file makes it Error, otherwise any file in progress makes it Indexing, otherwise it is indexed; a base with no files has no state. Each row reads the base's files (the first page of 100) through the knowledge listing the project view already used, once per base and file count; the Details tab reads them again. Nothing pushes a change of state, so the list does not follow indexing live; a failed read is not retried in the session. *Alternative:* a state on the room from the server (none is read today).
 - **The description of a skill** is read from its file, once per file version, and shared by the row and the Info panel. A failed read is not retried in the session; a save makes a new version, which is read again.
@@ -200,39 +199,9 @@ The fullscreen chat has no address of its own: AI Chat opens it over the agents 
 ### Official agents and portal-wide access are stated as absent
 Both are on the boards and neither can be specified without a product description and a server design. They are written as requirements of absence (`ai-agents-list` "No official agents", `ai-agent-access` "No portal-wide access"), so the gap is visible and testable, and they will be changes of their own.
 
-## Relationship to `ai-projects`
-
-`ai-projects` is not archived, so its capabilities are not in `openspec/specs/` and cannot be modified by a delta. Until it is archived, this table is the record of what this change replaces. When both are archived, the replaced requirements have to be removed or reworded in the main specs (see tasks.md, Workflow follow-up).
-
-| `ai-projects` requirement | Fate |
-|---------------------------|------|
-| `ai-chat-sources` — Thread scope | Replaced by `ai-agent-conversations` (a conversation belongs to one agent; histories). |
-| `ai-chat-sources` — Applying a project outside its page | Replaced by `ai-agent-conversations` "Picking an agent in the chat panel", "Returning to the default agent". |
-| `ai-chat-sources` — Project overrides the sources | Kept; now also true for an agent picked in the chat panel. |
-| `ai-chat-sources` — Chats are private | Kept; restated as "Conversations are private". Its "leaving keeps the threads" was reversed by server 18cb4ed823e and is corrected there; `ai-agent-conversations` "Conversations of an agent the user cannot open" says the same. |
-| `ai-chat-sources` — Sources of a round, Context folder follows the location | Lags the branch (data sources); the lists are in `ai-chat-source-menus`. |
-| `ai-chat-project-picker` — Choose AI Project in the model picker | Replaced by `ai-chat-agent-menu` "Agent menu in the panel title". |
-| `ai-chat-project-picker` — Applying a project to the open chat | Replaced by `ai-agent-conversations` "Picking an agent in the chat panel". |
-| `ai-chat-project-picker` — The chat keeps its title in a project | Reversed by `ai-chat-agent-menu` "Title of the panel". |
-| `ai-chat-project-picker` — Save the chat setup as a project, Save is hidden inside a project | Replaced by `ai-chat-agent-menu` "Save as new agent", "Saving a picked agent as a new one". |
-| `ai-chat-project-picker` — Closing the chat drops the project | Kept; restated as "Returning to the default agent". |
-| `ai-chat-project-picker` — the other requirements | Kept, with "agent" for "project". |
-| `ai-project-workspace` — Opening a project (the header) | The header is replaced by `ai-agent-page` "Header of an agent's page"; the fresh conversation stays. |
-| `ai-project-workspace` — Sources column, Source card contents, Sources read on expand, Failed vectorization in the Knowledge card, Personal Context folder, Sources on tablet and mobile, History and Info panel share the side | Replaced by `ai-agent-info-panel` (Context, Details) and `ai-chat-source-menus`. |
-| `ai-project-workspace` — Fixed model | Kept; extended to the chat panel by `ai-agent-conversations` "Model of a chat on an agent". |
-| `ai-projects-catalog` — Room actions (Info panel tabs, menu) | For an agent replaced by `ai-agent-info-panel` and `ai-agent-page` "Actions menu of an agent". |
-| `ai-projects-catalog` — Texts of the AI-off view | Reversed by `ai-agent-naming`: the texts speak of agents. |
-| `ai-projects-catalog` — Sidebar item and slots | Lags the branch; not restated here. |
-| `ai-projects-catalog` — AI rooms listing | Lags the branch: the section is three lists narrowed by room type, Agents (`ai-agents-list`), Skill sets (`ai-skill-sets`) and Knowledge bases (`ai-knowledge-bases`), the last two with columns of their own. |
-| `instructions-room` — Skills shown in the UI | Replaced: a set's skills are listed in its Info panel and when it is opened (`ai-skill-sets`), in an agent's Context (`ai-agent-info-panel`) and in the composer's menus (`ai-chat-source-menus`); the project's sources column it names is gone. |
-| `knowledge-room` — Indexing state | Kept for the state of each file and its retry; the counts shown "wherever the room is listed as a project source" went with the sources column. The state of a base and of a file is shown as `ai-knowledge-bases` says. |
-| `ai-projects-catalog` — Who may create, Project roles and who may be invited | Kept; restated with agent words in `ai-agent-access`. |
-| `ai-projects-api` | Unchanged by this change. It was brought up to the server of 2026-11-18 in place (groups and Read refused, losing access deletes conversations, conversations and files of a project); the other server items of proposal.md would extend it once they exist. |
-
 ## Risks / Trade-offs
 
 - **[Risk] The server items are not designed.** → The tasks that need them are gated in tasks.md and name the item; nothing else waits for them.
-- **[Risk] Two unarchived changes contradict each other.** → The table above; `ai-projects` is archived first.
 - **[Trade-off] Picking an agent no longer keeps the conversation.** Users lose "apply to this conversation", and a model and sources chosen on the default agent are dropped when the chat moves to an agent. The conversation stays in its history, and a conversation that can only ever have had one agent is what makes an agent's history and its logo beside replies truthful.
 - **[Trade-off] An agent's Info panel has no Contacts tab.** "Share agent" invites, but nothing lists an agent's members, changes a role or removes a member. → Open question below; task 7.2.
 - **[Risk] Leaving or removal deletes conversations for good.** Server 18cb4ed823e deletes a member's conversations and files of an agent when their access ends, and a new invitation restores nothing. → The client warns before removal, in the leave dialog and in the change-owner panel ("Losing access deletes a member's conversations"); tasks 9.4–9.6.
@@ -245,7 +214,7 @@ Both are on the boards and neither can be specified without a product descriptio
 - **[Risk] One read per row.** The Knowledge bases list reads each base's files to tell its state, and an opened skill set reads each skill file for its description. → Both are cached (per base and file count, per file version) and shared with the Info panel; a list of bases is paged by 100 like any rooms list.
 - **[Trade-off] The indexing state is not live.** A base keeps "Indexing" after its last file finished, or "Error" after a successful retry, until its file count changes or its Details are opened. → Stated as a requirement (`ai-knowledge-bases` "The list does not follow indexing live"); a pushed state would need the server.
 - **[Trade-off] Shared file badges.** "Indexing" and the "Error" pill replace "Preparing" and the alert icon for every file with an indexing state, not only in knowledge bases.
-- **[Risk] Existing conversations.** `ai-projects` records one scope per user, so every conversation started before this change, inside an agent or not, shows as a conversation of the default agent, and agents start with an empty history.
+- **[Risk] Existing conversations.** Conversations used to have one scope per user, so every conversation started before this change, inside an agent or not, shows as a conversation of the default agent, and agents start with an empty history.
 
 ## Migration Plan
 

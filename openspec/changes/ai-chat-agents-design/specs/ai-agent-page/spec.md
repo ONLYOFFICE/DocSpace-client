@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Defines the header of an agent's own page, the page that shows one agent's chat when it is opened from the Agents list, the sidebar or a link, and the actions that header offers to each role. The page frame, the chat and the "not a member" view come from `ai-project-workspace` of the `ai-projects` change.
+Defines the header of an agent's own page, the page that shows one agent's chat when it is opened from the Agents list, the sidebar or a link, and the actions that header offers to each role.
 
 Implementation: the Home section header and the agent view in the client, the navigation component and the agent picker in ui-kit, the room context options for a room of type 12.
 

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Defines what a conversation belongs to, an agent or the default agent, which conversations each history lists, how the chat moves between agents, and the rules a chat follows while it runs on an agent, on the agent's page and in the chat panel alike. It replaces the single per-user conversation scope of the `ai-projects` change.
+Defines what a conversation belongs to, an agent or the default agent, which conversations each history lists, how the chat moves between agents, and the rules a chat follows while it runs on an agent, on the agent's page and in the chat panel alike.
 
 Implementation: the ai-chat library's threads store and history, ui-kit's chat store and bridges, the client's `Shell`, `AiPresetsBridge` and sidebar, and ASC.AI.Chat for the scope of a conversation.
 
@@ -27,7 +27,7 @@ While the chat runs on an agent, its chat history (`Common:ChatHistory`), on the
 - **THEN** the three are listed and the other five are not
 
 ### Requirement: History of the default agent
-While the chat runs on the default agent, its chat history SHALL list all of the user's conversations, those with agents included. Until the AI storage can list them together, it SHALL list the conversations that belong to no agent: the storage lists a conversation of an agent for that agent only (`ai-projects-api` "Conversations of a project").
+While the chat runs on the default agent, its chat history SHALL list all of the user's conversations, those with agents included. Until the AI storage can list them together, it SHALL list the conversations that belong to no agent: the storage lists a conversation of an agent for that agent only.
 
 #### Scenario: Default agent
 - **WHEN** the same Member opens the history on the default agent

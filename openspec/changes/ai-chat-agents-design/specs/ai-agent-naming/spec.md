@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Fixes the words the interface uses after the redesign: a room of type 12, which the `ai-projects` change called an AI project, is an agent everywhere a user can read it, its roles are agent roles, and the rooms linked to it are skill sets and knowledge bases. Internal names, routes and stored data are not part of this capability.
+Fixes the words the interface uses after the redesign: a room of type 12, once called an AI project, is an agent everywhere a user can read it, its roles are agent roles, and the rooms linked to it are skill sets and knowledge bases. Internal names, routes and stored data are not part of this capability.
 
 Implementation: the English values of the `Common` keys with `AIProject` in their name, the agent keys kept from the removed AI Agents feature, their translations, and the labels passed to ui-kit.
 

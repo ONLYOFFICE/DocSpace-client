@@ -166,6 +166,5 @@ These come from proposal.md ("Server work this change depends on"). They are own
 
 ## Workflow follow-up
 
-- Archive `ai-projects` first, so its capabilities exist in `openspec/specs/`.
-- Then turn the table "Relationship to `ai-projects`" of design.md into REMOVED and MODIFIED deltas of those capabilities with `/opsx:update ai-chat-agents-design`, validate, and archive this change.
+- Validate and archive this change.
 - Official agents and portal-wide access get changes of their own once the product description and the server design exist.

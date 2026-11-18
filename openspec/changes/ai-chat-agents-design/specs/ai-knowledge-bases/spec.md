@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Defines the Knowledge bases list (Knowledge rooms) and an opened knowledge base: their columns, the indexing state of a base and of its files, and what the Info panel tells about each: boards 14 "Knowledge bases" and 15 "Knowledge base open". What a Knowledge room is, who may add files and how a failed file is indexed again stay as the `knowledge-room` capability of the `ai-projects` change records them.
+Defines the Knowledge bases list (Knowledge rooms) and an opened knowledge base: their columns, the indexing state of a base and of its files, and what the Info panel tells about each: boards 14 "Knowledge bases" and 15 "Knowledge base open".
 
 Implementation: in the client the table columns of the two lists (`TableStore`, `TableHeader`, `KnowledgeBasesRowData`, `KnowledgeFilesRowData`), `KnowledgeBasesStore` for the state of a base, `KnowledgeBaseStatusBadge`, the Details view; in shared the file badges and `FailedVectorizationBadge`.
 

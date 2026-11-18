@@ -56,14 +56,14 @@ const CACHE_DIR = path.join(os.homedir(), ".cache", "docspace-bugzilla");
 const TOKEN_FILE = path.join(CACHE_DIR, "portal-token.json");
 const AUTH_COOKIE = "asc_auth_key";
 
-const SETUP_HINT =
-  'No test portal. Add "testPortal": {"url", "user"} to config.local.json, then store the password:\n' +
-  `  security add-generic-password -s ${TEST_PORTAL.keychainService} -a <user> -w '<password>'\n` +
+const PASSWORD_HINT =
+  "Store the password in the Keychain:\n" +
+  `  security add-generic-password -s ${TEST_PORTAL.keychainService} -a ${TEST_PORTAL.user || "<user>"} -w '<password>'\n` +
   "(Windows / Linux: set BZ_PORTAL_PASSWORD instead.)";
 
 function requirePortal() {
   if (!TEST_PORTAL.url || !TEST_PORTAL.user) {
-    console.error(SETUP_HINT);
+    console.error(`No test portal. Add "testPortal": {"url", "user"} to config.local.json.\n${PASSWORD_HINT}`);
     process.exit(2);
   }
 }
@@ -81,7 +81,7 @@ function cachedToken() {
 async function login() {
   const password = getPortalPassword();
   if (!password) {
-    console.error(`No password for ${TEST_PORTAL.user}.\n${SETUP_HINT}`);
+    console.error(`No password for ${TEST_PORTAL.user} on ${TEST_PORTAL.url}.\n${PASSWORD_HINT}`);
     process.exit(2);
   }
   const res = await fetch(`${TEST_PORTAL.url}/api/2.0/authentication`, {

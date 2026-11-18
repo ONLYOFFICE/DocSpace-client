@@ -731,14 +731,16 @@ function commentCore(text) {
   return text.replace(FOOTER_RE, "").trim();
 }
 
+// A replay on the portal backs a close ("does not reproduce") as well as a
+// bug that is still there, so only a fixed verdict says it did not reproduce.
 const PORTAL_LINE = {
-  ru: (v) => `Не воспроизводится на тестовом портале, версия ${v}.`,
-  en: (v) => `Does not reproduce on the test portal, version ${v}.`,
+  ru: (v, fixed) => (fixed ? `Не воспроизводится на тестовом портале, версия ${v}.` : `Версия тестового портала: ${v}.`),
+  en: (v, fixed) => (fixed ? `Does not reproduce on the test portal, version ${v}.` : `Test portal version: ${v}.`),
 };
 
-function withFooter(comment, model, { e2eLink, portalVersion, lang } = {}) {
+function withFooter(comment, model, { e2eLink, portalVersion, fixed, lang } = {}) {
   const extra = [
-    portalVersion ? PORTAL_LINE[lang](portalVersion) : "",
+    portalVersion ? PORTAL_LINE[lang](portalVersion, fixed) : "",
     e2eLink ? `E2E: ${e2eLink}` : "",
   ].filter(Boolean);
   const tail = extra.length ? `\n\n${extra.join("\n")}` : "";
@@ -819,6 +821,7 @@ async function cmdPlan(args, key) {
       comment: withFooter(commentOf(d), model, {
         e2eLink: e2eCommit && commitUrl(e2eCommit),
         portalVersion: d.portal?.version,
+        fixed: d.verdict === "fixed",
         lang,
       }),
       ...(e2eCommit ? { e2eCommit, e2eSpec: d.e2e.spec } : {}),

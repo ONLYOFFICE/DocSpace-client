@@ -153,7 +153,9 @@ export {
   aiChatAssistantMessage,
   aiChatAttachmentsGetHandler,
   aiChatCreatedDocumentPart,
+  aiChatFileAttachmentPart,
   aiChatGeneratedImagePart,
+  aiChatImageAttachmentPart,
   aiChatMessageId,
   aiChatReplyEvents,
   aiChatRequestLog,
@@ -164,6 +166,8 @@ export {
 } from "./chatThreads";
 export type {
   AiChatContentPart,
+  AiChatFilePart,
+  AiChatImagePart,
   AiChatMessageMock,
   AiChatReplyMock,
   AiChatRequestLog,
@@ -198,6 +202,18 @@ export {
   roomCoversHandler,
 } from "./templates";
 export { aiTemplateInstallHandler, aiTemplatesHandler };
+
+export {
+  aiChatDraftSourcesStorage,
+  aiChatRoomSkillsHandlers,
+} from "./chatSources";
+export type {
+  AiChatRoomSkillMock,
+  AiChatRoomSkillsLog,
+  AiChatThreadSourceMock,
+} from "./chatSources";
+export { aiCopyToRoomHandlers } from "./saveToRoom";
+export type { AiCopyRequest, AiCopyTargetRoomMock } from "./saveToRoom";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),

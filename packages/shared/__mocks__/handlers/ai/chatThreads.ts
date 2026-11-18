@@ -84,7 +84,25 @@ export type AiChatToolCallPart = {
   result?: string;
 };
 
-export type AiChatContentPart = AiChatTextPart | AiChatToolCallPart;
+/**
+ * An image the user attached, as the library stores it in the sent message
+ * (`buildImageRefBlock`): `image` is the JSON ref to the stored attachment,
+ * `name` its file name.
+ */
+export type AiChatImagePart = { type: "image"; image: string; name?: string };
+
+/**
+ * Any other file the user attached, as the library stores it in the sent
+ * message (`buildFileRefBlock`): `mimeType` is the JSON ref to the stored
+ * attachment, `data` stays empty.
+ */
+export type AiChatFilePart = { type: "file"; mimeType: string; data: string };
+
+export type AiChatContentPart =
+  | AiChatTextPart
+  | AiChatToolCallPart
+  | AiChatImagePart
+  | AiChatFilePart;
 
 /**
  * A stored message as `threads/read-messages` answers it: assistant-ui's
@@ -253,6 +271,52 @@ export const aiChatCreatedDocumentPart = ({
     args: { task },
     result: { data: { summary, files } },
   });
+
+/**
+ * An image attached to a user message, as the library sends and the storage
+ * keeps it: a ref to the stored attachment (`buildImageRefBlock`). The
+ * message draws it once `ai/attachments/get` answers the ref - see
+ * {@link aiChatAttachmentsGetHandler}.
+ */
+export const aiChatImageAttachmentPart = ({
+  ref,
+  title,
+}: {
+  ref: string;
+  title: string;
+}): AiChatImagePart => ({
+  type: "image",
+  image: JSON.stringify({ ref, title, kind: "image" }),
+  name: title,
+});
+
+/**
+ * A file attached to a user message (`buildFileRefBlock`): its ref, its name,
+ * the `${entryId}/${title}` path ASC.AI.Chat gives a portal file and the
+ * editor's file type code the chip draws its icon from (`c_oAscFileType`,
+ * 65 for .docx).
+ */
+export const aiChatFileAttachmentPart = ({
+  ref,
+  title,
+  entryId,
+  type = 0,
+}: {
+  ref: string;
+  title: string;
+  entryId?: number | string;
+  type?: number;
+}): AiChatFilePart => ({
+  type: "file",
+  mimeType: JSON.stringify({
+    ref,
+    title,
+    kind: "file",
+    ...(entryId === undefined ? {} : { path: `${entryId}/${title}` }),
+    type,
+  }),
+  data: "",
+});
 
 /**
  * The snapshots a reply streams through: each tool call first without its
@@ -619,7 +683,20 @@ export const aiChatThreadsHandlers = (
  */
 export const aiChatAttachmentsGetHandler = (
   port: string,
-  attachments: Record<string, { title: string; base64: string }>,
+  attachments: Record<
+    string,
+    {
+      title: string;
+      base64: string;
+      /**
+       * The portal file the attachment is (a generated image is saved as
+       * one): answered as `path: "${entryId}/${title}"`, the form
+       * ASC.AI.Chat composes (`dtoToAttachment`), which "Save to room..."
+       * reads the file id from. Without it the record has no path.
+       */
+      entryId?: number | string;
+    }
+  >,
 ) =>
   http.post(
     `${BASE_URL}:${port}/${API_PREFIX}/ai/attachments/get`,
@@ -641,6 +718,9 @@ export const aiChatAttachmentsGetHandler = (
         source: "tool",
         title: record.title,
         base64: record.base64,
+        ...(record.entryId === undefined
+          ? {}
+          : { path: `${record.entryId}/${record.title}` }),
         createdAt: Date.parse(DEFAULT_CREATED_AT),
       });
     },

@@ -213,8 +213,12 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
-    // An AI project shows as a room does; it holds no files of its own and
-    // takes no storage, and its model comes from its settings block.
+    // An agent (an AI project) shows as a room does, with no Content and no
+    // Storage rows: it lists no contents of its own, as its members'
+    // conversation files lie in folders internal to each conversation. Those
+    // files do take space, counted against the agent and the portal rather
+    // than the member's quota; Details does not show it (design.md, Open
+    // Questions). Its model comes from its settings block.
     const isAIProject = isAgent(this.item);
 
     // A skill is shown as a skill, not as the Markdown file that holds it:

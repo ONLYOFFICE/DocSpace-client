@@ -14,7 +14,7 @@ const stores = vi.hoisted(() => ({
   },
   filesSettingsStore: { getIcon: () => "icon.svg" },
   settingsStore: { culture: "en" },
-  filesActionsStore: { downloadFiles: vi.fn(), checkAndOpenLocationAction: vi.fn() },
+  filesActionsStore: { downloadFiles: vi.fn() },
   filesStore: { setSelected: vi.fn(), setBufferSelection: vi.fn() },
   infoPanelStore: { setIsMobileHidden: vi.fn() },
 }));
@@ -144,18 +144,16 @@ describe("AiAgentContent", () => {
     open.mockRestore();
   });
 
-  it("opens the room or folder a file is in from its menu", async () => {
+  // Spec: ai-agent-info-panel, "Actions of a Content row"
+  it("offers no Open location, as the conversation's folders are internal", async () => {
     render(<AiAgentContent projectId={7} />);
     await flush();
-    const [, row] = screen
-      .getByTestId("ai-agent-content-attachments")
-      .querySelectorAll('[data-testid="ai-agent-content-file"]');
-    const item = row.querySelector('[data-testid="ai-agent-content-open-location"]') as HTMLElement;
-    expect(item.textContent).toBe("Common:OpenLocation");
-    fireEvent.click(item);
-    expect(stores.filesActionsStore.checkAndOpenLocationAction).toHaveBeenCalledWith(
-      expect.objectContaining({ id: 3, title: "Notes.jpg" }),
-    );
+    const rows = screen.getByTestId("ai-agent-content").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    expect(rows.length).toBeGreaterThan(0);
+    rows.forEach((row) => {
+      expect(row.querySelector('[data-testid="ai-agent-content-open-location"]')).toBeNull();
+      expect(row.querySelector('[data-testid="ai-agent-content-download"]')).not.toBeNull();
+    });
   });
 
   it("shows both sections empty for a new chat, without a request", async () => {

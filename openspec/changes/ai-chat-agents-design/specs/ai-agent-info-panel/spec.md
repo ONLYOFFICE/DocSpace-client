@@ -123,11 +123,15 @@ Each row SHALL show the file's icon, its name and its size, and for an artifact 
 - **THEN** its row shows the name, the size and the time, and opens the file by its name
 
 ### Requirement: Actions of a Content row
-Each row SHALL end with an actions menu ("⋮") that offers Download, "Save to room..." (`Common:SaveToRoom`), which copies the file into a room or folder the user picks, and an item that opens the room or folder the file is in.
+Each row SHALL end with an actions menu ("⋮") that offers Download and "Save to room..." (`Common:SaveToRoom`), which copies the file into a room or folder the user picks. It SHALL NOT offer "Open location": the folders of a conversation are internal to the agent and read-only to their author.
 
 #### Scenario: Copying an artifact
 - **WHEN** the user chooses "Save to room..." on an artifact's row and picks a room
 - **THEN** the file is copied there
+
+#### Scenario: No location to open
+- **WHEN** the user opens the actions menu of an attachment's row
+- **THEN** it offers Download and "Save to room..." and no "Open location"
 
 ### Requirement: Download all artifacts
 While Artifacts lists more than one file, its heading SHALL offer "Download all" (`Files:DownloadAll`), which downloads them together as one archive. Attachments SHALL NOT offer it.

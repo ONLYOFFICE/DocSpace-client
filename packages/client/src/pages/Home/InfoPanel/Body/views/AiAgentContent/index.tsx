@@ -52,7 +52,6 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
-import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 
 import styles from "./AiAgentContent.module.scss";
 
@@ -128,8 +127,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const threadId = useStore("dialogsStore").aiChatActiveThreadId;
   const { getIcon } = useStore("filesSettingsStore");
   const culture = useStore("settingsStore").culture;
-  const { downloadFiles, checkAndOpenLocationAction } =
-    useStore("filesActionsStore");
+  const { downloadFiles } = useStore("filesActionsStore");
   const filesStore = useStore("filesStore");
   const dialogsStore = useStore("dialogsStore");
   const infoPanelStore = useStore("infoPanelStore");
@@ -237,14 +235,9 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
       icon: CopyToReactSvgUrl,
       onClick: () => saveToRoom(file),
     },
-    {
-      // The folder the file lies in, opened with the file highlighted, as
-      // "Open location" does elsewhere.
-      key: "ai-agent-content-open-location",
-      label: t("Common:OpenLocation"),
-      icon: FolderLocationReactSvgUrl,
-      onClick: () => void checkAndOpenLocationAction(file),
-    },
+    // No "Open location": every file listed lies in a folder of the
+    // conversation that is internal to the agent and read-only to its
+    // author, so the conversation itself is where the file is.
   ];
 
   const row = (file: TFile) => {

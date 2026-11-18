@@ -151,6 +151,28 @@ describe("RecoveryPhraseDisplayModal", () => {
     expect(new Set(classes).size).toBe(1);
   });
 
+  it("Icons shown", () => {
+    renderModal();
+
+    for (const name of SAVE_ACTIONS) {
+      const action = screen.getByRole("button", { name });
+      expect(within(action).getByTestId("recovery_save_icon")).toBeInTheDocument();
+    }
+  });
+
+  it("Name of an action", () => {
+    renderModal();
+
+    for (const name of SAVE_ACTIONS) {
+      const action = screen.getByRole("button", { name });
+      expect(action).toHaveAccessibleName(name);
+      expect(within(action).getByTestId("recovery_save_icon")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      );
+    }
+  });
+
   it("Numbered words", () => {
     renderModal();
     const list = screen.getByTestId("recovery_phrase_words");
@@ -164,7 +186,7 @@ describe("RecoveryPhraseDisplayModal", () => {
     ).toEqual(WORDS);
   });
 
-  it("Numbers stay out of the copy", () => {
+  it("Copied by hand", () => {
     renderModal();
     const list = screen.getByTestId("recovery_phrase_words");
 

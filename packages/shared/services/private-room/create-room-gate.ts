@@ -48,7 +48,7 @@ export const hasPrivateRoomSecureContext = () => !!globalThis.crypto?.subtle;
  * fetched again from the server; `keys` is null when there are none.
  * `fetchFailed` tells a fetch that failed from a list that is empty, since a
  * list that could not be loaded may still hold a key.
- * Spec: private-rooms/room-membership, "Starting private room creation without a key starts key generation"
+ * Spec: private-rooms/room-membership, "Starting private room creation without a key opens key setup"
  */
 export async function resolvePrivateRoomKeys<TKey>(
   cachedKeys: TKey[] | null | undefined,

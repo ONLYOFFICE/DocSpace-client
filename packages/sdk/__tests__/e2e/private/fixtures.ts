@@ -114,7 +114,7 @@ export const unlock = async (page: Page) => {
     .locator('input[name="passphrase"], #passphrase input')
     .first()
     .fill(FIXTURE_PASSPHRASE);
-  await prompt.getByRole("button", { name: "Confirm" }).click();
+  await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
   await expect(prompt).toBeHidden({ timeout: 15000 });
 };
 

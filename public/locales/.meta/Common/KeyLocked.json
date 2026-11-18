@@ -1,0 +1,29 @@
+{
+  "key_path": "KeyLocked",
+  "content": "Key locked",
+  "content_en_sha1_hash": "38059810ce22318a4481cc79942c0bc0c9d6fd43",
+  "created_at": "2026-11-17T11:37:53.232Z",
+  "updated_at": "2026-11-17T11:38:48.375Z",
+  "comment": {
+    "text": "Label of the small button in the header of a private room, next to the room menu, showing that the user's encryption key is locked on this device; pressing it asks for the passphrase. A short state label (adjective or participle), not a command.",
+    "is_auto": true,
+    "updated_at": "2026-11-17T11:38:48.375Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/sub-components/KeyStateIndicator.tsx",
+      "line_number": 65,
+      "context": "const { isUnlocked, hasConfiguredKey, keysLoaded, requireIdentity } =\n useEncryption();\n \n if (!isPrivate || !keysLoaded || !hasConfiguredKey) return null;\n \n const label = isUnlocked ? t(\"Common:KeyUnlocked\") : t(\"Common:KeyLocked\");\n \n const onClick = () => {\n if (isUnlocked) return;\n \n void requireIdentity().then((identity) => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

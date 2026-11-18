@@ -40,4 +40,10 @@ export interface UnsavedChangesDialogProps {
   onConfirm: VoidFunction;
   /** Stacking order; raise it when the dialog confirms the close of another dialog. */
   zIndex?: number;
+  /** What closing throws away, in place of the general unsaved-changes text. */
+  description?: string;
+  /** The title, in place of the general unsaved-changes one. */
+  title?: string;
+  /** The label of the confirming action, in place of the general one. */
+  confirmLabel?: string;
 }

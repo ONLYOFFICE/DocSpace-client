@@ -80,6 +80,7 @@ import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { fixAccess } from "./utils";
+import { useMissingKeyMarks } from "./useMissingKeyMarks";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
@@ -919,6 +920,8 @@ const InvitePanel = ({
   };
 
   const isPrivateRoom = !!selectedRoom?.private;
+  // Spec: private-rooms/room-membership, "People without a key are marked before the invitation is sent"
+  const getItemMarks = useMissingKeyMarks({ roomId, isPrivateRoom, t });
 
   const bodyInvitePanel = useMemo(() => {
     return (
@@ -1137,6 +1140,7 @@ const InvitePanel = ({
               },
             }}
             currentUserId={currentUserId}
+            getItemMarks={getItemMarks}
           />
         </ModalDialog.Container>
       ) : null}

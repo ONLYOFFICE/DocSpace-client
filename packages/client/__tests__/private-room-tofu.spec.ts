@@ -75,7 +75,7 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
     await prompt
       .getByLabel("Passphrase", { exact: true })
       .fill(passphrase);
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
   }
 };
 

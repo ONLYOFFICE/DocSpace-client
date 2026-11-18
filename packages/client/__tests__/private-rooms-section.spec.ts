@@ -65,6 +65,7 @@ import { http } from "msw";
 import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip } from "./helpers/tour";
+import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const ROOM_ID = 9500;
 /** The pending flag of the Rooms tour, packages/client/src/store/RoomsTourStore.ts */
@@ -1800,23 +1801,22 @@ test.describe("Private section — key prompt", () => {
     );
   });
 
+  // Key setup opens on its explanation step, with no question before it.
   const keyPrompt = (page: Page) =>
-    page
-      .getByRole("dialog")
-      .filter({ hasText: "Encryption key required" });
+    page.getByRole("dialog", { name: "Create key" });
 
   const openCreateFromSection = async (page: Page, baseUrl: string) => {
     await page.goto(`${baseUrl}/private/filter`);
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
     await page.getByTestId("main-button").first().click();
     await expect(keyPrompt(page)).toBeVisible({ timeout: 15000 });
-    // No dialog under the prompts: a closed panel stays mounted, off screen.
+    // No dialog under key setup: a closed panel stays mounted, off screen.
     await expect(
       page.getByTestId("create_room_dialog_save"),
     ).not.toBeInViewport();
   };
 
-  test("User accepts key generation", async ({ page, baseUrl }) => {
+  test("User completes key setup", async ({ page, baseUrl }) => {
     await openCreateFromSection(page, baseUrl);
 
     await keyPrompt(page).getByRole("button", { name: "Continue" }).click();
@@ -1858,7 +1858,7 @@ test.describe("Private section — key prompt", () => {
     await expect(dialog.getByText("Private Room", { exact: true })).toBeVisible();
   });
 
-  test("User cancels key generation", async ({ page, baseUrl }) => {
+  test("User cancels on the explanation", async ({ page, baseUrl }) => {
     const createRequests: string[] = [];
     page.on("request", (request) => {
       if (request.method() === "POST" && /\/files\/rooms$/.test(request.url()))
@@ -1907,3 +1907,257 @@ test.describe("Private section — E2E rooms bookmarks", () => {
   });
 });
 
+test.describe("Private section — key state indicator", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        initialFiles: [{ id: 9501, title: FILE_TITLE, size: 4, encrypted: false }],
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ORDINARY_ROOM_ID,
+        title: "Team Room",
+        isPrivate: false,
+        initialFiles: [
+          { id: 9601, title: ORDINARY_FILE_TITLE, size: 4, encrypted: false },
+        ],
+      }),
+    );
+  });
+
+  const indicator = (page: Page) => page.getByTestId("key_state_indicator");
+  const keyPopover = (page: Page) =>
+    page.getByRole("dialog", { name: "Key unlocked" });
+
+  /** Makes a key, which leaves it unlocked, and opens the room in-app. */
+  const openRoomWithKey = async (
+    page: Page,
+    mockRequest: Parameters<typeof bootstrapEncryption>[1],
+    baseUrl: string,
+  ) => {
+    const { passphrase } = await bootstrapEncryption(page, mockRequest, baseUrl);
+    await navigateInApp(page, `/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+    return passphrase;
+  };
+
+  test("Shown unlocked", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    await openRoomWithKey(page, mockRequest, baseUrl);
+
+    await expect(indicator(page)).toHaveText("Key unlocked");
+  });
+
+  test("Locked from the popover", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    await openRoomWithKey(page, mockRequest, baseUrl);
+
+    await indicator(page).click();
+    const popover = keyPopover(page);
+    await expect(popover).toBeVisible();
+    await expect(
+      popover.getByRole("group", { name: "Auto-lock after inactivity" }),
+    ).toBeVisible();
+    await expect(
+      popover.getByRole("link", { name: "Keys management" }),
+    ).toBeVisible();
+
+    await popover.getByRole("button", { name: "Lock now" }).click();
+
+    await expect(indicator(page)).toHaveText("Key locked");
+    await expect(popover).toHaveCount(0);
+    await expect(indicator(page)).toBeFocused();
+  });
+
+  test("Unlocked from the indicator", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const passphrase = await openRoomWithKey(page, mockRequest, baseUrl);
+    await indicator(page).click();
+    await keyPopover(page).getByRole("button", { name: "Lock now" }).click();
+    await expect(indicator(page)).toHaveText("Key locked");
+
+    await indicator(page).click();
+
+    const prompt = page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
+    await expect(prompt).toBeVisible({ timeout: 5000 });
+    await expect(keyPopover(page)).toHaveCount(0);
+    await prompt
+      .locator('input[name="passphrase"], #passphrase input')
+      .first()
+      .fill(passphrase);
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
+
+    await expect(indicator(page)).toHaveText("Key unlocked");
+  });
+
+  test("Absent in a room that is not private", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    await bootstrapEncryption(page, mockRequest, baseUrl);
+
+    await navigateInApp(
+      page,
+      `/rooms/shared/${ORDINARY_ROOM_ID}/filter?folder=${ORDINARY_ROOM_ID}`,
+    );
+    await expect(fileRow(page, ORDINARY_FILE_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+
+    await expect(indicator(page)).toHaveCount(0);
+  });
+  test("Shown whole on a phone", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    await openRoomWithKey(page, mockRequest, baseUrl);
+    await page.setViewportSize({ width: 375, height: 800 });
+
+    await expect(indicator(page)).toHaveText("Key unlocked");
+    const box = await indicator(page).boundingBox();
+    const row = await page.locator("#control-buttons-container").boundingBox();
+    expect(box).not.toBeNull();
+    expect(row).not.toBeNull();
+    expect(box!.x).toBeGreaterThanOrEqual(row!.x - 1);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(row!.x + row!.width + 1);
+    await expect(page.locator(".title-block-text")).toBeVisible();
+  });
+
+  // WCAG 2.x contrast of two computed CSS colours ("rgb(r, g, b)").
+  const contrastOf = (a: string, b: string) => {
+    const luminance = (css: string) => {
+      const [r, g, bl] = (css.match(/[\d.]+/g) ?? [])
+        .slice(0, 3)
+        .map((c) => Number(c) / 255)
+        .map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+      return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+    };
+    const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return (light + 0.05) / (dark + 0.05);
+  };
+
+  const pillColours = (page: Page) =>
+    indicator(page).evaluate((element) => {
+      const style = getComputedStyle(element);
+      const path = element.querySelector("svg path");
+      const iconStyle = path ? getComputedStyle(path) : null;
+      return {
+        pill: style.backgroundColor,
+        text: style.color,
+        icon: iconStyle
+          ? iconStyle.fill !== "none"
+            ? iconStyle.fill
+            : iconStyle.stroke
+          : "",
+      };
+    });
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`Readable in the ${colorScheme} theme`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      await page.emulateMedia({ colorScheme });
+      await openRoomWithKey(page, mockRequest, baseUrl);
+
+      const unlocked = await pillColours(page);
+      await indicator(page).click();
+      await keyPopover(page).getByRole("button", { name: "Lock now" }).click();
+      await expect(indicator(page)).toHaveText("Key locked");
+      // The pointer still rests on the pill: read it without its hover tint.
+      await page.mouse.move(0, 0);
+      await expect
+        .poll(async () => (await pillColours(page)).pill)
+        .not.toBe(unlocked.pill);
+      const locked = await pillColours(page);
+
+      for (const [state, colours] of [
+        ["unlocked", unlocked],
+        ["locked", locked],
+      ] as const) {
+        expect(
+          contrastOf(colours.text, colours.pill),
+          `${state} text: ${colours.text} on ${colours.pill}`,
+        ).toBeGreaterThanOrEqual(4.5);
+        expect(
+          contrastOf(colours.icon, colours.pill),
+          `${state} icon: ${colours.icon} on ${colours.pill}`,
+        ).toBeGreaterThanOrEqual(3);
+      }
+    });
+  }
+
+  test("Preset picked in the popover", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    await openRoomWithKey(page, mockRequest, baseUrl);
+
+    await indicator(page).click();
+    const popover = keyPopover(page);
+    await popover.getByTestId("auto_lock_timeout_combobox").click();
+    await popover.getByRole("option", { name: "5 minutes", exact: true }).click();
+
+    await expect(popover.getByTestId("auto_lock_timeout_combobox")).toContainText(
+      "5 minutes",
+    );
+    await page.keyboard.press("Escape");
+    await expect(popover).toHaveCount(0);
+    await expect(indicator(page)).toBeFocused();
+
+    await navigateInApp(page, "/profile/keys-management");
+    await expect(page.getByTestId("auto_lock_timeout_combobox")).toContainText(
+      "5 minutes",
+      { timeout: 15000 },
+    );
+  });
+});
+
+test.describe("Private section — locked-key block", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [
+          {
+            id: "1",
+            userId: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+            publicKey: "BASE64_PUBLIC_KEY_FIXTURE_FOR_TEST",
+            privateKeyEnc: "BASE64_PRIVATE_KEY_ENC_FIXTURE_FOR_TEST",
+            date: "2026-01-01T00:00:00.000Z",
+          },
+        ],
+      }),
+      privateRoomListHandler(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+      ...encryptedFilesHandlers(TEST_PORT, { roomId: ROOM_ID, title: ROOM_TITLE }),
+    );
+  });
+
+  test("Room without files", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+
+    const prompt = page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
+    await expect(prompt).toBeVisible({ timeout: 15000 });
+    await prompt.getByRole("button", { name: "Cancel" }).click();
+
+    const block = page.getByTestId("private_room_locked_block");
+    await expect(block).toBeVisible();
+    await expect(
+      block.getByRole("button", { name: "Unlock", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Files in this room are end-to-end encrypted"),
+    ).toHaveCount(0);
+  });
+});

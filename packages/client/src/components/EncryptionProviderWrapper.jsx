@@ -224,7 +224,6 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
       encryptionKeys,
       setUserEncryptionKeys,
     }) => {
-      const { t } = useTranslation(["Common"]);
       const [isRecovering, setIsRecovering] = React.useState(false);
 
       const refreshKeysFromServer = React.useCallback(async () => {
@@ -275,7 +274,6 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
           onSubmit={onSubmit}
           onCancel={onCancel}
           onForgotPassphrase={handleForgotPassphrase}
-          submitLabel={t("Common:Confirm")}
           showRememberDevice
           onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}
           isPasskeyUnlocking={passkey.isUnlocking}

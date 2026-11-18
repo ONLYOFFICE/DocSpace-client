@@ -58,8 +58,8 @@ import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const TEST_USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 const ROOM_ID = 9451;
-// Both passphrases must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
-// length >= 12, uppercase, digits, special characters.
+// Both passphrases must satisfy the rules of a new passphrase
+// (PASSPHRASE_SETTINGS): at least 12 characters and no common pattern.
 const KNOWN_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
 const KNOWN_MNEMONIC =
   "abandon abandon abandon abandon abandon abandon " +
@@ -454,7 +454,7 @@ test.describe("Keys management — advanced flows", () => {
       .getByLabel("Passphrase", { exact: true })
       .fill(passphrase);
     await prompt.getByText("Don't ask again on this device").click();
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
     await expect
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(1);

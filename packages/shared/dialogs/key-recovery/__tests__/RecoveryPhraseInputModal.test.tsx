@@ -38,8 +38,19 @@ import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 
+import enCommon from "PUBLIC_DIR/locales/en/Common.json";
+
 import { validateMnemonic } from "../../../services/encryption/recovery";
 import { RecoveryPhraseInputModal } from "../RecoveryPhraseInputModal";
+
+// The shared mock echoes the key alone; the word count is read from the
+// interpolation values, so they are printed after it.
+vi.mock("react-i18next", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-i18next")>();
+  const t = (key: string, options?: Record<string, unknown>) =>
+    options ? `${key} ${JSON.stringify(options)}` : key;
+  return { ...actual, useTranslation: () => ({ t, ready: true }) };
+});
 
 vi.mock("../../../services/encryption/recovery", async (importOriginal) => {
   const actual =
@@ -116,7 +127,9 @@ describe("RecoveryPhraseInputModal", () => {
     await user.paste(VALID_PHRASE);
     await user.keyboard("{Enter}");
 
-    expect(validateMnemonic).toHaveBeenCalledWith(VALID_PHRASE);
+    await waitFor(() =>
+      expect(validateMnemonic).toHaveBeenCalledWith(VALID_PHRASE),
+    );
     await waitFor(() => expect(onSubmit).toHaveBeenCalledWith(VALID_PHRASE));
     expect(getPhraseField()).toHaveValue(VALID_PHRASE);
   });
@@ -211,5 +224,147 @@ describe("RecoveryPhraseInputModal", () => {
 
     expect(getPhraseField()).toHaveAttribute("aria-invalid", "true");
     expect(getPhraseField()).toHaveFocus();
+  });
+
+  describe("The recovery phrase input counts its words", () => {
+    const wordCount = () => screen.getByTestId("recovery_phrase_word_count");
+    const words = (count: number) => Array(count).fill("abandon").join(" ");
+
+    it("Count while typing", async () => {
+      const user = userEvent.setup();
+      renderModal();
+
+      expect(wordCount()).toHaveTextContent('"entered":0,"total":24');
+      await user.click(getPhraseField());
+      await user.paste(words(23));
+
+      expect(wordCount()).toHaveTextContent('"entered":23,"total":24');
+      expect(getPhraseField()).toHaveAccessibleDescription(
+        expect.stringContaining("Common:RecoveryPhraseWordCount"),
+      );
+    });
+
+    it("Too few words submitted", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+
+      await user.click(getPhraseField());
+      await user.paste(words(23));
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          "Common:RecoveryPhraseRequired",
+        ),
+      );
+      expect(validateMnemonic).not.toHaveBeenCalled();
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("Extra spaces and line breaks", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+      const spaced = `  ${words(12).replace(/ /g, "   ")}\n\n${words(11)}  art `;
+
+      await user.click(getPhraseField());
+      await user.paste(spaced);
+
+      expect(wordCount()).toHaveTextContent('"entered":24,"total":24');
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledWith(VALID_PHRASE));
+    });
+  });
+
+  describe("A word that is no recovery word is named", () => {
+    const submit = async (user: ReturnType<typeof userEvent.setup>, text: string) => {
+      await user.click(getPhraseField());
+      await user.paste(text);
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+    };
+
+    it("Misspelled word", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+      const words = VALID_PHRASE.split(" ");
+      words[9] = "abandn";
+
+      await submit(user, words.join(" "));
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          'Common:RecoveryPhraseUnknownWord {"word":"abandn","position":10}',
+        ),
+      );
+      expect(validateMnemonic).not.toHaveBeenCalled();
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("All words valid, phrase wrong", async () => {
+      const user = userEvent.setup();
+      const { onSubmit } = renderModal();
+
+      // Every word is a recovery word, but the last one breaks the checksum.
+      await submit(user, `${"abandon ".repeat(23)}zoo`);
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          "Common:InvalidRecoveryPhrase",
+        ),
+      );
+      expect(screen.getByTestId("key-dialog-announcement")).not.toHaveTextContent(
+        "Common:RecoveryPhraseUnknownWord",
+      );
+      expect(validateMnemonic).toHaveBeenCalled();
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("Recovery messages use plain words", () => {
+    it("Wrong phrase", async () => {
+      const user = userEvent.setup();
+      renderModal();
+
+      await user.click(getPhraseField());
+      await user.paste(`${"abandon ".repeat(23)}zoo`);
+      await user.click(
+        screen.getByRole("button", { name: "Common:ContinueButton" }),
+      );
+
+      await waitFor(() =>
+        expect(screen.getByTestId("key-dialog-announcement")).toHaveTextContent(
+          "Common:InvalidRecoveryPhrase",
+        ),
+      );
+      expect(enCommon.InvalidRecoveryPhrase).toMatch(/words/i);
+      expect(enCommon.InvalidRecoveryPhrase).toMatch(/order/i);
+      for (const key of [
+        "InvalidRecoveryPhrase",
+        "RecoveryPhraseRequired",
+        "RecoveryPhraseUnknownWord",
+        "RecoveryPhraseWordCount",
+        "RecoveryPhraseInputHint",
+        "RecoveryPhrasePlaceholder",
+      ] as const) {
+        expect(enCommon[key]).not.toMatch(/BIP|mnemonic|wordlist|checksum/i);
+      }
+    });
+  });
+
+  describe("The recovery phrase input takes no input assistance", () => {
+    it("Recovery input", () => {
+      renderModal();
+
+      const field = getPhraseField();
+      expect(field).toHaveAttribute("spellcheck", "false");
+      expect(field).toHaveAttribute("autocorrect", "off");
+      expect(field).toHaveAttribute("autocapitalize", "off");
+      expect(field).toHaveAttribute("autocomplete", "off");
+    });
   });
 });

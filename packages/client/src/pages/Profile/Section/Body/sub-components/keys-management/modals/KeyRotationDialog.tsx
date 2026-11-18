@@ -58,7 +58,11 @@ import {
   containsCommonPattern,
   isPassphraseAcceptable,
 } from "@docspace/shared/services/encryption/passphrase-strength";
-import { PASSPHRASE_SETTINGS } from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
+import {
+  PASSPHRASE_SETTINGS,
+  RULES_TOOLTIP_PLACE,
+} from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
+import { PassphraseStrengthLine } from "@docspace/shared/dialogs/passphrase-modal/PassphraseStrengthLine";
 
 import styles from "./KeyRotationDialog.module.scss";
 
@@ -295,9 +299,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tooltipPasswordLength={`${t(
                     "Common:PasswordMinimumLength",
                   )}: ${PASSPHRASE_MIN_LENGTH}`}
-                  tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-                  tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-                  tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
+                  tooltipPasswordPlace={RULES_TOOLTIP_PLACE}
                   isDisabled={isLoading}
                   hasError={!!newFieldError}
                   autoComplete="new-password"
@@ -305,6 +307,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tabIndex={0}
                 />
               </FieldContainer>
+              <PassphraseStrengthLine passphrase={newPassphrase} />
             </div>
 
             <div className={styles.inputGroup}>

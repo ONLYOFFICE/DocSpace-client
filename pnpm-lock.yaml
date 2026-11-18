@@ -617,8 +617,8 @@ importers:
         specifier: 2.4.16
         version: 2.4.16
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: file:../../onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz
-        version: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz(@types/node@24.10.7)(react@19.2.8)
+        specifier: file:../../onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz
+        version: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz(@types/node@24.10.7)(react@19.2.8)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -3573,7 +3573,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-IMyn4dr8dHL7baQ9kgoemzIKQfUyqQlsC7EfOvsO8ZkA6ZDZJd+N4JW5kn8FHHoG+l6CeXnYxwNxDxvu9jIRJA==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-/gMaIC6r8ZJls2tvKBrSfy1N/QLGkvTKXJu/4da2gBEYRgf0vxYEfUkEDkfwYGPOSZbtBuwIMccLasi6NqHOOQ==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
@@ -3637,9 +3637,9 @@ packages:
   '@onlyoffice/docspace-api-sdk@3.7.0':
     resolution: {integrity: sha512-zzhvkBZj7RelLDxGg/OnonG2vFwurlI2FaPSSHPiYXosu5y4lopQnSkoxoZ1uXgnWAKREjt1d0p+nkdtTH5xkA==}
 
-  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz':
-    resolution: {integrity: sha512-8KztC/hA0JarBGeqZ5Mm17XAm+3jG+6FkOYrVprvXocN+XqIB9P0j98NcRsMERmvcXAPNnh3tUnlbxpdIJ1VTQ==, tarball: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz}
-    version: 3.1.0-20261116
+  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz':
+    resolution: {integrity: sha512-L1A42L+K6omYXbIyvNRGFSfy1UgEbELNmNXKuuH7PVbIfgUWVp6fJQ6KgQvbb9pjimc8m5jhqhnki8RGybjIIA==, tarball: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz}
+    version: 3.1.0-20261117.8
     hasBin: true
     peerDependencies:
       react: 19.2.8
@@ -11862,7 +11862,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz(@types/node@24.10.7)(react@19.2.8)':
+  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz(@types/node@24.10.7)(react@19.2.8)':
     dependencies:
       '@types/react': 19.2.10
       inquirer: 9.3.8(@types/node@24.10.7)

@@ -57,6 +57,7 @@ type Deposit = {
   currency: string;
   status: "Pending" | "Completed" | "Rejected" | "Canceled";
   hasInvoice: boolean;
+  initiator: "Manual" | "Automatic";
 };
 
 const DEPOSITS: Deposit[] = [
@@ -67,6 +68,7 @@ const DEPOSITS: Deposit[] = [
     currency: "USD",
     status: "Completed",
     hasInvoice: true,
+    initiator: "Manual",
   },
   {
     id: 15201,
@@ -75,6 +77,7 @@ const DEPOSITS: Deposit[] = [
     currency: "USD",
     status: "Completed",
     hasInvoice: true,
+    initiator: "Automatic",
   },
   {
     id: 15100,
@@ -83,6 +86,7 @@ const DEPOSITS: Deposit[] = [
     currency: "USD",
     status: "Completed",
     hasInvoice: true,
+    initiator: "Manual",
   },
 ];
 
@@ -96,7 +100,14 @@ const depositsPage = (collection: Deposit[]) => ({
 });
 
 const depositsHandler = (collection: Deposit[] = DEPOSITS) =>
-  http.get(apiUrl(DEPOSITS_PATH), () => jsonResponse(depositsPage(collection)));
+  http.get(apiUrl(DEPOSITS_PATH), ({ request }) => {
+    const initiator = new URL(request.url).searchParams.get("initiator");
+    const rows = initiator
+      ? collection.filter((deposit) => deposit.initiator === initiator)
+      : collection;
+
+    return jsonResponse(depositsPage(rows));
+  });
 
 const invoiceUrlHandler = (baseUrl: string) =>
   http.get(apiUrl(`${DEPOSITS_PATH}/:id/invoice`), ({ params }) =>
@@ -104,20 +115,20 @@ const invoiceUrlHandler = (baseUrl: string) =>
   );
 
 const trackQueries = (page: Page, path: string) => {
-  const queries: string[] = [];
+  const queries: URLSearchParams[] = [];
 
   page.on("request", (request) => {
     const url = new URL(request.url());
 
     if (request.method() === "GET" && url.pathname.endsWith(`/${path}`))
-      queries.push(url.search);
+      queries.push(url.searchParams);
   });
 
   return queries;
 };
 
 const openInvoices = async (page: Page, baseUrl: string) => {
-  await page.goto(`${baseUrl}/billing/invoice-history`);
+  await page.goto(`${baseUrl}/billing/invoices`);
 
   await expect(
     page.getByText("Invoices", { exact: true }).first(),
@@ -126,13 +137,19 @@ const openInvoices = async (page: Page, baseUrl: string) => {
 
 const invoiceLinks = (page: Page) => page.getByTestId("invoice_link");
 
+const initiatorCombobox = (page: Page) =>
+  page.getByTestId("invoice_initiator_combobox");
+
+const clearFilter = (page: Page) =>
+  page.getByTestId("invoice_clear_filter_button");
+
 test.describe("Billing invoices", () => {
   test.beforeEach(async ({ mockRequest, page }) => {
     useSaasBilling(mockRequest, { user: "owner", payer: "self-owner" });
     await page.clock.setSystemTime(PAID_NOW);
   });
 
-  test("lists the completed top-ups with a link to each invoice", async ({
+  test("lists the completed top-ups of the last four weeks with their type and invoice", async ({
     page,
     baseUrl,
     mockRequest,
@@ -149,16 +166,82 @@ test.describe("Billing invoices", () => {
     await expect(page.getByText("$100.00")).toBeVisible();
     await expect(page.getByText("$50.00")).toBeVisible();
     await expect(page.getByText("$25.00")).toBeVisible();
-
+    await expect(page.getByText("Manual", { exact: true })).toHaveCount(2);
+    await expect(page.getByText("Automatic", { exact: true })).toHaveCount(1);
     await expect(invoiceLinks(page)).toHaveCount(3);
 
-    // The page asks for the first page of completed top-ups only.
+    // The default filter: every completed top-up of the last four weeks.
+    await expect(initiatorCombobox(page)).toContainText("All top-ups");
+    await expect(clearFilter(page)).toHaveCount(0);
     await expect.poll(() => queries.length).toBe(1);
-    expect(queries[0]).toContain("status=Completed");
-    expect(queries[0]).toContain("offset=0");
-    expect(queries[0]).toContain("limit=25");
+    expect(queries[0].get("status")).toBe("Completed");
+    expect(queries[0].get("startDate")).toBe("2025-11-12T00:00:00");
+    expect(queries[0].get("endDate")).toBe("2025-12-10T23:59:59");
+    expect(queries[0].get("initiator")).toBeNull();
+    expect(queries[0].get("offset")).toBe("0");
+    expect(queries[0].get("limit")).toBe("25");
 
     await expectScreenshot(page, ["desktop", "invoices", "list.png"]);
+  });
+
+  test("the type filter narrows the list and Clear filter widens it again", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(depositsHandler());
+    const queries = trackQueries(page, DEPOSITS_PATH);
+
+    await openInvoices(page, baseUrl);
+    await expect(invoiceLinks(page)).toHaveCount(3);
+
+    await initiatorCombobox(page).click();
+    await page.getByTestId("automatic_top_ups_option").click();
+
+    await expect.poll(() => queries.length).toBe(2);
+    expect(queries[1].get("initiator")).toBe("Automatic");
+    await expect(page.getByTestId("invoice_date")).toHaveCount(1);
+    await expect(page.getByText("$50.00")).toBeVisible();
+    await expect(initiatorCombobox(page)).toContainText("Automatic top-ups");
+
+    await expectScreenshot(page, ["desktop", "invoices", "filtered.png"]);
+
+    await clearFilter(page).click();
+
+    await expect.poll(() => queries.length).toBe(3);
+    expect(queries[2].get("initiator")).toBeNull();
+    await expect(page.getByTestId("invoice_date")).toHaveCount(3);
+    await expect(clearFilter(page)).toHaveCount(0);
+  });
+
+  test("a filter nothing matches says so and keeps the filter row", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    // Only manual top-ups exist, so the automatic filter finds nothing.
+    mockRequest.use(
+      depositsHandler(
+        DEPOSITS.filter((deposit) => deposit.initiator === "Manual"),
+      ),
+    );
+
+    await openInvoices(page, baseUrl);
+    await expect(invoiceLinks(page)).toHaveCount(2);
+
+    await initiatorCombobox(page).click();
+    await page.getByTestId("automatic_top_ups_option").click();
+
+    await expect(page.getByText("No findings found")).toBeVisible();
+    await expect(
+      page.getByText(
+        "No invoices match this filter. Try another or remove the filter to view all invoices.",
+      ),
+    ).toBeVisible();
+    await expect(initiatorCombobox(page)).toBeVisible();
+    await expect(clearFilter(page)).toBeVisible();
+
+    await expectScreenshot(page, ["desktop", "invoices", "filtered-empty.png"]);
   });
 
   test("View invoice opens the provider's page in a new tab", async ({
@@ -206,5 +289,52 @@ test.describe("Billing invoices", () => {
     await openInvoices(page, baseUrl);
 
     await expect(page.getByText("No invoices yet")).toBeVisible();
+  });
+});
+
+test.describe("Billing invoices on a phone", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test.beforeEach(async ({ mockRequest, page }) => {
+    useSaasBilling(mockRequest, { user: "owner", payer: "self-owner" });
+    mockRequest.use(depositsHandler());
+    await page.clock.setSystemTime(PAID_NOW);
+  });
+
+  test("the filter folds into an icon and applies from the panel", async ({
+    page,
+    baseUrl,
+  }) => {
+    const queries = trackQueries(page, DEPOSITS_PATH);
+
+    await openInvoices(page, baseUrl);
+    await expect(invoiceLinks(page)).toHaveCount(3);
+    await expect(page.getByText("Manual top-up", { exact: true })).toHaveCount(
+      2,
+    );
+
+    await expect(initiatorCombobox(page)).toHaveCount(0);
+    await page.getByTestId("invoice_filter_icon").click();
+
+    await expect(page.getByText("Top-up period")).toBeVisible();
+    await expect(page.getByTestId("apply_filter_button")).toBeDisabled();
+
+    await initiatorCombobox(page).click();
+    await page.getByTestId("automatic_top_ups_option").click();
+    await expect(page.getByTestId("apply_filter_button")).toBeEnabled();
+
+    await expectScreenshot(page, ["mobile", "invoices", "filter-panel.png"]);
+
+    expect(queries).toHaveLength(1);
+    await page.getByTestId("apply_filter_button").click();
+
+    await expect.poll(() => queries.length).toBe(2);
+    expect(queries[1].get("initiator")).toBe("Automatic");
+    await expect(
+      page.getByText("Automatic top-up", { exact: true }),
+    ).toHaveCount(1);
+    await expect(page.getByText("Manual top-up", { exact: true })).toHaveCount(
+      0,
+    );
   });
 });

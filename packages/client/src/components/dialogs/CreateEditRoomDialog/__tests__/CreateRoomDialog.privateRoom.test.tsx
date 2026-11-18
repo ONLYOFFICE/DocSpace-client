@@ -38,15 +38,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { RoomsTypePrivate } from "@docspace/shared/enums";
 
-type TConfirmProps = {
-  visible: boolean;
-  onConfirm: () => void;
+type TKeyFlowOptions = {
+  onSuccess: () => void;
+  onError: () => void;
   onCancel: () => void;
 };
-type TKeyFlowOptions = { onSuccess: () => void; onError: () => void };
 
 const mocks = vi.hoisted(() => ({
-  confirm: null as TConfirmProps | null,
   keyFlow: null as TKeyFlowOptions | null,
   requestKey: vi.fn(),
   panel: null as { visible?: boolean | null } | null,
@@ -60,13 +58,6 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 
 vi.mock("@docspace/shared/api/privacy", () => ({
   getEncryptionKeys: mocks.getEncryptionKeys,
-}));
-
-vi.mock("@docspace/shared/dialogs/confirmation-modal", () => ({
-  ConfirmationModal: (props: TConfirmProps) => {
-    mocks.confirm = props;
-    return null;
-  },
 }));
 
 vi.mock("@docspace/shared/dialogs/key-generation", () => ({
@@ -128,7 +119,6 @@ const renderPrivateRoomCreation = ({
 
 describe("Creating a private room without keys", () => {
   beforeEach(() => {
-    mocks.confirm = null;
     mocks.keyFlow = null;
   });
 
@@ -136,22 +126,19 @@ describe("Creating a private room without keys", () => {
     vi.unstubAllGlobals();
   });
 
-  it("offers key generation as soon as the dialog opens", () => {
+  it("No prompt before key setup", () => {
     const { onClose } = renderPrivateRoomCreation();
 
-    expect(mocks.confirm?.visible).toBe(true);
-    act(() => mocks.confirm!.onConfirm());
     expect(mocks.requestKey).toHaveBeenCalledTimes(1);
     expect(onClose).not.toHaveBeenCalled();
   });
 
-  it("Key generation cancelled", () => {
+  it("User cancels on the explanation", () => {
     const { onClose } = renderPrivateRoomCreation();
 
-    act(() => mocks.confirm!.onCancel());
+    act(() => mocks.keyFlow!.onCancel());
 
     expect(onClose).toHaveBeenCalledTimes(1);
-    expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 
   it("closes the creation when key generation fails", () => {
@@ -170,13 +157,12 @@ describe("Creating a private room without keys", () => {
       "Common:EncryptionRequiresHttps",
     );
     expect(onClose).toHaveBeenCalledTimes(1);
-    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 });
 
 describe("Creating a private room before the key list is known", () => {
   beforeEach(() => {
-    mocks.confirm = null;
     mocks.keyFlow = null;
   });
 
@@ -190,17 +176,16 @@ describe("Creating a private room before the key list is known", () => {
       ),
     );
     expect(onClose).toHaveBeenCalledTimes(1);
-    expect(mocks.confirm?.visible).toBe(false);
     expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 
-  it("User accepts key generation once the list loads empty", async () => {
+  it("Key setup opens once the list loads empty", async () => {
     mocks.getEncryptionKeys.mockResolvedValue([]);
     const { onClose, setUserEncryptionKeys } = renderPrivateRoomCreation({
       encryptionKeys: null,
     });
 
-    await waitFor(() => expect(mocks.confirm?.visible).toBe(true));
+    await waitFor(() => expect(mocks.requestKey).toHaveBeenCalledTimes(1));
     expect(setUserEncryptionKeys).toHaveBeenCalledWith([]);
     expect(onClose).not.toHaveBeenCalled();
   });
@@ -215,38 +200,31 @@ describe("Creating a private room before the key list is known", () => {
     await waitFor(() =>
       expect(setUserEncryptionKeys).toHaveBeenCalledWith([key]),
     );
-    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
     expect(onClose).not.toHaveBeenCalled();
     // Key list still loading: nothing is shown until the list is known.
     expect(mocks.panel?.visible).toBeFalsy();
   });
 });
 
-// Spec: room-membership, "Starting private room creation without a key starts key generation"
+// Spec: room-membership, "Starting private room creation without a key opens key setup"
 describe("The create-room panel waits for the key", () => {
   beforeEach(() => {
-    mocks.confirm = null;
     mocks.keyFlow = null;
     mocks.panel = null;
   });
 
-  it("No dialog under the prompts", () => {
+  it("No dialog under key setup", () => {
     renderPrivateRoomCreation();
-
-    expect(mocks.confirm?.visible).toBe(true);
-    expect(mocks.panel?.visible).toBeFalsy();
-
-    act(() => mocks.confirm!.onConfirm());
 
     expect(mocks.requestKey).toHaveBeenCalledTimes(1);
     expect(mocks.panel?.visible).toBeFalsy();
   });
 
-  it("User accepts key generation", async () => {
+  it("User completes key setup", async () => {
     mocks.getEncryptionKeys.mockResolvedValue([]);
     renderPrivateRoomCreation();
 
-    act(() => mocks.confirm!.onConfirm());
     expect(mocks.panel?.visible).toBeFalsy();
 
     await act(async () => {
@@ -256,10 +234,10 @@ describe("The create-room panel waits for the key", () => {
     await waitFor(() => expect(mocks.panel?.visible).toBe(true));
   });
 
-  it("User cancels key generation", () => {
+  it("User cancels inside key setup", () => {
     const { onClose } = renderPrivateRoomCreation();
 
-    act(() => mocks.confirm!.onCancel());
+    act(() => mocks.keyFlow!.onCancel());
 
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(mocks.panel?.visible).toBeFalsy();
@@ -275,12 +253,12 @@ describe("The create-room panel waits for the key", () => {
     renderPrivateRoomCreation({ encryptionKeys: null });
 
     expect(mocks.panel?.visible).toBeFalsy();
-    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
 
     await act(async () => {
       resolveKeys([{ publicKey: "pk", privateKeyEnc: "enc", date: "2026-10-22" }]);
     });
-    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 
   it("shows the panel at once to a user who holds a key", () => {
@@ -289,6 +267,6 @@ describe("The create-room panel waits for the key", () => {
     });
 
     expect(mocks.panel?.visible).toBe(true);
-    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 });

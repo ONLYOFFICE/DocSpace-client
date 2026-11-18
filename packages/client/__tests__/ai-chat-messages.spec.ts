@@ -259,8 +259,10 @@ test.describe("AI chat messages: the agent's logo", () => {
         createdAt: at(65),
       }),
     ];
+    // A later use() goes first: the threads storage overrides
+    // the empty thread list of aiChatStoreHandlers.
+    mockRequest.use(...baseHandlers("roomAdmin"));
     mockRequest.use(
-      ...baseHandlers("roomAdmin"),
       ...aiSectionsHandlers(TEST_PORT, [agent]),
       ...aiChatThreadsHandlers(TEST_PORT, {
         threads: [
@@ -291,8 +293,10 @@ test.describe("AI chat messages: the agent's logo", () => {
     baseUrl,
     mockRequest,
   }) => {
+    // A later use() goes first: the threads storage overrides
+    // the empty thread list of aiChatStoreHandlers.
+    mockRequest.use(...baseHandlers("owner"));
     mockRequest.use(
-      ...baseHandlers("owner"),
       roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
       ...aiChatThreadsHandlers(TEST_PORT, {
         reply: { text: "You have three rooms.", title: "Rooms" },
@@ -455,8 +459,10 @@ test.describe("AI chat messages: a generated image", () => {
     baseUrl,
     mockRequest,
   }) => {
+    // A later use() goes first: the threads storage overrides
+    // the empty thread list of aiChatStoreHandlers.
+    mockRequest.use(...baseHandlers("owner"));
     mockRequest.use(
-      ...baseHandlers("owner"),
       roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
       chartAttachments(),
       ...aiChatThreadsHandlers(TEST_PORT, {
@@ -523,8 +529,10 @@ test.describe("AI chat messages: Save to room", () => {
     copies: AiCopyRequest[],
   ) => {
     const agent = legalReviewer(AiProjectMockAccess.Owner);
+    // A later use() goes first: the threads storage overrides
+    // the empty thread list of aiChatStoreHandlers.
+    mockRequest.use(...baseHandlers("owner"));
     mockRequest.use(
-      ...baseHandlers("owner"),
       ...aiSectionsHandlers(TEST_PORT, [agent]),
       ...aiCopyToRoomHandlers(TEST_PORT, [MARKETING, BOARD], copies),
       chartAttachments(),
@@ -619,8 +627,10 @@ test.describe("AI chat messages: a created document", () => {
     mockRequest,
   }) => {
     const agent = legalReviewer(AiProjectMockAccess.Owner);
+    // A later use() goes first: the threads storage overrides
+    // the empty thread list of aiChatStoreHandlers.
+    mockRequest.use(...baseHandlers("owner"));
     mockRequest.use(
-      ...baseHandlers("owner"),
       ...aiSectionsHandlers(TEST_PORT, [agent]),
       ...aiChatThreadsHandlers(TEST_PORT, {
         reply: { content: proposalReply(), title: "Acme proposal" },
@@ -650,8 +660,10 @@ test.describe("AI chat messages: a created document", () => {
     baseUrl,
     mockRequest,
   }) => {
+    // A later use() goes first: the threads storage overrides
+    // the empty thread list of aiChatStoreHandlers.
+    mockRequest.use(...baseHandlers("owner"));
     mockRequest.use(
-      ...baseHandlers("owner"),
       roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
       ...aiChatThreadsHandlers(TEST_PORT, {
         reply: { content: proposalReply(), title: "Acme proposal" },
@@ -677,8 +689,10 @@ test.describe("AI chat messages: a created document", () => {
   }) => {
     const agent = legalReviewer(AiProjectMockAccess.Owner);
     const threadId = aiChatThreadId(31);
+    // A later use() goes first: the threads storage overrides
+    // the empty thread list of aiChatStoreHandlers.
+    mockRequest.use(...baseHandlers("owner"));
     mockRequest.use(
-      ...baseHandlers("owner"),
       ...aiSectionsHandlers(TEST_PORT, [agent]),
       ...aiChatThreadsHandlers(TEST_PORT, {
         threads: [

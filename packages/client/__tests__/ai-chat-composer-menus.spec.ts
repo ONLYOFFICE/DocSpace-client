@@ -189,11 +189,30 @@ const openPlusList = async (
   page: Page,
   section: "skills" | "knowledge" | "data-sources",
 ) => {
-  await openPlusMenu(page);
-  await page.getByTestId(`attachment-menu-${section}`).hover();
+  if (!(await plusMenu(page).isVisible())) await openPlusMenu(page);
+  // The chat panel sits at the window's right edge, so the list opens to
+  // the left and covers most of the menu: the entry is pointed at by its
+  // chevron, the part the list leaves free.
+  const entry = page.getByTestId(`attachment-menu-${section}`);
+  const box = await entry.boundingBox();
+  await entry.hover({
+    position: { x: (box?.width ?? 16) - 8, y: (box?.height ?? 16) / 2 },
+  });
   const list = page.getByTestId(`attachment-menu-${section}-submenu`);
   await expect(list).toBeVisible();
   return list;
+};
+
+/**
+ * Closes the "+" menu and its list. The pointer is moved off the menu
+ * first: left on an entry, it would open that entry's list again.
+ */
+const closePlusMenu = async (page: Page) => {
+  await page.mouse.move(1, 1);
+  for (let i = 0; i < 3 && (await plusMenu(page).isVisible()); i += 1) {
+    await page.keyboard.press("Escape");
+  }
+  await expect(plusMenu(page)).toBeHidden();
 };
 
 // ---- the skill list, shared by "+" > Skill sets and the slash menu ----
@@ -202,7 +221,11 @@ const slashMenu = (page: Page) => page.getByTestId("composer-skills-menu");
 
 const openSlashMenu = async (page: Page, query = "") => {
   await input(page).click();
-  await page.keyboard.type(`/${query}`);
+  // A click lands in the middle of a draft; a call starts after its text.
+  await page.keyboard.press("ControlOrMeta+End");
+  const draft = await input(page).inputValue();
+  const separator = draft === "" || /\s$/.test(draft) ? "" : " ";
+  await page.keyboard.type(`${separator}/${query}`);
   await expect(slashMenu(page)).toBeVisible();
   return slashMenu(page);
 };
@@ -231,24 +254,39 @@ const send = async (page: Page, text: string) => {
   await page.getByTestId("send-button").click();
 };
 
-const defaultChatHandlers = (
+/**
+ * The mocks of a chat on the default agent. Each `mockRequest.use` call puts
+ * its handlers in front of the earlier ones, while within one call the first
+ * matching handler wins; so the portal comes first, then `extra` (which
+ * overrides it), and last the skills and threads, which must win over the
+ * `files/rooms*` of the rooms list and the empty thread list of the chat
+ * stores.
+ */
+const useDefaultChat = (
+  mockRequest: WorkerFixture,
   skillsByRoom: Record<string, AiChatRoomSkillMock[]> = SKILLS,
   log?: AiChatRequestLog,
-) => [
-  rootHandler(TEST_PORT),
-  filesSettingsHandler(TEST_PORT),
-  settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
-  selfActivationStatusHandler(TEST_PORT, null, false, true),
-  selfByTypeHandler(TEST_PORT, "owner", "en-US"),
-  aiConfigHandler(TEST_PORT),
-  roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
-  ...aiChatStoreHandlers(TEST_PORT),
-  ...aiChatRoomSkillsHandlers(TEST_PORT, skillsByRoom),
-  ...aiChatThreadsHandlers(TEST_PORT, {
-    reply: { text: "Done.", title: "Done" },
-    log,
-  }),
-];
+  extra: Parameters<WorkerFixture["use"]> = [],
+) => {
+  mockRequest.use(
+    rootHandler(TEST_PORT),
+    filesSettingsHandler(TEST_PORT),
+    settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+    selfActivationStatusHandler(TEST_PORT, null, false, true),
+    selfByTypeHandler(TEST_PORT, "owner", "en-US"),
+    aiConfigHandler(TEST_PORT),
+    roomListHandler(TEST_PORT, TypeRoomList.ContextMenu),
+    ...aiChatStoreHandlers(TEST_PORT),
+  );
+  if (extra.length > 0) mockRequest.use(...extra);
+  mockRequest.use(
+    ...aiChatRoomSkillsHandlers(TEST_PORT, skillsByRoom),
+    ...aiChatThreadsHandlers(TEST_PORT, {
+      reply: { text: "Done.", title: "Done" },
+      log,
+    }),
+  );
+};
 
 test.describe("AI chat composer: the default agent", () => {
   test.beforeEach(async ({ page }) => {
@@ -262,7 +300,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -295,7 +333,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -317,10 +355,14 @@ test.describe("AI chat composer: the default agent", () => {
     }
     expect(tops).toEqual([...tops].sort((a, b) => a - b));
 
+    // Beside the menu, not in its place: the menu stays open, and the list
+    // reaches past its side. The panel at the window's right edge leaves no
+    // room on either side, so the list opens to the left over the menu.
     const list = await openPlusList(page, "data-sources");
+    await expect(plusMenu(page)).toBeVisible();
     const menuBox = await plusMenu(page).boundingBox();
     const listBox = await list.boundingBox();
-    expect(listBox!.x).toBeGreaterThanOrEqual(menuBox!.x + menuBox!.width - 1);
+    expect(listBox!.x).toBeLessThan(menuBox!.x);
   });
 
   // Spec: ai-chat-source-menus, "Skill sets list"
@@ -329,7 +371,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -369,7 +411,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, {
       skillSets: [DOCUMENT_ASSISTANT, EMPTY_SET],
     });
@@ -390,7 +432,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -407,7 +449,7 @@ test.describe("AI chat composer: the default agent", () => {
     await expect(list).not.toContainText("Added");
 
     // The slash menu ticks it too.
-    await page.keyboard.press("Escape");
+    await closePlusMenu(page);
     await openSlashMenu(page);
     await expect(
       skillRow(slashMenu(page), "Contract review").getByTestId(
@@ -434,7 +476,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, {
       skillSets: [DOCUMENT_ASSISTANT, SALES_ASSISTANT],
       knowledgeBases: [COMPANY_POLICIES],
@@ -491,7 +533,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -515,7 +557,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -548,7 +590,7 @@ test.describe("AI chat composer: the default agent", () => {
     mockRequest,
   }) => {
     const log = aiChatRequestLog();
-    mockRequest.use(...defaultChatHandlers(SKILLS, log));
+    useDefaultChat(mockRequest, SKILLS, log);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -586,7 +628,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -597,7 +639,9 @@ test.describe("AI chat composer: the default agent", () => {
     await expect(input(page)).toHaveValue("/document-summary /draft-proposal ");
 
     const highlights = page.getByTestId("composer-input-highlights");
-    await expect(highlights.getByTestId("skill-ref")).toHaveText([
+    // The highlight layer marks a call with the class of a sent message's
+    // call, without its test id.
+    await expect(highlights.locator(".aui-skill-ref")).toHaveText([
       "/document-summary",
       "/draft-proposal",
     ]);
@@ -613,7 +657,7 @@ test.describe("AI chat composer: the default agent", () => {
     mockRequest,
   }) => {
     const log = aiChatRequestLog();
-    mockRequest.use(...defaultChatHandlers(SKILLS, log));
+    useDefaultChat(mockRequest, SKILLS, log);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -653,7 +697,7 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -675,16 +719,14 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(
-      ...defaultChatHandlers({
-        [DOCUMENT_ASSISTANT.id]: [
-          skill("summary", "Summarizes a document.", "skill-doc-summary"),
-        ],
-        [SALES_ASSISTANT.id]: [
-          skill("summary", "Summarizes the deals.", "skill-sales-summary"),
-        ],
-      }),
-    );
+    useDefaultChat(mockRequest, {
+      [DOCUMENT_ASSISTANT.id]: [
+        skill("summary", "Summarizes a document.", "skill-doc-summary"),
+      ],
+      [SALES_ASSISTANT.id]: [
+        skill("summary", "Summarizes the deals.", "skill-sales-summary"),
+      ],
+    });
     await connectSources(page, OWNER_ID, {
       skillSets: [DOCUMENT_ASSISTANT, SALES_ASSISTANT],
     });
@@ -718,7 +760,7 @@ test.describe("AI chat composer: the default agent", () => {
     mockRequest,
   }) => {
     const log = aiChatRequestLog();
-    mockRequest.use(...defaultChatHandlers(SKILLS, log));
+    useDefaultChat(mockRequest, SKILLS, log);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -733,7 +775,7 @@ test.describe("AI chat composer: the default agent", () => {
     await expect(list).toBeVisible();
     await expect(list).toContainText("Manage knowledge bases...");
 
-    await page.keyboard.press("Escape");
+    await closePlusMenu(page);
     await send(page, "What is the leave policy?");
     await expect.poll(() => log.send.length).toBe(1);
     expect(log.send[0].actionArgs?.knowledgeRooms).toBeUndefined();
@@ -745,10 +787,9 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(
-      ...defaultChatHandlers(),
+    useDefaultChat(mockRequest, SKILLS, undefined, [
       aiConfigHandler(TEST_PORT, false, false, true),
-    );
+    ]);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
@@ -763,8 +804,7 @@ test.describe("AI chat composer: the default agent", () => {
     ).toBeVisible();
     await expect(list).not.toContainText("Manage knowledge bases...");
 
-    await page.keyboard.press("Escape");
-    await page.keyboard.press("Escape");
+    await closePlusMenu(page);
     await openSlashMenu(page);
     const knowledge = slashSection(page, "knowledge");
     await expect(
@@ -784,12 +824,15 @@ test.describe("AI chat composer: the default agent", () => {
     baseUrl,
     mockRequest,
   }) => {
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, ALL_SOURCES);
 
     await openDefaultChat(page, baseUrl);
     const list = await openPlusList(page, "data-sources");
-    const rows = list.getByTestId("attachment-menu-data-sources-item");
+    // The Manage sources... row under them shares the rows' test id.
+    const rows = list
+      .getByTestId("attachment-menu-data-sources-item")
+      .filter({ hasNotText: "Manage sources..." });
     await expect(rows).toHaveCount(2);
     await expect(rows.nth(0)).toContainText(DESIGN_FOR_MARKETING.name);
     await expect(rows.nth(1)).toContainText(CONTRACTS_2026.name);
@@ -822,7 +865,7 @@ test.describe("AI chat composer: the default agent", () => {
       name: `Folder ${index + 1}`,
       kind: "folder" as const,
     }));
-    mockRequest.use(...defaultChatHandlers());
+    useDefaultChat(mockRequest);
     await connectSources(page, OWNER_ID, {
       skillSets: [DOCUMENT_ASSISTANT],
       dataSources: twenty,
@@ -838,8 +881,7 @@ test.describe("AI chat composer: the default agent", () => {
     ).toHaveCount(20);
     await expect(list).not.toContainText("Manage sources...");
 
-    await page.keyboard.press("Escape");
-    await page.keyboard.press("Escape");
+    await closePlusMenu(page);
     await openSlashMenu(page);
     const dataSources = slashSection(page, "data-sources");
     await expect(
@@ -860,7 +902,7 @@ test.describe("AI chat composer: the default agent", () => {
     mockRequest,
   }) => {
     const [connected] = AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms;
-    mockRequest.use(...defaultChatHandlers(), ...aiSectionsHandlers(TEST_PORT));
+    useDefaultChat(mockRequest, SKILLS, undefined, aiSectionsHandlers(TEST_PORT));
     await connectSources(page, OWNER_ID, {
       skillSets: [DOCUMENT_ASSISTANT],
       knowledgeBases: [{ id: connected.id, name: connected.title }],
@@ -937,6 +979,10 @@ test.describe("AI chat composer: a chat on an agent", () => {
       aiConfigHandler(TEST_PORT),
       ...aiChatStoreHandlers(TEST_PORT),
       ...aiSectionsHandlers(TEST_PORT, [agent]),
+    );
+    // A later use() goes first: the skills and threads win over the
+    // section's room reads and the stores' empty thread list.
+    mockRequest.use(
       ...aiChatRoomSkillsHandlers(TEST_PORT, AGENT_SKILLS),
       ...aiChatThreadsHandlers(TEST_PORT),
     );
@@ -974,7 +1020,11 @@ test.describe("AI chat composer: a chat on an agent", () => {
     );
     await list.getByTestId("composer-skills-menu-manage").click();
 
-    await expect(page.getByTestId("ai-project-dialog")).toBeVisible();
+    // The modal wrapper has no box of its own; its dialog does.
+    await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
+    await expect(
+      page.getByRole("dialog").filter({ hasText: "Edit agent" }),
+    ).toBeVisible();
     await expect(
       page.getByTestId("aside").filter({ hasText: "Skill sets" }),
     ).toHaveCount(0);
@@ -1000,8 +1050,7 @@ test.describe("AI chat composer: a chat on an agent", () => {
     );
     await expect(list.getByTestId("composer-skills-menu-manage")).toHaveCount(0);
 
-    await page.keyboard.press("Escape");
-    await page.keyboard.press("Escape");
+    await closePlusMenu(page);
     const menu = await openSlashMenu(page);
     await expect.poll(async () => trimmed(await skillLabels(menu))).toEqual(
       AGENT_SKILL_LABELS,
@@ -1048,7 +1097,11 @@ test.describe("AI chat composer: a chat on an agent", () => {
     ).toHaveCount(0);
 
     await knowledge.getByTestId("composer-skills-menu-knowledge-manage").click();
-    await expect(page.getByTestId("ai-project-dialog")).toBeVisible();
+    // The modal wrapper has no box of its own; its dialog does.
+    await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
+    await expect(
+      page.getByRole("dialog").filter({ hasText: "Edit agent" }),
+    ).toBeVisible();
   });
 
   // Spec: ai-chat-source-menus, "Slash menu of a chat on an agent"

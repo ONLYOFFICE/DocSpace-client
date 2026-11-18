@@ -494,12 +494,14 @@ export type AiChatThreadsMockOptions = {
  *   `reply.title` or the user's text, so it is listed in that history and
  *   readable at once.
  *
- * Use it after `aiChatStoreHandlers` (it overrides their empty thread list):
+ * Pass it in a later `mockRequest.use` call than `aiChatStoreHandlers`, so it
+ * overrides their empty thread list: each call puts its handlers in front of
+ * the earlier ones, while within one call the first matching handler wins.
  *
  * ```ts
  * const log = aiChatRequestLog();
+ * mockRequest.use(...aiChatStoreHandlers(TEST_PORT));
  * mockRequest.use(
- *   ...aiChatStoreHandlers(TEST_PORT),
  *   ...aiChatThreadsHandlers(TEST_PORT, {
  *     threads: [{ threadId: aiChatThreadId(1), title: "NDA review", agentId: 777001,
  *       messages: [aiChatUserMessage("Term?"), aiChatAssistantMessage("Two years.")] }],

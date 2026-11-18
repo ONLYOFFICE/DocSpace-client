@@ -298,6 +298,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:UseInChat")}
+              dataTestId="quick-buttons-use-in-chat"
             />
           ) : null}
           {isAvailableShareFile && !isAvailableShareForUser ? (

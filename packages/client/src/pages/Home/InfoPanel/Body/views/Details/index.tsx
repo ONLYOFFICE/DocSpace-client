@@ -507,7 +507,10 @@ const Details = ({
           {t("Common:Properties")}
         </Text>
       </div>
-      <div className={commonStyles.properties}>
+      <div
+        className={commonStyles.properties}
+        data-testid="info_panel_details_properties"
+      >
         {itemProperties.map((property) => {
           return (
             <div

@@ -257,8 +257,10 @@ class AiProjectsStore {
    * slash menu connected and disconnected its Skill sets. Only the change is
    * applied, so a room the chat does not list (one without skills) stays
    * linked. Changes are saved one after another: each starts from the
-   * project the one before it left. Resolves to `false` when nothing was
-   * saved.
+   * project the one before it left. Resolves to `false` when the change
+   * was not saved - also when the project was written but the server
+   * refused to link or unlink a room, which the save reports as a warning
+   * rather than an error - so the chat goes back to the rooms it has.
    */
   changeActiveSkillRooms = (change: TSkillRoomsChange): Promise<boolean> =>
     this.queueSkillRoomsSave(() => Promise.resolve(this.activeProject), change);
@@ -307,7 +309,9 @@ class AiProjectsStore {
         showWarnings(project);
         runInAction(() => this.replaceProject(project));
         if (this.isChatOn(current.id)) this.syncPreset(project);
-        return true;
+        const wanted = [...kept, ...added];
+        const linked = project.aiProject.instructionsRooms.map((room) => room.id);
+        return linked.length === wanted.length && wanted.every((id) => linked.includes(id));
       } catch (e) {
         toastr.error(errorMessage(e));
         return false;

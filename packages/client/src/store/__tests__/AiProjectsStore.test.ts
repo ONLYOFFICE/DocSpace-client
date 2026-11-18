@@ -379,6 +379,25 @@ describe("AiProjectsStore", () => {
       expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
     });
 
+    it("reports a Skill sets change as not saved when the server refused to unlink the room", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      // The project is written, but the refused unlink leaves the room linked
+      // and comes back as a warning.
+      api.updateAiProject.mockResolvedValueOnce(
+        project(1, "Project 1", {
+          aiProject: {
+            ...project(1).aiProject,
+            warnings: [{ code: "roomUnavailable", message: "You don't have enough permission" }],
+          } as TAiProject["aiProject"],
+        }),
+      );
+
+      expect(await store.changeActiveSkillRooms({ added: [], removed: ["12"] })).toBe(false);
+      expect(toastr.warning).toHaveBeenCalledWith("You don't have enough permission");
+      expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
+    });
+
     it("saves a Skill sets change of an agent picked in the chat panel from the agent as the server has it", async () => {
       const store = createStore();
       const picked = { ...presets, activePreset: { id: "7" } };

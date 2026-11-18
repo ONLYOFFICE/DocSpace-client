@@ -39,6 +39,7 @@ import componentLoader from "@docspace/shared/utils/component-loader";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
 import KeysManagementRoute from "SRC_DIR/components/KeysManagementRoute";
+import { getProfileTabId } from "SRC_DIR/pages/Profile/Section/Body/profileTabs";
 
 // Every profile tab renders the same element tree, the keys-management guard
 // included (unguarded for the other tabs): with one tab wrapped differently,
@@ -451,7 +452,7 @@ const ProfileTab = () => {
   const Page = ProfilePage;
 
   return (
-    <KeysManagementRoute guarded={pathname.includes("/keys-management")}>
+    <KeysManagementRoute guarded={getProfileTabId(pathname) === "keys-management"}>
       <Page />
     </KeysManagementRoute>
   );

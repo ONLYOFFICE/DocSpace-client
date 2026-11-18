@@ -98,6 +98,23 @@ type TFileEncryptionAccess = Awaited<
 
 const HEADER_FETCH_BYTES = 4096;
 
+/** True for a request the server did not answer: the time limit or the network. */
+const gotNoAnswer = (error: unknown) => {
+  const failure = error as { isAxiosError?: boolean; response?: unknown } | null;
+  return !!failure?.isAxiosError && !failure.response;
+};
+
+const readAccessEntries = async (
+  fileId: number,
+): Promise<TFileEncryptionAccess> => {
+  try {
+    return await getFileEncryptionAccess(fileId);
+  } catch (error) {
+    if (!gotNoAnswer(error)) throw error;
+    return getFileEncryptionAccess(fileId);
+  }
+};
+
 // The real filename of an encrypted file exists only inside its DSE3 header;
 // the server-side title is an opaque placeholder. Decrypt the name while the
 // DEK is at hand and publish it to the per-tab filename cache so every title
@@ -209,7 +226,7 @@ const useFileEncryptionKeys = (
         if (accessRequest.current?.key !== accessKey) {
           accessRequest.current = {
             key: accessKey,
-            entries: getFileEncryptionAccess(numericFileId),
+            entries: readAccessEntries(numericFileId),
           };
         }
 

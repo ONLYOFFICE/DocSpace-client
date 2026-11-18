@@ -248,6 +248,39 @@ describe("useFileEncryptionKeys", () => {
     expect(getFileEncryptionAccess).toHaveBeenCalledTimes(2);
   });
 
+  const unanswered = () =>
+    Object.assign(new Error("timeout of 30000ms exceeded"), {
+      isAxiosError: true,
+    });
+
+  it("Request without an answer", async () => {
+    vi.mocked(getFileEncryptionAccess).mockImplementationOnce(async () => {
+      throw unanswered();
+    });
+    const seen: string[] = [];
+    render(config([{ userId: USER_ID }]));
+    for (let i = 0; i < 20 && state?.status !== "ready"; i += 1) {
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+      if (state) seen.push(state.status);
+    }
+
+    expect(state?.status).toBe("ready");
+    expect(seen).not.toContain("load-failed");
+    expect(getFileEncryptionAccess).toHaveBeenCalledTimes(2);
+  });
+
+  it("Repeated request without an answer", async () => {
+    vi.mocked(getFileEncryptionAccess).mockImplementation(async () => {
+      throw unanswered();
+    });
+    render(config([{ userId: USER_ID }]));
+
+    expect(await settledAt("load-failed")).toBe("load-failed");
+    expect(getFileEncryptionAccess).toHaveBeenCalledTimes(2);
+  });
+
   it("Envelopes could not be loaded", async () => {
     keysLoad.failed = true;
     encryptionContext.hasConfiguredKey = false;

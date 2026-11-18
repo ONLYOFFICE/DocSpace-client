@@ -19,8 +19,21 @@ export const TableCellMock = ({ children, dataTestId, className }: TCellProps) =
 
 export const marker =
   (name: string) =>
-  ({ item, create }: { item?: { title?: string }; create?: boolean }) => (
-    <span data-testid={`${name}${create ? "-created" : ""}`}>{item?.title ?? name}</span>
+  ({
+    item,
+    create,
+    displayFileExtension,
+  }: {
+    item?: { title?: string };
+    create?: boolean;
+    displayFileExtension?: boolean;
+  }) => (
+    <span
+      data-testid={`${name}${create ? "-created" : ""}`}
+      data-extension={String(displayFileExtension)}
+    >
+      {item?.title ?? name}
+    </span>
   );
 
 export const StyledTableMock = {

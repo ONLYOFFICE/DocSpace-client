@@ -121,6 +121,7 @@ const FormsAiChatProviders = ({
       isStandalone={isStandalone}
       isAvailable={canUseAi}
       canUseAi={canUseAi}
+      userId={user?.id}
       entityId={entityId}
       callbacks={callbacks}
       formatChatError={formatChatError}

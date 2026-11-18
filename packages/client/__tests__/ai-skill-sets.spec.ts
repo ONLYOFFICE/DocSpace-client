@@ -204,14 +204,15 @@ test.describe("AI Chat: Skill sets", () => {
         /Name[\s\S]*Skills[\s\S]*Owner[\s\S]*Last modified/,
       );
 
-      // "Document assistant" holds three skills and is the Administrator's.
+      // "Document assistant" holds three skills and is the Administrator's,
+      // the user who reads the list, so its owner shows as "Me".
       const assistant = row(page, "Document assistant");
       await expect(
         assistant.getByTestId(/^skill-sets-cell-skills-/),
       ).toHaveText("3");
       await expect(
         assistant.getByTestId(/^skill-sets-cell-owner-/),
-      ).toContainText("Administrator");
+      ).toContainText("Me");
       await expect(
         assistant.getByTestId(/^skill-sets-cell-activity-/),
       ).not.toBeEmpty();
@@ -356,16 +357,17 @@ test.describe("AI Chat: Skill sets", () => {
         ).not.toBeEmpty();
       }
 
-      // The description from the file, in full on hover.
+      // The description from the file, in full in a tooltip on hover.
       const description = row(page, "Document summary")
         .getByTestId(/^skills-cell-description-/)
-        .locator("[title]")
-        .first();
+        .getByTestId("text");
       await expect(description).toHaveText(DOCUMENT_SUMMARY.description);
-      await expect(description).toHaveAttribute(
-        "title",
+      await description.hover();
+      await expect(page.locator(".react-tooltip__show")).toHaveText(
         DOCUMENT_SUMMARY.description,
       );
+      await page.mouse.move(0, 0);
+      await expect(page.locator(".react-tooltip__show")).toHaveCount(0);
 
       await expectScreenshot(page, [
         "desktop",

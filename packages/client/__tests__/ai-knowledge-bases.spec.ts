@@ -82,6 +82,10 @@ const sidebar = (page: Page) => page.locator("#article-container");
 const row = (page: Page, title: string) =>
   table(page).locator("[data-testid^=table-row-]").filter({ hasText: title });
 
+/** A file's row: the list names a file without its extension. */
+const fileRow = (page: Page, title: string) =>
+  row(page, title.replace(/\.[^.]+$/, ""));
+
 const titleOf = (id: number) => {
   const base = KNOWLEDGE_BASES.find((room) => room.id === id);
   if (!base) throw new Error(`No stock knowledge base ${id}`);
@@ -148,7 +152,8 @@ test.describe("AI Chat: Knowledge bases", () => {
       await expect(header).not.toContainText("Tags");
       await expect(header).not.toContainText("Storage");
 
-      await expect(row(page, FAILED_BASE)).toContainText("Administrator");
+      // Its owner is the user who reads the list, shown as "Me".
+      await expect(row(page, FAILED_BASE)).toContainText("Me");
     });
 
     // Spec: ai-knowledge-bases, "Indexing state of a knowledge base"
@@ -300,13 +305,13 @@ test.describe("AI Chat: Knowledge bases", () => {
       await expect(header).toContainText("Added by");
       await expect(header).toContainText("Added");
 
-      const failedRow = row(page, KNOWLEDGE_FAILED_FILE_TITLE);
+      const failedRow = fileRow(page, KNOWLEDGE_FAILED_FILE_TITLE);
       await expect(
         failedRow.getByTestId(/^knowledge-files-cell-size-/),
       ).toContainText("KB");
       await expect(
         failedRow.getByTestId(/^knowledge-files-cell-author-/),
-      ).toContainText("Administrator");
+      ).toContainText("Me");
       await expect(
         failedRow.getByTestId(/^knowledge-files-cell-created-/),
       ).not.toBeEmpty();
@@ -325,10 +330,10 @@ test.describe("AI Chat: Knowledge bases", () => {
 
       // Files being indexed carry "Indexing".
       await expect(
-        row(page, "Travel policy.docx").getByTestId("preparing-for-ai-badge"),
+        fileRow(page, "Travel policy.docx").getByTestId("preparing-for-ai-badge"),
       ).toHaveText("Indexing");
 
-      const failedRow = row(page, KNOWLEDGE_FAILED_FILE_TITLE);
+      const failedRow = fileRow(page, KNOWLEDGE_FAILED_FILE_TITLE);
       const error = failedRow.getByTestId("failed-vectorization-badge");
       await expect(error).toHaveText("Error");
       await expect(failedRow.getByTestId("preparing-for-ai-badge")).toHaveCount(
@@ -347,7 +352,7 @@ test.describe("AI Chat: Knowledge bases", () => {
       await expect(table(page)).toBeVisible();
 
       await selectRow(
-        row(page, KNOWLEDGE_FAILED_FILE_TITLE),
+        fileRow(page, KNOWLEDGE_FAILED_FILE_TITLE),
         /^knowledge-files-cell-created-/,
       );
       await openDetails(page);

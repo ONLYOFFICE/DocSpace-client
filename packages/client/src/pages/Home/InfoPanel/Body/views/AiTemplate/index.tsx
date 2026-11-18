@@ -108,7 +108,7 @@ const AiTemplate = ({ view }: AiTemplateProps) => {
 
   if (!template || !catalog) return null;
 
-  const logo = getTemplateLogo(template.id);
+  const logo = getTemplateLogo(template, aiTemplatesStore.covers);
   const organization = getBrandName("OrganizationName");
 
   const verified = (

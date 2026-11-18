@@ -65,6 +65,7 @@ import {
   aiRoomFolderHandler,
   aiSectionsHandlers,
 } from "./projects";
+import { aiTemplateInstallHandler, aiTemplatesHandler } from "./templates";
 import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
@@ -155,6 +156,17 @@ export {
   aiMetaGenerateHandler,
 } from "./meta";
 
+export {
+  AI_TEMPLATE_AGENTS,
+  AI_TEMPLATE_CATALOG,
+  AI_TEMPLATE_COVERS,
+  AI_TEMPLATE_KNOWLEDGE_BASES,
+  AI_TEMPLATE_SKILL_SETS,
+  aiTemplatesHandlers,
+  roomCoversHandler,
+} from "./templates";
+export { aiTemplateInstallHandler, aiTemplatesHandler };
+
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),
   aiConfigHandler(port),
@@ -167,4 +179,8 @@ export const aiHandlers = (port: string) => [
   // The "AI rooms" section and its projects: empty until a spec seeds them.
   aiHubRoomsHandler(port, [], []),
   ...aiProjectsHandlers(port, []),
+  // The Templates tab of the Agents list: the shipped catalog. The room
+  // covers it is drawn with are left to the specs (roomCoversHandler).
+  aiTemplatesHandler(port),
+  aiTemplateInstallHandler(port),
 ];

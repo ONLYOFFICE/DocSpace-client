@@ -57,6 +57,10 @@ import type {
   TAiTemplate,
   TAiTemplateCatalog,
 } from "@docspace/shared/api/ai/templates";
+import type {
+  TAiProjectCover,
+  TAiProjectLogo,
+} from "@docspace/shared/api/ai/projects";
 
 import { useStore } from "SRC_DIR/store/useStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -86,15 +90,24 @@ import AiTemplateInstallDialog from "./AiTemplateInstallDialog";
 import styles from "./AiTemplatesCatalog.module.scss";
 
 /**
- * A template has no logo of its own: its initials, as a room without a
- * cover shows them, on one of the room logo colours. The colour is picked by
- * the template's id, so a template keeps it between visits.
+ * The logo a template is drawn with, as a room's: its built-in cover on its
+ * colour, the ones the rooms it becomes are created with. A template that
+ * names no colour gets one of the room logo colours, picked by its id so it
+ * keeps it between visits; one whose cover is not among the portal's covers
+ * (or while they are read) shows its initials.
  */
-export const getTemplateLogo = (id: string) => {
+export const getTemplateLogo = (
+  template: Pick<TAiTemplate, "id" | "color" | "cover">,
+  covers: TAiProjectCover[] | null,
+): TAiProjectLogo => {
+  const cover = template.cover
+    ? (covers?.find((item) => item.id === template.cover) ?? null)
+    : null;
+  if (template.color) return { color: `#${template.color}`, cover };
   const { logoColors } = globalColors;
   let hash = 0;
-  for (const char of id) hash = (hash * 31 + char.charCodeAt(0)) % 997;
-  return { color: logoColors[hash % logoColors.length] };
+  for (const char of template.id) hash = (hash * 31 + char.charCodeAt(0)) % 997;
+  return { color: logoColors[hash % logoColors.length], cover };
 };
 
 const DETAIL_ICONS = {
@@ -313,7 +326,7 @@ const AiTemplatesCatalog = () => {
         <ProjectLogo
           project={{
             title: template.name,
-            logo: getTemplateLogo(template.id),
+            logo: getTemplateLogo(template, aiTemplatesStore.covers),
           }}
           className={styles.logo}
         />

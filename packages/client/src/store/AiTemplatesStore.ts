@@ -42,6 +42,8 @@ import {
   type TAiTemplate,
   type TAiTemplateCatalog,
 } from "@docspace/shared/api/ai/templates";
+import type { TAiProjectCover } from "@docspace/shared/api/ai/projects";
+import { getRoomCovers } from "@docspace/shared/api/rooms";
 
 /** The template of the catalog with this id, of any kind. */
 const findTemplate = (
@@ -68,6 +70,13 @@ const findTemplate = (
 class AiTemplatesStore {
   catalog: TAiTemplateCatalog | null = null;
 
+  /**
+   * The portal's built-in room covers, which a template names by id; `null`
+   * until they are read, or when they cannot be, and a template then shows
+   * its initials on its colour.
+   */
+  covers: TAiProjectCover[] | null = null;
+
   /** The catalog could not be read and none was read before. */
   failed = false;
 
@@ -89,6 +98,7 @@ class AiTemplatesStore {
    * when the read fails.
    */
   fetchCatalog = async () => {
+    if (!this.covers) void this.fetchCovers();
     try {
       const catalog = await getAiTemplates();
       runInAction(() => {
@@ -99,6 +109,18 @@ class AiTemplatesStore {
       runInAction(() => {
         this.failed = !this.catalog;
       });
+    }
+  };
+
+  /** Reads the built-in room covers once; a failed read leaves the initials. */
+  fetchCovers = async () => {
+    try {
+      const covers = (await getRoomCovers()) as TAiProjectCover[] | null;
+      runInAction(() => {
+        this.covers = covers ?? null;
+      });
+    } catch {
+      // The templates keep their initials on their colours.
     }
   };
 

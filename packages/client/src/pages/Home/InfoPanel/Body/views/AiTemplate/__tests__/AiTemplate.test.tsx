@@ -13,6 +13,8 @@ const user = vi.hoisted(() => ({ id: "user", isAdmin: true }));
 const stores = vi.hoisted(() => ({ templates: null as unknown }));
 
 vi.mock("@docspace/shared/api/ai/templates", () => api);
+// The built-in room covers a template names.
+vi.mock("@docspace/shared/api/rooms", () => ({ getRoomCovers: vi.fn(async () => []) }));
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: string) =>

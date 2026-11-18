@@ -17,8 +17,10 @@ const setDocumentTitle = vi.hoisted(() => vi.fn());
 const user = vi.hoisted(() => ({ id: "user", isAdmin: true }));
 const stores = vi.hoisted(() => ({ templates: null as unknown }));
 const showInfoPanel = vi.hoisted(() => vi.fn());
+const getRoomCovers = vi.hoisted(() => vi.fn());
 
 vi.mock("@docspace/shared/api/ai/templates", () => api);
+vi.mock("@docspace/shared/api/rooms", () => ({ getRoomCovers }));
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: string) =>
@@ -77,6 +79,7 @@ import AiTemplatesStore from "SRC_DIR/store/AiTemplatesStore";
 import AiTemplatesCatalog, {
   filterTemplates,
   getTemplateCategories,
+  getTemplateLogo,
 } from "../index";
 
 const catalog = {
@@ -87,6 +90,8 @@ const catalog = {
       name: "Contract Reviewer",
       description: "Reviews contracts",
       category: "Document",
+      color: "6191F2",
+      cover: "shield",
       instructions: "Review",
       skills: ["skill-sets/review"],
       knowledges: ["knowledge-bases/standards"],
@@ -116,8 +121,11 @@ const catalog = {
 
 const cards = () => screen.findAllByTestId("ai-template-card");
 
+const covers = [{ id: "shield", data: "<svg/>" }];
+
 beforeEach(() => {
   api.getAiTemplates.mockReset().mockResolvedValue(catalog);
+  getRoomCovers.mockReset().mockResolvedValue(covers);
   api.installAiTemplate.mockReset();
   navigate.mockReset();
   toastr.success.mockReset();
@@ -245,6 +253,14 @@ describe("AiTemplatesCatalog", () => {
     expect(toastr.warning).toHaveBeenCalledWith(
       "Common:AiTemplateInstructionsNotSaved",
     );
+  });
+
+  it("reads the portal's room covers once, with the catalog", async () => {
+    render(<AiTemplatesCatalog />);
+    await cards();
+    await waitFor(() => expect(templatesStore().covers).toEqual(covers));
+    await act(() => templatesStore().fetchCatalog());
+    expect(getRoomCovers).toHaveBeenCalledTimes(1);
   });
 
   it("stays on the catalog and reports a refused install", async () => {
@@ -481,5 +497,25 @@ describe("the catalog's categories and search", () => {
     expect(names(" writ ", "Document")).toEqual(["Writer"]);
     expect(names("writ", "Presentation")).toEqual([]);
     expect(names("PRESENTATION", null)).toEqual(["Pitch"]);
+  });
+});
+
+describe("getTemplateLogo", () => {
+  it("draws the template's cover on its colour", () => {
+    expect(getTemplateLogo(catalog.agents[0], covers)).toEqual({
+      color: "#6191F2",
+      cover: covers[0],
+    });
+  });
+
+  it("shows the initials while the covers are unknown or the cover is not among them", () => {
+    expect(getTemplateLogo(catalog.agents[0], null).cover).toBeNull();
+    expect(getTemplateLogo({ ...catalog.agents[0], cover: "none" }, covers).cover).toBeNull();
+  });
+
+  it("picks a room colour by the id of a template that names none", () => {
+    const { color } = getTemplateLogo({ id: "skill-sets/review" }, covers);
+    expect(color).toMatch(/^#[0-9A-F]{6}$/);
+    expect(getTemplateLogo({ id: "skill-sets/review" }, null).color).toBe(color);
   });
 });

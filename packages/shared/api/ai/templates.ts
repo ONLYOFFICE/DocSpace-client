@@ -39,7 +39,8 @@ import { authFetch } from "./index";
  * The templates shipped with ASC.AI.Chat: agents, skill sets and knowledge
  * bases. A template's `id` is its path in the catalog. An agent names the
  * skill sets and knowledge bases it is linked to by their ids; each of those
- * is a template of its own.
+ * is a template of its own. A template is drawn, and its rooms are created,
+ * in its own colour and built-in room cover.
  */
 
 export type TAiSourceTemplate = {
@@ -48,6 +49,10 @@ export type TAiSourceTemplate = {
   name: string;
   description: string;
   category: string;
+  /** The room's colour, six hexadecimal digits without `#`; the rooms the template becomes take it. */
+  color?: string;
+  /** The id of the built-in room cover (`files/rooms/covers`) drawn in `color`. */
+  cover?: string;
   /** The names of the files the template holds. */
   files: string[];
 };
@@ -58,6 +63,10 @@ export type TAiAgentTemplate = {
   name: string;
   description: string;
   category: string;
+  /** The room's colour, six hexadecimal digits without `#`; the rooms the template becomes take it. */
+  color?: string;
+  /** The id of the built-in room cover (`files/rooms/covers`) drawn in `color`. */
+  cover?: string;
   instructions: string;
   /** Ids of the skill set templates the agent is linked to. */
   skills: string[];

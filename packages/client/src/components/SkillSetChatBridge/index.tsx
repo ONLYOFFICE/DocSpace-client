@@ -64,8 +64,9 @@ const SkillSetChatBridgeComponent = () => {
   React.useEffect(() => {
     if (!pending) return;
     // Read-and-clear, so the same request is not performed twice.
-    const room = aiPresetsStore.consumeUseInChat();
-    if (!room) return;
+    const request = aiPresetsStore.consumeUseInChat();
+    if (!request) return;
+    const { room, draft } = request;
 
     // The default agent: a pick of another one still being read is called off.
     aiPresetsStore.cancelApply();
@@ -76,6 +77,8 @@ const SkillSetChatBridgeComponent = () => {
       profileName: null,
       contextRooms: [room],
       knowledgeRooms: [],
+      // A skill's row starts the composer with the skill's call.
+      ...(draft ? { draft } : {}),
     });
     // The chat may have been left on its history or settings.
     setCurrentPage("chat");

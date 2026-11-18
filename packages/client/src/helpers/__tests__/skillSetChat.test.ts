@@ -14,7 +14,11 @@ describe("getUseInChatSkillSet", () => {
   });
 
   it("connects the open set for one of its skills", () => {
-    expect(getUseInChatSkillSet(skill, openSet)).toEqual({ id: 12, title: "Sales assistant" });
+    expect(getUseInChatSkillSet(skill, openSet)).toEqual({
+      id: 12,
+      title: "Sales assistant",
+      skill: "document-summary",
+    });
   });
 
   it("offers nothing for another room, a folder or a file outside a skill set", () => {

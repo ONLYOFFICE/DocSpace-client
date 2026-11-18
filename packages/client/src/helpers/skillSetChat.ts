@@ -35,12 +35,14 @@
 
 import { RoomsType } from "@docspace/shared/enums";
 import {
+  getSkillNameByTitle,
   isSkillFile,
   type TSkillFolder,
 } from "@docspace/shared/utils/skillFile";
 
 /** A skill set as "Use in chat" connects it: the room's id and its name. */
-export type TChatSkillSet = { id: number | string; title: string };
+/** A skill set to connect, and for a skill's row the name the skill is called by. */
+export type TChatSkillSet = { id: number | string; title: string; skill?: string };
 
 type TUseInChatItem = {
   id: number | string;
@@ -71,5 +73,9 @@ export const getUseInChatSkillSet = (
     openFolder.id != null &&
     String(item.folderId) === String(openFolder.id);
   if (!isOpenSet || !isSkillFile(item, openFolder)) return null;
-  return { id: openFolder.id!, title: openFolder.title ?? "" };
+  return {
+    id: openFolder.id!,
+    title: openFolder.title ?? "",
+    skill: getSkillNameByTitle(item.title),
+  };
 };

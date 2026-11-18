@@ -67,6 +67,17 @@ describe("SkillSetChatBridge", () => {
     expect(store.pendingUseInChat).toBeNull();
   });
 
+  it("starts the composer with the skill's call for a skill's row", () => {
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    act(() =>
+      store.requestUseInChat({ id: 12, title: "Sales assistant", skill: "document-summary" }),
+    );
+    expect(chat.store.openPreset).toHaveBeenCalledWith(
+      expect.objectContaining({ draft: "/document-summary " }),
+    );
+  });
+
   it("opens the chat once per request", () => {
     const store = new AiPresetsStore();
     const { rerender } = renderBridge(store);

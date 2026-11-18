@@ -50,6 +50,7 @@ import {
   type TAiProjectSource,
   type TAiProjectSuggestion,
 } from "@docspace/shared/api/ai/projects";
+import { toSkillCommand } from "@docspace/shared/utils/skillFile";
 
 /**
  * An AI project as the chat takes it: the model, its Instructions rooms as
@@ -162,6 +163,9 @@ class AiPresetsStore {
    * AiPresetsBridge, which holds the chat stores; `null` once it is open.
    */
   pendingUseInChat: AiChatPresetRoom | null = null;
+
+  /** The skill's call the chat opened by "Use in chat" starts with, if any. */
+  pendingUseInChatDraft: string | null = null;
 
   /**
    * The skill sets "Use in chat" connected to the default agent's chat.
@@ -291,20 +295,33 @@ class AiPresetsStore {
 
   /**
    * "Use in chat" on a skill set: the chat opens in a new conversation on the
-   * default agent with the set connected (see AiPresetsBridge).
+   * default agent with the set connected (see SkillSetChatBridge). On a
+   * skill's row the composer also starts with the skill's call.
    */
-  requestUseInChat = (skillSet: { id: number | string; title: string }) => {
+  requestUseInChat = (skillSet: {
+    id: number | string;
+    title: string;
+    skill?: string;
+  }) => {
     this.pendingUseInChat = {
       cloud: "docspace",
       id: String(skillSet.id),
       name: skillSet.title,
     };
+    this.pendingUseInChatDraft = skillSet.skill
+      ? `${toSkillCommand(skillSet.skill)} `
+      : null;
   };
 
-  consumeUseInChat = (): AiChatPresetRoom | null => {
+  consumeUseInChat = (): {
+    room: AiChatPresetRoom;
+    draft: string | null;
+  } | null => {
     const room = this.pendingUseInChat;
+    const draft = this.pendingUseInChatDraft;
     this.pendingUseInChat = null;
-    return room;
+    this.pendingUseInChatDraft = null;
+    return room ? { room, draft } : null;
   };
 
   setChatSkillRooms = (rooms: AiChatPresetRoom[] | null) => {

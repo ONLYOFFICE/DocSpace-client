@@ -284,7 +284,17 @@ describe("AiPresetsStore", () => {
   it("records a skill set's Use in chat once, as the chat's room", () => {
     const store = new AiPresetsStore();
     store.requestUseInChat({ id: 12, title: "Sales assistant" });
-    expect(store.consumeUseInChat()).toEqual({ cloud: "docspace", id: "12", name: "Sales assistant" });
+    expect(store.consumeUseInChat()).toEqual({
+      room: { cloud: "docspace", id: "12", name: "Sales assistant" },
+      draft: null,
+    });
+    expect(store.consumeUseInChat()).toBeNull();
+  });
+
+  it("records the skill's call with a skill's Use in chat", () => {
+    const store = new AiPresetsStore();
+    store.requestUseInChat({ id: 12, title: "Sales assistant", skill: "document-summary" });
+    expect(store.consumeUseInChat()?.draft).toBe("/document-summary ");
     expect(store.consumeUseInChat()).toBeNull();
   });
 

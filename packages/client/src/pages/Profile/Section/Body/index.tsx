@@ -35,7 +35,7 @@
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation, Navigate } from "react-router";
 import { TFunction } from "i18next";
 import { useEffect, useRef } from "react";
 
@@ -58,6 +58,8 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import TelegramStore from "SRC_DIR/store/TelegramStore";
 import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
+import type PluginStore from "SRC_DIR/store/PluginStore";
 import { isKeysManagementAvailable } from "SRC_DIR/helpers/privateRoomsSection";
 
 import MainProfile from "./sub-components/main-profile";
@@ -68,6 +70,12 @@ import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
 import KeysManagement from "./sub-components/keys-management";
 import useProfileBody from "./useProfileBody";
+import {
+  getPluginTabId,
+  getProfileBasePath,
+  getProfileTabId,
+  resolveProfileTab,
+} from "./profileTabs";
 import styles from "./body.module.scss";
 
 type SectionBodyContentProps = {
@@ -95,6 +103,8 @@ type SectionBodyContentProps = {
   checkTg?: TelegramStore["checkTg"];
   getEncryptionKeys?: UserStore["getEncryptionKeys"];
   showKeysManagement?: boolean;
+  pluginTabs?: PluginStore["profileTabItemsList"];
+  arePluginsPending?: boolean;
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -123,6 +133,8 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     checkTg,
     getEncryptionKeys,
     showKeysManagement,
+    pluginTabs = [],
+    arePluginsPending = false,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -238,19 +250,31 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     });
   }
 
-  const getCurrentTabId = () => {
-    const path = window.location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab && data.length ? currentTab.id : data[0].id;
-  };
+  pluginTabs.forEach(({ key, value }) => {
+    data.push({
+      id: getPluginTabId(key),
+      name: value.label,
+      content: (
+        <div className={styles.pluginTab}>
+          <PluginWrappedComponent
+            pluginName={value.pluginName}
+            component={value.component}
+          />
+        </div>
+      ),
+      onClick: () => {},
+    });
+  });
 
-  const currentTabId = getCurrentTabId();
+  const profilePath = getProfileBasePath(location.pathname);
+  const tabState = resolveProfileTab(
+    getProfileTabId(location.pathname),
+    data.map((item) => item.id),
+    arePluginsPending,
+  );
 
   const onSelect = (e: TTabItem) => {
-    const arrayPaths = window.location.pathname.split("/");
-    arrayPaths.splice(arrayPaths.length - 1);
-    const path = arrayPaths.join("/");
-    navigate(`${path}/${e.id}`, {
+    navigate(`${profilePath}/${e.id}`, {
       state: { disableScrollToTop: true, fromUrl: location?.state?.fromUrl },
     });
 
@@ -261,7 +285,13 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     }
   };
 
-  if (showProfileLoader) return <ProfileViewLoader />;
+  if (showProfileLoader || tabState.kind === "pending") {
+    return <ProfileViewLoader />;
+  }
+
+  if (tabState.kind === "missing") {
+    return <Navigate to={`${profilePath}/login`} replace />;
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -269,7 +299,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
       <div ref={tabsRef}>
         <Tabs
           items={data}
-          selectedItemId={currentTabId}
+          selectedItemId={tabState.id}
           onSelect={onSelect}
           stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
           withAnimation
@@ -293,6 +323,7 @@ export default inject(
     telegramStore,
     userStore,
     appsStore,
+    pluginStore,
   }: TStore) => {
     const {
       showProfileLoader,
@@ -355,6 +386,8 @@ export default inject(
         userStore.encryptionKeys,
         userStore.user?.isVisitor,
       ),
+      pluginTabs: pluginStore?.profileTabItemsList,
+      arePluginsPending: settingsStore.enablePlugins && !pluginStore?.isLoaded,
     };
   },
 )(

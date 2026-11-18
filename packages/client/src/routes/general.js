@@ -112,6 +112,16 @@ export const profileClientRoutes = [
       </PrivateRouteWrapper>
     ),
   },
+  {
+    path: "profile/p/:key",
+    element: (
+      <PrivateRouteWrapper>
+        <KeysManagementRoute guarded={false}>
+          <ViewComponent />
+        </KeysManagementRoute>
+      </PrivateRouteWrapper>
+    ),
+  },
 ];
 
 export const generalClientRoutes = [
@@ -490,6 +500,10 @@ const generalRoutes = [
       },
       {
         path: "authorized-apps",
+        lazy: loadProfileTab,
+      },
+      {
+        path: "p/:key",
         lazy: loadProfileTab,
       },
     ],

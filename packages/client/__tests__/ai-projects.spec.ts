@@ -44,33 +44,45 @@ import {
   aiConfigHandler,
   aiChatStoreHandlers,
   aiSectionsHandlers,
+  aiHubRoomsHandler,
+  aiAgentDeleteHandler,
+  aiAgentLeaveHandler,
+  aiAgentSkillsRefusedHandler,
+  aiProjectMock,
+  AiProjectMockAccess,
   AI_HUB_ROOMS,
   AI_PROJECTS,
   AI_PROJECT_WITH_SOURCES,
   AI_PROJECT_WITHOUT_SOURCES,
   rootHandler,
   filesSettingsHandler,
+  roomMembersHandlers,
   roomTagsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
- * The "AI rooms" section the server keeps under its own root, drawn by Home
- * with the Rooms machinery (`/ai-rooms/*`): the root lists the AI projects,
- * the Skills and Knowledge entries their rooms; each list creates what it
- * holds (the project form on the root, the entry's room type locked in the
- * room dialog), a room's menu has no archive, and a project opens on its
- * chat, with no sources column beside it.
+ * The AI Chat section, drawn by Home with the Rooms machinery on the
+ * `/ai-rooms/*` paths: its Agents list, with the Skill sets and Knowledge
+ * bases behind their own sidebar entries; each list creates what it holds
+ * (the agent form on Agents, the entry's room type locked in the room
+ * dialog on the others). An agent is a card with its sources, opens on its
+ * chat with no sources column beside it, and has an Info panel of its own
+ * (Details and Context, then Content on its page and Members for those who
+ * manage it) and an actions menu that leaves or deletes it from its page.
  *
- * The list is a Files table; the project views open the first stock
- * project, which links Instructions and Knowledge rooms, and the last,
- * which links none.
+ * The lists are Files tables; the agent views open the first stock agent,
+ * which links two skill sets and a knowledge base, and the last, which
+ * links none.
  */
 
 const AI_ROOMS_URL = "/ai-rooms/filter";
 
-const projectUrl = (id: number) => `/ai-rooms/${id}/filter?folder=${id}`;
+/** The Agents list narrowed to the agents' room type, as its sidebar entry opens it. */
+const AGENTS_URL = "/ai-rooms/filter?type=12";
+
+const agentUrl = (id: number) => `/ai-rooms/${id}/filter?folder=${id}`;
 
 const emptyView = (page: Page) =>
   page.getByTestId("empty-view").filter({ visible: true });
@@ -79,8 +91,91 @@ const table = (page: Page) => page.getByTestId("table-body");
 
 const sidebar = (page: Page) => page.locator("#article-container");
 
-/** A fresh copy of the stock projects: the create handler adds to its list. */
+const rowOf = (page: Page, title: string) =>
+  table(page).locator("[data-testid^=table-row-]").filter({ hasText: title });
+
+const tileOf = (page: Page, title: string) =>
+  page.getByTestId("tile").filter({ hasText: title });
+
+/** The tabs of the Info panel, in the order they are drawn. */
+const infoPanelTabs = (page: Page) =>
+  page
+    .locator('[data-testid^="info_"][data-testid$="_tab"]')
+    .evaluateAll((tabs) =>
+      tabs
+        .filter((tab) => (tab as HTMLElement).offsetParent !== null)
+        .map((tab) => tab.getAttribute("data-testid")),
+    );
+
+const openInfoPanel = async (page: Page) => {
+  const toggle = page.locator("#info-panel-toggle--open");
+  if (await toggle.isVisible()) await toggle.click();
+  await expect(page.getByTestId("info_details_tab")).toBeVisible();
+};
+
+/** Selects a row of the list through its menu, as a card's "Select" does. */
+const selectRow = async (page: Page, title: string) => {
+  await rowOf(page, title).getByTestId("context-menu-button").first().click();
+  await page.locator("#option_select").click();
+};
+
+/** The ids of the actions menu's items, in their order. */
+const menuItems = (page: Page) =>
+  page
+    .locator('[id^="option_"]')
+    .evaluateAll((items) =>
+      items
+        .filter((item) => (item as HTMLElement).offsetParent !== null)
+        .map((item) => item.id),
+    );
+
+const openPageMenu = async (page: Page) => {
+  await page.locator("#header_optional-button").click();
+  await expect(page.locator("#option_room-info")).toBeVisible();
+};
+
+/** A fresh copy of the stock agents: the create, leave and delete handlers change their list. */
 const stockProjects = () => [...AI_PROJECTS];
+
+/** The ids the self handler gives each user type. */
+const ROOM_ADMIN_ID = "roomadmin-user-id";
+
+/** An agent the caller manages (Agent manager). */
+const MANAGED_AGENT = aiProjectMock({
+  id: 777310,
+  title: "Legal Reviewer",
+  color: "8570FF",
+  access: AiProjectMockAccess.ProjectManager,
+  instructionsRooms: AI_PROJECT_WITH_SOURCES.aiProject.instructionsRooms,
+  knowledgeRooms: AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms,
+});
+
+/** An agent shared with the caller as a Member: one skill set and two knowledge bases. */
+const MEMBER_AGENT = aiProjectMock({
+  id: 777311,
+  title: "Data Analyst",
+  color: "5CC5D4",
+  access: AiProjectMockAccess.Member,
+  instructionsRooms: AI_PROJECT_WITH_SOURCES.aiProject.instructionsRooms.slice(0, 1),
+  knowledgeRooms: [
+    ...AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms,
+    {
+      ...AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms[0],
+      id: 779002,
+      title: "HR policies",
+    },
+  ],
+});
+
+/** An agent of the portal the caller is not a member of. */
+const OUTSIDE_AGENT = aiProjectMock({
+  id: 777312,
+  title: "Finance Desk",
+  color: "FF6680",
+  access: AiProjectMockAccess.None,
+});
+
+const [SKILL_SET] = MEMBER_AGENT.aiProject.instructionsRooms;
 
 test.describe("AI Chat section", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -94,8 +189,9 @@ test.describe("AI Chat section", () => {
     );
   });
 
-  test.describe("the list", () => {
-    test("lists the Instructions rooms, Knowledge rooms and AI projects with the section's slots", async ({
+  test.describe("the Agents list", () => {
+    // Spec: ai-agents-list, "Agents list"
+    test("lists the agents, with the skill sets and knowledge bases behind their own sidebar entries", async ({
       page,
       mockRequest,
       baseUrl,
@@ -107,21 +203,26 @@ test.describe("AI Chat section", () => {
 
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
 
-      // The root lists the agents; the Instructions and Knowledge rooms sit
+      // The list holds the agents; the skill sets and knowledge bases sit
       // behind the section's own entries.
       await expect(table(page)).toBeVisible();
-      for (const room of AI_PROJECTS) {
-        await expect(table(page)).toContainText(room.title);
+      for (const agent of AI_PROJECTS) {
+        await expect(table(page)).toContainText(agent.title);
       }
       for (const room of AI_HUB_ROOMS) {
         await expect(table(page)).not.toContainText(room.title);
       }
 
-      // One AI section in the sidebar, AI Chat, with Agents, Recent, Skill
-      // sets and Knowledge bases, no Trash or Archive; the projects have no
-      // section of their own.
+      // One AI section in the sidebar, AI Chat, with Agents, Skill sets and
+      // Knowledge bases; no "AI rooms" or "AI projects" of their own.
       await expect(sidebar(page)).toContainText("AI Chat");
+      for (const entry of ["Agents", "Skill sets", "Knowledge bases"]) {
+        await expect(
+          sidebar(page).getByText(entry, { exact: true }),
+        ).toBeVisible();
+      }
       await expect(sidebar(page)).not.toContainText("AI Projects");
+      await expect(sidebar(page)).not.toContainText("AI rooms");
 
       await expectScreenshot(page, [
         "desktop",
@@ -130,7 +231,7 @@ test.describe("AI Chat section", () => {
       ]);
     });
 
-    test("offers no archive in a Knowledge room's menu", async ({
+    test("offers no archive in a knowledge base's menu", async ({
       page,
       mockRequest,
       baseUrl,
@@ -140,25 +241,24 @@ test.describe("AI Chat section", () => {
         ...aiSectionsHandlers(TEST_PORT, stockProjects()),
       );
 
-      // The root lists the agents: the Knowledge rooms sit behind the
-      // section's own entry.
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
       await sidebar(page).getByText("Knowledge bases", { exact: true }).click();
       await expect(table(page)).toContainText("Contracts archive");
 
-      const knowledgeRow = table(page)
-        .locator("[data-testid^=table-row-]")
-        .filter({ hasText: "Contracts archive" });
-      await knowledgeRow.getByTestId("context-menu-button").first().click();
+      await rowOf(page, "Contracts archive")
+        .getByTestId("context-menu-button")
+        .first()
+        .click();
 
-      // A room's menu keeps "Delete room" (outright, as the server deletes
-      // an AI room) and has no "Move to Archive".
+      // The menu keeps Delete (outright, as the server deletes an AI room)
+      // and has no "Move to Archive".
       await expect(page.locator("#option_delete")).toBeVisible();
       await expect(page.locator("#option_archive-room")).toHaveCount(0);
     });
 
-    test("creates a project from the root, which lists the agents", async ({
+    // Spec: ai-agent-naming, "An AI project is called an agent"
+    test("creates an agent from the Agents list with the agent form", async ({
       page,
       mockRequest,
       baseUrl,
@@ -171,14 +271,15 @@ test.describe("AI Chat section", () => {
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
 
-      // The list creates what it holds: on the root, an agent, so New agent
-      // opens the project form with no room type to choose.
+      // The list creates what it holds: on Agents, an agent, so New agent
+      // opens the agent form with no room type to choose.
       await page.getByText("New agent", { exact: true }).first().click();
       await expect(page.getByTestId("room-type-list-item")).toHaveCount(0);
       // The modal root is a zero-size wrapper; the aside's fields are what shows.
       await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
       await expect(page.getByTestId("ai-project-title")).toBeVisible();
       await expect(page.getByTestId("ai-project-profile-combobox")).toBeVisible();
+      await expect(page.getByText("Create agent").first()).toBeVisible();
 
       await expectScreenshot(page, [
         "desktop",
@@ -187,7 +288,7 @@ test.describe("AI Chat section", () => {
       ]);
     });
 
-    test("creates a Knowledge room from the Knowledge list", async ({
+    test("creates a knowledge base from the Knowledge bases list", async ({
       page,
       mockRequest,
       baseUrl,
@@ -204,14 +305,14 @@ test.describe("AI Chat section", () => {
       await sidebar(page).getByText("Knowledge bases", { exact: true }).click();
       await expect(table(page)).toContainText("Contracts archive");
 
-      // The entry's room type is set and locked: no chooser, no project form.
+      // The entry's room type is set and locked: no chooser, no agent form.
       await page.getByText("New", { exact: true }).first().click();
       await expect(page.getByTestId("create_room_dialog_save")).toBeVisible();
       await expect(page.getByTestId("room-type-list-item")).toHaveCount(0);
       await expect(page.getByTestId("ai-project-dialog")).toHaveCount(0);
     });
 
-    test("offers an admin to create a room when the section is empty", async ({
+    test("offers an admin to create an agent when the section is empty", async ({
       page,
       mockRequest,
       baseUrl,
@@ -224,7 +325,6 @@ test.describe("AI Chat section", () => {
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
 
       await expect(emptyView(page)).toBeVisible();
-      await expect(emptyView(page)).toContainText("No AI rooms yet");
       await expect(emptyView(page)).toContainText("New agent");
 
       await expectScreenshot(page, [
@@ -234,7 +334,7 @@ test.describe("AI Chat section", () => {
       ]);
     });
 
-    test("tells a user that nothing was shared with them", async ({
+    test("tells a user that no agent was shared with them", async ({
       page,
       mockRequest,
       baseUrl,
@@ -247,9 +347,7 @@ test.describe("AI Chat section", () => {
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
 
       await expect(emptyView(page)).toBeVisible();
-      await expect(emptyView(page)).toContainText(
-        "No AI rooms shared with you yet",
-      );
+      await expect(emptyView(page)).toContainText("shared with you");
       await expect(emptyView(page)).not.toContainText("New agent");
 
       await expectScreenshot(page, [
@@ -259,7 +357,7 @@ test.describe("AI Chat section", () => {
       ]);
     });
 
-    test("creates a project with an uploaded picture and opens it", async ({
+    test("creates an agent with an uploaded picture and opens its page", async ({
       page,
       mockRequest,
       baseUrl,
@@ -270,7 +368,7 @@ test.describe("AI Chat section", () => {
       );
 
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
-      // The empty root creates an agent: New agent opens the project form.
+      // The empty list creates an agent: New agent opens the agent form.
       await emptyView(page).getByText("New agent", { exact: true }).click();
       await page.getByTestId("ai-project-title").fill("Sales");
 
@@ -290,7 +388,7 @@ test.describe("AI Chat section", () => {
 
       await page.getByTestId("ai-project-submit").click();
 
-      // The new project opens in the section, with the picture as its logo.
+      // The new agent's page opens, with the picture as its logo.
       await expect(page).toHaveURL(/\/ai-rooms\/777100\/filter/);
       const intro = page.getByTestId("ai-project-intro");
       await expect(intro).toBeVisible();
@@ -299,7 +397,118 @@ test.describe("AI Chat section", () => {
     });
   });
 
-  test.describe("a project", () => {
+  test.describe("agent cards", () => {
+    test.beforeEach(async ({ page, mockRequest }) => {
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "owner"),
+        ...aiSectionsHandlers(TEST_PORT, [...AI_PROJECTS, OUTSIDE_AGENT]),
+      );
+      await page.addInitScript(() =>
+        window.localStorage.setItem("viewAs", "tile"),
+      );
+    });
+
+    // Spec: ai-agents-list, "Agent card"; "Skill sets and knowledge bases on a card"
+    test("shows each agent as a card with its category, model, skill sets, knowledge bases and owner", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${AGENTS_URL}`);
+
+      const card = tileOf(page, AI_PROJECT_WITH_SOURCES.title);
+      await expect(card).toBeVisible();
+
+      const summary = card.getByTestId("ai-project-tile-summary");
+      await expect(summary.getByTestId("ai-project-tile-category")).toHaveText(
+        AI_PROJECT_WITH_SOURCES.tags[0],
+      );
+      await expect(summary.getByTestId("ai-project-tile-model")).toHaveText(
+        AI_PROJECT_WITH_SOURCES.aiProject.profile!.name,
+      );
+      const skills = summary.getByTestId("ai-project-tile-skills-item");
+      await expect(skills).toHaveCount(2);
+      for (const room of AI_PROJECT_WITH_SOURCES.aiProject.instructionsRooms) {
+        await expect(summary.getByTestId("ai-project-tile-skills")).toContainText(
+          room.title,
+        );
+      }
+      await expect(summary.getByTestId("ai-project-tile-knowledge")).toContainText(
+        AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms[0].title,
+      );
+      await expect(summary.getByTestId("ai-project-tile-owner")).toHaveText(
+        AI_PROJECT_WITH_SOURCES.createdBy.displayName,
+      );
+      await expect(card.getByTestId("ai-project-tile-open-chat")).toBeVisible();
+
+      // An agent without linked rooms or tags: dashes, and no Category row.
+      const bare = tileOf(page, AI_PROJECT_WITHOUT_SOURCES.title);
+      await expect(bare.getByTestId("ai-project-tile-skills")).toHaveText("—");
+      await expect(bare.getByTestId("ai-project-tile-knowledge")).toHaveText("—");
+      await expect(bare.getByTestId("ai-project-tile-category")).toHaveCount(0);
+
+      // Every agent is owned by a portal user: no Verified badge on a card.
+      await expect(page.getByTestId("ai-template-verified")).toHaveCount(0);
+
+      await expectScreenshot(page, [
+        "desktop",
+        "ai-projects",
+        "ai-agent-cards.png",
+      ]);
+    });
+
+    // Spec: ai-agents-list, "Open chat from a card"
+    test("opens an agent's page from Open chat, which only a member's card has", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${AGENTS_URL}`);
+
+      // A DocSpace admin outside the agent sees its card without Open chat.
+      await expect(tileOf(page, OUTSIDE_AGENT.title)).toBeVisible();
+      await expect(
+        tileOf(page, OUTSIDE_AGENT.title).getByTestId("ai-project-tile-open-chat"),
+      ).toHaveCount(0);
+
+      await tileOf(page, AI_PROJECT_WITH_SOURCES.title)
+        .getByTestId("ai-project-tile-open-chat")
+        .click();
+
+      await expect
+        .poll(() => new URL(page.url()).pathname)
+        .toBe(`/ai-rooms/${AI_PROJECT_WITH_SOURCES.id}/filter`);
+      await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+    });
+
+    // Spec: ai-agents-list, "Category row"; "Choosing a category"
+    test("narrows the agents to a category from the row under the filter", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${AGENTS_URL}`);
+
+      // "All" first and selected, then each tag the listed agents carry once.
+      const row = page.getByTestId("ai-agent-categories");
+      await expect(row).toBeVisible();
+      const categories = row.getByTestId("ai-agent-category");
+      await expect(categories.first()).toHaveText("All");
+      for (const tag of ["sales", "internal", "legal"]) {
+        await expect(row.getByText(tag, { exact: true })).toBeVisible();
+      }
+
+      await row.getByText("legal", { exact: true }).click();
+
+      // Only the agent tagged "legal", and the choice is kept in the address.
+      await expect(tileOf(page, "Contract reviewer")).toBeVisible();
+      await expect(tileOf(page, AI_PROJECT_WITH_SOURCES.title)).toHaveCount(0);
+      await expect(page).toHaveURL(/tags=/);
+
+      await page.reload();
+      await expect(tileOf(page, "Contract reviewer")).toBeVisible();
+      await expect(tileOf(page, AI_PROJECT_WITH_SOURCES.title)).toHaveCount(0);
+    });
+  });
+
+  test.describe("an agent's page", () => {
     test.beforeEach(({ mockRequest }) => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
@@ -307,7 +516,7 @@ test.describe("AI Chat section", () => {
       );
     });
 
-    test("opens from the list", async ({ page, baseUrl }) => {
+    test("opens from the Agents list", async ({ page, baseUrl }) => {
       await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
       await expect(table(page)).toBeVisible();
 
@@ -326,20 +535,20 @@ test.describe("AI Chat section", () => {
       page,
       baseUrl,
     }) => {
-      await page.goto(`${baseUrl}${projectUrl(AI_PROJECT_WITH_SOURCES.id)}`);
+      await page.goto(`${baseUrl}${agentUrl(AI_PROJECT_WITH_SOURCES.id)}`);
 
       const intro = page.getByTestId("ai-project-intro");
       await expect(intro).toBeVisible();
       await expect(intro).toContainText(AI_PROJECT_WITH_SOURCES.title);
 
-      const instructions = page.getByTestId("ai-project-intro-instructions");
+      const skillSets = page.getByTestId("ai-project-intro-instructions");
       for (const room of AI_PROJECT_WITH_SOURCES.aiProject.instructionsRooms) {
-        await expect(instructions).toContainText(room.title);
+        await expect(skillSets).toContainText(room.title);
       }
 
-      const knowledge = page.getByTestId("ai-project-intro-knowledge");
+      const knowledgeBases = page.getByTestId("ai-project-intro-knowledge");
       for (const room of AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms) {
-        await expect(knowledge).toContainText(room.title);
+        await expect(knowledgeBases).toContainText(room.title);
       }
 
       // Nothing beside the chat: the column's cards and their expanders are gone.
@@ -363,11 +572,11 @@ test.describe("AI Chat section", () => {
       ]);
     });
 
-    test("leaves the sources out of the intro of an agent without linked rooms", async ({
+    test("leaves the sources out of the intro of an agent without skill sets or knowledge bases", async ({
       page,
       baseUrl,
     }) => {
-      await page.goto(`${baseUrl}${projectUrl(AI_PROJECT_WITHOUT_SOURCES.id)}`);
+      await page.goto(`${baseUrl}${agentUrl(AI_PROJECT_WITHOUT_SOURCES.id)}`);
 
       await expect(page.getByTestId("ai-project-intro")).toBeVisible();
       await expect(page.getByTestId("ai-project-intro-instructions")).toHaveCount(0);
@@ -378,6 +587,480 @@ test.describe("AI Chat section", () => {
         "ai-projects",
         "ai-project-without-sources.png",
       ]);
+    });
+
+    // Spec: ai-agent-page, "Actions menu of an agent"
+    test("offers the Agent owner Edit, Share, Agent info, copy link, change owner and Delete agent, and no Leave agent", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${agentUrl(AI_PROJECT_WITH_SOURCES.id)}`);
+      await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+
+      await openPageMenu(page);
+      await expect
+        .poll(() => menuItems(page))
+        .toEqual([
+          "option_edit-room",
+          "option_invite-users-to-room",
+          "option_room-info",
+          "option_link-for-room-members",
+          "option_change-room-owner",
+          "option_delete",
+        ]);
+      await expect(page.locator("#option_edit-room")).toHaveText("Edit agent");
+      await expect(page.locator("#option_invite-users-to-room")).toHaveText(
+        "Share agent",
+      );
+      await expect(page.locator("#option_room-info")).toHaveText("Agent info");
+      await expect(page.locator("#option_delete")).toHaveText("Delete agent");
+    });
+
+    // Spec: ai-agent-page, "Agent info"
+    test("opens the Info panel on Details from Agent info", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${agentUrl(AI_PROJECT_WITH_SOURCES.id)}`);
+      await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+
+      await openPageMenu(page);
+      await page.locator("#option_room-info").click();
+
+      const details = page.getByTestId("info_details_tab");
+      await expect(details).toBeVisible();
+      await expect(details).toHaveAttribute("aria-selected", "true");
+      // Beside the chat, not in place of it.
+      await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+    });
+
+    // Spec: ai-agent-page, "Delete agent from its page"; ai-agent-naming, "Agent dialogs use the agent texts"
+    test("deletes the agent from its page after a confirmation and returns to the Agents list", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const projects = stockProjects();
+      mockRequest.use(
+        ...aiSectionsHandlers(TEST_PORT, projects),
+        aiAgentDeleteHandler(TEST_PORT, projects),
+      );
+
+      await page.goto(`${baseUrl}${agentUrl(AI_PROJECT_WITH_SOURCES.id)}`);
+      await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+
+      await openPageMenu(page);
+      await page.locator("#option_delete").click();
+
+      const dialog = page.getByTestId("delete-dialog");
+      await expect(dialog).toContainText("Delete this agent?");
+      await expect(dialog).toContainText(AI_PROJECT_WITH_SOURCES.title);
+      // Nothing is deleted before the warning is acknowledged.
+      await expect(page.getByTestId("delete_dialog_modal_submit")).toBeDisabled();
+      await page.getByTestId("delete_warning_checkbox").click();
+      await page.getByTestId("delete_dialog_modal_submit").click();
+
+      await expect
+        .poll(() => new URL(page.url()).pathname)
+        .toBe(AI_ROOMS_URL);
+      await expect(table(page)).toContainText(AI_PROJECT_WITHOUT_SOURCES.title);
+      await expect(table(page)).not.toContainText(AI_PROJECT_WITH_SOURCES.title);
+    });
+  });
+
+  /**
+   * The header of an agent's page for each role: a member reads the agent
+   * switcher, Chat history, New chat, the actions menu, "Share agent" when
+   * they may share it, and the Info panel toggle; someone outside the agent
+   * reads its name, the menu and the toggle.
+   */
+  test.describe("the header of an agent's page", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(
+        ...aiSectionsHandlers(TEST_PORT, [
+          ...AI_PROJECTS,
+          MANAGED_AGENT,
+          MEMBER_AGENT,
+          OUTSIDE_AGENT,
+        ]),
+      );
+    });
+
+    /** Where a header control starts: the controls are read left to right. */
+    const xOf = async (control: ReturnType<Page["locator"]>) => {
+      const box = await control.boundingBox();
+      return box?.x ?? Number.NaN;
+    };
+
+    // Spec: ai-agent-page, "Header of an agent's page"; "Share agent"
+    test("shows an Agent manager the switcher, Chat history, New chat, the menu, Share agent and the Info panel toggle, in that order", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "roomAdmin"));
+
+      await page.goto(`${baseUrl}${agentUrl(MANAGED_AGENT.id)}`);
+
+      const title = page.getByTestId("ai-chat-agent-picker");
+      const toolbar = page.locator("#chat-toolbar");
+      const history = toolbar.getByRole("button", { name: "Chat history" });
+      const newChat = toolbar.getByRole("button", { name: "New chat" });
+      const menu = page.locator("#header_optional-button");
+      const share = page.getByTestId("navigation_button");
+      const toggle = page.locator("#info-panel-toggle--open");
+
+      await expect(title).toContainText(MANAGED_AGENT.title);
+      await expect(history).toBeVisible();
+      await expect(newChat).toBeVisible();
+      await expect(menu).toBeVisible();
+      await expect(share).toHaveText("Share agent");
+      await expect(toggle).toBeVisible();
+
+      const order = [title, history, newChat, menu, share, toggle];
+      const xs: number[] = [];
+      for (const control of order) xs.push(await xOf(control));
+      expect(xs).toEqual([...xs].sort((a, b) => a - b));
+
+      // "Share agent" opens the agent's invite panel.
+      await share.click();
+      await expect(
+        page.locator("#invite_panel_modal").getByTestId("modal-dialog"),
+      ).toBeVisible();
+    });
+
+    // Spec: ai-agent-page, "Header of an agent's page"; "Actions menu of an agent"
+    test("shows a Member the same header without Share agent, and a menu of Agent info, copy link and Leave agent", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "roomAdmin"));
+
+      await page.goto(`${baseUrl}${agentUrl(MEMBER_AGENT.id)}`);
+
+      await expect(page.getByTestId("ai-chat-agent-picker")).toContainText(
+        MEMBER_AGENT.title,
+      );
+      await expect(
+        page.locator("#chat-toolbar").getByRole("button", { name: "Chat history" }),
+      ).toBeVisible();
+      await expect(page.locator("#info-panel-toggle--open")).toBeVisible();
+      await expect(page.getByTestId("navigation_button")).toHaveCount(0);
+
+      await openPageMenu(page);
+      await expect
+        .poll(() => menuItems(page))
+        .toEqual([
+          "option_room-info",
+          "option_link-for-room-members",
+          "option_leave-room",
+        ]);
+      await expect(page.locator("#option_leave-room")).toHaveText("Leave agent");
+    });
+
+    // Spec: ai-agent-page, "Actions menu of an agent"
+    test("offers an Agent manager Edit, Share, Agent info, copy link and Leave agent, without change owner or Delete agent", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "roomAdmin"));
+
+      await page.goto(`${baseUrl}${agentUrl(MANAGED_AGENT.id)}`);
+      await expect(page.getByTestId("ai-chat-agent-picker")).toBeVisible();
+
+      await openPageMenu(page);
+      await expect
+        .poll(() => menuItems(page))
+        .toEqual([
+          "option_edit-room",
+          "option_invite-users-to-room",
+          "option_room-info",
+          "option_link-for-room-members",
+          "option_leave-room",
+        ]);
+    });
+
+    // Spec: ai-agent-page, "Header for a non-member"
+    test("shows a DocSpace admin outside the agent its name, the menu and the Info panel toggle only", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+      await page.goto(`${baseUrl}${agentUrl(OUTSIDE_AGENT.id)}`);
+
+      await expect(page.getByTestId("agent-page-title")).toHaveText(
+        OUTSIDE_AGENT.title,
+      );
+      await expect(page.locator("#header_optional-button")).toBeVisible();
+      await expect(page.locator("#info-panel-toggle--open")).toBeVisible();
+      await expect(page.getByTestId("ai-chat-agent-picker")).toHaveCount(0);
+      await expect(page.locator("#chat-toolbar")).toHaveCount(0);
+      await expect(page.getByTestId("navigation_button")).toHaveCount(0);
+    });
+
+    // Spec: ai-agent-page, "Leave agent from its page"; ai-agent-naming, "Agent dialogs use the agent texts"
+    test("lets a Member leave the agent from its page after the conversations warning", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const projects = [...AI_PROJECTS, MEMBER_AGENT];
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "roomAdmin"),
+        ...aiSectionsHandlers(TEST_PORT, projects),
+        aiAgentLeaveHandler(TEST_PORT, projects, ROOM_ADMIN_ID),
+      );
+
+      await page.goto(`${baseUrl}${agentUrl(MEMBER_AGENT.id)}`);
+      await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+
+      await openPageMenu(page);
+      await page.locator("#option_leave-room").click();
+
+      const dialog = page.getByRole("dialog", { name: "Leave agent" });
+      await expect(dialog).toBeVisible();
+      await expect(dialog).toContainText(
+        "Your conversations with it, including the files in them, will be permanently deleted.",
+      );
+      await page.getByTestId("leave_room_modal_submit").click();
+
+      await expect(page.getByTestId("toast-content")).toContainText(
+        "You have left the agent",
+      );
+      await expect
+        .poll(() => new URL(page.url()).pathname)
+        .toBe(AI_ROOMS_URL);
+      await expect(table(page)).toContainText(AI_PROJECT_WITH_SOURCES.title);
+      await expect(table(page)).not.toContainText(MEMBER_AGENT.title);
+    });
+  });
+
+  /**
+   * The Info panel of an agent: Details and Context for everyone, Content
+   * on the agent's own page, Members last for those who manage it, and no
+   * Contacts, History or plugin tab. Context lists the skill sets (each
+   * unfolding to its skills) and the knowledge bases, with a "Manage ..."
+   * row under each for those who may edit the agent.
+   */
+  test.describe("the Info panel of an agent", () => {
+    test.beforeEach(({ mockRequest }) => {
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "roomAdmin"),
+        ...aiSectionsHandlers(TEST_PORT, [...AI_PROJECTS, MANAGED_AGENT, MEMBER_AGENT]),
+        ...roomMembersHandlers(TEST_PORT, MANAGED_AGENT.id),
+      );
+    });
+
+    // Spec: ai-agent-info-panel, "Tabs of an agent"; "Content tab on an agent's page"
+    test("gives a Member's selected card Details and Context only, with Details shown", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await expect(table(page)).toContainText(MEMBER_AGENT.title);
+
+      await selectRow(page, MEMBER_AGENT.title);
+      await openInfoPanel(page);
+
+      await expect
+        .poll(() => infoPanelTabs(page))
+        .toEqual(["info_details_tab", "info_context_tab"]);
+      await expect(page.getByTestId("info_details_tab")).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
+      await expect(page.getByTestId("info_details_tab")).toHaveText("Details");
+      await expect(page.getByTestId("info_context_tab")).toHaveText("Context");
+    });
+
+    // Spec: ai-agent-info-panel, "Tabs of an agent" ("Contacts was remembered")
+    test("falls back to Details for an agent after Contacts of a room was last open", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const [knowledgeBase] = AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms;
+      mockRequest.use(...roomMembersHandlers(TEST_PORT, knowledgeBase.id));
+
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await expect(table(page)).toBeVisible();
+      await sidebar(page).getByText("Knowledge bases", { exact: true }).click();
+      await expect(table(page)).toContainText(knowledgeBase.title);
+
+      // A room's Contacts tab is what the panel remembers.
+      await selectRow(page, knowledgeBase.title);
+      await openInfoPanel(page);
+      await page.getByTestId("info_members_tab").click();
+      await expect(page.getByTestId("info_members_tab")).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
+
+      await sidebar(page).getByText("Agents", { exact: true }).click();
+      await expect(table(page)).toContainText(MEMBER_AGENT.title);
+      await selectRow(page, MEMBER_AGENT.title);
+
+      await expect(page.getByTestId("info_details_tab")).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
+      await expect(page.getByTestId("info_members_tab")).toHaveCount(0);
+      await expect(page.getByTestId("info_history_tab")).toHaveCount(0);
+    });
+
+    // Spec: ai-agent-info-panel, "Members of an agent"; "Content tab on an agent's page"
+    test("gives an Agent manager Details, Context, Content and Members on the agent's page, and no Content on its card", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${agentUrl(MANAGED_AGENT.id)}`);
+      await openInfoPanel(page);
+
+      await expect
+        .poll(() => infoPanelTabs(page))
+        .toEqual([
+          "info_details_tab",
+          "info_context_tab",
+          "info_content_tab",
+          "info_members_tab",
+        ]);
+
+      // Selected in the list, the same agent has no Content tab.
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await expect(table(page)).toContainText(MANAGED_AGENT.title);
+      await selectRow(page, MANAGED_AGENT.title);
+      await openInfoPanel(page);
+
+      await expect
+        .poll(() => infoPanelTabs(page))
+        .toEqual(["info_details_tab", "info_context_tab", "info_members_tab"]);
+    });
+
+    // Spec: ai-agent-info-panel, "Content tab on an agent's page" ("Agent's page")
+    test("gives a Member Details, Context and Content on the agent's page", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${agentUrl(MEMBER_AGENT.id)}`);
+      await openInfoPanel(page);
+
+      await expect
+        .poll(() => infoPanelTabs(page))
+        .toEqual(["info_details_tab", "info_context_tab", "info_content_tab"]);
+    });
+
+    // Spec: ai-agent-info-panel, "Context tab"; "Skills of a skill set"; "Managing sources from Context"
+    test("lists a Member the agent's skill sets and knowledge bases on Context, a skill set unfolding to its skills, with no Manage rows", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await expect(table(page)).toContainText(MEMBER_AGENT.title);
+      await selectRow(page, MEMBER_AGENT.title);
+      await openInfoPanel(page);
+      await page.getByTestId("info_context_tab").click();
+
+      const skillSets = page.getByTestId("ai-agent-context-skills");
+      const knowledgeBases = page.getByTestId("ai-agent-context-knowledge");
+      await expect(skillSets).toContainText("Skill sets");
+      await expect(knowledgeBases).toContainText("Knowledge bases");
+
+      await expect(skillSets.getByTestId(/^ai-project-room-\d+$/)).toHaveCount(1);
+      await expect(skillSets).toContainText(SKILL_SET.title);
+      await expect(knowledgeBases.getByTestId(/^ai-project-room-\d+$/)).toHaveCount(2);
+      for (const room of MEMBER_AGENT.aiProject.knowledgeRooms) {
+        await expect(knowledgeBases).toContainText(room.title);
+      }
+
+      // The skill set unfolds to the names of its skills.
+      await expect(skillSets).not.toContainText("Pitch builder");
+      await page.getByTestId(`ai-project-room-expander-${SKILL_SET.id}`).click();
+      await expect(skillSets).toContainText("Pitch builder");
+      await expect(skillSets).toContainText("Follow-up writer");
+
+      // A Member may not edit the agent: no "Manage ..." row.
+      await expect(page.getByTestId("ai-agent-context-manage-skills")).toHaveCount(0);
+      await expect(page.getByTestId("ai-agent-context-manage-knowledge")).toHaveCount(0);
+    });
+
+    // Spec: ai-agent-info-panel, "Skills of a skill set" ("Skills unavailable")
+    test("lists the skill sets without an unfold control when their skills cannot be read", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(aiAgentSkillsRefusedHandler(TEST_PORT));
+
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await expect(table(page)).toContainText(MEMBER_AGENT.title);
+      await selectRow(page, MEMBER_AGENT.title);
+      await openInfoPanel(page);
+      await page.getByTestId("info_context_tab").click();
+
+      const skillSets = page.getByTestId("ai-agent-context-skills");
+      await expect(skillSets).toContainText(SKILL_SET.title);
+      await expect(skillSets.getByTestId(/^ai-project-room-expander-/)).toHaveCount(0);
+    });
+
+    // Spec: ai-agent-info-panel, "Managing sources from Context" ("Agent manager")
+    test("lets an Agent manager open the agent's edit form from Manage knowledge bases on Context", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.goto(`${baseUrl}${agentUrl(MANAGED_AGENT.id)}`);
+      await openInfoPanel(page);
+      await page.getByTestId("info_context_tab").click();
+
+      const manageSkills = page.getByTestId("ai-agent-context-manage-skills");
+      const manageKnowledge = page.getByTestId("ai-agent-context-manage-knowledge");
+      await expect(manageSkills).toHaveText("Manage skill sets...");
+      await expect(manageKnowledge).toHaveText("Manage knowledge bases...");
+      // Each closes its own section.
+      await expect(
+        page.getByTestId("ai-agent-context-skills").getByTestId("ai-agent-context-manage-skills"),
+      ).toBeVisible();
+      await expect(
+        page
+          .getByTestId("ai-agent-context-knowledge")
+          .getByTestId("ai-agent-context-manage-knowledge"),
+      ).toBeVisible();
+
+      await manageKnowledge.click();
+      await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
+      await expect(page.getByTestId("ai-project-title")).toHaveValue(MANAGED_AGENT.title);
+    });
+
+    // Spec: ai-agent-info-panel, "Context that cannot be read"
+    test("says that something went wrong on Context of an agent deleted meanwhile", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      // The list still lists the agent; the agent itself is gone.
+      const deleted = aiProjectMock({
+        id: 777313,
+        title: "Gone agent",
+        color: "8570FF",
+        access: AiProjectMockAccess.Member,
+      });
+      mockRequest.use(
+        aiHubRoomsHandler(TEST_PORT, AI_HUB_ROOMS, [...AI_PROJECTS, deleted]),
+      );
+
+      await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
+      await expect(table(page)).toContainText(deleted.title);
+      await selectRow(page, deleted.title);
+      await openInfoPanel(page);
+      await page.getByTestId("info_context_tab").click();
+
+      await expect(page.getByTestId("ai-agent-context-error")).toHaveText(
+        "Something went wrong.",
+      );
+      await expect(page.getByTestId("ai-agent-context-skills")).toHaveCount(0);
     });
   });
 });

@@ -45,6 +45,7 @@ import {
   aiSectionsHandlers,
   aiHubRoomsAsUserHandler,
   aiAgentReadDeniedHandlers,
+  agentInviteSearchHandler,
   aiProjectMock,
   AiProjectMockAccess,
   AI_HUB_ROOMS,
@@ -56,6 +57,8 @@ import {
   roomMembersHandlers,
   TypeRoomList,
   usersByType,
+  usersWithRoomSharedHandler,
+  type AgentInviteAccount,
   type RoomMembersHandlerHandle,
   type UserType,
 } from "@docspace/shared/__mocks__/handlers";
@@ -692,5 +695,183 @@ test.describe("Agent access", () => {
     await expect(page.getByTestId("ai-chat-slot")).toHaveCount(0);
     await expect(page.getByTestId("ai-chat-agent-picker")).toHaveCount(0);
     await expect(page.locator("#article-container")).not.toContainText("AI Chat");
+  });
+});
+
+/**
+ * The invite panel of an agent ("Share agent"): portal users by name only,
+ * each offered the roles their type may hold - Agent manager for an admin or
+ * a room admin, Member only for a User - and no guests, no groups and no
+ * invitation link. The inviter is a DocSpace admin who is the agent's
+ * Agent manager; the panel's search finds a room admin, a User, a guest and
+ * a group by the same word.
+ */
+test.describe("Inviting to an agent", () => {
+  const RITA: AgentInviteAccount = {
+    id: "rita-room-admin",
+    displayName: "Rita Stone",
+    email: "rita@example.com",
+    type: "roomAdmin",
+  };
+  const UMA: AgentInviteAccount = {
+    id: "uma-user",
+    displayName: "Uma Stone",
+    email: "uma@example.com",
+    type: "user",
+  };
+  const GINA: AgentInviteAccount = {
+    id: "gina-guest",
+    displayName: "Gina Stone",
+    email: "gina@example.com",
+    type: "guest",
+  };
+  const STONE_TEAM: AgentInviteAccount = {
+    id: "stone-team",
+    name: "Stone team",
+    type: "group",
+    membersCount: 3,
+  };
+
+  const invitePanel = (page: Page) => page.locator("#invite_panel_modal");
+  const searchInput = (page: Page) => page.getByTestId("invite_panel_search_input");
+
+  /** Types into the panel's search and waits for the server's answer. */
+  const search = async (page: Page, value: string) => {
+    const answered = page.waitForResponse((response) =>
+      response.url().includes(`/accounts/room/${MANAGED_AGENT.id}/search`),
+    );
+    await searchInput(page).fill(value);
+    await answered;
+  };
+
+  /** Finds an account by name and adds it to the invitees. */
+  const addInvitee = async (page: Page, name: string) => {
+    await search(page, name);
+    await page.getByText(name, { exact: true }).first().click();
+  };
+
+  const roleOf = (page: Page, name: string, role: string) =>
+    invitePanel(page).getByRole("button", { name: `Role of ${name}: ${role}`, exact: true });
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      filesSettingsHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      aiConfigHandler(TEST_PORT),
+      ...aiChatStoreHandlers(TEST_PORT),
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...aiSectionsHandlers(TEST_PORT, AGENTS_OF.admin()),
+      agentInviteSearchHandler(TEST_PORT, MANAGED_AGENT.id, [RITA, UMA, GINA, STONE_TEAM]),
+      usersWithRoomSharedHandler(TEST_PORT, MANAGED_AGENT.id, [
+        { id: RITA.id, displayName: "Rita Stone", email: "rita@example.com" },
+      ]),
+      ...roomMembersHandlers(TEST_PORT, MANAGED_AGENT.id),
+    );
+  });
+
+  /** "Share agent" in the agent's card menu opens its invite panel. */
+  const openInvitePanel = async (page: Page, baseUrl: string) => {
+    await page.goto(`${baseUrl}${AGENTS_URL}`);
+    await expect(table(page)).toContainText(MANAGED_AGENT.title);
+    await openCardMenu(page, MANAGED_AGENT.title);
+    await expect(page.getByTestId("option_invite-users-to-room")).toHaveText("Share agent");
+    await page.getByTestId("option_invite-users-to-room").click();
+    await expect(searchInput(page)).toBeVisible();
+  };
+
+  // Spec: ai-agent-access, "Roles of an agent"
+  test("Inviting a room admin", async ({ page, baseUrl }) => {
+    await openInvitePanel(page, baseUrl);
+    await addInvitee(page, "Rita Stone");
+
+    // Agent manager is preselected, and Member can be chosen as well.
+    const role = roleOf(page, "Rita Stone", "Agent manager");
+    await expect(role).toBeVisible();
+    await role.click();
+    await expect(page.getByTestId("access_right_option_projectmanager")).not.toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
+    await expect(page.getByTestId("access_right_option_projectmember")).not.toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
+  });
+
+  // Spec: ai-agent-access, "Roles of an agent"
+  test("Inviting a User", async ({ page, baseUrl }) => {
+    await openInvitePanel(page, baseUrl);
+    await addInvitee(page, "Uma Stone");
+
+    // Member is the only role that can be chosen.
+    const role = roleOf(page, "Uma Stone", "Member");
+    await expect(role).toBeVisible();
+    await role.click();
+    const manager = page.getByTestId("access_right_option_projectmanager");
+    await expect(manager).toHaveAttribute("aria-disabled", "true");
+    await expect(page.getByTestId("access_right_option_projectmember")).not.toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
+
+    // The disabled role says who can hold it.
+    await manager.hover({ force: true });
+    await expect(
+      page.getByText(
+        "Guests and Users cannot be assigned as Agent managers. Only Room and Full admins are suitable for the specified role.",
+      ),
+    ).toBeVisible();
+  });
+
+  // Spec: ai-agent-access, "Who may be invited to an agent"
+  test("No guests and no groups", async ({ page, baseUrl }) => {
+    await openInvitePanel(page, baseUrl);
+
+    // The server finds the guest and the group; the panel offers neither.
+    await search(page, "Gina");
+    await expect(page.getByText("Gina Stone", { exact: true })).toHaveCount(0);
+    await search(page, "Stone team");
+    await expect(page.getByText("Stone team", { exact: true })).toHaveCount(0);
+
+    // The same word finds the users, who are offered.
+    await search(page, "Stone");
+    await expect(page.getByText("Rita Stone", { exact: true })).toBeVisible();
+    await expect(page.getByText("Uma Stone", { exact: true })).toBeVisible();
+    await expect(page.getByText("Gina Stone", { exact: true })).toHaveCount(0);
+    await expect(page.getByText("Stone team", { exact: true })).toHaveCount(0);
+
+    // The list to choose from has no Guests tab, nor a Groups one.
+    await searchInput(page).fill("");
+    await page.getByTestId("invite_panel_choose_from_list_link").click();
+    const people = page.getByTestId("invite_panel_people_selector");
+    await expect(people).toBeVisible();
+    await expect(people.getByText("Guests", { exact: true })).toHaveCount(0);
+    await expect(people.getByText("Groups", { exact: true })).toHaveCount(0);
+  });
+
+  // Spec: ai-agent-access, "Who may be invited to an agent"
+  test("No invitation link", async ({ page, baseUrl }) => {
+    await openInvitePanel(page, baseUrl);
+
+    // The panel is loaded: the note on the agent's sources is there.
+    await expect(page.getByTestId("invite_panel_ai_project_sources_bar")).toBeVisible();
+    await expect(invitePanel(page).getByText("Invite via link", { exact: true })).toHaveCount(0);
+  });
+
+  // Spec: ai-agent-access, "No portal-wide access"
+  test("Share an agent", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}${agentPageUrl(MANAGED_AGENT.id)}`);
+    await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+
+    await shareAgentButton(page).click();
+
+    // Named portal users only: a search for them, no link and no audience.
+    await expect(searchInput(page)).toBeVisible();
+    await expect(invitePanel(page).getByText("Invite via link", { exact: true })).toHaveCount(0);
+    await expect(invitePanel(page).getByText("Everyone in DocSpace")).toHaveCount(0);
+    await addInvitee(page, "Rita Stone");
+    await expect(roleOf(page, "Rita Stone", "Agent manager")).toBeVisible();
   });
 });

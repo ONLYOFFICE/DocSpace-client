@@ -1,0 +1,29 @@
+{
+  "key_path": "YouLeftTheAgent",
+  "content": "You have left the agent",
+  "content_en_sha1_hash": "9046d9c834b4b78bdceb1017ec100bcfc353675a",
+  "created_at": "2026-11-18T08:06:41.458Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
+  "comment": {
+    "text": "Success toast after the user leaves an agent they were a member of, through the Leave agent action. The agent counterpart of You have left the room.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:13:34.331Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
+      "line_number": 609,
+      "context": "const isRoot = self.selectedFolderStore.isRootFolder;\n \n const successText = isOwner\n ? t(\"Common:LeftAndAppointNewOwner\")\n : isAgent(room)\n ? t(\"Common:YouLeftTheAgent\")\n : t(\"Common:YouLeftTheRoom\");\n \n const leave = () =>\n (\n api.rooms.updateRoomMemberRole(roomId, {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

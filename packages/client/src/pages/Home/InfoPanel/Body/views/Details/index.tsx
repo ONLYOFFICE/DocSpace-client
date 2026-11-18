@@ -517,6 +517,7 @@ const Details = ({
               id={property.id}
               key={property.title}
               className={`property ${property.className}`}
+              data-testid={`info_panel_details_property_${property.id}`}
             >
               <Text className="property-title">{property.title}</Text>
               {property.content}

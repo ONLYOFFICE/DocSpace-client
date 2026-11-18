@@ -39,6 +39,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const navigate = vi.fn();
 
 vi.mock("react-router", () => ({ useNavigate: () => navigate }));
+vi.mock("SRC_DIR/components/BetaBadgeWrapper", () => ({
+  default: () => null,
+}));
 
 import { takePrivateRoomCreateRequest } from "SRC_DIR/helpers/privateRoomCreateRequest";
 
@@ -103,6 +106,14 @@ describe("useModuleItems: the card of private rooms", () => {
     expect(card.description).toBe("Common:DashboardE2eRoomsDescription");
     expect(card.installed).toBe(true);
     expect(card.noTour).toBe(true);
+  });
+
+  it("Card with the badge: only the card of private rooms carries one", () => {
+    const items = render();
+
+    expect(items.filter((item) => item.badge).map((item) => item.id)).toEqual([
+      "e2e-rooms",
+    ]);
   });
 
   it("Section not available: no card", () => {

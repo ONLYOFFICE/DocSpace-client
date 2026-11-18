@@ -6,7 +6,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 - [x] 1.1 Client: add the card of private rooms to the dashboard apps (`packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx`), after Forms, shown only while the section is available to the user, with the installed state of the E2E rooms app, Common:Private, Common:DashboardE2eRoomsDescription, the icon of the sidebar item and no tour (design decision 1). Verify: cases "Section available", "Section not available" and "App switched off on a standalone portal" in a unit test of the hook next to it; `cd packages/client && pnpm exec vitest run src/pages/Dashboard`
 - [x] 1.2 Client: the button of the card. Common:CreatePrivateRoom for a user who may create rooms: it leaves a request and opens `/private/filter`, and the list takes the request and starts its own create entry point once; Common:Open for everybody else (design decision 2). Verify: cases "Room admin", "Room admin without a key" and "User who cannot create rooms" in the unit test of the hook and in a unit test of the place that takes the request; `pnpm exec vitest run src/pages/Dashboard src/pages/Home`
-- [ ] 1.3 Client: show the shared Beta badge beside the title of the card (design decision 3). Verify: case "Card with the badge" in a unit test of the card component; `pnpm exec vitest run src/pages/Dashboard`
+- [x] 1.3 Client: show the shared Beta badge beside the title of the card (design decision 3). Verify: case "Card with the badge" in a unit test of the card component; `pnpm exec vitest run src/pages/Dashboard`
 
 ## 2. Private list
 

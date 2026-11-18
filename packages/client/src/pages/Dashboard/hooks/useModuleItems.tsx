@@ -44,6 +44,7 @@ import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
 import CatalogPrivateIcon from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg";
 
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import { requestPrivateRoomCreate } from "SRC_DIR/helpers/privateRoomCreateRequest";
 
 import type { ModuleItem } from "../sub-components/ModuleCard";
@@ -247,6 +248,15 @@ export const useModuleItems = ({
         icon: <CatalogPrivateIcon />,
         title: t("Common:Private"),
         description: t("Common:DashboardE2eRoomsDescription"),
+        // Spec: private-rooms/sidebar-section, "Dashboard card of private rooms carries the Beta badge"
+        badge: (
+          <BetaBadge
+            place="bottom"
+            title={t("Common:PrivateRoomsBetaTitle")}
+            description={t("Common:PrivateRoomsBetaDescription")}
+            dataTestId="dashboard_private_rooms_beta_badge"
+          />
+        ),
         href: PRIVATE_ROOMS_PATH,
         // Spec: private-rooms/sidebar-section, "Dashboard card of private rooms creates or opens"
         ...withInstallState(

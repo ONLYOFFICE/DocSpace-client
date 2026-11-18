@@ -78,7 +78,6 @@ const SourceGroup = ({ label, rooms, kind }: SourceGroupProps) => {
             <RoomItem
               id={room.id}
               title={room.title}
-              logo={room.logo}
               icon={kind === "instructions" ? "instructionsRoom.svg" : "knowledgeRoom.svg"}
             />
           </div>

@@ -26,9 +26,9 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/mixins";
 
-// The body of an open AI project in the AI Rooms section: the sources column
-// (when shown) and the conversation, which takes the rest. The chat pane
-// expects a bounded flex column, as it gets directly inside the panel.
+// The body of an open agent in the AI Chat section: its conversation fills
+// it. The chat pane expects a bounded flex column, as it gets directly
+// inside the panel.
 .projectChat {
   display: flex;
   flex: 1;
@@ -55,28 +55,14 @@
   }
 }
 
-// Under the panel header: a project's sources column (when shown) and the
-// conversation, which takes the rest. The chat pane expects a bounded flex
-// column, as it gets directly inside the panel.
-.panelBody {
-  display: flex;
-  flex: 1 1 0;
-  min-height: 0;
-  min-width: 0;
-}
-
-.panelChat {
+// The conversation, inside the section's side gutters (as the Files section
+// keeps them), as a bounded flex column.
+.chatBody {
   display: flex;
   flex-direction: column;
   flex: 1 1 0;
   min-width: 0;
   min-height: 0;
-}
-
-// Inside a project the body keeps the section's side gutters (as the Files
-// section does); the conversation sits to the right of the sources column
-// with a gap and no divider, as the mockup draws it.
-.projectBody {
   padding: 0 20px;
   box-sizing: border-box;
 

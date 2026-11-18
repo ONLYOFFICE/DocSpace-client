@@ -82,10 +82,12 @@ const toChatRooms = (rooms: TAiProject["aiProject"]["knowledgeRooms"]) =>
     .map((room) => ({ cloud: "docspace", id: String(room.id), name: room.title }));
 
 /**
- * The body of the AI Rooms section while an AI project room is open: the
- * project's chat with its sources column, drawn in place of the file list
- * (a project holds no files). The header stays the section's own, with the
- * room's title, menu and the chat toolbar.
+ * The body of the AI Rooms section while an agent (an AI project room) is
+ * open: its chat, which fills the section body in place of the file list (an
+ * agent lists no files). There is no sources column beside it: what the
+ * agent draws on is in the Info panel's Context tab and in the composer's
+ * "+" menu. The header stays the section's own, with the room's title, menu
+ * and the chat toolbar.
  *
  * Opening reads the project (`GET ai/projects/{id}`) and starts a fresh
  * thread on its model and rooms; leaving the room resets the chat.
@@ -206,7 +208,7 @@ const AiProjectView = ({
 
   // A change of the project's model or linked rooms, here or elsewhere,
   // comes as an update of its room; both are read again so every member's
-  // chat and sources follow it.
+  // chat follows it.
   React.useEffect(() => {
     const onUpdate = ({ cmd, type, id }: { cmd?: string; type?: string; id?: number | string } = {}) => {
       if (cmd === "update" && type === "folder" && Number(id) === roomId) void store.refreshActiveSettings();
@@ -342,10 +344,8 @@ const AiProjectView = ({
     // `chat-container` drops the body's vertical padding while the chat
     // shows, as for an agent's chat.
     <div className={classnames(styles.projectChat, "chat-container")}>
-      <div className={classnames(styles.panelBody, styles.projectBody)}>
-        <div className={styles.panelChat}>
-          <AiChatPanelBody />
-        </div>
+      <div className={styles.chatBody}>
+        <AiChatPanelBody />
       </div>
     </div>
   );

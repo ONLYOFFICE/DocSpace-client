@@ -398,7 +398,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         <div className={styles.roomList}>
           {rooms.map((room) => (
             <div className={styles.roomItem} key={room.id} data-testid="ai-project-room-item">
-              <SourceRoomLogo title={room.title} logo={room.logo ?? undefined} icon={ROOM_ICONS[type]} size="20px" />
+              <SourceRoomLogo icon={ROOM_ICONS[type]} size="20px" />
               <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect truncate>
                 {room.title}
               </Text>

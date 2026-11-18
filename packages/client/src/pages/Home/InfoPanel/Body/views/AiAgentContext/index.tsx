@@ -188,7 +188,6 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
               <RoomItem
                 id={room.id}
                 title={room.title}
-                logo={room.logo}
                 icon="instructionsRoom.svg"
                 isExpanded={isExpanded}
                 onToggle={
@@ -230,7 +229,6 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
             key={room.id}
             id={room.id}
             title={room.title}
-            logo={room.logo}
             icon="knowledgeRoom.svg"
           />
         ),

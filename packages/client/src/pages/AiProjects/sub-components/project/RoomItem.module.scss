@@ -26,7 +26,7 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/mixins";
 
-// A room of an AI project as one row: its logo and name, and for a room
+// A room an agent draws on as one row: its icon and name, and for a room
 // that expands, the folder tree's triangle before it.
 .roomItem {
   display: flex;
@@ -45,15 +45,7 @@
   }
 
   :global(.room-icon) {
-    // The logo's colour square is absolutely positioned: anchored here, it
-    // scrolls with its row and is clipped by the card instead of staying
-    // where the row first was.
-    position: relative;
     min-width: 24px;
-
-    :global(.room-image) {
-      border-radius: 6px;
-    }
   }
 }
 
@@ -109,12 +101,4 @@
   &.expanded svg {
     transform: none;
   }
-}
-
-
-.roomTrailing {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  margin-inline-start: auto;
 }

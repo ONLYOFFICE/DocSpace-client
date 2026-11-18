@@ -60,8 +60,8 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
  * with the Rooms machinery (`/ai-rooms/*`): the root lists the AI projects,
  * the Skills and Knowledge entries their rooms; each list creates what it
  * holds (the project form on the root, the entry's room type locked in the
- * room dialog), a room's menu has no archive, and a project opens with its
- * sources.
+ * room dialog), a room's menu has no archive, and a project opens on its
+ * chat, with no sources column beside it.
  *
  * The list is a Files table; the project views open the first stock
  * project, which links Instructions and Knowledge rooms, and the last,
@@ -320,7 +320,9 @@ test.describe("AI Chat section", () => {
         .toBe(`/ai-rooms/${AI_PROJECT_WITH_SOURCES.id}/filter`);
       await expect(page.getByTestId("ai-project-intro")).toBeVisible();
     });
-    test("shows the chat with the project's skills and knowledge", async ({
+
+    // Spec: ai-agent-page, "No sources column on the page"
+    test("shows the chat with the agent's skill sets and knowledge bases in its intro, with no sources column", async ({
       page,
       baseUrl,
     }) => {
@@ -330,17 +332,20 @@ test.describe("AI Chat section", () => {
       await expect(intro).toBeVisible();
       await expect(intro).toContainText(AI_PROJECT_WITH_SOURCES.title);
 
-      const instructions = page.getByTestId("ai-project-instructions");
-      await expect(instructions).toBeVisible();
+      const instructions = page.getByTestId("ai-project-intro-instructions");
       for (const room of AI_PROJECT_WITH_SOURCES.aiProject.instructionsRooms) {
         await expect(instructions).toContainText(room.title);
       }
 
-      const knowledge = page.getByTestId("ai-project-knowledge");
-      await expect(knowledge).toBeVisible();
+      const knowledge = page.getByTestId("ai-project-intro-knowledge");
       for (const room of AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms) {
         await expect(knowledge).toContainText(room.title);
       }
+
+      // Nothing beside the chat: the column's cards and their expanders are gone.
+      await expect(page.getByTestId("ai-project-instructions")).toHaveCount(0);
+      await expect(page.getByTestId("ai-project-knowledge")).toHaveCount(0);
+      await expect(page.getByTestId(/^ai-project-room-expander-/)).toHaveCount(0);
 
       await expectScreenshot(page, [
         "desktop",
@@ -348,30 +353,25 @@ test.describe("AI Chat section", () => {
         "ai-project-with-sources.png",
       ]);
 
-      // Every file of an expanded room is listed with its state: the failed
-      // one carries the badge with "Try again", and the room row a warning.
-      const [room] = AI_PROJECT_WITH_SOURCES.aiProject.knowledgeRooms;
-      await page.getByTestId(`ai-project-room-expander-${room.id}`).click();
-      await expect(knowledge.getByTestId(/^ai-project-file-row-/)).toHaveCount(4);
-      await expect(knowledge).toContainText("In progress");
-      await expect(
-        page.getByTestId(`ai-project-room-warning-${room.id}`),
-      ).toBeVisible();
-      const failed = page.getByTestId("ai-project-file-failed-779104");
-      await expect(failed).toBeVisible();
-      await failed.hover();
-      await expect(page.getByText("Try again", { exact: true })).toBeVisible();
+      // On a tablet the chat fills the section body the same way.
+      await page.setViewportSize({ width: 900, height: 1024 });
+      await expect(intro).toBeVisible();
+      await expectScreenshot(page, [
+        "tablet",
+        "ai-projects",
+        "ai-project-with-sources.png",
+      ]);
     });
 
-    test("hides the source cards of a project without linked rooms", async ({
+    test("leaves the sources out of the intro of an agent without linked rooms", async ({
       page,
       baseUrl,
     }) => {
       await page.goto(`${baseUrl}${projectUrl(AI_PROJECT_WITHOUT_SOURCES.id)}`);
 
       await expect(page.getByTestId("ai-project-intro")).toBeVisible();
-      await expect(page.getByTestId("ai-project-instructions")).toHaveCount(0);
-      await expect(page.getByTestId("ai-project-knowledge")).toHaveCount(0);
+      await expect(page.getByTestId("ai-project-intro-instructions")).toHaveCount(0);
+      await expect(page.getByTestId("ai-project-intro-knowledge")).toHaveCount(0);
 
       await expectScreenshot(page, [
         "desktop",

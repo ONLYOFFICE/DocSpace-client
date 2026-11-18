@@ -38,32 +38,19 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 vi.mock("react-router", () => ({ useNavigate: () => vi.fn() }));
-vi.mock("@onlyoffice/apps-ui-kit/components/room-icon", () => ({
-  RoomIcon: ({ title }: { title: string }) => <span data-testid="room-logo">{title}</span>,
-}));
 
 import RoomItem, { SourceRoomLogo } from "../RoomItem";
 
-const logo = { color: "#FF6680", medium: "/logo.png", cover: null } as never;
-
 describe("SourceRoomLogo", () => {
-  it("draws a linked skill set with the skill set icon, not the logo stored for it", () => {
-    render(<SourceRoomLogo title="Legal" logo={logo} icon="instructionsRoom.svg" size="20px" />);
+  it("draws a linked skill set with the skill set icon", () => {
+    render(<SourceRoomLogo icon="instructionsRoom.svg" size="20px" />);
     const icon = screen.getByTestId("skill-icon-set");
     expect(icon.style.width).toBe("20px");
-    expect(screen.queryByTestId("room-logo")).toBeNull();
   });
 
-  it("draws a linked knowledge base with the knowledge base icon, not the logo stored for it", () => {
-    render(<SourceRoomLogo title="Wiki" logo={logo} icon="knowledgeRoom.svg" />);
+  it("draws a linked knowledge base with the knowledge base icon", () => {
+    render(<SourceRoomLogo icon="knowledgeRoom.svg" />);
     expect(screen.getByTestId("skill-icon-knowledge").style.width).toBe("24px");
-    expect(screen.queryByTestId("room-logo")).toBeNull();
-  });
-
-  it("keeps a folder's own logo", () => {
-    render(<SourceRoomLogo title="Reports" logo={logo} icon="folder.svg" />);
-    expect(screen.getByTestId("room-logo").textContent).toBe("Reports");
-    expect(screen.queryByTestId("skill-icon-set")).toBeNull();
   });
 });
 
@@ -71,8 +58,8 @@ describe("RoomItem", () => {
   it("draws the rows of the agent's Context with the skill set and knowledge base icons", () => {
     render(
       <>
-        <RoomItem id={1} title="Legal" logo={logo} icon="instructionsRoom.svg" />
-        <RoomItem id={2} title="Wiki" logo={logo} icon="knowledgeRoom.svg" />
+        <RoomItem id={1} title="Legal" icon="instructionsRoom.svg" />
+        <RoomItem id={2} title="Wiki" icon="knowledgeRoom.svg" />
       </>,
     );
     expect(screen.getByTestId("ai-project-room-1").querySelector("[data-testid='skill-icon-set']")).toBeTruthy();

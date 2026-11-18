@@ -34,6 +34,7 @@
  */
 
 import { FolderType } from "@docspace/shared/enums";
+import { getAgentRights, type TAgentRightsSource } from "../agentRights";
 import {
   isFile as isFileUtil,
   isRoom as isRoomUtil,
@@ -79,14 +80,15 @@ export type TGetAvailableInfoPanelTabsParams = {
  * room's members (`EditAccess`, the right "Share agent" goes by), held as
  * a member. A DocSpace admin who is not one is offered no member changes.
  *
+ * It is the `share` right of `getAgentRights`.
+ *
  * Spec: ai-agent-access, "What an Agent manager is offered"
  */
 export const canManageAgentMembers = (selection: object): boolean => {
-  const { security, inRoom } = selection as {
-    security?: { EditAccess?: boolean };
-    inRoom?: boolean;
-  };
-  return !!security?.EditAccess && inRoom !== false;
+  const agent = selection as TAgentRightsSource;
+  // A selection that does not say whether the caller is in the agent (no
+  // `inRoom`) is one the caller opened as a member.
+  return getAgentRights({ ...agent, inRoom: agent.inRoom !== false }).share;
 };
 
 export type TInfoPanelTabsResult = {

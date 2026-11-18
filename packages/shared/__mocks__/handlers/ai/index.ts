@@ -64,6 +64,7 @@ import {
   aiHubRoomsHandler,
   aiRoomFolderHandler,
   aiSectionsHandlers,
+  aiThreadFilesHandlers,
 } from "./projects";
 import { aiTemplateInstallHandler, aiTemplatesHandler } from "./templates";
 import {
@@ -118,6 +119,7 @@ export {
   aiHubRoomsHandler,
   aiRoomFolderHandler,
   aiSectionsHandlers,
+  aiThreadFilesHandlers,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
   aiChatAssignmentsHandler,
@@ -146,7 +148,12 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
-export type { AiProjectMock, AiHubRoomMock } from "./projects";
+export type {
+  AiProjectMock,
+  AiHubRoomMock,
+  AiThreadFileMock,
+  AiThreadFilesMock,
+} from "./projects";
 export type { DocumentAgentSettingsMock } from "./documentAgent";
 export {
   META_FILL_RESULT,

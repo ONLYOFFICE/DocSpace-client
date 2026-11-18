@@ -798,6 +798,59 @@ export const aiSectionsHandlers = (
   ...aiProjectsHandlers(port, projects),
 ];
 
+/** A file of a conversation, as the Files service lists it. */
+export type AiThreadFileMock = {
+  id: number;
+  title: string;
+  fileExst: string;
+  folderId?: number;
+  created?: string;
+};
+
+/** The files of one conversation: what its replies produced and what was sent with it. */
+export type AiThreadFilesMock = {
+  artifacts: AiThreadFileMock[];
+  attachments: AiThreadFileMock[];
+};
+
+/**
+ * `GET files/rooms/:id/threads/:threadId/artifacts` and `.../attachments`:
+ * the files of one conversation of an agent, as a counted list
+ * (`{ response, total, count }`). A conversation listed in `deleted` answers
+ * 404, as the server does once a conversation and its folders are gone; any
+ * other conversation of a known agent has no files yet. Unknown agents 404.
+ */
+export const aiThreadFilesHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+  threads: Record<string, AiThreadFilesMock> = {},
+  deleted: string[] = [],
+) =>
+  (["artifacts", "attachments"] as const).map((kind) =>
+    http.get(
+      `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/threads/:threadId/${kind}`,
+      ({ params }) => {
+        if (!findProject(projects, params.id)) return notFound();
+        const threadId = String(params.threadId);
+        if (deleted.includes(threadId))
+          return HttpResponse.json(
+            { error: { message: "The conversation was not found." } },
+            { status: 404 },
+          );
+        const files = (threads[threadId]?.[kind] ?? []).map((file) => ({
+          folderId: Number(params.id),
+          created: "2026-11-18T10:00:00.0000000+00:00",
+          ...file,
+        }));
+        return HttpResponse.json({
+          response: files,
+          total: files.length,
+          count: files.length,
+        });
+      },
+    ),
+  );
+
 /** Every route of a project but the list, over one list of projects. */
 export const aiProjectsHandlers = (
   port: string,
@@ -811,4 +864,5 @@ export const aiProjectsHandlers = (
   aiProjectGetByIdHandler(port, projects),
   aiProjectCreateHandler(port, projects),
   roomLogoUploadHandler(port),
+  ...aiThreadFilesHandlers(port, projects),
 ];

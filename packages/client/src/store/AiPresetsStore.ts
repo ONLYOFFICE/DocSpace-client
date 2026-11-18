@@ -91,8 +91,46 @@ export const PRESETS_FRESH_MS = 10_000;
 
 export type TAiPresetApplyResult = "applied" | "gone" | "superseded";
 
-/** How many projects are read for the chat panel's agents menu, the most recent first. */
-const PICKER_PROJECTS_COUNT = 100;
+/** A page of the projects list; the rooms list answers 400 to a larger `count`. */
+export const PICKER_PROJECTS_PAGE_SIZE = 100;
+
+/** The most pages of projects read for the agents menu in one go (2,000 projects). */
+export const PICKER_PROJECTS_MAX_PAGES = 20;
+
+/**
+ * Every project the caller can read, the most recent first, for the chat's
+ * agents menu and the sidebar: page by page until the list's total is in or
+ * a page comes back short, up to `PICKER_PROJECTS_MAX_PAGES` pages. A
+ * DocSpace admin reads every project of the portal, so the user's own may lie
+ * past the first page. A project that moved to the next page while the list
+ * was read (one created meanwhile) is kept once.
+ */
+const readPickerProjects = async (): Promise<TAiProject[]> => {
+  const projects: TAiProject[] = [];
+  const ids = new Set<number>();
+  let read = 0;
+  for (let pageIndex = 0; pageIndex < PICKER_PROJECTS_MAX_PAGES; pageIndex += 1) {
+    const page = await getAiProjects({
+      sortBy: "DateAndTime",
+      sortOrder: "descending",
+      startIndex: read,
+      count: PICKER_PROJECTS_PAGE_SIZE,
+    });
+    read += page.folders.length;
+    for (const project of page.folders) {
+      if (ids.has(project.id)) continue;
+      ids.add(project.id);
+      projects.push(project);
+    }
+    // The last page: shorter than asked, or the total reached.
+    if (
+      page.folders.length < PICKER_PROJECTS_PAGE_SIZE ||
+      (typeof page.total === "number" && read >= page.total)
+    )
+      break;
+  }
+  return projects;
+};
 
 // A linked room the caller can no longer read is not connected.
 const toChatRooms = (rooms: TAiProjectSource[]): AiChatPresetRoom[] =>
@@ -235,16 +273,12 @@ class AiPresetsStore {
   private readPresets = async () => {
     const id = ++this.requestId;
     try {
-      const page = await getAiProjects({
-        sortBy: "DateAndTime",
-        sortOrder: "descending",
-        count: PICKER_PROJECTS_COUNT,
-      });
+      const projects = await readPickerProjects();
       runInAction(() => {
         if (id !== this.requestId) return;
         // Only members chat with an agent: a DocSpace admin reads every
         // project, and those they are not a member of are not offered.
-        this.presets = page.folders.filter((project) => project.inRoom).map(toAiPreset);
+        this.presets = projects.filter((project) => project.inRoom).map(toAiPreset);
         this.lastReadAt = Date.now();
       });
     } catch {

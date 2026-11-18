@@ -10,7 +10,12 @@ const api = vi.hoisted(() => ({
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 
-import AiPresetsStore, { PRESETS_FRESH_MS, toAiPreset } from "../AiPresetsStore";
+import AiPresetsStore, {
+  PICKER_PROJECTS_MAX_PAGES,
+  PICKER_PROJECTS_PAGE_SIZE,
+  PRESETS_FRESH_MS,
+  toAiPreset,
+} from "../AiPresetsStore";
 
 const room = (id: number, title: string, available = true): TAiProjectSource =>
   ({ id, title, available, roomType: 10 }) as TAiProjectSource;
@@ -92,6 +97,61 @@ describe("AiPresetsStore", () => {
     store.init("admin");
     await flush();
     expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
+  });
+
+  it("reads the projects page by page up to the total, so the user's own past the first page are offered", async () => {
+    // A DocSpace admin reads every project: 230, of which the user is in
+    // one on each page.
+    const pageOf = (from: number, count: number) =>
+      Array.from({ length: count }, (_, i) => ({
+        ...project(from + i, `Agent ${from + i}`),
+        inRoom: (from + i) % 100 === 5,
+      }));
+    api.getAiProjects.mockImplementation(async ({ startIndex = 0, count }: { startIndex?: number; count: number }) => ({
+      folders: pageOf(startIndex, Math.min(count, 230 - startIndex)),
+      total: 230,
+    }));
+    const store = new AiPresetsStore();
+    store.init("admin");
+    await vi.waitFor(() => expect(store.presets).toHaveLength(3));
+    expect(api.getAiProjects).toHaveBeenCalledTimes(3);
+    expect(api.getAiProjects.mock.calls.map(([query]) => query.startIndex)).toEqual([0, 100, 200]);
+    for (const [query] of api.getAiProjects.mock.calls) {
+      expect(query).toEqual(
+        expect.objectContaining({ sortBy: "DateAndTime", sortOrder: "descending", count: PICKER_PROJECTS_PAGE_SIZE }),
+      );
+    }
+    // In the list's order: the sidebar shows the most recent and "Show more".
+    expect(store.presets.map((p) => p.name)).toEqual(["Agent 5", "Agent 105", "Agent 205"]);
+  });
+
+  it("stops at a full page that completes the total, and keeps a project the next page repeats once", async () => {
+    const full = Array.from({ length: PICKER_PROJECTS_PAGE_SIZE }, (_, i) => project(i, `Agent ${i}`));
+    api.getAiProjects
+      .mockResolvedValueOnce({ folders: full, total: 101 })
+      // A project created meanwhile pushed the last one of page one onto page two.
+      .mockResolvedValueOnce({ folders: [project(99, "Agent 99")], total: 101 });
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await vi.waitFor(() => expect(store.presets).toHaveLength(PICKER_PROJECTS_PAGE_SIZE));
+    expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+
+    api.getAiProjects.mockReset().mockResolvedValue({ folders: full, total: PICKER_PROJECTS_PAGE_SIZE });
+    await store.fetchPresets();
+    expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+  });
+
+  it("reads at most a bounded number of pages", async () => {
+    let next = 0;
+    api.getAiProjects.mockImplementation(async () => ({
+      folders: Array.from({ length: PICKER_PROJECTS_PAGE_SIZE }, () => project(next++, "Agent")),
+      total: 1_000_000,
+    }));
+    const store = new AiPresetsStore();
+    store.init("admin");
+    await vi.waitFor(() => expect(store.presets.length).toBeGreaterThan(0));
+    expect(api.getAiProjects).toHaveBeenCalledTimes(PICKER_PROJECTS_MAX_PAGES);
+    expect(store.presets).toHaveLength(PICKER_PROJECTS_MAX_PAGES * PICKER_PROJECTS_PAGE_SIZE);
   });
 
   it("keeps the last list when a re-read fails", async () => {

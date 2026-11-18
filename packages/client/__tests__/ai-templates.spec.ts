@@ -142,8 +142,11 @@ test.describe("AI Chat: Templates tab", () => {
     await cards(page).first().getByTestId("ai-template-install").click();
     await page.getByTestId("ai-template-install-confirm").click();
 
-    await expect(toast(page)).toHaveText(
+    // The toast carries its own "Done" heading before the message.
+    await expect(toast(page)).toContainText(
       `${AI_TEMPLATE_AGENTS[0].name} has been installed`,
     );
+    await expect(toast(page)).not.toContainText("without");
+    await expect(toast(page)).not.toContainText("could not be set");
   });
 });

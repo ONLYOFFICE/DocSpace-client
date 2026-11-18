@@ -186,7 +186,9 @@ const ChangeRoomOwner = (props) => {
       withInfo
       infoText={infoText}
       emptyScreenHeader={t("Common:NotFoundMembers")}
-      emptyScreenDescription={infoText}
+      emptyScreenDescription={
+        isAIProject ? t("Common:AIProjectChangeOwnerInfo") : infoText
+      }
       className={styles.changeOwnerPeopleSelector}
       data-test-id="change_owner_people_selector"
     />

@@ -35,9 +35,13 @@
 
 import type { Page } from "@playwright/test";
 
-import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import {
+  expectScreenshot,
+  type WorkerFixture,
+} from "@docspace/shared/__mocks__/e2e";
 import {
   aiConfigHandler,
+  appsHandler,
   freeQuotaHandler,
   quotaHandler,
   rootHandler,
@@ -106,6 +110,9 @@ const INTEGRATIONS_CARD = '[data-tour-id="dashboard-integrations"]';
 const DEVTOOLS_CARD = '[data-tour-id="dashboard-devtools"]';
 const APPS_SECTION = '[data-tour-id="dashboard-apps"]';
 const APP_CARDS = '[data-tour-id^="dashboard-app-card-"]';
+// Spec: private-rooms/sidebar-section, "Dashboard shows a card of private rooms"
+const PRIVATE_ROOMS_CARD = '[data-tour-id="dashboard-app-card-e2e-rooms"]';
+const PRIVATE_ROOMS_BUTTON = '[data-testid="dashboard-app-open-e2e-rooms"]';
 // The pencil that opens portal renaming, the one admin/owner-only control on
 // the profile card. By test id rather than by its title: `IconButton` turns a
 // `title` into a custom tooltip in the browser, so no title attribute is left
@@ -419,8 +426,10 @@ const readAppRows = async (page: Page) => {
 /**
  * Every row of the apps grid spans the section edge to edge, and the cards in
  * it are equally wide - three apps fill the row exactly as four do, the way the
- * quick actions above them lay out. Geometric rather than a screenshot check,
- * so it holds on a local run too.
+ * quick actions above them lay out. A fifth card wraps: at the widest layout
+ * it starts a second row at the left edge and keeps the width of the cards
+ * above it, so only that row stops short of the right edge. Geometric rather
+ * than a screenshot check, so it holds on a local run too.
  */
 const expectFilledRows = async (page: Page, columns: number) => {
   const sectionBox = await page.locator(APPS_SECTION).boundingBox();
@@ -429,11 +438,23 @@ const expectFilledRows = async (page: Page, columns: number) => {
   const rows = await readAppRows(page);
   expect(rows.length).toBeGreaterThan(0);
 
-  rows.forEach((row) => {
+  const cardWidth = rows[0][0].width;
+
+  rows.forEach((row, index) => {
     expect(row.length).toBeLessThanOrEqual(columns);
 
     const first = row[0];
     const last = row[row.length - 1];
+
+    // The wrapped row of the widest layout: one column wide, from the left.
+    if (columns > 2 && index > 0 && row.length < columns) {
+      expect(index).toBe(rows.length - 1);
+      expect(Math.abs(first.x - sectionBox!.x)).toBeLessThan(2);
+      row.forEach(({ width }) => {
+        expect(Math.abs(width - cardWidth)).toBeLessThan(2);
+      });
+      return;
+    }
 
     // Left edge of the row against the section, right edge of the row against
     // the section: between them the row covers the whole width.
@@ -464,6 +485,11 @@ type DashboardCase = {
    * portal answers /settings with `limitedAccessDevToolsForUsers`.
    */
   devToolsLimited: boolean;
+  /**
+   * The E2E rooms app switched off in the apps settings, which only a
+   * standalone portal has. Left out, the app is on, as it ships.
+   */
+  privateRoomsOff?: boolean;
   /** The width the page is rendered at. */
   viewport: Viewport;
   /**
@@ -492,10 +518,20 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     plan,
     ai,
     devToolsLimited,
+    privateRoomsOff = false,
     viewport,
     withScreenshot,
     screenshot,
   } = testCase;
+
+  // The card of private rooms follows the sidebar item: there for everyone
+  // while the app is on. Switched off, it stays as a disabled card for whoever
+  // can switch it back on, and is gone for everyone else.
+  const privateRoomsCard = !privateRoomsOff
+    ? "on"
+    : role.isAdminOrOwner
+      ? "off"
+      : "none";
 
   // Two different questions, and the split is the whole point. The portal
   // switch decides whether the section is *offered* at all - once it is limited
@@ -518,6 +554,9 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       aiConfigHandler(TEST_PORT, !ai.enabled),
       // The server serves the "AI rooms" root to everyone but a guest.
       rootHandler(TEST_PORT, { withAiHub: !role.isGuest }),
+      ...(privateRoomsOff
+        ? [appsHandler(TEST_PORT, { disabled: ["e2e-rooms"] })]
+        : []),
     );
 
     await openDashboard(page, baseUrl, viewport);
@@ -601,8 +640,31 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     // The "AI rooms" card joins the three apps where the sidebar has the
     // section: AI services on and the root served, which a guest never is.
     await expect(page.locator(APP_CARDS)).toHaveCount(
-      ai.enabled && !role.isGuest ? 4 : 3,
+      (ai.enabled && !role.isGuest ? 4 : 3) +
+        (privateRoomsCard === "none" ? 0 : 1),
     );
+
+    // The card of private rooms stands after Forms, carries the Beta badge and
+    // offers what its reader can do: create for whoever may create rooms, open
+    // for everyone else, and the way to the apps settings while the app is off.
+    const privateCard = page.locator(PRIVATE_ROOMS_CARD);
+    await expect(privateCard).toHaveCount(privateRoomsCard === "none" ? 0 : 1);
+    if (privateRoomsCard !== "none") {
+      await expect(
+        page.locator(
+          `[data-tour-id="dashboard-app-card-ai-forms"] + ${PRIVATE_ROOMS_CARD}`,
+        ),
+      ).toHaveCount(1);
+      await expect(privateCard.getByText("Private rooms")).toBeVisible();
+      await expect(privateCard.getByText("BETA", { exact: true })).toBeVisible();
+      await expect(page.locator(PRIVATE_ROOMS_BUTTON)).toHaveText(
+        privateRoomsCard === "off"
+          ? "Go to Settings"
+          : role.canCreateRooms
+            ? "Create private room"
+            : "Open",
+      );
+    }
     await expect(
       page.locator('[data-tour-id="dashboard-app-card-ai-hub"]'),
     ).toHaveCount(ai.enabled && !role.isGuest ? 1 : 0);
@@ -623,6 +685,75 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     }
   });
 };
+
+/**
+ * The E2E rooms app switched off on a standalone portal: the card stays,
+ * disabled, for the owner and full admins, and is gone for everyone else.
+ * The assertions carry it; the frame of the owner pins what a disabled card
+ * of private rooms looks like.
+ */
+test.describe("Dashboard on a standalone portal with the E2E rooms app off", () => {
+  for (const role of ROLES) {
+    dashboardCase(role.key, {
+      role,
+      edition: EDITIONS[1],
+      plan: STANDALONE_PLANS[1],
+      ai: AI_STATES[0],
+      devToolsLimited: false,
+      privateRoomsOff: true,
+      viewport: DESKTOP,
+      withScreenshot: role === ROLES[0],
+      screenshot: `standalone-private-off-${role.key}.png`,
+    });
+  }
+});
+
+// Spec: private-rooms/sidebar-section, "Dashboard card of private rooms creates or opens"
+test.describe("Dashboard card of private rooms", () => {
+  const open = async (
+    page: Page,
+    baseUrl: string,
+    mockRequest: WorkerFixture,
+    userType: UserType,
+  ) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+      selfByTypeHandler(TEST_PORT, userType),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      rootHandler(TEST_PORT),
+    );
+    await openDashboard(page, baseUrl, DESKTOP);
+  };
+
+  test("Room admin without a key", async ({ page, baseUrl, mockRequest }) => {
+    await open(page, baseUrl, mockRequest, "roomAdmin");
+
+    await page.locator(PRIVATE_ROOMS_BUTTON).click();
+
+    await expect
+      .poll(() => new URL(page.url()).pathname, { timeout: 15_000 })
+      .toBe("/private/filter");
+    // The list starts its own creation, which asks for a key first.
+    await expect(page.getByRole("dialog", { name: "Create key" })).toBeVisible({
+      timeout: 15_000,
+    });
+  });
+
+  test("User who cannot create rooms", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    await open(page, baseUrl, mockRequest, "regular");
+
+    await page.locator(PRIVATE_ROOMS_BUTTON).click();
+
+    await expect
+      .poll(() => new URL(page.url()).pathname, { timeout: 15_000 })
+      .toBe("/private/filter");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+  });
+});
 
 /**
  * The page at the two widths where the apps grid changes shape.

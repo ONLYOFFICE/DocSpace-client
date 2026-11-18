@@ -53,14 +53,14 @@ The agent's invite panel SHALL offer portal users only. It SHALL NOT offer guest
 - **THEN** it offers no "Invite via link" section
 
 ### Requirement: What the Agent owner is offered
-The Agent owner SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on Contacts, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, pin, notifications, change owner and Delete agent. The Agent owner SHALL NOT be offered leave.
+The Agent owner SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, pin, notifications, change owner and Delete agent. The Agent owner SHALL NOT be offered leave.
 
 #### Scenario: Owner on the agent's page
 - **WHEN** the Agent owner opens the agent's page
 - **THEN** the header has "Share agent", and the actions menu has Edit agent, change owner and Delete agent (`Common:DeleteAgent`), and no leave
 
 ### Requirement: What an Agent manager is offered
-An Agent manager SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on Contacts, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, pin, notifications and leave. An Agent manager SHALL NOT be offered Delete agent or change owner.
+An Agent manager SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, pin, notifications and leave. An Agent manager SHALL NOT be offered Delete agent or change owner.
 
 #### Scenario: Manager on the agent's page
 - **WHEN** an Agent manager opens the actions menu of the agent
@@ -115,7 +115,7 @@ Change owner SHALL offer as the new owner only users who may own an agent: the p
 - **THEN** the panel shows the note on who may own an agent and no warning about conversations
 
 ### Requirement: Removing a member warns about their conversations
-Wherever an agent's members are removed (task 7.2 decides where), removing a member SHALL first ask for confirmation, titled `People:RemoveUser`, saying that the member's conversations with this agent and their files will be permanently deleted and not restored by a new invitation (`Common:RemoveAgentMemberWarning`), as the server deletes them. Nothing SHALL be sent before it is confirmed. Private and form-filling rooms keep their own removal texts.
+On the Members tab of the agent's Info panel (`ai-agent-info-panel` "Members of an agent"), removing a member SHALL first ask for confirmation, titled `People:RemoveUser`, saying that the member's conversations with this agent and their files will be permanently deleted and not restored by a new invitation (`Common:RemoveAgentMemberWarning`), as the server deletes them. Nothing SHALL be sent before it is confirmed. Private and form-filling rooms keep their own removal texts.
 
 #### Scenario: Agent manager removes a Member
 - **WHEN** an Agent manager chooses to remove a Member from the agent's members list

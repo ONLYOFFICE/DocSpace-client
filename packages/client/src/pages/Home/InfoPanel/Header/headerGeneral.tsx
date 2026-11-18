@@ -47,6 +47,7 @@ import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 import styles from "./Header.module.scss";
 import { HeaderProps } from "./Header.types";
@@ -121,7 +122,12 @@ const InfoPanelHeaderGeneral = ({
   const tabItems = availableTabs.map((id) => {
     const name = match(id)
       .with(InfoPanelView.infoMembers, () =>
-        isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
+        isTemplate
+          ? t("Common:Accesses")
+          : // An agent's members, as its invite panel and roles call them.
+            isAgent(selection)
+            ? t("Common:Members")
+            : t("Common:Contacts"),
       )
       .with(InfoPanelView.infoShare, () => t("Common:Share"))
       .with(InfoPanelView.infoHistory, () => t("Common:SubmenuHistory"))

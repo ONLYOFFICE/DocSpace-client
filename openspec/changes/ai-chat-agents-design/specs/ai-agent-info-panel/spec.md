@@ -2,22 +2,33 @@
 
 ## Purpose
 
-Defines the Info panel of an agent: its tabs Details and Context, the Content tab an agent has on its own page, and what they show to each role. An agent has no Contacts, History or About tab; members are invited through "Share agent". The Info panel of a skill set, a skill, a knowledge base and a template is in `ai-skill-sets`, `ai-knowledge-bases` and `ai-agents-list`.
+Defines the Info panel of an agent: its tabs Details and Context, the Content tab an agent has on its own page, the Members tab of those who may change its members, and what they show to each role. An agent has no Contacts, History or About tab; members are invited through "Share agent" and listed, re-roled and removed on Members. The Info panel of a skill set, a skill, a knowledge base and a template is in `ai-skill-sets`, `ai-knowledge-bases` and `ai-agents-list`.
 
 Implementation: the Info panel tabs helper, header and views in the client (`helpers/info-panel/tabs.ts`, `InfoPanel/Body/views/AiAgentContext`, `AiAgentContent`); `packages/shared/api/ai/threadFiles.ts`; `app/storage/threadFiles.ts` and `projectAttachments.ts` in ASC.AI.Chat.
 
 ## ADDED Requirements
 
 ### Requirement: Tabs of an agent
-For an agent, selected in the Agents list or opened from "Agent info", the Info panel (`Common:Info`) SHALL have the tabs Details (`Common:SubmenuDetails`) and Context (`Common:Context`), in that order, and no Contacts, History or plugin tab. An agent is known by its room type. A remembered tab the agent does not have SHALL fall back to Details.
+For an agent, selected in the Agents list or opened from "Agent info", the Info panel (`Common:Info`) SHALL have the tabs Details (`Common:SubmenuDetails`) and Context (`Common:Context`), in that order, followed by Content and Members where those requirements give them, and no Contacts, History or plugin tab. An agent is known by its room type. A remembered tab the agent does not have SHALL fall back to Details.
 
 #### Scenario: Card selected
-- **WHEN** a user selects an agent's card with the Info panel open
+- **WHEN** a Member selects an agent's card with the Info panel open
 - **THEN** the tabs are Details and Context, with Details shown
 
 #### Scenario: Contacts was remembered
-- **WHEN** a user who last looked at Contacts of a room selects an agent
+- **WHEN** a Member who last looked at Contacts of a room selects an agent
 - **THEN** the panel shows Details
+
+### Requirement: Members of an agent
+For the Agent owner and Agent managers who are members of the agent, the Info panel of the agent SHALL end with a Members tab (`Common:Members`): the room's members list, where a member's role is changed between Agent manager and Member and a member is removed with the confirmation of `ai-agent-access` "Removing a member warns about their conversations". A Member, and a DocSpace admin who is not a member, SHALL NOT be given the tab.
+
+#### Scenario: Agent manager
+- **WHEN** an Agent manager opens the Info panel on the agent's page
+- **THEN** the tabs are Details, Context, Content and Members, and Members lists the agent's members with their roles
+
+#### Scenario: Member
+- **WHEN** a Member opens the Info panel of the agent
+- **THEN** there is no Members tab
 
 ### Requirement: Context tab
 Context SHALL list what the agent draws on in two sections: Skill sets (`Common:SkillSets`) and Knowledge bases. Each section SHALL list the linked rooms the caller can read, or a dash when it has none. The name of a skill set or a knowledge base SHALL open that room.

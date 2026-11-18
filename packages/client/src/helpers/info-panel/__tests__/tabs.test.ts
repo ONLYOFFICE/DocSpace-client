@@ -42,7 +42,10 @@ import {
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 
-import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
+import {
+  canManageAgentMembers,
+  getAvailableInfoPanelTabs,
+} from "SRC_DIR/helpers/info-panel/tabs";
 import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
 import {
   listItemOf,
@@ -82,7 +85,7 @@ describe("getAvailableInfoPanelTabs", () => {
       aiChatProjectId,
     }).tabs;
 
-  it("An agent has Details and Context only, plugins or not", () => {
+  it("An agent has Details and Context only, plugins or not, for a user who may not change its members", () => {
     const expected = [InfoPanelView.infoDetails, InfoPanelView.infoContext];
     expect(agentTabs({ id: 7, isAIProject: true, rootFolderType: FolderType.AiHub })).toEqual(expected);
     // A selection of the list is known by its room type alone.
@@ -97,6 +100,46 @@ describe("getAvailableInfoPanelTabs", () => {
       InfoPanelView.infoContent,
     ]);
     expect(agentTabs(agent, 8)).not.toContain(InfoPanelView.infoContent);
+  });
+
+  // Spec: ai-agent-info-panel, "Members of an agent"
+  describe("the members of an agent", () => {
+    const agent = (security: object, inRoom?: boolean) => ({
+      id: 7,
+      roomType: RoomsType.AiProjectRoom,
+      rootFolderType: FolderType.AiHub,
+      security,
+      ...(inRoom === undefined ? {} : { inRoom }),
+    });
+
+    it("are a last tab for the owner and an Agent manager, who may change them", () => {
+      expect(agentTabs(agent({ EditAccess: true }, true))).toEqual([
+        InfoPanelView.infoDetails,
+        InfoPanelView.infoContext,
+        InfoPanelView.infoMembers,
+      ]);
+      // On the agent's page they come after Content.
+      expect(agentTabs(agent({ EditAccess: true }, true), 7)).toEqual([
+        InfoPanelView.infoDetails,
+        InfoPanelView.infoContext,
+        InfoPanelView.infoContent,
+        InfoPanelView.infoMembers,
+      ]);
+    });
+
+    it("are not offered to a Member", () => {
+      expect(agentTabs(agent({ EditAccess: false }, true))).not.toContain(InfoPanelView.infoMembers);
+      expect(agentTabs(agent({}, true))).not.toContain(InfoPanelView.infoMembers);
+    });
+
+    it("are not offered to a DocSpace admin who is not a member", () => {
+      expect(agentTabs(agent({ EditAccess: true }, false))).not.toContain(InfoPanelView.infoMembers);
+      expect(canManageAgentMembers(agent({ EditAccess: true }, false))).toBe(false);
+    });
+
+    it("are offered for a selection that does not say whether the caller is in it", () => {
+      expect(canManageAgentMembers(agent({ EditAccess: true }))).toBe(true);
+    });
   });
 
   it("A template of the Templates tab has Details and Context, whatever else is selected", () => {

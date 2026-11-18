@@ -73,6 +73,22 @@ export type TGetAvailableInfoPanelTabsParams = {
   isAiTemplate?: boolean;
 };
 
+/**
+ * Whether the caller may list, re-role and remove the members of an agent:
+ * the right the server gives the owner and Agent managers to change the
+ * room's members (`EditAccess`, the right "Share agent" goes by), held as
+ * a member. A DocSpace admin who is not one is offered no member changes.
+ *
+ * Spec: ai-agent-access, "What an Agent manager is offered"
+ */
+export const canManageAgentMembers = (selection: object): boolean => {
+  const { security, inRoom } = selection as {
+    security?: { EditAccess?: boolean };
+    inRoom?: boolean;
+  };
+  return !!security?.EditAccess && inRoom !== false;
+};
+
 export type TInfoPanelTabsResult = {
   tabs: InfoPanelViewType[];
   useRoomsView: boolean;
@@ -125,7 +141,9 @@ export function getAvailableInfoPanelTabs({
   // An agent (an AI project): its details and what it draws on. The server
   // marks no room as one, so the room type decides for a selection of the
   // list or of the agent's page. On the agent's own page, where its chat is
-  // open, the files of the conversation on screen follow.
+  // open, the files of the conversation on screen follow. Those who may
+  // change its members (the owner and Agent managers) get them last, on
+  // the room's members list, where they are re-roled and removed.
   if (isAgent(selection)) {
     const tabs: InfoPanelViewType[] = [
       InfoPanelView.infoDetails,
@@ -133,6 +151,7 @@ export function getAvailableInfoPanelTabs({
     ];
     if (aiChatProjectId != null && Number(selection.id) === aiChatProjectId)
       tabs.push(InfoPanelView.infoContent);
+    if (canManageAgentMembers(selection)) tabs.push(InfoPanelView.infoMembers);
     return { tabs, useRoomsView: true };
   }
 

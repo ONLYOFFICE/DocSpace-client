@@ -42,9 +42,15 @@ import {
   selfByTypeHandler,
   aiConfigHandler,
   aiSectionsHandlers,
+  aiProjectMock,
+  AiProjectMockAccess,
   AI_HUB_ROOMS,
+  AI_PROJECTS,
   AI_PROJECT_WITH_SOURCES,
+  roomMembersHandlers,
+  type RoomMembersHandlerHandle,
 } from "@docspace/shared/__mocks__/handlers";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
@@ -123,5 +129,120 @@ test.describe("AI Workspace access", () => {
         })
         .toMatch(SECTION_PATH);
     }
+  });
+});
+
+/**
+ * An Agent manager lists, re-roles and removes the agent's members on the
+ * Members tab of its Info panel, the room's members list; a Member is not
+ * given the tab. A removal asks first and warns that the member's
+ * conversations go with them.
+ *
+ * Spec: ai-agent-info-panel, "Members of an agent"; ai-agent-access,
+ * "Removing a member warns about their conversations"
+ */
+test.describe("Members of an agent", () => {
+  const MANAGED_AGENT = aiProjectMock({
+    id: 777300,
+    title: "Team agent",
+    color: "8570FF",
+    access: AiProjectMockAccess.ProjectManager,
+  });
+
+  const MEMBER_AGENT = aiProjectMock({
+    id: 777301,
+    title: "Shared agent",
+    color: "5CC5D4",
+    access: AiProjectMockAccess.Member,
+  });
+
+  const BOB = { id: "bob-0001", displayName: "Bob Member", email: "bob@example.com" };
+
+  const agentUrl = (id: number) => `/ai-rooms/${id}/filter?folder=${id}`;
+
+  const openInfoPanel = async (page: Page) => {
+    const toggle = page.locator("#info-panel-toggle--open");
+    if (await toggle.isVisible()) await toggle.click();
+  };
+
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
+      selfByTypeHandler(TEST_PORT, "roomAdmin"),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      aiConfigHandler(TEST_PORT),
+      ...aiSectionsHandlers(TEST_PORT, [...AI_PROJECTS, MANAGED_AGENT, MEMBER_AGENT]),
+    );
+  });
+
+  test("an Agent manager re-roles and removes members, after a warning", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    const membersHandle: { current: RoomMembersHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, MANAGED_AGENT.id, {
+        handle: membersHandle,
+        initial: [
+          { id: BOB.id, displayName: BOB.displayName, email: BOB.email, access: ShareAccessRights.Collaborator },
+        ],
+      }),
+    );
+
+    await page.goto(`${baseUrl}${agentUrl(MANAGED_AGENT.id)}`);
+    await openInfoPanel(page);
+
+    // Details, Context and Content, then the members.
+    const membersTab = page.getByTestId("info_members_tab");
+    await expect(membersTab).toBeVisible();
+    await expect(membersTab).toHaveText("Members");
+    await membersTab.click();
+
+    const list = page.getByTestId("info_panel_files_view_members");
+    await expect(list).toContainText(BOB.displayName);
+
+    const roleOf = page.getByRole("button", {
+      name: new RegExp(`^Role of ${BOB.displayName}: `),
+    });
+
+    // Bob becomes an Agent manager.
+    await roleOf.click();
+    await page.getByText("Agent manager", { exact: true }).last().click();
+    await expect
+      .poll(() =>
+        membersHandle.current!.getRequests().some(
+          (r) =>
+            r.method === "PUT" &&
+            JSON.stringify(r.body).includes(BOB.id) &&
+            JSON.stringify(r.body).includes(`"access":${ShareAccessRights.RoomManager}`),
+        ),
+      )
+      .toBe(true);
+
+    // Removing him asks first, with the conversation warning, and sends nothing until confirmed.
+    const sentBefore = membersHandle.current!.getRequests().length;
+    await roleOf.click();
+    await page.getByText("Remove", { exact: true }).last().click();
+    const confirmation = page.getByRole("dialog", { name: "Remove user" });
+    await expect(confirmation).toBeVisible();
+    await expect(confirmation).toContainText(
+      "Their conversations with this agent, including the files in them, will be permanently deleted.",
+    );
+    expect(membersHandle.current!.getRequests().length).toBe(sentBefore);
+
+    await page.getByTestId("remove_user_confirmation_dialog_ok_button").click();
+    await expect(confirmation).toBeHidden();
+    await expect(list).not.toContainText(BOB.displayName);
+  });
+
+  test("a Member has no Members tab", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}${agentUrl(MEMBER_AGENT.id)}`);
+    await openInfoPanel(page);
+
+    await expect(page.getByTestId("info_details_tab")).toBeVisible();
+    await expect(page.getByTestId("info_members_tab")).toHaveCount(0);
   });
 });

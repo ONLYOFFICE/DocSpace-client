@@ -42,6 +42,7 @@ import {
 	FileFillingFormStatus,
 	RoomsType,
 	ShareAccessRights,
+	VectorizationStatus,
 } from "../../enums";
 import Badges from ".";
 import styles from "./Badges.module.scss";
@@ -399,6 +400,81 @@ describe("<Badges />", () => {
 				"info-tooltip",
 			);
 			expect(tooltipContainer).toHaveAttribute("data-tooltip-content");
+		});
+	});
+
+	describe("Indexing state of a file", () => {
+		it("draws an \"Indexing\" pill while the file is being indexed", () => {
+			render(
+				<Badges
+					{...defaultProps}
+					viewAs="table"
+					item={{
+						...defaultItem,
+						vectorizationStatus: VectorizationStatus.InProgress,
+					}}
+				/>,
+			);
+			const pill = screen.getByTestId("preparing-for-ai-badge");
+			expect(pill).toHaveTextContent("Common:Indexing");
+			expect(screen.queryByText("Common:Preparing")).not.toBeInTheDocument();
+			expect(
+				screen.queryByTestId("failed-vectorization-badge"),
+			).not.toBeInTheDocument();
+		});
+
+		it("draws an \"Error\" pill, not the alert icon, when indexing failed", () => {
+			render(
+				<Badges
+					{...defaultProps}
+					viewAs="table"
+					item={{
+						...defaultItem,
+						vectorizationStatus: VectorizationStatus.Failed,
+					}}
+				/>,
+			);
+			const pill = screen.getByTestId("failed-vectorization-badge");
+			expect(pill).toHaveTextContent("Common:Error");
+			expect(pill.tagName).not.toBe("BUTTON");
+			expect(
+				screen.queryByTestId("preparing-for-ai-badge"),
+			).not.toBeInTheDocument();
+		});
+
+		it("draws no \"Error\" pill in the tile view", () => {
+			render(
+				<Badges
+					{...defaultProps}
+					viewAs="tile"
+					item={{
+						...defaultItem,
+						vectorizationStatus: VectorizationStatus.Failed,
+					}}
+				/>,
+			);
+			expect(
+				screen.queryByTestId("failed-vectorization-badge"),
+			).not.toBeInTheDocument();
+		});
+
+		it("draws neither pill once the file is indexed", () => {
+			render(
+				<Badges
+					{...defaultProps}
+					viewAs="table"
+					item={{
+						...defaultItem,
+						vectorizationStatus: VectorizationStatus.Completed,
+					}}
+				/>,
+			);
+			expect(
+				screen.queryByTestId("preparing-for-ai-badge"),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByTestId("failed-vectorization-badge"),
+			).not.toBeInTheDocument();
 		});
 	});
 });

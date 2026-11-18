@@ -90,7 +90,13 @@ class FakeAiChatStore {
   applyPreset = vi.fn();
 
   constructor() {
-    makeAutoObservable(this, { applyPreset: false, agentPicker: false, agentActions: false, sourcesManager: false });
+    makeAutoObservable(this, {
+      applyPreset: false,
+      agentPicker: false,
+      agentActions: false,
+      sourcesManager: false,
+      chatAgent: false,
+    });
   }
 
   setSourcesManager = (manager: FakeAiChatStore["sourcesManager"]) => {
@@ -103,6 +109,12 @@ class FakeAiChatStore {
 
   setAgentPicker = (picker: FakeAiChatStore["agentPicker"]) => {
     this.agentPicker = picker;
+  };
+
+  chatAgent: { name: string; logo?: unknown } | null = null;
+
+  setChatAgent = (agent: FakeAiChatStore["chatAgent"]) => {
+    this.chatAgent = agent;
   };
 
   setIsVisible = (visible: boolean) => {
@@ -368,6 +380,19 @@ describe("AiPresetsBridge", () => {
 
     fireEvent.click(screen.getByTestId("cancel"));
     expect(screen.queryByTestId("save-dialog")).toBeNull();
+  });
+
+  it("tells the chat which agent it runs on, and that the default agent is none", () => {
+    const store = new AiPresetsStore();
+    renderBridge(store);
+    expect(aiChatStore.chatAgent).toBeNull();
+
+    act(() => store.setActivePreset(toAiPreset(project(1, "Sales"))));
+    expect(aiChatStore.chatAgent?.name).toBe("Sales");
+    expect(aiChatStore.chatAgent?.logo).toBeTruthy();
+
+    act(() => store.setActivePreset(null));
+    expect(aiChatStore.chatAgent).toBeNull();
   });
 
   it("applies a project picked in the model menu and drops it when the chat closes", async () => {

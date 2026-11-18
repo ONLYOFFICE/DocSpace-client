@@ -303,6 +303,30 @@ const AiPresetsBridge = ({
     [navigate, openProjectId, requestAiChatPage, userId],
   );
 
+  // The agent the chat runs on, picked in the panel or open on its page (an
+  // open agent is the active preset too): its logo starts every reply and its
+  // name goes on the documents those replies create. The default agent has
+  // neither.
+  const chatAgentName = activePreset?.name ?? null;
+  const chatAgentLogo = activePreset?.logo;
+  React.useEffect(() => {
+    aiChatStore.setChatAgent(
+      chatAgentName === null
+        ? null
+        : {
+            name: chatAgentName,
+            logo: (
+              <ProjectLogo
+                project={{ title: chatAgentName, logo: chatAgentLogo ?? NO_PROJECT_LOGO }}
+                size="24px"
+                radius="6px"
+              />
+            ),
+          },
+    );
+    return () => aiChatStore.setChatAgent(null);
+  }, [aiChatStore, chatAgentName, chatAgentLogo]);
+
   React.useEffect(() => {
     aiChatStore.setAgentPicker(
       isInsideOpenProject

@@ -600,6 +600,7 @@
   "CreateChatDescription": "Go to the {{aiChat}} tab to get started.",
   "CreateCopy": "Create copy",
   "CreatedBy": "Created by",
+  "CreatedByAgent": "created by {{name}}",
   "CreateDescription": "There will be two different files in the folder.",
   "CreateFileCopy": "Create file copy",
   "CreateFolderDescription": "There will be two different folders in the destination",

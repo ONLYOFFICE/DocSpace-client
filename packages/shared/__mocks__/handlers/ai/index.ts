@@ -240,6 +240,18 @@ export type {
   SkillSetMock,
   SkillSetsMockOptions,
 } from "./skillSets";
+export {
+  KNOWLEDGE_BASES,
+  KNOWLEDGE_BASE_FAILED_ID,
+  KNOWLEDGE_BASE_INDEXED_ID,
+  KNOWLEDGE_BASE_INDEXING_ID,
+  KNOWLEDGE_FAILED_FILE_TITLE,
+  KnowledgeFileMockStatus,
+  aiKnowledgeBasesHandlers,
+  knowledgeBaseFilesMock,
+  knowledgeBaseFolderHandler,
+} from "./knowledgeBases";
+export type { KnowledgeFileMock } from "./knowledgeBases";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),

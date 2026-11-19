@@ -567,4 +567,27 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
       accept.mockRestore();
     });
   });
+
+  describe("An unusable member key affects only that member", () => {
+    it.each([
+      ["not base64", "not base64!!"],
+      ["16 bytes", arrayBufferToBase64(new Uint8Array(16).buffer)],
+    ])("Unusable sender candidate: %s", async (_, unusable) => {
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [
+          { userId: ALICE_ID, publicKey: unusable },
+          { userId: ALICE_ID, publicKey: pubB64(alice) },
+        ],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+      });
+
+      expect(out).toEqual(dek);
+      expect(
+        (await getTofuStore(BOB_ID).getKeys(ALICE_ID)).map((k) => k.publicKey),
+      ).toEqual([pubB64(alice)]);
+    });
+  });
 });

@@ -54,6 +54,8 @@
 //      hold a chunk long enough to lock in between.
 // =============================================================================
 
+import type { Page } from "@playwright/test";
+
 import { privateRoomListHandler } from "@docspace/shared/__mocks__/handlers";
 
 import {
@@ -61,7 +63,7 @@ import {
   openInSdkHost,
   readSdkEvents,
 } from "../fixtures/sdkHost";
-import { expect, test } from "./fixtures";
+import { expect, test, type TMockBoth } from "./fixtures";
 
 const ROOM_ID = 7001;
 const ROOM_TITLE = "Private Test Room";
@@ -253,36 +255,64 @@ test.describe("(private) — host frame-bridge sync (P2)", () => {
       .toMatchObject({ section: "archive", pathname: "/sdk/private/archive" });
   });
 
-  test.fixme(
-    "navigateSection: parent posting {section:'archive'} routes the iframe without remount",
-    async () => {
-      // BLOCKER B + E (P2 feature — usePrivateFrameBridge not yet fully wired):
-      //   - Same as onNavigate above.
-      //   - The "without remount" assertion: check that the iframe's contentWindow
-      //     identity (or a sentinel value set in page.addInitScript) persists
-      //     across the navigation. In Playwright: record iframe.contentWindow before
-      //     postMessage and assert it equals iframe.contentWindow after navigation.
-      //   - Requires the SDK router to use router.replace() (not a full reload)
-      //     when receiving the navigateSection postMessage.
-      //
-      // Parent posts navigateSection → iframe router.replace('/private/archive')
-      // WITHOUT reloading the SDK (unlocked identity preserved). Asserts the
-      // iframe element is not re-created and the encryption session survives.
-    },
-  );
+  const embedPrivateList = async (
+    page: Page,
+    baseUrl: string,
+    port: string,
+    mockBoth: TMockBoth,
+  ) => {
+    mockBoth(privateRoomListHandler(port, { roomId: ROOM_ID, title: ROOM_TITLE }));
+    await openInSdkHost(page, baseUrl, `/sdk/private${OPT_IN}`, {
+      privateRooms: true,
+    });
+    const frame = page.frame({ name: "frameDocSpace__#ds-frame" });
+    if (!frame) throw new Error("The SDK frame is not on the host page");
+    return frame;
+  };
 
-  test.fixme(
-    "onAppReady fires exactly once for the whole (private) group",
-    async () => {
-      // BLOCKER B + E (P2 feature):
-      //   - Same frame-bridge prerequisites as above.
-      //   - Count postMessage events with type === "onAppReady" across multiple
-      //     in-iframe navigations (list → room → archive). Assert count === 1.
-      //   - The bridge must be mounted at the persistent shell level (layout.tsx)
-      //     so it survives route changes within the (private) group.
-      //
-      // Navigate list → room → archive within the iframe; the parent receives
-      // onAppReady only once (bridge mounted at the persistent shell level).
-    },
-  );
+  const lastNavigation = async (page: Page) =>
+    (await readSdkEvents(page, "onNavigate")).at(-1);
+
+  test("navigateSection: parent posting {section:'archive'} routes the iframe without remount", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const frame = await embedPrivateList(page, baseUrl, port, mockBoth);
+    await frame.evaluate(() => {
+      (window as unknown as { __sameDocument: boolean }).__sameDocument = true;
+    });
+
+    expect(
+      await callSdkMethod(page, "navigateSection", { section: "archive" }),
+    ).toEqual({ section: "archive" });
+
+    await expect
+      .poll(() => lastNavigation(page))
+      .toMatchObject({ section: "archive" });
+    expect(new URL(frame.url()).pathname).toBe("/sdk/private/archive");
+    expect(
+      await frame.evaluate(
+        () => (window as unknown as { __sameDocument?: boolean }).__sameDocument,
+      ),
+    ).toBe(true);
+    await expect(page.locator("iframe")).toHaveCount(1);
+  });
+
+  test("onAppReady fires exactly once for the whole (private) group", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await embedPrivateList(page, baseUrl, port, mockBoth);
+
+    for (const section of ["archive", "rooms", "archive"]) {
+      await callSdkMethod(page, "navigateSection", { section });
+      await expect.poll(() => lastNavigation(page)).toMatchObject({ section });
+    }
+
+    expect(await readSdkEvents(page, "onAppReady")).toHaveLength(1);
+  });
 });

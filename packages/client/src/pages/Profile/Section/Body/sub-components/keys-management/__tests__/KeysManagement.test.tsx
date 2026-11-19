@@ -55,8 +55,18 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: mocks.toastSuccess, error: vi.fn() },
 }));
 vi.mock("../KeysList", () => ({
-  KeysList: ({ keyState }: { keyState?: string }) => (
-    <div data-testid="keys_list" data-key-state={keyState ?? "none"} />
+  KeysList: ({
+    keyState,
+    keys,
+  }: {
+    keyState?: string;
+    keys: unknown[] | null;
+  }) => (
+    <div
+      data-testid="keys_list"
+      data-key-state={keyState ?? "none"}
+      data-keys={keys === null ? "unknown" : String(keys.length)}
+    />
   ),
 }));
 vi.mock("@docspace/shared/dialogs/key-generation", () => ({
@@ -405,6 +415,36 @@ describe("Recovery phrase has a block of its own in Keys management", () => {
     renderPage([KEY]);
 
     expect(screen.queryByTestId("recovery_section")).toBeNull();
+  });
+});
+
+describe("An unknown key list is not shown as no key", () => {
+  it("List loading", () => {
+    mocks.getEncryptionKeys.mockReturnValue(new Promise(() => {}));
+    renderPage(null);
+
+    expect(screen.getByTestId("keys_list")).toHaveAttribute(
+      "data-keys",
+      "unknown",
+    );
+  });
+
+  it("List failed", async () => {
+    mocks.getEncryptionKeys.mockRejectedValue(new Error("Network Error"));
+    renderPage(null);
+
+    expect(
+      await screen.findByText("Common:EncryptionKeysLoadFailed"),
+    ).toBeInTheDocument();
+    expect(action("Common:TryAgain")).toBeInTheDocument();
+    expect(screen.queryByTestId("keys_list")).not.toBeInTheDocument();
+  });
+
+  it("List empty", () => {
+    renderPage([]);
+
+    expect(screen.getByTestId("keys_list")).toHaveAttribute("data-keys", "0");
+    expect(action("Common:GenerateNewKey")).toBeInTheDocument();
   });
 });
 

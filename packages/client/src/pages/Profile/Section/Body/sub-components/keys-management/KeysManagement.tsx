@@ -300,15 +300,18 @@ const KeysManagement = ({
       <Text as="p" className={styles.intro} dataTestId="keys_management_intro">
         {t("Common:KeysManagementIntro")}
       </Text>
-      <KeysList
-        keyState={hasKeys ? (isUnlocked ? "unlocked" : "locked") : undefined}
-        keys={encryptionKeys || []}
-        onDelete={remove.request}
-        onExport={exportFlow.request}
-        onRotate={rotate.request}
-        isDeleting={remove.isPending}
-        deletingKeyId={remove.pendingId}
-      />
+      {/* A list that failed to load is reported by the block below. */}
+      {!keysKnown && keysLoadFailed ? null : (
+        <KeysList
+          keyState={hasKeys ? (isUnlocked ? "unlocked" : "locked") : undefined}
+          keys={keysKnown ? encryptionKeys : null}
+          onDelete={remove.request}
+          onExport={exportFlow.request}
+          onRotate={rotate.request}
+          isDeleting={remove.isPending}
+          deletingKeyId={remove.pendingId}
+        />
+      )}
       {/* Spec: private-rooms/key-management, "Keys management offers to unlock a locked key" */}
       {hasKeys && !isUnlocked ? (
         <div className={styles.unlockAction}>

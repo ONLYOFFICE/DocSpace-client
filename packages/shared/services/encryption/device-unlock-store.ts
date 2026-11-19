@@ -235,8 +235,19 @@ export async function hasDeviceUnlock(userId: string): Promise<boolean> {
   return (await getRecord(userId)) !== null;
 }
 
-export async function forgetDeviceUnlock(userId: string): Promise<void> {
+/**
+ * Removes the remembered record of the user; with a public key, only when
+ * the record was written for that key.
+ */
+export async function forgetDeviceUnlock(
+  userId: string,
+  publicKeyB64?: string,
+): Promise<void> {
   if (!userId) return;
+  if (publicKeyB64) {
+    const record = await getRecord(userId);
+    if (!record || record.publicKey !== publicKeyB64) return;
+  }
   await deleteRecord(userId);
 }
 

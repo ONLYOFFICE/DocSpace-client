@@ -196,3 +196,66 @@ describe("Removing the key removes what this device keeps of it", () => {
     expect(env.pruning).toHaveBeenLastCalledWith("user-1", null);
   });
 });
+
+describe("Other tabs read the key list again after a key change", () => {
+  const RESEALED = { ...KEY, privateKeyEnc: "enc-new" };
+
+  afterEach(() => {
+    act(() => root.unmount());
+    host.remove();
+  });
+
+  const keysChanged = async () => {
+    await act(async () => {
+      (env.providerProps?.onKeysChanged as () => void)();
+    });
+  };
+
+  it("New passphrase in the other tab", async () => {
+    env.getEncryptionKeys.mockResolvedValueOnce([KEY]);
+    await renderWrapper();
+
+    let answer!: (keys: unknown) => void;
+    env.getEncryptionKeys.mockReturnValueOnce(
+      new Promise((resolve) => {
+        answer = resolve;
+      }),
+    );
+    await keysChanged();
+
+    expect(env.providerProps?.keysLoaded).toBe(false);
+    expect(env.providerProps?.userKeys).toBeNull();
+
+    await act(async () => {
+      answer([RESEALED]);
+    });
+    expect(env.providerProps?.userKeys).toEqual({
+      publicKey: "pub",
+      privateKeyEnc: "enc-new",
+      userId: "user-1",
+    });
+  });
+
+  it("Key deleted while Keys management is open elsewhere", async () => {
+    env.getEncryptionKeys.mockResolvedValueOnce([KEY]);
+    await renderWrapper();
+
+    env.getEncryptionKeys.mockResolvedValueOnce([]);
+    await keysChanged();
+
+    expect(env.providerProps?.keysLoaded).toBe(true);
+    expect(env.providerProps?.userKeys).toBeNull();
+  });
+
+  it("Read fails in the other tab", async () => {
+    env.getEncryptionKeys.mockResolvedValueOnce([KEY]);
+    await renderWrapper();
+
+    env.getEncryptionKeys.mockRejectedValueOnce(new Error("500"));
+    await keysChanged();
+
+    expect(env.providerProps?.keysLoaded).toBe(false);
+    expect(env.providerProps?.userKeys).toBeNull();
+    expect(seen.load.failed).toBe(true);
+  });
+});

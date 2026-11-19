@@ -135,6 +135,11 @@ type EncryptionProviderProps = {
   keysLoaded?: boolean;
   PassphraseDialog?: React.ComponentType<PassphraseDialogProps>;
   KeyChangeDialog?: React.ComponentType<KeyChangeDialogModalProps>;
+  /**
+   * Called when another page of the user changed the key list: the wrapper
+   * treats its list as not known and reads it again.
+   */
+  onKeysChanged?: () => void;
 };
 
 export type PassphraseDialogProps = {
@@ -166,6 +171,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   keysLoaded = true,
   PassphraseDialog,
   KeyChangeDialog,
+  onKeysChanged,
 }) => {
   const { t } = useTranslation("Common");
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -243,13 +249,18 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   // A lock from another page of the user: this page's key and names go, the
   // device records stay with the page that locked.
   // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+  const onKeysChangedRef = useRef(onKeysChanged);
+  onKeysChangedRef.current = onKeysChanged;
+
   useEffect(() => {
     const userId = userKeys?.userId;
     if (!userId) return undefined;
-    return subscribeLockBroadcast(userId, () => {
+    return subscribeLockBroadcast(userId, ({ keysChanged }) => {
       SecretStorage.lock();
       clearEncryptedFilenameCache();
       setIsUnlocked(false);
+      // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+      if (keysChanged) onKeysChangedRef.current?.();
     });
   }, [userKeys?.userId]);
 

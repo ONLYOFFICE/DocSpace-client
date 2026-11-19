@@ -293,6 +293,12 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
 
   useDeviceRecordPruning(ownerIdStr, Array.isArray(keys) ? keys : null);
 
+  // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+  const handleKeysChanged = React.useCallback(() => {
+    userStore?.clearEncryptionKeys?.();
+    void userStore?.ensureEncryptionKeys?.();
+  }, [userStore]);
+
   const chosen = selectUserKey(keys);
 
   const userKeys =
@@ -310,6 +316,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
       keysLoaded={Array.isArray(keys)}
       PassphraseDialog={PassphraseUnlockAdapter}
       KeyChangeDialog={KeyChangeDialog}
+      onKeysChanged={handleKeysChanged}
     >
       <FilenameRecoveryEffect />
       <RoomUnlockEffect />

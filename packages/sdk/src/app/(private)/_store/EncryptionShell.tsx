@@ -90,12 +90,19 @@ const EncryptionShellInner: React.FC<EncryptionShellProps> = ({ children }) => {
 
   useDeviceRecordPruning(identityStore.ownerId, identityStore.keys);
 
+  // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+  const handleKeysChanged = React.useCallback(() => {
+    identityStore.setKeys(null);
+    void identityStore.loadKeys();
+  }, [identityStore]);
+
   return (
     <EncryptionProvider
       userKeys={userKeys}
       keysLoaded={identityStore.keys !== null}
       PassphraseDialog={PassphraseDialogAdapter}
       KeyChangeDialog={KeyChangeDialog}
+      onKeysChanged={handleKeysChanged}
     >
       <GhostStateToastEffect />
       <DeviceSetupHintEffect />

@@ -633,6 +633,78 @@ describe("EncryptionContext / EncryptionProvider", () => {
     });
   });
 
+  describe("Other tabs read the key list again after a key change", () => {
+    const tree = (
+      userKeys: EncryptionUserKeys | null,
+      onKeysChanged: () => void,
+      keysLoaded = true,
+    ) => (
+      <EncryptionProvider
+        userKeys={userKeys}
+        keysLoaded={keysLoaded}
+        PassphraseDialog={MockPassphraseDialog}
+        onKeysChanged={onKeysChanged}
+      >
+        <Consumer />
+      </EncryptionProvider>
+    );
+
+    it("New passphrase in the other tab", async () => {
+      const onKeysChanged = vi.fn();
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      const view = render(tree(userKeysFixture, onKeysChanged));
+
+      lockFromAnotherTab("user-42", true);
+
+      expect(onKeysChanged).toHaveBeenCalledTimes(1);
+      expect(latest.isUnlocked).toBe(false);
+
+      // The wrapper read the list again: the unlock opens the new envelope.
+      const resealed = { ...userKeysFixture, privateKeyEnc: "enc-new" };
+      view.rerender(tree(resealed, onKeysChanged));
+      vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
+      await act(async () => {
+        await latest.unlock("new passphrase");
+      });
+
+      expect(unlockWithPassphrase).toHaveBeenCalledWith(
+        { publicKey: "pub-base64", privateKeyEnc: "enc-new" },
+        "new passphrase",
+      );
+    });
+
+    it("Key deleted while Keys management is open elsewhere", () => {
+      const onKeysChanged = vi.fn();
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      render(tree(userKeysFixture, onKeysChanged));
+
+      lockFromAnotherTab("user-42", false);
+      expect(onKeysChanged).not.toHaveBeenCalled();
+
+      lockFromAnotherTab("user-42", true);
+      expect(onKeysChanged).toHaveBeenCalledTimes(1);
+    });
+
+    it("Read fails in the other tab", async () => {
+      const onKeysChanged = vi.fn();
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      const view = render(tree(userKeysFixture, onKeysChanged));
+
+      lockFromAnotherTab("user-42", true);
+      // The wrapper's list is not known after the failed read.
+      view.rerender(tree(null, onKeysChanged, false));
+
+      let unlocked = true;
+      await act(async () => {
+        unlocked = await latest.unlock("old passphrase");
+      });
+
+      expect(unlocked).toBe(false);
+      expect(unlockWithPassphrase).not.toHaveBeenCalled();
+      expect(latest.keysLoaded).toBe(false);
+    });
+  });
+
   describe("Removing the key removes what this device keeps of it", () => {
     it("Key deleted on a remembered device", async () => {
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);

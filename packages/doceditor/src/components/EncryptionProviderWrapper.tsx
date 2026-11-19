@@ -200,6 +200,12 @@ const EncryptionProviderWrapper = ({
 
   useDeviceRecordPruning(userId, keys);
 
+  // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+  const handleKeysChanged = React.useCallback(() => {
+    setKeys(null);
+    keysLoad.reload();
+  }, [keysLoad]);
+
   const chosen = selectUserKey(keys);
 
   const userKeys =
@@ -232,6 +238,7 @@ const EncryptionProviderWrapper = ({
         keysLoaded={keys !== null}
         PassphraseDialog={PassphraseUnlockAdapter}
         KeyChangeDialog={KeyChangeDialog}
+        onKeysChanged={handleKeysChanged}
       >
         <EncryptionKeysReadyContext.Provider value={keysReady}>
           <EncryptionKeysLoadContext.Provider value={keysLoad}>

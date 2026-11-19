@@ -48,6 +48,8 @@ const frame = vi.hoisted(() => ({
     ownerId: "user-1" as string | null,
     keys: null as Array<{ publicKey: string }> | null,
     userKeys: null,
+    setKeys: (_keys: unknown) => {},
+    loadKeys: async () => {},
   },
 }));
 
@@ -57,7 +59,7 @@ vi.mock("@docspace/shared/hooks/useDeviceRecordPruning", () => ({
 
 // The provider and its shell effects are not under test here.
 vi.mock("@docspace/shared/context/encryption", () => ({
-  EncryptionProvider: () => null,
+  EncryptionProvider: vi.fn(() => null),
 }));
 
 vi.mock("./EncryptionIdentityStore", () => ({
@@ -89,6 +91,8 @@ vi.mock("react-i18next", () => ({
 }));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+
+import { EncryptionProvider } from "@docspace/shared/context/encryption";
 
 import { EncryptionShell, PassphraseDialogAdapter } from "./EncryptionShell";
 
@@ -188,5 +192,34 @@ describe("Removing the key removes what this device keeps of it", () => {
     renderShell();
 
     expect(frame.pruning).toHaveBeenLastCalledWith("user-1", null);
+  });
+});
+
+describe("Other tabs read the key list again after a key change", () => {
+  let root: Root | null = null;
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+    vi.mocked(EncryptionProvider).mockClear();
+  });
+
+  it("New passphrase in the other tab: the list is set unknown, then read again", () => {
+    const order: string[] = [];
+    frame.identity.setKeys = vi.fn((keys) => {
+      order.push(`set:${keys === null ? "unknown" : "list"}`);
+    });
+    frame.identity.loadKeys = vi.fn(async () => {
+      order.push("read");
+    });
+    root = createRoot(document.createElement("div"));
+    act(() => root?.render(<EncryptionShell>{null}</EncryptionShell>));
+
+    const props = vi.mocked(EncryptionProvider).mock.lastCall?.[0] as {
+      onKeysChanged: () => void;
+    };
+    act(() => props.onKeysChanged());
+
+    expect(order).toEqual(["set:unknown", "read"]);
   });
 });

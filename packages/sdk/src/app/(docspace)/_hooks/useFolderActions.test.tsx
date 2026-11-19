@@ -35,13 +35,14 @@
 
 import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
 
 const mocks = vi.hoisted(() => ({
   pathname: "/private/7001",
+  router: { push: vi.fn(), replace: vi.fn() },
   navigation: {
     updateNavigationItems: () => {},
     setCurrentFolderId: () => {},
@@ -49,13 +50,22 @@ const mocks = vi.hoisted(() => ({
     setCurrentIsRootRoom: () => {},
   },
   selection: { setSelection: () => {} },
-  filesList: { setHighlightFileId: vi.fn() },
+  filesList: {
+    items: [] as unknown[],
+    setHighlightFileId: vi.fn(),
+  },
   settings: { shareKey: undefined },
+  getFolderPath: vi.fn(),
 }));
 
 vi.mock("next/navigation", () => ({
   usePathname: () => mocks.pathname,
-  useRouter: () => ({ push: vi.fn() }),
+  useRouter: () => mocks.router,
+}));
+
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  getFolderPath: mocks.getFolderPath,
 }));
 
 vi.mock("../_store/NavigationStore", () => ({
@@ -74,10 +84,31 @@ vi.mock("../_store/SettingsStore", () => ({
   useSettingsStore: () => mocks.settings,
 }));
 
+import { FolderType } from "@docspace/shared/enums";
+
 import useFolderActions from "./useFolderActions";
 
-describe("useFolderActions / openLocation", () => {
+const PRIVATE_PATH = [
+  { id: 2, title: "Rooms" },
+  { id: 7001, title: "Private", roomType: 5, private: true },
+  { id: 7002, title: "Drafts" },
+];
+const PLAIN_PATH = [
+  { id: 2, title: "Rooms" },
+  { id: 50, title: "Shared", roomType: 6, private: false },
+  { id: 7002, title: "Drafts" },
+];
+
+describe("useFolderActions", () => {
   let root: Root | null = null;
+
+  beforeEach(() => {
+    mocks.router.push.mockClear();
+    mocks.router.replace.mockClear();
+    mocks.getFolderPath.mockReset();
+    mocks.filesList.items = [];
+    window.history.replaceState({}, "", "/sdk/personal-files?privateRooms=true");
+  });
 
   afterEach(() => {
     act(() => root?.unmount());
@@ -85,7 +116,7 @@ describe("useFolderActions / openLocation", () => {
     vi.restoreAllMocks();
   });
 
-  const openLocation = (search: string) => {
+  const render = () => {
     let actions: ReturnType<typeof useFolderActions> | null = null;
     const Probe = () => {
       actions = useFolderActions({ t: (key: string) => key });
@@ -93,31 +124,89 @@ describe("useFolderActions / openLocation", () => {
     };
     root = createRoot(document.createElement("div"));
     act(() => root?.render(<Probe />));
-
     const pushState = vi
       .spyOn(window.history, "pushState")
       .mockImplementation(() => {});
-    act(() => actions?.openLocation(7002, 9101, search));
+    return { actions: actions as unknown as ReturnType<typeof useFolderActions>, pushState };
+  };
 
+  const openLocation = async (search: string) => {
+    const { actions, pushState } = render();
+    await act(async () => actions.openLocation(7002, 9101, search));
     return new URL(String(pushState.mock.calls[0][2]), "http://localhost");
   };
 
-  it("Open location from the history: the address carries no search text in a private room", () => {
+  it("Open location from the history: the address carries no search text in a private room", async () => {
     mocks.pathname = "/private/7001";
 
-    const url = openLocation("Quarterly report");
+    const url = await openLocation("Quarterly report");
 
     expect(url.searchParams.get("folder")).toBe("7002");
     expect(url.searchParams.has("search")).toBe(false);
     expect(url.href).not.toContain("Quarterly");
     expect(mocks.filesList.setHighlightFileId).toHaveBeenCalledWith(9101);
+    expect(mocks.getFolderPath).not.toHaveBeenCalled();
   });
 
-  it("keeps the search text outside private rooms", () => {
+  it("keeps the search text outside private rooms", async () => {
     mocks.pathname = "/personal-files";
+    mocks.getFolderPath.mockResolvedValue(PLAIN_PATH);
 
-    const url = openLocation("Quarterly report");
+    const url = await openLocation("Quarterly report");
 
     expect(url.searchParams.get("search")).toBe("Quarterly report");
+  });
+
+  it("Open location of an encrypted file on a generic page", async () => {
+    mocks.pathname = "/personal-files";
+    mocks.getFolderPath.mockResolvedValue(PRIVATE_PATH);
+    const { actions, pushState } = render();
+
+    await act(async () => actions.openLocation(7002, 9101, "Quarterly report"));
+
+    expect(pushState).not.toHaveBeenCalled();
+    expect(mocks.router.push).not.toHaveBeenCalled();
+    expect(mocks.router.replace).toHaveBeenCalledWith(
+      "/private/7001?privateRooms=true&folder=7002",
+    );
+  });
+
+  it("Folder of a private room reached on a generic page", async () => {
+    mocks.pathname = "/personal-files";
+    mocks.getFolderPath.mockResolvedValue(PRIVATE_PATH);
+    const { actions, pushState } = render();
+
+    await act(async () => actions.openFolder(7002, "Drafts"));
+
+    expect(mocks.getFolderPath).toHaveBeenCalledWith(7002);
+    expect(pushState).not.toHaveBeenCalled();
+    expect(mocks.router.replace).toHaveBeenCalledWith(
+      "/private/7001?privateRooms=true&folder=7002",
+    );
+  });
+
+  it("opens a folder of My documents without a path request", async () => {
+    mocks.pathname = "/personal-files";
+    mocks.filesList.items = [
+      { id: 55, isFolder: true, rootFolderType: FolderType.USER },
+    ];
+    const { actions, pushState } = render();
+
+    await act(async () => actions.openFolder(55, "Notes"));
+
+    expect(mocks.getFolderPath).not.toHaveBeenCalled();
+    expect(pushState).toHaveBeenCalledTimes(1);
+    expect(mocks.router.replace).not.toHaveBeenCalled();
+  });
+
+  it("Room of the folder cannot be read: nothing is listed", async () => {
+    mocks.pathname = "/rooms";
+    mocks.getFolderPath.mockRejectedValue(new Error("403"));
+    const { actions, pushState } = render();
+
+    await act(async () => actions.openFolder(7002, "Drafts"));
+
+    expect(pushState).not.toHaveBeenCalled();
+    expect(mocks.router.replace).not.toHaveBeenCalled();
   });
 });

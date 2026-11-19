@@ -32,7 +32,7 @@ The system SHALL make every name a decrypted download hands to the file system, 
 - **THEN** those spaces and the trailing dots are left out of the saved name
 
 #### Scenario: Reserved device name
-- **WHEN** the part of a decrypted name before its first dot is CON, PRN, AUX, NUL, COM1 to COM9 or LPT1 to LPT9 in any letter case
+- **WHEN** the part of a decrypted name before its first dot is CON, PRN, AUX, NUL, or COM or LPT followed by one of the digits 1 to 9 or the superscript digits ¹, ² and ³, in any letter case
 - **THEN** the saved name is the same name with "_" in front of it
 
 #### Scenario: Overlong name

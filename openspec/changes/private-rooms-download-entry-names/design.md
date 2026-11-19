@@ -66,8 +66,12 @@ folders in an archive; new texts.
    4. Trim whitespace at the start, then strip trailing whitespace and
       dots until none is left; a name made of dots ends up empty here.
    5. If the part before the first dot, without trailing spaces, is CON,
-      PRN, AUX, NUL, COM1 to COM9 or LPT1 to LPT9 in any letter case, put
-      `_` in front.
+      PRN, AUX, NUL, or COM or LPT followed by one of the digits 1 to 9 or
+      the superscript digits ¹, ² and ³, in any letter case, put `_` in front.
+      Windows reads those superscript digits as digits in device names
+      ("Naming Files, Paths, and Namespaces" in the Win32 documentation,
+      read on 2026-11-19); COM0, LPT0, CONIN$ and CONOUT$ are not on its
+      list and stay as they are.
    6. If the name takes more than 255 bytes in UTF-8, shorten the part
       before the extension (from the last dot that is not the first
       character, when the extension takes at most 32 bytes; otherwise the
@@ -176,8 +180,9 @@ Unit tests carry the scenario names of the deltas.
   separator, each rejected character, each control range and each
   text-direction character, leading and trailing spaces, trailing dots,
   each reserved device name in mixed case with and without extension and
-  with a trailing space before the dot (and `CONSOLE.txt`, `COM10` and
-  `LPT0` left alone), names of 255 and 256 bytes with one-, two-, three-
+  with a trailing space before the dot, COM and LPT with each superscript
+  digit (and `CONSOLE.txt`, `COM10`, `LPT0` and COM with the superscript
+  digit four left alone), names of 255 and 256 bytes with one-, two-, three-
   and four-byte characters at the cut, an extension longer than 32 bytes,
   and the candidate order (empty, dot-only and control-only names falling
   through to the next candidate and to `_`). Every output of the table

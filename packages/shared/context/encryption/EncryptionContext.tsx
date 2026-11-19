@@ -300,10 +300,17 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           passphrase,
         );
         SecretStorage.cacheUnlocked(userKeys.userId, kp);
-        setIsUnlocked(true);
+        // The unlock is reported once the remembered record is written, so
+        // what reads the record on the unlock finds it.
+        // Spec: private-rooms/key-management, "Remember this device"
         if (rememberDevice) {
-          void persistDeviceUnlock(userKeys.userId, userKeys.publicKey, kp);
+          await persistDeviceUnlock(
+            userKeys.userId,
+            userKeys.publicKey,
+            kp,
+          ).catch(() => false);
         }
+        setIsUnlocked(true);
         return true;
       } catch (error) {
         setUnlockError(getEncryptionErrorMessage(t, error));

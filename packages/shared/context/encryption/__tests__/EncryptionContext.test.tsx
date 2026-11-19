@@ -479,6 +479,44 @@ describe("EncryptionContext / EncryptionProvider", () => {
       );
     });
 
+    it("Remembered until right after the unlock", async () => {
+      vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
+      let written!: (ok: boolean) => void;
+      vi.mocked(persistDeviceUnlock).mockReturnValueOnce(
+        new Promise<boolean>((resolve) => {
+          written = resolve;
+        }),
+      );
+      renderTree();
+
+      let unlocking!: Promise<boolean>;
+      await act(async () => {
+        unlocking = latest.unlock("correct", true);
+      });
+      // The record is still being written: the unlock is not reported yet.
+      expect(latest.isUnlocked).toBe(false);
+
+      await act(async () => {
+        written(true);
+        await unlocking;
+      });
+      expect(latest.isUnlocked).toBe(true);
+    });
+
+    it("Remembered until right after the unlock: a failed write does not fail the unlock", async () => {
+      vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
+      vi.mocked(persistDeviceUnlock).mockRejectedValueOnce(new Error("quota"));
+      renderTree();
+
+      let unlocked = false;
+      await act(async () => {
+        unlocked = await latest.unlock("correct", true);
+      });
+
+      expect(unlocked).toBe(true);
+      expect(latest.isUnlocked).toBe(true);
+    });
+
     it("unlock without remember does NOT persist", async () => {
       vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
       renderTree();

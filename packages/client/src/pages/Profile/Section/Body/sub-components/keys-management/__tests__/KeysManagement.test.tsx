@@ -241,6 +241,35 @@ describe("KeysManagement", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("Remembered until right after the unlock", async () => {
+    const userStore = {
+      encryptionKeys: [KEY],
+      setUserEncryptionKeys: vi.fn(),
+      user: { id: "user-1", email: "user@example.com" },
+    };
+    // The mocked context is not reactive: a changed prop stands in for the
+    // update the encryption provider sends on the unlock.
+    const page = (tick: number) => (
+      <Provider userStore={userStore}>
+        <KeysManagement {...({ tick } as object)} />
+      </Provider>
+    );
+    mocks.encryption.isUnlocked = false;
+    const view = render(page(0));
+    expect(
+      screen.queryByText("Common:DeviceUnlockRememberedUntil"),
+    ).not.toBeInTheDocument();
+
+    // The provider reports the unlock once the record is written.
+    mocks.writtenAt = Date.now();
+    mocks.encryption.isUnlocked = true;
+    view.rerender(page(1));
+
+    expect(
+      await screen.findByText("Common:DeviceUnlockRememberedUntil"),
+    ).toBeInTheDocument();
+  });
+
   it("Forget device in another tab", async () => {
     const user = userEvent.setup();
     const order: string[] = [];

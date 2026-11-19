@@ -59,6 +59,45 @@ private rooms changed; none of the tasks of this change has landed.
   `private-rooms-server-hardening` 12.8 and raised with the backend team
   against its spec.
 
+### Read at `426776b640` (2026-11-19)
+
+The pull of 2026-11-19 brought 11 commits after `5636dd4a79`: the
+registration of the HTTP clients in the worker hosts, a retry of a document
+service request that times out, identity tests, and the fix of bug 83853.
+None of the open Backend tasks of this change has landed; each was checked
+in the source at this commit, as were `private-rooms-editor-contract` 6.2,
+10.6 and `private-rooms-server-hardening` 8.1 and 16.1.
+
+One commit changes private rooms, `dceb038a04` (bug 83853), in
+`products/ASC.Files/Core/Utils/FileMarker.cs`:
+
+- When the new-items marks of an entry are cleared for a user
+  (`RemoveMarkAsNewAsync`) and the entry lies in a private room, the server
+  now sends the new-items event of the Private root as well
+  (`SendSectionNoticeAsync`), with the count of that root for the user, the
+  sum over the user's private rooms without the rooms whose notifications
+  the user switched off (`GetSectionNewCountAsync`). The same is done for
+  the Forms root and a form-filling room. The Private root has no tag of
+  its own, and the event of the Rooms root that used to refresh its count
+  can be gone while a room still has marks.
+- The event is the one every root gets: `SocketManager.ExecMarkAsNewFoldersAsync`
+  posts `mark-as-new-folder`, and the socket service
+  (`common/ASC.Socket.IO/app/hubs/files.js`) emits `s:markasnew-folder`
+  with `{ folderId, count }` to the room of that folder and user.
+- A failure while the notice is built is logged and does not fail the
+  clearing of the marks.
+- The server test of the commit (`SocketSectionNewItemsTests`) covers the
+  Forms root; the Private root has no server test.
+
+The client needs no change for it. `TreeFoldersStore.listenTreeFolders`
+subscribes to `DIR-<id>` of every root of the tree but Recent, the Private
+root included; the handler of `SocketEvents.MarkAsNewFolder` in
+`packages/client/src/store/FilesStore.ts` reads the folder tree again when
+the event names a root of the tree; and the Private item takes its counter
+from the `newItems` of that root (`ClientArticleSidebar`). Read in the
+code, not run on a stand. No unit test covers that handler; task 3.9 adds
+one.
+
 ## Goals / Non-Goals
 
 **Goals:**

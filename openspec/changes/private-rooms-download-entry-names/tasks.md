@@ -30,7 +30,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
   - 2026-11-19, `release/v4.1.0` at d3c71ab174c: 5 passed (Folder download, Folder selected in the header menu, Files and folders selected, the cross-user single download, the media viewer case), 23 s.
 - [x] 5.2 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
   - 2026-11-19, `release/v4.1.0` at 12aed925b01: `test:lefthook` exit 0 (8 files, 61 passed, 3 skipped); `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks, 8 from the cache for inputs unchanged); `openspec validate --all --strict` 28 passed on the branch and 27 passed after a trial archive on a scratch copy, which merged 2 added and 3 modified requirements into `file-operations` and 1 added and 1 modified into `sdk-surface`.
-- [ ] 5.3 Run the gate of 5.2 again after 1.5. Verify: every command green, recorded here with the date and the counts
+- [x] 5.3 Run the gate of 5.2 again after 1.5. Verify: every command green, recorded here with the date and the counts
+  - 2026-11-19, `release/v4.1.0` at 2ccf4f9a817: `test:lefthook` exit 0 (8 files, 61 passed, 3 skipped); `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks, 10 from the cache for inputs unchanged); `openspec validate --all --strict` 28 passed on the branch and 27 passed after a trial archive on a scratch copy (3 added, 4 modified).
 
 ## Workflow follow-up
 

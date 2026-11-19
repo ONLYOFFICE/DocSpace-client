@@ -47,7 +47,8 @@ test:build && pnpm exec playwright test __tests__/e2e/private`.
 
 ## 5. Gate
 
-- [ ] 5.1 Run the SDK private E2E folder on a fresh build, the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
+- [x] 5.1 Run the SDK private E2E folder on a fresh build, the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
+  - 2026-11-19, `release/v4.1.0` at f034380ad8b: SDK private E2E on a fresh build 47 passed, 11 skipped (the fixme cases named in the proposal); `test:lefthook` exit 0 (8 files, 61 passed, 3 skipped); `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks, 8 from the cache for inputs unchanged); `openspec validate --all --strict` 27 passed on the branch and 26 passed after a trial archive on a scratch copy (3 added, 4 modified). The SDK build itself exits 1 on the Next.js security advisory check after the pages are generated, as before this change.
 
 ## Workflow follow-up
 

@@ -92,7 +92,28 @@ export type TUseFileEncryptionKeys = TFileEncryptionState & {
   retry: () => void;
 };
 
+type TFileEncryptionAccess = Awaited<
+  ReturnType<typeof getFileEncryptionAccess>
+>;
+
 const HEADER_FETCH_BYTES = 4096;
+
+/** True for a request the server did not answer: the time limit or the network. */
+const gotNoAnswer = (error: unknown) => {
+  const failure = error as { isAxiosError?: boolean; response?: unknown } | null;
+  return !!failure?.isAxiosError && !failure.response;
+};
+
+const readAccessEntries = async (
+  fileId: number,
+): Promise<TFileEncryptionAccess> => {
+  try {
+    return await getFileEncryptionAccess(fileId);
+  } catch (error) {
+    if (!gotNoAnswer(error)) throw error;
+    return getFileEncryptionAccess(fileId);
+  }
+};
 
 // The real filename of an encrypted file exists only inside its DSE3 header;
 // the server-side title is an opaque placeholder. Decrypt the name while the
@@ -138,6 +159,11 @@ const useFileEncryptionKeys = (
     status: isEncrypted ? "loading" : "off",
   });
   const [attempt, setAttempt] = React.useState(0);
+  // Spec: private-rooms/editor-integration, "Editor fetches the file's access entries"
+  const accessRequest = React.useRef<{
+    key: string;
+    entries: Promise<TFileEncryptionAccess>;
+  } | null>(null);
 
   const fileId = config?.file?.id;
   const fileViewUrl = config?.file?.viewUrl;
@@ -196,9 +222,17 @@ const useFileEncryptionKeys = (
           }
         }
 
-        let info: Awaited<ReturnType<typeof getFileEncryptionAccess>>;
+        const accessKey = `${numericFileId}:${attempt}`;
+        if (accessRequest.current?.key !== accessKey) {
+          accessRequest.current = {
+            key: accessKey,
+            entries: readAccessEntries(numericFileId),
+          };
+        }
+
+        let info: TFileEncryptionAccess;
         try {
-          info = await getFileEncryptionAccess(numericFileId);
+          info = await accessRequest.current.entries;
         } catch (error) {
           console.error("[ENCRYPTION] editor access entries failed:", error);
           if (!cancelled) setState({ status: "load-failed" });

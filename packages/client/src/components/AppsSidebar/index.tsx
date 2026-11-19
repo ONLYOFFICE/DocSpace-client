@@ -88,11 +88,13 @@ import ArticleDevToolsBar from "@onlyoffice/apps-ui-kit/components/article/sub-c
 import { ArticleProfileLoader } from "@onlyoffice/apps-ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
+import type PluginStore from "SRC_DIR/store/PluginStore";
 import { closeAfter } from "./closeAfter";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import LiveChatBlock from "./LiveChatBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
+import ArticleWidgetSlot from "./ArticleWidgetSlot";
 import { BackButtonLoader, HeaderLoader, NavMenuLoader } from "./SidebarLoader";
 import { useSidebarShowText } from "./useSidebarShowText";
 import {
@@ -135,6 +137,7 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   articleOpen?: boolean;
   articleButtonItems?: AppsPluginsItems | null;
   articleNavigationItems?: PluginNavigationItems | null;
+  articleWidgetItems?: PluginStore["articleWidgetItemsList"];
   toggleArticleOpen?: () => void;
   onBack?: () => void;
   backLabel?: string;
@@ -156,6 +159,7 @@ export const AppsSidebarView = ({
   backLabel,
   articleButtonItems,
   articleNavigationItems,
+  articleWidgetItems,
   pluginSection,
   isNavLoading,
   limitedAccessDevToolsForUsers,
@@ -210,6 +214,12 @@ export const AppsSidebarView = ({
   // While the nav skeleton is up, the footer (plugin slots + banner) stays
   // hidden so it doesn't appear ahead of the navigation it sits under.
   const showFooter = !isNavLoading && (hasPluginItems || showDevToolsBar);
+  const pluginWidget =
+    pluginSection && !isNavLoading
+      ? articleWidgetItems?.find(
+          ({ value }) => !value.appears || value.appears.includes(pluginSection),
+        )?.value
+      : undefined;
 
   const handleBackdropClick = () => {
     toggleArticleOpen?.();
@@ -328,6 +338,9 @@ export const AppsSidebarView = ({
               )}
             </div>
           )}
+          {pluginWidget ? (
+            <ArticleWidgetSlot item={pluginWidget} showText={showText} />
+          ) : null}
           {isNavLoading ? (
             <NavMenuLoader showText={showText} />
           ) : (
@@ -419,6 +432,7 @@ type AppsSidebarConnectedProps = AppsSidebarProps & {
   toggleArticleOpen?: () => void;
   articleButtonItems?: AppsPluginsItems | null;
   articleNavigationItems?: PluginNavigationItems | null;
+  articleWidgetItems?: PluginStore["articleWidgetItemsList"];
   limitedAccessDevToolsForUsers?: boolean;
 };
 
@@ -466,6 +480,7 @@ export default inject<TStore>(
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     articleButtonItems: pluginStore?.articleButtonItemsList,
     articleNavigationItems: pluginStore?.articleNavigationItemsList,
+    articleWidgetItems: pluginStore?.articleWidgetItemsList,
     limitedAccessDevToolsForUsers: settingsStore.limitedAccessDevToolsForUsers,
   }),
 )(observer(AppsSidebar));

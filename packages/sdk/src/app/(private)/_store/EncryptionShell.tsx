@@ -37,7 +37,6 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 
 import {
   EncryptionProvider,
@@ -45,12 +44,12 @@ import {
 } from "@docspace/shared/context/encryption";
 import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 
 import { useEncryptionIdentityStore } from "./EncryptionIdentityStore";
 import { useKeysManagementLink } from "../_hooks/useKeysManagementLink";
 import GhostStateToastEffect from "../_components/private-shell/GhostStateToastEffect";
 import DeviceSetupHintEffect from "../_components/private-shell/DeviceSetupHintEffect";
-import BroadcastLockSync from "../_components/private-shell/BroadcastLockSync";
 import AbortOnLockEffect from "../_components/private-shell/AbortOnLockEffect";
 import FilenameRecoveryEffect from "../_components/private-shell/FilenameRecoveryEffect";
 import BackfillEncryptedRoomEffect from "../_components/private-shell/BackfillEncryptedRoomEffect";
@@ -64,7 +63,6 @@ export const PassphraseDialogAdapter: React.FC<PassphraseDialogProps> = ({
   onSubmit,
   onCancel,
 }) => {
-  const { t } = useTranslation(["Common"]);
   const { open: openKeysManagement } = useKeysManagementLink();
   const handleForgotPassphrase = React.useCallback(() => {
     onCancel();
@@ -80,7 +78,6 @@ export const PassphraseDialogAdapter: React.FC<PassphraseDialogProps> = ({
       onSubmit={onSubmit}
       onCancel={onCancel}
       onForgotPassphrase={handleForgotPassphrase}
-      submitLabel={t("Common:Confirm")}
     />
   );
 };
@@ -91,16 +88,24 @@ const EncryptionShellInner: React.FC<EncryptionShellProps> = ({ children }) => {
   const identityStore = useEncryptionIdentityStore();
   const userKeys = identityStore.userKeys;
 
+  useDeviceRecordPruning(identityStore.ownerId, identityStore.keys);
+
+  // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+  const handleKeysChanged = React.useCallback(() => {
+    identityStore.setKeys(null);
+    void identityStore.loadKeys();
+  }, [identityStore]);
+
   return (
     <EncryptionProvider
       userKeys={userKeys}
       keysLoaded={identityStore.keys !== null}
       PassphraseDialog={PassphraseDialogAdapter}
       KeyChangeDialog={KeyChangeDialog}
+      onKeysChanged={handleKeysChanged}
     >
       <GhostStateToastEffect />
       <DeviceSetupHintEffect />
-      <BroadcastLockSync />
       <AbortOnLockEffect />
       <FilenameRecoveryEffect />
       <BackfillEncryptedRoomEffect />

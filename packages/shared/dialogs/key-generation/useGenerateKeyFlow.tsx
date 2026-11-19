@@ -51,11 +51,9 @@ import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 import { useEncryption } from "@docspace/shared/context/encryption";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 
-import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
+import { KeySetupDialog, type KeySetupStep } from "./KeySetupDialog";
 
-import { RecoveryPhraseDisplayModal } from "./RecoveryPhraseDisplayModal";
-
-type Step = "idle" | "passphrase" | "recovery-display";
+type Step = "idle" | KeySetupStep;
 
 type Deps = {
   userId: string | undefined;
@@ -65,7 +63,7 @@ type Deps = {
   refreshKeysFromServer: () => Promise<void>;
   onSuccess?: () => void;
   onError?: () => void;
-  /** The user cancelled the passphrase or the recovery-phrase dialog. */
+  /** The user cancelled key setup on any of its steps. */
   onCancel?: () => void;
 };
 
@@ -104,7 +102,7 @@ export function useGenerateKeyFlow({
     setMnemonic(null);
   }, []);
 
-  // Spec: room-membership, "Starting private room creation without a key starts key generation"
+  // Spec: room-membership, "Starting private room creation without a key opens key setup"
   const cancel = useCallback(() => {
     reset();
     onCancel?.();
@@ -117,8 +115,19 @@ export function useGenerateKeyFlow({
     }
     // Spec: private-rooms/key-management, "Generate a new key".
     if (hasExistingKeys || isPending || step !== "idle") return;
-    setStep("passphrase");
+    setStep("explanation");
   }, [t, hasExistingKeys, isPending, step]);
+
+  // Spec: private-rooms/key-management, "Key setup steps can be walked back"
+  const back = useCallback(() => {
+    setStep((current) =>
+      current === "recovery"
+        ? "passphrase"
+        : current === "passphrase"
+          ? "explanation"
+          : current,
+    );
+  }, []);
 
   const onPassphraseSubmit = useCallback(
     async (input: string) => {
@@ -127,14 +136,20 @@ export function useGenerateKeyFlow({
         onError?.();
         return;
       }
+      // The key pair and the recovery phrase are made once and kept while
+      // the dialog is open; only the passphrase follows the latest form.
+      setPassphrase(input);
+      if (keyPair && mnemonic) {
+        setStep("recovery");
+        return;
+      }
       setIsPending(true);
       try {
         const kp = await generateIdentityKeyPair();
         const m = await generateRecoveryMnemonic();
         setKeyPair(kp);
-        setPassphrase(input);
         setMnemonic(m);
-        setStep("recovery-display");
+        setStep("recovery");
       } catch (error) {
         toastr.error(getEncryptionErrorMessage(t, error));
         console.error("Key/mnemonic generation failed:", error);
@@ -144,7 +159,7 @@ export function useGenerateKeyFlow({
         setIsPending(false);
       }
     },
-    [reset, t, userId, onError],
+    [reset, t, userId, onError, keyPair, mnemonic],
   );
 
   const onRecoveryConfirm = useCallback(async () => {
@@ -192,29 +207,20 @@ export function useGenerateKeyFlow({
     onError,
   ]);
 
-  const modals = (
-    <>
-      {step === "passphrase" ? (
-        <PassphraseModal
-          visible
-          isNew
-          onSubmit={onPassphraseSubmit}
-          onCancel={cancel}
-          isLoading={isPending}
-        />
-      ) : null}
-      {step === "recovery-display" && mnemonic ? (
-        <RecoveryPhraseDisplayModal
-          visible
-          mnemonic={mnemonic}
-          accountLabel={accountLabel}
-          onConfirm={onRecoveryConfirm}
-          onCancel={cancel}
-          isLoading={isPending}
-        />
-      ) : null}
-    </>
-  );
+  const modals =
+    step === "idle" ? null : (
+      <KeySetupDialog
+        step={step}
+        mnemonic={mnemonic}
+        accountLabel={accountLabel}
+        isLoading={isPending}
+        onContinue={() => setStep("passphrase")}
+        onPassphraseSubmit={onPassphraseSubmit}
+        onRecoveryConfirm={onRecoveryConfirm}
+        onBack={back}
+        onCancel={cancel}
+      />
+    );
 
   return { request, isPending, modals };
 }

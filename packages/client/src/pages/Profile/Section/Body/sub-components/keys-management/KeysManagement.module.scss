@@ -133,8 +133,49 @@
 }
 
 .detailsLabel {
-  color: var(--profile-description-text-color);
+  color: var(--text-secondary);
   white-space: nowrap;
+}
+
+.fingerprintCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+// Spec: private-rooms/key-management, "Key fingerprint is shown in groups"
+.fingerprintValue {
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.fingerprintLine {
+  display: block;
+}
+
+.fingerprintHalf {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.fingerprintGroup {
+  white-space: nowrap;
+}
+
+.fingerprintHint {
+  color: var(--text-secondary);
+  line-height: 16px;
+}
+
+.detailsToggleRow {
+  grid-column: 1 / -1;
+}
+
+// The rows under Details take part in the grid of the card; [hidden] keeps
+// them out while the disclosure is closed.
+.detailsMore:not([hidden]) {
+  display: contents;
 }
 
 .monoValue {
@@ -150,8 +191,44 @@
   margin-bottom: 20px;
 }
 
-.keysListTitle {
+.keysListHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
   margin-bottom: 12px;
+}
+
+.keyStateNote.keyStateNote {
+  margin: -6px 0 12px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.intro.intro {
+  margin: 0 0 16px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.unlockAction {
+  margin: 16px 0 4px;
+}
+
+.recoverySection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.recoveryText.recoveryText {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .keysListItems {

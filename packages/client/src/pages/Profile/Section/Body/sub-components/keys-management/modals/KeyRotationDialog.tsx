@@ -56,9 +56,13 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   PASSPHRASE_MIN_LENGTH,
   containsCommonPattern,
-  isPassphraseAcceptable,
+  meetsPassphraseRules,
 } from "@docspace/shared/services/encryption/passphrase-strength";
-import { PASSPHRASE_SETTINGS } from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
+import {
+  PASSPHRASE_SETTINGS,
+  RULES_TOOLTIP_PLACE,
+} from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
+import { PassphraseStrengthLine } from "@docspace/shared/dialogs/passphrase-modal/PassphraseStrengthLine";
 
 import styles from "./KeyRotationDialog.module.scss";
 
@@ -128,8 +132,8 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
 
     if (!currentPassphrase) return;
     if (newPassphrase.length < PASSPHRASE_MIN_LENGTH) return;
-    // Spec: key-management, "Passphrase strength gate"
-    if (!rulesPassed || !isPassphraseAcceptable(newPassphrase)) return;
+    // Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+    if (!rulesPassed || !meetsPassphraseRules(newPassphrase)) return;
     if (newPassphrase !== confirmPassphrase) return;
     if (currentPassphrase === newPassphrase) return;
 
@@ -164,7 +168,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     currentPassphrase.length > 0 &&
     newPassphrase.length >= PASSPHRASE_MIN_LENGTH &&
     rulesPassed &&
-    isPassphraseAcceptable(newPassphrase) &&
+    meetsPassphraseRules(newPassphrase) &&
     newPassphrase === confirmPassphrase &&
     currentPassphrase !== newPassphrase;
 
@@ -295,9 +299,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tooltipPasswordLength={`${t(
                     "Common:PasswordMinimumLength",
                   )}: ${PASSPHRASE_MIN_LENGTH}`}
-                  tooltipPasswordDigits={t("Common:PasswordLimitDigits")}
-                  tooltipPasswordCapital={t("Common:PasswordLimitUpperCase")}
-                  tooltipPasswordSpecial={t("Common:PasswordLimitSpecialSymbols")}
+                  tooltipPasswordPlace={RULES_TOOLTIP_PLACE}
                   isDisabled={isLoading}
                   hasError={!!newFieldError}
                   autoComplete="new-password"
@@ -305,6 +307,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
                   tabIndex={0}
                 />
               </FieldContainer>
+              <PassphraseStrengthLine passphrase={newPassphrase} />
             </div>
 
             <div className={styles.inputGroup}>

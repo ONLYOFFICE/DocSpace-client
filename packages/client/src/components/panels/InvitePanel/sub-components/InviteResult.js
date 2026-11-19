@@ -37,6 +37,7 @@ import { useEffect, useId, useRef } from "react";
 
 import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { waitsForAccess } from "@docspace/shared/services/private-room/room-encryption";
 
 import styles from "../InvitePanel.module.scss";
 
@@ -48,9 +49,11 @@ const InviteResult = ({ t, outcome }) => {
   const refusedWithoutKey = refused
     .filter((entry) => entry.noKey)
     .map((entry) => entry.member);
-  const refusedOtherwise = refused
-    .filter((entry) => !entry.noKey)
-    .map((entry) => entry.member);
+  // Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+  const refusedOtherwise = [
+    ...refused.filter((entry) => !entry.noKey).map((entry) => entry.member),
+    ...skipped.filter((member) => waitsForAccess(member.reason)),
+  ];
   // Spec: private-rooms/room-membership, "Invitees without usable keys are skipped with a warning"
   const notInvitedWithoutKey = [
     ...refusedWithoutKey,
@@ -108,7 +111,7 @@ const InviteResult = ({ t, outcome }) => {
             {t("Common:EncryptedAccessPending")}
           </Heading>
           <Text>{namesOf(pending.map((entry) => entry.member))}</Text>
-          <Text className={styles.description}>
+          <Text className={styles.resultReason}>
             {failed
               ? t("Common:EncryptedReencryptFailed")
               : t("Common:EncryptedReencryptPartialFailure", {
@@ -124,14 +127,14 @@ const InviteResult = ({ t, outcome }) => {
           aria-label={t("Common:NotInvited")}
         >
           {notInvitedWithoutKey.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedInviteNoKey", {
                 users: namesOf(notInvitedWithoutKey),
               })}
             </Text>
           ) : null}
           {refusedOtherwise.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedInviteFailed", {
                 users: namesOf(refusedOtherwise),
               })}
@@ -146,14 +149,14 @@ const InviteResult = ({ t, outcome }) => {
           aria-label={t("Common:NotInvited")}
         >
           {withoutKey.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedSkippedNoKeys", {
                 users: namesOf(withoutKey),
               })}
             </Text>
           ) : null}
           {withRefusedKey.length ? (
-            <Text className={styles.description}>
+            <Text className={styles.resultReason}>
               {t("Common:EncryptedSkippedKeyMismatch", {
                 users: namesOf(withRefusedKey),
               })}

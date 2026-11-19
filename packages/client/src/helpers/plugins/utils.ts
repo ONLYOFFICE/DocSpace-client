@@ -81,6 +81,7 @@ export const messageActions = ({
   updateArticleButtonItems,
   updateArticleNavigationItems,
   updateDashboardWidgetItems,
+  updateArticleWidgetItem,
   updateFileItems,
   updateCreateDialogProps,
   updatePlugin,
@@ -88,6 +89,7 @@ export const messageActions = ({
   setPluginMediaViewerProps,
   setReactPluginModalState,
   reactPluginCurrentFile,
+  closeMobileArticle,
 }: TMessageActionsParams): void => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -266,6 +268,10 @@ export const messageActions = ({
         updateDashboardWidgetItems?.(pluginName);
 
         break;
+      case PluginActions.updateArticleWidgetItem:
+        updateArticleWidgetItem?.(pluginName);
+
+        break;
       case PluginActions.updateFileItems:
         updateFileItems?.(pluginName);
 
@@ -298,12 +304,18 @@ export const messageActions = ({
         }
         break;
 
-      case PluginActions.navigate:
+      case PluginActions.navigate: {
         if (!message.navigatePath) return;
 
-        window.DocSpace.navigate(message.navigatePath);
+        const { pathname, search, hash } = window.location;
+
+        window.DocSpace.navigate(message.navigatePath, {
+          replace: message.navigatePath === `${pathname}${search}${hash}`,
+        });
+        closeMobileArticle?.();
 
         break;
+      }
 
       case PluginActions.openInfoPanel:
         setPluginDialogVisible?.(false);

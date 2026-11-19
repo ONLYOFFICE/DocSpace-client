@@ -252,4 +252,32 @@ describe("messageActions", () => {
     warn.mockRestore();
     window.history.replaceState(null, "", "/");
   });
+
+  it("closes the mobile sidebar without a second history entry when the page is already open", () => {
+    const navigate = vi.fn();
+    const closeMobileArticle = vi.fn();
+    (window as unknown as { DocSpace: unknown }).DocSpace = { navigate };
+    window.history.replaceState(null, "", "/p/results");
+
+    const go = (navigatePath: string) =>
+      messageActions({
+        ...params,
+        closeMobileArticle,
+        message: { actions: [PluginActions.navigate], navigatePath },
+      } as unknown as TMessageActionsParams);
+
+    go("/p/results");
+
+    expect(navigate).toHaveBeenLastCalledWith("/p/results", { replace: true });
+    expect(closeMobileArticle).toHaveBeenCalledTimes(1);
+
+    go("/rooms/shared");
+
+    expect(navigate).toHaveBeenLastCalledWith("/rooms/shared", {
+      replace: false,
+    });
+    expect(closeMobileArticle).toHaveBeenCalledTimes(2);
+
+    window.history.replaceState(null, "", "/");
+  });
 });

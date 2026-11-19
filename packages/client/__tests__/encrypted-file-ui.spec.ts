@@ -544,7 +544,7 @@ test.describe("Media viewer of an encrypted file", () => {
       .locator('input[name="passphrase"], #passphrase input')
       .first()
       .fill(passphrase);
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
     await expect(prompt).toBeHidden({ timeout: 10000 });
   };
 
@@ -842,7 +842,7 @@ test.describe("Encrypted file moved out of a private room", () => {
         .locator('input[name="passphrase"], #passphrase input')
         .first()
         .fill(passphrase);
-      await passphrasePrompt.getByRole("button", { name: "Confirm" }).click();
+      await passphrasePrompt.getByRole("button", { name: "Unlock", exact: true }).click();
     } catch {}
 
     const deleteBody = (await deleteRequest).postDataJSON() as {

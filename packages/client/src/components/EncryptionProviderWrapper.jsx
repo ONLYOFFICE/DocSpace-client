@@ -51,6 +51,7 @@ import {
   clearDeviceSetupHintHandler,
 } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 import {
   PassphraseModal,
   usePasskeyUnlock,
@@ -224,7 +225,6 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
       encryptionKeys,
       setUserEncryptionKeys,
     }) => {
-      const { t } = useTranslation(["Common"]);
       const [isRecovering, setIsRecovering] = React.useState(false);
 
       const refreshKeysFromServer = React.useCallback(async () => {
@@ -275,7 +275,6 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
           onSubmit={onSubmit}
           onCancel={onCancel}
           onForgotPassphrase={handleForgotPassphrase}
-          submitLabel={t("Common:Confirm")}
           showRememberDevice
           onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}
           isPasskeyUnlocking={passkey.isUnlocking}
@@ -291,6 +290,14 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   const keys = userStore?.encryptionKeys;
   const ownerId = userStore?.user?.id;
   const ownerIdStr = ownerId ? String(ownerId) : undefined;
+
+  useDeviceRecordPruning(ownerIdStr, Array.isArray(keys) ? keys : null);
+
+  // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+  const handleKeysChanged = React.useCallback(() => {
+    userStore?.clearEncryptionKeys?.();
+    void userStore?.ensureEncryptionKeys?.();
+  }, [userStore]);
 
   const chosen = selectUserKey(keys);
 
@@ -309,6 +316,7 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
       keysLoaded={Array.isArray(keys)}
       PassphraseDialog={PassphraseUnlockAdapter}
       KeyChangeDialog={KeyChangeDialog}
+      onKeysChanged={handleKeysChanged}
     >
       <FilenameRecoveryEffect />
       <RoomUnlockEffect />

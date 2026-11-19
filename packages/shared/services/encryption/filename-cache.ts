@@ -64,6 +64,7 @@ function safeStorage(): Storage | null {
   }
 }
 
+/** Called with the file whose name changed, or "" when every name did. */
 type CacheChangeListener = (fileId: string) => void;
 const listeners = new Set<CacheChangeListener>();
 
@@ -153,9 +154,17 @@ export function forgetEncryptedFilename(fileId: number | string): void {
   }
 }
 
+/**
+ * Drops every cached name and tells the subscribers, so that names shown
+ * from the cache go back to the names as stored.
+ * Spec: private-rooms/key-management, "File names stay as stored while the key is locked"
+ */
 export function clearEncryptedFilenameCache(): void {
   const s = safeStorage();
-  if (!s) return;
+  if (!s) {
+    notify("");
+    return;
+  }
   try {
     const toRemove: string[] = [];
     for (let i = 0; i < s.length; i++) {
@@ -166,4 +175,5 @@ export function clearEncryptedFilenameCache(): void {
   } catch {
     /* ignore */
   }
+  notify("");
 }

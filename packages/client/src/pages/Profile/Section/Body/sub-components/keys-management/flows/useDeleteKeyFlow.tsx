@@ -45,7 +45,6 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { getTofuStore } from "@docspace/shared/services/encryption/tofu-store";
@@ -64,6 +63,8 @@ import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 type Deps = {
   userId?: string;
   refreshKeysFromServer: () => Promise<void>;
+  /** The context's lock after a removed key (useEncryption). */
+  lockAfterKeyRemoval: (publicKey?: string) => Promise<void>;
   onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
 };
 
@@ -83,6 +84,7 @@ export type DeleteKeyFlow = {
 export function useDeleteKeyFlow({
   userId,
   refreshKeysFromServer,
+  lockAfterKeyRemoval,
   onForgotPassphrase,
 }: Deps): DeleteKeyFlow {
   const { t } = useTranslation(["Common"]);
@@ -164,7 +166,7 @@ export function useDeleteKeyFlow({
         if (userId) {
           await getTofuStore(userId).forgetKey(userId, verifying.publicKey);
         }
-        SecretStorage.lock();
+        await lockAfterKeyRemoval(verifying.publicKey);
         await refreshKeysFromServer();
         toastr.success(t("Common:EncryptionKeyDeleted"));
         setVerifying(null);
@@ -181,7 +183,7 @@ export function useDeleteKeyFlow({
         setPendingId(null);
       }
     },
-    [verifying, userId, refreshKeysFromServer, t],
+    [verifying, userId, refreshKeysFromServer, lockAfterKeyRemoval, t],
   );
 
   const modals = (
@@ -207,6 +209,7 @@ export function useDeleteKeyFlow({
         <PassphraseModal
           visible
           isNew={false}
+          submitLabel={t("Common:ContinueButton")}
           onSubmit={onPassphraseSubmit}
           onCancel={() => {
             setVerifying(null);

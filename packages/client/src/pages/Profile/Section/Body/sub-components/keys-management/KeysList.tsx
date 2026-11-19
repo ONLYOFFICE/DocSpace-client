@@ -33,12 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { KEY_STATUS_BADGE_COLORS } from "./keyStatusBadgeColors";
@@ -50,11 +52,22 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
+import { splitFingerprint } from "@docspace/shared/services/encryption/fingerprint";
 import { activateAsButton } from "@docspace/shared/dialogs/key-dialog-keys";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import styles from "./KeysManagement.module.scss";
+
+// Lines of four groups, each of two halves, so a narrow screen breaks a
+// line between its halves and never elsewhere.
+const fingerprintLines = (groups: string[]) => {
+  const halves: string[][] = [];
+  for (let i = 0; i < groups.length; i += 2) halves.push(groups.slice(i, i + 2));
+  const lines: string[][][] = [];
+  for (let i = 0; i < halves.length; i += 2) lines.push(halves.slice(i, i + 2));
+  return lines;
+};
 
 type KeyItemProps = {
   keyData: TEncryptionKeyPair;
@@ -75,6 +88,9 @@ const KeyItem: React.FC<KeyItemProps> = ({
 }) => {
   const { t } = useTranslation(["Common", "People"]);
   const [fingerprint, setFingerprint] = useState<string>("");
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const detailsId = useId();
+  const fingerprintHintId = useId();
 
   useEffect(() => {
     const loadFingerprint = async () => {
@@ -123,9 +139,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
                 maxWidth="none"
               />
             </div>
-            <div className={styles.keyItemActions}>
+            <div className={styles.keyItemActions} data-testid="key_actions">
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={PencilReactSvgUrl}
                 size={16}
                 onClick={handleRotate}
@@ -138,6 +155,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
               />
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={DownloadReactSvgUrl}
                 size={16}
                 onClick={handleExport}
@@ -150,6 +168,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
               />
               <IconButton
                 className={styles.actionButton}
+                color="--profile-icon-fill"
                 iconName={TrashReactSvgUrl}
                 size={16}
                 onClick={handleDelete}
@@ -173,23 +192,100 @@ const KeyItem: React.FC<KeyItemProps> = ({
           <Text fontSize="13px" className={styles.detailsLabel}>
             {t("Common:KeyFingerprint")}
           </Text>
-          <Text fontSize="13px" className={styles.monoValue}>
-            {fingerprint || "..."}
-          </Text>
-          {keyData.id ? (
-            <>
-              <Text fontSize="13px" className={styles.detailsLabel}>
-                {t("Common:KeyId")}
-              </Text>
-              <Text fontSize="13px" className={styles.monoValue}>
-                {keyData.id}
-              </Text>
-            </>
-          ) : null}
-          <Text fontSize="13px" className={styles.detailsLabel}>
-            {t("Common:Algorithm")}
-          </Text>
-          <Text fontSize="13px">X25519</Text>
+          <div className={styles.fingerprintCell}>
+            <Text
+              fontSize="13px"
+              className={`${styles.monoValue} ${styles.fingerprintValue}`}
+              aria-describedby={fingerprintHintId}
+              data-testid="key_fingerprint"
+            >
+              {fingerprint ? (
+                // A selection copies the groups on one line, whatever the layout.
+                <span
+                  onCopy={(event) => {
+                    event.clipboardData.setData(
+                      "text/plain",
+                      splitFingerprint(fingerprint).join(" "),
+                    );
+                    event.preventDefault();
+                  }}
+                >
+                  {fingerprintLines(splitFingerprint(fingerprint)).map(
+                    (line, lineIndex) => (
+                      <React.Fragment key={lineIndex}>
+                        {lineIndex > 0 ? " " : null}
+                        <span className={styles.fingerprintLine}>
+                          {line.map((half, halfIndex) => (
+                            <React.Fragment key={halfIndex}>
+                              {halfIndex > 0 ? " " : null}
+                              <span className={styles.fingerprintHalf}>
+                                {half.map((group, index) => (
+                                  <React.Fragment key={`${index}-${group}`}>
+                                    {index > 0 ? " " : null}
+                                    <span
+                                      className={styles.fingerprintGroup}
+                                      data-testid="key_fingerprint_group"
+                                    >
+                                      {group}
+                                    </span>
+                                  </React.Fragment>
+                                ))}
+                              </span>
+                            </React.Fragment>
+                          ))}
+                        </span>
+                      </React.Fragment>
+                    ),
+                  )}
+                </span>
+              ) : (
+                "..."
+              )}
+            </Text>
+            <Text
+              id={fingerprintHintId}
+              fontSize="12px"
+              className={styles.fingerprintHint}
+            >
+              {t("Common:KeyFingerprintHint")}
+            </Text>
+          </div>
+          <div className={styles.detailsToggleRow}>
+            <Link
+              type={LinkType.action}
+              fontSize="13px"
+              fontWeight={600}
+              isHovered
+              onClick={() => setDetailsOpen((open) => !open)}
+              tabIndex={isDeleting ? -1 : undefined}
+              aria-expanded={detailsOpen}
+              aria-controls={detailsId}
+              dataTestId="key_details_toggle"
+            >
+              {t("Common:Details")}
+            </Link>
+          </div>
+          <div
+            id={detailsId}
+            className={styles.detailsMore}
+            hidden={!detailsOpen}
+            data-testid="key_details_more"
+          >
+            {keyData.id ? (
+              <>
+                <Text fontSize="13px" className={styles.detailsLabel}>
+                  {t("Common:KeyId")}
+                </Text>
+                <Text fontSize="13px" className={styles.monoValue}>
+                  {keyData.id}
+                </Text>
+              </>
+            ) : null}
+            <Text fontSize="13px" className={styles.detailsLabel}>
+              {t("Common:Algorithm")}
+            </Text>
+            <Text fontSize="13px">X25519</Text>
+          </div>
         </div>
       </div>
       {isCurrentlyDeleting && (
@@ -202,12 +298,15 @@ const KeyItem: React.FC<KeyItemProps> = ({
 };
 
 type KeysListProps = {
-  keys: TEncryptionKeyPair[];
+  /** The user's keys; `null` while the list is not known. */
+  keys: TEncryptionKeyPair[] | null;
   onDelete: (keyData: TEncryptionKeyPair) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
+  /** Whether the key is locked; left out while that is not to be shown. */
+  keyState?: "locked" | "unlocked";
 };
 
 export const KeysList: React.FC<KeysListProps> = ({
@@ -217,10 +316,24 @@ export const KeysList: React.FC<KeysListProps> = ({
   onRotate,
   isDeleting,
   deletingKeyId,
+  keyState,
 }) => {
   const { t } = useTranslation(["Common"]);
   // Spec: private-rooms/encryption-core, "One selected key per user".
   const key = selectUserKey(keys);
+
+  // Spec: private-rooms/key-management, "An unknown key list is not shown as no key"
+  if (keys === null) {
+    return (
+      <div
+        className={styles.noKeys}
+        data-testid="keys_list_loading"
+        aria-busy="true"
+      >
+        <Loader type={LoaderTypes.track} size="24px" />
+      </div>
+    );
+  }
 
   if (!key) {
     return (
@@ -240,9 +353,35 @@ export const KeysList: React.FC<KeysListProps> = ({
 
   return (
     <div className={styles.keysList}>
-      <Text fontSize="14px" fontWeight={600} className={styles.keysListTitle}>
-        {t("Common:EncryptionKeys")}
-      </Text>
+      <div className={styles.keysListHeading}>
+        <Text fontSize="14px" fontWeight={600}>
+          {t("Common:EncryptionKeys")}
+        </Text>
+        {/* Spec: private-rooms/key-management, "Keys management shows whether the key is locked" */}
+        {keyState ? (
+          <span data-testid="key_lock_state">
+            <Badge
+              label={
+                keyState === "locked"
+                  ? t("Common:KeyLocked")
+                  : t("Common:KeyUnlocked")
+              }
+              backgroundColor={KEY_STATUS_BADGE_COLORS[keyState].background}
+              color={KEY_STATUS_BADGE_COLORS[keyState].text}
+              maxWidth="none"
+            />
+          </span>
+        ) : null}
+      </div>
+      {keyState === "locked" ? (
+        <Text
+          as="p"
+          className={styles.keyStateNote}
+          dataTestId="key_locked_note"
+        >
+          {t("Common:PrivateRoomLockedBarText")}
+        </Text>
+      ) : null}
       <div className={styles.keysListItems}>
         <KeyItem
           keyData={key}

@@ -127,6 +127,25 @@ describe("KeyRotationDialog", () => {
     expect(current).toHaveValue("old horse battery");
   });
 
+  it("Passphrase change dialog", async () => {
+    const user = userEvent.setup();
+    renderDialog();
+
+    await user.type(
+      screen.getByPlaceholderText("Common:EnterCurrentPassphrase"),
+      "old horse battery",
+    );
+    await user.keyboard("{Escape}");
+
+    const confirmation = queryConfirmation();
+    expect(confirmation).toHaveTextContent("Common:UnsavedChanges");
+    expect(
+      within(confirmation as HTMLElement).getByRole("button", {
+        name: "Common:CloseMenu",
+      }),
+    ).toBeInTheDocument();
+  });
+
   it("Passphrase change on Enter", async () => {
     const user = userEvent.setup();
     const { onSubmit } = renderDialog();

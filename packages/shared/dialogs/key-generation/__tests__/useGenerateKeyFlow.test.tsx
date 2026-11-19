@@ -33,33 +33,46 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { act, render } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
+import enCommon from "PUBLIC_DIR/locales/en/Common.json";
+import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 
 const captured = {
-  passphrase: null as Record<string, unknown> | null,
-  recovery: null as Record<string, unknown> | null,
+  setup: null as Record<string, unknown> | null,
 };
 
-vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
-  PassphraseModal: (props: Record<string, unknown>) => {
-    captured.passphrase = props;
+// The props of the key setup dialog while it shows the given step.
+const stepProps = (step: string) =>
+  captured.setup?.step === step ? captured.setup : null;
+
+vi.mock("../KeySetupDialog", () => ({
+  KeySetupDialog: (props: Record<string, unknown>) => {
+    captured.setup = props;
     useEffect(() => () => {
-      captured.passphrase = null;
+      captured.setup = null;
     }, []);
     return null;
   },
 }));
-vi.mock("../RecoveryPhraseDisplayModal", () => ({
-  RecoveryPhraseDisplayModal: (props: Record<string, unknown>) => {
-    captured.recovery = props;
-    useEffect(() => () => {
-      captured.recovery = null;
-    }, []);
-    return null;
-  },
-}));
+
+// The shared mock echoes the key alone; the step counter is read from the
+// interpolation values, so they are printed after it.
+vi.mock("react-i18next", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-i18next")>();
+  const t = (key: string, options?: Record<string, unknown>) =>
+    options ? `${key} ${JSON.stringify(options)}` : key;
+  return { ...actual, useTranslation: () => ({ t, ready: true }) };
+});
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
@@ -97,6 +110,30 @@ import {
 } from "../useGenerateKeyFlow";
 
 let latest: GenerateKeyFlow;
+
+/** Requests key setup and continues from its explanation to the passphrase. */
+const openPassphraseStep = async () => {
+  await act(async () => latest.request());
+  if (captured.setup) {
+    await act(async () => {
+      (captured.setup!.onContinue as () => void)();
+    });
+  }
+};
+
+const submitPassphrase = async (passphrase: string) => {
+  await act(async () => {
+    await (
+      stepProps("passphrase")!.onPassphraseSubmit as (p: string) => Promise<void>
+    )(passphrase);
+  });
+};
+
+const confirmRecovery = async () => {
+  await act(async () => {
+    await (stepProps("recovery")!.onRecoveryConfirm as () => Promise<void>)();
+  });
+};
 const Harness = (deps: Parameters<typeof useGenerateKeyFlow>[0]) => {
   latest = useGenerateKeyFlow(deps);
   return <>{latest.modals}</>;
@@ -123,8 +160,7 @@ const happyMocks = () => {
 describe("useGenerateKeyFlow", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    captured.passphrase = null;
-    captured.recovery = null;
+    captured.setup = null;
   });
 
   afterEach(() => {
@@ -132,18 +168,18 @@ describe("useGenerateKeyFlow", () => {
   });
 
   describe("entry branch", () => {
-    it("opens the passphrase modal for a user without a key", async () => {
+    it("opens key setup for a user without a key", async () => {
       render(<Harness userId="42" refreshKeysFromServer={vi.fn()} />);
-      await act(async () => latest.request());
-      expect(captured.passphrase).not.toBeNull();
+      await openPassphraseStep();
+      expect(captured.setup).not.toBeNull();
     });
 
-    it("Key already exists: no passphrase modal opens", async () => {
+    it("Key already exists: no key setup opens", async () => {
       render(
         <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
       );
-      await act(async () => latest.request());
-      expect(captured.passphrase).toBeNull();
+      await openPassphraseStep();
+      expect(captured.setup).toBeNull();
     });
   });
 
@@ -159,15 +195,15 @@ describe("useGenerateKeyFlow", () => {
           onError={onError}
         />,
       );
-      await act(async () => latest.request());
+      await openPassphraseStep();
 
       await act(async () => {
-        (captured.passphrase!.onCancel as () => void)();
+        (stepProps("passphrase")!.onCancel as () => void)();
       });
 
       expect(onCancel).toHaveBeenCalledTimes(1);
       expect(onError).not.toHaveBeenCalled();
-      expect(captured.passphrase).toBeNull();
+      expect(captured.setup).toBeNull();
       expect(setEncryptionKeys).not.toHaveBeenCalled();
     });
 
@@ -181,19 +217,15 @@ describe("useGenerateKeyFlow", () => {
           onCancel={onCancel}
         />,
       );
-      await act(async () => latest.request());
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
+      await openPassphraseStep();
+      await submitPassphrase("secret");
 
       await act(async () => {
-        (captured.recovery!.onCancel as () => void)();
+        (stepProps("recovery")!.onCancel as () => void)();
       });
 
       expect(onCancel).toHaveBeenCalledTimes(1);
-      expect(captured.recovery).toBeNull();
+      expect(captured.setup).toBeNull();
       expect(setEncryptionKeys).not.toHaveBeenCalled();
     });
   });
@@ -203,35 +235,27 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId={undefined} refreshKeysFromServer={vi.fn()} />,
       );
-      await act(async () => latest.request());
+      await openPassphraseStep();
 
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
+      await submitPassphrase("secret");
 
       expect(toastr.error).toHaveBeenCalledTimes(1);
       expect(generateIdentityKeyPair).not.toHaveBeenCalled();
       expect(generateRecoveryMnemonic).not.toHaveBeenCalled();
     });
 
-    it("advances to recovery-display on successful keypair generation", async () => {
+    it("advances to the recovery phrase step on successful keypair generation", async () => {
       happyMocks();
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      await act(async () => latest.request());
+      await openPassphraseStep();
 
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
+      await submitPassphrase("secret");
 
       expect(generateIdentityKeyPair).toHaveBeenCalledTimes(1);
       expect(generateRecoveryMnemonic).toHaveBeenCalledTimes(1);
-      expect(captured.recovery?.mnemonic).toBe("twelve word phrase");
+      expect(stepProps("recovery")?.mnemonic).toBe("twelve word phrase");
     });
 
     it("toasts an error and resets state when keypair generation throws", async () => {
@@ -241,16 +265,12 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      await act(async () => latest.request());
+      await openPassphraseStep();
 
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
+      await submitPassphrase("secret");
 
       expect(toastr.error).toHaveBeenCalledTimes(1);
-      expect(captured.recovery).toBeNull();
+      expect(stepProps("recovery")).toBeNull();
     });
   });
 
@@ -261,15 +281,9 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={refresh} />,
       );
-      await act(async () => latest.request());
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.recovery!.onConfirm as () => Promise<void>)();
-      });
+      await openPassphraseStep();
+      await submitPassphrase("secret");
+      await confirmRecovery();
 
       expect(setEncryptionKeys).toHaveBeenCalledTimes(1);
       expect(setEncryptionKeys).toHaveBeenCalledWith(
@@ -288,15 +302,9 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      await act(async () => latest.request());
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.recovery!.onConfirm as () => Promise<void>)();
-      });
+      await openPassphraseStep();
+      await submitPassphrase("secret");
+      await confirmRecovery();
 
       expect(serializeIdentity).toHaveBeenCalledWith(
         dummyKeyPair,
@@ -321,15 +329,9 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={refresh} />,
       );
-      await act(async () => latest.request());
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.recovery!.onConfirm as () => Promise<void>)();
-      });
+      await openPassphraseStep();
+      await submitPassphrase("secret");
+      await confirmRecovery();
 
       expect(callOrder).toEqual(["api", "apply", "refresh"]);
     });
@@ -343,15 +345,9 @@ describe("useGenerateKeyFlow", () => {
           refreshKeysFromServer={vi.fn()}
         />,
       );
-      await act(async () => latest.request());
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.recovery!.onConfirm as () => Promise<void>)();
-      });
+      await openPassphraseStep();
+      await submitPassphrase("secret");
+      await confirmRecovery();
 
       expect(applyNewIdentity).toHaveBeenCalledWith(
         expect.objectContaining({ userId: "42" }),
@@ -365,18 +361,327 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      await act(async () => latest.request());
-      await act(async () => {
-        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
-          "secret",
-        );
-      });
-      await act(async () => {
-        await (captured.recovery!.onConfirm as () => Promise<void>)();
-      });
+      await openPassphraseStep();
+      await submitPassphrase("secret");
+      await confirmRecovery();
 
       expect(toastr.error).toHaveBeenCalledTimes(1);
-      expect(captured.recovery).toBeNull();
+      expect(stepProps("recovery")).toBeNull();
+    });
+  });
+});
+
+describe("Key setup is one dialog of three steps", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    captured.setup = null;
+  });
+
+  it("Steps in order", async () => {
+    happyMocks();
+    render(<Harness userId="42" refreshKeysFromServer={vi.fn()} />);
+
+    await act(async () => latest.request());
+    expect(captured.setup?.step).toBe("explanation");
+
+    await act(async () => {
+      (captured.setup!.onContinue as () => void)();
+    });
+    expect(captured.setup?.step).toBe("passphrase");
+
+    await submitPassphrase("secret");
+    expect(captured.setup?.step).toBe("recovery");
+  });
+
+  it("Nothing registered before the last step", async () => {
+    happyMocks();
+    render(<Harness userId="42" refreshKeysFromServer={vi.fn()} />);
+
+    await act(async () => latest.request());
+    await act(async () => {
+      (stepProps("explanation")!.onCancel as () => void)();
+    });
+    await openPassphraseStep();
+    await act(async () => {
+      (stepProps("passphrase")!.onCancel as () => void)();
+    });
+
+    expect(generateIdentityKeyPair).not.toHaveBeenCalled();
+    expect(setEncryptionKeys).not.toHaveBeenCalled();
+  });
+});
+
+describe("Key setup steps can be walked back", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    captured.setup = null;
+  });
+
+  it("Passphrase changed after going back", async () => {
+    happyMocks();
+    render(<Harness userId="42" refreshKeysFromServer={vi.fn()} />);
+    await openPassphraseStep();
+    await submitPassphrase("first");
+    const words = stepProps("recovery")!.mnemonic;
+
+    await act(async () => {
+      (stepProps("recovery")!.onBack as () => void)();
+    });
+    expect(captured.setup?.step).toBe("passphrase");
+    await submitPassphrase("second");
+
+    expect(stepProps("recovery")!.mnemonic).toBe(words);
+    expect(generateIdentityKeyPair).toHaveBeenCalledTimes(1);
+    expect(generateRecoveryMnemonic).toHaveBeenCalledTimes(1);
+
+    await confirmRecovery();
+    expect(serializeIdentity).toHaveBeenCalledWith(dummyKeyPair, "second", {
+      recoveryMnemonic: "twelve word phrase",
+    });
+  });
+});
+
+// The dialog itself, for what it shows: the step counter, the typed
+// passphrase kept across steps and the acknowledgement cleared on return.
+describe("Key setup dialog", () => {
+  const WORDS = Array.from({ length: 24 }, (_, i) => `word${i + 1}`).join(" ");
+  const PASSPHRASE = "Correct1horse!battery";
+
+  beforeAll(() => {
+    // The rules tooltip mounts floating-ui, which jsdom does not provide.
+    globalThis.ResizeObserver = class {
+      observe() {}
+
+      unobserve() {}
+
+      disconnect() {}
+    };
+  });
+
+  const renderDialog = async () => {
+    const { KeySetupDialog } = await vi.importActual<
+      typeof import("../KeySetupDialog")
+    >("../KeySetupDialog");
+    const props = {
+      mnemonic: WORDS,
+      isLoading: false,
+      onContinue: vi.fn(),
+      onPassphraseSubmit: vi.fn(),
+      onRecoveryConfirm: vi.fn(),
+      onBack: vi.fn(),
+      onCancel: vi.fn(),
+    };
+    const view = render(<KeySetupDialog step="explanation" {...props} />);
+    const show = (step: "explanation" | "passphrase" | "recovery") =>
+      view.rerender(<KeySetupDialog step={step} {...props} />);
+    return { show, props };
+  };
+
+  it("Three terms explained", async () => {
+    await renderDialog();
+    const explanation = screen.getByTestId("key_setup_explanation");
+
+    for (const key of [
+      "Common:KeySetupKeyTitle",
+      "Common:KeySetupKeyDescription",
+      "Common:KeySetupPassphraseTitle",
+      "Common:KeySetupPassphraseDescription",
+      "Common:KeySetupRecoveryTitle",
+      "Common:KeySetupRecoveryDescription",
+      "Common:KeySetupNotStored",
+    ]) {
+      expect(explanation).toHaveTextContent(key);
+    }
+    expect(screen.getAllByRole("term")).toHaveLength(3);
+    expect(screen.getAllByRole("definition")).toHaveLength(3);
+  });
+
+  it("Three icons", async () => {
+    await renderDialog();
+
+    expect(screen.getAllByTestId("key_setup_term_icon")).toHaveLength(3);
+  });
+
+  it("Read aloud", async () => {
+    await renderDialog();
+
+    for (const icon of screen.getAllByTestId("key_setup_term_icon")) {
+      expect(icon.closest("[aria-hidden=\"true\"]")).not.toBeNull();
+    }
+    expect(
+      screen.getAllByRole("term").map((term) => term.textContent),
+    ).toEqual([
+      "Common:KeySetupKeyTitle",
+      "Common:KeySetupPassphraseTitle",
+      "Common:KeySetupRecoveryTitle",
+    ]);
+  });
+
+  it("Key of the account", () => {
+    for (const key of ["KeySetupKeyTitle", "KeySetupKeyDescription"] as const) {
+      expect(enCommon[key]).not.toMatch(/browser|device/i);
+    }
+  });
+
+  // A closed ModalDialog stays mounted, hidden from assistive technology, so
+  // the confirmation is looked up among the dialogs that are actually open.
+  const openConfirmation = () =>
+    screen
+      .queryAllByRole("dialog")
+      .find((dialog) => dialog.textContent?.includes("Common:KeySetupDiscardTitle")) ??
+    null;
+
+  it("Closed on the recovery phrase step", async () => {
+    const user = userEvent.setup();
+    const { show, props } = await renderDialog();
+    show("recovery");
+
+    await user.keyboard("{Escape}");
+
+    const confirmation = openConfirmation();
+    expect(confirmation).toHaveTextContent("Common:KeySetupDiscardRecovery");
+    expect(
+      within(confirmation as HTMLElement).getByRole("button", {
+        name: "Common:KeySetupDiscardConfirm",
+      }),
+    ).toBeInTheDocument();
+    expect(confirmation).not.toHaveTextContent("Common:UnsavedChanges");
+    expect(props.onCancel).not.toHaveBeenCalled();
+  });
+
+  it("Closed on the passphrase step with typed input", async () => {
+    const user = userEvent.setup();
+    const { show } = await renderDialog();
+    show("passphrase");
+    await user.type(
+      screen.getByPlaceholderText("Common:Passphrase"),
+      "typed input",
+    );
+
+    await user.keyboard("{Escape}");
+
+    const confirmation = openConfirmation();
+    expect(confirmation).not.toBeNull();
+    expect(
+      within(confirmation as HTMLElement).getByRole("button", {
+        name: "Common:KeySetupDiscardConfirm",
+      }),
+    ).toBeInTheDocument();
+    expect(confirmation).not.toHaveTextContent("Common:CloseMenu");
+  });
+
+  it("Closed on the explanation", async () => {
+    const user = userEvent.setup();
+    const { props } = await renderDialog();
+
+    await user.keyboard("{Escape}");
+
+    expect(props.onCancel).toHaveBeenCalledTimes(1);
+    expect(openConfirmation()).toBeNull();
+  });
+
+  it("Step shown", async () => {
+    const { show } = await renderDialog();
+    const counter = () => screen.getByTestId("key_setup_step");
+
+    expect(counter()).toHaveTextContent('"step":1,"total":3');
+    show("passphrase");
+    expect(counter()).toHaveTextContent('"step":2,"total":3');
+    show("recovery");
+    expect(counter()).toHaveTextContent('"step":3,"total":3');
+  });
+
+  it("keeps the hint of the passphrase form on the passphrase step", async () => {
+    const { show } = await renderDialog();
+    show("passphrase");
+
+    expect(screen.getByText("Common:CreatePassphraseHint")).toBeVisible();
+  });
+
+  it("Back from the recovery phrase", async () => {
+    const user = userEvent.setup();
+    const { show } = await renderDialog();
+    show("passphrase");
+    await user.type(screen.getByPlaceholderText("Common:Passphrase"), PASSPHRASE);
+    await user.type(
+      screen.getByPlaceholderText("Common:ConfirmPassphrase"),
+      PASSPHRASE,
+    );
+
+    show("recovery");
+    show("passphrase");
+
+    expect(screen.getByPlaceholderText("Common:Passphrase")).toHaveValue(
+      PASSPHRASE,
+    );
+    expect(screen.getByPlaceholderText("Common:ConfirmPassphrase")).toHaveValue(
+      PASSPHRASE,
+    );
+  });
+
+  it("Acknowledgement cleared", async () => {
+    const user = userEvent.setup();
+    const { show } = await renderDialog();
+    show("recovery");
+    const continueButton = () =>
+      screen.getByRole("button", { name: "Common:ContinueButton" });
+    const words = () => screen.getByTestId("recovery_phrase_words").textContent;
+    const shown = words();
+
+    await user.click(screen.getByLabelText("Common:RecoveryPhraseAcknowledge"));
+    expect(continueButton()).toBeEnabled();
+
+    show("passphrase");
+    show("recovery");
+
+    expect(words()).toBe(shown);
+    expect(
+      screen.getByLabelText("Common:RecoveryPhraseAcknowledge"),
+    ).not.toBeChecked();
+    expect(continueButton()).toBeDisabled();
+  });
+
+  describe("Key setup is not closed while the key is registered", () => {
+    const renderRecovery = async () => {
+      const { KeySetupDialog } = await vi.importActual<
+        typeof import("../KeySetupDialog")
+      >("../KeySetupDialog");
+      const props = {
+        mnemonic: WORDS,
+        onContinue: vi.fn(),
+        onPassphraseSubmit: vi.fn(),
+        onRecoveryConfirm: vi.fn(),
+        onBack: vi.fn(),
+        onCancel: vi.fn(),
+      };
+      const view = render(
+        <KeySetupDialog step="recovery" isLoading={false} {...props} />,
+      );
+      const registering = (isLoading: boolean) =>
+        view.rerender(
+          <KeySetupDialog step="recovery" isLoading={isLoading} {...props} />,
+        );
+      return { props, registering };
+    };
+
+    it("Escape during registration", async () => {
+      const user = userEvent.setup();
+      const { props, registering } = await renderRecovery();
+      await user.click(
+        screen.getByLabelText("Common:RecoveryPhraseAcknowledge"),
+      );
+      registering(true);
+
+      await user.keyboard("{Escape}");
+
+      expect(props.onCancel).not.toHaveBeenCalled();
+      expect(openConfirmation()).toBeNull();
+      expect(screen.getByRole("button", { name: "Common:Back" })).toBeDisabled();
+
+      // Once the registration has ended, Escape closes the dialog again.
+      registering(false);
+      await user.keyboard("{Escape}");
+      expect(props.onCancel).toHaveBeenCalledTimes(1);
     });
   });
 });

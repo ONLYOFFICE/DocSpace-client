@@ -3,3 +3,6 @@ config.local.json
 
 # Downloaded bug attachments (default target is the home cache, but guard anyway).
 attachments/
+
+# Backlog audit runs (audit.mjs): Bugzilla data, decisions, apply logs, reports.
+runs/

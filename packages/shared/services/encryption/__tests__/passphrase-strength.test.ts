@@ -37,9 +37,11 @@ import { describe, it, expect } from "vitest";
 
 import {
   PASSPHRASE_MIN_LENGTH,
+  PASSPHRASE_SETTINGS,
   checkPassphraseStrength,
   containsCommonPattern,
-  isPassphraseAcceptable,
+  getShownPassphraseStrength,
+  meetsPassphraseRules,
 } from "../passphrase-strength";
 
 describe("PASSPHRASE_MIN_LENGTH", () => {
@@ -78,22 +80,16 @@ describe("containsCommonPattern", () => {
   });
 });
 
-const suggestionKinds = (
-  result: ReturnType<typeof checkPassphraseStrength>,
-): string[] => result.suggestions.map((s) => s.kind);
-
 describe("checkPassphraseStrength — length-based scoring", () => {
-  it("scores empty input as weak with length suggestion", () => {
+  it("scores empty input as weak", () => {
     const r = checkPassphraseStrength("");
     expect(r.strength).toBe("weak");
-    expect(suggestionKinds(r)).toContain("min-length");
-    expect(r.suggestions).toContainEqual({ kind: "min-length", value: 12 });
+    expect(r.score).toBe(0);
   });
 
   it("treats too-short input as weak", () => {
     const r = checkPassphraseStrength("Aa1!");
     expect(r.strength).toBe("weak");
-    expect(r.suggestions).toContainEqual({ kind: "min-length", value: 12 });
   });
 
   it("rewards length above minimum", () => {
@@ -104,29 +100,24 @@ describe("checkPassphraseStrength — length-based scoring", () => {
 
   it("uses provided minLength when supplied", () => {
     const r = checkPassphraseStrength("short", 4);
-    expect(suggestionKinds(r)).not.toContain("min-length");
+    expect(r.strength).toBe("fair");
+    expect(r.score).toBe(40);
   });
 });
 
 describe("checkPassphraseStrength — character class additivity", () => {
-  it("flags missing lowercase", () => {
-    const r = checkPassphraseStrength("ABCDEFGH1234!@");
-    expect(suggestionKinds(r)).toContain("lowercase");
-  });
+  const ALL_CLASSES = "AbCdEfGh12!@";
 
-  it("flags missing uppercase", () => {
-    const r = checkPassphraseStrength("abcdefgh1234!@");
-    expect(suggestionKinds(r)).toContain("uppercase");
-  });
-
-  it("flags missing digits", () => {
-    const r = checkPassphraseStrength("AbCdEfGhIjKl!@");
-    expect(suggestionKinds(r)).toContain("digits");
-  });
-
-  it("flags missing special chars", () => {
-    const r = checkPassphraseStrength("AbCdEfGh1234XY");
-    expect(suggestionKinds(r)).toContain("special");
+  it.each([
+    ["lowercase", "ABCDEFGH12!@", 15],
+    ["uppercase", "abcdefgh12!@", 15],
+    ["digits", "AbCdEfGhIj!@", 15],
+    ["punctuation", "AbCdEfGh12XY", 10],
+  ])("scores less without %s", (_, passphrase, points) => {
+    expect(passphrase).toHaveLength(ALL_CLASSES.length);
+    expect(checkPassphraseStrength(passphrase).score).toBe(
+      checkPassphraseStrength(ALL_CLASSES).score - points,
+    );
   });
 
   it("returns strong for a high-entropy mixed passphrase", () => {
@@ -141,7 +132,7 @@ describe("checkPassphraseStrength — common-pattern downgrade", () => {
     const r = checkPassphraseStrength("Password1234!");
     expect(r.containsCommonPattern).toBe(true);
     expect(r.strength).toBe("weak");
-    expect(suggestionKinds(r)).toContain("common-pattern");
+    expect(r.score).toBeLessThanOrEqual(25);
   });
 
   it("downgrades qwerty variants", () => {
@@ -163,23 +154,128 @@ describe("checkPassphraseStrength — common-pattern downgrade", () => {
   });
 });
 
-describe("isPassphraseAcceptable", () => {
-  it("rejects too-short input", () => {
-    expect(isPassphraseAcceptable("Ab1!")).toBe(false);
+const CYRILLIC_LOWERCASE = "абвгдеёжзийклмнопрсту";
+const CJK = "春眠不觉晓处处闻啼鸟夜来风雨声花落知多少";
+const LATIN_LOWERCASE = "bcdefghijkmnoqrstuvwx";
+
+describe("The strength grade counts letters of every script", () => {
+  it.each([
+    [12, "fair"],
+    [16, "fair"],
+    [20, "good"],
+  ])("Cyrillic lowercase: Cyrillic, %i characters", (length, grade) => {
+    const passphrase = CYRILLIC_LOWERCASE.slice(0, length);
+    expect(passphrase).toHaveLength(length);
+    expect(containsCommonPattern(passphrase)).toBe(false);
+
+    expect(checkPassphraseStrength(passphrase).strength).toBe(grade);
+    expect(checkPassphraseStrength(passphrase).strength).toBe(
+      checkPassphraseStrength(LATIN_LOWERCASE.slice(0, length)).strength,
+    );
   });
 
-  it("rejects common-pattern input even at min length", () => {
-    expect(isPassphraseAcceptable("Password1234!")).toBe(false);
-    expect(isPassphraseAcceptable("Qwerty12345!")).toBe(false);
+  it.each([
+    [12, "fair"],
+    [16, "fair"],
+    [20, "good"],
+  ])("Caseless script: CJK, %i characters", (length, grade) => {
+    const passphrase = CJK.slice(0, length);
+    expect(passphrase).toHaveLength(length);
+
+    expect(checkPassphraseStrength(passphrase).strength).toBe(grade);
+    expect(checkPassphraseStrength(passphrase).strength).toBe(
+      checkPassphraseStrength(LATIN_LOWERCASE.slice(0, length)).strength,
+    );
   });
 
-  it("accepts a non-weak passphrase", () => {
-    expect(isPassphraseAcceptable("Tx7$kp!aL2nQz@vR")).toBe(true);
+  it("Cyrillic mixed case", () => {
+    const passphrase = "ПриветМирДобрыйДень7";
+    const latin = "PrivetMirDobryiDenx7";
+    expect(passphrase).toHaveLength(20);
+    expect(containsCommonPattern(passphrase)).toBe(false);
+
+    expect(checkPassphraseStrength(passphrase).strength).toBe("strong");
+    expect(checkPassphraseStrength(passphrase).strength).toBe(
+      checkPassphraseStrength(latin).strength,
+    );
   });
 
-  it("accepts a 'fair' passphrase (no submit gate on fair)", () => {
-    const r = checkPassphraseStrength("abcdefghijkl");
-    expect(["fair", "good"]).toContain(r.strength);
-    expect(isPassphraseAcceptable("abcdefghijkl")).toBe(true);
+  it("Punctuation of another script", () => {
+    const letters = "bcdefghijkmnoqr";
+    expect(letters).toHaveLength(15);
+
+    expect(checkPassphraseStrength(`${letters}»`).strength).toBe("good");
+    expect(checkPassphraseStrength(`${letters}»`).strength).toBe(
+      checkPassphraseStrength(`${letters}!`).strength,
+    );
+  });
+});
+
+describe("A new passphrase needs no particular characters", () => {
+  it("Lowercase words", () => {
+    const passphrase = "lorem ipsum dolor sitx";
+    expect(passphrase).toHaveLength(22);
+
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+  });
+
+  it("Common pattern still refused", () => {
+    const passphrase = "my password is long";
+
+    expect(meetsPassphraseRules(passphrase)).toBe(false);
+  });
+
+  it("asks for no capital letter, digit or punctuation", () => {
+    expect(PASSPHRASE_SETTINGS).toMatchObject({
+      minLength: 12,
+      upperCase: false,
+      digits: false,
+      specSymbols: false,
+    });
+  });
+});
+
+describe("The strength grade does not contradict the passphrase rules", () => {
+  it("Long passphrase without a required character", () => {
+    const passphrase = "lorem ipsum dolor sitx";
+
+    expect(getShownPassphraseStrength(passphrase)).toBe(
+      checkPassphraseStrength(passphrase).strength,
+    );
+    expect(getShownPassphraseStrength(passphrase)).not.toBe("weak");
+  });
+
+  it("Passphrase too short", () => {
+    const passphrase = "Tx7$kp!aL2n";
+    expect(passphrase).toHaveLength(11);
+
+    expect(getShownPassphraseStrength(passphrase)).toBe("weak");
+  });
+
+  it("All rules met", () => {
+    const passphrase = "Tx7$kp!aL2nQz@vR";
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+    expect(getShownPassphraseStrength(passphrase)).toBe(
+      checkPassphraseStrength(passphrase).strength,
+    );
+  });
+
+  it.each([
+    ["too short", "Tx7$kp!aL2n"],
+    ["a common pattern", "Qwerty123456!"],
+  ])("grades a passphrase with %s as weak", (_, passphrase) => {
+    expect(getShownPassphraseStrength(passphrase)).toBe("weak");
+  });
+
+  it.each([
+    ["punctuation", "!@#$%^&*()_+"],
+    ["Cyrillic", CYRILLIC_LOWERCASE.slice(0, 12)],
+  ])("Accepted passphrase is not weak: %s, 12 characters", (_, passphrase) => {
+    expect(passphrase).toHaveLength(12);
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+
+    expect(["fair", "good", "strong"]).toContain(
+      getShownPassphraseStrength(passphrase),
+    );
   });
 });

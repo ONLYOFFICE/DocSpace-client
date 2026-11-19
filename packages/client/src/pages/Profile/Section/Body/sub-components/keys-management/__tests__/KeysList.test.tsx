@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -32,10 +32,14 @@ vi.mock("@onlyoffice/apps-ui-kit/components/badge", () => ({
 }));
 
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
-  getPublicKeyFingerprint: vi.fn(async () => "FINGERPRINT"),
+  getPublicKeyFingerprint: vi.fn(async () => "0123456789ABCDEF".repeat(4)),
 }));
 
 import { KeysList } from "../KeysList";
+
+// The mocked fingerprint: 64 hexadecimal characters, as a SHA-256 is.
+const FINGERPRINT = "0123456789ABCDEF".repeat(4);
+const GROUPED = FINGERPRINT.match(/.{8}/g)!.join(" ");
 import { KEY_STATUS_BADGE_COLORS } from "../keyStatusBadgeColors";
 
 const keyOld = {
@@ -53,7 +57,7 @@ const keyNew = {
 
 type ListProps = React.ComponentProps<typeof KeysList>;
 
-const renderList = (keys: never[], props: Partial<ListProps> = {}) => {
+const renderList = (keys: never[] | null, props: Partial<ListProps> = {}) => {
   const onDelete = vi.fn();
   const onExport = vi.fn();
   const onRotate = vi.fn();
@@ -119,6 +123,27 @@ describe("Key status badges are readable", () => {
   });
 });
 
+describe("An unknown key list is not shown as no key", () => {
+  it("List loading", () => {
+    renderList(null);
+
+    expect(screen.getByTestId("keys_list_loading")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    expect(screen.queryByText("Common:NoKey")).not.toBeInTheDocument();
+    expect(screen.queryByText("Common:NoEncryptionKey")).not.toBeInTheDocument();
+  });
+
+  it("List empty", () => {
+    renderList([]);
+
+    expect(screen.getByText("Common:NoKey")).toBeInTheDocument();
+    expect(screen.getByText("Common:NoEncryptionKey")).toBeInTheDocument();
+    expect(screen.queryByTestId("keys_list_loading")).not.toBeInTheDocument();
+  });
+});
+
 describe("KeysList", () => {
   it("shows the no-key state when the user has no key", () => {
     renderList([]);
@@ -153,10 +178,19 @@ describe("KeysList", () => {
     // title reaches the DOM only under NODE_ENV=test, so the name is read from
     // aria-label itself.
     expect(
-      within(screen.getByTestId("key_details"))
+      within(screen.getByTestId("key_actions"))
         .getAllByRole("button")
         .map((button) => button.getAttribute("aria-label")),
     ).toEqual(["Common:ChangePassphrase", "Common:ExportKey", "Common:Delete"]);
+    // The Details disclosure is a button of the card, not one of its actions.
+    expect(
+      within(screen.getByTestId("key_details")).getAllByRole("button"),
+    ).toHaveLength(4);
+    expect(
+      within(screen.getByTestId("key_actions")).queryByRole("button", {
+        name: "Common:Details",
+      }),
+    ).toBeNull();
   });
 
   it("Action disabled during a deletion", async () => {
@@ -181,5 +215,101 @@ describe("KeysList", () => {
     expect(onDelete).toHaveBeenCalledWith(keyNew);
     expect(onExport).toHaveBeenCalledTimes(1);
     expect(onRotate).not.toHaveBeenCalled();
+  });
+});
+
+describe("The fingerprint says what it is for", () => {
+  it("Hint shown", async () => {
+    renderList([keyNew]);
+
+    const fingerprint = await screen.findByTestId("key_fingerprint");
+    expect(fingerprint).toHaveTextContent(GROUPED);
+    expect(screen.getByText("Common:KeyFingerprintHint")).toBeVisible();
+    expect(fingerprint).toHaveAccessibleDescription("Common:KeyFingerprintHint");
+  });
+});
+
+describe("Technical key details are folded", () => {
+  const toggle = () =>
+    screen.getByRole("button", { name: "Common:Details" });
+
+  it("Page opens", async () => {
+    renderList([keyNew]);
+
+    expect(await screen.findByTestId("key_fingerprint")).toHaveTextContent(
+      GROUPED,
+    );
+    expect(screen.getByTestId("key_fingerprint")).toBeVisible();
+    expect(screen.getByText("Common:KeyCreatedOn")).toBeVisible();
+    expect(screen.getByTestId("badge")).toBeVisible();
+    expect(screen.getByText("new")).not.toBeVisible();
+    expect(screen.getByText("X25519")).not.toBeVisible();
+    expect(toggle()).toHaveAttribute("aria-expanded", "false");
+    expect(toggle()).toHaveAttribute(
+      "aria-controls",
+      screen.getByTestId("key_details_more").id,
+    );
+  });
+
+  it("Details opened", async () => {
+    const user = userEvent.setup();
+    renderList([keyNew]);
+
+    await user.click(toggle());
+    expect(toggle()).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText("new")).toBeVisible();
+    expect(screen.getByText("X25519")).toBeVisible();
+
+    toggle().focus();
+    await user.keyboard("{Enter}");
+    expect(toggle()).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getByText("X25519")).not.toBeVisible();
+
+    await user.keyboard(" ");
+    expect(toggle()).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText("X25519")).toBeVisible();
+  });
+});
+
+describe("Key fingerprint is shown in groups", () => {
+  it("Grouped fingerprint", async () => {
+    renderList([keyNew]);
+
+    const fingerprint = await screen.findByTestId("key_fingerprint");
+    await waitFor(() => expect(fingerprint).toHaveTextContent(GROUPED));
+    const groups = within(fingerprint)
+      .getAllByTestId("key_fingerprint_group")
+      .map((group) => group.textContent);
+    expect(groups).toHaveLength(8);
+    expect(groups.join("")).toBe(FINGERPRINT);
+    for (const group of groups) expect(group).toHaveLength(8);
+  });
+});
+
+describe("Keys management shows whether the key is locked", () => {
+  it("Locked key: the heading names the state and says what unlocking gives", () => {
+    renderList([keyNew], { keyState: "locked" });
+
+    expect(screen.getByTestId("key_lock_state")).toHaveTextContent(
+      "Common:KeyLocked",
+    );
+    expect(screen.getByTestId("key_locked_note")).toHaveTextContent(
+      "Common:PrivateRoomLockedBarText",
+    );
+  });
+
+  it("Unlocked key: the state is named and nothing is asked", () => {
+    renderList([keyNew], { keyState: "unlocked" });
+
+    expect(screen.getByTestId("key_lock_state")).toHaveTextContent(
+      "Common:KeyUnlocked",
+    );
+    expect(screen.queryByTestId("key_locked_note")).toBeNull();
+  });
+
+  it("User without a key: no state beside the heading", () => {
+    renderList([], { keyState: undefined });
+
+    expect(screen.queryByTestId("key_lock_state")).toBeNull();
   });
 });

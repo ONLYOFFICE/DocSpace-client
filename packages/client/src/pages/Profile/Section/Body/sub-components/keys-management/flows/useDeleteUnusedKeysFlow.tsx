@@ -162,6 +162,7 @@ export function useDeleteUnusedKeysFlow({
         <PassphraseModal
           visible
           isNew={false}
+          submitLabel={t("Common:ContinueButton")}
           onSubmit={onPassphraseSubmit}
           onCancel={() => {
             setVerifying(false);

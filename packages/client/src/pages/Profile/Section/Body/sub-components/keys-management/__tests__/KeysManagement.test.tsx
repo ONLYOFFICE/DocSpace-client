@@ -51,7 +51,11 @@ vi.mock("@docspace/shared/api/privacy", () => ({
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: mocks.toastSuccess, error: vi.fn() },
 }));
-vi.mock("../KeysList", () => ({ KeysList: () => null }));
+vi.mock("../KeysList", () => ({
+  KeysList: ({ keyState }: { keyState?: string }) => (
+    <div data-testid="keys_list" data-key-state={keyState ?? "none"} />
+  ),
+}));
 vi.mock("@docspace/shared/dialogs/key-generation", () => ({
   useGenerateKeyFlow: () => mocks.generate,
 }));
@@ -229,6 +233,122 @@ describe("KeysManagement", () => {
     expect(
       screen.queryByRole("button", { name: "Common:LockNow" }),
     ).not.toBeInTheDocument();
+  });
+});
+
+describe("Keys management opens with an introduction", () => {
+  it("User with a key", () => {
+    renderPage([KEY]);
+
+    expect(screen.getByTestId("keys_management_intro")).toHaveTextContent(
+      "Common:KeysManagementIntro",
+    );
+  });
+
+  it("User without a key", () => {
+    renderPage([]);
+
+    expect(screen.getByTestId("keys_management_intro")).toHaveTextContent(
+      "Common:KeysManagementIntro",
+    );
+  });
+});
+
+describe("Keys management shows whether the key is locked", () => {
+  const keyState = () =>
+    screen.getByTestId("keys_list").getAttribute("data-key-state");
+
+  it("Locked key", () => {
+    mocks.encryption.isUnlocked = false;
+    renderPage([KEY]);
+
+    expect(keyState()).toBe("locked");
+  });
+
+  it("Key locks while the page is open", () => {
+    const userStore = {
+      encryptionKeys: [KEY],
+      setUserEncryptionKeys: vi.fn(),
+      user: { id: "user-1", email: "user@example.com" },
+    };
+    // The mocked context is not reactive: a changed prop stands in for the
+    // update the encryption provider sends when the key locks.
+    const page = (tick: number) => (
+      <Provider userStore={userStore}>
+        <KeysManagement {...({ tick } as object)} />
+      </Provider>
+    );
+    const view = render(page(0));
+    expect(keyState()).toBe("unlocked");
+
+    mocks.encryption.isUnlocked = false;
+    view.rerender(page(1));
+
+    expect(keyState()).toBe("locked");
+  });
+
+  it("User without a key", () => {
+    mocks.encryption.isUnlocked = false;
+    renderPage([]);
+
+    expect(keyState()).toBe("none");
+  });
+});
+
+describe("Keys management offers to unlock a locked key", () => {
+  const unlock = () => screen.queryByTestId("keys_unlock_button");
+
+  it("Unlock from the page", async () => {
+    const user = userEvent.setup();
+    mocks.encryption.isUnlocked = false;
+    mocks.encryption.requireIdentity.mockResolvedValue({ userId: "user-1" });
+    renderPage([KEY]);
+
+    await user.click(action("Common:UnlockKey"));
+
+    expect(mocks.encryption.requireIdentity).toHaveBeenCalledTimes(1);
+  });
+
+  it("Unlock cancelled", async () => {
+    const user = userEvent.setup();
+    mocks.encryption.isUnlocked = false;
+    mocks.encryption.requireIdentity.mockResolvedValue(null);
+    renderPage([KEY]);
+
+    await user.click(action("Common:UnlockKey"));
+
+    expect(unlock()).toBeInTheDocument();
+  });
+
+  it("Unlocked key", () => {
+    renderPage([KEY]);
+
+    expect(unlock()).toBeNull();
+  });
+
+  it("offers nothing to unlock to a user without a key", () => {
+    mocks.encryption.isUnlocked = false;
+    renderPage([]);
+
+    expect(unlock()).toBeNull();
+  });
+});
+
+describe("Recovery phrase has a block of its own in Keys management", () => {
+  it("User with a key", () => {
+    renderPage([KEY]);
+
+    const block = screen.getByTestId("recovery_section");
+    expect(block).toHaveTextContent("Common:RecoveryPhraseTitle");
+    expect(block).toHaveTextContent("Common:RecoveryPhraseSectionText");
+    expect(block).toContainElement(action("Common:UseRecoveryPhrase"));
+  });
+
+  it("shows no block where recovery is not offered", () => {
+    mocks.recover.available = false;
+    renderPage([KEY]);
+
+    expect(screen.queryByTestId("recovery_section")).toBeNull();
   });
 });
 

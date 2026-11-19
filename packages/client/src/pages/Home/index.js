@@ -100,6 +100,7 @@ import {
 } from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
 import { useHideQuickActions } from "./Hooks/useHideQuickActions";
+import { usePrivateRoomCreateRequest } from "./Hooks/usePrivateRoomCreateRequest";
 import { useSectionDrop } from "./Hooks/useSectionDrop";
 
 import styles from "./Home.module.scss";
@@ -288,6 +289,7 @@ const PureHome = observer((props) => {
   const isAiChatAvailable = useIsAiChatAvailable();
 
   usePanelExclusivity(infoPanelStore);
+  usePrivateRoomCreateRequest();
 
   // An open AI project draws its chat in the section body (AiProjectView),
   // so the side panel stays out of the way while a project room is shown.

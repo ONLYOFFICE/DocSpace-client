@@ -106,6 +106,7 @@ describe("useSDK frame methods that create in a private room", () => {
     createFile.mockClear();
     createFolder.mockClear();
     refreshFiles.mockClear();
+    vi.mocked(resolveFolderTarget).mockReset();
   });
 
   it.each([true, false])(
@@ -160,6 +161,16 @@ describe("useSDK frame methods that create in a private room", () => {
       await callMethod("createFolder", { parentFolderId: 50, title: "Drafts" }),
     ).toEqual({ id: 2, title: "Drafts" });
     expect(refreshFiles).toHaveBeenCalledTimes(2);
+  });
+
+  it("Folder outside private rooms: a section alias makes no path request", async () => {
+    renderSdk(false);
+
+    expect(await callMethod("createFile", { folderId: "@my", title: "Plan" })).toEqual(
+      { id: 1, title: "Plan.docx" },
+    );
+    expect(resolveFolderTarget).not.toHaveBeenCalled();
+    expect(createFile).toHaveBeenCalledWith("@my", "Plan", undefined, undefined);
   });
 
   it("a folder whose path cannot be read gets nothing created", async () => {

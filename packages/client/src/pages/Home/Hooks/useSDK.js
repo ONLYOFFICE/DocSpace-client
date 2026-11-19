@@ -61,6 +61,8 @@ export const toFolderInfo = (folder) =>
  */
 // Spec: private-rooms/file-operations, "Frame methods create nothing in a private room without the opt-in"
 const assertFrameCreate = async (folderId, isFolder, isOptedIn) => {
+  // An alias such as "@my" names a section that holds no private room.
+  if (!Number.isFinite(Number(folderId))) return;
   const target = await resolveFolderTarget({ id: folderId });
   if (target.isPrivate && !(isFolder && isOptedIn)) {
     throw new Error("Not available in a private room");

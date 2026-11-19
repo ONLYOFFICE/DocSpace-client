@@ -103,11 +103,28 @@ export function getAutoLockTimeoutSeconds(): number {
 
 const changeListeners = new Set<() => void>();
 
+const notifyChange = () => {
+  Array.from(changeListeners).forEach((listener) => listener());
+};
+
+// A preset picked in another page of the same browser arrives as a storage
+// event for the key of the current scope; a cleared storage has no key.
+const handleStorage = (event: StorageEvent) => {
+  if (event.key !== null && event.key !== storageKey()) return;
+  notifyChange();
+};
+
 // Spec: private-rooms/key-management, "A newly picked auto-lock preset applies at once"
 export function subscribeAutoLockChange(listener: () => void): () => void {
   changeListeners.add(listener);
+  if (changeListeners.size === 1 && typeof window !== "undefined") {
+    window.addEventListener("storage", handleStorage);
+  }
   return () => {
-    changeListeners.delete(listener);
+    if (!changeListeners.delete(listener)) return;
+    if (changeListeners.size === 0 && typeof window !== "undefined") {
+      window.removeEventListener("storage", handleStorage);
+    }
   };
 }
 
@@ -119,7 +136,7 @@ export function setAutoLockTimeoutSeconds(seconds: number): void {
     Math.min(MAX_AUTO_LOCK_SECONDS, Math.floor(seconds)),
   );
   storage.setItem(storageKey(), String(clamped));
-  Array.from(changeListeners).forEach((listener) => listener());
+  notifyChange();
 }
 
 export function setAutoLockPreset(id: AutoLockPresetId): void {

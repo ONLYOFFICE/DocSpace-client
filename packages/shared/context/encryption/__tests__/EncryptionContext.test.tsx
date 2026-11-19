@@ -952,6 +952,54 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
     });
 
+    it("Preset picked in another tab", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(1800);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => {
+        vi.advanceTimersByTime(10 * 60_000);
+      });
+      // The other tab's pick arrives as a change of the stored preset.
+      pickAutoLockSeconds(300, true);
+
+      act(() => {
+        vi.advanceTimersByTime(299_000);
+      });
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(latest.isUnlocked).toBe(false);
+    });
+
+    it("Preset picked in another tab: the hidden-tab rule holds at once", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(1800);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(false);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      pickAutoLockSeconds(300, true);
+      Object.defineProperty(document, "visibilityState", {
+        value: "hidden",
+        configurable: true,
+      });
+      try {
+        await act(async () => {
+          document.dispatchEvent(new Event("visibilitychange"));
+        });
+        expect(latest.isUnlocked).toBe(false);
+      } finally {
+        Object.defineProperty(document, "visibilityState", {
+          value: "visible",
+          configurable: true,
+        });
+      }
+    });
+
     it("Longer preset picked while unlocked", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(300);

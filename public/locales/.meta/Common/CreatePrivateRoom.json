@@ -3,7 +3,7 @@
   "content": "Create private room",
   "content_en_sha1_hash": "786e0444b92050dea3358ad60efcbe47f774c16a",
   "created_at": "2026-06-09T09:42:38.194Z",
-  "updated_at": "2026-11-09T09:26:33.790Z",
+  "updated_at": "2026-11-19T16:14:53.940Z",
   "comment": {
     "text": "Dialog title in the modal header that appears when initiating the creation of a new private room.",
     "is_auto": true,
@@ -11,6 +11,18 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 561,
+      "context": ".with([FolderType.Rooms, P.when(() => isPrivateScope), P._], () =>\n access === ShareAccessRights.None\n ? [\n {\n ...createRoom,\n title: t(\"Common:CreatePrivateRoom\"),\n description: t(\"Common:PrivateRoomDescription\"),\n },\n ]\n : [],\n )",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 267,
+      "context": "...withInstallState(\n privateRooms === \"on\",\n createOrOpen(\n canCreateRooms,\n PRIVATE_ROOMS_PATH,\n t(\"Common:CreatePrivateRoom\"),\n () => {\n requestPrivateRoomCreate();\n navigate(PRIVATE_ROOMS_PATH);\n },\n ),",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
       "line_number": 491,

@@ -277,7 +277,7 @@ test.describe("Billing overview", () => {
       page.getByTestId("overview_manage_payment_method_link"),
     ).toHaveText("Manage");
     await expect(page.getByText(/admins \| .* rooms \| /)).toBeVisible();
-    await expect(topUpButton(page)).toHaveCount(0);
+    await expect(topUpButton(page)).toBeVisible();
 
     await expectScreenshot(page, ["desktop", "overview", "startup.png"]);
   });

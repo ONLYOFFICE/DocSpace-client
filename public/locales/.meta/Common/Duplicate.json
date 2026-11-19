@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:44.727Z",
-  "updated_at": "2026-11-05T16:49:39.995Z",
+  "updated_at": "2026-11-17T13:13:27.235Z",
   "comment": {
     "text": "Button label. Creates a copy of the selected item.",
     "is_auto": true,
@@ -49,13 +49,13 @@
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 108,
+      "line_number": 111,
       "context": "disabled: !item.security.Copy,\n },\n {\n id: \"option_create-copy\",\n key: \"copy\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => funcs.onDuplicate?.(item, t),\n disabled: !item.security.Duplicate,\n },\n {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 108,
+      "line_number": 111,
       "context": "disabled: !item.security.Copy,\n },\n {\n id: \"option_create-copy\",\n key: \"copy\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => funcs.onDuplicate?.(item, t),\n disabled: !item.security.Duplicate,\n },\n {",
       "module": "/packages/shared"
     }

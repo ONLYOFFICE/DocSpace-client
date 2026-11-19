@@ -3,7 +3,7 @@
   "content": "Encrypts the files you keep in private rooms. It belongs to your account, so it works wherever you sign in.",
   "content_en_sha1_hash": "4a82cc73df46138df073f350c5577be75e00d8b7",
   "created_at": "2026-11-17T10:34:32.880Z",
-  "updated_at": "2026-11-17T10:35:18.940Z",
+  "updated_at": "2026-11-19T16:14:54.180Z",
   "comment": {
     "text": "One sentence under the heading Your encryption key on the explanation step of key setup: says what the key does and that it belongs to the user's account, not to a browser or a device; do not mention browsers or devices.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
-      "line_number": 205,
-      "context": ">\n <dl className={styles.terms}>\n {[\n [\n t(\"Common:KeySetupKeyTitle\"),\n t(\"Common:KeySetupKeyDescription\"),\n ],\n [\n t(\"Common:KeySetupPassphraseTitle\"),\n t(\"Common:KeySetupPassphraseDescription\"),\n ],",
+      "line_number": 212,
+      "context": "{(\n [\n [\n KeyIcon,\n t(\"Common:KeySetupKeyTitle\"),\n t(\"Common:KeySetupKeyDescription\"),\n ],\n [\n PadlockIcon,\n t(\"Common:KeySetupPassphraseTitle\"),\n t(\"Common:KeySetupPassphraseDescription\"),",
       "module": "/packages/shared"
     }
   ],

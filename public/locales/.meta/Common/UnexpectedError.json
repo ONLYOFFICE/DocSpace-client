@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-11-09T17:07:34.663Z",
+  "updated_at": "2026-11-17T13:13:26.955Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -133,13 +133,13 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 145,
+      "line_number": 151,
       "context": "return null;\n }\n };\n \n export const getUnexpectedErrorText = () => {\n return i18n.t(\"Common:UnexpectedError\");\n };\n \n export const connectedCloudsTitleTranslation = (key, t) => {\n switch (key) {\n case \"Box\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 492,
+      "line_number": 499,
       "context": "t(\"Common:InsufficientFunds\"),\n );\n } else if (isPollingTimeoutError(error)) {\n // The store has already re-read the plan; keep the raw error for\n // anything thrown before the checkout opened.\n toastr.error(t(\"Common:UnexpectedError\"));\n closeBuyPlan?.();\n } else {\n toastr.error(error as Error);\n }\n }",
       "module": "/packages/client"
     },
@@ -157,19 +157,25 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 1011,
+      "line_number": 1012,
       "context": "// with the status only in the message (`HTTP <status>`), not as a\n // property, so the message is checked alongside the axios-style shape.\n const status = error?.response?.status ?? error?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(error?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n onStreamError: onAiStreamError,\n onStreamEnd: onAiStreamEnd,\n }),\n [t, onAiStreamError, onAiStreamEnd],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 734,
+      "line_number": 732,
       "context": "} catch (error) {\n // A failure the server reports for the task carries its own message; one\n // of the polling itself does not, and is not shown as is.\n toastr.error(\n error instanceof TaskPollingError\n ? t(\"Common:UnexpectedError\")\n : (error as string),\n );\n console.error(error);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 180,
+      "line_number": 181,
+      "context": "});\n \n !item!.url &&\n toastr.error(\n (translations as TDownloadTranslations).error ||\n i18n.t(\"Common:UnexpectedError\"),\n null,\n 0,\n true,\n );\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
+      "line_number": 181,
       "context": "});\n \n !item!.url &&\n toastr.error(\n (translations as TDownloadTranslations).error ||\n i18n.t(\"Common:UnexpectedError\"),\n null,\n 0,\n true,\n );\n }",
       "module": "/packages/client"
     },
@@ -181,14 +187,26 @@
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 350,
+      "line_number": 356,
+      "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/PaymentStore.ts",
+      "line_number": 356,
       "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
-      "line_number": 386,
+      "line_number": 391,
       "context": "combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || \"/login\"),\n );\n } catch (e) {\n if (axios.isCancel(e)) return;\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n onDebugClick = () => {\n this.setIsDebugDialogVisible(true);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts",
+      "line_number": 386,
+      "context": "const res = await finalizeUploadSession(\n startedRow.toFolderId!,\n pendingFinalize.sessionId,\n );\n if (!isChunkUploadResponse(res)) {\n throw new Error(t(\"Common:UnexpectedError\"));\n }\n \n const indexOfFile = findRowIndex();\n const row = self.files[indexOfFile];\n if (!row) return;",
       "module": "/packages/client"
     },
     {
@@ -222,6 +240,24 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFavoritesActions.ts",
+      "line_number": 60,
+      "context": "const folderIds = item.isFolder ? [item.id as number] : [];\n await api.files.markAsFavorite(fileIds, folderIds);\n filesListStore.updateItemFavorite(item.id, true);\n toastr.success(t(\"Common:MarkedAsFavorite\"));\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n },\n [t, filesListStore],\n );",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFavoritesActions.ts",
+      "line_number": 60,
+      "context": "const folderIds = item.isFolder ? [item.id as number] : [];\n await api.files.markAsFavorite(fileIds, folderIds);\n filesListStore.updateItemFavorite(item.id, true);\n toastr.success(t(\"Common:MarkedAsFavorite\"));\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n },\n [t, filesListStore],\n );",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFavoritesActions.ts",
+      "line_number": 60,
+      "context": "const folderIds = item.isFolder ? [item.id as number] : [];\n await api.files.markAsFavorite(fileIds, folderIds);\n filesListStore.updateItemFavorite(item.id, true);\n toastr.success(t(\"Common:MarkedAsFavorite\"));\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n },\n [t, filesListStore],\n );",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-providers/index.tsx",
       "line_number": 110,
       "context": "| { response?: { status?: number }; status?: number; message?: string }\n | undefined;\n const status = err?.response?.status ?? err?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(err?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t, onStreamError, onStreamEnd],\n );",
@@ -246,6 +282,18 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-row-view/sub-components/RoomsRow.tsx",
+      "line_number": 158,
+      "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/RoomsTableViewRow.tsx",
+      "line_number": 223,
+      "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/RoomsTableViewRow.tsx",
       "line_number": 223,
       "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
@@ -258,8 +306,20 @@
       "module": "/packages/sdk"
     },
     {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-tile-view/sub-components/RoomsTile.tsx",
+      "line_number": 153,
+      "context": "if (!canUnpin) return;\n try {\n await api.rooms.unpinRoom(item.id);\n refreshRooms?.();\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n }, [canUnpin, item.id, refreshRooms, t]);\n \n const onUnmuteClick = React.useCallback(async () => {\n if (!canMute) return;",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1609,
+      "line_number": 1615,
+      "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 1615,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     }

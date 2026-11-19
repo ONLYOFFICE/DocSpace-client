@@ -3,7 +3,7 @@
   "content": "Skills",
   "content_en_sha1_hash": "e09212c7d3eaa769fbcf66f82a6263794e715931",
   "created_at": "2026-11-09T09:36:09.719Z",
-  "updated_at": "2026-11-09T09:36:33.224Z",
+  "updated_at": "2026-11-17T13:13:26.978Z",
   "comment": {
     "text": "Sidebar entry of the AI Chat section listing the Instructions rooms, whose files are the skills the chat uses. Short plural noun, no trailing punctuation.",
     "is_auto": true,
@@ -13,8 +13,44 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 609,
-      "context": "icon: getCatalogIconUrlByType(FolderType.RoomTemplates),\n ...nav(aiHubTypeUrl(RoomsType.AiProjectRoom)),\n },\n {\n id: \"ai-rooms-skills\",\n label: t(\"Common:Skills\"),\n icon: CatalogSkillsReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),\n },\n {\n id: \"ai-rooms-knowledge\",",
+      "line_number": 621,
+      "context": "...nav(searchAreaUrl(\"/ai-rooms/filter\", RoomSearchArea.AiHub)),\n ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),\n children: [\n {\n id: \"ai-rooms-skills\",\n label: t(\"Common:Skills\"),\n icon: CatalogSkillsReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),\n },\n {\n id: \"ai-rooms-knowledge\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
+      "line_number": 65,
+      "context": "t: (key: string) => string,\n search: string,\n ): string => {\n switch (getAiWorkspaceListType(search)) {\n case RoomsType.InstructionsRoom:\n return t(\"Common:Skills\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:AiWorkspaceKnowledge\");\n default:\n return t(\"Common:AiWorkspace\");\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
+      "line_number": 165,
+      "context": "</Text>\n )}\n {instructionsRooms.length > 0 || knowledgeRooms.length > 0 ? (\n <div className={styles.sources}>\n {instructionsRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:Skills\")} rooms={instructionsRooms} kind=\"instructions\" />\n ) : null}\n {knowledgeRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:AiWorkspaceKnowledge\")} rooms={knowledgeRooms} kind=\"knowledge\" />\n ) : null}\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 492,
+      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 492,
+      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 492,
+      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
+      "line_number": 492,
+      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
       "module": "/packages/client"
     }
   ],

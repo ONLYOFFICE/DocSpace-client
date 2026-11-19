@@ -82,6 +82,8 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
   // Spec: private-rooms/sdk-surface, "Private addresses are decided before anything is listed"
   const continueOnPrivatePage = React.useCallback(
     async (folderId: number | string) => {
+      // A room reached by an external link is never private.
+      if (shareKey) return false;
       const listed = items.find(
         (item) => item.isFolder && String(item.id) === String(folderId),
       ) as { rootFolderType?: FolderType } | undefined;
@@ -104,7 +106,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
         return true;
       }
     },
-    [items, router, t, sdkConfig?.privateRooms],
+    [items, router, t, sdkConfig?.privateRooms, shareKey],
   );
 
   const openFolderHere = React.useCallback(

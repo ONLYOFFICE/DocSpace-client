@@ -205,6 +205,19 @@ describe("useFolderActions", () => {
     );
   });
 
+  it("opens a folder of a room reached by an external link without a path request", async () => {
+    mocks.pathname = "/public-room";
+    mocks.settings.shareKey = "share-key" as never;
+    const { actions, pushState } = render();
+
+    await act(async () => actions.openFolder(7002, "Drafts"));
+
+    expect(mocks.getFolderPath).not.toHaveBeenCalled();
+    expect(pushState).toHaveBeenCalledTimes(1);
+    expect(String(pushState.mock.calls[0][2])).toContain("key=share-key");
+    mocks.settings.shareKey = undefined;
+  });
+
   it("opens a folder of My documents without a path request", async () => {
     mocks.pathname = "/personal-files";
     mocks.filesList.items = [

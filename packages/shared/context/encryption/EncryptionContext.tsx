@@ -72,6 +72,7 @@ import {
   restoreDeviceUnlock,
 } from "../../services/encryption/device-unlock-store";
 import { forgetKeyOnDevice } from "../../services/encryption/device-records";
+import { subscribeLockBroadcast } from "../../services/encryption/lock-broadcast";
 import {
   clearEncryptedFilenameCache,
   setFilenameCacheScope,
@@ -230,6 +231,19 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       cancelled = true;
     };
   }, [hasConfiguredKey, userKeys?.userId, userKeys?.publicKey]);
+
+  // A lock from another page of the user: this page's key and names go, the
+  // device records stay with the page that locked.
+  // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+  useEffect(() => {
+    const userId = userKeys?.userId;
+    if (!userId) return undefined;
+    return subscribeLockBroadcast(userId, () => {
+      SecretStorage.lock();
+      clearEncryptedFilenameCache();
+      setIsUnlocked(false);
+    });
+  }, [userKeys?.userId]);
 
   useEffect(() => {
     if (!showPassphraseDialog) {

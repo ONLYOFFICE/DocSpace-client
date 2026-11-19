@@ -74,6 +74,32 @@ vi.mock("../../../services/encryption/device-records", () => ({
   forgetKeyOnDevice: vi.fn(async () => undefined),
 }));
 
+// The locks other pages of a user send, by user id.
+const lockChannel = vi.hoisted(() => ({
+  handlers: new Map<string, (event: { keysChanged: boolean }) => void>(),
+}));
+
+vi.mock("../../../services/encryption/lock-broadcast", () => ({
+  broadcastLock: vi.fn(),
+  subscribeLockBroadcast: vi.fn(
+    (userId: string, handler: (event: { keysChanged: boolean }) => void) => {
+      lockChannel.handlers.set(userId, handler);
+      return () => {
+        if (lockChannel.handlers.get(userId) === handler) {
+          lockChannel.handlers.delete(userId);
+        }
+      };
+    },
+  ),
+}));
+
+/** A lock sent by another page of the user. */
+const lockFromAnotherTab = (userId = "user-42", keysChanged = false) => {
+  act(() => {
+    lockChannel.handlers.get(userId)?.({ keysChanged });
+  });
+};
+
 const autoLockListeners = vi.hoisted(() => new Set<() => void>());
 
 vi.mock("../../../services/encryption/auto-lock-preference", () => ({
@@ -140,6 +166,7 @@ import {
   forgetDeviceUnlock,
 } from "../../../services/encryption/device-unlock-store";
 import { forgetKeyOnDevice } from "../../../services/encryption/device-records";
+import { broadcastLock } from "../../../services/encryption/lock-broadcast";
 
 const dummyKeyPair: IdentityKeyPair = {
   publicKey: new Uint8Array(32).fill(1),
@@ -465,6 +492,60 @@ describe("EncryptionContext / EncryptionProvider", () => {
       });
       expect(forgetDeviceUnlock).toHaveBeenCalledWith("user-42");
       expect(latest.isUnlocked).toBe(false);
+    });
+  });
+
+  describe("A lock reaches every tab of the user", () => {
+    it("Lock now in another tab", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      lockFromAnotherTab();
+
+      expect(latest.isUnlocked).toBe(false);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+
+      // The next operation asks for the passphrase.
+      let pending!: Promise<IdentityKeyPair | null>;
+      await act(async () => {
+        pending = latest.requireIdentity();
+      });
+      expect(captured.passphrase?.visible).toBe(true);
+      act(() => captured.passphrase?.onCancel());
+      expect(await pending).toBeNull();
+    });
+
+    it("Lock now in another tab: a lock of another user is not heard", () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      lockFromAnotherTab("user-7");
+
+      expect(latest.isUnlocked).toBe(true);
+    });
+
+    it("Unlock not shared", async () => {
+      vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
+      renderTree();
+
+      await act(async () => {
+        await latest.unlock("correct", true);
+      });
+
+      expect(latest.isUnlocked).toBe(true);
+      expect(broadcastLock).not.toHaveBeenCalled();
+    });
+
+    it("Remembered record left to the page that locked", () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      lockFromAnotherTab();
+
+      expect(forgetDeviceUnlock).not.toHaveBeenCalled();
+      expect(forgetKeyOnDevice).not.toHaveBeenCalled();
+      expect(broadcastLock).not.toHaveBeenCalled();
     });
   });
 

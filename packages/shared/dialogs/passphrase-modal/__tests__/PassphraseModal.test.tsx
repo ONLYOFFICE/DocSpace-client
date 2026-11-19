@@ -103,6 +103,15 @@ const getConfirmInput = () =>
 
 const getAnnouncement = () => screen.getByTestId("key-dialog-announcement");
 
+const CYRILLIC = "абвгдеёжзийклмнопрсту";
+const CJK = "春眠不觉晓处处闻啼鸟夜来风雨声花落知多少";
+
+const anotherScript = (lengths: number[]) =>
+  lengths.flatMap((length) => [
+    ["Cyrillic", length, CYRILLIC.slice(0, length)] as const,
+    ["CJK", length, CJK.slice(0, length)] as const,
+  ]);
+
 // The text assistive technology reads together with the field.
 const describedText = (field: HTMLElement) =>
   (field.getAttribute("aria-describedby") ?? "")
@@ -407,6 +416,40 @@ describe("PassphraseModal", () => {
       expect(getSubmit()).toBeDisabled();
     });
 
+    it.each(anotherScript([12, 16, 20]))(
+      "New passphrase after a recovery in another script: %s, %i characters",
+      async (_, length, passphrase) => {
+        expect(passphrase).toHaveLength(length);
+        const user = userEvent.setup();
+        const { onSubmit } = renderModal({ isNew: true });
+
+        await user.type(getPassphraseInput(), passphrase);
+        await user.type(getConfirmInput(), passphrase);
+
+        await waitFor(() => expect(getSubmit()).toBeEnabled());
+        expect(getPassphraseInput()).not.toHaveAttribute("aria-invalid", "true");
+        expect(screen.queryByText("Common:PassphraseCommonPattern")).toBeNull();
+        expect(getAnnouncement().textContent).toBe("");
+
+        await user.click(getSubmit());
+        expect(onSubmit).toHaveBeenCalledWith(passphrase, undefined);
+      },
+    );
+
+    it.each(anotherScript([11]))(
+      "Too short in another script: %s, %i characters",
+      async (_, length, passphrase) => {
+        expect(passphrase).toHaveLength(length);
+        const user = userEvent.setup();
+        renderModal({ isNew: true });
+
+        await user.type(getPassphraseInput(), passphrase);
+        await user.type(getConfirmInput(), passphrase);
+
+        expect(getSubmit()).toBeDisabled();
+      },
+    );
+
     it("Rules tooltip", () => {
       passwordInputProps.length = 0;
       renderModal({ isNew: true });
@@ -462,6 +505,25 @@ describe("PassphraseModal", () => {
       expect(
         within(strengthLine()).getByText("Common:PassphraseStrengthStrong"),
       ).toBeInTheDocument();
+    });
+
+    it("Accepted passphrase is not weak", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+      const passphrase = "!@#$%^&*()_+";
+      expect(passphrase).toHaveLength(12);
+
+      await user.type(getPassphraseInput(), passphrase);
+      await user.type(getConfirmInput(), passphrase);
+
+      expect(strengthLine()).toHaveTextContent(
+        /Common:PassphraseStrength(Fair|Good|Strong)$/,
+      );
+      await waitFor(() =>
+        expect(
+          screen.getByRole("button", { name: "Common:ContinueButton" }),
+        ).toBeEnabled(),
+      );
     });
   });
 

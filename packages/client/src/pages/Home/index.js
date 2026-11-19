@@ -172,6 +172,7 @@ const PureHome = observer((props) => {
     loadCurrentUser,
     i18n,
     getRooms,
+    isPrivateRoomsSectionAvailable,
     setSelectedFolder,
     userId,
     getFolderModel,
@@ -445,6 +446,7 @@ const PureHome = observer((props) => {
     i18n,
     getRooms,
     isLoading,
+    isPrivateRoomsSectionAvailable,
   });
 
   const getContextModel = useCallback(() => {
@@ -824,6 +826,7 @@ export const Component = inject(
     oformsStore,
     paymentStore,
     currentTariffStatusStore,
+    appsStore,
   }) => {
     const {
       setSelectedFolder,
@@ -1039,6 +1042,7 @@ export const Component = inject(
       isAiProjectRoomRoot,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
+      isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
 
       disableDrag,
 

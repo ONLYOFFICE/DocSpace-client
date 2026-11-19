@@ -34,7 +34,7 @@ test:build && pnpm exec playwright test __tests__/e2e/private`.
 
 ## 3. Client frame methods
 
-- [ ] 3.1 Client: decide `createFile` and `createFolder` of `packages/client/src/pages/Home/Hooks/useSDK.js` from the room on the folder's path before any request (design decision 8): `createFile` refused for a private target, `createFolder` refused there without the frame's opt-in, the host answered with an error and the list not refreshed. Verify: the four scenarios of "Frame methods create nothing in a private room without the opt-in" as cases of a new `packages/client/src/pages/Home/Hooks/useSDK.createInPrivateRoom.test.ts`, asserting that no create request is made on a refusal (`cd packages/client && pnpm exec vitest run src/pages/Home/Hooks`); `pnpm exec tsc` in client
+- [x] 3.1 Client: decide `createFile` and `createFolder` of `packages/client/src/pages/Home/Hooks/useSDK.js` from the room on the folder's path before any request (design decision 8): `createFile` refused for a private target, `createFolder` refused there without the frame's opt-in, the host answered with an error and the list not refreshed. Verify: the four scenarios of "Frame methods create nothing in a private room without the opt-in" as cases of a new `packages/client/src/pages/Home/Hooks/useSDK.createInPrivateRoom.test.ts`, asserting that no create request is made on a refusal (`cd packages/client && pnpm exec vitest run src/pages/Home/Hooks`); `pnpm exec tsc` in client
 
 ## 4. E2E
 

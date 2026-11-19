@@ -173,7 +173,7 @@ The system SHALL keep the unlocked private key only in process memory, in a sing
 - **THEN** the next operation restores the key from the record without a prompt
 
 ### Requirement: Remembered device keeps the key in IndexedDB
-The system SHALL, when the user opts to remember the device, store the private key in IndexedDB encrypted with AES-GCM under a non-extractable wrapping key kept in the same database, together with the time it was written. It SHALL restore the key silently on the next identity request, including after auto-lock, until the user locks or forgets the device or the record is older than the maximum age (30 days by default).
+The system SHALL, when the user opts to remember the device, store the private key in IndexedDB encrypted with AES-GCM under a non-extractable wrapping key kept in the same database, together with the time it was written. It SHALL restore the key silently on the next identity request, including after auto-lock, until the user locks or forgets the device, deletes or resets the key, or the record is older than the maximum age (30 days by default).
 
 #### Scenario: Silent restore
 - **WHEN** a remembered device needs the identity after a page reload
@@ -182,6 +182,10 @@ The system SHALL, when the user opts to remember the device, store the private k
 #### Scenario: Explicit lock forgets the device
 - **WHEN** the user chooses Lock now or Forget device
 - **THEN** the IndexedDB record is deleted
+
+#### Scenario: Key deletion forgets the device
+- **WHEN** the user deletes the key the record holds, or resets all keys, on this device
+- **THEN** the IndexedDB record is deleted in the same action
 
 #### Scenario: Record older than the maximum age
 - **WHEN** a restore finds a record written more than 30 days ago, or with a timestamp in the future

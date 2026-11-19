@@ -59,7 +59,11 @@ Each claim below was located with CodeGraph and read in the source.
   `searchArea=Active` without a privacy filter
   (`(selectors)/room-selector/loadData.ts`, `(selectors)/file-selector/loadData.ts`),
   so they get no private room. That matches the main `server-contract`
-  requirement "Rooms list privacy filter".
+  requirement "Rooms list privacy filter". The kit's room selector sends
+  its search and next pages without a search area, and the rooms list then
+  takes the Rooms area (`VirtualRoomsController.GetRoomsAsync`,
+  `searchArea ?? SearchArea.Active`; read at `e5847cbaf5`), so a search
+  lists no private room either.
 
 ## Goals / Non-Goals
 

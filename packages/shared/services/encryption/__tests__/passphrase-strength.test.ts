@@ -166,6 +166,63 @@ describe("checkPassphraseStrength — common-pattern downgrade", () => {
   });
 });
 
+const CYRILLIC_LOWERCASE = "абвгдеёжзийклмнопрсту";
+const CJK = "春眠不觉晓处处闻啼鸟夜来风雨声花落知多少";
+const LATIN_LOWERCASE = "bcdefghijkmnoqrstuvwx";
+
+describe("The strength grade counts letters of every script", () => {
+  it.each([
+    [12, "fair"],
+    [16, "fair"],
+    [20, "good"],
+  ])("Cyrillic lowercase: Cyrillic, %i characters", (length, grade) => {
+    const passphrase = CYRILLIC_LOWERCASE.slice(0, length);
+    expect(passphrase).toHaveLength(length);
+    expect(containsCommonPattern(passphrase)).toBe(false);
+
+    expect(checkPassphraseStrength(passphrase).strength).toBe(grade);
+    expect(checkPassphraseStrength(passphrase).strength).toBe(
+      checkPassphraseStrength(LATIN_LOWERCASE.slice(0, length)).strength,
+    );
+  });
+
+  it.each([
+    [12, "fair"],
+    [16, "fair"],
+    [20, "good"],
+  ])("Caseless script: CJK, %i characters", (length, grade) => {
+    const passphrase = CJK.slice(0, length);
+    expect(passphrase).toHaveLength(length);
+
+    expect(checkPassphraseStrength(passphrase).strength).toBe(grade);
+    expect(checkPassphraseStrength(passphrase).strength).toBe(
+      checkPassphraseStrength(LATIN_LOWERCASE.slice(0, length)).strength,
+    );
+  });
+
+  it("Cyrillic mixed case", () => {
+    const passphrase = "ПриветМирДобрыйДень7";
+    const latin = "PrivetMirDobryiDenx7";
+    expect(passphrase).toHaveLength(20);
+    expect(containsCommonPattern(passphrase)).toBe(false);
+
+    expect(checkPassphraseStrength(passphrase).strength).toBe("strong");
+    expect(checkPassphraseStrength(passphrase).strength).toBe(
+      checkPassphraseStrength(latin).strength,
+    );
+  });
+
+  it("Punctuation of another script", () => {
+    const letters = "bcdefghijkmnoqr";
+    expect(letters).toHaveLength(15);
+
+    expect(checkPassphraseStrength(`${letters}»`).strength).toBe("good");
+    expect(checkPassphraseStrength(`${letters}»`).strength).toBe(
+      checkPassphraseStrength(`${letters}!`).strength,
+    );
+  });
+});
+
 describe("isPassphraseAcceptable", () => {
   it("rejects too-short input", () => {
     expect(isPassphraseAcceptable("Ab1!")).toBe(false);

@@ -150,6 +150,12 @@ export function containsCommonPattern(passphrase: string): boolean {
   return false;
 }
 
+// Spec: private-rooms/key-management, "The strength grade counts letters of every script"
+const LOWERCASE_OR_CASELESS_LETTER = /[\p{Ll}\p{Lo}\p{Lm}]/u;
+const UPPERCASE_LETTER = /[\p{Lu}\p{Lt}]/u;
+const DECIMAL_DIGIT = /\p{Nd}/u;
+const PUNCTUATION_OR_SYMBOL = /[\p{P}\p{S}]/u;
+
 export function checkPassphraseStrength(
   passphrase: string,
   minLength: number = PASSPHRASE_MIN_LENGTH,
@@ -163,16 +169,16 @@ export function checkPassphraseStrength(
   if (passphrase.length >= minLength + 4) score += 10;
   if (passphrase.length >= minLength + 8) score += 10;
 
-  if (/[a-z]/.test(passphrase)) score += 15;
+  if (LOWERCASE_OR_CASELESS_LETTER.test(passphrase)) score += 15;
   else suggestions.push({ kind: "lowercase" });
 
-  if (/[A-Z]/.test(passphrase)) score += 15;
+  if (UPPERCASE_LETTER.test(passphrase)) score += 15;
   else suggestions.push({ kind: "uppercase" });
 
-  if (/\d/.test(passphrase)) score += 15;
+  if (DECIMAL_DIGIT.test(passphrase)) score += 15;
   else suggestions.push({ kind: "digits" });
 
-  if (/[!@#$%^&*()_+\-=[\]{}|;:'",.<>?/`~]/.test(passphrase)) score += 10;
+  if (PUNCTUATION_OR_SYMBOL.test(passphrase)) score += 10;
   else suggestions.push({ kind: "special" });
 
   const matchesPattern = containsCommonPattern(passphrase);

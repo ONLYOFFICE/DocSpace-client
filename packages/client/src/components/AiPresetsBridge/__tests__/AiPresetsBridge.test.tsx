@@ -756,6 +756,24 @@ describe("AiPresetsBridge", () => {
       expect(infoPanel.showInfoPanel).toHaveBeenCalledTimes(2);
     });
 
+    // The dashboard has no Info panel and keeps the flag the Documents page left on.
+    it("go to the agent's page for Agent info where a panel shown on another page left its flag on", async () => {
+      infoPanel.state.mounted = true;
+      infoPanel.showInfoPanel();
+      infoPanel.showInfoPanel.mockClear();
+      infoPanel.state.mounted = false;
+      const store = new AiPresetsStore();
+      await pick(store, withRights({}, false));
+
+      await act(async () => action("info")?.onClick());
+      expect(mockNavigate).toHaveBeenCalledWith("/ai-rooms/1/filter?folder=1");
+
+      // The chat was not replaced by a panel: closing it is the user's close.
+      act(() => aiChatStore.setIsVisible(false));
+      expect(store.activePreset).toBeNull();
+      infoPanel.hide();
+    });
+
     it("leave a member with Agent info alone", async () => {
       await pick(new AiPresetsStore(), withRights({ EditAccess: false, Delete: false }, false));
       expect(aiChatStore.agentActions?.map((a) => a.id)).toEqual(["info"]);

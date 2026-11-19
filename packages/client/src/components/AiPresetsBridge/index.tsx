@@ -406,13 +406,19 @@ const AiPresetsBridge = ({
           return;
         }
         setInfoPanelView(InfoPanelView.infoDetails);
+        // A page without an Info panel leaves the store's flag as the last
+        // page that had one set it, so only the flag turning on here says
+        // that a panel took the chat's place.
+        const wasVisible = infoPanelStore.isVisible;
         // Set first: the panel showing closes the chat at once.
         agentInfoOpen.current = true;
         showInfoPanel();
-        if (infoPanelStore.isVisible) return;
-        // No Info panel here: the agent's page has its own chat, and
-        // nothing comes back.
+        if (!wasVisible && infoPanelStore.isVisible) return;
+        // Nothing replaced the chat, so nothing comes back.
         agentInfoOpen.current = false;
+        // Already open beside the chat of this agent's own page.
+        if (wasVisible && window.location.pathname.includes(`/ai-rooms/${id}/`)) return;
+        // No Info panel here: the agent's page has its own chat.
         navigate(`/ai-rooms/${id}/filter?folder=${id}`);
         showInfoPanel();
       },

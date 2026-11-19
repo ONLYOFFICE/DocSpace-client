@@ -73,6 +73,14 @@ export interface FileEncryptionOpResult {
 
 export type SkippedMemberReason = "no-key" | SkippedMemberKey["reason"];
 
+/**
+ * A key that could not be checked or is unusable: not a refusal, so the
+ * member is left waiting for the files instead of being reported as skipped.
+ */
+// Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+export const waitsForAccess = (reason: SkippedMemberReason) =>
+  reason === "key-unchecked" || reason === "key-unusable";
+
 export interface SkippedRoomMember {
   id: string;
   displayName?: string;
@@ -327,7 +335,7 @@ async function wrapFilesForMembers(
   const skippedMembers: SkippedRoomMember[] = [];
   for (const m of validMembers) {
     const reason = skippedReasons.get(m.id);
-    if (reason) {
+    if (reason && !waitsForAccess(reason)) {
       skippedMembers.push({
         id: m.id,
         displayName: m.displayName,
@@ -344,7 +352,12 @@ async function wrapFilesForMembers(
   const missingFileIdsByMember: Record<string, number[]> = {};
   for (const m of validMembers) {
     if (String(m.id) === String(currentUserId)) continue;
-    if (skippedReasons.has(m.id)) continue;
+    const reason = skippedReasons.get(m.id);
+    if (reason && waitsForAccess(reason)) {
+      missingFileIdsByMember[m.id] = [...fileIds];
+      continue;
+    }
+    if (reason) continue;
     const missing = [
       ...failedFileIds,
       ...(notStoredFileIds.get(String(m.id)) ?? []),

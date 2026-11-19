@@ -40,6 +40,7 @@ import { generateDEK } from "../../encryption/file-keys";
 import { wrapDekForRecipients } from "../../encryption/room-file-access";
 import { inspectWrap } from "../../encryption/hpke";
 import {
+  TofuStore,
   getTofuStore,
   registerKeyMismatchHandler,
   resetTofuStores,
@@ -1446,5 +1447,177 @@ describe("verifyMemberKeys", () => {
 
     expect(handler).toHaveBeenCalledTimes(1);
     expect(result.verified).toHaveLength(1);
+  });
+});
+
+describe("Peer keys that could not be checked or used, in the room flows", () => {
+  const SECOND_FILE_ID = FILE_ID + 1;
+  let alice: IdentityKeyPair;
+  let bob: IdentityKeyPair;
+  let carol: IdentityKeyPair;
+  let ownWrap: ServerAccessKeyDto[];
+
+  /** The pin of BOB cannot be read or stored; every other check is real. */
+  const bobUnchecked = () => {
+    const real = TofuStore.prototype.checkKey;
+    return vi
+      .spyOn(TofuStore.prototype, "checkKey")
+      .mockImplementation(function (this: TofuStore, userId, publicKey) {
+        return userId === BOB
+          ? Promise.resolve({ kind: "unavailable" as const })
+          : real.call(this, userId, publicKey);
+      });
+  };
+
+  const usersWrappedFor = () =>
+    setFileEncryptionKeysMock.mock.calls.flatMap(([, keys]) =>
+      (keys as ServerAccessKeyDto[]).map((k) => String(k.userId)),
+    );
+
+  beforeEach(async () => {
+    alice = await generateIdentityKeyPair();
+    bob = await generateIdentityKeyPair();
+    carol = await generateIdentityKeyPair();
+    ownWrap = await wrapDekForRecipients({
+      dek: generateDEK(),
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [{ userId: ALICE, publicKey: pubB64(alice) }],
+      fileId: SECOND_FILE_ID,
+    });
+
+    getFolderMock.mockReset();
+    getFileEncryptionAccessMock.mockReset();
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: ownWrap,
+      userKeys: [],
+    });
+    setFileEncryptionKeysMock.mockReset();
+    setFileEncryptionKeysMock.mockResolvedValue({});
+    getRoomEncryptionKeysMock.mockReset();
+    getFilePublicKeysMock.mockReset();
+    getRoomMissingFileKeysMock.mockReset();
+
+    resetMockIDB();
+    resetTofuStores();
+    vi.stubGlobal("indexedDB", mockIDB);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it("Invitee whose key could not be checked", async () => {
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    bobUnchecked();
+
+    const result = await validateMembersForEncryption(
+      ROOM_ID,
+      [BOB],
+      ALICE,
+      undefined,
+      { [BOB]: "Bob" },
+    );
+
+    expect(result.valid).toEqual([]);
+    expect(result.skipped).toEqual([
+      { id: BOB, displayName: "Bob", reason: "key-unchecked" },
+    ]);
+  });
+
+  it("Invitation with one unusable key", async () => {
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: BOB, publicKey: "not a key" },
+      { userId: CAROL, publicKey: pubB64(carol) },
+    ]);
+
+    const result = await validateMembersForEncryption(
+      ROOM_ID,
+      [BOB, CAROL],
+      ALICE,
+      undefined,
+      { [BOB]: "Bob", [CAROL]: "Carol" },
+    );
+
+    expect(result.valid).toEqual([{ id: CAROL, publicKey: pubB64(carol) }]);
+    expect(result.skipped).toEqual([
+      { id: BOB, displayName: "Bob", reason: "key-unusable" },
+    ]);
+  });
+
+  it("Re-wrap for a member whose key could not be checked", async () => {
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    bobUnchecked();
+
+    const result = await rewrapMissingFilesForMember(
+      ROOM_ID,
+      BOB,
+      [SECOND_FILE_ID],
+      { currentUserId: ALICE, identity: alice },
+    );
+
+    expect(usersWrappedFor()).not.toContain(BOB);
+    expect(result.skippedMembers).toEqual([]);
+    expect(result.missingFileIdsByMember).toEqual({ [BOB]: [SECOND_FILE_ID] });
+  });
+
+  const backfill = (onKeyChange = vi.fn(async () => "refuse" as const)) =>
+    backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+      onKeyChange,
+    });
+
+  it("Backfill with a key that could not be checked", async () => {
+    getRoomMissingFileKeysMock.mockResolvedValue([
+      { userId: BOB, fileIds: [SECOND_FILE_ID] },
+    ]);
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    const check = bobUnchecked();
+    const onKeyChange = vi.fn(async () => "refuse" as const);
+
+    await backfill(onKeyChange);
+
+    expect(onKeyChange).not.toHaveBeenCalled();
+    expect(usersWrappedFor()).not.toContain(BOB);
+
+    // The next sweep checks the member again.
+    check.mockRestore();
+    await backfill();
+    expect(usersWrappedFor()).toContain(BOB);
+  });
+
+  it("Backfill with one unusable key", async () => {
+    getRoomMissingFileKeysMock.mockResolvedValue([
+      { userId: BOB, fileIds: [SECOND_FILE_ID] },
+      { userId: CAROL, fileIds: [SECOND_FILE_ID] },
+    ]);
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: "not a key" },
+      { userId: CAROL, publicKey: pubB64(carol) },
+    ]);
+
+    await backfill();
+
+    expect(usersWrappedFor()).toContain(CAROL);
+    expect(usersWrappedFor()).not.toContain(BOB);
+
+    // Once the member lists a well-formed key, the next sweep wraps for them.
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    await backfill();
+    expect(usersWrappedFor()).toContain(BOB);
   });
 });

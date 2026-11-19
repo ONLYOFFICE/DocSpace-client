@@ -3,7 +3,7 @@
   "content": "Try again",
   "content_en_sha1_hash": "042c862e4467d7d057cced262e6869dd75c22b7d",
   "created_at": "2025-10-27T16:14:24.460Z",
-  "updated_at": "2026-11-17T13:13:27.099Z",
+  "updated_at": "2026-11-19T16:14:54.025Z",
   "comment": {
     "text": "This is a button label that appears when an error occurs or a service is unavailable, allowing the user to retry the action or check availability.",
     "is_auto": true,
@@ -19,13 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 320,
+      "line_number": 356,
       "context": "</span>\n <Button\n className={styles.resetButton}\n size={ButtonSize.small}\n onClick={loadKeys}\n label={t(\"Common:TryAgain\")}\n />\n </div>\n ) : null}\n <div className={styles.contentBody}>\n {offerNewKey ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 90,
+      "line_number": 91,
+      "context": "| \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };\n \n // Spec: private-rooms/editor-integration, \"Editor not mounted until keys are ready\"\n const KEY_FLOW_ENDS: Partial<Record<TFileEncryptionStatus, TKeyFlowEnd>> = {\n \"unlock-cancelled\": {",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/Editor.tsx",
+      "line_number": 91,
       "context": "| \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };\n \n // Spec: private-rooms/editor-integration, \"Editor not mounted until keys are ready\"\n const KEY_FLOW_ENDS: Partial<Record<TFileEncryptionStatus, TKeyFlowEnd>> = {\n \"unlock-cancelled\": {",
       "module": "/packages/doceditor"
     },

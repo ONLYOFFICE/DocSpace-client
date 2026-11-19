@@ -3,7 +3,7 @@
   "content": "AI Workspace",
   "content_en_sha1_hash": "5c59644dc0a524dcedb5bd848d8409d8b42ecacc",
   "created_at": "2026-11-10T13:41:19.711Z",
-  "updated_at": "2026-11-17T13:13:26.978Z",
+  "updated_at": "2026-11-19T16:14:53.931Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 237,
+      "line_number": 286,
       "context": "// onboarding tour.\n if (isAiHubAvailable) {\n items.push({\n id: \"ai-hub\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:AiWorkspace\"),\n description: t(\"Common:AiRoomsCreateDescription\"),\n installed: true,\n href: AI_HUB_PATH,\n buttonLabel: t(\"Common:Open\"),\n onAction: () => navigate(AI_HUB_PATH),",
       "module": "/packages/client"
     },

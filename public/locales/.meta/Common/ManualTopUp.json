@@ -1,0 +1,21 @@
+{
+  "key_path": "ManualTopUp",
+  "content": "Manual top-up",
+  "content_en_sha1_hash": "1b1e68537190551890215679ee688df97b8f02a3",
+  "created_at": "2026-11-19T16:14:20.954Z",
+  "updated_at": "2026-11-19T16:14:20.954Z",
+  "comment": {
+    "text": "Type label of one invoice row in the wallet invoice history (mobile/row view): the user topped up the balance manually. Singular noun phrase.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

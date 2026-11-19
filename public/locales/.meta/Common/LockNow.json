@@ -3,7 +3,7 @@
   "content": "Lock now",
   "content_en_sha1_hash": "9217b30d55ad7174390b857ba950775631207e17",
   "created_at": "2026-05-24T17:27:32.011Z",
-  "updated_at": "2026-11-17T13:13:27.219Z",
+  "updated_at": "2026-11-19T16:14:54.064Z",
   "comment": {
     "text": "Button label used to initiate the immediate locking of encryption keys within the keys management section.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/sub-components/KeyStatePopover.tsx",
+      "line_number": 166,
+      "context": "</Text>\n <AutoLockSetting inPlace />\n <div className={styles.actions}>\n <Button\n size={ButtonSize.small}\n label={t(\"Common:LockNow\")}\n onClick={onLock}\n aria-describedby={isDeviceRemembered ? lockNoteId : undefined}\n testId=\"key_state_lock_now\"\n />\n <Link",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 442,
+      "line_number": 487,
       "context": "role=\"button\"\n tabIndex={0}\n onKeyDown={activateAsButton}\n dataTestId=\"lock_now_link\"\n >\n {t(\"Common:LockNow\")}\n </Link>\n </div>\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Copy to clipboard",
   "content_en_sha1_hash": "d8f482edf74e07a582e0836096d47a59b3bc03c2",
   "created_at": "2026-05-24T17:27:22.017Z",
-  "updated_at": "2026-11-17T13:13:27.187Z",
+  "updated_at": "2026-11-19T16:14:54.091Z",
   "comment": {
     "text": "Button label used to copy the recovery phrase to the clipboard.",
     "is_auto": true,
@@ -30,9 +30,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 226,
-      "context": "isDisabled={isLoading}\n />\n <Button\n size={ButtonSize.small}\n onClick={handleCopy}\n label={t(\"Common:CopyToClipboard\")}\n isDisabled={isLoading}\n />\n </div>\n \n <div className={styles.checkboxRow}>",
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseContent.tsx",
+      "line_number": 188,
+      "context": "isDisabled={isLoading}\n />\n <Button\n size={ButtonSize.small}\n onClick={handleCopy}\n label={t(\"Common:CopyToClipboard\")}\n icon={<CopyIcon aria-hidden=\"true\" data-testid=\"recovery_save_icon\" />}\n isDisabled={isLoading}\n />\n </div>",
       "module": "/packages/shared"
     }
   ],

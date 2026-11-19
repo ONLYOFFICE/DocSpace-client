@@ -3,7 +3,7 @@
   "content": "Unlock your encryption key to open this file.",
   "content_en_sha1_hash": "3694e0b39879bfa1832b715b29b4506eeafd0a3a",
   "created_at": "2026-11-11T17:43:06.800Z",
-  "updated_at": "2026-11-17T13:13:27.245Z",
+  "updated_at": "2026-11-19T16:14:54.145Z",
   "comment": {
     "text": "Message shown in place of the document editor when the user closed the passphrase dialog for an encrypted file of a private room; an Unlock button follows it. A full sentence, imperative. The encryption key belongs to the user's account.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 84,
+      "line_number": 85,
       "context": "/** A message under the bar, in place of the editor. */\n type TKeyFlowEnd = {\n /** i18n key of the message. */\n message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */",
       "module": "/packages/doceditor"
     }

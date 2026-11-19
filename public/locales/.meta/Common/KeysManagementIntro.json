@@ -1,27 +1,20 @@
 {
-  "key_path": "PrivateRoomKeyRequiredTitle",
-  "content": "Encryption key required",
-  "content_en_sha1_hash": "89a0141e9456e10c132c27f231a4a2ca03cefc47",
-  "created_at": "2026-06-09T09:42:54.544Z",
-  "updated_at": "2026-11-17T13:13:27.048Z",
+  "key_path": "KeysManagementIntro",
+  "content": "Your encryption key protects files in private rooms. Your passphrase unlocks the key; your recovery phrase helps restore access if you forget it.",
+  "content_en_sha1_hash": "52ef8516a81b4d5e3e80d12c512fe85fc752c917",
+  "created_at": "2026-11-19T16:14:17.615Z",
+  "updated_at": "2026-11-19T16:14:54.121Z",
   "comment": {
-    "text": "Dialog title in a confirmation modal that appears when an encryption key must be provided or generated for a private room.",
-    "is_auto": true,
-    "updated_at": "2026-06-09T09:56:03.490Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 406,
-      "context": "return (\n <>\n <ConfirmationModal\n visible={keyGate.keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={onConfirmGenerateKey}\n onCancel={onCancelGenerateKey}\n zIndex={410}",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 301,
+      "context": "return (\n <div className={styles.sectionBody}>\n {/* Spec: private-rooms/key-management, \"Keys management opens with an introduction\" */}\n <Text as=\"p\" className={styles.intro} dataTestId=\"keys_management_intro\">\n {t(\"Common:KeysManagementIntro\")}\n </Text>\n {/* A list that failed to load is reported by the block below. */}\n {!keysKnown && keysLoadFailed ? null : (\n <KeysList\n keyState={hasKeys ? (isUnlocked ? \"unlocked\" : \"locked\") : undefined}",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(private)/_components/create-room/PrivateCreateRoomDialog.tsx",
-      "line_number": 148,
-      "context": "return (\n <>\n <ConfirmationModal\n visible={keyGate.keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={keyGate.confirmKeyGeneration}\n onCancel={() => keyGate.cancelKeyGeneration(isCreation)}\n zIndex={410}",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {

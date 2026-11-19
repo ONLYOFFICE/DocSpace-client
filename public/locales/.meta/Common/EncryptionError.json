@@ -3,7 +3,7 @@
   "content": "An error occurred during the encryption operation",
   "content_en_sha1_hash": "93be28f85a3f4aa60d311ecf038b72f78e1b4a4b",
   "created_at": "2026-05-24T17:27:26.478Z",
-  "updated_at": "2026-11-17T13:13:27.286Z",
+  "updated_at": "2026-11-19T16:14:54.183Z",
   "comment": {
     "text": "Error message displayed in a toast notification when an encryption, decryption, or authentication process fails.",
     "is_auto": true,
@@ -13,20 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/useGenerateKeyFlow.tsx",
-      "line_number": 126,
-      "context": "}, [t, hasExistingKeys, isPending, step]);\n \n const onPassphraseSubmit = useCallback(\n async (input: string) => {\n if (!userId) {\n toastr.error(t(\"Common:EncryptionError\"));\n onError?.();\n return;\n }\n setIsPending(true);\n try {",
+      "line_number": 135,
+      "context": "}, []);\n \n const onPassphraseSubmit = useCallback(\n async (input: string) => {\n if (!userId) {\n toastr.error(t(\"Common:EncryptionError\"));\n onError?.();\n return;\n }\n // The key pair and the recovery phrase are made once and kept while\n // the dialog is open; only the passphrase follows the latest form.",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 94,
-      "context": "if (\n error instanceof AuthenticationError ||\n error instanceof DecryptionError ||\n error instanceof CryptoError\n ) {\n return t(\"Common:EncryptionError\");\n }\n return t(\"Common:EncryptionError\");\n }\n \n /**",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 94,
-      "context": "if (\n error instanceof AuthenticationError ||\n error instanceof DecryptionError ||\n error instanceof CryptoError\n ) {\n return t(\"Common:EncryptionError\");\n }\n return t(\"Common:EncryptionError\");\n }\n \n /**",
+      "line_number": 103,
+      "context": "export function getEncryptionErrorMessage(\n t: TFunction,\n error: unknown,\n ): string {\n return (\n getSpecificEncryptionErrorMessage(t, error) ?? t(\"Common:EncryptionError\")\n );\n }\n \n /**\n * The message of a failed encrypted copy, download or open: the key of an",
       "module": "/packages/shared"
     }
   ],

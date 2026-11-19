@@ -1,0 +1,21 @@
+{
+  "key_path": "NoInvoicesFilter",
+  "content": "No invoices match this filter. Try another or remove the filter to view all invoices.",
+  "content_en_sha1_hash": "2d1ed157d46e8bce9327ed87029b2be2746df838",
+  "created_at": "2026-11-19T16:14:23.602Z",
+  "updated_at": "2026-11-19T16:14:23.602Z",
+  "comment": {
+    "text": "Description of the empty state in the wallet invoice history when the applied filter (top-up type or period) returns no invoices. Suggests changing or clearing the filter.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

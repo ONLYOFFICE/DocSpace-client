@@ -3,7 +3,7 @@
   "content": "Passphrase strength",
   "content_en_sha1_hash": "29ff795bc9908162325ebb890c04caf35c401e91",
   "created_at": "2026-07-27T13:07:25.831Z",
-  "updated_at": "2026-11-17T13:13:27.288Z",
+  "updated_at": "2026-11-19T16:14:54.186Z",
   "comment": {
     "text": "Label in the passphrase modal that precedes the dynamically calculated strength value.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 341,
-      "context": "</FieldContainer>\n \n {strengthResult ? (\n <div className={styles.strengthRow}>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:PassphraseStrengthLabel\")}:{\" \"}\n </Text>\n <Text\n fontSize=\"12px\"\n fontWeight={600}\n color={STRENGTH_COLOR[strengthResult.strength]}",
+      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseStrengthLine.tsx",
+      "line_number": 78,
+      "context": "}[strength];\n \n return (\n <div className={styles.strengthRow} data-testid=\"passphrase_strength\">\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:PassphraseStrengthLabel\")}:{\" \"}\n </Text>\n <Text fontSize=\"12px\" fontWeight={600} color={STRENGTH_COLOR[strength]}>\n {label}\n </Text>\n </div>",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2026-11-17T13:13:26.963Z",
+  "updated_at": "2026-11-19T16:14:53.924Z",
   "comment": {
     "text": "This is a button label or dialog title. It initiates the process of inviting users or creating a group.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1099,
+      "line_number": 1102,
       "context": "isInvitePanelLoader\n id=\"invite_panel_modal\"\n aria-label={\n inviteOutcome\n ? t(\"Common:EncryptedInviteResultTitle\")\n : t(\"Common:Invite\")\n }\n >\n {!hideSelector && addUsersPanelVisible ? (\n <ModalDialog.Container>\n <PeopleSelector",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1099,
+      "line_number": 1102,
       "context": "isInvitePanelLoader\n id=\"invite_panel_modal\"\n aria-label={\n inviteOutcome\n ? t(\"Common:EncryptedInviteResultTitle\")\n : t(\"Common:Invite\")\n }\n >\n {!hideSelector && addUsersPanelVisible ? (\n <ModalDialog.Container>\n <PeopleSelector",
       "module": "/packages/client"
     },

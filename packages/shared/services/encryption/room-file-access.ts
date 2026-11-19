@@ -39,13 +39,18 @@
 
 import { unwrapDEK, wrapDEK, inspectWrap } from "./hpke";
 import { wipeDek } from "./file-keys";
-import { NoAccessError, AuthenticationError } from "./errors";
+import {
+  AuthenticationError,
+  KeyCheckUnavailableError,
+  NoAccessError,
+} from "./errors";
 import {
   getKeyMismatchHandler,
   getTofuStore,
+  keysEqual,
   type KeyMismatchResolver,
+  type TofuKeyEntry,
 } from "./tofu-store";
-import type { TofuKeyEntry } from "./tofu-store";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "./types";
 
 export type RoomMemberPublicKey = {
@@ -89,144 +94,111 @@ export async function unwrapDekForCurrentUser(params: {
     throw new NoAccessError(currentUserId);
   }
 
-  let lastError: unknown = null;
-
-  const tryCandidates = async (
-    myEntry: ServerAccessKeyDto,
-    senderUserId: string,
-    candidates: RoomMemberPublicKey[],
-  ): Promise<Uint8Array | null> => {
-    for (const candidate of candidates) {
-      const senderPubBytes = decodeBase64(candidate.publicKey);
-
-      let dek: Uint8Array;
-      try {
-        dek = await unwrapDEK({
-          wrapped: myEntry.privateKeyEnc,
-          recipientPrivateKey: currentIdentity.privateKey,
-          recipientUserId: currentUserId,
-          expectedSenderPublicKey: senderPubBytes,
-          expectedSenderUserId: senderUserId,
-          fileId,
-        });
-      } catch (e) {
-        lastError = e;
-        continue;
-      }
-
-      try {
-        await verifySenderKeyAgainstTofu(
-          currentUserId,
-          senderUserId,
-          candidate.publicKey,
-          onKeyChange,
-          senderDisplayName,
-        );
-      } catch (e) {
-        wipeDek(dek);
-        lastError = e;
-        continue;
-      }
-
-      return dek;
-    }
-    return null;
-  };
-
   const inspection = inspectWrap(myEntry.privateKeyEnc);
   const senderUserId = inspection.senderUserId;
+  const tofu = getTofuStore(currentUserId);
 
-  const liveCandidates = roomMemberKeys.filter(
+  // Spec: private-rooms/encryption-core, "Key mismatch on unwrap is refused unless a resolver accepts it"
+  const pins = await tofu.readKeys(senderUserId);
+  if (pins === null) throw new KeyCheckUnavailableError();
+
+  const live = roomMemberKeys.filter(
     (k) => String(k.userId) === String(senderUserId),
   );
-
-  const dek = await tryCandidates(myEntry, senderUserId, liveCandidates);
-  if (dek) return dek;
-
-  // A sender who left the room disappears from both live key sources while
-  // their wraps stay valid; keys this device already trusts still apply.
-  const tofuCandidates = await loadTofuSenderCandidates(
-    currentUserId,
-    senderUserId,
-    liveCandidates,
-  );
-  if (liveCandidates.length === 0 && tofuCandidates.length === 0) {
+  if (live.length === 0 && pins.length === 0) {
     throw new AuthenticationError(
       `wrap claims sender ${senderUserId} but no public key was provided`,
     );
   }
 
-  const tofuDek = await tryCandidates(myEntry, senderUserId, tofuCandidates);
-  if (tofuDek) return tofuDek;
+  const isPinned = (key: string) =>
+    pins.some((pin) => keysEqual(pin.publicKey, key));
+  // Pinned keys first, those of a sender who left the room included.
+  const pinned = live.filter((c) => isPinned(c.publicKey));
+  for (const pin of [...pins].sort((a, b) => b.lastSeenAt - a.lastSeenAt)) {
+    if (!pinned.some((c) => keysEqual(c.publicKey, pin.publicKey))) {
+      pinned.push({ userId: senderUserId, publicKey: pin.publicKey });
+    }
+  }
+  const unpinned = pins.length === 0 ? live : [];
+  const changed = pins.length === 0 ? [] : live.filter((c) => !isPinned(c.publicKey));
+
+  let lastError: unknown = null;
+  const tryUnwrap = async (candidate: RoomMemberPublicKey) => {
+    try {
+      return await unwrapDEK({
+        wrapped: myEntry.privateKeyEnc,
+        recipientPrivateKey: currentIdentity.privateKey,
+        recipientUserId: currentUserId,
+        expectedSenderPublicKey: decodeBase64(candidate.publicKey),
+        expectedSenderUserId: senderUserId,
+        fileId,
+      });
+    } catch (e) {
+      lastError = e;
+      return null;
+    }
+  };
+
+  // A changed key is used only once the user accepted it and it is stored.
+  const acceptChangedKey = async (known: TofuKeyEntry, newKey: string) => {
+    const handler = onKeyChange ?? getKeyMismatchHandler();
+    if (!handler) {
+      throw new AuthenticationError(
+        `sender ${senderUserId} key changed; no resolver registered`,
+      );
+    }
+    let decision: "accept" | "refuse";
+    try {
+      decision = await handler({
+        userId: senderUserId,
+        knownKey: known.publicKey,
+        newKey,
+        knownFirstSeenAt: known.firstSeenAt,
+        knownLastSeenAt: known.lastSeenAt,
+        displayName: senderDisplayName,
+      });
+    } catch {
+      throw new AuthenticationError(
+        `sender ${senderUserId} key change resolver threw`,
+      );
+    }
+    if (decision !== "accept") {
+      throw new AuthenticationError(`sender ${senderUserId} key change refused`);
+    }
+    if (!(await tofu.acceptKey(senderUserId, newKey))) {
+      throw new KeyCheckUnavailableError();
+    }
+  };
+
+  // The key that opened the wrap is released only once its pin is stored.
+  for (const candidate of [...pinned, ...unpinned]) {
+    const dek = await tryUnwrap(candidate);
+    if (!dek) continue;
+    try {
+      const result = await tofu.checkKey(senderUserId, candidate.publicKey);
+      if (result.kind === "unavailable") throw new KeyCheckUnavailableError();
+      // Another tab pinned another key for the sender meanwhile.
+      if (result.kind === "mismatch") {
+        await acceptChangedKey(result.known, candidate.publicKey);
+      }
+    } catch (e) {
+      wipeDek(dek);
+      throw e;
+    }
+    return dek;
+  }
+
+  const known = [...pins].sort((a, b) => b.lastSeenAt - a.lastSeenAt)[0];
+  for (const candidate of changed) {
+    await acceptChangedKey(known, candidate.publicKey);
+    const dek = await tryUnwrap(candidate);
+    if (dek) return dek;
+  }
 
   throw lastError instanceof Error
     ? lastError
     : new AuthenticationError("unwrap failed for all matching fileKeys");
-}
-
-async function loadTofuSenderCandidates(
-  scopeUserId: string,
-  senderUserId: string,
-  alreadyTried: RoomMemberPublicKey[],
-): Promise<RoomMemberPublicKey[]> {
-  let keys: TofuKeyEntry[];
-  try {
-    keys = await getTofuStore(scopeUserId).getKeys(senderUserId);
-  } catch {
-    return [];
-  }
-  const tried = new Set(alreadyTried.map((c) => c.publicKey));
-  return keys
-    .filter((k) => !tried.has(k.publicKey))
-    .sort((a, b) => b.lastSeenAt - a.lastSeenAt)
-    .map((k) => ({ userId: senderUserId, publicKey: k.publicKey }));
-}
-
-async function verifySenderKeyAgainstTofu(
-  scopeUserId: string,
-  senderUserId: string,
-  senderPublicKey: string,
-  resolver: KeyMismatchResolver | undefined,
-  displayName: string | undefined,
-): Promise<void> {
-  const tofu = getTofuStore(scopeUserId);
-  const result = await tofu.checkKey(senderUserId, senderPublicKey);
-  if (result.kind === "first-seen" || result.kind === "match") return;
-  if (result.kind === "unavailable") {
-    throw new AuthenticationError(
-      `sender ${senderUserId} pin could not be read`,
-    );
-  }
-
-  const handler = resolver ?? getKeyMismatchHandler();
-  if (!handler) {
-    throw new AuthenticationError(
-      `sender ${senderUserId} key changed; no resolver registered`,
-    );
-  }
-
-  let decision: "accept" | "refuse";
-  try {
-    decision = await handler({
-      userId: senderUserId,
-      knownKey: result.known.publicKey,
-      newKey: result.submitted,
-      knownFirstSeenAt: result.known.firstSeenAt,
-      knownLastSeenAt: result.known.lastSeenAt,
-      displayName,
-    });
-  } catch {
-    throw new AuthenticationError(
-      `sender ${senderUserId} key change resolver threw`,
-    );
-  }
-
-  if (decision !== "accept") {
-    throw new AuthenticationError(
-      `sender ${senderUserId} key change refused`,
-    );
-  }
-  await tofu.acceptKey(senderUserId, senderPublicKey);
 }
 
 export async function wrapDekForRecipients(params: {

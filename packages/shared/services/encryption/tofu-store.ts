@@ -192,7 +192,8 @@ function constantTimeEqual(a: Uint8Array, b: Uint8Array): boolean {
   return diff === 0;
 }
 
-function keysEqual(a: string, b: string): boolean {
+/** Whether two base64 public keys are the same key, compared in constant time. */
+export function keysEqual(a: string, b: string): boolean {
   try {
     return constantTimeEqual(base64ToUint8Array(a), base64ToUint8Array(b));
   } catch {
@@ -487,6 +488,13 @@ export class TofuStore {
             },
           ];
     return this.putRecord({ ...existing, keys });
+  }
+
+  /** The peer's pinned keys: [] without a record, null when they cannot be read. */
+  async readKeys(userId: string): Promise<TofuKeyEntry[] | null> {
+    const record = await this.readRecord(userId);
+    if (record === UNREADABLE) return null;
+    return record ? [...record.keys] : [];
   }
 
   async getKeys(userId: string): Promise<TofuKeyEntry[]> {

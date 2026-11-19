@@ -222,6 +222,7 @@ const serveRooms = async (
     memberKeys = [],
     folders = [],
     archived = false,
+    archivedRoomSecurity,
   }: {
     files?: TPlainFile[];
     secondRoom?: boolean;
@@ -229,6 +230,7 @@ const serveRooms = async (
     memberKeys?: TEncryptionKeyPair[];
     folders?: { id: number; title: string }[];
     archived?: boolean;
+    archivedRoomSecurity?: Record<string, boolean>;
   } = {},
 ): Promise<TRooms> => {
   const alice = await generateIdentityKeyPair();
@@ -261,6 +263,7 @@ const serveRooms = async (
       initialFiles,
       folders,
       archived,
+      archivedRoomSecurity,
       withOtherRooms,
       handle: roomHandle,
     }),
@@ -1381,7 +1384,12 @@ test.describe("(private) — archive", () => {
     port,
     mockBoth,
   }) => {
-    await serveRooms(mockBoth, port, { files: [PHOTO], archived: true });
+    // Spec: private-rooms/sdk-surface, "No upload or creation without the create right"
+    await serveRooms(mockBoth, port, {
+      files: [PHOTO],
+      archived: true,
+      archivedRoomSecurity: OWNER_ROOM_SECURITY,
+    });
     await openRoom(page, baseUrl);
     const photoRow = row(page, PHOTO.serverTitle);
     await expect(photoRow).toBeVisible();
@@ -1404,11 +1412,18 @@ test.describe("(private) — archive", () => {
     port,
     mockBoth,
   }) => {
-    await serveRooms(mockBoth, port, { archived: true });
+    await serveRooms(mockBoth, port, {
+      archived: true,
+      archivedRoomSecurity: OWNER_ROOM_SECURITY,
+    });
     const uploadRequests: string[] = [];
+    const createRequests: string[] = [];
     page.on("request", (request) => {
       if (/\/upload\/|\/session/.test(request.url())) {
         uploadRequests.push(request.url());
+      }
+      if (request.method() === "POST" && /\/files\/folder\//.test(request.url())) {
+        createRequests.push(request.url());
       }
     });
 
@@ -1422,6 +1437,10 @@ test.describe("(private) — archive", () => {
 
     expect(await chooser).toBeNull();
     expect(uploadRequests).toEqual([]);
+
+    await page.keyboard.press("Shift+F");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(createRequests).toEqual([]);
   });
 
   test("Restore from the header of an archived room", async ({

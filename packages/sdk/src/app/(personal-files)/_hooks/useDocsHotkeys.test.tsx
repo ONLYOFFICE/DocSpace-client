@@ -39,7 +39,10 @@ const mocks = vi.hoisted(() => ({
   encryptedActions: null as object | null,
   filesList: {
     items: [],
-    currentFolder: null as { security?: { Create?: boolean } } | null,
+    currentFolder: null as {
+      security?: { Create?: boolean };
+      rootFolderType?: number;
+    } | null,
   },
   selection: { selection: [], setSelection: () => {} },
 }));
@@ -66,6 +69,8 @@ vi.mock("@/app/(docspace)/_store/FilesSelectionStore", () => ({
 vi.mock("@/app/(docspace)/_contexts/EncryptedFileActionsContext", () => ({
   useEncryptedFileActions: () => mocks.encryptedActions,
 }));
+
+import { FolderType } from "@docspace/shared/enums";
 
 import useDocsHotkeys, { type DocsHotkeysHandlers } from "./useDocsHotkeys";
 
@@ -118,6 +123,20 @@ describe("useDocsHotkeys", () => {
   it("Upload hotkey in an archived room: no create or upload starts without the create right", () => {
     mocks.encryptedActions = {};
     mocks.filesList.currentFolder = { security: { Create: false } };
+    render();
+
+    for (const keys of CREATE_AND_UPLOAD_KEYS) press(keys);
+
+    expect(handlers.onUploadFiles).not.toHaveBeenCalled();
+    expect(handlers.onCreateFile).not.toHaveBeenCalled();
+  });
+
+  it("Archived room whatever its rights", () => {
+    mocks.encryptedActions = {};
+    mocks.filesList.currentFolder = {
+      security: { Create: true },
+      rootFolderType: FolderType.Archive,
+    };
     render();
 
     for (const keys of CREATE_AND_UPLOAD_KEYS) press(keys);

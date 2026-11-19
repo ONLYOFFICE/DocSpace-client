@@ -38,6 +38,7 @@
 import { useCallback, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
+import { FolderType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getHotkeyLetter } from "@docspace/shared/utils/getHotkeyLetter";
 
@@ -90,8 +91,14 @@ export default function useDocsHotkeys({
   }, []);
 
   // Spec: private-rooms/sdk-surface, "No upload or creation without the create right".
-  const canCreateHere = () =>
-    !encryptedActions || !!filesListStore.currentFolder?.security?.Create;
+  const canCreateHere = () => {
+    if (!encryptedActions) return true;
+    const folder = filesListStore.currentFolder;
+    return (
+      !!folder?.security?.Create &&
+      folder.rootFolderType !== FolderType.Archive
+    );
+  };
 
   const hotkeysOptions = {
     filter: (ev: KeyboardEvent) =>

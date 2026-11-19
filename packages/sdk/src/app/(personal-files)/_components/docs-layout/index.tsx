@@ -843,7 +843,8 @@ const DocsLayoutCore = observer(
                                   cancelButtonLabel={t("Common:CancelButton")}
                                   withCancelButton
                                   withBreadCrumbs
-                                  withSearch
+                                  // Spec: private-rooms/sdk-surface, "No search in private rooms"
+                                  withSearch={!isPrivate}
                                   withCreate={!!selectorMode}
                                   createDefineRoomType={RoomsType.CustomRoom}
                                   withFooterInput={false}

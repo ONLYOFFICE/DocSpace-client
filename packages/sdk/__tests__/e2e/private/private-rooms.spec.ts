@@ -1154,6 +1154,47 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     expect(room.getFiles().map((f) => f.id)).toEqual([MEMO.id]);
   });
 
+  test("Copy or move picker on a private page", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port, { secondRoom: true });
+    const searched: string[] = [];
+    page.on("request", (request) => {
+      const params = new URL(request.url()).searchParams;
+      if (params.get("search") || params.get("filterValue")) {
+        searched.push(request.url());
+      }
+    });
+    await openRoom(page, baseUrl);
+
+    for (const option of ["copy", "move-to"] as const) {
+      await chooseTransfer(page, row(page, MEMO.serverTitle), option);
+      const picker = page.getByTestId("aside").first();
+      const item = (title: string) =>
+        picker
+          .locator("[data-testid^='selector-item-']")
+          .filter({ hasText: title });
+      await expect(picker.getByText(ROOM_TITLE, { exact: true })).toBeVisible();
+      await expect(picker.getByTestId("selector_search_input")).toHaveCount(0);
+
+      if (option === "copy") {
+        await picker.getByText("Apps", { exact: true }).first().click();
+        await expect(picker.getByTestId("selector_search_input")).toHaveCount(0);
+        await item("Private").first().click();
+        await item(SECOND_ROOM_TITLE).click();
+        await expect(item(SECOND_ROOM_FOLDER.title)).toBeVisible();
+        await expect(picker.getByTestId("selector_search_input")).toHaveCount(0);
+      }
+      await picker.getByRole("button", { name: "Cancel" }).click();
+      await expect(picker).toHaveCount(0);
+    }
+
+    expect(searched).toEqual([]);
+  });
+
   test("Destination outside private rooms", async ({
     page,
     baseUrl,

@@ -94,9 +94,13 @@ change to the private pages' own listing; a change to the ui-kit.
    file selector resolves `id` unless it is empty or the Rooms section. The
    uploader resolves `targetId` when it is given. The in-place navigation of
    a generic page (`openFolder`, `openLocation` in
-   `(docspace)/_hooks/useFolderActions.ts`) passes the section of the open
-   folder as `rootFolderType`, so a folder outside the rooms sections costs
-   no request. `/sdk/personal-files/[destination]` only redirects to the
+   `(docspace)/_hooks/useFolderActions.ts`) passes the folder's own
+   `rootFolderType` when the folder is in the open list, so a folder outside
+   the rooms sections costs no request, and resolves any other folder with
+   the path request. The section of the open folder is not used: `openFolder`
+   also opens the destination of an operation, the parent of a restored item
+   and a breadcrumb, which can lie in another section. A path that cannot be
+   read leaves the page as it is, with Common:UnexpectedError. `/sdk/personal-files/[destination]` only redirects to the
    personal files page and is covered there.
 
 3. **What the refusal is, per entry.** With the session cookie, the room

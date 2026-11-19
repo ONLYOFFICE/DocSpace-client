@@ -230,13 +230,39 @@ export async function getDeviceUnlockWrittenAt(
   return record.updatedAt;
 }
 
+/** The public key the remembered record was written for, or null. */
+export async function getDeviceUnlockPublicKey(
+  userId: string,
+): Promise<string | null> {
+  if (!userId) return null;
+  return (await getRecord(userId))?.publicKey ?? null;
+}
+
+/** Removes the remembered record of the user once it is past its maximum age. */
+export async function forgetExpiredDeviceUnlock(userId: string): Promise<void> {
+  if (!userId) return;
+  const record = await getRecord(userId);
+  if (record && !isWithinMaxAge(record.updatedAt)) await deleteRecord(userId);
+}
+
 export async function hasDeviceUnlock(userId: string): Promise<boolean> {
   if (!userId) return false;
   return (await getRecord(userId)) !== null;
 }
 
-export async function forgetDeviceUnlock(userId: string): Promise<void> {
+/**
+ * Removes the remembered record of the user; with a public key, only when
+ * the record was written for that key.
+ */
+export async function forgetDeviceUnlock(
+  userId: string,
+  publicKeyB64?: string,
+): Promise<void> {
   if (!userId) return;
+  if (publicKeyB64) {
+    const record = await getRecord(userId);
+    if (!record || record.publicKey !== publicKeyB64) return;
+  }
   await deleteRecord(userId);
 }
 

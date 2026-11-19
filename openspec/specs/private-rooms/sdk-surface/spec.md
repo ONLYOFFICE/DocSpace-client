@@ -24,11 +24,15 @@ The private layout SHALL wrap its pages in the encryption provider together with
 - **THEN** the SDK's own key-change dialog asks the user to accept or refuse
 
 ### Requirement: Shell side effects
-The private layout SHALL run the shell effects: lock state synchronised across tabs, in-flight operations aborted on lock, encrypted file names recovered after unlock, the backfill sweep that re-wraps every member for a room manager once per room and page session, a device-setup hint shown only once the user's key list has loaded and is empty, a one-per-session ghost-state toast, a gate reset after unlock, and a disclosure banner.
+The private layout SHALL run the shell effects: the locks of the user's other pages that every page follows (key-management, "A lock reaches every tab of the user"), in-flight operations aborted on lock, encrypted file names recovered after unlock, the backfill sweep re-wrapping every member for a room manager once per room and page session, a device-setup hint only once the user's key list loaded empty, a one-per-session ghost-state toast, a gate reset after unlock, and a disclosure banner.
 
 #### Scenario: Lock in another tab
-- **WHEN** the identity is locked in one SDK tab
-- **THEN** other SDK tabs lock as well and abort their encrypted operations
+- **WHEN** the identity is locked by Lock now, a key change or a logout in another page of the user, an SDK page or a client page
+- **THEN** every SDK page of the user locks as well and aborts its encrypted operations, and the remembered record is left to the page that locked
+
+#### Scenario: Idle lock in another tab
+- **WHEN** another SDK page of the user locks after its idle time or because it was hidden
+- **THEN** this SDK page stays unlocked
 
 #### Scenario: Unlock recovers names
 - **WHEN** the identity becomes unlocked on a private page

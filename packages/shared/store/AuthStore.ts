@@ -581,6 +581,10 @@ class AuthStore {
         await import("../services/encryption/secret-storage");
       SecretStorage.lock();
       if (userId) {
+        // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+        const { broadcastLock } =
+          await import("../services/encryption/lock-broadcast");
+        broadcastLock(userId);
         const { forgetDeviceUnlock } =
           await import("../services/encryption/device-unlock-store");
         await forgetDeviceUnlock(userId);

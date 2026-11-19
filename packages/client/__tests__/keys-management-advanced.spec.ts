@@ -36,6 +36,7 @@
 import {
   generateIdentityKeyPair,
   serializeIdentity,
+  unlockWithPassphrase,
 } from "@docspace/shared/services/encryption/identity";
 import {
   capabilitiesHandler,
@@ -356,6 +357,157 @@ test.describe("Keys management — advanced flows", () => {
     expect(body.id).toBeTruthy();
     expect(body.publicKey).toBe(envelope.publicKey);
     expect(body.privateKeyEnc).not.toBe(envelope.privateKeyEnc);
+  });
+
+  // Spec: private-rooms/key-management, "Removing the key removes what this device keeps of it"
+  test("Key deleted on a remembered device", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const handleRef: { current: PrivacyroomHandlerHandle | null } = {
+      current: null,
+    };
+    const envelope = await realEnvelope();
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [envelope],
+        handle: handleRef,
+        userId: TEST_USER_ID,
+      }),
+      roomListHandler(TEST_PORT),
+    );
+    const keyState = page.getByTestId("key_lock_state");
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+    await expect(keyState).toHaveText("Key locked", { timeout: 15000 });
+
+    // Unlock with the remember option: the device keeps the key.
+    await page.getByTestId("keys_unlock_button").click();
+    const unlockDialog = page.getByRole("dialog");
+    const field = unlockDialog.getByLabel("Passphrase", { exact: true });
+    await field.fill(KNOWN_PASSPHRASE);
+    await unlockDialog.getByText("Don't ask again on this device").click();
+    await expect(
+      unlockDialog.getByRole("checkbox", {
+        name: "Don't ask again on this device",
+      }),
+    ).toBeChecked();
+    await field.press("Enter");
+    await expect(keyState).toHaveText("Key unlocked", { timeout: 15000 });
+
+    // Delete the key.
+    await page
+      .locator("[class*='keyItemActions']")
+      .first()
+      .getByTestId("icon-button")
+      .nth(2)
+      .click();
+    const warning = page
+      .getByRole("dialog")
+      .filter({ hasText: "Delete encryption keyWarning" });
+    const confirm = warning.getByRole("button", {
+      name: "Confirm",
+      exact: true,
+    });
+    await expect(confirm).toBeEnabled({ timeout: 10000 });
+    await confirm.click();
+    const verify = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    await verify.getByLabel("Passphrase", { exact: true }).fill(KNOWN_PASSPHRASE);
+    await verify.getByRole("button", { name: "Continue", exact: true }).click();
+    await expect
+      .poll(() => handleRef.current!.getKeys().length, { timeout: 10000 })
+      .toBe(0);
+
+    // Import the same key again.
+    const chooser = page.waitForEvent("filechooser", { timeout: 25000 });
+    await page.getByRole("button", { name: "Import key", exact: true }).click();
+    await (await chooser).setFiles({
+      name: "key.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(
+        JSON.stringify({
+          version: 2,
+          type: "docspace-identity-v2",
+          data: {
+            publicKey: envelope.publicKey,
+            privateKeyEnc: envelope.privateKeyEnc,
+          },
+        }),
+      ),
+    });
+    const importField = page
+      .getByRole("dialog")
+      .getByLabel("Passphrase", { exact: true });
+    await importField.fill(KNOWN_PASSPHRASE);
+    await importField.press("Enter");
+    await expect
+      .poll(() => handleRef.current!.getKeys().length, { timeout: 10000 })
+      .toBe(1);
+    expect(handleRef.current!.getKeys()[0].publicKey).toBe(envelope.publicKey);
+
+    // The next page load finds no remembered record of that key.
+    await page.reload();
+    await expect(keyState).toHaveText("Key locked", { timeout: 15000 });
+    await page.waitForTimeout(1500);
+    await expect(keyState).toHaveText("Key locked");
+  });
+
+  // Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+  test("Passphrase change in another script: Cyrillic, 20 characters", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const newPassphrase = "абвгдеёжзийклмнопрст";
+    expect(newPassphrase).toHaveLength(20);
+    const envelope = await realEnvelope();
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [envelope],
+        userId: TEST_USER_ID,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const rotateBtn = page
+      .locator("[class*='keyItemActions']")
+      .first()
+      .getByTestId("icon-button")
+      .nth(0);
+    await expect(rotateBtn).toBeVisible({ timeout: 10000 });
+    await rotateBtn.click();
+
+    await page.getByLabel("Current passphrase", { exact: true })
+      .fill(KNOWN_PASSPHRASE);
+    await page.getByLabel("New passphrase", { exact: true }).fill(newPassphrase);
+    await page.getByLabel("Confirm new passphrase", { exact: true })
+      .fill(newPassphrase);
+
+    const dialog = page.getByRole("dialog");
+    const strength = dialog.getByTestId("passphrase_strength");
+    await expect(strength).toBeVisible();
+    await expect(strength).not.toContainText("Weak");
+    const save = dialog.getByRole("button", { name: "Save", exact: true });
+    await expect(save).toBeEnabled();
+
+    const putPromise = page.waitForRequest(
+      (req) =>
+        req.method() === "PUT" && req.url().endsWith("/privacyroom/keys"),
+      { timeout: 30000 },
+    );
+    await save.click();
+
+    const body = (await putPromise).postDataJSON() as {
+      publicKey: string;
+      privateKeyEnc: string;
+    };
+    expect(body.publicKey).toBe(envelope.publicKey);
+    await expect(unlockWithPassphrase(body, newPassphrase)).resolves.toBeTruthy();
   });
 
   test("Auto-lock on a remembered device", async ({

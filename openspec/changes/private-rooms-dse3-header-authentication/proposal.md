@@ -9,8 +9,8 @@ The DSE3 container authenticates the chunk payloads (file nonce, chunk count, in
 - The flags byte, chunk plaintext size and the name-length field are bound into the authenticated data of every chunk and of the encrypted name, so any change to them makes decryption fail.
 - Because the associated data changes, the container format version is bumped (DSE3 version 3). Version-2 containers stay readable. The portal reads version 3 at once and writes it only once a Document Server release declares a library that reads it; until then new uploads keep writing version 2, because the Document Server decrypts with its own copy of the library and build 10.0.0.133 reads version 2 only (`private-rooms-editor-contract` D6, recorded 2026-10-30).
 - The parser rejects a version-3 header whose flags or sizes were altered, with the existing authentication error.
-- Re-import of a downloaded ciphertext (already supported) carries the container's version through unchanged.
-- Existing version-2 files are not migrated (decided 2026-10-26): they stay readable with unauthenticated headers, and a re-import keeps them as they are, version included (the upload orchestrator uploads a DSE3 container unchanged under recovered keys).
+- Re-import of a downloaded ciphertext is written as a new upload, in the container version new uploads use (revised on 2026-11-19: `private-rooms-invite-and-upload-robustness`, decision 1, gives a re-import a file key of its own, so the container is no longer uploaded unchanged).
+- Existing version-2 files are not migrated (decided 2026-10-26): they stay readable with unauthenticated headers. A re-import of one is a new upload and takes the version new uploads write (revised on 2026-11-19, see the item above).
 
 ## Capabilities
 

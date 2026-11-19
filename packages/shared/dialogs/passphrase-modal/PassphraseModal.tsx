@@ -64,7 +64,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   PASSPHRASE_MIN_LENGTH,
   PASSPHRASE_SETTINGS,
-  isPassphraseAcceptable,
+  meetsPassphraseRules,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 
 import {
@@ -113,7 +113,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
   const [passphrase, setPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
-  const [error, setError] = useState("");
   const [rulesPassed, setRulesPassed] = useState(false);
   const [rememberDevice, setRememberDevice] = useState(false);
 
@@ -121,7 +120,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     if (visible) {
       setPassphrase("");
       setConfirmPassphrase("");
-      setError("");
       setRulesPassed(false);
       setRememberDevice(false);
     }
@@ -139,18 +137,14 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   }, [visible, isNew, onPasskeyUnlock]);
 
   const handleSubmit = useCallback(() => {
-    if (isNew && !isPassphraseAcceptable(passphrase)) {
-      setError(t("Common:PassphraseWeak"));
-      return;
-    }
+    if (isNew && !meetsPassphraseRules(passphrase)) return;
 
     onSubmit(passphrase, showRememberDevice ? rememberDevice : undefined);
-  }, [passphrase, isNew, onSubmit, showRememberDevice, rememberDevice, t]);
+  }, [passphrase, isNew, onSubmit, showRememberDevice, rememberDevice]);
 
   const handleCancel = useCallback(() => {
     setPassphrase("");
     setConfirmPassphrase("");
-    setError("");
     onCancel();
   }, [onCancel]);
 
@@ -162,7 +156,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
   const isValid = isNew
     ? rulesPassed &&
-      isPassphraseAcceptable(passphrase) &&
+      meetsPassphraseRules(passphrase) &&
       passphrase === confirmPassphrase
     : passphrase.length >= MIN_LENGTH;
 
@@ -178,7 +172,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     visible && !isLoading && !!externalError,
   );
 
-  const displayedError = externalError || error;
+  const displayedError = externalError ?? "";
 
   const passphraseHasError = !!displayedError;
 
@@ -224,14 +218,10 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 onPassphraseChange={(value, generated) => {
                   setPassphrase(value);
                   if (generated) setConfirmPassphrase(value);
-                  setError("");
                 }}
-                onConfirmPassphraseChange={(value) => {
-                  setConfirmPassphrase(value);
-                  setError("");
-                }}
+                onConfirmPassphraseChange={setConfirmPassphrase}
                 onRulesPassedChange={setRulesPassed}
-                error={displayedError ?? ""}
+                error={displayedError}
                 rulesPassed={rulesPassed}
                 isLoading={isLoading}
                 onKeyDown={handleKeyDown}
@@ -245,7 +235,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   labelFor="passphrase"
                   removeMargin
                   hasError={passphraseHasError}
-                  errorMessage={displayedError ?? ""}
+                  errorMessage={displayedError}
                   errorMessageWidth="100%"
                   className={styles.inputWrapper}
                 >
@@ -253,10 +243,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                     id="passphrase"
                     inputName="passphrase"
                     inputValue={passphrase}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setPassphrase(e.target.value);
-                      setError("");
-                    }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setPassphrase(e.target.value)
+                    }
                     placeholder={t("Common:Passphrase")}
                     scale
                     size={InputSize.base}

@@ -106,6 +106,7 @@
     "@types/utif": "3.0.5",
     "@vitest/coverage-v8": "4.1.12",
     "@vitest/ui": "4.1.12",
+    "fake-indexeddb": "^6.2.8",
     "identity-obj-proxy": "3.0.0",
     "jsdom": "^27.4.0",
     "msw": "^2.15.0",

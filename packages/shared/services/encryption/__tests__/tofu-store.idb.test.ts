@@ -251,6 +251,24 @@ describe("Pin store on IndexedDB", () => {
     });
   });
 
+  describe("Member keys are verified against pins when granting access", () => {
+    it("Two keys of one peer accepted at once", async () => {
+      const KEY_C = "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=";
+      await storePinInAnotherTab();
+
+      // Two stores of one user, each with its own connection, as two tabs.
+      const results = await Promise.all([
+        new TofuStore("me").acceptKey(PEER, KEY_B),
+        new TofuStore("me").acceptKey(PEER, KEY_C),
+      ]);
+
+      expect(results).toEqual([true, true]);
+      expect(
+        (await readPin("me", PEER))?.keys.map((k: { publicKey: string }) => k.publicKey).sort(),
+      ).toEqual([KEY_A, KEY_B, KEY_C].sort());
+    });
+  });
+
   describe("writes that fail", () => {
     it("acceptKey resolves true once the key is stored", async () => {
       expect(await getTofuStore("me").acceptKey(PEER, KEY_A)).toBe(true);

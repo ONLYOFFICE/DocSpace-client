@@ -178,6 +178,31 @@ function decideKey(
   };
 }
 
+/** The peer's record with the key trusted: added, or its last-seen time moved. */
+function withAcceptedKey(
+  existing: TofuRecord | null,
+  userId: string,
+  publicKey: string,
+): TofuRecord {
+  const now = Date.now();
+  const accepted: TofuKeyEntry = {
+    publicKey,
+    firstSeenAt: now,
+    lastSeenAt: now,
+    verifiedAt: null,
+    source: "accepted",
+  };
+  if (!existing) return { userId, keys: [accepted] };
+  const idx = existing.keys.findIndex((k) => keysEqual(k.publicKey, publicKey));
+  return {
+    ...existing,
+    keys:
+      idx > -1
+        ? existing.keys.map((k, i) => (i === idx ? { ...k, lastSeenAt: now } : k))
+        : [...existing.keys, accepted],
+  };
+}
+
 function getIDB(): IDBFactory | null {
   if (typeof indexedDB === "undefined") return null;
   return indexedDB;
@@ -448,46 +473,40 @@ export class TofuStore {
   }
 
   /** Trusts the key for the peer; resolves whether it is stored. */
+  // Spec: private-rooms/encryption-core, "Member keys are verified against pins when granting access"
   async acceptKey(userId: string, publicKey: string): Promise<boolean> {
     if (!userId || !publicKey) {
       throw new Error("TofuStore.acceptKey: userId and publicKey are required");
     }
-    const existing = await this.readRecord(userId);
-    if (existing === UNREADABLE) return false;
-    const now = Date.now();
-    if (!existing) {
-      return this.putRecord({
+    const db = await this.openDB();
+    if (db === NOT_OPEN) return false;
+    if (!db) {
+      const memory = this.getMemoryStore();
+      memory.set(
         userId,
-        keys: [
-          {
-            publicKey,
-            firstSeenAt: now,
-            lastSeenAt: now,
-            verifiedAt: null,
-            source: "accepted",
-          },
-        ],
-      });
+        withAcceptedKey(normalizeRecord(memory.get(userId)), userId, publicKey),
+      );
+      return true;
     }
-    const idx = existing.keys.findIndex((k) =>
-      keysEqual(k.publicKey, publicKey),
-    );
-    const keys =
-      idx > -1
-        ? existing.keys.map((k, i) =>
-            i === idx ? { ...k, lastSeenAt: now } : k,
-          )
-        : [
-            ...existing.keys,
-            {
-              publicKey,
-              firstSeenAt: now,
-              lastSeenAt: now,
-              verifiedAt: null,
-              source: "accepted" as const,
-            },
-          ];
-    return this.putRecord({ ...existing, keys });
+    // One readwrite transaction reads and stores, so keys of one peer
+    // accepted at the same time in two tabs both stay.
+    return new Promise<boolean>((resolve) => {
+      try {
+        const tx = db.transaction(STORE_NAME, "readwrite");
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.get(userId);
+        req.onsuccess = () => {
+          store.put(
+            withAcceptedKey(normalizeRecord(req.result), userId, publicKey),
+          );
+        };
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => resolve(false);
+        tx.onabort = () => resolve(false);
+      } catch {
+        resolve(false);
+      }
+    });
   }
 
   /** The peer's pinned keys: [] without a record, null when they cannot be read. */

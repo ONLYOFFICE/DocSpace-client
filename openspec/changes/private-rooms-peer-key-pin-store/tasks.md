@@ -24,7 +24,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. Texts in the apps
 
-- [ ] 4.1 Client and SDK: list an invitee skipped for `key-unchecked` or `key-unusable` under Common:EncryptedInviteFailed in `InviteResult` of the client and of the SDK. Verify: cases "Invitee whose key could not be checked" and "Invitation with one unusable key" in `packages/client/src/components/panels/InvitePanel/__tests__/InviteResult.test.tsx` and a matching SDK test next to `packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteResult.tsx` (`cd packages/client && pnpm exec vitest run src/components/panels/InvitePanel`, `cd packages/sdk && pnpm exec vitest run "src/app/(rooms)/_components/invite-panel"`); `pnpm exec tsc` in client and sdk
+- [x] 4.1 Client and SDK: list an invitee skipped for `key-unchecked` or `key-unusable` under Common:EncryptedInviteFailed in `InviteResult` of the client and of the SDK. Verify: cases "Invitee whose key could not be checked" and "Invitation with one unusable key" in `packages/client/src/components/panels/InvitePanel/__tests__/InviteResult.test.tsx` and a matching SDK test next to `packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteResult.tsx` (`cd packages/client && pnpm exec vitest run src/components/panels/InvitePanel`, `cd packages/sdk && pnpm exec vitest run "src/app/(rooms)/_components/invite-panel"`); `pnpm exec tsc` in client and sdk
 
 ## 5. Gate
 

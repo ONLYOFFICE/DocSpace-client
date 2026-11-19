@@ -157,3 +157,19 @@ from that decision.
 
 None. Passphrases set earlier keep opening the key; the rules apply where a
 new passphrase is entered.
+
+## Verification
+
+Task 4.1, run on 2026-11-19 on `release/v4.1.0` at e0a268ae84e (tasks 1.1
+to 3.1 committed):
+
+- Client Playwright under Docker (`tests-dev`, built from the branch
+  sources, `WORKERS=3`): the thirteen `private-room*`, `private-rooms*` and
+  `keys-management*` specs, 206 passed.
+- SDK private suite (`packages/sdk/__tests__/e2e/private`) on a build made
+  with `pnpm run test:build` from the same commit: 36 passed, 14 skipped
+  (the `test.fixme` cases already in those specs).
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` 61 passed,
+  3 skipped; `nx run-many -t tsc lint test` over the six packages, 21 tasks
+  successful.
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 31 passed.

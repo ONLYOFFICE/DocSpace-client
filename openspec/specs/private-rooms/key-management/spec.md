@@ -25,7 +25,7 @@ The system SHALL let a user with no key generate one from the Keys management ta
 - **THEN** Common:EncryptionKeysLoadFailed is shown with Common:TryAgain, no generate or import action is offered, and no key is registered until a reload of the list answers with an empty list
 
 ### Requirement: Passphrase strength gate
-The system SHALL require a new passphrase of at least 12 characters, show a strength meter with suggestions, and SHALL refuse passphrases that match a common pattern (keyboard rows, sequences, brand names), at key creation and at a passphrase change alike.
+The system SHALL require a new passphrase of at least 12 characters, show its strength as a grade, and SHALL refuse passphrases that match a common pattern (keyboard rows, sequences, brand names), at key creation, after a recovery with the recovery phrase and at a passphrase change alike. The strength line SHALL show the grade alone and SHALL NOT advise adding a capital letter, a digit or a punctuation character.
 
 #### Scenario: Too short
 - **WHEN** the user enters an 11-character passphrase
@@ -38,6 +38,10 @@ The system SHALL require a new passphrase of at least 12 characters, show a stre
 #### Scenario: Passphrase change
 - **WHEN** the user enters a new passphrase built from a common pattern in the passphrase change dialog
 - **THEN** the new passphrase field is marked invalid with Common:PassphraseCommonPattern as its error, and the change MUST NOT be submitted
+
+#### Scenario: Strength line shows a grade only
+- **WHEN** the user types a new passphrase without a capital letter, a digit or a punctuation character
+- **THEN** the strength line shows Common:PassphraseStrengthLabel with one grade and no advice to add a character of any kind
 
 ### Requirement: Recovery phrase is shown once and must be acknowledged
 The system SHALL display the 24-word recovery phrase after key generation as a numbered list in the order of the phrase, with print, download (HTML recovery kit) and copy as three actions of equal weight, and SHALL require the user to tick the acknowledgement (Common:RecoveryPhraseAcknowledge) before the dialog can be closed. The acknowledgement SHALL be available whether or not a save action was used, and a save action SHALL NOT tick it.
@@ -685,7 +689,7 @@ The system SHALL describe the encryption key as the key of the user's account in
 - **THEN** it names a replaced key (Common:KeyChangedReasonReplaced), a recovery and a reset, and no reason that keys are stored per device
 
 ### Requirement: A new passphrase needs no particular characters
-The system SHALL accept a new passphrase, at key creation and at a passphrase change, when it has at least 12 characters and matches no common pattern, and SHALL NOT require a capital letter, a digit or a punctuation character in it. The rules tooltip of the passphrase field SHALL name the length alone.
+The system SHALL accept a new passphrase, at key creation, after a recovery with the recovery phrase and at a passphrase change, when it has at least 12 characters and matches no common pattern, in whatever script it is written, and SHALL NOT require a capital letter, a digit, a punctuation character or a Latin letter in it. The rules tooltip of the passphrase field SHALL name the length alone.
 
 #### Scenario: Lowercase words
 - **WHEN** the user enters a 22-character passphrase of lowercase words and spaces that matches no common pattern, and repeats it
@@ -702,6 +706,22 @@ The system SHALL accept a new passphrase, at key creation and at a passphrase ch
 #### Scenario: Rules tooltip
 - **WHEN** the rules tooltip of the passphrase field is shown
 - **THEN** it names the minimum length of 12 and no rule on capital letters, digits or punctuation
+
+#### Scenario: Passphrase in another script
+- **WHEN** the user enters in the key setup dialog a passphrase of 12, 16 or 20 Cyrillic letters, or of 12, 16 or 20 CJK characters, that matches no common pattern, and repeats it
+- **THEN** Common:ContinueButton is enabled and no error is shown
+
+#### Scenario: New passphrase after a recovery in another script
+- **WHEN** the user enters such a passphrase twice as the new passphrase after a recovery with the recovery phrase
+- **THEN** the confirm button is enabled and no error is shown
+
+#### Scenario: Passphrase change in another script
+- **WHEN** the user enters the current passphrase and such a passphrase twice as the new one in the passphrase-change dialog
+- **THEN** the save button is enabled and no error is shown
+
+#### Scenario: Too short in another script
+- **WHEN** the user enters a passphrase of 11 Cyrillic letters or of 11 CJK characters, and repeats it
+- **THEN** the confirm button stays disabled
 
 ### Requirement: A passphrase change keeps the key pair
 The system SHALL NOT generate a new key pair when the passphrase is changed or the key is recovered with the recovery phrase: only the envelope is sealed again. A copy of the key exported earlier, with the passphrase it was exported under, SHALL keep opening the user's files, so a leaked passphrase or export is not cured by a passphrase change. No action replaces the key pair of a user who keeps access to their files.
@@ -801,7 +821,7 @@ The system SHALL show the Common:Active and Common:NoKey badges of the keys mana
 - **THEN** the text of the Common:NoKey badge has a contrast of at least 4.5:1 against the badge
 
 ### Requirement: The strength grade does not contradict the passphrase rules
-The system SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStrengthGood or Common:PassphraseStrengthStrong for a new passphrase that fails the length or the common-pattern rule, at key creation and at a passphrase change alike. Such a passphrase SHALL be graded Common:PassphraseStrengthWeak.
+The system SHALL grade a new passphrase that fails the length or the common-pattern rule Common:PassphraseStrengthWeak and SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStrengthGood or Common:PassphraseStrengthStrong for it. It SHALL NOT show Common:PassphraseStrengthWeak for a new passphrase that meets both rules. Both hold at key creation, after a recovery with the recovery phrase and at a passphrase change.
 
 #### Scenario: Long passphrase without a required character
 - **WHEN** the user enters a 22-character passphrase of lowercase words and spaces that matches no common pattern
@@ -818,6 +838,33 @@ The system SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStreng
 #### Scenario: Passphrase change
 - **WHEN** the new passphrase of the passphrase-change dialog fails a rule
 - **THEN** its strength line shows Common:PassphraseStrengthWeak
+
+#### Scenario: Accepted passphrase is not weak
+- **WHEN** the user enters a passphrase of 12 characters that meets both rules but has few kinds of characters, such as 12 punctuation characters
+- **THEN** the strength line shows Common:PassphraseStrengthFair or better, and the confirm button is enabled once the passphrase is repeated
+
+#### Scenario: Accepted passphrase is not weak at a passphrase change
+- **WHEN** such a passphrase is the new passphrase of the passphrase-change dialog
+- **THEN** its strength line shows Common:PassphraseStrengthFair or better
+
+### Requirement: The strength grade counts letters of every script
+The system SHALL grade a new passphrase by the Unicode category of its characters: a letter of any script counts as a letter, an upper- or lowercase letter of a cased script as that case, a decimal digit of any script as a digit, and punctuation or a symbol of any script as punctuation. A passphrase SHALL get the grade a Latin passphrase of the same length and the same kinds of characters gets.
+
+#### Scenario: Cyrillic lowercase
+- **WHEN** the user enters a passphrase of 12, 16 or 20 lowercase Cyrillic letters that matches no common pattern
+- **THEN** the strength line shows Common:PassphraseStrengthFair, Common:PassphraseStrengthFair or Common:PassphraseStrengthGood, the grades of 12, 16 or 20 lowercase Latin letters
+
+#### Scenario: Caseless script
+- **WHEN** the user enters a passphrase of 12, 16 or 20 CJK characters
+- **THEN** the strength line shows Common:PassphraseStrengthFair, Common:PassphraseStrengthFair or Common:PassphraseStrengthGood, the grades of 12, 16 or 20 lowercase Latin letters
+
+#### Scenario: Cyrillic mixed case
+- **WHEN** the user enters a 20-character passphrase of upper- and lowercase Cyrillic letters and a digit that matches no common pattern
+- **THEN** the strength line shows Common:PassphraseStrengthStrong, the grade of the same passphrase in Latin letters
+
+#### Scenario: Punctuation of another script
+- **WHEN** the user enters 15 lowercase Latin letters followed by a guillemet that match no common pattern
+- **THEN** the strength line shows Common:PassphraseStrengthGood, the grade of the same letters followed by an exclamation mark
 
 ### Requirement: The passphrase rules tooltip leaves the dialog readable
 The system SHALL show the rules a new passphrase must meet in the tooltip of the passphrase field, as the other password forms of the product do. On a wide screen the tooltip SHALL open beside the passphrase field and cover none of the texts, fields and actions of the dialog; on a narrow screen it SHALL open below the passphrase field and SHALL NOT cover the title, the hint, Common:GenerateLogoButton or the actions of the dialog.

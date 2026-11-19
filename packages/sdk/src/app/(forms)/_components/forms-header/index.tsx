@@ -375,7 +375,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
-            hideInfoPanel={() => {}}
+            hideInfoPanel
             clearTrash={() => {}}
             showFolderInfo={() => {}}
           />
@@ -418,7 +418,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
         {...chatNavProps}
         toggleInfoPanel={() => {}}
         onLogoClick={() => {}}
-        hideInfoPanel={() => {}}
+        hideInfoPanel
         clearTrash={() => {}}
         showFolderInfo={() => {}}
       />
@@ -474,7 +474,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
-            hideInfoPanel={() => {}}
+            hideInfoPanel
             clearTrash={() => {}}
             showFolderInfo={() => {}}
           />
@@ -522,7 +522,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
-            hideInfoPanel={() => {}}
+            hideInfoPanel
             clearTrash={() => {}}
             showFolderInfo={() => {}}
           />
@@ -585,7 +585,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
-            hideInfoPanel={() => {}}
+            hideInfoPanel
             clearTrash={() => {}}
             showFolderInfo={() => {}}
           />
@@ -636,7 +636,7 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
           {...chatNavProps}
           toggleInfoPanel={() => {}}
           onLogoClick={() => {}}
-          hideInfoPanel={() => {}}
+          hideInfoPanel
           clearTrash={() => {}}
           showFolderInfo={() => {}}
         />

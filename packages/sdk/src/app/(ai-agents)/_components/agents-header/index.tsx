@@ -155,7 +155,7 @@ const AgentsHeader = ({
           withLogo=""
           burgerLogo=""
           onLogoClick={noop}
-          hideInfoPanel={noop}
+          hideInfoPanel
           clearTrash={noop}
           showFolderInfo={noop}
         />

@@ -25,7 +25,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 5. E2E and gate
 
-- [ ] 5.1 E2E: run the decrypted download spec unchanged, to confirm that ordinary names, the archive of a selection and the archive of a folder keep their names. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test __tests__/private-room-cross-user-download.spec.ts --reporter=line`, every case green
+- [x] 5.1 E2E: run the decrypted download spec unchanged, to confirm that ordinary names, the archive of a selection and the archive of a folder keep their names. Verify: `cd packages/client && docker-compose -f compose.yaml run --rm -T -e WORKERS=3 tests-dev pnpm exec playwright test __tests__/private-room-cross-user-download.spec.ts --reporter=line`, every case green
+  - 2026-11-19, `release/v4.1.0` at d3c71ab174c: 5 passed (Folder download, Folder selected in the header menu, Files and folders selected, the cross-user single download, the media viewer case), 23 s.
 - [ ] 5.2 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
 
 ## Workflow follow-up

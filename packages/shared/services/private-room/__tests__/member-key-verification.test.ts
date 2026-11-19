@@ -15,7 +15,7 @@ afterEach(() => {
 describe("verifyMemberKey", () => {
   it("Pin cannot be read", async () => {
     vi.spyOn(TofuStore.prototype, "checkKey").mockResolvedValue({
-      kind: "unreadable",
+      kind: "unavailable",
     });
     const accept = vi.spyOn(TofuStore.prototype, "acceptKey");
     const resolver = vi.fn<KeyMismatchResolver>(async () => "accept");

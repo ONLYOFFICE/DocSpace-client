@@ -150,7 +150,7 @@ describe("Pin store on IndexedDB", () => {
       answerNextOpen(() => failingOpen("UnknownError"));
       const store = getTofuStore("me");
 
-      expect((await store.checkKey(PEER, KEY_A)).kind).toBe("unreadable");
+      expect((await store.checkKey(PEER, KEY_A)).kind).toBe("unavailable");
       // A refused open is not a first sight: the stored pin is still read.
       expect((await store.checkKey(PEER, KEY_A)).kind).toBe("match");
     });
@@ -159,7 +159,7 @@ describe("Pin store on IndexedDB", () => {
       const release = await holdOlderVersion("me");
       const store = getTofuStore("me");
 
-      expect((await store.checkKey(PEER, KEY_A)).kind).toBe("unreadable");
+      expect((await store.checkKey(PEER, KEY_A)).kind).toBe("unavailable");
 
       release();
       expect(await store.checkKey(PEER, KEY_A)).toEqual({ kind: "first-seen" });
@@ -180,7 +180,7 @@ describe("Pin store on IndexedDB", () => {
       abortAfterNextRequest("put");
 
       expect((await getTofuStore("me").checkKey(PEER, KEY_A)).kind).toBe(
-        "unreadable",
+        "unavailable",
       );
       expect(await readPin("me", PEER)).toBeUndefined();
     });
@@ -190,7 +190,7 @@ describe("Pin store on IndexedDB", () => {
       failNextRequest("get");
 
       expect((await getTofuStore("me").checkKey(PEER, KEY_B)).kind).toBe(
-        "unreadable",
+        "unavailable",
       );
       // The stored pin is not overwritten.
       expect((await readPin("me", PEER))?.keys).toEqual([
@@ -252,6 +252,31 @@ describe("Pin store on IndexedDB", () => {
   });
 
   describe("writes that fail", () => {
+    it("acceptKey resolves true once the key is stored", async () => {
+      expect(await getTofuStore("me").acceptKey(PEER, KEY_A)).toBe(true);
+      expect((await readPin("me", PEER))?.keys).toHaveLength(1);
+    });
+
+    it("acceptKey resolves false when the write is not committed", async () => {
+      abortAfterNextRequest("put");
+
+      expect(await getTofuStore("me").acceptKey(PEER, KEY_A)).toBe(false);
+      expect(await readPin("me", PEER)).toBeUndefined();
+    });
+
+    it("acceptKey resolves false when the pin cannot be read", async () => {
+      failNextRequest("get");
+
+      expect(await getTofuStore("me").acceptKey(PEER, KEY_A)).toBe(false);
+    });
+
+    it("acceptKey resolves false when the pin store cannot be opened", async () => {
+      const release = await holdOlderVersion("me");
+
+      expect(await getTofuStore("me").acceptKey(PEER, KEY_A)).toBe(false);
+      release();
+    });
+
     it("forget resolves when the delete fails", async () => {
       failNextRequest("delete");
       await expect(getTofuStore("me").forget(PEER)).resolves.toBeUndefined();

@@ -64,7 +64,7 @@ type LegacyTofuRecordV1 = {
 export type TofuCheckResult =
   | { kind: "first-seen" }
   /** The pin store is open but the peer's record could not be read. */
-  | { kind: "unreadable" }
+  | { kind: "unavailable" }
   | { kind: "match"; record: TofuRecord; matchedKey: TofuKeyEntry }
   | {
       kind: "mismatch";
@@ -232,7 +232,7 @@ export class TofuStore {
     return this.memoryStore;
   }
 
-  private useMemoryStore(): Promise<OpenResult> {
+  private keepInMemory(): Promise<OpenResult> {
     warnUnavailableOnce();
     this.dbPromise = Promise.resolve(null);
     return this.dbPromise;
@@ -242,12 +242,12 @@ export class TofuStore {
   private openDB(): Promise<OpenResult> {
     if (this.dbPromise !== null) return this.dbPromise;
     const factory = getIDB();
-    if (!factory) return this.useMemoryStore();
+    if (!factory) return this.keepInMemory();
     let req: IDBOpenDBRequest;
     try {
       req = factory.open(`${DB_NAME_PREFIX}${this.scopeId}`, DB_VERSION);
     } catch {
-      return this.useMemoryStore();
+      return this.keepInMemory();
     }
     let refused = false;
     const opening = new Promise<OpenResult>((resolve) => {
@@ -351,44 +351,42 @@ export class TofuStore {
     return record === UNREADABLE ? null : record;
   }
 
-  private async putRecord(record: TofuRecord): Promise<void> {
+  /** Runs one write in a transaction of its own; true once it is committed. */
+  private async write(
+    inMemory: (memory: Map<string, TofuRecord>) => void,
+    inStore: (store: IDBObjectStore) => void,
+  ): Promise<boolean> {
     const db = await this.openDB();
-    if (db === NOT_OPEN) return;
+    if (db === NOT_OPEN) return false;
     if (!db) {
-      this.getMemoryStore().set(record.userId, record);
-      return;
+      inMemory(this.getMemoryStore());
+      return true;
     }
-    return new Promise<void>((resolve) => {
+    return new Promise<boolean>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readwrite");
-        const store = tx.objectStore(STORE_NAME);
-        const req = store.put(record);
-        req.onsuccess = () => resolve();
-        req.onerror = () => resolve();
+        inStore(tx.objectStore(STORE_NAME));
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => resolve(false);
+        tx.onabort = () => resolve(false);
       } catch {
-        resolve();
+        resolve(false);
       }
     });
   }
 
-  private async deleteRecord(userId: string): Promise<void> {
-    const db = await this.openDB();
-    if (db === NOT_OPEN) return;
-    if (!db) {
-      this.getMemoryStore().delete(userId);
-      return;
-    }
-    return new Promise<void>((resolve) => {
-      try {
-        const tx = db.transaction(STORE_NAME, "readwrite");
-        const store = tx.objectStore(STORE_NAME);
-        const req = store.delete(userId);
-        req.onsuccess = () => resolve();
-        req.onerror = () => resolve();
-      } catch {
-        resolve();
-      }
-    });
+  private putRecord(record: TofuRecord): Promise<boolean> {
+    return this.write(
+      (memory) => memory.set(record.userId, record),
+      (store) => store.put(record),
+    );
+  }
+
+  private deleteRecord(userId: string): Promise<boolean> {
+    return this.write(
+      (memory) => memory.delete(userId),
+      (store) => store.delete(userId),
+    );
   }
 
   async checkKey(
@@ -401,7 +399,7 @@ export class TofuStore {
 
     // Spec: private-rooms/encryption-core, "The first sight of a peer key is decided once per peer"
     const db = await this.openDB();
-    if (db === NOT_OPEN) return { kind: "unreadable" };
+    if (db === NOT_OPEN) return { kind: "unavailable" };
     if (!db) {
       // Read and write with no await between them, so the tab decides once.
       const memory = this.getMemoryStore();
@@ -424,7 +422,7 @@ export class TofuStore {
         resolve(
           decision?.result.kind === "match"
             ? decision.result
-            : { kind: "unreadable" },
+            : { kind: "unavailable" },
         );
       try {
         const tx = db.transaction(STORE_NAME, "readwrite");
@@ -439,24 +437,25 @@ export class TofuStore {
           );
           if (decision.record) store.put(decision.record);
         };
-        tx.oncomplete = () => resolve(decision?.result ?? { kind: "unreadable" });
+        tx.oncomplete = () => resolve(decision?.result ?? { kind: "unavailable" });
         tx.onerror = failed;
         tx.onabort = failed;
       } catch {
-        resolve({ kind: "unreadable" });
+        resolve({ kind: "unavailable" });
       }
     });
   }
 
-  async acceptKey(userId: string, publicKey: string): Promise<void> {
+  /** Trusts the key for the peer; resolves whether it is stored. */
+  async acceptKey(userId: string, publicKey: string): Promise<boolean> {
     if (!userId || !publicKey) {
       throw new Error("TofuStore.acceptKey: userId and publicKey are required");
     }
     const existing = await this.readRecord(userId);
-    if (existing === UNREADABLE) return;
+    if (existing === UNREADABLE) return false;
     const now = Date.now();
     if (!existing) {
-      await this.putRecord({
+      return this.putRecord({
         userId,
         keys: [
           {
@@ -468,7 +467,6 @@ export class TofuStore {
           },
         ],
       });
-      return;
     }
     const idx = existing.keys.findIndex((k) =>
       keysEqual(k.publicKey, publicKey),
@@ -488,7 +486,7 @@ export class TofuStore {
               source: "accepted" as const,
             },
           ];
-    await this.putRecord({ ...existing, keys });
+    return this.putRecord({ ...existing, keys });
   }
 
   async getKeys(userId: string): Promise<TofuKeyEntry[]> {
@@ -557,23 +555,10 @@ export class TofuStore {
   }
 
   async clear(): Promise<void> {
-    const db = await this.openDB();
-    if (db === NOT_OPEN) return;
-    if (!db) {
-      this.getMemoryStore().clear();
-      return;
-    }
-    return new Promise<void>((resolve) => {
-      try {
-        const tx = db.transaction(STORE_NAME, "readwrite");
-        const store = tx.objectStore(STORE_NAME);
-        const req = store.clear();
-        req.onsuccess = () => resolve();
-        req.onerror = () => resolve();
-      } catch {
-        resolve();
-      }
-    });
+    await this.write(
+      (memory) => memory.clear(),
+      (store) => store.clear(),
+    );
   }
 }
 

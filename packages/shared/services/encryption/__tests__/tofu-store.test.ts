@@ -357,7 +357,7 @@ describe("TofuStore — IndexedDB unavailable (in-memory fallback)", () => {
     expect(results.map((r) => r.kind).sort()).toEqual(["first-seen", "match"]);
   });
 
-  it("detects key mismatch within a session even when IDB is unavailable", async () => {
+  it("IndexedDB unavailable: a changed key is a mismatch within the session", async () => {
     const tofu = new TofuStore("alice");
     const a = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(a.kind).toBe("first-seen");
@@ -415,7 +415,7 @@ describe("TofuStore — IndexedDB open failure modes", () => {
 
     const tofu = new TofuStore("alice");
     expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe(
-      "unreadable",
+      "unavailable",
     );
     expect(warnSpy).toHaveBeenCalled();
   });

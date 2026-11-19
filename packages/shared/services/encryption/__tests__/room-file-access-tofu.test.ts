@@ -172,7 +172,7 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
     registerKeyMismatchHandler(resolver);
     const check = vi
       .spyOn(TofuStore.prototype, "checkKey")
-      .mockResolvedValue({ kind: "unreadable" });
+      .mockResolvedValue({ kind: "unavailable" });
 
     await expect(
       unwrapDekForCurrentUser({

@@ -177,15 +177,6 @@ export function checkPassphraseStrength(
   };
 }
 
-export function isPassphraseAcceptable(
-  passphrase: string,
-  minLength: number = PASSPHRASE_MIN_LENGTH,
-): boolean {
-  if (passphrase.length < minLength) return false;
-  const result = checkPassphraseStrength(passphrase, minLength);
-  return result.strength !== "weak";
-}
-
 /**
  * Whether a new passphrase meets the length and the common-pattern rule; the
  * kit's password input checks the length with PASSPHRASE_SETTINGS.

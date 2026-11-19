@@ -41,7 +41,6 @@ import {
   checkPassphraseStrength,
   containsCommonPattern,
   getShownPassphraseStrength,
-  isPassphraseAcceptable,
   meetsPassphraseRules,
 } from "../passphrase-strength";
 
@@ -212,41 +211,18 @@ describe("The strength grade counts letters of every script", () => {
   });
 });
 
-describe("isPassphraseAcceptable", () => {
-  it("rejects too-short input", () => {
-    expect(isPassphraseAcceptable("Ab1!")).toBe(false);
-  });
-
-  it("rejects common-pattern input even at min length", () => {
-    expect(isPassphraseAcceptable("Password1234!")).toBe(false);
-    expect(isPassphraseAcceptable("Qwerty12345!")).toBe(false);
-  });
-
-  it("accepts a non-weak passphrase", () => {
-    expect(isPassphraseAcceptable("Tx7$kp!aL2nQz@vR")).toBe(true);
-  });
-
-  it("accepts a 'fair' passphrase (no submit gate on fair)", () => {
-    const r = checkPassphraseStrength("abcdefghijkl");
-    expect(["fair", "good"]).toContain(r.strength);
-    expect(isPassphraseAcceptable("abcdefghijkl")).toBe(true);
-  });
-});
-
 describe("A new passphrase needs no particular characters", () => {
   it("Lowercase words", () => {
     const passphrase = "lorem ipsum dolor sitx";
     expect(passphrase).toHaveLength(22);
 
     expect(meetsPassphraseRules(passphrase)).toBe(true);
-    expect(isPassphraseAcceptable(passphrase)).toBe(true);
   });
 
   it("Common pattern still refused", () => {
     const passphrase = "my password is long";
 
     expect(meetsPassphraseRules(passphrase)).toBe(false);
-    expect(isPassphraseAcceptable(passphrase)).toBe(false);
   });
 
   it("asks for no capital letter, digit or punctuation", () => {

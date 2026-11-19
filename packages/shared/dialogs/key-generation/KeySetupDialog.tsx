@@ -46,7 +46,7 @@ import {
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
-import { isPassphraseAcceptable } from "@docspace/shared/services/encryption/passphrase-strength";
+import { meetsPassphraseRules } from "@docspace/shared/services/encryption/passphrase-strength";
 
 import { KEY_DIALOG_DISPLAY_TYPE } from "../key-dialog-display";
 import { useKeyDialogCloseGuard } from "../key-dialog-close-guard";
@@ -97,7 +97,6 @@ export const KeySetupDialog = ({
   const [passphrase, setPassphrase] = useState("");
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
   const [rulesPassed, setRulesPassed] = useState(false);
-  const [error, setError] = useState("");
   const [acknowledged, setAcknowledged] = useState(false);
 
   // Spec: private-rooms/key-management, "Key setup steps can be walked back"
@@ -107,16 +106,13 @@ export const KeySetupDialog = ({
 
   const isPassphraseValid =
     rulesPassed &&
-    isPassphraseAcceptable(passphrase) &&
+    meetsPassphraseRules(passphrase) &&
     passphrase === confirmPassphrase;
 
   const submitPassphrase = useCallback(() => {
-    if (!isPassphraseAcceptable(passphrase)) {
-      setError(t("Common:PassphraseWeak"));
-      return;
-    }
+    if (!meetsPassphraseRules(passphrase)) return;
     onPassphraseSubmit(passphrase);
-  }, [passphrase, onPassphraseSubmit, t]);
+  }, [passphrase, onPassphraseSubmit]);
 
   const dirty =
     step === "passphrase"
@@ -149,8 +145,8 @@ export const KeySetupDialog = ({
   const confirmMismatch =
     !!confirmPassphrase && passphrase !== confirmPassphrase;
   const announcedError =
-    step === "passphrase"
-      ? error || (confirmMismatch ? t("Common:PassphraseMismatch") : "")
+    step === "passphrase" && confirmMismatch
+      ? t("Common:PassphraseMismatch")
       : "";
 
   const primary = {
@@ -264,14 +260,10 @@ export const KeySetupDialog = ({
                 onPassphraseChange={(value, generated) => {
                   setPassphrase(value);
                   if (generated) setConfirmPassphrase(value);
-                  setError("");
                 }}
-                onConfirmPassphraseChange={(value) => {
-                  setConfirmPassphrase(value);
-                  setError("");
-                }}
+                onConfirmPassphraseChange={setConfirmPassphrase}
                 onRulesPassedChange={setRulesPassed}
-                error={error}
+                error=""
                 rulesPassed={rulesPassed}
                 isLoading={isLoading}
                 onKeyDown={handleKeyDown}

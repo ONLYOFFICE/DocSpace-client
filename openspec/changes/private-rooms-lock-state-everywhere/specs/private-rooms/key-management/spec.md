@@ -142,7 +142,7 @@ The system SHALL NOT show Common:NoKey or Common:NoEncryptionKey in Keys managem
 ## MODIFIED Requirements
 
 ### Requirement: Remember this device
-The system SHALL offer a "remember this device" option in the unlock dialog where enabled; when ticked, later identity requests on this device SHALL be served without a prompt until the user locks or forgets the device, deletes or resets the key, or the remembered record exceeds its maximum age (30 days by default). The option SHALL explain that it outlasts auto-lock and expires. The option SHALL sit directly under the passphrase field, before the other links of the dialog, and SHALL NOT be ticked by default.
+The system SHALL offer a "remember this device" option in the unlock dialog where enabled; when ticked, later identity requests on this device SHALL need no prompt until the user locks or forgets the device, deletes or resets the key, or the remembered record exceeds its maximum age (30 days by default). The option SHALL explain that it outlasts auto-lock and expires. It SHALL sit directly under the passphrase field, before the dialog's other links, and SHALL NOT be ticked by default.
 
 #### Scenario: Remembered
 - **WHEN** the user unlocks with the option ticked and reloads the page
@@ -176,7 +176,7 @@ The system SHALL offer Common:LockNow while the identity is unlocked; it SHALL w
 - **THEN** the identity is locked, the device is forgotten and the next operation prompts for the passphrase
 
 ### Requirement: Auto-lock timeout presets
-The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes, 30 minutes by default, and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, touch, scroll of the page or of a list or panel in it); with the 5 or 15 minute preset it SHALL also lock as soon as the tab is hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
+The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (30 by default) and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, touch, a scroll of the page or of a list in it); with the 5 or 15 minute preset it SHALL also lock once the tab is hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
 
 #### Scenario: Idle lock
 - **WHEN** the preset is 5 minutes and the user is inactive for 5 minutes

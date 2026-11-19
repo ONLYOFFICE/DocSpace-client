@@ -28,7 +28,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 5. Gate
 
-- [ ] 5.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, `cd common/tests && npx vitest run test/locales.test.js` for the new key in every language, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date and the counts
+- [x] 5.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, `cd common/tests && npx vitest run test/locales.test.js` for the new key in every language, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date and the counts
+  - 2026-11-19, `release/v4.1.0` at 07c5bd98ac9: `test:lefthook` exit 0 (8 files, 61 passed, 3 skipped); `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks, none from the cache); `locales.test.js` 44 passed, its two completeness checks failing on keys of other changes as before, `Common:EncryptedKeyCheckFailed` present in every language (`translation-stats.js --missing` lists it nowhere); `openspec validate --all --strict` 29 passed.
 
 ## Workflow follow-up
 

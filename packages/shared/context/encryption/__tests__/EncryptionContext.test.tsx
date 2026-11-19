@@ -537,6 +537,90 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(broadcastLock).not.toHaveBeenCalled();
     });
 
+    it("Lock now sends a lock", () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => latest.lock());
+
+      expect(broadcastLock).toHaveBeenCalledTimes(1);
+      expect(broadcastLock).toHaveBeenCalledWith("user-42");
+    });
+
+    it("Key deleted in another tab", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      await act(async () => {
+        await latest.lockAfterKeyRemoval("pub-base64");
+      });
+
+      expect(broadcastLock).toHaveBeenCalledWith("user-42", {
+        keysChanged: true,
+      });
+    });
+
+    it("Passphrase changed in another tab", () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => latest.lockAfterReseal());
+
+      expect(latest.isUnlocked).toBe(false);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+      expect(broadcastLock).toHaveBeenCalledWith("user-42", {
+        keysChanged: true,
+      });
+      expect(forgetDeviceUnlock).not.toHaveBeenCalled();
+      expect(forgetKeyOnDevice).not.toHaveBeenCalled();
+    });
+
+    it("Idle lock stays in its tab", () => {
+      vi.useFakeTimers();
+      try {
+        vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
+        SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+        renderTree();
+
+        act(() => {
+          vi.advanceTimersByTime(60_000);
+        });
+
+        expect(latest.isUnlocked).toBe(false);
+        expect(broadcastLock).not.toHaveBeenCalled();
+      } finally {
+        vi.useRealTimers();
+        vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      }
+    });
+
+    it("Hidden-tab lock stays in its tab", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(300);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
+      try {
+        SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+        renderTree();
+
+        Object.defineProperty(document, "visibilityState", {
+          value: "hidden",
+          configurable: true,
+        });
+        await act(async () => {
+          document.dispatchEvent(new Event("visibilitychange"));
+        });
+
+        expect(latest.isUnlocked).toBe(false);
+        expect(broadcastLock).not.toHaveBeenCalled();
+      } finally {
+        Object.defineProperty(document, "visibilityState", {
+          value: "visible",
+          configurable: true,
+        });
+        vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+        vi.mocked(locksWhenTabHidden).mockReturnValue(false);
+      }
+    });
+
     it("Remembered record left to the page that locked", () => {
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();

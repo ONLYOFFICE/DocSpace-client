@@ -72,7 +72,10 @@ import {
   restoreDeviceUnlock,
 } from "../../services/encryption/device-unlock-store";
 import { forgetKeyOnDevice } from "../../services/encryption/device-records";
-import { subscribeLockBroadcast } from "../../services/encryption/lock-broadcast";
+import {
+  broadcastLock,
+  subscribeLockBroadcast,
+} from "../../services/encryption/lock-broadcast";
 import {
   clearEncryptedFilenameCache,
   setFilenameCacheScope,
@@ -112,6 +115,11 @@ export type EncryptionContextValue = {
    * key, or every record of the user without one.
    */
   lockAfterKeyRemoval: (publicKey?: string) => Promise<void>;
+  /**
+   * Locks the identity after the user's envelope was sealed under a new
+   * passphrase; the device records, which hold the same key pair, stay.
+   */
+  lockAfterReseal: () => void;
   getIdentity: () => IdentityKeyPair | null;
   /** Prompts via the registered PassphraseDialog if cache is empty. */
   requireIdentity: () => Promise<IdentityKeyPair | null>;
@@ -283,11 +291,17 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [userKeys, t],
   );
 
+  // An explicit lock reaches the user's other pages; idle, hidden-tab and
+  // expiry locks stay with their page.
+  // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
   const lock = useCallback(() => {
-    if (userKeys?.userId) void forgetDeviceUnlock(userKeys.userId);
     SecretStorage.lock();
     clearEncryptedFilenameCache();
     setIsUnlocked(false);
+    if (userKeys?.userId) {
+      broadcastLock(userKeys.userId);
+      void forgetDeviceUnlock(userKeys.userId);
+    }
   }, [userKeys?.userId]);
 
   // Spec: private-rooms/key-management, "Removing the key removes what this device keeps of it"
@@ -297,11 +311,21 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       clearEncryptedFilenameCache();
       setIsUnlocked(false);
       if (userKeys?.userId) {
+        broadcastLock(userKeys.userId, { keysChanged: true });
         await forgetKeyOnDevice(userKeys.userId, removedPublicKey);
       }
     },
     [userKeys?.userId],
   );
+
+  const lockAfterReseal = useCallback(() => {
+    SecretStorage.lock();
+    clearEncryptedFilenameCache();
+    setIsUnlocked(false);
+    if (userKeys?.userId) {
+      broadcastLock(userKeys.userId, { keysChanged: true });
+    }
+  }, [userKeys?.userId]);
 
   const clearError = useCallback(() => {
     setUnlockError(null);
@@ -584,6 +608,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       unlock,
       lock,
       lockAfterKeyRemoval,
+      lockAfterReseal,
       getIdentity,
       requireIdentity,
       resolveKeyMismatch,
@@ -600,6 +625,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       unlock,
       lock,
       lockAfterKeyRemoval,
+      lockAfterReseal,
       getIdentity,
       requireIdentity,
       resolveKeyMismatch,

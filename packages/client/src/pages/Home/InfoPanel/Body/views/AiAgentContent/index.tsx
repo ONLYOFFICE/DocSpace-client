@@ -34,6 +34,7 @@
  */
 
 import React from "react";
+import { when } from "mobx";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -220,6 +221,18 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     filesStore.setBufferSelection(file as never);
     infoPanelStore.setIsMobileHidden(true);
     dialogsStore.setCopyPanelVisible(true);
+    // The copy panel leaves the buffered item where it is when it closes,
+    // and the Info panel shows a buffered item in place of the open folder:
+    // without this the agent's panel would stay the panel of this file, as
+    // the agent's page has no list whose click takes the buffer away. It
+    // outlives this view, which the panel may put away meanwhile.
+    when(
+      () => !dialogsStore.copyPanelVisible,
+      () => {
+        if (filesStore.bufferSelection?.id === file.id)
+          filesStore.setBufferSelection(null);
+      },
+    );
   };
 
   const getRowOptions = (file: TFile): ContextMenuModel[] => [

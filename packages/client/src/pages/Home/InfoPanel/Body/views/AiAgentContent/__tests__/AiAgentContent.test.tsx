@@ -6,18 +6,36 @@ const api = vi.hoisted(() => ({
   getAiThreadArtifacts: vi.fn(),
   getAiThreadAttachments: vi.fn(),
 }));
-const stores = vi.hoisted(() => ({
-  dialogsStore: {
-    aiChatActiveThreadId: "t-1",
-    aiChatThreadFilesChange: { threadId: "", seq: 0 },
-    setCopyPanelVisible: vi.fn(),
-  },
-  filesSettingsStore: { getIcon: () => "icon.svg" },
-  settingsStore: { culture: "en" },
-  filesActionsStore: { downloadFiles: vi.fn() },
-  filesStore: { setSelected: vi.fn(), setBufferSelection: vi.fn() },
-  infoPanelStore: { setIsMobileHidden: vi.fn() },
-}));
+// The copy panel's flag and the buffered item are observable, as in the
+// stores: the view waits for the panel to close.
+const stores = await vi.hoisted(async () => {
+  const { observable, runInAction } = await import("mobx");
+  const copyPanel = observable({ visible: false });
+  const filesStore = {
+    bufferSelection: null as { id: number } | null,
+    setSelected: vi.fn(),
+    setBufferSelection: vi.fn(),
+  };
+  return {
+    dialogsStore: {
+      aiChatActiveThreadId: "t-1",
+      aiChatThreadFilesChange: { threadId: "", seq: 0 },
+      get copyPanelVisible() {
+        return copyPanel.visible;
+      },
+      setCopyPanelVisible: vi.fn((visible: boolean) =>
+        runInAction(() => {
+          copyPanel.visible = visible;
+        }),
+      ),
+    },
+    filesSettingsStore: { getIcon: () => "icon.svg" },
+    settingsStore: { culture: "en" },
+    filesActionsStore: { downloadFiles: vi.fn() },
+    filesStore,
+    infoPanelStore: { setIsMobileHidden: vi.fn() },
+  };
+});
 
 vi.mock("@docspace/shared/api/ai/threadFiles", () => api);
 vi.mock("SRC_DIR/store/useStore", () => ({
@@ -88,6 +106,9 @@ beforeEach(() => {
   vi.clearAllMocks();
   stores.dialogsStore.aiChatActiveThreadId = "t-1";
   stores.dialogsStore.aiChatThreadFilesChange = { threadId: "", seq: 0 };
+  stores.dialogsStore.setCopyPanelVisible(false);
+  vi.clearAllMocks();
+  stores.filesStore.bufferSelection = null;
   api.getAiThreadArtifacts.mockResolvedValue([file(1, "Chart.png")]);
   api.getAiThreadAttachments.mockResolvedValue([file(2, "Agreement.docx"), file(3, "Notes.jpg")]);
 });
@@ -142,6 +163,30 @@ describe("AiAgentContent", () => {
       stores.filesStore.setSelected.mock.invocationCallOrder[0],
     );
     open.mockRestore();
+  });
+
+  // The agent's page has no list whose click would take the buffer away.
+  it("gives the Info panel back to the agent once the copy panel closes", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const [row] = screen.getByTestId("ai-agent-content-artifacts").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    fireEvent.click(row.querySelector('[data-testid="ai-agent-content-save-to-room"]') as HTMLElement);
+    expect(stores.filesStore.setBufferSelection).toHaveBeenCalledTimes(1);
+
+    stores.filesStore.bufferSelection = { id: 1 };
+    act(() => stores.dialogsStore.setCopyPanelVisible(false));
+    expect(stores.filesStore.setBufferSelection).toHaveBeenLastCalledWith(null);
+  });
+
+  it("leaves alone a buffer that holds something else by the time the copy panel closes", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const [row] = screen.getByTestId("ai-agent-content-artifacts").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    fireEvent.click(row.querySelector('[data-testid="ai-agent-content-save-to-room"]') as HTMLElement);
+
+    stores.filesStore.bufferSelection = { id: 99 };
+    act(() => stores.dialogsStore.setCopyPanelVisible(false));
+    expect(stores.filesStore.setBufferSelection).toHaveBeenCalledTimes(1);
   });
 
   // Spec: ai-agent-info-panel, "Actions of a Content row"

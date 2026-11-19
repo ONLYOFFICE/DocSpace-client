@@ -3,7 +3,7 @@
   "content": "This person has not set up an encryption key yet. They cannot be invited until they create one.",
   "content_en_sha1_hash": "6c057c4e9b5e3047ce7bbeff2bc9775c673c0472",
   "created_at": "2026-11-17T13:35:23.348Z",
-  "updated_at": "2026-11-17T13:36:00.712Z",
+  "updated_at": "2026-11-19T16:14:54.011Z",
   "comment": {
     "text": "Tooltip and screen-reader description of the 'No key' label in the people list of a private room's invite panel: explains that the person has not set up an encryption key and cannot be invited until they create one. Two sentences; 'They' refers to the person.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/useMissingKeyMarks.ts",
       "line_number": 102,
-      "context": "}),\n );\n \n const mark: TMark = {\n label: t(\"Common:NoEncryptionKeyMark\"),\n description: t(\"Common:NoEncryptionKeyMarkHint\"),\n };\n const marks: Record<string, TMark> = {};\n for (const id of ids) if (known.get(id) === false) marks[id] = mark;\n return marks;\n },",
+      "context": "}),\n );\n \n const mark: TMark = {\n label: t(\"Common:NoKey\"),\n description: t(\"Common:NoEncryptionKeyMarkHint\"),\n };\n const marks: Record<string, TMark> = {};\n for (const id of ids) if (known.get(id) === false) marks[id] = mark;\n return marks;\n },",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Close key setup?",
   "content_en_sha1_hash": "7b32aaa3629d11d4007e74a2b9ff210680d5f17a",
   "created_at": "2026-11-17T17:24:14.867Z",
-  "updated_at": "2026-11-17T17:25:40.356Z",
+  "updated_at": "2026-11-19T16:14:54.180Z",
   "comment": {
     "text": "Title of the small confirmation dialog that appears when the user tries to close the key setup dialog (the three-step dialog that creates the encryption key for private rooms) after typing a passphrase or while the recovery phrase is shown. A short question; key setup is the process of creating the key, not a settings page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
-      "line_number": 333,
+      "line_number": 327,
       "context": "// Spec: private-rooms/key-management, \"Discarding key setup names what is lost\"\n description={\n step === \"recovery\" ? t(\"Common:KeySetupDiscardRecovery\") : undefined\n }\n // Spec: private-rooms/key-management, \"The question that closes key setup names key setup\"\n title={t(\"Common:KeySetupDiscardTitle\")}\n confirmLabel={t(\"Common:KeySetupDiscardConfirm\")}\n />\n </>\n );\n };",
       "module": "/packages/shared"
     }

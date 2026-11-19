@@ -3,7 +3,7 @@
   "content": "Neither phrase is stored on the server: nobody, administrators included, can restore them for you.",
   "content_en_sha1_hash": "65c6979f39f65698dac4ef8cdc5646b359d7b534",
   "created_at": "2026-11-17T10:34:32.937Z",
-  "updated_at": "2026-11-17T10:35:18.940Z",
+  "updated_at": "2026-11-19T16:14:54.180Z",
   "comment": {
     "text": "Note at the end of the explanation step of key setup: neither the passphrase nor the recovery phrase is kept on the server, so nobody, not even an administrator, can restore them for the user.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
-      "line_number": 231,
-      "context": "</dd>\n </div>\n ))}\n </dl>\n <Text fontSize=\"13px\" className={styles.notStored}>\n {t(\"Common:KeySetupNotStored\")}\n </Text>\n </div>\n ) : null}\n \n {step === \"passphrase\" ? (",
+      "line_number": 247,
+      "context": "</div>\n </div>\n ))}\n </dl>\n <Text fontSize=\"13px\" className={styles.notStored}>\n {t(\"Common:KeySetupNotStored\")}\n </Text>\n </div>\n ) : null}\n \n {step === \"passphrase\" ? (",
       "module": "/packages/shared"
     }
   ],

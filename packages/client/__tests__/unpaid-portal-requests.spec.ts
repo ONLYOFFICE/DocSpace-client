@@ -141,6 +141,7 @@ const BOOT_ALLOWED = [
   "GET people/@self",
   "GET portal/payment/account",
   "GET portal/payment/customer/balance",
+  "GET portal/payment/customer/goodwill",
   "GET portal/payment/customerinfo",
   "GET portal/payment/quota",
   "GET portal/payment/quotas",
@@ -159,6 +160,9 @@ const TARIFF_PAGE_ALLOWED = [...BOOT_ALLOWED, "PUT portal/payment/url"];
 
 const WALLET_PAGE_ALLOWED = [
   ...BOOT_ALLOWED,
+  "GET portal/payment/accounting/prices/ai-search",
+  "GET portal/payment/accounting/prices/ai-tools",
+  "GET portal/payment/accounting/prices/ai-tools-byok",
   "GET portal/payment/customer/operations",
   "GET portal/payment/customer/usage",
   "GET portal/payment/topupsettings",

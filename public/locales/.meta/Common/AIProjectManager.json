@@ -3,7 +3,7 @@
   "content": "Project manager",
   "content_en_sha1_hash": "d30007bf2f399d99a8d9aaa2340f4d7446470742",
   "created_at": "2026-10-31T12:56:51.923Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-11-17T13:13:27.133Z",
   "comment": {
     "text": "Name of a member role in an AI project, shown in role lists and the members panel; the counterpart of a room manager. Noun phrase.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 199,
+      "line_number": 203,
       "context": "access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n projectManager: {\n key: \"projectManager\",\n label: t(\"Common:AIProjectManager\"),\n description: t(\"Common:AIProjectManagerDescription\"),\n tooltip: t(\"Common:UserMaxAvailableRoleWarning\"),\n color: globalColors.favoritesStatus,\n access: ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,",
       "module": "/packages/shared"
     }

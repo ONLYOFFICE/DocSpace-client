@@ -47,6 +47,7 @@ import {
 } from "@docspace/shared/api/ai/projects";
 
 import { useStore } from "SRC_DIR/store/useStore";
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 import RoomItem from "SRC_DIR/pages/AiProjects/sub-components/project/RoomItem";
 
 import styles from "./AiAgentContext.module.scss";
@@ -66,13 +67,14 @@ export const readAgentContext = async (id: number): Promise<TContext> => {
     // The skills are a detail of the list: without them the sets are still shown.
     getAiProjectSkills(id).catch(() => [] as TAiProjectSkillsRoom[]),
   ]);
-  const { instructionsRooms, knowledgeRooms, canEditSettings } =
-    project.aiProject;
+  const { instructionsRooms, knowledgeRooms } = project.aiProject;
   return {
     skillSets: instructionsRooms.filter((room) => room.available),
     knowledgeBases: knowledgeRooms.filter((room) => room.available),
     skills: Object.fromEntries(rooms.map((room) => [room.id, room.skills])),
-    canEdit: canEditSettings,
+    // Editing is for the agent's members: a DocSpace admin outside it reads
+    // the agent with full rights and is still offered no "Manage ..." rows.
+    canEdit: getAgentRights(project).edit,
   };
 };
 

@@ -32,7 +32,8 @@ import AiAgentContext from "../index";
 
 const room = (id: number, title: string, available = true) => ({ id, title, available });
 
-const project = (canEditSettings: boolean) => ({
+const project = (canEditSettings: boolean, inRoom = true) => ({
+  inRoom,
   aiProject: {
     instructionsRooms: [room(1, "Legal"), room(2, "Gone", false)],
     knowledgeRooms: [room(3, "Wiki")],
@@ -91,6 +92,7 @@ describe("AiAgentContext", () => {
     expect(api.getAiProject).toHaveBeenCalledTimes(1);
 
     api.getAiProject.mockResolvedValue({
+      inRoom: true,
       aiProject: { instructionsRooms: [room(1, "Legal")], knowledgeRooms: [room(4, "Policies")], canEditSettings: true },
     });
     act(() => {
@@ -107,6 +109,15 @@ describe("AiAgentContext", () => {
 
   it("offers a member no Manage rows", async () => {
     api.getAiProject.mockResolvedValue(project(false));
+    render(<AiAgentContext id={7} />);
+    await screen.findAllByTestId("room");
+    expect(screen.queryByTestId("ai-agent-context-manage-skills")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-context-manage-knowledge")).toBeNull();
+  });
+
+  // A DocSpace admin reads an agent they are not in with full rights.
+  it("offers no Manage rows to someone outside the agent, whatever rights the room answers", async () => {
+    api.getAiProject.mockResolvedValue(project(true, false));
     render(<AiAgentContext id={7} />);
     await screen.findAllByTestId("room");
     expect(screen.queryByTestId("ai-agent-context-manage-skills")).toBeNull();

@@ -31,7 +31,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. Waiting requests and activity
 
-- [ ] 4.1 Shared: `requireIdentity` keeps every waiting request and settles all of them on unlock, dismissal and loss of the key (design decision 8). Verify: cases "Two operations wait", "Dismissed with two operations waiting" and "Key removed while operations wait" in `context/encryption/__tests__/EncryptionContext.test.tsx` (`pnpm exec vitest run context/encryption`); `pnpm exec tsc` in the six packages
+- [x] 4.1 Shared: `requireIdentity` keeps every waiting request and settles all of them on unlock, dismissal and loss of the key (design decision 8). Verify: cases "Two operations wait", "Dismissed with two operations waiting" and "Key removed while operations wait" in `context/encryption/__tests__/EncryptionContext.test.tsx` (`pnpm exec vitest run context/encryption`); `pnpm exec tsc` in the six packages
 - [ ] 4.2 Shared: the idle timer hears activity in the capture phase (design decision 9). Verify: case "Scrolling a list counts as activity" in `context/encryption/__tests__/EncryptionContext.test.tsx` with fake timers and a scroll dispatched on an inner element (`pnpm exec vitest run context/encryption`); `pnpm exec tsc` in the six packages
 
 ## 5. Keys management and key setup details

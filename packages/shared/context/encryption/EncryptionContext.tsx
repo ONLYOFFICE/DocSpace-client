@@ -180,9 +180,17 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   const [unlockError, setUnlockError] = useState<string | null>(null);
   const [showPassphraseDialog, setShowPassphraseDialog] = useState(false);
   const [autoLockSuspendCount, setAutoLockSuspendCount] = useState(0);
-  const pendingResolveRef = useRef<
-    ((kp: IdentityKeyPair | null) => void) | null
-  >(null);
+  // Every request waiting for the unlock dialog; the dialog's outcome
+  // settles all of them.
+  // Spec: private-rooms/key-management, "Concurrent requests for the key share one unlock dialog"
+  const pendingResolversRef = useRef<
+    Array<(kp: IdentityKeyPair | null) => void>
+  >([]);
+  const settlePending = useCallback((kp: IdentityKeyPair | null) => {
+    const waiting = pendingResolversRef.current;
+    pendingResolversRef.current = [];
+    for (const resolve of waiting) resolve(kp);
+  }, []);
 
   const suspendAutoLock = useCallback((): (() => void) => {
     setAutoLockSuspendCount((c) => c + 1);
@@ -211,8 +219,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (!hasConfiguredKey || !userKeys?.userId) {
       setIsUnlocked(false);
       setShowPassphraseDialog(false);
-      pendingResolveRef.current?.(null);
-      pendingResolveRef.current = null;
+      settlePending(null);
       SecretStorage.lock();
       setFilenameCacheScope(null);
       setAutoLockScope(null);
@@ -382,7 +389,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
     setIsUnlocked(false);
     return new Promise<IdentityKeyPair | null>((resolve) => {
-      pendingResolveRef.current = resolve;
+      pendingResolversRef.current.push(resolve);
       setShowPassphraseDialog(true);
     });
   }, [hasConfiguredKey, PassphraseDialog, userKeys?.userId, userKeys?.publicKey]);
@@ -583,20 +590,18 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       const success = await unlock(passphrase, rememberDevice);
       if (success && userKeys?.userId) {
         const kp = SecretStorage.getCached(userKeys.userId);
-        pendingResolveRef.current?.(kp);
-        pendingResolveRef.current = null;
+        settlePending(kp);
         setShowPassphraseDialog(false);
       }
     },
-    [unlock, userKeys?.userId],
+    [unlock, userKeys?.userId, settlePending],
   );
 
   const handlePassphraseCancel = useCallback(() => {
-    pendingResolveRef.current?.(null);
-    pendingResolveRef.current = null;
+    settlePending(null);
     setShowPassphraseDialog(false);
     setUnlockError(null);
-  }, []);
+  }, [settlePending]);
 
   const handlePassphraseUnlocked = useCallback(
     (kp: IdentityKeyPair) => {
@@ -605,11 +610,10 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       }
       setIsUnlocked(true);
       setUnlockError(null);
-      pendingResolveRef.current?.(kp);
-      pendingResolveRef.current = null;
+      settlePending(kp);
       setShowPassphraseDialog(false);
     },
-    [userKeys?.userId],
+    [userKeys?.userId, settlePending],
   );
 
   const publicKey = userKeys?.publicKey ?? null;

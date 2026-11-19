@@ -181,14 +181,18 @@ const userKeysFixture: EncryptionUserKeys = {
 
 const captured = {
   passphrase: null as PassphraseDialogProps | null,
+  passphraseMounts: 0,
   keyChange: null as KeyChangeDialogModalProps | null,
   keyChangeMounts: 0,
 };
 
 const MockPassphraseDialog: React.FC<PassphraseDialogProps> = (props) => {
   captured.passphrase = props;
-  useEffect(() => () => {
-    captured.passphrase = null;
+  useEffect(() => {
+    captured.passphraseMounts += 1;
+    return () => {
+      captured.passphrase = null;
+    };
   }, []);
   return null;
 };
@@ -630,6 +634,67 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(forgetDeviceUnlock).not.toHaveBeenCalled();
       expect(forgetKeyOnDevice).not.toHaveBeenCalled();
       expect(broadcastLock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("Concurrent requests for the key share one unlock dialog", () => {
+    const askTwice = async () => {
+      let first!: Promise<IdentityKeyPair | null>;
+      let second!: Promise<IdentityKeyPair | null>;
+      await act(async () => {
+        first = latest.requireIdentity();
+        second = latest.requireIdentity();
+      });
+      return [first, second] as const;
+    };
+
+    beforeEach(() => {
+      captured.passphraseMounts = 0;
+    });
+
+    it("Two operations wait", async () => {
+      renderTree();
+      const [first, second] = await askTwice();
+      expect(captured.passphraseMounts).toBe(1);
+
+      vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
+      await act(async () => {
+        await captured.passphrase!.onSubmit("correct");
+      });
+
+      expect(await first).toEqual(dummyKeyPair);
+      expect(await second).toEqual(dummyKeyPair);
+      expect(captured.passphraseMounts).toBe(1);
+      expect(captured.passphrase).toBeNull();
+    });
+
+    it("Dismissed with two operations waiting", async () => {
+      renderTree();
+      const [first, second] = await askTwice();
+
+      act(() => captured.passphrase!.onCancel());
+
+      expect(await first).toBeNull();
+      expect(await second).toBeNull();
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("Key removed while operations wait", async () => {
+      const view = renderTree();
+      const [first, second] = await askTwice();
+
+      view.rerender(
+        <EncryptionProvider
+          userKeys={null}
+          PassphraseDialog={MockPassphraseDialog}
+        >
+          <Consumer />
+        </EncryptionProvider>,
+      );
+
+      expect(captured.passphrase).toBeNull();
+      expect(await first).toBeNull();
+      expect(await second).toBeNull();
     });
   });
 

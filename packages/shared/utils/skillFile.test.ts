@@ -51,6 +51,36 @@ describe("skill files", () => {
     });
   });
 
+  it("reads a description written over several lines", () => {
+    expect(
+      parseSkillFile("---\nname: review\ndescription: >\n  Reviews a contract\n  for risky clauses.\n---\nDo it").description,
+    ).toBe("Reviews a contract for risky clauses.");
+    expect(
+      parseSkillFile("---\nname: review\ndescription: |-\n  Reviews a contract\n  for risky clauses.\n---\nDo it").description,
+    ).toBe("Reviews a contract\nfor risky clauses.");
+    expect(
+      parseSkillFile("---\nname: review\ndescription: Reviews a contract\n  for risky clauses.\n---\nDo it").description,
+    ).toBe("Reviews a contract for risky clauses.");
+  });
+
+  it("keeps the frontmatter it does not edit when a file is read and written again", () => {
+    const source =
+      "---\nname: review\n# who may run it\nallowed-tools:\n  - Read\n  - Grep\ndescription: >\n  Reviews a contract\n  for risky clauses.\nlicense: MIT\nmetadata:\n  author: legal\n\n---\n\n# Steps\n";
+    const skill = parseSkillFile(source);
+    expect(skill).toEqual({
+      name: "review",
+      description: "Reviews a contract for risky clauses.",
+      body: "# Steps",
+      extra: "# who may run it\nallowed-tools:\n  - Read\n  - Grep\nlicense: MIT\nmetadata:\n  author: legal",
+    });
+
+    const written = buildSkillFile({ ...skill, description: "Reviews an NDA" });
+    expect(written).toBe(
+      '---\nname: "review"\ndescription: "Reviews an NDA"\n# who may run it\nallowed-tools:\n  - Read\n  - Grep\nlicense: MIT\nmetadata:\n  author: legal\n---\n\n# Steps\n',
+    );
+    expect(parseSkillFile(written)).toEqual({ ...skill, description: "Reviews an NDA" });
+  });
+
   it("takes a file without a frontmatter as instructions only", () => {
     expect(parseSkillFile("Just text")).toEqual({ name: "", description: "", body: "Just text" });
   });

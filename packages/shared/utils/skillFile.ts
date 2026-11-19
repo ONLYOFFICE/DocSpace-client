@@ -53,6 +53,12 @@ export type TSkillFile = {
   description: string;
   /** The instructions: the file after its frontmatter. */
   body: string;
+  /**
+   * The frontmatter lines that are neither the name nor the description
+   * (`license`, `allowed-tools`, a comment, ...), as the file has them, so a
+   * file read and written again keeps them. Absent when there are none.
+   */
+  extra?: string;
 };
 
 const NAME_CHAR = /[\p{L}\p{N}]/u;
@@ -129,9 +135,34 @@ const unquote = (value: string): string => {
   return trimmed;
 };
 
+/** A key at the start of a frontmatter line: `name:`, `allowed-tools:`. */
+const KEY_LINE = /^([A-Za-z_][\w-]*)[ \t]*:(.*)$/;
+
+/** The header of a YAML block scalar: `|` or `>`, with its optional chomping and indentation marks. */
+const BLOCK_SCALAR = /^([|>])[+\-\d]*$/;
+
 /**
- * Reads a skill file. A file without a frontmatter is all instructions; a
- * frontmatter key other than `name` and `description` is dropped.
+ * The value of a field written over several lines. A literal block (`|`)
+ * keeps its line breaks and a folded one (`>`) reads as one paragraph, as
+ * does a plain value continued on indented lines.
+ */
+const readValue = (inline: string, continuation: string[]): string => {
+  const head = inline.trim();
+  const block = BLOCK_SCALAR.exec(head);
+  const lines = continuation.map((line) => line.trim());
+  if (block) {
+    const text = block[1] === "|" ? lines.join("\n") : lines.filter(Boolean).join(" ");
+    return text.trim();
+  }
+  if (!lines.some(Boolean)) return unquote(head);
+  return unquote([head, ...lines].filter(Boolean).join(" "));
+};
+
+/**
+ * Reads a skill file. A file without a frontmatter is all instructions. The
+ * `name` and the `description` are read whether they are written on one
+ * line or over several; every other line of the frontmatter is kept as it
+ * is in `extra`.
  */
 export const parseSkillFile = (text: string): TSkillFile => {
   const source = text.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
@@ -139,23 +170,37 @@ export const parseSkillFile = (text: string): TSkillFile => {
   if (!match) return { name: "", description: "", body: source.trim() };
 
   const fields: Record<string, string> = {};
-  for (const line of match[1].split("\n")) {
-    const separator = line.indexOf(":");
-    if (separator <= 0) continue;
-    fields[line.slice(0, separator).trim()] = unquote(
-      line.slice(separator + 1),
-    );
+  const extra: string[] = [];
+  const lines = match[1].split("\n");
+  for (let i = 0; i < lines.length; ) {
+    const key = KEY_LINE.exec(lines[i]);
+    // The lines of the entry: everything up to the next line that starts at
+    // the margin, which is the next key or a comment.
+    let end = i + 1;
+    while (end < lines.length && (lines[end] === "" || /^[ \t]/.test(lines[end]))) end += 1;
+    if (key && (key[1] === "name" || key[1] === "description")) {
+      fields[key[1]] = readValue(key[2], lines.slice(i + 1, end));
+    } else {
+      extra.push(...lines.slice(i, end));
+    }
+    i = end;
   }
+  while (extra.length && extra[extra.length - 1].trim() === "") extra.pop();
 
   return {
     name: fields.name ?? "",
     description: fields.description ?? "",
     body: source.slice(match[0].length).trim(),
+    ...(extra.some((line) => line.trim() !== "") ? { extra: extra.join("\n") } : {}),
   };
 };
 
-/** Writes a skill file the way the AI service does: quoted one-line fields, then the instructions. */
-export const buildSkillFile = ({ name, description, body }: TSkillFile) =>
+/**
+ * Writes a skill file the way the AI service does: quoted one-line fields,
+ * then the instructions. The other frontmatter lines a file was read with
+ * (`extra`) follow the two fields unchanged.
+ */
+export const buildSkillFile = ({ name, description, body, extra }: TSkillFile) =>
   `---\nname: ${JSON.stringify(name)}\ndescription: ${JSON.stringify(
     description.replace(/\s+/g, " ").trim(),
-  )}\n---\n\n${body.trim()}\n`;
+  )}\n${extra ? `${extra}\n` : ""}---\n\n${body.trim()}\n`;

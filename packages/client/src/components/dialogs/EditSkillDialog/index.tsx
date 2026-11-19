@@ -120,6 +120,9 @@ const EditSkillDialog = ({
   );
   // The name is not called wrong before the user has changed it.
   const [isNameChanged, setIsNameChanged] = React.useState(false);
+  // The frontmatter the dialog does not edit (`license`, `allowed-tools`,
+  // ...): written back as the file had it.
+  const extraRef = React.useRef<string | undefined>(undefined);
 
   React.useEffect(() => {
     if (!file) return undefined;
@@ -128,6 +131,7 @@ const EditSkillDialog = ({
       .then((text) => {
         if (cancelled) return;
         const skill = parseSkillFile(text);
+        extraRef.current = skill.extra;
         setDescription(skill.description);
         setBody(skill.body);
         setIsLoading(false);
@@ -211,7 +215,7 @@ const EditSkillDialog = ({
     if (!canSave) return;
     setIsSaving(true);
     try {
-      const text = buildSkillFile({ name: skillName, description, body });
+      const text = buildSkillFile({ name: skillName, description, body, extra: extraRef.current });
       const title = name.trim();
       if (file) {
         await updateFileStream(file.id, new File([text], file.title, { type: "text/markdown" }), false, true);

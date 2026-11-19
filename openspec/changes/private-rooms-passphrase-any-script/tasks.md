@@ -23,7 +23,7 @@ in the test files (design.md, Risks).
 
 ## 3. End to end
 
-- [ ] 3.1 Add Playwright cases "Passphrase in another script" to `packages/client/__tests__/keys-management.spec.ts`, creating a key with 16 Cyrillic letters and with 12 CJK characters through the Create passphrase step and asserting that the strength line does not read "Weak", Continue is enabled and the key is registered, and "Passphrase change in another script" to `keys-management-advanced.spec.ts`, changing the passphrase to 20 Cyrillic letters. Verify: `keys-management.spec.ts` and `keys-management-advanced.spec.ts` green under Docker (`cd packages/client && pnpm test:e2e:docker:start`)
+- [x] 3.1 Add Playwright cases "Passphrase in another script" to `packages/client/__tests__/keys-management.spec.ts`, creating a key with 16 Cyrillic letters and with 12 CJK characters through the Create passphrase step and asserting that the strength line does not read "Weak", Continue is enabled and the key is registered, and "Passphrase change in another script" to `keys-management-advanced.spec.ts`, changing the passphrase to 20 Cyrillic letters. Verify: `keys-management.spec.ts` and `keys-management-advanced.spec.ts` green under Docker (`cd packages/client && pnpm test:e2e:docker:start`)
 
 ## 4. Gate
 

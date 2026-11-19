@@ -36,6 +36,7 @@
 import {
   generateIdentityKeyPair,
   serializeIdentity,
+  unlockWithPassphrase,
 } from "@docspace/shared/services/encryption/identity";
 import {
   capabilitiesHandler,
@@ -356,6 +357,60 @@ test.describe("Keys management — advanced flows", () => {
     expect(body.id).toBeTruthy();
     expect(body.publicKey).toBe(envelope.publicKey);
     expect(body.privateKeyEnc).not.toBe(envelope.privateKeyEnc);
+  });
+
+  // Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+  test("Passphrase change in another script: Cyrillic, 20 characters", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const newPassphrase = "абвгдеёжзийклмнопрст";
+    expect(newPassphrase).toHaveLength(20);
+    const envelope = await realEnvelope();
+    mockRequest.use(
+      ...privacyroomKeysHandlers(TEST_PORT, {
+        initial: [envelope],
+        userId: TEST_USER_ID,
+      }),
+    );
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    const rotateBtn = page
+      .locator("[class*='keyItemActions']")
+      .first()
+      .getByTestId("icon-button")
+      .nth(0);
+    await expect(rotateBtn).toBeVisible({ timeout: 10000 });
+    await rotateBtn.click();
+
+    await page.getByLabel("Current passphrase", { exact: true })
+      .fill(KNOWN_PASSPHRASE);
+    await page.getByLabel("New passphrase", { exact: true }).fill(newPassphrase);
+    await page.getByLabel("Confirm new passphrase", { exact: true })
+      .fill(newPassphrase);
+
+    const dialog = page.getByRole("dialog");
+    const strength = dialog.getByTestId("passphrase_strength");
+    await expect(strength).toBeVisible();
+    await expect(strength).not.toContainText("Weak");
+    const save = dialog.getByRole("button", { name: "Save", exact: true });
+    await expect(save).toBeEnabled();
+
+    const putPromise = page.waitForRequest(
+      (req) =>
+        req.method() === "PUT" && req.url().endsWith("/privacyroom/keys"),
+      { timeout: 30000 },
+    );
+    await save.click();
+
+    const body = (await putPromise).postDataJSON() as {
+      publicKey: string;
+      privateKeyEnc: string;
+    };
+    expect(body.publicKey).toBe(envelope.publicKey);
+    await expect(unlockWithPassphrase(body, newPassphrase)).resolves.toBeTruthy();
   });
 
   test("Auto-lock on a remembered device", async ({

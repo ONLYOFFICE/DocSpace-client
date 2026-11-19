@@ -1051,6 +1051,41 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
     });
 
+    it("Scrolling a list counts as activity", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(300);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      const list = document.createElement("div");
+      document.body.appendChild(list);
+      const scrollList = () =>
+        act(() => {
+          list.dispatchEvent(new Event("scroll", { bubbles: false }));
+        });
+
+      try {
+        // Six minutes of nothing but scrolling the list.
+        for (let minute = 0; minute < 6; minute++) {
+          act(() => {
+            vi.advanceTimersByTime(60_000);
+          });
+          scrollList();
+        }
+        expect(latest.isUnlocked).toBe(true);
+
+        act(() => {
+          vi.advanceTimersByTime(299_000);
+        });
+        expect(latest.isUnlocked).toBe(true);
+        act(() => {
+          vi.advanceTimersByTime(1_000);
+        });
+        expect(latest.isUnlocked).toBe(false);
+      } finally {
+        list.remove();
+      }
+    });
+
     it("Preset picked in another tab", () => {
       vi.useFakeTimers();
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(1800);

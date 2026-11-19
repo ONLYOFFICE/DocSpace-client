@@ -463,15 +463,21 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       "touchstart",
       "click",
     ];
+    // The capture phase hears a scroll of an inner list or panel, which does
+    // not bubble to the document.
+    // Spec: private-rooms/key-management, "Auto-lock timeout presets"
     for (const ev of events) {
-      document.addEventListener(ev, resetTimer, { passive: true });
+      document.addEventListener(ev, resetTimer, {
+        passive: true,
+        capture: true,
+      });
     }
     resetTimer();
 
     return () => {
       if (timerId !== null) clearTimeout(timerId);
       for (const ev of events) {
-        document.removeEventListener(ev, resetTimer);
+        document.removeEventListener(ev, resetTimer, { capture: true });
       }
     };
   }, [isUnlocked, autoLockSuspendCount, autoLockRevision]);

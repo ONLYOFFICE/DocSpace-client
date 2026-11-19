@@ -30,11 +30,11 @@ The system SHALL pin each peer's public key the first time it is seen, per curre
 - **THEN** the key is used as a match
 
 ### Requirement: Key mismatch on unwrap is refused unless a resolver accepts it
-The system SHALL, before unwrapping a DEK, compare the sender's public key with the pin, trying keys that match a pin before a changed key. On mismatch it SHALL ask the registered key-change resolver; without a resolver, or when the resolver refuses, the unwrap SHALL fail with an authentication error before any decryption. A sender key seen for the first time SHALL be pinned only after it opened the wrap, and the DEK SHALL be released only once that pin is stored.
+The system SHALL compare the sender's public key with the pins when it unwraps a DEK, trying keys that match a pin first. It SHALL ask the key-change resolver only about a changed key that opened the wrap, and release that DEK only once the key is accepted and stored; without a resolver, or on refusal, the DEK SHALL be wiped and the unwrap fail with an authentication error. A key seen first SHALL be pinned only after it opened the wrap, and its DEK released only once the pin is stored.
 
 #### Scenario: No resolver registered
 - **WHEN** a sender key mismatch is detected in a context with no dialog
-- **THEN** the file is not decrypted and no unwrap is attempted with the changed key
+- **THEN** the file is not decrypted and the file key the changed key opened is wiped without being handed over
 
 #### Scenario: User accepts the new key
 - **WHEN** the key-change dialog is accepted
@@ -42,7 +42,11 @@ The system SHALL, before unwrapping a DEK, compare the sender's public key with 
 
 #### Scenario: Unwrap waits for the decision
 - **WHEN** a sender key differs from its pin and the key-change dialog has not been answered
-- **THEN** no unwrap is attempted with that key until the user accepts it
+- **THEN** the file key is not handed over and nothing is decrypted until the user accepts the key
+
+#### Scenario: Listed changed key that does not open the wrap
+- **WHEN** a sender with a pin is listed with two changed keys and the wrap was made with the second
+- **THEN** the key-change dialog asks about the second key only, and the first is not trusted
 
 #### Scenario: Pinned key listed beside a changed one
 - **WHEN** the sender is listed with a pinned key and a changed key, and the wrap was made with the pinned key
@@ -70,6 +74,10 @@ The system SHALL check each member's public key against its pin before wrapping 
 #### Scenario: Accepted key cannot be stored
 - **WHEN** the user accepts a member's changed key and storing it among the trusted keys does not complete
 - **THEN** no wrap is produced for that key and the member is reported as a key that could not be checked
+
+#### Scenario: Two keys of one peer accepted at once
+- **WHEN** two tabs of the same user accept different changed keys of one peer at the same time
+- **THEN** both keys are among the peer's trusted keys
 
 ## ADDED Requirements
 

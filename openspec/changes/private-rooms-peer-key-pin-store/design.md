@@ -81,6 +81,10 @@ to the key-change dialog itself.
    `onerror` / `onabort` / a thrown `transaction()`. `acceptKey` returns
    whether the key is stored; `verifyMemberKey` and the unwrap use the key
    only when it is. The own-key callers do not read the result.
+   `acceptKey` reads the peer's record and stores the accepted key in one
+   readwrite transaction, as `checkKey` does (decision 2; proposal,
+   decision 7), so two keys of one peer accepted at the same time in two
+   tabs both stay stored.
    Durability: the default (`relaxed` in Chromium) commit is the acceptance
    point; `strict` durability is not requested, since a lost pin after a
    power cut only means the peer is seen for the first time again, which
@@ -106,14 +110,26 @@ to the key-change dialog itself.
    `match` (on `mismatch` - another tab pinned another key meanwhile - the
    resolver is asked with the DEK still held, and it is wiped on refusal;
    on `unavailable` it is wiped and `KeyCheckUnavailableError` thrown).
-   Changed keys are tried last, each only after the resolver accepted it
-   and `acceptKey` stored it. A pin read that fails throws
+   Changed keys are tried last, like unpinned ones: the first that opens
+   the wrap is put to the resolver with the DEK held, which is returned
+   only once the user accepted the key and `acceptKey` stored it, and wiped
+   on a refusal, a missing resolver or a key that was not stored (proposal,
+   decision 6). A pin read that fails throws
    `KeyCheckUnavailableError` before any unwrap. The TOFU fallback for a
    sender who left the room yields pinned keys only and joins the first
    group.
    Alternative: compare and pin before unwrapping every candidate -
    rejected, a listed key that does not open the wrap would then be pinned
    and the real key would raise a key-change dialog.
+   Alternative: ask about each changed key before unwrapping with it -
+   implemented first, then rejected on 2026-11-19. The server keeps every
+   pair a user ever created and lists them all:
+   `EncryptionKeyPairDtoHelper.CreateKeyPairAsync` appends a pair, and
+   `GetKeyPairForRoomAsync` and `GetKeyPairAsync(fileId)` return each
+   member's whole list
+   (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs`). With
+   two unpinned keys of one sender listed, the user was asked about a key
+   that opens nothing and, on accepting, trusted it.
 7. **Blocked open.** A `blocked` open refuses the waiting operation at
    once as "not open now" (proposal, decision 3). The database version
    stays 2 in this change, so an open is blocked only while a tab of an

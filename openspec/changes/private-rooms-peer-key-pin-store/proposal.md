@@ -20,12 +20,14 @@ unusable member key is contained, with unit tests for each behaviour.
   operation tries to open it again.
 - The first sight of a peer's key is decided once per peer, also when
   several operations or tabs see that peer at the same time.
-- The unwrap compares the sender key with the pins before it unwraps:
-  pinned keys are tried first, a changed key only after the user accepted
-  it, and a sender key seen for the first time is pinned once it opened the
+- The unwrap compares the sender key with the pins: pinned keys are tried
+  first, a changed key is put to the user only once it opened the wrap,
+  with its file key held until the user accepted the key and it is stored,
+  and a sender key seen for the first time is pinned once it opened the
   wrap, with the file key released only after that pin is stored.
 - A changed key the user accepts is used only once it is stored among the
-  peer's trusted keys.
+  peer's trusted keys; keys of one peer accepted at the same time all stay
+  stored.
 - When a key could not be checked, each operation says so in its own terms
   instead of reporting a refused key change or the ghost-state toast: the
   upload names the member under Common:EncryptedUploadShareFailed and keeps
@@ -91,8 +93,16 @@ Taken by the owner on 2026-11-19:
    existing Common:EncryptedUploadShareFailed, like a member it could not
    share with, and keeps them pending; no upload-specific text is added.
 
+6. The unwrap tries a changed sender key before it asks about it; the file
+   key it opens is held, never handed over before the user accepted the key
+   and it is stored, and wiped on a refusal. The dialog is shown only for
+   the key that opened the wrap, and a listed key that opens nothing is
+   never asked about or trusted.
+7. Accepting a key reads and writes the peer's pins in one transaction.
+
 Decisions 3 (revised), 4 and 5 were taken on 2026-11-19 after a review of
-the plan for the smallest change that meets the delta.
+the plan for the smallest change that meets the delta; decisions 6 and 7
+on the same day after a review of the implementation.
 
 ## Impact
 

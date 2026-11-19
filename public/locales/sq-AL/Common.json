@@ -959,6 +959,7 @@
   "EncryptedInviteFailed": "Nuk mund të ftoheshin {{users}}. Provoni përsëri.",
   "EncryptedInviteNoKey": "Nuk u ftuan: {{users}}. Ata nuk kanë konfiguruar ende çelësa enkriptimi. Kërkojuni të krijojnë një çelës në profilin e tyre, pastaj ftojini përsëri.",
   "EncryptedInviteResultTitle": "Rezultatet e ftesës",
+  "EncryptedKeyCheckFailed": "Çelësi i enkriptimit të dërguesit nuk mund të verifikohej në këtë pajisje. Rifreskoni faqen dhe provoni përsëri.",
   "EncryptedMovePartialFailure": "Këta skedarë nuk mund të zhvendoseshin jashtë dhomës private dhe mbeten në të: {{names}}",
   "EncryptedOperationFailed": "Veprimi me skedarin e enkriptuar dështoi. Provoni përsëri.",
   "EncryptedReencryptFailed": "Dështoi ndarja e skedarëve ekzistues të enkriptuar me anëtarët e rinj. Provoni përsëri nga paneli Anëtarët.",

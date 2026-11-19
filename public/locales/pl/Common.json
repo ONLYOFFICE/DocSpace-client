@@ -959,6 +959,7 @@
   "EncryptedInviteFailed": "Nie udało się zaprosić: {{users}}. Spróbuj ponownie.",
   "EncryptedInviteNoKey": "Nie zaproszono: {{users}}. Nie skonfigurowali jeszcze kluczy szyfrowania. Poproś ich o utworzenie klucza w profilu, a następnie zaproś ich ponownie.",
   "EncryptedInviteResultTitle": "Wyniki zaproszenia",
+  "EncryptedKeyCheckFailed": "Nie udało się sprawdzić klucza szyfrowania nadawcy na tym urządzeniu. Odśwież stronę i spróbuj ponownie.",
   "EncryptedMovePartialFailure": "Tych plików nie udało się przenieść poza pokój prywatny i pozostają w nim: {{names}}",
   "EncryptedOperationFailed": "Operacja na zaszyfrowanym pliku nie powiodła się. Spróbuj ponownie.",
   "EncryptedReencryptFailed": "Nie udało się udostępnić istniejących zaszyfrowanych plików nowym członkom. Spróbuj ponownie z panelu Członkowie.",

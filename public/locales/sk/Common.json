@@ -959,6 +959,7 @@
   "EncryptedInviteFailed": "{{users}} sa nepodarilo pozvať. Skúste to znova.",
   "EncryptedInviteNoKey": "Nepozvaní: {{users}}. Ešte nenastavili šifrovacie kľúče. Požiadajte ich, aby si vo svojom profile vytvorili kľúč, a potom ich pozvite znova.",
   "EncryptedInviteResultTitle": "Výsledky pozvania",
+  "EncryptedKeyCheckFailed": "Šifrovací kľúč odosielateľa sa na tomto zariadení nepodarilo overiť. Obnovte stránku a skúste to znova.",
   "EncryptedMovePartialFailure": "Tieto súbory sa nepodarilo presunúť mimo súkromnej miestnosti a zostávajú v nej: {{names}}",
   "EncryptedOperationFailed": "Operácia so zašifrovaným súborom zlyhala. Skúste to znova.",
   "EncryptedReencryptFailed": "Nepodarilo sa zdieľať existujúce zašifrované súbory s novými členmi. Skúste to znova z panela Členovia.",

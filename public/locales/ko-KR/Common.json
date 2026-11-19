@@ -959,6 +959,7 @@
   "EncryptedInviteFailed": "{{users}}을(를) 초대할 수 없습니다. 다시 시도하세요.",
   "EncryptedInviteNoKey": "초대되지 않음: {{users}}. 아직 암호화 키를 설정하지 않았습니다. 프로필에서 키를 생성하도록 요청한 후 다시 초대하세요.",
   "EncryptedInviteResultTitle": "초대 결과",
+  "EncryptedKeyCheckFailed": "이 기기에서 보낸 사람의 암호화 키를 확인할 수 없습니다. 페이지를 다시 로드한 후 다시 시도하세요.",
   "EncryptedMovePartialFailure": "다음 파일은 비공개 방 밖으로 이동할 수 없어 방에 그대로 남아 있습니다: {{names}}",
   "EncryptedOperationFailed": "암호화된 파일 작업에 실패했습니다. 다시 시도하세요.",
   "EncryptedReencryptFailed": "새 멤버와 기존 암호화 파일을 공유하는 데 실패했습니다. 멤버 패널에서 다시 시도하세요.",

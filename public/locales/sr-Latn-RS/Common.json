@@ -959,6 +959,7 @@
   "EncryptedInviteFailed": "Nije moguće pozvati {{users}}. Pokušajte ponovo.",
   "EncryptedInviteNoKey": "Nisu pozvani: {{users}}. Još nisu podesili ključeve za šifrovanje. Zamolite ih da naprave ključ u svom profilu, a zatim ih ponovo pozovite.",
   "EncryptedInviteResultTitle": "Rezultati poziva",
+  "EncryptedKeyCheckFailed": "Nije bilo moguće proveriti ključ za šifrovanje pošiljaoca na ovom uređaju. Osvežite stranicu i pokušajte ponovo.",
   "EncryptedMovePartialFailure": "Ove datoteke nije bilo moguće premestiti izvan privatne sobe i ostaju u njoj: {{names}}",
   "EncryptedOperationFailed": "Operacija sa šifrovanom datotekom nije uspela. Pokušajte ponovo.",
   "EncryptedReencryptFailed": "Deljenje postojećih šifrovanih fajlova sa novim članovima nije uspelo. Pokušajte ponovo iz panela Članovi.",

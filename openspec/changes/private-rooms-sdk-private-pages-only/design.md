@@ -192,7 +192,13 @@ file, so the change gets a scenario for the page (proposal, decision 6).
     `getFolderInfo` before `getFolder`. A room whose `roomType` is not
     `RoomsType.AIRoom` sets the agent-not-available state
     (`setIsErrorAIAgentNotAvailable`), so the room's contents are not
-    requested and no chat is mounted (proposal, decision 7).
+    requested (proposal, decision 7). The chat providers of the section
+    (`_components/ai-agent-providers`) take the route's `agentId` as their
+    scope, and `AiAgentView` renders the chat while the page loads, so both
+    wait for the room to be confirmed: the page records it in
+    `AiRoomStore.agentRoomId`, the providers use the route's id as their
+    scope only when it matches, and the view renders the chat only for that
+    room.
 
 ## Risks / Trade-offs
 

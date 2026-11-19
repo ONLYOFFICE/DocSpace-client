@@ -110,9 +110,19 @@ vi.mock("../../encryption/file-keys", () => ({
 }));
 
 vi.mock("../../encryption/room-file-access", () => ({
-  wrapDekForRecipients: vi.fn().mockResolvedValue([
-    { userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "enc-data" },
-  ]),
+  // One wrap per recipient, as the real function makes.
+  wrapDekForRecipients: vi.fn(
+    async ({
+      recipients,
+    }: {
+      recipients: Array<{ userId: string; publicKeyId?: string }>;
+    }) =>
+      recipients.map((r) => ({
+        userId: r.userId,
+        publicKeyId: r.publicKeyId ?? "",
+        privateKeyEnc: "enc-data",
+      })),
+  ),
 }));
 
 vi.mock("../encryption/filename-cache", () => ({

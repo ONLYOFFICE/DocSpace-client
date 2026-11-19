@@ -201,6 +201,11 @@ export async function unwrapDekForCurrentUser(params: {
     : new AuthenticationError("unwrap failed for all matching fileKeys");
 }
 
+/**
+ * Wraps the file key for each recipient; a recipient whose key cannot be
+ * wrapped for is left out of the result and the others still get theirs.
+ */
+// Spec: private-rooms/encryption-core, "An unusable member key affects only that member"
 export async function wrapDekForRecipients(params: {
   dek: Uint8Array;
   senderIdentity: IdentityKeyPair;
@@ -212,16 +217,20 @@ export async function wrapDekForRecipients(params: {
 
   const out: ServerAccessKeyDto[] = [];
   for (const r of recipients) {
-    const recipientPubBytes = decodeBase64(r.publicKey);
-    const wrapped = await wrapDEK({
-      dek,
-      senderPrivateKey: senderIdentity.privateKey,
-      senderPublicKey: senderIdentity.publicKey,
-      senderUserId,
-      recipientPublicKey: recipientPubBytes,
-      recipientUserId: r.userId,
-      fileId,
-    });
+    let wrapped: string;
+    try {
+      wrapped = await wrapDEK({
+        dek,
+        senderPrivateKey: senderIdentity.privateKey,
+        senderPublicKey: senderIdentity.publicKey,
+        senderUserId,
+        recipientPublicKey: decodeBase64(r.publicKey),
+        recipientUserId: r.userId,
+        fileId,
+      });
+    } catch {
+      continue;
+    }
     out.push({
       userId: r.userId,
       publicKeyId: r.publicKeyId ?? "",

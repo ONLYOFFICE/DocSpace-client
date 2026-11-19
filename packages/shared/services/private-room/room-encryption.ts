@@ -299,7 +299,10 @@ async function wrapFilesForMembers(
         ...newKeys,
       ];
       const written = await setFileEncryptionKeys(fileId, allKeys);
-      for (const userId of written?.skippedUserIds ?? []) {
+      const notWrapped = recipients
+        .filter((r) => !newKeys.some((k) => k.userId === r.userId))
+        .map((r) => r.userId);
+      for (const userId of [...notWrapped, ...(written?.skippedUserIds ?? [])]) {
         const id = String(userId);
         if (!recipients.some((r) => String(r.userId) === id)) continue;
         notStoredFileIds.set(id, [...(notStoredFileIds.get(id) ?? []), fileId]);
@@ -543,7 +546,13 @@ export async function backfillEncryptedFilesForRoomMembers(
       ];
       try {
         const written = await setFileEncryptionKeys(fileId, allKeys);
-        for (const userId of written?.skippedUserIds ?? []) {
+        const notWrapped = recipients
+          .filter((r) => !newKeys.some((k) => k.userId === r.userId))
+          .map((r) => r.userId);
+        for (const userId of [
+          ...notWrapped,
+          ...(written?.skippedUserIds ?? []),
+        ]) {
           const id = String(userId);
           if (!recipients.some((r) => String(r.userId) === id)) continue;
           missingFileIdsByMember[id] = [

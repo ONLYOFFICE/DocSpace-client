@@ -609,6 +609,9 @@ async function wrapDekForSelfAndRoom(args: {
       recipients: [{ userId, publicKey, publicKeyId }],
       fileId: fileIdNumeric,
     });
+    if (ownWraps.length === 0) {
+      throw new Error("the file key could not be wrapped for the uploader");
+    }
     ownEntryWritten = await writeOwnEntry(fileId, ownWraps);
   } catch (error) {
     ownEntryError = error;
@@ -662,7 +665,12 @@ async function wrapDekForSelfAndRoom(args: {
         fileId: fileIdNumeric,
       });
 
-      if (newKeys.length === 0) return { skipped };
+      // A member whose key could not be wrapped for waits for access.
+      const leftOut = verified
+        .filter((r) => !newKeys.some((k) => k.userId === r.userId))
+        .map((r) => r.userId);
+      const notWrapped = leftOut.length > 0 ? { failedFor: leftOut } : {};
+      if (newKeys.length === 0) return { skipped, ...notWrapped };
 
       const allKeys = [
         ...existingFileKeys.map((k) => ({
@@ -676,6 +684,7 @@ async function wrapDekForSelfAndRoom(args: {
       const unreadableFor = (written?.skippedUserIds ?? []).map(String);
       return {
         skipped,
+        ...notWrapped,
         ...(unreadableFor.length > 0 ? { unreadableFor } : {}),
       };
     } catch {

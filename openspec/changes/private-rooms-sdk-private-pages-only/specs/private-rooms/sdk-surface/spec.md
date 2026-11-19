@@ -69,6 +69,14 @@ The SDK SHALL list and open private rooms and their contents only on its private
 - **WHEN** the room selector opens or searches its list
 - **THEN** no private room is listed or offered
 
+#### Scenario: Chat opened with a private scope or file
+- **WHEN** the chat page is opened with a private room or a folder inside one as its scope, or with an encrypted file to attach
+- **THEN** the not-available view is shown, no chat is mounted, nothing is attached or uploaded, and the host still receives `onAppReady`
+
+#### Scenario: Room that is not an AI agent opened as an agent
+- **WHEN** the AI agent page is opened with the id of a room that is not an AI agent room, a private room included
+- **THEN** the agent-not-available view is shown, the room's contents are not requested and no chat is offered
+
 #### Scenario: Folder of a private room reached on a generic page
 - **WHEN** a generic page navigates in place to a private room or a folder inside one, by opening a folder or the location of a file
 - **THEN** the private page of that room is shown with that folder open, or the not-available view, and the generic page requests no listing of the folder

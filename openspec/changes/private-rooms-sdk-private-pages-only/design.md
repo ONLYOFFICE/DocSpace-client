@@ -3,8 +3,9 @@
 ## Context
 
 See proposal.md for the why. Read on 2026-11-19 at `54bed4b404d` (client)
-and `5636dd4a79` (server). No stashed design document covers these
-behaviours.
+and `5636dd4a79` (server). The server files read below are unchanged at
+`e5847cbaf5`, checked on the same day. No stashed design document covers
+these behaviours.
 
 Building blocks on the branch that this change reuses:
 
@@ -168,6 +169,23 @@ branch installs. `/sdk/chat` (`(chat)/chat/page.tsx`, `page.client.tsx`,
 Each of them can name a private room, a folder inside one or an encrypted
 file, so the change gets a scenario for the page (proposal, decision 6).
 
+9. **The chat page decides its ids before the chat is mounted.**
+   `ChatPage` (`(chat)/chat/page.client.tsx`, also rendered by the OAuth
+   variant) resolves a numeric scope (`agentId`, else `entityId`) with
+   `resolveFolderTarget` and loads `fileId` with `getFileInfo` before it
+   renders `AiAgentProviders`. A private scope or a file with `encrypted`
+   renders the not-available view, and `onAppReady` is sent as before. A
+   file inside a private room is always encrypted, so the file's own flag
+   decides and needs no path request. `ChatParamsBridge` attaches the file
+   it is given; it no longer loads the file itself (proposal, decision 6).
+
+10. **The AI agent page opens only AI agent rooms.**
+    `(ai-agents)/ai-agents/[agentId]/page.client.tsx` reads the room with
+    `getFolderInfo` before `getFolder`. A room whose `roomType` is not
+    `RoomsType.AIRoom` sets the agent-not-available state
+    (`setIsErrorAIAgentNotAvailable`), so the room's contents are not
+    requested and no chat is mounted (proposal, decision 7).
+
 ## Risks / Trade-offs
 
 - [One more request per generic address and per in-place navigation into
@@ -178,8 +196,8 @@ file, so the change gets a scenario for the page (proposal, decision 6).
 - [The OAuth variants cannot show a private room] → Accepted for this
   version (proposal, decision 5); the not-available view says the feature is
   not offered there.
-- [`/sdk/chat` is not covered yet] → Task 1.8 reads it before anything
-  else is applied, and the change is updated if it needs a scenario.
+- [One more request before the chat or an AI agent opens] → One small
+  request carrying an id; the chat makes none without a scope or a file.
 
 ## Migration Plan
 

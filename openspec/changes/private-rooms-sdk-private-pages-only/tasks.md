@@ -19,6 +19,8 @@ test:build && pnpm exec playwright test __tests__/e2e/private`.
 - [ ] 1.6 SDK: hold the room selector to the Rooms area (design, "Server facts"). Verify: a new `src/app/(selectors)/room-selector/loadData.test.ts` with "Room selector", asserting that the request carries `searchArea=Active` and no privacy filter (`cd packages/sdk && pnpm exec vitest run "src/app/(selectors)"`)
 - [ ] 1.7 SDK: decide the `targetId` of the uploader through the helper in `uploader/page.tsx` and `uploader/page.oauth.client.tsx`. A private target renders the not-available view, mounts no uploader and sends `onAppReady`. Verify: a new `src/app/uploader/page.test.tsx` with "Uploader aimed at a private folder" (the uploader is not rendered) and "Folder outside private rooms" (`cd packages/sdk && pnpm exec vitest run src/app/uploader`); `pnpm exec tsc` in sdk
 - [x] 1.8 SDK: read what `/sdk/chat` does with its `fileId` and `entityId` parameters, and whether either can name a private room, a folder inside one or an encrypted file. Record the answer with the files read in design.md. If one can, add the scenario through `/opsx:update` before any later task is applied. Verify: the note in design.md
+- [ ] 1.9 SDK: decide the scope (`agentId`, else `entityId`) and the `fileId` of the chat page before the chat is mounted, in `(chat)/chat/page.client.tsx` (design decision 9): a private scope or an encrypted file renders the not-available view and still sends `onAppReady`; `ChatParamsBridge` attaches the file it is given. Verify: cases "Chat opened with a private scope or file" (a private room, a folder inside one and an encrypted file, each with no providers mounted and nothing attached) and a case that a scope outside private rooms and a plain file open the chat as before, in a new `src/app/(chat)/chat/page.client.test.tsx` (`cd packages/sdk && pnpm exec vitest run "src/app/(chat)"`); `pnpm exec tsc` in sdk
+- [ ] 1.10 SDK: open only AI agent rooms on `(ai-agents)/ai-agents/[agentId]/page.client.tsx`, reading the room type with `getFolderInfo` before `getFolder` (design decision 10). Verify: case "Room that is not an AI agent opened as an agent" (a private room: agent-not-available state, `getFolder` not called) and a case that an AI agent room is loaded as before, in a new `src/app/(ai-agents)/ai-agents/[agentId]/page.client.test.tsx` (`cd packages/sdk && pnpm exec vitest run "src/app/(ai-agents)"`); `pnpm exec tsc` in sdk
 
 ## 2. Private pages and frame events
 
@@ -48,5 +50,6 @@ test:build && pnpm exec playwright test __tests__/e2e/private`.
 
 - Archive after 5.1. The archive modifies four requirements and adds two to
   the main `sdk-surface` spec, and adds one to `file-operations`.
-- Task 1.8 may add a scenario; if it does, the change is updated before 1.1
-  is applied.
+- Task 1.8 found that the chat page needs a scenario; the change was
+  updated with it, and with the AI agent page, before 1.1 (tasks 1.9 and
+  1.10).

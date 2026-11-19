@@ -22,6 +22,11 @@ methods of the client that create items.
   path, with one request that carries only the folder's id, before the
   folder's contents are requested and before any search text is sent.
 - The room selector keeps listing no private room; a test holds it.
+- The chat page shows the not-available view when its scope (`agentId` or
+  `entityId`) is a private room or a folder inside one, or its `fileId` is an
+  encrypted file, and mounts no chat. The AI agent page opens only AI agent
+  rooms; for any other room, a private one included, it shows its
+  agent-not-available state without requesting the room's contents.
 - Frame events carry no item of a private room: an encrypted file opened
   while the host subscribed to `onFileManagerClick` is opened by the SDK
   itself, as `onEditorOpen` already is, and the navigation event of the
@@ -98,7 +103,8 @@ the rooms list returns no private room.
 
 ## Decisions
 
-Taken by the owner on 2026-11-19, except the last:
+Taken by the owner on 2026-11-19; decision 6 was open until task 1.8 and
+was taken, with decision 7, after it:
 
 1. The uploader and the file selector show the not-available view for a
    private target, as the private pages do without the opt-in; no new text.
@@ -113,9 +119,12 @@ Taken by the owner on 2026-11-19, except the last:
    (`encryption-core`, "Metadata is visible to the server").
 5. Under OAuth (`auth=oauth`) the private pages are not served. A private
    target there shows the not-available view in place instead of a redirect.
-6. Open until task 1.8: `/sdk/chat` takes `fileId` and `entityId`. Task 1.8
-   reads what it does with them. If either can name a private item, the
-   change is updated through `/opsx:update` before code.
+6. `/sdk/chat` (read in task 1.8, design.md "The chat page") shows the
+   not-available view for a private scope or an encrypted file, as the
+   uploader and the file selector do, and mounts no chat; no new text.
+7. `/sdk/ai-agents/[agentId]` decides by the room type, with one request
+   carrying the room id before the room's contents, and shows its existing
+   agent-not-available state for any room that is not an AI agent room.
 
 ## Impact
 
@@ -132,6 +141,8 @@ Taken by the owner on 2026-11-19, except the last:
   `(private)/_utils/keys-management-link.ts`,
   `(private)/_components/private-shell/GhostStateToastEffect.tsx`; unit tests
   next to each.
+- SDK: `(chat)/chat/page.client.tsx` and
+  `(ai-agents)/ai-agents/[agentId]/page.client.tsx`, with unit tests.
 - Client: `packages/client/src/pages/Home/Hooks/useSDK.js` and a unit test.
 - E2E: `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts` and
   `private-security.spec.ts`.

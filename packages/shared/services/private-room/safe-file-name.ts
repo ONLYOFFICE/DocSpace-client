@@ -57,17 +57,27 @@ const trimEnds = (s: string) => s.trimStart().replace(/[\s.]+$/, "");
 const guardReserved = (s: string) =>
   RESERVED.test(s.split(".")[0].replace(/ +$/, "")) ? `_${s}` : s;
 
+/** The part before the extension, and the extension when it is short. */
+const splitExtension = (s: string): [string, string] => {
+  const dot = s.lastIndexOf(".");
+  return dot > 0 && byteLength(s.slice(dot)) <= MAX_EXTENSION_BYTES
+    ? [s.slice(0, dot), s.slice(dot)]
+    : [s, ""];
+};
+
+/** Cut at a code point boundary to at most `budget` bytes. */
+const cutToBytes = (s: string, budget: number) => {
+  const chars = Array.from(s);
+  let bytes = byteLength(s);
+  while (bytes > budget) bytes -= byteLength(chars.pop() ?? "");
+  return chars.join("");
+};
+
 const shortenToFit = (s: string): string => {
   if (byteLength(s) <= MAX_BYTES) return s;
-  const dot = s.lastIndexOf(".");
-  const hasExtension =
-    dot > 0 && byteLength(s.slice(dot)) <= MAX_EXTENSION_BYTES;
-  const extension = hasExtension ? s.slice(dot) : "";
-  const budget = MAX_BYTES - byteLength(extension);
-  const chars = Array.from(hasExtension ? s.slice(0, dot) : s);
-  let bytes = byteLength(chars.join(""));
-  while (bytes > budget) bytes -= byteLength(chars.pop() ?? "");
-  return guardReserved(trimEnds(chars.join("")) + extension);
+  const [base, extension] = splitExtension(s);
+  const cut = cutToBytes(base, MAX_BYTES - byteLength(extension));
+  return guardReserved(trimEnds(cut) + extension);
 };
 
 const toPlain = (name: string) =>
@@ -96,6 +106,16 @@ export function toSafeFileName(
     if (name) return name;
   }
   return "_";
+}
+
+/**
+ * A plain name with `suffix` before its extension, the part before the
+ * suffix shortened so that the whole still fits in 255 bytes.
+ */
+export function addSuffix(name: string, suffix: string): string {
+  const [base, extension] = splitExtension(name);
+  const budget = MAX_BYTES - byteLength(suffix) - byteLength(extension);
+  return cutToBytes(base, budget) + suffix + extension;
 }
 
 /** The key two names in one folder are compared by. */

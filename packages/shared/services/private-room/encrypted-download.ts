@@ -40,8 +40,7 @@ import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
-import { addCopySuffix } from "./encrypted-copy";
-import { fileNameKey } from "./safe-file-name";
+import { addSuffix, fileNameKey, toSafeFileName } from "./safe-file-name";
 
 export type DecryptConfig = {
   encryptedData: ArrayBuffer | Blob;
@@ -248,7 +247,7 @@ export function deduplicateFileNames(names: string[]): string[] {
     }
 
     for (let n = 1; ; n += 1) {
-      const candidate = addCopySuffix(name, n);
+      const candidate = addSuffix(name, ` (${n})`);
       const key = fileNameKey(candidate);
       if (!listed.has(key) && !used.has(key)) {
         used.add(key);
@@ -256,6 +255,73 @@ export function deduplicateFileNames(names: string[]): string[] {
       }
     }
   });
+}
+
+export type ArchiveItem = {
+  data: Uint8Array;
+  /** Name candidates in order, the last one the file's id. */
+  names: Array<string | number | null | undefined>;
+  /** From the folder the user picked down to the file's own folder. */
+  folders: Array<{ id: number | string; title: string }>;
+};
+
+type ArchiveDir = {
+  path: string;
+  sub: Map<string, ArchiveDir>;
+  children: Array<{ name: string; dir?: ArchiveDir }>;
+};
+
+const newArchiveDir = (): ArchiveDir => ({
+  path: "",
+  sub: new Map(),
+  children: [],
+});
+
+/**
+ * Archive entries in the order of the items: one directory per folder, and
+ * the folders and files of each directory named apart from each other.
+ */
+// Spec: private-rooms/file-operations, "Archive directories come from the folder tree"
+export function toArchiveEntries(
+  items: ArchiveItem[],
+): Array<{ name: string; data: Uint8Array }> {
+  const root = newArchiveDir();
+  const files = items.map((item) => {
+    let dir = root;
+    for (const folder of item.folders) {
+      let next = dir.sub.get(String(folder.id));
+      if (!next) {
+        next = newArchiveDir();
+        dir.sub.set(String(folder.id), next);
+        dir.children.push({
+          name: toSafeFileName(folder.title, folder.id),
+          dir: next,
+        });
+      }
+      dir = next;
+    }
+    const entry = { name: toSafeFileName(...item.names) };
+    dir.children.push(entry);
+    return { dir, entry, data: item.data };
+  });
+
+  const pending = [root];
+  for (let dir = pending.pop(); dir; dir = pending.pop()) {
+    const { path, children } = dir;
+    deduplicateFileNames(children.map((c) => c.name)).forEach((name, i) => {
+      const child = children[i];
+      child.name = name;
+      if (child.dir) {
+        child.dir.path = `${path}${name}/`;
+        pending.push(child.dir);
+      }
+    });
+  }
+
+  return files.map(({ dir, entry, data }) => ({
+    name: `${dir.path}${entry.name}`,
+    data,
+  }));
 }
 
 export function canUserDecrypt(

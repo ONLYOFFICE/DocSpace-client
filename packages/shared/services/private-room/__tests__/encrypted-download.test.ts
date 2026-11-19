@@ -43,6 +43,8 @@ import {
   deduplicateFileNames,
   downloadAndDecryptFile,
   downloadAndDecryptFileToBuffer,
+  toArchiveEntries,
+  type ArchiveItem,
 } from "../encrypted-download";
 import type { IdentityKeyPair } from "../../encryption/types";
 
@@ -225,6 +227,103 @@ describe("encryptedDownload", () => {
       expect(
         deduplicateFileNames(["x.txt", "y.txt", "x.txt", "y.txt"]),
       ).toEqual(["x.txt", "y.txt", "x (1).txt", "y (1).txt"]);
+    });
+  });
+
+  describe("toArchiveEntries", () => {
+    let nextId = 100;
+    const file = (
+      name: string,
+      folders: ArchiveItem["folders"] = [],
+    ): ArchiveItem => ({
+      data: new Uint8Array([1]),
+      names: [name, "stored title", (nextId += 1)],
+      folders,
+    });
+    const paths = (items: ArchiveItem[]) =>
+      toArchiveEntries(items).map((e) => e.name);
+
+    const root = { id: 1, title: "Root" };
+
+    it("File name with a separator inside a folder archive", () => {
+      const docs = { id: 10, title: "Docs" };
+      const out = paths([
+        file("../x/a.txt", [docs]),
+        file("b.txt", [docs]),
+      ]);
+
+      expect(out).toEqual(["Docs/.._x_a.txt", "Docs/b.txt"]);
+      expect(new Set(out.map((p) => p.split("/").length))).toEqual(
+        new Set([2]),
+      );
+    });
+
+    it("Folder title with a separator", () => {
+      expect(paths([file("f.txt", [root, { id: 2, title: "a/b" }])])).toEqual(
+        ["Root/a_b/f.txt"],
+      );
+    });
+
+    it("Folder title of which nothing is left", () => {
+      expect(paths([file("f.txt", [{ id: 7, title: ".." }])])).toEqual([
+        "7/f.txt",
+      ]);
+    });
+
+    it("Sibling folders that differ only in case", () => {
+      expect(
+        paths([
+          file("f1.txt", [root, { id: 2, title: "Plans" }]),
+          file("f2.txt", [root, { id: 3, title: "plans" }]),
+          file("f3.txt", [root, { id: 2, title: "Plans" }]),
+        ]),
+      ).toEqual([
+        "Root/Plans/f1.txt",
+        "Root/plans (1)/f2.txt",
+        "Root/Plans/f3.txt",
+      ]);
+    });
+
+    it("File and folder of the same name", () => {
+      const notes = { id: 2, title: "Notes" };
+      expect(paths([file("x.txt", [root, notes]), file("notes", [root])]))
+        .toEqual(["Root/Notes/x.txt", "Root/notes (1)"]);
+      expect(paths([file("notes", [root]), file("x.txt", [root, notes])]))
+        .toEqual(["Root/notes", "Root/Notes (1)/x.txt"]);
+    });
+
+    it("Names that differ only in case inside a folder", () => {
+      expect(
+        paths([file("Budget.xlsx", [root]), file("budget.xlsx", [root])]),
+      ).toEqual(["Root/Budget.xlsx", "Root/budget (1).xlsx"]);
+    });
+
+    it("Decrypted names clash: the same names in different folders stay", () => {
+      expect(
+        paths([
+          file("a.txt"),
+          file("a.txt"),
+          file("a (1).txt"),
+          file("a.txt", [root]),
+        ]),
+      ).toEqual(["a.txt", "a (2).txt", "a (1).txt", "Root/a.txt"]);
+    });
+
+    it("A clash of a name of 255 bytes keeps its suffix", () => {
+      const long = `${"a".repeat(251)}.txt`;
+      const [first, second] = paths([file(long), file(long)]);
+
+      expect(first).toBe(long);
+      expect(second).toBe(`${"a".repeat(247)} (1).txt`);
+      expect(new TextEncoder().encode(second).length).toBe(255);
+    });
+
+    it("Nothing left of the name: the next candidate names the entry", () => {
+      const out = toArchiveEntries([
+        { data: new Uint8Array([1]), names: ["...", "Title.docx", 5], folders: [] },
+        { data: new Uint8Array([1]), names: ["..", "\u0007", 6], folders: [] },
+      ]);
+      expect(out.map((e) => e.name)).toEqual(["Title.docx", "6"]);
     });
   });
 

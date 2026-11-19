@@ -104,7 +104,13 @@ change to the private pages' own listing; a change to the ui-kit.
    the path request. The section of the open folder is not used: `openFolder`
    also opens the destination of an operation, the parent of a restored item
    and a breadcrumb, which can lie in another section. A path that cannot be
-   read leaves the page as it is, with Common:UnexpectedError. `/sdk/personal-files/[destination]` only redirects to the
+   read leaves the page as it is, with Common:UnexpectedError. A page opened
+   with a share key resolves nothing: a room reached by an external link is
+   never private (`server-contract`, "No external or invitation links on a
+   private room"), and the path request carries no link token. A section
+   alias such as `@my`, which the create routes of the server take
+   (`FilesController`, `@my/file`) and the path route does not, is not
+   resolved by the frame methods either. `/sdk/personal-files/[destination]` only redirects to the
    personal files page and is covered there.
 
 3. **What the refusal is, per entry.** With the session cookie, the room

@@ -492,14 +492,14 @@ describe("TofuStore — IndexedDB open failure modes", () => {
     vi.restoreAllMocks();
   });
 
-  it("checkKey survives indexedDB.open onerror (Safari private mode, quota exceeded)", async () => {
+  it("IndexedDB unavailable: an open refused with InvalidStateError (private mode) keeps pins in memory", async () => {
     const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     vi.spyOn(console, "warn").mockImplementation(() => {});
     vi.stubGlobal("indexedDB", {
       open: () => {
         const req = new MockOpenRequest();
         queueMicrotask(() => {
-          req.error = new Error("InvalidStateError");
+          req.error = new DOMException("private mode", "InvalidStateError");
           req.onerror?.();
         });
         return req;
@@ -516,7 +516,7 @@ describe("TofuStore — IndexedDB open failure modes", () => {
     expect(errSpy).toHaveBeenCalled();
   });
 
-  it("checkKey survives indexedDB.open onblocked (other tab holds older version)", async () => {
+  it("Pin store cannot be opened: a blocked open refuses the operation", async () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
     vi.stubGlobal("indexedDB", {
       open: () => {
@@ -527,21 +527,20 @@ describe("TofuStore — IndexedDB open failure modes", () => {
     });
 
     const tofu = new TofuStore("alice");
-    const first = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
-    expect(first.kind).toBe("first-seen");
-    const swap = await tofu.checkKey("bob", "PKBOBABCDEFGHIJL");
-    expect(swap.kind).toBe("mismatch");
+    expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe(
+      "unreadable",
+    );
     expect(warnSpy).toHaveBeenCalled();
   });
 
-  it("list starts empty after open failure but reflects subsequent writes", async () => {
+  it("IndexedDB unavailable: list reflects the pins kept in memory", async () => {
     vi.spyOn(console, "error").mockImplementation(() => {});
     vi.spyOn(console, "warn").mockImplementation(() => {});
     vi.stubGlobal("indexedDB", {
       open: () => {
         const req = new MockOpenRequest();
         queueMicrotask(() => {
-          req.error = new Error("InvalidStateError");
+          req.error = new DOMException("private mode", "InvalidStateError");
           req.onerror?.();
         });
         return req;

@@ -39,6 +39,9 @@ vi.mock("@docspace/shared/services/encryption/device-unlock-store", () => ({
   forgetDeviceUnlock: vi.fn(async () => {}),
   getDeviceUnlockWrittenAt: vi.fn(async () => mocks.writtenAt),
 }));
+vi.mock("@docspace/shared/services/encryption/lock-broadcast", () => ({
+  broadcastLock: vi.fn(),
+}));
 vi.mock("@docspace/shared/services/encryption/passkey-unlock", () => ({
   isPasskeyUnlockAvailable: vi.fn(async () => mocks.passkeyAvailable),
   hasPasskeyUnlock: vi.fn(async () => false),
@@ -80,6 +83,9 @@ vi.mock("../flows/useRotatePassphraseFlow", () => ({
 vi.mock("../flows/useResetKeysFlow", () => ({
   useResetKeysFlow: () => mocks.reset,
 }));
+
+import { forgetDeviceUnlock } from "@docspace/shared/services/encryption/device-unlock-store";
+import { broadcastLock } from "@docspace/shared/services/encryption/lock-broadcast";
 
 import KeysManagement from "../KeysManagement";
 
@@ -233,6 +239,27 @@ describe("KeysManagement", () => {
     expect(
       screen.queryByRole("button", { name: "Common:LockNow" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("Forget device in another tab", async () => {
+    const user = userEvent.setup();
+    const order: string[] = [];
+    vi.mocked(forgetDeviceUnlock).mockImplementationOnce(async () => {
+      order.push("forget");
+    });
+    vi.mocked(broadcastLock).mockImplementationOnce(() => {
+      order.push("lock");
+    });
+    mocks.encryption.isUnlocked = false;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+
+    await user.click(
+      await screen.findByRole("button", { name: "Common:ForgetDeviceButton" }),
+    );
+
+    await waitFor(() => expect(broadcastLock).toHaveBeenCalledWith("user-1"));
+    expect(order).toEqual(["forget", "lock"]);
   });
 });
 

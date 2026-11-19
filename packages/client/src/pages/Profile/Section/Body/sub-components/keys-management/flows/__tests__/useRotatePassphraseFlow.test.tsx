@@ -58,9 +58,6 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
   changePassphrase: vi.fn(),
 }));
-vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { lock: vi.fn() },
-}));
 vi.mock("@docspace/shared/api/privacy", () => ({
   updateEncryptionKeys: vi.fn(),
 }));
@@ -68,7 +65,6 @@ vi.mock("@docspace/shared/api/privacy", () => ({
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -77,12 +73,14 @@ import {
   type RotatePassphraseFlow,
 } from "../useRotatePassphraseFlow";
 
+const lockAfterReseal = vi.fn();
+
 let latest: RotatePassphraseFlow;
 const Harness = (deps: {
   userId: string | undefined;
   refreshKeysFromServer: () => Promise<void>;
 }) => {
-  latest = useRotatePassphraseFlow(deps);
+  latest = useRotatePassphraseFlow({ lockAfterReseal, ...deps });
   return <>{latest.modals}</>;
 };
 
@@ -130,7 +128,7 @@ describe("useRotatePassphraseFlow", () => {
     expect(captured.rotation).not.toBeNull();
   });
 
-  it("does NOT lock SecretStorage when the rotation fails", async () => {
+  it("does NOT lock the identity when the rotation fails", async () => {
     vi.mocked(changePassphrase).mockRejectedValueOnce(
       new Error("wrong passphrase"),
     );
@@ -141,7 +139,7 @@ describe("useRotatePassphraseFlow", () => {
         captured.rotation!.onSubmit as (a: string, b: string) => Promise<void>
       )("wrong-old", "new-pass");
     });
-    expect(SecretStorage.lock).not.toHaveBeenCalled();
+    expect(lockAfterReseal).not.toHaveBeenCalled();
   });
 
   it("on success: uploads, locks, refreshes, toasts, then closes the dialog", async () => {
@@ -154,7 +152,7 @@ describe("useRotatePassphraseFlow", () => {
     vi.mocked(updateEncryptionKeys).mockImplementationOnce((async () => {
       callOrder.push("api");
     }) as never);
-    vi.mocked(SecretStorage.lock).mockImplementationOnce(() => {
+    lockAfterReseal.mockImplementationOnce(() => {
       callOrder.push("lock");
     });
     const refresh = vi.fn().mockImplementation(async () => {
@@ -182,5 +180,27 @@ describe("useRotatePassphraseFlow", () => {
     expect(callOrder).toEqual(["api", "lock", "refresh"]);
     expect(toastr.success).toHaveBeenCalledTimes(1);
     expect(captured.rotation).toBeNull();
+  });
+
+  it("Passphrase changed in another tab", async () => {
+    vi.mocked(changePassphrase).mockResolvedValueOnce({
+      publicKey: "pub-new",
+      privateKeyEnc: "enc-new",
+    });
+    vi.mocked(updateEncryptionKeys).mockResolvedValueOnce(undefined as never);
+    render(
+      <Harness
+        userId="42"
+        refreshKeysFromServer={vi.fn().mockResolvedValue(undefined)}
+      />,
+    );
+    act(() => latest.request(dummyKey));
+    await act(async () => {
+      await (
+        captured.rotation!.onSubmit as (a: string, b: string) => Promise<void>
+      )("old", "new");
+    });
+
+    expect(lockAfterReseal).toHaveBeenCalledTimes(1);
   });
 });

@@ -50,6 +50,7 @@ import {
   forgetDeviceUnlock,
   getDeviceUnlockWrittenAt,
 } from "@docspace/shared/services/encryption/device-unlock-store";
+import { broadcastLock } from "@docspace/shared/services/encryption/lock-broadcast";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@onlyoffice/apps-ui-kit/constants";
@@ -94,6 +95,7 @@ const KeysManagement = ({
     isUnlocked,
     lock,
     lockAfterKeyRemoval,
+    lockAfterReseal,
     getIdentity,
     requireIdentity,
     publicKey,
@@ -137,6 +139,8 @@ const KeysManagement = ({
   const handleForgetDevice = useCallback(() => {
     if (!userId) return;
     void forgetDeviceUnlock(userId).then(() => {
+      // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+      broadcastLock(userId);
       setRememberedUntil(null);
       toastr.success(t("Common:DeviceUnlockForgotten"));
     });
@@ -276,6 +280,7 @@ const KeysManagement = ({
   const rotate = useRotatePassphraseFlow({
     userId,
     refreshKeysFromServer,
+    lockAfterReseal,
     onForgotPassphrase: handleForgotPassphrase,
   });
 

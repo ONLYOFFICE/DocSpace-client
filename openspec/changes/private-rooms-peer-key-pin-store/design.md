@@ -140,9 +140,10 @@ to the key-change dialog itself.
 8. **Unusable keys are filtered before the pin check.** A key is usable
    when it decodes from base64 to exactly 32 bytes. `verifyMemberKey` gives
    a new kind `key-unusable` for any other key without touching the pin
-   store; `wrapDekForRecipients` wraps per recipient and returns the wraps
-   it produced with the recipients it could not wrap for, instead of
-   failing the whole call; the decode in the unwrap loop moves inside the
+   store; `wrapDekForRecipients` wraps per recipient and returns only the
+   wraps it produced, instead of failing the whole call, and the callers
+   take a recipient with no wrap in the result as one it could not wrap
+   for; the decode in the unwrap loop moves inside the
    per-candidate `try`. Callers map the outcome: upload adds the member to
    `failedFor` (Common:EncryptedUploadShareFailed, pending access), and does
    the same for `key-unchecked` (proposal, decision 5);

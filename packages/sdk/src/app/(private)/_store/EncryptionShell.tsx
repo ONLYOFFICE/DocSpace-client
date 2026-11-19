@@ -50,7 +50,6 @@ import { useEncryptionIdentityStore } from "./EncryptionIdentityStore";
 import { useKeysManagementLink } from "../_hooks/useKeysManagementLink";
 import GhostStateToastEffect from "../_components/private-shell/GhostStateToastEffect";
 import DeviceSetupHintEffect from "../_components/private-shell/DeviceSetupHintEffect";
-import BroadcastLockSync from "../_components/private-shell/BroadcastLockSync";
 import AbortOnLockEffect from "../_components/private-shell/AbortOnLockEffect";
 import FilenameRecoveryEffect from "../_components/private-shell/FilenameRecoveryEffect";
 import BackfillEncryptedRoomEffect from "../_components/private-shell/BackfillEncryptedRoomEffect";
@@ -100,7 +99,6 @@ const EncryptionShellInner: React.FC<EncryptionShellProps> = ({ children }) => {
     >
       <GhostStateToastEffect />
       <DeviceSetupHintEffect />
-      <BroadcastLockSync />
       <AbortOnLockEffect />
       <FilenameRecoveryEffect />
       <BackfillEncryptedRoomEffect />

@@ -16,7 +16,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 3. SDK
 
-- [ ] 3.1 SDK: build the archive of `downloadZip` with `toArchiveEntries` in `packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts`. Verify: cases "Name with separators in an SDK archive", "Names that differ only in case in an SDK archive" and "Single file saved from the SDK" in `src/app/(private)/_hooks/useEncryptedDownload.test.tsx` (`cd packages/sdk && pnpm exec vitest run "src/app/(private)/_hooks/useEncryptedDownload.test.tsx"`); `pnpm exec tsc` in sdk
+- [x] 3.1 SDK: build the archive of `downloadZip` with `toArchiveEntries` in `packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts`. Verify: cases "Name with separators in an SDK archive", "Names that differ only in case in an SDK archive" and "Single file saved from the SDK" in `src/app/(private)/_hooks/useEncryptedDownload.test.tsx` (`cd packages/sdk && pnpm exec vitest run "src/app/(private)/_hooks/useEncryptedDownload.test.tsx"`); `pnpm exec tsc` in sdk
 - [ ] 3.2 SDK: save a selection of one encrypted file with `downloadFile` in `packages/sdk/src/app/(docspace)/_hooks/useDownloadActions.ts` (design decision 7). Verify: case "One encrypted file selected" and a case for two encrypted files still going to `downloadZip` in `src/app/(docspace)/_hooks/useDownloadActions.test.tsx` (`cd packages/sdk && pnpm exec vitest run "src/app/(docspace)/_hooks/useDownloadActions.test.tsx"`); `pnpm exec tsc` in sdk
 
 ## 4. Archive writer

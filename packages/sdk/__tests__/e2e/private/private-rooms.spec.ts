@@ -51,7 +51,7 @@
 //   npx playwright test __tests__/e2e/private --reporter=line
 // =============================================================================
 
-import type { Locator, Page } from "@playwright/test";
+import type { FrameLocator, Locator, Page } from "@playwright/test";
 
 import type { SetupServer } from "@docspace/shared/__mocks__/e2e";
 
@@ -76,6 +76,7 @@ import { isDSE3Format } from "@docspace/shared/services/encryption/streaming-enc
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 
 import { FIXTURE_IDENTITY, FIXTURE_USER_ID } from "../fixtures/crypto";
+import { openInSdkHost, readSdkEvents } from "../fixtures/sdkHost";
 import {
   test,
   expect,
@@ -329,7 +330,7 @@ const openRoom = (page: Page, baseUrl: string) =>
   page.goto(`${baseUrl}${PRIVATE_LIST}/${ROOM_ID}${OPT_IN}`);
 
 /** The list shows titles without their extension. */
-const row = (page: Page, title: string) =>
+const row = (page: Page | FrameLocator, title: string) =>
   page
     .getByTestId("table-row")
     .filter({ hasText: title.replace(/\.[^.]+$/, "") });
@@ -697,6 +698,33 @@ const listsFolder = (folderId: number) => (url: string) =>
   new RegExp(`/api/2\\.0/files/${folderId}(\\?|$)`).test(url);
 
 const NOT_AVAILABLE = "This feature is under development";
+
+// Spec: private-rooms/sdk-surface, "Frame events carry no item of a private room"
+test.describe("(private) — frame events", () => {
+  test("Host subscribed to file clicks, encrypted file", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port, { files: [PHOTO] });
+    const frame = await openInSdkHost(
+      page,
+      baseUrl,
+      `${PRIVATE_LIST}/${ROOM_ID}${OPT_IN}`,
+      { privateRooms: true, events: { onFileManagerClick: true } },
+    );
+
+    await row(frame, PHOTO.serverTitle).dblclick();
+    await unlock(frame);
+
+    const viewer = frame.getByRole("dialog", {
+      name: `image viewer - ${PHOTO.name}`,
+    });
+    await expect(viewer.locator("img[src^='blob:']")).toBeVisible();
+    expect(await readSdkEvents(page, "onFileManagerClick")).toEqual([]);
+  });
+});
 
 // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
 test.describe("(private) — generic addresses of a private room", () => {

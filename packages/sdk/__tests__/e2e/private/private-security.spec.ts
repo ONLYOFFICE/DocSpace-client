@@ -300,6 +300,35 @@ test.describe("(private) — host frame-bridge sync (P2)", () => {
     await expect(page.locator("iframe")).toHaveCount(1);
   });
 
+  test("Navigation after a search of the private rooms list", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    mockBoth(privateRoomListHandler(port, { roomId: ROOM_ID, title: ROOM_TITLE }));
+    await openInSdkHost(
+      page,
+      baseUrl,
+      `/sdk/private${OPT_IN}&filterValue=Board%20plans&search=Board`,
+      { privateRooms: true },
+    );
+    await expect
+      .poll(() => lastNavigation(page))
+      .toMatchObject({ section: "rooms" });
+
+    await callSdkMethod(page, "navigateSection", { section: "archive" });
+    await expect
+      .poll(() => lastNavigation(page))
+      .toMatchObject({ section: "archive" });
+
+    const navigations = await readSdkEvents(page, "onNavigate");
+    expect(navigations.length).toBeGreaterThan(1);
+    for (const navigation of navigations) {
+      expect(JSON.stringify(navigation)).not.toContain("Board");
+    }
+  });
+
   test("onAppReady fires exactly once for the whole (private) group", async ({
     page,
     baseUrl,

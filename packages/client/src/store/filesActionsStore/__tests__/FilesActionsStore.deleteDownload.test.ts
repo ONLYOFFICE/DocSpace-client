@@ -29,6 +29,16 @@ vi.mock("@docspace/shared/services/private-room/encrypted-download", async (io) 
   triggerFileDownload: vi.fn(),
 }));
 
+vi.mock("@docspace/shared/services/encryption/room-file-access", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  unwrapDekForCurrentUser: vi.fn(async () => new Uint8Array(32)),
+}));
+
+vi.mock("@docspace/shared/services/encryption/file-keys", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  decryptFileFromBlob: vi.fn(),
+}));
+
 import { createTestFilesActionsStore, t } from "./testHarness";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -45,6 +55,7 @@ import {
   triggerFileDownload,
 } from "@docspace/shared/services/private-room/encrypted-download";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { decryptFileFromBlob } from "@docspace/shared/services/encryption/file-keys";
 
 const progress = () => {
   const setSecondaryProgressBarData = vi.fn();
@@ -582,5 +593,36 @@ describe("FilesActionsStore — single encrypted download", () => {
     );
     expect(requireUnlock).not.toHaveBeenCalled();
     expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();
+  });
+
+  it("Single file download", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
+    } as never);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response(new Uint8Array([1, 2, 3]))),
+    );
+    vi.mocked(decryptFileFromBlob).mockResolvedValue({
+      data: new Blob([new Uint8Array([7])]),
+      fileName: "../plans/q1\u0007.txt",
+    });
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFile({
+      id: 5,
+      title: "opaque-5.txt",
+      encrypted: true,
+      viewUrl: "http://x/5",
+    } as never);
+    vi.unstubAllGlobals();
+
+    const saved = vi.mocked(triggerFileDownload).mock.calls.at(-1)![0];
+    expect((saved as File).name).toBe(".._plans_q1.txt");
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 });

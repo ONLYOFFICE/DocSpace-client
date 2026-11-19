@@ -121,10 +121,12 @@ export const KeySetupDialog = ({
         ? !acknowledged
         : false;
 
+  // Spec: private-rooms/key-management, "Key setup is not closed while the key is registered"
   const { requestClose, confirming, confirmation } = useKeyDialogCloseGuard({
     visible: true,
     dirty,
     onCancel,
+    busy: isLoading,
   });
 
   const handleKeyDown = useMemo(

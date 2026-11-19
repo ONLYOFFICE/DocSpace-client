@@ -120,8 +120,9 @@ export async function unwrapDekForCurrentUser(params: {
       pinned.push({ userId: senderUserId, publicKey: pin.publicKey });
     }
   }
-  const unpinned = pins.length === 0 ? live : [];
-  const changed = pins.length === 0 ? [] : live.filter((c) => !isPinned(c.publicKey));
+  // Then every other listed key: unpinned when the sender has no record,
+  // changed when it has one. Each is asked about only once it opened the wrap.
+  const candidates = [...pinned, ...live.filter((c) => !isPinned(c.publicKey))];
 
   let lastError: unknown = null;
   const tryUnwrap = async (candidate: RoomMemberPublicKey) => {
@@ -141,6 +142,7 @@ export async function unwrapDekForCurrentUser(params: {
   };
 
   // A changed key is used only once the user accepted it and it is stored.
+  // Spec: private-rooms/encryption-core, "Key mismatch on unwrap is refused unless a resolver accepts it"
   const acceptChangedKey = async (known: TofuKeyEntry, newKey: string) => {
     const handler = onKeyChange ?? getKeyMismatchHandler();
     if (!handler) {
@@ -171,14 +173,14 @@ export async function unwrapDekForCurrentUser(params: {
     }
   };
 
-  // The key that opened the wrap is released only once its pin is stored.
-  for (const candidate of [...pinned, ...unpinned]) {
+  // The key that opened the wrap is released only once its pin is stored or,
+  // for a changed key, once the user accepted it and it is stored.
+  for (const candidate of candidates) {
     const dek = await tryUnwrap(candidate);
     if (!dek) continue;
     try {
       const result = await tofu.checkKey(senderUserId, candidate.publicKey);
       if (result.kind === "unavailable") throw new KeyCheckUnavailableError();
-      // Another tab pinned another key for the sender meanwhile.
       if (result.kind === "mismatch") {
         await acceptChangedKey(result.known, candidate.publicKey);
       }
@@ -187,13 +189,6 @@ export async function unwrapDekForCurrentUser(params: {
       throw e;
     }
     return dek;
-  }
-
-  const known = [...pins].sort((a, b) => b.lastSeenAt - a.lastSeenAt)[0];
-  for (const candidate of changed) {
-    await acceptChangedKey(known, candidate.publicKey);
-    const dek = await tryUnwrap(candidate);
-    if (dek) return dek;
   }
 
   throw lastError instanceof Error

@@ -445,7 +445,9 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
           fileId: FILE_ID,
         }),
       ).rejects.toBeInstanceOf(AuthenticationError);
-      expect(unwrappedWith(attacker)).toBe(false);
+      // The changed key opened the wrap; its file key was wiped, not handed over.
+      expect(unwrappedWith(attacker)).toBe(true);
+      expect(wipeDek).toHaveBeenCalledTimes(1);
     });
 
     it("User accepts the new key", async () => {
@@ -480,6 +482,7 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
           }),
       );
 
+      let handedOver = false;
       const unwrapping = unwrapDekForCurrentUser({
         fileKeys: attackerFileKeys,
         roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(attacker) }],
@@ -487,13 +490,44 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
         currentIdentity: bob,
         fileId: FILE_ID,
         onKeyChange: asked,
+      }).then((out) => {
+        handedOver = true;
+        return out;
       });
       await vi.waitFor(() => expect(asked).toHaveBeenCalled());
-      expect(unwrappedWith(attacker)).toBe(false);
+      await new Promise((resolve) => setTimeout(resolve, 20));
+      expect(handedOver).toBe(false);
 
       answer("accept");
       expect(await unwrapping).toEqual(dek);
-      expect(unwrappedWith(attacker)).toBe(true);
+    });
+
+    it("Listed changed key that does not open the wrap", async () => {
+      await pinAlice();
+      const other = await generateIdentityKeyPair();
+      const asked: string[] = [];
+
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: attackerFileKeys,
+        roomMemberKeys: [
+          { userId: ALICE_ID, publicKey: pubB64(other) },
+          { userId: ALICE_ID, publicKey: pubB64(attacker) },
+        ],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+        onKeyChange: async (info) => {
+          asked.push(info.newKey);
+          return "accept";
+        },
+      });
+
+      expect(out).toEqual(dek);
+      expect(asked).toEqual([pubB64(attacker)]);
+      const trusted = (await getTofuStore(BOB_ID).getKeys(ALICE_ID)).map(
+        (k) => k.publicKey,
+      );
+      expect(trusted).not.toContain(pubB64(other));
     });
 
     it("Pinned key listed beside a changed one", async () => {
@@ -563,7 +597,7 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
           onKeyChange: async () => "accept",
         }),
       ).rejects.toBeInstanceOf(KeyCheckUnavailableError);
-      expect(unwrappedWith(attacker)).toBe(false);
+      expect(wipeDek).toHaveBeenCalledTimes(1);
       accept.mockRestore();
     });
   });

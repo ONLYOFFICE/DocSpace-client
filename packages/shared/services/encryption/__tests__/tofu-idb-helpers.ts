@@ -99,7 +99,7 @@ export async function holdOlderVersion(scopeId: string): Promise<() => void> {
   return () => db.close();
 }
 
-type StoreMethod = "get" | "put" | "delete";
+type StoreMethod = "get" | "put" | "delete" | "getAll" | "clear";
 
 /** The next `method` call fails: its transaction aborts before the request. */
 export function failNextRequest(method: StoreMethod): void {

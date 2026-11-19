@@ -35,8 +35,10 @@
 
 import { describe, expect, it, vi } from "vitest";
 
-import { getTofuStore } from "../tofu-store";
+import { TofuStore, getTofuStore } from "../tofu-store";
 import {
+  abortAfterNextRequest,
+  failNextRequest,
   holdOlderVersion,
   openAnotherTab,
   readPin,
@@ -45,6 +47,7 @@ import {
 
 const PEER = "peer-1";
 const KEY_A = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+const KEY_B = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";
 
 /** An open request that fails with an error of the given name. */
 const failingOpen = (name: string) => {
@@ -161,6 +164,107 @@ describe("Pin store on IndexedDB", () => {
       release();
       expect(await store.checkKey(PEER, KEY_A)).toEqual({ kind: "first-seen" });
       expect((await readPin("me", PEER))?.keys).toHaveLength(1);
+    });
+  });
+
+  describe("Peer public keys are pinned on first use: storing and reading", () => {
+    it("First sight", async () => {
+      const seen = getTofuStore("me").checkKey(PEER, KEY_A);
+
+      expect(await seen).toEqual({ kind: "first-seen" });
+      // Reported once committed: another tab reads the pin at once.
+      expect((await readPin("me", PEER))?.keys).toHaveLength(1);
+    });
+
+    it("Pin cannot be stored", async () => {
+      abortAfterNextRequest("put");
+
+      expect((await getTofuStore("me").checkKey(PEER, KEY_A)).kind).toBe(
+        "unreadable",
+      );
+      expect(await readPin("me", PEER)).toBeUndefined();
+    });
+
+    it("Pin cannot be read", async () => {
+      await storePinInAnotherTab();
+      failNextRequest("get");
+
+      expect((await getTofuStore("me").checkKey(PEER, KEY_B)).kind).toBe(
+        "unreadable",
+      );
+      // The stored pin is not overwritten.
+      expect((await readPin("me", PEER))?.keys).toEqual([
+        expect.objectContaining({ publicKey: KEY_A }),
+      ]);
+    });
+
+    it("Last-seen time not recorded", async () => {
+      await storePinInAnotherTab();
+      abortAfterNextRequest("put");
+
+      expect((await getTofuStore("me").checkKey(PEER, KEY_A)).kind).toBe(
+        "match",
+      );
+      expect((await readPin("me", PEER))?.keys[0].lastSeenAt).toBe(1);
+    });
+  });
+
+  describe("The first sight of a peer key is decided once per peer", () => {
+    it("Two keys of one peer seen at once", async () => {
+      const store = getTofuStore("me");
+
+      const results = await Promise.all([
+        store.checkKey(PEER, KEY_A),
+        store.checkKey(PEER, KEY_B),
+      ]);
+
+      expect(results.map((r) => r.kind).sort()).toEqual([
+        "first-seen",
+        "mismatch",
+      ]);
+      expect((await readPin("me", PEER))?.keys).toHaveLength(1);
+    });
+
+    it("One key of one peer seen twice at once", async () => {
+      const store = getTofuStore("me");
+
+      const results = await Promise.all([
+        store.checkKey(PEER, KEY_A),
+        store.checkKey(PEER, KEY_A),
+      ]);
+
+      expect(results.map((r) => r.kind).sort()).toEqual(["first-seen", "match"]);
+    });
+
+    it("Two tabs see a new peer", async () => {
+      // Two stores of one user, each with its own connection, as two tabs.
+      const results = await Promise.all([
+        new TofuStore("me").checkKey(PEER, KEY_A),
+        new TofuStore("me").checkKey(PEER, KEY_B),
+      ]);
+
+      expect(results.map((r) => r.kind).sort()).toEqual([
+        "first-seen",
+        "mismatch",
+      ]);
+      expect((await readPin("me", PEER))?.keys).toHaveLength(1);
+    });
+  });
+
+  describe("writes that fail", () => {
+    it("forget resolves when the delete fails", async () => {
+      failNextRequest("delete");
+      await expect(getTofuStore("me").forget(PEER)).resolves.toBeUndefined();
+    });
+
+    it("list is empty when the read fails", async () => {
+      failNextRequest("getAll");
+      expect(await getTofuStore("me").list()).toEqual([]);
+    });
+
+    it("clear resolves when the clear fails", async () => {
+      failNextRequest("clear");
+      await expect(getTofuStore("me").clear()).resolves.toBeUndefined();
     });
   });
 });

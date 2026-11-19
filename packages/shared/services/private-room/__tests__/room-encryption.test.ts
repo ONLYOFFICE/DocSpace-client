@@ -45,6 +45,7 @@ import {
   resetTofuStores,
   unregisterKeyMismatchHandler,
 } from "../../encryption/tofu-store";
+import { mockIDB, resetMockIDB } from "./_helpers/mock-idb";
 import type {
   IdentityKeyPair,
   ServerAccessKeyDto,
@@ -96,135 +97,6 @@ vi.mock("../../../api/files/filter", () => {
   }
   return { default: FilesFilter };
 });
-
-type Store = Map<string, unknown>;
-
-class MockOpenRequest {
-  result: MockDB | null = null;
-  transaction: MockTransaction | null = null;
-  error: Error | null = null;
-  onupgradeneeded:
-    | ((event: { oldVersion: number; newVersion: number | null }) => void)
-    | null = null;
-  onsuccess: (() => void) | null = null;
-  onerror: (() => void) | null = null;
-  onblocked: (() => void) | null = null;
-}
-
-class MockRequest<T> {
-  result: T | undefined;
-  error: Error | null = null;
-  onsuccess: (() => void) | null = null;
-  onerror: (() => void) | null = null;
-}
-
-class MockObjectStoreNames {
-  constructor(private names: Set<string>) {}
-  contains(name: string): boolean {
-    return this.names.has(name);
-  }
-}
-
-class MockObjectStore {
-  constructor(private store: Store) {}
-
-  get(key: string): MockRequest<unknown> {
-    const req = new MockRequest<unknown>();
-    queueMicrotask(() => {
-      req.result = this.store.get(key);
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  put(value: { userId: string }): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
-      this.store.set(value.userId, value);
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  delete(key: string): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
-      this.store.delete(key);
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  getAll(): MockRequest<unknown[]> {
-    const req = new MockRequest<unknown[]>();
-    queueMicrotask(() => {
-      req.result = Array.from(this.store.values());
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  clear(): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
-      this.store.clear();
-      req.onsuccess?.();
-    });
-    return req;
-  }
-}
-
-class MockTransaction {
-  constructor(private store: Store) {}
-  objectStore(_name: string): MockObjectStore {
-    return new MockObjectStore(this.store);
-  }
-}
-
-class MockDB {
-  objectStoreNames: MockObjectStoreNames;
-  constructor(
-    private store: Store,
-    private storeNames: Set<string>,
-  ) {
-    this.objectStoreNames = new MockObjectStoreNames(storeNames);
-  }
-  createObjectStore(name: string, _options: { keyPath: string }): void {
-    this.storeNames.add(name);
-  }
-  transaction(_names: string, _mode: IDBTransactionMode): MockTransaction {
-    return new MockTransaction(this.store);
-  }
-}
-
-const dbs = new Map<string, { store: Store; storeNames: Set<string> }>();
-
-function resetMockIDB(): void {
-  dbs.clear();
-}
-
-const mockIDB = {
-  open(name: string, version = 1): MockOpenRequest {
-    const req = new MockOpenRequest();
-    let entry = dbs.get(name);
-    const isFresh = !entry;
-    if (!entry) {
-      entry = { store: new Map(), storeNames: new Set() };
-      dbs.set(name, entry);
-    }
-    const db = new MockDB(entry.store, entry.storeNames);
-    queueMicrotask(() => {
-      req.result = db;
-      if (isFresh) {
-        req.transaction = new MockTransaction(entry.store);
-        req.onupgradeneeded?.({ oldVersion: 0, newVersion: version });
-        req.transaction = null;
-      }
-      req.onsuccess?.();
-    });
-    return req;
-  },
-};
 
 const ALICE = "11111111-1111-1111-1111-111111111111";
 const BOB = "22222222-2222-2222-2222-222222222222";

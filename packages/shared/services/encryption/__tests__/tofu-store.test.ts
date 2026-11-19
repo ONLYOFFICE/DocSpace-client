@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { IDBFactory } from "fake-indexeddb";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
 import {
@@ -41,160 +42,31 @@ import {
   resetTofuStores,
 } from "../tofu-store";
 
-// Minimal in-memory IDBFactory good enough for tofu-store.ts. Persists data
-// per-database in a module-level Map so reopening a DB returns the same data
-// (mirrors real IndexedDB). Object-store schema is fixed (keyPath: "userId"),
-// matching what tofuStore.openDB creates on upgrade.
-type Store = Map<string, unknown>;
-
-class MockOpenRequest {
-  result: MockDB | null = null;
-  transaction: MockTransaction | null = null;
-  error: Error | null = null;
-  onupgradeneeded:
-    | ((event: { oldVersion: number; newVersion: number | null }) => void)
-    | null = null;
-  onsuccess: (() => void) | null = null;
-  onerror: (() => void) | null = null;
-  onblocked: (() => void) | null = null;
-}
-
-class MockRequest<T> {
-  result: T | undefined;
-  error: Error | null = null;
-  onsuccess: (() => void) | null = null;
-  onerror: (() => void) | null = null;
-}
-
-class MockObjectStoreNames {
-  constructor(private names: Set<string>) {}
-  contains(name: string): boolean {
-    return this.names.has(name);
-  }
-}
-
-class MockObjectStore {
-  constructor(private store: Store) {}
-
-  get(key: string): MockRequest<unknown> {
-    const req = new MockRequest<unknown>();
+/** A factory whose opens are answered with `answer`: "blocked" or an error name. */
+const answeredOpen = (answer: string) => ({
+  open: () => {
+    const req: {
+      error?: DOMException;
+      onerror?: () => void;
+      onblocked?: () => void;
+    } = {};
     queueMicrotask(() => {
-      req.result = this.store.get(key);
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  put(value: { userId: string }): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
-      this.store.set(value.userId, value);
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  delete(key: string): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
-      this.store.delete(key);
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  getAll(): MockRequest<unknown[]> {
-    const req = new MockRequest<unknown[]>();
-    queueMicrotask(() => {
-      req.result = Array.from(this.store.values());
-      req.onsuccess?.();
-    });
-    return req;
-  }
-
-  clear(): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
-      this.store.clear();
-      req.onsuccess?.();
-    });
-    return req;
-  }
-}
-
-class MockTransaction {
-  constructor(private store: Store) {}
-  objectStore(_name: string): MockObjectStore {
-    return new MockObjectStore(this.store);
-  }
-}
-
-class MockDB {
-  objectStoreNames: MockObjectStoreNames;
-  constructor(
-    private store: Store,
-    private storeNames: Set<string>,
-  ) {
-    this.objectStoreNames = new MockObjectStoreNames(storeNames);
-  }
-  createObjectStore(name: string, _options: { keyPath: string }): void {
-    this.storeNames.add(name);
-  }
-  transaction(_names: string, _mode: IDBTransactionMode): MockTransaction {
-    return new MockTransaction(this.store);
-  }
-}
-
-const dbs = new Map<
-  string,
-  { store: Store; storeNames: Set<string>; version: number }
->();
-
-function resetMockIDB(): void {
-  dbs.clear();
-}
-
-function seedMockIDB(
-  name: string,
-  version: number,
-  storeName: string,
-  records: ({ userId: string } & Record<string, unknown>)[],
-): void {
-  const store: Store = new Map();
-  for (const r of records) store.set(r.userId, r);
-  dbs.set(name, { store, storeNames: new Set([storeName]), version });
-}
-
-const mockIDB = {
-  open(name: string, version = 1): MockOpenRequest {
-    const req = new MockOpenRequest();
-    let entry = dbs.get(name);
-    if (!entry) {
-      entry = { store: new Map(), storeNames: new Set(), version: 0 };
-      dbs.set(name, entry);
-    }
-    const upgradeFrom = entry.version < version ? entry.version : null;
-    const db = new MockDB(entry.store, entry.storeNames);
-    queueMicrotask(() => {
-      req.result = db;
-      if (upgradeFrom !== null) {
-        req.transaction = new MockTransaction(entry.store);
-        req.onupgradeneeded?.({ oldVersion: upgradeFrom, newVersion: version });
-        req.transaction = null;
-        entry.version = version;
+      if (answer === "blocked") {
+        req.onblocked?.();
+        return;
       }
-      req.onsuccess?.();
+      req.error = new DOMException(answer, answer);
+      req.onerror?.();
     });
     return req;
   },
-};
+});
 
 // Tests
 describe("TofuStore", () => {
   beforeEach(() => {
-    resetMockIDB();
     resetTofuStores();
-    vi.stubGlobal("indexedDB", mockIDB);
+    vi.stubGlobal("indexedDB", new IDBFactory());
   });
 
   afterEach(() => {
@@ -358,15 +230,22 @@ describe("TofuStore", () => {
   });
 
   it("migrates a v1 single-key record to the multi-key shape", async () => {
-    seedMockIDB("docspace-tofu-alice", 1, "known_keys", [
-      {
-        userId: "bob",
-        publicKey: "PKBOBABCDEFGHIJK",
-        firstSeenAt: 1000,
-        lastSeenAt: 2000,
-        verifiedAt: 1500,
-      },
-    ]);
+    await new Promise<void>((resolve) => {
+      const req = indexedDB.open("docspace-tofu-alice", 1);
+      req.onupgradeneeded = () => {
+        req.result.createObjectStore("known_keys", { keyPath: "userId" }).put({
+          userId: "bob",
+          publicKey: "PKBOBABCDEFGHIJK",
+          firstSeenAt: 1000,
+          lastSeenAt: 2000,
+          verifiedAt: 1500,
+        });
+      };
+      req.onsuccess = () => {
+        req.result.close();
+        resolve();
+      };
+    });
 
     const tofu = new TofuStore("alice");
     const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
@@ -455,6 +334,29 @@ describe("TofuStore — IndexedDB unavailable (in-memory fallback)", () => {
     vi.unstubAllGlobals();
   });
 
+  it("Two keys of one peer seen at once", async () => {
+    const tofu = new TofuStore("alice");
+
+    const results = await Promise.all([
+      tofu.checkKey("bob", "PKBOBABCDEFGHIJK"),
+      tofu.checkKey("bob", "PKBOBABCDEFGHIJL"),
+    ]);
+
+    expect(results.map((r) => r.kind).sort()).toEqual(["first-seen", "mismatch"]);
+    expect(await tofu.getKeys("bob")).toHaveLength(1);
+  });
+
+  it("One key of one peer seen twice at once", async () => {
+    const tofu = new TofuStore("alice");
+
+    const results = await Promise.all([
+      tofu.checkKey("bob", "PKBOBABCDEFGHIJK"),
+      tofu.checkKey("bob", "PKBOBABCDEFGHIJK"),
+    ]);
+
+    expect(results.map((r) => r.kind).sort()).toEqual(["first-seen", "match"]);
+  });
+
   it("detects key mismatch within a session even when IDB is unavailable", async () => {
     const tofu = new TofuStore("alice");
     const a = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
@@ -495,16 +397,7 @@ describe("TofuStore — IndexedDB open failure modes", () => {
   it("IndexedDB unavailable: an open refused with InvalidStateError (private mode) keeps pins in memory", async () => {
     const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     vi.spyOn(console, "warn").mockImplementation(() => {});
-    vi.stubGlobal("indexedDB", {
-      open: () => {
-        const req = new MockOpenRequest();
-        queueMicrotask(() => {
-          req.error = new DOMException("private mode", "InvalidStateError");
-          req.onerror?.();
-        });
-        return req;
-      },
-    });
+    vi.stubGlobal("indexedDB", answeredOpen("InvalidStateError"));
 
     const tofu = new TofuStore("alice");
     const first = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
@@ -518,13 +411,7 @@ describe("TofuStore — IndexedDB open failure modes", () => {
 
   it("Pin store cannot be opened: a blocked open refuses the operation", async () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-    vi.stubGlobal("indexedDB", {
-      open: () => {
-        const req = new MockOpenRequest();
-        queueMicrotask(() => req.onblocked?.());
-        return req;
-      },
-    });
+    vi.stubGlobal("indexedDB", answeredOpen("blocked"));
 
     const tofu = new TofuStore("alice");
     expect((await tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).kind).toBe(
@@ -536,167 +423,11 @@ describe("TofuStore — IndexedDB open failure modes", () => {
   it("IndexedDB unavailable: list reflects the pins kept in memory", async () => {
     vi.spyOn(console, "error").mockImplementation(() => {});
     vi.spyOn(console, "warn").mockImplementation(() => {});
-    vi.stubGlobal("indexedDB", {
-      open: () => {
-        const req = new MockOpenRequest();
-        queueMicrotask(() => {
-          req.error = new DOMException("private mode", "InvalidStateError");
-          req.onerror?.();
-        });
-        return req;
-      },
-    });
+    vi.stubGlobal("indexedDB", answeredOpen("InvalidStateError"));
 
     const tofu = new TofuStore("alice");
     expect(await tofu.list()).toEqual([]);
     await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
     expect(await tofu.list()).toHaveLength(1);
-  });
-});
-
-describe("TofuStore — per-operation IndexedDB error paths", () => {
-  beforeEach(() => {
-    resetMockIDB();
-    resetTofuStores();
-  });
-
-  afterEach(() => {
-    vi.unstubAllGlobals();
-  });
-
-  function installFlakyIDB(failingOp: keyof MockObjectStore | "all") {
-    class FlakyObjectStore extends MockObjectStore {
-      get(key: string): MockRequest<unknown> {
-        if (failingOp === "get" || failingOp === "all") {
-          const req = new MockRequest<unknown>();
-          queueMicrotask(() => {
-            req.error = new Error("TransactionInactiveError");
-            req.onerror?.();
-          });
-          return req;
-        }
-        return super.get(key);
-      }
-      put(value: { userId: string }): MockRequest<void> {
-        if (failingOp === "put" || failingOp === "all") {
-          const req = new MockRequest<void>();
-          queueMicrotask(() => {
-            req.error = new Error("QuotaExceededError");
-            req.onerror?.();
-          });
-          return req;
-        }
-        return super.put(value);
-      }
-      delete(key: string): MockRequest<void> {
-        if (failingOp === "delete" || failingOp === "all") {
-          const req = new MockRequest<void>();
-          queueMicrotask(() => {
-            req.error = new Error("TransactionInactiveError");
-            req.onerror?.();
-          });
-          return req;
-        }
-        return super.delete(key);
-      }
-      getAll(): MockRequest<unknown[]> {
-        if (failingOp === "getAll" || failingOp === "all") {
-          const req = new MockRequest<unknown[]>();
-          queueMicrotask(() => {
-            req.error = new Error("TransactionInactiveError");
-            req.onerror?.();
-          });
-          return req;
-        }
-        return super.getAll();
-      }
-      clear(): MockRequest<void> {
-        if (failingOp === "clear" || failingOp === "all") {
-          const req = new MockRequest<void>();
-          queueMicrotask(() => {
-            req.error = new Error("TransactionInactiveError");
-            req.onerror?.();
-          });
-          return req;
-        }
-        return super.clear();
-      }
-    }
-
-    class FlakyTransaction extends MockTransaction {
-      objectStore(name: string): MockObjectStore {
-        const base = super.objectStore(name);
-        // biome-ignore lint/suspicious/noExplicitAny: reach into private field for the flaky variant
-        return new FlakyObjectStore((base as any).store);
-      }
-    }
-
-    class FlakyDB extends MockDB {
-      transaction(names: string, mode: IDBTransactionMode): MockTransaction {
-        const base = super.transaction(names, mode);
-        // biome-ignore lint/suspicious/noExplicitAny: bridge the private store field
-        return new FlakyTransaction((base as any).store);
-      }
-    }
-
-    vi.stubGlobal("indexedDB", {
-      open(name: string, _v: number): MockOpenRequest {
-        const req = new MockOpenRequest();
-        const entry = (mockIDB as unknown as {
-          open(name: string, v: number): MockOpenRequest;
-          // biome-ignore lint/suspicious/noExplicitAny: reuse the success-path open and swap DB
-        }).open(name, _v) as any;
-        // Replace result with a flaky version after the success-path mock prepared it
-        queueMicrotask(() => {
-          const realDb = entry.result as MockDB;
-          // biome-ignore lint/suspicious/noExplicitAny: pull the private store/storeNames out
-          const store = (realDb as any).store;
-          // biome-ignore lint/suspicious/noExplicitAny: same
-          const storeNames = (realDb as any).storeNames;
-          const flaky = new FlakyDB(store, storeNames);
-          req.result = flaky;
-          req.onsuccess?.();
-        });
-        return req;
-      },
-    });
-  }
-
-  it("Pin cannot be read", async () => {
-    installFlakyIDB("get");
-    const tofu = new TofuStore("alice");
-
-    const result = await tofu.checkKey("bob", "PKBOBABCDEFGHIJK");
-    expect(result.kind).toBe("unreadable");
-
-    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
-    expect(await tofu.list()).toEqual([]);
-  });
-
-  it("putRecord resolves silently when write fires onerror", async () => {
-    installFlakyIDB("put");
-    const tofu = new TofuStore("alice");
-    await expect(tofu.checkKey("bob", "PKBOBABCDEFGHIJK")).resolves.toEqual({
-      kind: "first-seen",
-    });
-    await expect(tofu.acceptKey("bob", "PKBOBNEWABCDEFGH")).resolves.toBeUndefined();
-  });
-
-  it("deleteRecord resolves silently when delete fires onerror", async () => {
-    installFlakyIDB("delete");
-    const tofu = new TofuStore("alice");
-    await expect(tofu.forget("bob")).resolves.toBeUndefined();
-  });
-
-  it("list resolves to [] when getAll fires onerror", async () => {
-    installFlakyIDB("getAll");
-    const tofu = new TofuStore("alice");
-    expect(await tofu.list()).toEqual([]);
-  });
-
-  it("clear resolves silently when underlying clear fires onerror", async () => {
-    installFlakyIDB("clear");
-    const tofu = new TofuStore("alice");
-    await expect(tofu.clear()).resolves.toBeUndefined();
   });
 });

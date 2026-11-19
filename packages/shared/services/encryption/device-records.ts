@@ -33,8 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { forgetDeviceUnlock } from "./device-unlock-store";
-import { removePasskeyUnlock } from "./passkey-unlock";
+import {
+  forgetDeviceUnlock,
+  forgetExpiredDeviceUnlock,
+  getDeviceUnlockPublicKey,
+} from "./device-unlock-store";
+import {
+  getPasskeyUnlockPublicKey,
+  removePasskeyUnlock,
+} from "./passkey-unlock";
 
 /**
  * Removes what this device keeps of the user's key: the remembered record
@@ -50,5 +57,35 @@ export async function forgetKeyOnDevice(
   await Promise.all([
     forgetDeviceUnlock(userId, publicKeyB64),
     removePasskeyUnlock(userId, publicKeyB64),
+  ]);
+}
+
+/**
+ * Removes the records this device keeps that no longer serve the user: an
+ * expired remembered record always, and, once the user's key list has been
+ * read, the records of a key the list does not hold. `null` stands for a
+ * list that is not known and removes nothing on its account.
+ */
+// Spec: private-rooms/key-management, "Removing the key removes what this device keeps of it"
+export async function pruneDeviceRecords(
+  userId: string,
+  listedPublicKeys: readonly string[] | null,
+): Promise<void> {
+  if (!userId) return;
+  await forgetExpiredDeviceUnlock(userId);
+  if (!listedPublicKeys) return;
+
+  const listed = new Set(listedPublicKeys);
+  const [rememberedKey, passkeyKey] = await Promise.all([
+    getDeviceUnlockPublicKey(userId),
+    getPasskeyUnlockPublicKey(userId),
+  ]);
+  await Promise.all([
+    rememberedKey && !listed.has(rememberedKey)
+      ? forgetDeviceUnlock(userId, rememberedKey)
+      : undefined,
+    passkeyKey && !listed.has(passkeyKey)
+      ? removePasskeyUnlock(userId, passkeyKey)
+      : undefined,
   ]);
 }

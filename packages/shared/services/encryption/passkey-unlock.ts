@@ -212,6 +212,14 @@ export async function hasPasskeyUnlock(
   return true;
 }
 
+/** The public key the passkey record was enrolled for, or null. */
+export async function getPasskeyUnlockPublicKey(
+  userId: string,
+): Promise<string | null> {
+  if (!userId) return null;
+  return (await getRecord(userId))?.publicKey ?? null;
+}
+
 /**
  * Removes the passkey record of the user; with a public key, only when the
  * record was enrolled for that key.

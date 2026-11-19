@@ -55,15 +55,11 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
 }));
 
-vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { lock: vi.fn() },
-}));
 vi.mock("@docspace/shared/api/privacy", () => ({
   deleteEncryptionKey: vi.fn(),
 }));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -79,13 +75,15 @@ const keys = (ids: string[]): TEncryptionKeyPair[] =>
       }) as unknown as TEncryptionKeyPair,
   );
 
+const lockAfterKeyRemoval = vi.fn(async (_publicKey?: string) => undefined);
+
 let latest: ResetKeysFlow;
 const Harness = (deps: {
   userId?: string;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   refreshKeysFromServer: () => Promise<void>;
 }) => {
-  latest = useResetKeysFlow(deps);
+  latest = useResetKeysFlow({ lockAfterKeyRemoval, ...deps });
   return <>{latest.modals}</>;
 };
 
@@ -150,7 +148,7 @@ describe("useResetKeysFlow", () => {
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
-  it("locks SecretStorage and refreshes even when a delete fails", async () => {
+  it("locks the identity and refreshes even when a delete fails", async () => {
     vi.mocked(deleteEncryptionKey)
       .mockRejectedValueOnce(new Error("403"))
       .mockResolvedValueOnce(undefined as never);
@@ -167,7 +165,7 @@ describe("useResetKeysFlow", () => {
       await (captured.dialog!.onConfirm as () => Promise<void>)();
     });
 
-    expect(SecretStorage.lock).toHaveBeenCalledTimes(1);
+    expect(lockAfterKeyRemoval).toHaveBeenCalledTimes(1);
     expect(refresh).toHaveBeenCalledTimes(1);
     expect(toastr.warning).toHaveBeenCalledTimes(1);
     expect(toastr.success).not.toHaveBeenCalled();
@@ -196,7 +194,7 @@ describe("useResetKeysFlow", () => {
     vi.mocked(deleteEncryptionKey).mockImplementation((async () => {
       callOrder.push("api");
     }) as never);
-    vi.mocked(SecretStorage.lock).mockImplementation(() => {
+    lockAfterKeyRemoval.mockImplementation(async () => {
       callOrder.push("lock");
     });
     const refresh = vi.fn().mockImplementation(async () => {
@@ -235,8 +233,35 @@ describe("useResetKeysFlow", () => {
     act(() => latest.request());
     expect(captured.dialog).toBeNull();
     expect(deleteEncryptionKey).not.toHaveBeenCalled();
-    expect(SecretStorage.lock).not.toHaveBeenCalled();
+    expect(lockAfterKeyRemoval).not.toHaveBeenCalled();
   });
+
+  it.each([
+    ["every deletion succeeds", [null, null]],
+    ["some deletions fail", [new Error("403"), null]],
+  ] as const)(
+    "Reset on a remembered device: %s",
+    async (_, outcomes) => {
+      for (const outcome of outcomes) {
+        if (outcome) vi.mocked(deleteEncryptionKey).mockRejectedValueOnce(outcome);
+        else vi.mocked(deleteEncryptionKey).mockResolvedValueOnce(undefined as never);
+      }
+      render(
+        <Harness
+          userId="user-1"
+          encryptionKeys={keys(["k1", "k2"])}
+          refreshKeysFromServer={vi.fn().mockResolvedValue(undefined)}
+        />,
+      );
+      act(() => latest.request());
+      await act(async () => {
+        await (captured.dialog!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(lockAfterKeyRemoval).toHaveBeenCalledTimes(1);
+      expect(lockAfterKeyRemoval).toHaveBeenCalledWith();
+    },
+  );
 
   it("ignores cancel attempts while a reset is in flight", async () => {
     let resolveDelete: (() => void) | undefined;

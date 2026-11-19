@@ -38,7 +38,6 @@ import { useTranslation } from "react-i18next";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { resetGhostStateGate } from "@docspace/shared/services/encryption/ghost-state-notifier";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
@@ -49,6 +48,8 @@ type Deps = {
   userId?: string;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   refreshKeysFromServer: () => Promise<void>;
+  /** The context's lock after a removed key (useEncryption). */
+  lockAfterKeyRemoval: (publicKey?: string) => Promise<void>;
 };
 
 export type ResetKeysFlow = {
@@ -62,6 +63,7 @@ export function useResetKeysFlow({
   userId,
   encryptionKeys,
   refreshKeysFromServer,
+  lockAfterKeyRemoval,
 }: Deps): ResetKeysFlow {
   const { t } = useTranslation(["Common"]);
   const [confirming, setConfirming] = useState(false);
@@ -87,9 +89,9 @@ export function useResetKeysFlow({
       // Drop in-memory state regardless of partial failure — a stale cached
       // identity must not outlive a half-completed reset.
       const results = await Promise.allSettled(
-        keys.map((k) => deleteEncryptionKey(String(k.id))),
+        keys.map(async (k) => deleteEncryptionKey(String(k.id))),
       );
-      SecretStorage.lock();
+      await lockAfterKeyRemoval();
       resetGhostStateGate();
       await refreshKeysFromServer();
 
@@ -108,7 +110,7 @@ export function useResetKeysFlow({
       setIsPending(false);
       setConfirming(false);
     }
-  }, [encryptionKeys, isPending, refreshKeysFromServer, t]);
+  }, [encryptionKeys, isPending, refreshKeysFromServer, lockAfterKeyRemoval, t]);
 
   const modals = confirming ? (
     <ResetKeysConfirmDialog

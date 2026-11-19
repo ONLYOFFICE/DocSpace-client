@@ -90,8 +90,14 @@ const KeysManagement = ({
   userEmail,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
-  const { isUnlocked, lock, getIdentity, requireIdentity, publicKey } =
-    useEncryption();
+  const {
+    isUnlocked,
+    lock,
+    lockAfterKeyRemoval,
+    getIdentity,
+    requireIdentity,
+    publicKey,
+  } = useEncryption();
   /** Formatted date the remembered-device record expires, or null. */
   const [rememberedUntil, setRememberedUntil] = useState<string | null>(null);
   const [passkeyPlatformOk, setPasskeyPlatformOk] = useState(false);
@@ -238,6 +244,7 @@ const KeysManagement = ({
     userId,
     encryptionKeys,
     refreshKeysFromServer,
+    lockAfterKeyRemoval,
   });
 
   const handleForgotPassphrase = useCallback(
@@ -254,6 +261,7 @@ const KeysManagement = ({
   const remove = useDeleteKeyFlow({
     userId,
     refreshKeysFromServer,
+    lockAfterKeyRemoval,
     onForgotPassphrase: handleForgotPassphrase,
   });
   const deleteUnused = useDeleteUnusedKeysFlow({

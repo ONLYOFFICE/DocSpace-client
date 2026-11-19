@@ -42,7 +42,8 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 6. Gate
 
-- [ ] 6.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
+- [x] 6.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. Verify: every command green, recorded here with the date and the counts
+  - 2026-11-19, `release/v4.1.0` at 5982142d65b: `test:lefthook` exit 0 (8 files, 61 passed, 3 skipped); `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks); `openspec validate --all --strict` 30 passed on the branch and 29 passed after a trial `openspec archive` on a scratch copy. The trial archive first found "Remember this device", "Auto-lock timeout presets" and "Shell side effects" over 500 characters; their wording was tightened in 5982142d65b. Before that, under Docker (`tests-dev`): the fifteen private-room, encrypted-file and keys-management specs 224 passed (task 2.9) and `keys-management.spec.ts` 31 passed (task 5.2); the unit suites of shared (2523), client (2396), sdk (512) and doceditor (140) passed after task 3.1.
 
 ## Workflow follow-up
 

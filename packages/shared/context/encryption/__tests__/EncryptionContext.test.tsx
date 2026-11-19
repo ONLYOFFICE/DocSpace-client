@@ -633,6 +633,40 @@ describe("EncryptionContext / EncryptionProvider", () => {
     });
   });
 
+  describe("The shown key state follows the key in memory", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("In-memory key expires", () => {
+      vi.useFakeTimers();
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(30 * 60_000);
+      });
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(1);
+      });
+      expect(latest.isUnlocked).toBe(false);
+    });
+
+    it("Slot cleared outside the context", () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => {
+        SecretStorage.lock();
+      });
+
+      expect(latest.isUnlocked).toBe(false);
+    });
+  });
+
   describe("Other tabs read the key list again after a key change", () => {
     const tree = (
       userKeys: EncryptionUserKeys | null,

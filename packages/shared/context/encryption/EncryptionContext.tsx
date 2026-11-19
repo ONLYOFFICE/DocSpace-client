@@ -52,6 +52,7 @@ import {
   unregisterUnlockHandler,
   registerAutoLockSuspender,
   unregisterAutoLockSuspender,
+  subscribeSlotCleared,
 } from "../../services/encryption/secret-storage";
 import {
   getAutoLockTimeoutSeconds,
@@ -249,6 +250,11 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   // A lock from another page of the user: this page's key and names go, the
   // device records stay with the page that locked.
   // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+  // Whatever empties the slot, its expiry and the modules that read it
+  // directly included, the page shows the key as locked.
+  // Spec: private-rooms/key-management, "The shown key state follows the key in memory"
+  useEffect(() => subscribeSlotCleared(() => setIsUnlocked(false)), []);
+
   const onKeysChangedRef = useRef(onKeysChanged);
   onKeysChangedRef.current = onKeysChanged;
 

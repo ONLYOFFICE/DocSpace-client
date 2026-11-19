@@ -124,6 +124,10 @@ const reserved: [string, string][] = [
   ["con.txt", "_con.txt"],
   ["Com1.tar.gz", "_Com1.tar.gz"],
   ["nul .txt", "_nul .txt"],
+  ...["COM\u00b9", "com\u00b2.txt", "Com\u00b3.tar.gz", "LPT\u00b9", "lpt\u00b3.txt"].map(
+    (n): [string, string] => [n, `_${n}`],
+  ),
+  ["COM\u2074.txt", "COM\u2074.txt"],
   ["CONSOLE.txt", "CONSOLE.txt"],
   ["COM10", "COM10"],
   ["LPT0", "LPT0"],

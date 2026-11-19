@@ -38,7 +38,8 @@
 const MAX_BYTES = 255;
 const MAX_EXTENSION_BYTES = 32;
 const REJECTED = /[/\\:*?"<>|]/g;
-const RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;
+// Windows reads the superscript digits one to three as digits here.
+const RESERVED = /^(con|prn|aux|nul|(com|lpt)[1-9\u00b9\u00b2\u00b3])$/i;
 
 const encoder = new TextEncoder();
 const byteLength = (s: string) => encoder.encode(s).length;

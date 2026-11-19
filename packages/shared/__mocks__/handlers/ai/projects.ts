@@ -278,6 +278,34 @@ export const AI_PROJECT_WITHOUT_SOURCES = AI_PROJECTS[2];
 /** A project as `files/rooms` answers it: the room, without the `aiProject` block. */
 const projectRoom = ({ aiProject: _aiProject, ...room }: AiProjectMock) => room;
 
+/**
+ * The projects of the list the caller pinned, as the "AI rooms" root of
+ * `files/@root` lists them (`rootHandler`'s `pinnedAiProjects`).
+ */
+export const aiPinnedProjectRooms = (projects: AiProjectMock[] = AI_PROJECTS) =>
+  projects.filter((project) => project.pinned).map(projectRoom);
+
+/**
+ * `PUT files/rooms/:id/pin` and `/unpin` for an agent
+ * (VirtualRoomsController.PinRoom / UnpinRoom): the agent of `projects` is
+ * replaced by one with the new `pinned`, and the room is answered. A room
+ * that is no agent of the list is left to the other handlers.
+ */
+export const aiAgentPinHandlers = (port: string, projects: AiProjectMock[]) =>
+  (["pin", "unpin"] as const).map((action) =>
+    http.put(
+      `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/${action}`,
+      ({ params }) => {
+        const index = projects.findIndex(
+          (project) => String(project.id) === String(params.id),
+        );
+        if (index < 0) return undefined;
+        projects[index] = { ...projects[index], pinned: action === "pin" };
+        return HttpResponse.json({ response: projectRoom(projects[index]) });
+      },
+    ),
+  );
+
 /** The owner's name, for the owner sort. */
 const ownerName = (project: AiProjectMock) => project.createdBy?.displayName ?? "";
 

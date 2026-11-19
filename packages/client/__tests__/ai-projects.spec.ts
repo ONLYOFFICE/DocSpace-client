@@ -48,6 +48,8 @@ import {
   aiAgentDeleteHandler,
   aiAgentLeaveHandler,
   aiAgentSkillsRefusedHandler,
+  aiAgentPinHandlers,
+  aiPinnedProjectRooms,
   aiProjectMock,
   AiProjectMockAccess,
   AI_HUB_ROOMS,
@@ -90,6 +92,10 @@ const emptyView = (page: Page) =>
 const table = (page: Page) => page.getByTestId("table-body");
 
 const sidebar = (page: Page) => page.locator("#article-container");
+
+/** The entry of a pinned agent, listed under Agents in the sidebar. */
+const sidebarAgent = (page: Page, id: number) =>
+  sidebar(page).locator(`[data-item-id="ai-nested-project-${id}"]`);
 
 const rowOf = (page: Page, title: string) =>
   table(page).locator("[data-testid^=table-row-]").filter({ hasText: title });
@@ -399,6 +405,105 @@ test.describe("AI Chat section", () => {
       await expect(intro).toBeVisible();
       await expect(intro).toContainText("Sales");
       await expect(intro.getByTestId("room-icon-image")).toBeVisible();
+    });
+  });
+
+  test.describe("the pinned agents of the sidebar", () => {
+    const [PINNED_AGENT, UNPINNED_AGENT] = AI_PROJECTS;
+
+    test("lists the agents the user pinned under Agents, and opens one on its page", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const projects = stockProjects();
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "owner"),
+        rootHandler(TEST_PORT, {
+          pinnedAiProjects: () => aiPinnedProjectRooms(projects),
+        }),
+        ...aiSectionsHandlers(TEST_PORT, projects),
+      );
+
+      await page.goto(`${baseUrl}${AGENTS_URL}`);
+      await expect(table(page)).toBeVisible();
+
+      // The pinned agent alone: the others stay on the Agents list.
+      await expect(sidebarAgent(page, PINNED_AGENT.id)).toContainText(
+        PINNED_AGENT.title,
+      );
+      await expect(
+        sidebar(page).locator('[data-item-id^="ai-nested-project-"]'),
+      ).toHaveCount(1);
+
+      await sidebarAgent(page, PINNED_AGENT.id).click();
+
+      await expect(page).toHaveURL(
+        new RegExp(`/ai-rooms/${PINNED_AGENT.id}/filter`),
+      );
+      await expect(page.getByTestId("ai-project-intro")).toBeVisible();
+    });
+
+    test("lists no agent while none is pinned", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "owner"),
+        ...aiSectionsHandlers(TEST_PORT, stockProjects()),
+      );
+
+      await page.goto(`${baseUrl}${AGENTS_URL}`);
+      await expect(table(page)).toBeVisible();
+      await expect(
+        sidebar(page).getByText("Agents", { exact: true }),
+      ).toBeVisible();
+
+      await expect(
+        sidebar(page).locator('[data-item-id^="ai-nested-project-"]'),
+      ).toHaveCount(0);
+    });
+
+    test("adds an agent pinned from its menu, and drops one that is unpinned", async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      const projects = stockProjects();
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "owner"),
+        rootHandler(TEST_PORT, {
+          pinnedAiProjects: () => aiPinnedProjectRooms(projects),
+        }),
+        ...aiSectionsHandlers(TEST_PORT, projects),
+        ...aiAgentPinHandlers(TEST_PORT, projects),
+      );
+
+      await page.goto(`${baseUrl}${AGENTS_URL}`);
+      await expect(table(page)).toBeVisible();
+      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
+      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toHaveCount(0);
+
+      await rowOf(page, UNPINNED_AGENT.title)
+        .getByTestId("context-menu-button")
+        .first()
+        .click();
+      await page.locator("#option_pin-room").click();
+
+      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toContainText(
+        UNPINNED_AGENT.title,
+      );
+      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
+
+      await rowOf(page, PINNED_AGENT.title)
+        .getByTestId("context-menu-button")
+        .first()
+        .click();
+      await page.locator("#option_unpin-room").click();
+
+      await expect(sidebarAgent(page, PINNED_AGENT.id)).toHaveCount(0);
+      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toBeVisible();
     });
   });
 

@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Faible",
   "PassphraseTooShort": "La phrase secrète doit comporter au moins {{length}} caractères",
   "PassphraseUpdated": "Phrase de passe mise à jour avec succès",
-  "PassphraseWeak": "La phrase de passe est trop faible. Veuillez ajouter plus de caractères et de variété.",
   "Password": "Mot de passe",
   "PasswordAccess": "Accès par mot de passe",
   "PasswordEntered": "Mot de passe saisi",

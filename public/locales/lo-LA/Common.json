@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "ອ່ອນ",
   "PassphraseTooShort": "ປະໂຫຍກລະຫັດຜ່ານຕ້ອງມີຢ່າງໜ້ອຍ {{length}} ຕົວອັກສອນ",
   "PassphraseUpdated": "ອັບເດດລະຫັດລັບສຳເລັດ",
-  "PassphraseWeak": "ລະຫັດລັບອ່ອນເກີນໄປ. ກະລຸນາເພີ່ມຕົວອັກສອນ ແລະຄວາມຫຼາກຫຼາຍ.",
   "Password": "ລະຫັດຜ່ານ",
   "PasswordAccess": "ການເຂົ້າເຖິງລະຫັດຜ່ານ",
   "PasswordEntered": "ລະຫັດລັບຖືກໃສ່ແລ້ວ",

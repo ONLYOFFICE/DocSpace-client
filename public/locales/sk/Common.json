@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Slabá",
   "PassphraseTooShort": "Prístupová fráza musí mať aspoň {{length}} znakov",
   "PassphraseUpdated": "Prístupová fráza bola úspešne aktualizovaná",
-  "PassphraseWeak": "Prístupová fráza je príliš slabá. Pridajte viac znakov a rozmanitosť.",
   "Password": "Heslo",
   "PasswordAccess": "Prístup je chránený heslom",
   "PasswordEntered": "Zadané heslo",

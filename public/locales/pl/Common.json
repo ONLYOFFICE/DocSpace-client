@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Słaba",
   "PassphraseTooShort": "Hasło musi zawierać co najmniej {{length}} znaków",
   "PassphraseUpdated": "Hasło dostępu zostało pomyślnie zaktualizowane",
-  "PassphraseWeak": "Hasło dostępu jest zbyt słabe. Dodaj więcej znaków i większą ich różnorodność.",
   "Password": "Hasło",
   "PasswordAccess": "Dostęp chroniony hasłem",
   "PasswordEntered": "Hasło zostało wpisane",

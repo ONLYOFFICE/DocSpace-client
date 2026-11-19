@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Fraca",
   "PassphraseTooShort": "A frase secreta deve ter pelo menos {{length}} caracteres",
   "PassphraseUpdated": "Senha de acesso atualizada com sucesso",
-  "PassphraseWeak": "A senha de acesso é muito fraca. Adicione mais caracteres e variedade.",
   "Password": "Senha",
   "PasswordAccess": "Acesso por senha",
   "PasswordEntered": "Senha inserida",

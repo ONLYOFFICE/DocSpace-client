@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Slaba",
   "PassphraseTooShort": "Lozinka mora imati najmanje {{length}} znakova",
   "PassphraseUpdated": "Lozinka je uspešno ažurirana",
-  "PassphraseWeak": "Lozinka je previše slaba. Dodajte više znakova i raznolikosti.",
   "Password": "Lozinka",
   "PasswordAccess": "Pristup lozinkom",
   "PasswordEntered": "Lozinka je uneta",

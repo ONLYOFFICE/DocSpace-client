@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Débil",
   "PassphraseTooShort": "La frase de contraseña debe tener al menos {{length}} caracteres",
   "PassphraseUpdated": "Frase de contraseña actualizada correctamente",
-  "PassphraseWeak": "La frase de contraseña es demasiado débil. Añada más caracteres y variedad.",
   "Password": "Contraseña",
   "PasswordAccess": "Acceso con contraseña",
   "PasswordEntered": "Contraseña ingresada",

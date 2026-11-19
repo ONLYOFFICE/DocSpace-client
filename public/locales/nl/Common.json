@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Zwak",
   "PassphraseTooShort": "De wachtwoordzin moet minimaal {{length}} tekens bevatten",
   "PassphraseUpdated": "Wachtzin succesvol bijgewerkt",
-  "PassphraseWeak": "Wachtzin is te zwak. Voeg meer tekens en variatie toe.",
   "Password": "Wachtwoord",
   "PasswordAccess": "Wachtwoord toegang",
   "PasswordEntered": "Wachtwoord ingevoerd",

@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "약함",
   "PassphraseTooShort": "암호문은 최소 {{length}}자 이상이어야 합니다",
   "PassphraseUpdated": "패스프레이즈가 성공적으로 업데이트되었습니다",
-  "PassphraseWeak": "패스프레이즈가 너무 약합니다. 더 많은 문자와 다양한 종류를 추가하세요.",
   "Password": "비밀번호",
   "PasswordAccess": "비밀번호 액세스",
   "PasswordEntered": "비밀번호가 입력되었습니다",

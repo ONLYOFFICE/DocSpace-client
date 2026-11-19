@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Слаба",
   "PassphraseTooShort": "Лозинка мора имати најмање {{length}} знакова",
   "PassphraseUpdated": "Лозинка је успешно ажурирана",
-  "PassphraseWeak": "Лозинка је прекратка. Додајте више знакова и разноврсности.",
   "Password": "Лозинка",
   "PasswordAccess": "Приступ са лозинкoм",
   "PasswordEntered": "Лозинка је унета",

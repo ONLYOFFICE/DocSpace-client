@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "弱い",
   "PassphraseTooShort": "パスフレーズは{{length}}文字以上である必要があります",
   "PassphraseUpdated": "パスフレーズを正常に更新しました",
-  "PassphraseWeak": "パスフレーズが弱すぎます。文字の種類と数を増やしてください。",
   "Password": "パスワード",
   "PasswordAccess": "パスワードアクセス",
   "PasswordEntered": "パスワードが入力されました",

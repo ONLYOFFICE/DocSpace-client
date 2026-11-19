@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Слабка",
   "PassphraseTooShort": "Парольна фраза має містити щонайменше {{length}} символів",
   "PassphraseUpdated": "Парольну фразу успішно оновлено",
-  "PassphraseWeak": "Парольна фраза занадто слабка. Додайте більше символів і різноманітності.",
   "Password": "Пароль",
   "PasswordAccess": "Доступ за паролем",
   "PasswordEntered": "Пароль введено",

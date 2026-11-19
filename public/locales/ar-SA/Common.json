@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "ضعيفة",
   "PassphraseTooShort": "يجب أن تتكون عبارة المرور من {{length}} حرفًا على الأقل",
   "PassphraseUpdated": "تم تحديث عبارة المرور بنجاح",
-  "PassphraseWeak": "عبارة المرور ضعيفة جداً. يُرجى إضافة المزيد من الأحرف والتنوع.",
   "Password": "كلمة المرور",
   "PasswordAccess": "إمكانية الوصول لكلمة المرور",
   "PasswordEntered": "تم إدخال كلمة المرور",

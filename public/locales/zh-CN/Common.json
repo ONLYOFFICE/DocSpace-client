@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "弱",
   "PassphraseTooShort": "密码短语必须至少包含 {{length}} 个字符",
   "PassphraseUpdated": "密码短语已成功更新",
-  "PassphraseWeak": "密码短语强度太弱。请增加字符数量和多样性。",
   "Password": "密码",
   "PasswordAccess": "通过密码访问",
   "PasswordEntered": "已输入密码",

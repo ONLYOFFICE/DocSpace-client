@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "දුර්වලයි",
   "PassphraseTooShort": "මුරපදය අවම වශයෙන් අකුරු {{length}}ක් අඩංගු විය යුතුය",
   "PassphraseUpdated": "මුරවාක්‍යය සාර්ථකව යාවත්කාලීන කෙරිණි",
-  "PassphraseWeak": "මුරවාක්‍යය ඉතා දුර්වලයි. කරුණාකර තවත් අක්ෂර සහ විවිධත්වය එකතු කරන්න.",
   "Password": "මුරපදය",
   "PasswordAccess": "මුරපදයකින් ප්‍රවේශය",
   "PasswordEntered": "රහස්යාංකය ඇතුළත් කරන ලදි",

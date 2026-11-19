@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Zayıf",
   "PassphraseTooShort": "Parola en az {{length}} karakter olmalıdır",
   "PassphraseUpdated": "Parola başarıyla güncellendi",
-  "PassphraseWeak": "Parola çok zayıf. Lütfen daha fazla karakter ve çeşitlilik ekleyin.",
   "Password": "Şifre",
   "PasswordAccess": "Şifre erişimi",
   "PasswordEntered": "Parola girildi",

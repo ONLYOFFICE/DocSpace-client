@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Heikko",
   "PassphraseTooShort": "Salasanalauseen tulee olla vähintään {{length}} merkkiä pitkä",
   "PassphraseUpdated": "Salauslause päivitetty onnistuneesti",
-  "PassphraseWeak": "Salauslause on liian heikko. Lisää enemmän merkkejä ja vaihtelua.",
   "Password": "Salasana",
   "PasswordAccess": "Salasanapääsy",
   "PasswordEntered": "Salasana syötetty",

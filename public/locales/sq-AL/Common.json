@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "E dobët",
   "PassphraseTooShort": "Fraza e fjalëkalimit duhet të ketë të paktën {{length}} karaktere",
   "PassphraseUpdated": "Frazëkalimi u përditësua me sukses",
-  "PassphraseWeak": "Frazëkalimi është shumë i dobët. Ju lutem shtoni më shumë karaktere dhe shumëllojshmëri.",
   "Password": "Fjalëkalimi",
   "PasswordAccess": "Akses me fjalëkalim",
   "PasswordEntered": "Fjalëkalimi është futur",

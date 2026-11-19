@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Yếu",
   "PassphraseTooShort": "Cụm mật khẩu phải có ít nhất {{length}} ký tự",
   "PassphraseUpdated": "Đã cập nhật mật khẩu bảo vệ thành công",
-  "PassphraseWeak": "Mật khẩu bảo vệ quá yếu. Vui lòng thêm nhiều ký tự và đa dạng hơn.",
   "Password": "Mật khẩu",
   "PasswordAccess": "Truy cập có mật khẩu",
   "PasswordEntered": "Đã nhập mật khẩu",

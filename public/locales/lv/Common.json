@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Vāja",
   "PassphraseTooShort": "Paroles frāzei jābūt vismaz {{length}} rakstzīmes garai",
   "PassphraseUpdated": "Ieejas frāze veiksmīgi atjaunināta",
-  "PassphraseWeak": "Ieejas frāze ir pārāk vāja. Lūdzu, pievienojiet vairāk rakstzīmju un dažādību.",
   "Password": "Parole",
   "PasswordAccess": "Piekļuve parolei",
   "PasswordEntered": "Parole ievadīta",

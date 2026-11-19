@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Schwach",
   "PassphraseTooShort": "Die Passphrase muss mindestens {{length}} Zeichen lang sein",
   "PassphraseUpdated": "Passphrase erfolgreich aktualisiert",
-  "PassphraseWeak": "Die Passphrase ist zu schwach. Bitte fügen Sie mehr Zeichen und Vielfalt hinzu.",
   "Password": "Passwort",
   "PasswordAccess": "Zugang mit Passwort",
   "PasswordEntered": "Passwort eingegeben",

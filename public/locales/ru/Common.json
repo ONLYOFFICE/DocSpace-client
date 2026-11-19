@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Слабая",
   "PassphraseTooShort": "Парольная фраза должна содержать не менее {{length}} символов",
   "PassphraseUpdated": "Парольная фраза успешно обновлена",
-  "PassphraseWeak": "Парольная фраза слишком слабая. Добавьте больше символов и разнообразия.",
   "Password": "Пароль",
   "PasswordAccess": "Доступ по паролю",
   "PasswordEntered": "Введен пароль",

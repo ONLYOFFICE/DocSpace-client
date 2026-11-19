@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Šibka",
   "PassphraseTooShort": "Geselna fraza mora vsebovati vsaj {{length}} znakov",
   "PassphraseUpdated": "Geslo je bilo uspešno posodobljeno",
-  "PassphraseWeak": "Geslo je prešibko. Dodajte več znakov in raznolikosti.",
   "Password": "Geslo",
   "PasswordAccess": "Dostop s geslom",
   "PasswordEntered": "Geslo vnešeno",

@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Slabă",
   "PassphraseTooShort": "Fraza de acces trebuie să aibă cel puțin {{length}} caractere",
   "PassphraseUpdated": "Fraza de acces a fost actualizată cu succes",
-  "PassphraseWeak": "Fraza de acces este prea slabă. Adăugați mai multe caractere și varietate.",
   "Password": "Parola",
   "PasswordAccess": "Acces prin parolă",
   "PasswordEntered": "Parola a fost introdusă",

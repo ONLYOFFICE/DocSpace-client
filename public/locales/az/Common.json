@@ -1755,7 +1755,6 @@
   "PassphraseStrengthWeak": "Zəif",
   "PassphraseTooShort": "Parol ifadəsi ən azı {{length}} simvoldan ibarət olmalıdır",
   "PassphraseUpdated": "Parol uğurla yeniləndi",
-  "PassphraseWeak": "Parol çox zəifdir. Zəhmət olmasa daha çox simvol və müxtəliflik əlavə edin.",
   "Password": "Şifrə",
   "PasswordAccess": "Şifrə girişi",
   "PasswordEntered": "Şifrə daxil edildi",

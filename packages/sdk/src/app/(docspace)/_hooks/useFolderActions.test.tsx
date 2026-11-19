@@ -56,6 +56,11 @@ const mocks = vi.hoisted(() => ({
   },
   settings: { shareKey: undefined },
   getFolderPath: vi.fn(),
+  sdkConfig: null as { privateRooms?: boolean } | null,
+}));
+
+vi.mock("@/providers/SDKConfigProvider", () => ({
+  useSDKConfig: () => ({ sdkConfig: mocks.sdkConfig }),
 }));
 
 vi.mock("next/navigation", () => ({
@@ -107,6 +112,7 @@ describe("useFolderActions", () => {
     mocks.router.replace.mockClear();
     mocks.getFolderPath.mockReset();
     mocks.filesList.items = [];
+    mocks.sdkConfig = null;
     window.history.replaceState({}, "", "/sdk/personal-files?privateRooms=true");
   });
 
@@ -182,6 +188,20 @@ describe("useFolderActions", () => {
     expect(pushState).not.toHaveBeenCalled();
     expect(mocks.router.replace).toHaveBeenCalledWith(
       "/private/7001?privateRooms=true&folder=7002",
+    );
+  });
+
+  it("Folder of a private room reached on a generic page: the opt-in of the frame configuration", async () => {
+    mocks.pathname = "/rooms/50";
+    mocks.sdkConfig = { privateRooms: true };
+    window.history.replaceState({}, "", "/sdk/rooms/50?sortBy=Title");
+    mocks.getFolderPath.mockResolvedValue(PRIVATE_PATH);
+    const { actions } = render();
+
+    await act(async () => actions.openFolder(7002, "Drafts"));
+
+    expect(mocks.router.replace).toHaveBeenCalledWith(
+      "/private/7001?sortBy=Title&privateRooms=true&folder=7002",
     );
   });
 

@@ -43,7 +43,12 @@ import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 import type { FolderType } from "@docspace/shared/enums";
+import {
+  isPrivateRoomsOptInValue,
+  PRIVATE_ROOMS_FLAG_KEY,
+} from "@docspace/shared/utils/privateRooms";
 
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { getPrivateRoomAddress } from "@/utils/private-room-address";
 
 import { OpenFolderContext } from "../_contexts/OpenFolderContext";
@@ -67,6 +72,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
   const openFolderOverride = React.useContext(OpenFolderContext);
   const router = useRouter();
   const pathname = usePathname();
+  const { sdkConfig } = useSDKConfig();
 
   /**
    * On a generic page, a folder of a private room continues on the private
@@ -82,6 +88,10 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       const params = Object.fromEntries(
         new URLSearchParams(window.location.search),
       );
+      // The host's opt-in arrives with the frame configuration.
+      if (isPrivateRoomsOptInValue(sdkConfig?.privateRooms)) {
+        params[PRIVATE_ROOMS_FLAG_KEY] = "true";
+      }
       try {
         const address = await getPrivateRoomAddress(
           { id: folderId, rootFolderType: listed?.rootFolderType },
@@ -94,7 +104,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
         return true;
       }
     },
-    [items, router, t],
+    [items, router, t, sdkConfig?.privateRooms],
   );
 
   const openFolderHere = React.useCallback(

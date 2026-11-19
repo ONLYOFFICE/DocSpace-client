@@ -389,6 +389,42 @@ describe("encryptedDownload", () => {
       expect(zipped[0]).toBe(0x50);
       expect(zipped[1]).toBe(0x4b);
     });
+
+    it.each([
+      ["an empty segment", "Docs//a.txt"],
+      ["a leading separator", "/a.txt"],
+      ["a parent reference", "Docs/../a.txt"],
+      ["a current directory reference", "./a.txt"],
+      ["an unnormalised segment", "Docs/a:b.txt"],
+      ["a trailing dot", "Docs/a."],
+      ["a backslash", "Docs\\a.txt"],
+    ])("Archive refuses a path that was not built: %s", (_, name) => {
+      expect(() =>
+        createZipFromBuffers([{ name, data: new Uint8Array([1]) }]),
+      ).toThrow();
+    });
+
+    it("Archive keeps a built path", () => {
+      const entries = toArchiveEntries([
+        {
+          data: new TextEncoder().encode("plan"),
+          names: ["../q1:plan.txt", 1],
+          folders: [
+            { id: 1, title: "Reports/2026" },
+            { id: 2, title: "Plans" },
+          ],
+        },
+      ]);
+
+      const unzipped = unzipSync(createZipFromBuffers(entries));
+
+      expect(Object.keys(unzipped)).toEqual(["Reports_2026/Plans/.._q1_plan.txt"]);
+      expect(
+        new TextDecoder().decode(
+          unzipped["Reports_2026/Plans/.._q1_plan.txt"],
+        ),
+      ).toBe("plan");
+    });
   });
 
   describe("decryptDownloadedFile", () => {

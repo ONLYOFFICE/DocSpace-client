@@ -210,9 +210,21 @@ export async function downloadAndDecryptFileToBuffer(
   };
 }
 
+const isBuiltPath = (path: string) =>
+  path
+    .split("/")
+    .every((segment) => segment !== "" && toSafeFileName(segment) === segment);
+
+/** Writes entries whose paths `toArchiveEntries` built; throws on any other. */
+// Spec: private-rooms/file-operations, "Archive directories come from the folder tree"
 export function createZipFromBuffers(
   files: Array<{ name: string; data: Uint8Array }>,
 ): Uint8Array {
+  const unbuilt = files.find((file) => !isBuiltPath(file.name));
+  if (unbuilt) {
+    throw new Error(`archive entry path was not built: ${unbuilt.name}`);
+  }
+
   const outputChunks: Uint8Array[] = [];
   let totalSize = 0;
 

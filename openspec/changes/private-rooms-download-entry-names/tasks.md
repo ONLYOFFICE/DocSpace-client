@@ -21,7 +21,7 @@ One task is one commit with its tick (the "Commits" paragraph of `openspec/confi
 
 ## 4. Archive writer
 
-- [ ] 4.1 Shared: let `createZipFromBuffers` accept only paths of segments the helper leaves unchanged (design decision 4), once every caller builds its paths with `toArchiveEntries`. Verify: cases "Archive refuses a path that was not built" (an empty, a `..` and an unnormalised segment) and "Archive keeps a built path" (round trip through fflate) in the `createZipFromBuffers` block of `services/private-room/__tests__/encrypted-download.test.ts` (`cd packages/shared && pnpm exec vitest run services/private-room/__tests__/encrypted-download.test.ts`); `pnpm exec tsc` in shared; the client and SDK suites of 2.1 and 3.1 passing again
+- [x] 4.1 Shared: let `createZipFromBuffers` accept only paths of segments the helper leaves unchanged (design decision 4), once every caller builds its paths with `toArchiveEntries`. Verify: cases "Archive refuses a path that was not built" (an empty, a `..` and an unnormalised segment) and "Archive keeps a built path" (round trip through fflate) in the `createZipFromBuffers` block of `services/private-room/__tests__/encrypted-download.test.ts` (`cd packages/shared && pnpm exec vitest run services/private-room/__tests__/encrypted-download.test.ts`); `pnpm exec tsc` in shared; the client and SDK suites of 2.1 and 3.1 passing again
 
 ## 5. E2E and gate
 

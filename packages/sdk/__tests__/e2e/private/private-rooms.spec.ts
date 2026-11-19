@@ -790,7 +790,7 @@ test.describe("(private) — generic addresses of a private room", () => {
     await expect(page.getByText(NOT_AVAILABLE)).toBeVisible();
     log.stop();
     expect(log.urls.filter(listsFolder(ROOM_FOLDER.id))).toEqual([]);
-    expect(page.locator("[data-testid^='selector-item-']")).toHaveCount(0);
+    await expect(page.locator("[data-testid^='selector-item-']")).toHaveCount(0);
   });
 
   test("Uploader aimed at a private folder", async ({

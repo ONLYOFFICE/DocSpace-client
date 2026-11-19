@@ -301,4 +301,16 @@ describe("The strength grade does not contradict the passphrase rules", () => {
   ])("grades a passphrase with %s as weak", (_, passphrase) => {
     expect(getShownPassphraseStrength(passphrase)).toBe("weak");
   });
+
+  it.each([
+    ["punctuation", "!@#$%^&*()_+"],
+    ["Cyrillic", CYRILLIC_LOWERCASE.slice(0, 12)],
+  ])("Accepted passphrase is not weak: %s, 12 characters", (_, passphrase) => {
+    expect(passphrase).toHaveLength(12);
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+
+    expect(["fair", "good", "strong"]).toContain(
+      getShownPassphraseStrength(passphrase),
+    );
+  });
 });

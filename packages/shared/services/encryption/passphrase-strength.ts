@@ -227,5 +227,6 @@ export function getShownPassphraseStrength(
   passphrase: string,
 ): PassphraseStrength {
   if (!meetsPassphraseRules(passphrase)) return "weak";
-  return checkPassphraseStrength(passphrase).strength;
+  const { strength } = checkPassphraseStrength(passphrase);
+  return strength === "weak" ? "fair" : strength;
 }

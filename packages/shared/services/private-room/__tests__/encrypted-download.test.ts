@@ -44,6 +44,7 @@ import {
   downloadAndDecryptFile,
   downloadAndDecryptFileToBuffer,
   toArchiveEntries,
+  triggerFileDownload,
   type ArchiveItem,
 } from "../encrypted-download";
 import type { IdentityKeyPair } from "../../encryption/types";
@@ -327,6 +328,43 @@ describe("encryptedDownload", () => {
     });
   });
 
+  describe("triggerFileDownload", () => {
+    const saved = () => {
+      const names: string[] = [];
+      vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(
+        function click(this: HTMLAnchorElement) {
+          names.push(this.download);
+        },
+      );
+      return names;
+    };
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+      URL.createObjectURL = vi.fn(() => "blob:test");
+      URL.revokeObjectURL = vi.fn();
+    });
+
+    afterEach(() => {
+      vi.runAllTimers();
+      vi.useRealTimers();
+      vi.restoreAllMocks();
+    });
+
+    it("Archive named after a folder", () => {
+      const names = saved();
+      triggerFileDownload(new Blob([]), "Plans/2026 Q1.zip");
+      expect(names).toEqual(["Plans_2026 Q1.zip"]);
+    });
+
+    it("Single file download: the file's own name is made plain", () => {
+      const names = saved();
+      triggerFileDownload(new File([], "memo\u202e.txt"));
+      triggerFileDownload(new Blob([]));
+      expect(names).toEqual(["memo.txt", "download"]);
+    });
+  });
+
   describe("createZipFromBuffers", () => {
     it("round-trips file names and contents via fflate", () => {
       const a = new TextEncoder().encode("hello");
@@ -389,6 +427,33 @@ describe("encryptedDownload", () => {
       });
       expect(result.success).toBe(true);
       expect(result.file?.name).toBe("report.docx");
+    });
+
+    const decryptNamed = async (headerName: string, stored: string) => {
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockResolvedValueOnce({
+        data: new Blob([new Uint8Array([1])]),
+        fileName: headerName,
+      });
+      const result = await decryptDownloadedFile({
+        ...baseConfig,
+        originalFileName: stored,
+        encryptedData: new ArrayBuffer(8),
+      });
+      return result.file?.name;
+    };
+
+    it("Single file download: the header name is made plain", async () => {
+      expect(await decryptNamed("../plans/q1\u0007\u202e.txt", "x.txt")).toBe(
+        ".._plans_q1.txt",
+      );
+    });
+
+    it("Nothing left of the name", async () => {
+      expect(await decryptNamed("...", "report.docx")).toBe("report.docx");
+      expect(await decryptNamed("..", ". .")).toBe("1");
     });
 
     it("returns success:false (never throws) when unwrap throws", async () => {

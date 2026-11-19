@@ -84,7 +84,11 @@ export async function decryptDownloadedFile(
             cacheFilenameForFileId: config.fileId,
           });
 
-    const finalName = decryptedName || config.originalFileName;
+    const finalName = toSafeFileName(
+      decryptedName,
+      config.originalFileName,
+      config.fileId,
+    );
     const decryptedFile = new File([decryptedBlob], finalName, {
       type: config.originalFileType || "application/octet-stream",
     });
@@ -166,7 +170,11 @@ export function triggerFileDownload(
   const url = URL.createObjectURL(file);
   const a = document.createElement("a");
   a.href = url;
-  a.download = fileName || (file instanceof File ? file.name : "download");
+  a.download = toSafeFileName(
+    fileName,
+    file instanceof File ? file.name : null,
+    "download",
+  );
   a.style.display = "none";
   document.body.appendChild(a);
   a.click();

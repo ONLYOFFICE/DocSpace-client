@@ -1123,6 +1123,62 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     ]);
   });
 
+  it("Upload with a key that could not be checked", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { setFileEncryptionKeys } = await import("../../../api/files");
+    const { TofuStore } = await import("../../encryption/tofu-store");
+    pendingAccessStore.clear(10, "bob");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: pk("a"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: pk("b"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+    const check = vi.spyOn(TofuStore.prototype, "checkKey");
+    check.mockImplementation(async (userId) =>
+      userId === "bob" ? { kind: "unavailable" } : { kind: "first-seen" },
+    );
+
+    const { results } = await upload();
+
+    check.mockRestore();
+    expect(results[0]).toMatchObject({ ok: true, shareFailed: true });
+    expect(results[0].skippedMembers ?? []).toEqual([]);
+    const fileId = Number(results[0].fileId);
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([fileId]);
+    const written = vi
+      .mocked(setFileEncryptionKeys)
+      .mock.calls.flatMap(([, keys]) =>
+        (keys as { userId: string }[]).map((k) => k.userId),
+      );
+    expect(written).toContain("alice");
+    expect(written).not.toContain("bob");
+  });
+
+  it("Upload with one unusable member key", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { setFileEncryptionKeys } = await import("../../../api/files");
+    pendingAccessStore.clear(10, "alice");
+    pendingAccessStore.clear(10, "bob");
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: pk("a"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: "not a key", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+    ] as never);
+
+    const { results } = await upload();
+
+    expect(results[0]).toMatchObject({ ok: true, shareFailed: true });
+    expect(results[0].skippedMembers ?? []).toEqual([]);
+    const fileId = Number(results[0].fileId);
+    expect(pendingAccessStore.get(10, "bob")?.missingFileIds).toEqual([fileId]);
+    expect(pendingAccessStore.get(10, "alice")).toBeUndefined();
+    const written = vi
+      .mocked(setFileEncryptionKeys)
+      .mock.calls.flatMap(([, keys]) =>
+        (keys as { userId: string }[]).map((k) => k.userId),
+      );
+    expect(written).toContain("alice");
+    expect(written).not.toContain("bob");
+  });
+
   it("Listed user cannot read the file: the member the server skipped is recorded as pending access", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
     const { setFileEncryptionKeys } = await import("../../../api/files");

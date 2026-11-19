@@ -49,9 +49,11 @@ import {
   downloadAndDecryptFile,
   downloadAndDecryptFileToBuffer,
   createZipFromBuffers,
-  deduplicateFileNames,
+  toArchiveEntries,
   triggerFileDownload,
+  type ArchiveItem,
 } from "@docspace/shared/services/private-room/encrypted-download";
+import { toSafeFileName } from "@docspace/shared/services/private-room/safe-file-name";
 import {
   requireUnlock,
 } from "@docspace/shared/services/encryption/secret-storage";
@@ -440,12 +442,13 @@ self: FilesActionStore,file: TActionItem
 
 const FOLDER_PAGE_SIZE = 100;
 
-type TFolderTreeFile = { file: TFile; dir: string };
+type TFolderChain = ArchiveItem["folders"];
+type TFolderTreeFile = { file: TFile; folders: TFolderChain };
 
-/** Every file under a folder, each with the path of its folder inside it. */
+/** Every file under a folder, each with the chain of folders down to it. */
 const listFolderTree = async (
   folderId: number | string,
-  dir = "",
+  folders: TFolderChain = [],
 ): Promise<TFolderTreeFile[]> => {
   const files: TFolderTreeFile[] = [];
   let loaded = 0;
@@ -455,9 +458,10 @@ const listFolderTree = async (
     filter.pageCount = FOLDER_PAGE_SIZE;
 
     const data = await getFolder(folderId, filter);
-    for (const file of data.files) files.push({ file, dir });
+    for (const file of data.files) files.push({ file, folders });
     for (const folder of data.folders) {
-      files.push(...(await listFolderTree(folder.id, `${dir}${folder.title}/`)));
+      const chain = [...folders, { id: folder.id, title: folder.title }];
+      files.push(...(await listFolderTree(folder.id, chain)));
     }
 
     const count = data.files.length + data.folders.length;
@@ -467,32 +471,12 @@ const listFolderTree = async (
   return files;
 };
 
-/** Zip entry names, with clashes renamed inside their own folder only. */
-const toZipEntries = (
-  entries: { dir: string; name: string; data: Uint8Array }[],
-) => {
-  const byDir = new Map<string, number[]>();
-  entries.forEach(({ dir }, index) => {
-    byDir.set(dir, [...(byDir.get(dir) ?? []), index]);
-  });
-
-  const names: string[] = new Array(entries.length);
-  for (const [dir, indexes] of byDir) {
-    deduplicateFileNames(indexes.map((i) => entries[i].name)).forEach(
-      (name, k) => {
-        names[indexes[k]] = `${dir}${name}`;
-      },
-    );
-  }
-  return entries.map(({ data }, i) => ({ name: names[i], data }));
-};
-
 type TDecryptedZipEntry = {
   file: Pick<
     TActionItem,
     "id" | "title" | "encrypted" | "viewUrl" | "contentType"
   >;
-  dir: string;
+  folders: TFolderChain;
   roomId: ReturnType<FilesActionStore["resolveRoomIdForFile"]>;
 };
 
@@ -501,14 +485,14 @@ const resolveRoomIdForFolder = (self: FilesActionStore, folder: TActionItem) =>
     ? folder.id
     : self.resolveRoomIdForFile(null);
 
-/** The files under a folder, each with its path inside the zip. */
+/** The files under a folder, each with its chain of folders in the zip. */
 const listFolderEntries = async (
   self: FilesActionStore,
   folder: TActionItem,
-  dir = "",
+  folders: TFolderChain = [],
 ): Promise<TDecryptedZipEntry[]> => {
   const roomId = resolveRoomIdForFolder(self, folder);
-  const tree = await listFolderTree(folder.id, dir);
+  const tree = await listFolderTree(folder.id, folders);
   return tree.map((entry) => ({ ...entry, roomId }));
 };
 
@@ -555,7 +539,7 @@ const downloadDecryptedZipImpl = async (
 
     const entries = await listEntries();
     const total = entries.length;
-    const results: { dir: string; name: string; data: Uint8Array }[] = [];
+    const results: ArchiveItem[] = [];
     const failures: string[] = [];
     const roomMemberKeysCache = new Map<
       string,
@@ -563,7 +547,8 @@ const downloadDecryptedZipImpl = async (
     >();
 
     for (let i = 0; i < total; i++) {
-      const { file, dir, roomId } = entries[i];
+      const { file, folders, roomId } = entries[i];
+      const dir = folders.map((f) => `${f.title}/`).join("");
       const shownName = resolveDisplayTitle(file);
       const fileShare = 100 / total;
       const fileBase = fileShare * i;
@@ -582,8 +567,8 @@ const downloadDecryptedZipImpl = async (
           const response = await fetch(file.viewUrl!);
           if (!response.ok) throw new Error(`${response.status}`);
           results.push({
-            dir,
-            name: file.title,
+            folders,
+            names: [file.title, file.id],
             data: new Uint8Array(await response.arrayBuffer()),
           });
           continue;
@@ -611,7 +596,7 @@ const downloadDecryptedZipImpl = async (
           roomMemberKeys,
           userId: String(userId),
           identity,
-          originalFileName: shownName,
+          originalFileName: file.title,
           originalFileType: file.contentType || "application/octet-stream",
           onDownloadProgress: (progress) => {
             setSecondaryProgressBarData({
@@ -634,7 +619,11 @@ const downloadDecryptedZipImpl = async (
         });
 
         if (result.success && result.data) {
-          results.push({ dir, name: result.fileName, data: result.data });
+          results.push({
+            folders,
+            names: [result.fileName, file.title, file.id],
+            data: result.data,
+          });
         } else {
           failures.push(`${dir}${shownName}`);
         }
@@ -657,7 +646,7 @@ const downloadDecryptedZipImpl = async (
     });
 
     // Decrypted names can clash where the opaque server titles did not.
-    const zipData = createZipFromBuffers(toZipEntries(results));
+    const zipData = createZipFromBuffers(toArchiveEntries(results));
     triggerFileDownload(
       new Blob([zipData as unknown as BlobPart], { type: "application/zip" }),
       zipName,
@@ -689,12 +678,14 @@ export const downloadEncryptedFilesAsZipImpl = async (
     async () => {
       const entries: TDecryptedZipEntry[] = encryptedFiles.map((file) => ({
         file,
-        dir: "",
+        folders: [],
         roomId: self.resolveRoomIdForFile(file),
       }));
       for (const folder of folders) {
         entries.push(
-          ...(await listFolderEntries(self, folder, `${folder.title}/`)),
+          ...(await listFolderEntries(self, folder, [
+            { id: folder.id, title: folder.title },
+          ])),
         );
       }
       return entries;
@@ -713,7 +704,7 @@ export const downloadEncryptedFolderImpl = async (
 ) =>
   downloadDecryptedZipImpl(
     self,
-    `${folder.title}.zip`,
+    `${toSafeFileName(folder.title, folder.id)}.zip`,
     () => listFolderEntries(self, folder),
     (fileNames) => i18n.t("Common:EncryptedDownloadPartial", { fileNames }),
   );

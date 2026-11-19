@@ -190,6 +190,16 @@ describe("encryptedDownload", () => {
       ]);
     });
 
+    it("Names that differ only in case", () => {
+      expect(deduplicateFileNames(["Budget.xlsx", "budget.xlsx"])).toEqual([
+        "Budget.xlsx",
+        "budget (1).xlsx",
+      ]);
+      expect(
+        deduplicateFileNames(["Report.docx", "report.docx", "REPORT (1).DOCX"]),
+      ).toEqual(["Report.docx", "report (2).docx", "REPORT (1).DOCX"]);
+    });
+
     it("splits on the LAST dot for multi-dot names", () => {
       expect(deduplicateFileNames(["a.b.c", "a.b.c"])).toEqual([
         "a.b.c",

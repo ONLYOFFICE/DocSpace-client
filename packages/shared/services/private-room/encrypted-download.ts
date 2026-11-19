@@ -40,6 +40,8 @@ import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
+import { addCopySuffix } from "./encrypted-copy";
+import { fileNameKey } from "./safe-file-name";
 
 export type DecryptConfig = {
   encryptedData: ArrayBuffer | Blob;
@@ -230,27 +232,26 @@ export function createZipFromBuffers(
 }
 
 /**
- * Unique names, in order: the first occurrence of a name keeps it, a later one
- * gets the lowest " (n)" before the extension that is neither in the list nor
- * given out already, so "a.txt", "a (1).txt", "a.txt" ends in "a (2).txt".
+ * Unique names, in order, compared without regard to case: the first
+ * occurrence of a name keeps it, a later one gets the lowest " (n)" before
+ * the extension that is neither in the list nor given out already, so
+ * "a.txt", "a (1).txt", "a.txt" ends in "a (2).txt".
  */
 export function deduplicateFileNames(names: string[]): string[] {
-  const listed = new Set(names);
+  const listed = new Set(names.map(fileNameKey));
   const used = new Set<string>();
 
   return names.map((name) => {
-    if (!used.has(name)) {
-      used.add(name);
+    if (!used.has(fileNameKey(name))) {
+      used.add(fileNameKey(name));
       return name;
     }
 
-    const dotIdx = name.lastIndexOf(".");
-    const base = dotIdx > 0 ? name.slice(0, dotIdx) : name;
-    const ext = dotIdx > 0 ? name.slice(dotIdx) : "";
     for (let n = 1; ; n += 1) {
-      const candidate = `${base} (${n})${ext}`;
-      if (!listed.has(candidate) && !used.has(candidate)) {
-        used.add(candidate);
+      const candidate = addCopySuffix(name, n);
+      const key = fileNameKey(candidate);
+      if (!listed.has(key) && !used.has(key)) {
+        used.add(key);
         return candidate;
       }
     }

@@ -56,13 +56,15 @@ folders in an archive; new texts.
    returns the first one that is not empty afterwards, `_` when none is
    left (callers always end the list with an id, so `_` is not reached in
    practice). The rule, in this order:
-   1. Unicode NFC.
-   2. Leave out C0 controls (U+0000 to U+001F), DEL (U+007F), C1 controls
+   1. Leave out C0 controls (U+0000 to U+001F), DEL (U+007F), C1 controls
       (U+0080 to U+009F) and the text-direction characters U+200E, U+200F,
       U+202A to U+202E and U+2066 to U+2069.
+   2. Unicode NFC. It comes after step 1, so that a character left out
+      between a letter and its combining mark does not keep the two from
+      being composed.
    3. Replace each of `/ \ : * ? " < > |` with `_`.
-   4. Trim whitespace at both ends, then strip trailing dots and spaces
-      until none is left; a name made of dots ends up empty here.
+   4. Trim whitespace at the start, then strip trailing whitespace and
+      dots until none is left; a name made of dots ends up empty here.
    5. If the part before the first dot, without trailing spaces, is CON,
       PRN, AUX, NUL, COM1 to COM9 or LPT1 to LPT9 in any letter case, put
       `_` in front.
@@ -70,7 +72,8 @@ folders in an archive; new texts.
       before the extension (from the last dot that is not the first
       character, when the extension takes at most 32 bytes; otherwise the
       whole name) at a code point boundary until the whole fits, then
-      apply step 4 again to the shortened part.
+      apply steps 4 and 5 again to the shortened part, so that a shortened
+      name such as "CON" followed by spaces is still guarded.
 
    The rule is idempotent: a name it returns comes back unchanged from a
    second pass. Decision 4 and `triggerFileDownload`, which applies the rule

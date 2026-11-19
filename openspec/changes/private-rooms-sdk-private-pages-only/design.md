@@ -152,6 +152,22 @@ change to the private pages' own listing; a change to the ui-kit.
    file, and folder titles are plain text by design (`encryption-core`,
    "Metadata is visible to the server"), which is why the two methods differ.
 
+### The chat page (task 1.8)
+
+Read on 2026-11-19 at `777b4a0b412` (client) with the ui-kit build the
+branch installs. `/sdk/chat` (`(chat)/chat/page.tsx`, `page.client.tsx`,
+`page.oauth.client.tsx`) takes three ids:
+
+- `agentId` (also from a request header) or else `entityId` is the scope of
+  the chat (`chatEntityId`, passed to the kit's `AiAgentProviders`). The kit
+  also uses the scope as the folder that files uploaded from the device in
+  the chat go to (`ai-agent/providers/files/upload-files`).
+- `fileId` is a file that `ChatParamsBridge` loads with `getFileInfo` and
+  attaches to the chat.
+
+Each of them can name a private room, a folder inside one or an encrypted
+file, so the change gets a scenario for the page (proposal, decision 6).
+
 ## Risks / Trade-offs
 
 - [One more request per generic address and per in-place navigation into

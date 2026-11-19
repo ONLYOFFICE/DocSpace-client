@@ -51,6 +51,7 @@ import {
   clearDeviceSetupHintHandler,
 } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 import {
   PassphraseModal,
   usePasskeyUnlock,
@@ -289,6 +290,8 @@ const EncryptionProviderWrapper = observer(({ userStore, children }) => {
   const keys = userStore?.encryptionKeys;
   const ownerId = userStore?.user?.id;
   const ownerIdStr = ownerId ? String(ownerId) : undefined;
+
+  useDeviceRecordPruning(ownerIdStr, Array.isArray(keys) ? keys : null);
 
   const chosen = selectUserKey(keys);
 

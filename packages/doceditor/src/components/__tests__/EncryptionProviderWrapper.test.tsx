@@ -44,11 +44,16 @@ import type { TUser } from "@docspace/shared/api/people/types";
 
 const env = vi.hoisted(() => ({
   getEncryptionKeys: vi.fn(),
+  pruning: vi.fn(),
   providerProps: null as Record<string, unknown> | null,
 }));
 
 vi.mock("@docspace/shared/api/privacy", () => ({
   getEncryptionKeys: env.getEncryptionKeys,
+}));
+
+vi.mock("@docspace/shared/hooks/useDeviceRecordPruning", () => ({
+  useDeviceRecordPruning: env.pruning,
 }));
 
 vi.mock("@docspace/shared/context/encryption", () => ({
@@ -166,5 +171,28 @@ describe("Editor loads the caller's key envelopes before opening an encrypted fi
     expect(seen.ready).toBe(true);
     expect(seen.load.failed).toBe(false);
     expect(env.providerProps?.keysLoaded).toBe(true);
+  });
+});
+
+describe("Removing the key removes what this device keeps of it", () => {
+  afterEach(() => {
+    act(() => root.unmount());
+    host.remove();
+  });
+
+  it("Key removed on another device", async () => {
+    env.getEncryptionKeys.mockResolvedValue([KEY]);
+
+    await renderWrapper();
+
+    expect(env.pruning).toHaveBeenLastCalledWith("user-1", [KEY]);
+  });
+
+  it("Key removed on another device: a failed read prunes nothing on its account", async () => {
+    env.getEncryptionKeys.mockRejectedValue(new Error("500"));
+
+    await renderWrapper();
+
+    expect(env.pruning).toHaveBeenLastCalledWith("user-1", null);
   });
 });

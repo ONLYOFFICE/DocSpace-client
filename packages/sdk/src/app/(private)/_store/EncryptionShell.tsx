@@ -44,6 +44,7 @@ import {
 } from "@docspace/shared/context/encryption";
 import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 
 import { useEncryptionIdentityStore } from "./EncryptionIdentityStore";
 import { useKeysManagementLink } from "../_hooks/useKeysManagementLink";
@@ -87,6 +88,8 @@ type EncryptionShellProps = { children: React.ReactNode };
 const EncryptionShellInner: React.FC<EncryptionShellProps> = ({ children }) => {
   const identityStore = useEncryptionIdentityStore();
   const userKeys = identityStore.userKeys;
+
+  useDeviceRecordPruning(identityStore.ownerId, identityStore.keys);
 
   return (
     <EncryptionProvider

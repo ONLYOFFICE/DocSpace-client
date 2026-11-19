@@ -71,8 +71,12 @@ vi.mock("@docspace/shared/dialogs/key-recovery", () => ({
 vi.mock("@docspace/shared/api/privacy", () => ({
   getEncryptionKeys: vi.fn(),
 }));
+vi.mock("@docspace/shared/hooks/useDeviceRecordPruning", () => ({
+  useDeviceRecordPruning: vi.fn(),
+}));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 
 import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
 
@@ -294,5 +298,19 @@ describe("EncryptionProviderWrapper tells the provider whether the key list is k
     renderWrapper(keys);
 
     expect(encryption.providerProps?.keysLoaded).toBe(keysLoaded);
+  });
+});
+
+describe("Removing the key removes what this device keeps of it", () => {
+  it("Key removed on another device", () => {
+    renderWrapper([KEY]);
+
+    expect(useDeviceRecordPruning).toHaveBeenLastCalledWith("me", [KEY]);
+  });
+
+  it("Key removed on another device: a list not known prunes nothing on its account", () => {
+    renderWrapper(undefined);
+
+    expect(useDeviceRecordPruning).toHaveBeenLastCalledWith("me", null);
   });
 });

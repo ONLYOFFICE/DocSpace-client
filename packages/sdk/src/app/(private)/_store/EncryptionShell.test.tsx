@@ -43,6 +43,25 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const frame = vi.hoisted(() => ({
   src: "https://portal.example.com" as string | undefined,
   forgot: null as null | (() => void),
+  pruning: vi.fn(),
+  identity: {
+    ownerId: "user-1" as string | null,
+    keys: null as Array<{ publicKey: string }> | null,
+    userKeys: null,
+  },
+}));
+
+vi.mock("@docspace/shared/hooks/useDeviceRecordPruning", () => ({
+  useDeviceRecordPruning: frame.pruning,
+}));
+
+// The provider and its shell effects are not under test here.
+vi.mock("@docspace/shared/context/encryption", () => ({
+  EncryptionProvider: () => null,
+}));
+
+vi.mock("./EncryptionIdentityStore", () => ({
+  useEncryptionIdentityStore: () => frame.identity,
 }));
 
 vi.mock("@/providers/SDKConfigProvider", () => ({
@@ -71,7 +90,7 @@ vi.mock("react-i18next", () => ({
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { PassphraseDialogAdapter } from "./EncryptionShell";
+import { EncryptionShell, PassphraseDialogAdapter } from "./EncryptionShell";
 
 describe("EncryptionShell passphrase dialog", () => {
   let root: Root | null = null;
@@ -138,5 +157,36 @@ describe("EncryptionShell passphrase dialog", () => {
     expect(toastr.info).toHaveBeenCalledWith(
       "Common:EncryptionKeysManagedInProfile",
     );
+  });
+});
+
+describe("Removing the key removes what this device keeps of it", () => {
+  let root: Root | null = null;
+
+  const renderShell = () => {
+    root = createRoot(document.createElement("div"));
+    act(() => root?.render(<EncryptionShell>{null}</EncryptionShell>));
+  };
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+  });
+
+  it("Key removed on another device", () => {
+    const keys = [{ publicKey: "pub" }];
+    frame.identity.keys = keys;
+
+    renderShell();
+
+    expect(frame.pruning).toHaveBeenLastCalledWith("user-1", keys);
+  });
+
+  it("Key removed on another device: a list not known prunes nothing on its account", () => {
+    frame.identity.keys = null;
+
+    renderShell();
+
+    expect(frame.pruning).toHaveBeenLastCalledWith("user-1", null);
   });
 });

@@ -72,6 +72,10 @@ import i18n from "../../i18n";
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import {
+  toAiProject,
+  type TAiProjectRoomDto,
+} from "@docspace/shared/api/ai/projects";
 import type { TPathParts } from "@docspace/shared/types";
 import type { TOptSocket } from "@onlyoffice/apps-ui-kit/utils/socket";
 
@@ -392,8 +396,14 @@ export function refreshFolderImpl(
       self.setFolder(folderInfo);
 
       // An agent's model or linked rooms change as an update of its room.
-      if (folderInfo.roomType === RoomsType.AiProjectRoom)
+      if (folderInfo.roomType === RoomsType.AiProjectRoom) {
         void self.aiProjectsStore?.refreshTileSummary(Number(folderInfo.id));
+        // Pinned, unpinned, renamed or given another logo, here or elsewhere:
+        // the sidebar's list of pinned agents follows.
+        self.treeFoldersStore.syncPinnedAiProject(
+          toAiProject(folderInfo as unknown as TAiProjectRoomDto),
+        );
+      }
 
       refreshInfoPanel();
     })
@@ -478,6 +488,9 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
       }
     });
   } else if (opt?.type === "folder" && opt?.id) {
+    // A deleted agent leaves the sidebar, whatever list is on screen.
+    self.treeFoldersStore.removePinnedAiProject(opt.id);
+
     const { isRoom, isTemplate, pathParts, rootFolderType } =
       self.selectedFolderStore;
     const foundIndex = self.folders.findIndex((x) => x.id === opt?.id);

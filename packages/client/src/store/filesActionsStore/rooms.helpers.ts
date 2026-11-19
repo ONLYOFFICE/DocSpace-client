@@ -130,7 +130,11 @@ self: FilesActionStore,
     (String(selectedFolderStore.id) === roomId ? selectedFolderStore : null);
   const ofAgents = ids.length > 0 && ids.every((roomId) => isAgent(roomOf(roomId)));
 
-  return setPinActionHelper(action, id, t, ofAgents);
+  await setPinActionHelper(action, id, t, ofAgents);
+
+  // The sidebar lists the pinned agents under Agents, in the server's order.
+  if (ids.some((roomId) => isAgent(roomOf(roomId))))
+    void self.treeFoldersStore.fetchTreeFolders();
 };
 
 
@@ -646,7 +650,10 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
         }
 
         // A left agent leaves the sidebar and the chat's agents menu.
-        if (isAgent(room)) void self.aiPresetsStore?.fetchPresets();
+        if (isAgent(room)) {
+          void self.aiPresetsStore?.fetchPresets();
+          self.treeFoldersStore.removePinnedAiProject(roomId);
+        }
 
         toastr.success(successText);
       })

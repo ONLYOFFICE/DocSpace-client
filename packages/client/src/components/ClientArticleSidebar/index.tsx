@@ -99,7 +99,7 @@ import {
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import type { TAiChatRecentThread } from "SRC_DIR/store/DialogsStore";
-import type { TAiPreset } from "SRC_DIR/store/AiPresetsStore";
+import type { TPinnedAiProject } from "SRC_DIR/store/TreeFoldersStore";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 
 import styles from "./ClientArticleSidebar.module.scss";
@@ -129,10 +129,10 @@ type ClientArticleSidebarProps = FolderIds & {
     afterLocationKey?: string | null,
     threadId?: string,
   ) => void;
-  // The latest AI projects (most recently changed first) listed under
-  // Agents, and the latest conversations under Recent with the one the chat
-  // shows.
-  recentAiProjects?: Pick<TAiPreset, "id" | "name" | "logo">[];
+  // The AI projects the user pinned, listed under Agents in the order the
+  // Agents list shows pinned ones, and the latest conversations under Recent
+  // with the one the chat shows.
+  pinnedAiProjects?: TPinnedAiProject[];
   recentAiChats?: TAiChatRecentThread[];
   hasMoreAiChats?: boolean;
   activeAiChatId?: string;
@@ -153,14 +153,8 @@ type ClientArticleSidebarProps = FolderIds & {
   onFolderNavigate: () => void;
 };
 
-/** How many AI projects Agents lists under it. */
-const RECENT_AI_PROJECTS_COUNT = 5;
-
 // A stable empty default, so the memoized groups are not rebuilt each render.
 const EMPTY_LIST: never[] = [];
-
-// A project read without its logo is drawn with its initials.
-const NO_PROJECT_LOGO = { color: "" };
 
 // The room type of an AI section room told by the folder type of the room
 // a folder inside it sits in.
@@ -170,7 +164,8 @@ const AI_ROOM_TYPES: Partial<Record<FolderType, RoomsType>> = {
   [FolderType.AiProjectRoom]: RoomsType.AiProjectRoom,
 };
 
-// Ids of the entries listed under Agents and Recent, Show more included.
+// Ids of the entries listed under Agents and Recent, Recent's Show more
+// included.
 // NavMenu has no third level: they are siblings of those entries, indented
 // and spaced by the `[data-item-id^="ai-nested-"]` rules of the module's
 // stylesheet.
@@ -215,7 +210,7 @@ const ClientArticleSidebar = ({
   aiOpenFolderId,
   aiOpenRoomType,
   requestAiChatPage,
-  recentAiProjects = EMPTY_LIST,
+  pinnedAiProjects = EMPTY_LIST,
   recentAiChats = EMPTY_LIST,
   hasMoreAiChats = false,
   activeAiChatId,
@@ -355,11 +350,6 @@ const ClientArticleSidebar = ({
     [requestAiChatPage, navigate, aiAgentsUrl],
   );
 
-  const shownAiProjects = React.useMemo(
-    () => recentAiProjects.slice(0, RECENT_AI_PROJECTS_COUNT),
-    [recentAiProjects],
-  );
-
   // While the chat covers the page, fullscreen, the entry it was opened as
   // is the current one: Recent on its history, the conversation when Recent
   // lists it, AI Chat otherwise. An AI project's own fullscreen chat belongs
@@ -385,7 +375,7 @@ const ClientArticleSidebar = ({
   const openProjectId = /^\/ai-rooms\/(\d+)\//.exec(location.pathname)?.[1];
   const aiProjectPageId =
     openProjectId &&
-    shownAiProjects.some((project) => project.id === openProjectId)
+    pinnedAiProjects.some((project) => project.id === openProjectId)
       ? aiProjectItemId(openProjectId)
       : undefined;
 
@@ -791,14 +781,14 @@ const ClientArticleSidebar = ({
           },
           // A project opens as its room, which shows its chat. Its logo is
           // the one the projects list shows; without one, its initials.
-          ...shownAiProjects.map((project) => ({
+          ...pinnedAiProjects.map((project) => ({
             id: aiProjectItemId(project.id),
             label: project.name,
             iconNode: (
               <ProjectLogo
                 project={{
                   title: project.name,
-                  logo: project.logo ?? NO_PROJECT_LOGO,
+                  logo: project.logo,
                 }}
                 size="20px"
                 radius="4px"
@@ -807,16 +797,6 @@ const ClientArticleSidebar = ({
             ),
             ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
           })),
-          // The rest are on the agents list.
-          ...(recentAiProjects.length > RECENT_AI_PROJECTS_COUNT
-            ? [
-                {
-                  id: "ai-nested-projects-more",
-                  label: t("Common:ShowMore"),
-                  ...nav(aiAgentsUrl),
-                },
-              ]
-            : []),
           {
             id: "ai-chat-recent",
             label: t("Common:AIChatRecent"),
@@ -878,8 +858,7 @@ const ClientArticleSidebar = ({
     aiHubTypeUrl,
     aiAgentsUrl,
     openAiChatPage,
-    shownAiProjects,
-    recentAiProjects,
+    pinnedAiProjects,
     recentAiChats,
     hasMoreAiChats,
     treeFolders,
@@ -904,7 +883,7 @@ const ClientArticleSidebar = ({
   // menu drew anew has none).
   React.useEffect(() => {
     const titles: [string, string][] = [
-      ...shownAiProjects.map(
+      ...pinnedAiProjects.map(
         (project) => [aiProjectItemId(project.id), project.name] as [string, string],
       ),
       ...recentAiChats.map(
@@ -944,7 +923,6 @@ const ClientArticleSidebarConnected = inject<TStore>(
     clientLoadingStore,
     settingsStore,
     appsStore,
-    aiPresetsStore,
     selectedFolderStore,
   }) => ({
     userId: userStore.user?.id,
@@ -975,7 +953,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
         }
       : {}),
     requestAiChatPage: dialogsStore.requestAiChatPage,
-    recentAiProjects: aiPresetsStore.presets,
+    pinnedAiProjects: treeFoldersStore.pinnedAiProjects,
     recentAiChats: dialogsStore.aiChatRecentThreads,
     hasMoreAiChats: dialogsStore.aiChatHasMoreThreads,
     activeAiChatId: dialogsStore.aiChatActiveThreadId,

@@ -48,6 +48,8 @@ export const fakeTreeFoldersStore = (): FakeStore => ({
   fetchTreeFolders: vi.fn(),
   updateTreeFoldersItem: vi.fn(),
   setSelectedNode: vi.fn(),
+  syncPinnedAiProject: vi.fn(),
+  removePinnedAiProject: vi.fn(),
   isMy: () => false,
   isRecycleBinFolder: false,
   isArchiveFolder: false,

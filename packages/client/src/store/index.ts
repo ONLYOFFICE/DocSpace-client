@@ -246,6 +246,7 @@ const dialogsStore = new DialogsStore(
 
 filesStore.dialogsStore = dialogsStore;
 filesStore.aiProjectsStore = aiProjectsStore;
+aiProjectsStore.treeFoldersStore = treeFoldersStore;
 filesStore.watchPrivateRoomsSection(appsStore);
 
 const profileActionsStore = new ProfileActionsStore(

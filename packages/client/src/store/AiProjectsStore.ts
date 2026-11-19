@@ -70,6 +70,7 @@ import type {
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import type AiPresetsStore from "./AiPresetsStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
 import { toAiPreset } from "./AiPresetsStore";
 
 /** The Skill sets connected and disconnected in the chat's composer. */
@@ -117,6 +118,9 @@ const showWarnings = (project: TAiProject) => {
  */
 class AiProjectsStore {
   aiPresetsStore: AiPresetsStore;
+
+  /** Set once the root store is wired: it keeps the pinned agents the sidebar lists. */
+  treeFoldersStore: TreeFoldersStore | null = null;
 
   private userStore: UserStore;
 
@@ -211,6 +215,7 @@ class AiProjectsStore {
     this.userStore = userStore;
     makeAutoObservable(this, {
       aiPresetsStore: false,
+      treeFoldersStore: false,
       openRequest: false,
       summaryRequests: false,
       summaryReads: false,
@@ -620,7 +625,7 @@ class AiProjectsStore {
   createProject = async (data: TAiProjectRequest) => {
     const project = await createAiProject(data);
     showWarnings(project);
-    // The sidebar lists the latest projects under Agents.
+    // The chat's agents menu offers the new project.
     void this.aiPresetsStore.fetchPresets();
     return project;
   };
@@ -642,8 +647,10 @@ class AiProjectsStore {
       if (this.formProject(id)) this.projectDialog = { mode: "edit", project };
     });
     if (this.isChatOn(id)) this.syncPreset(project);
-    // A rename shows under Agents, and a change moves the project up there.
+    // A rename shows in the chat's agents menu and, for a pinned project,
+    // under Agents in the sidebar.
     void this.aiPresetsStore.fetchPresets();
+    this.treeFoldersStore?.syncPinnedAiProject(project);
     return project;
   };
 
@@ -654,6 +661,7 @@ class AiProjectsStore {
     if (this.activeProject?.id === project.id) this.closeProject();
     // A left project leaves the sidebar and the chat's agents menu.
     void this.aiPresetsStore.fetchPresets();
+    this.treeFoldersStore?.removePinnedAiProject(project.id);
   };
 
   /** The owner hands the project over from the project form or its intro. */

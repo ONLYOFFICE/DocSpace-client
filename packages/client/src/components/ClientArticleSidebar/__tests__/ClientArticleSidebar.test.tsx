@@ -137,7 +137,7 @@ const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
 type TRenderOptions = {
-  presets?: { id: string; name: string }[];
+  pinnedProjects?: { id: string; name: string }[];
   recentThreads?: { id: string; title: string }[];
   hasMoreThreads?: boolean;
   selectedFolder?: Record<string, unknown>;
@@ -146,7 +146,7 @@ type TRenderOptions = {
 const renderSidebar = (
   extraFolders: unknown[] = [],
   {
-    presets = [],
+    pinnedProjects = [],
     recentThreads = [],
     hasMoreThreads = false,
     selectedFolder = { id: 1, rootFolderType: FolderType.USER, isRootFolder: true },
@@ -168,6 +168,10 @@ const renderSidebar = (
         myFolderId: 1,
         isTemplatesFolderRoot: false,
         isDocumentsFolder: false,
+        pinnedAiProjects: pinnedProjects.map((project) => ({
+          ...project,
+          logo: { color: "" },
+        })),
       }}
       filesStore={{ setSelection: vi.fn(), trashIsEmpty: true }}
       filesActionsStore={{ emptyTrashInProgress: false }}
@@ -178,7 +182,6 @@ const renderSidebar = (
         aiChatHasMoreThreads: hasMoreThreads,
         aiChatActiveThreadId: "",
       }}
-      aiPresetsStore={{ presets }}
       selectedFolderStore={selectedFolder}
       clientLoadingStore={{
         showArticleLoader: false,
@@ -296,15 +299,15 @@ describe("ClientArticleSidebar — an opened AI room on its short address", () =
 });
 
 describe("ClientArticleSidebar — AI Chat section recent entries", () => {
-  it("lists the five latest projects under Agents and the conversations under Recent, each with Show more", () => {
-    const presets = Array.from({ length: 7 }, (_, index) => ({
+  it("lists every pinned project under Agents, and the conversations under Recent with Show more", () => {
+    const pinnedProjects = Array.from({ length: 7 }, (_, index) => ({
       id: String(100 + index),
       name: `Project ${index}`,
     }));
     renderSidebar(
       [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
       {
-        presets,
+        pinnedProjects,
         recentThreads: [
           { id: "t1", title: "First" },
           { id: "t2", title: "Second" },
@@ -325,7 +328,8 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
       "nav-ai-nested-project-102",
       "nav-ai-nested-project-103",
       "nav-ai-nested-project-104",
-      "nav-ai-nested-projects-more",
+      "nav-ai-nested-project-105",
+      "nav-ai-nested-project-106",
       "nav-ai-chat-recent",
       "nav-ai-nested-chat-t1",
       "nav-ai-nested-chat-t2",
@@ -342,7 +346,7 @@ describe("ClientArticleSidebar — collapsed", () => {
     route.search = "?folder=100";
     try {
       renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
-        presets: [{ id: "100", name: "Only" }],
+        pinnedProjects: [{ id: "100", name: "Only" }],
         recentThreads: [{ id: "t1", title: "First" }],
         hasMoreThreads: true,
       });
@@ -370,12 +374,11 @@ describe("ClientArticleSidebar — AI Chat section without more entries", () => 
     renderSidebar(
       [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
       {
-        presets: [{ id: "100", name: "Only" }],
+        pinnedProjects: [{ id: "100", name: "Only" }],
         recentThreads: [{ id: "t1", title: "First" }],
       },
     );
 
-    expect(screen.queryByTestId("nav-ai-nested-projects-more")).toBeNull();
     expect(screen.queryByTestId("nav-ai-nested-chats-more")).toBeNull();
   });
 });
@@ -385,7 +388,7 @@ describe("ClientArticleSidebar — AI Chat section full names", () => {
     renderSidebar(
       [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
       {
-        presets: [{ id: "100", name: "A project with a very long name" }],
+        pinnedProjects: [{ id: "100", name: "A project with a very long name" }],
         recentThreads: [{ id: "t1", title: "A conversation with a long title" }],
       },
     );

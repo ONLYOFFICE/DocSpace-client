@@ -111,10 +111,11 @@ folders in an archive; new texts.
    which compares by `fileNameKey` and reserves every name listed in the
    directory before it picks a suffix, so "Decrypted names clash" keeps
    giving the clashing file ` (2)` when ` (1)` is listed. The suffix is
-   built with `addCopySuffix` of `encrypted-copy.ts`, the suffix of the
-   name-clash rule. When a suffixed name would take more than 255 bytes,
-   the part before the suffix is shortened so that the suffix and the
-   extension stay. Entry paths are the directory names joined with `/` plus
+   put before the extension by `addSuffix` of the helper, which splits the
+   name as the length step does and, when the suffixed name would take more
+   than 255 bytes, shortens the part before the suffix so that the suffix
+   and the extension stay. `addCopySuffix` of `encrypted-copy.ts` is not
+   used here: it knows no length. Entry paths are the directory names joined with `/` plus
    the file name. The client's
    `toZipEntries` goes away; `listFolderTree` records the folder chain with
    ids instead of a path string; the SDK passes items with an empty chain.

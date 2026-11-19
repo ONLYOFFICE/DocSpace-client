@@ -58,22 +58,9 @@ export const PASSPHRASE_GENERATOR_SETTINGS = {
 
 export type PassphraseStrength = "weak" | "fair" | "good" | "strong";
 
-/**
- * Discriminated union of suggestion kinds. UI maps each to a localized
- * message; producers (`checkPassphraseStrength`) never emit raw English.
- */
-export type PassphraseSuggestion =
-  | { kind: "min-length"; value: number }
-  | { kind: "lowercase" }
-  | { kind: "uppercase" }
-  | { kind: "digits" }
-  | { kind: "special" }
-  | { kind: "common-pattern" };
-
 export type PassphraseStrengthResult = {
   strength: PassphraseStrength;
   score: number;
-  suggestions: PassphraseSuggestion[];
   containsCommonPattern: boolean;
 };
 
@@ -160,32 +147,19 @@ export function checkPassphraseStrength(
   passphrase: string,
   minLength: number = PASSPHRASE_MIN_LENGTH,
 ): PassphraseStrengthResult {
-  const suggestions: PassphraseSuggestion[] = [];
   let score = 0;
 
   if (passphrase.length >= minLength) score += 25;
-  else suggestions.push({ kind: "min-length", value: minLength });
-
   if (passphrase.length >= minLength + 4) score += 10;
   if (passphrase.length >= minLength + 8) score += 10;
 
   if (LOWERCASE_OR_CASELESS_LETTER.test(passphrase)) score += 15;
-  else suggestions.push({ kind: "lowercase" });
-
   if (UPPERCASE_LETTER.test(passphrase)) score += 15;
-  else suggestions.push({ kind: "uppercase" });
-
   if (DECIMAL_DIGIT.test(passphrase)) score += 15;
-  else suggestions.push({ kind: "digits" });
-
   if (PUNCTUATION_OR_SYMBOL.test(passphrase)) score += 10;
-  else suggestions.push({ kind: "special" });
 
   const matchesPattern = containsCommonPattern(passphrase);
-  if (matchesPattern) {
-    score = Math.min(score, 25);
-    suggestions.push({ kind: "common-pattern" });
-  }
+  if (matchesPattern) score = Math.min(score, 25);
 
   const belowMinLength = passphrase.length < minLength;
 
@@ -199,7 +173,6 @@ export function checkPassphraseStrength(
   return {
     strength,
     score: Math.min(score, 100),
-    suggestions,
     containsCommonPattern: matchesPattern,
   };
 }

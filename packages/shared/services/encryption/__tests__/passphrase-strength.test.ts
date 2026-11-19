@@ -81,22 +81,16 @@ describe("containsCommonPattern", () => {
   });
 });
 
-const suggestionKinds = (
-  result: ReturnType<typeof checkPassphraseStrength>,
-): string[] => result.suggestions.map((s) => s.kind);
-
 describe("checkPassphraseStrength — length-based scoring", () => {
-  it("scores empty input as weak with length suggestion", () => {
+  it("scores empty input as weak", () => {
     const r = checkPassphraseStrength("");
     expect(r.strength).toBe("weak");
-    expect(suggestionKinds(r)).toContain("min-length");
-    expect(r.suggestions).toContainEqual({ kind: "min-length", value: 12 });
+    expect(r.score).toBe(0);
   });
 
   it("treats too-short input as weak", () => {
     const r = checkPassphraseStrength("Aa1!");
     expect(r.strength).toBe("weak");
-    expect(r.suggestions).toContainEqual({ kind: "min-length", value: 12 });
   });
 
   it("rewards length above minimum", () => {
@@ -107,29 +101,24 @@ describe("checkPassphraseStrength — length-based scoring", () => {
 
   it("uses provided minLength when supplied", () => {
     const r = checkPassphraseStrength("short", 4);
-    expect(suggestionKinds(r)).not.toContain("min-length");
+    expect(r.strength).toBe("fair");
+    expect(r.score).toBe(40);
   });
 });
 
 describe("checkPassphraseStrength — character class additivity", () => {
-  it("flags missing lowercase", () => {
-    const r = checkPassphraseStrength("ABCDEFGH1234!@");
-    expect(suggestionKinds(r)).toContain("lowercase");
-  });
+  const ALL_CLASSES = "AbCdEfGh12!@";
 
-  it("flags missing uppercase", () => {
-    const r = checkPassphraseStrength("abcdefgh1234!@");
-    expect(suggestionKinds(r)).toContain("uppercase");
-  });
-
-  it("flags missing digits", () => {
-    const r = checkPassphraseStrength("AbCdEfGhIjKl!@");
-    expect(suggestionKinds(r)).toContain("digits");
-  });
-
-  it("flags missing special chars", () => {
-    const r = checkPassphraseStrength("AbCdEfGh1234XY");
-    expect(suggestionKinds(r)).toContain("special");
+  it.each([
+    ["lowercase", "ABCDEFGH12!@", 15],
+    ["uppercase", "abcdefgh12!@", 15],
+    ["digits", "AbCdEfGhIj!@", 15],
+    ["punctuation", "AbCdEfGh12XY", 10],
+  ])("scores less without %s", (_, passphrase, points) => {
+    expect(passphrase).toHaveLength(ALL_CLASSES.length);
+    expect(checkPassphraseStrength(passphrase).score).toBe(
+      checkPassphraseStrength(ALL_CLASSES).score - points,
+    );
   });
 
   it("returns strong for a high-entropy mixed passphrase", () => {
@@ -144,7 +133,7 @@ describe("checkPassphraseStrength — common-pattern downgrade", () => {
     const r = checkPassphraseStrength("Password1234!");
     expect(r.containsCommonPattern).toBe(true);
     expect(r.strength).toBe("weak");
-    expect(suggestionKinds(r)).toContain("common-pattern");
+    expect(r.score).toBeLessThanOrEqual(25);
   });
 
   it("downgrades qwerty variants", () => {

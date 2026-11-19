@@ -465,6 +465,21 @@ describe("PassphraseModal", () => {
     });
   });
 
+  describe("Passphrase strength gate", () => {
+    it("Strength line shows a grade only", async () => {
+      const user = userEvent.setup();
+      renderModal({ isNew: true });
+
+      await user.type(getPassphraseInput(), "lorem ipsum dolor sitx");
+
+      const strengthLine = screen.getByTestId("passphrase_strength");
+      expect(strengthLine.children).toHaveLength(2);
+      expect(strengthLine).toHaveTextContent(
+        /^Common:PassphraseStrengthLabel: Common:PassphraseStrengthGood$/,
+      );
+    });
+  });
+
   // Spec: private-rooms/key-management, "Key dialogs ignore a click beside them"
   it("Backdrop click on the unlock prompt", () => {
     const { onCancel } = renderModal();

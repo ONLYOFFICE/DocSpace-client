@@ -225,11 +225,12 @@ describe("UploadDataStore.queueMemberFanOut", () => {
       fileKeys: [{ userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "own" }],
     } as never);
     vi.mocked(setFileEncryptionKeys).mockResolvedValue(undefined as never);
-    // Real base64, so a pinned key compares equal to itself after accept.
+    // Real base64 of 32 bytes, a well-formed key that compares equal to
+    // itself after accept.
     vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
-      memberKey("bob", btoa("bob-swapped")),
+      memberKey("bob", btoa("bob-swapped".padEnd(32, "."))),
     ] as never);
-    await getTofuStore("user-1").checkKey("bob", btoa("bob-pinned"));
+    await getTofuStore("user-1").checkKey("bob", btoa("bob-pinned".padEnd(32, ".")));
     waiting = [];
     handler = vi.fn(
       () =>

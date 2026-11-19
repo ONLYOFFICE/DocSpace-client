@@ -64,6 +64,9 @@ import {
 } from "../../encryption/tofu-store";
 import { pendingAccessStore } from "../pending-access";
 
+// A member key must be a well-formed 32-byte public key to be wrapped for.
+const pk = (name: string) => btoa(name.padEnd(32, "."));
+
 // ---------------------------------------------------------------------------
 // Module mocks
 // ---------------------------------------------------------------------------
@@ -875,7 +878,7 @@ describe("Cancelling an encrypted upload", () => {
   const BOB = {
     id: "b-1",
     userId: "bob",
-    publicKey: "pk-b",
+    publicKey: pk("b"),
     privateKeyEnc: "",
     date: "2026-01-01T00:00:00",
   };
@@ -1067,12 +1070,12 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     const { wrapDekForRecipients } = await import(
       "../../encryption/room-file-access"
     );
-    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    await getTofuStore("user-1").checkKey("bob", pk("b-pinned"));
     const handler = vi.fn(async () => "refuse" as const);
     registerKeyMismatchHandler(handler);
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
-      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
-      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-1", userId: "alice", publicKey: pk("a"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-2", userId: "bob", publicKey: pk("b-swapped"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never);
 
     const { results } = await upload();
@@ -1091,8 +1094,8 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     const { setFileEncryptionKeys } = await import("../../../api/files");
     pendingAccessStore.clear(10, "alice");
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
-      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
-      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-1", userId: "alice", publicKey: pk("a"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: pk("b"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never);
     vi.mocked(setFileEncryptionKeys)
       .mockResolvedValueOnce(undefined as never)
@@ -1115,7 +1118,7 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     const { setFileEncryptionKeys } = await import("../../../api/files");
     pendingAccessStore.clear(10, "bob");
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
-      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: pk("b"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never);
     vi.mocked(setFileEncryptionKeys)
       .mockResolvedValueOnce({ skippedUserIds: [] })
@@ -1134,7 +1137,7 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
   it("a shared upload is not flagged", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
-      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: pk("b"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never);
 
     const { results } = await upload();
@@ -1146,10 +1149,10 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
 
   it("Key trusted after a refusal: the file a refused key was left out of is recorded for the member", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
-    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    await getTofuStore("user-1").checkKey("bob", pk("b-pinned"));
     registerKeyMismatchHandler(vi.fn(async () => "refuse" as const));
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
-      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-2", userId: "bob", publicKey: pk("b-swapped"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never);
 
     const { results } = await upload();
@@ -1161,11 +1164,11 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
 
   it("asks once per refused key change across the files of one call", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
-    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    await getTofuStore("user-1").checkKey("bob", pk("b-pinned"));
     const handler = vi.fn(async () => "refuse" as const);
     registerKeyMismatchHandler(handler);
     const swapped = [
-      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-2", userId: "bob", publicKey: pk("b-swapped"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never;
     vi.mocked(getRoomEncryptionKeys)
       .mockResolvedValueOnce(swapped)
@@ -1190,10 +1193,10 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
 
   it("Member left out: the batch names the member once", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
-    await getTofuStore("user-1").checkKey("bob", "pk-b-pinned");
+    await getTofuStore("user-1").checkKey("bob", pk("b-pinned"));
     registerKeyMismatchHandler(vi.fn(async () => "refuse" as const));
     const swapped = [
-      { id: "b-2", userId: "bob", publicKey: "pk-b-swapped", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "b-2", userId: "bob", publicKey: pk("b-swapped"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never;
     vi.mocked(getRoomEncryptionKeys)
       .mockResolvedValueOnce(swapped)
@@ -1221,7 +1224,7 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
       "../../encryption/room-file-access"
     );
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
-      { id: "a-1", userId: "alice", publicKey: "pk-a", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-1", userId: "alice", publicKey: pk("a"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
     ] as never);
 
     const { results } = await upload();
@@ -1230,7 +1233,7 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
     expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
     const pinned = await getTofuStore("user-1").getKeys("alice");
-    expect(pinned.map((k) => k.publicKey)).toEqual(["pk-a"]);
+    expect(pinned.map((k) => k.publicKey)).toEqual([pk("a")]);
   });
 
   it("Member with two keys on the server: one recipient per member, for the selected key", async () => {
@@ -1240,9 +1243,9 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     );
     vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
       { id: "key-1", userId: "user-1", publicKey: "pk-own", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
-      { id: "a-old", userId: "alice", publicKey: "pk-a-old", privateKeyEnc: "", date: "2026-01-01T00:00:00" },
-      { id: "a-new", userId: "alice", publicKey: "pk-a-new", privateKeyEnc: "", date: "2026-10-01T00:00:00" },
-      { id: "b-1", userId: "bob", publicKey: "pk-b", privateKeyEnc: "", date: "2026-03-01T00:00:00" },
+      { id: "a-old", userId: "alice", publicKey: pk("a-old"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: "a-new", userId: "alice", publicKey: pk("a-new"), privateKeyEnc: "", date: "2026-10-01T00:00:00" },
+      { id: "b-1", userId: "bob", publicKey: pk("b"), privateKeyEnc: "", date: "2026-03-01T00:00:00" },
     ] as never);
 
     await orchestrateEncryptedUpload({
@@ -1257,8 +1260,8 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
 
     const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
     expect(fanOut.recipients).toEqual([
-      { userId: "alice", publicKey: "pk-a-new", publicKeyId: "a-new" },
-      { userId: "bob", publicKey: "pk-b", publicKeyId: "b-1" },
+      { userId: "alice", publicKey: pk("a-new"), publicKeyId: "a-new" },
+      { userId: "bob", publicKey: pk("b"), publicKeyId: "b-1" },
     ]);
   });
 });

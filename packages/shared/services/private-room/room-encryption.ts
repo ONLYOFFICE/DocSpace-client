@@ -48,7 +48,10 @@ import { wipeDek } from "../encryption/file-keys";
 import {
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
-import { verifyMemberKey } from "./member-key-verification";
+import {
+  type SkippedMemberKey,
+  verifyMemberKey,
+} from "./member-key-verification";
 import { loadRoomMemberKeys, selectMemberKeys } from "./room-member-keys";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
@@ -68,7 +71,7 @@ export interface FileEncryptionOpResult {
   error?: string;
 }
 
-export type SkippedMemberReason = "no-key" | "key-mismatch-refused";
+export type SkippedMemberReason = "no-key" | SkippedMemberKey["reason"];
 
 export interface SkippedRoomMember {
   id: string;

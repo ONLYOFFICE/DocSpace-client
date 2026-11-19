@@ -38,10 +38,15 @@ import {
   getTofuStore,
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
+import { base64ToUint8Array } from "../encryption/utils";
 
 export type MemberKeyVerification =
   | { kind: "ok"; publicKey: string }
-  | { kind: "key-mismatch-refused" };
+  | { kind: "key-mismatch-refused" }
+  /** The pin could not be read or stored, or the pin store opened. */
+  | { kind: "key-unchecked" }
+  /** The listed key is not a well-formed public key. */
+  | { kind: "key-unusable" };
 
 export interface MemberKeyRecipient {
   userId: string;
@@ -69,8 +74,17 @@ export function onMemberKeyTrusted(
 export interface SkippedMemberKey {
   userId: string;
   displayName?: string;
-  reason: "key-mismatch-refused";
+  reason: Exclude<MemberKeyVerification["kind"], "ok">;
 }
+
+/** Whether a listed key decodes to the 32 bytes of an X25519 public key. */
+const isUsablePublicKey = (publicKey: string) => {
+  try {
+    return base64ToUint8Array(publicKey).byteLength === 32;
+  } catch {
+    return false;
+  }
+};
 
 /** Checks one member key against the pins of `scopeUserId`; fails closed. */
 export async function verifyMemberKey(args: {
@@ -84,13 +98,16 @@ export async function verifyMemberKey(args: {
 }): Promise<MemberKeyVerification> {
   const { userId, scopeUserId, publicKey, displayName, resolver, refusals } =
     args;
+  // Spec: private-rooms/encryption-core, "An unusable member key affects only that member"
+  if (!isUsablePublicKey(publicKey)) return { kind: "key-unusable" };
   const tofu = getTofuStore(scopeUserId);
   const result = await tofu.checkKey(userId, publicKey);
   if (result.kind === "first-seen" || result.kind === "match") {
     return { kind: "ok", publicKey };
   }
-  // Spec: encryption-core, "Peer public keys are pinned on first use"
-  if (result.kind === "unavailable") return { kind: "key-mismatch-refused" };
+  // Not a refusal: the next file of a batch checks the key again.
+  // Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+  if (result.kind === "unavailable") return { kind: "key-unchecked" };
 
   const refusalKey = `${userId}:${publicKey}`;
   if (refusals?.has(refusalKey)) return { kind: "key-mismatch-refused" };
@@ -119,7 +136,9 @@ export async function verifyMemberKey(args: {
     refusals?.add(refusalKey);
     return { kind: "key-mismatch-refused" };
   }
-  await tofu.acceptKey(userId, publicKey);
+  if (!(await tofu.acceptKey(userId, publicKey))) {
+    return { kind: "key-unchecked" };
+  }
   for (const listener of trustedListeners) listener(userId, scopeUserId);
   return { kind: "ok", publicKey };
 }

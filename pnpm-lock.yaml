@@ -617,8 +617,8 @@ importers:
         specifier: 2.4.16
         version: 2.4.16
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: file:../../onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz
-        version: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz(@types/node@24.10.7)(react@19.2.8)
+        specifier: file:../../onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz
+        version: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz(@types/node@24.10.7)(react@19.2.8)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -1626,6 +1626,9 @@ importers:
       '@vitest/ui':
         specifier: 4.1.12
         version: 4.1.12(vitest@4.1.12)
+      fake-indexeddb:
+        specifier: ^6.2.8
+        version: 6.2.8
       identity-obj-proxy:
         specifier: 3.0.0
         version: 3.0.0
@@ -3573,7 +3576,7 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-0VqiMHuoclrdlj0txzZyCYUkkulk8+CiqM/wjKbEz0sr+dLKRgKYyZbmTwPkXpWDSFHk8HM91JKRbTfAMwqcCw==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-Zv5lMXXBSfNCnH/EJKVL899yRJ5VTFgydHN3/9s1P2mgt6xA8zTWi+ZKzcWEqeF4SXWuPS8hEfjhqNG8LT65Cg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
@@ -3637,9 +3640,9 @@ packages:
   '@onlyoffice/docspace-api-sdk@3.7.0':
     resolution: {integrity: sha512-zzhvkBZj7RelLDxGg/OnonG2vFwurlI2FaPSSHPiYXosu5y4lopQnSkoxoZ1uXgnWAKREjt1d0p+nkdtTH5xkA==}
 
-  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz':
-    resolution: {integrity: sha512-8KztC/hA0JarBGeqZ5Mm17XAm+3jG+6FkOYrVprvXocN+XqIB9P0j98NcRsMERmvcXAPNnh3tUnlbxpdIJ1VTQ==, tarball: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz}
-    version: 3.1.0-20261116
+  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz':
+    resolution: {integrity: sha512-L1A42L+K6omYXbIyvNRGFSfy1UgEbELNmNXKuuH7PVbIfgUWVp6fJQ6KgQvbb9pjimc8m5jhqhnki8RGybjIIA==, tarball: file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz}
+    version: 3.1.0-20261117.8
     hasBin: true
     peerDependencies:
       react: 19.2.8
@@ -6437,6 +6440,10 @@ packages:
 
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
+
+  fake-indexeddb@6.2.8:
+    resolution: {integrity: sha512-mpVW/HLUqwKXJ6F/s0hMgdK1eQfM4ncTHDioNGHWL0WKV3VcZCoZq1NKgboBbAge07aRCO7L48yziKssL59XEQ==}
+    engines: {node: '>=18'}
 
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
@@ -11862,7 +11869,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261116.tgz(@types/node@24.10.7)(react@19.2.8)':
+  '@onlyoffice/docspace-plugin-sdk@file:onlyoffice-docspace-plugin-sdk-3.1.0-20261117.8.tgz(@types/node@24.10.7)(react@19.2.8)':
     dependencies:
       '@types/react': 19.2.10
       inquirer: 9.3.8(@types/node@24.10.7)
@@ -14619,6 +14626,8 @@ snapshots:
   expect-type@1.4.0: {}
 
   extend@3.0.2: {}
+
+  fake-indexeddb@6.2.8: {}
 
   fast-deep-equal@3.1.3: {}
 

@@ -45,14 +45,6 @@ const encryption = vi.hoisted(() => ({
   keysLoaded: false,
 }));
 
-const frame = vi.hoisted(() => ({
-  src: "https://portal.example.com" as string | undefined,
-}));
-
-vi.mock("@/providers/SDKConfigProvider", () => ({
-  useSDKConfig: () => ({ sdkConfig: frame.src ? { src: frame.src } : null }),
-}));
-
 vi.mock("@docspace/shared/context/encryption", () => ({
   useEncryption: () => encryption,
 }));
@@ -85,7 +77,6 @@ describe("DeviceSetupHintEffect", () => {
 
   beforeEach(() => {
     sessionStorage.clear();
-    frame.src = "https://portal.example.com";
     vi.mocked(toastr.info).mockClear();
     encryption.hasConfiguredKey = false;
     encryption.keysLoaded = false;
@@ -114,7 +105,7 @@ describe("DeviceSetupHintEffect", () => {
     act(() => hint.props.components[0].props.onClick());
 
     expect(open).toHaveBeenCalledWith(
-      "https://portal.example.com/profile/keys-management",
+      `${window.location.origin}/profile/keys-management`,
       "_blank",
     );
     open.mockRestore();
@@ -122,13 +113,19 @@ describe("DeviceSetupHintEffect", () => {
 
   it("Client not reachable", () => {
     encryption.keysLoaded = true;
-    frame.src = undefined;
+    const open = vi.spyOn(window, "open").mockReturnValue(null);
 
     render();
 
-    expect(toastr.info).toHaveBeenCalledWith(
+    const hint = vi.mocked(toastr.info).mock.calls[0][0] as React.ReactElement<{
+      components: React.ReactElement<{ onClick: () => void }>[];
+    }>;
+    act(() => hint.props.components[0].props.onClick());
+
+    expect(toastr.info).toHaveBeenLastCalledWith(
       "Common:EncryptionKeysManagedInProfile",
     );
+    open.mockRestore();
   });
 
   it("stays silent when this device has a key", () => {

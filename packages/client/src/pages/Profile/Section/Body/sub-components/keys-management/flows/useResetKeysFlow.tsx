@@ -39,7 +39,10 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { resetGhostStateGate } from "@docspace/shared/services/encryption/ghost-state-notifier";
-import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
+import {
+  deleteEncryptionKey,
+  getEncryptionKeys,
+} from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import { ResetKeysConfirmDialog } from "../modals/ResetKeysConfirmDialog";
@@ -78,14 +81,13 @@ export function useResetKeysFlow({
 
   const onConfirm = useCallback(async () => {
     if (isPending) return;
-    const keys = encryptionKeys ?? [];
-    if (keys.length === 0) {
-      setConfirming(false);
-      return;
-    }
 
     setIsPending(true);
     try {
+      // The keys the server holds now, those registered since the page
+      // opened included; a failed read deletes nothing.
+      // Spec: private-rooms/key-management, "Reset all keys with a typed token"
+      const keys = (await getEncryptionKeys()) ?? [];
       // Drop in-memory state regardless of partial failure — a stale cached
       // identity must not outlive a half-completed reset.
       const results = await Promise.allSettled(
@@ -110,7 +112,7 @@ export function useResetKeysFlow({
       setIsPending(false);
       setConfirming(false);
     }
-  }, [encryptionKeys, isPending, refreshKeysFromServer, lockAfterKeyRemoval, t]);
+  }, [isPending, refreshKeysFromServer, lockAfterKeyRemoval, t]);
 
   const modals = confirming ? (
     <ResetKeysConfirmDialog

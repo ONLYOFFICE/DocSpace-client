@@ -57,10 +57,14 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 
 vi.mock("@docspace/shared/api/privacy", () => ({
   deleteEncryptionKey: vi.fn(),
+  getEncryptionKeys: vi.fn(),
 }));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
+import {
+  deleteEncryptionKey,
+  getEncryptionKeys,
+} from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
 import { useResetKeysFlow, type ResetKeysFlow } from "../useResetKeysFlow";
@@ -77,12 +81,18 @@ const keys = (ids: string[]): TEncryptionKeyPair[] =>
 
 const lockAfterKeyRemoval = vi.fn(async (_publicKey?: string) => undefined);
 
+// What the server lists at confirmation: unless a test says otherwise, the
+// keys the page shows.
+let shownKeys: TEncryptionKeyPair[] = [];
+let listedByServer: TEncryptionKeyPair[] | undefined;
+
 let latest: ResetKeysFlow;
 const Harness = (deps: {
   userId?: string;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   refreshKeysFromServer: () => Promise<void>;
 }) => {
+  shownKeys = deps.encryptionKeys ?? [];
   latest = useResetKeysFlow({ lockAfterKeyRemoval, ...deps });
   return <>{latest.modals}</>;
 };
@@ -91,6 +101,10 @@ describe("useResetKeysFlow", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     captured.dialog = null;
+    listedByServer = undefined;
+    vi.mocked(getEncryptionKeys).mockImplementation(
+      async () => listedByServer ?? shownKeys,
+    );
   });
 
   it("is unavailable when there are no keys to reset", () => {
@@ -293,5 +307,47 @@ describe("useResetKeysFlow", () => {
       await pendingConfirm;
     });
     expect(latest.isPending).toBe(false);
+  });
+
+  describe("Reset all keys with a typed token", () => {
+    it("Key registered after the page opened", async () => {
+      vi.mocked(deleteEncryptionKey).mockResolvedValue(undefined as never);
+      listedByServer = keys(["k1", "k-new"]);
+      render(
+        <Harness
+          encryptionKeys={keys(["k1"])}
+          refreshKeysFromServer={vi.fn().mockResolvedValue(undefined)}
+        />,
+      );
+      act(() => latest.request());
+      await act(async () => {
+        await (captured.dialog!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(deleteEncryptionKey).toHaveBeenCalledTimes(2);
+      expect(deleteEncryptionKey).toHaveBeenCalledWith("k1");
+      expect(deleteEncryptionKey).toHaveBeenCalledWith("k-new");
+    });
+
+    it("List cannot be read at confirmation", async () => {
+      vi.mocked(getEncryptionKeys).mockRejectedValueOnce(new Error("500"));
+      render(
+        <Harness
+          encryptionKeys={keys(["k1", "k2"])}
+          refreshKeysFromServer={vi.fn().mockResolvedValue(undefined)}
+        />,
+      );
+      act(() => latest.request());
+      await act(async () => {
+        await (captured.dialog!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(deleteEncryptionKey).not.toHaveBeenCalled();
+      expect(lockAfterKeyRemoval).not.toHaveBeenCalled();
+      expect(toastr.error).toHaveBeenCalledWith(
+        "Common:ResetEncryptionKeysFailed",
+      );
+      expect(toastr.success).not.toHaveBeenCalled();
+    });
   });
 });

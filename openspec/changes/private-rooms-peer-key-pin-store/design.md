@@ -56,10 +56,10 @@ to the key-change dialog itself.
      refused to the page, older private modes). Only this outcome selects
      the in-memory store, and it is cached for the session.
    - Not open now: any other open error (`UnknownError`, `VersionError`,
-     `QuotaExceededError`, `AbortError`), and a `blocked` open still pending
-     when the wait limit ends (decision 7). The operation gets the
-     "unavailable" check result; `dbPromise` is cleared so the next call
-     opens again. A blocked request that later succeeds is kept and used.
+     `QuotaExceededError`, `AbortError`), and a `blocked` open (decision 7).
+     The operation gets the "unavailable" check result; `dbPromise` is
+     cleared so the next call opens again. A blocked request that later
+     succeeds closes its connection; the next call opens its own.
    Alternatives: probing `indexedDB.databases()` to learn whether a store
    exists - rejected, not available in every supported browser and racy;
    treating every open failure as "not open now" - rejected, it would make
@@ -73,8 +73,9 @@ to the key-change dialog itself.
    cannot both find the record absent. The result is reported from
    `transaction.oncomplete`; `onerror` and `onabort` give "unavailable"
    (for a first sight) or keep the `match` (decision 4). The in-memory store
-   serialises operations per peer with a promise chain, so its answers obey
-   the same rule within the tab.
+   reads the record and stores the new pin in one synchronous step, with no
+   `await` between them (proposal, decision 4), so its answers obey the same
+   rule within the tab.
 3. **Writes resolve on commit.** Every write (`putRecord`, `deleteRecord`,
    `clear`, `acceptKey`) resolves on `oncomplete` and reports failure on
    `onerror` / `onabort` / a thrown `transaction()`. `acceptKey` returns
@@ -113,10 +114,13 @@ to the key-change dialog itself.
    Alternative: compare and pin before unwrapping every candidate -
    rejected, a listed key that does not open the wrap would then be pinned
    and the real key would raise a key-change dialog.
-7. **Blocked open wait.** A `blocked` open is waited for up to 5 seconds
-   (proposal, decision 3) before the waiting operation is refused; the
-   request is not cancelled, so a later operation can use the database
-   once the other tab lets go.
+7. **Blocked open.** A `blocked` open refuses the waiting operation at
+   once as "not open now" (proposal, decision 3). The database version
+   stays 2 in this change, so an open is blocked only while a tab of an
+   older build holds version 1; a wait limit belongs to the change that
+   next raises the version.
+   Alternative: wait 5 seconds for the other tab - rejected on 2026-11-19,
+   a timer and its test for a path no current build reaches.
 8. **Unusable keys are filtered before the pin check.** A key is usable
    when it decodes from base64 to exactly 32 bytes. `verifyMemberKey` gives
    a new kind `key-unusable` for any other key without touching the pin
@@ -124,21 +128,21 @@ to the key-change dialog itself.
    it produced with the recipients it could not wrap for, instead of
    failing the whole call; the decode in the unwrap loop moves inside the
    per-candidate `try`. Callers map the outcome: upload adds the member to
-   `failedFor` (Common:EncryptedUploadShareFailed, pending access);
+   `failedFor` (Common:EncryptedUploadShareFailed, pending access), and does
+   the same for `key-unchecked` (proposal, decision 5);
    invitation skips the invitee with Common:EncryptedInviteFailed;
    re-wrap records the member's files in `missingFileIdsByMember`; backfill
    leaves the member for the next sweep.
-9. **Texts.** Two new keys in `Common.json`:
-   `EncryptedUploadKeyCheckFailed` ("Not shared with {{names}}: their
-   encryption key could not be checked on this device. Reload the page and
-   retry from the Members panel.") and `EncryptedKeyCheckFailed` ("The
-   sender's encryption key could not be checked on this device. Reload the
-   page and try again."). The final English wording is reviewed with the
-   `.meta` comment written by `/translate-comments`. The invitation reuses
-   Common:EncryptedInviteFailed and the re-wrap Common:EncryptedReencryptPartialFailure,
-   so no new text there. The upload toast keeps its once-per-member rule,
-   keyed by member and reason so a refusal and a failed check are each
-   named once.
+9. **Texts.** One new key in `Common.json`, `EncryptedKeyCheckFailed`
+   ("The sender's encryption key could not be checked on this device.
+   Reload the page and try again."). The final English wording is reviewed
+   with the `.meta` comment written by `/translate-comments`. The upload
+   reuses Common:EncryptedUploadShareFailed (proposal, decision 5), the
+   invitation Common:EncryptedInviteFailed and the re-wrap
+   Common:EncryptedReencryptPartialFailure, so no new text there.
+   Alternative: an upload text of its own, `EncryptedUploadKeyCheckFailed`,
+   saying to reload - rejected on 2026-11-19, a second key in every
+   language for one extra sentence of advice.
 10. **Test IndexedDB.** `fake-indexeddb` (Apache-2.0) as a devDependency of
     `packages/shared` (proposal, decision 2), imported per test file from
     `fake-indexeddb` with a fresh `IDBFactory` per test. Failures are

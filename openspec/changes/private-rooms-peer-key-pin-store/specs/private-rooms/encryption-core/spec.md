@@ -22,7 +22,7 @@ The system SHALL pin each peer's public key the first time it is seen, per curre
 - **THEN** the operation that needed the key is refused: no file is decrypted with it and no wrap is produced for it
 
 #### Scenario: Pin store cannot be opened
-- **WHEN** the browser offers IndexedDB but the current user's pin store cannot be opened, or its opening is still blocked by another tab when the wait limit ends
+- **WHEN** the browser offers IndexedDB but the current user's pin store cannot be opened, or its opening is blocked by another tab
 - **THEN** the operation that needed a peer key is refused, and the next operation that needs one opens the store again
 
 #### Scenario: Last-seen time not recorded
@@ -93,7 +93,7 @@ The system SHALL refuse the part of an operation that needs a peer key whose pin
 
 #### Scenario: Upload with a key that could not be checked
 - **WHEN** a member's key cannot be checked during the fan-out of an upload
-- **THEN** the file is uploaded, no wrap is written for that member, the member is kept as pending access for the file, and Common:EncryptedUploadKeyCheckFailed names the member in the toast and the upload panel row instead of Common:EncryptedUploadNotSharedWith
+- **THEN** the file is uploaded, no wrap is written for that member, the member is kept as pending access for the file, and Common:EncryptedUploadShareFailed names the member, not Common:EncryptedUploadNotSharedWith
 
 #### Scenario: Next file of the batch checks again
 - **WHEN** a member's key could not be checked for one file of an upload batch

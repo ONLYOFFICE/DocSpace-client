@@ -16,8 +16,8 @@ unusable member key is contained, with unit tests for each behaviour.
   operation that needed the key.
 - The in-memory pin store is used only when the browser gives the page no
   IndexedDB at all. A pin store that exists but cannot be opened, or whose
-  opening waits on another tab, refuses the operation; the next operation
-  tries to open it again.
+  opening is blocked by another tab, refuses the operation; the next
+  operation tries to open it again.
 - The first sight of a peer's key is decided once per peer, also when
   several operations or tabs see that peer at the same time.
 - The unwrap compares the sender key with the pins before it unwraps:
@@ -28,7 +28,8 @@ unusable member key is contained, with unit tests for each behaviour.
   peer's trusted keys.
 - When a key could not be checked, each operation says so in its own terms
   instead of reporting a refused key change or the ghost-state toast: the
-  upload names the member with a new text and keeps them pending, an
+  upload names the member under Common:EncryptedUploadShareFailed and keeps
+  them pending, an
   invitation names the invitee under Common:EncryptedInviteFailed, a re-wrap
   keeps the files pending, the backfill retries on the next sweep, and a
   download, copy or preview shows a new text.
@@ -36,9 +37,8 @@ unusable member key is contained, with unit tests for each behaviour.
   member: it is not pinned or wrapped for, the other members still get their
   wraps, and the unwrap goes on to the next candidate key.
 
-New user-facing texts: `Common:EncryptedUploadKeyCheckFailed` (upload) and
-`Common:EncryptedKeyCheckFailed` (download, copy, preview), translated into
-every supported language.
+New user-facing text: `Common:EncryptedKeyCheckFailed` (download, copy,
+preview), translated into every supported language.
 
 ## Capabilities
 
@@ -80,14 +80,25 @@ Taken by the owner on 2026-11-19:
    the texts tell the user to reload and try again.
 2. The unit tests use the `fake-indexeddb` package, added as a
    devDependency of `packages/shared`.
-3. An open that is blocked by another tab is waited for 5 seconds before
-   the operation is refused.
+3. An open that is blocked by another tab refuses the operation at once.
+   (Revised on 2026-11-19 from a 5-second wait: the database version does
+   not change in this change, so a blocked open happens only while a tab of
+   an older build holds the store during an upgrade.)
+4. The in-memory pin store decides a first sight in one synchronous step,
+   with no wait between its read and its write, rather than ordering the
+   operations of a peer.
+5. The upload names a member whose key could not be checked with the
+   existing Common:EncryptedUploadShareFailed, like a member it could not
+   share with, and keeps them pending; no upload-specific text is added.
+
+Decisions 3 (revised), 4 and 5 were taken on 2026-11-19 after a review of
+the plan for the smallest change that meets the delta.
 
 ## Impact
 
 - `packages/shared/services/encryption/tofu-store.ts` (open, single
-  transaction first-sight decision, write completion, per-peer ordering in
-  the in-memory store).
+  transaction first-sight decision, write completion, a synchronous
+  first-sight step in the in-memory store).
 - `packages/shared/services/encryption/room-file-access.ts` (comparison
   before unwrap, candidate order, per-recipient wrapping, key-format check).
 - `packages/shared/services/encryption/errors.ts` and `error-i18n.ts` (an
@@ -96,11 +107,9 @@ Taken by the owner on 2026-11-19:
 - `packages/shared/services/private-room/member-key-verification.ts`,
   `room-encryption.ts`, `room-member-flows.ts` and
   `encrypted-upload-orchestrator.ts` (the new outcome and the unusable key).
-- Upload texts in `packages/client/src/store/uploadDataStore/encryption.helpers.ts`,
-  `packages/client/src/components/panels/UploadPanel/FileRow.js` and
-  `packages/sdk/src/app/(private)/_hooks/useEncryptedUpload.ts`; the invite
-  result in `packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js`
-  and its SDK counterpart.
-- Two keys in `public/locales/*/Common.json` with their `.meta` comments.
+- The invite result in `packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js`
+  and its SDK counterpart. The upload texts of the client and the SDK stay
+  as they are (decision 5).
+- One key in `public/locales/*/Common.json` with its `.meta` comment.
 - The devDependency `fake-indexeddb` in `packages/shared/package.json` and
   `pnpm-lock.yaml` (decision 2).

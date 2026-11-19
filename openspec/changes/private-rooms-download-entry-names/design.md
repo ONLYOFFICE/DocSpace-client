@@ -72,6 +72,10 @@ folders in an archive; new texts.
       whole name) at a code point boundary until the whole fits, then
       apply step 4 again to the shortened part.
 
+   The rule is idempotent: a name it returns comes back unchanged from a
+   second pass. Decision 4 and `triggerFileDownload`, which applies the rule
+   to names already made plain, rely on that.
+
    `fileNameKey` is `name.toLowerCase()`, the key the name-clash rule of a
    private room already uses; `encrypted-name-clash.ts` imports it instead
    of its local `nameKey`, which changes nothing there. The helper sits
@@ -80,9 +84,12 @@ folders in an archive; new texts.
 
 2. **Which candidates, in which order.** A single decrypted file:
    the name from the container header, then the name the caller passes
-   (`originalFileName`: the stored title for the client's single download,
-   the shown name for an archive entry, the item title in the SDK), then the
-   file id. `decryptDownloadedFile` names its `File` this way, so the
+   (`originalFileName`: the title the server stores, `file.title` in the
+   client and the item title in the SDK, in every path), then the file id.
+   The shown name from the filename cache is not a candidate: the cache
+   holds the header name, so a header name of which nothing is left would
+   skip the stored title. It stays the name in the text of a partial
+   failure. `decryptDownloadedFile` names its `File` this way, so the
    client, the media viewer and the SDK get the same name without a step of
    their own. A folder: its title, then its id. The archive of a folder: the
    folder's name by the same rule, followed by `.zip`. `triggerFileDownload`
@@ -94,18 +101,28 @@ folders in an archive; new texts.
    `encrypted-download.ts` gets `toArchiveEntries(items)`. Each item carries
    its decrypted data, its file name candidates and its folder chain, a list
    of `{ id, title }` from the folder the user picked down to the file's
-   own folder (empty for a file at the root). The builder walks the items in
-   order and keeps, per directory, one set of used keys (`fileNameKey`)
-   shared by files and folders. A folder gets its directory name the first
-   time its id appears under its parent; a later folder or file whose name
-   has a used key takes the lowest free ` (n)` before its extension, the
-   suffixed name passing through the length step again. Entry paths are the
-   directory names joined with `/` plus the file name. The client's
+   own folder (empty for a file at the root). The builder groups the items
+   by directory: the children of one directory are its folders, each once,
+   in the order their ids first appear, and its files, in order. It names
+   the children of each directory with one call of `deduplicateFileNames`,
+   which compares by `fileNameKey` and reserves every name listed in the
+   directory before it picks a suffix, so "Decrypted names clash" keeps
+   giving the clashing file ` (2)` when ` (1)` is listed. The suffix is
+   built with `addCopySuffix` of `encrypted-copy.ts`, the suffix of the
+   name-clash rule. When a suffixed name would take more than 255 bytes,
+   the part before the suffix is shortened so that the suffix and the
+   extension stay. Entry paths are the directory names joined with `/` plus
+   the file name. The client's
    `toZipEntries` goes away; `listFolderTree` records the folder chain with
    ids instead of a path string; the SDK passes items with an empty chain.
    Rejected: keeping two builders and only adding the helper to each. The
    rule of "Archive directories come from the folder tree" would then live
-   twice.
+   twice. Rejected: one set of names given out so far per directory,
+   without reserving the listed ones. Files "a.txt", "a.txt" and
+   "a (1).txt" would then end as "a.txt", "a (1).txt" and
+   "a (1) (1).txt". Rejected: passing a suffixed name through the length
+   step. For a name of 255 bytes the step cuts the suffix off again and
+   returns the name it started from.
 
 4. **The writer accepts only built paths.** `createZipFromBuffers` checks
    that every entry path is a `/`-joined list of non-empty segments, each
@@ -159,11 +176,14 @@ Unit tests carry the scenario names of the deltas.
   `LPT0` left alone), names of 255 and 256 bytes with one-, two-, three-
   and four-byte characters at the cut, an extension longer than 32 bytes,
   and the candidate order (empty, dot-only and control-only names falling
-  through to the next candidate and to `_`). A case for `fileNameKey`.
+  through to the next candidate and to `_`). Every output of the table
+  passed through the rule a second time comes back unchanged. A case for
+  `fileNameKey`.
 - `services/private-room/__tests__/encrypted-download.test.ts`:
   `toArchiveEntries` with the cases of "Archive directories come from the
   folder tree" and "Names that differ only in case", the existing
-  "Decrypted names clash" cases kept; `createZipFromBuffers` refusing a path
+  "Decrypted names clash" cases kept and run through it, a clash of a name
+  of 255 bytes keeping its suffix; `createZipFromBuffers` refusing a path
   with an empty, `..` or unnormalised segment and round-tripping a built
   one through fflate; `decryptDownloadedFile` naming its file by the
   candidates; `triggerFileDownload` with a name that needs the rule.

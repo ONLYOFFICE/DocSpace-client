@@ -70,6 +70,10 @@ vi.mock("../../../services/encryption/device-unlock-store", () => ({
   forgetDeviceUnlock: vi.fn(async () => undefined),
 }));
 
+vi.mock("../../../services/encryption/device-records", () => ({
+  forgetKeyOnDevice: vi.fn(async () => undefined),
+}));
+
 const autoLockListeners = vi.hoisted(() => new Set<() => void>());
 
 vi.mock("../../../services/encryption/auto-lock-preference", () => ({
@@ -135,6 +139,7 @@ import {
   restoreDeviceUnlock,
   forgetDeviceUnlock,
 } from "../../../services/encryption/device-unlock-store";
+import { forgetKeyOnDevice } from "../../../services/encryption/device-records";
 
 const dummyKeyPair: IdentityKeyPair = {
   publicKey: new Uint8Array(32).fill(1),
@@ -459,6 +464,35 @@ describe("EncryptionContext / EncryptionProvider", () => {
         latest.lock();
       });
       expect(forgetDeviceUnlock).toHaveBeenCalledWith("user-42");
+      expect(latest.isUnlocked).toBe(false);
+    });
+  });
+
+  describe("Removing the key removes what this device keeps of it", () => {
+    it("Key deleted on a remembered device", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      await act(async () => {
+        await latest.lockAfterKeyRemoval("pub-base64");
+      });
+
+      expect(forgetKeyOnDevice).toHaveBeenCalledWith("user-42", "pub-base64");
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+      expect(latest.isUnlocked).toBe(false);
+    });
+
+    it("Reset on a remembered device", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      await act(async () => {
+        await latest.lockAfterKeyRemoval();
+      });
+
+      expect(forgetKeyOnDevice).toHaveBeenCalledWith("user-42", undefined);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
       expect(latest.isUnlocked).toBe(false);
     });
   });

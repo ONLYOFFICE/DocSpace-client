@@ -71,6 +71,7 @@ import {
   persistDeviceUnlock,
   restoreDeviceUnlock,
 } from "../../services/encryption/device-unlock-store";
+import { forgetKeyOnDevice } from "../../services/encryption/device-records";
 import {
   clearEncryptedFilenameCache,
   setFilenameCacheScope,
@@ -104,6 +105,12 @@ export type EncryptionContextValue = {
   publicKey: string | null;
   unlock: (passphrase: string, rememberDevice?: boolean) => Promise<boolean>;
   lock: () => void;
+  /**
+   * Locks the identity after the user deleted a key or reset all keys, and
+   * removes what this device keeps of it: the records of the given public
+   * key, or every record of the user without one.
+   */
+  lockAfterKeyRemoval: (publicKey?: string) => Promise<void>;
   getIdentity: () => IdentityKeyPair | null;
   /** Prompts via the registered PassphraseDialog if cache is empty. */
   requireIdentity: () => Promise<IdentityKeyPair | null>;
@@ -268,6 +275,19 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     clearEncryptedFilenameCache();
     setIsUnlocked(false);
   }, [userKeys?.userId]);
+
+  // Spec: private-rooms/key-management, "Removing the key removes what this device keeps of it"
+  const lockAfterKeyRemoval = useCallback(
+    async (removedPublicKey?: string) => {
+      SecretStorage.lock();
+      clearEncryptedFilenameCache();
+      setIsUnlocked(false);
+      if (userKeys?.userId) {
+        await forgetKeyOnDevice(userKeys.userId, removedPublicKey);
+      }
+    },
+    [userKeys?.userId],
+  );
 
   const clearError = useCallback(() => {
     setUnlockError(null);
@@ -549,6 +569,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       publicKey,
       unlock,
       lock,
+      lockAfterKeyRemoval,
       getIdentity,
       requireIdentity,
       resolveKeyMismatch,
@@ -564,6 +585,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       publicKey,
       unlock,
       lock,
+      lockAfterKeyRemoval,
       getIdentity,
       requireIdentity,
       resolveKeyMismatch,

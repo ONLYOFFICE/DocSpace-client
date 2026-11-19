@@ -34,6 +34,7 @@
  */
 
 import { act, render } from "@testing-library/react";
+import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -152,7 +153,8 @@ describe("A locked key is shown in a private room: the entry request", () => {
     const sync = vi.fn();
     render(
       <Provider
-        selectedFolderStore={{ private: isPrivate, id: ROOM }}
+        selectedFolderStore={{ id: ROOM }}
+        treeFoldersStore={{ isPrivacyFolder: isPrivate }}
         filesStore={{ syncEncryptedRoom: sync }}
       >
         <RoomUnlockEffect />
@@ -177,11 +179,11 @@ describe("A locked key is shown in a private room: the entry request", () => {
     renderEffect();
 
     expect(encryption.requireIdentity).toHaveBeenCalledTimes(1);
-    expect(roomUnlockRequest.settledFolderId).toBeNull();
+    expect(roomUnlockRequest.settledRoomId).toBeNull();
 
     await act(async () => answer(null));
 
-    expect(roomUnlockRequest.settledFolderId).toBe(ROOM);
+    expect(roomUnlockRequest.settledRoomId).toBe(ROOM);
   });
 
   it("settled after a cancel, without the room sync", async () => {
@@ -190,7 +192,7 @@ describe("A locked key is shown in a private room: the entry request", () => {
     const sync = renderEffect();
     await act(async () => {});
 
-    expect(roomUnlockRequest.settledFolderId).toBe(ROOM);
+    expect(roomUnlockRequest.settledRoomId).toBe(ROOM);
     expect(sync).not.toHaveBeenCalled();
   });
 
@@ -201,7 +203,7 @@ describe("A locked key is shown in a private room: the entry request", () => {
     renderEffect();
 
     expect(encryption.requireIdentity).not.toHaveBeenCalled();
-    expect(roomUnlockRequest.settledFolderId).toBe(ROOM);
+    expect(roomUnlockRequest.settledRoomId).toBe(ROOM);
   });
 
   it("asks nothing of a user without a key", () => {
@@ -211,7 +213,7 @@ describe("A locked key is shown in a private room: the entry request", () => {
     renderEffect();
 
     expect(encryption.requireIdentity).not.toHaveBeenCalled();
-    expect(roomUnlockRequest.settledFolderId).toBeNull();
+    expect(roomUnlockRequest.settledRoomId).toBeNull();
   });
 
   it("forgets the answer outside private rooms", () => {
@@ -219,7 +221,67 @@ describe("A locked key is shown in a private room: the entry request", () => {
 
     renderEffect(false);
 
-    expect(roomUnlockRequest.settledFolderId).toBeNull();
+    expect(roomUnlockRequest.settledRoomId).toBeNull();
+  });
+
+  const FOLDER = 9200;
+  const OTHER_ROOM = 9300;
+
+  type TFolder = { id: number; rootRoomId: number };
+
+  const renderAt = (start: TFolder) => {
+    // The folder of a private room is not private itself; its room is.
+    const folder = observable({ private: false, ...start });
+    render(
+      <Provider
+        selectedFolderStore={folder}
+        treeFoldersStore={{ isPrivacyFolder: true }}
+        filesStore={{ syncEncryptedRoom: vi.fn() }}
+      >
+        <RoomUnlockEffect />
+      </Provider>,
+    );
+    return async (next: TFolder) => {
+      await act(async () => {
+        runInAction(() => Object.assign(folder, next));
+      });
+    };
+  };
+
+  it("Subfolder after a cancelled prompt", async () => {
+    encryption.requireIdentity = vi.fn(async () => null);
+    const open = renderAt({ id: ROOM, rootRoomId: ROOM });
+    await act(async () => {});
+    expect(encryption.requireIdentity).toHaveBeenCalledTimes(1);
+
+    await open({ id: FOLDER, rootRoomId: ROOM });
+
+    expect(encryption.requireIdentity).toHaveBeenCalledTimes(1);
+    expect(roomUnlockRequest.settledRoomId).toBe(ROOM);
+  });
+
+  it("Back to the root of the room", async () => {
+    encryption.requireIdentity = vi.fn(async () => null);
+    const open = renderAt({ id: ROOM, rootRoomId: ROOM });
+    await act(async () => {});
+    await open({ id: FOLDER, rootRoomId: ROOM });
+
+    await open({ id: ROOM, rootRoomId: ROOM });
+
+    expect(encryption.requireIdentity).toHaveBeenCalledTimes(1);
+    expect(roomUnlockRequest.settledRoomId).toBe(ROOM);
+  });
+
+  it("Another private room", async () => {
+    encryption.requireIdentity = vi.fn(async () => null);
+    const open = renderAt({ id: FOLDER, rootRoomId: ROOM });
+    await act(async () => {});
+    expect(roomUnlockRequest.settledRoomId).toBe(ROOM);
+
+    await open({ id: OTHER_ROOM, rootRoomId: OTHER_ROOM });
+
+    expect(encryption.requireIdentity).toHaveBeenCalledTimes(2);
+    expect(roomUnlockRequest.settledRoomId).toBe(OTHER_ROOM);
   });
 });
 

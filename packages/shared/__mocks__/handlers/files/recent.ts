@@ -1484,8 +1484,29 @@ export const recentResolver = (isEmpty: boolean): Response => {
     : new Response(JSON.stringify(recentSuccess));
 };
 
+/**
+ * Recent picks files by the type of their room, and a private room has no
+ * type of its own: EntryManager refuses `searchArea=PrivateRooms` there with
+ * an ArgumentException (FilesCommonResource.ErrorMessage_BadRequest), a 400.
+ */
 export const recentHandler = (port: string, isEmpty: boolean = false) => {
-  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_RECENT}`, () => {
-    return recentResolver(isEmpty);
-  });
+  return http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_RECENT}`,
+    ({ request }) => {
+      const searchArea = new URL(request.url).searchParams.get("searchArea");
+
+      if (searchArea === "PrivateRooms") {
+        return new Response(
+          JSON.stringify({
+            error: { message: "Bad request." },
+            status: 1,
+            statusCode: 400,
+          }),
+          { status: 400, headers: { "Content-Type": "application/json" } },
+        );
+      }
+
+      return recentResolver(isEmpty);
+    },
+  );
 };

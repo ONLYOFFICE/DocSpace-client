@@ -140,3 +140,6 @@ export const onSDKRequestRename = async (
 };
 
 export const onOutdatedVersion = () => window.location.reload();
+
+/** Loads the editor page again: a new configuration and a new key flow. */
+export const reloadEditorPage = () => window.location.reload();

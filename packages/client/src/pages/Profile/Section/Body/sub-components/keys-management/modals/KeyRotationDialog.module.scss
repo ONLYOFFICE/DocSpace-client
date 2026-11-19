@@ -52,6 +52,15 @@
 
 .inputWrapper {
   width: 100%;
+
+  :global(.password-field-wrapper) {
+    width: 100%;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: var(--divider-color);
 }
 
 .forgotRow {

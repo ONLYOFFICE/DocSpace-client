@@ -51,10 +51,12 @@ const HeaderComponent = ({
   defaultFolderType,
   isGuest,
   aiServicesEnabled,
+  isPrivateRoomsSectionAvailable,
 }) => {
   const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
     isGuest,
     aiServicesEnabled,
+    isPrivateRoomsSectionAvailable,
   });
   const logo = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
@@ -88,7 +90,7 @@ const HeaderComponent = ({
 
 HeaderComponent.displayName = "Header";
 
-export default inject(({ settingsStore, userStore }) => {
+export default inject(({ settingsStore, userStore, appsStore }) => {
   const {
     currentProductId,
     theme,
@@ -105,6 +107,7 @@ export default inject(({ settingsStore, userStore }) => {
     defaultFolderType,
     isGuest: userStore.user?.isVisitor ?? false,
     aiServicesEnabled,
+    isPrivateRoomsSectionAvailable: appsStore?.isPrivateRoomsSectionAvailable,
     // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

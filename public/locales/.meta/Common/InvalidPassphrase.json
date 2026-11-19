@@ -1,14 +1,14 @@
 {
   "key_path": "InvalidPassphrase",
-  "content": "Invalid passphrase",
-  "content_en_sha1_hash": "92ec89d57abc58876087cda1faa362e046564a2b",
-  "created_at": "2026-05-24T17:27:29.929Z",
-  "updated_at": "2026-11-05T16:49:39.984Z",
+  "content": "Incorrect passphrase",
+  "content_en_sha1_hash": "045362a69370c774cec47d1a2531e5c04302d264",
+  "created_at": "2026-11-13T06:50:44.995Z",
+  "updated_at": "2026-11-13T06:52:24.797Z",
   "comment": {
-    "text": "Error message or toast notification displayed when a passphrase fails verification during encryption key import or rotation.",
+    "text": "Error text under the passphrase field of the encryption key dialogs (unlock, export, import, delete), shown when the typed passphrase does not unlock the key. Short field error without a full stop; means the passphrase is wrong, not badly formatted.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:54:54.220Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-13T06:52:24.797Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useExportKeyFlow.tsx",
-      "line_number": 107,
+      "line_number": 109,
       "context": "URL.revokeObjectURL(url);\n toastr.success(t(\"Common:EncryptionKeyExported\"));\n reset();\n } catch (e) {\n if (e instanceof InvalidPassphraseError) {\n setError(t(\"Common:InvalidPassphrase\"));\n } else {\n toastr.error(getEncryptionErrorMessage(t, e));\n console.error(\"Key export failed:\", e);\n reset();\n }",
       "module": "/packages/client"
     },

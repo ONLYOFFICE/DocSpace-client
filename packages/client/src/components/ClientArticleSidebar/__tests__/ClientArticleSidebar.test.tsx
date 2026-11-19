@@ -48,7 +48,19 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
   useAiChatStoreOptional: () => null,
 }));
 
-vi.mock("SRC_DIR/components/NewFilesBadge", () => ({ default: () => null }));
+vi.mock("SRC_DIR/components/NewFilesBadge", () => ({
+  default: ({
+    newFilesCount,
+    folderId,
+  }: {
+    newFilesCount: number;
+    folderId: string | number;
+  }) => (
+    <span data-testid="new-files-badge" data-folder={folderId}>
+      {newFilesCount}
+    </span>
+  ),
+}));
 
 vi.mock("SRC_DIR/components/BetaBadgeWrapper", () => ({
   default: ({
@@ -89,7 +101,7 @@ vi.mock("SRC_DIR/components/AppsSidebar", () => ({
 const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
-const renderSidebar = () =>
+const renderSidebar = (extraRoots: object[] = []) =>
   render(
     <Provider
       authStore={{ isAdmin: true, isRoomAdmin: false }}
@@ -99,6 +111,7 @@ const renderSidebar = () =>
           { id: 1, title: "My documents", rootFolderType: FolderType.USER },
           { id: 2002, title: "Rooms", rootFolderType: FolderType.Rooms },
           { id: 2003, title: "Archive", rootFolderType: FolderType.Archive },
+          ...extraRoots,
         ],
         roomsFolderId: 2002,
         archiveFolderId: 2003,
@@ -153,5 +166,44 @@ describe("ClientArticleSidebar — Private section", () => {
     );
     expect(badge).toHaveAttribute("data-title", "Common:PrivateRoomsBetaTitle");
     expect(badge).toHaveTextContent("Common:PrivateRoomsBetaDescription");
+  });
+});
+
+describe("ClientArticleSidebar — New-items counter on the section item", () => {
+  const privateRoot = (newItems: number) => ({
+    id: 2004,
+    title: "Private",
+    rootFolderType: FolderType.PrivateRooms,
+    newItems,
+  });
+
+  it("Counter shown", () => {
+    renderSidebar([privateRoot(3)]);
+
+    const item = within(screen.getByTestId("nav-private-rooms"));
+    const counter = item.getByTestId("new-files-badge");
+
+    expect(counter).toHaveTextContent("3");
+    expect(counter).toHaveAttribute("data-folder", "private");
+    expect(item.getByTestId("beta-badge")).toBeInTheDocument();
+  });
+
+  it("shows no counter while the Private root has nothing new", () => {
+    renderSidebar([privateRoot(0)]);
+
+    const item = within(screen.getByTestId("nav-private-rooms"));
+
+    expect(item.queryByTestId("new-files-badge")).toBeNull();
+    expect(item.getByTestId("beta-badge")).toBeInTheDocument();
+  });
+
+  it("shows no counter when the server lists no Private root", () => {
+    renderSidebar();
+
+    expect(
+      within(screen.getByTestId("nav-private-rooms")).queryByTestId(
+        "new-files-badge",
+      ),
+    ).toBeNull();
   });
 });

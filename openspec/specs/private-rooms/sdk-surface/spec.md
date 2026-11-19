@@ -407,7 +407,7 @@ The SDK SHALL run the private-room flows (invite with re-wrap, owner change with
 - **THEN** the private flow of that action starts, as from the private rooms list
 
 ### Requirement: Invite panel offers people only and reports the invitation result
-The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups. It SHALL grant room access to the verified invitees before wrapping their file keys, and SHALL stay open after sending with the result of each invitee (granted, pending access, or skipped with Common:EncryptedSkippedNoKeys or Common:EncryptedSkippedKeyMismatch) until the user closes it, as the client does.
+The SDK invite panel of a private room SHALL offer portal users only, with no Guests tab and no groups. It SHALL grant room access to the verified invitees before wrapping their file keys, and SHALL stay open after sending with the result of each invitee (granted, pending access, or skipped with Common:EncryptedInviteNoKey or Common:EncryptedSkippedKeyMismatch) until the user closes it. When nobody was invited it SHALL keep the invite form, and it SHALL NOT repeat a skip reason in a toast.
 
 #### Scenario: People selector
 - **WHEN** the user opens "choose from list" in the invite panel of a private room
@@ -420,6 +420,10 @@ The SDK invite panel of a private room SHALL offer portal users only, with no Gu
 #### Scenario: Mixed invitation
 - **WHEN** some invitees have verified keys and others are skipped
 - **THEN** only the verified invitees are granted access, and the panel stays open listing the skipped ones with the reason
+
+#### Scenario: Nobody invited
+- **WHEN** the only invitee of an SDK invitation into a private room has no registered encryption key
+- **THEN** the invite form stays with that user in the list, Common:EncryptedInviteNoKey names them above the list, and neither an invite result nor a toast with the same sentence is shown
 
 ### Requirement: Leaving a private room drops the role without a revocation of its own
 The SDK SHALL, when the user leaves a private room, including through an owner change with the leave option, drop the role without a revocation of its own; the server removes the leaver's wrapped keys with the role, the room's current owner excepted.
@@ -581,3 +585,44 @@ The SDK SHALL read the room's missing file keys from the server whenever its pri
 #### Scenario: User who may neither invite nor edit
 - **WHEN** such a member opens the members list
 - **THEN** the missing keys are not requested
+
+### Requirement: SDK copy picker lists private rooms under a Private entry
+The SDK SHALL list private rooms under a Private entry at the root of the copy destination picker of its private pages, since the Rooms list of the picker holds no private room. The entry SHALL NOT be offered for a move or a restore, nor on the generic pages.
+
+#### Scenario: Copy into another private room
+- **WHEN** a user copies an encrypted file on a private page and picks another private room under the Private entry
+- **THEN** the copy is stored in that room encrypted for it, and the source file stays
+
+#### Scenario: Copy into a folder of another private room
+- **WHEN** the user picks a folder of another private room under the Private entry
+- **THEN** the copy is stored in that folder, encrypted for the room that holds it
+
+#### Scenario: Move on a private page
+- **WHEN** a user opens the move picker on a private page
+- **THEN** it offers no Private entry
+
+### Requirement: SDK private-room dialog waits for the key
+The SDK SHALL NOT show the private-room creation dialog behind the key-generation prompt, the passphrase dialog or the recovery-phrase dialog. For a user whose key list is known to be empty the creation dialog SHALL appear once a key is registered, and cancelling the prompts SHALL leave no dialog open. A key list that is not known yet SHALL keep the dialog shown, as "Private room creation waits for a known key list" describes.
+
+#### Scenario: Key-less user starts a private room
+- **WHEN** a user whose key list is known to be empty starts creating a private room in the SDK
+- **THEN** the key-generation prompt is shown on its own, and the creation dialog appears after the key is registered
+
+#### Scenario: Prompt cancelled
+- **WHEN** that user cancels the key-generation prompt or one of its dialogs
+- **THEN** no creation dialog is shown and no room is created
+
+#### Scenario: Key holder
+- **WHEN** a user who holds a key starts creating a private room in the SDK
+- **THEN** the creation dialog opens at once and no key prompt is shown
+
+#### Scenario: Editing a room
+- **WHEN** a user opens the edit dialog of a private room in the SDK
+- **THEN** the dialog opens at once, whatever the state of the key list
+
+### Requirement: Private room dialog explains the room
+The SDK SHALL show Common:PrivateRoomPanelDescription under Common:PrivateRoomTitle in the private block of its create and edit room dialog, the text the client shows there. It SHALL NOT show a help link in that block.
+
+#### Scenario: Creating a private room
+- **WHEN** the SDK's create dialog of a private room is open
+- **THEN** the private block shows Common:PrivateRoomTitle and Common:PrivateRoomPanelDescription and no link

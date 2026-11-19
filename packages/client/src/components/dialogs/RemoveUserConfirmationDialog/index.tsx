@@ -39,7 +39,7 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 type Props = {
@@ -65,6 +65,23 @@ const RemoveUserConfirmationDialog = ({
 
   const isEncryptedRoom = !!removeUserConfirmation.isEncryptedRoom;
 
+  // The control that asked for the removal goes with the removed member, so
+  // the dialog has nothing to give the focus back to: it goes to the tab of
+  // the Members view. The dialog is unmounted as it closes; the microtask
+  // runs after the kit dialog's own return of focus in the same commit.
+  const removedRef = useRef(false);
+  useEffect(
+    () => () => {
+      if (!removedRef.current) return;
+      queueMicrotask(() => {
+        document
+          .querySelector<HTMLElement>('[data-testid="info_members_tab"]')
+          ?.focus();
+      });
+    },
+    [],
+  );
+
   const onClose = () => {
     if (isLoading) return;
     setRemoveUserConfirmation(false);
@@ -75,6 +92,7 @@ const RemoveUserConfirmationDialog = ({
       try {
         setIsLoading(true);
         await removeUserConfirmation.callback();
+        removedRef.current = true;
       } catch (error) {
         toastr.error(error as Error);
         console.error(error);
@@ -90,6 +108,7 @@ const RemoveUserConfirmationDialog = ({
       isLoading={!ready}
       visible={removeUserConfirmation.visible}
       onClose={onClose}
+      aria-label={t("People:RemoveUser")}
     >
       <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>

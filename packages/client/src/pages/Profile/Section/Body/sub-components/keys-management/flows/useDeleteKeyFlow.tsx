@@ -207,6 +207,7 @@ export function useDeleteKeyFlow({
         <PassphraseModal
           visible
           isNew={false}
+          submitLabel={t("Common:ContinueButton")}
           onSubmit={onPassphraseSubmit}
           onCancel={() => {
             setVerifying(null);

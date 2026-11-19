@@ -70,13 +70,29 @@ vi.mock("../../../services/encryption/device-unlock-store", () => ({
   forgetDeviceUnlock: vi.fn(async () => undefined),
 }));
 
+const autoLockListeners = vi.hoisted(() => new Set<() => void>());
+
 vi.mock("../../../services/encryption/auto-lock-preference", () => ({
   getAutoLockTimeoutSeconds: vi.fn(() => 0),
   locksWhenTabHidden: vi.fn(() => false),
   setAutoLockTimeoutSeconds: vi.fn(),
   setAutoLockScope: vi.fn(),
+  subscribeAutoLockChange: (listener: () => void) => {
+    autoLockListeners.add(listener);
+    return () => {
+      autoLockListeners.delete(listener);
+    };
+  },
   AUTO_LOCK_OPTIONS: [],
 }));
+
+const pickAutoLockSeconds = (seconds: number, hidden: boolean) => {
+  vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(seconds);
+  vi.mocked(locksWhenTabHidden).mockReturnValue(hidden);
+  act(() => {
+    autoLockListeners.forEach((listener) => listener());
+  });
+};
 
 vi.mock("../../../api/people", () => ({
   getUserById: vi.fn(),
@@ -640,6 +656,61 @@ describe("EncryptionContext / EncryptionProvider", () => {
 
       expect(latest.isUnlocked).toBe(false);
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("Shorter preset picked while unlocked", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(1800);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      pickAutoLockSeconds(300, true);
+
+      act(() => {
+        vi.advanceTimersByTime(299_000);
+      });
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(1_000);
+      });
+      expect(latest.isUnlocked).toBe(false);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("Longer preset picked while unlocked", () => {
+      vi.useFakeTimers();
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(300);
+      vi.mocked(locksWhenTabHidden).mockReturnValue(true);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+
+      act(() => {
+        vi.advanceTimersByTime(60_000);
+      });
+      pickAutoLockSeconds(1800, false);
+
+      act(() => {
+        vi.advanceTimersByTime(300_000);
+        Object.defineProperty(document, "visibilityState", {
+          configurable: true,
+          get: () => "hidden",
+        });
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      Object.defineProperty(document, "visibilityState", {
+        configurable: true,
+        get: () => "visible",
+      });
+      expect(latest.isUnlocked).toBe(true);
+
+      act(() => {
+        vi.advanceTimersByTime(1_500_000);
+      });
+      expect(latest.isUnlocked).toBe(false);
     });
 
     it("activity resets the timer (no lock if event arrives before timeout)", () => {

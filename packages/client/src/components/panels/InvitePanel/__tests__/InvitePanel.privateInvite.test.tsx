@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -54,6 +54,13 @@ const mocks = vi.hoisted(() => ({
   setRoomSecurity: vi.fn(),
   getRoomSecurityInfo: vi.fn(),
   toastr: { success: vi.fn(), warning: vi.fn(), error: vi.fn() },
+  inviteInput: null as null | { setAddUsersPanelVisible: (v: boolean) => void },
+  peopleSelector: null as null | {
+    onSubmit: (users: object[], access: { access: number }) => void;
+    getItemMarks?: (
+      people: { id: string }[],
+    ) => Promise<Record<string, { label: string; description: string }>>;
+  },
 }));
 
 vi.mock("react-i18next", async (io) => ({
@@ -149,14 +156,22 @@ vi.mock("@onlyoffice/apps-ui-kit/context/InterfaceDirectionContext", () => ({
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/selectors/People", () => ({
-  default: () => null,
+  default: (props: NonNullable<typeof mocks.peopleSelector>) => {
+    mocks.peopleSelector = props;
+    return null;
+  },
 }));
 vi.mock("SRC_DIR/components/PaidQuotaLimitError", () => ({
   default: () => null,
 }));
 vi.mock("../../LinkSettingsPanel", () => ({ default: () => null }));
 vi.mock("../sub-components/ExternalLinks", () => ({ default: () => null }));
-vi.mock("../sub-components/InviteInput", () => ({ default: () => null }));
+vi.mock("../sub-components/InviteInput", () => ({
+  default: (props: NonNullable<typeof mocks.inviteInput>) => {
+    mocks.inviteInput = props;
+    return null;
+  },
+}));
 vi.mock("../sub-components/ItemsList", () => ({ default: () => null }));
 
 // Every prop comes from the stores below; the inferred inject typing of the
@@ -338,8 +353,8 @@ describe("Invite opened from the list", () => {
     fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
     expect(
-      await screen.findByTestId("invite_panel_result_skipped"),
-    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+      await screen.findByTestId("invite_panel_result_refused"),
+    ).toHaveTextContent("Common:EncryptedInviteNoKey");
     expect(mocks.setRoomSecurity).toHaveBeenCalledTimes(1);
     expect(mocks.setRoomSecurity.mock.calls[0][1].invitations).toEqual([
       { id: "ann", access: ShareAccessRights.Editing },
@@ -349,9 +364,8 @@ describe("Invite opened from the list", () => {
       [{ id: "ann", displayName: "ann keeper" }],
       expect.anything(),
     );
-    expect(mocks.toastr.warning).toHaveBeenCalledWith(
-      "Common:EncryptedSkippedNoKeys",
-    );
+    // Reason shown once
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
   });
 
   it("Every invitee skipped: nothing is sent and the panel lists them", async () => {
@@ -366,15 +380,71 @@ describe("Invite opened from the list", () => {
 
     fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
-    expect(
-      await screen.findByTestId("invite_panel_result_skipped"),
-    ).toHaveTextContent("Common:EncryptedSkippedNoKeys");
+    // Only invitee has no key
+    await waitFor(() =>
+      expect(screen.getByTestId("invite_panel_not_invited")).toHaveTextContent(
+        "Common:EncryptedInviteNoKey",
+      ),
+    );
+    expect(screen.getByTestId("invite_panel_not_invited")).toHaveAttribute(
+      "role",
+      "status",
+    );
     expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
     expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
 
-    fireEvent.click(screen.getByTestId("invite_panel_invite_again_button"));
+    expect(screen.queryByTestId("invite_panel_result")).not.toBeInTheDocument();
+    expect(screen.getByTestId("invite_panel_send_button")).toBeInTheDocument();
+    expect(setInviteItems).not.toHaveBeenCalled();
+    // Reason shown once
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
+  });
 
-    expect(setInviteItems).toHaveBeenCalledWith([BOB_ITEM]);
+  it("List corrected and sent again: the earlier reason is gone once the list is sent again", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.validateMembersForEncryption.mockImplementationOnce(async () => ({
+      valid: [],
+      skipped: [{ id: "bob", displayName: "bob tester", reason: "no-key" }],
+    }));
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }));
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+    await waitFor(() =>
+      expect(screen.getByTestId("invite_panel_not_invited")).toHaveTextContent(
+        "Common:EncryptedInviteNoKey",
+      ),
+    );
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(
+      await screen.findByTestId("invite_panel_result_granted"),
+    ).toHaveTextContent("bob tester");
+    expect(screen.queryByText("Common:EncryptedInviteNoKey")).toBeNull();
+  });
+
+  it("Somebody was invited: the invite result is shown, not the form block", async () => {
+    mocks.requireUnlock.mockImplementation(async () => identity);
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      valid: [{ id: "ann", publicKey: "pk-ann" }],
+      skipped: [{ id: "bob", displayName: "bob tester", reason: "no-key" }],
+    }));
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }), [
+      ANN_ITEM,
+      BOB_ITEM,
+    ]);
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(await screen.findByTestId("invite_panel_result")).toBeInTheDocument();
+    expect(screen.getByTestId("invite_panel_result_refused")).toHaveTextContent(
+      "Common:EncryptedInviteNoKey",
+    );
+    expect(
+      screen.queryByTestId("invite_panel_not_invited"),
+    ).not.toBeInTheDocument();
+    expect(mocks.toastr.warning).not.toHaveBeenCalled();
+    expect(mocks.toastr.success).not.toHaveBeenCalled();
   });
 
   it("All invitees have verified keys: the panel lists them as invited and closes on Close", async () => {
@@ -393,6 +463,8 @@ describe("Invite opened from the list", () => {
     expect(
       await screen.findByTestId("invite_panel_result_granted"),
     ).toHaveTextContent("bob tester");
+    // The end of the re-wrap is still announced through its toast.
+    expect(mocks.toastr.success).toHaveBeenCalledWith("Common:UsersInvited");
     expect(setInvitePanelOptions).not.toHaveBeenCalledWith(closedPanel);
     expect(
       screen.queryByTestId("invite_panel_invite_again_button"),
@@ -512,20 +584,24 @@ describe("Invite opened from the list", () => {
 
     it("Every invitee refused", async () => {
       refuseBob(403);
-      const { setInviteItems } = renderInviteFromList(
+      renderInviteFromList(
         privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
       );
 
       fireEvent.click(screen.getByTestId("invite_panel_send_button"));
 
-      expect(
-        await screen.findByTestId("invite_panel_result_refused"),
-      ).toHaveTextContent("Common:EncryptedInviteNoKey");
+      await waitFor(() =>
+        expect(
+          screen.getByTestId("invite_panel_not_invited"),
+        ).toHaveTextContent("Common:EncryptedInviteNoKey"),
+      );
       expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
-
-      fireEvent.click(screen.getByTestId("invite_panel_invite_again_button"));
-
-      expect(setInviteItems).toHaveBeenCalledWith([BOB_ITEM]);
+      expect(
+        screen.queryByTestId("invite_panel_result"),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByTestId("invite_panel_send_button"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -544,5 +620,193 @@ describe("Invite opened from the list", () => {
     expect(mocks.addMembersToEncryptedRoom).not.toHaveBeenCalled();
     expect(setInvitePanelOptions).toHaveBeenCalledWith(closedPanel);
     expect(screen.queryByTestId("invite_panel_result")).not.toBeInTheDocument();
+  });
+});
+
+describe("People without a key are marked before the invitation is sent", () => {
+  const people = [{ id: "ann" }, { id: "bob" }];
+  const NO_KEY_MARK = {
+    label: "Common:NoKey",
+    description: "Common:NoEncryptionKeyMarkHint",
+  };
+
+  const openPeopleList = (room: TRoom): typeof mocks.peopleSelector => {
+    mocks.peopleSelector = null;
+    renderInviteFromList(room);
+    act(() => mocks.inviteInput?.setAddUsersPanelVisible(true));
+    return mocks.peopleSelector;
+  };
+
+  beforeEach(() => {
+    mocks.getRoomCandidateKeys.mockReset();
+    mocks.getRoomCandidateKeys.mockImplementation(async () => [
+      { id: "k-ann", userId: "ann", publicKey: "pk-ann" },
+    ]);
+    mocks.getRoomSecurityInfo.mockImplementation(async () => ({ items: [] }));
+  });
+
+  it("Person without a key", async () => {
+    const selector = openPeopleList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+    );
+
+    const marks = await selector?.getItemMarks?.(people);
+
+    expect(mocks.getRoomCandidateKeys).toHaveBeenCalledWith(ROOM_ID, [
+      "ann",
+      "bob",
+    ]);
+    expect(marks?.bob).toEqual(NO_KEY_MARK);
+  });
+
+  it("Person with a key", async () => {
+    const selector = openPeopleList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+    );
+
+    const marks = await selector?.getItemMarks?.(people);
+
+    expect(marks).not.toHaveProperty("ann");
+  });
+
+  it("Explanation", async () => {
+    const selector = openPeopleList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+    );
+
+    const marks = await selector?.getItemMarks?.(people);
+
+    expect(marks?.bob?.description).toBe("Common:NoEncryptionKeyMarkHint");
+  });
+
+  it("Marked person selected and sent", async () => {
+    mocks.requireUnlock.mockImplementation(async () => ({ userId: "admin" }));
+    mocks.validateMembersForEncryption.mockImplementation(async () => ({
+      valid: [],
+      skipped: [{ id: "bob", displayName: "bob tester", reason: "no-key" }],
+    }));
+    const selector = openPeopleList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+    );
+    const marks = await selector?.getItemMarks?.(people);
+    expect(marks?.bob).toEqual(NO_KEY_MARK);
+
+    // The marked row is picked like any other.
+    act(() =>
+      selector?.onSubmit([{ ...BOB_ITEM, mark: marks?.bob }], {
+        access: ShareAccessRights.Editing,
+      }),
+    );
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    await waitFor(() =>
+      expect(screen.getByTestId("invite_panel_not_invited")).toHaveTextContent(
+        "Common:EncryptedInviteNoKey",
+      ),
+    );
+    expect(mocks.validateMembersForEncryption.mock.calls[0][1]).toEqual([
+      "bob",
+    ]);
+  });
+
+  it("Room that is not private", () => {
+    const selector = openPeopleList(roomDto({ id: ROOM_ID }));
+
+    expect(selector).not.toBeNull();
+    expect(selector?.getItemMarks).toBeUndefined();
+    expect(mocks.getRoomCandidateKeys).not.toHaveBeenCalled();
+  });
+});
+
+describe("The mark of a missing key follows the server's answer", () => {
+  const openPeopleList = (): typeof mocks.peopleSelector => {
+    mocks.peopleSelector = null;
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }));
+    act(() => mocks.inviteInput?.setAddUsersPanelVisible(true));
+    return mocks.peopleSelector;
+  };
+
+  beforeEach(() => {
+    mocks.getRoomCandidateKeys.mockReset();
+    mocks.getRoomSecurityInfo.mockImplementation(async () => ({ items: [] }));
+  });
+
+  it("Answer not yet arrived", async () => {
+    let answer: (keys: unknown[]) => void = () => {};
+    mocks.getRoomCandidateKeys.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          answer = resolve;
+        }),
+    );
+    const selector = openPeopleList();
+
+    let marks: Record<string, unknown> | undefined;
+    const pending = selector?.getItemMarks?.([{ id: "bob" }]).then((m) => {
+      marks = m;
+    });
+    await act(async () => {});
+
+    expect(marks).toBeUndefined();
+    answer([]);
+    await pending;
+    expect(marks).toHaveProperty("bob");
+  });
+
+  it("Next page", async () => {
+    mocks.getRoomCandidateKeys.mockImplementation(async () => []);
+    const selector = openPeopleList();
+
+    await selector?.getItemMarks?.([{ id: "ann" }]);
+    const marks = await selector?.getItemMarks?.([{ id: "bob" }]);
+
+    expect(mocks.getRoomCandidateKeys).toHaveBeenLastCalledWith(ROOM_ID, [
+      "bob",
+    ]);
+    expect(marks).toHaveProperty("bob");
+  });
+
+  it("Search", async () => {
+    mocks.getRoomCandidateKeys.mockImplementation(async () => [
+      { id: "k-ann", userId: "ann", publicKey: "pk-ann" },
+    ]);
+    const selector = openPeopleList();
+    await selector?.getItemMarks?.([{ id: "ann" }, { id: "bob" }]);
+
+    // The search list holds a person asked about already and a new one.
+    const marks = await selector?.getItemMarks?.([
+      { id: "bob" },
+      { id: "carol" },
+    ]);
+
+    expect(mocks.getRoomCandidateKeys).toHaveBeenLastCalledWith(ROOM_ID, [
+      "carol",
+    ]);
+    expect(Object.keys(marks ?? {}).sort()).toEqual(["bob", "carol"]);
+  });
+
+  it("Request fails", async () => {
+    mocks.getRoomCandidateKeys.mockImplementation(async () => {
+      throw new Error("offline");
+    });
+    const selector = openPeopleList();
+
+    const marks = await selector?.getItemMarks?.([{ id: "bob" }]);
+
+    expect(marks).toEqual({});
+    expect(mocks.toastr.error).not.toHaveBeenCalled();
+  });
+
+  it("asks in batches of a fixed size", async () => {
+    mocks.getRoomCandidateKeys.mockImplementation(async () => []);
+    const selector = openPeopleList();
+    const many = Array.from({ length: 45 }, (_, i) => ({ id: `u${i}` }));
+
+    const marks = await selector?.getItemMarks?.(many);
+
+    expect(mocks.getRoomCandidateKeys).toHaveBeenCalledTimes(2);
+    expect(mocks.getRoomCandidateKeys.mock.calls[0][1]).toHaveLength(40);
+    expect(mocks.getRoomCandidateKeys.mock.calls[1][1]).toHaveLength(5);
+    expect(Object.keys(marks ?? {})).toHaveLength(45);
   });
 });

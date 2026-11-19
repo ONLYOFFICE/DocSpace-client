@@ -380,7 +380,7 @@ The system SHALL decrypt each selected encrypted file and deliver them together 
 - **THEN** one Files.zip is saved with the file under its decrypted name at the root and the folder's files under their decrypted names inside a directory named after the folder, and no server archive is requested
 
 ### Requirement: Download without decryption
-The system SHALL offer "Download without decryption" for encrypted files and for folders in a private room, in the item context menu and in the bulk header menu of a private room; for a file it SHALL save the ciphertext container, for a folder it SHALL request a server archive of the ciphertext.
+The system SHALL offer "Download without decryption" for encrypted files and for folders in a private room, in the item context menu and in the bulk header menu of a private room; for a file it SHALL save the ciphertext container, for a folder it SHALL request a server archive of the ciphertext. The entry SHALL be labelled Common:DownloadWithoutDecryption, which names what is saved ("Download encrypted copy"); the specs keep calling the action download without decryption.
 
 #### Scenario: Encrypted file
 - **WHEN** the user picks download-encrypted on a file
@@ -393,6 +393,10 @@ The system SHALL offer "Download without decryption" for encrypted files and for
 #### Scenario: Bulk header menu
 - **WHEN** several encrypted files are selected in a private room and the header menu is opened
 - **THEN** "Download without decryption" is offered next to "Download"
+
+#### Scenario: Label of the entry
+- **WHEN** several encrypted files are selected in a private room and the header menu is opened in English
+- **THEN** the entry reads "Download encrypted copy"
 
 ### Requirement: Decrypted folder download
 The system SHALL offer "Download" for a folder inside a private room and for the room itself, from its context menu or with the folder selected alone in the header menu; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, a name that clashes inside its folder taking the lowest numbered suffix no other entry has, with the same progress and error reporting as the multi-file decrypted download.
@@ -687,7 +691,7 @@ The system SHALL offer the standard "Download" for a folder inside an archived p
 - **THEN** download and download-encrypted are present, and sharing-settings, copy-shared-link, manage-links, link-for-room-members, mark-as-favorite, copy-to and duplicate are absent
 
 ### Requirement: Copy hotkey withheld in an archived private room
-The system SHALL NOT put any item of an archived private room on the clipboard with Ctrl+C, although the server grants the copy right there. Copying out of such a room goes through the Copy dialog or drag-and-drop, where files are decrypted.
+The system SHALL NOT put any item of an archived private room on the clipboard with Ctrl+C. Copying out of such a room goes through the Copy dialog or drag-and-drop, where files are decrypted.
 
 #### Scenario: Ctrl+C on encrypted files
 - **WHEN** a member selects encrypted files in an archived private room and presses Ctrl+C
@@ -886,3 +890,111 @@ The system SHALL report a file whose access entries hold no wrap for a user who 
 #### Scenario: User without a key
 - **WHEN** a user whose key list is known to hold no key lists a private room
 - **THEN** the lock badge keeps the title Common:NoAccessToEncryptedFile
+
+### Requirement: Client search covers the open folder up to 10,000 items
+The system SHALL NOT search a private room beyond the folder that is open: its subfolders and the other folders of the room are not searched. The system SHALL load at most 10,000 items of that folder for a search; when the folder holds more, it SHALL show Files:ClientSearchPartialResults and match only the loaded items.
+
+#### Scenario: Match in a subfolder
+- **WHEN** the user searches in a folder of a private room for a name that only a file in one of its subfolders has
+- **THEN** the file is not found
+
+#### Scenario: Folder above the limit
+- **WHEN** the user searches in a folder of a private room that holds more than 10,000 items
+- **THEN** Files:ClientSearchPartialResults is shown and a file beyond the loaded items is not found even though its name matches
+
+### Requirement: Name sort orders only the loaded items
+The system SHALL NOT order a whole folder of a private room by decrypted name while only a part of it is loaded: the server orders the pages by the opaque stored names, and the client re-orders the loaded items among themselves. An item of a page not loaded yet takes its place only once that page is loaded.
+
+#### Scenario: Folder larger than one page
+- **WHEN** a folder of a private room holds more items than one page and the list is sorted by name without a search
+- **THEN** the loaded items are in the order of their decrypted names, and scrolling to the next page can place a newly loaded item above items already shown
+
+### Requirement: Decrypted zip is assembled in memory
+The system SHALL NOT stream a decrypted zip to disk: every selected file is decrypted in memory, and the archive is built in memory from all of them before it is saved. No size limit is enforced on the selection.
+
+#### Scenario: Large selection
+- **WHEN** the user downloads a selection of encrypted files whose total size is close to the browser's memory limit
+- **THEN** the download may fail with a memory error, and no partial archive is saved
+
+### Requirement: An interrupted encrypted download starts over
+The system SHALL NOT resume the download of an encrypted file: the ciphertext is fetched as a whole before decryption, and a download that fails part-way SHALL be reported as failed, with nothing saved and no partial plaintext shown.
+
+#### Scenario: Connection lost during a download
+- **WHEN** the connection is lost while an encrypted file is being fetched for a decrypting download
+- **THEN** the download fails with an error, no file is saved, and a new download fetches the file from its start
+
+### Requirement: Destination picker lists private rooms under a Private entry
+The system SHALL list the private rooms a copy may go to under a Private entry at the root of the Copy dialog, since the Rooms list of the picker holds no private room. The entry SHALL be offered only for a copy whose source lies in a private room and only while the Private section is available. A Move SHALL NOT get it, and neither SHALL a source outside private rooms.
+
+#### Scenario: Destination picker in a private room
+- **WHEN** the user opens the Copy dialog on a file of a private room and goes to the root of the picker
+- **THEN** the root lists a Private entry beside Rooms, the entry lists the user's private rooms, and no private room is listed under Rooms
+
+#### Scenario: Copy to another private room
+- **WHEN** the user picks another private room under the Private entry and confirms
+- **THEN** the file is copied there re-encrypted for that room
+
+#### Scenario: Path of the open room
+- **WHEN** the Copy dialog opens inside a private room
+- **THEN** its path names Private above the room, and one level up lists the private rooms
+
+#### Scenario: Move dialog
+- **WHEN** the user opens the Move dialog on a file of a private room
+- **THEN** the picker stays pinned to that room and offers no Private entry
+
+#### Scenario: Source outside private rooms
+- **WHEN** the user copies a file that is not in a private room
+- **THEN** the picker offers no Private entry and no private room can be picked
+
+#### Scenario: Section not available
+- **WHEN** the Private section is not available
+- **THEN** the picker offers no Private entry
+
+### Requirement: Empty folder inside a private room shows a folder empty view
+The system SHALL show, for an empty folder below the root of a private room, an empty folder view with the title and illustration of an empty folder and the create and upload entries the room allows, and SHALL NOT show there the welcome of the room with its list of encryption properties. The welcome SHALL stay at the room root. The entries SHALL follow "Create new file in a private room" and "Folder upload disabled in private rooms".
+
+#### Scenario: Empty folder with keys
+- **WHEN** a user with keys and the create right opens an empty folder inside a private room
+- **THEN** the view shows the empty folder title and the same create and upload entries as the empty room root shows that user, described with Common:PrivateRoomFolderEmptyDescription, and no list of encryption properties
+
+#### Scenario: Empty folder without keys
+- **WHEN** a user who has no encryption key opens an empty folder inside a private room
+- **THEN** the view offers no file creation, only folder creation and upload
+
+#### Scenario: Empty folder without the create right
+- **WHEN** a user who may not create in the room opens an empty folder inside it
+- **THEN** the view shows the empty folder title and no create or upload entry
+
+#### Scenario: Room root
+- **WHEN** a user opens an empty private room at its root
+- **THEN** the welcome of the room with its list of encryption properties is shown
+
+#### Scenario: Folder of an archived private room
+- **WHEN** a member opens an empty folder inside an archived private room
+- **THEN** the empty folder view is shown without create or upload entries
+
+### Requirement: Download submenu names both results
+The system SHALL label the two entries of the Download submenu of the client's context menu by what each saves when the submenu holds the download without decryption: Common:DownloadDecryptedCopy for the decrypting download and Common:DownloadEncryptedCopy for the ciphertext one. A Download submenu without that entry SHALL keep Common:OriginalFormat.
+
+#### Scenario: Encrypted file
+- **WHEN** the Download submenu of an encrypted file, of a folder in a private room or of a private room is opened
+- **THEN** it offers Common:DownloadDecryptedCopy and Common:DownloadEncryptedCopy, and neither Common:OriginalFormat nor a second "Download"
+
+#### Scenario: File outside private rooms
+- **WHEN** the Download submenu of a file outside private rooms is opened
+- **THEN** its plain download reads Common:OriginalFormat as before
+
+### Requirement: The media viewer reports a file that is not shared yet as no access
+The system SHALL show Common:EncryptedFileNoAccessYet in the media viewer when the opened encrypted file holds no wrap for a user who has a key, and SHALL keep Common:EncryptionDecryptPartialFailed for a file that is wrapped for the user and still does not decrypt.
+
+#### Scenario: Image not shared with the user yet
+- **WHEN** a user who holds a key opens in the media viewer an encrypted image that is not wrapped for them
+- **THEN** the viewer shows Common:EncryptedFileNoAccessYet
+
+#### Scenario: File wrapped but damaged
+- **WHEN** the file is wrapped for the user and its decryption fails
+- **THEN** the viewer shows Common:EncryptionDecryptPartialFailed with the name of the file
+
+#### Scenario: Next file in the viewer
+- **WHEN** the user moves from a file that is not shared yet to one that is
+- **THEN** the second file is shown and the message of the first is gone

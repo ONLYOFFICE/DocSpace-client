@@ -43,7 +43,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
 import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector/Selector.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 type AddRoomToGroupDialogProps = {
   visible?: boolean;
@@ -60,6 +60,7 @@ type AddRoomToGroupDialogProps = {
   getAllRoomGroups?: () => Promise<void>;
   getPrivateSectionRoomIds?: () => Promise<number[]>;
   isFormsSection?: boolean;
+  isPrivateSection?: boolean;
 };
 
 const AddRoomToGroupDialog = ({
@@ -71,6 +72,7 @@ const AddRoomToGroupDialog = ({
   getAllRoomGroups,
   getPrivateSectionRoomIds,
   isFormsSection = false,
+  isPrivateSection = false,
 }: AddRoomToGroupDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
   const [groupData, setGroupData] = useState<{
@@ -87,12 +89,12 @@ const AddRoomToGroupDialog = ({
     const fetchPrivateRoomIds = async () => {
       try {
         const ids =
-          isFormsSection || !getPrivateSectionRoomIds
+          isFormsSection || isPrivateSection || !getPrivateSectionRoomIds
             ? []
             : await getPrivateSectionRoomIds();
         if (isCurrent) setPrivateRoomIds(ids);
       } catch (error) {
-        // Spec: private-rooms/sidebar-section, "Rooms section excludes private rooms while the section is available".
+        // Spec: private-rooms/sidebar-section, "Rooms section never lists private rooms".
         if (!isCurrent) return;
         toastr.error(error as Error);
         setAddRoomToGroupDialogVisible?.(false);
@@ -108,6 +110,7 @@ const AddRoomToGroupDialog = ({
   }, [
     visible,
     isFormsSection,
+    isPrivateSection,
     getPrivateSectionRoomIds,
     setAddRoomToGroupDialogVisible,
   ]);
@@ -123,8 +126,10 @@ const AddRoomToGroupDialog = ({
           const data = await getGroupById(groupId);
           setGroupData({
             ...data,
+            // A group of the Private section holds private rooms only.
             rooms: (data.rooms || []).filter(
               (room) =>
+                isPrivateSection ||
                 (room.roomType === RoomsType.FormRoom) === isFormsSection,
             ),
           });
@@ -135,7 +140,7 @@ const AddRoomToGroupDialog = ({
     };
 
     fetchGroupData();
-  }, [visible, groupId, getGroupById, isFormsSection]);
+  }, [visible, groupId, getGroupById, isFormsSection, isPrivateSection]);
 
   const onClose = () => {
     setAddRoomToGroupDialogVisible?.(false);
@@ -240,6 +245,9 @@ const AddRoomToGroupDialog = ({
             }}
             withSearch
             isForms={isFormsSection}
+            searchArea={
+              isPrivateSection ? RoomSearchArea.PrivateRooms : undefined
+            }
             isMultiSelect
             excludeItems={privateRoomIds}
             selectedItems={groupData ? convertToItems(groupRooms) : []}
@@ -276,5 +284,8 @@ export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
     getAllRoomGroups,
     getPrivateSectionRoomIds,
     isFormsSection: treeFoldersStore.isFormsFolder,
+    // Spec: private-rooms/sidebar-section, "Room groups in the section"
+    isPrivateSection:
+      treeFoldersStore.roomGroupsArea === RoomSearchArea.PrivateRooms,
   };
 })(observer(AddRoomToGroupDialog));

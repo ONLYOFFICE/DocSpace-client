@@ -40,19 +40,19 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
   true;
 
-type TConfirmProps = {
-  visible: boolean;
-  onConfirm: () => void;
+type TKeyFlowOptions = {
+  onError: () => void;
+  onSuccess?: () => void;
   onCancel: () => void;
+  hasExistingKeys?: boolean;
 };
-type TKeyFlowOptions = { onError: () => void; hasExistingKeys?: boolean };
 type TDialogProps = {
+  visible?: boolean;
   hasEncryptionKeys?: boolean;
   resolveEncryptionKeys?: () => Promise<boolean | null>;
 };
 
 const mocks = vi.hoisted(() => ({
-  confirm: null as TConfirmProps | null,
   keyFlow: null as TKeyFlowOptions | null,
   dialog: null as TDialogProps | null,
   requestKey: vi.fn(),
@@ -76,13 +76,6 @@ vi.mock("@docspace/shared/context/encryption", () => ({
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: mocks.toastr,
-}));
-
-vi.mock("@docspace/shared/dialogs/confirmation-modal", () => ({
-  ConfirmationModal: (props: TConfirmProps) => {
-    mocks.confirm = props;
-    return null;
-  },
 }));
 
 vi.mock("@docspace/shared/dialogs/key-generation", () => ({
@@ -118,15 +111,68 @@ import PrivateCreateRoomDialog from "./PrivateCreateRoomDialog";
 describe("PrivateCreateRoomDialog", () => {
   let root: Root | null = null;
 
-  const open = () => {
+  const open = (room?: { id: number; title: string }) => {
     const onClose = vi.fn();
     root = createRoot(document.createElement("div"));
-    act(() => root?.render(<PrivateCreateRoomDialog visible onClose={onClose} />));
+    act(() =>
+      root?.render(
+        <PrivateCreateRoomDialog
+          visible
+          onClose={onClose}
+          room={room as never}
+        />,
+      ),
+    );
     return { onClose };
   };
 
+  // Spec: private-rooms/sdk-surface, "SDK private-room dialog waits for the key"
+  describe("The creation dialog waits for the key", () => {
+    it("Key-less user starts a private room", () => {
+      open();
+
+      expect(mocks.requestKey).toHaveBeenCalledTimes(1);
+      expect(mocks.dialog?.visible).toBe(false);
+
+      act(() => mocks.keyFlow!.onSuccess?.());
+      expect(mocks.dialog?.visible).toBe(true);
+    });
+
+    it("Key setup cancelled", () => {
+      const { onClose } = open();
+
+      act(() => mocks.keyFlow!.onCancel());
+
+      expect(onClose).toHaveBeenCalledTimes(1);
+      expect(mocks.dialog?.visible).toBe(false);
+    });
+
+    it("Key holder", () => {
+      mocks.identity.keys = [{}];
+      mocks.identity.hasKeys = true;
+      open();
+
+      expect(mocks.dialog?.visible).toBe(true);
+      expect(mocks.requestKey).not.toHaveBeenCalled();
+    });
+
+    it("Editing a room", () => {
+      open({ id: 7, title: "Pirate room" });
+
+      expect(mocks.dialog?.visible).toBe(true);
+      expect(mocks.requestKey).not.toHaveBeenCalled();
+    });
+
+    it("keeps the dialog while the key list is not known", () => {
+      mocks.keysLoaded = false;
+      mocks.identity.keys = null;
+      open();
+
+      expect(mocks.dialog?.visible).toBe(true);
+    });
+  });
+
   beforeEach(() => {
-    mocks.confirm = null;
     mocks.keyFlow = null;
     mocks.dialog = null;
     mocks.identity.keys = [];
@@ -146,7 +192,6 @@ describe("PrivateCreateRoomDialog", () => {
     mocks.identity.keys = null;
     const { onClose } = open();
 
-    expect(mocks.confirm?.visible ?? false).toBe(false);
     expect(mocks.requestKey).not.toHaveBeenCalled();
     expect(onClose).not.toHaveBeenCalled();
   });
@@ -186,7 +231,7 @@ describe("PrivateCreateRoomDialog", () => {
     expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalled();
     expect(mocks.dialog).toBeNull();
-    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 
   it("Document Server without encryption", () => {
@@ -199,17 +244,16 @@ describe("PrivateCreateRoomDialog", () => {
     expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalled();
     expect(mocks.dialog).toBeNull();
-    expect(mocks.confirm?.visible).toBe(false);
+    expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 
   it("Key generation cancelled", () => {
     const { onClose } = open();
 
-    expect(mocks.confirm?.visible).toBe(true);
-    act(() => mocks.confirm!.onCancel());
+    expect(mocks.requestKey).toHaveBeenCalledTimes(1);
+    act(() => mocks.keyFlow!.onCancel());
 
     expect(onClose).toHaveBeenCalledTimes(1);
-    expect(mocks.requestKey).not.toHaveBeenCalled();
   });
 
   it("closes the creation when key generation fails", () => {

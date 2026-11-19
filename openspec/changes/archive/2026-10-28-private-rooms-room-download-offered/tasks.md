@@ -13,4 +13,4 @@
 
 - Archive with `/opsx:archive private-rooms-room-download-offered` after review; the archive merges the MODIFIED and ADDED requirements into `openspec/specs/private-rooms/room-membership/spec.md`.
 - The SDK side does not change: `private-rooms/sdk-surface` "Room menu of a private room" keeps withholding the room download.
-- Design decision 2 leaves open the menu of a private room without the download right, where the client keeps "Download without decryption". Settle it in a later change, after reading the server's archive check in `../server` through CodeGraph.
+- Design decision 2 leaves open the menu of a private room without the download right. Settle it in a later change.

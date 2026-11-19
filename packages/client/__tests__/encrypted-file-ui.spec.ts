@@ -168,6 +168,10 @@ test.describe("Encrypted file UI in private room", () => {
       .filter({ hasText: "Enter passphrase" });
     await passphrasePrompt.waitFor({ timeout: 5000 }).catch(() => {});
     if (await passphrasePrompt.isVisible()) {
+      // Link before any attempt
+      await expect(
+        passphrasePrompt.getByTestId("forgot_passphrase_link"),
+      ).toBeVisible();
       await passphrasePrompt
         .getByRole("button", { name: "Cancel", exact: true })
         .click();
@@ -214,7 +218,7 @@ test.describe("Encrypted file UI in private room", () => {
     await expect(badge).toHaveClass(/noAccessIcon/);
   });
 
-  test("context menu of an encrypted file shows Download without decryption", async ({
+  test("Download submenu of an encrypted file", async ({
     page,
     mockRequest,
     baseUrl,
@@ -540,7 +544,7 @@ test.describe("Media viewer of an encrypted file", () => {
       .locator('input[name="passphrase"], #passphrase input')
       .first()
       .fill(passphrase);
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
     await expect(prompt).toBeHidden({ timeout: 10000 });
   };
 
@@ -838,7 +842,7 @@ test.describe("Encrypted file moved out of a private room", () => {
         .locator('input[name="passphrase"], #passphrase input')
         .first()
         .fill(passphrase);
-      await passphrasePrompt.getByRole("button", { name: "Confirm" }).click();
+      await passphrasePrompt.getByRole("button", { name: "Unlock", exact: true }).click();
     } catch {}
 
     const deleteBody = (await deleteRequest).postDataJSON() as {

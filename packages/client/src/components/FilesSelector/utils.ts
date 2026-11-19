@@ -147,3 +147,20 @@ export const getRoomSectionTreeFolders = (
   withRoomsTreeFolder: withRoomsTreeFolder ?? isInstalled("ai-rooms"),
   withFormsTreeFolder: withFormsTreeFolder ?? isInstalled("ai-forms"),
 });
+
+/**
+ * Whether the selector lists the Private section. Only a Copy out of a
+ * private room can land in another private room: a transfer into one from
+ * outside is refused, and a Move stays in its room. Not while the section is
+ * not available.
+ * Spec: private-rooms/file-operations, "Copy into another private room needs access to it"
+ */
+export const offersPrivateSection = ({
+  isCopy,
+  sourceInPrivateRoom,
+  isPrivateRoomsSectionAvailable,
+}: {
+  isCopy?: boolean;
+  sourceInPrivateRoom?: boolean;
+  isPrivateRoomsSectionAvailable?: boolean;
+}) => !!isCopy && !!sourceInPrivateRoom && !!isPrivateRoomsSectionAvailable;

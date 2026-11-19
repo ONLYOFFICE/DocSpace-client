@@ -49,7 +49,7 @@ import withContent from "../../../../../HOCs/withContent";
 
 import {
   connectedCloudsTypeTitleTranslation,
-  getRoomTypeName,
+  getRoomTypeLabel,
 } from "../../../../../helpers/filesUtils";
 
 const FilesRowContent = ({
@@ -84,7 +84,6 @@ const FilesRowContent = ({
     quotaLimit,
     usedSpace,
     order,
-    roomType,
   } = item;
 
   const contentComponent = () => {
@@ -103,7 +102,7 @@ const FilesRowContent = ({
         return getFileTypeName(fileType, t);
 
       case SortByFieldName.RoomType:
-        return getRoomTypeName(roomType, t);
+        return getRoomTypeLabel(item, t);
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "";

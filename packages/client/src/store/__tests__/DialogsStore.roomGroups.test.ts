@@ -172,8 +172,8 @@ describe("DialogsStore — rooms of the Private section", () => {
     expect(requests).toEqual([0, 1].map((page) => ({
       page,
       pageCount: 100,
-      privacyFilter: RoomPrivacyFilter.Private,
-      searchArea: RoomSearchArea.Active,
+      privacyFilter: null,
+      searchArea: RoomSearchArea.PrivateRooms,
     })));
   });
 

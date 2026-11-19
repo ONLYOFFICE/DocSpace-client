@@ -34,6 +34,7 @@
  */
 
 import { CategoryType } from "@docspace/shared/constants";
+import { RoomSearchArea } from "@docspace/shared/enums";
 import { getCategoryType } from "@docspace/shared/utils/common";
 
 const PRIVATE_LIST = "/private";
@@ -73,7 +74,14 @@ export const getRoomsAddressOfPrivateAddress = ({
       ? [PRIVATE_ARCHIVE, "/rooms/archived"]
       : [PRIVATE_LIST, "/rooms/shared"];
 
-  return `${to}${pathname.slice(from.length)}${search}`;
+  // The section's own area must not travel to Rooms: there it would ask
+  // for the private rooms again.
+  const roomsSearch = search.replace(
+    `searchArea=${RoomSearchArea.PrivateRooms}`,
+    `searchArea=${RoomSearchArea.Active}`,
+  );
+
+  return `${to}${pathname.slice(from.length)}${roomsSearch}`;
 };
 
 /**
@@ -110,6 +118,19 @@ export const isPrivateRoomsListRoot = (
   isRoomsFolder: boolean | undefined,
 ) =>
   getCategoryType(location) === CategoryType.PrivateRooms && !!isRoomsFolder;
+
+/**
+ * A root of the section is shown: the Private list or its Archive, not a room
+ * or a folder inside one.
+ */
+export const isPrivateRoomsSectionRoot = (
+  location: { pathname: string },
+  isRoomsFolder: boolean | undefined,
+  isArchiveFolder: boolean | undefined,
+) =>
+  isPrivateRoomsListRoot(location, isRoomsFolder) ||
+  (getCategoryType(location) === CategoryType.PrivateArchive &&
+    !!isArchiveFolder);
 
 /**
  * Keys management is offered while the section is, and to every key holder,

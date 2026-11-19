@@ -131,6 +131,8 @@ export interface DeleteGroupDialogProps {
   getAllRoomGroups: () => Promise<void>;
   currentFilterGroupId?: string | number | null;
   isFormsSection?: boolean;
+  /** The list of the section the dialog was opened in, as a path without slashes around it. */
+  sectionListPath?: string;
 }
 
 export interface GroupItemProps {
@@ -153,6 +155,8 @@ export interface RoomListPanelProps {
   sortSelectedFirst?: boolean;
   withoutBackdropBackground?: boolean;
   isFormsSection?: boolean;
+  /** The area the rooms are listed from, when it is not the one `isFormsSection` picks. */
+  searchArea?: RoomSearchArea;
   /** Rooms the list leaves out */
   excludeItems?: number[];
 }

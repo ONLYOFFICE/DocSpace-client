@@ -50,6 +50,12 @@ type KeysManagementRouteProps = {
   encryptionKeys: readonly unknown[] | null;
   getEncryptionKeys: () => Promise<unknown>;
   isGuest?: boolean;
+  /**
+   * False on the routes of the other profile tabs. They render this
+   * component too, unguarded, so that every tab has the same element tree
+   * and moving between tabs keeps the profile page mounted.
+   */
+  guarded?: boolean;
   children: React.ReactNode;
 };
 
@@ -64,13 +70,14 @@ const KeysManagementRoute = ({
   encryptionKeys,
   getEncryptionKeys,
   isGuest,
+  guarded = true,
   children,
 }: KeysManagementRouteProps) => {
   const [isKeysReadSettled, setIsKeysReadSettled] = useState(false);
 
   useEffect(() => {
-    ensureAppsLoaded();
-  }, [ensureAppsLoaded]);
+    if (guarded) ensureAppsLoaded();
+  }, [guarded, ensureAppsLoaded]);
 
   // Available is optimistic until the apps list arrives, as in PrivateRoomsSectionRoute.
   const isAppsPending =
@@ -79,6 +86,7 @@ const KeysManagementRoute = ({
 
   // The keys read at start-up may still be running, or may have failed.
   const mustReadKeys =
+    guarded &&
     !isGuest &&
     !isAppsPending &&
     !isSectionAvailable &&
@@ -99,6 +107,8 @@ const KeysManagementRoute = ({
       isCurrent = false;
     };
   }, [mustReadKeys, getEncryptionKeys]);
+
+  if (!guarded) return children;
 
   if (isAppsPending) return null;
 

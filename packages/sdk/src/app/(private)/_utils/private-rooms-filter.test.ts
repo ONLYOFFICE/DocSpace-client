@@ -34,7 +34,11 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import {
+  RoomPrivacyFilter,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import {
@@ -51,9 +55,10 @@ describe("private-rooms-filter", () => {
       expect(result.type).toBe(String(RoomsType.CustomRoom));
     });
 
-    it("defaults to the Active search area", () => {
+    it("asks the active list through the Private section's area, with no privacy filter", () => {
       const result = applyPrivateRoomsFilter(RoomsFilter.getDefault());
-      expect(result.searchArea).toBe(RoomSearchArea.Active);
+      expect(result.searchArea).toBe(RoomSearchArea.PrivateRooms);
+      expect(result.privacyFilter).toBeNull();
     });
 
     it("honors an explicit Archive search area", () => {
@@ -63,6 +68,7 @@ describe("private-rooms-filter", () => {
       );
       expect(result.type).toBe(String(RoomsType.CustomRoom));
       expect(result.searchArea).toBe(RoomSearchArea.Archive);
+      expect(result.privacyFilter).toBe(RoomPrivacyFilter.Private);
     });
 
     it("mutates and returns the same filter instance", () => {
@@ -76,7 +82,7 @@ describe("private-rooms-filter", () => {
       const active = getPrivateRoomsDefaultFilter(RoomSearchArea.Active);
       const archive = getPrivateRoomsDefaultFilter(RoomSearchArea.Archive);
       expect(active.type).toBe(String(RoomsType.CustomRoom));
-      expect(active.searchArea).toBe(RoomSearchArea.Active);
+      expect(active.searchArea).toBe(RoomSearchArea.PrivateRooms);
       expect(archive.searchArea).toBe(RoomSearchArea.Archive);
     });
   });

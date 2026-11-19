@@ -68,6 +68,8 @@ interface AccessSelectorProps {
 	availableAccess?: number[];
 	scaledOptions?: boolean;
 	dataTestId?: string;
+	/** Whose role the list sets; without it the list sets the role of new invitees. */
+	subjectName?: string;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -94,6 +96,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 	availableAccess,
 	scaledOptions,
 	dataTestId,
+	subjectName,
 }) => {
 	const [horizontalOrientation, setHorizontalOrientation] = useState(false);
 	const [width, setWidth] = useState(manualWidth || 0);
@@ -143,6 +146,12 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 
 	const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
+	const selectedLabel =
+		selectedOption && "label" in selectedOption ? selectedOption.label : "";
+	const ariaLabel = subjectName
+		? t("Common:RoleOfUser", { name: subjectName, role: selectedLabel })
+		: t("Common:RoleWithValue", { role: selectedLabel });
+
 	return (
 		<div className="access-selector" style={{ marginInlineEnd: "16px" }}>
 			{!(isMobile() && !isMobileHorizontalOrientation) ? (
@@ -167,6 +176,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 					availableAccess={availableAccess}
 					scaledOptions={scaledOptions}
 					dataTestId={dataTestId}
+					ariaLabel={ariaLabel}
 					showDisabledItems={true}
 				/>
 			) : null}
@@ -196,6 +206,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 					availableAccess={availableAccess}
 					scaledOptions={scaledOptions}
 					dataTestId={dataTestId}
+					ariaLabel={ariaLabel}
 					showDisabledItems={true}
 				/>
 			) : null}

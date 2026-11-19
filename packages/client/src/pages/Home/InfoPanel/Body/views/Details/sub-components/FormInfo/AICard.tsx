@@ -39,7 +39,6 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Card } from "@onlyoffice/apps-ui-kit/components/card";
 import { ActionButton } from "@onlyoffice/apps-ui-kit/components/action-button";
-import { getBrandName } from "@onlyoffice/apps-ui-kit/constants/brands";
 
 import SettingsSvg from "PUBLIC_DIR/images/settings.desc.react.svg";
 
@@ -109,9 +108,6 @@ export const AICard = ({
           components={{
             1: <strong />,
           }}
-          values={{
-            productName: getBrandName("ProductName"),
-          }}
         />
       );
     }
@@ -126,9 +122,6 @@ export const AICard = ({
           i18nKey="FormRoomConnectDatabaseAskAdmin"
           components={{
             1: <strong />,
-          }}
-          values={{
-            productName: getBrandName("ProductName"),
           }}
         />
       );

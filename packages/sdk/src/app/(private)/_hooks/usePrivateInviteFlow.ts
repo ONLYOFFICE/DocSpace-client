@@ -122,10 +122,6 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
     }: InviteAfterSubmitArgs) => {
       if (memberIds.length === 0) {
         if (skipped.length === 0) return null;
-        const { skippedMemberNotices } = await loadMemberFlows();
-        for (const { level, text } of skippedMemberNotices(t, skipped)) {
-          toastr[level](text);
-        }
         return { granted: [], pending: [], skipped };
       }
 
@@ -163,8 +159,9 @@ export const usePrivateInviteFlow = (): UsePrivateInviteFlowReturn => {
         });
         // A lock or a navigation aborts the operation; nothing is reported.
         if (controller.signal.aborted) return null;
-        for (const { level, text } of notices) toastr[level](text);
-        return outcome;
+        // Spec: private-rooms/sdk-surface, "Invite panel offers people only and reports the invitation result"
+        const result = outcome as TInviteOutcome | null;
+        return result ? { ...result, notices } : null;
       } finally {
         releaseCryptoOperation(controller);
         dialogs.setReencryptPercent(null);

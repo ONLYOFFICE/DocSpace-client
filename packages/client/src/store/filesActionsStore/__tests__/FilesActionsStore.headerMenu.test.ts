@@ -106,10 +106,9 @@ describe("FilesActionsStore.getHeaderMenu — Private section", () => {
     window.history.pushState({}, "", "/private/filter");
     const inPrivate = ids(menuFor({ isRoomsFolder: true }));
 
+    // Spec: private-rooms/sidebar-section, "Room groups in the section"
     expect(inRooms).toEqual(expect.arrayContaining(ROOM_GROUP_ITEMS));
-    expect(inPrivate).toEqual(
-      inRooms.filter((id) => !ROOM_GROUP_ITEMS.includes(id as string)),
-    );
+    expect(inPrivate).toEqual(inRooms);
   });
 });
 

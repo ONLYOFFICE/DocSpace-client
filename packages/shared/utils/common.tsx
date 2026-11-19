@@ -925,6 +925,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (formsFolder) sorted.push(formsFolder);
 
+  const privateRoomsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.PrivateRooms,
+  );
+  if (privateRoomsFolder) sorted.push(privateRoomsFolder);
+
   const aiHubFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.AiHub,

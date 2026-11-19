@@ -37,9 +37,12 @@ import { describe, it, expect } from "vitest";
 
 import {
   PASSPHRASE_MIN_LENGTH,
+  PASSPHRASE_SETTINGS,
   checkPassphraseStrength,
   containsCommonPattern,
+  getShownPassphraseStrength,
   isPassphraseAcceptable,
+  meetsPassphraseRules,
 } from "../passphrase-strength";
 
 describe("PASSPHRASE_MIN_LENGTH", () => {
@@ -181,5 +184,64 @@ describe("isPassphraseAcceptable", () => {
     const r = checkPassphraseStrength("abcdefghijkl");
     expect(["fair", "good"]).toContain(r.strength);
     expect(isPassphraseAcceptable("abcdefghijkl")).toBe(true);
+  });
+});
+
+describe("A new passphrase needs no particular characters", () => {
+  it("Lowercase words", () => {
+    const passphrase = "lorem ipsum dolor sitx";
+    expect(passphrase).toHaveLength(22);
+
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+    expect(isPassphraseAcceptable(passphrase)).toBe(true);
+  });
+
+  it("Common pattern still refused", () => {
+    const passphrase = "my password is long";
+
+    expect(meetsPassphraseRules(passphrase)).toBe(false);
+    expect(isPassphraseAcceptable(passphrase)).toBe(false);
+  });
+
+  it("asks for no capital letter, digit or punctuation", () => {
+    expect(PASSPHRASE_SETTINGS).toMatchObject({
+      minLength: 12,
+      upperCase: false,
+      digits: false,
+      specSymbols: false,
+    });
+  });
+});
+
+describe("The strength grade does not contradict the passphrase rules", () => {
+  it("Long passphrase without a required character", () => {
+    const passphrase = "lorem ipsum dolor sitx";
+
+    expect(getShownPassphraseStrength(passphrase)).toBe(
+      checkPassphraseStrength(passphrase).strength,
+    );
+    expect(getShownPassphraseStrength(passphrase)).not.toBe("weak");
+  });
+
+  it("Passphrase too short", () => {
+    const passphrase = "Tx7$kp!aL2n";
+    expect(passphrase).toHaveLength(11);
+
+    expect(getShownPassphraseStrength(passphrase)).toBe("weak");
+  });
+
+  it("All rules met", () => {
+    const passphrase = "Tx7$kp!aL2nQz@vR";
+    expect(meetsPassphraseRules(passphrase)).toBe(true);
+    expect(getShownPassphraseStrength(passphrase)).toBe(
+      checkPassphraseStrength(passphrase).strength,
+    );
+  });
+
+  it.each([
+    ["too short", "Tx7$kp!aL2n"],
+    ["a common pattern", "Qwerty123456!"],
+  ])("grades a passphrase with %s as weak", (_, passphrase) => {
+    expect(getShownPassphraseStrength(passphrase)).toBe("weak");
   });
 });

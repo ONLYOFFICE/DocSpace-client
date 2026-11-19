@@ -174,6 +174,17 @@ The editor SHALL NOT offer "Share to fill out" for a PDF form in a private room,
 - **WHEN** an encrypted PDF form is opened for editing in a private room
 - **THEN** the "Share to fill out" action is absent from the editor
 
+### Requirement: SDK does not hand an encrypted file to the host
+The SDK SHALL NOT pass the opening of an encrypted file to the embedding host: for such a file the `onEditorOpen` event is not sent even when the host subscribed to it, and the SDK opens the editor itself, since only the portal's editor page runs the key flow. The event SHALL be sent as before for a file that is not encrypted.
+
+#### Scenario: Host subscribed, encrypted file
+- **WHEN** a host that subscribed to `onEditorOpen` embeds the SDK and a user opens an encrypted file
+- **THEN** no `onEditorOpen` event is sent, no data of the file reaches the host, and the SDK opens the editor itself
+
+#### Scenario: Host subscribed, file not encrypted
+- **WHEN** the same host embeds the SDK and a user opens a file that is not encrypted
+- **THEN** the `onEditorOpen` event is sent with the file and the SDK opens no editor
+
 ### Requirement: New document from the editor withheld for encrypted files
 The editor SHALL NOT offer its create-new action for an encrypted file: the action creates a file that is not encrypted in the folder of the open one, which the server refuses in a private room.
 

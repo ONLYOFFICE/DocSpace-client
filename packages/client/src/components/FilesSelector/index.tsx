@@ -77,6 +77,7 @@ import {
   getAcceptButtonLabel,
   getCopyTargetRoomTypes,
   getRoomSectionTreeFolders,
+  offersPrivateSection,
 } from "./utils";
 import { getIsDisabled } from "@docspace/shared/utils/filesSelector";
 import {
@@ -136,6 +137,7 @@ const FilesSelectorWrapper = ({
   planPrivateTransfer,
   runPrivateTransferPlan,
   sourceInPrivateRoom,
+  isPrivateRoomsSectionAvailable,
   privateRoomId,
   userId,
   clearActiveOperations,
@@ -608,6 +610,11 @@ const FilesSelectorWrapper = ({
       withFavoritesTreeFolder={withFavoritesTreeFolder}
       withRoomsTreeFolder={withRoomsTreeFolder}
       withFormsTreeFolder={withFormsTreeFolder}
+      withPrivateTreeFolder={offersPrivateSection({
+        isCopy,
+        sourceInPrivateRoom,
+        isPrivateRoomsSectionAvailable,
+      })}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
       isRoomsOnly={isRoomsOnly}
@@ -896,6 +903,7 @@ export default inject(
       planPrivateTransfer,
       runPrivateTransferPlan,
       sourceInPrivateRoom: treeFoldersStore.isPrivacyFolder,
+      isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
       privateRoomId,
       userId: userStore.user?.id,
 

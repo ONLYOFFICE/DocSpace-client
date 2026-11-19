@@ -65,14 +65,32 @@ import styles from "../new-files-panel.module.scss";
 
 const MIN_LOADER_TIMER = 500;
 
-const filterRoomGroups = (groups: TNewFiles[], formsOnly: boolean) =>
+type TRoomsSection = "rooms" | "forms" | "private";
+
+/** The section a room of the rooms news belongs to: Forms by its type, Private by its setting. */
+const sectionOfRoom = (room: {
+  roomType?: RoomsType;
+  private?: boolean;
+}): TRoomsSection => {
+  if (room.roomType === RoomsType.FormRoom) return "forms";
+  return room.private ? "private" : "rooms";
+};
+
+/**
+ * The rooms news has no listing per section: `rooms/news` answers every room
+ * under the Rooms root, form and private rooms included, so each section's
+ * panel keeps its own.
+ * Spec: private-rooms/sidebar-section, "New-items counter on the section item"
+ */
+export const filterRoomGroups = (
+  groups: TNewFiles[],
+  section: TRoomsSection,
+) =>
   groups
     .map(({ date, items }) => ({
       date,
       items: items.filter(
-        (item) =>
-          !("room" in item) ||
-          (item.room.roomType === RoomsType.FormRoom) === formsOnly,
+        (item) => !("room" in item) || sectionOfRoom(item.room) === section,
       ),
     }))
     .filter(({ items }) => items.length > 0);
@@ -120,8 +138,11 @@ export const NewFilesPanelComponent = ({
   const dataFetched = React.useRef<boolean>(false);
   const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
-  const isForms = folderId === "forms";
-  const isRooms = folderId === "rooms" || isForms;
+  const roomsSection: TRoomsSection | null =
+    folderId === "rooms" || folderId === "forms" || folderId === "private"
+      ? folderId
+      : null;
+  const isRooms = roomsSection !== null;
 
   const fetchFolderIds = React.useMemo(
     () => (folderIds?.length ? folderIds : [folderId]),
@@ -183,7 +204,9 @@ export const NewFilesPanelComponent = ({
         dataFetched.current = true;
         requestRunning.current = false;
 
-        setData(isRooms ? filterRoomGroups(newFiles, isForms) : newFiles);
+        setData(
+          roomsSection ? filterRoomGroups(newFiles, roomsSection) : newFiles,
+        );
         const currentDate = new Date();
 
         const ms = currentDate.getTime() - startLoaderTime.getTime();
@@ -211,7 +234,7 @@ export const NewFilesPanelComponent = ({
     folderId,
     fetchFolderIds,
     isRooms,
-    isForms,
+    roomsSection,
     onClose,
     setIsLoading,
   ]);

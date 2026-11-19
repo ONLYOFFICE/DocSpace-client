@@ -1,13 +1,48 @@
 #!/usr/bin/env node
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
 // On-demand Bugzilla bug tool (read-only fetch + attachment download).
 //
 // This file is committed and MUST stay free of personal/secret data. All
-// per-user configuration lives outside version control:
+// per-user configuration lives outside version control (see lib.mjs):
 //   - host, default assignee, keychain service, attachment dir:
 //       .claude/scripts/bugzilla/config.local.json  (git-ignored; see config.example.json)
 //       or env: BZ_HOST, BZ_ASSIGNED, BZ_KEYCHAIN_SERVICE, BZ_ATTACH_DIR
 //   - API key (secret): env BZ_API_KEY, or macOS Keychain under the configured
-//       service (default "bugzilla-onlyoffice"):
+//       service (default "bugzilla"):
 //       security add-generic-password -s <service> -a "$USER" -w '<key>'
 //
 // Usage:
@@ -20,67 +55,18 @@
 //   node bz.mjs --show 123,456 [--dump-attachments]   # full detail per bug
 //   node bz.mjs --limit 50 --json
 
-import { execFileSync } from "node:child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import os from "node:os";
+import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-
-function loadConfig() {
-  try {
-    return JSON.parse(readFileSync(path.join(HERE, "config.local.json"), "utf8"));
-  } catch {
-    return {};
-  }
-}
-
-const cfg = loadConfig();
-const HOST = (process.env.BZ_HOST || cfg.host || "").replace(/\/$/, "");
-const DEFAULT_ASSIGNED = process.env.BZ_ASSIGNED || cfg.assigned || "";
-const KEYCHAIN_SERVICE =
-  process.env.BZ_KEYCHAIN_SERVICE || cfg.keychainService || "bugzilla";
-const ATTACH_DIR =
-  process.env.BZ_ATTACH_DIR ||
-  cfg.attachDir ||
-  path.join(os.homedir(), ".cache", "docspace-bugzilla", "attachments");
-
-const SETUP_HINT =
-  "Not configured. Copy config.example.json -> config.local.json (git-ignored) " +
-  "and set host + assigned, then add your key to Keychain:\n" +
-  `  security add-generic-password -s ${KEYCHAIN_SERVICE} -a "$USER" -w '<key>'`;
-
-function getApiKey() {
-  if (process.env.BZ_API_KEY) return process.env.BZ_API_KEY.trim();
-  try {
-    return execFileSync(
-      "security",
-      ["find-generic-password", "-s", KEYCHAIN_SERVICE, "-w"],
-      { encoding: "utf8" },
-    ).trim();
-  } catch {
-    return null;
-  }
-}
-
-function parseArgs(argv) {
-  const out = {};
-  for (let i = 0; i < argv.length; i += 1) {
-    const a = argv[i];
-    if (a.startsWith("--")) {
-      const key = a.slice(2);
-      const next = argv[i + 1];
-      if (next === undefined || next.startsWith("--")) {
-        out[key] = true;
-      } else {
-        out[key] = next;
-        i += 1;
-      }
-    }
-  }
-  return out;
-}
+import {
+  ATTACH_DIR,
+  DEFAULT_ASSIGNED,
+  HOST,
+  bzGet,
+  decodeEntities,
+  fmtDate,
+  parseArgs,
+  requireAuth,
+} from "./lib.mjs";
 
 // Turn a buglist.cgi / query.cgi saved-search URL into REST search params.
 function paramsFromSavedSearch(url) {
@@ -120,22 +106,6 @@ function buildSearch(args) {
   return p;
 }
 
-function fmtDate(iso) {
-  if (!iso) return "";
-  return String(iso).slice(0, 10);
-}
-
-function decodeEntities(s) {
-  return String(s ?? "")
-    .replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCodePoint(parseInt(h, 16)))
-    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&");
-}
-
 function truncate(s, n) {
   s = decodeEntities(s);
   return s.length > n ? `${s.slice(0, n - 1)}…` : s;
@@ -169,17 +139,6 @@ function printTable(bugs) {
   console.log(cols.map((c) => "-".repeat(c.w)).join("  "));
   for (const r of rows) console.log(line(cols.map((c) => r[c.k])));
   console.log(`\n${bugs.length} bug(s). Link: ${HOST}/show_bug.cgi?id=<ID>`);
-}
-
-async function bzGet(pathname, key, extra = {}) {
-  const p = new URLSearchParams({ api_key: key, ...extra });
-  // This instance ignores the X-BUGZILLA-API-KEY header; only the query param works.
-  const res = await fetch(`${HOST}/rest/${pathname}?${p.toString()}`);
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok || body.error) {
-    throw new Error(`[${res.status}] ${body.message || res.statusText}`);
-  }
-  return body;
 }
 
 // Download non-obsolete attachment binaries for a bug into ATTACH_DIR/<id>/.
@@ -273,16 +232,7 @@ async function showBugs(ids, key, dump = false) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-
-  if (!HOST) {
-    console.error(SETUP_HINT);
-    process.exit(2);
-  }
-  const key = getApiKey();
-  if (!key) {
-    console.error(`No API key for Keychain service "${KEYCHAIN_SERVICE}".\n${SETUP_HINT}`);
-    process.exit(2);
-  }
+  const key = requireAuth();
 
   if (args.show || args.detail) {
     const ids = String(args.show || args.detail)

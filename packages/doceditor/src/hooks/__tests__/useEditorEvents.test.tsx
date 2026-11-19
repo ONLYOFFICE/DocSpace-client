@@ -107,10 +107,16 @@ vi.mock("@/utils/aiProxy", () => ({
 }));
 
 import {
+  manageFormFilling,
   markAsFavorite,
   removeFromFavorite,
   sendEditorNotify,
 } from "@docspace/shared/api/files";
+import {
+  FormFillingManageAction,
+  StartFillingMode,
+} from "@docspace/shared/enums";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import { getDocEditor } from "@/utils";
 
 import useEditorEvents from "../useEditorEvents";
@@ -168,6 +174,96 @@ describe("useEditorEvents", () => {
       });
 
       expect(markAsFavorite).toHaveBeenCalledWith([7], []);
+    });
+  });
+
+  describe("form field changes", () => {
+    const settle = () =>
+      act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+
+    it("Editor ready: the fields are read as they were opened", async () => {
+      const takeFieldsSnapshot = vi.fn(async () => undefined);
+      render({ fileInfo: fileInfo(false), takeFieldsSnapshot });
+
+      await act(async () => {
+        events.onDocumentReady();
+      });
+
+      expect(takeFieldsSnapshot).toHaveBeenCalledTimes(1);
+    });
+
+    it("Document changed and saved, in the handler of the first render: the renames are scheduled on both", () => {
+      const scheduleFieldChanges = vi.fn();
+      render({ fileInfo: fileInfo(false), scheduleFieldChanges });
+
+      // The editor keeps this handler, made while the document was not ready yet.
+      const { onDocumentStateChange } = events;
+
+      act(() => onDocumentStateChange({ data: true }));
+      act(() => onDocumentStateChange({ data: false }));
+
+      expect(scheduleFieldChanges.mock.calls).toEqual([[true], [false]]);
+    });
+
+    it("Editor closed: it is left once the renames are sent", async () => {
+      let sent: () => void = () => {};
+      const closeFieldChanges = vi.fn(
+        () =>
+          new Promise<void>((resolve) => {
+            sent = resolve;
+          }),
+      );
+      const closeEvent = { event: "onEditorCloseCallback" };
+      render({
+        fileInfo: fileInfo(false),
+        sdkConfig: { frameId: "frame", src: "", editorGoBack: "event" },
+        closeFieldChanges,
+      });
+
+      const closed = events.onSDKRequestClose();
+      await settle();
+
+      expect(closeFieldChanges).toHaveBeenCalledTimes(1);
+      expect(frameCallEvent).not.toHaveBeenCalledWith(closeEvent);
+
+      sent();
+      await closed;
+
+      expect(frameCallEvent).toHaveBeenCalledWith(closeEvent);
+    });
+
+    it("Filling started from the editor: it starts once the renames are reported", async () => {
+      let reported: () => void = () => {};
+      const reportFieldChanges = vi.fn(
+        () =>
+          new Promise<void>((resolve) => {
+            reported = resolve;
+          }),
+      );
+      render({
+        fileInfo: fileInfo(false),
+        config: {
+          ...config,
+          startFillingMode: StartFillingMode.StartFillingRoomForm,
+        },
+        reportFieldChanges,
+      });
+
+      events.onRequestStartFilling({});
+      await settle();
+
+      expect(reportFieldChanges).toHaveBeenCalledTimes(1);
+      expect(manageFormFilling).not.toHaveBeenCalled();
+
+      reported();
+      await settle();
+
+      expect(manageFormFilling).toHaveBeenCalledWith(
+        7,
+        FormFillingManageAction.Start,
+      );
     });
   });
 

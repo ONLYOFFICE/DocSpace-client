@@ -43,3 +43,14 @@
   color: var(--text-secondary);
   line-height: 1.5;
 }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wordCount {
+  color: var(--text-secondary);
+  text-align: end;
+}

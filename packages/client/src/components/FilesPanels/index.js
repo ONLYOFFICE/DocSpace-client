@@ -45,6 +45,7 @@ import {
 } from "@docspace/shared/enums";
 
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
+import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
 import {
   UploadPanel,
@@ -109,7 +110,6 @@ import ShareSelector from "../ShareSelector";
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
-import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
 import AiProjectDialog from "../dialogs/AiProjectDialog";
 import GenerateSkillDialog from "../dialogs/GenerateSkillDialog";
 
@@ -201,7 +201,6 @@ const Panels = (props) => {
     arrRoomGroups,
     addRoomToGroupDialogVisible,
     pauseSubmissionsDialogVisible,
-    askAIConnectDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -292,7 +291,9 @@ const Panels = (props) => {
     (pluginDialogVisible || !!reactPluginModalState) && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
-    pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
+    pluginSelectorVisible && (
+      <Portal key="plugin-selector" element={<PluginSelector />} />
+    ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
@@ -479,9 +480,6 @@ const Panels = (props) => {
     pauseSubmissionsDialogVisible && (
       <PauseSubmissionsDialog key="pause-submissions-dialog" />
     ),
-    askAIConnectDialogVisible && (
-      <AskAIConnectDialog key="ask-ai-connect-dialog" />
-    ),
     aiProjectDialogVisible && <AiProjectDialog key="ai-project-dialog" />,
     generateSkillDialogVisible && (
       <GenerateSkillDialog key="generate-skill-dialog" />
@@ -577,7 +575,6 @@ export default inject(
       setEditRoomGroupsDialogVisible,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
-      askAIConnectDialogVisible,
     } = dialogsStore;
 
     const { setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -715,7 +712,6 @@ export default inject(
       arrRoomGroups,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
-      askAIConnectDialogVisible,
     };
   },
 )(observer(Panels));

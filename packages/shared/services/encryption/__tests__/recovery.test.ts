@@ -40,6 +40,8 @@ import {
   validateMnemonic,
   splitMnemonicForDisplay,
   normalizeMnemonic,
+  countMnemonicWords,
+  findUnknownMnemonicWord,
 } from "../recovery";
 
 // All-zeros 32-byte entropy → SHA-256 first byte = 0x66 → last word index 102
@@ -118,5 +120,26 @@ describe("recovery", () => {
     it("lower-cases and collapses whitespace", () => {
       expect(normalizeMnemonic("  ABANDON\tART  ")).toBe("abandon art");
     });
+  });
+});
+
+describe("countMnemonicWords", () => {
+  it("counts words split by any run of white space", () => {
+    expect(countMnemonicWords("")).toBe(0);
+    expect(countMnemonicWords("  abandon \n\n ability\tart  ")).toBe(3);
+  });
+});
+
+describe("findUnknownMnemonicWord", () => {
+  it("names the first word that is no recovery word, counted from 1", async () => {
+    await expect(
+      findUnknownMnemonicWord("abandon ability abandn zzz"),
+    ).resolves.toEqual({ word: "abandn", position: 3 });
+  });
+
+  it("returns null when every word is a recovery word", async () => {
+    await expect(
+      findUnknownMnemonicWord(`${"abandon ".repeat(23)}zoo`),
+    ).resolves.toBeNull();
   });
 });

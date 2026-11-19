@@ -94,12 +94,17 @@ import { DashboardTourHost } from "./DashboardTourHost";
 import { ModuleCard } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
+import { PluginWidgets } from "./sub-components/PluginWidgets";
 import { Header } from "./sub-components/Header";
 import { DashboardLoader } from "./sub-components/DashboardLoader";
 import { GuestRestrictionTooltip } from "./sub-components/GuestRestrictionTooltip";
 import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
-import { useModuleItems } from "./hooks/useModuleItems";
+import {
+  useModuleItems,
+  type PrivateRoomsCardState,
+} from "./hooks/useModuleItems";
+import { usePluginModuleItems } from "./hooks/usePluginModuleItems";
 import { useMyFolderId } from "./hooks/useMyFolderId";
 import { modulesGridStyle } from "./utils";
 import styles from "./Dashboard.module.scss";
@@ -133,6 +138,8 @@ type DashboardProps = ChatNoAccessStoreProps & {
   ensureAppsLoaded: () => void;
   /** The AI rooms section is in the sidebar: AI is on and its root is served. */
   isAiHubAvailable: boolean;
+  /** Whether the card of private rooms is shown, and in which state. */
+  privateRoomsCard: PrivateRoomsCardState;
   setShownInfoPanelWidth: (width: number) => void;
 };
 
@@ -158,6 +165,7 @@ const Dashboard = (props: DashboardProps) => {
     canManageApps,
     ensureAppsLoaded,
     isAiHubAvailable,
+    privateRoomsCard,
     setShownInfoPanelWidth,
   } = props;
   const { t } = useTranslation(["Common"]);
@@ -195,7 +203,7 @@ const Dashboard = (props: DashboardProps) => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
 
-  const moduleItems = useModuleItems({
+  const builtInModuleItems = useModuleItems({
     isGuest,
     canCreateRooms,
     isWarningRoomsDialog,
@@ -205,7 +213,9 @@ const Dashboard = (props: DashboardProps) => {
     // and the owner only.
     canEnableApps: isAdminOrOwner && canManageApps,
     isAiHubAvailable,
+    privateRooms: privateRoomsCard,
   });
+  const moduleItems = [...builtInModuleItems, ...usePluginModuleItems()];
 
   // The dashboard renders its own content (no SDK iframe). Tell the
   // persistent host to drop the previous app's frame so it doesn't linger
@@ -407,6 +417,8 @@ const Dashboard = (props: DashboardProps) => {
               </section>
             ) : null}
 
+            <PluginWidgets />
+
             <IntegrationsCard dataTourId="dashboard-integrations" />
             <DevToolsCard />
           </div>
@@ -521,6 +533,12 @@ const DashboardConnected = inject((stores: TStore) => {
     // The same condition the sidebar shows the "AI rooms" section on.
     isAiHubAvailable:
       !!treeFoldersStore.aiHubFolder && settingsStore.aiServicesEnabled,
+    // The same condition the sidebar shows the Private item on.
+    privateRoomsCard: appsStore.isPrivateRoomsSectionAvailable
+      ? "on"
+      : appsStore.isPrivateRoomsAppSwitchedOff
+        ? "off"
+        : "none",
     setShownInfoPanelWidth: infoPanelStore.setShownWidth,
   };
 })(observer(Dashboard));

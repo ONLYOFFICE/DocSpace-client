@@ -42,6 +42,7 @@ import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   getDefaultStartPageUrl,
   getEffectiveDefaultFolderType,
+  isStartPageAvailable,
 } from "../defaultStartPage";
 
 vi.mock("@docspace/shared/utils/oauthToken", () => ({
@@ -108,6 +109,26 @@ describe("getDefaultStartPageUrl", () => {
         isGuest: true,
       }),
     ).toBe("/dashboard");
+  });
+
+  it("Default page setting: opens the Private list while the section is available", () => {
+    expect(
+      getDefaultStartPageUrl(FolderType.PrivateRooms, {
+        isPrivateRoomsSectionAvailable: true,
+      }),
+    ).toBe("/private/filter");
+  });
+
+  it("Section not available: a start page set to Private opens Rooms", () => {
+    expect(getDefaultStartPageUrl(FolderType.PrivateRooms)).toBe(
+      "/rooms/shared/filter",
+    );
+    expect(isStartPageAvailable(FolderType.PrivateRooms)).toBe(false);
+    expect(
+      isStartPageAvailable(FolderType.PrivateRooms, {
+        isPrivateRoomsSectionAvailable: true,
+      }),
+    ).toBe(true);
   });
 
   it("opens Rooms instead of the Overview inside an OAuth frame", () => {

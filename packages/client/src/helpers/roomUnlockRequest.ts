@@ -36,24 +36,35 @@
 import { makeAutoObservable } from "mobx";
 
 /**
- * Whether the unlock request a private folder raises on entry has been
+ * Whether the unlock request a private room raises on entry has been
  * answered: unlocked, cancelled, or not needed because the key was unlocked.
- * The locked-key bar waits for it.
+ * The locked-key bar waits for it. The request belongs to the room, so its
+ * folders share the answer.
  */
 class RoomUnlockRequest {
-  settledFolderId: number | string | null = null;
+  settledRoomId: number | string | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  settle = (folderId: number | string) => {
-    this.settledFolderId = folderId;
+  settle = (roomId: number | string) => {
+    this.settledRoomId = roomId;
   };
 
   reset = () => {
-    this.settledFolderId = null;
+    this.settledRoomId = null;
   };
 }
+
+type TOpenFolder = {
+  id?: number | string | null;
+  rootRoomId?: number | string | null;
+};
+
+/** The room the open folder belongs to; the folder itself at the room's root. */
+export const getOpenRoomId = (
+  folder: TOpenFolder | null | undefined,
+): number | string | null => folder?.rootRoomId || folder?.id || null;
 
 export const roomUnlockRequest = new RoomUnlockRequest();

@@ -33,25 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 
-// One stub export is enough to build the kit's shim module from.
-vi.mock("@onlyoffice/apps-ui-kit", () => ({ Text: () => null }));
+import { rewritePluginImports } from "SRC_DIR/helpers/plugins/react/shim";
 
-let rewritePluginImports: (code: string) => string;
-
-beforeAll(async () => {
-  // jsdom implements no blob URLs, and the shim needs them at import time. Only
-  // the statics are filled in — replacing `URL` would drop the constructor.
+// jsdom implements no blob URLs, and the shim needs them at import time. Only
+// the statics are filled in — replacing `URL` would drop the constructor.
+// Hoisted above the import, so the shim loads while the file is collected:
+// a `beforeAll` import is bound by the 10s hook timeout, which loading React,
+// react-dom and the SDK overran under the parallel pre-push gate.
+vi.hoisted(() => {
   let issued = 0;
 
   URL.createObjectURL = () => `blob:mock/${(issued += 1)}`;
   URL.revokeObjectURL = () => {};
-
-  ({ rewritePluginImports } = await import(
-    "SRC_DIR/helpers/plugins/react/shim"
-  ));
 });
+
+// One stub export is enough to build the kit's shim module from.
+vi.mock("@onlyoffice/apps-ui-kit", () => ({ Text: () => null }));
 
 const rewrittenSpecifiers = (code: string) =>
   Array.from(rewritePluginImports(code).matchAll(/["'](blob:[^"']+)["']/g)).map(

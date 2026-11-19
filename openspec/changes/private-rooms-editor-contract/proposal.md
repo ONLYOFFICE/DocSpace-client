@@ -120,10 +120,10 @@ None.
 - Server (`../server`): editor configuration (the document address of an
   encrypted file, the document key after an encrypted save), the Document
   Server capability, the refusal of encrypted form submissions into
-  form-data collection, whether the signed configuration keeps the
-  caller's key-pair list, and the parity items of the server read of
-  2026-10-30 (copy-as, restore by address, the drop of a removed member's
-  sessions). The server already refuses to
+  form-data collection, an `encryptionKeys` entry of the editor
+  configuration that carries only what the editor reads, and the parity
+  items of the server read of 2026-10-30 (copy-as, restore by address, the
+  drop of a removed member's sessions). The server already refuses to
   convert encrypted or private-room files.
 - Document Server team: owns the contract, the end of an encrypted editing
   session, the form flag on save, and the crypto library build each release
@@ -167,10 +167,10 @@ Confirmed by the feature owner on 2026-10-29, after the live run:
 4. Whether the Document Server team adopts the recommended change-key
    derivation and associated data (contract DS-12) in the first release or
    later; the client needs no change either way.
-5. What the policy is if task 4.4 finds that inserted images reach the
-   Document Server or the portal in plaintext: block image insertion for
-   encrypted documents until fixed, or hold the release. Owner: feature
-   owner with the Document Server team.
+5. What the policy is if a stand run (tasks 4.4 and 4.10) does not confirm
+   that media added to an encrypted document is stored encrypted: block
+   image insertion for encrypted documents, or hold the release. Owner:
+   feature owner with the Document Server team.
 6. Whether encrypted spreadsheets and presentations ship in v1 before the
    Document Server closes the join race of DS-17 and the duplicated replay
    of DS-19 (build 10.0.2.5 closed DS-18 and the first-open race), or the

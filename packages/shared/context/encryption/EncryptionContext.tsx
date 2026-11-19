@@ -57,6 +57,7 @@ import {
   getAutoLockTimeoutSeconds,
   locksWhenTabHidden,
   setAutoLockScope,
+  subscribeAutoLockChange,
 } from "../../services/encryption/auto-lock-preference";
 import {
   registerKeyMismatchHandler,
@@ -344,6 +345,13 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     };
   }, [autoLockSuspendCount]);
 
+  const [autoLockRevision, setAutoLockRevision] = useState(0);
+
+  useEffect(
+    () => subscribeAutoLockChange(() => setAutoLockRevision((r) => r + 1)),
+    [],
+  );
+
   useEffect(() => {
     if (!isUnlocked) return undefined;
     if (autoLockSuspendCount > 0) return undefined;
@@ -384,7 +392,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
         document.removeEventListener(ev, resetTimer);
       }
     };
-  }, [isUnlocked, autoLockSuspendCount]);
+  }, [isUnlocked, autoLockSuspendCount, autoLockRevision]);
 
   const resolveKeyMismatch = useCallback(
     async (info: KeyMismatchInfo): Promise<KeyMismatchDecision> => {

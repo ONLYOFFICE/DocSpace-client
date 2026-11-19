@@ -39,10 +39,7 @@ import classNames from "classnames";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
-
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { HelpButton } from "@onlyoffice/apps-ui-kit/components/help-button";
 import { FieldContainer } from "@onlyoffice/apps-ui-kit/components/field-container";
 import {
@@ -51,7 +48,6 @@ import {
   InputSize,
 } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
-import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { IHeaderProps } from "./WhiteLabel.types";
 import styles from "./WhiteLabel.module.scss";
@@ -59,7 +55,7 @@ import styles from "./WhiteLabel.module.scss";
 export const WhiteLabelHeader = ({
   isSettingPaid,
   standalone,
-  onPaidBadgeClick,
+  paidBadge,
   onUseTextAsLogo,
   isEmpty,
   logoTextWhiteLabel,
@@ -67,7 +63,6 @@ export const WhiteLabelHeader = ({
   onClear,
 }: IHeaderProps) => {
   const { t } = useTranslation("Common");
-  const { isBase } = useTheme();
 
   return (
     <div className={styles.header}>
@@ -76,20 +71,7 @@ export const WhiteLabelHeader = ({
           {t("WhiteLabel")}
         </Text>
 
-        {!isSettingPaid && !standalone ? (
-          <Badge
-            className={classNames(styles.paidBadge, "paid-badge")}
-            fontWeight="700"
-            label={t("Common:Paid")}
-            onClick={onPaidBadgeClick}
-            isPaidBadge
-            backgroundColor={
-              isBase
-                ? globalColors.favoritesStatus
-                : globalColors.favoriteStatusDark
-            }
-          />
-        ) : null}
+        {!isSettingPaid && !standalone ? paidBadge : null}
       </div>
 
       <div className={classNames(styles.wlHelper, "wl-helper")}>

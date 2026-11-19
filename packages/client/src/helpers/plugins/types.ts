@@ -54,6 +54,8 @@ import type {
   IProfileMenuItem,
   IArticleButtonItem,
   IArticleNavigationItem,
+  IDashboardWidgetItem,
+  IArticleWidgetItem,
   ISettings,
   IMessage,
   IPostMessage,
@@ -69,6 +71,8 @@ import type {
   IProfileMenuPlugin,
   IArticleButtonPlugin,
   IArticleNavigationPlugin,
+  IDashboardWidgetPlugin,
+  IArticleWidgetPlugin,
   IPlugin,
   IApiPlugin,
   ISettingsPlugin,
@@ -114,6 +118,7 @@ export type {
   IProfileMenuItem,
   IArticleButtonItem,
   IArticleNavigationItem,
+  IDashboardWidgetItem,
 };
 
 //Extended client-side types
@@ -202,6 +207,17 @@ export interface IArticleNavigationItemClient
   onLoad?: () => Promise<{ section: IBox }>;
 }
 
+export interface IDashboardWidgetItemClient
+  extends Required<Pick<IDashboardWidgetItem, "title">>,
+    Omit<IDashboardWidgetItem, "title"> {
+  pluginName: string;
+}
+
+export interface IArticleWidgetItemClient extends IArticleWidgetItem {
+  pluginName: string;
+  label: string;
+}
+
 export interface IMediaViewerClient extends IMediaViewer {
   pluginName: string;
 }
@@ -281,7 +297,9 @@ export type TPlugin = {
   Partial<ISettingsPlugin> &
   Partial<IPostMessagePlugin> &
   Partial<IArticleButtonPlugin> &
-  Partial<IArticleNavigationPlugin>;
+  Partial<IArticleNavigationPlugin> &
+  Partial<IDashboardWidgetPlugin> &
+  Partial<IArticleWidgetPlugin>;
 
 export interface TMessageActionsParams {
   message: IMessage;
@@ -309,6 +327,9 @@ export interface TMessageActionsParams {
   updateEventListenerItems?: PluginStore["updateEventListenerItems"];
   updateArticleButtonItems?: PluginStore["updateArticleButtonItems"];
   updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
+  updateDashboardWidgetItems?: PluginStore["updateDashboardWidgetItems"];
+  updateArticleWidgetItem?: PluginStore["updateArticleWidgetItem"];
+  closeMobileArticle?: PluginStore["closeMobileArticle"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];
   setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];

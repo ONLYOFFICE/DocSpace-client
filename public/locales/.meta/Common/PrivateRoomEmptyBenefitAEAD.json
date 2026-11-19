@@ -1,26 +1,26 @@
 {
   "key_path": "PrivateRoomEmptyBenefitAEAD",
-  "content": "Every document gets its own key, so one leaked file never exposes another.",
-  "content_en_sha1_hash": "9a43490d13598e0cc755c7866f545c398c727123",
-  "created_at": "2026-06-09T09:42:54.385Z",
-  "updated_at": "2026-07-28T07:30:59.796Z",
+  "content": "Each file has its own encryption key.",
+  "content_en_sha1_hash": "4fd7868a59ae42397b7cdfa674ed10517e783a2d",
+  "created_at": "2026-11-13T06:51:07.570Z",
+  "updated_at": "2026-11-13T06:52:24.797Z",
   "comment": {
-    "text": "List item in an empty state view for Private Rooms, describing one of several security benefits.",
+    "text": "Second of four short points under the title of the empty private room view, next to a key icon. Says that every file is encrypted with a separate key; file means any file of the room, not only documents.",
     "is_auto": true,
-    "updated_at": "2026-06-09T10:00:11.949Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-13T06:52:24.797Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
-      "line_number": 77,
-      "context": "const { t } = useTranslation([\"EmptyView\", \"Common\", \"Translations\"]);\n const { isBase } = useTheme();\n \n const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n const dispatchCreate = useCallback(",
+      "line_number": 88,
+      "context": "const { t } = useTranslation([\"EmptyView\", \"Common\", \"Translations\"]);\n const { isBase } = useTheme();\n \n const items = [\n { text: t(\"Common:PrivateRoomEmptyBenefitE2EE\"), Icon: EncryptionIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitAEAD\"), Icon: FileKeyIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitHPKE\"), Icon: CollaborationIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitKDF\"), Icon: RecoveryIcon },\n ];\n \n const dispatchCreate = useCallback(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/empty-views/empty-private-room/index.tsx",
-      "line_number": 74,
-      "context": "const { t } = useTranslation([\"Common\"]);\n const { isBase } = useTheme();\n \n const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n return (",
+      "line_number": 85,
+      "context": "const { t } = useTranslation([\"Common\"]);\n const { isBase } = useTheme();\n \n const items = [\n { text: t(\"Common:PrivateRoomEmptyBenefitE2EE\"), Icon: EncryptionIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitAEAD\"), Icon: FileKeyIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitHPKE\"), Icon: CollaborationIcon },\n { text: t(\"Common:PrivateRoomEmptyBenefitKDF\"), Icon: RecoveryIcon },\n ];\n \n // Spec: private-rooms/file-operations, \"Empty folder inside a private room shows a folder empty view\"",
       "module": "/packages/shared"
     }
   ],

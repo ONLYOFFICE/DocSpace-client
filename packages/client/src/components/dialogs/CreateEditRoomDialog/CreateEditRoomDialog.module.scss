@@ -254,14 +254,6 @@
     line-height: 16px;
   }
 
-  &.privacyType :global(.permanent_setting-main_info-icon) svg path {
-    fill: $light-status-positive;
-
-    :global(.dark) & {
-      fill: $dark-status-positive;
-    }
-  }
-
   :global(.permanent_setting-help_button) {
     margin-inline-start: auto;
     white-space: pre-line;

@@ -63,7 +63,7 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
-import { AutoLockSetting } from "./AutoLockSetting";
+import { AutoLockSetting } from "SRC_DIR/components/AutoLockSetting/AutoLockSetting";
 import { KeysList } from "./KeysList";
 import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
@@ -283,7 +283,12 @@ const KeysManagement = ({
 
   return (
     <div className={styles.sectionBody}>
+      {/* Spec: private-rooms/key-management, "Keys management opens with an introduction" */}
+      <Text as="p" className={styles.intro} dataTestId="keys_management_intro">
+        {t("Common:KeysManagementIntro")}
+      </Text>
       <KeysList
+        keyState={hasKeys ? (isUnlocked ? "unlocked" : "locked") : undefined}
         keys={encryptionKeys || []}
         onDelete={remove.request}
         onExport={exportFlow.request}
@@ -291,6 +296,21 @@ const KeysManagement = ({
         isDeleting={remove.isPending}
         deletingKeyId={remove.pendingId}
       />
+      {/* Spec: private-rooms/key-management, "Keys management offers to unlock a locked key" */}
+      {hasKeys && !isUnlocked ? (
+        <div className={styles.unlockAction}>
+          <Button
+            primary
+            size={ButtonSize.small}
+            onClick={() => {
+              void requireIdentity();
+            }}
+            label={t("Common:UnlockKey")}
+            isDisabled={busy}
+            testId="keys_unlock_button"
+          />
+        </div>
+      ) : null}
       {deleteUnused.unusedCount > 0 ? (
         <div className={styles.resetSection} data-testid="unused_keys_notice">
           <span className={styles.resetHint}>
@@ -353,25 +373,34 @@ const KeysManagement = ({
               {t("Common:ImportKey")}
             </Link>
           ) : null}
-          {recover.available ? (
-            <Link
-              type={LinkType.action}
-              fontWeight="600"
-              fontSize="13px"
-              isHovered
-              onClick={() => {
-                if (!busy) recover.request();
-              }}
-              role="button"
-              tabIndex={0}
-              onKeyDown={activateAsButton}
-              dataTestId="use_recovery_phrase_link"
-            >
-              {t("Common:UseRecoveryPhrase")}
-            </Link>
-          ) : null}
         </div>
       </div>
+      {/* Spec: private-rooms/key-management, "Recovery phrase has a block of its own in Keys management" */}
+      {recover.available ? (
+        <div className={styles.recoverySection} data-testid="recovery_section">
+          <Text fontSize="14px" fontWeight={600}>
+            {t("Common:RecoveryPhraseTitle")}
+          </Text>
+          <Text as="p" className={styles.recoveryText}>
+            {t("Common:RecoveryPhraseSectionText")}
+          </Text>
+          <Link
+            type={LinkType.action}
+            fontWeight="600"
+            fontSize="13px"
+            isHovered
+            onClick={() => {
+              if (!busy) recover.request();
+            }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={activateAsButton}
+            dataTestId="use_recovery_phrase_link"
+          >
+            {t("Common:UseRecoveryPhrase")}
+          </Link>
+        </div>
+      ) : null}
       {hasKeys ? (
         <div className={styles.deviceSection}>
           <Text fontSize="14px" fontWeight={600}>
@@ -396,26 +425,29 @@ const KeysManagement = ({
           ) : null}
           {rememberedUntil ? (
             <div className={styles.deviceRow}>
-              <Text fontSize="13px">
+              <Text fontSize="13px" dataTestId="device_remembered_until">
                 {t("Common:DeviceUnlockRememberedUntil", {
                   date: rememberedUntil,
                 })}
               </Text>
-              <Link
-                type={LinkType.action}
-                fontWeight="600"
-                fontSize="13px"
-                isHovered
-                onClick={() => {
-                  if (!busy) handleForgetDevice();
-                }}
-                role="button"
-                tabIndex={0}
-                onKeyDown={activateAsButton}
-                dataTestId="forget_device_link"
-              >
-                {t("Common:ForgetDeviceButton")}
-              </Link>
+              {/* Spec: private-rooms/key-management, "Forget device and Lock now are offered one at a time" */}
+              {isUnlocked ? null : (
+                <Link
+                  type={LinkType.action}
+                  fontWeight="600"
+                  fontSize="13px"
+                  isHovered
+                  onClick={() => {
+                    if (!busy) handleForgetDevice();
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={activateAsButton}
+                  dataTestId="forget_device_link"
+                >
+                  {t("Common:ForgetDeviceButton")}
+                </Link>
+              )}
             </div>
           ) : null}
           {isUnlocked ? (

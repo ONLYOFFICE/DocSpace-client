@@ -208,6 +208,8 @@ export const enum RoomSearchArea {
   FormTemplates = "FormTemplates",
   /** The "AI rooms" section: Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`). */
   AiHub = "AiHub",
+  /** The "Private" section: the private rooms, which stay under the Rooms root (`FolderType.PrivateRooms`). */
+  PrivateRooms = "PrivateRooms",
 }
 export const enum RoomPrivacyFilter {
   None = 0,

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
 import {
   AUTO_LOCK_PRESETS,
@@ -44,6 +44,7 @@ import {
   getCurrentAutoLockPresetId,
   locksWhenTabHidden,
   setAutoLockPreset,
+  subscribeAutoLockChange,
   setAutoLockScope,
   setAutoLockTimeoutSeconds,
 } from "../auto-lock-preference";
@@ -144,6 +145,20 @@ describe("auto-lock preference storage", () => {
     setAutoLockPreset("30m");
 
     expect(locksWhenTabHidden()).toBe(false);
+  });
+});
+
+describe("auto-lock preference change", () => {
+  it("tells its subscribers when a preset is picked, until they unsubscribe", () => {
+    const listener = vi.fn();
+    const unsubscribe = subscribeAutoLockChange(listener);
+
+    setAutoLockPreset("5m");
+    expect(listener).toHaveBeenCalledTimes(1);
+
+    unsubscribe();
+    setAutoLockPreset("15m");
+    expect(listener).toHaveBeenCalledTimes(1);
   });
 });
 

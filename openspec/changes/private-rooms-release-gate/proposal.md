@@ -59,7 +59,8 @@ The change MUST NOT be applied until all of the following hold:
      (`private-rooms-server-hardening` decision 1; the server added none
      and the portal setting of prerequisite 8 is the availability control
      of this change);
-   - if the launch scope is B2B: recovery and offboarding as well.
+   - if the launch scope is B2B: recovery and offboarding as well; since
+     2026-11-16 the recovery is `private-rooms-admin-recovery`, archived.
 5. External penetration test performed on the crypto core and the private
    room flows, with the summary published (stashed task #69).
 6. Accessibility pass on the key dialogs and the private-room panels.
@@ -130,7 +131,8 @@ apply once that change is archived (prerequisite 1).
 
 1. Launch scope: individuals and SMB (prerequisite 4 without recovery and
    offboarding), or B2B (with them). The stashed V1 plan allowed the former,
-   with an explicit note in the release notes.
+   with an explicit note in the release notes. Decided by the owner on
+   2026-11-12: B2B, so recovery and offboarding are part of prerequisite 4.
 2. Whether frames and the SDK keep the host opt-in at general availability.
    `private-rooms-beta-release` keeps it for the beta.
 3. Default value of the portal setting on upgraded and new portals (product

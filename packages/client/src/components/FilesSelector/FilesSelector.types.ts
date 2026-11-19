@@ -126,6 +126,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	planPrivateTransfer: FilesActionStore["planPrivateTransfer"];
 	runPrivateTransferPlan: FilesActionStore["runPrivateTransferPlan"];
 	sourceInPrivateRoom?: boolean;
+	isPrivateRoomsSectionAvailable?: boolean;
 	privateRoomId?: number | string;
 	userId?: string;
 	clearActiveOperations: (

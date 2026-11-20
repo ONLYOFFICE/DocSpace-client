@@ -115,4 +115,14 @@ describe("The media viewer reports a file that is not shared yet as no access", 
     });
     expect(requireUnlock).toHaveBeenCalledWith("bob");
   });
+
+  it("Image not shared with the user yet shows its own message", () => {
+    const t = ((key: string) => key) as unknown as MediaViewerProps["t"];
+    render(<MediaViewer {...({ userId: "bob", t } as unknown as MediaViewerProps)} />);
+    const message = viewer.props?.getDecryptionErrorMessage as (e: Error) => string | null;
+
+    expect(message(new NoAccessError("bob"))).toBe("Common:EncryptedFileNoAccessYet");
+    // A damaged file has no message of its own: the viewer shows the general one with its name.
+    expect(message(new DecryptionError("tag mismatch"))).toBeNull();
+  });
 });

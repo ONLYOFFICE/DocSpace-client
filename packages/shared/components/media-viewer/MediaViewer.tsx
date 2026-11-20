@@ -42,6 +42,7 @@ import {
   getDocumentServiceLocation,
   getFileEncryptionAccess,
 } from "../../api/files";
+import { getSpecificEncryptionErrorMessage } from "../../services/encryption/error-i18n";
 import { NoAccessError } from "../../services/encryption/errors";
 import { decryptFile as decryptFileContent } from "../../services/encryption/file-keys";
 import { resolveDisplayTitle } from "../../services/encryption/filename-cache";
@@ -106,10 +107,17 @@ const MediaViewer = ({ userId, ...props }: MediaViewerProps) => {
     [userId],
   );
 
+  const { t } = props;
+  const getDecryptionErrorMessage = useCallback(
+    (error: Error) => getSpecificEncryptionErrorMessage(t, error),
+    [t],
+  );
+
   return (
     <KitMediaViewer
       {...props}
       decryptFile={decryptFile}
+      getDecryptionErrorMessage={getDecryptionErrorMessage}
       resolveTitle={resolveDisplayTitle}
       getPdfViewerScriptUrl={getPdfViewerScriptUrl}
     />

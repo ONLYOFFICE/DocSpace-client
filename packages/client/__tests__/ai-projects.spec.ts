@@ -561,19 +561,35 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agents-list, "Agent card" (every card of the list is as high)
-    test.fixme("draws the agent cards in rows that do not overlap", async ({
+    test("draws the agent cards in rows that do not overlap", async ({
       page,
       baseUrl,
     }) => {
-      // fixme: ui-kit's tile Grid sizes a row of agents 198px (182 + 16) while the client's agent card is 306px, so the second row covers the first one's Owner line; fix in docspace-ui-kit-react.
+      // ui-kit's tile Grid sizes the rows and the client the cards: a row
+      // lower than a card makes the next row cover the Owner line above it.
       await page.goto(`${baseUrl}${AGENTS_URL}`);
       await expect(tileOf(page, OUTSIDE_AGENT.title)).toBeVisible();
 
-      await expectScreenshot(page, [
-        "desktop",
-        "ai-projects",
-        "ai-agent-cards.png",
-      ]);
+      const boxes = await page
+        .locator("[data-testid^=tile_]")
+        .evaluateAll((tiles) =>
+          tiles.map((tile) => {
+            const { top, bottom } = tile.getBoundingClientRect();
+            return { top: Math.round(top), bottom: Math.round(bottom) };
+          }),
+        );
+      const rowTops = [...new Set(boxes.map((box) => box.top))].sort(
+        (a, b) => a - b,
+      );
+      expect(rowTops.length).toBeGreaterThan(1);
+      rowTops.slice(1).forEach((top, index) => {
+        const lowestAbove = Math.max(
+          ...boxes
+            .filter((box) => box.top === rowTops[index])
+            .map((box) => box.bottom),
+        );
+        expect(top).toBeGreaterThanOrEqual(lowestAbove);
+      });
     });
 
     // Spec: ai-agents-list, "Open chat from a card"

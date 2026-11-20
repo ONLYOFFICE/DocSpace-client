@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Page } from "@playwright/test";
+import type { FrameLocator, Page } from "@playwright/test";
 import type { SetupServer } from "@docspace/shared/__mocks__/e2e";
 import {
   privacyroomKeysHandlers,
@@ -103,18 +103,18 @@ export const test = base.extend<{
 });
 
 /** The SDK's own passphrase modal. */
-export const passphrasePrompt = (page: Page) =>
+export const passphrasePrompt = (page: Page | FrameLocator) =>
   page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
 
 /** Answers the passphrase modal with the fixture identity's passphrase. */
-export const unlock = async (page: Page) => {
+export const unlock = async (page: Page | FrameLocator) => {
   const prompt = passphrasePrompt(page);
   await expect(prompt).toBeVisible({ timeout: 15000 });
   await prompt
     .locator('input[name="passphrase"], #passphrase input')
     .first()
     .fill(FIXTURE_PASSPHRASE);
-  await prompt.getByRole("button", { name: "Confirm" }).click();
+  await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
   await expect(prompt).toBeHidden({ timeout: 15000 });
 };
 

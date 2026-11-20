@@ -41,7 +41,6 @@ import { useTranslation } from "react-i18next";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import { useEncryption } from "@docspace/shared/context/encryption";
-import { ConfirmationModal } from "@docspace/shared/dialogs/confirmation-modal";
 import { usePrivateRoomKeyGate } from "@docspace/shared/hooks/usePrivateRoomKeyGate";
 import { hasPrivateRoomSecureContext } from "@docspace/shared/services/private-room/create-room-gate";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -143,15 +142,6 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
 
   return (
     <>
-      <ConfirmationModal
-        visible={keyGate.keyConfirmVisible}
-        title={t("Common:PrivateRoomKeyRequiredTitle")}
-        message={t("Common:PrivateRoomKeyRequiredDescription")}
-        confirmLabel={t("Common:ContinueButton")}
-        onConfirm={keyGate.confirmKeyGeneration}
-        onCancel={() => keyGate.cancelKeyGeneration(isCreation)}
-        zIndex={410}
-      />
       {keyGate.keyGenerationModals}
       {canCreate ? (
         <CreateEditRoomDialog

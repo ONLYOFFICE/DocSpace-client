@@ -35,24 +35,32 @@
 
 export const PASSPHRASE_MIN_LENGTH = 12;
 
-export type PassphraseStrength = "weak" | "fair" | "good" | "strong";
+/** The rules of a new passphrase, in the shape the kit's password input takes. */
+// Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+export const PASSPHRASE_SETTINGS = {
+  minLength: PASSPHRASE_MIN_LENGTH,
+  upperCase: false,
+  digits: false,
+  specSymbols: false,
+  digitsRegexStr: "(?=.*\\d)",
+  upperCaseRegexStr: "(?=.*[A-Z])",
+  specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+} as const;
 
-/**
- * Discriminated union of suggestion kinds. UI maps each to a localized
- * message; producers (`checkPassphraseStrength`) never emit raw English.
- */
-export type PassphraseSuggestion =
-  | { kind: "min-length"; value: number }
-  | { kind: "lowercase" }
-  | { kind: "uppercase" }
-  | { kind: "digits" }
-  | { kind: "special" }
-  | { kind: "common-pattern" };
+/** What the generator draws a passphrase by. */
+// Spec: private-rooms/key-management, "A generated passphrase fills both fields"
+export const PASSPHRASE_GENERATOR_SETTINGS = {
+  ...PASSPHRASE_SETTINGS,
+  upperCase: true,
+  digits: true,
+  specSymbols: true,
+} as const;
+
+export type PassphraseStrength = "weak" | "fair" | "good" | "strong";
 
 export type PassphraseStrengthResult = {
   strength: PassphraseStrength;
   score: number;
-  suggestions: PassphraseSuggestion[];
   containsCommonPattern: boolean;
 };
 
@@ -129,36 +137,29 @@ export function containsCommonPattern(passphrase: string): boolean {
   return false;
 }
 
+// Spec: private-rooms/key-management, "The strength grade counts letters of every script"
+const LOWERCASE_OR_CASELESS_LETTER = /[\p{Ll}\p{Lo}\p{Lm}]/u;
+const UPPERCASE_LETTER = /[\p{Lu}\p{Lt}]/u;
+const DECIMAL_DIGIT = /\p{Nd}/u;
+const PUNCTUATION_OR_SYMBOL = /[\p{P}\p{S}]/u;
+
 export function checkPassphraseStrength(
   passphrase: string,
   minLength: number = PASSPHRASE_MIN_LENGTH,
 ): PassphraseStrengthResult {
-  const suggestions: PassphraseSuggestion[] = [];
   let score = 0;
 
   if (passphrase.length >= minLength) score += 25;
-  else suggestions.push({ kind: "min-length", value: minLength });
-
   if (passphrase.length >= minLength + 4) score += 10;
   if (passphrase.length >= minLength + 8) score += 10;
 
-  if (/[a-z]/.test(passphrase)) score += 15;
-  else suggestions.push({ kind: "lowercase" });
-
-  if (/[A-Z]/.test(passphrase)) score += 15;
-  else suggestions.push({ kind: "uppercase" });
-
-  if (/\d/.test(passphrase)) score += 15;
-  else suggestions.push({ kind: "digits" });
-
-  if (/[!@#$%^&*()_+\-=[\]{}|;:'",.<>?/`~]/.test(passphrase)) score += 10;
-  else suggestions.push({ kind: "special" });
+  if (LOWERCASE_OR_CASELESS_LETTER.test(passphrase)) score += 15;
+  if (UPPERCASE_LETTER.test(passphrase)) score += 15;
+  if (DECIMAL_DIGIT.test(passphrase)) score += 15;
+  if (PUNCTUATION_OR_SYMBOL.test(passphrase)) score += 10;
 
   const matchesPattern = containsCommonPattern(passphrase);
-  if (matchesPattern) {
-    score = Math.min(score, 25);
-    suggestions.push({ kind: "common-pattern" });
-  }
+  if (matchesPattern) score = Math.min(score, 25);
 
   const belowMinLength = passphrase.length < minLength;
 
@@ -172,16 +173,24 @@ export function checkPassphraseStrength(
   return {
     strength,
     score: Math.min(score, 100),
-    suggestions,
     containsCommonPattern: matchesPattern,
   };
 }
 
-export function isPassphraseAcceptable(
+/**
+ * Whether a new passphrase meets the length and the common-pattern rule; the
+ * kit's password input checks the length with PASSPHRASE_SETTINGS.
+ */
+export function meetsPassphraseRules(passphrase: string): boolean {
+  if (passphrase.trim().length < PASSPHRASE_SETTINGS.minLength) return false;
+  return !containsCommonPattern(passphrase);
+}
+
+// Spec: private-rooms/key-management, "The strength grade does not contradict the passphrase rules"
+export function getShownPassphraseStrength(
   passphrase: string,
-  minLength: number = PASSPHRASE_MIN_LENGTH,
-): boolean {
-  if (passphrase.length < minLength) return false;
-  const result = checkPassphraseStrength(passphrase, minLength);
-  return result.strength !== "weak";
+): PassphraseStrength {
+  if (!meetsPassphraseRules(passphrase)) return "weak";
+  const { strength } = checkPassphraseStrength(passphrase);
+  return strength === "weak" ? "fair" : strength;
 }

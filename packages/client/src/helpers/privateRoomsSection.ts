@@ -120,6 +120,19 @@ export const isPrivateRoomsListRoot = (
   getCategoryType(location) === CategoryType.PrivateRooms && !!isRoomsFolder;
 
 /**
+ * A root of the section is shown: the Private list or its Archive, not a room
+ * or a folder inside one.
+ */
+export const isPrivateRoomsSectionRoot = (
+  location: { pathname: string },
+  isRoomsFolder: boolean | undefined,
+  isArchiveFolder: boolean | undefined,
+) =>
+  isPrivateRoomsListRoot(location, isRoomsFolder) ||
+  (getCategoryType(location) === CategoryType.PrivateArchive &&
+    !!isArchiveFolder);
+
+/**
  * Keys management is offered while the section is, and to every key holder,
  * but never to a guest.
  */

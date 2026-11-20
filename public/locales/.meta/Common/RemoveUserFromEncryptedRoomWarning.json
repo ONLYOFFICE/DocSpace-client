@@ -3,7 +3,7 @@
   "content": "Remove this user from the encrypted room? Their wrapped key will be removed from every existing file, so they can no longer download new copies. However, anything they already decrypted on their device may still be accessible to them.",
   "content_en_sha1_hash": "f8d92f6917c1b6919ee1c29b04c824ea545e930e",
   "created_at": "2026-11-11T18:49:47.317Z",
-  "updated_at": "2026-11-11T18:51:02.244Z",
+  "updated_at": "2026-11-17T13:13:27.068Z",
   "comment": {
     "text": "Body of the confirmation dialog shown before a member is removed from a private room. A question followed by two sentences that explain what the removal does and does not revoke. Wrapped key is the file key encrypted for that member.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveUserConfirmationDialog/index.tsx",
-      "line_number": 98,
+      "line_number": 117,
       "context": ">\n <ModalDialog.Header>{t(\"People:RemoveUser\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {isEncryptedRoom\n ? t(\"Common:RemoveUserFromEncryptedRoomWarning\")\n : t(\"People:RemoveUserConfirmationText\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     },
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/dialogs/RemoveUserConfirmationDialog.tsx",
-      "line_number": 87,
-      "context": "return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={handleClose}>\n <ModalDialog.Header>{t(\"Common:RoomMembersRemoveUser\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"Common:RemoveUserFromEncryptedRoomWarning\", { displayName })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"",
+      "line_number": 92,
+      "context": "aria-label={t(\"Common:RoomMembersRemoveUser\")}\n >\n <ModalDialog.Header>{t(\"Common:RoomMembersRemoveUser\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"Common:RemoveUserFromEncryptedRoomWarning\", { displayName })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"",
       "module": "/packages/sdk"
     }
   ],

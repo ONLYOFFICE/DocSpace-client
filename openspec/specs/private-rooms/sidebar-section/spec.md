@@ -401,14 +401,14 @@ The system SHALL redirect `/e2e-rooms` to `/private/filter`, and `/e2e-rooms?sec
 - **THEN** the address is replaced with `/private/archived/filter`
 
 ### Requirement: Live updates skip rooms the user cannot read
-The system SHALL read a room or folder that arrives through a live update without the forbidden handling, and SHALL drop the update silently when the read is refused or fails. The server sends the events of every room in Rooms to all portal administrators, including private rooms they are not members of, so a refused read is an expected outcome, not an error the user caused.
+The system SHALL read a room or folder that arrives through a live update without the forbidden handling, and SHALL drop the update silently when the read is refused or fails. A refused read is an expected outcome, not an error the user caused.
 
-#### Scenario: Administrator outside a new private room
-- **WHEN** a portal administrator has the Rooms list open and another user creates a private room the administrator is not a member of
+#### Scenario: Update of a room the user cannot read
+- **WHEN** a live update names a new room whose read is refused while the user has the Rooms list open
 - **THEN** no Access denied message is shown, the rights of the open list are not refreshed, and the room is not inserted
 
-#### Scenario: Private room updated
-- **WHEN** a private room the administrator is not a member of is renamed while the administrator has the Rooms list open
+#### Scenario: Unreadable room renamed
+- **WHEN** a live update reports the rename of a room whose read is refused while the user has the Rooms list open
 - **THEN** no Access denied message is shown and the list is unchanged
 
 ### Requirement: Private item carries the Beta badge
@@ -446,11 +446,11 @@ The system SHALL make the Private section available while the E2E rooms app is o
 - **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
 
 ### Requirement: Private addresses open in Rooms while the section is not available
-The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
+The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
 
 #### Scenario: Link opened while the section is not available
 - **WHEN** a member of a private room opens `/private/{roomId}/filter` on a standalone portal where the E2E rooms app is off
-- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the room opens in the Rooms section
+- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter`
 
 ### Requirement: Apps catalog titles the E2E rooms app Private
 The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.
@@ -509,3 +509,56 @@ The system SHALL label the create button of the Private list, its header action 
 #### Scenario: Create button in the Rooms list
 - **WHEN** a room admin opens the Rooms list
 - **THEN** the create button reads Common:NewRoom
+
+### Requirement: Dashboard shows a card of private rooms
+The system SHALL show among the apps of the dashboard a card of private rooms to every user who is shown the sidebar item of the section. The card SHALL carry the icon of that item, the title Common:Private and the description Common:DashboardE2eRoomsDescription, and SHALL stand after the Forms card and before the AI Workspace card. The card SHALL offer no onboarding tour.
+
+#### Scenario: Section available
+- **WHEN** a user who sees the Private item in the sidebar opens the dashboard
+- **THEN** the apps show a card titled Common:Private with Common:DashboardE2eRoomsDescription, after Forms
+
+#### Scenario: Section not available
+- **WHEN** the section is not available to the user
+- **THEN** the dashboard shows no card of private rooms
+
+#### Scenario: App switched off on a standalone portal
+- **WHEN** an administrator of a standalone portal opens the dashboard while the E2E rooms app is off
+- **THEN** the card is shown as disabled and its button, Common:GoToSettings, leads to the apps settings
+- **AND** a user who cannot switch apps on is shown no card
+
+### Requirement: Dashboard card of private rooms creates or opens
+The button of the card SHALL read Common:CreatePrivateRoom for a user who may create rooms, open the Private list and start the creation of a private room there as the create button of the section does. For a user without that right it SHALL read Common:Open and open the Private list. The dashboard SHALL NOT open the create-room dialog itself.
+
+#### Scenario: Room admin
+- **WHEN** a room admin presses Common:CreatePrivateRoom on the card
+- **THEN** the Private list opens and the creation of a private room starts there, on the Private type with the type locked
+
+#### Scenario: Room admin without a key
+- **WHEN** a room admin who holds no encryption key presses Common:CreatePrivateRoom on the card
+- **THEN** the Private list opens and the key setup dialog is shown, as it is for the create button of the section
+
+#### Scenario: User who cannot create rooms
+- **WHEN** a user of type User opens the dashboard
+- **THEN** the button of the card reads Common:Open and opens the Private list
+
+### Requirement: Dashboard card of private rooms carries the Beta badge
+The system SHALL show the Beta badge beside the title of the card, the same badge as on the sidebar item of the section.
+
+#### Scenario: Card with the badge
+- **WHEN** the card of private rooms is shown
+- **THEN** the Beta badge stands beside its title
+
+### Requirement: Private list says that its files are encrypted
+The system SHALL show in the header of the Private list the line Common:PrivateRoomsSectionNote with an encryption mark. The line SHALL speak about the files, not about everything in the section: the names of rooms and their members are not encrypted. The line SHALL NOT be shown in the header of a room or of a folder inside one.
+
+#### Scenario: Private list
+- **WHEN** the user opens the Private list or its Archive
+- **THEN** the header shows Common:PrivateRoomsSectionNote
+
+#### Scenario: Inside a room
+- **WHEN** the user opens a private room
+- **THEN** the header shows no such line
+
+#### Scenario: Narrow window
+- **WHEN** the header has no room for the whole line
+- **THEN** the line is cut with an ellipsis or dropped, and the title and the header actions stay whole

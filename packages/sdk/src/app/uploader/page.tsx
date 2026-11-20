@@ -35,8 +35,10 @@
 
 import { headers } from "next/headers";
 
-import { getFilesSettings } from "@/api/files";
+import { getFilesSettings, getFolderPath } from "@/api/files";
+import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
 import { OAUTH_FRAME_HEADER } from "@/utils/constants";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 import { logger } from "../../../logger.mjs";
 
 import UploaderClient from "./page.client";
@@ -77,6 +79,14 @@ export default async function Page({
         baseConfig={baseConfig}
       />
     );
+  }
+
+  // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
+  if (
+    baseConfig.targetId &&
+    (await getPrivateRoomAddress({ id: baseConfig.targetId }, {}, getFolderPath))
+  ) {
+    return <PrivateTargetNotAvailable />;
   }
 
   const filesSettings = (await getFilesSettings()) as UploaderFilesSettings;

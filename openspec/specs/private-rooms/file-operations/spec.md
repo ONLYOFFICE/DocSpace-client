@@ -342,30 +342,30 @@ The system SHALL offer Duplicate in the context menu of an encrypted file of an 
 - **THEN** no Duplicate entry is shown
 
 ### Requirement: Download decrypts on the client
-The system SHALL download an encrypted file by fetching the ciphertext, decrypting it in the browser with the unlocked identity and saving it under its original name, reporting progress and surfacing a localized error on failure.
+The system SHALL download an encrypted file by fetching the ciphertext, decrypting it in the browser with the unlocked identity and saving it under its original name made plain as "Saved names are plain file names" describes, reporting progress and surfacing a localized error on failure.
 
 #### Scenario: Single file download
 - **WHEN** the user downloads one encrypted file and the identity is unlocked
-- **THEN** the browser saves the plaintext file with its original name
+- **THEN** the browser saves the plaintext file with its original name, made plain by the rule of "Saved names are plain file names"
 
 #### Scenario: Unlock declined
 - **WHEN** the user dismisses the passphrase prompt during download
 - **THEN** nothing is downloaded
 
 #### Scenario: No own access entry
-- **WHEN** the user downloads one encrypted file for which they hold no access entry
-- **THEN** nothing is downloaded and Common:EncryptionDownloadFailed is shown
+- **WHEN** a user who holds a key downloads one encrypted file for which they hold no access entry
+- **THEN** nothing is downloaded, no passphrase prompt is raised, and Common:EncryptedFileNoAccessYet is shown, not Common:EncryptionDownloadFailed
 
 #### Scenario: Download from the media viewer
 - **WHEN** the user downloads an encrypted file from the media viewer with its download button or Ctrl+S, and the identity is unlocked
-- **THEN** the browser saves the plaintext file under its original name, and the ciphertext MUST NOT be handed to the browser as the download
+- **THEN** the browser saves the plaintext file under its original name, made plain by the same rule, and the ciphertext MUST NOT be handed to the browser as the download
 
 #### Scenario: Download from the media viewer of a file that cannot be found
 - **WHEN** the user downloads an encrypted file from the media viewer, and the file is neither in the current folder list nor the file the viewer was opened for
 - **THEN** Common:EncryptionDownloadFailed is shown, nothing is downloaded, and the ciphertext MUST NOT be handed to the browser as the download
 
 ### Requirement: Multiple encrypted files download as a decrypted zip
-The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, a decrypted name that clashes with another taking the lowest numbered suffix no other entry has. A selected folder that lies in a private room SHALL be included as its decrypted subtree under the folder's name, and no server archive SHALL be requested for it. Non-encrypted files and folders outside private rooms of the same selection download through the standard path.
+The system SHALL decrypt each selected encrypted file and deliver them together as Files.zip, entries named and kept apart as "Archive directories come from the folder tree" describes. A selected folder that lies in a private room SHALL be included as its decrypted subtree under the folder's name, and no server archive SHALL be requested for it. Non-encrypted files and folders outside private rooms of the same selection download through the standard path.
 
 #### Scenario: Several encrypted files selected
 - **WHEN** the user downloads a selection of encrypted files
@@ -374,6 +374,10 @@ The system SHALL decrypt each selected encrypted file and deliver them together 
 #### Scenario: Decrypted names clash
 - **WHEN** two selected files decrypt to the same name and a third already carries that name with the suffix (1)
 - **THEN** the zip holds all three, the clashing one under the suffix (2)
+
+#### Scenario: Names that differ only in case
+- **WHEN** two selected files decrypt to "Budget.xlsx" and "budget.xlsx"
+- **THEN** the zip holds "Budget.xlsx" and "budget (1).xlsx"
 
 #### Scenario: Files and folders selected
 - **WHEN** an encrypted file and a folder of the same private room are selected and "Download" is picked in the header menu
@@ -399,7 +403,7 @@ The system SHALL offer "Download without decryption" for encrypted files and for
 - **THEN** the entry reads "Download encrypted copy"
 
 ### Requirement: Decrypted folder download
-The system SHALL offer "Download" for a folder inside a private room and for the room itself, from its context menu or with the folder selected alone in the header menu; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, a name that clashes inside its folder taking the lowest numbered suffix no other entry has, with the same progress and error reporting as the multi-file decrypted download.
+The system SHALL offer "Download" for a folder inside a private room and for the room itself, from its context menu or with the folder selected alone in the header menu; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, named and kept apart as "Archive directories come from the folder tree" describes, with the same progress and error reporting as the multi-file decrypted download.
 
 #### Scenario: Folder context menu
 - **WHEN** the context menu of a folder in a private room is opened
@@ -408,6 +412,10 @@ The system SHALL offer "Download" for a folder inside a private room and for the
 #### Scenario: Folder download
 - **WHEN** the user picks "Download" on a folder containing encrypted files
 - **THEN** a zip with the decrypted files under their original names is saved and progress is shown
+
+#### Scenario: Names that differ only in case inside a folder
+- **WHEN** the user picks "Download" on a folder holding two files that decrypt to "Budget.xlsx" and "budget.xlsx"
+- **THEN** the zip holds "Budget.xlsx" and "budget (1).xlsx" in that folder's directory
 
 #### Scenario: A file cannot be decrypted
 - **WHEN** one file in the subtree has no access entry for the user
@@ -452,11 +460,19 @@ The system SHALL NOT offer version history, finalize version, version list, vers
 - **THEN** the comment carries the Common:EditButton or Common:AddButton control
 
 ### Requirement: Favorites, conversion and download-as withheld
-The system SHALL NOT offer mark-as-favorite, convert or download-as for an encrypted file, nor favorites for a folder in a private room.
+The system SHALL NOT offer mark-as-favorite, convert or download-as for an encrypted file, nor favorites for a folder in a private room. The convert badge SHALL NOT be shown for an encrypted file and SHALL NOT open the conversion dialog, whatever conversion rights the server reports for it.
 
 #### Scenario: Encrypted file
 - **WHEN** the context menu of an encrypted file is opened
 - **THEN** mark-as-favorite, convert and download-as are absent
+
+#### Scenario: Convert badge of an encrypted file
+- **WHEN** an encrypted file whose format must be converted is listed in a list, table or tile view, and the server reports the Convert right on it
+- **THEN** no convert badge is shown, and the conversion dialog cannot be opened for it
+
+#### Scenario: Convert badge of a file that is not encrypted
+- **WHEN** a file that is not encrypted and must be converted is listed, and the server reports the Convert right on it
+- **THEN** the convert badge is shown and opens the conversion dialog
 
 ### Requirement: Files that need conversion cannot be opened
 The system SHALL NOT open an encrypted file whose format requires server conversion and SHALL show Common:PrivateRoomConvertNotSupported instead; view, preview and edit entries SHALL be absent for it.
@@ -466,11 +482,15 @@ The system SHALL NOT open an encrypted file whose format requires server convers
 - **THEN** Common:PrivateRoomConvertNotSupported is shown and nothing opens
 
 ### Requirement: Media preview decrypts on the client
-The system SHALL fetch and decrypt an encrypted image, audio or video in the browser before showing it in the media viewer, SHALL close the viewer when the user dismisses the passphrase prompt, and SHALL report decryption failures with a localized message.
+The system SHALL fetch and decrypt an encrypted image, audio or video in the browser before showing it in the media viewer, SHALL close the viewer when the user dismisses the passphrase prompt, and SHALL report decryption failures with a localized message. An encrypted TIFF (.tif, .tiff) or HEIC (.heic, .heif) image SHALL be decoded in the browser after decryption and shown as an unencrypted one of that format is.
 
 #### Scenario: Open encrypted image
 - **WHEN** the user opens an encrypted image with the identity unlocked
 - **THEN** the decrypted image is displayed and the viewer never requests a server-rendered preview
+
+#### Scenario: Open encrypted TIFF or HEIC image
+- **WHEN** the user opens an encrypted TIFF or HEIC image with the identity unlocked
+- **THEN** the decrypted image is decoded in the browser and displayed, the viewer never requests a server-rendered preview, and the decrypted content MUST NOT be sent to the server for decoding
 
 #### Scenario: Passphrase prompt dismissed
 - **WHEN** the viewer needs the identity and the user cancels the prompt
@@ -691,7 +711,7 @@ The system SHALL offer the standard "Download" for a folder inside an archived p
 - **THEN** download and download-encrypted are present, and sharing-settings, copy-shared-link, manage-links, link-for-room-members, mark-as-favorite, copy-to and duplicate are absent
 
 ### Requirement: Copy hotkey withheld in an archived private room
-The system SHALL NOT put any item of an archived private room on the clipboard with Ctrl+C, although the server grants the copy right there. Copying out of such a room goes through the Copy dialog or drag-and-drop, where files are decrypted.
+The system SHALL NOT put any item of an archived private room on the clipboard with Ctrl+C. Copying out of such a room goes through the Copy dialog or drag-and-drop, where files are decrypted.
 
 #### Scenario: Ctrl+C on encrypted files
 - **WHEN** a member selects encrypted files in an archived private room and presses Ctrl+C
@@ -881,11 +901,19 @@ The system SHALL read the user's key list again when a download, a copy or move,
 - **THEN** the action is refused as for a user without a key
 
 ### Requirement: A file without a wrap for the user is reported as no access
-The system SHALL report a file whose access entries hold no wrap for a user who has a key with Common:EncryptedFileNoAccessYet, and SHALL NOT advise that user to set up encryption keys.
+The system SHALL report a file whose access entries hold no wrap for a user who has a key with Common:EncryptedFileNoAccessYet when the user downloads, copies, moves or opens that file alone, and SHALL name it in the report of the batch when it is one of several files of a copy, move or decrypted archive. For a download, copy or move of that file alone it SHALL do so before it asks for the passphrase. It SHALL NOT advise that user to set up encryption keys.
 
 #### Scenario: Key holder without a wrap
-- **WHEN** a user who holds a key downloads, copies or opens an encrypted file that is not wrapped for them
-- **THEN** the message is Common:EncryptedFileNoAccessYet, not Common:NoAccessToEncryptedFile
+- **WHEN** a user who holds a key downloads, copies, moves out or opens an encrypted file that is not wrapped for them, and that file is the only one of the action
+- **THEN** the message is Common:EncryptedFileNoAccessYet, not Common:NoAccessToEncryptedFile, Common:EncryptionDownloadFailed or Common:EncryptedCopyFailed
+
+#### Scenario: Copy of one file without a wrap while the key is locked
+- **WHEN** a user who holds a key and whose key is locked copies or moves out of a private room one encrypted file that is not wrapped for them
+- **THEN** Common:EncryptedFileNoAccessYet is shown, no passphrase prompt is raised, and nothing is uploaded or deleted
+
+#### Scenario: One file of several without a wrap
+- **WHEN** a user who holds a key copies two encrypted files out of a private room and one of them is not wrapped for them
+- **THEN** the other file is copied and Common:EncryptedCopyFailed names the file that is not wrapped for them
 
 #### Scenario: User without a key
 - **WHEN** a user whose key list is known to hold no key lists a private room
@@ -983,3 +1011,153 @@ The system SHALL label the two entries of the Download submenu of the client's c
 #### Scenario: File outside private rooms
 - **WHEN** the Download submenu of a file outside private rooms is opened
 - **THEN** its plain download reads Common:OriginalFormat as before
+
+### Requirement: The media viewer reports a file that is not shared yet as no access
+The system SHALL show Common:EncryptedFileNoAccessYet in the media viewer when the opened encrypted file holds no wrap for a user who has a key, before it asks for the passphrase or fetches the file, and SHALL keep Common:EncryptionDecryptPartialFailed for a file that is wrapped for the user and still does not decrypt.
+
+#### Scenario: Image not shared with the user yet
+- **WHEN** a user who holds a key opens in the media viewer an encrypted image that is not wrapped for them
+- **THEN** the viewer shows Common:EncryptedFileNoAccessYet
+
+#### Scenario: Not shared yet while the key is locked
+- **WHEN** a user whose key is locked opens in the media viewer an encrypted image that is not wrapped for them
+- **THEN** the viewer shows Common:EncryptedFileNoAccessYet, no passphrase prompt is raised and the file content is not fetched
+
+#### Scenario: File wrapped but damaged
+- **WHEN** the file is wrapped for the user and its decryption fails
+- **THEN** the viewer shows Common:EncryptionDecryptPartialFailed with the name of the file
+
+#### Scenario: Next file in the viewer
+- **WHEN** the user moves from a file that is not shared yet to one that is
+- **THEN** the second file is shown and the message of the first is gone
+
+### Requirement: Saved names are plain file names
+The system SHALL make every name a decrypted download hands to the file system, the suggested name of a saved file, each archive entry and the archive's own name, a plain file name: NFC, no control or text-direction characters, each of `/ \ : * ? " < > |` replaced by `_`, no leading or trailing spaces, no trailing dots, a reserved device name prefixed with `_`, at most 255 bytes in UTF-8 with the extension kept. When nothing is left, the next known name is used, ending with the file's id.
+
+#### Scenario: Ordinary name
+- **WHEN** an encrypted file whose decrypted name is "Report 2026.docx" is downloaded
+- **THEN** the browser is asked to save it as "Report 2026.docx"
+
+#### Scenario: Name with separators
+- **WHEN** a decrypted name holds "/" or "\" between its parts, at its start or at its end
+- **THEN** each separator is saved as "_" and the name stays one segment, with no directory created
+
+#### Scenario: Name with a parent reference
+- **WHEN** a decrypted name is made of ".." followed by a separator and a further name
+- **THEN** it is saved as one segment that starts with ".._", and no entry or save name refers to a directory above it
+
+#### Scenario: Name with a drive prefix
+- **WHEN** a decrypted name starts with a drive letter and a colon
+- **THEN** the colon is saved as "_" and the name names no drive
+
+#### Scenario: Name with characters file systems reject
+- **WHEN** a decrypted name holds any of `: * ? " < > |`
+- **THEN** each of them is saved as "_"
+
+#### Scenario: Name with control characters
+- **WHEN** a decrypted name holds control characters or text-direction characters
+- **THEN** they are left out of the saved name and the other characters keep their order
+
+#### Scenario: Name with trailing dots or spaces
+- **WHEN** a decrypted name ends with dots or spaces, or starts with spaces
+- **THEN** those spaces and the trailing dots are left out of the saved name
+
+#### Scenario: Reserved device name
+- **WHEN** the part of a decrypted name before its first dot is CON, PRN, AUX, NUL, or COM or LPT followed by one of the digits 1 to 9 or the superscript digits ¹, ² and ³, in any letter case
+- **THEN** the saved name is the same name with "_" in front of it
+
+#### Scenario: Overlong name
+- **WHEN** a decrypted name takes more than 255 bytes in UTF-8
+- **THEN** the saved name is shortened before its extension to at most 255 bytes, without splitting a character, and keeps the extension
+
+#### Scenario: Nothing left of the name
+- **WHEN** a decrypted name is empty, or is made only of dots, spaces or characters that are left out
+- **THEN** the file is saved under the title the server stores for it, made plain by the same rule, and under its id when nothing is left of that either
+
+#### Scenario: Name shown in the list
+- **WHEN** a file whose saved name differs from its decrypted name is shown in the list, a picker or a feed
+- **THEN** the list keeps showing the decrypted name
+
+### Requirement: Archive directories come from the folder tree
+The system SHALL build the directories of a decrypted archive only from the folders it walked, one directory per folder named by the rule of "Saved names are plain file names" with the folder's id when nothing is left; a file name SHALL NOT add a directory. Inside one directory, files and folders SHALL share one set of names compared without regard to letter case; a later clash takes the lowest free numbered suffix.
+
+#### Scenario: File name with a separator inside a folder archive
+- **WHEN** a folder of a private room is downloaded and one of its files has a decrypted name with separators
+- **THEN** that file is one entry directly in the directory of its folder, and the archive holds no other directory than those of the walked folders
+
+#### Scenario: Folder title with a separator
+- **WHEN** a folder whose title holds a separator is downloaded inside its parent folder
+- **THEN** its files are in one directory whose name is the title with the separator saved as "_"
+
+#### Scenario: Sibling folders that differ only in case
+- **WHEN** a folder holds two subfolders titled "Plans" and "plans"
+- **THEN** the archive holds the directories "Plans" and "plans (1)", each with the files of its own folder
+
+#### Scenario: File and folder of the same name
+- **WHEN** a folder holds a subfolder titled "Notes" and a file whose decrypted name is "notes"
+- **THEN** the subfolder and the file are saved under different names in that directory
+
+#### Scenario: Archive named after a folder
+- **WHEN** a folder whose title holds a separator is downloaded as an archive of its own
+- **THEN** the archive is saved under the title made plain by the same rule, followed by ".zip"
+
+### Requirement: Frame methods create nothing in a private room without the opt-in
+The client running in an embedding frame SHALL refuse the `createFile` frame method for a private room or a folder inside one, and the `createFolder` method there unless the frame configuration carries the private-rooms opt-in. It SHALL decide from the room on the folder's path before any request about the new item, answer the host with an error and leave the list as it is.
+
+#### Scenario: File created into a private room through a frame method
+- **WHEN** the host calls `createFile` with a private room or a folder inside one, whether or not the frame carries the opt-in
+- **THEN** the host receives an error, no request carries the title of the file, and no file is created
+
+#### Scenario: Folder created into a private room without the opt-in
+- **WHEN** the host of a frame without the private-rooms opt-in calls `createFolder` with a private room or a folder inside one
+- **THEN** the host receives an error, no request carries the title of the folder, and no folder is created
+
+#### Scenario: Folder created into a private room with the opt-in
+- **WHEN** the host of a frame with the private-rooms opt-in calls `createFolder` with a private room or a folder inside one
+- **THEN** the folder is created and returned to the host, as in a room without the private setting
+
+#### Scenario: Folder outside private rooms
+- **WHEN** the host calls `createFile` or `createFolder` with a folder outside private rooms
+- **THEN** the item is created and returned to the host as before
+
+### Requirement: The media viewer menu of an encrypted file withholds link and download-as entries
+The media viewer SHALL NOT offer download-as or the room-member link entry (link-for-room-members, labelled Common:CopyLink) in the menu of an encrypted file, whatever rights the server reports for it. Download and download without decryption follow "Download decrypts on the client".
+
+#### Scenario: Media viewer menu of an encrypted PDF
+- **WHEN** the media viewer shows an encrypted PDF and the server reports the Download right on it
+- **THEN** its menu has no download-as entry and no Common:CopyLink entry
+
+#### Scenario: Media viewer menu of a PDF that is not encrypted
+- **WHEN** the media viewer shows a PDF that is not encrypted and the server reports the Download right on it
+- **THEN** its menu offers download-as and Common:CopyLink
+
+### Requirement: A move by drag and drop inside a private room stays a move
+The system SHALL move files and folders that the user drags onto a folder of the same private room through the server, without decryption and without the decryption confirmation, wherever that folder's row comes from: the first page of the list, a page loaded by scrolling, or a list update.
+
+#### Scenario: Drop on a folder row loaded by scrolling
+- **WHEN** the user drags encrypted files of a private room onto a folder row of the same folder that was loaded by scrolling to a later page, holding the Move right on them
+- **THEN** the server moves them into that folder, they keep their ids, and no Common:EncryptedTransferBannerTitle confirmation is shown
+- **AND** nothing MUST be decrypted, uploaded or copied
+
+#### Scenario: Drop on a folder row of the first page
+- **WHEN** the user drags encrypted files of a private room onto a folder row of the first page of the same folder
+- **THEN** the server moves them into that folder and no confirmation is shown
+
+#### Scenario: Drop on a folder outside private rooms
+- **WHEN** the user drags encrypted files of a private room onto a folder outside private rooms
+- **THEN** the Common:EncryptedTransferBannerTitle confirmation is shown first, as "Files leaving a private room are decrypted" describes
+
+### Requirement: A declined unlock on a copy or move says nothing was transferred
+The system SHALL show Common:EncryptionLockedCopy, and SHALL NOT show Common:EncryptionLockedAddMembers, when the user declines to unlock as an encrypted copy, move or duplicate starts: out of a private room, into another private room or inside the same room. Nothing SHALL be transferred and no source SHALL be deleted.
+
+#### Scenario: Unlock declined on a copy out of a private room
+- **WHEN** the user copies an encrypted file to My documents and dismisses the passphrase prompt
+- **THEN** Common:EncryptionLockedCopy is shown, no file is copied, and Common:EncryptionLockedAddMembers is not shown
+
+#### Scenario: Unlock declined on a move out of a private room
+- **WHEN** the user moves encrypted files out of a private room, confirms the decryption warning and dismisses the passphrase prompt
+- **THEN** Common:EncryptionLockedCopy is shown and every source stays in the room
+
+#### Scenario: Unlock declined on a duplicate
+- **WHEN** the user duplicates an encrypted file and dismisses the passphrase prompt
+- **THEN** Common:EncryptionLockedCopy is shown and no copy is stored

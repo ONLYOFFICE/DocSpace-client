@@ -1,0 +1,29 @@
+{
+  "key_path": "KeyFingerprintHint",
+  "content": "Colleagues may ask you for this fingerprint to confirm that your key has changed.",
+  "content_en_sha1_hash": "ac16e0ba874c1ca06f3dffa3e831d9fc8e84a221",
+  "created_at": "2026-11-17T09:19:18.410Z",
+  "updated_at": "2026-11-19T16:14:54.118Z",
+  "comment": {
+    "text": "Short hint under the key fingerprint in the key card of the Keys management page of the profile; explains why the fingerprint is shown: a colleague in a private room may ask the user for it to confirm that the user's encryption key was really changed by them. Addressed to the user (you, your key).",
+    "is_auto": true,
+    "updated_at": "2026-11-17T09:20:03.489Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
+      "line_number": 250,
+      "context": "<Text\n id={fingerprintHintId}\n fontSize=\"12px\"\n className={styles.fingerprintHint}\n >\n {t(\"Common:KeyFingerprintHint\")}\n </Text>\n </div>\n <div className={styles.detailsToggleRow}>\n <Link\n type={LinkType.action}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

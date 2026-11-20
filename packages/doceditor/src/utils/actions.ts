@@ -811,6 +811,44 @@ async function encryptedEditingRefusal(fileId: string, share?: string) {
     : undefined;
 }
 
+/** How many earlier versions the lookup below reads at most. */
+const STABLE_VERSION_LOOKUP_LIMIT = 30;
+
+/**
+ * Temporary, until the server sends the address itself
+ * (`private-rooms-editor-contract` 6.2, removed by its task 6.9).
+ * Spec: editor-integration, "Saved encrypted file reopens without replaying its changes"
+ */
+async function alignDocumentAddress(config: IInitialConfig, share?: string) {
+  const current = Number(config.file.version);
+  if (
+    !config.file.encrypted ||
+    config.editorConfig.mode !== "edit" ||
+    !(current > 1)
+  )
+    return;
+
+  const read = async (version: number) => {
+    const params = new URLSearchParams({ version: `${version}`, view: "true" });
+    if (share) params.append("share", share);
+    const answer = await openEdit(config.file.id, params.toString(), share);
+    return "editorConfig" in answer ? answer.document : undefined;
+  };
+
+  const own = await read(current);
+  if (!own || own.key === config.document.key) return;
+
+  const oldest = Math.max(1, current - STABLE_VERSION_LOOKUP_LIMIT);
+  for (let version = current - 1; version >= oldest; version -= 1) {
+    const past = await read(version);
+    if (!past) return;
+    if (past.key === config.document.key) {
+      config.document.url = past.url;
+      return;
+    }
+  }
+}
+
 export async function getData(
   fileId: string,
   version?: string,
@@ -841,6 +879,7 @@ export async function getData(
 
     if ("editorConfig" in config && typeof settings !== "string") {
       const newFileId = config.file.id.toString();
+      if (!view && !version) await alignDocumentAddress(config, share);
       // Spec: editor-integration, "Document Server capability check before opening"
       const docServiceEncryptionSupported = config.file.encrypted
         ? isEncryptedEditingAvailable(await getFilesSettings(share))

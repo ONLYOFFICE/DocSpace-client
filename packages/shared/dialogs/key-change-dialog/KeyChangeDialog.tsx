@@ -45,20 +45,13 @@ import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 
 import { getPublicKeyFingerprint } from "../../services/encryption/identity";
+import { formatFingerprint } from "../../services/encryption/fingerprint";
 import { LATIN_NUMBERING_SYSTEM } from "../../utils/latin-digits";
 
 import { formatDurationSince } from "./formatDuration";
 
 import type { KeyChangeDialogProps } from "./KeyChangeDialog.types";
 import styles from "./KeyChangeDialog.module.scss";
-
-function formatFingerprint(hex: string): string {
-  const groups: string[] = [];
-  for (let i = 0; i < hex.length; i += 8) {
-    groups.push(hex.slice(i, i + 8));
-  }
-  return groups.join(" ");
-}
 
 function formatDate(ts: number, locale: string): string {
   try {

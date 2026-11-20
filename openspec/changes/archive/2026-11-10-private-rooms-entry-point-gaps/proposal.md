@@ -8,10 +8,9 @@ The context menu of an encrypted file has no version entries, but a click on
 the version badge of a file row or tile still opens the version history
 panel, with Open, Restore, Download and Delete. This was seen on the test
 portal on 2026-11-10 (DocSpace 4.1.0.12351), as the room owner. The badge
-opens the panel whenever the server grants the ReadHistory right, and the
-server grants that right to the room owner on an encrypted file of a private
-room (design.md, Context). So the right does not show whether the panel is
-available.
+opens the panel whenever the item carries the ReadHistory right, without a
+look at whether the file is encrypted (design.md, Context). So the right
+does not show whether the panel is available.
 
 The media viewer breaks two more requirements of `file-operations`. Its
 download button and Ctrl+S save the file the server stores, so the user gets
@@ -38,8 +37,7 @@ requirement's only scenario names the context menu.
   history panel as before, when the server grants ReadHistory, and keeps its
   tooltip.
 - The E2E mock of a private room reports the rights of an encrypted file for
-  the room owner as the server does (Rename, Lock, CopyLink, ReadHistory and
-  EditHistory in an active room; ReadHistory alone in an archived one), and
+  the room owner as the server does, and
   takes the file's version count as a seed, so that an E2E case can reach
   the badge.
 - The download button and Ctrl+S of the client's media viewer save an
@@ -92,10 +90,8 @@ None.
 - Mocks: `packages/shared/__mocks__/handlers/files/encryptedFiles.ts` (the
   file's `version` and `versionGroup`, and its Rename, Lock, CopyLink,
   ReadHistory and EditHistory rights) and cases in its contract test.
-- Server (`../server`): no work needed for this change. The server reports
-  these rights on an encrypted file although the client never offers the
-  actions; asking it to stop is separate backend work. Until then, and
-  after it, the client checks the encrypted flag, not the right.
+- Server (`../server`): no work needed for this change. The client checks
+  the encrypted flag, not the right.
 - Locales: none. The badge only drops an existing string.
 
 ## Out of scope

@@ -48,6 +48,7 @@ import type {
   IModalDialog,
   TSelector,
   IMediaViewer,
+  IHtmlFrame,
   IFloatingOperationsButton,
 } from "@onlyoffice/docspace-plugin-sdk";
 
@@ -96,6 +97,7 @@ import type {
   IArticleNavigationItem,
   IArticleNavigationItemClient,
   IDashboardWidgetItemClient,
+  IArticleWidgetItemClient,
   IframeWindow,
   TPlugin,
   TPluginError,
@@ -118,7 +120,7 @@ import {
   releaseModuleEvents,
   setModuleEventDispatcher,
 } from "../helpers/plugins/react/socket";
-import type { RoomsType } from "@docspace/shared/enums";
+import { DeviceType, type RoomsType } from "@docspace/shared/enums";
 import { pluginRoomTypes, toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
@@ -199,6 +201,8 @@ class PluginStore {
 
   dashboardWidgetItems: Map<string, IDashboardWidgetItemClient> = new Map();
 
+  articleWidgetItems: Map<string, IArticleWidgetItemClient> = new Map();
+
   pluginFrame: HTMLIFrameElement | null = null;
 
   isInit = false;
@@ -265,6 +269,7 @@ class PluginStore {
     makeAutoObservable(this, {
       reactPluginModalState: observable.ref,
       reactSettingsSaveButtonState: observable.ref,
+      articleWidgetItems: observable.shallow,
     });
 
     // Subscribe to plugin state changes via WebSocket
@@ -321,6 +326,7 @@ class PluginStore {
       updateArticleButtonItems: this.updateArticleButtonItems,
       updateArticleNavigationItems: this.updateArticleNavigationItems,
       updateDashboardWidgetItems: this.updateDashboardWidgetItems,
+      updateArticleWidgetItem: this.updateArticleWidgetItem,
       updateFileItems: this.updateFileItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
@@ -333,7 +339,14 @@ class PluginStore {
       setPluginMediaViewerProps: this.setPluginMediaViewerProps,
       setReactPluginModalState: this.setReactPluginModalState,
       reactPluginCurrentFile: currentFile,
+      closeMobileArticle: this.closeMobileArticle,
     });
+  };
+
+  closeMobileArticle = () => {
+    if (this.settingsStore.currentDeviceType === DeviceType.mobile) {
+      this.settingsStore.setArticleOpen(false);
+    }
   };
 
   setReactPluginModalState = (
@@ -810,6 +823,10 @@ class PluginStore {
     if (scopes.includes(PluginScopes.DashboardWidget)) {
       this.updateDashboardWidgetItems(name);
     }
+
+    if (scopes.includes(PluginScopes.ArticleWidget)) {
+      this.updateArticleWidgetItem(name);
+    }
   };
 
   /** Takes back everything `registerPluginItems` published. */
@@ -850,6 +867,10 @@ class PluginStore {
 
     if (scopes.includes(PluginScopes.DashboardWidget)) {
       this.deactivateDashboardWidgetItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ArticleWidget)) {
+      this.articleWidgetItems.delete(plugin.name);
     }
   };
 
@@ -1862,6 +1883,30 @@ class PluginStore {
     );
   };
 
+  updateArticleWidgetItem = (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const item = plugin.getArticleWidgetItem?.();
+
+    if (
+      item &&
+      matchesUserRole(item.usersTypes, this.getUserRole()) &&
+      (!item.devices || item.devices.includes(this.getCurrentDevice())) &&
+      matchesUserAccess(item, this.userStore.user)
+    ) {
+      this.articleWidgetItems.set(name, {
+        ...item,
+        icon: item.icon && this.getPluginIconUrl(name, item.icon),
+        label: plugin.nameLocale,
+        pluginName: name,
+      });
+    } else {
+      this.articleWidgetItems.delete(name);
+    }
+  };
+
   deactivateDashboardWidgetItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
@@ -2120,6 +2165,14 @@ class PluginStore {
             message: { actions: [Actions.closeMediaViewer] },
             pluginName,
           }),
+        showHtmlInFrame: (props: IHtmlFrame) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showHtmlInFrame],
+              htmlFrameProps: props,
+            },
+            pluginName,
+          }),
         updateMediaViewer: (props: IMediaViewer) =>
           this.dispatchMessage({
             message: {
@@ -2163,6 +2216,7 @@ class PluginStore {
           Actions.updateArticleNavigationItems,
         ),
         updateDashboardWidgetItems: redraw(Actions.updateDashboardWidgetItems),
+        updateArticleWidgetItem: redraw(Actions.updateArticleWidgetItem),
       },
       api: pluginApi,
       settings: {
@@ -2307,6 +2361,10 @@ class PluginStore {
 
   get dashboardWidgetItemsList() {
     return listByPluginName(this.dashboardWidgetItems);
+  }
+
+  get articleWidgetItemsList() {
+    return listByPluginName(this.articleWidgetItems);
   }
 }
 

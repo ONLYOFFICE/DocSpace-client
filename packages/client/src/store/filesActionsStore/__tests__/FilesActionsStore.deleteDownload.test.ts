@@ -29,6 +29,16 @@ vi.mock("@docspace/shared/services/private-room/encrypted-download", async (io) 
   triggerFileDownload: vi.fn(),
 }));
 
+vi.mock("@docspace/shared/services/encryption/room-file-access", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  unwrapDekForCurrentUser: vi.fn(async () => new Uint8Array(32)),
+}));
+
+vi.mock("@docspace/shared/services/encryption/file-keys", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  decryptFileFromBlob: vi.fn(),
+}));
+
 import { createTestFilesActionsStore, t } from "./testHarness";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -45,6 +55,7 @@ import {
   triggerFileDownload,
 } from "@docspace/shared/services/private-room/encrypted-download";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { decryptFileFromBlob } from "@docspace/shared/services/encryption/file-keys";
 
 const progress = () => {
   const setSecondaryProgressBarData = vi.fn();
@@ -378,9 +389,141 @@ describe("FilesActionsStore — decrypted folder download", () => {
     );
     expect(downloadFiles).not.toHaveBeenCalled();
   });
+
+  const zipNames = () =>
+    vi.mocked(createZipFromBuffers).mock.calls.at(-1)![0].map((e) => e.name);
+  const ownAccess = () =>
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
+    } as never);
+
+  it("File name with a separator inside a folder archive", async () => {
+    vi.mocked(getFolder).mockResolvedValue(
+      listing([encrypted(1), encrypted(2)]) as never,
+    );
+    ownAccess();
+    decryptsTo({ 1: "../../etc/plan.txt", 2: "notes.txt" });
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(zipNames()).toEqual([".._.._etc_plan.txt", "notes.txt"]);
+  });
+
+  it("Folder title with a separator", async () => {
+    vi.mocked(getFolder).mockImplementation(async (folderId) =>
+      (folderId === 20
+        ? listing([], [{ id: 21, title: "2026/Q1" }])
+        : listing([encrypted(1)])) as never,
+    );
+    ownAccess();
+    decryptsTo({ 1: "plan.txt" });
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(zipNames()).toEqual(["2026_Q1/plan.txt"]);
+  });
+
+  it("Sibling folders that differ only in case", async () => {
+    vi.mocked(getFolder).mockImplementation(async (folderId) => {
+      if (folderId === 20) {
+        return listing(
+          [],
+          [
+            { id: 21, title: "Plans" },
+            { id: 22, title: "plans" },
+          ],
+        ) as never;
+      }
+      return listing([encrypted(folderId === 21 ? 1 : 2)]) as never;
+    });
+    ownAccess();
+    decryptsTo({ 1: "a.txt", 2: "b.txt" });
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(zipNames()).toEqual(["Plans/a.txt", "plans (1)/b.txt"]);
+  });
+
+  it("Names that differ only in case inside a folder", async () => {
+    vi.mocked(getFolder).mockResolvedValue(
+      listing([encrypted(1), encrypted(2)]) as never,
+    );
+    ownAccess();
+    decryptsTo({ 1: "Budget.xlsx", 2: "budget.xlsx" });
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(zipNames()).toEqual(["Budget.xlsx", "budget (1).xlsx"]);
+  });
+
+  it("Archive named after a folder", async () => {
+    vi.mocked(getFolder).mockResolvedValue(listing([encrypted(1)]) as never);
+    ownAccess();
+    decryptsTo({ 1: "plan.txt" });
+
+    await setup().downloadEncryptedFolder({
+      ...reports,
+      title: "Reports/2026",
+    } as never);
+
+    expect(vi.mocked(triggerFileDownload).mock.calls.at(-1)![1]).toBe(
+      "Reports_2026.zip",
+    );
+  });
+
+  it("Nothing left of the name", async () => {
+    vi.mocked(getFolder).mockResolvedValue(listing([encrypted(1)]) as never);
+    ownAccess();
+    decryptsTo({ 1: "..." });
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(
+      vi.mocked(downloadAndDecryptFileToBuffer).mock.calls.at(-1)![0]
+        .originalFileName,
+    ).toBe("opaque-1.txt");
+    expect(zipNames()).toEqual(["opaque-1.txt"]);
+  });
 });
 
 describe("FilesActionsStore — decrypted download of several files", () => {
+  it("Names that differ only in case", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
+    } as never);
+    const decrypted: Record<number, string> = {
+      1: "Budget.xlsx",
+      2: "budget.xlsx",
+    };
+    vi.mocked(downloadAndDecryptFileToBuffer).mockImplementation(
+      async ({ fileId }) =>
+        ({
+          success: true,
+          data: new Uint8Array([fileId as number]),
+          fileName: decrypted[fileId as number],
+        }) as never,
+    );
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      selectedFolderStore: { id: 10, isRoom: true, navigationPath: [] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFilesAsZip(
+      [1, 2].map((id) => ({
+        id,
+        title: `opaque-${id}.xlsx`,
+        encrypted: true,
+        viewUrl: `http://x/${id}`,
+      })) as never,
+    );
+
+    expect(
+      vi.mocked(createZipFromBuffers).mock.calls.at(-1)![0].map((e) => e.name),
+    ).toEqual(["Budget.xlsx", "budget (1).xlsx"]);
+  });
+
   it("Decrypted names clash", async () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
@@ -445,10 +588,42 @@ describe("FilesActionsStore — single encrypted download", () => {
     } as never);
 
     expect(getFileEncryptionAccess).toHaveBeenCalledWith(5);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
     expect(toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptionDownloadFailed",
+      "Common:EncryptedFileNoAccessYet",
     );
     expect(requireUnlock).not.toHaveBeenCalled();
     expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();
+  });
+
+  it("Single file download", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
+    } as never);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response(new Uint8Array([1, 2, 3]))),
+    );
+    vi.mocked(decryptFileFromBlob).mockResolvedValue({
+      data: new Blob([new Uint8Array([7])]),
+      fileName: "../plans/q1\u0007.txt",
+    });
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFile({
+      id: 5,
+      title: "opaque-5.txt",
+      encrypted: true,
+      viewUrl: "http://x/5",
+    } as never);
+    vi.unstubAllGlobals();
+
+    const saved = vi.mocked(triggerFileDownload).mock.calls.at(-1)![0];
+    expect((saved as File).name).toBe(".._plans_q1.txt");
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 });

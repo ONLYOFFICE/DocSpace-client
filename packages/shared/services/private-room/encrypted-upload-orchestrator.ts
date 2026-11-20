@@ -609,6 +609,9 @@ async function wrapDekForSelfAndRoom(args: {
       recipients: [{ userId, publicKey, publicKeyId }],
       fileId: fileIdNumeric,
     });
+    if (ownWraps.length === 0) {
+      throw new Error("the file key could not be wrapped for the uploader");
+    }
     ownEntryWritten = await writeOwnEntry(fileId, ownWraps);
   } catch (error) {
     ownEntryError = error;
@@ -648,11 +651,22 @@ async function wrapDekForSelfAndRoom(args: {
       readMembers = recipients.map((recipient) => recipient.userId);
       if (recipients.length === 0) return { skipped: [] };
 
-      const { verified, skipped } = await verifyMemberKeys(recipients, {
-        scopeUserId: userId,
-        refusals,
-      });
-      if (verified.length === 0) return { skipped };
+      const { verified, skipped: unverified } = await verifyMemberKeys(
+        recipients,
+        { scopeUserId: userId, refusals },
+      );
+      // A key that could not be checked or used is not a refused key change:
+      // the member is one the upload could not share with, and waits.
+      // Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+      const skipped = unverified.filter(
+        (s) => s.reason === "key-mismatch-refused",
+      );
+      const notShared = unverified
+        .filter((s) => s.reason !== "key-mismatch-refused")
+        .map((s) => s.userId);
+      if (verified.length === 0) {
+        return notShared.length > 0 ? { skipped, failedFor: notShared } : { skipped };
+      }
 
       const newKeys = await wrapDekForRecipients({
         dek,
@@ -662,7 +676,15 @@ async function wrapDekForSelfAndRoom(args: {
         fileId: fileIdNumeric,
       });
 
-      if (newKeys.length === 0) return { skipped };
+      // A member whose key could not be wrapped for waits for access.
+      const leftOut = [
+        ...notShared,
+        ...verified
+          .filter((r) => !newKeys.some((k) => k.userId === r.userId))
+          .map((r) => r.userId),
+      ];
+      const notWrapped = leftOut.length > 0 ? { failedFor: leftOut } : {};
+      if (newKeys.length === 0) return { skipped, ...notWrapped };
 
       const allKeys = [
         ...existingFileKeys.map((k) => ({
@@ -676,6 +698,7 @@ async function wrapDekForSelfAndRoom(args: {
       const unreadableFor = (written?.skippedUserIds ?? []).map(String);
       return {
         skipped,
+        ...notWrapped,
         ...(unreadableFor.length > 0 ? { unreadableFor } : {}),
       };
     } catch {

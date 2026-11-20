@@ -59,6 +59,7 @@ enum PluginScopes {
   ArticleButton = "ArticleButton",
   ArticleNavigation = "ArticleNavigation",
   DashboardWidget = "DashboardWidget",
+  ArticleWidget = "ArticleWidget",
 }
 
 export {

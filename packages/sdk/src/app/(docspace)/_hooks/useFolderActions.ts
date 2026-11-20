@@ -42,6 +42,14 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
+import type { FolderType } from "@docspace/shared/enums";
+import {
+  isPrivateRoomsOptInValue,
+  PRIVATE_ROOMS_FLAG_KEY,
+} from "@docspace/shared/utils/privateRooms";
+
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 
 import { OpenFolderContext } from "../_contexts/OpenFolderContext";
 import { useNavigationStore } from "../_store/NavigationStore";
@@ -59,18 +67,50 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     setCurrentIsRootRoom,
   } = useNavigationStore();
   const { setSelection } = useFilesSelectionStore();
-  const { setHighlightFileId } = useFilesListStore();
+  const { items, setHighlightFileId } = useFilesListStore();
   const { shareKey } = useSettingsStore();
   const openFolderOverride = React.useContext(OpenFolderContext);
   const router = useRouter();
   const pathname = usePathname();
+  const { sdkConfig } = useSDKConfig();
 
-  const openFolder = React.useCallback(
-    (folderId: number | string, title: string) => {
-      if (openFolderOverride && openFolderOverride(folderId, title)) {
-        return;
+  /**
+   * On a generic page, a folder of a private room continues on the private
+   * page of its room; resolves whether it did. A folder of the open list
+   * gives its own section, so one outside the rooms needs no request.
+   */
+  // Spec: private-rooms/sdk-surface, "Private addresses are decided before anything is listed"
+  const continueOnPrivatePage = React.useCallback(
+    async (folderId: number | string) => {
+      // A room reached by an external link is never private.
+      if (shareKey) return false;
+      const listed = items.find(
+        (item) => item.isFolder && String(item.id) === String(folderId),
+      ) as { rootFolderType?: FolderType } | undefined;
+      const params = Object.fromEntries(
+        new URLSearchParams(window.location.search),
+      );
+      // The host's opt-in arrives with the frame configuration.
+      if (isPrivateRoomsOptInValue(sdkConfig?.privateRooms)) {
+        params[PRIVATE_ROOMS_FLAG_KEY] = "true";
       }
+      try {
+        const address = await getPrivateRoomAddress(
+          { id: folderId, rootFolderType: listed?.rootFolderType },
+          params,
+        );
+        if (address) router.replace(address);
+        return !!address;
+      } catch {
+        toastr.error(t("Common:UnexpectedError"));
+        return true;
+      }
+    },
+    [items, router, t, sdkConfig?.privateRooms, shareKey],
+  );
 
+  const openFolderHere = React.useCallback(
+    (folderId: number | string, title: string) => {
       const filter = FilesFilter.getDefault();
 
       filter.folder = folderId.toString();
@@ -86,7 +126,6 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       window.history.pushState({}, "", `${window.location.pathname}${filterUrl}`);
     },
     [
-      openFolderOverride,
       shareKey,
       updateNavigationItems,
       setCurrentFolderId,
@@ -96,7 +135,23 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
     ],
   );
 
-  const openLocation = React.useCallback(
+  const openFolder = React.useCallback(
+    (folderId: number | string, title: string) => {
+      if (openFolderOverride && openFolderOverride(folderId, title)) {
+        return;
+      }
+      if (isPrivateRoomsRoute(pathname ?? "")) {
+        openFolderHere(folderId, title);
+        return;
+      }
+      void continueOnPrivatePage(folderId).then((done) => {
+        if (!done) openFolderHere(folderId, title);
+      });
+    },
+    [openFolderOverride, pathname, openFolderHere, continueOnPrivatePage],
+  );
+
+  const openLocationHere = React.useCallback(
     (
       folderId: number | string,
       fileId: number | string,
@@ -137,6 +192,26 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       setSelection,
       setHighlightFileId,
     ],
+  );
+
+  const openLocation = React.useCallback(
+    (
+      folderId: number | string,
+      fileId: number | string,
+      search: string,
+      targetPath?: string,
+    ) => {
+      if (isPrivateRoomsRoute(pathname ?? "")) {
+        openLocationHere(folderId, fileId, search, targetPath);
+        return;
+      }
+      // The search text goes only to a folder outside private rooms, where
+      // no file is encrypted.
+      void continueOnPrivatePage(folderId).then((done) => {
+        if (!done) openLocationHere(folderId, fileId, search, targetPath);
+      });
+    },
+    [pathname, openLocationHere, continueOnPrivatePage],
   );
 
   const copyFolderLink = React.useCallback(

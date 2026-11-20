@@ -33,9 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
+import {
+  getFilesSettings,
+  getFolder,
+  getFolderPath,
+  getFoldersTree,
+} from "@/api/files";
 import { getRooms } from "@/api/rooms";
 import { getSettings } from "@/api/settings";
+import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
 
 import FilesSelectorClient from "./page.client";
 import FilesSelectorOAuth from "./page.oauth.client";
@@ -48,6 +54,7 @@ import { logger } from "../../../../logger.mjs";
 
 const ssrDeps = {
   getFoldersTree,
+  getFolderPath,
   getFilesSettings,
   getSettings,
   getRooms,
@@ -78,6 +85,7 @@ export default async function Page({
   }
 
   const clientProps = await loadFilesSelectorProps(ssrDeps, baseConfig);
+  if ("privateTarget" in clientProps) return <PrivateTargetNotAvailable />;
 
   return <FilesSelectorClient {...clientProps} />;
 }

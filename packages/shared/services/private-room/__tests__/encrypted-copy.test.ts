@@ -41,6 +41,7 @@ import {
   tagFileForCopy,
 } from "../encrypted-copy";
 import type { IdentityKeyPair } from "../../encryption/types";
+import { NoAccessError } from "../../encryption/errors";
 
 // TS lib.dom rejects Uint8Array<ArrayBufferLike> as BodyInit on some lib versions.
 const respond = (bytes: number | Uint8Array, init?: ResponseInit): Response => {
@@ -103,23 +104,24 @@ describe("encryptedCopy", () => {
       expect(wipeDek).not.toHaveBeenCalled();
     });
 
-    it("throws when fileKeys is missing", async () => {
+    it("Key holder without a wrap: an access answer without fileKeys", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
       // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
       await expect(
         decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
-      ).rejects.toThrow(/Encryption access info missing/);
+      ).rejects.toBeInstanceOf(NoAccessError);
+      expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
     });
 
-    it("throws when the current user has no entry in fileKeys", async () => {
+    it("Key holder without a wrap", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
         fileKeys: [{ userId: "other-user" }],
       // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
       await expect(
         decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
-      ).rejects.toThrow(/no decrypt access/);
+      ).rejects.toBeInstanceOf(NoAccessError);
       expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
       expect(wipeDek).not.toHaveBeenCalled();
     });

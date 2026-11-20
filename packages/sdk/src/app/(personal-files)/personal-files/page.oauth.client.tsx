@@ -35,9 +35,12 @@
 
 "use client";
 
+import { notFound } from "next/navigation";
+
 import {
   getSettingsFiles,
   getFolder,
+  getFolderPath,
   getFoldersTree,
 } from "@docspace/shared/api/files";
 import { getSettings } from "@docspace/shared/api/settings";
@@ -45,6 +48,7 @@ import { getUser } from "@docspace/shared/api/people";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
 import OAuthPageLoader from "@/components/OAuthPageLoader";
+import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
 
 import DocsPage from "./page.client";
 import {
@@ -54,6 +58,7 @@ import {
 
 const clientDeps = {
   getFoldersTree,
+  getFolderPath,
   getFolder,
   getFilesSettings: getSettingsFiles,
   getSettings,
@@ -73,6 +78,8 @@ export default function DocsOAuth({
   if (error) throw error;
   if (!result) return <OAuthPageLoader />;
   if ("redirectTo" in result) return null;
+  if ("notAvailable" in result) return <PrivateTargetNotAvailable />;
+  if ("notFound" in result) notFound();
 
   return <DocsPage authToken="" {...result.data} />;
 }

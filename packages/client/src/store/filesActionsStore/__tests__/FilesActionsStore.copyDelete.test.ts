@@ -390,7 +390,11 @@ describe("FilesActionsStore - drag inside a private room", () => {
     security: { Move: true },
   };
 
-  const dragFromRoom = (dest: Record<string, unknown>, destFolderId: number) => {
+  const dragFromRoom = (
+    dest: Record<string, unknown> | undefined,
+    destFolderId: number,
+    folders: Record<string, unknown>[] = [],
+  ) => {
     const itemOperationToFolder = vi.fn(async () => {});
     const store = createTestFilesActionsStore({
       treeFoldersStore: { isPrivacyFolder: true },
@@ -400,14 +404,46 @@ describe("FilesActionsStore - drag inside a private room", () => {
         rootFolderId: 10,
         navigationPath: [{ id: 10, isRootRoom: true }],
       },
-      filesStore: { selection: [item], bufferSelection: null },
+      filesStore: { selection: [item], bufferSelection: null, folders },
       uploadDataStore: progressStore({ itemOperationToFolder }),
     });
     const copy = vi.fn(async () => {});
     store.copyEncryptedFilesToFolder = copy;
     store.moveDragItems(destFolderId, "Folder", dest as never);
-    return { copy, itemOperationToFolder };
+    return { store, copy, itemOperationToFolder };
   };
+
+  it("Drop on a folder row loaded by scrolling", async () => {
+    // The drop handler passes no folder info; the row sits on a later page.
+    const { store, copy, itemOperationToFolder } = dragFromRoom(undefined, 61, [
+      { id: 60, parentId: 50, private: false, rootFolderId: 10 },
+      { id: 61, parentId: 50, private: false, rootFolderId: 10 },
+    ]);
+
+    await vi.waitFor(() => expect(itemOperationToFolder).toHaveBeenCalled());
+    expect(store.dialogsStore.encryptedTransferConfirm).toBeNull();
+    expect(copy).not.toHaveBeenCalled();
+  });
+
+  it("Drop on a folder row of the first page", async () => {
+    const { store, copy, itemOperationToFolder } = dragFromRoom(undefined, 60, [
+      { id: 60, parentId: 50, private: false, rootFolderId: 10 },
+    ]);
+
+    await vi.waitFor(() => expect(itemOperationToFolder).toHaveBeenCalled());
+    expect(store.dialogsStore.encryptedTransferConfirm).toBeNull();
+    expect(copy).not.toHaveBeenCalled();
+  });
+
+  it("Drop on a folder outside private rooms", () => {
+    const { store, copy, itemOperationToFolder } = dragFromRoom(undefined, 5, [
+      { id: 60, parentId: 50, private: false, rootFolderId: 10 },
+    ]);
+
+    expect(store.dialogsStore.encryptedTransferConfirm).not.toBeNull();
+    expect(copy).not.toHaveBeenCalled();
+    expect(itemOperationToFolder).not.toHaveBeenCalled();
+  });
 
   it("moves files dropped on a folder row of the open room on the server", async () => {
     const { copy, itemOperationToFolder } = dragFromRoom(

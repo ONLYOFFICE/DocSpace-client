@@ -49,6 +49,7 @@ import {
   type NewRoomMember,
   type RoomEncryptionOptions,
   type SkippedRoomMember,
+  waitsForAccess,
 } from "./room-encryption";
 import { selectMemberKeys } from "./room-member-keys";
 import { pendingAccessStore } from "./pending-access";
@@ -263,6 +264,9 @@ export function skippedMemberNotices(
   const mismatchNames = skippedMembers
     .filter((m) => m.reason === "key-mismatch-refused")
     .map(formatName);
+  const uncheckedNames = skippedMembers
+    .filter((m) => waitsForAccess(m.reason))
+    .map(formatName);
   if (notInvitedNames.length > 0) {
     notices.push({
       level: "warning",
@@ -286,6 +290,15 @@ export function skippedMemberNotices(
       level: "warning",
       text: t("Common:EncryptedSkippedKeyMismatch", {
         users: mismatchNames.join(", "),
+      }),
+      namesLeftOut: true,
+    });
+  }
+  if (uncheckedNames.length > 0) {
+    notices.push({
+      level: "warning",
+      text: t("Common:EncryptedInviteFailed", {
+        users: uncheckedNames.join(", "),
       }),
       namesLeftOut: true,
     });
@@ -315,9 +328,10 @@ export function notInvitedReasons(
   const withRefusedKey = skipped.filter(
     (m) => m.reason === "key-mismatch-refused",
   );
-  const refusedOtherwise = refused
-    .filter((entry) => !entry.noKey)
-    .map((entry) => entry.member);
+  const refusedOtherwise = [
+    ...skipped.filter((m) => waitsForAccess(m.reason)),
+    ...refused.filter((entry) => !entry.noKey).map((entry) => entry.member),
+  ];
 
   const reasons: string[] = [];
   if (withoutKey.length > 0) {

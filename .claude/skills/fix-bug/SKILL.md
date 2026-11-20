@@ -9,7 +9,9 @@ argument-hint: "<bugId>"
 Take a single bug from report to a committed fix on its own branch. This is a
 **gated** procedure: a human confirms before any commit, nothing is pushed, and
 Bugzilla is never written to via the API — the commit message alone is what the
-server-side git action uses to close the ticket.
+server-side git action uses to close the ticket. (The only Bugzilla writer is
+`/bugs-audit`, after its own dry-run and confirmation; it is not part of this
+procedure.)
 
 Script (run from the repo root): `.claude/scripts/bugzilla/bz.mjs`
 Config/setup: `.claude/scripts/bugzilla/README.md`.
@@ -44,8 +46,8 @@ The bug's product/component decides where the fix lands and how it is verified:
 
 | Product / component | Repo & area | Local gate |
 |---|---|---|
-| `DocSpace/API`, `DocSpace/AI` (routes `/api/2.0/ai/*`) | **server**: `common/ASC.NewAi` (Node — `app/controllers/*`, `app/routes.ts`) for most `/ai/*`; some in `products/ASC.AI/Server/**` (C#, e.g. `TextToDocxController.cs`). Grep the exact route to pick the layer. | ASC.NewAi: `yarn typecheck` (+ unit tests if present). C#: build the project. |
-| `UI.Desktop/AI.Agent`, `SDK.Desktop/AI.Agent`, `AI.Agent/UI` | the **`@onlyoffice/ai-chat` source checkout** → then the tgz handoff into ui-kit + client + ASC.NewAi. HEAVY, multi-repo. | ai-chat build; then consumer builds. |
+| `DocSpace/API`, `DocSpace/AI` (routes `/api/2.0/ai/*`) | **server**: `common/ASC.AI.Chat` (Node, formerly `ASC.NewAi` — `app/controllers/*`, `app/routes.ts`) for most `/ai/*`; some in `products/ASC.AI/Server/**` or `common/ASC.AI.Integration` (C#, e.g. `TextToDocxController.cs`). Grep the exact route to pick the layer. | ASC.AI.Chat: `yarn typecheck` + `yarn test`. C#: build the project. |
+| `UI.Desktop/AI.Agent`, `SDK.Desktop/AI.Agent`, `AI.Agent/UI` | the **`@onlyoffice/ai-chat` source checkout** → then the tgz handoff into ui-kit + client + ASC.AI.Chat. HEAVY, multi-repo. | ai-chat build; then consumer builds. |
 | `DocSpace/Files`, `Rooms`, `Accounts`, `Settings`, `Plugins` | **client**: `packages/client/**` (React); some `Settings` UI in ui-kit (separate repo). | `pnpm tsc && pnpm lint && pnpm test:client` (or the targeted test). |
 | `DocSpace/DocEditor` (Forms) | client `packages/doceditor/**` (or server forms). | `pnpm tsc && pnpm lint`. |
 | `DocSpace/Server` (`Srv:*`) | **server** C# (`products/`, `web/`). | build the affected project. |
@@ -66,7 +68,7 @@ with your findings — do not guess-edit.
 If the target repo has a unit-test harness and the bug is unit-testable, add a
 test that **reproduces the bug (red)** before fixing:
 - client / shared: Vitest (`pnpm test:client`, `packages/shared` vitest).
-- ASC.NewAi: only if a test setup exists — check `package.json` scripts.
+- ASC.AI.Chat: Vitest (`yarn test`, tests under `app/__tests__`).
 
 If there is no local harness or the bug needs a running backend/browser to
 reproduce (we do NOT wire up the external api-tests suite or a live stack), skip

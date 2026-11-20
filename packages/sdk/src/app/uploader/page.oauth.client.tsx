@@ -39,6 +39,8 @@ import type { UploaderFilesSettings } from "@onlyoffice/apps-ui-kit/uploader/Upl
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
 import OAuthPageLoader from "@/components/OAuthPageLoader";
+import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 
 import UploaderClient, { type UploaderClientProps } from "./page.client";
 
@@ -46,12 +48,17 @@ type UploaderOAuthPageProps = Omit<UploaderClientProps, "filesSettings">;
 
 export default function UploaderOAuthPage(props: UploaderOAuthPageProps) {
   const { data, error } = useOAuthSSRData(async () => {
+    const targetId = props.baseConfig?.targetId;
+    if (targetId && (await getPrivateRoomAddress({ id: targetId }, {}))) {
+      return { privateTarget: true as const };
+    }
     const settings = await getSettingsFiles();
     return settings ? { filesSettings: settings as unknown as UploaderFilesSettings } : null;
   });
 
   if (error) throw error;
   if (!data) return <OAuthPageLoader />;
+  if ("privateTarget" in data) return <PrivateTargetNotAvailable />;
 
   return <UploaderClient {...props} filesSettings={data.filesSettings} />;
 }

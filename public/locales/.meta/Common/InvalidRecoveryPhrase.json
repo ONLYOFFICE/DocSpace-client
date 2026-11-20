@@ -1,26 +1,26 @@
 {
   "key_path": "InvalidRecoveryPhrase",
-  "content": "Recovery phrase is invalid. Check that all 24 words are spelled correctly and from the BIP-39 wordlist.",
-  "content_en_sha1_hash": "ec53817c245712e8a6d5060a00ba062c8a1d39a8",
-  "created_at": "2026-05-24T17:27:29.943Z",
-  "updated_at": "2026-11-05T16:49:40.025Z",
+  "content": "The recovery phrase is incorrect. Check the words and their order.",
+  "content_en_sha1_hash": "1dcecc7c9b93530f8163825376c07b5c7d877c25",
+  "created_at": "2026-11-17T08:59:52.310Z",
+  "updated_at": "2026-11-19T16:14:54.183Z",
   "comment": {
-    "text": "Error text displayed in the recovery phrase input modal or during the key recovery process when the entered 24-word mnemonic fails validation against the BIP-39 wordlist.",
+    "text": "Error under the recovery phrase field of the Recover key dialog when every typed word is a recovery word but the 24 words together are not a valid phrase or do not open the user's key; it asks the user to check the words and the order they are in. Do not name any word-list standard or other cryptographic term.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:54:32.222Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-17T09:00:46.761Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
-      "line_number": 110,
-      "context": "setIsValidating(true);\n try {\n const ok = await validateMnemonic(normalized);\n if (!ok) {\n setLocalError(t(\"Common:InvalidRecoveryPhrase\"));\n return;\n }\n onSubmit(normalized);\n } catch (e) {\n console.error(\"Recovery phrase validation failed:\", e);",
+      "line_number": 124,
+      "context": "return;\n }\n \n const ok = await validateMnemonic(normalized);\n if (!ok) {\n setLocalError(t(\"Common:InvalidRecoveryPhrase\"));\n return;\n }\n onSubmit(normalized);\n } catch (e) {\n console.error(\"Recovery phrase validation failed:\", e);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
-      "line_number": 110,
-      "context": "setIsValidating(true);\n try {\n const ok = await validateMnemonic(normalized);\n if (!ok) {\n setLocalError(t(\"Common:InvalidRecoveryPhrase\"));\n return;\n }\n onSubmit(normalized);\n } catch (e) {\n console.error(\"Recovery phrase validation failed:\", e);",
+      "line_number": 124,
+      "context": "return;\n }\n \n const ok = await validateMnemonic(normalized);\n if (!ok) {\n setLocalError(t(\"Common:InvalidRecoveryPhrase\"));\n return;\n }\n onSubmit(normalized);\n } catch (e) {\n console.error(\"Recovery phrase validation failed:\", e);",
       "module": "/packages/shared"
     },
     {
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 71,
+      "line_number": 74,
       "context": "}\n if (error instanceof InvalidPassphraseError) {\n return t(\"Common:InvalidPassphrase\");\n }\n if (error instanceof InvalidRecoveryPhraseError) {\n return t(\"Common:InvalidRecoveryPhrase\");\n }\n if (error instanceof InvalidFormatError) {\n return t(\"Common:EncryptionInvalidKeyFile\");\n }\n if (",
       "module": "/packages/shared"
     }

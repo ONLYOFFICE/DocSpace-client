@@ -41,8 +41,6 @@ import { useTranslation } from "react-i18next";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { useSDKConfig } from "@/providers/SDKConfigProvider";
-
 import { getKeysManagementUrl } from "../_utils/keys-management-link";
 
 /**
@@ -50,10 +48,9 @@ import { getKeysManagementUrl } from "../_utils/keys-management-link";
  * explanation shown when that page cannot be opened from here.
  */
 export const useKeysManagementLink = () => {
-  const { sdkConfig } = useSDKConfig();
   const { t } = useTranslation(["Common"]);
 
-  const url = getKeysManagementUrl(sdkConfig?.src);
+  const url = getKeysManagementUrl();
 
   const explain = React.useCallback(() => {
     toastr.info(

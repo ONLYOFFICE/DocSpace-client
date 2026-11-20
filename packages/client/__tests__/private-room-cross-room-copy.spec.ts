@@ -298,7 +298,7 @@ const unlockIfPrompted = async (page: Page, passphrase: string) => {
     .locator('input[name="passphrase"], #passphrase input')
     .first()
     .fill(passphrase);
-  await prompt.getByRole("button", { name: "Confirm" }).click();
+  await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
 };
 
 const selector = (page: Page) => page.getByTestId("aside").first();
@@ -309,7 +309,7 @@ const selectorItem = (page: Page, title: string | RegExp) =>
     .filter({ hasText: title });
 
 /**
- * Picks a room from the Private entry at the picker's root, since the Rooms
+ * Picks a room from the Private rooms entry at the picker's root, since the Rooms
  * list holds no private room on the server: the destination room unless
  * another is named, or a folder of it, and confirms.
  */
@@ -319,7 +319,7 @@ const copyToDestinationRoom = async (
 ) => {
   const picker = selector(page);
   await picker.getByText("Apps", { exact: true }).first().click();
-  await selectorItem(page, /^Private$/).click();
+  await selectorItem(page, /^Private rooms$/).click();
   await selectorItem(page, room).click();
   if (folder) await selectorItem(page, folder).click();
   await picker.getByRole("button", { name: "Copy here" }).click();
@@ -425,7 +425,7 @@ test.describe("Private room — copy into another private room", () => {
     const picker = selector(page);
     await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 10000 });
     await picker.getByText("Apps", { exact: true }).first().click();
-    await selectorItem(page, /^Private$/).click();
+    await selectorItem(page, /^Private rooms$/).click();
     await selectorItem(page, DEST_ROOM_TITLE).click();
 
     await expect(selectorItem(page, /^plan$/)).toBeVisible({ timeout: 15000 });

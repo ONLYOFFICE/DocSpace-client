@@ -44,6 +44,8 @@ type Options = {
   dirty: boolean;
   /** The dialog's own cancel: clears its state and tells the caller. */
   onCancel: () => void;
+  /** While set, the cross, Escape and a swipe do nothing. */
+  busy?: boolean;
 };
 
 /**
@@ -56,6 +58,7 @@ export const useKeyDialogCloseGuard = ({
   visible,
   dirty,
   onCancel,
+  busy = false,
 }: Options) => {
   const [confirming, setConfirming] = useState(false);
   // The dialog and its confirmation both hear the same Escape keyup on
@@ -66,10 +69,12 @@ export const useKeyDialogCloseGuard = ({
   const confirmingRef = useRef(false);
   const dirtyRef = useRef(dirty);
   const onCancelRef = useRef(onCancel);
+  const busyRef = useRef(busy);
 
   useEffect(() => {
     dirtyRef.current = dirty;
     onCancelRef.current = onCancel;
+    busyRef.current = busy;
   });
 
   const open = useCallback(() => {
@@ -89,7 +94,7 @@ export const useKeyDialogCloseGuard = ({
   }, [visible, close]);
 
   const requestClose = useCallback(() => {
-    if (confirmingRef.current) return;
+    if (busyRef.current || confirmingRef.current) return;
     if (dirtyRef.current) {
       open();
       return;

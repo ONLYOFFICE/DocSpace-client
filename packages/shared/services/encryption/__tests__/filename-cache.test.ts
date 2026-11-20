@@ -170,6 +170,18 @@ describe("filenameCache", () => {
       expect(ok).toHaveBeenCalledWith("1");
     });
 
+    it("notifies subscribers on clear", () => {
+      const listener = vi.fn();
+      const unsubscribe = subscribeFilenameCache(listener);
+      const before = getFilenameCacheVersion();
+
+      clearEncryptedFilenameCache();
+
+      expect(listener).toHaveBeenCalledWith("");
+      expect(getFilenameCacheVersion()).toBeGreaterThan(before);
+      unsubscribe();
+    });
+
     it("does not notify on get", () => {
       const listener = vi.fn();
       subscribeFilenameCache(listener);

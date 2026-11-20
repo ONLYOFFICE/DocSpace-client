@@ -93,7 +93,7 @@ const ITEMS = [
   },
   {
     id: "billing-invoice-history",
-    path: "/billing/invoice-history",
+    path: "/billing/invoices",
     icon: InvoiceHistoryReactSvgUrl,
     translationKey: "Common:Invoices" as const,
   },

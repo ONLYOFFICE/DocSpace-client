@@ -13,14 +13,6 @@ The server SHALL remove a user's file keys from every encrypted file of a privat
 - **WHEN** a member leaves a private room
 - **THEN** the leaver's keys are gone from every encrypted file of the room
 
-#### Scenario: Member without keys
-- **WHEN** a member whose key set is empty leaves a private room, or the owner removes that member or changes their role, through the share request of the room
-- **THEN** the server answers 403 with the message "The user does not have an encryption key", the member's share stays as it was and no key is removed
-
-#### Scenario: Key removal fails after the share is written
-- **WHEN** a member's share of a private room is removed and the removal of their file keys then fails
-- **THEN** the member no longer has access to the room, and their keys stay on the files
-
 #### Scenario: Owner keeps the keys
 - **WHEN** the owner clears the room's access, sets their own share to none or has it removed by a manager
 - **THEN** the owner keeps their keys and stays the owner
@@ -34,7 +26,7 @@ The server SHALL remove a user's file keys from every encrypted file of a privat
 - **THEN** the new owner's share removed by the transfer costs them no key, and from then on the new owner is the one whose keys a removal keeps
 
 ### Requirement: Owner change requires the new owner's keys
-The server SHALL refuse with 403 an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL refuse with 409, leaving the owner as it is, when the new owner, unless they created the room, holds no access entry on some encrypted file of the room, subfolders included; the missing files are read through the missing-file-keys request. The reassignment of a deleted user's rooms SHALL apply neither check.
+The server SHALL refuse with 403 an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL refuse with 409, leaving the owner as it is, when the new owner, unless they created the room, holds no access entry on some encrypted file of the room, subfolders included; the missing files are read through the missing-file-keys request.
 
 #### Scenario: New owner without keys
 - **WHEN** ownership of a private room is given to a user without keys
@@ -55,10 +47,6 @@ The server SHALL refuse with 403 an ownership change of a private room when the 
 #### Scenario: Previous owner without keys
 - **WHEN** an owner whose own key set is empty gives the room to a user with keys
 - **THEN** the change is refused with 403, since the share the previous owner gets in exchange passes the same key check as any new share
-
-#### Scenario: Rooms of a deleted user
-- **WHEN** the rooms of a user being deleted are reassigned to a user who lacks entries or has no keys at all
-- **THEN** the reassignment completes, and the private rooms are owned by that user
 
 ### Requirement: Invitation e-mails carry the room title
 The server SHALL NOT include the plaintext title of a private room or of its folders in invitation e-mails or in the letters and pushes about the room and its content; it SHALL name the room with a neutral label ("Private room") and a folder of it with another ("Private folder"), next to the link that resolves the title in the portal.

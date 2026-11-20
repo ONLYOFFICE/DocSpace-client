@@ -1,0 +1,55 @@
+# Tasks
+
+One task is one commit: the code, the tests, the locales and the tick. Keep
+the pre-push gate in mind: tsc, biome, locale tests and the shared, client
+and SDK unit tests must stay green. Groups 1 to 3 come first.
+
+## 1. The invite panel knows its room
+
+- [ ] 1.1 Give `packages/client/src/components/panels/InvitePanel/index.js` a load state of the room (design decision 1): loader while the room is read, Common:InviteRoomLoadFailed and no form, links or send when the read fails, no request from `onClickSend` before the room is loaded, and the link read only for a room that is known and not private. Add `Common:InviteRoomLoadFailed`, write its translator comment with `/translate-comments` and translate it with `/translate-locales`. Verify: cases "Room read fails", "Room read still on its way" and "Room read succeeds" in `packages/client/src/components/panels/InvitePanel/__tests__/InvitePanel.privateInvite.test.tsx` (`cd packages/client && pnpm exec vitest run src/components/panels/InvitePanel`), a Playwright case "Room read fails" in `packages/client/__tests__/private-room-invite.spec.ts` that answers the room read with an error and asserts the text and that no share request is sent (run under Docker with `pnpm test:e2e:docker:start`), and `cd common/tests && npx vitest run test/locales.test.js`
+
+## 2. Encrypted upload rows
+
+- [ ] 2.1 Look the row of an encrypted upload up by its `uniqueId` after every await in `uploadEncryptedItem` (`packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts`) and drop a result whose row is gone (design decision 10). Verify: case "Result after cancel all and a new drop" in `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.cancel.test.ts`, asserting that the new batch's row keeps its own file and is sent (`cd packages/client && pnpm exec vitest run src/store/uploadDataStore`)
+- [ ] 2.2 Free the upload slot of a cancelled row once: `failUploadItem` and the ends of `uploadEncryptedItem` do not release the slot of a row that is cancelled. Verify: cases "Row cancelled while the unlock prompt is open" and "Cancel all while the unlock prompt is open" in `UploadDataStore.cancel.test.ts`, asserting `currentUploadNumber` and the number of sessions started against the parallel limit
+
+## 3. The name comparison is not skipped
+
+- [ ] 3.1 Read an unknown key list again in `findPrivateNameClashes` (`packages/client/src/store/uploadDataStore/start.helpers.ts`) before the files are filtered, and use the same filter for the auto-lock suspension in `chunkUpload.helpers.ts`; a failed read fails the private files with `Common:EncryptionKeysLoadFailed` (design decision 12). Verify: case "Key list not known when the upload starts" in `packages/client/src/store/uploadDataStore/__tests__/start.helpers.test.ts`, asserting the clash is offered and the suspension is taken, and the existing cases of "An unknown key list is read again before an action is refused" still green
+- [ ] 3.2 Fail the files of a folder whose listing fails with `Common:EncryptedNameCheckFailed` in the client (`handleUploadConflictsImpl`, the plain files of the batch still sent) and in the SDK path (`checkUploadNameClashes` in `packages/shared/services/private-room/encrypted-upload-orchestrator.ts`, through the batch's refusal path instead of going on). Add `Common:EncryptedNameCheckFailed`, run `/translate-comments` and `/translate-locales`. Verify: case "Folder listing fails in the client" in `start.helpers.test.ts`, case "Folder listing fails in the SDK" in `packages/shared/services/private-room/__tests__/encrypted-upload-orchestrator.test.ts` (`cd packages/shared && pnpm exec vitest run services/private-room`), and `cd common/tests && npx vitest run test/locales.test.js`
+
+## 4. Verified containers only
+
+- [ ] 4.1 Drop `alreadyEncrypted` from the inputs of `resolveUploadGate` and `willEncryptUploadItem` (`packages/shared/services/private-room/encrypted-upload.ts`), so a private target with a key always takes the encrypt path, which sniffs and re-imports a container; stop passing `item.encrypted` / `file.encrypted` from `selectors.helpers.ts` and `chunkUpload.helpers.ts` (design decision 11). Verify: cases "File that is not a container", "Container whose key cannot be recovered" and "Container with an unreadable header" in `packages/shared/services/private-room/__tests__/upload-encryption-gate.test.ts` and `encrypted-upload.test.ts`, and case "Retry after a failed send" in `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.retry.test.ts`, asserting the batch unlock and the name comparison include the retried file
+
+## 5. Invitations
+
+- [ ] 5.1 Move `CANDIDATE_KEYS_BATCH_SIZE` next to `getRoomCandidateKeys` in `packages/shared/api/privacy`, use it in `useMissingKeyMarks.ts`, and ask for the invitees' keys in sequential batches in `verifyInvitees` (`packages/shared/services/private-room/room-member-flows.ts`), failing on the first failed batch (design decision 2). Verify: cases "Large invitation" and "One batch fails" in `packages/shared/services/private-room/__tests__/room-member-flows.test.ts`, asserting at most 40 `userIds` per request, and the marks tests of `useMissingKeyMarks` unchanged
+- [ ] 5.2 Refuse the items of a private invitation that are not portal users before the unlock in `InvitePanel/index.js`, naming them with `Common:EncryptedInviteFailed` among the refused invitees, and keep the form when no user is left (design decision 3). Verify: cases "Group in the list" and "Only an e-mail address in the list" in `InvitePanel.privateInvite.test.tsx`, asserting the share requests sent and that `Common:UsersInvited` is not shown
+
+## 6. Backfill from a subfolder
+
+- [ ] 6.1 Start the backfill sweep in `fetchFilesImpl` (`packages/client/src/store/filesStore/fetch.helpers.ts`) after the navigation path is built, when the room of the path is private, with the room's own rights (design decision 4). Verify: cases "Page loaded inside a subfolder" and "Member opens a subfolder" in `packages/client/src/store/filesStore/__tests__/FilesStore.fetchFiles.test.ts` (`cd packages/client && pnpm exec vitest run src/store/filesStore`), and the existing backfill cases of `FilesStore.encryption.test.ts`
+
+## 7. Owner candidates
+
+- [ ] 7.1 Page the members and the administrators in `packages/shared/hooks/usePrivateRoomOwnerExclusions.ts` and expose a failed state; render `Common:OwnerCandidatesLoadFailed` with no selector for it in `packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js` (design decision 5). Add the key, run `/translate-comments` and `/translate-locales`. Verify: cases "Room with more than 100 members", "Portal with more than 100 administrators" and "Members cannot be read" in a new `packages/shared/hooks/__tests__/usePrivateRoomOwnerExclusions.test.ts` (`cd packages/shared && pnpm exec vitest run hooks`) and in `ChangeRoomOwnerPanel/__tests__/ChangeRoomOwnerPanel.privateRoom.test.tsx`, "Owner selector opened" still green, and the locale tests
+- [ ] 7.2 Read the room's members again when the owner is assigned and refuse a non-member with `Common:EncryptedChangeOwnerNotMember`, in the owner panel and in the owner change of the edit dialog; add and translate the key. Verify: case "Candidate left the room meanwhile" in `ChangeRoomOwnerPanel.privateRoom.test.tsx`, the cases of "New owner must hold a verified key" unchanged, and the locale tests
+
+## 8. Section
+
+- [ ] 8.1 Await `appsStore.waitForFrameOptIn` in `checkSectionAddress` before the decision is built (design decision 6). Verify: case "Frame configuration arrives after the address" in `FilesStore.fetchFiles.test.ts`, the cases of "Section addresses are decided before the folder is shown" unchanged
+- [ ] 8.2 Return the non-private filter from `getRoomsRequestScope` (`packages/shared/utils/rooms.tsx`) for a Rooms category with any other search area (design decision 7). Verify: case "Address with another search area" in `packages/shared/utils/__tests__/rooms.privacyScope.test.ts` (`cd packages/shared && pnpm exec vitest run utils/__tests__/rooms.privacyScope.test.ts`) and in `FilesStore.fetchRooms.test.ts`
+- [ ] 8.3 Raise `foldersCount` for a live room only after it passed the privacy scope in `packages/client/src/store/filesStore/socket.helpers.ts` (design decision 8). Verify: case "Count of the open list" in `FilesStore.socketCreate.test.ts`
+- [ ] 8.4 Read the folder tree again when `isPrivateRoomsSectionAvailable` changes, next to `refetchRoomsListOnSectionChangeImpl` in `packages/client/src/store/FilesStore.ts` (design decision 9). Verify: cases "App switched on" and "App switched off" in `FilesStore.socketHandlers.test.ts` or `packages/client/src/store/__tests__/AppsStore.installed.test.ts`, and a Playwright case in `packages/client/__tests__/private-rooms-app-off.spec.ts` that switches the app on through the apps socket event and asserts the Private item's counter without a reload
+
+## 9. Re-import under a new key
+
+- [x] 9.1 Record the owner's answer to decision 1 in proposal.md. Done 2026-11-19: the owner took the recommendation, a re-import gets a file key of its own, so the deltas stay as written. Verify: `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate private-rooms-invite-and-upload-robustness --strict`
+- [ ] 9.2 Re-import by decrypting the container with the recovered key, verifying each chunk, and encrypting the clear bytes as a new upload under its original name in `prepareReimport` (`encrypted-upload-orchestrator.ts`) (design decision 13). Verify: cases "Ciphertext re-uploaded", "Re-import gets a key of its own" and "Damaged container" in `encrypted-upload-orchestrator.test.ts`, case "Re-imported copy" in `packages/shared/services/private-room/__tests__/upload-download.integration.test.ts`, and "Identity locked during re-import" still green
+- [ ] 9.3 Compare a container under the name recovered from its header in the client (`findPrivateNameClashes`) and the SDK (`checkUploadNameClashes`), wiping the recovered key right after, and apply "keep both" to the re-import's name. Verify: case "Re-imported container in the folder of its source" in `start.helpers.test.ts` and `encrypted-upload-orchestrator.test.ts`, and a Playwright case of the same name in `packages/client/__tests__/private-room-upload-target.spec.ts`
+
+## 10. Gate
+
+- [ ] 10.1 Type-check every package the change reaches with `pnpm exec tsc` in `packages/shared`, `packages/client` and `packages/sdk` (and `login` and `management` if `packages/shared/__mocks__` changed). Verify: every command exits 0
+- [ ] 10.2 Run the private-room specs of the client under Docker (`private-room-*.spec.ts`, `private-rooms-app-off.spec.ts`, `private-rooms-section.spec.ts`), the SDK private suite on a build made with `pnpm run test:build`, the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: green runs recorded in design.md

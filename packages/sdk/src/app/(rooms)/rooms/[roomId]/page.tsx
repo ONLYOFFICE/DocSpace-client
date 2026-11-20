@@ -60,17 +60,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 
-import { getFilesSettings, getFolder } from "@/api/files";
+import { getFilesSettings, getFolder, getFolderPath } from "@/api/files";
 import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
 import { PAGE_COUNT } from "@/utils/constants";
 
-import { getPrivateRoomAddress } from "../../_utils/private-room-address";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 
 import RoomFilesPage from "./page.client";
 
@@ -109,6 +109,14 @@ export default async function RoomFiles({
   const { roomId } = await params;
   const sp = await searchParams;
 
+  const privateRoomAddress = await getPrivateRoomAddress(
+    { id: sp.folder || roomId },
+    sp,
+    getFolderPath,
+  ).catch(() => undefined);
+  if (privateRoomAddress === undefined) notFound();
+  if (privateRoomAddress) redirect(privateRoomAddress);
+
   const filter = FilesFilter.getDefault();
   filter.folder = sp.folder || roomId;
   filter.pageCount = sp.pageCount ? Number(sp.pageCount) : PAGE_COUNT;
@@ -140,9 +148,6 @@ export default async function RoomFiles({
   if (!filesSettings || !portalSettings) {
     throw new Error("Failed to load required settings");
   }
-
-  const privateRoomAddress = await getPrivateRoomAddress(folderData, sp);
-  if (privateRoomAddress) redirect(privateRoomAddress);
 
   return (
     <RoomFilesPage

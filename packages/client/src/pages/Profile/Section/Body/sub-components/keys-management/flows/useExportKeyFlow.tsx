@@ -123,6 +123,7 @@ export function useExportKeyFlow({ onForgotPassphrase }: Deps = {}): ExportKeyFl
     <PassphraseModal
       visible
       isNew={false}
+      submitLabel={t("Common:ContinueButton")}
       onSubmit={onSubmit}
       onCancel={reset}
       isLoading={isPending}

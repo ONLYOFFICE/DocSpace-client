@@ -36,7 +36,9 @@
 import type { TFunction } from "i18next";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("../room-encryption", () => ({
+vi.mock("../room-encryption", async (io) => ({
+  waitsForAccess: ((await io()) as typeof import("../room-encryption"))
+    .waitsForAccess,
   addMembersToEncryptedRoom: vi.fn(),
   backfillEncryptedFilesForRoomMembers: vi.fn(),
   rewrapMissingFilesForMember: vi.fn(),
@@ -70,6 +72,7 @@ import {
   rewrapPendingAccessOfMember,
   sendPrivateRoomInvitations,
   notInvitedReasons,
+  skippedMemberNotices,
   verifyInvitees,
 } from "../room-member-flows";
 import { pendingAccessStore } from "../pending-access";
@@ -914,4 +917,26 @@ describe("notInvitedReasons", () => {
   it("names nobody when nobody was left out", () => {
     expect(notInvitedReasons(t, [], [])).toEqual([]);
   });
+});
+
+describe("A peer key that could not be checked is reported per operation", () => {
+  it.each(["key-unchecked", "key-unusable"] as const)(
+    "Invitee whose key could not be checked: %s",
+    (reason) => {
+      const skipped = [
+        { id: "u-bob", displayName: "Bob", reason, notInvited: true as const },
+      ];
+
+      expect(notInvitedReasons(t, skipped)).toEqual([
+        'Common:EncryptedInviteFailed {"users":"Bob"}',
+      ]);
+      expect(skippedMemberNotices(t, skipped)).toEqual([
+        {
+          level: "warning",
+          text: 'Common:EncryptedInviteFailed {"users":"Bob"}',
+          namesLeftOut: true,
+        },
+      ]);
+    },
+  );
 });

@@ -101,6 +101,11 @@ vi.mock("@onlyoffice/apps-ui-kit/components/password-input", () => ({
     simpleView,
     passwordSettings,
     onValidateInput,
+    tooltipPasswordPlace,
+    tooltipPasswordLength,
+    tooltipPasswordDigits,
+    tooltipPasswordCapital,
+    tooltipPasswordSpecial,
   }: {
     inputValue?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -109,31 +114,50 @@ vi.mock("@onlyoffice/apps-ui-kit/components/password-input", () => ({
     simpleView?: boolean;
     passwordSettings?: {
       minLength: number;
+      upperCase: boolean;
+      digits: boolean;
+      specSymbols: boolean;
       digitsRegexStr: string;
       upperCaseRegexStr: string;
       specSymbolsRegexStr: string;
     };
     onValidateInput?: (rulesPassed: boolean) => void;
+    tooltipPasswordPlace?: string;
+    tooltipPasswordLength?: string;
+    tooltipPasswordDigits?: string;
+    tooltipPasswordCapital?: string;
+    tooltipPasswordSpecial?: string;
   }) =>
     React.createElement("input", {
       "data-testid": inputName,
       value: inputValue ?? "",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        // Outside the simple view the kit checks its rules on every change.
+        // Outside the simple view the kit checks its rules on every change,
+        // each character rule only while it is switched on.
         if (!simpleView && passwordSettings) {
           const { value } = e.target;
+          const rules = [
+            [passwordSettings.digits, passwordSettings.digitsRegexStr],
+            [passwordSettings.upperCase, passwordSettings.upperCaseRegexStr],
+            [passwordSettings.specSymbols, passwordSettings.specSymbolsRegexStr],
+          ] as const;
           onValidateInput?.(
             value.trim().length >= passwordSettings.minLength &&
-              [
-                passwordSettings.digitsRegexStr,
-                passwordSettings.upperCaseRegexStr,
-                passwordSettings.specSymbolsRegexStr,
-              ].every((rule) => new RegExp(rule).test(value)),
+              rules.every(([on, rule]) => !on || new RegExp(rule).test(value)),
           );
         }
         onChange?.(e);
       },
       "data-has-error": String(hasError),
+      "data-tooltip-place": tooltipPasswordPlace,
+      "data-tooltip-rules": [
+        tooltipPasswordLength,
+        tooltipPasswordDigits,
+        tooltipPasswordCapital,
+        tooltipPasswordSpecial,
+      ]
+        .filter(Boolean)
+        .join("|"),
     }),
 }));
 
@@ -178,6 +202,7 @@ vi.mock("../KeyRotationDialog.module.scss", () => ({ default: {} }));
 // Import SUT after mocks are registered
 // ---------------------------------------------------------------------------
 import { KeyRotationDialog } from "../KeyRotationDialog";
+import { RULES_TOOLTIP_PLACE } from "@docspace/shared/dialogs/passphrase-modal/PassphraseModal";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -187,6 +212,15 @@ function typeInto(testId: string, value: string) {
   const input = screen.getByTestId(testId) as HTMLInputElement;
   fireEvent.change(input, { target: { value } });
 }
+
+const CYRILLIC = "абвгдеёжзийклмнопрсту";
+const CJK = "春眠不觉晓处处闻啼鸟夜来风雨声花落知多少";
+
+const anotherScript = (lengths: number[]) =>
+  lengths.flatMap((length) => [
+    ["Cyrillic", length, CYRILLIC.slice(0, length)] as const,
+    ["CJK", length, CJK.slice(0, length)] as const,
+  ]);
 
 const makeProps = (onSubmit = vi.fn()) => ({
   visible: true,
@@ -308,13 +342,14 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
     expect(btn.disabled).toBe(false);
   });
 
-  it("keeps Save disabled until the kit rules are met", () => {
+  // Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+  it("Passphrase change with lowercase words", () => {
     render(<KeyRotationDialog {...makeProps()} />);
     typeInto("currentPassphrase", "old-current-pass");
-    typeInto("newPassphrase", "Rv7mKt2pQx9w"); // not weak, no special character
-    typeInto("confirmNewPassphrase", "Rv7mKt2pQx9w");
+    typeInto("newPassphrase", "lorem ipsum dolor sitx");
+    typeInto("confirmNewPassphrase", "lorem ipsum dolor sitx");
     const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
-    expect(btn.disabled).toBe(true);
+    expect(btn.disabled).toBe(false);
   });
 
   it("Passphrase change", async () => {
@@ -336,6 +371,123 @@ describe("KeyRotationDialog — passphrase minimum-length guard", () => {
       fireEvent.click(btn);
     });
     expect(onSubmit).not.toHaveBeenCalled();
+  });
+});
+
+describe("KeyRotationDialog: the strength grade does not contradict the passphrase rules", () => {
+  const strengthLine = () => screen.getByTestId("passphrase_strength");
+
+  it("Passphrase change", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "my password is long"); // a common pattern
+
+    expect(strengthLine()).toHaveTextContent("Common:PassphraseStrengthWeak");
+  });
+
+  it("Long passphrase without a required character", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "lorem ipsum dolor sitx");
+
+    expect(strengthLine()).toHaveTextContent("Common:PassphraseStrengthGood");
+  });
+
+  it("All rules met", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", "Tx7$kp!aL2nQz@vR");
+
+    expect(strengthLine()).toHaveTextContent("Common:PassphraseStrengthStrong");
+  });
+
+  it("No strength line before a new passphrase is typed", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+
+    expect(screen.queryByTestId("passphrase_strength")).not.toBeInTheDocument();
+  });
+
+  it("Accepted passphrase is not weak at a passphrase change", () => {
+    const passphrase = "!@#$%^&*()_+";
+    expect(passphrase).toHaveLength(12);
+    render(<KeyRotationDialog {...makeProps()} />);
+    typeInto("currentPassphrase", "old-current-pass");
+    typeInto("newPassphrase", passphrase);
+    typeInto("confirmNewPassphrase", passphrase);
+
+    expect(screen.getByTestId("passphrase_strength")).toHaveTextContent(
+      /Common:PassphraseStrength(Fair|Good|Strong)$/,
+    );
+    const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
+    expect(btn.disabled).toBe(false);
+  });
+});
+
+describe("KeyRotationDialog: a new passphrase needs no particular characters", () => {
+  it("Rules tooltip", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+
+    expect(screen.getByTestId("newPassphrase")).toHaveAttribute(
+      "data-tooltip-rules",
+      "Common:PasswordMinimumLength: 12",
+    );
+  });
+
+  it.each(anotherScript([12, 16, 20]))(
+    "Passphrase change in another script: %s, %i characters",
+    async (_, length, passphrase) => {
+      expect(passphrase).toHaveLength(length);
+      const onSubmit = vi.fn().mockResolvedValue(undefined);
+      render(<KeyRotationDialog {...makeProps(onSubmit)} />);
+      typeInto("currentPassphrase", "old-current-pass");
+      typeInto("newPassphrase", passphrase);
+      typeInto("confirmNewPassphrase", passphrase);
+
+      const newField = screen.getByTestId("newPassphrase");
+      expect(newField).toHaveAttribute("data-has-error", "false");
+      expect(newField.closest("[data-error-message]")).toHaveAttribute(
+        "data-error-message",
+        "",
+      );
+      const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
+      expect(btn.disabled).toBe(false);
+
+      await act(async () => {
+        fireEvent.click(btn);
+      });
+      expect(onSubmit).toHaveBeenCalledWith("old-current-pass", passphrase);
+    },
+  );
+
+  it.each(anotherScript([11]))(
+    "Too short in another script: %s, %i characters",
+    async (_, length, passphrase) => {
+      expect(passphrase).toHaveLength(length);
+      const onSubmit = vi.fn();
+      render(<KeyRotationDialog {...makeProps(onSubmit)} />);
+      typeInto("currentPassphrase", "old-current-pass");
+      typeInto("newPassphrase", passphrase);
+      typeInto("confirmNewPassphrase", passphrase);
+
+      const btn = screen.getByTestId("Common:SaveButton") as HTMLButtonElement;
+      expect(btn.disabled).toBe(true);
+      await act(async () => {
+        fireEvent.click(btn);
+      });
+      expect(onSubmit).not.toHaveBeenCalled();
+    },
+  );
+});
+
+describe("KeyRotationDialog: the passphrase rules tooltip leaves the dialog readable", () => {
+  it("Passphrase change", () => {
+    render(<KeyRotationDialog {...makeProps()} />);
+
+    expect(screen.getByTestId("newPassphrase")).toHaveAttribute(
+      "data-tooltip-place",
+      RULES_TOOLTIP_PLACE,
+    );
   });
 });
 

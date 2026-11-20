@@ -36,6 +36,7 @@
 import {
   checkFileConflicts,
   duplicate,
+  getFileEncryptionAccess,
   getFolder,
 } from "@docspace/shared/api/files";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
@@ -302,9 +303,28 @@ self: FilesActionStore,
     return;
   }
 
+  // Spec: private-rooms/file-operations, "A file without a wrap for the user is reported as no access"
+  if (items.length === 1) {
+    let hasOwnEntry = false;
+    try {
+      const access = await getFileEncryptionAccess(items[0].id);
+      hasOwnEntry = !!access?.fileKeys?.some(
+        (k) => String(k.userId) === String(userId),
+      );
+    } catch (error) {
+      console.error("[ENCRYPTION] copy access not read:", error);
+      reportFailed([items[0].title]);
+      return;
+    }
+    if (!hasOwnEntry) {
+      toastr.error(i18n.t("Common:EncryptedFileNoAccessYet"));
+      return;
+    }
+  }
+
   const identity = await requireUnlock(String(userId));
   if (!identity) {
-    toastr.error(i18n.t("Common:EncryptionLockedAddMembers"));
+    toastr.error(i18n.t("Common:EncryptionLockedCopy"));
     return;
   }
 
@@ -656,12 +676,18 @@ export const moveDragItemsImpl = (
 self: FilesActionStore,
   destFolderId: number | string,
   folderTitle: string,
-  destFolderInfo: TFolder & {
+  passedFolderInfo?: TFolder & {
     private?: boolean;
     rootFolderId?: number | string;
   },
 
 )=> {
+  // A row of any loaded page, not only of the first one.
+  const destFolderInfo =
+    passedFolderInfo ??
+    (self.filesStore.folders.find((folder) =>
+      isSameId(folder.id, destFolderId),
+    ) as typeof passedFolderInfo);
   const sourceInPrivateRoom = self.treeFoldersStore.isPrivacyFolder;
   const { bufferSelection: dragBufferSelection } = self.filesStore;
   const dragSelection = (

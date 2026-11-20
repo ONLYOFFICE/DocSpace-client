@@ -3,7 +3,7 @@
   "content": "Weak",
   "content_en_sha1_hash": "8bfada821419f7b1c35da6470b04b8c1b0c72d91",
   "created_at": "2026-07-27T13:07:25.873Z",
-  "updated_at": "2026-11-05T16:49:40.025Z",
+  "updated_at": "2026-11-19T16:14:54.186Z",
   "comment": {
     "text": "Short label used in the passphrase modal to indicate a low security level.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 191,
-      "context": ");\n \n const strengthLabel = (strength: PassphraseStrength): string => {\n switch (strength) {\n case \"weak\":\n return t(\"Common:PassphraseStrengthWeak\");\n case \"fair\":\n return t(\"Common:PassphraseStrengthFair\");\n case \"good\":\n return t(\"Common:PassphraseStrengthGood\");\n case \"strong\":",
+      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseStrengthLine.tsx",
+      "line_number": 69,
+      "context": "if (!passphrase) return null;\n \n const strength = getShownPassphraseStrength(passphrase);\n \n const label = {\n weak: t(\"Common:PassphraseStrengthWeak\"),\n fair: t(\"Common:PassphraseStrengthFair\"),\n good: t(\"Common:PassphraseStrengthGood\"),\n strong: t(\"Common:PassphraseStrengthStrong\"),\n }[strength];",
       "module": "/packages/shared"
     }
   ],

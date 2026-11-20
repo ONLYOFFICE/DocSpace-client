@@ -42,6 +42,7 @@ import {
   getDocumentServiceLocation,
   getFileEncryptionAccess,
 } from "../../api/files";
+import { NoAccessError } from "../../services/encryption/errors";
 import { decryptFile as decryptFileContent } from "../../services/encryption/file-keys";
 import { resolveDisplayTitle } from "../../services/encryption/filename-cache";
 import { unwrapDekForCurrentUser } from "../../services/encryption/room-file-access";
@@ -66,8 +67,10 @@ const MediaViewer = ({ userId, ...props }: MediaViewerProps) => {
 
       const encryptionInfo = await getFileEncryptionAccess(fileId);
       if (signal.aborted) return null;
-      if (!encryptionInfo?.fileKeys) {
-        throw new Error("You don't have access to decrypt this file");
+      // Spec: private-rooms/file-operations, "The media viewer reports a file that is not shared yet as no access"
+      const fileKeys = encryptionInfo?.fileKeys ?? [];
+      if (!fileKeys.some((k) => String(k.userId) === String(userId))) {
+        throw new NoAccessError(String(userId));
       }
 
       const identity = await requireUnlock(String(userId));
@@ -86,7 +89,7 @@ const MediaViewer = ({ userId, ...props }: MediaViewerProps) => {
       if (signal.aborted) return null;
 
       const dek = await unwrapDekForCurrentUser({
-        fileKeys: encryptionInfo.fileKeys,
+        fileKeys,
         roomMemberKeys,
         currentUserId: String(userId),
         currentIdentity: identity,

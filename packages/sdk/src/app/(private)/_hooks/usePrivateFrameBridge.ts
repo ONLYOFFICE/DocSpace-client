@@ -50,11 +50,12 @@ export type PrivateFrameSection = "rooms" | "archive";
 export const sectionFromPathname = (pathname: string): PrivateFrameSection =>
   pathname.startsWith("/private/archive") ? "archive" : "rooms";
 
-// Spec: private-rooms/sdk-surface, "No search in private rooms".
+// Spec: private-rooms/sdk-surface, "Frame events carry no item of a private room".
 export const withoutSearchText = (query: string): string => {
   const params = new URLSearchParams(query);
-  if (!params.has("search")) return query;
+  if (!params.has("search") && !params.has("filterValue")) return query;
   params.delete("search");
+  params.delete("filterValue");
   const rest = params.toString();
   return rest ? `?${rest}` : "";
 };

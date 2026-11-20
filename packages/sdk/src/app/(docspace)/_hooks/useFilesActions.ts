@@ -68,7 +68,8 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
       editForm: boolean = false,
       fillForm: boolean = false,
     ) => {
-      if (sdkConfig?.events?.onFileManagerClick) {
+      // Spec: private-rooms/sdk-surface, "Frame events carry no item of a private room"
+      if (sdkConfig?.events?.onFileManagerClick && !file.encrypted) {
         frameCallEvent({
           event: "onFileManagerClick",
           data: file,

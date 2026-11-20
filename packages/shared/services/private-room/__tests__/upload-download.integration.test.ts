@@ -100,7 +100,7 @@ const mockIDB = {
   open: () => {
     const req = new MockOpenRequest();
     queueMicrotask(() => {
-      req.error = new Error("test: IDB disabled");
+      req.error = new DOMException("test: IDB disabled", "SecurityError");
       req.onerror?.();
     });
     return req;
@@ -238,6 +238,47 @@ describe("encrypted download — integration via MSW", () => {
     const decryptedBytes = await blobToUint8Array(result.file!);
     const decryptedText = new TextDecoder().decode(decryptedBytes);
     expect(decryptedText).toBe(originalText);
+  });
+
+  it("Name with separators", async () => {
+    const alice = await generateIdentityKeyPair();
+    const plainBytes = new TextEncoder().encode("Named content.");
+    const { encryptedBlob, dek } = await encryptFile(plainBytes, {
+      fileName: "../plans/memo\u0007.txt",
+    });
+    const fileId = 7778;
+    const wrapped = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE_ID,
+      recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      fileId,
+    });
+    filesHandle.current!.setFiles([
+      {
+        id: fileId,
+        title: "memo.txt",
+        serverTitle: "def-uuid.txt",
+        size: plainBytes.byteLength,
+        encrypted: true,
+        fileKeys: wrapped,
+        bytes: await blobToUint8Array(encryptedBlob),
+      },
+    ]);
+
+    const result = await downloadAndDecryptFile({
+      downloadUrl: `http://localhost:${PORT}/api/2.0/files/file/${fileId}/download`,
+      fileId,
+      fileKeys: wrapped,
+      roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      userId: ALICE_ID,
+      identity: alice,
+      originalFileName: "def-uuid.txt",
+      originalFileType: "text/plain",
+    });
+
+    expect(result.success).toBe(true);
+    expect(result.file!.name).toBe(".._plans_memo.txt");
   });
 
   it("returns success:false when the server rejects the download", async () => {

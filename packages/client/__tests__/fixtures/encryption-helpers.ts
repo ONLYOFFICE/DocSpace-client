@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import {
   privacyroomKeysHandlers,
   type PrivacyroomHandlerHandle,
@@ -49,11 +49,20 @@ export type BootstrapResult = {
 
 export type BootstrapOptions = {
   passphrase?: string;
+  /** Runs on the passphrase step once both fields are filled, before Continue. */
+  onPassphraseStep?: (dialog: Locator) => Promise<void>;
 };
 
-// Must satisfy PASSPHRASE_SETTINGS in PassphraseModal:
-// length >= 12, uppercase, digits, special characters.
+// Must satisfy the rules of a new passphrase (PASSPHRASE_SETTINGS): at
+// least 12 characters and no common pattern.
 const DEFAULT_PASSPHRASE = "Test-Horse-Battery-Staple-99!";
+
+/** Leaves the explanation step of key setup for its passphrase step. */
+export async function passKeySetupExplanation(page: Page) {
+  const explanation = page.getByRole("dialog", { name: "Create key" });
+  await expect(explanation).toBeVisible({ timeout: 5000 });
+  await explanation.getByRole("button", { name: "Continue" }).click();
+}
 
 export async function bootstrapEncryption(
   page: Page,
@@ -81,6 +90,7 @@ export async function bootstrapEncryption(
   });
   await expect(generateBtn).toBeVisible({ timeout: 15000 });
   await generateBtn.click();
+  await passKeySetupExplanation(page);
 
   const passphraseInput = page.getByLabel("Passphrase", { exact: true });
   await expect(passphraseInput).toBeVisible({ timeout: 5000 });
@@ -88,6 +98,10 @@ export async function bootstrapEncryption(
 
   const confirmInput = page.getByLabel("Confirm passphrase", { exact: true });
   await confirmInput.fill(passphrase);
+
+  await options.onPassphraseStep?.(
+    page.getByRole("dialog", { name: "Create passphrase" }),
+  );
 
   await page
     .getByRole("dialog")

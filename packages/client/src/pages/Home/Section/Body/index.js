@@ -57,7 +57,7 @@ import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import ClientSearchProgress from "./ClientSearchProgress";
 import KnowledgeVectorizationBar from "./KnowledgeVectorizationBar";
-import PrivateRoomLockedBar from "./PrivateRoomLockedBar";
+import PrivateRoomLockedBlock from "./PrivateRoomLockedBlock";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import EmptyRoomGroupContainer from "../../../../components/EmptyContainer/EmptyRoomGroupContainer";
@@ -115,7 +115,6 @@ const SectionBodyContent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isErrorRoomNotAvailable,
-    getSelectedFolder,
     setDropTargetPreview,
     roomsFilterGroupId,
     setEditRoomGroupsDialogVisible,
@@ -366,9 +365,9 @@ const SectionBodyContent = (props) => {
     }
   };
 
-  const onMoveTo = (destFolderId, title, destFolderInfo) => {
+  const onMoveTo = (destFolderId, title) => {
     const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
-    moveDragItems(id, title, destFolderInfo);
+    moveDragItems(id, title);
   };
 
   const onMouseUp = (e) => {
@@ -426,13 +425,8 @@ const SectionBodyContent = (props) => {
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
 
-    const selectedFolder = getSelectedFolder();
-    const destFolderInfo = selectedFolder.folders.find(
-      (folder) => folder.id == selectedFolderId,
-    );
-
     if (!isIndexEditingMode && selectedFolderId) {
-      return onMoveTo(selectedFolderId, title, destFolderInfo);
+      return onMoveTo(selectedFolderId, title);
     }
     if (filesList.length === 1) return;
 
@@ -546,8 +540,10 @@ const SectionBodyContent = (props) => {
     return (
       <>
         <KnowledgeVectorizationBar />
-        <PrivateRoomLockedBar />
-        <EmptyContainer isEmptyPage={isEmptyPage} />
+        {/* Spec: private-rooms/key-management, "A locked key is reported by a block in a private room" */}
+        <PrivateRoomLockedBlock
+          fallback={<EmptyContainer isEmptyPage={isEmptyPage} />}
+        />
       </>
     );
   }
@@ -557,7 +553,7 @@ const SectionBodyContent = (props) => {
   return (
     <>
       <KnowledgeVectorizationBar />
-      <PrivateRoomLockedBar />
+      <PrivateRoomLockedBlock />
       <ClientSearchProgress />
       {/* Where the list is for useRowFocus in every layout: the mobile one
           has no section scroller to find it by. No box of its own, so the
@@ -647,7 +643,6 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
-      getSelectedFolder: selectedFolderStore.getSelectedFolder,
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
       setEditRoomGroupsDialogVisible,

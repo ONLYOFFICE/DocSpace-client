@@ -522,6 +522,13 @@ test.describe("Media viewer of an encrypted file", () => {
       "base64",
     ),
   );
+  // A 1x1 grayscale TIFF, which the browser cannot show without decoding it.
+  const TIFF_BYTES = new Uint8Array(
+    Buffer.from(
+      "SUkqAAgAAAAJAAABAwABAAAAAQAAAAEBAwABAAAAAQAAAAIBAwABAAAACAAAAAMBAwABAAAAAQAAAAYBAwABAAAAAQAAABEBBAABAAAAegAAABUBAwABAAAAAQAAABYBAwABAAAAAQAAABcBBAABAAAAAQAAAAAAAACA",
+      "base64",
+    ),
+  );
 
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
@@ -544,7 +551,7 @@ test.describe("Media viewer of an encrypted file", () => {
       .locator('input[name="passphrase"], #passphrase input')
       .first()
       .fill(passphrase);
-    await prompt.getByRole("button", { name: "Confirm" }).click();
+    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
     await expect(prompt).toBeHidden({ timeout: 10000 });
   };
 
@@ -556,10 +563,14 @@ test.describe("Media viewer of an encrypted file", () => {
     page,
     mockRequest,
     baseUrl,
+    bytes = PNG_BYTES,
+    title = IMAGE_TITLE,
   }: {
     page: Page;
     mockRequest: WorkerFixture;
     baseUrl: string;
+    bytes?: Uint8Array;
+    title?: string;
   }) => {
     const { keysHandle, passphrase } = await bootstrapEncryption(
       page,
@@ -572,8 +583,8 @@ test.describe("Media viewer of an encrypted file", () => {
       alice.publicKey.buffer as ArrayBuffer,
     );
 
-    const { encryptedBlob, dek } = await encryptFile(PNG_BYTES, {
-      fileName: IMAGE_TITLE,
+    const { encryptedBlob, dek } = await encryptFile(bytes, {
+      fileName: title,
     });
     const fileKeys = await wrapDekForRecipients({
       dek,
@@ -596,9 +607,9 @@ test.describe("Media viewer of an encrypted file", () => {
         initialFiles: [
           {
             id: VIEWER_FILE_ID,
-            title: IMAGE_TITLE,
-            serverTitle: "obfuscated.png",
-            size: PNG_BYTES.byteLength,
+            title,
+            serverTitle: `obfuscated${title.slice(title.lastIndexOf("."))}`,
+            size: bytes.byteLength,
             encrypted: true,
             fileKeys,
             bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
@@ -660,6 +671,28 @@ test.describe("Media viewer of an encrypted file", () => {
     const fromHotkey = page.waitForEvent("download", { timeout: 20000 });
     await page.keyboard.press("Control+s");
     await expectPlaintextDownload(await fromHotkey);
+  });
+
+  test("Open encrypted TIFF or HEIC image", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    await openEncryptedImage({
+      page,
+      mockRequest,
+      baseUrl,
+      bytes: TIFF_BYTES,
+      title: "scan.tiff",
+    });
+
+    await expect
+      .poll(() =>
+        page
+          .getByTestId("image-content")
+          .evaluate((img) => (img as HTMLImageElement).naturalWidth),
+      )
+      .toBe(1);
   });
 
   test("Media viewer menu of an encrypted file", async ({
@@ -842,7 +875,7 @@ test.describe("Encrypted file moved out of a private room", () => {
         .locator('input[name="passphrase"], #passphrase input')
         .first()
         .fill(passphrase);
-      await passphrasePrompt.getByRole("button", { name: "Confirm" }).click();
+      await passphrasePrompt.getByRole("button", { name: "Unlock", exact: true }).click();
     } catch {}
 
     const deleteBody = (await deleteRequest).postDataJSON() as {

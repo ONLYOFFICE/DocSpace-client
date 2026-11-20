@@ -36,6 +36,7 @@
 import { useEffect, useCallback } from "react";
 
 import { Events } from "@docspace/shared/enums";
+import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
 import {
   frameCallbackData,
   frameCallCommand,
@@ -53,6 +54,20 @@ export const toFolderInfo = (folder) =>
         !FOLDER_INFO_EXCLUDED_KEYS.has(key) && typeof value !== "function",
     ),
   );
+
+/**
+ * Throws for a folder of a private room, where a frame method creates no
+ * file, and a folder only in a frame opted in to private rooms.
+ */
+// Spec: private-rooms/file-operations, "Frame methods create nothing in a private room without the opt-in"
+const assertFrameCreate = async (folderId, isFolder, isOptedIn) => {
+  // An alias such as "@my" names a section that holds no private room.
+  if (!Number.isFinite(Number(folderId))) return;
+  const target = await resolveFolderTarget({ id: folderId });
+  if (target.isPrivate && !(isFolder && isOptedIn)) {
+    throw new Error("Not available in a private room");
+  }
+};
 
 const useSDK = ({
   frameConfig,
@@ -80,6 +95,7 @@ const useSDK = ({
   i18n,
   getRooms,
   isLoading,
+  isPrivateRoomsSectionAvailable,
 }) => {
   const handleMessage = async (e) => {
     if (window.self === window.parent || e.source !== window.parent) return;
@@ -154,6 +170,7 @@ const useSDK = ({
           case "createFile":
             {
               const { folderId, title, templateId, formId } = data;
+              await assertFrameCreate(folderId, false, false);
               res = await createFile(folderId, title, templateId, formId);
 
               refreshFiles();
@@ -162,6 +179,11 @@ const useSDK = ({
           case "createFolder":
             {
               const { parentFolderId, title } = data;
+              await assertFrameCreate(
+                parentFolderId,
+                true,
+                isPrivateRoomsSectionAvailable,
+              );
               res = await createFolder(parentFolderId, title.trimEnd());
 
               refreshFiles();

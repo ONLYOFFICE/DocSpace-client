@@ -37,11 +37,11 @@ The system SHALL make the Private section available while the E2E rooms app is o
 - **THEN** the section disappears without a reload, and private rooms are listed nowhere: the Rooms section leaves them out too
 
 ### Requirement: Private addresses open in Rooms while the section is not available
-The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available, so a shared link to a private room keeps working. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
+The system SHALL open a `/private` address under the matching Rooms address, keeping its query, when the section is not available. The list and room addresses map to `/rooms/shared`, and the archive addresses to `/rooms/archived`.
 
 #### Scenario: Link opened while the section is not available
 - **WHEN** a member of a private room opens `/private/{roomId}/filter` on a standalone portal where the E2E rooms app is off
-- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter` and the room opens in the Rooms section
+- **THEN** the address is replaced with `/rooms/shared/{roomId}/filter`
 
 ### Requirement: Apps catalog titles the E2E rooms app Private
 The system SHALL title the E2E rooms app Common:Private in the apps catalog, the same label as the sidebar section. Its description stays Common:DashboardE2eRoomsDescription. The name "Rooms E2E" SHALL NOT appear anywhere in the client.

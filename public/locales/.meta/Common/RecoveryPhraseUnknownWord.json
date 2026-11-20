@@ -1,0 +1,29 @@
+{
+  "key_path": "RecoveryPhraseUnknownWord",
+  "content": "Word {{position}} ({{word}}) is not part of any recovery phrase. Check its spelling.",
+  "content_en_sha1_hash": "3ee8f669e7c54fa01ea9f1708ae675d463836128",
+  "created_at": "2026-11-17T08:50:42.600Z",
+  "updated_at": "2026-11-17T08:51:11.729Z",
+  "comment": {
+    "text": "Error under the recovery phrase field of the Recover key dialog when a typed word is not in the recovery word list; {{position}} is the word's number in the phrase (1 to 24) and {{word}} is the word as the user typed it, shown in parentheses. Full sentences: the word is misspelled, ask the user to check its spelling.",
+    "is_auto": true,
+    "updated_at": "2026-11-17T08:51:11.729Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
+      "line_number": 114,
+      "context": "setIsValidating(true);\n try {\n const unknown = await findUnknownMnemonicWord(normalized);\n if (unknown) {\n setLocalError(\n t(\"Common:RecoveryPhraseUnknownWord\", {\n word: unknown.word,\n position: unknown.position,\n }),\n );\n return;",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

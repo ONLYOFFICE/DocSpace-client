@@ -42,11 +42,9 @@ import { getCachedEncryptedFilename } from "../encryption/filename-cache";
 import type { IdentityKeyPair } from "../encryption/types";
 import { addCopySuffix } from "./encrypted-copy";
 import { recoverEncryptedFilenames } from "./encrypted-filename-recovery";
+import { fileNameKey as nameKey } from "./safe-file-name";
 
 const PAGE_SIZE = 100;
-
-/** Titles in one folder compare without regard to case. */
-const nameKey = (name: string) => name.toLowerCase();
 
 /**
  * The decrypted names of the files directly in a folder of a private room.

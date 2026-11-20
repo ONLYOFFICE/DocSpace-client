@@ -34,6 +34,7 @@
  */
 
 import type {
+  Locator,
   Page,
   PageAssertionsToHaveScreenshotOptions,
 } from "@playwright/test";
@@ -150,4 +151,19 @@ export const expectScreenshot = async (
   await page.waitForTimeout(500);
   await expectAlignedList(page);
   await expect(page).toHaveScreenshot(name, options);
+};
+
+/**
+ * Screenshots one element - a panel or a dialog - instead of the page. The
+ * list check of `expectScreenshot` is left out: the page behind the element
+ * is not in the frame, so its layout cannot spoil the baseline.
+ */
+export const expectElementScreenshot = async (
+  locator: Locator,
+  name: string | string[],
+  options?: Omit<PageAssertionsToHaveScreenshotOptions, "clip" | "fullPage">,
+) => {
+  // Add delay to ensure fonts are fully rendered on slower machines
+  await locator.page().waitForTimeout(500);
+  await expect(locator).toHaveScreenshot(name, options);
 };

@@ -90,11 +90,22 @@ describe("FilesStore.wsModifyFolderCreate — characterization", () => {
 describe("FilesStore.wsModifyFolderCreate — rooms the user cannot read", () => {
   afterEach(() => vi.restoreAllMocks());
 
-  it("Administrator outside a new private room", async () => {
+  it("Update of a room the user cannot read", async () => {
     const store = createTestFilesStore({
       selectedFolderStore: { id: 8 },
       treeFoldersStore: { isFormsFolder: false },
     });
+    const filters = () => [
+      store.filter.toUrlParams(),
+      store.filter.total,
+      store.roomsFilter.toUrlParams(),
+      store.roomsFilter.total,
+    ];
+    const before = filters();
+    const getFolder = vi
+      .spyOn(api.files, "getFolder")
+      .mockResolvedValue({} as never);
+    const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
     const getFolderInfo = vi
       .spyOn(api.files, "getFolderInfo")
       .mockRejectedValue(Object.assign(new Error("403"), { response: { status: 403 } }));
@@ -113,8 +124,12 @@ describe("FilesStore.wsModifyFolderCreate — rooms the user cannot read", () =>
       } as never),
     ).resolves.not.toThrow();
 
+    expect(getFolderInfo).toHaveBeenCalledTimes(1);
     expect(getFolderInfo).toHaveBeenCalledWith(100, true);
     expect(store.folders).toEqual([]);
+    expect(getFolder).not.toHaveBeenCalled();
+    expect(filters()).toEqual(before);
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 });
 

@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Nova datoteka će zameniti postojeću kao nova verzija.",
   "OverwriteTitle": "Prepisivanje novom verzijom",
   "Owner": "Vlasnik",
+  "OwnerCandidatesLoadFailed": "Članovi sobe nisu mogli da se učitaju, pa trenutno nije moguće izabrati novog vlasnika. Zatvorite panel i pokušajte ponovo.",
   "OwnerChange": "Promeni vlasnika",
   "Owners": "Vlasnici",
   "PageOfTotalPage": "{{page}} od {{totalPage}}",

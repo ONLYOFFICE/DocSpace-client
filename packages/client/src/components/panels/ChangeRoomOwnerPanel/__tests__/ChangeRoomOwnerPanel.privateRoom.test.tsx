@@ -157,21 +157,23 @@ describe("Change owner of a private room", () => {
     expect(mocks.selector?.excludeItems).toEqual(["me", "carol"]);
     expect(mocks.getRoomMembers).toHaveBeenCalledWith(
       ROOM_ID,
-      { count: 100 },
+      { count: 100, startIndex: 0 },
       expect.any(AbortSignal),
     );
     const [adminsFilter] = mocks.getUserList.mock.calls[0];
     expect(adminsFilter.pageCount).toBe(100);
   });
 
-  it("offers every candidate when the room members cannot be read", async () => {
+  it("Members cannot be read", async () => {
     mocks.getRoomMembers.mockImplementation(async () => {
       throw new Error("403");
     });
     renderPanelFor(privateRoomDto({ id: ROOM_ID }));
 
-    await waitFor(() => expect(screen.getByTestId("people_selector")));
-    expect(mocks.selector?.excludeItems).toEqual(["me"]);
+    expect(
+      await screen.findByTestId("change_owner_candidates_failed"),
+    ).toHaveTextContent("Common:OwnerCandidatesLoadFailed");
+    expect(screen.queryByTestId("people_selector")).toBeNull();
   });
 
   it("refuses a new owner without a key", async () => {

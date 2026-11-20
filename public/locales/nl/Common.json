@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Het nieuwe bestand zal het bestaande bestand vervangen als een nieuwe versie.",
   "OverwriteTitle": "Overschrijven met versie update",
   "Owner": "Eigenaar",
+  "OwnerCandidatesLoadFailed": "De leden van de kamer konden niet worden geladen, dus er kan nu geen nieuwe eigenaar worden gekozen. Sluit het paneel en probeer het opnieuw.",
   "OwnerChange": "Wijzig eigenaar",
   "Owners": "Eigenaren",
   "PageOfTotalPage": "{{page}} van {{totalPage}}",

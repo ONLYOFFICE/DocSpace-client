@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "새 파일이 기존 파일을 새 버전으로 대체합니다.",
   "OverwriteTitle": "버전 업데이트로 덮어쓰기",
   "Owner": "소유자",
+  "OwnerCandidatesLoadFailed": "방 멤버를 불러올 수 없어 지금은 새 소유자를 선택할 수 없습니다. 패널을 닫고 다시 시도하세요.",
   "OwnerChange": "소유자 변경",
   "Owners": "소유자",
   "PageOfTotalPage": "{{page}}/{{totalPage}}",

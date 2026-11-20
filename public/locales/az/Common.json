@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Yeni fayl mövcud faylı yeni versiya kimi əvəz edəcək.",
   "OverwriteTitle": "Versiya yenilənməsi ilə üzərinə yazma",
   "Owner": "Sahibi",
+  "OwnerCandidatesLoadFailed": "Otaq üzvlərini yükləmək mümkün olmadı, buna görə indi yeni sahib seçmək olmur. Paneli bağlayın və yenidən cəhd edin.",
   "OwnerChange": "Sahibi dəyiş",
   "Owners": "Sahiblər",
   "PageOfTotalPage": "{{page}}-ci {{totalPage}} səhifədən",

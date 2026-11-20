@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Nový soubor nahradí stávající soubor jako novou verzi.",
   "OverwriteTitle": "Přepsat aktualizací verze",
   "Owner": "Vlastník",
+  "OwnerCandidatesLoadFailed": "Členy místnosti se nepodařilo načíst, takže teď nelze vybrat nového vlastníka. Zavřete panel a zkuste to znovu.",
   "OwnerChange": "Změnit vlastníka",
   "Owners": "Vlastníci",
   "PageOfTotalPage": "{{page}} z {{totalPage}}",

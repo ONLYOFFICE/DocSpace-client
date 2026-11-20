@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Jaunais fails aizstāses ar esošo kā jauna versija.",
   "OverwriteTitle": "Pārrakstīt ar versijas atjaunināšanu",
   "Owner": "Īpašnieks",
+  "OwnerCandidatesLoadFailed": "Telpas dalībniekus neizdevās ielādēt, tāpēc pašlaik nevar izvēlēties jaunu īpašnieku. Aizveriet paneli un mēģiniet vēlreiz.",
   "OwnerChange": "Mainīt īpašnieku",
   "Owners": "Īpašnieki",
   "PageOfTotalPage": "{{page}} lapa no {{totalPage}}",

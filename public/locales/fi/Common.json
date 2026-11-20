@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Uusi tiedosto korvaa olemassa olevan tiedoston uutena versiona.",
   "OverwriteTitle": "Korvaa versiopäivityksellä",
   "Owner": "Omistaja",
+  "OwnerCandidatesLoadFailed": "Huoneen jäseniä ei voitu ladata, joten uutta omistajaa ei voi valita nyt. Sulje paneeli ja yritä uudelleen.",
   "OwnerChange": "Vaihda omistaja",
   "Owners": "Omistajat",
   "PageOfTotalPage": "{{page}} / {{totalPage}}",

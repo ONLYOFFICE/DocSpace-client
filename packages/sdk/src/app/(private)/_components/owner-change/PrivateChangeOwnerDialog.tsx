@@ -52,6 +52,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
@@ -99,7 +100,8 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
   );
 
   // Spec: private-rooms/sdk-surface, "Membership from every entry point"
-  const { excludeItems, excludeReady } = usePrivateRoomOwnerExclusions({
+  const { excludeItems, excludeReady, excludeFailed } =
+    usePrivateRoomOwnerExclusions({
     isPrivateRoom: true,
     roomId,
     userId: currentUserId,
@@ -168,7 +170,21 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
       } as const)
     : {};
 
-  const selectorContent = excludeReady ? (
+  const selectorContent = excludeFailed ? (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        minHeight: "240px",
+      }}
+    >
+      <Text role="alert" dataTestId="private_change_owner_candidates_failed">
+        {t("Common:OwnerCandidatesLoadFailed")}
+      </Text>
+    </div>
+  ) : excludeReady ? (
     <PeopleSelector
       withCancelButton
       onCancel={onClose}

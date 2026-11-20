@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Noul fișier va înlocui fișierul existent ca o nouă versiune.",
   "OverwriteTitle": "Suprascriere la o versiune actualizată",
   "Owner": "Proprietar",
+  "OwnerCandidatesLoadFailed": "Membrii sălii nu au putut fi încărcați, așa că acum nu se poate alege un proprietar nou. Închideți panoul și încercați din nou.",
   "OwnerChange": "Schimbare proprietar",
   "Owners": "Proprietari",
   "PageOfTotalPage": "{{page}} din {{totalPage}}",

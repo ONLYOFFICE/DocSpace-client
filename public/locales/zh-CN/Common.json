@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "文件与同名文件将作为不同版本存在。",
   "OverwriteTitle": "使用版本更新覆盖",
   "Owner": "所有者",
+  "OwnerCandidatesLoadFailed": "无法加载房间成员，因此现在无法选择新的所有者。请关闭面板后重试。",
   "OwnerChange": "变更所有者",
   "Owners": "所有者",
   "PageOfTotalPage": "{{page}}/{{totalPage}}",

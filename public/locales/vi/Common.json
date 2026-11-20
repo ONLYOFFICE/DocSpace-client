@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Tệp mới sẽ thay thế tệp hiện có dưới dạng một phiên bản mới.",
   "OverwriteTitle": "Ghi đè bằng cập nhật phiên bản",
   "Owner": "Chủ sở hữu",
+  "OwnerCandidatesLoadFailed": "Không thể tải thành viên của phòng nên hiện không thể chọn chủ sở hữu mới. Hãy đóng bảng và thử lại.",
   "OwnerChange": "Thay đổi chủ sở hữu",
   "Owners": "Chủ sở hữu",
   "PageOfTotalPage": "{{page}} trên {{totalPage}}",

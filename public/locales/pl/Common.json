@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Nowy plik zastąpi istniejący jako jego nowa wersja.",
   "OverwriteTitle": "Zastąp i zaktualizuj wersję",
   "Owner": "Właściciel",
+  "OwnerCandidatesLoadFailed": "Nie udało się wczytać członków pokoju, więc nie można teraz wybrać nowego właściciela. Zamknij panel i spróbuj ponownie.",
   "OwnerChange": "Zmień właściciela",
   "Owners": "Właściciele",
   "PageOfTotalPage": "{{page}} z {{totalPage}}",

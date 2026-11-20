@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "新しいファイルは、既存のファイルの新しいバージョンとして上書きされます。",
   "OverwriteTitle": "バージョンアップによる上書き",
   "Owner": "所有者",
+  "OwnerCandidatesLoadFailed": "ルームのメンバーを読み込めなかったため、現在は新しい所有者を選択できません。パネルを閉じて、もう一度お試しください。",
   "OwnerChange": "オーナー変更",
   "Owners": "所有者",
   "PageOfTotalPage": "{{page}}の{{totalPage}}",

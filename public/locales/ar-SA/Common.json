@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "سيحل الملف الجديد محل الملف الحالي كإصدار جديد.",
   "OverwriteTitle": "استبدال محتوى النسخة بالتحديث الجديد",
   "Owner": "المالك",
+  "OwnerCandidatesLoadFailed": "تعذّر تحميل أعضاء الغرفة، لذا لا يمكن اختيار مالك جديد الآن. أغلق اللوحة وحاول مرة أخرى.",
   "OwnerChange": "تغيير المالك",
   "Owners": "المالكون",
   "PageOfTotalPage": "الصفحة {{page}} من {{totalPage}}",

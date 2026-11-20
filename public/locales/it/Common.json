@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Il nuovo file sostituisce quello già esistente come una versione nuova.",
   "OverwriteTitle": "Sovrascrivere con l'aggiornamento della versione",
   "Owner": "Proprietario",
+  "OwnerCandidatesLoadFailed": "Impossibile caricare i membri della stanza, quindi al momento non è possibile scegliere un nuovo proprietario. Chiudi il pannello e riprova.",
   "OwnerChange": "Cambiare proprietario",
   "Owners": "Proprietari",
   "PageOfTotalPage": "{{page}} di {{totalPage}}",

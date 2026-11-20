@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "El nuevo archivo sustituirá al existente como una nueva versión.",
   "OverwriteTitle": "Sobrescribir con la actualización de la versión",
   "Owner": "Propietario",
+  "OwnerCandidatesLoadFailed": "No se pudieron cargar los miembros de la sala, así que ahora no se puede elegir un nuevo propietario. Cierre el panel e inténtelo de nuevo.",
   "OwnerChange": "Cambiar propietario",
   "Owners": "Propietarios",
   "PageOfTotalPage": "{{page}} de {{totalPage}}",

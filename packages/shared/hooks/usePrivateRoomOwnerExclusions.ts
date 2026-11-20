@@ -44,11 +44,30 @@ import {
   MembersSubjectType,
 } from "../enums";
 
+const PAGE_SIZE = 100;
+
+/** Every item of a list read page by page until its total is reached. */
+async function readAllPages<T>(
+  readPage: (
+    startIndex: number,
+  ) => Promise<{ items?: T[]; total?: number } | undefined>,
+) {
+  const items: T[] = [];
+  for (;;) {
+    const page = await readPage(items.length);
+    const pageItems = page?.items ?? [];
+    items.push(...pageItems);
+    if (pageItems.length === 0 || items.length >= (page?.total ?? 0)) {
+      return items;
+    }
+  }
+}
+
 /**
  * The people an owner change of a private room leaves out of the owner
  * picker: the current user and the administrators who are not room members.
- * The room's first 100 members and administrators are read; when they cannot
- * be read, only the current user is left out.
+ * Every member and administrator is read; when they cannot be read, the
+ * exclusions are `failed` and no candidate may be offered.
  */
 export function usePrivateRoomOwnerExclusions({
   isPrivateRoom,
@@ -66,10 +85,12 @@ export function usePrivateRoomOwnerExclusions({
 
   const [excludeItems, setExcludeItems] = useState<string[]>(baseExclude);
   const [excludeReady, setExcludeReady] = useState(!isPrivateRoom);
+  const [excludeFailed, setExcludeFailed] = useState(false);
 
   useEffect(() => {
     setExcludeItems(baseExclude);
     setExcludeReady(!isPrivateRoom);
+    setExcludeFailed(false);
 
     if (!isPrivateRoom || !roomId) return undefined;
 
@@ -79,21 +100,30 @@ export function usePrivateRoomOwnerExclusions({
     const adminsFilter = Filter.getDefault();
     adminsFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
     adminsFilter.employeeStatus = EmployeeStatus.Active;
-    adminsFilter.pageCount = 100;
+    adminsFilter.pageCount = PAGE_SIZE;
 
     Promise.all([
-      getRoomMembers(roomId, { count: 100 }, controller.signal),
-      getUserList(adminsFilter, controller.signal),
+      readAllPages((startIndex) =>
+        getRoomMembers(
+          roomId,
+          { count: PAGE_SIZE, startIndex },
+          controller.signal,
+        ),
+      ),
+      readAllPages((startIndex) => {
+        adminsFilter.page = startIndex / PAGE_SIZE;
+        return getUserList(adminsFilter, controller.signal);
+      }),
     ])
       .then(([members, admins]) => {
         if (cancelled) return;
         const memberIds = new Set(
-          (members?.items ?? [])
+          members
             .filter((m) => m?.subjectType === MembersSubjectType.User)
             .map((m) => m?.sharedTo?.id)
             .filter(Boolean),
         );
-        const nonMemberAdmins = (admins?.items ?? [])
+        const nonMemberAdmins = admins
           .map((a) => a.id)
           .filter((id) => id && !memberIds.has(id));
         const merged = new Set([...baseExclude, ...nonMemberAdmins]);
@@ -102,7 +132,8 @@ export function usePrivateRoomOwnerExclusions({
       })
       .catch(() => {
         if (cancelled) return;
-        setExcludeReady(true);
+        // Spec: private-rooms/room-membership, "Owner candidates are current members"
+        setExcludeFailed(true);
       });
 
     return () => {
@@ -111,5 +142,5 @@ export function usePrivateRoomOwnerExclusions({
     };
   }, [isPrivateRoom, roomId, baseExclude]);
 
-  return { excludeItems, excludeReady };
+  return { excludeItems, excludeReady, excludeFailed };
 }

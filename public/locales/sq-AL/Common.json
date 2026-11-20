@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Skedari i ri do të zëvendësojë atë ekzistues si një version i ri.",
   "OverwriteTitle": "Mbishkruani me përditësimin e versionit",
   "Owner": "Pronari",
+  "OwnerCandidatesLoadFailed": "Anëtarët e dhomës nuk mund të ngarkoheshin, ndaj tani nuk mund të zgjidhet pronar i ri. Mbyllni panelin dhe provoni përsëri.",
   "OwnerChange": "Ndryshoni pronarin",
   "Owners": "Pronarë",
   "PageOfTotalPage": "{{page}} of {{totalPage}}",

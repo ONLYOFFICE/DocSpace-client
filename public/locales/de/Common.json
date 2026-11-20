@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Die neue Datei wird die vorhandene Datei als neue Version ersetzen.",
   "OverwriteTitle": "Überschreiben mit Versions-Update",
   "Owner": "Besitzer",
+  "OwnerCandidatesLoadFailed": "Die Mitglieder des Raums konnten nicht geladen werden, daher kann gerade kein neuer Besitzer ausgewählt werden. Schließen Sie das Panel und versuchen Sie es erneut.",
   "OwnerChange": "Besitzer ändern",
   "Owners": "Besitzer",
   "PageOfTotalPage": "Seite {{page}} von {{totalPage}}",

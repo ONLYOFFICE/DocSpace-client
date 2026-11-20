@@ -1745,6 +1745,7 @@
   "OverwriteDescription": "The new file will replace the existing one as a new version.",
   "OverwriteTitle": "Overwrite with version update",
   "Owner": "Owner",
+  "OwnerCandidatesLoadFailed": "The room members could not be loaded, so no new owner can be chosen now. Close the panel and try again.",
   "OwnerChange": "Change owner",
   "Owners": "Owners",
   "PageOfTotalPage": "{{page}} of {{totalPage}}",

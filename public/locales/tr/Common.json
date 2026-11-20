@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Yeni dosya, mevcut olanın yerine yeni bir versiyon olarak geçecektir.",
   "OverwriteTitle": "Sürüm güncellemesiyle üstüne yaz",
   "Owner": "Sahibi",
+  "OwnerCandidatesLoadFailed": "Oda üyeleri yüklenemediği için şu anda yeni bir sahip seçilemiyor. Paneli kapatıp tekrar deneyin.",
   "OwnerChange": "Sahibi değiştir",
   "Owners": "Sahipler",
   "PageOfTotalPage": "{{totalPage}} sayfanın {{page}} tanesi",

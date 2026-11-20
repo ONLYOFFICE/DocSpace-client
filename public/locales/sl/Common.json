@@ -1748,6 +1748,7 @@
   "OverwriteDescription": "Nova datoteka bo zamenjala obstoječo kot nova različica.",
   "OverwriteTitle": "Prepišite s posodobitvijo različice",
   "Owner": "Lastnik",
+  "OwnerCandidatesLoadFailed": "Članov sobe ni bilo mogoče naložiti, zato zdaj ni mogoče izbrati novega lastnika. Zaprite ploščo in poskusite znova.",
   "OwnerChange": "Spremeni lastnika",
   "Owners": "Vlasniki",
   "PageOfTotalPage": "{{page}} od {{totalPage}}",

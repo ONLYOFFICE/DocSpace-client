@@ -427,7 +427,7 @@ export async function retryFinalizeImpl(
       return;
     }
 
-    failUploadSession(self, indexOfFile, error, t, true);
+    failUploadSession(self, row.uniqueId, error, t, true);
   } finally {
     settleUploadQueue(self, t);
   }
@@ -602,11 +602,13 @@ export async function startUploadFilesImpl(
 /** Fail a queued item before any byte was sent, free its slot, move the queue on. */
 export function failUploadItem(
   self: UploadDataStore,
-  indexOfFile: number,
+  uniqueId: string,
   errorMessage: string,
   t: TTranslation,
   createNewIfExist: boolean,
 ) {
+  const indexOfFile = indexOfRow(self, uniqueId);
+  if (isRowGoneOrCancelled(self, indexOfFile)) return;
   runInAction(() => {
     if (self.files[indexOfFile]) {
       self.files[indexOfFile].error = errorMessage;
@@ -725,7 +727,7 @@ export async function startSessionFuncImpl(
     if (unreadable) {
       failUploadItem(
         self,
-        rowIndex,
+        item.uniqueId,
         i18n.t("Common:EncryptionKeysLoadFailed"),
         t,
         createNewIfExist,
@@ -740,7 +742,7 @@ export async function startSessionFuncImpl(
     if (gate.reason === "no-key") requestDeviceSetupHint();
     failUploadItem(
       self,
-      rowIndex,
+      item.uniqueId,
       gate.reason === "unsupported-room-type"
         ? i18n.t("Common:EncryptionPrepareFailed")
         : getEncryptedUploadRefusalMessage(i18n.t, gate.reason),
@@ -819,13 +821,7 @@ export async function startSessionFuncImpl(
       );
     })
     .catch((error: unknown) =>
-      failUploadSession(
-        self,
-        indexOfRow(self, item.uniqueId),
-        error,
-        t,
-        createNewIfExist,
-      ),
+      failUploadSession(self, item.uniqueId, error, t, createNewIfExist),
     )
     .finally(() => settleUploadQueue(self, t));
 }
@@ -833,19 +829,13 @@ export async function startSessionFuncImpl(
 /** Fails a file whose upload session or chunks were refused, quota included. */
 function failUploadSession(
   self: UploadDataStore,
-  indexOfFile: number,
+  uniqueId: string,
   error: unknown,
   t: TTranslation,
   createNewIfExist: boolean,
 ) {
-  if (self.files[indexOfFile] === undefined) {
-    self.primaryProgressDataStore.setPrimaryProgressBarData({
-      operation: OPERATIONS_NAME.upload,
-      completed: true,
-      alert: true,
-    });
-    return Promise.resolve();
-  }
+  const indexOfFile = indexOfRow(self, uniqueId);
+  if (isRowGoneOrCancelled(self, indexOfFile)) return Promise.resolve();
   let errorMessage = "";
   if (typeof error === "object") {
     const axiosErr = error as TAxiosLikeError;
@@ -982,10 +972,9 @@ async function uploadEncryptedItem(
       (header) => !!header,
       () => true,
     );
-    if (rowIndex() === -1) return;
     failUploadItem(
       self,
-      rowIndex(),
+      uniqueId,
       isReimport
         ? i18n.t("Common:EncryptionReimportFailed")
         : getEncryptedUploadRefusalMessage(i18n.t, "locked"),
@@ -1085,18 +1074,18 @@ async function uploadEncryptedItem(
       const message = getEncryptedUploadErrorMessage(i18n.t, result.error);
       if (result.failedAt === "wrap" && result.fileId === undefined) {
         // Spec: file-operations, "A stored upload without the uploader's entry is not kept"
-        failUploadItem(self, currentIndex, message, t, createNewIfExist);
+        failUploadItem(self, uniqueId, message, t, createNewIfExist);
       } else if (result.failedAt === "wrap") {
         markUploadedWithError(self, uniqueId, message);
         toastr.error(message);
       } else if (result.failedAt === "upload") {
-        failUploadSession(self, currentIndex, result.error, t, createNewIfExist);
+        failUploadSession(self, uniqueId, result.error, t, createNewIfExist);
       } else {
         console.error("[ENCRYPTION] encrypted upload preparation failed", {
           uniqueId,
           message: (result.error as Error)?.message,
         });
-        failUploadItem(self, currentIndex, message, t, createNewIfExist);
+        failUploadItem(self, uniqueId, message, t, createNewIfExist);
       }
       return;
     }
@@ -1131,6 +1120,11 @@ async function uploadEncryptedItem(
 
 function indexOfRow(self: UploadDataStore, uniqueId: string) {
   return self.files.findIndex((f) => f.uniqueId === uniqueId);
+}
+
+/** The cancel already freed the slot of such a row and moved the queue on. */
+function isRowGoneOrCancelled(self: UploadDataStore, indexOfFile: number) {
+  return indexOfFile === -1 || !!self.files[indexOfFile].cancel;
 }
 
 function isRowCancelled(self: UploadDataStore, uniqueId: string) {

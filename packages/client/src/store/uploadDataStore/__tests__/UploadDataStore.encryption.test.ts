@@ -263,6 +263,43 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     expect(store.files[0]).toMatchObject({ uniqueId: "new-drop", error: null });
   });
 
+  const declineUnlockAfter = async (
+    cancel: (store: UploadDataStore, uniqueId: string) => void,
+  ) => {
+    const { store, entry } = setupEncryptedPendingFile();
+    let unlock!: (value: unknown) => void;
+    vi.mocked(requireUnlock).mockReturnValueOnce(
+      new Promise((resolve) => {
+        unlock = resolve;
+      }) as never,
+    );
+    const run = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+    cancel(store, entry.uniqueId);
+    const startSessionFunc = replaceAction(store, "startSessionFunc");
+    unlock(null);
+    await run;
+    return { store, startSessionFunc };
+  };
+
+  it("Row cancelled while the unlock prompt is open", async () => {
+    const { store, startSessionFunc } = await declineUnlockAfter(
+      (store, uniqueId) => store.cancelCurrentUpload(uniqueId, t),
+    );
+
+    expect(store.currentUploadNumber).toBe(0);
+    expect(startSessionFunc).not.toHaveBeenCalled();
+  });
+
+  it("Cancel all while the unlock prompt is open", async () => {
+    const { store, startSessionFunc } = await declineUnlockAfter((store) =>
+      store.cancelUpload(),
+    );
+
+    expect(store.currentUploadNumber).toBe(0);
+    expect(startSessionFunc).not.toHaveBeenCalled();
+  });
+
   it("marks the entry encrypted, shows the encryption progress and starts the session with the obfuscated name", async () => {
     const { store, fakes } = setupEncryptedPendingFile();
     vi.mocked(prepareEncryptedUpload).mockImplementation(async (config) => {

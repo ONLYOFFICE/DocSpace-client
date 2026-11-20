@@ -720,7 +720,7 @@ class FilesActionStore {
   moveDragItems = (
     destFolderId: number | string,
     folderTitle: string,
-    destFolderInfo: TFolder & {
+    destFolderInfo?: TFolder & {
       private?: boolean;
       rootFolderId?: number | string;
     },

@@ -656,12 +656,18 @@ export const moveDragItemsImpl = (
 self: FilesActionStore,
   destFolderId: number | string,
   folderTitle: string,
-  destFolderInfo: TFolder & {
+  passedFolderInfo?: TFolder & {
     private?: boolean;
     rootFolderId?: number | string;
   },
 
 )=> {
+  // A row of any loaded page, not only of the first one.
+  const destFolderInfo =
+    passedFolderInfo ??
+    (self.filesStore.folders.find((folder) =>
+      isSameId(folder.id, destFolderId),
+    ) as typeof passedFolderInfo);
   const sourceInPrivateRoom = self.treeFoldersStore.isPrivacyFolder;
   const { bufferSelection: dragBufferSelection } = self.filesStore;
   const dragSelection = (

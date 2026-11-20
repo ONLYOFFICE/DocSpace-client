@@ -40,7 +40,7 @@ import {
   Security,
 } from "@onlyoffice/docspace-plugin-sdk";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
 import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
@@ -102,6 +102,27 @@ describe("getAvailableInfoPanelTabs", () => {
         infoPanelItemsList: [],
       }).tabs,
     ).toContain(InfoPanelView.infoShare);
+  });
+
+  it("Folder inside a private room selected", () => {
+    const folderTabs = (isPrivacyFolder: boolean) =>
+      getAvailableInfoPanelTabs({
+        selection: {
+          id: 2,
+          isFolder: true,
+          canShare: true,
+          rootFolderType: FolderType.Rooms,
+          security: {},
+        } as unknown as TFolder,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs;
+
+    expect(folderTabs(true)).not.toContain(InfoPanelView.infoShare);
+    expect(folderTabs(false)).toContain(InfoPanelView.infoShare);
   });
 });
 

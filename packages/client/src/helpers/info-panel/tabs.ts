@@ -140,6 +140,8 @@ export function getAvailableInfoPanelTabs({
     selection.canShare &&
     !isRoomUtil(selection) &&
     !isPrivateItem &&
+    // Spec: private-rooms/room-membership, "Share tab hidden for private items"
+    !isPrivacyFolder &&
     // No external links to files in the AI rooms (the server refuses them).
     !(
       "rootFolderType" in selection &&

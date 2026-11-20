@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Uzaicinājuma rezultāti",
   "EncryptedKeyCheckFailed": "Sūtītāja šifrēšanas atslēgu šajā ierīcē neizdevās pārbaudīt. Atkārtoti ielādējiet lapu un mēģiniet vēlreiz.",
   "EncryptedMovePartialFailure": "Šos failus neizdevās pārvietot ārpus privātās istabas, un tie paliek tajā: {{names}}",
+  "EncryptedNameCheckFailed": "Fails netika augšupielādēts, jo neizdevās pārbaudīt nosaukumus mērķa mapē. Mēģiniet vēlreiz.",
   "EncryptedOperationFailed": "Darbība ar šifrēto failu neizdevās. Mēģiniet vēlreiz.",
   "EncryptedReencryptFailed": "Neizdevās koplietot esošos šifrētos failus ar jaunajiem dalībniekiem. Mēģiniet vēlreiz no Dalībnieku paneļa.",
   "EncryptedReencryptPartialFailure": "{{count}} šifrēto failu nevarēja padarīt pieejamus jaunajiem dalībniekiem. Mēģiniet vēlreiz vēlāk.",

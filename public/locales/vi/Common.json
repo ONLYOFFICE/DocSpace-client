@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Kết quả lời mời",
   "EncryptedKeyCheckFailed": "Không thể kiểm tra khoá mã hoá của người gửi trên thiết bị này. Hãy tải lại trang và thử lại.",
   "EncryptedMovePartialFailure": "Không thể di chuyển các tệp này ra khỏi phòng riêng tư và chúng vẫn ở trong phòng: {{names}}",
+  "EncryptedNameCheckFailed": "Tệp chưa được tải lên vì không thể kiểm tra tên trong thư mục đích. Hãy thử lại.",
   "EncryptedOperationFailed": "Thao tác trên tệp đã mã hóa không thành công. Vui lòng thử lại.",
   "EncryptedReencryptFailed": "Không thể chia sẻ các tập tin được mã hoá hiện có với các thành viên mới. Hãy thử lại từ bảng Thành viên.",
   "EncryptedReencryptPartialFailure": "{{count}} tập tin được mã hoá không thể được cung cấp cho thành viên mới. Hãy thử lại sau.",

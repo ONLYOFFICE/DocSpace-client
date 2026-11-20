@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "邀请结果",
   "EncryptedKeyCheckFailed": "无法在此设备上检查发送者的加密密钥。请重新加载页面后重试。",
   "EncryptedMovePartialFailure": "这些文件无法移出私密房间，仍保留在房间中：{{names}}",
+  "EncryptedNameCheckFailed": "由于无法检查目标文件夹中的名称，文件未上传。请重试。",
   "EncryptedOperationFailed": "加密文件操作失败。请重试。",
   "EncryptedReencryptFailed": "无法与新成员共享现有加密文件。请从成员面板重试。",
   "EncryptedReencryptPartialFailure": "{{count}} 个加密文件无法提供给新成员。请稍后重试。",

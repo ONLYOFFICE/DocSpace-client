@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Rezultatet e ftesës",
   "EncryptedKeyCheckFailed": "Çelësi i enkriptimit të dërguesit nuk mund të verifikohej në këtë pajisje. Rifreskoni faqen dhe provoni përsëri.",
   "EncryptedMovePartialFailure": "Këta skedarë nuk mund të zhvendoseshin jashtë dhomës private dhe mbeten në të: {{names}}",
+  "EncryptedNameCheckFailed": "Skedari nuk u ngarkua sepse emrat në dosjen e destinacionit nuk mund të kontrolloheshin. Provoni përsëri.",
   "EncryptedOperationFailed": "Veprimi me skedarin e enkriptuar dështoi. Provoni përsëri.",
   "EncryptedReencryptFailed": "Dështoi ndarja e skedarëve ekzistues të enkriptuar me anëtarët e rinj. Provoni përsëri nga paneli Anëtarët.",
   "EncryptedReencryptPartialFailure": "{{count}} skedar(ë) i/e enkriptuar(i) nuk mund të vihej në dispozicion të anëtarëve të rinj. Provoni përsëri më vonë.",

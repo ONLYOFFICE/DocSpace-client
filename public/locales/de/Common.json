@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Ergebnisse der Einladung",
   "EncryptedKeyCheckFailed": "Der Verschlüsselungsschlüssel des Absenders konnte auf diesem Gerät nicht überprüft werden. Laden Sie die Seite neu und versuchen Sie es erneut.",
   "EncryptedMovePartialFailure": "Diese Dateien konnten nicht aus dem privaten Raum verschoben werden und verbleiben darin: {{names}}",
+  "EncryptedNameCheckFailed": "Die Datei wurde nicht hochgeladen, da die Namen im Zielordner nicht geprüft werden konnten. Versuchen Sie es erneut.",
   "EncryptedOperationFailed": "Der Vorgang mit der verschlüsselten Datei ist fehlgeschlagen. Versuchen Sie es erneut.",
   "EncryptedReencryptFailed": "Fehler beim Teilen vorhandener verschlüsselter Dateien mit den neuen Mitgliedern. Versuchen Sie es erneut über das Mitglieder-Panel.",
   "EncryptedReencryptPartialFailure": "{{count}} verschlüsselte Datei(en) konnten den neuen Mitgliedern nicht zugänglich gemacht werden. Versuchen Sie es später erneut.",

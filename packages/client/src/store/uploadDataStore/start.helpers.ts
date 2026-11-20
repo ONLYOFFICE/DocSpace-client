@@ -277,12 +277,23 @@ async function findPrivateNameClashes(
     const roomId = folderItems[0].target.encryptionRoomId;
     if (roomId === null) continue;
 
-    const existingNames = await listDecryptedFileNames(
-      folderId,
-      roomId,
-      String(userId),
-      identity,
-    );
+    let existingNames: string[];
+    try {
+      existingNames = await listDecryptedFileNames(
+        folderId,
+        roomId,
+        String(userId),
+        identity,
+      );
+    } catch {
+      // Spec: private-rooms/file-operations, "The name comparison of a private upload is not skipped"
+      failQueuedItems(
+        self,
+        folderItems,
+        i18n.t("Common:EncryptedNameCheckFailed"),
+      );
+      continue;
+    }
     const clashes = resolveNameClashes(
       folderItems.map((item) => ({ item, name: item.file.name })),
       existingNames,
@@ -305,24 +316,34 @@ async function failPrivateItemsOnUnreadableKeyList(
 ) {
   if (!(await self.isKeyListUnreadable())) return false;
 
-  const errorMessage = i18n.t("Common:EncryptionKeysLoadFailed");
-  runInAction(() => {
-    items
-      .filter((item) => item.target.isPrivate)
-      .forEach((item) => {
-        item.inAction = true;
-        item.error = errorMessage;
-        item.percent = 0;
-        const historyItem = self.uploadedFilesHistory.find(
-          (f) => f.uniqueId === item.uniqueId,
-        );
-        if (historyItem) {
-          historyItem.error = errorMessage;
-          historyItem.percent = 0;
-        }
-      });
-  });
+  failQueuedItems(
+    self,
+    items.filter((item) => item.target.isPrivate),
+    i18n.t("Common:EncryptionKeysLoadFailed"),
+  );
   return true;
+}
+
+/** Fails files before they are sent; the rows may not be queued yet. */
+function failQueuedItems(
+  self: UploadDataStore,
+  items: TUploadFile[],
+  errorMessage: string,
+) {
+  runInAction(() => {
+    items.forEach((item) => {
+      item.inAction = true;
+      item.error = errorMessage;
+      item.percent = 0;
+      const historyItem = self.uploadedFilesHistory.find(
+        (f) => f.uniqueId === item.uniqueId,
+      );
+      if (historyItem) {
+        historyItem.error = errorMessage;
+        historyItem.percent = 0;
+      }
+    });
+  });
 }
 
 /** Keeps both files of a private clash: the new one takes its suffixed name. */

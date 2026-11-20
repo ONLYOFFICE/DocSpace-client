@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "招待の結果",
   "EncryptedKeyCheckFailed": "このデバイスで送信者の暗号化キーを確認できませんでした。ページを再読み込みして、もう一度お試しください。",
   "EncryptedMovePartialFailure": "これらのファイルはプライベートルームの外に移動できなかったため、ルームに残っています：{{names}}",
+  "EncryptedNameCheckFailed": "保存先フォルダー内の名前を確認できなかったため、ファイルはアップロードされませんでした。もう一度お試しください。",
   "EncryptedOperationFailed": "暗号化ファイルの操作に失敗しました。もう一度お試しください。",
   "EncryptedReencryptFailed": "新しいメンバーとの既存の暗号化ファイルの共有に失敗しました。メンバーパネルから再試行してください。",
   "EncryptedReencryptPartialFailure": "{{count}}件の暗号化ファイルを新しいメンバーが利用できるようにできませんでした。後で再試行してください。",

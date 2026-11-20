@@ -261,6 +261,15 @@ export class EncryptedWrapError extends Error {
  * The file was stored, its uploader's entry could not be written, and the
  * stored file was removed again.
  */
+/** The destination folder could not be listed, so its names were not compared. */
+export class EncryptedNameCheckError extends Error {
+  constructor(cause: unknown) {
+    super("The names of the destination folder could not be compared");
+    this.name = "EncryptedNameCheckError";
+    this.cause = cause;
+  }
+}
+
 export class EncryptedUploadNotKeptError extends Error {
   constructor(cause: unknown) {
     super("The uploaded file could not be sealed and was removed");
@@ -362,6 +371,9 @@ export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => 
   }
   if (error instanceof EncryptedUploadNotKeptError) {
     return t("Common:EncryptionUploadNotKept");
+  }
+  if (error instanceof EncryptedNameCheckError) {
+    return t("Common:EncryptedNameCheckFailed");
   }
   if (error instanceof EncryptedWrapError) {
     return t("Common:EncryptionUploadWrapFailed");
@@ -964,8 +976,12 @@ async function checkUploadNameClashes(
   userId: string,
   identity: IdentityKeyPair,
   onNameClash: (clashes: EncryptedUploadNameClash[]) => Promise<boolean>,
-): Promise<Map<string, string> | null> {
+): Promise<{
+  renames: Map<string, string>;
+  unchecked: Map<string, EncryptedNameCheckError>;
+} | null> {
   const byFolder = new Map<string, EncryptedUploadRetryItem[]>();
+  const unchecked = new Map<string, EncryptedNameCheckError>();
   for (const entry of entries) {
     const key = String(entry.folderId);
     byFolder.set(key, [...(byFolder.get(key) ?? []), entry]);
@@ -983,8 +999,9 @@ async function checkUploadNameClashes(
         identity,
       );
     } catch (error) {
-      // biome-ignore lint/suspicious/noConsole: the upload goes on without the check; the failure is logged for triage.
-      console.error("[ENCRYPTION] upload name clashes not checked:", error);
+      // Spec: private-rooms/file-operations, "The name comparison of a private upload is not skipped"
+      const failure = new EncryptedNameCheckError(error);
+      for (const entry of folderEntries) unchecked.set(entry.uploadId, failure);
       continue;
     }
     clashes.push(
@@ -995,7 +1012,7 @@ async function checkUploadNameClashes(
     );
   }
 
-  if (clashes.length === 0) return new Map();
+  if (clashes.length === 0) return { renames: new Map(), unchecked };
   const keepBoth = await onNameClash(
     clashes.map(({ item, renamed }) => ({
       uploadId: item.uploadId,
@@ -1004,7 +1021,12 @@ async function checkUploadNameClashes(
     })),
   );
   return keepBoth
-    ? new Map(clashes.map(({ item, renamed }) => [item.uploadId, renamed]))
+    ? {
+        renames: new Map(
+          clashes.map(({ item, renamed }) => [item.uploadId, renamed]),
+        ),
+        unchecked,
+      }
     : null;
 }
 
@@ -1040,15 +1062,15 @@ async function runEncryptedUploadBatch(
     };
   }
 
-  const renames = options.onNameClash
+  const nameCheck = options.onNameClash
     ? await checkUploadNameClashes(
         entries,
         gate.userId,
         gate.identity,
         options.onNameClash,
       )
-    : new Map<string, string>();
-  if (!renames) {
+    : { renames: new Map<string, string>(), unchecked: new Map() };
+  if (!nameCheck) {
     return {
       results: entries.map(({ file, uploadId }) => ({
         ok: false,
@@ -1101,7 +1123,19 @@ async function runEncryptedUploadBatch(
       continue;
     }
 
-    const renamed = renames.get(uploadId);
+    const uncheckedName = nameCheck.unchecked.get(uploadId);
+    if (uncheckedName) {
+      options.onFileError?.(file, uncheckedName, uploadId);
+      results.push({
+        ok: false,
+        uploadId,
+        originalName: file.name,
+        error: uncheckedName,
+      });
+      continue;
+    }
+
+    const renamed = nameCheck.renames.get(uploadId);
     const result = await uploadEncryptedFile(
       renamed
         ? new File([file], renamed, {

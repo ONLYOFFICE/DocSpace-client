@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Dəvət nəticələri",
   "EncryptedKeyCheckFailed": "Göndərənin şifrələmə açarını bu cihazda yoxlamaq mümkün olmadı. Səhifəni yenidən yükləyin və yenidən cəhd edin.",
   "EncryptedMovePartialFailure": "Bu faylları şəxsi otaqdan kənara köçürmək mümkün olmadı və onlar orada qalır: {{names}}",
+  "EncryptedNameCheckFailed": "Fayl yüklənmədi, çünki təyinat qovluğundakı adları yoxlamaq mümkün olmadı. Yenidən cəhd edin.",
   "EncryptedOperationFailed": "Şifrələnmiş fayl üzərində əməliyyat uğursuz oldu. Yenidən cəhd edin.",
   "EncryptedReencryptFailed": "Mövcud şifrəli faylları yeni üzvlərlə paylaşmaq alınmadı. Üzvlər panelindən yenidən cəhd edin.",
   "EncryptedReencryptPartialFailure": "{{count}} şifrəli fayl(lar) yeni üzvlər üçün əlçatan edilə bilmədi. Sonra yenidən cəhd edin.",

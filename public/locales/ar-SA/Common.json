@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "نتائج الدعوة",
   "EncryptedKeyCheckFailed": "تعذر التحقق من مفتاح التشفير الخاص بالمرسل على هذا الجهاز. أعد تحميل الصفحة وحاول مرة أخرى.",
   "EncryptedMovePartialFailure": "تعذر نقل هذه الملفات خارج الغرفة الخاصة وستبقى فيها: {{names}}",
+  "EncryptedNameCheckFailed": "لم يتم رفع الملف لأنه تعذّر التحقق من الأسماء في المجلد الوجهة. حاول مرة أخرى.",
   "EncryptedOperationFailed": "فشلت العملية على الملف المشفر. حاول مرة أخرى.",
   "EncryptedReencryptFailed": "فشل مشاركة الملفات المشفرة الحالية مع الأعضاء الجدد. أعد المحاولة من لوحة الأعضاء.",
   "EncryptedReencryptPartialFailure": "تعذّر إتاحة {{count}} ملف(ملفات) مشفرة للأعضاء الجدد. أعد المحاولة لاحقاً.",

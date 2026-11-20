@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Résultats de l'invitation",
   "EncryptedKeyCheckFailed": "Impossible de vérifier la clé de chiffrement de l'expéditeur sur cet appareil. Rechargez la page et réessayez.",
   "EncryptedMovePartialFailure": "Ces fichiers n'ont pas pu être déplacés hors de la salle privée et y restent : {{names}}",
+  "EncryptedNameCheckFailed": "Le fichier n'a pas été téléversé car les noms du dossier de destination n'ont pas pu être vérifiés. Réessayez.",
   "EncryptedOperationFailed": "L'opération sur le fichier chiffré a échoué. Veuillez réessayer.",
   "EncryptedReencryptFailed": "Échec du partage des fichiers chiffrés existants avec les nouveaux membres. Réessayez depuis le panneau Membres.",
   "EncryptedReencryptPartialFailure": "{{count}} fichier(s) chiffré(s) n'ont pas pu être rendus disponibles pour les nouveaux membres. Réessayez ultérieurement.",

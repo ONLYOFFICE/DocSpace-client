@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Risultati dell'invito",
   "EncryptedKeyCheckFailed": "Impossibile verificare la chiave di cifratura del mittente su questo dispositivo. Ricarica la pagina e riprova.",
   "EncryptedMovePartialFailure": "Questi file non sono stati spostati fuori dalla stanza privata e vi rimangono: {{names}}",
+  "EncryptedNameCheckFailed": "Il file non è stato caricato perché non è stato possibile controllare i nomi nella cartella di destinazione. Riprova.",
   "EncryptedOperationFailed": "L'operazione sul file crittografato non è riuscita. Riprova.",
   "EncryptedReencryptFailed": "Impossibile condividere i file cifrati esistenti con i nuovi membri. Riprovare dal pannello Membri.",
   "EncryptedReencryptPartialFailure": "Non è stato possibile rendere disponibili ai nuovi membri {{count}} file cifrato/i. Riprovare più tardi.",

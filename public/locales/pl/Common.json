@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Wyniki zaproszenia",
   "EncryptedKeyCheckFailed": "Nie udało się sprawdzić klucza szyfrowania nadawcy na tym urządzeniu. Odśwież stronę i spróbuj ponownie.",
   "EncryptedMovePartialFailure": "Tych plików nie udało się przenieść poza pokój prywatny i pozostają w nim: {{names}}",
+  "EncryptedNameCheckFailed": "Plik nie został wgrany, ponieważ nie udało się sprawdzić nazw w folderze docelowym. Spróbuj ponownie.",
   "EncryptedOperationFailed": "Operacja na zaszyfrowanym pliku nie powiodła się. Spróbuj ponownie.",
   "EncryptedReencryptFailed": "Nie udało się udostępnić istniejących zaszyfrowanych plików nowym członkom. Spróbuj ponownie z panelu Członkowie.",
   "EncryptedReencryptPartialFailure": "{{count}} zaszyfrowany(-e/-ych) plik(-i/-ów) nie mógł(-ły) zostać udostępniony(-e) nowym członkom. Spróbuj ponownie później.",

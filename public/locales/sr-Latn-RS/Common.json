@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Rezultati poziva",
   "EncryptedKeyCheckFailed": "Nije bilo moguće proveriti ključ za šifrovanje pošiljaoca na ovom uređaju. Osvežite stranicu i pokušajte ponovo.",
   "EncryptedMovePartialFailure": "Ove datoteke nije bilo moguće premestiti izvan privatne sobe i ostaju u njoj: {{names}}",
+  "EncryptedNameCheckFailed": "Datoteka nije otpremljena jer nije bilo moguće proveriti nazive u odredišnoj fascikli. Pokušajte ponovo.",
   "EncryptedOperationFailed": "Operacija sa šifrovanom datotekom nije uspela. Pokušajte ponovo.",
   "EncryptedReencryptFailed": "Deljenje postojećih šifrovanih fajlova sa novim članovima nije uspelo. Pokušajte ponovo iz panela Članovi.",
   "EncryptedReencryptPartialFailure": "{{count}} šifrovani fajl(ovi) nisu mogli biti učinjeni dostupnim novim članovima. Pokušajte ponovo kasnije.",

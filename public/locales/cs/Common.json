@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Výsledky pozvání",
   "EncryptedKeyCheckFailed": "Šifrovací klíč odesílatele se na tomto zařízení nepodařilo ověřit. Obnovte stránku a zkuste to znovu.",
   "EncryptedMovePartialFailure": "Tyto soubory nebylo možné přesunout mimo soukromou místnost a zůstávají v ní: {{names}}",
+  "EncryptedNameCheckFailed": "Soubor nebyl nahrán, protože se nepodařilo zkontrolovat názvy v cílové složce. Zkuste to znovu.",
   "EncryptedOperationFailed": "Operace se zašifrovaným souborem se nezdařila. Zkuste to znovu.",
   "EncryptedReencryptFailed": "Nepodařilo se sdílet stávající zašifrované soubory s novými členy. Zkuste to znovu z panelu Členové.",
   "EncryptedReencryptPartialFailure": "{{count}} zašifrovaný(ch) soubor(ů) nešlo zpřístupnit novým členům. Zkuste to znovu později.",

@@ -374,6 +374,21 @@ describe("handleUploadConflictsImpl", () => {
       expect(parallelUploading).toHaveBeenCalledTimes(1);
     });
 
+    it("Folder listing fails in the client", async () => {
+      const { store } = createTestUploadDataStore(keyed);
+      vi.mocked(requireUnlock).mockResolvedValue({} as never);
+      vi.mocked(listDecryptedFileNames).mockRejectedValueOnce(new Error("403"));
+      const item = privateItem();
+      const plain = ordinaryItem();
+
+      const upload = await checkConflicts(store, [item, plain], 50);
+
+      expect(item.error).toBe("Common:EncryptedNameCheckFailed");
+      expect(item.inAction).toBe(true);
+      expect(plain.error).toBeFalsy();
+      expect(upload).toHaveBeenCalledTimes(1);
+    });
+
     it("fails the files as locked when the unlock for the comparison is declined", async () => {
       const { store, fakes } = createTestUploadDataStore(keyed);
       vi.mocked(requireUnlock).mockResolvedValue(null as never);

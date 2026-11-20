@@ -37,6 +37,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 import {
+  EncryptedNameCheckError,
   EncryptedUploadNotKeptError,
   EncryptedWrapError,
   getEncryptedUploadErrorMessage,
@@ -578,6 +579,40 @@ describe("orchestrateEncryptedUpload - batch rules", () => {
       "Report (2).docx",
       "notes.txt",
     ]);
+  });
+
+  it("Folder listing fails in the SDK", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    // Folder 1 is listed first and fails; folder 2 holds no clash.
+    vi.mocked(listDecryptedFileNames)
+      .mockRejectedValueOnce(new Error("403"))
+      .mockResolvedValueOnce([]);
+    const onFileError = vi.fn();
+
+    const { results, refused } = await retryEncryptedUploads({
+      items: [
+        { file: makeFile("Report.docx", 16), uploadId: "row-1", folderId: 1, roomId: 10 },
+        { file: makeFile("notes.txt", 16), uploadId: "row-2", folderId: 2, roomId: 10 },
+      ],
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash: async () => true,
+      onFileError,
+    });
+
+    expect(refused).toBeUndefined();
+    expect(results[0].ok).toBe(false);
+    expect(results[0].error).toBeInstanceOf(EncryptedNameCheckError);
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptedNameCheckFailed",
+    );
+    expect(onFileError).toHaveBeenCalledWith(
+      expect.any(File),
+      results[0].error,
+      "row-1",
+    );
+    expect(vi.mocked(startUploadSession).mock.calls.map(([folderId]) => folderId)).toEqual([2]);
+    expect(results[1].ok).toBe(true);
   });
 
   it("Upload with a clashing name, cancelled: nothing is sent", async () => {

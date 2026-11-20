@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Invitation results",
   "EncryptedKeyCheckFailed": "The sender's encryption key could not be checked on this device. Reload the page and try again.",
   "EncryptedMovePartialFailure": "These files could not be moved out of the private room and remain in it: {{names}}",
+  "EncryptedNameCheckFailed": "The file was not uploaded because the names in the destination folder could not be checked. Try again.",
   "EncryptedOperationFailed": "The operation on the encrypted file failed. Try again.",
   "EncryptedReencryptFailed": "Failed to share existing encrypted files with the new members. Try again from the Members panel.",
   "EncryptedReencryptPartialFailure": "{{count}} encrypted file(s) could not be made available to the new members. Try again later.",

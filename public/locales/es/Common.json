@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Resultados de la invitación",
   "EncryptedKeyCheckFailed": "No se ha podido comprobar la clave de cifrado del remitente en este dispositivo. Recargue la página e inténtelo de nuevo.",
   "EncryptedMovePartialFailure": "Estos archivos no se han podido mover fuera de la sala privada y permanecen en ella: {{names}}",
+  "EncryptedNameCheckFailed": "El archivo no se ha cargado porque no se pudieron comprobar los nombres de la carpeta de destino. Inténtelo de nuevo.",
   "EncryptedOperationFailed": "No se ha podido completar la operación con el archivo cifrado. Inténtelo de nuevo.",
   "EncryptedReencryptFailed": "Error al compartir los archivos cifrados existentes con los nuevos miembros. Inténtelo de nuevo desde el panel de Miembros.",
   "EncryptedReencryptPartialFailure": "{{count}} archivo(s) cifrado(s) no se han podido poner a disposición de los nuevos miembros. Inténtelo de nuevo más tarde.",

@@ -970,6 +970,7 @@
   "EncryptedInviteResultTitle": "Davet sonuçları",
   "EncryptedKeyCheckFailed": "Gönderenin şifreleme anahtarı bu cihazda doğrulanamadı. Sayfayı yeniden yükleyip yeniden deneyin.",
   "EncryptedMovePartialFailure": "Bu dosyalar özel odanın dışına taşınamadı ve odada kalmaya devam ediyor: {{names}}",
+  "EncryptedNameCheckFailed": "Hedef klasördeki adlar kontrol edilemediği için dosya yüklenmedi. Tekrar deneyin.",
   "EncryptedOperationFailed": "Şifrelenmiş dosya üzerindeki işlem başarısız oldu. Tekrar deneyin.",
   "EncryptedReencryptFailed": "Mevcut şifrelenmiş dosyalar yeni üyelerle paylaşılamadı. Üyeler panelinden tekrar deneyin.",
   "EncryptedReencryptPartialFailure": "{{count}} şifrelenmiş dosya yeni üyelerin kullanımına sunulamadı. Daha sonra tekrar deneyin.",

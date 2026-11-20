@@ -54,6 +54,7 @@ import { getFileEncryptionAccess } from "../../api/files";
 import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
 import { decryptFile } from "../../services/encryption/file-keys";
 import { getSpecificEncryptionErrorMessage } from "../../services/encryption/error-i18n";
+import { NoAccessError } from "../../services/encryption/errors";
 import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
@@ -457,8 +458,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         }
         const encryptionInfo = await getFileEncryptionAccess(fileId);
         if (isStale()) return;
-        if (!encryptionInfo?.fileKeys) {
-          throw new Error("You don't have access to decrypt this file");
+        // Spec: private-rooms/file-operations, "The media viewer reports a file that is not shared yet as no access"
+        const fileKeys = encryptionInfo?.fileKeys ?? [];
+        if (!fileKeys.some((k) => String(k.userId) === String(userId))) {
+          throw new NoAccessError(String(userId));
         }
 
         const identity = await requireUnlock(String(userId));
@@ -484,7 +487,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         if (isStale()) return;
 
         const dek = await unwrapDekForCurrentUser({
-          fileKeys: encryptionInfo.fileKeys,
+          fileKeys,
           roomMemberKeys,
           currentUserId: String(userId),
           currentIdentity: identity,

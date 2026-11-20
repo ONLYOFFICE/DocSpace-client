@@ -42,7 +42,7 @@ The SDK SHALL show Common:EncryptedFileNoAccessYet when an encrypted copy or dup
 ## MODIFIED Requirements
 
 ### Requirement: Menu entries withheld for encrypted items
-The SDK SHALL withhold for an encrypted file, in row, header and selection menus, the entries the client withholds: rename, favorites, version entries, download-as, conversion, AI and integrator custom actions, and open and preview when the file opens only after a conversion; and for a folder inside a private room: copy, duplicate and favorites. It SHALL offer download without decryption in the row and header menus. The selection menu SHALL withhold copy for a selection that holds a folder of a private room, whatever rights the folder reports.
+The SDK SHALL withhold for an encrypted file, in row, header and selection menus, the entries the client withholds: rename, favorites, version entries, download-as, conversion, AI and integrator custom actions, and open and preview when the file opens only after a conversion; and for a folder inside a private room, also within a selection and whatever rights it reports: copy, duplicate and favorites. It SHALL offer download without decryption in the row and header menus.
 
 #### Scenario: Header menu of an encrypted file
 - **WHEN** a single encrypted file is selected and the header menu is opened

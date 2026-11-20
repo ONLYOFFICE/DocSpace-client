@@ -349,3 +349,9 @@ Alternatives considered for 13:
 - Pre-push gate: `npm --prefix ./common/tests run test:lefthook` exit 0;
   `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks).
 - `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 25 of 25.
+
+2026-11-20, after the review fixes (9c992c70b61, 420675974a3), at
+420675974a3: the same runs again. Client E2E under Docker: 172 passed.
+SDK private E2E on a fresh build: 47 passed, 11 skipped. The lefthook
+checks and `nx run-many -t tsc lint test` over the six packages exit 0;
+`openspec validate --all --strict`: 25 of 25.

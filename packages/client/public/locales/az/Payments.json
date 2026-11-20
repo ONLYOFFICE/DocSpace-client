@@ -1,17 +1,8 @@
 {
-  "CannotCreateNewRoom": "Otaq yaratmaq mümkün deyil",
   "CannotCreatePaidUsers": "Ödənişli istifadəçilər əlavə edilə bilməz",
   "CannotRestoreRoom": "Otağı bərpa etmək mümkün deyil",
-  "ChooseNewPlan": "Yeni qiymət planı seçmək istəyirsiniz?",
-  "GracePeriodActive": "Təxir müddəti <1>{{fromDate}}-dan {{byDate}}</1> aktivdir (qalan günlər: {{delayDaysCount}}).",
-  "LicenseExpiredRestriction": "Yeni istifadəçilər əlavə etmək və yeni otaqlar yaratmaq mümkün deyil. Lisenziya müddəti bitib.",
-  "LicenseGracePeriodInfo": "Bu müddət ərzində administratorlar yeni otaqlar yarada və ya yeni istifadəçilər əlavə edə bilməzlər. Güzəşt müddəti bitdikdən sonra, yeni lisenziya aktivləşdirilənə qədər iş sahəsi istifadə edilə bilməyəcək.",
-  "NewRoomWillExceedLimit": "Bu otağı yaratmaq mümkün deyil, çünki cari planınıza daxil edilmiş otaqların sayı limitə çatıb.",
   "NewUsersWillExceedMembersLimit": "Yeni ödənişli istifadəçiləri əlavə etmək mümkün deyil, çünki cari planınıza daxil edilmiş idarəçilərin sayı limitə çatıb.",
   "NotPossibleRoomRestoring": "Bu otağı bərpa etmək mümkün deyil, çünki cari planınıza daxil edilmiş otaqların sayı limitə çatıb.",
-  "NumberOfRoomsAccordingToTariff": "Tarif planınıza uyğun otaqların sayı: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Tarif planınıza uyğun olaraq administrator sayı: {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Yeni istifadəçilər əlavə etmək, yeni otaqlar yaratmaq və ya AI agentləri yaradıla bilməz. {{planName}} plan ödənişi gecikmişdir.",
-  "RoomsQuotaAlmostExhausted": "Otaq kvotası dolmaq üzrədir.",
   "UsersQuotaAlmostExhausted": "Ödənişli istifadəçi kvotası dolmaq üzrədir."
 }

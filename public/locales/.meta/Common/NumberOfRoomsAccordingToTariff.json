@@ -1,26 +1,26 @@
 {
-  "key_path": "NewRoomWillExceedLimit",
-  "content": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
-  "content_en_sha1_hash": "a04a1156e2e2826b884b0b81d56586ced44b5f15",
-  "created_at": "2025-05-19T21:30:53.704Z",
-  "updated_at": "2026-10-22T16:09:36.864Z",
+  "key_path": "NumberOfRoomsAccordingToTariff",
+  "content": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
+  "content_en_sha1_hash": "50c21689104208a689abc871f03f39356411633c",
+  "created_at": "2025-05-19T21:30:53.710Z",
+  "updated_at": "2026-11-20T12:02:00.476Z",
   "comment": {
-    "text": "This is an error message displayed in a dialog. It informs the user that they cannot create a new room because their plan's room limit has been reached.",
+    "text": "Line of the quota warning dialog shown when the room limit is nearly reached: {{currentValue}} is the number of rooms in use and {{maxValue}} the number the pricing plan allows, shown as a fraction.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:19:40.700Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-11-20T12:02:00.476Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
-      "line_number": 85,
-      "context": "</Text>\n <br />\n <Text>\n {isArchiveFolderRoot\n ? t(\"NotPossibleRoomRestoring\")\n : t(\"NewRoomWillExceedLimit\")}\n </Text>\n {chooseNewPlan}\n </>\n );",
+      "line_number": 96,
+      "context": "return (\n <>\n <Text fontWeight={600}>{t(\"Common:RoomsQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"Common:NumberOfRoomsAccordingToTariff\", {\n currentValue: usedRoomsCount,\n maxValue: maxCountRoomsByQuota,\n })}\n </Text>\n {chooseNewPlan}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
-      "line_number": 175,
-      "context": "const roomsLimitContent = isRoomsTariffLimit ? (\n <>\n <Text fontWeight={600}>{t(\"CannotCreateNewRoom\")}</Text>\n <br />\n <Text>{t(\"NewRoomWillExceedLimit\")}</Text>\n <br />\n {chooseNewPlan}\n </>\n ) : (\n <>",
+      "line_number": 184,
+      "context": ") : (\n <>\n <Text fontWeight={600}>{t(\"Common:RoomsQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"Common:NumberOfRoomsAccordingToTariff\", {\n currentValue: usedRoomsCount,\n maxValue: maxCountRoomsByQuota,\n })}\n </Text>\n <br />",
       "module": "/packages/sdk"
     }
   ],

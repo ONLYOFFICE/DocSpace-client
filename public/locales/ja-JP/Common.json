@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "独自のプラットフォーム",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "LicenseExpiredRestriction": "新しいユーザーを追加したり、新しいルームを作成したりすることはできません。ライセンスの期限が切れています。",
+  "PlanPaymentOverdue": "新しいユーザーを追加したり、新しいルームやAIエージェントを作成したりすることはできません。{{planName}}プランの支払いが期限を過ぎています。",
+  "GracePeriodActive": "猶予期間は<1>{{fromDate}}から{{byDate}}まで有効です（残り日数：{{delayDaysCount}}）。</1>",
+  "LicenseGracePeriodInfo": "この間は、管理者は新しいルームを作成したり、新しいユーザーを追加したりすることができません。猶予期間が終了すると、ワークスペースは新しいライセンスが有効になるまでご利用いただけなくなります。",
+  "ChooseNewPlan": "新しい料金プランの選択を希望されますか？",
+  "CannotCreateNewRoom": "ルームを作成できません",
+  "NewRoomWillExceedLimit": "現在のプランではルームの数の上限に達しているため、このルームを作成できません。",
+  "RoomsQuotaAlmostExhausted": "ルームのストレージ容量が残りわずかです。",
+  "NumberOfRoomsAccordingToTariff": "ご利用の料金プランのルーム数：{{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "料金プランをアップグレードするには、スーパー管理者にお問い合わせください。"
 }

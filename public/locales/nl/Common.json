@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "Uw eigen platform",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "LicenseExpiredRestriction": "Kan geen nieuwe gebruikers toevoegen en nieuwe ruimtes aanmaken. Licentie is verlopen.",
+  "PlanPaymentOverdue": "Kan geen nieuwe gebruikers, nieuwe ruimtes of AI-agenten toevoegen. Betaling voor het {{planName}}-abonnement is vervallen.",
+  "GracePeriodActive": "De grace-periode is actief <1>vanaf {{fromDate}} tot {{byDate}}</1> (resterende dagen: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Gedurende deze tijd kunnen beheerders geen nieuwe ruimtes aanmaken of nieuwe gebruikers toevoegen. Nadat de respijtperiode is afgelopen, zal de werkruimte onbeschikbaar zijn totdat een nieuwe licentie is geactiveerd.",
+  "ChooseNewPlan": "Wilt u een nieuw prijsplan kiezen?",
+  "CannotCreateNewRoom": "Kamer kan niet worden aangemaakt",
+  "NewRoomWillExceedLimit": "Deze kamer kan niet worden aangemaakt omdat de limiet is bereikt voor het aantal kamers in uw huidige plan.",
+  "RoomsQuotaAlmostExhausted": "Het aantal kamers is bijna opgebruikt.",
+  "NumberOfRoomsAccordingToTariff": "Aantal kamers volgens uw tariefplan: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Neem contact op met de superbeheerder om het tariefplan te upgraden."
 }

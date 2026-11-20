@@ -57,11 +57,13 @@ Parity. On the private pages:
   sends, and unit tests pin it (decision 2).
 - An SDK owner change wraps the candidate's missing files before it asks for
   the transfer, and counts the files the server names when it refuses one,
-  as the client does.
+  as the client does; that count becomes one shared function of both.
 - The info panel menu of an open private room starts the private edit,
   invite and owner-change flows.
-- The quota warning takes its texts from Common, and the translation test
-  covers every component the private pages render.
+- The quota warning's ten keys move from the client's Payments and MainBar
+  namespaces into Common, every caller in the client and the SDK names
+  Common, and the translation test covers every component the private pages
+  render.
 - Create waits for a key list that is still loading.
 - A file cancelled in the name-clash dialog leaves the upload panel, a file
   stopped by a lock fails with the locked-upload message, and "Cancel all"
@@ -123,6 +125,16 @@ Taken by the owner on 2026-11-19:
    own address, which the proxy does not know. Where the portal's own
    policy is served too, the browser applies both.
 
+Taken by the owner on 2026-11-20, after the review of the plan:
+
+3. **Quota warning keys:** moved into Common, and the client's callers name
+   Common too (design decision 5), rather than copied under new names.
+4. **Info panel menu of an open room:** the private info panel provides the
+   room actions the generic info panel builds (design decision 4), rather
+   than a change to the menu model.
+5. **Owner change refused with 409:** one shared function counts the missing
+   files for the client and the SDK (design decision 3).
+
 ## Capabilities
 
 ### New Capabilities
@@ -146,8 +158,14 @@ None.
 - `packages/sdk/src/app/(rooms)/_components/quota-warning-dialog`,
   `packages/sdk/src/app/(docspace)/_store/UploadStore.tsx`,
   `packages/sdk/src/app/(personal-files)/_components/upload-panel`.
-- `public/locales/*/Common.json` and `.meta`: the quota warning texts copied
-  from the client's Payments and MainBar namespaces.
+- `public/locales/*/Common.json`, `packages/client/public/locales/*/Payments.json`
+  and `MainBar.json`, and their `.meta`: the ten quota warning keys move into
+  Common.
+- `packages/client/src/components/dialogs/InviteQuotaWarningDialog` and
+  `packages/client/src/components/MainBar/QuotasBar.js`: callers of the moved
+  keys.
+- `packages/shared/services/private-room/room-member-flows.ts` and the
+  client's `filesActionsStore/rooms.helpers.ts`: the shared count of a 409.
 - `openspec/changes/private-rooms-beta-release/release-notes.md`: the
   embedding paragraph.
 - `docspace-sdk-js`: hand-over only.

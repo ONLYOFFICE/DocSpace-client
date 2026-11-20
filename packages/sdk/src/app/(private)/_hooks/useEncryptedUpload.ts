@@ -131,6 +131,8 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
       privateUploadStore.setQuotaErrorRaised(false);
       setIsUploading(true);
 
+      // Set by the name-clash dialog: its files leave the panel.
+      let clashCancelled = false;
       const fail = (uploadId: string, message: string, isQuota = false) => {
         if (isQuota) uploadStore.setItemQuotaError(uploadId, message);
         else uploadStore.setItemError(uploadId, message);
@@ -216,8 +218,13 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             );
             if (fileResult.file) filesListStore.addStoredFile(fileResult.file);
           },
-          onNameClash: (clashes: { name: string }[]) =>
-            privateDialogs.askNameClash(clashes.map(({ name }) => name)),
+          onNameClash: async (clashes: { name: string }[]) => {
+            const keepBoth = await privateDialogs.askNameClash(
+              clashes.map(({ name }) => name),
+            );
+            clashCancelled = !keepBoth;
+            return keepBoth;
+          },
         };
 
         const result: OrchestrateResult = isRetry
@@ -238,9 +245,19 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
           if (notice) toastr.info(notice);
         }
 
+        // Spec: private-rooms/sdk-surface, "Upload panel follows encrypted uploads"
         if (result.aborted && !privateUploadStore.quotaErrorRaised) {
+          const locked =
+            controller.signal.aborted && controller.signal.reason === "lock";
           for (const r of result.results) {
-            if (r.aborted) uploadStore.setItemCancelled(r.uploadId);
+            if (!r.aborted) continue;
+            if (clashCancelled) uploadStore.cancelItem(r.uploadId);
+            else if (locked) {
+              fail(
+                r.uploadId,
+                orchestrator.getEncryptedUploadRefusalMessage(t, "locked"),
+              );
+            } else uploadStore.setItemCancelled(r.uploadId);
           }
         }
 

@@ -69,6 +69,8 @@ import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
 import RoomHeader from "@/app/(docspace)/_components/info-panel/sub-components/RoomHeader";
+import { useInfoPanelRoomActions } from "@/app/(docspace)/_components/info-panel/helpers/useInfoPanelRoomActions";
+import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
 
 import PrivateMembersView from "../members/PrivateMembersView";
 import { usePrivateDialogsStore } from "../../_store/PrivateDialogsStore";
@@ -105,6 +107,8 @@ const PrivateInfoPanelBody = observer(
     const dialogs = usePrivateDialogsStore();
     const docsUser = useDocsUserStore();
     const user = docsUser.user as TUser | null;
+    // Spec: private-rooms/sdk-surface, "Membership from every entry point"
+    const roomActions = useInfoPanelRoomActions();
     const { selection, fileView, isVisible, isPinnedSelection } =
       infoPanelStore;
 
@@ -237,13 +241,15 @@ const PrivateInfoPanelBody = observer(
         data-testid="private_info_panel_body"
       >
         {showHeader && selection ? (
-          <RoomHeader
-            selection={selection as TFolder}
-            isMembersView={isMembersView}
-            hasEditAccess={hasEditAccess}
-            setSearchValue={setMemberSearch}
-            onInvite={handleAddUsers}
-          />
+          <RoomActionsContext.Provider value={roomActions}>
+            <RoomHeader
+              selection={selection as TFolder}
+              isMembersView={isMembersView}
+              hasEditAccess={hasEditAccess}
+              setSearchValue={setMemberSearch}
+              onInvite={handleAddUsers}
+            />
+          </RoomActionsContext.Provider>
         ) : null}
         {renderContent()}
       </div>

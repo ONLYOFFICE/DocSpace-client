@@ -69,6 +69,7 @@ import {
 import {
   getNewOwnerKeyRefusal,
   loadPendingAccess,
+  countMissingFilesOfRefusedOwnerChange,
   prepareNewOwner,
   retryPendingAccess,
   rewrapForInvitedMembers,
@@ -234,6 +235,47 @@ describe("prepareNewOwner", () => {
     await expect(prepareNewOwner(request)).resolves.toEqual({
       missingFileIds: [1, 2],
     });
+  });
+});
+
+describe("countMissingFilesOfRefusedOwnerChange", () => {
+  const conflict = Object.assign(new Error("Conflict"), {
+    response: { status: 409 },
+  });
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Transfer refused by the server", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "U-BOB", fileIds: [4, 5] },
+      { userId: "u-carol", fileIds: [6] },
+    ]);
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(conflict, ROOM_ID, "u-bob"),
+    ).resolves.toBe(2);
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(ROOM_ID, ["u-bob"]);
+  });
+
+  it("Other refusals count no file", async () => {
+    const forbidden = Object.assign(new Error("Forbidden"), {
+      response: { status: 403 },
+    });
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(forbidden, ROOM_ID, "u-bob"),
+    ).resolves.toBe(0);
+    expect(getRoomMissingFileKeys).not.toHaveBeenCalled();
+  });
+
+  it("Missing files cannot be listed", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockRejectedValue(new Error("403"));
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(conflict, ROOM_ID, "u-bob"),
+    ).resolves.toBe(0);
   });
 });
 

@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "منصتك الخاصة",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "LicenseExpiredRestriction": "لا يمكن إضافة مستخدمين جدد وإنشاء غرف جديدة. لقد انتهت صلاحية الترخيص.",
+  "PlanPaymentOverdue": "لا يمكن إضافة مستخدمين جدد، أو إنشاء غرف جديدة، أو وكلاء ذكاء اصطناعي. فاتورة خطة {{planName}} متأخرة.",
+  "GracePeriodActive": "فترة السماح سارية <1>من {{fromDate}} إلى {{byDate}}</1> (الأيام المتبقية: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "خلال هذه الفترة، لا يمكن للمسؤولين إنشاء غرف جديدة أو إضافة مستخدمين جدد. بمجرد انتهاء فترة السماح، ستصبح مساحة العمل غير متاحة حتى يتم تفعيل ترخيص جديد.",
+  "ChooseNewPlan": "هل ترغب في اختيار خطة تسعير جديدة؟",
+  "CannotCreateNewRoom": "لا يمكن إنشاء الغرفة",
+  "NewRoomWillExceedLimit": "إنشاء هذه الغرفة غير ممكن نظرًا لبلوغ الحد الأقصى لعدد الغرف المضمنة في خطتك الحالية.",
+  "RoomsQuotaAlmostExhausted": "تم استنفاد حصة الغرف تقريبًا.",
+  "NumberOfRoomsAccordingToTariff": "عدد الغرف وفقًا لخطة التعريف الخاصة بك: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "تواصل مع المسؤول العام لترقية خطة التعرفة."
 }

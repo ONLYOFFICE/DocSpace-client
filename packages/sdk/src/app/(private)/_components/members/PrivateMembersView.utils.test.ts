@@ -37,6 +37,7 @@ import { describe, it, expect } from "vitest";
 
 import {
   EmployeeActivationStatus,
+  EmployeeStatus,
   MembersSubjectType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -44,6 +45,7 @@ import type { RoomMember } from "@docspace/shared/api/rooms/types";
 
 import {
   classifyMembers,
+  isListedMember,
   type MemberSectionKey,
 } from "./PrivateMembersView.utils";
 
@@ -126,5 +128,34 @@ describe("classifyMembers (private room — users only, no groups/guests)", () =
       ["users", [user]],
       ["expected", []],
     ]);
+  });
+});
+
+describe("isListedMember", () => {
+  it("Members searched", () => {
+    const user = { id: "u", displayName: "User" };
+    expect(isListedMember(mk(ShareAccessRights.ReadOnly, user))).toBe(true);
+    expect(
+      isListedMember(mk(ShareAccessRights.ReadOnly, { ...user, isVisitor: true })),
+    ).toBe(false);
+    expect(
+      isListedMember(
+        mk(ShareAccessRights.ReadOnly, { ...user, status: EmployeeStatus.Disabled }),
+      ),
+    ).toBe(false);
+    expect(
+      isListedMember(
+        mk(
+          ShareAccessRights.FullAccess,
+          { ...user, status: EmployeeStatus.Disabled },
+          true,
+        ),
+      ),
+    ).toBe(true);
+    expect(
+      isListedMember(
+        mk(ShareAccessRights.ReadOnly, user, false, MembersSubjectType.Group),
+      ),
+    ).toBe(false);
   });
 });

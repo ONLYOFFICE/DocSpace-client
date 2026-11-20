@@ -42,11 +42,6 @@
 // are still fixme name what else they need.
 //
 // Remaining infrastructure blockers:
-//   C. CSP headers are set by packages/sdk/src/proxy.ts (the custom server.js),
-//      NOT by createNextTestServer(). The test harness uses createNextTestServer
-//      which bypasses proxy.ts entirely — CSP headers are absent on responses.
-//      To test CSP: run `pnpm test:build && pnpm test:start` (port 5112) and
-//      make direct HTTP requests via fetch/got in a non-browser test.
 //   F. Multi-context (broadcast-lock): Playwright's `browser.newContext()` is
 //      available but the base fixture creates a single page; a two-context test
 //      needs a custom fixture that creates two pages in the same worker.
@@ -68,36 +63,6 @@ import { expect, test, type TMockBoth } from "./fixtures";
 const ROOM_ID = 7001;
 const ROOM_TITLE = "Private Test Room";
 const OPT_IN = "?privateRooms=true";
-
-test.describe("(private) — security headers (§17.3)", () => {
-  test.fixme(
-    "csp-headers: /sdk/private/* responds with wasm-unsafe-eval, no unsafe-eval, COOP/CORP/HSTS",
-    async () => {
-      // BLOCKER C:
-      //   Content-Security-Policy headers are applied by packages/sdk/src/proxy.ts
-      //   (the custom Next.js server that wraps Nginx CSP directives). The test
-      //   harness (`createNextTestServer`) bypasses proxy.ts and creates a bare
-      //   Next.js HTTP server — CSP response headers are absent.
-      //
-      //   To enable this test:
-      //   1. Build the SDK: `pnpm test:build` (sets E2E_TEST=true).
-      //   2. Start the custom server: `pnpm test:start` (port 5112).
-      //   3. Replace the `createNextTestServer` fixture with a direct HTTP client
-      //      that points at port 5112.
-      //   4. Fetch GET /sdk/private and assert response.headers["content-security-policy"].
-      //
-      //   Alternatively, extract the CSP-building logic from proxy.ts into a pure
-      //   function and unit-test it directly (no browser needed).
-      //
-      // GET /sdk/private and assert Content-Security-Policy contains
-      // "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'", NO 'unsafe-eval'
-      // (prod), connect-src 'self' (no wildcard https:), frame-ancestors 'self',
-      // Cross-Origin-Opener-Policy: same-origin, Cross-Origin-Resource-Policy:
-      // same-origin, Strict-Transport-Security present, X-Content-Type-Options:
-      // nosniff. Reflects the accepted unsafe-inline decision (SECURITY.md §10).
-    },
-  );
-});
 
 test.describe("(private) — lock cleanup (§17.3)", () => {
   test.fixme(

@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "Kendi platformunuz",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
+  "LicenseExpiredRestriction": "Yeni kullanıcı eklenemiyor ve yeni odalar oluşturulamıyor. Lisans süresi dolmuş.",
+  "PlanPaymentOverdue": "Yeni kullanıcı eklenemiyor, yeni oda oluşturulamıyor veya AI ajanı oluşturulamıyor. {{planName}} plan ödemesi gecikti.",
+  "GracePeriodActive": "Geçiş süresi aktif <1>{{fromDate}}'dan {{byDate}}'a kadar</1> (kalan gün sayısı: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Bu süre zarfında, yöneticiler yeni odalar oluşturamaz veya yeni kullanıcı ekleyemez. Ödemesiz dönem sona erdiğinde, yeni bir lisans etkinleştirilene kadar çalışma alanı kullanılamaz olacaktır.",
+  "ChooseNewPlan": "Yeni bir fiyatlandırma planı seçmek ister misiniz?",
+  "CannotCreateNewRoom": "Oda oluşturulamıyor",
+  "NewRoomWillExceedLimit": "Mevcut planınıza dahil olan oda sayısı sınırına ulaşıldığı için bu odayı oluşturmak mümkün değil.",
+  "RoomsQuotaAlmostExhausted": "Oda kotası neredeyse doldu.",
+  "NumberOfRoomsAccordingToTariff": "Tarife planınıza göre oda sayısı: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Tarife planını yükseltmek için süper yöneticiye başvurun."
 }

@@ -54,7 +54,7 @@ of the plan against the code at `2228a89fbad`.
 ## 4. Doceditor
 
 - [x] 4.1 Add the cases "Name recovered" and "Range request fails" to `packages/doceditor/src/hooks/__tests__/useFileEncryptionKeys.test.tsx`, with a `viewUrl` in the config's file, `fetch` stubbed and `sessionStorage` cleared after each case (the filename cache `encfn:<id>` would otherwise answer before the request): the request asks for `bytes=0-4095` with a `Range` header, and a header built with `writeDSE3Header` and `encryptFileNameRaw` under the test's DEK puts the decrypted name into the filename cache; a not-ok answer leaves the cache empty without a log; a fetch that throws leaves it empty with `[ENCRYPTION] filename recovery failed` asserted on a `console.error` spy (design decision 3); the key flow reaches ready in all of them; a cached name makes no request. Verify: `cd packages/doceditor && pnpm exec vitest run src/hooks/__tests__/useFileEncryptionKeys.test.tsx`
-- [ ] 4.2 Run the doceditor group. Verify: `cd packages/doceditor && pnpm exec vitest run src` and `cd packages/doceditor && pnpm exec tsc`, clean, recorded in design.md with the date and counts
+- [x] 4.2 Run the doceditor group. Verify: `cd packages/doceditor && pnpm exec vitest run src` and `cd packages/doceditor && pnpm exec tsc`, clean, recorded in design.md with the date and counts
 
 ## 5. Gate
 

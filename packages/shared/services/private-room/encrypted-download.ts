@@ -40,6 +40,7 @@ import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
+import { addSuffix, fileNameKey, toSafeFileName } from "./safe-file-name";
 
 export type DecryptConfig = {
   encryptedData: ArrayBuffer | Blob;
@@ -83,7 +84,11 @@ export async function decryptDownloadedFile(
             cacheFilenameForFileId: config.fileId,
           });
 
-    const finalName = decryptedName || config.originalFileName;
+    const finalName = toSafeFileName(
+      decryptedName,
+      config.originalFileName,
+      config.fileId,
+    );
     const decryptedFile = new File([decryptedBlob], finalName, {
       type: config.originalFileType || "application/octet-stream",
     });
@@ -165,7 +170,11 @@ export function triggerFileDownload(
   const url = URL.createObjectURL(file);
   const a = document.createElement("a");
   a.href = url;
-  a.download = fileName || (file instanceof File ? file.name : "download");
+  a.download = toSafeFileName(
+    fileName,
+    file instanceof File ? file.name : null,
+    "download",
+  );
   a.style.display = "none";
   document.body.appendChild(a);
   a.click();
@@ -201,9 +210,21 @@ export async function downloadAndDecryptFileToBuffer(
   };
 }
 
+const isBuiltPath = (path: string) =>
+  path
+    .split("/")
+    .every((segment) => segment !== "" && toSafeFileName(segment) === segment);
+
+/** Writes entries whose paths `toArchiveEntries` built; throws on any other. */
+// Spec: private-rooms/file-operations, "Archive directories come from the folder tree"
 export function createZipFromBuffers(
   files: Array<{ name: string; data: Uint8Array }>,
 ): Uint8Array {
+  const unbuilt = files.find((file) => !isBuiltPath(file.name));
+  if (unbuilt) {
+    throw new Error(`archive entry path was not built: ${unbuilt.name}`);
+  }
+
   const outputChunks: Uint8Array[] = [];
   let totalSize = 0;
 
@@ -230,31 +251,97 @@ export function createZipFromBuffers(
 }
 
 /**
- * Unique names, in order: the first occurrence of a name keeps it, a later one
- * gets the lowest " (n)" before the extension that is neither in the list nor
- * given out already, so "a.txt", "a (1).txt", "a.txt" ends in "a (2).txt".
+ * Unique names, in order, compared without regard to case: the first
+ * occurrence of a name keeps it, a later one gets the lowest " (n)" before
+ * the extension that is neither in the list nor given out already, so
+ * "a.txt", "a (1).txt", "a.txt" ends in "a (2).txt".
  */
 export function deduplicateFileNames(names: string[]): string[] {
-  const listed = new Set(names);
+  const listed = new Set(names.map(fileNameKey));
   const used = new Set<string>();
 
   return names.map((name) => {
-    if (!used.has(name)) {
-      used.add(name);
+    if (!used.has(fileNameKey(name))) {
+      used.add(fileNameKey(name));
       return name;
     }
 
-    const dotIdx = name.lastIndexOf(".");
-    const base = dotIdx > 0 ? name.slice(0, dotIdx) : name;
-    const ext = dotIdx > 0 ? name.slice(dotIdx) : "";
     for (let n = 1; ; n += 1) {
-      const candidate = `${base} (${n})${ext}`;
-      if (!listed.has(candidate) && !used.has(candidate)) {
-        used.add(candidate);
+      const candidate = addSuffix(name, ` (${n})`);
+      const key = fileNameKey(candidate);
+      if (!listed.has(key) && !used.has(key)) {
+        used.add(key);
         return candidate;
       }
     }
   });
+}
+
+export type ArchiveItem = {
+  data: Uint8Array;
+  /** Name candidates in order, the last one the file's id. */
+  names: Array<string | number | null | undefined>;
+  /** From the folder the user picked down to the file's own folder. */
+  folders: Array<{ id: number | string; title: string }>;
+};
+
+type ArchiveDir = {
+  path: string;
+  sub: Map<string, ArchiveDir>;
+  children: Array<{ name: string; dir?: ArchiveDir }>;
+};
+
+const newArchiveDir = (): ArchiveDir => ({
+  path: "",
+  sub: new Map(),
+  children: [],
+});
+
+/**
+ * Archive entries in the order of the items: one directory per folder, and
+ * the folders and files of each directory named apart from each other.
+ */
+// Spec: private-rooms/file-operations, "Archive directories come from the folder tree"
+export function toArchiveEntries(
+  items: ArchiveItem[],
+): Array<{ name: string; data: Uint8Array }> {
+  const root = newArchiveDir();
+  const files = items.map((item) => {
+    let dir = root;
+    for (const folder of item.folders) {
+      let next = dir.sub.get(String(folder.id));
+      if (!next) {
+        next = newArchiveDir();
+        dir.sub.set(String(folder.id), next);
+        dir.children.push({
+          name: toSafeFileName(folder.title, folder.id),
+          dir: next,
+        });
+      }
+      dir = next;
+    }
+    const entry = { name: toSafeFileName(...item.names) };
+    dir.children.push(entry);
+    return { dir, entry, data: item.data };
+  });
+
+  const pending = [root];
+  for (let dir = pending.pop(); dir; dir = pending.pop()) {
+    const { path, children } = dir;
+    deduplicateFileNames(children.map((c) => c.name)).forEach((name, i) => {
+      const child = children[i];
+      child.name = name;
+      if (child.dir) {
+        child.dir.path = `${path}${name}/`;
+        pending.push(child.dir);
+      }
+    });
+  }
+
+  return files.map(({ dir, entry, data }) => ({
+    name: `${dir.path}${entry.name}`,
+    data,
+  }));
 }
 
 export function canUserDecrypt(

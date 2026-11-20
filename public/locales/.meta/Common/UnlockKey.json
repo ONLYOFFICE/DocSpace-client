@@ -3,7 +3,7 @@
   "content": "Unlock",
   "content_en_sha1_hash": "1526a17ee7570e6235eb76a6fef8ce4b6d9a3486",
   "created_at": "2026-11-11T16:54:53.479Z",
-  "updated_at": "2026-11-11T16:56:26.897Z",
+  "updated_at": "2026-11-19T16:14:54.057Z",
   "comment": {
     "text": "Link label at the end of the locked-key bar in a private room; clicking it opens the passphrase dialog that unlocks the user's encryption key. Verb, imperative, one short word, no object.",
     "is_auto": true,
@@ -12,10 +12,28 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx",
-      "line_number": 91,
-      "context": "isHovered\n fontWeight={600}\n onClick={onUnlock}\n dataTestId=\"private_room_locked_bar_unlock\"\n >\n {t(\"Common:UnlockKey\")}\n </Link>\n </>\n }\n iconName={InfoReactSvgUrl}\n barIsVisible",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBlock.tsx",
+      "line_number": 177,
+      "context": "</Text>\n <div className={styles.actions}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:UnlockKey\")}\n onClick={onUnlock}\n testId=\"private_room_locked_block_unlock\"\n />\n <Link\n type={LinkType.action}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 324,
+      "context": "primary\n size={ButtonSize.small}\n onClick={() => {\n void requireIdentity();\n }}\n label={t(\"Common:UnlockKey\")}\n isDisabled={busy}\n testId=\"keys_unlock_button\"\n />\n </div>\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/Editor.tsx",
+      "line_number": 91,
+      "context": "| \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };\n \n // Spec: private-rooms/editor-integration, \"Editor not mounted until keys are ready\"\n const KEY_FLOW_ENDS: Partial<Record<TFileEncryptionStatus, TKeyFlowEnd>> = {\n \"unlock-cancelled\": {",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
+      "line_number": 337,
+      "context": "onClick={handleSubmit}\n size={ButtonSize.normal}\n label={\n submitLabel ??\n // Spec: private-rooms/key-management, \"Unlock with the passphrase\"\n (isNew ? t(\"Common:ContinueButton\") : t(\"Common:UnlockKey\"))\n }\n isDisabled={isDisabled}\n isLoading={isLoading}\n />\n <Button",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

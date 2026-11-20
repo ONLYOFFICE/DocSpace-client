@@ -1,0 +1,21 @@
+{
+  "key_path": "Manual",
+  "content": "Manual",
+  "content_en_sha1_hash": "4e836fdc2572ab23d5dc8c36bd613ac6b0f82d63",
+  "created_at": "2026-11-19T16:14:20.914Z",
+  "updated_at": "2026-11-19T16:14:20.914Z",
+  "comment": {
+    "text": "Short value in the 'Type' column of the wallet invoice history table: the balance top-up was made manually by the user. Adjective, refers to a top-up; keep it short.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

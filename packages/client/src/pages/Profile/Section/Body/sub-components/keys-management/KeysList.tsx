@@ -40,6 +40,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { KEY_STATUS_BADGE_COLORS } from "./keyStatusBadgeColors";
@@ -297,7 +298,8 @@ const KeyItem: React.FC<KeyItemProps> = ({
 };
 
 type KeysListProps = {
-  keys: TEncryptionKeyPair[];
+  /** The user's keys; `null` while the list is not known. */
+  keys: TEncryptionKeyPair[] | null;
   onDelete: (keyData: TEncryptionKeyPair) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
@@ -319,6 +321,19 @@ export const KeysList: React.FC<KeysListProps> = ({
   const { t } = useTranslation(["Common"]);
   // Spec: private-rooms/encryption-core, "One selected key per user".
   const key = selectUserKey(keys);
+
+  // Spec: private-rooms/key-management, "An unknown key list is not shown as no key"
+  if (keys === null) {
+    return (
+      <div
+        className={styles.noKeys}
+        data-testid="keys_list_loading"
+        aria-busy="true"
+      >
+        <Loader type={LoaderTypes.track} size="24px" />
+      </div>
+    );
+  }
 
   if (!key) {
     return (

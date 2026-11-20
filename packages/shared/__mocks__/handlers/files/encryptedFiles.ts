@@ -179,6 +179,11 @@ export type EncryptedFilesHandlerOptions = {
    */
   roomSecurity?: Record<string, boolean>;
   /**
+   * Mock-only: rights the archived room reports in place of the server's,
+   * for a spec that checks the client does not rely on them.
+   */
+  archivedRoomSecurity?: Record<string, boolean>;
+  /**
    * Mock-only: another instance serves other rooms in the same spec, so a
    * file, folder or upload session this room does not hold falls through to
    * it instead of being answered 403 or 404.
@@ -550,6 +555,8 @@ export const encryptedFilesHandlers = (
   const roomDto = () => ({
     ...buildFolderDto(roomId, archived, isPrivate, roomTitle, folders.length),
     ...(!archived && opts.roomSecurity && { security: opts.roomSecurity }),
+    ...(archived &&
+      opts.archivedRoomSecurity && { security: opts.archivedRoomSecurity }),
   });
   const initialOwnerId =
     opts.ownerId ?? "66faa6e4-f133-11ea-b126-00ffeec8b4ef";

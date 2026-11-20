@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2026-11-09T17:07:34.694Z",
+  "updated_at": "2026-11-17T13:13:27.007Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears when restoring a file, folder, or room from the trash.",
     "is_auto": true,
@@ -55,19 +55,19 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 126,
+      "line_number": 125,
       "context": "};\n }\n if (canRestoreRoom) {\n archiveOptions = {\n key: \"unarchive-room\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => self.onClickArchive(\"unarchive\"),\n disabled: false,\n };\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 126,
+      "line_number": 125,
       "context": "};\n }\n if (canRestoreRoom) {\n archiveOptions = {\n key: \"unarchive-room\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => self.onClickArchive(\"unarchive\"),\n disabled: false,\n };\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/menu.helpers.ts",
-      "line_number": 198,
+      "line_number": 192,
       "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"restore\", {\n id: \"menu-restore\",\n label: t(\"Common:Restore\"),\n onClick: () => setRestorePanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n })\n .set(\"delete\", deleteOption)\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     },

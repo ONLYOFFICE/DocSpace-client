@@ -86,6 +86,9 @@ class AiRoomStore {
 
   isErrorAIAgentNotAvailable = false;
 
+  /** The room confirmed as an AI agent room; the chat is scoped to it only. */
+  agentRoomId: Nullable<number> = null;
+
   aiPlaylistImages: TChatPlaylistImage[] = [];
 
   security: Nullable<TFolderSecurity> = null;
@@ -139,6 +142,10 @@ class AiRoomStore {
 
   setIsErrorAIAgentNotAvailable = (value: boolean) => {
     this.isErrorAIAgentNotAvailable = value;
+  };
+
+  setAgentRoomId = (agentRoomId: Nullable<number>) => {
+    this.agentRoomId = agentRoomId;
   };
 
   get isChatTab() {

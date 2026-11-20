@@ -33,38 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TGetFolder } from "@docspace/shared/api/files/types";
+import { describe, expect, it, vi } from "vitest";
 
-import { getFolderInfo } from "@/api/files";
+import type RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { RoomSearchArea } from "@docspace/shared/enums";
 
-/**
- * The private page of the room that holds the open folder, keeping the
- * request's parameters and the open subfolder, or null when that room is not
- * private. The room is the entry of the folder's path that has a room type.
- * Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
- */
-export async function getPrivateRoomAddress(
-  folderData: TGetFolder,
-  searchParams: Record<string, string>,
-): Promise<string | null> {
-  const { current, pathParts } = folderData;
+import { loadRoomSelectorData, type RoomSelectorDeps } from "./loadData";
 
-  let roomId: number | string | undefined;
-  let isPrivate = false;
-  if (current?.roomType !== undefined && current?.roomType !== null) {
-    roomId = current.id;
-    isPrivate = current.private === true;
-  } else {
-    roomId = pathParts?.find((part) => !!part.roomType)?.id;
-    if (roomId === undefined) return null;
-    isPrivate = (await getFolderInfo(roomId))?.private === true;
-  }
-  if (!isPrivate) return null;
+describe("loadRoomSelectorData", () => {
+  it.each([
+    ["no room type", {}],
+    ["the private room type asked by the host", { roomType: "13" }],
+  ])("Room selector: %s", async (_, baseConfig) => {
+    const getRooms = vi.fn(async (filter: RoomsFilter) => {
+      void filter;
+      return { folders: [], total: 0 } as never;
+    });
 
-  const params = new URLSearchParams(searchParams);
-  if (String(current.id) === String(roomId)) params.delete("folder");
-  else params.set("folder", String(current.id));
-  const query = params.toString();
+    await loadRoomSelectorData({ getRooms } as RoomSelectorDeps, baseConfig);
 
-  return `/private/${roomId}${query ? `?${query}` : ""}`;
-}
+    const filter = getRooms.mock.calls[0][0];
+    expect(filter.searchArea).toBe(RoomSearchArea.Active);
+    expect(filter.privacyFilter ?? null).toBeNull();
+    expect(new URLSearchParams(filter.toApiUrlParams()).has("privacyFilter")).toBe(
+      false,
+    );
+  });
+});

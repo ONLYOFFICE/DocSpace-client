@@ -77,7 +77,10 @@ vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   requireUnlock: mocks.requireUnlock,
 }));
 
-vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
+vi.mock("@docspace/shared/services/private-room/room-encryption", async (io) => ({
+  waitsForAccess: (
+    (await io()) as typeof import("@docspace/shared/services/private-room/room-encryption")
+  ).waitsForAccess,
   addMembersToEncryptedRoom: mocks.addMembersToEncryptedRoom,
   backfillEncryptedFilesForRoomMembers:
     mocks.backfillEncryptedFilesForRoomMembers,

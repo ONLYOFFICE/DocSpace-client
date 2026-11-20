@@ -69,6 +69,7 @@ import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getAIAgent } from "@docspace/shared/api/ai";
 import { FolderType } from "@docspace/shared/enums";
+import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 
 import {
   useAiRoomStore,
@@ -148,18 +149,30 @@ const AiAgentDetailPage = ({
     aiRoomStore.setTitle("");
     aiRoomStore.setSecurity(null);
     aiRoomStore.setAgent(null);
+    aiRoomStore.setAgentRoomId(null);
     loadingStore.setIsSectionBodyLoading(true);
 
     const controller = new AbortController();
 
-    void getAIAgent(roomId)
-      .then((agent) => {
-        if (!controller.signal.aborted) aiRoomStore.setAgent(agent);
-      })
-      .catch(() => {});
-
+    // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
     void api.files
-      .getFolder(roomId, FilesFilter.getDefault(), controller.signal)
+      .getFolderInfo(roomId, false, undefined, controller.signal)
+      .then((room) => {
+        if (room?.roomType !== RoomsType.AIRoom) {
+          throw new Error(`Room ${roomId} is not an AI agent room`);
+        }
+        aiRoomStore.setAgentRoomId(roomId);
+        void getAIAgent(roomId)
+          .then((agent) => {
+            if (!controller.signal.aborted) aiRoomStore.setAgent(agent);
+          })
+          .catch(() => {});
+        return api.files.getFolder(
+          roomId,
+          FilesFilter.getDefault(),
+          controller.signal,
+        );
+      })
       .then((data) => {
         aiRoomStore.setTitle(data.current?.title ?? "");
         aiRoomStore.setSecurity(data.current?.security ?? null);

@@ -1,0 +1,21 @@
+{
+  "key_path": "TopUpPeriod",
+  "content": "Top-up period",
+  "content_en_sha1_hash": "b3891f89feb0b313bfc1561054f5d1897f5ad86a",
+  "created_at": "2026-11-19T16:14:40.998Z",
+  "updated_at": "2026-11-19T16:14:40.998Z",
+  "comment": {
+    "text": "Heading of the date-range section in the wallet invoice history filter panel: the period in which balance top-ups were made.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

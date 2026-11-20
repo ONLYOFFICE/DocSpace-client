@@ -3,7 +3,7 @@
   "content": "Create key",
   "content_en_sha1_hash": "e028cb09f2a481aec3b30e1b7d57d0e8976efb23",
   "created_at": "2026-11-13T06:50:40.597Z",
-  "updated_at": "2026-11-13T06:52:24.797Z",
+  "updated_at": "2026-11-19T16:14:54.121Z",
   "comment": {
     "text": "Label of the main button on the Keys management tab of the profile, shown while the user has no encryption key; it opens the dialog where a passphrase is typed or generated and the key is created. Verb, imperative; short button label.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 331,
+      "line_number": 367,
       "context": "<div className={styles.inputGroup}>\n <Button\n primary\n size={ButtonSize.small}\n onClick={generate.request}\n label={t(\"Common:GenerateNewKey\")}\n isLoading={generate.isPending}\n isDisabled={busy}\n />\n {importFlow.fileInput}\n </div>",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
+      "line_number": 142,
+      "context": "),\n [submitPassphrase, isPassphraseValid, isLoading, confirming],\n );\n \n const title = {\n explanation: t(\"Common:GenerateNewKey\"),\n passphrase: t(\"Common:CreatePassphrase\"),\n recovery: t(\"Common:RecoveryPhraseTitle\"),\n }[step];\n \n const confirmMismatch =",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

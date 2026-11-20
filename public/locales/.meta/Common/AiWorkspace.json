@@ -3,13 +3,44 @@
   "content": "AI Workspace",
   "content_en_sha1_hash": "5c59644dc0a524dcedb5bd848d8409d8b42ecacc",
   "created_at": "2026-11-10T13:41:19.711Z",
-  "updated_at": "2026-11-10T13:41:19.711Z",
+  "updated_at": "2026-11-19T16:14:53.931Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 614,
+      "context": "// there is no Archive slot. The bare `/ai-rooms` is the\n // Rooms app's SDK frame page: the section lives on the nested paths.\n if (aiHubFolder && aiServicesEnabled) {\n mainItems.push({\n id: \"ai-rooms\",\n label: t(\"Common:AiWorkspace\"),\n icon: getCatalogIconUrlByType(FolderType.Rooms),\n ...nav(searchAreaUrl(\"/ai-rooms/filter\", RoomSearchArea.AiHub)),\n ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),\n children: [\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
+      "line_number": 69,
+      "context": "case RoomsType.InstructionsRoom:\n return t(\"Common:Skills\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:AiWorkspaceKnowledge\");\n default:\n return t(\"Common:AiWorkspace\");\n }\n };\n \n export type TAiWorkspaceCreatePayload =\n | { startRoomType: RoomsType }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 286,
+      "context": "// onboarding tour.\n if (isAiHubAvailable) {\n items.push({\n id: \"ai-hub\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:AiWorkspace\"),\n description: t(\"Common:AiRoomsCreateDescription\"),\n installed: true,\n href: AI_HUB_PATH,\n buttonLabel: t(\"Common:Open\"),\n onAction: () => navigate(AI_HUB_PATH),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
+      "line_number": 94,
+      "context": "{\n label: t(\"Common:Private\"),\n key: FolderType.PrivateRooms,\n },\n {\n label: t(\"Common:AiWorkspace\"),\n key: FolderType.AiHub,\n },\n ];\n \n return options.filter((option) =>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
+      "line_number": 126,
+      "context": "break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n case FolderType.AiHub:\n folder.title = i18n.t(\"Common:AiWorkspace\");\n break;\n case FolderType.PrivateRooms:\n folder.title = i18n.t(\"Common:Private\");\n break;\n default:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

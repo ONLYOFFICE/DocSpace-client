@@ -640,4 +640,48 @@ describe("Key setup dialog", () => {
     ).not.toBeChecked();
     expect(continueButton()).toBeDisabled();
   });
+
+  describe("Key setup is not closed while the key is registered", () => {
+    const renderRecovery = async () => {
+      const { KeySetupDialog } = await vi.importActual<
+        typeof import("../KeySetupDialog")
+      >("../KeySetupDialog");
+      const props = {
+        mnemonic: WORDS,
+        onContinue: vi.fn(),
+        onPassphraseSubmit: vi.fn(),
+        onRecoveryConfirm: vi.fn(),
+        onBack: vi.fn(),
+        onCancel: vi.fn(),
+      };
+      const view = render(
+        <KeySetupDialog step="recovery" isLoading={false} {...props} />,
+      );
+      const registering = (isLoading: boolean) =>
+        view.rerender(
+          <KeySetupDialog step="recovery" isLoading={isLoading} {...props} />,
+        );
+      return { props, registering };
+    };
+
+    it("Escape during registration", async () => {
+      const user = userEvent.setup();
+      const { props, registering } = await renderRecovery();
+      await user.click(
+        screen.getByLabelText("Common:RecoveryPhraseAcknowledge"),
+      );
+      registering(true);
+
+      await user.keyboard("{Escape}");
+
+      expect(props.onCancel).not.toHaveBeenCalled();
+      expect(openConfirmation()).toBeNull();
+      expect(screen.getByRole("button", { name: "Common:Back" })).toBeDisabled();
+
+      // Once the registration has ended, Escape closes the dialog again.
+      registering(false);
+      await user.keyboard("{Escape}");
+      expect(props.onCancel).toHaveBeenCalledTimes(1);
+    });
+  });
 });

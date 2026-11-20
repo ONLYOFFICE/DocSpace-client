@@ -44,6 +44,7 @@ import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 
 import { PAGE_COUNT } from "@/utils/constants";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 
 export type PersonalFilesData = {
   filesSettings: TFilesSettings;
@@ -55,10 +56,13 @@ export type PersonalFilesData = {
 
 export type PersonalFilesResult =
   | { redirectTo: string }
-  | { data: PersonalFilesData };
+  | { data: PersonalFilesData }
+  | { notAvailable: true }
+  | { notFound: true };
 
 export type PersonalFilesDeps = {
   getFoldersTree: () => Promise<TFolder[]>;
+  getFolderPath: (folderId: number) => Promise<TFolder[]>;
   getFolder: (
     folderId: string | number,
     filter: FilesFilter,
@@ -115,6 +119,23 @@ export async function loadPersonalFilesData(
 
   const folderParam = params.folder || "@my";
   const resolvedFolderId = folderAliasToId[folderParam];
+
+  // The sections behind the aliases hold no private room.
+  const sectionIds = Object.values(folderAliasToId).map(String);
+  if (!resolvedFolderId && !sectionIds.includes(folderParam)) {
+    const privateAddress = await getPrivateRoomAddress(
+      { id: folderParam },
+      params,
+      deps.getFolderPath,
+    ).catch(() => undefined);
+    if (privateAddress === undefined) return { notFound: true };
+    if (privateAddress) {
+      // The private pages have no OAuth variant.
+      return canonicalize
+        ? { redirectTo: privateAddress }
+        : { notAvailable: true };
+    }
+  }
 
   let effectiveFolder: string | number = folderParam;
   let effectiveParentId = params.parentId;

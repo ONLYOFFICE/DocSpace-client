@@ -3,7 +3,7 @@
   "content": "Form filler",
   "content_en_sha1_hash": "36309bd9112093f7939d015f5678b7699adce63e",
   "created_at": "2025-05-19T21:30:48.030Z",
-  "updated_at": "2026-10-31T12:58:28.881Z",
+  "updated_at": "2026-11-17T13:13:27.013Z",
   "comment": {
     "text": "This is a label for a user role. It identifies a user who can fill out forms.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 178,
+      "line_number": 182,
       "context": "access: ShareAccessRights.Editing,\n type: EmployeeType.User,\n },\n formFiller: {\n key: \"formFiller\",\n label: t(\"Common:RoleFormFiller\"),\n description: getFormFillerDescription(roomType, t),\n access: ShareAccessRights.FormFilling,\n type: EmployeeType.User,\n },\n reviewer: {",
       "module": "/packages/shared"
     },

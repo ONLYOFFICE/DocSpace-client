@@ -47,6 +47,7 @@ import type { TSettings } from "@docspace/shared/api/settings/types";
 import { getFilterParams } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.utils";
 
 import { PAGE_COUNT } from "@/utils/constants";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 
 import type FilesSelectorClient from "./page.client";
 
@@ -59,8 +60,12 @@ export type FilesSelectorClientProps = React.ComponentProps<
   typeof FilesSelectorClient
 >;
 
+/** The folder named to the selector lies in a private room. */
+export type FilesSelectorPrivateTarget = { privateTarget: true };
+
 export type FilesSelectorDeps = {
   getFoldersTree: () => Promise<TFolder[]>;
+  getFolderPath: (folderId: number) => Promise<TFolder[]>;
   getFilesSettings: () => Promise<TFilesSettings>;
   getSettings: () => Promise<TSettings | string | undefined>;
   getRooms: (filter: RoomsFilter) => Promise<TGetRooms | undefined>;
@@ -73,7 +78,7 @@ export type FilesSelectorDeps = {
 export async function loadFilesSelectorProps(
   deps: FilesSelectorDeps,
   baseConfig: FilesSelectorBaseConfig,
-): Promise<FilesSelectorClientProps> {
+): Promise<FilesSelectorClientProps | FilesSelectorPrivateTarget> {
   const folderId = +(baseConfig.id ?? 0) || null;
 
   const [foldersTree, filesSettings, portalSettings] = await Promise.all([
@@ -87,6 +92,16 @@ export async function loadFilesSelectorProps(
   )?.id;
 
   const isRoomView = folderId === roomsID || !folderId;
+
+  // Spec: private-rooms/sdk-surface, "Private addresses are decided before anything is listed"
+  const isSectionRoot = foldersTree.some((f) => f.id === folderId);
+  if (
+    !isRoomView &&
+    !isSectionRoot &&
+    (await getPrivateRoomAddress({ id: folderId! }, {}, deps.getFolderPath))
+  ) {
+    return { privateTarget: true };
+  }
 
   let filter: RoomsFilter | FilesFilter;
   if (isRoomView) {

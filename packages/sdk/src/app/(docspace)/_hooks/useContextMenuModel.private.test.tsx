@@ -91,7 +91,7 @@ const encryptedFile = (contextOptions: string[]) => ({
 describe("useContextMenuModel in a private room", () => {
   let root: Root | null = null;
 
-  const selectionHeaderKeys = (selection: unknown[]) => {
+  const selectionHeaderModel = (selection: unknown[]) => {
     env.selection = selection;
     let model: ReturnType<
       ReturnType<typeof useContextMenuModel>["getHeaderContextMenuModel"]
@@ -114,7 +114,21 @@ describe("useContextMenuModel in a private room", () => {
         </EncryptedFileActionsContext.Provider>,
       ),
     );
-    return model.map((item) => String(item.key));
+    return model;
+  };
+
+  const selectionHeaderKeys = (selection: unknown[]) =>
+    selectionHeaderModel(selection).map((item) => String(item.key));
+
+  const copyEntry = (selection: unknown[]) =>
+    selectionHeaderModel(selection).find((item) => item.key === "copy");
+
+  const privateFolder = {
+    id: 5,
+    isFolder: true,
+    title: "Drafts",
+    security: { Download: true, Copy: true, Move: true, Delete: true },
+    contextOptions: [C.download, C.delete],
   };
 
   const headerKeys = (contextOptions: string[]) =>
@@ -141,6 +155,20 @@ describe("useContextMenuModel in a private room", () => {
 
     expect(keys).not.toContain("download");
     expect(keys).toContain("download-encrypted");
+  });
+
+  it("Selection holding a folder of a private room", () => {
+    expect(copyEntry([privateFolder])?.disabled).toBe(true);
+    expect(
+      copyEntry([privateFolder, encryptedFile([C.download, C.delete])])
+        ?.disabled,
+    ).toBe(true);
+  });
+
+  it("Selection of encrypted files only", () => {
+    expect(copyEntry([encryptedFile([C.download, C.delete])])?.disabled).toBe(
+      false,
+    );
   });
 
   it("Folder in a private room: no download-as for a selection holding a folder", () => {

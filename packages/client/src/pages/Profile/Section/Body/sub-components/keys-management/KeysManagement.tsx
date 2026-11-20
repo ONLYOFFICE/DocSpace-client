@@ -50,6 +50,7 @@ import {
   forgetDeviceUnlock,
   getDeviceUnlockWrittenAt,
 } from "@docspace/shared/services/encryption/device-unlock-store";
+import { broadcastLock } from "@docspace/shared/services/encryption/lock-broadcast";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@onlyoffice/apps-ui-kit/constants";
@@ -90,8 +91,15 @@ const KeysManagement = ({
   userEmail,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
-  const { isUnlocked, lock, getIdentity, requireIdentity, publicKey } =
-    useEncryption();
+  const {
+    isUnlocked,
+    lock,
+    lockAfterKeyRemoval,
+    lockAfterReseal,
+    getIdentity,
+    requireIdentity,
+    publicKey,
+  } = useEncryption();
   /** Formatted date the remembered-device record expires, or null. */
   const [rememberedUntil, setRememberedUntil] = useState<string | null>(null);
   const [passkeyPlatformOk, setPasskeyPlatformOk] = useState(false);
@@ -131,6 +139,8 @@ const KeysManagement = ({
   const handleForgetDevice = useCallback(() => {
     if (!userId) return;
     void forgetDeviceUnlock(userId).then(() => {
+      // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+      broadcastLock(userId);
       setRememberedUntil(null);
       toastr.success(t("Common:DeviceUnlockForgotten"));
     });
@@ -238,6 +248,7 @@ const KeysManagement = ({
     userId,
     encryptionKeys,
     refreshKeysFromServer,
+    lockAfterKeyRemoval,
   });
 
   const handleForgotPassphrase = useCallback(
@@ -254,6 +265,7 @@ const KeysManagement = ({
   const remove = useDeleteKeyFlow({
     userId,
     refreshKeysFromServer,
+    lockAfterKeyRemoval,
     onForgotPassphrase: handleForgotPassphrase,
   });
   const deleteUnused = useDeleteUnusedKeysFlow({
@@ -268,6 +280,7 @@ const KeysManagement = ({
   const rotate = useRotatePassphraseFlow({
     userId,
     refreshKeysFromServer,
+    lockAfterReseal,
     onForgotPassphrase: handleForgotPassphrase,
   });
 
@@ -287,15 +300,18 @@ const KeysManagement = ({
       <Text as="p" className={styles.intro} dataTestId="keys_management_intro">
         {t("Common:KeysManagementIntro")}
       </Text>
-      <KeysList
-        keyState={hasKeys ? (isUnlocked ? "unlocked" : "locked") : undefined}
-        keys={encryptionKeys || []}
-        onDelete={remove.request}
-        onExport={exportFlow.request}
-        onRotate={rotate.request}
-        isDeleting={remove.isPending}
-        deletingKeyId={remove.pendingId}
-      />
+      {/* A list that failed to load is reported by the block below. */}
+      {!keysKnown && keysLoadFailed ? null : (
+        <KeysList
+          keyState={hasKeys ? (isUnlocked ? "unlocked" : "locked") : undefined}
+          keys={keysKnown ? encryptionKeys : null}
+          onDelete={remove.request}
+          onExport={exportFlow.request}
+          onRotate={rotate.request}
+          isDeleting={remove.isPending}
+          deletingKeyId={remove.pendingId}
+        />
+      )}
       {/* Spec: private-rooms/key-management, "Keys management offers to unlock a locked key" */}
       {hasKeys && !isUnlocked ? (
         <div className={styles.unlockAction}>

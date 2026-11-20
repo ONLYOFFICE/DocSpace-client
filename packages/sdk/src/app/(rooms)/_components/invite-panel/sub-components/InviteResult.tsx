@@ -38,6 +38,7 @@
 import { useEffect, useId, useRef } from "react";
 
 import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
+import { waitsForAccess } from "@docspace/shared/services/private-room/room-encryption";
 import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import type { TTranslation } from "@docspace/shared/types";
@@ -57,9 +58,11 @@ const InviteResult = ({ t, outcome }: InviteResultProps) => {
   const refusedWithoutKey = refused
     .filter((entry) => entry.noKey)
     .map((entry) => entry.member);
-  const refusedOtherwise = refused
-    .filter((entry) => !entry.noKey)
-    .map((entry) => entry.member);
+  // Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+  const refusedOtherwise = [
+    ...refused.filter((entry) => !entry.noKey).map((entry) => entry.member),
+    ...skipped.filter((member) => waitsForAccess(member.reason)),
+  ];
   // Spec: private-rooms/room-membership, "Invitees without usable keys are skipped with a warning"
   const notInvitedWithoutKey = [
     ...refusedWithoutKey,

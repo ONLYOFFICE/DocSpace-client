@@ -425,4 +425,47 @@ describe("sender listed with several keys (leftover envelopes)", () => {
       }),
     ).rejects.toBeInstanceOf(AuthenticationError);
   });
+
+  describe("An unusable member key affects only that member", () => {
+    it("One recipient left out", async () => {
+      const alice = await generateIdentityKeyPair();
+      const bob = await generateIdentityKeyPair();
+      const carol = await generateIdentityKeyPair();
+      const dek = generateDEK();
+      // Users of their own, so no pin from the tests above applies.
+      const [SENDER, FIRST, SECOND] = [
+        "33333333-3333-3333-3333-333333333331",
+        "33333333-3333-3333-3333-333333333332",
+        "33333333-3333-3333-3333-333333333333",
+      ];
+      const roomMemberKeys = [
+        { userId: SENDER, publicKey: pubB64(alice) },
+        { userId: FIRST, publicKey: pubB64(bob) },
+        { userId: SECOND, publicKey: pubB64(carol) },
+      ];
+
+      const wraps = await wrapDekForRecipients({
+        dek,
+        senderIdentity: alice,
+        senderUserId: SENDER,
+        recipients: [
+          { userId: FIRST, publicKey: pubB64(bob) },
+          { userId: "not-base64", publicKey: "not base64!!" },
+          { userId: "short-key", publicKey: "AAAAAAAAAAAAAAAAAAAAAA==" },
+          { userId: SECOND, publicKey: pubB64(carol) },
+        ],
+        fileId: FILE_ID,
+      });
+
+      expect(wraps.map((w) => w.userId)).toEqual([FIRST, SECOND]);
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: wraps,
+        roomMemberKeys,
+        currentUserId: SECOND,
+        currentIdentity: carol,
+        fileId: FILE_ID,
+      });
+      expect(out).toEqual(dek);
+    });
+  });
 });

@@ -1,0 +1,21 @@
+{
+  "key_path": "Automatic",
+  "content": "Automatic",
+  "content_en_sha1_hash": "ac9041e76816a34aba228a736ec30da6984c5777",
+  "created_at": "2026-11-19T16:13:51.646Z",
+  "updated_at": "2026-11-19T16:13:51.646Z",
+  "comment": {
+    "text": "Short value in the 'Type' column of the wallet invoice history table: the balance top-up was made automatically (auto-recharge). Adjective, refers to a top-up; keep it short.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -61,6 +61,8 @@ import type { ContextFunctions, TranslationType } from "./MediaViewer.types";
 
 // Spec: private-rooms/file-operations, "Rename withheld for encrypted files"
 const isRenameWithheld = (file?: TFile) => !!file?.encrypted;
+// Spec: private-rooms/file-operations, "The media viewer menu of an encrypted file withholds link and download-as entries"
+const isPdfEntryWithheld = (file: TFile) => !!file.encrypted;
 
 export const getPDFContextModel = (
   t: TranslationType,
@@ -95,7 +97,7 @@ export const getPDFContextModel = (
       label: t("Common:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => funcs.onCopyLink?.(item, t),
-      disabled: false,
+      disabled: isPdfEntryWithheld(item),
     },
     {
       id: "option_copy-to",
@@ -126,7 +128,7 @@ export const getPDFContextModel = (
       label: t("Common:DownloadAs"),
       icon: DownloadAsReactSvgUrl,
       onClick: funcs.onClickDownloadAs,
-      disabled: !item.security.Download,
+      disabled: !item.security.Download || isPdfEntryWithheld(item),
     },
     {
       id: "option_rename",

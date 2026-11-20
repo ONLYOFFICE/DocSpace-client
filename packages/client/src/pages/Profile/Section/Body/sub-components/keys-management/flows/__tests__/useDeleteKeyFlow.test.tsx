@@ -66,9 +66,6 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
 
-vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { lock: vi.fn() },
-}));
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
   unlockWithPassphrase: vi.fn(),
 }));
@@ -87,7 +84,6 @@ vi.mock("react-i18next", () => ({
 }));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { unlockWithPassphrase } from "@docspace/shared/services/encryption/identity";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
@@ -98,13 +94,15 @@ import {
   type DeleteKeyFlow,
 } from "../useDeleteKeyFlow";
 
+const lockAfterKeyRemoval = vi.fn(async (_publicKey?: string) => undefined);
+
 let latest: DeleteKeyFlow;
 const Harness = (deps: {
   userId?: string;
   refreshKeysFromServer: () => Promise<void>;
   onForgotPassphrase?: () => void;
 }) => {
-  latest = useDeleteKeyFlow(deps);
+  latest = useDeleteKeyFlow({ lockAfterKeyRemoval, ...deps });
   return <>{latest.modals}</>;
 };
 
@@ -184,7 +182,7 @@ describe("useDeleteKeyFlow", () => {
     expect(captured.passphrase?.visible).toBe(true);
   });
 
-  it("locks SecretStorage only on a successful delete", async () => {
+  it("locks the identity only on a successful delete", async () => {
     vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(undefined as never);
     vi.mocked(deleteEncryptionKey).mockRejectedValueOnce(new Error("403"));
     render(<Harness refreshKeysFromServer={vi.fn()} />);
@@ -195,7 +193,7 @@ describe("useDeleteKeyFlow", () => {
         "secret",
       );
     });
-    expect(SecretStorage.lock).not.toHaveBeenCalled();
+    expect(lockAfterKeyRemoval).not.toHaveBeenCalled();
     expect(toastr.error).toHaveBeenCalledTimes(1);
 
     vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(undefined as never);
@@ -207,7 +205,24 @@ describe("useDeleteKeyFlow", () => {
         "secret",
       );
     });
-    expect(SecretStorage.lock).toHaveBeenCalledTimes(1);
+    expect(lockAfterKeyRemoval).toHaveBeenCalledTimes(1);
+  });
+
+  it("Key deleted on a remembered device", async () => {
+    vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(undefined as never);
+    vi.mocked(deleteEncryptionKey).mockResolvedValueOnce(undefined as never);
+    render(
+      <Harness refreshKeysFromServer={vi.fn().mockResolvedValue(undefined)} />,
+    );
+    act(() => latest.request(sampleKey));
+    act(() => (captured.confirmation!.onConfirm as () => void)());
+    await act(async () => {
+      await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+        "secret",
+      );
+    });
+
+    expect(lockAfterKeyRemoval).toHaveBeenCalledWith("pub-7");
   });
 
   it("dismisses the passphrase modal and calls onForgotPassphrase when the link fires", () => {
@@ -246,7 +261,7 @@ describe("useDeleteKeyFlow", () => {
     vi.mocked(deleteEncryptionKey).mockImplementationOnce((async () => {
       callOrder.push("api");
     }) as never);
-    vi.mocked(SecretStorage.lock).mockImplementationOnce(() => {
+    lockAfterKeyRemoval.mockImplementationOnce(async () => {
       callOrder.push("lock");
     });
     const refresh = vi.fn().mockImplementation(async () => {

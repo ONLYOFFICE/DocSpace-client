@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Page } from "@playwright/test";
+import type { FrameLocator, Page } from "@playwright/test";
 import type { SetupServer } from "@docspace/shared/__mocks__/e2e";
 import {
   privacyroomKeysHandlers,
@@ -103,11 +103,11 @@ export const test = base.extend<{
 });
 
 /** The SDK's own passphrase modal. */
-export const passphrasePrompt = (page: Page) =>
+export const passphrasePrompt = (page: Page | FrameLocator) =>
   page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
 
 /** Answers the passphrase modal with the fixture identity's passphrase. */
-export const unlock = async (page: Page) => {
+export const unlock = async (page: Page | FrameLocator) => {
   const prompt = passphrasePrompt(page);
   await expect(prompt).toBeVisible({ timeout: 15000 });
   await prompt

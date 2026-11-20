@@ -115,7 +115,6 @@ const SectionBodyContent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isErrorRoomNotAvailable,
-    getSelectedFolder,
     setDropTargetPreview,
     roomsFilterGroupId,
     setEditRoomGroupsDialogVisible,
@@ -366,9 +365,9 @@ const SectionBodyContent = (props) => {
     }
   };
 
-  const onMoveTo = (destFolderId, title, destFolderInfo) => {
+  const onMoveTo = (destFolderId, title) => {
     const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
-    moveDragItems(id, title, destFolderInfo);
+    moveDragItems(id, title);
   };
 
   const onMouseUp = (e) => {
@@ -426,13 +425,8 @@ const SectionBodyContent = (props) => {
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
 
-    const selectedFolder = getSelectedFolder();
-    const destFolderInfo = selectedFolder.folders.find(
-      (folder) => folder.id == selectedFolderId,
-    );
-
     if (!isIndexEditingMode && selectedFolderId) {
-      return onMoveTo(selectedFolderId, title, destFolderInfo);
+      return onMoveTo(selectedFolderId, title);
     }
     if (filesList.length === 1) return;
 
@@ -649,7 +643,6 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
-      getSelectedFolder: selectedFolderStore.getSelectedFolder,
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
       setEditRoomGroupsDialogVisible,

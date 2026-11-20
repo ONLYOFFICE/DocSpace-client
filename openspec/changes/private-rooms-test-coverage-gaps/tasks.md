@@ -38,7 +38,7 @@ of the plan against the code at `2228a89fbad`.
 
 ## 3. SDK
 
-- [ ] 3.1 Close the gaps of the shell effects in `packages/sdk/src/app/(private)/_components/private-shell/`:
+- [x] 3.1 Close the gaps of the shell effects in `packages/sdk/src/app/(private)/_components/private-shell/`:
   - extend `AbortOnLockEffect.test.tsx` with "Shell side effects: abort on lock": a first render while locked does not abort, and a second lock after an unlock aborts again (the `wasUnlockedRef` gate);
   - extend `GhostStateToastEffect.test.tsx` with "Unreadable file": the handler shows `toastr.warning` with `Common:GhostStateDetected`, and unmount clears the handler;
   - add `PostUnlockGateResetEffect.test.tsx` ("Shell side effects: gate reset after unlock": `resetGhostStateGate` runs on a locked-to-unlocked transition only, not on a mount while already unlocked);

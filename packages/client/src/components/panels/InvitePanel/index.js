@@ -472,6 +472,11 @@ const InvitePanel = ({
     setNotInvited([]);
   }, [inviteItems]);
 
+  const refusedMemberOf = (item) => ({
+    id: item.id ?? item.email,
+    displayName: item.displayName || item.groupName || item.email,
+  });
+
   const onClickSend = async () => {
     if (roomLoad !== "loaded") return;
     setNotInvited([]);
@@ -506,6 +511,13 @@ const InvitePanel = ({
       const invitedMembers = isPrivateInvite
         ? getMembersToRewrap(inviteItems)
         : [];
+      // Spec: private-rooms/room-membership, "A private-room invitation sends people only"
+      const memberIds = new Set(invitedMembers.map((member) => member.id));
+      const refusedNonUsers = isPrivateInvite
+        ? inviteItems
+            .filter((item) => !memberIds.has(item.id))
+            .map((item) => ({ member: refusedMemberOf(item), noKey: false }))
+        : [];
 
       let identity = null;
       if (isPrivateInvite && invitedMembers.length > 0) {
@@ -530,7 +542,7 @@ const InvitePanel = ({
       const invitationsToSend = isPrivateInvite
         ? invitations.filter(
             (invitation) =>
-              invitation.id === undefined ||
+              invitation.id !== undefined &&
               verifiedIds.has(String(invitation.id)),
           )
         : invitations;
@@ -548,16 +560,13 @@ const InvitePanel = ({
         ? getMembersToRewrap(privateSend.accepted.map(itemOf))
         : [];
       const refused = privateSend
-        ? privateSend.refused.map(({ invitation, noKey }) => {
-            const item = itemOf(invitation);
-            return {
-              member: {
-                id: item.id ?? item.email,
-                displayName: item.displayName || item.email,
-              },
+        ? [
+            ...refusedNonUsers,
+            ...privateSend.refused.map(({ invitation, noKey }) => ({
+              member: refusedMemberOf(itemOf(invitation)),
               noKey,
-            };
-          })
+            })),
+          ]
         : [];
 
       const result = !isRooms
@@ -588,7 +597,9 @@ const InvitePanel = ({
         });
       }
       const showsResult =
-        isPrivateInvite && identity && invitedMembers.length > 0;
+        isPrivateInvite &&
+        ((identity && invitedMembers.length > 0) ||
+          refusedNonUsers.length > 0);
 
       if (!showsResult) {
         setIsLoading(false);

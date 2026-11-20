@@ -65,10 +65,18 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock("react-i18next", async (io) => ({
   ...((await io()) as Record<string, unknown>),
+  // The key, then the values it is given, so that a test can find a name.
   withTranslation:
     () =>
     (Component: React.ComponentType<{ t: (key: string) => string }>) =>
-    (props: object) => <Component t={(key: string) => key} {...props} />,
+    (props: object) => (
+      <Component
+        t={(key: string, values?: object) =>
+          values ? `${key} ${JSON.stringify(values)}` : key
+        }
+        {...props}
+      />
+    ),
 }));
 
 vi.mock("react-router", () => ({ useNavigate: () => vi.fn() }));
@@ -653,6 +661,56 @@ describe("Invite opened from the list", () => {
       expect(
         await screen.findByTestId("invite_panel_result_refused"),
       ).toHaveTextContent("Common:EncryptedInviteFailed");
+    });
+
+    it("Group in the list", async () => {
+      mocks.setRoomSecurity.mockImplementation(async () => ({}));
+      const group = {
+        id: "group-1",
+        isGroup: true,
+        groupName: "Designers",
+        access: ShareAccessRights.Editing,
+      };
+      renderInviteFromList(
+        privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+        [BOB_ITEM, group] as never,
+      );
+
+      fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+      expect(
+        await screen.findByTestId("invite_panel_result_refused"),
+      ).toHaveTextContent(/Common:EncryptedInviteFailed.*Designers/);
+      expect(
+        mocks.setRoomSecurity.mock.calls.map(([, data]) => data.invitations),
+      ).toEqual([[{ id: "bob", access: ShareAccessRights.Editing }]]);
+    });
+
+    it("Only an e-mail address in the list", async () => {
+      const typed = {
+        id: "local-1",
+        email: "guest@example.com",
+        isEmailInvite: true,
+        access: ShareAccessRights.Editing,
+      };
+      const { setInvitePanelOptions } = renderInviteFromList(
+        privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+        [typed] as never,
+      );
+
+      fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+      await waitFor(() =>
+        expect(
+          screen.getByTestId("invite_panel_not_invited"),
+        ).toHaveTextContent(/Common:EncryptedInviteFailed.*guest@example\.com/),
+      );
+      expect(mocks.requireUnlock).not.toHaveBeenCalled();
+      expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
+      expect(setInvitePanelOptions).not.toHaveBeenCalledWith(closedPanel);
+      expect(mocks.toastr.success).not.toHaveBeenCalledWith(
+        "Common:UsersInvited",
+      );
     });
 
     it("Every invitee refused", async () => {

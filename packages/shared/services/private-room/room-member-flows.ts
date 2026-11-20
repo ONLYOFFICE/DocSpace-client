@@ -91,16 +91,21 @@ export type TMemberFlowNotice = {
 export type TInviteItem = {
   id?: string;
   isGroup?: boolean;
+  /** An address typed in the invite field: its id is local, not a user's. */
+  isEmailInvite?: boolean;
   displayName?: string;
   email?: string;
 };
 
-/** The invited people whose file keys are re-wrapped: users, not groups. */
+/**
+ * The invited people whose file keys are re-wrapped: portal users, not
+ * groups or typed addresses.
+ */
 export const getMembersToRewrap = (
   inviteItems: TInviteItem[],
 ): NewRoomMember[] =>
   inviteItems
-    .filter((item) => item.id && !item.isGroup)
+    .filter((item) => item.id && !item.isGroup && !item.isEmailInvite)
     .map((item) => ({
       id: item.id as string,
       displayName: (item.displayName || item.email) as string,

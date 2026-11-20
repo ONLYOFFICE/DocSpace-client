@@ -66,7 +66,7 @@ The arrow keys, Enter and Tab SHALL move among and pick the skills only. The row
 - **THEN** the highlight goes back to the first skill, not to a knowledge base
 
 ### Requirement: Knowledge bases and data sources in the slash menu
-In the slash menu the Knowledge bases and Data sources sections SHALL each be headed as the skill list is: a caption, then a line saying what the assistant does with those sources. Each knowledge base SHALL end with a bin labelled "Disconnect knowledge base: <name>" and each data source with a bin labelled "Disconnect folder: <name>". Using a bin SHALL disconnect that source and keep the menu open with the input focused. In a chat that runs on an agent the knowledge bases SHALL follow "Lists of a chat on an agent".
+In the slash menu the Knowledge bases and Data sources sections SHALL each start with a caption and a hint on what the assistant does with them. Each knowledge base SHALL end with a bin labelled "Disconnect knowledge base: <name>" and each data source with a bin labelled "Disconnect folder: <name>". Using a bin SHALL disconnect that source and keep the menu open with the input focused. In a chat that runs on an agent the knowledge bases SHALL follow "Lists of a chat on an agent".
 
 #### Scenario: Disconnect a folder from the slash menu
 - **WHEN** the user uses the bin of the folder "Contracts 2026" in the slash menu

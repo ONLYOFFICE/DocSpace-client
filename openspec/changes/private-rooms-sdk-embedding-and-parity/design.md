@@ -4,7 +4,10 @@
 
 See proposal.md for the motivation. Read on 2026-11-19 on `release/v4.1.0`
 (`54bed4b404d`), in `docspace-sdk-js` (read only, every branch), in
-`../buildtools` and, through CodeGraph, in `../server`.
+`../buildtools` and, through CodeGraph, in `../server`. Read again on
+2026-11-20 (`a26a2ae6aa5`), after `private-rooms-withheld-actions-gaps` and
+`private-rooms-invite-and-upload-robustness` were archived; the facts below
+are as of that reading.
 
 ### Embedding today
 
@@ -80,14 +83,33 @@ See proposal.md for the motivation. Read on 2026-11-19 on `release/v4.1.0`
   when `DocSpaceHelper.GetEncryptedFilesWithoutKeyAsync` finds files
   without the candidate's key (`products/ASC.Files/Core/Core/FileStorageService.cs`).
   `PrivacyRoomController.GetRoomMissingFileKeys` (`GET
-  api/2.0/privacyroom/{roomId}/access/missing`) lists them.
+  api/2.0/privacyroom/{roomId}/access/missing`) lists them. The 409 comes
+  only for a private room, with `demandFileKeys`, a candidate who is not the
+  room's creator and at least one encrypted file of the room's tree without
+  the candidate's key; a candidate with no key at all gets 403 before that
+  (`ThrowIfKeysAreNotSetAsync`). The missing-keys route takes repeated
+  `userIds`, answers only to those who may change the room's access (owner,
+  managers; 403 otherwise, archived rooms included), 400 for a room that is
+  not private and 404 for an unknown one; the E2E mock answers it the same
+  way. Since `private-rooms-invite-and-upload-robustness`,
+  `PrivateChangeOwnerDialog` refuses a candidate who is not a member or
+  holds no verified key through the shared `getNewOwnerKeyRefusal` before it
+  calls the hook, and `usePrivateRoomOwnerExclusions` fails closed
+  (`excludeFailed`): the hook lacks only the unlock, the wrap and the 409
+  path. The client's 409 count is private to `rooms.helpers.ts` (`statusOf`
+  and the count after it).
 - **Info panel menu of an open room.** `(private)/private/[roomId]/page.client.tsx`
   provides `RoomActionsOverrideContext` but no `RoomActionsContext`.
   `RoomActionsMenu` (`(rooms)/_components/room-actions-menu`) passes the
   callbacks of `RoomActionsContext` to `useRoomContextMenuModel`, whose
   edit, invite and change-owner entries call those callbacks and nothing
   else; only leave consults the override. On the private list page
-  `RoomsLayout` provides the context, so the list works.
+  `RoomsLayout` provides the context, so the list works. In the open room
+  archive, delete and info are just as empty, and `isArchive` is not
+  passed. `useRoomActions` (`(rooms)/_hooks/useRoomActions.ts`) already
+  sends edit, invite and change owner to the override, and the generic info
+  panel (`(docspace)/_components/info-panel/Body.tsx`) builds a fallback
+  `RoomActionsContext` from it when none sits above.
 - **Quota warning.** `(rooms)/_components/quota-warning-dialog` asks
   `useTranslation(["Payments", "Common"])` and renders nine keys of the
   client's `Payments` namespace and `MainBar:ContactToUpgradeTariff`
@@ -96,35 +118,69 @@ See proposal.md for the motivation. Read on 2026-11-19 on `release/v4.1.0`
   (`packages/sdk/src/utils/translationLoaders.ts`). The private list opens
   this dialog through `RoomsLayout.createCustomRoom`. A scan of
   `(private)`, `(rooms)`, `(docspace)` and `(personal-files)` finds no other
-  key outside Common; `(private)/translations.test.ts` scans `(private)`
-  only.
+  key outside Common (806 keys, 43 of them unprefixed); the dialog's
+  `ns="Payments"` is the only namespace attribute other than Common.
+  `(private)/translations.test.ts` scans `(private)` only and does not read
+  `ns`. The client renders the same ten keys in `InviteQuotaWarningDialog`
+  (`index.js`, `sub-components/RoomsContent.tsx`, `UsersContent.tsx`) and
+  `ContactToUpgradeTariff` in `MainBar/QuotasBar.js`; ui-kit and no test
+  name them. All ten are translated in all 31 languages. `FullEnDublicatesTest`
+  (`common/tests/test/locales.test.js`) fails when two English namespaces
+  hold the same key with the same value, so a copy under the same name
+  cannot stand next to the original.
 - **Create during the key-list load.** `EncryptionIdentityStore.loadKeys`
-  returns at once while a load runs; `resolveEncryptionKeys` of
-  `PrivateCreateRoomDialog` then sees `keys === null` and answers "unknown",
-  which the dialog turns into Common:EncryptionKeysLoadFailed.
+  returns at once while a load runs (`if (this.isLoading) return;`);
+  `resolveEncryptionKeys` of `PrivateCreateRoomDialog` then sees no list
+  (`keys === null`, "unknown", which the dialog turns into
+  Common:EncryptionKeysLoadFailed) or decides on the list known before the
+  load. Its other callers are `EncryptionShell`, `usePrivateRoomsPageInit`
+  and the dialog's `refreshKeysFromServer`, which runs after a key was
+  generated.
 - **Upload panel.** On a cancelled name-clash dialog the orchestrator
-  returns every file as aborted, and so it does for a lock; the hook marks
-  them `cancelled` (`useEncryptedUpload`). `file-row.tsx` knows only
+  returns every file as aborted, and so it does when the identity is locked
+  during the batch (`AbortOnLockEffect` calls
+  `abortAllCryptoOperations("lock")`, which aborts the hook's signal); the
+  hook marks them `cancelled` (`useEncryptedUpload`), as it does after
+  "Cancel all". A lock before the batch is the gate's refusal
+  (`refused: "locked"`), which already fails the rows with
+  Common:EncryptionLockedUpload. `file-row.tsx` knows only
   uploaded, error and the rest, so a cancelled row shows its percentage and
   a cancel button. `UploadStore.uploaded` is true once nothing is
   uploading, so the upload button reports "completed". `startBatch`
   replaces `batchAbortController`, so `cancelBatch` aborts only the newest
   batch, and `dropPending` then removes the rows of the older one while its
-  files keep uploading.
+  files keep uploading; `resetItemForRetry` links a retried row to the
+  newest batch's controller. The store is provided by the private,
+  personal-files, rooms and AI agents layouts.
 - **Leave after an owner change.** `PrivateChangeOwnerDialog` awaits
   `leaveRoom` in the same `try` as the transfer; a 403 falls into the
   `catch`, which toasts `error.message` and leaves the dialog open, after
-  the transfer took place.
+  the transfer took place. The client (`rooms.helpers.ts`, case "Leave
+  after an owner change refused") shows the refusal alone and stays on the
+  room.
 - **Members search.** `PrivateMembersView` renders the raw page of members
   while a search text is set and the sections of `classifyMembers`
   otherwise; only the sections drop guests and disabled members who are not
   the owner. The request already asks for users only, so groups are not in
-  either list.
+  either list. While searching, `members.length === 0` decides the empty
+  state and `members.length < total` the Show more button.
 - **Not confirmed**, left out: the e-mail branch of the invite panel (every
   user the server returns has an avatar address, `EmployeeDtoHelper.InitAsync`,
   and the private invite panel refuses a typed address) and a guest creating
   a private room (the SDK offers creation to administrators and room
   administrators only; the client closes silently too).
+
+### Other changes
+
+No requirement this delta adds or modifies is touched by another active
+change (`private-rooms-server-hardening` and `private-rooms-external-links`
+change other `sdk-surface` requirements), and the MODIFIED blocks copy the
+main text as of 2026-11-20, so the archive order is free; re-diff them if
+either of those archives first. `private-rooms-test-coverage-gaps` leaves
+the fixme cases "change-owner" and "csp-headers" and the members view
+render cases to tasks 2.1, 1.1 and 7.1 here; whichever lands second re-reads
+those files. `private-rooms-beta-release` owns the release notes task 1.2
+edits.
 
 ## Goals / Non-Goals
 
@@ -178,79 +234,104 @@ server call to every private page for no gain while the portal's policy is
 present. The fixme "csp-headers" case of `private-security.spec.ts` is
 replaced by unit cases in `proxy.test.ts`, as its own comment suggests.
 
-### 3. The SDK owner change runs the client's preparation
+### 3. The SDK owner change runs the client's preparation (proposal decision 5)
 
 The SDK flow unlocks through `requireIdentity` of the encryption context,
 calls `prepareNewOwner` and asks for the transfer only when no file stays
-missing. On a 409 it reads `getRoomMissingFileKeys` for the candidate and
-counts the files with Common:EncryptedReencryptPartialFailure, falling back
-to the mapped error when the server lists none. The same unlock covers the
-re-wrap; nothing new is asked of the server.
+missing. The count after a 409 moves into shared, next to
+`prepareNewOwner` in `room-member-flows.ts`, as one function that the
+client's `changeRoomOwnerImpl` and the SDK hook both call: it reads
+`getRoomMissingFileKeys` for the candidate and counts the files with
+Common:EncryptedReencryptPartialFailure, falling back to the mapped error
+when the server lists none. The unlock stays per app (`requireUnlock` in
+the client, `requireIdentity` in the SDK), and the same unlock covers the
+re-wrap; nothing new is asked of the server. The dialog keeps its
+`getNewOwnerKeyRefusal` check at selection, so the hook adds no membership
+or key check of its own. Copying the client's 409 handling into the SDK was
+the alternative; two copies drift.
 
-### 4. The room menu model uses the private override for edit, invite and change owner
+### 4. The private info panel provides the room actions (proposal decision 4)
 
-`useRoomContextMenuModel` already sends leave to `RoomActionsOverrideContext`
-when it is present. Edit, invite and change owner do the same. Both private
-pages provide the override with the same private actions, so the list keeps
-its behaviour and the open room gains it; generic pages provide no
-override. Wrapping `RoomHeader` in a `RoomActionsContext` built from the
-override was the alternative; it duplicates the bridge `RoomsLayout` keeps
-and would still leave the model dependent on which context sits above it.
+The private info panel wraps its `RoomHeader` in a `RoomActionsContext`
+built from `useRoomActions()`, the fallback the generic info panel
+(`Body.tsx`) builds when no context sits above; the fallback moves into one
+hook both panels call, with the archive state of the open room.
+`useRoomActions` already sends edit, invite and change owner to
+`RoomActionsOverrideContext`, which both private pages provide, so the open
+room starts the private flows, and archive, delete and info reach the menu
+as from the list. `useRoomContextMenuModel` is unchanged. Sending edit,
+invite and change owner of the menu model to the override was the
+alternative; it would leave archive, delete, info and the archive state
+empty in the open room.
 
-### 5. The quota warning takes its keys from Common
+### 5. The quota warning keys move to Common (proposal decision 3)
 
-The ten keys are copied into the root `Common.json` of every language with
-their existing translations and `.meta` comments, under the same names
-(none exists in Common), by a script that dry-runs first and checks
-placeholders and tags (`.claude/rules/bulk-locale-edits.md`). The dialog
-then asks for Common only, also for `GracePeriodActive`, which it reads
-with `ns="Payments"` today. The client keeps its own namespaces untouched.
-Bundling the client's Payments and MainBar namespaces in the SDK was the
-alternative; it ships hundreds of unrelated keys for one dialog.
+The ten keys move from the client's `Payments` (nine) and `MainBar`
+(`ContactToUpgradeTariff`) namespaces into the root `Common.json` of every
+language, with their translations as they are, and leave the client
+namespaces. A script that dry-runs first moves them and checks
+placeholders, tags and that each key occurs exactly once
+(`.claude/rules/bulk-locale-edits.md`). Their `.meta` files move to
+`public/locales/.meta/Common/`, and `generate-metadata` rebuilds their
+usage. Every caller then names `Common:`: the SDK dialog, which asks for
+Common only, also for `GracePeriodActive` (read with `ns="Payments"`
+today), and in the client `InviteQuotaWarningDialog` and `QuotasBar`.
+Alternatives: copies in Common under new names, two texts to keep in step
+(the same names fail `FullEnDublicatesTest`); bundling the client's
+namespaces in the SDK, hundreds of unrelated keys for one dialog.
 
 `translations.test.ts` scans `(private)`, `(rooms)`, `(docspace)` and
-`(personal-files)`: a key with a namespace other than Common fails, and an
-unprefixed key fails unless Common holds it.
+`(personal-files)`: a key with a namespace other than Common fails, an
+unprefixed key fails unless Common holds it, and an `ns` attribute other
+than Common fails.
 
 ### 6. Create waits for the load in flight
 
 `loadKeys` keeps the promise of the load in flight and returns it to a
 second caller, so `resolveEncryptionKeys` decides on the result of that load.
-The identity store's failure rule (a failed load is not an empty list) is
-unchanged.
+A caller that needs data newer than a running load (the dialog's refresh
+after a key was generated) waits for it and loads once more. The identity
+store's failure rule (a failed load is not an empty list) is unchanged.
 
 ### 7. Upload rows: cancelled leaves, locked fails, Cancel all stops every batch
 
 - A file the user cancels in the name-clash dialog is taken out of the panel
-  and the totals the way `cancelItem` takes out a row cancelled with its
-  cross, so the button reflects only what is left and disappears when
-  nothing is. A cancelled state with a label of its own was the
+  and the totals with `cancelItem`, as a row cancelled with its cross, so the
+  button reflects only what is left and disappears when nothing is; the hook
+  knows the dialog was cancelled from its own `onNameClash` answer. A cancelled state with a label of its own was the
   alternative; it needs a new key and a rule for a button whose every row is
   cancelled, and the client too takes a cancelled file out of the history
   its upload panel lists (`cancelCurrentUploadImpl`,
   `packages/client/src/store/uploadDataStore/start.helpers.ts`).
-- A file stopped by a lock fails with Common:EncryptionLockedUpload, the
-  message the SDK already uses when the uploader declines to unlock. The
-  hook tells the two apart by whether the name-clash dialog was cancelled.
-- `UploadStore` keeps one abort controller per batch; `cancelBatch` aborts
-  them all and `dropPending` removes only rows whose upload has stopped.
+- A file stopped by a lock during the batch (the hook's signal aborted with
+  the reason `lock`) fails with Common:EncryptionLockedUpload, the message
+  the gate's refusal already gives a lock before the batch. "Cancel all" and
+  a row's cross stay as they are.
+- `UploadStore` keeps the controllers of every running batch; `cancelBatch`
+  aborts them all, `resetItemForRetry` links a retried row to a live one,
+  and the set is emptied with the rows it served (`reset`, `dropPending`,
+  `clearFinished`). `dropPending` itself is unchanged.
 
-The store is shared with the generic personal-files pages, which gain the
-same "Cancel all".
+The store is shared with the personal-files, rooms and AI agents pages,
+which gain the same "Cancel all".
 
 ### 8. A refused leave after an owner change closes the dialog
 
-The leave step gets its own handling after a successful transfer: a 403 in
-a private room shows Common:EncryptedAccessChangeRefused (the check the
-SDK's leave dialog already uses), then the dialog reports the change and
-closes as after a successful hand-over; any other leave failure is shown
-with the mapped error and the dialog also closes, since the transfer is
-done and submitting again would transfer nothing.
+The leave step gets its own handling after a successful transfer. A 403,
+read with `isAccessChangeRefused` (the check the SDK's leave dialog already
+uses), shows Common:EncryptedAccessChangeRefused alone, with no success
+toast; the dialog calls `onChanged` and closes, and the page stays on the
+room, since the user is still a member, as in the client. Any other leave
+failure shows the mapped error, and the dialog also calls `onChanged` and
+closes, since the transfer is done and submitting again would transfer
+nothing.
 
 ### 9. The members search applies the same exclusions
 
 The rule `classifyMembers` applies to each member moves into one predicate
-used by the sections and by the search results.
+used by the sections and by the search results. In the view the predicate
+filters what is rendered and decides the empty state; the next page's
+`startIndex` and Show more keep counting the raw page and `total`.
 
 ## Hand-over to the host library
 
@@ -267,12 +348,13 @@ private rooms beta, which the client reads already. Nothing for
 - [The portal's policy may be missing on a deployment without the nginx
   block] → Production then allows connections to any https origin; framing
   stays limited by the SDK's own directive.
-- [Copied keys can drift from the client's Payments texts] → They are copied
-  once; `translate-stale` reports a reworded English value later.
-- [The Cancel all fix reaches the generic personal-files pages] → Covered by
-  the same `UploadStore` unit cases.
+- [The quota keys leave the client's Payments and MainBar] → Every caller is
+  repointed in the same task; ui-kit and no test name them (checked
+  2026-11-20).
+- [The Cancel all fix reaches the personal-files, rooms and AI agents pages]
+  → Covered by the same `UploadStore` unit cases.
 
 ## Open Questions
 
-None. The owner took both proposal decisions on 2026-11-19 as the tasks are
-written.
+None. The owner took proposal decisions 1 and 2 on 2026-11-19 and 3 to 5 on
+2026-11-20, as the tasks are written.

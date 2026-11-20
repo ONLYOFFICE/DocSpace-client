@@ -128,6 +128,7 @@ Only the ticked tasks are done. Tasks name the repository they change: the clien
 - [x] 8.3 ai-chat: draw a generated image in a card with its name, a built-in Download and host actions, and let a host draw the result of named tools; verify with the tool-call cases of `src/ui/pages/chat/tests/Thread.test.tsx`, then pack as in 1.6 (ai-chat `toolResultRenderers`, `generatedImageActions`, 2026-11-17)
 - [x] 8.4 ui-kit: pass the agent's logo, turn the attachment placement on, add "Save to room…" (the folder selector, then a copy of the file) and the document card with "created by"; verify with ui-kit tests for the two actions and the card, then build and `pnpm pack` (ui-kit, 2026-11-17)
 - [x] 8.5 Client: pass the logo of the agent the chat runs on, add `Common:SaveToRoom` and `Common:CreatedByAgent`, run `translate-comments` and `translate-locales`, and update the packages as in 1.9; verify with `AiPresetsBridge.test.tsx` and the locale tests (client, 2026-11-18; translations under 10.0)
+- [x] 8.6 Client: hand the chat no logo, so a reply starts with none on an agent as on the default one - the option of 8.1 and 8.4 stays unused; verify with `AiPresetsBridge.test.tsx` (client, 2026-11-20). `ai-chat-messages.spec.ts` now expects no logo and is not yet run in Docker, which supersedes the logo part of 10.8
 
 ## 9. Access by role (`ai-agent-access`)
 

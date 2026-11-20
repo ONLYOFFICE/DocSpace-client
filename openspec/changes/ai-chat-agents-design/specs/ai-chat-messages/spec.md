@@ -2,18 +2,18 @@
 
 ## Purpose
 
-Defines how the messages of a conversation look in the redesign: the agent's logo beside each reply, the user's attachments inside their own message, and cards for the files a reply produced.
+Defines how the messages of a conversation look in the redesign: replies without a logo, the user's attachments inside their own message, and cards for the files a reply produced.
 
-Implementation: the ai-chat library draws the messages; ui-kit supplies the logo, the document card and the "Save to room…" action; the client passes the agent the chat runs on.
+Implementation: the ai-chat library draws the messages; ui-kit supplies the document card and the "Save to room…" action; the client passes the name of the agent the chat runs on. The library and ui-kit can draw a logo at the start of a reply; the client hands them none (decided 2026-11-20, against the boards).
 
 ## ADDED Requirements
 
-### Requirement: Agent logo beside replies
-In a chat that runs on an agent, every reply SHALL start with that agent's logo. Replies of the default agent SHALL carry no logo.
+### Requirement: No logo beside replies
+A reply SHALL carry no logo, whether the chat runs on an agent or on the default agent: the agent's room logo is not drawn in the conversation.
 
 #### Scenario: Conversation with an agent
 - **WHEN** a Member reads a conversation with the agent "Legal Reviewer"
-- **THEN** each reply starts with the agent's logo
+- **THEN** the replies carry no logo
 
 #### Scenario: Default agent
 - **WHEN** a user reads a conversation with the default agent
@@ -67,7 +67,7 @@ A document a reply created SHALL be shown in the reply as a card with the file's
 - **THEN** the card shows the icon and the name, with no "created by" line
 
 ### Requirement: Cards stay with the conversation
-The logo, the attachments and the file cards of a message SHALL be shown the same way when the conversation is opened again later.
+The attachments and the file cards of a message SHALL be shown the same way when the conversation is opened again later.
 
 #### Scenario: Reopened conversation
 - **WHEN** the user reopens yesterday's conversation in which a document was created

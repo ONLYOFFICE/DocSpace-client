@@ -74,8 +74,8 @@ import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
- * The messages of a conversation (`ai-chat-messages`): the agent's logo
- * beside every reply of a chat on an agent, the attachments inside the
+ * The messages of a conversation (`ai-chat-messages`): no logo beside
+ * a reply, on an agent or on the default one, the attachments inside the
  * user's own message, the card of an image a reply generated with Download
  * and "Save to room...", and the card of a document a reply created.
  *
@@ -228,13 +228,13 @@ const baseHandlers = (userType: "owner" | "roomAdmin") => [
   ...aiChatStoreHandlers(TEST_PORT),
 ];
 
-test.describe("AI chat messages: the agent's logo", () => {
+test.describe("AI chat messages: no logo beside replies", () => {
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize(DESKTOP);
   });
 
-  // Spec: ai-chat-messages, "Agent logo beside replies"
-  test("Conversation with an agent: each reply starts with the agent's logo", async ({
+  // Spec: ai-chat-messages, "No logo beside replies"
+  test("Conversation with an agent: the replies carry no logo", async ({
     page,
     baseUrl,
     mockRequest,
@@ -280,14 +280,10 @@ test.describe("AI chat messages: the agent's logo", () => {
     await expect(replies.nth(1)).toContainText(
       "Clause 9 needs a cap on liability.",
     );
-    for (const index of [0, 1]) {
-      await expect(
-        replies.nth(index).getByTestId("assistant-message-logo"),
-      ).toBeVisible();
-    }
+    await expect(page.getByTestId("assistant-message-logo")).toHaveCount(0);
   });
 
-  // Spec: ai-chat-messages, "Agent logo beside replies"
+  // Spec: ai-chat-messages, "No logo beside replies"
   test("Default agent: the replies carry no logo", async ({
     page,
     baseUrl,
@@ -727,9 +723,7 @@ test.describe("AI chat messages: a created document", () => {
     await expect(card.getByTestId("created-document-author")).toHaveText(
       `created by ${AGENT_NAME}`,
     );
-    await expect(
-      page.getByTestId("assistant-message").getByTestId("assistant-message-logo"),
-    ).toBeVisible();
+    await expect(page.getByTestId("assistant-message-logo")).toHaveCount(0);
 
     await expectOpensProposal(page);
   });

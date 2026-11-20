@@ -425,7 +425,8 @@ describe("AiPresetsBridge", () => {
 
     act(() => store.setActivePreset(toAiPreset(project(1, "Sales"))));
     expect(aiChatStore.chatAgent?.name).toBe("Sales");
-    expect(aiChatStore.chatAgent?.logo).toBeTruthy();
+    // A reply starts with no logo of the agent's room.
+    expect(aiChatStore.chatAgent?.logo).toBeUndefined();
 
     act(() => store.setActivePreset(null));
     expect(aiChatStore.chatAgent).toBeNull();

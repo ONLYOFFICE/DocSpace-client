@@ -214,7 +214,7 @@ Both are on the boards and neither can be specified without a product descriptio
 ## Risks / Trade-offs
 
 - **[Risk] The server items are not designed.** → The tasks that need them are gated in tasks.md and name the item; nothing else waits for them.
-- **[Trade-off] Picking an agent no longer keeps the conversation.** Users lose "apply to this conversation", and a model and sources chosen on the default agent are dropped when the chat moves to an agent. The conversation stays in its history, and a conversation that can only ever have had one agent is what makes an agent's history and its logo beside replies truthful.
+- **[Trade-off] Picking an agent no longer keeps the conversation.** Users lose "apply to this conversation", and a model and sources chosen on the default agent are dropped when the chat moves to an agent. The conversation stays in its history, and a conversation that can only ever have had one agent is what makes an agent's history truthful.
 - **[Trade-off] An agent's Info panel has no Contacts tab.** "Share agent" invites, but nothing lists an agent's members, changes a role or removes a member. → Open question below; task 7.2.
 - **[Risk] Leaving or removal deletes conversations for good.** Server 18cb4ed823e deletes a member's conversations and files of an agent when their access ends, and a new invitation restores nothing. → The client warns before removal, in the leave dialog and in the change-owner panel ("Losing access deletes a member's conversations"); tasks 9.4–9.6.
 - **[Trade-off] Content learns of new files from the chat, not the server.** A round orphaned by a thread switch, or one run on another device, reports nothing here. → A read when the browser tab becomes visible again; tasks 7.4–7.6.

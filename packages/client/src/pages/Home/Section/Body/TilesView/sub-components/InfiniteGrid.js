@@ -64,8 +64,8 @@ const HeaderItem = ({ children, className, ...rest }) => {
 // Keep in step with AiProjectTile.module.scss.
 const AI_TILE_HEIGHTS = {
   [RoomsType.AiProjectRoom]: 290,
-  [RoomsType.InstructionsRoom]: 182,
-  [RoomsType.KnowledgeRoom]: 154,
+  [RoomsType.InstructionsRoom]: 173,
+  [RoomsType.KnowledgeRoom]: 145,
 };
 
 const VERTICAL_ROOM_GAP = 16;

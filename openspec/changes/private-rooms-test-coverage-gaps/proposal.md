@@ -25,7 +25,7 @@ Tests only, grouped by package:
   encrypted file; the apps catalog title;
   the live updates of a room the user cannot read; permanent deletion in a
   private room; the PDF form entry on mobile; the create hotkey without
-  keys; the create entries without keys; a quota
+  keys and F2 on an encrypted file; the create entries without keys; a quota
   error of an encrypted item in the middle of a batch; and the E2E cases
   for the invite panel, Forget device, the create-room chooser of Rooms and
   a key-less user in a private room.
@@ -67,11 +67,9 @@ Out of scope:
   "change-owner" fixme case (`private-rooms-sdk-embedding-and-parity`),
   and the move of the SDK security spec onto the private and host fixtures
   (`private-rooms-sdk-private-pages-only`).
-- The cases "Share tab hidden for private items" for a folder inside a
-  private room and "F2 on encrypted file" (file-operations, "Rename
-  withheld for encrypted files") belong to the change
-  `private-rooms-withheld-share-and-rename`, owner's decision of
-  2026-11-20.
+- The case "Share tab hidden for private items" for a folder inside a
+  private room belongs to the change `private-rooms-withheld-share-tab`,
+  owner's decision of 2026-11-20.
 - The SDK fixme cases that still need infrastructure the suite does not
   have (slowed upload and download streams with store introspection, a
   controlled late key registration): "abort-on-lock-upload",

@@ -157,8 +157,8 @@ option; a guest without a key is already one of `withoutKeys`.
   `private-rooms-invite-and-upload-robustness` and
   `private-rooms-sdk-embedding-and-parity`.
 - `private-rooms-remove-dead-api-calls` owns the desktop bridge test.
-- `private-rooms-withheld-share-and-rename` owns the Share tab case of a
-  folder inside a private room and "F2 on encrypted file".
+- `private-rooms-withheld-share-tab` owns the Share tab case of a folder
+  inside a private room.
 - Active changes on the same test files; whichever lands second rebases on
   the other: `private-rooms-server-followups` (its tasks 3.1, 3.5 and 3.7
   edit `roomMembers.ts` and `room-members-contract.test.ts`, as 1.6 does;

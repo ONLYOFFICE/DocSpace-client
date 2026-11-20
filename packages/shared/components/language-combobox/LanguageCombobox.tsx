@@ -122,9 +122,6 @@ const LanguageCombobox = (props: ComboboxProps) => {
       shouldShowBackdrop={shouldShowBackdrop}
       dataTestId={dataTestId ?? "language-combobox"}
       role="combobox"
-      aria-label="Select language"
-      aria-haspopup="listbox"
-      aria-controls="language-options"
     />
   );
 };

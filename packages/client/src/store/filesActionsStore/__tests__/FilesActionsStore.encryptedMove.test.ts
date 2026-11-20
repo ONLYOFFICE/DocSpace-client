@@ -31,12 +31,19 @@ vi.mock("@docspace/shared/services/private-room/encrypted-name-clash", async (io
 vi.mock("@docspace/shared/api/files", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   getFolderPath: vi.fn(),
+  // File 3 is not wrapped for user-1.
+  getFileEncryptionAccess: vi.fn(async (fileId: number) => ({
+    fileKeys: fileId === 3 ? [] : [{ userId: "user-1" }],
+  })),
 }));
 
 import { createTestFilesActionsStore } from "./testHarness";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import { getFolderPath } from "@docspace/shared/api/files";
+import {
+  getFileEncryptionAccess,
+  getFolderPath,
+} from "@docspace/shared/api/files";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { decryptEncryptedItemToFile } from "@docspace/shared/services/private-room/encrypted-copy";
@@ -142,6 +149,39 @@ describe("FilesActionsStore - encrypted files moved out of a private room", () =
     expect(startUpload).not.toHaveBeenCalled();
     expect(toastr.error).toHaveBeenCalledTimes(1);
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedFileNoAccessYet");
+  });
+
+  it("Copy of one file without a wrap while the key is locked", async () => {
+    const { store, startUpload } = setup();
+
+    await store.copyEncryptedFilesToFolder([unwrapped] as never, 5, {
+      private: false,
+      rootFolderId: 20,
+      rootFolderType: FolderType.USER,
+      deleteSourceOnSuccess: true,
+    });
+
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
+    expect(startUpload).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedFileNoAccessYet");
+  });
+
+  it("Access of the only file cannot be read", async () => {
+    allowConsoleError(/copy access not read/);
+    vi.mocked(getFileEncryptionAccess).mockRejectedValueOnce(new Error("500"));
+    const { store, startUpload } = setup();
+
+    await store.copyEncryptedFilesToFolder([ok] as never, 5, {
+      private: false,
+      rootFolderId: 20,
+      rootFolderType: FolderType.USER,
+    });
+
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(startUpload).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedCopyFailed");
   });
 
   it("One file of several without a wrap", async () => {

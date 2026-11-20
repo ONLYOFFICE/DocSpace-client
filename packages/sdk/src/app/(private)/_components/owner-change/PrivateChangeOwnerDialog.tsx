@@ -136,7 +136,11 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
         return;
       }
 
-      const ok = await changeOwner({ roomId, newOwnerId });
+      const ok = await changeOwner({
+        roomId,
+        newOwnerId,
+        currentUserId: currentUserId ?? "",
+      });
       if (!ok) return;
 
       // Parity: FilesActionsStore.changeRoomOwner, which leaves through

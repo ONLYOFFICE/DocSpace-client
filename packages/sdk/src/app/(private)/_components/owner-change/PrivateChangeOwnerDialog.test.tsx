@@ -242,6 +242,7 @@ describe("PrivateChangeOwnerDialog", () => {
     expect(mocks.changeOwner).toHaveBeenCalledWith({
       roomId: ROOM_ID,
       newOwnerId: "bob",
+      currentUserId: "me",
     });
     expect(mocks.leaveRoom).toHaveBeenCalledWith({
       roomId: ROOM_ID,

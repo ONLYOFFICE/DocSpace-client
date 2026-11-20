@@ -42,6 +42,11 @@ import api from "@docspace/shared/api";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
+import { useEncryption } from "@docspace/shared/context/encryption";
+import {
+  countMissingFilesOfRefusedOwnerChange,
+  prepareNewOwner,
+} from "@docspace/shared/services/private-room/room-member-flows";
 
 import {
   registerCryptoOperation,
@@ -51,6 +56,7 @@ import {
 type ChangeOwnerArgs = {
   roomId: number;
   newOwnerId: string;
+  currentUserId: string;
 };
 
 type LeaveRoomArgs = {
@@ -59,7 +65,10 @@ type LeaveRoomArgs = {
 };
 
 type UsePrivateOwnerChangeFlowReturn = {
-  /** Transfer ownership via files/owner; server handles ACL/file_keys handoff. */
+  /**
+   * Wraps the candidate's missing files, then transfers ownership via
+   * files/owner. Resolves with false after a refusal it has shown.
+   */
   changeOwner: (args: ChangeOwnerArgs) => Promise<boolean>;
   /**
    * Leave the room: drops the user's membership (access=None), as
@@ -72,24 +81,58 @@ type UsePrivateOwnerChangeFlowReturn = {
 export const usePrivateOwnerChangeFlow =
   (): UsePrivateOwnerChangeFlowReturn => {
     const { t } = useTranslation(["Common"]);
+    const { requireIdentity } = useEncryption();
     const [isLoading, setIsLoading] = React.useState(false);
 
+    // Spec: private-rooms/sdk-surface, "SDK owner change wraps the candidate's missing files"
     const changeOwner = React.useCallback(
-      async ({ roomId, newOwnerId }: ChangeOwnerArgs): Promise<boolean> => {
+      async ({
+        roomId,
+        newOwnerId,
+        currentUserId,
+      }: ChangeOwnerArgs): Promise<boolean> => {
         const controller = registerCryptoOperation();
         setIsLoading(true);
         try {
+          const identity = await requireIdentity();
+          if (!identity) {
+            toastr.error(t("Common:EncryptionUnlockRequired"));
+            return false;
+          }
+          const { missingFileIds } = await prepareNewOwner({
+            roomId,
+            candidateId: newOwnerId,
+            currentUserId,
+            identity,
+          });
+          if (missingFileIds.length > 0) {
+            toastr.error(
+              t("Common:EncryptedReencryptPartialFailure", {
+                count: missingFileIds.length,
+              }),
+            );
+            return false;
+          }
           await api.files.setFileOwner(newOwnerId, [roomId]);
           return true;
         } catch (error) {
-          toastr.error(getEncryptionErrorMessage(t, error));
+          const count = await countMissingFilesOfRefusedOwnerChange(
+            error,
+            roomId,
+            newOwnerId,
+          );
+          toastr.error(
+            count > 0
+              ? t("Common:EncryptedReencryptPartialFailure", { count })
+              : getEncryptionErrorMessage(t, error),
+          );
           return false;
         } finally {
           releaseCryptoOperation(controller);
           setIsLoading(false);
         }
       },
-      [t],
+      [t, requireIdentity],
     );
 
     // Spec: private-rooms/sdk-surface, "Leaving a private room drops the role without a revocation of its own"

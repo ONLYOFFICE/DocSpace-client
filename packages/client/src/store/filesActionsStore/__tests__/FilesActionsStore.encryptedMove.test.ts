@@ -159,7 +159,10 @@ describe("FilesActionsStore - encrypted files moved out of a private room", () =
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedCopyFailed");
   });
 
-  it("Identity locked: nothing is transferred and no source is tagged", async () => {
+  it.each([
+    ["copy", false],
+    ["move", true],
+  ])("Unlock declined on a %s out of a private room", async (_, deleteSourceOnSuccess) => {
     vi.mocked(requireUnlock).mockResolvedValueOnce(null as never);
     const { store, startUpload } = setup();
 
@@ -167,10 +170,12 @@ describe("FilesActionsStore - encrypted files moved out of a private room", () =
       private: false,
       rootFolderId: 20,
       rootFolderType: FolderType.USER,
-      deleteSourceOnSuccess: true,
+      deleteSourceOnSuccess,
     });
 
     expect(startUpload).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionLockedCopy");
   });
 });
 
@@ -309,6 +314,20 @@ describe("FilesActionsStore - encrypted files copied into another private room",
 
     expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
     expect(startUpload).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionLockedCopy");
+  });
+
+  it("Unlock declined on a duplicate", async () => {
+    vi.mocked(getFolderPath).mockResolvedValue(pathTo(SOURCE_ROOM, true));
+    vi.mocked(requireUnlock).mockResolvedValueOnce(null as never);
+    const { store, startUpload } = setupFrom("active");
+
+    await store.duplicateEncryptedFile({ ...ok, folderId: SOURCE_ROOM } as never);
+
+    expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
+    expect(startUpload).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionLockedCopy");
   });
 
   it("never uploads into a private folder whose room is not known", async () => {

@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Määritä salausavaimet profiilissa ennen tiedostojen lataamista yksityiseen huoneeseen.",
   "EncryptionLocked": "Salaus lukittu",
   "EncryptionLockedAddMembers": "Salaus on lukittu — uudet jäsenet eivät pääse olemassa oleviin tiedostoihin ennen kuin avaat avaimesi.",
+  "EncryptionLockedCopy": "Mitään ei kopioitu tai siirretty, koska salausavaimesi on lukittu. Avaa avain ja yritä uudelleen.",
   "EncryptionLockedUpload": "Tiedostoa ei ladattu, koska salausavaimesi on lukittu. Avaa avain ja yritä uudelleen.",
   "EncryptionPortalSubtitle": "Kun prosessi on ohi, voit työskennellä työtilan tietojen kanssa.",
   "EncryptionPortalTitle": "Salausprosessi on käynnissä",

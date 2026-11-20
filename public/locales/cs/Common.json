@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Před nahráním souborů do soukromé místnosti nastavte v Profilu šifrovací klíče.",
   "EncryptionLocked": "Šifrování uzamčeno",
   "EncryptionLockedAddMembers": "Šifrování je uzamčeno — noví členové nebudou mít přístup ke stávajícím souborům, dokud svůj klíč neodemknete.",
+  "EncryptionLockedCopy": "Nic nebylo zkopírováno ani přesunuto, protože váš šifrovací klíč je uzamčen. Odemkněte ho a zkuste to znovu.",
   "EncryptionLockedUpload": "Soubor nebyl nahrán, protože váš šifrovací klíč je uzamčen. Odemkněte ho a zkuste to znovu.",
   "EncryptionPortalSubtitle": "Jakmile proces skončí, budou data pracovního prostoru k dispozici pro práci.",
   "EncryptionPortalTitle": "Probíhající proces šifrování",

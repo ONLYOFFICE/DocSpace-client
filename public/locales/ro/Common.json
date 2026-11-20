@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Configurați-vă cheile de criptare în Profil înainte de a încărca fișiere într-o cameră privată.",
   "EncryptionLocked": "Criptarea este blocată",
   "EncryptionLockedAddMembers": "Criptarea este blocată — noii membri nu pot accesa fișierele existente până când nu vă deblocați cheia.",
+  "EncryptionLockedCopy": "Nimic nu a fost copiat sau mutat deoarece cheia dvs. de criptare este blocată. Deblocați-o și încercați din nou.",
   "EncryptionLockedUpload": "Fișierul nu a fost încărcat deoarece cheia dvs. de criptare este blocată. Deblocați-o și încercați din nou.",
   "EncryptionPortalSubtitle": "Odată ce procesul s-a încheiat, datele spațiului de lucru vor deveni disponibile pentru lucru.",
   "EncryptionPortalTitle": "Criptarea în desfășurare",

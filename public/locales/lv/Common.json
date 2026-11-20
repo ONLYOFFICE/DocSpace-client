@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Pirms failu augšupielādes privātā istabā iestatiet šifrēšanas atslēgas profilā.",
   "EncryptionLocked": "Šifrēšana bloķēta",
   "EncryptionLockedAddMembers": "Šifrēšana ir bloķēta — jaunie dalībnieki nevar piekļūt esošajiem failiem, kamēr jūs neatbloķēsiet savu atslēgu.",
+  "EncryptionLockedCopy": "Nekas netika kopēts vai pārvietots, jo jūsu šifrēšanas atslēga ir bloķēta. Atbloķējiet to un mēģiniet vēlreiz.",
   "EncryptionLockedUpload": "Fails netika augšupielādēts, jo jūsu šifrēšanas atslēga ir bloķēta. Atbloķējiet to un mēģiniet vēlreiz.",
   "EncryptionPortalSubtitle": "Tiklīdz process būs pabeigts, darbvietas dati būs pieejami darbam.",
   "EncryptionPortalTitle": "Notiek šifrēšanas process",

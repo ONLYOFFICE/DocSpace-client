@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Configure as suas chaves de encriptação no Perfil antes de carregar ficheiros para uma sala privada.",
   "EncryptionLocked": "Encriptação bloqueada",
   "EncryptionLockedAddMembers": "A encriptação está bloqueada — os novos membros não conseguem aceder aos ficheiros existentes até que desbloqueie a sua chave.",
+  "EncryptionLockedCopy": "Nada foi copiado nem movido porque a sua chave de encriptação está bloqueada. Desbloqueie-a e tente novamente.",
   "EncryptionLockedUpload": "O ficheiro não foi carregado porque a sua chave de encriptação está bloqueada. Desbloqueie-a e tente novamente.",
   "EncryptionPortalSubtitle": "Assim que o processo estiver concluído, os dados do espaço de trabalho estarão disponíveis para trabalhar.",
   "EncryptionPortalTitle": "O processo de encriptação em curso",

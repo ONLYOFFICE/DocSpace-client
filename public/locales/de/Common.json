@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Richten Sie Ihre Verschlüsselungsschlüssel im Profil ein, bevor Sie Dateien in einen privaten Raum hochladen.",
   "EncryptionLocked": "Verschlüsselung gesperrt",
   "EncryptionLockedAddMembers": "Verschlüsselung ist gesperrt — neue Mitglieder können erst auf vorhandene Dateien zugreifen, wenn Sie Ihren Schlüssel entsperren.",
+  "EncryptionLockedCopy": "Es wurde nichts kopiert oder verschoben, da Ihr Verschlüsselungsschlüssel gesperrt ist. Entsperren Sie ihn und versuchen Sie es erneut.",
   "EncryptionLockedUpload": "Die Datei wurde nicht hochgeladen, da Ihr Verschlüsselungsschlüssel gesperrt ist. Entsperren Sie ihn und versuchen Sie es erneut.",
   "EncryptionPortalSubtitle": "Sobald der Vorgang abgeschlossen ist, stehen die Daten des Arbeitsbereichs für die Arbeit zur Verfügung.",
   "EncryptionPortalTitle": "Der Verschlüsselungsprozess läuft",

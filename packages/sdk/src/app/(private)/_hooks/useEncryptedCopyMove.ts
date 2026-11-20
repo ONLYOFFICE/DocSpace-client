@@ -106,7 +106,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
       }
       const identity = await requireIdentity();
       if (!identity) {
-        toastr.error(t("Common:EncryptionLockedAddMembers"));
+        toastr.error(t("Common:EncryptionLockedCopy"));
         return;
       }
 
@@ -190,7 +190,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
       const identity = await requireIdentity();
       if (!identity) {
-        toastr.error(t("Common:EncryptionLockedAddMembers"));
+        toastr.error(t("Common:EncryptionLockedCopy"));
         return;
       }
 

@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Pred nahraním súborov do súkromnej miestnosti si v Profile nastavte šifrovacie kľúče.",
   "EncryptionLocked": "Šifrovanie zamknuté",
   "EncryptionLockedAddMembers": "Šifrovanie je zamknuté — noví členovia nemôžu pristupovať k existujúcim súborom, kým neodomknete svoj kľúč.",
+  "EncryptionLockedCopy": "Nič nebolo skopírované ani presunuté, pretože váš šifrovací kľúč je zamknutý. Odomknite ho a skúste to znova.",
   "EncryptionLockedUpload": "Súbor nebol nahraný, pretože váš šifrovací kľúč je zamknutý. Odomknite ho a skúste to znova.",
   "EncryptionPortalSubtitle": "Hneď po ukončení procesu budú údaje pracovného priestoru prístupné na prácu.",
   "EncryptionPortalTitle": "Prebieha proces šifrovania",

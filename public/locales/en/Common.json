@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Set up your encryption keys in Profile before uploading files to a private room.",
   "EncryptionLocked": "Encryption locked",
   "EncryptionLockedAddMembers": "Encryption is locked — new members cannot access existing files until you unlock your key.",
+  "EncryptionLockedCopy": "Nothing was copied or moved because your encryption key is locked. Unlock it and try again.",
   "EncryptionLockedUpload": "The file was not uploaded because your encryption key is locked. Unlock it and try again.",
   "EncryptionPortalSubtitle": "As soon as the process is over, the workspace data will be available for work.",
   "EncryptionPortalTitle": "The encryption process in progress",

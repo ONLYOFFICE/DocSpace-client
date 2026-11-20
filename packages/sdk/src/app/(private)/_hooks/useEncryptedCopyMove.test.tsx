@@ -205,17 +205,29 @@ describe("useEncryptedCopyMove", () => {
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
-  it("Locked identity: the copy is cancelled with the locked-operation toast", async () => {
+  it("Unlock declined on a copy in the SDK", async () => {
     env.requireIdentity.mockResolvedValueOnce(null as never);
 
     await copyTo(21);
 
-    expect(toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptionLockedAddMembers",
-    );
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionLockedCopy");
     expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
     expect(env.uploadFiles).not.toHaveBeenCalled();
     expect(env.uploadDecrypted).not.toHaveBeenCalled();
+  });
+
+  it("Unlock declined on a duplicate in the SDK", async () => {
+    env.requireIdentity.mockResolvedValueOnce(null as never);
+
+    await act(() =>
+      actions.duplicateFile({ item: MEMO, roomId: 10, folderId: 10 }),
+    );
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionLockedCopy");
+    expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
+    expect(env.uploadFiles).not.toHaveBeenCalled();
   });
 
   it("Duplicate of a file without a wrap in the SDK", async () => {

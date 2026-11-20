@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "プライベートルームにファイルをアップロードする前に、プロフィールで暗号化キーを設定してください。",
   "EncryptionLocked": "暗号化がロックされています",
   "EncryptionLockedAddMembers": "暗号化がロックされています — キーのロックを解除するまで、新しいメンバーは既存のファイルにアクセスできません。",
+  "EncryptionLockedCopy": "暗号化キーがロックされているため、何もコピーまたは移動されませんでした。キーのロックを解除して、もう一度お試しください。",
   "EncryptionLockedUpload": "暗号化キーがロックされているため、ファイルはアップロードされませんでした。キーのロックを解除して、もう一度お試しください。",
   "EncryptionPortalSubtitle": "プロセスが終了次第、ワークスペースのデータは作業に利用可能になります。",
   "EncryptionPortalTitle": "暗号化プロセスが進行中です",

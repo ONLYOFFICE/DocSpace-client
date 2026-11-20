@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Stel uw versleutelingssleutels in via Profiel voordat u bestanden uploadt naar een privéruimte.",
   "EncryptionLocked": "Versleuteling vergrendeld",
   "EncryptionLockedAddMembers": "Versleuteling is vergrendeld — nieuwe leden hebben geen toegang tot bestaande bestanden totdat u uw sleutel ontgrendelt.",
+  "EncryptionLockedCopy": "Er is niets gekopieerd of verplaatst omdat uw versleutelingssleutel is vergrendeld. Ontgrendel de sleutel en probeer het opnieuw.",
   "EncryptionLockedUpload": "Het bestand is niet geüpload omdat uw versleutelingssleutel is vergrendeld. Ontgrendel de sleutel en probeer het opnieuw.",
   "EncryptionPortalSubtitle": "Zodra het proces is voltooid, zijn de gegevens van de werkruimte beschikbaar om mee te werken.",
   "EncryptionPortalTitle": "Het versleutelingsproces in uitvoering",

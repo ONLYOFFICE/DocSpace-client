@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Configurez vos clés de chiffrement dans le Profil avant de téléverser des fichiers dans une salle privée.",
   "EncryptionLocked": "Chiffrement verrouillé",
   "EncryptionLockedAddMembers": "Le chiffrement est verrouillé — les nouveaux membres ne peuvent pas accéder aux fichiers existants tant que vous n'avez pas déverrouillé votre clé.",
+  "EncryptionLockedCopy": "Rien n'a été copié ni déplacé car votre clé de chiffrement est verrouillée. Déverrouillez-la et réessayez.",
   "EncryptionLockedUpload": "Le fichier n'a pas été téléversé car votre clé de chiffrement est verrouillée. Déverrouillez-la et réessayez.",
   "EncryptionPortalSubtitle": "Dès que le processus est terminé, les données de l'espace de travail sont disponibles pour travailler.",
   "EncryptionPortalTitle": "Le processus de chiffrement en cours",

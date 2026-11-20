@@ -305,7 +305,7 @@ self: FilesActionStore,
 
   const identity = await requireUnlock(String(userId));
   if (!identity) {
-    toastr.error(i18n.t("Common:EncryptionLockedAddMembers"));
+    toastr.error(i18n.t("Common:EncryptionLockedCopy"));
     return;
   }
 

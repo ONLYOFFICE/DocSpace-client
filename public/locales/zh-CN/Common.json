@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "在将文件上传到私密房间之前，请先在个人资料中设置加密密钥。",
   "EncryptionLocked": "加密已锁定",
   "EncryptionLockedAddMembers": "加密已锁定 — 在您解锁密钥之前，新成员无法访问现有文件。",
+  "EncryptionLockedCopy": "由于您的加密密钥已锁定，未复制或移动任何内容。请解锁后重试。",
   "EncryptionLockedUpload": "由于您的加密密钥已锁定，文件未上传。请解锁后重试。",
   "EncryptionPortalSubtitle": "进程结束后，工作区数据将可供使用。",
   "EncryptionPortalTitle": "加密正在进行中",

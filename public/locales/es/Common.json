@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Configure sus claves de cifrado en el Perfil antes de cargar archivos en una sala privada.",
   "EncryptionLocked": "Cifrado bloqueado",
   "EncryptionLockedAddMembers": "El cifrado está bloqueado — los nuevos miembros no podrán acceder a los archivos existentes hasta que desbloquee su clave.",
+  "EncryptionLockedCopy": "No se ha copiado ni movido nada porque su clave de cifrado está bloqueada. Desbloquéela e inténtelo de nuevo.",
   "EncryptionLockedUpload": "El archivo no se ha cargado porque su clave de cifrado está bloqueada. Desbloquéela e inténtelo de nuevo.",
   "EncryptionPortalSubtitle": "Tan pronto como finalice el proceso, los datos del espacio de trabajo estarán disponibles para trabajar.",
   "EncryptionPortalTitle": "Proceso de cifrado en curso",

@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Vendosni çelësat e kriptimit në Profil para se të ngarkoni skedarë në një dhomë private.",
   "EncryptionLocked": "Enkriptimi i bllokuar",
   "EncryptionLockedAddMembers": "Enkriptimi është i bllokuar — anëtarët e rinj nuk mund të aksesojnë skedarët ekzistues derisa të zhbllokoni çelësin tuaj.",
+  "EncryptionLockedCopy": "Asgjë nuk u kopjua ose u zhvendos sepse çelësi juaj i kriptimit është i bllokuar. Zhbllokojeni dhe provoni përsëri.",
   "EncryptionLockedUpload": "Skedari nuk u ngarkua sepse çelësi juaj i kriptimit është i bllokuar. Zhbllokojeni dhe provoni përsëri.",
   "EncryptionPortalSubtitle": "Sapo të përfundojë procesi, të dhënat e hapësirës së punës do të jenë të disponueshme për punë.",
   "EncryptionPortalTitle": "Procesi i enkriptimit është në zhvillim",

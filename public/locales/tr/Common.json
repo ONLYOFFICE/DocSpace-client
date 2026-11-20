@@ -1000,6 +1000,7 @@
   "EncryptionKeysRequiredForUpload": "Özel bir odaya dosya yüklemeden önce Profil bölümünde şifreleme anahtarlarınızı ayarlayın.",
   "EncryptionLocked": "Şifreleme kilitli",
   "EncryptionLockedAddMembers": "Şifreleme kilitli — anahtarınızın kilidini açana kadar yeni üyeler mevcut dosyalara erişemez.",
+  "EncryptionLockedCopy": "Şifreleme anahtarınız kilitli olduğu için hiçbir şey kopyalanmadı veya taşınmadı. Kilidini açın ve tekrar deneyin.",
   "EncryptionLockedUpload": "Şifreleme anahtarınız kilitli olduğu için dosya yüklenmedi. Kilidini açın ve tekrar deneyin.",
   "EncryptionPortalSubtitle": "İşlem tamamlanır tamamlanmaz çalışma alanı verileri kullanıma hazır olacaktır.",
   "EncryptionPortalTitle": "Şifreleme işlemi devam ediyor",

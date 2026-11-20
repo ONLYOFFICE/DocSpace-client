@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Cliquez ici</1> pour augmenter votre plan tarifaire.",
   "ConfirmEmailDescription": "Utilisez le lien fourni dans l’e-mail d’activation. Vous n’avez pas reçu d’e-mail contenant le lien d’activation ?",
   "ConfirmEmailHeader": "Veuillez activer votre adresse e-mail ({{ email }}) pour accéder aux fonctionnalités de l'espace de travail.",
-  "ContactToUpgradeTariff": "Contactez le super-administrateur pour mettre à niveau le plan tarifaire.",
   "PersonalQuotaHeader": "Votre quota de stockage personnel a été dépassé",
   "PersonalQuotaHeaderForAdmins": "Quota de stockage par utilisateur dépassé",
   "PersonalUserQuotaAdminsDescription": "Pour télécharger et créer de nouveaux fichiers et dossiers, veuillez libérer l'espace de stockage ou gérez des quotas d'utilisateurs à partir de la section <1>Paramètres de gestion du stockage.</1>",

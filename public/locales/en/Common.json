@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "Your own platform",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request."
+  "YouWillBeContacted": "The sales team will contact you after creating the request.",
+  "LicenseExpiredRestriction": "Cannot add new users and create new rooms. License has expired.",
+  "PlanPaymentOverdue": "Cannot add new users, create new rooms or AI agents. {{planName}} plan payment overdue.",
+  "GracePeriodActive": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, the workspace will become unavailable until a new license is activated.",
+  "ChooseNewPlan": "Would you like to choose a new pricing plan?",
+  "CannotCreateNewRoom": "Room cannot be created",
+  "NewRoomWillExceedLimit": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
+  "RoomsQuotaAlmostExhausted": "The quota of rooms is almost exhausted.",
+  "NumberOfRoomsAccordingToTariff": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Contact the Full admin to upgrade the tariff plan."
 }

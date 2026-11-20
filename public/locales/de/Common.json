@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "Ihre eigene Plattform",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
+  "LicenseExpiredRestriction": "Das Hinzufügen neuer Benutzer und das Erstellen neuer Räume ist nicht möglich. Die Lizenz ist abgelaufen.",
+  "PlanPaymentOverdue": "Neue Benutzer hinzufügen, neue Räume erstellen oder KI-Agenten hinzufügen ist nicht möglich. Die Zahlung für den {{planName}}-Plan ist überfällig.",
+  "GracePeriodActive": "Die Schonfrist ist aktiv <1>von {{fromDate}} bis {{byDate}}</1> (verbleibende Tage: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Während dieser Zeit können Administratoren keine neuen Räume erstellen oder neue Benutzer hinzufügen. Nach Ablauf der Gnadenfrist wird der Arbeitsbereich nicht verfügbar sein, bis eine neue Lizenz aktiviert wird.",
+  "ChooseNewPlan": "Möchten Sie einen neuen Preisplan wählen?",
+  "CannotCreateNewRoom": "Raum kann nicht erstellt werden",
+  "NewRoomWillExceedLimit": "Das Erstellen dieses Raums ist nicht möglich, da das Limit für die Anzahl der in Ihrem aktuellen Plan enthaltenen Räume erreicht ist.",
+  "RoomsQuotaAlmostExhausted": "Die Raumquote ist fast erschöpft.",
+  "NumberOfRoomsAccordingToTariff": "Anzahl der Räume gemäß Ihrem Tarifplan: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Wenden Sie sich an den Super-Administrator, um den Tarifplan zu erweitern."
 }

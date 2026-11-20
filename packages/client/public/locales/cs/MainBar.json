@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Klikněte zde</1> pro upgrade tarifního plánu.",
   "ConfirmEmailDescription": "Použijte odkaz uvedený v aktivačním e-mailu. Neobdrželi jste e-mail s aktivačním odkazem?",
   "ConfirmEmailHeader": "Pro získání přístupu k funkcím pracovního prostoru aktivujte svůj e-mail ({{ email }}).",
-  "ContactToUpgradeTariff": "Obraťte se na supersprávce s žádostí o vylepšení tarifního plánu.",
   "PersonalQuotaHeader": "Překročena kvóta vašeho osobního úložiště",
   "PersonalQuotaHeaderForAdmins": "Překročena kvóta úložiště na uživatele",
   "PersonalUserQuotaAdminsDescription": "Chcete-li nahrávat a vytvářet nové soubory a složky, uvolněte místo na disku nebo spravujte kvótu pro uživatele v nastavení <1>Správa úložiště.</1>",

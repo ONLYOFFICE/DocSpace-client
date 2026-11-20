@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "La tua piattaforma",
   "YourPrice": "Il tuo prezzo",
   "YourTurn": "Il tuo turno",
-  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta."
+  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
+  "LicenseExpiredRestriction": "Non è possibile aggiungere nuovi utenti e creare nuove stanze. La licenza è scaduta.",
+  "PlanPaymentOverdue": "Non è possibile aggiungere nuovi utenti, creare nuove stanze o agenti IA. Pagamento del piano {{planName}} scaduto.",
+  "GracePeriodActive": "Il periodo di grazia è attivo <1>dal {{fromDate}} al {{byDate}}</1> (giorni rimanenti: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Durante questo periodo, gli amministratori non possono creare nuove stanze o aggiungere nuovi utenti. Una volta terminato il periodo di grazia, lo spazio di lavoro non sarà disponibile fino all'attivazione di una nuova licenza.",
+  "ChooseNewPlan": "Vuoi scegliere un nuovo piano tariffario?",
+  "CannotCreateNewRoom": "La stanza non può essere creata",
+  "NewRoomWillExceedLimit": "Non è possibile creare questa stanza perché è stato raggiunto il limite del numero di stanze incluse nel piano attuale.",
+  "RoomsQuotaAlmostExhausted": "La quota di stanze è quasi esaurita.",
+  "NumberOfRoomsAccordingToTariff": "Numero di stanze in base al tuo piano tariffario: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Contatta il superamministratore per passare a un piano tariffario superiore."
 }

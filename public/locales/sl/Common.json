@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "Lastna platforma",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "LicenseExpiredRestriction": "Nisem mogoče dodajati novih uporabnikov in ustvarjati novih sob. Licenca je potekla.",
+  "PlanPaymentOverdue": "Ni mogoče dodajati novih uporabnikov, ustvarjati novih sob ali AI agentov. Plačilo paketa {{planName}} je zapadlo.",
+  "GracePeriodActive": "Okres odločljivosti je aktiven <1>od {{fromDate}} do {{byDate}}</1> (preostalo dni: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "V tem času skrbniki ne morejo ustvarjati novih sob ali dodajati novih uporabnikov. Ko poteče prehodno obdobje, bo delovni prostor nedostopen, dokler ni aktivirana nova licenca.",
+  "ChooseNewPlan": "Ali želite izbrati nov cenovni paket?",
+  "CannotCreateNewRoom": "Sobe ni mogoče ustvariti",
+  "NewRoomWillExceedLimit": "Ustvarjanje te sobe ni mogoče, ker je dosežena omejitev števila sob, ki je določena za vaš trenutni tarifni načrt.",
+  "RoomsQuotaAlmostExhausted": "Kvota sob je skoraj dosežena.",
+  "NumberOfRoomsAccordingToTariff": "Število sob, določeno z vašim tarifnim načrtom: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Obrnite se na superskrbnika za nadgradnjo tarifnega načrta."
 }

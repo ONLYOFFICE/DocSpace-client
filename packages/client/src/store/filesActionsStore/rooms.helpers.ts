@@ -34,7 +34,6 @@
  */
 
 import { removeFiles, moveToFolder } from "@docspace/shared/api/files";
-import { getRoomMissingFileKeys } from "@docspace/shared/api/privacy";
 import {
   AnalyticsEvents,
   Events,
@@ -49,7 +48,10 @@ import {
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
-import { prepareNewOwner } from "@docspace/shared/services/private-room/room-member-flows";
+import {
+  countMissingFilesOfRefusedOwnerChange,
+  prepareNewOwner,
+} from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
@@ -671,10 +673,6 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
 };
 
 
-/** The HTTP status an API request was refused with, if any. */
-const statusOf = (error: unknown) =>
-  (error as { response?: { status?: number } })?.response?.status;
-
 // Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
 export const changeRoomOwnerImpl = async (
   self: FilesActionStore,
@@ -738,16 +736,9 @@ export const changeRoomOwnerImpl = async (
     if (isLeaveChecked) await self.onLeaveRoom(t);
     else toastr.success(t("Common:AppointNewOwner"));
   } catch (e) {
-    // The server refuses the transfer while the candidate lacks an entry on
-    // an encrypted file, for example one uploaded since they were wrapped
-    // above; it lists those files on request.
-    const listed =
-      isPrivateRoom && statusOf(e) === 409
-        ? await getRoomMissingFileKeys(roomId, [userId]).catch(() => [])
-        : [];
-    const count =
-      listed.find((entry) => entry.userId.toLowerCase() === userId.toLowerCase())
-        ?.fileIds.length ?? 0;
+    const count = isPrivateRoom
+      ? await countMissingFilesOfRefusedOwnerChange(e, roomId, userId)
+      : 0;
     if (count > 0) {
       toastr.error(t("Common:EncryptedReencryptPartialFailure", { count }));
     } else {

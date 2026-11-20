@@ -75,7 +75,8 @@ class UploadStore {
   items: TUploadItem[] = [];
   uploadedBytes = 0;
   totalBytes = 0;
-  batchAbortController: AbortController | null = null;
+  /** The controllers of the batches whose rows the panel still lists. */
+  batchControllers: AbortController[] = [];
   panelVisible = false;
 
   constructor() {
@@ -84,7 +85,7 @@ class UploadStore {
 
   startBatch = (initItems: TUploadItemInit[]) => {
     const batch = new AbortController();
-    this.batchAbortController = batch;
+    this.batchControllers.push(batch);
     this.totalBytes += initItems.reduce((sum, i) => sum + i.fileSize, 0);
 
     for (const init of initItems) {
@@ -161,11 +162,16 @@ class UploadStore {
     const item = this.items.find((i) => i.uniqueId === uniqueId);
     if (!item) return;
     const fileAbort = new AbortController();
-    this.batchAbortController?.signal.addEventListener(
-      "abort",
-      () => fileAbort.abort(),
-      { once: true },
-    );
+    let batch = [...this.batchControllers]
+      .reverse()
+      .find((controller) => !controller.signal.aborted);
+    if (!batch) {
+      batch = new AbortController();
+      this.batchControllers.push(batch);
+    }
+    batch.signal.addEventListener("abort", () => fileAbort.abort(), {
+      once: true,
+    });
     item.status = "uploading";
     item.percent = 0;
     item.error = undefined;
@@ -197,8 +203,9 @@ class UploadStore {
     this.uploadedBytes = Math.min(this.totalBytes, this.uploadedBytes + delta);
   };
 
+  // Spec: private-rooms/sdk-surface, "Upload panel follows encrypted uploads"
   cancelBatch = () => {
-    this.batchAbortController?.abort();
+    for (const batch of this.batchControllers) batch.abort();
   };
 
   dropPending = () => {
@@ -208,6 +215,7 @@ class UploadStore {
     this.items = this.items.filter(
       (i) => i.status === "uploaded" || i.status === "error",
     );
+    this.batchControllers = [];
     if (this.items.length === 0) {
       this.uploadedBytes = 0;
       this.totalBytes = 0;
@@ -240,6 +248,7 @@ class UploadStore {
       .reduce((sum, i) => sum + i.fileSize, 0);
     this.items = this.items.filter((i) => i.status === "uploading");
     if (this.items.length === 0) {
+      this.batchControllers = [];
       this.uploadedBytes = 0;
       this.totalBytes = 0;
     } else {
@@ -252,7 +261,7 @@ class UploadStore {
     this.items = [];
     this.uploadedBytes = 0;
     this.totalBytes = 0;
-    this.batchAbortController = null;
+    this.batchControllers = [];
     this.panelVisible = false;
   };
 

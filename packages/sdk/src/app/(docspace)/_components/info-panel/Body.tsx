@@ -69,22 +69,18 @@ import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { FolderType } from "@docspace/shared/enums";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
-import {
-  RoomActionsContext,
-  type RoomActionsHandler,
-} from "@/app/(rooms)/_contexts/RoomActionsContext";
-import useRoomActions from "@/app/(rooms)/_hooks/useRoomActions";
+import { RoomActionsContext } from "@/app/(rooms)/_contexts/RoomActionsContext";
 import type { TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 import type { TagsChangedHandler } from "@docspace/shared/components/tag-management/TagManagement.types";
 
 import { InfoPanelView, useInfoPanelStore } from "../../_store/InfoPanelStore";
 
 import { getAvailableTabs } from "./helpers/tabs";
+import { useInfoPanelRoomActions } from "./helpers/useInfoPanelRoomActions";
 import Details from "./views/Details";
 import History from "./views/History";
 import Members from "./views/Members";
@@ -124,29 +120,7 @@ const InfoPanelBody = observer(
       scrollToTop,
     });
 
-    const inheritedRoomActions = React.useContext(RoomActionsContext);
-    const roomActions = useRoomActions();
-    const isArchive = filesListStore.rootFolderType === FolderType.Archive;
-    const fallbackRoomActions = React.useMemo<RoomActionsHandler>(
-      () => ({
-        archiveSelected: () => {},
-        deleteSelected: () => {},
-        restoreSelected: () => {},
-        pinSelected: () => {},
-        isArchive,
-        editRoom: roomActions.editRoom,
-        inviteRoom: roomActions.inviteRoom,
-        changeOwner: roomActions.changeOwner,
-        archiveRoom: roomActions.archiveRoom,
-        deleteRoom: roomActions.deleteRoom,
-        restoreRoom: roomActions.restoreRoom,
-        infoRoom: roomActions.infoRoom,
-        roomChanged: roomActions.roomChanged,
-      }),
-      [roomActions, isArchive],
-    );
-
-    const effectiveRoomActions = inheritedRoomActions ?? fallbackRoomActions;
+    const effectiveRoomActions = useInfoPanelRoomActions();
 
     // Clear pinned selection when the user navigates to a different folder so that
     // a previously-pinned room does not remain visible after entering another room.

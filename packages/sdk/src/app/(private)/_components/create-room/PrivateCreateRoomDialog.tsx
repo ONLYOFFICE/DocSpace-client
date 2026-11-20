@@ -91,7 +91,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
   const waitsForKey = isCreation && !mayHoldKey && !keyGenerated;
 
   const refreshKeysFromServer = React.useCallback(
-    () => identityStore.loadKeys(),
+    () => identityStore.reloadKeys(),
     [identityStore],
   );
 

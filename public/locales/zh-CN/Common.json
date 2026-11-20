@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "您自己的平台",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
+  "LicenseExpiredRestriction": "无法添加新用户和创建新房间。许可证已过期。",
+  "PlanPaymentOverdue": "无法添加新用户、创建新房间或 AI 智能体。{{planName}} 套餐付款已逾期。",
+  "GracePeriodActive": "宽限期从 <1>{{fromDate}} 到 {{byDate}}</1> 生效（剩余天数：{{delayDaysCount}}）。",
+  "LicenseGracePeriodInfo": "在此期间，管理员无法创建新房间或添加新用户。宽限期结束后，工作区将不可用，直到激活新许可证。",
+  "ChooseNewPlan": "是否选择新的定价版本？",
+  "CannotCreateNewRoom": "无法创建房间",
+  "NewRoomWillExceedLimit": "由于当前费用版本的房间数量已达上限，因此无法创建该房间。",
+  "RoomsQuotaAlmostExhausted": "房间配额已几乎用完。",
+  "NumberOfRoomsAccordingToTariff": "您的费用版本的房间数量为：{{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "请联系超级管理员升级资费套餐。"
 }

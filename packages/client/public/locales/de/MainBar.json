@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Klicken Sie hier</1>, um Ihren Tarifplan zu aktualisieren.",
   "ConfirmEmailDescription": "Verwenden Sie den in der Aktivierungs-E-Mail angegebenen Link. Haben Sie keine E-Mail mit dem Aktivierungslink erhalten?",
   "ConfirmEmailHeader": "Bitte aktivieren Sie Ihre E-Mail ({{ email }}), um Zugang zu den Funktionen des Arbeitsbereichs zu erhalten.",
-  "ContactToUpgradeTariff": "Wenden Sie sich an den Super-Administrator, um den Tarifplan zu erweitern.",
   "PersonalQuotaHeader": "Ihre persönliche Speicherquo­te wurde überschritten",
   "PersonalQuotaHeaderForAdmins": "Speicherquo­te pro Benutzer überschritten",
   "PersonalUserQuotaAdminsDescription": "Um neue Dateien und Ordner hochzuladen und zu erstellen, geben Sie bitte Speicherplatz frei oder verwalten Sie die Quote pro Benutzer in den <1>Speicherverwaltungseinstellungen</1>",

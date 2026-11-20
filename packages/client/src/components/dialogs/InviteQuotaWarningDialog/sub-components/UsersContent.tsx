@@ -97,8 +97,8 @@ const UsersContent = ({
       <br />
       <Text>
         {isPaymentPageAvailable
-          ? t("ChooseNewPlan")
-          : t("MainBar:ContactToUpgradeTariff")}
+          ? t("Common:ChooseNewPlan")
+          : t("Common:ContactToUpgradeTariff")}
       </Text>
     </>
   );

@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "A sua própria plataforma",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
+  "LicenseExpiredRestriction": "Não é possível adicionar novos usuários e criar novas salas. A licença expirou.",
+  "PlanPaymentOverdue": "Não é possível adicionar novos usuários, criar novas salas ou agentes de IA. Pagamento do plano {{planName}} em atraso.",
+  "GracePeriodActive": "O período de carência está ativo <1>de {{fromDate}} a {{byDate}}</1> (dias restantes: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Durante este período, os administradores não conseguem criar salas novas ou adicionar utilizadores novos. Assim que o período de carência terminar, o espaço de trabalho ficará indisponível até que uma nova licença seja ativada.",
+  "ChooseNewPlan": "Gostaria de escolher outro plano de preços?",
+  "CannotCreateNewRoom": "A sala não pode ser criada",
+  "NewRoomWillExceedLimit": "Não é possível criar este quarto porque o limite do número de quartos incluídos no seu plano atual foi atingido.",
+  "RoomsQuotaAlmostExhausted": "A quota de quartos está quase esgotada.",
+  "NumberOfRoomsAccordingToTariff": "Número de quartos de acordo com o seu plano tarifário: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Contacte o superadministrador para atualizar o plano tarifário."
 }

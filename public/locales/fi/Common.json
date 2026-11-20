@@ -2803,5 +2803,15 @@
   "YourOwnPlatform": "Oma alustasi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "LicenseExpiredRestriction": "Ei voi lisätä uusia käyttäjiä eikä luoda uusia huoneita. Lisenssi on vanhentunut.",
+  "PlanPaymentOverdue": "Ei voi lisätä uusia käyttäjiä, luoda uusia huoneita tai AI-agentteja. {{planName}} -suunnitelman maksu on myöhässä.",
+  "GracePeriodActive": "Armoajanjakso on voimassa <1>ajalta {{fromDate}} aina {{byDate}} asti</1> (jäljellä päiviä: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Tämän aikana ylläpitäjät eivät voi luoda uusia huoneita tai lisätä uusia käyttäjiä. Kun armoaika päättyy, työtila ei ole käytettävissä ennen kuin uusi lisenssi aktivoidaan.",
+  "ChooseNewPlan": "Haluaisitko valita uuden hinnoitteluohjelman?",
+  "CannotCreateNewRoom": "Huonetta ei voi luoda",
+  "NewRoomWillExceedLimit": "Tämän huoneen luominen ei ole mahdollista, koska huoneiden määrän raja, joka kuuluu tilaukseesi, on saavutettu.",
+  "RoomsQuotaAlmostExhausted": "Huoneiden määrän kiintiö on melkein täysi.",
+  "NumberOfRoomsAccordingToTariff": "Huoneiden määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Ota yhteyttä pääjärjestelmänvalvojaan hinnoittelusuunnitelman päivittämiseksi."
 }

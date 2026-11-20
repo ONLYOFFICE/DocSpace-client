@@ -677,3 +677,27 @@ export async function prepareNewOwner({
   const stillMissing = new Set(missingFileIdsByMember[candidateId] ?? []);
   return { missingFileIds: fileIds.filter((id) => stillMissing.has(id)) };
 }
+
+/**
+ * The number of files the server names as lacking the candidate's entry
+ * when it refused an owner change with 409, for example a file uploaded
+ * after `prepareNewOwner`; 0 for any other refusal or when none is listed.
+ */
+// Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
+export async function countMissingFilesOfRefusedOwnerChange(
+  error: unknown,
+  roomId: number | string,
+  candidateId: string,
+): Promise<number> {
+  const status = (error as { response?: { status?: number } })?.response
+    ?.status;
+  if (status !== 409) return 0;
+  const listed = await getRoomMissingFileKeys(roomId, [candidateId]).catch(
+    () => [],
+  );
+  const candidate = candidateId.toLowerCase();
+  return (
+    listed.find((entry) => entry.userId.toLowerCase() === candidate)?.fileIds
+      .length ?? 0
+  );
+}

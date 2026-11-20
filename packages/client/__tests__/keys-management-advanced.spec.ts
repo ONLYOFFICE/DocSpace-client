@@ -510,12 +510,11 @@ test.describe("Keys management — advanced flows", () => {
     await expect(unlockWithPassphrase(body, newPassphrase)).resolves.toBeTruthy();
   });
 
-  test("Auto-lock on a remembered device", async ({
-    page,
-    mockRequest,
-    baseUrl,
-  }) => {
-    test.slow();
+  // A private room with the user's key, the auto-lock on and the helpers
+  // that lock the tab, open the room and upload into it.
+  const onRememberableDevice = async (
+    ...[page, mockRequest, baseUrl]: Parameters<typeof bootstrapEncryption>
+  ) => {
     const { keysHandle, passphrase } = await bootstrapEncryption(
       page,
       mockRequest,
@@ -597,19 +596,52 @@ test.describe("Keys management — advanced flows", () => {
       .getByRole("dialog")
       .filter({ hasText: "Enter passphrase" });
 
+    // The first upload after the lock prompts; the passphrase is entered
+    // with the device remembered.
+    const unlockAndRemember = async () => {
+      await hideTabUntilLocked();
+      await openRoom();
+      await upload("first.txt");
+      await expect(prompt).toBeVisible({ timeout: 15000 });
+      await prompt
+        .getByLabel("Passphrase", { exact: true })
+        .fill(passphrase);
+      await prompt.getByText("Don't ask again on this device").click();
+      await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
+      await expect
+        .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+        .toBe(1);
+    };
+
+    return {
+      filesHandle,
+      navigate,
+      openRoom,
+      upload,
+      hideTabUntilLocked,
+      prompt,
+      unlockAndRemember,
+    };
+  };
+
+  test("Auto-lock on a remembered device", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const {
+      filesHandle,
+      navigate,
+      openRoom,
+      upload,
+      hideTabUntilLocked,
+      prompt,
+      unlockAndRemember,
+    } = await onRememberableDevice(page, mockRequest, baseUrl);
+
     // Not remembered yet: after the hidden-tab lock the upload prompts.
-    await hideTabUntilLocked();
-    await openRoom();
-    await upload("first.txt");
-    await expect(prompt).toBeVisible({ timeout: 15000 });
-    await prompt
-      .getByLabel("Passphrase", { exact: true })
-      .fill(passphrase);
-    await prompt.getByText("Don't ask again on this device").click();
-    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
-    await expect
-      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
-      .toBe(1);
+    await unlockAndRemember();
 
     // Remembered: the hidden tab still locks, the device stays remembered.
     await navigate("/profile/keys-management");
@@ -629,5 +661,34 @@ test.describe("Keys management — advanced flows", () => {
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(2);
     await expect(prompt).toBeHidden();
+  });
+
+  test("Forget device", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const {
+      filesHandle,
+      navigate,
+      openRoom,
+      upload,
+      hideTabUntilLocked,
+      prompt,
+      unlockAndRemember,
+    } = await onRememberableDevice(page, mockRequest, baseUrl);
+    await unlockAndRemember();
+
+    await navigate("/profile/keys-management");
+    await hideTabUntilLocked();
+    await page.getByTestId("forget_device_link").click();
+
+    await expect(
+      page.getByText("This device will now ask for the passphrase again."),
+    ).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId("device_remembered_until")).toHaveCount(0);
+
+    // Nothing is left to restore the key from: the next upload prompts.
+    await openRoom();
+    await upload("second.txt");
+    await expect(prompt).toBeVisible({ timeout: 15000 });
+    expect(filesHandle.current!.getFiles()).toHaveLength(1);
   });
 });

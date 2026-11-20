@@ -60,7 +60,11 @@ import {
   withRoomPrivacyFilter,
 } from "@docspace/shared/__mocks__/handlers/files/roomList";
 import { RoomPrivacyFilter, ShareAccessRights } from "@docspace/shared/enums";
-import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e";
+import {
+  API_PREFIX,
+  BASE_URL,
+  type WorkerFixture,
+} from "@docspace/shared/__mocks__/e2e";
 import { http } from "msw";
 import type { Page } from "@playwright/test";
 import { expect, test, TEST_PORT } from "./fixtures/base";
@@ -1669,6 +1673,51 @@ test.describe("Private section — creation", () => {
       0,
     );
   };
+
+  const openCreateRoomInRooms = async (
+    page: Page,
+    mockRequest: WorkerFixture,
+    baseUrl: string,
+  ) => {
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        title: ROOM_TITLE,
+        ordinaryRooms: [{ roomId: ORDINARY_ROOM_ID, title: "Team Room" }],
+      }),
+    );
+    await page.goto(`${baseUrl}/rooms/shared/filter`);
+    await expect(page.getByTestId("table-body")).toBeVisible({
+      timeout: 15000,
+    });
+    await page.getByTestId("main-button").first().click();
+    const types = page.getByTestId("room-type-list-item");
+    await expect(types.first()).toBeVisible({ timeout: 15000 });
+    return types;
+  };
+
+  test("Create room in Rooms", async ({ page, mockRequest, baseUrl }) => {
+    const types = await openCreateRoomInRooms(page, mockRequest, baseUrl);
+
+    expect(await types.count()).toBeGreaterThan(1);
+    await expect(types.filter({ hasText: "Private Room" })).toHaveCount(0);
+  });
+
+  test("Type dropdown after choosing a type", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const types = await openCreateRoomInRooms(page, mockRequest, baseUrl);
+    await types.filter({ hasText: "Custom room" }).click();
+
+    await page.getByTestId("room-type-dropdown-button").click();
+
+    const options = page.getByTestId("room-type-dropdown-item");
+    await expect(options.first()).toBeVisible();
+    expect(await options.count()).toBeGreaterThan(1);
+    await expect(options.filter({ hasText: "Private Room" })).toHaveCount(0);
+  });
 
   test("Room admin creates from the section", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/private/filter`);

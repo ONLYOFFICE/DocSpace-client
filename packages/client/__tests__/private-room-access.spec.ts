@@ -403,6 +403,62 @@ test.describe("A locked key is reported by a block in a private room", () => {
     ).toBeVisible({ timeout: 15000 });
     await expect(page.getByTestId("private_room_locked_block")).toHaveCount(0);
   });
+
+  test("User without a key: No keys", async ({ page, mockRequest, baseUrl }) => {
+    // A file in the room, so the list shows its filter and the main button.
+    mockRequest.use(
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        roomSecurity: { Read: true, Create: true },
+        initialFiles: [
+          {
+            id: 9101,
+            title: "report.docx",
+            serverTitle: "uuid-abc.docx",
+            size: 100,
+            encrypted: true,
+            fileKeys: [],
+          },
+        ],
+      }),
+    );
+    const createRequests: string[] = [];
+    page.on("request", (req) => {
+      if (req.method() === "POST" && /\/files\/\d+\/file/.test(req.url()))
+        createRequests.push(req.url());
+    });
+
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: TOAST_KEY_FRAGMENT }),
+    ).toBeVisible({ timeout: 15000 });
+
+    await expect(page.getByTestId("table-row-0")).toBeVisible({
+      timeout: 15000,
+    });
+    await page.getByTestId("main-button").first().click();
+    await expect(page.locator("#personal_new-folder")).toBeVisible({
+      timeout: 5000,
+    });
+    await expect(page.getByText("Upload files", { exact: true })).toBeVisible();
+    for (const id of [
+      "personal_new-document",
+      "personal_new-spreadsheet",
+      "personal_new-presentation",
+      "personal_new-pdf-form",
+    ]) {
+      await expect(page.locator(`#${id}`)).toHaveCount(0);
+    }
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#personal_new-folder")).toHaveCount(0);
+
+    await page.keyboard.press("Shift+D");
+
+    await expect(page.getByTestId("dialog_dialog")).toHaveCount(0);
+    await page.waitForTimeout(500);
+    expect(createRequests).toEqual([]);
+  });
 });
 
 test.describe("Private room — upload without a key", () => {

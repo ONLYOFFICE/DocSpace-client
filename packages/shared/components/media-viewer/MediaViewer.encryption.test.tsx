@@ -249,6 +249,16 @@ describe("Media preview decrypts on the client", () => {
     expect(fetch).toHaveBeenCalledTimes(1);
   });
 
+  it("Open encrypted TIFF or HEIC image: HEIC the converter cannot read", async () => {
+    vi.mocked(heic2any).mockRejectedValueOnce(new Error("unsupported"));
+
+    await openDecrypted("photo.heic");
+
+    const [shown] = createObjectURL.mock.calls[0] as [Blob];
+    expect(new Uint8Array(await shown.arrayBuffer())).toEqual(DECRYPTED);
+    expect(viewer.props?.decryptionError).toBeUndefined();
+  });
+
   it("Open encrypted image", async () => {
     await openDecrypted("shared.png");
 

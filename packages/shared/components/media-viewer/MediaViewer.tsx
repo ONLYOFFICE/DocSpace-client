@@ -514,7 +514,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           shown = (await decodeTiff(await shown.arrayBuffer())) ?? shown;
         } else if (isHeic(ext)) {
           const { default: heic2any } = await import("heic2any");
-          const converted = await heic2any({ blob: shown });
+          // A HEIC variant the converter cannot read is still decrypted;
+          // the browser may show it as it is.
+          const converted = await heic2any({ blob: shown }).catch(() => shown);
           if (!Array.isArray(converted)) shown = converted;
         }
         if (isStale()) return;

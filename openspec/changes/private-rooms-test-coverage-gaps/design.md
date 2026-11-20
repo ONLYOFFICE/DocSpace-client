@@ -170,3 +170,10 @@ option; a guest without a key is already one of `withoutKeys`.
   (`private-rooms-section.spec.ts`, as 2.15 does) and
   `private-rooms-admin-recovery` 3.3 and 3.4 (`KeysManagement.test.tsx`,
   as 2.1 and 2.2 do).
+
+## Gate runs
+
+- 2026-11-20, task 1.7, at `b72e58ca0f2`: `pnpm exec vitest run
+  services/encryption dialogs/passphrase-modal dialogs/key-change-dialog
+  __mocks__/handlers` in shared, 44 files and 727 tests passed;
+  `pnpm exec tsc` in shared clean.

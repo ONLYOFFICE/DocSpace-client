@@ -65,6 +65,53 @@ describe("EncryptionIdentityStore", () => {
     expect(identity.loadError).toBeInstanceOf(Error);
   });
 
+  it("Create pressed during the load", async () => {
+    let finish!: (keys: unknown[]) => void;
+    mocks.getEncryptionKeys.mockReturnValueOnce(
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+    );
+    const identity = renderStore();
+
+    const first = identity.loadKeys();
+    let answered = false;
+    const second = identity.loadKeys().then(() => {
+      answered = true;
+    });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    // The second caller waits for the load in flight instead of deciding now.
+    expect(answered).toBe(false);
+    finish([KEY]);
+    await act(() => second);
+
+    expect(identity.keys).toEqual([KEY]);
+    expect(identity.loadError).toBeNull();
+    expect(mocks.getEncryptionKeys).toHaveBeenCalledTimes(1);
+    await first;
+  });
+
+  it("Refresh after key generation during a load", async () => {
+    let finish!: (keys: unknown[]) => void;
+    mocks.getEncryptionKeys
+      .mockReturnValueOnce(
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+      )
+      .mockResolvedValueOnce([KEY]);
+    const identity = renderStore();
+
+    // The load began before the key existed; the refresh must see the key.
+    void identity.loadKeys();
+    const refresh = identity.reloadKeys();
+    finish([]);
+    await act(() => refresh);
+
+    expect(identity.keys).toEqual([KEY]);
+    expect(mocks.getEncryptionKeys).toHaveBeenCalledTimes(2);
+  });
+
   it("keeps the keys it had when a reload fails", async () => {
     mocks.getEncryptionKeys.mockResolvedValueOnce([KEY]);
     mocks.getEncryptionKeys.mockRejectedValueOnce(new Error("Network Error"));

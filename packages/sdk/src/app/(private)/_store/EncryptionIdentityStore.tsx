@@ -61,28 +61,46 @@ class EncryptionIdentityStore {
     this.keys = keys;
   };
 
-  loadKeys = async (): Promise<void> => {
-    if (this.isLoading) return;
+  private inflight: Promise<void> | null = null;
+
+  /** Loads the key list; a caller during a load gets that load's result. */
+  // Spec: private-rooms/sdk-surface, "Private room creation waits for a known key list"
+  loadKeys = (): Promise<void> => {
+    if (this.inflight !== null) return this.inflight;
     this.isLoading = true;
     this.loadError = null;
-    try {
-      const keys = await api.privacy.getEncryptionKeys();
-      runInAction(() => {
-        this.keys = keys ?? [];
-      });
-    } catch (error) {
-      // A failed load is not an empty list: the keys known before stay, and
-      // a list never loaded stays unknown.
-      // Spec: sdk-surface, "Private room creation gate"
-      runInAction(() => {
-        this.loadError =
-          error instanceof Error ? error : new Error(String(error));
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
+    const load = (async () => {
+      try {
+        const keys = await api.privacy.getEncryptionKeys();
+        runInAction(() => {
+          this.keys = keys ?? [];
+        });
+      } catch (error) {
+        // A failed load is not an empty list: the keys known before stay, and
+        // a list never loaded stays unknown.
+        // Spec: sdk-surface, "Private room creation gate"
+        runInAction(() => {
+          this.loadError =
+            error instanceof Error ? error : new Error(String(error));
+        });
+      } finally {
+        runInAction(() => {
+          this.isLoading = false;
+          this.inflight = null;
+        });
+      }
+    })();
+    this.inflight = load;
+    return load;
+  };
+
+  /**
+   * Loads the key list anew, also when a load that began before a change of
+   * the keys (a key just generated) is still running.
+   */
+  reloadKeys = async (): Promise<void> => {
+    if (this.inflight !== null) await this.inflight;
+    await this.loadKeys();
   };
 
   reset = () => {

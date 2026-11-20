@@ -209,6 +209,60 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     vi.mocked(sniffDse3Upload).mockResolvedValue(null);
   });
 
+  it("Result after cancel all and a new drop", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    let unlock!: (value: unknown) => void;
+    vi.mocked(requireUnlock).mockReturnValueOnce(
+      new Promise((resolve) => {
+        unlock = resolve;
+      }) as never,
+    );
+
+    const run = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+    store.cancelUpload();
+    store.files = [
+      makeUploadFile({
+        uniqueId: "new-drop",
+        file: makeBrowserFile("next.docx", 10),
+      }),
+    ];
+    unlock(IDENTITY);
+    await run;
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0]).toMatchObject({
+      uniqueId: "new-drop",
+      action: "upload",
+      fileId: null,
+      error: null,
+      encrypted: false,
+    });
+  });
+
+  it("Unlock declined after cancel all and a new drop", async () => {
+    const { store } = setupEncryptedPendingFile();
+    let unlock!: (value: unknown) => void;
+    vi.mocked(requireUnlock).mockReturnValueOnce(
+      new Promise((resolve) => {
+        unlock = resolve;
+      }) as never,
+    );
+
+    const run = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+    store.cancelUpload();
+    store.files = [makeUploadFile({ uniqueId: "new-drop" })];
+    unlock(null);
+    await run;
+
+    expect(store.files[0]).toMatchObject({ uniqueId: "new-drop", error: null });
+  });
+
   it("marks the entry encrypted, shows the encryption progress and starts the session with the obfuscated name", async () => {
     const { store, fakes } = setupEncryptedPendingFile();
     vi.mocked(prepareEncryptedUpload).mockImplementation(async (config) => {

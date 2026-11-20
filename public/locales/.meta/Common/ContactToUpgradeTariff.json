@@ -1,26 +1,38 @@
 {
-  "key_path": "RoomsQuotaAlmostExhausted",
-  "content": "The quota of rooms is almost exhausted.",
-  "content_en_sha1_hash": "a53e0908fec6be50fa0a49846a1efd994db59482",
-  "created_at": "2025-05-19T21:30:53.728Z",
-  "updated_at": "2026-10-22T16:09:36.864Z",
+  "key_path": "ContactToUpgradeTariff",
+  "content": "Contact the Full admin to upgrade the tariff plan.",
+  "content_en_sha1_hash": "14c86ca3084c0b689746e64c8471cc799c6990df",
+  "created_at": "2026-08-13T14:37:17.367Z",
+  "updated_at": "2026-11-20T12:02:00.476Z",
   "comment": {
-    "text": "This is a warning message displayed in a dialog, informing the user that the number of rooms they can create is nearing its limit based on their current plan.",
+    "text": "Advice shown to a user who cannot change the pricing plan: at the end of the quota warning dialog (rooms or users limit) and as the description of the quota bar in the web client. 'Full admin' is the portal administrator role.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:19:35.097Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-11-20T12:02:00.476Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
-      "line_number": 93,
-      "context": "</>\n );\n \n return (\n <>\n <Text fontWeight={600}>{t(\"RoomsQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfRoomsAccordingToTariff\", {\n currentValue: usedRoomsCount,\n maxValue: maxCountRoomsByQuota,",
+      "line_number": 68,
+      "context": "<>\n <br />\n <Text>\n {isPaymentPageAvailable\n ? t(\"Common:ChooseNewPlan\")\n : t(\"Common:ContactToUpgradeTariff\")}\n </Text>\n </>\n );\n \n if (isRoomsTariffLimit)",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/UsersContent.tsx",
+      "line_number": 101,
+      "context": "<>\n <br />\n <Text>\n {isPaymentPageAvailable\n ? t(\"Common:ChooseNewPlan\")\n : t(\"Common:ContactToUpgradeTariff\")}\n </Text>\n </>\n );\n \n if (isUserTariffLimit)",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 189,
+      "context": "return t(\"PersonalQuotaHeaderForAdmins\");\n };\n \n const getUpgradeTariffDescription = () => {\n if (!isAdmin)\n return t(\"Common:ContactToUpgradeTariff\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"ClickToUpgradeTariff\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
-      "line_number": 181,
-      "context": "<br />\n {chooseNewPlan}\n </>\n ) : (\n <>\n <Text fontWeight={600}>{t(\"RoomsQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfRoomsAccordingToTariff\", {\n currentValue: usedRoomsCount,\n maxValue: maxCountRoomsByQuota,",
+      "line_number": 167,
+      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"Common:ChooseNewPlan\")\n : t(\"Common:ContactToUpgradeTariff\")}\n </Text>\n );\n \n const roomsLimitContent = isRoomsTariffLimit ? (\n <>",
       "module": "/packages/sdk"
     }
   ],
@@ -170,6 +182,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

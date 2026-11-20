@@ -2748,5 +2748,15 @@
   "YourOwnPlatform": "Platforma juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "LicenseExpiredRestriction": "Nuk mund të shtohen përdorues të rinj dhe të krijohen dhoma të reja. Licenca ka skaduar.",
+  "PlanPaymentOverdue": "Nuk mund të shtohen përdorues të rinj, të krijohen dhoma të reja apo agjentë IA. Pagesa e planit {{planName}} ka mbyllë kohën.",
+  "GracePeriodActive": "Periudha e lehtësimit është aktive <1>nga {{fromDate}} deri në {{byDate}}</1> (ditë të mbetura: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Gjatë kësaj kohe, administratorët nuk mund të krijojnë dhoma të reja ose të shtojnë përdorues të rinj. Pasi të përfundojë periudha e lehtësimit, hapësira e punës do të jetë e padisponueshme derisa të aktivizohet një licencë e re.",
+  "ChooseNewPlan": "Dëshironi të zgjidhni një plan të ri çmimi?",
+  "CannotCreateNewRoom": "Dhoma nuk mund të krijohet",
+  "NewRoomWillExceedLimit": "Krijimi i kësaj dhome nuk është i mundur pasi është arritur kufiri për numrin e dhomave të përfshira në planin tuaj aktual.",
+  "RoomsQuotaAlmostExhausted": "Kuota e dhomave është pothuajse e shteruar.",
+  "NumberOfRoomsAccordingToTariff": "Numri i dhomave sipas planit tuaj tarifor: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Kontaktoni superadministratorin për të përmirësuar planin tarifor."
 }

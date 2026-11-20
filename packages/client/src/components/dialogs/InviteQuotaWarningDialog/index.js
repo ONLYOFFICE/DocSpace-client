@@ -128,8 +128,8 @@ const InviteQuotaWarningDialog = (props) => {
     <>
       <Text fontWeight={700}>
         {standalone
-          ? t("LicenseExpiredRestriction")
-          : t("PlanPaymentOverdue", {
+          ? t("Common:LicenseExpiredRestriction")
+          : t("Common:PlanPaymentOverdue", {
               planName: currentTariffPlanTitle,
             })}
       </Text>
@@ -138,7 +138,7 @@ const InviteQuotaWarningDialog = (props) => {
         {standalone ? (
           <Trans
             i18nKey="GracePeriodActive"
-            ns="Payments"
+            ns="Common"
             t={t}
             values={{
               fromDate,
@@ -162,7 +162,7 @@ const InviteQuotaWarningDialog = (props) => {
       <br />
       <Text>
         {standalone
-          ? t("LicenseGracePeriodInfo")
+          ? t("Common:LicenseGracePeriodInfo")
           : t("Common:GracePeriodActivatedDescription")}
       </Text>
     </>

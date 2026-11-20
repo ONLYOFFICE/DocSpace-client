@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "Tarif planınızı təkmilləşdirmək üçün <1>buraya klikləyin</1>.",
   "ConfirmEmailDescription": "Aktivləşdirmə e-məktubunda göndərilən keçiddən istifadə edin. Aktivləşdirmə linki olan e-məktub almamısınız?",
   "ConfirmEmailHeader": "Lütfən, iş sahəsinin xüsusiyyətlərinə daxil olmaq üçün e-poçtunuzu ({{ email }}) aktiv edin.",
-  "ContactToUpgradeTariff": "Tarif planını təkmilləşdirmək üçün super administratora müraciət edin.",
   "PersonalQuotaHeader": "Şəxsi yaddaş kvotanız limiti keçib",
   "PersonalQuotaHeaderForAdmins": "İstifadəçiyə düşən yaddaş kvotasını keçib",
   "PersonalUserQuotaAdminsDescription": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün zəhmət olmasa, diskdə yer boşaldın və ya <1>Yaddaş idarəetmə parametrlərində</1> hər istifadəçi kvotasını idarə edin.",

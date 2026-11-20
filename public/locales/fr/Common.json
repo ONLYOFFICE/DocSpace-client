@@ -2748,5 +2748,15 @@
   "YourOwnPlatform": "Votre propre plateforme",
   "YourPrice": "Votre prix",
   "YourTurn": "Votre tour",
-  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande."
+  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
+  "LicenseExpiredRestriction": "Impossible d'ajouter de nouveaux utilisateurs et de créer de nouvelles salles. La licence a expiré.",
+  "PlanPaymentOverdue": "Il est impossible d'ajouter de nouveaux utilisateurs, de créer de nouvelles salles ou des agents IA. Le paiement du plan {{planName}} est en retard.",
+  "GracePeriodActive": "La période de grâce est active <1>du {{fromDate}} au {{byDate}}</1> (jours restants : {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Pendant ce temps, les administrateurs ne peuvent pas créer de nouvelles salles ou ajouter de nouveaux utilisateurs. Une fois la période de grâce terminée, l'espace de travail sera indisponible jusqu'à ce qu'une nouvelle licence soit activée.",
+  "ChooseNewPlan": "Vous souhaitez choisir un nouveau plan tarifaire ?",
+  "CannotCreateNewRoom": "Impossible de créer une salle",
+  "NewRoomWillExceedLimit": "La création de cette salle n'est pas possible car la limite du nombre de salles incluses dans votre plan actuel est atteinte.",
+  "RoomsQuotaAlmostExhausted": "Le quota de salles est presque épuisé.",
+  "NumberOfRoomsAccordingToTariff": "Nombre de salles selon votre plan tarifaire : {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Contactez le super-administrateur pour mettre à niveau le plan tarifaire."
 }

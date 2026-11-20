@@ -81,6 +81,11 @@ import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-
 import { isDSE3Format } from "@docspace/shared/services/encryption/streaming-encryption";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 
+import {
+  PATH_QUOTA,
+  quotaSuccess,
+} from "@docspace/shared/__mocks__/handlers/portal/quota";
+
 import { FIXTURE_IDENTITY, FIXTURE_USER_ID } from "../fixtures/crypto";
 import { openInSdkHost, readSdkEvents } from "../fixtures/sdkHost";
 import {
@@ -867,7 +872,37 @@ test.describe("(private) — generic addresses of a private room", () => {
   });
 });
 
+/** The portal quota with every room of the pricing plan in use. */
+const roomLimitReachedHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
+    const quota = quotaSuccess();
+    const room = quota.response.features.find((f) => f.id === "room") as {
+      value: number;
+      used: { value: number; title: string };
+    };
+    room.value = 12;
+    room.used = { value: 12, title: "Rooms:" };
+    return HttpResponse.json(quota);
+  });
+
 test.describe("(private) — create / upload / download / preview", () => {
+  test("Room limit reached", async ({ page, baseUrl, port, mockBoth }) => {
+    await serveRooms(mockBoth, port);
+    mockBoth(roomLimitReachedHandler(port));
+    await page.goto(`${baseUrl}${PRIVATE_LIST}${OPT_IN}`);
+
+    await page.getByTestId("main-button").click();
+
+    await expect(page.getByText("Room cannot be created")).toBeVisible();
+    await expect(
+      page.getByText(
+        "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
+      ),
+    ).toBeVisible();
+    await expect(page.getByText("CannotCreateNewRoom")).toHaveCount(0);
+    await expect(page.getByText("NewRoomWillExceedLimit")).toHaveCount(0);
+  });
+
   test("Document created", async ({ page, baseUrl, port, mockBoth }) => {
     const { room } = await serveRooms(mockBoth, port, { files: [] });
     mockBoth(emptyTemplateHandler(port));

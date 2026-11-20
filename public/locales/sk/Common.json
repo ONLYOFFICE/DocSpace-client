@@ -2748,5 +2748,15 @@
   "YourOwnPlatform": "Vlastná platforma",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "LicenseExpiredRestriction": "Nie je možné pridať nových používateľov ani vytvoriť nové miestnosti. Licencia vypršla.",
+  "PlanPaymentOverdue": "Nie je možné pridať nových používateľov, vytvoriť nové miestnosti ani AI agentov. Platba za plán {{planName}} je vymeraná.",
+  "GracePeriodActive": "Doba úľavy je aktívna <1>od {{fromDate}} do {{byDate}}</1> (zostávajúce dni: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "Počas tohto obdobia administrátori nemôžu vytvárať nové miestnosti ani pridávať nových používateľov. Po skončení obdobia odkladu bude pracovný priestor nedostupný, kým sa neaktivuje nová licencia.",
+  "ChooseNewPlan": "Chcete si vybrať nový tarifný program?",
+  "CannotCreateNewRoom": "Nie je možné vytvoriť miestnosť",
+  "NewRoomWillExceedLimit": "Nie je možné vytvoriť túto miestnosť, pretože je dosiahnutý limit počtu miestností vo vašom aktuálnom tarifnom pláne.",
+  "RoomsQuotaAlmostExhausted": "Kvóta miestností je takmer vyčerpaná.",
+  "NumberOfRoomsAccordingToTariff": "Počet miestností podľa vášho tarifného plánu: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Obráťte sa na supersprávcu so žiadosťou o vylepšenie tarifného plánu."
 }

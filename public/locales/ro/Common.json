@@ -2748,5 +2748,15 @@
   "YourOwnPlatform": "Propria dvs. platformă",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "LicenseExpiredRestriction": "Nu pot adăuga utilizatori noi și nu pot crea camere noi. Licența a expirat.",
+  "PlanPaymentOverdue": "Nu puteți adăuga utilizatori noi, crea camere noi sau agenți IA. Pl-ul {{planName}} a depășit termenul de plată.",
+  "GracePeriodActive": "Perioada de grație este activă <1>de la {{fromDate}} până la {{byDate}}</1> (zile rămase: {{delayDaysCount}}).",
+  "LicenseGracePeriodInfo": "În acest timp, administratorii nu pot crea camere noi sau adăuga utilizatori noi. După expirarea perioadei de grație, spațiul de lucru va deveni indisponibil până când nu se activează o licență nouă.",
+  "ChooseNewPlan": "Doriţi să alegeţi un abonament nou?",
+  "CannotCreateNewRoom": "Imposibil de creat sala",
+  "NewRoomWillExceedLimit": "Imposibil de creat această sală deoarece limita maximă de săli permisă de planul dvs. actual a fost atinsă.",
+  "RoomsQuotaAlmostExhausted": "Cota spațiului de stocare aproape epuizată.",
+  "NumberOfRoomsAccordingToTariff": "Limita de săli permisă conform planului dvs tarifar: {{currentValue}}/{{maxValue}}",
+  "ContactToUpgradeTariff": "Contactați superadministratorul pentru a face upgrade la planul tarifar."
 }

@@ -1,26 +1,26 @@
 {
-  "key_path": "GracePeriodActive",
-  "content": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
-  "content_en_sha1_hash": "6493a5523794932a22a1b54895e6649750a537eb",
-  "created_at": "2026-03-31T15:18:33.645Z",
-  "updated_at": "2026-10-22T16:09:36.864Z",
+  "key_path": "NewRoomWillExceedLimit",
+  "content": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
+  "content_en_sha1_hash": "a04a1156e2e2826b884b0b81d56586ced44b5f15",
+  "created_at": "2025-05-19T21:30:53.704Z",
+  "updated_at": "2026-11-20T12:02:00.476Z",
   "comment": {
-    "text": "This is a message displayed in a dialog warning about an active grace period for a quota. It informs the user about the start and end dates of the grace period (`fromDate`, `byDate`) and the number of remaining days (`delayDaysCount`).",
+    "text": "Explanation under the heading of the quota warning dialog shown when a room cannot be created because the room limit of the current pricing plan is reached.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:19:43.680Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-11-20T12:02:00.476Z",
+    "model": "claude-opus-5-5"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 140,
-      "context": "</Text>\n <br />\n <Text as=\"div\">\n {standalone ? (\n <Trans\n i18nKey=\"GracePeriodActive\"\n ns=\"Payments\"\n t={t}\n values={{\n fromDate,\n byDate,",
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
+      "line_number": 85,
+      "context": "</Text>\n <br />\n <Text>\n {isArchiveFolderRoot\n ? t(\"NotPossibleRoomRestoring\")\n : t(\"Common:NewRoomWillExceedLimit\")}\n </Text>\n {chooseNewPlan}\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
-      "line_number": 138,
-      "context": "</Text>\n <br />\n <Text as=\"div\">\n {standalone ? (\n <Trans\n i18nKey=\"GracePeriodActive\"\n ns=\"Payments\"\n t={t}\n values={{ fromDate, byDate, delayDaysCount }}\n components={{ 1: <Text key=\"grace-period-text\" as=\"span\" /> }}\n />",
+      "line_number": 175,
+      "context": "const roomsLimitContent = isRoomsTariffLimit ? (\n <>\n <Text fontWeight={600}>{t(\"Common:CannotCreateNewRoom\")}</Text>\n <br />\n <Text>{t(\"Common:NewRoomWillExceedLimit\")}</Text>\n <br />\n {chooseNewPlan}\n </>\n ) : (\n <>",
       "module": "/packages/sdk"
     }
   ],
@@ -170,12 +170,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Clique aqui</1> para atualizar seu plano tarifário.",
   "ConfirmEmailDescription": "Use o link fornecido no e-mail de ativação. Não recebeu um e-mail com o link de ativação?",
   "ConfirmEmailHeader": "Favor ativar seu e-mail ({{ email }}) para ter acesso às características do espaço de trabalho.",
-  "ContactToUpgradeTariff": "Entre em contato com o superadministrador para atualizar o plano tarifário.",
   "PersonalQuotaHeader": "Sua cota de armazenamento pessoal excedida",
   "PersonalQuotaHeaderForAdmins": "Cota de armazenamento por usuário excedida",
   "PersonalUserQuotaAdminsDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou gerencie a cota por usuário nas <1>Configurações de gerenciamento de armazenamento.</1>",

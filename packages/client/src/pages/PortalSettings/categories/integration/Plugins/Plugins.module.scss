@@ -133,12 +133,19 @@
       }
     }
 
-    .pluginDescriptionToggle {
+    .pluginDescriptionToggle,
+    .pluginDeleteLink {
       padding: 0;
       border: none;
       background: none;
       font-family: inherit;
       font-weight: 600;
+    }
+
+    .pluginShadowedNote {
+      width: 100%;
+      color: var(--settings-common-description-color);
+      overflow-wrap: anywhere;
     }
   }
 }

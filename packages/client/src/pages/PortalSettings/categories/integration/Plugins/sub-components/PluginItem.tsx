@@ -74,6 +74,8 @@ const PluginItem = ({
   initError,
   dataTestId,
   theme,
+  shadowedBy,
+  onDelete,
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common", "WebPlugins"]);
 
@@ -176,17 +178,19 @@ const PluginItem = ({
         <div className={styles.pluginHeader}>
           <Heading className={styles.pluginName}>{nameLocale}</Heading>
           <div className={styles.pluginControls}>
-            <IconButton
-              iconName={PluginSettingsIconUrl}
-              size={16}
-              onClick={onOpenSettingsDialog}
-              data-testid="open_settings_icon_button"
-            />
+            {openSettingsDialog ? (
+              <IconButton
+                iconName={PluginSettingsIconUrl}
+                size={16}
+                onClick={onOpenSettingsDialog}
+                data-testid="open_settings_icon_button"
+              />
+            ) : null}
             <ToggleButton
               className={styles.pluginToggleButton}
               onChange={onChangeStatus}
-              isChecked={enabled}
-              isDisabled={!!loadError && !enabled}
+              isChecked={enabled && !!updatePlugin}
+              isDisabled={(!!loadError && !enabled) || !updatePlugin}
               dataTestId="enable_plugin_toggle_button"
             />
           </div>
@@ -206,6 +210,37 @@ const PluginItem = ({
           )}
           {errorIcon}
         </div>
+
+        {shadowedBy ? (
+          <Text
+            className={styles.pluginShadowedNote}
+            fontWeight={400}
+            lineHeight="20px"
+            dataTestId={`plugin_shadowed_${name}_text`}
+          >
+            {shadowedBy.enabled
+              ? t("WebPlugins:PersonalPluginShadowed", {
+                  pluginName: shadowedBy.nameLocale,
+                  version: shadowedBy.version,
+                })
+              : t("WebPlugins:PersonalPluginShadowedDisabled", {
+                  pluginName: shadowedBy.nameLocale,
+                })}
+          </Text>
+        ) : null}
+
+        {onDelete ? (
+          <Link
+            as="button"
+            className={styles.pluginDeleteLink}
+            type={LinkType.action}
+            isHovered
+            onClick={onDelete}
+            dataTestId={`delete_plugin_${name}_link`}
+          >
+            {t("Common:Delete")}
+          </Link>
+        ) : null}
 
         {descriptionLocale ? (
           <>

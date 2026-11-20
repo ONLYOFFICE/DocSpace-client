@@ -100,6 +100,7 @@ vi.mock("../sub-components/file-management", () => ({ default: () => null }));
 vi.mock("../sub-components/interface-theme", () => ({ default: () => null }));
 vi.mock("../sub-components/authorized-apps", () => ({ default: () => null }));
 vi.mock("../sub-components/keys-management", () => ({ default: () => null }));
+vi.mock("../sub-components/plugins", () => ({ default: () => null }));
 
 // Every prop comes from the stores of the Provider below.
 const SectionBodyContent = (await import("../index"))
@@ -109,16 +110,22 @@ type TKeysState = {
   isSectionAvailable?: boolean;
   encryptionKeys?: { id: string }[] | null;
   isGuest?: boolean;
+  arePersonalPluginsAllowed?: boolean;
 };
 
 const renderProfileTabs = ({
   isSectionAvailable = true,
   encryptionKeys = [],
   isGuest = false,
+  arePersonalPluginsAllowed = false,
 }: TKeysState = {}) =>
   render(
     <Provider
-      settingsStore={{ currentDeviceType: "desktop" }}
+      settingsStore={{
+        currentDeviceType: "desktop",
+        enablePlugins: true,
+        pluginOptions: { personal: arePersonalPluginsAllowed },
+      }}
       peopleStore={{
         targetUserStore: {
           setSubscriptions: vi.fn(),
@@ -222,5 +229,27 @@ describe("Keys management tab follows the Private section", () => {
     });
 
     expect(screen.queryByTestId("tab-keys-management")).toBeNull();
+  });
+});
+
+describe("Personal plugins tab", () => {
+  it("is offered when personal plugins are allowed", () => {
+    renderProfileTabs({ arePersonalPluginsAllowed: true });
+
+    expect(screen.getByTestId("tab-plugins")).toHaveTextContent(
+      "Common:Plugins",
+    );
+  });
+
+  it("is not offered to a guest", () => {
+    renderProfileTabs({ arePersonalPluginsAllowed: true, isGuest: true });
+
+    expect(screen.queryByTestId("tab-plugins")).not.toBeInTheDocument();
+  });
+
+  it("is not offered while personal plugins are not allowed", () => {
+    renderProfileTabs();
+
+    expect(screen.queryByTestId("tab-plugins")).not.toBeInTheDocument();
   });
 });

@@ -67,6 +67,7 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
 import KeysManagement from "./sub-components/keys-management";
+import PersonalPlugins from "./sub-components/plugins";
 import useProfileBody from "./useProfileBody";
 import styles from "./body.module.scss";
 
@@ -95,6 +96,7 @@ type SectionBodyContentProps = {
   checkTg?: TelegramStore["checkTg"];
   getEncryptionKeys?: UserStore["getEncryptionKeys"];
   showKeysManagement?: boolean;
+  showPersonalPlugins?: boolean;
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -123,6 +125,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     checkTg,
     getEncryptionKeys,
     showKeysManagement,
+    showPersonalPlugins,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -235,6 +238,15 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
       onClick: async () => {
         await getConsentList();
       },
+    });
+  }
+
+  if (showPersonalPlugins) {
+    data.push({
+      id: "plugins",
+      name: t?.("Common:Plugins"),
+      content: <PersonalPlugins />,
+      onClick: () => {},
     });
   }
 
@@ -355,6 +367,10 @@ export default inject(
         userStore.encryptionKeys,
         userStore.user?.isVisitor,
       ),
+      showPersonalPlugins:
+        settingsStore.enablePlugins &&
+        settingsStore.pluginOptions.personal &&
+        !userStore.user?.isVisitor,
     };
   },
 )(

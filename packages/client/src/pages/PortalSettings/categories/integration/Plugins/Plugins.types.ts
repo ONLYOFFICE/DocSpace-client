@@ -57,18 +57,33 @@ export interface PluginsEmptyScreen {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
 }
 
-export interface PluginItemProps extends TPlugin {
-  updatePlugin: (
+export interface PluginItemProps
+  extends Pick<
+    TPlugin,
+    | "name"
+    | "nameLocale"
+    | "version"
+    | "compatible"
+    | "descriptionLocale"
+    | "enabled"
+    | "image"
+    | "url"
+    | "loadError"
+    | "initError"
+  > {
+  updatePlugin?: (
     name: string,
     status: boolean,
     settings?: string,
     t?: TFunction,
   ) => Promise<unknown>;
 
-  openSettingsDialog: (name: string) => void;
+  openSettingsDialog?: (name: string) => void;
 
   theme: TTheme;
   dataTestId?: string;
+  shadowedBy?: Pick<TPlugin, "nameLocale" | "version" | "enabled">;
+  onDelete?: () => void;
 }
 
 export interface ListLoaderProps {

@@ -179,11 +179,12 @@ describe("getCountTilesInGrid", () => {
   });
 
   describe("agents", () => {
-    // The agent rows' grid: minmax(min(100%, clamp(340px, 30vw, 560px)), 1fr).
+    // The agent rows' grid:
+    // minmax(min(100%, clamp(340px, calc((100% - 16px) / 2), 560px)), 1fr).
     const getAgentCssGridColumns = (width: number) => {
       const isDesktop = width >= 1024;
       const gridWidth = getContentWidth(width) + (isDesktop ? -1 : 1);
-      const preferred = Math.max(340, Math.min(width * 0.3, 560));
+      const preferred = Math.max(340, Math.min((gridWidth - 16) / 2, 560));
       const track = Math.floor(preferred * 64) / 64;
 
       let columns = 1;

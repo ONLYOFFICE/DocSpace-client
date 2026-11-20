@@ -60,12 +60,14 @@
     gap: 16px;
   }
 
-  // Agent cards are wide, two to a row on most screens. Keep in step with
+  // Agent cards are wide, two to a row on most screens. The width is taken
+  // from the row, not from the window: the section narrows when the Info
+  // panel opens, and half a window no longer fits twice. Keep in step with
   // getCountTilesInGrid.
   &[data-is-agent] {
     grid-template-columns: repeat(
       auto-fill,
-      minmax(min(100%, clamp(340px, 30vw, 560px)), 1fr)
+      minmax(min(100%, clamp(340px, calc((100% - 16px) / 2), 560px)), 1fr)
     );
   }
 

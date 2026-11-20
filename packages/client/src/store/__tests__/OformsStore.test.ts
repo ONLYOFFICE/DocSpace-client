@@ -153,6 +153,121 @@ describe("OformsStore gallery availability", () => {
     expect(api.getOforms).toHaveBeenCalledTimes(1);
   });
 
+  it("keeps a tab switched during the check from asking the CMS after a refusal", async () => {
+    const check = deferred<boolean>();
+    filesApi.getFormGalleryAvailable.mockReturnValue(check.promise);
+    const store = createStore();
+
+    const opening = store.initTemplateGallery();
+    const tabSwitch = store.resetFilters(".xlsx");
+    check.resolve(false);
+    await Promise.all([opening, tabSwitch]);
+
+    expect(store.oformsLoadError).toBe(true);
+    expect(api.getOforms).not.toHaveBeenCalled();
+    expect(api.getOformPurposes).not.toHaveBeenCalled();
+    expect(api.getOformLocales).not.toHaveBeenCalled();
+  });
+
+  it("shows the refusal, not a network error of an earlier opening", async () => {
+    const store = createStore();
+    api.getOforms.mockRejectedValueOnce(
+      Object.assign(new Error("Network Error"), { code: "ERR_NETWORK" }),
+    );
+    await store.initTemplateGallery();
+    expect(store.oformsNetworkError).toBe(true);
+
+    filesApi.getFormGalleryAvailable.mockResolvedValue(false);
+    await store.initTemplateGallery();
+
+    expect(store.oformsNetworkError).toBe(false);
+    expect(store.oformsLoadError).toBe(true);
+  });
+
+  it("drops a CMS answer of an earlier opening after the gallery was opened again and refused", async () => {
+    const oldList = deferred<TOformsList>();
+    api.getOforms.mockReturnValueOnce(oldList.promise);
+    const store = createStore();
+
+    const firstOpening = store.initTemplateGallery();
+    await vi.waitFor(() => expect(api.getOforms).toHaveBeenCalledTimes(1));
+
+    filesApi.getFormGalleryAvailable.mockResolvedValue(false);
+    await store.initTemplateGallery();
+
+    oldList.resolve(list([1]));
+    await firstOpening;
+
+    expect(store.oformsLoadError).toBe(true);
+  });
+
+  it("drops a refusal of an earlier opening after the gallery loaded again", async () => {
+    const firstCheck = deferred<boolean>();
+    filesApi.getFormGalleryAvailable.mockReturnValueOnce(firstCheck.promise);
+    const store = createStore();
+
+    const firstOpening = store.initTemplateGallery();
+    await store.initTemplateGallery();
+
+    firstCheck.resolve(false);
+    await firstOpening;
+
+    expect(store.oformsLoadError).toBe(false);
+  });
+
+  it("keeps the list of a tab picked while the check is pending", async () => {
+    const check = deferred<boolean>();
+    filesApi.getFormGalleryAvailable.mockReturnValue(check.promise);
+    const store = createStore();
+
+    const opening = store.initTemplateGallery();
+    const tabSwitch = store.resetFilters(".xlsx");
+    check.resolve(true);
+    await Promise.all([opening, tabSwitch]);
+
+    expect(api.getOforms).toHaveBeenCalledTimes(1);
+    expect(api.getOforms.mock.calls[0][1].extension).toBe("xlsx");
+  });
+
+  it("keeps a tab picked in an earlier opening from asking the CMS", async () => {
+    const firstCheck = deferred<boolean>();
+    filesApi.getFormGalleryAvailable
+      .mockReturnValueOnce(firstCheck.promise)
+      .mockResolvedValueOnce(false);
+    const store = createStore();
+
+    const firstOpening = store.initTemplateGallery();
+    const tabSwitch = store.resetFilters(".xlsx");
+    store.setTemplateGalleryVisible(false);
+    await store.initTemplateGallery();
+
+    firstCheck.resolve(true);
+    await Promise.all([firstOpening, tabSwitch]);
+
+    expect(store.oformsLoadError).toBe(true);
+    expect(api.getOforms).not.toHaveBeenCalled();
+    expect(api.getOformPurposes).not.toHaveBeenCalled();
+  });
+
+  it("loads a tab picked during the check in the language the check settles on", async () => {
+    api.getOformLocales.mockResolvedValue(["en", "ru"]);
+    const check = deferred<boolean>();
+    filesApi.getFormGalleryAvailable.mockReturnValue(check.promise);
+    const store = new OformsStore(
+      settingsStore,
+      { user: { cultureName: "ru" } } as unknown as UserStore,
+      { isFormRoomRoot: false },
+    );
+
+    const opening = store.initTemplateGallery();
+    const tabSwitch = store.resetFilters(".xlsx");
+    check.resolve(true);
+    await Promise.all([opening, tabSwitch]);
+
+    expect(api.getOforms).toHaveBeenCalledTimes(1);
+    expect(api.getOforms.mock.calls[0][1].locale).toBe("ru");
+  });
+
   it("loads the gallery as before when the check itself fails", async () => {
     // A server without the check answers 404
     filesApi.getFormGalleryAvailable.mockRejectedValue(new Error("404"));

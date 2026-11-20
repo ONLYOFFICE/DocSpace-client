@@ -85,6 +85,23 @@ class OformsStore {
 
   listRequestId = 0;
 
+  // The server's answer whether it reaches the gallery. Every CMS request waits
+  // for it, so a tab switched during the check neither asks the CMS nor lifts
+  // the stub after a refusal.
+  formGalleryAvailable: Promise<boolean> = Promise.resolve(true);
+
+  // Counts the openings of the gallery: an answer that comes after the gallery
+  // was opened again belongs to the old opening and is dropped.
+  galleryOpeningId = 0;
+
+  // The check and the language list of the current opening: a tab picked
+  // before they settle waits for them, so its locale is the one they choose.
+  galleryReady: Promise<void> = Promise.resolve();
+
+  // The opening in which a tab was picked: that opening's first page is then
+  // left to the tab instead of loading the default file type over it.
+  tabPickedOpeningId = 0;
+
   purposesRequestId = 0;
 
   oformsLoadError = false;
@@ -141,7 +158,13 @@ class OformsStore {
     this.settingsStore = settingsStore;
     this.userStore = userStore;
     this.treeFoldersStore = treeFoldersStore;
-    makeAutoObservable(this, { listRequestId: false });
+    makeAutoObservable(this, {
+      listRequestId: false,
+      formGalleryAvailable: false,
+      galleryOpeningId: false,
+      galleryReady: false,
+      tabPickedOpeningId: false,
+    });
   }
 
   get defaultOformLocale() {
@@ -240,11 +263,18 @@ class OformsStore {
   }
 
   fetchOformLocales = async () => {
+    const openingId = this.galleryOpeningId;
+    if (!(await this.formGalleryAvailable)) return;
+    if (openingId !== this.galleryOpeningId) return;
+
     const url = combineUrl(this.oformsApiRoot, "/i18n/locales");
 
     try {
-      this.setOformLocales(await getOformLocales(url));
+      const locales = await getOformLocales(url);
+      if (openingId === this.galleryOpeningId) this.setOformLocales(locales);
     } catch {
+      if (openingId !== this.galleryOpeningId) return;
+
       // An empty list is the answer the language filter renders from; the
       // failure itself reaches the user through the error screen the list
       // request raises, so it is not toasted on top of it.
@@ -253,12 +283,21 @@ class OformsStore {
   };
 
   getOforms = async (filter: OformsFilter = OformsFilter.getDefault()) => {
+    const openingId = this.galleryOpeningId;
+    if (!(await this.formGalleryAvailable)) return null;
+    // The gallery was closed or opened again during the check
+    if (openingId !== this.galleryOpeningId) return null;
+
     try {
       const oforms = await getOforms(this.oformsApiUrl, filter);
+      if (openingId !== this.galleryOpeningId) return null;
+
       this.oformsLoadError = false;
       this.oformsNetworkError = false;
       return oforms;
     } catch (err) {
+      if (openingId !== this.galleryOpeningId) return null;
+
       // Every way the catalog can fail ends on the same error screen: a
       // status this code does not enumerate (403 from the CDN in front of the
       // CMS, 401, 429) used to fall through to a toast, leaving the gallery
@@ -436,6 +475,10 @@ class OformsStore {
   };
 
   fetchPurposes = async (locale: string, extension: string) => {
+    const openingId = this.galleryOpeningId;
+    if (!(await this.formGalleryAvailable)) return;
+    if (openingId !== this.galleryOpeningId) return;
+
     const url = combineUrl(this.oformsApiRoot, "/purposes");
 
     this.purposesRequestId += 1;
@@ -451,8 +494,13 @@ class OformsStore {
     }
 
     // A tab or language switched mid-flight answers for another type or
-    // locale, so only the latest request may replace the categories.
-    if (requestId !== this.purposesRequestId) return;
+    // locale, so only the latest request of this opening may replace the
+    // categories.
+    if (
+      requestId !== this.purposesRequestId ||
+      openingId !== this.galleryOpeningId
+    )
+      return;
 
     runInAction(() => {
       this.setPurposes(purposes);
@@ -576,14 +624,36 @@ class OformsStore {
   initTemplateGallery = async () => {
     // The server downloads the picked form, so a gallery it cannot reach is
     // shown as unavailable before the CMS is asked; a server without the
-    // check (404) or a failed call leaves the gallery as it was.
-    const available = await getFormGalleryAvailable().catch(() => true);
+    // check (404) or a failed call leaves the gallery as it was. A network
+    // error of an earlier opening must not pick the message.
+    this.galleryOpeningId += 1;
+    const openingId = this.galleryOpeningId;
+
+    this.formGalleryAvailable = getFormGalleryAvailable().catch(() => true);
+    this.galleryReady = this.formGalleryAvailable.then((available) =>
+      available && openingId === this.galleryOpeningId
+        ? this.fetchOformLocales()
+        : undefined,
+    );
+
+    const available = await this.formGalleryAvailable;
+    if (openingId !== this.galleryOpeningId) return;
+
     if (!available) {
+      this.oformsNetworkError = false;
       this.oformsLoadError = true;
       return;
     }
 
-    await this.fetchOformLocales();
+    await this.galleryReady;
+
+    // A tab picked during the check and the locales loads its own list: the
+    // first page must not replace it with another file type.
+    if (
+      openingId !== this.galleryOpeningId ||
+      this.tabPickedOpeningId === openingId
+    )
+      return;
 
     const firstLoadFilter = this.isFormsOnlyGallery
       ? OformsFilter.getDefault()
@@ -597,6 +667,19 @@ class OformsStore {
   resetFilters = async (ext?: string) => {
     this.filterPanelVisible = false;
 
+    const openingId = this.galleryOpeningId;
+    this.tabPickedOpeningId = openingId;
+
+    // Switching a tab and clearing a filter both replace the list in place,
+    // so they dim the tiles the same way a filter change does.
+    this.setOformsIsLoading(true);
+    this.setOformsIsRefetching(true);
+
+    // Before the language list of this opening is in, the default locale would
+    // fall back to English
+    await this.galleryReady;
+    if (openingId !== this.galleryOpeningId) return;
+
     const defaultFilter =
       ext === ".docx"
         ? OformsFilter.getDefaultDocx()
@@ -608,11 +691,6 @@ class OformsStore {
 
     defaultFilter.locale = this.defaultOformLocale;
 
-    // Switching a tab and clearing a filter both replace the list in place,
-    // so they dim the tiles the same way a filter change does.
-    this.setOformsIsLoading(true);
-    this.setOformsIsRefetching(true);
-
     await this.fetchOformsWithPurposes(defaultFilter);
   };
 
@@ -623,6 +701,8 @@ class OformsStore {
     if (!templateGalleryVisible) {
       this.createRoomFromTemplate = false;
       this.filterPanelVisible = false;
+      // Requests still running for this opening must not write after it
+      this.galleryOpeningId += 1;
     }
 
     this.templateGalleryVisible = templateGalleryVisible;

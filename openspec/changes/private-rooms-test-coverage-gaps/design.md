@@ -177,3 +177,6 @@ option; a guest without a key is already one of `withoutKeys`.
   services/encryption dialogs/passphrase-modal dialogs/key-change-dialog
   __mocks__/handlers` in shared, 44 files and 727 tests passed;
   `pnpm exec tsc` in shared clean.
+- 2026-11-20, task 2.14, at `bcd59a92290`: `pnpm exec vitest run src` in
+  client, 251 files and 2468 tests passed, no snapshot written or
+  removed; `pnpm exec tsc` in client clean.

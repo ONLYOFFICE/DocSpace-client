@@ -306,15 +306,6 @@ export type TRoomsRequestScope = {
   lists: "private" | "notPrivate";
 };
 
-/**
- * What a rooms-list request must carry for the address it was made from. The
- * Private section is the server's `PrivateRooms` area, and its Archive the
- * shared Archive with the private filter. The Rooms area never returns a
- * private room, so Rooms sends no filter, and Rooms -> Archive, which holds
- * both, sends the non-private one. Templates, Forms and AI agents searches
- * are left alone; any other area of a Rooms address sends the non-private
- * filter as well.
- */
 /** Rooms searches that list their own items, never a private room. */
 const AREAS_WITH_OWN_LISTS: string[] = [
   RoomSearchArea.Templates,
@@ -324,6 +315,15 @@ const AREAS_WITH_OWN_LISTS: string[] = [
   RoomSearchArea.AiHub,
 ];
 
+/**
+ * What a rooms-list request must carry for the address it was made from. The
+ * Private section is the server's `PrivateRooms` area, and its Archive the
+ * shared Archive with the private filter. The Rooms area never returns a
+ * private room, so Rooms sends no filter, and Rooms -> Archive, which holds
+ * both, sends the non-private one. Templates, Forms and AI agents searches
+ * are left alone; any other area of a Rooms address sends the non-private
+ * filter as well.
+ */
 const getRoomsRequestScope = (
   categoryType: ValueOf<typeof CategoryType>,
   searchArea: RoomSearchArea | string | undefined,

@@ -120,6 +120,35 @@ export async function getUploadComparisonName(
   return { name: realName, recovered: true };
 }
 
+/**
+ * The comparison names of a folder's new files; a file whose name cannot be
+ * recovered is set aside with its error.
+ */
+export async function nameUploadsForComparison<T>(
+  items: T[],
+  fileOf: (item: T) => File,
+  roomId: number | string,
+  userId: string,
+  identity: IdentityKeyPair,
+) {
+  const named: { item: T; name: string; recovered: boolean }[] = [];
+  const failed: { item: T; error: unknown }[] = [];
+  for (const item of items) {
+    try {
+      const compared = await getUploadComparisonName(
+        fileOf(item),
+        roomId,
+        userId,
+        identity,
+      );
+      named.push({ item, ...compared });
+    } catch (error) {
+      failed.push({ item, error });
+    }
+  }
+  return { named, failed };
+}
+
 export type TNameClash<T> = { item: T; name: string; renamed: string };
 
 /**

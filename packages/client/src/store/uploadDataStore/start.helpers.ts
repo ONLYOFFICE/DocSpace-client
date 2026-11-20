@@ -42,8 +42,8 @@ import { RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import i18n from "../../i18n";
 import {
-  getUploadComparisonName,
   listDecryptedFileNames,
+  nameUploadsForComparison,
   resolveNameClashes,
 } from "@docspace/shared/services/private-room/encrypted-name-clash";
 
@@ -297,26 +297,21 @@ async function findPrivateNameClashes(
       );
       continue;
     }
-    const named: { item: TUploadFile; name: string }[] = [];
-    const recovered = new Set<string>();
-    for (const item of folderItems) {
-      try {
-        const compared = await getUploadComparisonName(
-          item.file,
-          roomId,
-          String(userId),
-          identity,
-        );
-        named.push({ item, name: compared.name });
-        if (compared.recovered) recovered.add(item.uniqueId);
-      } catch {
-        failQueuedItems(
-          self,
-          [item],
-          i18n.t("Common:EncryptionReimportFailed"),
-        );
-      }
-    }
+    const { named, failed } = await nameUploadsForComparison(
+      folderItems,
+      (item) => item.file,
+      roomId,
+      String(userId),
+      identity,
+    );
+    failQueuedItems(
+      self,
+      failed.map(({ item }) => item),
+      i18n.t("Common:EncryptionReimportFailed"),
+    );
+    const recovered = new Set(
+      named.filter((n) => n.recovered).map((n) => n.item.uniqueId),
+    );
     resolveNameClashes(named, existingNames).forEach(
       ({ item, name, renamed }) => {
         renames.push({

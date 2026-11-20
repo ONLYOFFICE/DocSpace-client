@@ -81,8 +81,8 @@ import {
   type UploadRefusalReason,
 } from "./encrypted-upload";
 import {
-  getUploadComparisonName,
   listDecryptedFileNames,
+  nameUploadsForComparison,
   resolveNameClashes,
   type TNameClash,
 } from "./encrypted-name-clash";
@@ -264,10 +264,6 @@ export class EncryptedWrapError extends Error {
   }
 }
 
-/**
- * The file was stored, its uploader's entry could not be written, and the
- * stored file was removed again.
- */
 /** The destination folder could not be listed, so its names were not compared. */
 export class EncryptedNameCheckError extends Error {
   constructor(cause: unknown) {
@@ -277,6 +273,10 @@ export class EncryptedNameCheckError extends Error {
   }
 }
 
+/**
+ * The file was stored, its uploader's entry could not be written, and the
+ * stored file was removed again.
+ */
 export class EncryptedUploadNotKeptError extends Error {
   constructor(cause: unknown) {
     super("The uploaded file could not be sealed and was removed");
@@ -729,7 +729,7 @@ async function wrapDekForSelfAndRoom(args: {
   return serializeFanOut ? serializeFanOut(fanOutToRoom) : fanOutToRoom();
 }
 
-/** A file downloaded without decryption goes back under its original key. */
+/** A file downloaded without decryption is decrypted and uploaded again under a new key. */
 // Spec: private-rooms/file-operations, "Re-import of a file downloaded without decryption"
 export async function prepareReimport(
   file: File,
@@ -1029,24 +1029,20 @@ async function checkUploadNameClashes(
       for (const entry of folderEntries) unchecked.set(entry.uploadId, failure);
       continue;
     }
-    const named: { item: EncryptedUploadRetryItem; name: string }[] = [];
-    for (const entry of folderEntries) {
-      try {
-        const { name } = await getUploadComparisonName(
-          entry.file,
-          roomId,
-          userId,
-          identity,
-        );
-        named.push({ item: entry, name });
-      } catch (error) {
-        unchecked.set(
-          entry.uploadId,
-          error instanceof EncryptedReimportError
-            ? error
-            : new EncryptedReimportError((error as Error)?.message),
-        );
-      }
+    const { named, failed } = await nameUploadsForComparison(
+      folderEntries,
+      (entry) => entry.file,
+      roomId,
+      userId,
+      identity,
+    );
+    for (const { item, error } of failed) {
+      unchecked.set(
+        item.uploadId,
+        error instanceof EncryptedReimportError
+          ? error
+          : new EncryptedReimportError((error as Error)?.message),
+      );
     }
     clashes.push(...resolveNameClashes(named, existingNames));
   }

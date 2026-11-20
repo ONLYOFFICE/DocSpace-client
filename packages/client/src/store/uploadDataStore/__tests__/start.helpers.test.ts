@@ -38,8 +38,8 @@ import * as filesApi from "@docspace/shared/api/files";
 import { RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import {
-  getUploadComparisonName,
   listDecryptedFileNames,
+  nameUploadsForComparison,
 } from "@docspace/shared/services/private-room/encrypted-name-clash";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -63,14 +63,16 @@ vi.mock("@docspace/shared/services/encryption/secret-storage", async (io) => ({
 
 vi.mock(
   "@docspace/shared/services/private-room/encrypted-name-clash",
-  async (io) => ({
-    ...((await io()) as Record<string, unknown>),
-    listDecryptedFileNames: vi.fn(),
-    getUploadComparisonName: vi.fn(async (file: File) => ({
-      name: file.name,
-      recovered: false,
-    })),
-  }),
+  async (io) => {
+    const actual = (await io()) as Record<string, unknown>;
+    return {
+      ...actual,
+      listDecryptedFileNames: vi.fn(),
+      nameUploadsForComparison: vi.fn(
+        actual.nameUploadsForComparison as (...args: unknown[]) => unknown,
+      ),
+    };
+  },
 );
 
 const t = ((key: string) => key) as unknown as TTranslation;
@@ -388,10 +390,16 @@ describe("handleUploadConflictsImpl", () => {
       vi.mocked(listDecryptedFileNames).mockResolvedValue([
         "New document.docx",
       ]);
-      vi.mocked(getUploadComparisonName).mockResolvedValueOnce({
-        name: "New document.docx",
-        recovered: true,
-      });
+      vi.mocked(nameUploadsForComparison).mockImplementationOnce(
+        async (items) => ({
+          named: items.map((item) => ({
+            item,
+            name: "New document.docx",
+            recovered: true,
+          })),
+          failed: [],
+        }),
+      );
       const CONTAINER = "5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx";
       const item = copyInto(CONTAINER);
 
@@ -418,8 +426,14 @@ describe("handleUploadConflictsImpl", () => {
       const { store, fakes } = createTestUploadDataStore(keyed);
       vi.mocked(requireUnlock).mockResolvedValue({} as never);
       vi.mocked(listDecryptedFileNames).mockResolvedValue([]);
-      vi.mocked(getUploadComparisonName).mockRejectedValueOnce(
-        new Error("no source file in the room decrypts the uploaded blob"),
+      vi.mocked(nameUploadsForComparison).mockImplementationOnce(
+        async (items) => ({
+          named: [],
+          failed: items.map((item) => ({
+            item,
+            error: new Error("no source file in the room decrypts the uploaded blob"),
+          })),
+        }),
       );
       const item = privateItem();
       const plain = ordinaryItem();

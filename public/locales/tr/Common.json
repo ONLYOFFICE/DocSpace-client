@@ -1325,6 +1325,7 @@
   "InviteAgain": "Yeniden davet et",
   "InviteAsGuest": "konuk olarak davet et",
   "InviteContacts": "Kişileri davet edin",
+  "InviteRoomLoadFailed": "Oda yüklenemediği için şu anda kimse davet edilemiyor. Paneli kapatıp tekrar deneyin.",
   "Invited": "Davet edildi",
   "Inviter": "Davet eden",
   "InviteToRoomAddPlaceholder": "İsim veya e-posta ile insanları ekleyin.",

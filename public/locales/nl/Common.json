@@ -1325,6 +1325,7 @@
   "InviteAgain": "Opnieuw uitnodigen",
   "InviteAsGuest": "uitnodigen als gast",
   "InviteContacts": "Nodig mensen uit",
+  "InviteRoomLoadFailed": "De kamer kon niet worden geladen, dus er kan nu niemand worden uitgenodigd. Sluit het paneel en probeer het opnieuw.",
   "Invited": "Uitgenodigd",
   "Inviter": "Uitnodiger",
   "InviteToRoomAddPlaceholder": "Voeg mensen toe op naam of e-mailadres",

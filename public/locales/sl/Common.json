@@ -1325,6 +1325,7 @@
   "InviteAgain": "Povabi znova",
   "InviteAsGuest": "povabi kot gost",
   "InviteContacts": "Povabi osebe",
+  "InviteRoomLoadFailed": "Sobe ni bilo mogoče naložiti, zato zdaj ni mogoče povabiti nikogar. Zaprite ploščo in poskusite znova.",
   "Invited": "Povabljeni",
   "Inviter": "Vabitelj",
   "InviteToRoomAddPlaceholder": "Dodajanje ljudi po imenu ali e-pošti.",

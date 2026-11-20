@@ -1325,6 +1325,7 @@
   "InviteAgain": "Uzaicināt vēlreiz",
   "InviteAsGuest": "uzaicināt kā viesi",
   "InviteContacts": "Uzaicināt cilvēkus",
+  "InviteRoomLoadFailed": "Telpu neizdevās ielādēt, tāpēc pašlaik nevienu nevar uzaicināt. Aizveriet paneli un mēģiniet vēlreiz.",
   "Invited": "Uzaicināts",
   "Inviter": "Uzaicinātājs",
   "InviteToRoomAddPlaceholder": "Pievienojiet cilvēkus pēc vārda vai e-pasta adreses.",

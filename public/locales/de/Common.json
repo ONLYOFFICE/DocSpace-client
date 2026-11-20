@@ -1325,6 +1325,7 @@
   "InviteAgain": "Erneut einladen",
   "InviteAsGuest": "Als Gast einladen",
   "InviteContacts": "Personen einladen",
+  "InviteRoomLoadFailed": "Der Raum konnte nicht geladen werden, daher kann gerade niemand eingeladen werden. Schließen Sie das Panel und versuchen Sie es erneut.",
   "Invited": "Eingeladen",
   "Inviter": "Einladender",
   "InviteToRoomAddPlaceholder": "Personen nach Namen oder E-Mail hinzufügen",

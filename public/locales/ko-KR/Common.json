@@ -1325,6 +1325,7 @@
   "InviteAgain": "다시 초대",
   "InviteAsGuest": "게스트로 초대",
   "InviteContacts": "사람 초대",
+  "InviteRoomLoadFailed": "방을 불러올 수 없어 지금은 아무도 초대할 수 없습니다. 패널을 닫고 다시 시도하세요.",
   "Invited": "초대 완료",
   "Inviter": "초대자",
   "InviteToRoomAddPlaceholder": "이름 또는 이메일로 사람 추가하기",

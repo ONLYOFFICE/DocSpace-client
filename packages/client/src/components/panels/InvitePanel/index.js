@@ -136,7 +136,17 @@ const InvitePanel = ({
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
   );
-  const [selectedRoom, setSelectedRoom] = useState(null);
+  // A room already in hand is the panel's room from its first render.
+  const [selectedRoom, setSelectedRoom] = useState(() => {
+    if (roomId === -1) return null;
+    const project = findAiProject(roomId);
+    if (project) return aiProjectToRoom(project);
+    return folders.find((folder) => folder.id === roomId) ?? null;
+  });
+  // Spec: private-rooms/room-membership, "The invite panel waits for the room it invites to"
+  const [roomLoad, setRoomLoad] = useState(
+    roomId === -1 || selectedRoom ? "loaded" : "loading",
+  );
   const [hasErrors, setHasErrors] = useState(false);
   const [shareLinks, setShareLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -238,18 +248,20 @@ const InvitePanel = ({
 
   const selectRoom = () => {
     if (aiProject) {
-      setSelectedRoom(aiProjectToRoom(aiProject));
-      return Promise.resolve();
+      const room = aiProjectToRoom(aiProject);
+      setSelectedRoom(room);
+      return Promise.resolve(room);
     }
 
     const room = folders.find((folder) => folder.id === roomId);
 
     if (room) {
       setSelectedRoom(room);
-      return Promise.resolve();
+      return Promise.resolve(room);
     }
     return getFolderInfo(roomId).then((info) => {
       setSelectedRoom(info);
+      return info;
     });
   };
 
@@ -319,9 +331,17 @@ const InvitePanel = ({
     }
 
     setInvitePanelIsLoading(true);
-    Promise.all([selectRoom(), getInfo()]).finally(() => {
-      disableInvitePanelLoader(false);
-    });
+    selectRoom()
+      .then(
+        (room) => {
+          setRoomLoad("loaded");
+          return room?.private ? undefined : getInfo();
+        },
+        () => setRoomLoad("failed"),
+      )
+      .finally(() => {
+        disableInvitePanelLoader(false);
+      });
   }, [roomId]);
 
   useEffect(() => {
@@ -453,6 +473,7 @@ const InvitePanel = ({
   }, [inviteItems]);
 
   const onClickSend = async () => {
+    if (roomLoad !== "loaded") return;
     setNotInvited([]);
     const invitations = inviteItems.map((item) => {
       const newItem = {};
@@ -1092,7 +1113,7 @@ const InvitePanel = ({
         linkSettingsPanelVisible ||
         (!hideSelector ? addUsersPanelVisible : null)
       }
-      isLoading={invitePanelIsLoding}
+      isLoading={invitePanelIsLoding || roomLoad === "loading"}
       withBodyScroll
       isInvitePanelLoader
       id="invite_panel_modal"
@@ -1216,7 +1237,16 @@ const InvitePanel = ({
         </div>
       </ModalDialog.Header>
       <ModalDialog.Body>
-        {inviteOutcome ? (
+        {roomLoad === "failed" ? (
+          <Text
+            role="alert"
+            fontSize="13px"
+            fontWeight={600}
+            dataTestId="invite_panel_room_load_failed"
+          >
+            {t("Common:InviteRoomLoadFailed")}
+          </Text>
+        ) : inviteOutcome ? (
           <InviteResult t={t} outcome={inviteOutcome} />
         ) : (
           <PrivateRoomInviteContext.Provider value={isPrivateRoom}>
@@ -1236,7 +1266,17 @@ const InvitePanel = ({
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        {inviteOutcome ? (
+        {roomLoad === "failed" ? (
+          <Button
+            className="close-button"
+            scale
+            size="normal"
+            primary
+            onClick={onClose}
+            label={t("Common:CloseButton")}
+            testId="invite_panel_close_button"
+          />
+        ) : inviteOutcome ? (
           <>
             {canInviteAgain ? (
               <Button

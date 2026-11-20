@@ -1,0 +1,29 @@
+{
+  "key_path": "InviteRoomLoadFailed",
+  "content": "The room could not be loaded, so nobody can be invited now. Close the panel and try again.",
+  "content_en_sha1_hash": "3db05fad092a3c87dadc6a28cf01c13bb52e2c54",
+  "created_at": "2026-11-20T09:02:20.263Z",
+  "updated_at": "2026-11-20T09:03:12.006Z",
+  "comment": {
+    "text": "Message shown in place of the form of the invite panel, with only a Close button, when the panel was opened from inside a room and the room itself could not be read from the server, so nobody can be invited. The panel and the room are the ones the user opened; \"try again\" means reopening the panel.",
+    "is_auto": true,
+    "updated_at": "2026-11-20T09:03:12.006Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
+      "line_number": 1247,
+      "context": "role=\"alert\"\n fontSize=\"13px\"\n fontWeight={600}\n dataTestId=\"invite_panel_room_load_failed\"\n >\n {t(\"Common:InviteRoomLoadFailed\")}\n </Text>\n ) : inviteOutcome ? (\n <InviteResult t={t} outcome={inviteOutcome} />\n ) : (\n <PrivateRoomInviteContext.Provider value={isPrivateRoom}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

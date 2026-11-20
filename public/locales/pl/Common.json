@@ -1325,6 +1325,7 @@
   "InviteAgain": "Zaproś ponownie",
   "InviteAsGuest": "zaproś jako gościa",
   "InviteContacts": "Zaproś osoby",
+  "InviteRoomLoadFailed": "Nie udało się wczytać pokoju, więc nie można teraz nikogo zaprosić. Zamknij panel i spróbuj ponownie.",
   "Invited": "Zaproszono",
   "Inviter": "Zapraszający",
   "InviteToRoomAddPlaceholder": "Dodawaj osoby po imieniu lub adresie e-mail.",

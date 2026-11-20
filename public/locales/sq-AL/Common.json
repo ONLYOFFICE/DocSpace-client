@@ -1325,6 +1325,7 @@
   "InviteAgain": "Ftoni përsëri",
   "InviteAsGuest": "ftoni si mysafirë",
   "InviteContacts": "Ftoni njerëz",
+  "InviteRoomLoadFailed": "Dhoma nuk mund të ngarkohej, ndaj tani nuk mund të ftohet askush. Mbyllni panelin dhe provoni përsëri.",
   "Invited": "Ftuar",
   "Inviter": "Ftuesi",
   "InviteToRoomAddPlaceholder": "Shtoni njerëz me emër ose email",

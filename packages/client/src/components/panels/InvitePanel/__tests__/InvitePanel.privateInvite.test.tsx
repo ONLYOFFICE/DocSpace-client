@@ -200,8 +200,11 @@ const ANN_ITEM = {
   access: ShareAccessRights.Editing,
 };
 
-const renderInviteFromList = (room: TRoom, inviteItems = [BOB_ITEM]) => {
-  const getFolderInfo = vi.fn();
+const renderInviteFromList = (
+  room: TRoom | null,
+  inviteItems = [BOB_ITEM],
+  getFolderInfo = vi.fn(),
+) => {
   const setInviteItems = vi.fn();
   const setInvitePanelOptions = vi.fn();
 
@@ -215,7 +218,7 @@ const renderInviteFromList = (room: TRoom, inviteItems = [BOB_ITEM]) => {
         hasGuests: false,
         culture: "en",
       }}
-      filesStore={{ folders: [room], getFolderInfo }}
+      filesStore={{ folders: room ? [room] : [], getFolderInfo }}
       dialogsStore={{
         inviteItems,
         invitePanelOptions: {
@@ -251,6 +254,72 @@ const renderInviteFromList = (room: TRoom, inviteItems = [BOB_ITEM]) => {
 };
 
 const closedPanel = expect.objectContaining({ visible: false });
+
+describe("The invite panel waits for the room it invites to", () => {
+  beforeEach(() => {
+    mocks.getRoomSecurityInfo.mockImplementation(async () => ({ items: [] }));
+    mocks.setRoomSecurity.mockImplementation(async () => ({}));
+    mocks.requireUnlock.mockImplementation(async () => null);
+  });
+
+  it("Room read fails", async () => {
+    renderInviteFromList(
+      null,
+      [BOB_ITEM],
+      vi.fn(async () => {
+        throw new Error("403");
+      }),
+    );
+
+    expect(
+      await screen.findByTestId("invite_panel_room_load_failed"),
+    ).toHaveTextContent("Common:InviteRoomLoadFailed");
+    expect(screen.queryByTestId("invite_panel_send_button")).toBeNull();
+    expect(screen.getByTestId("invite_panel_close_button")).toBeInTheDocument();
+    expect(mocks.getRoomSecurityInfo).not.toHaveBeenCalled();
+    expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
+  });
+
+  it("Room read still on its way", async () => {
+    const getFolderInfo = vi.fn(() => new Promise(() => {}));
+    renderInviteFromList(null, [BOB_ITEM], getFolderInfo);
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+    await Promise.resolve();
+
+    expect(getFolderInfo).toHaveBeenCalledWith(ROOM_ID);
+    expect(mocks.requireUnlock).not.toHaveBeenCalled();
+    expect(mocks.setRoomSecurity).not.toHaveBeenCalled();
+    expect(mocks.getRoomSecurityInfo).not.toHaveBeenCalled();
+  });
+
+  it("Room read succeeds", async () => {
+    const room = privateRoomDto({ id: ROOM_ID, title: "Pirate room" });
+    const getFolderInfo = vi.fn(async () => room);
+    renderInviteFromList(null, [BOB_ITEM], getFolderInfo);
+
+    await act(async () => {});
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    await waitFor(() => expect(mocks.requireUnlock).toHaveBeenCalled());
+    expect(getFolderInfo).toHaveBeenCalledWith(ROOM_ID);
+    expect(mocks.getRoomSecurityInfo).not.toHaveBeenCalled();
+  });
+
+  it("Room already in hand", () => {
+    const getFolderInfo = vi.fn();
+    renderInviteFromList(
+      privateRoomDto({ id: ROOM_ID, title: "Pirate room" }),
+      [BOB_ITEM],
+      getFolderInfo,
+    );
+
+    fireEvent.click(screen.getByTestId("invite_panel_send_button"));
+
+    expect(mocks.requireUnlock).toHaveBeenCalled();
+    expect(getFolderInfo).not.toHaveBeenCalled();
+  });
+});
 
 describe("Invite opened from the list", () => {
   const identity = { userId: "admin" };

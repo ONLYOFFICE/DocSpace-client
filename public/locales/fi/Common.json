@@ -1325,6 +1325,7 @@
   "InviteAgain": "Kutsu uudelleen",
   "InviteAsGuest": "kutsu vieraana",
   "InviteContacts": "Kutsu henkilöitä",
+  "InviteRoomLoadFailed": "Huonetta ei voitu ladata, joten ketään ei voi kutsua nyt. Sulje paneeli ja yritä uudelleen.",
   "Invited": "Kutsuttu",
   "Inviter": "Kutsuja",
   "InviteToRoomAddPlaceholder": "Lisää ihmisiä nimellä tai sähköpostiosoitteella.",

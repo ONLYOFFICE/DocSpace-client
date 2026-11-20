@@ -1325,6 +1325,7 @@
   "InviteAgain": "Pozvat znovu",
   "InviteAsGuest": "pozvat jako hosta",
   "InviteContacts": "Pozvěte lidi",
+  "InviteRoomLoadFailed": "Místnost se nepodařilo načíst, takže teď nelze nikoho pozvat. Zavřete panel a zkuste to znovu.",
   "Invited": "Pozván",
   "Inviter": "Pozývající",
   "InviteToRoomAddPlaceholder": "Přidejte lidi podle jména nebo e-mailu.",

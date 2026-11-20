@@ -1325,6 +1325,7 @@
   "InviteAgain": "Mời lại",
   "InviteAsGuest": "mời với tư cách khách",
   "InviteContacts": "Mời mọi người",
+  "InviteRoomLoadFailed": "Không thể tải phòng nên hiện không thể mời ai. Hãy đóng bảng và thử lại.",
   "Invited": "Đã mời",
   "Inviter": "Người mời",
   "InviteToRoomAddPlaceholder": "Thêm người theo tên hoặc địa chỉ email.",

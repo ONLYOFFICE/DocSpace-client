@@ -1325,6 +1325,7 @@
   "InviteAgain": "再次邀请",
   "InviteAsGuest": "以访客身份邀请",
   "InviteContacts": "邀请人员",
+  "InviteRoomLoadFailed": "无法加载房间，因此现在无法邀请任何人。请关闭面板后重试。",
   "Invited": "已邀请",
   "Inviter": "邀请人",
   "InviteToRoomAddPlaceholder": "通过姓名或电子邮件添加用户",

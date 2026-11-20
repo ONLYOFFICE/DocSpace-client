@@ -1325,6 +1325,7 @@
   "InviteAgain": "Pozovi ponovo",
   "InviteAsGuest": "pozovite kao gosta",
   "InviteContacts": "Pozovite ljude",
+  "InviteRoomLoadFailed": "Soba nije mogla da se učita, pa trenutno nije moguće nikoga pozvati. Zatvorite panel i pokušajte ponovo.",
   "Invited": "Pozvan",
   "Inviter": "Osoba koja poziva",
   "InviteToRoomAddPlaceholder": "Dodajte ljude po imenu ili imejlu",

@@ -1325,6 +1325,7 @@
   "InviteAgain": "Convidar novamente",
   "InviteAsGuest": "convidar como convidado",
   "InviteContacts": "Convidar pessoas",
+  "InviteRoomLoadFailed": "Não foi possível carregar a sala, então ninguém pode ser convidado agora. Feche o painel e tente novamente.",
   "Invited": "Convidado",
   "Inviter": "Convidador",
   "InviteToRoomAddPlaceholder": "Adicionar pessoas por nome ou e-mail",

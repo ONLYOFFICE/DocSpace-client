@@ -1325,6 +1325,7 @@
   "InviteAgain": "دعوة مرة أخرى",
   "InviteAsGuest": "دعوة كضيف",
   "InviteContacts": "دعوة أشخاص",
+  "InviteRoomLoadFailed": "تعذّر تحميل الغرفة، لذا لا يمكن دعوة أي شخص الآن. أغلق اللوحة وحاول مرة أخرى.",
   "Invited": "مدعو",
   "Inviter": "الداعي",
   "InviteToRoomAddPlaceholder": "أضف الأشخاص حسب الاسم أو البريد الإلكتروني",

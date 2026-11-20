@@ -1325,6 +1325,7 @@
   "InviteAgain": "Invite again",
   "InviteAsGuest": "invite as guest",
   "InviteContacts": "Invite people",
+  "InviteRoomLoadFailed": "The room could not be loaded, so nobody can be invited now. Close the panel and try again.",
   "Invited": "Invited",
   "Inviter": "Inviter",
   "InviteToRoomAddPlaceholder": "Add people by name or email",

@@ -1325,6 +1325,7 @@
   "InviteAgain": "ເຊີນອີກຄັ້ງ",
   "InviteAsGuest": "ເຊີນເປັນແຂກ",
   "InviteContacts": "ເຊີນຜູ້ຄົນ",
+  "InviteRoomLoadFailed": "ບໍ່ສາມາດໂຫລດຫ້ອງໄດ້ ຈຶ່ງບໍ່ສາມາດເຊີນໃຜໄດ້ໃນຕອນນີ້. ປິດແຜງແລ້ວລອງໃໝ່ອີກຄັ້ງ.",
   "Invited": "ຖືກເຊີນ",
   "Inviter": "ຜູ້ເຊີນ",
   "InviteToRoomAddPlaceholder": "ເພີ່ມຄົນໂດຍຊື່ຫຼືອີເມລ໌",

@@ -1325,6 +1325,7 @@
   "InviteAgain": "Invită din nou",
   "InviteAsGuest": "invitare în calitate de invitat",
   "InviteContacts": "Invitați persoane",
+  "InviteRoomLoadFailed": "Sala nu a putut fi încărcată, așa că nimeni nu poate fi invitat acum. Închideți panoul și încercați din nou.",
   "Invited": "Invitat",
   "Inviter": "Persoană care invită",
   "InviteToRoomAddPlaceholder": "Adăugaţi persoane după nume sau după email",

@@ -1325,6 +1325,7 @@
   "InviteAgain": "再度招待する",
   "InviteAsGuest": "ゲストとして招待する",
   "InviteContacts": "人を招待する",
+  "InviteRoomLoadFailed": "ルームを読み込めなかったため、現在は誰も招待できません。パネルを閉じて、もう一度お試しください。",
   "Invited": "招待済み",
   "Inviter": "招待者",
   "InviteToRoomAddPlaceholder": "名前またはメールアドレスで招待する",

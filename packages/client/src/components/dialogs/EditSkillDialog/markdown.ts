@@ -155,7 +155,10 @@ export const getMarkdownEdit = (
 
   // A selection that ends with a line break ends on the line before it.
   const lineTo = to > from && text[to - 1] === "\n" ? to - 1 : to;
-  const start = text.lastIndexOf("\n", from - 1) + 1;
+  // At the very start there is no line break to look back for, and
+  // `lastIndexOf` reads a negative index as 0: a text that begins with a
+  // break would then start its first line after its end.
+  const start = from === 0 ? 0 : text.lastIndexOf("\n", from - 1) + 1;
   const nextBreak = text.indexOf("\n", lineTo);
   const end = nextBreak === -1 ? text.length : nextBreak;
   const lines = text.slice(start, end).split("\n");

@@ -58,6 +58,12 @@ describe("getMarkdownEdit", () => {
     expect(apply(text, 5, 5, "heading").result).toBe("one\n## two\nthree");
   });
 
+  it("marks an empty first line that a line break follows", () => {
+    expect(apply("\nfoo", 0, 0, "heading").result).toBe("## \nfoo");
+    expect(apply("\nfoo", 0, 0, "bulleted").result).toBe("- \nfoo");
+    expect(apply("\nfoo", 0, 0, "numbered").result).toBe("1. \nfoo");
+  });
+
   it("swaps one line mark for another and takes its own off", () => {
     expect(apply("- one\n- two", 0, 11, "numbered").result).toBe("1. one\n2. two");
     expect(apply("- one\n- two", 0, 11, "bulleted").result).toBe("one\ntwo");

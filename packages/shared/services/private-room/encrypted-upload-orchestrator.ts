@@ -55,7 +55,7 @@ import {
   forgetEncryptedFilename,
   rememberEncryptedFilename,
 } from "../encryption/filename-cache";
-import { wipeDek } from "../encryption/file-keys";
+import { decryptFileFromBlob, wipeDek } from "../encryption/file-keys";
 import { wrapDekForRecipients } from "../encryption/room-file-access";
 import { getEncryptionErrorMessage } from "../encryption/error-i18n";
 import { CryptoError } from "../encryption/errors";
@@ -74,7 +74,6 @@ import {
 import {
   assertEncryptedUploadName,
   EncryptedReimportError,
-  makeOpaqueUploadName,
   prepareEncryptedUpload,
   recoverDekForReimport,
   sniffDse3Upload,
@@ -723,10 +722,12 @@ async function wrapDekForSelfAndRoom(args: {
 }
 
 /** A file downloaded without decryption goes back under its original key. */
-async function prepareReimport(
+// Spec: private-rooms/file-operations, "Re-import of a file downloaded without decryption"
+export async function prepareReimport(
   file: File,
   header: DSE3Header,
   { roomId, userId, identity }: EncryptedFileUploadArgs,
+  encrypt: (clearFile: File) => Promise<PreparedUpload>,
 ): Promise<PreparedUpload> {
   const { dek, realName } = await recoverDekForReimport({
     file,
@@ -735,15 +736,22 @@ async function prepareReimport(
     userId,
     identity,
   });
-  return {
-    data: file,
-    encrypted: true,
-    dek,
-    uploadFileName: makeOpaqueUploadName(file.name),
-    originalFileType: file.type || "application/octet-stream",
-    originalFileSize: file.size,
-    originalFileName: realName,
-  };
+  let clear: Blob;
+  try {
+    ({ data: clear } = await decryptFileFromBlob(file, dek));
+  } catch (error) {
+    throw new EncryptedReimportError(
+      `re-imported container does not decrypt: ${(error as Error)?.message}`,
+    );
+  } finally {
+    wipeDek(dek);
+  }
+  return encrypt(
+    new File([clear], realName, {
+      type: file.type,
+      lastModified: file.lastModified,
+    }),
+  );
 }
 
 /**
@@ -781,18 +789,19 @@ export async function uploadEncryptedFile(
     // Signal the encryption phase so the upload-panel row can show a label.
     uploadStore?.setItemLabel?.(uploadId, "encrypting");
     try {
+      const encrypt = (clearFile: File) =>
+        prepareEncryptedUpload({
+          file: clearFile,
+          folderId: typeof folderId === "number" ? folderId : Number(folderId),
+          roomType: RoomsType.CustomRoom,
+          isPrivate: true,
+          onProgress: (fraction) =>
+            uploadStore?.reportEncryptionProgress?.(uploadId, fraction),
+        });
       const reimportHeader = await sniffDse3Upload(file);
       prepared = reimportHeader
-        ? await prepareReimport(file, reimportHeader, args)
-        : await prepareEncryptedUpload({
-            file,
-            folderId:
-              typeof folderId === "number" ? folderId : Number(folderId),
-            roomType: RoomsType.CustomRoom,
-            isPrivate: true,
-            onProgress: (fraction) =>
-              uploadStore?.reportEncryptionProgress?.(uploadId, fraction),
-          });
+        ? await prepareReimport(file, reimportHeader, args, encrypt)
+        : await encrypt(file);
     } finally {
       // Always clear the label whether encryption succeeded or failed.
       uploadStore?.setItemLabel?.(uploadId, undefined);

@@ -108,6 +108,10 @@ vi.mock("../../encryption/file-keys", () => ({
   ),
   wipeDek: vi.fn(),
   generateDEK: vi.fn(async () => new Uint8Array(AES_KEY_SIZE_BYTES)),
+  decryptFileFromBlob: vi.fn(async () => ({
+    data: new Blob(["clear bytes"]),
+    fileName: null,
+  })),
 }));
 
 vi.mock("../../encryption/room-file-access", () => ({
@@ -481,43 +485,69 @@ describe("orchestrateEncryptedUpload - batch rules", () => {
     expect(results).toMatchObject([{ ok: true, uploadId: "row-2" }]);
   });
 
-  it("Ciphertext re-uploaded: the file goes as it is, under its recovered key and name", async () => {
-    const { startUploadSession, uploadChunkSequential } = await import(
-      "../../../api/files"
-    );
-    const { encryptFile } = await import("../../encryption/file-keys");
-    const { wrapDekForRecipients } = await import(
-      "../../encryption/room-file-access"
-    );
-    const dek = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
+  const reimport = async () => {
+    const recovered = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
     vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
     vi.mocked(recoverDekForReimport).mockResolvedValueOnce({
-      dek,
+      dek: recovered,
       realName: "Report.docx",
       sourceFileId: 77,
     });
-    const downloaded = makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48);
-
     const { results } = await orchestrateEncryptedUpload({
-      files: [downloaded],
+      files: [makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48)],
       folderId: 1,
       roomId: 10,
       identity: makeIdentity() as never,
       ...KEYS,
     });
+    return { results, recovered };
+  };
+
+  it("Ciphertext re-uploaded", async () => {
+    const { encryptFile, decryptFileFromBlob, wipeDek } = await import(
+      "../../encryption/file-keys"
+    );
+
+    const { results, recovered } = await reimport();
 
     expect(results).toMatchObject([{ ok: true, originalName: "Report.docx" }]);
-    expect(encryptFile).not.toHaveBeenCalled();
-    const [, uploadName, size, , encrypted] =
-      vi.mocked(startUploadSession).mock.calls[0];
-    expect(uploadName).not.toBe(downloaded.name);
-    expect(uploadName).toMatch(/\.docx$/);
-    expect([size, encrypted]).toEqual([48, true]);
-    const form = vi.mocked(uploadChunkSequential).mock.calls[0][2] as FormData;
-    expect((form.get("file") as Blob).size).toBe(48);
-    expect(vi.mocked(wrapDekForRecipients).mock.calls[0][0]).toMatchObject({
-      dek,
-    });
+    expect(decryptFileFromBlob).toHaveBeenCalledWith(
+      expect.any(File),
+      recovered,
+    );
+    const [clear, options] = vi.mocked(encryptFile).mock.calls[0];
+    expect((clear as Blob).size).toBe("clear bytes".length);
+    expect(options?.fileName).toBe("Report.docx");
+    expect(wipeDek).toHaveBeenCalledWith(recovered);
+  });
+
+  it("Re-import gets a key of its own", async () => {
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+
+    const { recovered } = await reimport();
+
+    const { dek } = vi.mocked(wrapDekForRecipients).mock.calls[0][0];
+    expect(dek).not.toEqual(recovered);
+  });
+
+  it("Damaged container", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const { decryptFileFromBlob, wipeDek } = await import(
+      "../../encryption/file-keys"
+    );
+    vi.mocked(decryptFileFromBlob).mockRejectedValueOnce(
+      new Error("chunk 2 failed its authentication"),
+    );
+
+    const { results, recovered } = await reimport();
+
+    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptionReimportFailed",
+    );
+    expect(wipeDek).toHaveBeenCalledWith(recovered);
   });
 
   it("Ciphertext re-uploaded without a recoverable key: nothing is sent and the row names the re-import failure", async () => {

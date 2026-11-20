@@ -41,7 +41,10 @@ import * as filesApi from "@docspace/shared/api/files";
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import {
+  decryptFileFromBlob,
+  wipeDek,
+} from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
@@ -63,7 +66,7 @@ import type UploadDataStore from "../../UploadDataStore";
 
 vi.mock("@docspace/shared/services/encryption/file-keys", async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
-  return { ...actual, wipeDek: vi.fn() };
+  return { ...actual, wipeDek: vi.fn(), decryptFileFromBlob: vi.fn() };
 });
 
 vi.mock("@docspace/shared/services/encryption/secret-storage", async (orig) => {
@@ -763,7 +766,25 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
     return { ...harness, entry };
   };
 
-  it("uploads the DSE3 blob unchanged with the recovered DEK instead of re-encrypting", async () => {
+  const reencrypted = () => ({
+    data: new Blob([new Uint8Array(2100)]),
+    encrypted: true,
+    dek: makeDek(9),
+    uploadFileName: "0b5c72a8-0000-4000-8000-000000000000.docx",
+    originalFileType: "application/octet-stream",
+    originalFileSize: 2000,
+    originalFileName: "secret.docx",
+  });
+
+  beforeEach(() => {
+    vi.mocked(decryptFileFromBlob).mockResolvedValue({
+      data: new Blob([new Uint8Array(2000)]),
+      fileName: null,
+    });
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(reencrypted() as never);
+  });
+
+  it("Ciphertext re-uploaded: decrypted with the recovered key and encrypted again under the real name", async () => {
     const { store, entry } = setupReimportPendingFile();
     vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
     vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
@@ -781,7 +802,9 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
       expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
     );
 
-    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(vi.mocked(prepareEncryptedUpload).mock.calls[0][0].file.name).toBe(
+      "secret.docx",
+    );
     expect(vi.mocked(recoverDekForReimport).mock.calls).toEqual([
       [
         {
@@ -801,7 +824,7 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/,
     );
     expect(sessionArgs[1]).not.toBe(RAW_NAME);
-    expect(sessionArgs[2]).toBe(2048);
+    expect(sessionArgs[2]).toBe(2100);
     expect(sessionArgs[4]).toBe(true);
   });
 

@@ -25,21 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Page } from "@playwright/test";
-import { http } from "msw";
 
-import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import {
   capabilitiesHandler,
   filesSettingsHandler,
-  mockWorkspaceAppPlugin,
   selfActivationStatusHandler,
   settingsHandler,
   TypeSettings,
-  webPluginsListHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test, TEST_PORT } from "../fixtures/base";
+import { fakePlugins, openWithPlugins } from "../helpers/plugins";
 
 const PROFILE_URL = "/profile/login";
 
@@ -86,42 +83,8 @@ export default {
 };
 `;
 
-const fakePluginManifest = (plugin: TFakeTabPlugin): TAPIPlugin => ({
-  ...mockWorkspaceAppPlugin,
-  name: plugin.name,
-  version: "1.0.0",
-  description: `${plugin.name} description`,
-  pluginName: plugin.name.replace(/-/g, ""),
-  scopes: "ProfileTab",
-  image: "icon.svg",
-  url: `/plugins/${plugin.name}/plugin.js`,
-  settings: "",
-});
-
-const fakePluginHandlers = (plugins: TFakeTabPlugin[]) => [
-  webPluginsListHandler(TEST_PORT, plugins.map(fakePluginManifest)),
-  ...plugins.map((plugin) =>
-    http.get(
-      `*/plugins/${plugin.name}/plugin.js`,
-      () =>
-        new Response(fakePluginSource(plugin), {
-          headers: { "Content-Type": "application/javascript; charset=utf-8" },
-        }),
-    ),
-  ),
-];
-
-const openWithPlugins = async (
-  page: Page,
-  url: string,
-  plugins: TFakeTabPlugin[],
-) => {
-  const loaded = plugins.map(({ name }) =>
-    page.waitForResponse(`**/plugins/${name}/plugin.js`),
-  );
-  await page.goto(url);
-  await Promise.all(loaded);
-};
+const fakePluginHandlers = (plugins: TFakeTabPlugin[]) =>
+  fakePlugins(plugins, "ProfileTab", fakePluginSource);
 
 const card = (page: Page) => page.getByTestId("main-profile");
 const tab = (page: Page, name: string) => page.getByRole("tab", { name });

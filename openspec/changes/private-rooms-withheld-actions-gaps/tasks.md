@@ -34,7 +34,7 @@ and SDK unit tests must stay green. Before each commit run `pnpm exec tsc
 ## 6. Gate
 
 - [x] 6.0 Carry the text of "Download decrypts on the client" from the archive of `private-rooms-download-entry-names` (`openspec/changes/archive/2026-11-19-private-rooms-download-entry-names`) into this change's MODIFIED block. Verify: the requirement and its scenarios "Single file download" and "Download from the media viewer" name "Saved names are plain file names" as the main spec does. Done 2026-11-20 in the plan update after the review: the three passages are back, and the other five MODIFIED requirements were checked against the main specs with no other text missing
-- [ ] 6.1 Run the private-room specs and `encrypted-file-ui.spec.ts` of the client under Docker (`cd packages/client && pnpm test:e2e:docker:start`), the SDK private suite on a build made with `pnpm run test:build`, the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: green runs recorded in design.md
+- [x] 6.1 Run the private-room specs and `encrypted-file-ui.spec.ts` of the client under Docker (`cd packages/client && pnpm test:e2e:docker:start`), the SDK private suite on a build made with `pnpm run test:build`, the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `nx run-many -t tsc lint test` over the six packages) and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: green runs recorded in design.md
 
 ## Workflow follow-up
 

@@ -248,3 +248,23 @@ and the open folder is inside a private room.
 - Changing the copy's thrown error type may change the text of a test that
   asserted the old message. → Task 3.1 runs the shared copy tests and the
   client and SDK copy suites.
+
+## Gate runs
+
+2026-11-20, task 6.1, on `release/v4.1.0` at 84886783b94:
+
+- Client E2E under Docker (`tests-dev`), the private-room specs and
+  `encrypted-file-ui.spec.ts`: 177 passed, 5 failed. The five are the
+  block "Private room — people without a key are marked" of
+  `private-room-invite.spec.ts` (two screenshots, the badge contrast in
+  both themes, the badge position). The same five fail on 07af1e6bf6b,
+  the commit before this change, so they are not caused by it; nothing
+  this change touches renders that badge.
+- SDK private E2E (`__tests__/e2e/private`) on a fresh `pnpm run
+  test:build`: 47 passed, 11 skipped. The build exits 1 on the Next.js
+  vulnerability check after all pages are generated, a known state while
+  another developer raises the Next.js version.
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` exit 0;
+  `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks,
+  no cache).
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 26 of 26.

@@ -340,6 +340,14 @@ in `TFrameConfig`, documented for Manager mode as the host's opt-in to the
 private rooms beta, which the client reads already. Nothing for
 `/sdk/private`. Task 1.3 records when it was handed over.
 
+Handed over on 2026-11-20 to the owner of `docspace-sdk-js`, as a written
+note: the field with its description (the client frame of Manager mode and
+the SDK's own pages read it; the client frame reads it once, when it
+loads), the strings `"true"` and `"1"` the apps also accept but the type
+does not declare, the stand run above, nothing for `/sdk/private` in this
+version, and a changelog line in the next minor version, which 4.1.0 does
+not wait for since 2.2.0 passes the property already.
+
 ## Stand checks
 
 2026-11-20, task 1.2, on a local stand (`release/v4.1.0` at `d40ff7e85b6`,

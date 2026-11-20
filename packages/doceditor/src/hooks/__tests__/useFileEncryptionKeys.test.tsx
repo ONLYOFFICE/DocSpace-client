@@ -40,6 +40,15 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { EDITOR_CONTRACT_VERSION } from "@docspace/shared/services/encryption/types";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
+import {
+  encryptFileNameRaw,
+  writeDSE3Header,
+} from "@docspace/shared/services/encryption/streaming-encryption";
+import {
+  getCachedEncryptedFilename,
+  rememberEncryptedFilename,
+} from "@docspace/shared/services/encryption/filename-cache";
+import { DSE3_FILE_NONCE_SIZE } from "@docspace/shared/services/encryption/types";
 
 import type { IInitialConfig } from "@/types";
 
@@ -334,6 +343,89 @@ describe("useFileEncryptionKeys", () => {
     expect(ready?.encryptionKeys).toEqual({
       dek: arrayBufferToBase64(DEK),
       contractVersion: EDITOR_CONTRACT_VERSION,
+    });
+  });
+
+  describe("Name recovered from the file header", () => {
+    const VIEW_URL = "https://portal.example.com/files/7/view";
+
+    const withViewUrl = () =>
+      ({
+        ...config([{ userId: USER_ID }]),
+        file: { id: FILE_ID, encrypted: true, viewUrl: VIEW_URL },
+      }) as unknown as IInitialConfig;
+
+    const headerWithName = async (name: string) => {
+      const nonce = crypto.getRandomValues(new Uint8Array(DSE3_FILE_NONCE_SIZE));
+      const encryptedName = await encryptFileNameRaw(name, DEK, nonce);
+      return writeDSE3Header(1, nonce, encryptedName);
+    };
+
+    afterEach(() => {
+      sessionStorage.clear();
+      vi.unstubAllGlobals();
+      vi.restoreAllMocks();
+    });
+
+    it("Name recovered", async () => {
+      const header = await headerWithName("Budget 2027.xlsx");
+      const fetchMock = vi.fn(async () => new Response(header as BodyInit));
+      vi.stubGlobal("fetch", fetchMock);
+      render(withViewUrl());
+
+      expect((await settled())?.status).toBe("ready");
+      await vi.waitFor(() =>
+        expect(getCachedEncryptedFilename(FILE_ID)).toBe("Budget 2027.xlsx"),
+      );
+      expect(fetchMock).toHaveBeenCalledWith(VIEW_URL, {
+        headers: { Range: "bytes=0-4095" },
+      });
+    });
+
+    it("Range request fails: the server refuses it", async () => {
+      const consoleError = vi.spyOn(console, "error");
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(async () => new Response(null, { status: 403 })),
+      );
+      render(withViewUrl());
+
+      expect((await settled())?.status).toBe("ready");
+      expect(getCachedEncryptedFilename(FILE_ID)).toBeNull();
+      expect(consoleError).not.toHaveBeenCalled();
+    });
+
+    it("Range request fails: the request throws", async () => {
+      const consoleError = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+      const failure = new TypeError("network down");
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(async () => {
+          throw failure;
+        }),
+      );
+      render(withViewUrl());
+
+      expect((await settled())?.status).toBe("ready");
+      expect(getCachedEncryptedFilename(FILE_ID)).toBeNull();
+      await vi.waitFor(() =>
+        expect(consoleError).toHaveBeenCalledWith(
+          "[ENCRYPTION] filename recovery failed:",
+          failure,
+        ),
+      );
+    });
+
+    it("makes no request for a name already cached", async () => {
+      rememberEncryptedFilename(FILE_ID, "Known.docx");
+      const fetchMock = vi.fn();
+      vi.stubGlobal("fetch", fetchMock);
+      render(withViewUrl());
+
+      expect((await settled())?.status).toBe("ready");
+      expect(fetchMock).not.toHaveBeenCalled();
     });
   });
 });

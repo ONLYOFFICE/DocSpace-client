@@ -256,6 +256,32 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     expect(backfill).toHaveBeenCalledWith(ROOM.id, {});
   });
 
+  it("Frame configuration arrives after the address", async () => {
+    openAddress("/rooms/shared/5/filter", "?folder=5");
+    const store = sectionStore();
+    Object.assign(store.settingsStore, { isFrame: true });
+    const frame = { optedIn: false };
+    store.appsStore = {
+      get isPrivateRoomsSectionAvailable() {
+        return frame.optedIn;
+      },
+      isInstalled: () => true,
+      waitForFrameOptIn: async () => {
+        frame.optedIn = true;
+      },
+    };
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      roomContents(true) as never,
+    );
+
+    await store.fetchFiles(5);
+
+    expect(navigate).toHaveBeenCalledWith(
+      "/private/5/filter?folder=5",
+      expect.objectContaining({ replace: true }),
+    );
+  });
+
   it("shows the room once its address was decided", async () => {
     openAddress("/private/5/filter", "?folder=5", {
       privateRoomsSectionDecided: true,

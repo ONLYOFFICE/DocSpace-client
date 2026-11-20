@@ -121,6 +121,8 @@ async function checkSectionAddress(
   isSuperseded: boolean;
 }> {
   const { appsStore } = self;
+  // Spec: private-rooms/sidebar-section, "Section addresses are decided before the folder is shown"
+  await appsStore?.waitForFrameOptIn?.();
   const decision = {
     pathname: address.pathname,
     search: address.search,

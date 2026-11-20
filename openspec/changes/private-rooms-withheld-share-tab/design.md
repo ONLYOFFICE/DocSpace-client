@@ -15,11 +15,14 @@ The function already receives `isPrivacyFolder`
 one on its navigation path) and uses it to withhold plugin tabs
 ("AI and plugin actions withheld").
 
-What the server reports for such a folder, read in `../server`:
+What the server reports for such a folder, read in `../server` through
+CodeGraph at `4db0ede147`:
 
 - `products/ASC.Files/Core/Core/Security/FileSecurity.cs` (around line 2055):
   for an entry whose room has `SettingsPrivate` and that is not the room
-  itself, `EditAccess`, `Copy` and `CopyTo` are refused.
+  itself, `EditAccess`, `Copy` and `CopyTo` are refused. `folder` there is
+  the entry itself (lines 1247-1249), so the check applies to the folder
+  inside the room, not to its parent.
 - `products/ASC.Files/Core/Utils/FileSharing.cs` (around line 696,
   `FileSharingHelper.CanSetAccessAsync`): false unless the user can edit
   access to the entry.
@@ -28,6 +31,11 @@ What the server reports for such a folder, read in `../server`:
   for a private custom room, and is sent as `CanShare`.
 - `products/ASC.Files/Core/ApiModels/ResponseDto/FolderDto.cs:596`: only the
   room carries `Private`; a folder inside it has no mark of its room.
+- `products/ASC.Files/Core/Utils/FileSharing.cs:107-113`
+  (`FileSharing.SetAceObjectAsync`): a link with any access other than none
+  is refused for a private room and for an entry located in one
+  (`DocSpaceHelper.LocatedInPrivateRoomAsync`); revoking an existing link
+  stays possible.
 
 So the server sends `canShare: false` for such a folder today; the client
 change keeps the requirement when that input changes.
@@ -63,3 +71,16 @@ No stashed design document is behind this decision.
   after navigating out] -> `isPrivacyFolder` follows the open folder, so a
   private folder kept selected after leaving the room is judged by the
   server's `canShare` alone, which is false (Context above).
+- [`private-rooms-external-links` modifies the same requirement] -> by the
+  owner's decision of 2026-11-16 it shows Share to the owner and the room
+  managers while the portal allows external links of private rooms. By the
+  owner's decision of 2026-11-20 this change goes first: once it is
+  archived, that change rebases its `room-membership` delta on the
+  requirement as this change leaves it (the scenario "Folder inside a
+  private room selected" gives way to its scenarios for the members who
+  manage links), and its client task lifts the `isPrivacyFolder` condition
+  under its own conditions. The note is recorded under its task 3.2.
+
+## Gate runs
+
+None yet.

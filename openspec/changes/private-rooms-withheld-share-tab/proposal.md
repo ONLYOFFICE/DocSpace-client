@@ -47,6 +47,10 @@ None.
 - `packages/client/src/helpers/info-panel/tabs.ts`
   (`getAvailableInfoPanelTabs`) and its test
   `packages/client/src/helpers/info-panel/__tests__/tabs.test.ts`.
-- Coordination: `private-rooms-test-coverage-gaps` covers the encrypted
-  file scenario of the same requirement and leaves the folder case to this
-  change.
+- Coordination: `private-rooms-test-coverage-gaps` (archived 2026-11-20)
+  covered the encrypted file scenario of the same requirement and left the
+  folder case to this change. `private-rooms-external-links` modifies the
+  same requirement to show Share to the members who manage a private
+  room's links; it rebases its delta on the requirement after this change
+  is archived and lifts the new condition under its own conditions
+  (design.md, Risks).

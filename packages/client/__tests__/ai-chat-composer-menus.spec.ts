@@ -503,6 +503,12 @@ test.describe("AI chat composer: the default agent", () => {
 
     const knowledge = slashSection(page, "knowledge");
     await expect(
+      knowledge.getByTestId("composer-skills-menu-knowledge-title"),
+    ).toHaveText(/knowledge bases/i);
+    await expect(
+      knowledge.getByTestId("composer-skills-menu-knowledge-hint"),
+    ).toBeVisible();
+    await expect(
       knowledge.getByTestId("composer-skills-menu-knowledge-item"),
     ).toHaveText([COMPANY_POLICIES.name]);
     await expect(
@@ -510,6 +516,12 @@ test.describe("AI chat composer: the default agent", () => {
     ).toHaveText("Manage knowledge bases...");
 
     const dataSources = slashSection(page, "data-sources");
+    await expect(
+      dataSources.getByTestId("composer-skills-menu-data-sources-title"),
+    ).toHaveText(/data sources/i);
+    await expect(
+      dataSources.getByTestId("composer-skills-menu-data-sources-hint"),
+    ).toBeVisible();
     await expect(
       dataSources.getByTestId("composer-skills-menu-data-sources-item"),
     ).toHaveText([CONTRACTS_2026.name]);
@@ -765,6 +777,12 @@ test.describe("AI chat composer: the default agent", () => {
 
     await openDefaultChat(page, baseUrl);
     const list = await openPlusList(page, "knowledge");
+    await expect(
+      list.getByTestId("attachment-menu-knowledge-title"),
+    ).toHaveText(/knowledge bases/i);
+    await expect(
+      list.getByTestId("attachment-menu-knowledge-hint"),
+    ).toBeVisible();
     const rows = list.getByTestId("attachment-menu-knowledge-item");
     await expect(rows.filter({ hasText: COMPANY_POLICIES.name })).toHaveCount(1);
 
@@ -829,6 +847,12 @@ test.describe("AI chat composer: the default agent", () => {
 
     await openDefaultChat(page, baseUrl);
     const list = await openPlusList(page, "data-sources");
+    await expect(
+      list.getByTestId("attachment-menu-data-sources-title"),
+    ).toHaveText(/data sources/i);
+    await expect(
+      list.getByTestId("attachment-menu-data-sources-hint"),
+    ).toBeVisible();
     // The Manage sources... row under them shares the rows' test id.
     const rows = list
       .getByTestId("attachment-menu-data-sources-item")

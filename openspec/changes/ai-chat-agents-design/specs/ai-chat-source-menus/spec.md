@@ -45,11 +45,11 @@ A click on a skill in the Skill sets list or in the slash menu SHALL add its cal
 - **THEN** its call leaves the draft and the tick goes
 
 ### Requirement: Slash menu
-Typing "/" at the start of the draft or after a space SHALL open a menu above the composer. Its "Skill sets" caption and hint SHALL stay on top, and under them one scrolling body SHALL list the skill list with "Manage skill sets...", then a Knowledge bases section with the connected bases and "Manage knowledge bases...", then a Data sources section with the connected folders and rooms and "Manage sources...".
+Typing "/" at the start of the draft or after a space SHALL open a menu above the composer. Its "Skill sets" caption and hint SHALL stay on top, and under them one scrolling body SHALL list the skill list with "Manage skill sets...", then a Knowledge bases section with the connected bases and "Manage knowledge bases...", then a Data sources section with the connected folders and rooms and "Manage sources...". Each of the two sections SHALL be headed as the skill list is: its caption, then a line saying what the assistant does with those sources - that it looks for answers in the knowledge bases, and that it works with the files of the folders and rooms.
 
 #### Scenario: Open the menu
 - **WHEN** a user with two skill sets, one knowledge base and one folder connected types "/"
-- **THEN** the menu lists the two sets with their skills, then the knowledge base, then the folder, each section ending with its "Manage ..." row
+- **THEN** the menu lists the two sets with their skills, then the knowledge base, then the folder, each section under its caption and hint and ending with its "Manage ..." row
 
 ### Requirement: Filtering the slash menu
 What is typed after the slash SHALL narrow the skills by name or description, with every set unfolded, and the knowledge bases and data sources by name. While something is typed the "Manage knowledge bases..." and "Manage sources..." rows SHALL be hidden, and a section left with no rows SHALL be left out.
@@ -95,7 +95,7 @@ Each skill set in the Skill sets list and in the slash menu SHALL end with a bin
 - **THEN** one "/summary" call leaves the draft and the other stays
 
 ### Requirement: Knowledge bases list
-The Knowledge bases entry SHALL list the connected knowledge bases, one row each. In a chat on the default agent each row SHALL offer a "Remove <name>" control that disconnects the base and keeps the list open.
+The Knowledge bases entry SHALL open a list headed by a "Knowledge bases" caption and a line saying that the assistant looks for answers in the connected bases, then the connected knowledge bases, one row each. In a chat on the default agent each row SHALL offer a "Remove <name>" control that disconnects the base and keeps the list open.
 
 #### Scenario: Remove a base
 - **WHEN** the user uses the remove control of "Company policies" in "+" > Knowledge bases
@@ -109,7 +109,7 @@ While vectorization is off on the portal, neither menu SHALL offer a way to conn
 - **THEN** both menus show that base with its remove control and no "Manage knowledge bases..." row
 
 ### Requirement: Data sources list
-The Data sources entry SHALL list the folders and rooms the user connected as the chat's context, one flat row each, with no further level. A row SHALL carry the room icon for a room and the folder icon for a folder, and a "Remove <name>" control that disconnects it and keeps the list open.
+The Data sources entry SHALL open a list headed by a "Data sources" caption and a line saying that the assistant works with the files of the connected folders and rooms, then the folders and rooms the user connected as the chat's context, one flat row each, with no further level. A row SHALL carry the room icon for a room and the folder icon for a folder, and a "Remove <name>" control that disconnects it and keeps the list open.
 
 #### Scenario: A room and a folder
 - **WHEN** the user connected the room "Design for Marketing" and the folder "Contracts 2026"

@@ -506,6 +506,17 @@ export async function createFile(
   return res;
 }
 
+export async function getFormGalleryAvailable() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: "/files/formGallery/available",
+  };
+
+  const res = (await request(options)) as boolean;
+
+  return res;
+}
+
 // export function createTextFile(
 //   folderId: number,
 //   title: string,

@@ -14,6 +14,15 @@ vi.mock("@docspace/shared/api/oforms", async (io) => ({
   ...api,
 }));
 
+const filesApi = vi.hoisted(() => ({
+  getFormGalleryAvailable: vi.fn(),
+}));
+
+vi.mock("@docspace/shared/api/files", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  ...filesApi,
+}));
+
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { error: vi.fn(), warning: vi.fn() },
 }));
@@ -119,6 +128,41 @@ beforeEach(() => {
   api.getOforms.mockResolvedValue(list([]));
   api.getOformPurposes.mockResolvedValue(purposes);
   api.getOformLocales.mockResolvedValue(["en", "de", "fr"]);
+  filesApi.getFormGalleryAvailable.mockResolvedValue(true);
+});
+
+describe("OformsStore gallery availability", () => {
+  it("shows the gallery as unavailable without asking the CMS when the server cannot reach it", async () => {
+    filesApi.getFormGalleryAvailable.mockResolvedValue(false);
+    const store = createStore();
+
+    await store.initTemplateGallery();
+
+    expect(store.oformsLoadError).toBe(true);
+    expect(api.getOformLocales).not.toHaveBeenCalled();
+    expect(api.getOforms).not.toHaveBeenCalled();
+    expect(api.getOformPurposes).not.toHaveBeenCalled();
+  });
+
+  it("loads the gallery when the server reaches it", async () => {
+    const store = createStore();
+
+    await store.initTemplateGallery();
+
+    expect(store.oformsLoadError).toBe(false);
+    expect(api.getOforms).toHaveBeenCalledTimes(1);
+  });
+
+  it("loads the gallery as before when the check itself fails", async () => {
+    // A server without the check answers 404
+    filesApi.getFormGalleryAvailable.mockRejectedValue(new Error("404"));
+    const store = createStore();
+
+    await store.initTemplateGallery();
+
+    expect(store.oformsLoadError).toBe(false);
+    expect(api.getOforms).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("OformsStore.oformsApiRoot", () => {

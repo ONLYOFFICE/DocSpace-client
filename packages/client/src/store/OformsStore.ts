@@ -43,6 +43,7 @@ import {
   getOformPurposes,
   OformsContractError,
 } from "@docspace/shared/api/oforms";
+import { getFormGalleryAvailable } from "@docspace/shared/api/files";
 
 import { convertToLanguage } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -573,6 +574,15 @@ class OformsStore {
   };
 
   initTemplateGallery = async () => {
+    // The server downloads the picked form, so a gallery it cannot reach is
+    // shown as unavailable before the CMS is asked; a server without the
+    // check (404) or a failed call leaves the gallery as it was.
+    const available = await getFormGalleryAvailable().catch(() => true);
+    if (!available) {
+      this.oformsLoadError = true;
+      return;
+    }
+
     await this.fetchOformLocales();
 
     const firstLoadFilter = this.isFormsOnlyGallery

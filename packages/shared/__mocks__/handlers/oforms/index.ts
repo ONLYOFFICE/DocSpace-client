@@ -35,7 +35,7 @@
 
 import { http } from "msw";
 
-import { BASE_URL } from "../../e2e/utils";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 const CMS_PATH = "oforms-cms/api";
 
@@ -201,6 +201,10 @@ const templatesResponse = (params: URLSearchParams) => {
 const json = (body: unknown) => new Response(JSON.stringify(body));
 
 export const oformsHandlers = (port: string) => [
+  // The portal server checks the gallery before the client asks the CMS
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/formGallery/available`, () =>
+    json({ response: true }),
+  ),
   http.get(cmsUrl(port, "i18n/locales"), () =>
     json([{ code: "en" }, { code: "de" }]),
   ),

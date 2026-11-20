@@ -35,7 +35,10 @@
 
 import { headers } from "next/headers";
 
-import { getFilesSettings, getFolderPath } from "@/api/files";
+import { ValidationStatus } from "@docspace/shared/enums";
+
+import { getFilesSettings, getFolderInfo, getFolderPath } from "@/api/files";
+import { validatePublicRoomKey } from "@/api/rooms";
 import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
 import {
   MEDIA_VIEWER_LINK_ERROR_HEADER,
@@ -53,6 +56,20 @@ import {
   isPortalFolderId,
   isUnauthorizedError,
 } from "./_utils";
+
+const isLinkToPrivateRoom = async (key: string) => {
+  const { response: link } = await validatePublicRoomKey(key);
+
+  if (link.status !== ValidationStatus.Ok) {
+    throw new Error("The link is not valid");
+  }
+
+  if (!link.isRoom) return false;
+
+  const room = await getFolderInfo(link.id);
+
+  return room.private;
+};
 
 export default async function Page({
   searchParams,
@@ -85,23 +102,31 @@ export default async function Page({
 
   // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
   if (isPortalFolderId(folderId)) {
-    let privateAddress: string | null;
+    let isPrivate: boolean;
 
     try {
-      privateAddress = await getPrivateRoomAddress(
+      isPrivate = !!(await getPrivateRoomAddress(
         { id: folderId },
         {},
         getFolderPath,
-      );
+      ));
     } catch (error) {
       if (!key || !isUnauthorizedError(error)) {
         return <MediaViewerError event={getFolderErrorEvent(error)} />;
       }
 
-      privateAddress = null;
+      const linkToPrivateRoom = await isLinkToPrivateRoom(key).catch(
+        () => null,
+      );
+
+      if (linkToPrivateRoom === null) {
+        return <MediaViewerError event="onNoAccess" />;
+      }
+
+      isPrivate = linkToPrivateRoom;
     }
 
-    if (privateAddress) return <PrivateTargetNotAvailable />;
+    if (isPrivate) return <PrivateTargetNotAvailable />;
   }
 
   const filesSettings = await getFilesSettings().catch(() => undefined);

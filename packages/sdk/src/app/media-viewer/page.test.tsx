@@ -1,15 +1,23 @@
 import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
 
+import { ValidationStatus } from "@docspace/shared/enums";
+
 const requestHeaders = new Headers();
 
 vi.mock("next/headers", () => ({
   headers: async () => requestHeaders,
 }));
 
+const getFolderInfo = vi.hoisted(() => vi.fn());
+const validatePublicRoomKey = vi.hoisted(() => vi.fn());
+
 vi.mock("@/api/files", () => ({
   getFilesSettings: vi.fn(),
+  getFolderInfo,
   getFolderPath: vi.fn(),
 }));
+
+vi.mock("@/api/rooms", () => ({ validatePublicRoomKey }));
 
 vi.mock("@/utils/private-room-address", () => ({
   getPrivateRoomAddress: vi.fn(),
@@ -51,6 +59,8 @@ describe("media-viewer page", () => {
     requestHeaders.delete(MEDIA_VIEWER_LINK_ERROR_HEADER);
     (getFilesSettings as Mock).mockReset().mockResolvedValue(filesSettings);
     vi.mocked(getPrivateRoomAddress).mockReset().mockResolvedValue(null);
+    getFolderInfo.mockReset();
+    validatePublicRoomKey.mockReset();
   });
 
   test("renders the gallery with the folder, the link key and the start file", async () => {
@@ -149,17 +159,72 @@ describe("media-viewer page", () => {
     expect(element.props.event).toBe("onNoAccess");
   });
 
-  test("opens a link to a public room for a guest who cannot read the folder path", async () => {
-    vi.mocked(getPrivateRoomAddress).mockRejectedValue({
-      response: { status: 401 },
+  describe("a visitor without an account", () => {
+    const link = (isRoom: boolean, status = ValidationStatus.Ok) => ({
+      response: { id: "17", isRoom, status },
     });
 
-    const element = await render();
+    beforeEach(() => {
+      vi.mocked(getPrivateRoomAddress).mockRejectedValue({
+        response: { status: 401 },
+      });
+    });
 
-    expect(element.type).toBe(MediaViewerClient);
+    test("Visitor of a public room link", async () => {
+      validatePublicRoomKey.mockResolvedValue(link(true));
+      getFolderInfo.mockResolvedValue({ id: 17, private: false });
+
+      const element = await render();
+
+      expect(element.type).toBe(MediaViewerClient);
+      expect(validatePublicRoomKey).toHaveBeenCalledWith("tok");
+      expect(getFolderInfo).toHaveBeenCalledWith("17");
+    });
+
+    test("Visitor of a link that opens a private room", async () => {
+      validatePublicRoomKey.mockResolvedValue(link(true));
+      getFolderInfo.mockResolvedValue({ id: 17, private: true });
+
+      const element = await render();
+
+      expect(element.type).toBe(PrivateTargetNotAvailable);
+      expect(getFilesSettings).not.toHaveBeenCalled();
+    });
+
+    test("opens the gallery for a link to a folder inside a room", async () => {
+      validatePublicRoomKey.mockResolvedValue(link(false));
+
+      const element = await render();
+
+      expect(element.type).toBe(MediaViewerClient);
+      expect(getFolderInfo).not.toHaveBeenCalled();
+    });
+
+    test("Room of a valid link cannot be read", async () => {
+      validatePublicRoomKey.mockResolvedValue(link(true));
+      getFolderInfo.mockRejectedValue(new Error("Unauthorized"));
+
+      const element = await render();
+
+      expect(element.type).toBe(MediaViewerError);
+      expect(element.props.event).toBe("onNoAccess");
+      expect(getFilesSettings).not.toHaveBeenCalled();
+    });
+
+    test("reports onNoAccess for a link that does not validate", async () => {
+      validatePublicRoomKey.mockResolvedValue(
+        link(true, ValidationStatus.ExternalAccessDenied),
+      );
+
+      const element = await render();
+
+      expect(element.type).toBe(MediaViewerError);
+      expect(element.props.event).toBe("onNoAccess");
+      expect(getFolderInfo).not.toHaveBeenCalled();
+    });
   });
 
-  test("reports onNoAccess for a guest without a link key", async () => {
+  test("Visitor without a link", async () => {
     vi.mocked(getPrivateRoomAddress).mockRejectedValue({
       response: { status: 401 },
     });
@@ -171,6 +236,7 @@ describe("media-viewer page", () => {
     expect(element.type).toBe(MediaViewerError);
     expect(element.props.event).toBe("onNoAccess");
     expect(getFilesSettings).not.toHaveBeenCalled();
+    expect(validatePublicRoomKey).not.toHaveBeenCalled();
   });
 
   test("does not look for a private room behind an alias or a third-party folder", async () => {

@@ -291,7 +291,13 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   }
 
   if (tabState.kind === "missing") {
-    return <Navigate to={`${profilePath}/login`} replace />;
+    return (
+      <Navigate
+        to={`${profilePath}/login`}
+        state={{ fromUrl: location?.state?.fromUrl }}
+        replace
+      />
+    );
   }
 
   return (

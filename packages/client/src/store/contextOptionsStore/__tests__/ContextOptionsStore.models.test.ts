@@ -79,6 +79,21 @@ describe("ContextOptionsStore.getFolderModel — characterization", () => {
       "upload-files",
     ]);
   });
+
+  it("No keys", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { security: { Create: true } },
+      treeFoldersStore: { isPrivacyFolder: true },
+      uploadDataStore: { shouldEncryptCurrentUpload: () => false },
+    });
+    const model = store.getFolderModel(t) as { key: string }[];
+
+    expect(model.map((option) => option.key)).toEqual([
+      "new-folder",
+      "separator",
+      "upload-files",
+    ]);
+  });
 });
 
 describe("ContextOptionsStore.getFolderModel — Knowledge room", () => {

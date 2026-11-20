@@ -18,7 +18,7 @@
     "dotenv": "^17.4.1",
     "fastify": "^5.12.6",
     "fs-extra": "^11.3.4",
-    "glob": "^13.0.6",
+    "glob": "^14.0.6",
     "ollama": "^0.6.3",
     "socket.io": "^4.8.3"
   },
@@ -27,6 +27,7 @@
   },
   "overrides": {
     "fast-uri": "^3.1.9",
+    "minimatch": "^11.0.9",
     "ws": "^8.21.0",
     "brace-expansion": "^5.0.12",
     "find-my-way": "^9.7.0",

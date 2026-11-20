@@ -42,6 +42,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import i18n from "../../i18n";
 import {
+  getUploadComparisonName,
   listDecryptedFileNames,
   resolveNameClashes,
 } from "@docspace/shared/services/private-room/encrypted-name-clash";
@@ -242,6 +243,8 @@ export type TPrivateRename = {
   title: string;
   /** The name the new file takes. */
   name: string;
+  /** A re-imported container, whose own name must stay for its recovery. */
+  recovered: boolean;
 };
 
 /**
@@ -294,13 +297,36 @@ async function findPrivateNameClashes(
       );
       continue;
     }
-    const clashes = resolveNameClashes(
-      folderItems.map((item) => ({ item, name: item.file.name })),
-      existingNames,
+    const named: { item: TUploadFile; name: string }[] = [];
+    const recovered = new Set<string>();
+    for (const item of folderItems) {
+      try {
+        const compared = await getUploadComparisonName(
+          item.file,
+          roomId,
+          String(userId),
+          identity,
+        );
+        named.push({ item, name: compared.name });
+        if (compared.recovered) recovered.add(item.uniqueId);
+      } catch {
+        failQueuedItems(
+          self,
+          [item],
+          i18n.t("Common:EncryptionReimportFailed"),
+        );
+      }
+    }
+    resolveNameClashes(named, existingNames).forEach(
+      ({ item, name, renamed }) => {
+        renames.push({
+          uniqueId: item.uniqueId,
+          title: name,
+          name: renamed,
+          recovered: recovered.has(item.uniqueId),
+        });
+      },
     );
-    clashes.forEach(({ item, name, renamed }) => {
-      renames.push({ uniqueId: item.uniqueId, title: name, name: renamed });
-    });
   }
   return renames;
 }
@@ -357,10 +383,14 @@ export function keepBothPrivateNamesImpl(
     ...(uploadData.uploadedFilesHistory ?? []),
   ];
 
-  renames.forEach(({ uniqueId, name }) => {
+  renames.forEach(({ uniqueId, name, recovered }) => {
     items
       .filter((item) => item.uniqueId === uniqueId)
       .forEach((item) => {
+        if (recovered) {
+          item.keepBothName = name;
+          return;
+        }
         const { file } = item;
         item.file = Object.assign(
           new File([file], name, {

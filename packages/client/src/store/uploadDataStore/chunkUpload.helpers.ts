@@ -1024,6 +1024,7 @@ async function uploadEncryptedItem(
         signal: controller.signal,
         memberKeyRefusals: self.memberKeyRefusals,
         serializeFanOut: self.queueMemberFanOut,
+        name: item.keepBothName,
         uploadStore: {
           files: [],
           reportEncryptionProgress: (_uploadId, fraction) =>

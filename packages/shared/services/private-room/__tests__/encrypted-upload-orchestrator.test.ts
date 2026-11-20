@@ -599,7 +599,12 @@ describe("orchestrateEncryptedUpload - batch rules", () => {
     });
 
     expect(onNameClash).toHaveBeenCalledWith([
-      { uploadId: "row-1", file: expect.any(File), renamed: "Report (2).docx" },
+      {
+        uploadId: "row-1",
+        file: expect.any(File),
+        name: "Report.docx",
+        renamed: "Report (2).docx",
+      },
     ]);
     expect(sessionsAtPrompt).toBe(0);
     expect(
@@ -642,6 +647,79 @@ describe("orchestrateEncryptedUpload - batch rules", () => {
       "row-1",
     );
     expect(vi.mocked(startUploadSession).mock.calls.map(([folderId]) => folderId)).toEqual([2]);
+    expect(results[1].ok).toBe(true);
+  });
+
+  it("Re-imported container in the folder of its source", async () => {
+    const { encryptFile, wipeDek } = await import("../../encryption/file-keys");
+    const CONTAINER = "5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx";
+    const forComparison = new Uint8Array(AES_KEY_SIZE_BYTES).fill(3);
+    const forUpload = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
+    vi.mocked(listDecryptedFileNames).mockResolvedValueOnce(["Report.docx"]);
+    vi.mocked(sniffDse3Upload)
+      .mockResolvedValueOnce({} as never)
+      .mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport)
+      .mockResolvedValueOnce({ dek: forComparison, realName: "Report.docx", sourceFileId: 77 })
+      .mockResolvedValueOnce({ dek: forUpload, realName: "Report.docx", sourceFileId: 77 });
+    const onNameClash = vi.fn(async () => true);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile(CONTAINER, 48)],
+      uploadIds: ["row-1"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash,
+    });
+
+    expect(onNameClash).toHaveBeenCalledWith([
+      expect.objectContaining({ name: "Report.docx", renamed: "Report (1).docx" }),
+    ]);
+    expect(wipeDek).toHaveBeenCalledWith(forComparison);
+    // The recovery of the upload still reads the source uuid from the file name.
+    expect(vi.mocked(recoverDekForReimport).mock.calls[1][0].file.name).toBe(
+      CONTAINER,
+    );
+    expect(vi.mocked(encryptFile).mock.calls[0][1]?.fileName).toBe(
+      "Report (1).docx",
+    );
+    expect(results).toMatchObject([{ ok: true, originalName: "Report (1).docx" }]);
+  });
+
+  it("Name of a re-imported container cannot be recovered", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport).mockRejectedValueOnce(new Error("403"));
+    const onFileError = vi.fn();
+    const onNameClash = vi.fn(async () => true);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [
+        makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48),
+        makeFile("notes.txt", 16),
+      ],
+      uploadIds: ["row-1", "row-2"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash,
+      onFileError,
+    });
+
+    expect(onNameClash).not.toHaveBeenCalled();
+    expect(startUploadSession).toHaveBeenCalledTimes(1);
+    expect(results[0].ok).toBe(false);
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptionReimportFailed",
+    );
+    expect(onFileError).toHaveBeenCalledWith(
+      expect.any(File),
+      results[0].error,
+      "row-1",
+    );
     expect(results[1].ok).toBe(true);
   });
 

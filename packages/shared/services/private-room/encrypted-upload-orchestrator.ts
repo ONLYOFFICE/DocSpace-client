@@ -81,6 +81,7 @@ import {
   type UploadRefusalReason,
 } from "./encrypted-upload";
 import {
+  getUploadComparisonName,
   listDecryptedFileNames,
   resolveNameClashes,
   type TNameClash,
@@ -162,12 +163,17 @@ export interface EncryptedFileUploadArgs {
    * queues the fan-outs, so a changed member key is asked about once.
    */
   serializeFanOut?: <T>(fanOut: () => Promise<T>) => Promise<T>;
+  /**
+   * The name the file is stored under instead of its own ("keep both" of a
+   * name clash). A container keeps its own name, which the key recovery reads.
+   */
+  name?: string;
 }
 
 export interface OrchestrateEncryptedUploadArgs
   extends Omit<
     EncryptedFileUploadArgs,
-    "identity" | "userId" | "publicKeyId" | "publicKey"
+    "identity" | "userId" | "publicKeyId" | "publicKey" | "name"
   > {
   files: File[];
   /** The upload-panel ids of `files`, in order; generated when left out. */
@@ -211,6 +217,8 @@ export type EncryptedUploadRetryItem = {
 export type EncryptedUploadNameClash = {
   uploadId: string;
   file: File;
+  /** The name compared: for a re-imported container, the recovered one. */
+  name: string;
   renamed: string;
 };
 
@@ -726,7 +734,7 @@ async function wrapDekForSelfAndRoom(args: {
 export async function prepareReimport(
   file: File,
   header: DSE3Header,
-  { roomId, userId, identity }: EncryptedFileUploadArgs,
+  { roomId, userId, identity, name }: EncryptedFileUploadArgs,
   encrypt: (clearFile: File) => Promise<PreparedUpload>,
 ): Promise<PreparedUpload> {
   const { dek, realName } = await recoverDekForReimport({
@@ -747,7 +755,7 @@ export async function prepareReimport(
     wipeDek(dek);
   }
   return encrypt(
-    new File([clear], realName, {
+    new File([clear], name ?? realName, {
       type: file.type,
       lastModified: file.lastModified,
     }),
@@ -777,6 +785,7 @@ export async function uploadEncryptedFile(
     memberKeyRefusals,
     uploadThreads = 1,
     serializeFanOut,
+    name,
   } = args;
 
   let prepared: PreparedUpload | null = null;
@@ -801,7 +810,14 @@ export async function uploadEncryptedFile(
       const reimportHeader = await sniffDse3Upload(file);
       prepared = reimportHeader
         ? await prepareReimport(file, reimportHeader, args, encrypt)
-        : await encrypt(file);
+        : await encrypt(
+            name
+              ? new File([file], name, {
+                  type: file.type,
+                  lastModified: file.lastModified,
+                })
+              : file,
+          );
     } finally {
       // Always clear the label whether encryption succeeded or failed.
       uploadStore?.setItemLabel?.(uploadId, undefined);
@@ -987,10 +1003,10 @@ async function checkUploadNameClashes(
   onNameClash: (clashes: EncryptedUploadNameClash[]) => Promise<boolean>,
 ): Promise<{
   renames: Map<string, string>;
-  unchecked: Map<string, EncryptedNameCheckError>;
+  unchecked: Map<string, Error>;
 } | null> {
   const byFolder = new Map<string, EncryptedUploadRetryItem[]>();
-  const unchecked = new Map<string, EncryptedNameCheckError>();
+  const unchecked = new Map<string, Error>();
   for (const entry of entries) {
     const key = String(entry.folderId);
     byFolder.set(key, [...(byFolder.get(key) ?? []), entry]);
@@ -1013,19 +1029,34 @@ async function checkUploadNameClashes(
       for (const entry of folderEntries) unchecked.set(entry.uploadId, failure);
       continue;
     }
-    clashes.push(
-      ...resolveNameClashes(
-        folderEntries.map((entry) => ({ item: entry, name: entry.file.name })),
-        existingNames,
-      ),
-    );
+    const named: { item: EncryptedUploadRetryItem; name: string }[] = [];
+    for (const entry of folderEntries) {
+      try {
+        const { name } = await getUploadComparisonName(
+          entry.file,
+          roomId,
+          userId,
+          identity,
+        );
+        named.push({ item: entry, name });
+      } catch (error) {
+        unchecked.set(
+          entry.uploadId,
+          error instanceof EncryptedReimportError
+            ? error
+            : new EncryptedReimportError((error as Error)?.message),
+        );
+      }
+    }
+    clashes.push(...resolveNameClashes(named, existingNames));
   }
 
   if (clashes.length === 0) return { renames: new Map(), unchecked };
   const keepBoth = await onNameClash(
-    clashes.map(({ item, renamed }) => ({
+    clashes.map(({ item, name, renamed }) => ({
       uploadId: item.uploadId,
       file: item.file,
+      name,
       renamed,
     })),
   );
@@ -1078,7 +1109,10 @@ async function runEncryptedUploadBatch(
         gate.identity,
         options.onNameClash,
       )
-    : { renames: new Map<string, string>(), unchecked: new Map() };
+    : {
+        renames: new Map<string, string>(),
+        unchecked: new Map<string, Error>(),
+      };
   if (!nameCheck) {
     return {
       results: entries.map(({ file, uploadId }) => ({
@@ -1144,15 +1178,15 @@ async function runEncryptedUploadBatch(
       continue;
     }
 
-    const renamed = nameCheck.renames.get(uploadId);
     const result = await uploadEncryptedFile(
-      renamed
-        ? new File([file], renamed, {
-            type: file.type,
-            lastModified: file.lastModified,
-          })
-        : file,
-      { ...fileArgs, folderId, roomId, signal },
+      file,
+      {
+        ...fileArgs,
+        folderId,
+        roomId,
+        signal,
+        name: nameCheck.renames.get(uploadId),
+      },
       uploadId,
     );
     results.push(result);

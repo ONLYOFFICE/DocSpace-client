@@ -58,7 +58,7 @@ type TBatchOptions = {
     result: { uploadId: string; file?: { id: number; folderId: number } },
   ) => void;
   onNameClash: (
-    clashes: { uploadId: string; file: File; renamed: string }[],
+    clashes: { uploadId: string; file: File; name: string; renamed: string }[],
   ) => Promise<boolean>;
 };
 
@@ -434,7 +434,12 @@ describe("useEncryptedUpload", () => {
       env.orchestrate.mockImplementation(async (options: TBatchOptions) => {
         const [uploadId] = options.uploadIds;
         const keepBoth = await options.onNameClash([
-          { uploadId, file: options.files[0], renamed: "Report (1).docx" },
+          {
+            uploadId,
+            file: options.files[0],
+            name: "Report.docx",
+            renamed: "Report (1).docx",
+          },
         ]);
         if (keepBoth) {
           options.onFileComplete(options.files[0], { uploadId });
@@ -455,7 +460,8 @@ describe("useEncryptedUpload", () => {
       let ok: boolean | undefined;
       const done = act(async () => {
         ({ ok } = await uploadFiles({
-          files: [new File(["x"], "Report.docx")],
+          // A container downloaded without decryption; the clash is on its recovered name.
+          files: [new File(["x"], "5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx")],
           folderId: 5,
           roomId: 10,
         }));

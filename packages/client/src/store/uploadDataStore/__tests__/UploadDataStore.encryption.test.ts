@@ -784,6 +784,33 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
     vi.mocked(prepareEncryptedUpload).mockResolvedValue(reencrypted() as never);
   });
 
+  it("Re-imported container kept beside its source: stored under the suffixed name", async () => {
+    const { store, entry } = setupReimportPendingFile();
+    store.files[0].keepBothName = "secret (1).docx";
+    vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
+    vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
+    vi.mocked(recoverDekForReimport).mockResolvedValue({
+      dek: makeDek(),
+      realName: "secret.docx",
+      sourceFileId: 42,
+    } as never);
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+
+    store.startSessionFunc(0, t);
+    await vi.waitFor(() =>
+      expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
+    );
+
+    expect(vi.mocked(prepareEncryptedUpload).mock.calls[0][0].file.name).toBe(
+      "secret (1).docx",
+    );
+    expect(vi.mocked(recoverDekForReimport).mock.calls[0][0].file.name).toBe(
+      entry.file.name,
+    );
+  });
+
   it("Ciphertext re-uploaded: decrypted with the recovered key and encrypted again under the real name", async () => {
     const { store, entry } = setupReimportPendingFile();
     vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);

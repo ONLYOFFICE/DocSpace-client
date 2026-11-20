@@ -216,8 +216,8 @@ export const useEncryptedUpload = (): UseEncryptedUploadReturn => {
             );
             if (fileResult.file) filesListStore.addStoredFile(fileResult.file);
           },
-          onNameClash: (clashes: { file: File }[]) =>
-            privateDialogs.askNameClash(clashes.map(({ file }) => file.name)),
+          onNameClash: (clashes: { name: string }[]) =>
+            privateDialogs.askNameClash(clashes.map(({ name }) => name)),
         };
 
         const result: OrchestrateResult = isRetry

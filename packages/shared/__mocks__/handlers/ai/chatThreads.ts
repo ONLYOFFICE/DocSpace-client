@@ -235,8 +235,8 @@ export const aiChatToolCallPart = ({
 /**
  * The built-in `generate_image` call with its stored result. The engine
  * keeps the picture as an attachment and the result as `{ data: { ref } }`
- * (`persistGeneratedImage`); the reply draws it as a generated image card
- * (`generated-image-card`) once `ai/attachments/get` answers the ref - see
+ * (`persistGeneratedImage`); the reply draws the picture
+ * (`tool-call-generated-image`) once `ai/attachments/get` answers the ref - see
  * {@link aiChatAttachmentsGetHandler}.
  */
 export const aiChatGeneratedImagePart = ({

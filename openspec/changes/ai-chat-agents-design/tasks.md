@@ -129,6 +129,7 @@ Only the ticked tasks are done. Tasks name the repository they change: the clien
 - [x] 8.4 ui-kit: pass the agent's logo, turn the attachment placement on, add "Save to room…" (the folder selector, then a copy of the file) and the document card with "created by"; verify with ui-kit tests for the two actions and the card, then build and `pnpm pack` (ui-kit, 2026-11-17)
 - [x] 8.5 Client: pass the logo of the agent the chat runs on, add `Common:SaveToRoom` and `Common:CreatedByAgent`, run `translate-comments` and `translate-locales`, and update the packages as in 1.9; verify with `AiPresetsBridge.test.tsx` and the locale tests (client, 2026-11-18; translations under 10.0)
 - [x] 8.6 Client: hand the chat no logo, so a reply starts with none on an agent as on the default one - the option of 8.1 and 8.4 stays unused; verify with `AiPresetsBridge.test.tsx` (client, 2026-11-20). `ai-chat-messages.spec.ts` now expects no logo and is not yet run in Docker, which supersedes the logo part of 10.8
+- [x] 8.7 ai-chat, ui-kit, client: take out the attachments inside the user's message (8.2) and the card of a generated image (8.3, with its "Save to room…" of 8.4) - ai-chat `1.0.2-progress.60` reverts both, ui-kit drops the options, "Save to room…" stays on the card of a created document; verify with `UserMessage.test.tsx` and `ToolFallback.test.tsx` in ai-chat and the ai-agent tests of ui-kit (2026-11-20). `ai-chat-messages.spec.ts` is rewritten for it and not yet run in Docker, which supersedes those parts of 10.8
 
 ## 9. Access by role (`ai-agent-access`)
 

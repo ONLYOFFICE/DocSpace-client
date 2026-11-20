@@ -24,7 +24,7 @@ The designer's "DocSpace — AI Chat" boards redraw the AI section around agents
 - **Info panel.** An agent has the tabs Details and Context, and on its own page Content, the artifacts and attachments of the conversation on screen; Context lists its skill sets, which unfold to their skills, and its knowledge bases. Contacts and History are not shown for an agent.
 - **Composer menus.** The "+" menu's Skill sets entry opens the skill list; skill sets, knowledge bases and data sources are removed from their rows; each list has its own "Manage …" row; the slash menu lists the knowledge bases and data sources under the skills, to add and remove, and follows the agent's ownership of its sources.
 - **Reload.** A reload brings back the fullscreen chat and its conversation instead of the agents list under it.
-- **Messages.** No logo beside a reply, attachments inside the user's message, a card for a generated image (Download, "Save to room…") and a card for a generated document.
+- **Messages.** No logo beside a reply, attachments above the user's message, a generated image without a card and a card for a generated document.
 - **Access.** Every new entry point is offered by the rights the server returns for the agent, written out per portal user type and per agent role.
 
 ## Out of scope
@@ -73,7 +73,7 @@ Each item is a contract of `../server`; what has landed is read in its source an
 - `ai-knowledge-bases`: the Knowledge bases list and an opened knowledge base: their columns, the indexing state of a base and of a file, their Info panel, and Use in chat.
 - `ai-agent-info-panel`: the Details and Context tabs of an agent's Info panel.
 - `ai-chat-source-menus`: the composer's "+" lists of skill sets, knowledge bases and data sources, and the slash menu of skills, knowledge bases and data sources.
-- `ai-chat-messages`: replies without a logo, attachments inside the user's message, and cards for generated files.
+- `ai-chat-messages`: replies without a logo, attachments above the user's message, a generated image without a card, and the card of a created document.
 
 ### Modified Capabilities
 <!-- None: openspec/specs/ holds no AI capability yet. -->

@@ -68,24 +68,20 @@ import type {
   AiChatThreadMock,
   AiCopyRequest,
 } from "@docspace/shared/__mocks__/handlers";
-import { expectElementScreenshot } from "@docspace/shared/__mocks__/e2e";
 import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
  * The messages of a conversation (`ai-chat-messages`): no logo beside
- * a reply, on an agent or on the default one, the attachments inside the
- * user's own message, the card of an image a reply generated with Download
- * and "Save to room...", and the card of a document a reply created.
+ * a reply, on an agent or on the default one, the attachments above the
+ * user's own message, an image a reply generated drawn without a card, and
+ * the card of a document a reply created with its "Save to room...".
  *
  * Rounds and conversations come from the stateful threads mock
  * (`aiChatThreadsHandlers`), the stored pictures from `ai/attachments/get`
  * (`aiChatAttachmentsGetHandler`) and the copy into a room from the Files API
  * (`aiCopyToRoomHandlers`).
- *
- * ui-kit's Button override drops the library's test ids, so the buttons of
- * a generated image's card are found by their labels.
  */
 
 const ROOMS_URL = "/rooms/shared/";
@@ -310,7 +306,7 @@ test.describe("AI chat messages: no logo beside replies", () => {
   });
 });
 
-test.describe("AI chat messages: attachments inside the user's message", () => {
+test.describe("AI chat messages: attachments above the user's message", () => {
   const IMAGE = {
     ref: "cccccccc-0000-4000-8000-000000000011",
     title: "Whiteboard notes.jpg",
@@ -359,8 +355,8 @@ test.describe("AI chat messages: attachments inside the user's message", () => {
     await dismissModelUpdatedNotice(page, OWNER_ID);
   });
 
-  // Spec: ai-chat-messages, "Attachments inside the user's message"
-  test("Image: the message shows the text, then the image preview with its file name under it", async ({
+  // Spec: ai-chat-messages, "Attachments above the user's message"
+  test("Image: the picture stands above the bubble of the text", async ({
     page,
     baseUrl,
     mockRequest,
@@ -380,27 +376,26 @@ test.describe("AI chat messages: attachments inside the user's message", () => {
 
     const message = page.getByTestId("user-message-content");
     await expect(message).toContainText(text);
-    const attachments = message.getByTestId("user-message-attachments");
-    await expect(attachments).toHaveAttribute("data-placement", "inside");
-
-    const figure = attachments.getByTestId("user-message-image-attachment");
-    const preview = figure.locator("img");
-    const name = figure.getByTestId("user-message-image-name");
+    // The bubble holds the text alone.
+    await expect(message.getByTestId("user-message-attachments")).toHaveCount(
+      0,
+    );
+    const attachments = page
+      .getByTestId("user-message")
+      .getByTestId("user-message-attachments");
+    const preview = attachments.locator("img");
     await expect(preview).toHaveAttribute("src", PNG);
-    await expect(name).toHaveText(IMAGE.title);
 
-    // The text, then the preview, then the name under it.
-    const textBox = await message.getByText(text).boundingBox();
+    // The picture, then the bubble under it.
     const previewBox = await preview.boundingBox();
-    const nameBox = await name.boundingBox();
-    expect(previewBox!.y).toBeGreaterThan(textBox!.y);
-    expect(nameBox!.y).toBeGreaterThanOrEqual(
-      previewBox!.y + previewBox!.height,
+    const bubbleBox = await message.boundingBox();
+    expect(previewBox!.y + previewBox!.height).toBeLessThanOrEqual(
+      bubbleBox!.y,
     );
   });
 
-  // Spec: ai-chat-messages, "Attachments inside the user's message"
-  test("Document: the message shows the text, then a chip with the document icon and its name", async ({
+  // Spec: ai-chat-messages, "Attachments above the user's message"
+  test("Document: a chip with the document icon and its name stands above the bubble of the text", async ({
     page,
     baseUrl,
     mockRequest,
@@ -429,17 +424,19 @@ test.describe("AI chat messages: attachments inside the user's message", () => {
 
     const message = page.getByTestId("user-message-content");
     await expect(message).toContainText(text);
-    const attachments = message.getByTestId("user-message-attachments");
-    await expect(attachments).toHaveAttribute("data-placement", "inside");
-
-    const chip = attachments.getByTestId("file-item");
-    await expect(chip).toHaveAttribute("data-kind", "file");
+    // The bubble holds the text alone.
+    await expect(message.getByTestId("file-item")).toHaveCount(0);
+    const chip = page
+      .getByTestId("user-message")
+      .getByTestId("user-message-attachments")
+      .getByTestId("file-item");
     await expect(chip).toContainText(DOCUMENT.title);
     await expect(chip.locator("svg, img").first()).toBeVisible();
 
-    const textBox = await message.getByText(text).boundingBox();
+    // The chip, then the bubble under it.
     const chipBox = await chip.boundingBox();
-    expect(chipBox!.y).toBeGreaterThan(textBox!.y);
+    const bubbleBox = await message.boundingBox();
+    expect(chipBox!.y + chipBox!.height).toBeLessThanOrEqual(bubbleBox!.y);
   });
 });
 
@@ -448,9 +445,9 @@ test.describe("AI chat messages: a generated image", () => {
     await page.setViewportSize(DESKTOP);
   });
 
-  // Spec: ai-chat-messages, "Generated image card"; ai-chat-messages,
+  // Spec: ai-chat-messages, "Generated image without a card"; ai-chat-messages,
   // "Generated files are never shown as unsaved"
-  test("Chart: the card names the file as generated and offers Download and Save to room, with no Not saved mark", async ({
+  test("Chart: the picture is drawn in the reply as it is, with no card and no Not saved mark", async ({
     page,
     baseUrl,
     mockRequest,
@@ -470,34 +467,17 @@ test.describe("AI chat messages: a generated image", () => {
     await openDefaultChat(page, baseUrl);
     await send(page, "Draw the revenue by quarter as a chart");
 
-    const card = page.getByTestId("generated-image-card");
-    await expect(card).toBeVisible();
-    await expect(card.getByTestId("tool-call-generated-image")).toBeVisible();
-    const name = card.getByTestId("generated-image-name");
-    await expect(name).toContainText(CHART.title);
-    await expect(name).toContainText("generated");
-
-    const download = card.getByRole("button", { name: "Download" });
-    await expect(download).toBeEnabled();
+    const reply = page.getByTestId("assistant-message");
+    const image = reply.getByTestId("tool-call-generated-image");
+    await expect(image).toBeVisible();
+    await expect(image).toHaveAttribute("src", PNG);
+    // No card around the picture: no file name line and no buttons of its own.
+    await expect(page.getByTestId("generated-image-card")).toHaveCount(0);
     await expect(
-      card.getByRole("button", { name: "Save to room..." }),
-    ).toBeVisible();
-    // The file is a portal file from the start: nothing marks it as unsaved
-    // or asks for a save first.
-    await expect(card).not.toContainText(/not saved/i);
-
-    // Download works at once, under the card's file name.
-    const [file] = await Promise.all([
-      page.waitForEvent("download"),
-      download.click(),
-    ]);
-    expect(file.suggestedFilename()).toBe(CHART.title);
-
-    await expectElementScreenshot(card, [
-      "desktop",
-      "ai-chat-messages",
-      "generated-image-card.png",
-    ]);
+      reply.getByRole("button", { name: "Save to room..." }),
+    ).toHaveCount(0);
+    // Nothing marks the picture as unsaved or asks for a save first.
+    await expect(reply).not.toContainText(/not saved/i);
   });
 });
 
@@ -515,7 +495,7 @@ test.describe("AI chat messages: Save to room", () => {
       .first();
 
   /**
-   * A round on the agent that generates the chart, then "Save to room..." on
+   * A round on the agent that creates the proposal, then "Save to room..." on
    * its card: the folder selector, opened on the portal's roots.
    */
   const openSaveToRoom = async (
@@ -531,19 +511,18 @@ test.describe("AI chat messages: Save to room", () => {
     mockRequest.use(
       ...aiSectionsHandlers(TEST_PORT, [agent]),
       ...aiCopyToRoomHandlers(TEST_PORT, [MARKETING, BOARD], copies),
-      chartAttachments(),
       ...aiChatThreadsHandlers(TEST_PORT, {
-        reply: { content: chartReply(), title: "Revenue chart" },
+        reply: { content: proposalReply(), title: "Acme proposal" },
       }),
     );
     await dismissModelUpdatedNotice(page, OWNER_ID);
 
     await openAgentChat(page, baseUrl, agent.id);
-    await send(page, "Draw the revenue by quarter as a chart");
+    await send(page, "Write a proposal for Acme Corp");
 
-    const card = page.getByTestId("generated-image-card");
+    const card = page.getByTestId("created-document-card");
     await expect(card).toBeVisible();
-    await card.getByRole("button", { name: "Save to room..." }).click();
+    await card.getByTestId("created-document-save-to-room").click();
     await expect(picker(page)).toBeVisible();
     await pickerItem(page, "Rooms").click();
     return card;
@@ -554,7 +533,7 @@ test.describe("AI chat messages: Save to room", () => {
   });
 
   // Spec: ai-chat-messages, "Save to room"
-  test("Copy to a room: a copy of the image goes to the picked room and the card stays as it was", async ({
+  test("Copy to a room: a copy of the document goes to the picked room and the card stays as it was", async ({
     page,
     baseUrl,
     mockRequest,
@@ -569,7 +548,7 @@ test.describe("AI chat messages: Save to room", () => {
 
     await expect.poll(() => copies.length).toBe(1);
     expect(copies[0]).toMatchObject({
-      fileIds: [CHART.fileId],
+      fileIds: [PROPOSAL.id],
       folderIds: [],
       destFolderId: MARKETING.id,
       deleteAfter: false,
@@ -578,9 +557,7 @@ test.describe("AI chat messages: Save to room", () => {
     // The first copy stays where it is, and so does its card.
     await expect(picker(page)).toHaveCount(0);
     await expect(card).toBeVisible();
-    await expect(card.getByTestId("generated-image-name")).toContainText(
-      CHART.title,
-    );
+    await expect(card).toContainText(PROPOSAL.title);
   });
 
   // Spec: ai-chat-messages, "Save to room"

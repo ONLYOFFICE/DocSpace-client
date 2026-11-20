@@ -185,3 +185,20 @@ option; a guest without a key is already one of `withoutKeys`.
 - 2026-11-20, task 4.2, at `2d09f4abe35`: `pnpm exec vitest run src` in
   doceditor, 11 files and 144 tests passed; `pnpm exec tsc` in doceditor
   clean.
+- 2026-11-20, task 5.1, at `711c82b7222`:
+  - `pnpm exec tsc` in shared, client, sdk, doceditor, login and management
+    clean (also run after 1.6, which edits `packages/shared/__mocks__`);
+  - client E2E under Docker (`tests-dev`, image rebuilt after the last
+    ui-kit update), each touched spec on its own, then
+    `private-room-*.spec.ts`, `private-rooms-app-off.spec.ts`,
+    `private-rooms-section.spec.ts`, `keys-management*.spec.ts` and
+    `encrypted-file-ui.spec.ts` together: 232 passed;
+  - SDK private suite on a fresh `pnpm run test:build`: 52 passed, 7
+    skipped, the fixme cases of `private-security.spec.ts` down from seven
+    to five (the other two skipped are the fixme cases of
+    `private-rooms.spec.ts`);
+  - `npm --prefix ./common/tests run test:lefthook`: 8 files, 61 passed,
+    3 skipped;
+  - `pnpm nx run-many -t tsc lint test` over the six packages: green;
+  - full locale suite: 46 passed;
+  - `openspec validate --all --strict`: 24 passed.

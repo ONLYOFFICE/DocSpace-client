@@ -74,6 +74,7 @@ import {
   getPluginTabId,
   getProfileBasePath,
   getProfileTabId,
+  getProfileTabPath,
   resolveProfileTab,
 } from "./profileTabs";
 import styles from "./body.module.scss";
@@ -274,7 +275,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   );
 
   const onSelect = (e: TTabItem) => {
-    navigate(`${profilePath}/${e.id}`, {
+    navigate(`${profilePath}/${getProfileTabPath(e.id)}`, {
       state: { disableScrollToTop: true, fromUrl: location?.state?.fromUrl },
     });
 

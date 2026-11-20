@@ -39,6 +39,7 @@ import {
   getPluginTabId,
   getProfileBasePath,
   getProfileTabId,
+  getProfileTabPath,
   resolveProfileTab,
 } from "../profileTabs";
 
@@ -64,6 +65,23 @@ describe("getProfileTabId", () => {
       "p/кал",
     );
     expect(getProfileTabId("/profile/p/100%")).toBe("p/100%");
+  });
+});
+
+describe("getProfileTabPath", () => {
+  it("encodes a plugin tab's key, so the address reads back as the same tab", () => {
+    ["crm/sync", "a?b", "a#b", "100%", "calendar-sync"].forEach((key) => {
+      const tabId = getPluginTabId(key);
+
+      expect(getProfileTabId(`/profile/${getProfileTabPath(tabId)}`)).toBe(
+        tabId,
+      );
+    });
+    expect(getProfileTabPath(getPluginTabId("crm/sync"))).toBe("p/crm%2Fsync");
+  });
+
+  it("leaves a portal tab as it is", () => {
+    expect(getProfileTabPath("keys-management")).toBe("keys-management");
   });
 });
 

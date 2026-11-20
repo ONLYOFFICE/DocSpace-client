@@ -42,6 +42,11 @@ export type TProfileTabState =
 
 export const getPluginTabId = (key: string) => `${PLUGIN_TAB_PREFIX}${key}`;
 
+export const getProfileTabPath = (tabId: string) =>
+  tabId.startsWith(PLUGIN_TAB_PREFIX)
+    ? getPluginTabId(encodeURIComponent(tabId.slice(PLUGIN_TAB_PREFIX.length)))
+    : tabId;
+
 export const getProfileBasePath = (pathname: string) =>
   pathname.replace(/\/profile(\/.*)?$/, "/profile");
 

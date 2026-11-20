@@ -33,8 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import fs from "node:fs";
-import path from "node:path";
 import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import i18next from "i18next";
@@ -69,14 +67,11 @@ vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   };
 });
 
+import commonEn from "PUBLIC_DIR/locales/en/Common.json";
+
 import QuotaWarningDialog from ".";
 
-const common = JSON.parse(
-  fs.readFileSync(
-    path.resolve(import.meta.dirname, "../../../../../../../public/locales/en/Common.json"),
-    "utf8",
-  ),
-) as Record<string, string>;
+const common = commonEn as Record<string, string>;
 
 const MOVED_KEYS = [
   "LicenseExpiredRestriction",

@@ -1,6 +1,6 @@
 {
-  "pnpmVersion": "12.11.2",
-  "capturedAt": "2026-10-14",
+  "pnpmVersion": "12.21.0",
+  "capturedAt": "2026-11-20",
   "source": "https://json.schemastore.org/pnpm-workspace.json",
   "properties": {
     "addMissingPeerTypes": {
@@ -33,8 +33,14 @@
     "autoInstallPeers": {
       "description": "When true, any missing non-optional peer dependencies are automatically installed."
     },
+    "autoInstallPeersFromHighestMatch": {
+      "description": "When set to true, pnpm joins conflicting peer dependency ranges with || and installs the highest version that satisfies any of them. For example, if one dependency requires react@^16.0.0 and another requires react@^17.0.0, pnpm installs the highest react@17. Only semver ranges can be joined; conflicting paths, aliases, or tags leave the peer dependency missing, and identical non-semver specifiers are preserved."
+    },
     "blockExoticSubdeps": {
       "description": "When set to true, it prevents the resolution of exotic protocols (like git+ssh: or direct https: tarballs) in transitive dependencies. Only direct dependencies are allowed to use exotic sources."
+    },
+    "bootConfig": {
+      "description": "Sets the release-age and trust policy pnpm applies when installing config dependencies and the pnpm version pinned by the packageManager field, before the regular configuration is loaded. Added in pnpm v12.15.0."
     },
     "ca": {
       "description": "The Certificate Authority signing certificate that is trusted for SSL connections to the registry."
@@ -62,6 +68,9 @@
     },
     "cert": {
       "description": "A client certificate to pass when accessing the registry."
+    },
+    "changedFilesIgnorePattern": {
+      "description": "Glob patterns of changed files to ignore when filtering for the projects changed since a commit or branch."
     },
     "childConcurrency": {
       "description": "The maximum number of child processes to allocate simultaneously to build node_modules."
@@ -231,6 +240,9 @@
     "ignoreWorkspaceRootCheck": {
       "description": "Adding a new dependency to the root workspace package fails, unless the --ignore-workspace-root-check or -w flag is used."
     },
+    "include": {
+      "description": "Delegates settings to other YAML files and to config dependencies. Added in pnpm v12.15.0."
+    },
     "includeWorkspaceRoot": {
       "description": "When executing commands recursively in a workspace, execute them on the root workspace project as well."
     },
@@ -240,6 +252,9 @@
     "key": {
       "description": "A client key to pass when accessing the registry."
     },
+    "legacyDirFiltering": {
+      "description": "When true, `{<dir>}` filter selectors use the legacy behavior: the selector names a directory and matches every project in the subtree below it. By default `{<dir>}` is matched as a glob pattern, so `{packages/*}` selects the projects one level below packages/ and a `**` reaches deeper. Only applies to user-written selectors; the workspace-root selectors pnpm generates are always matched as globs."
+    },
     "linkWorkspacePackages": {
       "description": "If this is enabled, locally available packages are linked to node_modules instead of being downloaded from the registry."
     },
@@ -248,6 +263,9 @@
     },
     "lockfile": {
       "description": "When set to false, pnpm won't read or generate a pnpm-lock.yaml file."
+    },
+    "lockfileDir": {
+      "description": "The directory in which pnpm-lock.yaml is written, instead of the directory of pnpm-workspace.yaml. A lockfileDir that points at the default lockfile directory installs the same way as leaving it unset."
     },
     "lockfileIncludeTarballUrl": {
       "description": "Add the full URL to the package's tarball to every entry in pnpm-lock.yaml."
@@ -263,6 +281,9 @@
     },
     "maxsockets": {
       "description": "The maximum number of connections to use per origin (protocol/host/port combination)."
+    },
+    "maxTarballUnpackedSize": {
+      "description": "Caps the total number of bytes the files of one package may unpack to. Added in pnpm v12.15.0."
     },
     "mergeGitBranchLockfilesBranchPattern": {
       "description": "This configuration matches the current branch name to determine whether to merge all git branch lockfile files. "
@@ -301,16 +322,19 @@
       "description": "Configure custom Node.js download mirrors in `pnpm-workspace.yaml`. The keys are release channels (`release`, `rc`, `nightly`, `v8-canary`, etc.) and the values are base URLs."
     },
     "nodeExperimentalPackageMap": {
-      "description": "When true, pnpm injects the generated node_modules/.package-map.json into pnpm-managed Node.js script environments by adding Node's --experimental-package-map option to NODE_OPTIONS. see https://pnpm.io/settings/node-modules#nodeexperimentalpackagemap"
+      "description": "When true, pnpm injects the generated node_modules/.package-map.json into pnpm-managed Node.js script environments by adding Node's --experimental-package-map option to NODE_OPTIONS. see https://pnpm.io/settings/node-modules#nodeexperimentalpackagemap. Deprecated since pnpm v12.13.0: use nodePackageMap.mode instead. true is the same as mode: load and false the same as mode: off; nodePackageMap wins when both are set in the same place."
     },
     "nodeLinker": {
-      "description": "Defines what linker should be used for installing Node packages."
+      "description": "Defines what linker should be used for installing Node packages. loaded is an experimental linker that loads packages directly from the content-addressable store, without placing them in node_modules; it also accepts an object with type: loaded and an optional excluded list. Configuration sources replace the whole nodeLinker value: a higher-priority scalar, or an object without excluded, clears exclusions from lower-priority sources. The environment variable PNPM_CONFIG_NODE_LINKER and --config.node-linker accept the object as JSON."
     },
     "nodeOptions": {
       "description": "Options to pass through to Node.js via the NODE_OPTIONS environment variable."
     },
+    "nodePackageMap": {
+      "description": "Groups the package-map settings, which control node_modules/.package-map.json during isolated and hoisted installs. Replaces nodeExperimentalPackageMap and nodePackageMapType, which still work; nodePackageMap takes precedence when both are set in the same place. Added in pnpm v12.13.0."
+    },
     "nodePackageMapType": {
-      "description": "Controls how node_modules/.package-map.json is generated. standard - only declared dependencies are available through the package map. loose - also maps packages that are reachable through the installed node_modules layout, which can allow undeclared hoisted dependencies to resolve."
+      "description": "Controls how node_modules/.package-map.json is generated. standard - only declared dependencies are available through the package map. loose - also maps packages that are reachable through the installed node_modules layout, which can allow undeclared hoisted dependencies to resolve. Deprecated since pnpm v12.13.0: use nodePackageMap.type instead; nodePackageMap wins when both are set in the same place."
     },
     "nodeVersion": {
       "description": "The Node.js version to use when checking a package's engines setting."
@@ -381,6 +405,9 @@
     "pnpmfile": {
       "description": "The location of the local pnpmfile."
     },
+    "pnprServer": {
+      "description": "URL of a pnpr server for install acceleration. When set, pnpm install offloads dependency resolution to the remote server: pnpm sends its workspace manifests and registry configuration, the server resolves the dependency graph and returns the lockfile, while tarballs are downloaded directly from their registries. If the server refuses a setting the install uses, or cannot return the lockfile format pnpm reads, pnpm prints a warning and resolves locally. May also be set with the --config.pnprServer=<url> command-line option or the PNPM_CONFIG_PNPR_SERVER environment variable."
+    },
     "preferFrozenLockfile": {
       "description": "When set to true and the available pnpm-lock.yaml satisfies the package.json dependencies directive, a headless installation is performed."
     },
@@ -395,6 +422,9 @@
     },
     "progress": {
       "description": "Controls whether dependency and download progress lines are printed during installation. When set to false (or --no-progress is passed), progress output is suppressed. Warnings, lifecycle script output, and the dependency summary are still printed. Added in pnpm v12.6.0."
+    },
+    "projectScopedOptionalPeers": {
+      "description": "When true, a project gets a missing optional peer dependency only if the project's own dependencies already install a version of it. The workspace root's dependencies also count if resolvePeersFromWorkspaceRoot is true; a version that only another workspace project's dependencies install does not. dedupePeerDependents keeps deduplicating everything else, and this setting has no effect when dedupePeerDependents is false, because optional peers are already resolved only from the project's own dependencies then. Changing this setting changes the lockfile. Added in pnpm v12.19.0."
     },
     "provenance": {
       "description": "When publishing from a supported cloud CI/CD system, the package will be publicly linked to where it was built and published from."
@@ -483,6 +513,9 @@
     "storeDir": {
       "description": "The location where all the packages are saved on the disk."
     },
+    "storeIndexFormat": {
+      "description": "How the store records which files each package has. sqlite - one index.db database; SQLite's locking only works between processes on one machine, so this format is for a store on a local disk. files - one file per package in the store's index directory, for a store on a network filesystem that several machines use at once, such as a store shared by CI jobs; each entry is written to a temporary file and renamed into place, so concurrent jobs need no locks. The format belongs to the store: once the index directory exists, every pnpm process uses it whatever its own setting says, and the packages recorded in an existing index.db are not carried over when switching. pnpm v11 reads only index.db. Added in pnpm v12.13.0."
+    },
     "strictDepBuilds": {
       "description": "When strictDepBuilds is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts)."
     },
@@ -496,7 +529,7 @@
       "description": "Some registries allow the exact same content to be published under different package names and/or versions. "
     },
     "supportedArchitectures": {
-      "description": "Specifies architectures for which you'd like to install optional dependencies, even if they don't match the architecture of the system running the install."
+      "description": "Specifies architectures for which you'd like to install optional dependencies, even if they don't match the architecture of the system running the install. Either a mapping of os, cpu, and libc lists, or a list of exact platform tags to prepare."
     },
     "symlink": {
       "description": "When symlink is set to false, pnpm creates a virtual store directory without any symlinks. It is a useful setting together with nodeLinker=pnp."
@@ -509,6 +542,9 @@
     },
     "tasks": {
       "description": "Configure dependency relationships and per-task concurrency limits for recursive runs (`pnpm -r run <script>`). A task is a script in one workspace project; it becomes ready after every task it depends on completes successfully. A task with no entry under tasks defaults to depending on the same task in its workspace dependencies, but once a task has an entry, an omitted dependsOn is the same as `dependsOn: []`."
+    },
+    "testPattern": {
+      "description": "Glob patterns of test files. When the changed files of a project all match them, the \"changed since\" filter leaves out the projects that depend on it."
     },
     "trustLockfile": {
       "description": "A new trustLockfile setting controls whether pnpm install re-applies the `minimumReleaseAge` / `trustPolicy: 'no-downgrade'` checks to every entry in the loaded lockfile. When true, the install treats the lockfile as already-trusted and skips the verification pass — useful for closed-source projects where every commit comes from a trusted author. The default is false, so verification stays on by default."
@@ -568,7 +604,7 @@
       "description": "When set to true, pnpm populates the virtual store without creating importer symlinks, hoisting, bin links, or running lifecycle scripts. This is useful for pre-populating a store (e.g., in Nix builds) without creating unnecessary project-level artifacts. pnpm fetch uses this mode internally."
     },
     "virtualStoreType": {
-      "description": "Determines where the virtual store is located. When set to project, a separate virtual store is created in each project's node_modules/.pnpm. When set to global, a single store is shared by every project on the machine, with each project's node_modules holding only symlinks into it. Added in pnpm v11.23.0."
+      "description": "Determines where the virtual store is located. When set to project, a separate virtual store is created in each project's node_modules/.pnpm. When set to global, a single store is shared by every project on the machine, with each project's node_modules holding only symlinks into it. The value may also be an environment variable placeholder such as ${PNPM_VIRTUAL_STORE_TYPE:-global}. Added in pnpm v11.23.0."
     },
     "workspaceConcurrency": {
       "description": "Set the maximum number of tasks to run simultaneously. For unlimited concurrency use Infinity. You can set the value to <= 0 and it will use amount of CPU cores of the host minus the absolute value of the provided number as: max(1, (number of cores) - abs(workspaceConcurrency))."

@@ -165,7 +165,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
             options={radioOptions}
             selected={resolveType as unknown as string}
             data-test-id="conflict-resolve-options"
-            aria-label="Conflict resolution options"
+            aria-label={selectActionText}
           />
         </div>
       </ModalDialog.Body>

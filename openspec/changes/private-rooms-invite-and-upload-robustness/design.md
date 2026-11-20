@@ -333,3 +333,19 @@ Alternatives considered for 13:
 - A frame that never receives its configuration waits for it. → `AppsStore`
   settles the opt-in as false after `FRAME_CONFIG_TIMEOUT`, so the wait
   ends and the address is decided as for a frame without the opt-in.
+
+## Gate runs
+
+2026-11-20, task 10.2, on `release/v4.1.0` at 5875dc45b6b:
+
+- Client E2E under Docker (`tests-dev`, image rebuilt after the ui-kit
+  update db506ac7587): `private-room-*.spec.ts`,
+  `private-rooms-app-off.spec.ts` and `private-rooms-section.spec.ts`,
+  172 passed.
+- SDK private E2E (`__tests__/e2e/private`) on a fresh `pnpm run
+  test:build`: 47 passed, 11 skipped. The build exits 1 on the Next.js
+  vulnerability check after all pages are generated, the known state
+  recorded for the previous change.
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` exit 0;
+  `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks).
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 25 of 25.

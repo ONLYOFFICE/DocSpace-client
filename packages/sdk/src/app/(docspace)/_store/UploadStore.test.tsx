@@ -103,4 +103,30 @@ describe("UploadStore", () => {
     store.cancelBatch();
     expect(store.items[0].abortController.signal.aborted).toBe(true);
   });
+
+  it("Cancel all with two uploads running", () => {
+    store.startBatch([
+      { uniqueId: "row-2", fileName: "b.docx", fileSize: 20, folderId: 6 },
+    ]);
+    const signals = store.items.map((i) => i.abortController.signal);
+
+    store.cancelBatch();
+    store.dropPending();
+
+    expect(signals.map((signal) => signal.aborted)).toEqual([true, true]);
+    expect(store.items).toEqual([]);
+    expect(store.isUploading).toBe(false);
+  });
+
+  it("Retry after Cancel all", () => {
+    store.setItemError("row-1", "Common:EncryptionPrepareFailed");
+    store.cancelBatch();
+    store.dropPending();
+
+    store.resetItemForRetry("row-1");
+    expect(store.items[0].abortController.signal.aborted).toBe(false);
+
+    store.cancelBatch();
+    expect(store.items[0].abortController.signal.aborted).toBe(true);
+  });
 });

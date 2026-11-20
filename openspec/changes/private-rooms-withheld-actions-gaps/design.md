@@ -268,3 +268,10 @@ and the open folder is inside a private room.
   `nx run-many -t tsc lint test` over the six packages exit 0 (21 tasks,
   no cache).
 - `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 26 of 26.
+
+2026-11-20, after the review fixes (e8d18eeb340, 8d62bc1f05e), at
+8d62bc1f05e: the same runs again. Client E2E under Docker: 177 passed,
+the same five cases of "Private room — people without a key are marked"
+failed. SDK private E2E on a fresh build: 47 passed, 11 skipped. The
+lefthook checks and `nx run-many -t tsc lint test` over the six
+packages exit 0; `openspec validate --all --strict`: 26 of 26.

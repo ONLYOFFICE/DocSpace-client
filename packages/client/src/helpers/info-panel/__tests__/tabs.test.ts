@@ -70,6 +70,39 @@ describe("getAvailableInfoPanelTabs", () => {
     ]);
     expect(useRoomsView).toBe(true);
   });
+
+  it("Encrypted file selected", () => {
+    const selection = {
+      id: 1,
+      isFile: true,
+      fileExst: ".docx",
+      encrypted: true,
+      canShare: true,
+      rootFolderType: FolderType.Rooms,
+      security: {},
+    } as unknown as TFile;
+
+    const { tabs } = getAvailableInfoPanelTabs({
+      selection,
+      isTrash: false,
+      isRecentFolder: false,
+      isPrivacyFolder: false,
+      enablePlugins: false,
+      infoPanelItemsList: [],
+    });
+
+    expect(tabs).not.toContain(InfoPanelView.infoShare);
+    expect(
+      getAvailableInfoPanelTabs({
+        selection: { ...selection, encrypted: false } as TFile,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder: false,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs,
+    ).toContain(InfoPanelView.infoShare);
+  });
 });
 
 const TAB = "info_plugin-qr";

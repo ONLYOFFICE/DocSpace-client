@@ -47,6 +47,8 @@ import {
   KNOWLEDGE_BASE_REREAD_MS,
 } from "SRC_DIR/store/KnowledgeBasesStore";
 
+import { getUsedByText } from "SRC_DIR/helpers/usedByAgents";
+
 import FileNameCell from "./FileNameCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
@@ -171,7 +173,7 @@ const KnowledgeBasesRowDataComponent = (props) => {
             className={styles.styledText}
             truncate
           >
-            {item.linkedProjectsCount ?? 0}
+            {getUsedByText(t, item.linkedProjectsCount)}
           </Text>
           {lastColumn === "UsedByKnowledgeBases"
             ? quickButtonsComponentNode

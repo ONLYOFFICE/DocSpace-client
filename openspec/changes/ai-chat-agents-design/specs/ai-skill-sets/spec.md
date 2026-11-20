@@ -13,7 +13,7 @@ In the table view the Skill sets list SHALL show, in this order, Name, Skills (`
 
 #### Scenario: Skill sets in the table
 - **WHEN** a user opens Skill sets in the table view
-- **THEN** the columns read Name, Skills, Used by, Owner and Last modified, and "Document assistant" with three skills, used by two agents, shows 3 under Skills and 2 under Used by
+- **THEN** the columns read Name, Skills, Used by, Owner and Last modified, and "Document assistant" with three skills, used by two agents, shows 3 under Skills and "2 agents" under Used by
 
 #### Scenario: Sorted by owner
 - **WHEN** the user sorts the list by Owner
@@ -27,11 +27,15 @@ The Details tab of a skill set SHALL show its owner, its content as the number o
 - **THEN** the properties read "Skills: 3" and the panel lists the three skills with their commands, "/document-summary" among them
 
 ### Requirement: Used by of a skill set
-Used by SHALL be the number of agents that use the set, counting every such agent, readable by the user or not, and SHALL read 0 for a set no agent uses. The table column, the tile and the compact row of a set SHALL tell the same number under the same label. The number SHALL follow a change without a reload.
+Used by SHALL tell how many agents use the set, counting every such agent, readable by the user or not: "1 agent" (`Common:OneAgent`), "N agents" (`Common:AgentsNumber`), and a dash for a set no agent uses. The table column and the tile of a set SHALL tell it under the same label; the compact row SHALL tell it after the label and leave it out for a set no agent uses. It SHALL follow a change without a reload.
+
+#### Scenario: One agent, and none
+- **WHEN** a user opens Skill sets, where one agent uses "Legal tone" and none uses "Sales assistant"
+- **THEN** "Legal tone" reads "1 agent" under Used by and "Sales assistant" a dash
 
 #### Scenario: An agent links the set meanwhile
 - **WHEN** an agent links "Sales assistant", used by no agent, while the list is open
-- **THEN** its Used by number reads 1 without a reload
+- **THEN** its Used by reads "1 agent" without a reload
 
 ### Requirement: Agents that use a skill set
 The Details tab of a skill set SHALL list, under "Used by agents" (`Common:UsedByAgents`), the agents that use the set, each by its logo and its name, sorted by name, and only those the user may read. Agents past the first hundred SHALL be told by their number ("+N"). A set with no agent to list SHALL show no such list. The list SHALL be read again when the set's Used by number changes.
@@ -42,7 +46,7 @@ The Details tab of a skill set SHALL list, under "Used by agents" (`Common:UsedB
 
 #### Scenario: Agents the user may not read
 - **WHEN** a user selects a set used by two agents, neither of which the user is a member of
-- **THEN** its row reads 2 under Used by and its Details show no "Used by agents"
+- **THEN** its row reads "2 agents" under Used by and its Details show no "Used by agents"
 
 ### Requirement: Skills of an opened skill set
 In the table view of an opened skill set the columns SHALL be Name, the skill's name without the `.md` extension, Description (`Common:DescriptionLabel`), the description the skill gives in its file with the full text on hover, and Last modified. A skill with no description, or whose file cannot be read, SHALL show an empty Description.

@@ -39,7 +39,7 @@ describe("getAiRowInfo", () => {
       getAiRowInfo("skillSet", { t, item: { filesCount: 4, linkedProjectsCount: 2 }, ...dates }),
     ).toEqual([
       "Common:Skills: 4",
-      "Common:UsedBy: 2",
+      "Common:UsedBy: Common:AgentsNumber",
       "Me",
       "11/17/2026",
     ]);
@@ -47,8 +47,16 @@ describe("getAiRowInfo", () => {
 
   it("gives an agent its owner and last modification, and a knowledge base how many agents use it too", () => {
     expect(getAiRowInfo("agent", { t, item: {}, ...dates })).toEqual(["Me", "11/17/2026"]);
+    expect(
+      getAiRowInfo("knowledgeBase", { t, item: { linkedProjectsCount: 1 }, ...dates }),
+    ).toEqual(["Common:UsedBy: Common:OneAgent", "Me", "11/17/2026"]);
+    // A room no agent uses says nothing about it.
+    expect(getAiRowInfo("skillSet", { t, item: { filesCount: 1 }, ...dates })).toEqual([
+      "Common:Skills: 1",
+      "Me",
+      "11/17/2026",
+    ]);
     expect(getAiRowInfo("knowledgeBase", { t, item: {}, ...dates })).toEqual([
-      "Common:UsedBy: 0",
       "Me",
       "11/17/2026",
     ]);

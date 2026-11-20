@@ -54,7 +54,9 @@ describe("SkillSetsRowData", () => {
     renderSet();
     expect(screen.getByTestId("skill-sets-cell-name-0")).toHaveTextContent("Sales assistant");
     expect(screen.getByTestId("skill-sets-cell-skills-0")).toHaveTextContent("4");
-    expect(screen.getByTestId("skill-sets-cell-used-by-0")).toHaveTextContent("2");
+    expect(screen.getByTestId("skill-sets-cell-used-by-0")).toHaveTextContent(
+      "Common:AgentsNumber",
+    );
     expect(
       within(screen.getByTestId("skill-sets-cell-owner-0")).getByTestId("author"),
     ).toBeInTheDocument();
@@ -66,7 +68,8 @@ describe("SkillSetsRowData", () => {
   it("counts no skills for a set the list gives no count", () => {
     renderSet({ item: { ...skillSet, filesCount: undefined, linkedProjectsCount: undefined } });
     expect(screen.getByTestId("skill-sets-cell-skills-0")).toHaveTextContent("0");
-    expect(screen.getByTestId("skill-sets-cell-used-by-0")).toHaveTextContent("0");
+    // No agent uses it: a dash.
+    expect(screen.getByTestId("skill-sets-cell-used-by-0")).toHaveTextContent("—");
   });
 
   it("leaves out the columns that are switched off", () => {

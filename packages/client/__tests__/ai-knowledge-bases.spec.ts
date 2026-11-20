@@ -158,10 +158,10 @@ test.describe("AI Chat: Knowledge bases", () => {
       // Two agents use it; none uses "Company glossary".
       await expect(
         row(page, FAILED_BASE).getByTestId(/^knowledge-bases-cell-used-by-/),
-      ).toHaveText("2");
+      ).toHaveText("2 agents");
       await expect(
         row(page, INDEXED_BASE).getByTestId(/^knowledge-bases-cell-used-by-/),
-      ).toHaveText("0");
+      ).toHaveText("—");
     });
 
     // Spec: ai-knowledge-bases, "Indexing state of a knowledge base"

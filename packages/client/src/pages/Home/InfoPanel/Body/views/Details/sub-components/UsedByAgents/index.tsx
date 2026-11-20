@@ -119,7 +119,12 @@ export const UsedByAgents = ({ selection }: UsedByAgentsProps) => {
             className={styles.item}
             data-testid="used-by-agents-item"
           >
-            <ProjectLogo project={agent} />
+            <ProjectLogo
+              project={agent}
+              size="16px"
+              radius="4px"
+              className={styles.logo}
+            />
             <Text
               fontSize="13px"
               truncate

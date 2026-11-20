@@ -41,6 +41,8 @@ import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 
+import { getUsedByText } from "SRC_DIR/helpers/usedByAgents";
+
 import FileNameCell from "./FileNameCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
@@ -184,7 +186,7 @@ const SkillSetsRowDataComponent = (props) => {
             className={styles.styledText}
             truncate
           >
-            {item.linkedProjectsCount ?? 0}
+            {getUsedByText(t, item.linkedProjectsCount)}
           </Text>
           {lastColumn === "UsedBySkillSets" ? quickButtonsComponentNode : null}
         </TableCell>

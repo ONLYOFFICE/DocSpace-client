@@ -45,6 +45,7 @@ import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { RoomsType } from "@docspace/shared/enums";
 
+import { getUsedByText } from "SRC_DIR/helpers/usedByAgents";
 import { useStore } from "SRC_DIR/store/useStore";
 import KnowledgeBaseStatusBadge from "SRC_DIR/components/KnowledgeBaseStatusBadge";
 import { useKnowledgeBaseStatus } from "SRC_DIR/components/KnowledgeBaseStatusBadge/useKnowledgeBaseStatus";
@@ -156,7 +157,7 @@ const AiSourceRoomTile = ({
         </>
       ) : null}
       {label(t("Common:UsedBy"))}
-      {value("used-by", String(room.linkedProjectsCount ?? 0))}
+      {value("used-by", getUsedByText(t, room.linkedProjectsCount))}
       {label(t("Common:Owner"))}
       {owner ? (
         <Link

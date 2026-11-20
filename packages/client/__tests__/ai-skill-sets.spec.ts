@@ -216,10 +216,13 @@ test.describe("AI Chat: Skill sets", () => {
       // Two agents use it; none uses "Sales assistant".
       await expect(
         assistant.getByTestId(/^skill-sets-cell-used-by-/),
-      ).toHaveText("2");
+      ).toHaveText("2 agents");
+      await expect(
+        row(page, "Legal tone").getByTestId(/^skill-sets-cell-used-by-/),
+      ).toHaveText("1 agent");
       await expect(
         row(page, "Sales assistant").getByTestId(/^skill-sets-cell-used-by-/),
-      ).toHaveText("0");
+      ).toHaveText("—");
       await expect(
         assistant.getByTestId(/^skill-sets-cell-owner-/),
       ).toContainText("Me");

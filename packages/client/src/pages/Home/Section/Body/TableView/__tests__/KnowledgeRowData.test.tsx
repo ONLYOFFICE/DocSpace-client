@@ -70,7 +70,9 @@ describe("KnowledgeBasesRowData", () => {
     expect(screen.getByTestId("knowledge-bases-cell-name-0")).toHaveTextContent(
       "Company policies",
     );
-    expect(screen.getByTestId("knowledge-bases-cell-used-by-0")).toHaveTextContent("5");
+    expect(screen.getByTestId("knowledge-bases-cell-used-by-0")).toHaveTextContent(
+      "Common:AgentsNumber",
+    );
     expect(
       within(screen.getByTestId("knowledge-bases-cell-owner-0")).getByTestId("author"),
     ).toBeInTheDocument();

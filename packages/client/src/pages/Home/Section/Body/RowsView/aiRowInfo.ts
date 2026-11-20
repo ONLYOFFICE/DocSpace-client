@@ -37,6 +37,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
+import { getUsedByText } from "SRC_DIR/helpers/usedByAgents";
 
 /**
  * The rows of the AI section's lists and of the rooms opened from them, as
@@ -99,7 +100,8 @@ export const getAiRowKind = (
  * table's columns: an agent's owner and last modification; a skill set's
  * skills count, the number of agents that use it, owner and last
  * modification; a knowledge base's number of agents that use it, owner and
- * last modification (its indexing state is marked beside its name); a
+ * last modification (its indexing state is marked beside its name), the
+ * number left out of both when no agent uses the room; a
  * skill's description and last modification; a knowledge base file's size,
  * who added it and when. A value not known is left out.
  */
@@ -121,18 +123,21 @@ export const getAiRowInfo = (
     skillDescription?: string;
   },
 ): string[] => {
+  const usedBy = item.linkedProjectsCount
+    ? `${t("Common:UsedBy")}: ${getUsedByText(t, item.linkedProjectsCount)}`
+    : undefined;
   const values = (() => {
     switch (kind) {
       case "skillSet":
         return [
           `${t("Common:Skills")}: ${item.filesCount ?? 0}`,
-          `${t("Common:UsedBy")}: ${item.linkedProjectsCount ?? 0}`,
+          usedBy,
           fileOwner,
           updatedDate,
         ];
       case "knowledgeBase":
         return [
-          `${t("Common:UsedBy")}: ${item.linkedProjectsCount ?? 0}`,
+          usedBy,
           fileOwner,
           updatedDate,
         ];

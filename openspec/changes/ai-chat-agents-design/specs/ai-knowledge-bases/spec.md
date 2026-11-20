@@ -13,7 +13,7 @@ In the table view the Knowledge bases list SHALL show, in this order, Name, Used
 
 #### Scenario: Knowledge bases in the table
 - **WHEN** a user opens Knowledge bases in the table view
-- **THEN** the columns read Name, Used by, Owner and Last modified, with no Type, Tags or Storage column, and "Company policies", used by two agents, shows 2 under Used by
+- **THEN** the columns read Name, Used by, Owner and Last modified, with no Type, Tags or Storage column, and "Company policies", used by two agents, shows "2 agents" under Used by
 
 ### Requirement: Indexing state of a knowledge base
 In the table a knowledge base SHALL carry, after its name, "Indexing" (`Common:Indexing`) while any of its files is being indexed and none has failed, and "Error" (`Common:Error`) when any of its files failed, with a hint that some files could not be indexed and that opening the base shows which (`Common:KnowledgeBaseIndexingFailedInfo`). A base whose files are all indexed, or that holds none, SHALL carry no mark.
@@ -41,11 +41,11 @@ The Details tab of a knowledge base SHALL show its owner, its content as the num
 - **THEN** the properties read "Files: 48" and Status "Indexed"
 
 ### Requirement: Used by of a knowledge base
-Used by SHALL be the number of agents that use the base, told as a skill set's is (`ai-skill-sets`, "Used by of a skill set"): every such agent is counted, the table column, the tile and the compact row tell the same number, and it follows a change without a reload.
+Used by SHALL tell how many agents use the base as a skill set's Used by does (`ai-skill-sets`, "Used by of a skill set"): every such agent is counted, the wording and the dash are the same, and it follows a change without a reload.
 
 #### Scenario: Base used by two agents in the list
 - **WHEN** a user opens Knowledge bases, where two agents use "Company policies" and none uses "Company glossary"
-- **THEN** "Company policies" reads 2 under Used by and "Company glossary" reads 0
+- **THEN** "Company policies" reads "2 agents" under Used by and "Company glossary" a dash
 
 ### Requirement: Agents that use a knowledge base
 The Details tab of a knowledge base SHALL list, under "Used by agents" (`Common:UsedByAgents`), the agents that use the base, as the Details of a skill set list theirs (`ai-skill-sets`, "Agents that use a skill set"): by logo and name, sorted by name, only the agents the user may read, and no list when there is none to show.
@@ -56,7 +56,7 @@ The Details tab of a knowledge base SHALL list, under "Used by agents" (`Common:
 
 #### Scenario: Base no agent uses
 - **WHEN** a user selects "Company glossary", which no agent uses
-- **THEN** its row reads 0 under Used by and its Details show no "Used by agents"
+- **THEN** its row reads a dash under Used by and its Details show no "Used by agents"
 
 ### Requirement: Files of an opened knowledge base
 In the table view of an opened knowledge base the columns SHALL be Name, Size (`Common:Size`), Added by (`Common:AddedBy`), the user who added the file, and Added (`Common:Added`), the date it was added. Name SHALL always be shown and the other columns MAY be hidden. Every column SHALL sort the files.

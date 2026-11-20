@@ -78,7 +78,7 @@ describe("AiSourceRoomTile", () => {
     expect(screen.getByText("Common:Skills")).toBeInTheDocument();
     expect(value("skills")).toBe("3");
     expect(screen.getByText("Common:UsedBy")).toBeInTheDocument();
-    expect(value("used-by")).toBe("2");
+    expect(value("used-by")).toBe("Common:AgentsNumber");
     expect(screen.getByText("Common:Owner")).toBeInTheDocument();
     expect(screen.getByText("Alexey Bannov")).toBeInTheDocument();
     expect(screen.getByText("Common:LastModified")).toBeInTheDocument();
@@ -90,8 +90,8 @@ describe("AiSourceRoomTile", () => {
   it("tells a knowledge base's agents, owner and last modification, without a skills count", () => {
     renderTile({ roomType: RoomsType.KnowledgeRoom, linkedProjectsCount: undefined });
     expect(value("skills")).toBeUndefined();
-    // A room the list gives no number is used by none.
-    expect(value("used-by")).toBe("0");
+    // A room the list gives no number is used by none: a dash.
+    expect(value("used-by")).toBe("—");
     expect(screen.getByText("Alexey Bannov")).toBeInTheDocument();
     expect(knowledgeBasesStore.fetch).toHaveBeenCalledWith({ id: 7, filesCount: 3 });
   });

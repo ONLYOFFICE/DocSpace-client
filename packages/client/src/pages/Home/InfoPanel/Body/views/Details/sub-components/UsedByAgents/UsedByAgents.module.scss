@@ -46,9 +46,15 @@
 .item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
-  height: 32px;
+  height: 20px;
+}
+
+// The initials of an agent without a logo, sized for the small square.
+.logo :global(.room-title) {
+  font-size: 8px;
+  line-height: 10px;
 }
 
 .name {

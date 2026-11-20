@@ -7,13 +7,21 @@ vi.mock("@docspace/shared/services/encryption/secret-storage", async (io) => ({
   requireUnlock: vi.fn(async () => ({ publicKey: "pk", privateKey: "sk" })),
 }));
 
-vi.mock("@docspace/shared/services/private-room/encrypted-copy", async (io) => ({
-  ...((await io()) as Record<string, unknown>),
-  decryptEncryptedItemToFile: vi.fn(async (item: { id: number; title: string }) => {
-    if (item.id === 2) throw new Error("bad key");
-    return new File(["plain"], item.title, { type: "text/plain" });
-  }),
-}));
+vi.mock("@docspace/shared/services/private-room/encrypted-copy", async (io) => {
+  const { NoAccessError } = await import(
+    "@docspace/shared/services/encryption/errors"
+  );
+  return {
+    ...((await io()) as Record<string, unknown>),
+    decryptEncryptedItemToFile: vi.fn(
+      async (item: { id: number; title: string }) => {
+        if (item.id === 2) throw new Error("bad key");
+        if (item.id === 3) throw new NoAccessError("user-1");
+        return new File(["plain"], item.title, { type: "text/plain" });
+      },
+    ),
+  };
+});
 
 vi.mock("@docspace/shared/services/private-room/encrypted-name-clash", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -46,6 +54,7 @@ type TTagged = File & {
 
 const ok = { id: 1, title: "ok.docx", fileExst: ".docx", encrypted: true };
 const broken = { id: 2, title: "broken.docx", fileExst: ".docx", encrypted: true };
+const unwrapped = { id: 3, title: "new.docx", fileExst: ".docx", encrypted: true };
 
 const setup = () => {
   const startUpload = vi.fn();
@@ -113,6 +122,40 @@ describe("FilesActionsStore - encrypted files moved out of a private room", () =
     });
 
     expect(uploaded()[0].uploadContext?.moveSource).toBeUndefined();
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedCopyFailed");
+  });
+
+  it.each([
+    ["copies", false],
+    ["moves out", true],
+  ])("Key holder without a wrap: the user %s the only file", async (_, deleteSourceOnSuccess) => {
+    allowConsoleError(/client copy failed/);
+    const { store, startUpload } = setup();
+
+    await store.copyEncryptedFilesToFolder([unwrapped] as never, 5, {
+      private: false,
+      rootFolderId: 20,
+      rootFolderType: FolderType.USER,
+      deleteSourceOnSuccess,
+    });
+
+    expect(startUpload).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedFileNoAccessYet");
+  });
+
+  it("One file of several without a wrap", async () => {
+    allowConsoleError(/client copy failed/);
+    const { store, uploaded } = setup();
+
+    await store.copyEncryptedFilesToFolder([ok, unwrapped] as never, 5, {
+      private: false,
+      rootFolderId: 20,
+      rootFolderType: FolderType.USER,
+    });
+
+    expect(uploaded().map((f) => f.name)).toEqual(["ok.docx"]);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedCopyFailed");
   });
 

@@ -37,10 +37,10 @@
 import { useCallback, useEffect, useRef } from "react";
 import type { TFunction } from "i18next";
 
-import { getRoomCandidateKeys } from "@docspace/shared/api/privacy";
-
-/** Ids asked for in one request, which keeps its query string short. */
-export const CANDIDATE_KEYS_BATCH_SIZE = 40;
+import {
+  CANDIDATE_KEYS_BATCH_SIZE,
+  getRoomCandidateKeys,
+} from "@docspace/shared/api/privacy";
 
 type TMark = { label: string; description: string };
 type TPerson = { id?: string | null };

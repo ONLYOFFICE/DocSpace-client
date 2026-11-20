@@ -36,6 +36,7 @@
 import type { TFunction } from "i18next";
 
 import {
+  CANDIDATE_KEYS_BATCH_SIZE,
   getRoomCandidateKeys,
   getRoomMissingFileKeys,
 } from "../../api/privacy";
@@ -132,7 +133,16 @@ export async function verifyInvitees({
   if (invitees.length === 0) return { verified: [], skipped: [] };
 
   const memberIds = invitees.map((member) => member.id);
-  const candidateKeys = await getRoomCandidateKeys(roomId, memberIds);
+  // Spec: private-rooms/room-membership, "The key check of invitees is sent in batches"
+  const candidateKeys = [];
+  for (let i = 0; i < memberIds.length; i += CANDIDATE_KEYS_BATCH_SIZE) {
+    candidateKeys.push(
+      ...(await getRoomCandidateKeys(
+        roomId,
+        memberIds.slice(i, i + CANDIDATE_KEYS_BATCH_SIZE),
+      )),
+    );
+  }
   const displayNames: Record<string, string | undefined> = {};
   for (const member of invitees) displayNames[member.id] = member.displayName;
 

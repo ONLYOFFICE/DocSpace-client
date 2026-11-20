@@ -44,7 +44,8 @@ vi.mock("../room-encryption", async (io) => ({
   rewrapMissingFilesForMember: vi.fn(),
   validateMembersForEncryption: vi.fn(),
 }));
-vi.mock("../../../api/privacy", () => ({
+vi.mock("../../../api/privacy", async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
   getRoomCandidateKeys: vi.fn(),
   getRoomMissingFileKeys: vi.fn(),
 }));
@@ -242,6 +243,51 @@ describe("verifyInvitees", () => {
 
   afterEach(() => {
     vi.resetAllMocks();
+  });
+
+  const many = (count: number) =>
+    Array.from({ length: count }, (_, i) => ({
+      id: `u-${i}`,
+      displayName: `User ${i}`,
+    }));
+
+  it("Large invitation", async () => {
+    vi.mocked(getRoomCandidateKeys).mockImplementation(async (_room, ids) =>
+      ids.map((userId) => ({ id: `${userId}-key`, userId, publicKey: "pk" })),
+    );
+    vi.mocked(validateMembersForEncryption).mockResolvedValue({
+      valid: [],
+      skipped: [],
+    });
+
+    await verifyInvitees({
+      roomId: ROOM_ID,
+      invitees: many(95),
+      currentUserId: "u-me",
+    });
+
+    const batches = vi.mocked(getRoomCandidateKeys).mock.calls.map(
+      ([, ids]) => ids.length,
+    );
+    expect(batches).toEqual([40, 40, 15]);
+    const keys = vi.mocked(validateMembersForEncryption).mock.calls[0][5];
+    expect(keys?.size).toBe(95);
+  });
+
+  it("One batch fails", async () => {
+    vi.mocked(getRoomCandidateKeys)
+      .mockResolvedValueOnce([])
+      .mockRejectedValueOnce(new Error("414"));
+
+    await expect(
+      verifyInvitees({
+        roomId: ROOM_ID,
+        invitees: many(95),
+        currentUserId: "u-me",
+      }),
+    ).rejects.toThrow("414");
+    expect(getRoomCandidateKeys).toHaveBeenCalledTimes(2);
+    expect(validateMembersForEncryption).not.toHaveBeenCalled();
   });
 
   it("Order of operations: the invitees' keys come from the prospective members route and go through the verification", async () => {

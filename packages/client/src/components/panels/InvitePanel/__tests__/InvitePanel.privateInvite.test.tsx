@@ -87,7 +87,8 @@ vi.mock("@docspace/shared/services/private-room/room-encryption", async (io) => 
   validateMembersForEncryption: mocks.validateMembersForEncryption,
 }));
 
-vi.mock("@docspace/shared/api/privacy", () => ({
+vi.mock("@docspace/shared/api/privacy", async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
   getRoomCandidateKeys: mocks.getRoomCandidateKeys,
 }));
 

@@ -29,7 +29,7 @@ and SDK unit tests must stay green. Before each commit run `pnpm exec tsc
 ## 5. Hardening (proposal decision 3)
 
 - [x] 5.1 Do not render the convert badge for an encrypted file in `packages/shared/components/badges/index.tsx`; the badge is the only caller of the client HOC's handler, which stays as it is (design.md, decision 7). Verify: cases "Convert badge of an encrypted file" (with `security.Convert: true` and `MustConvert`) and "Convert badge of a file that is not encrypted" in `packages/shared/components/badges/Badges.test.tsx`; `cd packages/shared && pnpm exec vitest run components/badges` and `pnpm exec tsc --noEmit -p tsconfig.json`
-- [ ] 5.2 Disable the copy of `getGroupCopyItem` in `packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts` when the selection holds a folder inside a private room, whatever its Copy right. Verify: cases "Selection holding a folder of a private room" (folder with `security.Copy: true`) and "Selection of encrypted files only" in `packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.private.test.tsx`; `cd packages/sdk && pnpm exec vitest run "src/app/(docspace)/_hooks"` and `pnpm exec tsc --noEmit -p tsconfig.json`
+- [x] 5.2 Disable the copy of `getGroupCopyItem` in `packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts` when the selection holds a folder inside a private room, whatever its Copy right. Verify: cases "Selection holding a folder of a private room" (folder with `security.Copy: true`) and "Selection of encrypted files only" in `packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.private.test.tsx`; `cd packages/sdk && pnpm exec vitest run "src/app/(docspace)/_hooks"` and `pnpm exec tsc --noEmit -p tsconfig.json`
 
 ## 6. Gate
 

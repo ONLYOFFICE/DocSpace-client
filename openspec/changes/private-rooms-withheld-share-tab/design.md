@@ -83,4 +83,9 @@ No stashed design document is behind this decision.
 
 ## Gate runs
 
-None yet.
+- 2026-11-20, at `cda985059a2`: client E2E under Docker `tests-dev` on the
+  image built after the last ui-kit update (`private-room-*.spec.ts` and
+  `private-rooms-section.spec.ts`, ten specs): 168 passed;
+  `test:lefthook`: 61 passed, 3 skipped; `pnpm nx run-many -t tsc lint test`
+  over the six packages: green; `openspec validate --all --strict`: 23 of
+  23.

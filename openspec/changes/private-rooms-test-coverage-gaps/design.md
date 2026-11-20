@@ -2,9 +2,14 @@
 
 ## Context
 
-Read on 2026-11-19 at `54bed4b404d` on `release/v4.1.0`, and in `../server`
-through CodeGraph and the source files named below. No stashed design
-document is involved; the code and the main specs are the reference.
+Read on 2026-11-19 at `54bed4b404d` on `release/v4.1.0` (the plan was
+committed at `05b9405d88e`), and in `../server` through CodeGraph and the
+source files named below. Read again on 2026-11-20 at `2228a89fbad`, after
+`private-rooms-withheld-actions-gaps`,
+`private-rooms-invite-and-upload-robustness` and
+`private-rooms-sdk-embedding-and-parity` were archived; the tasks are
+corrected to that reading. No stashed design document is involved; the
+code and the main specs are the reference.
 
 How each gap was confirmed: the scenario name and the code path behind it
 were searched in every unit and E2E suite of the package that owns it.
@@ -23,8 +28,9 @@ The searches that came back empty, or that found a test of something else:
   and `Common:PasskeyDisabled` appear in no test. The auto-try in
   `PassphraseModal` (once per open) is not asserted; the two cases that pass
   `onPasskeyUnlock` check the reading and Tab order only.
-  `reportPotentialGhostState` and `Common:GhostStateDetected` appear in no
-  test. No test clicks Forget device: `Common:DeviceUnlockForgotten` is in
+  `Common:GhostStateDetected` appears in no client test;
+  `ghost-state-notifier.test.ts` holds two cases about a peer key that
+  could not be checked, not the once-per-session gate. No test clicks Forget device: `Common:DeviceUnlockForgotten` is in
   no test, and the E2E case of the remembered device checks only that the
   link is shown. `Common:KeyChangedReasonReplaced` is in no test.
 - room-membership: `InvitePanel.privateInvite.test.tsx` mocks
@@ -45,14 +51,18 @@ The searches that came back empty, or that found a test of something else:
   for Shift+D without keys or F2; the "+ New" model is tested with keys
   only and the main button has no test; the quota cascade test uploads a
   plain file.
-- sdk-surface: no test imports `AbortOnLockEffect`, `GhostStateToastEffect`,
-  `PostUnlockGateResetEffect`, `DisclosureBanner` or
-  `BackfillEncryptedRoomEffect`; `RemoveUserConfirmationDialog` has no test;
-  `proxy.test.ts` has no `/private` case (taken by another change, see
-  Coordination). `usePrivateRoleChangeFlow.test.ts`
-  imports nothing but Vitest: it copies the gating and the role-change
-  logic into the test file and tests the copy, so a change to the
-  components cannot fail it.
+- sdk-surface: `AbortOnLockEffect.test.tsx` covers the lock in another
+  tab and `GhostStateToastEffect.test.tsx` the toast link, both added on
+  2026-11-19; nothing asserts that a first render while locked does not
+  abort, the warning toast itself, or that unmount clears the handler. No
+  test imports `PostUnlockGateResetEffect`, `DisclosureBanner` or
+  `BackfillEncryptedRoomEffect`; `RemoveUserConfirmationDialog` has no
+  test. `usePrivateRoleChangeFlow.test.ts` imports nothing but Vitest: it
+  copies the gating and the role-change logic into the test file and tests
+  the copy, so a change to the components cannot fail it. The refusal of a
+  role change is covered on the real component
+  (`PrivateMemberUser.accessRefusal.test.tsx`); its success, the same
+  role, another error and the gating are not.
 - editor-integration: the config of `useFileEncryptionKeys.test.tsx` has no
   `viewUrl`, so `recoverFilenameWithDek` returns before the range request in
   every case.
@@ -89,7 +99,11 @@ which `ResponseWrapper` (`common/ASC.Api.Core/Middleware/ResponseWrapper.cs`)
 answers with 403. The handler's existing `noKeyResponse` already has that
 shape; the handler only has to apply it to a group subject and to a guest
 without a key, in the order the server walks the invitations (ordered by
-`SubjectGroup`, descending).
+`SubjectGroup`, descending). A group that already holds a share in the
+room is not checked (`existedShare.SubjectType != Group`), so a role
+change of a shared group is not refused. The share request carries only
+`{id, access, email}`, so the handler learns which ids are groups from an
+option; a guest without a key is already one of `withoutKeys`.
 
 ## Decisions
 
@@ -102,48 +116,57 @@ without a key, in the order the server walks the invitations (ordered by
    can show (link controls absent in the real panel, the prompt after
    Forget device, the chooser of Rooms, the create entries of a key-less
    user). Everything else is a unit case.
-3. **`[ENCRYPTION]` console errors.** A unit test fails on a
-   `console.error` containing `[ENCRYPTION]`. The thrown branch of the
-   doceditor name recovery logs one; its case spies on `console.error` and
-   asserts the call instead of letting it fail the suite. The not-ok
-   response branch logs nothing.
+3. **`[ENCRYPTION]` console errors in doceditor.** The doceditor suite has
+   no guard that fails a test on such a log (only shared's setup has one,
+   with `allowConsoleError`). The thrown branch of the name recovery logs
+   `[ENCRYPTION] filename recovery failed`; its case spies on
+   `console.error` and asserts the call, so the log stays a checked
+   outcome. The not-ok response branch logs nothing.
 4. **Ghost-state gate without a handler.** `reportPotentialGhostState`
    returns before touching the session gate when no handler is registered.
    The notifier test asserts that order, so a report before the toast is
    wired does not use up the one toast of the session.
-5. **The role-change copy is replaced, not kept.** The cases of
-   `usePrivateRoleChangeFlow.test.ts` move to tests that render
-   `PrivateMembersView` and `PrivateMemberUser`; the file is deleted. If
-   rendering proves too heavy, moving the `canChangeRole` derivation into
-   `PrivateMembersView.utils.ts` (already tested) is an allowed refactor
-   with no behaviour change.
-6. **SDK fixme cases.** Blockers A (unlock) and B (session cookie) of the
-   security spec are solved by the helpers of `private-rooms.spec.ts`, as
-   its header says; `private-rooms-sdk-private-pages-only` moves the
-   security spec onto them. Blocker C (CSP not served by the test server)
-   goes away with the proxy unit cases of
-   `private-rooms-sdk-embedding-and-parity`. Of the rest, two need no
-   browser at all: "auto-lock-tamper" is covered by the shared unit case
-   "Tampered auto-lock value" and "tofu-migration" by "migrates a v1
-   single-key record to the multi-key shape" of `tofu-store.test.ts`.
-   These two are deleted here, after the move. The "change-owner" case of
-   `private-rooms.spec.ts` names texts that no longer exist
-   (`Common:PrivateRoomChangeOwnerNoKey`, `...KeyMismatch`), and the unit
-   case "Owner change from the header of an open room" of
-   `PrivateChangeOwnerDialog.test.tsx` covers the key check; it is left to
-   `private-rooms-sdk-embedding-and-parity`, which reworks that flow.
+5. **The role-change copy is replaced, not kept** (owner's decision of
+   2026-11-20). A new `PrivateMemberUser.roleChange.test.tsx` covers the
+   success, the same role and another error on the real component, beside
+   the refusal case that `PrivateMemberUser.accessRefusal.test.tsx`
+   already has; a new `PrivateMembersView.roleChange.test.tsx` covers the
+   four conditions of the role control (`PrivateMembersView.tsx`: edit
+   right, the member's `canEditAccess`, not the owner, not oneself). The
+   copy is deleted. If rendering proves too heavy, moving the
+   `canChangeRole` derivation into `PrivateMembersView.utils.ts` (already
+   tested) is an allowed refactor with no behaviour change.
+6. **SDK fixme cases.** The security spec runs on the private and host
+   fixtures since `private-rooms-sdk-private-pages-only`, and its
+   "csp-headers" case went with the proxy unit cases of
+   `private-rooms-sdk-embedding-and-parity`, which also replaced the
+   "change-owner" case of `private-rooms.spec.ts`. Of the seven fixme
+   cases left in the security spec, two need no browser at all:
+   "auto-lock-tamper" is covered by the shared unit case "Tampered
+   auto-lock value" (`auto-lock-preference.test.ts`) and "tofu-migration"
+   by "migrates a v1 single-key record to the multi-key shape"
+   (`tofu-store.test.ts`). These two are deleted here; the other five
+   keep their blocker notes (F, two browser contexts; G, slowed
+   transfers).
 
 ## Coordination
 
-- `private-rooms-lock-state-everywhere` modifies "Remember this device" and
-  "Shell side effects". The Forget device scenario keeps its wording there,
-  so task 2.2 and 2.15 stand; the cross-tab lock is left to that change.
+- Archived since the plan was written: `private-rooms-lock-state-everywhere`
+  (its "Remember this device" wording keeps Forget device as tasks 2.2 and
+  2.15 test it), `private-rooms-sdk-private-pages-only`,
+  `private-rooms-invite-and-upload-robustness` and
+  `private-rooms-sdk-embedding-and-parity`.
 - `private-rooms-remove-dead-api-calls` owns the desktop bridge test.
-- `private-rooms-sdk-embedding-and-parity` owns the proxy cases, the
-  "csp-headers" and "change-owner" fixme cases.
-- `private-rooms-sdk-private-pages-only` owns the move, the header and the
-  frame-bridge cases of the SDK security spec; task 3.4 waits for its 4.2.
-- `private-rooms-invite-and-upload-robustness` changes what the invite
-  panel sends (its task 5.2, in `InvitePanel/index.js` and
-  `InvitePanel.privateInvite.test.tsx`); task 2.5 here tests the invite
-  input, a different file, and task 2.4 a separate suite.
+- `private-rooms-withheld-share-and-rename` owns the Share tab case of a
+  folder inside a private room and "F2 on encrypted file".
+- Active changes on the same test files; whichever lands second rebases on
+  the other: `private-rooms-server-followups` (its tasks 3.1, 3.5 and 3.7
+  edit `roomMembers.ts` and `room-members-contract.test.ts`, as 1.6 does;
+  3.7's whole-or-nothing share change must not duplicate the group and
+  guest cases, and its 3.1 may change the refusal text task 3.3 relies
+  on), `private-rooms-dse3-header-authentication` (its 2.1 extends
+  `dse3-tampering.test.ts`, as 1.2 does), `private-rooms-release-gate`
+  2.2 and `private-rooms-spec-wording-nov` 2.2
+  (`private-rooms-section.spec.ts`, as 2.15 does) and
+  `private-rooms-admin-recovery` 3.3 and 3.4 (`KeysManagement.test.tsx`,
+  as 2.1 and 2.2 do).

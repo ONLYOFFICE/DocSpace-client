@@ -353,6 +353,25 @@ describe("KeysManagement", () => {
     ).toBeInTheDocument();
   });
 
+  it("Forget device", async () => {
+    const user = userEvent.setup();
+    mocks.encryption.isUnlocked = false;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+    await screen.findByText("Common:DeviceUnlockRememberedUntil");
+
+    await user.click(action("Common:ForgetDeviceButton"));
+
+    await waitFor(() =>
+      expect(mocks.toastSuccess).toHaveBeenCalledWith(
+        "Common:DeviceUnlockForgotten",
+      ),
+    );
+    expect(
+      screen.queryByText("Common:DeviceUnlockRememberedUntil"),
+    ).not.toBeInTheDocument();
+  });
+
   it("Forget device in another tab", async () => {
     const user = userEvent.setup();
     const order: string[] = [];

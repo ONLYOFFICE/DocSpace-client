@@ -27,9 +27,12 @@ Handover to the documentation team: not yet recorded.
   - existing private rooms are not listed anywhere; nothing is deleted,
     and they are back when the app is switched on again;
   - users who already hold a key keep the Keys management tab.
-- **Embedding:** an embedded client frame and the SDK private pages show
-  private rooms only when the host sets `privateRooms` in the frame
-  configuration.
+- **Embedding:** an embedded client frame (the host library's Manager
+  mode) shows private rooms only when the host sets `privateRooms` in the
+  frame configuration; host library 2.2.0 passes the property to the frame,
+  although its types do not declare it yet. The SDK's own private pages
+  under `/sdk/private` open only from pages of the portal's own origin in
+  this version.
 
 ## Before users start
 

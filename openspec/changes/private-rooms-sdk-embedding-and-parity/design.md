@@ -340,6 +340,38 @@ in `TFrameConfig`, documented for Manager mode as the host's opt-in to the
 private rooms beta, which the client reads already. Nothing for
 `/sdk/private`. Task 1.3 records when it was handed over.
 
+## Stand checks
+
+2026-11-20, task 1.2, on a local stand (`release/v4.1.0` at `d40ff7e85b6`,
+the client and the SDK from their dev servers behind the stand's nginx):
+
+- Read: `docspace-sdk-js` origin/develop `135d0cc` (2.2.0) answers the
+  frame's `setConfig` request by sending its whole configuration,
+  `privateRooms` included, although `TFrameConfig` does not declare it; the
+  client reads it from `settingsStore.frameConfig.privateRooms`
+  (`AppsStore.settleFrameOptIn`). The portal serves the same library at
+  `/static/scripts/sdk/2.2.0/api.js`.
+- Run: a host page at `http://localhost:5555`, added to the portal's trusted
+  domains, loaded that library and called `initManager` with
+  `showMenu: true`. With `privateRooms: true` the frame reported ready and
+  its sidebar listed Private rooms with the Beta badge; without the property
+  the item was absent.
+- Before the frame loads, the library asks the portal for
+  `GET api/2.0/security/csp` and refuses a host outside its trusted domains.
+  The client pages carry `X-Frame-Options: SAMEORIGIN`, which the
+  `frame-ancestors` of the portal policy overrides. The local stand needed
+  two settings for the run, undone afterwards: its nginx configuration was
+  adjusted to the local container network, and the dev server's origin was
+  trusted too.
+- Headers (task 8.1): `GET /sdk/private` through nginx carried both
+  policies, the portal's (`frame-ancestors` with the trusted domains and
+  `'self'`) and the SDK's (`frame-ancestors 'self'`, same-origin opener and
+  resource policies; the dev build adds `'unsafe-eval'` and `ws:`), so the
+  private pages stay framed by the portal's own origin.
+- Not covered: the host and the portal were the same site (`localhost`),
+  so what a frame of another site changes (partitioned storage, third-party
+  cookies) was not seen.
+
 ## Risks / Trade-offs
 
 - [The SDK private surface has no embedding consumer in 4.1.0] → It stays

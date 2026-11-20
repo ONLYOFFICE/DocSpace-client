@@ -40,7 +40,12 @@ import {
   getEncryptionErrorMessage,
   getSpecificEncryptionErrorMessage,
 } from "../error-i18n";
-import { DecryptionError, KeyNotFoundError, NoAccessError } from "../errors";
+import {
+  DecryptionError,
+  KeyCheckUnavailableError,
+  KeyNotFoundError,
+  NoAccessError,
+} from "../errors";
 
 const t = ((key: string) => key) as unknown as TFunction;
 
@@ -55,6 +60,14 @@ describe("A file without a wrap for the user is reported as no access", () => {
   it("keeps the missing-key message for a missing key", () => {
     expect(getEncryptionErrorMessage(t, new KeyNotFoundError())).toBe(
       "Common:NoEncryptionKey",
+    );
+  });
+});
+
+describe("A peer key that could not be checked is reported per operation", () => {
+  it("Download, copy or preview with a sender key that could not be checked", () => {
+    expect(getEncryptionErrorMessage(t, new KeyCheckUnavailableError())).toBe(
+      "Common:EncryptedKeyCheckFailed",
     );
   });
 });

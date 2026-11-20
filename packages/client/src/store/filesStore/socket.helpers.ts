@@ -226,66 +226,75 @@ export async function wsModifyFolderCreateImpl(
     // the parent folders are subscribed too, so a folder created in one of
     // them must not be counted here; a folder is counted where it is listed,
     // as its deletion is
-    if (!folder || isInSelectedFolder(folder.parentId)) {
+    const countsHere = !folder || isInSelectedFolder(folder.parentId);
+    const countIt = () =>
       self.selectedFolderStore.setFoldersCount(
         self.selectedFolderStore.foldersCount + 1,
       );
-    }
-
-    const foundIndex = self.folders.findIndex((x) => x.id == opt?.id);
-
-    if (foundIndex > -1 || !folder) return;
-
-    if (self.selectedFolderStore.id != folder.parentId) {
-      const movedToIndex = self.getFolderIndex(folder.parentId);
-      if (movedToIndex > -1) self.folders[movedToIndex].foldersCount++;
-    }
-
-    if (
-      !isInSelectedFolder(folder.parentId) ||
-      (folder.roomType &&
-        folder.createdBy.id === self.userStore.user!.id &&
-        self.roomCreated)
-    ) {
-      return (self.roomCreated = false);
-    }
-
-    // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
-    const folderInfo = await api.files
-      .getFolderInfo(folder.id, true)
-      .catch(() => null);
-
-    if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
-      console.log("Skip UNSUBSCRIBED folder creation");
-      return;
-    }
-
-    console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
-
     // Spec: private-rooms/sidebar-section, "Live updates respect the split"
-    if (folder.roomType) {
-      const scope = getRoomsRequestScope(
-        getCategoryType(window.DocSpace?.location ?? window.location),
-        self.roomsFilter.searchArea,
-      );
-      const isPrivate = !!folderInfo.private;
+    const isRoom = !!folder?.roomType;
+    if (countsHere && !isRoom) countIt();
+    let droppedByScope = false;
+
+    try {
+      const foundIndex = self.folders.findIndex((x) => x.id == opt?.id);
+
+      if (foundIndex > -1 || !folder) return;
+
+      if (self.selectedFolderStore.id != folder.parentId) {
+        const movedToIndex = self.getFolderIndex(folder.parentId);
+        if (movedToIndex > -1) self.folders[movedToIndex].foldersCount++;
+      }
+
       if (
-        (scope?.lists === "private" && !isPrivate) ||
-        (scope?.lists === "notPrivate" && isPrivate)
+        !isInSelectedFolder(folder.parentId) ||
+        (folder.roomType &&
+          folder.createdBy.id === self.userStore.user!.id &&
+          self.roomCreated)
       ) {
+        return (self.roomCreated = false);
+      }
+
+      // Spec: private-rooms/sidebar-section, "Live updates skip rooms the user cannot read"
+      const folderInfo = await api.files
+        .getFolderInfo(folder.id, true)
+        .catch(() => null);
+
+      if (!folderInfo || !isInSelectedFolder(folderInfo.parentId)) {
+        console.log("Skip UNSUBSCRIBED folder creation");
         return;
       }
+
+      console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
+
+      // Spec: private-rooms/sidebar-section, "Live updates respect the split"
+      if (folder.roomType) {
+        const scope = getRoomsRequestScope(
+          getCategoryType(window.DocSpace?.location ?? window.location),
+          self.roomsFilter.searchArea,
+        );
+        const isPrivate = !!folderInfo.private;
+        if (
+          (scope?.lists === "private" && !isPrivate) ||
+          (scope?.lists === "notPrivate" && isPrivate)
+        ) {
+          droppedByScope = true;
+          return;
+        }
+      }
+
+      const newFolders = [folderInfo, ...self.folders];
+
+      const newFilter = self.filter;
+      newFilter.total += 1;
+
+      runInAction(() => {
+        self.setFilter(newFilter);
+        self.setFolders(newFolders);
+      });
+    } finally {
+      if (countsHere && isRoom && !droppedByScope) countIt();
     }
-
-    const newFolders = [folderInfo, ...self.folders];
-
-    const newFilter = self.filter;
-    newFilter.total += 1;
-
-    runInAction(() => {
-      self.setFilter(newFilter);
-      self.setFolders(newFolders);
-    });
   }
 }
 

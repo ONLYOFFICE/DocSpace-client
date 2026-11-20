@@ -100,6 +100,8 @@ export type ModuleItem = {
   onAction: () => void;
   /** The app has no onboarding tour, so its card offers none. */
   noTour?: boolean;
+  /** A mark shown beside the title, such as the Beta badge. */
+  badge?: React.ReactNode;
 };
 
 type ModuleCardProps = {
@@ -131,9 +133,18 @@ export const ModuleCard = ({ mod, onTakeTour }: ModuleCardProps) => {
          * with the title rather than with the icon.
          */}
         <div className={styles.moduleHeadings}>
-          <Text as="p" className={styles.moduleTitle}>
-            {mod.title}
-          </Text>
+          {mod.badge ? (
+            <span className={styles.moduleTitleWithBadge}>
+              <Text as="p" className={styles.moduleTitle}>
+                {mod.title}
+              </Text>
+              {mod.badge}
+            </span>
+          ) : (
+            <Text as="p" className={styles.moduleTitle}>
+              {mod.title}
+            </Text>
+          )}
           <Text as="span" className={styles.moduleInstalledBadge}>
             {mod.installed ? (
               <>

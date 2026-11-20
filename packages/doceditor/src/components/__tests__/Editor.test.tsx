@@ -102,6 +102,7 @@ const env = vi.hoisted(() => {
       onSDKWarning: vi.fn(),
       onSDKError: vi.fn(),
       onSDKRequestRename: vi.fn(),
+      reloadEditorPage: vi.fn(),
     },
     useAIAttachFile: vi.fn(),
   };
@@ -625,7 +626,58 @@ describe("Editor", () => {
       );
     });
 
-    it("Frame error on a plain file: the editor stays mounted and the error is logged", async () => {
+    const errorRetryButton = () =>
+      container?.querySelector<HTMLElement>(
+        '[data-testid="editor-error-retry"]',
+      ) ?? null;
+
+    const openingRefused = {
+      data: {
+        errorCode: -82,
+        errorDescription: "An error has occurred while opening the file.",
+      },
+    };
+
+    const renderWithEditorError = async () => {
+      asEncrypted();
+      await renderEditor({
+        config: makeConfig(true),
+        fileInfo: makeFileInfo(true),
+      });
+      const onError = events().onError as (event: object) => void;
+      await act(async () => onError(openingRefused));
+    };
+
+    it("Editor error with the button", async () => {
+      await renderWithEditorError();
+
+      expect(editorMounted()).toBe(false);
+      expect(container?.textContent).toContain("Common:SomethingWentWrong");
+      expect(container?.textContent).toContain(
+        openingRefused.data.errorDescription,
+      );
+      expect(errorRetryButton()?.textContent).toContain("Common:TryAgain");
+    });
+
+    it("Try again after an editor error", async () => {
+      await renderWithEditorError();
+
+      await act(async () => errorRetryButton()?.click());
+
+      expect(env.eventHelpers.reloadEditorPage).toHaveBeenCalledTimes(1);
+    });
+
+    it("No repeat without the user", async () => {
+      await renderWithEditorError();
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      expect(env.eventHelpers.reloadEditorPage).not.toHaveBeenCalled();
+      expect(errorRetryButton()).not.toBeNull();
+    });
+
+    it("Editor error on a plain file: the editor stays mounted and the error is logged", async () => {
       await renderEditor({
         config: makeConfig(false),
         fileInfo: makeFileInfo(false),
@@ -636,6 +688,7 @@ describe("Editor", () => {
 
       expect(env.eventHelpers.onSDKError).toHaveBeenCalledWith(libraryMissing);
       expect(editorMounted()).toBe(true);
+      expect(errorRetryButton()).toBeNull();
     });
   });
 

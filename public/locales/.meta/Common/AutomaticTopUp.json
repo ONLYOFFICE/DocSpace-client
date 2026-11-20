@@ -1,0 +1,21 @@
+{
+  "key_path": "AutomaticTopUp",
+  "content": "Automatic top-up",
+  "content_en_sha1_hash": "9a62e8461d81199cabe0f36ec20bccff9d0d1fb9",
+  "created_at": "2026-11-19T16:13:51.690Z",
+  "updated_at": "2026-11-19T16:13:51.690Z",
+  "comment": {
+    "text": "Type label of one invoice row in the wallet invoice history (mobile/row view): the balance was topped up automatically by auto-recharge. Singular noun phrase.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

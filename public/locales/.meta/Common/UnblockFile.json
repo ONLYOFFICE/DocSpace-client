@@ -3,7 +3,7 @@
   "content": "Unblock",
   "content_en_sha1_hash": "12aabd251c4213f1cebfe4cb83e6547df55552c3",
   "created_at": "2025-05-19T21:30:49.379Z",
-  "updated_at": "2026-11-05T16:49:39.996Z",
+  "updated_at": "2026-11-17T13:13:27.237Z",
   "comment": {
     "text": "This is the label for a button or a tooltip that appears when a file is locked. It allows the user to unlock the file.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 424,
+      "line_number": 432,
       "context": "data-id={id}\n data-locked={!!locked}\n onClick={onIconLockClick}\n color={themeIsBase ? globalColors.lightIcons : globalColors.white}\n hoverColor=\"accent\"\n title={t(\"Common:UnblockFile\")}\n />\n </div>\n ) : null}\n \n {item.viewAccessibility?.MustConvert &&",
       "module": "/packages/shared"
     },

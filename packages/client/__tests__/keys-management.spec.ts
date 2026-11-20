@@ -187,6 +187,37 @@ test.describe("Profile > Keys Management", () => {
     expect(keysHandle.getKeys()).toHaveLength(1);
   });
 
+  for (const [script, passphrase] of [
+    ["Cyrillic, 16 characters", "абвгдеёжзийклмно"],
+    ["CJK, 12 characters", "春眠不觉晓处处闻啼鸟夜来"],
+  ] as const) {
+    test(`Passphrase in another script: ${script}`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      const { keysHandle } = await bootstrapEncryption(
+        page,
+        mockRequest,
+        baseUrl,
+        {
+          passphrase,
+          onPassphraseStep: async (dialog) => {
+            const strength = dialog.getByTestId("passphrase_strength");
+            await expect(strength).toBeVisible();
+            await expect(strength).not.toContainText("Weak");
+            await expect(
+              dialog.getByRole("button", { name: "Continue" }),
+            ).toBeEnabled();
+          },
+        },
+      );
+
+      expect(keysHandle.getKeys()).toHaveLength(1);
+    });
+  }
+
   test("cancel passphrase modal does NOT upload anything", async ({
     page,
     mockRequest,
@@ -265,6 +296,64 @@ test.describe("Profile > Keys Management", () => {
     ).toHaveCount(0);
     await expect(page.getByTestId("import_key_link")).toHaveCount(0);
     await expect(page.getByTestId("unused_keys_notice")).toBeVisible();
+  });
+
+  // Spec: private-rooms/key-management, "Keys management opens with an introduction"
+  test("User without a key", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+
+    await page.goto(`${baseUrl}/profile/keys-management`);
+
+    await expect(page.getByTestId("keys_management_intro")).toContainText(
+      "Your encryption key protects files in private rooms.",
+      { timeout: 15_000 },
+    );
+    await expect(page.getByTestId("key_lock_state")).toHaveCount(0);
+    await expect(page.getByTestId("keys_unlock_button")).toHaveCount(0);
+  });
+
+  // Spec: private-rooms/key-management, "Keys management shows whether the key
+  // is locked", "Keys management offers to unlock a locked key" and "Recovery
+  // phrase has a block of its own in Keys management"
+  test("Locked key", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { passphrase } = await bootstrapEncryption(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+
+    const state = page.getByTestId("key_lock_state");
+    const unlock = page.getByTestId("keys_unlock_button");
+    await expect(page.getByTestId("keys_management_intro")).toBeVisible();
+    await expect(state).toHaveText("Key unlocked");
+    await expect(page.getByTestId("key_locked_note")).toHaveCount(0);
+    await expect(unlock).toHaveCount(0);
+
+    const recovery = page.getByTestId("recovery_section");
+    await expect(recovery).toContainText("Recovery phrase");
+    await expect(recovery).toContainText(
+      "Use your 24-word recovery phrase to set a new passphrase",
+    );
+    await expect(
+      recovery.getByTestId("use_recovery_phrase_link"),
+    ).toBeVisible();
+
+    // A reload drops the unlocked key from memory.
+    await page.reload();
+
+    await expect(state).toHaveText("Key locked", { timeout: 15_000 });
+    await expect(page.getByTestId("key_locked_note")).toHaveText(
+      "Unlock it to see file names and to open, upload and download files.",
+    );
+
+    await unlock.click();
+    const dialog = page.getByRole("dialog");
+    await dialog.getByLabel("Passphrase", { exact: true }).fill(passphrase);
+    await page.keyboard.press("Enter");
+
+    await expect(state).toHaveText("Key unlocked", { timeout: 15_000 });
+    await expect(unlock).toHaveCount(0);
   });
 });
 

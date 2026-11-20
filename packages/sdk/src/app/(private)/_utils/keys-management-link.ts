@@ -36,10 +36,15 @@
 const KEYS_MANAGEMENT_PATH = "/profile/keys-management";
 
 /**
- * The client's keys-management page on the portal. Null when the portal
- * address is unknown.
+ * The client's keys-management page on the portal, by default the origin
+ * the SDK is served from. Null when the portal address is unknown.
  */
-export const getKeysManagementUrl = (portalUrl: string | null | undefined) => {
+// Spec: private-rooms/sdk-surface, "Forgot passphrase and device setup link out to the client"
+export const getKeysManagementUrl = (
+  portalUrl: string | null | undefined = typeof window === "undefined"
+    ? undefined
+    : window.location.origin,
+) => {
   if (!portalUrl) return null;
 
   try {

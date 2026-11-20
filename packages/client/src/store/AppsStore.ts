@@ -221,6 +221,16 @@ class AppsStore {
     );
   }
 
+  // The app is switched off on a portal that can switch apps. The dashboard
+  // then keeps its card, marked as disabled, for whoever may switch it on.
+  get isPrivateRoomsAppSwitchedOff() {
+    if (this.isSdkFrame && !this.framePrivateRoomsOptIn) return false;
+    if (!this.canManageApps || !this.isLoaded) return false;
+    return !(
+      this.apps.find((a) => a.id === PRIVATE_ROOMS_APP_ID)?.enabled ?? false
+    );
+  }
+
   getSettings = <T = Record<string, unknown>>(id: string): T | undefined => {
     return this.apps.find((a) => a.id === id)?.settings as T | undefined;
   };

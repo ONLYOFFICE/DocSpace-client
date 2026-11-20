@@ -3,7 +3,7 @@
   "content": "Role: {{role}}",
   "content_en_sha1_hash": "35199cc42fe0b3324b0628235871dacf42b01b1f",
   "created_at": "2026-11-12T15:54:27.857Z",
-  "updated_at": "2026-11-12T16:00:41.309Z",
+  "updated_at": "2026-11-17T13:13:26.957Z",
   "comment": {
     "text": "Accessible name, read by screen readers and never shown on screen, of the drop-down beside the search field of the invite panel that sets the access role new invitees get; {{role}} is the role chosen now, for example Viewer.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 153,
       "context": "const selectedLabel =\n selectedOption && \"label\" in selectedOption ? selectedOption.label : \"\";\n const ariaLabel = subjectName\n ? t(\"Common:RoleOfUser\", { name: subjectName, role: selectedLabel })\n : t(\"Common:RoleWithValue\", { role: selectedLabel });\n \n return (\n <div className=\"access-selector\" style={{ marginInlineEnd: \"16px\" }}>\n {!(isMobile() && !isMobileHorizontalOrientation) ? (\n <AccessRightSelect",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/AccessSelector.tsx",
+      "line_number": 181,
+      "context": "selectedOption && \"label\" in selectedOption\n ? String(selectedOption.label ?? \"\")\n : \"\";\n const ariaLabel = subjectName\n ? t(\"Common:RoleOfUser\", { name: subjectName, role: selectedLabel })\n : t(\"Common:RoleWithValue\", { role: selectedLabel });\n \n return (\n <div className=\"access-selector\" style={{ marginInlineEnd: \"16px\" }}>\n {!(isMobile() && !isMobileHorizontalOrientation) ? (\n <AccessRightSelect",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

@@ -98,6 +98,7 @@ vi.mock("./useEncryptedUpload", () => ({
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { decryptEncryptedItemToFile } from "@docspace/shared/services/private-room/encrypted-copy";
+import { NoAccessError } from "@docspace/shared/services/encryption/errors";
 
 import { useEncryptedCopyMove } from "./useEncryptedCopyMove";
 
@@ -204,17 +205,64 @@ describe("useEncryptedCopyMove", () => {
     expect(toastr.error).not.toHaveBeenCalled();
   });
 
-  it("Locked identity: the copy is cancelled with the locked-operation toast", async () => {
+  it("Unlock declined on a copy in the SDK", async () => {
     env.requireIdentity.mockResolvedValueOnce(null as never);
 
     await copyTo(21);
 
-    expect(toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptionLockedAddMembers",
-    );
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionLockedCopy");
     expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
     expect(env.uploadFiles).not.toHaveBeenCalled();
     expect(env.uploadDecrypted).not.toHaveBeenCalled();
+  });
+
+  it("Unlock declined on a duplicate in the SDK", async () => {
+    env.requireIdentity.mockResolvedValueOnce(null as never);
+
+    await act(() =>
+      actions.duplicateFile({ item: MEMO, roomId: 10, folderId: 10 }),
+    );
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionLockedCopy");
+    expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
+    expect(env.uploadFiles).not.toHaveBeenCalled();
+  });
+
+  it("Duplicate of a file without a wrap in the SDK", async () => {
+    vi.mocked(decryptEncryptedItemToFile).mockRejectedValueOnce(
+      new NoAccessError("me"),
+    );
+
+    await act(() =>
+      actions.duplicateFile({ item: MEMO, roomId: 10, folderId: 10 }),
+    );
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedFileNoAccessYet");
+    expect(env.uploadFiles).not.toHaveBeenCalled();
+  });
+
+  it("One file of several without a wrap in the SDK", async () => {
+    const notShared = { ...MEMO, id: 8, title: "new.txt" };
+    vi.mocked(decryptEncryptedItemToFile)
+      .mockResolvedValueOnce(new File(["plain"], "memo.txt"))
+      .mockRejectedValueOnce(new NoAccessError("me"));
+
+    await act(() =>
+      actions.copyFiles({
+        files: [MEMO, notShared],
+        destFolderId: 30,
+        sourceRoomId: 10,
+        uploadDecrypted: env.uploadDecrypted,
+      }),
+    );
+
+    const [uploaded] = env.uploadDecrypted.mock.calls[0] as unknown as [File[]];
+    expect(uploaded.map((f) => f.name)).toEqual(["memo.txt"]);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedCopyFailed:new.txt");
   });
 
   it("Destination unknown", async () => {

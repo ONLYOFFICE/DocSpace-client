@@ -3,7 +3,7 @@
   "content": "Selected elements were successfully deleted from {{sectionName}}",
   "content_en_sha1_hash": "34001013ab8ad0b2c793c6ef5b07cc520c8c155d",
   "created_at": "2025-06-02T10:19:18.540Z",
-  "updated_at": "2026-11-09T17:07:34.660Z",
+  "updated_at": "2026-11-17T13:13:26.951Z",
   "comment": {
     "text": "This is a toast message confirming that selected items have been successfully deleted. The `{{sectionName}}` variable will be replaced with the name of the section from which the items were deleted (e.g., \"Trash\").",
     "is_auto": true,
@@ -19,26 +19,26 @@
     },
     {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 466,
-      "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }",
+      "line_number": 473,
+      "context": "if (isDeleteConfirmationForced) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 529,
+      "line_number": 527,
       "context": "deleteRoomsAction([selectedFolderId], translations).catch((err: unknown) =>\n toastr.error(err as string),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err: unknown) =>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
-      "line_number": 357,
-      "context": ": () => {\n if (self.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n self.filesActionsStore",
+      "line_number": 355,
+      "context": ": () => {\n if (self.filesActionsStore.isDeleteConfirmationForced) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n self.filesActionsStore",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 221,
-      "context": "if (confirmDelete) {\n this.dialogsStore.setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: this.t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n };\n \n this.filesActionsStore",
+      "line_number": 219,
+      "context": "private deleteAction = () => {\n if (this.filesActionsStore.isDeleteConfirmationForced) {\n this.dialogsStore.setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: this.t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n };\n \n this.filesActionsStore",
       "module": "/packages/client"
     }
   ],

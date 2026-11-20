@@ -3,7 +3,7 @@
   "content": "Renew subscription",
   "content_en_sha1_hash": "9f8e65758249c349385d2ddcf458f3f056c64837",
   "created_at": "2026-08-12T11:00:34.750Z",
-  "updated_at": "2026-11-09T09:26:33.512Z",
+  "updated_at": "2026-11-17T13:13:27.177Z",
   "comment": {
     "text": "Button label used to initiate the renewal of an existing DocsConnect subscription.",
     "is_auto": true,
@@ -25,20 +25,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 554,
+      "line_number": 561,
       "context": "? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable)\n return isRenew ? t(\"Common:RenewSubscription\") : t(\"Common:Upgrade\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return info.deactivated\n ? t(\"Common:TopUpAndPay\")",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 554,
+      "line_number": 561,
       "context": "? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable)\n return isRenew ? t(\"Common:RenewSubscription\") : t(\"Common:Upgrade\");\n \n if (isDelayedPaymentTopUp) return t(\"Common:TopUpWallet\");\n \n return info.deactivated\n ? t(\"Common:TopUpAndPay\")",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 198,
-      "context": "{canceled ? (\n <>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:RenewSubscription\")}\n onClick={() => openBuyPlan?.(\"edit\")}\n isDisabled={!canManage}\n className={styles.buyButton}\n testId=\"docs_connect_buy_button\"\n />",
+      "line_number": 171,
+      "context": "{canceled ? (\n <>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:RenewSubscription\")}\n onClick={() => openBuyPlan?.(\"edit\")}\n className={styles.buyButton}\n testId=\"docs_connect_buy_button\"\n />\n <Link",
       "module": "/packages/client"
     }
   ],

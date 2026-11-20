@@ -43,6 +43,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { CryptoError } from "@docspace/shared/services/encryption/errors";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
+import type { ArchiveItem } from "@docspace/shared/services/private-room/encrypted-download";
 
 import { useEncryptionIdentityStore } from "../_store/EncryptionIdentityStore";
 import {
@@ -169,7 +170,7 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
           {
             downloadAndDecryptFileToBuffer,
             createZipFromBuffers,
-            deduplicateFileNames,
+            toArchiveEntries,
             triggerFileDownload,
           },
           memberMod,
@@ -177,7 +178,7 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
 
         const roomMemberKeys = await memberMod.loadRoomMemberKeysSafe(roomId);
 
-        const buffers: Array<{ data: Uint8Array; fileName: string }> = [];
+        const buffers: ArchiveItem[] = [];
         const failedNames: string[] = [];
         for (const f of files) {
           if (controller.signal.aborted) return;
@@ -200,7 +201,8 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
             if (decrypted.success && decrypted.data) {
               buffers.push({
                 data: decrypted.data,
-                fileName: decrypted.fileName,
+                names: [decrypted.fileName, f.originalFileName, f.fileId],
+                folders: [],
               });
             } else {
               failedNames.push(f.originalFileName);
@@ -217,10 +219,7 @@ export const useEncryptedDownload = (): UseEncryptedDownloadReturn => {
           return;
         }
 
-        const names = deduplicateFileNames(buffers.map((b) => b.fileName));
-        const zipBytes = createZipFromBuffers(
-          buffers.map((b, i) => ({ data: b.data, name: names[i] })),
-        );
+        const zipBytes = createZipFromBuffers(toArchiveEntries(buffers));
         const zipBlob = new Blob([new Uint8Array(zipBytes)], {
           type: "application/zip",
         });

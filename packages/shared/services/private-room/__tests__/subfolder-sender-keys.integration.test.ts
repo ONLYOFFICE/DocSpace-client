@@ -103,7 +103,7 @@ const mockIDB = {
   open: () => {
     const req = new MockOpenRequest();
     queueMicrotask(() => {
-      req.error = new Error("test: IDB disabled");
+      req.error = new DOMException("test: IDB disabled", "SecurityError");
       req.onerror?.();
     });
     return req;

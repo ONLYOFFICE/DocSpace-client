@@ -62,16 +62,16 @@ describe("resolveUploadGate", () => {
   it("refuses a key-less uploader before anything else is considered", () => {
     expect(
       resolveUploadGate(
-        { publicKey: null, userId: null, alreadyEncrypted: true },
+        { publicKey: null, userId: null },
         privateTarget,
       ),
     ).toEqual({ action: "refuse", reason: "no-key" });
   });
 
-  it("passes an already-encrypted item through unchanged", () => {
-    expect(
-      resolveUploadGate({ ...KEYS, alreadyEncrypted: true }, privateTarget),
-    ).toEqual({ action: "plain" });
+  it("File that is not a container", () => {
+    expect(resolveUploadGate({ ...KEYS }, privateTarget)).toEqual({
+      action: "encrypt",
+    });
   });
 
   it("sends plaintext for a non-private target even without keys", () => {
@@ -106,7 +106,7 @@ describe("resolveUploadGate", () => {
     ).toEqual(refused);
     expect(
       resolveUploadGate(
-        { ...KEYS, alreadyEncrypted: true },
+        { ...KEYS },
         { isPrivate: true, roomType: RoomsType.EditingRoom },
       ),
     ).toEqual(refused);
@@ -160,11 +160,6 @@ describe("willEncryptUploadItem", () => {
     ).toEqual({ action: "refuse", reason: "no-key" });
   });
 
-  it("does NOT re-encrypt an already-encrypted item", () => {
-    expect(
-      willEncryptUploadItem({ ...KEYS, alreadyEncrypted: true }, privateTarget),
-    ).toBe(false);
-  });
 
   it("never encrypts for a non-private target", () => {
     expect(willEncryptUploadItem({ ...KEYS }, plainTarget)).toBe(false);

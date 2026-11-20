@@ -45,6 +45,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/room-member-flows";
 import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
@@ -132,7 +133,8 @@ const ChangeRoomOwner = (props) => {
     return newFilter;
   }, []);
 
-  const { excludeItems, excludeReady } = usePrivateRoomOwnerExclusions({
+  const { excludeItems, excludeReady, excludeFailed } =
+    usePrivateRoomOwnerExclusions({
     isPrivateRoom,
     roomId,
     userId,
@@ -157,7 +159,13 @@ const ChangeRoomOwner = (props) => {
       ? t("Common:LeaveTheFormSpace")
       : t("Common:LeaveTheRoom");
 
-  const selectorComponent = excludeReady ? (
+  const selectorComponent = excludeFailed ? (
+    <div className={styles.changeOwnerLoader}>
+      <Text role="alert" dataTestId="change_owner_candidates_failed">
+        {t("Common:OwnerCandidatesLoadFailed")}
+      </Text>
+    </div>
+  ) : excludeReady ? (
     <PeopleSelector
       withCancelButton
       onCancel={handleClosePanel}

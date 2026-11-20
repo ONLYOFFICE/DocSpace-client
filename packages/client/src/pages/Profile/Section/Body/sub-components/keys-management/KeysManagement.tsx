@@ -50,6 +50,7 @@ import {
   forgetDeviceUnlock,
   getDeviceUnlockWrittenAt,
 } from "@docspace/shared/services/encryption/device-unlock-store";
+import { broadcastLock } from "@docspace/shared/services/encryption/lock-broadcast";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@onlyoffice/apps-ui-kit/constants";
@@ -90,8 +91,15 @@ const KeysManagement = ({
   userEmail,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
-  const { isUnlocked, lock, getIdentity, requireIdentity, publicKey } =
-    useEncryption();
+  const {
+    isUnlocked,
+    lock,
+    lockAfterKeyRemoval,
+    lockAfterReseal,
+    getIdentity,
+    requireIdentity,
+    publicKey,
+  } = useEncryption();
   /** Formatted date the remembered-device record expires, or null. */
   const [rememberedUntil, setRememberedUntil] = useState<string | null>(null);
   const [passkeyPlatformOk, setPasskeyPlatformOk] = useState(false);
@@ -131,6 +139,8 @@ const KeysManagement = ({
   const handleForgetDevice = useCallback(() => {
     if (!userId) return;
     void forgetDeviceUnlock(userId).then(() => {
+      // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+      broadcastLock(userId);
       setRememberedUntil(null);
       toastr.success(t("Common:DeviceUnlockForgotten"));
     });
@@ -238,6 +248,7 @@ const KeysManagement = ({
     userId,
     encryptionKeys,
     refreshKeysFromServer,
+    lockAfterKeyRemoval,
   });
 
   const handleForgotPassphrase = useCallback(
@@ -254,6 +265,7 @@ const KeysManagement = ({
   const remove = useDeleteKeyFlow({
     userId,
     refreshKeysFromServer,
+    lockAfterKeyRemoval,
     onForgotPassphrase: handleForgotPassphrase,
   });
   const deleteUnused = useDeleteUnusedKeysFlow({
@@ -268,6 +280,7 @@ const KeysManagement = ({
   const rotate = useRotatePassphraseFlow({
     userId,
     refreshKeysFromServer,
+    lockAfterReseal,
     onForgotPassphrase: handleForgotPassphrase,
   });
 
@@ -283,14 +296,37 @@ const KeysManagement = ({
 
   return (
     <div className={styles.sectionBody}>
-      <KeysList
-        keys={encryptionKeys || []}
-        onDelete={remove.request}
-        onExport={exportFlow.request}
-        onRotate={rotate.request}
-        isDeleting={remove.isPending}
-        deletingKeyId={remove.pendingId}
-      />
+      {/* Spec: private-rooms/key-management, "Keys management opens with an introduction" */}
+      <Text as="p" className={styles.intro} dataTestId="keys_management_intro">
+        {t("Common:KeysManagementIntro")}
+      </Text>
+      {/* A list that failed to load is reported by the block below. */}
+      {!keysKnown && keysLoadFailed ? null : (
+        <KeysList
+          keyState={hasKeys ? (isUnlocked ? "unlocked" : "locked") : undefined}
+          keys={keysKnown ? encryptionKeys : null}
+          onDelete={remove.request}
+          onExport={exportFlow.request}
+          onRotate={rotate.request}
+          isDeleting={remove.isPending}
+          deletingKeyId={remove.pendingId}
+        />
+      )}
+      {/* Spec: private-rooms/key-management, "Keys management offers to unlock a locked key" */}
+      {hasKeys && !isUnlocked ? (
+        <div className={styles.unlockAction}>
+          <Button
+            primary
+            size={ButtonSize.small}
+            onClick={() => {
+              void requireIdentity();
+            }}
+            label={t("Common:UnlockKey")}
+            isDisabled={busy}
+            testId="keys_unlock_button"
+          />
+        </div>
+      ) : null}
       {deleteUnused.unusedCount > 0 ? (
         <div className={styles.resetSection} data-testid="unused_keys_notice">
           <span className={styles.resetHint}>
@@ -353,25 +389,34 @@ const KeysManagement = ({
               {t("Common:ImportKey")}
             </Link>
           ) : null}
-          {recover.available ? (
-            <Link
-              type={LinkType.action}
-              fontWeight="600"
-              fontSize="13px"
-              isHovered
-              onClick={() => {
-                if (!busy) recover.request();
-              }}
-              role="button"
-              tabIndex={0}
-              onKeyDown={activateAsButton}
-              dataTestId="use_recovery_phrase_link"
-            >
-              {t("Common:UseRecoveryPhrase")}
-            </Link>
-          ) : null}
         </div>
       </div>
+      {/* Spec: private-rooms/key-management, "Recovery phrase has a block of its own in Keys management" */}
+      {recover.available ? (
+        <div className={styles.recoverySection} data-testid="recovery_section">
+          <Text fontSize="14px" fontWeight={600}>
+            {t("Common:RecoveryPhraseTitle")}
+          </Text>
+          <Text as="p" className={styles.recoveryText}>
+            {t("Common:RecoveryPhraseSectionText")}
+          </Text>
+          <Link
+            type={LinkType.action}
+            fontWeight="600"
+            fontSize="13px"
+            isHovered
+            onClick={() => {
+              if (!busy) recover.request();
+            }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={activateAsButton}
+            dataTestId="use_recovery_phrase_link"
+          >
+            {t("Common:UseRecoveryPhrase")}
+          </Link>
+        </div>
+      ) : null}
       {hasKeys ? (
         <div className={styles.deviceSection}>
           <Text fontSize="14px" fontWeight={600}>

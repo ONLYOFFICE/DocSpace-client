@@ -3,7 +3,7 @@
   "content": "In progress",
   "content_en_sha1_hash": "b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18",
   "created_at": "2025-05-19T21:30:45.918Z",
-  "updated_at": "2026-11-02T07:10:46.702Z",
+  "updated_at": "2026-11-17T13:13:27.011Z",
   "comment": {
     "text": "This label indicates that an operation or process is currently running. It appears in a dialog showing the status of a data reassignment and as a section title in the forms module.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 168,
+      "line_number": 200,
       "context": "const { t } = useTranslation([\"Common\"]);\n switch (file.vectorizationStatus) {\n case VectorizationStatus.InProgress:\n return (\n <Text className={styles.fileState} fontSize=\"12px\" lineHeight=\"16px\" noSelect>\n {t(\"Common:InProgress\")}\n </Text>\n );\n case VectorizationStatus.Failed:\n return (\n <FailedVectorizationBadge",
       "module": "/packages/client"
     },

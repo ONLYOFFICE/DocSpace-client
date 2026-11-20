@@ -39,14 +39,14 @@ import { getFolder } from "../../api/files";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
 import { getCachedEncryptedFilename } from "../encryption/filename-cache";
+import { wipeDek } from "../encryption/file-keys";
 import type { IdentityKeyPair } from "../encryption/types";
 import { addCopySuffix } from "./encrypted-copy";
+import { recoverDekForReimport, sniffDse3Upload } from "./encrypted-upload";
 import { recoverEncryptedFilenames } from "./encrypted-filename-recovery";
+import { fileNameKey as nameKey } from "./safe-file-name";
 
 const PAGE_SIZE = 100;
-
-/** Titles in one folder compare without regard to case. */
-const nameKey = (name: string) => name.toLowerCase();
 
 /**
  * The decrypted names of the files directly in a folder of a private room.
@@ -93,6 +93,60 @@ export async function listDecryptedFileNames(
       : file.title;
     return name ? [name] : [];
   });
+}
+
+/**
+ * The name a new file is compared under: its own, or for a container
+ * downloaded without decryption the one recovered from its header. Throws
+ * EncryptedReimportError when a container's name cannot be recovered.
+ */
+// Spec: private-rooms/file-operations, "Re-import of a file downloaded without decryption"
+export async function getUploadComparisonName(
+  file: File,
+  roomId: number | string,
+  userId: string,
+  identity: IdentityKeyPair,
+): Promise<{ name: string; recovered: boolean }> {
+  const header = await sniffDse3Upload(file);
+  if (!header) return { name: file.name, recovered: false };
+  const { dek, realName } = await recoverDekForReimport({
+    file,
+    header,
+    roomId,
+    userId,
+    identity,
+  });
+  wipeDek(dek);
+  return { name: realName, recovered: true };
+}
+
+/**
+ * The comparison names of a folder's new files; a file whose name cannot be
+ * recovered is set aside with its error.
+ */
+export async function nameUploadsForComparison<T>(
+  items: T[],
+  fileOf: (item: T) => File,
+  roomId: number | string,
+  userId: string,
+  identity: IdentityKeyPair,
+) {
+  const named: { item: T; name: string; recovered: boolean }[] = [];
+  const failed: { item: T; error: unknown }[] = [];
+  for (const item of items) {
+    try {
+      const compared = await getUploadComparisonName(
+        fileOf(item),
+        roomId,
+        userId,
+        identity,
+      );
+      named.push({ item, ...compared });
+    } catch (error) {
+      failed.push({ item, error });
+    }
+  }
+  return { named, failed };
 }
 
 export type TNameClash<T> = { item: T; name: string; renamed: string };

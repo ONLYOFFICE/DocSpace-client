@@ -36,11 +36,12 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import type { TFunction } from "i18next";
+import chunk from "lodash/chunk";
 
-import { getRoomCandidateKeys } from "@docspace/shared/api/privacy";
-
-/** Ids asked for in one request, which keeps its query string short. */
-export const CANDIDATE_KEYS_BATCH_SIZE = 40;
+import {
+  CANDIDATE_KEYS_BATCH_SIZE,
+  getRoomCandidateKeys,
+} from "@docspace/shared/api/privacy";
 
 type TMark = { label: string; description: string };
 type TPerson = { id?: string | null };
@@ -79,12 +80,8 @@ export const useMissingKeyMarks = ({
       );
       const unknown = ids.filter((id) => !known.has(id));
 
-      const batches: string[][] = [];
-      for (let i = 0; i < unknown.length; i += CANDIDATE_KEYS_BATCH_SIZE)
-        batches.push(unknown.slice(i, i + CANDIDATE_KEYS_BATCH_SIZE));
-
       await Promise.all(
-        batches.map(async (batch) => {
+        chunk(unknown, CANDIDATE_KEYS_BATCH_SIZE).map(async (batch) => {
           try {
             const keys = await getRoomCandidateKeys(roomId, batch);
             const withKey = new Set(

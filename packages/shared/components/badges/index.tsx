@@ -434,7 +434,9 @@ const Badges = ({
         </div>
       ) : null}
 
+      {/* Spec: private-rooms/file-operations, "Favorites, conversion and download-as withheld" */}
       {item.viewAccessibility?.MustConvert &&
+      !encrypted &&
       security &&
       "Convert" in security &&
       security?.Convert &&

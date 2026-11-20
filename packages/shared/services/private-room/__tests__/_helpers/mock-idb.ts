@@ -65,58 +65,76 @@ class MockObjectStoreNames {
 }
 
 class MockObjectStore {
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private tx?: MockTransaction,
+  ) {}
 
-  get(key: string): MockRequest<unknown> {
-    const req = new MockRequest<unknown>();
+  /** Runs one request: its result, its success callback, then the commit. */
+  private run<T>(apply: () => T): MockRequest<T> {
+    const req = new MockRequest<T>();
+    this.tx?.begin();
     queueMicrotask(() => {
-      req.result = this.store.get(key);
+      req.result = apply();
       req.onsuccess?.();
+      this.tx?.end();
     });
     return req;
+  }
+
+  get(key: string): MockRequest<unknown> {
+    return this.run(() => this.store.get(key));
   }
 
   put(value: { userId: string }): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
+    return this.run(() => {
       this.store.set(value.userId, value);
-      req.onsuccess?.();
     });
-    return req;
   }
 
   delete(key: string): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
+    return this.run(() => {
       this.store.delete(key);
-      req.onsuccess?.();
     });
-    return req;
   }
 
   getAll(): MockRequest<unknown[]> {
-    const req = new MockRequest<unknown[]>();
-    queueMicrotask(() => {
-      req.result = Array.from(this.store.values());
-      req.onsuccess?.();
-    });
-    return req;
+    return this.run(() => Array.from(this.store.values()));
   }
 
   clear(): MockRequest<void> {
-    const req = new MockRequest<void>();
-    queueMicrotask(() => {
+    return this.run(() => {
       this.store.clear();
-      req.onsuccess?.();
     });
-    return req;
   }
 }
 
+/** Completes once every request made through it has settled. */
 class MockTransaction {
+  oncomplete: (() => void) | null = null;
+
+  onabort: (() => void) | null = null;
+
+  onerror: (() => void) | null = null;
+
+  private pending = 0;
+
   constructor(private store: Store) {}
+
   objectStore(_name: string): MockObjectStore {
-    return new MockObjectStore(this.store);
+    return new MockObjectStore(this.store, this);
+  }
+
+  begin(): void {
+    this.pending += 1;
+  }
+
+  end(): void {
+    this.pending -= 1;
+    if (this.pending > 0) return;
+    queueMicrotask(() => {
+      if (this.pending === 0) this.oncomplete?.();
+    });
   }
 }
 

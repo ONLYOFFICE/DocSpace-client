@@ -45,7 +45,10 @@ import {
   prepareEncryptedUpload,
   prepareMultipleEncryptedUploads,
   shouldEncryptUpload,
+  EncryptedReimportError,
+  sniffDse3Upload,
 } from "../encrypted-upload";
+import { MAGIC_DSE3_FILE } from "../../encryption/types";
 import { encryptFile } from "../../encryption/file-keys";
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 
@@ -285,6 +288,20 @@ describe("encryptedUpload", () => {
       expect(vi.mocked(encryptFile)).toHaveBeenCalledWith(
         decoy,
         expect.objectContaining({ isForm: false }),
+      );
+    });
+  });
+
+  describe("sniffDse3Upload", () => {
+    it("File that is not a container", async () => {
+      await expect(sniffDse3Upload(new Blob(["plain text"]))).resolves.toBeNull();
+    });
+
+    it("Container with an unreadable header", async () => {
+      const damaged = new Blob([MAGIC_DSE3_FILE, new Uint8Array([9, 9, 9])]);
+
+      await expect(sniffDse3Upload(damaged)).rejects.toBeInstanceOf(
+        EncryptedReimportError,
       );
     });
   });

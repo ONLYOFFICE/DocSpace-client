@@ -47,8 +47,14 @@ describe("keys-management link", () => {
     );
   });
 
+  it("Link address", () => {
+    expect(getKeysManagementUrl()).toBe(
+      `${window.location.origin}/profile/keys-management`,
+    );
+  });
+
   it("is unknown without a usable portal address", () => {
-    expect(getKeysManagementUrl(undefined)).toBeNull();
+    expect(getKeysManagementUrl(null)).toBeNull();
     expect(getKeysManagementUrl("")).toBeNull();
     expect(getKeysManagementUrl("not a url")).toBeNull();
   });

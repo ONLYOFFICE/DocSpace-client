@@ -223,6 +223,66 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     expect(store.files).toEqual([]);
   });
 
+  const openSubfolder = async (roomSecurity: Record<string, boolean>) => {
+    openAddress("/private/5/filter", "?folder=6", {
+      privateRoomsSectionDecided: true,
+    });
+    const store = sectionStore();
+    const backfill = vi.fn();
+    store.maybeBackfillEncryptedRoom = backfill as never;
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      roomContents(true, true) as never,
+    );
+    vi.spyOn(api.files, "getFolderInfo").mockResolvedValue({
+      ...ROOM,
+      parentId: ROOMS_ROOT.id,
+      rootFolderType: FolderType.Rooms,
+      private: true,
+      security: roomSecurity,
+    } as never);
+
+    await store.fetchFiles(SUBFOLDER.id);
+    return backfill;
+  };
+
+  it("Page loaded inside a subfolder", async () => {
+    const backfill = await openSubfolder({ EditRoom: true });
+
+    expect(backfill).toHaveBeenCalledWith(ROOM.id, { EditRoom: true });
+  });
+
+  it("Member opens a subfolder", async () => {
+    const backfill = await openSubfolder({});
+
+    expect(backfill).toHaveBeenCalledWith(ROOM.id, {});
+  });
+
+  it("Frame configuration arrives after the address", async () => {
+    openAddress("/rooms/shared/5/filter", "?folder=5");
+    const store = sectionStore();
+    Object.assign(store.settingsStore, { isFrame: true });
+    const frame = { optedIn: false };
+    store.appsStore = {
+      get isPrivateRoomsSectionAvailable() {
+        return frame.optedIn;
+      },
+      isInstalled: () => true,
+      waitForFrameOptIn: async () => {
+        frame.optedIn = true;
+      },
+    };
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      roomContents(true) as never,
+    );
+
+    await store.fetchFiles(5);
+
+    expect(navigate).toHaveBeenCalledWith(
+      "/private/5/filter?folder=5",
+      expect.objectContaining({ replace: true }),
+    );
+  });
+
   it("shows the room once its address was decided", async () => {
     openAddress("/private/5/filter", "?folder=5", {
       privateRoomsSectionDecided: true,

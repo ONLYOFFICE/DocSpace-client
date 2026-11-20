@@ -3,7 +3,7 @@
   "content": "Upload any type files from your personal device",
   "content_en_sha1_hash": "668f73764cc99938a3a442a47ee4a5d6a62e4d50",
   "created_at": "2026-06-09T09:42:54.480Z",
-  "updated_at": "2026-06-09T09:57:39.684Z",
+  "updated_at": "2026-11-17T13:13:27.258Z",
   "comment": {
     "text": "Description text within the empty state view of a private room, providing instructions for uploading files from a local device.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/empty-views/empty-private-room/index.tsx",
-      "line_number": 124,
+      "line_number": 158,
       "context": "<span className={styles.actionBody}>\n <span className={styles.actionTitle}>\n {t(\"Common:PrivateRoomEmptyUploadTitle\")}\n </span>\n <span className={styles.actionDescription}>\n {t(\"Common:PrivateRoomEmptyUploadDescription\")}\n </span>\n </span>\n </button>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }

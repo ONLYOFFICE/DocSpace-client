@@ -106,6 +106,7 @@ const encryptedFile = {
   fileExst: ".docx",
   viewUrl: "/view/7",
 };
+const otherEncryptedFile = { ...encryptedFile, id: 9, viewUrl: "/view/9" };
 const plainFile = {
   id: 8,
   isFolder: false,
@@ -288,12 +289,37 @@ describe("useDownloadActions in a private room", () => {
     encryptedActions.downloadZip.mockRejectedValueOnce(
       new TypeError("Failed to fetch"),
     );
-    render([encryptedFile]);
+    render([encryptedFile, otherEncryptedFile]);
 
     await act(async () => {
       await actions.downloadAction();
     });
 
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedOperationFailed");
+  });
+
+  it("One encrypted file selected", async () => {
+    render([encryptedFile]);
+
+    await act(async () => {
+      await actions.downloadAction();
+    });
+
+    expect(encryptedActions.downloadFile).toHaveBeenCalledWith(encryptedFile);
+    expect(encryptedActions.downloadZip).not.toHaveBeenCalled();
+  });
+
+  it("Two encrypted files selected are saved as one archive", async () => {
+    render([encryptedFile, otherEncryptedFile]);
+
+    await act(async () => {
+      await actions.downloadAction();
+    });
+
+    expect(encryptedActions.downloadZip).toHaveBeenCalledWith([
+      encryptedFile,
+      otherEncryptedFile,
+    ]);
+    expect(encryptedActions.downloadFile).not.toHaveBeenCalled();
   });
 });

@@ -42,6 +42,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const env = vi.hoisted(() => ({
   downloadAndDecryptFile: vi.fn(),
+  downloadAndDecryptFileToBuffer: vi.fn(),
+  createZipFromBuffers: vi.fn(() => new Uint8Array([1])),
   triggerFileDownload: vi.fn(),
 }));
 
@@ -65,10 +67,16 @@ vi.mock("@docspace/shared/api/files", () => ({
   })),
 }));
 
-vi.mock("@docspace/shared/services/private-room/encrypted-download", () => ({
-  downloadAndDecryptFile: env.downloadAndDecryptFile,
-  triggerFileDownload: env.triggerFileDownload,
-}));
+vi.mock(
+  "@docspace/shared/services/private-room/encrypted-download",
+  async (io) => ({
+    ...((await io()) as Record<string, unknown>),
+    downloadAndDecryptFile: env.downloadAndDecryptFile,
+    downloadAndDecryptFileToBuffer: env.downloadAndDecryptFileToBuffer,
+    createZipFromBuffers: env.createZipFromBuffers,
+    triggerFileDownload: env.triggerFileDownload,
+  }),
+);
 
 vi.mock("@docspace/shared/services/private-room/room-member-keys", () => ({
   loadRoomMemberKeysSafe: vi.fn(async () => []),
@@ -122,5 +130,77 @@ describe("useEncryptedDownload", () => {
     expect(toastr.error).toHaveBeenCalledTimes(1);
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptionDownloadFailed");
     expect(env.triggerFileDownload).not.toHaveBeenCalled();
+  });
+
+  const zipOf = async (decrypted: Record<number, string>) => {
+    env.downloadAndDecryptFileToBuffer.mockImplementation(
+      async ({ fileId }: { fileId: number }) => ({
+        success: true,
+        data: new Uint8Array([fileId]),
+        fileName: decrypted[fileId],
+      }),
+    );
+    await act(async () => {
+      await download.downloadZip({
+        roomId: 10,
+        files: Object.keys(decrypted).map((id) => ({
+          fileId: Number(id),
+          downloadUrl: `/view/${id}`,
+          originalFileName: `opaque-${id}.txt`,
+          originalFileType: ".txt",
+        })),
+      });
+    });
+    return (
+      env.createZipFromBuffers.mock.calls.at(-1) as unknown as [
+        { name: string }[],
+      ]
+    )[0].map((e) => e.name);
+  };
+
+  it("Name with separators in an SDK archive", async () => {
+    expect(await zipOf({ 1: "../plans/q1.txt", 2: "notes.txt" })).toEqual([
+      ".._plans_q1.txt",
+      "notes.txt",
+    ]);
+  });
+
+  it("Names that differ only in case in an SDK archive", async () => {
+    expect(await zipOf({ 1: "Budget.xlsx", 2: "budget.xlsx" })).toEqual([
+      "Budget.xlsx",
+      "budget (1).xlsx",
+    ]);
+  });
+
+  it("Single file saved from the SDK", async () => {
+    const actual = await vi.importActual<
+      typeof import("@docspace/shared/services/private-room/encrypted-download")
+    >("@docspace/shared/services/private-room/encrypted-download");
+    env.triggerFileDownload.mockImplementationOnce(actual.triggerFileDownload);
+    env.downloadAndDecryptFile.mockResolvedValueOnce({
+      success: true,
+      file: new File([new Uint8Array([1])], "memo\u0007.docx"),
+    });
+    const saved: string[] = [];
+    vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(
+      function click(this: HTMLAnchorElement) {
+        saved.push(this.download);
+      },
+    );
+    URL.createObjectURL = vi.fn(() => "blob:test");
+    URL.revokeObjectURL = vi.fn();
+
+    await act(async () => {
+      await download.downloadFile({
+        fileId: 7,
+        roomId: 10,
+        downloadUrl: "/view/7",
+        originalFileName: "opaque-7.docx",
+        originalFileType: ".docx",
+      });
+    });
+
+    expect(saved).toEqual(["memo.docx"]);
+    vi.restoreAllMocks();
   });
 });

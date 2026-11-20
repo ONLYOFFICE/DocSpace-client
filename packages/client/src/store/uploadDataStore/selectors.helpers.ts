@@ -145,7 +145,6 @@ export function willEncryptItemImpl(
   return willEncryptUploadItem(
     {
       uploadContext: item.file?.uploadContext,
-      alreadyEncrypted: item.encrypted,
       publicKey,
       userId,
     },

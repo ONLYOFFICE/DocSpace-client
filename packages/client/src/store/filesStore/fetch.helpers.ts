@@ -125,6 +125,8 @@ async function checkSectionAddress(
   isSuperseded: boolean;
 }> {
   const { appsStore } = self;
+  // Spec: private-rooms/sidebar-section, "Section addresses are decided before the folder is shown"
+  await appsStore?.waitForFrameOptIn?.();
   const decision = {
     pathname: address.pathname,
     search: address.search,
@@ -266,6 +268,8 @@ export function fetchFilesImpl(
   self.roomsController = null;
 
   let room: Nullable<TItem> = null;
+  // The room of the open folder, read once for the second part of the path.
+  let pathRoom: Nullable<TItem> = null;
 
   const controller = self.filesController;
   // Set when a corrected address or a newer fetch takes the loading over.
@@ -329,16 +333,6 @@ export function fetchFilesImpl(
 
       if (data.current.private) {
         noticeOwnKeysOnRoomEntry(self.userStore);
-
-        // The room id may differ from data.current.id when navigating into
-        // a sub-folder: pathParts[1] is the room, current is the sub-folder.
-        const resolvedRoomId = data.pathParts?.[1]?.id ?? data.current.id;
-        // Backfill envelopes for members who registered their keypair after
-        // being invited (their old files are otherwise locked out).
-        self.maybeBackfillEncryptedRoom(
-          resolvedRoomId,
-          data.current.security,
-        );
       }
 
 
@@ -444,9 +438,11 @@ export function fetchFilesImpl(
           room = data.current;
 
           if (idx === 1) {
+            pathRoom = data.current;
             if (!isCurrentFolder) {
               room =
                 sectionCheck.room ?? (await api.files.getFolderInfo(folder.id));
+              pathRoom = room;
 
               shared = room.shared;
               external = room.external;
@@ -497,6 +493,11 @@ export function fetchFilesImpl(
           })
           .reverse();
       });
+
+      // Spec: private-rooms/room-membership, "The backfill sweep starts from any folder of the room"
+      if (pathRoom?.private) {
+        self.maybeBackfillEncryptedRoom(pathRoom.id ?? null, pathRoom.security);
+      }
 
       runInAction(() => {
         if (self.isPreview) {

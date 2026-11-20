@@ -94,6 +94,10 @@ vi.mock("@/app/(docspace)/_utils/open-doc-editor", () => ({
 }));
 
 import openDocEditor from "@/app/(docspace)/_utils/open-doc-editor";
+import {
+  createFile,
+  startUploadSession,
+} from "@docspace/shared/api/files";
 
 import useDocsActions, { type TPrivateCreate } from "./useDocsActions";
 
@@ -103,13 +107,13 @@ describe("useDocsActions in a private room", () => {
   const createFileOverride = vi.fn(async () => true);
   const uploadFilesToFolderOverride = vi.fn(async () => {});
 
-  const render = (privateCreate: TPrivateCreate) => {
+  const render = (privateCreate: TPrivateCreate, withOverrides = true) => {
     const Probe = () => {
-      actions = useDocsActions({
-        createFileOverride,
-        privateCreate,
-        uploadFilesToFolderOverride,
-      });
+      actions = useDocsActions(
+        withOverrides
+          ? { createFileOverride, privateCreate, uploadFilesToFolderOverride }
+          : { privateCreate },
+      );
       return null;
     };
     root = createRoot(document.createElement("div"));
@@ -162,6 +166,22 @@ describe("useDocsActions in a private room", () => {
       [files, 12],
       [files, undefined],
     ]);
+  });
+
+  it("Private page without an encrypted path", async () => {
+    render({ canCreateFiles: true }, false);
+    const files = [new File(["x"], "plan.txt")];
+
+    await act(async () => actions.uploadFilesToFolder(files));
+    await act(async () => actions.uploadFilesToFolder(files, 12));
+    await act(async () => actions.openCreateDialog("docx"));
+    env.keepNewFileName = false;
+    await act(async () => actions.openCreateDialog("xlsx"));
+
+    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(createFile).not.toHaveBeenCalled();
+    expect(openDocEditor).not.toHaveBeenCalled();
+    expect(actions.dialogVisible).toBe(false);
   });
 
   it("Create menu opened without keys", async () => {

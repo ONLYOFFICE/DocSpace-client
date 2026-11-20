@@ -114,6 +114,18 @@ export class AuthenticationError extends CryptoError {
   }
 }
 
+/**
+ * A peer key that could not be checked against its pin: the pin could not be
+ * read or stored, or the pin store could not be opened.
+ */
+// Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+export class KeyCheckUnavailableError extends AuthenticationError {
+  constructor() {
+    super("peer key could not be checked");
+    this.name = "KeyCheckUnavailableError";
+  }
+}
+
 export class WebCryptoUnavailableError extends CryptoError {
   constructor() {
     super(

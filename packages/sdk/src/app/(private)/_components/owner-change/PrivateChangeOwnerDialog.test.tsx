@@ -189,6 +189,45 @@ describe("PrivateChangeOwnerDialog", () => {
     expect(mocks.changeOwner).not.toHaveBeenCalled();
   });
 
+  it("Candidate left the room meanwhile", async () => {
+    await open();
+    mocks.getRoomMembers.mockImplementation(async () => ({ items: [] }));
+
+    await submit(false);
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedChangeOwnerNotMember",
+    );
+    expect(mocks.validateMembersForEncryption).not.toHaveBeenCalled();
+    expect(mocks.changeOwner).not.toHaveBeenCalled();
+  });
+
+  it("Members cannot be read", async () => {
+    mocks.getRoomMembers.mockImplementation(async () => {
+      throw new Error("403");
+    });
+    const container = document.createElement("div");
+    root = createRoot(container);
+
+    await act(async () => {
+      root?.render(
+        <PrivateChangeOwnerDialog
+          visible
+          onClose={vi.fn()}
+          roomId={ROOM_ID}
+          roomOwnerId="me"
+          currentUserId="me"
+        />,
+      );
+    });
+    await act(async () => {});
+
+    expect(container.textContent).toContain(
+      "Common:OwnerCandidatesLoadFailed",
+    );
+    expect(mocks.selector).toBeNull();
+  });
+
   it("offers the leave option checked by default to the owner", async () => {
     await open();
 

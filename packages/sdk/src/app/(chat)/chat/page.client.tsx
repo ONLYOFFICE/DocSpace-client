@@ -55,6 +55,8 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@onlyoffice/apps-ui-kit/ai-agent/providers/themes";
 import { getFileInfo } from "@docspace/shared/api/files";
+import type { TFile } from "@onlyoffice/apps-ui-kit/types";
+import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
 import {
   frameCallCommand,
   frameCallEvent,
@@ -62,6 +64,7 @@ import {
 } from "@docspace/shared/utils/common";
 
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
+import PrivateRoomsNotAvailable from "@/app/(private)/_components/not-available";
 
 import styles from "./page.module.scss";
 
@@ -70,11 +73,11 @@ const NewChat = dynamic(() => import("@onlyoffice/apps-ui-kit/ai-agent/new-chat"
 });
 
 type ChatParamsBridgeProps = {
-  fileId: string;
+  file: TFile | null;
   threadId: string;
 };
 
-const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
+const ChatParamsBridge = ({ file, threadId }: ChatParamsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const api = useApi();
   const stores = useStores();
@@ -96,11 +99,10 @@ const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
           .catch(() => {})
       : Promise.resolve();
 
-    if (!fileId) return;
+    if (!file) return;
 
     resumeThread
-      .then(() => getFileInfo(fileId))
-      .then((file) =>
+      .then(() =>
         attachFilesToChat([
           {
             id: file.id,
@@ -127,9 +129,62 @@ const ChatParamsBridge = ({ fileId, threadId }: ChatParamsBridgeProps) => {
           data: error instanceof Error ? error.message : String(error),
         });
       });
-  }, [api, attachFilesToChat, fileId, switchToThread, threadId, t]);
+  }, [api, attachFilesToChat, file, switchToThread, threadId, t]);
 
   return null;
+};
+
+type ChatTargets =
+  | { state: "pending" }
+  | { state: "private" }
+  | { state: "open"; file: TFile | null };
+
+/**
+ * Decides the scope and the file of the chat before it is mounted: a scope
+ * inside a private room or an encrypted file keeps the chat closed.
+ */
+// Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
+const useChatTargets = (scope: string, fileId: string): ChatTargets => {
+  const [targets, setTargets] = React.useState<ChatTargets>({
+    state: "pending",
+  });
+
+  React.useEffect(() => {
+    let cancelled = false;
+    const scopeId = Number(scope);
+
+    Promise.all([
+      scope && Number.isFinite(scopeId)
+        ? resolveFolderTarget({ id: scopeId })
+        : null,
+      fileId
+        ? getFileInfo(fileId).catch((error: unknown) => {
+            frameCallEvent({
+              event: "onAppError",
+              data: error instanceof Error ? error.message : String(error),
+            });
+            return null;
+          })
+        : null,
+    ])
+      .then(([target, file]) => {
+        if (cancelled) return;
+        setTargets(
+          target?.isPrivate || (file as { encrypted?: boolean } | null)?.encrypted
+            ? { state: "private" }
+            : { state: "open", file },
+        );
+      })
+      .catch(() => {
+        if (!cancelled) setTargets({ state: "private" });
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [scope, fileId]);
+
+  return targets;
 };
 
 type ChatPageProps = {
@@ -171,6 +226,7 @@ const ChatPage = ({
   }, [agentId]);
 
   const chatEntityId = agentId || entityId || undefined;
+  const targets = useChatTargets(chatEntityId ?? "", fileId);
 
   const frameInsets: React.CSSProperties | undefined =
     headerOffset > 0 || headerHeight > 0
@@ -179,6 +235,11 @@ const ChatPage = ({
           paddingBlockStart: headerHeight > 0 ? headerHeight : undefined,
         }
       : undefined;
+
+  if (targets.state === "pending") return null;
+  if (targets.state === "private") {
+    return <PrivateRoomsNotAvailable optInHint={false} />;
+  }
 
   return (
     <div className={styles.chatRoot} style={frameInsets}>
@@ -193,7 +254,7 @@ const ChatPage = ({
         getAgentRoomId={getAgentRoomId}
       >
         {canUseAi ? (
-          <ChatParamsBridge fileId={fileId} threadId={threadId} />
+          <ChatParamsBridge file={targets.file} threadId={threadId} />
         ) : null}
         <div className={styles.chat}>
           {canUseAi ? <ChatToolbar /> : null}

@@ -42,6 +42,10 @@ import { Events, RoomsType } from "@docspace/shared/enums";
 import CatalogRoomsIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 import CatalogFolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CatalogDocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg";
+import CatalogPrivateIcon from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg";
+
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
+import { requestPrivateRoomCreate } from "SRC_DIR/helpers/privateRoomCreateRequest";
 
 import type { ModuleItem } from "../sub-components/ModuleCard";
 import { DASHBOARD_ANALYTICS_CONTEXT } from "../utils";
@@ -98,9 +102,19 @@ export type UseModuleItemsProps = {
    * so its card is either shown as on or not built at all.
    */
   isAiHubAvailable: boolean;
+  /**
+   * The card of private rooms: "on" while the Private section is available to
+   * the user, "off" while its app is switched off on a portal that can switch
+   * apps, "none" where the section is not offered at all (an embedding frame
+   * without the host opt-in).
+   */
+  privateRooms: PrivateRoomsCardState;
 };
 
+export type PrivateRoomsCardState = "on" | "off" | "none";
+
 const APPS_SETTINGS_PATH = "/portal-settings/apps";
+const PRIVATE_ROOMS_PATH = "/private/filter";
 const AI_HUB_PATH = "/ai-rooms/filter";
 
 /**
@@ -122,6 +136,7 @@ export const useModuleItems = ({
   isAppInstalled,
   canEnableApps,
   isAiHubAvailable,
+  privateRooms,
 }: UseModuleItemsProps): ModuleItem[] => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -226,6 +241,40 @@ export const useModuleItems = ({
       },
     ];
 
+    // Spec: private-rooms/sidebar-section, "Dashboard shows a card of private rooms"
+    if (privateRooms !== "none") {
+      items.push({
+        id: "e2e-rooms",
+        icon: <CatalogPrivateIcon />,
+        title: t("Common:Private"),
+        description: t("Common:DashboardE2eRoomsDescription"),
+        // Spec: private-rooms/sidebar-section, "Dashboard card of private rooms carries the Beta badge"
+        badge: (
+          <BetaBadge
+            place="bottom"
+            title={t("Common:PrivateRoomsBetaTitle")}
+            description={t("Common:PrivateRoomsBetaDescription")}
+            dataTestId="dashboard_private_rooms_beta_badge"
+          />
+        ),
+        href: PRIVATE_ROOMS_PATH,
+        // Spec: private-rooms/sidebar-section, "Dashboard card of private rooms creates or opens"
+        ...withInstallState(
+          privateRooms === "on",
+          createOrOpen(
+            canCreateRooms,
+            PRIVATE_ROOMS_PATH,
+            t("Common:CreatePrivateRoom"),
+            () => {
+              requestPrivateRoomCreate();
+              navigate(PRIVATE_ROOMS_PATH);
+            },
+          ),
+        ),
+        noTour: true,
+      });
+    }
+
     // AI Chat (its agents, skill sets and knowledge bases) comes last, as in
     // the sidebar. Each of its lists creates what it holds, so the card opens
     // the section; it has no onboarding tour.
@@ -255,6 +304,7 @@ export const useModuleItems = ({
     formsInstalled,
     canEnableApps,
     isAiHubAvailable,
+    privateRooms,
   ]);
 };
 

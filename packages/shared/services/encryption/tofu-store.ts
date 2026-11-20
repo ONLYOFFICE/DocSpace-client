@@ -64,7 +64,7 @@ type LegacyTofuRecordV1 = {
 export type TofuCheckResult =
   | { kind: "first-seen" }
   /** The pin store is open but the peer's record could not be read. */
-  | { kind: "unreadable" }
+  | { kind: "unavailable" }
   | { kind: "match"; record: TofuRecord; matchedKey: TofuKeyEntry }
   | {
       kind: "mismatch";
@@ -74,6 +74,15 @@ export type TofuCheckResult =
     };
 
 const UNREADABLE = Symbol("unreadable");
+
+/** The pin store exists but cannot be opened now; the next call tries again. */
+const NOT_OPEN = Symbol("not-open");
+
+/** An open database, `null` for the in-memory store, or `NOT_OPEN`. */
+type OpenResult = IDBDatabase | null | typeof NOT_OPEN;
+
+// Errors of a browser that gives the page no IndexedDB at all.
+const STORAGE_REFUSED = new Set(["SecurityError", "InvalidStateError"]);
 
 const DB_NAME_PREFIX = "docspace-tofu-";
 const STORE_NAME = "known_keys";
@@ -116,6 +125,84 @@ function mostRecentKey(keys: TofuKeyEntry[]): TofuKeyEntry {
   return best;
 }
 
+type KeyDecision = { result: TofuCheckResult; record?: TofuRecord };
+
+/** What a seen key means against the peer's record, and the record to store. */
+function decideKey(
+  existing: TofuRecord | null,
+  userId: string,
+  publicKey: string,
+  now: number,
+): KeyDecision {
+  if (!existing) {
+    const record: TofuRecord = {
+      userId,
+      keys: [
+        {
+          publicKey,
+          firstSeenAt: now,
+          lastSeenAt: now,
+          verifiedAt: null,
+          source: "first-seen",
+        },
+      ],
+    };
+    return { result: { kind: "first-seen" }, record };
+  }
+
+  const matchIndex = existing.keys.findIndex((k) =>
+    keysEqual(k.publicKey, publicKey),
+  );
+  if (matchIndex > -1) {
+    const matchedKey: TofuKeyEntry = {
+      ...existing.keys[matchIndex],
+      lastSeenAt: now,
+    };
+    const updated: TofuRecord = {
+      ...existing,
+      keys: existing.keys.map((k, i) => (i === matchIndex ? matchedKey : k)),
+    };
+    return {
+      result: { kind: "match", record: updated, matchedKey },
+      record: updated,
+    };
+  }
+
+  return {
+    result: {
+      kind: "mismatch",
+      known: mostRecentKey(existing.keys),
+      knownKeys: existing.keys,
+      submitted: publicKey,
+    },
+  };
+}
+
+/** The peer's record with the key trusted: added, or its last-seen time moved. */
+function withAcceptedKey(
+  existing: TofuRecord | null,
+  userId: string,
+  publicKey: string,
+): TofuRecord {
+  const now = Date.now();
+  const accepted: TofuKeyEntry = {
+    publicKey,
+    firstSeenAt: now,
+    lastSeenAt: now,
+    verifiedAt: null,
+    source: "accepted",
+  };
+  if (!existing) return { userId, keys: [accepted] };
+  const idx = existing.keys.findIndex((k) => keysEqual(k.publicKey, publicKey));
+  return {
+    ...existing,
+    keys:
+      idx > -1
+        ? existing.keys.map((k, i) => (i === idx ? { ...k, lastSeenAt: now } : k))
+        : [...existing.keys, accepted],
+  };
+}
+
 function getIDB(): IDBFactory | null {
   if (typeof indexedDB === "undefined") return null;
   return indexedDB;
@@ -130,7 +217,8 @@ function constantTimeEqual(a: Uint8Array, b: Uint8Array): boolean {
   return diff === 0;
 }
 
-function keysEqual(a: string, b: string): boolean {
+/** Whether two base64 public keys are the same key, compared in constant time. */
+export function keysEqual(a: string, b: string): boolean {
   try {
     return constantTimeEqual(base64ToUint8Array(a), base64ToUint8Array(b));
   } catch {
@@ -154,7 +242,7 @@ function warnUnavailableOnce(): void {
 export class TofuStore {
   private readonly scopeId: string;
 
-  private dbPromise: Promise<IDBDatabase | null> | null = null;
+  private dbPromise: Promise<OpenResult> | null = null;
 
   private memoryStore: Map<string, TofuRecord> | null = null;
 
@@ -170,16 +258,30 @@ export class TofuStore {
     return this.memoryStore;
   }
 
-  private openDB(): Promise<IDBDatabase | null> {
+  private keepInMemory(): Promise<OpenResult> {
+    warnUnavailableOnce();
+    this.dbPromise = Promise.resolve(null);
+    return this.dbPromise;
+  }
+
+  // Spec: private-rooms/encryption-core, "Peer public keys are pinned on first use"
+  private openDB(): Promise<OpenResult> {
     if (this.dbPromise !== null) return this.dbPromise;
     const factory = getIDB();
-    if (!factory) {
-      warnUnavailableOnce();
-      this.dbPromise = Promise.resolve(null);
-      return this.dbPromise;
+    if (!factory) return this.keepInMemory();
+    let req: IDBOpenDBRequest;
+    try {
+      req = factory.open(`${DB_NAME_PREFIX}${this.scopeId}`, DB_VERSION);
+    } catch {
+      return this.keepInMemory();
     }
-    this.dbPromise = new Promise<IDBDatabase | null>((resolve) => {
-      const req = factory.open(`${DB_NAME_PREFIX}${this.scopeId}`, DB_VERSION);
+    let refused = false;
+    const opening = new Promise<OpenResult>((resolve) => {
+      const refuse = () => {
+        refused = true;
+        if (this.dbPromise === opening) this.dbPromise = null;
+        resolve(NOT_OPEN);
+      };
       req.onupgradeneeded = (event) => {
         const db = req.result;
         if (!db.objectStoreNames.contains(STORE_NAME)) {
@@ -211,6 +313,11 @@ export class TofuStore {
       };
       req.onsuccess = () => {
         const db = req.result;
+        // Refused while blocked: the next call opens a connection of its own.
+        if (refused) {
+          db.close();
+          return;
+        }
         db.onversionchange = () => {
           db.close();
           this.dbPromise = null;
@@ -222,19 +329,23 @@ export class TofuStore {
           // biome-ignore lint/suspicious/noConsole: diagnostic-only on IndexedDB open failure.
           console.error("TofuStore: open failed", req.error);
         }
-        warnUnavailableOnce();
-        resolve(null);
+        if (STORAGE_REFUSED.has(req.error?.name ?? "")) {
+          warnUnavailableOnce();
+          resolve(null);
+          return;
+        }
+        refuse();
       };
       req.onblocked = () => {
         if (typeof console !== "undefined") {
           // biome-ignore lint/suspicious/noConsole: diagnostic-only on IndexedDB open blocked.
           console.warn("TofuStore: open blocked");
         }
-        warnUnavailableOnce();
-        resolve(null);
+        refuse();
       };
     });
-    return this.dbPromise;
+    this.dbPromise = opening;
+    return opening;
   }
 
   /** The peer's record, `null` when there is none, `UNREADABLE` when the read failed. */
@@ -242,6 +353,7 @@ export class TofuStore {
     userId: string,
   ): Promise<TofuRecord | null | typeof UNREADABLE> {
     const db = await this.openDB();
+    if (db === NOT_OPEN) return UNREADABLE;
     if (!db) {
       return normalizeRecord(this.getMemoryStore().get(userId));
     }
@@ -265,42 +377,42 @@ export class TofuStore {
     return record === UNREADABLE ? null : record;
   }
 
-  private async putRecord(record: TofuRecord): Promise<void> {
+  /** Runs one write in a transaction of its own; true once it is committed. */
+  private async write(
+    inMemory: (memory: Map<string, TofuRecord>) => void,
+    inStore: (store: IDBObjectStore) => void,
+  ): Promise<boolean> {
     const db = await this.openDB();
+    if (db === NOT_OPEN) return false;
     if (!db) {
-      this.getMemoryStore().set(record.userId, record);
-      return;
+      inMemory(this.getMemoryStore());
+      return true;
     }
-    return new Promise<void>((resolve) => {
+    return new Promise<boolean>((resolve) => {
       try {
         const tx = db.transaction(STORE_NAME, "readwrite");
-        const store = tx.objectStore(STORE_NAME);
-        const req = store.put(record);
-        req.onsuccess = () => resolve();
-        req.onerror = () => resolve();
+        inStore(tx.objectStore(STORE_NAME));
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => resolve(false);
+        tx.onabort = () => resolve(false);
       } catch {
-        resolve();
+        resolve(false);
       }
     });
   }
 
-  private async deleteRecord(userId: string): Promise<void> {
-    const db = await this.openDB();
-    if (!db) {
-      this.getMemoryStore().delete(userId);
-      return;
-    }
-    return new Promise<void>((resolve) => {
-      try {
-        const tx = db.transaction(STORE_NAME, "readwrite");
-        const store = tx.objectStore(STORE_NAME);
-        const req = store.delete(userId);
-        req.onsuccess = () => resolve();
-        req.onerror = () => resolve();
-      } catch {
-        resolve();
-      }
-    });
+  private putRecord(record: TofuRecord): Promise<boolean> {
+    return this.write(
+      (memory) => memory.set(record.userId, record),
+      (store) => store.put(record),
+    );
+  }
+
+  private deleteRecord(userId: string): Promise<boolean> {
+    return this.write(
+      (memory) => memory.delete(userId),
+      (store) => store.delete(userId),
+    );
   }
 
   async checkKey(
@@ -311,93 +423,97 @@ export class TofuStore {
       throw new Error("TofuStore.checkKey: userId and publicKey are required");
     }
 
-    const existing = await this.readRecord(userId);
-    // Spec: encryption-core, "Peer public keys are pinned on first use"
-    if (existing === UNREADABLE) return { kind: "unreadable" };
-    const now = Date.now();
-
-    if (!existing) {
-      const record: TofuRecord = {
+    // Spec: private-rooms/encryption-core, "The first sight of a peer key is decided once per peer"
+    const db = await this.openDB();
+    if (db === NOT_OPEN) return { kind: "unavailable" };
+    if (!db) {
+      // Read and write with no await between them, so the tab decides once.
+      const memory = this.getMemoryStore();
+      const decision = decideKey(
+        normalizeRecord(memory.get(userId)),
         userId,
-        keys: [
-          {
+        publicKey,
+        Date.now(),
+      );
+      if (decision.record) memory.set(userId, decision.record);
+      return decision.result;
+    }
+
+    // One readwrite transaction reads and pins, so tabs cannot both find the
+    // peer unpinned; the answer waits for the commit.
+    return new Promise<TofuCheckResult>((resolve) => {
+      let decision: KeyDecision | null = null;
+      const failed = () =>
+        // A match stands without its timestamp; nothing else does.
+        resolve(
+          decision?.result.kind === "match"
+            ? decision.result
+            : { kind: "unavailable" },
+        );
+      try {
+        const tx = db.transaction(STORE_NAME, "readwrite");
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.get(userId);
+        req.onsuccess = () => {
+          decision = decideKey(
+            normalizeRecord(req.result),
+            userId,
             publicKey,
-            firstSeenAt: now,
-            lastSeenAt: now,
-            verifiedAt: null,
-            source: "first-seen",
-          },
-        ],
-      };
-      await this.putRecord(record);
-      return { kind: "first-seen" };
-    }
-
-    const matchIndex = existing.keys.findIndex((k) =>
-      keysEqual(k.publicKey, publicKey),
-    );
-    if (matchIndex > -1) {
-      const matchedKey: TofuKeyEntry = {
-        ...existing.keys[matchIndex],
-        lastSeenAt: now,
-      };
-      const updated: TofuRecord = {
-        ...existing,
-        keys: existing.keys.map((k, i) => (i === matchIndex ? matchedKey : k)),
-      };
-      await this.putRecord(updated);
-      return { kind: "match", record: updated, matchedKey };
-    }
-
-    return {
-      kind: "mismatch",
-      known: mostRecentKey(existing.keys),
-      knownKeys: existing.keys,
-      submitted: publicKey,
-    };
+            Date.now(),
+          );
+          if (decision.record) store.put(decision.record);
+        };
+        tx.oncomplete = () => resolve(decision?.result ?? { kind: "unavailable" });
+        tx.onerror = failed;
+        tx.onabort = failed;
+      } catch {
+        resolve({ kind: "unavailable" });
+      }
+    });
   }
 
-  async acceptKey(userId: string, publicKey: string): Promise<void> {
+  /** Trusts the key for the peer; resolves whether it is stored. */
+  // Spec: private-rooms/encryption-core, "Member keys are verified against pins when granting access"
+  async acceptKey(userId: string, publicKey: string): Promise<boolean> {
     if (!userId || !publicKey) {
       throw new Error("TofuStore.acceptKey: userId and publicKey are required");
     }
-    const existing = await this.readRecord(userId);
-    if (existing === UNREADABLE) return;
-    const now = Date.now();
-    if (!existing) {
-      await this.putRecord({
+    const db = await this.openDB();
+    if (db === NOT_OPEN) return false;
+    if (!db) {
+      const memory = this.getMemoryStore();
+      memory.set(
         userId,
-        keys: [
-          {
-            publicKey,
-            firstSeenAt: now,
-            lastSeenAt: now,
-            verifiedAt: null,
-            source: "accepted",
-          },
-        ],
-      });
-      return;
+        withAcceptedKey(normalizeRecord(memory.get(userId)), userId, publicKey),
+      );
+      return true;
     }
-    const idx = existing.keys.findIndex((k) =>
-      keysEqual(k.publicKey, publicKey),
-    );
-    const keys =
-      idx > -1
-        ? existing.keys.map((k, i) =>
-            i === idx ? { ...k, lastSeenAt: now } : k,
-          )
-        : [
-            ...existing.keys,
-            {
-              publicKey,
-              firstSeenAt: now,
-              lastSeenAt: now,
-              verifiedAt: null,
-              source: "accepted" as const,
-            },
-          ];
-    await this.putRecord({ ...existing, keys });
+    // One readwrite transaction reads and stores, so keys of one peer
+    // accepted at the same time in two tabs both stay.
+    return new Promise<boolean>((resolve) => {
+      try {
+        const tx = db.transaction(STORE_NAME, "readwrite");
+        const store = tx.objectStore(STORE_NAME);
+        const req = store.get(userId);
+        req.onsuccess = () => {
+          store.put(
+            withAcceptedKey(normalizeRecord(req.result), userId, publicKey),
+          );
+        };
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => resolve(false);
+        tx.onabort = () => resolve(false);
+      } catch {
+        resolve(false);
+      }
+    });
+  }
+
+  /** The peer's pinned keys: [] without a record, null when they cannot be read. */
+  async readKeys(userId: string): Promise<TofuKeyEntry[] | null> {
+    const record = await this.readRecord(userId);
+    if (record === UNREADABLE) return null;
+    return record ? [...record.keys] : [];
   }
 
   async getKeys(userId: string): Promise<TofuKeyEntry[]> {
@@ -443,6 +559,7 @@ export class TofuStore {
 
   async list(): Promise<TofuRecord[]> {
     const db = await this.openDB();
+    if (db === NOT_OPEN) return [];
     if (!db) {
       return Array.from(this.getMemoryStore().values());
     }
@@ -465,22 +582,10 @@ export class TofuStore {
   }
 
   async clear(): Promise<void> {
-    const db = await this.openDB();
-    if (!db) {
-      this.getMemoryStore().clear();
-      return;
-    }
-    return new Promise<void>((resolve) => {
-      try {
-        const tx = db.transaction(STORE_NAME, "readwrite");
-        const store = tx.objectStore(STORE_NAME);
-        const req = store.clear();
-        req.onsuccess = () => resolve();
-        req.onerror = () => resolve();
-      } catch {
-        resolve();
-      }
-    });
+    await this.write(
+      (memory) => memory.clear(),
+      (store) => store.clear(),
+    );
   }
 }
 

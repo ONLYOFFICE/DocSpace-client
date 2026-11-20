@@ -58,11 +58,15 @@ What the review saw:
 - A file the user holds no wrap for is reported with
   Common:EncryptedFileNoAccessYet when it is the only file of a download,
   copy, move or open, and is named in the batch report when it is one of
-  several. "Download decrypts on the client" is modified to match.
+  several. "Download decrypts on the client" is modified to match. When it is
+  the only file of a download, copy or move, it is reported before the
+  passphrase prompt. The SDK keeps naming it in the report of a copy of
+  several files.
 - The media viewer reports a file that is not shared yet before it asks for
   the passphrase or fetches the file.
 - The media viewer decodes an encrypted TIFF or HEIC image in the browser
-  after decryption.
+  after decryption, and drops the extension-to-type table it never matched
+  for a decrypted file.
 - The media viewer menu of an encrypted file has no download-as and no
   room-member link entry.
 - The convert badge is not shown for an encrypted file, and the SDK
@@ -81,16 +85,20 @@ Out of scope:
   encrypted file while a folder outside private rooms is open; none was
   found (design.md, "Dropped findings").
 - A server-side change of any kind.
+- The preview of an encrypted SVG image in the media viewer. It needs a
+  design of its own and is left to a follow-up change (decision 6).
+- The order of the passphrase prompt and the wrap check in the SDK's copy
+  and duplicate, as for the SDK's single-file download above.
 
 Dependencies:
 
 - No work on `../server` or the Document Server. Every server fact this
   change relies on is cited from the source in design.md.
 - `private-rooms-download-entry-names` modifies "Download decrypts on the
-  client" as well, for the saved names. Whichever change is archived second
-  carries the other's text into its MODIFIED block before it is archived:
-  that change keeps the scenario "No own access entry" at
-  Common:EncryptionDownloadFailed, which this change replaces.
+  client" as well, for the saved names. It was archived first (2026-11-19),
+  so this change's MODIFIED block already carries its text; the scenario
+  "No own access entry" moves from Common:EncryptionDownloadFailed to
+  Common:EncryptedFileNoAccessYet here.
 
 ## Decisions
 
@@ -115,6 +123,17 @@ Taken by the owner on 2026-11-19:
    rule the version badge already has ("whatever history rights the server
    reports"). The owner keeps the group.
 
+Taken by the owner on 2026-11-20, after the review of the plan:
+
+4. A copy or move of a single encrypted file checks the user's wrap before
+   the passphrase prompt, as the download does and the media viewer will:
+   a file the user cannot open never asks for the passphrase first.
+5. The media viewer's extension-to-type table for a decrypted file is
+   deleted rather than fixed. It never matched (design.md, "Context"), and
+   a reproduction showed every supported format rendering without it.
+6. The preview of an encrypted SVG image, which does not render today, is
+   left to a follow-up change.
+
 ## Capabilities
 
 ### New Capabilities
@@ -130,20 +149,23 @@ None.
   without a wrap for the user is reported as no access", "Media preview
   decrypts on the client", "The media viewer reports a file that is not
   shared yet as no access").
-- `private-rooms/sdk-surface`: two requirements added (no conversion of an
-  encrypted file, a declined unlock on a copy or move), one modified ("Menu
-  entries withheld for encrypted items").
+- `private-rooms/sdk-surface`: three requirements added (no conversion of an
+  encrypted file, a declined unlock on a copy or move, a file without a wrap
+  on a copy), one modified ("Menu entries withheld for encrypted items").
 
 ## Impact
 
 - `packages/shared/components/badges`: the convert badge.
 - `packages/shared/components/media-viewer`: the PDF menu, the order of the
-  access check, the TIFF and HEIC decoding after decryption.
+  access check, the TIFF and HEIC decoding after decryption, the type table
+  of a decrypted file.
 - `packages/shared/services/private-room/encrypted-copy.ts`: a missing wrap
   raises the typed no-access error, so the shared error mapping names it.
 - `packages/client/src/pages/Home/Section/Body/index.js` and
   `packages/client/src/store/filesActionsStore/copyMove.helpers.ts`: the drop
-  target and the locked text; `download.helpers.ts`: the no-access text.
+  target, the wrap check before the unlock and the locked text;
+  `download.helpers.ts`: the no-access text.
 - `packages/sdk/src/app/(personal-files)/_components/docs-layout`, the SDK
-  selection menu and `(private)/_hooks/useEncryptedCopyMove.ts`.
+  selection menu and `(private)/_hooks/useEncryptedCopyMove.ts` (the locked
+  text and the report of a copy of several files).
 - `public/locales`: one new Common key in every language.

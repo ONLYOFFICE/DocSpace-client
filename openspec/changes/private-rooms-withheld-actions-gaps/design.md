@@ -5,7 +5,9 @@
 See proposal.md for the motivation. No stashed design document covers these
 decisions: they come from the release-readiness review of 2026-11-19 and
 from reading `release/v4.1.0` and `../server` (HEAD 5636dd4a79, 2026-11-18)
-on the same day.
+on the same day. The review of the plan on 2026-11-20 re-read both, with
+`../server` at 44d88bc606 (none of the server files cited below changed
+since 5636dd4a79), and its findings are folded in below.
 
 What the code does today:
 
@@ -13,6 +15,8 @@ What the code does today:
   and `security.Convert`, with no look at `encrypted`
   (`packages/shared/components/badges/index.tsx`); the client's badge HOC
   opens the conversion dialog from it (`packages/client/src/HOCs/withBadges.js`).
+  The HOC hands its handler to the badges only, and the badges call it only
+  from the convert badge.
 - The PDF menu of the media viewer (`getPDFContextModel` in
   `MediaViewer.helpers.tsx`) gates download-as on the Download right alone and
   never disables the room-member link entry. The client puts a PDF into the
@@ -20,8 +24,13 @@ What the code does today:
   (`MediaViewerDataStore.ts`; `public/scripts/config.json` ships it off).
 - The SDK's open handler (`(personal-files)/_components/docs-layout/index.tsx`)
   calls `requestConvert` for any file with `MustConvert` once the encrypted
-  editor check has passed; the client refuses an encrypted one first
-  (`filesActionsStore/navigation.helpers.ts`).
+  editor check (`refusesEncryptedOpen`) has passed; the client refuses an
+  encrypted one in `filesActionsStore/navigation.helpers.ts`, before
+  `openDocEditorImpl` (`filesStore/actions.helpers.ts`) checks the Document
+  Server capability, so it shows Common:PrivateRoomConvertNotSupported
+  whatever the capability. The SDK row menus already withhold open and
+  preview for such a file (`getEncryptedFileWithheld`), so a double click or
+  Enter is the only way in.
 - The SDK selection menu (`(docspace)/_hooks/useContextMenuModel.ts`,
   `getGroupCopyItem`) offers copy when every item has the Copy right or is an
   encrypted file.
@@ -35,26 +44,44 @@ What the code does today:
   private rooms, the plan is `decrypt-out` with its confirmation, and
   `copyEncryptedFilesToFolderImpl` then resolves the real destination from its path, finds the
   same room and stores encrypted copies with suffixed names, deleting no
-  source.
+  source. The drop handler is the only caller of `moveDragItems` and has no
+  unit harness; `FilesActionsStore.drag.test.ts` calls the store directly.
 - A declined unlock in `copyEncryptedFilesToFolderImpl` and in the SDK's
   `useEncryptedCopyMove.ts` (copy and duplicate) shows
   Common:EncryptionLockedAddMembers.
 - `downloadEncryptedFileImpl` (`download.helpers.ts`) checks the user's own
   access entry before the unlock and shows Common:EncryptionDownloadFailed
   without one. `decryptEncryptedItemToFile` (`services/private-room/encrypted-copy.ts`)
-  throws a plain `Error` without one, so the copy reports
-  Common:EncryptedCopyFailed (or Common:EncryptedMovePartialFailure).
+  throws a plain `Error` without one, or without `fileKeys`, so the copy
+  reports Common:EncryptedCopyFailed (or Common:EncryptedMovePartialFailure).
+  The client's copy asks for the passphrase before it reads any access
+  answer. The SDK's copy (`useEncryptedCopyMove.ts`) shows the mapped
+  encryption text whenever exactly one file failed with a typed crypto error,
+  however many files the copy held, and Common:EncryptedCopyFailed naming the
+  files otherwise.
 - The media viewer (`MediaViewer.tsx`, `fetchAndDecryptFile`) reads the access
   answer, throws a plain `Error` only when `fileKeys` is missing, then asks
   for the passphrase, fetches the file and unwraps; the unwrap raises
   `NoAccessError` for an empty list, which the shared mapping turns into
-  Common:EncryptedFileNoAccessYet. After decryption it hands the blob to the
-  viewer with an `image/tiff` or `image/heic` type; the TIFF and HEIC decoders
-  run only on the unencrypted branch.
+  Common:EncryptedFileNoAccessYet. After decryption it looks the blob's type
+  up in an extension table whose keys have no dot, while `getFileExtension`
+  returns the extension with its dot, so every decrypted blob is handed to
+  the viewer as `application/octet-stream`. The TIFF and HEIC decoders run
+  only on the unencrypted branch.
+- What that type changes was reproduced on 2026-11-20 in Chromium 158, each
+  sample shown with its own type and as `application/octet-stream`: PNG,
+  JPEG, WebP, GIF and BMP in an `img`, WAV in an `audio`, MP4 and WebM in a
+  `video` render the same either way; SVG does not render as
+  `application/octet-stream`. The PDF viewer fetches the URL into an
+  `ArrayBuffer` (`sub-components/PDFViewer`), so the type does not reach it.
+  `viewed-images` of the default appsettings lists `.svg`, so an encrypted
+  SVG opens in the viewer and shows no image; that is left to a follow-up
+  (proposal.md, decision 6).
 
 ## Server facts
 
-Found with CodeGraph in `../server` and read in the source:
+Found with CodeGraph in `../server` and read in the source, last at
+44d88bc606 (2026-11-20):
 
 - Convert right in a private room: `FileSecurity.FilterEntryAsync`
   (`products/ASC.Files/Core/Core/Security/FileSecurity.cs`, the
@@ -83,7 +110,11 @@ Found with CodeGraph in `../server` and read in the source:
   a `ToListAsync` over the caller's own rows. A caller without an entry gets
   an empty list, never a missing one; the DTO
   (`products/ASC.Files/Core/ApiModels/ResponseDto/FileEncryptionInfoDto.cs`)
-  documents an empty list as "not shared with this account".
+  documents an empty list as "not shared with this account". The other
+  implementations of `IFileDao.GetFileKeys` answer the same way:
+  `ThirdPartyFileDao` and `SharePointFileDao` return an empty list and
+  `ProviderFileDao` passes the call to the DAO of the file's storage, so no
+  storage gives a missing list.
 
 So the convert badge and the SDK selection copy of a private folder are not
 offered with the rights the server reports today, and a conversion started
@@ -110,19 +141,21 @@ group 5 and the SDK refusal of task 1.1 are a second line, not the only one.
 ### 1. The SDK refuses conversion before the conversion dialog
 
 `openFileHandler` checks `file.encrypted && file.viewAccessibility?.MustConvert`
-right after the encrypted-editor check and shows
-Common:PrivateRoomConvertNotSupported, the text the client shows. The check
-sits in a pure helper next to `refusesEncryptedOpen` (`open-encrypted.ts`), so
-it is tested without the layout. The convert badge of the SDK rows goes
-through the shared badges and is covered by decision 6.
+first, before `refusesEncryptedOpen`, and shows
+Common:PrivateRoomConvertNotSupported, the text the client shows whatever the
+Document Server capability. The check reads the file alone, as the client's
+does, and sits in a pure helper next to `refusesEncryptedOpen`
+(`open-encrypted.ts`), so it is tested without the layout. The convert badge
+of the SDK rows goes through the shared badges and is covered by decision 7.
 
-### 2. The drop target comes from the shown list
+### 2. The store takes the drop target from the shown list
 
-The drop handler looks the target up in `filesStore.folders`, the list that
-is rendered with every loaded page and every socket update, instead of
-`selectedFolderStore.folders`. As a second line, `moveDragItemsImpl` counts a
-destination as part of the open room when it is one of the folders of the
-open folder's list, whether or not the caller passed folder info. The
+`moveDragItemsImpl` takes the destination's folder info from
+`filesStore.folders`, the list that is rendered with every loaded page and
+every socket update, when the caller passes none, and the drop handler stops
+looking it up in `selectedFolderStore.folders`. The lookup lives in the store
+so the drag suite tests the code that decides, and the handler only loses
+lines. A drop on a tree item finds no row and goes on as before. The
 alternative, filling `selectedFolderStore.folders` on every page, was
 rejected: it is the snapshot of the folder taken on navigation, and other
 readers expect it.
@@ -139,11 +172,17 @@ new members.
 ### 4. A missing wrap is a typed error everywhere
 
 `decryptEncryptedItemToFile` throws `NoAccessError` when the user has no
-entry, as `unwrapDekForCurrentUser` already does, so the shared mapping
-(`getSpecificEncryptionErrorMessage`) returns Common:EncryptedFileNoAccessYet.
-The client's copy shows that text when the failing file is the only one, and
-keeps Common:EncryptedCopyFailed or Common:EncryptedMovePartialFailure naming
-the files otherwise. The download shows it instead of
+entry, whether `fileKeys` is empty or missing, as `unwrapDekForCurrentUser`
+already does, so the shared mapping (`getSpecificEncryptionErrorMessage`)
+returns Common:EncryptedFileNoAccessYet. The client's copy shows that text
+when the failing file is the only one, and keeps Common:EncryptedCopyFailed
+or Common:EncryptedMovePartialFailure naming the files otherwise. For a copy
+or move of a single file (proposal.md, decision 4) the client reads the
+access answer before `requireUnlock` and stops there without an entry, as the
+download does. The SDK's copy shows the mapped text only when the copy held
+one file (`files.length === 1`), not whenever one file failed, so a file
+without a wrap among several stays named in Common:EncryptedCopyFailed; its
+duplicate is always a single file. The download shows it instead of
 Common:EncryptionDownloadFailed; the scenario "Download from the media
 viewer of a file that cannot be found" keeps Common:EncryptionDownloadFailed,
 which is a different case.
@@ -158,17 +197,21 @@ mapped it to Common:EncryptionDecryptPartialFailed goes.
 
 ### 6. TIFF and HEIC are decoded after decryption
 
-After decryption, a name ending in a TIFF or HEIC extension sends the
-decrypted blob through the same decoders the unencrypted branch uses
+After decryption, a decrypted name whose extension passes `isTiff` or
+`isHeic` (`MediaViewer.utils.ts`: `.tif`, `.tiff`, `.heic`, `.heif`) sends
+the decrypted blob through the same decoders the unencrypted branch uses
 (`decodeTiff`, `heic2any`), taking the bytes directly instead of fetching a
-URL, under the encrypted branch's abort signal. The decoders run in the
-browser, so the decrypted bytes stay there.
+URL, and the result is dropped once the encrypted branch's signal is
+aborted. The decoders run in the browser, so the decrypted bytes stay there.
+Every other decrypted blob is handed to the viewer without a type: the
+extension table goes (proposal.md, decision 5), which changes nothing the
+reproduction in Context could see.
 
 ### 7. Withheld entries do not rely on the server's rights
 
-The convert badge is not rendered for `item.encrypted`, and the HOC's
-handler returns early for one, so neither the badge nor a stale handler opens
-the dialog. The media viewer's PDF menu disables download-as and the
+The convert badge is not rendered for `item.encrypted`. The badge is the only
+caller of the HOC's handler (Context), so the handler needs no check of its
+own. The media viewer's PDF menu disables download-as and the
 room-member link for `item.encrypted`, the way it already withholds rename.
 The SDK selection menu's copy is disabled when the selection holds a folder
 and the open folder is inside a private room.
@@ -192,9 +235,16 @@ and the open folder is inside a private room.
 
 - The drop lookup reads a larger list. → It is the list already rendered; a
   `find` by id over it costs nothing next to a drag.
-- `private-rooms-download-entry-names` modifies the same download
-  requirement. → The change archived second merges the other's text first
-  (proposal.md, Dependencies).
+- The store now finds folder info for a drop on a row of a later page
+  outside private rooms too, where it passed none before; the ordinary move
+  hands that info on in its operation data. → The drag suite runs whole in
+  task 2.1, and a row of the first page already passed the same info.
+- The wrap check before the unlock adds one access request to a copy of a
+  single file. → The same request the download makes; a copy of several files
+  keeps one unlock and checks each file as it goes.
+- `private-rooms-download-entry-names` modified the same download
+  requirement and was archived first. → Its text is already in this change's
+  MODIFIED block (proposal.md, Dependencies).
 - Changing the copy's thrown error type may change the text of a test that
   asserted the old message. → Task 3.1 runs the shared copy tests and the
   client and SDK copy suites.

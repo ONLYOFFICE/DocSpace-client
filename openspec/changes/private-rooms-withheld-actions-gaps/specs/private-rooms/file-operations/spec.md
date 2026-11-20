@@ -62,11 +62,11 @@ The system SHALL NOT offer mark-as-favorite, convert or download-as for an encry
 - **THEN** the convert badge is shown and opens the conversion dialog
 
 ### Requirement: Download decrypts on the client
-The system SHALL download an encrypted file by fetching the ciphertext, decrypting it in the browser with the unlocked identity and saving it under its original name, reporting progress and surfacing a localized error on failure.
+The system SHALL download an encrypted file by fetching the ciphertext, decrypting it in the browser with the unlocked identity and saving it under its original name made plain as "Saved names are plain file names" describes, reporting progress and surfacing a localized error on failure.
 
 #### Scenario: Single file download
 - **WHEN** the user downloads one encrypted file and the identity is unlocked
-- **THEN** the browser saves the plaintext file with its original name
+- **THEN** the browser saves the plaintext file with its original name, made plain by the rule of "Saved names are plain file names"
 
 #### Scenario: Unlock declined
 - **WHEN** the user dismisses the passphrase prompt during download
@@ -78,18 +78,22 @@ The system SHALL download an encrypted file by fetching the ciphertext, decrypti
 
 #### Scenario: Download from the media viewer
 - **WHEN** the user downloads an encrypted file from the media viewer with its download button or Ctrl+S, and the identity is unlocked
-- **THEN** the browser saves the plaintext file under its original name, and the ciphertext MUST NOT be handed to the browser as the download
+- **THEN** the browser saves the plaintext file under its original name, made plain by the same rule, and the ciphertext MUST NOT be handed to the browser as the download
 
 #### Scenario: Download from the media viewer of a file that cannot be found
 - **WHEN** the user downloads an encrypted file from the media viewer, and the file is neither in the current folder list nor the file the viewer was opened for
 - **THEN** Common:EncryptionDownloadFailed is shown, nothing is downloaded, and the ciphertext MUST NOT be handed to the browser as the download
 
 ### Requirement: A file without a wrap for the user is reported as no access
-The system SHALL report a file whose access entries hold no wrap for a user who has a key with Common:EncryptedFileNoAccessYet when the user downloads, copies, moves or opens that file alone, and SHALL name it in the report of the batch when it is one of several files of a copy, move or decrypted archive. It SHALL NOT advise that user to set up encryption keys.
+The system SHALL report a file whose access entries hold no wrap for a user who has a key with Common:EncryptedFileNoAccessYet when the user downloads, copies, moves or opens that file alone, and SHALL name it in the report of the batch when it is one of several files of a copy, move or decrypted archive. For a download, copy or move of that file alone it SHALL do so before it asks for the passphrase. It SHALL NOT advise that user to set up encryption keys.
 
 #### Scenario: Key holder without a wrap
 - **WHEN** a user who holds a key downloads, copies, moves out or opens an encrypted file that is not wrapped for them, and that file is the only one of the action
 - **THEN** the message is Common:EncryptedFileNoAccessYet, not Common:NoAccessToEncryptedFile, Common:EncryptionDownloadFailed or Common:EncryptedCopyFailed
+
+#### Scenario: Copy of one file without a wrap while the key is locked
+- **WHEN** a user who holds a key and whose key is locked copies or moves out of a private room one encrypted file that is not wrapped for them
+- **THEN** Common:EncryptedFileNoAccessYet is shown, no passphrase prompt is raised, and nothing is uploaded or deleted
 
 #### Scenario: One file of several without a wrap
 - **WHEN** a user who holds a key copies two encrypted files out of a private room and one of them is not wrapped for them
@@ -100,7 +104,7 @@ The system SHALL report a file whose access entries hold no wrap for a user who 
 - **THEN** the lock badge keeps the title Common:NoAccessToEncryptedFile
 
 ### Requirement: Media preview decrypts on the client
-The system SHALL fetch and decrypt an encrypted image, audio or video in the browser before showing it in the media viewer, SHALL close the viewer when the user dismisses the passphrase prompt, and SHALL report decryption failures with a localized message. An encrypted TIFF or HEIC image SHALL be decoded in the browser after decryption and shown as an unencrypted one of that format is.
+The system SHALL fetch and decrypt an encrypted image, audio or video in the browser before showing it in the media viewer, SHALL close the viewer when the user dismisses the passphrase prompt, and SHALL report decryption failures with a localized message. An encrypted TIFF (.tif, .tiff) or HEIC (.heic, .heif) image SHALL be decoded in the browser after decryption and shown as an unencrypted one of that format is.
 
 #### Scenario: Open encrypted image
 - **WHEN** the user opens an encrypted image with the identity unlocked

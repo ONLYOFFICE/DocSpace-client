@@ -113,6 +113,10 @@ const CAROL = {
   email: "carol@example.com",
 };
 
+/** Common:PrivateOwnerEncryptionHint, shown only by the private owner picker. */
+const PRIVATE_OWNER_HINT =
+  "Only users who are already members of this room and have set up encryption can become the owner.";
+
 /** The rights FolderDtoHelper sends the owner of an active room. */
 const OWNER_ROOM_SECURITY = {
   Read: true,
@@ -1687,6 +1691,31 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     expect(asked).toBeGreaterThan(-1);
     expect(asked).toBeLessThan(urls.indexOf(`POST /${API_PREFIX}/files/owner`));
     await expect(page.getByText("You have appointed a new owner.")).toBeVisible();
+  });
+
+  test("Owner change from the info panel of an open room", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveOwnerChange(mockBoth, port, { candidateHasKey: true });
+    await openRoom(page, baseUrl);
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+
+    await page.locator(".info-panel-toggle").click();
+    await page.locator("#info-panel_room-context-button").click();
+    const more = page.getByRole("menuitem", { name: "More options" });
+    if (await more.isVisible()) await more.hover();
+    await page.locator("#option_change-room-owner").click();
+
+    // The private dialog: current members as candidates, with its key hint.
+    await expect(
+      page
+        .locator("[data-testid^='selector-item-']")
+        .filter({ hasText: CAROL.displayName }),
+    ).toBeVisible();
+    await expect(page.getByText(PRIVATE_OWNER_HINT)).toBeVisible();
   });
 
   test("Transfer refused by the server", async ({

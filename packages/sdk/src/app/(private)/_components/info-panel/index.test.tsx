@@ -43,6 +43,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 const mocks = vi.hoisted(() => ({
   selection: null as Record<string, unknown> | null,
   tabs: [] as { id: string }[],
+  rootFolderType: 0,
 }));
 
 vi.mock("react-i18next", () => ({
@@ -65,13 +66,74 @@ vi.mock("@/app/(docspace)/_store/InfoPanelStore", async (io) => ({
   useInfoPanelStore: () => ({
     selection: mocks.selection,
     fileView: "info_details",
+    isVisible: false,
+    isPinnedSelection: false,
     setView: vi.fn(),
     close: vi.fn(),
+    setSelection: vi.fn(),
+    setPinnedSelection: vi.fn(),
   }),
 }));
 
+vi.mock("@/app/(docspace)/_store/FilesSelectionStore", () => ({
+  useFilesSelectionStore: () => ({ selection: [], bufferSelection: null }),
+}));
+vi.mock("@/app/(docspace)/_store/FilesListStore", () => ({
+  useFilesListStore: () => ({
+    currentFolder: mocks.selection,
+    rootFolderType: mocks.rootFolderType,
+  }),
+}));
+vi.mock("@/app/(docspace)/_store/DialogsStore", () => ({
+  useDialogsStore: () => ({}),
+}));
+vi.mock("@/app/(docspace)/_store/NavigationStore", () => ({
+  useNavigationStore: () => ({}),
+}));
+vi.mock("@/app/(personal-files)/_store/DocsUserStore", () => ({
+  useDocsUserStore: () => ({ user: { id: "me" } }),
+}));
+vi.mock("../../_store/PrivateDialogsStore", () => ({
+  usePrivateDialogsStore: () => ({}),
+}));
+vi.mock("../members/PrivateMembersView", () => ({ default: () => null }));
+vi.mock("@/app/(docspace)/_components/info-panel/views/Details", () => ({
+  default: () => null,
+}));
+vi.mock("@/app/(docspace)/_components/info-panel/views/History", () => ({
+  default: () => null,
+}));
+// The room menu of the panel header, reduced to the actions it starts.
+vi.mock(
+  "@/app/(docspace)/_components/info-panel/sub-components/RoomHeader",
+  async () => {
+    const { RoomActionsContext } = await import(
+      "@/app/(rooms)/_contexts/RoomActionsContext"
+    );
+    const RoomHeader = ({ selection }: { selection: unknown }) => {
+      const actions = React.useContext(RoomActionsContext);
+      const item = selection as never;
+      return (
+        <div>
+          <button type="button" onClick={() => actions?.editRoom?.(item)}>
+            edit
+          </button>
+          <button type="button" onClick={() => actions?.inviteRoom?.(item)}>
+            invite
+          </button>
+          <button type="button" onClick={() => actions?.changeOwner?.(item)}>
+            owner
+          </button>
+        </div>
+      );
+    };
+    return { default: RoomHeader };
+  },
+);
+
 import { InfoPanelHeader } from "@/app/(docspace)/_components/info-panel";
-import { PrivateInfoPanelHeader } from ".";
+import { RoomActionsOverrideContext } from "@/app/(rooms)/_contexts/RoomActionsOverrideContext";
+import { PrivateInfoPanelBody, PrivateInfoPanelHeader } from ".";
 
 describe("PrivateInfoPanelHeader", () => {
   let root: Root | null = null;
@@ -116,5 +178,73 @@ describe("PrivateInfoPanelHeader", () => {
       "info_history",
       "info_details",
     ]);
+  });
+});
+
+describe("PrivateInfoPanelBody — room menu of an open room", () => {
+  const ROOM = {
+    id: 10,
+    title: "Vault",
+    isRoom: true,
+    private: true,
+    roomType: 2,
+    security: { EditRoom: true },
+  };
+  const override = {
+    editRoom: vi.fn(),
+    inviteRoom: vi.fn(),
+    changeOwner: vi.fn(),
+    leaveRoom: vi.fn(),
+  };
+  let root: Root | null = null;
+  let container: HTMLDivElement;
+
+  const renderOpenRoomPanel = () => {
+    mocks.selection = ROOM;
+    container = document.createElement("div");
+    root = createRoot(container);
+    act(() =>
+      root?.render(
+        <RoomActionsOverrideContext.Provider value={override}>
+          <PrivateInfoPanelBody />
+        </RoomActionsOverrideContext.Provider>,
+      ),
+    );
+  };
+
+  const click = (label: string) =>
+    act(() =>
+      Array.from(container.querySelectorAll("button"))
+        .find((b) => b.textContent === label)
+        ?.click(),
+    );
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+  });
+
+  it("Edit from the info panel of an open room", () => {
+    renderOpenRoomPanel();
+    click("edit");
+    expect(override.editRoom).toHaveBeenCalledWith(
+      expect.objectContaining({ id: ROOM.id }),
+    );
+  });
+
+  it("Invite from the info panel of an open room", () => {
+    renderOpenRoomPanel();
+    click("invite");
+    expect(override.inviteRoom).toHaveBeenCalledWith(
+      expect.objectContaining({ id: ROOM.id }),
+    );
+  });
+
+  it("Owner change from the info panel of an open room", () => {
+    renderOpenRoomPanel();
+    click("owner");
+    expect(override.changeOwner).toHaveBeenCalledWith(
+      expect.objectContaining({ id: ROOM.id }),
+    );
   });
 });

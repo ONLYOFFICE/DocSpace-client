@@ -376,8 +376,8 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1
       '@onlyoffice/docspace-sdk-js':
-        specifier: file:../../onlyoffice-docspace-sdk-js-2.3.0-20261117.tgz
-        version: file:onlyoffice-docspace-sdk-js-2.3.0-20261117.tgz
+        specifier: file:../../onlyoffice-docspace-sdk-js-2.3.0-20261120.tgz
+        version: file:onlyoffice-docspace-sdk-js-2.3.0-20261120.tgz
       '@onlyoffice/document-editor-react':
         specifier: 2.3.0
         version: 2.3.0(@onlyoffice/doceditor-types@10.0.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3671,9 +3671,9 @@ packages:
       react:
         optional: true
 
-  '@onlyoffice/docspace-sdk-js@file:onlyoffice-docspace-sdk-js-2.3.0-20261117.tgz':
-    resolution: {integrity: sha512-yQK5WvggoPVLJ0KvUZloAYJriBk5P+8LlJftIGrxu3eR20UuwNMzVQkHeOmnqDgstTVRnCeWdEAp8a5K40wVfg==, tarball: file:onlyoffice-docspace-sdk-js-2.3.0-20261117.tgz}
-    version: 2.3.0-20261117
+  '@onlyoffice/docspace-sdk-js@file:onlyoffice-docspace-sdk-js-2.3.0-20261120.tgz':
+    resolution: {integrity: sha512-2OkyxGDtrj/SVN3jOnK9gxUvJArDUsxmOOVM4+++k6SavdWumeiKpHPup2hMajCCW8UAOkBHSo60QsoXjR+ObA==, tarball: file:onlyoffice-docspace-sdk-js-2.3.0-20261120.tgz}
+    version: 2.3.0-20261120
     engines: {node: '>=18'}
 
   '@onlyoffice/document-editor-react@2.3.0':
@@ -11902,7 +11902,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@onlyoffice/docspace-sdk-js@file:onlyoffice-docspace-sdk-js-2.3.0-20261117.tgz': {}
+  '@onlyoffice/docspace-sdk-js@file:onlyoffice-docspace-sdk-js-2.3.0-20261120.tgz': {}
 
   '@onlyoffice/document-editor-react@2.3.0(@onlyoffice/doceditor-types@10.0.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:

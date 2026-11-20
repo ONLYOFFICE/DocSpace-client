@@ -49,7 +49,7 @@
     "@onlyoffice/ai-chat": "file:../../onlyoffice-ai-chat-1.0.2-progress.39.tgz",
     "@onlyoffice/apps-ui-kit": "file:../../onlyoffice-apps-ui-kit.tgz",
     "@onlyoffice/doceditor-types": "^10.0.1",
-    "@onlyoffice/docspace-sdk-js": "file:../../onlyoffice-docspace-sdk-js-2.3.0-20261117.tgz",
+    "@onlyoffice/docspace-sdk-js": "file:../../onlyoffice-docspace-sdk-js-2.3.0-20261120.tgz",
     "@onlyoffice/document-editor-react": "2.3.0",
     "@radix-ui/react-dialog": "catalog:",
     "@radix-ui/react-dropdown-menu": "catalog:",

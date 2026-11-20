@@ -455,8 +455,8 @@ test.describe("A locked key is reported by a block in a private room", () => {
 
     await page.keyboard.press("Shift+D");
 
-    await expect(page.getByTestId("dialog_dialog")).toHaveCount(0);
     await page.waitForTimeout(500);
+    await expect(page.getByTestId("new_document_dialog")).toHaveCount(0);
     expect(createRequests).toEqual([]);
   });
 });

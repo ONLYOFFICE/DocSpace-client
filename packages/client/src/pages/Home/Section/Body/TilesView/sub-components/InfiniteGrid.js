@@ -59,26 +59,30 @@ const HeaderItem = ({ children, className, ...rest }) => {
 
 // The rooms of the AI section - an agent, a skill set, a knowledge base - are
 // rooms to the tile container, which wraps them as one; their tiles are
-// taller, so their rows are told apart by the room type of the item.
-const AI_TILE_ROOM_TYPES = [
-  RoomsType.AiProjectRoom,
-  RoomsType.InstructionsRoom,
-  RoomsType.KnowledgeRoom,
-];
-
-const getTileRoomType = (child) =>
-  child?.props?.children?.props?.item?.roomType;
-
-const isAgentTile = (child) =>
-  AI_TILE_ROOM_TYPES.includes(getTileRoomType(child));
-
-// An agent's card holds five rows, a skill set's four and a knowledge
-// base's three. Keep in step with AiProjectTile.module.scss.
+// taller, so they are told apart by the room type of the item. An agent's
+// card holds five rows, a skill set's four and a knowledge base's three.
+// Keep in step with AiProjectTile.module.scss.
 const AI_TILE_HEIGHTS = {
   [RoomsType.AiProjectRoom]: 290,
   [RoomsType.InstructionsRoom]: 182,
   [RoomsType.KnowledgeRoom]: 154,
 };
+
+const VERTICAL_ROOM_GAP = 16;
+
+const getTileRoomType = (child) =>
+  child?.props?.children?.props?.item?.roomType;
+
+/** The height of an AI card with the gap under it; 0 for any other tile. */
+const getAiTileHeight = (child) => {
+  const height = AI_TILE_HEIGHTS[getTileRoomType(child)];
+  return height ? height + VERTICAL_ROOM_GAP : 0;
+};
+
+// Only an agent's cards are wide, two to a row; a skill set's and a
+// knowledge base's are laid out in the columns of rooms.
+const isAgentTile = (child) =>
+  getTileRoomType(child) === RoomsType.AiProjectRoom;
 
 const Card = ({ children, ...rest }) => {
   const getItemSize = (child) => {
@@ -98,8 +102,8 @@ const Card = ({ children, ...rest }) => {
     const titleHeight = 20 + headerMargin;
     const templateHeight = 126 + verticalRoomGap;
 
-    if (isAgentTile(child))
-      return AI_TILE_HEIGHTS[getTileRoomType(child)] + verticalRoomGap;
+    const aiTileHeight = getAiTileHeight(child);
+    if (aiTileHeight) return aiTileHeight;
     if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
@@ -160,8 +164,26 @@ const InfiniteGrid = (props) => {
   const aiRoomTypes = new Set();
 
   const addItemToList = (key, cls, clear) => {
+    // The grid knows the heights of rooms, folders and files; a row of AI
+    // cards tells its own. A row of loaders alone has no card to ask and
+    // takes the height of the row above it.
+    const cardsHeight = Math.max(
+      0,
+      ...cards.map((card) => getAiTileHeight(card.props.children)),
+    );
+    const rowHeight =
+      cardsHeight ||
+      (cards.some((card) => card.type === Card)
+        ? 0
+        : (list[list.length - 1]?.props?.["data-row-height"] ?? 0));
+
     list.push(
-      <Item key={key} className={cls} ref={observeRow}>
+      <Item
+        key={key}
+        className={cls}
+        ref={observeRow}
+        data-row-height={rowHeight || undefined}
+      >
         {cards}
       </Item>,
     );
@@ -237,7 +259,7 @@ const InfiniteGrid = (props) => {
           addItemToList(listKey, cls, true);
         }
 
-        if (isAgentTile(child)) aiRoomTypes.add(getTileRoomType(child));
+        if (getAiTileHeight(child)) aiRoomTypes.add(getTileRoomType(child));
 
         const key = child?.props?.children?.props?.id;
 
@@ -328,11 +350,11 @@ export default inject(
 
     const currentFolderId = selectedFolderStore.id;
 
-    // The lists of the AI Chat section: their rows are agent-sized cards,
-    // for agents, skill sets and knowledge bases alike (see isAgentTile).
+    // The list of agents: its rows are wide cards, two to a row (see
+    // isAgentTile).
     const isAgents =
       isAiSectionFolder &&
-      filesList.some((item) => AI_TILE_ROOM_TYPES.includes(item.roomType));
+      filesList.some((item) => item.roomType === RoomsType.AiProjectRoom);
 
     return {
       filesList,

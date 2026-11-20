@@ -1096,13 +1096,10 @@ class HotkeyStore {
     const { filesList } = this.filesStore;
     const isRooms = filesList.some((item) => item.isRoom && !item.isTemplate);
     const isTemplates = filesList.some((item) => item.isTemplate);
-    // Agents, skill sets and knowledge bases share the wide AI card grid.
+    // Agents take the wide card grid; skill sets and knowledge bases are
+    // laid out in the columns of rooms.
     const isAgents = filesList.some(
-      (item) =>
-        item.isRoom &&
-        (item.roomType === RoomsType.AiProjectRoom ||
-          item.roomType === RoomsType.InstructionsRoom ||
-          item.roomType === RoomsType.KnowledgeRoom),
+      (item) => item.isRoom && item.roomType === RoomsType.AiProjectRoom,
     );
     return getCountTilesInGrid(isRooms, isTemplates, isAgents);
   }

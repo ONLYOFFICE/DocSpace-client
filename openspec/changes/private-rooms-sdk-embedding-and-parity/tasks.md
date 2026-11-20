@@ -38,7 +38,7 @@ decisions 3 to 5, taken on 2026-11-20. Unit tests of the SDK run with
 
 ## 7. Members search
 
-- [ ] 7.1 Move the exclusions of `classifyMembers` (`(private)/_components/members/PrivateMembersView.utils.ts`) into one predicate used by the sections and by the search results of `PrivateMembersView.tsx`, where it filters what is rendered and decides the empty state, while the next page's `startIndex` and Show more keep counting the raw page and `total` (design decision 9). Verify: a case "Members searched" in `PrivateMembersView.utils.test.ts`; in `PrivateMembersView.pendingAccess.test.tsx` or a new `PrivateMembersView.search.test.tsx` (reusing the harness of `private-rooms-test-coverage-gaps` 3.3 if it landed first), a search case and "A page of only excluded members shows the empty state"; "Members listed" unchanged; `cd packages/sdk && pnpm exec vitest run "src/app/(private)/_components/members"`
+- [x] 7.1 Move the exclusions of `classifyMembers` (`(private)/_components/members/PrivateMembersView.utils.ts`) into one predicate used by the sections and by the search results of `PrivateMembersView.tsx`, where it filters what is rendered and decides the empty state, while the next page's `startIndex` and Show more keep counting the raw page and `total` (design decision 9). Verify: a case "Members searched" in `PrivateMembersView.utils.test.ts`; in `PrivateMembersView.pendingAccess.test.tsx` or a new `PrivateMembersView.search.test.tsx` (reusing the harness of `private-rooms-test-coverage-gaps` 3.3 if it landed first), a search case and "A page of only excluded members shows the empty state"; "Members listed" unchanged; `cd packages/sdk && pnpm exec vitest run "src/app/(private)/_components/members"`
 
 ## 8. Gate
 

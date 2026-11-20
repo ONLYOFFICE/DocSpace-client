@@ -52,6 +52,19 @@ export type ClassifiedMemberSection = {
   members: RoomMember[];
 };
 
+/**
+ * Whether the members view lists a member, in its sections and in a search:
+ * not a group or a guest, and a disabled user only as the owner.
+ */
+// Spec: private-rooms/sdk-surface, "Members grouped without groups and guests"
+export function isListedMember(member: RoomMember): boolean {
+  const shared = member.sharedTo as TUser & { status?: EmployeeStatus };
+  if (member.subjectType === MembersSubjectType.Group || shared.isVisitor) {
+    return false;
+  }
+  return !(shared.status === EmployeeStatus.Disabled && !member.isOwner);
+}
+
 export function classifyMembers(
   members: RoomMember[],
 ): ClassifiedMemberSection[] {
@@ -59,20 +72,10 @@ export function classifyMembers(
   const users: RoomMember[] = [];
   const expected: RoomMember[] = [];
 
-  for (const member of members) {
+  for (const member of members.filter(isListedMember)) {
     const shared = member.sharedTo as TUser & {
       activationStatus?: EmployeeActivationStatus;
-      status?: EmployeeStatus;
     };
-
-    // Spec: private-rooms/sdk-surface, "Members grouped without groups and guests"
-    if (member.subjectType === MembersSubjectType.Group || shared.isVisitor) {
-      continue;
-    }
-
-    if (shared.status === EmployeeStatus.Disabled && !member.isOwner) {
-      continue;
-    }
 
     if (shared.activationStatus === EmployeeActivationStatus.Pending) {
       expected.push(member);

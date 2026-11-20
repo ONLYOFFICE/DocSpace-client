@@ -419,6 +419,28 @@ describe("FilesStore rooms requests — Private section scope", () => {
     expect(store.folders.map((f) => f.id)).toEqual([2, 3, 4]);
   });
 
+  it.each([
+    ["on", false, true],
+    ["off", true, false],
+  ])("App switched %s", async (_, before, after) => {
+    // A folder of a room is open, so the rooms list itself is not reloaded.
+    openAddress("/rooms/shared/12/filter");
+    const store = storeOnRoomsList(true);
+    const fetchTreeFolders = vi.fn(async () => {});
+    store.treeFoldersStore.fetchTreeFolders = fetchTreeFolders as never;
+    const apps = observable({
+      isPrivateRoomsSectionAvailable: before,
+      isInstalled: () => true,
+    });
+    store.watchPrivateRoomsSection(apps);
+
+    runInAction(() => {
+      apps.isPrivateRoomsSectionAvailable = after;
+    });
+
+    await vi.waitFor(() => expect(fetchTreeFolders).toHaveBeenCalledTimes(1));
+  });
+
   it("reloads the open Rooms list when the section availability flips", async () => {
     const store = storeOnRoomsList(true);
     const apps = observable({

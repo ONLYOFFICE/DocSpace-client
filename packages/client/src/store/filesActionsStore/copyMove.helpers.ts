@@ -69,7 +69,6 @@ import type FilesActionStore from "../FilesActionsStore";
 import type DialogsStore from "../DialogsStore";
 import type { TUploadTarget } from "../uploadDataStore/helpers";
 import { resolveFolderTarget } from "@docspace/shared/services/private-room/upload-target";
-import { NoAccessError } from "@docspace/shared/services/encryption/errors";
 import {
   isSameId,
   planPrivateTransfer,
@@ -351,7 +350,6 @@ self: FilesActionStore,
 
   const decrypted: { item: TActionItem; file: File }[] = [];
   const failed: string[] = [];
-  let soleFileError: unknown;
 
   for (const item of items) {
     try {
@@ -376,7 +374,6 @@ self: FilesActionStore,
         error,
       );
       failed.push(item.title);
-      if (items.length === 1) soleFileError = error;
     }
   }
 
@@ -407,10 +404,7 @@ self: FilesActionStore,
     self.uploadDataStore.startUpload(filesToUpload, target, i18n.t);
   }
 
-  // Spec: private-rooms/file-operations, "A file without a wrap for the user is reported as no access"
-  if (soleFileError instanceof NoAccessError) {
-    toastr.error(i18n.t("Common:EncryptedFileNoAccessYet"));
-  } else if (failed.length > 0) {
+  if (failed.length > 0) {
     if (deleteSourceOnSuccess) {
       toastr.error(
         i18n.t("Common:EncryptedMovePartialFailure", {

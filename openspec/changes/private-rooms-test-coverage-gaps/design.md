@@ -202,3 +202,16 @@ option; a guest without a key is already one of `withoutKeys`.
   - `pnpm nx run-many -t tsc lint test` over the six packages: green;
   - full locale suite: 46 passed;
   - `openspec validate --all --strict`: 24 passed.
+- 2026-11-20, after the review fixes, at `9cb6caeec5c`:
+  - client E2E under Docker (`tests-dev`): `private-room-access.spec.ts`,
+    the only spec the fixes touch, 13 passed; its "No keys" case fails
+    with the key-less guard of `withHotkeys` removed;
+  - `pnpm exec vitest run src/components/panels/InvitePanel` in client:
+    3 files, 41 tests passed;
+  - SDK private suite on a fresh `pnpm run test:build`: 52 passed, 7
+    skipped;
+  - `npm --prefix ./common/tests run test:lefthook`: 8 files, 61 passed,
+    3 skipped;
+  - `pnpm nx run-many -t tsc lint test` over the six packages: green;
+  - full locale suite: 46 passed;
+  - `openspec validate --all --strict`: 24 passed.

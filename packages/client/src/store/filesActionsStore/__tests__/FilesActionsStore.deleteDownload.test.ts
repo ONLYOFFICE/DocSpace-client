@@ -588,8 +588,9 @@ describe("FilesActionsStore — single encrypted download", () => {
     } as never);
 
     expect(getFileEncryptionAccess).toHaveBeenCalledWith(5);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
     expect(toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptionDownloadFailed",
+      "Common:EncryptedFileNoAccessYet",
     );
     expect(requireUnlock).not.toHaveBeenCalled();
     expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();

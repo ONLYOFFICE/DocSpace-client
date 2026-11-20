@@ -358,8 +358,8 @@ self: FilesActionStore,file: TActionItem
       (k) => String(k.userId) === String(userId),
     );
     if (!hasOwnEntry) {
-      // Spec: file-operations, "Download decrypts on the client"
-      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
+      // Spec: file-operations, "A file without a wrap for the user is reported as no access"
+      toastr.error(i18n.t("Common:EncryptedFileNoAccessYet"));
       return Promise.resolve();
     }
 

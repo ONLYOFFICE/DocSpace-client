@@ -306,6 +306,74 @@ describe("handleUploadConflictsImpl", () => {
       expect(filesApi.checkIsFileExist).not.toHaveBeenCalled();
     });
 
+    const withUnknownKeyList = (read: "succeeds" | "fails") => {
+      const harness = createTestUploadDataStore({
+        userStore: { user: { id: "user-1", isAdmin: false }, encryptionKeys: null },
+      });
+      const userStore = harness.store.userStore as unknown as {
+        encryptionKeys: unknown;
+        ensureEncryptionKeys: () => Promise<unknown>;
+      };
+      userStore.ensureEncryptionKeys = vi.fn(async () => {
+        if (read === "fails") return null;
+        userStore.encryptionKeys = keyed.userStore.encryptionKeys;
+        return userStore.encryptionKeys;
+      });
+      return harness;
+    };
+
+    it("Key list not known when the upload starts", async () => {
+      const { store, fakes } = withUnknownKeyList("succeeds");
+      vi.mocked(requireUnlock).mockResolvedValue({} as never);
+      vi.mocked(listDecryptedFileNames).mockResolvedValue([
+        "New document.docx",
+      ]);
+      const item = copyInto("New document.docx");
+
+      const upload = await checkConflicts(store, [item], 50);
+
+      expect(upload).not.toHaveBeenCalled();
+      expect(
+        fakes.dialogsStore.setConflictResolveDialogItems,
+      ).toHaveBeenCalledWith([{ title: "New document.docx", isFile: true }]);
+      // The auto-lock suspension of the upload reads the same filter.
+      expect(store.willEncryptItem(item)).toBe(true);
+    });
+
+    it("Key list cannot be read when the upload starts", async () => {
+      const { store } = withUnknownKeyList("fails");
+      const item = privateItem();
+
+      const upload = await checkConflicts(store, [item], 50);
+
+      expect(requireUnlock).not.toHaveBeenCalled();
+      expect(listDecryptedFileNames).not.toHaveBeenCalled();
+      expect(item.error).toBe("Common:EncryptionKeysLoadFailed");
+      expect(upload).toHaveBeenCalledTimes(1);
+    });
+
+    it("Retry while the key list is not known", async () => {
+      const { store } = withUnknownKeyList("succeeds");
+      vi.mocked(requireUnlock).mockResolvedValue({} as never);
+      const failed = makeUploadFile({
+        uniqueId: "retry-me",
+        action: "upload",
+        error: "Common:EncryptionPrepareFailed",
+        inAction: true,
+        toFolderId: 50,
+        target: makePrivateUploadTarget(),
+      });
+      store.files = [failed];
+      store.uploadedFilesHistory = [{ ...failed }];
+      const parallelUploading = vi.fn();
+      store.parallelUploading = parallelUploading as never;
+
+      await retryUploadFilesImpl(store, t, "retry-me");
+
+      expect(requireUnlock).toHaveBeenCalledWith("user-1");
+      expect(parallelUploading).toHaveBeenCalledTimes(1);
+    });
+
     it("fails the files as locked when the unlock for the comparison is declined", async () => {
       const { store, fakes } = createTestUploadDataStore(keyed);
       vi.mocked(requireUnlock).mockResolvedValue(null as never);

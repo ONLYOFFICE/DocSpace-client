@@ -40,6 +40,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import i18n from "../../i18n";
 import {
   listDecryptedFileNames,
   resolveNameClashes,
@@ -253,6 +254,8 @@ async function findPrivateNameClashes(
   self: UploadDataStore,
   items: TUploadFile[],
 ): Promise<TPrivateRename[]> {
+  // Spec: private-rooms/file-operations, "The name comparison of a private upload is not skipped"
+  if (await failPrivateItemsOnUnreadableKeyList(self, items)) return [];
   const privateItems = items.filter((f) => self.willEncryptItem(f));
   if (privateItems.length === 0) return [];
 
@@ -289,6 +292,37 @@ async function findPrivateNameClashes(
     });
   }
   return renames;
+}
+
+/**
+ * Reads a key list that is not known yet, so that the files bound for a
+ * private room are counted as the gate will count them; when the read fails,
+ * those files fail as the gate would fail them. True when they failed.
+ */
+async function failPrivateItemsOnUnreadableKeyList(
+  self: UploadDataStore,
+  items: TUploadFile[],
+) {
+  if (!(await self.isKeyListUnreadable())) return false;
+
+  const errorMessage = i18n.t("Common:EncryptionKeysLoadFailed");
+  runInAction(() => {
+    items
+      .filter((item) => item.target.isPrivate)
+      .forEach((item) => {
+        item.inAction = true;
+        item.error = errorMessage;
+        item.percent = 0;
+        const historyItem = self.uploadedFilesHistory.find(
+          (f) => f.uniqueId === item.uniqueId,
+        );
+        if (historyItem) {
+          historyItem.error = errorMessage;
+          historyItem.percent = 0;
+        }
+      });
+  });
+  return true;
 }
 
 /** Keeps both files of a private clash: the new one takes its suffixed name. */
@@ -501,6 +535,9 @@ async function unlockRetriedFiles(
   self: UploadDataStore,
   retryFiles: TUploadFile[],
 ) {
+  if (await failPrivateItemsOnUnreadableKeyList(self, retryFiles)) {
+    return retryFiles.filter((f) => !f.target.isPrivate);
+  }
   if (await self.ensureEncryptionUnlockedForBatch(retryFiles)) {
     return retryFiles;
   }

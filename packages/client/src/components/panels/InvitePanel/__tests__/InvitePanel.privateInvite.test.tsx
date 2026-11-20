@@ -35,7 +35,7 @@
 
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "mobx-react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ShareAccessRights } from "@docspace/shared/enums";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
@@ -177,7 +177,17 @@ vi.mock("SRC_DIR/components/PaidQuotaLimitError", () => ({
   default: () => null,
 }));
 vi.mock("../../LinkSettingsPanel", () => ({ default: () => null }));
-vi.mock("../sub-components/ExternalLinks", () => ({ default: () => null }));
+// The link block stays out unless a case asks for the real one.
+const links = vi.hoisted(() => ({ real: false }));
+vi.mock("../sub-components/ExternalLinks", async (io) => {
+  const { default: ExternalLinks } = (await io()) as {
+    default: React.ComponentType<object>;
+  };
+  return {
+    default: (props: object) =>
+      links.real ? <ExternalLinks {...props} /> : null,
+  };
+});
 vi.mock("../sub-components/InviteInput", () => ({
   default: (props: NonNullable<typeof mocks.inviteInput>) => {
     mocks.inviteInput = props;
@@ -939,5 +949,59 @@ describe("The mark of a missing key follows the server's answer", () => {
     expect(mocks.getRoomCandidateKeys.mock.calls[0][1]).toHaveLength(40);
     expect(mocks.getRoomCandidateKeys.mock.calls[1][1]).toHaveLength(5);
     expect(Object.keys(marks ?? {})).toHaveLength(45);
+  });
+});
+
+describe("Invite panel opened", () => {
+  const LINK_CONTROLS = [
+    "invite_panel_external_links_toggle",
+    "link-settings_icon",
+    "invite_panel_external_link_input",
+    "invite_panel_external_link_access",
+  ];
+
+  beforeEach(() => {
+    links.real = true;
+    mocks.getRoomSecurityInfo.mockResolvedValue({
+      items: [
+        {
+          access: ShareAccessRights.ReadOnly,
+          sharedTo: {
+            id: "link-1",
+            title: "Invite link",
+            shareLink: "https://example.com/invite",
+            expirationDate: null,
+            currentUseCount: 0,
+            maxUseCount: null,
+          },
+        },
+      ],
+    });
+  });
+
+  afterEach(() => {
+    links.real = false;
+  });
+
+  it("renders no link controls for a private room", async () => {
+    renderInviteFromList(privateRoomDto({ id: ROOM_ID, title: "Pirate room" }), []);
+
+    await screen.findByTestId("invite_panel_send_button");
+
+    for (const testId of LINK_CONTROLS) {
+      expect(screen.queryByTestId(testId)).not.toBeInTheDocument();
+    }
+    expect(mocks.getRoomSecurityInfo).not.toHaveBeenCalled();
+  });
+
+  it("renders the link controls for an ordinary room with its links on", async () => {
+    renderInviteFromList(roomDto({ id: ROOM_ID, title: "Public room" }), []);
+
+    expect(
+      await screen.findByTestId("invite_panel_external_link_input"),
+    ).toBeInTheDocument();
+    for (const testId of LINK_CONTROLS) {
+      expect(screen.getByTestId(testId)).toBeInTheDocument();
+    }
   });
 });

@@ -380,6 +380,25 @@ the client and the SDK from their dev servers behind the stand's nginx):
   so what a frame of another site changes (partitioned storage, third-party
   cookies) was not seen.
 
+## Gate runs
+
+2026-11-20, task 8.1, on `release/v4.1.0` at `c0c2e91536f` (the code as of
+`d40ff7e85b6`, after the review fix):
+
+- Client E2E under Docker (`tests-dev`, on the image rebuilt after the
+  ui-kit update `db506ac7587`): `private-room-*.spec.ts`,
+  `private-rooms-app-off.spec.ts` and `private-rooms-section.spec.ts`,
+  172 passed.
+- SDK private E2E (`__tests__/e2e/private`) on a fresh `pnpm run
+  test:build`: 52 passed, 9 skipped. The build exits 1 on the Next.js
+  vulnerability check after all pages are generated, the known state of
+  the earlier changes.
+- Pre-push gate: `npm --prefix ./common/tests run test:lefthook` exit 0;
+  `nx run-many -t tsc lint test` over the six packages exit 0.
+- Full locale suite (`test/locales.test.js`): 46 passed.
+- `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`: 24 of 24.
+- The headers of `/sdk/private` through nginx: "Stand checks" above.
+
 ## Risks / Trade-offs
 
 - [The SDK private surface has no embedding consumer in 4.1.0] → It stays

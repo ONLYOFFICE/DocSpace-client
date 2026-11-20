@@ -189,6 +189,19 @@ describe("PrivateChangeOwnerDialog", () => {
     expect(mocks.changeOwner).not.toHaveBeenCalled();
   });
 
+  it("Candidate left the room meanwhile", async () => {
+    await open();
+    mocks.getRoomMembers.mockImplementation(async () => ({ items: [] }));
+
+    await submit(false);
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedChangeOwnerNotMember",
+    );
+    expect(mocks.validateMembersForEncryption).not.toHaveBeenCalled();
+    expect(mocks.changeOwner).not.toHaveBeenCalled();
+  });
+
   it("Members cannot be read", async () => {
     mocks.getRoomMembers.mockImplementation(async () => {
       throw new Error("403");

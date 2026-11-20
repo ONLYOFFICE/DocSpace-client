@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "{{user}} a désormais accès à tous les fichiers chiffrés de la salle.",
   "EncryptedChangeOwnerKeyMismatch": "Impossible de transférer la propriété à {{user}} : sa clé de chiffrement a changé et n'a pas été approuvée. Vérifiez à nouveau la clé et réessayez.",
   "EncryptedChangeOwnerNoKeys": "Impossible de transférer la propriété à {{user}} : il n'a pas encore configuré de clés de chiffrement. Demandez-lui de générer des clés dans son profil, puis réessayez.",
+  "EncryptedChangeOwnerNotMember": "Impossible de transférer la propriété à {{user}} : il n'est pas membre de cette salle.",
   "EncryptedCopyFailed": "Échec de la copie des fichiers chiffrés : {{names}}",
   "EncryptedDownloadPartial": "Ces fichiers n'ont pas pu être déchiffrés et ont été exclus de l'archive : {{fileNames}}",
   "EncryptedFile": "Fichier chiffré",

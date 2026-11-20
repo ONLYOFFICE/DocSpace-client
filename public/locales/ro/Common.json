@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "{{user}} are acum acces la toate fișierele criptate din sală.",
   "EncryptedChangeOwnerKeyMismatch": "Nu se poate transfera proprietatea către {{user}}: cheia lor de criptare s-a schimbat și nu a fost de încredere. Re-verificați cheia și încercați din nou.",
   "EncryptedChangeOwnerNoKeys": "Nu se poate transfera proprietatea către {{user}}: aceștia nu au configurat încă chei de criptare. Rugați-i să genereze chei în profilul lor, apoi încercați din nou.",
+  "EncryptedChangeOwnerNotMember": "Nu se poate transfera proprietatea către {{user}}: nu este membru al acestei săli.",
   "EncryptedCopyFailed": "Copierea fișierelor criptate a eșuat: {{names}}",
   "EncryptedDownloadPartial": "Aceste fișiere nu au putut fi decriptate și au fost excluse din arhivă: {{fileNames}}",
   "EncryptedFile": "Fișier criptat",

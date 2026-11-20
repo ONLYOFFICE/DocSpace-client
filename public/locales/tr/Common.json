@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "{{user}} artık odadaki tüm şifrelenmiş dosyalara erişebilir.",
   "EncryptedChangeOwnerKeyMismatch": "Sahiplik {{user}} kullanıcısına aktarılamıyor: şifreleme anahtarı değişmiş ve güvenilir bulunamadı. Anahtarı yeniden doğrulayıp tekrar deneyin.",
   "EncryptedChangeOwnerNoKeys": "Sahiplik {{user}} kullanıcısına aktarılamıyor: henüz şifreleme anahtarları kurulmamış. Profillerinde anahtar oluşturmalarını isteyin, ardından tekrar deneyin.",
+  "EncryptedChangeOwnerNotMember": "Sahiplik {{user}} kullanıcısına aktarılamıyor: bu odanın üyesi değil.",
   "EncryptedCopyFailed": "Şifrelenmiş dosyalar kopyalanamadı: {{names}}",
   "EncryptedDownloadPartial": "Bu dosyaların şifresi çözülemedi ve arşive eklenmedi: {{fileNames}}",
   "EncryptedFile": "Şifrelenmiş dosya",

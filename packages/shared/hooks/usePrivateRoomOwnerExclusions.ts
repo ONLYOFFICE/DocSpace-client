@@ -38,6 +38,7 @@ import { useEffect, useMemo, useState } from "react";
 import Filter from "../api/people/filter";
 import { getUserList } from "../api/people";
 import { getRoomMembers } from "../api/rooms";
+import { readAllPages } from "../utils/readAllPages";
 import {
   EmployeeStatus,
   EmployeeType,
@@ -45,23 +46,6 @@ import {
 } from "../enums";
 
 const PAGE_SIZE = 100;
-
-/** Every item of a list read page by page until its total is reached. */
-async function readAllPages<T>(
-  readPage: (
-    startIndex: number,
-  ) => Promise<{ items?: T[]; total?: number } | undefined>,
-) {
-  const items: T[] = [];
-  for (;;) {
-    const page = await readPage(items.length);
-    const pageItems = page?.items ?? [];
-    items.push(...pageItems);
-    if (pageItems.length === 0 || items.length >= (page?.total ?? 0)) {
-      return items;
-    }
-  }
-}
 
 /**
  * The people an owner change of a private room leaves out of the owner

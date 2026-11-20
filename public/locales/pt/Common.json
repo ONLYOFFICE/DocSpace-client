@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "{{user}} tem agora acesso a todos os ficheiros encriptados da sala.",
   "EncryptedChangeOwnerKeyMismatch": "Não é possível transferir a propriedade para {{user}}: a chave de encriptação do utilizador foi alterada e não foi considerada de confiança. Verifique novamente a chave e tente outra vez.",
   "EncryptedChangeOwnerNoKeys": "Não é possível transferir a propriedade para {{user}}: o utilizador ainda não configurou chaves de encriptação. Peça-lhe que gere chaves no seu perfil e tente novamente.",
+  "EncryptedChangeOwnerNotMember": "Não é possível transferir a propriedade para {{user}}: não é membro desta sala.",
   "EncryptedCopyFailed": "Falha ao copiar ficheiros encriptados: {{names}}",
   "EncryptedDownloadPartial": "Não foi possível desencriptar estes ficheiros, pelo que foram excluídos do arquivo: {{fileNames}}",
   "EncryptedFile": "Ficheiro encriptado",

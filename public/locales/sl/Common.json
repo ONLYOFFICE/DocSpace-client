@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "Uporabnik {{user}} ima zdaj dostop do vseh šifriranih datotek v sobi.",
   "EncryptedChangeOwnerKeyMismatch": "Lastništva ni mogoče prenesti na {{user}}: njihov šifrirni ključ se je spremenil in ni bil zaupan. Znova preverite ključ in poskusite znova.",
   "EncryptedChangeOwnerNoKeys": "Lastništva ni mogoče prenesti na {{user}}: šifrirnih ključev še niso nastavili. Prosim jih, da ustvarijo ključe v svojem profilu, in poskusite znova.",
+  "EncryptedChangeOwnerNotMember": "Lastništva ni mogoče prenesti na {{user}}: ni član te sobe.",
   "EncryptedCopyFailed": "Kopiranje šifriranih datotek ni uspelo: {{names}}",
   "EncryptedDownloadPartial": "Teh datotek ni bilo mogoče dešifrirati, zato niso bile vključene v arhiv: {{fileNames}}",
   "EncryptedFile": "Šifrirana datoteka",

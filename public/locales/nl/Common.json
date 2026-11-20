@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "{{user}} heeft nu toegang tot alle versleutelde bestanden in de kamer.",
   "EncryptedChangeOwnerKeyMismatch": "Kan eigendom niet overdragen aan {{user}}: hun versleutelingssleutel is gewijzigd en werd niet vertrouwd. Verifieer de sleutel opnieuw en probeer het nogmaals.",
   "EncryptedChangeOwnerNoKeys": "Kan eigendom niet overdragen aan {{user}}: zij hebben nog geen versleutelingssleutels ingesteld. Vraag hen sleutels te genereren in hun profiel en probeer het dan opnieuw.",
+  "EncryptedChangeOwnerNotMember": "Kan eigendom niet overdragen aan {{user}}: deze persoon is geen lid van deze kamer.",
   "EncryptedCopyFailed": "Kopiëren van versleutelde bestanden mislukt: {{names}}",
   "EncryptedDownloadPartial": "Deze bestanden konden niet worden ontsleuteld en zijn niet in het archief opgenomen: {{fileNames}}",
   "EncryptedFile": "Versleuteld bestand",

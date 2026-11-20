@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "Používateľ {{user}} má teraz prístup ku všetkým zašifrovaným súborom v miestnosti.",
   "EncryptedChangeOwnerKeyMismatch": "Nie je možné preniesť vlastníctvo na {{user}}: ich šifrovací kľúč sa zmenil a nebol dôveryhodný. Overte kľúč znova a skúste znova.",
   "EncryptedChangeOwnerNoKeys": "Nie je možné preniesť vlastníctvo na {{user}}: ešte nenastavili šifrovacie kľúče. Požiadajte ich, aby vygenerovali kľúče vo svojom profile, a potom skúste znova.",
+  "EncryptedChangeOwnerNotMember": "Nie je možné preniesť vlastníctvo na {{user}}: nie je členom tejto miestnosti.",
   "EncryptedCopyFailed": "Nepodarilo sa skopírovať zašifrované súbory: {{names}}",
   "EncryptedDownloadPartial": "Tieto súbory sa nepodarilo dešifrovať a neboli zahrnuté do archívu: {{fileNames}}",
   "EncryptedFile": "Zašifrovaný súbor",

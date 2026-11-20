@@ -51,13 +51,14 @@ vi.mock("../../../api/privacy", async (importOriginal) => ({
 }));
 vi.mock("../../../api/rooms", () => ({
   setRoomSecurity: vi.fn(),
+  getRoomMembers: vi.fn(),
 }));
 
 import {
   getRoomCandidateKeys,
   getRoomMissingFileKeys,
 } from "../../../api/privacy";
-import { setRoomSecurity } from "../../../api/rooms";
+import { getRoomMembers, setRoomSecurity } from "../../../api/rooms";
 import type { IdentityKeyPair } from "../../encryption/types";
 import {
   addMembersToEncryptedRoom,
@@ -66,6 +67,7 @@ import {
   validateMembersForEncryption,
 } from "../room-encryption";
 import {
+  getNewOwnerKeyRefusal,
   loadPendingAccess,
   prepareNewOwner,
   retryPendingAccess,
@@ -985,4 +987,55 @@ describe("A peer key that could not be checked is reported per operation", () =>
       ]);
     },
   );
+});
+
+describe("getNewOwnerKeyRefusal", () => {
+  const t = ((key: string, values?: object) =>
+    values ? `${key} ${JSON.stringify(values)}` : key) as unknown as TFunction;
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Candidate left the room meanwhile", async () => {
+    vi.mocked(getRoomMembers).mockResolvedValue({
+      items: [{ subjectType: 0, sharedTo: { id: "u-ann" } }],
+      total: 1,
+    } as never);
+
+    const refusal = await getNewOwnerKeyRefusal(
+      t,
+      ROOM_ID,
+      { id: "u-bob", label: "Bob" },
+      "u-me",
+    );
+
+    expect(refusal).toBe(
+      'Common:EncryptedChangeOwnerNotMember {"user":"Bob"}',
+    );
+    expect(validateMembersForEncryption).not.toHaveBeenCalled();
+  });
+
+  it("Members cannot be read when the candidate is chosen", async () => {
+    vi.mocked(getRoomMembers).mockRejectedValue(new Error("403"));
+
+    await expect(
+      getNewOwnerKeyRefusal(t, ROOM_ID, { id: "u-ann" }, "u-me"),
+    ).resolves.toBe("Common:OwnerCandidatesLoadFailed");
+  });
+
+  it("Member with a verified key", async () => {
+    vi.mocked(getRoomMembers).mockResolvedValue({
+      items: [{ subjectType: 0, sharedTo: { id: "u-ann" } }],
+      total: 1,
+    } as never);
+    vi.mocked(validateMembersForEncryption).mockResolvedValue({
+      valid: [{ id: "u-ann", publicKey: "pk" }],
+      skipped: [],
+    } as never);
+
+    await expect(
+      getNewOwnerKeyRefusal(t, ROOM_ID, { id: "u-ann" }, "u-me"),
+    ).resolves.toBeNull();
+  });
 });

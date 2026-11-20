@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "Käyttäjällä {{user}} on nyt pääsy kaikkiin huoneen salattuihin tiedostoihin.",
   "EncryptedChangeOwnerKeyMismatch": "Omistajuutta ei voi siirtää käyttäjälle {{user}}: heidän salausavaimensa on muuttunut eikä sitä ole hyväksytty luotettavaksi. Vahvista avain uudelleen ja yritä uudelleen.",
   "EncryptedChangeOwnerNoKeys": "Omistajuutta ei voi siirtää käyttäjälle {{user}}: he eivät ole vielä ottaneet salausavaimia käyttöön. Pyydä heitä luomaan avaimet profiilissaan ja yritä sitten uudelleen.",
+  "EncryptedChangeOwnerNotMember": "Omistajuutta ei voi siirtää käyttäjälle {{user}}: hän ei ole tämän huoneen jäsen.",
   "EncryptedCopyFailed": "Salattujen tiedostojen kopiointi epäonnistui: {{names}}",
   "EncryptedDownloadPartial": "Näiden tiedostojen salausta ei voitu purkaa, joten ne jätettiin pois arkistosta: {{fileNames}}",
   "EncryptedFile": "Salattu tiedosto",

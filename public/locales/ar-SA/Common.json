@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "أصبح لدى {{user}} الآن حق الوصول إلى جميع الملفات المشفرة في الغرفة.",
   "EncryptedChangeOwnerKeyMismatch": "لا يمكن نقل الملكية إلى {{user}}: تغيّر مفتاح التشفير الخاص به ولم يُوثَّق. أعد التحقق من المفتاح وحاول مجدداً.",
   "EncryptedChangeOwnerNoKeys": "لا يمكن نقل الملكية إلى {{user}}: لم يقم بإعداد مفاتيح التشفير بعد. اطلب منه توليد المفاتيح في ملفه الشخصي ثم أعد المحاولة.",
+  "EncryptedChangeOwnerNotMember": "لا يمكن نقل الملكية إلى {{user}}: ليس عضوًا في هذه الغرفة.",
   "EncryptedCopyFailed": "فشل نسخ الملفات المشفرة: {{names}}",
   "EncryptedDownloadPartial": "تعذّر فك تشفير هذه الملفات ولم تُضمَّن في الأرشيف: {{fileNames}}",
   "EncryptedFile": "ملف مشفر",

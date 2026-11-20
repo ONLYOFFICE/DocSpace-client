@@ -176,6 +176,28 @@ describe("Change owner of a private room", () => {
     expect(screen.queryByTestId("people_selector")).toBeNull();
   });
 
+  it.each([
+    ["the change-owner panel", undefined],
+    ["the edit dialog", { onOwnerChange: vi.fn() }],
+  ])("Candidate left the room meanwhile, in %s", async (_, editDialog) => {
+    const { changeRoomOwner } = renderPanelFor(
+      privateRoomDto({ id: ROOM_ID }),
+      editDialog,
+    );
+    await waitFor(() => expect(screen.getByTestId("people_selector")));
+    mocks.getRoomMembers.mockImplementation(async () => ({ items: [] }));
+
+    await act(() =>
+      mocks.selector!.onSubmit([{ id: "bob", label: "Bob" }], null, "", true),
+    );
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      expect.stringContaining("Common:EncryptedChangeOwnerNotMember"),
+    );
+    expect(changeRoomOwner).not.toHaveBeenCalled();
+    expect(editDialog?.onOwnerChange ?? vi.fn()).not.toHaveBeenCalled();
+  });
+
   it("refuses a new owner without a key", async () => {
     mocks.validateMembersForEncryption.mockImplementation(async () => ({
       skipped: [{ id: "bob", reason: "no-key", displayName: "Bob" }],

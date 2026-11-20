@@ -40,7 +40,9 @@ import {
   getRoomCandidateKeys,
   getRoomMissingFileKeys,
 } from "../../api/privacy";
-import { setRoomSecurity } from "../../api/rooms";
+import { getRoomMembers, setRoomSecurity } from "../../api/rooms";
+import { MembersSubjectType } from "../../enums";
+import { readAllPages } from "../../utils/readAllPages";
 import type { IdentityKeyPair } from "../encryption/types";
 import {
   addMembersToEncryptedRoom,
@@ -591,8 +593,9 @@ export async function rewrapPendingAccessOfMember({
 }
 
 /**
- * Checks that a new owner of the room holds a verified key. Resolves with the
- * refusal to show, or null when the candidate can own the room.
+ * Checks that a new owner of the room is one of its members and holds a
+ * verified key. Resolves with the refusal to show, or null when the
+ * candidate can own the room.
  */
 export async function getNewOwnerKeyRefusal(
   t: TFunction,
@@ -600,6 +603,26 @@ export async function getNewOwnerKeyRefusal(
   candidate: { id: string; label?: string; displayName?: string },
   currentUserId: string,
 ): Promise<string | null> {
+  // Spec: private-rooms/room-membership, "Owner candidates are current members"
+  let members: Awaited<ReturnType<typeof getRoomMembers>>["items"];
+  try {
+    members = await readAllPages((startIndex) =>
+      getRoomMembers(roomId, { count: 100, startIndex }),
+    );
+  } catch {
+    return t("Common:OwnerCandidatesLoadFailed");
+  }
+  const isMember = members.some(
+    (member) =>
+      member?.subjectType === MembersSubjectType.User &&
+      String(member.sharedTo?.id) === String(candidate.id),
+  );
+  if (!isMember) {
+    return t("Common:EncryptedChangeOwnerNotMember", {
+      user: candidate.label || candidate.displayName || candidate.id,
+    });
+  }
+
   const { skipped } = await validateMembersForEncryption(
     Number(roomId),
     [candidate.id],

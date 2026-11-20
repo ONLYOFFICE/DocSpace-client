@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "Użytkownik {{user}} ma teraz dostęp do wszystkich zaszyfrowanych plików w pokoju.",
   "EncryptedChangeOwnerKeyMismatch": "Nie można przenieść własności do {{user}}: klucz szyfrowania tej osoby uległ zmianie i nie był zaufany. Zweryfikuj ponownie klucz i spróbuj jeszcze raz.",
   "EncryptedChangeOwnerNoKeys": "Nie można przenieść własności do {{user}}: ta osoba nie skonfigurowała jeszcze kluczy szyfrowania. Poproś ją o wygenerowanie kluczy w profilu, a następnie spróbuj ponownie.",
+  "EncryptedChangeOwnerNotMember": "Nie można przenieść własności do {{user}}: ta osoba nie jest członkiem tego pokoju.",
   "EncryptedCopyFailed": "Nie udało się skopiować zaszyfrowanych plików: {{names}}",
   "EncryptedDownloadPartial": "Nie udało się odszyfrować tych plików i zostały one pominięte w archiwum: {{fileNames}}",
   "EncryptedFile": "Zaszyfrowany plik",

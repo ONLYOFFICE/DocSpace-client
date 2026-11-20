@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "{{user}} hiện đã có quyền truy cập vào tất cả các tập tin được mã hoá trong phòng.",
   "EncryptedChangeOwnerKeyMismatch": "Không thể chuyển quyền sở hữu cho {{user}}: khoá mã hoá của họ đã thay đổi và chưa được tin cậy. Hãy xác minh lại khoá và thử lại.",
   "EncryptedChangeOwnerNoKeys": "Không thể chuyển quyền sở hữu cho {{user}}: họ chưa thiết lập khoá mã hoá. Hãy yêu cầu họ tạo khoá trong hồ sơ cá nhân, rồi thử lại.",
+  "EncryptedChangeOwnerNotMember": "Không thể chuyển quyền sở hữu cho {{user}}: họ không phải là thành viên của phòng này.",
   "EncryptedCopyFailed": "Không thể sao chép các tập tin được mã hoá: {{names}}",
   "EncryptedDownloadPartial": "Không thể giải mã các tệp này nên chúng đã bị loại khỏi tệp lưu trữ: {{fileNames}}",
   "EncryptedFile": "Tập tin được mã hoá",

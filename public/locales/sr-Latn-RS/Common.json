@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "Korisnik {{user}} sada ima pristup svim šifrovanim fajlovima u sobi.",
   "EncryptedChangeOwnerKeyMismatch": "Nije moguće preneti vlasništvo na korisnika {{user}}: njihov ključ za šifrovanje se promenio i nije bio pouzdan. Ponovo verifikujte ključ i pokušajte ponovo.",
   "EncryptedChangeOwnerNoKeys": "Nije moguće preneti vlasništvo na korisnika {{user}}: oni još uvek nisu podesili ključeve za šifrovanje. Zamolite ih da generišu ključeve u svom profilu, pa pokušajte ponovo.",
+  "EncryptedChangeOwnerNotMember": "Nije moguće preneti vlasništvo na korisnika {{user}}: nije član ove sobe.",
   "EncryptedCopyFailed": "Kopiranje šifrovanih fajlova nije uspelo: {{names}}",
   "EncryptedDownloadPartial": "Ove datoteke nije moguće dešifrovati i izostavljene su iz arhive: {{fileNames}}",
   "EncryptedFile": "Šifrovani fajl",

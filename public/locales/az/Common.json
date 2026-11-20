@@ -960,6 +960,7 @@
   "EncryptedAccessRestored": "{{user}} artıq otaqdakı bütün şifrəli fayllara giriş imkanına malikdir.",
   "EncryptedChangeOwnerKeyMismatch": "Sahibliyi {{user}}-ə ötürmək mümkün deyil: onların şifrələmə açarı dəyişib və etibarlı sayılmayıb. Açarı yenidən yoxlayın və cəhd edin.",
   "EncryptedChangeOwnerNoKeys": "Sahibliyi {{user}}-ə ötürmək mümkün deyil: onlar hələ şifrələmə açarlarını qurmayıblar. Onlardan profillərində açar yaratmalarını xahiş edin, sonra yenidən cəhd edin.",
+  "EncryptedChangeOwnerNotMember": "Sahibliyi {{user}}-ə ötürmək mümkün deyil: onlar bu otağın üzvü deyil.",
   "EncryptedCopyFailed": "Şifrəli faylları kopyalamaq alınmadı: {{names}}",
   "EncryptedDownloadPartial": "Bu faylların şifrəsi açıla bilmədi və onlar arxivə daxil edilmədi: {{fileNames}}",
   "EncryptedFile": "Şifrəli fayl",

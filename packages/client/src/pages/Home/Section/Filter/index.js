@@ -511,6 +511,12 @@ const SectionFilterContent = ({
       const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
       newFilter.groupId = getPinnedGroupId() ?? null;
+      // A list of the AI Chat section is its rooms narrowed to one room
+      // type, which is the list itself and not a filter to clear: without
+      // it the Skill sets would turn into every room of the section.
+      if (roomsFilter.searchArea === RoomSearchArea.AiHub) {
+        newFilter.type = [String(getAiWorkspaceListType(location.search))];
+      }
 
       const path = getRoomsListBasePath(roomsFilter.searchArea);
 
@@ -537,6 +543,7 @@ const SectionFilterContent = ({
     isContactsPage,
 
     location.pathname,
+    location.search,
   ]);
 
   const onSearch = React.useCallback(

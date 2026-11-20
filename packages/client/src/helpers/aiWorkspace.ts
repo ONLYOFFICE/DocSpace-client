@@ -111,6 +111,82 @@ export const getAiWorkspaceInfoPanelHint = (
   }
 };
 
+export type TAiListEmptyTexts = {
+  title: string;
+  description: string;
+  userTitle: string;
+  userDescription: string;
+  createDescription: string;
+};
+
+/**
+ * What an empty list says. Each list names what it holds - agents, skill
+ * sets or knowledge bases - and never the three of them at once: the list
+ * creates only its own kind.
+ */
+export const getAiListEmptyTexts = (
+  t: (key: string) => string,
+  type: RoomsType,
+): TAiListEmptyTexts => {
+  switch (type) {
+    case RoomsType.InstructionsRoom:
+      return {
+        title: t("EmptyView:SkillSetsEmptyTitle"),
+        description: t("EmptyView:SkillSetsEmptyDescription"),
+        userTitle: t("EmptyView:SkillSetsEmptyUserTitle"),
+        userDescription: t("EmptyView:SkillSetsEmptyUserDescription"),
+        createDescription: t("EmptyView:SkillSetsCreateDescription"),
+      };
+    case RoomsType.KnowledgeRoom:
+      return {
+        title: t("EmptyView:KnowledgeBasesEmptyTitle"),
+        description: t("EmptyView:KnowledgeBasesEmptyDescription"),
+        userTitle: t("EmptyView:KnowledgeBasesEmptyUserTitle"),
+        userDescription: t("EmptyView:KnowledgeBasesEmptyUserDescription"),
+        createDescription: t("EmptyView:KnowledgeBasesCreateDescription"),
+      };
+    default:
+      return {
+        title: t("EmptyView:AgentsEmptyTitle"),
+        description: t("EmptyView:AgentsEmptyDescription"),
+        userTitle: t("EmptyView:AgentsEmptyUserTitle"),
+        userDescription: t("EmptyView:AgentsEmptyUserDescription"),
+        createDescription: t("EmptyView:AgentsCreateDescription"),
+      };
+  }
+};
+
+/**
+ * What a search or a filter that found nothing says in the AI Chat section:
+ * its lists name what they hold, and a skill set or a knowledge base names
+ * what is inside it. `null` anywhere else.
+ */
+export const getAiEmptyFilterDescription = (
+  t: (key: string) => string,
+  {
+    isAiHubFolder,
+    listType,
+    roomType,
+  }: {
+    isAiHubFolder: boolean;
+    listType: RoomsType;
+    roomType?: RoomsType | number | null;
+  },
+): string | null => {
+  if (isAiHubFolder) {
+    if (listType === RoomsType.InstructionsRoom)
+      return t("Common:EmptyFilterSkillSetsDescription");
+    if (listType === RoomsType.KnowledgeRoom)
+      return t("Common:EmptyFilterKnowledgeBasesDescription");
+    return t("Common:EmptyFilterAIAgentsDescription");
+  }
+  if (roomType === RoomsType.InstructionsRoom)
+    return t("Common:EmptyFilterSkillsDescription");
+  if (roomType === RoomsType.KnowledgeRoom)
+    return t("Common:EmptyFilterKnowledgeFilesDescription");
+  return null;
+};
+
 /** The list's title: the name of the sidebar entry that opens it. */
 export const getAiWorkspaceTitle = (
   t: (key: string) => string,

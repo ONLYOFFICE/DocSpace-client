@@ -54,7 +54,9 @@ import {
 import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 import {
   getAiWorkspaceCreateLabel,
+  getAiListEmptyTexts,
   getAiWorkspaceCreatePayload,
+  getAiWorkspaceListType,
   isAiWorkspaceCreateRefused,
   type TAiWorkspaceCreatePayload,
 } from "SRC_DIR/helpers/aiWorkspace";
@@ -79,12 +81,13 @@ type EmptyAiRoomsContainerProps = {
 };
 
 /**
- * The "AI rooms" root when it shows no list. With AI not set up on the
+ * A list of the AI Chat section - the Agents, the Skill sets or the
+ * Knowledge bases - when it shows no list. With AI not set up on the
  * portal it is the AI chat's "AI is off" view, list or not: the settings
  * link on standalone, activation on SaaS, "contact an admin" for everyone
- * else, and nothing can be created. Otherwise it is the empty state: a room
- * admin can create an Instructions room, a Knowledge room or an AI project
- * (the "AI rooms" chooser), a user or guest only waits for an invitation.
+ * else, and nothing can be created. Otherwise it is the empty state of that
+ * list: a room admin can create what the list holds, a user or guest only
+ * waits for an invitation.
  */
 const EmptyAiRoomsContainer = ({
   aiNoAccessStores,
@@ -96,7 +99,7 @@ const EmptyAiRoomsContainer = ({
   setQuotaWarningDialogVisible,
   selectedFolderId,
 }: EmptyAiRoomsContainerProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["EmptyView", "Common"]);
   const { isBase } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -164,6 +167,11 @@ const EmptyAiRoomsContainer = ({
     );
   }
 
+  const texts = getAiListEmptyTexts(
+    t,
+    getAiWorkspaceListType(location.search),
+  );
+
   // The Knowledge bases list creates nothing while vectorization is off: it
   // says why, as the room type list does.
   const isCreateRefused =
@@ -174,7 +182,7 @@ const EmptyAiRoomsContainer = ({
         {
           key: "create-ai-room",
           title: getAiWorkspaceCreateLabel(t, location.search),
-          description: t("Common:AiRoomsCreateDescription"),
+          description: texts.createDescription,
           icon: <CreateRoomIcon />,
           onClick: onCreate,
         },
@@ -184,15 +192,15 @@ const EmptyAiRoomsContainer = ({
   return (
     <EmptyView
       icon={icon}
-      title={canManage ? t("Common:AiRoomsEmpty") : t("Common:AiRoomsEmptyUser")}
+      title={canManage ? texts.title : texts.userTitle}
       description={
         isCreateRefused
           ? isAdmin
-            ? t("Common:KnowledgeRoomCreationNeedsVectorizationAdmin")
-            : t("Common:KnowledgeRoomCreationNeedsVectorizationUser")
+            ? t("EmptyView:KnowledgeBasesNeedVectorizationAdmin")
+            : t("EmptyView:KnowledgeBasesNeedVectorizationUser")
           : canManage
-            ? t("Common:AiRoomsEmptyDescription")
-            : t("Common:AiRoomsEmptyUserDescription")
+            ? texts.description
+            : texts.userDescription
       }
       options={options}
     />

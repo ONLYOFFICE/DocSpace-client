@@ -5,6 +5,8 @@ import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 
 import {
   getAgentCategories,
+  getAiEmptyFilterDescription,
+  getAiListEmptyTexts,
   getAgentCategory,
   getAgentCategoryUrl,
   getVisibleAgentsFilter,
@@ -245,3 +247,47 @@ describe("Agents list categories", () => {
   });
 });
 
+
+describe("empty lists of the AI Chat section", () => {
+  it.each([
+    [RoomsType.AiProjectRoom, "Agents"],
+    [RoomsType.InstructionsRoom, "SkillSets"],
+    [RoomsType.KnowledgeRoom, "KnowledgeBases"],
+  ])("list %s names only what it holds", (type, prefix) => {
+    expect(getAiListEmptyTexts(t, type)).toEqual({
+      title: `EmptyView:${prefix}EmptyTitle`,
+      description: `EmptyView:${prefix}EmptyDescription`,
+      userTitle: `EmptyView:${prefix}EmptyUserTitle`,
+      userDescription: `EmptyView:${prefix}EmptyUserDescription`,
+      createDescription: `EmptyView:${prefix}CreateDescription`,
+    });
+  });
+
+  it.each([
+    [RoomsType.AiProjectRoom, "Common:EmptyFilterAIAgentsDescription"],
+    [RoomsType.InstructionsRoom, "Common:EmptyFilterSkillSetsDescription"],
+    [RoomsType.KnowledgeRoom, "Common:EmptyFilterKnowledgeBasesDescription"],
+  ])("a search of list %s that found nothing names the list", (type, key) => {
+    expect(
+      getAiEmptyFilterDescription(t, { isAiHubFolder: true, listType: type }),
+    ).toBe(key);
+  });
+
+  it("a search inside a skill set or a knowledge base names what it holds", () => {
+    const inside = (roomType: RoomsType | null) =>
+      getAiEmptyFilterDescription(t, {
+        isAiHubFolder: false,
+        listType: RoomsType.AiProjectRoom,
+        roomType,
+      });
+    expect(inside(RoomsType.InstructionsRoom)).toBe(
+      "Common:EmptyFilterSkillsDescription",
+    );
+    expect(inside(RoomsType.KnowledgeRoom)).toBe(
+      "Common:EmptyFilterKnowledgeFilesDescription",
+    );
+    // Any other room keeps the wording of the files and rooms lists.
+    expect(inside(RoomsType.CustomRoom)).toBeNull();
+    expect(inside(null)).toBeNull();
+  });
+});

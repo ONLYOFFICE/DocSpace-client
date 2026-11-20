@@ -1,0 +1,29 @@
+{
+  "key_path": "SkillSetEmptyDescription",
+  "content": "Add skills as Markdown (.md) files. The assistant follows them wherever this skill set is connected.",
+  "content_en_sha1_hash": "84a5ebbebaa029f26bcc5f7db22b62f53f9cabaa",
+  "created_at": "2026-11-20T10:53:41.479Z",
+  "updated_at": "2026-11-20T10:54:39.928Z",
+  "comment": {
+    "text": "Description on the empty screen inside a skill set for a user who may add skills: skills are Markdown (.md) files, and the AI assistant follows them in every chat or agent the skill set is connected to. Keep Markdown and .md as is.",
+    "is_auto": true,
+    "updated_at": "2026-11-20T10:54:39.928Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 259,
+      "context": "// A skill set holds skills and a knowledge base holds files to search:\n // each says what it is for, not \"files and folders\" or \"quick actions\".\n if (type === RoomsType.InstructionsRoom)\n return isReadOnly\n ? t(\"EmptyView:SkillSetEmptyUserDescription\")\n : t(\"EmptyView:SkillSetEmptyDescription\");\n if (type === RoomsType.KnowledgeRoom)\n return isReadOnly\n ? t(\"EmptyView:KnowledgeBaseEmptyUserDescription\")\n : t(\"EmptyView:KnowledgeBaseEmptyDescription\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "KnowledgeBasesNeedVectorizationAdmin",
+  "content": "A knowledge base can be created once vectorization works: configure an embeddings provider in the AI settings.",
+  "content_en_sha1_hash": "6b3c963f22dcacc735b2ce3c78afb696f3220ac4",
+  "created_at": "2026-11-20T10:53:41.475Z",
+  "updated_at": "2026-11-20T10:54:39.928Z",
+  "comment": {
+    "text": "Description on the empty screen of the Knowledge bases list in the AI Chat section, shown to a portal admin while vectorization (indexing of files with an embeddings model) is off and no knowledge base can be created. AI settings is a settings page.",
+    "is_auto": true,
+    "updated_at": "2026-11-20T10:54:39.928Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
+      "line_number": 199,
+      "context": "icon={icon}\n title={canManage ? texts.title : texts.userTitle}\n description={\n isCreateRefused\n ? isAdmin\n ? t(\"EmptyView:KnowledgeBasesNeedVectorizationAdmin\")\n : t(\"EmptyView:KnowledgeBasesNeedVectorizationUser\")\n : canManage\n ? texts.description\n : texts.userDescription\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

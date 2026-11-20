@@ -103,7 +103,10 @@ import { useHideQuickActions } from "./Hooks/useHideQuickActions";
 import { usePrivateRoomCreateRequest } from "./Hooks/usePrivateRoomCreateRequest";
 import { useSectionDrop } from "./Hooks/useSectionDrop";
 
-import { isAiWorkspaceTemplates } from "SRC_DIR/helpers/aiWorkspace";
+import {
+  hasAiWorkspaceTemplates,
+  isAiWorkspaceTemplates,
+} from "SRC_DIR/helpers/aiWorkspace";
 import AiTemplatesCatalog from "./Section/Body/AiTemplatesCatalog";
 
 import styles from "./Home.module.scss";
@@ -299,6 +302,20 @@ const PureHome = observer((props) => {
   const isAiTemplatesTab =
     getCategoryType(location) === CategoryType.AiHub &&
     isAiWorkspaceTemplates(location.search);
+
+  // The Templates tab was opened from the Agents list, so the header, the
+  // tabs and the filter of that list are still the loaded ones. The list's
+  // view, mounted again on the way back, keeps them instead of covering the
+  // section with skeletons. A tab opened by a reload has no list behind it.
+  const isAgentsListLoadedRef = React.useRef(false);
+  React.useEffect(() => {
+    if (isAiTemplatesTab) return;
+
+    isAgentsListLoadedRef.current =
+      getCategoryType(location) === CategoryType.AiHub &&
+      location.pathname.startsWith("/ai-rooms/filter") &&
+      hasAiWorkspaceTemplates(location.search);
+  }, [isAiTemplatesTab, location]);
 
   // An agent's page draws its chat in the section body (AiProjectView),
   // beside the Info panel rather than in its place.
@@ -775,7 +792,15 @@ const PureHome = observer((props) => {
           ) : null}
 
           <Section.SectionBody>
-            {isAiTemplatesTab ? <AiTemplatesCatalog /> : <Outlet />}
+            {isAiTemplatesTab ? (
+              <AiTemplatesCatalog />
+            ) : (
+              <Outlet
+                context={{
+                  keepSectionLoaded: isAgentsListLoadedRef.current,
+                }}
+              />
+            )}
           </Section.SectionBody>
 
           <Section.InfoPanelHeader>

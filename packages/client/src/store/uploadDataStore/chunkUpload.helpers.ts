@@ -697,14 +697,12 @@ export async function startSessionFuncImpl(
   const { file, toFolderId } = item;
   const fileToUpload = file;
   const fileName = file.name;
-  const isEncrypted = file.encrypted || false;
 
   const readGate = () => {
     const { publicKey, userId } = self.getUserEncryptionKeys();
     return resolveUploadGate(
       {
         uploadContext: file.uploadContext,
-        alreadyEncrypted: isEncrypted,
         publicKey,
         userId,
       },
@@ -766,7 +764,7 @@ export async function startSessionFuncImpl(
     fileName,
     fileSize,
     "",
-    isEncrypted,
+    false,
     file.lastModifiedDate,
     createNewIfExist,
   )

@@ -882,7 +882,7 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
     );
   });
 
-  it("uploader declines to unlock: cancelEncryptedBatchUpload fails only the not-yet-started encryptable files with the locked reason", () => {
+  it("uploader declines to unlock: cancelEncryptedBatchUpload fails every not-yet-started file bound for the room with the locked reason", () => {
     const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
     const target = makePrivateUploadTarget();
     const pendingEncryptable = makeUploadFile({ uniqueId: "enc-a", target });
@@ -910,7 +910,7 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
     expect(store.files[0].inAction).toBe(true);
     expect(store.files[0].percent).toBe(0);
     expect(store.files[1].error).toBeNull();
-    expect(store.files[2].error).toBeNull();
+    expect(store.files[2].error).toBe("Common:EncryptionLockedUpload");
     expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual([
       "enc-a",
       "run-b",

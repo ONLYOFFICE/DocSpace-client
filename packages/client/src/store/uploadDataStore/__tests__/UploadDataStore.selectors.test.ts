@@ -347,14 +347,14 @@ describe("UploadDataStore.willEncryptItem", () => {
     expect(store.willEncryptItem(makeUploadFile())).toBe(false);
   });
 
-  it("is false when the item is already encrypted", () => {
+  it("Row marked encrypted by an earlier attempt", () => {
     const { store } = createTestUploadDataStore({ userStore: keyedUserStore });
 
     expect(
       store.willEncryptItem(
         makeUploadFile({ encrypted: true, target: makePrivateUploadTarget() }),
       ),
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it("is false without encryption keys even for a private target", () => {

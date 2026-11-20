@@ -40,6 +40,7 @@ import { describe, it, expect } from "vitest";
 import {
   encryptChunked,
   decryptChunked,
+  decryptChunkedFromBlob,
   parseDSE3Header,
   getDSE3HeaderSize,
 } from "../streaming-encryption";
@@ -349,5 +350,73 @@ describe("DSE3 v2 versions of one file", () => {
     await expect(decryptFile(otherFile, dek)).rejects.toBeInstanceOf(
       DecryptionError,
     );
+  });
+});
+
+describe("DSE3 v2 extended container", () => {
+  const MAX_FINAL_CIPHERTEXT = DSE3_CHUNK_PLAINTEXT_SIZE + AES_GCM_TAG_SIZE;
+
+  async function container(plaintextSize: number, extraBytes: number) {
+    const dek = generateDEK();
+    const encrypted = await blobToUint8Array(
+      await encryptChunked(fillRandom(new Uint8Array(plaintextSize)), dek, null),
+    );
+    const header = parseDSE3Header(encrypted);
+    const headerSize = getDSE3HeaderSize(header);
+    const extended = new Uint8Array(encrypted.byteLength + extraBytes);
+    extended.set(encrypted);
+    fillRandom(extended.subarray(encrypted.byteLength));
+    return { dek, header, headerSize, extended };
+  }
+
+  type Decrypt = (
+    bytes: Uint8Array,
+    dek: Uint8Array,
+    header: ReturnType<typeof parseDSE3Header>,
+    headerSize: number,
+  ) => Promise<Blob>;
+
+  const decryptors: [string, Decrypt][] = [
+    ["decryptChunked", decryptChunked],
+    [
+      "decryptChunkedFromBlob",
+      (bytes, ...rest) => decryptChunkedFromBlob(new Blob([bytes as BlobPart]), ...rest),
+    ],
+  ];
+
+  describe.each(decryptors)("Extended container: %s", (_, decrypt) => {
+    it("refuses a byte appended after a partial last chunk as ciphertext", async () => {
+      const { dek, header, headerSize, extended } = await container(1000, 1);
+
+      await expect(
+        decrypt(extended, dek, header, headerSize),
+      ).rejects.toBeInstanceOf(DecryptionError);
+    });
+
+    it("refuses a partial last chunk padded past the largest final chunk", async () => {
+      const finalCiphertext = 1000 + AES_GCM_TAG_SIZE;
+      const { dek, header, headerSize, extended } = await container(
+        1000,
+        MAX_FINAL_CIPHERTEXT - finalCiphertext + 1,
+      );
+
+      const result = decrypt(extended, dek, header, headerSize);
+
+      await expect(result).rejects.toBeInstanceOf(InvalidFormatError);
+      await expect(result).rejects.toThrow("trailing bytes after final chunk");
+    });
+
+    it("refuses a byte appended after a full last chunk", async () => {
+      const { dek, header, headerSize, extended } = await container(
+        DSE3_CHUNK_PLAINTEXT_SIZE,
+        1,
+      );
+      expect(header.chunkCount).toBe(1);
+
+      const result = decrypt(extended, dek, header, headerSize);
+
+      await expect(result).rejects.toBeInstanceOf(InvalidFormatError);
+      await expect(result).rejects.toThrow("trailing bytes after final chunk");
+    });
   });
 });

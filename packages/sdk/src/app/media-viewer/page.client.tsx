@@ -51,6 +51,7 @@ import {
   getFrameId,
   openUrl,
 } from "@docspace/shared/utils/common";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
@@ -85,6 +86,7 @@ export default function MediaViewerClient({
 
   const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>();
   const [errorEvent, setErrorEvent] = useState<MediaViewerErrorEvent>();
+  const [readThroughApiClient] = useState(isOAuthFrame);
 
   useEffect(() => {
     frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
@@ -134,6 +136,7 @@ export default function MediaViewerClient({
       t={t}
       folderId={folderId}
       requestToken={requestToken}
+      readThroughApiClient={readThroughApiClient}
       startFileId={startFileId}
       pageSize={PAGE_COUNT}
       extsImagePreviewed={filesSettings.extsImagePreviewed ?? []}

@@ -36,6 +36,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import { ValidationStatus } from "@docspace/shared/enums";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 
 import {
@@ -43,6 +44,7 @@ import {
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
   LOCALE_HEADER,
+  MEDIA_VIEWER_LINK_ERROR_HEADER,
   OAUTH_FRAME_HEADER,
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
@@ -51,6 +53,11 @@ import {
   THEME_HEADER,
 } from "@/utils/constants";
 import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
+
+const MEDIA_VIEWER_LINK_ERRORS: Partial<Record<ValidationStatus, string>> = {
+  [ValidationStatus.Invalid]: "onNotFound",
+  [ValidationStatus.Expired]: "onNoAccess",
+};
 
 // This function can be marked `async` if using `await` inside
 export async function proxy(request: NextRequest) {
@@ -232,15 +239,27 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  if (
-    request.nextUrl.pathname.includes("public-room") ||
-    request.nextUrl.pathname === "/media-viewer"
-  ) {
+  const isMediaViewer = request.nextUrl.pathname === "/media-viewer";
+
+  if (request.nextUrl.pathname.includes("public-room") || isMediaViewer) {
+    requestHeaders.delete(MEDIA_VIEWER_LINK_ERROR_HEADER);
+
     const validationResult = await handlePublicRoomValidation(
       request,
       requestHeaders,
       shareKey || "",
     );
+
+    const mediaViewerLinkError =
+      isMediaViewer && validationResult?.status !== undefined
+        ? MEDIA_VIEWER_LINK_ERRORS[validationResult.status]
+        : undefined;
+
+    if (mediaViewerLinkError) {
+      requestHeaders.set(MEDIA_VIEWER_LINK_ERROR_HEADER, mediaViewerLinkError);
+
+      return NextResponse.next({ request: { headers: requestHeaders } });
+    }
 
     if (validationResult?.redirect) {
       return NextResponse.rewrite(

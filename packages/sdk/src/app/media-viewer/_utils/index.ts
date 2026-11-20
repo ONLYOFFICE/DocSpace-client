@@ -53,3 +53,13 @@ const getResponseStatus = (error: unknown) => {
 
 export const getFolderErrorEvent = (error: unknown): MediaViewerErrorEvent =>
   getResponseStatus(error) === 404 ? "onNotFound" : "onNoAccess";
+
+export const isUnauthorizedError = (error: unknown) =>
+  getResponseStatus(error) === 401;
+
+export const isMediaViewerErrorEvent = (
+  value: string | null,
+): value is MediaViewerErrorEvent =>
+  value === "onNoAccess" || value === "onNotFound";
+
+export const isPortalFolderId = (folderId: string) => /^\d+$/.test(folderId);

@@ -39,20 +39,34 @@ import { getSettingsFiles } from "@docspace/shared/api/files";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
 import OAuthPageLoader from "@/components/OAuthPageLoader";
+import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 
 import MediaViewerClient, { type MediaViewerClientProps } from "./page.client";
+import MediaViewerError from "./page.error.client";
+import { getFolderErrorEvent, isPortalFolderId } from "./_utils";
 
 type MediaViewerOAuthPageProps = Omit<MediaViewerClientProps, "filesSettings">;
 
 export default function MediaViewerOAuthPage(props: MediaViewerOAuthPageProps) {
+  const { folderId } = props;
+
   const { data, error } = useOAuthSSRData(async () => {
+    if (
+      isPortalFolderId(String(folderId)) &&
+      (await getPrivateRoomAddress({ id: folderId }, {}))
+    ) {
+      return { privateTarget: true as const };
+    }
+
     const filesSettings = await getSettingsFiles();
 
     return filesSettings ? { filesSettings } : null;
   });
 
-  if (error) throw error;
+  if (error) return <MediaViewerError event={getFolderErrorEvent(error)} />;
   if (!data) return <OAuthPageLoader />;
+  if ("privateTarget" in data) return <PrivateTargetNotAvailable />;
 
   return <MediaViewerClient {...props} filesSettings={data.filesSettings} />;
 }

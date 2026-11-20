@@ -35,13 +35,24 @@
 
 import { headers } from "next/headers";
 
-import { getFilesSettings } from "@/api/files";
-import { OAUTH_FRAME_HEADER } from "@/utils/constants";
+import { getFilesSettings, getFolderPath } from "@/api/files";
+import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
+import {
+  MEDIA_VIEWER_LINK_ERROR_HEADER,
+  OAUTH_FRAME_HEADER,
+} from "@/utils/constants";
+import { getPrivateRoomAddress } from "@/utils/private-room-address";
 import { logger } from "../../../logger.mjs";
 
 import MediaViewerClient from "./page.client";
 import MediaViewerOAuthPage from "./page.oauth.client";
 import MediaViewerError from "./page.error.client";
+import {
+  getFolderErrorEvent,
+  isMediaViewerErrorEvent,
+  isPortalFolderId,
+  isUnauthorizedError,
+} from "./_utils";
 
 export default async function Page({
   searchParams,
@@ -56,6 +67,12 @@ export default async function Page({
 
   const hdrs = await headers();
 
+  const linkError = hdrs.get(MEDIA_VIEWER_LINK_ERROR_HEADER);
+
+  if (isMediaViewerErrorEvent(linkError)) {
+    return <MediaViewerError event={linkError} />;
+  }
+
   if (hdrs.get(OAUTH_FRAME_HEADER)) {
     return (
       <MediaViewerOAuthPage
@@ -64,6 +81,27 @@ export default async function Page({
         startFileId={fileId}
       />
     );
+  }
+
+  // Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
+  if (isPortalFolderId(folderId)) {
+    let privateAddress: string | null;
+
+    try {
+      privateAddress = await getPrivateRoomAddress(
+        { id: folderId },
+        {},
+        getFolderPath,
+      );
+    } catch (error) {
+      if (!key || !isUnauthorizedError(error)) {
+        return <MediaViewerError event={getFolderErrorEvent(error)} />;
+      }
+
+      privateAddress = null;
+    }
+
+    if (privateAddress) return <PrivateTargetNotAvailable />;
   }
 
   const filesSettings = await getFilesSettings().catch(() => undefined);

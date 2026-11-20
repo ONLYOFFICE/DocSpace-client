@@ -1,11 +1,15 @@
 import { describe, expect, test, vi } from "vitest";
 import { NextRequest } from "next/server";
 
+import { ValidationStatus } from "@docspace/shared/enums";
+
 import {
   AGENT_ID_HEADER,
   FILTER_HEADER,
+  MEDIA_VIEWER_LINK_ERROR_HEADER,
   OAUTH_FRAME_HEADER,
 } from "@/utils/constants";
+import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
 
 import { proxy, config } from "./proxy";
 
@@ -44,6 +48,65 @@ describe("proxy — matcher coverage", () => {
 
     expect(response).toBeDefined();
     expect(requestHeader(response!, OAUTH_FRAME_HEADER)).toBe("1");
+  });
+});
+
+describe("proxy — /media-viewer", () => {
+  test.each([
+    [ValidationStatus.Invalid, "/sdk/public-room/error/invalid-link", "onNotFound"],
+    [ValidationStatus.Expired, "/sdk/public-room/error/expired-link", "onNoAccess"],
+  ])(
+    "keeps the viewer page and names the event for a refused link (%s)",
+    async (status, redirect, event) => {
+      vi.mocked(handlePublicRoomValidation).mockResolvedValueOnce({
+        redirect,
+        status,
+      });
+
+      const response = await proxy(makeRequest("/media-viewer?folder=12&key=bad"));
+
+      expect(response!.headers.get("x-middleware-rewrite")).toBeNull();
+      expect(requestHeader(response!, MEDIA_VIEWER_LINK_ERROR_HEADER)).toBe(event);
+    },
+  );
+
+  test("still sends a link with a password to the password page", async () => {
+    vi.mocked(handlePublicRoomValidation).mockResolvedValueOnce({
+      redirect: "/sdk/public-room/password",
+      status: ValidationStatus.Password,
+    });
+
+    const response = await proxy(makeRequest("/media-viewer?folder=12&key=locked"));
+
+    expect(response!.headers.get("x-middleware-rewrite")).toContain(
+      "/sdk/public-room/password",
+    );
+  });
+
+  test("drops a link error header sent by the client", async () => {
+    vi.mocked(handlePublicRoomValidation).mockResolvedValueOnce(null);
+
+    const request = new NextRequest(
+      new URL("/media-viewer?folder=12", "http://portal.example.com"),
+      { headers: { [MEDIA_VIEWER_LINK_ERROR_HEADER]: "onNotFound" } },
+    );
+
+    const response = await proxy(request);
+
+    expect(requestHeader(response!, MEDIA_VIEWER_LINK_ERROR_HEADER)).toBeNull();
+  });
+
+  test("leaves the public room error pages to the public room", async () => {
+    vi.mocked(handlePublicRoomValidation).mockResolvedValueOnce({
+      redirect: "/sdk/public-room/error/invalid-link",
+      status: ValidationStatus.Invalid,
+    });
+
+    const response = await proxy(makeRequest("/public-room?key=bad"));
+
+    expect(response!.headers.get("x-middleware-rewrite")).toContain(
+      "/sdk/public-room/error/invalid-link",
+    );
   });
 });
 

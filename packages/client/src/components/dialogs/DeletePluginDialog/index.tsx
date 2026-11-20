@@ -113,12 +113,12 @@ export default inject<TStore>(({ pluginStore }) => {
     setDeletePluginDialogProps(null);
   };
 
-  const { pluginName } = deletePluginDialogProps || {};
+  const { pluginName, personal } = deletePluginDialogProps || {};
 
   const onDelete = async (t: TTranslation) => {
     if (!pluginName) return;
 
-    await uninstallPlugin(pluginName, t);
+    await uninstallPlugin(pluginName, t, personal);
   };
 
   return { onClose, onDelete };

@@ -162,7 +162,7 @@ export default inject(
     const withUpload = pluginOptions.upload;
 
     const {
-      pluginList,
+      portalPluginList: pluginList,
       updatePlugin,
       updatePlugins,
       setCurrentSettingsDialogPlugin,

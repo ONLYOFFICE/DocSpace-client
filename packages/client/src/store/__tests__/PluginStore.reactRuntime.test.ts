@@ -83,6 +83,8 @@ class PluginInstance {
 
   enabled = true;
 
+  personal = false;
+
   settings: string | null = null;
 
   scopes: string[] = [];
@@ -181,6 +183,20 @@ describe("PluginStore react runtime settings", () => {
         PLUGIN,
         false,
         JSON.stringify({ tries: 3 }),
+        false,
+      );
+    });
+
+    it("writes a personal plugin's settings to its owner alone", async () => {
+      const { store } = withPlugin({ personal: true });
+
+      await settingsOf(store).save({ tries: 3 });
+
+      expect(updatePlugin).toHaveBeenCalledWith(
+        PLUGIN,
+        true,
+        JSON.stringify({ tries: 3 }),
+        true,
       );
     });
 

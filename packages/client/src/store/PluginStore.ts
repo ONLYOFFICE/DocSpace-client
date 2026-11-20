@@ -228,9 +228,12 @@ class PluginStore {
 
   deletePluginDialogVisible = false;
 
-  deletePluginDialogProps: null | { pluginName: string } = null;
+  deletePluginDialogProps: null | { pluginName: string; personal?: boolean } =
+    null;
 
   isEmptyList = false;
+
+  personalPlugins: TAPIPlugin[] = [];
 
   needPageReload = false;
 
@@ -292,7 +295,7 @@ class PluginStore {
 
     const plugin = this.plugins.find((p) => p.name === webPluginName);
 
-    if (!plugin || plugin.enabled === enabled) return;
+    if (!plugin || plugin.personal || plugin.enabled === enabled) return;
 
     return enabled
       ? this.activatePlugin(webPluginName)
@@ -399,7 +402,9 @@ class PluginStore {
     this.deletePluginDialogVisible = value;
   };
 
-  setDeletePluginDialogProps = (value: null | { pluginName: string }) => {
+  setDeletePluginDialogProps = (
+    value: null | { pluginName: string; personal?: boolean },
+  ) => {
     this.deletePluginDialogProps = value;
   };
 
@@ -513,7 +518,7 @@ class PluginStore {
         abortController.signal,
       );
 
-      this.setIsEmptyList(plugins.length === 0);
+      this.setIsEmptyList(plugins.every((p) => p.personal));
       await Promise.allSettled(
         plugins.map((plugin) =>
           plugin.runtime === "module"
@@ -558,9 +563,23 @@ class PluginStore {
     );
   };
 
-  addPlugin = async (data: FormData) => {
+  fetchPersonalPlugins = async () => {
     try {
-      const plugin = await api.plugins.addPlugin(data);
+      const plugins = await api.plugins.getPersonalPlugins();
+
+      runInAction(() => {
+        this.personalPlugins = plugins;
+      });
+    } catch (e) {
+      toastr.error(e as TData);
+    }
+  };
+
+  addPlugin = async (data: FormData, personal = false) => {
+    try {
+      const plugin = await api.plugins.addPlugin(data, personal);
+
+      if (personal) this.fetchPersonalPlugins();
 
       const isPluginCompatible = this.checkPluginCompatibility(
         plugin.minDocSpaceVersion,
@@ -600,21 +619,26 @@ class PluginStore {
     }
   };
 
-  uninstallPlugin = async (name: string, t: TTranslation) => {
-    const pluginIdx = this.plugins.findIndex((p) => p.name === name);
+  uninstallPlugin = async (name: string, t: TTranslation, personal = false) => {
+    const pluginIdx = this.plugins.findIndex(
+      (p) => p.name === name && !!p.personal === personal,
+    );
 
     try {
-      await api.plugins.deletePlugin(name);
-
-      this.deactivatePlugin(name);
+      await api.plugins.deletePlugin(name, personal);
 
       if (pluginIdx !== -1) {
+        this.deactivatePlugin(name);
+
         runInAction(() => {
           this.plugins.splice(pluginIdx, 1);
 
-          if (this.plugins.length === 0) this.setIsEmptyList(true);
+          if (this.portalPluginList.length === 0) this.setIsEmptyList(true);
         });
       }
+
+      if (personal) this.fetchPersonalPlugins();
+
       toastr.success(t("PluginDeletedSuccessfully"));
     } catch (e) {
       toastr.error(e as TData);
@@ -882,7 +906,7 @@ class PluginStore {
         this.plugins = [plugin, ...this.plugins];
       });
 
-      this.setIsEmptyList(false);
+      if (!plugin.personal) this.setIsEmptyList(false);
 
       return this.plugins[0];
     }
@@ -1010,6 +1034,7 @@ class PluginStore {
         name,
         currentStatus,
         currentSettings,
+        oldPlugin?.personal,
       );
 
       if (oldPlugin)
@@ -1948,6 +1973,10 @@ class PluginStore {
     return this.plugins.filter((p) => p.system);
   }
 
+  get portalPluginList() {
+    return this.plugins.filter((p) => !p.personal);
+  }
+
   get contextMenuItemsList() {
     const items: { key: string; value: IContextMenuItemClient }[] = Array.from(
       this.contextMenuItems,
@@ -2237,6 +2266,7 @@ class PluginStore {
             pluginName,
             entry.enabled,
             settingsStr,
+            entry.personal,
           );
           runInAction(() => {
             entry.settings = settingsStr;

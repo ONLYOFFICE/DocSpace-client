@@ -287,7 +287,7 @@ class SettingsStore {
 
   enablePlugins = false;
 
-  pluginOptions = { upload: false, delete: false };
+  pluginOptions = { upload: false, delete: false, personal: false };
 
   domainValidator: TDomainValidator | null = null;
 
@@ -1146,6 +1146,7 @@ class SettingsStore {
       this.pluginOptions = {
         upload: origSettings.plugins.upload,
         delete: origSettings.plugins.delete,
+        personal: !!origSettings.plugins.personal,
       };
     }
 

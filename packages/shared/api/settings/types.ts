@@ -190,6 +190,7 @@ export type TSettings = {
     enabled: boolean;
     upload: boolean;
     delete: boolean;
+    personal?: boolean;
   };
   deepLink: {
     androidPackageName: string;

@@ -52,6 +52,7 @@ export type TAPIPlugin = {
   createOn: Date;
   enabled: boolean;
   system: boolean;
+  personal?: boolean;
   url: string;
   cssUrl?: string;
   settings: string;

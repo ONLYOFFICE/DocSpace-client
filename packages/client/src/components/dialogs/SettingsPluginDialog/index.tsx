@@ -208,9 +208,11 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
 
   const plugin = pluginList.find((p) => p.name === pluginName);
 
-  const withDelete = standalone
-    ? pluginOptions.delete
-    : pluginOptions.delete && !plugin?.system;
+  const withDelete =
+    !!plugin?.personal ||
+    (standalone
+      ? pluginOptions.delete
+      : pluginOptions.delete && !plugin?.system);
 
   const onClose = () => {
     setSettingsPluginDialogVisible(false);
@@ -218,8 +220,13 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
   };
 
   const onDelete = () => {
+    if (!currentSettingsDialog) return;
+
     setDeletePluginDialogVisible(true);
-    setDeletePluginDialogProps(currentSettingsDialog);
+    setDeletePluginDialogProps({
+      ...currentSettingsDialog,
+      personal: plugin?.personal,
+    });
   };
 
   return {

@@ -38,6 +38,9 @@
 import { request } from "../client";
 import { TAPIPlugin } from "./types";
 
+const personalQuery = (personal?: boolean) =>
+  personal ? "?personal=true" : "";
+
 export const getPlugins = async (
   enabled: null | boolean,
   signal?: AbortSignal,
@@ -55,10 +58,20 @@ export const getPlugins = async (
   return res;
 };
 
-export const addPlugin = async (data: FormData) => {
+export const getPersonalPlugins = async (signal?: AbortSignal) => {
+  const res = (await request({
+    method: "GET",
+    url: `/settings/webplugins${personalQuery(true)}`,
+    signal,
+  })) as TAPIPlugin[];
+
+  return res;
+};
+
+export const addPlugin = async (data: FormData, personal?: boolean) => {
   const res = (await request({
     method: "POST",
-    url: `/settings/webplugins`,
+    url: `/settings/webplugins${personalQuery(personal)}`,
     data,
   })) as TAPIPlugin;
 
@@ -76,17 +89,18 @@ export const updatePlugin = async (
   name: string,
   enabled: boolean,
   settings: unknown = "",
+  personal?: boolean,
 ) => {
   return request({
     method: "PUT",
-    url: `/settings/webplugins/${name}`,
+    url: `/settings/webplugins/${name}${personalQuery(personal)}`,
     data: { enabled, settings },
   });
 };
 
-export const deletePlugin = async (name: string) => {
-  request({
+export const deletePlugin = async (name: string, personal?: boolean) => {
+  return request({
     method: "DELETE",
-    url: `/settings/webplugins/${name}`,
+    url: `/settings/webplugins/${name}${personalQuery(personal)}`,
   });
 };

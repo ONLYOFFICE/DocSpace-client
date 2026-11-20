@@ -32,9 +32,15 @@ import {
   AI_HUB_ROOMS,
   AI_HUB_ROOT_ID,
   AI_PROJECTS,
+  aiRoomProjectMock,
+  aiRoomProjectsHandler,
   aiSectionsHandlers,
 } from "./projects";
-import type { AiHubRoomMock, AiProjectMock } from "./projects";
+import type {
+  AiHubRoomMock,
+  AiProjectMock,
+  AiRoomProjectMock,
+} from "./projects";
 
 /**
  * The Knowledge bases list (Knowledge rooms, `RoomsType.KnowledgeRoom`) with
@@ -84,6 +90,7 @@ const knowledgeBase = (
   color: string,
   updated: string,
   filesCount: number,
+  linkedProjectsCount = 0,
 ): AiHubRoomMock => ({
   ...knowledgeRoomTemplate(),
   id,
@@ -92,6 +99,7 @@ const knowledgeBase = (
   created: "2026-10-01T10:00:00.0000000+00:00",
   updated,
   filesCount,
+  linkedProjectsCount,
 });
 
 /** One file failed and two are still being indexed: the base carries "Error". */
@@ -127,10 +135,21 @@ const SEEDS: Record<number, KnowledgeFileSeed[]> = {
   ],
 };
 
+/** The agents that use each stock base: two use "Company policies", none the others. */
+export const KNOWLEDGE_BASE_AGENTS: Record<number, AiRoomProjectMock[]> = {
+  [KNOWLEDGE_BASE_FAILED_ID]: [
+    aiRoomProjectMock(779302, "Onboarding guide", "5CC5D4"),
+    aiRoomProjectMock(779301, "Contract reviewer", "FF6680"),
+  ],
+  [KNOWLEDGE_BASE_INDEXING_ID]: [],
+  [KNOWLEDGE_BASE_INDEXED_ID]: [],
+};
+
 /**
  * The Knowledge bases list, newest change first: "Company policies" (48
- * files, one failed, two being indexed), "Product documentation" (one file
- * being indexed) and "Company glossary" (all indexed).
+ * files, one failed, two being indexed, used by two agents), "Product
+ * documentation" (one file being indexed) and "Company glossary" (all
+ * indexed).
  */
 export const KNOWLEDGE_BASES: AiHubRoomMock[] = [
   knowledgeBase(
@@ -139,6 +158,7 @@ export const KNOWLEDGE_BASES: AiHubRoomMock[] = [
     "5CC5D4",
     "2026-11-17T10:00:00.0000000+00:00",
     SEEDS[KNOWLEDGE_BASE_FAILED_ID].length,
+    KNOWLEDGE_BASE_AGENTS[KNOWLEDGE_BASE_FAILED_ID].length,
   ),
   knowledgeBase(
     KNOWLEDGE_BASE_INDEXING_ID,
@@ -322,12 +342,16 @@ export const aiKnowledgeBasesHandlers = (
     projects = AI_PROJECTS,
     bases = KNOWLEDGE_BASES,
     files = knowledgeBaseFilesMock(bases),
+    agents = KNOWLEDGE_BASE_AGENTS,
   }: {
     projects?: AiProjectMock[];
     bases?: AiHubRoomMock[];
     files?: Record<number, KnowledgeFileMock[]>;
+    /** The agents that use each base, by the base's id. */
+    agents?: Record<number, AiRoomProjectMock[]>;
   } = {},
 ) => [
   knowledgeBaseFolderHandler(port, bases, files),
+  aiRoomProjectsHandler(port, agents),
   ...aiSectionsHandlers(port, projects, bases),
 ];

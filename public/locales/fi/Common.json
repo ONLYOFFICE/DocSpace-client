@@ -2618,6 +2618,8 @@
   "Usage": "Käyttö",
   "UsageDescription": "Tarkista kulutuksesi palvelukohtaisesti. Käyttöön perustuvat palvelut näyttävät todelliset kustannukset; tilaukset näyttävät kuukausimaksunsa valitulle kaudelle.",
   "UseCustomFilter": "käytä mukautettua suodatinta",
+  "UsedBy": "Käyttäjät",
+  "UsedByAgents": "Agentit, jotka käyttävät",
   "UsedLimits": "Käytetty / Rajat",
   "UseHttp": "Käytä Http:tä",
   "UseInChat": "Käytä chatissa",

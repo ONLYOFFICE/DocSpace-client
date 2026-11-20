@@ -271,9 +271,13 @@ class TableStore {
 
   skillsSkillSetsColumnIsEnabled = true;
 
+  usedBySkillSetsColumnIsEnabled = true;
+
   ownerSkillSetsColumnIsEnabled = true;
 
   activitySkillSetsColumnIsEnabled = true;
+
+  usedByKnowledgeBasesColumnIsEnabled = true;
 
   ownerKnowledgeBasesColumnIsEnabled = true;
 
@@ -551,6 +555,10 @@ class TableStore {
     );
   }
 
+  setUsedByKnowledgeBasesColumn = (enable: boolean) => {
+    this.usedByKnowledgeBasesColumnIsEnabled = enable;
+  };
+
   setOwnerKnowledgeBasesColumn = (enable: boolean) => {
     this.ownerKnowledgeBasesColumnIsEnabled = enable;
   };
@@ -573,6 +581,10 @@ class TableStore {
 
   setSkillsSkillSetsColumn = (enable: boolean) => {
     this.skillsSkillSetsColumnIsEnabled = enable;
+  };
+
+  setUsedBySkillSetsColumn = (enable: boolean) => {
+    this.usedBySkillSetsColumnIsEnabled = enable;
   };
 
   setOwnerSkillSetsColumn = (enable: boolean) => {
@@ -672,6 +684,7 @@ class TableStore {
 
       if (this.isSkillSetsList) {
         this.setSkillsSkillSetsColumn(splitColumns.includes("SkillsSkillSets"));
+        this.setUsedBySkillSetsColumn(splitColumns.includes("UsedBySkillSets"));
         this.setOwnerSkillSetsColumn(splitColumns.includes("OwnerSkillSets"));
         this.setActivitySkillSetsColumn(
           splitColumns.includes("ActivitySkillSets"),
@@ -680,6 +693,9 @@ class TableStore {
       }
 
       if (this.isKnowledgeBasesList) {
+        this.setUsedByKnowledgeBasesColumn(
+          splitColumns.includes("UsedByKnowledgeBases"),
+        );
         this.setOwnerKnowledgeBasesColumn(
           splitColumns.includes("OwnerKnowledgeBases"),
         );
@@ -825,6 +841,14 @@ class TableStore {
     switch (key) {
       case "SkillsSkillSets":
         this.setSkillsSkillSetsColumn(!this.skillsSkillSetsColumnIsEnabled);
+        return;
+      case "UsedBySkillSets":
+        this.setUsedBySkillSetsColumn(!this.usedBySkillSetsColumnIsEnabled);
+        return;
+      case "UsedByKnowledgeBases":
+        this.setUsedByKnowledgeBasesColumn(
+          !this.usedByKnowledgeBasesColumnIsEnabled,
+        );
         return;
       case "OwnerSkillSets":
         this.setOwnerSkillSetsColumn(!this.ownerSkillSetsColumnIsEnabled);

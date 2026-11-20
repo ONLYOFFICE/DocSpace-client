@@ -37,6 +37,7 @@ import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { TableCell } from "@onlyoffice/apps-ui-kit/components/table";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { VectorizationStatus } from "@docspace/shared/enums";
 
@@ -58,12 +59,13 @@ import styles from "./CellStyles.module.scss";
 
 /**
  * A row of the Knowledge bases list: the base's name, marked while its
- * files are being indexed or when some could not be, its owner and when it
- * was last modified. How far a base is indexed is read from its files by
+ * files are being indexed or when some could not be, how many agents use
+ * it, its owner and when it was last modified. How far a base is indexed is read from its files by
  * the knowledge bases store.
  */
 const KnowledgeBasesRowDataComponent = (props) => {
   const {
+    usedByKnowledgeBasesColumnIsEnabled,
     ownerKnowledgeBasesColumnIsEnabled,
     activityKnowledgeBasesColumnIsEnabled,
 
@@ -152,6 +154,33 @@ const KnowledgeBasesRowDataComponent = (props) => {
         {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
+      {usedByKnowledgeBasesColumnIsEnabled ? (
+        <TableCell
+          dataTestId={`knowledge-bases-cell-used-by-${index}`}
+          style={dragStyles.style}
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "UsedByKnowledgeBases" ? "no-extra-space" : "",
+          )}
+        >
+          <Text
+            fontSize="12px"
+            fontWeight={600}
+            color={sideColor}
+            className={styles.styledText}
+            truncate
+          >
+            {item.linkedProjectsCount ?? 0}
+          </Text>
+          {lastColumn === "UsedByKnowledgeBases"
+            ? quickButtonsComponentNode
+            : null}
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
       {ownerKnowledgeBasesColumnIsEnabled ? (
         <TableCell
           dataTestId={`knowledge-bases-cell-owner-${index}`}
@@ -203,12 +232,14 @@ const KnowledgeBasesRowDataComponent = (props) => {
 
 export default inject(({ tableStore, knowledgeBasesStore }, { item }) => {
   const {
+    usedByKnowledgeBasesColumnIsEnabled,
     ownerKnowledgeBasesColumnIsEnabled,
     activityKnowledgeBasesColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
   return {
+    usedByKnowledgeBasesColumnIsEnabled,
     ownerKnowledgeBasesColumnIsEnabled,
     activityKnowledgeBasesColumnIsEnabled,
     tableStorageName,

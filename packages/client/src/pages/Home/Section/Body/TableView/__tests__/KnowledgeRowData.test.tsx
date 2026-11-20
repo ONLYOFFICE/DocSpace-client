@@ -37,13 +37,20 @@ import { rowProps, setStoredColumns } from "./rowDataMocks";
 const Row = KnowledgeBasesRowData as unknown as React.FC<Record<string, unknown>>;
 const FileRow = KnowledgeFilesRowData as unknown as React.FC<Record<string, unknown>>;
 
-const base = { id: 21, title: "Company policies", isRoom: true, filesCount: 3 };
+const base = {
+  id: 21,
+  title: "Company policies",
+  isRoom: true,
+  filesCount: 3,
+  linkedProjectsCount: 5,
+};
 
 const renderBase = (props: Record<string, unknown> = {}) => {
   const fetchState = vi.fn();
   render(
     <Row
       {...rowProps(base)}
+      usedByKnowledgeBasesColumnIsEnabled
       ownerKnowledgeBasesColumnIsEnabled
       activityKnowledgeBasesColumnIsEnabled
       state={null}
@@ -58,11 +65,12 @@ beforeEach(() => localStorage.clear());
 afterEach(() => vi.useRealTimers());
 
 describe("KnowledgeBasesRowData", () => {
-  it("shows a base's name, owner and last change, and reads its files once", () => {
+  it("shows a base's name, how many agents use it, owner and last change, and reads its files once", () => {
     const fetchState = renderBase();
     expect(screen.getByTestId("knowledge-bases-cell-name-0")).toHaveTextContent(
       "Company policies",
     );
+    expect(screen.getByTestId("knowledge-bases-cell-used-by-0")).toHaveTextContent("5");
     expect(
       within(screen.getByTestId("knowledge-bases-cell-owner-0")).getByTestId("author"),
     ).toBeInTheDocument();
@@ -75,9 +83,11 @@ describe("KnowledgeBasesRowData", () => {
 
   it("leaves out the columns that are switched off", () => {
     renderBase({
+      usedByKnowledgeBasesColumnIsEnabled: false,
       ownerKnowledgeBasesColumnIsEnabled: false,
       activityKnowledgeBasesColumnIsEnabled: false,
     });
+    expect(screen.queryByTestId("knowledge-bases-cell-used-by-0")).toBeNull();
     expect(screen.queryByTestId("knowledge-bases-cell-owner-0")).toBeNull();
     expect(screen.queryByTestId("knowledge-bases-cell-activity-0")).toBeNull();
   });

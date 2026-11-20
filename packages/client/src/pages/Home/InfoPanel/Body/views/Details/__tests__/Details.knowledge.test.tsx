@@ -31,6 +31,10 @@ vi.mock("SRC_DIR/components/SpaceQuota", async () => ({
 vi.mock("../sub-components/FormInfo", async () => ({
   FormInfo: (await import("./detailsMocks")).Nothing,
 }));
+// The agents that use a room have their own test.
+vi.mock("../sub-components/UsedByAgents", async () => ({
+  UsedByAgents: (await import("./detailsMocks")).Nothing,
+}));
 vi.mock("../sub-components/SkillSetInfo", async () => ({
   SkillSetInfo: (await import("./detailsMocks")).Nothing,
 }));

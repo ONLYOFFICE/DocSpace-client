@@ -2618,6 +2618,8 @@
   "Usage": "Uporaba",
   "UsageDescription": "Preglejte svojo porabo po storitvi. Storitve, ki temeljijo na uporabi, prikazujejo dejanske stroške; naročnine prikazujejo mesečno pristojbino za izbrano obdobje.",
   "UseCustomFilter": "uporabi prilagojeni filter",
+  "UsedBy": "Uporablja",
+  "UsedByAgents": "Uporabljajo agenti",
   "UsedLimits": "Uporabljeno / Omejitve",
   "UseHttp": "Uporabi Http",
   "UseInChat": "Uporabi v klepetu",

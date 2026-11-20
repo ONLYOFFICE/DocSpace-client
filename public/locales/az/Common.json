@@ -2618,6 +2618,8 @@
   "Usage": "İstifadə",
   "UsageDescription": "Xərcləriniziə xidmətə görə nəzərdən keçirin. İstifadəyə əsaslanan xidmətlər faktiki xərcləri göstərir; abunəliklər seçilmiş dövr üçün aylıq ödənişlərini göstərir.",
   "UseCustomFilter": "xüsusi filtrdən istifadə edin",
+  "UsedBy": "İstifadə edir",
+  "UsedByAgents": "İstifadə edən agentlər",
   "UsedLimits": "İstifadə olunan / Limitlər",
   "UseHttp": "Http istifadə edin",
   "UseInChat": "Söhbətdə istifadə et",

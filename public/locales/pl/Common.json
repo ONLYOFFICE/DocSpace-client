@@ -2618,6 +2618,8 @@
   "Usage": "Wykorzystanie",
   "UsageDescription": "Przejrzyj swoje wydatki według usługi. Usługi oparte na użyciu pokazują rzeczywiste koszty; subskrypcje pokazują miesięczną opłatę za wybrany okres.",
   "UseCustomFilter": "użyj niestandardowego filtra",
+  "UsedBy": "Używane przez",
+  "UsedByAgents": "Używane przez agentów",
   "UsedLimits": "Wykorzystano / Limity",
   "UseHttp": "Użyj Http",
   "UseInChat": "Użyj w czacie",

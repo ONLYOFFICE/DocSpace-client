@@ -2618,6 +2618,8 @@
   "Usage": "Cách sử dụng",
   "UsageDescription": "Xem lại chi tiêu của bạn theo dịch vụ. Các dịch vụ dựa trên mức sử dụng hiển thị chi phí thực tế; các đăng ký hiển thị phí hàng tháng cho kỳ đã chọn.",
   "UseCustomFilter": "sử dụng bộ lọc tùy chỉnh",
+  "UsedBy": "Được dùng bởi",
+  "UsedByAgents": "Được dùng bởi tác nhân",
   "UsedLimits": "Đã dùng / Giới hạn",
   "UseHttp": "Sử dụng Http",
   "UseInChat": "Dùng trong trò chuyện",

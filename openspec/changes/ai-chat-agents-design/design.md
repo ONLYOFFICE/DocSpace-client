@@ -44,10 +44,10 @@ Version `1794687729-e1b1` of the design, read on 2026-11-16, has fifteen boards.
 | 08 Agent chat + info | `ai-agent-page` (title menu, Share agent), `ai-agent-info-panel` (Context), `ai-chat-messages` | Context's Data sources section (the owner's decision, proposal). The "current room" tag: the agent's page has no location. |
 | 09 Agent chat + details | `ai-agent-info-panel` (Details), `ai-agents-list` "Agent description" | Access "Everyone in DocSpace": `ai-agent-access` "No portal-wide access". Owner "ONLYOFFICE": as on board 04. |
 | 10 Agent chat + content | `ai-agent-info-panel` (Content) | "Not saved" and "From device": files are saved at once and the origin is not recorded. The copy to a room is not built. |
-| 11 Skill sets | `ai-skill-sets` (Columns of the Skill sets list, Skill set in the Info panel, Use a skill set in the chat) | "Used by" and "Used by agents", the set's description, and the skill names on the count's hover: server item 5. Last modified shows the time too. |
+| 11 Skill sets | `ai-skill-sets` (Columns of the Skill sets list, Skill set in the Info panel, Use a skill set in the chat) | The set's description and the skill names on the count's hover: server item 5. "Used by" is a number, not the agents' names ("Used by comes from the room"). Last modified shows the time too. |
 | 12 Skill set open | `ai-skill-sets` (Skills of an opened skill set, Skill in the Info panel, View instructions, Use a skill set in the chat) | — |
 | 13 Edit skill | `ai-skill-sets` (Edit skill, Markdown toolbar, What the toolbar buttons do, Saving a skill) | The instructions are a code editor, not a plain text field. |
-| 14 Knowledge bases | `ai-knowledge-bases` (Columns, Indexing state of a knowledge base, Knowledge base in the Info panel, Use a knowledge base in the chat) | "Used by", "Used by agents", the description, and "Last indexed" (the list shows Last modified): server item 5. The state is marked in the table view only. |
+| 14 Knowledge bases | `ai-knowledge-bases` (Columns, Indexing state of a knowledge base, Knowledge base in the Info panel, Use a knowledge base in the chat) | The description and "Last indexed" (the list shows Last modified): server item 5. "Used by" is a number, not the agents' names ("Used by comes from the room"). The state is marked in the table view only. |
 | 15 Knowledge base open | `ai-knowledge-bases` (Files of an opened knowledge base, Indexing state of a file, File in the Info panel) | The reason a file failed (server item 5): a fixed note says it could not be prepared. The "Add files" button: the create menu keeps "Upload from storage" and "Upload from device". |
 
 ## Goals / Non-Goals
@@ -189,6 +189,18 @@ Every column is read from what the rooms list and the folder listing already ans
 - **The description of a skill** is read from its file, once per file version, and shared by the row and the Info panel. A failed read is not retried in the session; a save makes a new version, which is read again.
 
 The file badges are shared: the pill of a file in progress now reads "Indexing" instead of "Preparing", and a failed file gets an "Error" pill in the table and row views instead of the alert icon (the tile view keeps the icon). This reaches every list that shows a file's indexing state, not only knowledge bases. A file's Details show its indexing state as Status, and a failed file a fixed note above the properties.
+
+### Used by comes from the room
+
+Server `6b55a3daa8` (2026-11-19, change `add-linked-projects-to-ai-rooms` in `../server/openspec`) gives what "Used by" needs; the contract, as its OpenAPI text states it:
+
+- A Knowledge or an Instructions room object carries `linkedProjectsCount`: every agent linked to the room, readable by the caller or not. Other room types, and the short room object of the new-items listing, do not carry it.
+- `GET api/2.0/files/rooms/{id}/projects` (`getRoomProjects`) answers one page of the agents that use the room, each with `id`, `title` and `logo`, sorted by title, paged with `startIndex` and `count` (25 by default), with the total in the envelope. Only the agents the caller may read are listed, so the total can be lower than `linkedProjectsCount`. 404 for another kind of room, 403 without read access to the room or with the AI features off.
+- `update-folder` is sent for each room whose number changes: when an agent links it, unlinks it or is deleted.
+
+The client shows the number as the Used by column of both lists, on their tiles and in their compact rows, and lists the agents in the Details ("Used by agents"). The number is not sortable: the server sorts the section by no such key. The list in the Details reads the first hundred agents and tells the rest by their number; it is read again when the room's number changes, which the existing `update-folder` handling brings without new code (`refreshFolder` re-reads the room and replaces the list item and the selection). An agent's name in the list is not a link. The column sits after Skills in the Skill sets list and after Name in the Knowledge bases list; its place and the plain number were not compared with boards 11 and 14.
+
+The stored column sets of both lists are reset (`TableVersions.SkillSets` and `KnowledgeBases` are "2"), so the new column shows for a user who chose columns before.
 
 ### A skill is read in a dialog and edited in a modal
 The Command column of 134d6791cd1, the Type column renamed, is reverted: an opened set lists the description instead, and the command is shown where a skill is looked at one by one (its Details, the skill list of its set's Details, the Edit skill dialog). The instructions left the Info panel for a read-only dialog behind "View instructions", which offers Edit to those who may edit and rename the file. Edit skill became a modal, as board 13 draws it, replacing the side panel recorded on 2026-11-13; its toolbar edits the Markdown text in place (wrap or unwrap a selection, mark or unmark its lines, a link with its address selected) and keeps the editor's selection. The skill generation dialog shares the editor, not the toolbar.

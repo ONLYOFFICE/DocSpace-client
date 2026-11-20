@@ -146,6 +146,7 @@ test.describe("AI Chat: Knowledge bases", () => {
 
       const header = tableHeader(page);
       await expect(header).toContainText("Name");
+      await expect(header).toContainText("Used by");
       await expect(header).toContainText("Owner");
       await expect(header).toContainText("Last modified");
       await expect(header).not.toContainText("Type");
@@ -154,6 +155,13 @@ test.describe("AI Chat: Knowledge bases", () => {
 
       // Its owner is the user who reads the list, shown as "Me".
       await expect(row(page, FAILED_BASE)).toContainText("Me");
+      // Two agents use it; none uses "Company glossary".
+      await expect(
+        row(page, FAILED_BASE).getByTestId(/^knowledge-bases-cell-used-by-/),
+      ).toHaveText("2");
+      await expect(
+        row(page, INDEXED_BASE).getByTestId(/^knowledge-bases-cell-used-by-/),
+      ).toHaveText("0");
     });
 
     // Spec: ai-knowledge-bases, "Indexing state of a knowledge base"
@@ -253,6 +261,8 @@ test.describe("AI Chat: Knowledge bases", () => {
       await expect(property(page, "Status")).toContainText("Indexed");
       // A knowledge base is told by its files, not by a room type.
       await expect(property(page, "Type")).toHaveCount(0);
+      // No agent uses it, so none is listed.
+      await expect(page.getByTestId("used-by-agents")).toHaveCount(0);
 
       // A base with a failed file says so in its Status.
       await selectRow(
@@ -261,6 +271,11 @@ test.describe("AI Chat: Knowledge bases", () => {
       );
       await expect(property(page, "Content")).toContainText("Files: 48");
       await expect(property(page, "Status")).toContainText("Error");
+      // The agents that use it, sorted by name.
+      await expect(page.getByTestId("used-by-agents-name")).toHaveText([
+        "Contract reviewer",
+        "Onboarding guide",
+      ]);
     });
 
     // Spec: ai-knowledge-bases, "Use a knowledge base in the chat"

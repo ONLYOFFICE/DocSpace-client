@@ -28,6 +28,7 @@ import {
   getAiProjectKnowledgeFiles,
   getAiProjectKnowledgeFilesCount,
   getAiProjects,
+  getAiRoomProjects,
   getAiProject,
   getAiProjectSkills,
   getAiProjectSummary,
@@ -142,6 +143,33 @@ describe("the calls", () => {
       if (answer === undefined) throw new Error(`unexpected ${method} ${url}`);
       return typeof answer === "function" ? answer(options as { data?: unknown }) : answer;
     });
+
+  it("lists the agents that use a room, a page with its total", async () => {
+    route({
+      "GET /files/rooms/7/projects?startIndex=0&count=100": {
+        total: 3,
+        items: [
+          { id: 2, title: "Legal", logo: { color: "123456", medium: "" } },
+          { id: 5, title: "Sales", logo: null },
+        ],
+      },
+    });
+    expect(await getAiRoomProjects(7, { startIndex: 0, count: 100 })).toEqual({
+      total: 3,
+      items: [
+        { id: 2, title: "Legal", logo: { color: "#123456", medium: "" } },
+        { id: 5, title: "Sales", logo: { color: "" } },
+      ],
+    });
+  });
+
+  it("reads an answer without a total as the whole list", async () => {
+    route({ "GET /files/rooms/7/projects": [{ id: 2, title: "Legal", logo: { color: "#123456" } }] });
+    expect(await getAiRoomProjects(7)).toEqual({
+      total: 1,
+      items: [{ id: 2, title: "Legal", logo: { color: "#123456" } }],
+    });
+  });
 
   it("lists the AI projects of the AI rooms root, with only the set query fields", async () => {
     request.mockResolvedValueOnce({ total: 1, folders: [folder()] });

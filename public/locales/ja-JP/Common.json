@@ -2618,6 +2618,8 @@
   "Usage": "使用法",
   "UsageDescription": "サービス別の支出を確認してください。使用量ベースのサービスは実際のコストを表示し、サブスクリプションは選択した期間の月額料金を表示します。",
   "UseCustomFilter": "カスタムフィルターを使用",
+  "UsedBy": "使用元",
+  "UsedByAgents": "使用しているエージェント",
   "UsedLimits": "使用量 / 上限",
   "UseHttp": "Httpを使用します",
   "UseInChat": "チャットで使用",

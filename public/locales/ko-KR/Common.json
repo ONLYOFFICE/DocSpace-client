@@ -2618,6 +2618,8 @@
   "Usage": "사용법",
   "UsageDescription": "서비스별 지출을 검토하세요. 사용량 기반 서비스는 실제 비용을 표시하고, 구독은 선택한 기간의 월별 요금을 표시합니다.",
   "UseCustomFilter": "사용자 정의 필터 사용",
+  "UsedBy": "사용처",
+  "UsedByAgents": "사용 중인 에이전트",
   "UsedLimits": "사용량 / 한도",
   "UseHttp": "Http 사용",
   "UseInChat": "채팅에서 사용",

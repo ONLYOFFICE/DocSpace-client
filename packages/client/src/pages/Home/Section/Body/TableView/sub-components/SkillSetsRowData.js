@@ -53,12 +53,13 @@ import styles from "./CellStyles.module.scss";
 
 /**
  * A row of the Skill sets list: the set's name, how many skills it holds
- * (its Markdown files: a set has no folders), its owner and when it was
- * last modified.
+ * (its Markdown files: a set has no folders), how many agents use it, its
+ * owner and when it was last modified.
  */
 const SkillSetsRowDataComponent = (props) => {
   const {
     skillsSkillSetsColumnIsEnabled,
+    usedBySkillSetsColumnIsEnabled,
     ownerSkillSetsColumnIsEnabled,
     activitySkillSetsColumnIsEnabled,
 
@@ -89,13 +90,16 @@ const SkillSetsRowDataComponent = (props) => {
         ? "ActivitySkillSets"
         : ownerSkillSetsColumnIsEnabled
           ? "OwnerSkillSets"
-          : skillsSkillSetsColumnIsEnabled
-            ? "SkillsSkillSets"
-            : "Name"),
+          : usedBySkillSetsColumnIsEnabled
+            ? "UsedBySkillSets"
+            : skillsSkillSetsColumnIsEnabled
+              ? "SkillsSkillSets"
+              : "Name"),
     [
       tableStorageName,
       storageColumns,
       skillsSkillSetsColumnIsEnabled,
+      usedBySkillSetsColumnIsEnabled,
       ownerSkillSetsColumnIsEnabled,
       activitySkillSetsColumnIsEnabled,
     ],
@@ -163,6 +167,31 @@ const SkillSetsRowDataComponent = (props) => {
         <div />
       )}
 
+      {usedBySkillSetsColumnIsEnabled ? (
+        <TableCell
+          dataTestId={`skill-sets-cell-used-by-${index}`}
+          style={dragStyles.style}
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "UsedBySkillSets" ? "no-extra-space" : "",
+          )}
+        >
+          <Text
+            fontSize="12px"
+            fontWeight={600}
+            color={sideColor}
+            className={styles.styledText}
+            truncate
+          >
+            {item.linkedProjectsCount ?? 0}
+          </Text>
+          {lastColumn === "UsedBySkillSets" ? quickButtonsComponentNode : null}
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
       {ownerSkillSetsColumnIsEnabled ? (
         <TableCell
           dataTestId={`skill-sets-cell-owner-${index}`}
@@ -213,6 +242,7 @@ const SkillSetsRowDataComponent = (props) => {
 export default inject(({ tableStore }) => {
   const {
     skillsSkillSetsColumnIsEnabled,
+    usedBySkillSetsColumnIsEnabled,
     ownerSkillSetsColumnIsEnabled,
     activitySkillSetsColumnIsEnabled,
     tableStorageName,
@@ -220,6 +250,7 @@ export default inject(({ tableStore }) => {
 
   return {
     skillsSkillSetsColumnIsEnabled,
+    usedBySkillSetsColumnIsEnabled,
     ownerSkillSetsColumnIsEnabled,
     activitySkillSetsColumnIsEnabled,
     tableStorageName,

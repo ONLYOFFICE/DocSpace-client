@@ -2628,6 +2628,8 @@
   "Usage": "Usage",
   "UsageDescription": "Review your spending by service. Usage-based services show actual costs; subscriptions show their monthly charge for the selected period.",
   "UseCustomFilter": "use custom filter",
+  "UsedBy": "Used by",
+  "UsedByAgents": "Used by agents",
   "UsedLimits": "Used / Limits",
   "UseHttp": "Use Http",
   "UseInChat": "Use in chat",

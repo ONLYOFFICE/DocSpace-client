@@ -728,6 +728,46 @@ export const getAiProjects = async (
   return { ...page, folders: page.folders.map(toAiProject) } as TAiProjectsPage;
 };
 
+/** An agent that uses a skill set or a knowledge base, as the room lists it. */
+export type TAiRoomProject = {
+  id: number;
+  title: string;
+  logo: TAiProjectLogo;
+};
+
+export type TAiRoomProjectsPage = {
+  items: TAiRoomProject[];
+  /** The agents of all pages the caller may read. */
+  total: number;
+};
+
+/**
+ * The agents that use a skill set or a knowledge base
+ * (`GET files/rooms/{id}/projects`), one page sorted by title. Only the
+ * agents the caller may read are listed, so `total` can be lower than the
+ * room's `linkedProjectsCount`, which counts every agent.
+ */
+export const getAiRoomProjects = async (
+  roomId: number,
+  query: { startIndex?: number; count?: number } = {},
+  signal?: AbortSignal,
+): Promise<TAiRoomProjectsPage> => {
+  const res = await request({
+    method: "GET",
+    url: `${roomsUrl}/${roomId}/projects${toParams(query)}`,
+    signal,
+  });
+  // An envelope that reports `total` reaches here as `{ total, items }`.
+  const paged = !!res && typeof res === "object" && "items" in res;
+  const list = ((paged ? (res as { items: unknown }).items : res) ?? []) as (Omit<TAiRoomProject, "logo"> & {
+    logo?: Partial<TAiProjectLogo> | null;
+  })[];
+  return {
+    items: list.map((project) => ({ id: project.id, title: project.title ?? "", logo: toLogo(project.logo) })),
+    total: paged ? Number((res as { total?: number }).total ?? list.length) : list.length,
+  };
+};
+
 /** Drops the project's uploaded logo; it is drawn by its colour and cover again. */
 export const deleteAiProjectLogo = async (id: number) => {
   const res = await request({ method: "DELETE", url: `${roomsUrl}/${id}/logo` });

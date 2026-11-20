@@ -28,7 +28,12 @@
 import { http, HttpResponse } from "msw";
 
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
-import { AI_HUB_ROOT_ID } from "./projects";
+import {
+  AI_HUB_ROOT_ID,
+  aiRoomProjectMock,
+  aiRoomProjectsHandler,
+} from "./projects";
+import type { AiRoomProjectMock } from "./projects";
 
 /*
  * The Skill sets of the AI Chat section: Instructions rooms (`roomType` 10,
@@ -89,6 +94,8 @@ export type SkillSetMock = {
   /** The caller's access: the owner's, or read-only. */
   readOnly: boolean;
   skills: SkillMock[];
+  /** The agents that use the set; none when left out. */
+  usedBy?: AiRoomProjectMock[];
 };
 
 /** A skill file as the AI service writes one (`buildSkillFile`). */
@@ -128,8 +135,9 @@ export const DOCUMENT_SUMMARY = {
 /**
  * The stock skill sets, newest first: "Document assistant" (the
  * Administrator's, three skills), "Legal tone" (Zoe Counsel's, one skill) and
- * "Sales assistant" (Jane Reviewer's, two skills). Sorted by owner they read
- * otherwise than by date. With `readOnly` the caller may only read them.
+ * "Sales assistant" (Jane Reviewer's, two skills). Two agents use the first,
+ * one the second and none the third. Sorted by owner they read otherwise
+ * than by date. With `readOnly` the caller may only read them.
  * A fresh copy each call: a save changes the files.
  */
 export const skillSetsMock = ({
@@ -143,6 +151,10 @@ export const skillSetsMock = ({
     created: "2026-11-01T10:00:00.0000000+00:00",
     updated: "2026-11-12T10:00:00.0000000+00:00",
     readOnly,
+    usedBy: [
+      aiRoomProjectMock(778302, "Sales desk", "5CC5D4"),
+      aiRoomProjectMock(778301, "Contract reviewer", "FF6680"),
+    ],
     skills: [
       skill(
         778201,
@@ -178,6 +190,7 @@ export const skillSetsMock = ({
     created: "2026-11-01T10:00:00.0000000+00:00",
     updated: "2026-11-11T10:00:00.0000000+00:00",
     readOnly,
+    usedBy: [aiRoomProjectMock(778301, "Contract reviewer", "FF6680")],
     skills: [
       skill(
         778211,
@@ -289,6 +302,7 @@ const skillSetRoom = (set: SkillSetMock) => ({
   // A set holds its skills only: no folders.
   filesCount: set.skills.length,
   foldersCount: 0,
+  linkedProjectsCount: set.usedBy?.length ?? 0,
   isFavorite: false,
   new: 0,
   logo: roomLogo(set.color),
@@ -584,12 +598,19 @@ export const aiSkillSetContentHandlers = (
   ];
 };
 
-/** Every route of the Skill sets: the list, the opened sets and their skills. */
+/**
+ * Every route of the Skill sets: the list, the agents that use each set, the
+ * opened sets and their skills.
+ */
 export const aiSkillSetsHandlers = (
   port: string,
   sets: SkillSetMock[],
   options: SkillSetsMockOptions = {},
 ) => [
   aiSkillSetsListHandler(port, sets),
+  aiRoomProjectsHandler(
+    port,
+    Object.fromEntries(sets.map((set) => [set.id, set.usedBy ?? []])),
+  ),
   ...aiSkillSetContentHandlers(port, sets, options),
 ];

@@ -4,27 +4,45 @@
 
 Defines the Skill sets list (Instructions rooms) and what an opened skill set shows about its skills, how a skill is read and how it is edited: boards 11 "Skill sets", 12 "Skill set open" and 13 "Edit skill". A skill is a Markdown file with a frontmatter (`name`, `description`) followed by its instructions.
 
-Implementation: `packages/shared/utils/skillFile.ts`; in the client the table columns of the two lists (`TableStore`, `TableHeader`, `SkillSetsRowData`, `SkillsRowData`), `SkillsStore` for the skill files read, the Details view and its `SkillSetInfo`, the files context options and `components/dialogs/EditSkillDialog` with its Markdown toolbar.
+Implementation: `packages/shared/utils/skillFile.ts`; in the client the table columns of the two lists (`TableStore`, `TableHeader`, `SkillSetsRowData`, `SkillsRowData`), `SkillsStore` for the skill files read, the Details view with its `SkillSetInfo` and `UsedByAgents`, `getAiRoomProjects` in `packages/shared/api/ai/projects.ts`, the files context options and `components/dialogs/EditSkillDialog` with its Markdown toolbar.
 
 ## ADDED Requirements
 
 ### Requirement: Columns of the Skill sets list
-In the table view the Skill sets list SHALL show, in this order, Name, Skills (`Common:Skills`), the number of the set's files, Owner (`Common:Owner`), with the owner's avatar, and Last modified (`Common:LastModified`), the date and time of the set's last change. Name SHALL always be shown and the other columns MAY be hidden. Name, Owner and Last modified SHALL sort the list. Each list SHALL keep its own column choice and widths.
+In the table view the Skill sets list SHALL show, in this order, Name, Skills (`Common:Skills`), the number of the set's files, Used by (`Common:UsedBy`), Owner (`Common:Owner`), with the owner's avatar, and Last modified (`Common:LastModified`), the date and time of the set's last change. Name SHALL always be shown and the other columns MAY be hidden. Name, Owner and Last modified SHALL sort the list. Each list SHALL keep its own column choice and widths.
 
 #### Scenario: Skill sets in the table
 - **WHEN** a user opens Skill sets in the table view
-- **THEN** the columns read Name, Skills, Owner and Last modified, and "Document assistant" with three skills shows 3 under Skills
+- **THEN** the columns read Name, Skills, Used by, Owner and Last modified, and "Document assistant" with three skills, used by two agents, shows 3 under Skills and 2 under Used by
 
 #### Scenario: Sorted by owner
 - **WHEN** the user sorts the list by Owner
 - **THEN** the skill sets are ordered by their owners' names
 
 ### Requirement: Skill set in the Info panel
-The Details tab of a skill set SHALL show its owner, its content as the number of its skills ("Skills: N"), its modification date, who modified it last, its creation date and its tags, and SHALL show no room type and no storage size. Under the properties it SHALL list the set's skills, each by its name and the command it is called by. A list that cannot be read SHALL be left out.
+The Details tab of a skill set SHALL show its owner, its content as the number of its skills ("Skills: N"), its modification date, who modified it last, its creation date and its tags, and SHALL show no room type and no storage size. Under the properties it SHALL list the set's skills, each by its name and the command it is called by, and then the agents that use the set ("Agents that use a skill set"). A list that cannot be read SHALL be left out.
 
 #### Scenario: Skill set selected
 - **WHEN** a user selects "Document assistant", which holds three skills, with the Info panel open on Details
 - **THEN** the properties read "Skills: 3" and the panel lists the three skills with their commands, "/document-summary" among them
+
+### Requirement: Used by of a skill set
+Used by SHALL be the number of agents that use the set, counting every such agent, readable by the user or not, and SHALL read 0 for a set no agent uses. The table column, the tile and the compact row of a set SHALL tell the same number under the same label. The number SHALL follow a change without a reload.
+
+#### Scenario: An agent links the set meanwhile
+- **WHEN** an agent links "Sales assistant", used by no agent, while the list is open
+- **THEN** its Used by number reads 1 without a reload
+
+### Requirement: Agents that use a skill set
+The Details tab of a skill set SHALL list, under "Used by agents" (`Common:UsedByAgents`), the agents that use the set, each by its logo and its name, sorted by name, and only those the user may read. Agents past the first hundred SHALL be told by their number ("+N"). A set with no agent to list SHALL show no such list. The list SHALL be read again when the set's Used by number changes.
+
+#### Scenario: Set used by two agents
+- **WHEN** a user selects "Document assistant", which "Contract reviewer" and "Sales desk" use, with the Info panel open on Details
+- **THEN** "Used by agents" lists "Contract reviewer" and "Sales desk"
+
+#### Scenario: Agents the user may not read
+- **WHEN** a user selects a set used by two agents, neither of which the user is a member of
+- **THEN** its row reads 2 under Used by and its Details show no "Used by agents"
 
 ### Requirement: Skills of an opened skill set
 In the table view of an opened skill set the columns SHALL be Name, the skill's name without the `.md` extension, Description (`Common:DescriptionLabel`), the description the skill gives in its file with the full text on hover, and Last modified. A skill with no description, or whose file cannot be read, SHALL show an empty Description.

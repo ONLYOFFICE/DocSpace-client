@@ -2618,6 +2618,8 @@
   "Usage": "Nutzung",
   "UsageDescription": "Überprüfen Sie Ihre Ausgaben nach Dienst. Nutzungsbasierte Dienste zeigen tatsächliche Kosten; Abonnements zeigen ihre monatliche Gebühr für den ausgewählten Zeitraum.",
   "UseCustomFilter": "Benutzerdefinierten Filter verwenden",
+  "UsedBy": "Verwendet von",
+  "UsedByAgents": "Von Agenten verwendet",
   "UsedLimits": "Verbraucht / Limits",
   "UseHttp": "HTTP nutzen",
   "UseInChat": "Im Chat verwenden",

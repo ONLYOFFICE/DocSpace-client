@@ -2618,6 +2618,8 @@
   "Usage": "用法",
   "UsageDescription": "按服务查看您的支出。基于用量的服务显示实际费用；订阅显示所选期间的月费。",
   "UseCustomFilter": "使用自定义过滤器",
+  "UsedBy": "使用方",
+  "UsedByAgents": "使用它的智能体",
   "UsedLimits": "已用 / 限额",
   "UseHttp": "使用Http",
   "UseInChat": "在对话中使用",

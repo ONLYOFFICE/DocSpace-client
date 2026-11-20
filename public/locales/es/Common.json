@@ -2618,6 +2618,8 @@
   "Usage": "Uso",
   "UsageDescription": "Revise sus gastos por servicio. Los servicios basados en el uso muestran los costos reales; las suscripciones muestran su cargo mensual para el período seleccionado.",
   "UseCustomFilter": "utilizar filtro personalizado",
+  "UsedBy": "Usado por",
+  "UsedByAgents": "Usado por agentes",
   "UsedLimits": "Usado / Límites",
   "UseHttp": "Utilice Http",
   "UseInChat": "Usar en el chat",

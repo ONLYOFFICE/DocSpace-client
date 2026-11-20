@@ -247,6 +247,7 @@ export type {
 export {
   KNOWLEDGE_BASES,
   KNOWLEDGE_BASE_FAILED_ID,
+  KNOWLEDGE_BASE_AGENTS,
   KNOWLEDGE_BASE_INDEXED_ID,
   KNOWLEDGE_BASE_INDEXING_ID,
   KNOWLEDGE_FAILED_FILE_TITLE,
@@ -274,6 +275,8 @@ export const aiHandlers = (port: string) => [
   aiTemplatesHandler(port),
   aiTemplateInstallHandler(port),
 ];
+export { aiRoomProjectMock, aiRoomProjectsHandler } from "./projects";
+export type { AiRoomProjectMock } from "./projects";
 export {
   aiHubRoomAsReader,
   aiHubRoomGetByIdHandler,

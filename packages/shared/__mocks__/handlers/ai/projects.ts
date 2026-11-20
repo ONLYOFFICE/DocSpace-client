@@ -687,6 +687,8 @@ const aiHubRoomMock = (
   access: AiProjectMockAccess.Owner,
   filesCount: 0,
   foldersCount: 0,
+  // How many agents use the room; a list of sets or bases sets its own.
+  linkedProjectsCount: 0 as number,
   isFavorite: false,
   new: 0,
   logo: room.logo,
@@ -718,6 +720,62 @@ export const AI_HUB_ROOMS = [
 ];
 
 export type AiHubRoomMock = (typeof AI_HUB_ROOMS)[number];
+
+/** An agent as `GET files/rooms/:id/projects` lists it for a room it uses. */
+export type AiRoomProjectMock = {
+  id: number;
+  title: string;
+  logo: {
+    original: string;
+    large: string;
+    medium: string;
+    small: string;
+    color: string;
+    cover: null;
+  };
+};
+
+/** An agent that uses a room, drawn by its colour and initials. */
+export const aiRoomProjectMock = (
+  id: number,
+  title: string,
+  color: string,
+): AiRoomProjectMock => ({
+  id,
+  title,
+  logo: { original: "", large: "", medium: "", small: "", color, cover: null },
+});
+
+/**
+ * `GET files/rooms/:id/projects`: the agents that use a skill set or a
+ * knowledge base, by the room's id, sorted by title and paged with
+ * `startIndex` and `count`; `total` counts them all. A room the map does
+ * not name is left to the other handlers.
+ */
+export const aiRoomProjectsHandler = (
+  port: string,
+  usedBy: Record<number, AiRoomProjectMock[]>,
+) =>
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/projects`,
+    ({ params, request }) => {
+      const agents = usedBy[Number(params.id)];
+      if (!agents) return undefined;
+      const search = new URL(request.url).searchParams;
+      const sorted = [...agents].sort((a, b) => a.title.localeCompare(b.title));
+      const startIndex = Number(search.get("startIndex")) || 0;
+      const count = Number(search.get("count")) || 25;
+      const page = sorted.slice(startIndex, startIndex + count);
+      return HttpResponse.json({
+        response: page,
+        count: page.length,
+        total: sorted.length,
+        links: [],
+        status: 0,
+        statusCode: 200,
+      });
+    },
+  );
 
 const AI_HUB_TITLE = "AI rooms";
 

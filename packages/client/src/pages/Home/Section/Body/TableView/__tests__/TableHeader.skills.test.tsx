@@ -68,22 +68,25 @@ const columns = () =>
 beforeEach(() => localStorage.clear());
 
 describe("TableHeader of the Skill sets list", () => {
-  it("has Name, Skills, Owner and Last modified", () => {
+  it("has Name, Skills, Used by, Owner and Last modified", () => {
     renderHeader({
       isRooms: true,
       isSkillSetsList: true,
       skillsSkillSetsColumnIsEnabled: true,
+      usedBySkillSetsColumnIsEnabled: true,
       ownerSkillSetsColumnIsEnabled: true,
       activitySkillSetsColumnIsEnabled: false,
     });
     expect(columns()).toEqual([
       { key: "Name", title: "Common:Label" },
       { key: "SkillsSkillSets", title: "Common:Skills" },
+      { key: "UsedBySkillSets", title: "Common:UsedBy" },
       { key: "OwnerSkillSets", title: "Common:Owner" },
       { key: "ActivitySkillSets", title: "Common:LastModified" },
     ]);
-    // The number of skills is not sorted by; the rest are.
+    // The numbers of skills and of agents are not sorted by; the rest are.
     expect(screen.getByTestId("column-SkillsSkillSets")).toHaveAttribute("data-sort", "");
+    expect(screen.getByTestId("column-UsedBySkillSets")).toHaveAttribute("data-sort", "");
     expect(screen.getByTestId("column-OwnerSkillSets")).toHaveAttribute(
       "data-sort",
       SortByFieldName.Author,
@@ -99,11 +102,12 @@ describe("TableHeader of the Skill sets list", () => {
       isRooms: true,
       isSkillSetsList: true,
       skillsSkillSetsColumnIsEnabled: true,
+      usedBySkillSetsColumnIsEnabled: true,
       ownerSkillSetsColumnIsEnabled: false,
       activitySkillSetsColumnIsEnabled: true,
     });
     expect(localStorage.getItem("test-header-columns")).toBe(
-      "Name,SkillsSkillSets,false,ActivitySkillSets",
+      "Name,SkillsSkillSets,UsedBySkillSets,false,ActivitySkillSets",
     );
   });
 });

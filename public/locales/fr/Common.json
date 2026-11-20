@@ -2618,6 +2618,8 @@
   "Usage": "Utilisation",
   "UsageDescription": "Examinez vos dépenses par service. Les services basés sur l’utilisation affichent les coûts réels ; les abonnements affichent leur frais mensuel pour la période sélectionnée.",
   "UseCustomFilter": "utiliser un filtre personnalisé",
+  "UsedBy": "Utilisé par",
+  "UsedByAgents": "Utilisé par les agents",
   "UsedLimits": "Utilisé / Limites",
   "UseHttp": "Utiliser Http",
   "UseInChat": "Utiliser dans le chat",

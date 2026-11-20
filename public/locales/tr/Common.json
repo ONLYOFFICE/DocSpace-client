@@ -2618,6 +2618,8 @@
   "Usage": "Kullanım",
   "UsageDescription": "Harcamalarınızı hizmete göre inceleyin. Kullanıma dayalı hizmetler gerçek maliyetleri gösterir; abonelikler seçilen dönem için aylık ücretlerini gösterir.",
   "UseCustomFilter": "özel filtre kullan",
+  "UsedBy": "Kullanan",
+  "UsedByAgents": "Kullanan ajanlar",
   "UsedLimits": "Kullanılan / Limitler",
   "UseHttp": "Http kullan",
   "UseInChat": "Sohbette kullan",

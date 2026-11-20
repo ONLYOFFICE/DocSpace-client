@@ -34,17 +34,21 @@ describe("getAiRowKind", () => {
 describe("getAiRowInfo", () => {
   const dates = { fileOwner: "Me", updatedDate: "11/17/2026", createdDate: "11/16/2026" };
 
-  it("gives a skill set its skills count, owner and last modification", () => {
-    expect(getAiRowInfo("skillSet", { t, item: { filesCount: 4 }, ...dates })).toEqual([
+  it("gives a skill set its skills count, how many agents use it, owner and last modification", () => {
+    expect(
+      getAiRowInfo("skillSet", { t, item: { filesCount: 4, linkedProjectsCount: 2 }, ...dates }),
+    ).toEqual([
       "Common:Skills: 4",
+      "Common:UsedBy: 2",
       "Me",
       "11/17/2026",
     ]);
   });
 
-  it("gives an agent and a knowledge base their owner and last modification", () => {
+  it("gives an agent its owner and last modification, and a knowledge base how many agents use it too", () => {
     expect(getAiRowInfo("agent", { t, item: {}, ...dates })).toEqual(["Me", "11/17/2026"]);
     expect(getAiRowInfo("knowledgeBase", { t, item: {}, ...dates })).toEqual([
+      "Common:UsedBy: 0",
       "Me",
       "11/17/2026",
     ]);

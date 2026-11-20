@@ -49,6 +49,7 @@ const renderTile = (item: object, thumbnailClick = vi.fn()) => {
           id: 7,
           title: "Contract review",
           filesCount: 3,
+          linkedProjectsCount: 2,
           updated: "2026-11-17T10:00:00.0000000+00:00",
           createdBy: { displayName: "Alexey Bannov" },
           ...item,
@@ -72,10 +73,12 @@ describe("AiSourceRoomTile", () => {
     knowledgeBasesStore.get.mockReturnValue(null);
   });
 
-  it("tells a skill set's skills, owner and last modification, as its table row does", () => {
+  it("tells a skill set's skills, the agents that use it, owner and last modification, as its table row does", () => {
     renderTile({ roomType: RoomsType.InstructionsRoom });
     expect(screen.getByText("Common:Skills")).toBeInTheDocument();
     expect(value("skills")).toBe("3");
+    expect(screen.getByText("Common:UsedBy")).toBeInTheDocument();
+    expect(value("used-by")).toBe("2");
     expect(screen.getByText("Common:Owner")).toBeInTheDocument();
     expect(screen.getByText("Alexey Bannov")).toBeInTheDocument();
     expect(screen.getByText("Common:LastModified")).toBeInTheDocument();
@@ -84,9 +87,11 @@ describe("AiSourceRoomTile", () => {
     expect(knowledgeBasesStore.fetch).not.toHaveBeenCalled();
   });
 
-  it("tells a knowledge base's owner and last modification, without a skills count", () => {
-    renderTile({ roomType: RoomsType.KnowledgeRoom });
+  it("tells a knowledge base's agents, owner and last modification, without a skills count", () => {
+    renderTile({ roomType: RoomsType.KnowledgeRoom, linkedProjectsCount: undefined });
     expect(value("skills")).toBeUndefined();
+    // A room the list gives no number is used by none.
+    expect(value("used-by")).toBe("0");
     expect(screen.getByText("Alexey Bannov")).toBeInTheDocument();
     expect(knowledgeBasesStore.fetch).toHaveBeenCalledWith({ id: 7, filesCount: 3 });
   });

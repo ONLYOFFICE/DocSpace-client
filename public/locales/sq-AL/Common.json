@@ -2618,6 +2618,8 @@
   "Usage": "Përdorim",
   "UsageDescription": "Rishikoni shpenzimet tuaja sipas shërbimit. Shërbimet e bazuara në përdorim tregojnë kostot aktuale; abonimet tregojnë tarifën e tyre mujore për periudhën e zgjedhur.",
   "UseCustomFilter": "përdorni filtër të personalizuar",
+  "UsedBy": "Përdoret nga",
+  "UsedByAgents": "Përdoret nga agjentët",
   "UsedLimits": "Përdorur / Limite",
   "UseHttp": "Përdorni Http",
   "UseInChat": "Përdor në bisedë",

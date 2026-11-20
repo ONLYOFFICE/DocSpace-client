@@ -2618,6 +2618,8 @@
   "Usage": "Lietojums",
   "UsageDescription": "Pārskatiet savus izdevumus pēc pakalpojuma. Uz lietošanu balstīti pakalpojumi rāda faktiskās izmaksas; abonēšana rāda mēneša maksu par izvēlēto periodu.",
   "UseCustomFilter": "izmantot pielāgotu filtru",
+  "UsedBy": "Izmanto",
+  "UsedByAgents": "Izmanto aģenti",
   "UsedLimits": "Izmantots / Ierobežojumi",
   "UseHttp": "Izmantojiet Http",
   "UseInChat": "Izmantot tērzēšanā",

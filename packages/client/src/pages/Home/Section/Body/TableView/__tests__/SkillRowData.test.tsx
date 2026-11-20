@@ -29,13 +29,20 @@ const SkillRow = SkillsRowData as unknown as React.FC<Record<string, unknown>>;
 
 beforeEach(() => localStorage.clear());
 
-const skillSet = { id: 12, title: "Sales assistant", isRoom: true, filesCount: 4 };
+const skillSet = {
+  id: 12,
+  title: "Sales assistant",
+  isRoom: true,
+  filesCount: 4,
+  linkedProjectsCount: 2,
+};
 
 const renderSet = (props: Record<string, unknown> = {}) =>
   render(
     <SetRow
       {...rowProps(skillSet)}
       skillsSkillSetsColumnIsEnabled
+      usedBySkillSetsColumnIsEnabled
       ownerSkillSetsColumnIsEnabled
       activitySkillSetsColumnIsEnabled
       {...props}
@@ -43,10 +50,11 @@ const renderSet = (props: Record<string, unknown> = {}) =>
   );
 
 describe("SkillSetsRowData", () => {
-  it("shows a set's name, how many skills it has, its owner and last change", () => {
+  it("shows a set's name, how many skills it has, how many agents use it, its owner and last change", () => {
     renderSet();
     expect(screen.getByTestId("skill-sets-cell-name-0")).toHaveTextContent("Sales assistant");
     expect(screen.getByTestId("skill-sets-cell-skills-0")).toHaveTextContent("4");
+    expect(screen.getByTestId("skill-sets-cell-used-by-0")).toHaveTextContent("2");
     expect(
       within(screen.getByTestId("skill-sets-cell-owner-0")).getByTestId("author"),
     ).toBeInTheDocument();
@@ -56,17 +64,20 @@ describe("SkillSetsRowData", () => {
   });
 
   it("counts no skills for a set the list gives no count", () => {
-    renderSet({ item: { ...skillSet, filesCount: undefined } });
+    renderSet({ item: { ...skillSet, filesCount: undefined, linkedProjectsCount: undefined } });
     expect(screen.getByTestId("skill-sets-cell-skills-0")).toHaveTextContent("0");
+    expect(screen.getByTestId("skill-sets-cell-used-by-0")).toHaveTextContent("0");
   });
 
   it("leaves out the columns that are switched off", () => {
     renderSet({
       skillsSkillSetsColumnIsEnabled: false,
+      usedBySkillSetsColumnIsEnabled: false,
       ownerSkillSetsColumnIsEnabled: false,
       activitySkillSetsColumnIsEnabled: false,
     });
     expect(screen.queryByTestId("skill-sets-cell-skills-0")).toBeNull();
+    expect(screen.queryByTestId("skill-sets-cell-used-by-0")).toBeNull();
     expect(screen.queryByTestId("skill-sets-cell-owner-0")).toBeNull();
     expect(screen.queryByTestId("skill-sets-cell-activity-0")).toBeNull();
   });

@@ -2618,6 +2618,8 @@
   "Usage": "Utilizare",
   "UsageDescription": "Examinați cheltuielile dvs. pe serviciu. Serviciile bazate pe utilizare afișează costurile reale; abonamentele afișează taxa lunară pentru perioada selectată.",
   "UseCustomFilter": "folosire un filtru particularizat",
+  "UsedBy": "Utilizat de",
+  "UsedByAgents": "Utilizat de agenți",
   "UsedLimits": "Utilizat / Limite",
   "UseHttp": "Utilizare Http",
   "UseInChat": "Utilizare în chat",

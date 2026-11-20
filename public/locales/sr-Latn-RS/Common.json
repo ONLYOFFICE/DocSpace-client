@@ -2618,6 +2618,8 @@
   "Usage": "Upotreba",
   "UsageDescription": "Pregledajte svoje troškove po usluzi. Usluge zasnovane na upotrebi prikazuju stvarne troškove; pretplate prikazuju svoju mesečnu naknadu za izabrani period.",
   "UseCustomFilter": "koristi prilagođeni filter",
+  "UsedBy": "Koristi",
+  "UsedByAgents": "Koriste agenti",
   "UsedLimits": "Iskorišćeno / Ograničenja",
   "UseHttp": "Koristi Http",
   "UseInChat": "Koristi u ćaskanju",

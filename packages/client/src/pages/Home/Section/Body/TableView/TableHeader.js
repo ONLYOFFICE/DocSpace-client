@@ -241,12 +241,13 @@ class FilesTableHeader extends React.Component {
     return this.getFilesColumns();
   };
 
-  // The Knowledge bases list: every row is a base, with its owner and its
-  // last change. Its type and tags are not columns here.
+  // The Knowledge bases list: every row is a base, with how many agents use
+  // it, its owner and its last change. Its type and tags are not columns here.
   getKnowledgeBasesColumns = () => {
     const {
       t,
       roomColumnNameIsEnabled,
+      usedByKnowledgeBasesColumnIsEnabled,
       ownerKnowledgeBasesColumnIsEnabled,
       activityKnowledgeBasesColumnIsEnabled,
     } = this.props;
@@ -261,6 +262,13 @@ class FilesTableHeader extends React.Component {
         sortBy: SortByFieldName.Name,
         minWidth: 210,
         onClick: this.onRoomsFilter,
+      },
+      {
+        key: "UsedByKnowledgeBases",
+        title: t("Common:UsedBy"),
+        enable: usedByKnowledgeBasesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
       },
       {
         key: "OwnerKnowledgeBases",
@@ -335,12 +343,14 @@ class FilesTableHeader extends React.Component {
     ];
   };
 
-  // The Skill sets list: every row is a set, told by how many skills it has.
+  // The Skill sets list: every row is a set, told by how many skills it has
+  // and how many agents use it.
   getSkillSetsColumns = () => {
     const {
       t,
       roomColumnNameIsEnabled,
       skillsSkillSetsColumnIsEnabled,
+      usedBySkillSetsColumnIsEnabled,
       ownerSkillSetsColumnIsEnabled,
       activitySkillSetsColumnIsEnabled,
     } = this.props;
@@ -360,6 +370,13 @@ class FilesTableHeader extends React.Component {
         key: "SkillsSkillSets",
         title: t("Common:Skills"),
         enable: skillsSkillSetsColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "UsedBySkillSets",
+        title: t("Common:UsedBy"),
+        enable: usedBySkillSetsColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
       },
@@ -1277,10 +1294,12 @@ export default inject(
       isSkillSet,
       isSkillSetsList,
       skillsSkillSetsColumnIsEnabled,
+      usedBySkillSetsColumnIsEnabled,
       ownerSkillSetsColumnIsEnabled,
       activitySkillSetsColumnIsEnabled,
       isKnowledgeBasesList,
       isKnowledgeBase,
+      usedByKnowledgeBasesColumnIsEnabled,
       ownerKnowledgeBasesColumnIsEnabled,
       activityKnowledgeBasesColumnIsEnabled,
       sizeKnowledgeFileColumnIsEnabled,
@@ -1305,10 +1324,12 @@ export default inject(
       modifiedSkillColumnIsEnabled,
       isSkillSetsList,
       skillsSkillSetsColumnIsEnabled,
+      usedBySkillSetsColumnIsEnabled,
       ownerSkillSetsColumnIsEnabled,
       activitySkillSetsColumnIsEnabled,
       isKnowledgeBasesList,
       isKnowledgeBase,
+      usedByKnowledgeBasesColumnIsEnabled,
       ownerKnowledgeBasesColumnIsEnabled,
       activityKnowledgeBasesColumnIsEnabled,
       sizeKnowledgeFileColumnIsEnabled,

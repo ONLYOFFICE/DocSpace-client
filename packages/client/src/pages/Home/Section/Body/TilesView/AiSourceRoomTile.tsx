@@ -58,6 +58,7 @@ type TSourceRoom = {
   id: number | string;
   roomType?: RoomsType;
   filesCount?: number;
+  linkedProjectsCount?: number;
   updated?: string;
   createdBy?: { displayName?: string };
 };
@@ -84,8 +85,8 @@ const CONTROLS =
  * A skill set or a knowledge base in the tile view, laid out as an agent's
  * tile and telling what the table's columns tell: the logo and the name
  * above - a knowledge base marked while its files are being indexed or when
- * some could not be - and below them how many skills a set holds, the owner
- * and when the room was last modified.
+ * some could not be - and below them how many skills a set holds, how many
+ * agents use the room, the owner and when the room was last modified.
  */
 const AiSourceRoomTile = ({
   item,
@@ -154,6 +155,8 @@ const AiSourceRoomTile = ({
           {value("skills", String(room.filesCount ?? 0))}
         </>
       ) : null}
+      {label(t("Common:UsedBy"))}
+      {value("used-by", String(room.linkedProjectsCount ?? 0))}
       {label(t("Common:Owner"))}
       {owner ? (
         <Link

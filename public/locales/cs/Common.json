@@ -2618,6 +2618,8 @@
   "Usage": "Použití",
   "UsageDescription": "Zkontrolujte své výdaje podle služby. Služby založené na využití zobrazují skutečné náklady; předplatná zobrazují svůj měsíční poplatek za vybrané období.",
   "UseCustomFilter": "použijte vlastní filtr",
+  "UsedBy": "Používá",
+  "UsedByAgents": "Používají agenti",
   "UsedLimits": "Využito / Limity",
   "UseHttp": "Použijte Http",
   "UseInChat": "Použít v chatu",

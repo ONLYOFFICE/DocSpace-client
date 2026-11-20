@@ -80,6 +80,7 @@ import { FormInfo } from "./sub-components/FormInfo";
 import SkillIcon, { getAiRoomIconKind } from "SRC_DIR/components/SkillIcon";
 
 import { SkillSetInfo } from "./sub-components/SkillSetInfo";
+import { UsedByAgents } from "./sub-components/UsedByAgents";
 
 import DetailsHelper from "./Details.utils";
 
@@ -536,6 +537,7 @@ const Details = ({
         />
       ) : null}
       <SkillSetInfo selection={selection} />
+      <UsedByAgents selection={selection} />
     </>
   );
 };

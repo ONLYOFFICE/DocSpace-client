@@ -2618,6 +2618,8 @@
   "Usage": "Gebruik",
   "UsageDescription": "Bekijk uw uitgaven per dienst. Op gebruik gebaseerde diensten tonen werkelijke kosten; abonnementen tonen hun maandelijkse kosten voor de geselecteerde periode.",
   "UseCustomFilter": "gebruik aangepaste filter",
+  "UsedBy": "Gebruikt door",
+  "UsedByAgents": "Gebruikt door agenten",
   "UsedLimits": "Gebruikt / Limieten",
   "UseHttp": "Gebruik Http",
   "UseInChat": "Gebruiken in chat",

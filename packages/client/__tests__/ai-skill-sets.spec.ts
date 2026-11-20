@@ -187,7 +187,7 @@ test.describe("AI Chat: Skill sets", () => {
     test("Skill sets in the table", async ({ page, baseUrl }) => {
       await openSkillSets(page, baseUrl);
 
-      // Name, Skills, Owner and Last modified, in that order.
+      // Name, Skills, Used by, Owner and Last modified, in that order.
       await expect(header(page).getByTestId("column-Name")).toContainText(
         "Name",
       );
@@ -195,13 +195,16 @@ test.describe("AI Chat: Skill sets", () => {
         header(page).getByTestId("column-SkillsSkillSets"),
       ).toContainText("Skills");
       await expect(
+        header(page).getByTestId("column-UsedBySkillSets"),
+      ).toContainText("Used by");
+      await expect(
         header(page).getByTestId("column-OwnerSkillSets"),
       ).toContainText("Owner");
       await expect(
         header(page).getByTestId("column-ActivitySkillSets"),
       ).toContainText("Last modified");
       await expect(header(page)).toHaveText(
-        /Name[\s\S]*Skills[\s\S]*Owner[\s\S]*Last modified/,
+        /Name[\s\S]*Skills[\s\S]*Used by[\s\S]*Owner[\s\S]*Last modified/,
       );
 
       // "Document assistant" holds three skills and is the Administrator's,
@@ -210,6 +213,13 @@ test.describe("AI Chat: Skill sets", () => {
       await expect(
         assistant.getByTestId(/^skill-sets-cell-skills-/),
       ).toHaveText("3");
+      // Two agents use it; none uses "Sales assistant".
+      await expect(
+        assistant.getByTestId(/^skill-sets-cell-used-by-/),
+      ).toHaveText("2");
+      await expect(
+        row(page, "Sales assistant").getByTestId(/^skill-sets-cell-used-by-/),
+      ).toHaveText("0");
       await expect(
         assistant.getByTestId(/^skill-sets-cell-owner-/),
       ).toContainText("Me");
@@ -287,6 +297,12 @@ test.describe("AI Chat: Skill sets", () => {
           command,
         );
       }
+
+      // The agents that use it, sorted by name.
+      await expect(page.getByTestId("used-by-agents-name")).toHaveText([
+        "Contract reviewer",
+        "Sales desk",
+      ]);
 
       await expectScreenshot(page, [
         "desktop",

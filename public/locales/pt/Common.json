@@ -2618,6 +2618,8 @@
   "Usage": "Uso",
   "UsageDescription": "Reveja as suas despesas por serviço. Os serviços baseados na utilização mostram os custos reais; as subscrições mostram a sua cobrança mensal para o período selecionado.",
   "UseCustomFilter": "usar filtro personalizado",
+  "UsedBy": "Utilizado por",
+  "UsedByAgents": "Utilizado por agentes",
   "UsedLimits": "Utilizado / Limites",
   "UseHttp": "Usar Http",
   "UseInChat": "Usar no chat",

@@ -57,6 +57,7 @@ type TAiRowItem = {
   roomType?: RoomsType | number | null;
   isAIProject?: boolean;
   filesCount?: number;
+  linkedProjectsCount?: number;
   contentLength?: string;
 };
 
@@ -96,7 +97,8 @@ export const getAiRowKind = (
 /**
  * The secondary values of an AI row in the compact view, in the order of the
  * table's columns: an agent's owner and last modification; a skill set's
- * skills count, owner and last modification; a knowledge base's owner and
+ * skills count, the number of agents that use it, owner and last
+ * modification; a knowledge base's number of agents that use it, owner and
  * last modification (its indexing state is marked beside its name); a
  * skill's description and last modification; a knowledge base file's size,
  * who added it and when. A value not known is left out.
@@ -124,6 +126,13 @@ export const getAiRowInfo = (
       case "skillSet":
         return [
           `${t("Common:Skills")}: ${item.filesCount ?? 0}`,
+          `${t("Common:UsedBy")}: ${item.linkedProjectsCount ?? 0}`,
+          fileOwner,
+          updatedDate,
+        ];
+      case "knowledgeBase":
+        return [
+          `${t("Common:UsedBy")}: ${item.linkedProjectsCount ?? 0}`,
           fileOwner,
           updatedDate,
         ];

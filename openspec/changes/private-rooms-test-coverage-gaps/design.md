@@ -180,3 +180,5 @@ option; a guest without a key is already one of `withoutKeys`.
 - 2026-11-20, task 2.14, at `bcd59a92290`: `pnpm exec vitest run src` in
   client, 251 files and 2468 tests passed, no snapshot written or
   removed; `pnpm exec tsc` in client clean.
+- 2026-11-20, task 3.5, at `be01070dd68`: `pnpm exec vitest run` in sdk,
+  114 files and 612 tests passed; `pnpm exec tsc` in sdk clean.

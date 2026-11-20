@@ -65,7 +65,14 @@
   display: flex;
   flex: 0 0 auto;
 
+  // ReactSVG wraps the icon in a div of its own: left a block, it takes the
+  // line's height and the icon sits on the baseline, above the middle.
+  > div {
+    display: flex;
+  }
+
   svg {
+    display: block;
     width: 14px;
     height: 14px;
   }

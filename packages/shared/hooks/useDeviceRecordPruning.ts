@@ -33,19 +33,36 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const BROADCAST_LOCK_PREFIX = "docspace-encryption-lock";
+import { useEffect } from "react";
 
-export function getBroadcastLockChannelName(userId: string): string {
-  return `${BROADCAST_LOCK_PREFIX}:${userId}`;
+import { pruneDeviceRecords } from "../services/encryption/device-records";
+
+/**
+ * Removes the device records of the session user that no longer serve
+ * them, whenever the user or the key list the page holds changes. `keys` is
+ * `null` or `undefined` while the list is not known, after a failed read
+ * included.
+ */
+export function useDeviceRecordPruning(
+  userId: string | null | undefined,
+  keys: readonly { publicKey: string }[] | null | undefined,
+): void {
+  const listedPublicKeys = Array.isArray(keys)
+    ? keys
+        .map((key) => key.publicKey)
+        .sort()
+        .join("\n")
+    : null;
+
+  useEffect(() => {
+    if (!userId) return;
+    void pruneDeviceRecords(
+      userId,
+      listedPublicKeys === null
+        ? null
+        : listedPublicKeys.split("\n").filter(Boolean),
+    );
+  }, [userId, listedPublicKeys]);
 }
 
-export type BroadcastLockMessage = {
-  type: "lock";
-  sessionId: string;
-};
-
-// A fresh id per tab; rebroadcasted lock events from the same tab are ignored.
-export const BROADCAST_LOCK_SESSION_ID =
-  typeof crypto !== "undefined" && crypto.randomUUID
-    ? crypto.randomUUID()
-    : `${Date.now()}-${Math.random()}`;
+export default useDeviceRecordPruning;

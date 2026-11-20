@@ -57,7 +57,7 @@ const keyNew = {
 
 type ListProps = React.ComponentProps<typeof KeysList>;
 
-const renderList = (keys: never[], props: Partial<ListProps> = {}) => {
+const renderList = (keys: never[] | null, props: Partial<ListProps> = {}) => {
   const onDelete = vi.fn();
   const onExport = vi.fn();
   const onRotate = vi.fn();
@@ -120,6 +120,27 @@ describe("Key status badges are readable", () => {
     );
     // The kit forces white on a badge text without a colour of its own.
     expect(badge).toHaveAttribute("data-color", KEY_STATUS_BADGE_COLORS.noKey.text);
+  });
+});
+
+describe("An unknown key list is not shown as no key", () => {
+  it("List loading", () => {
+    renderList(null);
+
+    expect(screen.getByTestId("keys_list_loading")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    expect(screen.queryByText("Common:NoKey")).not.toBeInTheDocument();
+    expect(screen.queryByText("Common:NoEncryptionKey")).not.toBeInTheDocument();
+  });
+
+  it("List empty", () => {
+    renderList([]);
+
+    expect(screen.getByText("Common:NoKey")).toBeInTheDocument();
+    expect(screen.getByText("Common:NoEncryptionKey")).toBeInTheDocument();
+    expect(screen.queryByTestId("keys_list_loading")).not.toBeInTheDocument();
   });
 });
 

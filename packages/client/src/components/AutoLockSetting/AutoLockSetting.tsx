@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useId, useMemo, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -47,6 +47,7 @@ import {
   type AutoLockPresetId,
   getCurrentAutoLockPresetId,
   setAutoLockPreset,
+  subscribeAutoLockChange,
 } from "@docspace/shared/services/encryption/auto-lock-preference";
 
 import styles from "./AutoLockSetting.module.scss";
@@ -61,6 +62,13 @@ export const AutoLockSetting = ({ inPlace = false }: AutoLockSettingProps) => {
   const labelId = useId();
   const [presetId, setPresetId] = useState<AutoLockPresetId>(() =>
     getCurrentAutoLockPresetId(),
+  );
+
+  // Spec: private-rooms/key-management, "A newly picked auto-lock preset applies at once"
+  useEffect(
+    () =>
+      subscribeAutoLockChange(() => setPresetId(getCurrentAutoLockPresetId())),
+    [],
   );
 
   const options = useMemo<TOption[]>(

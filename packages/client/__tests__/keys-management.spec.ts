@@ -187,6 +187,37 @@ test.describe("Profile > Keys Management", () => {
     expect(keysHandle.getKeys()).toHaveLength(1);
   });
 
+  for (const [script, passphrase] of [
+    ["Cyrillic, 16 characters", "абвгдеёжзийклмно"],
+    ["CJK, 12 characters", "春眠不觉晓处处闻啼鸟夜来"],
+  ] as const) {
+    test(`Passphrase in another script: ${script}`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      const { keysHandle } = await bootstrapEncryption(
+        page,
+        mockRequest,
+        baseUrl,
+        {
+          passphrase,
+          onPassphraseStep: async (dialog) => {
+            const strength = dialog.getByTestId("passphrase_strength");
+            await expect(strength).toBeVisible();
+            await expect(strength).not.toContainText("Weak");
+            await expect(
+              dialog.getByRole("button", { name: "Continue" }),
+            ).toBeEnabled();
+          },
+        },
+      );
+
+      expect(keysHandle.getKeys()).toHaveLength(1);
+    });
+  }
+
   test("cancel passphrase modal does NOT upload anything", async ({
     page,
     mockRequest,

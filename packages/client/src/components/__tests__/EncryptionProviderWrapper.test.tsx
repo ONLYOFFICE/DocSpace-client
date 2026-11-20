@@ -71,8 +71,12 @@ vi.mock("@docspace/shared/dialogs/key-recovery", () => ({
 vi.mock("@docspace/shared/api/privacy", () => ({
   getEncryptionKeys: vi.fn(),
 }));
+vi.mock("@docspace/shared/hooks/useDeviceRecordPruning", () => ({
+  useDeviceRecordPruning: vi.fn(),
+}));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 
 import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
 
@@ -294,5 +298,94 @@ describe("EncryptionProviderWrapper tells the provider whether the key list is k
     renderWrapper(keys);
 
     expect(encryption.providerProps?.keysLoaded).toBe(keysLoaded);
+  });
+});
+
+describe("Removing the key removes what this device keeps of it", () => {
+  it("Key removed on another device", () => {
+    renderWrapper([KEY]);
+
+    expect(useDeviceRecordPruning).toHaveBeenLastCalledWith("me", [KEY]);
+  });
+
+  it("Key removed on another device: a list not known prunes nothing on its account", () => {
+    renderWrapper(undefined);
+
+    expect(useDeviceRecordPruning).toHaveBeenLastCalledWith("me", null);
+  });
+});
+
+describe("Other tabs read the key list again after a key change", () => {
+  const RESEALED = { ...KEY, privateKeyEnc: "enc-new" };
+
+  const renderWithStore = (read: () => Promise<unknown>) => {
+    const userStore = observable({
+      encryptionKeys: [KEY] as unknown[] | null,
+      user: { id: "me" },
+      clearEncryptionKeys() {
+        userStore.encryptionKeys = null;
+      },
+      ensureEncryptionKeys: async () => {
+        const keys = await read().catch(() => null);
+        runInAction(() => {
+          if (keys) userStore.encryptionKeys = keys as unknown[];
+        });
+        return keys;
+      },
+    });
+    render(
+      <Provider userStore={userStore}>
+        <EncryptionProviderWrapper />
+      </Provider>,
+    );
+    return userStore;
+  };
+
+  const keysChanged = async () => {
+    await act(async () => {
+      (encryption.providerProps?.onKeysChanged as () => void)();
+    });
+  };
+
+  it("New passphrase in the other tab", async () => {
+    let answer!: (keys: unknown) => void;
+    renderWithStore(
+      () =>
+        new Promise((resolve) => {
+          answer = resolve;
+        }),
+    );
+
+    await keysChanged();
+    // Until the read answers, the list is not known.
+    expect(encryption.providerProps?.keysLoaded).toBe(false);
+    expect(encryption.providerProps?.userKeys).toBeNull();
+
+    await act(async () => {
+      answer([RESEALED]);
+    });
+    expect(encryption.providerProps?.userKeys).toEqual({
+      publicKey: "pub",
+      privateKeyEnc: "enc-new",
+      userId: "me",
+    });
+  });
+
+  it("Key deleted while Keys management is open elsewhere", async () => {
+    renderWithStore(() => Promise.resolve([]));
+
+    await keysChanged();
+
+    expect(encryption.providerProps?.keysLoaded).toBe(true);
+    expect(encryption.providerProps?.userKeys).toBeNull();
+  });
+
+  it("Read fails in the other tab", async () => {
+    renderWithStore(() => Promise.reject(new Error("500")));
+
+    await keysChanged();
+
+    expect(encryption.providerProps?.keysLoaded).toBe(false);
+    expect(encryption.providerProps?.userKeys).toBeNull();
   });
 });

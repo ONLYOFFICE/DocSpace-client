@@ -52,6 +52,7 @@ import {
   unregisterUnlockHandler,
   registerAutoLockSuspender,
   unregisterAutoLockSuspender,
+  subscribeSlotCleared,
 } from "../../services/encryption/secret-storage";
 import {
   getAutoLockTimeoutSeconds,
@@ -71,6 +72,11 @@ import {
   persistDeviceUnlock,
   restoreDeviceUnlock,
 } from "../../services/encryption/device-unlock-store";
+import { forgetKeyOnDevice } from "../../services/encryption/device-records";
+import {
+  broadcastLock,
+  subscribeLockBroadcast,
+} from "../../services/encryption/lock-broadcast";
 import {
   clearEncryptedFilenameCache,
   setFilenameCacheScope,
@@ -104,6 +110,17 @@ export type EncryptionContextValue = {
   publicKey: string | null;
   unlock: (passphrase: string, rememberDevice?: boolean) => Promise<boolean>;
   lock: () => void;
+  /**
+   * Locks the identity after the user deleted a key or reset all keys, and
+   * removes what this device keeps of it: the records of the given public
+   * key, or every record of the user without one.
+   */
+  lockAfterKeyRemoval: (publicKey?: string) => Promise<void>;
+  /**
+   * Locks the identity after the user's envelope was sealed under a new
+   * passphrase; the device records, which hold the same key pair, stay.
+   */
+  lockAfterReseal: () => void;
   getIdentity: () => IdentityKeyPair | null;
   /** Prompts via the registered PassphraseDialog if cache is empty. */
   requireIdentity: () => Promise<IdentityKeyPair | null>;
@@ -119,6 +136,11 @@ type EncryptionProviderProps = {
   keysLoaded?: boolean;
   PassphraseDialog?: React.ComponentType<PassphraseDialogProps>;
   KeyChangeDialog?: React.ComponentType<KeyChangeDialogModalProps>;
+  /**
+   * Called when another page of the user changed the key list: the wrapper
+   * treats its list as not known and reads it again.
+   */
+  onKeysChanged?: () => void;
 };
 
 export type PassphraseDialogProps = {
@@ -150,6 +172,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   keysLoaded = true,
   PassphraseDialog,
   KeyChangeDialog,
+  onKeysChanged,
 }) => {
   const { t } = useTranslation("Common");
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -157,9 +180,17 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   const [unlockError, setUnlockError] = useState<string | null>(null);
   const [showPassphraseDialog, setShowPassphraseDialog] = useState(false);
   const [autoLockSuspendCount, setAutoLockSuspendCount] = useState(0);
-  const pendingResolveRef = useRef<
-    ((kp: IdentityKeyPair | null) => void) | null
-  >(null);
+  // Every request waiting for the unlock dialog; the dialog's outcome
+  // settles all of them.
+  // Spec: private-rooms/key-management, "Concurrent requests for the key share one unlock dialog"
+  const pendingResolversRef = useRef<
+    Array<(kp: IdentityKeyPair | null) => void>
+  >([]);
+  const settlePending = useCallback((kp: IdentityKeyPair | null) => {
+    const waiting = pendingResolversRef.current;
+    pendingResolversRef.current = [];
+    for (const resolve of waiting) resolve(kp);
+  }, []);
 
   const suspendAutoLock = useCallback((): (() => void) => {
     setAutoLockSuspendCount((c) => c + 1);
@@ -188,8 +219,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (!hasConfiguredKey || !userKeys?.userId) {
       setIsUnlocked(false);
       setShowPassphraseDialog(false);
-      pendingResolveRef.current?.(null);
-      pendingResolveRef.current = null;
+      settlePending(null);
       SecretStorage.lock();
       setFilenameCacheScope(null);
       setAutoLockScope(null);
@@ -224,6 +254,29 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     };
   }, [hasConfiguredKey, userKeys?.userId, userKeys?.publicKey]);
 
+  // A lock from another page of the user: this page's key and names go, the
+  // device records stay with the page that locked.
+  // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
+  // Whatever empties the slot, its expiry and the modules that read it
+  // directly included, the page shows the key as locked.
+  // Spec: private-rooms/key-management, "The shown key state follows the key in memory"
+  useEffect(() => subscribeSlotCleared(() => setIsUnlocked(false)), []);
+
+  const onKeysChangedRef = useRef(onKeysChanged);
+  onKeysChangedRef.current = onKeysChanged;
+
+  useEffect(() => {
+    const userId = userKeys?.userId;
+    if (!userId) return undefined;
+    return subscribeLockBroadcast(userId, ({ keysChanged }) => {
+      SecretStorage.lock();
+      clearEncryptedFilenameCache();
+      setIsUnlocked(false);
+      // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+      if (keysChanged) onKeysChangedRef.current?.();
+    });
+  }, [userKeys?.userId]);
+
   useEffect(() => {
     if (!showPassphraseDialog) {
       setUnlockError(null);
@@ -247,10 +300,17 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           passphrase,
         );
         SecretStorage.cacheUnlocked(userKeys.userId, kp);
-        setIsUnlocked(true);
+        // The unlock is reported once the remembered record is written, so
+        // what reads the record on the unlock finds it.
+        // Spec: private-rooms/key-management, "Remember this device"
         if (rememberDevice) {
-          void persistDeviceUnlock(userKeys.userId, userKeys.publicKey, kp);
+          await persistDeviceUnlock(
+            userKeys.userId,
+            userKeys.publicKey,
+            kp,
+          ).catch(() => false);
         }
+        setIsUnlocked(true);
         return true;
       } catch (error) {
         setUnlockError(getEncryptionErrorMessage(t, error));
@@ -262,11 +322,40 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [userKeys, t],
   );
 
+  // An explicit lock reaches the user's other pages; idle, hidden-tab and
+  // expiry locks stay with their page.
+  // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
   const lock = useCallback(() => {
-    if (userKeys?.userId) void forgetDeviceUnlock(userKeys.userId);
     SecretStorage.lock();
     clearEncryptedFilenameCache();
     setIsUnlocked(false);
+    if (userKeys?.userId) {
+      broadcastLock(userKeys.userId);
+      void forgetDeviceUnlock(userKeys.userId);
+    }
+  }, [userKeys?.userId]);
+
+  // Spec: private-rooms/key-management, "Removing the key removes what this device keeps of it"
+  const lockAfterKeyRemoval = useCallback(
+    async (removedPublicKey?: string) => {
+      SecretStorage.lock();
+      clearEncryptedFilenameCache();
+      setIsUnlocked(false);
+      if (userKeys?.userId) {
+        broadcastLock(userKeys.userId, { keysChanged: true });
+        await forgetKeyOnDevice(userKeys.userId, removedPublicKey);
+      }
+    },
+    [userKeys?.userId],
+  );
+
+  const lockAfterReseal = useCallback(() => {
+    SecretStorage.lock();
+    clearEncryptedFilenameCache();
+    setIsUnlocked(false);
+    if (userKeys?.userId) {
+      broadcastLock(userKeys.userId, { keysChanged: true });
+    }
   }, [userKeys?.userId]);
 
   const clearError = useCallback(() => {
@@ -307,7 +396,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
     setIsUnlocked(false);
     return new Promise<IdentityKeyPair | null>((resolve) => {
-      pendingResolveRef.current = resolve;
+      pendingResolversRef.current.push(resolve);
       setShowPassphraseDialog(true);
     });
   }, [hasConfiguredKey, PassphraseDialog, userKeys?.userId, userKeys?.publicKey]);
@@ -381,15 +470,21 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       "touchstart",
       "click",
     ];
+    // The capture phase hears a scroll of an inner list or panel, which does
+    // not bubble to the document.
+    // Spec: private-rooms/key-management, "Auto-lock timeout presets"
     for (const ev of events) {
-      document.addEventListener(ev, resetTimer, { passive: true });
+      document.addEventListener(ev, resetTimer, {
+        passive: true,
+        capture: true,
+      });
     }
     resetTimer();
 
     return () => {
       if (timerId !== null) clearTimeout(timerId);
       for (const ev of events) {
-        document.removeEventListener(ev, resetTimer);
+        document.removeEventListener(ev, resetTimer, { capture: true });
       }
     };
   }, [isUnlocked, autoLockSuspendCount, autoLockRevision]);
@@ -508,20 +603,18 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       const success = await unlock(passphrase, rememberDevice);
       if (success && userKeys?.userId) {
         const kp = SecretStorage.getCached(userKeys.userId);
-        pendingResolveRef.current?.(kp);
-        pendingResolveRef.current = null;
+        settlePending(kp);
         setShowPassphraseDialog(false);
       }
     },
-    [unlock, userKeys?.userId],
+    [unlock, userKeys?.userId, settlePending],
   );
 
   const handlePassphraseCancel = useCallback(() => {
-    pendingResolveRef.current?.(null);
-    pendingResolveRef.current = null;
+    settlePending(null);
     setShowPassphraseDialog(false);
     setUnlockError(null);
-  }, []);
+  }, [settlePending]);
 
   const handlePassphraseUnlocked = useCallback(
     (kp: IdentityKeyPair) => {
@@ -530,11 +623,10 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       }
       setIsUnlocked(true);
       setUnlockError(null);
-      pendingResolveRef.current?.(kp);
-      pendingResolveRef.current = null;
+      settlePending(kp);
       setShowPassphraseDialog(false);
     },
-    [userKeys?.userId],
+    [userKeys?.userId, settlePending],
   );
 
   const publicKey = userKeys?.publicKey ?? null;
@@ -549,6 +641,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       publicKey,
       unlock,
       lock,
+      lockAfterKeyRemoval,
+      lockAfterReseal,
       getIdentity,
       requireIdentity,
       resolveKeyMismatch,
@@ -564,6 +658,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       publicKey,
       unlock,
       lock,
+      lockAfterKeyRemoval,
+      lockAfterReseal,
       getIdentity,
       requireIdentity,
       resolveKeyMismatch,

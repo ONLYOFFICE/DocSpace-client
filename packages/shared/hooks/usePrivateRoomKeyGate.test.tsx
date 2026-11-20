@@ -145,6 +145,55 @@ describe("Starting private room creation without a key opens key setup", () => {
   });
 });
 
+describe("Key setup is not closed while the key is registered", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    captured.setup = null;
+  });
+
+  it("Private room creation during registration", async () => {
+    vi.mocked(generateIdentityKeyPair).mockResolvedValue({} as never);
+    vi.mocked(generateRecoveryMnemonic).mockResolvedValue("words");
+    vi.mocked(serializeIdentity).mockResolvedValue({
+      publicKey: "pub",
+      privateKeyEnc: "enc",
+    });
+    let registered!: () => void;
+    vi.mocked(setEncryptionKeys).mockReturnValueOnce(
+      new Promise<void>((resolve) => {
+        registered = resolve;
+      }) as never,
+    );
+    const onKeyGenerated = vi.fn();
+    const onKeyGenerationCancelled = vi.fn();
+    renderGate({
+      hasExistingKeys: false,
+      onKeyGenerated,
+      onKeyGenerationCancelled,
+    });
+    act(() => {
+      gate.offerKeyGeneration();
+    });
+    await call("onContinue");
+    await call("onPassphraseSubmit", "secret");
+
+    let confirming!: Promise<unknown>;
+    act(() => {
+      confirming = (captured.setup!.onRecoveryConfirm as () => Promise<unknown>)();
+    });
+    // The dialog is told it is busy, so its cross and Escape do nothing.
+    expect(captured.setup?.isLoading).toBe(true);
+
+    await act(async () => {
+      registered();
+      await confirming;
+    });
+
+    expect(onKeyGenerated).toHaveBeenCalledTimes(1);
+    expect(onKeyGenerationCancelled).not.toHaveBeenCalled();
+  });
+});
+
 describe("usePrivateRoomKeyGate", () => {
   beforeEach(() => {
     captured.setup = null;

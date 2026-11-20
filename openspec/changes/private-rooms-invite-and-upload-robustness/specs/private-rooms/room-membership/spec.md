@@ -53,7 +53,7 @@ The system SHALL start the backfill sweep that "Backfill re-wraps every member" 
 ## MODIFIED Requirements
 
 ### Requirement: Owner candidates are current members
-The system SHALL offer only current members of the private room, excluding the current owner, as ownership candidates; administrators who are not members SHALL be excluded. Every member and administrator SHALL be read for that, however many there are; when they cannot be read, no candidate SHALL be offered and Common:OwnerCandidatesLoadFailed SHALL be shown. A candidate who is not a member when the owner is assigned SHALL be refused with Common:EncryptedChangeOwnerNotMember.
+The system SHALL offer only current members of the private room, excluding the current owner, as ownership candidates; administrators who are not members SHALL be excluded. Every member and administrator SHALL be read for that, however many there are; when they cannot be read, no candidate SHALL be offered and Common:OwnerCandidatesLoadFailed SHALL be shown. A candidate who is not a member when chosen SHALL be refused with Common:EncryptedChangeOwnerNotMember.
 
 #### Scenario: Owner selector opened
 - **WHEN** the change-owner panel opens for a private room
@@ -72,5 +72,5 @@ The system SHALL offer only current members of the private room, excluding the c
 - **THEN** no candidate is offered and Common:OwnerCandidatesLoadFailed is shown
 
 #### Scenario: Candidate left the room meanwhile
-- **WHEN** the owner assigns a candidate who left the room after the panel opened
+- **WHEN** the owner chooses a candidate who left the room after the panel opened, in the change-owner panel, the owner change of the edit dialog or the SDK
 - **THEN** ownership is not transferred and Common:EncryptedChangeOwnerNotMember names the candidate

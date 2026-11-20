@@ -76,11 +76,11 @@ Uploads:
   room's own rights deciding whether the user may run it.
 - The owner picker of a private room reads every member and administrator,
   offers no candidate when it cannot (Common:OwnerCandidatesLoadFailed), and
-  refuses a candidate who is not a member with
-  Common:EncryptedChangeOwnerNotMember.
+  refuses a chosen candidate who is not a member with
+  Common:EncryptedChangeOwnerNotMember, in the client and the SDK alike.
 - The section of an address in an embedding frame is decided once the frame
-  knows its opt-in; a Rooms address with any other search area is requested
-  without private rooms; a live room that is not inserted does not change
+  knows its opt-in; a Rooms address with the search area Any or an unknown
+  one is requested without private rooms; a live room that is not inserted does not change
   the count of the open list; the folder tree is read again when the E2E
   rooms app is switched.
 - A late encrypted upload result reaches only its own row, found by its id,
@@ -92,7 +92,8 @@ Uploads:
 - The name comparison reads an unknown key list again before it classifies
   the files, stops the files of a folder whose listing fails in the client
   and the SDK alike (Common:EncryptedNameCheckFailed), and compares a
-  re-imported container under its original name.
+  re-imported container under its original name, which "keep both" can
+  change without losing the way back to the container's key.
 - A re-imported container is decrypted with the recovered
   key and encrypted again under a new file key, like any other upload.
 
@@ -127,7 +128,12 @@ Dependencies:
   2026-11-19.
 - `private-rooms-release-gate` modifies "Section availability follows the
   E2E rooms app"; this change adds a separate requirement for the folder
-  tree and leaves that one alone.
+  tree and leaves that one alone. Its task 5.2 redefines
+  `AppsStore.isPrivateRoomsSectionAvailable`, which tasks 8.1 and 8.4 rely
+  on: whichever lands second checks the other's reaction.
+- `private-rooms-dse3-header-authentication`: its design decision 4 and
+  task 3.1 still had a re-import keep its version-2 bytes; both were revised
+  on 2026-11-20 to match decision 1.
 
 ## Decisions
 
@@ -139,6 +145,24 @@ Dependencies:
    name, and the container is verified in full. Cost: the file is decrypted
    and encrypted once more in memory, which uploads already do for any
    file.
+
+Taken by the owner on 2026-11-20, after the review of the plan (each the
+recommended option):
+
+2. Only the search area `Any`, or one the client does not know, makes a
+   Rooms address non-private; the Templates, Forms, AI agents and AI hub
+   searches keep no scope (design decision 7).
+3. "Keep both" carries the chosen name beside a container instead of
+   renaming its file, so the key of a re-import is still recovered by the
+   UUID in its name (design decision 13).
+4. A folder whose listing fails is a per-file failure in the SDK too, not
+   a refusal of the whole batch (design decision 12).
+5. The non-member check of a new owner sits in the shared
+   `getNewOwnerKeyRefusal`, run when the candidate is chosen, for the client
+   panel, the edit dialog and the SDK (design decision 5).
+6. The fixes reach every path with the same defect: the stale row index of
+   `startSessionFuncImpl` and the plain upload path, and the backfill after
+   an unlock (`syncEncryptedRoomImpl`) (design decisions 4 and 10).
 
 ## Capabilities
 

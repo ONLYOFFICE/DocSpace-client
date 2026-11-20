@@ -37,7 +37,7 @@ The system SHALL send bytes into a private room only as a container it produced 
 - **THEN** the unlock prompt of the batch is raised for it, the name comparison includes it, and it is encrypted again before any byte is sent
 
 ### Requirement: The name comparison of a private upload is not skipped
-The system SHALL run the comparison of "Name clashes in a private room are checked on the client" for every file sent encrypted. A key list that is not known SHALL be read again before the files are compared. When the destination folder cannot be listed, its files SHALL NOT be sent and SHALL fail with Common:EncryptedNameCheckFailed, in the client and the SDK alike. A re-imported container SHALL be compared under its original name.
+The system SHALL run the comparison of "Name clashes in a private room are checked on the client" for every file sent encrypted. A key list that is not known SHALL be read again before the files are compared. When the destination folder cannot be listed, its files SHALL NOT be sent and SHALL fail with Common:EncryptedNameCheckFailed. A re-imported container SHALL be compared under its original name, or fail with Common:EncryptionReimportFailed when it cannot be recovered.
 
 #### Scenario: Key list not known when the upload starts
 - **WHEN** a user who holds a key uploads "Report.docx" into a private room folder holding a file of that decrypted name while the key list is not known, and the read of the list succeeds
@@ -54,6 +54,10 @@ The system SHALL run the comparison of "Name clashes in a private room are check
 #### Scenario: Re-imported container in the folder of its source
 - **WHEN** a file downloaded without decryption from a folder of a private room is uploaded back into that folder, which still holds the source file
 - **THEN** the clash is offered under the source file's decrypted name, and keeping both stores the re-import under the suffixed name
+
+#### Scenario: Name of a re-imported container cannot be recovered
+- **WHEN** a container whose source file is not in the destination room is uploaded into a private room folder
+- **THEN** nothing of it is sent and it fails with Common:EncryptionReimportFailed
 
 ## MODIFIED Requirements
 

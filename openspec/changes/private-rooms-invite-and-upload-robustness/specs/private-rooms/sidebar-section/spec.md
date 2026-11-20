@@ -45,7 +45,7 @@ Addresses inside an embedded frame SHALL be decided the same way, once the frame
 - **THEN** the superseded load commits nothing, neither folder state nor loading state nor a highlighted file, and only the newer load ends the loading
 
 ### Requirement: Rooms section never lists private rooms
-The system SHALL request the Rooms list without a privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive with the non-private filter, since the shared Archive holds both, whether the Private section is available or not. A Rooms address that names any other search area SHALL be requested with the non-private filter as well. While the section is not available, private rooms SHALL NOT be listed anywhere in the client.
+The system SHALL request the Rooms list without a privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive with the non-private filter, since the shared Archive holds both, whether the Private section is available or not. A Rooms address whose search area is Any or one the client does not know SHALL be requested with the non-private filter as well. While the section is not available, private rooms SHALL NOT be listed anywhere in the client.
 
 #### Scenario: Section available
 - **WHEN** the user opens Rooms or Rooms → Archive while the section is available
@@ -62,6 +62,10 @@ The system SHALL request the Rooms list without a privacy filter, the server lea
 #### Scenario: Address with another search area
 - **WHEN** a Rooms address carrying `searchArea=Any` is opened by a member of a private room
 - **THEN** the request carries the non-private filter and no private room is listed
+
+#### Scenario: Templates search under Rooms
+- **WHEN** the Templates submenu of Rooms is opened, its address carrying `searchArea=Templates`
+- **THEN** the request carries no privacy filter, as before
 
 #### Scenario: Room group opened in Rooms
 - **WHEN** a room group of the Rooms area is opened while the section is available

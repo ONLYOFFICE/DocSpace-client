@@ -376,6 +376,48 @@ test.describe("Private room — upload target fixed when the user starts the upl
     expect(carryingName).toEqual([]);
   });
 
+  test("Re-imported container in the folder of its source", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { filesHandle, passphrase } = await openPrivateRoomWithKey(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    const [file] = plaintextFiles(1);
+    await page.locator("#customFileInput").first().setInputFiles([file]);
+    await unlockIfPrompted(page, passphrase);
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(1);
+    // The file as "Download without decryption" saves it: its stored bytes under its stored name.
+    const [source] = filesHandle.current!.getFiles();
+    const container = {
+      name: source.serverTitle,
+      mimeType: "application/octet-stream",
+      buffer: Buffer.from(source.bytes!),
+    };
+
+    await page.locator("#customFileInput").first().setInputFiles([container]);
+    const dialog = page.getByRole("dialog").filter({ hasText: "Action required" });
+    await expect(dialog).toBeVisible({ timeout: 15000 });
+    await expect(dialog).toContainText(file.name);
+    await dialog.getByText("Create file copy", { exact: true }).click();
+    await dialog.getByRole("button", { name: "OK", exact: true }).click();
+    await unlockIfPrompted(page, passphrase);
+
+    await expect
+      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+      .toBe(2);
+    // The table shows the extension apart from the title.
+    await expect(
+      page.getByTestId("table-body").getByText("note-0 (1)", { exact: true }),
+    ).toBeVisible({ timeout: 15000 });
+  });
+
   test("Retry from another folder", async ({ page, mockRequest, baseUrl }) => {
     test.slow();
     const { filesHandle, passphrase } = await openPrivateRoomWithKey(

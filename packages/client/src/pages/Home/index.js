@@ -100,6 +100,7 @@ import {
 } from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
 import { useHideQuickActions } from "./Hooks/useHideQuickActions";
+import { usePrivateRoomCreateRequest } from "./Hooks/usePrivateRoomCreateRequest";
 import { useSectionDrop } from "./Hooks/useSectionDrop";
 
 import styles from "./Home.module.scss";
@@ -171,6 +172,7 @@ const PureHome = observer((props) => {
     loadCurrentUser,
     i18n,
     getRooms,
+    isPrivateRoomsSectionAvailable,
     setSelectedFolder,
     userId,
     getFolderModel,
@@ -288,6 +290,7 @@ const PureHome = observer((props) => {
   const isAiChatAvailable = useIsAiChatAvailable();
 
   usePanelExclusivity(infoPanelStore);
+  usePrivateRoomCreateRequest();
 
   // An open AI project draws its chat in the section body (AiProjectView),
   // so the side panel stays out of the way while a project room is shown.
@@ -443,6 +446,7 @@ const PureHome = observer((props) => {
     i18n,
     getRooms,
     isLoading,
+    isPrivateRoomsSectionAvailable,
   });
 
   const getContextModel = useCallback(() => {
@@ -822,6 +826,7 @@ export const Component = inject(
     oformsStore,
     paymentStore,
     currentTariffStatusStore,
+    appsStore,
   }) => {
     const {
       setSelectedFolder,
@@ -1037,6 +1042,7 @@ export const Component = inject(
       isAiProjectRoomRoot,
       isArchiveFolder,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
+      isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
 
       disableDrag,
 

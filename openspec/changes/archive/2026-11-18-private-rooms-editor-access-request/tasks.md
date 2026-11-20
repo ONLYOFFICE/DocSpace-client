@@ -1,0 +1,20 @@
+# Tasks
+
+One task is one commit with its tick (the "Commits" paragraph of `openspec/config.yaml`). The change states nothing about `../server`; nothing there changes. No locale key is added.
+
+## 1. Doceditor
+
+- [x] 1.1 Doceditor: keep the request for the access entries per file and attempt in `packages/doceditor/src/hooks/useFileEncryptionKeys.ts`, so a restart of the effect awaits the request already sent and a rejected attempt is not asked again before `retry` (design decisions 1 and 4). Verify: cases "Key flow restarts within one attempt" (the key list arriving and the unlock function changing leave `getFileEncryptionAccess` called once) and "Access entries could not be fetched" (an error with a status: called once, load-failed, then "Retry after a failed request" with a second call) in `packages/doceditor/src/hooks/__tests__/useFileEncryptionKeys.test.tsx`; `cd packages/doceditor && pnpm exec vitest run src/hooks`
+- [x] 1.2 Doceditor: repeat once a request for the access entries that got no answer, inside the kept request and without a delay; an error that carries a response is not repeated (design decisions 2 and 3). Verify: cases "Request without an answer" (two calls, ready, load-failed never shown) and "Repeated request without an answer" (two calls, load-failed) in the same test file; `cd packages/doceditor && pnpm exec vitest run src/hooks`
+- [x] 1.3 Doceditor: on the editor error page of an encrypted file add the button Common:TryAgain that loads the page again, in `packages/doceditor/src/components/Editor.tsx` (design decision 5). Verify: cases "Editor error with the button", "Try again after an editor error", "No repeat without the user" and "Editor error on a plain file" in `packages/doceditor/src/components/__tests__/Editor.test.tsx`; `cd packages/doceditor && pnpm exec vitest run src/components`
+- [x] 1.4 Stand: on the local stack open an encrypted file and count the requests for `files/{id}/access` of the editor page; then, as a member who only views, open a file whose session another member holds after a save, and press Common:TryAgain on the error page while the session is held and after it has ended. Verify: one request per opening, the page loaded again by the button, recorded here with the date and the builds
+  - 2026-11-18, local stack (client `release/v4.1.0` at `928b2b07138` in the development build, server `61d7682647`, Document Server 10.0.3.58), the docx of the private room of that day's run. Opened by its owner and later by a Viewer: one `files/17/access` request per opening, where the run of the morning had three. The owner added a paragraph and saved while staying in the editor; the Viewer's opening answered Common:SomethingWentWrong with "An error has occurred while opening the file." and the button. Pressed while the session was held: the page loaded again and showed the same error with the button. Pressed after the owner had left and the session had ended: the page loaded again and the document opened in the view mode with both lines. The user's key list and the files settings are still requested twice, the double run of effects of the development build; a production build was not run.
+
+## 2. Gate
+
+- [x] 2.1 Run `pnpm exec tsc` in `packages/doceditor`, `pnpm run test:doceditor`, Biome on `packages/doceditor/src`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: every command green, recorded here with the date and the counts
+  - 2026-11-18, each command with its exit code read: `pnpm exec tsc --noEmit` in `packages/doceditor` exit 0; Biome on `packages/doceditor/src`, 101 files, no finding; `pnpm run test:doceditor` exit 0, 135 tests in 11 files; `npm --prefix ./common/tests run test:lefthook` exit 0; `openspec validate --all --strict` 22 of 22. No E2E run: the doceditor spec does not reach the key requests or the editor error page, which unit cases and the stand run of 1.4 cover.
+
+## Workflow follow-up
+
+- Archive after 2.1; the archive merges the delta into `private-rooms/editor-integration`.

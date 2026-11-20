@@ -155,8 +155,12 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
   const [dialogType, setDialogType] = useState<CreateFileDialogType>("folder");
   const [isCreating, setIsCreating] = useState(false);
 
+  // Spec: private-rooms/sdk-surface, "No upload or creation without the create right"
+  const isPrivatePage = !!options?.privateCreate;
+
   const navigateToCreate = useCallback(
     (folderId: number | string, fileTitle: string) => {
+      if (isPrivatePage) return;
       if (sdkConfig?.events?.onEditorOpen) {
         setIsCreating(true);
         createFile(folderId, fileTitle)
@@ -183,7 +187,7 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
         frameConfig: sdkConfig,
       });
     },
-    [openInSameTab, sdkConfig, router],
+    [isPrivatePage, openInSameTab, sdkConfig, router],
   );
 
   useEffect(() => {
@@ -478,8 +482,14 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
     (files: FileList | File[], targetFolderId?: number | string) =>
       options?.uploadFilesToFolderOverride
         ? options.uploadFilesToFolderOverride(files, targetFolderId)
-        : defaultUploadFilesToFolder(files, targetFolderId),
-    [options?.uploadFilesToFolderOverride, defaultUploadFilesToFolder],
+        : isPrivatePage
+          ? Promise.resolve()
+          : defaultUploadFilesToFolder(files, targetFolderId),
+    [
+      options?.uploadFilesToFolderOverride,
+      isPrivatePage,
+      defaultUploadFilesToFolder,
+    ],
   );
 
   const confirmUploadConflict = useCallback(

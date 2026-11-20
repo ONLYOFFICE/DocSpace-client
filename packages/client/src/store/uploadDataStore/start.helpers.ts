@@ -40,8 +40,10 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import i18n from "../../i18n";
 import {
   listDecryptedFileNames,
+  nameUploadsForComparison,
   resolveNameClashes,
 } from "@docspace/shared/services/private-room/encrypted-name-clash";
 
@@ -241,6 +243,8 @@ export type TPrivateRename = {
   title: string;
   /** The name the new file takes. */
   name: string;
+  /** A re-imported container, whose own name must stay for its recovery. */
+  recovered: boolean;
 };
 
 /**
@@ -253,6 +257,8 @@ async function findPrivateNameClashes(
   self: UploadDataStore,
   items: TUploadFile[],
 ): Promise<TPrivateRename[]> {
+  // Spec: private-rooms/file-operations, "The name comparison of a private upload is not skipped"
+  if (await failPrivateItemsOnUnreadableKeyList(self, items)) return [];
   const privateItems = items.filter((f) => self.willEncryptItem(f));
   if (privateItems.length === 0) return [];
 
@@ -274,21 +280,91 @@ async function findPrivateNameClashes(
     const roomId = folderItems[0].target.encryptionRoomId;
     if (roomId === null) continue;
 
-    const existingNames = await listDecryptedFileNames(
-      folderId,
+    let existingNames: string[];
+    try {
+      existingNames = await listDecryptedFileNames(
+        folderId,
+        roomId,
+        String(userId),
+        identity,
+      );
+    } catch {
+      // Spec: private-rooms/file-operations, "The name comparison of a private upload is not skipped"
+      failQueuedItems(
+        self,
+        folderItems,
+        i18n.t("Common:EncryptedNameCheckFailed"),
+      );
+      continue;
+    }
+    const { named, failed } = await nameUploadsForComparison(
+      folderItems,
+      (item) => item.file,
       roomId,
       String(userId),
       identity,
     );
-    const clashes = resolveNameClashes(
-      folderItems.map((item) => ({ item, name: item.file.name })),
-      existingNames,
+    failQueuedItems(
+      self,
+      failed.map(({ item }) => item),
+      i18n.t("Common:EncryptionReimportFailed"),
     );
-    clashes.forEach(({ item, name, renamed }) => {
-      renames.push({ uniqueId: item.uniqueId, title: name, name: renamed });
-    });
+    const recovered = new Set(
+      named.filter((n) => n.recovered).map((n) => n.item.uniqueId),
+    );
+    resolveNameClashes(named, existingNames).forEach(
+      ({ item, name, renamed }) => {
+        renames.push({
+          uniqueId: item.uniqueId,
+          title: name,
+          name: renamed,
+          recovered: recovered.has(item.uniqueId),
+        });
+      },
+    );
   }
   return renames;
+}
+
+/**
+ * Reads a key list that is not known yet, so that the files bound for a
+ * private room are counted as the gate will count them; when the read fails,
+ * those files fail as the gate would fail them. True when they failed.
+ */
+async function failPrivateItemsOnUnreadableKeyList(
+  self: UploadDataStore,
+  items: TUploadFile[],
+) {
+  if (!(await self.isKeyListUnreadable())) return false;
+
+  failQueuedItems(
+    self,
+    items.filter((item) => item.target.isPrivate),
+    i18n.t("Common:EncryptionKeysLoadFailed"),
+  );
+  return true;
+}
+
+/** Fails files before they are sent; the rows may not be queued yet. */
+function failQueuedItems(
+  self: UploadDataStore,
+  items: TUploadFile[],
+  errorMessage: string,
+) {
+  runInAction(() => {
+    items.forEach((item) => {
+      item.inAction = true;
+      item.error = errorMessage;
+      item.percent = 0;
+      const historyItem = self.uploadedFilesHistory.find(
+        (f) => f.uniqueId === item.uniqueId,
+      );
+      if (historyItem) {
+        historyItem.error = errorMessage;
+        historyItem.percent = 0;
+      }
+    });
+  });
 }
 
 /** Keeps both files of a private clash: the new one takes its suffixed name. */
@@ -302,10 +378,14 @@ export function keepBothPrivateNamesImpl(
     ...(uploadData.uploadedFilesHistory ?? []),
   ];
 
-  renames.forEach(({ uniqueId, name }) => {
+  renames.forEach(({ uniqueId, name, recovered }) => {
     items
       .filter((item) => item.uniqueId === uniqueId)
       .forEach((item) => {
+        if (recovered) {
+          item.keepBothName = name;
+          return;
+        }
         const { file } = item;
         item.file = Object.assign(
           new File([file], name, {
@@ -501,6 +581,9 @@ async function unlockRetriedFiles(
   self: UploadDataStore,
   retryFiles: TUploadFile[],
 ) {
+  if (await failPrivateItemsOnUnreadableKeyList(self, retryFiles)) {
+    return retryFiles.filter((f) => !f.target.isPrivate);
+  }
   if (await self.ensureEncryptionUnlockedForBatch(retryFiles)) {
     return retryFiles;
   }

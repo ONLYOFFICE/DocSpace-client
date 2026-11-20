@@ -224,17 +224,24 @@ describe("FilesStore.wsModifyFolderCreate — Private section", () => {
 
   // The Private list is open under its own root; a room in it still reports
   // the Rooms root as its parent.
-  const roomArrives = async (
+  const roomArrival = async (
     pathname: string,
     isPrivate: boolean,
     createdBy = "other-user",
+    roomCreatedHere = false,
   ) => {
     window.history.pushState({}, "", pathname);
     const isPrivateList = pathname.startsWith("/private");
+    const setFoldersCount = vi.fn();
+    const counts = { foldersCount: 0, setFoldersCount };
     const store = createTestFilesStore({
       selectedFolderStore: isPrivateList
-        ? { id: PRIVATE_ROOT_ID, rootFolderType: FolderType.PrivateRooms }
-        : { id: ROOMS_ROOT_ID, rootFolderType: FolderType.Rooms },
+        ? {
+            id: PRIVATE_ROOT_ID,
+            rootFolderType: FolderType.PrivateRooms,
+            ...counts,
+          }
+        : { id: ROOMS_ROOT_ID, rootFolderType: FolderType.Rooms, ...counts },
       treeFoldersStore: {
         isFormsFolder: false,
         isPrivateRoomsFolder: isPrivateList,
@@ -257,6 +264,7 @@ describe("FilesStore.wsModifyFolderCreate — Private section", () => {
       ...room,
       private: isPrivate,
     } as never);
+    store.roomCreated = roomCreatedHere;
 
     await store.wsModifyFolderCreate({
       type: "folder",
@@ -264,8 +272,29 @@ describe("FilesStore.wsModifyFolderCreate — Private section", () => {
       data: JSON.stringify(room),
     } as never);
 
-    return store.folders.map((f) => f.id);
+    return { ids: store.folders.map((f) => f.id), setFoldersCount };
   };
+
+  const roomArrives = async (
+    ...args: Parameters<typeof roomArrival>
+  ) => (await roomArrival(...args)).ids;
+
+  it("Count of the open list", async () => {
+    const { setFoldersCount } = await roomArrival("/rooms/shared/filter", true);
+
+    expect(setFoldersCount).not.toHaveBeenCalled();
+  });
+
+  it("Own room created", async () => {
+    const { setFoldersCount } = await roomArrival(
+      "/private/filter",
+      true,
+      "user-1",
+      true,
+    );
+
+    expect(setFoldersCount).toHaveBeenCalledWith(1);
+  });
 
   it("Invited to a private room: not inserted into the Rooms list", async () => {
     expect(await roomArrives("/rooms/shared/filter", true)).toEqual([]);

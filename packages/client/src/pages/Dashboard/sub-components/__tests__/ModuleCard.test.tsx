@@ -33,19 +33,42 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const BROADCAST_LOCK_PREFIX = "docspace-encryption-lock";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 
-export function getBroadcastLockChannelName(userId: string): string {
-  return `${BROADCAST_LOCK_PREFIX}:${userId}`;
-}
+import { ModuleCard, type ModuleItem } from "../ModuleCard";
 
-export type BroadcastLockMessage = {
-  type: "lock";
-  sessionId: string;
+const mod: ModuleItem = {
+  id: "e2e-rooms",
+  icon: null,
+  title: "Common:Private",
+  description: "Common:DashboardE2eRoomsDescription",
+  installed: true,
+  buttonLabel: "Common:Open",
+  href: "/private/filter",
+  onAction: vi.fn(),
+  noTour: true,
 };
 
-// A fresh id per tab; rebroadcasted lock events from the same tab are ignored.
-export const BROADCAST_LOCK_SESSION_ID =
-  typeof crypto !== "undefined" && crypto.randomUUID
-    ? crypto.randomUUID()
-    : `${Date.now()}-${Math.random()}`;
+describe("ModuleCard", () => {
+  it("Card with the badge: the badge stands beside the title", () => {
+    render(
+      <ModuleCard mod={{ ...mod, badge: <span data-testid="card_badge" /> }} />,
+    );
+
+    const badge = screen.getByTestId("card_badge");
+    const title = screen.getByText("Common:Private");
+
+    expect(badge.parentElement).toBe(title.parentElement);
+    expect(title.nextElementSibling).toBe(badge);
+  });
+
+  it("renders no badge slot for a card without one", () => {
+    render(<ModuleCard mod={mod} />);
+
+    expect(screen.queryByTestId("card_badge")).toBeNull();
+    expect(
+      screen.getByText("Common:Private").nextElementSibling,
+    ).toHaveTextContent("Common:Enabled");
+  });
+});

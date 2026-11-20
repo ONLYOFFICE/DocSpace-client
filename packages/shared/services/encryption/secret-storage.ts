@@ -100,11 +100,63 @@ function bump(entry: CacheEntry): void {
   entry.lastUsedAt = Date.now();
 }
 
-function clearState(): void {
+const slotClearedListeners = new Set<() => void>();
+
+/**
+ * Calls the listener whenever the slot is cleared: a lock, a switch to
+ * another user or the expiry. Filling the slot again is not a clearing.
+ */
+// Spec: private-rooms/key-management, "The shown key state follows the key in memory"
+export function subscribeSlotCleared(listener: () => void): () => void {
+  slotClearedListeners.add(listener);
+  return () => {
+    slotClearedListeners.delete(listener);
+  };
+}
+
+const announceSlotCleared = () => {
+  Array.from(slotClearedListeners).forEach((listener) => {
+    try {
+      listener();
+    } catch {
+      // A listener's failure leaves the others to hear the clearing.
+    }
+  });
+};
+
+// One timer for the expiry: armed when the slot is filled and, when it fires
+// before the key is due because a use moved the expiry, armed again for the
+// remainder.
+let expiryTimer: ReturnType<typeof setTimeout> | null = null;
+
+function cancelExpiry(): void {
+  if (expiryTimer !== null) clearTimeout(expiryTimer);
+  expiryTimer = null;
+}
+
+function armExpiry(): void {
+  if (expiryTimer !== null || !_state) return;
+  const remaining =
+    _state.lastUsedAt + SESSION_CACHE_DURATION_MS - Date.now() + 1;
+  expiryTimer = setTimeout(
+    () => {
+      expiryTimer = null;
+      if (!_state) return;
+      if (isExpired(_state)) lockState();
+      else armExpiry();
+    },
+    Math.max(0, remaining),
+  );
+}
+
+/** Empties the slot; says so unless the slot is about to be filled again. */
+function clearState(announce = true): void {
+  cancelExpiry();
   if (_state) {
     zeroBuffer(_state.privateKey);
     zeroBuffer(_state.publicKey);
     _state = null;
+    if (announce) announceSlotCleared();
   }
 }
 
@@ -120,13 +172,14 @@ export const SecretStorage = {
     if (!userId) {
       throw new Error("SecretStorage.cacheUnlocked: userId is required");
     }
-    clearState();
+    clearState(false);
     _state = {
       userId,
       publicKey: new Uint8Array(kp.publicKey),
       privateKey: new Uint8Array(kp.privateKey),
       lastUsedAt: Date.now(),
     };
+    armExpiry();
   },
 
   /**

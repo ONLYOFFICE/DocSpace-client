@@ -460,6 +460,29 @@ describe("Media viewer menu models", () => {
     },
   );
 
+  it("Media viewer menu of an encrypted PDF", () => {
+    const pdf = {
+      ...renamable,
+      security: { ...renamable.security, Download: true },
+    } as TFile;
+
+    const keys = visibleKeys(models.pdf({ ...pdf, encrypted: true }));
+    expect(keys).not.toContain("download-as");
+    expect(keys).not.toContain("link-for-room-members");
+    expect(keys).toContain("download");
+  });
+
+  it("Media viewer menu of a PDF that is not encrypted", () => {
+    const pdf = {
+      ...renamable,
+      security: { ...renamable.security, Download: true },
+    } as TFile;
+
+    const keys = visibleKeys(models.pdf(pdf));
+    expect(keys).toContain("download-as");
+    expect(keys).toContain("link-for-room-members");
+  });
+
   it.each(Object.keys(models) as (keyof typeof models)[])(
     "Media viewer menu of a file that is not encrypted (%s)",
     (kind) => {

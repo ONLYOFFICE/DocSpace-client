@@ -113,7 +113,7 @@ beforeEach(() => {
 });
 
 describe("cancelEncryptedBatchUploadImpl", () => {
-  it("Uploader declines to unlock: only pending, encryptable rows fail with Common:EncryptionLockedUpload", () => {
+  it("Uploader declines to unlock: every pending row bound for the room fails with Common:EncryptionLockedUpload", () => {
     const { store } = createTestUploadDataStore(keyed);
     const target = makePrivateUploadTarget();
     const enc = makeUploadFile({ uniqueId: "enc", action: "upload", target });
@@ -144,8 +144,10 @@ describe("cancelEncryptedBatchUploadImpl", () => {
     expect(store.uploadedFilesHistory[0].error).toBe(
       "Common:EncryptionLockedUpload",
     );
-    expect(store.files[1].error).toBeNull();
-    expect(store.uploadedFilesHistory[1].error).toBeNull();
+    expect(store.files[1].error).toBe("Common:EncryptionLockedUpload");
+    expect(store.uploadedFilesHistory[1].error).toBe(
+      "Common:EncryptionLockedUpload",
+    );
     expect(store.files[2].error).toBe("boom");
     expect(store.files[3].error).toBeNull();
   });
@@ -183,12 +185,6 @@ describe("ensureEncryptionUnlockedForBatchImpl", () => {
       treeFoldersStore: { isPrivacyFolder: true },
     });
     store.files = [
-      makeUploadFile({
-        action: "upload",
-        file: makeBrowserFile("a.docx", 10, { encrypted: true }),
-        encrypted: true,
-        target: makePrivateUploadTarget(),
-      }),
       makeUploadFile({ action: "converted", target: makePrivateUploadTarget() }),
       makeUploadFile({ action: "upload" }),
     ];
@@ -225,11 +221,12 @@ describe("UploadDataStore.queueMemberFanOut", () => {
       fileKeys: [{ userId: "user-1", publicKeyId: "key-1", privateKeyEnc: "own" }],
     } as never);
     vi.mocked(setFileEncryptionKeys).mockResolvedValue(undefined as never);
-    // Real base64, so a pinned key compares equal to itself after accept.
+    // Real base64 of 32 bytes, a well-formed key that compares equal to
+    // itself after accept.
     vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
-      memberKey("bob", btoa("bob-swapped")),
+      memberKey("bob", btoa("bob-swapped".padEnd(32, "."))),
     ] as never);
-    await getTofuStore("user-1").checkKey("bob", btoa("bob-pinned"));
+    await getTofuStore("user-1").checkKey("bob", btoa("bob-pinned".padEnd(32, ".")));
     waiting = [];
     handler = vi.fn(
       () =>

@@ -54,6 +54,7 @@ import { getFileEncryptionAccess } from "../../api/files";
 import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
 import { decryptFile } from "../../services/encryption/file-keys";
 import { getSpecificEncryptionErrorMessage } from "../../services/encryption/error-i18n";
+import { NoAccessError } from "../../services/encryption/errors";
 import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
@@ -457,8 +458,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         }
         const encryptionInfo = await getFileEncryptionAccess(fileId);
         if (isStale()) return;
-        if (!encryptionInfo?.fileKeys) {
-          throw new Error("You don't have access to decrypt this file");
+        // Spec: private-rooms/file-operations, "The media viewer reports a file that is not shared yet as no access"
+        const fileKeys = encryptionInfo?.fileKeys ?? [];
+        if (!fileKeys.some((k) => String(k.userId) === String(userId))) {
+          throw new NoAccessError(String(userId));
         }
 
         const identity = await requireUnlock(String(userId));
@@ -484,7 +487,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         if (isStale()) return;
 
         const dek = await unwrapDekForCurrentUser({
-          fileKeys: encryptionInfo.fileKeys,
+          fileKeys,
           roomMemberKeys,
           currentUserId: String(userId),
           currentIdentity: identity,
@@ -504,28 +507,21 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         if (decryptedName) {
           setTitle(decryptedName);
         }
-        const ext = getFileExtension(displayName).toLowerCase();
-        const mimeTypes: Record<string, string> = {
-          jpg: "image/jpeg",
-          jpeg: "image/jpeg",
-          png: "image/png",
-          gif: "image/gif",
-          webp: "image/webp",
-          tif: "image/tiff",
-          tiff: "image/tiff",
-          heic: "image/heic",
-          heif: "image/heif",
-          mp4: "video/mp4",
-          webm: "video/webm",
-          mp3: "audio/mpeg",
-          wav: "audio/wav",
-          ogg: "audio/ogg",
-          pdf: "application/pdf",
-        };
-        const mimeType = mimeTypes[ext] || "application/octet-stream";
+        // Spec: private-rooms/file-operations, "Media preview decrypts on the client"
+        const ext = getFileExtension(displayName);
+        let shown = new Blob([decryptedBlob]);
+        if (isTiff(ext)) {
+          shown = (await decodeTiff(await shown.arrayBuffer())) ?? shown;
+        } else if (isHeic(ext)) {
+          const { default: heic2any } = await import("heic2any");
+          // A HEIC variant the converter cannot read is still decrypted;
+          // the browser may show it as it is.
+          const converted = await heic2any({ blob: shown }).catch(() => shown);
+          if (!Array.isArray(converted)) shown = converted;
+        }
+        if (isStale()) return;
 
-        const typedBlob = new Blob([decryptedBlob], { type: mimeType });
-        setFileUrl(URL.createObjectURL(typedBlob));
+        setFileUrl(URL.createObjectURL(shown));
       } catch (error) {
         if (isStale()) return;
         if (error instanceof Error) {

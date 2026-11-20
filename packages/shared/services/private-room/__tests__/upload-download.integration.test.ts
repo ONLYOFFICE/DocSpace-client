@@ -60,8 +60,11 @@ import { arrayBufferToBase64 } from "../../encryption/utils";
 import type { IdentityKeyPair } from "../../encryption/types";
 
 import { downloadAndDecryptFile } from "../encrypted-download";
+import { prepareReimport } from "../encrypted-upload-orchestrator";
+import { RoomsType } from "../../../enums";
 import {
   EncryptedReimportError,
+  prepareEncryptedUpload,
   recoverDekForReimport,
   sniffDse3Upload,
 } from "../encrypted-upload";
@@ -100,7 +103,7 @@ const mockIDB = {
   open: () => {
     const req = new MockOpenRequest();
     queueMicrotask(() => {
-      req.error = new Error("test: IDB disabled");
+      req.error = new DOMException("test: IDB disabled", "SecurityError");
       req.onerror?.();
     });
     return req;
@@ -240,6 +243,47 @@ describe("encrypted download — integration via MSW", () => {
     expect(decryptedText).toBe(originalText);
   });
 
+  it("Name with separators", async () => {
+    const alice = await generateIdentityKeyPair();
+    const plainBytes = new TextEncoder().encode("Named content.");
+    const { encryptedBlob, dek } = await encryptFile(plainBytes, {
+      fileName: "../plans/memo\u0007.txt",
+    });
+    const fileId = 7778;
+    const wrapped = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE_ID,
+      recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      fileId,
+    });
+    filesHandle.current!.setFiles([
+      {
+        id: fileId,
+        title: "memo.txt",
+        serverTitle: "def-uuid.txt",
+        size: plainBytes.byteLength,
+        encrypted: true,
+        fileKeys: wrapped,
+        bytes: await blobToUint8Array(encryptedBlob),
+      },
+    ]);
+
+    const result = await downloadAndDecryptFile({
+      downloadUrl: `http://localhost:${PORT}/api/2.0/files/file/${fileId}/download`,
+      fileId,
+      fileKeys: wrapped,
+      roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      userId: ALICE_ID,
+      identity: alice,
+      originalFileName: "def-uuid.txt",
+      originalFileType: "text/plain",
+    });
+
+    expect(result.success).toBe(true);
+    expect(result.file!.name).toBe(".._plans_memo.txt");
+  });
+
   it("returns success:false when the server rejects the download", async () => {
     const alice = await generateIdentityKeyPair();
     const dummyWrap = await wrapDekForRecipients({
@@ -333,6 +377,38 @@ describe("encrypted re-import — integration via MSW", () => {
     const { data } = await decryptFile(encryptedBytes, recovery.dek);
     const decrypted = new TextDecoder().decode(await blobToUint8Array(data));
     expect(decrypted).toBe(originalText);
+  });
+
+  it("Re-imported copy", async () => {
+    const alice = await generateIdentityKeyPair();
+    const { encryptedBytes, originalText } = await seedSourceFile(alice);
+    const rawFile = new File([encryptedBytes as BlobPart], SOURCE_TITLE);
+    const header = await sniffDse3Upload(rawFile);
+    const args = { roomId: ROOM_ID, userId: ALICE_ID, identity: alice };
+    const source = await recoverDekForReimport({
+      file: rawFile,
+      header: header!,
+      ...args,
+    });
+
+    const copy = await prepareReimport(rawFile, header!, args as never, (clear) =>
+      prepareEncryptedUpload({
+        file: clear,
+        folderId: ROOM_ID,
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      }),
+    );
+
+    expect(copy.originalFileName).toBe("report.txt");
+    expect(copy.dek).not.toEqual(source.dek);
+    const { data } = await decryptFile(
+      await blobToUint8Array(copy.data),
+      copy.dek!,
+    );
+    expect(new TextDecoder().decode(await blobToUint8Array(data))).toBe(
+      originalText,
+    );
   });
 
   it("recovers via the uuid even when the browser deduplicated the download name", async () => {

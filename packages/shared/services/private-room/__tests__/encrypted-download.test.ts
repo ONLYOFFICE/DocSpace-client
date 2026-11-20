@@ -43,6 +43,9 @@ import {
   deduplicateFileNames,
   downloadAndDecryptFile,
   downloadAndDecryptFileToBuffer,
+  toArchiveEntries,
+  triggerFileDownload,
+  type ArchiveItem,
 } from "../encrypted-download";
 import type { IdentityKeyPair } from "../../encryption/types";
 
@@ -190,6 +193,16 @@ describe("encryptedDownload", () => {
       ]);
     });
 
+    it("Names that differ only in case", () => {
+      expect(deduplicateFileNames(["Budget.xlsx", "budget.xlsx"])).toEqual([
+        "Budget.xlsx",
+        "budget (1).xlsx",
+      ]);
+      expect(
+        deduplicateFileNames(["Report.docx", "report.docx", "REPORT (1).DOCX"]),
+      ).toEqual(["Report.docx", "report (2).docx", "REPORT (1).DOCX"]);
+    });
+
     it("splits on the LAST dot for multi-dot names", () => {
       expect(deduplicateFileNames(["a.b.c", "a.b.c"])).toEqual([
         "a.b.c",
@@ -218,6 +231,140 @@ describe("encryptedDownload", () => {
     });
   });
 
+  describe("toArchiveEntries", () => {
+    let nextId = 100;
+    const file = (
+      name: string,
+      folders: ArchiveItem["folders"] = [],
+    ): ArchiveItem => ({
+      data: new Uint8Array([1]),
+      names: [name, "stored title", (nextId += 1)],
+      folders,
+    });
+    const paths = (items: ArchiveItem[]) =>
+      toArchiveEntries(items).map((e) => e.name);
+
+    const root = { id: 1, title: "Root" };
+
+    it("File name with a separator inside a folder archive", () => {
+      const docs = { id: 10, title: "Docs" };
+      const out = paths([
+        file("../x/a.txt", [docs]),
+        file("b.txt", [docs]),
+      ]);
+
+      expect(out).toEqual(["Docs/.._x_a.txt", "Docs/b.txt"]);
+      expect(new Set(out.map((p) => p.split("/").length))).toEqual(
+        new Set([2]),
+      );
+    });
+
+    it("Folder title with a separator", () => {
+      expect(paths([file("f.txt", [root, { id: 2, title: "a/b" }])])).toEqual(
+        ["Root/a_b/f.txt"],
+      );
+    });
+
+    it("Folder title of which nothing is left", () => {
+      expect(paths([file("f.txt", [{ id: 7, title: ".." }])])).toEqual([
+        "7/f.txt",
+      ]);
+    });
+
+    it("Sibling folders that differ only in case", () => {
+      expect(
+        paths([
+          file("f1.txt", [root, { id: 2, title: "Plans" }]),
+          file("f2.txt", [root, { id: 3, title: "plans" }]),
+          file("f3.txt", [root, { id: 2, title: "Plans" }]),
+        ]),
+      ).toEqual([
+        "Root/Plans/f1.txt",
+        "Root/plans (1)/f2.txt",
+        "Root/Plans/f3.txt",
+      ]);
+    });
+
+    it("File and folder of the same name", () => {
+      const notes = { id: 2, title: "Notes" };
+      expect(paths([file("x.txt", [root, notes]), file("notes", [root])]))
+        .toEqual(["Root/Notes/x.txt", "Root/notes (1)"]);
+      expect(paths([file("notes", [root]), file("x.txt", [root, notes])]))
+        .toEqual(["Root/notes", "Root/Notes (1)/x.txt"]);
+    });
+
+    it("Names that differ only in case inside a folder", () => {
+      expect(
+        paths([file("Budget.xlsx", [root]), file("budget.xlsx", [root])]),
+      ).toEqual(["Root/Budget.xlsx", "Root/budget (1).xlsx"]);
+    });
+
+    it("Decrypted names clash: the same names in different folders stay", () => {
+      expect(
+        paths([
+          file("a.txt"),
+          file("a.txt"),
+          file("a (1).txt"),
+          file("a.txt", [root]),
+        ]),
+      ).toEqual(["a.txt", "a (2).txt", "a (1).txt", "Root/a.txt"]);
+    });
+
+    it("A clash of a name of 255 bytes keeps its suffix", () => {
+      const long = `${"a".repeat(251)}.txt`;
+      const [first, second] = paths([file(long), file(long)]);
+
+      expect(first).toBe(long);
+      expect(second).toBe(`${"a".repeat(247)} (1).txt`);
+      expect(new TextEncoder().encode(second).length).toBe(255);
+    });
+
+    it("Nothing left of the name: the next candidate names the entry", () => {
+      const out = toArchiveEntries([
+        { data: new Uint8Array([1]), names: ["...", "Title.docx", 5], folders: [] },
+        { data: new Uint8Array([1]), names: ["..", "\u0007", 6], folders: [] },
+      ]);
+      expect(out.map((e) => e.name)).toEqual(["Title.docx", "6"]);
+    });
+  });
+
+  describe("triggerFileDownload", () => {
+    const saved = () => {
+      const names: string[] = [];
+      vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(
+        function click(this: HTMLAnchorElement) {
+          names.push(this.download);
+        },
+      );
+      return names;
+    };
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+      URL.createObjectURL = vi.fn(() => "blob:test");
+      URL.revokeObjectURL = vi.fn();
+    });
+
+    afterEach(() => {
+      vi.runAllTimers();
+      vi.useRealTimers();
+      vi.restoreAllMocks();
+    });
+
+    it("Archive named after a folder", () => {
+      const names = saved();
+      triggerFileDownload(new Blob([]), "Plans/2026 Q1.zip");
+      expect(names).toEqual(["Plans_2026 Q1.zip"]);
+    });
+
+    it("Single file download: the file's own name is made plain", () => {
+      const names = saved();
+      triggerFileDownload(new File([], "memo\u202e.txt"));
+      triggerFileDownload(new Blob([]));
+      expect(names).toEqual(["memo.txt", "download"]);
+    });
+  });
+
   describe("createZipFromBuffers", () => {
     it("round-trips file names and contents via fflate", () => {
       const a = new TextEncoder().encode("hello");
@@ -241,6 +388,42 @@ describe("encryptedDownload", () => {
       // ZIP magic bytes: PK\x03\x04
       expect(zipped[0]).toBe(0x50);
       expect(zipped[1]).toBe(0x4b);
+    });
+
+    it.each([
+      ["an empty segment", "Docs//a.txt"],
+      ["a leading separator", "/a.txt"],
+      ["a parent reference", "Docs/../a.txt"],
+      ["a current directory reference", "./a.txt"],
+      ["an unnormalised segment", "Docs/a:b.txt"],
+      ["a trailing dot", "Docs/a."],
+      ["a backslash", "Docs\\a.txt"],
+    ])("Archive refuses a path that was not built: %s", (_, name) => {
+      expect(() =>
+        createZipFromBuffers([{ name, data: new Uint8Array([1]) }]),
+      ).toThrow();
+    });
+
+    it("Archive keeps a built path", () => {
+      const entries = toArchiveEntries([
+        {
+          data: new TextEncoder().encode("plan"),
+          names: ["../q1:plan.txt", 1],
+          folders: [
+            { id: 1, title: "Reports/2026" },
+            { id: 2, title: "Plans" },
+          ],
+        },
+      ]);
+
+      const unzipped = unzipSync(createZipFromBuffers(entries));
+
+      expect(Object.keys(unzipped)).toEqual(["Reports_2026/Plans/.._q1_plan.txt"]);
+      expect(
+        new TextDecoder().decode(
+          unzipped["Reports_2026/Plans/.._q1_plan.txt"],
+        ),
+      ).toBe("plan");
     });
   });
 
@@ -280,6 +463,33 @@ describe("encryptedDownload", () => {
       });
       expect(result.success).toBe(true);
       expect(result.file?.name).toBe("report.docx");
+    });
+
+    const decryptNamed = async (headerName: string, stored: string) => {
+      vi.mocked(unwrapDekForCurrentUser).mockResolvedValueOnce(
+        new Uint8Array(32),
+      );
+      vi.mocked(decryptFile).mockResolvedValueOnce({
+        data: new Blob([new Uint8Array([1])]),
+        fileName: headerName,
+      });
+      const result = await decryptDownloadedFile({
+        ...baseConfig,
+        originalFileName: stored,
+        encryptedData: new ArrayBuffer(8),
+      });
+      return result.file?.name;
+    };
+
+    it("Single file download: the header name is made plain", async () => {
+      expect(await decryptNamed("../plans/q1\u0007\u202e.txt", "x.txt")).toBe(
+        ".._plans_q1.txt",
+      );
+    });
+
+    it("Nothing left of the name", async () => {
+      expect(await decryptNamed("...", "report.docx")).toBe("report.docx");
+      expect(await decryptNamed("..", ". .")).toBe("1");
     });
 
     it("returns success:false (never throws) when unwrap throws", async () => {

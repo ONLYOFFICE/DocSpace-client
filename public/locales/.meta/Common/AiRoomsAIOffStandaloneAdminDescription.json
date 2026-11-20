@@ -3,7 +3,7 @@
   "content": "Connect an AI provider to create AI projects with their own instructions and knowledge base, and share them with your team.",
   "content_en_sha1_hash": "646d39d2011a2560a729ff83d5347f3f73a53444",
   "created_at": "2026-11-01T08:11:31.630Z",
-  "updated_at": "2026-11-01T08:13:19.914Z",
+  "updated_at": "2026-11-17T13:13:26.997Z",
   "comment": {
     "text": "Description in the AI rooms section placeholder for an admin of a self-hosted portal where no AI provider is connected yet; a Go to settings button follows. Connect is an imperative verb; an AI provider is an external AI service such as OpenAI.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 272,
+      "line_number": 274,
       "context": "t: TTranslation,\n standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n if (!isPortalAdmin) return t(\"Common:AiRoomsAIOffUserDescription\");\n if (standalone) return t(\"Common:AiRoomsAIOffStandaloneAdminDescription\");\n return (\n <>\n <Text as=\"span\">{t(\"Common:AiRoomsAIOffDescription\")}</Text>\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n {t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}",
       "module": "/packages/client"
     }

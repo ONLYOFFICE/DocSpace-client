@@ -196,6 +196,17 @@ The server SHALL serve private rooms only while the E2E rooms app of the portal 
 - **WHEN** the E2E rooms app is switched on after it was off
 - **THEN** every private room, its files, its members and its keys are served as before the app was switched off
 
+### Requirement: New-items counts include private rooms
+The server SHALL count new items of private rooms under the Private root: that root's new-items count, its news listing and mark-as-read on it. The Rooms root's count, news listing and mark-as-read SHALL NOT cover private rooms. When the marks of an entry of a private room are cleared for a user, the server SHALL send that user the new-items event of the Private root with the root's count after the clearing.
+
+#### Scenario: New file in a private room
+- **WHEN** a member uploads a file into a private room
+- **THEN** the Private root's new-items count of the other members grows, the Rooms root's does not, and the Private root's news listing includes the file
+
+#### Scenario: Marks of a private room cleared
+- **WHEN** the new-items marks of a file or a folder of a private room are cleared for a user
+- **THEN** the user receives the new-items event of the Private root carrying the count left over the user's private rooms, rooms with notifications switched off left out
+
 ## RENAMED Requirements
 
 - FROM: `### Requirement: The E2E rooms app gates the private section`

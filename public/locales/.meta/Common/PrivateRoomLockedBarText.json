@@ -3,7 +3,7 @@
   "content": "Unlock it to see file names and to open, upload and download files.",
   "content_en_sha1_hash": "2464555c4f9ce3c17a9301d9acad733db8877c14",
   "created_at": "2026-11-11T16:54:29.945Z",
-  "updated_at": "2026-11-11T16:56:26.897Z",
+  "updated_at": "2026-11-19T16:14:54.057Z",
   "comment": {
     "text": "Body sentence of the bar at the top of a private room while the user's encryption key is locked; it follows the title and is followed by the Unlock link. The pronoun it refers to the encryption key from the title. Verbs are imperative and infinitive.",
     "is_auto": true,
@@ -12,9 +12,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx",
-      "line_number": 83,
-      "context": "return (\n <PublicRoomBar\n headerText={t(\"Common:PrivateRoomLockedBarTitle\")}\n bodyText={\n <>\n {t(\"Common:PrivateRoomLockedBarText\")}{\" \"}\n <Link\n type={LinkType.action}\n isHovered\n fontWeight={600}\n onClick={onUnlock}",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBlock.tsx",
+      "line_number": 171,
+      "context": "fontWeight={700}\n >\n {t(\"Common:PrivateRoomLockedBarTitle\")}\n </Text>\n <Text fontSize=\"13px\" className={styles.text}>\n {t(\"Common:PrivateRoomLockedBarText\")}\n </Text>\n <div className={styles.actions}>\n <Button\n primary\n size={ButtonSize.small}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
+      "line_number": 382,
+      "context": "<Text\n as=\"p\"\n className={styles.keyStateNote}\n dataTestId=\"key_locked_note\"\n >\n {t(\"Common:PrivateRoomLockedBarText\")}\n </Text>\n ) : null}\n <div className={styles.keysListItems}>\n <KeyItem\n keyData={key}",
       "module": "/packages/client"
     }
   ],

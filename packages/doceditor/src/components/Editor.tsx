@@ -60,6 +60,7 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
+  reloadEditorPage,
   type TErrorEvent,
   // onOutdatedVersion,
 } from "@/utils/events";
@@ -537,6 +538,16 @@ const EditorBody = ({
       <>
         <div>{t("Common:SomethingWentWrong")}</div>
         {frameError ? <div>{frameError}</div> : null}
+        {/* Spec: editor-integration, "Editor error of an encrypted file offers a reload" */}
+        <div style={{ marginTop: "16px" }}>
+          <Button
+            primary
+            size={ButtonSize.medium}
+            label={t("Common:TryAgain")}
+            onClick={reloadEditorPage}
+            testId="editor-error-retry"
+          />
+        </div>
       </>,
     );
   }

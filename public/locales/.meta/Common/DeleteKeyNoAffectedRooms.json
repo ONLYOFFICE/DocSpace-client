@@ -3,7 +3,7 @@
   "content": "None of your private rooms has files encrypted for you, so no room is affected.",
   "content_en_sha1_hash": "c6277a36124915df0e755da81f6a6370832e4592",
   "created_at": "2026-10-23T14:20:43.581Z",
-  "updated_at": "2026-10-23T14:22:50.735Z",
+  "updated_at": "2026-11-19T16:14:54.124Z",
   "comment": {
     "text": "Bold line under the warning of the Delete encryption key confirmation dialog in Profile > Keys management, shown instead of the list of affected private rooms when no private room of the user holds files encrypted for them, so deleting the key locks them out of no room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteKeyFlow.tsx",
-      "line_number": 145,
+      "line_number": 147,
       "context": "if (affectedRooms.status === \"done\") {\n affectedRoomsText = affectedRooms.rooms.length\n ? t(\"Common:DeleteKeyAffectedRooms\", {\n rooms: affectedRooms.rooms.map((room) => room.title).join(\", \"),\n })\n : t(\"Common:DeleteKeyNoAffectedRooms\");\n }\n \n const onPassphraseSubmit = useCallback(\n async (passphrase: string) => {\n if (!verifying) return;",
       "module": "/packages/client"
     }

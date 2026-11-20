@@ -3,7 +3,7 @@
   "content": "Role of {{name}}: {{role}}",
   "content_en_sha1_hash": "1c7d4b2788f9da8cacd4eaa55990518b9567f72e",
   "created_at": "2026-11-12T15:54:27.431Z",
-  "updated_at": "2026-11-12T16:00:41.309Z",
+  "updated_at": "2026-11-17T13:13:26.957Z",
   "comment": {
     "text": "Accessible name, read by screen readers and never shown on screen, of the drop-down that sets the access role of one person in the invite panel or in a room's members list; {{name}} is the person's display name, {{role}} is the role chosen now, for example Viewer.",
     "is_auto": true,
@@ -16,6 +16,24 @@
       "line_number": 152,
       "context": "const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;\n \n const selectedLabel =\n selectedOption && \"label\" in selectedOption ? selectedOption.label : \"\";\n const ariaLabel = subjectName\n ? t(\"Common:RoleOfUser\", { name: subjectName, role: selectedLabel })\n : t(\"Common:RoleWithValue\", { role: selectedLabel });\n \n return (\n <div className=\"access-selector\" style={{ marginInlineEnd: \"16px\" }}>\n {!(isMobile() && !isMobileHorizontalOrientation) ? (",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
+      "line_number": 334,
+      "context": "withBlur={isMobile}\n isLoading={isRoleChanging}\n isMobileView={isMobileOnly}\n shouldShowBackdrop={isMobile}\n dataTestId=\"private_member_role_combobox\"\n ariaLabel={t(\"Common:RoleOfUser\", {\n name: displayName,\n role: String(selectedRole.label ?? \"\"),\n })}\n />\n ) : (",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/AccessSelector.tsx",
+      "line_number": 180,
+      "context": "const selectedLabel =\n selectedOption && \"label\" in selectedOption\n ? String(selectedOption.label ?? \"\")\n : \"\";\n const ariaLabel = subjectName\n ? t(\"Common:RoleOfUser\", { name: subjectName, role: selectedLabel })\n : t(\"Common:RoleWithValue\", { role: selectedLabel });\n \n return (\n <div className=\"access-selector\" style={{ marginInlineEnd: \"16px\" }}>\n {!(isMobile() && !isMobileHorizontalOrientation) ? (",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/User.tsx",
+      "line_number": 334,
+      "context": "isLoading={isLoading}\n isMobileView={isMobileOnly}\n // fixedDirection={isMobile}\n shouldShowBackdrop={isMobile}\n dataTestId=\"info_panel_members_user_role_combobox\"\n ariaLabel={t(\"Common:RoleOfUser\", {\n name: memberName,\n role: selectedOption.label,\n })}\n />\n ) : (",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

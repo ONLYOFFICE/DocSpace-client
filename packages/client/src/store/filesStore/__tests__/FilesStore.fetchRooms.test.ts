@@ -329,6 +329,22 @@ describe("FilesStore rooms requests — Private section scope", () => {
     expect(sentFilter(getRooms).privacyFilter).toBeNull();
   });
 
+  it("Address with another search area", async () => {
+    const store = storeOnRoomsList(true);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+    const filter = store.roomsFilter.clone();
+    filter.searchArea = RoomSearchArea.Any;
+
+    await store.fetchRooms(0, filter);
+
+    expect(sentFilter(getRooms)).toMatchObject({
+      searchArea: RoomSearchArea.Any,
+      privacyFilter: RoomPrivacyFilter.NotPrivate,
+    });
+  });
+
   it("Section not available: the same requests", async () => {
     const getRooms = vi
       .spyOn(api.rooms, "getRooms")
@@ -401,6 +417,28 @@ describe("FilesStore rooms requests — Private section scope", () => {
       searchArea: RoomSearchArea.PrivateRooms,
     });
     expect(store.folders.map((f) => f.id)).toEqual([2, 3, 4]);
+  });
+
+  it.each([
+    ["on", false, true],
+    ["off", true, false],
+  ])("App switched %s", async (_, before, after) => {
+    // A folder of a room is open, so the rooms list itself is not reloaded.
+    openAddress("/rooms/shared/12/filter");
+    const store = storeOnRoomsList(true);
+    const fetchTreeFolders = vi.fn(async () => {});
+    store.treeFoldersStore.fetchTreeFolders = fetchTreeFolders as never;
+    const apps = observable({
+      isPrivateRoomsSectionAvailable: before,
+      isInstalled: () => true,
+    });
+    store.watchPrivateRoomsSection(apps);
+
+    runInAction(() => {
+      apps.isPrivateRoomsSectionAvailable = after;
+    });
+
+    await vi.waitFor(() => expect(fetchTreeFolders).toHaveBeenCalledTimes(1));
   });
 
   it("reloads the open Rooms list when the section availability flips", async () => {

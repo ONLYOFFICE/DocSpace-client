@@ -470,6 +470,20 @@
   gap: 4px 8px;
 }
 
+// The title with a mark of its own (the Beta badge): the two keep together
+// and take the place the title alone has in the other cards.
+.moduleTitleWithBadge {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+
+  .moduleTitle {
+    flex: 0 1 auto;
+  }
+}
+
 .moduleInstalledBadge {
   display: inline-flex;
   align-items: center;

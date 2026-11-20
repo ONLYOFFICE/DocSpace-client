@@ -34,6 +34,7 @@
  */
 
 import type { TFunction } from "i18next";
+import chunk from "lodash/chunk";
 
 import {
   CANDIDATE_KEYS_BATCH_SIZE,
@@ -142,13 +143,8 @@ export async function verifyInvitees({
   const memberIds = invitees.map((member) => member.id);
   // Spec: private-rooms/room-membership, "The key check of invitees is sent in batches"
   const candidateKeys = [];
-  for (let i = 0; i < memberIds.length; i += CANDIDATE_KEYS_BATCH_SIZE) {
-    candidateKeys.push(
-      ...(await getRoomCandidateKeys(
-        roomId,
-        memberIds.slice(i, i + CANDIDATE_KEYS_BATCH_SIZE),
-      )),
-    );
+  for (const batch of chunk(memberIds, CANDIDATE_KEYS_BATCH_SIZE)) {
+    candidateKeys.push(...(await getRoomCandidateKeys(roomId, batch)));
   }
   const displayNames: Record<string, string | undefined> = {};
   for (const member of invitees) displayNames[member.id] = member.displayName;

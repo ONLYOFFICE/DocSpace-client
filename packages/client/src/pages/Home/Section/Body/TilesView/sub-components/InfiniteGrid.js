@@ -66,8 +66,19 @@ const AI_TILE_ROOM_TYPES = [
   RoomsType.KnowledgeRoom,
 ];
 
+const getTileRoomType = (child) =>
+  child?.props?.children?.props?.item?.roomType;
+
 const isAgentTile = (child) =>
-  AI_TILE_ROOM_TYPES.includes(child?.props?.children?.props?.item?.roomType);
+  AI_TILE_ROOM_TYPES.includes(getTileRoomType(child));
+
+// An agent's card holds five rows, a skill set's four and a knowledge
+// base's three. Keep in step with AiProjectTile.module.scss.
+const AI_TILE_HEIGHTS = {
+  [RoomsType.AiProjectRoom]: 290,
+  [RoomsType.InstructionsRoom]: 182,
+  [RoomsType.KnowledgeRoom]: 154,
+};
 
 const Card = ({ children, ...rest }) => {
   const getItemSize = (child) => {
@@ -86,9 +97,9 @@ const Card = ({ children, ...rest }) => {
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
     const templateHeight = 126 + verticalRoomGap;
-    const agentHeight = 290 + verticalRoomGap;
 
-    if (isAgentTile(child)) return agentHeight;
+    if (isAgentTile(child))
+      return AI_TILE_HEIGHTS[getTileRoomType(child)] + verticalRoomGap;
     if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
@@ -146,6 +157,7 @@ const InfiniteGrid = (props) => {
 
   let cards = [];
   const list = [];
+  const aiRoomTypes = new Set();
 
   const addItemToList = (key, cls, clear) => {
     list.push(
@@ -225,6 +237,8 @@ const InfiniteGrid = (props) => {
           addItemToList(listKey, cls, true);
         }
 
+        if (isAgentTile(child)) aiRoomTypes.add(getTileRoomType(child));
+
         const key = child?.props?.children?.props?.id;
 
         const cardKey = key ? `card-item_${key}` : uniqueid("card-item_");
@@ -269,9 +283,11 @@ const InfiniteGrid = (props) => {
   // The grid caches its row heights and measures them again only when this
   // key changes. The folder alone is not enough: Agents, Skill sets and
   // Knowledge bases are one folder narrowed to a room type, and an agent's
-  // row is taller than a room's, so the kinds of rows shown are part of it.
+  // row is taller than a room's, so the kinds of rows shown are part of it -
+  // and the room types of the AI cards, each as high as its own rows.
   const rowKinds = [
     ...new Set(list.map((row) => row.props.className ?? "")),
+    ...aiRoomTypes,
   ].join(" ");
   const rowHeightsKey = `${currentFolderId}:${rowKinds}`;
 

@@ -84,6 +84,25 @@
   }
 }
 
+// A skill set tells four rows and a knowledge base three, not an agent's
+// five: their tiles are as much lower. Keep in step with the card heights of
+// InfiniteGrid.
+.aiProjectTile.skillSetTile {
+  max-height: 184px;
+
+  :global(.bottomContent) {
+    height: 104px;
+  }
+}
+
+.aiProjectTile.knowledgeBaseTile {
+  max-height: 156px;
+
+  :global(.bottomContent) {
+    height: 76px;
+  }
+}
+
 // The labels take the width of the longest one, so none is cut; the values
 // take the rest of the line.
 .wrapper {

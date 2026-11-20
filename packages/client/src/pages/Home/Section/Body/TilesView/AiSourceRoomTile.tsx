@@ -50,7 +50,8 @@ import { useStore } from "SRC_DIR/store/useStore";
 import KnowledgeBaseStatusBadge from "SRC_DIR/components/KnowledgeBaseStatusBadge";
 import { useKnowledgeBaseStatus } from "SRC_DIR/components/KnowledgeBaseStatusBadge/useKnowledgeBaseStatus";
 
-// The frame of the agent tile: the same halves, paddings and rows.
+// The frame of the agent tile: the same halves, paddings and rows, as high
+// as the rows a skill set or a knowledge base tells.
 import styles from "./AiProjectTile.module.scss";
 
 type TBaseTileProps = React.ComponentProps<typeof BaseTile>;
@@ -200,7 +201,9 @@ const AiSourceRoomTile = ({
         </>
       }
       bottomContent={bottomContent}
-      className={styles.aiProjectTile}
+      className={`${styles.aiProjectTile} ${
+        isKnowledgeBase ? styles.knowledgeBaseTile : styles.skillSetTile
+      }`}
       onRoomClick={onRoomClick}
       checkboxContainerRef={checkboxContainerRef}
     />

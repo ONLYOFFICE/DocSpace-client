@@ -507,28 +507,19 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         if (decryptedName) {
           setTitle(decryptedName);
         }
-        const ext = getFileExtension(displayName).toLowerCase();
-        const mimeTypes: Record<string, string> = {
-          jpg: "image/jpeg",
-          jpeg: "image/jpeg",
-          png: "image/png",
-          gif: "image/gif",
-          webp: "image/webp",
-          tif: "image/tiff",
-          tiff: "image/tiff",
-          heic: "image/heic",
-          heif: "image/heif",
-          mp4: "video/mp4",
-          webm: "video/webm",
-          mp3: "audio/mpeg",
-          wav: "audio/wav",
-          ogg: "audio/ogg",
-          pdf: "application/pdf",
-        };
-        const mimeType = mimeTypes[ext] || "application/octet-stream";
+        // Spec: private-rooms/file-operations, "Media preview decrypts on the client"
+        const ext = getFileExtension(displayName);
+        let shown = new Blob([decryptedBlob]);
+        if (isTiff(ext)) {
+          shown = (await decodeTiff(await shown.arrayBuffer())) ?? shown;
+        } else if (isHeic(ext)) {
+          const { default: heic2any } = await import("heic2any");
+          const converted = await heic2any({ blob: shown });
+          if (!Array.isArray(converted)) shown = converted;
+        }
+        if (isStale()) return;
 
-        const typedBlob = new Blob([decryptedBlob], { type: mimeType });
-        setFileUrl(URL.createObjectURL(typedBlob));
+        setFileUrl(URL.createObjectURL(shown));
       } catch (error) {
         if (isStale()) return;
         if (error instanceof Error) {

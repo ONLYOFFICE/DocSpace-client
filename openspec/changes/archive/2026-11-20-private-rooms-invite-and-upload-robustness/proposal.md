@@ -59,9 +59,9 @@ Uploads:
   on without the comparison when the folder listing fails, while the client
   stops; a re-imported container is compared under its opaque name and
   stored under its original one.
-- Re-importing a file downloaded without decryption stores a second file
-  under the same file key and nonce, which the encryption-core requirement
-  "Per-file content key" does not allow for.
+- The encryption-core requirement "Per-file content key" is to hold for a
+  file downloaded without decryption and uploaded again too: it gets a file
+  key and nonce of its own.
 
 ## What Changes
 
@@ -122,10 +122,9 @@ Dependencies:
   re-wraps every member" identical to the main spec. This change adds a
   separate requirement instead of modifying that one, so the two archive in
   any order.
-- `private-rooms-dse3-header-authentication` says that a re-import uploads a
-  container unchanged, version included. With decision 1 a re-import writes
-  the current container version instead; that proposal was revised on
-  2026-11-19.
+- `private-rooms-dse3-header-authentication` had a re-import keep its
+  container version. With decision 1 a re-import writes the current
+  container version; that proposal was revised on 2026-11-19.
 - `private-rooms-release-gate` modifies "Section availability follows the
   E2E rooms app"; this change adds a separate requirement for the folder
   tree and leaves that one alone. Its task 5.2 redefines

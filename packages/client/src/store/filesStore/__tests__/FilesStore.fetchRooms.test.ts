@@ -329,6 +329,22 @@ describe("FilesStore rooms requests — Private section scope", () => {
     expect(sentFilter(getRooms).privacyFilter).toBeNull();
   });
 
+  it("Address with another search area", async () => {
+    const store = storeOnRoomsList(true);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+    const filter = store.roomsFilter.clone();
+    filter.searchArea = RoomSearchArea.Any;
+
+    await store.fetchRooms(0, filter);
+
+    expect(sentFilter(getRooms)).toMatchObject({
+      searchArea: RoomSearchArea.Any,
+      privacyFilter: RoomPrivacyFilter.NotPrivate,
+    });
+  });
+
   it("Section not available: the same requests", async () => {
     const getRooms = vi
       .spyOn(api.rooms, "getRooms")

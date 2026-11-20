@@ -1037,6 +1037,8 @@ test.describe("(private) — create / upload / download / preview", () => {
     await expect(dialog).toBeHidden();
     expect(room.getSessions()).toEqual([]);
     expect(room.getFiles()).toHaveLength(1);
+    // The cancelled file leaves the upload panel: no upload button stays.
+    await expect(page.getByTestId("icon-upload")).toHaveCount(0);
   });
 
   test("Upload with a clashing name: keep both stores the first free copy suffix", async ({

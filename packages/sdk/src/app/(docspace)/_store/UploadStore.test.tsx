@@ -104,6 +104,21 @@ describe("UploadStore", () => {
     expect(store.items[0].abortController.signal.aborted).toBe(true);
   });
 
+  it("Rows stopped by a lock fail, rows of a cancelled clash leave", () => {
+    store.startBatch([
+      { uniqueId: "row-2", fileName: "b.docx", fileSize: 20, folderId: 5 },
+    ]);
+
+    store.setItemError("row-1", "Common:EncryptionLockedUpload");
+    expect(store.errorsCount).toBe(1);
+    expect(store.uploaded).toBe(false);
+
+    store.cancelItem("row-1");
+    store.cancelItem("row-2");
+    expect(store.hasItems).toBe(false);
+    expect(store.totalBytes).toBe(0);
+  });
+
   it("Cancel all with two uploads running", () => {
     store.startBatch([
       { uniqueId: "row-2", fileName: "b.docx", fileSize: 20, folderId: 6 },

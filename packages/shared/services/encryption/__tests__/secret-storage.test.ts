@@ -50,6 +50,7 @@ import {
   registerAutoLockSuspender,
   unregisterAutoLockSuspender,
   suspendAutoLock,
+  subscribeSlotCleared,
 } from "../secret-storage";
 import { SESSION_CACHE_DURATION_MS } from "../types";
 import type { IdentityKeyPair } from "../types";
@@ -139,6 +140,95 @@ describe("A lock wipes only the cache slot", () => {
         fileId: 7,
       }),
     ).resolves.toEqual(dek);
+  });
+});
+
+describe("The shown key state follows the key in memory", () => {
+  let unsubscribe: () => void = () => {};
+  const cleared = vi.fn();
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    SecretStorage.lock();
+    cleared.mockClear();
+    unsubscribe = subscribeSlotCleared(cleared);
+  });
+
+  afterEach(() => {
+    unsubscribe();
+    SecretStorage.lock();
+    vi.useRealTimers();
+  });
+
+  it("Expiry announced at its time", () => {
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(1));
+
+    vi.advanceTimersByTime(SESSION_CACHE_DURATION_MS);
+    expect(cleared).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
+    expect(cleared).toHaveBeenCalledTimes(1);
+    expect(SecretStorage.getCached("user-1")).toBeNull();
+  });
+
+  it("Expiry announced at its time: the names go with the key", () => {
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(1));
+    rememberEncryptedFilename(1, "plan.docx");
+
+    vi.advanceTimersByTime(SESSION_CACHE_DURATION_MS + 1);
+
+    expect(getCachedEncryptedFilename(1)).toBeNull();
+  });
+
+  it("Lock announced", () => {
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(1));
+
+    SecretStorage.lock();
+
+    expect(cleared).toHaveBeenCalledTimes(1);
+    // An empty slot has nothing left to announce.
+    SecretStorage.lock();
+    expect(cleared).toHaveBeenCalledTimes(1);
+    vi.advanceTimersByTime(SESSION_CACHE_DURATION_MS + 1);
+    expect(cleared).toHaveBeenCalledTimes(1);
+  });
+
+  it("User switch announced", () => {
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(1));
+
+    expect(SecretStorage.getCached("user-2")).toBeNull();
+
+    expect(cleared).toHaveBeenCalledTimes(1);
+  });
+
+  it("User switch announced: filling the slot again is not a clearing", () => {
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(1));
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(2));
+
+    expect(cleared).not.toHaveBeenCalled();
+  });
+
+  it("Use moves the expiry", () => {
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(1));
+
+    vi.advanceTimersByTime(SESSION_CACHE_DURATION_MS - 60_000);
+    expect(SecretStorage.getCached("user-1")).not.toBeNull();
+
+    // The first expiry has passed; the use moved it.
+    vi.advanceTimersByTime(120_000);
+    expect(cleared).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(SESSION_CACHE_DURATION_MS - 120_000);
+    expect(cleared).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(cleared).toHaveBeenCalledTimes(1);
+  });
+
+  it("Use moves the expiry: one timer, however many uses", () => {
+    SecretStorage.cacheUnlocked("user-1", makeIdentity(1));
+    for (let i = 0; i < 50; i++) SecretStorage.getCached("user-1");
+
+    expect(vi.getTimerCount()).toBe(1);
   });
 });
 

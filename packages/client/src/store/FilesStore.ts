@@ -1330,7 +1330,13 @@ class FilesStore {
 
     reaction(
       () => appsStore.isPrivateRoomsSectionAvailable,
-      () => refetchRoomsListOnSectionChangeImpl(this),
+      () => {
+        // Spec: private-rooms/sidebar-section, "The folder tree follows a switch of the E2E rooms app"
+        Promise.resolve(this.treeFoldersStore.fetchTreeFolders()).catch(
+          () => {},
+        );
+        refetchRoomsListOnSectionChangeImpl(this);
+      },
     );
   };
 

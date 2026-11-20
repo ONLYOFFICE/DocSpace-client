@@ -2,5 +2,12 @@
   "host": "https://your-bugzilla.example.com",
   "assigned": "you@example.com",
   "keychainService": "bugzilla",
-  "attachDir": ""
+  "attachDir": "",
+  "frontTeam": ["frontend.dev1@example.com", "frontend.dev2@example.com"],
+  "backendTeam": ["backend.dev1@example.com", "backend.dev2@example.com"],
+  "testPortal": {
+    "url": "https://test-portal.example.com",
+    "user": "admin@example.com",
+    "keychainService": "docspace-test-portal"
+  }
 }

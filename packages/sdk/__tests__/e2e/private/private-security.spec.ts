@@ -36,12 +36,12 @@
 // =============================================================================
 // Security & host-sync e2e for (private).
 //
-// STATUS: all tests remain fixme — see per-test blocker comments.
+// The private fixture (./fixtures) seeds the session cookie and the fixture
+// identity; the SDK host fixture (../fixtures/sdkHost) embeds a page in a host
+// frame, records its frame events and calls its frame methods. The cases that
+// are still fixme name what else they need.
 //
-// Common infrastructure blockers:
-//   B. `asc_auth_key` cookie not seeded in the base fixture browser context.
-//      The base.ts fixture does not set cookies; page.context().addCookies() must
-//      be called before goto(), or a `cookieFixture` helper must be added.
+// Remaining infrastructure blockers:
 //   C. CSP headers are set by packages/sdk/src/proxy.ts (the custom server.js),
 //      NOT by createNextTestServer(). The test harness uses createNextTestServer
 //      which bypasses proxy.ts entirely — CSP headers are absent on responses.
@@ -50,9 +50,24 @@
 //   F. Multi-context (broadcast-lock): Playwright's `browser.newContext()` is
 //      available but the base fixture creates a single page; a two-context test
 //      needs a custom fixture that creates two pages in the same worker.
+//   G. Slowed transfers: the upload and download cases need MSW handlers that
+//      hold a chunk long enough to lock in between.
 // =============================================================================
 
-import { test } from "../fixtures/base";
+import type { Page } from "@playwright/test";
+
+import { privateRoomListHandler } from "@docspace/shared/__mocks__/handlers";
+
+import {
+  callSdkMethod,
+  openInSdkHost,
+  readSdkEvents,
+} from "../fixtures/sdkHost";
+import { expect, test, type TMockBoth } from "./fixtures";
+
+const ROOM_ID = 7001;
+const ROOM_TITLE = "Private Test Room";
+const OPT_IN = "?privateRooms=true";
 
 test.describe("(private) — security headers (§17.3)", () => {
   test.fixme(
@@ -88,7 +103,7 @@ test.describe("(private) — lock cleanup (§17.3)", () => {
   test.fixme(
     "abort-on-lock-upload: lock mid-upload aborts in-flight uploads within 500ms",
     async () => {
-      // BLOCKER A + B:
+      // BLOCKER G (the session and the unlock are in place):
       //   - Needs `asc_auth_key` cookie + identity unlock + an active upload.
       //   - The upload chunk endpoint (POST /files/{folderId}/session/{id}/upload)
       //     must be slowed down (introduce a deliberate delay in the MSW handler)
@@ -109,7 +124,7 @@ test.describe("(private) — lock cleanup (§17.3)", () => {
   test.fixme(
     "abort-on-lock-download: lock mid-download aborts the decrypt pipeline",
     async () => {
-      // BLOCKER A + B:
+      // BLOCKER G (the session and the unlock are in place):
       //   - Same auth/unlock prerequisites as abort-on-lock-upload.
       //   - The download chunk is streamed via ReadableStream; the abort signal
       //     from abortAllCryptoOperations cancels the stream controller.
@@ -126,7 +141,7 @@ test.describe("(private) — lock cleanup (§17.3)", () => {
   test.fixme(
     "401-mid-upload: a 401 triggers lock + abortAll (+ BE session abort once available)",
     async () => {
-      // BLOCKER A + B:
+      // BLOCKER G (the session and the unlock are in place):
       //   - All unlock + cookie blockers.
       //   - The axios interceptor in the encryption layer calls lock() + abortAll()
       //     on a 401 response. To trigger this: configure the upload chunk handler
@@ -144,7 +159,7 @@ test.describe("(private) — multi-tab & storage (§17.3)", () => {
   test.fixme(
     "broadcast-lock: lock in tab A locks tab B (same user) within 200ms",
     async () => {
-      // BLOCKER B + F:
+      // BLOCKER F:
       //   - Needs two browser contexts (tab A and tab B) both authenticated with
       //     the same `asc_auth_key` cookie (same userId).
       //   - The BroadcastChannel name is `docspace-encryption-lock:${userId}`.
@@ -163,7 +178,7 @@ test.describe("(private) — multi-tab & storage (§17.3)", () => {
   test.fixme(
     "broadcast-user-scope: User A lock does NOT lock User B's tab",
     async () => {
-      // BLOCKER B + F:
+      // BLOCKER F:
       //   - Requires two browser contexts with DIFFERENT `asc_auth_key` values
       //     (different userId). Since BroadcastChannel is same-origin, two pages
       //     from different contexts but the same origin WILL receive each other's
@@ -180,7 +195,7 @@ test.describe("(private) — multi-tab & storage (§17.3)", () => {
   test.fixme(
     "auto-lock-tamper: an externally-written non-preset auto-lock value falls back to default",
     async () => {
-      // BLOCKER B:
+      // No blocker left; not part of the SDK address change:
       //   - Needs `asc_auth_key` cookie + page navigation.
       //   - Before navigating, seed a bogus localStorage value via
       //     page.addInitScript() or page.evaluate():
@@ -200,7 +215,7 @@ test.describe("(private) — multi-tab & storage (§17.3)", () => {
   test.fixme(
     "tofu-migration: existing v1 TOFU IDB entries do not raise spurious KeyChange dialogs",
     async () => {
-      // BLOCKER A + B:
+      // No blocker left; not part of the SDK address change:
       //   - All unlock + cookie blockers.
       //   - v1 TOFU entries are stored in IndexedDB under a different schema than
       //     v2. Seeding v1 entries requires page.evaluate() to open the IDB and
@@ -219,56 +234,114 @@ test.describe("(private) — multi-tab & storage (§17.3)", () => {
 });
 
 test.describe("(private) — host frame-bridge sync (P2)", () => {
-  test.fixme(
-    "onNavigate: switching to archive inside the iframe updates the host ?section",
-    async () => {
-      // BLOCKER B + E (P2 feature — usePrivateFrameBridge not yet fully wired):
-      //   - Needs `asc_auth_key` cookie.
-      //   - The frame-bridge (usePrivateFrameBridge) posts postMessage events to
-      //     the parent window when the iframe router navigates. This requires
-      //     embedding /sdk/private in a parent <iframe> inside the Playwright page.
-      //   - Implementation: use page.setContent() to create a parent HTML page
-      //     with an <iframe src="/sdk/private">, then navigate inside the iframe
-      //     to /sdk/private/archive, and listen for postMessage on the parent.
-      //   - The bridge is a P2 feature tracked separately; this test should be
-      //     enabled once usePrivateFrameBridge is implemented and merged.
-      //
-      // Embed /sdk/private in a parent page, navigate to /sdk/private/archive
-      // inside the iframe → parent receives postMessage onEventReturn /
-      // onNavigate with section:"archive". (usePrivateFrameBridge.)
-    },
-  );
+  test("onNavigate: switching to archive inside the iframe updates the host ?section", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    mockBoth(privateRoomListHandler(port, { roomId: ROOM_ID, title: ROOM_TITLE }));
+    await openInSdkHost(page, baseUrl, `/sdk/private${OPT_IN}`, {
+      privateRooms: true,
+    });
+    await expect
+      .poll(() => readSdkEvents(page, "onNavigate"))
+      .toContainEqual(expect.objectContaining({ section: "rooms" }));
 
-  test.fixme(
-    "navigateSection: parent posting {section:'archive'} routes the iframe without remount",
-    async () => {
-      // BLOCKER B + E (P2 feature — usePrivateFrameBridge not yet fully wired):
-      //   - Same as onNavigate above.
-      //   - The "without remount" assertion: check that the iframe's contentWindow
-      //     identity (or a sentinel value set in page.addInitScript) persists
-      //     across the navigation. In Playwright: record iframe.contentWindow before
-      //     postMessage and assert it equals iframe.contentWindow after navigation.
-      //   - Requires the SDK router to use router.replace() (not a full reload)
-      //     when receiving the navigateSection postMessage.
-      //
-      // Parent posts navigateSection → iframe router.replace('/private/archive')
-      // WITHOUT reloading the SDK (unlocked identity preserved). Asserts the
-      // iframe element is not re-created and the encryption session survives.
-    },
-  );
+    await callSdkMethod(page, "navigateSection", { section: "archive" });
 
-  test.fixme(
-    "onAppReady fires exactly once for the whole (private) group",
-    async () => {
-      // BLOCKER B + E (P2 feature):
-      //   - Same frame-bridge prerequisites as above.
-      //   - Count postMessage events with type === "onAppReady" across multiple
-      //     in-iframe navigations (list → room → archive). Assert count === 1.
-      //   - The bridge must be mounted at the persistent shell level (layout.tsx)
-      //     so it survives route changes within the (private) group.
-      //
-      // Navigate list → room → archive within the iframe; the parent receives
-      // onAppReady only once (bridge mounted at the persistent shell level).
-    },
-  );
+    await expect
+      .poll(async () => (await readSdkEvents(page, "onNavigate")).at(-1))
+      .toMatchObject({ section: "archive", pathname: "/sdk/private/archive" });
+  });
+
+  const embedPrivateList = async (
+    page: Page,
+    baseUrl: string,
+    port: string,
+    mockBoth: TMockBoth,
+  ) => {
+    mockBoth(privateRoomListHandler(port, { roomId: ROOM_ID, title: ROOM_TITLE }));
+    await openInSdkHost(page, baseUrl, `/sdk/private${OPT_IN}`, {
+      privateRooms: true,
+    });
+    const frame = page.frame({ name: "frameDocSpace__#ds-frame" });
+    if (!frame) throw new Error("The SDK frame is not on the host page");
+    return frame;
+  };
+
+  const lastNavigation = async (page: Page) =>
+    (await readSdkEvents(page, "onNavigate")).at(-1);
+
+  test("navigateSection: parent posting {section:'archive'} routes the iframe without remount", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const frame = await embedPrivateList(page, baseUrl, port, mockBoth);
+    await frame.evaluate(() => {
+      (window as unknown as { __sameDocument: boolean }).__sameDocument = true;
+    });
+
+    expect(
+      await callSdkMethod(page, "navigateSection", { section: "archive" }),
+    ).toEqual({ section: "archive" });
+
+    await expect
+      .poll(() => lastNavigation(page))
+      .toMatchObject({ section: "archive" });
+    expect(new URL(frame.url()).pathname).toBe("/sdk/private/archive");
+    expect(
+      await frame.evaluate(
+        () => (window as unknown as { __sameDocument?: boolean }).__sameDocument,
+      ),
+    ).toBe(true);
+    await expect(page.locator("iframe")).toHaveCount(1);
+  });
+
+  test("Navigation after a search of the private rooms list", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    mockBoth(privateRoomListHandler(port, { roomId: ROOM_ID, title: ROOM_TITLE }));
+    await openInSdkHost(
+      page,
+      baseUrl,
+      `/sdk/private${OPT_IN}&filterValue=Board%20plans&search=Board`,
+      { privateRooms: true },
+    );
+    await expect
+      .poll(() => lastNavigation(page))
+      .toMatchObject({ section: "rooms" });
+
+    await callSdkMethod(page, "navigateSection", { section: "archive" });
+    await expect
+      .poll(() => lastNavigation(page))
+      .toMatchObject({ section: "archive" });
+
+    const navigations = await readSdkEvents(page, "onNavigate");
+    expect(navigations.length).toBeGreaterThan(1);
+    for (const navigation of navigations) {
+      expect(JSON.stringify(navigation)).not.toContain("Board");
+    }
+  });
+
+  test("onAppReady fires exactly once for the whole (private) group", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await embedPrivateList(page, baseUrl, port, mockBoth);
+
+    for (const section of ["archive", "rooms", "archive"]) {
+      await callSdkMethod(page, "navigateSection", { section });
+      await expect.poll(() => lastNavigation(page)).toMatchObject({ section });
+    }
+
+    expect(await readSdkEvents(page, "onAppReady")).toHaveLength(1);
+  });
 });

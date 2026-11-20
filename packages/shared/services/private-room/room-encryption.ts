@@ -48,7 +48,10 @@ import { wipeDek } from "../encryption/file-keys";
 import {
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
-import { verifyMemberKey } from "./member-key-verification";
+import {
+  type SkippedMemberKey,
+  verifyMemberKey,
+} from "./member-key-verification";
 import { loadRoomMemberKeys, selectMemberKeys } from "./room-member-keys";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
@@ -68,7 +71,15 @@ export interface FileEncryptionOpResult {
   error?: string;
 }
 
-export type SkippedMemberReason = "no-key" | "key-mismatch-refused";
+export type SkippedMemberReason = "no-key" | SkippedMemberKey["reason"];
+
+/**
+ * A key that could not be checked or is unusable: not a refusal, so the
+ * member is left waiting for the files instead of being reported as skipped.
+ */
+// Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+export const waitsForAccess = (reason: SkippedMemberReason) =>
+  reason === "key-unchecked" || reason === "key-unusable";
 
 export interface SkippedRoomMember {
   id: string;
@@ -296,7 +307,10 @@ async function wrapFilesForMembers(
         ...newKeys,
       ];
       const written = await setFileEncryptionKeys(fileId, allKeys);
-      for (const userId of written?.skippedUserIds ?? []) {
+      const notWrapped = recipients
+        .filter((r) => !newKeys.some((k) => k.userId === r.userId))
+        .map((r) => r.userId);
+      for (const userId of [...notWrapped, ...(written?.skippedUserIds ?? [])]) {
         const id = String(userId);
         if (!recipients.some((r) => String(r.userId) === id)) continue;
         notStoredFileIds.set(id, [...(notStoredFileIds.get(id) ?? []), fileId]);
@@ -321,7 +335,7 @@ async function wrapFilesForMembers(
   const skippedMembers: SkippedRoomMember[] = [];
   for (const m of validMembers) {
     const reason = skippedReasons.get(m.id);
-    if (reason) {
+    if (reason && !waitsForAccess(reason)) {
       skippedMembers.push({
         id: m.id,
         displayName: m.displayName,
@@ -338,7 +352,12 @@ async function wrapFilesForMembers(
   const missingFileIdsByMember: Record<string, number[]> = {};
   for (const m of validMembers) {
     if (String(m.id) === String(currentUserId)) continue;
-    if (skippedReasons.has(m.id)) continue;
+    const reason = skippedReasons.get(m.id);
+    if (reason && waitsForAccess(reason)) {
+      missingFileIdsByMember[m.id] = [...fileIds];
+      continue;
+    }
+    if (reason) continue;
     const missing = [
       ...failedFileIds,
       ...(notStoredFileIds.get(String(m.id)) ?? []),
@@ -540,7 +559,13 @@ export async function backfillEncryptedFilesForRoomMembers(
       ];
       try {
         const written = await setFileEncryptionKeys(fileId, allKeys);
-        for (const userId of written?.skippedUserIds ?? []) {
+        const notWrapped = recipients
+          .filter((r) => !newKeys.some((k) => k.userId === r.userId))
+          .map((r) => r.userId);
+        for (const userId of [
+          ...notWrapped,
+          ...(written?.skippedUserIds ?? []),
+        ]) {
           const id = String(userId);
           if (!recipients.some((r) => String(r.userId) === id)) continue;
           missingFileIdsByMember[id] = [

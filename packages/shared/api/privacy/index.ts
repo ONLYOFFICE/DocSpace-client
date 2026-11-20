@@ -78,6 +78,12 @@ export async function getRoomEncryptionKeys(roomId: string | number) {
   return res ?? [];
 }
 
+/**
+ * At most this many users per request: their ids travel in the query string,
+ * which the portal's proxy caps.
+ */
+export const CANDIDATE_KEYS_BATCH_SIZE = 40;
+
 export async function getRoomCandidateKeys(
   roomId: string | number,
   userIds: string[],

@@ -244,6 +244,37 @@ describe("<Badges />", () => {
 		});
 	});
 
+	describe("Convert badge", () => {
+		const mustConvert = {
+			...defaultItem,
+			viewAccessibility: { MustConvert: true } as never,
+		};
+
+		it("Convert badge of an encrypted file", () => {
+			const { container } = render(
+				<Badges {...defaultProps} item={{ ...mustConvert, encrypted: true }} />,
+			);
+
+			expect(container.querySelector(".can-convert")).not.toBeInTheDocument();
+		});
+
+		it("Convert badge of a file that is not encrypted", async () => {
+			const setConvertDialogVisible = vi.fn();
+			const { container } = render(
+				<Badges
+					{...defaultProps}
+					item={mustConvert}
+					setConvertDialogVisible={setConvertDialogVisible}
+				/>,
+			);
+
+			const badge = container.querySelector(".can-convert");
+			expect(badge).toBeInTheDocument();
+			await userEvent.click(badge as Element);
+			expect(setConvertDialogVisible).toHaveBeenCalledTimes(1);
+		});
+	});
+
 	describe("Version badge", () => {
 		const versionedItem = { ...defaultItem, versionGroup: 3 };
 

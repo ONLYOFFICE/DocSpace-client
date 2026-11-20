@@ -104,6 +104,7 @@ const AiAgentView = () => {
     knowledgeId,
     resultId,
     isErrorAIAgentNotAvailable,
+    agentRoomId,
   } = aiRoomStore;
 
   const { user } = userStore;
@@ -147,6 +148,7 @@ const AiAgentView = () => {
   const hasNoAccessToChat = !canUseChat && !loadingStore.showBodyLoader;
   const shouldRenderChat =
     currentTab === "chat" &&
+    agentRoomId === roomId &&
     !hasNoAccessToChat &&
     (!isErrorAIAgentNotAvailable || loadingStore.showBodyLoader);
 

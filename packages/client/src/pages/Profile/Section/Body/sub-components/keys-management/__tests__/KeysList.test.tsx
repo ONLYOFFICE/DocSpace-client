@@ -57,7 +57,7 @@ const keyNew = {
 
 type ListProps = React.ComponentProps<typeof KeysList>;
 
-const renderList = (keys: never[], props: Partial<ListProps> = {}) => {
+const renderList = (keys: never[] | null, props: Partial<ListProps> = {}) => {
   const onDelete = vi.fn();
   const onExport = vi.fn();
   const onRotate = vi.fn();
@@ -120,6 +120,27 @@ describe("Key status badges are readable", () => {
     );
     // The kit forces white on a badge text without a colour of its own.
     expect(badge).toHaveAttribute("data-color", KEY_STATUS_BADGE_COLORS.noKey.text);
+  });
+});
+
+describe("An unknown key list is not shown as no key", () => {
+  it("List loading", () => {
+    renderList(null);
+
+    expect(screen.getByTestId("keys_list_loading")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    expect(screen.queryByText("Common:NoKey")).not.toBeInTheDocument();
+    expect(screen.queryByText("Common:NoEncryptionKey")).not.toBeInTheDocument();
+  });
+
+  it("List empty", () => {
+    renderList([]);
+
+    expect(screen.getByText("Common:NoKey")).toBeInTheDocument();
+    expect(screen.getByText("Common:NoEncryptionKey")).toBeInTheDocument();
+    expect(screen.queryByTestId("keys_list_loading")).not.toBeInTheDocument();
   });
 });
 
@@ -262,5 +283,33 @@ describe("Key fingerprint is shown in groups", () => {
     expect(groups).toHaveLength(8);
     expect(groups.join("")).toBe(FINGERPRINT);
     for (const group of groups) expect(group).toHaveLength(8);
+  });
+});
+
+describe("Keys management shows whether the key is locked", () => {
+  it("Locked key: the heading names the state and says what unlocking gives", () => {
+    renderList([keyNew], { keyState: "locked" });
+
+    expect(screen.getByTestId("key_lock_state")).toHaveTextContent(
+      "Common:KeyLocked",
+    );
+    expect(screen.getByTestId("key_locked_note")).toHaveTextContent(
+      "Common:PrivateRoomLockedBarText",
+    );
+  });
+
+  it("Unlocked key: the state is named and nothing is asked", () => {
+    renderList([keyNew], { keyState: "unlocked" });
+
+    expect(screen.getByTestId("key_lock_state")).toHaveTextContent(
+      "Common:KeyUnlocked",
+    );
+    expect(screen.queryByTestId("key_locked_note")).toBeNull();
+  });
+
+  it("User without a key: no state beside the heading", () => {
+    renderList([], { keyState: undefined });
+
+    expect(screen.queryByTestId("key_lock_state")).toBeNull();
   });
 });

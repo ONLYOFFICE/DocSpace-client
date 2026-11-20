@@ -24,11 +24,15 @@ The private layout SHALL wrap its pages in the encryption provider together with
 - **THEN** the SDK's own key-change dialog asks the user to accept or refuse
 
 ### Requirement: Shell side effects
-The private layout SHALL run the shell effects: lock state synchronised across tabs, in-flight operations aborted on lock, encrypted file names recovered after unlock, the backfill sweep that re-wraps every member for a room manager once per room and page session, a device-setup hint shown only once the user's key list has loaded and is empty, a one-per-session ghost-state toast, a gate reset after unlock, and a disclosure banner.
+The private layout SHALL run the shell effects: the locks of the user's other pages that every page follows (key-management, "A lock reaches every tab of the user"), in-flight operations aborted on lock, encrypted file names recovered after unlock, the backfill sweep re-wrapping every member for a room manager once per room and page session, a device-setup hint only once the user's key list loaded empty, a one-per-session ghost-state toast, a gate reset after unlock, and a disclosure banner.
 
 #### Scenario: Lock in another tab
-- **WHEN** the identity is locked in one SDK tab
-- **THEN** other SDK tabs lock as well and abort their encrypted operations
+- **WHEN** the identity is locked by Lock now, a key change or a logout in another page of the user, an SDK page or a client page
+- **THEN** every SDK page of the user locks as well and aborts its encrypted operations, and the remembered record is left to the page that locked
+
+#### Scenario: Idle lock in another tab
+- **WHEN** another SDK page of the user locks after its idle time or because it was hidden
+- **THEN** this SDK page stays unlocked
 
 #### Scenario: Unlock recovers names
 - **WHEN** the identity becomes unlocked on a private page
@@ -43,7 +47,7 @@ The private layout SHALL run the shell effects: lock state synchronised across t
 - **THEN** no device-setup hint is shown until the list has loaded and contains no key for this device
 
 ### Requirement: Forgot passphrase and device setup link out to the client
-The SDK SHALL NOT offer key recovery or key management itself, and SHALL offer key generation only where creating a private room needs a key; the forgot-passphrase link and the device-setup hint SHALL open the client's keys-management profile page in a new tab, and SHALL explain in place when the client page is not reachable from the host.
+The SDK SHALL NOT offer key recovery or key management itself, and SHALL offer key generation only where creating a private room needs a key; the forgot-passphrase link, the device-setup hint and the reset link of the ghost-state toast SHALL open the client's keys-management profile page on the origin the SDK is served from, in a new tab, and SHALL explain in place when that page cannot be opened.
 
 #### Scenario: Forgot passphrase
 - **WHEN** the user clicks the forgot link in the SDK passphrase modal
@@ -54,15 +58,27 @@ The SDK SHALL NOT offer key recovery or key management itself, and SHALL offer k
 - **THEN** a hint pointing to the client's keys-management page is shown
 
 #### Scenario: Client not reachable
-- **WHEN** the host embeds the SDK from an origin where the client application is not available
+- **WHEN** the keys-management page cannot be opened from the frame, the browser refusing the new tab
 - **THEN** the hint explains that keys are managed in the DocSpace profile (Common:EncryptionKeysManagedInProfile) instead of opening a broken link
 
+#### Scenario: Link address
+- **WHEN** the forgot link, the device-setup hint or the reset link of the ghost-state toast is opened
+- **THEN** the page opened is the keys-management page on the origin the SDK is served from
+
+#### Scenario: Reset link of the ghost-state toast
+- **WHEN** the user clicks the reset link of the ghost-state toast
+- **THEN** the toast closes and the keys-management page opens in a new tab, or Common:EncryptionKeysManagedInProfile is shown when it cannot be opened
+
 ### Requirement: Encrypted file actions shared with the generic views
-The SDK SHALL provide encrypted download, zip download, copy, move and duplicate through a shared encrypted-actions context so the generic file views use the same handlers as the private pages.
+The SDK SHALL provide encrypted download, zip download, copy, move and duplicate through a shared encrypted-actions context so the generic file views use the same handlers as the private pages. A selection of one encrypted file SHALL be saved as that file, as from its own menu; only two or more encrypted files are saved as a zip.
 
 #### Scenario: Download from a private room
 - **WHEN** the user downloads one or more encrypted files
 - **THEN** each file is decrypted in the browser before it is saved, with a zip for several files
+
+#### Scenario: One encrypted file selected
+- **WHEN** exactly one encrypted file is selected and downloaded from the header menu
+- **THEN** the decrypted file itself is saved under its decrypted name, and no archive is built
 
 ### Requirement: Mixed and folder downloads refused
 The SDK SHALL refuse a download that mixes encrypted and non-encrypted items with Common:PrivateRoomMixedDownloadNotSupported, and SHALL refuse any download of a folder inside a private room, alone or in a selection, with Common:PrivateRoomFolderDownloadNotSupported before any request. It SHALL NOT offer the download of a private room. Download without decryption is not affected.
@@ -259,7 +275,7 @@ The SDK SHALL treat a folder as inside a private room when any folder on its pat
 - **THEN** Common:ArchiveEmptyScreenHeader is shown, and its action opens the private rooms list rather than the other rooms
 
 ### Requirement: Private rooms only through the private pages
-The SDK SHALL list and open private rooms only on its private pages. Its generic room lists, active and archived, SHALL leave private rooms out, and a generic room address of a private room SHALL lead to the private page of that room. No generic room flow (upload, member removal, AI chat) SHALL run on a private room. A private address of a room without the private setting SHALL lead to its generic room page.
+The SDK SHALL list and open private rooms and their contents only on its private pages. Its generic room lists, active and archived, and its selectors SHALL leave private rooms out; any other SDK address or in-place navigation that names a private room or a folder inside one SHALL lead to the private page of that room. No generic flow (search, upload, creation, member removal, AI chat) SHALL run there. A private address of a room without the private setting SHALL lead to its generic room page.
 
 #### Scenario: Generic rooms list
 - **WHEN** the generic rooms list or its archive is opened in the SDK
@@ -276,6 +292,34 @@ The SDK SHALL list and open private rooms only on its private pages. Its generic
 #### Scenario: Non-private room at a private address
 - **WHEN** a room without the private setting is opened at its private address
 - **THEN** its generic room page is shown, and no encrypted upload, create or copy runs on it
+
+#### Scenario: Folder of a private room opened in personal files
+- **WHEN** the personal files page is opened with the id of a private room or of a folder inside one
+- **THEN** the private page of that room is shown with that folder open, or the not-available view when the host has not enabled private rooms or the page is served under OAuth, and no generic listing, search field, create tile, upload entry or AI entry is rendered for it
+
+#### Scenario: Private folder named to the file selector
+- **WHEN** the file selector is opened with the id of a private room or of a folder inside one
+- **THEN** the not-available view is shown, nothing of the folder is listed and nothing can be picked or sent to the host
+
+#### Scenario: Uploader aimed at a private folder
+- **WHEN** the uploader is opened with a private room or a folder inside one as its target
+- **THEN** the not-available view is shown, no file can be picked or dropped, and no upload session or folder is requested
+
+#### Scenario: Room selector
+- **WHEN** the room selector opens or searches its list
+- **THEN** no private room is listed or offered
+
+#### Scenario: Chat opened with a private scope or file
+- **WHEN** the chat page is opened with a private room or a folder inside one as its scope, or with an encrypted file to attach
+- **THEN** the not-available view is shown, no chat is mounted, nothing is attached or uploaded, and the host still receives `onAppReady`
+
+#### Scenario: Room that is not an AI agent opened as an agent
+- **WHEN** the AI agent page is opened with the id of a room that is not an AI agent room, a private room included
+- **THEN** the agent-not-available view is shown, the room's contents are not requested and no chat is offered
+
+#### Scenario: Folder of a private room reached on a generic page
+- **WHEN** a generic page navigates in place to a private room or a folder inside one, by opening a folder or the location of a file
+- **THEN** the private page of that room is shown with that folder open, or the not-available view, and the generic page requests no listing of the folder
 
 ### Requirement: Moves stay inside the private room
 The SDK SHALL offer only folders of the same private room as destinations of a move of its items, and SHALL let the server move files and folders within the room without decrypting them. A move into another private room SHALL be refused with Common:CannotMoveToAnotherPrivateRoom. The decryption warning SHALL appear only in the copy dialog.
@@ -355,7 +399,7 @@ The SDK SHALL refuse folder trees dropped into a private room or onto one of its
 - **THEN** they are uploaded encrypted into that folder
 
 ### Requirement: Menu entries withheld for encrypted items
-The SDK SHALL withhold for an encrypted file, in row, header and selection menus, the entries the client withholds: rename, favorites, version entries, download-as, conversion, AI and integrator custom actions, and open and preview when the file opens only after a conversion; and for a folder inside a private room: copy, duplicate and favorites. It SHALL offer download without decryption in the row and header menus.
+The SDK SHALL withhold for an encrypted file, in row, header and selection menus, the entries the client withholds: rename, favorites, version entries, download-as, conversion, AI and integrator custom actions, and open and preview when the file opens only after a conversion; and for a folder inside a private room, also within a selection and whatever rights it reports: copy, duplicate and favorites. It SHALL offer download without decryption in the row and header menus.
 
 #### Scenario: Header menu of an encrypted file
 - **WHEN** a single encrypted file is selected and the header menu is opened
@@ -364,6 +408,14 @@ The SDK SHALL withhold for an encrypted file, in row, header and selection menus
 #### Scenario: Header menu of a folder inside a private room
 - **WHEN** a folder inside a private room is open and its header menu is opened
 - **THEN** no copy, duplicate or favorites entry is shown
+
+#### Scenario: Selection holding a folder of a private room
+- **WHEN** a folder of a private room is ticked, alone or with encrypted files, and the selection menu is opened, whatever Copy right the folder reports
+- **THEN** no copy entry is offered
+
+#### Scenario: Selection of encrypted files only
+- **WHEN** only encrypted files of a private room are ticked and the selection menu is opened
+- **THEN** copy is offered although the server reports no Copy right for the files
 
 #### Scenario: Integrator action on an encrypted file
 - **WHEN** the host registered custom context actions and the user opens the menu of an encrypted file
@@ -470,7 +522,7 @@ The SDK SHALL NOT show the Share tab of the info panel for a private room, a fol
 - **THEN** the tabs do not include Share
 
 ### Requirement: No search in private rooms
-The SDK SHALL NOT offer search inside a private room, active or archived, and SHALL NOT send a search text for a private room to the server. Opening the location of an encrypted file SHALL NOT put its name in a search, the address or a message to the host.
+The SDK SHALL NOT offer search inside a private room, active or archived, nor in the copy and move pickers of its private pages, and SHALL NOT send a search text for a private room to the server. Opening the location of an encrypted file, on any page, SHALL NOT put its name in a search, the address or a message to the host.
 
 #### Scenario: Private room opened
 - **WHEN** a private room or a folder inside it is open
@@ -480,8 +532,16 @@ The SDK SHALL NOT offer search inside a private room, active or archived, and SH
 - **WHEN** the user opens the location of an encrypted file from the info panel history
 - **THEN** its folder opens, and the file name is not sent to the server, written to the address or passed to the host
 
+#### Scenario: Copy or move picker on a private page
+- **WHEN** the copy or the move picker is opened on a private page
+- **THEN** the picker shows no search field in any folder and none of its requests carries a search text
+
+#### Scenario: Open location of an encrypted file on a generic page
+- **WHEN** the location of an encrypted file is opened from a generic page
+- **THEN** the file name is not sent to the server, written to the address or passed to the host
+
 ### Requirement: No upload or creation without the create right
-The SDK SHALL NOT start an upload or a file creation from any entry, hotkeys and drops onto a row included, in a private room folder where the user cannot create files, an archived private room included, and SHALL NOT send the names of picked or dropped files to the server for it.
+The SDK SHALL NOT start an upload or a file creation from any entry, hotkeys and drops onto a row included, in a private room folder where the user cannot create files, nor anywhere in an archived private room whatever rights it reports, and SHALL NOT send the names of picked or dropped files to the server for it. A private page SHALL upload and create only through its encrypted paths, never through the generic ones.
 
 #### Scenario: Upload hotkey in an archived room
 - **WHEN** the user presses the upload hotkey in an archived private room
@@ -494,6 +554,14 @@ The SDK SHALL NOT start an upload or a file creation from any entry, hotkeys and
 #### Scenario: File dropped without the create right
 - **WHEN** a user who cannot create files in a private room folder drops a file onto it or onto one of its rows
 - **THEN** no upload starts, no unlock prompt opens and no request carries a file name
+
+#### Scenario: Archived room whatever its rights
+- **WHEN** an archived private room is open and the rights reported for it include creation
+- **THEN** no upload or create entry is offered, the upload and create hotkeys do nothing, and no request carries a file name
+
+#### Scenario: Private page without an encrypted path
+- **WHEN** an upload or a creation is requested on a private page that has no encrypted upload or create path for the open folder
+- **THEN** nothing is uploaded or created and no request carries a file name
 
 ### Requirement: Files list follows encrypted operations
 The SDK SHALL list a file stored by an encrypted upload, duplicate or copy in the open folder as soon as it is stored, under its decrypted name, without waiting for a socket event or a navigation.
@@ -626,3 +694,85 @@ The SDK SHALL show Common:PrivateRoomPanelDescription under Common:PrivateRoomTi
 #### Scenario: Creating a private room
 - **WHEN** the SDK's create dialog of a private room is open
 - **THEN** the private block shows Common:PrivateRoomTitle and Common:PrivateRoomPanelDescription and no link
+
+### Requirement: SDK saved names follow the client rules
+The SDK SHALL name a decrypted file it saves, and each entry of a decrypted archive it saves, by the rules of the client: "Saved names are plain file names" and "Archive directories come from the folder tree" of private-rooms/file-operations, so the same file is saved under the same name from either.
+
+#### Scenario: Name with separators in an SDK archive
+- **WHEN** two encrypted files are downloaded together in the SDK and one decrypts to a name holding "/"
+- **THEN** that file is one entry at the root of the archive, with the separator saved as "_"
+
+#### Scenario: Names that differ only in case in an SDK archive
+- **WHEN** two encrypted files that decrypt to "Budget.xlsx" and "budget.xlsx" are downloaded together in the SDK
+- **THEN** the archive holds "Budget.xlsx" and "budget (1).xlsx"
+
+#### Scenario: Single file saved from the SDK
+- **WHEN** one encrypted file whose decrypted name holds a control character is downloaded in the SDK
+- **THEN** the browser is asked to save it under the name without that character
+
+### Requirement: Private addresses are decided before anything is listed
+The SDK SHALL decide whether a folder named by an address or reached by navigation lies in a private room from the room on the folder's own path, whatever the folder's own private field says, with one request that carries only the folder's id. It SHALL request the folder's contents only once the folder is known to lie outside private rooms, and SHALL send no search text before. A folder whose path cannot be read SHALL NOT be listed.
+
+#### Scenario: Folder named with a search text
+- **WHEN** a generic SDK address names a folder inside a private room and carries a search text
+- **THEN** the only request made for the folder carries its id and no search text, no listing of the folder is requested, and the address of the private page carries no search text
+
+#### Scenario: Room of the folder cannot be read
+- **WHEN** the path of the folder named by a generic SDK address cannot be loaded
+- **THEN** no listing of the folder is rendered and the page shows its not-found view
+
+#### Scenario: Folder outside private rooms
+- **WHEN** a generic SDK address names a folder of a room without the private setting
+- **THEN** the folder is listed on the generic page with the address's sorting, filters and search, as before
+
+### Requirement: Frame events carry no item of a private room
+The SDK SHALL NOT pass a private room, a folder inside one or an encrypted file to the host in a frame event, nor a search or filter text typed on a private page; the navigation event of the private pages SHALL carry only the section and the page address without such text. An encrypted file opened while the host subscribed to `onFileManagerClick` SHALL be opened by the SDK itself, as for `onEditorOpen`.
+
+#### Scenario: Host subscribed to file clicks, encrypted file
+- **WHEN** a host that subscribed to `onFileManagerClick` embeds the SDK and a user opens an encrypted file of a private room
+- **THEN** no `onFileManagerClick` event is sent, no data of the file reaches the host, and the SDK opens the file itself
+
+#### Scenario: Host subscribed to file clicks, file not encrypted
+- **WHEN** the same host embeds the SDK and a user opens a file that is not encrypted
+- **THEN** the `onFileManagerClick` event is sent with the file and the SDK opens nothing
+
+#### Scenario: Navigation after a search of the private rooms list
+- **WHEN** the user searches or filters the private rooms list in an embedded SDK
+- **THEN** each navigation event the host receives carries the section and the page address without the search text or any filter value
+
+### Requirement: SDK does not send an encrypted file to conversion
+The SDK SHALL NOT start a server conversion of an encrypted file whose format must be converted, from a double click, the Enter key or any other open action, and SHALL show Common:PrivateRoomConvertNotSupported instead, as the client does. The conversion dialog SHALL NOT open for such a file. This refusal SHALL come before the check of the Document Server's encrypted-editing capability, as in the client.
+
+#### Scenario: Encrypted file that must be converted opened
+- **WHEN** the user double-clicks, or presses Enter on, an encrypted file of a private room whose format must be converted, while the Document Server can open encrypted files
+- **THEN** Common:PrivateRoomConvertNotSupported is shown, no conversion dialog opens and no conversion is requested from the server
+
+#### Scenario: Encrypted file that must be converted, Document Server without encryption
+- **WHEN** the user opens an encrypted file of a private room whose format must be converted, while the Document Server cannot open encrypted files
+- **THEN** Common:PrivateRoomConvertNotSupported is shown, not Common:PrivateRoomEditorNotSupported, and no conversion dialog opens
+
+#### Scenario: File outside private rooms that must be converted
+- **WHEN** the user opens a file that is not encrypted and must be converted
+- **THEN** the conversion dialog opens as before
+
+### Requirement: SDK declined unlock on a copy or move says nothing was transferred
+The SDK SHALL show Common:EncryptionLockedCopy, and SHALL NOT show Common:EncryptionLockedAddMembers, when the user declines to unlock as an encrypted copy, move or duplicate starts. Nothing SHALL be transferred.
+
+#### Scenario: Unlock declined on a copy in the SDK
+- **WHEN** the user copies an encrypted file out of a private room in the SDK and dismisses the passphrase prompt
+- **THEN** Common:EncryptionLockedCopy is shown and no file is copied
+
+#### Scenario: Unlock declined on a duplicate in the SDK
+- **WHEN** the user duplicates an encrypted file in the SDK and dismisses the passphrase prompt
+- **THEN** Common:EncryptionLockedCopy is shown and no copy is stored
+
+### Requirement: SDK reports a file without a wrap on a copy as no access
+The SDK SHALL show Common:EncryptedFileNoAccessYet when an encrypted copy or duplicate of a single file fails because the file holds no wrap for the user, and SHALL name that file in Common:EncryptedCopyFailed when it is one of several files of a copy.
+
+#### Scenario: Duplicate of a file without a wrap in the SDK
+- **WHEN** a user who holds a key duplicates in the SDK an encrypted file that is not wrapped for them and unlocks the key
+- **THEN** Common:EncryptedFileNoAccessYet is shown and no copy is stored
+
+#### Scenario: One file of several without a wrap in the SDK
+- **WHEN** a user who holds a key copies in the SDK two encrypted files out of a private room and one of them is not wrapped for them
+- **THEN** the other file is copied and Common:EncryptedCopyFailed names the file that is not wrapped for them

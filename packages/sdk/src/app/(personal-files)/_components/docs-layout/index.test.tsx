@@ -51,7 +51,7 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/files", () => ({
 
 import DocsLayout from ".";
 import { makeDropUpload } from "./drop-upload";
-import { refusesEncryptedOpen } from "./open-encrypted";
+import { makeOpenFile, refusesEncryptedOpen } from "./open-encrypted";
 
 type DocsLayoutProps = Parameters<typeof DocsLayout>[0];
 
@@ -140,5 +140,65 @@ describe("refusesEncryptedOpen", () => {
   it("Plain file, or a page that is not private", () => {
     expect(refusesEncryptedOpen(true, { encrypted: false }, null)).toBe(false);
     expect(refusesEncryptedOpen(false, encrypted, null)).toBe(false);
+  });
+});
+
+describe("opening a file that must be converted", () => {
+  const mustConvert = (encrypted: boolean) =>
+    ({ id: 7, encrypted, viewAccessibility: { MustConvert: true } }) as never;
+
+  const open = (
+    isPrivate: boolean,
+    docServiceEncryptionSupported: boolean,
+  ) => {
+    const info = vi.fn();
+    const requestConvert = vi.fn();
+    const openFileInEditor = vi.fn();
+    const openFile = makeOpenFile({
+      isPrivate,
+      filesSettings: { docServiceEncryptionSupported },
+      t: (key) => key,
+      info,
+      requestConvert,
+      openFileInEditor,
+    });
+    return { openFile, info, requestConvert, openFileInEditor };
+  };
+
+  it("Encrypted file that must be converted opened", () => {
+    const { openFile, info, requestConvert, openFileInEditor } = open(
+      true,
+      true,
+    );
+
+    openFile(mustConvert(true));
+
+    expect(info).toHaveBeenCalledWith("Common:PrivateRoomConvertNotSupported");
+    expect(requestConvert).not.toHaveBeenCalled();
+    expect(openFileInEditor).not.toHaveBeenCalled();
+  });
+
+  it("Encrypted file that must be converted, Document Server without encryption", () => {
+    const { openFile, info, requestConvert, openFileInEditor } = open(
+      true,
+      false,
+    );
+
+    openFile(mustConvert(true));
+
+    expect(info).toHaveBeenCalledTimes(1);
+    expect(info).toHaveBeenCalledWith("Common:PrivateRoomConvertNotSupported");
+    expect(requestConvert).not.toHaveBeenCalled();
+    expect(openFileInEditor).not.toHaveBeenCalled();
+  });
+
+  it("File outside private rooms that must be converted", () => {
+    const { openFile, info, requestConvert } = open(false, false);
+    const file = mustConvert(false);
+
+    openFile(file);
+
+    expect(requestConvert).toHaveBeenCalledWith(file);
+    expect(info).not.toHaveBeenCalled();
   });
 });

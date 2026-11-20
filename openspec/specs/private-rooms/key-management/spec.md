@@ -25,7 +25,7 @@ The system SHALL let a user with no key generate one from the Keys management ta
 - **THEN** Common:EncryptionKeysLoadFailed is shown with Common:TryAgain, no generate or import action is offered, and no key is registered until a reload of the list answers with an empty list
 
 ### Requirement: Passphrase strength gate
-The system SHALL require a new passphrase of at least 12 characters, show a strength meter with suggestions, and SHALL refuse passphrases that match a common pattern (keyboard rows, sequences, brand names), at key creation and at a passphrase change alike.
+The system SHALL require a new passphrase of at least 12 characters, show its strength as a grade, and SHALL refuse passphrases that match a common pattern (keyboard rows, sequences, brand names), at key creation, after a recovery with the recovery phrase and at a passphrase change alike. The strength line SHALL show the grade alone and SHALL NOT advise adding a capital letter, a digit or a punctuation character.
 
 #### Scenario: Too short
 - **WHEN** the user enters an 11-character passphrase
@@ -38,6 +38,10 @@ The system SHALL require a new passphrase of at least 12 characters, show a stre
 #### Scenario: Passphrase change
 - **WHEN** the user enters a new passphrase built from a common pattern in the passphrase change dialog
 - **THEN** the new passphrase field is marked invalid with Common:PassphraseCommonPattern as its error, and the change MUST NOT be submitted
+
+#### Scenario: Strength line shows a grade only
+- **WHEN** the user types a new passphrase without a capital letter, a digit or a punctuation character
+- **THEN** the strength line shows Common:PassphraseStrengthLabel with one grade and no advice to add a character of any kind
 
 ### Requirement: Recovery phrase is shown once and must be acknowledged
 The system SHALL display the 24-word recovery phrase after key generation as a numbered list in the order of the phrase, with print, download (HTML recovery kit) and copy as three actions of equal weight, and SHALL require the user to tick the acknowledgement (Common:RecoveryPhraseAcknowledge) before the dialog can be closed. The acknowledgement SHALL be available whether or not a save action was used, and a save action SHALL NOT tick it.
@@ -109,7 +113,7 @@ The system SHALL offer a Common:ForgotPassphrase link in the unlock dialog from 
 - **THEN** no Forgot passphrase link is shown
 
 ### Requirement: Remember this device
-The system SHALL offer a "remember this device" option in the unlock dialog where enabled; when ticked, later identity requests on this device SHALL be served without a prompt until the user locks or forgets the device or the remembered record exceeds its maximum age (30 days by default). The option SHALL explain that it survives auto-lock and expires. The option SHALL sit directly under the passphrase field, before the other links of the dialog, and SHALL NOT be ticked by default.
+The system SHALL offer a "remember this device" option in the unlock dialog where enabled; when ticked, later identity requests on this device SHALL need no prompt until the user locks or forgets the device, deletes or resets the key, or the remembered record exceeds its maximum age (30 days by default). The option SHALL explain that it outlasts auto-lock and expires. It SHALL sit directly under the passphrase field, before the dialog's other links, and SHALL NOT be ticked by default.
 
 #### Scenario: Remembered
 - **WHEN** the user unlocks with the option ticked and reloads the page
@@ -131,6 +135,10 @@ The system SHALL offer a "remember this device" option in the unlock dialog wher
 - **WHEN** the unlock dialog opens with the remember option
 - **THEN** the option follows the passphrase field, comes before the forgot-passphrase and passkey links in the reading and the Tab order, and is not ticked
 
+#### Scenario: Remembered until right after the unlock
+- **WHEN** the user unlocks with the option ticked from Common:UnlockKey in Keys management
+- **THEN** Common:DeviceUnlockRememberedUntil is shown on the page as soon as the key is unlocked, without a reload or leaving the page
+
 ### Requirement: Passkey unlock
 The system SHALL offer a passkey toggle (Common:PasskeyUnlockLabel) when the platform supports it or a passkey is already enrolled. Enrolling requires an unlocked identity; once enrolled, the unlock dialog SHALL try the passkey automatically on open before asking for the passphrase.
 
@@ -151,7 +159,7 @@ The system SHALL offer a passkey toggle (Common:PasskeyUnlockLabel) when the pla
 - **THEN** the passkey record is deleted and Common:PasskeyDisabled is shown
 
 ### Requirement: Auto-lock timeout presets
-The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes, 30 minutes by default, and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, scroll, touch); with the 5 or 15 minute preset it SHALL also lock as soon as the tab is hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
+The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (30 by default) and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, touch, a scroll of the page or of a list in it); with the 5 or 15 minute preset it SHALL also lock once the tab is hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
 
 #### Scenario: Idle lock
 - **WHEN** the preset is 5 minutes and the user is inactive for 5 minutes
@@ -177,8 +185,12 @@ The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes, 
 - **WHEN** the device is remembered and the idle timeout or a hidden tab locks the identity
 - **THEN** the next encrypted operation restores the key from the device record without a prompt, and Keys management still shows the device as remembered
 
+#### Scenario: Scrolling a list counts as activity
+- **WHEN** the preset is 5 minutes and the user does nothing but scroll the file list of a room for 6 minutes
+- **THEN** the identity stays unlocked, and it locks 5 minutes after the last scroll
+
 ### Requirement: Lock now
-The system SHALL offer Common:LockNow while the identity is unlocked; it SHALL wipe the in-memory key, forget the remembered device and confirm with Common:EncryptionLocked. Besides Forget device and record expiry, Lock now is the only lock that removes the remembered record.
+The system SHALL offer Common:LockNow while the identity is unlocked; it SHALL wipe the in-memory key, forget the remembered device and confirm with Common:EncryptionLocked. Besides Forget device, a key deletion, a reset and record expiry, Lock now is the only lock that removes the remembered record.
 
 #### Scenario: Manual lock
 - **WHEN** the user clicks Lock now
@@ -240,7 +252,7 @@ The system SHALL delete a registered key only after a warning (Common:DeleteKeyW
 - **THEN** the warning states that no room is affected (Common:DeleteKeyNoAffectedRooms)
 
 ### Requirement: Reset all keys with a typed token
-The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both passphrase and recovery phrase; it SHALL require typing the localized token (Common:ResetEncryptionKeysConfirmationToken, compared trimmed and case-insensitively), then delete every envelope the server lists for the user, unused ones included, lock the identity and refresh the list.
+The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both passphrase and recovery phrase; it SHALL require typing the localized token (Common:ResetEncryptionKeysConfirmationToken, compared trimmed and case-insensitively), then read the user's key list from the server, delete every envelope it lists, unused ones included, lock the identity and refresh the list.
 
 #### Scenario: Token mismatch
 - **WHEN** the typed text does not match the token
@@ -249,6 +261,14 @@ The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both pas
 #### Scenario: Partial failure
 - **WHEN** some key deletions fail
 - **THEN** Common:ResetEncryptionKeysPartialFailure reports the count and the identity is still locked
+
+#### Scenario: Key registered after the page opened
+- **WHEN** a key was registered for the user on another device after Keys management was opened, and the user confirms a reset
+- **THEN** that key is deleted together with the keys the page showed
+
+#### Scenario: List cannot be read at confirmation
+- **WHEN** the read of the key list at the confirmation of a reset fails
+- **THEN** Common:ResetEncryptionKeysFailed is shown and no key is deleted
 
 ### Requirement: Device setup hint on entering a private room without keys
 The system SHALL show, once per browser session, an info toast (Common:EncryptionDeviceSetupHint) with a link to Keys management when the user enters a private room on a device with no configured key. The hint SHALL wait until the user's key list is known.
@@ -685,7 +705,7 @@ The system SHALL describe the encryption key as the key of the user's account in
 - **THEN** it names a replaced key (Common:KeyChangedReasonReplaced), a recovery and a reset, and no reason that keys are stored per device
 
 ### Requirement: A new passphrase needs no particular characters
-The system SHALL accept a new passphrase, at key creation and at a passphrase change, when it has at least 12 characters and matches no common pattern, and SHALL NOT require a capital letter, a digit or a punctuation character in it. The rules tooltip of the passphrase field SHALL name the length alone.
+The system SHALL accept a new passphrase, at key creation, after a recovery with the recovery phrase and at a passphrase change, when it has at least 12 characters and matches no common pattern, in whatever script it is written, and SHALL NOT require a capital letter, a digit, a punctuation character or a Latin letter in it. The rules tooltip of the passphrase field SHALL name the length alone.
 
 #### Scenario: Lowercase words
 - **WHEN** the user enters a 22-character passphrase of lowercase words and spaces that matches no common pattern, and repeats it
@@ -702,6 +722,22 @@ The system SHALL accept a new passphrase, at key creation and at a passphrase ch
 #### Scenario: Rules tooltip
 - **WHEN** the rules tooltip of the passphrase field is shown
 - **THEN** it names the minimum length of 12 and no rule on capital letters, digits or punctuation
+
+#### Scenario: Passphrase in another script
+- **WHEN** the user enters in the key setup dialog a passphrase of 12, 16 or 20 Cyrillic letters, or of 12, 16 or 20 CJK characters, that matches no common pattern, and repeats it
+- **THEN** Common:ContinueButton is enabled and no error is shown
+
+#### Scenario: New passphrase after a recovery in another script
+- **WHEN** the user enters such a passphrase twice as the new passphrase after a recovery with the recovery phrase
+- **THEN** the confirm button is enabled and no error is shown
+
+#### Scenario: Passphrase change in another script
+- **WHEN** the user enters the current passphrase and such a passphrase twice as the new one in the passphrase-change dialog
+- **THEN** the save button is enabled and no error is shown
+
+#### Scenario: Too short in another script
+- **WHEN** the user enters a passphrase of 11 Cyrillic letters or of 11 CJK characters, and repeats it
+- **THEN** the confirm button stays disabled
 
 ### Requirement: A passphrase change keeps the key pair
 The system SHALL NOT generate a new key pair when the passphrase is changed or the key is recovered with the recovery phrase: only the envelope is sealed again. A copy of the key exported earlier, with the passphrase it was exported under, SHALL keep opening the user's files, so a leaked passphrase or export is not cured by a passphrase change. No action replaces the key pair of a user who keeps access to their files.
@@ -730,7 +766,7 @@ The system SHALL offer Common:ForgetDeviceButton only while the identity is lock
 - **THEN** the identity is locked, the remembered record is removed, and the next encrypted operation MUST NOT run without the passphrase or a passkey
 
 ### Requirement: A newly picked auto-lock preset applies at once
-The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it: the idle time SHALL be counted from that moment with the new length, and the hidden-tab rule of the new preset SHALL hold from that moment, without a lock and a new unlock in between.
+The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it, in the page where it is picked and in every other open page of the same user in this browser: the idle time SHALL be counted from that moment with the new length, and the hidden-tab rule of the new preset SHALL hold from that moment, without a lock and a new unlock in between.
 
 #### Scenario: Shorter preset picked while unlocked
 - **WHEN** the identity was unlocked with the 30-minute preset and the user picks 5 minutes
@@ -739,6 +775,10 @@ The system SHALL apply an auto-lock preset to the unlocked identity as soon as t
 #### Scenario: Longer preset picked while unlocked
 - **WHEN** the identity was unlocked with the 5-minute preset and the user picks 30 minutes
 - **THEN** the identity stays unlocked through 5 minutes of inactivity and when the tab is hidden
+
+#### Scenario: Preset picked in another tab
+- **WHEN** two tabs hold the key unlocked with the 30-minute preset and the user picks 5 minutes in one of them
+- **THEN** the other tab shows 5 minutes, locks after 5 minutes of inactivity counted from the pick, and locks when it is hidden
 
 ### Requirement: The unlock dialog on entry is raised once per private room
 The system SHALL raise the unlock dialog by itself once per private room that a user with a locked key enters, and SHALL NOT raise it again when the user moves between the folders of that room: after the first answer the locked-key block is the way to unlock. Entering another private room SHALL raise the dialog again.
@@ -801,7 +841,7 @@ The system SHALL show the Common:Active and Common:NoKey badges of the keys mana
 - **THEN** the text of the Common:NoKey badge has a contrast of at least 4.5:1 against the badge
 
 ### Requirement: The strength grade does not contradict the passphrase rules
-The system SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStrengthGood or Common:PassphraseStrengthStrong for a new passphrase that fails the length or the common-pattern rule, at key creation and at a passphrase change alike. Such a passphrase SHALL be graded Common:PassphraseStrengthWeak.
+The system SHALL grade a new passphrase that fails the length or the common-pattern rule Common:PassphraseStrengthWeak and SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStrengthGood or Common:PassphraseStrengthStrong for it. It SHALL NOT show Common:PassphraseStrengthWeak for a new passphrase that meets both rules. Both hold at key creation, after a recovery with the recovery phrase and at a passphrase change.
 
 #### Scenario: Long passphrase without a required character
 - **WHEN** the user enters a 22-character passphrase of lowercase words and spaces that matches no common pattern
@@ -818,6 +858,33 @@ The system SHALL NOT show Common:PassphraseStrengthFair, Common:PassphraseStreng
 #### Scenario: Passphrase change
 - **WHEN** the new passphrase of the passphrase-change dialog fails a rule
 - **THEN** its strength line shows Common:PassphraseStrengthWeak
+
+#### Scenario: Accepted passphrase is not weak
+- **WHEN** the user enters a passphrase of 12 characters that meets both rules but has few kinds of characters, such as 12 punctuation characters
+- **THEN** the strength line shows Common:PassphraseStrengthFair or better, and the confirm button is enabled once the passphrase is repeated
+
+#### Scenario: Accepted passphrase is not weak at a passphrase change
+- **WHEN** such a passphrase is the new passphrase of the passphrase-change dialog
+- **THEN** its strength line shows Common:PassphraseStrengthFair or better
+
+### Requirement: The strength grade counts letters of every script
+The system SHALL grade a new passphrase by the Unicode category of its characters: a letter of any script counts as a letter, an upper- or lowercase letter of a cased script as that case, a decimal digit of any script as a digit, and punctuation or a symbol of any script as punctuation. A passphrase SHALL get the grade a Latin passphrase of the same length and the same kinds of characters gets.
+
+#### Scenario: Cyrillic lowercase
+- **WHEN** the user enters a passphrase of 12, 16 or 20 lowercase Cyrillic letters that matches no common pattern
+- **THEN** the strength line shows Common:PassphraseStrengthFair, Common:PassphraseStrengthFair or Common:PassphraseStrengthGood, the grades of 12, 16 or 20 lowercase Latin letters
+
+#### Scenario: Caseless script
+- **WHEN** the user enters a passphrase of 12, 16 or 20 CJK characters
+- **THEN** the strength line shows Common:PassphraseStrengthFair, Common:PassphraseStrengthFair or Common:PassphraseStrengthGood, the grades of 12, 16 or 20 lowercase Latin letters
+
+#### Scenario: Cyrillic mixed case
+- **WHEN** the user enters a 20-character passphrase of upper- and lowercase Cyrillic letters and a digit that matches no common pattern
+- **THEN** the strength line shows Common:PassphraseStrengthStrong, the grade of the same passphrase in Latin letters
+
+#### Scenario: Punctuation of another script
+- **WHEN** the user enters 15 lowercase Latin letters followed by a guillemet that match no common pattern
+- **THEN** the strength line shows Common:PassphraseStrengthGood, the grade of the same letters followed by an exclamation mark
 
 ### Requirement: The passphrase rules tooltip leaves the dialog readable
 The system SHALL show the rules a new passphrase must meet in the tooltip of the passphrase field, as the other password forms of the product do. On a wide screen the tooltip SHALL open beside the passphrase field and cover none of the texts, fields and actions of the dialog; on a narrow screen it SHALL open below the passphrase field and SHALL NOT cover the title, the hint, Common:GenerateLogoButton or the actions of the dialog.
@@ -1123,3 +1190,195 @@ The system SHALL title the confirmation asked when key setup is closed with Comm
 #### Scenario: Passphrase change dialog
 - **WHEN** the user closes the passphrase change dialog after typing
 - **THEN** the confirmation is titled Common:UnsavedChanges and is confirmed with Common:CloseMenu
+
+### Requirement: Keys management opens with an introduction
+The system SHALL show at the top of Keys management the sentence Common:KeysManagementIntro, which says what the encryption key, the passphrase and the recovery phrase are for. The sentence SHALL be shown whether the user holds a key or not.
+
+#### Scenario: User with a key
+- **WHEN** a user who holds a key opens Keys management
+- **THEN** Common:KeysManagementIntro stands above the key
+
+#### Scenario: User without a key
+- **WHEN** a user who holds no key opens Keys management
+- **THEN** Common:KeysManagementIntro stands above the empty state
+
+### Requirement: Keys management shows whether the key is locked
+The system SHALL show beside the heading of the key in Keys management the state of the user's key with a text, Common:KeyLocked or Common:KeyUnlocked, the words of the room header. The state SHALL NOT be told by colour alone and SHALL follow a lock or an unlock without a page reload. It SHALL NOT be shown to a user without a key or while the key list is not known. The status of the key, Common:Active, stays where it is.
+
+#### Scenario: Locked key
+- **WHEN** a user whose key is locked opens Keys management
+- **THEN** the heading of the key shows Common:KeyLocked
+
+#### Scenario: Key locks while the page is open
+- **WHEN** the key is locked by the idle timeout or by Common:LockNow while the page is open
+- **THEN** the heading shows Common:KeyLocked without a page reload
+
+#### Scenario: User without a key
+- **WHEN** a user who holds no key opens Keys management
+- **THEN** no state is shown beside the heading
+
+### Requirement: Key state on Keys management is readable
+The system SHALL show the state of the key in Keys management with a contrast of at least 4.5:1 between its text and its background, in the light and in the dark theme.
+
+#### Scenario: Both themes
+- **WHEN** the state Common:KeyLocked or Common:KeyUnlocked is shown in the light or in the dark theme
+- **THEN** its text has a contrast of at least 4.5:1 against its background
+
+### Requirement: Keys management offers to unlock a locked key
+While the user's key is locked, the system SHALL show under the heading of the key the sentence Common:PrivateRoomLockedBarText and under the key a primary action labelled Common:UnlockKey, which raises the unlock dialog. Neither SHALL be shown while the key is unlocked.
+
+#### Scenario: Unlock from the page
+- **WHEN** the user presses Common:UnlockKey in Keys management and enters the passphrase
+- **THEN** the key is unlocked, the heading shows Common:KeyUnlocked, and the sentence and the action are gone
+
+#### Scenario: Unlock cancelled
+- **WHEN** the user presses Common:UnlockKey and dismisses the dialog
+- **THEN** the page stays as it was, with the action offered
+
+#### Scenario: Unlocked key
+- **WHEN** a user whose key is unlocked opens Keys management
+- **THEN** no unlock action is shown
+
+### Requirement: Recovery phrase has a block of its own in Keys management
+The system SHALL show the link Common:UseRecoveryPhrase under the heading Common:RecoveryPhraseTitle and the sentence Common:RecoveryPhraseSectionText, which says that the phrase sets a new passphrase and restores access to the existing key. The block SHALL be shown wherever the link is shown today.
+
+#### Scenario: User with a key
+- **WHEN** a user who holds a key opens Keys management
+- **THEN** the heading, the sentence and the link of the recovery phrase stand together under the key
+
+### Requirement: Removing the key removes what this device keeps of it
+The system SHALL remove from this device the remembered record and the passkey record of a key when the user deletes that key or resets all keys, in the same action that locks the identity. A record whose key is not in the user's key list SHALL be removed once that list is known, and SHALL NOT be removed on that ground while the list is not known. A remembered record past its maximum age SHALL be removed when a page loads.
+
+#### Scenario: Key deleted on a remembered device
+- **WHEN** the user deletes their key on a device that is remembered and has a passkey enrolled
+- **THEN** the remembered record and the passkey record of that key are removed from this device, and when the same key is imported again later, no encrypted operation MUST run before its passphrase is entered
+
+#### Scenario: Reset on a remembered device
+- **WHEN** the user resets all keys on a device that is remembered and has a passkey enrolled, whether every deletion succeeds or some fail
+- **THEN** the remembered record and the passkey record are removed from this device
+
+#### Scenario: Key removed on another device
+- **WHEN** a page loads on a device that holds a remembered record or a passkey record of a key, and the user's key list, once read, does not hold that key
+- **THEN** both records of that key are removed without a prompt
+
+#### Scenario: Key list not known
+- **WHEN** the read of the user's key list fails on page load
+- **THEN** no record is removed on account of the list
+
+#### Scenario: Expired record without an unlock
+- **WHEN** a page loads more than 30 days after the remembered record was written and no encrypted operation runs
+- **THEN** the record is removed, and Keys management shows no Common:DeviceUnlockRememberedUntil line
+
+### Requirement: A lock reaches every tab of the user
+The system SHALL lock the identity in every open page of the same user in this browser, files, editor and SDK pages alike, within a second and without a reload, when Common:LockNow, Common:ForgetDeviceButton, a key deletion, a reset, a passphrase change or a logout happens in one of them. A lock by idle time, by a hidden tab or by the in-memory expiry SHALL stay with its page. An unlock SHALL NOT be shared.
+
+#### Scenario: Lock now in another tab
+- **WHEN** two tabs show a private room with the key unlocked and the user presses Common:LockNow in one of them
+- **THEN** the other tab shows Common:KeyLocked and the locked-key block without a reload, and its next encrypted operation MUST NOT run without the passphrase or a passkey
+
+#### Scenario: Key deleted in another tab
+- **WHEN** the user deletes the key in Keys management in one tab while another tab holds it unlocked
+- **THEN** the other tab locks and MUST NOT decrypt with that key afterwards
+
+#### Scenario: Reset in another tab
+- **WHEN** the user resets all keys in one tab while another tab holds the key unlocked
+- **THEN** the other tab locks
+
+#### Scenario: Passphrase changed in another tab
+- **WHEN** the user changes the passphrase in one tab while another tab holds the key unlocked
+- **THEN** the other tab locks
+
+#### Scenario: Forget device in another tab
+- **WHEN** one tab is locked on a remembered device, another tab holds the key unlocked, and the user presses Common:ForgetDeviceButton in the first
+- **THEN** the other tab locks, and its next encrypted operation asks for the passphrase or a passkey
+
+#### Scenario: Logout in another tab
+- **WHEN** the user logs out in one tab while another tab holds the key unlocked
+- **THEN** the other tab locks
+
+#### Scenario: Editor tab
+- **WHEN** an encrypted document is open in the editor in one tab and the user presses Common:LockNow in another
+- **THEN** the identity of the editor tab is locked as an idle lock in that tab would lock it
+
+#### Scenario: Idle lock stays in its tab
+- **WHEN** one tab locks after the idle time while the user works in another tab of the same user
+- **THEN** the tab the user works in stays unlocked
+
+#### Scenario: Hidden-tab lock stays in its tab
+- **WHEN** the preset is 5 minutes and the user switches from one tab with the key unlocked to another
+- **THEN** the hidden tab locks and the tab the user switched to stays unlocked
+
+#### Scenario: Unlock not shared
+- **WHEN** the user unlocks the key in one tab while another tab is locked
+- **THEN** the other tab stays locked until it is unlocked on its own
+
+### Requirement: Other tabs read the key list again after a key change
+The system SHALL read the user's key list again in every other open page of the user when a key is deleted, all keys are reset or the passphrase is changed in one page. Until that read has answered, the page SHALL treat its key list as not known, so its unlock dialog accepts only the passphrase of the envelope the server holds and Keys management shows the current key without a reload.
+
+#### Scenario: New passphrase in the other tab
+- **WHEN** the passphrase is changed in one tab and the user then unlocks in another tab
+- **THEN** the new passphrase unlocks, and the old passphrase is refused with Common:InvalidPassphrase
+
+#### Scenario: Key deleted while Keys management is open elsewhere
+- **WHEN** the key is deleted in one tab while Keys management is open in another
+- **THEN** the other tab shows the state without a key, with Common:GenerateNewKey, without a reload
+
+#### Scenario: Read fails in the other tab
+- **WHEN** the passphrase is changed in one tab and the read of the key list fails in another
+- **THEN** the other tab treats its key list as not known, as after a failed load, and the old passphrase MUST NOT unlock there
+
+### Requirement: The shown key state follows the key in memory
+The system SHALL show the key as locked, in the header of a private room (Common:KeyLocked), in Keys management (Common:KeyLocked with Common:UnlockKey) and by the locked-key block, whenever the key is not in memory, whatever removed it: its own expiry after 30 minutes without use, a key change on the page, or a lock in another page. No page SHALL show Common:KeyUnlocked while the key is not in memory.
+
+#### Scenario: In-memory key expires
+- **WHEN** the key is unlocked and the user works for more than 30 minutes in sections that run no encrypted operation, then opens a private room
+- **THEN** the header shows Common:KeyLocked, the room is handled as with a locked key, and no page showed Common:KeyUnlocked after the expiry
+
+#### Scenario: Passphrase change with a failed list refresh
+- **WHEN** the user changes the passphrase and the following read of the key list fails
+- **THEN** Keys management shows Common:KeyLocked and Common:UnlockKey, and Common:LockNow is not offered
+
+#### Scenario: Partial reset
+- **WHEN** a reset leaves a key on the server because some deletions failed
+- **THEN** Keys management shows that key as Common:KeyLocked and no page shows Common:KeyUnlocked
+
+### Requirement: Concurrent requests for the key share one unlock dialog
+The system SHALL show one unlock dialog when several operations ask for the locked key before the user answers, and SHALL give every waiting operation the outcome of that dialog: all continue after the unlock, all are aborted when the dialog is dismissed or the user's key becomes unavailable. No operation SHALL be left waiting after the dialog closes.
+
+#### Scenario: Two operations wait
+- **WHEN** two operations ask for the locked key before the user answers the unlock dialog, and the user unlocks
+- **THEN** one dialog was shown, and both operations continue
+
+#### Scenario: Dismissed with two operations waiting
+- **WHEN** two operations wait for the unlock dialog and the user dismisses it
+- **THEN** both operations are aborted and nothing is decrypted
+
+#### Scenario: Key removed while operations wait
+- **WHEN** operations wait for the unlock dialog and the user's key list changes to hold no key
+- **THEN** the dialog closes and every waiting operation is aborted
+
+### Requirement: Key setup is not closed while the key is registered
+The system SHALL NOT close key setup by the cross, Escape or its cancel action while the new key is being registered, and SHALL report the outcome once: the success of a registered key or the failure of one that was not registered, never a cancellation together with either.
+
+#### Scenario: Escape during registration
+- **WHEN** the user confirms the recovery phrase step and presses Escape while the key is being registered
+- **THEN** the dialog stays open as busy, and when the registration ends only Common:EncryptionKeyGenerated or the error of the registration follows
+
+#### Scenario: Private room creation during registration
+- **WHEN** key setup was opened by private room creation and the user presses Escape while the key is being registered
+- **THEN** the creation is not cancelled and goes on after the key is registered, as after a registration without Escape
+
+### Requirement: An unknown key list is not shown as no key
+The system SHALL NOT show Common:NoKey or Common:NoEncryptionKey in Keys management while the user's key list is not known. While the list loads, the page SHALL show a loading state; when the load fails, it SHALL show Common:EncryptionKeysLoadFailed with Common:TryAgain and nothing that says the user has no key.
+
+#### Scenario: List loading
+- **WHEN** Keys management opens before the key list has loaded
+- **THEN** a loading state is shown, and neither Common:NoKey nor Common:NoEncryptionKey
+
+#### Scenario: List failed
+- **WHEN** the read of the key list fails
+- **THEN** Common:EncryptionKeysLoadFailed and Common:TryAgain are shown, and neither Common:NoKey nor Common:NoEncryptionKey
+
+#### Scenario: List empty
+- **WHEN** the key list loads and holds no key
+- **THEN** Common:NoKey, Common:NoEncryptionKey and Common:GenerateNewKey are shown

@@ -571,6 +571,38 @@ test.describe("Private section — rooms open inside it", () => {
     ).toHaveCount(0);
   });
 
+  // Spec: private-rooms/sidebar-section, "Private list says that its files are encrypted"
+  test("Private list", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(roomLink(page)).toBeVisible({ timeout: 15000 });
+
+    await expect(page.getByTestId("private_section_note")).toHaveText(
+      "Files here are end-to-end encrypted: only room members can read them.",
+    );
+  });
+
+  test("Inside a room", async ({ page, baseUrl }) => {
+    await page.goto(`${baseUrl}/private/filter`);
+    await expect(page.getByTestId("private_section_note")).toBeVisible({
+      timeout: 15000,
+    });
+
+    await roomLink(page).click();
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+
+    await expect(page.getByTestId("private_section_note")).toHaveCount(0);
+  });
+
+  test("Narrow window", async ({ page, baseUrl }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`${baseUrl}/private/filter`);
+
+    await expect(
+      page.getByRole("heading", { name: "Private rooms", exact: true }),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByTestId("private_section_note")).toBeHidden();
+  });
+
   test("Browser tab title", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}/private/filter`);
     await expect(roomLink(page)).toBeVisible({ timeout: 15000 });

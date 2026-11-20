@@ -26,8 +26,8 @@
 
 ## 2. Remove the beta label
 
-- [ ] 2.1 Remove the Beta badge from the Private sidebar item (`packages/client/src/components/ClientArticleSidebar/index.tsx`) and the Keys management tab (`packages/client/src/pages/Profile/Section/Body/index.tsx`), and delete Common:PrivateRoomsBetaTitle and Common:PrivateRoomsBetaDescription from every language in the same commit (design decision 1). Keep the title and description options of the shared `BetaBadge` only if another surface uses them. Verify: the cases "No beta label" and the badge-free sidebar item and tab in the unit tests next to each surface, and `cd common/tests && npx vitest run test/locales.test.js`
-- [ ] 2.2 E2E: drop the badge assertions of `private-rooms-section.spec.ts` and `keys-management.spec.ts`, and regenerate the screenshots that show the Private item under Docker (`tests-dev`, `--update-snapshots=changed`). Verify: `cd packages/client && pnpm test:e2e:docker:dev` for those specs, then the full client E2E run
+- [ ] 2.1 Remove the Beta badge from the Private sidebar item (`packages/client/src/components/ClientArticleSidebar/index.tsx`), the card of private rooms on the dashboard (`packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx`, added by `private-rooms-concept-alignment`) and the Keys management tab (`packages/client/src/pages/Profile/Section/Body/index.tsx`), and delete Common:PrivateRoomsBetaTitle and Common:PrivateRoomsBetaDescription from every language in the same commit (design decision 1). Keep the title and description options of the shared `BetaBadge` only if another surface uses them. Verify: the cases "No beta label" and the badge-free sidebar item and tab in the unit tests next to each surface, and `cd common/tests && npx vitest run test/locales.test.js`
+- [ ] 2.2 E2E: drop the badge assertions of `private-rooms-section.spec.ts`, `keys-management.spec.ts` and `dashboard-appearance.spec.ts`, and regenerate the screenshots that show the Private item under Docker (`tests-dev`, `--update-snapshots=changed`). Verify: `cd packages/client && pnpm test:e2e:docker:dev` for those specs, then the full client E2E run
 
 ## 3. Documentation and release notes
 

@@ -651,6 +651,79 @@ test.describe("Private room — invite entry point", () => {
 });
 
 // Spec: private-rooms/room-membership, "The invitation result is readable".
+test.describe("Private room — the invite panel waits for its room", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Room read fails", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { keysHandle } = await bootstrapEncryption(page, mockRequest, baseUrl);
+    const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+      current: null,
+    };
+    mockRequest.use(
+      ...roomMembersHandlers(TEST_PORT, ROOM_ID),
+      privateRoomListHandler(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        title: "Private Test Room",
+      }),
+      ...encryptedFilesHandlers(TEST_PORT, {
+        roomId: ROOM_ID,
+        ownerId: TEST_USER_ID,
+        // The owner's rights on a private room: inviting is not withheld.
+        roomSecurity: { Read: true, Create: true, EditRoom: true, EditAccess: true },
+      }),
+      ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+      usersWithRoomSharedHandler(TEST_PORT, ROOM_ID, [CAROL]),
+    );
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      { ...keysHandle.getKeys()[0], userId: TEST_USER_ID },
+    ]);
+
+    await navigateInApp(page, `/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
+    await page.waitForResponse(
+      (res) =>
+        res.request().method() === "GET" &&
+        new URL(res.url()).pathname.endsWith(`/files/${ROOM_ID}`) &&
+        res.ok(),
+      { timeout: 15000 },
+    );
+
+    // Inside the room the panel reads the room itself; that read fails.
+    await page.route(
+      new RegExp(`/api/2\\.0/files/folder/${ROOM_ID}(\\?|$)`),
+      (route) => route.fulfill({ status: 500, body: "" }),
+    );
+    const shareRequests: string[] = [];
+    page.on("request", (request) => {
+      if (
+        request.method() === "PUT" &&
+        /\/files\/rooms\/\d+\/share/.test(request.url())
+      )
+        shareRequests.push(`${request.method()} ${request.url()}`);
+    });
+
+    await page.locator(".info-panel-toggle").click();
+    await page.getByTestId("info_members_tab").click();
+    await page.locator("#info_add-user").click();
+
+    await expect(page.getByTestId("invite_panel_room_load_failed")).toHaveText(
+      "The room could not be loaded, so nobody can be invited now. Close the panel and try again.",
+      { timeout: 15000 },
+    );
+    await expect(page.getByTestId("invite_panel_send_button")).toHaveCount(0);
+    expect(shareRequests).toEqual([]);
+  });
+});
+
 test.describe("Private room — invitation result is readable", () => {
   test.use({ locale: "en-US", timezoneId: "UTC" });
 

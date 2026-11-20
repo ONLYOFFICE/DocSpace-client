@@ -47,4 +47,13 @@ export const KEY_STATUS_BADGE_COLORS = {
     background: globalColors.mainOrange,
     text: globalColors.black,
   },
+  // Spec: private-rooms/key-management, "Key state on Keys management is readable"
+  locked: {
+    background: globalColors.mainOrange,
+    text: globalColors.black,
+  },
+  unlocked: {
+    background: globalColors.secondGreen,
+    text: globalColors.black,
+  },
 } as const;

@@ -306,13 +306,23 @@ export type TRoomsRequestScope = {
   lists: "private" | "notPrivate";
 };
 
+/** Rooms searches that list their own items, never a private room. */
+const AREAS_WITH_OWN_LISTS: string[] = [
+  RoomSearchArea.Templates,
+  RoomSearchArea.FormTemplates,
+  RoomSearchArea.Forms,
+  RoomSearchArea.AIAgents,
+  RoomSearchArea.AiHub,
+];
+
 /**
  * What a rooms-list request must carry for the address it was made from. The
  * Private section is the server's `PrivateRooms` area, and its Archive the
  * shared Archive with the private filter. The Rooms area never returns a
  * private room, so Rooms sends no filter, and Rooms -> Archive, which holds
  * both, sends the non-private one. Templates, Forms and AI agents searches
- * are left alone.
+ * are left alone; any other area of a Rooms address sends the non-private
+ * filter as well.
  */
 const getRoomsRequestScope = (
   categoryType: ValueOf<typeof CategoryType>,
@@ -346,7 +356,15 @@ const getRoomsRequestScope = (
         isSectionArea ||
         searchArea === RoomSearchArea.Active ||
         searchArea === RoomSearchArea.Archive;
-      if (!isRoomsArea) return null;
+      if (!isRoomsArea) {
+        if (AREAS_WITH_OWN_LISTS.includes(String(searchArea)))
+          return null;
+        // Spec: private-rooms/sidebar-section, "Rooms section never lists private rooms"
+        return {
+          privacyFilter: RoomPrivacyFilter.NotPrivate,
+          lists: "notPrivate",
+        };
+      }
 
       // Spec: private-rooms/sidebar-section, "Rooms section never lists private rooms"
       const isArchive =

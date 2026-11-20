@@ -780,6 +780,22 @@ describe("UploadDataStore retry — the private-room rules run again on the fixe
     expectEncryptedIntoRoom();
   });
 
+  it("Retry after a failed send", async () => {
+    // The row was marked encrypted by the attempt that failed.
+    const store = storeWithFailed([
+      failedPrivateItem("a", { encrypted: true }),
+    ]);
+    vi.mocked(requireUnlock).mockResolvedValue(null as never);
+    stubStoreMethod(store, "finishUploadFiles");
+
+    await store.retryUploadFiles(t, "a");
+
+    expect(requireUnlock).toHaveBeenCalledTimes(1);
+    expect(store.files[0].error).toBe("Common:EncryptionLockedUpload");
+    expect(sniffDse3Upload).not.toHaveBeenCalled();
+    expect(sessionCalls()).toHaveLength(0);
+  });
+
   it("Retry still without a key", async () => {
     const store = storeWithFailed(
       [

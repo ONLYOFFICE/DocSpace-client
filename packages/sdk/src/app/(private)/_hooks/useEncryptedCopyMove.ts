@@ -106,7 +106,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
       }
       const identity = await requireIdentity();
       if (!identity) {
-        toastr.error(t("Common:EncryptionLockedAddMembers"));
+        toastr.error(t("Common:EncryptionLockedCopy"));
         return;
       }
 
@@ -190,7 +190,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
       const identity = await requireIdentity();
       if (!identity) {
-        toastr.error(t("Common:EncryptionLockedAddMembers"));
+        toastr.error(t("Common:EncryptionLockedCopy"));
         return;
       }
 
@@ -270,7 +270,7 @@ export const useEncryptedCopyMove = (): UseEncryptedCopyMoveReturn => {
 
         if (controller.signal.aborted) return;
 
-        if (failed.length === 1 && failed[0].error instanceof CryptoError) {
+        if (files.length === 1 && failed[0]?.error instanceof CryptoError) {
           toastr.error(getEncryptionErrorMessage(t, failed[0].error));
         } else if (failed.length > 0) {
           toastr.error(

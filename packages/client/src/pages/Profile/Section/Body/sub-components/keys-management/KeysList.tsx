@@ -40,6 +40,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
+import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import { KEY_STATUS_BADGE_COLORS } from "./keyStatusBadgeColors";
@@ -297,12 +298,15 @@ const KeyItem: React.FC<KeyItemProps> = ({
 };
 
 type KeysListProps = {
-  keys: TEncryptionKeyPair[];
+  /** The user's keys; `null` while the list is not known. */
+  keys: TEncryptionKeyPair[] | null;
   onDelete: (keyData: TEncryptionKeyPair) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
+  /** Whether the key is locked; left out while that is not to be shown. */
+  keyState?: "locked" | "unlocked";
 };
 
 export const KeysList: React.FC<KeysListProps> = ({
@@ -312,10 +316,24 @@ export const KeysList: React.FC<KeysListProps> = ({
   onRotate,
   isDeleting,
   deletingKeyId,
+  keyState,
 }) => {
   const { t } = useTranslation(["Common"]);
   // Spec: private-rooms/encryption-core, "One selected key per user".
   const key = selectUserKey(keys);
+
+  // Spec: private-rooms/key-management, "An unknown key list is not shown as no key"
+  if (keys === null) {
+    return (
+      <div
+        className={styles.noKeys}
+        data-testid="keys_list_loading"
+        aria-busy="true"
+      >
+        <Loader type={LoaderTypes.track} size="24px" />
+      </div>
+    );
+  }
 
   if (!key) {
     return (
@@ -335,9 +353,35 @@ export const KeysList: React.FC<KeysListProps> = ({
 
   return (
     <div className={styles.keysList}>
-      <Text fontSize="14px" fontWeight={600} className={styles.keysListTitle}>
-        {t("Common:EncryptionKeys")}
-      </Text>
+      <div className={styles.keysListHeading}>
+        <Text fontSize="14px" fontWeight={600}>
+          {t("Common:EncryptionKeys")}
+        </Text>
+        {/* Spec: private-rooms/key-management, "Keys management shows whether the key is locked" */}
+        {keyState ? (
+          <span data-testid="key_lock_state">
+            <Badge
+              label={
+                keyState === "locked"
+                  ? t("Common:KeyLocked")
+                  : t("Common:KeyUnlocked")
+              }
+              backgroundColor={KEY_STATUS_BADGE_COLORS[keyState].background}
+              color={KEY_STATUS_BADGE_COLORS[keyState].text}
+              maxWidth="none"
+            />
+          </span>
+        ) : null}
+      </div>
+      {keyState === "locked" ? (
+        <Text
+          as="p"
+          className={styles.keyStateNote}
+          dataTestId="key_locked_note"
+        >
+          {t("Common:PrivateRoomLockedBarText")}
+        </Text>
+      ) : null}
       <div className={styles.keysListItems}>
         <KeyItem
           keyData={key}

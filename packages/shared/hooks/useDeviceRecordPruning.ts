@@ -33,38 +33,36 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TGetFolder } from "@docspace/shared/api/files/types";
+import { useEffect } from "react";
 
-import { getFolderInfo } from "@/api/files";
+import { pruneDeviceRecords } from "../services/encryption/device-records";
 
 /**
- * The private page of the room that holds the open folder, keeping the
- * request's parameters and the open subfolder, or null when that room is not
- * private. The room is the entry of the folder's path that has a room type.
- * Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
+ * Removes the device records of the session user that no longer serve
+ * them, whenever the user or the key list the page holds changes. `keys` is
+ * `null` or `undefined` while the list is not known, after a failed read
+ * included.
  */
-export async function getPrivateRoomAddress(
-  folderData: TGetFolder,
-  searchParams: Record<string, string>,
-): Promise<string | null> {
-  const { current, pathParts } = folderData;
+export function useDeviceRecordPruning(
+  userId: string | null | undefined,
+  keys: readonly { publicKey: string }[] | null | undefined,
+): void {
+  const listedPublicKeys = Array.isArray(keys)
+    ? keys
+        .map((key) => key.publicKey)
+        .sort()
+        .join("\n")
+    : null;
 
-  let roomId: number | string | undefined;
-  let isPrivate = false;
-  if (current?.roomType !== undefined && current?.roomType !== null) {
-    roomId = current.id;
-    isPrivate = current.private === true;
-  } else {
-    roomId = pathParts?.find((part) => !!part.roomType)?.id;
-    if (roomId === undefined) return null;
-    isPrivate = (await getFolderInfo(roomId))?.private === true;
-  }
-  if (!isPrivate) return null;
-
-  const params = new URLSearchParams(searchParams);
-  if (String(current.id) === String(roomId)) params.delete("folder");
-  else params.set("folder", String(current.id));
-  const query = params.toString();
-
-  return `/private/${roomId}${query ? `?${query}` : ""}`;
+  useEffect(() => {
+    if (!userId) return;
+    void pruneDeviceRecords(
+      userId,
+      listedPublicKeys === null
+        ? null
+        : listedPublicKeys.split("\n").filter(Boolean),
+    );
+  }, [userId, listedPublicKeys]);
 }
+
+export default useDeviceRecordPruning;

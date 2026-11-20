@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-11-09T09:26:33.337Z",
+  "updated_at": "2026-11-17T13:13:27.056Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveUserConfirmationDialog/index.tsx",
-      "line_number": 106,
+      "line_number": 125,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:Remove\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onDelete}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
@@ -97,25 +97,25 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/dialogs/RemoveUserConfirmationDialog.tsx",
-      "line_number": 93,
+      "line_number": 98,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Common:Remove\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={handleDelete}\n isLoading={isLoading}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 968,
+      "line_number": 974,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 968,
+      "line_number": 974,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 352,
+      "line_number": 356,
       "context": "key: \"s2\",\n isSeparator: true,\n },\n {\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ];\n \n return withRemove ? [...options, ...removeOption] : options;\n };",
       "module": "/packages/shared"
     },

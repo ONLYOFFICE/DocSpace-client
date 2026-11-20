@@ -118,7 +118,6 @@ export function resolveItemRoomContext(
 
 export type UploadGateParams = {
   uploadContext?: ItemUploadContext;
-  alreadyEncrypted?: boolean;
   publicKey?: string | null;
   userId?: string | null;
 };
@@ -131,8 +130,8 @@ export type UploadGateParams = {
 export type UploadRefusalReason = "no-key" | "locked" | "unsupported-room-type";
 
 /**
- * `encrypt` before sending, send `plain` bytes as they are (non-private
- * target or already DSE3), or `refuse` and send nothing.
+ * `encrypt` before sending (a container is re-imported on that path), send
+ * `plain` bytes to a non-private target, or `refuse` and send nothing.
  * Spec: private-rooms/file-operations, "Uploads into a private room are
  * encrypted on the client".
  */
@@ -162,7 +161,7 @@ export function resolveUploadGate(
   if (!params.publicKey || !params.userId) {
     return { action: "refuse", reason: "no-key" };
   }
-  if (params.alreadyEncrypted) return { action: "plain" };
+  // Spec: private-rooms/file-operations, "An upload into a private room is sent only as a verified container"
   return { action: "encrypt" };
 }
 

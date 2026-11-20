@@ -41,6 +41,7 @@ import {
   InvalidFormatError,
   InvalidPassphraseError,
   InvalidRecoveryPhraseError,
+  KeyCheckUnavailableError,
   KeyNotFoundError,
   NoAccessError,
   UnsupportedSuiteError,
@@ -87,6 +88,9 @@ export function getSpecificEncryptionErrorMessage(
   }
   if (error instanceof KeyNotFoundError) {
     return t("Common:NoEncryptionKey");
+  }
+  if (error instanceof KeyCheckUnavailableError) {
+    return t("Common:EncryptedKeyCheckFailed");
   }
   return null;
 }

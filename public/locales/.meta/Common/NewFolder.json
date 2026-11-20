@@ -3,7 +3,7 @@
   "content": "New folder",
   "content_en_sha1_hash": "a711999b72aaf4c3d8e7523718231bf1c8d7cb4d",
   "created_at": "2025-05-19T21:30:46.744Z",
-  "updated_at": "2026-11-05T16:49:39.811Z",
+  "updated_at": "2026-11-17T13:13:26.986Z",
   "comment": {
     "text": "This is a button label or menu item text. It allows users to create a new folder within the file browser.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
-      "line_number": 154,
-      "context": "},\n ],\n });\n } else {\n options.push({\n title: t(\"Common:NewFolder\"),\n description: t(\"EmptyView:CreateNewFileDescription\"),\n icon: <CreateNewFileIcon />,\n key: \"create-folder\",\n onClick: () => dispatchCreate(undefined),\n });",
+      "line_number": 169,
+      "context": "},\n ],\n });\n } else {\n options.push({\n title: t(\"Common:NewFolder\"),\n description: createDescription,\n icon: <CreateNewFileIcon />,\n key: \"create-folder\",\n onClick: () => dispatchCreate(undefined),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 101,
+      "line_number": 107,
       "context": "case \"pdf\":\n return i18n.t(\"Common:NewPDFForm\");\n case \"md\":\n return i18n.t(\"Common:NewMarkdown\");\n default:\n return i18n.t(\"Common:NewFolder\");\n }\n };\n \n export const getDefaultFileTestIdPrefix = (format) => {\n switch (format) {",
       "module": "/packages/client"
     },
@@ -49,8 +49,8 @@
     },
     {
       "file_path": "/packages/shared/components/empty-views/empty-private-room/index.tsx",
-      "line_number": 104,
-      "context": "onClick={onCreateFolder}\n >\n <CreateNewFolderIcon />\n <span className={styles.actionBody}>\n <span className={styles.actionTitle}>\n {t(\"Common:NewFolder\")}\n </span>\n <span className={styles.actionDescription}>\n {t(\"Common:PrivateRoomEmptyCreateFolderDescription\")}\n </span>\n </span>",
+      "line_number": 136,
+      "context": "onClick={onCreateFolder}\n >\n <CreateNewFolderIcon />\n <span className={styles.actionBody}>\n <span className={styles.actionTitle}>\n {t(\"Common:NewFolder\")}\n </span>\n <span className={styles.actionDescription}>\n {isFolder\n ? t(\"Common:PrivateRoomFolderEmptyDescription\")\n : t(\"Common:PrivateRoomEmptyCreateFolderDescription\")}",
       "module": "/packages/shared"
     }
   ],

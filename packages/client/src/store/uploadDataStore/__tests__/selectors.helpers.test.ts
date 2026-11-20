@@ -298,7 +298,7 @@ describe("willEncryptItemImpl", () => {
     expect(willEncryptItemImpl(store, makeUploadFile())).toBe(false);
   });
 
-  it("is false when the item is already encrypted", () => {
+  it("Row marked encrypted by an earlier attempt", () => {
     const { store } = createTestUploadDataStore({ userStore: keyedUserStore });
 
     expect(
@@ -306,7 +306,7 @@ describe("willEncryptItemImpl", () => {
         store,
         makeUploadFile({ encrypted: true, target: makePrivateUploadTarget() }),
       ),
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it("honors a per-file uploadContext override in a non-private folder", () => {

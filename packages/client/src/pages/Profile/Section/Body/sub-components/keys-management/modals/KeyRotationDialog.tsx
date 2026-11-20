@@ -56,7 +56,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import {
   PASSPHRASE_MIN_LENGTH,
   containsCommonPattern,
-  isPassphraseAcceptable,
+  meetsPassphraseRules,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 import {
   PASSPHRASE_SETTINGS,
@@ -132,8 +132,8 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
 
     if (!currentPassphrase) return;
     if (newPassphrase.length < PASSPHRASE_MIN_LENGTH) return;
-    // Spec: key-management, "Passphrase strength gate"
-    if (!rulesPassed || !isPassphraseAcceptable(newPassphrase)) return;
+    // Spec: private-rooms/key-management, "A new passphrase needs no particular characters"
+    if (!rulesPassed || !meetsPassphraseRules(newPassphrase)) return;
     if (newPassphrase !== confirmPassphrase) return;
     if (currentPassphrase === newPassphrase) return;
 
@@ -168,7 +168,7 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
     currentPassphrase.length > 0 &&
     newPassphrase.length >= PASSPHRASE_MIN_LENGTH &&
     rulesPassed &&
-    isPassphraseAcceptable(newPassphrase) &&
+    meetsPassphraseRules(newPassphrase) &&
     newPassphrase === confirmPassphrase &&
     currentPassphrase !== newPassphrase;
 

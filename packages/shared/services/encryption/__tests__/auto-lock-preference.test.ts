@@ -160,6 +160,55 @@ describe("auto-lock preference change", () => {
     setAutoLockPreset("15m");
     expect(listener).toHaveBeenCalledTimes(1);
   });
+
+  describe("A newly picked auto-lock preset applies at once", () => {
+    beforeEach(() => {
+      window.localStorage.clear();
+      setAutoLockScope("user-A");
+    });
+
+    /** What the browser announces when another page writes the preset. */
+    const pickInAnotherTab = (key: string, seconds: number) => {
+      window.localStorage.setItem(key, String(seconds));
+      window.dispatchEvent(
+        new StorageEvent("storage", { key, newValue: String(seconds) }),
+      );
+    };
+
+    it("Preset picked in another tab", () => {
+      const listener = vi.fn();
+      const unsubscribe = subscribeAutoLockChange(listener);
+
+      pickInAnotherTab(`${AUTO_LOCK_TIMEOUT_KEY_PREFIX}user-A`, 300);
+
+      expect(listener).toHaveBeenCalledTimes(1);
+      expect(getAutoLockTimeoutSeconds()).toBe(300);
+      expect(locksWhenTabHidden()).toBe(true);
+      unsubscribe();
+    });
+
+    it("Preset picked in another tab: another user's pick is not heard", () => {
+      const listener = vi.fn();
+      const unsubscribe = subscribeAutoLockChange(listener);
+
+      pickInAnotherTab(`${AUTO_LOCK_TIMEOUT_KEY_PREFIX}user-B`, 300);
+      window.dispatchEvent(
+        new StorageEvent("storage", { key: "unrelated", newValue: "1" }),
+      );
+
+      expect(listener).not.toHaveBeenCalled();
+      unsubscribe();
+    });
+
+    it("Preset picked in another tab: nothing is heard after unsubscribing", () => {
+      const listener = vi.fn();
+      subscribeAutoLockChange(listener)();
+
+      pickInAnotherTab(`${AUTO_LOCK_TIMEOUT_KEY_PREFIX}user-A`, 300);
+
+      expect(listener).not.toHaveBeenCalled();
+    });
+  });
 });
 
 describe("auto-lock preference scoping", () => {

@@ -87,7 +87,11 @@ export default function useDownloadActions() {
         (item) => !item.isFolder && (item as TFileItem).encrypted,
       ) as TFileItem[]);
       if (encryptedFiles.length === data.length) {
-        encryptedActions.downloadZip(encryptedFiles).catch((error) => {
+        const download =
+          encryptedFiles.length === 1
+            ? encryptedActions.downloadFile(encryptedFiles[0])
+            : encryptedActions.downloadZip(encryptedFiles);
+        download.catch((error) => {
           toastr.error(getEncryptedOperationErrorMessage(t, error));
         });
         return;

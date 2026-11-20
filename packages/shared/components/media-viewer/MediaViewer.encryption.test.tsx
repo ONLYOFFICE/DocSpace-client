@@ -4,10 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, waitFor } from "@testing-library/react";
 
 import { DeviceType, FileStatus } from "../../enums";
-import {
-  DecryptionError,
-  NoAccessError,
-} from "../../services/encryption/errors";
+import { DecryptionError } from "../../services/encryption/errors";
 import type { MediaViewerProps } from "./MediaViewer.types";
 
 const viewer = vi.hoisted(() => ({
@@ -23,7 +20,7 @@ vi.mock("./sub-components/ViewerWrapper", () => ({
 
 vi.mock("../../api/files", async (importOriginal) => ({
   ...(await importOriginal<Record<string, unknown>>()),
-  getFileEncryptionAccess: vi.fn(async () => ({ fileKeys: [{}] })),
+  getFileEncryptionAccess: vi.fn(),
 }));
 
 vi.mock("../../services/encryption/secret-storage", async (importOriginal) => ({
@@ -45,9 +42,21 @@ vi.mock("../../services/encryption/file-keys", async (importOriginal) => ({
   decryptFile: vi.fn(),
 }));
 
+vi.mock("../../utils/decodeTiff", () => ({
+  decodeTiff: vi.fn(async () => new Blob(["decoded tiff"])),
+}));
+
+vi.mock("heic2any", () => ({
+  default: vi.fn(async () => new Blob(["decoded heic"])),
+}));
+
 import MediaViewer from "./MediaViewer";
+import { getFileEncryptionAccess } from "../../api/files";
+import { requireUnlock } from "../../services/encryption/secret-storage";
 import { unwrapDekForCurrentUser } from "../../services/encryption/room-file-access";
 import { decryptFile } from "../../services/encryption/file-keys";
+import { decodeTiff } from "../../utils/decodeTiff";
+import heic2any from "heic2any";
 
 const item = (id: number, title: string) => ({
   id,
@@ -64,6 +73,12 @@ const item = (id: number, title: string) => ({
 });
 
 const PLAYLIST = [item(1, "photo.png"), item(2, "shared.png")];
+
+// GET files/{id}/access: file 1 holds no entry for bob, file 2 holds his.
+const accessFor = async (fileId: number) =>
+  ({
+    fileKeys: fileId === 1 ? [] : [{ userId: "bob" }],
+  }) as Awaited<ReturnType<typeof getFileEncryptionAccess>>;
 
 // The message is the key followed by its interpolation values.
 const t = ((key: string, options?: Record<string, unknown>) =>
@@ -103,6 +118,7 @@ describe("The media viewer reports a file that is not shared yet as no access", 
     );
     vi.stubGlobal("URL", { ...URL, createObjectURL: vi.fn(() => "blob:shown") });
     vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.mocked(getFileEncryptionAccess).mockImplementation(accessFor as never);
   });
 
   afterEach(() => {
@@ -111,13 +127,33 @@ describe("The media viewer reports a file that is not shared yet as no access", 
   });
 
   it("Image not shared with the user yet", async () => {
-    vi.mocked(unwrapDekForCurrentUser).mockRejectedValue(new NoAccessError("bob"));
-
     render(<MediaViewer {...props(0)} />);
 
     await waitFor(() =>
       expect(viewer.props?.decryptionError).toBe("Common:EncryptedFileNoAccessYet"),
     );
+    expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
+  });
+
+  it("Not shared yet while the key is locked", async () => {
+    render(<MediaViewer {...props(0)} />);
+
+    await waitFor(() =>
+      expect(viewer.props?.decryptionError).toBe("Common:EncryptedFileNoAccessYet"),
+    );
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("Access answer without fileKeys", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({} as never);
+
+    render(<MediaViewer {...props(1)} />);
+
+    await waitFor(() =>
+      expect(viewer.props?.decryptionError).toBe("Common:EncryptedFileNoAccessYet"),
+    );
+    expect(requireUnlock).not.toHaveBeenCalled();
   });
 
   it("File wrapped but damaged", async () => {
@@ -126,20 +162,19 @@ describe("The media viewer reports a file that is not shared yet as no access", 
     );
     vi.mocked(decryptFile).mockRejectedValue(new DecryptionError("tag mismatch"));
 
-    render(<MediaViewer {...props(0)} />);
+    render(<MediaViewer {...props(1)} />);
 
     await waitFor(() =>
       expect(viewer.props?.decryptionError).toBe(
-        'Common:EncryptionDecryptPartialFailed {"fileNames":"photo.png"}',
+        'Common:EncryptionDecryptPartialFailed {"fileNames":"shared.png"}',
       ),
     );
   });
 
   it("Next file in the viewer", async () => {
-    vi.mocked(unwrapDekForCurrentUser).mockImplementation(async ({ fileId }) => {
-      if (fileId === 1) throw new NoAccessError("bob");
-      return {} as Awaited<ReturnType<typeof unwrapDekForCurrentUser>>;
-    });
+    vi.mocked(unwrapDekForCurrentUser).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof unwrapDekForCurrentUser>>,
+    );
     vi.mocked(decryptFile).mockResolvedValue({
       data: new Blob([new Uint8Array([1, 2, 3])]),
       fileName: "shared.png",
@@ -154,5 +189,82 @@ describe("The media viewer reports a file that is not shared yet as no access", 
 
     await waitFor(() => expect(viewer.props?.fileUrl).toBe("blob:shown"));
     expect(viewer.props?.decryptionError).toBeUndefined();
+  });
+});
+
+describe("Media preview decrypts on the client", () => {
+  const DECRYPTED = new Uint8Array([1, 2, 3]);
+  let createObjectURL: ReturnType<typeof vi.fn>;
+
+  beforeEach(() => {
+    viewer.props = null;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) })),
+    );
+    createObjectURL = vi.fn(() => "blob:shown");
+    vi.stubGlobal("URL", { ...URL, createObjectURL });
+    vi.mocked(getFileEncryptionAccess).mockImplementation(accessFor as never);
+    vi.mocked(unwrapDekForCurrentUser).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof unwrapDekForCurrentUser>>,
+    );
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  const openDecrypted = async (fileName: string) => {
+    vi.mocked(decryptFile).mockResolvedValue({
+      data: new Blob([DECRYPTED]),
+      fileName,
+    });
+    render(<MediaViewer {...props(1)} />);
+    await waitFor(() => expect(viewer.props?.fileUrl).toBe("blob:shown"));
+  };
+
+  it("Open encrypted TIFF or HEIC image: TIFF", async () => {
+    await openDecrypted("scan.tiff");
+
+    const [bytes] = vi.mocked(decodeTiff).mock.calls[0];
+    expect(new Uint8Array(bytes)).toEqual(DECRYPTED);
+    const decoded = await vi.mocked(decodeTiff).mock.results[0].value;
+    expect(createObjectURL).toHaveBeenCalledWith(decoded);
+    expect(heic2any).not.toHaveBeenCalled();
+    // The file fetch is the only one; nothing is requested after decryption.
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("Open encrypted TIFF or HEIC image: HEIC", async () => {
+    await openDecrypted("photo.heic");
+
+    const [{ blob }] = vi.mocked(heic2any).mock.calls[0] as unknown as [
+      { blob: Blob },
+    ];
+    expect(new Uint8Array(await blob.arrayBuffer())).toEqual(DECRYPTED);
+    const decoded = await vi.mocked(heic2any).mock.results[0].value;
+    expect(createObjectURL).toHaveBeenCalledWith(decoded);
+    expect(decodeTiff).not.toHaveBeenCalled();
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("Open encrypted TIFF or HEIC image: HEIC the converter cannot read", async () => {
+    vi.mocked(heic2any).mockRejectedValueOnce(new Error("unsupported"));
+
+    await openDecrypted("photo.heic");
+
+    const [shown] = createObjectURL.mock.calls[0] as [Blob];
+    expect(new Uint8Array(await shown.arrayBuffer())).toEqual(DECRYPTED);
+    expect(viewer.props?.decryptionError).toBeUndefined();
+  });
+
+  it("Open encrypted image", async () => {
+    await openDecrypted("shared.png");
+
+    const [shown] = createObjectURL.mock.calls[0] as [Blob];
+    expect(new Uint8Array(await shown.arrayBuffer())).toEqual(DECRYPTED);
+    expect(decodeTiff).not.toHaveBeenCalled();
+    expect(heic2any).not.toHaveBeenCalled();
   });
 });

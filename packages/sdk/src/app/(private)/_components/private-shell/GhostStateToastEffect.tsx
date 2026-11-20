@@ -48,8 +48,11 @@ import {
 import { Link } from "@onlyoffice/apps-ui-kit/components/link";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
+import { useKeysManagementLink } from "../../_hooks/useKeysManagementLink";
+
 const GhostStateToastEffect: React.FC = () => {
   const { t } = useTranslation(["Common"]);
+  const { open } = useKeysManagementLink();
   React.useEffect(() => {
     registerGhostStateHandler(() => {
       toastr.warning(
@@ -64,7 +67,7 @@ const GhostStateToastEffect: React.FC = () => {
               color="accent"
               onClick={() => {
                 toastr.clear();
-                window.open("/profile/keys-management", "_blank");
+                open();
               }}
             />,
           ]}
@@ -75,7 +78,7 @@ const GhostStateToastEffect: React.FC = () => {
       );
     });
     return () => clearGhostStateHandler();
-  }, [t]);
+  }, [t, open]);
   return null;
 };
 

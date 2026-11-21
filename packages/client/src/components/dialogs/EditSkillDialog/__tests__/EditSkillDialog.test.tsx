@@ -173,6 +173,11 @@ describe("EditSkillDialog", () => {
     expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
   });
 
+  it("opens a new skill as a side panel", () => {
+    render(<EditSkillDialog folderId={7} onClose={onClose} refreshFiles={refreshFiles} />);
+    expect(screen.getByTestId("form").dataset.displayType).toBe("aside");
+  });
+
   it("offers no Edit in the instructions view to those who may not edit the skill", async () => {
     render(<EditSkillDialog file={file} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
     await screen.findByTestId("editor");

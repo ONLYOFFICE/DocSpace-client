@@ -234,12 +234,14 @@ const EditSkillDialog = ({
     }
   };
 
+  // A new skill is written in a side panel, as one made with AI is; a skill
+  // that exists is read and edited in a modal.
   return (
     <ModalDialog
       visible
-      displayType={ModalDialogType.modal}
-      autoMaxHeight
-      className={styles.dialog}
+      displayType={isNew ? ModalDialogType.aside : ModalDialogType.modal}
+      autoMaxHeight={!isNew}
+      className={isNew ? undefined : styles.dialog}
       withForm
       onSubmit={(e) => {
         e.preventDefault();

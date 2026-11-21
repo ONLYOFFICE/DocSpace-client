@@ -45,9 +45,18 @@ import EmptyFilterRoomsDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter
 import EmptyFilterFilesLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg";
 import EmptyFilterFilesDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg";
 
+import EmptyFilterAiLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.ai.agents.light.svg";
+import EmptyFilterAiDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.ai.agents.dark.svg";
+
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { EmptyView } from "@docspace/shared/components/empty-view";
+
+import {
+  getAiEmptyFilterDescription,
+  getAiWorkspaceListType,
+  getAiWorkspaceTabUrl,
+} from "SRC_DIR/helpers/aiWorkspace";
 
 // import EmptyContainer from "./EmptyContainer";
 
@@ -71,15 +80,32 @@ const EmptyFilterContainer = ({
   userId,
   folderType,
   roomsFilterSearchArea,
+  isAiHubFolder,
+  roomType,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const descriptionText = isRooms
-    ? t("Common:EmptyFilterRoomsDescription")
-    : t("Common:EmptyFilterFilesDescription");
+  const aiListType = getAiWorkspaceListType(location.search);
+
+  const descriptionText =
+    getAiEmptyFilterDescription(t, {
+      isAiHubFolder,
+      listType: aiListType,
+      roomType,
+    }) ??
+    (isRooms
+      ? t("Common:EmptyFilterRoomsDescription")
+      : t("Common:EmptyFilterFilesDescription"));
 
   const getIconURL = () => {
+    if (isAiHubFolder)
+      return theme.isBase ? (
+        <EmptyFilterAiLightIcon />
+      ) : (
+        <EmptyFilterAiDarkIcon />
+      );
+
     if (isRooms)
       return theme.isBase ? (
         <EmptyFilterRoomsLightIcon />
@@ -112,6 +138,14 @@ const EmptyFilterContainer = ({
 
     if (isArchiveFolder) {
       setClearSearch(true);
+      return;
+    }
+    // A list of the AI Chat section is the section's rooms narrowed to one
+    // room type: clearing the filter keeps that type, or the Skill sets would
+    // turn into every room of the section under the Agents title.
+    if (isAiHubFolder) {
+      setClearSearch(true);
+      navigate(getAiWorkspaceTabUrl(false, aiListType, userId));
       return;
     }
     if (isRoomsFolder || isFormsFolder || isTemplatesFolder) {
@@ -178,6 +212,7 @@ export default inject(
       isRecentFolder,
       isFormsFolder,
       isTemplatesFolder,
+      isAiHubFolder,
     } = treeFoldersStore;
 
     const isRooms =
@@ -201,6 +236,8 @@ export default inject(
       userId: user?.id,
       folderType: filesStore.filter.folderType,
       roomsFilterSearchArea: filesStore.roomsFilter.searchArea,
+      isAiHubFolder,
+      roomType: selectedFolderStore.roomType,
 
       isPublicRoom,
       publicRoomKey,

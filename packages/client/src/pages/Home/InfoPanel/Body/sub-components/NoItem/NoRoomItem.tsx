@@ -34,10 +34,15 @@
  */
 
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 import classNames from "classnames";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryType } from "@docspace/shared/utils/common";
+
+import { getAiWorkspaceInfoPanelHint } from "SRC_DIR/helpers/aiWorkspace";
 
 import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url";
 import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url";
@@ -46,7 +51,14 @@ import styles from "./NoItem.module.scss";
 
 const NoRoomItem = () => {
   const { isBase } = useTheme();
-  const { t } = useTranslation(["InfoPanel"]);
+  const { t } = useTranslation(["InfoPanel", "Common"]);
+  const location = useLocation();
+
+  // A list of the AI section speaks of what it lists, not of rooms.
+  const text =
+    getCategoryType(location) === CategoryType.AiHub
+      ? getAiWorkspaceInfoPanelHint(t, location.search)
+      : t("RoomsEmptyScreenTent");
 
   const imageSrc = isBase
     ? InfoPanelRoomEmptyScreenSvgUrl
@@ -63,7 +75,7 @@ const NoRoomItem = () => {
         <img src={imageSrc} alt="No Room" />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("RoomsEmptyScreenTent")}
+        {text}
       </Text>
     </div>
   );

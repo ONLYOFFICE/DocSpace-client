@@ -40,6 +40,10 @@ export type RoomTypeProps = {
   roomType?: RoomsType;
   isOpen: boolean;
 
+  /**
+   * `displayItem` is the fixed, not clickable type at the top of a room's
+   * create or edit form when the type cannot be changed there.
+   */
   type?: "listItem" | "dropdownButton" | "dropdownItem" | "displayItem";
   id?: string;
   selectedId: string | number;

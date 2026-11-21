@@ -82,6 +82,7 @@ const AiArbiterShell = ({ commonData, children }: AiArbiterShellProps) => {
         theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
         locale={i18n.language}
         canUseAi={!!commonData.userId}
+        userId={commonData.userId ? String(commonData.userId) : undefined}
       >
         {children}
       </AiAgentProviders>

@@ -205,6 +205,7 @@ const AiAgentsAiChatProviders = ({
       // Guests are intentionally NOT excluded here — the agents surface is
       // left untouched for now.
       canUseAi={!!user}
+      userId={user?.id}
       callbacks={callbacks}
       entityId={entityId}
       formatChatError={formatChatError}

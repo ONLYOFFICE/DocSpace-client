@@ -63,6 +63,8 @@ import ThirdPartyComponent from "../History/HistoryBlockContent/ThirdParty";
 import Members from "../Members";
 import Share from "../Share";
 import Metadata from "../Metadata";
+import AiAgentContext from "../AiAgentContext";
+import AiAgentContent from "../AiAgentContent";
 import { getEntryKind } from "../Metadata/utils";
 import Plugin from "../Plugin";
 
@@ -390,6 +392,12 @@ const FilesView = ({
         />
       );
     }
+
+    if (value === InfoPanelView.infoContext)
+      return <AiAgentContext id={Number(selection.id)} />;
+
+    if (value === InfoPanelView.infoContent)
+      return <AiAgentContent projectId={Number(selection.id)} />;
 
     if (value === InfoPanelView.infoMetadata) {
       if (!isMetadataSupported(selection)) return null;

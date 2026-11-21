@@ -125,6 +125,7 @@ import type PublicRoomStore from "./PublicRoomStore";
 import type AppsStore from "./AppsStore";
 import type IndexingStore from "./IndexingStore";
 import type DialogsStore from "./DialogsStore";
+import type AiProjectsStore from "./AiProjectsStore";
 
 import {
   PersistenceKeys,
@@ -387,6 +388,14 @@ class FilesStore {
   > = null;
 
   arrRoomGroups: unknown[] = [];
+
+  // Attached post-construction in store/index.ts, not observable: the
+  // agents' tiles read their summaries again with the list, and when an
+  // agent's room is updated or deleted.
+  declare aiProjectsStore?: Pick<
+    AiProjectsStore,
+    "refreshTileSummaries" | "refreshTileSummary" | "forgetTileSummary"
+  >;
 
   // created by a constructor assignment before
   // makeAutoObservable in the old JS (never a class field) — `declare`

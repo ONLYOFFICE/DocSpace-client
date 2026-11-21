@@ -14,6 +14,16 @@ describe("project folder memory", () => {
     expect(readProjectFolder("u2", 5)).toBeNull();
   });
 
+  it("keeps whether the remembered source is a room or a folder", () => {
+    writeProjectFolder("u1", 5, { ...folder, kind: "room" });
+    expect(readProjectFolder("u1", 5)).toEqual({ ...folder, kind: "room" });
+    localStorage.setItem(
+      "aiProjectFolderContext:u1:6",
+      JSON.stringify({ ...folder, kind: "drive" }),
+    );
+    expect(readProjectFolder("u1", 6)).toEqual(folder);
+  });
+
   it("forgets the folder once it is disconnected", () => {
     writeProjectFolder("u1", 5, folder);
     writeProjectFolder("u1", 5, null);

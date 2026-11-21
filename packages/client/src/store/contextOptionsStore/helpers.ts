@@ -301,6 +301,54 @@ export const layoutRoomOptions = (
   ];
 };
 
+// An agent's menu (ai-agent-page, "Actions menu of an agent" and "Actions
+// menu on a card"): select and open on a card, then Edit agent, Share agent
+// and Agent info, pin and notifications, copy link, change owner and Leave
+// agent, and Delete agent last after a separator.
+const AGENT_HEAD_KEYS = ["select", "open"];
+const AGENT_MAIN_KEYS = [
+  "edit-room",
+  "invite-users-to-room",
+  "room-info",
+  "pin-room",
+  "unpin-room",
+  "mute-room",
+  "unmute-room",
+  "link-for-room-members",
+  "change-room-owner",
+  "leave-room",
+];
+const AGENT_LAST_KEYS = ["delete"];
+const AGENT_PLACED_KEYS = new Set([
+  ...AGENT_HEAD_KEYS,
+  ...AGENT_MAIN_KEYS,
+  ...AGENT_LAST_KEYS,
+]);
+
+export const layoutAgentOptions = (
+  options: TContextOption[],
+  customActions: TContextOption[],
+): TContextOption[] => {
+  const shown = options.filter(
+    (option) => !option.isSeparator && !option.disabled,
+  );
+  const pick = (keys: string[]) =>
+    keys.flatMap((key) => shown.filter((option) => option.key === key));
+
+  return [
+    ...pick(AGENT_HEAD_KEYS),
+    { key: "separator-agent-head", isSeparator: true },
+    ...pick(AGENT_MAIN_KEYS),
+    // Anything else the agent is offered (a plugin's More options) stays in
+    // the main block.
+    ...shown.filter((option) => !AGENT_PLACED_KEYS.has(option.key)),
+    { key: "separator-custom-actions", isSeparator: true },
+    ...customActions,
+    { key: "separator-agent-delete", isSeparator: true },
+    ...pick(AGENT_LAST_KEYS),
+  ];
+};
+
 export const onShowEditingToast = (t: TTranslation) => {
   toastr.error(t("Files:DocumentEdited"));
 };

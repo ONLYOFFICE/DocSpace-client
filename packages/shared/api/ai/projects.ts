@@ -38,7 +38,8 @@ import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import { VectorizationStatus } from "../../enums";
 import { request } from "../client";
 import { isChatCapableProfile } from "./enums";
-import { getProfileById } from "./index";
+import { getProfileAssignments, getProfileById } from "./index";
+import { getProgress } from "../files";
 import type { TOperation } from "../files/types";
 
 /**
@@ -66,12 +67,12 @@ const modelUrl = (id: number) => `${roomsUrl}/${id}/model`;
 const instructionsUrl = (id: number) => `${roomsUrl}/${id}/instructions`;
 const suggestionsUrl = (id: number) => `${roomsUrl}/${id}/suggestions`;
 
-/** `FileShare` on the server, limited to what a project uses: a Member is the room's Read. */
+/** `FileShare` on the server, limited to what a project uses: a Member is the room's Content creator. */
 export const AiProjectAccess = {
   None: 0,
   Owner: 1,
-  Member: 2,
   ProjectManager: 9,
+  Member: 11,
 } as const;
 export type TAiProjectAccess =
   (typeof AiProjectAccess)[keyof typeof AiProjectAccess];
@@ -176,6 +177,12 @@ export type TAiProjectSettings = {
    * unknown until the project is read on its own.
    */
   partial?: true;
+  /**
+   * The model could not be read: `profile` is `null` for want of an answer,
+   * not because the project has no model of its own. The chat runs on as
+   * the server decides; the project form must not save over the real model.
+   */
+  modelUnread?: true;
 };
 
 /** The room security flags a project reads, plus `Leave`, which the client derives. */
@@ -450,8 +457,10 @@ const toRoomFields = ({ title, tags, logo }: TAiProjectRequest) => {
 
 /** `FilterType.FilesOnly`. */
 const FILTER_FILES_ONLY = 1;
-/** Page size of the Files API, also the most files a Knowledge room keeps; a larger `count` answers 400. */
+/** Page size of the Files API; a larger `count` answers 400. */
 const FILES_PAGE_SIZE = 100;
+/** The most pages of a Knowledge room's files read in one go (5,000 files). */
+const KNOWLEDGE_FILES_MAX_PAGES = 50;
 
 /** A linked room as `GET files/rooms/{id}/sources` answers it. */
 type TSourceDto = { id: number; title: string; logo?: Partial<TAiProjectLogo> | null };
@@ -719,23 +728,135 @@ export const getAiProjects = async (
   return { ...page, folders: page.folders.map(toAiProject) } as TAiProjectsPage;
 };
 
+/** An agent that uses a skill set or a knowledge base, as the room lists it. */
+export type TAiRoomProject = {
+  id: number;
+  title: string;
+  logo: TAiProjectLogo;
+};
+
+export type TAiRoomProjectsPage = {
+  items: TAiRoomProject[];
+  /** The agents of all pages the caller may read. */
+  total: number;
+};
+
+/**
+ * The agents that use a skill set or a knowledge base
+ * (`GET files/rooms/{id}/projects`), one page sorted by title. Only the
+ * agents the caller may read are listed, so `total` can be lower than the
+ * room's `linkedProjectsCount`, which counts every agent.
+ */
+export const getAiRoomProjects = async (
+  roomId: number,
+  query: { startIndex?: number; count?: number } = {},
+  signal?: AbortSignal,
+): Promise<TAiRoomProjectsPage> => {
+  const res = await request({
+    method: "GET",
+    url: `${roomsUrl}/${roomId}/projects${toParams(query)}`,
+    signal,
+  });
+  // An envelope that reports `total` reaches here as `{ total, items }`.
+  const paged = !!res && typeof res === "object" && "items" in res;
+  const list = ((paged ? (res as { items: unknown }).items : res) ?? []) as (Omit<TAiRoomProject, "logo"> & {
+    logo?: Partial<TAiProjectLogo> | null;
+  })[];
+  return {
+    items: list.map((project) => ({ id: project.id, title: project.title ?? "", logo: toLogo(project.logo) })),
+    total: paged ? Number((res as { total?: number }).total ?? list.length) : list.length,
+  };
+};
+
 /** Drops the project's uploaded logo; it is drawn by its colour and cover again. */
 export const deleteAiProjectLogo = async (id: number) => {
   const res = await request({ method: "DELETE", url: `${roomsUrl}/${id}/logo` });
   return toAiProject(res as TAiProjectRoomDto);
 };
 
-export const getAiProject = async (id: number) => {
+/** The project with its `modelUnread` mark set or dropped. */
+const withModelUnread = (project: TAiProject, unread: boolean): TAiProject => {
+  const { modelUnread: _, ...aiProject } = project.aiProject;
+  return { ...project, aiProject: unread ? { ...aiProject, modelUnread: true } : aiProject };
+};
+
+/**
+ * Reads a project in full. A model that cannot be read leaves the project
+ * without one, marked `modelUnread`; with `requireModel` (the project form,
+ * which saves the model it shows) the read fails instead.
+ */
+export const getAiProject = async (id: number, options?: { requireModel?: boolean }) => {
+  let modelUnread = false;
   const [room, sources, profile, instructions, suggestions] = await Promise.all([
     request({ method: "GET", url: `${roomsUrl}/${id}` }),
     getSources(id),
-    // A model that cannot be read leaves the project on the portal default.
-    getModel(id).catch(() => null),
+    options?.requireModel
+      ? getModel(id)
+      : getModel(id).catch(() => {
+          modelUnread = true;
+          return null;
+        }),
     // Instructions or suggestions that cannot be read leave the chat without them.
     getAiProjectInstructions(id).catch(() => ""),
     getAiProjectSuggestions(id).catch(() => []),
   ]);
-  return toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, { instructions, suggestions }));
+  const project = toAiProject(withSources(room as TAiProjectRoomDto, sources, profile, { instructions, suggestions }));
+  return modelUnread ? withModelUnread(project, true) : project;
+};
+
+
+/** What a project's tile in the list says about it: its model and the names of its linked rooms. */
+export type TAiProjectSummary = {
+  /** The model's name; `null` when none is selected and the project runs on the portal default. */
+  model: string | null;
+  /** `false` when the stored model is gone or cannot chat. */
+  modelAvailable: boolean;
+  skills: string[];
+  knowledge: string[];
+};
+
+/** The summary of a project already read in full. */
+export const toAiProjectSummary = ({ aiProject }: TAiProject): TAiProjectSummary => ({
+  model: aiProject.profile?.name ?? null,
+  modelAvailable: aiProject.profile?.available !== false,
+  skills: aiProject.instructionsRooms.map((room) => room.title).filter(Boolean),
+  knowledge: aiProject.knowledgeRooms.map((room) => room.title).filter(Boolean),
+});
+
+/**
+ * The name of the model an agent without one of its own runs on: the profile
+ * bound to the `Chat` action, or to the `Default` slot when that action has
+ * none. `null` when neither is bound or the profile cannot be read.
+ */
+export const getDefaultChatModelName = async (): Promise<string | null> => {
+  try {
+    const assignments = await getProfileAssignments();
+    const profileId = assignments.Chat ?? assignments.Default;
+    if (!profileId) return null;
+    return (await getProfileById(profileId))?.name ?? null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * The summary of a project of the list, which answers the rooms without
+ * their settings: its linked rooms and its model, without the room itself,
+ * the instructions or the suggestions.
+ */
+export const getAiProjectSummary = async (id: number): Promise<TAiProjectSummary> => {
+  const [sources, profile] = await Promise.all([
+    getSources(id),
+    // A model that cannot be read leaves the project on the portal default.
+    getModel(id).catch(() => null),
+  ]);
+  const titles = (rooms: TSourceDto[] | undefined) => (rooms ?? []).map((room) => room.title).filter(Boolean);
+  return {
+    model: profile?.name ?? null,
+    modelAvailable: profile?.available !== false,
+    skills: titles(sources.instructionsRooms),
+    knowledge: titles(sources.knowledgeRooms),
+  };
 };
 
 /**
@@ -747,9 +868,16 @@ export const refreshAiProjectSettings = async (project: TAiProject): Promise<TAi
   const known = project.aiProject.profile;
   const knownInstructions = project.aiProject.instructions;
   const knownSuggestions = project.aiProject.suggestions;
+  // A model still unread stays marked; one read now drops the mark.
+  let modelUnread = !!project.aiProject.modelUnread;
   const [sources, profile, instructions, readSuggestions] = await Promise.all([
     getSources(project.id),
-    getAiProjectModel(project.id, known).catch(() => known),
+    getAiProjectModel(project.id, known)
+      .then((read) => {
+        modelUnread = false;
+        return read;
+      })
+      .catch(() => known),
     getAiProjectInstructions(project.id).catch(() => knownInstructions),
     getAiProjectSuggestions(project.id).catch(() => knownSuggestions),
   ]);
@@ -761,16 +889,20 @@ export const refreshAiProjectSettings = async (project: TAiProject): Promise<TAi
   const ids = (rooms: TAiProjectSource[]) => rooms.map(({ id, title }) => `${id}:${title}`).join(",");
   if (
     profile === known &&
+    modelUnread === !!project.aiProject.modelUnread &&
     instructions === knownInstructions &&
     suggestions === knownSuggestions &&
     ids(instructionsRooms) === ids(project.aiProject.instructionsRooms) &&
     ids(knowledgeRooms) === ids(project.aiProject.knowledgeRooms)
   )
     return project;
-  return {
-    ...project,
-    aiProject: { ...project.aiProject, profile, instructions, suggestions, instructionsRooms, knowledgeRooms },
-  };
+  return withModelUnread(
+    {
+      ...project,
+      aiProject: { ...project.aiProject, profile, instructions, suggestions, instructionsRooms, knowledgeRooms },
+    },
+    modelUnread,
+  );
 };
 
 export const createAiProject = async (data: TAiProjectRequest) => {
@@ -855,10 +987,13 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
   const { warnings, removed, added } = await syncSources(id, data.aiProject, linked);
   const sources = await syncedSources(id, linked, removed, added, data.aiProject?.rooms);
   const profileId = data.aiProject?.profileId;
-  const model =
-    current && (profileId === undefined || profileId === (current.aiProject.profile?.id ?? null))
-      ? { profile: current.aiProject.profile, warnings: [] as TAiProjectWarning[] }
-      : await saveModel(id, profileId);
+  const keepModel =
+    !!current && (profileId === undefined || profileId === (current.aiProject.profile?.id ?? null));
+  const model = keepModel
+    ? { profile: current.aiProject.profile, warnings: [] as TAiProjectWarning[] }
+    : await saveModel(id, profileId);
+  // A model kept from a project whose model could not be read is still unknown.
+  const modelUnread = keepModel && !!current?.aiProject.modelUnread;
   // The instructions are written only when the form changed them; without
   // the opened project they are read back.
   const text = data.aiProject?.instructions;
@@ -892,19 +1027,37 @@ export const updateAiProject = async (id: number, data: TAiProjectRequest, curre
         allWarnings,
       ),
     );
-    return { ...current, aiProject };
+    return withModelUnread({ ...current, aiProject }, modelUnread);
   }
-  return toAiProject(withSources(room as TAiProjectRoomDto, sources, model.profile, chat, allWarnings));
+  return withModelUnread(
+    toAiProject(withSources(room as TAiProjectRoomDto, sources, model.profile, chat, allWarnings)),
+    modelUnread,
+  );
 };
 
-/** Starts the delete; the answer is the file operation to follow. */
+/** How often a queued delete is asked how far it got. */
+export const AI_PROJECT_DELETE_POLL_MS = 1000;
+
+/**
+ * Deletes a project for good. The server queues the delete as a file
+ * operation: it is followed until it ends, as the Files list follows its
+ * own, and one that ends with an error rejects with it. An operation the
+ * server no longer lists has ended.
+ */
 export const deleteAiProject = async (id: number) => {
-  const res = await request({
+  let operation = (await request({
     method: "DELETE",
     url: `${roomsUrl}/${id}`,
     data: { deleteAfter: false },
-  });
-  return res as TOperation;
+  })) as TOperation | undefined;
+  while (operation?.id && !operation.finished && !operation.error) {
+    await new Promise((resolve) => {
+      setTimeout(resolve, AI_PROJECT_DELETE_POLL_MS);
+    });
+    const operationId: string = operation.id;
+    operation = (await getProgress(operationId))?.find((item) => item.id === operationId);
+  }
+  if (operation?.error) throw new Error(operation.error);
 };
 
 export const getAiProjectSkills = async (id: number) => {
@@ -923,18 +1076,33 @@ type TKnowledgeFileDto = {
   security?: { Vectorization?: boolean };
 };
 
+/** A page of a folder's files; an envelope that reports `total` reaches here as `{ total, items }`. */
+const readFilesPage = async (roomId: number, startIndex: number, count: number) => {
+  const res = await request({
+    method: "GET",
+    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, startIndex: startIndex || undefined, count })}`,
+  });
+  const page = (
+    res && typeof res === "object" && "items" in res ? (res as { items: unknown }).items : res
+  ) as { files?: TKnowledgeFileDto[]; total?: number } | null;
+  return { files: page?.files ?? [], total: page?.total };
+};
+
 /**
  * A linked Knowledge room's files (`GET files/{roomId}`, files only) with
- * their vectorization state, read when its row in the Knowledge card is
- * expanded. One page holds them all: a Knowledge room keeps at most 100
- * files.
+ * their vectorization state: the Knowledge card's expanded row and the state
+ * of a knowledge base. The room is read page by page until its `total` is
+ * in, up to `KNOWLEDGE_FILES_MAX_PAGES` pages.
  */
 export const getAiProjectKnowledgeFiles = async (roomId: number): Promise<TAiProjectKnowledgeFile[]> => {
-  const page = (await request({
-    method: "GET",
-    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: FILES_PAGE_SIZE })}`,
-  })) as { files?: TKnowledgeFileDto[] };
-  return (page.files ?? []).map((file) => {
+  const files: TKnowledgeFileDto[] = [];
+  for (let pageIndex = 0; pageIndex < KNOWLEDGE_FILES_MAX_PAGES; pageIndex += 1) {
+    const page = await readFilesPage(roomId, files.length, FILES_PAGE_SIZE);
+    files.push(...page.files);
+    // The last page: shorter than asked, or the total reached.
+    if (page.files.length < FILES_PAGE_SIZE || (page.total !== undefined && files.length >= page.total)) break;
+  }
+  return files.map((file) => {
     const status = file.vectorizationStatus ?? null;
     return {
       id: file.id,
@@ -952,10 +1120,5 @@ export const getAiProjectKnowledgeFiles = async (roomId: number): Promise<TAiPro
  * only: one row is asked for, the answer's `total` is what is read), for the
  * number in the Knowledge card's title before the room is expanded.
  */
-export const getAiProjectKnowledgeFilesCount = async (roomId: number): Promise<number> => {
-  const page = (await request({
-    method: "GET",
-    url: `/files/${roomId}${toParams({ filterType: FILTER_FILES_ONLY, count: 1 })}`,
-  })) as { total?: number };
-  return page.total ?? 0;
-};
+export const getAiProjectKnowledgeFilesCount = async (roomId: number): Promise<number> =>
+  (await readFilesPage(roomId, 0, 1)).total ?? 0;

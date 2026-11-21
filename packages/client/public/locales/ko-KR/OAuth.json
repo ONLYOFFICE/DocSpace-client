@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG 또는 SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "유효하지 않은 토큰",
-  "LastModified": "마지막 수정",
   "NewApp": "새로운 애플리케이션",
   "NoAuthorizedApps": "인증된 앱이 없습니다",
   "NoOAuthAppHeader": "OAuth 애플리케이션이 없습니다",

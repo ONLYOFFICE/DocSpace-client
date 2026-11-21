@@ -41,11 +41,15 @@ import { useNavigate } from "react-router";
 
 import { DragAndDrop } from "@onlyoffice/apps-ui-kit/components/drag-and-drop";
 import { RoomsType } from "@docspace/shared/enums";
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
 
 import { FileTile as FileTileComponent } from "@onlyoffice/apps-ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@onlyoffice/apps-ui-kit/components/tiles/folder-tile";
 import { RoomTile } from "@onlyoffice/apps-ui-kit/components/tiles/room-tile";
 import { TemplateTile } from "@onlyoffice/apps-ui-kit/components/tiles/template-tile";
+import AiProjectTile from "./AiProjectTile";
+import AiSourceRoomTile from "./AiSourceRoomTile";
+import SkillTilePreview from "./SkillTilePreview";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeLabel } from "SRC_DIR/helpers/filesUtils";
@@ -108,6 +112,7 @@ const FileTile = (props) => {
     disableDrag,
     canCreateSecurity,
     documentTitle,
+    isSkill,
   } = props;
 
   const navigate = useNavigate();
@@ -158,6 +163,7 @@ const FileTile = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      roomType={item.roomType}
       isPrivateRoom={item.isPrivateRoom}
       showDefault={
         !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
@@ -242,6 +248,31 @@ const FileTile = (props) => {
           SpaceQuotaComponent={SpaceQuota}
         />
       );
+    if (item.isRoom && item.roomType === RoomsType.AiProjectRoom)
+      return (
+        <AiProjectTile
+          {...commonProps}
+          key={item.id}
+          badgeUrl={badgeUrl}
+          thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
+        />
+      );
+    // A skill set and a knowledge base tell what their table rows tell.
+    if (
+      item.isRoom &&
+      (item.roomType === RoomsType.InstructionsRoom ||
+        item.roomType === RoomsType.KnowledgeRoom)
+    )
+      return (
+        <AiSourceRoomTile
+          {...commonProps}
+          key={item.id}
+          badgeUrl={badgeUrl}
+          thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
+        />
+      );
     if (item.isRoom)
       return (
         <RoomTile
@@ -290,6 +321,28 @@ const FileTile = (props) => {
       );
     if (item.isFolder)
       return <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />;
+
+    // A skill shows the command that calls it and its description, as its
+    // table row and the Info panel do, instead of a Markdown thumbnail. The
+    // text starts in the corner where a file keeps its quick buttons, so
+    // they sit in the opposite one, after the badges.
+    if (isSkill)
+      return (
+        <FileTileComponent
+          {...commonProps}
+          key={item.id}
+          temporaryIcon={<SkillTilePreview file={item} />}
+          thumbnail=""
+          thumbSize={thumbSize}
+          badges={
+            <div className={styles.skillCorner}>
+              {badgesComponent}
+              {quickButtonsComponent}
+            </div>
+          }
+          thumbnailClick={onFilesClick}
+        />
+      );
 
     return (
       <FileTileComponent
@@ -345,6 +398,7 @@ export default inject(
       treeFoldersStore,
       infoPanelStore,
       currentQuotaStore,
+      selectedFolderStore,
     },
     { item },
   ) => {
@@ -372,6 +426,14 @@ export default inject(
       isHighlight,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
+      isSkill:
+        !item?.isFolder &&
+        !item?.isRoom &&
+        isSkillFile(item ?? {}, {
+          id: selectedFolderStore.id,
+          roomType: selectedFolderStore.roomType,
+          parentRoomType: selectedFolderStore.parentRoomType,
+        }),
     };
   },
 )(

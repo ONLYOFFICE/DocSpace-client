@@ -81,7 +81,11 @@ import {
   isPrivateRoomsListRoot,
   isPrivateRoomsSectionRoot,
 } from "SRC_DIR/helpers/privateRoomsSection";
-import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
+import {
+  getAiWorkspaceCreateLabel,
+  getAiWorkspaceTitle,
+  isAiWorkspaceCreateRefused,
+} from "SRC_DIR/helpers/aiWorkspace";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import {
   getLifetimePeriodTranslation,
@@ -90,7 +94,9 @@ import {
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { HeadingWithTooltip } from "@onlyoffice/apps-ui-kit/components/heading";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import AiChatAgentPicker from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-agent-picker";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
@@ -103,6 +109,7 @@ import KeyStateIndicator from "./sub-components/KeyStateIndicator";
 import PrivateSectionNote from "./sub-components/PrivateSectionNote";
 import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -115,6 +122,7 @@ const SectionHeaderContent = (props) => {
     isAiSectionFolder,
     isAiProjectRoomRoot,
     isAiOff,
+    vectorizationEnabled,
     security,
     setIsIndexEditingMode,
     tReady,
@@ -181,6 +189,7 @@ const SectionHeaderContent = (props) => {
     showMenu,
     onCreateAndCopySharedLink,
     showNavigationButton,
+    onClickInviteUsers,
     isFormRoomRoot,
     startUpload,
     resolveOpenFolderTarget,
@@ -514,6 +523,10 @@ const SectionHeaderContent = (props) => {
 
     onCreateAndCopySharedLink(shareTarget, t);
   }, [onCreateAndCopySharedLink, navigationPath, selectedFolder, t]);
+
+  const onShareAgentClick = React.useCallback(() => {
+    onClickInviteUsers(selectedFolder.id, RoomsType.AiProjectRoom);
+  }, [onClickInviteUsers, selectedFolder?.id]);
 
   const onCloseIndexMenu = React.useCallback(() => {
     const items = getIndexingArray();
@@ -874,8 +887,15 @@ const SectionHeaderContent = (props) => {
     selectedFolder?.type,
   ]);
 
-  // Nothing is created in "AI rooms" until AI is set up on the portal.
-  const currentCanCreate = security?.Create && !(isAiHubFolder && isAiOff);
+  // Nothing is created in "AI rooms" until AI is set up on the portal, nor
+  // in the Knowledge bases list while vectorization is off.
+  const currentCanCreate =
+    security?.Create &&
+    !(
+      isAiHubFolder &&
+      (isAiOff ||
+        isAiWorkspaceCreateRefused(location.search, vectorizationEnabled))
+    );
 
   const currentRootRoomTitle =
     navigationPath &&
@@ -918,11 +938,40 @@ const SectionHeaderContent = (props) => {
     [theme.isBase],
   );
 
-  const navigationButtonLabel = showNavigationButton
-    ? isFormRoomRoot
-      ? t("Files:ShareSpace")
-      : t("Files:ShareRoom")
+  // An agent's page has "Share agent" in that place: it invites, for those
+  // who may change the agent's members.
+  const agentRights = isAiProjectRoomRoot
+    ? getAgentRights(selectedFolder)
     : null;
+  const showShareAgent = !!agentRights?.share;
+
+  const navigationButtonLabel = showShareAgent
+    ? t("Common:ShareAgent")
+    : showNavigationButton
+      ? isFormRoomRoot
+        ? t("Files:ShareSpace")
+        : t("Files:ShareRoom")
+      : null;
+
+  // A member's agent page is titled by the agents menu: the open agent,
+  // and the others to switch to. Anyone else reads the agent's name as plain
+  // text: the navigation's own title would open the breadcrumb drop box.
+  let agentTitle;
+  if (isAiProjectRoomRoot) {
+    agentTitle =
+      agentRights?.chat && aiChatStore?.hasAgentPicker ? (
+        <AiChatAgentPicker title={currentTitle} />
+      ) : (
+        <HeadingWithTooltip
+          className={styles.agentTitle}
+          title={currentTitle}
+          truncate
+          data-testid="agent-page-title"
+        >
+          {currentTitle}
+        </HeadingWithTooltip>
+      );
+  }
 
   const headerProps = React.useMemo(
     () => (isIndexEditingMode ? { headerLabel: t("Common:SortingIndex") } : {}),
@@ -1053,9 +1102,11 @@ const SectionHeaderContent = (props) => {
                   : undefined,
                 actions: isFormsSection
                   ? t("Common:CreateFormSet")
-                  : isRoomsFolder || isAiHubFolder
-                    ? getNewRoomLabel(t)
-                    : t("Common:Actions"),
+                  : isAiHubFolder
+                    ? getAiWorkspaceCreateLabel(t, location.search)
+                    : isRoomsFolder
+                      ? getNewRoomLabel(t)
+                      : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
                 aiChat: t("Common:AIChatButton"),
@@ -1088,9 +1139,12 @@ const SectionHeaderContent = (props) => {
               isFrame={isFrame}
               showTitle={isFrame ? showTitle : true}
               navigationButtonLabel={navigationButtonLabel}
-              onNavigationButtonClick={onNavigationButtonClick}
+              onNavigationButtonClick={
+                showShareAgent ? onShareAgentClick : onNavigationButtonClick
+              }
+              titleContent={agentTitle}
               tariffBar={<TariffBar />}
-              showNavigationButton={!!showNavigationButton}
+              showNavigationButton={!!showNavigationButton || showShareAgent}
               badgeLabel={badgeLabel}
               onContextOptionsClick={onContextOptionsClick}
               onLogoClick={onLogoClick}
@@ -1098,21 +1152,16 @@ const SectionHeaderContent = (props) => {
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
+              beforeContextButton={
+                // An agent's page reads name, Chat history, New chat, "⋮",
+                // Share agent: the agent's chat toolbar goes before the room
+                // menu. An agent the caller is not a member of has no chat.
+                agentRights?.chat ? (
+                  <ChatToolbar keepSessionProfile />
+                ) : undefined
+              }
               analyzeResponsesButton={
-                isAiProjectRoomRoot ? (
-                  // The project's chat toolbar (history, new chat) takes the
-                  // slot after the room menu, as the agents' header did. A
-                  // project the caller is not a member of has no chat.
-                  selectedFolder?.inRoom ? (
-                    <ChatToolbar
-                      className={classnames(
-                        styles.analyzeResponsesButton,
-                        styles.projectChatToolbar,
-                      )}
-                      keepSessionProfile
-                    />
-                  ) : null
-                ) : (
+                isAiProjectRoomRoot ? null : (
                   <>
                     <PrivateSectionNote
                       isSectionRoot={isPrivateRoomsSectionRoot(
@@ -1287,6 +1336,7 @@ export default inject(
 
     const {
       onClickEditRoom,
+      onClickInviteUsers,
       onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
@@ -1442,6 +1492,8 @@ export default inject(
       isAiSectionFolder,
       isAiProjectRoomRoot,
       isAiOff: settingsStore.aiReady === false,
+      vectorizationEnabled:
+        settingsStore.aiConfig?.vectorizationEnabled !== false,
 
       selectedFolder,
 
@@ -1484,6 +1536,7 @@ export default inject(
       getGroupContextOptions,
       onCreateAndCopySharedLink,
       showNavigationButton,
+      onClickInviteUsers,
       isFormRoomRoot,
       startUpload,
       resolveOpenFolderTarget,

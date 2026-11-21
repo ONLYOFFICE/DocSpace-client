@@ -75,3 +75,63 @@
     border-radius: 3px;
   }
 }
+
+// The AI projects under Agents and the conversations under Recent. NavMenu
+// has no third level, so they are sub-items of their own, set in by the width
+// of a sub-item's icon and its gap: their text starts under the text of the
+// entry they belong to, and reads lighter than it. The element is part of the
+// selector to outweigh NavMenu's own padding rule.
+:global(:is(a, button)[data-item-id^="ai-nested-"]) {
+  padding-inline-start: 60px;
+
+  > span {
+    font-weight: 400;
+  }
+}
+
+// The projects' logos are larger than the menu's 16px icons, as on the
+// projects list; their text moves along with them.
+:global(:is(a, button)[data-item-id^="ai-nested-project-"] > div:first-child) {
+  width: 20px;
+  height: 20px;
+}
+
+// RoomIcon sets the initials for its 32px default (14px); at 20px two
+// letters would not fit, so they shrink in proportion, as the info panel and
+// the room dialogs size them for their own logos.
+.agentLogo :global(.room-title) {
+  font-size: 9px;
+  line-height: 12px;
+}
+
+// Show more is a link, not a row: the text only, in the menu's colour and
+// weight, underlined with dashes as an action link (ui-kit Link), with no
+// row highlight - NavMenu draws that on the row's first element, which is
+// left out here.
+:global(:is(a, button)[data-item-id^="ai-nested-"][data-item-id$="-more"]) {
+  width: auto;
+
+  > span {
+    font-weight: 600;
+    color: var(--nav-menu-item-text-color);
+    text-decoration: underline dashed;
+    text-underline-offset: 2px;
+  }
+
+  &:hover > span,
+  &:focus-visible > span {
+    color: var(--nav-menu-item-text-active-color);
+  }
+}
+
+:global(li:has(> div > [data-item-id^="ai-nested-"][data-item-id$="-more"]) > div > div:first-child) {
+  display: none;
+}
+
+// The entry after a group - after its Show more, or its last entry without
+// one - stands 16px apart from it. Set on that entry rather than on the
+// group's last one: picking the last one needs a :has() inside a :has(),
+// which CSS does not allow, and a browser drops the whole rule.
+:global(li:has(> div > [data-item-id^="ai-nested-"]) + li:not(:has(> div > [data-item-id^="ai-nested-"]))) {
+  margin-top: 16px;
+}

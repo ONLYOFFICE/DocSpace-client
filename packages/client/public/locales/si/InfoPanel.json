@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "අමුත්තන්ගේ විස්තර මෙහි බලන්න",
   "HistoryEmptyScreenText": "ක්‍රියාකාරකම් ඉතිහාසය මෙහි පෙන්වනු ඇත",
   "HistoryThirdParty": "ඉතිහාස ප්‍රදර්ශනය, සම්බන්ධිත තෙවන පාර්ශව ගබඩා සහිත පොදු කාමර සඳහා නොපවතී.",
+  "KnowledgeBasesEmptyScreenText": "දැනුම් පදනමේ විස්තර මෙතැන බලන්න",
   "LastUpdateInfo": "අවසන් යාවත්කාලීන කිරීම",
   "LifetimeEnds": "ආයු කාලය අවසන් වේ",
   "MembersEmptyScreenText": "මෙසේ සාමාජික විස්තර බලන්න:",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "කාමරයේ විස්තර මෙතැන බලන්න",
   "SelectedGroups": "තෝරාගත් කණ්ඩායම්",
   "SelectedUsers": "තෝරාගත් ගිණුම්",
+  "SkillSetsEmptyScreenText": "කුසලතා කට්ටලයේ විස්තර මෙතැන බලන්න",
   "StorageType": "ආචයන වර්ගය",
   "Users": "පරිශ්‍රීලකයින්"
 }

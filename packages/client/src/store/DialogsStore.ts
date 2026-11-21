@@ -91,6 +91,7 @@ import type {
 } from "SRC_DIR/components/dialogs/EditRoomGroupsDialog/EditRoomGroupsDialog.types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 import type { TMetadataAIPanelData } from "SRC_DIR/components/panels/MetadataAIPanel/types";
+import type { TRemoveUserReason } from "SRC_DIR/components/dialogs/RemoveUserConfirmationDialog/RemoveUserConfirmationDialog.types";
 import type { TEncryptedTransferConfirm } from "./filesActionsStore/copyMove.helpers";
 import type { TModel } from "@onlyoffice/apps-ui-kit/components/room-icon";
 
@@ -104,6 +105,19 @@ type TFilesStore = {
   hasBufferSelection: boolean;
   isPrivateRoomsSectionAvailable: boolean;
   setSelected: (selected: "none") => void;
+};
+
+export type TAiChatPageRequest = {
+  page: "chat" | "history";
+  afterLocationKey: Nullable<string>;
+  /** The conversation to show on the chat page; a fresh or the open one without. */
+  threadId?: string;
+};
+
+/** A conversation as the sidebar's Recent lists it. */
+export type TAiChatRecentThread = {
+  id: string;
+  title: string;
 };
 
 type TConnectItem = Partial<Omit<ThirdPartyAccountType, "provider_id">> & {
@@ -244,6 +258,15 @@ class DialogsStore {
   selectFileKnowledgeRoomDialogVisible = false;
 
   generateSkillDialogVisible = false;
+
+  /** The skill file the "Edit skill" dialog is open on. */
+  editSkillFile: Nullable<TFile> = null;
+
+  /** The skill set the skill dialog creates a skill in: "New skill". */
+  newSkillFolderId: Nullable<number | string> = null;
+
+  /** The dialog only shows the skill's instructions: "View instructions". */
+  editSkillReadOnly = false;
 
   convertPasswordDialogVisible = false;
 
@@ -433,6 +456,32 @@ class DialogsStore {
   // predicate reads may not survive the `getFileInfo` it goes through.
   askAIAnalyze = false;
 
+  // The AI section's sidebar entries that are the chat itself (AI Chat,
+  // Recent) open it fullscreen on one of its pages. Switching the page needs
+  // the chat library's router, which only exists inside the ai-chat
+  // providers, so the sidebar records the request and AiChatPageBridge
+  // performs it. `afterLocationKey` is the location the click left when it
+  // also navigated: the request waits until that navigation has landed, so
+  // what closes the chat on the way (leaving an AI project, a section change
+  // on a phone) cannot close it again behind the opening.
+  aiChatPageRequest: Nullable<TAiChatPageRequest> = null;
+
+  // The latest conversations and the one the chat shows, mirrored out of the
+  // chat library's stores by AiChatPageBridge for the sidebar's Recent.
+  aiChatRecentThreads: TAiChatRecentThread[] = [];
+
+  // There are conversations past those: Recent offers Show more.
+  aiChatHasMoreThreads = false;
+
+  aiChatActiveThreadId = "";
+
+  // The last conversation whose files may have changed, and a counter that
+  // moves on every such change. The server announces no new artifact or
+  // attachment over the socket, so the chat's round events (Shell's
+  // callbacks to the chat) stand in for one; the Info panel's Content tab
+  // reads its lists again when the counter moves for its conversation.
+  aiChatThreadFilesChange = { threadId: "", seq: 0 };
+
   newFilesPanelFolderId: Nullable<number | string> = null;
 
   sortedDownloadFiles: TSortedDownloadFiles = {
@@ -456,11 +505,11 @@ class DialogsStore {
   removeUserConfirmation: {
     visible: boolean;
     callback: Nullable<() => Promise<void>> | undefined;
-    isEncryptedRoom: boolean;
+    reason: TRemoveUserReason;
   } = {
     visible: false,
     callback: null,
-    isEncryptedRoom: false,
+    reason: "formFilling",
   };
 
   isShareFormData: {
@@ -563,6 +612,43 @@ class DialogsStore {
     this.askAIFile = null;
     this.askAIAnalyze = false;
     return { file, analyze };
+  };
+
+  requestAiChatPage = (
+    page: TAiChatPageRequest["page"],
+    afterLocationKey: Nullable<string> = null,
+    threadId?: string,
+  ) => {
+    this.aiChatPageRequest = { page, afterLocationKey, threadId };
+  };
+
+  setAiChatRecentThreads = (
+    threads: TAiChatRecentThread[],
+    hasMore = false,
+  ) => {
+    this.aiChatRecentThreads = threads;
+    this.aiChatHasMoreThreads = hasMore;
+  };
+
+  setAiChatActiveThreadId = (threadId: string) => {
+    this.aiChatActiveThreadId = threadId;
+  };
+
+  notifyAiChatThreadFilesChanged = (threadId: string) => {
+    // A chat not sent yet has no files on the server.
+    if (!threadId) return;
+    this.aiChatThreadFilesChange = {
+      threadId,
+      seq: this.aiChatThreadFilesChange.seq + 1,
+    };
+  };
+
+  // Read-and-clear, as `consumeAskAIFile`: a double-invoked effect opens the
+  // chat once, and the same entry can be clicked twice in a row.
+  consumeAiChatPageRequest = () => {
+    const request = this.aiChatPageRequest;
+    this.aiChatPageRequest = null;
+    return request;
   };
 
   setEditRoomDialogProps = (props: TEditRoomDialogProps) => {
@@ -955,6 +1041,16 @@ class DialogsStore {
     this.generateSkillDialogVisible = visible;
   };
 
+  /** Opens the skill dialog empty, to create a skill in the skill set. */
+  setNewSkillFolderId = (folderId: Nullable<number | string>) => {
+    this.newSkillFolderId = folderId;
+  };
+
+  setEditSkillFile = (file: Nullable<TFile>, readOnly = false) => {
+    this.editSkillFile = file;
+    this.editSkillReadOnly = !!file && readOnly;
+  };
+
   createMasterForm = async (
     fileInfo: TFile,
     options: {
@@ -1297,15 +1393,20 @@ class DialogsStore {
     };
   };
 
+  /**
+   * The reason picks the warning the dialog shows. `formFilling` is the
+   * default: the server refused a plain removal because the user takes part
+   * in form filling.
+   */
   setRemoveUserConfirmation = (
     visible: boolean,
     callback: Nullable<() => Promise<void>> = null,
-    isEncryptedRoom = false,
+    reason: TRemoveUserReason = "formFilling",
   ) => {
     this.removeUserConfirmation = {
       visible,
       callback,
-      isEncryptedRoom,
+      reason,
     };
   };
 

@@ -34,6 +34,7 @@
  */
 
 import { AiProjectAccess, type TAiProject } from "@docspace/shared/api/ai/projects";
+import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 
 export const isManager = (project: TAiProject) =>
   project.access === AiProjectAccess.Owner ||
@@ -49,22 +50,85 @@ export const canManageProjects = (user?: {
   isRoomAdmin?: boolean;
 } | null) => !!user && (!!user.isOwner || !!user.isAdmin || !!user.isRoomAdmin);
 
+/**
+ * The agent cannot chat, and nothing can be sent in its chat until its model
+ * is changed: its own model is gone or cannot chat, or it has none and the
+ * portal has no chat model for it to run on (the `Chat` assignment, else the
+ * `Default` slot, as the server picks the round's model). `portalHasChatModel`
+ * is `null` while unknown; a project read without its settings, or whose
+ * model could not be read, is not judged.
+ */
+export const isAgentModelUnavailable = (
+  project: TAiProject,
+  portalHasChatModel: boolean | null,
+) => {
+  const { profile, partial, modelUnread } = project.aiProject;
+  if (profile) return profile.available === false;
+  return !partial && !modelUnread && portalHasChatModel === false;
+};
+
+/** Whether the portal's chat model (`Chat`, else `Default`) exists and can chat. */
+export const hasPortalChatModel = (
+  chatProfile: { capabilities?: number } | null,
+  defaultProfile: { capabilities?: number } | null,
+) => {
+  const profile = chatProfile ?? defaultProfile;
+  return !!profile && isChatCapableProfile(profile);
+};
+
 /** The project's address in the AI Rooms section, as a room's "Copy link" gives it. */
 export const projectLink = (project: TAiProject) =>
   `${window.location.origin}/ai-rooms/${project.id}/filter?folder=${project.id}`;
 
 /**
- * The model the project form saves. A stored model missing from the model
- * list is gone (removed, disabled, no longer chat-capable), so the option
- * shown in its place, the default, is saved instead. Until the whole list is
- * in, a missing model may only be one not read yet: it is saved as it is.
+ * The model the project form saves. An agent edited without a model of its
+ * own (`isEdit` with no `profileId`: none stored, none picked in the form)
+ * saves none, so it stays on the portal's chat model and follows it; the
+ * default the form shows is not written. A stored model missing from the
+ * model list is gone (removed, disabled, no longer chat-capable), so the
+ * option shown in its place, the default, is saved instead. Until the whole
+ * list is in, a missing model may only be one not read yet: it is saved as
+ * it is. `undefined` leaves the model as it is.
  */
 export const savedProjectProfileId = (
   profileId: string | null,
   optionKeys: string[],
   shownKey: string | undefined,
   profilesLoaded: boolean,
-) => {
+  isEdit = false,
+): string | null | undefined => {
+  if (isEdit && profileId === null) return undefined;
   if (!profilesLoaded && profileId && !optionKeys.includes(profileId)) return profileId;
   return shownKey ?? profileId;
+};
+
+/**
+ * Why a room of the agent form's room picker cannot be linked, or `null`
+ * when it can: a Knowledge room while vectorization is off, or a room the
+ * user may not manage - the server links only those, and refuses the whole
+ * save over one that is not.
+ */
+export const roomLinkRefusal = (
+  room: { security?: { EditRoom?: boolean } | null },
+  isKnowledge: boolean,
+  vectorizationEnabled: boolean,
+): "vectorizationOff" | "noManageRights" | null => {
+  if (isKnowledge && !vectorizationEnabled) return "vectorizationOff";
+  if (!room.security?.EditRoom) return "noManageRights";
+  return null;
+};
+
+/**
+ * Enter in the agent form's Tags field adds the typed tag (the tag dropdown
+ * takes it on keyup), and it also submits the form before that. The submit
+ * saves the form only while the field is not being typed in: unfocused or
+ * empty, as in the room form.
+ */
+export const isTagBeingTyped = (form: HTMLFormElement | null | undefined) => {
+  const input = form?.elements.namedItem("tagInput");
+  return (
+    input instanceof HTMLInputElement &&
+    input === document.activeElement &&
+    input.value.trim().length > 0
+  );
 };

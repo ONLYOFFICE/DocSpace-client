@@ -40,4 +40,29 @@ describe("AI Workspace section active item", () => {
   ])("highlights %s%s as %s", (pathname, search, activeId) => {
     expect(getClientActiveId(pathname, ids, search)).toBe(activeId);
   });
+
+  // An opened room's short address has no `type`: the room's own type tells
+  // which entry lists it.
+  it.each([
+    [RoomsType.InstructionsRoom, "ai-rooms-skills"],
+    [RoomsType.KnowledgeRoom, "ai-rooms-knowledge"],
+    [RoomsType.AiProjectRoom, "ai-rooms"],
+  ])("highlights an opened room of type %s as %s", (roomType, activeId) => {
+    expect(
+      getClientActiveId("/ai-rooms/32/filter", ids, "?folder=32", false, false, roomType),
+    ).toBe(activeId);
+  });
+
+  it("takes the opened room's type over a type left in the query", () => {
+    expect(
+      getClientActiveId(
+        "/ai-rooms/32/filter",
+        ids,
+        `?folder=32&type=${RoomsType.KnowledgeRoom}`,
+        false,
+        false,
+        RoomsType.InstructionsRoom,
+      ),
+    ).toBe("ai-rooms-skills");
+  });
 });

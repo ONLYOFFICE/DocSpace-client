@@ -64,6 +64,7 @@ import {
   refreshInfoPanel,
   setInfoPanelSelectedRoom,
 } from "SRC_DIR/helpers/info-panel";
+import { getAiWorkspaceListUrlOf } from "SRC_DIR/helpers/aiWorkspace";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import i18n from "../../i18n";
@@ -71,6 +72,10 @@ import i18n from "../../i18n";
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import {
+  toAiProject,
+  type TAiProjectRoomDto,
+} from "@docspace/shared/api/ai/projects";
 import type { TPathParts } from "@docspace/shared/types";
 import type { TOptSocket } from "@onlyoffice/apps-ui-kit/utils/socket";
 
@@ -126,9 +131,23 @@ export async function wsModifyFolderCreateImpl(
     // (JSON.parse of possibly-undefined data, user possibly null).
     const file = JSON.parse(opt?.data as string);
 
+    // An agent keeps the files of its conversations to itself and is listed
+    // as empty: the uploader's own create-file of a chat attachment is not
+    // an item, a count or a created file of the Files views.
+    if (
+      self.selectedFolderStore.roomType === RoomsType.AiProjectRoom &&
+      self.selectedFolderStore.id === file.folderId
+    )
+      return;
+
     if (self.selectedFolderStore.id !== file.folderId) {
       const movedToIndex = self.getFolderIndex(file.folderId);
-      if (movedToIndex > -1) self.folders[movedToIndex].filesCount++;
+      const movedTo = movedToIndex > -1 ? self.folders[movedToIndex] : null;
+      if (
+        movedTo &&
+        !("roomType" in movedTo && movedTo.roomType === RoomsType.AiProjectRoom)
+      )
+        movedTo.filesCount++;
       return;
     }
 
@@ -385,6 +404,16 @@ export function refreshFolderImpl(
 
       self.setFolder(folderInfo);
 
+      // An agent's model or linked rooms change as an update of its room.
+      if (folderInfo.roomType === RoomsType.AiProjectRoom) {
+        void self.aiProjectsStore?.refreshTileSummary(Number(folderInfo.id));
+        // Pinned, unpinned, renamed or given another logo, here or elsewhere:
+        // the sidebar's list of pinned agents follows.
+        self.treeFoldersStore.syncPinnedAiProject(
+          toAiProject(folderInfo as unknown as TAiProjectRoomDto),
+        );
+      }
+
       refreshInfoPanel();
     })
     .catch(() => {
@@ -468,6 +497,9 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
       }
     });
   } else if (opt?.type === "folder" && opt?.id) {
+    // A deleted agent leaves the sidebar, whatever list is on screen.
+    self.treeFoldersStore.removePinnedAiProject(opt.id);
+
     const { isRoom, isTemplate, pathParts, rootFolderType } =
       self.selectedFolderStore;
     const foundIndex = self.folders.findIndex((x) => x.id === opt?.id);
@@ -487,6 +519,9 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     }
 
     const foundFolder = self.folders[foundIndex];
+
+    if ("roomType" in foundFolder && foundFolder.roomType === RoomsType.AiProjectRoom)
+      self.aiProjectsStore?.forgetTileSummary(Number(foundFolder.id));
 
     self.selectedFolderStore.setFoldersCount(
       self.selectedFolderStore.foldersCount - 1,
@@ -623,13 +658,16 @@ export function redirectToParentImpl(
 
   switch (rootFolderType) {
     case FolderType.AiHub: {
-      const searchArea = RoomSearchArea.AiHub;
-      const aiFilter = RoomsFilter.getDefault(userId as string, searchArea);
-      aiFilter.searchArea = searchArea;
-      const params = aiFilter.toUrlParams(userId as string, true);
-      const path = getCategoryUrl(CategoryType.AiHub);
+      // Back to the list of the room's kind: the Agents for an agent. The
+      // path's only room is the one of the section.
+      const roomType =
+        pathParts.find((part) => part.roomType != null)?.roomType ??
+        self.selectedFolderStore.roomType;
 
-      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
+      return window.DocSpace.navigate(
+        getAiWorkspaceListUrlOf(roomType, userId ?? undefined),
+        { replace: true },
+      );
     }
     case FolderType.Archive: {
       const archiveFilter = RoomsFilter.getDefault(

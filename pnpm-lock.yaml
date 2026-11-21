@@ -377,11 +377,11 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.39.tgz
-        version: file:onlyoffice-ai-chat-1.0.2-progress.39.tgz(ebfc3269144ca83955c0791ed073ac72)
+        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.62.tgz
+        version: file:onlyoffice-ai-chat-1.0.2-progress.62.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(03ac918a8e6a5dd5b828f7f0ac8bc2a7)
+        version: file:onlyoffice-apps-ui-kit.tgz(b7bfe872983f8fc2d7eb6c13e44b6155)
       '@onlyoffice/doceditor-types':
         specifier: ^10.0.1
         version: 10.0.1
@@ -679,7 +679,7 @@ importers:
         version: 6.2.1(babel-plugin-react-compiler@1.0.0)(vite@8.3.8(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
       '@vitest/ui':
         specifier: 4.1.12
-        version: 4.1.12(vitest@4.1.12)
+        version: 4.1.12(@vitest/coverage-v8@4.1.12)(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vitest@4.1.12)
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
@@ -727,7 +727,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(03ac918a8e6a5dd5b828f7f0ac8bc2a7)
+        version: file:onlyoffice-apps-ui-kit.tgz(b7bfe872983f8fc2d7eb6c13e44b6155)
       '@onlyoffice/doceditor-types':
         specifier: ^10.0.1
         version: 10.0.1
@@ -860,7 +860,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(03ac918a8e6a5dd5b828f7f0ac8bc2a7)
+        version: file:onlyoffice-apps-ui-kit.tgz(b7bfe872983f8fc2d7eb6c13e44b6155)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -981,7 +981,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(03ac918a8e6a5dd5b828f7f0ac8bc2a7)
+        version: file:onlyoffice-apps-ui-kit.tgz(b7bfe872983f8fc2d7eb6c13e44b6155)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1146,11 +1146,11 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.39.tgz
-        version: file:onlyoffice-ai-chat-1.0.2-progress.39.tgz(ebfc3269144ca83955c0791ed073ac72)
+        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.62.tgz
+        version: file:onlyoffice-ai-chat-1.0.2-progress.62.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(03ac918a8e6a5dd5b828f7f0ac8bc2a7)
+        version: file:onlyoffice-apps-ui-kit.tgz(b7bfe872983f8fc2d7eb6c13e44b6155)
       '@radix-ui/react-dialog':
         specifier: 'catalog:'
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1409,7 +1409,7 @@ importers:
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(03ac918a8e6a5dd5b828f7f0ac8bc2a7)
+        version: file:onlyoffice-apps-ui-kit.tgz(b7bfe872983f8fc2d7eb6c13e44b6155)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1632,10 +1632,10 @@ importers:
         version: 3.0.5
       '@vitest/coverage-v8':
         specifier: 4.1.12
-        version: 4.1.12(vitest@4.1.12)
+        version: 4.1.12(@vitest/ui@4.1.12)(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vitest@4.1.12)
       '@vitest/ui':
         specifier: 4.1.12
-        version: 4.1.12(vitest@4.1.12)
+        version: 4.1.12(@vitest/coverage-v8@4.1.12)(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vitest@4.1.12)
       fake-indexeddb:
         specifier: ^6.2.8
         version: 6.2.8
@@ -3501,9 +3501,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.39.tgz':
-    resolution: {integrity: sha512-0s8Npdm2mSdkr81vsCYx0GuuPOUsM3hDgH7SEHEfe+j2JA1pr58BnbrZdnIxtARyin+ydqOnji6fKDBWjZHreg==, tarball: file:onlyoffice-ai-chat-1.0.2-progress.39.tgz}
-    version: 1.0.2-progress.39
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.62.tgz':
+    resolution: {integrity: sha512-jgEXv65BBSlczIhlvUMyObDULLw10oh9lfBmTDkbDv9zKkWHLniJGBbg6d8PvzMQqdYlPt5uwVMi4fvkI2uRkw==, tarball: file:onlyoffice-ai-chat-1.0.2-progress.62.tgz}
+    version: 1.0.2-progress.62
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -3602,11 +3602,11 @@ packages:
         optional: true
 
   '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz':
-    resolution: {integrity: sha512-WOuBmqUKBa20dSOms15EgDkTZYh3hVWkA/BMitW6Tl7OfIagfhT3KOnM+FiKif+2EWGHoUdczRHBZR7wZTaTqg==, tarball: file:onlyoffice-apps-ui-kit.tgz}
+    resolution: {integrity: sha512-gbV1lHX+kW5H8ubu+5KHm9Eg9RkLk9bfSqa4wFHHm6tk8AzxUoeowFn6tVdorRDUAVe6G44A7V6ihaTh1Enrnw==, tarball: file:onlyoffice-apps-ui-kit.tgz}
     version: 4.1.0
     engines: {node: '>=22'}
     peerDependencies:
-      '@onlyoffice/ai-chat': '>=1.0.2-progress.34'
+      '@onlyoffice/ai-chat': '>=1.0.2-progress.56'
       '@onlyoffice/doceditor-types': '>=9.3.1'
       '@onlyoffice/document-editor-react': 2.3.0
       '@socket.io/component-emitter': 3.1.2
@@ -11819,7 +11819,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.2.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.39.tgz(ebfc3269144ca83955c0791ed073ac72)':
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.62.tgz(ebfc3269144ca83955c0791ed073ac72)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11858,7 +11858,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(03ac918a8e6a5dd5b828f7f0ac8bc2a7)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(b7bfe872983f8fc2d7eb6c13e44b6155)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11896,7 +11896,7 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-1.0.2-progress.39.tgz(ebfc3269144ca83955c0791ed073ac72)
+      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-1.0.2-progress.62.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/doceditor-types': 10.0.1
       '@onlyoffice/document-editor-react': 2.3.0(@onlyoffice/doceditor-types@10.0.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@socket.io/component-emitter': 3.1.2
@@ -13509,7 +13509,7 @@ snapshots:
     optionalDependencies:
       babel-plugin-react-compiler: 1.0.0
 
-  '@vitest/coverage-v8@4.1.12(vitest@4.1.12)':
+  '@vitest/coverage-v8@4.1.12(@vitest/ui@4.1.12)(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vitest@4.1.12)':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/utils': 4.1.12
@@ -13522,6 +13522,9 @@ snapshots:
       std-env: 4.3.0
       tinyrainbow: 3.2.0
       vitest: 4.1.12(@types/node@24.10.7)(@vitest/coverage-v8@4.1.12)(@vitest/ui@4.1.12)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.8(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
+    transitivePeerDependencies:
+      - '@vitest/ui'
+      - msw
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -13575,7 +13578,7 @@ snapshots:
 
   '@vitest/spy@4.1.12': {}
 
-  '@vitest/ui@4.1.12(vitest@4.1.12)':
+  '@vitest/ui@4.1.12(@vitest/coverage-v8@4.1.12)(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vitest@4.1.12)':
     dependencies:
       '@vitest/utils': 4.1.12
       fflate: 0.8.3
@@ -13585,6 +13588,9 @@ snapshots:
       tinyglobby: 0.2.17
       tinyrainbow: 3.2.0
       vitest: 4.1.12(@types/node@24.10.7)(@vitest/coverage-v8@4.1.12)(@vitest/ui@4.1.12)(jsdom@27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1))(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vite@8.3.8(@types/node@24.10.7)(esbuild@0.28.2)(sass@1.79.6)(terser@5.46.0)(yaml@2.9.1))
+    transitivePeerDependencies:
+      - '@vitest/coverage-v8'
+      - msw
 
   '@vitest/utils@3.2.4':
     dependencies:
@@ -18064,8 +18070,8 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.10.7
-      '@vitest/coverage-v8': 4.1.12(vitest@4.1.12)
-      '@vitest/ui': 4.1.12(vitest@4.1.12)
+      '@vitest/coverage-v8': 4.1.12(@vitest/ui@4.1.12)(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vitest@4.1.12)
+      '@vitest/ui': 4.1.12(@vitest/coverage-v8@4.1.12)(msw@2.15.0(@types/node@24.10.7)(typescript@5.9.3))(vitest@4.1.12)
       jsdom: 27.4.0(@noble/hashes@2.4.0)(supports-color@8.1.1)
     transitivePeerDependencies:
       - msw

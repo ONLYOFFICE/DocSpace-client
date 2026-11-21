@@ -112,11 +112,13 @@ import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 import AiProjectDialog from "../dialogs/AiProjectDialog";
 import GenerateSkillDialog from "../dialogs/GenerateSkillDialog";
+import EditSkillDialog from "../dialogs/EditSkillDialog";
 
 const Panels = (props) => {
   const {
     aiProjectDialogVisible,
     generateSkillDialogVisible,
+    editSkillDialogVisible,
     uploadPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -484,6 +486,7 @@ const Panels = (props) => {
     generateSkillDialogVisible && (
       <GenerateSkillDialog key="generate-skill-dialog" />
     ),
+    editSkillDialogVisible && <EditSkillDialog key="edit-skill-dialog" />,
   ];
 };
 
@@ -625,6 +628,9 @@ export default inject(
     return {
       aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
       generateSkillDialogVisible: dialogsStore.generateSkillDialogVisible,
+      editSkillDialogVisible:
+        dialogsStore.editSkillFile !== null ||
+        dialogsStore.newSkillFolderId !== null,
       preparationPortalDialogVisible,
       uploadPanelVisible,
       copyPanelVisible,

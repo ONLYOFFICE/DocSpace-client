@@ -38,7 +38,7 @@ import { useEffect, useState } from "react";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 /**
- * "AI profiles exist" flag that survives chat store rebuilds. The zustand
+ * "A profile that can chat exists" flag that survives chat store rebuilds. The zustand
  * bundle is recreated on every entity/scope switch (room navigation, agent
  * pick) and starts with an empty, not-yet-hydrated profiles list — reading
  * `profiles.length` directly flaps to `false` for the hydration window and
@@ -49,8 +49,9 @@ export const useHasAiProfiles = (): boolean => {
   const { useProfilesStore } = useStores();
   const initialized = useProfilesStore((s) => s.initialized);
   // The portal-wide flag: the chat starts knowing only its assigned
-  // profiles, so the list's length says nothing about the catalogue.
-  const hasProfilesNow = useProfilesStore((s) => s.hasProfiles);
+  // profiles, so the list's length says nothing about the catalogue. A
+  // portal with image or embedding models only cannot chat.
+  const hasProfilesNow = useProfilesStore((s) => s.hasChatProfiles);
 
   const [hasProfiles, setHasProfiles] = useState(false);
 

@@ -952,6 +952,10 @@ const InvitePanel = ({
   };
 
   const isPrivateRoom = !!selectedRoom?.private;
+  // An agent takes no link invites: its members are invited by name only.
+  // A private room takes none either.
+  const hasLinkInvites =
+    !isPrivateRoom && roomType !== RoomsType.AiProjectRoom;
   // Spec: private-rooms/room-membership, "People without a key are marked before the invitation is sent"
   const getItemMarks = useMissingKeyMarks({ roomId, isPrivateRoom, t });
 
@@ -967,7 +971,7 @@ const InvitePanel = ({
             dataTestId="invite_panel_ai_project_sources_bar"
           />
         ) : null}
-        {isPrivateRoom ? null : (
+        {hasLinkInvites ? (
           <ExternalLinks
             t={t}
             shareLinks={shareLinks}
@@ -987,7 +991,7 @@ const InvitePanel = ({
             setIsLinksToggling={setIsLinksToggling}
             setInviteContactsLink={setInviteContactsLink}
           />
-        )}
+        ) : null}
 
         <InviteInput
           t={t}
@@ -1009,7 +1013,7 @@ const InvitePanel = ({
             t={t}
             setHasErrors={setHasErrors}
             roomType={roomType}
-            externalLinksVisible={externalLinksVisible}
+            externalLinksVisible={hasLinkInvites && externalLinksVisible}
             scrollAllPanelContent={scrollAllPanelContent}
             inputsRef={inputsRef}
             invitePanelBodyRef={invitePanelBodyRef}
@@ -1032,6 +1036,7 @@ const InvitePanel = ({
     invitePanelBodyRef,
     setInviteContactsLink,
     isPrivateRoom,
+    hasLinkInvites,
   ]);
 
   const closeUsersPanel = () => {

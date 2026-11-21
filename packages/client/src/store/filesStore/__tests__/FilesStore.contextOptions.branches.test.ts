@@ -461,6 +461,98 @@ describe("getFilesContextOptions — download in a private room", () => {
   });
 });
 
+describe("getFilesContextOptions — an agent's owner", () => {
+  const agent = (ownerId: string) =>
+    ({
+      id: 8,
+      title: "Legal Reviewer",
+      roomType: RoomsType.AiProjectRoom,
+      rootFolderType: FolderType.AiHub,
+      inRoom: true,
+      createdBy: { id: ownerId },
+      security: { Read: true, EditRoom: true, EditAccess: true, Delete: true },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  it("is offered no Leave agent, while a member is", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    expect(store.getFilesContextOptions(agent("user-1"))).not.toContain(
+      "leave-room",
+    );
+    expect(store.getFilesContextOptions(agent("user-2"))).toContain(
+      "leave-room",
+    );
+  });
+
+  it("keeps Leave the room for the owner of an ordinary room", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      ...agent("user-1"),
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+    } as unknown as TItem;
+
+    expect(store.getFilesContextOptions(room)).toContain("leave-room");
+  });
+
+  it("offers a Member no Edit agent, Share agent, change owner or Delete agent", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const member = {
+      ...agent("user-2"),
+      security: { Read: true, Pin: true, Mute: true },
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(member);
+
+    expect(opts).toEqual(
+      expect.arrayContaining(["room-info", "link-for-room-members", "leave-room"]),
+    );
+    for (const key of [
+      "edit-room",
+      "invite-users-to-room",
+      "change-room-owner",
+      "delete",
+    ]) {
+      expect(opts).not.toContain(key);
+    }
+  });
+
+  it("offers a DocSpace admin outside the agent change owner and Delete agent, without edit, share, notifications or leave", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const outside = {
+      ...agent("user-2"),
+      inRoom: false,
+      security: {
+        Read: true,
+        EditRoom: true,
+        EditAccess: true,
+        ChangeOwner: true,
+        Delete: true,
+        Pin: true,
+        Mute: true,
+      },
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(outside);
+
+    expect(opts).toEqual(
+      expect.arrayContaining(["room-info", "change-room-owner", "delete"]),
+    );
+    for (const key of [
+      "edit-room",
+      "invite-users-to-room",
+      "mute-room",
+      "unmute-room",
+      "leave-room",
+    ]) {
+      expect(opts).not.toContain(key);
+    }
+  });
+});
+
 describe("getFilesContextOptions — room-level operations of a private room", () => {
   const ROOM_LEVEL_OPTIONS = [
     "edit-index",

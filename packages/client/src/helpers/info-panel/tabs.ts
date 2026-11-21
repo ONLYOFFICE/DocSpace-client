@@ -34,6 +34,7 @@
  */
 
 import { FolderType } from "@docspace/shared/enums";
+import { getAgentRights, type TAgentRightsSource } from "../agentRights";
 import {
   isFile as isFileUtil,
   isRoom as isRoomUtil,
@@ -46,6 +47,7 @@ import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
 import { pluginRoomTypes } from "SRC_DIR/helpers/plugins/react/utils";
 import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 import { InfoPanelView } from "./index";
 
@@ -63,6 +65,30 @@ export type TGetAvailableInfoPanelTabsParams = {
   isPrivacyFolder: boolean;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
+  /** The id of the agent whose page (its chat) is open: that agent gets the Content tab. */
+  aiChatProjectId?: number | null;
+  /**
+   * A template of the Agents list's Templates tab is selected: the panel
+   * shows it instead of the selection, which is the list's own folder there.
+   */
+  isAiTemplate?: boolean;
+};
+
+/**
+ * Whether the caller may list, re-role and remove the members of an agent:
+ * the right the server gives the owner and Agent managers to change the
+ * room's members (`EditAccess`, the right "Share agent" goes by), held as
+ * a member. A DocSpace admin who is not one is offered no member changes.
+ *
+ * It is the `share` right of `getAgentRights`.
+ *
+ * Spec: ai-agent-access, "What an Agent manager is offered"
+ */
+export const canManageAgentMembers = (selection: object): boolean => {
+  const agent = selection as TAgentRightsSource;
+  // A selection that does not say whether the caller is in the agent (no
+  // `inRoom`) is one the caller opened as a member.
+  return getAgentRights({ ...agent, inRoom: agent.inRoom !== false }).share;
 };
 
 export type TInfoPanelTabsResult = {
@@ -84,11 +110,20 @@ export function getAvailableInfoPanelTabs({
   isPrivacyFolder,
   enablePlugins,
   infoPanelItemsList,
+  aiChatProjectId,
+  isAiTemplate,
 }: TGetAvailableInfoPanelTabsParams): TInfoPanelTabsResult {
   const detailsOnly: TInfoPanelTabsResult = {
     tabs: [InfoPanelView.infoDetails],
     useRoomsView: false,
   };
+
+  // A template of an agent: what it is and what it brings, as an agent has.
+  if (isAiTemplate)
+    return {
+      tabs: [InfoPanelView.infoDetails, InfoPanelView.infoContext],
+      useRoomsView: true,
+    };
 
   if (!selection || Array.isArray(selection)) return detailsOnly;
 
@@ -105,16 +140,21 @@ export function getAvailableInfoPanelTabs({
     };
   }
 
-  // An AI project (the projects page): its members, history and details.
-  if ("isAIProject" in selection && selection.isAIProject === true) {
-    return {
-      tabs: [
-        InfoPanelView.infoMembers,
-        InfoPanelView.infoHistory,
-        InfoPanelView.infoDetails,
-      ],
-      useRoomsView: true,
-    };
+  // An agent (an AI project): its details and what it draws on. The server
+  // marks no room as one, so the room type decides for a selection of the
+  // list or of the agent's page. On the agent's own page, where its chat is
+  // open, the files of the conversation on screen follow. Those who may
+  // change its members (the owner and Agent managers) get them last, on
+  // the room's members list, where they are re-roled and removed.
+  if (isAgent(selection)) {
+    const tabs: InfoPanelViewType[] = [
+      InfoPanelView.infoDetails,
+      InfoPanelView.infoContext,
+    ];
+    if (aiChatProjectId != null && Number(selection.id) === aiChatProjectId)
+      tabs.push(InfoPanelView.infoContent);
+    if (canManageAgentMembers(selection)) tabs.push(InfoPanelView.infoMembers);
+    return { tabs, useRoomsView: true };
   }
 
   const isRoomsType =

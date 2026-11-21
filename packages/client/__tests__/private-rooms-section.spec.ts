@@ -751,6 +751,36 @@ test.describe("Private section — rooms open inside it", () => {
     });
     await expect(navItem(page, ROOMS_ID)).toHaveClass(isActive);
   });
+
+  test("Room address without the folder parameter", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/private/${ROOM_ID}/filter`);
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(fileRow(page, FILE_TITLE)).toBeVisible({ timeout: 15000 });
+    await expect(navItem(page, "private-rooms")).toHaveClass(isActive);
+  });
+
+  test("Ordinary room address without the folder parameter", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/rooms/shared/${ORDINARY_ROOM_ID}/filter`);
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/rooms/shared/${ORDINARY_ROOM_ID}/filter?folder=${ORDINARY_ROOM_ID}`,
+      { timeout: 15000 },
+    );
+    await expect(fileRow(page, ORDINARY_FILE_TITLE)).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(navItem(page, ROOMS_ID)).toHaveClass(isActive);
+  });
 });
 
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";

@@ -34,6 +34,29 @@ What the code does:
   (`packages/client/src/routes/client.js`) gives the id as the `room`
   parameter. `getCategoryUrl` does the same for `CategoryType.SharedRoom`.
 
+Read again on 2026-11-21 at `03b13b211c9`; the facts above hold. Also
+found then:
+
+- `getCategoryUrl` gives `/forms/${folderId}/filter` for
+  `CategoryType.Form`, and a Forms room address without `folder` takes the
+  same rooms-list branch, so it becomes `/forms/undefined/filter`.
+- The route `private/:room` (no `/filter`) is read as a private room by
+  `getCategoryType` (`packages/shared/utils/common.tsx`) and takes the same
+  branch; so do `rooms/shared/:room` and `forms/:room`.
+- An AI room address without `folder` (`/ai-rooms/{id}/filter`) is not a
+  rooms-list category: it takes the files branch, whose
+  `FilesFilter.getFilter` falls back to the default folder `@my`. An
+  archived Rooms room address (`/rooms/archived/{id}/filter`) is read as the
+  Archive list by `getCategoryType`. Both are other defects on other paths
+  and stay out of this change.
+- `private-rooms-sdk-embedding-and-parity` was archived on 2026-11-20 and
+  the main sdk-surface spec no longer carries the sentence about the client
+  flag. `private-rooms-editor-contract` and
+  `private-rooms-remove-dead-api-calls` are still open. No open change
+  modifies the three requirements of this change;
+  `private-rooms-beta-release` modifies other requirements of
+  sidebar-section.
+
 ## Server behaviour
 
 - The create request: `CreateRoomRequestDto.Private`
@@ -51,13 +74,13 @@ What the code does:
 
 ## Not changed
 
-- sdk-surface, "SDK private surface honours the opt-in": it ends with "The
+- sdk-surface, "SDK private surface honours the opt-in": it ended with "The
   opt-in SHALL be removed together with the client flag at release", while
   feature-gating has no client flag and `PrivateLayout`
   (`packages/sdk/src/app/(private)/layout.tsx`) keeps requiring the host
-  opt-in. The open change `private-rooms-sdk-embedding-and-parity`
-  modifies this requirement and its delta no longer carries the sentence,
-  so no delta here.
+  opt-in. `private-rooms-sdk-embedding-and-parity` modified this
+  requirement without the sentence and was archived on 2026-11-20, so no
+  delta here.
 - `packages/doceditor/src/utils/actions.ts` points at "Saved encrypted file
   reopens without replaying its changes" and
   `packages/doceditor/src/components/Editor.tsx` at "Editor fails closed
@@ -78,13 +101,38 @@ What the code does:
 1. **The bare room address takes its id from the path.** When a private
    room address has no `folder` in its query, the list load replaces the
    address with `/private/{room}/filter?folder={room}` built from the route
-   parameter and the default files filter, the same form the server links
-   to, instead of falling back to the rooms list. An address that carries
-   other list parameters but no `folder` is not touched.
-2. **Rooms gets the same fix.** The same code path serves
-   `/rooms/shared/{id}/filter`, so task 2.1 fixes both addresses (owner,
-   2026-11-19). Rooms is not a private-rooms capability: the delta specs
-   describe the private address only.
+   parameter, the same form the server links to, instead of falling back to
+   the rooms list. The replacement takes the place of the bare address in
+   the history, so the back button does not return to it. An address that carries
+   other list parameters but no `folder` is not touched. The address without
+   `/filter` (`/private/{room}`) takes the same branch and is replaced the
+   same way.
+2. **Rooms and Forms get the same fix.** The same code path serves
+   `/rooms/shared/{id}/filter` and `/forms/{id}/filter`, so task 2.1 fixes
+   all three addresses (owner: Rooms on 2026-11-19, Forms on 2026-11-21).
+   Neither is a private-rooms capability: the delta specs describe the
+   private address only.
 3. **"Other room type" gets the test it names.** No test asserts the flag
    of a non-private creation; task 1.1 adds the case, so the scenario has a
    test of its name.
+4. **AI and archived room addresses stay out.** They fail on other paths
+   (see Context) and need fixes of their own; this change does not touch
+   them.
+
+## Gate runs
+
+2026-11-21, task 3.1, code at `d3c5806e980`, each command on its own with
+its exit code read:
+
+- Client E2E of private rooms under Docker `tests-dev`, the eleven
+  `packages/client/__tests__/private-*.spec.ts`: 177 passed, exit 0.
+- `npm --prefix ./common/tests run test:lefthook`: 61 passed, 3 skipped,
+  exit 0.
+- `pnpm nx run-many -t tsc lint test --parallel=3`: tsc, lint and test
+  green for the six packages, exit 0.
+- `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict`:
+  22 passed on the branch; 21 passed after a trial archive on a scratch copy
+  of `openspec/`, which changed only the three requirements of this change.
+
+Not run: the SDK E2E and the full locale suites; the change touches neither
+the SDK nor a locale.

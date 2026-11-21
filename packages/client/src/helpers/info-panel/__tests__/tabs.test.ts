@@ -40,7 +40,7 @@ import {
   Security,
 } from "@onlyoffice/docspace-plugin-sdk";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import {
   canManageAgentMembers,
@@ -160,6 +160,60 @@ describe("getAvailableInfoPanelTabs", () => {
     // The list's own folder is the selection on the Templates tab.
     expect(templateTabs({ id: 1, isFolder: true, rootFolderType: FolderType.AiHub })).toEqual(expected);
     expect(templateTabs(null)).toEqual(expected);
+  });
+
+  it("Encrypted file selected", () => {
+    const selection = {
+      id: 1,
+      isFile: true,
+      fileExst: ".docx",
+      encrypted: true,
+      canShare: true,
+      rootFolderType: FolderType.Rooms,
+      security: {},
+    } as unknown as TFile;
+
+    const { tabs } = getAvailableInfoPanelTabs({
+      selection,
+      isTrash: false,
+      isRecentFolder: false,
+      isPrivacyFolder: false,
+      enablePlugins: false,
+      infoPanelItemsList: [],
+    });
+
+    expect(tabs).not.toContain(InfoPanelView.infoShare);
+    expect(
+      getAvailableInfoPanelTabs({
+        selection: { ...selection, encrypted: false } as TFile,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder: false,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs,
+    ).toContain(InfoPanelView.infoShare);
+  });
+
+  it("Folder inside a private room selected", () => {
+    const folderTabs = (isPrivacyFolder: boolean) =>
+      getAvailableInfoPanelTabs({
+        selection: {
+          id: 2,
+          isFolder: true,
+          canShare: true,
+          rootFolderType: FolderType.Rooms,
+          security: {},
+        } as unknown as TFolder,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs;
+
+    expect(folderTabs(true)).not.toContain(InfoPanelView.infoShare);
+    expect(folderTabs(false)).toContain(InfoPanelView.infoShare);
   });
 });
 

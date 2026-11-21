@@ -156,46 +156,6 @@ test.describe("(private) — multi-tab & storage (§17.3)", () => {
       // Channel name is docspace-encryption-lock:${userId} — cross-user isolation.
     },
   );
-
-  test.fixme(
-    "auto-lock-tamper: an externally-written non-preset auto-lock value falls back to default",
-    async () => {
-      // No blocker left; not part of the SDK address change:
-      //   - Needs `asc_auth_key` cookie + page navigation.
-      //   - Before navigating, seed a bogus localStorage value via
-      //     page.addInitScript() or page.evaluate():
-      //     localStorage.setItem("auto-lock-preference:userId", "99999")
-      //   - Navigate to /sdk/private; on boot the auto-lock preference store reads
-      //     localStorage and rejects values not in the whitelist (AUTO_LOCK_PRESETS
-      //     from auto-lock-preference.ts), falling back to the default preset.
-      //   - Assert: the auto-lock selector in the settings shows the default value,
-      //     not "99999". Requires the settings panel to be open (if it's accessible
-      //     without unlock, otherwise also needs BLOCKER A).
-      //
-      // Write a bogus localStorage auto-lock value → read-time whitelist rejects
-      // it and uses the default preset.
-    },
-  );
-
-  test.fixme(
-    "tofu-migration: existing v1 TOFU IDB entries do not raise spurious KeyChange dialogs",
-    async () => {
-      // No blocker left; not part of the SDK address change:
-      //   - All unlock + cookie blockers.
-      //   - v1 TOFU entries are stored in IndexedDB under a different schema than
-      //     v2. Seeding v1 entries requires page.evaluate() to open the IDB and
-      //     write the v1 format before the store initializes.
-      //   - On room entry with the v2 identity unlocked, the TOFU store reads the
-      //     IDB. If the v1 migration is correctly handled, the KeyChangeDialog
-      //     must NOT appear (no spurious mismatch).
-      //   - Assert: KeyChangeDialog is not visible within 2000ms of page load.
-      //   - The TOFU store migration path is in tofu-store.ts; unit tests exist
-      //     in __tests__/tofu-store.test.ts. This e2e test adds browser-context
-      //     IDB validation on top of the unit tests.
-      //
-      // Seed the per-user TOFU IDB, enter (private) → no KeyChangeDialog.
-    },
-  );
 });
 
 test.describe("(private) — host frame-bridge sync (P2)", () => {

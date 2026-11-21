@@ -588,6 +588,60 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     expect(store.currentUploadNumber).toBe(0);
   });
 
+  it("Quota exceeded mid-batch", async () => {
+    const { store } = setupEncryptedPendingFile();
+    const pending = (uniqueId: string) =>
+      makeUploadFile({
+        uniqueId,
+        file: makeBrowserFile(`${uniqueId}.docx`, 3000),
+        toFolderId: 7,
+        encryptionRoomId: 7,
+        target: makePrivateUploadTarget({ folderId: 7 }),
+      });
+    const done = {
+      ...pending("enc-done"),
+      action: "uploaded",
+      inAction: true,
+    } as (typeof store.files)[number];
+    const files = [done, store.files[0], pending("enc-next"), pending("enc-last")];
+    store.files = files;
+    store.uploadedFilesHistory = files.map((f) => ({ ...f }));
+    const dek = makeDek();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(dek) as never,
+    );
+    vi.mocked(filesApi.startUploadSession).mockRejectedValue({
+      response: {
+        status: 507,
+        data: {
+          error: {
+            message: "Storage quota exceeded",
+            type: "TenantQuotaException",
+          },
+        },
+      },
+      message: "Request failed with status code 507",
+    });
+
+    await store.startSessionFunc(1, t);
+
+    expect(store.files.map((f) => f.isQuotaError ?? false)).toEqual([
+      false,
+      true,
+      true,
+      true,
+    ]);
+    expect(store.files[0].error).toBeFalsy();
+    expect(store.files.slice(2).map((f) => f.error)).toEqual([
+      "Storage quota exceeded",
+      "Storage quota exceeded",
+    ]);
+    expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1);
+    expect(prepareEncryptedUpload).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
+  });
+
   it("fails the file and frees the slot when the encryption preparation itself rejects", async () => {
     allowConsoleError("[ENCRYPTION] encrypted upload preparation failed");
     const { store, fakes } = setupEncryptedPendingFile();

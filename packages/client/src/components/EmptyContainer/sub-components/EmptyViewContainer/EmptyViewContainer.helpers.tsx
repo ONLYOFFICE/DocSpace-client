@@ -739,25 +739,25 @@ export const getOptions = (
         uploadFromDeviceAnyFile,
       ];
 
-    // Markdown only: created from the skill template, uploaded, or
-    // written by AI.
+    // Markdown only: written by AI, created from the skill template, or
+    // uploaded. The skills come first, the people to share them with last.
     case RoomsType.InstructionsRoom: {
       if (isNotAdmin) return [];
 
       const skillOptions = [
+        ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
         ...(isCreateSkillAvailable ? [createMarkdown] : []),
         uploadMarkdownFromStorage,
         uploadMarkdownFromDevice,
-        ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
       ];
 
       return isCollaborator
         ? skillOptions
-        : [inviteToSkillSet, ...skillOptions];
+        : [...skillOptions, inviteToSkillSet];
     }
 
     // Files to index: uploaded, never created or edited; nothing at all
-    // while vectorization is off.
+    // while vectorization is off. The files come first, the people last.
     case RoomsType.KnowledgeRoom:
       if (isNotAdmin) return [];
 
@@ -768,9 +768,9 @@ export const getOptions = (
         return [uploadKnowledgeFromStorage, uploadKnowledgeFromDevice];
 
       return [
-        inviteToKnowledgeBase,
         uploadKnowledgeFromStorage,
         uploadKnowledgeFromDevice,
+        inviteToKnowledgeBase,
       ];
     default:
       return [];

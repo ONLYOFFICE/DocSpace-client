@@ -45,7 +45,11 @@ describe("getOptions of an empty skill set", () => {
   });
 });
 
-const optionsOf = (type: RoomsType, access: ShareAccessRights) =>
+const optionsOf = (
+  type: RoomsType,
+  access: ShareAccessRights,
+  isCreateSkillWithAIAvailable = false,
+) =>
   getOptions(
     type,
     { Create: true, EditAccess: true },
@@ -65,7 +69,7 @@ const optionsOf = (type: RoomsType, access: ShareAccessRights) =>
     false,
     false,
     true,
-    false,
+    isCreateSkillWithAIAvailable,
     false,
     false,
     true,
@@ -124,9 +128,22 @@ describe("an empty skill set and an empty knowledge base", () => {
   it("words the quick actions of a knowledge base for a knowledge base", () => {
     const options = optionsOf(RoomsType.KnowledgeRoom, ShareAccessRights.None);
     expect(options.map((option) => option.description)).toEqual([
-      "EmptyView:KnowledgeBaseInviteDescription",
       "EmptyView:KnowledgeBaseUploadStorageDescription",
       "EmptyView:KnowledgeBaseUploadDeviceDescription",
+      "EmptyView:KnowledgeBaseInviteDescription",
     ]);
+  });
+
+  it("offers a skill set its skills first, AI ahead of them, and people last", () => {
+    const keys = optionsOf(
+      RoomsType.InstructionsRoom,
+      ShareAccessRights.None,
+      true,
+    ).map((option) => option.key);
+
+    expect(keys[0]).toBe("create-skill-with-ai");
+    expect(keys[1]).toBe("create-markdown");
+    expect(keys.at(-1)).toBe("invite-users");
+    expect(keys).toHaveLength(5);
   });
 });

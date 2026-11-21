@@ -102,6 +102,26 @@ describe("GenerateSkillDialog", () => {
     );
   });
 
+  it("opens named New skill and leaves the name to the AI while it stays so", async () => {
+    ai.generateSkillWithAI.mockResolvedValue({ ...generated, title: "QA Haiku Writer" });
+    render(<GenerateSkillDialog roomId={5} setGenerateSkillDialogVisible={vi.fn()} />);
+    expect((screen.getByTestId("generate-skill-title") as HTMLInputElement).value).toBe("Common:NewSkill");
+    fireEvent.change(screen.getByTestId("generate-skill-description"), { target: { value: "A haiku about QA" } });
+    fireEvent.click(screen.getByTestId("generate-skill-run-button"));
+    await screen.findByTestId("editor");
+    expect(ai.generateSkillWithAI.mock.calls[0][0]).toEqual({ destId: 5, description: "A haiku about QA" });
+    expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("QA Haiku Writer");
+  });
+
+  it("asks the AI for the name of a skill whose name was emptied", async () => {
+    render(<GenerateSkillDialog roomId={5} setGenerateSkillDialogVisible={vi.fn()} />);
+    fireEvent.change(screen.getByTestId("generate-skill-title"), { target: { value: "  " } });
+    fireEvent.change(screen.getByTestId("generate-skill-description"), { target: { value: "A haiku about QA" } });
+    fireEvent.click(screen.getByTestId("generate-skill-run-button"));
+    await screen.findByTestId("editor");
+    expect(ai.generateSkillWithAI.mock.calls[0][0]).not.toHaveProperty("title");
+  });
+
   it("saves nothing without a description", async () => {
     await generate();
     fireEvent.change(screen.getByTestId("edit-skill-description"), { target: { value: " " } });

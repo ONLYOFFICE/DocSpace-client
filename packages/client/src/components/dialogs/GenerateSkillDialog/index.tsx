@@ -175,9 +175,11 @@ const getGenerateError = (
 
 /**
  * "Create skill with AI" in an Instructions room, laid out as the metadata AI
- * panel: the user names the skill and describes it, "Generate skill" has the
- * AI service write the Markdown file, and the result opens in the fields of
- * the Edit skill form, named as the user typed it. Nothing is stored until
+ * panel: the user describes the skill and may name it, "Generate skill" has
+ * the AI service write the Markdown file, and the result opens in the fields
+ * of the Edit skill form. The name opens as "New skill", as the New skill
+ * form does; left that way or emptied, it is no name of the user's, and the
+ * AI names the skill from its description. Nothing is stored until
  * Save, which writes the skill as edited into `<name>.md`, as "New skill"
  * does; the Files service validates its frontmatter then, and the file
  * reaches the list through the socket.
@@ -193,14 +195,15 @@ const GenerateSkillDialog = ({
   // The room the panel was opened in: the skill is generated for it and
   // saved into it, wherever the user has gone meanwhile.
   const [targetRoomId] = React.useState(roomId);
-  const [title, setTitle] = React.useState("");
+  const defaultTitle = t("Common:NewSkill");
+  const [title, setTitle] = React.useState(defaultTitle);
   const [description, setDescription] = React.useState("");
   const [isValidTitle, setIsValidTitle] = React.useState(true);
   const [isGenerating, setIsGenerating] = React.useState(false);
   const [isSaving, setIsSaving] = React.useState(false);
   const [error, setError] = React.useState("");
   // The generated skill as the form shows it: the name is the typed title,
-  // the file's own name is made from it again on Save.
+  // or the one the AI gave a skill left unnamed; the file's own name is made from it again on Save.
   const [skill, setSkill] = React.useState<TSkillFile | null>(null);
   const abortRef = React.useRef<AbortController | null>(null);
   const { width, onPointerDown } = usePanelWidth();
@@ -208,8 +211,7 @@ const GenerateSkillDialog = ({
   React.useEffect(() => () => abortRef.current?.abort(), []);
 
   const isBusy = isGenerating || isSaving;
-  const canGenerate =
-    !!title.trim() && !!description.trim() && targetRoomId != null;
+  const canGenerate = !!description.trim() && targetRoomId != null;
   const canSave =
     !!skill &&
     toSkillName(skill.name) !== "" &&
@@ -265,8 +267,11 @@ const GenerateSkillDialog = ({
 
   const onGenerate = async () => {
     const trimmedTitle = title.trim();
+    // The name the panel opened with is not one the user chose.
+    const ownTitle =
+      trimmedTitle && trimmedTitle !== defaultTitle ? trimmedTitle : undefined;
     if (!canGenerate || isBusy) return;
-    if (!HAS_NAME_CHARS.test(trimmedTitle)) {
+    if (ownTitle && !HAS_NAME_CHARS.test(ownTitle)) {
       setIsValidTitle(false);
       return;
     }
@@ -280,7 +285,7 @@ const GenerateSkillDialog = ({
       const generated = await generateSkillWithAI(
         {
           destId: targetRoomId!,
-          title: trimmedTitle,
+          ...(ownTitle && { title: ownTitle }),
           description: description.trim(),
         },
         abort.signal,
@@ -288,7 +293,11 @@ const GenerateSkillDialog = ({
       const { description: skillDescription, body } = parseSkillFile(
         generated.content,
       );
-      setSkill({ name: trimmedTitle, description: skillDescription, body });
+      setSkill({
+        name: ownTitle ?? generated.title ?? defaultTitle,
+        description: skillDescription,
+        body,
+      });
     } catch (e) {
       if (abort.signal.aborted) return;
       setError(

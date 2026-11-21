@@ -52,6 +52,7 @@ import {
 } from "./validatePublicRoomKey";
 import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
 import {
+  emptyFormsRootHandler,
   roomListHandler,
   roomListResolver,
   createRoomHandler,
@@ -167,6 +168,7 @@ export {
   showQuickActionsHandler,
   changeDeleteConfirmHandler,
   validatePublicRoomKeyHandler,
+  emptyFormsRootHandler,
   roomListHandler,
   roomPrimaryLinkHandler,
   roomLinksHandler,

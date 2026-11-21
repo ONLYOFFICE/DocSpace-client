@@ -1083,13 +1083,13 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
-  // `createRoomFromTemplate` is set from the Forms root, where there is no
-  // folder to create a file in: the picked template must produce a form space
-  // built around it instead of a bare PDF (see onCreateTemplateImpl). Without
-  // it the create falls through to the file branch and the editor opens on a
-  // file the user may not create there -- "Access denied".
   onShowTemplateGallery = (createRoomFromTemplate = false) => {
-    this.oformsStore.setCreateRoomFromTemplate(createRoomFromTemplate);
+    // At the Forms root, a picked template must create a form space regardless
+    // of which menu opened the gallery.
+    const fromFormsRoot =
+      createRoomFromTemplate || this.treeFoldersStore.isFormsFolder;
+
+    this.oformsStore.setCreateRoomFromTemplate(fromFormsRoot);
     this.oformsStore.setTemplateGalleryVisible(true);
     // the original .js passed a possibly-null selected folder
     // id through unchecked — the non-null assertion keeps that behavior.

@@ -187,20 +187,24 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
     expect(setEmptyTrashDialogVisible).toHaveBeenCalledWith(true);
   });
 
-  it("onShowTemplateGallery -> oformsStore.setTemplateGalleryVisible(true)", () => {
-    const setTemplateGalleryVisible = vi.fn();
-    const setCreateRoomFromTemplate = vi.fn();
-    const store = createTestContextOptionsStore({
-      oformsStore: {
-        setTemplateGalleryVisible,
-        setCreateRoomFromTemplate,
-        setOformFromFolderId: vi.fn(),
-      },
-    });
-    store.onShowTemplateGallery();
-    expect(setTemplateGalleryVisible).toHaveBeenCalledWith(true);
-    expect(setCreateRoomFromTemplate).toHaveBeenCalledWith(false);
-  });
+  it.each([true, false])(
+    "onShowTemplateGallery() uses the current Forms root state (%s)",
+    (isFormsFolder) => {
+      const setTemplateGalleryVisible = vi.fn();
+      const setCreateRoomFromTemplate = vi.fn();
+      const store = createTestContextOptionsStore({
+        treeFoldersStore: { isFormsFolder },
+        oformsStore: {
+          setTemplateGalleryVisible,
+          setCreateRoomFromTemplate,
+          setOformFromFolderId: vi.fn(),
+        },
+      });
+      store.onShowTemplateGallery();
+      expect(setTemplateGalleryVisible).toHaveBeenCalledWith(true);
+      expect(setCreateRoomFromTemplate).toHaveBeenCalledWith(isFormsFolder);
+    },
+  );
 
   it("onShowTemplateGallery(true) -> gallery creates a form space, not a file", () => {
     const setCreateRoomFromTemplate = vi.fn();

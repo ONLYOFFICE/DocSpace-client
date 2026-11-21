@@ -35,7 +35,7 @@
 
 import { http } from "msw";
 import { uuid } from "@onlyoffice/apps-ui-kit/utils";
-import { ShareAccessRights } from "../../../enums";
+import { FolderType, ShareAccessRights } from "../../../enums";
 import { TGetRooms, TRoom } from "../../../api/rooms/types";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
@@ -3245,6 +3245,38 @@ export const roomListHandler = (
     ({ request }) => {
       return roomListResolver(roomListType, params, request);
     },
+  );
+};
+
+export const emptyFormsRootHandler = (port: string) => {
+  const rootId = FolderType.Forms;
+
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`, () =>
+    Response.json({
+      response: {
+        files: [],
+        folders: [],
+        current: {
+          id: rootId,
+          parentId: 0,
+          rootFolderId: rootId,
+          rootFolderType: FolderType.Forms,
+          parentRoomType: FolderType.Forms,
+          title: "Forms",
+          filesCount: 0,
+          foldersCount: 0,
+          security: { Read: true, Create: true },
+          access: ShareAccessRights.None,
+          created: "2025-01-15T12:00:00.000Z",
+          updated: "2025-01-15T12:00:00.000Z",
+        },
+        pathParts: [{ id: rootId, title: "Forms" }],
+        startIndex: 0,
+        count: 0,
+        total: 0,
+        new: 0,
+      },
+    }),
   );
 };
 

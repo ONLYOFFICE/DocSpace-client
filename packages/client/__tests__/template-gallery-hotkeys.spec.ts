@@ -34,9 +34,8 @@
  */
 
 import type { Page } from "@playwright/test";
-import { http } from "msw";
-import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e";
 import {
+  emptyFormsRootHandler,
   filesSettingsHandler,
   myDocumentsHandler,
   myHandler,
@@ -52,36 +51,6 @@ import { expect, test, TEST_PORT } from "./fixtures/base";
 
 const PERSONAL_FOLDER_URL = "/rooms/personal/filter?folder=12764";
 const FORMS_URL = "/forms/filter";
-const FORMS_ROOT_ID = 36;
-
-const formsRootHandler = () =>
-  http.get(`${BASE_URL}:${TEST_PORT}/${API_PREFIX}/files/rooms*`, () =>
-    Response.json({
-      response: {
-        files: [],
-        folders: [],
-        current: {
-          id: FORMS_ROOT_ID,
-          parentId: 0,
-          rootFolderId: FORMS_ROOT_ID,
-          rootFolderType: FORMS_ROOT_ID,
-          parentRoomType: FORMS_ROOT_ID,
-          title: "Forms",
-          filesCount: 0,
-          foldersCount: 0,
-          security: { Read: true, Create: true },
-          access: 0,
-          created: "2025-01-15T12:00:00.000Z",
-          updated: "2025-01-15T12:00:00.000Z",
-        },
-        pathParts: [{ id: FORMS_ROOT_ID, title: "Forms" }],
-        startIndex: 0,
-        count: 0,
-        total: 0,
-        new: 0,
-      },
-    }),
-  );
 
 const gallery = (page: Page) => page.locator("#scroll-template-gallery");
 
@@ -165,7 +134,7 @@ test.describe("Hotkeys in the Forms template gallery", () => {
         oformsFormGallerySettings(TEST_PORT),
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      formsRootHandler(),
+      emptyFormsRootHandler(TEST_PORT),
       roomTagsHandler(TEST_PORT),
       ...oformsHandlers(TEST_PORT),
     );

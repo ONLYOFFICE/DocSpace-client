@@ -17,7 +17,7 @@ tsc, biome, locale tests, shared, client and sdk unit tests must stay green.
 
 ## 3. Gate
 
-- [ ] 3.1 Run the client E2E specs of private rooms under Docker `tests-dev` (`packages/client/__tests__/private-*.spec.ts`), the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. The SDK E2E and the full locale suites are not run: the change touches neither the SDK nor a locale. Verify: every command green, recorded in design.md, "Gate runs", with the date, the commit and the counts
+- [x] 3.1 Run the client E2E specs of private rooms under Docker `tests-dev` (`packages/client/__tests__/private-*.spec.ts`), the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `pnpm nx run-many -t tsc lint test --parallel=3`), each command on its own with its exit code read, and `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict` on the branch and after a trial archive on a scratch copy of `openspec/`. The SDK E2E and the full locale suites are not run: the change touches neither the SDK nor a locale. Verify: every command green, recorded in design.md, "Gate runs", with the date, the commit and the counts
 
 ## Workflow follow-up
 

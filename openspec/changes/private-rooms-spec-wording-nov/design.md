@@ -121,4 +121,18 @@ found then:
 
 ## Gate runs
 
-Recorded by task 3.1.
+2026-11-21, task 3.1, code at `d3c5806e980`, each command on its own with
+its exit code read:
+
+- Client E2E of private rooms under Docker `tests-dev`, the eleven
+  `packages/client/__tests__/private-*.spec.ts`: 177 passed, exit 0.
+- `npm --prefix ./common/tests run test:lefthook`: 61 passed, 3 skipped,
+  exit 0.
+- `pnpm nx run-many -t tsc lint test --parallel=3`: tsc, lint and test
+  green for the six packages, exit 0.
+- `OPENSPEC_TELEMETRY=0 npx -y @fission-ai/openspec@1.17.0 validate --all --strict`:
+  22 passed on the branch; 21 passed after a trial archive on a scratch copy
+  of `openspec/`, which changed only the three requirements of this change.
+
+Not run: the SDK E2E and the full locale suites; the change touches neither
+the SDK nor a locale.

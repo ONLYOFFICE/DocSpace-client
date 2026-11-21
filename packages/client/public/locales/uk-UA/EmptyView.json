@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Отримуйте відповіді, знаходьте файли та створюйте контент за допомогою AI.",
   "AgentsCreateDescription": "Виберіть модель, підключіть набори навичок і бази знань та запросіть людей",
+  "AgentsCreateTitle": "Новий агент",
   "AgentsEmptyDescription": "Агент поєднує модель, набори навичок і бази знань та відкриває цю конфігурацію людям, яких ви запросите.",
   "AgentsEmptyTitle": "Агентів поки немає",
   "AgentsEmptyUserDescription": "Агентів налаштовують адміністратори кімнат. Коли вас запросять до одного з них, він з'явиться тут.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Передайте файли зі свого пристрою",
   "KnowledgeBaseUploadStorageDescription": "Передайте файли зі своїх документів або кімнат",
   "KnowledgeBasesCreateDescription": "Файли, у яких чат або агент шукає відповіді",
+  "KnowledgeBasesCreateTitle": "Нова база знань",
   "KnowledgeBasesEmptyDescription": "База знань містить файли, у яких асистент шукає відповіді. Підключіть її до чату або агента.",
   "KnowledgeBasesEmptyTitle": "Баз знань поки немає",
   "KnowledgeBasesEmptyUserDescription": "Бази знань створюють адміністратори кімнат. Коли вас запросять до однієї з них, вона з'явиться тут.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "До набору навичок можна додавати лише файли Markdown (.md)",
   "SkillSetUploadStorageDescription": "Передайте файли Markdown (.md) зі своїх документів або кімнат",
   "SkillSetsCreateDescription": "Навички, яких дотримується чат або агент",
+  "SkillSetsCreateTitle": "Новий набір навичок",
   "SkillSetsEmptyDescription": "Набір навичок містить навички: інструкції, які пояснюють асистентові, як виконувати завдання. Підключіть його до чату або агента.",
   "SkillSetsEmptyTitle": "Наборів навичок поки немає",
   "SkillSetsEmptyUserDescription": "Набори навичок створюють адміністратори кімнат. Коли вас запросять до одного з них, він з'явиться тут.",

@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Získejte odpovědi, najděte soubory a připravte obsah pomocí AI.",
   "AgentsCreateDescription": "Vyberte model, připojte sady dovedností a znalostní báze a pozvěte lidi",
+  "AgentsCreateTitle": "Nový agent",
   "AgentsEmptyDescription": "Agent spojuje model, sady dovedností a znalostní báze a sdílí toto nastavení s lidmi, které pozvete.",
   "AgentsEmptyTitle": "Zatím žádní agenti",
   "AgentsEmptyUserDescription": "Agenty nastavují administrátoři místností. Když vás někdo k některému pozve, zobrazí se zde.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Nahrajte soubory ze svého zařízení",
   "KnowledgeBaseUploadStorageDescription": "Nahrajte soubory ze svých dokumentů nebo místností",
   "KnowledgeBasesCreateDescription": "Soubory, ve kterých chat nebo agent hledá odpovědi",
+  "KnowledgeBasesCreateTitle": "Nová znalostní báze",
   "KnowledgeBasesEmptyDescription": "Znalostní báze obsahuje soubory, ve kterých asistent hledá odpovědi. Připojte ji k chatu nebo agentovi.",
   "KnowledgeBasesEmptyTitle": "Zatím žádné znalostní báze",
   "KnowledgeBasesEmptyUserDescription": "Znalostní báze vytvářejí administrátoři místností. Když vás někdo do některé pozve, zobrazí se zde.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Do sady dovedností lze přidávat pouze soubory Markdown (.md)",
   "SkillSetUploadStorageDescription": "Nahrajte soubory Markdown (.md) ze svých dokumentů nebo místností",
   "SkillSetsCreateDescription": "Dovednosti, kterými se řídí chat nebo agent",
+  "SkillSetsCreateTitle": "Nová sada dovedností",
   "SkillSetsEmptyDescription": "Sada dovedností obsahuje dovednosti: instrukce, které asistentovi říkají, jak splnit úkol. Připojte ji k chatu nebo agentovi.",
   "SkillSetsEmptyTitle": "Zatím žádné sady dovedností",
   "SkillSetsEmptyUserDescription": "Sady dovedností vytvářejí administrátoři místností. Když vás někdo do některé pozve, zobrazí se zde.",

@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "ຮັບຄຳຕອບ, ຄົ້ນຫາໄຟລ໌ ແລະ ຮ່າງເນື້ອຫາດ້ວຍ AI.",
   "AgentsCreateDescription": "ເລືອກໂມເດລ, ເຊື່ອມຕໍ່ຊຸດທັກສະ ແລະ ຖານຄວາມຮູ້ ແລະ ເຊີນຜູ້ຄົນ",
+  "AgentsCreateTitle": "ຕົວແທນໃໝ່",
   "AgentsEmptyDescription": "ຕົວແທນລວມໂມເດລ, ຊຸດທັກສະ ແລະ ຖານຄວາມຮູ້ເຂົ້າກັນ ແລະ ແບ່ງປັນການຕັ້ງຄ່ານັ້ນກັບຜູ້ຄົນທີ່ທ່ານເຊີນ.",
   "AgentsEmptyTitle": "ຍັງບໍ່ມີຕົວແທນ",
   "AgentsEmptyUserDescription": "ຕົວແທນຖືກຕັ້ງຄ່າໂດຍຜູ້ເບິ່ງແຍງຫ້ອງ. ເມື່ອມີຄົນເຊີນທ່ານເຂົ້າຕົວແທນໃດໜຶ່ງ, ມັນຈະປະກົດຢູ່ທີ່ນີ້.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "ອັບໂຫຼດໄຟລ໌ຈາກອຸປະກອນຂອງທ່ານ",
   "KnowledgeBaseUploadStorageDescription": "ອັບໂຫຼດໄຟລ໌ຈາກເອກະສານ ຫຼື ຫ້ອງຂອງທ່ານ",
   "KnowledgeBasesCreateDescription": "ໄຟລ໌ໃຫ້ການສົນທະນາ ຫຼື ຕົວແທນຊອກຫາຄຳຕອບ",
+  "KnowledgeBasesCreateTitle": "ຖານຄວາມຮູ້ໃໝ່",
   "KnowledgeBasesEmptyDescription": "ຖານຄວາມຮູ້ບັນຈຸໄຟລ໌ທີ່ຜູ້ຊ່ວຍໃຊ້ຊອກຫາຄຳຕອບ. ເຊື່ອມຕໍ່ມັນກັບການສົນທະນາ ຫຼື ຕົວແທນ.",
   "KnowledgeBasesEmptyTitle": "ຍັງບໍ່ມີຖານຄວາມຮູ້",
   "KnowledgeBasesEmptyUserDescription": "ຖານຄວາມຮູ້ຖືກສ້າງໂດຍຜູ້ເບິ່ງແຍງຫ້ອງ. ເມື່ອມີຄົນເຊີນທ່ານເຂົ້າຖານຄວາມຮູ້ໃດໜຶ່ງ, ມັນຈະປະກົດຢູ່ທີ່ນີ້.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "ສາມາດເພີ່ມໄດ້ສະເພາະໄຟລ໌ Markdown (.md) ເຂົ້າໃນຊຸດທັກສະ",
   "SkillSetUploadStorageDescription": "ອັບໂຫຼດໄຟລ໌ Markdown (.md) ຈາກເອກະສານ ຫຼື ຫ້ອງຂອງທ່ານ",
   "SkillSetsCreateDescription": "ທັກສະໃຫ້ການສົນທະນາ ຫຼື ຕົວແທນປະຕິບັດຕາມ",
+  "SkillSetsCreateTitle": "ຊຸດທັກສະໃໝ່",
   "SkillSetsEmptyDescription": "ຊຸດທັກສະບັນຈຸທັກສະ: ຄຳແນະນຳທີ່ບອກຜູ້ຊ່ວຍວ່າຕ້ອງເຮັດວຽກໃດໜຶ່ງແນວໃດ. ເຊື່ອມຕໍ່ມັນກັບການສົນທະນາ ຫຼື ຕົວແທນ.",
   "SkillSetsEmptyTitle": "ຍັງບໍ່ມີຊຸດທັກສະ",
   "SkillSetsEmptyUserDescription": "ຊຸດທັກສະຖືກສ້າງໂດຍຜູ້ເບິ່ງແຍງຫ້ອງ. ເມື່ອມີຄົນເຊີນທ່ານເຂົ້າຊຸດທັກສະໃດໜຶ່ງ, ມັນຈະປະກົດຢູ່ທີ່ນີ້.",

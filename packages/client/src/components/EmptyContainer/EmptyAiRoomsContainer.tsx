@@ -53,7 +53,6 @@ import {
 } from "SRC_DIR/Hooks/useChatNoAccess";
 import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 import {
-  getAiWorkspaceCreateLabel,
   getAiListEmptyTexts,
   getAiWorkspaceCreatePayload,
   getAiWorkspaceListType,
@@ -181,7 +180,7 @@ const EmptyAiRoomsContainer = ({
     ? [
         {
           key: "create-ai-room",
-          title: getAiWorkspaceCreateLabel(t, location.search),
+          title: texts.createTitle,
           description: texts.createDescription,
           icon: <CreateRoomIcon />,
           onClick: onCreate,

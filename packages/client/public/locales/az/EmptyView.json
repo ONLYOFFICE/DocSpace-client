@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "AI cavablar alın, faylları tapın və məzmun hazırlayın.",
   "AgentsCreateDescription": "Model seçin, bacarıq dəstlərini və bilik bazalarını qoşun və insanları dəvət edin",
+  "AgentsCreateTitle": "Yeni agent",
   "AgentsEmptyDescription": "Agent modeli, bacarıq dəstlərini və bilik bazalarını bir araya gətirir və bu konfiqurasiyanı dəvət etdiyiniz insanlarla paylaşır.",
   "AgentsEmptyTitle": "Hələ agent yoxdur",
   "AgentsEmptyUserDescription": "Agentləri otaq adminləri qurur. Kimsə sizi agentə dəvət etdikdə o, burada görünəcək.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Cihazınızdan faylları yükləyin",
   "KnowledgeBaseUploadStorageDescription": "Sənədlərinizdən və ya otaqlarınızdan faylları yükləyin",
   "KnowledgeBasesCreateDescription": "Söhbətin və ya agentin cavab axtaracağı fayllar",
+  "KnowledgeBasesCreateTitle": "Yeni bilik bazası",
   "KnowledgeBasesEmptyDescription": "Bilik bazası köməkçinin cavab axtardığı faylları saxlayır. Onu söhbətə və ya agentə qoşun.",
   "KnowledgeBasesEmptyTitle": "Hələ bilik bazası yoxdur",
   "KnowledgeBasesEmptyUserDescription": "Bilik bazalarını otaq adminləri yaradır. Kimsə sizi bilik bazasına dəvət etdikdə o, burada görünəcək.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Bacarıq dəstinə yalnız Markdown (.md) faylları əlavə edilə bilər",
   "SkillSetUploadStorageDescription": "Sənədlərinizdən və ya otaqlarınızdan Markdown (.md) fayllarını yükləyin",
   "SkillSetsCreateDescription": "Söhbətin və ya agentin əməl edəcəyi bacarıqlar",
+  "SkillSetsCreateTitle": "Yeni bacarıq dəsti",
   "SkillSetsEmptyDescription": "Bacarıq dəsti bacarıqları saxlayır: köməkçiyə tapşırığı necə yerinə yetirməyi izah edən təlimatlar. Onu söhbətə və ya agentə qoşun.",
   "SkillSetsEmptyTitle": "Hələ bacarıq dəsti yoxdur",
   "SkillSetsEmptyUserDescription": "Bacarıq dəstlərini otaq adminləri yaradır. Kimsə sizi bacarıq dəstinə dəvət etdikdə o, burada görünəcək.",

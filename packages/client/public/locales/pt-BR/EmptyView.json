@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Obtenha respostas, encontre arquivos e crie conteúdo com a IA.",
   "AgentsCreateDescription": "Escolha um modelo, conecte conjuntos de habilidades e bases de conhecimento e convide pessoas",
+  "AgentsCreateTitle": "Novo agente",
   "AgentsEmptyDescription": "Um agente reúne um modelo, conjuntos de habilidades e bases de conhecimento e compartilha essa configuração com as pessoas que você convidar.",
   "AgentsEmptyTitle": "Ainda não há agentes",
   "AgentsEmptyUserDescription": "Os agentes são configurados pelos administradores de salas. Quando alguém convidar você para um, ele aparecerá aqui.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Carregue arquivos do seu dispositivo",
   "KnowledgeBaseUploadStorageDescription": "Carregue arquivos dos seus documentos ou salas",
   "KnowledgeBasesCreateDescription": "Arquivos nos quais um chat ou um agente busca respostas",
+  "KnowledgeBasesCreateTitle": "Nova base de conhecimento",
   "KnowledgeBasesEmptyDescription": "Uma base de conhecimento contém os arquivos nos quais o assistente busca respostas. Conecte-a a um chat ou a um agente.",
   "KnowledgeBasesEmptyTitle": "Ainda não há bases de conhecimento",
   "KnowledgeBasesEmptyUserDescription": "As bases de conhecimento são criadas pelos administradores de salas. Quando alguém convidar você para uma, ela aparecerá aqui.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Somente arquivos Markdown (.md) podem ser adicionados a um conjunto de habilidades",
   "SkillSetUploadStorageDescription": "Carregue arquivos Markdown (.md) dos seus documentos ou salas",
   "SkillSetsCreateDescription": "Habilidades para um chat ou um agente seguir",
+  "SkillSetsCreateTitle": "Novo conjunto de habilidades",
   "SkillSetsEmptyDescription": "Um conjunto de habilidades contém habilidades: instruções que dizem ao assistente como realizar uma tarefa. Conecte-o a um chat ou a um agente.",
   "SkillSetsEmptyTitle": "Ainda não há conjuntos de habilidades",
   "SkillSetsEmptyUserDescription": "Os conjuntos de habilidades são criados pelos administradores de salas. Quando alguém convidar você para um, ele aparecerá aqui.",

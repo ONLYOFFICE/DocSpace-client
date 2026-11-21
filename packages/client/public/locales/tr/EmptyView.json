@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "AI ile yanıtlar alın, dosyaları bulun ve içerik oluşturun.",
   "AgentsCreateDescription": "Bir model seçin, beceri setlerini ve bilgi tabanlarını bağlayın ve kişileri davet edin",
+  "AgentsCreateTitle": "Yeni temsilci",
   "AgentsEmptyDescription": "Bir ajan; bir modeli, beceri setlerini ve bilgi tabanlarını bir araya getirir ve bu yapılandırmayı davet ettiğiniz kişilerle paylaşır.",
   "AgentsEmptyTitle": "Henüz ajan yok",
   "AgentsEmptyUserDescription": "Ajanları oda yöneticileri kurar. Biri sizi bir ajana davet ettiğinde ajan burada görünür.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Cihazınızdan dosya yükleyin",
   "KnowledgeBaseUploadStorageDescription": "Belgelerinizden veya odalarınızdan dosya yükleyin",
   "KnowledgeBasesCreateDescription": "Bir sohbetin veya ajanın yanıt arayacağı dosyalar",
+  "KnowledgeBasesCreateTitle": "Yeni bilgi tabanı",
   "KnowledgeBasesEmptyDescription": "Bir bilgi tabanı, asistanın yanıt aradığı dosyaları içerir. Onu bir sohbete veya ajana bağlayın.",
   "KnowledgeBasesEmptyTitle": "Henüz bilgi tabanı yok",
   "KnowledgeBasesEmptyUserDescription": "Bilgi tabanlarını oda yöneticileri oluşturur. Biri sizi bir bilgi tabanına davet ettiğinde bilgi tabanı burada görünür.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Bir beceri setine yalnızca Markdown (.md) dosyaları eklenebilir",
   "SkillSetUploadStorageDescription": "Belgelerinizden veya odalarınızdan Markdown (.md) dosyaları yükleyin",
   "SkillSetsCreateDescription": "Bir sohbetin veya ajanın izleyeceği beceriler",
+  "SkillSetsCreateTitle": "Yeni beceri seti",
   "SkillSetsEmptyDescription": "Bir beceri seti beceriler içerir: asistana bir görevi nasıl yapacağını söyleyen talimatlar. Onu bir sohbete veya ajana bağlayın.",
   "SkillSetsEmptyTitle": "Henüz beceri seti yok",
   "SkillSetsEmptyUserDescription": "Beceri setlerini oda yöneticileri oluşturur. Biri sizi bir beceri setine davet ettiğinde beceri seti burada görünür.",

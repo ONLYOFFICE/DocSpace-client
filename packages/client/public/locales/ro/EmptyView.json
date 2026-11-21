@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Obțineți răspunsuri, găsiți fișiere și redactați conținut cu ajutorul IA.",
   "AgentsCreateDescription": "Alegeți un model, conectați seturi de abilități și baze de cunoștințe și invitați persoane",
+  "AgentsCreateTitle": "Agent nou",
   "AgentsEmptyDescription": "Un agent reunește un model, seturi de abilități și baze de cunoștințe și partajează această configurație cu persoanele pe care le invitați.",
   "AgentsEmptyTitle": "Încă nu există agenți",
   "AgentsEmptyUserDescription": "Agenții sunt configurați de administratorii de săli. Când cineva vă invită la unul, acesta apare aici.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Încărcați fișiere de pe dispozitivul dumneavoastră",
   "KnowledgeBaseUploadStorageDescription": "Încărcați fișiere din documentele sau sălile dumneavoastră",
   "KnowledgeBasesCreateDescription": "Fișiere în care un chat sau un agent să caute răspunsuri",
+  "KnowledgeBasesCreateTitle": "Bază de cunoștințe nouă",
   "KnowledgeBasesEmptyDescription": "O bază de cunoștințe conține fișierele în care asistentul caută răspunsuri. Conectați-o la un chat sau la un agent.",
   "KnowledgeBasesEmptyTitle": "Încă nu există baze de cunoștințe",
   "KnowledgeBasesEmptyUserDescription": "Bazele de cunoștințe sunt create de administratorii de săli. Când cineva vă invită la una, aceasta apare aici.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Într-un set de abilități pot fi adăugate doar fișiere Markdown (.md)",
   "SkillSetUploadStorageDescription": "Încărcați fișiere Markdown (.md) din documentele sau sălile dumneavoastră",
   "SkillSetsCreateDescription": "Abilități pe care să le urmeze un chat sau un agent",
+  "SkillSetsCreateTitle": "Set de abilități nou",
   "SkillSetsEmptyDescription": "Un set de abilități conține abilități: instrucțiuni care îi spun asistentului cum să îndeplinească o sarcină. Conectați-l la un chat sau la un agent.",
   "SkillSetsEmptyTitle": "Încă nu există seturi de abilități",
   "SkillSetsEmptyUserDescription": "Seturile de abilități sunt create de administratorii de săli. Când cineva vă invită la unul, acesta apare aici.",

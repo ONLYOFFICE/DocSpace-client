@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "AI සමඟ පිළිතුරු ලබා ගන්න, ගොනු සොයන්න සහ අන්තර්ගතය සකසන්න.",
   "AgentsCreateDescription": "ආකෘතියක් තෝරන්න, කුසලතා කට්ටල සහ දැනුම් පදනම් සම්බන්ධ කරන්න, සහ පුද්ගලයන්ට ආරාධනා කරන්න",
+  "AgentsCreateTitle": "නව නියෝජිතයා",
   "AgentsEmptyDescription": "නියෝජිතයෙකු ආකෘතියක්, කුසලතා කට්ටල සහ දැනුම් පදනම් එකට ගෙන එන අතර එම සැකසුම ඔබ ආරාධනා කරන පුද්ගලයන් සමඟ බෙදා ගනී.",
   "AgentsEmptyTitle": "තවම නියෝජිතයන් නැත",
   "AgentsEmptyUserDescription": "නියෝජිතයන් සකසනු ලබන්නේ කාමර පරිපාලකයන් විසිනි. යමෙකු ඔබට එකකට ආරාධනා කළ විට, එය මෙහි දිස්වේ.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "ඔබේ උපකරණයෙන් ගොනු උඩුගත කරන්න",
   "KnowledgeBaseUploadStorageDescription": "ඔබේ ලේඛනවලින් හෝ කාමරවලින් ගොනු උඩුගත කරන්න",
   "KnowledgeBasesCreateDescription": "කතාබහකට හෝ නියෝජිතයෙකුට පිළිතුරු සෙවීමට ගොනු",
+  "KnowledgeBasesCreateTitle": "නව දැනුම් පදනමක්",
   "KnowledgeBasesEmptyDescription": "දැනුම් පදනමක සහායකයා පිළිතුරු සොයන ගොනු අඩංගු වේ. එය කතාබහකට හෝ නියෝජිතයෙකුට සම්බන්ධ කරන්න.",
   "KnowledgeBasesEmptyTitle": "තවම දැනුම් පදනම් නැත",
   "KnowledgeBasesEmptyUserDescription": "දැනුම් පදනම් සාදනු ලබන්නේ කාමර පරිපාලකයන් විසිනි. යමෙකු ඔබට එකකට ආරාධනා කළ විට, එය මෙහි දිස්වේ.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "කුසලතා කට්ටලයකට එක් කළ හැක්කේ Markdown (.md) ගොනු පමණි",
   "SkillSetUploadStorageDescription": "ඔබේ ලේඛනවලින් හෝ කාමරවලින් Markdown (.md) ගොනු උඩුගත කරන්න",
   "SkillSetsCreateDescription": "කතාබහකට හෝ නියෝජිතයෙකුට අනුගමනය කිරීමට කුසලතා",
+  "SkillSetsCreateTitle": "නව කුසලතා කට්ටලයක්",
   "SkillSetsEmptyDescription": "කුසලතා කට්ටලයක කුසලතා අඩංගු වේ: කාර්යයක් කරන්නේ කෙසේදැයි සහායකයාට පවසන උපදෙස්. එය කතාබහකට හෝ නියෝජිතයෙකුට සම්බන්ධ කරන්න.",
   "SkillSetsEmptyTitle": "තවම කුසලතා කට්ටල නැත",
   "SkillSetsEmptyUserDescription": "කුසලතා කට්ටල සාදනු ලබන්නේ කාමර පරිපාලකයන් විසිනි. යමෙකු ඔබට එකකට ආරාධනා කළ විට, එය මෙහි දිස්වේ.",

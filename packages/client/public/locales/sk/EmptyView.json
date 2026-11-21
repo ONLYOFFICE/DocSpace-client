@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Získajte odpovede, nájdite súbory a pripravte obsah pomocou AI.",
   "AgentsCreateDescription": "Vyberte model, pripojte sady zručností a znalostné bázy a pozvite ľudí",
+  "AgentsCreateTitle": "Nový agent",
   "AgentsEmptyDescription": "Agent spája model, sady zručností a znalostné bázy a zdieľa toto nastavenie s ľuďmi, ktorých pozvete.",
   "AgentsEmptyTitle": "Zatiaľ žiadni agenti",
   "AgentsEmptyUserDescription": "Agentov nastavujú administrátori miestností. Keď vás niekto k niektorému pozve, zobrazí sa tu.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Nahrajte súbory zo svojho zariadenia",
   "KnowledgeBaseUploadStorageDescription": "Nahrajte súbory zo svojich dokumentov alebo miestností",
   "KnowledgeBasesCreateDescription": "Súbory, v ktorých chat alebo agent hľadá odpovede",
+  "KnowledgeBasesCreateTitle": "Nová znalostná báza",
   "KnowledgeBasesEmptyDescription": "Znalostná báza obsahuje súbory, v ktorých asistent hľadá odpovede. Pripojte ju k chatu alebo agentovi.",
   "KnowledgeBasesEmptyTitle": "Zatiaľ žiadne znalostné bázy",
   "KnowledgeBasesEmptyUserDescription": "Znalostné bázy vytvárajú administrátori miestností. Keď vás niekto do niektorej pozve, zobrazí sa tu.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Do sady zručností možno pridávať iba súbory Markdown (.md)",
   "SkillSetUploadStorageDescription": "Nahrajte súbory Markdown (.md) zo svojich dokumentov alebo miestností",
   "SkillSetsCreateDescription": "Zručnosti, ktorými sa riadi chat alebo agent",
+  "SkillSetsCreateTitle": "Nová sada zručností",
   "SkillSetsEmptyDescription": "Sada zručností obsahuje zručnosti: inštrukcie, ktoré asistentovi hovoria, ako splniť úlohu. Pripojte ju k chatu alebo agentovi.",
   "SkillSetsEmptyTitle": "Zatiaľ žiadne sady zručností",
   "SkillSetsEmptyUserDescription": "Sady zručností vytvárajú administrátori miestností. Keď vás niekto do niektorej pozve, zobrazí sa tu.",

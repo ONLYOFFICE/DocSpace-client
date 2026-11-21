@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "AI로 답변을 얻고, 파일을 찾고, 콘텐츠 초안을 작성하세요.",
   "AgentsCreateDescription": "모델을 선택하고, 스킬 세트와 지식 기반을 연결하고, 사람들을 초대하세요",
+  "AgentsCreateTitle": "새로운 에이전트",
   "AgentsEmptyDescription": "에이전트는 모델, 스킬 세트, 지식 기반을 하나로 묶고 그 구성을 초대한 사람들과 공유합니다.",
   "AgentsEmptyTitle": "아직 에이전트가 없습니다",
   "AgentsEmptyUserDescription": "에이전트는 방 관리자가 설정합니다. 누군가 에이전트에 초대하면 여기에 표시됩니다.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "내 장치에서 파일 업로드",
   "KnowledgeBaseUploadStorageDescription": "내 문서 또는 방에서 파일 업로드",
   "KnowledgeBasesCreateDescription": "채팅이나 에이전트가 답변을 찾을 파일",
+  "KnowledgeBasesCreateTitle": "새 지식 기반",
   "KnowledgeBasesEmptyDescription": "지식 기반에는 어시스턴트가 답변을 찾는 파일이 들어 있습니다. 채팅이나 에이전트에 연결하세요.",
   "KnowledgeBasesEmptyTitle": "아직 지식 기반이 없습니다",
   "KnowledgeBasesEmptyUserDescription": "지식 기반은 방 관리자가 만듭니다. 누군가 지식 기반에 초대하면 여기에 표시됩니다.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "스킬 세트에는 Markdown(.md) 파일만 추가할 수 있습니다",
   "SkillSetUploadStorageDescription": "내 문서 또는 방에서 Markdown(.md) 파일 업로드",
   "SkillSetsCreateDescription": "채팅이나 에이전트가 따를 스킬",
+  "SkillSetsCreateTitle": "새 스킬 세트",
   "SkillSetsEmptyDescription": "스킬 세트에는 스킬이 들어 있습니다. 스킬은 어시스턴트에게 작업 수행 방법을 알려 주는 지침입니다. 채팅이나 에이전트에 연결하세요.",
   "SkillSetsEmptyTitle": "아직 스킬 세트가 없습니다",
   "SkillSetsEmptyUserDescription": "스킬 세트는 방 관리자가 만듭니다. 누군가 스킬 세트에 초대하면 여기에 표시됩니다.",

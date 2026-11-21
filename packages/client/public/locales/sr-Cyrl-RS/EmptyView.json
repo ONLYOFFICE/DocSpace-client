@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Добијте одговоре, пронађите датотеке и састављајте садржај уз АИ.",
   "AgentsCreateDescription": "Изаберите модел, повежите скупове вештина и базе знања и позовите људе",
+  "AgentsCreateTitle": "Нови агент",
   "AgentsEmptyDescription": "Агент обједињује модел, скупове вештина и базе знања и дели ту поставку са људима које позовете.",
   "AgentsEmptyTitle": "Још нема агената",
   "AgentsEmptyUserDescription": "Агенте подешавају администратори соба. Када вас неко позове у агента, он се појављује овде.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Отпреми датотеке са свог уређаја",
   "KnowledgeBaseUploadStorageDescription": "Отпреми датотеке из својих докумената или соба",
   "KnowledgeBasesCreateDescription": "Датотеке у којима ћаскање или агент треба да тражи одговоре",
+  "KnowledgeBasesCreateTitle": "Нова база знања",
   "KnowledgeBasesEmptyDescription": "База знања садржи датотеке у којима асистент тражи одговоре. Повежите је са ћаскањем или агентом.",
   "KnowledgeBasesEmptyTitle": "Још нема база знања",
   "KnowledgeBasesEmptyUserDescription": "Базе знања креирају администратори соба. Када вас неко позове у базу знања, она се појављује овде.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "У скуп вештина могу се додати само Markdown (.md) датотеке",
   "SkillSetUploadStorageDescription": "Отпреми Markdown (.md) датотеке из својих докумената или соба",
   "SkillSetsCreateDescription": "Вештине које ћаскање или агент треба да следи",
+  "SkillSetsCreateTitle": "Нови скуп вештина",
   "SkillSetsEmptyDescription": "Скуп вештина садржи вештине: инструкције које асистенту говоре како да обави задатак. Повежите га са ћаскањем или агентом.",
   "SkillSetsEmptyTitle": "Још нема скупова вештина",
   "SkillSetsEmptyUserDescription": "Скупове вештина креирају администратори соба. Када вас неко позове у скуп вештина, он се појављује овде.",

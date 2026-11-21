@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Dobijte odgovore, pronađite datoteke i sastavljajte sadržaj uz AI.",
   "AgentsCreateDescription": "Izaberite model, povežite skupove veština i baze znanja i pozovite ljude",
+  "AgentsCreateTitle": "Novi agent",
   "AgentsEmptyDescription": "Agent objedinjuje model, skupove veština i baze znanja i deli tu postavku sa ljudima koje pozovete.",
   "AgentsEmptyTitle": "Još nema agenata",
   "AgentsEmptyUserDescription": "Agente podešavaju administratori soba. Kada vas neko pozove u agenta, on se pojavljuje ovde.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Otpremi datoteke sa svog uređaja",
   "KnowledgeBaseUploadStorageDescription": "Otpremi datoteke iz svojih dokumenata ili soba",
   "KnowledgeBasesCreateDescription": "Datoteke u kojima ćaskanje ili agent treba da traži odgovore",
+  "KnowledgeBasesCreateTitle": "Nova baza znanja",
   "KnowledgeBasesEmptyDescription": "Baza znanja sadrži datoteke u kojima asistent traži odgovore. Povežite je sa ćaskanjem ili agentom.",
   "KnowledgeBasesEmptyTitle": "Još nema baza znanja",
   "KnowledgeBasesEmptyUserDescription": "Baze znanja kreiraju administratori soba. Kada vas neko pozove u bazu znanja, ona se pojavljuje ovde.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "U skup veština mogu se dodati samo Markdown (.md) datoteke",
   "SkillSetUploadStorageDescription": "Otpremi Markdown (.md) datoteke iz svojih dokumenata ili soba",
   "SkillSetsCreateDescription": "Veštine koje ćaskanje ili agent treba da sledi",
+  "SkillSetsCreateTitle": "Novi skup veština",
   "SkillSetsEmptyDescription": "Skup veština sadrži veštine: instrukcije koje asistentu govore kako da obavi zadatak. Povežite ga sa ćaskanjem ili agentom.",
   "SkillSetsEmptyTitle": "Još nema skupova veština",
   "SkillSetsEmptyUserDescription": "Skupove veština kreiraju administratori soba. Kada vas neko pozove u skup veština, on se pojavljuje ovde.",

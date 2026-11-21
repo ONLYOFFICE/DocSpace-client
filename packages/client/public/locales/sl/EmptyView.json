@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Pridobite odgovore, poiščite datoteke in pripravite vsebino z umetno inteligenco.",
   "AgentsCreateDescription": "Izberite model, povežite nabore veščin in zbirke znanja ter povabite osebe",
+  "AgentsCreateTitle": "Nov agent",
   "AgentsEmptyDescription": "Agent združuje model, nabore veščin in zbirke znanja ter to nastavitev deli z osebami, ki jih povabite.",
   "AgentsEmptyTitle": "Agentov še ni",
   "AgentsEmptyUserDescription": "Agente nastavljajo skrbniki sob. Ko vas nekdo povabi k enemu od njih, se prikaže tukaj.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Naložite datoteke iz svoje naprave",
   "KnowledgeBaseUploadStorageDescription": "Naložite datoteke iz svojih dokumentov ali sob",
   "KnowledgeBasesCreateDescription": "Datoteke, v katerih klepet ali agent išče odgovore",
+  "KnowledgeBasesCreateTitle": "Nova zbirka znanja",
   "KnowledgeBasesEmptyDescription": "Zbirka znanja vsebuje datoteke, v katerih asistent išče odgovore. Povežite jo s klepetom ali agentom.",
   "KnowledgeBasesEmptyTitle": "Zbirk znanja še ni",
   "KnowledgeBasesEmptyUserDescription": "Zbirke znanja ustvarjajo skrbniki sob. Ko vas nekdo povabi v eno od njih, se prikaže tukaj.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "V nabor veščin je mogoče dodati samo datoteke Markdown (.md)",
   "SkillSetUploadStorageDescription": "Naložite datoteke Markdown (.md) iz svojih dokumentov ali sob",
   "SkillSetsCreateDescription": "Veščine, ki jim sledi klepet ali agent",
+  "SkillSetsCreateTitle": "Nov nabor veščin",
   "SkillSetsEmptyDescription": "Nabor veščin vsebuje veščine: navodila, ki asistentu povedo, kako naj opravi nalogo. Povežite ga s klepetom ali agentom.",
   "SkillSetsEmptyTitle": "Naborov veščin še ni",
   "SkillSetsEmptyUserDescription": "Nabore veščin ustvarjajo skrbniki sob. Ko vas nekdo povabi v enega od njih, se prikaže tukaj.",

@@ -259,6 +259,7 @@ describe("empty lists of the AI Chat section", () => {
       description: `EmptyView:${prefix}EmptyDescription`,
       userTitle: `EmptyView:${prefix}EmptyUserTitle`,
       userDescription: `EmptyView:${prefix}EmptyUserDescription`,
+      createTitle: `EmptyView:${prefix}CreateTitle`,
       createDescription: `EmptyView:${prefix}CreateDescription`,
     });
   });

@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Obtenga respuestas, encuentre archivos y redacte contenido con la IA.",
   "AgentsCreateDescription": "Elija un modelo, conecte conjuntos de habilidades y bases de conocimientos, e invite a personas",
+  "AgentsCreateTitle": "Nuevo agente",
   "AgentsEmptyDescription": "Un agente reúne un modelo, conjuntos de habilidades y bases de conocimientos, y comparte esa configuración con las personas que usted invite.",
   "AgentsEmptyTitle": "Aún no hay agentes",
   "AgentsEmptyUserDescription": "Los administradores de sala configuran los agentes. Cuando alguien le invite a uno, aparecerá aquí.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Cargue archivos desde su dispositivo",
   "KnowledgeBaseUploadStorageDescription": "Cargue archivos desde sus documentos o salas",
   "KnowledgeBasesCreateDescription": "Archivos en los que un chat o un agente buscará respuestas",
+  "KnowledgeBasesCreateTitle": "Nueva base de conocimientos",
   "KnowledgeBasesEmptyDescription": "Una base de conocimientos contiene los archivos en los que el asistente busca respuestas. Conéctela a un chat o a un agente.",
   "KnowledgeBasesEmptyTitle": "Aún no hay bases de conocimientos",
   "KnowledgeBasesEmptyUserDescription": "Los administradores de sala crean las bases de conocimientos. Cuando alguien le invite a una, aparecerá aquí.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Solo se pueden añadir archivos Markdown (.md) a un conjunto de habilidades",
   "SkillSetUploadStorageDescription": "Cargue archivos Markdown (.md) desde sus documentos o salas",
   "SkillSetsCreateDescription": "Habilidades que seguirá un chat o un agente",
+  "SkillSetsCreateTitle": "Nuevo conjunto de habilidades",
   "SkillSetsEmptyDescription": "Un conjunto de habilidades contiene habilidades: instrucciones que indican al asistente cómo realizar una tarea. Conéctelo a un chat o a un agente.",
   "SkillSetsEmptyTitle": "Aún no hay conjuntos de habilidades",
   "SkillSetsEmptyUserDescription": "Los administradores de sala crean los conjuntos de habilidades. Cuando alguien le invite a uno, aparecerá aquí.",

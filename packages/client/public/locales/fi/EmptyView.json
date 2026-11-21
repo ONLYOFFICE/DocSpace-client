@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Saa vastauksia, löydä tiedostoja ja luo sisältöä tekoälyn avulla.",
   "AgentsCreateDescription": "Valitse malli, yhdistä taitokokoelmia ja tietokantoja ja kutsu henkilöitä",
+  "AgentsCreateTitle": "Uusi agentti",
   "AgentsEmptyDescription": "Agentti kokoaa yhteen mallin, taitokokoelmat ja tietokannat ja jakaa tämän kokoonpanon kutsumillesi henkilöille.",
   "AgentsEmptyTitle": "Agentteja ei vielä ole",
   "AgentsEmptyUserDescription": "Huoneiden järjestelmänvalvojat määrittävät agentit. Kun joku kutsuu sinut agenttiin, se näkyy täällä.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Lataa tiedostoja laitteestasi",
   "KnowledgeBaseUploadStorageDescription": "Lataa tiedostoja asiakirjoistasi tai huoneistasi",
   "KnowledgeBasesCreateDescription": "Tiedostoja, joista chat tai agentti etsii vastauksia",
+  "KnowledgeBasesCreateTitle": "Uusi tietämyskanta",
   "KnowledgeBasesEmptyDescription": "Tietokanta sisältää tiedostot, joista avustaja etsii vastauksia. Yhdistä se chattiin tai agenttiin.",
   "KnowledgeBasesEmptyTitle": "Tietokantoja ei vielä ole",
   "KnowledgeBasesEmptyUserDescription": "Huoneiden järjestelmänvalvojat luovat tietokannat. Kun joku kutsuu sinut tietokantaan, se näkyy täällä.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Taitokokoelmaan voi lisätä vain Markdown (.md) -tiedostoja",
   "SkillSetUploadStorageDescription": "Lataa Markdown (.md) -tiedostoja asiakirjoistasi tai huoneistasi",
   "SkillSetsCreateDescription": "Taitoja chatin tai agentin noudatettavaksi",
+  "SkillSetsCreateTitle": "Uusi taitokokoelma",
   "SkillSetsEmptyDescription": "Taitokokoelma sisältää taitoja: ohjeita, jotka kertovat avustajalle, miten tehtävä tehdään. Yhdistä se chattiin tai agenttiin.",
   "SkillSetsEmptyTitle": "Taitokokoelmia ei vielä ole",
   "SkillSetsEmptyUserDescription": "Huoneiden järjestelmänvalvojat luovat taitokokoelmat. Kun joku kutsuu sinut taitokokoelmaan, se näkyy täällä.",

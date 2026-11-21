@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Krijg antwoorden, vind bestanden en stel content op met AI.",
   "AgentsCreateDescription": "Kies een model, verbind vaardighedensets en kennisbanken en nodig mensen uit",
+  "AgentsCreateTitle": "Nieuwe agent",
   "AgentsEmptyDescription": "Een agent brengt een model, vaardighedensets en kennisbanken samen en deelt die configuratie met de mensen die u uitnodigt.",
   "AgentsEmptyTitle": "Nog geen agenten",
   "AgentsEmptyUserDescription": "Agenten worden ingesteld door kamerbeheerders. Wanneer iemand u voor een agent uitnodigt, verschijnt deze hier.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Upload bestanden vanaf uw apparaat",
   "KnowledgeBaseUploadStorageDescription": "Upload bestanden vanuit uw documenten of kamers",
   "KnowledgeBasesCreateDescription": "Bestanden waarin een chat of een agent naar antwoorden zoekt",
+  "KnowledgeBasesCreateTitle": "Nieuwe kennisbank",
   "KnowledgeBasesEmptyDescription": "Een kennisbank bevat de bestanden waarin de assistent naar antwoorden zoekt. Verbind de kennisbank met een chat of een agent.",
   "KnowledgeBasesEmptyTitle": "Nog geen kennisbanken",
   "KnowledgeBasesEmptyUserDescription": "Kennisbanken worden aangemaakt door kamerbeheerders. Wanneer iemand u voor een kennisbank uitnodigt, verschijnt deze hier.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Aan een vaardighedenset kunnen alleen Markdown-bestanden (.md) worden toegevoegd",
   "SkillSetUploadStorageDescription": "Upload Markdown-bestanden (.md) vanuit uw documenten of kamers",
   "SkillSetsCreateDescription": "Vaardigheden die een chat of een agent volgt",
+  "SkillSetsCreateTitle": "Nieuwe vaardighedenset",
   "SkillSetsEmptyDescription": "Een vaardighedenset bevat vaardigheden: instructies die de assistent vertellen hoe een taak moet worden uitgevoerd. Verbind de set met een chat of een agent.",
   "SkillSetsEmptyTitle": "Nog geen vaardighedensets",
   "SkillSetsEmptyUserDescription": "Vaardighedensets worden aangemaakt door kamerbeheerders. Wanneer iemand u voor een vaardighedenset uitnodigt, verschijnt deze hier.",

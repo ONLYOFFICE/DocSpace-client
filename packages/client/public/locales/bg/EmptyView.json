@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Получавайте отговори, намирайте файлове и създавайте съдържание с ИИ.",
   "AgentsCreateDescription": "Изберете модел, свържете набори от умения и бази знания и поканете хора",
+  "AgentsCreateTitle": "Нов агент",
   "AgentsEmptyDescription": "Агентът обединява модел, набори от умения и бази знания и споделя тази настройка с хората, които поканите.",
   "AgentsEmptyTitle": "Все още няма агенти",
   "AgentsEmptyUserDescription": "Агентите се настройват от администраторите на стаи. Когато някой ви покани в агент, той се появява тук.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Качете файлове от вашето устройство",
   "KnowledgeBaseUploadStorageDescription": "Качете файлове от вашите документи или стаи",
   "KnowledgeBasesCreateDescription": "Файлове, в които чат или агент да търси отговори",
+  "KnowledgeBasesCreateTitle": "Нова база знания",
   "KnowledgeBasesEmptyDescription": "Базата знания съдържа файловете, в които асистентът търси отговори. Свържете я с чат или агент.",
   "KnowledgeBasesEmptyTitle": "Все още няма бази знания",
   "KnowledgeBasesEmptyUserDescription": "Базите знания се създават от администраторите на стаи. Когато някой ви покани в база знания, тя се появява тук.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "В набор от умения могат да се добавят само Markdown (.md) файлове",
   "SkillSetUploadStorageDescription": "Качете Markdown (.md) файлове от вашите документи или стаи",
   "SkillSetsCreateDescription": "Умения, които чат или агент да следва",
+  "SkillSetsCreateTitle": "Нов набор от умения",
   "SkillSetsEmptyDescription": "Наборът от умения съдържа умения: инструкции, които казват на асистента как да изпълни дадена задача. Свържете го с чат или агент.",
   "SkillSetsEmptyTitle": "Все още няма набори от умения",
   "SkillSetsEmptyUserDescription": "Наборите от умения се създават от администраторите на стаи. Когато някой ви покани в набор, той се появява тук.",

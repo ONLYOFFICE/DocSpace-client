@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Ottieni risposte, trova file e crea contenuti con l’IA.",
   "AgentsCreateDescription": "Scegli un modello, collega set di competenze e basi di conoscenza e invita persone",
+  "AgentsCreateTitle": "Nuovo agente",
   "AgentsEmptyDescription": "Un agente riunisce un modello, set di competenze e basi di conoscenza e condivide questa configurazione con le persone che inviti.",
   "AgentsEmptyTitle": "Ancora nessun agente",
   "AgentsEmptyUserDescription": "Gli agenti vengono configurati dagli amministratori della stanza. Quando qualcuno ti invita a uno di essi, appare qui.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Carica file dal tuo dispositivo",
   "KnowledgeBaseUploadStorageDescription": "Carica file dai tuoi documenti o dalle tue stanze",
   "KnowledgeBasesCreateDescription": "File in cui una chat o un agente cerca le risposte",
+  "KnowledgeBasesCreateTitle": "Nuova base di conoscenza",
   "KnowledgeBasesEmptyDescription": "Una base di conoscenza contiene i file in cui l'assistente cerca le risposte. Collegala a una chat o a un agente.",
   "KnowledgeBasesEmptyTitle": "Ancora nessuna base di conoscenza",
   "KnowledgeBasesEmptyUserDescription": "Le basi di conoscenza vengono create dagli amministratori della stanza. Quando qualcuno ti invita a una di esse, appare qui.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "A un set di competenze è possibile aggiungere solo file Markdown (.md)",
   "SkillSetUploadStorageDescription": "Carica file Markdown (.md) dai tuoi documenti o dalle tue stanze",
   "SkillSetsCreateDescription": "Competenze che una chat o un agente deve seguire",
+  "SkillSetsCreateTitle": "Nuovo set di competenze",
   "SkillSetsEmptyDescription": "Un set di competenze contiene competenze: istruzioni che indicano all'assistente come svolgere un'attività. Collegalo a una chat o a un agente.",
   "SkillSetsEmptyTitle": "Ancora nessun set di competenze",
   "SkillSetsEmptyUserDescription": "I set di competenze vengono creati dagli amministratori della stanza. Quando qualcuno ti invita a uno di essi, appare qui.",

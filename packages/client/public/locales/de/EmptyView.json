@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Erhalten Sie Antworten, finden Sie Dateien und entwerfen Sie Inhalte mit KI.",
   "AgentsCreateDescription": "Wählen Sie ein Modell, verbinden Sie Skill-Sets und Wissensdatenbanken und laden Sie Personen ein",
+  "AgentsCreateTitle": "Neuer Agent",
   "AgentsEmptyDescription": "Ein Agent führt ein Modell, Skill-Sets und Wissensdatenbanken zusammen und teilt diese Konfiguration mit den Personen, die Sie einladen.",
   "AgentsEmptyTitle": "Noch keine Agenten",
   "AgentsEmptyUserDescription": "Agenten werden von Raum-Admins eingerichtet. Wenn Sie jemand zu einem Agenten einlädt, wird er hier angezeigt.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Laden Sie Dateien von Ihrem Gerät hoch",
   "KnowledgeBaseUploadStorageDescription": "Laden Sie Dateien aus Ihren Dokumenten oder Räumen hoch",
   "KnowledgeBasesCreateDescription": "Dateien, in denen ein Chat oder ein Agent nach Antworten sucht",
+  "KnowledgeBasesCreateTitle": "Neue Wissensdatenbank",
   "KnowledgeBasesEmptyDescription": "Eine Wissensdatenbank enthält die Dateien, in denen der Assistent nach Antworten sucht. Verbinden Sie sie mit einem Chat oder einem Agenten.",
   "KnowledgeBasesEmptyTitle": "Noch keine Wissensdatenbanken",
   "KnowledgeBasesEmptyUserDescription": "Wissensdatenbanken werden von Raum-Admins erstellt. Wenn Sie jemand zu einer Wissensdatenbank einlädt, wird sie hier angezeigt.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Zu einem Skill-Set können nur Markdown-Dateien (.md) hinzugefügt werden",
   "SkillSetUploadStorageDescription": "Laden Sie Markdown-Dateien (.md) aus Ihren Dokumenten oder Räumen hoch",
   "SkillSetsCreateDescription": "Skills, denen ein Chat oder ein Agent folgt",
+  "SkillSetsCreateTitle": "Neues Skill-Set",
   "SkillSetsEmptyDescription": "Ein Skill-Set enthält Skills: Anweisungen, die dem Assistenten sagen, wie er eine Aufgabe erledigen soll. Verbinden Sie es mit einem Chat oder einem Agenten.",
   "SkillSetsEmptyTitle": "Noch keine Skill-Sets",
   "SkillSetsEmptyUserDescription": "Skill-Sets werden von Raum-Admins erstellt. Wenn Sie jemand zu einem Skill-Set einlädt, wird es hier angezeigt.",

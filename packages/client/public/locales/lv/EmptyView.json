@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Saņemiet atbildes, atrodiet failus un veidojiet saturu ar MI.",
   "AgentsCreateDescription": "Izvēlieties modeli, pievienojiet prasmju kopas un zināšanu bāzes un uzaiciniet cilvēkus",
+  "AgentsCreateTitle": "Jauns aģents",
   "AgentsEmptyDescription": "Aģents apvieno modeli, prasmju kopas un zināšanu bāzes un kopīgo šo iestatījumu ar cilvēkiem, kurus uzaicināt.",
   "AgentsEmptyTitle": "Aģentu vēl nav",
   "AgentsEmptyUserDescription": "Aģentus iestata telpu administratori. Kad kāds jūs uzaicina uz kādu no tiem, tas parādās šeit.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Augšupielādējiet failus no savas ierīces",
   "KnowledgeBaseUploadStorageDescription": "Augšupielādējiet failus no saviem dokumentiem vai telpām",
   "KnowledgeBasesCreateDescription": "Faili, kuros tērzēšana vai aģents meklē atbildes",
+  "KnowledgeBasesCreateTitle": "Jauna zināšanu bāze",
   "KnowledgeBasesEmptyDescription": "Zināšanu bāzē ir faili, kuros asistents meklē atbildes. Pievienojiet to tērzēšanai vai aģentam.",
   "KnowledgeBasesEmptyTitle": "Zināšanu bāzu vēl nav",
   "KnowledgeBasesEmptyUserDescription": "Zināšanu bāzes izveido telpu administratori. Kad kāds jūs uzaicina uz kādu no tām, tā parādās šeit.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Prasmju kopai var pievienot tikai Markdown (.md) failus",
   "SkillSetUploadStorageDescription": "Augšupielādējiet Markdown (.md) failus no saviem dokumentiem vai telpām",
   "SkillSetsCreateDescription": "Prasmes, kuras ievēro tērzēšana vai aģents",
+  "SkillSetsCreateTitle": "Jauna prasmju kopa",
   "SkillSetsEmptyDescription": "Prasmju kopā ir prasmes: norādījumi, kas asistentam pasaka, kā veikt uzdevumu. Pievienojiet to tērzēšanai vai aģentam.",
   "SkillSetsEmptyTitle": "Prasmju kopu vēl nav",
   "SkillSetsEmptyUserDescription": "Prasmju kopas izveido telpu administratori. Kad kāds jūs uzaicina uz kādu no tām, tā parādās šeit.",

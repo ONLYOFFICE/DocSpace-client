@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "احصل على إجابات وابحث عن الملفات وأنشئ محتوى بمساعدة الذكاء الاصطناعي.",
   "AgentsCreateDescription": "اختر نموذجًا، واربط مجموعات المهارات وقواعد المعرفة، وادعُ الأشخاص",
+  "AgentsCreateTitle": "عميل جديد",
   "AgentsEmptyDescription": "يجمع الوكيل بين نموذج ومجموعات مهارات وقواعد معرفة، ويشارك هذا الإعداد مع الأشخاص الذين تدعوهم.",
   "AgentsEmptyTitle": "لا يوجد وكلاء حتى الآن",
   "AgentsEmptyUserDescription": "يتولى مسؤولو الغرف إعداد الوكلاء. عندما يدعوك أحدهم إلى وكيل، سيظهر هنا.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "قم بتحميل الملفات من جهازك",
   "KnowledgeBaseUploadStorageDescription": "قم بتحميل الملفات من مستنداتك أو غرفك",
   "KnowledgeBasesCreateDescription": "ملفات تبحث فيها دردشة أو وكيل عن الإجابات",
+  "KnowledgeBasesCreateTitle": "قاعدة معرفة جديدة",
   "KnowledgeBasesEmptyDescription": "تضم قاعدة المعرفة الملفات التي يبحث فيها المساعد عن الإجابات. اربطها بدردشة أو بوكيل.",
   "KnowledgeBasesEmptyTitle": "لا توجد قواعد معرفة حتى الآن",
   "KnowledgeBasesEmptyUserDescription": "ينشئ مسؤولو الغرف قواعد المعرفة. عندما يدعوك أحدهم إلى قاعدة، ستظهر هنا.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "يمكن إضافة ملفات Markdown (.md) فقط إلى مجموعة المهارات",
   "SkillSetUploadStorageDescription": "قم بتحميل ملفات Markdown (.md) من مستنداتك أو غرفك",
   "SkillSetsCreateDescription": "مهارات تتبعها دردشة أو وكيل",
+  "SkillSetsCreateTitle": "مجموعة مهارات جديدة",
   "SkillSetsEmptyDescription": "تضم مجموعة المهارات مهارات: تعليمات توضّح للمساعد كيفية تنفيذ مهمة. اربطها بدردشة أو بوكيل.",
   "SkillSetsEmptyTitle": "لا توجد مجموعات مهارات حتى الآن",
   "SkillSetsEmptyUserDescription": "ينشئ مسؤولو الغرف مجموعات المهارات. عندما يدعوك أحدهم إلى مجموعة، ستظهر هنا.",

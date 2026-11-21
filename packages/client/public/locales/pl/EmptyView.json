@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Uzyskaj odpowiedzi, znajdź pliki i twórz treści z pomocą AI.",
   "AgentsCreateDescription": "Wybierz model, podłącz zestawy umiejętności i bazy wiedzy oraz zaproś osoby",
+  "AgentsCreateTitle": "Nowy agent",
   "AgentsEmptyDescription": "Agent łączy model, zestawy umiejętności i bazy wiedzy oraz udostępnia tę konfigurację zaproszonym przez Ciebie osobom.",
   "AgentsEmptyTitle": "Nie ma jeszcze agentów",
   "AgentsEmptyUserDescription": "Agentów konfigurują administratorzy pokojów. Gdy ktoś zaprosi Cię do agenta, pojawi się on tutaj.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Prześlij pliki ze swojego urządzenia",
   "KnowledgeBaseUploadStorageDescription": "Prześlij pliki ze swoich dokumentów lub pokojów",
   "KnowledgeBasesCreateDescription": "Pliki, w których czat lub agent szuka odpowiedzi",
+  "KnowledgeBasesCreateTitle": "Nowa baza wiedzy",
   "KnowledgeBasesEmptyDescription": "Baza wiedzy zawiera pliki, w których asystent szuka odpowiedzi. Podłącz ją do czatu lub agenta.",
   "KnowledgeBasesEmptyTitle": "Nie ma jeszcze baz wiedzy",
   "KnowledgeBasesEmptyUserDescription": "Bazy wiedzy tworzą administratorzy pokojów. Gdy ktoś zaprosi Cię do bazy, pojawi się ona tutaj.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Do zestawu umiejętności można dodawać tylko pliki Markdown (.md)",
   "SkillSetUploadStorageDescription": "Prześlij pliki Markdown (.md) ze swoich dokumentów lub pokojów",
   "SkillSetsCreateDescription": "Umiejętności, którymi kieruje się czat lub agent",
+  "SkillSetsCreateTitle": "Nowy zestaw umiejętności",
   "SkillSetsEmptyDescription": "Zestaw umiejętności zawiera umiejętności: instrukcje, które mówią asystentowi, jak wykonać zadanie. Podłącz go do czatu lub agenta.",
   "SkillSetsEmptyTitle": "Nie ma jeszcze zestawów umiejętności",
   "SkillSetsEmptyUserDescription": "Zestawy umiejętności tworzą administratorzy pokojów. Gdy ktoś zaprosi Cię do zestawu, pojawi się on tutaj.",

@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "AIで回答を得たり、ファイルを探したり、文章を下書きしたりできます。",
   "AgentsCreateDescription": "モデルを選択し、スキルセットとナレッジベースを接続して、人を招待します",
+  "AgentsCreateTitle": "新規エージェント",
   "AgentsEmptyDescription": "エージェントは、モデル、スキルセット、ナレッジベースをひとつにまとめ、その構成を招待した人と共有します。",
   "AgentsEmptyTitle": "エージェントはまだありません",
   "AgentsEmptyUserDescription": "エージェントはルーム管理者が設定します。誰かに招待されると、ここに表示されます。",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "デバイスからファイルをアップロード",
   "KnowledgeBaseUploadStorageDescription": "ドキュメントまたはルームからファイルをアップロード",
   "KnowledgeBasesCreateDescription": "チャットやエージェントが回答を探すファイル",
+  "KnowledgeBasesCreateTitle": "新規ナレッジベース",
   "KnowledgeBasesEmptyDescription": "ナレッジベースには、アシスタントが回答を探すファイルが入っています。チャットまたはエージェントに接続してください。",
   "KnowledgeBasesEmptyTitle": "ナレッジベースはまだありません",
   "KnowledgeBasesEmptyUserDescription": "ナレッジベースはルーム管理者が作成します。誰かに招待されると、ここに表示されます。",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "スキルセットに追加できるのはMarkdown（.md）ファイルのみです",
   "SkillSetUploadStorageDescription": "ドキュメントまたはルームからMarkdown（.md）ファイルをアップロード",
   "SkillSetsCreateDescription": "チャットやエージェントが従うスキル",
+  "SkillSetsCreateTitle": "新規スキルセット",
   "SkillSetsEmptyDescription": "スキルセットにはスキルが入っています。スキルとは、タスクの実行方法をアシスタントに伝える指示です。チャットまたはエージェントに接続してください。",
   "SkillSetsEmptyTitle": "スキルセットはまだありません",
   "SkillSetsEmptyUserDescription": "スキルセットはルーム管理者が作成します。誰かに招待されると、ここに表示されます。",

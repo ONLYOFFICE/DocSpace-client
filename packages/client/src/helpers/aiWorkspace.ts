@@ -116,6 +116,7 @@ export type TAiListEmptyTexts = {
   description: string;
   userTitle: string;
   userDescription: string;
+  createTitle: string;
   createDescription: string;
 };
 
@@ -135,6 +136,7 @@ export const getAiListEmptyTexts = (
         description: t("EmptyView:SkillSetsEmptyDescription"),
         userTitle: t("EmptyView:SkillSetsEmptyUserTitle"),
         userDescription: t("EmptyView:SkillSetsEmptyUserDescription"),
+        createTitle: t("EmptyView:SkillSetsCreateTitle"),
         createDescription: t("EmptyView:SkillSetsCreateDescription"),
       };
     case RoomsType.KnowledgeRoom:
@@ -143,6 +145,7 @@ export const getAiListEmptyTexts = (
         description: t("EmptyView:KnowledgeBasesEmptyDescription"),
         userTitle: t("EmptyView:KnowledgeBasesEmptyUserTitle"),
         userDescription: t("EmptyView:KnowledgeBasesEmptyUserDescription"),
+        createTitle: t("EmptyView:KnowledgeBasesCreateTitle"),
         createDescription: t("EmptyView:KnowledgeBasesCreateDescription"),
       };
     default:
@@ -151,6 +154,7 @@ export const getAiListEmptyTexts = (
         description: t("EmptyView:AgentsEmptyDescription"),
         userTitle: t("EmptyView:AgentsEmptyUserTitle"),
         userDescription: t("EmptyView:AgentsEmptyUserDescription"),
+        createTitle: t("EmptyView:AgentsCreateTitle"),
         createDescription: t("EmptyView:AgentsCreateDescription"),
       };
   }

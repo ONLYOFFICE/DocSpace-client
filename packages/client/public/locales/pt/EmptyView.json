@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Obtenha respostas, encontre ficheiros e redija conteúdos com a IA.",
   "AgentsCreateDescription": "Escolha um modelo, ligue conjuntos de competências e bases de conhecimento e convide pessoas",
+  "AgentsCreateTitle": "Novo agente",
   "AgentsEmptyDescription": "Um agente reúne um modelo, conjuntos de competências e bases de conhecimento e partilha essa configuração com as pessoas que convidar.",
   "AgentsEmptyTitle": "Ainda não há agentes",
   "AgentsEmptyUserDescription": "Os agentes são configurados pelos administradores de salas. Quando alguém o convidar para um, ele aparecerá aqui.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Carregue ficheiros do seu dispositivo",
   "KnowledgeBaseUploadStorageDescription": "Carregue ficheiros dos seus documentos ou salas",
   "KnowledgeBasesCreateDescription": "Ficheiros em que um chat ou um agente procura respostas",
+  "KnowledgeBasesCreateTitle": "Nova base de conhecimento",
   "KnowledgeBasesEmptyDescription": "Uma base de conhecimento contém os ficheiros em que o assistente procura respostas. Ligue-a a um chat ou a um agente.",
   "KnowledgeBasesEmptyTitle": "Ainda não há bases de conhecimento",
   "KnowledgeBasesEmptyUserDescription": "As bases de conhecimento são criadas pelos administradores de salas. Quando alguém o convidar para uma, ela aparecerá aqui.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Só é possível adicionar ficheiros Markdown (.md) a um conjunto de competências",
   "SkillSetUploadStorageDescription": "Carregue ficheiros Markdown (.md) dos seus documentos ou salas",
   "SkillSetsCreateDescription": "Competências para um chat ou um agente seguir",
+  "SkillSetsCreateTitle": "Novo conjunto de competências",
   "SkillSetsEmptyDescription": "Um conjunto de competências contém competências: instruções que indicam ao assistente como realizar uma tarefa. Ligue-o a um chat ou a um agente.",
   "SkillSetsEmptyTitle": "Ainda não há conjuntos de competências",
   "SkillSetsEmptyUserDescription": "Os conjuntos de competências são criados pelos administradores de salas. Quando alguém o convidar para um, ele aparecerá aqui.",

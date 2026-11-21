@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Obtenez des réponses, trouvez des fichiers et rédigez du contenu avec l’IA.",
   "AgentsCreateDescription": "Choisissez un modèle, connectez des ensembles de compétences et des bases de connaissances, et invitez des personnes",
+  "AgentsCreateTitle": "Nouvel agent",
   "AgentsEmptyDescription": "Un agent réunit un modèle, des ensembles de compétences et des bases de connaissances, et partage cette configuration avec les personnes que vous invitez.",
   "AgentsEmptyTitle": "Aucun agent pour le moment",
   "AgentsEmptyUserDescription": "Les agents sont configurés par les administrateurs de salle. Lorsque quelqu'un vous invite à rejoindre un agent, celui-ci apparaît ici.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Téléchargez des fichiers depuis votre appareil",
   "KnowledgeBaseUploadStorageDescription": "Téléchargez des fichiers depuis vos documents ou vos salles",
   "KnowledgeBasesCreateDescription": "Des fichiers dans lesquels un chat ou un agent cherche des réponses",
+  "KnowledgeBasesCreateTitle": "Nouvelle base de connaissances",
   "KnowledgeBasesEmptyDescription": "Une base de connaissances contient les fichiers dans lesquels l'assistant cherche des réponses. Connectez-la à un chat ou à un agent.",
   "KnowledgeBasesEmptyTitle": "Aucune base de connaissances pour le moment",
   "KnowledgeBasesEmptyUserDescription": "Les bases de connaissances sont créées par les administrateurs de salle. Lorsque quelqu'un vous invite à en rejoindre une, celle-ci apparaît ici.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Seuls des fichiers Markdown (.md) peuvent être ajoutés à un ensemble de compétences",
   "SkillSetUploadStorageDescription": "Téléchargez des fichiers Markdown (.md) depuis vos documents ou vos salles",
   "SkillSetsCreateDescription": "Des compétences à suivre par un chat ou un agent",
+  "SkillSetsCreateTitle": "Nouvel ensemble de compétences",
   "SkillSetsEmptyDescription": "Un ensemble de compétences contient des compétences : des instructions qui indiquent à l'assistant comment réaliser une tâche. Connectez-le à un chat ou à un agent.",
   "SkillSetsEmptyTitle": "Aucun ensemble de compétences pour le moment",
   "SkillSetsEmptyUserDescription": "Les ensembles de compétences sont créés par les administrateurs de salle. Lorsque quelqu'un vous invite à en rejoindre un, celui-ci apparaît ici.",

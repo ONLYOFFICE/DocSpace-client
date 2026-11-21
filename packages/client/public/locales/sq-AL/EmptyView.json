@@ -1,6 +1,7 @@
 {
   "AIChatOptionDescription": "Merrni përgjigje, gjeni skedarë dhe hartoni përmbajtje me IA.",
   "AgentsCreateDescription": "Zgjidhni një model, lidhni grupe aftësish dhe baza njohurish dhe ftoni njerëz",
+  "AgentsCreateTitle": "Agjent i ri",
   "AgentsEmptyDescription": "Një agjent bashkon një model, grupe aftësish dhe baza njohurish dhe e ndan këtë konfigurim me personat që ftoni.",
   "AgentsEmptyTitle": "Ende asnjë agjent",
   "AgentsEmptyUserDescription": "Agjentët konfigurohen nga administratorët e dhomave. Kur dikush ju fton te njëri prej tyre, ai shfaqet këtu.",
@@ -51,6 +52,7 @@
   "KnowledgeBaseUploadDeviceDescription": "Ngarkoni skedarë nga pajisja juaj",
   "KnowledgeBaseUploadStorageDescription": "Ngarkoni skedarë nga dokumentet ose dhomat tuaja",
   "KnowledgeBasesCreateDescription": "Skedarë ku një bisedë ose një agjent kërkon përgjigje",
+  "KnowledgeBasesCreateTitle": "Bazë e re njohurish",
   "KnowledgeBasesEmptyDescription": "Një bazë njohurish përmban skedarët ku asistenti kërkon përgjigje. Lidheni me një bisedë ose një agjent.",
   "KnowledgeBasesEmptyTitle": "Ende asnjë bazë njohurish",
   "KnowledgeBasesEmptyUserDescription": "Bazat e njohurive krijohen nga administratorët e dhomave. Kur dikush ju fton te njëra prej tyre, ajo shfaqet këtu.",
@@ -74,6 +76,7 @@
   "SkillSetMarkdownOnlyDescription": "Në një grup aftësish mund të shtohen vetëm skedarë Markdown (.md)",
   "SkillSetUploadStorageDescription": "Ngarkoni skedarë Markdown (.md) nga dokumentet ose dhomat tuaja",
   "SkillSetsCreateDescription": "Aftësi që do t'i ndjekë një bisedë ose një agjent",
+  "SkillSetsCreateTitle": "Grup i ri aftësish",
   "SkillSetsEmptyDescription": "Një grup aftësish përmban aftësi: udhëzime që i tregojnë asistentit si të kryejë një detyrë. Lidheni me një bisedë ose një agjent.",
   "SkillSetsEmptyTitle": "Ende asnjë grup aftësish",
   "SkillSetsEmptyUserDescription": "Grupet e aftësive krijohen nga administratorët e dhomave. Kur dikush ju fton te njëri prej tyre, ai shfaqet këtu.",

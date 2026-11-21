@@ -101,8 +101,9 @@ found then:
 1. **The bare room address takes its id from the path.** When a private
    room address has no `folder` in its query, the list load replaces the
    address with `/private/{room}/filter?folder={room}` built from the route
-   parameter and the default files filter, the same form the server links
-   to, instead of falling back to the rooms list. An address that carries
+   parameter, the same form the server links to, instead of falling back to
+   the rooms list. The replacement takes the place of the bare address in
+   the history, so the back button does not return to it. An address that carries
    other list parameters but no `folder` is not touched. The address without
    `/filter` (`/private/{room}`) takes the same branch and is replaced the
    same way.

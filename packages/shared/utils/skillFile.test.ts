@@ -51,6 +51,12 @@ describe("skill files", () => {
     });
   });
 
+  it("keeps the indentation a line of a literal description adds to the block's", () => {
+    expect(
+      parseSkillFile("---\nname: review\ndescription: |\n  Reviews:\n    - clauses\n\n  Done.\n---\nDo it").description,
+    ).toBe("Reviews:\n  - clauses\n\nDone.");
+  });
+
   it("reads a description written over several lines", () => {
     expect(
       parseSkillFile("---\nname: review\ndescription: >\n  Reviews a contract\n  for risky clauses.\n---\nDo it").description,

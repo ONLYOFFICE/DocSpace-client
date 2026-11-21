@@ -150,10 +150,20 @@ const readValue = (inline: string, continuation: string[]): string => {
   const head = inline.trim();
   const block = BLOCK_SCALAR.exec(head);
   const lines = continuation.map((line) => line.trim());
-  if (block) {
-    const text = block[1] === "|" ? lines.join("\n") : lines.filter(Boolean).join(" ");
-    return text.trim();
+  if (block?.[1] === "|") {
+    // The indentation the lines share is the block's own; what a line adds
+    // to it belongs to the text.
+    const indent = Math.min(
+      ...continuation
+        .filter((line) => line.trim())
+        .map((line) => line.length - line.trimStart().length),
+    );
+    return continuation
+      .map((line) => (line.trim() ? line.slice(indent).trimEnd() : ""))
+      .join("\n")
+      .trim();
   }
+  if (block) return lines.filter(Boolean).join(" ").trim();
   if (!lines.some(Boolean)) return unquote(head);
   return unquote([head, ...lines].filter(Boolean).join(" "));
 };

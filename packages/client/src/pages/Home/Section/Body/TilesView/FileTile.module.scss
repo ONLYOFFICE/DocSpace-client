@@ -36,3 +36,10 @@
 .dragAndDrop {
   border-radius: 12px;
 }
+
+// The badges and the quick buttons of a skill's tile, side by side in its
+// upper end corner.
+.skillCorner {
+  display: flex;
+  gap: 4px;
+}

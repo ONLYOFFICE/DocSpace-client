@@ -323,7 +323,9 @@ const FileTile = (props) => {
       return <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />;
 
     // A skill shows the command that calls it and its description, as its
-    // table row and the Info panel do, instead of a Markdown thumbnail.
+    // table row and the Info panel do, instead of a Markdown thumbnail. The
+    // text starts in the corner where a file keeps its quick buttons, so
+    // they sit in the opposite one, after the badges.
     if (isSkill)
       return (
         <FileTileComponent
@@ -332,7 +334,12 @@ const FileTile = (props) => {
           temporaryIcon={<SkillTilePreview file={item} />}
           thumbnail=""
           thumbSize={thumbSize}
-          contentElement={quickButtonsComponent}
+          badges={
+            <div className={styles.skillCorner}>
+              {badgesComponent}
+              {quickButtonsComponent}
+            </div>
+          }
           thumbnailClick={onFilesClick}
         />
       );

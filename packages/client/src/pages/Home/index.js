@@ -306,16 +306,21 @@ const PureHome = observer((props) => {
   // The Templates tab was opened from the Agents list, so the header, the
   // tabs and the filter of that list are still the loaded ones. The list's
   // view, mounted again on the way back, keeps them instead of covering the
-  // section with skeletons. A tab opened by a reload has no list behind it.
-  const isAgentsListLoadedRef = React.useRef(false);
+  // section with skeletons. A tab opened by a reload has no list behind it,
+  // and a tab left for another list has that list's section to load.
+  const isAgentsList =
+    !isAiTemplatesTab &&
+    getCategoryType(location) === CategoryType.AiHub &&
+    location.pathname.startsWith("/ai-rooms/filter") &&
+    hasAiWorkspaceTemplates(location.search);
+  // The list shown before this render: read while rendering, written after.
+  const wasAgentsListRef = React.useRef(false);
+  const keepSectionLoaded = isAgentsList && wasAgentsListRef.current;
   React.useEffect(() => {
     if (isAiTemplatesTab) return;
 
-    isAgentsListLoadedRef.current =
-      getCategoryType(location) === CategoryType.AiHub &&
-      location.pathname.startsWith("/ai-rooms/filter") &&
-      hasAiWorkspaceTemplates(location.search);
-  }, [isAiTemplatesTab, location]);
+    wasAgentsListRef.current = isAgentsList;
+  }, [isAiTemplatesTab, isAgentsList]);
 
   // An agent's page draws its chat in the section body (AiProjectView),
   // beside the Info panel rather than in its place.
@@ -795,11 +800,7 @@ const PureHome = observer((props) => {
             {isAiTemplatesTab ? (
               <AiTemplatesCatalog />
             ) : (
-              <Outlet
-                context={{
-                  keepSectionLoaded: isAgentsListLoadedRef.current,
-                }}
-              />
+              <Outlet context={{ keepSectionLoaded }} />
             )}
           </Section.SectionBody>
 

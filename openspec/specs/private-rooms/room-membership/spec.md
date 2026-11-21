@@ -7,7 +7,7 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag.
+The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set to true. Only a Custom room SHALL be encryptable; a room of any other type SHALL be created with the private flag set to false.
 
 #### Scenario: Private card chosen
 - **WHEN** the user creates a room from the Private section, where the dialog shows the Private room type, and confirms creation
@@ -15,7 +15,7 @@ The system SHALL present "Private room" as its own room type in the create-room 
 
 #### Scenario: Other room type
 - **WHEN** a Public, Form filling, Virtual data or Collaboration room is created
-- **THEN** the private flag is not sent and the room is not encrypted
+- **THEN** the create request carries the private flag set to false and the room is not encrypted
 
 ### Requirement: Private room creation requires an encryption key
 The system SHALL refuse to create a private room for a user who has no registered encryption key, after re-fetching the keys from the server, and SHALL show Common:EncryptionKeysRequiredForPrivateRoom.

@@ -31,7 +31,7 @@ The system SHALL show a top-level sidebar item labelled Common:Private while the
 ### Requirement: Section addresses
 The system SHALL serve these section addresses:
 - the list at `/private/filter`;
-- a private room or a folder inside one at `/private/{id}/filter`;
+- a private room or a folder inside one at `/private/{id}/filter`, with or without `?folder={id}`;
 - the archive at `/private/archived/filter`;
 - an archived private room or a folder inside one at `/private/archived/filter?folder={id}`, the same form Rooms → Archive uses.
 
@@ -44,6 +44,10 @@ The sidebar SHALL highlight Private on the list and room addresses, and its Arch
 #### Scenario: Room address
 - **WHEN** the user opens `/private/{roomId}/filter` for a private room they belong to
 - **THEN** the room contents are shown and the Private item is highlighted
+
+#### Scenario: Room address without the folder parameter
+- **WHEN** the user opens `/private/{roomId}/filter` with no query for a private room they belong to
+- **THEN** the address becomes `/private/{roomId}/filter?folder={roomId}`, the room contents are shown, and no address names an undefined room
 
 #### Scenario: Archived room address
 - **WHEN** the user opens `/private/archived/filter?folder={roomId}` for an archived private room they belong to
@@ -206,7 +210,7 @@ The system SHALL offer the Private section to the client running inside an embed
 
 #### Scenario: Frame opened in the Private section
 - **WHEN** a host embeds the client with the root path `/private/` while the section is available
-- **THEN** the frame shows the Private list and its requests carry `privacyFilter=Private`
+- **THEN** the frame shows the Private list and its requests name the section's search area (`searchArea=PrivateRooms`) and carry no privacy filter
 
 #### Scenario: Frame showing the menu
 - **WHEN** a host embeds the client with the menu shown while the section is available

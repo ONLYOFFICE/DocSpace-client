@@ -6,7 +6,7 @@ tsc, biome, locale tests, shared, client and sdk unit tests must stay green.
 
 ## 1. Wording
 
-- [ ] 1.1 Add the case "Other room type" to `packages/client/src/store/__tests__/CreateEditRoomStore.privateRoom.test.ts`: creating a Public, a Form filling, a Virtual data and a Collaboration room sends the room's own type with `private` false (design decision 3). Verify: `cd packages/client && pnpm exec vitest run src/store/__tests__/CreateEditRoomStore.privateRoom.test.ts`
+- [x] 1.1 Add the case "Other room type" to `packages/client/src/store/__tests__/CreateEditRoomStore.privateRoom.test.ts`: creating a Public, a Form filling, a Virtual data and a Collaboration room sends the room's own type with `private` false (design decision 3). Verify: `cd packages/client && pnpm exec vitest run src/store/__tests__/CreateEditRoomStore.privateRoom.test.ts`
 - [ ] 1.2 Confirm the existing test matches the corrected frame scenario, with no edit expected: the block "Frame opened in the Private section" of `packages/client/src/helpers/__tests__/privateRoomsSectionNavigation.test.ts` (search area `PrivateRooms`, no privacy filter). Verify: `cd packages/client && pnpm exec vitest run src/helpers/__tests__/privateRoomsSectionNavigation.test.ts`, green, recorded here with the date
 
 ## 2. Room address without the folder parameter

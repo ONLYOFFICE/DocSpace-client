@@ -95,6 +95,17 @@ const DeleteDialogComponent = (props) => {
     !!isRoomDelete &&
     selection.length > 0 &&
     selection.every((item) => isAgent(item));
+  // Every room deleted is a knowledge base, or every one a skill set: the
+  // dialog and its notice name them, not rooms.
+  const isEveryRoomOfType = (roomType) =>
+    !!isRoomDelete &&
+    selection.length > 0 &&
+    selection.every((item) => item?.roomType === roomType);
+  const aiRoomKind = isEveryRoomOfType(RoomsType.KnowledgeRoom)
+    ? "knowledgeBase"
+    : isEveryRoomOfType(RoomsType.InstructionsRoom)
+      ? "skillSet"
+      : null;
 
   // Only a plain move to Trash is gated by the "confirm delete" profile setting;
   // every other case (permanent, third-party, private room, rooms, templates,
@@ -156,14 +167,22 @@ const DeleteDialogComponent = (props) => {
     const translations = {
       successRemoveRoom: isAgentDelete
         ? t("Common:AgentRemoved")
-        : isFormSpace
-          ? t("Common:SpaceRemoved")
-          : t("Common:RoomRemoved"),
+        : aiRoomKind === "knowledgeBase"
+          ? t("Common:KnowledgeBaseRemoved")
+          : aiRoomKind === "skillSet"
+            ? t("Common:SkillSetRemoved")
+            : isFormSpace
+              ? t("Common:SpaceRemoved")
+              : t("Common:RoomRemoved"),
       successRemoveRooms: isAgentDelete
         ? t("Common:AgentsRemoved")
-        : isFormSpace
-          ? t("Common:SpacesRemoved")
-          : t("Common:RoomsRemoved"),
+        : aiRoomKind === "knowledgeBase"
+          ? t("Common:KnowledgeBasesRemoved")
+          : aiRoomKind === "skillSet"
+            ? t("Common:SkillSetsRemoved")
+            : isFormSpace
+              ? t("Common:SpacesRemoved")
+              : t("Common:RoomsRemoved"),
     };
 
     if (isTemplate) {
@@ -248,6 +267,18 @@ const DeleteDialogComponent = (props) => {
         : t("Common:DeleteAIAgentTitle");
     }
 
+    if (aiRoomKind === "knowledgeBase") {
+      return selection.length > 1
+        ? t("Common:DeleteKnowledgeBasesTitle")
+        : t("Common:DeleteKnowledgeBaseTitle");
+    }
+
+    if (aiRoomKind === "skillSet") {
+      return selection.length > 1
+        ? t("Common:DeleteSkillSetsTitle")
+        : t("Common:DeleteSkillSetTitle");
+    }
+
     if (isRoomDelete) {
       if (selection.length > 1) return t("Common:DeleteRoomsTitle");
       if (isFormSpace) return t("Common:DeleteFormSpaceTitle");
@@ -280,6 +311,7 @@ const DeleteDialogComponent = (props) => {
     isPrivacyFolder,
     isFormSpace,
     isAgentDelete,
+    aiRoomKind,
   );
 
   const title = getDialogTitle();

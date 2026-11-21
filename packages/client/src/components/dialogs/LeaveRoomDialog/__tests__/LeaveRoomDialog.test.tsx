@@ -156,4 +156,26 @@ describe("LeaveRoomDialog - texts", () => {
 
     expect(screen.getByText("Common:WantLeaveRoom")).toBeInTheDocument();
   });
+
+  it.each([
+    ["isKnowledgeBase", "KnowledgeBase"],
+    ["isSkillSet", "SkillSet"],
+  ])("names the room of a %s dialog by what it is", (flag, name) => {
+    renderTextOf({ [flag]: true });
+
+    expect(screen.getByText(`Common:LeaveThe${name}`)).toBeInTheDocument();
+    expect(screen.getByText(`Common:WantLeave${name}`)).toBeInTheDocument();
+    expect(screen.queryByText("Common:WantLeaveRoom")).toBeNull();
+  });
+
+  it.each([
+    ["isKnowledgeBase", "KnowledgeBase"],
+    ["isSkillSet", "SkillSet"],
+  ])("asks the owner of a %s dialog to hand it over first", (flag, name) => {
+    renderTextOf({ [flag]: true, isRoomOwner: true });
+
+    expect(
+      screen.getByText(`Common:Leave${name}Description`),
+    ).toBeInTheDocument();
+  });
 });

@@ -164,3 +164,45 @@ describe("getDialogContent — deleting agents", () => {
     expect(roomNoteKeys([agent], false)).toContain("DeleteRoomConfirm");
   });
 });
+
+describe("getDialogContent - deleting knowledge bases and skill sets", () => {
+  const room = { id: 6, title: "Handbook", isFolder: true };
+
+  const roomNoteKeys = (selection: object[], aiRoomKind: string | null) =>
+    keysOf(
+      getDialogContent(
+        t,
+        selection,
+        false, // isTemplate
+        true, // isRoomDelete
+        false, // isRecycleBinFolder
+        false, // isPersonalRoom
+        true, // isRoom
+        false, // isTemplatesFolder
+        false, // isSharedWithMeFolderRoot
+        false, // unsubscribe
+        false, // isPrivacyFolder
+        false, // isFormSpace
+        false, // isAgentDelete
+        aiRoomKind as never,
+      ),
+    );
+
+  it.each([
+    ["knowledgeBase", "DeleteKnowledgeBaseConfirm", "DeleteKnowledgeBases"],
+    ["skillSet", "DeleteSkillSetConfirm", "DeleteSkillSets"],
+  ])("names a %s, one or several, not a room", (kind, single, several) => {
+    const one = roomNoteKeys([room], kind);
+    expect(one).toContain(single);
+    expect(one).toContain("Common:WantToContinue");
+    expect(one).not.toContain("DeleteRoomConfirm");
+
+    const many = roomNoteKeys([room, { ...room, id: 7 }], kind);
+    expect(many).toContain(several);
+    expect(many).not.toContain("DeleteRooms");
+  });
+
+  it("keeps the room note without a kind", () => {
+    expect(roomNoteKeys([room], null)).toContain("DeleteRoomConfirm");
+  });
+});

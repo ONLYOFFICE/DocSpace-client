@@ -67,6 +67,8 @@ const ChangeRoomOwner = (props) => {
     isAIProject,
     changeAiProjectOwner,
     isFormSpace,
+    isKnowledgeBase,
+    isSkillSet,
     updateInfoPanelMembers,
     roomId,
     isPrivateRoom,
@@ -142,22 +144,35 @@ const ChangeRoomOwner = (props) => {
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
+  // A knowledge base and a skill set are named as such, not as a room.
   const headerLabel = isAIProject
     ? t("Common:AIProjectChangeOwner")
-    : t("Common:ChangeTheRoomOwner");
+    : isKnowledgeBase
+      ? t("Common:ChangeKnowledgeBaseOwner")
+      : isSkillSet
+        ? t("Common:ChangeSkillSetOwner")
+        : t("Common:ChangeTheRoomOwner");
 
   // Spec: ai-agent-access, "Who may own an agent"
   const infoText = isAIProject
     ? ownerIsCurrentUser && !showBackButton
       ? t("Common:AIProjectChangeOwnerLeaveInfo")
       : t("Common:AIProjectChangeOwnerInfo")
-    : t("Common:PeopleSelectorInfo");
+    : isKnowledgeBase
+      ? t("Common:KnowledgeBaseOwnerSelectorInfo")
+      : isSkillSet
+        ? t("Common:SkillSetOwnerSelectorInfo")
+        : t("Common:PeopleSelectorInfo");
 
   const footerCheckboxLabel = isAIProject
     ? t("Common:LeaveTheAgent")
-    : isFormSpace
-      ? t("Common:LeaveTheFormSpace")
-      : t("Common:LeaveTheRoom");
+    : isKnowledgeBase
+      ? t("Common:LeaveTheKnowledgeBase")
+      : isSkillSet
+        ? t("Common:LeaveTheSkillSet")
+        : isFormSpace
+          ? t("Common:LeaveTheFormSpace")
+          : t("Common:LeaveTheRoom");
 
   const selectorComponent = excludeFailed ? (
     <div className={styles.changeOwnerLoader}>
@@ -263,6 +278,8 @@ export default inject(
       changeAiProjectOwner: (newOwnerId, keepAsManager) =>
         aiProjectsStore.changeOwner(room, newOwnerId, keepAsManager),
       isFormSpace: room?.roomType === RoomsType.FormRoom,
+      isKnowledgeBase: room?.roomType === RoomsType.KnowledgeRoom,
+      isSkillSet: room?.roomType === RoomsType.InstructionsRoom,
       updateInfoPanelMembers,
       roomId: room?.id,
       isPrivateRoom: !!(room?.isPrivateRoom ?? room?.private),

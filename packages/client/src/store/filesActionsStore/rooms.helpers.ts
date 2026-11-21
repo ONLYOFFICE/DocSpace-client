@@ -613,7 +613,11 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
     ? t("Common:LeftAndAppointNewOwner")
     : isAgent(room)
       ? t("Common:YouLeftTheAgent")
-      : t("Common:YouLeftTheRoom");
+      : room.roomType === RoomsType.KnowledgeRoom
+        ? t("Common:YouLeftTheKnowledgeBase")
+        : room.roomType === RoomsType.InstructionsRoom
+          ? t("Common:YouLeftTheSkillSet")
+          : t("Common:YouLeftTheRoom");
 
   const leave = () =>
     (

@@ -58,6 +58,7 @@ export const getDialogContent = (
   isPrivacyFolder,
   isFormSpace = false,
   isAgentDelete = false,
+  aiRoomKind = null,
 ) => {
   if (!selection) return null;
 
@@ -115,6 +116,53 @@ export const getDialogContent = (
           <Trans
             t={t}
             i18nKey="DeleteAIAgents"
+            ns="Common"
+            values={{ count: selection.length }}
+            components={{ 1: <strong /> }}
+          />
+        )}{" "}
+        {t("Common:WantToContinue")}
+      </>
+    );
+  }
+
+  // Every room deleted is a knowledge base, or every one a skill set: the
+  // note names them.
+  if (isRoomDelete && aiRoomKind) {
+    const isKnowledgeBase = aiRoomKind === "knowledgeBase";
+
+    return (
+      <>
+        {isSingle ? (
+          isKnowledgeBase ? (
+            <Trans
+              t={t}
+              i18nKey="DeleteKnowledgeBaseConfirm"
+              ns="Common"
+              values={{ name: selection[0]?.title }}
+              components={{ 1: <strong /> }}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="DeleteSkillSetConfirm"
+              ns="Common"
+              values={{ name: selection[0]?.title }}
+              components={{ 1: <strong /> }}
+            />
+          )
+        ) : isKnowledgeBase ? (
+          <Trans
+            t={t}
+            i18nKey="DeleteKnowledgeBases"
+            ns="Common"
+            values={{ count: selection.length }}
+            components={{ 1: <strong /> }}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="DeleteSkillSets"
             ns="Common"
             values={{ count: selection.length }}
             components={{ 1: <strong /> }}

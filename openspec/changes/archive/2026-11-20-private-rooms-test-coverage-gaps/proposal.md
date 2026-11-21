@@ -22,18 +22,19 @@ Tests only, grouped by package:
 - Client: passkey enrol, enrol failure and removal on Keys management;
   Forget device; the ghost-state toast; the invite panel without external
   links and the invite input of a private room; the Share tab for an
-  encrypted file and a folder of a private room; the apps catalog title;
+  encrypted file; the apps catalog title;
   the live updates of a room the user cannot read; permanent deletion in a
-  private room; the PDF tile on mobile; the create hotkey and F2 without
-  keys or on an encrypted file; the create entries without keys; a quota
+  private room; the PDF form entry on mobile; the create hotkey without
+  keys and F2 on an encrypted file; the create entries without keys; a quota
   error of an encrypted item in the middle of a batch; and the E2E cases
   for the invite panel, Forget device, the create-room chooser of Rooms and
   a key-less user in a private room.
-- SDK: the shell effects (abort on lock, ghost-state toast, gate reset
-  after unlock, disclosure banner, backfill on room entry), the warning of
-  the member removal dialog, a role change test that exercises the real
-  components instead of a copy of their logic, and the removal of two
-  `test.fixme` cases whose subject a unit test already covers.
+- SDK: the gaps of the shell effects (abort on lock and the ghost-state
+  toast have tests; gate reset after unlock, the disclosure banner and the
+  backfill on room entry have none), the member removal dialog, role
+  change tests that exercise the real components instead of a copy of
+  their logic, and the removal of two `test.fixme` cases whose subject a
+  unit test already covers.
 - Doceditor: the display name recovered from the file header and its
   failure path.
 
@@ -55,19 +56,20 @@ Out of scope:
   (around line 162): it skips the mobile projects on purpose, since tablets
   and phones get the deep link page instead of the editor. It cannot be
   enabled.
-- The cross-tab lock: `BroadcastLockSync`, the "broadcast-lock" and
-  "broadcast-user-scope" fixme cases of the SDK security spec. The open
-  change `private-rooms-lock-state-everywhere` changes which locks reach
-  other tabs and owns their tests.
-- The `/private` routes of the SDK proxy and the "csp-headers" fixme case:
-  the open change `private-rooms-sdk-embedding-and-parity` modifies the
-  content security policy requirement and adds those unit cases to
-  `proxy.test.ts` (its design decision 2). The "change-owner" fixme case of
-  `private-rooms.spec.ts` is left to that change too, since it reworks the
-  SDK owner change.
-- The move of the SDK security spec onto the private and host fixtures,
-  its header and the three frame-bridge cases: the open change
-  `private-rooms-sdk-private-pages-only` does that (its tasks 4.2 and 4.3).
+- The "broadcast-lock" and "broadcast-user-scope" fixme cases of the SDK
+  security spec: they need two browser contexts (blocker F). The lock
+  channel moved to the shared provider with
+  `private-rooms-lock-state-everywhere` (archived) and is unit-tested
+  there (`AbortOnLockEffect.test.tsx`, "Lock in another tab"). They stay
+  fixme.
+- Done by archived changes and dropped from this one: the `/private`
+  routes of the SDK proxy and the "csp-headers" fixme case, the
+  "change-owner" fixme case (`private-rooms-sdk-embedding-and-parity`),
+  and the move of the SDK security spec onto the private and host fixtures
+  (`private-rooms-sdk-private-pages-only`).
+- The case "Share tab hidden for private items" for a folder inside a
+  private room belongs to the change `private-rooms-withheld-share-tab`,
+  owner's decision of 2026-11-20.
 - The SDK fixme cases that still need infrastructure the suite does not
   have (slowed upload and download streams with store introspection, a
   controlled late key registration): "abort-on-lock-upload",

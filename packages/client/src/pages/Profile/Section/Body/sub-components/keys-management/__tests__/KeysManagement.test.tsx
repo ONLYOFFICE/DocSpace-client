@@ -18,6 +18,7 @@ const mocks = vi.hoisted(() => {
     },
     writtenAt: null as number | null,
     passkeyAvailable: false,
+    passkeyEnrolled: false,
     generate: flow(),
     importFlow: { ...flow(), fileInput: null },
     recover: { ...flow(), available: true },
@@ -27,6 +28,7 @@ const mocks = vi.hoisted(() => {
     exportFlow: flow(),
     rotate: flow(),
     toastSuccess: vi.fn(),
+    toastError: vi.fn(),
     getEncryptionKeys: vi.fn(),
   };
 });
@@ -44,7 +46,7 @@ vi.mock("@docspace/shared/services/encryption/lock-broadcast", () => ({
 }));
 vi.mock("@docspace/shared/services/encryption/passkey-unlock", () => ({
   isPasskeyUnlockAvailable: vi.fn(async () => mocks.passkeyAvailable),
-  hasPasskeyUnlock: vi.fn(async () => false),
+  hasPasskeyUnlock: vi.fn(async () => mocks.passkeyEnrolled),
   enrollPasskeyUnlock: vi.fn(),
   removePasskeyUnlock: vi.fn(async () => {}),
 }));
@@ -52,7 +54,7 @@ vi.mock("@docspace/shared/api/privacy", () => ({
   getEncryptionKeys: mocks.getEncryptionKeys,
 }));
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
-  toastr: { success: mocks.toastSuccess, error: vi.fn() },
+  toastr: { success: mocks.toastSuccess, error: mocks.toastError },
 }));
 vi.mock("../KeysList", () => ({
   KeysList: ({
@@ -96,6 +98,10 @@ vi.mock("../flows/useResetKeysFlow", () => ({
 
 import { forgetDeviceUnlock } from "@docspace/shared/services/encryption/device-unlock-store";
 import { broadcastLock } from "@docspace/shared/services/encryption/lock-broadcast";
+import {
+  enrollPasskeyUnlock,
+  removePasskeyUnlock,
+} from "@docspace/shared/services/encryption/passkey-unlock";
 
 import KeysManagement from "../KeysManagement";
 
@@ -128,6 +134,8 @@ beforeEach(() => {
   mocks.encryption.isUnlocked = true;
   mocks.writtenAt = null;
   mocks.passkeyAvailable = false;
+  mocks.passkeyEnrolled = false;
+  mocks.encryption.getIdentity.mockReset();
   mocks.recover.available = true;
   mocks.getEncryptionKeys.mockResolvedValue([]);
 });
@@ -187,6 +195,71 @@ describe("KeysManagement", () => {
     });
 
     expect(toggle).not.toBeChecked();
+  });
+
+  describe("Passkey unlock", () => {
+    const passkeyToggle = () =>
+      screen.findByRole("checkbox", { name: "Common:PasskeyUnlockLabel" });
+
+    it("Enrol", async () => {
+      const user = userEvent.setup();
+      const identity = { userId: "user-1" };
+      mocks.passkeyAvailable = true;
+      mocks.encryption.getIdentity.mockReturnValue(identity);
+      vi.mocked(enrollPasskeyUnlock).mockResolvedValueOnce("ok");
+      renderPage([KEY]);
+
+      await user.click(await passkeyToggle());
+
+      await waitFor(() =>
+        expect(mocks.toastSuccess).toHaveBeenCalledWith("Common:PasskeyEnabled"),
+      );
+      expect(enrollPasskeyUnlock).toHaveBeenCalledWith(
+        "user-1",
+        "pub",
+        identity,
+        expect.objectContaining({ userName: "user@example.com" }),
+      );
+      expect(await passkeyToggle()).toBeChecked();
+    });
+
+    it("Enrol fails", async () => {
+      const user = userEvent.setup();
+      mocks.passkeyAvailable = true;
+      mocks.encryption.getIdentity.mockReturnValue({ userId: "user-1" });
+      vi.mocked(enrollPasskeyUnlock).mockResolvedValueOnce("failed");
+      renderPage([KEY]);
+
+      await user.click(await passkeyToggle());
+
+      await waitFor(() =>
+        expect(mocks.toastError).toHaveBeenCalledWith(
+          "Common:PasskeyEnrollFailed",
+        ),
+      );
+      expect(mocks.toastSuccess).not.toHaveBeenCalled();
+      expect(await passkeyToggle()).not.toBeChecked();
+    });
+
+    it("Remove", async () => {
+      const user = userEvent.setup();
+      mocks.passkeyAvailable = true;
+      mocks.passkeyEnrolled = true;
+      renderPage([KEY]);
+      const toggle = await passkeyToggle();
+      await waitFor(() => expect(toggle).toBeChecked());
+
+      await user.click(toggle);
+
+      await waitFor(() =>
+        expect(mocks.toastSuccess).toHaveBeenCalledWith(
+          "Common:PasskeyDisabled",
+        ),
+      );
+      expect(removePasskeyUnlock).toHaveBeenCalledWith("user-1");
+      expect(enrollPasskeyUnlock).not.toHaveBeenCalled();
+      expect(await passkeyToggle()).not.toBeChecked();
+    });
   });
 
   it("Device section", async () => {
@@ -278,6 +351,25 @@ describe("KeysManagement", () => {
     expect(
       await screen.findByText("Common:DeviceUnlockRememberedUntil"),
     ).toBeInTheDocument();
+  });
+
+  it("Forget device", async () => {
+    const user = userEvent.setup();
+    mocks.encryption.isUnlocked = false;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+    await screen.findByText("Common:DeviceUnlockRememberedUntil");
+
+    await user.click(action("Common:ForgetDeviceButton"));
+
+    await waitFor(() =>
+      expect(mocks.toastSuccess).toHaveBeenCalledWith(
+        "Common:DeviceUnlockForgotten",
+      ),
+    );
+    expect(
+      screen.queryByText("Common:DeviceUnlockRememberedUntil"),
+    ).not.toBeInTheDocument();
   });
 
   it("Forget device in another tab", async () => {

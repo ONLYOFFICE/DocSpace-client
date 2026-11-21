@@ -33,8 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+
+import enCommon from "PUBLIC_DIR/locales/en/Common.json";
 
 import { KeyChangeDialog } from "..";
 
@@ -78,5 +80,37 @@ describe("KeyChangeDialog", () => {
     expect(onRefuse).not.toHaveBeenCalled();
     expect(onAccept).not.toHaveBeenCalled();
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  describe("Reasons of a key change", () => {
+    const LEGITIMATE = [
+      "Common:KeyChangedReasonReplaced",
+      "Common:KeyChangedReasonRecovery",
+      "Common:KeyChangedReasonReset",
+    ];
+
+    it("lists the legitimate reasons beside the attack", () => {
+      renderDialog();
+
+      const reasons = within(screen.getByRole("list"))
+        .getAllByRole("listitem")
+        .map((item) => item.textContent);
+
+      expect(reasons).toHaveLength(4);
+      expect(reasons).toEqual(
+        expect.arrayContaining([...LEGITIMATE, "Common:KeyChangedReasonAttack"]),
+      );
+    });
+
+    it("says nothing of a device in the English reasons", () => {
+      const texts = ["Common:KeyChangedWhyIntro", ...LEGITIMATE].map(
+        (key) => enCommon[key.replace("Common:", "") as keyof typeof enCommon],
+      );
+
+      for (const text of texts) {
+        expect(text).toBeTruthy();
+        expect(text).not.toMatch(/device/i);
+      }
+    });
   });
 });

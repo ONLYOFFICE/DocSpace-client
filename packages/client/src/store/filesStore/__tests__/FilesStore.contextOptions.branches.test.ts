@@ -158,9 +158,13 @@ describe("getFilesContextOptions — folder context", () => {
 describe("getFilesContextOptions — encrypted file", () => {
   it("strips sharing/link/version options and adds download-encrypted", () => {
     const store = createTestFilesStore();
-    const opts = store.getFilesContextOptions(encryptedFile());
+    const file = encryptedFile();
+    const opts = store.getFilesContextOptions(file);
 
     expect(opts).toContain("download-encrypted");
+    // Spec: private-rooms/file-operations, "Rename withheld for encrypted files"
+    expect(file.security?.Rename).toBe(true);
+    expect(opts).not.toContain("rename");
     for (const stripped of [
       "sharing-settings",
       "copy-shared-link",

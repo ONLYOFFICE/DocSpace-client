@@ -24,10 +24,8 @@ lands on an address that names no room, which the spec promises to serve.
 Not changed, with the reason in design.md:
 
 - sdk-surface, "SDK private surface honours the opt-in": its sentence that
-  ties the opt-in to a client flag removed at release contradicts
-  feature-gating, but the open change
-  `private-rooms-sdk-embedding-and-parity` modifies this requirement and
-  drops that sentence.
+  tied the opt-in to a client flag removed at release was dropped by
+  `private-rooms-sdk-embedding-and-parity`, archived on 2026-11-20.
 - editor-integration: two code comments point at requirements that live in
   the open change `private-rooms-editor-contract`; they resolve when that
   change is archived.
@@ -37,10 +35,13 @@ Not changed, with the reason in design.md:
 
 Out of scope:
 
-- Requirements that other new changes modify: the "no access entry" text of
-  file-operations (`private-rooms-withheld-actions-gaps`), "Key mismatch on
-  unwrap" (`private-rooms-peer-key-pin-store`), "Per-file content key"
+- Requirements that other changes of November modified, all archived
+  since: the "no access entry" text of file-operations
+  (`private-rooms-withheld-actions-gaps`), "Key mismatch on unwrap"
+  (`private-rooms-peer-key-pin-store`), "Per-file content key"
   (`private-rooms-invite-and-upload-robustness`).
+- The room address of an AI room and of an archived Rooms room without
+  `?folder=`: they take other code paths, see design.md.
 
 Decisions:
 
@@ -49,6 +50,9 @@ Decisions:
   is shared. Rooms is not a private-rooms capability, so the delta specs
   describe the private address only and the Rooms address is covered by the
   tests of tasks 2.1 and 2.2.
+- Taken by the owner on 2026-11-21: the same fix covers the room address of
+  Forms (`/forms/{id}/filter`), which takes the same code path; it is
+  covered by the unit test of task 2.1.
 
 Depends on: nothing in `../server` or the Document Server. The statement
 about the create request rests on the server source cited in design.md.

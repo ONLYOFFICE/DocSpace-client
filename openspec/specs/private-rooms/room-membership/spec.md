@@ -7,7 +7,7 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag.
+The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set to true. Only a Custom room SHALL be encryptable; a room of any other type SHALL be created with the private flag set to false.
 
 #### Scenario: Private card chosen
 - **WHEN** the user creates a room from the Private section, where the dialog shows the Private room type, and confirms creation
@@ -15,7 +15,7 @@ The system SHALL present "Private room" as its own room type in the create-room 
 
 #### Scenario: Other room type
 - **WHEN** a Public, Form filling, Virtual data or Collaboration room is created
-- **THEN** the private flag is not sent and the room is not encrypted
+- **THEN** the create request carries the private flag set to false and the room is not encrypted
 
 ### Requirement: Private room creation requires an encryption key
 The system SHALL refuse to create a private room for a user who has no registered encryption key, after re-fetching the keys from the server, and SHALL show Common:EncryptionKeysRequiredForPrivateRoom.
@@ -287,7 +287,7 @@ The system SHALL NOT offer external links, member links or embedding settings fo
 - **THEN** no "Shared links" block and no "Create new link" control are rendered
 
 ### Requirement: Share tab hidden for private items
-The system SHALL NOT show the Share tab of the info panel for a private room, a folder inside it, or an encrypted file.
+The system SHALL NOT show the Share tab of the info panel for a private room, a folder inside it, or an encrypted file, whatever share right the server reports for the item.
 
 #### Scenario: Encrypted file selected
 - **WHEN** an encrypted file is selected and the info panel opens
@@ -296,6 +296,10 @@ The system SHALL NOT show the Share tab of the info panel for a private room, a 
 #### Scenario: Private room selected in a list
 - **WHEN** a private room is selected in the Private or Rooms list and the info panel opens
 - **THEN** the tabs do not include Share
+
+#### Scenario: Folder inside a private room selected
+- **WHEN** a folder inside a private room is selected while that room or one of its folders is open, and the info panel opens
+- **THEN** the tabs do not include Share, even when the folder reports the share right
 
 ### Requirement: Room-level operations withheld for private rooms
 The system SHALL NOT offer index editing, index export, save as template or duplicate in the context menu of a private room.

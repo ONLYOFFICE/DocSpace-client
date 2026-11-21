@@ -607,6 +607,39 @@ describe("ContextOptionsStore.getFilesContextOptions — the members link", () =
   it("gives way to the external link for a shareable file elsewhere", () => {
     expect(membersLink(FolderType.Rooms)?.disabled ?? true).toBe(true);
   });
+
+  // A skill in a skill set: the lone link takes the place of the Share
+  // submenu, Edit skill opens with the other ways to open the file, and
+  // nothing follows Delete.
+  it("keeps the lone link and Edit skill of a skill above Delete, the last item", () => {
+    const store = createTestContextOptionsStore();
+    const keys = menuShape(
+      store.getFilesContextOptions(
+        {
+          ...fileItem([
+            "select",
+            "link-for-room-members",
+            "edit-skill",
+            "rename",
+            "delete",
+          ]),
+          canShare: true,
+          rootFolderType: FolderType.AiHub,
+        } as never,
+        t,
+      ),
+    )
+      .map((option) => String(option.key))
+      .filter((key) => !key.startsWith("separator"));
+
+    expect(keys).toEqual([
+      "select",
+      "edit-skill",
+      "link-for-room-members",
+      "rename",
+      "delete",
+    ]);
+  });
 });
 
 // ai-agent-page, "Actions menu of an agent" and "Actions menu on a card".

@@ -1301,6 +1301,14 @@ export const getFilesContextOptionsImpl = (
   );
 
   if (!item.isRoom) {
+    // A Share submenu left with one item is not built: the item stays bare
+    // and takes the submenu's place.
+    const BARE_SHARE_KEYS = [
+      "link-for-room-members",
+      "copy-shared-link",
+      "manage-links",
+      "create-room",
+    ];
     const groups = item.isFolder
       ? [
           ["select", "open", "mark-read", "open-location"],
@@ -1308,6 +1316,7 @@ export const getFilesContextOptionsImpl = (
           [
             "update-xlsx-data",
             "share",
+            ...BARE_SHARE_KEYS,
             "move",
             // a one-item "move" category is replaced by this bare option
             "move-to",
@@ -1327,6 +1336,7 @@ export const getFilesContextOptionsImpl = (
             "open-pdf",
             "fill-form",
             "edit",
+            "edit-skill",
             "start-filling",
             "vectorization",
             "preview",
@@ -1344,6 +1354,7 @@ export const getFilesContextOptionsImpl = (
           [
             "update-xlsx-data",
             "share",
+            ...BARE_SHARE_KEYS,
             "move",
             "move-to",
             "copy-to",
@@ -1385,6 +1396,24 @@ export const getFilesContextOptionsImpl = (
       frameActionsPlaced = true;
     };
 
+    // An option no group names keeps a row of its own, ahead of the frame
+    // actions and of the group that removes the item: Delete stays last.
+    let leftoversPlaced = false;
+    const placeLeftovers = () => {
+      const placedKeys = groups.flat();
+      items.forEach((option) => {
+        if (placedKeys.includes(option.key)) return;
+        if (result.length > 0 && !result[result.length - 1].isSeparator) {
+          result.push({
+            key: `separator${folderSeparatorIndex++}`,
+            isSeparator: true,
+          });
+        }
+        result.push(option);
+      });
+      leftoversPlaced = true;
+    };
+
     groups.forEach((group) => {
       const groupItems: TContextOption[] = [];
 
@@ -1396,6 +1425,7 @@ export const getFilesContextOptionsImpl = (
       if (groupItems.length > 0) {
         const isDeleteGroup = group.includes("delete");
 
+        if (isDeleteGroup && !leftoversPlaced) placeLeftovers();
         if (isDeleteGroup && !frameActionsPlaced) placeFrameActions();
         const shouldAddSeparator =
           result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
@@ -1421,20 +1451,8 @@ export const getFilesContextOptionsImpl = (
       }
     });
 
+    if (!leftoversPlaced) placeLeftovers();
     if (!frameActionsPlaced) placeFrameActions();
-
-    items.forEach((option) => {
-      const isInGroups = groups.flat().includes(option.key);
-      if (!isInGroups) {
-        if (result.length > 0 && !result[result.length - 1].isSeparator) {
-          result.push({
-            key: `separator${folderSeparatorIndex++}`,
-            isSeparator: true,
-          });
-        }
-        result.push(option);
-      }
-    });
 
     // Insert plugin items according to their placement
     const newResult = placePlugins(result, pluginItems);

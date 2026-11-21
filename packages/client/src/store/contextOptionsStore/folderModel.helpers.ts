@@ -403,26 +403,30 @@ export const getFolderModelImpl = (
       onClick: () => self.onShowGenerateSkillDialog(),
     };
     // A new skill is created from the skill template by the AI service,
-    // whether or not the Markdown plugin is there to open it.
-    const createSkillOptions: TContextOption[] = self.isCreateSkillAvailable
-      ? [
-          { ...createNewMarkdown, label: t("Common:NewSkill") },
-          { key: "separator", isSeparator: true },
-        ]
-      : [];
+    // whether or not the Markdown plugin is there to open it. Writing one
+    // with AI comes first, then the form, then the uploads, as in the
+    // empty view.
+    const createSkillOptions: TContextOption[] = [
+      ...(self.isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
+      ...(self.isCreateSkillAvailable
+        ? [{ ...createNewMarkdown, label: t("Common:NewSkill") }]
+        : []),
+    ];
+    const skillSetOptions: TContextOption[] =
+      createSkillOptions.length > 0
+        ? [
+            ...createSkillOptions,
+            { key: "separator", isSeparator: true },
+            uploadFromStorage,
+            uploadFromDevice,
+          ]
+        : [uploadFromStorage, uploadFromDevice];
     const sourceRoomOptions: TContextOption[] =
       roomType === RoomsType.KnowledgeRoom
         ? vectorizationEnabled
           ? [uploadFromStorage, uploadFromDevice]
           : []
-        : self.isCreateSkillWithAIAvailable
-          ? [
-              ...createSkillOptions,
-              uploadFromStorage,
-              uploadFromDevice,
-              createSkillWithAI,
-            ]
-          : [...createSkillOptions, uploadFromStorage, uploadFromDevice];
+        : skillSetOptions;
 
     return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
   }

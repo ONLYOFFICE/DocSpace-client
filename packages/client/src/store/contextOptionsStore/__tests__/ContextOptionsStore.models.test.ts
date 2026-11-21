@@ -119,14 +119,14 @@ describe("ContextOptionsStore.getFolderModel — Knowledge room", () => {
 describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
   const instructionsRoom = { security: { Create: true }, roomType: RoomsType.InstructionsRoom };
 
-  it("offers a skill from the template, the workspace and device uploads, and a skill written by AI", () => {
+  it("offers a skill written by AI first, then a skill from the template, then the workspace and device uploads", () => {
     const store = createTestContextOptionsStore({ selectedFolderStore: instructionsRoom });
     expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
+      { key: "create-skill-with-ai", label: "Common:CreateSkillWithAI" },
       { key: "new-markdown", label: "Common:NewSkill" },
       { key: "separator", label: undefined },
       { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
       { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },
-      { key: "create-skill-with-ai", label: "Common:CreateSkillWithAI" },
     ]);
   });
 

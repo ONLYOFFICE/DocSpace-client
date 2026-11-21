@@ -613,15 +613,16 @@ const ArticleMainButtonContent = (props) => {
         onClick: onShowGenerateSkillDialog,
         key: "create-skill-with-ai",
       };
-      const sourceUploadActions = isKnowledgeRoom
-        ? vectorizationEnabled
-          ? sourceRoomUploadActions
-          : []
-        : isCreateSkillWithAIAvailable
-          ? [...sourceRoomUploadActions, createSkillWithAI]
-          : sourceRoomUploadActions;
-      const sourceCreateActions =
-        !isKnowledgeRoom && isCreateSkillAvailable ? [createNewMarkdown] : [];
+      const sourceUploadActions =
+        isKnowledgeRoom && !vectorizationEnabled ? [] : sourceRoomUploadActions;
+      // Writing a skill with AI comes first, then the form, then the
+      // uploads.
+      const sourceCreateActions = isKnowledgeRoom
+        ? []
+        : [
+            ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
+            ...(isCreateSkillAvailable ? [createNewMarkdown] : []),
+          ];
       setUploadActions(sourceUploadActions);
       setActions(sourceCreateActions);
       setModel(

@@ -305,6 +305,9 @@ export const getFilesContextOptionsImpl = (
   const isFormSpace = item.roomType === RoomsType.FormRoom;
   // A room of type 12 is an agent: its menu speaks of an agent.
   const isAgent = item.roomType === RoomsType.AiProjectRoom;
+  // A knowledge base and a skill set are rooms too, and are named so.
+  const isKnowledgeBase = item.roomType === RoomsType.KnowledgeRoom;
+  const isSkillSet = item.roomType === RoomsType.InstructionsRoom;
 
   const hasShareLinkRights = isPublicRoom
     ? item.security?.Read
@@ -470,9 +473,13 @@ export const getFilesContextOptionsImpl = (
       key: "edit-room",
       label: isAgent
         ? t("Common:EditAgent")
-        : isFormSpace
-          ? t("Common:EditFormSpace")
-          : t("Common:EditRoom"),
+        : isKnowledgeBase
+          ? t("Common:EditKnowledgeBase")
+          : isSkillSet
+            ? t("Common:EditSkillSet")
+            : isFormSpace
+              ? t("Common:EditFormSpace")
+              : t("Common:EditRoom"),
       icon: SettingsReactSvgUrl,
       onClick: () => self.onClickEditRoom(item),
       disabled: false,
@@ -705,7 +712,13 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_room-info",
       key: "room-info",
-      label: isAgent ? t("Common:AgentInfo") : t("Common:RoomInfo"),
+      label: isAgent
+        ? t("Common:AgentInfo")
+        : isKnowledgeBase
+          ? t("Common:KnowledgeBaseInfo")
+          : isSkillSet
+            ? t("Common:SkillSetInfo")
+            : t("Common:RoomInfo"),
       icon: InfoOutlineReactSvgUrl,
       onClick: () => self.onShowInfoPanel(item),
       disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
@@ -808,9 +821,13 @@ export const getFilesContextOptionsImpl = (
       key: "change-room-owner",
       label: isAgent
         ? t("Common:AIProjectChangeOwner")
-        : isFormSpace
-          ? t("Common:ChangeFormSpaceOwner")
-          : t("Common:ChangeRoomOwner"),
+        : isKnowledgeBase
+          ? t("Common:ChangeKnowledgeBaseOwner")
+          : isSkillSet
+            ? t("Common:ChangeSkillSetOwner")
+            : isFormSpace
+              ? t("Common:ChangeFormSpaceOwner")
+              : t("Common:ChangeRoomOwner"),
       icon: ReconnectSvgUrl,
       onClick: self.onChangeRoomOwner,
       disabled: false,
@@ -954,9 +971,13 @@ export const getFilesContextOptionsImpl = (
       key: "leave-room",
       label: isAgent
         ? t("Common:LeaveTheAgent")
-        : isFormSpace
-          ? t("Common:LeaveTheFormSpace")
-          : t("Common:LeaveTheRoom"),
+        : isKnowledgeBase
+          ? t("Common:LeaveTheKnowledgeBase")
+          : isSkillSet
+            ? t("Common:LeaveTheSkillSet")
+            : isFormSpace
+              ? t("Common:LeaveTheFormSpace")
+              : t("Common:LeaveTheRoom"),
       icon: LeaveRoomSvgUrl,
       onClick: self.onLeaveRoom,
       disabled:
@@ -1000,9 +1021,13 @@ export const getFilesContextOptionsImpl = (
           : item.isRoom
             ? isAgent
               ? t("Common:DeleteAgent")
-              : isFormSpace
-                ? t("Common:DeleteFormSpace")
-                : t("Common:DeleteRoom")
+              : isKnowledgeBase
+                ? t("Common:DeleteKnowledgeBase")
+                : isSkillSet
+                  ? t("Common:DeleteSkillSet")
+                  : isFormSpace
+                    ? t("Common:DeleteFormSpace")
+                    : t("Common:DeleteRoom")
             : t("Common:Delete"),
       icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
       onClick: () => self.onDelete(item, t),

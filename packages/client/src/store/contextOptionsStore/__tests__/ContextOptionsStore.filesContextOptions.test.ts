@@ -793,6 +793,32 @@ describe("ContextOptionsStore.getFilesContextOptions — an agent's menu", () =>
       ]),
     );
   });
+
+  it.each([
+    [RoomsType.KnowledgeRoom, "KnowledgeBase"],
+    [RoomsType.InstructionsRoom, "SkillSet"],
+  ])("names a room of type %s by what it is, not a room", (roomType, name) => {
+    const store = createTestContextOptionsStore();
+    const labels = shape(
+      store.getFilesContextOptions(
+        agent(
+          ["edit-room", "room-info", "change-room-owner", "leave-room", "delete"],
+          { roomType, rootFolderType: FolderType.AiHub },
+        ) as never,
+        t,
+      ),
+    );
+
+    expect(labels).toEqual(
+      expect.arrayContaining([
+        `edit-room=Common:Edit${name}`,
+        `room-info=Common:${name}Info`,
+        `leave-room=Common:LeaveThe${name}`,
+        `delete=Common:Delete${name}`,
+      ]),
+    );
+    expect(labels.join()).not.toMatch(/Room\b|RoomInfo|RoomOwner/);
+  });
 });
 
 describe("ContextOptionsStore.getFilesContextOptions - the Download submenu", () => {

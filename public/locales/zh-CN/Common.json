@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "创建一个强密码短语来保护您的加密密钥。请牢记该密码短语或将其保存在密码管理器中：解锁密钥时需要用到它。",
   "CreatePrivateRoom": "创建私人房间",
   "CreateRoom": "创建房间",
+  "CreateSkill": "创建技能",
   "CreateSkillSet": "创建技能集",
   "CreateSkillWithAI": "使用 AI 创建技能",
   "CreateSkillWithAIDescription": "描述技能应完成的任务，AI 将为您编写。",

@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Vytvořte silnou přístupovou frázi na ochranu svého šifrovacího klíče. Zapamatujte si ji nebo ji uložte do správce hesel: budete ji potřebovat k odemknutí klíče.",
   "CreatePrivateRoom": "Vytvoření soukromé místnosti",
   "CreateRoom": "Vytvoření místnosti",
+  "CreateSkill": "Vytvořit dovednost",
   "CreateSkillSet": "Vytvořit sadu dovedností",
   "CreateSkillWithAI": "Vytvořit dovednost pomocí AI",
   "CreateSkillWithAIDescription": "Popište, co má dovednost dělat, a AI ji napíše za vás.",

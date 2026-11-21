@@ -443,7 +443,7 @@ export const getOptions = (
   // by the AI service: the server refuses a Markdown file without its
   // name / description.
   const createMarkdown: EmptyViewItemType = {
-    title: t("Common:NewSkill"),
+    title: t("Common:CreateSkill"),
     description: t("EmptyView:SkillSetMarkdownOnlyDescription"),
     icon: <CreateNewFormIcon />,
     key: "create-markdown",

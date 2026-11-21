@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Krijoni një frazëkalim të fortë për të mbrojtur çelësin tuaj të enkriptimit. Mbajeni mend ose ruajeni në një menaxher fjalëkalimesh: do t'ju duhet për të zhbllokuar çelësin tuaj.",
   "CreatePrivateRoom": "Krijoni dhomë private",
   "CreateRoom": "Krijoni dhomë",
+  "CreateSkill": "Krijo aftësi",
   "CreateSkillSet": "Krijo grup aftësish",
   "CreateSkillWithAI": "Krijo aftësi me IA",
   "CreateSkillWithAIDescription": "Përshkruani se çfarë duhet të bëjë aftësia dhe IA do ta shkruajë për ju.",

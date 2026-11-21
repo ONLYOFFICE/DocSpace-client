@@ -409,7 +409,7 @@ export const getFolderModelImpl = (
     const createSkillOptions: TContextOption[] = [
       ...(self.isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
       ...(self.isCreateSkillAvailable
-        ? [{ ...createNewMarkdown, label: t("Common:NewSkill") }]
+        ? [{ ...createNewMarkdown, label: t("Common:CreateSkill") }]
         : []),
     ];
     const skillSetOptions: TContextOption[] =

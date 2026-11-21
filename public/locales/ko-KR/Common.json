@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "암호화 키를 보호할 강력한 패스프레이즈를 만드세요. 패스프레이즈를 기억하거나 비밀번호 관리자에 보관하세요. 키의 잠금을 해제할 때 필요합니다.",
   "CreatePrivateRoom": "비공개 룸 생성",
   "CreateRoom": "방 생성",
+  "CreateSkill": "스킬 만들기",
   "CreateSkillSet": "스킬 세트 만들기",
   "CreateSkillWithAI": "AI로 스킬 만들기",
   "CreateSkillWithAIDescription": "스킬이 수행할 작업을 설명하면 AI가 스킬을 작성해 드립니다.",

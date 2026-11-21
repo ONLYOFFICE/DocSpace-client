@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Napravite jaku lozinku da zaštitite svoj ključ za šifrovanje. Zapamtite je ili je čuvajte u menadžeru lozinki: biće vam potrebna za otključavanje ključa.",
   "CreatePrivateRoom": "Kreiraj privatnu sobu",
   "CreateRoom": "Kreiraj sobu",
+  "CreateSkill": "Kreiraj veštinu",
   "CreateSkillSet": "Kreiraj skup veština",
   "CreateSkillWithAI": "Kreiraj veštinu pomoću AI",
   "CreateSkillWithAIDescription": "Opišite šta veština treba da radi i AI će je napisati umesto vas.",

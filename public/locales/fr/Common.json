@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Créez une phrase de passe robuste pour protéger votre clé de chiffrement. Mémorisez-la ou conservez-la dans un gestionnaire de mots de passe : vous en aurez besoin pour déverrouiller votre clé.",
   "CreatePrivateRoom": "Créer une salle privée",
   "CreateRoom": "Créer une salle",
+  "CreateSkill": "Créer une compétence",
   "CreateSkillSet": "Créer un ensemble de compétences",
   "CreateSkillWithAI": "Créer une compétence avec l'IA",
   "CreateSkillWithAIDescription": "Décrivez ce que la compétence doit faire, et l'IA la rédigera pour vous.",

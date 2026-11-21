@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Crie uma senha de acesso forte para proteger sua chave de criptografia. Memorize-a ou guarde-a em um gerenciador de senhas: você precisará dela para desbloquear sua chave.",
   "CreatePrivateRoom": "Criar sala privada",
   "CreateRoom": "Criar sala",
+  "CreateSkill": "Criar habilidade",
   "CreateSkillSet": "Criar conjunto de habilidades",
   "CreateSkillWithAI": "Criar habilidade com IA",
   "CreateSkillWithAIDescription": "Descreva o que a habilidade deve fazer, e a IA a escreverá para você.",

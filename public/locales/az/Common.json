@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Şifrələmə açarınızı qorumaq üçün güclü parol yaradın. Onu yadda saxlayın və ya parol menecerində saxlayın: açarınızın kilidini açmaq üçün ona ehtiyacınız olacaq.",
   "CreatePrivateRoom": "Şəxsi otaq yaradın",
   "CreateRoom": "Otaq yaradın",
+  "CreateSkill": "Bacarıq yarat",
   "CreateSkillSet": "Bacarıq dəsti yarat",
   "CreateSkillWithAI": "AI ilə bacarıq yaradın",
   "CreateSkillWithAIDescription": "Bacarığın nə etməli olduğunu təsvir edin, AI onu sizin üçün yazacaq.",

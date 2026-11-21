@@ -621,7 +621,9 @@ const ArticleMainButtonContent = (props) => {
         ? []
         : [
             ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
-            ...(isCreateSkillAvailable ? [createNewMarkdown] : []),
+            ...(isCreateSkillAvailable
+              ? [{ ...createNewMarkdown, label: t("Common:CreateSkill") }]
+              : []),
           ];
       setUploadActions(sourceUploadActions);
       setActions(sourceCreateActions);

@@ -12,7 +12,7 @@ import {
 const t = ((key: string) => key) as never;
 
 describe("getOptions of an empty skill set", () => {
-  it("names its first quick action New skill, the form it opens", () => {
+  it("names its first quick action Create skill, a verb as the actions beside it", () => {
     const options = getOptions(
       RoomsType.InstructionsRoom,
       { Create: true },
@@ -41,7 +41,7 @@ describe("getOptions of an empty skill set", () => {
     expect(Array.isArray(options)).toBe(true);
     const [first] = options as { key: string; title: string }[];
     expect(first.key).toBe("create-markdown");
-    expect(first.title).toBe("Common:NewSkill");
+    expect(first.title).toBe("Common:CreateSkill");
   });
 });
 

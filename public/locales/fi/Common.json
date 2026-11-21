@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Luo vahva salauslause suojaamaan salausavaintasi. Paina se mieleesi tai säilytä sitä salasanojen hallintaohjelmassa: tarvitset sitä avaimesi lukituksen avaamiseen.",
   "CreatePrivateRoom": "Luo yksityishuone",
   "CreateRoom": "Luo huone",
+  "CreateSkill": "Luo taito",
   "CreateSkillSet": "Luo taitokokoelma",
   "CreateSkillWithAI": "Luo taito AI:n avulla",
   "CreateSkillWithAIDescription": "Kuvaile, mitä taidon pitää tehdä, niin AI kirjoittaa sen puolestasi.",

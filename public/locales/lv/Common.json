@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Izveidojiet spēcīgu ieejas frāzi, lai aizsargātu savu šifrēšanas atslēgu. Iegaumējiet to vai glabājiet paroļu pārvaldniekā: tā būs nepieciešama, lai atbloķētu atslēgu.",
   "CreatePrivateRoom": "Izveidot privātu telpu",
   "CreateRoom": "Izveidot telpu",
+  "CreateSkill": "Izveidot prasmi",
   "CreateSkillSet": "Izveidot prasmju kopu",
   "CreateSkillWithAI": "Izveidot prasmi ar MI",
   "CreateSkillWithAIDescription": "Aprakstiet, kas prasmei jādara, un MI to uzrakstīs jūsu vietā.",

@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Tạo mật khẩu bảo vệ mạnh để bảo vệ khoá mã hoá của bạn. Hãy ghi nhớ hoặc lưu nó trong trình quản lý mật khẩu: bạn sẽ cần nó mỗi khi mở khoá mã hoá của mình.",
   "CreatePrivateRoom": "Tạo phòng riêng tư",
   "CreateRoom": "Tạo phòng",
+  "CreateSkill": "Tạo kỹ năng",
   "CreateSkillSet": "Tạo bộ kỹ năng",
   "CreateSkillWithAI": "Tạo kỹ năng bằng AI",
   "CreateSkillWithAIDescription": "Mô tả những gì kỹ năng cần làm, AI sẽ viết nó cho bạn.",

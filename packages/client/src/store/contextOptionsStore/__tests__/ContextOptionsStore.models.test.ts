@@ -123,7 +123,7 @@ describe("ContextOptionsStore.getFolderModel — Instructions room", () => {
     const store = createTestContextOptionsStore({ selectedFolderStore: instructionsRoom });
     expect(menuShape(store.getFolderModel(t) as unknown[])).toEqual([
       { key: "create-skill-with-ai", label: "Common:CreateSkillWithAI" },
-      { key: "new-markdown", label: "Common:NewSkill" },
+      { key: "new-markdown", label: "Common:CreateSkill" },
       { key: "separator", label: undefined },
       { key: "upload-from-storage", label: "EmptyView:UploadFromPortalTitle" },
       { key: "upload-from-device", label: "EmptyView:UploadDeviceOptionTitle" },

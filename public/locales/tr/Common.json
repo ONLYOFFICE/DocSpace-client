@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Şifreleme anahtarınızı korumak için güçlü bir parola oluşturun. Parolayı aklınızda tutun veya bir parola yöneticisinde saklayın: anahtarınızın kilidini açmak için ona ihtiyacınız olacak.",
   "CreatePrivateRoom": "Özel oda oluştur",
   "CreateRoom": "Oda oluştur",
+  "CreateSkill": "Beceri oluştur",
   "CreateSkillSet": "Beceri seti oluştur",
   "CreateSkillWithAI": "AI ile beceri oluştur",
   "CreateSkillWithAIDescription": "Becerinin ne yapması gerektiğini açıklayın, AI sizin için yazsın.",

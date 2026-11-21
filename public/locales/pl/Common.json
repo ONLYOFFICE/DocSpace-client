@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Utwórz silne hasło dostępu, aby chronić swój klucz szyfrowania. Zapamiętaj je lub przechowuj w menedżerze haseł: będzie potrzebne do odblokowania klucza.",
   "CreatePrivateRoom": "Utwórz prywatny pokój",
   "CreateRoom": "Utwórz pokój",
+  "CreateSkill": "Utwórz umiejętność",
   "CreateSkillSet": "Utwórz zestaw umiejętności",
   "CreateSkillWithAI": "Utwórz umiejętność z AI",
   "CreateSkillWithAIDescription": "Opisz, co ma robić umiejętność, a AI napisze ją za Ciebie.",

@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "暗号化キーを保護するための強力なパスフレーズを作成してください。パスフレーズは覚えておくか、パスワードマネージャーに保管してください。キーのロック解除に必要になります。",
   "CreatePrivateRoom": "プライベートルームを作成する",
   "CreateRoom": "ルームを作成する",
+  "CreateSkill": "スキルを作成",
   "CreateSkillSet": "スキルセットを作成",
   "CreateSkillWithAI": "AIでスキルを作成",
   "CreateSkillWithAIDescription": "スキルで何をするかを説明すると、AIがスキルを作成します。",

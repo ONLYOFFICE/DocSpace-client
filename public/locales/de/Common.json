@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Erstellen Sie eine starke Passphrase zum Schutz Ihres Verschlüsselungsschlüssels. Merken Sie sie sich oder bewahren Sie sie in einem Passwort-Manager auf: Sie benötigen sie, um Ihren Schlüssel zu entsperren.",
   "CreatePrivateRoom": "Privaten Raum erstellen",
   "CreateRoom": "Raum erstellen",
+  "CreateSkill": "Skill erstellen",
   "CreateSkillSet": "Skill-Set erstellen",
   "CreateSkillWithAI": "Skill mit KI erstellen",
   "CreateSkillWithAIDescription": "Beschreiben Sie, was der Skill tun soll, und die KI schreibt ihn für Sie.",

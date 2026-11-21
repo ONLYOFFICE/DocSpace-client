@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Ustvarite močno geslo za zaščito svojega šifrirnega ključa. Zapomnite si ga ali ga shranite v upravitelju gesel: potrebovali ga boste za odklepanje ključa.",
   "CreatePrivateRoom": "Ustvari zasebno sobo",
   "CreateRoom": "Ustvari sobo",
+  "CreateSkill": "Ustvari veščino",
   "CreateSkillSet": "Ustvari nabor veščin",
   "CreateSkillWithAI": "Ustvari veščino z AI",
   "CreateSkillWithAIDescription": "Opišite, kaj naj veščina počne, in AI jo bo napisal namesto vas.",

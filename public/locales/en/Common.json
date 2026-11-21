@@ -623,6 +623,7 @@
   "CreatePassphraseHint": "Create a strong passphrase to protect your encryption key. Remember it or keep it in a password manager: you will need it to unlock your key.",
   "CreatePrivateRoom": "Create private room",
   "CreateRoom": "Create room",
+  "CreateSkill": "Create skill",
   "CreateSkillSet": "Create skill set",
   "CreateSkillWithAI": "Create skill with AI",
   "CreateSkillWithAIDescription": "Describe what the skill should do, and AI will write it for you.",

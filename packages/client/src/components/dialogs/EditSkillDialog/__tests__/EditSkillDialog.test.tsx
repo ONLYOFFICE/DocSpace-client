@@ -164,13 +164,13 @@ describe("EditSkillDialog", () => {
     expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("Clause check");
   });
 
-  it("opens as a modal dialog, to read and to edit", async () => {
+  it("opens the instructions as a modal dialog and the form as a side panel", async () => {
     const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
     render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
     await screen.findByTestId("editor");
     expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
     fireEvent.click(screen.getByTestId("view-skill-edit"));
-    expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
+    expect(screen.getByTestId("form").dataset.displayType).toBe("aside");
   });
 
   it("opens a new skill as a side panel", () => {

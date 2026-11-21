@@ -35,7 +35,7 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/mixins";
 
-// A modal of a fixed height, as wide as an editor needs, never taller or
+// The instructions view: a modal of a fixed height, as wide as an editor needs, never taller or
 // wider than the window: on a phone it is the bottom sheet of every modal.
 // Its body takes the height the header and the footer leave.
 .dialog {
@@ -62,8 +62,8 @@
   }
 }
 
-// The form takes the dialog's whole body, in the Edit skill modal and in the
-// panel of a generated skill, so the instructions get the height the other
+// The form takes the dialog's whole body, in the panel of a new, an edited
+// or a generated skill, as the instructions do in their modal, so the instructions get the height the other
 // fields leave and scroll inside their editor. The dialog body is the
 // positioned box; its side padding is kept by the inline inset. Only a
 // dialog too short for the fields scrolls as a whole.

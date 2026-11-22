@@ -123,8 +123,6 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isArchiveFolder,
 
-    setOformFromFolderId,
-
     enablePlugins,
     mainButtonItemsList,
 
@@ -154,7 +152,7 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     contactsTab,
-    setTemplateGalleryVisible,
+    showTemplateGallery,
     templateGalleryAvailable,
 
     allowInvitingMembers,
@@ -312,10 +310,10 @@ const ArticleMainButtonContent = (props) => {
 
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
-  const onShowTemplateGallery = () => {
-    setTemplateGalleryVisible(true);
-    setOformFromFolderId(currentFolderId);
-  };
+  // Goes through the store action so that at the Forms root the picked
+  // template creates a form space, as the header menu does (bug 83750).
+  // Called without the click event, which would read as `createRoomFromTemplate`.
+  const onShowTemplateGallery = () => showTemplateGallery();
 
   React.useEffect(() => {
     const isFolderHiddenDropdown =
@@ -970,8 +968,7 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
-      oformsStore;
+    const { oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
@@ -1009,7 +1006,6 @@ export default inject(
       currentRoomType,
     vectorizationEnabled,
 
-      setOformFromFolderId,
       oformsFilter,
 
       enablePlugins,
@@ -1054,7 +1050,7 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       contactsTab: peopleStore.usersStore.contactsTab,
-      setTemplateGalleryVisible,
+      showTemplateGallery: contextOptionsStore.onShowTemplateGallery,
       templateGalleryAvailable,
 
       allowInvitingMembers,

@@ -54,10 +54,10 @@ describe.each(["setCustomRoomQuota", "resetRoomQuota"] as const)(
         .fn<typeof store.fetchRooms>()
         .mockResolvedValue(undefined);
       store.fetchRooms = fetchRooms;
-      const updateQuota = (inRoom?: boolean, filter?: RoomsFilter) =>
+      const updateQuota = (inRoom?: boolean) =>
         action === "setCustomRoomQuota"
-          ? store.setCustomRoomQuota([1], -1, inRoom, filter)
-          : store.resetRoomQuota([1], inRoom, filter);
+          ? store.setCustomRoomQuota([1], -1, inRoom)
+          : store.resetRoomQuota([1], inRoom);
 
       return { store, fetchRooms, updateQuota };
     };
@@ -93,14 +93,16 @@ describe.each(["setCustomRoomQuota", "resetRoomQuota"] as const)(
       expect(fetchRooms.mock.calls[0][1]).not.toBe(store.roomsFilter);
     });
 
-    it("uses an explicit filter", async () => {
+    it("prefers the current URL filter over the stored filter", async () => {
       const { store, fetchRooms, updateQuota } = setup();
       const currentFilter = RoomsFilter.getDefault(
         undefined,
         RoomSearchArea.Forms,
       );
-      store.setRoomsFilter(currentFilter);
-      const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.Active);
+      currentFilter.filterValue = "invoice";
+      const storedFilter = currentFilter.clone();
+      storedFilter.filterValue = "report";
+      store.setRoomsFilter(storedFilter);
 
       const { href } = window.location;
       const { state } = window.history;
@@ -110,10 +112,13 @@ describe.each(["setCustomRoomQuota", "resetRoomQuota"] as const)(
           "",
           `/forms/filter?${currentFilter.toUrlParams()}`,
         );
-        await updateQuota(false, filter);
+        await updateQuota();
 
         expect(fetchRooms).toHaveBeenCalledTimes(1);
-        expect(fetchRooms.mock.calls[0][1]).toBe(filter);
+        expect(fetchRooms.mock.calls[0][1]).toMatchObject({
+          searchArea: RoomSearchArea.Forms,
+          filterValue: "invoice",
+        });
       } finally {
         window.history.replaceState(state, "", href);
       }

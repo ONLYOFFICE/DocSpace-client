@@ -1369,7 +1369,6 @@ class FilesStore {
     itemsIDs: (number | string)[],
     quotaSize: number | string,
     inRoom = false,
-    filter: Nullable<TRoomsFilter> = null,
   ) => {
     const { href } = window.location;
     // rooms quota endpoints are typed with numeric ids;
@@ -1379,20 +1378,16 @@ class FilesStore {
       +quotaSize,
     );
 
-    if (!inRoom) await refreshRoomsAfterQuotaChangeImpl(this, href, filter);
+    if (!inRoom) await refreshRoomsAfterQuotaChangeImpl(this, href);
 
     return rooms;
   };
 
-  resetRoomQuota = async (
-    itemsIDs: (number | string)[],
-    inRoom = false,
-    filter: Nullable<TRoomsFilter> = null,
-  ) => {
+  resetRoomQuota = async (itemsIDs: (number | string)[], inRoom = false) => {
     const { href } = window.location;
     const rooms = await api.rooms.resetRoomQuota(itemsIDs as number[]);
 
-    if (!inRoom) await refreshRoomsAfterQuotaChangeImpl(this, href, filter);
+    if (!inRoom) await refreshRoomsAfterQuotaChangeImpl(this, href);
 
     return rooms;
   };

@@ -956,7 +956,6 @@ export const scopeRoomsRequest = (
 export async function refreshRoomsAfterQuotaChangeImpl(
   self: FilesStore,
   previousHref: string,
-  filter: Nullable<TRoomsFilter>,
 ) {
   const location = window.location;
   const previousLocation = new URL(previousHref);
@@ -970,7 +969,7 @@ export async function refreshRoomsAfterQuotaChangeImpl(
   const urlFilter = RoomsFilter.getFilter(location);
   const activeFilter =
     location.search === previousLocation.search
-      ? (filter ?? urlFilter ?? self.roomsFilter.clone())
+      ? (urlFilter ?? self.roomsFilter.clone())
       : urlFilter;
   if (!activeFilter) return;
 

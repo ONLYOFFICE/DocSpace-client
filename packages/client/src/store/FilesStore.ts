@@ -42,7 +42,6 @@ import {
   FolderType,
   FileStatus,
   RoomsType,
-  RoomSearchArea,
 } from "@docspace/shared/enums";
 import SocketHelper, {
   SocketCommands,
@@ -159,6 +158,7 @@ import {
   fetchRoomsImpl,
   fetchMoreFilesImpl,
   refetchRoomsListOnSectionChangeImpl,
+  refreshRoomsAfterQuotaChangeImpl,
 } from "./filesStore/fetch.helpers";
 import {
   onResolveNewFileImpl,
@@ -1371,6 +1371,7 @@ class FilesStore {
     inRoom = false,
     filter: Nullable<TRoomsFilter> = null,
   ) => {
+    const { href } = window.location;
     // rooms quota endpoints are typed with numeric ids;
     // string ids pass through unchanged at runtime.
     const rooms = await api.rooms.setCustomRoomQuota(
@@ -1378,15 +1379,7 @@ class FilesStore {
       +quotaSize,
     );
 
-    if (!inRoom) {
-      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
-        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
-        newFilter.searchArea = RoomSearchArea.Templates;
-        await this.fetchRooms(null, newFilter, false, false, false);
-      } else {
-        await this.fetchRooms(null, filter, false, false, false);
-      }
-    }
+    if (!inRoom) await refreshRoomsAfterQuotaChangeImpl(this, href, filter);
 
     return rooms;
   };
@@ -1396,17 +1389,10 @@ class FilesStore {
     inRoom = false,
     filter: Nullable<TRoomsFilter> = null,
   ) => {
+    const { href } = window.location;
     const rooms = await api.rooms.resetRoomQuota(itemsIDs as number[]);
 
-    if (!inRoom) {
-      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
-        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
-        newFilter.searchArea = RoomSearchArea.Templates;
-        await this.fetchRooms(null, newFilter, false, false, false);
-      } else {
-        await this.fetchRooms(null, filter, false, false, false);
-      }
-    }
+    if (!inRoom) await refreshRoomsAfterQuotaChangeImpl(this, href, filter);
 
     return rooms;
   };

@@ -953,6 +953,34 @@ export const scopeRoomsRequest = (
     ),
   );
 
+export async function refreshRoomsAfterQuotaChangeImpl(
+  self: FilesStore,
+  previousHref: string,
+  filter: Nullable<TRoomsFilter>,
+) {
+  const location = window.location;
+  const previousLocation = new URL(previousHref);
+  if (
+    location.pathname !== previousLocation.pathname ||
+    new URLSearchParams(location.search).get("folder")
+  )
+    return;
+
+  // The stored filter can lag behind the URL, including after going back.
+  const urlFilter = RoomsFilter.getFilter(location);
+  const activeFilter =
+    location.search === previousLocation.search
+      ? (filter ?? urlFilter ?? self.roomsFilter.clone())
+      : urlFilter;
+  if (!activeFilter) return;
+
+  try {
+    await self.fetchRooms(null, activeFilter, false, false, false);
+  } catch (error) {
+    if (!axios.isCancel(error)) throw error;
+  }
+}
+
 /** Reloads an open Rooms list when the Private section appears or goes away. */
 export function refetchRoomsListOnSectionChangeImpl(self: FilesStore) {
   const { isRoomsFolder, isArchiveFolder } = self.treeFoldersStore;

@@ -366,7 +366,6 @@
   "AutoLock5m": "5 minuti",
   "AutoLock15m": "15 minuti",
   "AutoLock30m": "30 minuti",
-  "AutoLockHint": "Le opzioni da 5 e 15 minuti bloccano le chiavi anche quando la scheda viene nascosta.",
   "AutoLockLabel": "Blocco automatico dopo inattività",
   "Automatic": "Automatica",
   "AutomaticallyAddCredits": "Aggiungi automaticamente crediti quando i crediti disponibili scendono sotto un importo specificato",

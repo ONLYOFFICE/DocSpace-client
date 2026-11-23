@@ -366,7 +366,6 @@
   "AutoLock5m": "5 phút",
   "AutoLock15m": "15 phút",
   "AutoLock30m": "30 phút",
-  "AutoLockHint": "Các tùy chọn 5 và 15 phút cũng khóa các khóa mã hóa khi thẻ bị ẩn.",
   "AutoLockLabel": "Tự động khoá sau khi không hoạt động",
   "Automatic": "Tự động",
   "AutomaticallyAddCredits": "Tự động thêm tín dụng khi tín dụng khả dụng giảm xuống dưới một mức xác định",

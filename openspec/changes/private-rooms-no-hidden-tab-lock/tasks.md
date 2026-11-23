@@ -7,7 +7,7 @@
 
 ## 2. Setting
 
-- [ ] 2.1 Remove the hint from `packages/client/src/components/AutoLockSetting/AutoLockSetting.tsx` and `AutoLockHint` from every `public/locales/*/Common.json` with its `.meta` files (bulk edit by script, per `.claude/rules/bulk-locale-edits.md`); update `AutoLockSetting.test.tsx`; verify with `cd packages/client && pnpm exec vitest run src/components/AutoLockSetting`, `cd common/tests && npx vitest run test/locales.test.js` and a search that finds no `AutoLockHint` outside `openspec/changes/archive`
+- [x] 2.1 Remove the hint from `packages/client/src/components/AutoLockSetting/AutoLockSetting.tsx` and `AutoLockHint` from every `public/locales/*/Common.json` with its `.meta` files (bulk edit by script, per `.claude/rules/bulk-locale-edits.md`); update `AutoLockSetting.test.tsx`; verify with `cd packages/client && pnpm exec vitest run src/components/AutoLockSetting`, `cd common/tests && npx vitest run test/locales.test.js` and a search that finds no `AutoLockHint` outside `openspec/changes/archive`
 
 ## 3. Integration
 

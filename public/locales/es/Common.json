@@ -366,7 +366,6 @@
   "AutoLock5m": "5 minutos",
   "AutoLock15m": "15 minutos",
   "AutoLock30m": "30 minutos",
-  "AutoLockHint": "Las opciones de 5 y 15 minutos también bloquean las claves cuando la pestaña se oculta.",
   "AutoLockLabel": "Bloqueo automático tras inactividad",
   "Automatic": "Automática",
   "AutomaticallyAddCredits": "Añadir créditos automáticamente cuando los créditos disponibles bajen de una cantidad especificada",

@@ -366,7 +366,6 @@
   "AutoLock5m": "5 minut",
   "AutoLock15m": "15 minut",
   "AutoLock30m": "30 minut",
-  "AutoLockHint": "Opcje 5 i 15 minut blokują klucze także po ukryciu karty.",
   "AutoLockLabel": "Automatyczna blokada po bezczynności",
   "Automatic": "Automatyczne",
   "AutomaticallyAddCredits": "Automatycznie dodawaj kredyty, gdy dostępne kredyty spadną poniżej określonej kwoty",

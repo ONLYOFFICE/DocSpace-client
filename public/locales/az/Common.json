@@ -366,7 +366,6 @@
   "AutoLock5m": "5 dəqiqə",
   "AutoLock15m": "15 dəqiqə",
   "AutoLock30m": "30 dəqiqə",
-  "AutoLockHint": "5 və 15 dəqiqəlik seçimlər vərəq gizlədildikdə də açarları kilidləyir.",
   "AutoLockLabel": "Qeyri-fəallıqdan sonra avtomatik kilid",
   "Automatic": "Avtomatik",
   "AutomaticallyAddCredits": "Mövcud kreditlər müəyyən edilmiş məbləğdən aşağı düşdükdə kreditləri avtomatik əlavə edin",

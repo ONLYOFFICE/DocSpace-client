@@ -366,7 +366,6 @@
   "AutoLock5m": "5 minuuttia",
   "AutoLock15m": "15 minuuttia",
   "AutoLock30m": "30 minuuttia",
-  "AutoLockHint": "5 ja 15 minuutin vaihtoehdot lukitsevat avaimet myös, kun välilehti piilotetaan.",
   "AutoLockLabel": "Automaattilukitus toimettomana olon jälkeen",
   "Automatic": "Automaattinen",
   "AutomaticallyAddCredits": "Lisää kreditit automaattisesti, kun saatavilla olevat kreditit putoavat alle määritetyn summan",

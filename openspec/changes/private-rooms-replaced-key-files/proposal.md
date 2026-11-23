@@ -37,8 +37,9 @@ Out of scope:
 - Any change to what deleting a key does, or to its confirmation dialog.
 - The SDK's private shell: it gets the new message through the shared error
   text, no notice of its own.
-- The key state shown after returning from the editor (reported together with
-  this problem, not reproduced; tracked separately).
+- The key state shown after returning from the editor, reported together with
+  this problem: it came from the lock on a hidden tab, removed by the archived
+  change `private-rooms-no-hidden-tab-lock`.
 
 Decisions that need a human:
 

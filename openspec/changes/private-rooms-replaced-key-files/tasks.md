@@ -22,7 +22,7 @@
 
 ## 5. Integration
 
-- [ ] 5.1 Run `pnpm exec tsc` in shared, client, doceditor and sdk, `pnpm nx run-many -t lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; check on the local stand (room 19 of the reported case) that the notice gives 6, the media viewer and a download give the new message, and no ghost-state toast appears
+- [x] 5.1 Run `pnpm exec tsc` in shared, client, doceditor and sdk, `pnpm nx run-many -t lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; check on the local stand (room 19 of the reported case) that the notice gives 6, the media viewer and a download give the new message, and no ghost-state toast appears
 
 ## Workflow follow-up
 

@@ -461,6 +461,19 @@ none is open. The technical decisions below follow from them.
     of the password are fixed and not stored, so a change of them needs
     new labels. The proof is sent as base64 of its 32 bytes; the server
     names no encoding yet.
+26. **A wrap for a link is the wrap of a member, unchanged (2026-11-23,
+    with task 2.2).** `wrapDEK` and `unwrapDEK` take any X25519 public
+    key and any id of 16 bytes as the recipient, and a link id is one, so
+    wrapping for a link needs no code of its own: the link's public key
+    and the link id stand where a member's stand. The wrap is bound to the
+    sender, the recipient id and the file, so one made for a member, for
+    another link, or under another link id does not open with the key of
+    a link. What follows for the visitor: opening a wrap needs the public
+    key and the id of the member who made it, and a visitor has no account
+    to read them through. The server gives both with the wrap it serves
+    to a link session (its task 3.4); the id is in the wrap itself. A
+    visitor cannot check that key against anything, which is the limit
+    the main spec already states for an active server.
 
 ## Risks / Trade-offs
 

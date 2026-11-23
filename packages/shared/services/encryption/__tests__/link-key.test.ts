@@ -35,8 +35,13 @@
 
 import { describe, expect, it } from "vitest";
 
-import { InvalidFormatError, InvalidPassphraseError } from "../errors";
-import { unlockWithPassphrase } from "../identity";
+import {
+  AuthenticationError,
+  InvalidFormatError,
+  InvalidPassphraseError,
+} from "../errors";
+import { unwrapDEK, wrapDEK } from "../hpke";
+import { generateIdentityKeyPair, unlockWithPassphrase } from "../identity";
 import {
   createLinkKey,
   deriveLinkProof,
@@ -50,6 +55,7 @@ import {
   arrayBufferToBase64,
   base64ToUint8Array,
   base64UrlEncode,
+  getRandomBytes,
 } from "../utils";
 
 const PASSWORD = "correct horse";
@@ -176,5 +182,96 @@ describe("The secret of a link is encoded for an address", () => {
     expect(isLinkSecret(`${secret.slice(0, 42)}*`)).toBe(false);
     expect(isLinkSecret(`${secret.slice(0, 42)}=`)).toBe(false);
     expect(isLinkSecret(`${secret} `)).toBe(false);
+  });
+});
+
+describe("An external link has a key pair of its own", () => {
+  const FILE_ID = 4711;
+  const MEMBER_ID = "11111111-1111-4111-8111-111111111111";
+  const OTHER_MEMBER_ID = "22222222-2222-4222-8222-222222222222";
+  const LINK_ID = "33333333-3333-4333-8333-333333333333";
+  const OTHER_LINK_ID = "44444444-4444-4444-8444-444444444444";
+
+  const setup = async () => {
+    const secret = generateLinkSecret();
+    const member = await generateIdentityKeyPair();
+    const { material } = await createLinkKey(secret);
+    const dek = getRandomBytes(32);
+    const wrapFor = (recipientPublicKey: Uint8Array, recipientUserId: string) =>
+      wrapDEK({
+        dek,
+        senderPrivateKey: member.privateKey,
+        senderPublicKey: member.publicKey,
+        senderUserId: MEMBER_ID,
+        recipientPublicKey,
+        recipientUserId,
+        fileId: FILE_ID,
+      });
+    const openAs = async (
+      wrapped: string,
+      recipientPrivateKey: Uint8Array,
+      recipientUserId: string,
+    ) =>
+      unwrapDEK({
+        wrapped,
+        recipientPrivateKey,
+        recipientUserId,
+        expectedSenderPublicKey: member.publicKey,
+        expectedSenderUserId: MEMBER_ID,
+        fileId: FILE_ID,
+      });
+    return { secret, member, material, dek, wrapFor, openAs };
+  };
+
+  it("Link to a file created", async () => {
+    const { secret, material, dek, wrapFor, openAs } = await setup();
+
+    const wrap = await wrapFor(
+      base64ToUint8Array(material.linkPublicKey),
+      LINK_ID,
+    );
+    const visitor = await openLinkKey(material, secret);
+
+    expect(await openAs(wrap, visitor.privateKey, LINK_ID)).toEqual(dek);
+  });
+
+  it("File added under a linked folder", async () => {
+    const { secret, material, dek, wrapFor, openAs } = await setup();
+    const otherMember = await generateIdentityKeyPair();
+
+    const forMember = await wrapFor(otherMember.publicKey, OTHER_MEMBER_ID);
+    const forLink = await wrapFor(
+      base64ToUint8Array(material.linkPublicKey),
+      LINK_ID,
+    );
+    const visitor = await openLinkKey(material, secret);
+
+    expect(
+      await openAs(forMember, otherMember.privateKey, OTHER_MEMBER_ID),
+    ).toEqual(dek);
+    expect(await openAs(forLink, visitor.privateKey, LINK_ID)).toEqual(dek);
+  });
+
+  it("Wrap made for a member offered to a link", async () => {
+    const { secret, material, wrapFor, openAs } = await setup();
+    const otherMember = await generateIdentityKeyPair();
+    const otherLink = await createLinkKey(generateLinkSecret());
+    const visitor = await openLinkKey(material, secret);
+
+    const forMember = await wrapFor(otherMember.publicKey, OTHER_MEMBER_ID);
+    const forOtherLink = await wrapFor(
+      base64ToUint8Array(otherLink.material.linkPublicKey),
+      OTHER_LINK_ID,
+    );
+    const forThisKeyUnderAnotherId = await wrapFor(
+      base64ToUint8Array(material.linkPublicKey),
+      OTHER_LINK_ID,
+    );
+
+    for (const wrap of [forMember, forOtherLink, forThisKeyUnderAnotherId]) {
+      await expect(
+        openAs(wrap, visitor.privateKey, LINK_ID),
+      ).rejects.toBeInstanceOf(AuthenticationError);
+    }
   });
 });

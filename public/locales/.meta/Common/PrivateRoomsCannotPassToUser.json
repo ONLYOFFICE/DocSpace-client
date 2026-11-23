@@ -1,0 +1,35 @@
+{
+  "key_path": "PrivateRoomsCannotPassToUser",
+  "content": "The selected user cannot take over the private rooms of this account. They need an encryption key and access to every encrypted file in those rooms.",
+  "content_en_sha1_hash": "28e5bd7b01faa21b90f2325a6498928372c4dc8d",
+  "created_at": "2026-11-23T09:37:15.463Z",
+  "updated_at": "2026-11-23T09:38:04.428Z",
+  "comment": {
+    "text": "Error toast shown to an administrator who turns a user into a guest and names another user to receive that user's rooms, when the server refuses because the chosen recipient cannot open the private (end-to-end encrypted) rooms. The selected user is the recipient picked in the data reassignment dialog, this account is the user being changed, They refers to the recipient. Encryption key is the personal key a user creates to work with private rooms.",
+    "is_auto": true,
+    "updated_at": "2026-11-23T09:38:04.428Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/index.js",
+      "line_number": 148,
+      "context": ".then(() => checkProgress())\n .catch((error) => {\n // Spec: private-rooms/room-membership, \"Refused change of an account that owns private rooms is explained\"\n toastr.error(\n isPrivateRoomOwnershipRefusal(error)\n ? t(\"Common:PrivateRoomsCannotPassToUser\")\n : error?.response?.data?.error?.message,\n );\n })\n .finally(() => {\n if (isDeleteProfile || needResetUserSelection) {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/GlobalEvents/ChangeUserTypeEvent.tsx",
+      "line_number": 116,
+      "context": "successCallback?.(users as TUser[]);\n })\n .catch((error: unknown) => {\n // Spec: private-rooms/room-membership, \"Refused change of an account that owns private rooms is explained\"\n if (isPrivateRoomOwnershipRefusal(error)) {\n toastr.error(t(\"Common:PrivateRoomsCannotPassToUser\"));\n abortCallback?.();\n return;\n }\n \n toastr.error(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

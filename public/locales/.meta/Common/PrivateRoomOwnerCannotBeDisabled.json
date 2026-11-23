@@ -1,0 +1,29 @@
+{
+  "key_path": "PrivateRoomOwnerCannotBeDisabled",
+  "content": "Not disabled: an account that owns a private room cannot be disabled. Change the owner of each of its private rooms first.",
+  "content_en_sha1_hash": "62d79ff8ac5086578e1e40e864013bd02ffbba2d",
+  "created_at": "2026-11-23T09:37:15.165Z",
+  "updated_at": "2026-11-23T09:38:04.428Z",
+  "comment": {
+    "text": "Error toast in the accounts list, shown to an administrator after the Disable user dialog is confirmed and the server refuses because one of the selected accounts owns a private (end-to-end encrypted) room. Two sentences: what was not done, then what to do first, which is to change the owner of that account's private rooms. Disabled means the account is deactivated, not deleted; keep the term used for the Disable action of users.",
+    "is_auto": true,
+    "updated_at": "2026-11-23T09:38:04.428Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
+      "line_number": 112,
+      "context": ");\n })\n .catch((error: unknown) => {\n // Spec: private-rooms/room-membership, \"Refused change of an account that owns private rooms is explained\"\n if (isPrivateRoomOwnershipRefusal(error)) {\n toastr.error(t(\"Common:PrivateRoomOwnerCannotBeDisabled\"));\n return;\n }\n \n toastr.error(\n <PaidQuotaLimitError",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

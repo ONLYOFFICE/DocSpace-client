@@ -38,6 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { isPrivateRoomOwnershipRefusal } from "@docspace/shared/services/private-room/ownership-refusal";
 import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { downgradeUserType } from "@docspace/shared/api/people";
@@ -109,7 +110,14 @@ const ChangeUserTypeEvent = ({
 
 				successCallback?.(users as TUser[]);
 			})
-			.catch(() => {
+			.catch((error: unknown) => {
+				// Spec: private-rooms/room-membership, "Refused change of an account that owns private rooms is explained"
+				if (isPrivateRoomOwnershipRefusal(error)) {
+					toastr.error(t("Common:PrivateRoomsCannotPassToUser"));
+					abortCallback?.();
+					return;
+				}
+
 				toastr.error(
 					<PaidQuotaLimitError
 						isRoomAdmin={undefined}

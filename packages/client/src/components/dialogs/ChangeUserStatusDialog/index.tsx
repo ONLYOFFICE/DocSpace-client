@@ -44,6 +44,7 @@ import {
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { isPrivateRoomOwnershipRefusal } from "@docspace/shared/services/private-room/ownership-refusal";
 import { ButtonKeys, EmployeeStatus } from "@docspace/shared/enums";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -105,7 +106,13 @@ const ChangeUserStatusDialogComponent = ({
 						: t("PeopleTranslations:SuccessChangeUserStatus"),
 				);
 			})
-			.catch(() => {
+			.catch((error: unknown) => {
+				// Spec: private-rooms/room-membership, "Refused change of an account that owns private rooms is explained"
+				if (isPrivateRoomOwnershipRefusal(error)) {
+					toastr.error(t("Common:PrivateRoomOwnerCannotBeDisabled"));
+					return;
+				}
+
 				toastr.error(
 					<PaidQuotaLimitError
 						isRoomAdmin={undefined}

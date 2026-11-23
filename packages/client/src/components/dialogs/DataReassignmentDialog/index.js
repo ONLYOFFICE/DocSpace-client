@@ -38,6 +38,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import PeopleSelector from "@onlyoffice/apps-ui-kit/selectors/People";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { isPrivateRoomOwnershipRefusal } from "@docspace/shared/services/private-room/ownership-refusal";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Backdrop } from "@onlyoffice/apps-ui-kit/components/backdrop";
 
@@ -141,7 +142,12 @@ const DataReassignmentDialog = ({
     handleReassignUserData(user.id, targetUser.id)
       .then(() => checkProgress())
       .catch((error) => {
-        toastr.error(error?.response?.data?.error?.message);
+        // Spec: private-rooms/room-membership, "Refused change of an account that owns private rooms is explained"
+        toastr.error(
+          isPrivateRoomOwnershipRefusal(error)
+            ? t("Common:PrivateRoomsCannotPassToUser")
+            : error?.response?.data?.error?.message,
+        );
       })
       .finally(() => {
         if (isDeleteProfile || needResetUserSelection) {

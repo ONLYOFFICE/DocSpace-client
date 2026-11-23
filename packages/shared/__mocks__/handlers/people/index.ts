@@ -57,6 +57,7 @@ import { themeProviderHandler } from "./theme";
 import { userPhotoHandler } from "./userPhoto";
 
 export { groupsHandler, groupHandler, salesGroup } from "./groups";
+export * from "./privateRoomAccounts";
 
 export {
   usersWithRoomSharedHandler,

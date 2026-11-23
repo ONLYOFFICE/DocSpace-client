@@ -113,6 +113,18 @@ export const usePanelExclusivity = (
           if (visible && !isChatInSectionRef.current()) aiChatStore.close();
         },
       ),
+      // The chat stops being the section's own with both on screen: AI Chat
+      // or Recent clicked on an agent's page opens the chat fullscreen while
+      // the agent is still the open room, so the reaction above let the Info
+      // panel be, and it was left beside a chat that covers the section.
+      // The chat is the newer of the two, so it wins here as well.
+      reaction(
+        () => isChatInSectionRef.current(),
+        (inSection) => {
+          if (!inSection && aiChatStore.isVisible && infoPanelStore.isVisible)
+            infoPanelStore.setIsVisible(false);
+        },
+      ),
     ];
     return () => disposers.forEach((dispose) => dispose());
   }, [aiChatStore, infoPanelStore]);

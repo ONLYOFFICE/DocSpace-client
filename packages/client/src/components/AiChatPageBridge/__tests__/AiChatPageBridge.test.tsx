@@ -47,7 +47,8 @@ const chat = vi.hoisted(() => ({
     hasMoreThreads: false,
     threadId: "",
     threadsLoaded: true,
-    onSwitchToThread: () => {},
+    onSwitchToThread: (_id: string) => {},
+    onSwitchToNewThread: (_options?: object) => {},
     ensureThreads: async (_entityId?: string) => {},
   },
   list: async (_entityId?: string, _count?: number): Promise<TThread[]> => [],
@@ -58,6 +59,17 @@ const chat = vi.hoisted(() => ({
     open: () => {},
     openNewChat: () => {},
     setFullscreen: () => {},
+    applyPreset: (_preset: object) => {},
+  },
+  openHistory: async () => {},
+}));
+
+// The agent picked in the chat panel (`aiPresetsStore`).
+const presets = vi.hoisted(() => ({
+  activePreset: null as { id: string } | null,
+  cancelApply: () => {},
+  setActivePreset(preset: { id: string } | null) {
+    presets.activePreset = preset;
   },
 }));
 
@@ -76,7 +88,7 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => {
   );
   // The library hands out the same API and stores on every render.
   const api = { threads: { list: (...args: [string?, number?]) => chat.list(...args) } };
-  const router = { goToChat: () => {}, openHistory: async () => {} };
+  const router = { goToChat: () => {}, openHistory: () => chat.openHistory() };
   const stores = {
     useRouter: (select: (s: object) => unknown) => select(router),
     useThreadsStore,
@@ -104,7 +116,9 @@ vi.mock("SRC_DIR/store/useStore", () => ({
       ? dialogsStore
       : name === "userStore"
         ? { user: { id: "u1" } }
-        : { isAiProjectRoomRoot: false },
+        : name === "aiPresetsStore"
+          ? presets
+          : { isAiProjectRoomRoot: false },
 }));
 
 import AiChatPageBridge from "../index";
@@ -227,5 +241,84 @@ describe("AiChatPageBridge — a reload", () => {
     await flush();
     expect(dialogsStore.requestAiChatPage).not.toHaveBeenCalled();
     expect(sessionStorage.getItem("aiChatPage:u1")).toBeNull();
+  });
+});
+
+describe("AiChatPageBridge — a request from Recent", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.useFakeTimers();
+    sessionStorage.clear();
+    presets.activePreset = null;
+    chat.threads.threadId = "";
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    dialogsStore.aiChatPageRequest = null;
+    cleanup();
+  });
+
+  const request = (page: "chat" | "history", threadId?: string) => {
+    const value = { page, afterLocationKey: null, threadId };
+    (dialogsStore as { aiChatPageRequest: object | null }).aiChatPageRequest = value;
+    dialogsStore.consumeAiChatPageRequest.mockReturnValue(value);
+  };
+
+  it("takes the chat off an agent picked in the panel before the history opens, and opens it on the default agent", async () => {
+    presets.activePreset = { id: "7" };
+    chat.threads.threadId = "agent-thread";
+    const applyPreset = vi.spyOn(chat.store, "applyPreset");
+    const leave = vi.spyOn(chat.threads, "onSwitchToNewThread");
+    const openHistory = vi.spyOn(chat, "openHistory");
+    request("history");
+
+    const view = renderBridge("7");
+    expect(presets.activePreset).toBeNull();
+    expect(applyPreset).toHaveBeenCalledWith(
+      expect.objectContaining({ profileId: null, contextRooms: [], knowledgeRooms: [] }),
+    );
+    expect(leave).toHaveBeenCalledTimes(1);
+    // The request waits for the chat's scope to follow.
+    expect(dialogsStore.consumeAiChatPageRequest).not.toHaveBeenCalled();
+    act(() => vi.runAllTimers());
+    expect(openHistory).not.toHaveBeenCalled();
+
+    view.rerender(
+      <MemoryRouter initialEntries={["/rooms/shared"]}>
+        <AiChatPageBridge canLoadThreads />
+      </MemoryRouter>,
+    );
+    act(() => vi.runAllTimers());
+    expect(dialogsStore.consumeAiChatPageRequest).toHaveBeenCalledTimes(1);
+    expect(openHistory).toHaveBeenCalledTimes(1);
+  });
+
+  it("opens a conversation of Recent on the default agent too", () => {
+    presets.activePreset = { id: "7" };
+    const switchToThread = vi.spyOn(chat.threads, "onSwitchToThread");
+    request("chat", "plain1");
+
+    const view = renderBridge("7");
+    expect(presets.activePreset).toBeNull();
+    expect(switchToThread).not.toHaveBeenCalled();
+
+    view.rerender(
+      <MemoryRouter initialEntries={["/rooms/shared"]}>
+        <AiChatPageBridge canLoadThreads />
+      </MemoryRouter>,
+    );
+    act(() => vi.runAllTimers());
+    expect(switchToThread).toHaveBeenCalledWith("plain1");
+  });
+
+  it("leaves the agent to a chat opened by AI Chat itself", () => {
+    presets.activePreset = { id: "7" };
+    request("chat");
+
+    renderBridge("7");
+    act(() => vi.runAllTimers());
+    expect(presets.activePreset).toEqual({ id: "7" });
+    expect(dialogsStore.consumeAiChatPageRequest).toHaveBeenCalledTimes(1);
   });
 });

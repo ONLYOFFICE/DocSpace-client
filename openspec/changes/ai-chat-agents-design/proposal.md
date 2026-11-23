@@ -46,7 +46,7 @@ Taken as working assumptions from the boards; each changes a requirement if answ
 - Categories are the agents' tags, and "My agents" is the owner filter (product). Board 04 now draws the category row on the Templates tab only; whether "My agents" keeps one is open.
 - Templates are offered for agents only; the skill set and knowledge base templates are installed with the agent that brings them (built on 2026-11-16, client `cd7a394e82a`).
 - The agent menu on a page and on a card keeps pin, notifications, change owner, copy link and leave after the design's items (designer).
-- The default agent's history and Recent list all conversations, and opening one switches the chat to its agent (product).
+- The default agent's history and Recent list all conversations, and opening one switches the chat to its agent (product). Recent was taken out of this on 2026-11-23: it lists the default agent's conversations only and always opens the chat on the default agent.
 - Official agents and portal-wide access (product and .NET), listed under Out of scope.
 
 ## Server work this change depends on

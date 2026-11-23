@@ -90,6 +90,8 @@ The history of the default agent, and the sidebar's Recent, list all of the user
 
 *State (2026-11-16):* not reachable yet. A list asked without a scope answers only the threads of no project (`ThreadQueries`, `EntryId == null`), so since ASC.AI.Chat scopes threads the default agent's history and Recent show the conversations of no agent, and an agent's conversations are found in that agent only. The specs say so until the storage can list them together. Conversations started in an agent before the change carry no agent and stay in the general list.
 
+*Decided 2026-11-23:* Recent is the default agent's for good, not until the storage lists all: it lists that agent's conversations only, and its entry, "Show more" and a conversation under it take the chat off an agent picked in the panel before they open (`AiChatPageBridge`), so the history opened from Recent never changes with the agent. The default agent's history still awaits the one list.
+
 *Why:* Recent already shows one list, and a user looking for a conversation should not have to remember which agent it was with. *Alternative:* the default agent lists only its own conversations (cleaner, but Recent would then be a third kind of list). To confirm with the product owner.
 
 ### The panel's agent actions come from the client

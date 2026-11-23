@@ -46,6 +46,9 @@ Decisions that need a human:
 - Whether the notice should carry an action (none is proposed: Keys management
   offers nothing that brings these files back).
 
+Decided by the owner on 2026-11-23: the wording of design.md, decision 5, is
+accepted, and the notice carries no action.
+
 ## Capabilities
 
 ### New Capabilities

@@ -48,6 +48,7 @@ vi.mock("next/headers", () => ({
 
 vi.mock("next/navigation", () => ({ redirect: vi.fn() }));
 vi.mock("@/api/people", () => ({ getSelf: vi.fn() }));
+vi.mock("@/api/apps", () => ({ getAppEnabled: vi.fn() }));
 vi.mock("./_components/not-available", () => ({ default: () => null }));
 vi.mock("./_components/opt-in/PrivateRoomsOptInSource", () => ({
   default: ({ children }: { children: ReactNode }) => children,
@@ -55,6 +56,7 @@ vi.mock("./_components/opt-in/PrivateRoomsOptInSource", () => ({
 
 import { redirect } from "next/navigation";
 
+import { getAppEnabled } from "@/api/apps";
 import { getSelf } from "@/api/people";
 
 import PrivateRoomsNotAvailable from "./_components/not-available";
@@ -64,6 +66,7 @@ import PrivateLayout from "./layout";
 describe("private layout opt-in gate", () => {
   beforeEach(() => {
     (getSelf as Mock).mockResolvedValue({ id: "user-1" });
+    (getAppEnabled as Mock).mockResolvedValue(true);
   });
 
   test("SDK route without the flag", async () => {
@@ -82,6 +85,25 @@ describe("private layout opt-in gate", () => {
 
     expect(element.type).toBe(PrivateRoomsOptInSource);
     expect(element.props.children).toBe("page");
+  });
+
+  test("SDK route with the app off", async () => {
+    (getAppEnabled as Mock).mockResolvedValue(false);
+    request.filter = "privateRooms=true";
+
+    const element = await PrivateLayout({ children: "page" });
+
+    expect(getAppEnabled).toHaveBeenCalledWith("e2e-rooms");
+    expect(element.type).toBe(PrivateRoomsNotAvailable);
+  });
+
+  test("opens the pages when the state of the app cannot be read", async () => {
+    (getAppEnabled as Mock).mockResolvedValue(null);
+    request.filter = "privateRooms=true";
+
+    const element = await PrivateLayout({ children: "page" });
+
+    expect(element.type).toBe(PrivateRoomsOptInSource);
   });
 
   test("Private room opened: the sign-in return address carries no search", async () => {

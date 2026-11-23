@@ -66,3 +66,37 @@ export async function getAppSettings<T = Record<string, unknown>>(
     return null;
   }
 }
+
+/**
+ * Whether a portal app is on: `GET apps/{id}`. An app the installation does
+ * not list answers 404 and counts as off, as the server treats it; a failed
+ * request answers null, since the state is then not known.
+ */
+export async function getAppEnabled(id: string): Promise<boolean | null> {
+  logger.debug(`Start GET /apps/${id}`);
+
+  try {
+    const [req] = await createRequest(
+      [`/apps/${encodeURIComponent(id)}`],
+      [],
+      "GET",
+    );
+
+    const res = await fetch(req, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(5000),
+    });
+
+    if (res.status === 404) return false;
+    if (!res.ok) {
+      logger.error(`GET /apps/${id} failed: ${res.status}`);
+      return null;
+    }
+
+    const json = await res.json();
+    return json.response?.enabled === true;
+  } catch (error) {
+    logger.error(`Error in getAppEnabled(${id}): ${error}`);
+    return null;
+  }
+}

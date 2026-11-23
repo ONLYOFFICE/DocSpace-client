@@ -68,7 +68,10 @@ The change MUST NOT be applied until all of the following hold:
    named and exercised on staging.
 8. The portal setting for private rooms is merged on the server release
    branch, and its JSON name, payload, write route and defaults have been read
-   in `../server` through CodeGraph.
+   in `../server` through CodeGraph. Decided by the owner on 2026-11-23: the
+   setting is the state of the E2E rooms app, which the server reads on
+   every installation since `private-rooms-server-followups` 2.5; no
+   separate setting is added.
 9. Backup and restore of private rooms: the loss is an accepted
    limitation for now (owner, 2026-11-06; `private-rooms-server-hardening`
    decision 9 and task group 15), so the warning on the backup and restore
@@ -97,8 +100,11 @@ None.
 - `private-rooms/feature-gating`: a portal setting decides availability on
   top of the E2E rooms app, and administrators switch it in the portal
   settings.
-- `private-rooms/sidebar-section`: section availability reads the setting, and
-  the Private sidebar item loses its Beta badge.
+- `private-rooms/sidebar-section`: the Private sidebar item loses its Beta
+  badge. Section availability on every portal is
+  `private-rooms-server-followups` 3.6.
+- `private-rooms/sdk-surface`: the SDK private pages follow the E2E rooms
+  app.
 - `private-rooms/key-management`: the Keys management tab loses its Beta badge.
 
 These deltas modify requirements that `private-rooms-beta-release` adds. They
@@ -107,13 +113,13 @@ apply once that change is archived (prerequisite 1).
 ## Impact
 
 - **Client:**
-  - availability: `packages/client/src/store/AppsStore.ts`, the settings store type;
-  - the administrator control in the portal settings (location is decision 4);
+  - availability: `packages/client/src/store/AppsStore.ts`, done by `private-rooms-server-followups` 3.6;
+  - the administrator control: the switch of the E2E rooms app in the apps settings (decision 4);
   - `packages/client/src/components/ClientArticleSidebar`;
   - `packages/client/src/pages/Profile/Section/Body/index.tsx`;
   - `public/locales` (the two beta keys removed, the control's keys added);
-  - the E2E specs that assert the badges, a setting-off spec, and the sidebar screenshots.
-- **Shared:** the MSW settings handler and its contract case.
+  - the E2E specs that assert the badges, the app-off spec, and the sidebar screenshots.
+- **SDK:** the private layout, which follows the E2E rooms app.
 - **SDK:** the `(private)` layout reads the setting in addition to the host opt-in.
 - **Server (`../server`):** the portal setting (prerequisite 8) and the
   `private-rooms-server-hardening` items of prerequisite 4.
@@ -137,6 +143,12 @@ apply once that change is archived (prerequisite 1).
    `private-rooms-beta-release` keeps it for the beta.
 3. Default value of the portal setting on upgraded and new portals (product
    with the server team). Upgraded portals ran the beta with the section
-   shown, so on keeps their state.
+   shown, so on keeps their state. Decided by the owner on 2026-11-23: on,
+   for new and for upgraded portals; the default of the E2E rooms app comes
+   from the configuration of the installation, which has to list the app.
 4. Where administrators find the control: the security settings, the rooms
-   settings, or the apps catalog entry of the E2E rooms app.
+   settings, or the apps catalog entry of the E2E rooms app. Follows from
+   the decision of 2026-11-23 on prerequisite 8: the switch of the E2E rooms
+   app in the apps settings. Open: the client offers the apps settings on a
+   standalone portal only, so on any other portal the app is switched
+   through the API alone; whether such a portal gets a control.

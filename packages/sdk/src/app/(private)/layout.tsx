@@ -36,6 +36,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { getAppEnabled } from "@/api/apps";
 import { getSelf } from "@/api/people";
 import { FILTER_HEADER, PATHNAME_HEADER } from "@/utils/constants";
 
@@ -47,6 +48,8 @@ import {
 } from "./_utils/private-rooms-opt-in";
 
 export const dynamic = "force-dynamic";
+
+const PRIVATE_ROOMS_APP_ID = "e2e-rooms";
 
 const FORWARDED_PARAMS = [
   "id",
@@ -108,6 +111,11 @@ export default async function PrivateLayout({
     authParams.set("successRedirectURL", successRedirectURL);
 
     redirect(`/auth?${authParams.toString()}`);
+  }
+
+  // Spec: private-rooms/sdk-surface, "SDK private surface follows the E2E rooms app"
+  if (user && (await getAppEnabled(PRIVATE_ROOMS_APP_ID)) === false) {
+    return <PrivateRoomsNotAvailable />;
   }
 
   return <PrivateRoomsOptInSource>{children}</PrivateRoomsOptInSource>;

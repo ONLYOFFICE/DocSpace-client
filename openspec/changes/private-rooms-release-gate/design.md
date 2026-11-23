@@ -54,12 +54,18 @@ proposal.md.
    them, list every accepted limitation, and drop the beta-only known issues
    that the prerequisites closed.
 
-3. **The setting sits on top of the E2E rooms app, and an absent field means
-   on.** Standalone administrators keep the app they used during the beta. A
-   server without the field is one that predates the setting, and it ran the
-   beta with the section shown, so the client keeps showing it there.
-   - *Alternative:* an absent field means off.
-   - *Why not:* a client upgraded before its server would hide private rooms that users already rely on.
+3. **The setting is the E2E rooms app (decided by the owner on
+   2026-11-23).** The backend team offered the state of the app in place of
+   a new setting, and since `private-rooms-server-followups` 2.5 the server
+   closes private rooms by it on every installation. The client follows the
+   app on every portal (`private-rooms-server-followups` 3.6) and the SDK
+   private pages do the same (task 5.4), so no settings field, store getter
+   or settings mock is added. Until the state of the app is read the section
+   counts as available, as during the beta.
+   - *Alternative:* a setting of its own on top of the app, as this decision
+     read until 2026-11-23.
+   - *Why not:* two switches for one feature, and the server would have to
+     keep both in step.
 
 4. **The keys routes keep the guard of the beta.** It already renders the page
    while the section is available or the user holds a key; reading the

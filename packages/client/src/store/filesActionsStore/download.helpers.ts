@@ -39,6 +39,7 @@ import {
   getFolder,
 } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { isWrappedForReplacedKey } from "@docspace/shared/services/encryption/room-file-access";
 import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 import {
   loadRoomMemberKeysSafe,
@@ -362,6 +363,11 @@ self: FilesActionStore,file: TActionItem
       toastr.error(i18n.t("Common:EncryptedFileNoAccessYet"));
       return Promise.resolve();
     }
+    // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+    if (isWrappedForReplacedKey(encryptionInfo, String(userId))) {
+      toastr.error(i18n.t("Common:EncryptedFileKeyReplaced"));
+      return Promise.resolve();
+    }
 
     const identity = await requireUnlock(String(userId));
     if (!identity) {
@@ -578,7 +584,10 @@ const downloadDecryptedZipImpl = async (
         const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(
           (k) => String(k.userId) === String(userId),
         );
-        if (!hasOwnEntry) {
+        if (
+          !hasOwnEntry ||
+          isWrappedForReplacedKey(encryptionInfo, String(userId))
+        ) {
           failures.push(`${dir}${shownName}`);
           continue;
         }

@@ -7,7 +7,7 @@
 
 ## 2. Single-file operations
 
-- [ ] 2.1 Raise the message before the unlock in download and copy/move (`packages/client/src/store/filesActionsStore/download.helpers.ts`, `copyMove.helpers.ts`, `packages/shared/services/private-room/encrypted-copy.ts`), beside the existing no-access branch; in a batch the file goes to the existing report; verify with the unit tests of those helpers (single file: Common:EncryptedFileKeyReplaced and no `requireIdentity` call; two files: one copied, one named) via `pnpm test:store` and `cd packages/shared && pnpm exec vitest run services/private-room`
+- [x] 2.1 Raise the message before the unlock in download and copy/move (`packages/client/src/store/filesActionsStore/download.helpers.ts`, `copyMove.helpers.ts`, `packages/shared/services/private-room/encrypted-copy.ts`), beside the existing no-access branch; in a batch the file goes to the existing report; verify with the unit tests of those helpers (single file: Common:EncryptedFileKeyReplaced and no `requireIdentity` call; two files: one copied, one named) via `pnpm test:store` and `cd packages/shared && pnpm exec vitest run services/private-room`
 - [ ] 2.2 Show the message in the media viewer before the content is fetched (`packages/shared/components/media-viewer/MediaViewer.tsx`); verify with a MediaViewer unit test: message shown, no fetch of the file, message gone on the next file
 
 ## 3. Editor

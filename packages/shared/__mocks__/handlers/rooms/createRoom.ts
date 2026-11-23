@@ -86,10 +86,11 @@ export type CreateRoomHandlerOptions = {
 const AI_HUB_ROOM_TYPES = [10, 11, 12];
 
 /**
- * The room types the server creates with a primary external link: RoomType
- * .FillingFormsRoom (1) and .PublicRoom (6) of CreateRoomRequestDto.cs.
+ * The room types that cannot be private because they are reached without
+ * an encryption key: RoomType.FillingFormsRoom (1), .PublicRoom (6) and
+ * .AiRoom (9) of CreateRoomRequestDto.cs.
  */
-const LINKED_ROOM_TYPES = [1, 6];
+const KEYLESS_ROOM_TYPES = [1, 6, 9];
 
 const okResponse = <T>(response: T, status = 200): Response =>
   new Response(
@@ -155,18 +156,17 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
    * Mirrors VirtualRoomsController.CreateRoom -> FileStorageService
    * .CreateRoomAsync -> InternalCreateFolderAsync, in the server's order.
    * CreateRoomAsync refuses the private flag on an AI hub room type with an
-   * ArgumentException, 400 "Bad request.". InternalCreateFolderAsync then
+   * ArgumentException, 400 "Bad request.". InternalCreateFolderAsync
+   * refuses it on a public room, a form-filling room and an AI agent the
+   * same way, with a message of its own, before anything is saved, and then
    * runs DemandPrivateRoomCanBeCreatedAsync: the creator without a key
    * record, or with an empty key list (ThrowIfKeysAreNotSetAsync, since
    * cc60512acd), is refused with an InvalidOperationException, and so is
-   * a Document Server that cannot encrypt (since b562fc3fb1); the
-   * CustomExceptionHandler answers both with 403, the message and the
-   * exception type. Last, since bd89a24dcd, a private room refuses with
+   * a Document Server that cannot encrypt (since b562fc3fb1); both are
+   * answered with 403, the message and the exception type. Last, since bd89a24dcd, a private room refuses with
    * 400 "Bad request." indexing, or a lifetime or watermark whose
    * `enabled` is not false, an object without the flag counting as
-   * enabled. The mock answers 403 "Access denied" for a public or
-   * form-filling room created as private, as the server does. The order
-   * of the steps below mirrors the server and is held by the contract
+   * enabled. The order of the steps below mirrors the server and is held by the contract
    * test; do not reorder them.
    */
   const create = http.post(url, async ({ request }) => {
@@ -177,11 +177,19 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
       return errorResponse(400, "Bad request.");
     }
 
+    if (body.private && KEYLESS_ROOM_TYPES.includes(Number(body.roomType))) {
+      return errorResponse(
+        400,
+        "A Public room, a Form filling room or an AI agent cannot be private: each of them is reached without an encryption key",
+        "System.ArgumentException",
+      );
+    }
+
     if (body.private && opts.callerHasKeys === false) {
       return errorResponse(
         403,
         "The user does not have an encryption key",
-        "System.InvalidOperationException",
+        "ASC.Web.Studio.Core.EncryptionKeyNotSetException",
       );
     }
 
@@ -207,10 +215,6 @@ const buildHandlers = (port: string, opts: CreateRoomHandlerOptions) => {
       createdAt: new Date().toISOString(),
     };
     state.push(record);
-
-    if (record.private && LINKED_ROOM_TYPES.includes(Number(body.roomType))) {
-      return errorResponse(403, "Access denied");
-    }
 
     return okResponse(buildRoomResponse(record));
   });

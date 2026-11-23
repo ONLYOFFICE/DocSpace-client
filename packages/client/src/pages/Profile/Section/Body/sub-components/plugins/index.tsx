@@ -38,9 +38,14 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import { useStore } from "SRC_DIR/store/useStore";
-import { getPersonalPluginRows } from "SRC_DIR/helpers/plugins/personal";
+import {
+  getLocalizedText,
+  getPersonalPluginRows,
+} from "SRC_DIR/helpers/plugins/personal";
 import Dropzone from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/Dropzone";
 import PluginItem from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem";
 import PluginCacheWarningDialog from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginCacheWarningDialog";
@@ -62,9 +67,12 @@ const PersonalPlugins = () => {
     setCurrentSettingsDialogPlugin,
     setDeletePluginDialogVisible,
     setDeletePluginDialogProps,
+    checkPluginCompatibility,
   } = useStore("pluginStore");
 
-  const { pluginOptions, theme } = useStore("settingsStore");
+  const { pluginOptions, theme, culture } = useStore("settingsStore");
+
+  const language = (getCookie(LANGUAGE) || culture) as string;
 
   const addPersonalPlugin = useCallback(
     (data: FormData) => addPlugin(data, true),
@@ -127,10 +135,14 @@ const PersonalPlugins = () => {
             <PluginItem
               key={`plugin-${own.name}-${own.version}`}
               name={own.name}
-              nameLocale={own.name}
+              nameLocale={getLocalizedText(own.nameLocale, language, own.name)}
               version={own.version}
-              compatible
-              descriptionLocale={own.description}
+              compatible={checkPluginCompatibility(own.minDocSpaceVersion)}
+              descriptionLocale={getLocalizedText(
+                own.descriptionLocale,
+                language,
+                own.description,
+              )}
               enabled={own.enabled}
               image={own.image}
               url={own.url}

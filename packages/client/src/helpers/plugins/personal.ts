@@ -51,6 +51,12 @@ const isSameName = (a: string, b: string) =>
 export const clashesWith = (plugin: TPluginIdentity, other: TPluginIdentity) =>
   isSameName(plugin.name, other.name) || plugin.pluginName === other.pluginName;
 
+export const getLocalizedText = (
+  map: { [key: string]: string } | undefined,
+  language: string,
+  fallback: string,
+) => map?.[language] || fallback;
+
 export const getPersonalPluginRows = <TLoaded extends TPluginIdentity>(
   own: TAPIPlugin[],
   loaded: TLoaded[],

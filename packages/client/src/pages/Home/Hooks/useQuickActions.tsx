@@ -133,13 +133,11 @@ export type UseQuickActionsProps = SectionFlags & {
   // Whether the OForms template gallery is reachable (settingsStore). The
   // FormRoom "from template" tile is only offered when it is.
   templateGalleryAvailable?: boolean;
-  // OformsStore actions used to open the template gallery scoped to the current
-  // folder (mirrors MainButton.onShowTemplateGallery).
-  setTemplateGalleryVisible?: (visible: boolean) => void;
-  setOformFromFolderId?: (id: number | string | null) => void;
-  // Makes the gallery create a form space out of the picked template instead of
-  // a file — used by the Forms root tile, which has no folder to create in.
-  setCreateRoomFromTemplate?: (value: boolean) => void;
+  // ContextOptionsStore.onShowTemplateGallery: opens the template gallery
+  // scoped to the current folder, the same action MainButton and the header
+  // menu use. `true` makes the picked template create a form space instead of
+  // a file; at the Forms root the store forces it anyway.
+  onShowTemplateGallery?: (createRoomFromTemplate?: boolean) => void;
   // Opens the create-room dialog on the Private type (ContextOptionsStore
   // .onCreateRoom on the Private list).
 };
@@ -163,9 +161,7 @@ export const useQuickActions = (
     canCreateEncrypted,
     canCreateRooms,
     templateGalleryAvailable,
-    setTemplateGalleryVisible,
-    setOformFromFolderId,
-    setCreateRoomFromTemplate,
+    onShowTemplateGallery,
     ...sectionFlags
   } = props;
 
@@ -311,11 +307,7 @@ export const useQuickActions = (
         dataTestId: "quick-form-gallery",
         icon: <CreateFromTemplateIcon />,
         label: t("Common:TemplateGallery"),
-        onClick: () => {
-          setCreateRoomFromTemplate?.(true);
-          setTemplateGalleryVisible?.(true);
-          setOformFromFolderId?.(currentFolderId);
-        },
+        onClick: () => onShowTemplateGallery?.(true),
       });
     }
 
@@ -328,9 +320,7 @@ export const useQuickActions = (
     aiChatItems,
     isAiChatAvailable,
     templateGalleryAvailable,
-    setCreateRoomFromTemplate,
-    setTemplateGalleryVisible,
-    setOformFromFolderId,
+    onShowTemplateGallery,
   ]);
 
   // Inside a Form Filling room only PDF forms can be created. A blank PDF form
@@ -355,10 +345,7 @@ export const useQuickActions = (
         dataTestId: "quick-form-template",
         icon: <CreateFromTemplateIcon />,
         label: t("Common:TemplateGallery"),
-        onClick: () => {
-          setTemplateGalleryVisible?.(true);
-          setOformFromFolderId?.(currentFolderId);
-        },
+        onClick: () => onShowTemplateGallery?.(),
       });
     }
 
@@ -369,8 +356,7 @@ export const useQuickActions = (
     t,
     currentFolderId,
     templateGalleryAvailable,
-    setTemplateGalleryVisible,
-    setOformFromFolderId,
+    onShowTemplateGallery,
     aiChatItems,
     isAiChatAvailable,
   ]);

@@ -44,7 +44,7 @@ vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/availability", () => ({
   useIsAiChatAvailable: () => true,
 }));
 
-import { useQuickActions } from "../useQuickActions";
+import { type QuickActionsResult, useQuickActions } from "../useQuickActions";
 
 describe("useQuickActions — Private section", () => {
   const privateList = { currentFolderId: 2002, isRoomsFolder: true };
@@ -101,5 +101,49 @@ describe("useQuickActions — Private section", () => {
     expect(ids).toContain("quick-custom-room");
     expect(ids).toContain("quick-ai-chat");
     expect(ids).not.toContain("quick-private-room");
+  });
+});
+
+describe("useQuickActions — template gallery tiles", () => {
+  const clickTile = (items: QuickActionsResult["items"], dataTestId: string) =>
+    items
+      .find((item) => item.dataTestId === dataTestId)
+      ?.onClick?.({} as React.MouseEvent<HTMLElement>);
+
+  it("Forms root: the gallery tile opens it through the store action, creating a form space", () => {
+    const onShowTemplateGallery = vi.fn();
+    const { result } = renderHook(() =>
+      useQuickActions({
+        currentFolderId: 36,
+        isFormsSection: true,
+        canCreateRooms: true,
+        templateGalleryAvailable: true,
+        onShowTemplateGallery,
+      }),
+    );
+
+    clickTile(result.current.items, "quick-form-gallery");
+
+    expect(onShowTemplateGallery).toHaveBeenCalledTimes(1);
+    expect(onShowTemplateGallery).toHaveBeenCalledWith(true);
+  });
+
+  it("form filling room: the gallery tile opens it through the store action, creating a file", () => {
+    const onShowTemplateGallery = vi.fn();
+    const { result } = renderHook(() =>
+      useQuickActions({
+        currentFolderId: 70,
+        isRoom: true,
+        isFormRoom: true,
+        canCreateFiles: true,
+        templateGalleryAvailable: true,
+        onShowTemplateGallery,
+      }),
+    );
+
+    clickTile(result.current.items, "quick-form-template");
+
+    expect(onShowTemplateGallery).toHaveBeenCalledTimes(1);
+    expect(onShowTemplateGallery).toHaveBeenCalledWith();
   });
 });

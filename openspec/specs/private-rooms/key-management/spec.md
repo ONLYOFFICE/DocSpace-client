@@ -294,11 +294,15 @@ The system SHALL show, once per browser session, an info toast (Common:Encryptio
 - **THEN** no hint is shown until the list has loaded and holds no key for this device
 
 ### Requirement: Ghost-state notification
-The system SHALL show, once per session, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because the user's key cannot unwrap the file.
+The system SHALL show, once per session, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because the user's key cannot unwrap the file. It SHALL NOT show that toast for a file whose access entry names a key the user no longer holds.
 
 #### Scenario: Unreadable file
 - **WHEN** an encrypted operation finds no usable wrap for the current user
 - **THEN** the ghost-state toast appears once, later failures in the session stay silent
+
+#### Scenario: File wrapped for a previous key
+- **WHEN** filename recovery, a download or a copy meets a file whose access entry names a key that is not in the user's key list
+- **THEN** the ghost-state toast is not shown and the session's one toast is not used up
 
 ### Requirement: Key-change dialog
 The system SHALL show a dialog when a peer's public key differs from its pin, naming the peer by display name, stating how long the previous key was active, listing possible causes and an out-of-band verification tip, with accept and refuse actions. Concurrent mismatches SHALL wait for the open dialog and be shown one after another; requests for the same user and key SHALL share the user's one decision. The system SHALL NOT answer a request on the user's behalf.

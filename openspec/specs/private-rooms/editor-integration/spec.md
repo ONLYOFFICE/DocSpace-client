@@ -130,6 +130,10 @@ For an encrypted file, the editor SHALL NOT mount the document editor component 
 - **WHEN** the key flow ends in the no-access state
 - **THEN** the page shows Common:EncryptedFileNoAccessYet, no button and no editor component
 
+#### Scenario: Wrapped for a key the user no longer holds
+- **WHEN** the user's access entry of the file names a key that is not in the user's key list
+- **THEN** the key flow ends before the unlock dialog is raised, and the page shows Common:EncryptedFileKeyReplaced, no button and no editor component
+
 #### Scenario: No key
 - **WHEN** the key flow ends in the no-key state
 - **THEN** the page shows Common:EncryptionKeysNotConfigured, no button and no editor component

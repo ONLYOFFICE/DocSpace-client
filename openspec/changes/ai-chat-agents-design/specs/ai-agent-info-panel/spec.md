@@ -31,7 +31,11 @@ For the Agent owner and Agent managers who are members of the agent, the Info pa
 - **THEN** there is no Members tab
 
 ### Requirement: Context tab
-Context SHALL list what the agent draws on in two sections: Skill sets (`Common:SkillSets`) and Knowledge bases. Each section SHALL be headed as the same list is in the composer's slash menu: its caption and a line saying what the assistant does with it (`Common:SkillSetsHint`, `Common:KnowledgeBasesHint`), followed by the linked rooms the caller can read. A section with no rooms SHALL show the caption and that line only, with no dash. The name of a skill set or a knowledge base SHALL open that room.
+Context SHALL list what the agent draws on in two sections: Skill sets (`Common:SkillSets`) and Knowledge bases. Each section SHALL show its caption, a line saying what the assistant does with it, as the composer's slash menu heads the same list, and the linked rooms the caller can read. The name of a skill set or a knowledge base SHALL open that room.
+
+#### Scenario: Section with no rooms
+- **WHEN** a Member opens Context for an agent with no knowledge bases
+- **THEN** Knowledge bases shows its caption and the line `Common:KnowledgeBasesHint` only, with no dash
 
 #### Scenario: Agent with sources
 - **WHEN** a Member opens Context for an agent with one skill set and two knowledge bases

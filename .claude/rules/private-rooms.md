@@ -80,8 +80,10 @@ Workflow:
    summary>`, e.g. `Client: Private rooms: refuse key-less uploads before the
    upload session`, or `OpenSpec: <change>: <summary>` for artifact-only
    commits; body in plain prose, ending with `OpenSpec: <change> <task id>`.
-   Commit directly on `release/v4.1.0` (the feature branch was merged there
-   by PR !798). No AI-attribution lines (CLAUDE.md), no `--no-verify`, no
+   Commit on the branch the work is done on: `release/v4.1.0` (the feature
+   branch was merged there by PR !798), or a feature branch made from it
+   that pairs with a branch of the same name in `../server`, such as
+   `feature/private-rooms-external-links`. No AI-attribution lines (CLAUDE.md), no `--no-verify`, no
    push unless asked. Full wording: the "Commits" paragraph of
    `openspec/config.yaml`.
 8. Private rooms are a beta offered to every user, with Beta badges on the

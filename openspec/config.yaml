@@ -99,9 +99,12 @@ context: |
   uploads before the upload session`; then a blank line and a plain-prose
   body wrapped at 72 columns saying what changed and why, ending with the
   line `OpenSpec: <change> <task id>` when it implements a task. No
-  Co-Authored-By or other AI-attribution lines (CLAUDE.md). Commit directly
-  on `release/v4.1.0`, where the feature branch was merged on 2026-11-03
-  (PR !798), never on master or develop; never push unless the user asks,
+  Co-Authored-By or other AI-attribution lines (CLAUDE.md). Commit on
+  the branch the work is done on: `release/v4.1.0`, where the feature
+  branch was merged on 2026-11-03 (PR !798), or a feature branch made from
+  it that pairs with a branch of the same name in `../server` (since
+  2026-11-23 `feature/private-rooms-external-links`); never on master or
+  develop; never push unless the user asks,
   and never bypass hooks with --no-verify.
 
   Design history: the original design documents (SECURITY.md, FORMAT.md,

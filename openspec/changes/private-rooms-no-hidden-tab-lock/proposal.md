@@ -38,6 +38,9 @@ Decisions that need a human:
 1. Whether Common:AutoLockHint is removed (proposed) or reworded to describe
    the idle timeout. A reworded hint has to be translated into every language.
 
+Decided by the owner on 2026-11-23: decision 1 as proposed, the hint is
+removed.
+
 Depends on: nothing in `../server` or the Document Server.
 
 ## Capabilities

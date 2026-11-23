@@ -15,4 +15,4 @@
 
 ## Workflow follow-up
 
-- Archive the change after the owner confirms proposal decision 1.
+- Archive the change after the integration check.

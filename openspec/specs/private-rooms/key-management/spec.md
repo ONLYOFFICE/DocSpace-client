@@ -159,7 +159,7 @@ The system SHALL offer a passkey toggle (Common:PasskeyUnlockLabel) when the pla
 - **THEN** the passkey record is deleted and Common:PasskeyDisabled is shown
 
 ### Requirement: Auto-lock timeout presets
-The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (30 by default) and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, touch, a scroll of the page or of a list in it); with the 5 or 15 minute preset it SHALL also lock once the tab is hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
+The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (30 by default) and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, touch, a scroll of the page or of a list in it). It SHALL NOT lock because the tab is hidden, with any preset. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
 
 #### Scenario: Idle lock
 - **WHEN** the preset is 5 minutes and the user is inactive for 5 minutes
@@ -167,11 +167,19 @@ The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (
 
 #### Scenario: Tab hidden
 - **WHEN** the preset is 5 or 15 minutes and the tab is hidden
-- **THEN** the identity locks immediately
+- **THEN** the identity stays unlocked, and the page shows Common:KeyUnlocked when the user returns to it within the idle time
 
 #### Scenario: Tab hidden with the default preset
 - **WHEN** the preset is 30 minutes and the tab is hidden
 - **THEN** the identity stays unlocked
+
+#### Scenario: Document opened in another tab
+- **WHEN** the preset is 5 minutes and the user opens a document of a private room, which opens the editor in a new tab, and returns to the file list within 5 minutes
+- **THEN** the file list shows Common:KeyUnlocked and no locked-key block
+
+#### Scenario: Idle time runs while the tab is hidden
+- **WHEN** the preset is 5 minutes and the tab stays hidden for more than 5 minutes without activity in it
+- **THEN** the identity of that tab is locked by the idle timeout
 
 #### Scenario: Preset off
 - **WHEN** the value stored by an earlier version is off or 60 minutes
@@ -182,7 +190,7 @@ The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (
 - **THEN** it offers Common:AutoLock5m, Common:AutoLock15m and Common:AutoLock30m, and nothing else
 
 #### Scenario: Auto-lock on a remembered device
-- **WHEN** the device is remembered and the idle timeout or a hidden tab locks the identity
+- **WHEN** the device is remembered and the idle timeout locks the identity
 - **THEN** the next encrypted operation restores the key from the device record without a prompt, and Keys management still shows the device as remembered
 
 #### Scenario: Scrolling a list counts as activity
@@ -758,7 +766,7 @@ The system SHALL offer Common:ForgetDeviceButton only while the identity is lock
 - **THEN** Common:DeviceUnlockRememberedUntil and Common:LockNow are shown, and Common:ForgetDeviceButton is not
 
 #### Scenario: Remembered device, identity locked
-- **WHEN** the identity of a remembered device is locked by the idle timeout or a hidden tab and the user opens Keys management
+- **WHEN** the identity of a remembered device is locked by the idle timeout and the user opens Keys management
 - **THEN** Common:DeviceUnlockRememberedUntil and Common:ForgetDeviceButton are shown, and Common:LockNow is not
 
 #### Scenario: Lock now on a remembered device
@@ -766,7 +774,7 @@ The system SHALL offer Common:ForgetDeviceButton only while the identity is lock
 - **THEN** the identity is locked, the remembered record is removed, and the next encrypted operation MUST NOT run without the passphrase or a passkey
 
 ### Requirement: A newly picked auto-lock preset applies at once
-The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it, in the page where it is picked and in every other open page of the same user in this browser: the idle time SHALL be counted from that moment with the new length, and the hidden-tab rule of the new preset SHALL hold from that moment, without a lock and a new unlock in between.
+The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it, in the page where it is picked and in every other open page of the same user in this browser: the idle time SHALL be counted from that moment with the new length, without a lock and a new unlock in between.
 
 #### Scenario: Shorter preset picked while unlocked
 - **WHEN** the identity was unlocked with the 30-minute preset and the user picks 5 minutes
@@ -774,11 +782,11 @@ The system SHALL apply an auto-lock preset to the unlocked identity as soon as t
 
 #### Scenario: Longer preset picked while unlocked
 - **WHEN** the identity was unlocked with the 5-minute preset and the user picks 30 minutes
-- **THEN** the identity stays unlocked through 5 minutes of inactivity and when the tab is hidden
+- **THEN** the identity stays unlocked through 5 minutes of inactivity
 
 #### Scenario: Preset picked in another tab
 - **WHEN** two tabs hold the key unlocked with the 30-minute preset and the user picks 5 minutes in one of them
-- **THEN** the other tab shows 5 minutes, locks after 5 minutes of inactivity counted from the pick, and locks when it is hidden
+- **THEN** the other tab shows 5 minutes, locks after 5 minutes of inactivity counted from the pick
 
 ### Requirement: The unlock dialog on entry is raised once per private room
 The system SHALL raise the unlock dialog by itself once per private room that a user with a locked key enters, and SHALL NOT raise it again when the user moves between the folders of that room: after the first answer the locked-key block is the way to unlock. Entering another private room SHALL raise the dialog again.
@@ -1270,7 +1278,7 @@ The system SHALL remove from this device the remembered record and the passkey r
 - **THEN** the record is removed, and Keys management shows no Common:DeviceUnlockRememberedUntil line
 
 ### Requirement: A lock reaches every tab of the user
-The system SHALL lock the identity in every open page of the same user in this browser, files, editor and SDK pages alike, within a second and without a reload, when Common:LockNow, Common:ForgetDeviceButton, a key deletion, a reset, a passphrase change or a logout happens in one of them. A lock by idle time, by a hidden tab or by the in-memory expiry SHALL stay with its page. An unlock SHALL NOT be shared.
+The system SHALL lock the identity in every open page of the same user in this browser, files, editor and SDK pages alike, within a second and without a reload, when Common:LockNow, Common:ForgetDeviceButton, a key deletion, a reset, a passphrase change or a logout happens in one of them. A lock by idle time or by the in-memory expiry SHALL stay with its page. An unlock SHALL NOT be shared.
 
 #### Scenario: Lock now in another tab
 - **WHEN** two tabs show a private room with the key unlocked and the user presses Common:LockNow in one of them
@@ -1306,7 +1314,7 @@ The system SHALL lock the identity in every open page of the same user in this b
 
 #### Scenario: Hidden-tab lock stays in its tab
 - **WHEN** the preset is 5 minutes and the user switches from one tab with the key unlocked to another
-- **THEN** the hidden tab locks and the tab the user switched to stays unlocked
+- **THEN** neither tab locks: the hidden tab keeps the key until its idle time passes
 
 #### Scenario: Unlock not shared
 - **WHEN** the user unlocks the key in one tab while another tab is locked

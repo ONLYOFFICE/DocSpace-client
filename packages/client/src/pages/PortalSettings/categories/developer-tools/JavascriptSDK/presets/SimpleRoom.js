@@ -252,7 +252,10 @@ const SimpleRoom = (props) => {
 
     newConfig.requestToken = links[0]?.sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
-    newConfig.mode = version === sdkVersion[220] ? "public-room" : "manager";
+    const hasPublicRoomMode = Object.keys(sdkVersion).some(
+      (key) => Number(key) >= 220 && sdkVersion[key] === version,
+    );
+    newConfig.mode = hasPublicRoomMode ? "public-room" : "manager";
 
     setConfig((oldConfig) => {
       return { ...oldConfig, ...newConfig, init: true };

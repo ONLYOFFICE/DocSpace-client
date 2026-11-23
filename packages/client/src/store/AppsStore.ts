@@ -196,7 +196,7 @@ class AppsStore {
 
   // Apps can be switched off only on a standalone installation. In SaaS every
   // app is on and stays on: the switch is not offered and the server's enabled
-  // flags are not consulted.
+  // flags are not consulted, but for the E2E rooms app (see isInstalled).
   get canManageApps() {
     return this.settingsStore.standalone;
   }
@@ -208,17 +208,17 @@ class AppsStore {
   // unless the list failed to load (`isLoadFailed`).
   isInstalled = (id: string): boolean => {
     if (isAppTemporarilyDisabled(id)) return false;
-    if (!this.canManageApps || !this.isLoaded) return true;
+    if (!this.isLoaded) return true;
+    // The server closes private rooms by the state of their app on every
+    // installation, so that one app is read outside standalone too.
+    if (!this.canManageApps && id !== PRIVATE_ROOMS_APP_ID) return true;
     return this.isEnabled(id);
   };
 
   // Spec: private-rooms/sidebar-section, "Section availability follows the E2E rooms app"
   get isPrivateRoomsSectionAvailable() {
     if (this.isSdkFrame && !this.framePrivateRoomsOptIn) return false;
-    if (!this.canManageApps || !this.isLoaded) return true;
-    return (
-      this.apps.find((a) => a.id === PRIVATE_ROOMS_APP_ID)?.enabled ?? false
-    );
+    return this.isInstalled(PRIVATE_ROOMS_APP_ID);
   }
 
   // The app is switched off on a portal that can switch apps. The dashboard

@@ -96,6 +96,47 @@ export const setAppEnabledHandler = (port: string) =>
     return jsonResponse({ id: params.id, enabled: !!body?.enabled });
   });
 
+const refusal = (statusCode: number, message: string) =>
+  new Response(JSON.stringify({ error: { message }, status: 1, statusCode }), {
+    status: statusCode,
+  });
+
+/**
+ * A private room while the E2E rooms app is off, as PrivateRoomsGate closes
+ * it; put these before the handlers of the room. ThrowIfHiddenAsync answers
+ * 404 for the section, the room, a folder or a file of it and its opening in
+ * the editors; FileSecurity grants nothing there, so the members, the links
+ * and the keys of the room answer 403; DemandEnabledAsync answers 403 to a
+ * private room creation. The caller's own keys (`privacyroom/keys`) are not
+ * behind the app and are left to their handler.
+ */
+export const privateRoomsAppOffHandlers = (
+  port: string,
+  { roomId, fileIds = [] }: { roomId: number; fileIds?: number[] },
+) => {
+  const notFound = (what: "folder" | "file") => () =>
+    refusal(404, `The required ${what} was not found`);
+  const denied = () => refusal(403, "Access denied");
+
+  return [
+    http.get(apiUrl(port, "files/@private"), notFound("folder")),
+    http.get(apiUrl(port, `files/${roomId}`), notFound("folder")),
+    http.get(apiUrl(port, `files/folder/${roomId}`), notFound("folder")),
+    ...fileIds.flatMap((id) => [
+      http.get(apiUrl(port, `files/file/${id}`), notFound("file")),
+      http.get(apiUrl(port, `files/file/${id}/openedit`), notFound("file")),
+    ]),
+    http.get(apiUrl(port, `files/rooms/${roomId}/share`), denied),
+    http.get(apiUrl(port, `files/rooms/${roomId}/links`), denied),
+    http.get(apiUrl(port, `privacyroom/${roomId}/access`), denied),
+    http.post(apiUrl(port, "files/rooms"), async ({ request }) => {
+      const body = (await request.clone().json()) as { private?: boolean };
+      if (!body.private) return undefined;
+      return refusal(403, "Private rooms are turned off on this portal");
+    }),
+  ];
+};
+
 export const appsHandlers = (port: string) => [
   appsHandler(port),
   setAppEnabledHandler(port),

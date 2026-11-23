@@ -45,7 +45,6 @@ type KeysManagementRouteProps = {
   isAppsLoaded: boolean;
   isAppsLoadFailed: boolean;
   ensureAppsLoaded: () => void;
-  canManageApps: boolean;
   /** The user's keys; null until they are read, and after a failed read. */
   encryptionKeys: readonly unknown[] | null;
   getEncryptionKeys: () => Promise<unknown>;
@@ -66,7 +65,6 @@ const KeysManagementRoute = ({
   isAppsLoaded,
   isAppsLoadFailed,
   ensureAppsLoaded,
-  canManageApps,
   encryptionKeys,
   getEncryptionKeys,
   isGuest,
@@ -81,8 +79,7 @@ const KeysManagementRoute = ({
 
   // Available is optimistic until the apps list arrives, as in PrivateRoomsSectionRoute.
   const isAppsPending =
-    !isFrameOptInSettled ||
-    (canManageApps && !isAppsLoaded && !isAppsLoadFailed);
+    !isFrameOptInSettled || (!isAppsLoaded && !isAppsLoadFailed);
 
   // The keys read at start-up may still be running, or may have failed.
   const mustReadKeys =
@@ -126,7 +123,6 @@ export default inject<TStore>(({ appsStore, userStore }) => ({
   isAppsLoaded: appsStore.isLoaded,
   isAppsLoadFailed: appsStore.isLoadFailed,
   ensureAppsLoaded: appsStore.ensureLoaded,
-  canManageApps: appsStore.canManageApps,
   encryptionKeys: userStore.encryptionKeys,
   getEncryptionKeys: userStore.getEncryptionKeys,
   isGuest: userStore.user?.isVisitor,

@@ -62,7 +62,6 @@ const renderRoute = (props: Partial<Props> = {}) =>
       isAppsLoaded
       isAppsLoadFailed={false}
       ensureAppsLoaded={vi.fn()}
-      canManageApps
       encryptionKeys={[]}
       getEncryptionKeys={vi.fn(async () => [])}
       {...(props as object)}
@@ -154,7 +153,6 @@ describe("KeysManagementRoute", () => {
         isAppsLoaded
         isAppsLoadFailed={false}
         ensureAppsLoaded={vi.fn()}
-        canManageApps
         encryptionKeys={[KEY]}
         getEncryptionKeys={getEncryptionKeys}
       >
@@ -180,7 +178,7 @@ describe("KeysManagementRoute", () => {
     expectProfileFallback();
   });
 
-  it("waits for the apps list on standalone", () => {
+  it("waits for the apps list", () => {
     const getEncryptionKeys = vi.fn(async () => []);
     renderRoute({
       isAppsLoaded: false,
@@ -237,7 +235,6 @@ describe("KeysManagementRoute on the other profile tabs", () => {
         isAppsLoaded
         isAppsLoadFailed={false}
         ensureAppsLoaded={vi.fn()}
-        canManageApps
         encryptionKeys={[KEY]}
         getEncryptionKeys={vi.fn(async () => [])}
         guarded={guarded}

@@ -40,6 +40,7 @@ import {
   encryptedFilesHandlers,
   filesSettingsHandler,
   privateRoomListHandler,
+  privateRoomsAppOffHandlers,
   privacyroomKeysHandlers,
   roomListHandler,
   rootHandler,
@@ -216,12 +217,13 @@ test.describe("Private rooms with the E2E rooms app off", () => {
     await expect(navItem(page, "private-rooms")).toHaveCount(0);
   });
 
-  test("Link opened while the section is not available", async ({
+  test("App off, private room requested by id", async ({
     page,
     mockRequest,
     baseUrl,
   }) => {
     mockRequest.use(
+      ...privateRoomsAppOffHandlers(TEST_PORT, { roomId: ROOM_ID }),
       ...encryptedFilesHandlers(TEST_PORT, {
         roomId: ROOM_ID,
         title: "Shared Private Room",
@@ -231,17 +233,24 @@ test.describe("Private rooms with the E2E rooms app off", () => {
       }),
     );
 
+    const refused = page.waitForResponse(
+      (response) =>
+        new URL(response.url()).pathname.endsWith(`/files/${ROOM_ID}`) &&
+        response.status() === 404,
+      { timeout: 15000 },
+    );
+
     await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
 
     await expect(page).toHaveURL(
       `${baseUrl}/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`,
       { timeout: 15000 },
     );
-    await expect(
-      page
-        .locator('[data-testid^="table-row-"]')
-        .filter({ hasText: FILE_TITLE.replace(/\.txt$/, "") }),
-    ).toBeVisible({ timeout: 15000 });
+    await refused;
+    await expect(page.locator('[data-testid^="table-row-"]')).toHaveCount(0);
+    await expect(page.getByText(FILE_TITLE.replace(/\.txt$/, ""))).toHaveCount(
+      0,
+    );
   });
 
   test("Chooser with the app off", async ({ page, mockRequest, baseUrl }) => {

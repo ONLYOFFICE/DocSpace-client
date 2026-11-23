@@ -45,7 +45,6 @@ type PrivateRoomsSectionRouteProps = {
   isAppsLoaded: boolean;
   isAppsLoadFailed: boolean;
   ensureAppsLoaded: () => void;
-  canManageApps: boolean;
   children: React.ReactNode;
 };
 
@@ -56,7 +55,6 @@ const PrivateRoomsSectionRoute = ({
   isAppsLoaded,
   isAppsLoadFailed,
   ensureAppsLoaded,
-  canManageApps,
   children,
 }: PrivateRoomsSectionRouteProps) => {
   const location = useLocation();
@@ -77,7 +75,7 @@ const PrivateRoomsSectionRoute = ({
     );
 
   // Available is optimistic until the apps list arrives, as in ProtectedAppRoute.
-  if (canManageApps && !isAppsLoaded && !isAppsLoadFailed) return null;
+  if (!isAppsLoaded && !isAppsLoadFailed) return null;
 
   return children;
 };
@@ -88,5 +86,4 @@ export default inject<TStore>(({ appsStore }) => ({
   isAppsLoaded: appsStore.isLoaded,
   isAppsLoadFailed: appsStore.isLoadFailed,
   ensureAppsLoaded: appsStore.ensureLoaded,
-  canManageApps: appsStore.canManageApps,
 }))(observer(PrivateRoomsSectionRoute));

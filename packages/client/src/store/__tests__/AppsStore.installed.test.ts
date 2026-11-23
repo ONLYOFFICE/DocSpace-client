@@ -257,11 +257,32 @@ describe("AppsStore.isPrivateRoomsSectionAvailable in an SDK frame", () => {
 });
 
 describe("AppsStore.isPrivateRoomsSectionAvailable", () => {
-  it("SaaS portal", async () => {
-    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: false }]);
+  it("Portal that is not standalone with the app on", async () => {
+    getApps.mockResolvedValue([{ id: "e2e-rooms", enabled: true }]);
     const store = createStore(false);
 
     await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(true);
+  });
+
+  it("App off on a portal that is not standalone", async () => {
+    getApps.mockResolvedValue([
+      { id: "e2e-rooms", enabled: false },
+      { id: "ai-rooms", enabled: false },
+    ]);
+    const store = createStore(false);
+
+    await store.fetchApps();
+
+    expect(store.isPrivateRoomsSectionAvailable).toBe(false);
+    expect(store.isInstalled("e2e-rooms")).toBe(false);
+    expect(store.isInstalled("ai-rooms")).toBe(true);
+    expect(store.isPrivateRoomsAppSwitchedOff).toBe(false);
+  });
+
+  it("is optimistic on a portal that is not standalone until the list arrives", () => {
+    const store = createStore(false);
 
     expect(store.isPrivateRoomsSectionAvailable).toBe(true);
   });

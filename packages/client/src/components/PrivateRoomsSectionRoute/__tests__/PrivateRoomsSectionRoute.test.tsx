@@ -70,7 +70,6 @@ const renderRoute = (props: Partial<Props> = {}) =>
       isAppsLoaded
       isAppsLoadFailed={false}
       ensureAppsLoaded={vi.fn()}
-      canManageApps
       {...(props as object)}
     >
       <div data-testid="section" />
@@ -98,7 +97,7 @@ describe("PrivateRoomsSectionRoute", () => {
     );
   });
 
-  it("waits for the apps list on standalone", () => {
+  it("waits for the apps list", () => {
     renderRoute({ isAppsLoaded: false });
 
     expect(screen.queryByTestId("section")).toBeNull();

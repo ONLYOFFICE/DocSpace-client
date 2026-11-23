@@ -139,6 +139,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       <Link
         className={styles.manage}
         type={LinkType.action}
+        color="accent"
         isHovered
         fontSize="13px"
         fontWeight={600}

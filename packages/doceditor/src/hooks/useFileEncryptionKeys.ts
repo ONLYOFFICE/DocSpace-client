@@ -54,10 +54,12 @@ import {
 } from "@docspace/shared/services/encryption/streaming-encryption";
 import { loadFileSenderKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 
 import {
   useEncryptionKeysLoad,
   useEncryptionKeysReady,
+  useLoadedEncryptionKeys,
 } from "@/components/EncryptionProviderWrapper";
 import type { IInitialConfig } from "@/types";
 
@@ -182,6 +184,7 @@ const useFileEncryptionKeys = (
   const hasEncryptionContext = !!encryption;
   const hasConfiguredKey = !!encryption?.hasConfiguredKey;
   const keysReady = useEncryptionKeysReady();
+  const loadedKeys = useLoadedEncryptionKeys();
   const { failed: keysLoadFailed, reload: reloadKeys } =
     useEncryptionKeysLoad();
 
@@ -279,18 +282,15 @@ const useFileEncryptionKeys = (
         await recoverFilenameWithDek(numericFileId, fileViewUrl, dek);
         if (cancelled) return;
 
-        const serverKeyPairs = config?.editorConfig?.encryptionKeys;
-        const serverCryptoEngineId = (
-          serverKeyPairs?.find((k) => String(k.userId) === currentUserId) ??
-          serverKeyPairs?.[0]
-        )?.cryptoEngineId;
+        // Spec: private-rooms/editor-integration, "DEK handed to the editor configuration"
+        const cryptoEngineId = selectUserKey(loadedKeys)?.cryptoEngineId;
 
         const encryptionKeys: TEditorEncryptionKeys = {
           dek: arrayBufferToBase64(dek),
           contractVersion: EDITOR_CONTRACT_VERSION,
         };
-        if (typeof serverCryptoEngineId === "string") {
-          encryptionKeys.cryptoEngineId = serverCryptoEngineId;
+        if (typeof cryptoEngineId === "string") {
+          encryptionKeys.cryptoEngineId = cryptoEngineId;
         }
 
         if (cancelled) return;

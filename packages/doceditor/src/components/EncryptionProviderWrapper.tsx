@@ -125,6 +125,13 @@ const PassphraseUnlockAdapter = ({
   );
 };
 
+/**
+ * The caller's key set as `GET privacyroom/keys` answered it; null until it
+ * is read and after a failed read.
+ */
+export const useLoadedEncryptionKeys = () =>
+  React.useContext(EncryptionKeysDataContext).encryptionKeys;
+
 export const EncryptionKeysReadyContext = React.createContext(false);
 
 export const useEncryptionKeysReady = () =>

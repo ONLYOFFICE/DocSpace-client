@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { IInitialConfig } from "@/types";
+import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import {
   setEncryptionKeys,
   getEncryptionAccess,
@@ -44,19 +44,14 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 
+// Spec: private-rooms/editor-integration, "DEK handed to the editor configuration"
 const initDesktop = (
-  cfg: IInitialConfig,
+  loadedKeys: readonly TEncryptionKeyPair[] | null,
   user: TUser,
   fileId: string | number,
   t: Nullable<TTranslation>,
 ) => {
-  const keyPairs = cfg?.editorConfig?.encryptionKeys;
-  const ownKeyPairs = keyPairs?.filter(
-    (k) => String(k.userId) === String(user.id),
-  );
-  const keyPair = selectUserKey(
-    ownKeyPairs && ownKeyPairs.length > 0 ? ownKeyPairs : keyPairs,
-  );
+  const keyPair = selectUserKey(loadedKeys);
   const encryptionKeys = keyPair
     ? {
         privateKeyEnc: keyPair.privateKeyEnc,

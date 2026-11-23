@@ -67,7 +67,12 @@ const { USER_ID, FILE_ID, DEK, encryptionContext, keysLoad } = vi.hoisted(() => 
       hasConfiguredKey: true,
       requireIdentity: (async () => ({ userId })) as () => Promise<unknown>,
     },
-    keysLoad: { ready: true, failed: false, reload: () => {} },
+    keysLoad: {
+      ready: true,
+      failed: false,
+      reload: () => {},
+      loaded: null as null | { cryptoEngineId?: string; date?: string }[],
+    },
   };
 });
 
@@ -95,6 +100,7 @@ vi.mock("@docspace/shared/services/private-room/room-member-keys", () => ({
 
 vi.mock("@/components/EncryptionProviderWrapper", () => ({
   useEncryptionKeysReady: () => keysLoad.ready,
+  useLoadedEncryptionKeys: () => keysLoad.loaded,
   useEncryptionKeysLoad: () => ({
     failed: keysLoad.failed,
     reload: keysLoad.reload,
@@ -167,6 +173,7 @@ describe("useFileEncryptionKeys", () => {
     keysLoad.ready = true;
     keysLoad.failed = false;
     keysLoad.reload = () => {};
+    keysLoad.loaded = null;
     vi.mocked(getFileEncryptionAccess).mockImplementation(
       async () => OWN_ENTRIES as never,
     );
@@ -321,7 +328,8 @@ describe("useFileEncryptionKeys", () => {
     expect(await settledAt("error")).toBe("error");
   });
 
-  it("Configuration extended: the ready entry carries the DEK, the engine id and the contract version", async () => {
+  it("Configuration extended: the ready entry carries the DEK, the engine id of the loaded key and the contract version", async () => {
+    keysLoad.loaded = [{ cryptoEngineId: "engine-from-keys" }];
     render(config([{ userId: USER_ID, cryptoEngineId: "engine-from-server" }]));
 
     const ready = await settled();
@@ -329,12 +337,26 @@ describe("useFileEncryptionKeys", () => {
     expect(ready?.status).toBe("ready");
     expect(ready?.encryptionKeys).toEqual({
       dek: arrayBufferToBase64(DEK),
-      cryptoEngineId: "engine-from-server",
+      cryptoEngineId: "engine-from-keys",
       contractVersion: EDITOR_CONTRACT_VERSION,
     });
   });
 
-  it("Engine id taken from the server: without a server engine id the entry has none", async () => {
+  it("Configuration without key pairs", async () => {
+    keysLoad.loaded = [{ cryptoEngineId: "engine-from-keys" }];
+    render({
+      file: { id: FILE_ID, encrypted: true },
+      document: { referenceData: { roomId: "10" } },
+      editorConfig: {},
+    } as unknown as IInitialConfig);
+
+    const ready = await settled();
+
+    expect(ready?.status).toBe("ready");
+    expect(ready?.encryptionKeys?.cryptoEngineId).toBe("engine-from-keys");
+  });
+
+  it("Engine id taken from the server: without one in the loaded key the entry has none", async () => {
     render(config([{ userId: USER_ID }]));
 
     const ready = await settled();

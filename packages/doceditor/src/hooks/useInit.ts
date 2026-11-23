@@ -41,6 +41,10 @@ import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitl
 import { UseInitProps } from "@/types";
 import { setDocumentTitle, showDocEditorMessage } from "@/utils";
 import initDesktop from "@/utils/initDesktop";
+import {
+  useEncryptionKeysReady,
+  useLoadedEncryptionKeys,
+} from "@/components/EncryptionProviderWrapper";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 const useInit = ({
@@ -95,11 +99,15 @@ const useInit = ({
     organizationName,
   ]);
 
+  const keysReady = useEncryptionKeysReady();
+  const loadedKeys = useLoadedEncryptionKeys();
+
   React.useEffect(() => {
-    if (config && IS_DESKTOP_EDITOR && user && fileInfo?.id) {
-      initDesktop(config, user, fileInfo.id, t);
+    // The key pair comes from the key set the page reads, so wait for the read.
+    if (config && IS_DESKTOP_EDITOR && user && fileInfo?.id && keysReady) {
+      initDesktop(loadedKeys, user, fileInfo.id, t);
     }
-  }, [config, fileInfo?.id, t, user]);
+  }, [config, fileInfo?.id, t, user, keysReady, loadedKeys]);
 
   React.useEffect(() => {
     try {

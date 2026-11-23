@@ -210,7 +210,7 @@ The editor SHALL send the mention notification of an encrypted file to the porta
 ## MODIFIED Requirements
 
 ### Requirement: DEK handed to the editor configuration
-The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the contract version to the editor configuration under the encryption keys entry, keeping the document address pointing at the ciphertext stored on the server. The entry SHALL be typed in the editor configuration types, and the DEK SHALL stay outside the signed token, so that it never reaches the portal or the Document Server.
+The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the contract version to the editor configuration under the encryption keys entry, keeping the document address pointing at the ciphertext stored on the server. The entry SHALL be typed in the editor configuration types, and the DEK SHALL stay outside the signed token, so that it never reaches the portal or the Document Server. The page SHALL take the crypto engine identifier, and under the desktop application the key pair it hands over, from the key set it reads for the signed-in user, and SHALL take neither from the editor configuration of the server.
 
 #### Scenario: Configuration extended
 - **WHEN** keys reach the ready state
@@ -218,8 +218,16 @@ The editor SHALL pass the base64-encoded DEK, a crypto engine identifier and the
 - **AND** the document URL is unchanged and still references the encrypted blob
 
 #### Scenario: Engine id taken from the server
-- **WHEN** the server configuration lists key pairs with a crypto engine id
-- **THEN** that engine id is used; otherwise the client default is used
+- **WHEN** the key the page selected from the key set it read carries a crypto engine id
+- **THEN** that engine id is used; otherwise the entry carries none
+
+#### Scenario: Desktop key pair comes from the loaded key set
+- **WHEN** the editor page runs in the desktop application and the key set of the user has been read
+- **THEN** the desktop application is given the public key, the sealed private key and the crypto engine id of the selected key of that set
+
+#### Scenario: Configuration without key pairs
+- **WHEN** the editor configuration of an encrypted file carries no key pair
+- **THEN** the keys reach the ready state, and the desktop application gets its key pair, as with one
 
 #### Scenario: Token handling
 - **WHEN** the server signs the editor configuration of an encrypted file

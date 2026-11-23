@@ -176,6 +176,22 @@ describe("The secret of a link is encoded for an address", () => {
     expect(isLinkSecret(undefined)).toBe(false);
   });
 
+  it("takes one spelling of a secret, not the four that decode to the same bytes", () => {
+    const secret = generateLinkSecret();
+    const lastIndex =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_".indexOf(
+        secret[42],
+      );
+    const sameBytes =
+      secret.slice(0, 42) +
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"[
+        lastIndex + 1
+      ];
+
+    expect(lastIndex % 4).toBe(0);
+    expect(isLinkSecret(sameBytes)).toBe(false);
+  });
+
   it("Foreign character in the secret", () => {
     const secret = generateLinkSecret();
 

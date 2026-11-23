@@ -71,7 +71,10 @@ const SECRET_BYTES = 32;
 /** The secret as it stands in the address: URL-safe base64 without padding. */
 export const LINK_SECRET_LENGTH = 43;
 
-const SECRET_PATTERN = /^[A-Za-z0-9_-]{43}$/;
+// 43 characters carry 258 bits: the last one holds four of the secret's and two
+// that are zero, so only sixteen characters may end a secret. One address then
+// stands for one secret.
+const SECRET_PATTERN = /^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$/;
 
 const INFO_SEAL = "docspace-link-seal-v1";
 const INFO_PROOF = "docspace-link-proof-v1";
@@ -140,20 +143,23 @@ async function deriveInput(
   const secretBytes = decodeSecret(secret);
   if (!password) return secretBytes;
 
-  // shortcut: the password is stretched with fixed parameters, since the envelope has no field for them; a change of them needs new labels.
-  const stretched = await argon2id({
-    password: utf8(password.normalize("NFKC")),
-    salt: await hkdf(secretBytes, INFO_PASSWORD_SALT, SALT_SIZE),
-    iterations: DEFAULT_ARGON2_PARAMS.t,
-    parallelism: DEFAULT_ARGON2_PARAMS.p,
-    memorySize: DEFAULT_ARGON2_PARAMS.m_KiB,
-    hashLength: ARGON2ID_DK_LEN,
-    outputType: "binary",
-  });
-  const input = concatBuffers(secretBytes, stretched);
-  zeroBuffer(secretBytes);
-  zeroBuffer(stretched);
-  return input;
+  try {
+    // shortcut: the password is stretched with fixed parameters, since the envelope has no field for them; a change of them needs new labels.
+    const stretched = await argon2id({
+      password: utf8(password.normalize("NFKC")),
+      salt: await hkdf(secretBytes, INFO_PASSWORD_SALT, SALT_SIZE),
+      iterations: DEFAULT_ARGON2_PARAMS.t,
+      parallelism: DEFAULT_ARGON2_PARAMS.p,
+      memorySize: DEFAULT_ARGON2_PARAMS.m_KiB,
+      hashLength: ARGON2ID_DK_LEN,
+      outputType: "binary",
+    });
+    const input = concatBuffers(secretBytes, stretched);
+    zeroBuffer(stretched);
+    return input;
+  } finally {
+    zeroBuffer(secretBytes);
+  }
 }
 
 async function deriveSealAndProof(

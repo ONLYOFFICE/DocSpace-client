@@ -460,7 +460,10 @@ none is open. The technical decisions below follow from them.
     168 characters, well under the 4096 the server takes. The parameters
     of the password are fixed and not stored, so a change of them needs
     new labels. The proof is sent as base64 of its 32 bytes; the server
-    names no encoding yet.
+    names no encoding yet. A secret has one spelling: 43 characters hold
+    two bits more than the secret, so the last character is one of the
+    sixteen that leave them zero, and the check of decision 20 refuses the
+    other three spellings of the same bytes as an address copied wrongly.
 26. **A wrap for a link is the wrap of a member, unchanged (2026-11-23,
     with task 2.2).** `wrapDEK` and `unwrapDEK` take any X25519 public
     key and any id of 16 bytes as the recipient, and a link id is one, so

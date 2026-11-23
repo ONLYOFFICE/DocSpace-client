@@ -84,7 +84,12 @@ export default async function PrivateLayout({
 
   const providerName = filterParams.get("providerName") || "";
 
-  const user = await getSelf();
+  // The state of the app is asked with the user, not after: a page of the
+  // section waits for one answer, not for two in a row.
+  const [user, appEnabled] = await Promise.all([
+    getSelf(),
+    getAppEnabled(PRIVATE_ROOMS_APP_ID),
+  ]);
 
   if (!user && providerName) {
     const inviteKey = filterParams.get("inviteKey") || "";
@@ -114,7 +119,7 @@ export default async function PrivateLayout({
   }
 
   // Spec: private-rooms/sdk-surface, "SDK private surface follows the E2E rooms app"
-  if (user && (await getAppEnabled(PRIVATE_ROOMS_APP_ID)) === false) {
+  if (user && appEnabled === false) {
     return <PrivateRoomsNotAvailable />;
   }
 

@@ -88,6 +88,8 @@ export async function getAppEnabled(id: string): Promise<boolean | null> {
     });
 
     if (res.status === 404) return false;
+    // A visitor who is not signed in is no failure: the state is not known.
+    if (res.status === 401) return null;
     if (!res.ok) {
       logger.error(`GET /apps/${id} failed: ${res.status}`);
       return null;

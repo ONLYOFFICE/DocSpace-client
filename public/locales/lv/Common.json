@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Neizdevās kopēt šifrētos failus: {{names}}",
   "EncryptedDownloadPartial": "Šos failus neizdevās atšifrēt, un tie netika iekļauti arhīvā: {{fileNames}}",
   "EncryptedFile": "Šifrēts fails",
+  "EncryptedFileKeyReplaced": "Šis fails tika šifrēts šifrēšanas atslēgai, kuras jums vairs nav. Jūsu pašreizējā atslēga to nevar atvērt.",
   "EncryptedFileNoAccessYet": "Jums vēl nav piekļuves šim šifrētajam failam.",
   "EncryptedFileUnlockToOpen": "Atbloķējiet savu šifrēšanas atslēgu, lai atvērtu šo failu.",
   "EncryptedInviteFailed": "Neizdevās uzaicināt {{users}}. Mēģiniet vēlreiz.",

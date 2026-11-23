@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "සංකේතාංකිත ගොනු පිටපත් කිරීම අසාර්ථකයි: {{names}}",
   "EncryptedDownloadPartial": "මෙම ගොනු විකේතනය කළ නොහැකි වූ අතර ඒවා සංරක්ෂිතයෙන් ඉවත් කරන ලදී: {{fileNames}}",
   "EncryptedFile": "සංකේතාංකිත ගොනුව",
+  "EncryptedFileKeyReplaced": "මෙම ගොනුව සංකේතනය කර ඇත්තේ ඔබ සතුව තවදුරටත් නොමැති සංකේතන යතුරක් සඳහා ය. ඔබේ වත්මන් යතුරට එය විවෘත කළ නොහැක.",
   "EncryptedFileNoAccessYet": "ඔබට තවමත් මෙම සංකේතාංකිත ගොනුවට ප්‍රවේශය නැත.",
   "EncryptedFileUnlockToOpen": "මෙම ගොනුව විවෘත කිරීමට ඔබේ සංකේතන යතුර අගුළු හරින්න.",
   "EncryptedInviteFailed": "{{users}} හට ආරාධනා කළ නොහැකි විය. නැවත උත්සාහ කරන්න.",

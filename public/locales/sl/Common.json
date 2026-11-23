@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Kopiranje šifriranih datotek ni uspelo: {{names}}",
   "EncryptedDownloadPartial": "Teh datotek ni bilo mogoče dešifrirati, zato niso bile vključene v arhiv: {{fileNames}}",
   "EncryptedFile": "Šifrirana datoteka",
+  "EncryptedFileKeyReplaced": "Ta datoteka je bila šifrirana za šifrirni ključ, ki ga nimate več. Vaš trenutni ključ je ne more odpreti.",
   "EncryptedFileNoAccessYet": "Do te šifrirane datoteke še nimate dostopa.",
   "EncryptedFileUnlockToOpen": "Odklenite svoj šifrirni ključ, da odprete to datoteko.",
   "EncryptedInviteFailed": "{{users}} ni bilo mogoče povabiti. Poskusite znova.",

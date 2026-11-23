@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Fehler beim Kopieren verschlüsselter Dateien: {{names}}",
   "EncryptedDownloadPartial": "Diese Dateien konnten nicht entschlüsselt werden und wurden nicht in das Archiv aufgenommen: {{fileNames}}",
   "EncryptedFile": "Verschlüsselte Datei",
+  "EncryptedFileKeyReplaced": "Diese Datei wurde für einen Verschlüsselungsschlüssel verschlüsselt, den Sie nicht mehr besitzen. Ihr aktueller Schlüssel kann sie nicht öffnen.",
   "EncryptedFileNoAccessYet": "Sie haben noch keinen Zugriff auf diese verschlüsselte Datei.",
   "EncryptedFileUnlockToOpen": "Entsperren Sie Ihren Verschlüsselungsschlüssel, um diese Datei zu öffnen.",
   "EncryptedInviteFailed": "{{users}} konnten nicht eingeladen werden. Versuchen Sie es erneut.",

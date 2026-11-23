@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Error al copiar los archivos cifrados: {{names}}",
   "EncryptedDownloadPartial": "No se pudieron descifrar estos archivos y se dejaron fuera del archivo comprimido: {{fileNames}}",
   "EncryptedFile": "Archivo cifrado",
+  "EncryptedFileKeyReplaced": "Este archivo se cifró para una clave de cifrado que ya no tiene. Su clave actual no puede abrirlo.",
   "EncryptedFileNoAccessYet": "Todavía no tiene acceso a este archivo cifrado.",
   "EncryptedFileUnlockToOpen": "Desbloquee su clave de cifrado para abrir este archivo.",
   "EncryptedInviteFailed": "No se pudo invitar a {{users}}. Inténtelo de nuevo.",

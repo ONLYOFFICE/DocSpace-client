@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Неуспешно копиране на криптирани файлове: {{names}}",
   "EncryptedDownloadPartial": "Тези файлове не можаха да бъдат декриптирани и бяха изключени от архива: {{fileNames}}",
   "EncryptedFile": "Криптиран файл",
+  "EncryptedFileKeyReplaced": "Този файл е шифрован за ключ за шифроване, който вече нямате. Текущият ви ключ не може да го отвори.",
   "EncryptedFileNoAccessYet": "Все още нямате достъп до този криптиран файл.",
   "EncryptedFileUnlockToOpen": "Отключете ключа си за шифроване, за да отворите този файл.",
   "EncryptedInviteFailed": "Неуспешно поканване на {{users}}. Опитайте отново.",

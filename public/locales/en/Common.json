@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Failed to copy encrypted files: {{names}}",
   "EncryptedDownloadPartial": "These files could not be decrypted and were left out of the archive: {{fileNames}}",
   "EncryptedFile": "Encrypted file",
+  "EncryptedFileKeyReplaced": "This file was encrypted for an encryption key you no longer have. Your current key cannot open it.",
   "EncryptedFileNoAccessYet": "You do not have access to this encrypted file yet.",
   "EncryptedFileUnlockToOpen": "Unlock your encryption key to open this file.",
   "EncryptedInviteFailed": "Could not invite {{users}}. Try again.",

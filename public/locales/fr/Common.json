@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Échec de la copie des fichiers chiffrés : {{names}}",
   "EncryptedDownloadPartial": "Ces fichiers n'ont pas pu être déchiffrés et ont été exclus de l'archive : {{fileNames}}",
   "EncryptedFile": "Fichier chiffré",
+  "EncryptedFileKeyReplaced": "Ce fichier a été chiffré pour une clé de chiffrement que vous n'avez plus. Votre clé actuelle ne peut pas l'ouvrir.",
   "EncryptedFileNoAccessYet": "Vous n'avez pas encore accès à ce fichier chiffré.",
   "EncryptedFileUnlockToOpen": "Déverrouillez votre clé de chiffrement pour ouvrir ce fichier.",
   "EncryptedInviteFailed": "Impossible d'inviter {{users}}. Réessayez.",

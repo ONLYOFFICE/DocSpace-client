@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Copierea fișierelor criptate a eșuat: {{names}}",
   "EncryptedDownloadPartial": "Aceste fișiere nu au putut fi decriptate și au fost excluse din arhivă: {{fileNames}}",
   "EncryptedFile": "Fișier criptat",
+  "EncryptedFileKeyReplaced": "Acest fișier a fost criptat pentru o cheie de criptare pe care nu o mai aveți. Cheia dvs. actuală nu îl poate deschide.",
   "EncryptedFileNoAccessYet": "Încă nu aveți acces la acest fișier criptat.",
   "EncryptedFileUnlockToOpen": "Deblocați cheia dvs. de criptare pentru a deschide acest fișier.",
   "EncryptedInviteFailed": "Nu s-a putut invita {{users}}. Încercați din nou.",

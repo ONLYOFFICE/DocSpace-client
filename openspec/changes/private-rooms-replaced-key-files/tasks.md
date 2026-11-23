@@ -3,7 +3,7 @@
 ## 1. Recognise the case
 
 - [x] 1.1 Add `KeyReplacedError` to `packages/shared/services/encryption/errors.ts` and `isWrappedForReplacedKey(info, userId)` to `room-file-access.ts` (design.md, decisions 1 and 2); verify with new cases in `packages/shared/services/encryption/__tests__/room-file-access.test.ts`: other key id, same id in another letter case, empty id, all-zero id, missing or empty `userKeys`, no own entry
-- [ ] 1.2 Add Common:EncryptedFileKeyReplaced to `public/locales/en/Common.json`, write its `.meta` comment with the `translate-comments` skill, translate it with `translate-key`, map `KeyReplacedError` to it in `error-i18n.ts` and return early for it in `reportPotentialGhostState`; verify with `packages/shared/services/encryption/__tests__/ghost-state-notifier.test.ts` (no toast, session gate untouched), the error-i18n test, and `cd common/tests && npx vitest run test/locales.test.js`
+- [x] 1.2 Add Common:EncryptedFileKeyReplaced to `public/locales/en/Common.json`, write its `.meta` comment with the `translate-comments` skill, translate it with `translate-key`, map `KeyReplacedError` to it in `error-i18n.ts` and return early for it in `reportPotentialGhostState`; verify with `packages/shared/services/encryption/__tests__/ghost-state-notifier.test.ts` (no toast, session gate untouched), the error-i18n test, and `cd common/tests && npx vitest run test/locales.test.js`
 
 ## 2. Single-file operations
 

@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Şifrəli faylları kopyalamaq alınmadı: {{names}}",
   "EncryptedDownloadPartial": "Bu faylların şifrəsi açıla bilmədi və onlar arxivə daxil edilmədi: {{fileNames}}",
   "EncryptedFile": "Şifrəli fayl",
+  "EncryptedFileKeyReplaced": "Bu fayl artıq sizdə olmayan şifrələmə açarı üçün şifrələnib. Cari açarınız onu aça bilmir.",
   "EncryptedFileNoAccessYet": "Bu şifrəli fayla hələ girişiniz yoxdur.",
   "EncryptedFileUnlockToOpen": "Bu faylı açmaq üçün şifrələmə açarınızı kiliddən çıxarın.",
   "EncryptedInviteFailed": "{{users}} dəvət etmək mümkün olmadı. Yenidən cəhd edin.",

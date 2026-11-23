@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Nepodařilo se zkopírovat zašifrované soubory: {{names}}",
   "EncryptedDownloadPartial": "Tyto soubory se nepodařilo dešifrovat a nebyly zahrnuty do archivu: {{fileNames}}",
   "EncryptedFile": "Zašifrovaný soubor",
+  "EncryptedFileKeyReplaced": "Tento soubor byl zašifrován pro šifrovací klíč, který již nemáte. Váš aktuální klíč jej nemůže otevřít.",
   "EncryptedFileNoAccessYet": "K tomuto zašifrovanému souboru zatím nemáte přístup.",
   "EncryptedFileUnlockToOpen": "Odemkněte svůj šifrovací klíč, abyste mohli tento soubor otevřít.",
   "EncryptedInviteFailed": "{{users}} se nepodařilo pozvat. Zkuste to znovu.",

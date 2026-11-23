@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Falha ao copiar arquivos criptografados: {{names}}",
   "EncryptedDownloadPartial": "Não foi possível descriptografar estes arquivos, e eles foram deixados de fora do arquivo compactado: {{fileNames}}",
   "EncryptedFile": "Arquivo criptografado",
+  "EncryptedFileKeyReplaced": "Este arquivo foi criptografado para uma chave de criptografia que você não tem mais. Sua chave atual não pode abri-lo.",
   "EncryptedFileNoAccessYet": "Você ainda não tem acesso a este arquivo criptografado.",
   "EncryptedFileUnlockToOpen": "Desbloqueie sua chave de criptografia para abrir este arquivo.",
   "EncryptedInviteFailed": "Não foi possível convidar {{users}}. Tente novamente.",

@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Salattujen tiedostojen kopiointi epäonnistui: {{names}}",
   "EncryptedDownloadPartial": "Näiden tiedostojen salausta ei voitu purkaa, joten ne jätettiin pois arkistosta: {{fileNames}}",
   "EncryptedFile": "Salattu tiedosto",
+  "EncryptedFileKeyReplaced": "Tämä tiedosto on salattu salausavaimelle, jota sinulla ei enää ole. Nykyinen avaimesi ei voi avata sitä.",
   "EncryptedFileNoAccessYet": "Sinulla ei ole vielä pääsyä tähän salattuun tiedostoon.",
   "EncryptedFileUnlockToOpen": "Avaa salausavaimesi lukitus avataksesi tämän tiedoston.",
   "EncryptedInviteFailed": "Käyttäjiä {{users}} ei voitu kutsua. Yritä uudelleen.",

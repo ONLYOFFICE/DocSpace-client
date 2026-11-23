@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Falha ao copiar ficheiros encriptados: {{names}}",
   "EncryptedDownloadPartial": "Não foi possível desencriptar estes ficheiros, pelo que foram excluídos do arquivo: {{fileNames}}",
   "EncryptedFile": "Ficheiro encriptado",
+  "EncryptedFileKeyReplaced": "Este ficheiro foi encriptado para uma chave de encriptação que já não tem. A sua chave atual não o consegue abrir.",
   "EncryptedFileNoAccessYet": "Ainda não tem acesso a este ficheiro encriptado.",
   "EncryptedFileUnlockToOpen": "Desbloqueie a sua chave de encriptação para abrir este ficheiro.",
   "EncryptedInviteFailed": "Não foi possível convidar {{users}}. Tente novamente.",

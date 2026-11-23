@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Nie udało się skopiować zaszyfrowanych plików: {{names}}",
   "EncryptedDownloadPartial": "Nie udało się odszyfrować tych plików i zostały one pominięte w archiwum: {{fileNames}}",
   "EncryptedFile": "Zaszyfrowany plik",
+  "EncryptedFileKeyReplaced": "Ten plik został zaszyfrowany dla klucza szyfrowania, którego już nie masz. Twój obecny klucz nie może go otworzyć.",
   "EncryptedFileNoAccessYet": "Nie masz jeszcze dostępu do tego zaszyfrowanego pliku.",
   "EncryptedFileUnlockToOpen": "Odblokuj swój klucz szyfrowania, aby otworzyć ten plik.",
   "EncryptedInviteFailed": "Nie udało się zaprosić: {{users}}. Spróbuj ponownie.",

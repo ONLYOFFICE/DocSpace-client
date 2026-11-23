@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "فشل نسخ الملفات المشفرة: {{names}}",
   "EncryptedDownloadPartial": "تعذّر فك تشفير هذه الملفات ولم تُضمَّن في الأرشيف: {{fileNames}}",
   "EncryptedFile": "ملف مشفر",
+  "EncryptedFileKeyReplaced": "تم تشفير هذا الملف بمفتاح تشفير لم يعد لديك. لا يمكن لمفتاحك الحالي فتحه.",
   "EncryptedFileNoAccessYet": "ليس لديك حق الوصول إلى هذا الملف المشفر بعد.",
   "EncryptedFileUnlockToOpen": "قم بإلغاء قفل مفتاح التشفير الخاص بك لفتح هذا الملف.",
   "EncryptedInviteFailed": "تعذّرت دعوة {{users}}. حاول مرة أخرى.",

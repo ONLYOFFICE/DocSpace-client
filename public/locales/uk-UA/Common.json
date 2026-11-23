@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Не вдалося скопіювати зашифровані файли: {{names}}",
   "EncryptedDownloadPartial": "Ці файли не вдалося розшифрувати, тому їх не включено до архіву: {{fileNames}}",
   "EncryptedFile": "Зашифрований файл",
+  "EncryptedFileKeyReplaced": "Цей файл зашифровано для ключа шифрування, якого у вас більше немає. Поточний ключ не може його відкрити.",
   "EncryptedFileNoAccessYet": "У вас поки немає доступу до цього зашифрованого файлу.",
   "EncryptedFileUnlockToOpen": "Розблокуйте ключ шифрування, щоб відкрити цей файл.",
   "EncryptedInviteFailed": "Не вдалося запросити: {{users}}. Спробуйте ще раз.",

@@ -994,6 +994,7 @@
   "EncryptedCopyFailed": "Dështoi kopjimi i skedarëve të enkriptuar: {{names}}",
   "EncryptedDownloadPartial": "Këta skedarë nuk mund të deshifroheshin dhe u lanë jashtë arkivit: {{fileNames}}",
   "EncryptedFile": "Skedar i enkriptuar",
+  "EncryptedFileKeyReplaced": "Ky skedar u kriptua për një çelës kriptimi që nuk e keni më. Çelësi juaj aktual nuk mund ta hapë.",
   "EncryptedFileNoAccessYet": "Ende nuk keni akses në këtë skedar të enkriptuar.",
   "EncryptedFileUnlockToOpen": "Zhbllokoni çelësin tuaj të kriptimit për të hapur këtë skedar.",
   "EncryptedInviteFailed": "Nuk mund të ftoheshin {{users}}. Provoni përsëri.",

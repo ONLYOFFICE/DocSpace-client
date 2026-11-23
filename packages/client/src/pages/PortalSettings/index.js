@@ -56,9 +56,8 @@ const Settings = () => {
 
   return isGeneralPage ? (
     <>
-      <Layout key="1" isGeneralPage>
-        <Panels />
-      </Layout>
+      <Layout key="1" isGeneralPage />
+      <Panels />
       <Outlet />
     </>
   ) : (

@@ -45,7 +45,6 @@ import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import Dialogs from "SRC_DIR/pages/Home/Section/ContactsBody/Dialogs";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
-import PluginDialog from "SRC_DIR/components/dialogs/PluginDialog";
 
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
@@ -72,7 +71,7 @@ class Profile extends React.Component {
   render() {
     // console.log("Profile render");
 
-    const { profile, setIsLoading, pluginDialogVisible } = this.props;
+    const { profile, setIsLoading } = this.props;
 
     return (
       <>
@@ -89,9 +88,6 @@ class Profile extends React.Component {
           </Section.SectionBody>
         </SectionWrapper>
         <Dialogs />
-        {pluginDialogVisible && (
-          <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
-        )}
       </>
     );
   }
@@ -105,7 +101,6 @@ const ComponentPure = inject(
     clientLoadingStore,
     tfaStore,
     treeFoldersStore,
-    pluginStore,
   }) => {
     const { language } = authStore;
 
@@ -128,8 +123,6 @@ const ComponentPure = inject(
 
     const { getTfaType } = tfaStore;
 
-    const { pluginDialogVisible } = pluginStore;
-
     return {
       language,
       profile,
@@ -142,7 +135,6 @@ const ComponentPure = inject(
       setIsProfileLoaded,
       setIsLoading,
       getTfaType,
-      pluginDialogVisible,
     };
   },
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));

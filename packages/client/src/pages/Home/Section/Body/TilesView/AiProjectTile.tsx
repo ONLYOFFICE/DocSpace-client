@@ -36,7 +36,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
 
 import { BaseTile } from "@onlyoffice/apps-ui-kit/components/tiles/base-tile";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -46,8 +45,6 @@ import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import ChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url";
-import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 
 import styles from "./AiProjectTile.module.scss";
 
@@ -143,22 +140,26 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
     </Text>
   );
 
-  // The linked rooms of a kind, one per line with the kind's icon: the
-  // first two, then how many more. A kind with none shows a dash.
-  const sources = (key: string, icon: string, names: string[] | undefined) => {
+  // The linked rooms of a kind on one line: the first two, then how many
+  // more. A kind with none shows a dash.
+  const sources = (key: string, names: string[] | undefined) => {
     if (!names?.length) return text(key, DASH);
     const { shown, rest } = getShownSources(names);
     return (
-      <div className={`${styles.value} ${styles.sources}`} data-testid={`ai-project-tile-${key}`}>
-        {shown.map((name, index) => (
-          // Two linked rooms may share a title.
-          <div key={`${index}-${name}`} className={styles.source} data-testid={`ai-project-tile-${key}-item`}>
-            <ReactSVG src={icon} className={styles.icon} />
-            <Text truncate fontSize="13px" fontWeight={600} title={name} dir="auto">
-              {name}
-            </Text>
-          </div>
-        ))}
+      <div
+        className={`${styles.value} ${styles.sources}`}
+        title={names.join(", ")}
+        data-testid={`ai-project-tile-${key}`}
+      >
+        <Text truncate fontSize="13px" fontWeight={600} className={styles.names} dir="auto">
+          {shown.map((name, index) => (
+            // Two linked rooms may share a title.
+            <React.Fragment key={`${index}-${name}`}>
+              {index ? ", " : null}
+              <span data-testid={`ai-project-tile-${key}-item`}>{name}</span>
+            </React.Fragment>
+          ))}
+        </Text>
         {rest ? (
           <Text fontSize="13px" fontWeight={600} className={styles.more} data-testid={`ai-project-tile-${key}-more`}>
             {`+${rest}`}
@@ -171,11 +172,11 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
   const rows = [
     ...(category ? [{ key: "category", label: t("Common:Category"), value: text("category", category) }] : []),
     { key: "model", label: t("Common:AIAgentModel"), value: text("model", model) },
-    { key: "skills", label: t("Common:SkillSets"), value: sources("skills", SkillSetReactSvgUrl, summary?.skills) },
+    { key: "skills", label: t("Common:SkillSets"), value: sources("skills", summary?.skills) },
     {
       key: "knowledge",
       label: t("Common:AIProjectKnowledgeRooms"),
-      value: sources("knowledge", KnowledgeReactSvgUrl, summary?.knowledge),
+      value: sources("knowledge", summary?.knowledge),
     },
   ];
 

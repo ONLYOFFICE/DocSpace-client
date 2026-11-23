@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // The agent tile takes the room template's tile as its model: the same
-// paddings and rhythm, with up to five rows in the lower half.
+// paddings and rhythm, with up to five rows in the lower half, and sits in
+// the columns of rooms.
 .aiProjectTile {
-  max-height: 292px;
+  max-height: 212px;
   row-gap: 12px;
   padding: 12px 0;
 
@@ -67,12 +68,12 @@
       }
     }
 
-    // Five rows and the four gaps between them, whether the agent has a
-    // category or not and however many rooms it links: every card of the
-    // list is as high. Rows are lines of 20px; Skill sets and Knowledge
-    // bases take three each (two rooms and "+N").
+    // Five rows of 20px and the four gaps between them, whether the agent
+    // has a category or not and however many rooms it links: every card of
+    // the list is as high. Keep in step with the card height of
+    // InfiniteGrid: 202px as drawn.
     .bottomContent {
-      height: 212px;
+      height: 132px;
       width: 100%;
       box-sizing: border-box;
       overflow: hidden;
@@ -132,35 +133,19 @@
   margin-inline-start: auto;
 }
 
-// The linked rooms of a kind, one per line.
+// The linked rooms of a kind on one line: the names, cut when they do not
+// fit, and how many more, which is never cut.
 .sources {
   display: flex;
-  flex-direction: column;
+  gap: 4px;
 }
 
-.source {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.names {
   min-width: 0;
-  line-height: 20px;
-}
-
-.icon {
-  display: flex;
-  flex: 0 0 auto;
-
-  svg {
-    width: 12px;
-    height: 12px;
-
-    path {
-      fill: var(--text-color);
-    }
-  }
 }
 
 .more {
+  flex: 0 0 auto;
   line-height: 20px;
   color: var(--tile-sub-text);
 }

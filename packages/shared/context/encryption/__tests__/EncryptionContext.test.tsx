@@ -633,7 +633,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
       }
     });
 
-    it("Hidden-tab lock stays in its tab", async () => {
+    it("Hidden tab keeps its key", async () => {
       vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(300);
       try {
         SecretStorage.cacheUnlocked("user-42", dummyKeyPair);

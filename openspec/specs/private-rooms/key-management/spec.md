@@ -1316,7 +1316,7 @@ The system SHALL lock the identity in every open page of the same user in this b
 - **WHEN** one tab locks after the idle time while the user works in another tab of the same user
 - **THEN** the tab the user works in stays unlocked
 
-#### Scenario: Hidden-tab lock stays in its tab
+#### Scenario: Hidden tab keeps its key
 - **WHEN** the preset is 5 minutes and the user switches from one tab with the key unlocked to another
 - **THEN** neither tab locks: the hidden tab keeps the key until its idle time passes
 

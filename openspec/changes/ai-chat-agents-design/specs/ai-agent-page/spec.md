@@ -4,16 +4,16 @@
 
 Defines the header of an agent's own page, the page that shows one agent's chat when it is opened from the Agents list, the sidebar or a link, and the actions that header offers to each role.
 
-Implementation: the Home section header and the agent view in the client, the navigation component and the agent picker in ui-kit, the room context options for a room of type 12.
+Implementation: the Home section header and the agent view in the client, the navigation component in ui-kit, the room context options for a room of type 12.
 
 ## ADDED Requirements
 
 ### Requirement: Header of an agent's page
-For a member of the agent, the header of its page SHALL show, in this order: the agent's logo and name as the agent switcher, Chat history (`Common:ChatHistory`), New chat (`Common:AINewChat`), the agent's actions menu, the "Share agent" button when the user may share the agent, and the Info panel toggle.
+For a member of the agent, the header of its page SHALL show, in this order: the agent's logo and name, Chat history (`Common:ChatHistory`), New chat (`Common:AINewChat`), the agent's actions menu, the "Share agent" button when the user may share the agent, and the Info panel toggle.
 
 #### Scenario: Agent manager
 - **WHEN** an Agent manager opens the page of "Legal Reviewer"
-- **THEN** the header shows the logo and name with an arrow, Chat history, New chat, the actions menu, "Share agent" and the Info panel toggle
+- **THEN** the header shows the logo and name, Chat history, New chat, the actions menu, "Share agent" and the Info panel toggle
 
 #### Scenario: Member
 - **WHEN** a Member opens the same page
@@ -26,16 +26,12 @@ For a portal owner or DocSpace admin who is not a member of the agent, the heade
 - **WHEN** a DocSpace admin who is not a member opens the page of "Legal Reviewer"
 - **THEN** the header has the name, the actions menu and the Info panel toggle only, above the "not a member" view (`Common:AIProjectNotMember`)
 
-### Requirement: Agent switcher
-The title of an agent's page SHALL open a menu with "Default AI agent" (`Common:DefaultAIAgent`) and the agents the user is a member of, the open one ticked. Picking another agent SHALL open that agent's page, and picking "Default AI agent" SHALL open the AI Chat page.
+### Requirement: No agent switcher on the page
+The title of an agent's page SHALL be the agent's logo and name as plain text and SHALL open no menu of agents. The chat on the page SHALL offer no other agent: agents are picked in the title of the chat panel only (`ai-chat-agent-menu`).
 
-#### Scenario: Switch to another agent
-- **WHEN** a Member of "Legal Reviewer" and "Data Analyst" picks "Data Analyst" in the title of the page of "Legal Reviewer"
-- **THEN** the page of "Data Analyst" opens
-
-#### Scenario: Back to the default agent
-- **WHEN** the Member picks "Default AI agent" there
-- **THEN** the AI Chat page opens on the default agent
+#### Scenario: Member on the page
+- **WHEN** a Member of "Legal Reviewer" and "Data Analyst" opens the page of "Legal Reviewer"
+- **THEN** the title reads "Legal Reviewer" with its logo and no arrow, and a click on it opens nothing
 
 ### Requirement: Actions menu of an agent
 The actions menu of an agent SHALL list Edit agent (`Common:EditAgent`), Share agent and Agent info (`Common:AgentInfo`) first, then copy link, change owner and Leave agent (`Common:LeaveTheAgent`), and Delete agent (`Common:DeleteAgent`) last after a separator. An item SHALL be present only when the agent's rights allow the action to the user.

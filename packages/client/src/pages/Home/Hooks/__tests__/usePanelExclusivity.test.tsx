@@ -111,6 +111,26 @@ describe("usePanelExclusivity", () => {
     expect(infoPanelStore.isVisible).toBe(true);
   });
 
+  it("closes the Info panel of an agent's page once the chat opened from the sidebar is no longer the section's own", () => {
+    const { aiChatStore, infoPanelStore } = makeStores();
+    const page = makeAutoObservable({ isAgent: true });
+    mount(infoPanelStore, () => page.isAgent);
+
+    act(() => aiChatStore.open());
+    act(() => infoPanelStore.setIsVisible(true));
+    // AI Chat in the sidebar: the page releases its chat and the chat opens
+    // again, fullscreen, while the agent is still the open room.
+    act(() => aiChatStore.close());
+    act(() => aiChatStore.open());
+    expect(infoPanelStore.isVisible).toBe(true);
+
+    act(() => {
+      page.isAgent = false;
+    });
+    expect(infoPanelStore.isVisible).toBe(false);
+    expect(aiChatStore.isVisible).toBe(true);
+  });
+
   it("opens the Info panel beside the agent's chat without closing it", () => {
     const { aiChatStore, infoPanelStore } = makeStores();
     mount(infoPanelStore, () => true);

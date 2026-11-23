@@ -41,7 +41,7 @@ Version `1794687729-e1b1` of the design, read on 2026-11-16, has fifteen boards.
 | 05 Plus menu | `ai-chat-source-menus` (Skill sets list, removing a set, manage rows) | Its "Manage Skill Sets..." is written in sentence case, as on board 01. |
 | 06 Slash | `ai-chat-source-menus` (Slash menu, skill calls) | The hover box on a call: needs a rich input. The board lists skill sets only; the sections of board 01 are taken, with Data sources after them. |
 | 07 Data sources | `ai-chat-source-menus` (Data sources list, limit, manage rows) | — |
-| 08 Agent chat + info | `ai-agent-page` (title menu, Share agent), `ai-agent-info-panel` (Context), `ai-chat-messages` | Context's Data sources section (the owner's decision, proposal). The "current room" tag: the agent's page has no location. |
+| 08 Agent chat + info | `ai-agent-page` (title, Share agent), `ai-agent-info-panel` (Context), `ai-chat-messages` | The "current room" tag: the agent's page has no location. |
 | 09 Agent chat + details | `ai-agent-info-panel` (Details), `ai-agents-list` "Agent description" | Access "Everyone in DocSpace": `ai-agent-access` "No portal-wide access". Owner "ONLYOFFICE": as on board 04. |
 | 10 Agent chat + content | `ai-agent-info-panel` (Content) | "Not saved" and "From device": files are saved at once and the origin is not recorded. The copy to a room is not built. |
 | 11 Skill sets | `ai-skill-sets` (Columns of the Skill sets list, Skill set in the Info panel, Use a skill set in the chat) | The set's description and the skill names on the count's hover: server item 5. "Used by" matches the board ("Used by comes from the room"). Last modified shows the time too. |
@@ -90,6 +90,8 @@ The history of the default agent, and the sidebar's Recent, list all of the user
 
 *State (2026-11-16):* not reachable yet. A list asked without a scope answers only the threads of no project (`ThreadQueries`, `EntryId == null`), so since ASC.AI.Chat scopes threads the default agent's history and Recent show the conversations of no agent, and an agent's conversations are found in that agent only. The specs say so until the storage can list them together. Conversations started in an agent before the change carry no agent and stay in the general list.
 
+*Decided 2026-11-23:* Recent is the default agent's for good, not until the storage lists all: it lists that agent's conversations only, and its entry, "Show more" and a conversation under it take the chat off an agent picked in the panel before they open (`AiChatPageBridge`), so the history opened from Recent never changes with the agent. The default agent's history still awaits the one list.
+
 *Why:* Recent already shows one list, and a user looking for a conversation should not have to remember which agent it was with. *Alternative:* the default agent lists only its own conversations (cleaner, but Recent would then be a third kind of list). To confirm with the product owner.
 
 ### The panel's agent actions come from the client
@@ -106,11 +108,11 @@ Delete agent in the panel asks in a dialog of its own and deletes through the ro
 ### "Agent info" from the panel opens the Info panel in place of the chat
 The chat panel and the Info panel exclude each other outside an agent's page, so the Info panel cannot open beside a docked chat: "Agent info" in the panel opens it instead of the chat, on the agent, and the page stays. *Alternative:* navigate to the agent's page with the Info panel on Details. Rejected: the user asked about the agent, not to leave where they are; it stays as the fallback for a page with no Info panel. *Alternative:* a dialog with the About content (no board shows one).
 
-### The page title reuses the panel's agent menu
-The navigation component of ui-kit gets a title slot, and the client puts the agent menu in it for a member. On the page a pick navigates: to the picked agent's page, or to the AI Chat page for the default agent. The same slot change lets the chat toolbar sit before the actions menu, as the boards show, instead of after it.
+### The page title is the agent's name, not a menu
+The navigation component of ui-kit gets a title slot, and the client puts the agent's logo and plain name in it. Until 2026-11-23 a member got the panel's agent menu there, a pick navigating to the picked agent's page or to AI Chat; it was taken off: a page is one agent's, and agents are picked in the chat panel only. The same slot change lets the chat toolbar sit before the actions menu, as the boards show, instead of after it.
 
 ### Info panel: Details, Context and, on the agent's page, Content
-An agent's panel has Details and Context. Details is the room's Details view. Context is a client view that reads the agent in full (its linked rooms and the caller's right to edit) and its skills, so it works the same for a card selected in the list and for "Agent info" from the chat panel. The server marks no room as an agent, so the tabs helper knows one by its room type. Each section of Context ends with its own "Manage ..." row (client, 2026-11-17); the Data sources section of board 08's Context is not built; the About tab of the first version of the boards is Details in the second.
+An agent's panel has Details and Context. Details is the room's Details view. Context is a client view that reads the agent in full (its linked rooms and the caller's right to edit) and its skills, so it works the same for a card selected in the list and for "Agent info" from the chat panel. The server marks no room as an agent, so the tabs helper knows one by its room type. Each section of Context ends with its own "Manage ..." row (client, 2026-11-17); the Data sources section of board 08's Context is built for the chat that runs on the agent (client, 2026-11-23): the sources are the user's own and live in the chat's stores, so the section reads them there and is left out for an agent the chat does not run on; ui-kit's panel store hands the host the selector "Manage sources..." opens (`addDataSource`, ui-kit `bf362335`); the About tab of the first version of the boards is Details in the second.
 
 Content exists only on the agent's own page, where the conversation on screen is known (`dialogsStore.aiChatActiveThreadId`, kept by `AiChatPageBridge`). Its two lists come from two places, as the server has them (`../server`, commits `8d1745d48f` and `de201d1dc6`):
 

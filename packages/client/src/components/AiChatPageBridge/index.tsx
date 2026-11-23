@@ -59,6 +59,14 @@ import {
 /** How many conversations the sidebar's Recent lists. */
 const RECENT_THREADS_COUNT = 5;
 
+// The chat's settings on the default agent: no model and no rooms of an agent.
+const DEFAULT_AGENT = {
+  profileId: null,
+  profileName: null,
+  contextRooms: [],
+  knowledgeRooms: [],
+};
+
 type AiChatPageBridgeProps = {
   /**
    * The session may use the AI API (Shell's `canUseAi`). Without it the
@@ -85,7 +93,9 @@ type TRecentSource = {
  *
  * - fulfils the requests recorded by `dialogsStore.requestAiChatPage` - AI
  *   Chat, Recent and a conversation under it open the chat fullscreen, on the
- *   conversation, on its history or on that conversation;
+ *   conversation, on its history or on that conversation. Recent and a
+ *   conversation under it open on the default agent, whatever agent the
+ *   chat ran on;
  * - mirrors the latest conversations and the open one into `dialogsStore`
  *   for Recent's entries. They are read even while the chat is closed, since
  *   the sidebar shows them all the time. Recent lists the conversations of
@@ -105,6 +115,7 @@ const AiChatPageBridgeComponent = ({
   const request = dialogsStore.aiChatPageRequest;
   const userId = useStore("userStore").user?.id;
   const { isAiProjectRoomRoot } = useStore("treeFoldersStore");
+  const aiPresetsStore = useStore("aiPresetsStore");
 
   const location = useLocation();
   const address = `${location.pathname}${location.search}`;
@@ -299,15 +310,29 @@ const AiChatPageBridgeComponent = ({
     )
       return;
 
+    // Recent and the conversations under it are the default agent's: the
+    // history it opens never lists an agent's conversations. A chat that
+    // runs on an agent picked in the panel is taken off it first, its
+    // conversation left in that agent's history, and the request waits for
+    // the chat's scope to follow. An agent's page releases its own chat as
+    // the navigation leaves it.
+    const isRecentRequest = request.page === "history" || !!request.threadId;
+    if (isRecentRequest && chatEntityId !== undefined) {
+      if (aiPresetsStore.activePreset && !isAiProjectRoomRoot) {
+        const chatThreads = useThreadsStore.getState();
+        if (chatThreads.threadId)
+          chatThreads.onSwitchToNewThread({ keepSessionProfile: true });
+        aiPresetsStore.cancelApply();
+        aiPresetsStore.setActivePreset(null);
+        aiChatStore.applyPreset(DEFAULT_AGENT);
+      }
+      return;
+    }
+
     const consumed = dialogsStore.consumeAiChatPageRequest();
     if (!consumed) return;
 
-    // After the effects of the navigation have run: leaving an AI project
-    // releases its chat and closes the panel, and on a phone a section change
-    // closes it too. Opened before them, the chat would be closed again.
-    // Not cleared on re-run: the request is consumed already, so a re-run
-    // has nothing else to do it with.
-    window.setTimeout(() => {
+    const openChat = () => {
       // The entry's highlight fills to the end once its page is shown. A
       // section does that when its list has loaded; the chat has no list,
       // and from the agents list it is opened without a navigation at all,
@@ -327,12 +352,27 @@ const AiChatPageBridgeComponent = ({
       aiChatStore.setFullscreen(true);
       if (consumed.page === "history") void openHistory();
       else goToChat();
-    }, 0);
+    };
+
+    // A request that waits for no navigation opens the chat at once, before
+    // the page under it is painted: the sidebar asks so wherever nothing on
+    // the way closes the chat. One that waited for a navigation opens after
+    // that navigation's effects have run: leaving an AI project releases its
+    // chat and closes the panel, and on a phone a section change closes it
+    // too. Opened before them, the chat would be closed again. Not cleared
+    // on re-run: the request is consumed already, so a re-run has nothing
+    // else to do it with.
+    if (consumed.afterLocationKey === null) openChat();
+    else window.setTimeout(openChat, 0);
   }, [
     request,
     location.key,
     dialogsStore,
     aiChatStore,
+    aiPresetsStore,
+    chatEntityId,
+    isAiProjectRoomRoot,
+    useThreadsStore,
     goToChat,
     openHistory,
     switchToThread,

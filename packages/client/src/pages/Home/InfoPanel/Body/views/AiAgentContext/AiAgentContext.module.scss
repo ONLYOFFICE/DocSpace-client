@@ -48,6 +48,12 @@
 }
 
 .heading {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+// What the assistant does with the section's sources, under its caption.
+.hint {
   margin: 0 0 4px;
   color: var(--text-secondary);
 }
@@ -74,4 +80,36 @@
 
 .manage {
   align-self: flex-start;
+}
+
+// A data source as one row: its icon, its name and, at the end, the cross
+// that disconnects it.
+.dataSource {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.dataSourceIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  height: 24px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+
+    path {
+      fill: var(--text-secondary);
+    }
+  }
+}
+
+.dataSourceRemove {
+  flex-shrink: 0;
 }

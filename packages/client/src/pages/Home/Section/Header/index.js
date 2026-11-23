@@ -96,7 +96,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { HeadingWithTooltip } from "@onlyoffice/apps-ui-kit/components/heading";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
-import AiChatAgentPicker from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/components/ai-chat-agent-picker";
 import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers/availability";
 import { useOpenAiChat } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
@@ -110,6 +109,7 @@ import PrivateSectionNote from "./sub-components/PrivateSectionNote";
 import { ChatToolbar } from "@onlyoffice/apps-ui-kit/ai-agent/chat-toolbar";
 import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 import { getAgentRights } from "SRC_DIR/helpers/agentRights";
+import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -953,15 +953,27 @@ const SectionHeaderContent = (props) => {
         : t("Files:ShareRoom")
       : null;
 
-  // A member's agent page is titled by the agents menu: the open agent,
-  // and the others to switch to. Anyone else reads the agent's name as plain
-  // text: the navigation's own title would open the breadcrumb drop box.
+  // An agent's page is titled by the agent's logo and name as plain text:
+  // the navigation's own title would open the breadcrumb drop box, and
+  // the agents menu belongs to the chat panel, where the chat can change
+  // its agent; a page is one agent's.
   let agentTitle;
   if (isAiProjectRoomRoot) {
-    agentTitle =
-      agentRights?.chat && aiChatStore?.hasAgentPicker ? (
-        <AiChatAgentPicker title={currentTitle} />
-      ) : (
+    agentTitle = (
+      <div className={styles.agentTitleRow}>
+        <ProjectLogo
+          project={{
+            title: currentTitle,
+            // The logo component reads the colour of every logo.
+            logo: {
+              ...selectedFolder.logo,
+              color: selectedFolder.logo?.color ?? "",
+            },
+          }}
+          size="24px"
+          radius="5px"
+          className={styles.agentTitleLogo}
+        />
         <HeadingWithTooltip
           className={styles.agentTitle}
           title={currentTitle}
@@ -970,7 +982,8 @@ const SectionHeaderContent = (props) => {
         >
           {currentTitle}
         </HeadingWithTooltip>
-      );
+      </div>
+    );
   }
 
   const headerProps = React.useMemo(
@@ -1157,7 +1170,10 @@ const SectionHeaderContent = (props) => {
                 // Share agent: the agent's chat toolbar goes before the room
                 // menu. An agent the caller is not a member of has no chat.
                 agentRights?.chat ? (
-                  <ChatToolbar keepSessionProfile />
+                  <ChatToolbar
+                    className={styles.agentChatToolbar}
+                    keepSessionProfile
+                  />
                 ) : undefined
               }
               analyzeResponsesButton={

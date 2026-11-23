@@ -34,18 +34,18 @@ While the chat runs on the default agent, its chat history SHALL list all of the
 - **THEN** the eight conversations with agents and the conversations with the default agent are all listed
 
 ### Requirement: Recent in the sidebar
-The sidebar's Recent (`Common:AIChatRecent`) SHALL list the user's latest conversations whatever agent they belong to, and its "Show more" (`Common:ShowMore`) SHALL open the history of all conversations. Until the AI storage can list them together, Recent SHALL list the latest conversations that belong to no agent.
+The sidebar's Recent (`Common:AIChatRecent`) SHALL list the user's latest conversations with the default agent only, whatever agent the chat runs on. Recent, its "Show more" (`Common:ShowMore`) and a conversation under it SHALL open the chat on the default agent, with the default agent's history.
 
 #### Scenario: Mixed conversations
 - **WHEN** a user's latest conversations are two with "Legal Reviewer" and one with the default agent
-- **THEN** Recent lists all three
+- **THEN** Recent lists the one with the default agent
+
+#### Scenario: Recent with an agent picked in the panel
+- **WHEN** a user with "Legal Reviewer" picked in the chat panel clicks Recent
+- **THEN** the chat opens on the default agent and its history lists no conversation with "Legal Reviewer"
 
 ### Requirement: Opening a conversation of another agent
-Opening a conversation from Recent or from the default agent's history SHALL open it on the agent it belongs to. In the chat panel the panel SHALL switch to that agent. From the sidebar the agent's page SHALL open, or the AI Chat page for a conversation of the default agent.
-
-#### Scenario: From Recent
-- **WHEN** a user on the Rooms section clicks a conversation with "Legal Reviewer" in Recent
-- **THEN** the page of "Legal Reviewer" opens on that conversation
+Opening a conversation of another agent from the default agent's history SHALL open it on the agent it belongs to: the chat panel SHALL switch to that agent.
 
 #### Scenario: From the panel's history
 - **WHEN** a user opens the history in the chat panel on the default agent and clicks a conversation with "Legal Reviewer"

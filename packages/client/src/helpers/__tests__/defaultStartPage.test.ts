@@ -143,3 +143,45 @@ describe("getDefaultStartPageUrl", () => {
     expect(getDefaultStartPageUrl(FolderType.Forms)).toBe("/forms/filter");
   });
 });
+
+// Bug 84835: a section switched off in Settings -> Apps is no start page.
+describe("sections switched off in Settings -> Apps", () => {
+  it("offers Rooms and Forms while nothing says they are off", () => {
+    expect(isStartPageAvailable(FolderType.Rooms)).toBe(true);
+    expect(isStartPageAvailable(FolderType.Forms)).toBe(true);
+  });
+
+  it("does not offer Rooms or Forms once their app is off", () => {
+    expect(
+      isStartPageAvailable(FolderType.Rooms, {
+        isRoomsSectionAvailable: false,
+      }),
+    ).toBe(false);
+    expect(
+      isStartPageAvailable(FolderType.Forms, {
+        isFormsSectionAvailable: false,
+      }),
+    ).toBe(false);
+  });
+
+  it("opens Home when the saved section is switched off", () => {
+    expect(
+      getEffectiveDefaultFolderType(FolderType.Rooms, {
+        isRoomsSectionAvailable: false,
+      }),
+    ).toBe(FolderType.DEFAULT);
+    expect(
+      getEffectiveDefaultFolderType(FolderType.Forms, {
+        isFormsSectionAvailable: false,
+      }),
+    ).toBe(FolderType.DEFAULT);
+  });
+
+  it("opens Home for Private when Rooms is switched off too", () => {
+    expect(
+      getEffectiveDefaultFolderType(FolderType.PrivateRooms, {
+        isRoomsSectionAvailable: false,
+      }),
+    ).toBe(FolderType.DEFAULT);
+  });
+});

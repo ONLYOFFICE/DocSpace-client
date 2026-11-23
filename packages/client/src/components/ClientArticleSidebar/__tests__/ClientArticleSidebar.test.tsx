@@ -418,15 +418,36 @@ describe("ClientArticleSidebar — leaving the AI Chat page", () => {
     return store;
   };
 
-  it("closes the fullscreen chat when Agents is clicked, and opens the projects list", () => {
+  // The name the ui-kit gives the event (`AnimationEvents.END_ANIMATION`).
+  const pageShown = () => window.dispatchEvent(new CustomEvent("ANIMATION_END"));
+
+  it("keeps the fullscreen chat over the page until the clicked entry's page is shown, then closes it", () => {
     const store = renderWithChat(true);
 
     fireEvent.click(screen.getByTestId("nav-ai-rooms"));
 
-    expect(store.close).toHaveBeenCalled();
     expect(navigateMock).toHaveBeenCalledWith(
       expect.stringMatching(/^\/ai-rooms\/filter\?/),
     );
+    expect(store.close).not.toHaveBeenCalled();
+
+    pageShown();
+    expect(store.close).toHaveBeenCalledTimes(1);
+    // The wait is over: a later page load closes nothing.
+    pageShown();
+    expect(store.close).toHaveBeenCalledTimes(1);
+    chat.store = null;
+  });
+
+  it("closes the fullscreen chat anyway when the page never says it is shown", () => {
+    vi.useFakeTimers();
+    const store = renderWithChat(true);
+
+    fireEvent.click(screen.getByTestId("nav-ai-rooms"));
+    expect(store.close).not.toHaveBeenCalled();
+    vi.runAllTimers();
+    expect(store.close).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
     chat.store = null;
   });
 

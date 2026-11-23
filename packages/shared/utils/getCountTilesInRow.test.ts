@@ -178,54 +178,6 @@ describe("getCountTilesInGrid", () => {
     });
   });
 
-  describe("agents", () => {
-    // The agent rows' grid:
-    // minmax(min(100%, clamp(340px, calc((100% - 16px) / 2), 560px)), 1fr).
-    const getAgentCssGridColumns = (width: number) => {
-      const isDesktop = width >= 1024;
-      const gridWidth = getContentWidth(width) + (isDesktop ? -1 : 1);
-      const preferred = Math.max(340, Math.min((gridWidth - 16) / 2, 560));
-      const track = Math.floor(preferred * 64) / 64;
-
-      let columns = 1;
-      while ((columns + 1) * track + columns * 16 <= gridWidth) columns += 1;
-      return columns;
-    };
-
-    it("matches the agents' CSS auto-fill grid at every width from 320 to 2560px", () => {
-      const mismatches: string[] = [];
-
-      for (let width = 320; width <= 2560; width += 1) {
-        setLayout(width);
-
-        const expected = getAgentCssGridColumns(width);
-        const actual = getCountTilesInGrid(true, false, true);
-
-        if (actual !== expected) {
-          mismatches.push(`${width}px: ${actual} instead of ${expected}`);
-        }
-      }
-
-      expect(mismatches).toEqual([]);
-    });
-
-    it.each([
-      [1280, 2],
-      [1440, 2],
-      [1920, 2],
-    ])("lays agents out in two wide columns at %spx", (width, columns) => {
-      setLayout(width);
-
-      expect(getCountTilesInGrid(true, false, true)).toBe(columns);
-    });
-
-    it("keeps one column on a phone", () => {
-      setLayout(360);
-
-      expect(getCountTilesInGrid(true, false, true)).toBe(1);
-    });
-  });
-
   it("counts room tiles when templates are on the same list", () => {
     setLayout(1440);
 

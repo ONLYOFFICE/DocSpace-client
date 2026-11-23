@@ -59,6 +59,11 @@ import EmptyAccessLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.right
 import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
 
 import { getAgentRights } from "SRC_DIR/helpers/agentRights";
+import {
+  mapChatNoAccessStores,
+  useChatNoAccess,
+  type ChatNoAccessStoreProps,
+} from "SRC_DIR/Hooks/useChatNoAccess";
 
 import { readProjectFolder, writeProjectFolder } from "./folderContextMemory";
 import styles from "./AiProjectView.module.scss";
@@ -74,6 +79,8 @@ type AiProjectViewProps = {
   inRoom: boolean;
   setInRoom: (inRoom: boolean) => void;
   userId?: string;
+  /** What the chat's "AI is not available" screen is filled from. */
+  aiNoAccessStores: ChatNoAccessStoreProps;
 };
 
 // The chat's shape of a project's linked rooms. A room the caller can no
@@ -100,6 +107,7 @@ const AiProjectView = ({
   inRoom,
   setInRoom,
   userId,
+  aiNoAccessStores,
 }: AiProjectViewProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -107,6 +115,11 @@ const AiProjectView = ({
   const aiChatStore = useAiChatStore();
   const isAiChatAvailable = useIsAiChatAvailable();
   const { useCloudsStore } = useStores();
+  // Without these the chat cannot tell a portal whose models are all
+  // switched off from one with no provider, and offers to connect one
+  // (Bug 83381).
+  const { aiReady, noAccessProps, topUpDialog } =
+    useChatNoAccess(aiNoAccessStores);
 
   // The room on screen is the project: read it and start its chat. Another
   // project room replaces it; the same room is left as it is. A project the
@@ -347,16 +360,32 @@ const AiProjectView = ({
     // shows, as for an agent's chat.
     <div className={classnames(styles.projectChat, "chat-container")}>
       <div className={styles.chatBody}>
-        <AiChatPanelBody />
+        <AiChatPanelBody aiReady={aiReady} noAccessProps={noAccessProps} />
       </div>
+      {topUpDialog}
     </div>
   );
 };
 
-export default inject(({ aiProjectsStore, selectedFolderStore, userStore }: TStore) => ({
-  aiProjectsStore,
-  roomId: Number(selectedFolderStore.id),
-  inRoom: selectedFolderStore.inRoom,
-  setInRoom: selectedFolderStore.setInRoom,
-  userId: userStore.user?.id,
-}))(observer(AiProjectView));
+export default inject(
+  ({
+    aiProjectsStore,
+    selectedFolderStore,
+    userStore,
+    settingsStore,
+    paymentStore,
+    authStore,
+  }: TStore) => ({
+    aiProjectsStore,
+    roomId: Number(selectedFolderStore.id),
+    inRoom: selectedFolderStore.inRoom,
+    setInRoom: selectedFolderStore.setInRoom,
+    userId: userStore.user?.id,
+    aiNoAccessStores: mapChatNoAccessStores({
+      settingsStore,
+      userStore,
+      paymentStore,
+      authStore,
+    } as TStore),
+  }),
+)(observer(AiProjectView));

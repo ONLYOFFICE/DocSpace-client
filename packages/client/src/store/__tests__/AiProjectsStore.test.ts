@@ -43,7 +43,7 @@ import { VectorizationStatus } from "@docspace/shared/enums";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
 import type AiPresetsStore from "../AiPresetsStore";
-import AiProjectsStore, { errorMessage } from "../AiProjectsStore";
+import AiProjectsStore, { errorMessage, isPaymentRequired } from "../AiProjectsStore";
 
 const project = (id: number, title = `Project ${id}`, extra: Partial<TAiProject> = {}): TAiProject =>
   ({
@@ -98,6 +98,15 @@ describe("AiProjectsStore", () => {
       expect(errorMessage({ response: { data: { error: { message: "dotnet says no" } } } })).toBe("dotnet says no");
       expect(errorMessage(new Error("plain"))).toBe("plain");
       expect(errorMessage("text")).toBe("text");
+    });
+  });
+
+  describe("isPaymentRequired", () => {
+    it("tells the bare 402 of an unpaid portal from other failures", () => {
+      expect(isPaymentRequired({ response: { status: 402 }, message: "Request failed with status code 402" })).toBe(true);
+      expect(isPaymentRequired({ response: { status: 403 } })).toBe(false);
+      expect(isPaymentRequired(new Error("plain"))).toBe(false);
+      expect(isPaymentRequired(null)).toBe(false);
     });
   });
 

@@ -71,8 +71,10 @@ import type {
   NavSubItem,
 } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import { isDesktop } from "@docspace/shared/utils";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
@@ -163,6 +165,14 @@ const AI_ROOM_TYPES: Partial<Record<FolderType, RoomsType>> = {
   [FolderType.KnowledgeRoom]: RoomsType.KnowledgeRoom,
   [FolderType.AiProjectRoom]: RoomsType.AiProjectRoom,
 };
+
+// How long a fullscreen chat waits for the page of a clicked entry to say
+// it is shown before it closes anyway.
+const CHAT_CLOSE_TIMEOUT = 10000;
+
+// The path of the AI section's lists: Agents, and Skill sets and Knowledge
+// bases, which narrow it with `type`.
+const AI_AGENTS_PATH = "/ai-rooms/filter";
 
 // Ids of the entries listed under Agents and Recent, Recent's Show more
 // included.
@@ -256,16 +266,49 @@ const ClientArticleSidebar = ({
   // it, so the chat closes rather than shrinking to the side panel over the
   // entry's page - Agents shows the projects list, not the chat beside it.
   // A side-panel chat stays open across sections, as before.
+  //
+  // The AI Chat page closes once the entry's page says it is shown
+  // (`END_ANIMATION`), not at the click: closed at once, it uncovered the
+  // agents list it lies over for as long as the entry's own list took to
+  // load. A page that never says so is not waited for longer than
+  // `CHAT_CLOSE_TIMEOUT`, and a chat asked for again meanwhile is left open.
+  const pendingChatCloseRef = React.useRef<(() => void) | null>(null);
+  const cancelChatClose = React.useCallback(() => {
+    pendingChatCloseRef.current?.();
+    pendingChatCloseRef.current = null;
+  }, []);
+  React.useEffect(() => cancelChatClose, [cancelChatClose]);
+  const isAiProjectRoomRootRef = React.useRef(isAiProjectRoomRoot);
+  isAiProjectRoomRootRef.current = isAiProjectRoomRoot;
+  const leaveFullscreenChat = React.useCallback(() => {
+    if (!aiChatStore?.effectiveFullscreen) return;
+    cancelChatClose();
+    if (isAiProjectRoomRootRef.current) {
+      aiChatStore.close();
+      return;
+    }
+    const close = () => {
+      cancelChatClose();
+      if (aiChatStore.effectiveFullscreen) aiChatStore.close();
+    };
+    const timer = window.setTimeout(close, CHAT_CLOSE_TIMEOUT);
+    window.addEventListener(AnimationEvents.END_ANIMATION, close);
+    pendingChatCloseRef.current = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener(AnimationEvents.END_ANIMATION, close);
+    };
+  }, [aiChatStore, cancelChatClose]);
+
   const nav = React.useCallback(
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
       onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
-        if (aiChatStore?.effectiveFullscreen) aiChatStore.close();
+        leaveFullscreenChat();
         onFolderNavigateRef.current?.();
         if (!meta?.isLink) navigate(path);
       },
     }),
-    [navigate, aiChatStore],
+    [navigate, leaveFullscreenChat],
   );
 
   const folderUrl = React.useCallback(
@@ -329,25 +372,35 @@ const ClientArticleSidebar = ({
   // AI Chat and Recent are the chat itself, not a list: they open it
   // fullscreen on the conversation or on its history, over the agents list
   // (the section's root), which is what closing the chat goes back to. From
-  // anywhere else - another section, an AI project, a narrowed list - the
-  // click goes to that list first and the chat opens once it is there.
+  // anywhere else - another section, a narrowed list - the click opens the
+  // chat at once and goes to that list under it, so the list is never seen
+  // on the way. Two navigations close a chat opened before them, and there
+  // the chat waits for the navigation to land: leaving an AI project, whose
+  // view releases its chat, and, below the desktop width, a change of the
+  // path, which closes the chat that covers the main area.
   const locationRef = React.useRef(location);
   locationRef.current = location;
   const openAiChatPage = React.useCallback(
     (page: "chat" | "history", threadId?: string) => () => {
+      // The chat is asked for again: a close still waiting for the entry
+      // left before it is called off.
+      cancelChatClose();
       const current = locationRef.current;
       const isOnAgentsList =
-        current.pathname === "/ai-rooms/filter" &&
+        current.pathname === AI_AGENTS_PATH &&
         !new URLSearchParams(current.search).has("type");
       if (isOnAgentsList) {
         requestAiChatPage?.(page, null, threadId);
         return;
       }
-      requestAiChatPage?.(page, current.key, threadId);
+      const closesChat =
+        !!isAiProjectRoomRootRef.current ||
+        (!isDesktop() && current.pathname !== AI_AGENTS_PATH);
+      requestAiChatPage?.(page, closesChat ? current.key : null, threadId);
       onFolderNavigateRef.current?.();
       navigate(aiAgentsUrl);
     },
-    [requestAiChatPage, navigate, aiAgentsUrl],
+    [requestAiChatPage, navigate, aiAgentsUrl, cancelChatClose],
   );
 
   // While the chat covers the page, fullscreen, the entry it was opened as

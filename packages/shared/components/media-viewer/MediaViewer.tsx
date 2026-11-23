@@ -54,8 +54,12 @@ import { getFileEncryptionAccess } from "../../api/files";
 import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
 import { decryptFile } from "../../services/encryption/file-keys";
 import { getSpecificEncryptionErrorMessage } from "../../services/encryption/error-i18n";
-import { NoAccessError } from "../../services/encryption/errors";
 import {
+  KeyReplacedError,
+  NoAccessError,
+} from "../../services/encryption/errors";
+import {
+  isWrappedForReplacedKey,
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
 } from "../../services/encryption/room-file-access";
@@ -462,6 +466,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         const fileKeys = encryptionInfo?.fileKeys ?? [];
         if (!fileKeys.some((k) => String(k.userId) === String(userId))) {
           throw new NoAccessError(String(userId));
+        }
+        // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+        if (isWrappedForReplacedKey(encryptionInfo, String(userId))) {
+          throw new KeyReplacedError();
         }
 
         const identity = await requireUnlock(String(userId));

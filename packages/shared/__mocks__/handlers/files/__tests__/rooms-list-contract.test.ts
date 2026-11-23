@@ -110,6 +110,23 @@ describe("privateRoomListHandler — privacyFilter (mirrors VirtualRoomsCommonCo
     },
   );
 
+  it.each(["Forms", "FormTemplates"])(
+    "Forms area (%s)",
+    async (searchArea) => {
+      useList();
+
+      const withFilter = await getRooms(
+        `?searchArea=${searchArea}&privacyFilter=${PRIVATE}`,
+      );
+      const list = await getRooms(`?searchArea=${searchArea}`);
+
+      expect(withFilter.folders.map((room) => room.id)).not.toContain(
+        PRIVATE_ROOM_ID,
+      );
+      expect(list.folders.map((room) => room.id)).toEqual([ORDINARY_ROOM_ID]);
+    },
+  );
+
   it("Archive without a filter lists every room", async () => {
     useList();
 

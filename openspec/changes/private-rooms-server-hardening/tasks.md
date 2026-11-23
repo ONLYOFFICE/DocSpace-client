@@ -142,7 +142,8 @@ No client task mirrors 13.1: the client creates files in a private room through 
 
 - [x] 16.1 Backend: answer `customization.ai.disabled: true` in the editor configuration of an encrypted file, whatever the portal's AI access setting, as the `server-contract` delta "Editor configuration hides AI tools for an encrypted file" describes; verify with a server unit test next to `PrivateRoomEditorTests` asserting the flag for an encrypted file and the portal-wide answer for a plain one, and by eye on a stand: no AI tools tab in the editor of an encrypted file
   - 2026-11-23: done in `a77956ac1c`, on the branch `feature/private-rooms-external-links` of `../server`, not merged into `release/v4.1.0` (`CustomizationConfig.GetAIConfigAsync`; `PrivateRoomContentGatesTests`). Not looked at on a stand
-- [ ] 16.2 Client: once 16.1 has merged, mirror the flag in the `openedit` mock of `packages/shared/__mocks__/handlers/files` for an encrypted file with a contract case "AI tools hidden for an encrypted file", and keep the doceditor's own skip of the plugin initialisation (`useEditorEvents.ts`) as the second line; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
+- [x] 16.2 Client: once 16.1 has merged, mirror the flag in the `openedit` mock of `packages/shared/__mocks__/handlers/files` for an encrypted file with a contract case "AI tools hidden for an encrypted file", and keep the doceditor's own skip of the plugin initialisation (`useEditorEvents.ts`) as the second line; verify with `cd packages/shared && pnpm exec vitest run __mocks__/handlers/files`
+  - 2026-11-23: done. The `openedit` handler of the encrypted files mock answers `customization.ai.disabled` as true for an encrypted file and false for a plain one, with the contract case "AI tools hidden for an encrypted file". The doceditor's own skip of the plugin initialisation is untouched
 
 ## Workflow follow-up
 

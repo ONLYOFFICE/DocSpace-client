@@ -3120,7 +3120,9 @@ type TPrivacyFilteredList = {
  * FileSecurity.GetVirtualRoomsAsync). The Rooms area, `Active` or no area
  * named, never lists a private room: the server forces `NotPrivate` on it,
  * and reads `Private` on it as the private rooms section, which lists only
- * private rooms. On every other area the filter applies as given:
+ * private rooms. The Forms and form-template areas list no private room
+ * whatever the filter (SearchAreaExtensions.MatchesRoom). On every other
+ * area the filter applies as given:
  * FolderDao.BuildRoomsQuery keeps the private rooms for `Private` and the
  * others for `NotPrivate`. `Private` adds no room on third-party storage.
  * The `PrivateRooms` area means `Private` whatever the filter says. The
@@ -3135,10 +3137,11 @@ export const withRoomPrivacyFilter = <T extends TPrivacyFilteredList>(
   const searchArea = new URL(request.url).searchParams.get("searchArea");
   const isRoomsArea = !searchArea || searchArea === "Active";
   const requested = readPrivacyFilter(request);
+  const isFormsArea = searchArea === "Forms" || searchArea === "FormTemplates";
   const privacyFilter =
     searchArea === PRIVATE_ROOMS_SEARCH_AREA
       ? PRIVACY_FILTER_PRIVATE
-      : isRoomsArea && requested !== PRIVACY_FILTER_PRIVATE
+      : isFormsArea || (isRoomsArea && requested !== PRIVACY_FILTER_PRIVATE)
         ? PRIVACY_FILTER_NOT_PRIVATE
         : requested;
   if (!privacyFilter) return list;

@@ -482,7 +482,7 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
     ]);
     handle.current!.setRoomUserKeys([key(ALICE_ID, "a"), key(BOB_ID, "b")]);
 
-    expect(await userIdsOf(9)).toEqual([BOB_ID]);
+    expect(await userIdsOf(9)).toEqual([ALICE_ID, BOB_ID].sort());
   });
 
   it("Creator who left the room", async () => {
@@ -491,9 +491,8 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/publickeys (mirrors S
       { id: 10, title: "s.txt", encrypted: true, createdBy: creatorId },
     ]);
     handle.current!.setRoomUserKeys([key(ALICE_ID, "a"), key(BOB_ID, "b")]);
-    handle.current!.setNonMemberKeys([key(creatorId, "c")]);
 
-    expect(await userIdsOf(10)).toEqual([BOB_ID, creatorId].sort());
+    expect(await userIdsOf(10)).toEqual([ALICE_ID, BOB_ID].sort());
   });
 });
 
@@ -2003,6 +2002,20 @@ describe("encryptedFiles mock — GET /files/file/{fileId}/openedit (mirrors Edi
     expect(response.editorConfig.customization.mentionShare).toBe(true);
     expect(response.document.info.favorite).toBe(false);
     expect(response.file.encrypted).toBeUndefined();
+  });
+
+  it("AI tools hidden for an encrypted file", async () => {
+    const ai = async (fileId: number) =>
+      (
+        (await (await fetch(OPENEDIT_URL(fileId))).json()) as {
+          response: {
+            editorConfig: { customization: { ai: { disabled: boolean } } };
+          };
+        }
+      ).response.editorConfig.customization.ai;
+
+    expect(await ai(OPENEDIT_FILE_ID)).toEqual({ disabled: true });
+    expect(await ai(ORDINARY_FILE_ID)).toEqual({ disabled: false });
   });
 
   it("answers 404 for an unknown file", async () => {

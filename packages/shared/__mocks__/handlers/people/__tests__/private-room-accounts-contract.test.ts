@@ -42,6 +42,10 @@ import {
   encryptedFilesHandlers,
   type EncryptedFilesHandlerHandle,
 } from "../../files/encryptedFiles";
+import {
+  roomMembersHandlers,
+  type RoomMembersHandlerHandle,
+} from "../../rooms/roomMembers";
 import { privateRoomAccountsHandlers } from "../privateRoomAccounts";
 
 const PORT = "3232";
@@ -55,12 +59,18 @@ const files: { current: EncryptedFilesHandlerHandle | null } = {
   current: null,
 };
 
+const members: { current: RoomMembersHandlerHandle | null } = {
+  current: null,
+};
+
 const server = setupServer(
   ...privateRoomAccountsHandlers(PORT, {
     owners: [OWNER_ID],
     canTakeRooms: [CAROL_ID],
     files,
+    members,
   }),
+  ...roomMembersHandlers(PORT, ROOM_ID, { handle: members }),
   ...encryptedFilesHandlers(PORT, {
     roomId: ROOM_ID,
     ownerId: OWNER_ID,
@@ -72,6 +82,10 @@ beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 afterAll(() => server.close());
 
 beforeEach(() => {
+  members.current!.setMembers([
+    { id: OWNER_ID, access: 1 },
+    { id: BOB_ID, access: 11 },
+  ]);
   files.current!.setFiles([
     {
       id: 1,
@@ -138,6 +152,20 @@ describe("privateRoomAccounts mock - POST /people/type (mirrors UserController.S
   });
 
   it("Member turned into a guest", async () => {
-    expect((await toGuest(BOB_ID, BOB_ID)).status).toBe(200);
+    const res = await toGuest(BOB_ID, CAROL_ID);
+
+    expect(res.status).toBe(200);
+    expect(members.current!.getMembers().map((m) => m.id)).toEqual([OWNER_ID]);
+    expect(keyHolders()).toEqual([OWNER_ID]);
+  });
+
+  it("Guest made a user again", async () => {
+    await toGuest(BOB_ID, CAROL_ID);
+
+    const res = await put("type", { type: 4, userId: BOB_ID }, "POST");
+
+    expect(res.status).toBe(200);
+    expect(members.current!.getMembers().map((m) => m.id)).toEqual([OWNER_ID]);
+    expect(keyHolders()).toEqual([OWNER_ID]);
   });
 });

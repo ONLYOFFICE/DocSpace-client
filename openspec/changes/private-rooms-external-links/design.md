@@ -444,6 +444,23 @@ none is open. The technical decisions below follow from them.
     hold them. A visitor still opens a document in the editor, in view
     mode, once the Document Server opens an encrypted document for a
     visitor without an account (task 0.3).
+25. **How the two values are derived, and what the envelope is
+    (2026-11-23, with task 2.1).** The input is the 32 bytes of the
+    secret, followed, when the link has a password, by the password
+    stretched with Argon2id under the parameters of a passphrase and a
+    salt derived from the secret. HKDF-SHA256 over that input gives the
+    sealing key under one label and the proof under another; the server
+    stores SHA-256 of the proof. The private key of the link is sealed in
+    the envelope of an identity key, opened by the sealing key in the
+    place of a passphrase, with the smallest parameters its key derivation
+    takes: the sealing key is uniform already, and the password has been
+    stretched before it. Alternative: a format of its own for the sealed
+    key. Rejected: the identity envelope already binds the public key and
+    is parsed and tested; a second format would repeat it. The envelope is
+    168 characters, well under the 4096 the server takes. The parameters
+    of the password are fixed and not stored, so a change of them needs
+    new labels. The proof is sent as base64 of its 32 bytes; the server
+    names no encoding yet.
 
 ## Risks / Trade-offs
 

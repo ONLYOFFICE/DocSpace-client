@@ -38,6 +38,7 @@ export * from "./errors";
 export * from "./utils";
 export * from "./identity";
 export * from "./hpke";
+export * from "./link-key";
 export * from "./file-keys";
 export * from "./streaming-encryption";
 export * from "./recovery";

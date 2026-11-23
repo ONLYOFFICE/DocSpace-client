@@ -91,7 +91,7 @@ describe("AiProjectTile", () => {
     expect(screen.queryByTestId("ai-project-tile-skills-more")).not.toBeInTheDocument();
   });
 
-  it("names the first two skill sets one per line, then counts the rest", () => {
+  it("names the first two skill sets on one line, then counts the rest", () => {
     store.tileSummaries = {
       7: { model: null, modelAvailable: true, skills: ["Legal", "Sales", "HR", "Finance"], knowledge: [] },
     };

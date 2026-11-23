@@ -185,6 +185,7 @@ const Shell = ({ page = "home", ...rest }) => {
     selectedIsRootFolder,
     selectedSecurity,
     isPrivacyFolder,
+    isRoomsSectionAvailable,
     isFormsFolderRoot,
     isFormRoomRoot,
     isAIReady,
@@ -1044,6 +1045,7 @@ const Shell = ({ page = "home", ...rest }) => {
           theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
           isAvailable={isAiChatAvailable}
+          roomsSectionAvailable={isRoomsSectionAvailable}
           // Anonymous sessions (login redirect, public room, public preview)
           // would 401 on every AI call; guests are barred from AI both
           // server-side (endpoint checks) and by role — a guest can never
@@ -1130,6 +1132,7 @@ const ShellWrapper = inject(
     paymentStore,
     peopleStore,
     filesStore,
+    appsStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -1277,6 +1280,9 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
+      // The Rooms section is on in Settings -> Apps: the chat's selectors
+      // offer it only then, as the client's own selectors do (Bug 84833).
+      isRoomsSectionAvailable: appsStore?.isInstalled("ai-rooms") ?? true,
       // The chat's context rooms: the Instructions rooms of the agent the
       // chat runs on, else the skill sets "Use in chat" connected to the
       // default agent's chat; a new array per render, the ui-kit provider

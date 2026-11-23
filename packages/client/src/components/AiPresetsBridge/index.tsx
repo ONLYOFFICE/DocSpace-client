@@ -60,7 +60,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import DialogComponent from "SRC_DIR/components/GlobalEvents/sub-components/Dialog";
 import type AiPresetsStore from "SRC_DIR/store/AiPresetsStore";
-import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
+import { errorMessage, isPaymentRequired } from "SRC_DIR/store/AiProjectsStore";
 import { canManageProjects, hasPortalChatModel } from "SRC_DIR/pages/AiProjects/utils";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 import { InfoPanelView, showInfoPanel } from "SRC_DIR/helpers/info-panel";
@@ -123,6 +123,8 @@ type AiPresetsBridgeProps = {
   setInfoPanelView: (view: InfoPanelView) => void;
   /** The Info panel: whether it is on screen (observable). */
   infoPanelStore: { isVisible: boolean };
+  /** Opens the warning of a portal whose plan is not paid. */
+  showPaymentWarning: () => void;
 };
 
 // A project read without its logo is drawn with its initials.
@@ -161,6 +163,7 @@ const AiPresetsBridge = ({
   selectForInfoPanel,
   setInfoPanelView,
   infoPanelStore,
+  showPaymentWarning,
 }: AiPresetsBridgeProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -594,7 +597,9 @@ const AiPresetsBridge = ({
       // A linked room that could not be shared with a member, and the like.
       saved.project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
     } catch (e) {
-      toastr.error(errorMessage(e));
+      // An unpaid portal: the warning shown for a new room says why.
+      if (isPaymentRequired(e)) showPaymentWarning();
+      else toastr.error(errorMessage(e));
     }
   };
 
@@ -635,8 +640,10 @@ export default inject(
     userStore,
     settingsStore,
     paymentStore,
+    dialogsStore,
   }: TStore) => ({
   aiPresetsStore,
+  showPaymentWarning: () => dialogsStore.setQuotaWarningDialogVisible(true),
   isAiProjectOpen: aiProjectsStore.activeProject !== null,
   openEditAiProject: aiProjectsStore.openEditDialogById,
   changeAgentSkillRooms: aiProjectsStore.changeSkillRooms,

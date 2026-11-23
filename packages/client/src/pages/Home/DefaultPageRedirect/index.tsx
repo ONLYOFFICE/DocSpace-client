@@ -45,6 +45,8 @@ type Props = {
   isGuest?: boolean;
   aiServicesEnabled?: boolean;
   isPrivateRoomsSectionAvailable?: boolean;
+  isRoomsSectionAvailable?: boolean;
+  isFormsSectionAvailable?: boolean;
 };
 
 const DefaultPageRedirectComponent = ({
@@ -52,11 +54,15 @@ const DefaultPageRedirectComponent = ({
   isGuest,
   aiServicesEnabled,
   isPrivateRoomsSectionAvailable,
+  isRoomsSectionAvailable,
+  isFormsSectionAvailable,
 }: Props) => {
   const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
     isGuest,
     aiServicesEnabled,
     isPrivateRoomsSectionAvailable,
+    isRoomsSectionAvailable,
+    isFormsSectionAvailable,
   });
 
   return <Navigate to={defaultUrl} replace />;
@@ -68,5 +74,7 @@ export const DefaultPageRedirect = inject(
     isGuest: userStore.user?.isVisitor ?? false,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
+    isRoomsSectionAvailable: appsStore.isInstalled("ai-rooms"),
+    isFormsSectionAvailable: appsStore.isInstalled("ai-forms"),
   }),
 )(observer(DefaultPageRedirectComponent));

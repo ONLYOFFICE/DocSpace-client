@@ -834,7 +834,7 @@ describe("encryptedFiles mock — the copy right (mirrors FileSecurity.FilterEnt
       security: {
         Read: true,
         Download: true,
-        ReadHistory: true,
+        ReadHistory: false,
         Copy: false,
         Edit: false,
         Rename: false,
@@ -878,31 +878,50 @@ describe("encryptedFiles mock — the room owner's rights and the versions (mirr
     ).json()) as Listing;
   const seed = { id: 1, title: "secret.docx", encrypted: true, fileKeys: [] };
 
-  it("File in an active private room reports the owner's rename, lock, link and history rights", async () => {
-    handle.current!.setFiles([seed]);
+  const WITHHELD = {
+    Rename: false,
+    ReadHistory: false,
+    EditHistory: false,
+    Lock: false,
+    CopyLink: false,
+    CustomFilter: false,
+    SubmitToFormGallery: false,
+  };
+
+  it("Spreadsheet in an active private room", async () => {
+    handle.current!.setFiles([{ ...seed, title: "secret.xlsx" }]);
 
     const { files } = (await list(ROOM_ID)).response;
 
     expect(files[0].security).toMatchObject({
-      Rename: true,
-      Lock: true,
-      CopyLink: true,
-      ReadHistory: true,
-      EditHistory: true,
+      ...WITHHELD,
+      Comment: true,
+      Review: true,
     });
   });
 
-  it("File in an archived private room reports ReadHistory and none of the others", async () => {
+  it("File in an archived private room", async () => {
     archivedHandle.current!.setFiles([seed]);
 
     const { files } = (await list(ARCHIVED_ROOM_ID)).response;
 
     expect(files[0].security).toMatchObject({
-      Rename: false,
-      Lock: false,
-      CopyLink: false,
+      ...WITHHELD,
+      Comment: false,
+      Review: false,
+    });
+  });
+
+  it("keeps the rights of a file stored in the clear in a private room", async () => {
+    handle.current!.setFiles([{ ...seed, encrypted: false }]);
+
+    const { files } = (await list(ROOM_ID)).response;
+
+    expect(files[0].security).toMatchObject({
+      Rename: true,
       ReadHistory: true,
-      EditHistory: false,
+      Lock: true,
+      CopyLink: true,
     });
   });
 
@@ -923,9 +942,9 @@ describe("encryptedFiles mock — the room owner's rights and the versions (mirr
     expect(await rightsOf("secret.xlsx")).toMatchObject({
       Comment: true,
       Review: true,
-      CustomFilter: true,
-      EditHistory: true,
-      SubmitToFormGallery: true,
+      CustomFilter: false,
+      EditHistory: false,
+      SubmitToFormGallery: false,
       FillForms: false,
       StartFilling: false,
       FillingStatus: false,
@@ -951,7 +970,7 @@ describe("encryptedFiles mock — the room owner's rights and the versions (mirr
     expect(await rightsOf("secret.pdf", ROOM_ID, dse3(0x02))).toMatchObject({
       OpenForm: true,
       FillForms: false,
-      SubmitToFormGallery: true,
+      SubmitToFormGallery: false,
     });
   });
 

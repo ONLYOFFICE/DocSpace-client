@@ -402,7 +402,7 @@ test.describe("Encrypted file UI in private room", () => {
     );
     await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     const { security } = (await (await listed).json()).response.files[0];
-    expect(security).toMatchObject({ EditHistory: true });
+    expect(security).toMatchObject({ EditHistory: false });
 
     const row = page.getByTestId("table-row-0");
     await expect(row).toBeVisible({ timeout: 10000 });
@@ -471,11 +471,11 @@ test.describe("Encrypted file UI in private room", () => {
     await page.goto(`${baseUrl}/private/${ROOM_ID}/filter?folder=${ROOM_ID}`);
     const { security } = (await (await listed).json()).response.files[0];
     expect(security).toMatchObject({
-      CustomFilter: true,
-      SubmitToFormGallery: true,
-      EditHistory: true,
-      ReadHistory: true,
-      Lock: true,
+      CustomFilter: false,
+      SubmitToFormGallery: false,
+      EditHistory: false,
+      ReadHistory: false,
+      Lock: false,
     });
 
     const row = page.getByTestId("table-row-0");

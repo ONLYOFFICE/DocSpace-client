@@ -386,6 +386,9 @@ const buildFileDto = (
     // header). The Archive branch admits Read, Download and ReadHistory of
     // these and, for a room that is not private, Copy. AskAi in an ordinary
     // room follows the portal's AI settings, which the mock does not model.
+    // Refused for an encrypted file before all of that, the owner included
+    // and whether the room is archived or not: Rename, ReadHistory,
+    // EditHistory, Lock, CopyLink, CustomFilter and SubmitToFormGallery.
     security: {
       Read: true,
       Edit: true,
@@ -431,6 +434,15 @@ const buildFileDto = (
         SubmitToFormGallery: false,
         CopyLink: false,
         OpenForm: false,
+      }),
+      ...(record.encrypted && {
+        Rename: false,
+        ReadHistory: false,
+        EditHistory: false,
+        Lock: false,
+        CopyLink: false,
+        CustomFilter: false,
+        SubmitToFormGallery: false,
       }),
     },
   };

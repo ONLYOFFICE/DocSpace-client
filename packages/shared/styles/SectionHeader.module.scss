@@ -76,6 +76,21 @@
     }
   }
 
+  // The title of an agent's page: its logo and name. The row shrinks with
+  // the name, which truncates.
+  .agentTitleRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  // The initials of an agent without a picture, sized for the 24px logo.
+  .agentTitleLogo :global(.room-title) {
+    font-size: 10px;
+    line-height: 12px;
+  }
+
   // An agent's chat toolbar in the header row. The toolbar's own side
   // paddings are for the chat panel's header; here they doubled the row's
   // gaps around it. Without them, and with the last button's inner padding

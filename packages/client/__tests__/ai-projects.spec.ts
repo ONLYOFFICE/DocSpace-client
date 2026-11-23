@@ -805,10 +805,10 @@ test.describe("AI Chat section", () => {
   });
 
   /**
-   * The header of an agent's page for each role: a member reads the agent
-   * switcher, Chat history, New chat, the actions menu, "Share agent" when
-   * they may share it, and the Info panel toggle; someone outside the agent
-   * reads its name, the menu and the toggle.
+   * The header of an agent's page for each role: a member reads the agent's
+   * name, Chat history, New chat, the actions menu, "Share agent" when they
+   * may share it, and the Info panel toggle; someone outside the agent reads
+   * its name, the menu and the toggle. The name opens no agents menu.
    */
   test.describe("the header of an agent's page", () => {
     test.beforeEach(({ mockRequest }) => {
@@ -829,7 +829,7 @@ test.describe("AI Chat section", () => {
     };
 
     // Spec: ai-agent-page, "Header of an agent's page"; "Share agent"
-    test("shows an Agent manager the switcher, Chat history, New chat, the menu, Share agent and the Info panel toggle, in that order", async ({
+    test("shows an Agent manager the name, Chat history, New chat, the menu, Share agent and the Info panel toggle, in that order", async ({
       page,
       mockRequest,
       baseUrl,
@@ -838,7 +838,7 @@ test.describe("AI Chat section", () => {
 
       await page.goto(`${baseUrl}${agentUrl(MANAGED_AGENT.id)}`);
 
-      const title = page.getByTestId("ai-chat-agent-picker");
+      const title = page.getByTestId("agent-page-title");
       const toolbar = page.locator("#chat-toolbar");
       const history = toolbar.getByRole("button", { name: "Chat history" });
       const newChat = toolbar.getByRole("button", { name: "New chat" });
@@ -846,7 +846,8 @@ test.describe("AI Chat section", () => {
       const share = page.getByTestId("navigation_button");
       const toggle = page.locator("#info-panel-toggle--open");
 
-      await expect(title).toContainText(MANAGED_AGENT.title);
+      await expect(title).toHaveText(MANAGED_AGENT.title);
+      await expect(page.getByTestId("ai-chat-agent-picker")).toHaveCount(0);
       await expect(history).toBeVisible();
       await expect(newChat).toBeVisible();
       await expect(menu).toBeVisible();
@@ -875,7 +876,7 @@ test.describe("AI Chat section", () => {
 
       await page.goto(`${baseUrl}${agentUrl(MEMBER_AGENT.id)}`);
 
-      await expect(page.getByTestId("ai-chat-agent-picker")).toContainText(
+      await expect(page.getByTestId("agent-page-title")).toHaveText(
         MEMBER_AGENT.title,
       );
       await expect(
@@ -904,7 +905,7 @@ test.describe("AI Chat section", () => {
       mockRequest.use(selfByTypeHandler(TEST_PORT, "roomAdmin"));
 
       await page.goto(`${baseUrl}${agentUrl(MANAGED_AGENT.id)}`);
-      await expect(page.getByTestId("ai-chat-agent-picker")).toBeVisible();
+      await expect(page.getByTestId("agent-page-title")).toBeVisible();
 
       await openPageMenu(page);
       await expect

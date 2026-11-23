@@ -52,7 +52,6 @@ import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
 import type { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { getAiWorkspaceTabUrl } from "SRC_DIR/helpers/aiWorkspace";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
@@ -107,9 +106,6 @@ type AiPresetsBridgeProps = {
   setPortalHasChatModel: (value: boolean | null) => void;
   /** An AI project is open on the projects page (its room, with its own chat). */
   isAiProjectOpen: boolean;
-  /** The id of the agent whose page is open, as the agents menu carries ids. */
-  openProjectId: string | null;
-  requestAiChatPage: (page: "chat" | "history", afterLocationKey?: string | null) => void;
   /** Opens the edit form of a project, read first. */
   openEditAiProject: (id: number) => void | Promise<void>;
   /**
@@ -159,8 +155,6 @@ const AiPresetsBridge = ({
   setAiReady,
   setPortalHasChatModel,
   isAiProjectOpen,
-  openProjectId,
-  requestAiChatPage,
   openEditAiProject,
   changeAgentSkillRooms,
   inviteToRoom,
@@ -285,24 +279,6 @@ const AiPresetsBridge = ({
     [aiChatStore, aiPresetsStore, leaveConversation, t],
   );
 
-  // On an agent's own page the same menu is the page title (the panel keeps
-  // its plain one there): the open agent is the picked one, another agent
-  // opens that agent's page, and the default agent opens AI Chat.
-  const locationKeyRef = React.useRef(location.key);
-  locationKeyRef.current = location.key;
-  const onPageAgentSelect = React.useCallback(
-    (id: string | null) => {
-      if (id !== null && id === openProjectId) return;
-      if (id === null) {
-        requestAiChatPage("chat", locationKeyRef.current);
-        navigate(getAiWorkspaceTabUrl(false, RoomsType.AiProjectRoom, userId ?? undefined));
-        return;
-      }
-      navigate(`/ai-rooms/${id}/filter?folder=${id}`);
-    },
-    [navigate, openProjectId, requestAiChatPage, userId],
-  );
-
   // The agent the chat runs on, picked in the panel or open on its page (an
   // open agent is the active preset too): its name goes on the documents its
   // replies create. The replies themselves carry no logo, and the default
@@ -316,14 +292,10 @@ const AiPresetsBridge = ({
   }, [aiChatStore, chatAgentName]);
 
   React.useEffect(() => {
+    // An agent's own page is that agent: its chat offers no other one.
     aiChatStore.setAgentPicker(
       isInsideOpenProject
-        ? {
-            agents,
-            selectedId: openProjectId,
-            onSelect: onPageAgentSelect,
-            onOpen: aiPresetsStore.refreshPresets,
-          }
+        ? null
         : {
             agents,
             selectedId: selectedAgentId,
@@ -339,8 +311,6 @@ const AiPresetsBridge = ({
     selectedAgentId,
     onAgentSelect,
     isInsideOpenProject,
-    openProjectId,
-    onPageAgentSelect,
   ]);
 
   // The "Agent actions" menu of the panel header, for the agent the chat
@@ -660,7 +630,6 @@ export default inject(
     aiPresetsStore,
     aiProjectsStore,
     contextOptionsStore,
-    dialogsStore,
     filesStore,
     infoPanelStore,
     userStore,
@@ -669,8 +638,6 @@ export default inject(
   }: TStore) => ({
   aiPresetsStore,
   isAiProjectOpen: aiProjectsStore.activeProject !== null,
-  openProjectId: aiProjectsStore.activeProject ? String(aiProjectsStore.activeProject.id) : null,
-  requestAiChatPage: dialogsStore.requestAiChatPage,
   openEditAiProject: aiProjectsStore.openEditDialogById,
   changeAgentSkillRooms: aiProjectsStore.changeSkillRooms,
   inviteToRoom: contextOptionsStore.onClickInviteUsers,

@@ -184,6 +184,24 @@ describe("OformsStore gallery availability", () => {
     expect(store.oformsLoadError).toBe(true);
   });
 
+  it("clears the error of an earlier opening while the new one is checked", async () => {
+    filesApi.getFormGalleryAvailable.mockResolvedValueOnce(false);
+    const store = createStore();
+    await store.initTemplateGallery();
+    expect(store.oformsLoadError).toBe(true);
+
+    const check = deferred<boolean>();
+    filesApi.getFormGalleryAvailable.mockReturnValueOnce(check.promise);
+    const opening = store.initTemplateGallery();
+
+    expect(store.oformsLoadError).toBe(false);
+    expect(store.oformsNetworkError).toBe(false);
+
+    check.resolve(true);
+    await opening;
+    expect(store.oformsLoadError).toBe(false);
+  });
+
   it("drops a CMS answer of an earlier opening after the gallery was opened again and refused", async () => {
     const oldList = deferred<TOformsList>();
     api.getOforms.mockReturnValueOnce(oldList.promise);

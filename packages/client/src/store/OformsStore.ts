@@ -624,10 +624,13 @@ class OformsStore {
   initTemplateGallery = async () => {
     // The server downloads the picked form, so a gallery it cannot reach is
     // shown as unavailable before the CMS is asked; a server without the
-    // check (404) or a failed call leaves the gallery as it was. A network
-    // error of an earlier opening must not pick the message.
+    // check (404) or a failed call leaves the gallery as it was. An error of
+    // an earlier opening must not stay on screen while this one is checked.
     this.galleryOpeningId += 1;
     const openingId = this.galleryOpeningId;
+
+    this.oformsLoadError = false;
+    this.oformsNetworkError = false;
 
     this.formGalleryAvailable = getFormGalleryAvailable().catch(() => true);
     this.galleryReady = this.formGalleryAvailable.then((available) =>
@@ -640,7 +643,6 @@ class OformsStore {
     if (openingId !== this.galleryOpeningId) return;
 
     if (!available) {
-      this.oformsNetworkError = false;
       this.oformsLoadError = true;
       return;
     }

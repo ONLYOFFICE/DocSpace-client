@@ -36,6 +36,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import { BaseTile } from "@onlyoffice/apps-ui-kit/components/tiles/base-tile";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -45,6 +46,9 @@ import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import ChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url";
+
+import SkillSetReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 
 import styles from "./AiProjectTile.module.scss";
 
@@ -140,9 +144,9 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
     </Text>
   );
 
-  // The linked rooms of a kind on one line: the first two, then how many
-  // more. A kind with none shows a dash.
-  const sources = (key: string, names: string[] | undefined) => {
+  // The linked rooms of a kind on one line after the kind's icon: the first
+  // two, then how many more. A kind with none shows a dash.
+  const sources = (key: string, icon: string, names: string[] | undefined) => {
     if (!names?.length) return text(key, DASH);
     const { shown, rest } = getShownSources(names);
     return (
@@ -151,6 +155,7 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
         title={names.join(", ")}
         data-testid={`ai-project-tile-${key}`}
       >
+        <ReactSVG src={icon} className={styles.icon} />
         <Text truncate fontSize="13px" fontWeight={600} className={styles.names} dir="auto">
           {shown.map((name, index) => (
             // Two linked rooms may share a title.
@@ -172,11 +177,11 @@ const AiProjectTile = ({ item, children, badges, thumbnailClick, openUser, ...re
   const rows = [
     ...(category ? [{ key: "category", label: t("Common:Category"), value: text("category", category) }] : []),
     { key: "model", label: t("Common:AIAgentModel"), value: text("model", model) },
-    { key: "skills", label: t("Common:SkillSets"), value: sources("skills", summary?.skills) },
+    { key: "skills", label: t("Common:SkillSets"), value: sources("skills", SkillSetReactSvgUrl, summary?.skills) },
     {
       key: "knowledge",
       label: t("Common:AIProjectKnowledgeRooms"),
-      value: sources("knowledge", summary?.knowledge),
+      value: sources("knowledge", KnowledgeReactSvgUrl, summary?.knowledge),
     },
   ];
 

@@ -132,7 +132,7 @@ The Model row of a card SHALL name the model the agent runs on: its own model, o
 - **THEN** the Model row reads "GLM 5.3 Flash"
 
 ### Requirement: Skill sets and knowledge bases on a card
-The Skill sets and Knowledge bases rows of a card SHALL each name the linked rooms on one line: the first two of a kind, cut when they do not fit, then "+N" for the rest, which is never cut. A kind with no linked room SHALL show a dash. The cards SHALL be laid out in the columns of the room tiles, and every card of the list SHALL keep the same height, also after the user comes from the Skill sets or Knowledge bases list, whose tiles are lower.
+The Skill sets and Knowledge bases rows of a card SHALL each name the linked rooms on one line after the kind's icon: the first two of a kind, cut when they do not fit, then "+N" for the rest, which is never cut. A kind with no linked room SHALL show a dash. The cards SHALL be laid out in the columns of the room tiles, and every card of the list SHALL keep the same height, also after the user comes from the Skill sets or Knowledge bases list, whose tiles are lower.
 
 #### Scenario: Four skill sets
 - **WHEN** an agent links four skill sets

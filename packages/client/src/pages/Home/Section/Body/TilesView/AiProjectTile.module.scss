@@ -133,11 +133,26 @@
   margin-inline-start: auto;
 }
 
-// The linked rooms of a kind on one line: the names, cut when they do not
-// fit, and how many more, which is never cut.
+// The linked rooms of a kind on one line: the kind's icon, the names, cut
+// when they do not fit, and how many more, which is never cut.
 .sources {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon {
+  display: flex;
+  flex: 0 0 auto;
+
+  svg {
+    width: 12px;
+    height: 12px;
+
+    path {
+      fill: var(--text-color);
+    }
+  }
 }
 
 .names {

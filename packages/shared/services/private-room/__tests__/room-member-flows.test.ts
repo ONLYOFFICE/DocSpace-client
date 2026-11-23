@@ -44,19 +44,21 @@ vi.mock("../room-encryption", async (io) => ({
   rewrapMissingFilesForMember: vi.fn(),
   validateMembersForEncryption: vi.fn(),
 }));
-vi.mock("../../../api/privacy", () => ({
+vi.mock("../../../api/privacy", async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
   getRoomCandidateKeys: vi.fn(),
   getRoomMissingFileKeys: vi.fn(),
 }));
 vi.mock("../../../api/rooms", () => ({
   setRoomSecurity: vi.fn(),
+  getRoomMembers: vi.fn(),
 }));
 
 import {
   getRoomCandidateKeys,
   getRoomMissingFileKeys,
 } from "../../../api/privacy";
-import { setRoomSecurity } from "../../../api/rooms";
+import { getRoomMembers, setRoomSecurity } from "../../../api/rooms";
 import type { IdentityKeyPair } from "../../encryption/types";
 import {
   addMembersToEncryptedRoom,
@@ -65,7 +67,9 @@ import {
   validateMembersForEncryption,
 } from "../room-encryption";
 import {
+  getNewOwnerKeyRefusal,
   loadPendingAccess,
+  countMissingFilesOfRefusedOwnerChange,
   prepareNewOwner,
   retryPendingAccess,
   rewrapForInvitedMembers,
@@ -234,6 +238,47 @@ describe("prepareNewOwner", () => {
   });
 });
 
+describe("countMissingFilesOfRefusedOwnerChange", () => {
+  const conflict = Object.assign(new Error("Conflict"), {
+    response: { status: 409 },
+  });
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Transfer refused by the server", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "U-BOB", fileIds: [4, 5] },
+      { userId: "u-carol", fileIds: [6] },
+    ]);
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(conflict, ROOM_ID, "u-bob"),
+    ).resolves.toBe(2);
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(ROOM_ID, ["u-bob"]);
+  });
+
+  it("Other refusals count no file", async () => {
+    const forbidden = Object.assign(new Error("Forbidden"), {
+      response: { status: 403 },
+    });
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(forbidden, ROOM_ID, "u-bob"),
+    ).resolves.toBe(0);
+    expect(getRoomMissingFileKeys).not.toHaveBeenCalled();
+  });
+
+  it("Missing files cannot be listed", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockRejectedValue(new Error("403"));
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(conflict, ROOM_ID, "u-bob"),
+    ).resolves.toBe(0);
+  });
+});
+
 describe("verifyInvitees", () => {
   const invitees = [
     { id: "u-ann", displayName: "Ann" },
@@ -242,6 +287,51 @@ describe("verifyInvitees", () => {
 
   afterEach(() => {
     vi.resetAllMocks();
+  });
+
+  const many = (count: number) =>
+    Array.from({ length: count }, (_, i) => ({
+      id: `u-${i}`,
+      displayName: `User ${i}`,
+    }));
+
+  it("Large invitation", async () => {
+    vi.mocked(getRoomCandidateKeys).mockImplementation(async (_room, ids) =>
+      ids.map((userId) => ({ id: `${userId}-key`, userId, publicKey: "pk" })),
+    );
+    vi.mocked(validateMembersForEncryption).mockResolvedValue({
+      valid: [],
+      skipped: [],
+    });
+
+    await verifyInvitees({
+      roomId: ROOM_ID,
+      invitees: many(95),
+      currentUserId: "u-me",
+    });
+
+    const batches = vi.mocked(getRoomCandidateKeys).mock.calls.map(
+      ([, ids]) => ids.length,
+    );
+    expect(batches).toEqual([40, 40, 15]);
+    const keys = vi.mocked(validateMembersForEncryption).mock.calls[0][5];
+    expect(keys?.size).toBe(95);
+  });
+
+  it("One batch fails", async () => {
+    vi.mocked(getRoomCandidateKeys)
+      .mockResolvedValueOnce([])
+      .mockRejectedValueOnce(new Error("414"));
+
+    await expect(
+      verifyInvitees({
+        roomId: ROOM_ID,
+        invitees: many(95),
+        currentUserId: "u-me",
+      }),
+    ).rejects.toThrow("414");
+    expect(getRoomCandidateKeys).toHaveBeenCalledTimes(2);
+    expect(validateMembersForEncryption).not.toHaveBeenCalled();
   });
 
   it("Order of operations: the invitees' keys come from the prospective members route and go through the verification", async () => {
@@ -939,4 +1029,55 @@ describe("A peer key that could not be checked is reported per operation", () =>
       ]);
     },
   );
+});
+
+describe("getNewOwnerKeyRefusal", () => {
+  const t = ((key: string, values?: object) =>
+    values ? `${key} ${JSON.stringify(values)}` : key) as unknown as TFunction;
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Candidate left the room meanwhile", async () => {
+    vi.mocked(getRoomMembers).mockResolvedValue({
+      items: [{ subjectType: 0, sharedTo: { id: "u-ann" } }],
+      total: 1,
+    } as never);
+
+    const refusal = await getNewOwnerKeyRefusal(
+      t,
+      ROOM_ID,
+      { id: "u-bob", label: "Bob" },
+      "u-me",
+    );
+
+    expect(refusal).toBe(
+      'Common:EncryptedChangeOwnerNotMember {"user":"Bob"}',
+    );
+    expect(validateMembersForEncryption).not.toHaveBeenCalled();
+  });
+
+  it("Members cannot be read when the candidate is chosen", async () => {
+    vi.mocked(getRoomMembers).mockRejectedValue(new Error("403"));
+
+    await expect(
+      getNewOwnerKeyRefusal(t, ROOM_ID, { id: "u-ann" }, "u-me"),
+    ).resolves.toBe("Common:OwnerCandidatesLoadFailed");
+  });
+
+  it("Member with a verified key", async () => {
+    vi.mocked(getRoomMembers).mockResolvedValue({
+      items: [{ subjectType: 0, sharedTo: { id: "u-ann" } }],
+      total: 1,
+    } as never);
+    vi.mocked(validateMembersForEncryption).mockResolvedValue({
+      valid: [{ id: "u-ann", publicKey: "pk" }],
+      skipped: [],
+    } as never);
+
+    await expect(
+      getNewOwnerKeyRefusal(t, ROOM_ID, { id: "u-ann" }, "u-me"),
+    ).resolves.toBeNull();
+  });
 });

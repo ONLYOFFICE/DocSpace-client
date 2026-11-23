@@ -36,7 +36,7 @@
 import { act, render } from "@testing-library/react";
 import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const encryption = vi.hoisted(() => ({
   hasConfiguredKey: false,
@@ -78,6 +78,12 @@ vi.mock("@docspace/shared/hooks/useDeviceRecordPruning", () => ({
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 
+import { NoAccessError } from "@docspace/shared/services/encryption/errors";
+import {
+  reportPotentialGhostState,
+  resetGhostStateGate,
+} from "@docspace/shared/services/encryption/ghost-state-notifier";
+
 import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
 
 const wrapperModule = await import("../EncryptionProviderWrapper");
@@ -89,6 +95,8 @@ const DeviceSetupHintEffect =
   wrapperModule.DeviceSetupHintEffect as unknown as React.ComponentType;
 const RoomUnlockEffect =
   wrapperModule.RoomUnlockEffect as unknown as React.ComponentType;
+const GhostStateToastEffect =
+  wrapperModule.GhostStateToastEffect as unknown as React.ComponentType;
 
 const KEY = { id: "key-1", publicKey: "pub", privateKeyEnc: "enc" };
 
@@ -387,5 +395,45 @@ describe("Other tabs read the key list again after a key change", () => {
 
     expect(encryption.providerProps?.keysLoaded).toBe(false);
     expect(encryption.providerProps?.userKeys).toBeNull();
+  });
+});
+
+describe("Unreadable file", () => {
+  beforeEach(() => {
+    sessionStorage.clear();
+    resetGhostStateGate();
+  });
+
+  afterEach(() => vi.unstubAllGlobals());
+
+  type ToastContent = React.ReactElement<{
+    i18nKey: string;
+    components: React.ReactElement<{ onClick: () => void }>[];
+  }>;
+
+  it("warns with a link to Keys management", () => {
+    const location = { href: "/rooms/shared" };
+    vi.stubGlobal("location", location);
+    render(<GhostStateToastEffect />);
+
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+    const content = vi.mocked(toastr.warning).mock.calls[0][0] as ToastContent;
+    expect(content.props.i18nKey).toBe("Common:GhostStateDetected");
+
+    content.props.components[0].props.onClick();
+
+    expect(toastr.clear).toHaveBeenCalledTimes(1);
+    expect(location.href).toBe("/profile/keys-management");
+  });
+
+  it("clears the handler on unmount", () => {
+    const view = render(<GhostStateToastEffect />);
+    view.unmount();
+
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(toastr.warning).not.toHaveBeenCalled();
   });
 });

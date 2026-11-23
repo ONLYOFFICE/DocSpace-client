@@ -351,7 +351,7 @@ const InfoDialog = ({
                 truncate
                 dataTestId="client_info_last_modified"
               >
-                {t("LastModified")}
+                {t("Common:LastModified")}
               </Text>
 
               <Text

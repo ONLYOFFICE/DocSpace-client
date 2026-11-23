@@ -44,6 +44,7 @@ import {
   ConflictResolveType,
   FolderType,
   type FormFillingManageAction,
+  RoomsType,
   ShareAccessRights,
 } from "../../enums";
 import {
@@ -271,6 +272,18 @@ export async function getFoldersTree() {
       newItems: newCount,
       security,
       new: newCount,
+      // The AI rooms section lists the AI projects the caller pinned,
+      // whatever `count` asks for. A server older than that listing answers
+      // the first room of the section instead, of any type and pinned or
+      // not, so only the pinned projects are kept.
+      ...(type === FolderType.AiHub
+        ? {
+            pinnedAiProjects: (data.folders ?? []).filter(
+              (room) =>
+                room.roomType === RoomsType.AiProjectRoom && !!room.pinned,
+            ),
+          }
+        : {}),
     } as TFolder;
   });
 }

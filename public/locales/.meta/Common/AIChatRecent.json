@@ -1,0 +1,29 @@
+{
+  "key_path": "AIChatRecent",
+  "content": "Recents",
+  "content_en_sha1_hash": "84380106d9c4ea550a1569bc3645245838ea6524",
+  "created_at": "2026-11-18T08:05:09.291Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
+  "comment": {
+    "text": "Sidebar item under AI Chat that opens the history of the user's AI chats; the latest chat titles are listed under it. Plural noun used as a short section label (the recent chats), not a verb or an adjective.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:13:34.331Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 804,
+      "context": "},\n ]\n : []),\n {\n id: \"ai-chat-recent\",\n label: t(\"Common:AIChatRecent\"),\n icon: CatalogAiRecentReactSvgUrl,\n onClick: openAiChatPage(\"history\"),\n },\n ...recentAiChats.map((thread) => ({\n id: aiChatItemId(thread.id),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

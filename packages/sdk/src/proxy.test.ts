@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import { NextRequest } from "next/server";
 
 import { ValidationStatus } from "@docspace/shared/enums";
@@ -220,5 +220,80 @@ describe("proxy — /ai-agents", () => {
 
     expect(requestHeader(response!, "x-sdk-config-theme")).toBe("Dark");
     expect(requestHeader(response!, "x-sdk-config-locale")).toBe("fr");
+  });
+});
+
+// Spec: private-rooms/sdk-surface, "SDK private pages are framed only by the portal's own origin"
+describe("proxy — private routes", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  const privateHeaders = async (path: string, env: string) => {
+    vi.stubEnv("NODE_ENV", env);
+    const response = await proxy(makeRequest(path));
+    return response!.headers;
+  };
+
+  const directives = (headers: Headers) =>
+    (headers.get("Content-Security-Policy") ?? "").split("; ");
+
+  test.each(["/private", "/private/123", "/private/archive"])(
+    "Private page served: %s carries the private-surface policy",
+    async (path) => {
+      const headers = await privateHeaders(path, "production");
+
+      expect(directives(headers)).toEqual(
+        expect.arrayContaining([
+          "default-src 'self'",
+          "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'",
+          "frame-ancestors 'self'",
+          "object-src 'none'",
+        ]),
+      );
+      expect(headers.get("X-Content-Type-Options")).toBe("nosniff");
+    },
+  );
+
+  test("Connections in production", async () => {
+    const headers = await privateHeaders("/private", "production");
+    const csp = headers.get("Content-Security-Policy") ?? "";
+
+    expect(directives(headers)).toContain("connect-src 'self' https:");
+    expect(csp).not.toContain("'unsafe-eval'");
+    expect(headers.get("Strict-Transport-Security")).toBe(
+      "max-age=31536000; includeSubDomains",
+    );
+  });
+
+  test("Connections in development", async () => {
+    const headers = await privateHeaders("/private", "development");
+
+    expect(directives(headers)).toEqual(
+      expect.arrayContaining([
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline' 'wasm-unsafe-eval'",
+        "connect-src 'self' ws: wss: http: https:",
+      ]),
+    );
+    expect(headers.get("Strict-Transport-Security")).toBeNull();
+  });
+
+  test.each(["production", "development"])(
+    "Private page framed by the portal (%s)",
+    async (env) => {
+      const headers = await privateHeaders("/private/123", env);
+
+      expect(directives(headers)).toContain("frame-ancestors 'self'");
+    },
+  );
+
+  test("Private page framed by another origin", async () => {
+    const headers = await privateHeaders("/private/archive", "production");
+
+    expect(
+      directives(headers).filter((d) => d.startsWith("frame-ancestors")),
+    ).toEqual(["frame-ancestors 'self'"]);
+    expect(headers.get("Cross-Origin-Opener-Policy")).toBe("same-origin");
+    expect(headers.get("Cross-Origin-Resource-Policy")).toBe("same-origin");
   });
 });

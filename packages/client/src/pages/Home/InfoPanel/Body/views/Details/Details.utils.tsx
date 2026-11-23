@@ -50,6 +50,11 @@ import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TAiProjectSettings } from "@docspace/shared/api/ai/projects";
+import { RoomsType, VectorizationStatus } from "@docspace/shared/enums";
+import {
+  getSkillNameByTitle,
+  toSkillCommand,
+} from "@docspace/shared/utils/skillFile";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -62,6 +67,7 @@ import {
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 import CommentEditor from "../../sub-components/CommentEditor";
 
@@ -124,6 +130,25 @@ type DetailsHelperProps = {
   isAdmin: boolean;
   isArchiveFolder: boolean;
   roomLifetime: TRoomLifetime;
+  /** The item is a skill of a skill set, shown as one. */
+  isSkill?: boolean;
+  /** The title of the skill set a selected skill is in, when it is the open one. */
+  skillSetTitle?: string;
+  /** The skill's name as its file states it; the title gives it otherwise. */
+  skillName?: string;
+  /** How far a selected knowledge base is indexed; `null` until it is read. */
+  knowledgeStatus?: VectorizationStatus | null;
+  /**
+   * The name of a selected agent's own model, when the selection does not
+   * carry the agent's settings in full (a room of the Files list); `null`
+   * when it has none, `undefined` until it is read.
+   */
+  agentModelName?: string | null;
+  /**
+   * The portal's chat model, which an agent without a model of its own runs
+   * on; `null` when there is none or it is not read yet.
+   */
+  agentDefaultModelName?: string | null;
 };
 
 class DetailsHelper {
@@ -147,6 +172,18 @@ class DetailsHelper {
 
   roomLifetime: TRoomLifetime;
 
+  isSkill: boolean;
+
+  skillSetTitle?: string;
+
+  skillName?: string;
+
+  knowledgeStatus?: VectorizationStatus | null;
+
+  agentModelName?: string | null;
+
+  agentDefaultModelName?: string | null;
+
   constructor(props: DetailsHelperProps) {
     this.t = props.t;
     this.item = props.item;
@@ -158,6 +195,12 @@ class DetailsHelper {
     this.isAdmin = props.isAdmin;
     this.isArchiveFolder = props.isArchiveFolder;
     this.roomLifetime = props.roomLifetime;
+    this.isSkill = !!props.isSkill;
+    this.skillSetTitle = props.skillSetTitle;
+    this.skillName = props.skillName;
+    this.knowledgeStatus = props.knowledgeStatus;
+    this.agentModelName = props.agentModelName;
+    this.agentDefaultModelName = props.agentDefaultModelName;
   }
 
   getPropertyList = () => {
@@ -170,16 +213,47 @@ class DetailsHelper {
   };
 
   getNeededProperties = () => {
-    // An AI project shows as a room does; it holds no files of its own and
-    // takes no storage, and its model comes from its settings block.
-    const isAIProject = "isAIProject" in this.item && !!this.item.isAIProject;
+    // An agent (an AI project) shows as a room does, with no Content and no
+    // Storage rows: it lists no contents of its own, as its members'
+    // conversation files lie in folders internal to each conversation. Those
+    // files do take space, counted against the agent and the portal rather
+    // than the member's quota; Details does not show it (design.md, Open
+    // Questions). Its model comes from its settings block.
+    const isAIProject = isAgent(this.item);
+
+    // A skill is shown as a skill, not as the Markdown file that holds it:
+    // the set it is in and the command that calls it, no type or size.
+    if (this.isSkill)
+      return [
+        this.skillSetTitle && "Skill set",
+        "ownedBy" in this.item && this.item.ownedBy ? "OwnedBy" : "Owner",
+        "Command",
+        "Date modified",
+        "Last modified by",
+        "Creation date",
+      ].filter((nP) => nP) as string[];
+
+    // A skill set holds skills only: its content is their number.
+    const isSkillSet =
+      "isRoom" in this.item &&
+      this.item.isRoom &&
+      this.item.roomType === RoomsType.InstructionsRoom;
+
+    // A knowledge base holds files only, and is told by how far they are
+    // indexed, not by its room type.
+    const isKnowledgeBase =
+      "isRoom" in this.item &&
+      this.item.isRoom &&
+      this.item.roomType === RoomsType.KnowledgeRoom;
+
     return (
       "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
             (this.item as TRoom).providerKey && "Storage Type",
-            "Type",
+            !isSkillSet && !isKnowledgeBase && "Type",
             !isAIProject && "Content",
+            isKnowledgeBase && this.getIndexingStatus() !== null && "Status",
             "Date modified",
             "Last modified by",
             "Creation date",
@@ -193,8 +267,10 @@ class DetailsHelper {
                 this.isArchiveFolder,
               ).canCreate) &&
               "Tags",
-            !isAIProject && "Storage",
-            isAIProject && this.getAiProjectSettings()?.profile?.name && "Model",
+            !isAIProject && !isSkillSet && "Storage",
+            // Always: an agent without a model of its own runs on the
+            // portal's, as its card says.
+            isAIProject && "Model",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
@@ -219,6 +295,7 @@ class DetailsHelper {
               "Type",
               "File extension",
               "Size",
+              this.getIndexingStatus() !== null && "Status",
               "dimensions" in this.item &&
                 this.item?.dimensions &&
                 "Resolution",
@@ -295,6 +372,13 @@ class DetailsHelper {
       case "Model":
         return this.t("Common:AIAgentModel");
 
+      case "Status":
+        return this.t("Common:Status");
+      case "Skill set":
+        return this.t("Common:SkillSet");
+      case "Command":
+        return this.t("Common:SkillCommand");
+
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
           return this.isDefaultRoomsQuotaSet &&
@@ -363,7 +447,19 @@ class DetailsHelper {
       case "externalDbTableName":
         return this.getExternalDbTableName();
       case "Model":
-        return text(this.getAiProjectSettings()?.profile?.name);
+        return text(this.getAgentModelName() ?? "\u2014");
+      case "Status":
+        return this.getItemIndexingStatus();
+      case "Skill set":
+        return text(this.skillSetTitle);
+      case "Command":
+        return (
+          <Text truncate className="property-content skill-command">
+            {toSkillCommand(
+              this.skillName || getSkillNameByTitle(this.item.title),
+            )}
+          </Text>
+        );
       default:
         break;
     }
@@ -374,6 +470,22 @@ class DetailsHelper {
     "aiProject" in this.item
       ? (this.item.aiProject as TAiProjectSettings | undefined)
       : undefined;
+
+  /**
+   * The model the agent runs on: its own, from its settings or as its tile
+   * read it, else the portal's chat model. `undefined` while its own is not
+   * read yet, or when it has none and the portal has none either.
+   */
+  getAgentModelName = (): string | undefined => {
+    const settings = this.getAiProjectSettings();
+    // Settings read in full say whether the agent has a model of its own.
+    const ownModel =
+      settings && !settings.partial && !settings.modelUnread
+        ? (settings.profile?.name ?? null)
+        : this.agentModelName;
+    if (ownModel === undefined) return undefined;
+    return ownModel ?? this.agentDefaultModelName ?? undefined;
+  };
 
   getExternalDbTableName = () => {
     if (!("externalDbTableName" in this.item)) return null;
@@ -431,11 +543,47 @@ class DetailsHelper {
   getItemContent = () => {
     if (!("foldersCount" in this.item) || !("filesCount" in this.item))
       return null;
+    if (
+      "roomType" in this.item &&
+      this.item.roomType === RoomsType.InstructionsRoom
+    )
+      return text(`${this.t("Common:Skills")}: ${this.item.filesCount}`);
+    if (
+      "roomType" in this.item &&
+      this.item.roomType === RoomsType.KnowledgeRoom
+    )
+      return text(`${this.t("Common:Files")}: ${this.item.filesCount}`);
     return text(
       `${this.t("Common:Folders")}: ${this.item.foldersCount} | ${this.t(
         "Common:Files",
       )}: ${this.item.filesCount}`,
     );
+  };
+
+  /**
+   * How far the item is indexed: a knowledge base by its files, a file by
+   * its own state. `null` for anything that is not indexed at all.
+   */
+  getIndexingStatus = (): VectorizationStatus | null => {
+    if ("isRoom" in this.item && this.item.isRoom)
+      return this.knowledgeStatus ?? null;
+    const { vectorizationStatus } = this.item as {
+      vectorizationStatus?: VectorizationStatus | null;
+    };
+    return vectorizationStatus ?? null;
+  };
+
+  getItemIndexingStatus = () => {
+    switch (this.getIndexingStatus()) {
+      case VectorizationStatus.InProgress:
+        return text(this.t("Common:Indexing"));
+      case VectorizationStatus.Failed:
+        return text(this.t("Common:Error"));
+      case VectorizationStatus.Completed:
+        return text(this.t("Common:Indexed"));
+      default:
+        return null;
+    }
   };
 
   getItemSize = () => {

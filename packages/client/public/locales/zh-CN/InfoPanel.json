@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "在此查看访客详细信息。",
   "HistoryEmptyScreenText": "活动历史记录将在这里显示",
   "HistoryThirdParty": "历史记录显示不适用于已连接第三方存储的公共房间",
+  "KnowledgeBasesEmptyScreenText": "请在此处查看知识库详情",
   "LastUpdateInfo": "上次更新",
   "LifetimeEnds": "有效期到期",
   "MembersEmptyScreenText": "在此处查看成员详情",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "在此查看房间详情",
   "SelectedGroups": "已选中的组",
   "SelectedUsers": "已选账户",
+  "SkillSetsEmptyScreenText": "请在此处查看技能集详情",
   "StorageType": "存储类型",
   "Users": "用户"
 }

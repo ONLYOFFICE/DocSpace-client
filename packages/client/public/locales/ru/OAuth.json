@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG или SVG, 32x32",
   "ID": "Идентификатор",
   "InvalidToken": "Недействительный токен",
-  "LastModified": "Последние изменения",
   "NewApp": "Новое приложение",
   "NoAuthorizedApps": "Нет авторизованных приложений",
   "NoOAuthAppHeader": "Нет приложений OAuth",

@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Details zu Gästen hier ansehen",
   "HistoryEmptyScreenText": "Aktivitätsverlauf wird hier angezeigt",
   "HistoryThirdParty": "Die Verlaufsanzeige ist für öffentliche Räume mit angeschlossenen Drittanbieterspeichern nicht verfügbar",
+  "KnowledgeBasesEmptyScreenText": "Details zur Wissensdatenbank finden Sie hier",
   "LastUpdateInfo": "Letzter Stand",
   "LifetimeEnds": "Lebensdauer endet",
   "MembersEmptyScreenText": "Details zu den Mitgliedern finden Sie hier",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Siehe Details von Räumen hier",
   "SelectedGroups": "Ausgewählte Gruppen",
   "SelectedUsers": "Ausgewählte Konten",
+  "SkillSetsEmptyScreenText": "Details zum Skill-Set finden Sie hier",
   "StorageType": "Art des Speicherplatzes",
   "Users": "Benutzer"
 }

@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG ili SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "Nevažeći token",
-  "LastModified": "Poslednja izmena",
   "NewApp": "Nova aplikacija",
   "NoAuthorizedApps": "Nema autorizovanih aplikacija",
   "NoOAuthAppHeader": "Nema OAuth aplikacija",

@@ -890,6 +890,49 @@ describe("PassphraseModal", () => {
     });
   });
 
+  describe("Auto-try on unlock", () => {
+    const props = { onSubmit: vi.fn(), onCancel: vi.fn() };
+
+    it("tries the passkey once when the unlock dialog opens", () => {
+      const onPasskeyUnlock = vi.fn();
+      const { rerender } = render(
+        <PassphraseModal visible isNew={false} {...props} onPasskeyUnlock={onPasskeyUnlock} />,
+      );
+
+      expect(onPasskeyUnlock).toHaveBeenCalledTimes(1);
+
+      const nextCallback = vi.fn();
+      rerender(
+        <PassphraseModal visible isNew={false} {...props} onPasskeyUnlock={nextCallback} />,
+      );
+
+      expect(onPasskeyUnlock).toHaveBeenCalledTimes(1);
+      expect(nextCallback).not.toHaveBeenCalled();
+    });
+
+    it("tries again after the dialog is closed and reopened", () => {
+      const onPasskeyUnlock = vi.fn();
+      const { rerender } = render(
+        <PassphraseModal visible isNew={false} {...props} onPasskeyUnlock={onPasskeyUnlock} />,
+      );
+      rerender(
+        <PassphraseModal visible={false} isNew={false} {...props} onPasskeyUnlock={onPasskeyUnlock} />,
+      );
+      rerender(
+        <PassphraseModal visible isNew={false} {...props} onPasskeyUnlock={onPasskeyUnlock} />,
+      );
+
+      expect(onPasskeyUnlock).toHaveBeenCalledTimes(2);
+    });
+
+    it("never tries it in the creation dialog", () => {
+      const onPasskeyUnlock = vi.fn();
+      render(<PassphraseModal visible isNew {...props} onPasskeyUnlock={onPasskeyUnlock} />);
+
+      expect(onPasskeyUnlock).not.toHaveBeenCalled();
+    });
+  });
+
   describe("Unlock with the passphrase", () => {
     it("Confirm action names the unlock", () => {
       renderModal();

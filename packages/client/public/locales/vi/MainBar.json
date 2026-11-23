@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn.",
   "ConfirmEmailDescription": "Sử dụng liên kết được cung cấp trong email kích hoạt. Bạn chưa nhận được email chứa liên kết kích hoạt?",
   "ConfirmEmailHeader": "Xin vui lòng kích hoạt email ({{ email }}) của bạn để có quyền truy cập vào các tính năng của không gian làm việc.",
-  "ContactToUpgradeTariff": "Hãy liên hệ với siêu quản trị viên để nâng cấp gói cước.",
   "PersonalQuotaHeader": "Đã vượt quá hạn mức lưu trữ cá nhân của bạn",
   "PersonalQuotaHeaderForAdmins": "Đã vượt quá hạn mức lưu trữ cho mỗi người dùng",
   "PersonalUserQuotaAdminsDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc quản lý hạn mức cho mỗi người dùng trong <1> cài đặt Quản lý lưu trữ.</1>",

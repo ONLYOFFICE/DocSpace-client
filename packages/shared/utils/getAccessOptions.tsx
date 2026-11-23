@@ -200,9 +200,9 @@ export const getAccessOptions = (
 		},
 		projectManager: {
 			key: "projectManager",
-			label: t("Common:AIProjectManager"),
+			label: t("Common:AgentManager"),
 			description: t("Common:AIProjectManagerDescription"),
-			tooltip: t("Common:UserMaxAvailableRoleWarning"),
+			tooltip: t("Common:UserAgentMaxAvailableRoleWarning"),
 			color: globalColors.favoritesStatus,
 			access: ShareAccessRights.RoomManager,
 			type: EmployeeType.RoomAdmin,
@@ -211,8 +211,10 @@ export const getAccessOptions = (
 			key: "projectMember",
 			label: t("Common:Member"),
 			description: t("Common:AIProjectMemberDescription"),
-			access: ShareAccessRights.ReadOnly,
-			type: EmployeeType.Guest,
+			// A member is the room's Content creator: the server takes no
+			// Read in an AI project, and no guest.
+			access: ShareAccessRights.Collaborator,
+			type: EmployeeType.User,
 		},
 		viewer: {
 			key: "viewer",

@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG nebo SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "Neplatný token",
-  "LastModified": "Naposledy upraveno",
   "NewApp": "Nová aplikace",
   "NoAuthorizedApps": "Žádné autorizované aplikace",
   "NoOAuthAppHeader": "Žádné aplikace OAuth",

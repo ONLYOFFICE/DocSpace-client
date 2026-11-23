@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Див. інформацію про гостей тут",
   "HistoryEmptyScreenText": "Тут буде показано історію активності",
   "HistoryThirdParty": "Показ історії недоступний для публічних кімнат із під'єднаними сторонніми сховищами",
+  "KnowledgeBasesEmptyScreenText": "Перегляньте деталі бази знань тут",
   "LastUpdateInfo": "Останнє оновлення",
   "LifetimeEnds": "Період існування закінчується",
   "MembersEmptyScreenText": "Див. інформацію про учасників тут",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Див. інформацію про кімнати тут",
   "SelectedGroups": "Вибрані групи",
   "SelectedUsers": "Вибрані облікові записи",
+  "SkillSetsEmptyScreenText": "Перегляньте деталі набору навичок тут",
   "StorageType": "Тип сховища",
   "Users": "Користувачі"
 }

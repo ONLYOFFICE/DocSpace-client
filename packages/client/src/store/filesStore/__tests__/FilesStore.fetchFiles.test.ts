@@ -39,6 +39,7 @@ import api from "@docspace/shared/api";
 import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
+import { fakeSelectedFolderStore } from "../../__tests__/sharedFakes";
 // After the harness, which mocks the toast module.
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
@@ -222,6 +223,66 @@ describe("FilesStore.fetchFiles — Private section address", () => {
     expect(store.files).toEqual([]);
   });
 
+  const openSubfolder = async (roomSecurity: Record<string, boolean>) => {
+    openAddress("/private/5/filter", "?folder=6", {
+      privateRoomsSectionDecided: true,
+    });
+    const store = sectionStore();
+    const backfill = vi.fn();
+    store.maybeBackfillEncryptedRoom = backfill as never;
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      roomContents(true, true) as never,
+    );
+    vi.spyOn(api.files, "getFolderInfo").mockResolvedValue({
+      ...ROOM,
+      parentId: ROOMS_ROOT.id,
+      rootFolderType: FolderType.Rooms,
+      private: true,
+      security: roomSecurity,
+    } as never);
+
+    await store.fetchFiles(SUBFOLDER.id);
+    return backfill;
+  };
+
+  it("Page loaded inside a subfolder", async () => {
+    const backfill = await openSubfolder({ EditRoom: true });
+
+    expect(backfill).toHaveBeenCalledWith(ROOM.id, { EditRoom: true });
+  });
+
+  it("Member opens a subfolder", async () => {
+    const backfill = await openSubfolder({});
+
+    expect(backfill).toHaveBeenCalledWith(ROOM.id, {});
+  });
+
+  it("Frame configuration arrives after the address", async () => {
+    openAddress("/rooms/shared/5/filter", "?folder=5");
+    const store = sectionStore();
+    Object.assign(store.settingsStore, { isFrame: true });
+    const frame = { optedIn: false };
+    store.appsStore = {
+      get isPrivateRoomsSectionAvailable() {
+        return frame.optedIn;
+      },
+      isInstalled: () => true,
+      waitForFrameOptIn: async () => {
+        frame.optedIn = true;
+      },
+    };
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      roomContents(true) as never,
+    );
+
+    await store.fetchFiles(5);
+
+    expect(navigate).toHaveBeenCalledWith(
+      "/private/5/filter?folder=5",
+      expect.objectContaining({ replace: true }),
+    );
+  });
+
   it("shows the room once its address was decided", async () => {
     openAddress("/private/5/filter", "?folder=5", {
       privateRoomsSectionDecided: true,
@@ -399,5 +460,63 @@ describe("FilesStore.fetchFiles — Private section address", () => {
 
     expect(navigate).not.toHaveBeenCalled();
     expect(store.files.map((f) => f.id)).toEqual([70]);
+  });
+});
+
+describe("FilesStore.fetchFiles — the AI Chat section's root crumb", () => {
+  const AI_ROOT = { id: 2, title: "AI rooms", folderType: FolderType.AiHub };
+
+  const aiRoomContents = (roomType: RoomsType) => {
+    const room = { id: 5, title: "Sales assistant", roomType };
+    return {
+      total: 0,
+      folders: [],
+      files: [],
+      new: 0,
+      pathParts: [AI_ROOT, room],
+      current: {
+        ...room,
+        parentId: AI_ROOT.id,
+        rootFolderType: FolderType.AiHub,
+        security: {},
+        private: false,
+        inRoom: true,
+      },
+    };
+  };
+
+  beforeEach(() => {
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      navigate: vi.fn(),
+      location: { pathname: "/ai-rooms/5/filter", search: "?folder=5" },
+    };
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it.each([
+    [RoomsType.InstructionsRoom, "Common:SkillSets"],
+    [RoomsType.KnowledgeRoom, "Common:AIProjectKnowledgeRooms"],
+    [RoomsType.AiProjectRoom, "Common:Agents"],
+  ])("names the root after the list of a room of type %s", async (roomType, title) => {
+    const setSelectedFolder = vi.fn();
+    const store = createTestFilesStore({
+      selectedFolderStore: { ...fakeSelectedFolderStore(), setSelectedFolder },
+    });
+    store.getFilesContextOptions = (() => []) as never;
+    vi.spyOn(api.files, "getFolder").mockResolvedValue(
+      aiRoomContents(roomType) as never,
+    );
+    vi.spyOn(api.files, "getFolderInfo").mockResolvedValue({} as never);
+
+    await store.fetchFiles(5);
+
+    expect(setSelectedFolder).toHaveBeenCalled();
+    const { navigationPath } = setSelectedFolder.mock.calls.at(-1)![0];
+    expect(navigationPath).toEqual([
+      expect.objectContaining({ id: AI_ROOT.id, title, isRootRoom: true }),
+    ]);
   });
 });

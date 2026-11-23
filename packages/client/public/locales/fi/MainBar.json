@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Klikkaa tästä</1> päivittääksesi tilauksesi.",
   "ConfirmEmailDescription": "Käytä aktivointisähköpostissa annettua linkkiä. Etkö ole saanut aktivointilinkkiä sähköpostilla?",
   "ConfirmEmailHeader": "Ole hyvä ja aktivoi sähköpostisi ({{ email }}) saadaksesi työtilan ominaisuudet käyttöön.",
-  "ContactToUpgradeTariff": "Ota yhteyttä pääjärjestelmänvalvojaan hinnoittelusuunnitelman päivittämiseksi.",
   "PersonalQuotaHeader": "Henkilökohtainen muistikiintiösi on ylitetty",
   "PersonalQuotaHeaderForAdmins": "Muistikiintiö per käyttäjä ylitetty",
   "PersonalUserQuotaAdminsDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi uusia tiedostoja ja kansioita, tai hallitaksesi kiintiötä per käyttäjä <1>Muistinhallinta-asetuksissa. </1>",

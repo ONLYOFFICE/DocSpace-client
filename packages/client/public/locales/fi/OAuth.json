@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG tai SVG, 32x32",
   "ID": "Tunnus",
   "InvalidToken": "Virheellinen tunnus",
-  "LastModified": "Viimeksi muokattu",
   "NewApp": "Uusi sovellus",
   "NoAuthorizedApps": "Ei valtuutettuja sovelluksia",
   "NoOAuthAppHeader": "Ei OAuth sovelluksia",

@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>こちらをクリック</1>すると、料金プランをアップグレードできます。",
   "ConfirmEmailDescription": "アクティベーションメールに記載されているリンクを使用してください。アクティベーション用リンクが記載されたメールが届いていませんか？",
   "ConfirmEmailHeader": "ワークスペースの機能を利用するために、メール({{ email }})を有効にしてください。",
-  "ContactToUpgradeTariff": "料金プランをアップグレードするには、スーパー管理者にお問い合わせください。",
   "PersonalQuotaHeader": "個人ストレージ容量制限を超過しました",
   "PersonalQuotaHeaderForAdmins": "ユーザーごとのストレージ容量制限を超過しました",
   "PersonalUserQuotaAdminsDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、<1>ストレージ管理設定</1>でディスク領域を解放するか、ユーザーごとに容量制限を管理してください。",

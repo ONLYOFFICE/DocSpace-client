@@ -138,7 +138,7 @@ export const getDescription = (
       parentRoomType,
     );
 
-  return getRoomDescription(t, isNotAdmin, isArchiveFolderRoot);
+  return getRoomDescription(t, isNotAdmin, isArchiveFolderRoot, type);
 };
 
 export const getTitle = (
@@ -443,8 +443,8 @@ export const getOptions = (
   // by the AI service: the server refuses a Markdown file without its
   // name / description.
   const createMarkdown: EmptyViewItemType = {
-    title: t("EmptyView:CreateNewFileTitle"),
-    description: t("Common:InstructionsRoomMarkdownOnly"),
+    title: t("Common:CreateSkill"),
+    description: t("EmptyView:SkillSetMarkdownOnlyDescription"),
     icon: <CreateNewFormIcon />,
     key: "create-markdown",
     disabled: !security?.Create,
@@ -453,14 +453,26 @@ export const getOptions = (
 
   const uploadMarkdownFromDevice = createUploadFromDeviceOption(
     t("EmptyView:UploadDeviceOptionTitle"),
-    t("Common:InstructionsRoomMarkdownOnly"),
+    t("EmptyView:SkillSetMarkdownOnlyDescription"),
     "file",
   );
 
-  const uploadFilesFromDevice = createUploadFromDeviceOption(
+  // A knowledge base takes the formats vectorization reads, not any file.
+  const uploadKnowledgeFromDevice = createUploadFromDeviceOption(
     t("EmptyView:UploadDeviceOptionTitle"),
-    t("EmptyView:UploadDeviceOptionDescription"),
+    t("EmptyView:KnowledgeBaseUploadDeviceDescription"),
     "file",
+  );
+
+  // The members of a skill set or a knowledge base use it; they do not
+  // "work together in the room".
+  const inviteToSkillSet = createInviteOption(
+    t("Common:InviteContacts"),
+    t("EmptyView:SkillSetInviteDescription"),
+  );
+  const inviteToKnowledgeBase = createInviteOption(
+    t("Common:InviteContacts"),
+    t("EmptyView:KnowledgeBaseInviteDescription"),
   );
 
   // The workspace picker of a Knowledge or Instructions room copies several
@@ -468,12 +480,14 @@ export const getOptions = (
   // vectorization reads, or Markdown.
   const uploadKnowledgeFromStorage: EmptyViewItemType = {
     ...uploadAllFromDocSpace,
+    description: t("EmptyView:KnowledgeBaseUploadStorageDescription"),
     key: "upload-knowledge-from-storage",
     onClick: () => actions.uploadFromDocspaceKnowledgeRoom(),
   };
 
   const uploadMarkdownFromStorage: EmptyViewItemType = {
     ...uploadKnowledgeFromStorage,
+    description: t("EmptyView:SkillSetUploadStorageDescription"),
     key: "upload-markdown-from-storage",
   };
 
@@ -725,32 +739,39 @@ export const getOptions = (
         uploadFromDeviceAnyFile,
       ];
 
-    // Markdown only: created from the skill template, uploaded, or
-    // written by AI.
+    // Markdown only: written by AI, created from the skill template, or
+    // uploaded. The skills come first, the people to share them with last.
     case RoomsType.InstructionsRoom: {
       if (isNotAdmin) return [];
 
       const skillOptions = [
+        ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
         ...(isCreateSkillAvailable ? [createMarkdown] : []),
         uploadMarkdownFromStorage,
         uploadMarkdownFromDevice,
-        ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
       ];
 
-      return isCollaborator ? skillOptions : [inviteUser, ...skillOptions];
+      return isCollaborator
+        ? skillOptions
+        : [...skillOptions, inviteToSkillSet];
     }
 
     // Files to index: uploaded, never created or edited; nothing at all
-    // while vectorization is off.
+    // while vectorization is off. The files come first, the people last.
     case RoomsType.KnowledgeRoom:
       if (isNotAdmin) return [];
 
-      if (!vectorizationEnabled) return isCollaborator ? [] : [inviteUser];
+      if (!vectorizationEnabled)
+        return isCollaborator ? [] : [inviteToKnowledgeBase];
 
       if (isCollaborator)
-        return [uploadKnowledgeFromStorage, uploadFilesFromDevice];
+        return [uploadKnowledgeFromStorage, uploadKnowledgeFromDevice];
 
-      return [inviteUser, uploadKnowledgeFromStorage, uploadFilesFromDevice];
+      return [
+        uploadKnowledgeFromStorage,
+        uploadKnowledgeFromDevice,
+        inviteToKnowledgeBase,
+      ];
     default:
       return [];
   }

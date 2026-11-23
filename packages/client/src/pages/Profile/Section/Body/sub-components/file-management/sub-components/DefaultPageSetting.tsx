@@ -91,7 +91,7 @@ const StartPageSettingComponent = ({
         key: FolderType.PrivateRooms,
       },
       {
-        label: t("Common:AiWorkspace"),
+        label: t("Common:AIChat"),
         key: FolderType.AiHub,
       },
     ];

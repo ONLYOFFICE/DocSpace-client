@@ -1,17 +1,8 @@
 {
-  "CannotCreateNewRoom": "Impossible de créer une salle",
   "CannotCreatePaidUsers": "Impossible d'ajouter des utilisateurs payants",
   "CannotRestoreRoom": "Impossible de restaurer la salle",
-  "ChooseNewPlan": "Vous souhaitez choisir un nouveau plan tarifaire ?",
-  "GracePeriodActive": "La période de grâce est active <1>du {{fromDate}} au {{byDate}}</1> (jours restants : {{delayDaysCount}}).",
-  "LicenseExpiredRestriction": "Impossible d'ajouter de nouveaux utilisateurs et de créer de nouvelles salles. La licence a expiré.",
-  "LicenseGracePeriodInfo": "Pendant ce temps, les administrateurs ne peuvent pas créer de nouvelles salles ou ajouter de nouveaux utilisateurs. Une fois la période de grâce terminée, l'espace de travail sera indisponible jusqu'à ce qu'une nouvelle licence soit activée.",
-  "NewRoomWillExceedLimit": "La création de cette salle n'est pas possible car la limite du nombre de salles incluses dans votre plan actuel est atteinte.",
   "NewUsersWillExceedMembersLimit": "L'ajout de nouveaux utilisateurs payants n'est pas possible car la limite est atteinte pour le nombre d'administrateurs inclus dans votre plan actuel.",
   "NotPossibleRoomRestoring": "La restauration de cette salle n'est pas possible car la limite du nombre de salles incluses dans votre plan actuel est atteinte.",
-  "NumberOfRoomsAccordingToTariff": "Nombre de salles selon votre plan tarifaire : {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Nombre d'administrateurs selon votre plan tarifaire : {{currentValue}}/{{maxValue}}",
-  "PlanPaymentOverdue": "Il est impossible d'ajouter de nouveaux utilisateurs, de créer de nouvelles salles ou des agents IA. Le paiement du plan {{planName}} est en retard.",
-  "RoomsQuotaAlmostExhausted": "Le quota de salles est presque épuisé.",
   "UsersQuotaAlmostExhausted": "Le quota d'utilisateurs payants est presque épuisé."
 }

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-import { FolderType } from "../../enums";
+import { FolderType, RoomsType } from "../../enums";
 
 const section = (
   id: number,
@@ -39,6 +39,7 @@ type TTreeNode = {
   rootFolderType: FolderType;
   newItems: number;
   new: number;
+  pinnedAiProjects?: { id: number }[];
 };
 
 const getTree = async () => (await getFoldersTree()) as unknown as TTreeNode[];
@@ -79,5 +80,35 @@ describe("getFoldersTree", () => {
 
     expect(rooms.newItems).toBe(5);
     expect(rooms.new).toBe(5);
+  });
+
+  it("lists the pinned AI projects of the AI rooms section", async () => {
+    response.push(section(1, FolderType.Rooms, 0, 0), {
+      ...section(9, FolderType.AiHub, 0, 0),
+      folders: [
+        { id: 11, roomType: RoomsType.AiProjectRoom, pinned: true },
+        { id: 12, roomType: RoomsType.AiProjectRoom, pinned: true },
+      ],
+    });
+
+    const tree = await getTree();
+    const aiHub = tree.find((f) => f.rootFolderType === FolderType.AiHub);
+
+    expect(aiHub?.pinnedAiProjects?.map((room) => room.id)).toEqual([11, 12]);
+    expect(tree[0].pinnedAiProjects).toBeUndefined();
+  });
+
+  it("drops what a server without that listing answers in the AI rooms section", async () => {
+    response.push({
+      ...section(9, FolderType.AiHub, 0, 0),
+      folders: [
+        { id: 11, roomType: RoomsType.AiProjectRoom, pinned: false },
+        { id: 12, roomType: RoomsType.KnowledgeRoom, pinned: true },
+      ],
+    });
+
+    const [aiHub] = await getTree();
+
+    expect(aiHub.pinnedAiProjects).toEqual([]);
   });
 });

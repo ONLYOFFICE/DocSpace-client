@@ -99,7 +99,7 @@ describe("DefaultPageSetting — Section is a start page option while available"
       "Common:Rooms",
       "Common:Forms",
       "Common:Private",
-      "Common:AiWorkspace",
+      "Common:AIChat",
     ]);
 
     fireEvent.click(screen.getByRole("button", { name: "Common:Private" }));

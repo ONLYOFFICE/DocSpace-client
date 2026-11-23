@@ -34,12 +34,16 @@
  */
 
 import type { TFunction } from "i18next";
+import chunk from "lodash/chunk";
 
 import {
+  CANDIDATE_KEYS_BATCH_SIZE,
   getRoomCandidateKeys,
   getRoomMissingFileKeys,
 } from "../../api/privacy";
-import { setRoomSecurity } from "../../api/rooms";
+import { getRoomMembers, setRoomSecurity } from "../../api/rooms";
+import { MembersSubjectType } from "../../enums";
+import { readAllPages } from "../../utils/readAllPages";
 import type { IdentityKeyPair } from "../encryption/types";
 import {
   addMembersToEncryptedRoom,
@@ -90,16 +94,21 @@ export type TMemberFlowNotice = {
 export type TInviteItem = {
   id?: string;
   isGroup?: boolean;
+  /** An address typed in the invite field: its id is local, not a user's. */
+  isEmailInvite?: boolean;
   displayName?: string;
   email?: string;
 };
 
-/** The invited people whose file keys are re-wrapped: users, not groups. */
+/**
+ * The invited people whose file keys are re-wrapped: portal users, not
+ * groups or typed addresses.
+ */
 export const getMembersToRewrap = (
   inviteItems: TInviteItem[],
 ): NewRoomMember[] =>
   inviteItems
-    .filter((item) => item.id && !item.isGroup)
+    .filter((item) => item.id && !item.isGroup && !item.isEmailInvite)
     .map((item) => ({
       id: item.id as string,
       displayName: (item.displayName || item.email) as string,
@@ -132,7 +141,11 @@ export async function verifyInvitees({
   if (invitees.length === 0) return { verified: [], skipped: [] };
 
   const memberIds = invitees.map((member) => member.id);
-  const candidateKeys = await getRoomCandidateKeys(roomId, memberIds);
+  // Spec: private-rooms/room-membership, "The key check of invitees is sent in batches"
+  const candidateKeys = [];
+  for (const batch of chunk(memberIds, CANDIDATE_KEYS_BATCH_SIZE)) {
+    candidateKeys.push(...(await getRoomCandidateKeys(roomId, batch)));
+  }
   const displayNames: Record<string, string | undefined> = {};
   for (const member of invitees) displayNames[member.id] = member.displayName;
 
@@ -576,8 +589,9 @@ export async function rewrapPendingAccessOfMember({
 }
 
 /**
- * Checks that a new owner of the room holds a verified key. Resolves with the
- * refusal to show, or null when the candidate can own the room.
+ * Checks that a new owner of the room is one of its members and holds a
+ * verified key. Resolves with the refusal to show, or null when the
+ * candidate can own the room.
  */
 export async function getNewOwnerKeyRefusal(
   t: TFunction,
@@ -585,6 +599,26 @@ export async function getNewOwnerKeyRefusal(
   candidate: { id: string; label?: string; displayName?: string },
   currentUserId: string,
 ): Promise<string | null> {
+  // Spec: private-rooms/room-membership, "Owner candidates are current members"
+  let members: Awaited<ReturnType<typeof getRoomMembers>>["items"];
+  try {
+    members = await readAllPages((startIndex) =>
+      getRoomMembers(roomId, { count: 100, startIndex }),
+    );
+  } catch {
+    return t("Common:OwnerCandidatesLoadFailed");
+  }
+  const isMember = members.some(
+    (member) =>
+      member?.subjectType === MembersSubjectType.User &&
+      String(member.sharedTo?.id) === String(candidate.id),
+  );
+  if (!isMember) {
+    return t("Common:EncryptedChangeOwnerNotMember", {
+      user: candidate.label || candidate.displayName || candidate.id,
+    });
+  }
+
   const { skipped } = await validateMembersForEncryption(
     Number(roomId),
     [candidate.id],
@@ -642,4 +676,28 @@ export async function prepareNewOwner({
   }
   const stillMissing = new Set(missingFileIdsByMember[candidateId] ?? []);
   return { missingFileIds: fileIds.filter((id) => stillMissing.has(id)) };
+}
+
+/**
+ * The number of files the server names as lacking the candidate's entry
+ * when it refused an owner change with 409, for example a file uploaded
+ * after `prepareNewOwner`; 0 for any other refusal or when none is listed.
+ */
+// Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
+export async function countMissingFilesOfRefusedOwnerChange(
+  error: unknown,
+  roomId: number | string,
+  candidateId: string,
+): Promise<number> {
+  const status = (error as { response?: { status?: number } })?.response
+    ?.status;
+  if (status !== 409) return 0;
+  const listed = await getRoomMissingFileKeys(roomId, [candidateId]).catch(
+    () => [],
+  );
+  const candidate = candidateId.toLowerCase();
+  return (
+    listed.find((entry) => entry.userId.toLowerCase() === candidate)?.fileIds
+      .length ?? 0
+  );
 }

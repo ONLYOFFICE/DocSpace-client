@@ -85,6 +85,7 @@ export default async function Page({
       fileId={fileId}
       threadId={threadId}
       canUseAi={canUseAi}
+      userId={user?.id}
       isPortalAdmin={isPortalAdmin}
       isStandalone={isStandalone}
     />

@@ -1,0 +1,29 @@
+{
+  "key_path": "MarkdownBold",
+  "content": "Bold",
+  "content_en_sha1_hash": "19e07430eed6d97d6d73cb4a2967b1f316520f54",
+  "created_at": "2026-11-18T08:35:53.202Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Tooltip and accessible name of the Bold formatting button in the Markdown toolbar over a skill's instructions in the skill editor. Single word, the text style.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/MarkdownToolbar.tsx",
+      "line_number": 95,
+      "context": "/** The formatting buttons over a skill's instructions, and the note that they are Markdown. */\n const MarkdownToolbar = ({ isDisabled, onAction }: MarkdownToolbarProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n const actions: { action: TMarkdownAction; label: string }[] = [\n { action: \"bold\", label: t(\"Common:MarkdownBold\") },\n { action: \"italic\", label: t(\"Common:MarkdownItalic\") },\n { action: \"heading\", label: t(\"Common:MarkdownHeading\") },\n { action: \"bulleted\", label: t(\"Common:MarkdownBulletedList\") },\n { action: \"numbered\", label: t(\"Common:MarkdownNumberedList\") },\n { action: \"code\", label: t(\"Common:MarkdownCode\") },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -195,6 +195,48 @@ describe("FilesActionsStore — delete/download/duplicate (batch 8)", () => {
   });
 });
 
+describe("FilesActionsStore — permanent deletion in a private room", () => {
+  const RECYCLE_BIN_ID = 99;
+
+  const deleteFileIn = async (isPrivacyFolder: boolean) => {
+    const p = progress();
+    const addActiveItems = vi.fn();
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isPrivacyFolder, recycleBinFolderId: RECYCLE_BIN_ID },
+      filesStore: {
+        selection: [{ id: 1, fileExst: ".docx", security: { Delete: true } }],
+        bufferSelection: null,
+        activeFiles: [],
+        activeFolders: [],
+        getIsEmptyTrash: vi.fn(),
+        addActiveItems,
+        removeFiles: vi.fn(),
+        fetchFiles: vi.fn(async () => {}),
+        setSelected: vi.fn(),
+      },
+      uploadDataStore: { ...p.store, removeFiles: vi.fn() },
+    });
+
+    await store.deleteAction({ deleteFromTrash: "x" } as never);
+
+    return addActiveItems;
+  };
+
+  it("Delete a file", async () => {
+    const addActiveItems = await deleteFileIn(true);
+
+    expect(removeFiles).toHaveBeenCalledWith([], [1], false, true);
+    expect(addActiveItems).toHaveBeenCalledWith([1], null, null);
+  });
+
+  it("moves a file to the Recycle Bin outside a private room", async () => {
+    const addActiveItems = await deleteFileIn(false);
+
+    expect(removeFiles).toHaveBeenCalledWith([], [1], false, false);
+    expect(addActiveItems).toHaveBeenCalledWith([1], null, RECYCLE_BIN_ID);
+  });
+});
+
 describe("FilesActionsStore — delete confirmation in a private room", () => {
   const setup = (isPrivacyFolder: boolean) => {
     const setDeleteDialogVisible = vi.fn();

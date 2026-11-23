@@ -36,6 +36,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
+import { isMobileOnly } from "react-device-detect";
 
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
@@ -45,7 +46,13 @@ import styles from "./main.module.scss";
 // and none of the three is an HTML attribute -- spreading the whole props
 // object onto <main> put all three on the DOM node and React complained about
 // each on every page. Only what is left after these is forwarded.
-const Main = ({ mainBarVisible, isFrame, isDesktop, ...rest }) => {
+const Main = ({
+  mainBarVisible,
+  isFrame,
+  isBannerVisible = false,
+  isDesktop,
+  ...rest
+}) => {
   // console.log("Main render");
   const [mainHeight, setMainHeight] = React.useState(window.innerHeight);
   const updateSizeRef = React.useRef(null);
@@ -58,10 +65,14 @@ const Main = ({ mainBarVisible, isFrame, isDesktop, ...rest }) => {
     if (isMobileUtils() && !isFrame) {
       correctHeight -= 48;
       correctHeight -= 3;
+
+      // The smart banner is in the flow above the nav menu (Shell wraps it
+      // with 80px of bottom padding); without it the page overflows.
+      if (isMobileOnly && isBannerVisible) correctHeight -= 80;
     }
 
     setMainHeight(correctHeight);
-  }, [mainBarVisible, isFrame]);
+  }, [mainBarVisible, isFrame, isBannerVisible]);
 
   React.useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -74,7 +85,7 @@ const Main = ({ mainBarVisible, isFrame, isDesktop, ...rest }) => {
 
   React.useEffect(() => {
     onResize();
-  }, [mainBarVisible, isFrame, onResize]);
+  }, [mainBarVisible, isFrame, isBannerVisible, onResize]);
 
   const mainStyle = mainHeight ? { height: `${mainHeight}px` } : undefined;
 
@@ -90,9 +101,10 @@ const Main = ({ mainBarVisible, isFrame, isDesktop, ...rest }) => {
 Main.displayName = "Main";
 
 export default inject(({ settingsStore }) => {
-  const { mainBarVisible, isFrame } = settingsStore;
+  const { mainBarVisible, isFrame, isBannerVisible } = settingsStore;
   return {
     mainBarVisible,
     isFrame,
+    isBannerVisible,
   };
 })(observer(Main));

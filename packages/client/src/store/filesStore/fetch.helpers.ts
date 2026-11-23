@@ -73,7 +73,11 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
 import { noticeOwnKeysOnRoomEntry } from "SRC_DIR/helpers/ownKeyListNotice";
-import { getAiWorkspaceTitle } from "SRC_DIR/helpers/aiWorkspace";
+import {
+  getAiListTitle,
+  getAiRoomListType,
+  getAiWorkspaceTitle,
+} from "SRC_DIR/helpers/aiWorkspace";
 import {
   getSectionAddressCorrection,
   SECTION_DECIDED_STATE,
@@ -121,6 +125,8 @@ async function checkSectionAddress(
   isSuperseded: boolean;
 }> {
   const { appsStore } = self;
+  // Spec: private-rooms/sidebar-section, "Section addresses are decided before the folder is shown"
+  await appsStore?.waitForFrameOptIn?.();
   const decision = {
     pathname: address.pathname,
     search: address.search,
@@ -262,6 +268,8 @@ export function fetchFilesImpl(
   self.roomsController = null;
 
   let room: Nullable<TItem> = null;
+  // The room of the open folder, read once for the second part of the path.
+  let pathRoom: Nullable<TItem> = null;
 
   const controller = self.filesController;
   // Set when a corrected address or a newer fetch takes the loading over.
@@ -325,16 +333,6 @@ export function fetchFilesImpl(
 
       if (data.current.private) {
         noticeOwnKeysOnRoomEntry(self.userStore);
-
-        // The room id may differ from data.current.id when navigating into
-        // a sub-folder: pathParts[1] is the room, current is the sub-folder.
-        const resolvedRoomId = data.pathParts?.[1]?.id ?? data.current.id;
-        // Backfill envelopes for members who registered their keypair after
-        // being invited (their old files are otherwise locked out).
-        self.maybeBackfillEncryptedRoom(
-          resolvedRoomId,
-          data.current.security,
-        );
       }
 
 
@@ -376,6 +374,16 @@ export function fetchFilesImpl(
 
       const currentFolder: TItem = data.current;
 
+      // A room of the AI Chat section: its list (Skill sets, Knowledge bases,
+      // Agents), which the root crumb names and leads back to.
+      const aiRoomListType =
+        data.current.rootFolderType === FolderType.AiHub
+          ? getAiRoomListType(
+              (data.pathParts[1] as TPathParts | undefined)?.roomType ??
+                data.current.roomType,
+            )
+          : null;
+
       const navigationPath = await Promise.all(
         data.pathParts.map(async (folder, idx) => {
           const { Rooms, Archive } = FolderType;
@@ -397,17 +405,23 @@ export function fetchFilesImpl(
           const { title, roomType, folderType } = folderInfo as TFolder &
             TPathParts;
 
+          const isAiListRoot = idx === 0 && aiRoomListType !== null;
+
           const isRootRoom =
-            idx === 0 &&
-            (data.current.rootFolderType === Rooms ||
-              data.current.rootFolderType === Archive);
+            (idx === 0 &&
+              (data.current.rootFolderType === Rooms ||
+                data.current.rootFolderType === Archive)) ||
+            isAiListRoot;
 
           // Form rooms live in the VirtualRooms tree, so the server names the
           // root path part "Rooms". On the /forms route that crumb already
           // navigates to the Forms list (see onClickFolder -> moveToRoomsPage),
           // so it must be labelled Forms to match where it leads.
-          const crumbTitle =
-            isRootRoom && window.location.pathname.startsWith("/forms")
+          // The server names the AI Chat section's root "AI rooms"; the crumb
+          // is the list the room is in, as the sidebar names it.
+          const crumbTitle = isAiListRoot
+            ? getAiListTitle(i18n.t, aiRoomListType)
+            : isRootRoom && window.location.pathname.startsWith("/forms")
               ? i18n.t("Common:Forms")
               : isRootRoom &&
                   folderType === Rooms &&
@@ -424,9 +438,11 @@ export function fetchFilesImpl(
           room = data.current;
 
           if (idx === 1) {
+            pathRoom = data.current;
             if (!isCurrentFolder) {
               room =
                 sectionCheck.room ?? (await api.files.getFolderInfo(folder.id));
+              pathRoom = room;
 
               shared = room.shared;
               external = room.external;
@@ -477,6 +493,11 @@ export function fetchFilesImpl(
           })
           .reverse();
       });
+
+      // Spec: private-rooms/room-membership, "The backfill sweep starts from any folder of the room"
+      if (pathRoom?.private) {
+        self.maybeBackfillEncryptedRoom(pathRoom.id ?? null, pathRoom.security);
+      }
 
       runInAction(() => {
         if (self.isPreview) {
@@ -850,6 +871,10 @@ export function fetchRoomsImpl(
           self.setFolders(data.folders);
           self.setFiles(EMPTY_ARRAY);
         });
+
+        // The agents' tiles read their summaries again with the list.
+        if (self.categoryType === CategoryType.AiHub)
+          self.aiProjectsStore?.refreshTileSummaries();
 
         // Spec: private-rooms/sidebar-section, "Info panel in the section".
         const isListShown =

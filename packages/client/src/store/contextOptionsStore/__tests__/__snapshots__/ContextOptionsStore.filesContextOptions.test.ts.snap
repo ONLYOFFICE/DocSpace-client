@@ -59,10 +59,6 @@ exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a recy
 exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a room option set 1`] = `
 [
   {
-    "key": "delete",
-    "label": "Common:Delete",
-  },
-  {
     "key": "edit-room",
     "label": "Common:EditRoom",
   },
@@ -78,18 +74,28 @@ exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a room
     "key": "archive-room",
     "label": "Common:MoveToArchive",
   },
+  {
+    "key": "separator3",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
 ]
 `;
 
 exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a room template 1`] = `
 [
   {
-    "key": "delete",
-    "label": "Common:Delete",
-  },
-  {
     "key": "room-info",
     "label": "Common:RoomInfo",
+  },
+  {
+    "key": "separator0",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
   },
 ]
 `;
@@ -97,16 +103,19 @@ exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps a room
 exports[`ContextOptionsStore.getFilesContextOptions — item kinds > maps an archived room 1`] = `
 [
   {
-    "key": "delete",
-    "label": "Common:Delete",
-  },
-  {
     "key": "room-info",
     "label": "Common:RoomInfo",
   },
   {
     "key": "unarchive-room",
     "label": "Common:Restore",
+  },
+  {
+    "key": "separator1",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
   },
 ]
 `;

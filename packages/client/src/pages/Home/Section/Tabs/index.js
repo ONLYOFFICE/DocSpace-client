@@ -34,6 +34,8 @@
  */
 import { inject, observer } from "mobx-react";
 
+import AiWorkspaceTabs from "./AiWorkspaceTabs";
+
 const SectionSubmenuContent = ({
   allowInvitingGuests,
   checkGuests,
@@ -48,8 +50,11 @@ const SectionSubmenuContent = ({
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
   // The Rooms/Templates submenu was replaced by the Templates item in the
-  // sidebar (ClientArticleSidebar → Rooms → Templates).
-  return null;
+  // sidebar (ClientArticleSidebar → Rooms → Templates). The AI Chat section's
+  // lists keep theirs: it renders nothing anywhere else.
+  if (isContacts) return null;
+
+  return <AiWorkspaceTabs />;
 };
 
 export default inject(({ settingsStore, clientLoadingStore }) => {

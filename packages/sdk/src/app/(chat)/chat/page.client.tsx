@@ -193,6 +193,7 @@ type ChatPageProps = {
   fileId: string;
   threadId: string;
   canUseAi: boolean;
+  userId?: string;
   isPortalAdmin: boolean;
   isStandalone: boolean;
 };
@@ -203,6 +204,7 @@ const ChatPage = ({
   fileId,
   threadId,
   canUseAi,
+  userId,
   isPortalAdmin,
   isStandalone,
 }: ChatPageProps) => {
@@ -247,6 +249,7 @@ const ChatPage = ({
         locale={i18n.language}
         isStandalone={isStandalone}
         canUseAi={canUseAi}
+        userId={userId}
         entityId={chatEntityId}
         getAgentRoomId={getAgentRoomId}
       >

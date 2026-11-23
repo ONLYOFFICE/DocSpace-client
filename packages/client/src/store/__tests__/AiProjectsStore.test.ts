@@ -8,6 +8,14 @@ const api = vi.hoisted(() => ({
   getAiProjectKnowledgeFiles: vi.fn(),
   getAiProjectKnowledgeFilesCount: vi.fn(),
   getAiProjectSkills: vi.fn(),
+  getAiProjectSummary: vi.fn(),
+  getDefaultChatModelName: vi.fn(async () => null as string | null),
+  toAiProjectSummary: vi.fn((p: { aiProject: { profile?: { name?: string } | null } }) => ({
+    model: p.aiProject.profile?.name ?? null,
+    modelAvailable: true,
+    skills: ["from project"],
+    knowledge: [],
+  })),
   refreshAiProjectSettings: vi.fn(),
   updateAiProject: vi.fn(),
   toAiProject: vi.fn((dto: Record<string, unknown>) => ({ ...dto, aiProject: {} })),
@@ -69,7 +77,7 @@ const listed = (id: number) =>
     } as unknown as TAiProject["aiProject"],
   });
 
-const presets = { setActivePreset: vi.fn() };
+const presets = { setActivePreset: vi.fn(), fetchPresets: vi.fn(async () => {}) };
 const userStore = { user: { id: "me" } } as unknown as UserStore;
 const createStore = () => new AiProjectsStore(presets as unknown as AiPresetsStore, userStore);
 
@@ -305,6 +313,8 @@ describe("AiProjectsStore", () => {
       expect(result).toBe(created);
       expect(toastr.warning).toHaveBeenCalledWith("room 5 is gone");
       expect(store.activeProject).toBeNull();
+      // The sidebar's Agents lists the latest projects.
+      expect(presets.fetchPresets).toHaveBeenCalled();
     });
 
     it("replaces an updated open project and re-syncs the chat", async () => {
@@ -317,6 +327,105 @@ describe("AiProjectsStore", () => {
 
       expect(store.activeProject).toEqual(updated);
       expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1" }));
+    });
+
+    it("re-syncs an agent picked in the chat panel when its form saves it, and no other", async () => {
+      const picked = { ...presets, activePreset: { id: "7" } };
+      const store = new AiProjectsStore(picked as unknown as AiPresetsStore, userStore);
+      api.updateAiProject.mockResolvedValue(project(8));
+      await store.updateProject(8, { title: "Other" } as never);
+      expect(presets.setActivePreset).not.toHaveBeenCalled();
+
+      api.updateAiProject.mockResolvedValue(project(7, "Renamed"));
+      await store.updateProject(7, { title: "Renamed" } as never);
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "7", name: "Renamed" }));
+    });
+
+    it("saves the Skill sets the chat connected and disconnected, one change after another", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      const linked = (ids: number[]) =>
+        project(1, "Project 1", {
+          aiProject: {
+            ...project(1).aiProject,
+            instructionsRooms: ids.map((id) => ({ id, title: `Room ${id}`, available: true })),
+          } as TAiProject["aiProject"],
+        });
+      api.updateAiProject.mockResolvedValueOnce(linked([12, 13])).mockResolvedValueOnce(linked([13]));
+
+      const first = store.changeActiveSkillRooms({ added: [{ id: "13" }], removed: [] });
+      const second = store.changeActiveSkillRooms({ added: [], removed: ["12"] });
+
+      expect(await first).toBe(true);
+      expect(await second).toBe(true);
+      expect(api.updateAiProject.mock.calls[0][1].aiProject.instructionsRoomIds).toEqual([12, 13]);
+      // The second change starts from what the first one saved.
+      expect(api.updateAiProject.mock.calls[1][1].aiProject.instructionsRoomIds).toEqual([13]);
+      expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([13]);
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1" }));
+    });
+
+    it("writes nothing for a Skill sets change the project already has, and reports a refused save", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      api.updateAiProject.mockClear();
+
+      expect(await store.changeActiveSkillRooms({ added: [{ id: "12" }], removed: ["99"] })).toBe(true);
+      expect(api.updateAiProject).not.toHaveBeenCalled();
+
+      api.updateAiProject.mockRejectedValueOnce(new Error("refused"));
+      expect(await store.changeActiveSkillRooms({ added: [], removed: ["12"] })).toBe(false);
+      expect(toastr.error).toHaveBeenCalled();
+      expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
+    });
+
+    it("reports a Skill sets change as not saved when the server refused to unlink the room", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      // The project is written, but the refused unlink leaves the room linked
+      // and comes back as a warning.
+      api.updateAiProject.mockResolvedValueOnce(
+        project(1, "Project 1", {
+          aiProject: {
+            ...project(1).aiProject,
+            warnings: [{ code: "roomUnavailable", message: "You don't have enough permission" }],
+          } as TAiProject["aiProject"],
+        }),
+      );
+
+      expect(await store.changeActiveSkillRooms({ added: [], removed: ["12"] })).toBe(false);
+      expect(toastr.warning).toHaveBeenCalledWith("You don't have enough permission");
+      expect(store.activeProject?.aiProject.instructionsRooms.map((room) => room.id)).toEqual([12]);
+    });
+
+    it("saves a Skill sets change of an agent picked in the chat panel from the agent as the server has it", async () => {
+      const store = createStore();
+      const picked = { ...presets, activePreset: { id: "7" } };
+      const panelStore = new AiProjectsStore(picked as unknown as AiPresetsStore, userStore);
+      api.getAiProject.mockResolvedValueOnce(project(7));
+      api.updateAiProject.mockResolvedValueOnce(
+        project(7, "Project 7", {
+          aiProject: { ...project(7).aiProject, instructionsRooms: [] } as TAiProject["aiProject"],
+        }),
+      );
+
+      expect(await panelStore.changeSkillRooms(7, { added: [], removed: ["12"] })).toBe(true);
+      expect(api.getAiProject).toHaveBeenCalledWith(7);
+      expect(api.updateAiProject.mock.calls[0][1].aiProject.instructionsRoomIds).toEqual([]);
+      // The picked agent follows the saved one.
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "7", contextRooms: [] }));
+
+      // An agent the user may not change is not saved, nor one that cannot be read.
+      api.getAiProject.mockResolvedValueOnce(
+        project(8, "Project 8", {
+          aiProject: { ...project(8).aiProject, canEditSettings: false } as TAiProject["aiProject"],
+        }),
+      );
+      expect(await store.changeSkillRooms(8, { added: [], removed: ["12"] })).toBe(false);
+      api.getAiProject.mockRejectedValueOnce(new Error("gone"));
+      expect(await store.changeSkillRooms(9, { added: [], removed: ["12"] })).toBe(false);
+      expect(toastr.error).toHaveBeenCalled();
+      expect(api.updateAiProject).toHaveBeenCalledTimes(1);
     });
 
     it("drops the uploaded logo after an update that removed it", async () => {
@@ -341,6 +450,7 @@ describe("AiProjectsStore", () => {
       await store.changeOwner(project(1), "u2", true);
       expect(filesApi.setFileOwner).toHaveBeenCalledWith("u2", [1]);
       expect(roomsApi.updateRoomMemberRole).not.toHaveBeenCalled();
+      expect(presets.fetchPresets).not.toHaveBeenCalled();
       expect(store.activeProject?.title).toBe("Handed over");
 
       await store.changeOwner(project(1), "u3", false);
@@ -348,6 +458,8 @@ describe("AiProjectsStore", () => {
         invitations: [{ id: "me", access: expect.anything() }],
       });
       expect(store.activeProject).toBeNull();
+      // The left project leaves the sidebar's agents.
+      expect(presets.fetchPresets).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -370,7 +482,7 @@ describe("AiProjectsStore", () => {
       const store = createStore();
 
       await store.openEditDialogById(5);
-      expect(api.getAiProject).toHaveBeenCalledWith(5);
+      expect(api.getAiProject).toHaveBeenCalledWith(5, { requireModel: true });
       expect(store.projectDialog).toEqual({ mode: "edit", project: project(5) });
 
       await store.openProject(project(1));
@@ -383,6 +495,62 @@ describe("AiProjectsStore", () => {
       expect(toastr.error).toHaveBeenCalledWith("no");
     });
 
+    it("keeps the edit form on the project it opened while the project changes elsewhere", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      store.openEditDialog(project(1));
+      const elsewhere = project(1, "Renamed elsewhere");
+      api.refreshAiProjectSettings.mockResolvedValue(elsewhere);
+
+      await store.refreshActiveSettings();
+
+      expect(store.activeProject?.title).toBe("Renamed elsewhere");
+      expect(store.projectDialog).toEqual({ mode: "edit", project: project(1) });
+    });
+
+    it("shows the new owner in the open form, keeping what it edits", async () => {
+      const store = createStore();
+      store.openEditDialog(project(1));
+      api.getAiProject.mockResolvedValue(
+        project(1, "Renamed elsewhere", { createdBy: { id: "u2" }, access: 9 } as Partial<TAiProject>),
+      );
+
+      await store.changeOwner(project(1), "u2", true);
+
+      const form = store.projectDialog?.mode === "edit" ? store.projectDialog.project : null;
+      expect(form?.createdBy).toEqual({ id: "u2" });
+      expect(form?.access).toBe(9);
+      expect(form?.title).toBe("Project 1");
+    });
+
+    it("reads a project whose model could not be read before the form opens on it", async () => {
+      const unread = project(1, "Project 1", {
+        aiProject: { ...project(1).aiProject, profile: null, modelUnread: true },
+      });
+      api.getAiProject.mockResolvedValueOnce(project(1));
+      const store = createStore();
+
+      store.openEditDialog(unread);
+      expect(store.projectDialog).toBeNull();
+      await vi.waitFor(() => expect(store.projectDialog).toEqual({ mode: "edit", project: project(1) }));
+      expect(api.getAiProject).toHaveBeenCalledWith(1, { requireModel: true });
+    });
+
+    it("opens no form when the model still cannot be read", async () => {
+      const unread = project(1, "Project 1", {
+        aiProject: { ...project(1).aiProject, profile: null, modelUnread: true },
+      });
+      const store = createStore();
+      await store.openProject(unread);
+      api.getAiProject.mockRejectedValueOnce(new Error("model refused"));
+
+      await store.openEditDialogById(1);
+
+      expect(api.getAiProject).toHaveBeenCalledWith(1, { requireModel: true });
+      expect(toastr.error).toHaveBeenCalledWith("model refused");
+      expect(store.projectDialog).toBeNull();
+    });
+
     it("keeps the edit form on the project as the server has it after a save", async () => {
       const store = createStore();
       store.openEditDialog(project(1));
@@ -392,6 +560,8 @@ describe("AiProjectsStore", () => {
       await store.updateProject(1, { title: "Renamed" } as never);
 
       expect(store.projectDialog).toEqual({ mode: "edit", project: updated });
+      // The views that read the project themselves are told it moved.
+      expect(store.projectRevisions[1]).toBe(1);
     });
   });
 
@@ -425,6 +595,90 @@ describe("AiProjectsStore", () => {
 
       expect(store.knowledge[30][0].vectorizationStatus).toBe(VectorizationStatus.Failed);
       expect(toastr.error).toHaveBeenCalledWith("busy");
+    });
+  });
+
+  describe("the tile summaries", () => {
+    const summary = { model: "Claude", modelAvailable: true, skills: ["Legal"], knowledge: ["Wiki"] };
+
+    it("reads the portal's chat model once for the tiles of agents without their own", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      api.getDefaultChatModelName.mockResolvedValue("GLM 5.3 Flash");
+      const store = createStore();
+      await Promise.all([store.fetchTileSummary(1), store.fetchTileSummary(2)]);
+      await store.fetchDefaultModel();
+      expect(store.defaultModelName).toBe("GLM 5.3 Flash");
+      expect(api.getDefaultChatModelName).toHaveBeenCalledTimes(1);
+    });
+
+    it("reads a project's summary once, however many tiles ask", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      const store = createStore();
+      await Promise.all([store.fetchTileSummary(7), store.fetchTileSummary(7)]);
+      await store.fetchTileSummary(7);
+
+      expect(api.getAiProjectSummary).toHaveBeenCalledTimes(1);
+      expect(store.tileSummaries[7]).toEqual(summary);
+    });
+
+    it("tries a failed read again for the next tile that asks", async () => {
+      api.getAiProjectSummary.mockRejectedValueOnce(new Error("down")).mockResolvedValueOnce(summary);
+      const store = createStore();
+      await store.fetchTileSummary(7);
+      expect(store.tileSummaries[7]).toBeUndefined();
+
+      await store.fetchTileSummary(7);
+      expect(store.tileSummaries[7]).toEqual(summary);
+    });
+
+    it("takes the summary of a project saved in the form, without a read", async () => {
+      api.updateAiProject.mockResolvedValue(project(7));
+      const store = createStore();
+      await store.updateProject(7, { title: "Renamed" });
+
+      expect(store.tileSummaries[7]).toMatchObject({ model: "Claude", skills: ["from project"] });
+      await store.fetchTileSummary(7);
+      expect(api.getAiProjectSummary).not.toHaveBeenCalled();
+    });
+
+    it("reads the summaries and the portal's model again once the list is read again, showing the old ones meanwhile", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      api.getDefaultChatModelName.mockResolvedValue("GLM 5.3 Flash");
+      const store = createStore();
+      await store.fetchTileSummary(7);
+      await store.fetchDefaultModel();
+
+      store.refreshTileSummaries();
+      expect(store.tileSummaries[7]).toEqual(summary);
+      const renamed = { ...summary, skills: ["Contracts"] };
+      api.getAiProjectSummary.mockResolvedValue(renamed);
+      api.getDefaultChatModelName.mockResolvedValue("Claude");
+      await store.fetchTileSummary(7);
+      await store.fetchDefaultModel();
+
+      expect(api.getAiProjectSummary).toHaveBeenCalledTimes(2);
+      expect(store.tileSummaries[7]).toEqual(renamed);
+      expect(store.defaultModelName).toBe("Claude");
+      // Read once per read of the list.
+      await store.fetchTileSummary(7);
+      expect(api.getAiProjectSummary).toHaveBeenCalledTimes(2);
+    });
+
+    it("reads a shown summary again when its project changes, and drops it when the project is gone", async () => {
+      api.getAiProjectSummary.mockResolvedValue(summary);
+      const store = createStore();
+      // Never shown: nothing to read again.
+      await store.refreshTileSummary(7);
+      expect(api.getAiProjectSummary).not.toHaveBeenCalled();
+
+      await store.fetchTileSummary(7);
+      const changed = { ...summary, model: "GPT" };
+      api.getAiProjectSummary.mockResolvedValue(changed);
+      await store.refreshTileSummary(7);
+      expect(store.tileSummaries[7]).toEqual(changed);
+
+      store.forgetTileSummary(7);
+      expect(store.tileSummaries[7]).toBeUndefined();
     });
   });
 });

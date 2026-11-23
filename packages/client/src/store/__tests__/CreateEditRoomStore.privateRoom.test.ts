@@ -230,3 +230,25 @@ describe("CreateEditRoomStore.onCreateRoom for a private room", () => {
     );
   });
 });
+
+describe("CreateEditRoomStore.onCreateRoom for another room type", () => {
+  it.each([
+    ["Public", RoomsType.PublicRoom],
+    ["Form filling", RoomsType.FormRoom],
+    ["Virtual data", RoomsType.VirtualDataRoom],
+    ["Collaboration", RoomsType.EditingRoom],
+  ])("Other room type: %s", async (_name, type) => {
+    const { store, createRoom } = createStore({ encryptionKeys: [] });
+    store.setRoomParams({
+      ...store.roomParams,
+      type,
+      isPrivate: false,
+    } as unknown as Parameters<typeof store.setRoomParams>[0]);
+
+    await store.onCreateRoom(t);
+
+    expect(createRoom).toHaveBeenCalledWith(
+      expect.objectContaining({ roomType: type, private: false }),
+    );
+  });
+});

@@ -61,15 +61,25 @@ function getSectionContentWidth() {
   );
 }
 
+/**
+ * How many tiles a row of the tile view holds, as its CSS auto-fill grid lays
+ * them out. Agent tiles (an AI Chat list) are wider than room tiles, two to a
+ * row on most screens, half the row each:
+ * `minmax(min(100%, clamp(340px, calc((100% - 16px) / 2), 560px)), 1fr)`.
+ */
 export const getCountTilesInGrid = (
   isRooms?: boolean,
   isTemplates?: boolean,
+  isAgents?: boolean,
 ) => {
   const isDesktopView = isDesktop();
   const gridWidth = getSectionContentWidth() + (isDesktopView ? -1 : 1);
-  const tileGap = isDesktopView || isRooms ? 16 : 14;
-  const tileWidth =
-    isRooms || isTemplates ? getTileWidth(275, 350) : getTileWidth(216, 360);
+  const tileGap = isDesktopView || isRooms || isAgents ? 16 : 14;
+  const tileWidth = isAgents
+    ? Math.max(340, Math.min((gridWidth - tileGap) / 2, 560))
+    : isRooms || isTemplates
+      ? getTileWidth(275, 350)
+      : getTileWidth(216, 360);
   const minTileWidth = Math.floor(tileWidth * 64) / 64;
 
   return Math.max(

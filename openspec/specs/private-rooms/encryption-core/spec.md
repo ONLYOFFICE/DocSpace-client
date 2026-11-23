@@ -39,11 +39,15 @@ The system SHALL derive the optional recovery slot from a 24-word BIP-39 phrase 
 - **THEN** it is rejected without a key-derivation attempt
 
 ### Requirement: Per-file content key
-The system SHALL encrypt every file in a private room with its own random 32-byte AES-256 key (DEK). There SHALL be no room-level key.
+The system SHALL encrypt every file in a private room with its own random 32-byte AES-256 key (DEK), a file re-imported from a container downloaded without decryption included. There SHALL be no room-level key.
 
 #### Scenario: Two files in one room
 - **WHEN** two files are uploaded to the same private room
 - **THEN** each is encrypted with a different DEK
+
+#### Scenario: Re-imported copy
+- **WHEN** a container downloaded without decryption is uploaded back while the file it came from is still in the room
+- **THEN** the new file is encrypted with a DEK different from that of the file it came from
 
 ### Requirement: DEK wrapped per recipient with authenticated HPKE
 The system SHALL wrap the DEK once per room member using HPKE in authenticated mode (DHKEM X25519 / HKDF-SHA256 / AES-256-GCM) under the sender's identity key, binding the sender user id, recipient user id and the server-assigned file id into the key schedule. The wrap blob SHALL carry its version, suite and sender id.

@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Veja os detalhes dos convidados aqui",
   "HistoryEmptyScreenText": "O histórico de atividades será mostrado aqui",
   "HistoryThirdParty": "A exibição do histórico não está disponível para salas públicas com armazenamentos de terceiros conectados",
+  "KnowledgeBasesEmptyScreenText": "Veja os detalhes da base de conhecimento aqui",
   "LastUpdateInfo": "Última atualização",
   "LifetimeEnds": "Fim da vida útil",
   "MembersEmptyScreenText": "Veja os detalhes dos membros aqui",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Veja os detalhes dos quartos aqui",
   "SelectedGroups": "Grupos selecionados",
   "SelectedUsers": "Contas selecionadas",
+  "SkillSetsEmptyScreenText": "Veja os detalhes do conjunto de habilidades aqui",
   "StorageType": "Tipo de armazenamento",
   "Users": "Usuários"
 }

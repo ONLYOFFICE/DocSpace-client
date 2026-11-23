@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Skatīt sīkāku informāciju par viesiem šeit",
   "HistoryEmptyScreenText": "Aktivitāšu vēsture tiks parādīta šeit",
   "HistoryThirdParty": "Vēstures displejs nav pieejams sabiedriskām telpām ar saistītām trešo pušu krātuvēm",
+  "KnowledgeBasesEmptyScreenText": "Sīkāku informāciju par zināšanu bāzi skatiet šeit",
   "LastUpdateInfo": "Pēdējais atjauninājums",
   "LifetimeEnds": "Kalpošanas laika beigas",
   "MembersEmptyScreenText": "Skatiet informāciju par dalībniekiem šeit",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Detalizētu informāciju par telpām skatīt šeit",
   "SelectedGroups": "Atlasītās grupas",
   "SelectedUsers": "Atlasītie konti",
+  "SkillSetsEmptyScreenText": "Sīkāku informāciju par prasmju kopu skatiet šeit",
   "StorageType": "Krātuves veids",
   "Users": "Lietotāji"
 }

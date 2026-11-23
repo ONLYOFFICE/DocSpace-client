@@ -77,7 +77,7 @@ import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledPar
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import AvatarEditorDialog from "SRC_DIR/components/dialogs/AvatarEditorDialog";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
-import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
+import { errorMessage, isPaymentRequired } from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
@@ -327,7 +327,14 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         onCreated?.(created);
       }
     } catch (e) {
-      toastr.error(errorMessage(e));
+      if (isPaymentRequired(e)) {
+        // The warning that an unpaid portal shows for a new room says why and
+        // leads to the payments page; the form gives way to it.
+        store.closeProjectDialog();
+        dialogsStore.setQuotaWarningDialogVisible(true);
+      } else {
+        toastr.error(errorMessage(e));
+      }
     } finally {
       setIsSaving(false);
     }

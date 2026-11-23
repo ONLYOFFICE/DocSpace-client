@@ -24,6 +24,8 @@ vi.mock("@docspace/shared/api/ai/projects", () => api);
 vi.mock("SRC_DIR/store/useStore", () => ({ useStore: () => store }));
 vi.mock("@onlyoffice/ai-chat", () => ({ FOLDER_CONTEXTS_LIMIT: 2 }));
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
+  // The chat library's own translations: its keys have no namespace.
+  useI18n: () => ({ t: (key: string) => `chat:${key}` }),
   useStores: () => ({
     useCloudsStore: (pick: (state: object) => unknown) =>
       pick({
@@ -156,10 +158,10 @@ describe("AiAgentContext", () => {
     });
     render(<AiAgentContext id={7} />);
     const skills = await screen.findByTestId("ai-agent-context-skills");
-    expect(screen.getByTestId("ai-agent-context-skills-hint").textContent).toBe("Common:SkillSetsHint");
-    expect(screen.getByTestId("ai-agent-context-knowledge-hint").textContent).toBe("Common:KnowledgeBasesHint");
+    expect(screen.getByTestId("ai-agent-context-skills-hint").textContent).toBe("chat:SkillSetsHint");
+    expect(screen.getByTestId("ai-agent-context-knowledge-hint").textContent).toBe("chat:KnowledgeBasesHint");
     expect(screen.queryAllByTestId("room")).toEqual([]);
-    expect(skills.textContent).toBe("Common:SkillSetsCommon:SkillSetsHint");
+    expect(skills.textContent).toBe("Common:SkillSetschat:SkillSetsHint");
   });
 
   describe("Data sources", () => {
@@ -181,7 +183,7 @@ describe("AiAgentContext", () => {
       chat.folders = [folder("20", "Contracts"), folder("21", "Sales room", "room")];
       render(<AiAgentContext id={7} />);
       const section = await screen.findByTestId("ai-agent-context-data-sources");
-      expect(section.textContent).toContain("Common:DataSourcesHint");
+      expect(section.textContent).toContain("chat:DataSourcesHint");
       const rows = screen.getAllByTestId("ai-agent-context-data-source");
       expect(rows.map((row) => row.textContent)).toEqual(["Contracts", "Sales room"]);
 
@@ -209,7 +211,7 @@ describe("AiAgentContext", () => {
       store.activePreset = { id: "7" };
       render(<AiAgentContext id={7} />);
       const section = await screen.findByTestId("ai-agent-context-data-sources");
-      expect(section.textContent).toBe("Common:DataSourcesCommon:DataSourcesHint");
+      expect(section.textContent).toBe("chat:DataSourceschat:DataSourcesHint");
     });
   });
 

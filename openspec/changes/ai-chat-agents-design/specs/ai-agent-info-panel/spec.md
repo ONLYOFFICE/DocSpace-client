@@ -35,7 +35,7 @@ Context SHALL list what the agent draws on in two sections: Skill sets (`Common:
 
 #### Scenario: Section with no rooms
 - **WHEN** a Member opens Context for an agent with no knowledge bases
-- **THEN** Knowledge bases shows its caption and the line `Common:KnowledgeBasesHint` only, with no dash
+- **THEN** Knowledge bases shows its caption and the line under it only, with no dash
 
 #### Scenario: Agent with sources
 - **WHEN** a Member opens Context for an agent with one skill set and two knowledge bases
@@ -57,7 +57,7 @@ On Context a skill set that has skills SHALL unfold to the names of its skills. 
 - **THEN** the skill sets are listed and none can be unfolded
 
 ### Requirement: Data sources on Context
-While the chat runs on the agent, on its page or picked in the chat panel, Context SHALL end with a Data sources section (`Common:DataSources`) for every member: its caption, a line on what the assistant does with them, and the folders and rooms the user connected to that chat, each with a control that disconnects it. The section SHALL end with "Manage sources..." (`Common:ManageSources`), which opens the selector of the composer's menus.
+While the chat runs on the agent, on its page or picked in the chat panel, Context SHALL end with a Data sources section for every member: its caption, a line on what the assistant does with them, and the folders and rooms the user connected to that chat, each with a control that disconnects it. The section SHALL end with "Manage sources..." (`Common:ManageSources`), which opens the selector of the composer's menus.
 
 #### Scenario: At the limit
 - **WHEN** the chat has as many data sources as it takes

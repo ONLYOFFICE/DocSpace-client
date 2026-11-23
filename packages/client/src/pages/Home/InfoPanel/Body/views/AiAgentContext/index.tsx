@@ -41,7 +41,10 @@ import { FOLDER_CONTEXTS_LIMIT } from "@onlyoffice/ai-chat";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import {
+  useI18n as useAiChatI18n,
+  useStores as useAiChatStores,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import {
   getAiProject,
@@ -145,6 +148,7 @@ const ManageRow = ({ testId, label, onClick }: ManageRowProps) => (
  */
 const DataSources = () => {
   const { t } = useTranslation(["Common"]);
+  const { t: chatT } = useAiChatI18n();
   const { useCloudsStore } = useAiChatStores();
   const folders = useCloudsStore((s) => s.selectedFolderContexts);
   const disconnect = useCloudsStore((s) => s.deselectFolderContext);
@@ -155,8 +159,8 @@ const DataSources = () => {
   return (
     <Section
       testId="ai-agent-context-data-sources"
-      label={t("Common:DataSources")}
-      hint={t("Common:DataSourcesHint")}
+      label={chatT("DataSources")}
+      hint={chatT("DataSourcesHint")}
     >
       {rows.map(({ cloud, room }) => (
         <div
@@ -217,6 +221,9 @@ type AiAgentContextProps = {
  */
 const AiAgentContext = ({ id }: AiAgentContextProps) => {
   const { t } = useTranslation(["Common"]);
+  // The captions' lines are the chat library's own, the ones its slash menu
+  // shows over the same lists: read from its translations, not copied here.
+  const { t: chatT } = useAiChatI18n();
   const aiProjectsStore = useStore("aiProjectsStore");
   // The chat runs on this agent: on its page, or picked in the chat panel.
   const isChatAgent =
@@ -290,7 +297,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       {section(
         "ai-agent-context-skills",
         t("Common:SkillSets"),
-        t("Common:SkillSetsHint"),
+        chatT("SkillSetsHint"),
         context.skillSets,
         (room) => {
           const skills = context.skills[room.id] ?? [];
@@ -335,7 +342,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       {section(
         "ai-agent-context-knowledge",
         t("Common:AIProjectKnowledgeRooms"),
-        t("Common:KnowledgeBasesHint"),
+        chatT("KnowledgeBasesHint"),
         context.knowledgeBases,
         (room) => (
           <RoomItem

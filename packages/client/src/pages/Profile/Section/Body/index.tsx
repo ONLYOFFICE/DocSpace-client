@@ -305,6 +305,7 @@ export default inject(
     telegramStore,
     userStore,
     appsStore,
+    pluginStore,
   }: TStore) => {
     const {
       showProfileLoader,
@@ -370,7 +371,9 @@ export default inject(
       showPersonalPlugins:
         settingsStore.enablePlugins &&
         settingsStore.pluginOptions.personal &&
-        !userStore.user?.isVisitor,
+        !userStore.user?.isVisitor &&
+        (settingsStore.pluginOptions.upload ||
+          !!pluginStore?.pluginList?.some((plugin) => plugin.personal)),
     };
   },
 )(

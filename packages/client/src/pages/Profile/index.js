@@ -45,7 +45,6 @@ import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import Dialogs from "SRC_DIR/pages/Home/Section/ContactsBody/Dialogs";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
-
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 class Profile extends React.Component {

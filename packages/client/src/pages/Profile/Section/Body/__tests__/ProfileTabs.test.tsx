@@ -111,6 +111,8 @@ type TKeysState = {
   encryptionKeys?: { id: string }[] | null;
   isGuest?: boolean;
   arePersonalPluginsAllowed?: boolean;
+  isUploadAllowed?: boolean;
+  hasPersonalPlugin?: boolean;
 };
 
 const renderProfileTabs = ({
@@ -118,13 +120,21 @@ const renderProfileTabs = ({
   encryptionKeys = [],
   isGuest = false,
   arePersonalPluginsAllowed = false,
+  isUploadAllowed = true,
+  hasPersonalPlugin = false,
 }: TKeysState = {}) =>
   render(
     <Provider
       settingsStore={{
         currentDeviceType: "desktop",
         enablePlugins: true,
-        pluginOptions: { personal: arePersonalPluginsAllowed },
+        pluginOptions: {
+          personal: arePersonalPluginsAllowed,
+          upload: isUploadAllowed,
+        },
+      }}
+      pluginStore={{
+        pluginList: hasPersonalPlugin ? [{ name: "own", personal: true }] : [],
       }}
       peopleStore={{
         targetUserStore: {
@@ -245,6 +255,25 @@ describe("Personal plugins tab", () => {
     renderProfileTabs({ arePersonalPluginsAllowed: true, isGuest: true });
 
     expect(screen.queryByTestId("tab-plugins")).not.toBeInTheDocument();
+  });
+
+  it("is not offered while uploads are off and the member has no personal plugin", () => {
+    renderProfileTabs({
+      arePersonalPluginsAllowed: true,
+      isUploadAllowed: false,
+    });
+
+    expect(screen.queryByTestId("tab-plugins")).not.toBeInTheDocument();
+  });
+
+  it("is offered while uploads are off when the member has a personal plugin", () => {
+    renderProfileTabs({
+      arePersonalPluginsAllowed: true,
+      isUploadAllowed: false,
+      hasPersonalPlugin: true,
+    });
+
+    expect(screen.getByTestId("tab-plugins")).toBeInTheDocument();
   });
 
   it("is not offered while personal plugins are not allowed", () => {

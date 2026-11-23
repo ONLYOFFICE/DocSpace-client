@@ -49,6 +49,7 @@ import {
 import Dropzone from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/Dropzone";
 import PluginItem from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem";
 import PluginCacheWarningDialog from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginCacheWarningDialog";
+import ListLoader from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/ListLoader";
 import usePluginUpload from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload";
 import pluginStyles from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/Plugins.module.scss";
 
@@ -68,6 +69,8 @@ const PersonalPlugins = () => {
     setDeletePluginDialogVisible,
     setDeletePluginDialogProps,
     checkPluginCompatibility,
+    isLoaded,
+    needPageReload,
   } = useStore("pluginStore");
 
   const { pluginOptions, theme, culture } = useStore("settingsStore");
@@ -86,6 +89,12 @@ const PersonalPlugins = () => {
   useEffect(() => {
     fetchPersonalPlugins();
   }, [fetchPersonalPlugins]);
+
+  useEffect(() => {
+    if (!needPageReload) return;
+
+    return () => window.location.reload();
+  }, [needPageReload]);
 
   const openSettingsDialog = (pluginName: string) => {
     setSettingsPluginDialogVisible(true);
@@ -120,40 +129,48 @@ const PersonalPlugins = () => {
         </>
       ) : null}
 
-      <div className={pluginStyles.pluginListContainer}>
-        {rows.map(({ own, loaded, shadowedBy }) =>
-          loaded ? (
-            <PluginItem
-              key={`plugin-${loaded.name}-${loaded.version}`}
-              {...loaded}
-              updatePlugin={updatePlugin}
-              openSettingsDialog={openSettingsDialog}
-              theme={theme}
-              dataTestId={`personal_plugin_${loaded.name}`}
-            />
-          ) : (
-            <PluginItem
-              key={`plugin-${own.name}-${own.version}`}
-              name={own.name}
-              nameLocale={getLocalizedText(own.nameLocale, language, own.name)}
-              version={own.version}
-              compatible={checkPluginCompatibility(own.minDocSpaceVersion)}
-              descriptionLocale={getLocalizedText(
-                own.descriptionLocale,
-                language,
-                own.description,
-              )}
-              enabled={own.enabled}
-              image={own.image}
-              url={own.url}
-              theme={theme}
-              shadowedBy={shadowedBy}
-              onDelete={() => openDeleteDialog(own.name)}
-              dataTestId={`personal_plugin_${own.name}`}
-            />
-          ),
-        )}
-      </div>
+      {isLoaded ? (
+        <div className={pluginStyles.pluginListContainer}>
+          {rows.map(({ own, loaded, shadowedBy }) =>
+            loaded ? (
+              <PluginItem
+                key={`plugin-${loaded.name}-${loaded.version}`}
+                {...loaded}
+                updatePlugin={updatePlugin}
+                openSettingsDialog={openSettingsDialog}
+                theme={theme}
+                dataTestId={`personal_plugin_${loaded.name}`}
+              />
+            ) : (
+              <PluginItem
+                key={`plugin-${own.name}-${own.version}`}
+                name={own.name}
+                nameLocale={getLocalizedText(
+                  own.nameLocale,
+                  language,
+                  own.name,
+                )}
+                version={own.version}
+                compatible={checkPluginCompatibility(own.minDocSpaceVersion)}
+                descriptionLocale={getLocalizedText(
+                  own.descriptionLocale,
+                  language,
+                  own.description,
+                )}
+                enabled={own.enabled}
+                image={own.image}
+                url={own.url}
+                theme={theme}
+                shadowedBy={shadowedBy}
+                onDelete={() => openDeleteDialog(own.name)}
+                dataTestId={`personal_plugin_${own.name}`}
+              />
+            ),
+          )}
+        </div>
+      ) : (
+        <ListLoader withUpload={false} />
+      )}
     </div>
   );
 };

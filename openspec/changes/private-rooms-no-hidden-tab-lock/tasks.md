@@ -11,7 +11,7 @@
 
 ## 3. Integration
 
-- [ ] 3.1 Run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; check on the local stand with the 5-minute preset and a remembered device that hiding the tab and returning leaves Common:KeyUnlocked and no locked-key block
+- [x] 3.1 Run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; check on the local stand with the 5-minute preset and a remembered device that hiding the tab and returning leaves Common:KeyUnlocked and no locked-key block
 
 ## Workflow follow-up
 

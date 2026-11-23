@@ -157,6 +157,7 @@ import { getItemUrl as buildItemUrl } from "./filesStore/itemUrl.helpers";
 import {
   fetchFilesImpl,
   fetchRoomsImpl,
+  getQuotaRefreshFilter,
   fetchMoreFilesImpl,
   refetchRoomsListOnSectionChangeImpl,
 } from "./filesStore/fetch.helpers";
@@ -1379,13 +1380,13 @@ class FilesStore {
     );
 
     if (!inRoom) {
-      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
-        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
-        newFilter.searchArea = RoomSearchArea.Templates;
-        await this.fetchRooms(null, newFilter, false, false, false);
-      } else {
-        await this.fetchRooms(null, filter, false, false, false);
-      }
+      await this.fetchRooms(
+        null,
+        getQuotaRefreshFilter(this, filter),
+        false,
+        false,
+        false,
+      );
     }
 
     return rooms;
@@ -1399,13 +1400,13 @@ class FilesStore {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs as number[]);
 
     if (!inRoom) {
-      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
-        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
-        newFilter.searchArea = RoomSearchArea.Templates;
-        await this.fetchRooms(null, newFilter, false, false, false);
-      } else {
-        await this.fetchRooms(null, filter, false, false, false);
-      }
+      await this.fetchRooms(
+        null,
+        getQuotaRefreshFilter(this, filter),
+        false,
+        false,
+        false,
+      );
     }
 
     return rooms;

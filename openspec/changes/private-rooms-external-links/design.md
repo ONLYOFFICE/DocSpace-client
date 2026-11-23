@@ -129,6 +129,138 @@ What follows for this change:
   Handed over by the owner on 2026-11-16 as the draft under
   `server-change/` of this change; no reply is recorded yet.
 
+### Server read at `39f71456b0` (2026-11-23)
+
+The backend team took the draft of `server-change/` into a change of its
+own specs, `private-rooms-external-links` in `../server`, on the branch
+`feature/private-rooms-external-links`, which this repository follows on a
+branch of the same name. Its first iteration is the access to view only;
+commenting, reviewing and editing are left to a later change of its
+specs. Three commits carry code: `7931999802`, `d252914f9f` and
+`d2ade494d7`, with a part of the serving in `a77956ac1c`. Read in the
+source; its tests are in
+`products/ASC.Files/Tests/Tests/08_Private/ExternalLinks`.
+
+What the server does at this commit:
+
+- **Fields.** `setRoomLink`, `setFileExternalLink`,
+  `setFolderPrimaryExternalLink`, `createFilePrimaryExternalLink` and
+  `createFolderPrimaryExternalLink` take `linkPublicKey`,
+  `linkPrivateKeyEnc`, `linkProofHash` and `passwordRequired`
+  (`RoomLinkRequestDto`, `FileLinkRequestDto`, `FolderLinkRequestDto`). A
+  link answers `passwordRequired` and `linkPublicKey` inside `sharedLink`
+  (`FileShareDto`); the sealed key and the proof hash are never answered.
+  The names are the ones this change proposed.
+- **Sizes** (`LinkKeyMaterial.Validate`). `linkPublicKey` and
+  `linkProofHash` are base64 of exactly 32 bytes in the canonical form,
+  with padding, and nothing else; `linkPrivateKeyEnc` is not empty and at
+  most 4096 characters. Anything else answers 400. A request that carries
+  none of the three is a link without key material.
+- **Checks before the first write**
+  (`FileSharingAceHelper.ValidatePrivateLinksAsync`). 403: a caller who may
+  not change the access of the room; a subject that is not an external
+  link; a new link without key material; an access other than reading;
+  `denyDownload`; a link without a password that is not a link to one
+  file with an end date. 400: a malformed field; `password`; another
+  `linkPublicKey` for a link that has one; a new link whose id is held by
+  a user, a group, a share record or another link's key material.
+  `passwordRequired` left out counts as true for a new link and keeps the
+  stored value of an existing one.
+- **Who manages** (`FileSharingHelper.CanSetLinkAsync`,
+  `FileSharing.CanSeeSharesAsync`). A request of external links only on a
+  file or a folder of a private room is checked against the room, so the
+  owner and the room managers set, read and revoke the links of its items;
+  a member with a lower role reads an empty list. A member share on such
+  an item is still refused.
+- **Limits** (`FileSecurity.GetLinksSettings`). An entry of a private room
+  reports no link settings to a listing, so no count of links comes with
+  an entry; only the link-setting path asks for the limit of a room of
+  the same type.
+- **Storage.** Two tables, the key material of a link and the wraps of a
+  link's secret per user, both left out of a backup. The key material is
+  written before the share record and put back when the record fails;
+  every write of a private link holds a lock of the link.
+- **Revocation and deletion.** A revocation deletes the key material
+  before the share record. A file, a folder with its subtree and a
+  private room deleted for good lose the key material and the secret
+  wraps of their links in the same transaction; in the Trash they keep
+  them.
+- **Serving** (`ExternalShare.ValidateRecordAsync`). A link that stores
+  `passwordRequired`, which only a link of a private item does, answers
+  RequiredPassword, also with `passwordRequired: false`. No proof is
+  accepted yet, so no such link opens anything.
+- **Address** (`ExternalShare.GetLinkDataAsync`). Unchanged: a link of a
+  private item gets the address of an ordinary one, by the kind of the
+  item. Decision 23 asks for one route.
+
+Not on the server yet, by its tasks: the proof in
+`applyExternalSharePassword` and the private flag of
+`getExternalShareData`, the read-only link session and the view mode of
+the editor for it, links as recipients of file keys, the wraps of a
+link's secret, a new password, the portal setting and the gates, the
+audit of an opening, the address without a fragment and the restricted
+Content-Security-Policy. The names `proof`, `linkSecretWraps` and `isLink`
+are its proposals; no code carries them.
+
+What follows for this change:
+
+- This change ends at viewing as well (decision 24).
+- The existing pages of a link (`PublicRoom`, `PublicPreview`, the SDK
+  validation middleware and the root page of the doceditor) answer
+  RequiredPassword with the form of an ordinary link, which sends
+  `password`. For a link of a private item they send the visitor to the
+  page of decision 23 instead (task 4.3).
+- Code that reads the keys of a room counts every entry as a member
+  (`packages/shared/services/private-room`, the desktop bridge). It skips
+  the entries of links from the commit that mirrors them (task 3.1).
+- The mark of active links (decision 12) has no source in a listing. A
+  count of the working links of an entry is asked of the backend team
+  with the reply to its change.
+
+### Stand check of 2026-11-23
+
+The stand and the accounts of `private-rooms-server-followups`, design.md
+"Stand check of 2026-11-23". The links were set through the API on a
+private Custom room without files and on a folder of it, with random
+values of the right sizes as key material.
+
+- A room link without key material, with the access to edit, with the
+  download ban, and one that asks for no password: 403. With a password,
+  and with a public key of 31 bytes: 400, the message naming the field.
+- A room link with key material and no `passwordRequired`: stored, and
+  answered with `passwordRequired: true`, `linkPublicKey`, and neither the
+  sealed key nor the proof hash. A folder link the same; a folder link
+  that asks for no password, with an end date: 403.
+- `shareLink` of both is the short address, `<portal>/s/<code>`. It
+  redirects to `rooms/share?key=<key>`, and a fragment added to the short
+  address is not sent to the server. The client therefore appends the
+  secret to the short address it is given; decision 23 changes where the
+  redirect lands.
+- The room and the folder that hold a link report `shared` and
+  `sharedExternal` as true in their own entry. That is a source for the
+  mark of decision 12 without a count; the count is still asked.
+- `GET files/share/{key}` without signing in answers the status
+  RequiredPassword (3) for the link, and `POST files/share/{key}/password`
+  with an ordinary password answers the same status. After the link was
+  revoked the status is Invalid (1) and the room lists no link.
+
+Added the same day, on a text document the owner uploaded into a private
+room through the client:
+
+- A link of the file that asks for no password: 403 without an end date,
+  stored with one, with `passwordRequired: false`. Removing the end date
+  from it and raising its access to editing each answer 403.
+- Its short address redirects to the editor page,
+  `/doceditor?fileid=<id>&share=<key>`, which answers its ordinary page.
+  Decision 23 moves it to `share/private`.
+- Without a proof the status of the link is RequiredPassword, and the
+  download of the file by the key of the link answers 403.
+- The file reports `shared` and `sharedExternal` as true while it holds
+  the link, and false before; after the revocation the file lists no link
+  and the status is Invalid.
+
+Not checked: the pages a visitor sees.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -286,6 +418,32 @@ none is open. The technical decisions below follow from them.
 22. **The SDK offers no links of private items in this change.** Its Share
     tab and menus stay as the main `sdk-surface` has them; the page of a
     visitor is the portal's own.
+23. **Every link of a private item opens one page, `share/private`
+    (decided by the owner on 2026-11-23).** The address the server builds
+    is `share/private?key=<key>`, with `&folder=<id>` for a folder, for a
+    room, a folder and a file alike; the client appends the secret after
+    `#`. The server builds the address of an ordinary link by the kind of
+    the item (`ExternalShare.GetLinkDataAsync`: `rooms/share`, the editor,
+    `share/preview/<id>` or the download address of the file handler), and
+    two of those cannot serve a private item: the download address hands
+    out the stored file with no page to decrypt it, and the pages ordinary
+    links use cannot take a Content-Security-Policy of their own. One
+    route that no ordinary link uses lets the proxy send the restricted
+    policy of the server's decision 11 by the path alone. Alternative:
+    `private/share`. Rejected: `private/:room` of the client's routes
+    takes it for a room, and the server builds the addresses of the
+    Private section under the same prefix. The `location` of the route in
+    `../buildtools` is added by the client team, on a branch of that
+    repository.
+
+24. **This change ends at the access to view (2026-11-23).** The backend
+    team scoped its change to viewing, and the server refuses any other
+    access of a link of a private item. Commenting, reviewing and editing
+    through a link, which decision 5 placed second, move to a later
+    change of both repositories; the deltas and the tasks here no longer
+    hold them. A visitor still opens a document in the editor, in view
+    mode, once the Document Server opens an encrypted document for a
+    visitor without an account (task 0.3).
 
 ## Risks / Trade-offs
 

@@ -25,7 +25,8 @@ Nothing is built before the decisions below are taken. What is proposed:
 - A member who may manage the access of a private room creates an external
   link to a file, a folder or the room, as for an ordinary item: a primary
   link and additional ones within the limits the server has today, with the
-  access to view, to comment, to review or to edit.
+  access to view. Commenting, reviewing and editing through a link come in
+  a later change (2026-11-23, design decision 24).
 - The link keeps the settings of an ordinary link that the server can
   enforce without reading the content: a title, an end date, a password, a
   limit of uses and "DocSpace users only".
@@ -40,8 +41,8 @@ Nothing is built before the decisions below are taken. What is proposed:
   are for a member, by the creator at once and by every later uploader.
 - A visitor opens the address: the browser proves to the server that it
   knows the secret, gets the sealed key, the wraps and the ciphertext, and
-  decrypts in the page. With the access to view the visitor reads and
-  downloads; with the others the visitor works in the editor.
+  decrypts in the page. The visitor reads and downloads, and opens a
+  document in the editor for viewing.
 - Revoking a link removes its wraps and its key on the server.
 - A portal administrator can forbid external links of private rooms.
 - The limits are stated as requirements: whoever holds the address reads
@@ -52,6 +53,9 @@ Out of scope:
 
 - Links for members ("link for room members"), invitation links and
   embedding, which stay withheld.
+- The access to comment, to review or to edit through a link. The backend
+  team scoped its change to viewing on 2026-11-17, and the server refuses
+  any other access; they come in a later change of both repositories.
 - The SDK. It offers no link controls for private items and serves no
   page of a visitor in this change; a link made in the client works
   whatever the SDK shows.
@@ -95,13 +99,20 @@ Decided by the owner on 2026-11-16:
 - The link types, the roles and the settings are the portal's own; Proton
   is the reference for the approach only.
 - The access to view comes first; commenting, reviewing and editing
-  follow together, after the Document Server opens a saved encrypted
+  follow together, in a later change since 2026-11-23, after the Document Server opens a saved encrypted
   document again (`private-rooms-editor-contract` 6.2) and confirms an
   encrypted session for a visitor.
 - Whoever may change the access of the room creates a link; a portal
   setting, on by default, lets a portal administrator switch the links
   off.
 - A link never lets a visitor upload files.
+
+Decided by the owner on 2026-11-23:
+
+- The links are part of 4.1.0.
+- Every link of a private item opens one page, `share/private?key=<key>`,
+  with `&folder=<id>` for a folder (design decision 23). The change of the
+  proxy in `../buildtools` is made by the client team.
 
 Depends on: `../server` for the key material of a link, the proof of the
 secret, the routes a visitor reads through, the editor configuration for a

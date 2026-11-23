@@ -3,7 +3,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: No external or invitation links on a private room
-The server SHALL accept on an active private room, and on a folder or file inside one, only an external link that carries a link public key, a sealed private key and a proof hash, with an access other than form filling and no download ban, from a caller who may change the access, while the portal allows such links. It SHALL refuse with 403 any other external link and every invitation link. Revoking a link SHALL stay possible.
+The server SHALL accept on an active private room, and on a folder or file inside one, only an external link that carries a link public key, a sealed private key and a proof hash, with the access to view and no download ban, from a caller who may change the access of the room, while the portal allows such links. It SHALL refuse with 403 any other external link and every invitation link, and with 400 a link whose key material is malformed, that sends a password, or whose new id somebody else holds. Every refusal SHALL come before anything of the request is stored. Revoking a link SHALL stay possible.
 
 #### Scenario: External link requested
 - **WHEN** a room manager requests an external link for a private room without the link's key material
@@ -19,11 +19,31 @@ The server SHALL accept on an active private room, and on a folder or file insid
 
 #### Scenario: External link with key material requested
 - **WHEN** a room manager requests an external link for a private item with the link's public key, sealed private key and proof hash
-- **THEN** the link is stored as an ordinary link is, primary or additional within the same limits, with its access, title, end date, password, limit of uses and internal flag
+- **THEN** the link is stored as an ordinary link is, primary or additional within the limits of a room of the same type, with the access to view, its title, end date, limit of uses and internal flag, and whether it asks for a password
 
-#### Scenario: Form filling or a download ban requested
-- **WHEN** an external link of a private item is requested with the access to fill forms or with the download ban
+#### Scenario: Another access or a download ban requested
+- **WHEN** an external link of a private item is requested with the access to comment, review, edit or fill forms, or with the download ban
 - **THEN** the server refuses it with 403
+
+#### Scenario: Malformed key material
+- **WHEN** the public key or the proof hash of the request is not the canonical base64 of 32 bytes, or the sealed private key is empty or longer than 4096 characters
+- **THEN** the server answers 400 and stores nothing
+
+#### Scenario: Password sent
+- **WHEN** the request of a link of a private item carries a password
+- **THEN** the server answers 400 and stores nothing
+
+#### Scenario: Id of a new link held by somebody else
+- **WHEN** a new link is requested under an id that a user, a group, a share or another link holds
+- **THEN** the server answers 400 and stores nothing
+
+#### Scenario: Link of a file or a folder set by a room manager
+- **WHEN** the owner or a room manager sets, reads or revokes an external link of a file or a folder of a private room
+- **THEN** the request is served by the right to change the access of the room, and a member with a lower role reads no link
+
+#### Scenario: Link read
+- **WHEN** a member who may read the links of a private item reads one
+- **THEN** the answer carries the public key of the link and whether it asks for a password, and neither the sealed private key nor the proof hash
 
 #### Scenario: Portal forbids the links
 - **WHEN** the portal setting for external links of private rooms is off
@@ -70,7 +90,7 @@ The server SHALL accept, from a user who manages links, a new sealed private key
 
 #### Scenario: Public key changed in the same request
 - **WHEN** the request also carries another public key for the link
-- **THEN** the server refuses it and changes nothing
+- **THEN** the server answers 400 and changes nothing
 
 ### Requirement: No link in a private virtual data room that restricts downloading
 The server SHALL refuse with 403 an external link on a private Virtual Data Room, or on an item of one, while the room-wide restriction on downloading is on, and SHALL serve none that the room holds until it is off. It SHALL NOT delete them.
@@ -84,19 +104,23 @@ The server SHALL refuse with 403 an external link on a private Virtual Data Room
 - **THEN** the links are served as invalid while it is on and work again after
 
 ### Requirement: A link of a private item without a password is limited
-The server SHALL refuse to store an external link of a private item without a password, unless the link is to one file, carries the access to view and has an end date. It SHALL apply the same rule when a link is changed.
+The server SHALL refuse with 403 to store an external link of a private item that asks for no password, unless the link is to one file and has an end date. It SHALL apply the same rule when a link is changed, and SHALL count a new link that does not say whether it asks for a password as one that does.
 
 #### Scenario: Link to a file to view with an end date
-- **WHEN** a link to one file with the access to view, an end date and no password is requested
+- **WHEN** a link to one file with an end date is requested as one that asks for no password
 - **THEN** the server stores it
 
 #### Scenario: Link without a password outside the rule
-- **WHEN** a link without a password is requested for a folder or a room, with another access, or without an end date
+- **WHEN** a link that asks for no password is requested for a folder or a room, or without an end date
 - **THEN** the server refuses it and stores nothing
 
 #### Scenario: Password removed from a link
 - **WHEN** a change removes the password of a link that the rule does not allow without one
 - **THEN** the server refuses the change
+
+#### Scenario: End date removed from a link without a password
+- **WHEN** a change removes the end date of a link to a file that asks for no password
+- **THEN** the server answers 403 and the link keeps its end date
 
 ### Requirement: External links of a private item are recipients of file keys
 The server SHALL list the public keys of the external links that cover a file with the public keys of its members, SHALL store a wrap of a file key for a link as for a member, and SHALL report which files a link has no wrap for.
@@ -124,20 +148,24 @@ The server SHALL give the sealed private key of a link, the wraps made for it an
 - **WHEN** a request names a link without its proof or with a wrong one
 - **THEN** the server refuses it and MUST NOT answer with the sealed key, a wrap or any content
 
+#### Scenario: Link that asks for no password requested without a proof
+- **WHEN** a request names a link of a private item that asks for no password and carries no proof
+- **THEN** the server answers as for a link that waits for its password, and serves nothing
+
 #### Scenario: Repeated wrong proofs
 - **WHEN** wrong proofs keep coming for one link
 - **THEN** the server slows or blocks the requests as it does for a wrong link password
 
 ### Requirement: A visitor of a link gets the content as stored
-The server SHALL serve a file to a visitor of an external link of a private item as the stored ciphertext with its wrap for the link, and SHALL NOT convert it, build a preview or a thumbnail of it, or index it. It SHALL give a visitor the rights of the link's access and none of the rights of a member.
+The server SHALL serve a file to a visitor of an external link of a private item as the stored ciphertext with its wrap for the link, and SHALL NOT convert it, build a preview or a thumbnail of it, or index it. It SHALL give a visitor the right to read and to download what the link covers and none of the rights of a member.
 
 #### Scenario: File requested through a link with the access to view
-- **WHEN** a visitor of a link with the access to view requests a file the link covers
+- **WHEN** a visitor of a link requests a file the link covers
 - **THEN** the server answers with the ciphertext and the wrap, and reports no right to edit, delete, move, rename or share
 
-#### Scenario: Document opened through a link with another access
-- **WHEN** a visitor of a link with the access to comment, review or edit opens a document the link covers
-- **THEN** the editor configuration carries that mode, and a save is accepted only as an encrypted file
+#### Scenario: Document opened through a link
+- **WHEN** a visitor of a link opens a document the link covers in the editors
+- **THEN** the editor configuration carries the view mode, and a save of that session is refused
 
 #### Scenario: Internal link opened without signing in
 - **WHEN** a request for a link made for DocSpace users only comes without a signed-in user
@@ -153,3 +181,29 @@ The server SHALL write an audit event when an external link of a private item is
 #### Scenario: Link opened
 - **WHEN** a visitor opens a link with a valid proof
 - **THEN** the audit trail holds the opening with the link and the time
+
+### Requirement: The address of a link of a private item is one route without a secret
+The server SHALL build the address of an external link of a private room, folder or file as `share/private?key=<key>`, with `&folder=<id>` for a folder, and its short address, without a fragment. It SHALL NOT shorten an address a caller sends.
+
+#### Scenario: Address of a link to a file
+- **WHEN** a link of an encrypted file is set or read
+- **THEN** its address is `share/private?key=<key>` on the portal, whatever the type of the file, and has no `#`
+
+#### Scenario: Address of a link to a folder
+- **WHEN** a link of a folder of a private room is set or read
+- **THEN** its address is `share/private?key=<key>&folder=<id>` and has no `#`
+
+#### Scenario: Short address followed
+- **WHEN** the short address of such a link is requested
+- **THEN** the server redirects to the stored address, and the redirect carries no fragment
+
+### Requirement: The key material of a link goes with its item
+The server SHALL delete the sealed key, the proof hash and the wraps of the secret of the links of a file, a folder with everything under it, or a private room when the item is deleted for good, and SHALL keep them while the item is in the Trash.
+
+#### Scenario: Item deleted for good
+- **WHEN** a file, a folder or a private room that holds links is deleted for good
+- **THEN** nothing of the key material of those links is stored
+
+#### Scenario: Item moved to the Trash and restored
+- **WHEN** an item that holds a link is moved to the Trash and restored
+- **THEN** the link and its key material are as they were

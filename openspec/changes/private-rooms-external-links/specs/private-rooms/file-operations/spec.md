@@ -38,19 +38,11 @@ The system SHALL open the address of an external link of a private item for a vi
 - **THEN** the page says the link no longer works and nothing is decrypted
 
 ### Requirement: What a visitor of an external link can do
-The system SHALL let a visitor read and download the files a link covers, and open a document in the editor in the mode of the link's access: viewing, commenting, reviewing or editing. It SHALL NOT let a visitor upload, delete, move, rename or share anything, or see the members of the room.
+The system SHALL let a visitor read and download the files a link covers, and open a document in the editor for viewing. It SHALL NOT let a visitor change, upload, delete, move, rename or share anything, or see the members of the room.
 
-#### Scenario: Link with the access to view
-- **WHEN** a visitor of a link with the access to view opens a text document, a spreadsheet or a presentation
+#### Scenario: Document opened through a link
+- **WHEN** a visitor of a link opens a text document, a spreadsheet or a presentation
 - **THEN** it opens in the editor for viewing only
-
-#### Scenario: Link with the access to comment or review
-- **WHEN** a visitor of a link with the access to comment or to review opens a document
-- **THEN** it opens in that mode, and what the visitor adds is stored inside the encrypted file
-
-#### Scenario: Link with the access to edit
-- **WHEN** a visitor of a link with the access to edit opens a document
-- **THEN** it opens for editing, and a save stores the file encrypted under the same file key
 
 #### Scenario: Link for DocSpace users only
 - **WHEN** a signed-in user of the portal who is not a member opens a link made for DocSpace users only

@@ -51,7 +51,7 @@ The system SHALL show the Share tab of the info panel for a private room, a fold
 ## ADDED Requirements
 
 ### Requirement: External link of a private item keeps the link model of the portal
-The system SHALL offer for a private item the primary and the additional external links of an ordinary item, within the same limits, with the access to view, comment, review or edit and the settings title, end date, password, limit of uses and DocSpace users only. It SHALL NOT offer the access to fill forms or the download ban. The address SHALL be shown for copying with its secret part and SHALL NOT be sent to the server whole.
+The system SHALL offer for a private item the primary and the additional external links of an ordinary item, within the same limits, with the access to view and the settings title, end date, password, limit of uses and DocSpace users only. It SHALL NOT offer another access or the download ban. The address SHALL be shown for copying with its secret part and SHALL NOT be sent to the server whole.
 
 #### Scenario: Link with the access to view
 - **WHEN** a member creates a link with the access to view
@@ -59,7 +59,7 @@ The system SHALL offer for a private item the primary and the additional externa
 
 #### Scenario: Accesses offered
 - **WHEN** the access list of an external link of a private item is opened
-- **THEN** it offers viewing, commenting, reviewing and editing, and no form filling
+- **THEN** it offers viewing only
 
 #### Scenario: Download ban
 - **WHEN** the settings of an external link of a private item are shown
@@ -89,10 +89,10 @@ The system SHALL let a member who may change the access revoke an external link 
 - **THEN** the link leaves the list and its address no longer opens anything
 
 ### Requirement: A link without a password is limited to one file to view
-The system SHALL require a password for an external link of a private item, except for a link to one file with the access to view, which SHALL carry an end date instead, preset to seven days from its creation. It SHALL ask for the missing password or end date before the link is created or changed.
+The system SHALL require a password for an external link of a private item, except for a link to one file, which SHALL carry an end date instead, preset to seven days from its creation. It SHALL ask for the missing password or end date before the link is created or changed.
 
 #### Scenario: Link to a file to view without a password
-- **WHEN** a member creates a link to one file with the access to view and no password
+- **WHEN** a member creates a link to one file with no password
 - **THEN** the end date is preset to seven days from now, and the link is created with it
 
 #### Scenario: End date cleared
@@ -102,10 +102,6 @@ The system SHALL require a password for an external link of a private item, exce
 #### Scenario: Link to a folder or a room without a password
 - **WHEN** a member creates a link to a folder or a private room without a password
 - **THEN** the password is asked and no link is created without it
-
-#### Scenario: Access raised on a link without a password
-- **WHEN** a member changes a link without a password to the access to comment, review or edit
-- **THEN** the password is asked and the access is not changed without it
 
 ### Requirement: A private item shows its active links
 The system SHALL mark a private room, a folder or a file that holds an external link which still works, with the number of such links, for a member who may see the access of the room.

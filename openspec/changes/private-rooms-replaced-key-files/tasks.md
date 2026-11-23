@@ -12,7 +12,7 @@
 
 ## 3. Editor
 
-- [ ] 3.1 Add the `key-replaced` status to `packages/doceditor/src/hooks/useFileEncryptionKeys.ts`, checked before `requireIdentity`, and its entry in `KEY_FLOW_ENDS` of `Editor.tsx`; verify with `pnpm test:doceditor`: the hook test asserts the status and that `requireIdentity` was not called, the Editor test asserts the text, no button and no editor component
+- [x] 3.1 Add the `key-replaced` status to `packages/doceditor/src/hooks/useFileEncryptionKeys.ts`, checked before `requireIdentity`, and its entry in `KEY_FLOW_ENDS` of `Editor.tsx`; verify with `pnpm test:doceditor`: the hook test asserts the status and that `requireIdentity` was not called, the Editor test asserts the text, no button and no editor component
 
 ## 4. Room notice
 

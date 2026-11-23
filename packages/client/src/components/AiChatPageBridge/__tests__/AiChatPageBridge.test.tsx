@@ -312,6 +312,30 @@ describe("AiChatPageBridge — a request from Recent", () => {
     expect(switchToThread).toHaveBeenCalledWith("plain1");
   });
 
+  it("opens the chat at once for a request that waits for no navigation", () => {
+    const openNewChat = vi.spyOn(chat.store, "openNewChat");
+    const openHistory = vi.spyOn(chat, "openHistory");
+    request("history");
+
+    renderBridge();
+    // No timer has run yet.
+    expect(openNewChat).toHaveBeenCalledTimes(1);
+    expect(openHistory).toHaveBeenCalledTimes(1);
+  });
+
+  it("opens the chat after the navigation a request waited for has landed and its effects have run", () => {
+    const openNewChat = vi.spyOn(chat.store, "openNewChat");
+    const value = { page: "chat", afterLocationKey: "left-page", threadId: undefined };
+    (dialogsStore as { aiChatPageRequest: object | null }).aiChatPageRequest = value;
+    dialogsStore.consumeAiChatPageRequest.mockReturnValue(value);
+
+    renderBridge();
+    expect(dialogsStore.consumeAiChatPageRequest).toHaveBeenCalledTimes(1);
+    expect(openNewChat).not.toHaveBeenCalled();
+    act(() => vi.runAllTimers());
+    expect(openNewChat).toHaveBeenCalledTimes(1);
+  });
+
   it("leaves the agent to a chat opened by AI Chat itself", () => {
     presets.activePreset = { id: "7" };
     request("chat");

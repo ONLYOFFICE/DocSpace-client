@@ -73,6 +73,7 @@ import type {
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 
 import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import { isDesktop } from "@docspace/shared/utils";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
@@ -163,6 +164,10 @@ const AI_ROOM_TYPES: Partial<Record<FolderType, RoomsType>> = {
   [FolderType.KnowledgeRoom]: RoomsType.KnowledgeRoom,
   [FolderType.AiProjectRoom]: RoomsType.AiProjectRoom,
 };
+
+// The path of the AI section's lists: Agents, and Skill sets and Knowledge
+// bases, which narrow it with `type`.
+const AI_AGENTS_PATH = "/ai-rooms/filter";
 
 // Ids of the entries listed under Agents and Recent, Recent's Show more
 // included.
@@ -329,21 +334,30 @@ const ClientArticleSidebar = ({
   // AI Chat and Recent are the chat itself, not a list: they open it
   // fullscreen on the conversation or on its history, over the agents list
   // (the section's root), which is what closing the chat goes back to. From
-  // anywhere else - another section, an AI project, a narrowed list - the
-  // click goes to that list first and the chat opens once it is there.
+  // anywhere else - another section, a narrowed list - the click opens the
+  // chat at once and goes to that list under it, so the list is never seen
+  // on the way. Two navigations close a chat opened before them, and there
+  // the chat waits for the navigation to land: leaving an AI project, whose
+  // view releases its chat, and, below the desktop width, a change of the
+  // path, which closes the chat that covers the main area.
   const locationRef = React.useRef(location);
   locationRef.current = location;
+  const isAiProjectRoomRootRef = React.useRef(isAiProjectRoomRoot);
+  isAiProjectRoomRootRef.current = isAiProjectRoomRoot;
   const openAiChatPage = React.useCallback(
     (page: "chat" | "history", threadId?: string) => () => {
       const current = locationRef.current;
       const isOnAgentsList =
-        current.pathname === "/ai-rooms/filter" &&
+        current.pathname === AI_AGENTS_PATH &&
         !new URLSearchParams(current.search).has("type");
       if (isOnAgentsList) {
         requestAiChatPage?.(page, null, threadId);
         return;
       }
-      requestAiChatPage?.(page, current.key, threadId);
+      const closesChat =
+        !!isAiProjectRoomRootRef.current ||
+        (!isDesktop() && current.pathname !== AI_AGENTS_PATH);
+      requestAiChatPage?.(page, closesChat ? current.key : null, threadId);
       onFolderNavigateRef.current?.();
       navigate(aiAgentsUrl);
     },

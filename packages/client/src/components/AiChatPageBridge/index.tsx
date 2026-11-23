@@ -332,12 +332,7 @@ const AiChatPageBridgeComponent = ({
     const consumed = dialogsStore.consumeAiChatPageRequest();
     if (!consumed) return;
 
-    // After the effects of the navigation have run: leaving an AI project
-    // releases its chat and closes the panel, and on a phone a section change
-    // closes it too. Opened before them, the chat would be closed again.
-    // Not cleared on re-run: the request is consumed already, so a re-run
-    // has nothing else to do it with.
-    window.setTimeout(() => {
+    const openChat = () => {
       // The entry's highlight fills to the end once its page is shown. A
       // section does that when its list has loaded; the chat has no list,
       // and from the agents list it is opened without a navigation at all,
@@ -357,7 +352,18 @@ const AiChatPageBridgeComponent = ({
       aiChatStore.setFullscreen(true);
       if (consumed.page === "history") void openHistory();
       else goToChat();
-    }, 0);
+    };
+
+    // A request that waits for no navigation opens the chat at once, before
+    // the page under it is painted: the sidebar asks so wherever nothing on
+    // the way closes the chat. One that waited for a navigation opens after
+    // that navigation's effects have run: leaving an AI project releases its
+    // chat and closes the panel, and on a phone a section change closes it
+    // too. Opened before them, the chat would be closed again. Not cleared
+    // on re-run: the request is consumed already, so a re-run has nothing
+    // else to do it with.
+    if (consumed.afterLocationKey === null) openChat();
+    else window.setTimeout(openChat, 0);
   }, [
     request,
     location.key,

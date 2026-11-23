@@ -16,7 +16,7 @@
 
 ## 4. Room notice
 
-- [ ] 4.1 Record the files that match the predicate during filename recovery (`packages/shared/services/private-room/encrypted-filename-recovery.ts`) in a set cleared with the filename cache; verify with the recovery unit test: ids recorded, no ghost-state call, set empty after a lock
+- [x] 4.1 Record the files that match the predicate during filename recovery (`packages/shared/services/private-room/encrypted-filename-recovery.ts`) in a set cleared with the filename cache; verify with the recovery unit test: ids recorded, no ghost-state call, set empty after a lock
 - [ ] 4.2 Add Common:PrivateRoomReplacedKeyBarTitle and Common:PrivateRoomReplacedKeyBarText (plural forms) with `.meta` comments and translations, expose the count of loaded files in the set from the files store, and render the notice in `packages/client/src/pages/Home/Section/Body` under the private-room condition, never together with the locked-key block; verify with a component test next to `PrivateRoomLockedBlock.test.tsx` (count shown, hidden at zero, hidden while locked) and the locale test
 - [ ] 4.3 Extend the MSW access handler in `packages/shared/__mocks__/handlers` with a file whose entry names a key outside `userKeys` (`Array.from`, no spread of a Set) and add an E2E case to `packages/client/__tests__/private-room-*.spec.ts`: notice with the number on entry and after a reload, the media viewer message; verify with `pnpm exec tsc` in shared, client, login and management and the E2E spec in Docker
 

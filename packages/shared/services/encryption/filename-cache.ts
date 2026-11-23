@@ -95,6 +95,22 @@ function notify(fileId: number | string): void {
   }
 }
 
+// Files whose wrap names a key the user no longer holds. Kept for the page
+// only, so every visit reads them again; cleared with the names.
+// Spec: private-rooms/file-operations, "A private room names the files wrapped for a key the user no longer holds"
+const replacedKeyFiles = new Set<string>();
+
+export function markReplacedKeyFile(fileId: number | string): void {
+  const id = String(fileId);
+  if (!fileId || replacedKeyFiles.has(id)) return;
+  replacedKeyFiles.add(id);
+  notify(id);
+}
+
+export function isReplacedKeyFile(fileId: number | string): boolean {
+  return replacedKeyFiles.has(String(fileId));
+}
+
 export function rememberEncryptedFilename(
   fileId: number | string,
   originalName: string,
@@ -160,6 +176,7 @@ export function forgetEncryptedFilename(fileId: number | string): void {
  * Spec: private-rooms/key-management, "File names stay as stored while the key is locked"
  */
 export function clearEncryptedFilenameCache(): void {
+  replacedKeyFiles.clear();
   const s = safeStorage();
   if (!s) {
     notify("");

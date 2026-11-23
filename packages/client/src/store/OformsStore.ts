@@ -43,7 +43,7 @@ import {
   getOformPurposes,
   OformsContractError,
 } from "@docspace/shared/api/oforms";
-import { getFormGalleryAvailable } from "@docspace/shared/api/files";
+import { getTemplateGalleryAvailable } from "@docspace/shared/api/files";
 
 import { convertToLanguage } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -88,7 +88,7 @@ class OformsStore {
   // The server's answer whether it reaches the gallery. Every CMS request waits
   // for it, so a tab switched during the check neither asks the CMS nor lifts
   // the stub after a refusal.
-  formGalleryAvailable: Promise<boolean> = Promise.resolve(true);
+  templateGalleryAvailable: Promise<boolean> = Promise.resolve(true);
 
   // Counts the openings of the gallery: an answer that comes after the gallery
   // was opened again belongs to the old opening and is dropped.
@@ -160,7 +160,7 @@ class OformsStore {
     this.treeFoldersStore = treeFoldersStore;
     makeAutoObservable(this, {
       listRequestId: false,
-      formGalleryAvailable: false,
+      templateGalleryAvailable: false,
       galleryOpeningId: false,
       galleryReady: false,
       tabPickedOpeningId: false,
@@ -264,7 +264,7 @@ class OformsStore {
 
   fetchOformLocales = async () => {
     const openingId = this.galleryOpeningId;
-    if (!(await this.formGalleryAvailable)) return;
+    if (!(await this.templateGalleryAvailable)) return;
     if (openingId !== this.galleryOpeningId) return;
 
     const url = combineUrl(this.oformsApiRoot, "/i18n/locales");
@@ -284,7 +284,7 @@ class OformsStore {
 
   getOforms = async (filter: OformsFilter = OformsFilter.getDefault()) => {
     const openingId = this.galleryOpeningId;
-    if (!(await this.formGalleryAvailable)) return null;
+    if (!(await this.templateGalleryAvailable)) return null;
     // The gallery was closed or opened again during the check
     if (openingId !== this.galleryOpeningId) return null;
 
@@ -476,7 +476,7 @@ class OformsStore {
 
   fetchPurposes = async (locale: string, extension: string) => {
     const openingId = this.galleryOpeningId;
-    if (!(await this.formGalleryAvailable)) return;
+    if (!(await this.templateGalleryAvailable)) return;
     if (openingId !== this.galleryOpeningId) return;
 
     const url = combineUrl(this.oformsApiRoot, "/purposes");
@@ -633,14 +633,16 @@ class OformsStore {
     this.oformsLoadError = false;
     this.oformsNetworkError = false;
 
-    this.formGalleryAvailable = getFormGalleryAvailable().catch(() => true);
-    this.galleryReady = this.formGalleryAvailable.then((available) =>
+    this.templateGalleryAvailable = getTemplateGalleryAvailable().catch(
+      () => true,
+    );
+    this.galleryReady = this.templateGalleryAvailable.then((available) =>
       available && openingId === this.galleryOpeningId
         ? this.fetchOformLocales()
         : undefined,
     );
 
-    const available = await this.formGalleryAvailable;
+    const available = await this.templateGalleryAvailable;
     if (openingId !== this.galleryOpeningId) return;
 
     if (!available) {

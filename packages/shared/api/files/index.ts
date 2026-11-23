@@ -519,10 +519,10 @@ export async function createFile(
   return res;
 }
 
-export async function getFormGalleryAvailable() {
+export async function getTemplateGalleryAvailable() {
   const options: AxiosRequestConfig = {
     method: "get",
-    url: "/files/formGallery/available",
+    url: "/files/templateGallery/available",
   };
 
   const res = (await request(options)) as boolean;

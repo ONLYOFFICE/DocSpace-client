@@ -15,7 +15,7 @@ vi.mock("@docspace/shared/api/oforms", async (io) => ({
 }));
 
 const filesApi = vi.hoisted(() => ({
-  getFormGalleryAvailable: vi.fn(),
+  getTemplateGalleryAvailable: vi.fn(),
 }));
 
 vi.mock("@docspace/shared/api/files", async (io) => ({
@@ -128,12 +128,12 @@ beforeEach(() => {
   api.getOforms.mockResolvedValue(list([]));
   api.getOformPurposes.mockResolvedValue(purposes);
   api.getOformLocales.mockResolvedValue(["en", "de", "fr"]);
-  filesApi.getFormGalleryAvailable.mockResolvedValue(true);
+  filesApi.getTemplateGalleryAvailable.mockResolvedValue(true);
 });
 
 describe("OformsStore gallery availability", () => {
   it("shows the gallery as unavailable without asking the CMS when the server cannot reach it", async () => {
-    filesApi.getFormGalleryAvailable.mockResolvedValue(false);
+    filesApi.getTemplateGalleryAvailable.mockResolvedValue(false);
     const store = createStore();
 
     await store.initTemplateGallery();
@@ -155,7 +155,7 @@ describe("OformsStore gallery availability", () => {
 
   it("keeps a tab switched during the check from asking the CMS after a refusal", async () => {
     const check = deferred<boolean>();
-    filesApi.getFormGalleryAvailable.mockReturnValue(check.promise);
+    filesApi.getTemplateGalleryAvailable.mockReturnValue(check.promise);
     const store = createStore();
 
     const opening = store.initTemplateGallery();
@@ -177,7 +177,7 @@ describe("OformsStore gallery availability", () => {
     await store.initTemplateGallery();
     expect(store.oformsNetworkError).toBe(true);
 
-    filesApi.getFormGalleryAvailable.mockResolvedValue(false);
+    filesApi.getTemplateGalleryAvailable.mockResolvedValue(false);
     await store.initTemplateGallery();
 
     expect(store.oformsNetworkError).toBe(false);
@@ -185,13 +185,13 @@ describe("OformsStore gallery availability", () => {
   });
 
   it("clears the error of an earlier opening while the new one is checked", async () => {
-    filesApi.getFormGalleryAvailable.mockResolvedValueOnce(false);
+    filesApi.getTemplateGalleryAvailable.mockResolvedValueOnce(false);
     const store = createStore();
     await store.initTemplateGallery();
     expect(store.oformsLoadError).toBe(true);
 
     const check = deferred<boolean>();
-    filesApi.getFormGalleryAvailable.mockReturnValueOnce(check.promise);
+    filesApi.getTemplateGalleryAvailable.mockReturnValueOnce(check.promise);
     const opening = store.initTemplateGallery();
 
     expect(store.oformsLoadError).toBe(false);
@@ -210,7 +210,7 @@ describe("OformsStore gallery availability", () => {
     const firstOpening = store.initTemplateGallery();
     await vi.waitFor(() => expect(api.getOforms).toHaveBeenCalledTimes(1));
 
-    filesApi.getFormGalleryAvailable.mockResolvedValue(false);
+    filesApi.getTemplateGalleryAvailable.mockResolvedValue(false);
     await store.initTemplateGallery();
 
     oldList.resolve(list([1]));
@@ -221,7 +221,9 @@ describe("OformsStore gallery availability", () => {
 
   it("drops a refusal of an earlier opening after the gallery loaded again", async () => {
     const firstCheck = deferred<boolean>();
-    filesApi.getFormGalleryAvailable.mockReturnValueOnce(firstCheck.promise);
+    filesApi.getTemplateGalleryAvailable.mockReturnValueOnce(
+      firstCheck.promise,
+    );
     const store = createStore();
 
     const firstOpening = store.initTemplateGallery();
@@ -235,7 +237,7 @@ describe("OformsStore gallery availability", () => {
 
   it("keeps the list of a tab picked while the check is pending", async () => {
     const check = deferred<boolean>();
-    filesApi.getFormGalleryAvailable.mockReturnValue(check.promise);
+    filesApi.getTemplateGalleryAvailable.mockReturnValue(check.promise);
     const store = createStore();
 
     const opening = store.initTemplateGallery();
@@ -249,7 +251,7 @@ describe("OformsStore gallery availability", () => {
 
   it("keeps a tab picked in an earlier opening from asking the CMS", async () => {
     const firstCheck = deferred<boolean>();
-    filesApi.getFormGalleryAvailable
+    filesApi.getTemplateGalleryAvailable
       .mockReturnValueOnce(firstCheck.promise)
       .mockResolvedValueOnce(false);
     const store = createStore();
@@ -270,7 +272,7 @@ describe("OformsStore gallery availability", () => {
   it("loads a tab picked during the check in the language the check settles on", async () => {
     api.getOformLocales.mockResolvedValue(["en", "ru"]);
     const check = deferred<boolean>();
-    filesApi.getFormGalleryAvailable.mockReturnValue(check.promise);
+    filesApi.getTemplateGalleryAvailable.mockReturnValue(check.promise);
     const store = new OformsStore(
       settingsStore,
       { user: { cultureName: "ru" } } as unknown as UserStore,
@@ -288,7 +290,7 @@ describe("OformsStore gallery availability", () => {
 
   it("loads the gallery as before when the check itself fails", async () => {
     // A server without the check answers 404
-    filesApi.getFormGalleryAvailable.mockRejectedValue(new Error("404"));
+    filesApi.getTemplateGalleryAvailable.mockRejectedValue(new Error("404"));
     const store = createStore();
 
     await store.initTemplateGallery();

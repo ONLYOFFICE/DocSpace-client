@@ -202,8 +202,9 @@ const json = (body: unknown) => new Response(JSON.stringify(body));
 
 export const oformsHandlers = (port: string) => [
   // The portal server checks the gallery before the client asks the CMS
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/formGallery/available`, () =>
-    json({ response: true }),
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/files/templateGallery/available`,
+    () => json({ response: true }),
   ),
   http.get(cmsUrl(port, "i18n/locales"), () =>
     json([{ code: "en" }, { code: "de" }]),

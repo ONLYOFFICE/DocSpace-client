@@ -42,7 +42,6 @@ import api from "@docspace/shared/api";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
-import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 
 import { useActiveEncryptedUploadsForRoom } from "../_store/PrivateEncryptedUploadStore";
 
@@ -98,12 +97,7 @@ export const usePrivateRemoveMemberFlow = (
         });
         return true;
       } catch (error) {
-        // Spec: private-rooms/sdk-surface, "SDK explains a refused access change in a private room"
-        toastr.error(
-          isAccessChangeRefused(error)
-            ? t("Common:EncryptedAccessChangeRefused")
-            : getEncryptionErrorMessage(t, error),
-        );
+        toastr.error(getEncryptionErrorMessage(t, error));
         return false;
       } finally {
         setIsLoading(false);

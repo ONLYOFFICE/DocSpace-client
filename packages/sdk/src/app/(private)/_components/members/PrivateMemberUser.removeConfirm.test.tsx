@@ -99,12 +99,7 @@ import {
 } from "../../_store/PrivateDialogsStore";
 import PrivateMemberUser from "./PrivateMemberUser";
 
-const refusal = (status: number) =>
-  Object.assign(new Error("The user does not have an encryption key"), {
-    response: { status },
-  });
-
-describe("SDK explains a refused access change in a private room", () => {
+describe("PrivateMemberUser removal confirmed", () => {
   let root: Root | null = null;
   let container: HTMLDivElement;
   let dialogs: ReturnType<typeof usePrivateDialogsStore>;
@@ -146,41 +141,9 @@ describe("SDK explains a refused access change in a private room", () => {
         ?.click();
     });
 
-  beforeEach(() => {
-    mocks.updateRoomMemberRole.mockRejectedValue(refusal(403));
-    mocks.setRoomSecurity.mockRejectedValue(refusal(403));
-  });
-
   afterEach(() => {
     act(() => root?.unmount());
     root = null;
-  });
-
-  it("Removal or role change refused: role change", async () => {
-    render();
-
-    await click("private_member_role_combobox");
-
-    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
-    expect(mocks.toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptedAccessChangeRefused",
-    );
-    expect(onRoleChanged).not.toHaveBeenCalled();
-  });
-
-  it("Removal or role change refused: removal", async () => {
-    render();
-
-    await click("private_member_remove_button");
-    await act(async () => {
-      await dialogs.removeUser?.onConfirm();
-    });
-
-    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
-    expect(mocks.toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptedAccessChangeRefused",
-    );
-    expect(onRemoved).not.toHaveBeenCalled();
   });
 
   it("Remove a member", async () => {

@@ -105,7 +105,7 @@ describe("FilesActionsStore — onLeaveRoom of a private room", () => {
   });
 });
 
-describe("FilesActionsStore — onLeaveRoom refused by the server", () => {
+describe("FilesActionsStore — onLeaveRoom fails", () => {
   const refusal = (status: number) =>
     Object.assign(new Error(String(status)), { response: { status } });
 
@@ -118,36 +118,12 @@ describe("FilesActionsStore — onLeaveRoom refused by the server", () => {
     return { store, removeFiles };
   };
 
-  it("Leave refused", async () => {
-    vi.mocked(updateRoomMemberRole).mockRejectedValue(refusal(403));
-    const { store, removeFiles } = storeOf({ id: 42, private: true });
-
-    await expect(store.onLeaveRoom(t)).resolves.toBeUndefined();
-
-    expect(toastr.error).toHaveBeenCalledTimes(1);
-    expect(toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptedAccessChangeRefused",
-    );
-    expect(removeFiles).not.toHaveBeenCalled();
-    expect(toastr.success).not.toHaveBeenCalled();
-  });
-
   it("Leave fails for another reason", async () => {
     const failure = refusal(500);
     vi.mocked(updateRoomMemberRole).mockRejectedValue(failure);
     const { store } = storeOf({ id: 42, private: true });
 
     await expect(store.onLeaveRoom(t)).rejects.toBe(failure);
-
-    expect(toastr.error).not.toHaveBeenCalled();
-  });
-
-  it("Refusal in an ordinary room", async () => {
-    const forbidden = refusal(403);
-    vi.mocked(updateRoomMemberRole).mockRejectedValue(forbidden);
-    const { store } = storeOf({ id: 42, private: false });
-
-    await expect(store.onLeaveRoom(t)).rejects.toBe(forbidden);
 
     expect(toastr.error).not.toHaveBeenCalled();
   });

@@ -152,24 +152,4 @@ describe("usePrivateRemoveMemberFlow", () => {
     expect(mocks.toastr.error).toHaveBeenCalledWith("Common:EncryptionError");
     expect(removed).toBe(false);
   });
-
-  it("Removal or role change refused", async () => {
-    mocks.setRoomSecurity.mockImplementation(async () => {
-      throw Object.assign(new Error("The user does not have an encryption key"), {
-        response: { status: 403 },
-      });
-    });
-    render();
-
-    let removed = true;
-    await act(async () => {
-      removed = await flow.remove({ roomId: 10, userId: "bob" });
-    });
-
-    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
-    expect(mocks.toastr.error).toHaveBeenCalledWith(
-      "Common:EncryptedAccessChangeRefused",
-    );
-    expect(removed).toBe(false);
-  });
 });

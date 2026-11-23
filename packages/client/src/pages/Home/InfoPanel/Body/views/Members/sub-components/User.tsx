@@ -53,7 +53,6 @@ import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOpti
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
 import { retryPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
 
@@ -154,12 +153,6 @@ const User = ({
         await changeUserRole(option, user.id, currentUser?.id, hasNextPage);
       })
       .catch((err) => {
-        // Spec: private-rooms/room-membership, "Refused access change in a private room is explained"
-        if (room.private && isAccessChangeRefused(err)) {
-          toastr.error(t("Common:EncryptedAccessChangeRefused"));
-          return;
-        }
-
         toastr.error(err);
       });
   };

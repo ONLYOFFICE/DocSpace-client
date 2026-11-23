@@ -54,25 +54,23 @@ export type RoomMembersHandlerOptions = {
   handle?: { current: RoomMembersHandlerHandle | null };
   /**
    * Users who never registered an encryption key, for a private room. A
-   * share request that names one of them is answered with 403, as the
-   * server answers it. The order in which the handler walks the entries
-   * mirrors the server; do not reorder it.
+   * share request that gives one of them access for the first time is
+   * answered with 403; one who already holds a share can be removed or
+   * given another role.
    */
   withoutKeys?: string[];
   /**
-   * Portal groups, for a private room. The server resolves every subject to
-   * an account and checks its key; a group id resolves to
-   * Constants.LostUser, which has none, so naming a group that holds no
-   * share in the room yet is answered with 403. A group already shared
-   * there is not checked. The request carries no subject type, hence this
-   * option.
+   * Portal groups, for a private room. A group named with an access other
+   * than FileShare.None is answered with 403, also one the room still
+   * holds; removing it goes through. The request carries no subject type,
+   * hence this option.
    */
   groups?: string[];
   /**
    * The room's files. A share set to None (FileShare.None) for a member
-   * who held one removes that member's file keys once the request went
-   * through, as SetAceObjectAsync calls RevokeFileKeysAsync after its loop;
-   * the mock's groups have no members, so every subject counts as a user.
+   * who held one removes that member's file keys, as SetAceObjectAsync
+   * calls RevokeFileKeysAsync for the members a request takes out; the
+   * mock's groups have no members, so every subject counts as a user.
    */
   files?: { current: EncryptedFilesHandlerHandle | null };
 };
@@ -94,17 +92,24 @@ const okResponse = <T>(response: T): Response =>
     { headers: { "Content-Type": "application/json" } },
   );
 
-const noKeyResponse = (): Response =>
+const refusedResponse = (message: string, type: string): Response =>
   new Response(
-    JSON.stringify({
-      status: 1,
-      statusCode: 403,
-      error: {
-        message: "The user does not have an encryption key",
-        type: "System.InvalidOperationException",
-      },
-    }),
+    JSON.stringify({ status: 1, statusCode: 403, error: { message, type } }),
     { status: 403, headers: { "Content-Type": "application/json" } },
+  );
+
+/** EncryptionLoginProvider.ThrowIfKeysAreNotSetAsync. */
+const noKeyResponse = (): Response =>
+  refusedResponse(
+    "The user does not have an encryption key",
+    "ASC.Web.Studio.Core.EncryptionKeyNotSetException",
+  );
+
+/** FilesCommonResource.ErrorMessage_GroupInPrivateRoom. */
+const groupResponse = (): Response =>
+  refusedResponse(
+    "A group cannot be invited to a private room: file keys are issued to each user",
+    "System.InvalidOperationException",
   );
 
 /**
@@ -198,9 +203,10 @@ export const roomMembersHandlers = (
 
     /**
      * VirtualRoomsController.SetRoomSecurity, which runs
-     * FileSharingAceHelper.SetAceObjectAsync: the invitations are walked
-     * groups first (ordered by SubjectGroup, descending), and in a private
-     * room every subject but a group already shared there must hold a key.
+     * FileSharingAceHelper.SetAceObjectAsync. In a private room
+     * ValidatePrivateRoomMembersAsync checks the whole request before
+     * anything is written: a group with an access is refused, and a user
+     * who holds no share of the room yet must hold a key.
      */
     http.put(baseUrl, async ({ request }) => {
       const body = (await request.json()) as {
@@ -210,18 +216,19 @@ export const roomMembersHandlers = (
 
       const isGroup = (id: string) => opts.groups?.includes(id) ?? false;
       const invitations = body.invitations ?? [];
-      const ordered = [
-        ...invitations.filter((inv) => isGroup(inv.id)),
-        ...invitations.filter((inv) => !isGroup(inv.id)),
-      ];
+
+      for (const inv of invitations) {
+        if (inv.access === SHARE_NONE) continue;
+        if (isGroup(inv.id)) return groupResponse();
+        const isMember = state.some((m) => m.id === inv.id);
+        if (!isMember && opts.withoutKeys?.includes(inv.id)) {
+          return noKeyResponse();
+        }
+      }
 
       const removed: string[] = [];
-      for (const inv of ordered) {
+      for (const inv of invitations) {
         const existing = state.find((m) => m.id === inv.id);
-        const refused = isGroup(inv.id)
-          ? !existing?.isGroup
-          : opts.withoutKeys?.includes(inv.id);
-        if (refused) return noKeyResponse();
         if (existing) {
           if (inv.access === SHARE_NONE) removed.push(inv.id);
           if (inv.access !== undefined) existing.access = inv.access;

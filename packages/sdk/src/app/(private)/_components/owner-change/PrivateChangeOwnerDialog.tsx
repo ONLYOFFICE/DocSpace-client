@@ -57,7 +57,6 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
 import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/room-member-flows";
-import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -155,12 +154,7 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
           await leaveRoom({ roomId, userId: currentUserId as string });
         } catch (error) {
           // The transfer took place: the dialog closes on the new owner.
-          // Spec: private-rooms/sdk-surface, "SDK explains a refused access change in a private room"
-          toastr.error(
-            isAccessChangeRefused(error)
-              ? t("Common:EncryptedAccessChangeRefused")
-              : getEncryptionErrorMessage(t, error),
-          );
+          toastr.error(getEncryptionErrorMessage(t, error));
           onChanged?.(roomId);
           onClose();
           return;

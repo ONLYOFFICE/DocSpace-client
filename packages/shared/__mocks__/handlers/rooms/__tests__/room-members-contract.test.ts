@@ -175,14 +175,61 @@ describe("roomMembers mock — PUT /files/rooms/{id}/share for a group or a gues
     expect(memberIds()).not.toContain(BOB_ID);
   });
 
-  it("Group shared with a private room: a role change of a shared group is not refused", async () => {
+  it("Group added", async () => {
+    const res = await share([{ id: GROUP_ID, access: 11 }]);
+
+    expect(res.status).toBe(403);
+    expect((await res.json()).error.type).toBe(
+      "System.InvalidOperationException",
+    );
+  });
+
+  it("Group added: a role change of a group the room still holds is refused too", async () => {
     const res = await share([{ id: SHARED_GROUP_ID, access: 2 }]);
 
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(403);
     expect(
       privateRoom.current!.getMembers().find((m) => m.id === SHARED_GROUP_ID)
         ?.access,
-    ).toBe(2);
+    ).toBe(11);
+  });
+
+  it("Group removed", async () => {
+    const res = await share([{ id: SHARED_GROUP_ID, access: 0 }]);
+
+    expect(res.status).toBe(200);
+  });
+
+  it("User without keys invited", async () => {
+    const res = await share([{ id: GUEST_ID, access: 2 }]);
+
+    expect(res.status).toBe(403);
+    expect((await res.json()).error.type).toBe(
+      "ASC.Web.Studio.Core.EncryptionKeyNotSetException",
+    );
+  });
+
+  it("Member without keys removed or given another role", async () => {
+    privateRoom.current!.setMembers([
+      { id: OWNER_ID, access: 1 },
+      { id: GUEST_ID, access: 11 },
+    ]);
+
+    const role = await share([{ id: GUEST_ID, access: 2 }]);
+    const removal = await share([{ id: GUEST_ID, access: 0 }]);
+
+    expect(role.status).toBe(200);
+    expect(removal.status).toBe(200);
+  });
+
+  it("Invitation with a user without a key", async () => {
+    const res = await share([
+      { id: BOB_ID, access: 11 },
+      { id: GUEST_ID, access: 2 },
+    ]);
+
+    expect(res.status).toBe(403);
+    expect(memberIds()).not.toContain(BOB_ID);
   });
 
   it("Guest shared with a private room", async () => {

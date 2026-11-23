@@ -70,7 +70,8 @@ const useDeepLink = ({
     const isSDK = params.get("isSDK");
     const isEmbedded = params.get("editorType") === "embedded";
     const isOpenOnlyApp =
-      defaultOpenDocument === "app" || deepLinkSettings === DeepLinkType.App;
+      deepLinkSettings === DeepLinkType.App ||
+      (deepLinkSettings !== DeepLinkType.Web && defaultOpenDocument === "app");
 
     if (
       !isSDK &&

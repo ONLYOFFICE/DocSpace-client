@@ -33,9 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { filesSettingsHandler } from "@docspace/shared/__mocks__/handlers";
+import {
+  deepLinkHandler,
+  filesSettingsHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { DeepLinkType } from "@docspace/shared/enums";
 import { expect, test } from "./fixtures/base";
+import { installFakeEditor } from "./fixtures/fakeEditor";
 
 test.describe("DeepLink", () => {
   test("DeepLink render", async ({
@@ -56,5 +61,44 @@ test.describe("DeepLink", () => {
     await expect(form).toBeVisible();
 
     await expectScreenshot(page, ["deeplink", "deeplink-render.png"]);
+  });
+
+  test("Bug 73753: Open in web only wins over a remembered app choice", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name === "desktop",
+      "DeepLink unsupported on desktop",
+    );
+
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      deepLinkHandler(port, DeepLinkType.Web),
+    );
+
+    await page.addInitScript(() =>
+      localStorage.setItem("defaultOpenDocument", "app"),
+    );
+    await installFakeEditor(page);
+
+    const appLaunches: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().startsWith("oodocuments:")) {
+        appLaunches.push(request.url());
+      }
+    });
+
+    await page.goto(`${baseUrl}/doceditor?fileId=1`, {
+      waitUntil: "domcontentloaded",
+    });
+
+    await expect(page.locator("#portal_editor")).toBeAttached();
+    await page.waitForTimeout(1500);
+
+    expect(appLaunches).toEqual([]);
+    await expect(page.getByTestId("form-wrapper")).toHaveCount(0);
   });
 });

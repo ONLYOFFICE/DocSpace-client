@@ -54,12 +54,17 @@ export const getSuccessDeepLink = {
   statusCode: 200,
 };
 
-export const deepLinkResolver = (): Response => {
-  return new Response(JSON.stringify(getSuccessDeepLink));
+export const deepLinkResolver = (handlingMode = 0): Response => {
+  return new Response(
+    JSON.stringify({
+      ...getSuccessDeepLink,
+      response: { ...getSuccessDeepLink.response, handlingMode },
+    }),
+  );
 };
 
-export const deepLinkHandler = (port: string) => {
+export const deepLinkHandler = (port: string, handlingMode = 0) => {
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_DEEP_LINK}`, () => {
-    return deepLinkResolver();
+    return deepLinkResolver(handlingMode);
   });
 };

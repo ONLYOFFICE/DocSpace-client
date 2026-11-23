@@ -559,7 +559,10 @@ class PluginStore {
 
   checkPluginCacheWarning = (plugin: TAPIPlugin) => {
     return this.plugins.some(
-      (p) => p.name === plugin.name && p.version === plugin.version,
+      (p) =>
+        p.name === plugin.name &&
+        p.version === plugin.version &&
+        !!p.personal === !!plugin.personal,
     );
   };
 

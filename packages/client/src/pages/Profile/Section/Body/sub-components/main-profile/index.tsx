@@ -366,7 +366,7 @@ const MainProfile = (props: MainProfileProps) => {
       TopLoadingIndicator.start();
       await updateProfileCulture?.(profile!.id, newLanguage.key as string);
       await i18n.changeLanguage(newLanguage.key?.toString());
-      enablePlugins && (await updatePlugins?.());
+      enablePlugins && (await updatePlugins?.(true));
       await fetchTreeFolders?.();
       await getBanner?.(true);
     } catch (error: unknown) {

@@ -139,3 +139,41 @@ describe("portalPluginList", () => {
     expect(store.portalPluginList).toHaveLength(0);
   });
 });
+
+describe("checkPluginCacheWarning", () => {
+  it("warns about a plugin of the same level, name and version", () => {
+    const store = withLoadedPlugin(true);
+
+    expect(
+      store.checkPluginCacheWarning({
+        name: NAME,
+        version: "1.0.0",
+        personal: true,
+      } as never),
+    ).toBe(false);
+
+    runInAction(() => {
+      store.plugins[0].version = "1.0.0";
+    });
+
+    expect(
+      store.checkPluginCacheWarning({
+        name: NAME,
+        version: "1.0.0",
+        personal: true,
+      } as never),
+    ).toBe(true);
+  });
+
+  it("does not warn about a plugin of the other level", () => {
+    const store = withLoadedPlugin(true);
+
+    runInAction(() => {
+      store.plugins[0].version = "1.0.0";
+    });
+
+    expect(
+      store.checkPluginCacheWarning({ name: NAME, version: "1.0.0" } as never),
+    ).toBe(false);
+  });
+});

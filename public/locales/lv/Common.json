@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Privātās telpas ir beta versijā. Dažas darbības šifrētiem failiem vēl nav pieejamas, un šifrētus failus nevar atvērt bez jūsu atslēgas, tāpēc glabājiet atkopšanas frāzi drošā vietā.",
   "PrivateRoomsBetaTitle": "Privātās telpas",
   "PrivateRoomsCannotPassToUser": "Atlasītais lietotājs nevar pārņemt šī konta privātās telpas. Viņam ir nepieciešama šifrēšanas atslēga un piekļuve katram šifrētajam failam šajās telpās.",
+  "PrivateRoomsKeptWithAccount": "Dati tika pārdalīti, taču dažas privātās telpas palika šim kontam: nevienam, kas varētu tās pārņemt, nav šifrēšanas atslēgas. Superadministrators, kurš ir šādas telpas dalībnieks, var nomainīt tās īpašnieku.",
   "PrivateRoomsListEmptyDescription": "Privātās telpas ir pilnīgi šifrētas. Faili tiek šifrēti jūsu pārlūkprogrammā pirms augšupielādes, un tos var lasīt tikai jūsu uzaicinātie cilvēki.",
   "PrivateRoomsListEmptyTitle": "Vēl nav privāto telpu",
   "PrivateRoomsSectionNote": "Faili šeit ir pilnīgi šifrēti: tos var lasīt tikai telpas dalībnieki.",

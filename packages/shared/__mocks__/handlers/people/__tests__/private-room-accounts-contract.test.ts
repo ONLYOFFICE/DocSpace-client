@@ -169,3 +169,32 @@ describe("privateRoomAccounts mock - POST /people/type (mirrors UserController.S
     expect(keyHolders()).toEqual([OWNER_ID]);
   });
 });
+
+describe("privateRoomAccounts mock - GET /people/reassign/progress/{userId} (mirrors ReassignController.GetReassignProgress)", () => {
+  const KEPT_PORT = "3234";
+  const progress = async (port: string) =>
+    (
+      await (
+        await fetch(
+          `${BASE_URL}:${port}/${API_PREFIX}/people/reassign/progress/${BOB_ID}`,
+        )
+      ).json()
+    ).response as { isCompleted: boolean; keptPrivateRoomIds: number[] };
+
+  it("Every private room moved", async () => {
+    expect(await progress(PORT)).toMatchObject({
+      isCompleted: true,
+      keptPrivateRoomIds: [],
+    });
+  });
+
+  it("Private rooms kept", async () => {
+    server.use(
+      ...privateRoomAccountsHandlers(KEPT_PORT, {
+        keptPrivateRoomIds: [ROOM_ID],
+      }),
+    );
+
+    expect((await progress(KEPT_PORT)).keptPrivateRoomIds).toEqual([ROOM_ID]);
+  });
+});

@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Las salas privadas están en fase beta. Algunas acciones aún no están disponibles para los archivos cifrados, y los archivos cifrados no se pueden abrir sin su clave, así que guarde su frase de recuperación en un lugar seguro.",
   "PrivateRoomsBetaTitle": "Salas privadas",
   "PrivateRoomsCannotPassToUser": "El usuario seleccionado no puede hacerse cargo de las salas privadas de esta cuenta. Necesita una clave de cifrado y acceso a todos los archivos cifrados de esas salas.",
+  "PrivateRoomsKeptWithAccount": "Los datos se reasignaron, pero algunas salas privadas se quedaron en esta cuenta: nadie que pudiera hacerse cargo de ellas tiene una clave de cifrado. Un superadministrador que sea miembro de una de esas salas puede cambiar su propietario.",
   "PrivateRoomsListEmptyDescription": "Las salas privadas están cifradas de extremo a extremo. Los archivos se cifran en su navegador antes de subirlos y solo las personas que invite pueden leerlos.",
   "PrivateRoomsListEmptyTitle": "Aún no hay salas privadas",
   "PrivateRoomsSectionNote": "Los archivos aquí están cifrados de extremo a extremo: solo los miembros de la sala pueden leerlos.",

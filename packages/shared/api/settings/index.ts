@@ -609,6 +609,7 @@ export function dataReassignment(fromUserId, toUserId, deleteProfile) {
   });
 }
 
+/** @returns {Promise<import("../people/types").TTaskProgress | null>} */
 export function dataReassignmentProgress(id) {
   return request({
     method: "get",

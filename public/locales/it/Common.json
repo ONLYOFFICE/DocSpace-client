@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Le stanze private sono in versione beta. Alcune azioni non sono ancora disponibili per i file crittografati e i file crittografati non possono essere aperti senza la tua chiave, quindi conserva la tua frase di recupero in un luogo sicuro.",
   "PrivateRoomsBetaTitle": "Stanze private",
   "PrivateRoomsCannotPassToUser": "L'utente selezionato non può prendere in carico le stanze private di questo account. Deve avere una chiave di cifratura e l'accesso a ogni file cifrato in quelle stanze.",
+  "PrivateRoomsKeptWithAccount": "I dati sono stati riassegnati, ma alcune stanze private sono rimaste a questo account: nessuno di coloro che potrebbero prenderle in carico ha una chiave di cifratura. Un superamministratore che è membro di una di queste stanze può cambiarne il proprietario.",
   "PrivateRoomsListEmptyDescription": "Le stanze private sono crittografate end-to-end. I file vengono crittografati nel browser prima del caricamento e solo le persone che inviti possono leggerli.",
   "PrivateRoomsListEmptyTitle": "Ancora nessuna stanza privata",
   "PrivateRoomsSectionNote": "Qui i file sono crittografati end-to-end: solo i membri della stanza possono leggerli.",

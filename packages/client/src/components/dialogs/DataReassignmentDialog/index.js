@@ -123,6 +123,12 @@ const DataReassignmentDialog = ({
         clearTimeout(timerId);
         if (res.status === statusTerminateCompleted) return;
 
+        // Spec: private-rooms/room-membership, "Private rooms left with an account are named"
+        if (res.keptPrivateRoomIds?.length) {
+          toastr.warning(t("Common:PrivateRoomsKeptWithAccount"));
+          return;
+        }
+
         toastr.success(t("Common:ChangesSavedSuccessfully"));
       })
       .catch((error) => {

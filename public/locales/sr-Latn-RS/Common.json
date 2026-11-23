@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Privatne sobe su u beta fazi. Neke radnje još uvek nisu dostupne za šifrovane fajlove, a šifrovani fajlovi ne mogu da se otvore bez vašeg ključa, zato čuvajte frazu za oporavak na bezbednom mestu.",
   "PrivateRoomsBetaTitle": "Privatne sobe",
   "PrivateRoomsCannotPassToUser": "Izabrani korisnik ne može da preuzme privatne sobe ovog naloga. Potrebni su mu ključ za šifrovanje i pristup svakoj šifrovanoj datoteci u tim sobama.",
+  "PrivateRoomsKeptWithAccount": "Podaci su ponovo dodeljeni, ali su neke privatne sobe ostale na ovom nalogu: niko ko bi mogao da ih preuzme nema ključ za šifrovanje. Superadministrator koji je član takve sobe može da promeni njenog vlasnika.",
   "PrivateRoomsListEmptyDescription": "Privatne sobe su šifrovane s kraja na kraj. Datoteke se šifruju u vašem pregledaču pre otpremanja i mogu ih čitati samo osobe koje pozovete.",
   "PrivateRoomsListEmptyTitle": "Još nema privatnih soba",
   "PrivateRoomsSectionNote": "Datoteke su ovde šifrovane s kraja na kraj: mogu ih čitati samo članovi sobe.",

@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Yksityishuoneet ovat beta-vaiheessa. Jotkin toiminnot eivät ole vielä käytettävissä salatuille tiedostoille, eikä salattuja tiedostoja voi avata ilman avaintasi, joten säilytä palautuslauseesi turvassa.",
   "PrivateRoomsBetaTitle": "Yksityishuoneet",
   "PrivateRoomsCannotPassToUser": "Valittu käyttäjä ei voi ottaa tämän tilin yksityishuoneita haltuunsa. Hän tarvitsee salausavaimen ja pääsyn jokaiseen näiden huoneiden salattuun tiedostoon.",
+  "PrivateRoomsKeptWithAccount": "Tiedot siirrettiin, mutta osa yksityishuoneista jäi tälle tilille: kenelläkään, joka voisi ottaa ne haltuunsa, ei ole salausavainta. Pääjärjestelmänvalvoja, joka on tällaisen huoneen jäsen, voi vaihtaa sen omistajan.",
   "PrivateRoomsListEmptyDescription": "Yksityishuoneet on salattu päästä päähän. Tiedostot salataan selaimessasi ennen lähetystä, ja vain kutsumasi henkilöt voivat lukea niitä.",
   "PrivateRoomsListEmptyTitle": "Ei vielä yksityishuoneita",
   "PrivateRoomsSectionNote": "Tiedostot ovat täällä päästä päähän salattuja: vain huoneen jäsenet voivat lukea niitä.",

@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Şəxsi otaqlar beta mərhələsindədir. Şifrələnmiş fayllar üçün bəzi əməliyyatlar hələ əlçatan deyil və şifrələnmiş faylları açarınız olmadan açmaq mümkün deyil, ona görə də bərpa ifadənizi təhlükəsiz yerdə saxlayın.",
   "PrivateRoomsBetaTitle": "Şəxsi otaqlar",
   "PrivateRoomsCannotPassToUser": "Seçilmiş istifadəçi bu hesabın şəxsi otaqlarını qəbul edə bilməz. Ona şifrələmə açarı və həmin otaqlardakı hər bir şifrələnmiş fayla giriş lazımdır.",
+  "PrivateRoomsKeptWithAccount": "Məlumatlar yenidən təyin edildi, lakin bəzi şəxsi otaqlar bu hesabda qaldı: onları qəbul edə biləcək heç kimin şifrələmə açarı yoxdur. Belə otağın üzvü olan super administrator onun sahibini dəyişə bilər.",
   "PrivateRoomsListEmptyDescription": "Şəxsi otaqlar uçdan-uca şifrələnir. Fayllar yükləməzdən əvvəl brauzerinizdə şifrələnir və yalnız dəvət etdiyiniz şəxslər onları oxuya bilər.",
   "PrivateRoomsListEmptyTitle": "Hələ şəxsi otaq yoxdur",
   "PrivateRoomsSectionNote": "Buradakı fayllar uçdan-uca şifrələnib: onları yalnız otaq üzvləri oxuya bilər.",

@@ -657,6 +657,23 @@ describe("encryptedFiles mock — POST /files/owner (mirrors SecurityController.
     expect((await transfer(BOB_ID)).status).toBe(200);
   });
 
+  it("Administrator who is a member", async () => {
+    handle.current!.setCurrentUserId(BOB_ID);
+    handle.current!.setOwnerChangers([ALICE_ID, BOB_ID]);
+    handle.current!.setFileKeys(21, [aliceEntry, bobEntry]);
+    handle.current!.setFileKeys(22, [aliceEntry, bobEntry]);
+
+    expect((await transfer(BOB_ID)).status).toBe(200);
+  });
+
+  it("Administrator outside the room", async () => {
+    handle.current!.setCurrentUserId(CAROL_ID);
+    handle.current!.setOwnerChangers([ALICE_ID]);
+
+    expect((await transfer(BOB_ID)).status).toBe(403);
+    expect(await creatorOf(21)).toBe(ALICE_ID);
+  });
+
   it("New owner without keys", async () => {
     expect((await transfer(CAROL_ID)).status).toBe(403);
     expect((await transfer("")).status).toBe(400);

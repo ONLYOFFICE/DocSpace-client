@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Privékamers zijn in bèta. Sommige acties zijn nog niet beschikbaar voor versleutelde bestanden, en versleutelde bestanden kunnen niet worden geopend zonder uw sleutel, dus bewaar uw herstelzin op een veilige plek.",
   "PrivateRoomsBetaTitle": "Privékamers",
   "PrivateRoomsCannotPassToUser": "De geselecteerde gebruiker kan de privékamers van dit account niet overnemen. Deze gebruiker heeft een versleutelingssleutel nodig en toegang tot elk versleuteld bestand in die kamers.",
+  "PrivateRoomsKeptWithAccount": "De gegevens zijn opnieuw toegewezen, maar sommige privékamers zijn bij dit account gebleven: niemand die ze zou kunnen overnemen heeft een versleutelingssleutel. Een superbeheerder die lid is van zo'n kamer kan de eigenaar ervan wijzigen.",
   "PrivateRoomsListEmptyDescription": "Privékamers zijn end-to-end versleuteld. Bestanden worden in uw browser versleuteld voordat ze worden geüpload en alleen de mensen die u uitnodigt kunnen ze lezen.",
   "PrivateRoomsListEmptyTitle": "Nog geen privékamers",
   "PrivateRoomsSectionNote": "Bestanden zijn hier end-to-end versleuteld: alleen leden van de kamer kunnen ze lezen.",

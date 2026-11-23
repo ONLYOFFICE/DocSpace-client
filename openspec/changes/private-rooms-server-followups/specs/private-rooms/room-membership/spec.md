@@ -22,3 +22,14 @@ The system SHALL show a text of its own, and not the server's message, when the 
 #### Scenario: Another failure
 - **WHEN** the same request fails for another reason
 - **THEN** the failure is shown as it was before, and neither text is shown
+
+### Requirement: Private rooms left with an account are named
+The system SHALL tell the administrator, when a reassignment of a user's data ends, that private rooms stayed with the account, and who can hand such a room over, when the server names rooms it left there.
+
+#### Scenario: Private rooms kept
+- **WHEN** the reassignment of a user's data ends and its progress names private rooms left with the account
+- **THEN** Common:PrivateRoomsKeptWithAccount is shown in place of the message of success
+
+#### Scenario: Every private room moved
+- **WHEN** the reassignment ends and its progress names no room, with an empty list or with none
+- **THEN** the message of success is shown as before

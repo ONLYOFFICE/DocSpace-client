@@ -50,6 +50,11 @@ export type PrivateRoomListOptions = {
   title?: string;
   ownerId?: string;
   /**
+   * Whether the caller may change the owner: the room's owner, and a
+   * DocSpace admin who is a member of the room. True unless said otherwise.
+   */
+  canChangeOwner?: boolean;
+  /**
    * More private rooms, listed right after the first one. `foldersCount` is
    * the number of folders below the room, as FolderDtoHelper copies it from
    * the stored counter (FolderQueries.UpdateFoldersCountAsync).
@@ -94,7 +99,7 @@ const privateRoomBodies = (opts: PrivateRoomListOptions) => {
     CopyLink: false,
     Embed: false,
     Reconnect: false,
-    ChangeOwner: true,
+    ChangeOwner: opts.canChangeOwner ?? true,
     IndexExport: false,
     UseChat: false,
   });

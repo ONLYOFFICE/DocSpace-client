@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "As salas privadas estão em versão beta. Algumas ações ainda não estão disponíveis para ficheiros encriptados, e os ficheiros encriptados não podem ser abertos sem a sua chave, por isso guarde a sua frase de recuperação em segurança.",
   "PrivateRoomsBetaTitle": "Salas privadas",
   "PrivateRoomsCannotPassToUser": "O utilizador selecionado não pode assumir as salas privadas desta conta. Precisa de uma chave de encriptação e de acesso a todos os ficheiros encriptados dessas salas.",
+  "PrivateRoomsKeptWithAccount": "Os dados foram reatribuídos, mas algumas salas privadas ficaram com esta conta: ninguém que as pudesse assumir tem uma chave de encriptação. Um superadministrador que seja membro de uma dessas salas pode alterar o respetivo proprietário.",
   "PrivateRoomsListEmptyDescription": "As salas privadas são encriptadas de ponta a ponta. Os ficheiros são encriptados no seu browser antes do carregamento e apenas as pessoas que convidar os podem ler.",
   "PrivateRoomsListEmptyTitle": "Ainda não existem salas privadas",
   "PrivateRoomsSectionNote": "Os ficheiros aqui são encriptados de ponta a ponta: apenas os membros da sala os podem ler.",

@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Les salles privées sont en version bêta. Certaines actions ne sont pas encore disponibles pour les fichiers chiffrés, et les fichiers chiffrés ne peuvent pas être ouverts sans votre clé, alors conservez votre phrase de récupération en lieu sûr.",
   "PrivateRoomsBetaTitle": "Salles privées",
   "PrivateRoomsCannotPassToUser": "L'utilisateur sélectionné ne peut pas reprendre les salles privées de ce compte. Il lui faut une clé de chiffrement et l'accès à chaque fichier chiffré de ces salles.",
+  "PrivateRoomsKeptWithAccount": "Les données ont été réattribuées, mais certaines salles privées sont restées sur ce compte : aucune des personnes qui pourraient les reprendre n'a de clé de chiffrement. Un super-administrateur membre d'une telle salle peut en changer le propriétaire.",
   "PrivateRoomsListEmptyDescription": "Les salles privées sont chiffrées de bout en bout. Les fichiers sont chiffrés dans votre navigateur avant le téléversement et seules les personnes que vous invitez peuvent les lire.",
   "PrivateRoomsListEmptyTitle": "Aucune salle privée pour le moment",
   "PrivateRoomsSectionNote": "Les fichiers sont ici chiffrés de bout en bout : seuls les membres de la salle peuvent les lire.",

@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Prywatne pokoje są w wersji beta. Niektóre działania nie są jeszcze dostępne dla zaszyfrowanych plików, a zaszyfrowanych plików nie można otworzyć bez Twojego klucza, dlatego przechowuj frazę odzyskiwania w bezpiecznym miejscu.",
   "PrivateRoomsBetaTitle": "Prywatne pokoje",
   "PrivateRoomsCannotPassToUser": "Wybrany użytkownik nie może przejąć prywatnych pokoi tego konta. Potrzebuje klucza szyfrowania i dostępu do każdego zaszyfrowanego pliku w tych pokojach.",
+  "PrivateRoomsKeptWithAccount": "Dane zostały przypisane ponownie, ale niektóre prywatne pokoje pozostały przy tym koncie: nikt, kto mógłby je przejąć, nie ma klucza szyfrowania. Superadministrator, który jest członkiem takiego pokoju, może zmienić jego właściciela.",
   "PrivateRoomsListEmptyDescription": "Prywatne pokoje są szyfrowane end-to-end. Pliki są szyfrowane w przeglądarce przed wgraniem i mogą je odczytać tylko zaproszone przez Ciebie osoby.",
   "PrivateRoomsListEmptyTitle": "Brak prywatnych pokoi",
   "PrivateRoomsSectionNote": "Pliki są tutaj szyfrowane end-to-end: mogą je odczytać tylko członkowie pokoju.",

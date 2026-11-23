@@ -118,6 +118,12 @@ export type EncryptedFilesHandlerHandle = {
    */
   setRoomAccessManagers: (userIds: string[]) => void;
   /**
+   * The users who may change the owner of the room: its owner, and a
+   * DocSpace admin who is a member of it (FileSecurity, ChangeOwner on a
+   * private room). Until set, the caller may.
+   */
+  setOwnerChangers: (userIds: string[]) => void;
+  /**
    * Mirrors the private-room branch of FileSharingAceHelper
    * .SetAceObjectAsync: the users whose share on the room was removed lose
    * their entries on every file of the room, its folders included
@@ -571,6 +577,7 @@ export const encryptedFilesHandlers = (
   const outsidePrivateRoom = new Set<number>();
   const unreadableUsers = new Set<string>();
   let accessManagers: Set<string> | null = null;
+  let ownerChangers: Set<string> | null = null;
   /** files_file_keys.create_on: set when the row is written. */
   const keyCreatedOn = (fileId: number, userId: string) => {
     const key = `${fileId}:${userId}`;
@@ -670,6 +677,9 @@ export const encryptedFilesHandlers = (
     setRoomAccessManagers: (userIds) => {
       accessManagers = new Set(userIds.map(String));
     },
+    setOwnerChangers: (userIds) => {
+      ownerChangers = new Set(userIds.map(String));
+    },
     revokeFileKeys: (userIds) => {
       if (!isPrivate) return;
       const revoked = userIds.map(String).filter((id) => id !== ownerId);
@@ -694,6 +704,7 @@ export const encryptedFilesHandlers = (
       outsidePrivateRoom.clear();
       unreadableUsers.clear();
       accessManagers = null;
+      ownerChangers = null;
       requests.length = 0;
       roomUserKeys = [];
       nextFileId = 1000;
@@ -1100,8 +1111,9 @@ export const encryptedFilesHandlers = (
      * otherwise the room with its new creator, and a repeat for the owner
      * is answered untouched. Another room's id is left to that room's
      * instance, and a room that is not private skips the key checks. The
-     * mock has no portal directory: the account checks of the new owner and
-     * the caller's right to change the owner are not mirrored.
+     * mock has no portal directory: the account checks of the new owner are
+     * not mirrored, and the callers who may change the owner are the ones
+     * `setOwnerChangers` names, anybody else getting 403.
      */
     http.post(`${apiBase}/files/owner`, async ({ request }) => {
       const body = (await request.clone().json()) as {
@@ -1119,6 +1131,9 @@ export const encryptedFilesHandlers = (
       }
       const sameUser = (other: string) =>
         other.toLowerCase() === userId.toLowerCase();
+      if (ownerChangers && !ownerChangers.has(currentUserId)) {
+        return errorResponse(403, "Access denied");
+      }
       if (isPrivate) {
         const hasKeys =
           sameUser(ownerId) ||

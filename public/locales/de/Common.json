@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Private Räume befinden sich in der Beta-Phase. Einige Aktionen sind für verschlüsselte Dateien noch nicht verfügbar, und verschlüsselte Dateien lassen sich ohne Ihren Schlüssel nicht öffnen. Bewahren Sie Ihre Wiederherstellungsphrase daher sicher auf.",
   "PrivateRoomsBetaTitle": "Private Räume",
   "PrivateRoomsCannotPassToUser": "Der ausgewählte Benutzer kann die privaten Räume dieses Kontos nicht übernehmen. Er benötigt einen Verschlüsselungsschlüssel und Zugriff auf jede verschlüsselte Datei in diesen Räumen.",
+  "PrivateRoomsKeptWithAccount": "Die Daten wurden neu zugewiesen, aber einige private Räume sind bei diesem Konto geblieben: Niemand, der sie übernehmen könnte, hat einen Verschlüsselungsschlüssel. Ein Super-Administrator, der Mitglied eines solchen Raums ist, kann dessen Besitzer ändern.",
   "PrivateRoomsListEmptyDescription": "Private Räume sind Ende-zu-Ende-verschlüsselt. Dateien werden vor dem Hochladen in Ihrem Browser verschlüsselt und können nur von den von Ihnen eingeladenen Personen gelesen werden.",
   "PrivateRoomsListEmptyTitle": "Noch keine privaten Räume",
   "PrivateRoomsSectionNote": "Dateien sind hier Ende-zu-Ende-verschlüsselt: Nur Raummitglieder können sie lesen.",

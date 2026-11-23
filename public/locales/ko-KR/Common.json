@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "비공개 룸은 베타 버전입니다. 암호화된 파일에서는 일부 작업을 아직 사용할 수 없으며, 암호화된 파일은 키 없이 열 수 없으므로 복구 문구를 안전하게 보관하세요.",
   "PrivateRoomsBetaTitle": "비공개 룸",
   "PrivateRoomsCannotPassToUser": "선택한 사용자는 이 계정의 비공개 룸을 인계받을 수 없습니다. 암호화 키와 해당 룸의 모든 암호화된 파일에 대한 액세스 권한이 필요합니다.",
+  "PrivateRoomsKeptWithAccount": "데이터가 재할당되었지만 일부 비공개 룸은 이 계정에 남았습니다. 인계받을 수 있는 사용자 중 암호화 키를 가진 사용자가 없습니다. 해당 룸의 구성원인 슈퍼 관리자가 소유자를 변경할 수 있습니다.",
   "PrivateRoomsListEmptyDescription": "비공개 룸은 종단 간 암호화됩니다. 파일은 업로드 전에 브라우저에서 암호화되며 초대한 사람만 읽을 수 있습니다.",
   "PrivateRoomsListEmptyTitle": "아직 비공개 룸이 없습니다",
   "PrivateRoomsSectionNote": "이곳의 파일은 종단 간 암호화되어 룸 멤버만 읽을 수 있습니다.",

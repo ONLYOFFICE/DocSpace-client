@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Dhomat private janë në versionin beta. Disa veprime nuk janë ende të disponueshme për skedarët e enkriptuar dhe skedarët e enkriptuar nuk mund të hapen pa çelësin tuaj, prandaj ruajeni frazën e rikuperimit në një vend të sigurt.",
   "PrivateRoomsBetaTitle": "Dhomat private",
   "PrivateRoomsCannotPassToUser": "Përdoruesi i zgjedhur nuk mund të marrë përsipër dhomat private të kësaj llogarie. Atij i duhet një çelës enkriptimi dhe qasje në çdo skedar të enkriptuar në ato dhoma.",
+  "PrivateRoomsKeptWithAccount": "Të dhënat u ricaktuan, por disa dhoma private mbetën te kjo llogari: askush që mund t'i merrte përsipër nuk ka çelës enkriptimi. Një superadministrator që është anëtar i një dhome të tillë mund të ndryshojë pronarin e saj.",
   "PrivateRoomsListEmptyDescription": "Dhomat private janë të enkriptuara skaj-më-skaj. Skedarët enkriptohen në shfletuesin tuaj përpara ngarkimit dhe vetëm personat që ftoni mund t'i lexojnë.",
   "PrivateRoomsListEmptyTitle": "Nuk ka ende dhoma private",
   "PrivateRoomsSectionNote": "Skedarët këtu janë të enkriptuar skaj-më-skaj: vetëm anëtarët e dhomës mund t'i lexojnë.",

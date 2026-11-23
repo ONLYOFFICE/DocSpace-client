@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Sălile private sunt în versiune beta. Unele acțiuni nu sunt încă disponibile pentru fișierele criptate, iar fișierele criptate nu pot fi deschise fără cheia dumneavoastră, așa că păstrați fraza de recuperare într-un loc sigur.",
   "PrivateRoomsBetaTitle": "Săli private",
   "PrivateRoomsCannotPassToUser": "Utilizatorul selectat nu poate prelua sălile private ale acestui cont. Are nevoie de o cheie de criptare și de acces la fiecare fișier criptat din aceste săli.",
+  "PrivateRoomsKeptWithAccount": "Datele au fost reatribuite, dar unele săli private au rămas la acest cont: nimeni dintre cei care le-ar putea prelua nu are o cheie de criptare. Un superadministrator care este membru al unei astfel de săli îi poate schimba proprietarul.",
   "PrivateRoomsListEmptyDescription": "Sălile private sunt criptate end-to-end. Fișierele sunt criptate în browserul dvs. înainte de încărcare și numai persoanele pe care le invitați le pot citi.",
   "PrivateRoomsListEmptyTitle": "Încă nu există săli private",
   "PrivateRoomsSectionNote": "Fișierele de aici sunt criptate end-to-end: numai membrii sălii le pot citi.",

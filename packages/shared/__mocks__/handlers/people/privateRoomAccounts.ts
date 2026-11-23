@@ -52,6 +52,11 @@ export type PrivateRoomAccountsOptions = {
   files?: { current: EncryptedFilesHandlerHandle | null };
   /** The members of a private room, which a new guest leaves. */
   members?: { current: RoomMembersHandlerHandle | null };
+  /**
+   * The private rooms a data reassignment leaves with the account, since
+   * neither the recipient nor the portal owner holds an encryption key.
+   */
+  keptPrivateRoomIds?: number[];
 };
 
 /** EmployeeStatus.Terminated and EmployeeType.Guest. */
@@ -108,6 +113,23 @@ export const privateRoomAccountsHandlers = (
         userIds.map((id) => ({ id, status: Number(params.status) })),
       );
     }),
+
+    /**
+     * ReassignController.GetReassignProgress: the finished job names the
+     * private rooms it left with the account in `keptPrivateRoomIds`
+     * (FileStorageService.ReassignPrivateRoomsAsync), an empty list when
+     * every room moved.
+     */
+    http.get(`${api}/reassign/progress/:userId`, ({ params }) =>
+      okResponse({
+        id: `1_${params.userId}_ReassignProgressItem`,
+        error: "",
+        percentage: 100,
+        isCompleted: true,
+        status: 2,
+        keptPrivateRoomIds: opts.keptPrivateRoomIds ?? [],
+      }),
+    ),
 
     /**
      * UserController.StartUserTypeUpdate. A change to guest is refused by

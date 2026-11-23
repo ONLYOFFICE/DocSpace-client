@@ -59,6 +59,7 @@ import {
   TGetUserList,
   TUser,
   TUserExistsResponse,
+  TTaskProgress,
 } from "./types";
 import { TOperation } from "../files/filter";
 
@@ -535,7 +536,7 @@ export async function getReassignmentProgress(userId: number | string) {
   return request({
     method: "get",
     url: `people/type/progress/${userId}`,
-  });
+  }) as Promise<TTaskProgress | null>;
 }
 
 export async function terminateReassignment(userId: number | string) {

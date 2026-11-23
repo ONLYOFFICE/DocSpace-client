@@ -1974,6 +1974,7 @@
   "PrivateRoomsBetaDescription": "Private rooms are in beta. Some actions are not available for encrypted files yet, and encrypted files cannot be opened without your key, so keep your recovery phrase safe.",
   "PrivateRoomsBetaTitle": "Private rooms",
   "PrivateRoomsCannotPassToUser": "The selected user cannot take over the private rooms of this account. They need an encryption key and access to every encrypted file in those rooms.",
+  "PrivateRoomsKeptWithAccount": "Data was reassigned, but some private rooms stayed with this account: nobody who could take them has an encryption key. A Full admin who is a member of such a room can change its owner.",
   "PrivateRoomsListEmptyDescription": "Private rooms are end-to-end encrypted. Files are encrypted in your browser before upload and only the people you invite can read them.",
   "PrivateRoomsListEmptyTitle": "No private rooms yet",
   "PrivateRoomsSectionNote": "Files here are end-to-end encrypted: only room members can read them.",

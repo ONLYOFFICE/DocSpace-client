@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "私人房间目前处于测试阶段。部分操作暂不适用于加密文件，且没有您的密钥将无法打开加密文件，因此请妥善保管您的恢复短语。",
   "PrivateRoomsBetaTitle": "私人房间",
   "PrivateRoomsCannotPassToUser": "所选用户无法接管此账户的私人房间。对方需要加密密钥，并且能够访问这些房间中的每个加密文件。",
+  "PrivateRoomsKeptWithAccount": "数据已重新分配，但部分私人房间仍留在此账户下：能够接管它们的人都没有加密密钥。作为该房间成员的超级管理员可以更改其所有者。",
   "PrivateRoomsListEmptyDescription": "私人房间采用端到端加密。文件在上传前会在您的浏览器中加密，只有您邀请的人才能阅读。",
   "PrivateRoomsListEmptyTitle": "暂无私人房间",
   "PrivateRoomsSectionNote": "此处的文件经过端到端加密：只有房间成员才能阅读。",

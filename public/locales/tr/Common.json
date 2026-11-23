@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Özel odalar beta aşamasındadır. Şifrelenmiş dosyalar için bazı işlemler henüz kullanılamıyor ve şifrelenmiş dosyalar anahtarınız olmadan açılamaz, bu nedenle kurtarma ifadenizi güvenli bir yerde saklayın.",
   "PrivateRoomsBetaTitle": "Özel odalar",
   "PrivateRoomsCannotPassToUser": "Seçilen kullanıcı bu hesabın özel odalarını devralamaz. Bir şifreleme anahtarına ve bu odalardaki her şifreli dosyaya erişime ihtiyacı var.",
+  "PrivateRoomsKeptWithAccount": "Veriler yeniden atandı, ancak bazı özel odalar bu hesapta kaldı: onları devralabilecek hiç kimsenin şifreleme anahtarı yok. Böyle bir odanın üyesi olan bir süper yönetici odanın sahibini değiştirebilir.",
   "PrivateRoomsListEmptyDescription": "Özel odalar uçtan uca şifrelenir. Dosyalar yüklenmeden önce tarayıcınızda şifrelenir ve yalnızca davet ettiğiniz kişiler bunları okuyabilir.",
   "PrivateRoomsListEmptyTitle": "Henüz özel oda yok",
   "PrivateRoomsSectionNote": "Buradaki dosyalar uçtan uca şifrelenir: yalnızca oda üyeleri okuyabilir.",

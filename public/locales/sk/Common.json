@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Súkromné miestnosti sú vo verzii beta. Niektoré akcie zatiaľ nie sú pre šifrované súbory dostupné a šifrované súbory nemožno otvoriť bez vášho kľúča, preto si obnovovaciu frázu bezpečne uschovajte.",
   "PrivateRoomsBetaTitle": "Súkromné miestnosti",
   "PrivateRoomsCannotPassToUser": "Vybraný používateľ nemôže prevziať súkromné miestnosti tohto účtu. Potrebuje šifrovací kľúč a prístup ku každému šifrovanému súboru v týchto miestnostiach.",
+  "PrivateRoomsKeptWithAccount": "Údaje boli priradené nanovo, ale niektoré súkromné miestnosti zostali pri tomto účte: nikto, kto by ich mohol prevziať, nemá šifrovací kľúč. Supersprávca, ktorý je členom takejto miestnosti, môže zmeniť jej vlastníka.",
   "PrivateRoomsListEmptyDescription": "Súkromné miestnosti sú koncovo zašifrované. Súbory sú zašifrované vo vašom prehliadači pred nahraním a prečítať si ich môžu iba ľudia, ktorých pozvete.",
   "PrivateRoomsListEmptyTitle": "Zatiaľ žiadne súkromné miestnosti",
   "PrivateRoomsSectionNote": "Súbory sú tu koncovo šifrované: prečítať si ich môžu iba členovia miestnosti.",

@@ -169,3 +169,18 @@ export type TPeopleListItem = {
   tfaAppEnabled: boolean | undefined;
 };
 
+/** `TaskProgressResponseDto`: the progress of a queued job of People. */
+export type TTaskProgress = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: number;
+  /**
+   * The private rooms a data removal or reassignment left with the account:
+   * nobody who could take them holds an encryption key. An empty list when
+   * every room moved; absent before the rooms are handed over and for a job
+   * that hands none over.
+   */
+  keptPrivateRoomIds?: number[] | null;
+};

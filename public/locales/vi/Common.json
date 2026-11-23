@@ -1975,6 +1975,7 @@
   "PrivateRoomsBetaDescription": "Phòng riêng tư đang ở giai đoạn beta. Một số thao tác chưa khả dụng cho tệp được mã hóa, và không thể mở tệp được mã hóa nếu không có khóa của bạn, vì vậy hãy giữ cụm từ khôi phục của bạn ở nơi an toàn.",
   "PrivateRoomsBetaTitle": "Phòng riêng tư",
   "PrivateRoomsCannotPassToUser": "Người dùng được chọn không thể tiếp nhận các phòng riêng tư của tài khoản này. Họ cần có khoá mã hoá và quyền truy cập vào mọi tệp được mã hoá trong các phòng đó.",
+  "PrivateRoomsKeptWithAccount": "Dữ liệu đã được chuyển giao, nhưng một số phòng riêng tư vẫn thuộc về tài khoản này: không ai có thể tiếp nhận chúng có khoá mã hoá. Siêu quản trị viên là thành viên của phòng như vậy có thể thay đổi chủ sở hữu của phòng.",
   "PrivateRoomsListEmptyDescription": "Các phòng riêng tư được mã hoá đầu cuối. Tập tin được mã hoá trong trình duyệt của bạn trước khi tải lên và chỉ những người bạn mời mới có thể đọc chúng.",
   "PrivateRoomsListEmptyTitle": "Chưa có phòng riêng tư nào",
   "PrivateRoomsSectionNote": "Tập tin ở đây được mã hoá đầu cuối: chỉ thành viên của phòng mới có thể đọc.",

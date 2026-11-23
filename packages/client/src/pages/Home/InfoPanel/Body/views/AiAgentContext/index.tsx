@@ -37,8 +37,12 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { FOLDER_CONTEXTS_LIMIT } from "@onlyoffice/ai-chat";
+import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useStores as useAiChatStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
 import {
   getAiProject,
   getAiProjectSkills,
@@ -50,7 +54,14 @@ import { useStore } from "SRC_DIR/store/useStore";
 import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 import RoomItem from "SRC_DIR/pages/AiProjects/sub-components/project/RoomItem";
 
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
+import RoomIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
+
 import styles from "./AiAgentContext.module.scss";
+
+// The data sources of this portal, as the chat's store marks them.
+const PORTAL_CLOUD = "docspace";
 
 type TContext = {
   skillSets: TAiProjectSource[];
@@ -78,6 +89,117 @@ export const readAgentContext = async (id: number): Promise<TContext> => {
   };
 };
 
+type SectionProps = {
+  testId: string;
+  label: string;
+  /** What the assistant does with the section's sources. */
+  hint: string;
+  children?: React.ReactNode;
+};
+
+/** A section of the tab: its caption, the line under it, its rows. */
+const Section = ({ testId, label, hint, children }: SectionProps) => (
+  <section className={styles.section} data-testid={testId}>
+    <Text as="h4" fontSize="12px" fontWeight={600} className={styles.heading}>
+      {label}
+    </Text>
+    <Text
+      fontSize="12px"
+      className={styles.hint}
+      data-testid={`${testId}-hint`}
+    >
+      {hint}
+    </Text>
+    {children}
+  </section>
+);
+
+type ManageRowProps = {
+  testId: string;
+  label: string;
+  onClick: () => void;
+};
+
+/** The "Manage ..." row a section ends with. */
+const ManageRow = ({ testId, label, onClick }: ManageRowProps) => (
+  <Link
+    className={styles.manage}
+    type={LinkType.action}
+    color="accent"
+    isHovered
+    fontSize="13px"
+    fontWeight={600}
+    onClick={onClick}
+    dataTestId={testId}
+  >
+    {label}
+  </Link>
+);
+
+/**
+ * Data sources: the folders and rooms the user connected to the chat that
+ * runs on the agent. They are the user's own, not the agent's: every member
+ * removes one from its row and connects one more with "Manage sources...",
+ * as in the composer's menus, until the limit. Rendered only while the chat
+ * runs on the agent, which is when the chat's stores hold its sources.
+ */
+const DataSources = () => {
+  const { t } = useTranslation(["Common"]);
+  const { useCloudsStore } = useAiChatStores();
+  const folders = useCloudsStore((s) => s.selectedFolderContexts);
+  const disconnect = useCloudsStore((s) => s.deselectFolderContext);
+  const addDataSource = useAiChatStoreOptional()?.addDataSource;
+
+  const rows = folders.filter((item) => item.cloud === PORTAL_CLOUD);
+
+  return (
+    <Section
+      testId="ai-agent-context-data-sources"
+      label={t("Common:DataSources")}
+      hint={t("Common:DataSourcesHint")}
+    >
+      {rows.map(({ cloud, room }) => (
+        <div
+          className={styles.dataSource}
+          key={room.id}
+          data-testid="ai-agent-context-data-source"
+        >
+          <span className={styles.dataSourceIcon} aria-hidden>
+            {/* A source picked before the kind was recorded is a folder. */}
+            {room.kind === "room" ? <RoomIcon /> : <FolderIcon />}
+          </span>
+          <Text
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="15px"
+            title={room.name}
+            truncate
+            noSelect
+          >
+            {room.name}
+          </Text>
+          <IconButton
+            className={styles.dataSourceRemove}
+            iconName={CrossReactSvgUrl}
+            size={12}
+            title={t("Common:RemoveSource", { name: room.name })}
+            ariaLabel={t("Common:RemoveSource", { name: room.name })}
+            onClick={() => disconnect(cloud, room.id)}
+            dataTestId="ai-agent-context-remove-data-source"
+          />
+        </div>
+      ))}
+      {addDataSource && rows.length < FOLDER_CONTEXTS_LIMIT ? (
+        <ManageRow
+          testId="ai-agent-context-manage-data-sources"
+          label={t("Common:ManageSources")}
+          onClick={addDataSource}
+        />
+      ) : null}
+    </Section>
+  );
+};
+
 type AiAgentContextProps = {
   /** The agent's room id. */
   id: number;
@@ -88,13 +210,17 @@ type AiAgentContextProps = {
  * linked to, each unfolding to its skills, and its knowledge bases. Each
  * section is headed as the same list is in the composer's slash menu: a
  * caption and a line saying what the assistant does with it, which is all
- * an empty section shows. A name opens its room. Those who may edit the agent get a "Manage ..." row under
+ * an empty section shows. A name opens its room. While the chat runs on the
+ * agent, the user's own data sources of that chat come last. Those who may edit the agent get a "Manage ..." row under
  * each section ("Manage skill sets...", "Manage knowledge bases..."), which
  * opens the agent's form.
  */
 const AiAgentContext = ({ id }: AiAgentContextProps) => {
   const { t } = useTranslation(["Common"]);
   const aiProjectsStore = useStore("aiProjectsStore");
+  // The chat runs on this agent: on its page, or picked in the chat panel.
+  const isChatAgent =
+    useStore("aiPresetsStore").activePreset?.id === String(id);
 
   const [context, setContext] = React.useState<TContext | null>(null);
   const [failed, setFailed] = React.useState(false);
@@ -138,18 +264,11 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   // The section's own "Manage ..." row, for those who may edit the agent.
   const manageRow = (testId: string, label: string) =>
     context.canEdit ? (
-      <Link
-        className={styles.manage}
-        type={LinkType.action}
-        color="accent"
-        isHovered
-        fontSize="13px"
-        fontWeight={600}
+      <ManageRow
+        testId={testId}
+        label={label}
         onClick={() => aiProjectsStore.openEditDialogById(id)}
-        dataTestId={testId}
-      >
-        {label}
-      </Link>
+      />
     ) : null;
 
   const section = (
@@ -160,25 +279,10 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
     row: (room: TAiProjectSource) => React.ReactNode,
     manage: React.ReactNode,
   ) => (
-    <section className={styles.section} data-testid={testId}>
-      <Text
-        as="h4"
-        fontSize="12px"
-        fontWeight={600}
-        className={styles.heading}
-      >
-        {label}
-      </Text>
-      <Text
-        fontSize="12px"
-        className={styles.hint}
-        data-testid={`${testId}-hint`}
-      >
-        {hint}
-      </Text>
+    <Section testId={testId} label={label} hint={hint}>
       {rooms.map(row)}
       {manage}
-    </section>
+    </Section>
   );
 
   return (
@@ -246,6 +350,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
           t("Common:ManageKnowledgeBases"),
         ),
       )}
+      {isChatAgent ? <DataSources /> : null}
     </div>
   );
 };

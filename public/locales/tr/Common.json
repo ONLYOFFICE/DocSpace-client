@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Bu bilgi tabanındaki bazı dosyalar dizine eklenemedi. Hangileri olduğunu görmek için bilgi tabanını açın.",
   "KnowledgeBaseDescription": "AI ajanlarına bir bilgi tabanına erişim sağlayın. Belgeleriniz text-embedding-3-small modeli kullanılarak dizine eklenir, böylece ajanlar verilerinize dayanarak arama yapabilir ve sorulara yanıt verebilir. Bu özellik ilgili bilgileri bulmak için tasarlanmıştır; özet oluşturmaz veya daha kapsamlı analiz yapmaz.",
   "KnowledgeBasesHint": "Asistan yanıtları bağlı bilgi tabanlarında arar.",
+  "DataSources": "Veri kaynakları",
+  "DataSourcesHint": "Asistan bağlı klasörlerdeki ve odalardaki dosyalarla çalışır.",
   "KnowledgeBaseInfo": "Bilgi tabanı bilgisi",
   "KnowledgeBaseOwnerSelectorInfo": "Bilgi tabanının sahibi yalnızca bir oda yöneticisi veya süper yönetici olabilir",
   "KnowledgeBaseRemoved": "Bilgi tabanı kaldırıldı",

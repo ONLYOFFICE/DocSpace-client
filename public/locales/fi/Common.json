@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Joitakin tämän tietämyskannan tiedostoja ei voitu indeksoida. Avaa se nähdäksesi mitkä.",
   "KnowledgeBaseDescription": "Anna AI-agenteille pääsy tietokantaan. Asiakirjasi indeksoidaan text-embedding-3-small-mallilla, jotta agentit voivat hakea ja vastata kysymyksiin tietojesi perusteella. Tämä ominaisuus on suunniteltu olennaisen tiedon löytämiseen, eikä se luo yhteenvetoja tai suorita laajempaa analyysiä.",
   "KnowledgeBasesHint": "Avustaja etsii vastauksia yhdistetyistä tietopankeista.",
+  "DataSources": "Tietolähteet",
+  "DataSourcesHint": "Avustaja työskentelee yhdistettyjen kansioiden ja huoneiden tiedostojen kanssa.",
   "KnowledgeBaseInfo": "Tietämyskannan tiedot",
   "KnowledgeBaseOwnerSelectorInfo": "Vain huoneen tai pääjärjestelmänvalvoja voi tulla tietämyskannan omistajaksi",
   "KnowledgeBaseRemoved": "Tietämyskanta poistettu",

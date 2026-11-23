@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Bu bilik bazasının bəzi faylları indeksləşdirilə bilmədi. Hansılar olduğunu görmək üçün onu açın.",
   "KnowledgeBaseDescription": "AI agentlərinə bilik bazasına giriş imkanı verin. Sənədləriniz text-embedding-3-small modelindən istifadə edərək indeksləşdirilir, bu da agentlərin məlumatlarınız əsasında axtarış aparmasına və suallara cavab verməsinə imkan verir. Bu funksiya müvafiq məlumatların tapılması üçün nəzərdə tutulub, xülasələr yaratmır və ya daha geniş təhlil aparmır.",
   "KnowledgeBasesHint": "Asistent cavabları qoşulmuş bilik bazalarında axtarır.",
+  "DataSources": "Məlumat mənbələri",
+  "DataSourcesHint": "Asistent qoşulmuş qovluqlardakı və otaqlardakı fayllarla işləyir.",
   "KnowledgeBaseInfo": "Bilik bazası məlumatları",
   "KnowledgeBaseOwnerSelectorInfo": "Bilik bazasının sahibi yalnız otaq və ya super administrator ola bilər",
   "KnowledgeBaseRemoved": "Bilik bazası silindi",

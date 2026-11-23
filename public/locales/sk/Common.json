@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Niektoré súbory tejto znalostnej bázy sa nepodarilo indexovať. Otvorte ju a zistite, ktoré.",
   "KnowledgeBaseDescription": "Poskytnite AI agentom prístup k znalostnej báze. Vaše dokumenty sú indexované pomocou modelu text-embedding-3-small, takže agenti môžu vyhľadávať a odpovedať na otázky na základe vašich údajov. Táto funkcia je určená na hľadanie relevantných informácií, negeneruje zhrnutia ani nevykonáva rozsiahlejšiu analýzu.",
   "KnowledgeBasesHint": "Asistent hľadá odpovede v pripojených znalostných databázach.",
+  "DataSources": "Zdroje údajov",
+  "DataSourcesHint": "Asistent pracuje so súbormi v pripojených priečinkoch a miestnostiach.",
   "KnowledgeBaseInfo": "Informácie o znalostnej báze",
   "KnowledgeBaseOwnerSelectorInfo": "Majiteľom znalostnej bázy sa môže stať iba administrátor miestnosti alebo supersprávca",
   "KnowledgeBaseRemoved": "Znalostná báza bola odstránená",

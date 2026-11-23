@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Dažus šīs zināšanu bāzes failus neizdevās indeksēt. Atveriet to, lai redzētu, kurus.",
   "KnowledgeBaseDescription": "Sniedziet MI aģentiem piekļuvi zināšanu bāzei. Jūsu dokumenti tiek indeksēti, izmantojot modeli text-embedding-3-small, lai aģenti varētu meklēt un atbildēt uz jautājumiem, pamatojoties uz jūsu datiem. Šī funkcija ir paredzēta atbilstošas informācijas atrašanai, tā neģenerē kopsavilkumus un neveic plašāku analīzi.",
   "KnowledgeBasesHint": "Asistents meklē atbildes pievienotajās zināšanu bāzēs.",
+  "DataSources": "Datu avoti",
+  "DataSourcesHint": "Asistents strādā ar failiem pievienotajās mapēs un istabās.",
   "KnowledgeBaseInfo": "Informācija par zināšanu bāzi",
   "KnowledgeBaseOwnerSelectorInfo": "Tikai telpas vai superadministrators var kļūt par zināšanu bāzes īpašnieku",
   "KnowledgeBaseRemoved": "Zināšanu bāze ir noņemta",

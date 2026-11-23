@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Sommige bestanden van deze kennisbank konden niet worden geïndexeerd. Open de kennisbank om te zien welke.",
   "KnowledgeBaseDescription": "Geef AI-agenten toegang tot een kennisbank. Uw documenten worden geïndexeerd met het model text-embedding-3-small, zodat agenten op basis van uw gegevens kunnen zoeken en vragen kunnen beantwoorden. Deze functie is bedoeld om relevante informatie te vinden; ze genereert geen samenvattingen en voert geen bredere analyse uit.",
   "KnowledgeBasesHint": "De assistent zoekt antwoorden in de gekoppelde kennisbanken.",
+  "DataSources": "Gegevensbronnen",
+  "DataSourcesHint": "De assistent werkt met de bestanden in de gekoppelde mappen en kamers.",
   "KnowledgeBaseInfo": "Kennisbankinfo",
   "KnowledgeBaseOwnerSelectorInfo": "Alleen een kamerbeheerder of superbeheerder kan eigenaar van de kennisbank worden",
   "KnowledgeBaseRemoved": "Kennisbank verwijderd",

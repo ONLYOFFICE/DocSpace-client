@@ -56,6 +56,21 @@ On Context a skill set that has skills SHALL unfold to the names of its skills. 
 - **WHEN** the skills of the agent cannot be read
 - **THEN** the skill sets are listed and none can be unfolded
 
+### Requirement: Data sources on Context
+While the chat runs on the agent, on its page or picked in the chat panel, Context SHALL end with a Data sources section (`Common:DataSources`) for every member: its caption, a line on what the assistant does with them, and the folders and rooms the user connected to that chat, each with a control that disconnects it. The section SHALL end with "Manage sources..." (`Common:ManageSources`), which opens the selector of the composer's menus.
+
+#### Scenario: At the limit
+- **WHEN** the chat has as many data sources as it takes
+- **THEN** the section has no "Manage sources..." row
+
+#### Scenario: Member on the agent's page
+- **WHEN** a Member with the folder "Contracts" connected opens Context on the agent's page
+- **THEN** Data sources lists "Contracts" with its remove control, followed by "Manage sources..."
+
+#### Scenario: Agent selected in the list
+- **WHEN** a Member selects an agent in the Agents list while the chat runs on no agent
+- **THEN** Context has no Data sources section
+
 ### Requirement: Managing sources from Context
 For those who may edit the agent, the agent owner and Agent managers, each section of Context SHALL end with its own row: Skill sets with "Manage skill sets..." (`Common:ManageSkillSets`) and Knowledge bases with "Manage knowledge bases..." (`Common:ManageKnowledgeBases`). Each row SHALL open the agent's edit form. Everyone else SHALL NOT be offered them.
 

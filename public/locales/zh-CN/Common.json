@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "此知识库中的部分文件无法建立索引。打开它以查看是哪些文件。",
   "KnowledgeBaseDescription": "让 AI 智能体访问知识库。您的文档将使用 text-embedding-3-small 模型进行索引，智能体可据此搜索并回答与您的数据相关的问题。此功能专注于查找相关信息，不会生成摘要或执行更广泛的分析。",
   "KnowledgeBasesHint": "助手会在已连接的知识库中查找答案。",
+  "DataSources": "数据源",
+  "DataSourcesHint": "助手会处理已连接文件夹和房间中的文件。",
   "KnowledgeBaseInfo": "知识库信息",
   "KnowledgeBaseOwnerSelectorInfo": "只有房间管理员或超级管理员才能成为知识库的所有者",
   "KnowledgeBaseRemoved": "知识库已删除",

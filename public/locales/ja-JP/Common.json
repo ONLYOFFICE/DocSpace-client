@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "このナレッジベースの一部のファイルをインデックス化できませんでした。開いて該当するファイルを確認してください。",
   "KnowledgeBaseDescription": "AIエージェントにナレッジベースへのアクセスを与えます。ドキュメントはtext-embedding-3-smallモデルを使用してインデックス化されるため、エージェントはデータに基づいて検索したり質問に答えたりできます。この機能は関連情報を見つけることに特化しており、要約の生成や広範な分析は行いません。",
   "KnowledgeBasesHint": "アシスタントは接続されたナレッジベースから回答を探します。",
+  "DataSources": "データソース",
+  "DataSourcesHint": "アシスタントは接続されたフォルダーとルームのファイルを扱います。",
   "KnowledgeBaseInfo": "ナレッジベース情報",
   "KnowledgeBaseOwnerSelectorInfo": "ナレッジベースの所有者になれるのは、ルーム管理者またはスーパー管理者のみです",
   "KnowledgeBaseRemoved": "ナレッジベースが削除されました",

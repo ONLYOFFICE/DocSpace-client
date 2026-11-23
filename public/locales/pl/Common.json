@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Nie udało się zindeksować niektórych plików tej bazy wiedzy. Otwórz ją, aby zobaczyć, których.",
   "KnowledgeBaseDescription": "Zapewnij agentom AI dostęp do bazy wiedzy. Twoje dokumenty są indeksowane za pomocą modelu text-embedding-3-small, dzięki czemu agenci mogą wyszukiwać informacje i odpowiadać na pytania na podstawie Twoich danych. Ta funkcja służy do znajdowania istotnych informacji, nie generuje podsumowań ani nie przeprowadza szerszej analizy.",
   "KnowledgeBasesHint": "Asystent szuka odpowiedzi w podłączonych bazach wiedzy.",
+  "DataSources": "Źródła danych",
+  "DataSourcesHint": "Asystent pracuje z plikami w podłączonych folderach i pokojach.",
   "KnowledgeBaseInfo": "Informacje o bazie wiedzy",
   "KnowledgeBaseOwnerSelectorInfo": "Tylko administrator pokoju lub superadministrator może zostać właścicielem bazy wiedzy",
   "KnowledgeBaseRemoved": "Baza wiedzy została usunięta",

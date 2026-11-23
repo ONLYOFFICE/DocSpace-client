@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Some files of this knowledge base could not be indexed. Open it to see which ones.",
   "KnowledgeBaseDescription": "Give AI agents access to a knowledge base. Your documents are indexed using the text-embedding-3-small model, so agents can search and answer questions based on your data. This feature is built for finding relevant information, it doesn't generate summaries or perform broader analysis.",
   "KnowledgeBasesHint": "The assistant looks for answers in the connected knowledge bases.",
+  "DataSources": "Data sources",
+  "DataSourcesHint": "The assistant works with the files in the connected folders and rooms.",
   "KnowledgeBaseInfo": "Knowledge base info",
   "KnowledgeBaseOwnerSelectorInfo": "Only a room admin or Full admin can become the owner of the knowledge base",
   "KnowledgeBaseRemoved": "Knowledge base removed",

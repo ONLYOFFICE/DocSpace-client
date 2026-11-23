@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Nekaterih datotek te zbirke znanja ni bilo mogoče indeksirati. Odprite jo, da vidite, katerih.",
   "KnowledgeBaseDescription": "Agentom AI omogočite dostop do baze znanja. Vaši dokumenti so indeksirani z modelom text-embedding-3-small, tako da lahko agenti iščejo in odgovarjajo na vprašanja na podlagi vaših podatkov. Ta funkcija je namenjena iskanju ustreznih informacij, ne ustvarja pa povzetkov niti ne izvaja širše analize.",
   "KnowledgeBasesHint": "Pomočnik išče odgovore v povezanih bazah znanja.",
+  "DataSources": "Viri podatkov",
+  "DataSourcesHint": "Pomočnik dela z datotekami v povezanih mapah in sobah.",
   "KnowledgeBaseInfo": "Informacije o zbirki znanja",
   "KnowledgeBaseOwnerSelectorInfo": "Lastnik zbirke znanja lahko postane samo skrbnik sobe ali superskrbnik",
   "KnowledgeBaseRemoved": "Zbirka znanja odstranjena",

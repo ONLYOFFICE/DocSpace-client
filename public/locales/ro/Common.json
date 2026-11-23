@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Unele fișiere din această bază de cunoștințe nu au putut fi indexate. Deschideți-o pentru a vedea care.",
   "KnowledgeBaseDescription": "Oferiți agenților IA acces la o bază de cunoștințe. Documentele dvs. sunt indexate utilizând modelul text-embedding-3-small, astfel încât agenții pot căuta și răspunde la întrebări pe baza datelor dvs. Această funcție este concepută pentru a găsi informații relevante, nu generează rezumate și nu efectuează analize mai ample.",
   "KnowledgeBasesHint": "Asistentul caută răspunsuri în bazele de cunoștințe conectate.",
+  "DataSources": "Surse de date",
+  "DataSourcesHint": "Asistentul lucrează cu fișierele din folderele și camerele conectate.",
   "KnowledgeBaseInfo": "Informații despre baza de cunoștințe",
   "KnowledgeBaseOwnerSelectorInfo": "Doar un administrator al sălii sau superadministrator poate deveni proprietarul bazei de cunoștințe",
   "KnowledgeBaseRemoved": "Baza de cunoștințe eliminată",

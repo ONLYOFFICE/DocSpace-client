@@ -40,7 +40,7 @@ The designer's "DocSpace — AI Chat" boards redraw the AI section around agents
 Taken as working assumptions from the boards; each changes a requirement if answered otherwise, and design.md records the alternative.
 
 - Boards 05–07, not board 01, define the composer (designer); the slash menu takes the Knowledge bases section of board 01 and adds Data sources (built on 2026-11-16).
-- The Info panel of an agent is cut to Details and Context, with Content on the agent's own page (owner's decision, 2026-11-13; Content built on 2026-11-16); the Data sources section of Context is not built. Members are invited through "Share agent"; where roles are changed and members removed is open.
+- The Info panel of an agent is cut to Details and Context, with Content on the agent's own page (owner's decision, 2026-11-13; Content built on 2026-11-16); the Data sources section of Context lists the user's own data sources while the chat runs on the agent (built on 2026-11-23). Members are invited through "Share agent"; where roles are changed and members removed is open.
 - An agent's page has no agent switcher (2026-11-23; until then a pick in its title opened the picked agent's page). "Agent info" in the chat panel opens the Info panel on Details in place of the chat, without leaving the page; closing it brings the chat back on the agent (product owner, 2026-11-13; the designer's first answer was the agent's page).
 - The title of the chat panel is a menu for a user with no agents who may create one (designer).
 - Categories are the agents' tags, and "My agents" is the owner filter (product). Board 04 now draws the category row on the Templates tab only; whether "My agents" keeps one is open.

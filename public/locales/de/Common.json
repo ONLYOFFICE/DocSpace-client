@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Einige Dateien dieser Wissensdatenbank konnten nicht indexiert werden. Öffnen Sie sie, um zu sehen, welche.",
   "KnowledgeBaseDescription": "Geben Sie KI-Agenten Zugriff auf eine Wissensdatenbank. Ihre Dokumente werden mithilfe des Modells text-embedding-3-small indexiert, sodass Agenten anhand Ihrer Daten suchen und Fragen beantworten können. Diese Funktion ist auf das Finden relevanter Informationen ausgelegt, sie erstellt keine Zusammenfassungen und führt keine umfassendere Analyse durch.",
   "KnowledgeBasesHint": "Der Assistent sucht in den verbundenen Wissensdatenbanken nach Antworten.",
+  "DataSources": "Datenquellen",
+  "DataSourcesHint": "Der Assistent arbeitet mit den Dateien in den verbundenen Ordnern und Räumen.",
   "KnowledgeBaseInfo": "Wissensdatenbank-Informationen",
   "KnowledgeBaseOwnerSelectorInfo": "Nur ein Raum- oder Super-Administrator kann Besitzer der Wissensdatenbank werden",
   "KnowledgeBaseRemoved": "Wissensdatenbank entfernt",

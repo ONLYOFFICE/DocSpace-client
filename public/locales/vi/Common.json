@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Không thể lập chỉ mục một số tệp của cơ sở kiến thức này. Hãy mở nó để xem đó là những tệp nào.",
   "KnowledgeBaseDescription": "Cung cấp cho các tác nhân AI quyền truy cập vào cơ sở kiến thức. Tài liệu của bạn được lập chỉ mục bằng mô hình text-embedding-3-small, giúp tác nhân tìm kiếm và trả lời câu hỏi dựa trên dữ liệu của bạn. Tính năng này được thiết kế để tìm thông tin liên quan, không tạo bản tóm tắt hay thực hiện phân tích rộng hơn.",
   "KnowledgeBasesHint": "Trợ lý tìm câu trả lời trong các cơ sở tri thức đã kết nối.",
+  "DataSources": "Nguồn dữ liệu",
+  "DataSourcesHint": "Trợ lý làm việc với các tệp trong thư mục và phòng đã kết nối.",
   "KnowledgeBaseInfo": "Thông tin cơ sở kiến thức",
   "KnowledgeBaseOwnerSelectorInfo": "Chỉ quản trị viên phòng hoặc siêu quản trị viên có thể trở thành chủ sở hữu của cơ sở kiến thức",
   "KnowledgeBaseRemoved": "Đã xóa cơ sở kiến thức",

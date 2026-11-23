@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Non è stato possibile indicizzare alcuni file di questa base di conoscenza. Aprila per vedere quali.",
   "KnowledgeBaseDescription": "Dai agli agenti IA accesso a una base di conoscenza. I tuoi documenti vengono indicizzati utilizzando il modello text-embedding-3-small, così gli agenti possono cercare e rispondere a domande in base ai tuoi dati. Questa funzionalità è pensata per trovare informazioni pertinenti; non genera riepiloghi né esegue analisi più ampie.",
   "KnowledgeBasesHint": "L'assistente cerca le risposte nelle basi di conoscenza collegate.",
+  "DataSources": "Origini dati",
+  "DataSourcesHint": "L'assistente lavora con i file delle cartelle e delle stanze collegate.",
   "KnowledgeBaseInfo": "Informazioni sulla base di conoscenza",
   "KnowledgeBaseOwnerSelectorInfo": "Solo un amministratore della stanza o superamministratore può diventare proprietario della base di conoscenza",
   "KnowledgeBaseRemoved": "La base di conoscenza è stata rimossa",

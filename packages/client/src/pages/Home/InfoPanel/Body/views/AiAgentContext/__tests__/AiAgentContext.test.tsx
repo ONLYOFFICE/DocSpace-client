@@ -10,10 +10,31 @@ const api = vi.hoisted(() => ({
 const store = vi.hoisted(() => ({
   openEditDialogById: vi.fn(),
   projectRevisions: {} as Record<number, number>,
+  // The agent the chat runs on (`aiPresetsStore`).
+  activePreset: null as { id: string } | null,
+}));
+// The chat's own stores: its data sources and the selector that adds one.
+const chat = vi.hoisted(() => ({
+  folders: [] as { cloud: string; room: { id: string; name: string; kind?: string } }[],
+  deselectFolderContext: vi.fn(),
+  addDataSource: null as (() => void) | null,
 }));
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 vi.mock("SRC_DIR/store/useStore", () => ({ useStore: () => store }));
+vi.mock("@onlyoffice/ai-chat", () => ({ FOLDER_CONTEXTS_LIMIT: 2 }));
+vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
+  useStores: () => ({
+    useCloudsStore: (pick: (state: object) => unknown) =>
+      pick({
+        selectedFolderContexts: chat.folders,
+        deselectFolderContext: chat.deselectFolderContext,
+      }),
+  }),
+}));
+vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store", () => ({
+  useAiChatStoreOptional: () => ({ addDataSource: chat.addDataSource }),
+}));
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
@@ -48,6 +69,10 @@ beforeEach(() => {
     .mockResolvedValue([{ id: 1, skills: [{ id: "9", name: "clause-check", description: "Checks" }] }]);
   store.openEditDialogById.mockReset();
   store.projectRevisions = observable({});
+  store.activePreset = null;
+  chat.folders = [];
+  chat.deselectFolderContext.mockReset();
+  chat.addDataSource = null;
 });
 
 describe("AiAgentContext", () => {
@@ -135,6 +160,57 @@ describe("AiAgentContext", () => {
     expect(screen.getByTestId("ai-agent-context-knowledge-hint").textContent).toBe("Common:KnowledgeBasesHint");
     expect(screen.queryAllByTestId("room")).toEqual([]);
     expect(skills.textContent).toBe("Common:SkillSetsCommon:SkillSetsHint");
+  });
+
+  describe("Data sources", () => {
+    const folder = (id: string, name: string, kind?: string) => ({
+      cloud: "docspace",
+      room: { id, name, ...(kind ? { kind } : {}) },
+    });
+
+    it("are left out while the chat does not run on the agent", async () => {
+      store.activePreset = { id: "8" };
+      chat.folders = [folder("20", "Contracts")];
+      render(<AiAgentContext id={7} />);
+      await screen.findByTestId("ai-agent-context");
+      expect(screen.queryByTestId("ai-agent-context-data-sources")).toBeNull();
+    });
+
+    it("list the folders and rooms of the chat on the agent, each with its remove control", async () => {
+      store.activePreset = { id: "7" };
+      chat.folders = [folder("20", "Contracts"), folder("21", "Sales room", "room")];
+      render(<AiAgentContext id={7} />);
+      const section = await screen.findByTestId("ai-agent-context-data-sources");
+      expect(section.textContent).toContain("Common:DataSourcesHint");
+      const rows = screen.getAllByTestId("ai-agent-context-data-source");
+      expect(rows.map((row) => row.textContent)).toEqual(["Contracts", "Sales room"]);
+
+      fireEvent.click(screen.getAllByTestId("ai-agent-context-remove-data-source")[1]);
+      expect(chat.deselectFolderContext).toHaveBeenCalledWith("docspace", "21");
+    });
+
+    it("offer \"Manage sources...\" to a member who cannot edit the agent, until the limit", async () => {
+      api.getAiProject.mockResolvedValue(project(false));
+      store.activePreset = { id: "7" };
+      chat.addDataSource = vi.fn();
+      chat.folders = [folder("20", "Contracts")];
+      const { unmount } = render(<AiAgentContext id={7} />);
+      fireEvent.click(await screen.findByTestId("ai-agent-context-manage-data-sources"));
+      expect(chat.addDataSource).toHaveBeenCalledTimes(1);
+      unmount();
+
+      chat.folders = [folder("20", "Contracts"), folder("21", "Sales")];
+      render(<AiAgentContext id={7} />);
+      await screen.findByTestId("ai-agent-context-data-sources");
+      expect(screen.queryByTestId("ai-agent-context-manage-data-sources")).toBeNull();
+    });
+
+    it("show the caption and the line only when the chat has none", async () => {
+      store.activePreset = { id: "7" };
+      render(<AiAgentContext id={7} />);
+      const section = await screen.findByTestId("ai-agent-context-data-sources");
+      expect(section.textContent).toBe("Common:DataSourcesCommon:DataSourcesHint");
+    });
   });
 
   it("says so when the agent cannot be read", async () => {

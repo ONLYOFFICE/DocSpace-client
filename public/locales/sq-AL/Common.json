@@ -1421,6 +1421,8 @@
   "KnowledgeBaseIndexingFailedInfo": "Disa skedarë të kësaj baze njohurish nuk mund të indeksoheshin. Hapeni për të parë cilët.",
   "KnowledgeBaseDescription": "Jepuni agjentëve IA akses në një bazë njohurish. Dokumentet tuaja indeksohen duke përdorur modelin text-embedding-3-small, në mënyrë që agjentët të kërkojnë dhe të përgjigjen pyetjeve bazuar në të dhënat tuaja. Ky funksion është krijuar për të gjetur informacion përkatës, nuk gjeneron përmbledhje dhe as nuk kryen analizë më të gjerë.",
   "KnowledgeBasesHint": "Asistenti kërkon përgjigje në bazat e lidhura të njohurive.",
+  "DataSources": "Burimet e të dhënave",
+  "DataSourcesHint": "Asistenti punon me skedarët në dosjet dhe dhomat e lidhura.",
   "KnowledgeBaseInfo": "Informacion për bazën e njohurive",
   "KnowledgeBaseOwnerSelectorInfo": "Vetëm një administrator i dhomës ose superadministrator mund të bëhet pronar i bazës së njohurive",
   "KnowledgeBaseRemoved": "Baza e njohurive u hoq",

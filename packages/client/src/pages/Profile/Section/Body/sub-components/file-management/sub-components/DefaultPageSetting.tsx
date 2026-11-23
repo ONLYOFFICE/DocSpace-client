@@ -52,6 +52,8 @@ type Props = {
   userType?: UserStore["userType"];
   aiServicesEnabled?: SettingsStore["aiServicesEnabled"];
   isPrivateRoomsSectionAvailable?: boolean;
+  isRoomsSectionAvailable?: boolean;
+  isFormsSectionAvailable?: boolean;
 };
 
 const StartPageSettingComponent = ({
@@ -60,6 +62,8 @@ const StartPageSettingComponent = ({
   userType,
   aiServicesEnabled,
   isPrivateRoomsSectionAvailable,
+  isRoomsSectionAvailable,
+  isFormsSectionAvailable,
 }: Props) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
@@ -101,6 +105,8 @@ const StartPageSettingComponent = ({
         isGuest,
         aiServicesEnabled,
         isPrivateRoomsSectionAvailable,
+        isRoomsSectionAvailable,
+        isFormsSectionAvailable,
       }),
     );
   };
@@ -156,6 +162,8 @@ export const DefaultPageSetting = inject(
       userType,
       aiServicesEnabled,
       isPrivateRoomsSectionAvailable: appsStore.isPrivateRoomsSectionAvailable,
+      isRoomsSectionAvailable: appsStore.isInstalled("ai-rooms"),
+      isFormsSectionAvailable: appsStore.isInstalled("ai-forms"),
     };
   },
 )(observer(StartPageSettingComponent));

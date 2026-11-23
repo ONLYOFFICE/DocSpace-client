@@ -43,6 +43,19 @@ const SHARE_NONE = 0;
 const SHARE_READ = 2;
 const LINK_TYPE_EXTERNAL = 1;
 
+/** RoomType.CustomRoom and .VirtualDataRoom (CreateRoomRequestDto.cs). */
+const ROOM_TYPE_CUSTOM = 5;
+const ROOM_TYPE_VDR = 8;
+
+/**
+ * FileSecurity.GetLinksSettings, asked for a link with key material: a
+ * Custom room takes one primary and five additional links to the room, a
+ * room of another type none; a file or a folder takes six of each kind.
+ */
+const ROOM_PRIMARY_LINKS = 1;
+const ROOM_ADDITIONAL_LINKS = 5;
+const ITEM_LINKS = 6;
+
 /** LinkKeyMaterial.KeyBytes and .MaxPrivateKeyEncLength. */
 const KEY_BYTES = 32;
 const MAX_PRIVATE_KEY_ENC_LENGTH = 4096;
@@ -85,6 +98,8 @@ export type PrivateLinksHandlerHandle = {
 
 export type PrivateLinksHandlerOptions = {
   roomId: number;
+  /** RoomType of the private room; a Custom room unless said otherwise. */
+  roomType?: number;
   folderIds?: number[];
   fileIds?: number[];
   /** Ids a user, a group or another share holds, which a new link cannot take. */
@@ -134,7 +149,11 @@ const hasKeyLength = (value?: string) => {
  * set to FileShare.None is revoked with its key material. The answer of a
  * link carries `passwordRequired` and `linkPublicKey`, never the sealed key
  * or the proof hash, and its address is the short one, without a fragment.
- * A member who does not manage the links reads an empty list.
+ * A member who does not manage the links reads an empty list. A new link
+ * over the limit of its entry is refused with 403 and the message of
+ * ErrorMessage_MaxLinksCount (SetAceLinkAsync turns the warning of
+ * SetAceObjectAsync into an InvalidOperationException), and a link in a
+ * Virtual Data Room is for portal users whatever the request asks.
  */
 export const privateLinksHandlers = (
   port: string,
@@ -184,6 +203,14 @@ export const privateLinksHandlers = (
     canRevoke: true,
     subjectType: link.primary ? 4 : 1,
   });
+
+  const roomType = opts.roomType ?? ROOM_TYPE_CUSTOM;
+
+  const limitOf = (entry: string, primary: boolean) => {
+    if (entry.indexOf("room:") !== 0) return ITEM_LINKS;
+    if (roomType !== ROOM_TYPE_CUSTOM) return 0;
+    return primary ? ROOM_PRIMARY_LINKS : ROOM_ADDITIONAL_LINKS;
+  };
 
   const set = async (entry: string, isFile: boolean, request: Request) => {
     const body = (await request.json()) as LinkBody;
@@ -235,12 +262,29 @@ export const privateLinksHandlers = (
     const expirationDate = body.expirationDate ?? null;
     if (!passwordRequired && !(isFile && expirationDate)) return denied();
 
+    if (!existing) {
+      const primary = !!body.primary;
+      const limit = limitOf(entry, primary);
+      const held = links.filter(
+        (link) => link.entry === entry && link.primary === primary,
+      ).length;
+      if (held >= limit) {
+        return refusal(
+          403,
+          `The maximum number of links may not exceed ${limit}`,
+        );
+      }
+    }
+
     const link: PrivateLinkRecord = {
       id: body.linkId || `00000000-0000-4000-8000-${String(nextCode++).padStart(12, "0")}`,
       entry,
       title: body.title || existing?.title || "External link",
       expirationDate,
-      internal: body.internal ?? existing?.internal ?? false,
+      internal:
+        roomType === ROOM_TYPE_VDR
+          ? true
+          : (body.internal ?? existing?.internal ?? false),
       primary: body.primary ?? existing?.primary ?? false,
       passwordRequired,
       linkPublicKey: body.linkPublicKey ?? existing!.linkPublicKey,

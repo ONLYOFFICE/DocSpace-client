@@ -176,6 +176,21 @@ What the server does at this commit:
   reports no link settings to a listing, so no count of links comes with
   an entry; only the link-setting path asks for the limit of a room of
   the same type.
+- **How many, and where** (read again on 2026-11-23 for task 3.2,
+  `FileSecurity.GetLinksSettings` and its two tables). To the room itself:
+  a Custom room takes one primary and five additional links; a
+  Collaboration room and a Virtual Data Room have no entry in the table,
+  so a link to such a room is refused. To a folder or a file of a Custom,
+  a Collaboration or a Virtual Data room: six additional links, and the
+  same six for a primary one, since the table names none and the
+  additional limit stands in. The count is checked only when a link is
+  made. Over the limit the request answers 403 with "The maximum number of
+  links may not exceed N": `SetAceObjectAsync` skips the link with a
+  warning and `SetAceLinkAsync` turns the warning into an
+  `InvalidOperationException`.
+- **Audience** (`FileSharingAceHelper.SetAceObjectAsync`). In a Virtual
+  Data Room the internal flag of a link is set to true whatever the
+  request sends; elsewhere it is taken as sent.
 - **Storage.** Two tables, the key material of a link and the wraps of a
   link's secret per user, both left out of a backup. The key material is
   written before the share record and put back when the record fails;

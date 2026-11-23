@@ -291,3 +291,74 @@ describe("privateLinks mock - Password of a link of a private item is replaced w
     expect(handle.current!.getLinks()[0]).toEqual(before);
   });
 });
+
+describe("privateLinks mock (mirrors FileSecurity.GetLinksSettings) - the links an entry takes", () => {
+  const OTHER_PORT = "3235";
+  const otherUrl = (path: string) =>
+    `${BASE_URL}:${OTHER_PORT}/${API_PREFIX}/files/${path}/links`;
+  const putTo = async (path: string, body: Record<string, unknown>) => {
+    const res = await fetch(otherUrl(path), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ access: 2, ...body }),
+    });
+    return { status: res.status, body: await res.json() };
+  };
+  const useRoomOfType = (roomType: number) =>
+    server.use(
+      ...privateLinksHandlers(OTHER_PORT, {
+        roomId: ROOM_ID,
+        fileIds: [FILE_ID],
+        roomType,
+      }),
+    );
+
+  it("Limit of links reached", async () => {
+    for (let i = 0; i < 5; i += 1) {
+      expect(
+        (await put(ROOM, { linkType: 1, ...(await material()) })).status,
+      ).toBe(200);
+    }
+    const sixth = await put(ROOM, { linkType: 1, ...(await material()) });
+    const primary = await put(ROOM, {
+      linkType: 1,
+      primary: true,
+      ...(await material()),
+    });
+
+    expect(sixth.status).toBe(403);
+    expect(sixth.body.error.message).toBe(
+      "The maximum number of links may not exceed 5",
+    );
+    expect(primary.status).toBe(200);
+    expect(handle.current!.getLinks()).toHaveLength(6);
+  });
+
+  it("Limit of links reached: a file takes six", async () => {
+    for (let i = 0; i < 6; i += 1) await put(FILE, await material());
+
+    expect((await put(FILE, await material())).status).toBe(403);
+  });
+
+  it("Room of a type without room links", async () => {
+    useRoomOfType(2);
+
+    const toRoom = await putTo(ROOM, { linkType: 1, ...(await material()) });
+    const toFile = await putTo(FILE, await material());
+
+    expect(toRoom.status).toBe(403);
+    expect(toFile.status).toBe(200);
+  });
+
+  it("Private virtual data room", async () => {
+    useRoomOfType(8);
+
+    const { status, body } = await putTo(FILE, {
+      ...(await material()),
+      internal: false,
+    });
+
+    expect(status).toBe(200);
+    expect(body.response.sharedTo.internal).toBe(true);
+  });
+});

@@ -43,7 +43,6 @@ import type { TTranslation } from "@docspace/shared/types";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { isMobile, getCountTilesInGrid } from "@docspace/shared/utils";
-import { RoomsType } from "@docspace/shared/enums";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 
@@ -1096,12 +1095,7 @@ class HotkeyStore {
     const { filesList } = this.filesStore;
     const isRooms = filesList.some((item) => item.isRoom && !item.isTemplate);
     const isTemplates = filesList.some((item) => item.isTemplate);
-    // Agents take the wide card grid; skill sets and knowledge bases are
-    // laid out in the columns of rooms.
-    const isAgents = filesList.some(
-      (item) => item.isRoom && item.roomType === RoomsType.AiProjectRoom,
-    );
-    return getCountTilesInGrid(isRooms, isTemplates, isAgents);
+    return getCountTilesInGrid(isRooms, isTemplates);
   }
 
   get division() {

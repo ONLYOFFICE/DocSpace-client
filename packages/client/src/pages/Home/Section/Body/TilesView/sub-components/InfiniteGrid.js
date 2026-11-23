@@ -60,10 +60,10 @@ const HeaderItem = ({ children, className, ...rest }) => {
 // The rooms of the AI section - an agent, a skill set, a knowledge base - are
 // rooms to the tile container, which wraps them as one; their tiles are
 // taller, so they are told apart by the room type of the item. An agent's
-// card holds five rows, a skill set's four and a knowledge base's three.
-// Keep in step with AiProjectTile.module.scss.
+// card holds five rows, a skill set's four and a knowledge base's three,
+// all in the columns of rooms. Keep in step with AiProjectTile.module.scss.
 const AI_TILE_HEIGHTS = {
-  [RoomsType.AiProjectRoom]: 290,
+  [RoomsType.AiProjectRoom]: 202,
   [RoomsType.InstructionsRoom]: 173,
   [RoomsType.KnowledgeRoom]: 145,
 };
@@ -78,11 +78,6 @@ const getAiTileHeight = (child) => {
   const height = AI_TILE_HEIGHTS[getTileRoomType(child)];
   return height ? height + VERTICAL_ROOM_GAP : 0;
 };
-
-// Only an agent's cards are wide, two to a row; a skill set's and a
-// knowledge base's are laid out in the columns of rooms.
-const isAgentTile = (child) =>
-  getTileRoomType(child) === RoomsType.AiProjectRoom;
 
 const Card = ({ children, ...rest }) => {
   const getItemSize = (child) => {
@@ -121,16 +116,13 @@ const Card = ({ children, ...rest }) => {
 };
 
 const Item = ({ children, className, ...rest }) => {
-  // A row of agents lays out as a row of rooms, with wider and taller cards.
-  const isAgent = className === "isAgent";
-  const isRoom = className === "isRoom" || isAgent;
+  const isRoom = className === "isRoom";
   const isTemplate = className === "isTemplate";
   return (
     <StyledItem
       className={`Item ${className}`}
       isRoom={isRoom}
       isTemplate={isTemplate}
-      isAgent={isAgent}
       {...rest}
     >
       {children}
@@ -148,14 +140,13 @@ const InfiniteGrid = (props) => {
     currentFolderId,
     isRooms,
     isTemplates,
-    isAgents,
     tilesGridColumns,
     setTilesGridColumns,
     ...rest
   } = props;
 
   const countTilesInRow =
-    tilesGridColumns || getCountTilesInGrid(isRooms, isTemplates, isAgents);
+    tilesGridColumns || getCountTilesInGrid(isRooms, isTemplates);
 
   const observeRow = useGridColumns(setTilesGridColumns);
 
@@ -212,12 +203,6 @@ const InfiniteGrid = (props) => {
 
     if (isTemplate) return "isTemplate";
 
-    const isAgent = useTempList
-      ? isAgentTile(card.props.children)
-      : listItem.props.className.includes("isAgent");
-
-    if (isAgent) return "isAgent";
-
     return "isRoom";
   };
 
@@ -244,9 +229,7 @@ const InfiniteGrid = (props) => {
         const isTemplate = child?.props?.className?.includes("template");
         const cls = isFile
           ? "isFile"
-          : isAgentTile(child)
-            ? "isAgent"
-            : isRoom
+          : isRoom
             ? "isRoom"
             : isTemplate
               ? "isTemplate"
@@ -289,7 +272,7 @@ const InfiniteGrid = (props) => {
           key={key}
           className={`tiles-loader ${type}`}
           isFolder={type === "isFolder"}
-          isRoom={type === "isRoom" || type === "isAgent"}
+          isRoom={type === "isRoom"}
         />,
       );
     }
@@ -304,9 +287,9 @@ const InfiniteGrid = (props) => {
   }
   // The grid caches its row heights and measures them again only when this
   // key changes. The folder alone is not enough: Agents, Skill sets and
-  // Knowledge bases are one folder narrowed to a room type, and an agent's
-  // row is taller than a room's, so the kinds of rows shown are part of it -
-  // and the room types of the AI cards, each as high as its own rows.
+  // Knowledge bases are one folder narrowed to a room type, so the kinds of
+  // rows shown are part of it - and the room types of the AI cards, each as
+  // high as its own rows.
   const rowKinds = [
     ...new Set(list.map((row) => row.props.className ?? "")),
     ...aiRoomTypes,
@@ -350,15 +333,8 @@ export default inject(
 
     const currentFolderId = selectedFolderStore.id;
 
-    // The list of agents: its rows are wide cards, two to a row (see
-    // isAgentTile).
-    const isAgents =
-      isAiSectionFolder &&
-      filesList.some((item) => item.roomType === RoomsType.AiProjectRoom);
-
     return {
       filesList,
-      isAgents,
       hasMoreFiles,
       filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,

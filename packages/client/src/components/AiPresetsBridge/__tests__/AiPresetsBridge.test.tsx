@@ -66,7 +66,6 @@ vi.mock("../DeleteAgentDialog", () => ({
 const openEditAiProject = vi.fn();
 const changeSkillRooms = vi.fn();
 const inviteToRoom = vi.fn();
-const requestAiChatPage = vi.fn();
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 
 /** The slice of the panel store the bridge drives, observable so its reactions fire. */
@@ -259,7 +258,6 @@ const renderBridge = (
           setPortalHasChatModel,
         }}
         contextOptionsStore={{ onClickInviteUsers: inviteToRoom }}
-        dialogsStore={{ requestAiChatPage }}
         filesStore={{ setSelection, setBufferSelection }}
         infoPanelStore={Object.assign(infoPanel.state, { setView: setInfoPanelView })}
         userStore={{ user }}
@@ -886,30 +884,12 @@ describe("AiPresetsBridge", () => {
     });
   });
 
-  it("hands the agents to an open agent's page as its title menu: the open one picked, a pick opens that agent's page", async () => {
+  it("offers no agents menu on an open agent's page", async () => {
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
     const store = new AiPresetsStore();
     renderBridge(store, { path: "/ai-rooms/1/filter", activeProject: { id: 1 } });
     await flush();
-    expect(aiChatStore.agentPicker?.agents.map((a) => a.name)).toEqual(["Sales", "Legal"]);
-    expect(aiChatStore.agentPicker?.selectedId).toBe("1");
-
-    act(() => aiChatStore.agentPicker?.onSelect("1"));
-    expect(mockNavigate).not.toHaveBeenCalled();
-
-    act(() => aiChatStore.agentPicker?.onSelect("2"));
-    expect(mockNavigate).toHaveBeenCalledWith("/ai-rooms/2/filter?folder=2");
-    // The chat is not put on another agent: the page is that agent.
-    expect(store.activePreset).toBeNull();
-  });
-
-  it("opens AI Chat for the default agent picked on an agent's page", async () => {
-    const store = new AiPresetsStore();
-    renderBridge(store, { path: "/ai-rooms/1/filter", activeProject: { id: 1 } });
-    await flush();
-    act(() => aiChatStore.agentPicker?.onSelect(null));
-    expect(requestAiChatPage).toHaveBeenCalledWith("chat", expect.any(String));
-    expect(mockNavigate).toHaveBeenCalledWith(expect.stringMatching(/^\/ai-rooms\/filter\?/));
+    expect(aiChatStore.agentPicker).toBeNull();
   });
 
   describe("a pick still being read", () => {

@@ -1,14 +1,14 @@
 {
   "key_path": "GuestCantCreateOrUploadDescription",
-  "content": "Ask the Room or Full admin for additional permissions.",
-  "content_en_sha1_hash": "ca5b6e116245eee1ca433d4cc8ddaea1bfcbcfd1",
-  "created_at": "2026-08-13T14:36:53.438Z",
-  "updated_at": "2026-08-21T16:27:00.793Z",
+  "content": "A Room or Full admin can grant this permission.",
+  "content_en_sha1_hash": "c1a2b3c99e3bc206565984c4924d5b77cfa1d358",
+  "created_at": "2026-11-23T09:29:27.159Z",
+  "updated_at": "2026-11-23T09:30:57.917Z",
   "comment": {
-    "text": "Instructional text within a tooltip that appears when a guest user lacks the necessary permissions to create or upload files.",
+    "text": "Second line of the tooltip a guest sees over the create and upload actions on the Dashboard, under the line saying that guests cannot create or upload files. It names who can give the right, without telling the guest to contact anyone.",
     "is_auto": true,
-    "updated_at": "2026-08-13T14:48:50.367Z",
-    "model": "gemma4:26b"
+    "updated_at": "2026-11-23T09:30:57.917Z",
+    "model": "claude-fable-5-2"
   },
   "usage": [
     {

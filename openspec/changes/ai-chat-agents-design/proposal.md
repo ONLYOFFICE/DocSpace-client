@@ -16,7 +16,7 @@ The designer's "DocSpace — AI Chat" boards redraw the AI section around agents
 - **Vocabulary.** Every user-facing text calls a room of type 12 an agent: the room type "AI agent", the roles Agent owner, Agent manager and Member, the create and edit dialogs, menus, toasts and views.
 - **Conversations belong to an agent.** **BREAKING** for the old rule "one global scope per user": a conversation belongs to the agent it was started on, or to the default agent. An agent's history lists that agent's conversations; the default agent's history and the sidebar's Recent list all of the user's conversations. Picking an agent switches the chat to it instead of applying its settings to the conversation in progress, and a chat on an agent follows the agent's settings on its page and in the chat panel alike.
 - **Chat panel.** The title menu shows the picked agent's logo, ends with "Save as new agent" (the header's save icon goes), and a picked agent gets an "Agent actions" menu with its own history list; the header changes with it.
-- **Agent page.** The title is an agent switcher, followed by chat history, new chat, the agent's actions and a "Share agent" button; the actions are worded for agents.
+- **Agent page.** The title is the agent's logo and name (no agent switcher: agents are picked in the chat panel only, decided 2026-11-23), followed by chat history, new chat, the agent's actions and a "Share agent" button; the actions are worded for agents.
 - **Agents list.** Category tabs (All, My agents, tags) and cards with a description, an "Open chat" button and stacked skill sets and knowledge bases.
 - **Templates.** The Agents list gets two tabs over the filter, "My agents" and "Templates". The Templates tab shows the agent templates shipped with ASC.AI.Chat (three agents in each of Document, Presentation and Tables, with a skill set and a knowledge base each) as cards and installs one into the portal as new rooms; a selected template shows its Details and "Add to my agents" in the Info panel. Skill sets and Knowledge bases have no tabs.
 - **Skill sets.** The list shows each set's number of skills, owner and last change, and its Info panel lists the set's skills with their commands. An opened skill set lists its skills by name, description and date; a skill's Details show its description, set, owner and command and open its instructions read-only; "Edit skill" edits them in a modal with a Markdown toolbar. A set and a skill can be used in a new chat from their row.
@@ -40,13 +40,13 @@ The designer's "DocSpace — AI Chat" boards redraw the AI section around agents
 Taken as working assumptions from the boards; each changes a requirement if answered otherwise, and design.md records the alternative.
 
 - Boards 05–07, not board 01, define the composer (designer); the slash menu takes the Knowledge bases section of board 01 and adds Data sources (built on 2026-11-16).
-- The Info panel of an agent is cut to Details and Context, with Content on the agent's own page (owner's decision, 2026-11-13; Content built on 2026-11-16); the Data sources section of Context is not built. Members are invited through "Share agent"; where roles are changed and members removed is open.
-- A pick in the agent switcher on an agent's page opens that agent's page, and "Agent info" in the chat panel opens the Info panel on Details in place of the chat, without leaving the page; closing it brings the chat back on the agent (product owner, 2026-11-13; the designer's first answer was the agent's page).
+- The Info panel of an agent is cut to Details and Context, with Content on the agent's own page (owner's decision, 2026-11-13; Content built on 2026-11-16); the Data sources section of Context lists the user's own data sources while the chat runs on the agent (built on 2026-11-23). Members are invited through "Share agent"; where roles are changed and members removed is open.
+- An agent's page has no agent switcher (2026-11-23; until then a pick in its title opened the picked agent's page). "Agent info" in the chat panel opens the Info panel on Details in place of the chat, without leaving the page; closing it brings the chat back on the agent (product owner, 2026-11-13; the designer's first answer was the agent's page).
 - The title of the chat panel is a menu for a user with no agents who may create one (designer).
 - Categories are the agents' tags, and "My agents" is the owner filter (product). Board 04 now draws the category row on the Templates tab only; whether "My agents" keeps one is open.
 - Templates are offered for agents only; the skill set and knowledge base templates are installed with the agent that brings them (built on 2026-11-16, client `cd7a394e82a`).
 - The agent menu on a page and on a card keeps pin, notifications, change owner, copy link and leave after the design's items (designer).
-- The default agent's history and Recent list all conversations, and opening one switches the chat to its agent (product).
+- The default agent's history and Recent list all conversations, and opening one switches the chat to its agent (product). Recent was taken out of this on 2026-11-23: it lists the default agent's conversations only and always opens the chat on the default agent.
 - Official agents and portal-wide access (product and .NET), listed under Out of scope.
 
 ## Server work this change depends on
@@ -67,7 +67,7 @@ Each item is a contract of `../server`; what has landed is read in its source an
 - `ai-agent-access`: who is offered which agent action, by portal user type and by role in the agent.
 - `ai-agent-conversations`: which agent a conversation belongs to, what each history lists, the rules of a chat that runs on an agent, and the chat a reload brings back.
 - `ai-chat-agent-menu`: the agent menu in the chat panel title, saving the chat as a new agent, and the actions of the picked agent.
-- `ai-agent-page`: the header of an agent's own page: the agent switcher, the actions and the Share button.
+- `ai-agent-page`: the header of an agent's own page: the title, the actions and the Share button.
 - `ai-agents-list`: the Agents list: My agents and Templates tabs, the templates catalog, category tabs, cards and the agent's description.
 - `ai-skill-sets`: the Skill sets list and an opened skill set: their columns, the Info panel of a set and of a skill, View instructions, the Edit skill dialog with its Markdown toolbar, and Use in chat.
 - `ai-knowledge-bases`: the Knowledge bases list and an opened knowledge base: their columns, the indexing state of a base and of a file, their Info panel, and Use in chat.

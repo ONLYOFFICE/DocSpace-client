@@ -94,6 +94,16 @@ export const errorMessage = (e: unknown): string => {
   return String(e);
 };
 
+/**
+ * The portal's plan is not paid (the grace period): the server refuses to
+ * create an agent, as it does a room, with a bare 402 that carries no text
+ * to show (Bug 84716).
+ */
+export const isPaymentRequired = (e: unknown): boolean =>
+  typeof e === "object" &&
+  e !== null &&
+  (e as { response?: { status?: number } }).response?.status === 402;
+
 /** The project form can open on the project as it is: its settings and its model were read. */
 const canOpenInForm = (project: TAiProject) =>
   !project.aiProject.partial && !project.aiProject.modelUnread;

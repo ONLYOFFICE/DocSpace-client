@@ -48,6 +48,13 @@ export type TStartPageContext = {
   aiServicesEnabled?: boolean;
   /** The Private section is shown: the E2E rooms app is on. */
   isPrivateRoomsSectionAvailable?: boolean;
+  /**
+   * The Rooms section is shown: its app is on in Settings -> Apps. A caller
+   * that does not know leaves it out, and the section counts as shown.
+   */
+  isRoomsSectionAvailable?: boolean;
+  /** The Forms section is shown: its app is on, as for Rooms. */
+  isFormsSectionAvailable?: boolean;
 };
 
 /**
@@ -62,6 +69,8 @@ export const isStartPageAvailable = (
     isGuest = false,
     aiServicesEnabled = false,
     isPrivateRoomsSectionAvailable = false,
+    isRoomsSectionAvailable = true,
+    isFormsSectionAvailable = true,
   }: TStartPageContext = {},
 ) => {
   if (folderType === FolderType.USER) return !isGuest;
@@ -69,6 +78,10 @@ export const isStartPageAvailable = (
   // Spec: private-rooms/sidebar-section, "Section is a start page option while available"
   if (folderType === FolderType.PrivateRooms)
     return isPrivateRoomsSectionAvailable;
+  // A section switched off in Settings -> Apps is gone from the sidebar, so
+  // it is no start page either (Bug 84835).
+  if (folderType === FolderType.Rooms) return isRoomsSectionAvailable;
+  if (folderType === FolderType.Forms) return isFormsSectionAvailable;
 
   return true;
 };
@@ -91,8 +104,10 @@ export const getEffectiveDefaultFolderType = (
   if (isStartPageAvailable(type, context)) return type;
 
   // A private room opens in Rooms while its section is not shown, so a
-  // start page set to Private opens Rooms then, not Home.
-  return type === FolderType.PrivateRooms
+  // start page set to Private opens Rooms then, not Home - unless Rooms is
+  // switched off as well.
+  return type === FolderType.PrivateRooms &&
+    isStartPageAvailable(FolderType.Rooms, context)
     ? FolderType.Rooms
     : FolderType.DEFAULT;
 };

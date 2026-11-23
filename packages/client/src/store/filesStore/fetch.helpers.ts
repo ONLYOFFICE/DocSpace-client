@@ -711,6 +711,33 @@ export function fetchFilesImpl(
     });
 }
 
+/**
+ * The filter the rooms list is read again with after a quota change. A caller
+ * that names one keeps it. Without one the list stays in the section it
+ * shows: Templates start from their default, and every other section but
+ * Rooms keeps its own filter - a default one would answer with the rooms of
+ * the Rooms section in place of AI rooms, forms, private or archived rooms.
+ */
+export function getQuotaRefreshFilter(
+  self: FilesStore,
+  filter: Nullable<TRoomsFilter>,
+): Nullable<TRoomsFilter> {
+  if (filter) return filter;
+
+  const { searchArea } = self.roomsFilter;
+
+  if (searchArea === RoomSearchArea.Templates) {
+    const newFilter = RoomsFilter.getDefault(self.userStore.user?.id);
+    newFilter.searchArea = RoomSearchArea.Templates;
+    return newFilter;
+  }
+
+  if (searchArea && searchArea !== RoomSearchArea.Active)
+    return self.roomsFilter;
+
+  return null;
+}
+
 export function fetchRoomsImpl(
   self: FilesStore,
   folderId: Nullable<number | string>,

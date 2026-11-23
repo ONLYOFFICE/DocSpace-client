@@ -71,6 +71,7 @@ import type {
   NavSubItem,
 } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
@@ -164,6 +165,10 @@ const AI_ROOM_TYPES: Partial<Record<FolderType, RoomsType>> = {
   [FolderType.KnowledgeRoom]: RoomsType.KnowledgeRoom,
   [FolderType.AiProjectRoom]: RoomsType.AiProjectRoom,
 };
+
+// How long a fullscreen chat waits for the page of a clicked entry to say
+// it is shown before it closes anyway.
+const CHAT_CLOSE_TIMEOUT = 10000;
 
 // The path of the AI section's lists: Agents, and Skill sets and Knowledge
 // bases, which narrow it with `type`.
@@ -261,16 +266,49 @@ const ClientArticleSidebar = ({
   // it, so the chat closes rather than shrinking to the side panel over the
   // entry's page - Agents shows the projects list, not the chat beside it.
   // A side-panel chat stays open across sections, as before.
+  //
+  // The AI Chat page closes once the entry's page says it is shown
+  // (`END_ANIMATION`), not at the click: closed at once, it uncovered the
+  // agents list it lies over for as long as the entry's own list took to
+  // load. A page that never says so is not waited for longer than
+  // `CHAT_CLOSE_TIMEOUT`, and a chat asked for again meanwhile is left open.
+  const pendingChatCloseRef = React.useRef<(() => void) | null>(null);
+  const cancelChatClose = React.useCallback(() => {
+    pendingChatCloseRef.current?.();
+    pendingChatCloseRef.current = null;
+  }, []);
+  React.useEffect(() => cancelChatClose, [cancelChatClose]);
+  const isAiProjectRoomRootRef = React.useRef(isAiProjectRoomRoot);
+  isAiProjectRoomRootRef.current = isAiProjectRoomRoot;
+  const leaveFullscreenChat = React.useCallback(() => {
+    if (!aiChatStore?.effectiveFullscreen) return;
+    cancelChatClose();
+    if (isAiProjectRoomRootRef.current) {
+      aiChatStore.close();
+      return;
+    }
+    const close = () => {
+      cancelChatClose();
+      if (aiChatStore.effectiveFullscreen) aiChatStore.close();
+    };
+    const timer = window.setTimeout(close, CHAT_CLOSE_TIMEOUT);
+    window.addEventListener(AnimationEvents.END_ANIMATION, close);
+    pendingChatCloseRef.current = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener(AnimationEvents.END_ANIMATION, close);
+    };
+  }, [aiChatStore, cancelChatClose]);
+
   const nav = React.useCallback(
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
       onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
-        if (aiChatStore?.effectiveFullscreen) aiChatStore.close();
+        leaveFullscreenChat();
         onFolderNavigateRef.current?.();
         if (!meta?.isLink) navigate(path);
       },
     }),
-    [navigate, aiChatStore],
+    [navigate, leaveFullscreenChat],
   );
 
   const folderUrl = React.useCallback(
@@ -342,10 +380,11 @@ const ClientArticleSidebar = ({
   // path, which closes the chat that covers the main area.
   const locationRef = React.useRef(location);
   locationRef.current = location;
-  const isAiProjectRoomRootRef = React.useRef(isAiProjectRoomRoot);
-  isAiProjectRoomRootRef.current = isAiProjectRoomRoot;
   const openAiChatPage = React.useCallback(
     (page: "chat" | "history", threadId?: string) => () => {
+      // The chat is asked for again: a close still waiting for the entry
+      // left before it is called off.
+      cancelChatClose();
       const current = locationRef.current;
       const isOnAgentsList =
         current.pathname === AI_AGENTS_PATH &&
@@ -361,7 +400,7 @@ const ClientArticleSidebar = ({
       onFolderNavigateRef.current?.();
       navigate(aiAgentsUrl);
     },
-    [requestAiChatPage, navigate, aiAgentsUrl],
+    [requestAiChatPage, navigate, aiAgentsUrl, cancelChatClose],
   );
 
   // While the chat covers the page, fullscreen, the entry it was opened as

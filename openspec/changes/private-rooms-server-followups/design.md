@@ -300,6 +300,37 @@ Not checked: the AI tab as the editor shows it, a session of the editor
 open while the app is switched off, the client's own pages, and a portal
 that is not standalone.
 
+### Check on a portal that is not standalone, 2026-11-23
+
+The test portal of the owner, DocSpace 4.1.0.12505 with Document Server
+10.0.3.60, `standalone: false`. It runs the server of `release/v4.1.0`,
+without the changes of the paired branch, so it shows the release as it
+is and the client on a portal that is not standalone.
+
+- `GET api/2.0/apps` lists `e2e-rooms`, enabled. Whether the production
+  configuration lists it is not known from here.
+- `PUT api/2.0/apps/e2e-rooms/enabled` is accepted on such a portal, from
+  the portal owner. With the app off, the server of the release answers
+  404 for the section listing and leaves the Private root out of the root
+  folders, and still serves a private room by id, its members, its keys
+  and the rooms listing with private rooms in it.
+- The client with the app off: the page requests `GET api/2.0/apps` and
+  does not use the answer. The Private item stays in the sidebar with its
+  Beta badge, and the section opens and lists the rooms, since the list
+  comes from the rooms listing (`files/rooms?searchArea=PrivateRooms`),
+  which the release does not gate. Once
+  `private-rooms-server-followups` 2.5 is on such a portal, that listing
+  is empty and a room answers 404 while the item is still offered: what
+  task 3.6 changes.
+- The release as the baseline of tasks 3.2 and
+  `private-rooms-server-hardening` 16.2: the owner reads Rename,
+  ReadHistory, EditHistory, Lock, CopyLink, CustomFilter and
+  SubmitToFormGallery as true on an encrypted file and `CanUseAi` as true
+  on a private room, and `openedit` answers
+  `customization.ai.disabled: false`.
+
+The app was switched on again and the section answered as before.
+
 ## Goals / Non-Goals
 
 **Goals:**

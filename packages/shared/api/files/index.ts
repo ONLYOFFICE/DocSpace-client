@@ -519,13 +519,16 @@ export async function createFile(
   return res;
 }
 
+// The API client settles some calls with no answer: `undefined` for a 401 on
+// its way to the login page, `null` for an empty body. Only `true` and `false`
+// are answers of the server.
 export async function getTemplateGalleryAvailable() {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/files/templateGallery/available",
   };
 
-  const res = (await request(options)) as boolean;
+  const res = (await request(options)) as boolean | null | undefined;
 
   return res;
 }

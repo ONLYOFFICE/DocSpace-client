@@ -288,6 +288,60 @@ describe("OformsStore gallery availability", () => {
     expect(api.getOforms.mock.calls[0][1].locale).toBe("ru");
   });
 
+  it("does not write a list of an earlier opening while the next one is checked", async () => {
+    const oldList = deferred<TOformsList>();
+    api.getOforms.mockReturnValueOnce(oldList.promise);
+    const store = createStore();
+
+    const firstOpening = store.initTemplateGallery();
+    await vi.waitFor(() => expect(api.getOforms).toHaveBeenCalledTimes(1));
+    store.setTemplateGalleryVisible(false);
+
+    const check = deferred<boolean>();
+    filesApi.getTemplateGalleryAvailable.mockReturnValueOnce(check.promise);
+    const secondOpening = store.initTemplateGallery();
+
+    oldList.resolve(list([1]));
+    await firstOpening;
+
+    expect(store.oformFiles).toBeNull();
+
+    api.getOforms.mockResolvedValueOnce(list([2]));
+    check.resolve(true);
+    await secondOpening;
+
+    expect(store.oformFiles?.map(({ id }) => id)).toEqual([2]);
+  });
+
+  it("drops a next page of an earlier opening", async () => {
+    api.getOforms.mockResolvedValueOnce(list([1], 2));
+    const store = createStore();
+    await store.initTemplateGallery();
+
+    const nextPage = deferred<TOformsList>();
+    api.getOforms.mockReturnValueOnce(nextPage.promise);
+    const more = store.fetchMoreOforms();
+    await vi.waitFor(() => expect(api.getOforms).toHaveBeenCalledTimes(2));
+    store.setTemplateGalleryVisible(false);
+
+    nextPage.resolve(list([2], 2));
+    await more;
+
+    expect(store.oformFiles?.map(({ id }) => id)).toEqual([1]);
+    expect(store.oformsFilter.total).toBe(2);
+  });
+
+  it("loads the gallery when the check settles with no answer", async () => {
+    // The API client settles a 401 on its way to the login page with nothing
+    filesApi.getTemplateGalleryAvailable.mockResolvedValue(undefined);
+    const store = createStore();
+
+    await store.initTemplateGallery();
+
+    expect(store.oformsLoadError).toBe(false);
+    expect(api.getOforms).toHaveBeenCalledTimes(1);
+  });
+
   it("loads the gallery as before when the check itself fails", async () => {
     // A server without the check answers 404
     filesApi.getTemplateGalleryAvailable.mockRejectedValue(new Error("404"));

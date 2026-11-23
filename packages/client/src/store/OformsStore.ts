@@ -331,9 +331,16 @@ class OformsStore {
   fetchOforms = async (filter: OformsFilter = OformsFilter.getDefault()) => {
     this.listRequestId += 1;
     const requestId = this.listRequestId;
+    const openingId = this.galleryOpeningId;
 
     const oformData = await this.getOforms(filter);
-    if (requestId !== this.listRequestId) return false;
+    // A list of a closed or reopened gallery is dropped, not written as an
+    // empty one over the opening that replaced it.
+    if (
+      requestId !== this.listRequestId ||
+      openingId !== this.galleryOpeningId
+    )
+      return false;
 
     const templates = this.applyOformsList(filter, oformData);
 
@@ -370,6 +377,7 @@ class OformsStore {
     this.setOformsIsLoading(true);
 
     const requestId = this.listRequestId;
+    const openingId = this.galleryOpeningId;
     const newOformsFilter = this.oformsFilter.clone();
     newOformsFilter.page += 1;
 
@@ -379,8 +387,13 @@ class OformsStore {
       // A page of a list that has already been replaced is dropped whole,
       // the loading flag included: it now belongs to the request that
       // replaced the list, and clearing it here would let the grid paginate
-      // that list while it is still being fetched.
-      if (requestId !== this.listRequestId) return;
+      // that list while it is still being fetched. A page of a closed or
+      // reopened gallery is dropped the same way.
+      if (
+        requestId !== this.listRequestId ||
+        openingId !== this.galleryOpeningId
+      )
+        return;
 
       const newForms = this.applyOformsList(newOformsFilter, oformData);
       this.setOformsFilter(newOformsFilter);
@@ -625,15 +638,19 @@ class OformsStore {
     // The server downloads the picked template, whatever its format, and one
     // check covers every tab: a gallery it cannot reach is shown as
     // unavailable before the CMS is asked; a server without the
-    // check (404) or a failed call leaves the gallery as it was. An error of
-    // an earlier opening must not stay on screen while this one is checked.
+    // check (404) or a failed call leaves the gallery as it was. Only an
+    // explicit `false` is a refusal: the API client settles some calls with
+    // no answer at all (a 401 on its way to the login page), and that is not
+    // one. An error of an earlier opening must not stay on screen while this
+    // one is checked.
     this.galleryOpeningId += 1;
     const openingId = this.galleryOpeningId;
 
     this.oformsLoadError = false;
     this.oformsNetworkError = false;
 
-    this.templateGalleryAvailable = getTemplateGalleryAvailable().catch(
+    this.templateGalleryAvailable = getTemplateGalleryAvailable().then(
+      (available) => available !== false,
       () => true,
     );
     this.galleryReady = this.templateGalleryAvailable.then((available) =>

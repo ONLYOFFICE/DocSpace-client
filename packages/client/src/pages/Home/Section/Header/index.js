@@ -1157,7 +1157,10 @@ const SectionHeaderContent = (props) => {
                 // Share agent: the agent's chat toolbar goes before the room
                 // menu. An agent the caller is not a member of has no chat.
                 agentRights?.chat ? (
-                  <ChatToolbar keepSessionProfile />
+                  <ChatToolbar
+                    className={styles.agentChatToolbar}
+                    keepSessionProfile
+                  />
                 ) : undefined
               }
               analyzeResponsesButton={

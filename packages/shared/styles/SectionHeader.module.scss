@@ -76,6 +76,16 @@
     }
   }
 
+  // An agent's chat toolbar in the header row. The toolbar's own side
+  // paddings are for the chat panel's header; here they doubled the row's
+  // gaps around it. Without them, and with the last button's inner padding
+  // taken out of the gap before the context button, the icons of the row
+  // stand at one step.
+  .agentChatToolbar {
+    --chat-toolbar-padding-inline: 0;
+    margin-inline-end: -8px;
+  }
+
   :global(.table-container_group-menu) {
     margin-block: 0;
     margin-inline: -20px 0;

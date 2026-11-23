@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { ShareAccessRights } from "../../enums";
+
 export type TPrivacyRoomRequest = {
   id?: string;
   publicKey: string;
@@ -59,6 +61,30 @@ export type TMemberEncryptionKey = Omit<TEncryptionKeyPair, "privateKeyEnc"> & {
 
 /** A key of a prospective member: the answer never carries the private half. */
 export type TRoomCandidateKey = Omit<TEncryptionKeyPair, "privateKeyEnc">;
+
+/** The room, the folder or the file of a private room a link belongs to. */
+export type TPrivateLinkTarget =
+  | { roomId: number | string }
+  | { folderId: number | string }
+  | { fileId: number | string };
+
+/**
+ * An external link of a private item. The key material comes with a new link
+ * and with a new password; `access: ShareAccessRights.None` with the `linkId`
+ * revokes the link. The password itself is never sent.
+ */
+export type TPrivateLinkRequest = {
+  linkId?: string;
+  access?: ShareAccessRights;
+  title?: string;
+  expirationDate?: string | null;
+  internal?: boolean;
+  primary?: boolean;
+  passwordRequired?: boolean;
+  linkPublicKey?: string;
+  linkPrivateKeyEnc?: string;
+  linkProofHash?: string;
+};
 
 /** `RoomMissingFileKeysDto`: a user and the encrypted files of a room that hold no key for them. */
 export type TRoomMissingFileKeys = {

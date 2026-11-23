@@ -33,8 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { ShareAccessRights, ShareLinkType } from "../../enums";
 import { request } from "../client";
+import type { TFileLink } from "../files/types";
 import type {
+  TPrivateLinkRequest,
+  TPrivateLinkTarget,
   TPrivacyRoomRequest,
   TEncryptionKeyPair,
   TMemberEncryptionKey,
@@ -127,4 +131,35 @@ export async function deleteEncryptionKey(keyId: string): Promise<void> {
     method: "delete",
     url: `privacyroom/keys/${keyId}`,
   });
+}
+
+/**
+ * Sets, changes or revokes an external link of a private room, or of a
+ * folder or a file of one (`setRoomLink`, `setFolderPrimaryExternalLink`,
+ * `setFileExternalLink`). Such a link reads only, and its password stays in
+ * the browser: the server gets `passwordRequired` and the key material.
+ */
+export async function setPrivateItemLink(
+  target: TPrivateLinkTarget,
+  link: TPrivateLinkRequest,
+) {
+  const url =
+    "roomId" in target
+      ? `/files/rooms/${target.roomId}/links`
+      : "folderId" in target
+        ? `/files/folder/${target.folderId}/links`
+        : `/files/file/${target.fileId}/links`;
+
+  return (await request(
+    {
+      method: "put",
+      url,
+      data: {
+        access: ShareAccessRights.ReadOnly,
+        ...("roomId" in target && { linkType: ShareLinkType.External }),
+        ...link,
+      },
+    },
+    true,
+  )) as TFileLink;
 }

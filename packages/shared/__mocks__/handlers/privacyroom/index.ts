@@ -451,6 +451,8 @@ export const privacyroomAccessHandlers = (
   ];
 };
 
+export * from "./privateLinks";
+
 /** Default handler set: empty state. Tests can override with a fresh factory call. */
 export const privacyroomHandlers = (port: string) =>
   privacyroomKeysHandlers(port);

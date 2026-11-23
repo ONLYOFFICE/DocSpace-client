@@ -519,6 +519,10 @@ export type TFileLink = {
     disabled?: boolean;
     /** Whether the link belongs to a room template (returned for room external links). */
     isTemplate?: boolean;
+    /** A link of a private item: whether its visitor types a password; null on any other link. */
+    passwordRequired?: boolean | null;
+    /** A link of a private item: the public key file keys are wrapped for. */
+    linkPublicKey?: string | null;
   };
   subjectType: number;
 };

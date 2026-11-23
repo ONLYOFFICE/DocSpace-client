@@ -54,6 +54,10 @@ The system SHALL read the secret of an opened link from the part of the address 
 - **WHEN** the visitor reloads the page
 - **THEN** the item opens again from the same address, after the password when the link has one
 
+#### Scenario: Script from another origin
+- **WHEN** code on the page of a visitor asks for a script from an origin other than the portal and its Document Server
+- **THEN** the policy of the page itself refuses it, whatever policy the answer of the server carried
+
 ### Requirement: Texts name who was given access, not who is a member
 The system SHALL describe a private item that can carry an external link by who the user gave access to: the members of the room and the holders of the links the user made, with the service holding no key. It SHALL NOT say that only members can read, or use the term zero-knowledge.
 

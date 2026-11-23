@@ -474,6 +474,17 @@ none is open. The technical decisions below follow from them.
     to a link session (its task 3.4); the id is in the wrap itself. A
     visitor cannot check that key against anything, which is the limit
     the main spec already states for an active server.
+27. **The restricted policy of the visitor's page has two lines, and both
+    stay (decided by the owner on 2026-11-23).** The header comes from the
+    proxy, with the value the server builds (the backend team's design
+    decision 11; tasks 1.3 and 4.4). The page adds a policy of its own
+    (task 4.5), so that the rule of decision 11 here, no script from
+    another origin, holds on a portal whose proxy does not send the header
+    and against a mistake in the page. Dropping the header and relying on
+    the page not asking for such scripts was weighed and not taken: both
+    specs ask for the header, and the page would then be its own only
+    guard. How the page's policy reaches one route of a single-page client
+    is open and is the first step of task 4.5.
 
 ## Risks / Trade-offs
 

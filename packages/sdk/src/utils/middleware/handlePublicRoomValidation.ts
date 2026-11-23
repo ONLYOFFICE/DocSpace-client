@@ -50,7 +50,11 @@ export async function handlePublicRoomValidation(
   request: NextRequest,
   requestHeaders: Headers,
   shareKey: string,
-): Promise<{ redirect?: string; anonymousSessionKeyCookie?: string } | null> {
+): Promise<{
+  redirect?: string;
+  status?: ValidationStatus;
+  anonymousSessionKeyCookie?: string;
+} | null> {
   if (!shareKey || request.nextUrl.pathname.includes("public-room/password")) {
     return null;
   }
@@ -72,5 +76,6 @@ export async function handlePublicRoomValidation(
 
   return {
     redirect: redirectPath,
+    status: validation.status,
   };
 }

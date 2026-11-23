@@ -54,7 +54,7 @@ import { isSameId } from "SRC_DIR/helpers/plugins/utils";
 import {
   findNearestIndex,
   isVideo,
-} from "@docspace/shared/components/media-viewer/MediaViewer.utils";
+} from "@onlyoffice/apps-ui-kit/media-viewer/MediaViewer.utils";
 
 import type PluginStore from "./PluginStore";
 import type PublicRoomStore from "./PublicRoomStore";

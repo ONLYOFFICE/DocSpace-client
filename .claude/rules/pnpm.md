@@ -333,3 +333,33 @@ SDK's directory under `node_modules/.pnpm` to `@onlyoffice+docspace-plugin_<hash
 the script matches that prefix. Go back with
 `pnpm -r update @onlyoffice/docspace-plugin-sdk@^<version>` once the release is
 on npm, and delete the tarball.
+
+## The Embed SDK dependency
+
+`@onlyoffice/docspace-sdk-js` (only `packages/client` depends on it, for the
+Embed SDK presets in Developer Tools) is switched to an unpublished build with
+`pnpm run update-sdk-js`, which works as `update-plugin-sdk` does: a pack from
+the `docspace-sdk-js` checkout under a dated pre-release version, named
+`onlyoffice-docspace-sdk-js-<version>.tgz` at the repo root.
+
+```bash
+# in the docspace-sdk-js checkout (restore package.json afterwards)
+npm version 2.3.0-20261117 --no-git-tag-version && pnpm build && pnpm pack
+# here
+pnpm run update-sdk-js                 # newest pack in ../../docspace-sdk-js
+pnpm run update-sdk-js path/to/pack.tgz
+DOCSPACE_SDK_JS_SRC=../elsewhere pnpm run update-sdk-js
+```
+
+The presets do not only import the package: with the Script source and in the
+code they generate they load `public/scripts/sdk/<x.y.z>/api.js`. The script
+therefore also writes the pack's `dist/api.js` there, under the version without
+its pre-release part, and refuses a pack with a release version, which would
+overwrite the committed script of that release. Go back with
+`pnpm -r update @onlyoffice/docspace-sdk-js@^<version>`, delete the tarball and
+put the released build in `public/scripts/sdk/<x.y.z>/api.js`.
+
+A copy installed from the registry before the first switch can stay behind under
+`node_modules/.pnpm/@onlyoffice+docspace-sdk-js@<version>` when the manifest was
+repointed by hand; the verification then reports it as a different build.
+Remove that directory and re-run.

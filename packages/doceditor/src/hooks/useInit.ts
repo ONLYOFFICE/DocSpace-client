@@ -102,11 +102,21 @@ const useInit = ({
   const keysReady = useEncryptionKeysReady();
   const loadedKeys = useLoadedEncryptionKeys();
 
+  const desktopFileId = React.useRef<string | number | null>(null);
+
   React.useEffect(() => {
-    // The key pair comes from the key set the page reads, so wait for the read.
-    if (config && IS_DESKTOP_EDITOR && user && fileInfo?.id && keysReady) {
-      initDesktop(loadedKeys, user, fileInfo.id, t);
-    }
+    if (!config || !IS_DESKTOP_EDITOR || !user || !fileInfo?.id) return;
+
+    // Only an encrypted file hands a key pair over, so only it waits for the
+    // key set the page reads; any other file registers at once.
+    const needsKeys = !!config.file?.encrypted;
+    if (needsKeys && !keysReady) return;
+
+    // Once per file: a key set read again must not sign the desktop in again.
+    if (desktopFileId.current === fileInfo.id) return;
+    desktopFileId.current = fileInfo.id;
+
+    initDesktop(needsKeys ? loadedKeys : null, user, fileInfo.id, t);
   }, [config, fileInfo?.id, t, user, keysReady, loadedKeys]);
 
   React.useEffect(() => {

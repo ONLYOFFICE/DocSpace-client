@@ -3,7 +3,7 @@
 ## ADDED Requirements
 
 ### Requirement: Key check only when access is first granted
-The server SHALL demand encryption keys of a user only when the user first gets access to a private room. It SHALL NOT refuse, for want of keys, a leave, a removal or a role change of a member who already has access, nor an owner change because the previous owner has no keys. It SHALL refuse a group as a member of a private room with a reason of its own.
+The server SHALL demand encryption keys of a user only when the user first gets access to a private room. It SHALL NOT refuse, for want of keys, a leave, a removal or a role change of a member who already has access, nor an owner change because the previous owner has no keys. It SHALL refuse a group as a member of a private room with 403 and a message of its own, and SHALL let a group that a private room still holds be removed.
 
 #### Scenario: Member without keys leaves
 - **WHEN** a member of a private room whose key set is empty leaves the room
@@ -19,18 +19,26 @@ The server SHALL demand encryption keys of a user only when the user first gets 
 
 #### Scenario: Group added
 - **WHEN** a group is added to a private room
-- **THEN** the server refuses, and the reason is not the missing-keys reason
+- **THEN** the server refuses with 403, and the answer does not carry the type of a refusal for want of keys
+
+#### Scenario: Group removed
+- **WHEN** a group that a private room still holds is removed from it
+- **THEN** the removal succeeds
+
+#### Scenario: Address without an account invited
+- **WHEN** a private room is shared with an e-mail address that names no account
+- **THEN** the server refuses as for a user without keys
 
 ### Requirement: Key refusals carry a stable reason
-The server SHALL mark a refusal caused by missing encryption keys with a reason a client can read without comparing message text, distinct from a refusal by access rights.
+The server SHALL mark a refusal caused by missing encryption keys with a reason a client can read without comparing message text, distinct from a refusal by access rights: the answer carries `ASC.Web.Studio.Core.EncryptionKeyNotSetException` in `error.type`.
 
 #### Scenario: Refusal for want of keys
 - **WHEN** a request is refused because a user has no encryption keys
-- **THEN** the answer carries the stable reason, whatever the language of its message
+- **THEN** the answer is a 403 whose `error.type` is `ASC.Web.Studio.Core.EncryptionKeyNotSetException`, whatever the language of its message
 
 #### Scenario: Refusal by access rights
 - **WHEN** the same request is refused because the caller may not change the access
-- **THEN** the answer does not carry the missing-keys reason
+- **THEN** `error.type` of the answer is another one
 
 ### Requirement: A user turned into a guest loses private rooms and keys
 The server SHALL, when a user is turned into a guest, remove the user from every private room, the rooms the user owned included once they have passed to the new owner, remove the wrapped file keys the user held for the files of those rooms, and delete the user's stored encryption key pair. It SHALL NOT restore any of them when the guest is made a user again.
@@ -51,6 +59,13 @@ The server SHALL, when a user is turned into a guest, remove the user from every
 - **WHEN** such a guest is made a user again
 - **THEN** the user holds no key and is in no private room until a key is created and an invitation is sent
 
+### Requirement: A change to guest is refused while the rooms cannot pass on
+The server SHALL refuse to turn a user into a guest, before anything is changed, while the user named to take the user's private rooms holds no encryption key or lacks the key of an encrypted file of one of them.
+
+#### Scenario: New owner cannot take the rooms
+- **WHEN** the owner of a private room is turned into a guest and the user named to take the rooms holds no encryption key, or no key of an encrypted file of the room
+- **THEN** the server answers 403 with `ASC.Files.Core.Helpers.PrivateRoomOwnershipException` in `error.type`, and the user's type, rooms and keys are as they were
+
 ### Requirement: A share change of a private room is applied whole or not at all
 The server SHALL check, before it stores any share of a request that changes the access to a private room, that every user who would get access for the first time holds an encryption key, and SHALL refuse the whole request when one does not. It SHALL NOT give access to some users of a refused request.
 
@@ -68,6 +83,10 @@ The server SHALL NOT mark a private room or a folder of a private room as a favo
 #### Scenario: Private room sent to the favourites
 - **WHEN** a member sends a private room or a folder of one to the favourites, alone or with other entries
 - **THEN** it is not marked, the other entries are, and the Favourites listing does not hold it
+
+#### Scenario: Private room marked earlier
+- **WHEN** the Favourites are listed by a user who marked a private room or a folder of one before the server stopped marking them
+- **THEN** the listing does not hold it
 
 ### Requirement: Private rooms are not listed in the Forms area
 The server SHALL NOT list a private room in the Forms area or the form-template area of the rooms listing.
@@ -112,7 +131,7 @@ The server SHALL return, for one file in a private room, active or archived, the
 - **THEN** the creator's keys MUST NOT be in the answer
 
 ### Requirement: Owner change requires the new owner's keys
-The server SHALL refuse with 403 an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL refuse with 409, leaving the owner as it is, when the new owner, unless they created the room, holds no access entry on some encrypted file of the room, subfolders included; the missing files are read through the missing-file-keys request. The reassignment of a deleted user's rooms SHALL NOT leave a private room with an owner who has no encryption keys.
+The server SHALL refuse with 403 an ownership change of a private room when the new owner has no encryption keys or an empty key set, and SHALL refuse with 409, leaving the owner as it is, when the new owner, unless they created the room, holds no access entry on some encrypted file of the room, subfolders included; the missing files are read through the missing-file-keys request. It SHALL let a DocSpace admin who is a member of a private room, in any role, change its owner, and SHALL refuse an administrator who is not a member. When the data of a user is removed or reassigned, a private room of that user SHALL go to the user who takes the data when that user holds an encryption key, else to the portal owner when the portal owner holds one, and SHALL otherwise stay with the user; the progress of the operation SHALL name the rooms that stayed in `keptPrivateRoomIds`.
 
 #### Scenario: New owner without keys
 - **WHEN** ownership of a private room is given to a user without keys
@@ -139,11 +158,23 @@ The server SHALL refuse with 403 an ownership change of a private room when the 
 - **THEN** the reassignment completes
 
 #### Scenario: Rooms of a deleted user reassigned to a user without keys
-- **WHEN** the rooms of a user being deleted are reassigned to a user without encryption keys
-- **THEN** no private room ends up owned by that user
+- **WHEN** the rooms of a user being deleted are reassigned to a user without encryption keys, and the portal owner holds one
+- **THEN** the private rooms belong to the portal owner, and `keptPrivateRoomIds` of the progress is empty
+
+#### Scenario: Nobody can take the rooms
+- **WHEN** the data of a user is removed or reassigned and neither the user who takes it nor the portal owner holds an encryption key
+- **THEN** the private rooms stay with the user and `keptPrivateRoomIds` of the progress holds their ids
+
+#### Scenario: Administrator who is a member hands a room over
+- **WHEN** a DocSpace admin who is a member of a private room gives it to a user with keys who holds an access entry on every encrypted file
+- **THEN** the room owner changes, and the room reports the right to change the owner to that administrator
+
+#### Scenario: Administrator outside the room
+- **WHEN** a DocSpace admin who is not a member of a private room asks to change its owner
+- **THEN** the server answers 403
 
 ### Requirement: File rights reported to the owner of a private room
-The server SHALL report on a file of an active private room, to the room's owner, the comment and review rights as granted, and SHALL deny the rights of operations that do not work on encrypted content: rename, the history rights, lock, copy-link, custom-filter, form-gallery, form filling, AI, conversion, embedding and vectorization. It SHALL deny the AI right on a private room. In an archived private room it SHALL deny all of these but read-history.
+The server SHALL report on a file of an active private room, to the room's owner, the comment and review rights as granted, and SHALL deny the rights of operations that do not work on encrypted content: rename, the history rights, lock, copy-link, custom-filter, form-gallery, form filling, AI, conversion, embedding and vectorization. It SHALL deny the AI right on a private room. It SHALL deny rename, the history rights, lock, copy-link, custom-filter and form-gallery on an encrypted file in an archived private room as well.
 
 #### Scenario: Spreadsheet in an active private room
 - **WHEN** the owner of an active private room lists an encrypted spreadsheet in it
@@ -159,14 +190,14 @@ The server SHALL report on a file of an active private room, to the room's owner
 
 #### Scenario: File in an archived private room
 - **WHEN** the owner of an archived private room lists an encrypted file in it
-- **THEN** the file reports Comment, Review, CustomFilter, EditHistory, SubmitToFormGallery and OpenForm as false
+- **THEN** the file reports Comment, Review, Rename, ReadHistory, EditHistory, Lock, CopyLink, CustomFilter, SubmitToFormGallery and OpenForm as false
 
 #### Scenario: AI right on a private room
 - **WHEN** the owner lists a private room
 - **THEN** the room reports CanUseAi as false
 
 ### Requirement: The E2E rooms app gates private rooms
-The server SHALL serve private rooms only while the E2E rooms app of the portal is on. While the app is off, `GET files/@private` answers 404, the root folders request leaves the Private root out, no rooms listing holds a private room whatever area or filter it names, the creation of a private room is refused, and a request that names an existing private room, a folder or a file of it by id is refused: its content, its download, its opening in the editors, its members and share changes, and the keys of the room and of its files. The routes of the caller's own encryption key pair SHALL NOT depend on the app. Switching the app off SHALL NOT delete anything: with the app on again the rooms, their files, their members and their keys are as they were.
+The server SHALL serve private rooms only while the E2E rooms app of the portal is on. While the app is off, `GET files/@private` answers 404, the root folders request leaves the Private root out, no rooms listing holds a private room whatever area or filter it names, the creation of a private room is refused with 403, and a request that names an existing private room, a folder or a file of it by id is refused: its content, its download, its opening in the editors, its members and share changes, and the keys of the room and of its files. The routes of the caller's own encryption key pair SHALL NOT depend on the app. Switching the app off SHALL NOT delete anything: with the app on again the rooms, their files, their members and their keys are as they were.
 
 #### Scenario: App off, section requested
 - **WHEN** the E2E rooms app is off and a client requests `GET files/@private`
@@ -182,15 +213,19 @@ The server SHALL serve private rooms only while the E2E rooms app of the portal 
 
 #### Scenario: App off, private room created
 - **WHEN** the E2E rooms app is off and a user with keys creates a private room
-- **THEN** the server refuses and creates nothing
+- **THEN** the server answers 403 and creates nothing
 
 #### Scenario: App off, private room requested by id
 - **WHEN** the E2E rooms app is off and a member requests a private room, a folder or a file of it by id, downloads an encrypted file, opens it in the editors or reads the keys of the room or of the file
-- **THEN** the server refuses and answers with nothing of the room
+- **THEN** the server answers 404 for the room, the folder, the file and its opening in the editors, refuses the other requests, and answers with nothing of the room
 
 #### Scenario: App off, other private-room routes
 - **WHEN** the E2E rooms app is off and a user who holds a key reads, replaces or deletes the user's own key pair
 - **THEN** the server handles the request as while the app is on
+
+#### Scenario: App off on a portal that is not standalone
+- **WHEN** the E2E rooms app is off, or is not listed in the configuration of the installation, whatever kind of installation it is
+- **THEN** the server answers as in the scenarios above
 
 #### Scenario: App switched on again
 - **WHEN** the E2E rooms app is switched on after it was off

@@ -160,26 +160,17 @@ const ExternalLinks = ({
     standalone,
   );
 
-  // A project's link joins as Project manager only - the server takes no
-  // other role for it - so the paid role stays selectable there.
   const filteredAccesses =
-    roomType === RoomsType.AiProjectRoom
-      ? accesses.filter((access) => access.key === "projectManager")
-      : roomType === -1
-        ? accesses
-        : filterPaidRoleOptions(accesses);
+    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
 
   const description =
     roomId === -1
       ? t("InviteViaLinkDescriptionAccounts")
-      : roomType === RoomsType.AiProjectRoom
-          ? // A project takes no guests.
-            t("Common:InviteViaLinkDescriptionAIProjectMembers")
-          : allowInvitingGuests
-            ? roomType === RoomsType.FormRoom
-              ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
-              : t("Common:InviteViaLinkDescriptionRoomGuest")
-            : t("Common:InviteViaLinkDescriptionRoomMembers");
+      : allowInvitingGuests
+        ? roomType === RoomsType.FormRoom
+          ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
+          : t("Common:InviteViaLinkDescriptionRoomGuest")
+        : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>

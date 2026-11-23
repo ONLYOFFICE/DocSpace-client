@@ -74,6 +74,7 @@ import AiAgentProviders from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 type PersonalFilesAiAgentProvidersProps = {
   myFolderId?: number | string;
   canUseAi?: boolean;
+  userId?: string;
   children: React.ReactNode;
 };
 
@@ -85,6 +86,7 @@ type PersonalFilesAiAgentProvidersProps = {
 const PersonalFilesAiAgentProviders = ({
   children,
   canUseAi,
+  userId,
 }: PersonalFilesAiAgentProvidersProps) => {
   const { i18n } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -94,6 +96,7 @@ const PersonalFilesAiAgentProviders = ({
       theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
       locale={i18n.language}
       canUseAi={canUseAi}
+      userId={userId}
     >
       {children}
     </AiAgentProviders>

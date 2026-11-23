@@ -90,11 +90,22 @@ describe("FilesStore.wsModifyFolderCreate — characterization", () => {
 describe("FilesStore.wsModifyFolderCreate — rooms the user cannot read", () => {
   afterEach(() => vi.restoreAllMocks());
 
-  it("Administrator outside a new private room", async () => {
+  it("Update of a room the user cannot read", async () => {
     const store = createTestFilesStore({
       selectedFolderStore: { id: 8 },
       treeFoldersStore: { isFormsFolder: false },
     });
+    const filters = () => [
+      store.filter.toUrlParams(),
+      store.filter.total,
+      store.roomsFilter.toUrlParams(),
+      store.roomsFilter.total,
+    ];
+    const before = filters();
+    const getFolder = vi
+      .spyOn(api.files, "getFolder")
+      .mockResolvedValue({} as never);
+    const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
     const getFolderInfo = vi
       .spyOn(api.files, "getFolderInfo")
       .mockRejectedValue(Object.assign(new Error("403"), { response: { status: 403 } }));
@@ -113,8 +124,12 @@ describe("FilesStore.wsModifyFolderCreate — rooms the user cannot read", () =>
       } as never),
     ).resolves.not.toThrow();
 
+    expect(getFolderInfo).toHaveBeenCalledTimes(1);
     expect(getFolderInfo).toHaveBeenCalledWith(100, true);
     expect(store.folders).toEqual([]);
+    expect(getFolder).not.toHaveBeenCalled();
+    expect(filters()).toEqual(before);
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 });
 
@@ -395,6 +410,56 @@ describe("FilesStore.wsModifyFolderCreate — deferred queue add", () => {
     await vi.advanceTimersByTimeAsync(500);
 
     expect(getFileInfo).toHaveBeenCalledWith(7, undefined);
+  });
+});
+
+describe("FilesStore.wsModifyFolderCreate — conversation files of an agent", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
+  it("skips the uploader's own file created in the open agent", async () => {
+    vi.useFakeTimers();
+    const countFileCreated = vi.fn();
+    const store = createTestFilesStore({
+      selectedFolderStore: {
+        id: 12,
+        roomType: RoomsType.AiProjectRoom,
+        countFileCreated,
+      },
+    });
+    store.files = [];
+    const dataLayer: unknown[] = [];
+    (window as unknown as { dataLayer: unknown[] }).dataLayer = dataLayer;
+    const getFileInfo = vi.spyOn(api.files, "getFileInfo");
+
+    await store.wsModifyFolderCreate({
+      type: "file",
+      id: 7,
+      data: JSON.stringify({ id: 7, folderId: 12, title: "Notes.docx" }),
+    } as never);
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(countFileCreated).not.toHaveBeenCalled();
+    expect(dataLayer).toHaveLength(0);
+    expect(getFileInfo).not.toHaveBeenCalled();
+    expect(store.files).toHaveLength(0);
+  });
+
+  it("does not count a file created inside an agent listed in the Agents list", async () => {
+    const store = createTestFilesStore();
+    store.folders = [
+      { id: 50, filesCount: 0, roomType: RoomsType.AiProjectRoom } as TItem,
+    ] as never;
+
+    await store.wsModifyFolderCreate({
+      type: "file",
+      id: 1,
+      data: JSON.stringify({ folderId: 50 }),
+    } as never);
+
+    expect((store.folders[0] as { filesCount: number }).filesCount).toBe(0);
   });
 });
 

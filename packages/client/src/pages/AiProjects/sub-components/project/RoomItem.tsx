@@ -37,96 +37,71 @@ import type React from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router";
 
-import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { iconSize32 } from "@docspace/shared/utils/image-helpers";
-import type { TAiProjectLogo } from "@docspace/shared/api/ai/projects";
 
 import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 
-import { coverLogo } from "../list/ProjectLogo";
-import styles from "./ProjectSources.module.scss";
+import SkillIcon from "SRC_DIR/components/SkillIcon";
+
+import styles from "./RoomItem.module.scss";
+
+/** The kind of a linked room: a skill set or a knowledge base. */
+type TSourceRoomIcon = "instructionsRoom.svg" | "knowledgeRoom.svg";
 
 type RoomItemProps = {
   id: number | string;
   title: string;
-  logo?: TAiProjectLogo;
-  /** Drawn while the room carries no logo. */
-  icon: "instructionsRoom.svg" | "knowledgeRoom.svg" | "folder.svg";
+  /** The kind of room, drawn with its own icon. */
+  icon: TSourceRoomIcon;
   /** Called before the room opens, e.g. to close the aside the item sits in. */
   onOpen?: () => void;
-  /** Opens the item instead of the room route, e.g. a folder through Files. */
-  onClick?: () => void;
-  /** Tooltip of the name, e.g. the folder's path. */
-  hint?: string;
   /** With `onToggle`, an expander before the room, as the folder tree draws one. */
   isExpanded?: boolean;
   onToggle?: () => void;
-  /** Drawn at the end of the row, e.g. a warning badge; a click on it does not open the room. */
-  trailing?: React.ReactNode;
 };
 
 type SourceRoomLogoProps = {
-  title: string;
-  logo?: TAiProjectLogo;
-  icon: RoomItemProps["icon"];
+  icon: TSourceRoomIcon;
   size?: string;
   className?: string;
 };
 
-/** A linked room's own logo: the uploaded picture, the cover in its colour, or its initials; `icon` while it carries no logo. */
-export const SourceRoomLogo = ({ title, logo, icon, size = "24px", className }: SourceRoomLogoProps) => {
-  const color = logo?.color.replace("#", "") ?? "";
-
-  return (
-    <RoomIcon
-      className={classNames("room-icon", className)}
-      imgClassName="room-image"
-      logo={logo ? (logo.cover ? coverLogo(logo.cover, color) : logo.medium) : (iconSize32.get(icon) ?? "")}
-      title={title}
-      color={color}
-      showDefault={logo ? !logo.cover && !logo.medium : false}
-      dropDownManualX="0"
-      size={size}
-    />
-  );
+const SKILL_ICON_KINDS: Record<TSourceRoomIcon, "set" | "knowledge"> = {
+  "instructionsRoom.svg": "set",
+  "knowledgeRoom.svg": "knowledge",
 };
 
+/**
+ * A linked room's picture. A skill set and a knowledge base are drawn with
+ * the skill set icon and the knowledge base icon, as the lists, the Info
+ * panel and Details draw them: a logo stored for such a room is not shown.
+ */
+export const SourceRoomLogo = ({ icon, size = "24px", className }: SourceRoomLogoProps) => (
+  <SkillIcon
+    kind={SKILL_ICON_KINDS[icon]}
+    size={Number.parseInt(size, 10)}
+    className={classNames("room-icon", className)}
+  />
+);
+
 /** A linked room as the new-files panel draws one; a click opens the room. */
-const RoomItem = ({
-  id,
-  title,
-  logo,
-  icon,
-  onOpen,
-  onClick: onOpenItem,
-  hint,
-  isExpanded,
-  onToggle,
-  trailing,
-}: RoomItemProps) => {
+const RoomItem = ({ id, title, icon, onOpen, isExpanded, onToggle }: RoomItemProps) => {
   const navigate = useNavigate();
 
   const onClick = (e: React.MouseEvent) => {
     // Inside an expandable row the rest of the row toggles; the room itself opens.
     e.stopPropagation();
     onOpen?.();
-    if (onOpenItem) onOpenItem();
     // The address Files opens a room by; without `folder` the room id is lost.
-    else navigate(`/ai-rooms/${id}/filter?folder=${id}`);
+    navigate(`/ai-rooms/${id}/filter?folder=${id}`);
   };
 
   const item = (
     <div className={styles.roomItem} onClick={onClick} data-testid={`ai-project-room-${id}`}>
-      <SourceRoomLogo title={title} logo={logo} icon={icon} />
-      <Text className="room-item-title" fontSize="13px" fontWeight={600} lineHeight="15px" title={hint ?? title} truncate noSelect>
+      <SourceRoomLogo icon={icon} />
+      <Text className="room-item-title" fontSize="13px" fontWeight={600} lineHeight="15px" title={title} truncate noSelect>
         {title}
       </Text>
-      {trailing ? (
-        <span className={styles.roomTrailing} onClick={(e) => e.stopPropagation()}>
-          {trailing}
-        </span>
-      ) : null}
     </div>
   );
 

@@ -211,6 +211,40 @@ describe("RoomType", () => {
     });
   });
 
+  describe("Fixed type of a form", () => {
+    it.each([
+      [RoomsType.InstructionsRoom, "Common:SkillSet"],
+      [RoomsType.KnowledgeRoom, "Common:Knowledge"],
+    ])(
+      "names room type %s in the AI Chat section's words",
+      (roomType, title) => {
+        render(
+          <RoomType {...defaultProps} type="displayItem" roomType={roomType} />,
+        );
+
+        expect(screen.getByText(title)).toBeInTheDocument();
+      },
+    );
+
+    it("keeps the room type's name in the type chooser", () => {
+      render(
+        <RoomType {...defaultProps} roomType={RoomsType.InstructionsRoom} />,
+      );
+
+      expect(
+        screen.getByText("Common:InstructionsRoomTitle"),
+      ).toBeInTheDocument();
+    });
+
+    it("keeps the room type's name of other rooms", () => {
+      render(<RoomType {...defaultProps} type="displayItem" />);
+
+      expect(
+        screen.getByText("Common:CollaborationRoomTitle"),
+      ).toBeInTheDocument();
+    });
+  });
+
   describe("Private room block", () => {
     const privateProps = {
       ...defaultProps,

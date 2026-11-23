@@ -37,6 +37,7 @@ import type { TTranslation } from "@docspace/shared/types";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
 import { getNewRoomLabel } from "./newRoomLabel";
+import { getAiWorkspaceCreateLabel } from "./aiWorkspace";
 
 type TGetCreateModel = (
   t: TTranslation,
@@ -50,10 +51,17 @@ export type GetSectionCreateButtonParams = {
   isContactsGroupsPage: boolean;
   isContactsGuestsPage: boolean;
   isRoomsFolder: boolean;
-  /** The "AI rooms" root; offers "New room" (its own chooser) like the Rooms root. */
+  /**
+   * The AI Chat section's lists; they create what they hold, as the Rooms
+   * root creates rooms, and the button says what ("New agent" or "New").
+   */
   isAiHubFolder?: boolean;
+  /** The address query of the page: which AI Chat list is shown. */
+  search?: string;
   isFormsSection: boolean;
   isFormsFolder: boolean;
+  /** An open knowledge base (a Knowledge room): its button adds files. */
+  isKnowledgeBase?: boolean;
 
   selectedFolderId?: number | string;
 
@@ -77,8 +85,10 @@ export const getSectionCreateButton = ({
   isContactsGuestsPage,
   isRoomsFolder,
   isAiHubFolder = false,
+  search = "",
   isFormsSection,
   isFormsFolder,
+  isKnowledgeBase = false,
   selectedFolderId,
   getFolderModel,
   getContactsModel,
@@ -100,8 +110,8 @@ export const getSectionCreateButton = ({
     };
   }
 
-  // The "AI rooms" root creates rooms too, through its own chooser (it
-  // answers `onCreateRoom`).
+  // The AI Chat section's lists create rooms too: each the kind it lists
+  // (it answers `onCreateRoom`).
   if (isRoomsFolder || isAiHubFolder) {
     const model = getFolderModel(t);
     if (!model || model.length === 0) return HIDDEN;
@@ -109,7 +119,9 @@ export const getSectionCreateButton = ({
     return {
       showMainButton: true,
       mainButtonProps: {
-        text: getNewRoomLabel(t),
+        text: isAiHubFolder
+          ? getAiWorkspaceCreateLabel(t, search)
+          : getNewRoomLabel(t),
         isDropdown: false,
         model: [],
         onAction: () => onCreateRoom(),
@@ -151,7 +163,8 @@ export const getSectionCreateButton = ({
   return {
     showMainButton: true,
     mainButtonProps: {
-      text: t("Common:New"),
+      // A knowledge base only takes files: from the storage or the device.
+      text: isKnowledgeBase ? t("Common:AddFiles") : t("Common:New"),
       isDropdown: true,
       model,
     },

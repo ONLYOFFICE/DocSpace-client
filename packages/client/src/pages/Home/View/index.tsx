@@ -36,7 +36,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate, useOutletContext } from "react-router";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
@@ -272,7 +272,19 @@ const View = ({
     groupsAbortController,
   });
 
+  // Home says when the section around this view is already the loaded one:
+  // the Agents list left for its Templates tab and come back to. The header,
+  // the tabs and the filter stay then, and only the list is read again.
+  const outletContext = useOutletContext<
+    { keepSectionLoaded?: boolean } | undefined
+  >();
+  const keepSectionLoadedRef = React.useRef(
+    outletContext?.keepSectionLoaded === true,
+  );
+
   React.useLayoutEffect(() => {
+    if (keepSectionLoadedRef.current) return;
+
     setIsSectionHeaderLoading(true, false);
   }, [setIsSectionHeaderLoading]);
 

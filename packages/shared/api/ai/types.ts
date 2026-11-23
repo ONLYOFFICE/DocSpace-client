@@ -295,14 +295,19 @@ export const SKILL_DESCRIPTION_MAX_LENGTH = 2000;
 export type TGenerateSkillRequest = {
   /** The Instructions room the skill is written for. */
   destId: number | string;
-  /** The skill's title; its kebab-case form becomes the skill's name. */
-  title: string;
+  /**
+   * The skill's title; its kebab-case form becomes the skill's name. Left
+   * out, the AI titles the skill itself.
+   */
+  title?: string;
   /** What the skill should do, in the user's words. */
   description: string;
 };
 
 /** The generated skill, not saved yet: the user reviews it first. */
 export type TGenerateSkillResult = {
+  /** The skill's title: the one sent, or the one the AI chose. */
+  title?: string;
   /** The skill's name; the file is saved as `<name>.md`. */
   name: string;
   /** The whole Markdown file, frontmatter included. */

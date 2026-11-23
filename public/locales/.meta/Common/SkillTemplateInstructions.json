@@ -1,0 +1,29 @@
+{
+  "key_path": "SkillTemplateInstructions",
+  "content": "# Skill title\n\nSay in one or two sentences what the assistant should do when this skill is used.\n\n## Steps\n\n1. The first thing to do.\n2. The next thing to do.\n\n## Rules\n\n- What must always be done.\n- What must never be done.\n\n## Output\n\nDescribe the result: its structure, format and length.",
+  "content_en_sha1_hash": "04444d87f772ebec9cf3dd007517b8c1d344a44b",
+  "created_at": "2026-11-18T08:36:18.781Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Markdown template that fills the instructions of a new skill; the user replaces it. Keep every line break and the Markdown markers exactly (# and ## headings, numbered and dash list items); translate only the words.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/index.tsx",
+      "line_number": 119,
+      "context": ");\n const [description, setDescription] = React.useState(() =>\n isNew ? t(\"Common:SkillTemplateDescription\") : \"\",\n );\n const [body, setBody] = React.useState(() =>\n isNew ? t(\"Common:SkillTemplateInstructions\") : \"\",\n );\n // The name is not called wrong before the user has changed it.\n const [isNameChanged, setIsNameChanged] = React.useState(false);\n \n React.useEffect(() => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

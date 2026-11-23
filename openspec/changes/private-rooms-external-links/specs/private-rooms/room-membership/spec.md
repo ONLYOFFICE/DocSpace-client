@@ -36,6 +36,10 @@ The system SHALL show the Share tab of the info panel for a private room, a fold
 - **WHEN** a private room is selected in the Private or Rooms list by a member who may not manage its links and the info panel opens
 - **THEN** the tabs do not include Share
 
+#### Scenario: Folder inside a private room selected
+- **WHEN** a folder inside a private room is selected by a member who may not manage the room's links, while that room or one of its folders is open, and the info panel opens
+- **THEN** the tabs do not include Share, even when the folder reports the share right
+
 #### Scenario: Member who manages links
 - **WHEN** the owner or a room manager selects a private room, a folder inside it or an encrypted file
 - **THEN** the tabs include Share, with the external links of the item

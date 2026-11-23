@@ -194,6 +194,16 @@ test.describe("Private room — invite entry point", () => {
     );
     await expect(chooseFromListLink).toBeVisible({ timeout: 10000 });
 
+    // Invite panel opened
+    for (const testId of [
+      "invite_panel_external_links_toggle",
+      "link-settings_icon",
+      "invite_panel_external_link_input",
+      "invite_panel_external_link_access",
+    ]) {
+      await expect(page.getByTestId(testId)).toHaveCount(0);
+    }
+
     const sendButton = page.getByTestId("invite_panel_send_button");
     await expect(sendButton).toBeVisible({ timeout: 5000 });
     await expect(sendButton).toBeDisabled();

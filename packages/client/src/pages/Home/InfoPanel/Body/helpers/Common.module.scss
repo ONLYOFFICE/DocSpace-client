@@ -288,7 +288,12 @@
       font-size: 13px;
     }
 
-    :global(.property-content) {
+// The command that calls a skill in the chat.
+    :global(.skill-command) {
+      color: var(--accent-main);
+    }
+
+        :global(.property-content) {
       max-width: 100%;
       margin: auto 0;
       font-weight: 600;

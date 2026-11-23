@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -53,7 +53,10 @@ import {
 } from "SRC_DIR/Hooks/useChatNoAccess";
 import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 import {
+  getAiListEmptyTexts,
   getAiWorkspaceCreatePayload,
+  getAiWorkspaceListType,
+  isAiWorkspaceCreateRefused,
   type TAiWorkspaceCreatePayload,
 } from "SRC_DIR/helpers/aiWorkspace";
 import { canManageProjects } from "SRC_DIR/pages/AiProjects/utils";
@@ -67,6 +70,8 @@ type EmptyAiRoomsContainerProps = {
   aiNoAccessStores: ChatNoAccessStoreProps;
   /** AI is not set up on the portal (`settingsStore.aiReady === false`). */
   isAiOff: boolean;
+  /** Vectorization is on: a Knowledge room can be created. */
+  vectorizationEnabled: boolean;
   canManage: boolean;
   isAdmin: boolean;
   isWarningRoomsDialog: boolean;
@@ -75,25 +80,28 @@ type EmptyAiRoomsContainerProps = {
 };
 
 /**
- * The "AI rooms" root when it shows no list. With AI not set up on the
+ * A list of the AI Chat section - the Agents, the Skill sets or the
+ * Knowledge bases - when it shows no list. With AI not set up on the
  * portal it is the AI chat's "AI is off" view, list or not: the settings
  * link on standalone, activation on SaaS, "contact an admin" for everyone
- * else, and nothing can be created. Otherwise it is the empty state: a room
- * admin can create an Instructions room, a Knowledge room or an AI project
- * (the "AI rooms" chooser), a user or guest only waits for an invitation.
+ * else, and nothing can be created. Otherwise it is the empty state of that
+ * list: a room admin can create what the list holds, a user or guest only
+ * waits for an invitation.
  */
 const EmptyAiRoomsContainer = ({
   aiNoAccessStores,
   isAiOff,
+  vectorizationEnabled,
   canManage,
   isAdmin,
   isWarningRoomsDialog,
   setQuotaWarningDialogVisible,
   selectedFolderId,
 }: EmptyAiRoomsContainerProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["EmptyView", "Common"]);
   const { isBase } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
   // The chat's activation flow (SaaS) and top-up dialog.
   const { activation, topUpDialog } = useChatNoAccess(aiNoAccessStores);
   const standalone = !!aiNoAccessStores.standalone;
@@ -158,12 +166,22 @@ const EmptyAiRoomsContainer = ({
     );
   }
 
-  const options: EmptyViewOptionsType = canManage
+  const texts = getAiListEmptyTexts(
+    t,
+    getAiWorkspaceListType(location.search),
+  );
+
+  // The Knowledge bases list creates nothing while vectorization is off: it
+  // says why, as the room type list does.
+  const isCreateRefused =
+    canManage && isAiWorkspaceCreateRefused(location.search, vectorizationEnabled);
+
+  const options: EmptyViewOptionsType = canManage && !isCreateRefused
     ? [
         {
           key: "create-ai-room",
-          title: t("Common:NewRoom"),
-          description: t("Common:AiRoomsCreateDescription"),
+          title: texts.createTitle,
+          description: texts.createDescription,
           icon: <CreateRoomIcon />,
           onClick: onCreate,
         },
@@ -173,11 +191,15 @@ const EmptyAiRoomsContainer = ({
   return (
     <EmptyView
       icon={icon}
-      title={canManage ? t("Common:AiRoomsEmpty") : t("Common:AiRoomsEmptyUser")}
+      title={canManage ? texts.title : texts.userTitle}
       description={
-        canManage
-          ? t("Common:AiRoomsEmptyDescription")
-          : t("Common:AiRoomsEmptyUserDescription")
+        isCreateRefused
+          ? isAdmin
+            ? t("EmptyView:KnowledgeBasesNeedVectorizationAdmin")
+            : t("EmptyView:KnowledgeBasesNeedVectorizationUser")
+          : canManage
+            ? texts.description
+            : texts.userDescription
       }
       options={options}
     />
@@ -201,6 +223,7 @@ export default inject(
       authStore,
     } as TStore),
     isAiOff: settingsStore.aiReady === false,
+    vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
     canManage: canManageProjects(userStore.user),
     isAdmin: !!(userStore.user?.isOwner || userStore.user?.isAdmin),
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,

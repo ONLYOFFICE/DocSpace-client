@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Вижте подробности за гостите тук",
   "HistoryEmptyScreenText": "Историята на дейностите ще бъде показана тук",
   "HistoryThirdParty": "Показването на историята не е налично за обществени стаи със свързани хранилища на трети страни",
+  "KnowledgeBasesEmptyScreenText": "Вижте подробности за базата знания тук",
   "LastUpdateInfo": "Последна актуализация",
   "LifetimeEnds": "Животът приключва",
   "MembersEmptyScreenText": "Вижте детайли за членовете тук",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Вижте подробности за стаите тук",
   "SelectedGroups": "Избрани групи",
   "SelectedUsers": "Избрани акаунти",
+  "SkillSetsEmptyScreenText": "Вижте подробности за набора от умения тук",
   "StorageType": "Тип съхранение",
   "Users": "Потребители"
 }

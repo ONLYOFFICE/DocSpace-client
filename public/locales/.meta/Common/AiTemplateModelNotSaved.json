@@ -1,0 +1,29 @@
+{
+  "key_path": "AiTemplateModelNotSaved",
+  "content": "The template's model could not be set, so {{name}} uses the workspace's default model. You can choose another model in the agent's settings.",
+  "content_en_sha1_hash": "ea41863550f857b5d80ac7461ede31db7913b67f",
+  "created_at": "2026-11-18T08:35:08.956Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Warning toast after an agent template is installed without its own AI model. {{name}} is the new agent's name; it falls back to the workspace's default model until another one is chosen in the agent's settings.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/useInstallAiTemplate.ts",
+      "line_number": 91,
+      "context": "// The agent is installed without the template's model: it runs on the\n // workspace's own until one is chosen. (Skipped instructions are not\n // shown: the agent form does not edit them.)\n if (installed.warnings?.includes(\"modelNotSaved\"))\n toastr.warning(\n t(\"Common:AiTemplateModelNotSaved\", { name: installed.title }),\n );\n // A new agent shows in the sidebar and the chat's agents menu.\n if (installed.kind === \"agent\") void aiPresetsStore.fetchPresets();\n navigate(\n getAiWorkspaceTabUrl(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

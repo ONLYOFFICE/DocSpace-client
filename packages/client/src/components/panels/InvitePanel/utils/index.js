@@ -33,7 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ShareAccessRights, EmployeeType } from "@docspace/shared/enums";
+import {
+	ShareAccessRights,
+	EmployeeType,
+	RoomsType,
+} from "@docspace/shared/enums";
 
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
@@ -69,7 +73,8 @@ export const getFreeUsersRoleArray = () => {
 	];
 };
 
-export const makeFreeRole = (item, t, freeRole) => {
+// The warning names the paid role of the room: an agent's is Agent manager.
+export const makeFreeRole = (item, t, freeRole, roomType) => {
 	if (!freeRole) return item;
 
 	item.access = freeRole.access;
@@ -77,11 +82,13 @@ export const makeFreeRole = (item, t, freeRole) => {
 		? t("Common:GroupMaxAvailableRoleWarning", {
 				roleName: freeRole.label,
 			})
-		: t("Common:UserMaxAvailableRoleWarning");
+		: roomType === RoomsType.AiProjectRoom
+			? t("Common:UserAgentMaxAvailableRoleWarning")
+			: t("Common:UserMaxAvailableRoleWarning");
 	return item;
 };
 
 export const fixAccess = (item, t, roomType) => {
 	const topFreeRole = getTopFreeRole(t, roomType);
-	return makeFreeRole(item, t, topFreeRole);
+	return makeFreeRole(item, t, topFreeRole, roomType);
 };

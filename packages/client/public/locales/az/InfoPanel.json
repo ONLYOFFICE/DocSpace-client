@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Qonaq detallarına burada baxın",
   "HistoryEmptyScreenText": "Hərəkət tarixçəsi burada göstəriləcək",
   "HistoryThirdParty": "Tarixçə ekranı üçüncü tərəf saxlama vahidlərinin qoşulduğu ümumi otaqlarda əlçatan deyil",
+  "KnowledgeBasesEmptyScreenText": "Bilik bazasının təfərrüatlarına burada baxın",
   "LastUpdateInfo": "Son yeniləmə",
   "LifetimeEnds": "İstifadə müddəti bitir",
   "MembersEmptyScreenText": "Üzvlərin məlumatlarına burada baxın",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Otaq detallarına burada baxın",
   "SelectedGroups": "Seçilmiş qruplar",
   "SelectedUsers": "Seçilmiş hesablar",
+  "SkillSetsEmptyScreenText": "Bacarıq dəstinin təfərrüatlarına burada baxın",
   "StorageType": "Yaddaş növü",
   "Users": "İstifadəçilər"
 }

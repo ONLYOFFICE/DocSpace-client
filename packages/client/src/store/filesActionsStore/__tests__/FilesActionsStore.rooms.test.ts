@@ -1,6 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi } from "vitest";
+import { RoomsType } from "@docspace/shared/enums";
 
 vi.mock("../helpers", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -22,7 +23,28 @@ describe("FilesActionsStore — room operations (batch 5)", () => {
       },
     });
     store.pinRooms(t);
-    expect(setPinAction).toHaveBeenLastCalledWith("pin", [1, 3], t);
+    expect(setPinAction).toHaveBeenLastCalledWith("pin", [1, 3], t, false);
+  });
+
+  it("pinRooms of agents asks for the agents' notice", () => {
+    const agents = [
+      { id: 1, pinned: false, roomType: RoomsType.AiProjectRoom },
+      { id: 3, pinned: false, roomType: RoomsType.AiProjectRoom },
+    ];
+    const store = createTestFilesActionsStore({
+      filesStore: { selection: agents, folders: agents },
+    });
+    store.pinRooms(t);
+    expect(setPinAction).toHaveBeenLastCalledWith("pin", [1, 3], t, true);
+  });
+
+  it("pinning the agent whose page is open asks for the agent's notice", () => {
+    const store = createTestFilesActionsStore({
+      filesStore: { folders: [] },
+      selectedFolderStore: { id: 9, roomType: RoomsType.AiProjectRoom },
+    });
+    store.setPinAction("unpin", 9, t);
+    expect(setPinAction).toHaveBeenLastCalledWith("unpin", 9, t, true);
   });
 
   it("unpinRooms unpins only the pinned rooms", () => {
@@ -35,7 +57,7 @@ describe("FilesActionsStore — room operations (batch 5)", () => {
       },
     });
     store.unpinRooms(t);
-    expect(setPinAction).toHaveBeenLastCalledWith("unpin", [2], t);
+    expect(setPinAction).toHaveBeenLastCalledWith("unpin", [2], t, false);
   });
 
   it("archiveRooms: unarchive + quota warning shows the quota dialog", () => {

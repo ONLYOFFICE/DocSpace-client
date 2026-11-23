@@ -44,6 +44,11 @@ import { isPrivateRoomsRoute } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
 
 import { removeOptions, removeSeparator } from "SRC_DIR/helpers/filesUtils";
+import {
+  getAgentRights,
+  type TAgentRightsSource,
+} from "SRC_DIR/helpers/agentRights";
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { isMarkdownFile } from "SRC_DIR/helpers/plugins/markdown";
 import type { TMetadataAIItem } from "SRC_DIR/components/panels/MetadataAIPanel/types";
@@ -343,6 +348,7 @@ export const buildContextOptions = (
       "copy-to",
       "duplicate",
       "restore",
+      "edit-skill",
       "rename",
       "edit-index",
       "separator2",
@@ -524,6 +530,15 @@ export const buildContextOptions = (
 
     if (!canRenameItem) {
       fileOptions = removeOptions(fileOptions, ["rename"]);
+    }
+
+    // A skill is edited as a skill by those who may edit and rename its file.
+    if (
+      !isSkillFile(item, deps.selectedFolderStore) ||
+      !canRenameItem ||
+      !item.security?.Edit
+    ) {
+      fileOptions = removeOptions(fileOptions, ["edit-skill"]);
     }
 
     if (canOpenPlayer || !canEditFile) {
@@ -746,21 +761,39 @@ export const buildContextOptions = (
     return templateOptions;
   }
   if (isRoom) {
-    const canInviteUserInRoom = item.private
-      ? item.security?.EditRoom
-      : item.security?.EditAccess;
-    const canRemoveRoom = item.security?.Delete;
+    // An agent's actions are answered by its rights helper, as on every
+    // other entry point of the agent (ai-agent-access).
+    const agentRights =
+      item.roomType === RoomsType.AiProjectRoom
+        ? getAgentRights(item as TAgentRightsSource, deps.userStore.user?.id)
+        : null;
+
+    const canInviteUserInRoom = agentRights
+      ? agentRights.share
+      : item.private
+        ? item.security?.EditRoom
+        : item.security?.EditAccess;
+    const canRemoveRoom = agentRights
+      ? agentRights.delete
+      : item.security?.Delete;
 
     const canArchiveRoom = item.security?.Move;
-    const canPinRoom = item.security?.Pin;
+    const canPinRoom = agentRights ? agentRights.pin : item.security?.Pin;
 
-    const canEditRoom = item.security?.EditRoom;
+    const canEditRoom = agentRights
+      ? agentRights.edit
+      : item.security?.EditRoom;
 
-    const canViewRoomInfo =
-      item.security?.Read || isLockedSharedRoom(item as TRoom);
-    const canMuteRoom = item.security?.Mute && item.inRoom;
+    const canViewRoomInfo = agentRights
+      ? agentRights.info
+      : item.security?.Read || isLockedSharedRoom(item as TRoom);
+    const canMuteRoom = agentRights
+      ? agentRights.mute
+      : item.security?.Mute && item.inRoom;
 
-    const canChangeOwner = item.security?.ChangeOwner;
+    const canChangeOwner = agentRights
+      ? agentRights.changeOwner
+      : item.security?.ChangeOwner;
 
     const isPublicRoomType =
       item.roomType === RoomsType.PublicRoom ||
@@ -881,8 +914,21 @@ export const buildContextOptions = (
       roomOptions = removeOptions(roomOptions, ["save-as-template"]);
     }
 
+    // The agent's menu has no Download (ai-agent-page, "Actions menu of an
+    // agent").
     if (isAiProject) {
-      roomOptions = removeOptions(roomOptions, ["duplicate-room"]);
+      roomOptions = removeOptions(roomOptions, [
+        "duplicate-room",
+        "download",
+        "download-encrypted",
+      ]);
+    }
+
+    // The agent's owner hands the agent over through change owner before
+    // leaving it: no Leave agent is offered to them, nor to an admin who is
+    // not in the agent.
+    if (agentRights && !agentRights.leave) {
+      roomOptions = removeOptions(roomOptions, ["leave-room"]);
     }
 
     if (!canRemoveRoom) {

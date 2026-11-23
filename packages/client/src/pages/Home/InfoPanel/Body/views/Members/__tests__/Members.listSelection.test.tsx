@@ -37,7 +37,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import {
@@ -220,7 +220,7 @@ describe("Members tab of a room selected in a list", () => {
     expect(setRemoveUserConfirmation).toHaveBeenCalledWith(
       true,
       expect.any(Function),
-      true,
+      "encryptedRoom",
     );
     expect(mocks.updateRoomMemberRole).not.toHaveBeenCalled();
   });
@@ -242,5 +242,41 @@ describe("Members tab of a room selected in a list", () => {
     );
     expect(mocks.updateRoomMemberRole).toHaveBeenCalledTimes(1);
     expect(mocks.setFileEncryptionKeys).not.toHaveBeenCalled();
+  });
+
+  it("Agent manager removes a Member", async () => {
+    const { setRemoveUserConfirmation } = renderMembersOf(
+      listItemOf(roomDto({ roomType: RoomsType.AiProjectRoom })),
+    );
+
+    fireEvent.click(screen.getByTestId("member_bob_remove"));
+
+    expect(setRemoveUserConfirmation).toHaveBeenCalledWith(
+      true,
+      expect.any(Function),
+      "agentMember",
+    );
+    expect(mocks.updateRoomMemberRole).not.toHaveBeenCalled();
+
+    const [, confirm] = setRemoveUserConfirmation.mock.calls[0];
+    await confirm();
+
+    expect(mocks.updateRoomMemberRole).toHaveBeenCalledWith(
+      14,
+      expect.objectContaining({
+        invitations: [{ id: "bob", access: ShareAccessRights.None }],
+      }),
+    );
+  });
+
+  it("removes a member of an ordinary room without a confirmation", () => {
+    const { setRemoveUserConfirmation } = renderMembersOf(
+      listItemOf(roomDto()),
+    );
+
+    fireEvent.click(screen.getByTestId("member_bob_remove"));
+
+    expect(setRemoveUserConfirmation).not.toHaveBeenCalled();
+    expect(mocks.updateRoomMemberRole).toHaveBeenCalledTimes(1);
   });
 });

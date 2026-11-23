@@ -47,8 +47,11 @@ import type { TLogo } from "@onlyoffice/apps-ui-kit/types";
 import { RoomIcon, type TModel } from "@onlyoffice/apps-ui-kit/components";
 import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { mayHoldEncryptionKey } from "@docspace/shared/services/encryption/select-user-key";
+import { SKILL_EXTENSION } from "@docspace/shared/utils/skillFile";
 
+import SkillIcon, { getAiRoomIconKind } from "./SkillIcon";
 import styles from "./icons.module.scss";
 
 type ItemIconProps = {
@@ -76,6 +79,10 @@ type ItemIconProps = {
 	encrypted?: boolean;
 	/** False only for a key list known to be empty. */
 	mayHoldKey?: boolean;
+	/** The room's type: a skill set is drawn with its own icon. */
+	roomType?: RoomsType | number | null;
+	/** The open folder is a skill set: its Markdown files are skills. */
+	isSkillSetOpen?: boolean;
 };
 
 const ItemIcon = ({
@@ -102,8 +109,36 @@ const ItemIcon = ({
 	dataTestId,
 	encrypted,
 	mayHoldKey,
+	roomType,
+	isSkillSetOpen,
 }: ItemIconProps) => {
 	const { t } = useTranslation(["Common"]);
+
+	// Skill sets, their skills and knowledge bases have icons of their own,
+	// the same for every one: no room colour or initials, no Markdown file
+	// icon.
+	const skillKind =
+		getAiRoomIconKind({ isRoom, roomType }) ??
+		(!isRoom && isSkillSetOpen && fileExst?.toLowerCase() === SKILL_EXTENSION
+			? "skill"
+			: null);
+
+	if (skillKind)
+		return (
+			<div
+				className={classNames(styles.iconWrapper, {
+					[styles.isRoom]: skillKind !== "skill",
+				})}
+			>
+				<SkillIcon
+					kind={skillKind}
+					size={size ? parseInt(size, 10) || 32 : 32}
+					className={className}
+					dataTestId={dataTestId}
+				/>
+			</div>
+		);
+
 	const isLoadedRoomIcon = !!logo;
 	const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
@@ -181,7 +216,12 @@ const ItemIcon = ({
 	);
 };
 
-export default inject(({ treeFoldersStore, userStore }: TStore) => ({
-	isPrivacy: treeFoldersStore.isPrivacyFolder,
-	mayHoldKey: mayHoldEncryptionKey(userStore?.encryptionKeys),
-}))(observer(ItemIcon));
+export default inject(
+	({ treeFoldersStore, userStore, selectedFolderStore }: TStore) => ({
+		isSkillSetOpen:
+			selectedFolderStore.roomType === RoomsType.InstructionsRoom ||
+			selectedFolderStore.parentRoomType === FolderType.InstructionsRoom,
+		isPrivacy: treeFoldersStore.isPrivacyFolder,
+		mayHoldKey: mayHoldEncryptionKey(userStore?.encryptionKeys),
+	}),
+)(observer(ItemIcon));

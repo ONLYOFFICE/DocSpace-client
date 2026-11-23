@@ -103,11 +103,18 @@ import { useHideQuickActions } from "./Hooks/useHideQuickActions";
 import { usePrivateRoomCreateRequest } from "./Hooks/usePrivateRoomCreateRequest";
 import { useSectionDrop } from "./Hooks/useSectionDrop";
 
+import {
+  hasAiWorkspaceTemplates,
+  isAiWorkspaceTemplates,
+} from "SRC_DIR/helpers/aiWorkspace";
+import AiTemplatesCatalog from "./Section/Body/AiTemplatesCatalog";
+
 import styles from "./Home.module.scss";
 
 // `observer` is required because we read MobX observables from the shared
 // AiChatStore directly here (via `useAiChatPanel`): without it, the AI chat
 // panel's visibility changes (e.g. closing) would not re-render Home.
+
 const PureHome = observer((props) => {
   const {
     currentClientView,
@@ -242,6 +249,7 @@ const PureHome = observer((props) => {
     setCreateRoomFromTemplate,
 
     infoPanelStore,
+    getIsAiProjectRoomRoot,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -289,7 +297,34 @@ const PureHome = observer((props) => {
   // AiAgentProviders' context.
   const isAiChatAvailable = useIsAiChatAvailable();
 
-  usePanelExclusivity(infoPanelStore);
+  // The Templates tab of an AI Chat section list draws the catalog of
+  // shipped templates in place of the list and its filter.
+  const isAiTemplatesTab =
+    getCategoryType(location) === CategoryType.AiHub &&
+    isAiWorkspaceTemplates(location.search);
+
+  // The Templates tab was opened from the Agents list, so the header, the
+  // tabs and the filter of that list are still the loaded ones. The list's
+  // view, mounted again on the way back, keeps them instead of covering the
+  // section with skeletons. A tab opened by a reload has no list behind it,
+  // and a tab left for another list has that list's section to load.
+  const isAgentsList =
+    !isAiTemplatesTab &&
+    getCategoryType(location) === CategoryType.AiHub &&
+    location.pathname.startsWith("/ai-rooms/filter") &&
+    hasAiWorkspaceTemplates(location.search);
+  // The list shown before this render: read while rendering, written after.
+  const wasAgentsListRef = React.useRef(false);
+  const keepSectionLoaded = isAgentsList && wasAgentsListRef.current;
+  React.useEffect(() => {
+    if (isAiTemplatesTab) return;
+
+    wasAgentsListRef.current = isAgentsList;
+  }, [isAiTemplatesTab, isAgentsList]);
+
+  // An agent's page draws its chat in the section body (AiProjectView),
+  // beside the Info panel rather than in its place.
+  usePanelExclusivity(infoPanelStore, getIsAiProjectRoomRoot);
   usePrivateRoomCreateRequest();
 
   // An open AI project draws its chat in the section body (AiProjectView),
@@ -664,9 +699,12 @@ const PureHome = observer((props) => {
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
 
+  // An agent's page draws its chat in the section body and has no list to
+  // filter.
   const shouldRenderSectionFilter =
     (isContactsPage ? isValidContactsContent : isValidMainContent) &&
-    !isSettingsPage;
+    !isSettingsPage &&
+    !isAiProjectRoomRoot;
 
   React.useEffect(() => {
     if (isChangePageRequestRunning) return;
@@ -735,6 +773,7 @@ const PureHome = observer((props) => {
           {!isPluginSection &&
           !isErrorAvailable &&
           shouldShowFilter &&
+          !isAiTemplatesTab &&
           !isProfile &&
           (!isFrame || showFilter) ? (
             <Section.SectionFilter>
@@ -758,7 +797,11 @@ const PureHome = observer((props) => {
           ) : null}
 
           <Section.SectionBody>
-            <Outlet />
+            {isAiTemplatesTab ? (
+              <AiTemplatesCatalog />
+            ) : (
+              <Outlet context={{ keepSectionLoaded }} />
+            )}
           </Section.SectionBody>
 
           <Section.InfoPanelHeader>
@@ -1176,6 +1219,8 @@ export const Component = inject(
       getPluginIconUrl,
 
       infoPanelStore,
+      // Read when the chat or the Info panel opens, not when Home renders.
+      getIsAiProjectRoomRoot: () => treeFoldersStore.isAiProjectRoomRoot,
     };
   },
 )(observer(HomeWithGuard));

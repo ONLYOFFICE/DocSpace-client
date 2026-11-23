@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -70,7 +70,12 @@ const GlobalEvents = ({
   userId,
   openEditAiProject,
   openCreateAiProject,
+  vectorizationEnabled,
+  isAdmin,
 }) => {
+  // Read by the room-create handler, which is bound once.
+  const knowledgeCreateRef = useRef({ vectorizationEnabled, isAdmin });
+  knowledgeCreateRef.current = { vectorizationEnabled, isAdmin };
 
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -186,6 +191,26 @@ const GlobalEvents = ({
     // not in the room dialog.
     if (e?.payload?.isAiProjectCreate) {
       openCreateAiProject();
+      return;
+    }
+
+    // A Knowledge room cannot be created while vectorization is off (the
+    // server refuses it): a "New room" that would open its form straight
+    // away, past the type list that greys it out, says why instead.
+    if (
+      e?.payload?.startRoomType === RoomsType.KnowledgeRoom &&
+      !knowledgeCreateRef.current.vectorizationEnabled
+    ) {
+      toastr.warning(
+        knowledgeCreateRef.current.isAdmin ? (
+          <Trans
+            ns="Common"
+            i18nKey="KnowledgeRoomCreationNeedsVectorizationAdmin"
+          />
+        ) : (
+          <Trans ns="Common" i18nKey="KnowledgeRoomCreationNeedsVectorizationUser" />
+        ),
+      );
       return;
     }
 
@@ -579,6 +604,9 @@ export default inject(
       userId: userStore?.user?.id,
       openEditAiProject: aiProjectsStore.openEditDialogById,
       openCreateAiProject: aiProjectsStore.openCreateDialog,
+      vectorizationEnabled:
+        settingsStore.aiConfig?.vectorizationEnabled !== false,
+      isAdmin: !!(userStore?.user?.isOwner || userStore?.user?.isAdmin),
     };
   },
 )(observer(GlobalEvents));

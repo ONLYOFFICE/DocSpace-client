@@ -99,7 +99,7 @@ import "@docspace/shared/styles/theme.scss";
 import { isTourDemoId } from "SRC_DIR/api/tourDemo/data";
 import AiPresetsBridge from "SRC_DIR/components/AiPresetsBridge";
 import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/ProjectIntro";
-import { useAiPresetsPickerActions } from "SRC_DIR/Hooks/useAiPresetsPickerActions";
+import { isAgentModelUnavailable } from "SRC_DIR/pages/AiProjects/utils";
 import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
@@ -116,6 +116,9 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import { AskAIChatBridge } from "./components/AskAIChatBridge";
+import { SkillSetChatBridge } from "./components/SkillSetChatBridge";
+import { AiChatPageBridge } from "./components/AiChatPageBridge";
+import { getAiThreadFilesCallbacks } from "./components/AiChatPageBridge/aiThreadFilesCallbacks";
 import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
@@ -185,13 +188,14 @@ const Shell = ({ page = "home", ...rest }) => {
     isFormsFolderRoot,
     isFormRoomRoot,
     isAIReady,
-    aiPresetContextRooms,
-    aiPresets,
-    requestPresetApply,
-    fetchAiPresets,
+    aiChatContextRooms,
+    aiActivePresetId,
+    aiActivePresetSuggestions,
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
+    portalHasChatModel,
+    notifyAiChatThreadFilesChanged,
   } = rest;
 
   const [searchParams] = useSearchParams();
@@ -255,6 +259,10 @@ const Shell = ({ page = "home", ...rest }) => {
   // chips are the project's own rather than the section's.
   const isInsideAiProject =
     isAiProjectOpen && location.pathname.startsWith("/ai-rooms/");
+
+  // The chat runs on an agent: on the agent's page, or picked in the title
+  // menu of the chat panel (the agent's page sets it as well).
+  const isChatOnAgent = isInsideAiProject || !!aiActivePresetId;
 
   useCreateFileError({
     setPortalTariff,
@@ -913,28 +921,16 @@ const Shell = ({ page = "home", ...rest }) => {
     onChangeAiLimit,
   });
 
-  // "Choose AI Project" entry for the model picker: the user's AI projects,
-  // applied to the open chat by AiPresetsBridge (the chat stores live below
-  // AiAgentProviders). A project that is gone by now is only reported.
-  const onProjectPick = useCallback(
-    (preset) => {
-      void requestPresetApply(preset).then((applied) => {
-        if (!applied) toastr.info(t("Common:AIProjectNotAvailable"));
-      });
-    },
-    [requestPresetApply, t],
-  );
-  const profilePickerActions = useAiPresetsPickerActions(
-    aiPresets,
-    onProjectPick,
-  );
-
-  // The chat's own scope is only ever an AI project: the AI service
+  // The chat's own scope is only ever an AI project (an agent): the one
+  // whose page is open, or the one picked in the chat panel. The AI service
   // recognises the project by this id and takes the round's model and
-  // linked rooms from the project itself (`ai/projects/{id}/chat-context`).
-  // Threads are global per user, so no other location scopes the chat.
+  // linked rooms from the project itself (`ai/projects/{id}/chat-context`),
+  // and a conversation started on it belongs to it, so the history lists
+  // the agent's own conversations. No other location scopes the chat.
   const chatEntityId =
-    isInsideAiProject && aiActiveProject ? String(aiActiveProject.id) : undefined;
+    isInsideAiProject && aiActiveProject
+      ? String(aiActiveProject.id)
+      : (aiActivePresetId ?? undefined);
 
   // The location the rounds work in: the folder or room the chat is opened
   // in (the AI service's location line, generated files and uploads follow
@@ -983,10 +979,18 @@ const Shell = ({ page = "home", ...rest }) => {
     [t, standalone, aiActiveProject, openEditAiProject],
   );
 
-  // Inside a project whose model is unavailable nothing can be sent until
+  // Inside a project whose model is unavailable - its own one gone, or none
+  // of its own on a portal without a chat model - nothing can be sent until
   // the model is changed; the intro says so and offers the change.
   const isProjectModelUnavailable =
-    isInsideAiProject && aiActiveProject?.aiProject.profile?.available === false;
+    isInsideAiProject &&
+    !!aiActiveProject &&
+    isAgentModelUnavailable(aiActiveProject, portalHasChatModel);
+
+  const threadFiles = useMemo(
+    () => getAiThreadFilesCallbacks(notifyAiChatThreadFilesChanged),
+    [notifyAiChatThreadFilesChanged],
+  );
 
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
@@ -1011,10 +1015,21 @@ const Shell = ({ page = "home", ...rest }) => {
           status === 403 || /\bHTTP\s+403\b/.test(error?.message ?? "");
         if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
       },
-      onStreamError: onAiStreamError,
-      onStreamEnd: onAiStreamEnd,
+      // The round's events also tell the agent page's Content tab that
+      // the conversation may have new files (see getAiThreadFilesCallbacks).
+      onStreamStart: threadFiles.onStreamStart,
+      onStreamStop: threadFiles.onStreamStop,
+      onToolCallResult: threadFiles.onToolCallResult,
+      onStreamError: (event) => {
+        onAiStreamError(event);
+        threadFiles.onStreamError(event);
+      },
+      onStreamEnd: (event) => {
+        onAiStreamEnd(event);
+        threadFiles.onStreamEnd(event);
+      },
     }),
-    [t, onAiStreamError, onAiStreamEnd],
+    [t, onAiStreamError, onAiStreamEnd, threadFiles],
   );
 
   // Defer mounting AiAgentProviders until authStore is loaded — otherwise
@@ -1037,34 +1052,33 @@ const Shell = ({ page = "home", ...rest }) => {
           // mounted for useStores() consumers; only hydration and the chat
           // UI are switched off.
           canUseAi={canUseAi}
+          // Scopes the chat's per-conversation source records to the user.
+          userId={userId ? String(userId) : undefined}
           callbacks={aiChatCallbacks}
           entityId={chatEntityId}
           contextEntityId={chatContextEntityId}
           // The picker area is always present (an explicit `false` also
           // overrides the lib's entityId default-hide heuristic — the chat
-          // is always entity-scoped here). Inside an AI project the model
-          // is fixed by the project, so the picker is a read-only label.
+          // is always entity-scoped here). A chat on an agent, on its page
+          // or in the panel, runs on the agent's model, so the picker is a
+          // read-only label.
           formatChatError={formatChatError}
           hideProfilePicker={false}
-          profilePickerReadOnly={isInsideAiProject}
+          profilePickerReadOnly={isChatOnAgent}
           isChatOpen={isChatOpen}
-          profilePickerActions={profilePickerActions}
-          // The picker opens on the current project list: one created,
-          // renamed or left elsewhere meanwhile is picked up.
-          onProfilePickerOpen={fetchAiPresets}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={
             isProjectModelUnavailable || (standalone ? undefined : !isAIReady)
           }
           composerNotice={aiComposerNotice}
-          // A chat inside a project offers the project's own chips; one
-          // opened from an AI preset starts with none: its sources are the
-          // subject, not the page.
+          // A chat inside a project offers the project's own chips. An agent
+          // picked in the panel offers its own as well, and the chips of the
+          // section the panel is open in when it has none.
           suggestions={
             isInsideAiProject
               ? (aiActiveProject?.aiProject.suggestions ?? NO_SUGGESTIONS)
-              : aiPresetContextRooms
-                ? NO_SUGGESTIONS
+              : aiActivePresetSuggestions?.length
+                ? aiActivePresetSuggestions
                 : aiSuggestions
           }
           // An empty project chat opens with the project's logo, name and
@@ -1075,13 +1089,19 @@ const Shell = ({ page = "home", ...rest }) => {
             ) : undefined
           }
           // Instructions rooms are connected on their own only from an AI
-          // project (its linked rooms, see AiPresetsBridge); standing in an
-          // Instructions room does not connect it, the user picks it in the
-          // composer like a knowledge base.
-          contextRoom={canUseAi ? aiPresetContextRooms : undefined}
+          // project (its linked rooms, see AiPresetsBridge) or by a skill
+          // set's "Use in chat"; standing in an Instructions room does not
+          // connect it, the user picks it in the composer like a knowledge
+          // base.
+          contextRoom={canUseAi ? aiChatContextRooms : undefined}
           attachmentLimit={isFormsSection ? 1 : undefined}
         >
           <AskAIChatBridge />
+          <SkillSetChatBridge />
+          <AiChatPageBridge
+            canLoadThreads={canUseAi}
+            chatEntityId={chatEntityId}
+          />
           <AiPresetsBridge enabled={canUseAi} />
 
           <AiChatVisibilityBridge onChange={setIsChatPanelVisible} />
@@ -1257,16 +1277,20 @@ const ShellWrapper = inject(
       // rights of the opened folder / room do not allow are filtered out.
       selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
-      // The Instructions rooms of the project the chat runs on, as its
-      // context rooms; a new array per render, the ui-kit provider memoizes
-      // it by id and name.
-      aiPresetContextRooms: aiPresetsStore.activePresetContextRooms,
+      // The chat's context rooms: the Instructions rooms of the agent the
+      // chat runs on, else the skill sets "Use in chat" connected to the
+      // default agent's chat; a new array per render, the ui-kit provider
+      // memoizes it by id and name.
+      aiChatContextRooms: aiPresetsStore.chatContextRooms,
+      // The agent the chat runs on, picked in the panel or open on its page.
+      aiActivePresetId: aiPresetsStore.activePreset?.id ?? null,
+      aiActivePresetSuggestions: aiPresetsStore.activePreset?.suggestions,
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
+      portalHasChatModel: aiProjectsStore.portalHasChatModel,
+      notifyAiChatThreadFilesChanged:
+        dialogsStore.notifyAiChatThreadFilesChanged,
       openEditAiProject: aiProjectsStore.openEditDialog,
-      aiPresets: aiPresetsStore.presets,
-      requestPresetApply: aiPresetsStore.requestApply,
-      fetchAiPresets: aiPresetsStore.fetchPresets,
       // The Forms section, in both its shapes: the bare Forms root, and a
       // form filling room with its In progress / Complete folders. Caps the
       // chat's attachments at one (see `attachmentLimit`).

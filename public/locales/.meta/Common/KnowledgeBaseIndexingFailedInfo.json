@@ -1,0 +1,29 @@
+{
+  "key_path": "KnowledgeBaseIndexingFailedInfo",
+  "content": "Some files of this knowledge base could not be indexed. Open it to see which ones.",
+  "content_en_sha1_hash": "68db059d1faffad6744b90dcfa52e8fd8edb0198",
+  "created_at": "2026-11-18T08:35:47.595Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Text of the tooltip on the Error badge beside a knowledge base, under the title Indexing failed: some of its files could not be indexed for AI search, and opening the knowledge base shows which.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/KnowledgeBaseStatusBadge/index.tsx",
+      "line_number": 85,
+      "context": "return (\n <FailedVectorizationBadge\n className={className}\n label={t(\"Common:Error\")}\n title={t(\"Common:KnowledgeBaseIndexingFailed\")}\n info={t(\"Common:KnowledgeBaseIndexingFailedInfo\")}\n themeIsBase={themeIsBase}\n dataTestId=\"knowledge-base-error-badge\"\n />\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

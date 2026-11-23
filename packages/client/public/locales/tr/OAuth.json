@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG veya SVG, 32x32",
   "ID": "Kimlik",
   "InvalidToken": "Geçersiz token",
-  "LastModified": "Son değiştirilme tarihi",
   "NewApp": "Yeni uygulama",
   "NoAuthorizedApps": "Yetkili uygulama yok",
   "NoOAuthAppHeader": "OAuth uygulaması yok",

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll, vi } from "vitest";
 
 import {
   generateIdentityKeyPair,
@@ -56,6 +56,14 @@ import {
   X25519_PRIVATE_KEY_SIZE,
   type IdentityKeyPair,
 } from "../types";
+
+const hashWasm = vi.hoisted(() => ({ argon2id: vi.fn() }));
+
+vi.mock("hash-wasm", async (importActual) => {
+  const actual = await importActual<typeof import("hash-wasm")>();
+  hashWasm.argon2id.mockImplementation(actual.argon2id);
+  return { ...actual, argon2id: hashWasm.argon2id };
+});
 
 // Use lightweight Argon2 params for tests so suite runs fast. Real production
 // uses 64 MiB / t=3 / p=4 (DEFAULT_ARGON2_PARAMS).
@@ -336,6 +344,44 @@ describe("identity", () => {
       );
       await expect(unlock).rejects.toBeInstanceOf(InvalidFormatError);
       await expect(unlock).rejects.toThrow("Argon2 params must be non-zero");
+    });
+  });
+
+  describe("Out-of-range KDF parameters", () => {
+    const tamper = async (edit: (slot: DataView) => void) => {
+      const { base64ToUint8Array, arrayBufferToBase64 } = await import(
+        "../utils"
+      );
+      const ser = await serializeIdentity(kp, "secret", {
+        argon2Params: FAST_PARAMS,
+      });
+      const bytes = base64ToUint8Array(ser.privateKeyEnc);
+      edit(new DataView(bytes.buffer, bytes.byteOffset + PASSPHRASE_SLOT_OFFSET));
+      return {
+        publicKey: ser.publicKey,
+        privateKeyEnc: arrayBufferToBase64(bytes),
+      };
+    };
+
+    it.each([
+      ["memory over 1 GiB", (s: DataView) => s.setUint32(3, 1_048_577), "Argon2 m_KiB out of bounds"],
+      ["65 iterations", (s: DataView) => s.setUint8(1, 65), "Argon2 t out of bounds"],
+      ["65 lanes", (s: DataView) => s.setUint8(2, 65), "Argon2 p out of bounds"],
+    ])("rejects %s before any derivation", async (_, edit, message) => {
+      const envelope = await tamper(edit);
+      // A derivation with these parameters would allocate up to a gigabyte.
+      const real = hashWasm.argon2id.getMockImplementation();
+      hashWasm.argon2id.mockClear().mockRejectedValue(new Error("derived"));
+
+      try {
+        const unlock = unlockWithPassphrase(envelope, "secret");
+
+        await expect(unlock).rejects.toBeInstanceOf(InvalidFormatError);
+        await expect(unlock).rejects.toThrow(message);
+        expect(hashWasm.argon2id).not.toHaveBeenCalled();
+      } finally {
+        hashWasm.argon2id.mockImplementation(real!);
+      }
     });
   });
 

@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG կամ SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "Անվավեր token",
-  "LastModified": "Վերջին փոփոխությունը",
   "NewApp": "Նոր հավելված",
   "NoAuthorizedApps": "Լիազորված հավելվածներ չկան",
   "NoOAuthAppHeader": "OAuth հավելվածներ չկան",

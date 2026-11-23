@@ -41,3 +41,49 @@ if (typeof globalThis.TextEncoder === "undefined") {
 if (typeof globalThis.TextDecoder === "undefined") {
   globalThis.TextDecoder = TextDecoder as unknown as typeof globalThis.TextDecoder;
 }
+
+// Node 25+ exposes a global `localStorage` that, without a valid
+// `--localstorage-file`, is an empty object lacking the Storage methods
+// (clear, setItem, etc.) and shadows the jsdom implementation. Provide a
+// spec-compliant in-memory Storage, as shared's setup does, so that tests
+// calling `vi.spyOn(Storage.prototype, ...)` work correctly.
+class MockStorage {
+  store: Record<string, string> = {};
+
+  getItem(key: string): string | null {
+    return key in this.store ? this.store[key] : null;
+  }
+
+  setItem(key: string, value: string): void {
+    this.store[key] = String(value);
+  }
+
+  removeItem(key: string): void {
+    delete this.store[key];
+  }
+
+  clear(): void {
+    this.store = {};
+  }
+
+  key(index: number): string | null {
+    return Object.keys(this.store)[index] ?? null;
+  }
+
+  get length(): number {
+    return Object.keys(this.store).length;
+  }
+}
+
+Object.defineProperty(globalThis, "Storage", {
+  value: MockStorage,
+  writable: true,
+});
+Object.defineProperty(globalThis, "localStorage", {
+  value: new MockStorage(),
+  writable: true,
+});
+Object.defineProperty(globalThis, "sessionStorage", {
+  value: new MockStorage(),
+  writable: true,
+});

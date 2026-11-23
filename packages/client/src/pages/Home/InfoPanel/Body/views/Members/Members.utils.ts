@@ -60,15 +60,15 @@ class MembersHelper {
       },
       projectManager: {
         key: "projectManager",
-        label: this.t("Common:AIProjectManager"),
-        tooltip: this.t("Common:UserMaxAvailableRoleWarning"),
+        label: this.t("Common:AgentManager"),
+        tooltip: this.t("Common:UserAgentMaxAvailableRoleWarning"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
       projectMember: {
         key: "projectMember",
         label: this.t("Common:Member"),
-        access: ShareAccessRights.ReadOnly,
+        access: ShareAccessRights.Collaborator,
         type: "user",
       },
       collaborator: {
@@ -189,11 +189,11 @@ class MembersHelper {
     if (roomType === RoomsType.AiProjectRoom) {
       if (access === ShareAccessRights.RoomManager)
         return options.projectManager;
-      if (access === ShareAccessRights.ReadOnly)
+      if (access === ShareAccessRights.Collaborator)
         return options.projectMember;
     }
 
-    // The project roles share their access with Room manager and Viewer,
+    // The project roles share their access with Room manager and Content creator,
     // so any other room never resolves to them.
     const [userOption] = Object.values(options).filter(
       (opt) =>

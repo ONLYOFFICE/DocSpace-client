@@ -52,6 +52,7 @@ import { TooltipContainer } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { consumeKey } from "@onlyoffice/apps-ui-kit/utils/consume-key";
 
 import {
+  getAiSourceTitleTranslation,
   getRoomTypeDescriptionTranslation,
   getRoomTypeTitleTranslation,
 } from "./RoomType.utils";
@@ -76,11 +77,19 @@ const RoomType = ({
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
+  // The fixed type at the top of the form of a skill set or a knowledge
+  // base is named as the AI Chat section names it, not as a room type.
+  const aiSourceTitle =
+    type === "displayItem" && !isTemplate
+      ? getAiSourceTitleTranslation(t, roomType)
+      : null;
+
   const room = {
     type: roomType,
     title: isTemplateGallery
       ? t("Common:FromTemplateGallery")
-      : getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection),
+      : (aiSourceTitle ??
+        getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection)),
     description: isTemplateGallery
       ? t("Common:FromTemplateGalleryDescription")
       : getRoomTypeDescriptionTranslation(

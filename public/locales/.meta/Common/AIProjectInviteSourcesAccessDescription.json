@@ -1,20 +1,20 @@
 {
   "key_path": "AIProjectInviteSourcesAccessDescription",
-  "content": "Everyone invited to this project gets the Viewer role in all of its Instructions and Knowledge rooms.",
-  "content_en_sha1_hash": "1db5cb437a1bbb0c420092af667ef531e172555d",
-  "created_at": "2026-11-01T11:21:14.978Z",
-  "updated_at": "2026-11-19T16:14:54.006Z",
+  "content": "Everyone invited to this agent gets the Viewer role in all of its skill sets and knowledge bases.",
+  "content_en_sha1_hash": "35425bb91b28f7f5254c048801211c7bcb6fd30e",
+  "created_at": "2026-11-18T08:05:11.809Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
   "comment": {
-    "text": "Text of the info bar at the top of the Invite panel of an AI project: every invited person automatically becomes a Viewer (the read-only room role, use the same term as the role name) in all Instructions rooms and Knowledge rooms linked to the project.",
+    "text": "Text of the info bar at the top of the Invite panel of an agent: every invited person automatically gets the Viewer role (the read-only room role, use the same term as the role name) in all skill sets and knowledge bases linked to the agent.",
     "is_auto": true,
-    "updated_at": "2026-11-01T11:22:51.313Z",
+    "updated_at": "2026-11-18T08:13:34.331Z",
     "model": "claude-opus-5-5"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 934,
-      "context": "{/* A project member reads its linked rooms through the project. */}\n {roomType === RoomsType.AiProjectRoom ? (\n <PublicRoomBar\n className={styles.aiProjectSourcesBar}\n headerText={t(\"Common:AIProjectInviteSourcesAccess\")}\n bodyText={t(\"Common:AIProjectInviteSourcesAccessDescription\")}\n dataTestId=\"invite_panel_ai_project_sources_bar\"\n />\n ) : null}\n {isPrivateRoom ? null : (\n <ExternalLinks",
+      "line_number": 928,
+      "context": "{/* A project member reads its linked rooms through the project. */}\n {roomType === RoomsType.AiProjectRoom ? (\n <PublicRoomBar\n className={styles.aiProjectSourcesBar}\n headerText={t(\"Common:AIProjectInviteSourcesAccess\")}\n bodyText={t(\"Common:AIProjectInviteSourcesAccessDescription\")}\n dataTestId=\"invite_panel_ai_project_sources_bar\"\n />\n ) : null}\n {hasLinkInvites ? (\n <ExternalLinks",
       "module": "/packages/client"
     }
   ],

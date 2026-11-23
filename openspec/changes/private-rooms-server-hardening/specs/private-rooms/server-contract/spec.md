@@ -71,7 +71,7 @@ For the B2B launch the server SHALL, when a user is deactivated, remove that use
 
 #### Scenario: Deprovisioned owner
 - **WHEN** the owner of a private room is deactivated while still its owner
-- **THEN** the deactivation is refused with a reason of its own and nothing changes
+- **THEN** the deactivation is refused with 403 and `ASC.Files.Core.Helpers.PrivateRoomOwnershipException` in `error.type`, nothing changes, and in a status change of several users nobody is deactivated
 
 #### Scenario: Owner after the room has passed on
 - **WHEN** the former owner is deactivated after the room has passed to a user with keys
@@ -458,7 +458,7 @@ The server SHALL NOT include the plaintext title of a private room or of its fol
 - **THEN** they carry its title
 
 ### Requirement: Private room creation requires keys
-The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, and on the AI hub room types (Knowledge, Instructions and AI project rooms). It SHALL otherwise store the room with the requested room type and the private setting.
+The server SHALL refuse with 403 a room creation request that sets the private flag when the caller has no stored key record or an empty key set, and SHALL refuse with 400 the private flag on a room created on third-party storage, with or without keys, on the AI hub room types (Knowledge, Instructions and AI project rooms), on an AI agent, on the public and the form-filling room types, and on a room made from a template. It SHALL otherwise store the room with the requested room type and the private setting.
 
 #### Scenario: Caller without keys
 - **WHEN** a user without encryption keys creates a private room
@@ -482,7 +482,11 @@ The server SHALL refuse with 403 a room creation request that sets the private f
 
 #### Scenario: AI agent created as private
 - **WHEN** a user with encryption keys creates an AI agent with the private flag while the Document Server encrypts
-- **THEN** the server refuses the request with 400 and creates no agent, once decision 8 confirms the refusal the server proposes
+- **THEN** the server refuses the request with 400 and creates no agent
+
+#### Scenario: Room made from a template as private
+- **WHEN** a room is created from a template with the private flag
+- **THEN** the server answers 400 and creates no room
 
 #### Scenario: Public or form-filling room created as private
 - **WHEN** a room creation request sets the private flag with the public or the form-filling room type, whose rooms exist through an external link

@@ -15,6 +15,10 @@ The system SHALL show a text of its own, and not the server's message, when the 
 - **WHEN** an administrator disables one or several accounts in the accounts list and the server refuses because one of them owns a private room
 - **THEN** Common:PrivateRoomOwnerCannotBeDisabled is shown once and no account is shown as disabled
 
+#### Scenario: Owner removes the own profile
+- **WHEN** the owner of a private room confirms the removal of the own profile and the server refuses for that room
+- **THEN** Common:PrivateRoomOwnerCannotBeDisabled is shown on the confirmation page and the profile stays
+
 #### Scenario: Refused for a private room
 - **WHEN** an administrator turns the owner of a private room into a guest and the server refuses because the user who would take the rooms cannot open them
 - **THEN** Common:PrivateRoomsCannotPassToUser is shown and the type is not changed

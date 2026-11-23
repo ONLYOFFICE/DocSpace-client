@@ -44,6 +44,7 @@ import { FormWrapper } from "@onlyoffice/apps-ui-kit/components/form-wrapper";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { deleteSelf } from "@docspace/shared/api/people";
+import { isPrivateRoomOwnershipRefusal } from "@docspace/shared/services/private-room/ownership-refusal";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 
 import { TError } from "@/types";
@@ -92,7 +93,10 @@ const ProfileRemoveForm = ({
       const knownError = error as TError;
       let errorMessage: string;
 
-      if (typeof knownError === "object") {
+      // Spec: private-rooms/room-membership, "Refused change of an account that owns private rooms is explained"
+      if (isPrivateRoomOwnershipRefusal(error)) {
+        errorMessage = t("Common:PrivateRoomOwnerCannotBeDisabled");
+      } else if (typeof knownError === "object") {
         errorMessage =
           knownError?.response?.data?.error?.message ||
           knownError?.statusText ||

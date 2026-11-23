@@ -124,6 +124,19 @@ describe("AiAgentContext", () => {
     expect(screen.queryByTestId("ai-agent-context-manage-knowledge")).toBeNull();
   });
 
+  it("heads each section with what the assistant does with it, which is all an empty one shows", async () => {
+    api.getAiProject.mockResolvedValue({
+      inRoom: true,
+      aiProject: { instructionsRooms: [], knowledgeRooms: [], canEditSettings: false },
+    });
+    render(<AiAgentContext id={7} />);
+    const skills = await screen.findByTestId("ai-agent-context-skills");
+    expect(screen.getByTestId("ai-agent-context-skills-hint").textContent).toBe("Common:SkillSetsHint");
+    expect(screen.getByTestId("ai-agent-context-knowledge-hint").textContent).toBe("Common:KnowledgeBasesHint");
+    expect(screen.queryAllByTestId("room")).toEqual([]);
+    expect(skills.textContent).toBe("Common:SkillSetsCommon:SkillSetsHint");
+  });
+
   it("says so when the agent cannot be read", async () => {
     api.getAiProject.mockRejectedValue(new Error("down"));
     render(<AiAgentContext id={7} />);

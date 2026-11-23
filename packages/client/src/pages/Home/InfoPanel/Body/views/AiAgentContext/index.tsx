@@ -85,8 +85,10 @@ type AiAgentContextProps = {
 
 /**
  * The Context tab of an agent's Info panel: the skill sets the agent is
- * linked to, each unfolding to its skills, and its knowledge bases. A name
- * opens its room. Those who may edit the agent get a "Manage ..." row under
+ * linked to, each unfolding to its skills, and its knowledge bases. Each
+ * section is headed as the same list is in the composer's slash menu: a
+ * caption and a line saying what the assistant does with it, which is all
+ * an empty section shows. A name opens its room. Those who may edit the agent get a "Manage ..." row under
  * each section ("Manage skill sets...", "Manage knowledge bases..."), which
  * opens the agent's form.
  */
@@ -153,6 +155,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   const section = (
     testId: string,
     label: string,
+    hint: string,
     rooms: TAiProjectSource[],
     row: (room: TAiProjectSource) => React.ReactNode,
     manage: React.ReactNode,
@@ -166,13 +169,14 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       >
         {label}
       </Text>
-      {rooms.length > 0 ? (
-        rooms.map(row)
-      ) : (
-        <Text fontSize="13px" className={styles.empty}>
-          {"—"}
-        </Text>
-      )}
+      <Text
+        fontSize="12px"
+        className={styles.hint}
+        data-testid={`${testId}-hint`}
+      >
+        {hint}
+      </Text>
+      {rooms.map(row)}
       {manage}
     </section>
   );
@@ -182,6 +186,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       {section(
         "ai-agent-context-skills",
         t("Common:SkillSets"),
+        t("Common:SkillSetsHint"),
         context.skillSets,
         (room) => {
           const skills = context.skills[room.id] ?? [];
@@ -226,6 +231,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       {section(
         "ai-agent-context-knowledge",
         t("Common:AIProjectKnowledgeRooms"),
+        t("Common:KnowledgeBasesHint"),
         context.knowledgeBases,
         (room) => (
           <RoomItem

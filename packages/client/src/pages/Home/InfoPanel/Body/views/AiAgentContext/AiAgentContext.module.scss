@@ -48,6 +48,12 @@
 }
 
 .heading {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+// What the assistant does with the section's sources, under its caption.
+.hint {
   margin: 0 0 4px;
   color: var(--text-secondary);
 }

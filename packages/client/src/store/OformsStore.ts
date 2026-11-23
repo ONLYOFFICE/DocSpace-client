@@ -622,8 +622,9 @@ class OformsStore {
   };
 
   initTemplateGallery = async () => {
-    // The server downloads the picked form, so a gallery it cannot reach is
-    // shown as unavailable before the CMS is asked; a server without the
+    // The server downloads the picked template, whatever its format, and one
+    // check covers every tab: a gallery it cannot reach is shown as
+    // unavailable before the CMS is asked; a server without the
     // check (404) or a failed call leaves the gallery as it was. An error of
     // an earlier opening must not stay on screen while this one is checked.
     this.galleryOpeningId += 1;

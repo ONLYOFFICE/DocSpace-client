@@ -50,6 +50,7 @@ import type {
 } from "@onlyoffice/apps-ui-kit/providers/translation";
 import { ThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
 import type { TThemeProvider } from "@onlyoffice/apps-ui-kit/providers/theme";
+import { ThemeKeys } from "@onlyoffice/apps-ui-kit/enums";
 
 import { TDataContext } from "@/types";
 
@@ -60,6 +61,14 @@ import pkgFile from "../../package.json";
 import ErrorBoundaryWrapper from "./ErrorBoundary";
 
 installLatinDigits();
+
+const getDesktopTheme = () => {
+  const type = window.RendererProcessVariable?.theme?.type;
+
+  if (!type) return undefined;
+
+  return type === "dark" ? ThemeKeys.DarkStr : ThemeKeys.BaseStr;
+};
 
 export const Providers = ({
   children,
@@ -93,6 +102,12 @@ export const Providers = ({
   }
 
   const pathName = usePathname();
+
+  const [desktopTheme, setDesktopTheme] = React.useState<ThemeKeys>();
+
+  React.useEffect(() => {
+    setDesktopTheme(getDesktopTheme());
+  }, []);
 
   React.useEffect(() => {
     if (
@@ -129,7 +144,11 @@ export const Providers = ({
       translations={translations}
     >
       <ThemeProvider
-        initialTheme={user?.theme as TThemeProvider["initialTheme"]}
+        initialTheme={
+          user?.theme
+            ? (user.theme as TThemeProvider["initialTheme"])
+            : desktopTheme
+        }
         systemTheme={value.systemTheme as TThemeProvider["systemTheme"]}
         colorTheme={value.colorTheme as TThemeProvider["colorTheme"]}
         locale={locale}

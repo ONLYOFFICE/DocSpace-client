@@ -39,7 +39,7 @@ import classNames from "classnames";
 
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
-import { DeviceType, FolderType } from "../../enums";
+import { DeviceType, FolderType, RoomsType } from "../../enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
@@ -146,6 +146,12 @@ const FilesSelectorInput = ({
     isSelectFolder,
   );
 
+  const isFormRoomType = (roomType?: number) =>
+    roomType === RoomsType.FormRoom;
+
+  const isBackupRoomDisabled: FilesSelectorProps["isRoomDisabled"] = (room) =>
+    isFormRoomType(room.roomType) || room.security?.Create === false;
+
   const getIsDisabledAction: FilesSelectorProps["getIsDisabled"] = (
     isFirstLoad,
     isSelectedParentFolder,
@@ -222,6 +228,7 @@ const FilesSelectorInput = ({
       onSubmit={onSubmit}
       onSetBaseFolderPath={onSetBasePath}
       getIsDisabled={getIsDisabledAction}
+      isRoomDisabled={isRoomBackup ? isBackupRoomDisabled : undefined}
       withCreate={withCreate}
       formProps={formProps}
       disabledCreatePublicRoom={disabledCreatePublicRoom}

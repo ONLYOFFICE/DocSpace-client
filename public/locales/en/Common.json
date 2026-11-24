@@ -2704,6 +2704,7 @@
   "UploadFromDevice": "Add files from device",
   "Uploading": "Uploading",
   "UploadLicenseFile": "Upload license file",
+  "UploadOverEditedFile": "“{{fileName}}” is open for editing and can’t get a new version now, so the upload is saved as a separate copy. To update the file itself, upload it again after editing is finished.",
   "UploadPDFForm": "Upload PDF form",
   "UploadPicture": "Upload picture",
   "Usage": "Usage",

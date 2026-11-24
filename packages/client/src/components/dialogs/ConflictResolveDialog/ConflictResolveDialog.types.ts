@@ -63,6 +63,7 @@ export type TConflictResolveDialogData = {
   };
   /** Set for files bound for a private room; only keeping both is offered. */
   privateRenames?: TPrivateRename[];
+  editingTitles?: string[];
 
   selectedFolder?: TFolder;
   fromShareCollectSelector?: boolean;

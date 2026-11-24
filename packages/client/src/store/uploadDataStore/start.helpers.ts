@@ -38,7 +38,7 @@ import uniqueid from "lodash/uniqueId";
 import { checkIsFileExist, getFolderInfo } from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { RoomsType } from "@docspace/shared/enums";
+import { FileStatus, RoomsType } from "@docspace/shared/enums";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import i18n from "../../i18n";
 import {
@@ -434,11 +434,25 @@ export async function handleUploadConflictsImpl(
     });
 
     if (conflicts.length > 0) {
+      const conflictTitles = new Set(
+        conflicts.map((c) => (typeof c === "string" ? c : c.title)),
+      );
+      const editingTitles = (self.filesStore.files ?? [])
+        .filter(
+          (f) =>
+            String(f.folderId) === String(toFolderId) &&
+            conflictTitles.has(f.title) &&
+            ((f.fileStatus ?? 0) & FileStatus.IsEditing) ===
+              FileStatus.IsEditing,
+        )
+        .map((f) => f.title);
+
       self.setConflictDialogData(conflicts, {
         isUploadConflict: true,
         newUploadData: uploadData,
         folderTitle: folderInfo.title,
         ...(privateRenames.length > 0 && { privateRenames }),
+        ...(editingTitles.length > 0 && { editingTitles }),
       });
     } else {
       self.handleUploadAndOptionalConversion(uploadData, t, true);

@@ -99,6 +99,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     destFolderInfo,
     toFillOut,
     privateRenames,
+    editingTitles,
   } = conflictResolveDialogData;
 
   const onClose = () => {
@@ -242,6 +243,17 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     }
 
     data = { ...data, files: newFiles, filesSize };
+
+    if (
+      conflictResolveType === ConflictResolveType.Overwrite &&
+      editingTitles?.length
+    ) {
+      toastr.warning(
+        t("Common:UploadOverEditedFile", {
+          fileName: editingTitles.join(", "),
+        }),
+      );
+    }
 
     setSelected("none");
     onClosePanels();

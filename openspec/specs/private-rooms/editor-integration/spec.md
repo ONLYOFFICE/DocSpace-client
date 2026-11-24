@@ -131,8 +131,8 @@ For an encrypted file, the editor SHALL NOT mount the document editor component 
 - **THEN** the page shows Common:EncryptedFileNoAccessYet, no button and no editor component
 
 #### Scenario: Wrapped for a key the user no longer holds
-- **WHEN** the user's access entry of the file names a key that is not in the user's key list
-- **THEN** the key flow ends before the unlock dialog is raised, and the page shows Common:EncryptedFileKeyReplaced, no button and no editor component
+- **WHEN** the user's access entry of the file names a key that is not in the user's key list and the unlocked key does not open it
+- **THEN** the page shows Common:EncryptedFileKeyReplaced, no button and no editor component
 
 #### Scenario: No key
 - **WHEN** the key flow ends in the no-key state
@@ -145,6 +145,10 @@ For an encrypted file, the editor SHALL NOT mount the document editor component 
 #### Scenario: Retry after a failed request
 - **WHEN** the user presses Common:TryAgain and the repeated request succeeds
 - **THEN** the key flow goes on from that step and the editor is mounted once it is ready, without a page reload
+
+#### Scenario: Key imported again
+- **WHEN** the user deleted their key and imported the same key again from its export, so that the wraps of earlier files name a key id that the key list no longer holds
+- **THEN** the key flow reaches the ready state and the editor is mounted
 
 ### Requirement: Editor error of an encrypted file offers a reload
 When the editor reports an error for an encrypted file, the page SHALL show Common:SomethingWentWrong with the error description in place of the editor and SHALL offer Common:TryAgain, which loads the page again with a new configuration and a new key flow. The page SHALL NOT repeat the opening by itself.

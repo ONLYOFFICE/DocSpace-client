@@ -49,7 +49,7 @@
   "BackupFile": "Backup file",
   "BackupFileUploading": "Backup file is being uploaded to the server. Please wait.",
   "BlankDocument": "Blank Document",
-  "BlankForm": "Blank Form",
+  "BlankForm": "Blank {{organizationName}} PDF form",
   "BlankPresentation": "Blank Presentation",
   "BlankSpreadsheet": "Blank Spreadsheet",
   "BlockAccessRecommended": "Block access (recommended)",

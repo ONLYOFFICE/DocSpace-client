@@ -49,7 +49,7 @@
   "BackupFile": "Dublējuma fails",
   "BackupFileUploading": "Dublējuma fails tiek augšupielādēts serverī. Uzgaidiet.",
   "BlankDocument": "Tukšs dokuments",
-  "BlankForm": "Tukša forma",
+  "BlankForm": "Tukša {{organizationName}} PDF forma",
   "BlankPresentation": "Būta prezentācija",
   "BlankSpreadsheet": "Tukša tabula",
   "BlockAccessRecommended": "Bloķēt piekļuvi (ieteicams)",

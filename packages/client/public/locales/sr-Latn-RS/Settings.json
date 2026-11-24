@@ -49,7 +49,7 @@
   "BackupFile": "Rezervna datoteka",
   "BackupFileUploading": "Datoteka rezervne kopije se otprema na server. Molimo sačekajte.",
   "BlankDocument": "Prazan dokument",
-  "BlankForm": "Prazan obrazac",
+  "BlankForm": "Prazan {{organizationName}} PDF obrazac",
   "BlankPresentation": "Prazna prezentacija",
   "BlankSpreadsheet": "Prazan tabelarni list",
   "BlockAccessRecommended": "Blokiraj pristup (preporučuje se)",

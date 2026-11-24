@@ -49,7 +49,7 @@
   "BackupFile": "Back-up bestand",
   "BackupFileUploading": "Back-up bestand wordt geüpload naar de server. Een moment geduld.",
   "BlankDocument": "Leeg document",
-  "BlankForm": "Leeg Formulier",
+  "BlankForm": "Leeg {{organizationName}} PDF-formulier",
   "BlankPresentation": "Lege Presentatie",
   "BlankSpreadsheet": "Lege spreadsheet",
   "BlockAccessRecommended": "Toegang blokkeren (aanbevolen)",

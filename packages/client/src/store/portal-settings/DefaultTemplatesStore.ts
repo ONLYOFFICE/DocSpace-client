@@ -44,6 +44,7 @@ import {
   uploadTemplateFromDevice,
 } from "@docspace/shared/api/files";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { getBrandName } from "@docspace/shared/constants/brands";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
@@ -82,7 +83,9 @@ class DefaultTemplatesStore {
       case ".pptx":
         return i18n.t("Settings:BlankPresentation");
       case ".pdf":
-        return i18n.t("Settings:BlankForm");
+        return i18n.t("Settings:BlankForm", {
+          organizationName: getBrandName("OrganizationName"),
+        });
     }
   };
 

@@ -49,7 +49,7 @@
   "BackupFile": "Резервна датотека",
   "BackupFileUploading": "Датотеке резервних копија се отпремају на сервер. Молимо сачекајте.",
   "BlankDocument": "Празни документ",
-  "BlankForm": "Празни формулар",
+  "BlankForm": "Празни {{organizationName}} PDF формулар",
   "BlankPresentation": "Празна презентација",
   "BlankSpreadsheet": "Празна табела",
   "BlockAccessRecommended": "Блокирај приступ (препоручује се)",

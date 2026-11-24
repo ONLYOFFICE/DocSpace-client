@@ -49,7 +49,7 @@
   "BackupFile": "Plik kopii zapasowej",
   "BackupFileUploading": "Plik kopii zapasowej jest przesyłany na serwer. Proszę czekać.",
   "BlankDocument": "Pusty dokument",
-  "BlankForm": "Pusty formularz",
+  "BlankForm": "Pusty formularz PDF {{organizationName}}",
   "BlankPresentation": "Pusta prezentacja",
   "BlankSpreadsheet": "Pusty arkusz kalkulacyjny",
   "BlockAccessRecommended": "Zablokuj dostęp (zalecane)",

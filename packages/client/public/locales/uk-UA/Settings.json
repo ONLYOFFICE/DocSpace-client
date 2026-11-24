@@ -49,7 +49,7 @@
   "BackupFile": "Файл резервної копії",
   "BackupFileUploading": "Файл резервної копії вивантажується на сервер. Зачекайте.",
   "BlankDocument": "Пустий документ",
-  "BlankForm": "Пустий бланк",
+  "BlankForm": "Порожня PDF-форма {{organizationName}}",
   "BlankPresentation": "Порожня презентація",
   "BlankSpreadsheet": "Порожня таблиця",
   "BlockAccessRecommended": "Заблокувати доступ (рекомендовано)",

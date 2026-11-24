@@ -354,6 +354,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setIsUnlocked(false);
     if (userKeys?.userId) {
       broadcastLock(userKeys.userId, { keysChanged: true });
+      // Spec: private-rooms/key-management, "Change passphrase"
+      void forgetDeviceUnlock(userKeys.userId);
     }
   }, [userKeys?.userId]);
 

@@ -610,7 +610,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(broadcastLock).toHaveBeenCalledWith("user-42", {
         keysChanged: true,
       });
-      expect(forgetDeviceUnlock).not.toHaveBeenCalled();
+      expect(forgetDeviceUnlock).toHaveBeenCalledWith("user-42");
       expect(forgetKeyOnDevice).not.toHaveBeenCalled();
     });
 
@@ -930,6 +930,33 @@ describe("EncryptionContext / EncryptionProvider", () => {
       expect(restored).not.toBeNull();
       expect(captured.passphrase).toBeNull();
       expect(latest.isUnlocked).toBe(true);
+    });
+
+    it("Passphrase changed on a remembered device", async () => {
+      vi.mocked(forgetDeviceUnlock).mockImplementation(store.forgetDeviceUnlock);
+      try {
+        SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+        await act(async () => {
+          renderTree({ userKeys: realUserKeys });
+        });
+
+        await act(async () => {
+          latest.lockAfterReseal();
+        });
+        expect(await store.getDeviceUnlockWrittenAt("user-42")).toBeNull();
+
+        let promised!: Promise<IdentityKeyPair | null>;
+        await act(async () => {
+          promised = latest.requireIdentity();
+        });
+        expect(captured.passphrase).not.toBeNull();
+        await act(async () => {
+          captured.passphrase!.onCancel();
+        });
+        expect(await promised).toBeNull();
+      } finally {
+        vi.mocked(forgetDeviceUnlock).mockImplementation(async () => undefined);
+      }
     });
 
     it("Remembered record expired: after auto-lock the user is prompted for the passphrase", async () => {

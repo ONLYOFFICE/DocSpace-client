@@ -1,4 +1,5 @@
 {
+  "DeletePersonalPluginDescription": "This plugin will no longer be available to you. Are you sure you want to continue?",
   "DeletePlugin": "Delete plugin",
   "DeletePluginDescription": "This plugin will no longer be available to the workspace users. Are you sure you want to continue?",
   "DeletePluginTitle": "Delete plugin?",

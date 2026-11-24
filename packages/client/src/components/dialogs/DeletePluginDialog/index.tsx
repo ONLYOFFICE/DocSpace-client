@@ -44,13 +44,14 @@ import { TTranslation } from "@docspace/shared/types";
 
 type Props = {
   isVisible: boolean;
+  personal?: boolean;
   onClose?: () => void;
   onDelete?: (t: TTranslation) => Promise<void>;
 };
 
 const DeletePluginDialog = (props: Props) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
-  const { isVisible, onClose, onDelete } = props;
+  const { isVisible, personal, onClose, onDelete } = props;
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
@@ -71,7 +72,9 @@ const DeletePluginDialog = (props: Props) => {
     <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("DeletePluginDescription")}
+        {personal
+          ? t("DeletePersonalPluginDescription")
+          : t("DeletePluginDescription")}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -121,5 +124,5 @@ export default inject<TStore>(({ pluginStore }) => {
     await uninstallPlugin(pluginName, t, personal);
   };
 
-  return { onClose, onDelete };
+  return { personal, onClose, onDelete };
 })(observer(DeletePluginDialog));

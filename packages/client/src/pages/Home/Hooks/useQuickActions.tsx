@@ -53,9 +53,11 @@ import {
   QuickCustomRoomIcon,
   QuickFormRoomIcon,
   CreateFromTemplateIcon,
+  GeneratePdfAiIcon,
   AIChatIcon,
 } from "@onlyoffice/apps-ui-kit/components/quick-actions/icons";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import FormFromTextIcon from "PUBLIC_DIR/images/form.from.text.react.svg";
 import { RoomsType } from "@onlyoffice/apps-ui-kit/enums";
 import { Events } from "@docspace/shared/enums";
 import { getConstName } from "@docspace/shared/constants/consts";
@@ -346,6 +348,20 @@ export const useQuickActions = (
         icon: <BlankPdfIcon />,
         label: t("Common:BlankPDFForm"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),
+      },
+      {
+        id: "quick-form-generate-ai",
+        dataTestId: "quick-form-generate-ai",
+        icon: <GeneratePdfAiIcon />,
+        label: t("Common:GenerateWithAI"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
+      },
+      {
+        id: "quick-form-from-text",
+        dataTestId: "quick-form-from-text",
+        icon: <FormFromTextIcon />,
+        label: t("Common:FromTextFile"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
       },
     ];
 

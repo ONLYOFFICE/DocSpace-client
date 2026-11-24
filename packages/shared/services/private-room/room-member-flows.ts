@@ -50,6 +50,7 @@ import {
   backfillEncryptedFilesForRoomMembers,
   rewrapMissingFilesForMember,
   validateMembersForEncryption,
+  type FileEncryptionOpResult,
   type NewRoomMember,
   type RoomEncryptionOptions,
   type SkippedRoomMember,
@@ -233,6 +234,32 @@ export type TInviteOutcome = {
   refused?: TRefusedInvitee[];
   /** The messages of the re-wrap, for a caller that can no longer show the result. */
   notices?: TMemberFlowNotice[];
+  /** The files that are wrapped for a key the inviter no longer holds. */
+  keyReplacedFileIds?: number[];
+};
+
+const keyReplacedIdsOf = (fileResults: FileEncryptionOpResult[]) =>
+  fileResults.filter((r) => r.keyReplaced).map((r) => r.fileId);
+
+/**
+ * The message for files that could not be re-wrapped: the cause when every
+ * one of them is wrapped for a key the inviter no longer holds.
+ */
+// Spec: private-rooms/room-membership, "A re-wrap names a key the inviter no longer holds"
+export const reencryptFailureText = (
+  t: TFunction,
+  fileIds: readonly number[],
+  keyReplacedFileIds: readonly number[] = [],
+): string => {
+  const failed = Array.from(new Set(fileIds));
+  const count = failed.length;
+  const replaced = new Set(keyReplacedFileIds);
+  if (count > 0 && failed.every((id) => replaced.has(id))) {
+    return count === 1
+      ? t("Common:PrivateRoomReplacedKeyBarText_one", { count })
+      : t("Common:PrivateRoomReplacedKeyBarText_other", { count });
+  }
+  return t("Common:EncryptedReencryptPartialFailure", { count });
 };
 
 const getInviteOutcome = (
@@ -401,11 +428,11 @@ export async function rewrapForInvitedMembers({
       const failures = fileResults.filter((r) => !r.success);
       const hasAlert = failures.length > 0 || allSkipped.length > 0;
       onProgress({ percent: 100, completed: true, alert: hasAlert });
-      const outcome = getInviteOutcome(
-        newMembers,
-        allSkipped,
-        missingFileIdsByMember,
-      );
+      const keyReplacedFileIds = keyReplacedIdsOf(fileResults);
+      const outcome: TInviteOutcome = {
+        ...getInviteOutcome(newMembers, allSkipped, missingFileIdsByMember),
+        ...(keyReplacedFileIds.length > 0 && { keyReplacedFileIds }),
+      };
       for (const member of outcome.granted) {
         pendingAccessStore.clear(roomId, member.id);
       }
@@ -419,9 +446,11 @@ export async function rewrapForInvitedMembers({
       if (failures.length > 0) {
         notices.push({
           level: "warning",
-          text: t("Common:EncryptedReencryptPartialFailure", {
-            count: failures.length,
-          }),
+          text: reencryptFailureText(
+            t,
+            failures.map((r) => r.fileId),
+            keyReplacedFileIds,
+          ),
         });
       } else if (allSkipped.length === 0) {
         notices.push({ level: "success", text: t("Common:UsersInvited") });
@@ -501,7 +530,7 @@ export async function retryPendingAccess({
   };
 
   try {
-    const { skippedMembers, missingFileIdsByMember } =
+    const { fileResults, skippedMembers, missingFileIdsByMember } =
       pending.missingFileIds === "all"
         ? await addMembersToEncryptedRoom(roomId, [member], options)
         : await rewrapMissingFilesForMember(
@@ -535,9 +564,11 @@ export async function retryPendingAccess({
       pendingAccessStore.record({ roomId, userId: member.id, missingFileIds });
       return {
         level: "warning",
-        text: t("Common:EncryptedReencryptPartialFailure", {
-          count: missingFileIds.length,
-        }),
+        text: reencryptFailureText(
+          t,
+          missingFileIds,
+          keyReplacedIdsOf(fileResults),
+        ),
       };
     }
 

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
@@ -81,14 +81,13 @@ const PersonalPlugins = () => {
     setDeletePluginDialogProps,
     checkPluginCompatibility,
     isLoaded,
+    isPersonalLoaded,
     reloadRequiredPlugins,
   } = pluginStore;
 
   const { pluginOptions, theme, culture } = useStore("settingsStore");
 
   const language = (getCookie(LANGUAGE) || culture) as string;
-
-  const [isPersonalLoaded, setIsPersonalLoaded] = useState(false);
 
   const reloadOnLeave = useRef(false);
   const isMounted = useRef(true);
@@ -126,7 +125,7 @@ const PersonalPlugins = () => {
   );
 
   useEffect(() => {
-    fetchPersonalPlugins().then(() => setIsPersonalLoaded(true));
+    fetchPersonalPlugins();
   }, [fetchPersonalPlugins]);
 
   useEffect(() => {

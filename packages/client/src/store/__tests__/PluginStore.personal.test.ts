@@ -172,6 +172,33 @@ describe("uninstallPlugin", () => {
   });
 });
 
+describe("fetchPersonalPlugins", () => {
+  it.each([true, false])(
+    "marks the member's list as read once the request ends (succeeds: %s)",
+    async (succeeds) => {
+      const store = withLoadedPlugin(true);
+      let finishRead: () => void = () => {};
+
+      vi.mocked(api.plugins.getPersonalPlugins).mockImplementationOnce(
+        () =>
+          new Promise((resolve, reject) => {
+            finishRead = () =>
+              succeeds ? resolve([]) : reject(new Error("timeout"));
+          }),
+      );
+
+      const read = store.fetchPersonalPlugins(false);
+
+      expect(store.isPersonalLoaded).toBe(false);
+
+      finishRead();
+      await read;
+
+      expect(store.isPersonalLoaded).toBe(true);
+    },
+  );
+});
+
 describe("updatePlugin of a personal plugin refused after it was saved", () => {
   it("switches the plugin on when the member's own list says it is on", async () => {
     const store = withLoadedPlugin(true);

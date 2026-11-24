@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -107,7 +107,8 @@ const loadedPlugin = (name: string, personal: boolean) => ({
 
 type TTabState = {
   isAdmin?: boolean;
-  fetchPersonalPlugins?: () => Promise<void>;
+  fetchPersonalPlugins?: () => Promise<unknown>;
+  isPersonalLoaded?: boolean;
   personalPlugins?: ReturnType<typeof ownPlugin>[];
   pluginList?: ReturnType<typeof loadedPlugin>[];
   reloadRequiredPlugins?: string[];
@@ -115,7 +116,8 @@ type TTabState = {
 
 const renderTab = ({
   isAdmin = false,
-  fetchPersonalPlugins = vi.fn(async () => {}),
+  fetchPersonalPlugins = vi.fn(async () => true),
+  isPersonalLoaded = true,
   personalPlugins = [],
   pluginList = [],
   reloadRequiredPlugins = [],
@@ -135,6 +137,7 @@ const renderTab = ({
         setDeletePluginDialogProps: vi.fn(),
         checkPluginCompatibility: () => true,
         isLoaded: true,
+        isPersonalLoaded,
       }}
       userStore={{ user: { isAdmin, isOwner: false } }}
       settingsStore={{
@@ -148,17 +151,9 @@ const renderTab = ({
   );
 
 describe("Personal plugins tab", () => {
-  it("shows the skeleton until the member's plugins are read", async () => {
-    let finishRead = () => {};
-    const fetchPersonalPlugins = vi.fn(
-      () =>
-        new Promise<void>((resolve) => {
-          finishRead = resolve;
-        }),
-    );
-
+  it("shows the skeleton until the member's plugins are first read", () => {
     renderTab({
-      fetchPersonalPlugins,
+      isPersonalLoaded: false,
       personalPlugins: [ownPlugin("own")],
       pluginList: [loadedPlugin("own", true)],
     });
@@ -168,14 +163,20 @@ describe("Personal plugins tab", () => {
     expect(
       screen.queryByText("WebPlugins:PersonalPluginsDescription"),
     ).toBeNull();
+  });
 
-    await act(async () => finishRead());
+  it("shows the list it has at once when opened again and reads it in the background", () => {
+    const fetchPersonalPlugins = vi.fn(() => new Promise(() => {}));
 
+    renderTab({
+      fetchPersonalPlugins,
+      personalPlugins: [ownPlugin("own")],
+      pluginList: [loadedPlugin("own", true)],
+    });
+
+    expect(fetchPersonalPlugins).toHaveBeenCalledTimes(1);
     expect(screen.queryByTestId("list-loader")).toBeNull();
     expect(screen.getByTestId("personal_plugin_own")).toBeInTheDocument();
-    expect(
-      screen.getByText("WebPlugins:PersonalPluginsDescription"),
-    ).toBeInTheDocument();
   });
 
   it("marks a plugin that this page has not loaded", async () => {

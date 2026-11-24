@@ -210,6 +210,8 @@ class PluginStore {
 
   isLoaded = false;
 
+  isPersonalLoaded = false;
+
   settingsPluginDialogVisible = false;
 
   currentSettingsDialogPlugin: null | { pluginName: string } = null;
@@ -589,6 +591,10 @@ class PluginStore {
     this.isLoaded = isLoaded;
   };
 
+  setIsPersonalLoaded = (isPersonalLoaded: boolean) => {
+    this.isPersonalLoaded = isPersonalLoaded;
+  };
+
   initPlugins = async () => {
     if (this.isNotPaidPeriod) {
       this.setIsLoaded(true);
@@ -691,6 +697,8 @@ class PluginStore {
       if (notifyError) toastr.error(e as TData);
 
       return false;
+    } finally {
+      this.setIsPersonalLoaded(true);
     }
   };
 

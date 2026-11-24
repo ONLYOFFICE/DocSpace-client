@@ -32,14 +32,25 @@
     --line: #dfe5ec;
     --accent: #3567c0;
     --accent-soft: #e6eefb;
-    --good: #2f7d4f;
+    /* good and warn are text colors too: ≥ 4.5:1 on their -soft fill */
+    --good: #2a7147;
     --good-soft: #e3f2e9;
-    --warn: #a06a12;
+    --warn: #8a5a0c;
     --warn-soft: #f8eeda;
     --crit: #b3433a;
     --crit-soft: #f9e7e5;
     --chip-ink: #33415a;
     --code-bg: #eef2f9;
+
+    /* The type scale — every font-size uses one of these steps */
+    --fs-label: 12px;  /* uppercase labels, tags, pills, mono bars */
+    --fs-small: 14px;  /* diagram details, nuances, footer, code blocks */
+    --fs-text: 16px;   /* secondary text: cards, captions, callouts, chips */
+    --fs-body: 17px;   /* running text, card and panel headings */
+    --fs-lead: 19px;   /* hero lead, concept-card headings */
+    --fs-h2: 26px;
+    /* running text wraps here; boxes and figures stay full width */
+    --measure: 66ch;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -84,7 +95,7 @@
     background: var(--ground);
     color: var(--ink);
     font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
-    font-size: 17px;
+    font-size: var(--fs-body);
     line-height: 1.55;
     overflow-wrap: break-word;
   }
@@ -111,7 +122,7 @@
     overflow-x: auto;
     margin: 14px 0;
   }
-  pre code { background: none; padding: 0; white-space: pre; font-size: 13.5px; line-height: 1.55; }
+  pre code { background: none; padding: 0; white-space: pre; font-size: var(--fs-small); line-height: 1.55; }
   a { color: var(--accent); }
 
   .shell {
@@ -138,21 +149,21 @@
   .hero .kicker {
     font-family: "Manrope", sans-serif;
     font-weight: 700;
-    font-size: 13px;
+    font-size: var(--fs-label);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 12px;
   }
   .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.02em; }
-  .hero p.lead { max-width: 62ch; font-size: 19px; color: var(--muted); margin: 16px 0 24px; }
+  .hero p.lead { max-width: 62ch; font-size: var(--fs-lead); color: var(--muted); margin: 16px 0 24px; }
   .factline { display: flex; flex-wrap: wrap; gap: 10px; }
   .fact {
     background: var(--ground);
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 7px 16px;
-    font-size: 15px;
+    font-size: var(--fs-text);
     font-weight: 600;
     color: var(--chip-ink);
   }
@@ -161,10 +172,10 @@
   a.fact { text-decoration: none; cursor: pointer; }
   a.fact:hover { border-color: var(--accent); }
 
-  nav.toc { position: sticky; top: 40px; align-self: start; font-size: 15px; }
+  nav.toc { position: sticky; top: 40px; align-self: start; font-size: var(--fs-text); }
   nav.toc .toc-title {
     font-family: "Manrope", sans-serif;
-    font-size: 12px;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -184,9 +195,11 @@
   main { min-width: 0; }
   section { margin-top: 56px; scroll-margin-top: 24px; }
   .sec-head { display: flex; align-items: baseline; gap: 12px; }
-  .sec-num { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; color: var(--accent); }
-  section > .sec-head h2 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+  .sec-num { font-family: "JetBrains Mono", monospace; font-size: var(--fs-label); font-weight: 600; color: var(--accent); }
+  section > .sec-head h2 { font-size: var(--fs-h2); font-weight: 800; margin-bottom: 6px; }
   section > p.sub { color: var(--muted); margin: 0 0 20px; }
+  /* Running text wraps at the measure; cards, panels and figures keep the full column */
+  section > p, .panel > p, .card > p, .panel-intro, .note, figcaption { max-width: var(--measure); }
 
   .card {
     background: var(--card);
@@ -209,28 +222,28 @@
     content: attr(data-title);
     display: block;
     font-family: "Manrope", sans-serif;
-    font-size: 12px;
+    font-size: var(--fs-label);
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 10px;
   }
-  .panel-intro { margin-top: 0; color: var(--muted); font-size: 15px; }
+  .panel-intro { margin-top: 0; color: var(--muted); font-size: var(--fs-text); }
   .panel > p:first-of-type { margin-top: 0; }
-  .panel h3 { font-size: 17px; margin: 20px 0 8px; }
+  .panel h3 { font-size: var(--fs-body); margin: 20px 0 8px; }
   .plainlist { margin: 0; padding-left: 20px; }
   .plainlist li { margin: 5px 0; }
 
   /* Concept cards (roles, key ideas) */
   .roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
   @media (max-width: 720px) { .roles { grid-template-columns: minmax(0, 1fr); } }
-  .role-card h3 { font-size: 18px; margin-bottom: 8px; }
-  .role-card p { font-size: 15.5px; color: var(--muted); margin: 0; }
+  .role-card h3 { font-size: var(--fs-lead); margin-bottom: 8px; }
+  .role-card p { font-size: var(--fs-text); color: var(--muted); margin: 0; }
   .role-tag {
     display: inline-block;
     font-family: "Manrope", sans-serif;
-    font-size: 12px;
+    font-size: var(--fs-label);
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -245,7 +258,7 @@
   /* Filter buttons — role pickers and tab switchers share this look */
   .filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
   .filter button {
-    font: 600 15px "Source Sans 3", sans-serif;
+    font: 600 var(--fs-text) "Source Sans 3", sans-serif;
     color: var(--chip-ink);
     background: var(--card);
     border: 1px solid var(--line);
@@ -277,13 +290,13 @@
   }
   ul.actions li .who {
     font-family: "Manrope", sans-serif;
-    font-size: 12px;
+    font-size: var(--fs-label);
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     white-space: nowrap;
   }
-  ul.actions li .note { grid-column: 1 / -1; font-size: 15px; color: var(--muted); }
+  ul.actions li .note { grid-column: 1 / -1; font-size: var(--fs-text); color: var(--muted); }
   ul.actions.dim li { opacity: 0.35; transition: opacity 0.15s; }
   ul.actions.dim li.hit { opacity: 1; }
 
@@ -292,7 +305,7 @@
     align-items: center;
     gap: 6px;
     font-family: "Manrope", sans-serif;
-    font-size: 12.5px;
+    font-size: var(--fs-label);
     font-weight: 700;
     border-radius: 999px;
     padding: 2px 11px;
@@ -311,16 +324,16 @@
     padding: 24px 22px;
   }
   .node { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; text-align: center; background: var(--ground); }
-  .node .t { font-weight: 700; font-size: 15px; font-family: "Manrope", sans-serif; }
-  .node .d { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+  .node .t { font-weight: 700; font-size: var(--fs-text); font-family: "Manrope", sans-serif; }
+  .node .d { font-size: var(--fs-small); color: var(--muted); margin-top: 3px; line-height: 1.45; }
   .node.hub { border-color: var(--accent); background: var(--accent-soft); }
   .node.ok { border-color: var(--good); background: var(--good-soft); }
   .node.off { border-color: var(--crit); background: var(--crit-soft); }
-  .darrow { color: var(--accent); font-weight: 700; font-size: 18px; text-align: center; }
+  .darrow { color: var(--accent); font-weight: 700; font-size: var(--fs-lead); text-align: center; }
   .darrow small {
     display: block;
     font-family: "Manrope", sans-serif;
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.03em;
     color: var(--muted);
@@ -346,19 +359,19 @@
     width: 28px; height: 28px; border-radius: 50%;
     display: grid; place-items: center;
     font-family: "JetBrains Mono", monospace;
-    font-size: 13px; font-weight: 600;
+    font-size: var(--fs-label); font-weight: 600;
     background: var(--accent-soft); color: var(--accent);
     border: 1.5px solid var(--line);
     flex-shrink: 0;
   }
   .fstep .rail-line { width: 2px; flex: 1; background: var(--line); margin: 4px 0; min-height: 12px; }
   .fstep:last-child .rail-line { display: none; }
-  .fstep .fbody { padding-bottom: 16px; font-size: 15.5px; }
+  .fstep .fbody { padding-bottom: 16px; font-size: var(--fs-text); }
   .fstep:last-child .fbody { padding-bottom: 2px; }
   .fstep .actor {
     display: inline-block;
     font-family: "Manrope", sans-serif;
-    font-size: 11px;
+    font-size: var(--fs-label);
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -369,14 +382,16 @@
     padding: 1px 7px;
     margin-bottom: 4px;
   }
-  .fstep small { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+  .fstep small { display: block; color: var(--muted); font-size: var(--fs-small); margin-top: 2px; }
 
   /* The one aside component; two tones. */
   .callout {
     border-radius: 12px;
     padding: 14px 18px;
+    /* the box spans the column, its text wraps at the measure */
+    padding-right: max(18px, calc(100% - var(--measure)));
     margin: 18px 0;
-    font-size: 16px;
+    font-size: var(--fs-text);
     border: 1px solid transparent;
   }
   .callout.rule { background: var(--accent-soft); color: var(--chip-ink); }
@@ -385,8 +400,8 @@
 
   /* Two-way forks and comparisons */
   .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px; margin: 18px 0; }
-  .compare .card h3 { font-size: 17px; margin-bottom: 10px; }
-  .compare ul { margin: 0; padding-left: 20px; font-size: 15.5px; }
+  .compare .card h3 { font-size: var(--fs-body); margin-bottom: 10px; }
+  .compare ul { margin: 0; padding-left: 20px; font-size: var(--fs-text); }
   .compare li { margin: 5px 0; }
 
   .pill-list { list-style: none; padding: 0; margin: 14px 0; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -395,7 +410,7 @@
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 6px 14px;
-    font-size: 15px;
+    font-size: var(--fs-text);
     font-weight: 600;
     color: var(--chip-ink);
   }
@@ -409,7 +424,7 @@
     position: absolute;
     right: 10px;
     bottom: 10px;
-    font-size: 12px;
+    font-size: var(--fs-label);
     line-height: 1;
     background: rgba(13, 17, 23, 0.55);
     color: #fff;
@@ -424,7 +439,7 @@
     padding: 8px 14px;
     border-bottom: 1px solid var(--line);
     font-family: "JetBrains Mono", monospace;
-    font-size: 12.5px;
+    font-size: var(--fs-label);
     color: var(--muted);
     min-width: 0;
     overflow: hidden;
@@ -462,12 +477,14 @@
     white-space: nowrap;
   }
   .ui-long { white-space: normal; }
+  /* a long UI string must not push the page sideways on a phone */
+  @media (max-width: 560px) { .ui { white-space: normal; } }
 
   /* Inline SVG diagrams: draw with the tokens so both themes hold */
   .dia { padding: 20px; overflow-x: auto; }
   .dia svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
   .dia text { font-family: "Manrope", sans-serif; }
-  figcaption { font-size: 15px; color: var(--muted); padding: 10px 4px 0; }
+  figcaption { font-size: var(--fs-text); color: var(--muted); padding: 10px 4px 0; }
   figcaption b { color: var(--ink); }
   .shots-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 20px; }
 
@@ -487,10 +504,10 @@
   /* Reference data only — permissions use .filter + ul.actions */
   .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); margin: 18px 0; }
   table.data { border-collapse: collapse; width: 100%; min-width: 560px; }
-  table.data th, table.data td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 15px; vertical-align: top; }
+  table.data th, table.data td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: var(--fs-text); vertical-align: top; }
   table.data th {
     font-family: "Manrope", sans-serif;
-    font-size: 12px;
+    font-size: var(--fs-label);
     text-transform: uppercase;
     letter-spacing: 0.07em;
     color: var(--muted);
@@ -506,7 +523,7 @@
     padding-top: 20px;
     border-top: 1px solid var(--line);
     color: var(--muted);
-    font-size: 14px;
+    font-size: var(--fs-small);
   }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) {
@@ -522,7 +539,7 @@
       content: attr(data-title);
       display: block;
       font-family: "Manrope", sans-serif;
-      font-size: 12px;
+      font-size: var(--fs-label);
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;

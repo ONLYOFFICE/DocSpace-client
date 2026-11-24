@@ -177,10 +177,12 @@ Before writing the page, load the `artifact-design` skill; load
   the structure and the verbatim UI strings; write the prose anew in
   the target language.
 - **Final copy pass on plain text, per language, before the first
-  publish.** Strip the markup (any quick one-liner) and reread the
-  whole prose top to bottom as running text — no layout, no images to
-  hide behind. Rewrite every sentence that needs a second read, leans
-  on a coined image, or reads like a translation. Only then publish.
+  publish** — the copy review in §7 step 2: the scanner measures, the
+  `onboard-judge` agent proposes rewrites for the clear failures, the
+  user approves them, and you reread the plain text yourself — no
+  layout, no images to hide behind. Rewrite
+  every sentence that needs a second read, leans on a coined image, or
+  reads like a translation. Only then publish.
 - **Never embellish behavior.** Describe exactly what the mechanism
   does and nothing more: a `mailto:` link "opens the mail client with
   the address prefilled" — not "opens a ready letter".
@@ -229,6 +231,12 @@ Before writing the page, load the `artifact-design` skill; load
 - Screenshots enlarge on click: a simple lightbox overlay (zoom-in
   cursor on the thumbnail; click or Esc closes) — inline thumbnails
   stay compact, details stay readable.
+- **On desktop a screenshot shows at 0.6 of its real size or more** —
+  below that, the product's ~13px interface text renders under 8px and
+  a reader who only scrolls cannot read the evidence. A full-width frame
+  (1440px) takes its own row; side by side, each frame is cropped to at
+  most ~700 source pixels wide. The lightbox does not excuse a smaller
+  inline frame. `ux-check.cjs` enforces this (§7 step 3).
 
 ## 5. Schematics
 
@@ -250,10 +258,16 @@ Before writing the page, load the `artifact-design` skill; load
 
 ## 6. Layout
 
-- Text runs the same width as the cards and figures — no narrow
-  paragraphs against full-width blocks (the "slapped together" look).
-  The shell is ~1240px: wide enough for side-by-side screenshots to
-  stay legible.
+- Running text wraps at the measure (`--measure`, ~70 characters a
+  line); cards, panels, figures and callout boxes keep the full column —
+  a callout wraps its text at the measure through its right padding, so
+  no narrow box stands against wide ones. Lines of 100+ characters,
+  which full-width paragraphs produced on the ~1240px shell, are hard to
+  track back to the next line. Keep the shell at ~1240px: it is what
+  keeps screenshots at a legible scale.
+- Font sizes come only from the type-scale tokens (`--fs-label` …
+  `--fs-h2`); running and secondary text never go below 16px. A new
+  size is a new token, never a one-off pixel value.
 - No inline styles: shared classes for panels, headings and lists, one
   spacing rhythm.
 - Chips, pills and diagram nodes placed inside a card take the page
@@ -279,7 +293,43 @@ path, a `file://` or localhost link, or a screenshot of a local render
 1. Author the HTML as wrapper content (no `<!doctype>`, `<html>`,
    `<head>` or `<body>` tags of your own) in the scratchpad directory,
    and embed the images with the embed script.
-2. **Silent smoke-test** — an internal check, never shown or announced
+2. **Copy review**, on the source HTML (before embedding), per page:
+   1. Keep a copy of the source as `copy-before.html`, then run
+      `node .claude/skills/onboard/naturalness.mjs <src> --lang=<page language> --text=<s>/copy.txt --json=<s>/copy-before.json > <s>/copy-report.txt`.
+      It reports rhythm, density, repeats, this skill's structure rules
+      (callout over two sentences, caption over one, a second loose
+      paragraph). It holds no word lists, so it works the same for a
+      page in any language — never add one; language patterns belong in
+      the judge's rubric as concepts. Numbers are compared between
+      versions of one page, never across languages.
+   2. Spawn the `onboard-judge` agent (`subagent_type: "onboard-judge"`;
+      its file pins a model other than the author's) with the text
+      path, the page language and the report path — nothing from the
+      conversation. If the type is missing (agent files load at session
+      start), spawn `general-purpose` with `model: "sonnet"` and tell it
+      to follow the body of `.claude/agents/onboard-judge.md`.
+   3. Check every severity-2 rewrite against the rule or the code — the
+      judge sees only text, so a rewrite that adds a referent or shifts
+      the meaning is corrected or dropped here. `rewrite: null` is a
+      question about facts — answer it from the rule or the code and
+      propose your own fix, or leave the sentence and say so. The
+      scanner's structure issues (callout over two sentences, caption
+      over one, a second loose paragraph) get proposed fixes too — they
+      are this skill's rules.
+   4. **Ask before applying — never skipped.** List every proposed change
+      as "was → became", one line each, with the rule in brackets and a
+      mark on those you corrected; below it, the severity-1 findings as
+      report-only (not part of the question). Then one option dialog:
+      "Apply all (recommended)" / "Let me pick" / "Don't apply". "Let me
+      pick" → a follow-up multi-select when the list fits in four
+      options, otherwise a numbered list the user answers with numbers.
+   5. Apply what was approved: replace the quoted span in the source,
+      keeping the markup around `⟦ ⟧` UI strings intact. Rerun the
+      scanner with `--protect=<s>/copy-before.html
+      --baseline=<s>/copy-before.json`. A nonzero exit means a UI string
+      or a number changed — undo that rewrite. The reply that delivers
+      the page names the numbers that moved.
+3. **Silent smoke-test** — an internal check, never shown or announced
    to the user, never their preview, and **never a visible browser
    window**: drive a headless browser from a script
    (`chromium.launch()` — require the repo's own Playwright, e.g.
@@ -294,18 +344,26 @@ path, a `file://` or localhost link, or a screenshot of a local render
    functional check only — design is judged on the published artifact
    (a local render lacks the artifact wrapper and is not how the page
    really looks).
-3. The footer names the provenance in one line: the source rule (or
+   Then run `node .claude/skills/onboard/ux-check.cjs <embedded page>`
+   (headless too; it renders desktop light and dark, 375px and 320px).
+   Every "must fix" line — contrast below WCAG AA, horizontal scroll on
+   a phone, a click target under 24px, a screenshot under 0.6 of its
+   real size on desktop — is fixed before publishing; a nonzero exit
+   blocks the publish. The report lines (line length, text runs, font
+   sizes) are fixed when marked ⚠, otherwise only read.
+4. The footer names the provenance in one line: the source rule (or
    "code survey"), the month and year, a scope note when the page
    narrows the area (e.g. SaaS only), and the model that assembled the
    page — the name of the model actually running the session, never one
    guessed or copied from an example or an earlier page.
-4. Publish with the Artifact tool (private; the user shares the link
+5. Publish with the Artifact tool (private; the user shares the link
    when they choose) and give the user the artifact URL. Keep one page
    per feature and republish to the same URL with a short version
    `label`; never fork a second artifact for a revision.
-5. Iterate with the user section by section — copy, layout and visuals
-   are their calls; apply each request, rerun steps 1–3, same URL.
-6. **Standalone HTML file** — only when asked for one. Wrap the same
+6. Iterate with the user section by section — copy, layout and visuals
+   are their calls; apply each request, rerun steps 1–4 (step 2 only
+   when the copy changed), same URL.
+7. **Standalone HTML file** — only when asked for one. Wrap the same
    embedded content in a complete document: `<!doctype html>`, `<html>`,
    a `<head>` carrying `<meta charset>`, `<meta name="viewport">`, the
    page's `<title>` hoisted into it and a minimal body reset — opened

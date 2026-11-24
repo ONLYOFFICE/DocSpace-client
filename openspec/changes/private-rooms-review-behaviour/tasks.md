@@ -15,4 +15,4 @@
 
 ## 4. Integration
 
-- [ ] 4.1 Run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; run `keys-management.spec.ts` and `keys-management-advanced.spec.ts` in Docker and check that no case other than the two known screenshot differences (passphrase-create.png, passphrase-rules-tooltip.png) fails
+- [x] 4.1 Run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; run `keys-management.spec.ts` and `keys-management-advanced.spec.ts` in Docker and check that no case other than the two known screenshot differences (passphrase-create.png, passphrase-rules-tooltip.png) fails

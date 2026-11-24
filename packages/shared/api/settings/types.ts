@@ -141,8 +141,6 @@ export type TTemplateGallery = {
   domain: string;
   uploadPath: string;
   uploadDomain: string;
-  url?: string;
-  uploadUrl?: string;
 };
 
 export type TDomainValidator = {

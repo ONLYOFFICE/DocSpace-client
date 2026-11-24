@@ -190,8 +190,6 @@ class SettingsStore {
   enabledJoin = false;
 
   templateGallery: TTemplateGallery = {
-    url: "",
-    uploadUrl: "",
     path: "",
     domain: "",
     uploadPath: "",

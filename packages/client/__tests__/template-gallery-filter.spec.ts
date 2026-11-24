@@ -38,7 +38,7 @@ import {
   filesSettingsHandler,
   myDocumentsHandler,
   myHandler,
-  oformsFormGallerySettings,
+  oformsTemplateGallerySettings,
   oformsHandlers,
   rootHandler,
   selfActivationStatusHandler,
@@ -92,7 +92,7 @@ test.describe("Template gallery filter", () => {
       settingsHandler(
         TEST_PORT,
         TypeSettings.Authenticated,
-        oformsFormGallerySettings(TEST_PORT),
+        oformsTemplateGallerySettings(TEST_PORT),
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       myHandler(TEST_PORT, true),

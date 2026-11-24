@@ -40,7 +40,7 @@ import {
   filesSettingsHandler,
   myDocumentsHandler,
   myHandler,
-  oformsFormGallerySettings,
+  oformsTemplateGallerySettings,
   oformsHandlers,
   roomTagsHandler,
   rootHandler,
@@ -96,7 +96,7 @@ test.describe("Hotkeys with the template gallery open", () => {
       settingsHandler(
         TEST_PORT,
         TypeSettings.Authenticated,
-        oformsFormGallerySettings(TEST_PORT),
+        oformsTemplateGallerySettings(TEST_PORT),
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       myHandler(TEST_PORT, true),
@@ -162,7 +162,7 @@ test.describe("Hotkeys in the Forms template gallery", () => {
       settingsHandler(
         TEST_PORT,
         TypeSettings.Authenticated,
-        oformsFormGallerySettings(TEST_PORT),
+        oformsTemplateGallerySettings(TEST_PORT),
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       formsRootHandler(),

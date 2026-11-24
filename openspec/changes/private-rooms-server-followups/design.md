@@ -331,6 +331,25 @@ is and the client on a portal that is not standalone.
 
 The app was switched on again and the section answered as before.
 
+### Stand check of 2026-11-24
+
+A local stand of the owner after the release was merged into both
+branches: `../server` at `b708cf9799`, the client at `25c24fe0e09`, a
+standalone portal with a new database, the E2E rooms app on, Document
+Server 10.0.3.58.
+
+- The counter of the Private item (task 3.9). A member uploaded a file to
+  a private room while the owner of the portal, a member of that room,
+  had the Rooms section open. The item showed 1 without a reload. It lost
+  the counter without a reload after the mark of the file was cleared
+  (`PUT files/fileops/markasread`), and again, for a second file, after
+  the file was opened (`GET files/file/{id}/openedit`). Both requests
+  were sent from the page, not through the list or the editor: opening
+  the file in the interface needs the passphrase of that account.
+- The migration of the link tables, generated again as
+  `MigrationContext_Upgrade112`, is applied on this database: a link of a
+  file of a private room is created with its key material and revoked.
+
 ## Goals / Non-Goals
 
 **Goals:**

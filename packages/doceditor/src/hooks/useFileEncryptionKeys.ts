@@ -41,6 +41,7 @@ import type { EditorConfigBase } from "@onlyoffice/doceditor-types";
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
 import { useEncryptionOptional } from "@docspace/shared/context/encryption";
 import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
+import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { EDITOR_CONTRACT_VERSION } from "@docspace/shared/services/encryption/types";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
@@ -66,9 +67,10 @@ export type TEditorEncryptionKeys = NonNullable<
 >;
 
 /**
- * Where the key flow of an encrypted file stands. The last five are its ends
+ * Where the key flow of an encrypted file stands. The last six are its ends
  * without a key: the unlock dialog was dismissed, the file holds no wrap for
- * the user, the user holds no key, a request failed, or anything else.
+ * the user, its wrap names a key the user no longer holds, the user holds no
+ * key, a request failed, or anything else.
  * Spec: private-rooms/editor-integration, "Editor not mounted until keys are ready"
  */
 export type TFileEncryptionStatus =
@@ -78,6 +80,7 @@ export type TFileEncryptionStatus =
   | "ready"
   | "unlock-cancelled"
   | "no-access"
+  | "key-replaced"
   | "no-key"
   | "load-failed"
   | "error";
@@ -271,6 +274,7 @@ const useFileEncryptionKeys = (
         dek = await unwrapDekForCurrentUser({
           fileKeys: info.fileKeys,
           roomMemberKeys,
+          userKeys: info.userKeys,
           currentUserId,
           currentIdentity: identity,
           fileId: numericFileId,
@@ -296,6 +300,10 @@ const useFileEncryptionKeys = (
         if (cancelled) return;
         setState({ status: "ready", encryptionKeys });
       } catch (error) {
+        if (error instanceof KeyReplacedError) {
+          if (!cancelled) setState({ status: "key-replaced" });
+          return;
+        }
         console.error("[ENCRYPTION] editor key acquisition failed:", error);
         if (!cancelled) setState({ status: "error" });
       } finally {

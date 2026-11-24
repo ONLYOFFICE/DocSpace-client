@@ -61,6 +61,11 @@ function getSectionContentWidth() {
   );
 }
 
+/**
+ * How many tiles a row of the tile view holds, as its CSS auto-fill grid lays
+ * them out. The tiles of the AI Chat lists - agents, skill sets, knowledge
+ * bases - are laid out in the columns of rooms.
+ */
 export const getCountTilesInGrid = (
   isRooms?: boolean,
   isTemplates?: boolean,

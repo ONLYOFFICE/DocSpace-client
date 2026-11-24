@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG හෝ SVG, 32x32",
   "ID": "අංකය",
   "InvalidToken": "වලංගු නොවන ටෝකනය",
-  "LastModified": "අන්තිම වශයෙන් වෙනස් කරන ලද්දේ",
   "NewApp": "නව අයදුම්පත්‍රය",
   "NoAuthorizedApps": "අනුමතිත ඇප්ස් නැත.",
   "NoOAuthAppHeader": "OAuth යෙදුම් නැත.",

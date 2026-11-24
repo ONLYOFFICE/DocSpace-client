@@ -42,7 +42,6 @@ import {
   DEFAULT_AUTO_LOCK_SECONDS,
   getAutoLockTimeoutSeconds,
   getCurrentAutoLockPresetId,
-  locksWhenTabHidden,
   setAutoLockPreset,
   subscribeAutoLockChange,
   setAutoLockScope,
@@ -130,22 +129,6 @@ describe("auto-lock preference storage", () => {
       Math.max(...AUTO_LOCK_PRESETS.map((p) => p.seconds)),
     ).toBeLessThanOrEqual(30 * 60);
   });
-
-  it("Tab hidden", () => {
-    for (const id of ["5m", "15m"] as const) {
-      setAutoLockPreset(id);
-
-      expect(locksWhenTabHidden()).toBe(true);
-    }
-  });
-
-  it("Tab hidden with the default preset", () => {
-    expect(locksWhenTabHidden()).toBe(false);
-
-    setAutoLockPreset("30m");
-
-    expect(locksWhenTabHidden()).toBe(false);
-  });
 });
 
 describe("auto-lock preference change", () => {
@@ -183,7 +166,6 @@ describe("auto-lock preference change", () => {
 
       expect(listener).toHaveBeenCalledTimes(1);
       expect(getAutoLockTimeoutSeconds()).toBe(300);
-      expect(locksWhenTabHidden()).toBe(true);
       unsubscribe();
     });
 

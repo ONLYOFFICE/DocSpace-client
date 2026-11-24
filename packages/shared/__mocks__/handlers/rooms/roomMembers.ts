@@ -60,6 +60,15 @@ export type RoomMembersHandlerOptions = {
    */
   withoutKeys?: string[];
   /**
+   * Portal groups, for a private room. The server resolves every subject to
+   * an account and checks its key; a group id resolves to
+   * Constants.LostUser, which has none, so naming a group that holds no
+   * share in the room yet is answered with 403. A group already shared
+   * there is not checked. The request carries no subject type, hence this
+   * option.
+   */
+  groups?: string[];
+  /**
    * The room's files. A share set to None (FileShare.None) for a member
    * who held one removes that member's file keys once the request went
    * through, as SetAceObjectAsync calls RevokeFileKeysAsync after its loop;
@@ -187,16 +196,32 @@ export const roomMembersHandlers = (
       return okResponse({ items, total: items.length });
     }),
 
+    /**
+     * VirtualRoomsController.SetRoomSecurity, which runs
+     * FileSharingAceHelper.SetAceObjectAsync: the invitations are walked
+     * groups first (ordered by SubjectGroup, descending), and in a private
+     * room every subject but a group already shared there must hold a key.
+     */
     http.put(baseUrl, async ({ request }) => {
       const body = (await request.json()) as {
         invitations?: Array<{ id: string; access?: number; email?: string }>;
       };
       requests.push({ method: "PUT", url: baseUrl, body });
 
+      const isGroup = (id: string) => opts.groups?.includes(id) ?? false;
+      const invitations = body.invitations ?? [];
+      const ordered = [
+        ...invitations.filter((inv) => isGroup(inv.id)),
+        ...invitations.filter((inv) => !isGroup(inv.id)),
+      ];
+
       const removed: string[] = [];
-      for (const inv of body.invitations ?? []) {
-        if (opts.withoutKeys?.includes(inv.id)) return noKeyResponse();
+      for (const inv of ordered) {
         const existing = state.find((m) => m.id === inv.id);
+        const refused = isGroup(inv.id)
+          ? !existing?.isGroup
+          : opts.withoutKeys?.includes(inv.id);
+        if (refused) return noKeyResponse();
         if (existing) {
           if (inv.access === SHARE_NONE) removed.push(inv.id);
           if (inv.access !== undefined) existing.access = inv.access;
@@ -206,6 +231,7 @@ export const roomMembersHandlers = (
           id: inv.id,
           email: inv.email,
           access: inv.access ?? 11,
+          isGroup: isGroup(inv.id) || undefined,
         });
       }
       opts.files?.current?.revokeFileKeys(removed);

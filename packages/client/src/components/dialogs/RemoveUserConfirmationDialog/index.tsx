@@ -42,16 +42,18 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useEffect, useRef, useState } from "react";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
+import type { TRemoveUserReason } from "./RemoveUserConfirmationDialog.types";
+
 type Props = {
   setRemoveUserConfirmation: (
     visible: boolean,
     callback?: () => Promise<void>,
-    isEncryptedRoom?: boolean,
+    reason?: TRemoveUserReason,
   ) => void;
   removeUserConfirmation: {
     visible: boolean;
     callback: () => Promise<void> | null;
-    isEncryptedRoom?: boolean;
+    reason?: TRemoveUserReason;
   };
 };
 
@@ -63,7 +65,14 @@ const RemoveUserConfirmationDialog = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const isEncryptedRoom = !!removeUserConfirmation.isEncryptedRoom;
+  // Spec: ai-agent-access, "Removing a member warns about their conversations"
+  const reason = removeUserConfirmation.reason ?? "formFilling";
+  const warning =
+    reason === "encryptedRoom"
+      ? t("Common:RemoveUserFromEncryptedRoomWarning")
+      : reason === "agentMember"
+        ? t("Common:RemoveAgentMemberWarning")
+        : t("People:RemoveUserConfirmationText");
 
   // The control that asked for the removal goes with the removed member, so
   // the dialog has nothing to give the focus back to: it goes to the tab of
@@ -113,9 +122,7 @@ const RemoveUserConfirmationDialog = ({
       <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
-          {isEncryptedRoom
-            ? t("Common:RemoveUserFromEncryptedRoomWarning")
-            : t("People:RemoveUserConfirmationText")}
+          {warning}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

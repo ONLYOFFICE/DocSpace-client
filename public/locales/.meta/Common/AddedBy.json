@@ -1,0 +1,29 @@
+{
+  "key_path": "AddedBy",
+  "content": "Added by",
+  "content_en_sha1_hash": "75a4b633a09baf6e3a808bafcffc177b185de6fe",
+  "created_at": "2026-11-18T08:35:02.295Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Column header in the file list of a knowledge base (an AI Knowledge room): the person who added the file. Short column title, followed by the person's name in each row.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 319,
+      "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"AuthorKnowledgeFile\",\n title: t(\"Common:AddedBy\"),\n enable: authorKnowledgeFileColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

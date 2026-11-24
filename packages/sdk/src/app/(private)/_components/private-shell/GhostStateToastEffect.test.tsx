@@ -93,6 +93,25 @@ describe("GhostStateToastEffect", () => {
     act(() => toast.props.components[0].props.onClick());
   };
 
+  it("Unreadable file", () => {
+    act(() => env.handler?.());
+
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+    const toast = vi.mocked(toastr.warning).mock.calls[0][0] as React.ReactElement<{
+      i18nKey: string;
+    }>;
+    expect(toast.props.i18nKey).toBe("Common:GhostStateDetected");
+  });
+
+  it("Unreadable file: unmount clears the handler", () => {
+    expect(env.handler).not.toBeNull();
+
+    act(() => root?.unmount());
+    root = null;
+
+    expect(env.handler).toBeNull();
+  });
+
   it("Reset link of the ghost-state toast", () => {
     const open = vi.spyOn(window, "open").mockReturnValue({} as Window);
 

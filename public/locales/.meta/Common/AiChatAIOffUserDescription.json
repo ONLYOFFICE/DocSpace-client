@@ -1,0 +1,29 @@
+{
+  "key_path": "AiChatAIOffUserDescription",
+  "content": "Agents, skill sets and knowledge bases will be available once the Full admin sets up AI.",
+  "content_en_sha1_hash": "e2526fe0300014d7c0749e8113a0457088b82866",
+  "created_at": "2026-11-20T10:53:31.448Z",
+  "updated_at": "2026-11-20T10:54:39.928Z",
+  "comment": {
+    "text": "Description of the AI is not available screen for a user who is not an admin. Full admin is a user role. Shown on the lists of the AI Chat section (Agents, Skill sets, Knowledge bases) while AI is not set up on the portal.",
+    "is_auto": true,
+    "updated_at": "2026-11-20T10:54:39.928Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 288,
+      "context": "export const getAiRoomsAIOffDescription = (\n t: TTranslation,\n standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n if (!isPortalAdmin) return t(\"Common:AiChatAIOffUserDescription\");\n if (standalone) return t(\"Common:AiChatAIOffStandaloneAdminDescription\");\n return (\n <>\n <Text as=\"span\">{t(\"Common:AiChatAIOffDescription\")}</Text>\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

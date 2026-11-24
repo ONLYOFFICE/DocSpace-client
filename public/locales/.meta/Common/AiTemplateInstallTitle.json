@@ -1,0 +1,29 @@
+{
+  "key_path": "AiTemplateInstallTitle",
+  "content": "Install this template?",
+  "content_en_sha1_hash": "fec2a55aa5c8a2f6691851e4dafe58b9f5e5ddf2",
+  "created_at": "2026-11-18T08:05:13.577Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
+  "comment": {
+    "text": "Title of the confirmation dialog shown before a template from the AI templates catalog is installed; installing creates new rooms and installing again creates them again. A yes/no question ending with a question mark.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:13:34.331Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/AiTemplateInstallDialog.tsx",
+      "line_number": 126,
+      "context": "displayType={ModalDialogType.modal}\n onClose={isInstalling ? undefined : closeInstallConfirmation}\n dataTestId=\"ai-template-install-dialog\"\n >\n <ModalDialog.Header>\n {t(\"Common:AiTemplateInstallTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text dataTestId=\"ai-template-install-description\">\n <Description template={template} t={t} />\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -44,8 +44,11 @@ import {
   getAiProjectKnowledgeFiles,
   getAiProjectKnowledgeFilesCount,
   getAiProjectSkills,
+  getAiProjectSummary,
+  getDefaultChatModelName,
   refreshAiProjectSettings,
   toAiProject,
+  toAiProjectSummary,
   updateAiProject,
 } from "@docspace/shared/api/ai/projects";
 // A project is a room: what it shares with a room goes through the room routes.
@@ -62,11 +65,16 @@ import type {
   TAiProjectRoomDto,
   TAiProjectSkillsRoom,
   TAiProjectSource,
+  TAiProjectSummary,
 } from "@docspace/shared/api/ai/projects";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import type AiPresetsStore from "./AiPresetsStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
 import { toAiPreset } from "./AiPresetsStore";
+
+/** The Skill sets connected and disconnected in the chat's composer. */
+type TSkillRoomsChange = { added: { id: string }[]; removed: string[] };
 
 export type TProjectDialogState =
   | { mode: "create" }
@@ -85,6 +93,20 @@ export const errorMessage = (e: unknown): string => {
   }
   return String(e);
 };
+
+/**
+ * The portal's plan is not paid (the grace period): the server refuses to
+ * create an agent, as it does a room, with a bare 402 that carries no text
+ * to show (Bug 84716).
+ */
+export const isPaymentRequired = (e: unknown): boolean =>
+  typeof e === "object" &&
+  e !== null &&
+  (e as { response?: { status?: number } }).response?.status === 402;
+
+/** The project form can open on the project as it is: its settings and its model were read. */
+const canOpenInForm = (project: TAiProject) =>
+  !project.aiProject.partial && !project.aiProject.modelUnread;
 
 /** The non-fatal problems the server reports on a changed project (a skipped Viewer grant, ...). */
 const showWarnings = (project: TAiProject) => {
@@ -107,12 +129,52 @@ const showWarnings = (project: TAiProject) => {
 class AiProjectsStore {
   aiPresetsStore: AiPresetsStore;
 
+  /** Set once the root store is wired: it keeps the pinned agents the sidebar lists. */
+  treeFoldersStore: TreeFoldersStore | null = null;
+
   private userStore: UserStore;
 
   /** The project open in the chat; `null` outside a project. */
   activeProject: TAiProject | null = null;
 
   skills: TAiProjectSkillsRoom[] = [];
+
+  /**
+   * What the tiles of the list say about their projects, by project id: the
+   * list answers the rooms without their settings, so each tile asks for
+   * its own (`fetchTileSummary`).
+   */
+  tileSummaries: Record<number, TAiProjectSummary> = {};
+
+  /**
+   * Bumped each time the agents' list is read again: every tile reads its
+   * summary again, showing the one it has until the answer lands.
+   */
+  tileSummariesRead = 0;
+
+  /** The `tileSummariesRead` each summary, and the portal's model, was read in. */
+  private summaryReads: Record<number, number> = {};
+
+  private defaultModelRead = -1;
+
+  /**
+   * The model an agent without one of its own runs on, by name: what its
+   * tile shows in place of a model. `null` until read, or when the portal
+   * has no chat model bound.
+   */
+  defaultModelName: string | null = null;
+
+  /**
+   * Whether the portal has a chat model for an agent without one of its
+   * own (the `Chat` assignment, else the `Default` slot), as the chat's
+   * profiles read it (AiPresetsBridge); `null` until they are read.
+   */
+  portalHasChatModel: boolean | null = null;
+
+  private defaultModelRequest: Promise<void> | null = null;
+
+  /** The summary reads in flight, by project id. */
+  private summaryRequests: Record<number, Promise<void>> = {};
 
   /** The files of each expanded Knowledge room, by room id. */
   knowledge: Record<number, TAiProjectKnowledgeFile[]> = {};
@@ -145,6 +207,14 @@ class AiProjectsStore {
   projectDialog: TProjectDialogState | null = null;
 
   /**
+   * Bumped, by project id, each time a project is taken over as the server
+   * has it after a change (a save here, an edit announced from elsewhere):
+   * views that read a project on their own, as the Info panel's Context tab
+   * does, read it again when its number moves.
+   */
+  projectRevisions: Record<number, number> = {};
+
+  /**
    * Bumped by every open and close: a read by id that lands after another
    * open, or after the project was left, opens nothing.
    */
@@ -153,7 +223,14 @@ class AiProjectsStore {
   constructor(aiPresetsStore: AiPresetsStore, userStore: UserStore) {
     this.aiPresetsStore = aiPresetsStore;
     this.userStore = userStore;
-    makeAutoObservable(this, { aiPresetsStore: false, openRequest: false } as never);
+    makeAutoObservable(this, {
+      aiPresetsStore: false,
+      treeFoldersStore: false,
+      openRequest: false,
+      summaryRequests: false,
+      summaryReads: false,
+      defaultModelRead: false,
+    } as never);
   }
 
   /* ------------------------------ Project ------------------------------ */
@@ -186,6 +263,77 @@ class AiProjectsStore {
     } catch (e) {
       toastr.error(errorMessage(e));
     }
+  };
+
+  private skillRoomsSaves: Promise<unknown> = Promise.resolve();
+
+  /**
+   * Links and unlinks Instructions rooms of the open project, as the chat's
+   * slash menu connected and disconnected its Skill sets. Only the change is
+   * applied, so a room the chat does not list (one without skills) stays
+   * linked. Changes are saved one after another: each starts from the
+   * project the one before it left. Resolves to `false` when the change
+   * was not saved - also when the project was written but the server
+   * refused to link or unlink a room, which the save reports as a warning
+   * rather than an error - so the chat goes back to the rooms it has.
+   */
+  changeActiveSkillRooms = (change: TSkillRoomsChange): Promise<boolean> =>
+    this.queueSkillRoomsSave(() => Promise.resolve(this.activeProject), change);
+
+  /**
+   * The same for an agent picked in the chat panel, which is not the open
+   * project: the agent is read first, so the change starts from what the
+   * server has, and the picked agent then follows the saved one.
+   */
+  changeSkillRooms = (id: number, change: TSkillRoomsChange): Promise<boolean> =>
+    this.queueSkillRoomsSave(async () => {
+      if (this.activeProject?.id === id) return this.activeProject;
+      try {
+        return await getAiProject(id);
+      } catch (e) {
+        toastr.error(errorMessage(e));
+        return null;
+      }
+    }, change);
+
+  private queueSkillRoomsSave = (
+    read: () => Promise<TAiProject | null>,
+    change: TSkillRoomsChange,
+  ): Promise<boolean> => {
+    const save = this.skillRoomsSaves.then(async () => {
+      const current = await read();
+      if (!current?.aiProject.canEditSettings) return false;
+      const { instructionsRooms, knowledgeRooms } = current.aiProject;
+      const removed = new Set(change.removed.map(Number));
+      const kept = instructionsRooms.map((room) => room.id).filter((id) => !removed.has(id));
+      const added = change.added.map((room) => Number(room.id)).filter((id) => Number.isFinite(id) && !kept.includes(id));
+      if (!added.length && kept.length === instructionsRooms.length) return true;
+      try {
+        const project = await updateAiProject(
+          current.id,
+          {
+            aiProject: {
+              instructionsRoomIds: [...kept, ...added],
+              knowledgeRoomIds: knowledgeRooms.map((room) => room.id),
+              // A newly linked room is not among these: it is read back.
+              rooms: [...instructionsRooms, ...knowledgeRooms],
+            },
+          },
+          current,
+        );
+        showWarnings(project);
+        runInAction(() => this.replaceProject(project));
+        if (this.isChatOn(current.id)) this.syncPreset(project);
+        const wanted = [...kept, ...added];
+        const linked = project.aiProject.instructionsRooms.map((room) => room.id);
+        return linked.length === wanted.length && wanted.every((id) => linked.includes(id));
+      } catch (e) {
+        toastr.error(errorMessage(e));
+        return false;
+      }
+    });
+    this.skillRoomsSaves = save;
+    return save;
   };
 
   // The sources (skills, knowledge files) are not read here: the cards read
@@ -248,13 +396,102 @@ class AiProjectsStore {
     this.aiPresetsStore.setActivePreset(toAiPreset(project));
   };
 
-  /** The open project (and the one in the edit form), as the server has it now. */
-  private replaceProject = (project: TAiProject) => {
-    if (this.activeProject?.id === project.id) this.activeProject = project;
-    if (this.projectDialog?.mode === "edit" && this.projectDialog.project.id === project.id) {
-      this.projectDialog = { mode: "edit", project };
-    }
+  /** The chat runs on the project: open on its page, or picked in the chat panel. */
+  private isChatOn = (id: number) =>
+    this.activeProject?.id === id || this.aiPresetsStore.activePreset?.id === String(id);
+
+  /**
+   * Reads the summary a project's tile shows, once per read of the list:
+   * later calls reuse the answer until the list is read again
+   * (`refreshTileSummaries`), and a failed read is tried again by the next
+   * tile that asks.
+   */
+  fetchTileSummary = (id: number): Promise<void> => {
+    void this.fetchDefaultModel();
+    if (this.tileSummaries[id] && this.summaryReads[id] === this.tileSummariesRead) return Promise.resolve();
+    const pending = this.summaryRequests[id];
+    if (pending) return pending;
+    const read = this.tileSummariesRead;
+    const request = getAiProjectSummary(id)
+      .then((summary) => {
+        runInAction(() => {
+          this.tileSummaries[id] = summary;
+          this.summaryReads[id] = read;
+        });
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        delete this.summaryRequests[id];
+      });
+    this.summaryRequests[id] = request;
+    return request;
   };
+
+  /**
+   * The agents' list was read again: each tile reads its summary again, and
+   * the portal's chat model is read again with them.
+   */
+  refreshTileSummaries = () => {
+    this.tileSummariesRead += 1;
+  };
+
+  /** A project changed (its room was updated): its summary is read again if a tile showed it. */
+  refreshTileSummary = (id: number): Promise<void> => {
+    if (!this.tileSummaries[id]) return Promise.resolve();
+    delete this.summaryReads[id];
+    return this.fetchTileSummary(id);
+  };
+
+  /** A project is gone: its summary goes with it. */
+  forgetTileSummary = (id: number) => {
+    delete this.tileSummaries[id];
+    delete this.summaryReads[id];
+  };
+
+  setPortalHasChatModel = (value: boolean | null) => {
+    this.portalHasChatModel = value;
+  };
+
+  /**
+   * Reads the portal's chat model once per read of the list; a read that
+   * found none is tried again by the next tile.
+   */
+  fetchDefaultModel = (): Promise<void> => {
+    if (this.defaultModelName && this.defaultModelRead === this.tileSummariesRead) return Promise.resolve();
+    const read = this.tileSummariesRead;
+    this.defaultModelRequest ??= getDefaultChatModelName()
+      .then((name) => {
+        runInAction(() => {
+          this.defaultModelName = name;
+          this.defaultModelRead = read;
+        });
+      })
+      .finally(() => {
+        this.defaultModelRequest = null;
+      });
+    return this.defaultModelRequest;
+  };
+
+  /**
+   * The open project as the server has it now. The edit form keeps the
+   * project it was opened on: it saves what changed against that one, so a
+   * change made elsewhere meanwhile is not written back over.
+   */
+  private replaceProject = (project: TAiProject) => {
+    this.projectRevisions[project.id] = (this.projectRevisions[project.id] ?? 0) + 1;
+    // A project read in full is also what its tile shows.
+    if (!project.aiProject.partial) {
+      this.tileSummaries[project.id] = toAiProjectSummary(project);
+      this.summaryReads[project.id] = this.tileSummariesRead;
+    }
+    if (this.activeProject?.id === project.id) this.activeProject = project;
+  };
+
+  /** The edit form open on the project, if it is. */
+  private formProject = (id: number) =>
+    this.projectDialog?.mode === "edit" && this.projectDialog.project.id === id
+      ? this.projectDialog.project
+      : null;
 
   refreshActiveProject = async () => {
     if (!this.activeProject) return;
@@ -398,6 +635,8 @@ class AiProjectsStore {
   createProject = async (data: TAiProjectRequest) => {
     const project = await createAiProject(data);
     showWarnings(project);
+    // The chat's agents menu offers the new project.
+    void this.aiPresetsStore.fetchPresets();
     return project;
   };
 
@@ -412,8 +651,16 @@ class AiProjectsStore {
       project = { ...room, aiProject: project.aiProject };
     }
     showWarnings(project);
-    runInAction(() => this.replaceProject(project));
-    if (this.activeProject?.id === id) this.syncPreset(project);
+    runInAction(() => {
+      this.replaceProject(project);
+      // The form saved: it now stands on what the server has.
+      if (this.formProject(id)) this.projectDialog = { mode: "edit", project };
+    });
+    if (this.isChatOn(id)) this.syncPreset(project);
+    // A rename shows in the chat's agents menu and, for a pinned project,
+    // under Agents in the sidebar.
+    void this.aiPresetsStore.fetchPresets();
+    this.treeFoldersStore?.syncPinnedAiProject(project);
     return project;
   };
 
@@ -422,6 +669,9 @@ class AiProjectsStore {
       invitations: [{ id: this.userStore.user?.id, access: ShareAccessRights.None }],
     });
     if (this.activeProject?.id === project.id) this.closeProject();
+    // A left project leaves the sidebar and the chat's agents menu.
+    void this.aiPresetsStore.fetchPresets();
+    this.treeFoldersStore?.removePinnedAiProject(project.id);
   };
 
   /** The owner hands the project over from the project form or its intro. */
@@ -435,7 +685,17 @@ class AiProjectsStore {
     }
     try {
       const updated = await getAiProject(project.id);
-      runInAction(() => this.replaceProject(updated));
+      runInAction(() => {
+        this.replaceProject(updated);
+        // The form shows the new owner and the rights left; what it edits
+        // stays as it was opened.
+        const opened = this.formProject(updated.id);
+        if (opened)
+          this.projectDialog = {
+            mode: "edit",
+            project: { ...opened, createdBy: updated.createdBy, access: updated.access, security: updated.security },
+          };
+      });
     } catch (e) {
       toastr.error(errorMessage(e));
     }
@@ -445,21 +705,32 @@ class AiProjectsStore {
 
   openCreateDialog = () => (this.projectDialog = { mode: "create" });
 
-  openEditDialog = (project: TAiProject) =>
-    (this.projectDialog = { mode: "edit", project });
+  /**
+   * Opens the form on a project. The form saves the model it shows, so a
+   * project read without its settings, or whose model could not be read, is
+   * read again first (`openEditDialogById`).
+   */
+  openEditDialog = (project: TAiProject) => {
+    if (!canOpenInForm(project)) {
+      void this.openEditDialogById(project.id);
+      return;
+    }
+    this.projectDialog = { mode: "edit", project };
+  };
 
   /**
    * "Edit" on a project room of the Files list: the room comes without its
    * `aiProject` block, so the project is read first and the form opens on
-   * the model and the rooms the server has.
+   * the model and the rooms the server has. A model that cannot be read
+   * opens no form: it would show none and could be saved over.
    */
   openEditDialogById = async (id: number) => {
-    if (this.activeProject?.id === id && !this.activeProject.aiProject.partial) {
+    if (this.activeProject?.id === id && canOpenInForm(this.activeProject)) {
       this.openEditDialog(this.activeProject);
       return;
     }
     try {
-      const project = await getAiProject(id);
+      const project = await getAiProject(id, { requireModel: true });
       runInAction(() => this.openEditDialog(project));
     } catch (e) {
       toastr.error(errorMessage(e));

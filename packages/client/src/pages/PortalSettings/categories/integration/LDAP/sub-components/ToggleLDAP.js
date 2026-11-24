@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useId } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -42,6 +42,7 @@ import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import classnames from "classnames";
 import styles from "./ToggleLDAP.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const ToggleLDAP = ({
   isLdapEnabled,
@@ -52,6 +53,7 @@ const ToggleLDAP = ({
   isLdapEnabledOnServer,
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
+  const inputId = useId();
 
   const onChangeToggle = React.useCallback(
     (e) => {
@@ -71,19 +73,22 @@ const ToggleLDAP = ({
         isChecked={isLdapEnabled}
         onChange={onChangeToggle}
         isDisabled={isUIDisabled}
+        inputId={inputId}
         dataTestId="ldap_toggle_button"
       />
 
       <div className="toggle-caption">
         <div className="toggle-caption_title">
-          <Text
-            fontWeight={600}
-            lineHeight="20px"
-            noSelect
-            className="settings_unavailable"
-          >
-            {t("LdapToggle")}
-          </Text>
+          <ControlCaption htmlFor={inputId} isDisabled={isUIDisabled}>
+            <Text
+              fontWeight={600}
+              lineHeight="20px"
+              noSelect
+              className="settings_unavailable"
+            >
+              {t("LdapToggle")}
+            </Text>
+          </ControlCaption>
           {!isLdapAvailable ? (
             <PaidBadge className="toggle-caption_title_badge" />
           ) : null}

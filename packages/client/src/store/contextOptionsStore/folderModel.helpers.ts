@@ -63,6 +63,7 @@ import {
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
+import { getAiWorkspaceCreateLabel } from "SRC_DIR/helpers/aiWorkspace";
 import { onSuggestOformChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
@@ -402,23 +403,30 @@ export const getFolderModelImpl = (
       onClick: () => self.onShowGenerateSkillDialog(),
     };
     // A new skill is created from the skill template by the AI service,
-    // whether or not the Markdown plugin is there to open it.
-    const createSkillOptions: TContextOption[] = self.isCreateSkillAvailable
-      ? [createNewMarkdown, { key: "separator", isSeparator: true }]
-      : [];
+    // whether or not the Markdown plugin is there to open it. Writing one
+    // with AI comes first, then the form, then the uploads, as in the
+    // empty view.
+    const createSkillOptions: TContextOption[] = [
+      ...(self.isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),
+      ...(self.isCreateSkillAvailable
+        ? [{ ...createNewMarkdown, label: t("Common:CreateSkill") }]
+        : []),
+    ];
+    const skillSetOptions: TContextOption[] =
+      createSkillOptions.length > 0
+        ? [
+            ...createSkillOptions,
+            { key: "separator", isSeparator: true },
+            uploadFromStorage,
+            uploadFromDevice,
+          ]
+        : [uploadFromStorage, uploadFromDevice];
     const sourceRoomOptions: TContextOption[] =
       roomType === RoomsType.KnowledgeRoom
         ? vectorizationEnabled
           ? [uploadFromStorage, uploadFromDevice]
           : []
-        : self.isCreateSkillWithAIAvailable
-          ? [
-              ...createSkillOptions,
-              uploadFromStorage,
-              uploadFromDevice,
-              createSkillWithAI,
-            ]
-          : [...createSkillOptions, uploadFromStorage, uploadFromDevice];
+        : skillSetOptions;
 
     return sourceRoomOptions.length > 0 ? sourceRoomOptions : null;
   }
@@ -474,7 +482,11 @@ export const getFolderModelImpl = (
           : [
               {
                 key: "new-room",
-                label: getNewRoomLabel(t),
+                // An AI Chat list creates what it holds: an agent, a skill
+                // set or a knowledge base.
+                label: isAiHubFolder
+                  ? getAiWorkspaceCreateLabel(t, window.location.search)
+                  : getNewRoomLabel(t),
                 onClick: self.onCreateRoom,
                 icon: CatalogRoomsReactSvgUrl,
               },

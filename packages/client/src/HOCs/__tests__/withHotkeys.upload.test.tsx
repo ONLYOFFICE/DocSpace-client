@@ -36,6 +36,8 @@
 import { fireEvent, render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
+import { Events } from "@docspace/shared/enums";
+
 vi.mock("mobx-react", () => ({
   inject: () => (component: unknown) => component,
   observer: (component: unknown) => component,
@@ -230,5 +232,73 @@ describe("withHotkeys — the Delete key", () => {
 
     expect(setDeleteDialogVisible).not.toHaveBeenCalled();
     expect(deleteAction).toHaveBeenCalledTimes(1);
+  });
+});
+
+const listen = (eventName: string) => {
+  const listener = vi.fn();
+  window.addEventListener(eventName, listener);
+  return {
+    listener,
+    stop: () => window.removeEventListener(eventName, listener),
+  };
+};
+
+const renderInPrivateRoom = (props: Record<string, unknown>) => {
+  const Section = withHotkeys(UploadInputs) as unknown as React.ComponentType<
+    Record<string, unknown>
+  >;
+
+  render(
+    <Section
+      t={(key: string) => key}
+      enabledHotkeys
+      mediaViewerIsVisible={false}
+      filesIsLoading={false}
+      security={{ Create: true }}
+      isPrivacyFolder
+      activateHotkeys={vi.fn()}
+      currentFolderId={5}
+      {...props}
+    />,
+  );
+};
+
+describe("withHotkeys — Shift+D without keys", () => {
+  it.each([
+    ["a user who cannot create encrypted files gets no", false, 0],
+    ["a user who can gets one", true, 1],
+  ])("in a private room %s create event", (_, canCreateEncrypted, events) => {
+    const create = listen(Events.CREATE);
+    renderInPrivateRoom({ canCreateEncrypted });
+
+    pressShiftWith("d");
+    create.stop();
+
+    expect(create.listener).toHaveBeenCalledTimes(events);
+  });
+});
+
+describe("withHotkeys — F2 on encrypted file", () => {
+  const pressF2 = () => {
+    fireEvent.keyDown(document, { key: "F2", keyCode: 113 });
+    fireEvent.keyUp(document, { key: "F2", keyCode: 113 });
+  };
+
+  it.each([
+    ["an encrypted file whose options hold no rename", true, ["download"], 0],
+    ["a plain file", false, ["rename", "download"], 1],
+  ])("%s", (_, encrypted, contextOptions, events) => {
+    const rename = listen(Events.RENAME);
+    renderInPrivateRoom({
+      getSelection: () => [
+        { id: 3, fileExst: ".docx", encrypted, contextOptions },
+      ],
+    });
+
+    pressF2();
+    rename.stop();
+
+    expect(rename.listener).toHaveBeenCalledTimes(events);
   });
 });

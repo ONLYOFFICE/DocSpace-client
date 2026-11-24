@@ -35,6 +35,11 @@
 
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
+import {
+  toAiProject,
+  type TAiProject,
+  type TAiProjectRoomDto,
+} from "@docspace/shared/api/ai/projects";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -59,7 +64,24 @@ export type TTreeFolder = TFolder & {
   files?: TFile[];
   folders?: TFolder[] | null;
   newItems?: number;
+  /** On the AI rooms root: the AI projects the user pinned, as `@root` lists them. */
+  pinnedAiProjects?: TFolder[];
 };
+
+/** A pinned AI project as the sidebar lists it under Agents. */
+export type TPinnedAiProject = {
+  id: string;
+  name: string;
+  logo: TAiProject["logo"];
+};
+
+const toPinnedAiProject = (
+  project: Pick<TAiProject, "id" | "title" | "logo">,
+): TPinnedAiProject => ({
+  id: String(project.id),
+  name: project.title,
+  logo: project.logo,
+});
 
 class TreeFoldersStore {
   selectedFolderStore: SelectedFolderStore;
@@ -75,6 +97,13 @@ class TreeFoldersStore {
   expandedPanelKeys: string[] | null = null;
 
   rootFoldersTitles: Partial<Record<FolderType, TTreeFolder>> = {};
+
+  /**
+   * The AI projects the user pinned, in the order the Agents list shows
+   * pinned ones: read with the tree, then kept current by what happens to a
+   * project here or over the socket.
+   */
+  pinnedAiProjects: TPinnedAiProject[] = [];
 
   isLoadingNodes = false;
 
@@ -123,7 +152,7 @@ class TreeFoldersStore {
           folder.title = i18n.t("Common:Recent");
           break;
         case FolderType.AiHub:
-          folder.title = i18n.t("Common:AiWorkspace");
+          folder.title = i18n.t("Common:AIChat");
           break;
         case FolderType.PrivateRooms:
           folder.title = i18n.t("Common:Private");
@@ -135,8 +164,55 @@ class TreeFoldersStore {
 
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
+    this.setPinnedAiProjects(
+      (
+        treeFolders.find((f) => f.rootFolderType === FolderType.AiHub)
+          ?.pinnedAiProjects ?? []
+      ).map((room) =>
+        toPinnedAiProject(toAiProject(room as unknown as TAiProjectRoomDto)),
+      ),
+    );
     this.listenTreeFolders(treeFolders);
     return treeFolders;
+  };
+
+  setPinnedAiProjects = (projects: TPinnedAiProject[]) => {
+    this.pinnedAiProjects = projects;
+  };
+
+  /**
+   * An AI project changed: a listed one takes its new name and logo, or
+   * leaves the list once unpinned. One pinned just now is read with the
+   * tree, which knows where the server puts it among the others.
+   */
+  syncPinnedAiProject = (
+    project: Pick<TAiProject, "id" | "title" | "logo" | "pinned">,
+  ) => {
+    const id = String(project.id);
+    const listed = this.pinnedAiProjects.some((p) => p.id === id);
+
+    if (!project.pinned) {
+      if (listed) this.removePinnedAiProject(id);
+      return;
+    }
+
+    if (!listed) {
+      void this.fetchTreeFolders();
+      return;
+    }
+
+    this.pinnedAiProjects = this.pinnedAiProjects.map((p) =>
+      p.id === id ? toPinnedAiProject(project) : p,
+    );
+  };
+
+  /** A deleted or left AI project leaves the list. */
+  removePinnedAiProject = (id: string | number) => {
+    const projectId = String(id);
+    if (!this.pinnedAiProjects.some((p) => p.id === projectId)) return;
+    this.pinnedAiProjects = this.pinnedAiProjects.filter(
+      (p) => p.id !== projectId,
+    );
   };
 
   listenTreeFolders = (treeFolders: TTreeFolder[]) => {

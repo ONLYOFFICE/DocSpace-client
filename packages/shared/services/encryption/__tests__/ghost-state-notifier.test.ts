@@ -35,7 +35,13 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { AuthenticationError, KeyCheckUnavailableError } from "../errors";
+import {
+  AuthenticationError,
+  DecryptionError,
+  KeyCheckUnavailableError,
+  NoAccessError,
+  KeyReplacedError,
+} from "../errors";
 import {
   clearGhostStateHandler,
   registerGhostStateHandler,
@@ -66,5 +72,99 @@ describe("A peer key that could not be checked is reported per operation", () =>
     reportPotentialGhostState(new AuthenticationError());
 
     expect(handler).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("Unreadable file", () => {
+  const handler = vi.fn();
+
+  beforeEach(() => {
+    sessionStorage.clear();
+    resetGhostStateGate();
+  });
+
+  afterEach(() => {
+    clearGhostStateHandler();
+    handler.mockReset();
+    vi.restoreAllMocks();
+  });
+
+  it.each([
+    ["NoAccessError", () => new NoAccessError()],
+    ["AuthenticationError", () => new AuthenticationError()],
+  ])("%s raises the handler once per session", (_, error) => {
+    registerGhostStateHandler(handler);
+
+    reportPotentialGhostState(error());
+    reportPotentialGhostState(error());
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("File wrapped for a previous key", () => {
+    registerGhostStateHandler(handler);
+
+    reportPotentialGhostState(new KeyReplacedError());
+    expect(handler).not.toHaveBeenCalled();
+
+    reportPotentialGhostState(new NoAccessError());
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("ignores any other error", () => {
+    registerGhostStateHandler(handler);
+
+    reportPotentialGhostState(new DecryptionError("chunk 0 failed"));
+    reportPotentialGhostState(new Error("network"));
+    reportPotentialGhostState("not an error");
+
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it("leaves the session gate unused while no handler is registered", () => {
+    reportPotentialGhostState(new NoAccessError());
+
+    registerGhostStateHandler(handler);
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("lets the next report through after the gate is reset", () => {
+    registerGhostStateHandler(handler);
+    reportPotentialGhostState(new NoAccessError());
+
+    resetGhostStateGate();
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(handler).toHaveBeenCalledTimes(2);
+  });
+
+  it("still raises the handler when the session storage throws", () => {
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+      throw new Error("storage unavailable");
+    });
+    registerGhostStateHandler(handler);
+
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("logs a handler that throws and does not let it escape", () => {
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    const failure = new Error("toast failed");
+    registerGhostStateHandler(() => {
+      throw failure;
+    });
+
+    expect(() => reportPotentialGhostState(new NoAccessError())).not.toThrow();
+    expect(consoleError).toHaveBeenCalledWith(
+      "[ghost-state] handler threw:",
+      failure,
+    );
   });
 });

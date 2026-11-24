@@ -7,7 +7,7 @@ Covers how a private (end-to-end encrypted) room is created and edited, who can 
 ## Requirements
 
 ### Requirement: Private room is a flagged Custom room
-The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set. Only a Custom room SHALL be encryptable; no other room type SHALL carry the private flag.
+The system SHALL present "Private room" as its own room type in the create-room dialog opened from the Private section, while sending the server a Custom room with the private flag set to true. Only a Custom room SHALL be encryptable; a room of any other type SHALL be created with the private flag set to false.
 
 #### Scenario: Private card chosen
 - **WHEN** the user creates a room from the Private section, where the dialog shows the Private room type, and confirms creation
@@ -15,7 +15,7 @@ The system SHALL present "Private room" as its own room type in the create-room 
 
 #### Scenario: Other room type
 - **WHEN** a Public, Form filling, Virtual data or Collaboration room is created
-- **THEN** the private flag is not sent and the room is not encrypted
+- **THEN** the create request carries the private flag set to false and the room is not encrypted
 
 ### Requirement: Private room creation requires an encryption key
 The system SHALL refuse to create a private room for a user who has no registered encryption key, after re-fetching the keys from the server, and SHALL show Common:EncryptionKeysRequiredForPrivateRoom.
@@ -174,7 +174,7 @@ The system SHALL skip an invitee who has no encryption key or whose key changed 
 The system SHALL report Common:EncryptedReencryptPartialFailure with the failure count when some files could not be re-wrapped, and Common:EncryptedReencryptFailed when the whole re-encryption fails. A member for whom some or all files could not be re-wrapped SHALL be shown in the Members panel as pending access (Common:EncryptedAccessPending) with a retry action that re-wraps the missing files, or every encrypted file of the room when the re-encryption failed as a whole.
 
 #### Scenario: Some files fail
-- **WHEN** re-wrapping fails for a subset of files after an invitation
+- **WHEN** re-wrapping fails for a subset of files after an invitation, for a reason other than a key the inviter no longer holds
 - **THEN** Common:EncryptedReencryptPartialFailure is shown with the number of failed files and the member row shows Common:EncryptedAccessPending
 
 #### Scenario: Re-encryption fails as a whole
@@ -186,7 +186,7 @@ The system SHALL report Common:EncryptedReencryptPartialFailure with the failure
 - **THEN** the pending marker disappears and Common:EncryptedAccessRestored is shown
 
 #### Scenario: Retry still fails
-- **WHEN** the retry cannot re-wrap some files
+- **WHEN** the retry cannot re-wrap some files, for a reason other than a key the inviter no longer holds
 - **THEN** the pending marker stays and Common:EncryptedReencryptPartialFailure is shown again with the remaining count
 
 ### Requirement: Member removal confirmation for encrypted rooms
@@ -287,7 +287,7 @@ The system SHALL NOT offer external links, member links or embedding settings fo
 - **THEN** no "Shared links" block and no "Create new link" control are rendered
 
 ### Requirement: Share tab hidden for private items
-The system SHALL NOT show the Share tab of the info panel for a private room, a folder inside it, or an encrypted file.
+The system SHALL NOT show the Share tab of the info panel for a private room, a folder inside it, or an encrypted file, whatever share right the server reports for the item.
 
 #### Scenario: Encrypted file selected
 - **WHEN** an encrypted file is selected and the info panel opens
@@ -296,6 +296,10 @@ The system SHALL NOT show the Share tab of the info panel for a private room, a 
 #### Scenario: Private room selected in a list
 - **WHEN** a private room is selected in the Private or Rooms list and the info panel opens
 - **THEN** the tabs do not include Share
+
+#### Scenario: Folder inside a private room selected
+- **WHEN** a folder inside a private room is selected while that room or one of its folders is open, and the info panel opens
+- **THEN** the tabs do not include Share, even when the folder reports the share right
 
 ### Requirement: Room-level operations withheld for private rooms
 The system SHALL NOT offer index editing, index export, save as template or duplicate in the context menu of a private room.
@@ -728,3 +732,18 @@ The system SHALL start the backfill sweep that "Backfill re-wraps every member" 
 #### Scenario: Member opens a subfolder
 - **WHEN** a member without room-edit rights opens a subfolder of a private room
 - **THEN** no sweep runs
+
+### Requirement: A re-wrap names a key the inviter no longer holds
+When every file that could not be re-wrapped for a member is wrapped for a key the inviter no longer holds, the system SHALL show Common:PrivateRoomReplacedKeyBarText with the number of those files in place of Common:EncryptedReencryptPartialFailure: in the message after the invitation, in the invitation result and after a retry. The member SHALL stay pending, since another member who can open the files can still re-wrap them.
+
+#### Scenario: Invitation by a user who replaced their key
+- **WHEN** a user who replaced their key invites a member into a private room whose four files are wrapped for the previous key
+- **THEN** the invitation result names the member under Common:EncryptedAccessPending with Common:PrivateRoomReplacedKeyBarText and the number four, not Common:EncryptedReencryptPartialFailure
+
+#### Scenario: Retry by the same user
+- **WHEN** that user triggers the retry on the pending member
+- **THEN** Common:PrivateRoomReplacedKeyBarText is shown again and the pending marker stays
+
+#### Scenario: Mixed causes
+- **WHEN** one file is wrapped for a key the inviter no longer holds and another could not be re-wrapped for a different reason
+- **THEN** Common:EncryptedReencryptPartialFailure is shown with the number two

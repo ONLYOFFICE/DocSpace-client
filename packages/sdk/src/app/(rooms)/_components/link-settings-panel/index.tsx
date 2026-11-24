@@ -61,7 +61,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import type { DateTime } from "luxon";
 import { ReactSVG } from "react-svg";
@@ -97,6 +97,7 @@ import type {
   LinkSettingsPanelProps,
   LinkSettingsSubmitOption,
 } from "./LinkSettingsPanel.types";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const MAX_USERS_COUNT = 1000;
 
@@ -115,6 +116,7 @@ const LinkSettingsPanel = ({
   isContacts,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common"]);
+  const userLimitToggleId = useId();
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
   const usersNumber = activeLink.currentUseCount ?? 0;
@@ -219,16 +221,19 @@ const LinkSettingsPanel = ({
             ) : null}
 
             <div className={styles.linkSettingsUserLimit}>
-              <Text
-                fontSize="16px"
-                fontWeight={700}
-                className={styles.linkSettingsText}
-              >
-                {t("Common:UserLimit")}
-              </Text>
+              <ControlCaption htmlFor={userLimitToggleId}>
+                <Text
+                  fontSize="16px"
+                  fontWeight={700}
+                  className={styles.linkSettingsText}
+                >
+                  {t("Common:UserLimit")}
+                </Text>
+              </ControlCaption>
               <ToggleButton
                 className={styles.linkSettingsToggle}
                 isChecked={userLimitIsChecked}
+                inputId={userLimitToggleId}
                 onChange={() => setUserLimitIsChecked(!userLimitIsChecked)}
               />
             </div>

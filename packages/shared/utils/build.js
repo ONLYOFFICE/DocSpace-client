@@ -53,9 +53,12 @@ const getBanner = (version) => `/*
 * Version: ${version} (build at: ${getBuildDate()})
 */`;
 
+// The origins a Next dev server accepts requests for its dev resources from
+// (`allowedDevOrigins`): localhost, its loopback address and the machine's
+// LAN addresses, so a page opened through the proxy on any of them works.
 const getAllLocalIps = (os) => {
   const interfaces = os.networkInterfaces();
-  const ips = ["localhost", "*.dev.localhost"];
+  const ips = ["localhost", "127.0.0.1", "*.dev.localhost"];
 
   for (const name of Object.keys(interfaces)) {
     for (const iface of interfaces[name]) {

@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useId } from "react";
+
 import { ReactSVG } from "react-svg";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -42,6 +44,7 @@ import { ImportItemProps, ImportSectionProps } from "../types";
 import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import classNames from "classnames";
 import styles from "../StyledDataImport.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const ImportItem = ({
   sectionName,
@@ -83,6 +86,7 @@ const ImportSection = ({
   dataTestId,
   getTooltipContent,
 }: ImportSectionProps) => {
+  const inputId = useId();
   const toggleButtonTooltipId = `toggle-button-tooltip-${sectionName}`;
   return (
     <div
@@ -94,6 +98,7 @@ const ImportSection = ({
         onChange={onChange || (() => {})}
         className="toggleButton"
         isDisabled={isDisabled}
+        inputId={inputId}
         dataTestId="enable_import_section_button"
         dataTooltipId={
           isDisabled && getTooltipContent ? toggleButtonTooltipId : undefined
@@ -108,9 +113,11 @@ const ImportSection = ({
         />
       ) : null}
       <div className="section-content">
-        <Text lineHeight="20px" fontWeight={600} className="section-title">
-          {sectionName}
-        </Text>
+        <ControlCaption htmlFor={inputId} isDisabled={isDisabled}>
+          <Text lineHeight="20px" fontWeight={600} className="section-title">
+            {sectionName}
+          </Text>
+        </ControlCaption>
         <Text fontSize="12px" lineHeight="16px" className="section-description">
           {description}
         </Text>

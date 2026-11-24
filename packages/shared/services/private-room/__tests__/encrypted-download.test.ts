@@ -62,6 +62,7 @@ import {
   decryptFileFromBlob,
 } from "../../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../../encryption/room-file-access";
+import { KeyReplacedError } from "../../encryption/errors";
 
 const dummyIdentity: IdentityKeyPair = {
   publicKey: new Uint8Array(32),
@@ -634,6 +635,30 @@ describe("encryptedDownload", () => {
       expect(result.success).toBe(true);
       expect(result.fileName).toBe("decrypted.bin");
       expect(Array.from(result.data ?? [])).toEqual([42, 43]);
+    });
+
+    it("Download of one such file: the verdict on a replaced key reaches the caller as a flag", async () => {
+      const payload = new Uint8Array([1, 2, 3]);
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(okResponse(payload, payload.byteLength)),
+      );
+      const userKeys = [{ id: "key-now" }];
+      vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+        new KeyReplacedError(),
+      );
+
+      const result = await downloadAndDecryptFileToBuffer({
+        ...baseConfig,
+        userKeys,
+        downloadUrl: "https://x/y",
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.keyReplaced).toBe(true);
+      expect(vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].userKeys).toBe(
+        userKeys,
+      );
     });
 
     it("propagates errors with originalFileName as fallback", async () => {

@@ -62,6 +62,7 @@ export const readProjectFolder = (
       id: folder.id,
       name: folder.name,
       ...(typeof folder.path === "string" ? { path: folder.path } : {}),
+      ...(folder.kind === "room" || folder.kind === "folder" ? { kind: folder.kind } : {}),
     };
   } catch {
     return null;

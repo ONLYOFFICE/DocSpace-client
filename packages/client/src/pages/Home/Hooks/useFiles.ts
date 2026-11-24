@@ -77,6 +77,13 @@ import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 const SHARED_ROOMS_PREFIX = "/rooms/shared/";
 const AI_ROOMS_PREFIX = "/ai-rooms/";
 
+// A room address without `?folder=` takes its id from the path.
+const ROOM_ADDRESS_CATEGORIES: number[] = [
+  CategoryType.PrivateRoom,
+  CategoryType.SharedRoom,
+  CategoryType.Form,
+];
+
 const dropDeletedMetadata = async (
   filter: FilesFilter | RoomsFilter,
   checked: React.RefObject<string>,
@@ -141,7 +148,7 @@ const useFiles = ({
 }: UseFilesProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { id } = useParams();
+  const { id, room } = useParams();
   const checkedMetadata = React.useRef("");
 
   const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
@@ -155,9 +162,17 @@ const useFiles = ({
   };
 
   const fetchDefaultRooms = () => {
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
-
     const categoryType = getCategoryType(location) as number;
+
+    // Spec: private-rooms/sidebar-section, "Section addresses"
+    if (room && ROOM_ADDRESS_CATEGORIES.includes(categoryType)) {
+      navigate(`${getCategoryUrl(categoryType, room)}?folder=${room}`, {
+        replace: true,
+      });
+      return;
+    }
+
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     const url = getCategoryUrl(categoryType);
 

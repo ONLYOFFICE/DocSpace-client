@@ -1,0 +1,29 @@
+{
+  "key_path": "AiContentEmpty",
+  "content": "No files yet",
+  "content_en_sha1_hash": "1a46941812a0b9cd486ee8aaa9fca8ec55a02d1e",
+  "created_at": "2026-11-18T08:35:05.111Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Placeholder under the Artifacts or Attachments heading in an agent's Info panel Content tab when that section has no files yet. Short sentence fragment with no final period.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContent/index.tsx",
+      "line_number": 255,
+      "context": "</div>\n {list.length > 0 ? (\n list.map((file) => row(file))\n ) : (\n <Text fontSize=\"13px\" className={styles.empty}>\n {t(\"Common:AiContentEmpty\")}\n </Text>\n )}\n </section>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentsPinned",
+  "content": "Agents pinned: {{count}}",
+  "content_en_sha1_hash": "2fe314013102a34c622932cedde4a38237915ed7",
+  "created_at": "2026-11-18T08:05:08.405Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
+  "comment": {
+    "text": "Success toast after the user pins several agents at once to the top of the agents list. {{count}} is the number of agents pinned; keep the label, colon, number form of Rooms pinned: {{count}}.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:13:34.331Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/helpers.ts",
+      "line_number": 147,
+      "context": ": isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");\n const translationForSeverals = ofAgents\n ? isPin\n ? t(\"Common:AgentsPinned\", { count: elems.length })\n : t(\"Common:AgentsUnpinned\", { count: elems.length })\n : isPin\n ? t(\"Common:RoomsPinned\", { count: elems.length })\n : t(\"Common:RoomsUnpinned\", { count: elems.length });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

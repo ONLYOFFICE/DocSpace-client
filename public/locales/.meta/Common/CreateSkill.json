@@ -1,0 +1,227 @@
+{
+  "key_path": "CreateSkill",
+  "content": "Create skill",
+  "content_en_sha1_hash": "f7fc4f0889c9a08ff5126b2037a22bc8980492c2",
+  "created_at": "2026-11-21T12:53:52.024Z",
+  "updated_at": "2026-11-21T12:55:32.352Z",
+  "comment": {
+    "text": "Menu item in the create (+) menu of a skill set and title of the matching quick action on its empty screen, in the AI Chat section; opens the form where a skill is written by hand. Verb, imperative or the form the language uses for menu commands, like the neighbouring Upload items; short label, no full stop. Skill = a Markdown instruction the assistant follows. Match Common:CreateSkillWithAI; the form itself is titled by Common:NewSkill.",
+    "is_auto": true,
+    "updated_at": "2026-11-21T12:55:32.352Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 625,
+      "context": "const sourceCreateActions = isKnowledgeRoom\n ? []\n : [\n ...(isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),\n ...(isCreateSkillAvailable\n ? [{ ...createNewMarkdown, label: t(\"Common:CreateSkill\") }]\n : []),\n ];\n setUploadActions(sourceUploadActions);\n setActions(sourceCreateActions);\n setModel(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 446,
+      "context": "// a Knowledge room holds files to index. Neither takes a folder.\n // A skill is uploaded, written by AI, or created from the skill template\n // by the AI service: the server refuses a Markdown file without its\n // name / description.\n const createMarkdown: EmptyViewItemType = {\n title: t(\"Common:CreateSkill\"),\n description: t(\"EmptyView:SkillSetMarkdownOnlyDescription\"),\n icon: <CreateNewFormIcon />,\n key: \"create-markdown\",\n disabled: !security?.Create,\n onClick: () => actions.onCreate(\"md\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 412,
+      "context": "// with AI comes first, then the form, then the uploads, as in the\n // empty view.\n const createSkillOptions: TContextOption[] = [\n ...(self.isCreateSkillWithAIAvailable ? [createSkillWithAI] : []),\n ...(self.isCreateSkillAvailable\n ? [{ ...createNewMarkdown, label: t(\"Common:CreateSkill\") }]\n : []),\n ];\n const skillSetOptions: TContextOption[] =\n createSkillOptions.length > 0\n ? [",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

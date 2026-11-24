@@ -48,6 +48,8 @@ type KnowledgeVectorizationBarProps = {
   vectorizationEnabled: boolean;
   /** Portal owner or DocSpace admin: may configure the provider. */
   isAdmin: boolean;
+  /** The files list is a table: its container is pulled up by 25px under the bar. */
+  isTableView: boolean;
 };
 
 /**
@@ -60,6 +62,7 @@ const KnowledgeVectorizationBar = ({
   isKnowledgeRoom,
   vectorizationEnabled,
   isAdmin,
+  isTableView,
 }: KnowledgeVectorizationBarProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -83,7 +86,10 @@ const KnowledgeVectorizationBar = ({
     t("Common:KnowledgeRoomVectorizationOffUser")
   );
 
+  // The table container has a -25px top margin and a fixed header, so a
+  // block above it needs that much room or the header covers its bottom.
   return (
+    <div style={isTableView ? { paddingBlockEnd: 25 } : undefined}>
     <PublicRoomBar
       headerText={t("Common:KnowledgeRoomVectorizationOffTitle")}
       bodyText={bodyText}
@@ -92,13 +98,15 @@ const KnowledgeVectorizationBar = ({
       live
       dataTestId="knowledge_vectorization_bar"
     />
+    </div>
   );
 };
 
-export default inject(({ selectedFolderStore, settingsStore, userStore }: TStore) => ({
+export default inject(({ selectedFolderStore, settingsStore, userStore, filesStore }: TStore) => ({
   isKnowledgeRoom: selectedFolderStore.roomType === RoomsType.KnowledgeRoom,
   // The AI config is read only while AI services are on; without it the
   // room is left as it is.
   vectorizationEnabled: settingsStore.aiConfig?.vectorizationEnabled !== false,
+  isTableView: filesStore.viewAs === "table",
   isAdmin: !!(userStore.user?.isOwner || userStore.user?.isAdmin),
 }))(observer(KnowledgeVectorizationBar));

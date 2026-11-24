@@ -76,6 +76,7 @@ Group 0 holds the beta gate. PR !798 merged the code into `release/v4.1.0` on 20
 - [ ] 6.2 Run on staging with the Document Server of 0.1, and record date, builds and results in design.md (SaaS half done 2026-11-06 on the release stand, design.md "Release stand check": the owner sees the section and both badges; the app-off half waits for a standalone portal):
   - a user who never opted in sees the Private section and the badges;
   - on a standalone portal an administrator switches the Private app off: the section goes, private rooms are not listed in Rooms either, and the Keys management tab stays for a key holder;
+  - a client frame of the host library in Manager mode, on a page of another site that the portal trusts, with `privateRooms: true` in the frame configuration: the Private section shows, a private room opens, the identity unlocks and an encrypted file decrypts; record what the frame's storage changes (device unlock, the trust list of member keys, the lock across tabs) and whether the frame's session holds under the browser's third-party cookie limits (`private-rooms-sdk-embedding-and-parity`, design.md "Stand checks", ran it from the same site only);
   - the manual checks of `private-rooms-server-hardening` 10.2, the server behaviours its suite cannot cover (the editor session drop, the real crypto library, the socket recipients, the hidden submit button, the letters, the audit export and the room history report, digest letters).
 
   Verify: that record.

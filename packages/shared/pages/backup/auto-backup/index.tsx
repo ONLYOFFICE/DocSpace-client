@@ -35,7 +35,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useId } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -71,6 +71,7 @@ import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 import PrivateRoomsBackupWarning from "../sub-components/PrivateRoomsBackupWarning";
 import styles from "./AutoBackup.module.scss";
+import { ControlCaption } from "../../../components/control-caption";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -194,6 +195,7 @@ const AutomaticBackup = ({
     selectedStorageType === `${BackupStorageType.StorageModuleType}`;
 
   const { t } = useTranslation(["Common"]);
+  const enableToggleId = useId();
 
   const [isLoadingData, setIsLoadingData] = useStateCallback(false);
 
@@ -468,6 +470,7 @@ const AutomaticBackup = ({
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
           isDisabled={mainDisabled}
+          inputId={enableToggleId}
           dataTestId="enable_automatic_backup_button"
         />
 
@@ -478,14 +481,16 @@ const AutomaticBackup = ({
               "toggle-caption_title",
             )}
           >
-            <Text
-              fontWeight={600}
-              lineHeight="20px"
-              noSelect
-              className={styles.settingsUnavailable}
-            >
-              {t("Common:EnableAutomaticBackup")}
-            </Text>
+            <ControlCaption htmlFor={enableToggleId} isDisabled={mainDisabled}>
+              <Text
+                fontWeight={600}
+                lineHeight="20px"
+                noSelect
+                className={styles.settingsUnavailable}
+              >
+                {t("Common:EnableAutomaticBackup")}
+              </Text>
+            </ControlCaption>
           </div>
           <Text
             className={classNames(

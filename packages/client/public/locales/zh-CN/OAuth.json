@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG 或 SVG，32x32",
   "ID": "ID",
   "InvalidToken": "无效令牌",
-  "LastModified": "最后一次修改",
   "NewApp": "新应用",
   "NoAuthorizedApps": "无授权应用",
   "NoOAuthAppHeader": "无 OAuth 应用",

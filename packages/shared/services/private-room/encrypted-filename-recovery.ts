@@ -37,12 +37,15 @@ import { getFileEncryptionAccess } from "../../api/files";
 import { wipeDek } from "../encryption/file-keys";
 import {
   getCachedEncryptedFilename,
+  isReplacedKeyFile,
+  markReplacedKeyFile,
   rememberEncryptedFilename,
 } from "../encryption/filename-cache";
 import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
 } from "../encryption/room-file-access";
+import { KeyReplacedError } from "../encryption/errors";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import {
   decryptFileNameRaw,
@@ -83,7 +86,9 @@ function recoverOne(
   identity: IdentityKeyPair,
   roomMemberKeys: RoomMemberPublicKey[],
 ): Promise<void> {
-  if (getCachedEncryptedFilename(file.id)) return Promise.resolve();
+  if (getCachedEncryptedFilename(file.id) || isReplacedKeyFile(file.id)) {
+    return Promise.resolve();
+  }
 
   const existing = inFlight.get(file.id);
   if (existing) return existing;
@@ -120,6 +125,7 @@ async function recoverOneUncached(
     dek = await unwrapDekForCurrentUser({
       fileKeys: info.fileKeys,
       roomMemberKeys,
+      userKeys: info.userKeys,
       currentUserId: userId,
       currentIdentity: identity,
       fileId: file.id,
@@ -131,7 +137,9 @@ async function recoverOneUncached(
     );
     if (name) rememberEncryptedFilename(file.id, name);
   } catch (error) {
-    reportPotentialGhostState(error);
+    // Spec: private-rooms/file-operations, "A private room names the files wrapped for a key the user no longer holds"
+    if (error instanceof KeyReplacedError) markReplacedKeyFile(file.id);
+    else reportPotentialGhostState(error);
   } finally {
     if (dek) wipeDek(dek);
   }

@@ -186,7 +186,7 @@ const QuotasBar = ({
 
   const getUpgradeTariffDescription = () => {
     if (!isAdmin)
-      return t("ContactToUpgradeTariff");
+      return t("Common:ContactToUpgradeTariff");
 
     return (
       <Trans

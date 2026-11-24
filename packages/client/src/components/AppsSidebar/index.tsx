@@ -90,6 +90,7 @@ import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext"
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
 import type PluginStore from "SRC_DIR/store/PluginStore";
 import { closeAfter } from "./closeAfter";
+import { endAnimationOnSamePage } from "./endAnimationOnSamePage";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import LiveChatBlock from "./LiveChatBlock";
@@ -114,6 +115,13 @@ export type SidebarVariant = "primary" | "secondary";
 export type AppsSidebarProps = {
   groups: NavMenuGroup[];
   activeId?: string;
+  /**
+   * What the collapsed (icon-only) sidebar shows in place of `groups`, and
+   * its active entry: entries that only make sense with their text can be
+   * left out there. Without it the collapsed sidebar shows `groups`.
+   */
+  collapsedGroups?: NavMenuGroup[];
+  collapsedActiveId?: string;
   variant?: SidebarVariant;
   isNavLoading?: boolean;
   /** Hides the section "Back" button (secondary variant). */
@@ -145,8 +153,10 @@ type AppsSidebarViewProps = AppsSidebarProps & {
 };
 
 export const AppsSidebarView = ({
-  groups,
-  activeId,
+  groups: expandedGroups,
+  activeId: expandedActiveId,
+  collapsedGroups,
+  collapsedActiveId,
   variant = "primary",
   showText,
   toggleShowText,
@@ -165,6 +175,10 @@ export const AppsSidebarView = ({
   limitedAccessDevToolsForUsers,
   withDevTools,
 }: AppsSidebarViewProps) => {
+  const isCollapsedView = !showText && !!collapsedGroups;
+  const groups = isCollapsedView ? collapsedGroups : expandedGroups;
+  const activeId = isCollapsedView ? collapsedActiveId : expandedActiveId;
+
   const showBackButton = variant === "secondary" && !hideBack;
   const hideFooter = variant === "secondary";
 
@@ -239,10 +253,24 @@ export const AppsSidebarView = ({
   // navigation click. Wrap every item/sub-item onClick to run its own handler
   // first (navigate) and then close the article. Off mobile the article is
   // pinned, so handlers pass through untouched.
-  const mobileGroups = useMemo(() => {
-    if (!isMobile) return navGroups;
+  // An entry that reopens the page on screen finishes its highlight's fill
+  // itself, since that page loads nothing to report the end.
+  const animatedGroups = useMemo(
+    () =>
+      navGroups.map((group) => ({
+        ...group,
+        items: group.items.map((item: NavMenuItem) => ({
+          ...endAnimationOnSamePage(item),
+          children: item.children?.map(endAnimationOnSamePage),
+        })),
+      })),
+    [navGroups],
+  );
 
-    return navGroups.map((group) => ({
+  const mobileGroups = useMemo(() => {
+    if (!isMobile) return animatedGroups;
+
+    return animatedGroups.map((group) => ({
       ...group,
       items: group.items.map((item: NavMenuItem) => ({
         ...item,
@@ -253,7 +281,7 @@ export const AppsSidebarView = ({
         })),
       })),
     }));
-  }, [navGroups, isMobile, toggleArticleOpen]);
+  }, [animatedGroups, isMobile, toggleArticleOpen]);
 
   const articleContent = (
     <>

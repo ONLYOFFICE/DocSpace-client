@@ -43,8 +43,8 @@ const AI_PROJECT_ROOM_TYPE = 12;
 export const AiProjectMockAccess = {
   None: 0,
   Owner: 1,
-  Member: 2,
   ProjectManager: 9,
+  Member: 11,
 } as const;
 
 type MockAccess =
@@ -277,6 +277,34 @@ export const AI_PROJECT_WITHOUT_SOURCES = AI_PROJECTS[2];
 
 /** A project as `files/rooms` answers it: the room, without the `aiProject` block. */
 const projectRoom = ({ aiProject: _aiProject, ...room }: AiProjectMock) => room;
+
+/**
+ * The projects of the list the caller pinned, as the "AI rooms" root of
+ * `files/@root` lists them (`rootHandler`'s `pinnedAiProjects`).
+ */
+export const aiPinnedProjectRooms = (projects: AiProjectMock[] = AI_PROJECTS) =>
+  projects.filter((project) => project.pinned).map(projectRoom);
+
+/**
+ * `PUT files/rooms/:id/pin` and `/unpin` for an agent
+ * (VirtualRoomsController.PinRoom / UnpinRoom): the agent of `projects` is
+ * replaced by one with the new `pinned`, and the room is answered. A room
+ * that is no agent of the list is left to the other handlers.
+ */
+export const aiAgentPinHandlers = (port: string, projects: AiProjectMock[]) =>
+  (["pin", "unpin"] as const).map((action) =>
+    http.put(
+      `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/${action}`,
+      ({ params }) => {
+        const index = projects.findIndex(
+          (project) => String(project.id) === String(params.id),
+        );
+        if (index < 0) return undefined;
+        projects[index] = { ...projects[index], pinned: action === "pin" };
+        return HttpResponse.json({ response: projectRoom(projects[index]) });
+      },
+    ),
+  );
 
 /** The owner's name, for the owner sort. */
 const ownerName = (project: AiProjectMock) => project.createdBy?.displayName ?? "";
@@ -659,6 +687,8 @@ const aiHubRoomMock = (
   access: AiProjectMockAccess.Owner,
   filesCount: 0,
   foldersCount: 0,
+  // How many agents use the room; a list of sets or bases sets its own.
+  linkedProjectsCount: 0 as number,
   isFavorite: false,
   new: 0,
   logo: room.logo,
@@ -690,6 +720,62 @@ export const AI_HUB_ROOMS = [
 ];
 
 export type AiHubRoomMock = (typeof AI_HUB_ROOMS)[number];
+
+/** An agent as `GET files/rooms/:id/projects` lists it for a room it uses. */
+export type AiRoomProjectMock = {
+  id: number;
+  title: string;
+  logo: {
+    original: string;
+    large: string;
+    medium: string;
+    small: string;
+    color: string;
+    cover: null;
+  };
+};
+
+/** An agent that uses a room, drawn by its colour and initials. */
+export const aiRoomProjectMock = (
+  id: number,
+  title: string,
+  color: string,
+): AiRoomProjectMock => ({
+  id,
+  title,
+  logo: { original: "", large: "", medium: "", small: "", color, cover: null },
+});
+
+/**
+ * `GET files/rooms/:id/projects`: the agents that use a skill set or a
+ * knowledge base, by the room's id, sorted by title and paged with
+ * `startIndex` and `count`; `total` counts them all. A room the map does
+ * not name is left to the other handlers.
+ */
+export const aiRoomProjectsHandler = (
+  port: string,
+  usedBy: Record<number, AiRoomProjectMock[]>,
+) =>
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/projects`,
+    ({ params, request }) => {
+      const agents = usedBy[Number(params.id)];
+      if (!agents) return undefined;
+      const search = new URL(request.url).searchParams;
+      const sorted = [...agents].sort((a, b) => a.title.localeCompare(b.title));
+      const startIndex = Number(search.get("startIndex")) || 0;
+      const count = Number(search.get("count")) || 25;
+      const page = sorted.slice(startIndex, startIndex + count);
+      return HttpResponse.json({
+        response: page,
+        count: page.length,
+        total: sorted.length,
+        links: [],
+        status: 0,
+        statusCode: 200,
+      });
+    },
+  );
 
 const AI_HUB_TITLE = "AI rooms";
 
@@ -798,6 +884,103 @@ export const aiSectionsHandlers = (
   ...aiProjectsHandlers(port, projects),
 ];
 
+/** A file of a conversation, as the Files service lists it. */
+export type AiThreadFileMock = {
+  id: number;
+  title: string;
+  fileExst: string;
+  folderId?: number;
+  created?: string;
+};
+
+/** The files of one conversation: what its replies produced and what was sent with it. */
+export type AiThreadFilesMock = {
+  artifacts: AiThreadFileMock[];
+  attachments: AiThreadFileMock[];
+};
+
+/** The rights of the author on a file of their conversation: read-only. */
+const AI_THREAD_FILE_SECURITY = {
+  Read: true,
+  Download: true,
+  Copy: true,
+  Comment: false,
+  FillForms: false,
+  Review: false,
+  Edit: false,
+  Delete: false,
+  CustomFilter: false,
+  Rename: false,
+  ReadHistory: false,
+  Lock: false,
+  EditHistory: false,
+  Duplicate: false,
+  Move: false,
+  SubmitToFormGallery: false,
+  CopyLink: false,
+  Embed: false,
+  Vectorization: false,
+};
+
+/** How a file of a conversation opens, by its extension: an image is viewed, a document read. */
+const aiThreadFileViewAccessibility = (fileExst: string) => {
+  const isImage = [".png", ".jpg", ".jpeg", ".gif", ".webp"].includes(fileExst);
+  return {
+    ImageView: isImage,
+    MediaView: false,
+    WebView: !isImage,
+    WebEdit: false,
+    WebReview: false,
+    WebCustomFilterEditing: false,
+    WebRestrictedEditing: false,
+    WebComment: false,
+    CanConvert: false,
+    MustConvert: false,
+  };
+};
+
+/**
+ * `GET files/rooms/:id/threads/:threadId/artifacts` and `.../attachments`:
+ * the files of one conversation of an agent, as a counted list
+ * (`{ response, total, count }`). A conversation listed in `deleted` answers
+ * 404, as the server does once a conversation and its folders are gone; any
+ * other conversation of a known agent has no files yet. Unknown agents 404.
+ */
+export const aiThreadFilesHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+  threads: Record<string, AiThreadFilesMock> = {},
+  deleted: string[] = [],
+) =>
+  (["artifacts", "attachments"] as const).map((kind) =>
+    http.get(
+      `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id/threads/:threadId/${kind}`,
+      ({ params }) => {
+        if (!findProject(projects, params.id)) return notFound();
+        const threadId = String(params.threadId);
+        if (deleted.includes(threadId))
+          return HttpResponse.json(
+            { error: { message: "The conversation was not found." } },
+            { status: 404 },
+          );
+        const files = (threads[threadId]?.[kind] ?? []).map((file) => ({
+          folderId: Number(params.id),
+          created: "2026-11-18T10:00:00.0000000+00:00",
+          // A FileDto always carries both; the conversation's folders are
+          // read-only to their author, who may read, download and copy.
+          security: AI_THREAD_FILE_SECURITY,
+          viewAccessibility: aiThreadFileViewAccessibility(file.fileExst),
+          ...file,
+        }));
+        return HttpResponse.json({
+          response: files,
+          total: files.length,
+          count: files.length,
+        });
+      },
+    ),
+  );
+
 /** Every route of a project but the list, over one list of projects. */
 export const aiProjectsHandlers = (
   port: string,
@@ -811,4 +994,96 @@ export const aiProjectsHandlers = (
   aiProjectGetByIdHandler(port, projects),
   aiProjectCreateHandler(port, projects),
   roomLogoUploadHandler(port),
+  ...aiThreadFilesHandlers(port, projects),
 ];
+
+/** The rights of a member in an Instructions or Knowledge room: they read it and may not edit it. */
+const AI_HUB_ROOM_READER_SECURITY = {
+  Read: true,
+  Create: false,
+  Rename: false,
+  EditRoom: false,
+  EditAccess: false,
+  ChangeOwner: false,
+  Delete: false,
+  Duplicate: false,
+  Pin: true,
+  Mute: true,
+  CopyLink: true,
+  Download: true,
+  UseChat: true,
+};
+
+/**
+ * An Instructions or Knowledge room as a member who only reads it sees it:
+ * no `EditRoom`, so the server refuses to link it to an agent
+ * (`AiHubService.LinkSourcesAsync`, `CanEditRoomAsync`).
+ */
+export const aiHubRoomAsReader = (room: AiHubRoomMock): AiHubRoomMock => ({
+  ...room,
+  security: { ...AI_HUB_ROOM_READER_SECURITY },
+});
+
+/**
+ * `GET files/rooms/:id` for an Instructions or Knowledge room: the room with
+ * the caller's rights, as the client reads it before linking the room to a
+ * new agent. Any other room is left to the project and rooms handlers.
+ */
+export const aiHubRoomGetByIdHandler = (
+  port: string,
+  rooms: AiHubRoomMock[] = AI_HUB_ROOMS,
+) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id`, ({ params }) => {
+    const room = rooms.find((r) => String(r.id) === String(params.id));
+    return room ? HttpResponse.json({ response: room }) : undefined;
+  });
+
+/** `FileOperationType.Delete` and `FileOperationStatus.Finished`, as the operations list answers them. */
+const DELETE_OPERATION = 2;
+const OPERATION_FINISHED = 2;
+
+/**
+ * `DELETE files/rooms/:id` for a project and the `GET files/fileops` that
+ * follows it. The server queues the delete and answers the operation not
+ * finished yet (`VirtualRoomsController.DeleteRoom`); the next read of the
+ * operations list finds it finished, and the project leaves `projects`
+ * then. A caller without `Delete` in the project's `security` gets 403, an
+ * unknown project 404. Any other room, and any other operation, is left to
+ * the other handlers.
+ */
+export const aiProjectDeleteHandlers = (
+  port: string,
+  projects: AiProjectMock[] = AI_PROJECTS,
+) => {
+  const queued: Record<string, number> = {};
+  const operation = (id: string, finished: boolean) => ({
+    id,
+    Operation: DELETE_OPERATION,
+    progress: finished ? 100 : 0,
+    error: "",
+    processed: finished ? "1" : "0",
+    finished,
+    ...(finished ? { status: OPERATION_FINISHED } : {}),
+  });
+  return [
+    http.delete(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms/:id`, ({ params }) => {
+      const project = findProject(projects, params.id);
+      if (!project) return undefined;
+      if (!project.security.Delete)
+        return HttpResponse.json(
+          { error: { message: "You don't have enough permission to delete the room." } },
+          { status: 403 },
+        );
+      const id = `mock-delete-room-${project.id}`;
+      queued[id] = project.id;
+      return HttpResponse.json({ response: operation(id, false) });
+    }),
+    http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/fileops`, ({ request }) => {
+      const id = new URL(request.url).searchParams.get("id");
+      if (!id || queued[id] === undefined) return undefined;
+      const index = projects.findIndex((p) => p.id === queued[id]);
+      if (index >= 0) projects.splice(index, 1);
+      return HttpResponse.json({ response: [operation(id, true)] });
+    }),
+  ];
+};

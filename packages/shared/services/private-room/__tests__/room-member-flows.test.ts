@@ -69,6 +69,7 @@ import {
 import {
   getNewOwnerKeyRefusal,
   loadPendingAccess,
+  countMissingFilesOfRefusedOwnerChange,
   prepareNewOwner,
   retryPendingAccess,
   rewrapForInvitedMembers,
@@ -237,6 +238,47 @@ describe("prepareNewOwner", () => {
   });
 });
 
+describe("countMissingFilesOfRefusedOwnerChange", () => {
+  const conflict = Object.assign(new Error("Conflict"), {
+    response: { status: 409 },
+  });
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it("Transfer refused by the server", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "U-BOB", fileIds: [4, 5] },
+      { userId: "u-carol", fileIds: [6] },
+    ]);
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(conflict, ROOM_ID, "u-bob"),
+    ).resolves.toBe(2);
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(ROOM_ID, ["u-bob"]);
+  });
+
+  it("Other refusals count no file", async () => {
+    const forbidden = Object.assign(new Error("Forbidden"), {
+      response: { status: 403 },
+    });
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(forbidden, ROOM_ID, "u-bob"),
+    ).resolves.toBe(0);
+    expect(getRoomMissingFileKeys).not.toHaveBeenCalled();
+  });
+
+  it("Missing files cannot be listed", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockRejectedValue(new Error("403"));
+
+    await expect(
+      countMissingFilesOfRefusedOwnerChange(conflict, ROOM_ID, "u-bob"),
+    ).resolves.toBe(0);
+  });
+});
+
 describe("verifyInvitees", () => {
   const invitees = [
     { id: "u-ann", displayName: "Ann" },
@@ -350,7 +392,9 @@ describe("rewrapForInvitedMembers", () => {
     { id: "u-cid", displayName: "Cid" },
   ];
   const onProgress = vi.fn();
-  const rewrap = () =>
+  const rewrap = (
+    extra: Partial<Parameters<typeof rewrapForInvitedMembers>[0]> = {},
+  ) =>
     rewrapForInvitedMembers({
       t,
       roomId: ROOM_ID,
@@ -358,6 +402,7 @@ describe("rewrapForInvitedMembers", () => {
       currentUserId: "u-me",
       identity,
       onProgress,
+      ...extra,
     });
 
   beforeEach(() => {
@@ -479,6 +524,47 @@ describe("rewrapForInvitedMembers", () => {
       completed: true,
       alert: true,
     });
+  });
+
+  it("Invitation by a user who replaced their key", async () => {
+    vi.mocked(addMembersToEncryptedRoom).mockResolvedValue({
+      fileResults: [
+        ok(1),
+        { ...failed(2), keyReplaced: true },
+        { ...failed(3), keyReplaced: true },
+      ],
+      skippedMembers: [],
+      missingFileIdsByMember: { [newMembers[0].id]: [2, 3] },
+    } as never);
+    const onOutcome = vi.fn();
+
+    const notices = await rewrap({ onOutcome });
+
+    expect(notices).toEqual([
+      {
+        level: "warning",
+        text: `Common:PrivateRoomReplacedKeyBarText_other ${JSON.stringify({ count: 2 })}`,
+      },
+    ]);
+    expect(onOutcome).toHaveBeenCalledWith(
+      expect.objectContaining({ keyReplacedFileIds: [2, 3] }),
+    );
+  });
+
+  it("Mixed causes", async () => {
+    vi.mocked(addMembersToEncryptedRoom).mockResolvedValue({
+      fileResults: [{ ...failed(2), keyReplaced: true }, failed(3)],
+      skippedMembers: [],
+    } as never);
+
+    const notices = await rewrap();
+
+    expect(notices).toEqual([
+      {
+        level: "warning",
+        text: `Common:EncryptedReencryptPartialFailure ${JSON.stringify({ count: 2 })}`,
+      },
+    ]);
   });
 
   it("warns with the count of files left without the new members' entries", async () => {
@@ -697,6 +783,25 @@ describe("retryPendingAccess", () => {
     expect(notice).toEqual({
       level: "warning",
       text: `Common:EncryptedReencryptPartialFailure ${JSON.stringify({ count: 1 })}`,
+    });
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toEqual([
+      3,
+    ]);
+  });
+
+  it("Retry by the same user", async () => {
+    recordBob([3]);
+    vi.mocked(rewrapMissingFilesForMember).mockResolvedValue({
+      fileResults: [{ ...failed(3), keyReplaced: true }],
+      skippedMembers: [],
+      missingFileIdsByMember: { "u-bob": [3] },
+    });
+
+    const notice = await retry();
+
+    expect(notice).toEqual({
+      level: "warning",
+      text: `Common:PrivateRoomReplacedKeyBarText_one ${JSON.stringify({ count: 1 })}`,
     });
     expect(pendingAccessStore.get(ROOM_ID, "u-bob")?.missingFileIds).toEqual([
       3,

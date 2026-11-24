@@ -277,9 +277,20 @@ const KeysManagement = ({
   const exportFlow = useExportKeyFlow({
     onForgotPassphrase: handleForgotPassphrase,
   });
+  const applyReplacedEnvelope = useCallback(
+    (replaced: TEncryptionKeyPair) => {
+      setUserEncryptionKeys?.(
+        (encryptionKeys ?? []).map((key) =>
+          key.id === replaced.id ? replaced : key,
+        ),
+      );
+    },
+    [encryptionKeys, setUserEncryptionKeys],
+  );
   const rotate = useRotatePassphraseFlow({
     userId,
     refreshKeysFromServer,
+    onEnvelopeReplaced: applyReplacedEnvelope,
     lockAfterReseal,
     onForgotPassphrase: handleForgotPassphrase,
   });

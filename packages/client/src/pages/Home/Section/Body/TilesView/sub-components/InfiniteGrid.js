@@ -40,6 +40,7 @@ import uniqueid from "lodash/uniqueId";
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { getCountTilesInGrid } from "@docspace/shared/utils";
 import { useGridColumns } from "@docspace/shared/hooks/useGridColumns";
+import { RoomsType } from "@docspace/shared/enums";
 
 import {
   StyledCard,
@@ -54,6 +55,28 @@ const HeaderItem = ({ children, className, ...rest }) => {
       {children}
     </StyledHeaderItem>
   );
+};
+
+// The rooms of the AI section - an agent, a skill set, a knowledge base - are
+// rooms to the tile container, which wraps them as one; their tiles are
+// taller, so they are told apart by the room type of the item. An agent's
+// card holds five rows, a skill set's four and a knowledge base's three,
+// all in the columns of rooms. Keep in step with AiProjectTile.module.scss.
+const AI_TILE_HEIGHTS = {
+  [RoomsType.AiProjectRoom]: 202,
+  [RoomsType.InstructionsRoom]: 173,
+  [RoomsType.KnowledgeRoom]: 145,
+};
+
+const VERTICAL_ROOM_GAP = 16;
+
+const getTileRoomType = (child) =>
+  child?.props?.children?.props?.item?.roomType;
+
+/** The height of an AI card with the gap under it; 0 for any other tile. */
+const getAiTileHeight = (child) => {
+  const height = AI_TILE_HEIGHTS[getTileRoomType(child)];
+  return height ? height + VERTICAL_ROOM_GAP : 0;
 };
 
 const Card = ({ children, ...rest }) => {
@@ -74,6 +97,8 @@ const Card = ({ children, ...rest }) => {
     const titleHeight = 20 + headerMargin;
     const templateHeight = 126 + verticalRoomGap;
 
+    const aiTileHeight = getAiTileHeight(child);
+    if (aiTileHeight) return aiTileHeight;
     if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
@@ -127,10 +152,29 @@ const InfiniteGrid = (props) => {
 
   let cards = [];
   const list = [];
+  const aiRoomTypes = new Set();
 
   const addItemToList = (key, cls, clear) => {
+    // The grid knows the heights of rooms, folders and files; a row of AI
+    // cards tells its own. A row of loaders alone has no card to ask and
+    // takes the height of the row above it.
+    const cardsHeight = Math.max(
+      0,
+      ...cards.map((card) => getAiTileHeight(card.props.children)),
+    );
+    const rowHeight =
+      cardsHeight ||
+      (cards.some((card) => card.type === Card)
+        ? 0
+        : (list[list.length - 1]?.props?.["data-row-height"] ?? 0));
+
     list.push(
-      <Item key={key} className={cls} ref={observeRow}>
+      <Item
+        key={key}
+        className={cls}
+        ref={observeRow}
+        data-row-height={rowHeight || undefined}
+      >
         {cards}
       </Item>,
     );
@@ -198,6 +242,8 @@ const InfiniteGrid = (props) => {
           addItemToList(listKey, cls, true);
         }
 
+        if (getAiTileHeight(child)) aiRoomTypes.add(getTileRoomType(child));
+
         const key = child?.props?.children?.props?.id;
 
         const cardKey = key ? `card-item_${key}` : uniqueid("card-item_");
@@ -239,6 +285,17 @@ const InfiniteGrid = (props) => {
     const listKey = `list-${key}`;
     addItemToList(listKey, type);
   }
+  // The grid caches its row heights and measures them again only when this
+  // key changes. The folder alone is not enough: Agents, Skill sets and
+  // Knowledge bases are one folder narrowed to a room type, so the kinds of
+  // rows shown are part of it - and the room types of the AI cards, each as
+  // high as its own rows.
+  const rowKinds = [
+    ...new Set(list.map((row) => row.props.className ?? "")),
+    ...aiRoomTypes,
+  ].join(" ");
+  const rowHeightsKey = `${currentFolderId}:${rowKinds}`;
+
   return (
     <StyledInfiniteLoader
       viewAs="tile"
@@ -248,7 +305,7 @@ const InfiniteGrid = (props) => {
       itemCount={hasMoreFiles ? list.length + 1 : list.length}
       loadMoreItems={fetchMoreFiles}
       className={`TileList ${className}`}
-      currentFolderId={currentFolderId}
+      currentFolderId={rowHeightsKey}
       {...rest}
     >
       {list}

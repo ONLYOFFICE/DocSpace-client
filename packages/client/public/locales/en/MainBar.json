@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Click here</1> to upgrade your tariff plan.",
   "ConfirmEmailDescription": "Use the link provided in the activation email. Haven't received an email with the activation link?",
   "ConfirmEmailHeader": "Please activate your email ({{ email }}) to get access to the workspace features.",
-  "ContactToUpgradeTariff": "Contact the Full admin to upgrade the tariff plan.",
   "PersonalQuotaHeader": "Your personal storage quota exceeded",
   "PersonalQuotaHeaderForAdmins": "Storage quota per user exceeded",
   "PersonalUserQuotaAdminsDescription": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",

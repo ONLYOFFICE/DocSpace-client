@@ -1,0 +1,29 @@
+{
+  "key_path": "SkillSetEmptyUserDescription",
+  "content": "Skills added by the admins of this skill set will appear here.",
+  "content_en_sha1_hash": "234e70f780cfa982870b79142aa2c24c850de1f8",
+  "created_at": "2026-11-20T10:53:41.483Z",
+  "updated_at": "2026-11-20T10:54:39.928Z",
+  "comment": {
+    "text": "Description on the empty screen inside a skill set for a member who cannot add skills: the skills will be added by the admins of this skill set.",
+    "is_auto": true,
+    "updated_at": "2026-11-20T10:54:39.928Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 258,
+      "context": "// A skill set holds skills and a knowledge base holds files to search:\n // each says what it is for, not \"files and folders\" or \"quick actions\".\n if (type === RoomsType.InstructionsRoom)\n return isReadOnly\n ? t(\"EmptyView:SkillSetEmptyUserDescription\")\n : t(\"EmptyView:SkillSetEmptyDescription\");\n if (type === RoomsType.KnowledgeRoom)\n return isReadOnly\n ? t(\"EmptyView:KnowledgeBaseEmptyUserDescription\")\n : t(\"EmptyView:KnowledgeBaseEmptyDescription\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

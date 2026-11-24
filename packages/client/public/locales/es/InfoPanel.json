@@ -34,6 +34,7 @@
   "GoToDate": "Ir a la fecha",
   "GroupsEmptyScreenText": "Vea detalles de los grupos aquí",
   "GuestsEmptyScreenText": "Ver detalles de los invitados aquí",
+  "HistoryEmptyForDateText": "No hay actividad en esta fecha",
   "HistoryEmptyScreenText": "El historial de actividad se mostrará aquí",
   "HistoryThirdParty": "La visualización del historial no está disponible para salas públicas con almacenamientos de terceros conectados",
   "KnowledgeBasesEmptyScreenText": "Vea los detalles de la base de conocimientos aquí",

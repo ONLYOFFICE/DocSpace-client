@@ -34,6 +34,7 @@
   "GoToDate": "日付を指定",
   "GroupsEmptyScreenText": "グループの詳細はこちらで確認できます",
   "GuestsEmptyScreenText": "ゲストの詳細はこちらでご確認いただけます",
+  "HistoryEmptyForDateText": "この日付のアクティビティはありません",
   "HistoryEmptyScreenText": "アクティビティ履歴はこちらに表示されます",
   "HistoryThirdParty": "サードパーティストレージが接続されているパブリックルームでは、履歴表示は利用できません。",
   "KnowledgeBasesEmptyScreenText": "ナレッジベースの詳細はこちら",

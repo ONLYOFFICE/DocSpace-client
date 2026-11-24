@@ -34,6 +34,7 @@
   "GoToDate": "Siirry päivämäärään",
   "GroupsEmptyScreenText": "Katso ryhmän tiedot tässä",
   "GuestsEmptyScreenText": "Katso vieraiden tiedot täältä",
+  "HistoryEmptyForDateText": "Tälle päivämäärälle ei ole toimintaa",
   "HistoryEmptyScreenText": "Toimintahistoria näytetään tässä",
   "HistoryThirdParty": "Historian näyttö ei ole saatavilla julkisiin huoneisiin, jotka ovat yhteydessä kolmansien osapuolien muisteihin.",
   "KnowledgeBasesEmptyScreenText": "Katso tietämyskannan tiedot täältä",

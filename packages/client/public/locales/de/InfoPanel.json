@@ -34,6 +34,7 @@
   "GoToDate": "Zu Datum springen",
   "GroupsEmptyScreenText": "Gruppendetails hier ansehen",
   "GuestsEmptyScreenText": "Details zu Gästen hier ansehen",
+  "HistoryEmptyForDateText": "Für dieses Datum gibt es keine Aktivitäten",
   "HistoryEmptyScreenText": "Aktivitätsverlauf wird hier angezeigt",
   "HistoryThirdParty": "Die Verlaufsanzeige ist für öffentliche Räume mit angeschlossenen Drittanbieterspeichern nicht verfügbar",
   "KnowledgeBasesEmptyScreenText": "Details zur Wissensdatenbank finden Sie hier",

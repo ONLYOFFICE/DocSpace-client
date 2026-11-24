@@ -34,6 +34,7 @@
   "GoToDate": "날짜로 이동",
   "GroupsEmptyScreenText": "여기 그룹 세부 정보 보기",
   "GuestsEmptyScreenText": "여기에서 게스트 세부 정보를 확인하세요",
+  "HistoryEmptyForDateText": "이 날짜에는 활동이 없습니다",
   "HistoryEmptyScreenText": "활동 내역이 여기에 표시됩니다",
   "HistoryThirdParty": "연결된 타사 스토리지가 포함된 공개 룸의 경우 기록 표시를 사용할 수 없습니다",
   "KnowledgeBasesEmptyScreenText": "여기에서 지식 기반 세부 정보를 확인하세요",

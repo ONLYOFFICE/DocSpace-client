@@ -38,6 +38,7 @@ import { TableHeader } from "@onlyoffice/apps-ui-kit/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Events, SortByFieldName } from "@docspace/shared/enums";
+import { getInitialSortOrder } from "SRC_DIR/helpers/columnSortOrder";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -1104,6 +1105,7 @@ class FilesTableHeader extends React.Component {
 
     if (newFilter.sortBy !== sortBy) {
       newFilter.sortBy = sortBy;
+      newFilter.sortOrder = getInitialSortOrder(sortBy);
     } else {
       newFilter.sortOrder =
         newFilter.sortOrder === "ascending" ? "descending" : "ascending";
@@ -1124,6 +1126,7 @@ class FilesTableHeader extends React.Component {
 
     if (newFilter.sortBy !== sortBy) {
       newFilter.sortBy = sortBy;
+      newFilter.sortOrder = getInitialSortOrder(sortBy);
     } else {
       newFilter.sortOrder =
         newFilter.sortOrder === "ascending" ? "descending" : "ascending";

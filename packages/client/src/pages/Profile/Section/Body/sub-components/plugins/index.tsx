@@ -134,9 +134,10 @@ const PersonalPlugins = () => {
     return () => {
       isMounted.current = false;
 
-      if (reloadOnLeave.current) window.location.reload();
+      if (reloadOnLeave.current && pluginStore.reloadRequiredPlugins.length)
+        window.location.reload();
     };
-  }, []);
+  }, [pluginStore]);
 
   const openSettingsDialog = (pluginName: string) => {
     setSettingsPluginDialogVisible(true);

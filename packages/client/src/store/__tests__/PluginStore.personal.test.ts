@@ -58,6 +58,7 @@ vi.mock("@docspace/shared/api", () => ({
 }));
 
 import api from "@docspace/shared/api";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
@@ -138,6 +139,19 @@ describe("uninstallPlugin", () => {
     await store.uninstallPlugin(NAME, t, true);
 
     expect(store.plugins.map((p) => p.name)).toEqual(["uploaded"]);
+  });
+
+  it("does not report a failed re-read of the member's list after a delete", async () => {
+    const store = withLoadedPlugin(true);
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockRejectedValueOnce(
+      new Error("timeout"),
+    );
+
+    await store.uninstallPlugin(NAME, t, true);
+    await vi.waitFor(() => expect(store.isPersonalLoaded).toBe(true));
+
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 
   it("drops the deleted plugin from the member's own list before it is read again", async () => {
@@ -562,6 +576,70 @@ describe("handlePersonalPluginStateChange", () => {
 
     expect(store.plugins.map((p) => p.name)).toContain("own");
     expect(store.reloadRequiredPlugins).toEqual(["own"]);
+  });
+
+  it("takes the settings saved in another tab, so a later switch keeps them", async () => {
+    const store = withLoadedPlugin(true);
+
+    runInAction(() => {
+      store.plugins[0].settings = "old";
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      { name: NAME, enabled: true, settings: "new" } as unknown as TAPIPlugin,
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+    await store.updatePlugin(NAME, false);
+
+    expect(api.plugins.updatePlugin).toHaveBeenLastCalledWith(
+      NAME,
+      false,
+      "new",
+      true,
+    );
+  });
+
+  it("leaves a change read during the tab's own upload to the end of that upload", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(true);
+    const oldUrl = "https://portal.test/plugins/hello/plugin.js?hash=1.0.0";
+    let finishRead: (plugins: TAPIPlugin[]) => void = () => {};
+
+    runInAction(() => {
+      store.plugins[0].url = oldUrl;
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          finishRead = resolve;
+        }),
+    );
+
+    const change = store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+
+    await vi.waitFor(() =>
+      expect(api.plugins.getPersonalPlugins).toHaveBeenCalledTimes(1),
+    );
+    store.pendingPersonalUploads = 1;
+    finishRead([
+      {
+        ...ownModulePlugin(),
+        name: NAME,
+        pluginName: "Hello",
+        url: "https://portal.test/plugins/hello/plugin.js?hash=2.0.0",
+      } as TAPIPlugin,
+    ]);
+    await change;
+
+    expect(store.plugins[0].url).toBe(oldUrl);
+    expect(store.deferredPersonalChanges.has(NAME)).toBe(true);
   });
 
   it("loads the new version uploaded in another tab", async () => {

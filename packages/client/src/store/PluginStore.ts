@@ -349,6 +349,11 @@ class PluginStore {
   private applyPersonalChange = async (name: string) => {
     if (!(await this.fetchPersonalPlugins(false))) return;
 
+    if (this.pendingPersonalUploads) {
+      this.deferredPersonalChanges.add(name);
+      return;
+    }
+
     const loaded = this.plugins.find((p) => p.personal && p.name === name);
     const own = this.personalPlugins.find((p) => p.name === name);
 
@@ -367,6 +372,17 @@ class PluginStore {
     if (this.plugins.some((p) => !p.personal && clashesWith(own, p))) return;
 
     if (loaded && loaded.url === own.url) {
+      if (loaded.settings !== own.settings) {
+        runInAction(() => {
+          loaded.settings = own.settings;
+        });
+
+        if (loaded.enabled && loaded.scopes.includes(PluginScopes.Settings)) {
+          loaded.setAdminPluginSettingsValue?.(own.settings || null);
+          this.updatePluginStatus(name);
+        }
+      }
+
       await this.activatePlugin(name);
       return;
     }
@@ -729,7 +745,7 @@ class PluginStore {
         thrownInitError = toPluginError(e);
       }
 
-      if (personal) this.fetchPersonalPlugins();
+      if (personal) this.fetchPersonalPlugins(false);
 
       this.markReloadRequired(plugin);
 
@@ -775,14 +791,14 @@ class PluginStore {
         });
       }
 
-      if (personal) this.fetchPersonalPlugins();
+      if (personal) this.fetchPersonalPlugins(false);
 
       toastr.success(t("PluginDeletedSuccessfully"));
     } catch (e) {
       toastr.error(e as TData);
       console.log(e);
 
-      if (personal) this.fetchPersonalPlugins();
+      if (personal) this.fetchPersonalPlugins(false);
     }
   };
 
@@ -1219,7 +1235,7 @@ class PluginStore {
       console.log(e);
 
       if (status === true && this.pluginList.find((p) => p.name === name)?.personal) {
-        await this.fetchPersonalPlugins();
+        await this.fetchPersonalPlugins(false);
 
         if (this.personalPlugins.some((p) => p.name === name && p.enabled)) {
           this.activatePlugin(name);

@@ -104,6 +104,7 @@ const SimpleFilesRow = React.memo((props) => {
   } = props;
 
   const isMobileDevice = isMobileUtile();
+  const badgesBesideMenu = !isMobileDevice || item.isTemplate || !!item.isRoom;
 
   const [isDragActive, setIsDragActive] = React.useState(false);
 
@@ -247,9 +248,7 @@ const SimpleFilesRow = React.memo((props) => {
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
-          badgesComponent={
-            !isMobileDevice || item.isTemplate ? badgesComponent : null
-          }
+          badgesComponent={badgesBesideMenu ? badgesComponent : null}
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -290,9 +289,7 @@ const SimpleFilesRow = React.memo((props) => {
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            badgesComponent={
-              isMobileDevice && !item.isTemplate ? badgesComponent : null
-            }
+            badgesComponent={badgesBesideMenu ? null : badgesComponent}
           />
         </FilesRow>
       </DragAndDrop>

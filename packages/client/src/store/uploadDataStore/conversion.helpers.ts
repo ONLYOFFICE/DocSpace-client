@@ -50,6 +50,20 @@ import type {
   TConversionFile,
 } from "../UploadDataStore";
 
+const toastFileCreatedIn = (
+  t: TTranslation,
+  folderId: number | string,
+  fileTitle: string,
+) =>
+  getFolderInfo(folderId).then((folderInfo) =>
+    toastr.success(
+      t("ConvertDialog:InfoCreateFileIn", {
+        fileTitle,
+        folderTitle: folderInfo.title,
+      }),
+    ),
+  );
+
 export function convertFileFromFilesImpl(
   self: UploadDataStore,
   file: TConversionFile,
@@ -239,16 +253,7 @@ export async function startConversionFromFilesImpl(
           encrypted: converted.encrypted,
         });
 
-        getFolderInfo(converted.folderId)
-          .then((folderInfo) =>
-            toastr.success(
-              t("ConvertDialog:InfoCreateFileIn", {
-                fileTitle,
-                folderTitle: folderInfo.title,
-              }),
-            ),
-          )
-          .catch(() => {});
+        toastFileCreatedIn(t, converted.folderId, fileTitle).catch(() => {});
       }
     }
 
@@ -601,16 +606,9 @@ export async function startConversionImpl(
           });
 
           folderId &&
-            getFolderInfo(folderId)
-              .then((folderInfo) =>
-                toastr.success(
-                  t("InfoCreateFileIn", {
-                    fileTitle,
-                    folderTitle: folderInfo.title,
-                  }),
-                ),
-              )
-              .catch((err) => toastr.error(err as string));
+            toastFileCreatedIn(t, folderId, fileTitle).catch((err) =>
+              toastr.error(err as string),
+            );
         }
         const percent = self.getConversationPercent(index + 1);
         self.setConversionPercent(percent, !!error);

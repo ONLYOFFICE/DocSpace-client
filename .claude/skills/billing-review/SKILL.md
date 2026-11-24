@@ -86,7 +86,6 @@ Client repository:
 - `onlyoffice-apps-ui-kit.tgz` — a swapped tarball means ui-kit changed;
   check the ui-kit half
 - billing consumers outside billing:
-  `packages/client/src/components/AiAgentsTour/**`,
   `packages/shared/pages/backup/manual-backup/**`,
   `packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/**`
 

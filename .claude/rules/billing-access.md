@@ -177,12 +177,6 @@ showing the previous plan so it can be bought again.
 
 ## Billing checks outside the billing pages
 
-- `canActivateAi`
-  (`packages/client/src/components/AiAgentsTour/index.tsx`) decides
-  whether the AI empty screen offers a way to switch AI on:
-  `standalone || !isCardLinkedToPortal || isPayer`. Standalone is sent
-  to connect a provider; with no card linked any admin may activate;
-  once a card is linked, only the payer.
 - Paid manual backup (`shared/pages/backup/manual-backup`) and Docs
   Connect plans (`developer-tools/DocsConnect/BuyPlanPanel`) also live
   outside `/billing` but follow the same rule as the add-ons: any admin

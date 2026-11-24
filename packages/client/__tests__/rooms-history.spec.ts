@@ -246,7 +246,7 @@ test.describe("Rooms — info panel history", () => {
       await expect(toolbar).toBeHidden();
     });
 
-    test("should request the history up to the selected day", async ({
+    test("should request the history of the selected day only", async ({
       page,
       baseUrl,
       mockRequest,
@@ -265,14 +265,15 @@ test.describe("Rooms — info panel history", () => {
 
       await selectDay(page, "16");
 
-      await expect(blocks).toHaveCount(2);
+      await expect(blocks).toHaveCount(1);
 
-      expect(handle.current?.getLastRequest()?.toDate).toBe(
-        "2026-03-16T23:59:59.999Z",
-      );
+      expect(handle.current?.getLastRequest()).toMatchObject({
+        fromDate: "2026-03-16T00:00:00.000Z",
+        toDate: "2026-03-16T23:59:59.999Z",
+      });
 
       await expect(historyPanel.getByText("Beta")).toBeVisible();
-      await expect(historyPanel.getByText("Alpha")).toBeVisible();
+      await expect(historyPanel.getByText("Alpha")).toBeHidden();
       await expect(historyPanel.getByText("Gamma")).toBeHidden();
 
       await expectScreenshot(page, [
@@ -336,7 +337,7 @@ test.describe("Rooms — info panel history", () => {
 
       await selectDay(page, "16");
 
-      await expect(blocks).toHaveCount(2);
+      await expect(blocks).toHaveCount(1);
       await expect(dateFilterButton).toHaveText("Mar 16, 2026");
 
       await page.getByTestId("info_history_calendar_reset").click();
@@ -364,7 +365,7 @@ test.describe("Rooms — info panel history", () => {
       const historyView = page.getByTestId("info_panel_files_view_history");
 
       await selectDay(page, "16");
-      await expect(blocks).toHaveCount(2);
+      await expect(blocks).toHaveCount(1);
 
       handle.current?.reset();
 

@@ -123,6 +123,14 @@ The system SHALL offer a "remember this device" option in the unlock dialog wher
 - **WHEN** the user clicks Common:ForgetDeviceButton in Keys management
 - **THEN** the stored unlock is removed, Common:DeviceUnlockForgotten is shown, and the next operation prompts again
 
+#### Scenario: Passphrase changed on a remembered device
+- **WHEN** the user changes the passphrase of the key on a device that is remembered
+- **THEN** the remembered record is removed from this device, and the next encrypted operation asks for the new passphrase or a passkey
+
+#### Scenario: Passphrase changed on another device
+- **WHEN** the user changes the passphrase on one device while another device is remembered
+- **THEN** the other device keeps its remembered record until it is locked, forgotten or past its maximum age
+
 #### Scenario: Remembered record expired
 - **WHEN** a remembered device needs the identity more than 30 days after the record was written
 - **THEN** the record is discarded and the user is prompted for the passphrase (or passkey) as if the device had never been remembered
@@ -231,11 +239,15 @@ The system SHALL import a key from a previously exported JSON file (Common:Impor
 - **THEN** Keys management offers no import
 
 ### Requirement: Change passphrase
-The system SHALL let the user re-seal their key under a new passphrase after proving the current one, replacing the envelope in place and locking the identity, confirming with Common:PassphraseUpdated. The recovery phrase SHALL keep working.
+The system SHALL let the user re-seal their key under a new passphrase after proving the current one, replacing the envelope in place, locking the identity and removing the remembered record of this device, confirming with Common:PassphraseUpdated. The recovery phrase SHALL keep working.
 
 #### Scenario: Rotate passphrase
 - **WHEN** the user enters the current passphrase and a new acceptable one
 - **THEN** the envelope on the server is replaced and the old passphrase no longer unlocks it
+
+#### Scenario: Key list not read again after the change
+- **WHEN** the passphrase is changed and the following read of the key list fails
+- **THEN** the page that made the change unlocks with the new passphrase and refuses the old one, without a reload
 
 ### Requirement: Recover with the recovery phrase
 The system SHALL let the user restore access on this device by entering the 24-word phrase (Common:UseRecoveryPhrase) and then set a new passphrase; success is confirmed with Common:RecoveryPhraseRestored. A wrong phrase SHALL report Common:InvalidRecoveryPhrase.
@@ -714,7 +726,7 @@ The system SHALL describe the encryption key as the key of the user's account in
 
 #### Scenario: Reasons of a key change
 - **WHEN** the key-change dialog lists the legitimate reasons of a change
-- **THEN** it names a replaced key (Common:KeyChangedReasonReplaced), a recovery and a reset, and no reason that keys are stored per device
+- **THEN** it names a replaced key (Common:KeyChangedReasonReplaced) and a reset, which are the two actions that change a key; it names neither a recovery with the recovery phrase, which keeps the key, nor a reason that keys are stored per device
 
 ### Requirement: A new passphrase needs no particular characters
 The system SHALL accept a new passphrase, at key creation, after a recovery with the recovery phrase and at a passphrase change, when it has at least 12 characters and matches no common pattern, in whatever script it is written, and SHALL NOT require a capital letter, a digit, a punctuation character or a Latin letter in it. The rules tooltip of the passphrase field SHALL name the length alone.

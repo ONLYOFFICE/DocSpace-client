@@ -391,6 +391,14 @@ The system SHALL decrypt each selected encrypted file and deliver them together 
 - **WHEN** an encrypted file and a folder of the same private room are selected and "Download" is picked in the header menu
 - **THEN** one Files.zip is saved with the file under its decrypted name at the root and the folder's files under their decrypted names inside a directory named after the folder, and no server archive is requested
 
+#### Scenario: No file can be decrypted
+- **WHEN** none of the files can be decrypted and at least one of them fails for another reason than a key the user no longer holds
+- **THEN** no zip is saved and Files:DecryptAllFailed is shown
+
+#### Scenario: Every file is wrapped for a key the user no longer holds
+- **WHEN** every file is wrapped for a key the user no longer holds
+- **THEN** no zip is saved and Common:PrivateRoomReplacedKeyBarText is shown with the number of those files, not Files:DecryptAllFailed
+
 ### Requirement: Download without decryption
 The system SHALL offer "Download without decryption" for encrypted files and for folders in a private room, in the item context menu and in the bulk header menu of a private room; for a file it SHALL save the ciphertext container, for a folder it SHALL request a server archive of the ciphertext. The entry SHALL be labelled Common:DownloadWithoutDecryption, which names what is saved ("Download encrypted copy"); the specs keep calling the action download without decryption.
 
@@ -432,6 +440,14 @@ The system SHALL offer "Download" for a folder inside a private room and for the
 #### Scenario: Folder selected in the header menu
 - **WHEN** a folder of a private room is the only selected item and "Download" is picked in the header menu
 - **THEN** the same zip is saved as from the folder's context menu, named after the folder, and no server archive of its ciphertext is requested
+
+#### Scenario: No file can be decrypted
+- **WHEN** none of the files can be decrypted and at least one of them fails for another reason than a key the user no longer holds
+- **THEN** no zip is saved and Files:DecryptAllFailed is shown
+
+#### Scenario: Every file is wrapped for a key the user no longer holds
+- **WHEN** every file is wrapped for a key the user no longer holds
+- **THEN** no zip is saved and Common:PrivateRoomReplacedKeyBarText is shown with the number of those files, not Files:DecryptAllFailed
 
 ### Requirement: Deletion bypasses the recycle bin
 The system SHALL delete items in a private room permanently, never moving them to the recycle bin, and SHALL always show the delete confirmation with the permanent-deletion note, whichever way the deletion starts: the item menu, the menu of a selection, the header menu, the Delete key or the menu of the folder being viewed.

@@ -3,7 +3,7 @@
 ## 1. Passphrase change
 
 - [x] 1.1 Make `lockAfterReseal` in `packages/shared/context/encryption/EncryptionContext.tsx` remove the remembered record of the device (design.md, decision 1); verify with new cases "Passphrase changed on a remembered device" (record removed, the next `requireIdentity` raises the dialog) in `packages/shared/context/encryption/__tests__/EncryptionContext.test.tsx` via `cd packages/shared && pnpm exec vitest run context/encryption`
-- [ ] 1.2 Put the new envelope into the key list the page holds right after the server accepted it, in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRotatePassphraseFlow.tsx` with a callback from `KeysManagement.tsx` (design.md, decision 2); verify with a case "Key list not read again after the change" in the flow's unit test (the list holds the new `privateKeyEnc` although the read rejected) via `cd packages/client && pnpm exec vitest run src/pages/Profile/Section/Body/sub-components/keys-management`
+- [x] 1.2 Put the new envelope into the key list the page holds right after the server accepted it, in `packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRotatePassphraseFlow.tsx` with a callback from `KeysManagement.tsx` (design.md, decision 2); verify with a case "Key list not read again after the change" in the flow's unit test (the list holds the new `privateKeyEnc` although the read rejected) via `cd packages/client && pnpm exec vitest run src/pages/Profile/Section/Body/sub-components/keys-management`
 
 ## 2. Decrypted archives
 

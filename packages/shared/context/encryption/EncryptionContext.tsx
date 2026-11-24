@@ -321,8 +321,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [userKeys, t],
   );
 
-  // An explicit lock reaches the user's other pages; idle, hidden-tab and
-  // expiry locks stay with their page.
+  // An explicit lock reaches the user's other pages; idle and expiry locks
+  // stay with their page.
   // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
   const lock = useCallback(() => {
     SecretStorage.lock();

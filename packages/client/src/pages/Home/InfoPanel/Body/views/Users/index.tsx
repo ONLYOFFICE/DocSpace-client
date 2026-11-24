@@ -283,7 +283,7 @@ const Users = ({
 					</Text>
 					{typeData}
 
-					{isGuests && userSelection.createdBy?.displayName ? (
+					{userSelection.createdBy?.displayName ? (
 						<>
 							<Text
 								className={styles.infoField}
@@ -294,7 +294,7 @@ const Users = ({
 							<Text
 								fontSize="13px"
 								fontWeight={600}
-								title={statusLabel}
+								title={userSelection.createdBy.displayName}
 							>
 								{userSelection.createdBy.displayName}
 							</Text>

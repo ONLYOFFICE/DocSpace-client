@@ -271,6 +271,7 @@ class DetailsHelper {
             // Always: an agent without a model of its own runs on the
             // portal's, as its card says.
             isAIProject && "Model",
+            isAIProject && !!this.getAgentProviderName() && "Provider",
           ]
         : "isFolder" in this.item && this.item.isFolder
           ? [
@@ -371,6 +372,8 @@ class DetailsHelper {
 
       case "Model":
         return this.t("Common:AIAgentModel");
+      case "Provider":
+        return this.t("Common:Provider");
 
       case "Status":
         return this.t("Common:Status");
@@ -448,6 +451,8 @@ class DetailsHelper {
         return this.getExternalDbTableName();
       case "Model":
         return text(this.getAgentModelName() ?? "\u2014");
+      case "Provider":
+        return text(this.getAgentProviderName());
       case "Status":
         return this.getItemIndexingStatus();
       case "Skill set":
@@ -485,6 +490,12 @@ class DetailsHelper {
         : this.agentModelName;
     if (ownModel === undefined) return undefined;
     return ownModel ?? this.agentDefaultModelName ?? undefined;
+  };
+
+  getAgentProviderName = () => {
+    const settings = this.getAiProjectSettings();
+    if (!settings || settings.partial || settings.modelUnread) return undefined;
+    return settings.profile?.provider || undefined;
   };
 
   getExternalDbTableName = () => {

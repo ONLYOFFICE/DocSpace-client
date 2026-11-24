@@ -1,7 +1,7 @@
 ---
 name: onboard
-description: Build an interactive onboarding page (Artifact) for a large product feature — roles, states, flows and rules in plain human language, illustrated with real product screens, for non-developer readers. Invoked without arguments it offers a menu of documented areas to pick from. With `changes` after the subject it builds a release-delta page instead — what changed in the area since the last release — published as a separate artifact. Use for whole feature areas (billing, rooms, backup), never for a single control or small fix.
-argument-hint: "[<feature or area>] [changes] [.claude/rules/<rule>.md] [lang=<code>]"
+description: Build an interactive onboarding page (Artifact) for a large product feature — roles, states, flows and rules in plain human language, illustrated with real product screens, for non-developer readers. Invoked without arguments it offers a menu of documented areas to pick from. With `changes` after the subject it builds a release-delta page instead — what changed in the area since the last release — published as a separate artifact. With `for=external` it builds the short page for readers outside the team — what the feature gives, how to start, where it ends — as its own artifact next to the full one. Use for whole feature areas (billing, rooms, backup), never for a single control or small fix.
+argument-hint: "[<feature or area>] [changes] [for=external] [.claude/rules/<rule>.md] [lang=<code>]"
 ---
 
 # Onboarding page
@@ -47,9 +47,9 @@ research**, with the interactive option dialog:
   "give me a file" / "just the link" — each IS the answer. Ask only
   what is genuinely open; when nothing is, ask nothing.
 - Ask every open question in ONE dialog (it takes up to four): scope,
-  how the result is delivered, and in changes mode the comparison base
-  (§8). Never spend two round-trips on questions. Language is never
-  one of them — see §3.
+  the profile (§0a), how the result is delivered, and in changes mode
+  the comparison base (§8). Never spend two round-trips on questions.
+  Language is never one of them — see §3.
 - **Delivery is one of those questions**: a published Artifact (a
   private link the user shares when they choose) or a standalone HTML
   file they can attach to a message — some recipients cannot open an
@@ -60,6 +60,47 @@ research**, with the interactive option dialog:
   title naming the thread rather than the whole area. State in the
   reply what was deliberately left out, so the user can ask for a
   second page on the rest.
+
+### 0a. Two profiles
+
+The same facts serve two readers who ask different questions, so a
+feature has up to two pages, each its own artifact with its own title:
+
+| Profile    | Argument        | Reader's question                          | Size            |
+|------------|-----------------|--------------------------------------------|-----------------|
+| full       | (default)       | how it behaves in every state and role     | all sections    |
+| external   | `for=external`  | what it gives, how to start, where it ends | about a third   |
+
+The full profile is everything below. The **external** profile (a
+reader outside the team, named by the question they bring, never by a
+job title) is not the full page cut short — it answers its own question
+with its own section plan:
+
+| #  | Section                          | Component                                   |
+|----|----------------------------------|---------------------------------------------|
+| 01 | What it is                       | three value chips + one screen of the thing |
+| 02 | The concepts the reader must own | concept cards + one schematic               |
+| 03 | How to start                     | one step rail, one screen per step at most  |
+| 04 | What stays usual, what is gone   | two comparison cards                        |
+| 05 | What it protects and what not    | two comparison cards + a row list of limits |
+| 06 | When something is lost           | one card per recovery path                  |
+
+Whole states, per-role permissions, error texts, timers, devices and
+editor internals stay on the full page. Extra language rules for the
+external profile, on top of §3:
+
+- only words that appear on screen — no internal terms (envelope,
+  access record, wrapped key, hotspot);
+- error and refusal strings are not quoted unless the reader will
+  surely meet them (a lost passphrase);
+- at most one screenshot per section; the start rail may carry one
+  per step;
+- the facts are the full page's facts from the same rule: the short
+  page simplifies the wording, never the truth ("nobody can restore the
+  phrase" stays).
+
+The profile is asked in the §0 dialog when `for=` is absent and the
+request does not name the reader; the full profile goes first.
 
 Publishes a private Artifact page that explains how a feature behaves —
 for people who do not read code. The result is a stable URL the user can
@@ -389,8 +430,8 @@ path, a `file://` or localhost link, or a screenshot of a local render
    guessed or copied from an example or an earlier page.
 5. Publish with the Artifact tool (private; the user shares the link
    when they choose) and give the user the artifact URL. Keep one page
-   per feature and republish to the same URL with a short version
-   `label`; never fork a second artifact for a revision.
+   per feature and profile (§0a) and republish to the same URL with a
+   short version `label`; never fork a second artifact for a revision.
 6. Iterate with the user section by section — copy, layout and visuals
    are their calls; apply each request, rerun steps 1–4 (step 2 only
    when the copy changed), same URL.

@@ -43,16 +43,10 @@ import {
   getFileEncryptionAccess,
 } from "../../api/files";
 import { getSpecificEncryptionErrorMessage } from "../../services/encryption/error-i18n";
-import {
-  KeyReplacedError,
-  NoAccessError,
-} from "../../services/encryption/errors";
+import { NoAccessError } from "../../services/encryption/errors";
 import { decryptFile as decryptFileContent } from "../../services/encryption/file-keys";
 import { resolveDisplayTitle } from "../../services/encryption/filename-cache";
-import {
-  isWrappedForReplacedKey,
-  unwrapDekForCurrentUser,
-} from "../../services/encryption/room-file-access";
+import { unwrapDekForCurrentUser } from "../../services/encryption/room-file-access";
 import { requireUnlock } from "../../services/encryption/secret-storage";
 import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
 import { combineUrl } from "../../utils/combineUrl";
@@ -79,10 +73,6 @@ const MediaViewer = ({ userId, ...props }: MediaViewerProps) => {
       if (!fileKeys.some((k) => String(k.userId) === String(userId))) {
         throw new NoAccessError(String(userId));
       }
-      // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
-      if (isWrappedForReplacedKey(encryptionInfo, String(userId))) {
-        throw new KeyReplacedError();
-      }
 
       const identity = await requireUnlock(String(userId));
       if (signal.aborted || !identity) return null;
@@ -102,6 +92,7 @@ const MediaViewer = ({ userId, ...props }: MediaViewerProps) => {
       const dek = await unwrapDekForCurrentUser({
         fileKeys,
         roomMemberKeys,
+        userKeys: encryptionInfo?.userKeys,
         currentUserId: String(userId),
         currentIdentity: identity,
         fileId,

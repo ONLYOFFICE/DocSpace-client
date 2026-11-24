@@ -56,6 +56,8 @@ import {
 } from "@docspace/shared/services/private-room/encrypted-download";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { decryptFileFromBlob } from "@docspace/shared/services/encryption/file-keys";
+import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
+import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
 
 const progress = () => {
   const setSecondaryProgressBarData = vi.fn();
@@ -439,7 +441,8 @@ describe("FilesActionsStore — decrypted folder download", () => {
       fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
     } as never);
 
-  const replacedKeyAccess = (noEntryFor: number[] = []) =>
+  // Every file the user holds an entry of fails with the verdict of a replaced key.
+  const replacedKeyAccess = (noEntryFor: number[] = []) => {
     vi.mocked(getFileEncryptionAccess).mockImplementation((async (
       fileId: number,
     ) => ({
@@ -448,6 +451,12 @@ describe("FilesActionsStore — decrypted folder download", () => {
         ? []
         : [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
     })) as never);
+    vi.mocked(downloadAndDecryptFileToBuffer).mockResolvedValue({
+      success: false,
+      keyReplaced: true,
+      fileName: "",
+    });
+  };
 
   it("Every file is wrapped for a key the user no longer holds", async () => {
     vi.mocked(getFolder).mockResolvedValue(
@@ -461,7 +470,6 @@ describe("FilesActionsStore — decrypted folder download", () => {
     expect(toastr.error).toHaveBeenCalledWith(
       "Common:PrivateRoomReplacedKeyBarText_other",
     );
-    expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();
     expect(triggerFileDownload).not.toHaveBeenCalled();
   });
 
@@ -584,6 +592,11 @@ describe("FilesActionsStore — decrypted download of several files", () => {
       userKeys: [{ id: "k1" }],
       fileKeys: [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
     } as never);
+    vi.mocked(downloadAndDecryptFileToBuffer).mockResolvedValue({
+      success: false,
+      keyReplaced: true,
+      fileName: "",
+    });
     const { store: uploadDataStore } = progress();
     const store = createTestFilesActionsStore({
       userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
@@ -691,29 +704,61 @@ describe("FilesActionsStore — decrypted download of several files", () => {
 });
 
 describe("FilesActionsStore — single encrypted download", () => {
-  it("Download of one such file", async () => {
+  const fileOfAnotherKeyId = () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       userKeys: [{ id: "k1" }],
       fileKeys: [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
     } as never);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response(new Uint8Array([1, 2, 3]))),
+    );
     const { store: uploadDataStore } = progress();
-    const store = createTestFilesActionsStore({
+    return createTestFilesActionsStore({
       userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
       uploadDataStore,
     });
+  };
+  const opaque = {
+    id: 5,
+    title: "opaque-5.txt",
+    encrypted: true,
+    viewUrl: "http://x/5",
+  };
 
-    await store.downloadEncryptedFile({
-      id: 5,
-      title: "opaque-5.txt",
-      encrypted: true,
-    } as never);
+  it("Download of one such file", async () => {
+    const store = fileOfAnotherKeyId();
+    vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+      new KeyReplacedError(),
+    );
+
+    await store.downloadEncryptedFile(opaque as never);
+    vi.unstubAllGlobals();
 
     expect(toastr.error).toHaveBeenCalledTimes(1);
     expect(toastr.error).toHaveBeenCalledWith(
       "Common:EncryptedFileKeyReplaced",
     );
-    expect(requireUnlock).not.toHaveBeenCalled();
-    expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();
+    expect(
+      vi.mocked(unwrapDekForCurrentUser).mock.calls.at(-1)![0].userKeys,
+    ).toEqual([{ id: "k1" }]);
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
+  it("Key imported again", async () => {
+    const store = fileOfAnotherKeyId();
+    vi.mocked(decryptFileFromBlob).mockResolvedValue({
+      data: new Blob([new Uint8Array([7])]),
+      fileName: "plan.txt",
+    });
+
+    await store.downloadEncryptedFile(opaque as never);
+    vi.unstubAllGlobals();
+
+    expect(toastr.error).not.toHaveBeenCalled();
+    expect(
+      (vi.mocked(triggerFileDownload).mock.calls.at(-1)![0] as File).name,
+    ).toBe("plan.txt");
   });
 
   it("No own access entry", async () => {

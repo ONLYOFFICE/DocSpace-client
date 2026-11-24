@@ -39,7 +39,6 @@ import {
   getFolder,
 } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { isWrappedForReplacedKey } from "@docspace/shared/services/encryption/room-file-access";
 import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 import {
   loadRoomMemberKeysSafe,
@@ -363,11 +362,6 @@ self: FilesActionStore,file: TActionItem
       toastr.error(i18n.t("Common:EncryptedFileNoAccessYet"));
       return Promise.resolve();
     }
-    // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
-    if (isWrappedForReplacedKey(encryptionInfo, String(userId))) {
-      toastr.error(i18n.t("Common:EncryptedFileKeyReplaced"));
-      return Promise.resolve();
-    }
 
     const identity = await requireUnlock(String(userId));
     if (!identity) {
@@ -391,6 +385,7 @@ self: FilesActionStore,file: TActionItem
       fileId: file.id,
       fileKeys: encryptionInfo.fileKeys,
       roomMemberKeys,
+      userKeys: encryptionInfo.userKeys,
       userId: String(userId),
       identity,
       originalFileName: file.title,
@@ -424,10 +419,15 @@ self: FilesActionStore,file: TActionItem
     if (result.success && result.file) {
       triggerFileDownload(result.file);
     } else {
-      if (result.error) {
-        console.error("[ENCRYPTION] downloadEncryptedFile:", result.error);
+      // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+      if (result.keyReplaced) {
+        toastr.error(i18n.t("Common:EncryptedFileKeyReplaced"));
+      } else {
+        if (result.error) {
+          console.error("[ENCRYPTION] downloadEncryptedFile:", result.error);
+        }
+        toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
       }
-      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
     }
   } catch (error) {
     setSecondaryProgressBarData({
@@ -585,12 +585,7 @@ const downloadDecryptedZipImpl = async (
         const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(
           (k) => String(k.userId) === String(userId),
         );
-        const keyReplaced = isWrappedForReplacedKey(
-          encryptionInfo,
-          String(userId),
-        );
-        if (!hasOwnEntry || keyReplaced) {
-          if (keyReplaced) replacedKeyFailures += 1;
+        if (!hasOwnEntry) {
           failures.push(`${dir}${shownName}`);
           continue;
         }
@@ -606,6 +601,7 @@ const downloadDecryptedZipImpl = async (
           fileId: file.id,
           fileKeys: encryptionInfo.fileKeys!,
           roomMemberKeys,
+          userKeys: encryptionInfo.userKeys,
           userId: String(userId),
           identity,
           originalFileName: file.title,
@@ -637,6 +633,7 @@ const downloadDecryptedZipImpl = async (
             data: result.data,
           });
         } else {
+          if (result.keyReplaced) replacedKeyFailures += 1;
           failures.push(`${dir}${shownName}`);
         }
       } catch {

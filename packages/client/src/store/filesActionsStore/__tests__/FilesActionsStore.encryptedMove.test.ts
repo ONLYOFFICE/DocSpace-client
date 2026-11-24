@@ -158,7 +158,8 @@ describe("FilesActionsStore - encrypted files moved out of a private room", () =
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedFileNoAccessYet");
   });
 
-  it("Key locked: one file wrapped for a previous key is reported before the unlock", async () => {
+  it("Key locked: one file wrapped for a previous key is reported once the key is unlocked", async () => {
+    allowConsoleError(/client copy failed/);
     const { store, startUpload } = setup();
 
     await store.copyEncryptedFilesToFolder([replaced] as never, 5, {
@@ -168,8 +169,7 @@ describe("FilesActionsStore - encrypted files moved out of a private room", () =
       deleteSourceOnSuccess: true,
     });
 
-    expect(requireUnlock).not.toHaveBeenCalled();
-    expect(decryptEncryptedItemToFile).not.toHaveBeenCalled();
+    expect(requireUnlock).toHaveBeenCalled();
     expect(startUpload).not.toHaveBeenCalled();
     expect(toastr.error).toHaveBeenCalledTimes(1);
     expect(toastr.error).toHaveBeenCalledWith("Common:EncryptedFileKeyReplaced");

@@ -34,6 +34,7 @@
  */
 
 import type { TFunction } from "i18next";
+import type { TTranslation } from "../../types";
 import chunk from "lodash/chunk";
 
 import {
@@ -247,7 +248,7 @@ const keyReplacedIdsOf = (fileResults: FileEncryptionOpResult[]) =>
  */
 // Spec: private-rooms/room-membership, "A re-wrap names a key the inviter no longer holds"
 export const reencryptFailureText = (
-  t: TFunction,
+  t: TTranslation,
   fileIds: readonly number[],
   keyReplacedFileIds: readonly number[] = [],
 ): string => {

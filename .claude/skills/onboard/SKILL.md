@@ -51,10 +51,12 @@ research**, with the interactive option dialog:
   the comparison base (§8). Never spend two round-trips on questions.
   Language is never one of them — see §3.
 - **Delivery is one of those questions**: a published Artifact (a
-  private link the user shares when they choose) or a standalone HTML
+  private link the user shares when they choose), a standalone HTML
   file they can attach to a message — some recipients cannot open an
-  artifact link at all. "Both" is a valid answer; the artifact goes
-  first as the default. §7 has the mechanics of each.
+  artifact link at all — or a PDF for mail and print. Several are a
+  valid answer; the artifact goes first as the default. A PDF is a
+  snapshot: later revisions do not reach it, so it is an attachment,
+  never the primary copy. §7 has the mechanics of each.
 - A narrower scope changes the page, not merely its length: only the
   sections that thread needs, the same components as always, and a
   title naming the thread rather than the whole area. State in the
@@ -448,6 +450,28 @@ path, a `file://` or localhost link, or a screenshot of a local render
    Downloads folder, or a path they name) — never the scratchpad,
    never inside the repository — and open it once to confirm it renders
    before handing it over.
+
+8. **PDF** — only when asked for one. Print the embedded page with
+   `node .claude/skills/onboard/export-pdf.cjs <embedded page> <out.pdf>`
+   (headless, print media, A4 at 0.8 scale so the desktop layout
+   survives — card rows, the flow strip and side-by-side shots would
+   fold into one column at A4 width — backgrounds on). The template's
+   print styles carry the page: every tab panel expands under its title, the
+   role filter shows every row with its role label, the contents list
+   sits at the top with working anchors, the zoom badge and the
+   lightbox disappear, and cards, frames, diagrams and steps never
+   break across pages. The PDF carries bookmarks (the viewer's outline
+   tab): the page title, the numbered sections and their sub-headings,
+   rebuilt from the markup with PyMuPDF because Chromium's own outline
+   lists every card title and loses spaces at line breaks. The script
+   names every block taller than one
+   printed page — such a block will be cut; crop the screenshot or
+   split the card before handing the file over. Write the PDF next to
+   the standalone HTML (Downloads or a path the user names) and look
+   through every page before handing it over: render them with PyMuPDF
+   (`python3 -m pip install --user pymupdf`; the Read tool needs
+   poppler, which is usually absent) and tile them into one sheet to
+   read with the Read tool.
 
 If the user reports blank images that the smoke test showed fine, the
 fault is the artifact viewer surface, not the page: known triggers are

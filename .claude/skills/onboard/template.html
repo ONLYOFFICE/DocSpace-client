@@ -550,10 +550,17 @@
   }
   /* Print: hide the chrome, expand every tab panel with its title */
   @media print {
-    nav.toc, .filter, .lightbox { display: none !important; }
+    .filter, .lightbox { display: none !important; }
+    /* paper is the ground: a tinted body would print as a grey box cut at the page margins */
+    body { background: #fff; }
     .shell { display: block; max-width: none; padding: 0; }
+    /* the sticky contents becomes a plain list at the top; anchors survive in the PDF */
+    nav.toc { display: block !important; position: static; margin: 24px 0 8px; columns: 2; }
+    nav.toc a { break-inside: avoid; }
     .panel, .panel[hidden] { display: block !important; }
-    .panel { break-inside: avoid; }
+    /* nothing that reads as one unit is cut by a page break */
+    .panel, .card, figure, .frame, .diagram, .dia, ul.actions li, .callout, .fstep { break-inside: avoid; }
+    h2, h3 { break-after: avoid; }
     .panel::before {
       content: attr(data-title);
       display: block;

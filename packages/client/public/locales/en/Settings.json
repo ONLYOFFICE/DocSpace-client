@@ -197,6 +197,7 @@
   "Lifetime": "Lifetime (min)",
   "LimitThemesTooltip": "You can only create 3 custom themes. To create a new one, you must delete one of the previous themes.",
   "LinksBeforeRestriction": "Choose what happens to links created before the restriction:",
+  "LinkKeepWorking": "Previously created public links keep working until they are removed.",
   "LinkStopWorking": "Previously created public links will stop working.",
   "LoginHistoryCampaignHeader": "Secure your workspace",
   "LoginHistoryCampaignText": "Protect your data and accounts from unauthorized access.",

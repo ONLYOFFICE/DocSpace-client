@@ -74,6 +74,25 @@ describe("getAvailableInfoPanelTabs", () => {
     expect(useRoomsView).toBe(true);
   });
 
+  it("No Metadata tab for anything of the AI section, while a file of My documents has it", () => {
+    const tabsOf = (selection: object) =>
+      getAvailableInfoPanelTabs({
+        selection: selection as never,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder: false,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs;
+    const file = { id: 5, parentId: 3, fileExst: ".docx", title: "Plan.docx" };
+
+    expect(tabsOf({ ...file, rootFolderType: FolderType.USER })).toContain(InfoPanelView.infoMetadata);
+    expect(tabsOf({ ...file, rootFolderType: FolderType.AiHub })).not.toContain(InfoPanelView.infoMetadata);
+    expect(
+      tabsOf({ id: 12, parentId: 3, isRoom: true, roomType: RoomsType.KnowledgeRoom, rootFolderType: FolderType.AiHub }),
+    ).not.toContain(InfoPanelView.infoMetadata);
+  });
+
   const agentTabs = (selection: object, aiChatProjectId: number | null = null) =>
     getAvailableInfoPanelTabs({
       selection: selection as never,

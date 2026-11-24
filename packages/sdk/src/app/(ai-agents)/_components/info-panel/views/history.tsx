@@ -68,10 +68,10 @@ import styles from "../InfoPanel.module.scss";
 const labelFor = (
   key: FeedActionKeys,
   data: TFeedAction["data"] | undefined,
-  t: (
-    k: string,
-    opts?: Record<string, unknown> & { defaultValue?: string },
-  ) => string,
+  t: {
+    (k: string): string;
+    (k: string, opts: Record<string, unknown> & { defaultValue?: string }): string;
+  },
 ): string => {
   const title = (data?.title ||
     data?.newTitle ||

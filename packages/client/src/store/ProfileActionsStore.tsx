@@ -113,10 +113,10 @@ type TFilesStore = FilesStore;
 /** Shape used to read `originalEvent` off context-menu click payloads. */
 type TClickEventObj = { originalEvent?: ReactMouseEvent };
 
-type TTranslationFn = (
-  key: string,
-  options?: Record<string, string | number>,
-) => string;
+type TTranslationFn = {
+  (key: string): string;
+  (key: string, options: Record<string, string | number>): string;
+};
 
 /**
  * Profile menu items are ContextMenuType entries extended with the extra

@@ -63,7 +63,10 @@ export const getInstallLabel = (
  * give it. Warnings the client does not know are left out.
  */
 export const getInstallWarnings = (
-  t: (key: string, options?: Record<string, unknown>) => string,
+  t: {
+    (key: string): string;
+    (key: string, options: Record<string, unknown>): string;
+  },
   installed: Pick<TAiInstalledTemplate, "title" | "warnings">,
 ) => {
   const name = installed.title;

@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "공유 링크를 통해 이용 가능한 공간",
   "RoomCreated": "방이 생성되었습니다",
   "RoomEmptyContainerDescription": "서 첫 번째 방을 만드세요.",
-  "RoomTagsLabel": "룸 태그",
   "RoomTagsTooltip": "태그는 이 템플릿을 기반으로 생성될 룸에 적용됩니다.",
   "RoomTemplate": "룸 템플릿",
   "RoomTemplateDescription": "이 템플릿을 사용하여 새 룸을 신속하게 생성하세요.",

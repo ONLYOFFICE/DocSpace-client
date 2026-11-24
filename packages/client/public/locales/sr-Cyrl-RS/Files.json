@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Простор доступан путем дељеног линка",
   "RoomCreated": "Соба креирана",
   "RoomEmptyContainerDescription": "Молимо вас креирајте прву собу.",
-  "RoomTagsLabel": "Ознаке собе",
   "RoomTagsTooltip": "Ознаке ће се применити на собу која ће бити креирана на основу овог шаблона.",
   "RoomTemplate": "Шаблон собе",
   "RoomTemplateDescription": "Користите овај шаблон за брзо креирање нове собе.",

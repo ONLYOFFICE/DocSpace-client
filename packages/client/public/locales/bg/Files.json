@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Пространството е достъпно чрез споделен линк",
   "RoomCreated": "Стаята е създадена",
   "RoomEmptyContainerDescription": "Моля, създайте първата стая.",
-  "RoomTagsLabel": "Етикети на стая",
   "RoomTagsTooltip": "Етикетите ще се прилагат към стаята, която ще бъде създадена въз основа на този шаблон.",
   "RoomTemplate": "Шаблон на стая",
   "RoomTemplateDescription": "Използвайте този шаблон за бързо създаване на нова стая.",

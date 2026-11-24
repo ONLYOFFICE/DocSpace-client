@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Space available via shared link",
   "RoomCreated": "Room created",
   "RoomEmptyContainerDescription": "Please create the first room.",
-  "RoomTagsLabel": "Room Tags",
   "RoomTagsTooltip": "Tags will apply to the room that will be created based on this template.",
   "RoomTemplate": "Room template",
   "RoomTemplateDescription": "Use this template to quickly create a new room.",

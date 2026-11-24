@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Простір доступний через спільне посилання",
   "RoomCreated": "Кімнату створено",
   "RoomEmptyContainerDescription": "Створіть першу кімнату.",
-  "RoomTagsLabel": "Теги кімнати",
   "RoomTagsTooltip": "Теги буде застосовано до кімнати, яка буде створена на основі цього шаблону.",
   "RoomTemplate": "Шаблон кімнати",
   "RoomTemplateDescription": "Використовуйте цей шаблон, щоб швидко створити нову кімнату.",

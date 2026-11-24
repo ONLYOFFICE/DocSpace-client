@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Espaço disponível através de link partilhado",
   "RoomCreated": "Sala criada",
   "RoomEmptyContainerDescription": "Por favor, crie a primeira sala.",
-  "RoomTagsLabel": "Etiquetas da Sala",
   "RoomTagsTooltip": "As etiquetas aplicar-se-ão à sala que será criada com base neste templates.",
   "RoomTemplate": "Templates de Sala",
   "RoomTemplateDescription": "Utilize este templates para criar rapidamente uma nova sala.",

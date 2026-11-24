@@ -446,8 +446,6 @@ const SetRoomParams = ({
       />
     );
 
-  const tagsTitle = isTemplateSelected || isTemplate ? t("Files:RoomTagsLabel") : "";
-
   const inputTitle =
     isTemplateSelected || isTemplate
       ? `${t("Files:TemplateName")}:`
@@ -515,7 +513,6 @@ const SetRoomParams = ({
 
       <TagInput
         t={t}
-        title={tagsTitle}
         tagHandler={tagHandler}
         setIsScrollLocked={setIsScrollLocked}
         isDisabled={isDisabled}

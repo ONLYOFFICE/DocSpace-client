@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Không gian khả dụng thông qua liên kết được chia sẻ",
   "RoomCreated": "Đã tạo phòng",
   "RoomEmptyContainerDescription": "Xin vui lòng tạo phòng đầu tiên.",
-  "RoomTagsLabel": "Thẻ tag (từ khóa) phòng",
   "RoomTagsTooltip": "Thẻ tag được sẽ áp dụng cho phòng được tạo dựa trên mẫu này.",
   "RoomTemplate": "Mẫu phòng",
   "RoomTemplateDescription": "Sử dụng mẫu này để nhanh chóng tạo phòng mới.",

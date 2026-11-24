@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Space verfügbar über freigegebenen Link",
   "RoomCreated": "Raum erstellt",
   "RoomEmptyContainerDescription": "Bitte erstellen Sie den ersten Raum.",
-  "RoomTagsLabel": "Raum-Tags",
   "RoomTagsTooltip": "Auf den Raum, der auf Grundlage dieser Vorlage erstellt wird, werden Tags angewendet.",
   "RoomTemplate": "Raumvorlage",
   "RoomTemplateDescription": "Verwenden Sie diese Vorlage, um schnell einen neuen Raum zu erstellen.",

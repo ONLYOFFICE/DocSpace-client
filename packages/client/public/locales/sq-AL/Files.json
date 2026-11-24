@@ -106,7 +106,6 @@
   "RoomAvailableViaSharedLink": "Hapësira në dispozicion përmes lidhjes së shpërndarë",
   "RoomCreated": "Dhoma u krijua",
   "RoomEmptyContainerDescription": "Ju lutemi krijoni dhomën e parë.",
-  "RoomTagsLabel": "Etiketat e Dhomave",
   "RoomTagsTooltip": "Etiketat do të aplikohen dhomës që do të krijohet bazuar në këtë model.",
   "RoomTemplate": "Modelo i dhomës",
   "RoomTemplateDescription": "Përdorni këtë model për të krijuar shpejt një dhomë të re.",

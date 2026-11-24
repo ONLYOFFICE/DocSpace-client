@@ -47,6 +47,10 @@ import {
 import { BackupStorageType, AutoBackupPeriod } from "../../../enums";
 import { OPERATIONS_NAME } from "../../../constants";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
+import {
+  TOGGLE_CAPTION_CLASS,
+  onToggleCaptionClick,
+} from "../../../utils/toggleCaption";
 import { getBackupStorage } from "../../../api/settings";
 import AutoBackupLoader from "../../../skeletons/backup/AutoBackup";
 import StatusMessage from "@onlyoffice/apps-ui-kit/components/status-message";
@@ -476,7 +480,9 @@ const AutomaticBackup = ({
             className={classNames(
               styles.toggleCaptionTitle,
               "toggle-caption_title",
+              TOGGLE_CAPTION_CLASS,
             )}
+            onClick={onToggleCaptionClick}
           >
             <Text
               fontWeight={600}

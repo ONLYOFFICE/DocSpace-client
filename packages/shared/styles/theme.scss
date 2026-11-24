@@ -3014,3 +3014,7 @@
   --color-error: #{$dark-error-status};
   --color-error-light: #{rgba($dark-error-status, 0.12)};
 }
+
+.toggle-caption-clickable {
+  cursor: pointer;
+}

@@ -72,6 +72,7 @@ import { createLoader } from "@docspace/shared/utils/createLoader";
 import type AiPresetsStore from "./AiPresetsStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import { toAiPreset } from "./AiPresetsStore";
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 
 /** The Skill sets connected and disconnected in the chat's composer. */
 type TSkillRoomsChange = { added: { id: string }[]; removed: string[] };
@@ -221,6 +222,15 @@ class AiProjectsStore {
 
   projectDialog: TProjectDialogState | null = null;
 
+  /**
+   * Set, as a new object each time, when a model picked in the chat on an
+   * agent was not saved: the chat goes back to the agent's model.
+   */
+  modelRejected: { id: number } | null = null;
+
+  /** `modelRejected`, read through a function that keeps its identity. */
+  getModelRejected = () => this.modelRejected;
+
   /** The rooms selector open on an agent outside its form; `null` while closed. */
   roomsSelector: TRoomsSelectorState | null = null;
 
@@ -262,7 +272,7 @@ class AiProjectsStore {
    */
   openRoomsSelector = async (id: number, kind: TAgentRoomsKind) => {
     const project = await this.readProject(id);
-    if (!project?.aiProject.canEditSettings) return;
+    if (!project || !getAgentRights(project).edit) return;
     runInAction(() => {
       this.roomsSelector = {
         id,
@@ -284,7 +294,7 @@ class AiProjectsStore {
   setRooms = (id: number, kind: TAgentRoomsKind, rooms: TAiProjectSource[]): Promise<boolean> => {
     const save = this.skillRoomsSaves.then(async () => {
       const current = await this.readProject(id);
-      if (!current?.aiProject.canEditSettings) return false;
+      if (!current || !getAgentRights(current).edit) return false;
       const instructions = kind === "instructions" ? rooms : current.aiProject.instructionsRooms;
       const knowledge = kind === "knowledge" ? rooms : current.aiProject.knowledgeRooms;
       try {
@@ -307,6 +317,40 @@ class AiProjectsStore {
         toastr.error(errorMessage(e));
         return false;
       }
+    });
+    this.skillRoomsSaves = save;
+    return save;
+  };
+
+  /**
+   * Saves the model picked in the composer of the chat that runs on an
+   * agent as the agent's model. Only the model is written. Saved after the
+   * changes before it, from the agent as the server has it then. When the
+   * save fails, or the user may not change the agent, the chat is asked to
+   * go back to the agent's model (`modelRejected`). Resolves to `false` when
+   * nothing was saved.
+   */
+  setModel = (id: number, profileId: string): Promise<boolean> => {
+    const save = this.skillRoomsSaves.then(async () => {
+      const current = await this.readProject(id);
+      if (!current) return false;
+      if (current.aiProject.profile?.id === profileId) return true;
+      if (getAgentRights(current).edit) {
+        try {
+          const project = await updateAiProject(current.id, { aiProject: { profileId } }, current);
+          showWarnings(project);
+          runInAction(() => this.replaceProject(project));
+          if (this.isChatOn(current.id)) this.syncPreset(project);
+          return true;
+        } catch (e) {
+          toastr.error(errorMessage(e));
+        }
+      }
+      if (this.isChatOn(current.id)) {
+        this.syncPreset(current);
+        runInAction(() => (this.modelRejected = { id: current.id }));
+      }
+      return false;
     });
     this.skillRoomsSaves = save;
     return save;
@@ -352,7 +396,7 @@ class AiProjectsStore {
   ): Promise<boolean> => {
     const save = this.skillRoomsSaves.then(async () => {
       const current = await read();
-      if (!current?.aiProject.canEditSettings) return false;
+      if (!current || !getAgentRights(current).edit) return false;
       const { instructionsRooms, knowledgeRooms } = current.aiProject;
       const removed = new Set(change.removed.map(Number));
       const kept = instructionsRooms.map((room) => room.id).filter((id) => !removed.has(id));

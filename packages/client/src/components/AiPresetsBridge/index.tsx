@@ -120,6 +120,8 @@ type AiPresetsBridgeProps = {
    * resolves to `false` when nothing was saved.
    */
   changeAgentSkillRooms: (id: number, change: AiChatSkillRoomsChange) => Promise<boolean>;
+  /** Read in a reaction: set anew each time a model picked in the chat on an agent was not saved. */
+  aiProjectsModelRejected: () => { id: number } | null;
   /** Opens the invite panel of a room. */
   inviteToRoom: (roomId: number, roomType: RoomsType) => void;
   /**
@@ -167,6 +169,7 @@ const AiPresetsBridge = ({
   openEditAiProject,
   openAgentRooms,
   changeAgentSkillRooms,
+  aiProjectsModelRejected,
   inviteToRoom,
   selectForInfoPanel,
   setInfoPanelView,
@@ -509,6 +512,27 @@ const AiPresetsBridge = ({
     [aiChatStore, aiPresetsStore],
   );
 
+  // A model picked in the composer of a chat on an agent is saved as the
+  // agent's model (Shell's `onProfilePickerSelect`); when it was not saved,
+  // the chat goes back to the model the agent has.
+  React.useEffect(
+    () =>
+      reaction(
+        () => aiProjectsModelRejected(),
+        (rejected) => {
+          const preset = aiPresetsStore.activePreset;
+          if (!rejected || preset?.id !== String(rejected.id)) return;
+          aiChatStore.applyPreset({
+            profileId: preset.profileId,
+            profileName: preset.profileName,
+            contextRooms: preset.contextRooms,
+            knowledgeRooms: preset.knowledgeRooms,
+          });
+        },
+      ),
+    [aiChatStore, aiPresetsStore, aiProjectsModelRejected],
+  );
+
   // With vectorization off no Knowledge room can be searched, so the
   // "+" menu's Knowledge bases loses Manage; a base connected earlier stays
   // listed there and can still be disconnected.
@@ -656,6 +680,7 @@ export default inject(
   openEditAiProject: aiProjectsStore.openEditDialogById,
   openAgentRooms: aiProjectsStore.openRoomsSelector,
   changeAgentSkillRooms: aiProjectsStore.changeSkillRooms,
+  aiProjectsModelRejected: aiProjectsStore.getModelRejected,
   inviteToRoom: contextOptionsStore.onClickInviteUsers,
   // The Info panel shows the list's selection: the agent takes its place.
   selectForInfoPanel: (room: ReturnType<typeof aiProjectToRoom> | null) => {

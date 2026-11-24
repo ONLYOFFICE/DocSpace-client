@@ -676,10 +676,10 @@ describe("AiPresetsBridge", () => {
   });
 
   describe("the actions of the picked agent", () => {
-    const withRights = (security: object, canEditSettings: boolean) => ({
+    // `canEdit` is the room's EditRoom right, which the agent's settings ask.
+    const withRights = (security: object, canEdit: boolean) => ({
       ...project(1, "Sales"),
-      security,
-      aiProject: { ...project(1, "Sales").aiProject, canEditSettings },
+      security: { ...security, EditRoom: canEdit },
     });
     const pick = async (store: AiPresetsStore, picked: object) => {
       api.getAiProject.mockResolvedValue(picked);

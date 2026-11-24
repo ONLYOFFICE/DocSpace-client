@@ -30,6 +30,7 @@ const project = (id: number, title: string, overrides: Partial<TAiProject["aiPro
     title,
     created: "2026-10-01T00:00:00.000Z",
     inRoom: true,
+    security: { EditRoom: true },
     aiProject: {
       profile: { id: "p1", name: "Claude", available: true },
       instructionsRooms: [room(12, "Skills"), room(13, "Legal tone")],

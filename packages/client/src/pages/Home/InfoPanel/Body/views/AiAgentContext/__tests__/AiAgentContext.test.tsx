@@ -55,12 +55,13 @@ import AiAgentContext from "../index";
 
 const room = (id: number, title: string, available = true) => ({ id, title, available });
 
-const project = (canEditSettings: boolean, inRoom = true) => ({
+// `canEdit` is the room's EditRoom right, which the agent's settings ask.
+const project = (canEdit: boolean, inRoom = true) => ({
   inRoom,
+  security: { EditRoom: canEdit },
   aiProject: {
     instructionsRooms: [room(1, "Legal"), room(2, "Gone", false)],
     knowledgeRooms: [room(3, "Wiki")],
-    canEditSettings,
   },
 });
 
@@ -130,7 +131,8 @@ describe("AiAgentContext", () => {
 
     api.getAiProject.mockResolvedValue({
       inRoom: true,
-      aiProject: { instructionsRooms: [room(1, "Legal")], knowledgeRooms: [room(4, "Policies")], canEditSettings: true },
+      security: { EditRoom: true },
+      aiProject: { instructionsRooms: [room(1, "Legal")], knowledgeRooms: [room(4, "Policies")] },
     });
     act(() => {
       runInAction(() => {
@@ -164,7 +166,8 @@ describe("AiAgentContext", () => {
   it("heads each section with what the assistant does with it, which is all an empty one shows", async () => {
     api.getAiProject.mockResolvedValue({
       inRoom: true,
-      aiProject: { instructionsRooms: [], knowledgeRooms: [], canEditSettings: false },
+      security: { EditRoom: false },
+      aiProject: { instructionsRooms: [], knowledgeRooms: [] },
     });
     render(<AiAgentContext id={7} />);
     const skills = await screen.findByTestId("ai-agent-context-skills");

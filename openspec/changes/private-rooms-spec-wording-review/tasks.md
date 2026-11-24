@@ -9,7 +9,7 @@ No behaviour changes. One task is one commit with its tick.
 
 ## 2. Gate
 
-- [ ] 2.1 Run `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` and check that no unarchived change carries one of the seventeen requirements (the search of design.md, decision 2, repeated); verify: validation green, search empty
+- [x] 2.1 Run `npx -y @fission-ai/openspec@1.17.0 validate --all --strict` and check that no unarchived change carries one of the seventeen requirements (the search of design.md, decision 2, repeated); verify: validation green, search empty
 
 ## Workflow follow-up
 

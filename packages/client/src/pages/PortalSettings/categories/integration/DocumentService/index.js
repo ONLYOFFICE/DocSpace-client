@@ -144,10 +144,13 @@ const DocumentService = ({
   const isSecretKeyMasked = secretKey === SECRET_KEY_MASK;
   const secretKeyToSave = isSecretKeyMasked ? undefined : secretKey;
 
+  const stripSpaces = (value) => value.replace(/\s+/g, "");
+
   const onChangeDocServiceUrl = (e) => {
-    setDocServiceUrl(e.target.value);
-    if (!e.target.value) setDocServiceUrlIsValid(true);
-    else setDocServiceUrlIsValid(URL_REGEX.test(e.target.value));
+    const value = stripSpaces(e.target.value);
+    setDocServiceUrl(value);
+    if (!value) setDocServiceUrlIsValid(true);
+    else setDocServiceUrlIsValid(URL_REGEX.test(value));
   };
 
   const onChangeIsDisabledCertificat = () => {
@@ -174,15 +177,17 @@ const DocumentService = ({
   };
 
   const onChangeInternalUrl = (e) => {
-    setInternalUrl(e.target.value);
-    if (!e.target.value) setInternalUrlIsValid(true);
-    else setInternalUrlIsValid(URL_REGEX.test(e.target.value));
+    const value = stripSpaces(e.target.value);
+    setInternalUrl(value);
+    if (!value) setInternalUrlIsValid(true);
+    else setInternalUrlIsValid(URL_REGEX.test(value));
   };
 
   const onChangePortalUrl = (e) => {
-    setPortalUrl(e.target.value);
-    if (!e.target.value) setPortalUrlIsValid(true);
-    else setPortalUrlIsValid(URL_REGEX.test(e.target.value));
+    const value = stripSpaces(e.target.value);
+    setPortalUrl(value);
+    if (!value) setPortalUrlIsValid(true);
+    else setPortalUrlIsValid(URL_REGEX.test(value));
   };
 
   const onSubmit = (e) => {

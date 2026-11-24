@@ -5,10 +5,13 @@
  * what readers meet. Language-neutral — nothing here reads the words.
  *
  * Must fix (exit 1): text contrast below WCAG AA, horizontal scroll on a
- * phone, click targets under 24px, a screenshot that failed to load or shows
- * at under MIN_SHOT_SCALE of its real size on desktop.
+ * phone, click targets under 24px, a screenshot that failed to load, shows
+ * at under MIN_SHOT_SCALE of its real size on desktop, or is stretched above
+ * its real size (pixels blur).
  * Report only: line length, the longest text run without a visual, text
- * hidden behind tabs, the number of font sizes, the smallest prose size.
+ * hidden behind tabs, the number of font sizes, the smallest prose size, a
+ * screenshot that is mostly flat background (crop it), a card grid whose last
+ * row is short (an orphan), a screenshot pair of very different heights.
  *
  * Usage: node ux-check.cjs <page.html>
  */
@@ -18,6 +21,9 @@ const { readFileSync } = require("node:fs");
 const { chromium } = require(join(__dirname, "../../../packages/client/node_modules/@playwright/test"));
 
 const MIN_SHOT_SCALE = 0.6; // below this, ~13px product UI text renders under ~8px
+const MAX_SHOT_SCALE = 1.0; // above real size a raster screenshot only blurs
+const FLAT_SHARE = 0.5; // rows identical to the row above: an empty list area or a blank canvas; dialogs sit near 0.4
+const PAIR_RATIO = 1.5; // taller frame of a pair over the shorter one
 const MEASURE_MAX = 75; // characters per line
 const MAX_FONT_SIZES = 7;
 
@@ -91,11 +97,50 @@ function measure() {
         .map((e) => `${e.tagName.toLowerCase()}.${e.className} reaches ${Math.round(e.getBoundingClientRect().right)}px`)
     : [];
 
+  // share of rows identical to the previous one inside the visible region of the shot
+  const flatShare = (img) => {
+    if (!img.naturalWidth) return 0;
+    const cs = getComputedStyle(img.closest(".crop") || img);
+    const v = (n) => parseFloat(cs.getPropertyValue(n));
+    const [sx, sy, sw, sh] = img.closest(".crop")
+      ? [v("--cx"), v("--cy"), v("--cw"), v("--ch")]
+      : [0, 0, img.naturalWidth, img.naturalHeight];
+    const step = 4;
+    const c = document.createElement("canvas");
+    c.width = Math.ceil(sw / step); c.height = Math.ceil(sh / step);
+    const ctx = c.getContext("2d");
+    try { ctx.drawImage(img, sx, sy, sw, sh, 0, 0, c.width, c.height); } catch { return 0; }
+    const d = ctx.getImageData(0, 0, c.width, c.height).data;
+    const row = c.width * 4;
+    let flat = 0;
+    for (let y = 1; y < c.height; y++) {
+      let same = true;
+      for (let i = y * row; same && i < (y + 1) * row; i += 4)
+        if (Math.abs(d[i] - d[i - row]) > 6 || Math.abs(d[i + 1] - d[i - row + 1]) > 6 || Math.abs(d[i + 2] - d[i - row + 2]) > 6) same = false;
+      if (same) flat++;
+    }
+    return +(flat / (c.height - 1)).toFixed(2);
+  };
   const shots = [...document.querySelectorAll(".frame img, figure img")].filter(vis).map((img) => ({
     loaded: img.naturalWidth > 0,
     scale: img.naturalWidth ? +(img.getBoundingClientRect().width / img.naturalWidth).toFixed(2) : 0,
+    flat: flatShare(img),
     name: (img.alt || img.closest("figure")?.querySelector(".bar")?.textContent || "").trim().slice(0, 50),
   }));
+
+  // a card grid whose last row is short: four cards on three columns leave an orphan
+  const orphans = [...main.querySelectorAll(".compare, .roles")].filter(vis).map((g) => {
+    const cols = getComputedStyle(g).gridTemplateColumns.split(" ").length;
+    const n = g.children.length;
+    return n > cols && n % cols ? `${n} cards on ${cols} columns near "${snip(g.children[0])}"` : null;
+  }).filter(Boolean);
+
+  // a screenshot pair of very different heights leaves the shorter frame mostly empty
+  const pairs = [...main.querySelectorAll(".shots-2, .shots-3")].filter(vis).map((g) => {
+    const hs = [...g.querySelectorAll(".frame")].map((f) => f.querySelector("img")?.getBoundingClientRect().height || 0).filter(Boolean);
+    const ratio = hs.length > 1 ? Math.max(...hs) / Math.min(...hs) : 1;
+    return { ratio: +ratio.toFixed(2), name: snip(g.querySelector(".bar") || g) };
+  });
 
   const targets = [...document.querySelectorAll("button, a.fact, nav.toc a, [role=button], [role=tab]")].filter(vis)
     .map((e) => ({ e, r: e.getBoundingClientRect() }))
@@ -143,7 +188,7 @@ function measure() {
   const prose = [...main.querySelectorAll("p, li, figcaption")].filter(vis).map((p) => parseFloat(getComputedStyle(p).fontSize));
 
   return {
-    contrast, overflow, offenders, shots, targets,
+    contrast, overflow, offenders, shots, targets, orphans, pairs,
     cpl: { median: q(0.5), p90: q(0.9), over: cpl.filter((c) => c.cpl > 75).length, total: cpl.length, widest: cpl.at(-1) },
     run: { screens: +(run.gap / innerHeight).toFixed(2), at: run.at },
     hidden: Math.round((hiddenText / allText) * 100),
@@ -174,11 +219,19 @@ function measure() {
     if (m.overflow > 0) must.push(`[${tag}] horizontal scroll ${m.overflow}px: ${m.offenders.join("; ")}`);
     for (const t of m.targets) must.push(`[${tag}] click target under 24px: ${t}`);
     for (const s of m.shots.filter((s) => !s.loaded)) must.push(`[${tag}] screenshot did not load: ${s.name}`);
+    if (run.scheme === "light")
+      for (const s of m.shots.filter((s) => s.loaded && s.scale > MAX_SHOT_SCALE + 0.02))
+        must.push(`[${tag}] screenshot stretched to ${s.scale} of real size (max ${MAX_SHOT_SCALE}) — show it at real size or recapture it larger: ${s.name}`);
     if (run.desktop && run.scheme === "light") {
       for (const s of m.shots.filter((s) => s.loaded && s.scale < MIN_SHOT_SCALE))
         must.push(`[${tag}] screenshot at ${s.scale} of real size (min ${MIN_SHOT_SCALE}) — crop it or give it a full row: ${s.name}`);
       const sc = m.shots.map((s) => s.scale).sort((a, b) => a - b);
-      if (sc.length) report.push(`screenshot scale on desktop: min ${sc[0]} · median ${sc[Math.floor(sc.length / 2)]}`);
+      if (sc.length) report.push(`screenshot scale on desktop: min ${sc[0]} · median ${sc[Math.floor(sc.length / 2)]} · max ${sc.at(-1)}`);
+      for (const s of m.shots.filter((s) => s.flat > FLAT_SHARE))
+        report.push(`screenshot is ${Math.round(s.flat * 100)}% flat background ⚠ — crop it to its content: ${s.name}`);
+      for (const o of m.orphans) report.push(`card grid leaves an orphan ⚠ — ${o}`);
+      for (const p of m.pairs.filter((p) => p.ratio > PAIR_RATIO))
+        report.push(`screenshot pair heights differ ${p.ratio}× ⚠ — give each its own row: ${p.name}`);
       report.push(`line length: median ${m.cpl.median} · p90 ${m.cpl.p90}${m.cpl.p90 > MEASURE_MAX ? " ⚠" : ""} characters · over ${MEASURE_MAX}: ${m.cpl.over}/${m.cpl.total}${m.cpl.over ? ` — widest: "${m.cpl.widest.text}"` : ""}`);
       report.push(`longest text without a visual: ${m.run.screens} screens${m.run.screens > 1 ? " ⚠" : ""}${m.run.at ? ` (near "${m.run.at}")` : ""}`);
       report.push(`text behind tabs: ${m.hidden}%`);

@@ -113,9 +113,20 @@ Before writing the page, load the `artifact-design` skill; load
     machines (paid / grace / unpaid), one panel per branch. Every tab
     group carries an appended "expand all" toggle: hidden panels are
     invisible to find-in-page and to printing, and the toggle lifts
-    both limits (expanded panels show their tab name as a heading);
+    both limits (expanded panels show their tab name as a heading).
+    The toggle is a text control with a dashed underline, left-aligned
+    after the tabs (never pushed to the right edge, where it floats
+    alone when the tabs wrap), never another pill — a pill reads as
+    one more tab;
   - step rails (numbered dots + actor chips) for step-by-step flows;
-  - comparison cards for two-way forks.
+  - comparison cards for two-way forks. Four cards take the `two`
+    modifier (two rows of two): on three columns the fourth card drops
+    alone into the next row.
+  - a row list (`.pill-list`) for a flat set of facts without
+    structure (limits, what is missing): one bordered item per line,
+    each as wide as its text, never stretched across the column. Never a
+    cloud of chips — chips wrap unpredictably and a long one reads as a
+    button.
 
 ## 3. Language
 
@@ -227,7 +238,25 @@ Before writing the page, load the `artifact-design` skill; load
   section. A text list of states that look different is a coverage
   gap, not brevity.
 - Frame each screenshot with a browser-chrome bar naming the route, and
-  a caption that says what to notice.
+  a caption that says what to notice. The zoom badge sits in the bar,
+  never over the screenshot.
+- **Never above real size.** A raster screenshot stretched past 1:1 only
+  blurs; the frame keeps the column width and a small shot sits centered
+  on the ground tone inside it, a crop is capped at its own width. A
+  shot too small for its row is recaptured larger, not scaled up.
+  `ux-check.cjs` fails the publish on a stretched shot. (Tried and
+  rejected on 2026-11-24: full-width stretching, soft; a frame shrunk to
+  the shot, uneven rows.)
+- **Crop to the content.** A full-page capture of a list with one row or
+  of an empty state is mostly blank canvas; cut it below the last
+  element (a `.crop` with its own `--ch`). The check flags a shot that
+  is more than half flat rows.
+- **Pairs share one height.** Frames of a pair sit in one subgrid row
+  and captions in the next, so a two-line caption cannot shorten its
+  frame: frames end level, the shorter shot is centered, captions start
+  on one line. When the heights differ by more than half (a dialog next
+  to a toast) the check flags the pair; give each its own row or
+  recapture to similar heights.
 - Screenshots enlarge on click: a simple lightbox overlay (zoom-in
   cursor on the thumbnail; click or Esc closes) — inline thumbnails
   stay compact, details stay readable.
@@ -274,7 +303,9 @@ Before writing the page, load the `artifact-design` skill; load
   ground tone (one surface step away from the card), never the card's
   own surface — same-on-same blends into the background in both themes.
 - Stacked cards always get explicit vertical spacing (a `card + card`
-  margin or a grid gap) — two grey cards must never sit flush. Scope
+  margin or a grid gap) — two grey cards must never sit flush. A card
+  grid (`.roles`) counts as a card here: a diagram card followed by a
+  three-card row needs the same margin. Scope
   that margin to direct section-level siblings only: inside a grid
   (comparison pairs, role cards) the gap owns the spacing, and a broad
   `card + card` selector shifts grid children out of line.

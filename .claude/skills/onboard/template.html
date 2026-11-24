@@ -208,14 +208,21 @@
     padding: 20px 24px;
   }
   /* direct section-level siblings only — inside a grid the gap owns the spacing */
-  section > .card + .card, .roles + .card { margin-top: 16px; }
+  section > .card + .card, section > .card + .roles, .roles + .card, .roles + .roles { margin-top: 16px; }
 
   .card.panel { padding: 22px 26px; }
   .panel[hidden] { display: none; }
-  .filter .expand-all {
-    border-style: dashed;
+  /* "expand all" is a text control, not another tab: dashed underline, left-aligned after the pills */
+  .filter .expand-all, .filter .expand-all[aria-pressed="true"] {
+    padding: 7px 0;
+    border: 0;
+    border-radius: 0;
     background: none;
-    color: var(--muted);
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline dashed;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
   }
   .panel.expanded + .panel.expanded { margin-top: 16px; }
   .panel.expanded::before {
@@ -404,15 +411,15 @@
   .compare ul { margin: 0; padding-left: 20px; font-size: var(--fs-text); }
   .compare li { margin: 5px 0; }
 
-  .pill-list { list-style: none; padding: 0; margin: 14px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  /* a list of facts: one item per line, each as wide as its text (a cloud of chips wraps unpredictably) */
+  .pill-list { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 8px; justify-items: start; }
   .pill-list li {
-    background: var(--ground);
+    background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 6px 14px;
+    border-radius: 12px;
+    padding: 8px 16px;
     font-size: var(--fs-text);
-    font-weight: 600;
-    color: var(--chip-ink);
+    color: var(--ink);
   }
 
   /* Screenshots: framed, captioned, click-to-zoom */
@@ -423,7 +430,7 @@
     content: "🔍";
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    top: 7px;
     font-size: var(--fs-label);
     line-height: 1;
     background: rgba(13, 17, 23, 0.55);
@@ -487,6 +494,18 @@
   figcaption { font-size: var(--fs-text); color: var(--muted); padding: 10px 4px 0; }
   figcaption b { color: var(--ink); }
   .shots-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 20px; }
+  /* a screenshot never shows above its real size: a small shot sits centered on the ground tone */
+  .frame { background: var(--ground); }
+  .frame .bar { background: var(--card); }
+  .frame > img { width: auto; max-width: 100%; margin: 0 auto; }
+  .crop { width: min(100%, calc(var(--cw) * 1px)); margin: 0 auto; }
+  /* paired frames share one grid row and captions another, so a two-line caption
+     cannot shorten its frame: frames end level and captions start on one line */
+  .shots-2 figure { display: grid; grid-template-rows: subgrid; grid-row: span 2; }
+  .shots-2 .frame { display: flex; flex-direction: column; }
+  .shots-2 .frame > img, .shots-2 .frame > .crop { margin: auto; }
+  /* four cards make two rows of two, never three and an orphan */
+  .compare.two { grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); }
 
   .lightbox {
     position: fixed;

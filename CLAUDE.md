@@ -2,23 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-ONLYOFFICE DocSpace frontend client - a document collaboration hub built with React. This is a pnpm monorepo managed with Nx containing 6 packages.
-
 ## Common Commands
 
 ```bash
-# Unit tests (shared package, Vitest)
-pnpm test
-
-# Unit tests (client package, Vitest)
-pnpm test:client               # all @docspace/client unit tests
-pnpm test:store                # only client store tests (src/store, incl. FilesStore)
-
-# Unit tests (sdk package, Vitest)
-pnpm test:sdk
-
 # Unit tests (doceditor package, Vitest; __tests__/ there is Playwright E2E)
 pnpm test:doceditor
 
@@ -43,19 +29,9 @@ cd common/tests && npx vitest run test/locales.test.js
 
 ## Architecture
 
-### State Management
-
-MobX stores in `packages/shared/store/` are injected via React context. Main stores:
-- AuthStore - Authentication state
-- UserStore - User information
-- SettingsStore - Application settings
-
 ### Build Pipeline
 
-1. `build:translations` generates i18n files
-2. Vite builds client package; Next.js builds login, doceditor, management, sdk
-3. Nx orchestrates parallel builds with caching
-4. Static file hashes (browserDetector.js, config.json) are computed on-demand via `packages/shared/utils/static-hash.ts`
+Static file hashes (browserDetector.js, config.json) are computed on-demand via `packages/shared/utils/static-hash.ts`.
 
 ### Dev Server
 
@@ -83,84 +59,33 @@ committing the manifests together with `pnpm-lock.yaml`. Both first-party
 packages sit in `minimumReleaseAgeExclude`, since they are adopted on release
 day.
 
-To try a ui-kit build **before it is published**, `pnpm run update-ui-kit`
-(newest `pnpm pack` in `../../docspace-ui-kit-react`, or a path) switches every
-app to `file:../../onlyoffice-apps-ui-kit.tgz` at the repo root, installs it
-and verifies by hash what landed. Do not do this by hand: once the specifier is
-`file:`, copying a new pack over and running `pnpm install` silently keeps the
-cached copy. The Dockerfiles copy root `*.tgz` optionally, so an image builds
-in either mode. Go back with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`
-and delete the tarball; see `.claude/rules/pnpm.md`.
-
-For local work on ui-kit itself, `pnpm run start:ui-kit-src` (root script, or
-the "Start (ui-kit src)" workspace button) points every app's dev server at a
-checkout and restores HMR, with no build, pack or install in the loop - the
-Vite client through `packages/client/config/`, the four Next apps through
-`scripts/ui-kit-dev.cjs`. It is a dev-server alias only - never a tsconfig
-path, and both `vite build` and `next build` refuse to run while it is set. In
-the client an import that escapes the checkout fails (any JS/TS import, and a
-bare `@docspace/shared` load in SCSS; sass resolves relative `@use` paths
-itself, unchecked); the Next apps have no such check. Run the apps once
-**without** the variable before publishing a ui-kit release: source mode does not
-exercise the stylesheet order, `"use client"`, the exports wildcard or the
-generated types. Details in `.claude/rules/pnpm.md`.
-
-A local tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's
-`main`, `module`, `types` and `exports` fields live under `publishConfig`, which
-only pnpm promotes to the top level when packing. An npm-packed tarball has no
-entry points at all.
-
-`@onlyoffice/ai-chat` is an **optional peer** of ui-kit that ui-kit statically
-imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. The
-apps that render the AI agent (client, sdk) therefore declare it themselves,
-from npm as well — that dependency is what satisfies ui-kit's peer, so it
-cannot be dropped while those subpaths are used. `pnpm run update-ai-chat`
-switches them to a local pack from `../../onlyoffice-ai-chat` the same way
-(`update-ui-kit` also takes one that sits next to the ui-kit checkout).
-ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must be
-declared by those same apps; their versions sit in the `catalog:` block of
-`pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
-
-`@onlyoffice/docspace-plugin-sdk` is switched to an unpublished build the same
-way, with `pnpm run update-plugin-sdk` (a pack from `../../docspace-plugin-sdk`),
-and the Embed SDK `@onlyoffice/docspace-sdk-js` with `pnpm run update-sdk-js`
-(a pack from `../../docspace-sdk-js`), which also writes the pack's
-`dist/api.js` to `public/scripts/sdk/<x.y.z>/api.js` for the Embed SDK presets.
+Unpublished builds of ui-kit, ai-chat, the plugin SDK and the Embed SDK are
+switched in with the root `update-*` scripts (`update-ui-kit`,
+`update-ai-chat`, `update-plugin-sdk`, `update-sdk-js`), never by hand: once a
+specifier is `file:`, copying a new pack over and running `pnpm install`
+silently keeps the cached copy. A local ui-kit checkout is served through
+`pnpm run start:ui-kit-src` (a dev-server alias only; builds refuse to run
+while it is set). Details, including the `pnpm pack` vs `npm pack` trap and the
+ai-chat peer, in `.claude/rules/pnpm.md`.
 
 ### buildtools sibling repo
 
 `../buildtools` (ONLYOFFICE Apps Build Tools) is a **separate, optional repo**,
 not a submodule. The client clones, installs, builds and tests without it — so
-treat every path below as "only if `../buildtools` exists", and never block or
+treat every path there as "only if `../buildtools` exists", and never block or
 fail client work because it is missing. It owns the nginx routing, the
 appsettings and the build/install scripts the client runs behind, so when it
-*is* checked out, client work regularly needs changes there. It has its own
-`../buildtools/CLAUDE.md` with the full layout — the parts that matter here:
+*is* checked out, client work regularly needs changes there. Its own
+`../buildtools/CLAUDE.md` has the full layout (nginx routing in
+`config/nginx/onlyoffice.conf`, upstream ports, appsettings overlays, the CI
+Dockerfile, the frontend build entry points) and loads whenever buildtools is
+a working directory.
 
-- **`config/nginx/onlyoffice.conf`** — the routing source of truth for
-  everything the browser requests. `/` proxies to the client dev server; each
-  `/static/<kind>/` subpath (`css`, `fonts`, `locales`, `scripts`, `images`,
-  `offline`, `plugins`, `campaigns`) is served from the public root by its own
-  `location`, and login / doceditor / management / sdk / confirm / wizard are
-  mounted under their prefixes with their own `_next/static` handling. A new
-  asset kind, locale directory or app route is **not** served until it gets a
-  `location` here. The same file carries the `$cache_control` and
-  `$content_security_policy` maps, so a new asset type also needs a cache rule,
-  and a new external origin needs a CSP entry.
-- **`config/nginx/includes/onlyoffice-upstream-map.conf`** — maps every service
-  to its dev port (client 5001, login 5011, doceditor 5013, management 5015,
-  sdk 5099, storybook 6006, backend 5000/5007/…). Generated from the
-  `.template` next to it; edit the template.
-- **`config/appsettings*.json`** — what `pnpm deploy`'d SSR apps read
-  (base / `developer` / `enterprise` / `test` overlays, matching `APP_EDITION`).
-- **`install/docker/build/Dockerfile`** — builds the client in CI. It must keep
-  a bare `corepack enable` so the pinned `packageManager` decides the pnpm
-  version (see the pnpm version section below).
-- **Frontend build entry points** — `build.frontend.bat`, `build.static.sh`,
-  `install/common/packages-build.sh` (also builds the sibling `mcp` repo) and
-  `install/win/frontend-build.bat`. None of these are covered by the client's
-  pre-push gate or CI, so a flag or script change here is only caught at
-  release-build time.
+A new asset kind, locale directory or app route is **not** served until
+`config/nginx/onlyoffice.conf` gets a `location` for it, plus a `$cache_control`
+rule and, for a new external origin, a `$content_security_policy` entry. The
+frontend build entry points there are covered by no gate or CI, so a flag or
+script change is only caught at release-build time.
 
 Changes to any of this are committed **in the buildtools repo**, on its own
 branch (`master` / `develop`, `feature/*`, `bugfix/*`), never from the client

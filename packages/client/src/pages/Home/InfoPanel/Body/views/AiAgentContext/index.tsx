@@ -56,6 +56,7 @@ import {
 import { useStore } from "SRC_DIR/store/useStore";
 import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 import RoomItem from "SRC_DIR/pages/AiProjects/sub-components/project/RoomItem";
+import SkillIcon from "SRC_DIR/components/SkillIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
@@ -211,7 +212,8 @@ type AiAgentContextProps = {
 
 /**
  * The Context tab of an agent's Info panel: the skill sets the agent is
- * linked to, each unfolding to its skills, and its knowledge bases. Each
+ * linked to, each unfolded to its skills until folded by hand, each skill
+ * with the skill's icon, and its knowledge bases. Each
  * section is headed as the same list is in the composer's slash menu: a
  * caption and a line saying what the assistant does with it, which is all
  * an empty section shows. A name opens its room. While the chat runs on the
@@ -231,7 +233,8 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
 
   const [context, setContext] = React.useState<TContext | null>(null);
   const [failed, setFailed] = React.useState(false);
-  const [expanded, setExpanded] = React.useState<Record<number, boolean>>({});
+  // Every skill set starts unfolded; only the ones folded by hand are kept.
+  const [collapsed, setCollapsed] = React.useState<Record<number, boolean>>({});
 
   // Read again once the agent is saved (a "Manage ..." row) or changed elsewhere.
   const revision = aiProjectsStore.projectRevisions[id] ?? 0;
@@ -245,7 +248,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       shownId.current = id;
       setContext(null);
       setFailed(false);
-      setExpanded({});
+      setCollapsed({});
     }
     readAgentContext(id)
       .then((data) => {
@@ -301,7 +304,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
         context.skillSets,
         (room) => {
           const skills = context.skills[room.id] ?? [];
-          const isExpanded = !!expanded[room.id];
+          const isExpanded = skills.length > 0 && !collapsed[room.id];
           return (
             <React.Fragment key={room.id}>
               <RoomItem
@@ -312,7 +315,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
                 onToggle={
                   skills.length > 0
                     ? () =>
-                        setExpanded((state) => ({
+                        setCollapsed((state) => ({
                           ...state,
                           [room.id]: !state[room.id],
                         }))
@@ -322,7 +325,8 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
               {isExpanded ? (
                 <ul className={styles.skills}>
                   {skills.map((skill) => (
-                    <li key={skill.id}>
+                    <li key={skill.id} className={styles.skillRow}>
+                      <SkillIcon kind="skill" size={24} />
                       <Text
                         fontSize="13px"
                         className={styles.skill}

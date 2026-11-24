@@ -84,9 +84,18 @@ describe("AiAgentContext", () => {
     expect(rooms.map((node) => node.textContent)).toEqual(["Legal", "Wiki"]);
   });
 
-  it("unfolds a skill set to its skills", async () => {
+  it("shows every skill set unfolded to its skills, each with the skill icon", async () => {
     render(<AiAgentContext id={7} />);
-    fireEvent.click(await screen.findByTestId("toggle-Legal"));
+    const skill = await screen.findByText("clause-check");
+    expect(skill.closest("li")?.querySelector('[data-testid="skill-icon-skill"]')).toBeTruthy();
+  });
+
+  it("folds a skill set by hand and unfolds it again", async () => {
+    render(<AiAgentContext id={7} />);
+    const toggle = await screen.findByTestId("toggle-Legal");
+    fireEvent.click(toggle);
+    expect(screen.queryByText("clause-check")).toBeNull();
+    fireEvent.click(toggle);
     expect(screen.getByText("clause-check")).toBeTruthy();
   });
 

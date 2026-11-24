@@ -110,6 +110,7 @@ import type {
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserAccess, matchesUserRole } from "../helpers/plugins/roles";
+import { clashesWith } from "../helpers/plugins/personal";
 import {
   isSupersededPluginItem,
   MARKDOWN_EXTENSION,
@@ -510,6 +511,8 @@ class PluginStore {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
+    this.setIsLoaded(false);
+
     try {
       this.plugins = [];
 
@@ -582,8 +585,6 @@ class PluginStore {
     try {
       const plugin = await api.plugins.addPlugin(data, personal);
 
-      if (personal) this.fetchPersonalPlugins();
-
       const isPluginCompatible = this.checkPluginCompatibility(
         plugin.minDocSpaceVersion,
       );
@@ -609,6 +610,8 @@ class PluginStore {
         thrownInitError = toPluginError(e);
       }
 
+      if (personal) this.fetchPersonalPlugins();
+
       const storedPlugin = this.plugins.find((p) => p.name === plugin.name);
 
       return {
@@ -623,12 +626,12 @@ class PluginStore {
   };
 
   uninstallPlugin = async (name: string, t: TTranslation, personal = false) => {
-    const pluginIdx = this.plugins.findIndex(
-      (p) => p.name === name && !!p.personal === personal,
-    );
-
     try {
       await api.plugins.deletePlugin(name, personal);
+
+      const pluginIdx = this.plugins.findIndex(
+        (p) => p.name === name && !!p.personal === personal,
+      );
 
       if (pluginIdx !== -1) {
         this.deactivatePlugin(name);
@@ -640,12 +643,22 @@ class PluginStore {
         });
       }
 
+      if (personal) {
+        runInAction(() => {
+          this.personalPlugins = this.personalPlugins.filter(
+            (p) => p.name !== name,
+          );
+        });
+      }
+
       if (personal) this.fetchPersonalPlugins();
 
       toastr.success(t("PluginDeletedSuccessfully"));
     } catch (e) {
       toastr.error(e as TData);
       console.log(e);
+
+      if (personal) this.fetchPersonalPlugins();
     }
   };
 
@@ -901,15 +914,36 @@ class PluginStore {
     }
   };
 
+  private unloadShadowedPersonalPlugins = (plugin: TPlugin) => {
+    const shadowed = this.plugins.filter(
+      (p) => p.personal && clashesWith(p, plugin),
+    );
+
+    if (!shadowed.length) return;
+
+    shadowed.forEach((p) => {
+      this.uninstallPluginCss(p);
+      this.unregisterPluginItems(p);
+      releaseModuleEvents(p.name);
+    });
+
+    runInAction(() => {
+      this.plugins = this.plugins.filter((p) => !shadowed.includes(p));
+    });
+  };
+
   private addToPluginList = (plugin: TPlugin) => {
+    if (!plugin.personal) {
+      this.unloadShadowedPersonalPlugins(plugin);
+      this.setIsEmptyList(false);
+    }
+
     const idx = this.plugins.findIndex((p) => p.name === plugin.name);
 
     if (idx === -1) {
       runInAction(() => {
         this.plugins = [plugin, ...this.plugins];
       });
-
-      if (!plugin.personal) this.setIsEmptyList(false);
 
       return this.plugins[0];
     }
@@ -1059,6 +1093,14 @@ class PluginStore {
     } catch (e) {
       toastr.error(e as TData);
       console.log(e);
+
+      if (status === true && this.pluginList.find((p) => p.name === name)?.personal) {
+        await this.fetchPersonalPlugins();
+
+        if (this.personalPlugins.some((p) => p.name === name && p.enabled)) {
+          this.activatePlugin(name);
+        }
+      }
     }
   };
 

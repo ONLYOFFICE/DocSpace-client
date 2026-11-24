@@ -74,6 +74,7 @@ const InfoPanelBodyGeneral = ({
   enablePlugins,
   isRecentFolder,
   isPrivacyFolder,
+  canManagePrivateLinks,
   aiChatProjectId,
   isAiTemplate,
 
@@ -127,6 +128,7 @@ const InfoPanelBodyGeneral = ({
         isTrash,
         isRecentFolder,
         isPrivacyFolder,
+        canManagePrivateLinks,
         aiChatProjectId,
         enablePlugins,
         infoPanelItemsList,
@@ -137,6 +139,7 @@ const InfoPanelBodyGeneral = ({
       isTrash,
       isRecentFolder,
       isPrivacyFolder,
+      canManagePrivateLinks,
       aiChatProjectId,
       enablePlugins,
       infoPanelItemsList,

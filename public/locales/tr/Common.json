@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Yönetici başına fiyat",
   "PricePerGB": "GB başına fiyat",
   "Private": "Özel odalar",
+  "PrivateLinkNeedsEndDate": "Parolası olmayan bir bağlantının bitiş tarihi olmalıdır.",
+  "PrivateLinkRevokeDescription": "Bağlantı çalışmayı durduracak. Bağlantı üzerinden daha önce açılan veya indirilen her şey, onu açan kişilerde kalır.",
   "PrivateOwnerEncryptionHint": "Yalnızca bu odanın üyesi olan ve şifrelemeyi ayarlamış kullanıcılar sahip olabilir.",
   "PrivateRoomConvertNotSupported": "Dönüştürme gerektiren dosyalar özel odalarda henüz açılamıyor.",
   "PrivateRoomCreateNotSupported": "Özel odada .{{extension}} uzantılı dosyalar oluşturulamaz.",

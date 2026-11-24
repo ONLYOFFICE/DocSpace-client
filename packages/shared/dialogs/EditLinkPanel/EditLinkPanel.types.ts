@@ -78,8 +78,13 @@ export type EditLinkPanelProps = ExternalLinkType & {
   withBackButton?: boolean;
 
   onClose?: VoidFunction;
-  updateLink?: (link: TFileLink) => void;
+  updateLink?: (link: TFileLink, address?: string) => void;
   isExternalShareRestricted?: boolean;
+  /**
+   * The id of the user, given for a link of a private item: the panel then
+   * offers what such a link has, and creates one when `link` has no id.
+   */
+  privateLinkUserId?: string;
 };
 
 export interface ToggleBlockProps {

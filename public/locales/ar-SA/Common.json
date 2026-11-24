@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "السعر لكل مسؤول",
   "PricePerGB": "سعر لكل جيجابايت",
   "Private": "الغرف الخاصة",
+  "PrivateLinkNeedsEndDate": "يجب تحديد تاريخ انتهاء للرابط الذي ليس له كلمة مرور.",
+  "PrivateLinkRevokeDescription": "سيتوقف الرابط عن العمل. كل ما تم فتحه أو تنزيله عبره سابقًا يبقى لدى من فتحه.",
   "PrivateOwnerEncryptionHint": "لا يمكن أن يصبح مالكاً إلا المستخدمون الأعضاء بالفعل في هذه الغرفة والذين أعدّوا التشفير.",
   "PrivateRoomConvertNotSupported": "لا يمكن بعد فتح الملفات التي تحتاج إلى تحويل في غرفة خاصة.",
   "PrivateRoomCreateNotSupported": "لا يمكن إنشاء ملفات بالامتداد .{{extension}} في غرفة خاصة.",

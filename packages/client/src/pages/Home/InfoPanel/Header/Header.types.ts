@@ -55,6 +55,7 @@ export type HeaderProps = {
 
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
   isPrivacyFolder: TreeFoldersStore["isPrivacyFolder"];
+  canManagePrivateLinks: boolean;
   /** The id of the agent whose page (its chat) is open, or `null`. */
   aiChatProjectId: number | null;
   /** A template selected on the Agents list's Templates tab: shown instead of the selection. */

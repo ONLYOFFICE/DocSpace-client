@@ -56,6 +56,14 @@ vi.mock("../../services/share-link.service", () => ({
   ShareLinkService: { editLink: vi.fn() },
 }));
 
+const privateLinks = vi.hoisted(() => ({ create: vi.fn(), edit: vi.fn() }));
+
+vi.mock("../../services/private-room/private-links", async (io) => ({
+  ...((await io()) as object),
+  createPrivateItemLink: privateLinks.create,
+  editPrivateItemLink: privateLinks.edit,
+}));
+
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: {
     error: vi.fn(),
@@ -338,5 +346,78 @@ describe("<EditLinkPanel />", () => {
       expect(toastr.error).toHaveBeenCalledWith("Role is not available"),
     );
     expect(props.setIsVisible).not.toHaveBeenCalled();
+  });
+
+  describe("link of a private item", () => {
+    const renderPrivate = (over: object = {}) => {
+      const props = {
+        link: createLink(ShareAccessRights.ReadOnly),
+        item: createItem({ ExternalLink: [ShareRights.Read] }),
+        language: "en",
+        visible: true,
+        setIsVisible: vi.fn(),
+        setLinkParams: vi.fn(),
+        updateLink: vi.fn(),
+        currentDeviceType: DeviceType.desktop,
+        passwordSettings: undefined,
+        getPortalPasswordSettings: vi.fn(async () => {}),
+        privateLinkUserId: "u-1",
+        ...over,
+      } as EditLinkPanelProps;
+
+      render(<EditLinkPanel {...props} />);
+
+      return props;
+    };
+
+    it("Download ban", async () => {
+      renderPrivate();
+
+      await waitFor(() => expect(getSaveButton()).toBeInTheDocument());
+      expect(screen.queryByTestId("stub_toggle_block")).toBeNull();
+    });
+
+    it("Looking for the old password", async () => {
+      renderPrivate();
+
+      await waitFor(() => expect(getSaveButton()).toBeInTheDocument());
+      expect(screen.queryByTestId("stub_password_block")).toBeNull();
+    });
+
+    it("changes a link that exists without key material", async () => {
+      const link = createLink(ShareAccessRights.ReadOnly);
+      link.sharedTo.passwordRequired = true;
+      privateLinks.edit.mockResolvedValue(link);
+      const props = renderPrivate({ link });
+      const user = userEvent.setup();
+
+      await user.click(screen.getByTestId("stub_rename_link"));
+      await user.click(getSaveButton());
+
+      await waitFor(() => expect(props.setIsVisible).toHaveBeenCalledWith(false));
+      expect(privateLinks.edit.mock.calls[0][1].sharedTo.title).toBe(
+        "Renamed link",
+      );
+      expect(ShareLinkService.editLink).not.toHaveBeenCalled();
+      expect(props.updateLink).toHaveBeenCalledWith(link);
+    });
+
+    it("Link to a folder or a room without a password", async () => {
+      const folder = { id: 18, isFolder: true, parentId: 14 };
+      const props = renderPrivate({
+        link: { sharedTo: { primary: true } } as unknown as TFileLink,
+        item: folder as unknown as EditLinkPanelProps["item"],
+      });
+      const user = userEvent.setup();
+
+      // A new link asks for its password: the block is there, and a save
+      // with none entered makes nothing.
+      expect(screen.getByTestId("stub_password_block")).toBeInTheDocument();
+      await waitFor(() => expect(getSaveButton()).not.toBeDisabled());
+      await user.click(getSaveButton());
+
+      expect(privateLinks.create).not.toHaveBeenCalled();
+      expect(props.setIsVisible).not.toHaveBeenCalled();
+    });
   });
 });

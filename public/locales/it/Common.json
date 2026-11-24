@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Prezzo per amministratore",
   "PricePerGB": "Prezzo per GB",
   "Private": "Stanze private",
+  "PrivateLinkNeedsEndDate": "Un collegamento senza password deve avere una data di scadenza.",
+  "PrivateLinkRevokeDescription": "Il collegamento smetterà di funzionare. Tutto ciò che è già stato aperto o scaricato tramite esso resta a chi lo ha aperto.",
   "PrivateOwnerEncryptionHint": "Solo gli utenti che sono già membri di questa stanza e che hanno configurato la crittografia possono diventare proprietari.",
   "PrivateRoomConvertNotSupported": "I file che richiedono la conversione non possono ancora essere aperti in una stanza privata.",
   "PrivateRoomCreateNotSupported": "Non è possibile creare file con estensione .{{extension}} in una stanza privata.",

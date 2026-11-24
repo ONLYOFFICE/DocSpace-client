@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Preis pro Admin",
   "PricePerGB": "Preis pro GB",
   "Private": "Private Räume",
+  "PrivateLinkNeedsEndDate": "Ein Link ohne Passwort benötigt ein Ablaufdatum.",
+  "PrivateLinkRevokeDescription": "Der Link funktioniert dann nicht mehr. Alles, was bereits über ihn geöffnet oder heruntergeladen wurde, bleibt bei den Personen, die es geöffnet haben.",
   "PrivateOwnerEncryptionHint": "Nur Benutzer, die bereits Mitglied dieses Raums sind und die Verschlüsselung eingerichtet haben, können Eigentümer werden.",
   "PrivateRoomConvertNotSupported": "Dateien, die konvertiert werden müssen, können in einem privaten Raum noch nicht geöffnet werden.",
   "PrivateRoomCreateNotSupported": "Dateien mit der Erweiterung .{{extension}} können in einem privaten Raum nicht erstellt werden.",

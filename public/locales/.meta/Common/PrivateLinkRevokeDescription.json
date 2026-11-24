@@ -1,0 +1,29 @@
+{
+  "key_path": "PrivateLinkRevokeDescription",
+  "content": "The link will stop working. Anything already opened or downloaded through it stays with the people who opened it.",
+  "content_en_sha1_hash": "cf55ffc7232bfdb2192bf6f0fb8df010f5926c0a",
+  "created_at": "2026-11-24T07:16:40.612Z",
+  "updated_at": "2026-11-24T07:17:41.591Z",
+  "comment": {
+    "text": "Body text of the Revoke link confirmation dialog for an external link to a file or folder of a private (end-to-end encrypted) room. Two sentences: the link stops working after revocation, but copies that visitors already opened or downloaded cannot be taken back. 'It' refers to the link.",
+    "is_auto": true,
+    "updated_at": "2026-11-24T07:17:41.591Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/sub-components/RevokePrivateLinkDialog.tsx",
+      "line_number": 85,
+      "context": "displayType={ModalDialogType.modal}\n dataTestId=\"revoke_private_link_dialog\"\n >\n <ModalDialog.Header>{t(\"Common:RevokeLink\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:PrivateLinkRevokeDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n scale",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

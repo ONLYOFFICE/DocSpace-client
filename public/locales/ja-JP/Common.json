@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "管理者あたりの価格",
   "PricePerGB": "1GBあたりの価格",
   "Private": "プライベートルーム",
+  "PrivateLinkNeedsEndDate": "パスワードのないリンクには終了日が必要です。",
+  "PrivateLinkRevokeDescription": "リンクは機能しなくなります。このリンクを通じてすでに開かれた、またはダウンロードされたものは、開いた人の手元に残ります。",
   "PrivateOwnerEncryptionHint": "このルームのメンバーであり、かつ暗号化を設定済みのユーザーのみが所有者になれます。",
   "PrivateRoomConvertNotSupported": "変換が必要なファイルはプライベートルームではまだ開けません。",
   "PrivateRoomCreateNotSupported": "プライベートルームでは拡張子 .{{extension}} のファイルを作成できません。",

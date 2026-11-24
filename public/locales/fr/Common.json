@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Prix par administrateur",
   "PricePerGB": "Prix par Go",
   "Private": "Salles privées",
+  "PrivateLinkNeedsEndDate": "Un lien sans mot de passe doit avoir une date de fin.",
+  "PrivateLinkRevokeDescription": "Le lien cessera de fonctionner. Tout ce qui a déjà été ouvert ou téléchargé par son intermédiaire reste entre les mains des personnes qui l'ont ouvert.",
   "PrivateOwnerEncryptionHint": "Seuls les utilisateurs qui sont déjà membres de cette salle et qui ont configuré le chiffrement peuvent devenir propriétaire.",
   "PrivateRoomConvertNotSupported": "Les fichiers nécessitant une conversion ne peuvent pas encore être ouverts dans une salle privée.",
   "PrivateRoomCreateNotSupported": "Les fichiers avec l'extension .{{extension}} ne peuvent pas être créés dans une salle privée.",

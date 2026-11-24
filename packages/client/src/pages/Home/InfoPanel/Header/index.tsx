@@ -35,6 +35,8 @@
 
 import { inject, observer } from "mobx-react";
 
+import { canManagePrivateLinks as canManagePrivateLinksOf } from "@docspace/shared/services/private-room/private-links";
+
 import InfoPanelHeaderTemplateGallery from "./headerTemplateGallery";
 import InfoPanelHeaderGeneral from "./headerGeneral";
 import { InfoPanelHeaderContentProps } from "./Header.types";
@@ -60,6 +62,7 @@ const InfoPanelHeaderContent = ({
     enablePlugins,
     isRecentFolder,
     isPrivacyFolder,
+    canManagePrivateLinks,
     aiChatProjectId,
     isAiTemplate,
   } = restProps as Exclude<InfoPanelHeaderContentProps, { isGallery: true }>;
@@ -76,6 +79,7 @@ const InfoPanelHeaderContent = ({
       enablePlugins={enablePlugins}
       isRecentFolder={isRecentFolder}
       isPrivacyFolder={isPrivacyFolder}
+      canManagePrivateLinks={canManagePrivateLinks}
       aiChatProjectId={aiChatProjectId}
       isAiTemplate={isAiTemplate}
     />
@@ -123,6 +127,9 @@ export default inject(
 
       isRecentFolder,
       isPrivacyFolder,
+      canManagePrivateLinks: canManagePrivateLinksOf(
+        infoPanelStore.infoPanelRoomSelection,
+      ),
       aiChatProjectId: aiProjectsStore.activeProject?.id ?? null,
       isAiTemplate: !!aiTemplatesStore.selected,
     };

@@ -1944,6 +1944,8 @@
   "PricePerAdmin": "Price per admin",
   "PricePerGB": "Price per GB",
   "Private": "Private rooms",
+  "PrivateLinkNeedsEndDate": "A link without a password needs an end date.",
+  "PrivateLinkRevokeDescription": "The link will stop working. Anything already opened or downloaded through it stays with the people who opened it.",
   "PrivateOwnerEncryptionHint": "Only users who are already members of this room and have set up encryption can become the owner.",
   "PrivateRoomConvertNotSupported": "Files that need conversion cannot be opened in a private room yet.",
   "PrivateRoomCreateNotSupported": "Files with the .{{extension}} extension cannot be created in a private room.",

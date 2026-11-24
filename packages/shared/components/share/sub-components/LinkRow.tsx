@@ -80,6 +80,7 @@ const LinkRow = ({
   isExternalShareRestricted,
   takeFocus,
   onFocusTaken,
+  canCopyLink,
 }: LinkRowProps) => {
   const { t } = useTranslation("Common");
 
@@ -157,7 +158,9 @@ const LinkRow = ({
     const shareOption = getShareOption();
 
     const isExpiredLink = link.sharedTo.isExpired;
-    const isLocked = !!link.sharedTo.password;
+    // A link of a private item never carries its password, only that it asks for one.
+    const isLocked =
+      !!link.sharedTo.password || !!link.sharedTo.passwordRequired;
     const linkTitle = link.sharedTo.title;
     const shareLink = link.sharedTo.shareLink;
 
@@ -184,7 +187,7 @@ const LinkRow = ({
             linkTitle={linkTitle}
             shareLink={shareLink}
             isExpiredLink={isExpiredLink}
-            disabledCopy={isArchiveFolder}
+            disabledCopy={isArchiveFolder || canCopyLink?.(link) === false}
             isBlockedByAdmin={isBlockedByAdmin}
             onCopyLink={() =>
               isExpiredLink

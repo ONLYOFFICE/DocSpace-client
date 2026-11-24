@@ -63,6 +63,11 @@ export type TGetAvailableInfoPanelTabsParams = {
   isRecentFolder: boolean | undefined;
   /** TreeFoldersStore.isPrivacyFolder: the open folder is in a private room. */
   isPrivacyFolder: boolean;
+  /**
+   * The user manages the external links of the private room the selection
+   * is in (`canManagePrivateLinks` of its room).
+   */
+  canManagePrivateLinks?: boolean;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
   /** The id of the agent whose page (its chat) is open: that agent gets the Content tab. */
@@ -108,6 +113,7 @@ export function getAvailableInfoPanelTabs({
   isTrash,
   isRecentFolder,
   isPrivacyFolder,
+  canManagePrivateLinks = false,
   enablePlugins,
   infoPanelItemsList,
   aiChatProjectId,
@@ -176,12 +182,13 @@ export function getAvailableInfoPanelTabs({
   if (useRoomsView) {
     tabs.push(InfoPanelView.infoMembers);
   } else if (
-    "canShare" in selection &&
-    selection.canShare &&
     !isRoomUtil(selection) &&
-    !isPrivateItem &&
-    // Spec: private-rooms/room-membership, "Share tab hidden for private items"
-    !isPrivacyFolder &&
+    // Spec: private-rooms/room-membership, "Share tab hidden for private items":
+    // an item of a private room reports no right to share, and its links are
+    // for those who manage the links of the room.
+    (isPrivateItem || isPrivacyFolder
+      ? canManagePrivateLinks
+      : "canShare" in selection && selection.canShare) &&
     // No external links to files in the AI rooms (the server refuses them).
     !(
       "rootFolderType" in selection &&

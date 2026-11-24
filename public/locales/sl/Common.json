@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Cena na skrbnika",
   "PricePerGB": "Cena na GB",
   "Private": "Zasebne sobe",
+  "PrivateLinkNeedsEndDate": "Povezava brez gesla potrebuje končni datum.",
+  "PrivateLinkRevokeDescription": "Povezava bo prenehala delovati. Vse, kar je bilo prek nje že odprto ali preneseno, ostane pri ljudeh, ki so to odprli.",
   "PrivateOwnerEncryptionHint": "Lastnik lahko postane samo uporabnik, ki je že član te sobe in ima nastavljeno šifriranje.",
   "PrivateRoomConvertNotSupported": "Datotek, ki zahtevajo pretvorbo, v zasebni sobi še ni mogoče odpreti.",
   "PrivateRoomCreateNotSupported": "Datotek s pripono .{{extension}} v zasebni sobi ni mogoče ustvariti.",

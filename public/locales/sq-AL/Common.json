@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Çmimi për administrator",
   "PricePerGB": "Çmimi për GB",
   "Private": "Dhomat private",
+  "PrivateLinkNeedsEndDate": "Një lidhje pa fjalëkalim ka nevojë për një datë përfundimi.",
+  "PrivateLinkRevokeDescription": "Lidhja do të pushojë së funksionuari. Gjithçka që është hapur ose shkarkuar tashmë përmes saj mbetet te personat që e kanë hapur.",
   "PrivateOwnerEncryptionHint": "Vetëm përdoruesit që janë tashmë anëtarë të kësaj dhome dhe kanë konfiguruar enkriptimin mund të bëhen pronarë.",
   "PrivateRoomConvertNotSupported": "Skedarët që kërkojnë konvertim nuk mund të hapen ende në një dhomë private.",
   "PrivateRoomCreateNotSupported": "Skedarët me prapashtesën .{{extension}} nuk mund të krijohen në një dhomë private.",

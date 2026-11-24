@@ -55,6 +55,7 @@ const EditLinkPanelWrapper = ({
   currentDeviceType,
   getPortalPasswordSettings,
   isExternalShareRestricted,
+  privateLinkUserId,
 }: InjectedEditLinkPanelProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -75,6 +76,7 @@ const EditLinkPanelWrapper = ({
         searchParams,
         setSearchParams,
         isExternalShareRestricted,
+        privateLinkUserId,
       }}
     />
   );
@@ -132,6 +134,7 @@ export default inject<TStore>(
       currentDeviceType,
       getPortalPasswordSettings,
       isExternalShareRestricted,
+      privateLinkUserId: linkParams?.privateLinkUserId,
     };
   },
 )(observer(EditLinkPanelWrapper as FC));

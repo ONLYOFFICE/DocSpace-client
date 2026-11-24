@@ -195,6 +195,42 @@ describe("getAvailableInfoPanelTabs", () => {
     ).toContain(InfoPanelView.infoShare);
   });
 
+  it("Member who manages links", () => {
+    const tabsOf = (selection: TFile | TFolder, isPrivacyFolder: boolean) =>
+      getAvailableInfoPanelTabs({
+        selection,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder,
+        canManagePrivateLinks: true,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs;
+
+    // As the server answers them: no right to share with the entry itself.
+    const file = {
+      id: 1,
+      isFile: true,
+      fileExst: ".docx",
+      encrypted: true,
+      canShare: false,
+      rootFolderType: FolderType.Rooms,
+      security: {},
+    } as unknown as TFile;
+    const folder = {
+      id: 2,
+      isFolder: true,
+      canShare: false,
+      rootFolderType: FolderType.Rooms,
+      security: {},
+    } as unknown as TFolder;
+
+    expect(tabsOf(file, true)).toContain(InfoPanelView.infoShare);
+    expect(tabsOf(folder, true)).toContain(InfoPanelView.infoShare);
+    // Outside a private room the right of that room opens nothing.
+    expect(tabsOf(folder, false)).not.toContain(InfoPanelView.infoShare);
+  });
+
   it("Folder inside a private room selected", () => {
     const folderTabs = (isPrivacyFolder: boolean) =>
       getAvailableInfoPanelTabs({

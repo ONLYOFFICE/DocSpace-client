@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "관리자당 가격",
   "PricePerGB": "GB당 가격",
   "Private": "비공개 룸",
+  "PrivateLinkNeedsEndDate": "비밀번호가 없는 링크에는 종료 날짜가 필요합니다.",
+  "PrivateLinkRevokeDescription": "링크가 더 이상 작동하지 않습니다. 이 링크를 통해 이미 열었거나 다운로드한 내용은 연 사람에게 그대로 남습니다.",
   "PrivateOwnerEncryptionHint": "이미 이 룸의 멤버이고 암호화를 설정한 사용자만 소유자가 될 수 있습니다.",
   "PrivateRoomConvertNotSupported": "변환이 필요한 파일은 비공개 룸에서 아직 열 수 없습니다.",
   "PrivateRoomCreateNotSupported": "비공개 룸에서는 확장자가 .{{extension}}인 파일을 만들 수 없습니다.",

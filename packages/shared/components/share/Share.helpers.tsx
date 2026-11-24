@@ -426,7 +426,7 @@ export const isExpired = (expirationDate: string | Date) => {
 };
 
 export const getPasswordDescription = (t: TFunction, link: TFileLink) => {
-  return link.sharedTo.password ? (
+  return link.sharedTo.password || link.sharedTo.passwordRequired ? (
     <>&nbsp;{t("Common:RoomShareLinkPassword")}</>
   ) : (
     ""

@@ -72,6 +72,7 @@ const Share = (props: ShareProps) => {
     hideLinkTypeSelector,
     isExternalShareRestricted,
     defaultShareLinkInternal,
+    privateLinks,
   } = props;
 
   // HACK: Hide share option for rooms — remove after implementation is ready
@@ -81,13 +82,15 @@ const Share = (props: ShareProps) => {
 
   const isFolder = infoPanelSelection.isFolder;
   const parentShared = infoPanelSelection.parentShared;
-  const hideSharePanel = !infoPanelSelection?.canShare;
+  const hideSharePanel = !infoPanelSelection?.canShare && !privateLinks;
 
   const { t } = useTranslation(["Common"]);
 
   const [isLoading, setIsLoading] = useState(!fileLinkProps && !members);
 
-  const { getLinkElements } = useShare({
+  const { getLinkElements, privateLinkDialog } = useShare({
+    privateLinks,
+    selfId,
     infoPanelSelection,
     setEditLinkPanelIsVisible,
     setIsLoading,
@@ -135,13 +138,16 @@ const Share = (props: ShareProps) => {
       })}
       data-testid="shared-links"
     >
-      <ShareInfoBar
-        t={t}
-        selfId={selfId}
-        isFolder={isFolder}
-        parentShared={parentShared}
-        isEditor={isEditor}
-      />
+      {/* The bar invites to share the item with users, which a private room does not do. */}
+      {privateLinks ? null : (
+        <ShareInfoBar
+          t={t}
+          selfId={selfId}
+          isFolder={isFolder}
+          parentShared={parentShared}
+          isEditor={isEditor}
+        />
+      )}
       {isLoading || isLoadingMembers ? (
         <ShareLoader t={t} />
       ) : (
@@ -158,6 +164,7 @@ const Share = (props: ShareProps) => {
           </List>
         </div>
       )}
+      {privateLinkDialog}
     </div>
   );
 };

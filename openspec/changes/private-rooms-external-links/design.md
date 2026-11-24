@@ -276,6 +276,46 @@ room through the client:
 
 Not checked: the pages a visitor sees.
 
+### Stand check of 2026-11-24
+
+A local stand of the owner after the release was merged into both
+branches: `../server` at `b708cf9799`, a standalone portal with a new
+database, Document Server 10.0.3.58. A room admin with a key owns a private
+Custom room with two files and a folder; the portal owner is a member with
+the Content creator role.
+
+What the server answers for the entries, which task 3.2 builds on:
+
+- A file and a folder of the room carry `canShare: false` and no
+  `shareSettings` for the owner of the room as for any member, and the
+  folder reports `security.EditAccess: false`. Nothing with the entry says
+  who manages its links; the room's `security.EditAccess` does (true for the
+  owner, false for the Content creator).
+- `availableShareRights` of the file is Read and None for the owner and
+  Read for the member; the folder lists every access (Editing, Review,
+  Comment, Read, None), though only reading is accepted.
+- A link answers `canEditInternal` and `canEditExpirationDate` true, and
+  `canRevoke`, `canEditAccess` and `isOwner` false, also to the owner of
+  the room who made it. `canEditDenyDownload` is true, though the download
+  ban is refused.
+- A primary link is made by the same request as an additional one, with
+  `primary: true`; the request that makes the primary link of an ordinary
+  item on first read is not used. A link to the file without a password
+  and without an end date, and an end date cleared on such a link: 403.
+- After a link is made the file reports `shared: true` and
+  `sharedExternal: true`.
+
+In the interface, as the room admin: the Share tab of a file lists its
+links with the access shown as viewing; a new link is made at once with
+seven days and its address copied; a revocation asks first and removes the
+link. The Share tab of a folder opens the link settings for a new link,
+with the password asked and no download ban, and the link is made with it.
+
+To ask of the backend team: a right with the entry that says the caller
+manages its links, and the link settings (the limits) of an entry of a
+private room; the folder's `availableShareRights` narrowed to reading;
+`canEditDenyDownload` false for a link of a private item.
+
 ## Goals / Non-Goals
 
 **Goals:**

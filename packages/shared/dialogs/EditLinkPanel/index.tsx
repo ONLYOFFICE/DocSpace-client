@@ -71,6 +71,11 @@ import {
 import { parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 
 import { ShareLinkService } from "../../services/share-link.service";
+import {
+  createPrivateItemLink,
+  editPrivateItemLink,
+  getPrivateLinkNeed,
+} from "../../services/private-room/private-links";
 import type { TFileLink } from "../../api/files/types";
 import type { TError } from "../../utils/axiosClient";
 import type { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
@@ -120,8 +125,18 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   setSearchParams,
   withBackButton = false,
   isExternalShareRestricted = false,
+  privateLinkUserId,
 }) => {
   const { t } = useTranslation("Common");
+
+  // A link of a private item: it reads only, its download cannot be
+  // forbidden, and its password never leaves the browser, so the password of
+  // a link that exists is neither shown nor changed here.
+  // Spec: private-rooms/room-membership, "External link of a private item keeps the link model of the portal"
+  const isPrivateLink = privateLinkUserId !== undefined;
+  const isNewPrivateLink = isPrivateLink && !link?.sharedTo?.id;
+  // A link to a folder or a room always carries a password.
+  const isPasswordRequired = isNewPrivateLink && !isFile(item);
 
   const accessLink = link?.access;
   const isLocked = !!link?.sharedTo?.password;
@@ -219,8 +234,9 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const [isSameDate, setIsSameDate] = useState(false);
 
-  const [passwordAccessIsChecked, setPasswordAccessIsChecked] =
-    useState(isLocked);
+  const [passwordAccessIsChecked, setPasswordAccessIsChecked] = useState(
+    isLocked || isPasswordRequired,
+  );
 
   const [denyDownload, setDenyDownload] = useState(isDenyDownload);
 
@@ -255,8 +271,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const hasChanges = useUnsavedChanges(initData, currentDate) || !isSameDate;
 
-  const onPasswordAccessChange = () =>
+  const onPasswordAccessChange = () => {
+    if (isPasswordRequired) return;
     setPasswordAccessIsChecked(!passwordAccessIsChecked);
+  };
 
   const onDenyDownloadChange = () => setDenyDownload(!denyDownload);
 
@@ -296,8 +314,27 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       errors.push("expiration");
     }
 
+    // Spec: private-rooms/room-membership, "A link without a password is limited to one file to view"
+    if (
+      isPrivateLink &&
+      !(isNewPrivateLink ? passwordAccessIsChecked : link?.sharedTo?.passwordRequired) &&
+      getPrivateLinkNeed(item, { expirationDate }) === "end-date" &&
+      !errors.includes("expiration")
+    ) {
+      errors.push("end-date");
+    }
+
     return errors;
-  }, [passwordAccessIsChecked, passwordValue, isPasswordValid, expirationDate]);
+  }, [
+    passwordAccessIsChecked,
+    passwordValue,
+    isPasswordValid,
+    expirationDate,
+    isPrivateLink,
+    isNewPrivateLink,
+    link,
+    item,
+  ]);
 
   const handleValidationErrors = (errors: string[]) => {
     if (errors.includes("password")) {
@@ -306,6 +343,9 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
     if (errors.includes("expiration")) {
       setIsExpired(true);
+    }
+    if (errors.includes("end-date")) {
+      toastr.warning(t("Common:PrivateLinkNeedsEndDate"));
     }
   };
 
@@ -340,6 +380,36 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const executeApiCall = useCallback(
     async (updatedLink: TFileLink) => {
+      if (isNewPrivateLink) {
+        const made = await createPrivateItemLink(item, privateLinkUserId!, {
+          password: updatedLink.sharedTo.password,
+          title: updatedLink.sharedTo.title || undefined,
+          expirationDate: updatedLink.sharedTo.expirationDate ?? null,
+          internal: updatedLink.sharedTo.internal,
+          primary: updatedLink.sharedTo.primary,
+        });
+
+        // The unlock was dismissed: the panel stays, with what was entered.
+        if (!made) return null;
+
+        updateLink?.(made.link, made.address);
+        copyShareLink(
+          item,
+          {
+            ...made.link,
+            sharedTo: { ...made.link.sharedTo, shareLink: made.address },
+          },
+          t,
+        );
+        return made.link;
+      }
+
+      if (isPrivateLink) {
+        const response = await editPrivateItemLink(item, updatedLink);
+        updateLink?.(response);
+        return response;
+      }
+
       const response = await ShareLinkService.editLink(item, updatedLink);
 
       setLinkParams({ link: response, item });
@@ -353,7 +423,16 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
       return response;
     },
-    [t, item, updateLink, setLinkParams, setExternalLink],
+    [
+      t,
+      item,
+      updateLink,
+      setLinkParams,
+      setExternalLink,
+      isPrivateLink,
+      isNewPrivateLink,
+      privateLinkUserId,
+    ],
   );
 
   const handleApiError = (err: TError) => {
@@ -373,7 +452,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     try {
       const updatedLink = buildUpdatedLink();
 
-      await executeApiCall(updatedLink);
+      if (!(await executeApiCall(updatedLink))) return;
 
       onClose();
     } catch (err) {
@@ -485,22 +564,25 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const isPrimary = link?.sharedTo?.primary;
 
-  const isValidLinkTitle = !!deferredLinkTitle.trim();
+  // A new link of a private item may go without a title: the server names it.
+  const isValidLinkTitle = isNewPrivateLink || !!deferredLinkTitle.trim();
 
   // The link carries a role that is not among the available rights any more, so
   // the server would reject any save - even a password-only one. Require the
   // user to pick a role that is still available instead of failing the request.
   const isRevokedAccess =
-    "disabled" in selectedAccessOption && !!selectedAccessOption.disabled;
+    !isPrivateLink &&
+    "disabled" in selectedAccessOption &&
+    !!selectedAccessOption.disabled;
 
   const isDisabledSaveButton =
-    !hasChanges ||
+    (!hasChanges && !isNewPrivateLink) ||
     isLoading ||
     isExpired ||
     !isValidLinkTitle ||
     isRevokedAccess;
 
-  const canChangeLifetime = link?.canEditExpirationDate;
+  const canChangeLifetime = isNewPrivateLink || link?.canEditExpirationDate;
 
   const disabledDenyDownload = link?.canEditDenyDownload === false;
   const canEditInternal = link?.canEditInternal;
@@ -539,7 +621,9 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         dataTestId="edit_link_panel_modal"
       >
         <ModalDialog.Header>
-          {isPrimary
+          {isNewPrivateLink
+            ? t("Common:RoomCreateNewLink")
+            : isPrimary
             ? t("Common:EditSharedLink")
             : isPublic || isFormRoom
               ? t("Common:EditAdditionalLink")
@@ -550,7 +634,8 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
             {/* A revoked access is worth showing even when it is the only
                 option left: the block carries the warning that explains why
                 the save button stays disabled. */}
-            {accessOptions.options.length > 1 || isRevokedAccess ? (
+            {!isPrivateLink &&
+            (accessOptions.options.length > 1 || isRevokedAccess) ? (
               <RoleLinkBlock
                 t={t}
                 accessOptions={accessOptions.options}
@@ -577,22 +662,24 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
                 onSelect={handleSelectLinkAccess}
               />
             ) : null}
-            <PasswordAccessBlock
-              t={t}
-              isLoading={isLoading}
-              headerText={t("Common:PasswordAccess")}
-              bodyText={t("Common:PasswordLink")}
-              isChecked={passwordAccessIsChecked}
-              isPasswordValid={isPasswordValid}
-              passwordValue={passwordValue}
-              setPasswordValue={setPasswordValue}
-              setIsPasswordValid={setIsPasswordValid}
-              onChange={onPasswordAccessChange}
-              passwordSettings={passwordSettings}
-              isPasswordErrorShow={isPasswordErrorShow}
-              setIsPasswordErrorShow={setIsPasswordErrorShow}
-            />
-            {!isFormRoom ? (
+            {isPrivateLink && !isNewPrivateLink ? null : (
+              <PasswordAccessBlock
+                t={t}
+                isLoading={isLoading}
+                headerText={t("Common:PasswordAccess")}
+                bodyText={t("Common:PasswordLink")}
+                isChecked={passwordAccessIsChecked}
+                isPasswordValid={isPasswordValid}
+                passwordValue={passwordValue}
+                setPasswordValue={setPasswordValue}
+                setIsPasswordValid={setIsPasswordValid}
+                onChange={onPasswordAccessChange}
+                passwordSettings={passwordSettings}
+                isPasswordErrorShow={isPasswordErrorShow}
+                setIsPasswordErrorShow={setIsPasswordErrorShow}
+              />
+            )}
+            {!isFormRoom && !isPrivateLink ? (
               <ToggleBlock
                 isLoading={isLoading}
                 headerText={t("Common:DisableDownload")}

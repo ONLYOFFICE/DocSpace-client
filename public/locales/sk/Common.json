@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Cena za administrátora",
   "PricePerGB": "Cena za GB",
   "Private": "Súkromné miestnosti",
+  "PrivateLinkNeedsEndDate": "Odkaz bez hesla musí mať dátum ukončenia platnosti.",
+  "PrivateLinkRevokeDescription": "Odkaz prestane fungovať. Všetko, čo už bolo jeho prostredníctvom otvorené alebo stiahnuté, zostane ľuďom, ktorí to otvorili.",
   "PrivateOwnerEncryptionHint": "Vlastníkom sa môžu stať iba používatelia, ktorí už sú členmi tejto miestnosti a majú nastavené šifrovanie.",
   "PrivateRoomConvertNotSupported": "Súbory, ktoré vyžadujú konverziu, zatiaľ nie je možné otvoriť v súkromnej miestnosti.",
   "PrivateRoomCreateNotSupported": "Súbory s príponou .{{extension}} nie je možné vytvoriť v súkromnej miestnosti.",

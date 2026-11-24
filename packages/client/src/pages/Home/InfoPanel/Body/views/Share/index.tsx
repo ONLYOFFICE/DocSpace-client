@@ -40,6 +40,7 @@ import Share from "@docspace/shared/components/share";
 import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
 import { FolderType } from "@docspace/shared/enums";
+import { canManagePrivateLinks } from "@docspace/shared/services/private-room/private-links";
 
 import type { ShareProps } from "@docspace/shared/components/share/Share.types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -84,7 +85,13 @@ const WrapperShare: FC<WrapperShareProps> = (props) => {
 };
 
 export default inject<TStore>(
-  ({ infoPanelStore, userStore, dialogsStore, filesSettingsStore }) => {
+  ({
+    infoPanelStore,
+    userStore,
+    dialogsStore,
+    filesSettingsStore,
+    treeFoldersStore,
+  }) => {
     const selfId = userStore.user?.id ?? "";
 
     const {
@@ -140,6 +147,14 @@ export default inject<TStore>(
         (isInRoom ? externalShareApplyToRooms : externalShareApplyToDocuments),
       blockExistingLinksOnRestrict,
       defaultShareLinkInternal,
+      // An item of a private room: an encrypted file, or anything listed
+      // while such a room is open. Its links are those of a private item.
+      privateLinks:
+        !Array.isArray(selection) &&
+        selection !== null &&
+        (("encrypted" in selection && selection.encrypted === true) ||
+          treeFoldersStore.isPrivacyFolder) &&
+        canManagePrivateLinks(infoPanelStore.infoPanelRoomSelection),
     };
   },
 )(observer(WrapperShare as FC<ExternalShareProps>));

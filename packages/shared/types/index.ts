@@ -213,7 +213,13 @@ export interface LinkParamsType {
   link: TFileLink;
   item: TFile | TFolder | TRoom;
 
-  updateLink?: (newLink: TFileLink) => void;
+  /** `address` comes with a new link of a private item: its only copy. */
+  updateLink?: (newLink: TFileLink, address?: string) => void;
+  /**
+   * The item belongs to a private room: the panel then sets the link as one
+   * of a private item, and with no `link` it creates one.
+   */
+  privateLinkUserId?: string;
 }
 
 export type TShareLinkAccessRightOption = {

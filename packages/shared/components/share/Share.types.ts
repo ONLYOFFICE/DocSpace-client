@@ -97,6 +97,8 @@ export type LinkRowProps = {
   isShareLink?: boolean;
   hideLinkTypeSelector?: boolean;
   isExternalShareRestricted?: boolean;
+  /** False for a link whose address cannot be given: its title is not a copy control then. */
+  canCopyLink?: (link: TFileLink) => boolean;
 } & (
   | {
       isRoomsLink?: undefined | false;
@@ -154,6 +156,12 @@ export type ShareProps = {
   disabledSharedUser?: boolean;
   hideLinkTypeSelector?: boolean;
   onClickGroup?: (group: TGroup) => void;
+  /**
+   * The selection is a file or a folder of a private room whose links the
+   * user manages: the links are those of a private item and no member is
+   * listed.
+   */
+  privateLinks?: boolean;
 };
 
 export interface LinkTitleProps {
@@ -219,6 +227,8 @@ export interface UseShareProps {
     item?: TFile | TFolder;
   }) => void;
   hideLinkTypeSelector?: boolean;
+  privateLinks?: boolean;
+  selfId?: string;
 }
 
 export type TTitleID =

@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "每位管理员价格",
   "PricePerGB": "每 GB 价格",
   "Private": "私人房间",
+  "PrivateLinkNeedsEndDate": "没有密码的链接需要设置结束日期。",
+  "PrivateLinkRevokeDescription": "链接将停止工作。已通过该链接打开或下载的内容仍保留在打开者手中。",
   "PrivateOwnerEncryptionHint": "只有已经是此房间成员并已设置加密的用户才能成为所有者。",
   "PrivateRoomConvertNotSupported": "私人房间内暂不支持打开需要转换的文件。",
   "PrivateRoomCreateNotSupported": "无法在私人房间中创建扩展名为 .{{extension}} 的文件。",

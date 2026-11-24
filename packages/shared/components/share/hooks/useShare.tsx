@@ -52,6 +52,13 @@ import { isDesktop } from "../../../utils";
 import { AnalyticsEvents, FolderType, ShareAccessRights } from "../../../enums";
 import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
+import {
+  PRIVATE_ITEM_LINKS_LIMIT,
+  createPrivateItemLink,
+  editPrivateItemLink,
+  revokePrivateItemLink,
+} from "../../../services/private-room/private-links";
+import type { TAvailableShareRights } from "../../../types";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
 
 import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
@@ -63,10 +70,18 @@ import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import LinkRow from "../sub-components/LinkRow";
 import ShareHeader from "../sub-components/ShareHeader";
 import { CreateButton } from "../sub-components/CreateButton";
+import { RevokePrivateLinkDialog } from "../sub-components/RevokePrivateLinkDialog";
 
 import styles from "../Share.module.scss";
 import { copyShareLink, evenPrimaryLink } from "../Share.helpers";
 import type { AccessItem, TLink, UseShareProps } from "../Share.types";
+
+// A link of a private item reads only (the server refuses any other access),
+// whatever rights the entry reports: a folder of a private room lists them all.
+const PRIVATE_LINK_RIGHTS = {
+  ExternalLink: ["Read"],
+  PrimaryExternalLink: ["Read"],
+} as TAvailableShareRights;
 
 export const useShare = ({
   setView,
@@ -85,6 +100,8 @@ export const useShare = ({
   isExternalShareRestricted,
   blockExistingLinksOnRestrict,
   defaultShareLinkInternal,
+  privateLinks,
+  selfId,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
 
@@ -102,7 +119,36 @@ export const useShare = ({
   // Set while the link the create row asked for is on its way: the row that
   // shows it takes the focus the create row held, which goes away with it.
   const [focusCreatedLink, setFocusCreatedLink] = useState(false);
-  const hideSharePanel = !infoPanelSelection?.canShare;
+  // An entry of a private room reports no right to share: who manages the
+  // room's links is decided by the room (`canManagePrivateLinks`).
+  const hideSharePanel = !infoPanelSelection?.canShare && !privateLinks;
+
+  // The addresses of the private links made while the panel is mounted, by
+  // link id. The secret after `#` exists nowhere else.
+  // shortcut: the address of a link can be copied only by who made it, until
+  // the page is left; the owner and the managers get it back once the server
+  // stores the wraps of a link's secret (private-rooms-external-links 3.4).
+  const privateAddresses = useRef(new Map<string, string>());
+  const [linkToRevoke, setLinkToRevoke] = useState<TFileLink | null>(null);
+
+  const showError = (error: unknown) => {
+    console.error(error);
+    const message =
+      (error as AxiosError<{ error?: { message?: string } }>)?.response?.data
+        ?.error?.message ?? (error as { message?: string })?.message;
+    toastr.error((message ?? error) as TData);
+  };
+
+  const copyPrivateLink = async (link: TFileLink) => {
+    const address = privateAddresses.current.get(String(link.sharedTo.id));
+    if (!address) return;
+
+    await copyShareLink(
+      infoPanelSelection,
+      { ...link, sharedTo: { ...link.sharedTo, shareLink: address } },
+      t,
+    );
+  };
 
   // The panel stays mounted as the selection changes: a link asked for the
   // item before must not take the focus in the links of the next one.
@@ -161,7 +207,67 @@ export const useShare = ({
     setFileLinks([...fileLinks, ...[link]]);
   };
 
+  /**
+   * Spec: private-rooms/room-membership, "External link of a private item keeps the link model of the portal"
+   * and "A link without a password is limited to one file to view"
+   */
+  const addPrivateLink = async () => {
+    const primary = !evenPrimaryLink(fileLinks as TFileLink[]);
+
+    // A link to a folder needs a password, which the settings of the link
+    // ask for before it is made.
+    if (isFolder) {
+      setEditLinkPanelIsVisible(true);
+      setLinkParams({
+        link: { sharedTo: { primary } } as TFileLink,
+        item: infoPanelSelection,
+        privateLinkUserId: selfId,
+        updateLink: (newLink: TFileLink, address?: string) => {
+          if (!mountedRef.current) return;
+          if (address)
+            privateAddresses.current.set(String(newLink.sharedTo.id), address);
+          setFileLinks((links) => [...links, newLink]);
+        },
+      });
+      return false;
+    }
+
+    addLoaderLink();
+    const dropLoader = () =>
+      setFileLinks((links) =>
+        links.filter((link) => !("isLoaded" in link && link.isLoaded)),
+      );
+
+    try {
+      const made = await createPrivateItemLink(
+        infoPanelSelection,
+        selfId ?? "",
+        { primary },
+      );
+
+      if (!made) {
+        dropLoader();
+        return false;
+      }
+
+      privateAddresses.current.set(String(made.link.sharedTo.id), made.address);
+      setFileLinks((links) =>
+        links.map((link) =>
+          "isLoaded" in link && link.isLoaded ? made.link : link,
+        ),
+      );
+      await copyPrivateLink(made.link);
+      return true;
+    } catch (error) {
+      dropLoader();
+      showError(error);
+      return false;
+    }
+  };
+
   const addGeneralLink = async () => {
+    if (privateLinks) return addPrivateLink();
+
     try {
       addLoaderLink();
 
@@ -211,6 +317,13 @@ export const useShare = ({
 
   const addAdditionalLinks = async () => {
     if (!isLoadedAddLinks) return;
+
+    if (privateLinks) {
+      setIsLoadedAddLinks(false);
+      await addPrivateLink();
+      setIsLoadedAddLinks(true);
+      return;
+    }
 
     setIsLoadedAddLinks(false);
 
@@ -277,7 +390,40 @@ export const useShare = ({
     setFileLinks(newArr);
   };
 
+  const editPrivateLink = async (link: TFileLink, changed: TFileLink) => {
+    try {
+      setLoadingLinks((val) => [...val, link.sharedTo.id]);
+      updateLink(link, await editPrivateItemLink(infoPanelSelection, changed));
+    } catch (error) {
+      setLoadingLinks((val) => val.filter((id) => id !== link.sharedTo.id));
+      showError(error);
+    }
+  };
+
+  const revokePrivateLink = async () => {
+    if (!linkToRevoke) return;
+
+    try {
+      await revokePrivateItemLink(infoPanelSelection, linkToRevoke);
+      privateAddresses.current.delete(String(linkToRevoke.sharedTo.id));
+      deleteLink(linkToRevoke.sharedTo.id);
+      toastr.success(t("Common:LinkRemoved"));
+    } catch (error) {
+      showError(error);
+    } finally {
+      setLinkToRevoke(null);
+    }
+  };
+
   const changeShareOption = async (item: TOption, link: TFileLink) => {
+    if (privateLinks) {
+      await editPrivateLink(link, {
+        ...link,
+        sharedTo: { ...link.sharedTo, internal: item.internal || false },
+      });
+      return;
+    }
+
     if (link.sharedTo.isExpired) {
       link.sharedTo.expirationDate =
         addToDate(now(), 7, "days")?.toISO() ?? null;
@@ -351,6 +497,19 @@ export const useShare = ({
   };
 
   const removeLink = async (link: TFileLink, isReactivate: boolean = false) => {
+    if (privateLinks) {
+      if (!isReactivate) return setLinkToRevoke(link);
+
+      await editPrivateLink(link, {
+        ...link,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: addToDate(now(), 7, "days")?.toISO() ?? null,
+        },
+      });
+      return;
+    }
+
     try {
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
@@ -398,6 +557,7 @@ export const useShare = ({
     setLinkParams({
       link,
       item: infoPanelSelection,
+      privateLinkUserId: privateLinks ? selfId : undefined,
       updateLink: (newLink: TFileLink) => {
         if (!mountedRef.current) return;
         updateLink(link, newLink);
@@ -415,6 +575,23 @@ export const useShare = ({
     link: TFileLink,
     expirationDate: DateTime | null,
   ) => {
+    if (privateLinks) {
+      // Spec: private-rooms/room-membership, "A link without a password is limited to one file to view"
+      if (!expirationDate && !link.sharedTo.passwordRequired) {
+        toastr.warning(t("Common:PrivateLinkNeedsEndDate"));
+        return;
+      }
+
+      await editPrivateLink(link, {
+        ...link,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: expirationDate ? toISOString(expirationDate) : null,
+        },
+      });
+      return;
+    }
+
     try {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
@@ -438,6 +615,8 @@ export const useShare = ({
       toastr.error(t("Common:LinkExpired"));
       return;
     }
+
+    if (privateLinks) return copyPrivateLink(link);
 
     const isBlockedByAdmin =
       isExternalShareRestricted &&
@@ -470,7 +649,39 @@ export const useShare = ({
     await copyShareLink(infoPanelSelection, link, t);
   };
 
+  const canCopyPrivateLink = (link: TFileLink) =>
+    privateAddresses.current.has(String(link.sharedTo.id));
+
   const getData = (link: TFileLink): ContextMenuModel[] => {
+    // No embedding of a private item, and no address without its secret.
+    if (privateLinks) {
+      return [
+        {
+          key: "edit-link-key",
+          label: t("Common:LinkSettings"),
+          icon: SettingsReactSvgUrl,
+          onClick: () => onEditLink(link),
+        },
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopySharedLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: () => onCopyLink(link),
+          disabled: !canCopyPrivateLink(link),
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: t("Common:RevokeLink"),
+          icon: OutlineReactSvgUrl,
+          onClick: () => removeLink(link),
+        },
+      ];
+    }
+
     const isRestrictedByAdmin =
       isExternalShareRestricted && !link.sharedTo.internal;
 
@@ -533,16 +744,22 @@ export const useShare = ({
     [fileLinks],
   );
 
-  const availableShareRights = infoPanelSelection?.availableShareRights;
+  const availableShareRights = privateLinks
+    ? PRIVATE_LINK_RIGHTS
+    : infoPanelSelection?.availableShareRights;
 
-  const countCanCreateLink = Math.max(
-    0,
-    (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
-      (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
-      1,
-  );
+  const countCanCreateLink = privateLinks
+    ? PRIVATE_ITEM_LINKS_LIMIT - 1
+    : Math.max(
+        0,
+        (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
+          (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
+          1,
+      );
 
-  const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
+  const canAddLink =
+    privateLinks ||
+    (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
   const blockLinkCreation =
     isExternalShareRestricted &&
@@ -627,10 +844,19 @@ export const useShare = ({
           availableShareRights={availableShareRights}
           hideLinkTypeSelector={hideLinkTypeSelector}
           isExternalShareRestricted={isExternalShareRestricted}
+          canCopyLink={privateLinks ? canCopyPrivateLink : undefined}
         />
       )),
     ];
   };
 
-  return { getLinkElements };
+  const privateLinkDialog = privateLinks ? (
+    <RevokePrivateLinkDialog
+      visible={!!linkToRevoke}
+      onConfirm={revokePrivateLink}
+      onClose={() => setLinkToRevoke(null)}
+    />
+  ) : null;
+
+  return { getLinkElements, privateLinkDialog };
 };

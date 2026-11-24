@@ -64,6 +64,7 @@ const InfoPanelHeaderGeneral = ({
 
   isRecentFolder,
   isPrivacyFolder,
+  canManagePrivateLinks,
   aiChatProjectId,
   isAiTemplate,
 }: HeaderProps) => {
@@ -108,6 +109,7 @@ const InfoPanelHeaderGeneral = ({
     isTrash,
     isRecentFolder,
     isPrivacyFolder,
+    canManagePrivateLinks,
     aiChatProjectId,
     enablePlugins,
     infoPanelItemsList,

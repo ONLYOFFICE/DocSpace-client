@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Preț per administrator",
   "PricePerGB": "Preț pe GB",
   "Private": "Săli private",
+  "PrivateLinkNeedsEndDate": "Un link fără parolă are nevoie de o dată de expirare.",
+  "PrivateLinkRevokeDescription": "Linkul nu va mai funcționa. Tot ce a fost deja deschis sau descărcat prin el rămâne la persoanele care l-au deschis.",
   "PrivateOwnerEncryptionHint": "Numai utilizatorii care sunt deja membri ai acestei săli și care au configurat criptarea pot deveni proprietari.",
   "PrivateRoomConvertNotSupported": "Fișierele care necesită conversie nu pot fi deschise încă într-o cameră privată.",
   "PrivateRoomCreateNotSupported": "Fișierele cu extensia .{{extension}} nu pot fi create într-o cameră privată.",

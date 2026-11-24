@@ -1950,6 +1950,8 @@
   "PricePerAdmin": "Giá mỗi quản trị viên",
   "PricePerGB": "Giá mỗi GB",
   "Private": "Phòng riêng tư",
+  "PrivateLinkNeedsEndDate": "Liên kết không có mật khẩu cần có ngày kết thúc.",
+  "PrivateLinkRevokeDescription": "Liên kết sẽ ngừng hoạt động. Mọi thứ đã được mở hoặc tải xuống qua liên kết vẫn thuộc về những người đã mở.",
   "PrivateOwnerEncryptionHint": "Chỉ những người dùng đã là thành viên của phòng này và đã thiết lập mã hoá mới có thể trở thành chủ sở hữu.",
   "PrivateRoomConvertNotSupported": "Chưa thể mở các tệp cần chuyển đổi trong phòng riêng tư.",
   "PrivateRoomCreateNotSupported": "Không thể tạo tệp có phần mở rộng .{{extension}} trong phòng riêng tư.",

@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Yalnızca 3 özel tema oluşturabilirsiniz. Yeni bir tane oluşturmak için önceki temalardan birini silmeniz gerekir.",
   "LinksBeforeRestriction": "Kısıtlamadan önce oluşturulan bağlantılara ne yapılacağını seçin:",
   "LinkStopWorking": "Daha önce oluşturulan genel bağlantılar çalışmayı durduracaktır.",
+  "LinksKeepWorking": "Daha önce oluşturulan herkese açık bağlantılar kaldırılana kadar çalışmaya devam eder.",
   "LoginHistoryCampaignHeader": "Çalışma alanınızı güvence altına alın",
   "LoginHistoryCampaignText": "Verilerinizi ve hesaplarınızı yetkisiz erişime karşı koruyun.",
   "LoginHistoryCampaignTitle": "Çalışma alanınızı güvence altına almak için iki faktörlü kimlik doğrulamayı etkinleştirin",

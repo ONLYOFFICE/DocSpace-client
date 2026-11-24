@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Můžete vytvořit pouze 3 vlastní motivy. Chcete-li vytvořit nové, musíte odstranit jedno z předchozích témat.",
   "LinksBeforeRestriction": "Vyberte, co se stane s odkazy vytvořenými před omezením:",
   "LinkStopWorking": "Dříve vytvořené veřejné odkazy přestanou fungovat.",
+  "LinksKeepWorking": "Dříve vytvořené veřejné odkazy budou fungovat, dokud nebudou odstraněny.",
   "LoginHistoryCampaignHeader": "Zabezpečte svůj pracovní prostor",
   "LoginHistoryCampaignText": "Chraňte svá data a účty před neoprávněným přístupem.",
   "LoginHistoryCampaignTitle": "Povolit dvoufaktorové ověřování a zabezpečit pracovní prostor",

@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Mund të krijoni vetëm 3 tema të personalizuara. Për të krijuar një të re, duhet të fshini një nga temat e mëparshme.",
   "LinksBeforeRestriction": "Zgjidhni çfarë ndodh me lidhjet e krijuara përpara kufizimit:",
   "LinkStopWorking": "Lidhjet publike të krijuara më parë do të ndalojnë së funksionuari.",
+  "LinksKeepWorking": "Lidhjet publike të krijuara më parë vazhdojnë të funksionojnë derisa të hiqen.",
   "LoginHistoryCampaignHeader": "Siguroni hapësirën tuaj të punës",
   "LoginHistoryCampaignText": "Mbroni të dhënat dhe llogaritë tuaja nga aksesi i paautorizuar.",
   "LoginHistoryCampaignTitle": "Aktivizoni autentifikimin me dy faktorë për të siguruar hapësirën tuaj të punës",

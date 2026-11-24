@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "您只能创建 3 个自定义主题。如需创建新的主题，请删除一个之前的主题。",
   "LinksBeforeRestriction": "选择对限制前创建的链接的处理方式：",
   "LinkStopWorking": "之前创建的公开链接将停止工作。",
+  "LinksKeepWorking": "之前创建的公开链接在被删除之前将继续有效。",
   "LoginHistoryCampaignHeader": "保护工作区安全",
   "LoginHistoryCampaignText": "保护您的数据和账户，防止未经授权的访问。",
   "LoginHistoryCampaignTitle": "启用双因素身份验证以保护您的工作区",

@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "カスタムテーマは3つまでしか作成できません。新しく作成する場合は、以前のテーマを1つ削除する必要があります。",
   "LinksBeforeRestriction": "制限前に作成されたリンクをどう処理するかを選択してください：",
   "LinkStopWorking": "以前に作成されたパブリックリンクは使用できなくなります。",
+  "LinksKeepWorking": "以前に作成された公開リンクは、削除されるまで引き続き機能します。",
   "LoginHistoryCampaignHeader": "ワークスペースを保護する",
   "LoginHistoryCampaignText": "データとアカウントを不正アクセスから保護します。",
   "LoginHistoryCampaignTitle": "二要素認証を有効にしてワークスペースを保護する",

@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Ustvarite lahko samo 3 teme po meri. Če želite ustvariti novo, morate izbrisati eno od prejšnjih tem.",
   "LinksBeforeRestriction": "Izberite, kaj se zgodi s povezavami, ustvarjenimi pred omejitvijo:",
   "LinkStopWorking": "Predhodno ustvarjene javne povezave bodo prenehale delovati.",
+  "LinksKeepWorking": "Prej ustvarjene javne povezave delujejo, dokler jih ne odstranite.",
   "LoginHistoryCampaignHeader": "Zavarujte svoj delovni prostor",
   "LoginHistoryCampaignText": "Zaščitite svoje podatke in račune pred nepooblaščenim dostopom.",
   "LoginHistoryCampaignTitle": "Omogočite dvofaktorsko avtentikacijo za zaščito delovnega prostora",

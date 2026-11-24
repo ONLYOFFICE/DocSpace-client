@@ -170,6 +170,17 @@ describe("PrivateInfoPanelHeader", () => {
     expect(tabsFor(file, InfoPanelHeader)).toContain("info_share");
   });
 
+  it("Manager in the SDK", () => {
+    const security = { EditAccess: true };
+    const room = { id: 10, title: "Vault", isRoom: true, private: true, security };
+    const file = { id: 7, fileExst: ".docx", encrypted: true, shared: true, security };
+    const folder = { id: 8, isFolder: true, shared: true, security };
+
+    for (const selection of [room, file, folder]) {
+      expect(tabsFor(selection)).not.toContain("info_share");
+    }
+  });
+
   it("Private room selected", () => {
     const privateRoom = { id: 10, title: "Vault", isRoom: true, private: true };
 

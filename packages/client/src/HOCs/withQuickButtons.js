@@ -51,7 +51,11 @@ import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
 
-import { openShareTab } from "SRC_DIR/helpers/info-panel";
+import { openMembersTab, openShareTab } from "SRC_DIR/helpers/info-panel";
+import {
+  canManagePrivateLinks,
+  canManagePrivateRoomLinks,
+} from "@docspace/shared/services/private-room/private-links";
 import { getUseInChatSkillSet } from "SRC_DIR/helpers/skillSetChat";
 import { getUseInChatKnowledgeBase } from "SRC_DIR/helpers/knowledgeBaseChat";
 
@@ -221,6 +225,37 @@ export default function withQuickButtons(WrappedComponent) {
       openShareTab();
     };
 
+    // The links of a private room are in its Members tab, those of a file
+    // or a folder in the Share tab.
+    openPrivateLinks = () => {
+      const {
+        item,
+        setBufferSelection,
+        resetSelections,
+        showForcedInfoPanelLoader,
+      } = this.props;
+
+      showForcedInfoPanelLoader(item.id);
+
+      resetSelections();
+      setBufferSelection(item);
+      if (item.isRoom) openMembersTab();
+      else openShareTab();
+    };
+
+    // Spec: private-rooms/room-membership, "A private item shows its active links".
+    // The server tells that an entry holds a link, not how many nor whether
+    // one still works, so the mark carries no number.
+    hasPrivateLinksMark = () => {
+      const { item, isPrivacyFolder, openRoom } = this.props;
+      if (!item.shared) return false;
+      if (item.isRoom) return canManagePrivateRoomLinks(item);
+      return (
+        (item.encrypted === true || isPrivacyFolder) &&
+        canManagePrivateLinks(openRoom)
+      );
+    };
+
     render() {
       const {
         t,
@@ -270,6 +305,9 @@ export default function withQuickButtons(WrappedComponent) {
           onRetryVectorization={this.onRetryVectorization}
           isTrashFolder={isTrashFolder}
           openShareTab={this.openShareTab}
+          onOpenPrivateLinks={
+            this.hasPrivateLinksMark() ? this.openPrivateLinks : undefined
+          }
           onUseInChat={
             this.getUseInChatRoom() ? this.onUseInChat : undefined
           }
@@ -316,6 +354,7 @@ export default function withQuickButtons(WrappedComponent) {
         isTemplatesFolder,
         isTrashFolder,
         isRecentFolder,
+        isPrivacyFolder,
       } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
@@ -357,6 +396,14 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder,
         showForcedInfoPanelLoader,
         isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
+        isPrivacyFolder,
+        // The room that is open, whose right decides the links of its items.
+        // shortcut: inside a subfolder the room is known only once the info
+        // panel has read it, so the mark of a nested item appears then;
+        // upgrade when the open folder carries the rights of its room.
+        openRoom: selectedFolderStore.isRoom
+          ? selectedFolderStore
+          : infoPanelStore.infoPanelRoom,
         // Who may use the AI chat, as Shell decides it (`canUseAi`).
         canUseAiChat:
           authStore.isAuthenticated &&

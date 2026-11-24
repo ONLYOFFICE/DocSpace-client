@@ -65,6 +65,11 @@ export type QuickButtonsProps = {
   onRetryVectorization?: VoidFunction;
   openShareTab?: VoidFunction;
   /**
+   * Given for a private item that holds external links, to a member who
+   * manages them: the row carries the mark of its links, which opens them.
+   */
+  onOpenPrivateLinks?: VoidFunction;
+  /**
    * Opens the AI chat with the item in use: a skill set connected, or the
    * set a skill lies in. Given, the row offers "Use in chat" in place of its
    * share link.

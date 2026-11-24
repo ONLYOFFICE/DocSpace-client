@@ -93,6 +93,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
     isTrashFolder,
     openShareTab,
     onUseInChat,
+    onOpenPrivateLinks,
   } = props;
 
   const { id, shared, security } = item;
@@ -141,10 +142,13 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
     item?.access === ShareAccessRights.RoomManager ||
     item?.access === ShareAccessRights.None;
 
+  // The address of a link of a private room carries a secret the server
+  // does not hold, so there is no primary link to fetch and copy.
   const showCopyLinkIcon =
     isPublicRoomType &&
     haveLinksRight &&
     item.shared &&
+    !("private" in item && item.private) &&
     !isArchiveFolder &&
     !isTile;
 
@@ -276,6 +280,20 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CreateRoom")}
+            />
+          ) : null}
+          {/* Spec: private-rooms/room-membership, "A private item shows its active links" */}
+          {onOpenPrivateLinks ? (
+            <IconButton
+              iconName={LinkReactSvgUrl}
+              className="badge copy-link icons-group link-shared"
+              size={sizeQuickButton}
+              onClick={onOpenPrivateLinks}
+              color="accent"
+              isDisabled={isDisabled}
+              hoverColor="accent"
+              title={t("Common:SharedLinks")}
+              dataTestId="quick-buttons-private-links"
             />
           ) : null}
           {showCopyLinkIcon ? (

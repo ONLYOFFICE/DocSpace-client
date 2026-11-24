@@ -277,6 +277,56 @@ describe("<QuickButtons />", () => {
     expect(screen.getByTitle("Use in chat")).toBeInTheDocument();
   });
 
+  describe("links of a private item", () => {
+    const privateRoom = {
+      ...baseFileItem,
+      isRoom: true,
+      private: true,
+      shared: true,
+      canShare: false,
+      roomType: RoomsType.CustomRoom,
+      access: ShareAccessRights.None,
+    } as unknown as TFile;
+
+    it("Item with links", async () => {
+      const onOpenPrivateLinks = vi.fn();
+      renderWithTheme(
+        <QuickButtons
+          {...baseProps}
+          item={privateRoom}
+          onOpenPrivateLinks={onOpenPrivateLinks}
+        />,
+      );
+
+      await userEvent.click(screen.getByTestId("quick-buttons-private-links"));
+
+      expect(onOpenPrivateLinks).toHaveBeenCalledTimes(1);
+      // The mark stands in place of the copy of a primary link, which a
+      // private room does not have.
+      expect(screen.queryByTitle("Copy Shared Link")).not.toBeInTheDocument();
+    });
+
+    it("Manager in the SDK", () => {
+      // No handler given, as where the links are not offered: no mark, and
+      // no copy of a link either.
+      renderWithTheme(<QuickButtons {...baseProps} item={privateRoom} />);
+
+      expect(screen.queryByTestId("quick-buttons-private-links")).toBeNull();
+      expect(screen.queryByTitle("Copy Shared Link")).not.toBeInTheDocument();
+    });
+
+    it("keeps the copy of the primary link of an ordinary room", () => {
+      renderWithTheme(
+        <QuickButtons
+          {...baseProps}
+          item={{ ...privateRoom, private: false } as unknown as TFile}
+        />,
+      );
+
+      expect(screen.getByTitle("Copy Shared Link")).toBeInTheDocument();
+    });
+  });
+
   it("offers no Use in chat by default", () => {
     renderWithTheme(<QuickButtons {...baseProps} />);
 

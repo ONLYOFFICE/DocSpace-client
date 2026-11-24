@@ -317,10 +317,26 @@ link is made, listed with its lock and copied; the revocation asks first
 and the room lists no link after it (`GET files/rooms/{id}/links`). The
 room reports no `shareSettings` either.
 
+The lists, as the room admin: a room with a link reports `shared: true`,
+as a file and a folder do; `GET files/rooms/{id}/link`, the request an
+ordinary room answers with its primary link, answers 403 for a private
+room.
+
+The archive. With the room archived its `security.EditAccess` is false for
+its owner as well, and a new link is refused with 403. The links of the
+room itself are still listed (`GET files/rooms/{id}/links`), with
+`isExpired: false`; the links of a file read as an empty list, though the
+file reports `shared: true`. After the room is restored the links of the
+room and of the file are listed again. So the links of a room could be
+shown as not working while it is archived, and those of its files and
+folders cannot: the client is not given them.
+
 To ask of the backend team: a right with the entry that says the caller
 manages its links, and the link settings (the limits) of an entry of a
 private room; the folder's `availableShareRights` narrowed to reading;
-`canEditDenyDownload` false for a link of a private item.
+`canEditDenyDownload` false for a link of a private item; the links of
+the files and folders of an archived room listed to who managed them, if
+they are to be shown as not working.
 
 ## Goals / Non-Goals
 

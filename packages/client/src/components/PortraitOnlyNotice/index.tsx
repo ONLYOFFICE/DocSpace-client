@@ -34,8 +34,11 @@
  */
 
 import { useEffect, useState } from "react";
+import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
+
+import { useStore } from "SRC_DIR/store/useStore";
 
 import styles from "./PortraitOnlyNotice.module.scss";
 
@@ -48,6 +51,7 @@ const isLandscapeScreen = () => {
 
 const PortraitOnlyNotice = () => {
   const { t } = useTranslation(["Common"]);
+  const { visible: isMediaViewerVisible } = useStore("mediaViewerDataStore");
   const [isLandscape, setIsLandscape] = useState(
     () => isMobileOnly && isLandscapeScreen(),
   );
@@ -68,7 +72,7 @@ const PortraitOnlyNotice = () => {
     };
   }, []);
 
-  if (!isLandscape) return null;
+  if (!isLandscape || isMediaViewerVisible) return null;
 
   return (
     <div
@@ -98,4 +102,4 @@ const PortraitOnlyNotice = () => {
   );
 };
 
-export default PortraitOnlyNotice;
+export default observer(PortraitOnlyNotice);

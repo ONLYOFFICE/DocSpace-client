@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useId } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -46,6 +46,7 @@ import { useAppsCatalog } from "SRC_DIR/helpers/apps-catalog";
 import type AppsStore from "SRC_DIR/store/AppsStore";
 
 import styles from "./Apps.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type AppsProps = {
   isInstalled?: AppsStore["isInstalled"];
@@ -64,6 +65,7 @@ const Apps = ({
   ensureLoaded,
 }: AppsProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
+  const captionId = useId();
   const apps = useAppsCatalog();
   // The app whose switch is being saved, so it cannot be flipped twice.
   const [pendingId, setPendingId] = React.useState<string | null>(null);
@@ -112,9 +114,11 @@ const Apps = ({
                 {app.icon}
               </span>
               <div className={styles.info}>
-                <Text as="p" className={styles.title} isBold>
-                  {app.title}
-                </Text>
+                <ControlCaption htmlFor={`${captionId}-${app.id}`} isDisabled={isLocked}>
+                  <Text as="p" className={styles.title} isBold>
+                    {app.title}
+                  </Text>
+                </ControlCaption>
                 <Text as="p" className={styles.itemDescription}>
                   {app.description}
                 </Text>
@@ -124,6 +128,7 @@ const Apps = ({
                 isChecked={enabled}
                 isDisabled={isLocked}
                 onChange={() => handleToggle(app.id, !enabled)}
+                inputId={`${captionId}-${app.id}`}
                 dataTestId={`settings-app-toggle-${app.id}`}
               />
             </div>

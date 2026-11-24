@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState, useId } from "react";
 import copy from "copy-to-clipboard";
 import { TFunction } from "i18next";
 
@@ -67,8 +67,10 @@ import {
 } from "../../utils";
 
 import styles from "./StyledCreateApiKeys.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
+  const lifetimeToggleId = useId();
   const {
     t,
     tReady,
@@ -409,13 +411,16 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       {!isEdit ? (
         <div className="api-key_name">
           <div className="api-key_lifetime">
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Settings:KeyLifetime")}
-            </Text>
+            <ControlCaption htmlFor={lifetimeToggleId}>
+              <Text fontSize="13px" fontWeight={600}>
+                {t("Settings:KeyLifetime")}
+              </Text>
+            </ControlCaption>
             <ToggleButton
               className="api-key_toggle"
               isChecked={lifetimeIsChecked}
               onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}
+              inputId={lifetimeToggleId}
               dataTestId="secret_key_lifetime_toggle_button"
             />
           </div>

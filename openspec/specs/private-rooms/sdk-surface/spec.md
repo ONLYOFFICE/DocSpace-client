@@ -24,7 +24,7 @@ The private layout SHALL wrap its pages in the encryption provider together with
 - **THEN** the SDK's own key-change dialog asks the user to accept or refuse
 
 ### Requirement: Shell side effects
-The private layout SHALL run the shell effects: the locks of the user's other pages that every page follows (key-management, "A lock reaches every tab of the user"), in-flight operations aborted on lock, encrypted file names recovered after unlock, the backfill sweep re-wrapping every member for a room manager once per room and page session, a device-setup hint only once the user's key list loaded empty, a one-per-session ghost-state toast, a gate reset after unlock, and a disclosure banner.
+The private layout SHALL run the shell effects: the locks of the user's other pages that every page follows (key-management, "A lock reaches every tab of the user"), in-flight operations aborted on lock, encrypted file names recovered after unlock, the backfill sweep of missing file keys for a room manager once per room and page session, a device-setup hint only once the user's key list loaded empty, a one-per-session ghost-state toast, a gate reset after unlock, and a disclosure banner.
 
 #### Scenario: Lock in another tab
 - **WHEN** the identity is locked by Lock now, a key change or a logout in another page of the user, an SDK page or a client page
@@ -40,7 +40,7 @@ The private layout SHALL run the shell effects: the locks of the user's other pa
 
 #### Scenario: Manager enters a room
 - **WHEN** a room manager with an unlocked identity enters a private room in the SDK for the first time in the page session
-- **THEN** the backfill sweep runs once for that room and re-wraps every member with a verified key
+- **THEN** the backfill sweep runs once for that room and wraps the file keys the server lists as missing, for members with a verified key
 
 #### Scenario: Hint waits for the key list
 - **WHEN** a private page opens and the key list has not been loaded yet
@@ -96,7 +96,7 @@ The SDK SHALL refuse a download that mixes encrypted and non-encrypted items wit
 - **THEN** no download entry is offered
 
 ### Requirement: Download without decryption
-The SDK SHALL offer download without decryption for an encrypted file, saving the stored ciphertext unchanged, and for a folder inside a private room, requesting a server archive of its ciphertext files, as the client does. Neither unlocks the identity.
+The SDK SHALL offer download without decryption for an encrypted file, saving the stored ciphertext unchanged, and for a folder inside a private room, requesting a server archive of its ciphertext files. It SHALL offer it in the row menu of a file or a folder and, in the header menu, for one selected file only. Neither unlocks the identity.
 
 #### Scenario: Ciphertext download
 - **WHEN** the user chooses download without decryption
@@ -405,11 +405,11 @@ The SDK SHALL stop the queued uploads of a batch into a private room when the se
 - **THEN** the file is encrypted and sent to the folder it was first queued for
 
 ### Requirement: Re-import of a file downloaded without decryption
-The SDK SHALL recognise an uploaded file that is already in the encrypted container format, recover its original file key through the uploader's unlocked identity and upload it without encrypting it again; when that fails it SHALL report Common:EncryptionReimportFailed and send nothing.
+The SDK SHALL recognise an uploaded file that is already in the encrypted container format, recover its original file key through the uploader's unlocked identity, decrypt it and upload it encrypted again under a new file key, as the client does; when that fails it SHALL report Common:EncryptionReimportFailed and send nothing.
 
 #### Scenario: Ciphertext re-uploaded
 - **WHEN** a file downloaded "without decryption" is uploaded back into the same private room
-- **THEN** it is stored with its original file key and stays readable to room members
+- **THEN** it is stored under its original name with a file key of its own and stays readable to room members
 
 ### Requirement: Dropped folders and drop targets
 The SDK SHALL refuse folder trees dropped into a private room or onto one of its folders with Common:FolderUploadNotSupportedInPrivateRoom while uploading the files of the same drop, and SHALL upload files dropped onto a folder row into that folder, not into the open one.

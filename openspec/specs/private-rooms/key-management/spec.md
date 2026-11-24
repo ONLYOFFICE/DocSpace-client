@@ -291,10 +291,10 @@ The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both pas
 - **THEN** Common:ResetEncryptionKeysFailed is shown and no key is deleted
 
 ### Requirement: Device setup hint on entering a private room without keys
-The system SHALL show, once per browser session, an info toast (Common:EncryptionDeviceSetupHint) with a link to Keys management when the user enters a private room on a device with no configured key. The hint SHALL wait until the user's key list is known.
+The system SHALL show, once per browser session, an info toast (Common:EncryptionDeviceSetupHint) with a link to Keys management when a user whose account has no encryption key enters a private room. The hint SHALL wait until the user's key list is known.
 
 #### Scenario: First private room this session
-- **WHEN** a user without keys on this device opens a private room
+- **WHEN** a user without an encryption key opens a private room
 - **THEN** the hint toast appears with the link
 
 #### Scenario: Second room same session
@@ -303,10 +303,10 @@ The system SHALL show, once per browser session, an info toast (Common:Encryptio
 
 #### Scenario: Key list not known
 - **WHEN** a user opens a private room while their key list has not loaded or failed to load
-- **THEN** no hint is shown until the list has loaded and holds no key for this device
+- **THEN** no hint is shown until the list has loaded and holds no key
 
 ### Requirement: Ghost-state notification
-The system SHALL show, once per session, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because the user's key cannot unwrap the file. It SHALL NOT show that toast for a file whose access entry names a key the user no longer holds.
+The system SHALL show, once per session and once more after the user resets their keys, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because the user's key cannot unwrap the file. It SHALL NOT show that toast for a file whose access entry names a key the user no longer holds.
 
 #### Scenario: Unreadable file
 - **WHEN** an encrypted operation finds no usable wrap for the current user
@@ -315,6 +315,10 @@ The system SHALL show, once per session, a toast (Common:GhostStateDetected) lin
 #### Scenario: File wrapped for a previous key
 - **WHEN** filename recovery, a download or a copy meets a file whose access entry names a key that is not in the user's key list
 - **THEN** the ghost-state toast is not shown and the session's one toast is not used up
+
+#### Scenario: After a key reset
+- **WHEN** the toast was shown in the session, the user resets their keys and an encrypted operation again finds no usable wrap
+- **THEN** the toast is shown once more
 
 ### Requirement: Key-change dialog
 The system SHALL show a dialog when a peer's public key differs from its pin, naming the peer by display name, stating how long the previous key was active, listing possible causes and an out-of-band verification tip, with accept and refuse actions. Concurrent mismatches SHALL wait for the open dialog and be shown one after another; requests for the same user and key SHALL share the user's one decision. The system SHALL NOT answer a request on the user's behalf.
@@ -393,7 +397,7 @@ The system SHALL NOT close a key dialog on a click or tap on the backdrop beside
 - **THEN** the dialog closes and the pending operation is aborted, as on Cancel
 
 ### Requirement: Closing a key dialog with typed input asks for confirmation
-The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross or Escape closes a passphrase-creation, passphrase-change or recovery-phrase-input dialog that holds typed input, or a recovery-phrase display whose phrase is not yet acknowledged; declining keeps the dialog open with its input, confirming discards it, whether the answer is given with a pointer or with the keyboard. The unlock prompt, the reset dialog and the key-change dialog SHALL close without a question.
+The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross or Escape closes a passphrase-creation, passphrase-change or recovery-phrase-input dialog whose step holds typed input, or a recovery-phrase display whose phrase is not yet acknowledged; declining keeps the dialog open with its input, confirming discards it, whether the answer is given with a pointer or with the keyboard. The unlock prompt, the reset dialog and the key-change dialog SHALL close without a question.
 
 #### Scenario: Typed passphrase kept
 - **WHEN** the user has typed a new passphrase, presses Escape and declines the confirmation
@@ -418,6 +422,10 @@ The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross o
 #### Scenario: Unlock prompt closes at once
 - **WHEN** the user has typed into the unlock prompt and presses Escape
 - **THEN** the prompt closes without a confirmation and the pending operation is aborted
+
+#### Scenario: Explanation step after going back
+- **WHEN** the user typed a passphrase in key setup, went back to the explanation step and presses the cross or Escape there
+- **THEN** the dialog closes without a question and the typed passphrase is dropped
 
 ### Requirement: Key dialogs take the focus when they open
 The system SHALL move the keyboard focus into a key dialog as it opens: to its first text field when it has one, otherwise to the dialog itself, in both the modal and the aside presentation, so the next Tab moves within the dialog and not in the page behind it.
@@ -519,7 +527,7 @@ While a key dialog's primary action is in progress the system SHALL report that 
 - **THEN** the primary action is exposed as busy and the fields are disabled
 
 ### Requirement: Keys management controls are reachable with Tab
-The system SHALL make every enabled control of the keys management page a tab stop, in the order the page displays them: the key card's change-passphrase, export and delete actions, the generate, import, recovery-phrase, delete-unused and reset actions, and the device section's auto-lock selector, passkey toggle, forget-device and lock-now actions. A disabled control SHALL NOT be a tab stop.
+The system SHALL make every enabled control of the keys management page a tab stop, in the order the page displays them: the key card's change-passphrase, export and delete actions, the unlock, delete-unused, generate, import and recovery-phrase actions, the device section's auto-lock selector, passkey toggle, forget-device and lock-now actions, and the reset action. A disabled control SHALL NOT be a tab stop.
 
 #### Scenario: Tab across the key card
 - **WHEN** a user with a key moves the focus with Tab across the key card
@@ -527,7 +535,7 @@ The system SHALL make every enabled control of the keys management page a tab st
 
 #### Scenario: No key yet
 - **WHEN** a user without a key moves the focus with Tab from Common:GenerateNewKey
-- **THEN** the next stop is Common:ImportKey, followed by Common:UseRecoveryPhrase when it is offered
+- **THEN** the next stop is Common:ImportKey
 
 #### Scenario: Device section
 - **WHEN** the device is remembered, the identity is unlocked and the user tabs through the device section
@@ -767,8 +775,8 @@ The system SHALL accept a new passphrase, at key creation, after a recovery with
 The system SHALL NOT generate a new key pair when the passphrase is changed or the key is recovered with the recovery phrase: only the envelope is sealed again. A copy of the key exported earlier, with the passphrase it was exported under, SHALL keep opening the user's files, so a leaked passphrase or export is not cured by a passphrase change. No action replaces the key pair of a user who keeps access to their files.
 
 #### Scenario: Old export after a passphrase change
-- **WHEN** the user exports the key, changes the passphrase, and the old export is later imported on another device with the old passphrase
-- **THEN** that device opens the user's encrypted files
+- **WHEN** the user exports the key, changes the passphrase, later deletes the key and imports the old export with the old passphrase
+- **THEN** the imported key opens the user's encrypted files
 
 #### Scenario: Public key unchanged
 - **WHEN** the user changes the passphrase
@@ -1268,7 +1276,7 @@ While the user's key is locked, the system SHALL show under the heading of the k
 - **THEN** no unlock action is shown
 
 ### Requirement: Recovery phrase has a block of its own in Keys management
-The system SHALL show the link Common:UseRecoveryPhrase under the heading Common:RecoveryPhraseTitle and the sentence Common:RecoveryPhraseSectionText, which says that the phrase sets a new passphrase and restores access to the existing key. The block SHALL be shown wherever the link is shown today.
+The system SHALL show the link Common:UseRecoveryPhrase under the heading Common:RecoveryPhraseTitle and the sentence Common:RecoveryPhraseSectionText, which says that the phrase sets a new passphrase and restores access to the existing key. The block SHALL be shown while the user has a key.
 
 #### Scenario: User with a key
 - **WHEN** a user who holds a key opens Keys management

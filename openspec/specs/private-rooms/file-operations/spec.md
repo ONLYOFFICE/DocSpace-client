@@ -292,7 +292,7 @@ The system SHALL refuse to copy or move a folder out of a private room, showing 
 - **THEN** the folder is not transferred and Common:CannotTransferFolderFromPrivateRoom is shown, while the selected encrypted files are copied re-encrypted
 
 ### Requirement: Files leaving a private room are decrypted
-The system SHALL decrypt files copied or moved out of a private room on the client and upload them as plaintext, after warning that they will be saved decrypted: in the destination picker, or in a confirmation before anything moves when the transfer starts without it (drag and drop, cut and paste). On move it SHALL delete each source only after its decrypted copy succeeded, and SHALL report Common:EncryptedCopyFailed with the failed names on error.
+The system SHALL decrypt files copied or moved out of a private room on the client and upload them as plaintext, after warning that they will be saved decrypted: in the destination picker, or in a confirmation before anything moves when the transfer starts without it (drag and drop, cut and paste). On move it SHALL delete each source only after its decrypted copy succeeded, and SHALL name the failed files with Common:EncryptedCopyFailed (copy) or Common:EncryptedMovePartialFailure (move).
 
 #### Scenario: Copy to My documents
 - **WHEN** the user copies an encrypted file to a folder outside the room and confirms
@@ -419,7 +419,7 @@ The system SHALL offer "Download without decryption" for encrypted files and for
 - **THEN** the entry reads "Download encrypted copy"
 
 ### Requirement: Decrypted folder download
-The system SHALL offer "Download" for a folder inside a private room and for the room itself, from its context menu or with the folder selected alone in the header menu; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, named and kept apart as "Archive directories come from the folder tree" describes, with the same progress and error reporting as the multi-file decrypted download.
+The system SHALL offer "Download" for a folder inside a private room and for the room itself, from its context menu or with the folder selected alone in the header menu; it SHALL decrypt every file in the subtree on the client and save them as one zip with original names, each under its path inside the folder, named and kept apart as "Archive directories come from the folder tree" describes, with the same progress as the multi-file decrypted download.
 
 #### Scenario: Folder context menu
 - **WHEN** the context menu of a folder in a private room is opened
@@ -839,11 +839,11 @@ The destination picker SHALL NOT show the Common:EncryptedTransferBannerTitle wa
 - **THEN** no decryption warning is shown
 
 ### Requirement: Errors on encrypted paths are localized
-The system SHALL take every message of an encrypted copy, download or open from the locale files, with no English fallback text in code; an error without a specific message SHALL show Common:EncryptedOperationFailed.
+The system SHALL take every message of an encrypted copy, download or open from the locale files, with no English fallback text in code. An error without a specific message SHALL show the general message of its operation: Common:EncryptionDownloadFailed for a decrypting download, Common:EncryptedCopyFailed or Common:EncryptedMovePartialFailure for a copy or a move, Common:EncryptionDecryptPartialFailed in the media viewer, and Common:EncryptedOperationFailed for a download without decryption.
 
 #### Scenario: Error text is localized
-- **WHEN** an encrypted copy, download or open fails with an error that has no specific message
-- **THEN** the toast shows Common:EncryptedOperationFailed in the user's language, never the raw error object
+- **WHEN** a decrypting download fails with an error that has no specific message
+- **THEN** the toast shows Common:EncryptionDownloadFailed in the user's language, never the raw error object
 
 #### Scenario: Download without decryption fails
 - **WHEN** "Download without decryption" is picked in the header menu of a private room or in the context menu of a folder in one, and the server archive request fails without a specific message
@@ -1037,7 +1037,7 @@ The system SHALL label the two entries of the Download submenu of the client's c
 - **THEN** its plain download reads Common:OriginalFormat as before
 
 ### Requirement: The media viewer reports a file that is not shared yet as no access
-The system SHALL show Common:EncryptedFileNoAccessYet in the media viewer when the opened encrypted file holds no wrap for a user who has a key, before it asks for the passphrase or fetches the file, and SHALL keep Common:EncryptionDecryptPartialFailed for a file that is wrapped for the user and still does not decrypt.
+The system SHALL show Common:EncryptedFileNoAccessYet in the media viewer when the opened encrypted file holds no wrap for a user who has a key, before it asks for the passphrase or fetches the file, and SHALL keep Common:EncryptionDecryptPartialFailed for a failure that has no message of its own.
 
 #### Scenario: Image not shared with the user yet
 - **WHEN** a user who holds a key opens in the media viewer an encrypted image that is not wrapped for them
@@ -1304,3 +1304,7 @@ The system SHALL show a notice (Common:PrivateRoomReplacedKeyBarTitle, Common:Pr
 #### Scenario: Key imported again
 - **WHEN** the user deleted their key and imported the same key again from its export, so that the wraps of earlier files name a key id that the key list no longer holds
 - **THEN** the notice is not shown and those files show their decrypted names
+
+#### Scenario: Counted until the names are cleared
+- **WHEN** a file was counted and its access entry changes while the page stays open
+- **THEN** the file stays counted until the key is locked, the user changes or the page is loaded again

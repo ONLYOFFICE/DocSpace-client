@@ -49,6 +49,21 @@ import {
   type TAgentRightsSource,
 } from "SRC_DIR/helpers/agentRights";
 import { isSkillFile } from "@docspace/shared/utils/skillFile";
+
+/** What the context menu of a skill (a skill file of a skill set) may offer. */
+const SKILL_FILE_OPTIONS = new Set([
+  "select",
+  "edit",
+  "edit-skill",
+  "preview",
+  "view",
+  "link-for-room-members",
+  "move",
+  "move-to",
+  "copy-to",
+  "download",
+  "delete",
+]);
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { isMarkdownFile } from "SRC_DIR/helpers/plugins/markdown";
 import type { TMetadataAIItem } from "SRC_DIR/components/panels/MetadataAIPanel/types";
@@ -733,6 +748,15 @@ export const buildContextOptions = (
 
     if (deps.publicRoomStore.isPublicRoom || !canEmbed) {
       fileOptions = removeOptions(fileOptions, ["embedding-settings"]);
+    }
+
+    // A skill's menu offers only these, each still as its file's rights
+    // allow it (the checks above); everything else, plugins' items
+    // included, is left out.
+    if (isSkillFile(item, deps.selectedFolderStore)) {
+      fileOptions = fileOptions.filter(
+        (key) => SKILL_FILE_OPTIONS.has(key) || key.startsWith("separator"),
+      );
     }
 
     fileOptions = removeSeparator(fileOptions);

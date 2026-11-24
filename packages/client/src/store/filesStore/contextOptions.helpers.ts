@@ -62,6 +62,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { default as FilesStore } from "../FilesStore";
 
 import type { TClientConfigWithPdfViewer, TItem } from "./types";
+import { isTooLargeToConvert } from "SRC_DIR/helpers/convertSizeLimit";
 import { mayHoldEncryptionKey } from "@docspace/shared/services/encryption/select-user-key";
 import {
   getEncryptedFileWithheld,
@@ -587,7 +588,7 @@ export const buildContextOptions = (
       ]);
     }
 
-    if (!canConvert) {
+    if (!canConvert || isTooLargeToConvert(item)) {
       fileOptions = removeOptions(fileOptions, ["download-as"]);
     }
 

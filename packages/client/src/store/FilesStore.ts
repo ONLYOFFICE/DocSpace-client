@@ -81,6 +81,7 @@ import {
 import debounce from "lodash.debounce";
 import Queue from "queue-promise";
 import { mappingActiveItems } from "SRC_DIR/helpers/filesUtils";
+import { isTooLargeToConvert } from "SRC_DIR/helpers/convertSizeLimit";
 import {
   getUserFilter,
   setUserFilter,
@@ -1923,6 +1924,8 @@ class FilesStore {
         !selected.viewAccessibility
       )
         return false;
+
+      if (isTooLargeToConvert(selected)) return false;
 
       return selected.viewAccessibility?.CanConvert;
     });

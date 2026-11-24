@@ -55,6 +55,7 @@ export type TAPIPlugin = {
   personal?: boolean;
   url: string;
   cssUrl?: string;
+  cspDomains?: string;
   settings: string;
   /** "module" — load as ES module without iframe; absent/other — legacy iframe */
   runtime?: "module";

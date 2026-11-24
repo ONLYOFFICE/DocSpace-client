@@ -281,6 +281,7 @@ export type TPlugin = {
   personal?: boolean;
   url: string;
   cssUrl?: string;
+  cspDomains?: string;
   settings: string;
   iconUrl: string;
   loadError?: TPluginError;

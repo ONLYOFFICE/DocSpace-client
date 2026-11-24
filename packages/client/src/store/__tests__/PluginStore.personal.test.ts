@@ -339,6 +339,39 @@ describe("addPlugin", () => {
     expect(api.plugins.addPlugin).toHaveBeenCalledWith(data, true);
     expect(ownPluginsLoadedAtRead).toBe(1);
   });
+
+  it.each([
+    ["https://api.example.com", true],
+    [undefined, false],
+  ])(
+    "asks for a reload after a personal upload only with domains (%s)",
+    async (cspDomains, needsReload) => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue({ ok: false, status: 404, text: async () => "" }),
+      );
+      vi.spyOn(console, "error").mockImplementation(() => {});
+
+      const store = withLoadedPlugin(false);
+
+      vi.mocked(api.plugins.addPlugin).mockResolvedValueOnce({
+        name: "own",
+        pluginName: "Own",
+        enabled: true,
+        personal: true,
+        scopes: "",
+        url: "https://portal.test/plugins/own/plugin.js",
+        version: "1.0.0",
+        runtime: "module",
+        cspDomains,
+      } as unknown as TAPIPlugin);
+
+      const result = await store.addPlugin(new FormData(), true);
+
+      expect(result?.needsReload).toBe(needsReload);
+      expect(store.needPageReload).toBe(false);
+    },
+  );
 });
 
 describe("handlePluginStateChange", () => {
@@ -357,6 +390,295 @@ describe("handlePluginStateChange", () => {
 
     expect(store.plugins[0].enabled).toBe(false);
   });
+});
+
+describe("handlePersonalPluginStateChange", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  const switchedOff = (store: PluginStore, cspDomains?: string) =>
+    runInAction(() => {
+      store.plugins[0].enabled = false;
+      store.plugins[0].cspDomains = cspDomains;
+    });
+
+  const ownModulePlugin = (cspDomains?: string) =>
+    ({
+      name: "own",
+      pluginName: "Own",
+      enabled: true,
+      personal: true,
+      scopes: "",
+      url: "https://portal.test/plugins/own/plugin.js",
+      version: "1.0.0",
+      runtime: "module",
+      cspDomains,
+    }) as unknown as TAPIPlugin;
+
+  const withoutPluginScripts = () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: false, status: 404, text: async () => "" }),
+    );
+    vi.spyOn(console, "error").mockImplementation(() => {});
+  };
+
+  it("switches the plugin off and clears its reload mark while the member keeps it", async () => {
+    const store = withLoadedPlugin(true);
+
+    runInAction(() => {
+      store.reloadRequiredPlugins = [NAME];
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      { name: NAME, enabled: false } as unknown as TAPIPlugin,
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: false,
+    });
+
+    expect(store.plugins).toHaveLength(1);
+    expect(store.plugins[0].enabled).toBe(false);
+    expect(store.reloadRequiredPlugins).toEqual([]);
+  });
+
+  it.each([true, false])(
+    "unloads the plugin deleted in another tab (on here: %s)",
+    async (enabled) => {
+      const store = withLoadedPlugin(true);
+
+      if (!enabled) switchedOff(store);
+      vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([]);
+
+      await store.handlePersonalPluginStateChange({
+        webPluginName: NAME,
+        enabled: false,
+      });
+
+      expect(store.plugins).toHaveLength(0);
+    },
+  );
+
+  it.each([
+    ["https://api.example.com", [NAME]],
+    [",", []],
+    [undefined, []],
+  ])(
+    "switches the plugin on, marked for a reload only with domains (%s)",
+    async (cspDomains, marked) => {
+      const store = withLoadedPlugin(true);
+
+      switchedOff(store, cspDomains);
+      vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+        { name: NAME, enabled: true, cspDomains } as unknown as TAPIPlugin,
+      ]);
+
+      await store.handlePersonalPluginStateChange({
+        webPluginName: NAME,
+        enabled: true,
+      });
+
+      expect(store.plugins[0].enabled).toBe(true);
+      expect(store.reloadRequiredPlugins).toEqual(marked);
+    },
+  );
+
+  it("ends in the state of the last change when two arrive at once", async () => {
+    const store = withLoadedPlugin(true);
+    let finishFirstRead: (plugins: TAPIPlugin[]) => void = () => {};
+
+    vi.mocked(api.plugins.getPersonalPlugins)
+      .mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            finishFirstRead = resolve;
+          }),
+      )
+      .mockResolvedValueOnce([
+        { name: NAME, enabled: true } as unknown as TAPIPlugin,
+      ]);
+
+    const switchOff = store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: false,
+    });
+    const switchOn = store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+
+    await vi.waitFor(() =>
+      expect(api.plugins.getPersonalPlugins).toHaveBeenCalledTimes(1),
+    );
+    finishFirstRead([{ name: NAME, enabled: false } as unknown as TAPIPlugin]);
+    await Promise.all([switchOff, switchOn]);
+
+    expect(store.plugins[0].enabled).toBe(true);
+  });
+
+  it("loads a plugin added in another tab and marks its domains for a reload", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      ownModulePlugin("https://api.example.com"),
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: true,
+    });
+
+    expect(store.plugins.map((p) => p.name)).toContain("own");
+    expect(store.reloadRequiredPlugins).toEqual(["own"]);
+  });
+
+  it("loads the new version uploaded in another tab", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(true);
+    const newVersion = {
+      ...ownModulePlugin(),
+      name: NAME,
+      pluginName: "Hello",
+      url: "https://portal.test/plugins/hello/plugin.js?hash=2.0.0",
+    } as TAPIPlugin;
+
+    runInAction(() => {
+      store.plugins[0].url =
+        "https://portal.test/plugins/hello/plugin.js?hash=1.0.0";
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      newVersion,
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+
+    expect(store.plugins).toHaveLength(1);
+    expect(store.plugins[0].url).toBe(newVersion.url);
+  });
+
+  it("leaves a plugin a portal plugin shadows unloaded", async () => {
+    const store = withLoadedPlugin(false);
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      { name: NAME, pluginName: "Hello", enabled: true } as unknown as TAPIPlugin,
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+
+    expect(store.plugins).toHaveLength(1);
+    expect(store.plugins[0].personal).toBe(false);
+    expect(store.plugins[0].initError).toBeUndefined();
+  });
+
+  it("loads its own upload that the server kept while refusing it with 403", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+    let uploadsAtRead = -1;
+
+    vi.mocked(api.plugins.addPlugin).mockImplementationOnce(async () => {
+      store.handlePersonalPluginStateChange({
+        webPluginName: "own",
+        enabled: true,
+      });
+
+      await Promise.resolve();
+
+      throw new Error(
+        "CSP header size exceeds maximum allowed size of 15360 bytes.",
+      );
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockImplementationOnce(
+      async () => {
+        uploadsAtRead = store.pendingPersonalUploads;
+
+        return [ownModulePlugin()];
+      },
+    );
+
+    await store.addPlugin(new FormData(), true);
+    await store.personalChanges;
+
+    expect(uploadsAtRead).toBe(0);
+    expect(store.plugins.map((p) => p.name)).toContain("own");
+  });
+});
+
+describe("activatePlugin", () => {
+  it("does not start a plugin again that an event has already switched on", async () => {
+    const store = withLoadedPlugin(true);
+    let starts = 0;
+
+    runInAction(() => {
+      store.plugins[0].onLoadCallback = async () => {
+        starts += 1;
+      };
+    });
+
+    await store.activatePlugin(NAME);
+
+    expect(starts).toBe(0);
+  });
+
+  it("starts a plugin that failed to start once when asked twice at a time", async () => {
+    const store = withLoadedPlugin(true);
+    let starts = 0;
+    let finishStart = () => {};
+
+    runInAction(() => {
+      store.plugins[0].initError = {
+        kind: "thrown",
+        message: "timeout",
+      } as never;
+      store.plugins[0].onLoadCallback = () => {
+        starts += 1;
+
+        return new Promise<void>((resolve) => {
+          finishStart = resolve;
+        });
+      };
+    });
+
+    const first = store.activatePlugin(NAME);
+    const second = store.activatePlugin(NAME);
+
+    await vi.waitFor(() => expect(starts).toBe(1));
+    finishStart();
+    await Promise.all([first, second]);
+
+    expect(starts).toBe(1);
+    expect(store.plugins[0].initError).toBeUndefined();
+  });
+
+  it.each([
+    [true, false],
+    [false, true],
+  ])(
+    "asks the portal settings to reload only for a portal plugin (personal: %s)",
+    async (personal, needPageReload) => {
+      const store = withLoadedPlugin(personal);
+
+      runInAction(() => {
+        store.plugins[0].enabled = false;
+      });
+
+      await store.activatePlugin(NAME);
+
+      expect(store.needPageReload).toBe(needPageReload);
+    },
+  );
 });
 
 describe("portalPluginList", () => {

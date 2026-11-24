@@ -110,6 +110,7 @@ type TTabState = {
   fetchPersonalPlugins?: () => Promise<void>;
   personalPlugins?: ReturnType<typeof ownPlugin>[];
   pluginList?: ReturnType<typeof loadedPlugin>[];
+  reloadRequiredPlugins?: string[];
 };
 
 const renderTab = ({
@@ -117,12 +118,14 @@ const renderTab = ({
   fetchPersonalPlugins = vi.fn(async () => {}),
   personalPlugins = [],
   pluginList = [],
+  reloadRequiredPlugins = [],
 }: TTabState = {}) =>
   render(
     <Provider
       pluginStore={{
         personalPlugins,
         pluginList,
+        reloadRequiredPlugins,
         fetchPersonalPlugins,
         addPlugin: vi.fn(),
         updatePlugin: vi.fn(),
@@ -181,6 +184,23 @@ describe("Personal plugins tab", () => {
     expect(await screen.findByTestId("personal_plugin_other")).toHaveAttribute(
       "data-not-loaded",
       "true",
+    );
+  });
+
+  it("marks a loaded plugin whose domains need a reload", async () => {
+    renderTab({
+      personalPlugins: [ownPlugin("own"), ownPlugin("plain")],
+      pluginList: [loadedPlugin("own", true), loadedPlugin("plain", true)],
+      reloadRequiredPlugins: ["own"],
+    });
+
+    expect(await screen.findByTestId("personal_plugin_own")).toHaveAttribute(
+      "data-not-loaded",
+      "true",
+    );
+    expect(screen.getByTestId("personal_plugin_plain")).toHaveAttribute(
+      "data-not-loaded",
+      "false",
     );
   });
 

@@ -81,6 +81,7 @@ const PersonalPlugins = () => {
     setDeletePluginDialogProps,
     checkPluginCompatibility,
     isLoaded,
+    reloadRequiredPlugins,
   } = pluginStore;
 
   const { pluginOptions, theme, culture } = useStore("settingsStore");
@@ -101,7 +102,7 @@ const PersonalPlugins = () => {
     async (data: FormData) => {
       const result = await addPlugin(data, true);
 
-      if (result) armReload();
+      if (result?.needsReload) armReload();
 
       return result;
     },
@@ -112,11 +113,8 @@ const PersonalPlugins = () => {
     async (name: string, status: boolean, settings?: string, t?: TFunction) => {
       const result = await updatePlugin(name, status, settings, t);
 
-      const switchedOn = pluginStore.pluginList.some(
-        (p) => p.personal && p.name === name && p.enabled,
-      );
-
-      if (status && switchedOn) armReload();
+      if (status && pluginStore.reloadRequiredPlugins.includes(name))
+        armReload();
 
       return result;
     },
@@ -209,6 +207,7 @@ const PersonalPlugins = () => {
               {...loaded}
               updatePlugin={switchPlugin}
               openSettingsDialog={openSettingsDialog}
+              isNotLoaded={reloadRequiredPlugins.includes(loaded.name)}
               theme={theme}
               dataTestId={`personal_plugin_${loaded.name}`}
             />

@@ -236,6 +236,16 @@ class PluginStore {
 
   personalPlugins: TAPIPlugin[] = [];
 
+  reloadRequiredPlugins: string[] = [];
+
+  pendingPersonalUploads = 0;
+
+  deferredPersonalChanges = new Set<string>();
+
+  personalChanges: Promise<void> = Promise.resolve();
+
+  activatingPlugins = new Set<string>();
+
   needPageReload = false;
 
   pluginMediaViewerVisible = false;
@@ -274,6 +284,10 @@ class PluginStore {
       reactPluginModalState: observable.ref,
       reactSettingsSaveButtonState: observable.ref,
       articleWidgetItems: observable.shallow,
+      pendingPersonalUploads: false,
+      deferredPersonalChanges: false,
+      personalChanges: false,
+      activatingPlugins: false,
     });
 
     // Subscribe to plugin state changes via WebSocket
@@ -289,6 +303,101 @@ class PluginStore {
       SocketEvents.ChangeWebPlugin,
       this.handlePluginStateChange,
     );
+
+    SocketHelper?.on(
+      SocketEvents.ChangePersonalWebPlugin,
+      this.handlePersonalPluginStateChange,
+    );
+  };
+
+  handlePersonalPluginStateChange = ({
+    webPluginName,
+  }: TChangeWebPluginData) => {
+    if (this.pendingPersonalUploads) {
+      this.deferredPersonalChanges.add(webPluginName);
+
+      return this.personalChanges;
+    }
+
+    return this.queuePersonalChange(webPluginName);
+  };
+
+  private queuePersonalChange = (name: string) => {
+    this.personalChanges = this.personalChanges
+      .then(() => this.applyPersonalChange(name))
+      .catch((e) => {
+        console.error(`[Plugin: ${name}] Personal plugin change failed:`, e);
+      });
+
+    return this.personalChanges;
+  };
+
+  private finishPersonalUpload = () => {
+    this.pendingPersonalUploads -= 1;
+
+    if (this.pendingPersonalUploads) return;
+
+    const names = [...this.deferredPersonalChanges];
+
+    this.deferredPersonalChanges.clear();
+
+    for (const name of names) this.queuePersonalChange(name);
+  };
+
+  private applyPersonalChange = async (name: string) => {
+    if (!(await this.fetchPersonalPlugins(false))) return;
+
+    const loaded = this.plugins.find((p) => p.personal && p.name === name);
+    const own = this.personalPlugins.find((p) => p.name === name);
+
+    if (!own?.enabled) {
+      if (loaded?.enabled) this.deactivatePlugin(name);
+
+      if (loaded && !own) {
+        runInAction(() => {
+          this.plugins = this.plugins.filter((p) => p !== loaded);
+        });
+      }
+
+      return;
+    }
+
+    if (this.plugins.some((p) => !p.personal && clashesWith(own, p))) return;
+
+    if (loaded && loaded.url === own.url) {
+      await this.activatePlugin(name);
+      return;
+    }
+
+    try {
+      await this.loadPlugin(own);
+    } catch (e) {
+      console.error(`[Plugin: ${name}] Plugin initialization failed:`, e);
+
+      this.setInitError(name, toPluginError(e));
+    }
+
+    this.markReloadRequired(own);
+  };
+
+  private markReloadRequired = (
+    plugin: Pick<TAPIPlugin, "name" | "personal" | "cspDomains">,
+  ) => {
+    if (
+      !plugin.personal ||
+      !plugin.cspDomains?.split(",").some((domain) => domain.trim()) ||
+      this.reloadRequiredPlugins.includes(plugin.name)
+    )
+      return;
+
+    runInAction(() => {
+      this.reloadRequiredPlugins = [...this.reloadRequiredPlugins, plugin.name];
+    });
+  };
+
+  private loadPlugin = async (plugin: TAPIPlugin) => {
+    if (plugin.runtime === "module") await this.initModulePlugin(plugin);
+    else await this.initPlugin(plugin);
   };
 
   handlePluginStateChange = (data: TChangeWebPluginData) => {
@@ -569,19 +678,25 @@ class PluginStore {
     );
   };
 
-  fetchPersonalPlugins = async () => {
+  fetchPersonalPlugins = async (notifyError = true) => {
     try {
       const plugins = await api.plugins.getPersonalPlugins();
 
       runInAction(() => {
         this.personalPlugins = plugins;
       });
+
+      return true;
     } catch (e) {
-      toastr.error(e as TData);
+      if (notifyError) toastr.error(e as TData);
+
+      return false;
     }
   };
 
   addPlugin = async (data: FormData, personal = false) => {
+    if (personal) this.pendingPersonalUploads += 1;
+
     try {
       const plugin = await api.plugins.addPlugin(data, personal);
 
@@ -591,16 +706,12 @@ class PluginStore {
 
       const isPluginInCache = this.checkPluginCacheWarning(plugin);
 
-      this.setNeedPageReload(true);
+      if (!personal) this.setNeedPageReload(true);
 
       let thrownInitError: TPluginError | undefined;
 
       try {
-        if (plugin.runtime === "module") {
-          await this.initModulePlugin(plugin);
-        } else {
-          await this.initPlugin(plugin);
-        }
+        await this.loadPlugin(plugin);
       } catch (e) {
         console.error(
           `[Plugin: ${plugin.name}] Plugin initialization failed:`,
@@ -612,6 +723,8 @@ class PluginStore {
 
       if (personal) this.fetchPersonalPlugins();
 
+      this.markReloadRequired(plugin);
+
       const storedPlugin = this.plugins.find((p) => p.name === plugin.name);
 
       return {
@@ -619,9 +732,12 @@ class PluginStore {
         isPluginInCache,
         loadError: storedPlugin?.loadError,
         initError: storedPlugin?.initError ?? thrownInitError,
+        needsReload: this.reloadRequiredPlugins.includes(plugin.name),
       };
     } catch (e) {
       toastr.error(e as TData);
+    } finally {
+      if (personal) this.finishPersonalUpload();
     }
   };
 
@@ -1107,16 +1223,25 @@ class PluginStore {
   activatePlugin = async (name: string) => {
     const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (idx === -1) return;
+    if (
+      idx === -1 ||
+      this.activatingPlugins.has(name) ||
+      (this.plugins[idx].enabled && !this.plugins[idx].initError)
+    )
+      return;
+
+    this.markReloadRequired(this.plugins[idx]);
 
     runInAction(() => {
       this.plugins[idx].enabled = true;
       this.plugins.splice(idx, 1, this.plugins[idx]);
     });
 
-    this.setNeedPageReload(true);
-
     const plugin = this.plugins[idx];
+
+    if (!plugin.personal) this.setNeedPageReload(true);
+
+    this.activatingPlugins.add(name);
 
     try {
       await this.runPluginInit(plugin, plugin.settings || null, false);
@@ -1126,6 +1251,8 @@ class PluginStore {
       console.error(`[Plugin: ${name}] Plugin initialization failed:`, e);
 
       this.setInitError(name, toPluginError(e));
+    } finally {
+      this.activatingPlugins.delete(name);
     }
   };
 
@@ -1137,6 +1264,9 @@ class PluginStore {
     runInAction(() => {
       this.plugins[idx].enabled = false;
       this.plugins.splice(idx, 1, this.plugins[idx]);
+      this.reloadRequiredPlugins = this.reloadRequiredPlugins.filter(
+        (n) => n !== name,
+      );
     });
 
     const plugin = this.plugins[idx];

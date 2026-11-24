@@ -44,6 +44,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import { DefaultPageSetting } from "./sub-components/DefaultPageSetting";
+import { OpenDocumentSetting } from "./sub-components/OpenDocumentSetting";
 import styles from "./FileManagement.module.scss";
 
 type FileManagementProps = {
@@ -139,6 +140,7 @@ const FileManagement = ({
   return (
     <div className={styles.styledWrapper} data-testid="profile-file-management">
       <DefaultPageSetting />
+      <OpenDocumentSetting className={styles.openDocumentSetting} />
       <div className={styles.settingsSection}>
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton

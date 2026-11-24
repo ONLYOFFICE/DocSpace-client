@@ -60,6 +60,12 @@
     margin-top: 0;
   }
 
+  .openDocumentSetting {
+    display: grid;
+    grid-gap: 8px;
+    justify-items: start;
+  }
+
   .settingsSection {
     box-sizing: border-box;
     display: grid;

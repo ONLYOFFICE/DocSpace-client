@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Ask every time",
   "CancellaionNotification": "Don't show the cancellation notification again",
   "DefaultHomepage": "Default homepage",
   "GroupByRooms": "Group by rooms",
+  "OpenDocumentsOnMobile": "Open documents on mobile devices",
+  "OpenInMobileApp": "In the mobile app",
+  "OpenInMobileBrowser": "In the browser",
   "OpenSameTab": "Open editors in same tab",
   "ShowQuickActions": "Show quick actions"
 }

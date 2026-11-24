@@ -49,7 +49,7 @@
   "BackupFile": "ملف النسخ الاحتياطي",
   "BackupFileUploading": "يتم الآن تحميل ملف النسخ الاحتياطي إلى الخادم. انتظر من فضلك.",
   "BlankDocument": "مستند فارغ",
-  "BlankForm": "نموذج فارغ",
+  "BlankForm": "نموذج PDF فارغ من {{organizationName}}",
   "BlankPresentation": "عرض تقديمي فارغ",
   "BlankSpreadsheet": "ورقة عمل فارغة",
   "BlockAccessRecommended": "حظر الوصول (موصى به)",

@@ -49,7 +49,7 @@
   "BackupFile": "File di backup",
   "BackupFileUploading": "Il file di backup è in fase di caricamento sul server. Attendere prego.",
   "BlankDocument": "Documento vuoto",
-  "BlankForm": "Modulo vuoto",
+  "BlankForm": "Modulo PDF {{organizationName}} vuoto",
   "BlankPresentation": "Presentazione vuota",
   "BlankSpreadsheet": "Foglio di calcolo vuoto",
   "BlockAccessRecommended": "Blocca l'accesso (consigliato)",

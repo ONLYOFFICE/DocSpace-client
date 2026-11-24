@@ -49,7 +49,7 @@
   "BackupFile": "Архивен файл",
   "BackupFileUploading": "Архивният файл се качва на сървъра. Моля, изчакайте.",
   "BlankDocument": "Празен документ",
-  "BlankForm": "Празна форма",
+  "BlankForm": "Празна PDF форма на {{organizationName}}",
   "BlankPresentation": "Празна презентация",
   "BlankSpreadsheet": "Праздна електронна таблица",
   "BlockAccessRecommended": "Блокиране на достъпа (препоръчително)",

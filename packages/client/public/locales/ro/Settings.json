@@ -49,7 +49,7 @@
   "BackupFile": "Fișier de rezervă",
   "BackupFileUploading": "Fișier de rezervă este în curs de încărcare pe server. Vă rugăm așteptați.",
   "BlankDocument": "Document gol",
-  "BlankForm": "Formular gol",
+  "BlankForm": "Formular PDF {{organizationName}} gol",
   "BlankPresentation": "Prezentare goală",
   "BlankSpreadsheet": "Plană de lucru goală",
   "BlockAccessRecommended": "Blocare acces (recomandat)",

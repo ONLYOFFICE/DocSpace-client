@@ -49,7 +49,7 @@
   "BackupFile": "Yedekleme dosyası",
   "BackupFileUploading": "Yedekleme dosyası sunucuya yükleniyor. Lütfen bekleyin.",
   "BlankDocument": "Boş Belge",
-  "BlankForm": "Boş Form",
+  "BlankForm": "Boş {{organizationName}} PDF formu",
   "BlankPresentation": "Boş Sunum",
   "BlankSpreadsheet": "Boş Çalışma Sayfası",
   "BlockAccessRecommended": "Erişimi engelle (önerilen)",

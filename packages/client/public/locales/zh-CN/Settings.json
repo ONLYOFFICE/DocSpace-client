@@ -49,7 +49,7 @@
   "BackupFile": "备份文件",
   "BackupFileUploading": "正在将备份文件上传到服务器。请稍候。",
   "BlankDocument": "空白文档",
-  "BlankForm": "空白表单",
+  "BlankForm": "空白 {{organizationName}} PDF 表单",
   "BlankPresentation": "空白演示文稿",
   "BlankSpreadsheet": "空白电子表格",
   "BlockAccessRecommended": "阻止访问（推荐）",

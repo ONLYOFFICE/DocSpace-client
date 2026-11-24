@@ -49,7 +49,7 @@
   "BackupFile": "Αρχείο αντιγράφου ασφαλείας",
   "BackupFileUploading": "Το αρχείο αντιγράφου ασφαλείας μεταφορτώνεται στον διακομιστή. Περιμένετε.",
   "BlankDocument": "Κενό Έγγραφο",
-  "BlankForm": "Κενή Φόρμα",
+  "BlankForm": "Κενή φόρμα PDF {{organizationName}}",
   "BlankPresentation": "Κενή Παρουσίαση",
   "BlankSpreadsheet": "Κενό Φύλλο Εργασίας",
   "BlockAccessRecommended": "Αποκλεισμός πρόσβασης (συνιστάται)",

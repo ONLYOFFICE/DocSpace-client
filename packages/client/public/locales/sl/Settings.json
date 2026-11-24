@@ -49,7 +49,7 @@
   "BackupFile": "Datoteka varnostne kopije",
   "BackupFileUploading": "Datoteka varnostne kopije se nalaga na strežnik. Prosimo, počakajte.",
   "BlankDocument": "Prazen dokument",
-  "BlankForm": "Prazn obrazec",
+  "BlankForm": "Prazen PDF obrazec {{organizationName}}",
   "BlankPresentation": "Prazna prezentacija",
   "BlankSpreadsheet": "Prazna tabela",
   "BlockAccessRecommended": "Blokiraj dostop (priporočeno)",

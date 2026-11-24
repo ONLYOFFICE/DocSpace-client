@@ -49,7 +49,7 @@
   "BackupFile": "백업 파일",
   "BackupFileUploading": "백업 파일이 서버에 업로드되고 있습니다. 잠시만 기다려주세요.",
   "BlankDocument": "빈 문서",
-  "BlankForm": "빈 양식",
+  "BlankForm": "빈 {{organizationName}} PDF 양식",
   "BlankPresentation": "빈 프레젠테이션",
   "BlankSpreadsheet": "빈 스프레드시트",
   "BlockAccessRecommended": "액세스 차단 (권장)",

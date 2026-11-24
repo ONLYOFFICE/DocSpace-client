@@ -49,7 +49,7 @@
   "BackupFile": "Tập tin sao lưu",
   "BackupFileUploading": "Tập sao lưu đang được tải lên máy chủ. Xin vui lòng chờ.",
   "BlankDocument": "Tài liệu trống",
-  "BlankForm": "Biểu mẫu trống",
+  "BlankForm": "Biểu mẫu PDF {{organizationName}} trống",
   "BlankPresentation": "Bản trình bày trống",
   "BlankSpreadsheet": "Bảng tính trống",
   "BlockAccessRecommended": "Chặn quyền truy cập (khuyến nghị)",

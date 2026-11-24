@@ -37,7 +37,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation, Navigate } from "react-router";
 import { TFunction } from "i18next";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@onlyoffice/apps-ui-kit/components/tabs";
@@ -71,6 +71,7 @@ import AuthorizedApps from "./sub-components/authorized-apps";
 import KeysManagement from "./sub-components/keys-management";
 import useProfileBody from "./useProfileBody";
 import {
+  PLUGIN_TAB_WAIT_MS,
   getPluginTabId,
   getProfileBasePath,
   getProfileTabId,
@@ -140,6 +141,21 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const tabsRef = useRef<HTMLDivElement>(null);
+
+  // A plugin whose loading never settles keeps the plugins pending for good,
+  // so the wait for a plugin tab that has not registered is bounded.
+  const [isPluginWaitOver, setIsPluginWaitOver] = useState(false);
+
+  useEffect(() => {
+    if (!arePluginsPending) return;
+
+    const timer = setTimeout(
+      () => setIsPluginWaitOver(true),
+      PLUGIN_TAB_WAIT_MS,
+    );
+
+    return () => clearTimeout(timer);
+  }, [arePluginsPending]);
 
   const checkEmailChangeParam = () => {
     const search = window.location.search;
@@ -271,7 +287,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   const tabState = resolveProfileTab(
     getProfileTabId(location.pathname),
     data.map((item) => item.id),
-    arePluginsPending,
+    arePluginsPending && !isPluginWaitOver,
   );
 
   const onSelect = (e: TTabItem) => {

@@ -34,9 +34,11 @@
  */
 
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+
+import { PLUGIN_TAB_WAIT_MS } from "../profileTabs";
 
 vi.mock("react-i18next", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -275,6 +277,26 @@ describe("Plugin tabs", () => {
     renderProfileTabs({ arePluginsLoaded: false });
 
     expect(screen.getByTestId("profile-loader")).toBeInTheDocument();
+  });
+
+  it("stops waiting for a plugin tab when the plugins never finish loading", () => {
+    vi.useFakeTimers();
+
+    try {
+      router.pathname = "/profile/p/calendar-sync";
+      renderProfileTabs({ arePluginsLoaded: false });
+
+      act(() => {
+        vi.advanceTimersByTime(PLUGIN_TAB_WAIT_MS);
+      });
+
+      expect(screen.getByTestId("navigate")).toHaveAttribute(
+        "data-to",
+        "/profile/login",
+      );
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("sends a plugin tab address no plugin owns to the login tab once the plugins are loaded", () => {

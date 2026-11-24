@@ -35,6 +35,9 @@
 
 export const PLUGIN_TAB_PREFIX = "p/";
 
+/** How long a plugin tab address waits for its plugin before it counts as missing. */
+export const PLUGIN_TAB_WAIT_MS = 10000;
+
 export type TProfileTabState =
   | { kind: "tab"; id: string }
   | { kind: "pending" }

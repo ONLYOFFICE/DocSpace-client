@@ -124,6 +124,7 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
+import PortraitOnlyNotice from "./components/PortraitOnlyNotice";
 
 // Stable empty list, so the chat provider's memo is not re-run each render.
 const NO_SUGGESTIONS = [];
@@ -863,6 +864,7 @@ const Shell = ({ page = "home", ...rest }) => {
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
+      {!isFrame && !isEditor ? <PortraitOnlyNotice /> : null}
 
       <Main isDesktop={isDesktop}>
         {!isMobileOnly && !isFrame ? (

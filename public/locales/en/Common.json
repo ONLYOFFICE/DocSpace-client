@@ -2263,6 +2263,8 @@
   "RoomUsers": "Users",
   "RoomWatermarkDisabled": "Watermark for files in the room disabled",
   "RoomWatermarkSet": "Watermark for files in the room enabled",
+  "RotateToPortraitText": "This page works with the phone held upright. Turn it to continue.",
+  "RotateToPortraitTitle": "Turn your phone upright",
   "SalesDepartmentRequest": "Sales department request",
   "SameEmail": "You can't use the same email address",
   "SaveAndCopy": "Save & copy",

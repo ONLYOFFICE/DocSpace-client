@@ -35,7 +35,7 @@
 
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useId } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -52,9 +52,11 @@ import {
 import { useDocsSettingsStore } from "../../../_store/DocsSettingsStore";
 
 import styles from "./FileManagement.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const FileManagement = observer(() => {
   const { t } = useTranslation("Common");
+  const captionId = useId();
   const docsSettingsStore = useDocsSettingsStore();
   const settings = docsSettingsStore.filesSettings;
 
@@ -126,41 +128,53 @@ const FileManagement = observer(() => {
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton
             className={styles.toggleBtn}
+            inputId={`${captionId}-ask-again`}
             onChange={onChangeKeepNewFileName}
             isChecked={settings.keepNewFileName}
           />
-          <Text>{t("Common:DontAskAgain")}</Text>
+          <ControlCaption htmlFor={`${captionId}-ask-again`}>
+            <Text>{t("Common:DontAskAgain")}</Text>
+          </ControlCaption>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton
             className={styles.toggleBtn}
+            inputId={`${captionId}-original-copy`}
             onChange={onChangeOriginalCopy}
             isChecked={settings.storeOriginalFiles}
           />
-          <Text>{t("OriginalCopy")}</Text>
+          <ControlCaption htmlFor={`${captionId}-original-copy`}>
+            <Text>{t("OriginalCopy")}</Text>
+          </ControlCaption>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton
             className={styles.toggleBtn}
+            inputId={`${captionId}-trash-confirmation`}
             onChange={onChangeDeleteConfirm}
             isChecked={settings.confirmDelete}
           />
-          <Text>
-            {t("TrashMoveConfirmation", {
-              sectionName: t("Common:TrashSection"),
-            })}
-          </Text>
+          <ControlCaption htmlFor={`${captionId}-trash-confirmation`}>
+            <Text>
+              {t("TrashMoveConfirmation", {
+                sectionName: t("Common:TrashSection"),
+              })}
+            </Text>
+          </ControlCaption>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton
             className={styles.toggleBtn}
+            inputId={`${captionId}-file-extension`}
             onChange={onChangeDisplayFileExtension}
             isChecked={settings.displayFileExtension}
           />
-          <Text>{t("DisplayFileExtension")}</Text>
+          <ControlCaption htmlFor={`${captionId}-file-extension`}>
+            <Text>{t("DisplayFileExtension")}</Text>
+          </ControlCaption>
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useId } from "react";
 import { Trans } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -43,6 +43,7 @@ import FileLifetime from "./FileLifetime";
 import Watermarks from "./Watermarks";
 
 import styles from "../CreateEditRoomDialog.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const Block = ({
   headerText,
@@ -53,16 +54,21 @@ const Block = ({
   children,
   dataTestId,
 }) => {
+  const inputId = useId();
+
   return (
     <div className="virtual-data-room-block" data-testid={dataTestId}>
       <div className="virtual-data-room-block_header">
-        <Text fontWeight={600} fontSize="13px">
-          {headerText}
-        </Text>
+        <ControlCaption htmlFor={inputId} isDisabled={isDisabled}>
+          <Text fontWeight={600} fontSize="13px">
+            {headerText}
+          </Text>
+        </ControlCaption>
         <ToggleButton
           isDisabled={isDisabled}
           isChecked={isChecked}
           onChange={onChange}
+          inputId={inputId}
           className="virtual-data-room-block_toggle"
           dataTestId={dataTestId ? `${dataTestId}_toggle` : undefined}
         />

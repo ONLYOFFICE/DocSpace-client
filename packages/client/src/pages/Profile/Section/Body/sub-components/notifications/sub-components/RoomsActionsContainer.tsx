@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useId } from "react";
+
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
@@ -44,6 +46,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type RoomsActionsContainerProps = {
   t: TFunction;
@@ -64,6 +67,7 @@ const RoomsActionsContainer = ({
   textProps,
   textDescriptionsProps,
 }: RoomsActionsContainerProps) => {
+  const inputId = useId();
   const onChangeBadgeSubscription = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -81,13 +85,16 @@ const RoomsActionsContainer = ({
   return (
     <div className={styles.notificationContainer}>
       <div className={styles.row}>
-        <Text {...textProps} className="subscription-title">
-          {t("FileActivityNotify")}
-        </Text>
+        <ControlCaption htmlFor={inputId}>
+          <Text {...textProps} className="subscription-title">
+            {t("FileActivityNotify")}
+          </Text>
+        </ControlCaption>
         <ToggleButton
           className="rooms-actions"
           onChange={onChangeBadgeSubscription}
           isChecked={badgesSubscription}
+          inputId={inputId}
           dataTestId="actions_rooms_toggle_button"
         />
       </div>

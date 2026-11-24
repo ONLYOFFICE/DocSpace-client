@@ -39,26 +39,22 @@ describe("getAccessOptions for an AI project", () => {
     return option && "access" in option ? option.access : undefined;
   };
 
-  it("offers Agent manager and Member, a member being its Content creator", () => {
-    expect(accessOf("projectManager")).toBe(ShareAccessRights.RoomManager);
+  it("offers Member alone, a member being its Content creator, and no Agent manager", () => {
+    expect(keysOf(RoomsType.AiProjectRoom)).toEqual(["projectMember"]);
     expect(accessOf("projectMember")).toBe(ShareAccessRights.Collaborator);
+    expect(accessOf("projectManager")).toBeUndefined();
   });
 
-  it("names the roles in agent terms", () => {
-    const option = (key: string) =>
-      getAccessOptions(t, RoomsType.AiProjectRoom).find(
-        (item) => "key" in item && item.key === key,
-      ) as { label?: string; tooltip?: string } | undefined;
-    expect(option("projectManager")?.label).toBe("Common:AgentManager");
-    expect(option("projectManager")?.tooltip).toBe(
-      "Common:UserAgentMaxAvailableRoleWarning",
-    );
-    expect(option("projectMember")?.label).toBe("Common:Member");
+  it("names the role in agent terms", () => {
+    const option = getAccessOptions(t, RoomsType.AiProjectRoom).find(
+      (item) => "key" in item && item.key === "projectMember",
+    ) as { label?: string } | undefined;
+    expect(option?.label).toBe("Common:Member");
   });
 
-  it("creates the invitation link as Project manager", () => {
+  it("invites as Member (Content creator)", () => {
     expect(getDefaultAccessUser(RoomsType.AiProjectRoom)).toBe(
-      ShareAccessRights.RoomManager,
+      ShareAccessRights.Collaborator,
     );
   });
 });

@@ -57,6 +57,7 @@ import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import TelegramStore from "SRC_DIR/store/TelegramStore";
+import type PluginStore from "SRC_DIR/store/PluginStore";
 import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import { isKeysManagementAvailable } from "SRC_DIR/helpers/privateRoomsSection";
 
@@ -97,6 +98,7 @@ type SectionBodyContentProps = {
   getEncryptionKeys?: UserStore["getEncryptionKeys"];
   showKeysManagement?: boolean;
   showPersonalPlugins?: boolean;
+  fetchPersonalPlugins?: PluginStore["fetchPersonalPlugins"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -126,6 +128,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getEncryptionKeys,
     showKeysManagement,
     showPersonalPlugins,
+    fetchPersonalPlugins,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -147,6 +150,10 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     checkEmailChangeParam();
     resetSelections?.();
   }, []);
+
+  useEffect(() => {
+    fetchPersonalPlugins?.();
+  }, [fetchPersonalPlugins]);
 
   const {
     tfaOn,
@@ -339,6 +346,11 @@ export default inject(
 
     const { getEncryptionKeys } = userStore;
 
+    const canHavePersonalPlugins =
+      settingsStore.enablePlugins &&
+      settingsStore.pluginOptions.personal &&
+      !userStore.user?.isVisitor;
+
     return {
       currentDeviceType: settingsStore.currentDeviceType,
       showProfileLoader,
@@ -369,11 +381,14 @@ export default inject(
         userStore.user?.isVisitor,
       ),
       showPersonalPlugins:
-        settingsStore.enablePlugins &&
-        settingsStore.pluginOptions.personal &&
-        !userStore.user?.isVisitor &&
+        canHavePersonalPlugins &&
         (settingsStore.pluginOptions.upload ||
+          !!pluginStore?.personalPlugins?.length ||
           !!pluginStore?.pluginList?.some((plugin) => plugin.personal)),
+      fetchPersonalPlugins:
+        canHavePersonalPlugins && !settingsStore.pluginOptions.upload
+          ? pluginStore?.fetchPersonalPlugins
+          : undefined,
     };
   },
 )(

@@ -10,6 +10,7 @@
   "NoPlugins": "No plugins added",
   "NotNeedSettings": "No need to enter settings",
   "PersonalPluginNotLoaded": "Not loaded on this page. Reload the page to use it.",
+  "PersonalPluginsAdminDescription": "Plugins you add here work only for you. Plugins for all workspace users are managed on the <1>Plugins</1> page of the settings.",
   "PersonalPluginsDescription": "Plugins you add here work only for you. Plugins for all workspace users are added by the administrator.",
   "PersonalPluginShadowed": "Not in use: {{pluginName}} {{version}} is installed for all workspace users by the administrator.",
   "PersonalPluginShadowedDisabled": "Not in use: {{pluginName}} is installed for all workspace users and turned off by the administrator.",

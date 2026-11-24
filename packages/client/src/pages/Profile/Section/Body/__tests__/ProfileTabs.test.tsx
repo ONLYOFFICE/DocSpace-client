@@ -113,6 +113,8 @@ type TKeysState = {
   arePersonalPluginsAllowed?: boolean;
   isUploadAllowed?: boolean;
   hasPersonalPlugin?: boolean;
+  ownPlugins?: { name: string }[];
+  fetchPersonalPlugins?: () => Promise<void>;
 };
 
 const renderProfileTabs = ({
@@ -122,6 +124,8 @@ const renderProfileTabs = ({
   arePersonalPluginsAllowed = false,
   isUploadAllowed = true,
   hasPersonalPlugin = false,
+  ownPlugins = [],
+  fetchPersonalPlugins = vi.fn(async () => {}),
 }: TKeysState = {}) =>
   render(
     <Provider
@@ -135,6 +139,8 @@ const renderProfileTabs = ({
       }}
       pluginStore={{
         pluginList: hasPersonalPlugin ? [{ name: "own", personal: true }] : [],
+        personalPlugins: ownPlugins,
+        fetchPersonalPlugins,
       }}
       peopleStore={{
         targetUserStore: {
@@ -274,6 +280,36 @@ describe("Personal plugins tab", () => {
     });
 
     expect(screen.getByTestId("tab-plugins")).toBeInTheDocument();
+  });
+
+  it("is offered while uploads are off when the member's own plugin is shadowed and not loaded", () => {
+    renderProfileTabs({
+      arePersonalPluginsAllowed: true,
+      isUploadAllowed: false,
+      ownPlugins: [{ name: "own" }],
+    });
+
+    expect(screen.getByTestId("tab-plugins")).toBeInTheDocument();
+  });
+
+  it("reads the member's own plugins while uploads are off", () => {
+    const fetchPersonalPlugins = vi.fn(async () => {});
+
+    renderProfileTabs({
+      arePersonalPluginsAllowed: true,
+      isUploadAllowed: false,
+      fetchPersonalPlugins,
+    });
+
+    expect(fetchPersonalPlugins).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not read the member's own plugins while uploads are on", () => {
+    const fetchPersonalPlugins = vi.fn(async () => {});
+
+    renderProfileTabs({ arePersonalPluginsAllowed: true, fetchPersonalPlugins });
+
+    expect(fetchPersonalPlugins).not.toHaveBeenCalled();
   });
 
   it("is not offered while personal plugins are not allowed", () => {

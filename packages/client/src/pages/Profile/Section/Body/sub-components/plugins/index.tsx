@@ -33,11 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
+import { useNavigate } from "react-router";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 
@@ -55,8 +58,16 @@ import pluginStyles from "SRC_DIR/pages/PortalSettings/categories/integration/Pl
 
 import styles from "./plugins.module.scss";
 
+const PORTAL_PLUGINS_ROUTE = "/portal-settings/integration/plugins";
+
 const PersonalPlugins = () => {
   const { t } = useTranslation(["WebPlugins", "Common"]);
+  const navigate = useNavigate();
+
+  const { user } = useStore("userStore");
+  const canManagePortalPlugins = !!(user?.isAdmin || user?.isOwner);
+
+  const pluginStore = useStore("pluginStore");
 
   const {
     personalPlugins,
@@ -70,16 +81,46 @@ const PersonalPlugins = () => {
     setDeletePluginDialogProps,
     checkPluginCompatibility,
     isLoaded,
-    needPageReload,
-  } = useStore("pluginStore");
+  } = pluginStore;
 
   const { pluginOptions, theme, culture } = useStore("settingsStore");
 
   const language = (getCookie(LANGUAGE) || culture) as string;
 
+  const [isPersonalLoaded, setIsPersonalLoaded] = useState(false);
+
+  const reloadOnLeave = useRef(false);
+  const isMounted = useRef(true);
+
+  const armReload = useCallback(() => {
+    if (isMounted.current) reloadOnLeave.current = true;
+    else window.location.reload();
+  }, []);
+
   const addPersonalPlugin = useCallback(
-    (data: FormData) => addPlugin(data, true),
-    [addPlugin],
+    async (data: FormData) => {
+      const result = await addPlugin(data, true);
+
+      if (result) armReload();
+
+      return result;
+    },
+    [addPlugin, armReload],
+  );
+
+  const switchPlugin = useCallback(
+    async (name: string, status: boolean, settings?: string, t?: TFunction) => {
+      const result = await updatePlugin(name, status, settings, t);
+
+      const switchedOn = pluginStore.pluginList.some(
+        (p) => p.personal && p.name === name && p.enabled,
+      );
+
+      if (status && switchedOn) armReload();
+
+      return result;
+    },
+    [pluginStore, updatePlugin, armReload],
   );
 
   const { onDrop, showCacheWarning, handleCloseCacheWarning } = usePluginUpload(
@@ -87,14 +128,18 @@ const PersonalPlugins = () => {
   );
 
   useEffect(() => {
-    fetchPersonalPlugins();
+    fetchPersonalPlugins().then(() => setIsPersonalLoaded(true));
   }, [fetchPersonalPlugins]);
 
   useEffect(() => {
-    if (!needPageReload) return;
+    isMounted.current = true;
 
-    return () => window.location.reload();
-  }, [needPageReload]);
+    return () => {
+      isMounted.current = false;
+
+      if (reloadOnLeave.current) window.location.reload();
+    };
+  }, []);
 
   const openSettingsDialog = (pluginName: string) => {
     setSettingsPluginDialogVisible(true);
@@ -108,10 +153,37 @@ const PersonalPlugins = () => {
 
   const rows = getPersonalPluginRows(personalPlugins, pluginList);
 
+  if (!isLoaded || !isPersonalLoaded) {
+    return (
+      <div className={styles.wrapper}>
+        <ListLoader withUpload={!!pluginOptions.upload} />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
       <Text className={styles.description} lineHeight="20px">
-        {t("WebPlugins:PersonalPluginsDescription")}
+        {canManagePortalPlugins ? (
+          <Trans
+            ns="WebPlugins"
+            t={t}
+            i18nKey="PersonalPluginsAdminDescription"
+            components={{
+              1: (
+                <Link
+                  type={LinkType.page}
+                  color="accent"
+                  isHovered
+                  onClick={() => navigate(PORTAL_PLUGINS_ROUTE)}
+                  dataTestId="portal_plugins_link"
+                />
+              ),
+            }}
+          />
+        ) : (
+          t("WebPlugins:PersonalPluginsDescription")
+        )}
       </Text>
 
       {pluginOptions.upload ? (
@@ -129,48 +201,45 @@ const PersonalPlugins = () => {
         </>
       ) : null}
 
-      {isLoaded ? (
-        <div className={pluginStyles.pluginListContainer}>
-          {rows.map(({ own, loaded, shadowedBy }) =>
-            loaded ? (
-              <PluginItem
-                key={`plugin-${loaded.name}-${loaded.version}`}
-                {...loaded}
-                updatePlugin={updatePlugin}
-                openSettingsDialog={openSettingsDialog}
-                theme={theme}
-                dataTestId={`personal_plugin_${loaded.name}`}
-              />
-            ) : (
-              <PluginItem
-                key={`plugin-${own.name}-${own.version}`}
-                name={own.name}
-                nameLocale={getLocalizedText(
-                  own.nameLocale,
-                  language,
-                  own.name,
-                )}
-                version={own.version}
-                compatible={checkPluginCompatibility(own.minDocSpaceVersion)}
-                descriptionLocale={getLocalizedText(
-                  own.descriptionLocale,
-                  language,
-                  own.description,
-                )}
-                enabled={own.enabled}
-                image={own.image}
-                url={own.url}
-                theme={theme}
-                shadowedBy={shadowedBy}
-                onDelete={() => openDeleteDialog(own.name)}
-                dataTestId={`personal_plugin_${own.name}`}
-              />
-            ),
-          )}
-        </div>
-      ) : (
-        <ListLoader withUpload={false} />
-      )}
+      <div className={pluginStyles.pluginListContainer}>
+        {rows.map(({ own, loaded, shadowedBy }) =>
+          loaded ? (
+            <PluginItem
+              key={`plugin-${loaded.name}-${loaded.version}`}
+              {...loaded}
+              updatePlugin={switchPlugin}
+              openSettingsDialog={openSettingsDialog}
+              theme={theme}
+              dataTestId={`personal_plugin_${loaded.name}`}
+            />
+          ) : (
+            <PluginItem
+              key={`plugin-${own.name}-${own.version}`}
+              name={own.name}
+              nameLocale={getLocalizedText(
+                own.nameLocale,
+                language,
+                own.name,
+              )}
+              version={own.version}
+              compatible={checkPluginCompatibility(own.minDocSpaceVersion)}
+              descriptionLocale={getLocalizedText(
+                own.descriptionLocale,
+                language,
+                own.description,
+              )}
+              enabled={own.enabled}
+              image={own.image}
+              url={own.url}
+              theme={theme}
+              shadowedBy={shadowedBy}
+              isNotLoaded={!shadowedBy}
+              onDelete={() => openDeleteDialog(own.name)}
+              dataTestId={`personal_plugin_${own.name}`}
+            />
+          ),
+        )}
+      </div>
     </div>
   );
 };

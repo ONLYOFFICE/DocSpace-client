@@ -221,7 +221,9 @@ const IpSecurity = (props) => {
   const onSaveClick = async () => {
     setIsSaving(true);
 
-    const errors = validateAllIps(ips);
+    const ipsToSave = enable ? ips : [];
+
+    const errors = validateAllIps(ipsToSave);
     setErrorMessages(errors);
 
     if (errors.some((e) => e !== null)) {
@@ -229,20 +231,22 @@ const IpSecurity = (props) => {
       return;
     }
 
-    const ipsObjectArr = ips.map((ip) => {
+    const ipsObjectArr = ipsToSave.map((ip) => {
       return { ip };
     });
 
     try {
       await setIpRestrictions(ipsObjectArr, enable);
 
+      setIps(ipsToSave);
+
       saveToSessionStorage("currentIPSettings", {
         enable,
-        ips,
+        ips: ipsToSave,
       });
       saveToSessionStorage("defaultIPSettings", {
         enable,
-        ips,
+        ips: ipsToSave,
       });
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -353,7 +357,7 @@ const IpSecurity = (props) => {
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
-        saveButtonDisabled={errorMessages.some((e) => e !== null)}
+        saveButtonDisabled={enable && errorMessages.some((e) => e !== null)}
         additionalClassSaveButton="ip-security-save"
         additionalClassCancelButton="ip-security-cancel"
         saveButtonDataTestId="ip_security_save_button"

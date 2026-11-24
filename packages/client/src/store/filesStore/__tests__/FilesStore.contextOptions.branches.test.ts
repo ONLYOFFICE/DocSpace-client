@@ -486,6 +486,21 @@ describe("getFilesContextOptions — an agent's owner", () => {
     );
   });
 
+  it("is offered no Edit agent, while the owner of an ordinary room keeps Edit room", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      ...agent("user-1"),
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+    } as unknown as TItem;
+
+    const opts = store.getFilesContextOptions(agent("user-1"));
+    expect(opts).not.toContain("edit-room");
+    expect(opts).toContain("invite-users-to-room");
+    expect(store.getFilesContextOptions(room)).toContain("edit-room");
+  });
+
   it("keeps Leave the room for the owner of an ordinary room", () => {
     const store = createTestFilesStore();
     store.dialogsStore = { roomGroups: [] } as never;

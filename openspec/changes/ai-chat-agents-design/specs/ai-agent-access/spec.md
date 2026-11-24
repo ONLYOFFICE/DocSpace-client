@@ -57,14 +57,14 @@ The Agent owner SHALL be offered: the chat, Agent info, Edit agent, Share agent,
 
 #### Scenario: Owner on the agent's page
 - **WHEN** the Agent owner opens the agent's page
-- **THEN** the header has "Share agent", and the actions menu has Edit agent, change owner and Delete agent (`Common:DeleteAgent`), and no leave
+- **THEN** the header has "Share agent", and the actions menu has change owner and Delete agent (`Common:DeleteAgent`), and neither Edit agent nor leave
 
 ### Requirement: What an Agent manager is offered
 An Agent manager SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, pin, notifications and leave. An Agent manager SHALL NOT be offered Delete agent or change owner.
 
 #### Scenario: Manager on the agent's page
 - **WHEN** an Agent manager opens the actions menu of the agent
-- **THEN** it has Edit agent, Share agent and leave, and neither Delete agent nor change owner
+- **THEN** it has Share agent and leave, and neither Edit agent, Delete agent nor change owner
 
 ### Requirement: What a Member is offered
 A Member SHALL be offered: the chat, Agent info (`Common:AgentInfo`), the agent's skill sets and knowledge bases to read, their own data sources to add and remove, pin, notifications and leave. A Member SHALL NOT be offered Edit agent, Share agent, Delete agent, change owner, role changes, removals, or any "Manage ..." row of the agent's skill sets and knowledge bases.

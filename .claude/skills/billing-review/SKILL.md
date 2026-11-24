@@ -72,7 +72,8 @@ exercise; anything the spec catches, leave to the spec.
 
 ## Trigger paths
 
-Run this skill whenever a diff touches any of the paths below.
+Nothing runs this skill automatically — `review-branch` does not call
+it. Invoke it by hand when a diff touches any of the paths below.
 
 Client repository:
 

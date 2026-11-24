@@ -496,7 +496,7 @@ this section says otherwise.
 
   ```bash
   node .claude/skills/onboard/collect-changes.mjs \
-    [--base master] [--locales <en-json,...>] [--key-filter <regex>] \
+    [--base origin/master] [--locales <en-json,...>] [--key-filter <regex>] \
     [--uikit <path,...>] [--uikit-src <path>] <client pathspec>...
   ```
 

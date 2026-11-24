@@ -73,7 +73,7 @@ function parse(html) {
       re.lastIndex = end < 0 ? html.length : html.indexOf(">", end) + 1;
       continue;
     }
-    const cls = (attrs.match(/class\s*=\s*"([^"]*)"/) || [, ""])[1].split(/\s+/).filter(Boolean);
+    const cls = (attrs.match(/class\s*=\s*"([^"]*)"/)?.[1] ?? "").split(/\s+/).filter(Boolean);
     const node = { tag, cls, attrs, children: [] };
     top.children.push(node);
     if (!VOID.has(tag) && !attrs.endsWith("/")) stack.push(node);
@@ -105,9 +105,9 @@ function blocksOf(root) {
     }
     node.parentTag = parentTag;
     if (has(node, ["toc"])) return;
-    if (node.tag === "section") section = (node.attrs.match(/id\s*=\s*"([^"]*)"/) || [, ""])[1];
+    if (node.tag === "section") section = (node.attrs.match(/id\s*=\s*"([^"]*)"/)?.[1] ?? "");
     if (node.tag === "img") {
-      const alt = (node.attrs.match(/alt\s*=\s*"([^"]*)"/) || [, ""])[1];
+      const alt = (node.attrs.match(/alt\s*=\s*"([^"]*)"/)?.[1] ?? "");
       if (alt) open("alt", "img").parts.push(decode(alt));
       return;
     }

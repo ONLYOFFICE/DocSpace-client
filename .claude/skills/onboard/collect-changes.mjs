@@ -2,7 +2,7 @@
 /**
  * Collect the raw material for an onboarding "what changed" page: everything
  * that happened to a feature area between the last release (merge-base with
- * a base ref, default master) and the current working tree.
+ * a base ref, default origin/master) and the current working tree.
  *
  * Deliberately dumb: gathers and prints, never judges. Deciding which changes
  * are substantial is the caller's job.
@@ -13,7 +13,7 @@
  * Positional pathspecs scope the client-repo commit log and working-tree scan.
  *
  * Flags:
- *   --base <ref>          base ref to diff against (default: master)
+ *   --base <ref>          base ref to diff against (default: origin/master)
  *   --locales <path,...>  en locale JSON files to key-diff (repeatable)
  *   --key-filter <regex>  only report locale keys whose path or value matches
  *                         (case-insensitive); useful for huge namespaces
@@ -54,7 +54,7 @@ const paths = [];
 const localeFiles = [];
 const uikitPaths = [];
 const deepPaths = [];
-let base = "master";
+let base = "origin/master";
 let keyFilter = null;
 let uikitSrc;
 const shots = [];

@@ -189,11 +189,6 @@ nothing changed. Nx prints only the output of failed tasks. To debug a blocked
 push, run the failing task on its own; `pnpm nx reset` drops the cache if a
 result looks stale. Never bypass the gate with `git push --no-verify`.
 
-The Vitest configs are `vitest.config.mts` (and the client's
-`config/plugins/jsx-in-js.mts` they import), so Vite loads them as ES modules
-without its `configLoader: 'native'` compatibility warning; use
-`import.meta.dirname` there, not `__dirname`.
-
 CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
 is **manual-dispatch only** — there is no automatic PR/push CI, so the
 pre-push gate is the only automatic check. CI additionally covers what

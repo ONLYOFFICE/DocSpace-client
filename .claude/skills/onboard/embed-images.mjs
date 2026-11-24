@@ -14,7 +14,7 @@
  * over the cap, or a total page size over 4MB.
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const IMAGE_CAP = 50 * 1024; // bytes of PNG; ~66K base64 chars
 const PAGE_CAP = 4 * 1024 * 1024;
@@ -29,13 +29,18 @@ const map = Object.fromEntries(pairs.map((p) => p.split(/=(.+)/).slice(0, 2)));
 const used = new Set();
 const problems = [];
 
-let html = readFileSync(src, "utf8");
+// comments go: the template's own instructions carry a literal marker
+let html = readFileSync(src, "utf8").replace(/<!--[\s\S]*?-->/g, "");
 html = html.replace(/@@IMG:([a-z0-9-]+)@@/g, (m, key) => {
   if (!map[key]) {
     problems.push(`marker @@IMG:${key}@@ has no key=path mapping`);
     return m;
   }
   used.add(key);
+  if (!existsSync(map[key])) {
+    problems.push(`${map[key]} does not exist (key "${key}")`);
+    return m;
+  }
   const buf = readFileSync(map[key]);
   if (buf.length > IMAGE_CAP) {
     problems.push(

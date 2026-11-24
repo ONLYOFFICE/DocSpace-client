@@ -206,7 +206,9 @@ const EditRoomGroupsDialog = ({
     setIsSaving(true);
     try {
       if (setOrganizeRoomsGrouping) {
-        await setOrganizeRoomsGrouping(localGroupingEnabled, isFormsSection);
+        await setOrganizeRoomsGrouping(localGroupingEnabled, isFormsSection, {
+          withReEnableHint: true,
+        });
       }
 
       setHasGroupingChanged(false);

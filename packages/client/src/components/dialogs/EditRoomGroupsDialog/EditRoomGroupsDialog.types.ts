@@ -111,6 +111,7 @@ export interface EditRoomGroupsDialogProps {
   setOrganizeRoomsGrouping?: (
     enabled: boolean,
     isSpaces?: boolean,
+    options?: { withReEnableHint?: boolean },
   ) => Promise<boolean>;
   /** Section the groups belong to: the Rooms section or the Forms section */
   searchArea: RoomSearchArea;

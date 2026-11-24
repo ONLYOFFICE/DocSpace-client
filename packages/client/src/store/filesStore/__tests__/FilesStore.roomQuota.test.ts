@@ -168,6 +168,38 @@ describe.each(["setCustomRoomQuota", "resetRoomQuota"] as const)(
       },
     );
 
+    it("reloads the section default when the query is cleared during a quota update", async () => {
+      const { store, fetchRooms, updateQuota } = setup();
+      const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.Forms);
+      filter.filterValue = "invoice";
+      store.setRoomsFilter(filter);
+
+      const request = Promise.withResolvers<unknown>();
+      vi.mocked(api.rooms[action]).mockReturnValueOnce(request.promise);
+      const { href } = window.location;
+      const { state } = window.history;
+      try {
+        window.history.replaceState(
+          state,
+          "",
+          `/forms/filter?${filter.toUrlParams()}`,
+        );
+        const pending = updateQuota();
+        window.history.replaceState(state, "", "/forms/filter");
+
+        request.resolve([{ id: 1 }]);
+        await pending;
+
+        expect(fetchRooms).toHaveBeenCalledTimes(1);
+        expect(fetchRooms.mock.calls[0][1]).toMatchObject({
+          searchArea: RoomSearchArea.Forms,
+          filterValue: null,
+        });
+      } finally {
+        window.history.replaceState(state, "", href);
+      }
+    });
+
     it("uses the URL filter after returning to the original address during a quota update", async () => {
       const { store, fetchRooms, updateQuota } = setup();
       const originalFilter = RoomsFilter.getDefault(

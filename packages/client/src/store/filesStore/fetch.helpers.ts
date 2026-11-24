@@ -966,12 +966,17 @@ export async function refreshRoomsAfterQuotaChangeImpl(
     return;
 
   // The stored filter can lag behind the URL, including after going back.
+  // A bare address (no query) means the section's default list; the
+  // pathname matched, so the stored filter still names the section.
   const urlFilter = RoomsFilter.getFilter(location);
   const activeFilter =
-    location.search === previousLocation.search
-      ? (urlFilter ?? self.roomsFilter.clone())
-      : urlFilter;
-  if (!activeFilter) return;
+    urlFilter ??
+    (location.search === previousLocation.search
+      ? self.roomsFilter.clone()
+      : RoomsFilter.getDefault(
+          self.userStore.user?.id,
+          self.roomsFilter.searchArea,
+        ));
 
   try {
     await self.fetchRooms(null, activeFilter, false, false, false);

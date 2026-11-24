@@ -50,6 +50,7 @@ import type { FilesSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Files
 
 import {
   getAcceptButtonLabel,
+  isRoomDisabledForBackup,
   // getHeaderLabel,
   getIsDisabled,
 } from "./FilesSelector.helpers";
@@ -236,6 +237,7 @@ const FilesSelectorInput = ({
       currentFooterInputValue=""
       getFilesArchiveError={() => ""}
       rootFolderType={FolderType.Rooms}
+      isRoomDisabled={isRoomBackup ? isRoomDisabledForBackup : undefined}
       currentDeviceType={currentDeviceType ?? DeviceType.desktop}
       {...filesSelectorSettings}
       withFavoritesTreeFolder={isFilesSelection}

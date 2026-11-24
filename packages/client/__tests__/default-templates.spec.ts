@@ -192,6 +192,45 @@ test.describe("Default templates", () => {
     await expect(badge).toHaveText("Default");
   });
 
+  // Bug 79954: the title of a customized template opens the same preview as
+  // the context menu item; the default template has no file, so its title
+  // stays plain text. The client E2E server has no doceditor app, so the
+  // open is asserted on the URL handed to window.open.
+  test("should open the customized template preview by its title", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(defaultTemplatesHandler(TEST_PORT, "customized"));
+    await page.addInitScript(() => {
+      const opened: string[] = [];
+      (window as unknown as { __opened: string[] }).__opened = opened;
+      window.open = (url?: string | URL) => {
+        opened.push(String(url));
+        return null;
+      };
+    });
+    await page.goto(
+      `${baseUrl}/portal-settings/customization/default-templates`,
+    );
+
+    await expect(page.getByTestId("default-templates")).toBeVisible();
+
+    await expect(
+      page.getByTestId("default-template-preview-link-1"),
+    ).toHaveCount(0);
+
+    await page.getByTestId("default-template-preview-link-0").click();
+
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () => (window as unknown as { __opened: string[] }).__opened,
+        ),
+      )
+      .toEqual([expect.stringContaining("/doceditor?fileId=13&action=view")]);
+  });
+
   // Ukrainian has the longest wording of both badge labels across the
   // supported languages ("За замовчуванням", "Індивідуалізований"); the
   // badge used to cap them at 50px and slice the text at both ends.

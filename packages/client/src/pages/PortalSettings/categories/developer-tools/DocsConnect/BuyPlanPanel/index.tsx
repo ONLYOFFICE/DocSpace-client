@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -87,6 +87,7 @@ import { DOCS_CONNECT_LINKS } from "../constants";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
 
 import styles from "./BuyPlanPanel.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const MIN_USERS = 1;
 const DEFAULT_USERS = 50;
@@ -157,6 +158,7 @@ const BuyPlanPanel = ({
   closeBuyPlan,
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+  const devPackToggleId = useId();
   const { paymentApi } = useApi();
   const { fetchTransactionHistory } = usePaymentStore();
 
@@ -858,17 +860,19 @@ const BuyPlanPanel = ({
             <div className={styles.devPackCard}>
               <div className={styles.devPackHeader}>
                 <div>
-                  <Text fontSize="13px" fontWeight={600}>
-                    {t("DocsConnect:DevPack")}{" "}
-                    <Text
-                      as="span"
-                      fontSize="13px"
-                      fontWeight={400}
-                      className={styles.secondaryText}
-                    >
-                      {t("DocsConnect:OptionalAddOn")}
+                  <ControlCaption htmlFor={devPackToggleId} isDisabled={submitting}>
+                    <Text fontSize="13px" fontWeight={600}>
+                      {t("DocsConnect:DevPack")}{" "}
+                      <Text
+                        as="span"
+                        fontSize="13px"
+                        fontWeight={400}
+                        className={styles.secondaryText}
+                      >
+                        {t("DocsConnect:OptionalAddOn")}
+                      </Text>
                     </Text>
-                  </Text>
+                  </ControlCaption>
                   <Text fontSize="13px">
                     {t("DocsConnect:PlusPerUserPerMonth", {
                       price: formatCurrency(devPackPrice),
@@ -889,6 +893,7 @@ const BuyPlanPanel = ({
                   isChecked={devPack}
                   onChange={onToggleDevPack}
                   isDisabled={submitting}
+                  inputId={devPackToggleId}
                   dataTestId="docs_connect_devpack_toggle"
                 />
               </div>

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useId } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -41,9 +41,11 @@ import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import PaidBadge from "SRC_DIR/components/PaidBadge";
 import classnames from "classnames";
 import styles from "./ToggleSSO.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
   const { t } = useTranslation("SingleSignOn");
+  const inputId = useId();
 
   const onChangeToggle = React.useCallback(() => {
     ssoToggle(t);
@@ -56,19 +58,22 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
         isChecked={enableSso}
         onChange={onChangeToggle}
         isDisabled={!isSSOAvailable}
+        inputId={inputId}
         dataTestId="enable_sso_toggle_button"
       />
 
       <div className="toggle-caption">
         <div className="toggle-caption_title">
-          <Text
-            fontWeight={600}
-            lineHeight="20px"
-            noSelect
-            className="settings_unavailable"
-          >
-            {t("TurnOnSSO")}
-          </Text>
+          <ControlCaption htmlFor={inputId} isDisabled={!isSSOAvailable}>
+            <Text
+              fontWeight={600}
+              lineHeight="20px"
+              noSelect
+              className="settings_unavailable"
+            >
+              {t("TurnOnSSO")}
+            </Text>
+          </ControlCaption>
           {!isSSOAvailable ? (
             <PaidBadge
               fontWeight="700"

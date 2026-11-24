@@ -35,7 +35,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { getQuickActionsSection } from "../quickActions";
+import { getQuickActionsSection, isEmptyRoomGroup } from "../quickActions";
 
 describe("getQuickActionsSection — Private section", () => {
   it("Banner on a non-empty Private list: the Private list root has none", () => {
@@ -85,5 +85,44 @@ describe("getQuickActionsSection — Private section", () => {
         isPrivateRoomsSection: false,
       }),
     ).toBeNull();
+  });
+});
+
+describe("isEmptyRoomGroup", () => {
+  it("is an emptied room group in Rooms and in Forms", () => {
+    expect(
+      isEmptyRoomGroup({
+        isEmptyPage: true,
+        roomsFilterGroupId: 7,
+        isRoomsFolder: true,
+      }),
+    ).toBe(true);
+    expect(
+      isEmptyRoomGroup({
+        isEmptyPage: true,
+        roomsFilterGroupId: "7",
+        isFormsSection: true,
+      }),
+    ).toBe(true);
+  });
+
+  it("is not a group with rooms, an empty list without a group, or a group outside Rooms and Forms", () => {
+    expect(
+      isEmptyRoomGroup({
+        isEmptyPage: false,
+        roomsFilterGroupId: 7,
+        isRoomsFolder: true,
+      }),
+    ).toBe(false);
+    expect(
+      isEmptyRoomGroup({
+        isEmptyPage: true,
+        roomsFilterGroupId: null,
+        isRoomsFolder: true,
+      }),
+    ).toBe(false);
+    expect(
+      isEmptyRoomGroup({ isEmptyPage: true, roomsFilterGroupId: 7 }),
+    ).toBe(false);
   });
 });

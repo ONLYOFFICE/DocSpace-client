@@ -148,6 +148,19 @@ export const getQuickActionsSection = (
 // header button is hidden across ALL of these (including archive / trash /
 // templates / favorites / recent), per product decision — the quick-actions
 // tiles replace creation there.
+export const isEmptyRoomGroup = ({
+  isEmptyPage,
+  roomsFilterGroupId,
+  isRoomsFolder,
+  isFormsSection,
+}: {
+  isEmptyPage?: boolean;
+  roomsFilterGroupId?: number | string | null;
+  isRoomsFolder?: boolean;
+  isFormsSection?: boolean;
+}): boolean =>
+  !!isEmptyPage && !!roomsFilterGroupId && !!(isRoomsFolder || isFormsSection);
+
 export const isFilesRoomsArea = (flags: SectionFlags): boolean => {
   const { isContactsPage, isProfile, isSettingsPage } = flags;
 

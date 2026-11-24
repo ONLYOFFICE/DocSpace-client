@@ -77,6 +77,7 @@ import {
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
+import { isEmptyRoomGroup } from "SRC_DIR/helpers/quickActions";
 import {
   isPrivateRoomsListRoot,
   isPrivateRoomsSectionRoot,
@@ -506,10 +507,15 @@ const SectionHeaderContent = (props) => {
     return onCreateRoom();
   }, [isContactsGroupsPage, onCreateRoom]);
 
-  const isEmptyRoomGroup =
-    isEmptyPage && !!roomsFilterGroupId && (isRoomsFolder || isFormsSection);
   const isPlusButtonVisible =
-    (isEmptyPage && !isContactsPage && !isEmptyRoomGroup) ||
+    (isEmptyPage &&
+      !isContactsPage &&
+      !isEmptyRoomGroup({
+        isEmptyPage,
+        roomsFilterGroupId,
+        isRoomsFolder,
+        isFormsSection,
+      })) ||
     (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {

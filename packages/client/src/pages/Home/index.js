@@ -69,6 +69,7 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import SectionTours from "SRC_DIR/components/Tour/SectionTours";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { isEmptyRoomGroup } from "SRC_DIR/helpers/quickActions";
 import { isPluginSectionPath } from "SRC_DIR/helpers/plugins/navigation";
 
 import {
@@ -411,12 +412,16 @@ const PureHome = observer((props) => {
     isProfile,
     isSettingsPage,
   });
-  const isEmptyRoomGroup =
-    isEmptyPage && !!roomsFilterGroupId && (isRoomsFolder || isFormsSection);
   const showQuickActions =
     quickActionsEnabled &&
     quickActions.show &&
-    (!isEmptyPage || isEmptyRoomGroup);
+    (!isEmptyPage ||
+      isEmptyRoomGroup({
+        isEmptyPage,
+        roomsFilterGroupId,
+        isRoomsFolder,
+        isFormsSection,
+      }));
 
   const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 

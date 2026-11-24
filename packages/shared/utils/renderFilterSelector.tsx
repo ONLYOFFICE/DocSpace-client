@@ -35,7 +35,7 @@
 
 import React from "react";
 
-import { FilterSelectorTypes } from "../enums";
+import { EmployeeType, FilterSelectorTypes } from "../enums";
 import type { SelectorRenderProps } from "@onlyoffice/apps-ui-kit/components/filter/Filter.types";
 
 import GroupsSelector from "@onlyoffice/apps-ui-kit/selectors/Groups";
@@ -69,7 +69,9 @@ const renderFilterSelector = ({
           withoutBorder: !!isRooms,
         }}
         currentUserId={userId}
-        withGuests={!!isRooms}
+        {...(isRooms
+          ? { filter: { role: [EmployeeType.Admin, EmployeeType.RoomAdmin] } }
+          : {})}
       />
     );
   }

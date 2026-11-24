@@ -7,4 +7,4 @@
 
 ## 2. Integration
 
-- [ ] 2.1 Run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; check on the local stand, in the room "Review check room", that the retry on the pending member shows the text with 4 files
+- [x] 2.1 Run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; check on the local stand, in the room "Review check room", that the retry on the pending member shows the text with 4 files

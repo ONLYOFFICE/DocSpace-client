@@ -107,10 +107,10 @@
     -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
     width: calc(100% + 40px);
-    height: 68px;
+    height: 60px;
 
     @include mixins.tablet-and-below {
-      height: 61px;
+      height: 53px;
       margin-block: 0;
       margin-inline: -16px 0;
       width: calc(100% + 32px);

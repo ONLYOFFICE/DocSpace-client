@@ -60,7 +60,6 @@ describe("AutoLockSetting", () => {
         "Common:AutoLock15m",
         "Common:AutoLock30m",
         "Common:AutoLockLabel",
-        "Common:AutoLockHint",
       ]),
     );
   });

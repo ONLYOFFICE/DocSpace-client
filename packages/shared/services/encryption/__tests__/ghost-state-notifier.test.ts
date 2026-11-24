@@ -40,6 +40,7 @@ import {
   DecryptionError,
   KeyCheckUnavailableError,
   NoAccessError,
+  KeyReplacedError,
 } from "../errors";
 import {
   clearGhostStateHandler,
@@ -98,6 +99,16 @@ describe("Unreadable file", () => {
     reportPotentialGhostState(error());
     reportPotentialGhostState(new NoAccessError());
 
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("File wrapped for a previous key", () => {
+    registerGhostStateHandler(handler);
+
+    reportPotentialGhostState(new KeyReplacedError());
+    expect(handler).not.toHaveBeenCalled();
+
+    reportPotentialGhostState(new NoAccessError());
     expect(handler).toHaveBeenCalledTimes(1);
   });
 

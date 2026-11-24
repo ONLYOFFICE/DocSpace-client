@@ -56,7 +56,6 @@ import {
 } from "../../services/encryption/secret-storage";
 import {
   getAutoLockTimeoutSeconds,
-  locksWhenTabHidden,
   setAutoLockScope,
   subscribeAutoLockChange,
 } from "../../services/encryption/auto-lock-preference";
@@ -322,8 +321,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [userKeys, t],
   );
 
-  // An explicit lock reaches the user's other pages; idle, hidden-tab and
-  // expiry locks stay with their page.
+  // An explicit lock reaches the user's other pages; idle and expiry locks
+  // stay with their page.
   // Spec: private-rooms/key-management, "A lock reaches every tab of the user"
   const lock = useCallback(() => {
     SecretStorage.lock();
@@ -355,6 +354,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setIsUnlocked(false);
     if (userKeys?.userId) {
       broadcastLock(userKeys.userId, { keysChanged: true });
+      // Spec: private-rooms/key-management, "Change passphrase"
+      void forgetDeviceUnlock(userKeys.userId);
     }
   }, [userKeys?.userId]);
 
@@ -416,23 +417,6 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       unregisterAutoLockSuspender();
     };
   }, [suspendAutoLock]);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return undefined;
-    if (autoLockSuspendCount > 0) return undefined;
-    const handler = () => {
-      if (!locksWhenTabHidden()) return;
-      if (document.visibilityState === "hidden") {
-        SecretStorage.lock();
-        clearEncryptedFilenameCache();
-        setIsUnlocked(false);
-      }
-    };
-    document.addEventListener("visibilitychange", handler);
-    return () => {
-      document.removeEventListener("visibilitychange", handler);
-    };
-  }, [autoLockSuspendCount]);
 
   const [autoLockRevision, setAutoLockRevision] = useState(0);
 

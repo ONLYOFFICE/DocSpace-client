@@ -39,7 +39,7 @@ import classNames from "classnames";
 
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 
-import { DeviceType, FolderType, RoomsType } from "../../enums";
+import { DeviceType, FolderType } from "../../enums";
 import FilesSelector from "@onlyoffice/apps-ui-kit/selectors/Files";
 import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { FileInput } from "@onlyoffice/apps-ui-kit/components/file-input";
@@ -50,6 +50,7 @@ import type { FilesSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Files
 
 import {
   getAcceptButtonLabel,
+  isRoomDisabledForBackup,
   // getHeaderLabel,
   getIsDisabled,
 } from "./FilesSelector.helpers";
@@ -146,12 +147,6 @@ const FilesSelectorInput = ({
     isSelectFolder,
   );
 
-  const isFormRoomType = (roomType?: number) =>
-    roomType === RoomsType.FormRoom;
-
-  const isBackupRoomDisabled: FilesSelectorProps["isRoomDisabled"] = (room) =>
-    isFormRoomType(room.roomType) || room.security?.Create === false;
-
   const getIsDisabledAction: FilesSelectorProps["getIsDisabled"] = (
     isFirstLoad,
     isSelectedParentFolder,
@@ -228,7 +223,6 @@ const FilesSelectorInput = ({
       onSubmit={onSubmit}
       onSetBaseFolderPath={onSetBasePath}
       getIsDisabled={getIsDisabledAction}
-      isRoomDisabled={isRoomBackup ? isBackupRoomDisabled : undefined}
       withCreate={withCreate}
       formProps={formProps}
       disabledCreatePublicRoom={disabledCreatePublicRoom}
@@ -243,6 +237,7 @@ const FilesSelectorInput = ({
       currentFooterInputValue=""
       getFilesArchiveError={() => ""}
       rootFolderType={FolderType.Rooms}
+      isRoomDisabled={isRoomBackup ? isRoomDisabledForBackup : undefined}
       currentDeviceType={currentDeviceType ?? DeviceType.desktop}
       {...filesSelectorSettings}
       withFavoritesTreeFolder={isFilesSelection}

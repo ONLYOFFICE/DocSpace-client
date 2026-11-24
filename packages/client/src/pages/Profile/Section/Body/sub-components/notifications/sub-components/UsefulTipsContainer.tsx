@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useId } from "react";
+
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
@@ -44,6 +46,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type UsefulTipsContainerProps = {
   t: TFunction;
@@ -60,6 +63,7 @@ const UsefulTipsContainer = ({
   textProps,
   textDescriptionsProps,
 }: UsefulTipsContainerProps) => {
+  const inputId = useId();
   const onChangeEmailSubscription = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -74,14 +78,17 @@ const UsefulTipsContainer = ({
   return (
     <div className={styles.notificationContainer}>
       <div className={styles.row}>
-        <Text {...textProps} className="subscription-title">
-          {t("UsefulTips", { organizationName: getBrandName("OrganizationName"),
-            productName: getBrandName("ProductName") })}
-        </Text>
+        <ControlCaption htmlFor={inputId}>
+          <Text {...textProps} className="subscription-title">
+            {t("UsefulTips", { organizationName: getBrandName("OrganizationName"),
+              productName: getBrandName("ProductName") })}
+          </Text>
+        </ControlCaption>
         <ToggleButton
           className="useful-tips toggle-btn"
           onChange={onChangeEmailSubscription}
           isChecked={usefulTipsSubscription}
+          inputId={inputId}
           dataTestId="useful_tips_toggle_button"
         />
       </div>

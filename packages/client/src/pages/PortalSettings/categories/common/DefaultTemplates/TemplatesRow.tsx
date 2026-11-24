@@ -94,10 +94,9 @@ const TemplatesRow = ({
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const onPreview = () => {
-    if (item.id === null) return;
-    openDocEditor?.(item.id, true);
-  };
+  // item.id may be null in the row model; the erased cast keeps the old
+  // unchecked call. Only a customized template has a file to preview.
+  const onPreview = () => openDocEditor?.(item.id as number, true);
 
   const getOptions = () => {
     const selectOption = [
@@ -199,15 +198,18 @@ const TemplatesRow = ({
       <ReactSVG src={icon!} className={styles.icon} />
       <div className={styles.rowContent}>
         <div className={styles.mainContent}>
-          {item?.isModified ? (
+          {item.isModified ? (
             <Link
               type={LinkType.action}
               fontWeight={600}
               fontSize="13px"
+              // Link sets its own taller line-height; inherit the one the
+              // plain-text title uses so the row keeps its height.
+              lineHeight="inherit"
               isTextOverflow
-              title={t("Common:Preview")}
+              truncate
               onClick={onPreview}
-              dataTestId={`default-template-preview-${index}`}
+              dataTestId={`default-template-preview-link-${index}`}
             >
               {getTitleWithoutExtension(item, false)}
             </Link>

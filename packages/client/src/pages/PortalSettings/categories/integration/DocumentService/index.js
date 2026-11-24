@@ -53,11 +53,10 @@ import styles from "./index.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 import ApplyToPortalDialog from "../../developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog";
+import { parseUrlInput } from "./utils";
 
 const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
 
-const URL_REGEX =
-  /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
 const SECRET_KEY_MASK_CHAR = "•";
@@ -144,13 +143,10 @@ const DocumentService = ({
   const isSecretKeyMasked = secretKey === SECRET_KEY_MASK;
   const secretKeyToSave = isSecretKeyMasked ? undefined : secretKey;
 
-  const stripSpaces = (value) => value.replace(/\s+/g, "");
-
   const onChangeDocServiceUrl = (e) => {
-    const value = stripSpaces(e.target.value);
-    setDocServiceUrl(value);
-    if (!value) setDocServiceUrlIsValid(true);
-    else setDocServiceUrlIsValid(URL_REGEX.test(value));
+    const { url, isValid } = parseUrlInput(e.target.value);
+    setDocServiceUrl(url);
+    setDocServiceUrlIsValid(isValid);
   };
 
   const onChangeIsDisabledCertificat = () => {
@@ -177,17 +173,15 @@ const DocumentService = ({
   };
 
   const onChangeInternalUrl = (e) => {
-    const value = stripSpaces(e.target.value);
-    setInternalUrl(value);
-    if (!value) setInternalUrlIsValid(true);
-    else setInternalUrlIsValid(URL_REGEX.test(value));
+    const { url, isValid } = parseUrlInput(e.target.value);
+    setInternalUrl(url);
+    setInternalUrlIsValid(isValid);
   };
 
   const onChangePortalUrl = (e) => {
-    const value = stripSpaces(e.target.value);
-    setPortalUrl(value);
-    if (!value) setPortalUrlIsValid(true);
-    else setPortalUrlIsValid(URL_REGEX.test(value));
+    const { url, isValid } = parseUrlInput(e.target.value);
+    setPortalUrl(url);
+    setPortalUrlIsValid(isValid);
   };
 
   const onSubmit = (e) => {

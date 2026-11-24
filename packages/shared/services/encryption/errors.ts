@@ -77,6 +77,15 @@ export class NoAccessError extends CryptoError {
   }
 }
 
+/** The user's wrap of a file names a key that is not in the user's key list. */
+// Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+export class KeyReplacedError extends CryptoError {
+  constructor() {
+    super("File is wrapped for a key the user no longer holds", "KEY_REPLACED");
+    this.name = "KeyReplacedError";
+  }
+}
+
 export class InvalidFormatError extends CryptoError {
   constructor(detail?: string) {
     super(

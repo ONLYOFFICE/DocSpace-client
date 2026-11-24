@@ -253,7 +253,9 @@ export async function getFolderPath(folderId: string | number): Promise<TFolder[
 
 		if (!res.ok) {
 			logger.error(`GET /files/folder/${folderId}/path failed: ${res.status}`);
-			throw new Error("Failed to get folder path");
+			throw Object.assign(new Error("Failed to get folder path"), {
+				response: { status: res.status },
+			});
 		}
 
 		const resJson = await res.json();

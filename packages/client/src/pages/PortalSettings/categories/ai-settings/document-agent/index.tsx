@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useId } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -66,6 +66,7 @@ import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 
 import styles from "./DocumentAgent.module.scss";
 import { DocumentAgentLoader } from "./DocumentAgentLoader";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type TDocumentAgentProps = {
   documentAgentInitied?: AISettingsStore["documentAgentInitied"];
@@ -164,6 +165,7 @@ const DocumentAgentComponent = ({
   resetDocumentAgentSettings,
 }: TDocumentAgentProps) => {
   const { t } = useTranslation(["Common"]);
+  const captionId = useId();
 
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
@@ -352,12 +354,15 @@ const DocumentAgentComponent = ({
           isChecked={draft.enabled}
           onChange={() => patch({ enabled: !draft.enabled })}
           isDisabled={saveRequestRunning}
+          inputId={`${captionId}-enabled`}
           dataTestId="document-agent-enabled-toggle"
         />
         <div className={styles.toggleCaption}>
-          <Text fontWeight={600} lineHeight="20px" noSelect>
-            {t("Common:DocumentAgentEnable")}
-          </Text>
+          <ControlCaption htmlFor={`${captionId}-enabled`} isDisabled={saveRequestRunning}>
+            <Text fontWeight={600} lineHeight="20px" noSelect>
+              {t("Common:DocumentAgentEnable")}
+            </Text>
+          </ControlCaption>
           <Text fontSize="12px" lineHeight="16px">
             {t("Common:DocumentAgentEnableHint")}
           </Text>
@@ -438,12 +443,15 @@ const DocumentAgentComponent = ({
             isChecked={draft.taskLog}
             onChange={() => patch({ taskLog: !draft.taskLog })}
             isDisabled={fieldsDisabled}
+            inputId={`${captionId}-tasklog`}
             dataTestId="document-agent-tasklog-toggle"
           />
           <div className={styles.toggleCaption}>
-            <Text fontWeight={600} lineHeight="20px" noSelect>
-              {t("Common:DocumentAgentTaskLog")}
-            </Text>
+            <ControlCaption htmlFor={`${captionId}-tasklog`} isDisabled={fieldsDisabled}>
+              <Text fontWeight={600} lineHeight="20px" noSelect>
+                {t("Common:DocumentAgentTaskLog")}
+              </Text>
+            </ControlCaption>
             <Text fontSize="12px" lineHeight="16px" className={styles.hint}>
               {t("Common:DocumentAgentTaskLogHint")}
             </Text>

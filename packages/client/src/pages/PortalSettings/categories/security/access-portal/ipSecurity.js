@@ -221,6 +221,8 @@ const IpSecurity = (props) => {
   const onSaveClick = async () => {
     setIsSaving(true);
 
+    // Disabling IP Security drops the allowed list: the hidden addresses are
+    // neither validated nor kept, so enabling it again starts from scratch.
     const ipsToSave = enable ? ips : [];
 
     const errors = validateAllIps(ipsToSave);
@@ -239,7 +241,6 @@ const IpSecurity = (props) => {
       await setIpRestrictions(ipsObjectArr, enable);
 
       setIps(ipsToSave);
-
       saveToSessionStorage("currentIPSettings", {
         enable,
         ips: ipsToSave,

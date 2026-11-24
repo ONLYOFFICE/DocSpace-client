@@ -84,6 +84,7 @@ type TKeyFlowEnd = {
   message:
     | "Common:EncryptedFileUnlockToOpen"
     | "Common:EncryptedFileNoAccessYet"
+    | "Common:EncryptedFileKeyReplaced"
     | "Common:EncryptionKeysNotConfigured"
     | "Common:EncryptionKeysLoadFailed"
     | "Common:SomethingWentWrong";
@@ -98,6 +99,7 @@ const KEY_FLOW_ENDS: Partial<Record<TFileEncryptionStatus, TKeyFlowEnd>> = {
     action: "Common:UnlockKey",
   },
   "no-access": { message: "Common:EncryptedFileNoAccessYet" },
+  "key-replaced": { message: "Common:EncryptedFileKeyReplaced" },
   "no-key": { message: "Common:EncryptionKeysNotConfigured" },
   "load-failed": {
     message: "Common:EncryptionKeysLoadFailed",
@@ -492,6 +494,8 @@ const EditorBody = ({
         return t("Common:EncryptedFileUnlockToOpen");
       case "Common:EncryptedFileNoAccessYet":
         return t("Common:EncryptedFileNoAccessYet");
+      case "Common:EncryptedFileKeyReplaced":
+        return t("Common:EncryptedFileKeyReplaced");
       case "Common:EncryptionKeysNotConfigured":
         return t("Common:EncryptionKeysNotConfigured");
       case "Common:EncryptionKeysLoadFailed":

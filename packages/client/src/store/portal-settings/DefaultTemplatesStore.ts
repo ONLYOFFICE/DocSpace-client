@@ -44,11 +44,11 @@ import {
   uploadTemplateFromDevice,
 } from "@docspace/shared/api/files";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { getBrandName } from "@docspace/shared/constants/brands";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { TDefaultTemplate } from "@docspace/shared/api/files/types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import i18n from "SRC_DIR/i18n";
 

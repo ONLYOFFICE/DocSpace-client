@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useId } from "react";
 import { Portal } from "@onlyoffice/apps-ui-kit/components/portal";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -61,6 +61,7 @@ import GroupItem from "./sub-components/GroupItem";
 import { EditRoomGroupsDialogProps } from "./EditRoomGroupsDialog.types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector/Selector.types";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const TOOLTIP_DISMISSED_KEY = "roomGroupingTooltipDismissed";
 
@@ -87,6 +88,7 @@ const EditRoomGroupsDialog = ({
   getPrivateSectionRoomIds,
 }: EditRoomGroupsDialogProps) => {
   const { t } = useTranslation(["Common", "GroupingRooms"]);
+  const groupingToggleId = useId();
   const navigate = useNavigate();
 
   const isFormsSection = searchArea === RoomSearchArea.Forms;
@@ -448,15 +450,18 @@ const EditRoomGroupsDialog = ({
 
           <div className={styles.settingRoomGroups}>
             <div className={styles.roomGroups}>
-              <div className={styles.title}>
-                {isFormsSection
-                  ? t("GroupingRooms:SpaceGrouping")
-                  : t("GroupingRooms:RoomGrouping")}
-              </div>
+              <ControlCaption htmlFor={groupingToggleId}>
+                <div className={styles.title}>
+                  {isFormsSection
+                    ? t("GroupingRooms:SpaceGrouping")
+                    : t("GroupingRooms:RoomGrouping")}
+                </div>
+              </ControlCaption>
               <ToggleButton
                 className={styles.roomGroupsToggle}
                 isChecked={localGroupingEnabled}
                 onChange={onToggleGrouping}
+                inputId={groupingToggleId}
                 dataTestId="toggle_room_groups_button"
               />
             </div>

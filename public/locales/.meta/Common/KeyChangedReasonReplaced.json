@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx",
       "line_number": 181,
-      "context": "{t(\"Common:KeyChangedReasonRecovery\")}\n </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonReplaced\")}\n </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonAttack\")}",
+      "context": " </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonReplaced\")}\n </Text>\n </li>\n <li>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:KeyChangedReasonAttack\")}",
       "module": "/packages/shared"
     }
   ],

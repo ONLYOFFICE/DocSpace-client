@@ -324,10 +324,6 @@ const AccessControl = ({
 
   if (!ready || !isLoaded) return <AccessControlLoader />;
 
-  const existingLinksText = blockExisting
-    ? t("Settings:LinkStopWorking")
-    : t("Settings:LinkKeepWorking");
-
   return (
     <MainContainer>
       <div className={styles.container}>
@@ -422,7 +418,9 @@ const AccessControl = ({
                     })}
                   </Text>
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
-                    {existingLinksText}
+                    {blockExisting
+                      ? t("Settings:LinkStopWorking")
+                      : t("Settings:LinksKeepWorking")}
                   </Text>
                 </div>
               </div>
@@ -445,7 +443,9 @@ const AccessControl = ({
                     })}
                   </Text>
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
-                    {existingLinksText}
+                    {blockExisting
+                      ? t("Settings:LinkStopWorking")
+                      : t("Settings:LinksKeepWorking")}
                   </Text>
                   <Text fontSize="13px" fontWeight="600" lineHeight="20px">
                     {t("Settings:AppliesToRoomsWarning")}

@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useId } from "react";
+
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
@@ -43,6 +45,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type RoomsActivityContainerProps = {
   t: TFunction;
@@ -59,6 +62,7 @@ const RoomsActivityContainer = ({
   textProps,
   textDescriptionsProps,
 }: RoomsActivityContainerProps) => {
+  const inputId = useId();
   const onChangeEmailSubscription = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -73,17 +77,20 @@ const RoomsActivityContainer = ({
   return (
     <div className={styles.notificationContainer}>
       <div className={styles.row}>
-        <Text {...textProps} className="subscription-title">
-          {t("RoomUpdateNotify", {
-            files: t("Common:Files"),
-            rooms: t("Common:Rooms"),
-            forms: t("Common:Forms"),
-          })}
-        </Text>
+        <ControlCaption htmlFor={inputId}>
+          <Text {...textProps} className="subscription-title">
+            {t("RoomUpdateNotify", {
+              files: t("Common:Files"),
+              rooms: t("Common:Rooms"),
+              forms: t("Common:Forms"),
+            })}
+          </Text>
+        </ControlCaption>
         <ToggleButton
           className="rooms-activity toggle-btn"
           onChange={onChangeEmailSubscription}
           isChecked={roomsActivitySubscription}
+          inputId={inputId}
           dataTestId="rooms_activity_toggle_button"
         />
       </div>

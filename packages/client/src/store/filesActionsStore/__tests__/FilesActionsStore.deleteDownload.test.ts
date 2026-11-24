@@ -613,6 +613,31 @@ describe("FilesActionsStore — decrypted download of several files", () => {
 });
 
 describe("FilesActionsStore — single encrypted download", () => {
+  it("Download of one such file", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      userKeys: [{ id: "k1" }],
+      fileKeys: [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
+    } as never);
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFile({
+      id: 5,
+      title: "opaque-5.txt",
+      encrypted: true,
+    } as never);
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedFileKeyReplaced",
+    );
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();
+  });
+
   it("No own access entry", async () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [{ userId: "someone-else", publicKeyId: "k9", privateKeyEnc: "w" }],

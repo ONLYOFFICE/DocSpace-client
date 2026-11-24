@@ -108,6 +108,10 @@
 
   svg {
     flex-shrink: 0;
+
+    path {
+      fill: currentColor;
+    }
   }
 }
 

@@ -42,14 +42,21 @@ import {
 import {
   getCachedEncryptedFilename,
   rememberEncryptedFilename,
+  clearEncryptedFilenameCache,
+  isReplacedKeyFile,
 } from "../../encryption/filename-cache";
+import { reportPotentialGhostState } from "../../encryption/ghost-state-notifier";
 import type { IdentityKeyPair } from "../../encryption/types";
 
 vi.mock("../../encryption/file-keys", () => ({
   wipeDek: vi.fn(),
 }));
-vi.mock("../../encryption/room-file-access", () => ({
+vi.mock("../../encryption/room-file-access", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
   unwrapDekForCurrentUser: vi.fn(),
+}));
+vi.mock("../../encryption/ghost-state-notifier", () => ({
+  reportPotentialGhostState: vi.fn(),
 }));
 vi.mock("../../encryption/streaming-encryption", () => ({
   parseDSE3Header: vi.fn(),
@@ -114,6 +121,7 @@ describe("encryptedFilenameRecovery", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     sessionStorage.clear();
+    clearEncryptedFilenameCache();
   });
 
   afterEach(() => {
@@ -227,6 +235,63 @@ describe("encryptedFilenameRecovery", () => {
 
     expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
     expect(wipeDek).not.toHaveBeenCalled();
+  });
+
+  describe("A private room names the files wrapped for a key the user no longer holds", () => {
+    const replacedFor = (ids: number[]) =>
+      vi.mocked(getFileEncryptionAccess).mockImplementation((async (
+        fileId: number,
+      ) => ({
+        userKeys: [{ id: "key-now" }],
+        fileKeys: [
+          {
+            userId: "u1",
+            publicKeyId: ids.includes(fileId) ? "key-before" : "key-now",
+          },
+        ],
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      })) as any);
+
+    it("Mixed room", async () => {
+      vi.stubGlobal("fetch", vi.fn(async () => okHeaderBytes()));
+      happyMocks();
+      replacedFor([1, 2]);
+
+      await recoverEncryptedFilenames(
+        makeCandidates([1, 2, 3]),
+        "u1",
+        identity,
+        ROOM_ID,
+      );
+
+      expect([1, 2, 3].map(isReplacedKeyFile)).toEqual([true, true, false]);
+      expect(getCachedEncryptedFilename(3)).toBe("real-name.docx");
+      expect(unwrapDekForCurrentUser).toHaveBeenCalledTimes(1);
+      expect(reportPotentialGhostState).not.toHaveBeenCalled();
+    });
+
+    it("a file already found is not read again", async () => {
+      const fetchSpy = vi.fn(async () => okHeaderBytes());
+      vi.stubGlobal("fetch", fetchSpy);
+      happyMocks();
+      replacedFor([1]);
+
+      await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID);
+      await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID);
+
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it("Key locked: the found files are forgotten with the names", async () => {
+      vi.stubGlobal("fetch", vi.fn(async () => okHeaderBytes()));
+      happyMocks();
+      replacedFor([1]);
+      await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID);
+
+      clearEncryptedFilenameCache();
+
+      expect(isReplacedKeyFile(1)).toBe(false);
+    });
   });
 
   it("swallows unwrap throws AFTER getFileEncryptionAccess succeeded", async () => {

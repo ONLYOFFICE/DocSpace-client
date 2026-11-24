@@ -35,13 +35,9 @@
 
 import { useCallback, useContext, useMemo } from "react";
 
-import { isVideo } from "@docspace/shared/components/media-viewer/MediaViewer.utils";
-import type {
-  PlaylistType,
-  NumberOrString,
-} from "@docspace/shared/components/media-viewer/MediaViewer.types";
-import { thumbnailStatuses } from "@docspace/shared/constants";
+import type { NumberOrString } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
+import { getPlaylist } from "@onlyoffice/apps-ui-kit/media-viewer/utils/getPlaylist";
 
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -55,49 +51,6 @@ import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 
 type UseMediaViewerProps = {
   filesSettings: TFilesSettings;
-};
-
-const getPlayList = (files: TFileItem[]) => {
-  const filesList = [...files];
-  const playlist: PlaylistType[] = [];
-  let id = 0;
-  const itemsWithoutThumb = [];
-
-  if (filesList.length > 0) {
-    filesList.forEach((file) => {
-      const canOpenPlayer =
-        file.viewAccessibility?.ImageView || file.viewAccessibility?.MediaView;
-
-      if (canOpenPlayer) {
-        playlist.push({
-          id,
-          fileId: file.id,
-          src: file.viewUrl,
-          title: file.title,
-          fileExst: file.fileExst,
-          fileStatus: file.fileStatus,
-          canShare: file.canShare,
-          version: file.version,
-          encrypted: file.encrypted === true,
-          thumbnailUrl:
-            !file.providerItem && file.thumbnailUrl ? file.thumbnailUrl : "",
-        });
-
-        const thumbnailIsNotCreated =
-          file.thumbnailStatus === thumbnailStatuses.WAITING;
-
-        const isVideoOrImage =
-          file.viewAccessibility?.ImageView || isVideo(file.fileExst);
-
-        if (thumbnailIsNotCreated && isVideoOrImage)
-          itemsWithoutThumb.push(file);
-
-        id++;
-      }
-    });
-  }
-
-  return playlist;
 };
 
 export function useMediaViewer({ filesSettings }: UseMediaViewerProps) {
@@ -122,7 +75,7 @@ export function useMediaViewer({ filesSettings }: UseMediaViewerProps) {
 
   const files = useMemo(() => items.filter((item) => !item.isFolder), [items]);
 
-  const playlist = useMemo(() => getPlayList(files), [files]);
+  const playlist = useMemo(() => getPlaylist(files), [files]);
 
   const playlistPos = playlist.find((file) => file.fileId === mediaId)?.id || 0;
 

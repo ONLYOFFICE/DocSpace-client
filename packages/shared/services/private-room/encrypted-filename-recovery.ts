@@ -37,9 +37,12 @@ import { getFileEncryptionAccess } from "../../api/files";
 import { wipeDek } from "../encryption/file-keys";
 import {
   getCachedEncryptedFilename,
+  isReplacedKeyFile,
+  markReplacedKeyFile,
   rememberEncryptedFilename,
 } from "../encryption/filename-cache";
 import {
+  isWrappedForReplacedKey,
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
 } from "../encryption/room-file-access";
@@ -83,7 +86,9 @@ function recoverOne(
   identity: IdentityKeyPair,
   roomMemberKeys: RoomMemberPublicKey[],
 ): Promise<void> {
-  if (getCachedEncryptedFilename(file.id)) return Promise.resolve();
+  if (getCachedEncryptedFilename(file.id) || isReplacedKeyFile(file.id)) {
+    return Promise.resolve();
+  }
 
   const existing = inFlight.get(file.id);
   if (existing) return existing;
@@ -117,6 +122,10 @@ async function recoverOneUncached(
   try {
     const info = await getFileEncryptionAccess(file.id);
     if (!info?.fileKeys || info.fileKeys.length === 0) return;
+    if (isWrappedForReplacedKey(info, userId)) {
+      markReplacedKeyFile(file.id);
+      return;
+    }
     dek = await unwrapDekForCurrentUser({
       fileKeys: info.fileKeys,
       roomMemberKeys,

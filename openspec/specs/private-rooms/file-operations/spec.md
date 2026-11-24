@@ -1226,3 +1226,57 @@ The system SHALL run the comparison of "Name clashes in a private room are check
 #### Scenario: Name of a re-imported container cannot be recovered
 - **WHEN** a container whose source file is not in the destination room is uploaded into a private room folder
 - **THEN** nothing of it is sent and it fails with Common:EncryptionReimportFailed
+
+### Requirement: A file wrapped for a key the user no longer holds is reported as such
+The system SHALL report an encrypted file whose access entry for the user names a key that is not in the user's key list with Common:EncryptedFileKeyReplaced when the user downloads, copies, moves or opens in the media viewer that file alone, and SHALL name it in the report of the batch when it is one of several. It SHALL do so before it asks for the passphrase and SHALL NOT fetch or try to decrypt the file content.
+
+#### Scenario: Download of one such file
+- **WHEN** a user who replaced their key downloads one encrypted file that is wrapped for the previous key
+- **THEN** Common:EncryptedFileKeyReplaced is shown, not Common:EncryptionDownloadFailed, and nothing is saved
+
+#### Scenario: Media viewer
+- **WHEN** that user opens such an image in the media viewer
+- **THEN** the viewer shows Common:EncryptedFileKeyReplaced, not Common:EncryptionDecryptPartialFailed, and the file content is not fetched
+
+#### Scenario: Key locked
+- **WHEN** that user's key is locked and they copy one such file out of the private room
+- **THEN** Common:EncryptedFileKeyReplaced is shown, no passphrase prompt is raised, and nothing is uploaded or deleted
+
+#### Scenario: One file of several
+- **WHEN** that user copies two encrypted files out of a private room and one of them is wrapped for the previous key
+- **THEN** the other file is copied and Common:EncryptedCopyFailed names the file that is wrapped for the previous key
+
+#### Scenario: Entry without a key id
+- **WHEN** the user's access entry of a file names no key, or the all-zero id
+- **THEN** the file is handled as a file wrapped for the user, as before
+
+#### Scenario: Key list not known
+- **WHEN** the access entries of a file arrive without the user's key list
+- **THEN** the file is not reported with Common:EncryptedFileKeyReplaced
+
+### Requirement: A private room names the files wrapped for a key the user no longer holds
+The system SHALL show a notice (Common:PrivateRoomReplacedKeyBarTitle, Common:PrivateRoomReplacedKeyBarText with the number of files) above the file list of a private room, or of a folder inside one, while files wrapped for a key the user no longer holds are among the loaded items. The notice SHALL be shown on every visit and SHALL NOT be dismissible. It SHALL NOT be shown together with the locked-key block.
+
+#### Scenario: Room of a user who replaced the key
+- **WHEN** a user who replaced their key opens a private room whose six files are wrapped for the previous key
+- **THEN** the notice is shown above the list and gives the number six
+
+#### Scenario: Page reload
+- **WHEN** that user reloads the page in the room
+- **THEN** the notice is shown again
+
+#### Scenario: Mixed room
+- **WHEN** the room holds two files wrapped for the previous key and one wrapped for the current key
+- **THEN** the notice gives the number two and the third file shows its decrypted name
+
+#### Scenario: No such files
+- **WHEN** every loaded file is wrapped for a key the user holds
+- **THEN** the notice is not shown
+
+#### Scenario: Key locked
+- **WHEN** the user's key is locked and the locked-key block is shown
+- **THEN** the notice is not shown until the key is unlocked
+
+#### Scenario: Leaving the room
+- **WHEN** the user moves from that room to a section that is not a private room
+- **THEN** the notice is gone

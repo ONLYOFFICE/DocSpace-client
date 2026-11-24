@@ -63,6 +63,7 @@ import type { TagChange } from "@docspace/shared/components/tag-management/TagMa
 import { getCategoryType } from "@docspace/shared/utils/common";
 import {
   subscribeFilenameCache,
+  isReplacedKeyFile,
   getCachedEncryptedFilename,
 } from "@docspace/shared/services/encryption/filename-cache";
 import {
@@ -660,6 +661,13 @@ class FilesStore {
     });
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
+  }
+
+  // Spec: private-rooms/file-operations, "A private room names the files wrapped for a key the user no longer holds"
+  get replacedKeyFilesCount() {
+    void this.encryptedFilenameCacheVersion;
+    return this.files.filter((f) => f.encrypted && isReplacedKeyFile(f.id))
+      .length;
   }
 
   get selection() {

@@ -51,7 +51,6 @@ vi.mock("../../_utils/abort-registry", () => ({
 
 vi.mock("@docspace/shared/services/encryption/auto-lock-preference", () => ({
   getAutoLockTimeoutSeconds: () => env.timeoutSeconds,
-  locksWhenTabHidden: () => false,
   setAutoLockScope: () => {},
   subscribeAutoLockChange: () => () => {},
 }));

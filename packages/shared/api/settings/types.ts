@@ -136,13 +136,11 @@ export type TFirebaseSettings = {
   databaseURL: string;
 };
 
-export type TFormGallery = {
+export type TTemplateGallery = {
   path: string;
   domain: string;
-  ext: string;
   uploadPath: string;
   uploadDomain: string;
-  uploadExt: string;
   url?: string;
   uploadUrl?: string;
 };
@@ -196,7 +194,7 @@ export type TSettings = {
     url: string;
     iosPackageId: string;
   };
-  formGallery: TFormGallery;
+  templateGallery: TTemplateGallery;
   wizardToken?: string;
   defaultFolderType?: string;
   tagManagerId?: string;

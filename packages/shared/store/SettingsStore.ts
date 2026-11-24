@@ -66,13 +66,13 @@ import type {
   TDomainValidator,
   TExternalResources,
   TFirebaseSettings,
-  TFormGallery,
   TGetColorTheme,
   TLoginSettings,
   TMailDomainSettings,
   TPasswordHash,
   TPasswordSettings,
   TSettings,
+  TTemplateGallery,
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
@@ -189,11 +189,9 @@ class SettingsStore {
 
   enabledJoin = false;
 
-  formGallery: TFormGallery = {
+  templateGallery: TTemplateGallery = {
     url: "",
-    ext: ".oform",
     uploadUrl: "",
-    uploadExt: ".docxf",
     path: "",
     domain: "",
     uploadPath: "",
@@ -1011,7 +1009,7 @@ class SettingsStore {
   }
 
   get templateGalleryAvailable() {
-    return !!(this.formGallery && this.formGallery.domain !== "");
+    return !!(this.templateGallery && this.templateGallery.domain !== "");
   }
 
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {

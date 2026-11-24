@@ -110,11 +110,9 @@ const cmsUrl = (port: string, path: string) =>
   `${BASE_URL}:${port}/${CMS_PATH}/${path}`;
 
 export const oformsFormGallerySettings = (port: string) => ({
-  formGallery: {
+  templateGallery: {
     url: "",
-    ext: ".docx",
     uploadUrl: "",
-    uploadExt: ".docx",
     domain: `${BASE_URL}:${port}`,
     path: `/${CMS_PATH}/oforms`,
     uploadDomain: "",

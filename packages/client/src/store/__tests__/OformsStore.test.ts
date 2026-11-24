@@ -32,7 +32,7 @@ import OformsStore from "../OformsStore";
 
 const settingsStore = {
   culture: "en",
-  formGallery: {
+  templateGallery: {
     domain: "https://cms.example",
     path: "/dashboard/api/oforms/",
     uploadDomain: "",

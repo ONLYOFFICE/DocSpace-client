@@ -227,13 +227,13 @@ class OformsStore {
    * dropped: `.../dashboard/api/oforms/` -> `.../dashboard/api`.
    */
   get oformsApiRoot() {
-    const { domain, path } = this.settingsStore.formGallery;
+    const { domain, path } = this.settingsStore.templateGallery;
 
     return combineUrl(domain, path.replace(/\/*oforms\/*$/, ""));
   }
 
   get oformsApiUrl() {
-    const { domain, path } = this.settingsStore.formGallery;
+    const { domain, path } = this.settingsStore.templateGallery;
 
     return combineUrl(domain, path);
   }
@@ -355,7 +355,7 @@ class OformsStore {
     language: string,
     signal: AbortSignal | null = null,
   ) => {
-    const { uploadDomain, uploadPath } = this.settingsStore.formGallery;
+    const { uploadDomain, uploadPath } = this.settingsStore.templateGallery;
 
     const res = (await submitToGallery(
       combineUrl(uploadDomain, uploadPath),

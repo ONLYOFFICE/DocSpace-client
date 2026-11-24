@@ -363,6 +363,7 @@ const FilesView = ({
           isFirstLoading={historyIsFirstLoading}
           fetchHistory={fetchHistory}
           fetchMoreHistory={fetchMoreHistory}
+          isDayFiltered={!!historyDay}
         />
       );
     }

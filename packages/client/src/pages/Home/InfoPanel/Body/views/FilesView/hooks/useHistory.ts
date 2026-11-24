@@ -107,9 +107,11 @@ const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
 };
 
 const getDayFilter = (day: Nullable<string>) => {
-  const toDate = parseToDateTime(day)?.endOf("day").toUTC().toISO();
+  const date = parseToDateTime(day);
+  const fromDate = date?.startOf("day").toUTC().toISO();
+  const toDate = date?.endOf("day").toUTC().toISO();
 
-  return toDate ? { toDate } : {};
+  return fromDate && toDate ? { fromDate, toDate } : {};
 };
 
 const countFeedEntries = <T,>(feedActions: TFeedAction<T>[]) =>

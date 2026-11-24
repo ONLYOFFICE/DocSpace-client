@@ -102,6 +102,7 @@ type HistoryProps = {
   isFirstLoading: ReturnType<typeof useHistory>["isFirstLoading"];
   fetchHistory: ReturnType<typeof useHistory>["fetchHistory"];
   fetchMoreHistory: ReturnType<typeof useHistory>["fetchMoreHistory"];
+  isDayFiltered?: boolean;
 };
 
 const History = ({
@@ -114,6 +115,7 @@ const History = ({
   isFirstLoading,
   fetchHistory,
   fetchMoreHistory,
+  isDayFiltered = false,
 }: HistoryProps) => {
   const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
 
@@ -177,7 +179,8 @@ const History = ({
 
   if (showLoading) return <InfoPanelViewLoader view="history" />;
 
-  if (!history.length && !(isLoading || isFirstLoading)) return <NoHistory />;
+  if (!history.length && !(isLoading || isFirstLoading))
+    return <NoHistory isDayFiltered={isDayFiltered} />;
 
   return (
     <HistorySelectionProvider selection={infoPanelSelection}>

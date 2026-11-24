@@ -44,7 +44,11 @@ import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.
 
 import styles from "./NoItem.module.scss";
 
-const NoHistory = () => {
+type NoHistoryProps = {
+  isDayFiltered?: boolean;
+};
+
+const NoHistory = ({ isDayFiltered = false }: NoHistoryProps) => {
   const { isBase } = useTheme();
   const { t } = useTranslation(["InfoPanel"]);
 
@@ -61,7 +65,9 @@ const NoHistory = () => {
         <img src={imageSrc} alt="No History" />
       </div>
       <Text className="no-history-text" textAlign="center">
-        {t("HistoryEmptyScreenText")}
+        {isDayFiltered
+          ? t("HistoryEmptyForDateText")
+          : t("HistoryEmptyScreenText")}
       </Text>
     </div>
   );

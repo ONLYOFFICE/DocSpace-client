@@ -75,7 +75,7 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 
 	const title = item.requestToken
 		? t("Common:ViaLink")
-		: originRoomTitle || originTitle;
+		: originTitle || originRoomTitle;
 	const originId = originFolderId || originRoomId;
 	const withTooltip = item.requestToken ? false : !!title;
 

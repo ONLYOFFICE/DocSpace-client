@@ -46,6 +46,7 @@ import { ReactSVG } from "react-svg";
 import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { TDefaultTemplateItem } from "@docspace/shared/types";
 import { UrlActionType } from "@docspace/shared/enums";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -93,6 +94,11 @@ const TemplatesRow = ({
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const onPreview = () => {
+    if (item.id === null) return;
+    openDocEditor?.(item.id, true);
+  };
+
   const getOptions = () => {
     const selectOption = [
       {
@@ -125,9 +131,7 @@ const TemplatesRow = ({
         {
           key: "preview",
           label: t("Common:Preview"),
-          // item.id may be null in the row model; the erased
-          // cast keeps the old unchecked call.
-          onClick: () => openDocEditor?.(item.id as number, true),
+          onClick: onPreview,
           disabled: false,
           icon: EyeIcon,
         },
@@ -195,9 +199,23 @@ const TemplatesRow = ({
       <ReactSVG src={icon!} className={styles.icon} />
       <div className={styles.rowContent}>
         <div className={styles.mainContent}>
-          <Text fontWeight={600} fontSize="13px" truncate>
-            {getTitleWithoutExtension(item, false)}
-          </Text>
+          {item?.isModified ? (
+            <Link
+              type={LinkType.action}
+              fontWeight={600}
+              fontSize="13px"
+              isTextOverflow
+              title={t("Common:Preview")}
+              onClick={onPreview}
+              dataTestId={`default-template-preview-${index}`}
+            >
+              {getTitleWithoutExtension(item, false)}
+            </Link>
+          ) : (
+            <Text fontWeight={600} fontSize="13px" truncate>
+              {getTitleWithoutExtension(item, false)}
+            </Text>
+          )}
           <Text
             className={styles.modifiedText}
             containerMinWidth="120px"

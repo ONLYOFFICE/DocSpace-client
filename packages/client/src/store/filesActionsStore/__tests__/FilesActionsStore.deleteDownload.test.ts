@@ -56,6 +56,8 @@ import {
 } from "@docspace/shared/services/private-room/encrypted-download";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { decryptFileFromBlob } from "@docspace/shared/services/encryption/file-keys";
+import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
+import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
 
 const progress = () => {
   const setSecondaryProgressBarData = vi.fn();
@@ -192,6 +194,48 @@ describe("FilesActionsStore — delete/download/duplicate (batch 8)", () => {
     await store.duplicateAction({ id: 1, fileExst: ".docx" } as never);
     expect(p.setSecondaryProgressBarData).toHaveBeenCalled();
     expect(p.store.loopFilesOperations).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("FilesActionsStore — permanent deletion in a private room", () => {
+  const RECYCLE_BIN_ID = 99;
+
+  const deleteFileIn = async (isPrivacyFolder: boolean) => {
+    const p = progress();
+    const addActiveItems = vi.fn();
+    const store = createTestFilesActionsStore({
+      treeFoldersStore: { isPrivacyFolder, recycleBinFolderId: RECYCLE_BIN_ID },
+      filesStore: {
+        selection: [{ id: 1, fileExst: ".docx", security: { Delete: true } }],
+        bufferSelection: null,
+        activeFiles: [],
+        activeFolders: [],
+        getIsEmptyTrash: vi.fn(),
+        addActiveItems,
+        removeFiles: vi.fn(),
+        fetchFiles: vi.fn(async () => {}),
+        setSelected: vi.fn(),
+      },
+      uploadDataStore: { ...p.store, removeFiles: vi.fn() },
+    });
+
+    await store.deleteAction({ deleteFromTrash: "x" } as never);
+
+    return addActiveItems;
+  };
+
+  it("Delete a file", async () => {
+    const addActiveItems = await deleteFileIn(true);
+
+    expect(removeFiles).toHaveBeenCalledWith([], [1], false, true);
+    expect(addActiveItems).toHaveBeenCalledWith([1], null, null);
+  });
+
+  it("moves a file to the Recycle Bin outside a private room", async () => {
+    const addActiveItems = await deleteFileIn(false);
+
+    expect(removeFiles).toHaveBeenCalledWith([], [1], false, false);
+    expect(addActiveItems).toHaveBeenCalledWith([1], null, RECYCLE_BIN_ID);
   });
 });
 
@@ -397,6 +441,62 @@ describe("FilesActionsStore — decrypted folder download", () => {
       fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
     } as never);
 
+  // Every file the user holds an entry of fails with the verdict of a replaced key.
+  const replacedKeyAccess = (noEntryFor: number[] = []) => {
+    vi.mocked(getFileEncryptionAccess).mockImplementation((async (
+      fileId: number,
+    ) => ({
+      userKeys: [{ id: "k1" }],
+      fileKeys: noEntryFor.includes(fileId)
+        ? []
+        : [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
+    })) as never);
+    vi.mocked(downloadAndDecryptFileToBuffer).mockResolvedValue({
+      success: false,
+      keyReplaced: true,
+      fileName: "",
+    });
+  };
+
+  it("Every file is wrapped for a key the user no longer holds", async () => {
+    vi.mocked(getFolder).mockResolvedValue(
+      listing([encrypted(1), encrypted(2)]) as never,
+    );
+    replacedKeyAccess();
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomReplacedKeyBarText_other",
+    );
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
+  it("Every file is wrapped for a key the user no longer holds: one file", async () => {
+    vi.mocked(getFolder).mockResolvedValue(listing([encrypted(1)]) as never);
+    replacedKeyAccess();
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomReplacedKeyBarText_one",
+    );
+  });
+
+  it("No file can be decrypted", async () => {
+    vi.mocked(getFolder).mockResolvedValue(
+      listing([encrypted(1), encrypted(2)]) as never,
+    );
+    replacedKeyAccess([2]);
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Files:DecryptAllFailed");
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
   it("File name with a separator inside a folder archive", async () => {
     vi.mocked(getFolder).mockResolvedValue(
       listing([encrypted(1), encrypted(2)]) as never,
@@ -487,6 +587,39 @@ describe("FilesActionsStore — decrypted folder download", () => {
 });
 
 describe("FilesActionsStore — decrypted download of several files", () => {
+  it("Every file is wrapped for a key the user no longer holds", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      userKeys: [{ id: "k1" }],
+      fileKeys: [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
+    } as never);
+    vi.mocked(downloadAndDecryptFileToBuffer).mockResolvedValue({
+      success: false,
+      keyReplaced: true,
+      fileName: "",
+    });
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      selectedFolderStore: { id: 10, isRoom: true, navigationPath: [] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFilesAsZip(
+      [1, 2].map((id) => ({
+        id,
+        title: `opaque-${id}.xlsx`,
+        encrypted: true,
+        viewUrl: `http://x/${id}`,
+      })) as never,
+    );
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomReplacedKeyBarText_other",
+    );
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
   it("Names that differ only in case", async () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
@@ -571,6 +704,63 @@ describe("FilesActionsStore — decrypted download of several files", () => {
 });
 
 describe("FilesActionsStore — single encrypted download", () => {
+  const fileOfAnotherKeyId = () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      userKeys: [{ id: "k1" }],
+      fileKeys: [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
+    } as never);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response(new Uint8Array([1, 2, 3]))),
+    );
+    const { store: uploadDataStore } = progress();
+    return createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      uploadDataStore,
+    });
+  };
+  const opaque = {
+    id: 5,
+    title: "opaque-5.txt",
+    encrypted: true,
+    viewUrl: "http://x/5",
+  };
+
+  it("Download of one such file", async () => {
+    const store = fileOfAnotherKeyId();
+    vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+      new KeyReplacedError(),
+    );
+
+    await store.downloadEncryptedFile(opaque as never);
+    vi.unstubAllGlobals();
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedFileKeyReplaced",
+    );
+    expect(
+      vi.mocked(unwrapDekForCurrentUser).mock.calls.at(-1)![0].userKeys,
+    ).toEqual([{ id: "k1" }]);
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
+  it("Key imported again", async () => {
+    const store = fileOfAnotherKeyId();
+    vi.mocked(decryptFileFromBlob).mockResolvedValue({
+      data: new Blob([new Uint8Array([7])]),
+      fileName: "plan.txt",
+    });
+
+    await store.downloadEncryptedFile(opaque as never);
+    vi.unstubAllGlobals();
+
+    expect(toastr.error).not.toHaveBeenCalled();
+    expect(
+      (vi.mocked(triggerFileDownload).mock.calls.at(-1)![0] as File).name,
+    ).toBe("plan.txt");
+  });
+
   it("No own access entry", async () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [{ userId: "someone-else", publicKeyId: "k9", privateKeyEnc: "w" }],

@@ -37,6 +37,7 @@ import { Zip, ZipPassThrough } from "fflate";
 
 import { decryptFile, decryptFileFromBlob } from "../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import { KeyReplacedError } from "../encryption/errors";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
@@ -47,6 +48,8 @@ export type DecryptConfig = {
   fileId: number;
   fileKeys: ServerAccessKeyDto[];
   roomMemberKeys: RoomMemberPublicKey[];
+  /** The caller's key list of the access answer. */
+  userKeys?: readonly { id: string }[] | null;
   userId: string;
   identity: IdentityKeyPair;
   /** Fallback when the DSE3 header has no encrypted name. */
@@ -59,6 +62,8 @@ export type DecryptResult = {
   success: boolean;
   file?: File;
   error?: string;
+  /** The file is wrapped for a key the user no longer holds. */
+  keyReplaced?: boolean;
 };
 
 export async function decryptDownloadedFile(
@@ -68,6 +73,7 @@ export async function decryptDownloadedFile(
     const dek = await unwrapDekForCurrentUser({
       fileKeys: config.fileKeys,
       roomMemberKeys: config.roomMemberKeys,
+      userKeys: config.userKeys,
       currentUserId: config.userId,
       currentIdentity: config.identity,
       fileId: config.fileId,
@@ -100,6 +106,7 @@ export async function decryptDownloadedFile(
       success: false,
       error:
         error instanceof Error ? error.message : "Decryption failed",
+      keyReplaced: error instanceof KeyReplacedError,
     };
   }
 }
@@ -148,6 +155,7 @@ export async function downloadAndDecryptFile(
       fileId: config.fileId,
       fileKeys: config.fileKeys,
       roomMemberKeys: config.roomMemberKeys,
+      userKeys: config.userKeys,
       userId: config.userId,
       identity: config.identity,
       originalFileName: config.originalFileName,
@@ -187,6 +195,8 @@ export type BatchDecryptResult = {
   data?: Uint8Array;
   fileName: string;
   error?: string;
+  /** The file is wrapped for a key the user no longer holds. */
+  keyReplaced?: boolean;
 };
 
 export async function downloadAndDecryptFileToBuffer(
@@ -199,6 +209,7 @@ export async function downloadAndDecryptFileToBuffer(
       success: false,
       fileName: config.originalFileName,
       error: decryptResult.error,
+      keyReplaced: decryptResult.keyReplaced,
     };
   }
 

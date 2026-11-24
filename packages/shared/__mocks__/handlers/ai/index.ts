@@ -62,9 +62,13 @@ import {
   AI_HUB_ROOMS,
   AI_HUB_ROOT_ID,
   aiHubRoomsHandler,
+  aiPinnedProjectRooms,
+  aiAgentPinHandlers,
   aiRoomFolderHandler,
   aiSectionsHandlers,
+  aiThreadFilesHandlers,
 } from "./projects";
+import { aiTemplateInstallHandler, aiTemplatesHandler } from "./templates";
 import {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
@@ -115,8 +119,11 @@ export {
   AI_HUB_ROOMS,
   AI_HUB_ROOT_ID,
   aiHubRoomsHandler,
+  aiPinnedProjectRooms,
+  aiAgentPinHandlers,
   aiRoomFolderHandler,
   aiSectionsHandlers,
+  aiThreadFilesHandlers,
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
   aiChatAssignmentsHandler,
@@ -145,8 +152,47 @@ export {
   AiActionType,
 } from "./chatStores";
 export type { AiChatProfile, AssignmentMap } from "./chatStores";
-export type { AiProjectMock, AiHubRoomMock } from "./projects";
+export {
+  AI_CHAT_PLACEHOLDER_TITLE,
+  aiChatAssistantMessage,
+  aiChatAttachmentsGetHandler,
+  aiChatCreatedDocumentPart,
+  aiChatFileAttachmentPart,
+  aiChatGeneratedImagePart,
+  aiChatImageAttachmentPart,
+  aiChatMessageId,
+  aiChatReplyEvents,
+  aiChatRequestLog,
+  aiChatThreadId,
+  aiChatThreadsHandlers,
+  aiChatToolCallPart,
+  aiChatUserMessage,
+} from "./chatThreads";
+export type {
+  AiChatContentPart,
+  AiChatFilePart,
+  AiChatImagePart,
+  AiChatMessageMock,
+  AiChatReplyMock,
+  AiChatRequestLog,
+  AiChatSendRequest,
+  AiChatTextPart,
+  AiChatThreadMock,
+  AiChatThreadsMockOptions,
+  AiChatToolCallPart,
+} from "./chatThreads";
+export type {
+  AiProjectMock,
+  AiHubRoomMock,
+  AiThreadFileMock,
+  AiThreadFilesMock,
+} from "./projects";
 export type { DocumentAgentSettingsMock } from "./documentAgent";
+export {
+  aiAgentDeleteHandler,
+  aiAgentLeaveHandler,
+  aiAgentSkillsRefusedHandler,
+} from "./agentActions";
 export {
   META_FILL_RESULT,
   META_GENERATE_RESULT,
@@ -154,6 +200,63 @@ export {
   aiMetaFillHandler,
   aiMetaGenerateHandler,
 } from "./meta";
+
+export {
+  AI_TEMPLATE_AGENTS,
+  AI_TEMPLATE_CATALOG,
+  AI_TEMPLATE_COVERS,
+  AI_TEMPLATE_KNOWLEDGE_BASES,
+  AI_TEMPLATE_SKILL_SETS,
+  aiTemplatesHandlers,
+  roomCoversHandler,
+} from "./templates";
+export { aiTemplateInstallHandler, aiTemplatesHandler };
+
+export {
+  aiChatDraftSourcesStorage,
+  aiChatRoomSkillsHandlers,
+} from "./chatSources";
+export type {
+  AiChatRoomSkillMock,
+  AiChatRoomSkillsLog,
+  AiChatThreadSourceMock,
+} from "./chatSources";
+export { aiCopyToRoomHandlers } from "./saveToRoom";
+export type { AiCopyRequest, AiCopyTargetRoomMock } from "./saveToRoom";
+export {
+  aiAgentReadDeniedHandlers,
+  aiHubRoomsAsUserHandler,
+  agentInviteSearchHandler,
+} from "./agentAccess";
+export type { AgentInviteAccount } from "./agentAccess";
+export {
+  DOCUMENT_SUMMARY,
+  SKILL_SET_OWNERS,
+  aiSkillSetContentHandlers,
+  aiSkillSetsHandlers,
+  aiSkillSetsListHandler,
+  skillFileText,
+  skillSetsMock,
+  skillViewUrl,
+} from "./skillSets";
+export type {
+  SkillMock,
+  SkillSetMock,
+  SkillSetsMockOptions,
+} from "./skillSets";
+export {
+  KNOWLEDGE_BASES,
+  KNOWLEDGE_BASE_FAILED_ID,
+  KNOWLEDGE_BASE_AGENTS,
+  KNOWLEDGE_BASE_INDEXED_ID,
+  KNOWLEDGE_BASE_INDEXING_ID,
+  KNOWLEDGE_FAILED_FILE_TITLE,
+  KnowledgeFileMockStatus,
+  aiKnowledgeBasesHandlers,
+  knowledgeBaseFilesMock,
+  knowledgeBaseFolderHandler,
+} from "./knowledgeBases";
+export type { KnowledgeFileMock } from "./knowledgeBases";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),
@@ -167,4 +270,15 @@ export const aiHandlers = (port: string) => [
   // The "AI rooms" section and its projects: empty until a spec seeds them.
   aiHubRoomsHandler(port, [], []),
   ...aiProjectsHandlers(port, []),
+  // The Templates tab of the Agents list: the shipped catalog. The room
+  // covers it is drawn with are left to the specs (roomCoversHandler).
+  aiTemplatesHandler(port),
+  aiTemplateInstallHandler(port),
 ];
+export { aiRoomProjectMock, aiRoomProjectsHandler } from "./projects";
+export type { AiRoomProjectMock } from "./projects";
+export {
+  aiHubRoomAsReader,
+  aiHubRoomGetByIdHandler,
+  aiProjectDeleteHandlers,
+} from "./projects";

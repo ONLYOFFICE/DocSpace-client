@@ -234,7 +234,7 @@ describe("Member removal is blocked during active uploads", () => {
     expect(setRemoveUserConfirmation).toHaveBeenCalledWith(
       true,
       expect.any(Function),
-      true,
+      "encryptedRoom",
     );
   });
 });

@@ -6,6 +6,7 @@
 
 import {
   afterAll,
+  afterEach,
   beforeAll,
   beforeEach,
   describe,
@@ -127,6 +128,68 @@ describe("roomMembers mock — PUT /files/rooms/{id}/share in a private room (mi
       [OWNER_ID, BOB_ID, CAROL_ID],
       [OWNER_ID, BOB_ID, CAROL_ID],
     ]);
+  });
+});
+
+describe("roomMembers mock — PUT /files/rooms/{id}/share for a group or a guest in a private room (mirrors FileSharingAceHelper.SetAceObjectAsync)", () => {
+  const GROUP_ID = "55555555-5555-5555-5555-555555555555";
+  const SHARED_GROUP_ID = "66666666-6666-6666-6666-666666666666";
+  const GUEST_ID = "77777777-7777-7777-7777-777777777777";
+  const privateRoom: { current: RoomMembersHandlerHandle | null } = {
+    current: null,
+  };
+
+  beforeEach(() => {
+    server.use(
+      ...roomMembersHandlers(PORT, ROOM_ID, {
+        handle: privateRoom,
+        groups: [GROUP_ID, SHARED_GROUP_ID],
+        withoutKeys: [GUEST_ID],
+      }),
+    );
+    privateRoom.current!.setMembers([
+      { id: OWNER_ID, access: 1 },
+      { id: SHARED_GROUP_ID, access: 11, isGroup: true },
+    ]);
+  });
+
+  afterEach(() => server.resetHandlers());
+
+  const share = (invitations: Array<{ id: string; access: number }>) =>
+    fetch(`${BASE_URL}:${PORT}/${API_PREFIX}/files/rooms/${ROOM_ID}/share`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ invitations }),
+    });
+
+  const memberIds = () => privateRoom.current!.getMembers().map((m) => m.id);
+
+  it("Group shared with a private room", async () => {
+    const res = await share([
+      { id: BOB_ID, access: 11 },
+      { id: GROUP_ID, access: 11 },
+    ]);
+
+    expect(res.status).toBe(403);
+    expect(memberIds()).not.toContain(GROUP_ID);
+    expect(memberIds()).not.toContain(BOB_ID);
+  });
+
+  it("Group shared with a private room: a role change of a shared group is not refused", async () => {
+    const res = await share([{ id: SHARED_GROUP_ID, access: 2 }]);
+
+    expect(res.status).toBe(200);
+    expect(
+      privateRoom.current!.getMembers().find((m) => m.id === SHARED_GROUP_ID)
+        ?.access,
+    ).toBe(2);
+  });
+
+  it("Guest shared with a private room", async () => {
+    const res = await share([{ id: GUEST_ID, access: 2 }]);
+
+    expect(res.status).toBe(403);
+    expect(memberIds()).not.toContain(GUEST_ID);
   });
 });
 

@@ -116,11 +116,29 @@ describe("getRoomsRequestScope", () => {
 
   it.each([
     RoomSearchArea.Templates,
+    RoomSearchArea.FormTemplates,
     RoomSearchArea.Forms,
     RoomSearchArea.AIAgents,
+    RoomSearchArea.AiHub,
   ])("does not scope a %s search", (searchArea) => {
     expect(getRoomsRequestScope(CategoryType.Shared, searchArea)).toBeNull();
   });
+
+  it("Templates search under Rooms", () => {
+    expect(
+      getRoomsRequestScope(CategoryType.Shared, RoomSearchArea.Templates),
+    ).toBeNull();
+  });
+
+  it.each([RoomSearchArea.Any, "Unexpected"])(
+    "Address with another search area (%s)",
+    (searchArea) => {
+      expect(getRoomsRequestScope(CategoryType.Shared, searchArea)).toEqual({
+        privacyFilter: RoomPrivacyFilter.NotPrivate,
+        lists: "notPrivate",
+      });
+    },
+  );
 
   it("does not scope lists outside rooms", () => {
     expect(getRoomsRequestScope(CategoryType.Personal, undefined)).toBeNull();

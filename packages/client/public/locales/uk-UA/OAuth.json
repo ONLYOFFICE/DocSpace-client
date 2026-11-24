@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG або SVG, 32x32",
   "ID": "Ідентифікатор",
   "InvalidToken": "Недійсний маркер",
-  "LastModified": "Остання зміна",
   "NewApp": "Новий застосунок",
   "NoAuthorizedApps": "Немає авторизованих застосунків",
   "NoOAuthAppHeader": "Немає застосунків OAuth",

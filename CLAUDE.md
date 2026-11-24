@@ -43,6 +43,20 @@ cd common/tests && npx vitest run test/locales.test.js
 
 ## Architecture
 
+### State Management
+
+MobX stores in `packages/shared/store/` are injected via React context. Main stores:
+- AuthStore - Authentication state
+- UserStore - User information
+- SettingsStore - Application settings
+
+### Build Pipeline
+
+1. `build:translations` generates i18n files
+2. Vite builds client package; Next.js builds login, doceditor, management, sdk
+3. Nx orchestrates parallel builds with caching
+4. Static file hashes (browserDetector.js, config.json) are computed on-demand via `packages/shared/utils/static-hash.ts`
+
 ### Dev Server
 
 - Client (Vite): `http://localhost:5001` — served behind nginx proxy at port 8092
@@ -78,12 +92,40 @@ cached copy. The Dockerfiles copy root `*.tgz` optionally, so an image builds
 in either mode. Go back with `pnpm -r update @onlyoffice/apps-ui-kit@^<version>`
 and delete the tarball; see `.claude/rules/pnpm.md`.
 
-For local ui-kit work, `pnpm run start:ui-kit-src` points the dev servers at a
-checkout - a dev-server alias only, never a tsconfig path. A local tarball must
-come from `pnpm pack`, never `npm pack`. `@onlyoffice/ai-chat` (an optional peer
-of ui-kit that client and sdk must declare themselves) and
-`@onlyoffice/docspace-plugin-sdk` switch to local packs with `update-ai-chat` /
-`update-plugin-sdk`. Details for all of these in `.claude/rules/pnpm.md`.
+For local work on ui-kit itself, `pnpm run start:ui-kit-src` (root script, or
+the "Start (ui-kit src)" workspace button) points every app's dev server at a
+checkout and restores HMR, with no build, pack or install in the loop - the
+Vite client through `packages/client/config/`, the four Next apps through
+`scripts/ui-kit-dev.cjs`. It is a dev-server alias only - never a tsconfig
+path, and both `vite build` and `next build` refuse to run while it is set. In
+the client an import that escapes the checkout fails (any JS/TS import, and a
+bare `@docspace/shared` load in SCSS; sass resolves relative `@use` paths
+itself, unchecked); the Next apps have no such check. Run the apps once
+**without** the variable before publishing a ui-kit release: source mode does not
+exercise the stylesheet order, `"use client"`, the exports wildcard or the
+generated types. Details in `.claude/rules/pnpm.md`.
+
+A local tarball must be produced by `pnpm pack`, not `npm pack`: ui-kit's
+`main`, `module`, `types` and `exports` fields live under `publishConfig`, which
+only pnpm promotes to the top level when packing. An npm-packed tarball has no
+entry points at all.
+
+`@onlyoffice/ai-chat` is an **optional peer** of ui-kit that ui-kit statically
+imports from its `ai-agent/*` and `api/ai` subpaths without bundling it. The
+apps that render the AI agent (client, sdk) therefore declare it themselves,
+from npm as well — that dependency is what satisfies ui-kit's peer, so it
+cannot be dropped while those subpaths are used. `pnpm run update-ai-chat`
+switches them to a local pack from `../../onlyoffice-ai-chat` the same way
+(`update-ui-kit` also takes one that sits next to the ui-kit checkout).
+ai-chat's own optional peers (LLM SDKs, radix, codemirror, ...) must be
+declared by those same apps; their versions sit in the `catalog:` block of
+`pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
+
+`@onlyoffice/docspace-plugin-sdk` is switched to an unpublished build the same
+way, with `pnpm run update-plugin-sdk` (a pack from `../../docspace-plugin-sdk`),
+and the Embed SDK `@onlyoffice/docspace-sdk-js` with `pnpm run update-sdk-js`
+(a pack from `../../docspace-sdk-js`), which also writes the pack's
+`dist/api.js` to `public/scripts/sdk/<x.y.z>/api.js` for the Embed SDK presets.
 
 ### buildtools sibling repo
 
@@ -222,6 +264,11 @@ nothing changed. Nx prints only the output of failed tasks. To debug a blocked
 push, run the failing task on its own; `pnpm nx reset` drops the cache if a
 result looks stale. Never bypass the gate with `git push --no-verify`.
 
+The Vitest configs are `vitest.config.mts` (and the client's
+`config/plugins/jsx-in-js.mts` they import), so Vite loads them as ES modules
+without its `configLoader: 'native'` compatibility warning; use
+`import.meta.dirname` there, not `__dirname`.
+
 CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
 is **manual-dispatch only** — there is no automatic PR/push CI, so the
 pre-push gate is the only automatic check. CI additionally covers what
@@ -258,7 +305,6 @@ the translation skills use that comment as context.
 | `.claude/rules/e2e-tests.md` | `packages/client/__tests__/**`, `packages/shared/__mocks__/**` |
 | `.claude/rules/link-preview.md` | `packages/client/index.html`, `packages/shared/utils/link-preview.ts`, `packages/shared/components/link-preview-meta/**`, `packages/login/src/app/link-preview/**` |
 | `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
-| `.claude/rules/billing-access.md` | SaaS billing access (payer / owner / admin): `payments/**`, `BillingSidebar/**`, `MainBar/**`, `Route.private.tsx`, `libs/ui-kit/billing/**`, the billing specs |
 | `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
 | `.claude/rules/private-rooms.md` | private-room / encryption code, `openspec/**` — OpenSpec specs and workflow for the feature |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |

@@ -33,9 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+import { Events } from "@docspace/shared/enums";
+
+const device = vi.hoisted(() => ({ isMobile: false }));
+
+vi.mock("react-device-detect", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
+  get isMobile() {
+    return device.isMobile;
+  },
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
+  toastr: { info: vi.fn(), error: vi.fn(), success: vi.fn(), warning: vi.fn() },
+}));
+
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import EmptyPrivateRoomView from "../EmptyPrivateRoomView";
 
@@ -152,5 +169,58 @@ describe("Empty folder inside a private room", () => {
     expect(screen.queryByText("EmptyView:CreateNewFileTitle")).toBeNull();
     expect(screen.queryByText("EmptyView:UploadDeviceOptionTitle")).toBeNull();
     expect(screen.queryByText("Common:PrivateRoomEmptyBenefitE2EE")).toBeNull();
+  });
+});
+
+describe("Mobile tap on PDF tile", () => {
+  afterEach(() => {
+    device.isMobile = false;
+  });
+
+  const openCreateMenu = () => {
+    render(
+      <Provider
+        selectedFolderStore={{ security: { Create: true } }}
+        uploadDataStore={{ shouldEncryptCurrentUpload: () => true }}
+      >
+        <EmptyPrivateRoomView />
+      </Provider>,
+    );
+    fireEvent.click(screen.getByText("EmptyView:CreateNewFileTitle"));
+  };
+
+  const createEvents = () => {
+    const listener = vi.fn();
+    window.addEventListener(Events.CREATE, listener);
+    return {
+      listener,
+      stop: () => window.removeEventListener(Events.CREATE, listener),
+    };
+  };
+
+  it("shows a notice instead of creating a PDF form on a mobile device", () => {
+    device.isMobile = true;
+    const events = createEvents();
+    openCreateMenu();
+
+    fireEvent.click(screen.getByText("Translations:NewForm"));
+    events.stop();
+
+    expect(toastr.info).toHaveBeenCalledWith(
+      "Common:MobileEditPdfNotAvailableInfo",
+    );
+    expect(events.listener).not.toHaveBeenCalled();
+  });
+
+  it("still creates a document on a mobile device", () => {
+    device.isMobile = true;
+    const events = createEvents();
+    openCreateMenu();
+
+    fireEvent.click(screen.getByText("Common:Document"));
+    events.stop();
+
+    expect(events.listener).toHaveBeenCalledTimes(1);
+    expect(toastr.info).not.toHaveBeenCalled();
   });
 });

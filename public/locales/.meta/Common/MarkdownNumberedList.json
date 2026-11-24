@@ -1,0 +1,29 @@
+{
+  "key_path": "MarkdownNumberedList",
+  "content": "Numbered list",
+  "content_en_sha1_hash": "8294ea4f78d097513144a9b8ba4e6d545a2a19e1",
+  "created_at": "2026-11-18T08:35:53.412Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Tooltip and accessible name of the numbered list button in the Markdown toolbar over a skill's instructions in the skill editor. Short noun phrase.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/MarkdownToolbar.tsx",
+      "line_number": 99,
+      "context": "const actions: { action: TMarkdownAction; label: string }[] = [\n { action: \"bold\", label: t(\"Common:MarkdownBold\") },\n { action: \"italic\", label: t(\"Common:MarkdownItalic\") },\n { action: \"heading\", label: t(\"Common:MarkdownHeading\") },\n { action: \"bulleted\", label: t(\"Common:MarkdownBulletedList\") },\n { action: \"numbered\", label: t(\"Common:MarkdownNumberedList\") },\n { action: \"code\", label: t(\"Common:MarkdownCode\") },\n { action: \"link\", label: t(\"Common:Link\") },\n ];\n \n return (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

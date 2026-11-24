@@ -45,6 +45,18 @@ type SkillEditorProps = {
   value: string;
   isDisabled: boolean;
   onChange: (value: string) => void;
+  /** The least height of the editor; most of the window by default. */
+  minHeight?: string;
+  /** The height the editor scrolls past; it grows with its text without one. */
+  maxHeight?: string;
+  /** A fixed height: the text scrolls inside the editor. */
+  height?: string;
+  /** Added to the editor's box, to size it from outside. */
+  className?: string;
+  /** The numbers of the lines, in a gutter; on unless switched off. */
+  withLineNumbers?: boolean;
+  /** Hands over the editor's view, for edits made from outside of it. */
+  onCreateEditor?: (view: EditorView) => void;
 };
 
 const extensions = [EditorView.lineWrapping];
@@ -72,12 +84,26 @@ const darkTheme = githubDarkInit({
   },
 });
 
-/** The generated skill as Markdown text, editable before it is saved. */
-const SkillEditor = ({ value, isDisabled, onChange }: SkillEditorProps) => {
+/** A skill's text as Markdown, in the Edit skill form and its read-only view. */
+const SkillEditor = ({
+  value,
+  isDisabled,
+  onChange,
+  minHeight = "calc(100vh - 220px)",
+  maxHeight,
+  height,
+  className,
+  withLineNumbers = true,
+  onCreateEditor,
+}: SkillEditorProps) => {
   const { isBase } = useTheme();
 
   return (
-    <div className={styles.editor} dir="ltr" data-testid="generate-skill-editor">
+    <div
+      className={className ? `${styles.editor} ${className}` : styles.editor}
+      dir="ltr"
+      data-testid="generate-skill-editor"
+    >
       <CodeMirror
         value={value}
         theme={isBase ? lightTheme : darkTheme}
@@ -85,10 +111,11 @@ const SkillEditor = ({ value, isDisabled, onChange }: SkillEditorProps) => {
         editable={!isDisabled}
         readOnly={isDisabled}
         onChange={onChange}
-        // The preview is the panel's whole body: a short skill still gets
-        // the room of a long one, and a long one scrolls with the panel.
-        minHeight="calc(100vh - 220px)"
-        basicSetup={{ foldGutter: false }}
+        minHeight={minHeight}
+        maxHeight={maxHeight}
+        height={height}
+        onCreateEditor={onCreateEditor}
+        basicSetup={{ foldGutter: false, lineNumbers: withLineNumbers }}
       />
     </div>
   );

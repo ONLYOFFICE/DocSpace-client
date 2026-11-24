@@ -37,7 +37,9 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 import React, { useId } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Badge } from "@onlyoffice/apps-ui-kit/components/badge";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
+import { globalColors } from "@onlyoffice/apps-ui-kit/providers/theme";
 import { classNames } from "../../utils";
 import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
@@ -56,6 +58,10 @@ type Props = {
 	/** The tooltip's heading and text; the file's "preparation failed" ones when unset. */
 	title?: string;
 	info?: string;
+	/** Draws the badge as a pill with this text in place of the alert icon. */
+	label?: string;
+	/** The light theme is on: the colour of the pill. */
+	themeIsBase?: boolean;
 	dataTestId?: string;
 };
 
@@ -66,6 +72,8 @@ export const FailedVectorizationBadge = ({
 	withRetryVectorization,
 	title,
 	info,
+	label,
+	themeIsBase = true,
 	dataTestId = "failed-vectorization-badge",
 }: Props) => {
 	const { t } = useTranslation("Common");
@@ -98,15 +106,35 @@ export const FailedVectorizationBadge = ({
 
 	return (
 		<>
-			<IconButton
-				data-tooltip-id={tooltipId}
-				iconName={iconAlert}
-				className={classNames(styles.badge, className, {
-					[styles.small]: size === "small",
-					[styles.medium]: size === "medium",
-				})}
-				dataTestId={dataTestId}
-			/>
+			{label ? (
+				<Badge
+					noHover
+					isVersionBadge
+					className={classNames(styles.pill, className)}
+					backgroundColor={
+						themeIsBase
+							? globalColors.lightErrorStatus
+							: globalColors.darkErrorStatus
+					}
+					label={label}
+					borderRadius="50px"
+					color={globalColors.white}
+					fontSize="9px"
+					fontWeight={700}
+					data-tooltip-id={tooltipId}
+					dataTestId={dataTestId}
+				/>
+			) : (
+				<IconButton
+					data-tooltip-id={tooltipId}
+					iconName={iconAlert}
+					className={classNames(styles.badge, className, {
+						[styles.small]: size === "small",
+						[styles.medium]: size === "medium",
+					})}
+					dataTestId={dataTestId}
+				/>
+			)}
 			<Tooltip
 				id={tooltipId}
 				className="not-selectable"

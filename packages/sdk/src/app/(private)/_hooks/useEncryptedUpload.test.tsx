@@ -58,7 +58,7 @@ type TBatchOptions = {
     result: { uploadId: string; file?: { id: number; folderId: number } },
   ) => void;
   onNameClash: (
-    clashes: { uploadId: string; file: File; renamed: string }[],
+    clashes: { uploadId: string; file: File; name: string; renamed: string }[],
   ) => Promise<boolean>;
 };
 
@@ -124,6 +124,7 @@ import {
   usePrivateDialogsStore,
 } from "../_store/PrivateDialogsStore";
 import { useEncryptedUpload } from "./useEncryptedUpload";
+import { abortAllCryptoOperations } from "../_utils/abort-registry";
 
 const batchResult = (
   uploadIds: string[],
@@ -371,6 +372,40 @@ describe("useEncryptedUpload", () => {
     expect(store.items[0].status).toBe("cancelled");
   });
 
+  it("Identity locked during an upload", async () => {
+    env.orchestrate.mockImplementationOnce(async (options: TBatchOptions) => {
+      abortAllCryptoOperations("lock");
+      return batchResult([], {
+        aborted: true,
+        results: options.uploadIds.map((uploadId) => ({
+          ok: false,
+          uploadId,
+          originalName: uploadId,
+          aborted: true,
+        })),
+      });
+    });
+
+    await upload(["a.docx", "b.docx"]);
+
+    expect(rows()).toEqual([
+      {
+        status: "error",
+        error: "Common:EncryptionLockedUpload",
+        isQuotaError: false,
+        retry: true,
+      },
+      {
+        status: "error",
+        error: "Common:EncryptionLockedUpload",
+        isQuotaError: false,
+        retry: true,
+      },
+    ]);
+    expect(store.errorsCount).toBe(2);
+    expect(store.uploaded).toBe(true);
+  });
+
   it("File cancelled while waiting", async () => {
     let waitingAborted: boolean | undefined;
     env.orchestrate.mockImplementationOnce(async (options: TBatchOptions) => {
@@ -434,7 +469,12 @@ describe("useEncryptedUpload", () => {
       env.orchestrate.mockImplementation(async (options: TBatchOptions) => {
         const [uploadId] = options.uploadIds;
         const keepBoth = await options.onNameClash([
-          { uploadId, file: options.files[0], renamed: "Report (1).docx" },
+          {
+            uploadId,
+            file: options.files[0],
+            name: "Report.docx",
+            renamed: "Report (1).docx",
+          },
         ]);
         if (keepBoth) {
           options.onFileComplete(options.files[0], { uploadId });
@@ -455,7 +495,8 @@ describe("useEncryptedUpload", () => {
       let ok: boolean | undefined;
       const done = act(async () => {
         ({ ok } = await uploadFiles({
-          files: [new File(["x"], "Report.docx")],
+          // A container downloaded without decryption; the clash is on its recovered name.
+          files: [new File(["x"], "5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx")],
           folderId: 5,
           roomId: 10,
         }));
@@ -463,7 +504,7 @@ describe("useEncryptedUpload", () => {
       return { done, ok: () => ok };
     };
 
-    it("asks before sending and cancels the upload when the user cancels", async () => {
+    it("Name clash cancelled", async () => {
       const { done, ok } = clashingUpload();
       await vi.waitFor(() => expect(dialogs.nameClash).not.toBeNull());
       expect(dialogs.nameClash?.names).toEqual(["Report.docx"]);
@@ -473,9 +514,10 @@ describe("useEncryptedUpload", () => {
 
       expect(ok()).toBe(false);
       expect(dialogs.nameClash).toBeNull();
-      expect(rows()).toEqual([
-        { status: "cancelled", error: undefined, isQuotaError: false, retry: false },
-      ]);
+      // The cancelled files leave the panel and its totals.
+      expect(rows()).toEqual([]);
+      expect(store.hasItems).toBe(false);
+      expect(store.totalBytes).toBe(0);
     });
 
     it("keeps both files when the user chooses to keep both", async () => {

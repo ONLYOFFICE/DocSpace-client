@@ -97,9 +97,6 @@ export const AutoLockSetting = ({ inPlace = false }: AutoLockSettingProps) => {
         <Text id={labelId} fontSize="13px" fontWeight={600}>
           {t("Common:AutoLockLabel")}
         </Text>
-        <Text fontSize="12px" color="var(--text-secondary)">
-          {t("Common:AutoLockHint")}
-        </Text>
       </div>
       <ComboBox
         className={styles.select}

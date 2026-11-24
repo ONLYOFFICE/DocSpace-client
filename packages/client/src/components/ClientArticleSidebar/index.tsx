@@ -71,21 +71,23 @@ import type {
   NavSubItem,
 } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { useAiChatStoreOptional } from "@onlyoffice/apps-ui-kit/ai-agent/providers/ai-chat-store";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
+import { isDesktop } from "@docspace/shared/utils";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import {
-  AI_HUB_SECTION_FOLDER_TYPES,
-  ROOMS_SECTION_FOLDER_TYPES,
-} from "@docspace/shared/utils/rooms";
+import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
-import CatalogSkillsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import CatalogAiChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url";
+import CatalogAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents-bot.react.svg?url";
+import CatalogAiRecentReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
+import CatalogSkillSetsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import CatalogKnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
@@ -98,6 +100,9 @@ import {
   type FolderIds,
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
+import type { TAiChatRecentThread } from "SRC_DIR/store/DialogsStore";
+import type { TPinnedAiProject } from "SRC_DIR/store/TreeFoldersStore";
+import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 
 import styles from "./ClientArticleSidebar.module.scss";
 
@@ -110,7 +115,29 @@ type ClientArticleSidebarProps = FolderIds & {
   canUseTemplates?: boolean;
   isTemplatesFolderRoot?: boolean;
   isDocumentsFolder?: boolean;
+  // An AI project room is open: its chat fills the section, fullscreen, as
+  // the project's own view - not the AI Chat entry.
+  isAiProjectRoomRoot?: boolean;
+  // The AI section room on screen (an opened skill set, knowledge base or
+  // agent, or a folder inside one) and its room type: the entry that lists
+  // it is highlighted even on its short address, which has no `type`.
+  aiOpenFolderId?: number | string | null;
+  aiOpenRoomType?: RoomsType | null;
   isNavLoading?: boolean;
+  // AI Chat / Recent open the chat fullscreen on one of its pages; the chat
+  // library's router is switched by AiChatPageBridge.
+  requestAiChatPage?: (
+    page: "chat" | "history",
+    afterLocationKey?: string | null,
+    threadId?: string,
+  ) => void;
+  // The AI projects the user pinned, listed under Agents in the order the
+  // Agents list shows pinned ones, and the latest conversations under Recent
+  // with the one the chat shows.
+  pinnedAiProjects?: TPinnedAiProject[];
+  recentAiChats?: TAiChatRecentThread[];
+  hasMoreAiChats?: boolean;
+  activeAiChatId?: string;
   // The portal-wide AI switch (Settings -> Integration -> AI services). With it
   // off there is no AI in the portal at all, so the AI Projects app is dropped
   // from the catalog rather than left pointing at a section that cannot work.
@@ -128,6 +155,60 @@ type ClientArticleSidebarProps = FolderIds & {
   onFolderNavigate: () => void;
 };
 
+// A stable empty default, so the memoized groups are not rebuilt each render.
+const EMPTY_LIST: never[] = [];
+
+// The room type of an AI section room told by the folder type of the room
+// a folder inside it sits in.
+const AI_ROOM_TYPES: Partial<Record<FolderType, RoomsType>> = {
+  [FolderType.InstructionsRoom]: RoomsType.InstructionsRoom,
+  [FolderType.KnowledgeRoom]: RoomsType.KnowledgeRoom,
+  [FolderType.AiProjectRoom]: RoomsType.AiProjectRoom,
+};
+
+// How long a fullscreen chat waits for the page of a clicked entry to say
+// it is shown before it closes anyway.
+const CHAT_CLOSE_TIMEOUT = 10000;
+
+// The path of the AI section's lists: Agents, and Skill sets and Knowledge
+// bases, which narrow it with `type`.
+const AI_AGENTS_PATH = "/ai-rooms/filter";
+
+// Ids of the entries listed under Agents and Recent, Recent's Show more
+// included.
+// NavMenu has no third level: they are siblings of those entries, indented
+// and spaced by the `[data-item-id^="ai-nested-"]` rules of the module's
+// stylesheet.
+const aiProjectItemId = (id: string | number) => `ai-nested-project-${id}`;
+const aiChatItemId = (id: string) => `ai-nested-chat-${id}`;
+const isAiNestedItemId = (id: string) => id.startsWith("ai-nested-");
+
+/**
+ * The collapsed sidebar draws the entries as icons, one under the other: the
+ * agents and conversations listed under Agents and Recent (and their Show
+ * more) are left out there, so Skill sets and Knowledge bases stay in reach
+ * without scrolling, and an agent or a conversation on screen highlights the
+ * entry it is listed under.
+ */
+const toCollapsedGroups = (groups: NavMenuGroup[]): NavMenuGroup[] =>
+  groups.map((group) => ({
+    ...group,
+    items: group.items.map((item) =>
+      item.children?.some((child) => isAiNestedItemId(child.id))
+        ? {
+            ...item,
+            children: item.children.filter((child) => !isAiNestedItemId(child.id)),
+          }
+        : item,
+    ),
+  }));
+
+const toCollapsedActiveId = (id: string | undefined) => {
+  if (id?.startsWith("ai-nested-project-")) return "ai-rooms";
+  if (id?.startsWith("ai-nested-chat-")) return "ai-chat-recent";
+  return id;
+};
+
 const ClientArticleSidebar = ({
   userId,
   treeFolders,
@@ -135,6 +216,14 @@ const ClientArticleSidebar = ({
   canUseTemplates,
   isTemplatesFolderRoot,
   isDocumentsFolder,
+  isAiProjectRoomRoot,
+  aiOpenFolderId,
+  aiOpenRoomType,
+  requestAiChatPage,
+  pinnedAiProjects = EMPTY_LIST,
+  recentAiChats = EMPTY_LIST,
+  hasMoreAiChats = false,
+  activeAiChatId,
   isNavLoading,
   aiServicesEnabled = true,
   roomsInstalled = true,
@@ -171,16 +260,55 @@ const ClientArticleSidebar = ({
   // navigates by itself (`meta.isLink`); navigating here too pushed the same
   // history entry twice. A section header with a sub-menu is a button and
   // still needs it.
+  //
+  // A fullscreen chat is the AI Chat page (or an AI project's own chat,
+  // which its view releases on the way out): going to another entry leaves
+  // it, so the chat closes rather than shrinking to the side panel over the
+  // entry's page - Agents shows the projects list, not the chat beside it.
+  // A side-panel chat stays open across sections, as before.
+  //
+  // The AI Chat page closes once the entry's page says it is shown
+  // (`END_ANIMATION`), not at the click: closed at once, it uncovered the
+  // agents list it lies over for as long as the entry's own list took to
+  // load. A page that never says so is not waited for longer than
+  // `CHAT_CLOSE_TIMEOUT`, and a chat asked for again meanwhile is left open.
+  const pendingChatCloseRef = React.useRef<(() => void) | null>(null);
+  const cancelChatClose = React.useCallback(() => {
+    pendingChatCloseRef.current?.();
+    pendingChatCloseRef.current = null;
+  }, []);
+  React.useEffect(() => cancelChatClose, [cancelChatClose]);
+  const isAiProjectRoomRootRef = React.useRef(isAiProjectRoomRoot);
+  isAiProjectRoomRootRef.current = isAiProjectRoomRoot;
+  const leaveFullscreenChat = React.useCallback(() => {
+    if (!aiChatStore?.effectiveFullscreen) return;
+    cancelChatClose();
+    if (isAiProjectRoomRootRef.current) {
+      aiChatStore.close();
+      return;
+    }
+    const close = () => {
+      cancelChatClose();
+      if (aiChatStore.effectiveFullscreen) aiChatStore.close();
+    };
+    const timer = window.setTimeout(close, CHAT_CLOSE_TIMEOUT);
+    window.addEventListener(AnimationEvents.END_ANIMATION, close);
+    pendingChatCloseRef.current = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener(AnimationEvents.END_ANIMATION, close);
+    };
+  }, [aiChatStore, cancelChatClose]);
+
   const nav = React.useCallback(
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
       onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
-        aiChatStore?.setFullscreen(false);
+        leaveFullscreenChat();
         onFolderNavigateRef.current?.();
         if (!meta?.isLink) navigate(path);
       },
     }),
-    [navigate],
+    [navigate, leaveFullscreenChat],
   );
 
   const folderUrl = React.useCallback(
@@ -222,9 +350,9 @@ const ClientArticleSidebar = ({
     [userId],
   );
 
-  // The AI Workspace list narrowed to one of its room types: the section's
-  // Skills (Instructions rooms) and Knowledge (Knowledge rooms) entries
-  // are the same /ai-rooms list with the `type` filter preset.
+  // The AI section's list narrowed to one of its room types: the Skill sets
+  // (Instructions rooms) and Knowledge bases (Knowledge rooms) entries are
+  // the same /ai-rooms list with the `type` filter preset.
   const aiHubTypeUrl = React.useCallback(
     (type: RoomsType) => {
       const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
@@ -235,7 +363,84 @@ const ClientArticleSidebar = ({
     [userId],
   );
 
-  const activeId = React.useMemo(
+  // The AI section's list of agents (AI projects) - its root, unnarrowed.
+  const aiAgentsUrl = React.useMemo(
+    () => searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub),
+    [searchAreaUrl],
+  );
+
+  // AI Chat and Recent are the chat itself, not a list: they open it
+  // fullscreen on the conversation or on its history, over the agents list
+  // (the section's root), which is what closing the chat goes back to. From
+  // anywhere else - another section, a narrowed list - the click opens the
+  // chat at once and goes to that list under it, so the list is never seen
+  // on the way. Two navigations close a chat opened before them, and there
+  // the chat waits for the navigation to land: leaving an AI project, whose
+  // view releases its chat, and, below the desktop width, a change of the
+  // path, which closes the chat that covers the main area.
+  const locationRef = React.useRef(location);
+  locationRef.current = location;
+  const openAiChatPage = React.useCallback(
+    (page: "chat" | "history", threadId?: string) => () => {
+      // The chat is asked for again: a close still waiting for the entry
+      // left before it is called off.
+      cancelChatClose();
+      const current = locationRef.current;
+      const isOnAgentsList =
+        current.pathname === AI_AGENTS_PATH &&
+        !new URLSearchParams(current.search).has("type");
+      if (isOnAgentsList) {
+        requestAiChatPage?.(page, null, threadId);
+        return;
+      }
+      const closesChat =
+        !!isAiProjectRoomRootRef.current ||
+        (!isDesktop() && current.pathname !== AI_AGENTS_PATH);
+      requestAiChatPage?.(page, closesChat ? current.key : null, threadId);
+      onFolderNavigateRef.current?.();
+      navigate(aiAgentsUrl);
+    },
+    [requestAiChatPage, navigate, aiAgentsUrl, cancelChatClose],
+  );
+
+  // While the chat covers the page, fullscreen, the entry it was opened as
+  // is the current one: Recent on its history, the conversation when Recent
+  // lists it, AI Chat otherwise. An AI project's own fullscreen chat belongs
+  // to the project (Agents).
+  const getAiChatPageId = () => {
+    if (
+      !aiChatStore?.isVisible ||
+      !aiChatStore.effectiveFullscreen ||
+      isAiProjectRoomRoot
+    )
+      return undefined;
+    if (aiChatStore.isOnHistoryPage) return "ai-chat-recent";
+    if (
+      activeAiChatId &&
+      recentAiChats.some((thread) => thread.id === activeAiChatId)
+    )
+      return aiChatItemId(activeAiChatId);
+    return "ai-chat";
+  };
+  const aiChatPageId = getAiChatPageId();
+
+  // An open AI project that Agents lists is its own entry.
+  const openProjectId = /^\/ai-rooms\/(\d+)\//.exec(location.pathname)?.[1];
+  const aiProjectPageId =
+    openProjectId &&
+    pinnedAiProjects.some((project) => project.id === openProjectId)
+      ? aiProjectItemId(openProjectId)
+      : undefined;
+
+  // The open room counts only once it is the folder the address names: on
+  // the way to another one the store still holds the room being left.
+  const shownAiRoomType =
+    aiOpenFolderId != null &&
+    new URLSearchParams(location.search).get("folder") === String(aiOpenFolderId)
+      ? aiOpenRoomType
+      : null;
+
+  const locationActiveId = React.useMemo(
     () =>
       getClientActiveId(
         location.pathname,
@@ -243,6 +448,7 @@ const ClientArticleSidebar = ({
         location.search,
         isTemplatesFolderRoot,
         isDocumentsFolder,
+        shownAiRoomType,
       ),
     [
       location.pathname,
@@ -250,8 +456,11 @@ const ClientArticleSidebar = ({
       folderIds,
       isTemplatesFolderRoot,
       isDocumentsFolder,
+      shownAiRoomType,
     ],
   );
+
+  const activeId = aiChatPageId ?? aiProjectPageId ?? locationActiveId;
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     const find = (type: FolderType) =>
@@ -599,48 +808,80 @@ const ClientArticleSidebar = ({
       });
     }
 
-    // The AI sections close the apps, while the portal has AI switched on
-    // (the server only serves their roots then). "AI Workspace" holds the
-    // Instructions rooms, Knowledge rooms and AI projects (`FolderType.AiHub`).
-    // Its root lists the agents (AI projects; a project opens as its chat),
-    // the entries are the same list narrowed to the other room types -
-    // Skills (Instructions rooms), Knowledge (Knowledge rooms) - plus a
-    // Trash scoped to those room types; the server never archives them, so
-    // there is no Archive slot. The bare `/ai-rooms` is the
-    // Rooms app's SDK frame page: the section lives on the nested paths.
+    // The AI section closes the apps, while the portal has AI switched on
+    // (the server only serves its root then). It holds the AI projects,
+    // Instructions rooms and Knowledge rooms (`FolderType.AiHub`). The
+    // section itself is AI Chat: the chat, fullscreen. Under it Agents lists
+    // the AI projects (the section's root list; a project opens as its
+    // chat), Recent is the chat's history, and Skill sets and Knowledge bases
+    // are the same list narrowed to Instructions and Knowledge rooms. There
+    // is no Trash entry (its `/ai-rooms/trash` route stays) and no Archive
+    // one - the server never archives these rooms. The bare `/ai-rooms` is
+    // the Rooms app's SDK frame page: the section lives on the nested paths.
     if (aiHubFolder && aiServicesEnabled) {
       mainItems.push({
-        id: "ai-rooms",
-        label: t("Common:AiWorkspace"),
-        icon: getCatalogIconUrlByType(FolderType.Rooms),
-        ...nav(searchAreaUrl("/ai-rooms/filter", RoomSearchArea.AiHub)),
+        id: "ai-chat",
+        label: t("Common:AIChat"),
+        icon: CatalogAiChatReactSvgUrl,
+        onClick: openAiChatPage("chat"),
         ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),
         children: [
           {
+            id: "ai-rooms",
+            label: t("Common:Agents"),
+            icon: CatalogAgentsReactSvgUrl,
+            ...nav(aiAgentsUrl),
+          },
+          // A project opens as its room, which shows its chat. Its logo is
+          // the one the projects list shows; without one, its initials.
+          ...pinnedAiProjects.map((project) => ({
+            id: aiProjectItemId(project.id),
+            label: project.name,
+            iconNode: (
+              <ProjectLogo
+                project={{
+                  title: project.name,
+                  logo: project.logo,
+                }}
+                size="20px"
+                radius="4px"
+                className={styles.agentLogo}
+              />
+            ),
+            ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
+          })),
+          {
+            id: "ai-chat-recent",
+            label: t("Common:AIChatRecent"),
+            icon: CatalogAiRecentReactSvgUrl,
+            onClick: openAiChatPage("history"),
+          },
+          ...recentAiChats.map((thread) => ({
+            id: aiChatItemId(thread.id),
+            label: thread.title,
+            onClick: openAiChatPage("chat", thread.id),
+          })),
+          // The rest are in the chat's history.
+          ...(hasMoreAiChats
+            ? [
+                {
+                  id: "ai-nested-chats-more",
+                  label: t("Common:ShowMore"),
+                  onClick: openAiChatPage("history"),
+                },
+              ]
+            : []),
+          {
             id: "ai-rooms-skills",
-            label: t("Common:Skills"),
-            icon: CatalogSkillsReactSvgUrl,
+            label: t("Common:SkillSets"),
+            icon: CatalogSkillSetsReactSvgUrl,
             ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),
           },
           {
             id: "ai-rooms-knowledge",
-            label: t("Common:AiWorkspaceKnowledge"),
+            label: t("Common:AIProjectKnowledgeRooms"),
             icon: CatalogKnowledgeReactSvgUrl,
             ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),
-          },
-          {
-            id: "ai-rooms-trash",
-            label: t("Common:TrashSection"),
-            icon: getCatalogIconUrlByType(FolderType.TRASH),
-            ...nav(
-              scopedUrl(
-                CategoryType.Trash,
-                "/ai-rooms/trash",
-                recycleBinFolderId,
-                AI_HUB_SECTION_FOLDER_TYPES,
-              ),
-            ),
-            withTopSeparator: true,
           },
         ],
       });
@@ -668,6 +909,11 @@ const ClientArticleSidebar = ({
     scopedUrl,
     searchAreaUrl,
     aiHubTypeUrl,
+    aiAgentsUrl,
+    openAiChatPage,
+    pinnedAiProjects,
+    recentAiChats,
+    hasMoreAiChats,
     treeFolders,
     isVisitor,
     canUseTemplates,
@@ -684,10 +930,35 @@ const ClientArticleSidebar = ({
     setEmptyTrashDialogVisible,
   ]);
 
+  // The projects and conversations are cut to the menu's width; hovering
+  // one shows its whole name. NavMenu gives a sub-item no title of its own,
+  // so it is set on the rendered entry, after every render (an entry the
+  // menu drew anew has none).
+  React.useEffect(() => {
+    const titles: [string, string][] = [
+      ...pinnedAiProjects.map(
+        (project) => [aiProjectItemId(project.id), project.name] as [string, string],
+      ),
+      ...recentAiChats.map(
+        (thread) => [aiChatItemId(thread.id), thread.title] as [string, string],
+      ),
+    ];
+    for (const [id, title] of titles) {
+      for (const entry of document.querySelectorAll<HTMLElement>(
+        `[data-item-id="${id}"]`,
+      ))
+        entry.title = title;
+    }
+  });
+
+  const collapsedGroups = React.useMemo(() => toCollapsedGroups(groups), [groups]);
+
   return (
     <AppsSidebar
       groups={groups}
       activeId={activeId}
+      collapsedGroups={collapsedGroups}
+      collapsedActiveId={toCollapsedActiveId(activeId)}
       isNavLoading={isNavLoading}
       pluginSection={Section.Files}
     />
@@ -705,6 +976,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     clientLoadingStore,
     settingsStore,
     appsStore,
+    selectedFolderStore,
   }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
@@ -720,6 +992,24 @@ const ClientArticleSidebarConnected = inject<TStore>(
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
     isDocumentsFolder: treeFoldersStore.isDocumentsFolder,
+    isAiProjectRoomRoot: treeFoldersStore.isAiProjectRoomRoot,
+    ...(selectedFolderStore.rootFolderType === FolderType.AiHub &&
+    !selectedFolderStore.isRootFolder
+      ? {
+          aiOpenFolderId: selectedFolderStore.id,
+          aiOpenRoomType:
+            selectedFolderStore.roomType ??
+            (selectedFolderStore.parentRoomType != null
+              ? AI_ROOM_TYPES[selectedFolderStore.parentRoomType]
+              : undefined) ??
+            null,
+        }
+      : {}),
+    requestAiChatPage: dialogsStore.requestAiChatPage,
+    pinnedAiProjects: treeFoldersStore.pinnedAiProjects,
+    recentAiChats: dialogsStore.aiChatRecentThreads,
+    hasMoreAiChats: dialogsStore.aiChatHasMoreThreads,
+    activeAiChatId: dialogsStore.aiChatActiveThreadId,
     aiServicesEnabled: settingsStore.aiServicesEnabled,
     roomsInstalled: appsStore.isInstalled("ai-rooms"),
     formsInstalled: appsStore.isInstalled("ai-forms"),

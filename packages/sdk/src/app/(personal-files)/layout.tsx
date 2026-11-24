@@ -126,6 +126,7 @@ export default async function DocsLayout({
           initViewAs={initViewAs}
           myFolderId={myFolderId}
           canUseAi={!!user && !user.isVisitor}
+          userId={user?.id}
         >
           {children}
         </DocsStoreProviders>

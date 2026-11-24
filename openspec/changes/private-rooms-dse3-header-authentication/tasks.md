@@ -27,7 +27,7 @@ task 2.3 retires that limitation when the change resumes.
 
 ## 3. Upload, download, re-import and name recovery on version 3
 
-- [ ] 3.1 Run the private-room integration suites (`packages/shared/services/private-room/__tests__/{upload-download,filename-recovery,cross-user-download}.integration.test.ts`) against version-3 output, produced through the version parameter of 1.3, and against the default, and add a v2-fixture re-import case to `encrypted-upload-orchestrator.test.ts` asserting the re-imported container keeps its version-2 bytes; verify green.
+- [ ] 3.1 Run the private-room integration suites (`packages/shared/services/private-room/__tests__/{upload-download,filename-recovery,cross-user-download}.integration.test.ts`) against version-3 output, produced through the version parameter of 1.3, and against the default, and add a v2-fixture re-import case to `encrypted-upload-orchestrator.test.ts` asserting that a version-2 container is read and the re-import is written in the version the header builder writes (revised on 2026-11-20: a re-import is a new upload, `private-rooms-invite-and-upload-robustness` decision 1); verify green.
 - [ ] 3.2 Confirm the 4 KiB range read used for name recovery still covers the header for v3 (layout unchanged); verify with the existing `encrypted-filename-recovery.test.ts`.
 
 ## 4. Server and editor compatibility

@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG ຫຼື SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "ຕົວລະປ້າຍທີ່ບໍ່ຖືກຕ້ອງ",
-  "LastModified": "ຄັ້ງສຸດທະຍ້າຍແກ້ໄຂ",
   "NewApp": "ຄໍາຮ້ອງສະຫມັກໃໝ່",
   "NoAuthorizedApps": "ບໍ່ມີແອັບຯທີ່ໄດ້ຮັບອະນຸຍາດ",
   "NoOAuthAppHeader": "ບໍມີແອັບພລິເຄຊັນ OAuth",

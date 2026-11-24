@@ -64,6 +64,7 @@ const FILE_ID = 8700;
 const ORIGINAL_TEXT = "Cross-user encrypted memo. If you can read this, the unwrap path picked the right roomMemberKeys.";
 const FOLDER_ID = 9710;
 const FOLDER_TITLE = "Reports";
+const REPLACED_KEY_ID = "3b01cb76-0000-4000-8000-00000000000b";
 
 function pubB64(kp: IdentityKeyPair): string {
   return arrayBufferToBase64(kp.publicKey.buffer as ArrayBuffer);
@@ -78,6 +79,10 @@ type Seed = {
   name: string;
   text: string;
   forBob: boolean;
+  /** Bob's wrap is made for a key pair he no longer holds, under its id. */
+  replacedKey?: boolean;
+  /** Bob's wrap is made for his key, under an id his key list does not hold. */
+  otherKeyId?: boolean;
   folderId?: number;
   serverTitle?: string;
 };
@@ -114,9 +119,10 @@ async function openReportsRoom(
   );
   const bobPublicKeyB64 = bobKeysHandle.getKeys()[0].publicKey;
   const alice = await generateIdentityKeyPair();
+  const bobPreviousKey = await generateIdentityKeyPair();
 
   const initialFiles = await Promise.all(
-    seeds.map(async ({ id, name, text, forBob, folderId, serverTitle }) => {
+    seeds.map(async ({ id, name, text, forBob, replacedKey, otherKeyId, folderId, serverTitle }) => {
       const plainBytes = new TextEncoder().encode(text);
       const { encryptedBlob, dek } = await encryptFile(plainBytes, {
         fileName: name,
@@ -127,7 +133,18 @@ async function openReportsRoom(
         senderUserId: ALICE_ID,
         recipients: [
           { userId: ALICE_ID, publicKey: pubB64(alice) },
-          ...(forBob ? [{ userId: BOB_ID, publicKey: bobPublicKeyB64 }] : []),
+          ...(forBob
+            ? [
+                {
+                  userId: BOB_ID,
+                  publicKey: replacedKey
+                    ? pubB64(bobPreviousKey)
+                    : bobPublicKeyB64,
+                  publicKeyId:
+                    replacedKey || otherKeyId ? REPLACED_KEY_ID : undefined,
+                },
+              ]
+            : []),
         ],
         fileId: id,
       });
@@ -153,6 +170,17 @@ async function openReportsRoom(
       ownerId: ALICE_ID,
       folders: [{ id: FOLDER_ID, title: FOLDER_TITLE }],
       initialFiles,
+      currentUserId: BOB_ID,
+      callerKeys: [
+        {
+          id: bobKeysHandle.getKeys()[0].id ?? "bob-1",
+          userId: BOB_ID,
+          publicKey: bobPublicKeyB64,
+          privateKeyEnc: bobKeysHandle.getKeys()[0].privateKeyEnc,
+          date: "2026-01-01T00:00:00.000Z",
+          cryptoEngineId: "",
+        },
+      ],
       roomUserKeys: [
         {
           id: "bob-1",
@@ -551,3 +579,92 @@ test.describe("Private room — media viewer of a file not shared yet", () => {
   });
 });
 
+// Spec: private-rooms/file-operations, "A private room names the files wrapped for a key the user no longer holds"
+test.describe("Private room — files wrapped for a key the user no longer holds", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Room of a user who replaced the key", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const { passphrase, passphrasePrompt } = await openReportsRoom(
+      page,
+      mockRequest,
+      baseUrl,
+      [
+        {
+          id: 8740,
+          name: "photo.png",
+          text: "Wrapped for the previous key",
+          forBob: true,
+          replacedKey: true,
+          serverTitle: "obfuscated-8740.png",
+        },
+      ],
+    );
+    const notice = page.getByTestId("private_room_replaced_key_notice");
+
+    await page.getByTestId("private_room_locked_block_unlock").click();
+    await enterPassphrase(passphrasePrompt, passphrase);
+
+    await expect(notice).toContainText("1 file here was encrypted", {
+      timeout: 15000,
+    });
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: "cannot unwrap" }),
+    ).toHaveCount(0);
+
+    // Media viewer
+    await page
+      .getByTestId("table-body")
+      .getByTestId("files-cell-name-1")
+      .locator(".item-file-name")
+      .click();
+    await expect(
+      page.getByText(
+        "This file was encrypted for an encryption key you no longer have.",
+      ),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(/Failed to decrypt/)).toHaveCount(0);
+  });
+
+  test("Key imported again", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { passphrase, passphrasePrompt } = await openReportsRoom(
+      page,
+      mockRequest,
+      baseUrl,
+      [
+        {
+          id: 8741,
+          name: "kept.png",
+          text: "Wrapped for the same key under its earlier id",
+          forBob: true,
+          otherKeyId: true,
+          serverTitle: "obfuscated-8741.png",
+        },
+      ],
+    );
+
+    await page.getByTestId("private_room_locked_block_unlock").click();
+    await enterPassphrase(passphrasePrompt, passphrase);
+
+    // The list shows the decrypted name without its extension.
+    await expect(page.getByTestId("table-body")).toContainText("kept", {
+      timeout: 15000,
+    });
+    await expect(
+      page.getByTestId("private_room_replaced_key_notice"),
+    ).toHaveCount(0);
+  });
+});

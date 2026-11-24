@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "ゲストの詳細はこちらでご確認いただけます",
   "HistoryEmptyScreenText": "アクティビティ履歴はこちらに表示されます",
   "HistoryThirdParty": "サードパーティストレージが接続されているパブリックルームでは、履歴表示は利用できません。",
+  "KnowledgeBasesEmptyScreenText": "ナレッジベースの詳細はこちら",
   "LastUpdateInfo": "最終更新日",
   "LifetimeEnds": "有効期限が近づいています",
   "MembersEmptyScreenText": "メンバーの詳細はここをクリックしてご覧ください",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "ルームの詳細情報はこちら",
   "SelectedGroups": "選択されたグループ",
   "SelectedUsers": "選択されたアカウント",
+  "SkillSetsEmptyScreenText": "スキルセットの詳細はこちら",
   "StorageType": "ストレージのタイプ",
   "Users": "ユーザー"
 }

@@ -60,8 +60,11 @@ import { arrayBufferToBase64 } from "../../encryption/utils";
 import type { IdentityKeyPair } from "../../encryption/types";
 
 import { downloadAndDecryptFile } from "../encrypted-download";
+import { prepareReimport } from "../encrypted-upload-orchestrator";
+import { RoomsType } from "../../../enums";
 import {
   EncryptedReimportError,
+  prepareEncryptedUpload,
   recoverDekForReimport,
   sniffDse3Upload,
 } from "../encrypted-upload";
@@ -374,6 +377,38 @@ describe("encrypted re-import — integration via MSW", () => {
     const { data } = await decryptFile(encryptedBytes, recovery.dek);
     const decrypted = new TextDecoder().decode(await blobToUint8Array(data));
     expect(decrypted).toBe(originalText);
+  });
+
+  it("Re-imported copy", async () => {
+    const alice = await generateIdentityKeyPair();
+    const { encryptedBytes, originalText } = await seedSourceFile(alice);
+    const rawFile = new File([encryptedBytes as BlobPart], SOURCE_TITLE);
+    const header = await sniffDse3Upload(rawFile);
+    const args = { roomId: ROOM_ID, userId: ALICE_ID, identity: alice };
+    const source = await recoverDekForReimport({
+      file: rawFile,
+      header: header!,
+      ...args,
+    });
+
+    const copy = await prepareReimport(rawFile, header!, args as never, (clear) =>
+      prepareEncryptedUpload({
+        file: clear,
+        folderId: ROOM_ID,
+        roomType: RoomsType.CustomRoom,
+        isPrivate: true,
+      }),
+    );
+
+    expect(copy.originalFileName).toBe("report.txt");
+    expect(copy.dek).not.toEqual(source.dek);
+    const { data } = await decryptFile(
+      await blobToUint8Array(copy.data),
+      copy.dek!,
+    );
+    expect(new TextDecoder().decode(await blobToUint8Array(data))).toBe(
+      originalText,
+    );
   });
 
   it("recovers via the uuid even when the browser deduplicated the download name", async () => {

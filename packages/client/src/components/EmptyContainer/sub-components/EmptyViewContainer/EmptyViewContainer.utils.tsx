@@ -97,6 +97,8 @@ import FormDefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.defau
 import FormDefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
 import DefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.dark.svg";
 import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.light.svg";
+import EmptyAiRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+import EmptyAiRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
@@ -245,9 +247,22 @@ export const getRoomDescription = (
   t: TTranslation,
   isNotAdmin: boolean,
   isArchiveFolderRoot: boolean,
+  type?: RoomsType,
 ) => {
-  if (isNotAdmin || isArchiveFolderRoot)
-    return t("Common:UserEmptyDescription");
+  const isReadOnly = isNotAdmin || isArchiveFolderRoot;
+
+  // A skill set holds skills and a knowledge base holds files to search:
+  // each says what it is for, not "files and folders" or "quick actions".
+  if (type === RoomsType.InstructionsRoom)
+    return isReadOnly
+      ? t("EmptyView:SkillSetEmptyUserDescription")
+      : t("EmptyView:SkillSetEmptyDescription");
+  if (type === RoomsType.KnowledgeRoom)
+    return isReadOnly
+      ? t("EmptyView:KnowledgeBaseEmptyUserDescription")
+      : t("EmptyView:KnowledgeBaseEmptyDescription");
+
+  if (isReadOnly) return t("Common:UserEmptyDescription");
 
   return t("EmptyView:EmptyViewDescription");
 };
@@ -270,11 +285,11 @@ export const getAiRoomsAIOffDescription = (
   standalone: boolean,
   isPortalAdmin: boolean,
 ) => {
-  if (!isPortalAdmin) return t("Common:AiRoomsAIOffUserDescription");
-  if (standalone) return t("Common:AiRoomsAIOffStandaloneAdminDescription");
+  if (!isPortalAdmin) return t("Common:AiChatAIOffUserDescription");
+  if (standalone) return t("Common:AiChatAIOffStandaloneAdminDescription");
   return (
     <>
-      <Text as="span">{t("Common:AiRoomsAIOffDescription")}</Text>
+      <Text as="span">{t("Common:AiChatAIOffDescription")}</Text>
       <Text as="span" style={{ display: "block", marginTop: "8px" }}>
         {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
       </Text>
@@ -397,6 +412,13 @@ export const getRoomTitle = (
 ) => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
+  // Whoever looks at it, an empty skill set has no skills and an empty
+  // knowledge base has no files.
+  if (type === RoomsType.InstructionsRoom)
+    return t("EmptyView:SkillSetEmptyTitle");
+  if (type === RoomsType.KnowledgeRoom)
+    return t("EmptyView:KnowledgeBaseEmptyTitle");
+
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
 
   if (isNotAdmin || isArchiveFolderRoot) return t("Common:EmptyScreenFolder");
@@ -492,6 +514,11 @@ export const getRoomIcon = (
   access: AccessType,
 ) => {
   return match([type, access])
+    // The rooms of the AI Chat section share its illustration.
+    .with(
+      [P.union(RoomsType.InstructionsRoom, RoomsType.KnowledgeRoom), P._],
+      () => (isBaseTheme ? <EmptyAiRoomLightIcon /> : <EmptyAiRoomDarkIcon />),
+    )
     .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
       isBaseTheme ? (
         <EmptyFormRoomFillingLightIcon />

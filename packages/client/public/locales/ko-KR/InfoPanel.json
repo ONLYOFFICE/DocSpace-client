@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "여기에서 게스트 세부 정보를 확인하세요",
   "HistoryEmptyScreenText": "활동 내역이 여기에 표시됩니다",
   "HistoryThirdParty": "연결된 타사 스토리지가 포함된 공개 룸의 경우 기록 표시를 사용할 수 없습니다",
+  "KnowledgeBasesEmptyScreenText": "여기에서 지식 기반 세부 정보를 확인하세요",
   "LastUpdateInfo": "최종 업데이트",
   "LifetimeEnds": "수명 만료",
   "MembersEmptyScreenText": "여기에서 멤버 세부 정보를 확인하세요",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "여기에서 방 세부 정보를 확인하세요",
   "SelectedGroups": "선택된 그룹",
   "SelectedUsers": "선택된 계정",
+  "SkillSetsEmptyScreenText": "여기에서 스킬 세트 세부 정보를 확인하세요",
   "StorageType": "스토리지 유형",
   "Users": "사용자"
 }

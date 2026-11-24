@@ -14,11 +14,11 @@ Implementation: packages/client/src/components/ClientArticleSidebar, packages/cl
 ## Requirements
 
 ### Requirement: Sidebar item
-The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI rooms (Common:AiRooms) when that item is shown. It SHALL have exactly one sub-item, Archive (Common:Archive).
+The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI Chat (Common:AIChat) when that item is shown. It SHALL have exactly one sub-item, Archive (Common:Archive).
 
 #### Scenario: Section available
 - **WHEN** the sidebar renders while the section is available and AI services are on
-- **THEN** a Private item follows Forms and precedes AI rooms, and expanding it shows only the Archive sub-item
+- **THEN** a Private item follows Forms and precedes AI Chat, and expanding it shows only the Archive sub-item
 
 #### Scenario: Item clicked
 - **WHEN** the user clicks the Private item
@@ -31,7 +31,7 @@ The system SHALL show a top-level sidebar item labelled Common:Private while the
 ### Requirement: Section addresses
 The system SHALL serve these section addresses:
 - the list at `/private/filter`;
-- a private room or a folder inside one at `/private/{id}/filter`;
+- a private room or a folder inside one at `/private/{id}/filter`, with or without `?folder={id}`;
 - the archive at `/private/archived/filter`;
 - an archived private room or a folder inside one at `/private/archived/filter?folder={id}`, the same form Rooms → Archive uses.
 
@@ -44,6 +44,10 @@ The sidebar SHALL highlight Private on the list and room addresses, and its Arch
 #### Scenario: Room address
 - **WHEN** the user opens `/private/{roomId}/filter` for a private room they belong to
 - **THEN** the room contents are shown and the Private item is highlighted
+
+#### Scenario: Room address without the folder parameter
+- **WHEN** the user opens `/private/{roomId}/filter` with no query for a private room they belong to
+- **THEN** the address becomes `/private/{roomId}/filter?folder={roomId}`, the room contents are shown, and no address names an undefined room
 
 #### Scenario: Archived room address
 - **WHEN** the user opens `/private/archived/filter?folder={roomId}` for an archived private room they belong to
@@ -69,7 +73,7 @@ The system SHALL request the section list with the section's search area (`Priva
 - **THEN** that room is never listed in the Private section
 
 ### Requirement: Rooms section never lists private rooms
-The system SHALL request the Rooms list without a privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive with the non-private filter, since the shared Archive holds both, whether the Private section is available or not. While the section is not available, private rooms SHALL NOT be listed anywhere in the client.
+The system SHALL request the Rooms list without a privacy filter, the server leaving private rooms out of the Rooms area, and Rooms → Archive with the non-private filter, since the shared Archive holds both, whether the Private section is available or not. A Rooms address whose search area is Any or one the client does not know SHALL be requested with the non-private filter as well. While the section is not available, private rooms SHALL NOT be listed anywhere in the client.
 
 #### Scenario: Section available
 - **WHEN** the user opens Rooms or Rooms → Archive while the section is available
@@ -82,6 +86,14 @@ The system SHALL request the Rooms list without a privacy filter, the server lea
 #### Scenario: Address asks Rooms for private rooms
 - **WHEN** a Rooms address carrying `privacyFilter=Private` is opened while the section is available
 - **THEN** the request carries no privacy filter and lists the Rooms root only
+
+#### Scenario: Address with another search area
+- **WHEN** a Rooms address carrying `searchArea=Any` is opened by a member of a private room
+- **THEN** the request carries the non-private filter and no private room is listed
+
+#### Scenario: Templates search under Rooms
+- **WHEN** the Templates submenu of Rooms is opened, its address carrying `searchArea=Templates`
+- **THEN** the request carries no privacy filter, as before
 
 #### Scenario: Room group opened in Rooms
 - **WHEN** a room group of the Rooms area is opened while the section is available
@@ -171,7 +183,7 @@ The system SHALL decide whether an address belongs to the Rooms or the Private s
 - keeps the highlight that the entry point asked for;
 - never alternates between the two sections.
 
-Addresses inside an embedded frame SHALL be decided the same way.
+Addresses inside an embedded frame SHALL be decided the same way, once the frame knows whether its host opted in.
 
 #### Scenario: Cold link to a private room
 - **WHEN** a member opens `/rooms/shared/{roomId}/filter` for a private room without keys on this device
@@ -185,16 +197,20 @@ Addresses inside an embedded frame SHALL be decided the same way.
 - **WHEN** a Rooms address of a private room is opened in the client inside an embedded frame while the section is available
 - **THEN** the address is replaced with its `/private` counterpart and the room opens there, as outside a frame
 
+#### Scenario: Frame configuration arrives after the address
+- **WHEN** an embedded frame whose host opted in is opened at a Rooms address of a private room and its configuration arrives after the folder was read
+- **THEN** the address is replaced with its `/private` counterpart and the room opens there, without being shown under Rooms first
+
 #### Scenario: Superseded load
 - **WHEN** the user navigates again before the folder behind a Rooms or Private address has been checked
 - **THEN** the superseded load commits nothing, neither folder state nor loading state nor a highlighted file, and only the newer load ends the loading
 
 ### Requirement: Private section in an embedded frame
-The system SHALL offer the Private section to the client running inside an embedded frame under the same availability as outside a frame. A frame opened at a `/private` address SHALL show the Private list or the private room it names, and a frame that shows the menu SHALL show the Private item in it.
+The system SHALL offer the Private section to the client running inside an embedded frame under the same availability as outside a frame once the frame's configuration carries the `privateRooms` opt-in. A frame opened at a `/private` address SHALL show the Private list or the private room it names, and a frame that shows the menu SHALL show the Private item in it.
 
 #### Scenario: Frame opened in the Private section
 - **WHEN** a host embeds the client with the root path `/private/` while the section is available
-- **THEN** the frame shows the Private list and its requests carry `privacyFilter=Private`
+- **THEN** the frame shows the Private list and its requests name the section's search area (`searchArea=PrivateRooms`) and carry no privacy filter
 
 #### Scenario: Frame showing the menu
 - **WHEN** a host embeds the client with the menu shown while the section is available
@@ -379,7 +395,7 @@ The system SHALL make the info panel available on the Private section list, on i
 - **THEN** the panel shows the room's details and members
 
 ### Requirement: Live updates respect the split
-The system SHALL insert a room that arrives through a live update only into the open list whose privacy scope it matches. That covers a room created, restored or shared with the user. The client SHALL read the room's private setting from the room itself, because the live event does not carry it.
+The system SHALL insert a room that arrives through a live update only into the open list whose privacy scope it matches. That covers a room created, restored or shared with the user. The client SHALL read the room's private setting from the room itself, because the live event does not carry it. A room that is not inserted SHALL NOT change the count of rooms of the open list.
 
 #### Scenario: Invited to a private room
 - **WHEN** another user adds the current user to a private room while the Rooms list is open and the section is available
@@ -388,6 +404,10 @@ The system SHALL insert a room that arrives through a live update only into the 
 #### Scenario: Ordinary room created in another tab
 - **WHEN** the user creates a non-private room in another tab while the Private list is open
 - **THEN** the room is not inserted into the Private list
+
+#### Scenario: Count of the open list
+- **WHEN** the user creates a private room in another tab while the Rooms list is open and the section is available
+- **THEN** the count of rooms of the Rooms list does not change
 
 ### Requirement: E2E rooms entry points lead to the section
 The system SHALL redirect `/e2e-rooms` to `/private/filter`, and `/e2e-rooms?section=archive` to `/private/archived/filter`, while the section is available. Launching the E2E rooms app SHALL open `/private/filter`. No client page SHALL frame the SDK private surface.
@@ -511,14 +531,14 @@ The system SHALL label the create button of the Private list, its header action 
 - **THEN** the create button reads Common:NewRoom
 
 ### Requirement: Dashboard shows a card of private rooms
-The system SHALL show among the apps of the dashboard a card of private rooms to every user who is shown the sidebar item of the section. The card SHALL carry the icon of that item, the title Common:Private and the description Common:DashboardE2eRoomsDescription, and SHALL stand after the Forms card and before the AI Workspace card. The card SHALL offer no onboarding tour.
+The system SHALL show among the apps of the dashboard a card of private rooms to every user who is shown the sidebar item of the section, and as a disabled card to a user who can switch apps while the E2E rooms app is off. The card SHALL carry the icon of that item, the title Common:Private and the description Common:DashboardE2eRoomsDescription, and SHALL stand after the Forms card and before the AI Workspace card. The card SHALL offer no onboarding tour.
 
 #### Scenario: Section available
 - **WHEN** a user who sees the Private item in the sidebar opens the dashboard
 - **THEN** the apps show a card titled Common:Private with Common:DashboardE2eRoomsDescription, after Forms
 
 #### Scenario: Section not available
-- **WHEN** the section is not available to the user
+- **WHEN** the section is not available to a user who cannot switch apps
 - **THEN** the dashboard shows no card of private rooms
 
 #### Scenario: App switched off on a standalone portal
@@ -562,3 +582,14 @@ The system SHALL show in the header of the Private list the line Common:PrivateR
 #### Scenario: Narrow window
 - **WHEN** the header has no room for the whole line
 - **THEN** the line is cut with an ellipsis or dropped, and the title and the header actions stay whole
+
+### Requirement: The folder tree follows a switch of the E2E rooms app
+The system SHALL read the folder tree again when the E2E rooms app is switched on or off while the page is open, because the server lists the Private root among the root folders only while the app is on. The Private item SHALL then show the new-items count of the Private root without a reload.
+
+#### Scenario: App switched on
+- **WHEN** an administrator switches the E2E rooms app on while a user has the page open and a private room of that user holds a new file
+- **THEN** the folder tree is read again and the Private item shows its new-items count without a reload
+
+#### Scenario: App switched off
+- **WHEN** an administrator switches the E2E rooms app off while a user has the page open
+- **THEN** the folder tree is read again and holds no Private root

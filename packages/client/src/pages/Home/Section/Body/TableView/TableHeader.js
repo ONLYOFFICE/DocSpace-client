@@ -94,6 +94,7 @@ class FilesTableHeader extends React.Component {
       withContent,
       headerBorder,
       isInSharedFolder,
+      isSkillSet,
     } = this.props;
 
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
@@ -114,6 +115,10 @@ class FilesTableHeader extends React.Component {
       isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       isInSharedFolder !== prevProps.isInSharedFolder ||
+      isSkillSet !== prevProps.isSkillSet ||
+      this.props.isSkillSetsList !== prevProps.isSkillSetsList ||
+      this.props.isKnowledgeBasesList !== prevProps.isKnowledgeBasesList ||
+      this.props.isKnowledgeBase !== prevProps.isKnowledgeBase ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
       (!changeDocumentsTabs && sortOrder !== stateSortOrder)
     ) {
@@ -223,12 +228,216 @@ class FilesTableHeader extends React.Component {
     if (isSharedWithMeFolder || isInSharedFolder)
       return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
+    if (this.props.isSkillSetsList) return this.getSkillSetsColumns();
+    if (this.props.isKnowledgeBasesList)
+      return this.getKnowledgeBasesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
     if (isRecentFolder) return this.getRecentFolderColumns();
     if (isFavoritesFolder) return this.getFavoritesFolderColumns();
+    if (this.props.isSkillSet) return this.getSkillsColumns();
+    if (this.props.isKnowledgeBase) return this.getKnowledgeFilesColumns();
     if (isIndexing) return this.getIndexingColumns();
     return this.getFilesColumns();
+  };
+
+  // The Knowledge bases list: every row is a base, with how many agents use
+  // it, its owner and its last change. Its type and tags are not columns here.
+  getKnowledgeBasesColumns = () => {
+    const {
+      t,
+      roomColumnNameIsEnabled,
+      usedByKnowledgeBasesColumnIsEnabled,
+      ownerKnowledgeBasesColumnIsEnabled,
+      activityKnowledgeBasesColumnIsEnabled,
+    } = this.props;
+
+    return [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: roomColumnNameIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "UsedByKnowledgeBases",
+        title: t("Common:UsedBy"),
+        enable: usedByKnowledgeBasesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "OwnerKnowledgeBases",
+        title: t("Common:Owner"),
+        enable: ownerKnowledgeBasesColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "ActivityKnowledgeBases",
+        title: t("Common:LastModified"),
+        enable: activityKnowledgeBasesColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+    ];
+  };
+
+  // An open knowledge base lists what was added to it: how large each file
+  // is, who added it and when.
+  getKnowledgeFilesColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      sizeKnowledgeFileColumnIsEnabled,
+      authorKnowledgeFileColumnIsEnabled,
+      createdKnowledgeFileColumnIsEnabled,
+    } = this.props;
+
+    return [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      {
+        key: "SizeKnowledgeFile",
+        title: t("Common:Size"),
+        enable: sizeKnowledgeFileColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "AuthorKnowledgeFile",
+        title: t("Common:AddedBy"),
+        enable: authorKnowledgeFileColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "CreatedKnowledgeFile",
+        title: t("Common:Added"),
+        enable: createdKnowledgeFileColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.CreationDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
+  };
+
+  // The Skill sets list: every row is a set, told by how many skills it has
+  // and how many agents use it.
+  getSkillSetsColumns = () => {
+    const {
+      t,
+      roomColumnNameIsEnabled,
+      skillsSkillSetsColumnIsEnabled,
+      usedBySkillSetsColumnIsEnabled,
+      ownerSkillSetsColumnIsEnabled,
+      activitySkillSetsColumnIsEnabled,
+    } = this.props;
+
+    return [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: roomColumnNameIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "SkillsSkillSets",
+        title: t("Common:Skills"),
+        enable: skillsSkillSetsColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "UsedBySkillSets",
+        title: t("Common:UsedBy"),
+        enable: usedBySkillSetsColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "OwnerSkillSets",
+        title: t("Common:Owner"),
+        enable: ownerSkillSetsColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "ActivitySkillSets",
+        title: t("Common:LastModified"),
+        enable: activitySkillSetsColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+    ];
+  };
+
+  // An open skill set lists skills: what each is for, not what file it is.
+  getSkillsColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      descriptionSkillColumnIsEnabled,
+      modifiedSkillColumnIsEnabled,
+    } = this.props;
+
+    return [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: nameColumnIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      {
+        key: "DescriptionSkill",
+        title: t("Common:DescriptionLabel"),
+        enable: descriptionSkillColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedSkill",
+        title: t("Common:LastModified"),
+        enable: modifiedSkillColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
   };
 
   getFilesColumns = () => {
@@ -1080,6 +1289,23 @@ export default inject(
       templateRoomColumnActivityIsEnabled,
       templateRoomQuotaColumnIsEnable,
 
+      descriptionSkillColumnIsEnabled,
+      modifiedSkillColumnIsEnabled,
+      isSkillSet,
+      isSkillSetsList,
+      skillsSkillSetsColumnIsEnabled,
+      usedBySkillSetsColumnIsEnabled,
+      ownerSkillSetsColumnIsEnabled,
+      activitySkillSetsColumnIsEnabled,
+      isKnowledgeBasesList,
+      isKnowledgeBase,
+      usedByKnowledgeBasesColumnIsEnabled,
+      ownerKnowledgeBasesColumnIsEnabled,
+      activityKnowledgeBasesColumnIsEnabled,
+      sizeKnowledgeFileColumnIsEnabled,
+      authorKnowledgeFileColumnIsEnabled,
+      createdKnowledgeFileColumnIsEnabled,
+
       getColumns,
       setColumnEnable,
     } = tableStore;
@@ -1093,6 +1319,22 @@ export default inject(
       isHeaderChecked,
       filter,
       selectedFolderId: selectedFolderStore.id,
+      isSkillSet,
+      descriptionSkillColumnIsEnabled,
+      modifiedSkillColumnIsEnabled,
+      isSkillSetsList,
+      skillsSkillSetsColumnIsEnabled,
+      usedBySkillSetsColumnIsEnabled,
+      ownerSkillSetsColumnIsEnabled,
+      activitySkillSetsColumnIsEnabled,
+      isKnowledgeBasesList,
+      isKnowledgeBase,
+      usedByKnowledgeBasesColumnIsEnabled,
+      ownerKnowledgeBasesColumnIsEnabled,
+      activityKnowledgeBasesColumnIsEnabled,
+      sizeKnowledgeFileColumnIsEnabled,
+      authorKnowledgeFileColumnIsEnabled,
+      createdKnowledgeFileColumnIsEnabled,
       withContent,
       sortingVisible,
 

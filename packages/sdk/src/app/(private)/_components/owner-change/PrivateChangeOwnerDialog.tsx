@@ -52,10 +52,13 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
 import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/room-member-flows";
+import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
@@ -99,7 +102,8 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
   );
 
   // Spec: private-rooms/sdk-surface, "Membership from every entry point"
-  const { excludeItems, excludeReady } = usePrivateRoomOwnerExclusions({
+  const { excludeItems, excludeReady, excludeFailed } =
+    usePrivateRoomOwnerExclusions({
     isPrivateRoom: true,
     roomId,
     userId: currentUserId,
@@ -134,7 +138,11 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
         return;
       }
 
-      const ok = await changeOwner({ roomId, newOwnerId });
+      const ok = await changeOwner({
+        roomId,
+        newOwnerId,
+        currentUserId: currentUserId ?? "",
+      });
       if (!ok) return;
 
       // Parity: FilesActionsStore.changeRoomOwner, which leaves through
@@ -143,7 +151,20 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
       const leftOpenRoom =
         leaving && String(filesListStore.currentFolder?.id) === String(roomId);
       if (leaving) {
-        await leaveRoom({ roomId, userId: currentUserId as string });
+        try {
+          await leaveRoom({ roomId, userId: currentUserId as string });
+        } catch (error) {
+          // The transfer took place: the dialog closes on the new owner.
+          // Spec: private-rooms/sdk-surface, "SDK explains a refused access change in a private room"
+          toastr.error(
+            isAccessChangeRefused(error)
+              ? t("Common:EncryptedAccessChangeRefused")
+              : getEncryptionErrorMessage(t, error),
+          );
+          onChanged?.(roomId);
+          onClose();
+          return;
+        }
         toastr.success(t("Common:YouLeftTheRoom"));
       } else {
         toastr.success(t("Common:AppointNewOwner"));
@@ -168,7 +189,21 @@ const PrivateChangeOwnerDialog: React.FC<PrivateChangeOwnerDialogProps> = ({
       } as const)
     : {};
 
-  const selectorContent = excludeReady ? (
+  const selectorContent = excludeFailed ? (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        minHeight: "240px",
+      }}
+    >
+      <Text role="alert" dataTestId="private_change_owner_candidates_failed">
+        {t("Common:OwnerCandidatesLoadFailed")}
+      </Text>
+    </div>
+  ) : excludeReady ? (
     <PeopleSelector
       withCancelButton
       onCancel={onClose}

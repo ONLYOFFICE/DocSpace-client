@@ -56,3 +56,28 @@ describe("FilesFilter metadata params", () => {
     expect(copy.equals(filter)).toBe(false);
   });
 });
+
+describe("FilesFilter URL", () => {
+  const withLocationSearch = (search: string, run: () => void) => {
+    const previous = window.location.href;
+    window.history.replaceState(null, "", `/ai-rooms/filter?${search}`);
+    try {
+      run();
+    } finally {
+      window.history.replaceState(null, "", previous);
+    }
+  };
+
+  it("does not carry the room type and the tab of the rooms list on screen", () => {
+    withLocationSearch("searchArea=AiHub&type=11&tab=templates&frame=1", () => {
+      const filter = FilesFilter.getDefault();
+      filter.folder = "4";
+      const params = new URLSearchParams(filter.toUrlParams());
+
+      expect(params.has("type")).toBe(false);
+      expect(params.has("tab")).toBe(false);
+      // Other params of the page are still carried over.
+      expect(params.get("frame")).toBe("1");
+    });
+  });
+});

@@ -48,7 +48,13 @@ const StyledCard = ({ cardHeight, children, className, ...rest }) => (
   </div>
 );
 
-const StyledItem = ({ isRoom, isTemplate, children, className, ...rest }) => (
+const StyledItem = ({
+  isRoom,
+  isTemplate,
+  children,
+  className,
+  ...rest
+}) => (
   <div
     className={`${styles.item}${className ? ` ${className}` : ""}`}
     data-is-room={isRoom || undefined}

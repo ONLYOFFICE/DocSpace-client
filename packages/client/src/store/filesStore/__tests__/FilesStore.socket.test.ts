@@ -34,7 +34,7 @@
  */
 
 import { describe, it, expect, vi } from "vitest";
-import { FileType, FolderType } from "@docspace/shared/enums";
+import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -130,6 +130,34 @@ describe("FilesStore.wsModifyFolderDelete — characterization", () => {
     store.wsModifyFolderDelete({ type: "file", id: 1, data: "" } as never);
 
     expect(store.tempActionFilesIds).toContain(1);
+  });
+});
+
+describe("FilesStore.redirectToParent — a room of the AI section is removed", () => {
+  it.each([
+    ["an agent", RoomsType.AiProjectRoom],
+    ["a skill set", RoomsType.InstructionsRoom],
+    ["a knowledge base", RoomsType.KnowledgeRoom],
+  ])("opens the list of %s's kind", (_, roomType) => {
+    const navigate = vi.fn();
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      navigate,
+      location: { pathname: "/ai-rooms/12/filter", search: "?folder=12" },
+    };
+
+    createTestFilesStore().redirectToParent(
+      { id: 12 } as never,
+      [{ id: 1, roomType: null }, { id: 12, roomType }] as never,
+      true,
+      false,
+      FolderType.AiHub,
+    );
+
+    const url = String(navigate.mock.calls[0][0]);
+    expect(url.startsWith("/ai-rooms/filter?")).toBe(true);
+    expect(new URLSearchParams(url.split("?")[1]).getAll("type")).toEqual([
+      String(roomType),
+    ]);
   });
 });
 

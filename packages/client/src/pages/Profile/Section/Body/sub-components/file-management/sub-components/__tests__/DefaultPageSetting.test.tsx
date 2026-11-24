@@ -68,7 +68,11 @@ import { DefaultPageSetting } from "../DefaultPageSetting";
 
 const Setting = DefaultPageSetting as unknown as React.ComponentType;
 
-const renderSetting = (isPrivateRoomsSectionAvailable: boolean) => {
+const renderSetting = (
+  isPrivateRoomsSectionAvailable: boolean,
+  // The apps switched off in Settings -> Apps.
+  appsOff: string[] = [],
+) => {
   const updateDefaultFolderType = vi.fn(async () => {});
   render(
     <Provider
@@ -78,7 +82,10 @@ const renderSetting = (isPrivateRoomsSectionAvailable: boolean) => {
         aiServicesEnabled: true,
       }}
       userStore={{ userType: EmployeeType.Admin }}
-      appsStore={{ isPrivateRoomsSectionAvailable }}
+      appsStore={{
+        isPrivateRoomsSectionAvailable,
+        isInstalled: (id: string) => !appsOff.includes(id),
+      }}
     >
       <Setting />
     </Provider>,
@@ -99,7 +106,7 @@ describe("DefaultPageSetting — Section is a start page option while available"
       "Common:Rooms",
       "Common:Forms",
       "Common:Private",
-      "Common:AiWorkspace",
+      "Common:AIChat",
     ]);
 
     fireEvent.click(screen.getByRole("button", { name: "Common:Private" }));
@@ -113,5 +120,26 @@ describe("DefaultPageSetting — Section is a start page option while available"
     renderSetting(false);
 
     expect(options()).not.toContain("Common:Private");
+  });
+});
+
+// Bug 84835
+describe("DefaultPageSetting — sections switched off in Settings -> Apps", () => {
+  it("does not offer Rooms and Forms once their apps are off", () => {
+    renderSetting(true, ["ai-rooms", "ai-forms"]);
+
+    expect(options()).toEqual([
+      "Common:Home",
+      "Common:Files",
+      "Common:Private",
+      "Common:AIChat",
+    ]);
+  });
+
+  it("keeps Forms while only Rooms is off", () => {
+    renderSetting(true, ["ai-rooms"]);
+
+    expect(options()).toContain("Common:Forms");
+    expect(options()).not.toContain("Common:Rooms");
   });
 });

@@ -132,10 +132,21 @@ describe("FilesStore.wsModifyFolderUpdate — characterization", () => {
     expect(getFolderInfo).toHaveBeenCalledWith(7, true);
   });
 
-  it("Private room updated", async () => {
+  it("Unreadable room renamed", async () => {
     const store = createTestFilesStore();
     store.getFilesContextOptions = (() => []) as never;
     store.folders = [{ id: 1, title: "Kept" } as never] as never;
+    const filters = () => [
+      store.filter.toUrlParams(),
+      store.filter.total,
+      store.roomsFilter.toUrlParams(),
+      store.roomsFilter.total,
+    ];
+    const before = filters();
+    const getFolder = vi
+      .spyOn(api.files, "getFolder")
+      .mockResolvedValue({} as never);
+    const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
     const getFolderInfo = vi
       .spyOn(api.files, "getFolderInfo")
       .mockRejectedValue(Object.assign(new Error("403"), { response: { status: 403 } }));
@@ -148,6 +159,9 @@ describe("FilesStore.wsModifyFolderUpdate — characterization", () => {
 
     expect(getFolderInfo).toHaveBeenCalledWith(7, true);
     expect(store.folders).toEqual([{ id: 1, title: "Kept" }]);
+    expect(getFolder).not.toHaveBeenCalled();
+    expect(filters()).toEqual(before);
+    expect(toastr.error).not.toHaveBeenCalled();
   });
 });
 

@@ -1,6 +1,6 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const request = vi.fn(async (_options: unknown): Promise<unknown> => ({}));
 
@@ -24,11 +24,15 @@ import {
   AI_PROJECT_ROOM_TYPE,
   aiProjectToRoom,
   createAiProject,
+  deleteAiProject,
   getAiProjectKnowledgeFiles,
   getAiProjectKnowledgeFilesCount,
   getAiProjects,
+  getAiRoomProjects,
   getAiProject,
   getAiProjectSkills,
+  getAiProjectSummary,
+  toAiProjectSummary,
   refreshAiProjectSettings,
   toAiProject,
   updateAiProject,
@@ -139,6 +143,33 @@ describe("the calls", () => {
       if (answer === undefined) throw new Error(`unexpected ${method} ${url}`);
       return typeof answer === "function" ? answer(options as { data?: unknown }) : answer;
     });
+
+  it("lists the agents that use a room, a page with its total", async () => {
+    route({
+      "GET /files/rooms/7/projects?startIndex=0&count=100": {
+        total: 3,
+        items: [
+          { id: 2, title: "Legal", logo: { color: "123456", medium: "" } },
+          { id: 5, title: "Sales", logo: null },
+        ],
+      },
+    });
+    expect(await getAiRoomProjects(7, { startIndex: 0, count: 100 })).toEqual({
+      total: 3,
+      items: [
+        { id: 2, title: "Legal", logo: { color: "#123456", medium: "" } },
+        { id: 5, title: "Sales", logo: { color: "" } },
+      ],
+    });
+  });
+
+  it("reads an answer without a total as the whole list", async () => {
+    route({ "GET /files/rooms/7/projects": [{ id: 2, title: "Legal", logo: { color: "#123456" } }] });
+    expect(await getAiRoomProjects(7)).toEqual({
+      total: 1,
+      items: [{ id: 2, title: "Legal", logo: { color: "#123456" } }],
+    });
+  });
 
   it("lists the AI projects of the AI rooms root, with only the set query fields", async () => {
     request.mockResolvedValueOnce({ total: 1, folders: [folder()] });
@@ -323,6 +354,36 @@ describe("the calls", () => {
 
   const PROFILE = { id: "p1", name: "Claude", provider: "anthropic", available: true };
 
+  it("reads a tile's summary from the sources and the model alone", async () => {
+    route({
+      "GET /files/rooms/7/sources": {
+        instructionsRooms: [{ id: 1, title: "Legal" }, { id: 2, title: null }],
+        knowledgeRooms: [{ id: 3, title: "Wiki" }],
+      },
+      "GET /files/rooms/7/model": { profileId: "p1" },
+    });
+    expect(await getAiProjectSummary(7)).toEqual({
+      model: "Claude",
+      modelAvailable: true,
+      skills: ["Legal"],
+      knowledge: ["Wiki"],
+    });
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7" }));
+
+    // No model picked, or one that cannot be read: the portal default.
+    route({ "GET /files/rooms/7/sources": sources() });
+    expect(await getAiProjectSummary(7)).toEqual({ model: null, modelAvailable: true, skills: [], knowledge: [] });
+  });
+
+  it("derives the same summary from a project read in full", () => {
+    expect(toAiProjectSummary(toAiProject(folder()))).toEqual({
+      model: "Claude",
+      modelAvailable: true,
+      skills: [],
+      knowledge: ["Docs"],
+    });
+  });
+
   it("reads the project's model with the room, and the default when it cannot be read", async () => {
     route({
       "GET /files/rooms/7": folder({ aiProject: undefined }),
@@ -335,7 +396,101 @@ describe("the calls", () => {
       "GET /files/rooms/7": folder({ aiProject: undefined }),
       "GET /files/rooms/7/sources": sources(),
     });
-    expect((await getAiProject(7)).aiProject.profile).toBeNull();
+    const unread = await getAiProject(7);
+    expect(unread.aiProject.profile).toBeNull();
+    // Told apart from a project without a model of its own.
+    expect(unread.aiProject.modelUnread).toBe(true);
+  });
+
+  describe("deleteAiProject", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("follows the queued delete until its operation ends", async () => {
+      vi.useFakeTimers();
+      let polls = 0;
+      route({
+        "DELETE /files/rooms/7": { id: "op1", finished: false, error: "" },
+        "get /files/fileops?id=op1": () => {
+          polls += 1;
+          return [{ id: "op1", finished: polls > 1, error: "" }];
+        },
+      });
+      let done = false;
+      const deleting = deleteAiProject(7).then(() => {
+        done = true;
+      });
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(done).toBe(false);
+      await vi.advanceTimersByTimeAsync(1000);
+      await deleting;
+      expect(polls).toBe(2);
+      expect(done).toBe(true);
+    });
+
+    it("rejects with the error the operation ended with", async () => {
+      vi.useFakeTimers();
+      route({
+        "DELETE /files/rooms/7": { id: "op1", finished: false, error: "" },
+        "get /files/fileops?id=op1": [{ id: "op1", finished: true, error: "Room is locked" }],
+      });
+      const deleting = expect(deleteAiProject(7)).rejects.toThrow("Room is locked");
+      await vi.advanceTimersByTimeAsync(1000);
+      await deleting;
+    });
+
+    it("takes an operation the server no longer lists, or one done at once, as ended", async () => {
+      vi.useFakeTimers();
+      route({
+        "DELETE /files/rooms/7": { id: "op1", finished: false, error: "" },
+        "get /files/fileops?id=op1": [],
+      });
+      const deleting = deleteAiProject(7);
+      await vi.advanceTimersByTimeAsync(1000);
+      await expect(deleting).resolves.toBeUndefined();
+
+      route({ "DELETE /files/rooms/7": { id: "op2", finished: true, error: "" } });
+      await expect(deleteAiProject(7)).resolves.toBeUndefined();
+    });
+  });
+
+  it("fails the read the project form opens on when the model cannot be read", async () => {
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    await expect(getAiProject(7, { requireModel: true })).rejects.toThrow("unexpected GET /files/rooms/7/model");
+
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/model": { profileId: null },
+    });
+    const project = await getAiProject(7, { requireModel: true });
+    expect(project.aiProject.profile).toBeNull();
+    expect(project.aiProject.modelUnread).toBeUndefined();
+  });
+
+  it("keeps an unread model unread through a save that leaves the model, and drops the mark once read", async () => {
+    route({
+      "GET /files/rooms/7": folder({ aiProject: undefined }),
+      "GET /files/rooms/7/sources": sources(),
+    });
+    const opened = await getAiProject(7);
+
+    request.mockClear();
+    const saved = await updateAiProject(7, { aiProject: { instructionsRoomIds: [] } }, opened);
+    expect(saved.aiProject.modelUnread).toBe(true);
+    expect(request).not.toHaveBeenCalledWith(expect.objectContaining({ url: "/files/rooms/7/model" }));
+
+    route({
+      "GET /files/rooms/7/sources": sources(),
+      "GET /files/rooms/7/model": { profileId: "p1" },
+    });
+    const refreshed = await refreshAiProjectSettings(opened);
+    expect(refreshed.aiProject.profile).toEqual(PROFILE);
+    expect(refreshed.aiProject.modelUnread).toBeUndefined();
   });
 
   it("re-reads only the model and sources of an open project, keeping it when nothing changed", async () => {
@@ -543,6 +698,7 @@ describe("the calls", () => {
       },
     });
     const files = await getAiProjectKnowledgeFiles(9);
+    // Fewer files than a page: one request.
     expect(request).toHaveBeenCalledTimes(1);
     expect(files.map((file) => file.indexed)).toEqual([true, false, false]);
     expect(files[1]).toEqual({
@@ -553,6 +709,41 @@ describe("the calls", () => {
       vectorizationStatus: 2,
       security: { Vectorization: false },
     });
+  });
+
+  it("pages through a Knowledge room's files until its total is read", async () => {
+    const page = (from: number, count: number) =>
+      Array.from({ length: count }, (_, i) => ({ id: from + i, title: `f${from + i}.pdf`, vectorizationStatus: 1 }));
+    route({
+      "GET /files/9?filterType=1&count=100": { total: 230, files: page(0, 100) },
+      "GET /files/9?filterType=1&startIndex=100&count=100": { total: 230, files: page(100, 100) },
+      "GET /files/9?filterType=1&startIndex=200&count=100": { total: 230, files: page(200, 30) },
+    });
+    const files = await getAiProjectKnowledgeFiles(9);
+    expect(request).toHaveBeenCalledTimes(3);
+    expect(files).toHaveLength(230);
+    expect(new Set(files.map((file) => file.id)).size).toBe(230);
+  });
+
+  it("stops at a page the total completes, and reads an envelope that reports its total", async () => {
+    const page = (from: number, count: number) =>
+      Array.from({ length: count }, (_, i) => ({ id: from + i, title: `f${from + i}.pdf` }));
+    route({
+      // The API client answers `{ total, items }` for an envelope with a total.
+      "GET /files/9?filterType=1&count=100": { total: 200, items: { total: 200, files: page(0, 100) } },
+      "GET /files/9?filterType=1&startIndex=100&count=100": { total: 200, items: { total: 200, files: page(100, 100) } },
+    });
+    expect(await getAiProjectKnowledgeFiles(9)).toHaveLength(200);
+    expect(request).toHaveBeenCalledTimes(2);
+  });
+
+  it("reads at most fifty pages of a Knowledge room", async () => {
+    request.mockImplementation(async () => ({
+      total: 100_000,
+      files: Array.from({ length: 100 }, (_, i) => ({ id: i, title: "f.pdf" })),
+    }));
+    expect(await getAiProjectKnowledgeFiles(9)).toHaveLength(5000);
+    expect(request).toHaveBeenCalledTimes(50);
   });
 
   it("counts a Knowledge room's files from the total of a one-row read", async () => {

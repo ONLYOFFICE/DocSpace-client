@@ -121,7 +121,7 @@ export const RoomUnlockEffect = inject(
   }),
 );
 
-const GhostStateToastEffect = () => {
+export const GhostStateToastEffect = () => {
   const { t } = useTranslation(["Common"]);
   React.useEffect(() => {
     registerGhostStateHandler(() => {

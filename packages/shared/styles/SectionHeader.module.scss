@@ -57,18 +57,48 @@
     }
   }
 
-  // The chat toolbar of an open AI project ends right before the header's
-  // own buttons block (the info panel toggle). The block's 20px start margin
-  // reads as an empty slot after the toolbar's last button, so in a project
-  // it is 8px. The block has no class of its own outside ui-kit, so it is
-  // matched by its CSS module name.
-  .projectChatToolbar {
-    padding-inline-end: 0;
+  // The plain title of an agent's page for a non-member, sized as the
+  // navigation's own title. The heading takes its size from its variables.
+  .agentTitle {
+    --heading-font-size-medium: 18px;
+    --heading-weight: 700;
+    line-height: 24px;
+    min-width: 0;
+
+    @include mixins.tablet-and-below {
+      --heading-font-size-medium: 21px;
+      line-height: 28px;
+    }
+
+    @include mixins.mobile {
+      --heading-font-size-medium: 18px;
+      line-height: 24px;
+    }
   }
 
-  &:has(.projectChatToolbar)
-    :global([class*="buttonsContainer"]) {
-    margin-inline-start: 8px;
+  // The title of an agent's page: its logo and name. The row shrinks with
+  // the name, which truncates.
+  .agentTitleRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  // The initials of an agent without a picture, sized for the 24px logo.
+  .agentTitleLogo :global(.room-title) {
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  // An agent's chat toolbar in the header row. The toolbar's own side
+  // paddings are for the chat panel's header; here they doubled the row's
+  // gaps around it. Without them, and with the last button's inner padding
+  // taken out of the gap before the context button, the icons of the row
+  // stand at one step.
+  .agentChatToolbar {
+    --chat-toolbar-padding-inline: 0;
+    margin-inline-end: -8px;
   }
 
   :global(.table-container_group-menu) {

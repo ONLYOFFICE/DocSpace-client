@@ -123,6 +123,8 @@ export const setPinAction = async (
   action: string,
   id: number | number[],
   t: TTranslation,
+  // Every room pinned is an agent: the notice speaks of agents.
+  ofAgents = false,
 ) => {
   const items = Array.isArray(id) ? id : [id];
 
@@ -133,12 +135,20 @@ export const setPinAction = async (
   const updatingFolderList = (elems: unknown[], isPin = false) => {
     if (elems.length === 0) return;
 
-    const translationForOneItem = isPin
-      ? t("Common:RoomPinned")
-      : t("Common:RoomUnpinned");
-    const translationForSeverals = isPin
-      ? t("Common:RoomsPinned", { count: elems.length })
-      : t("Common:RoomsUnpinned", { count: elems.length });
+    const translationForOneItem = ofAgents
+      ? isPin
+        ? t("Common:AgentPinned")
+        : t("Common:AgentUnpinned")
+      : isPin
+        ? t("Common:RoomPinned")
+        : t("Common:RoomUnpinned");
+    const translationForSeverals = ofAgents
+      ? isPin
+        ? t("Common:AgentsPinned", { count: elems.length })
+        : t("Common:AgentsUnpinned", { count: elems.length })
+      : isPin
+        ? t("Common:RoomsPinned", { count: elems.length })
+        : t("Common:RoomsUnpinned", { count: elems.length });
 
     toastr.success(
       elems.length > 1 ? translationForSeverals : translationForOneItem,

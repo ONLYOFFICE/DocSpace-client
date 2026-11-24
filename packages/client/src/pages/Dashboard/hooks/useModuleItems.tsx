@@ -275,15 +275,14 @@ export const useModuleItems = ({
       });
     }
 
-    // "AI rooms" (Instructions rooms, Knowledge rooms and AI projects) comes
-    // last, as in the sidebar. Its rooms are created from a type chooser of
-    // their own inside the section, so the card opens the section; it has no
-    // onboarding tour.
+    // AI Chat (its agents, skill sets and knowledge bases) comes last, as in
+    // the sidebar. Each of its lists creates what it holds, so the card opens
+    // the section; it has no onboarding tour.
     if (isAiHubAvailable) {
       items.push({
         id: "ai-hub",
         icon: <CatalogRoomsIcon />,
-        title: t("Common:AiWorkspace"),
+        title: t("Common:AIChat"),
         description: t("Common:AiRoomsCreateDescription"),
         installed: true,
         href: AI_HUB_PATH,

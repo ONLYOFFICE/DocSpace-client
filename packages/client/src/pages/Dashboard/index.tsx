@@ -176,7 +176,7 @@ const Dashboard = (props: DashboardProps) => {
   // welcome is not offered and neither help icon is rendered — the CSS in
   // `Dashboard.module.scss` hides them too, but a button that cannot do
   // anything should not be in the tree to begin with.
-  const isMobile = isTourBlocked(currentDeviceType);
+  const isTourOff = isTourBlocked(currentDeviceType);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -299,7 +299,7 @@ const Dashboard = (props: DashboardProps) => {
         <Scrollbar className={styles.dashboardScrollbar}>
           <div className={styles.dashboardInner}>
             <Header
-              onOpenTour={isMobile ? undefined : () => setIsWelcomeOpen(true)}
+              onOpenTour={isTourOff ? undefined : () => setIsWelcomeOpen(true)}
             />
             <ProfileCard />
 
@@ -401,7 +401,7 @@ const Dashboard = (props: DashboardProps) => {
                       onTakeTour={
                         // An app that is switched off has no section for its
                         // tour to run in; ModuleCard disables the icon then.
-                        isMobile || mod.noTour
+                        isTourOff || mod.noTour
                           ? undefined
                           : () => {
                               requestAppTour(mod.id as AppId);

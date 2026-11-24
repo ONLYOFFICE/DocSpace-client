@@ -45,6 +45,7 @@ import {
   clearEncryptedFilenameCache,
   isReplacedKeyFile,
 } from "../../encryption/filename-cache";
+import { KeyReplacedError } from "../../encryption/errors";
 import { reportPotentialGhostState } from "../../encryption/ghost-state-notifier";
 import type { IdentityKeyPair } from "../../encryption/types";
 
@@ -238,19 +239,17 @@ describe("encryptedFilenameRecovery", () => {
   });
 
   describe("A private room names the files wrapped for a key the user no longer holds", () => {
+    // The unwrap gives the verdict: it fails for these files with the error of a replaced key.
     const replacedFor = (ids: number[]) =>
-      vi.mocked(getFileEncryptionAccess).mockImplementation((async (
-        fileId: number,
-      ) => ({
-        userKeys: [{ id: "key-now" }],
-        fileKeys: [
-          {
-            userId: "u1",
-            publicKeyId: ids.includes(fileId) ? "key-before" : "key-now",
-          },
-        ],
+      vi.mocked(unwrapDekForCurrentUser).mockImplementation((async ({
+        fileId,
+      }: {
+        fileId: number;
+      }) => {
+        if (ids.includes(fileId)) throw new KeyReplacedError();
+        return new Uint8Array(32);
       // biome-ignore lint/suspicious/noExplicitAny: test mock
-      })) as any);
+      }) as any);
 
     it("Mixed room", async () => {
       vi.stubGlobal("fetch", vi.fn(async () => okHeaderBytes()));
@@ -266,7 +265,6 @@ describe("encryptedFilenameRecovery", () => {
 
       expect([1, 2, 3].map(isReplacedKeyFile)).toEqual([true, true, false]);
       expect(getCachedEncryptedFilename(3)).toBe("real-name.docx");
-      expect(unwrapDekForCurrentUser).toHaveBeenCalledTimes(1);
       expect(reportPotentialGhostState).not.toHaveBeenCalled();
     });
 

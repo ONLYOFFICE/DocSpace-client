@@ -1386,7 +1386,6 @@
   "KeyChangedLastSeen": "ພົບຄັ້ງສຸດທ້າຍ: {{date}}",
   "KeyChangedNewFingerprint": "ລາຍນິ້ວມືໃໝ່",
   "KeyChangedReasonAttack": "ມີຜູ້ໃດຜູ້ໜຶ່ງກຳລັງພະຍາຍາມປອມຕົວເປັນຜູ້ໃຊ້. ຖ້າທ່ານບໍ່ໄດ້ຄາດວ່າຈະມີການປ່ຽນກຸນແຈ ໃຫ້ຖືວ່ານ່າສົງໄສ.",
-  "KeyChangedReasonRecovery": "ຜູ້ໃຊ້ຟື້ນຟູຕົວຕົນຂອງຕົນໂດຍໃຊ້ວະລີການກູ້ຄືນ.",
   "KeyChangedReasonReplaced": "ຜູ້ໃຊ້ໄດ້ປ່ຽນກຸນແຈເຂົ້າລະຫັດຂອງຕົນເປັນອັນໃໝ່.",
   "KeyChangedReasonReset": "ຜູ້ໃຊ້ຣີເຊັດກຸນແຈເຂົ້າລະຫັດຂອງຕົນ ຫຼັງຈາກລືມລະຫັດລັບ.",
   "KeyChangedRefuse": "ບໍ່ໄວ້ວາງໃຈ",

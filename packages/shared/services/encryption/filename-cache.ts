@@ -95,8 +95,8 @@ function notify(fileId: number | string): void {
   }
 }
 
-// Files whose wrap names a key the user no longer holds. Kept for the page
-// only, so every visit reads them again; cleared with the names.
+// Files wrapped for a key the user no longer holds. Kept for the page only
+// and cleared with the names, so a lock or a reload makes them be read again.
 // Spec: private-rooms/file-operations, "A private room names the files wrapped for a key the user no longer holds"
 const replacedKeyFiles = new Set<string>();
 

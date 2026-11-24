@@ -39,6 +39,7 @@ import { useEffect, useId, useRef } from "react";
 
 import type { TInviteOutcome } from "@docspace/shared/services/private-room/room-member-flows";
 import { waitsForAccess } from "@docspace/shared/services/private-room/room-encryption";
+import { reencryptFailureText } from "@docspace/shared/services/private-room/room-member-flows";
 import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import type { TTranslation } from "@docspace/shared/types";
@@ -54,7 +55,14 @@ const namesOf = (members: { id: string; displayName?: string }[]) =>
   members.map((member) => member.displayName || member.id).join(", ");
 
 const InviteResult = ({ t, outcome }: InviteResultProps) => {
-  const { granted, pending, skipped, failed, refused = [] } = outcome;
+  const {
+    granted,
+    pending,
+    skipped,
+    failed,
+    refused = [],
+    keyReplacedFileIds,
+  } = outcome;
   const refusedWithoutKey = refused
     .filter((entry) => entry.noKey)
     .map((entry) => entry.member);
@@ -76,9 +84,6 @@ const InviteResult = ({ t, outcome }: InviteResultProps) => {
   const withRefusedKey = skipped.filter(
     (member) => member.reason === "key-mismatch-refused",
   );
-  const missingFileCount = new Set(
-    pending.flatMap((entry) => entry.missingFileIds),
-  ).size;
 
   const regionRef = useRef<HTMLDivElement>(null);
   const grantedId = useId();
@@ -123,9 +128,11 @@ const InviteResult = ({ t, outcome }: InviteResultProps) => {
           <Text className={styles.description}>
             {failed
               ? t("Common:EncryptedReencryptFailed")
-              : t("Common:EncryptedReencryptPartialFailure", {
-                  count: missingFileCount,
-                })}
+              : reencryptFailureText(
+                  t,
+                  pending.flatMap((entry) => entry.missingFileIds),
+                  keyReplacedFileIds,
+                )}
           </Text>
         </section>
       ) : null}

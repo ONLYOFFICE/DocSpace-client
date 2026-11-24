@@ -1386,7 +1386,6 @@
   "KeyChangedLastSeen": "последње виђено: {{date}}",
   "KeyChangedNewFingerprint": "Нови отисак прста",
   "KeyChangedReasonAttack": "Неко покушава да се лажно представи као корисник. Ако нисте очекивали промену кључа, сматрајте је сумњивом.",
-  "KeyChangedReasonRecovery": "Корисник је обновио свој идентитет помоћу фразе за опоравак.",
   "KeyChangedReasonReplaced": "Корисник је заменио свој кључ за шифровање новим.",
   "KeyChangedReasonReset": "Корисник је ресетовао своје кључеве за шифровање након заборављања лозинке.",
   "KeyChangedRefuse": "Не веруј",

@@ -110,6 +110,7 @@ vi.mock("@/components/EncryptionProviderWrapper", () => ({
 
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
 import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
+import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
 
 import useFileEncryptionKeys, {
   type TUseFileEncryptionKeys,
@@ -226,6 +227,27 @@ describe("useFileEncryptionKeys", () => {
   });
 
   it("Wrapped for a key the user no longer holds", async () => {
+    const userKeys = [{ id: "key-now" }];
+    vi.mocked(getFileEncryptionAccess).mockImplementation(
+      async () =>
+        ({
+          userKeys,
+          fileKeys: [{ userId: USER_ID, publicKeyId: "key-before" }],
+        }) as never,
+    );
+    vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+      new KeyReplacedError(),
+    );
+    encryptionContext.requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
+    render(config([{ userId: USER_ID }]));
+
+    expect(await settledAt("key-replaced")).toBe("key-replaced");
+    expect(vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].userKeys).toBe(
+      userKeys,
+    );
+  });
+
+  it("Key imported again", async () => {
     vi.mocked(getFileEncryptionAccess).mockImplementation(
       async () =>
         ({
@@ -233,13 +255,10 @@ describe("useFileEncryptionKeys", () => {
           fileKeys: [{ userId: USER_ID, publicKeyId: "key-before" }],
         }) as never,
     );
-    const requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
-    encryptionContext.requireIdentity = requireIdentity;
+    encryptionContext.requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
     render(config([{ userId: USER_ID }]));
 
-    expect(await settledAt("key-replaced")).toBe("key-replaced");
-    expect(requireIdentity).not.toHaveBeenCalled();
-    expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
+    expect(await settledAt("ready")).toBe("ready");
   });
 
   it("Key flow restarts within one attempt", async () => {

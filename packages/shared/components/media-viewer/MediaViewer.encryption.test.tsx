@@ -87,16 +87,19 @@ describe("The media viewer reports a file that is not shared yet as no access", 
   });
 
   it("Media viewer: a file wrapped for a previous key", async () => {
+    const userKeys = [{ id: "key-now" }];
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
-      userKeys: [{ id: "key-now" }],
+      userKeys,
       fileKeys: [{ userId: "bob", publicKeyId: "key-before" }],
     } as never);
+    vi.mocked(unwrapDekForCurrentUser).mockRejectedValue(new KeyReplacedError());
 
     await expect(kitDecryptFile()(params(2))).rejects.toBeInstanceOf(
       KeyReplacedError,
     );
-    expect(requireUnlock).not.toHaveBeenCalled();
-    expect(fetch).not.toHaveBeenCalled();
+    expect(vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].userKeys).toBe(
+      userKeys,
+    );
   });
 
   it("Access answer without fileKeys", async () => {

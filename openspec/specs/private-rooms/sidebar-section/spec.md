@@ -14,11 +14,11 @@ Implementation: packages/client/src/components/ClientArticleSidebar, packages/cl
 ## Requirements
 
 ### Requirement: Sidebar item
-The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI rooms (Common:AiRooms) when that item is shown. It SHALL have exactly one sub-item, Archive (Common:Archive).
+The system SHALL show a top-level sidebar item labelled Common:Private while the section is available, to every user whose sidebar shows the Rooms tree. The item SHALL be placed after Forms (after Rooms when Forms is absent) and before AI Chat (Common:AIChat) when that item is shown. It SHALL have exactly one sub-item, Archive (Common:Archive).
 
 #### Scenario: Section available
 - **WHEN** the sidebar renders while the section is available and AI services are on
-- **THEN** a Private item follows Forms and precedes AI rooms, and expanding it shows only the Archive sub-item
+- **THEN** a Private item follows Forms and precedes AI Chat, and expanding it shows only the Archive sub-item
 
 #### Scenario: Item clicked
 - **WHEN** the user clicks the Private item
@@ -206,7 +206,7 @@ Addresses inside an embedded frame SHALL be decided the same way, once the frame
 - **THEN** the superseded load commits nothing, neither folder state nor loading state nor a highlighted file, and only the newer load ends the loading
 
 ### Requirement: Private section in an embedded frame
-The system SHALL offer the Private section to the client running inside an embedded frame under the same availability as outside a frame. A frame opened at a `/private` address SHALL show the Private list or the private room it names, and a frame that shows the menu SHALL show the Private item in it.
+The system SHALL offer the Private section to the client running inside an embedded frame under the same availability as outside a frame once the frame's configuration carries the `privateRooms` opt-in. A frame opened at a `/private` address SHALL show the Private list or the private room it names, and a frame that shows the menu SHALL show the Private item in it.
 
 #### Scenario: Frame opened in the Private section
 - **WHEN** a host embeds the client with the root path `/private/` while the section is available
@@ -531,14 +531,14 @@ The system SHALL label the create button of the Private list, its header action 
 - **THEN** the create button reads Common:NewRoom
 
 ### Requirement: Dashboard shows a card of private rooms
-The system SHALL show among the apps of the dashboard a card of private rooms to every user who is shown the sidebar item of the section. The card SHALL carry the icon of that item, the title Common:Private and the description Common:DashboardE2eRoomsDescription, and SHALL stand after the Forms card and before the AI Workspace card. The card SHALL offer no onboarding tour.
+The system SHALL show among the apps of the dashboard a card of private rooms to every user who is shown the sidebar item of the section, and as a disabled card to a user who can switch apps while the E2E rooms app is off. The card SHALL carry the icon of that item, the title Common:Private and the description Common:DashboardE2eRoomsDescription, and SHALL stand after the Forms card and before the AI Workspace card. The card SHALL offer no onboarding tour.
 
 #### Scenario: Section available
 - **WHEN** a user who sees the Private item in the sidebar opens the dashboard
 - **THEN** the apps show a card titled Common:Private with Common:DashboardE2eRoomsDescription, after Forms
 
 #### Scenario: Section not available
-- **WHEN** the section is not available to the user
+- **WHEN** the section is not available to a user who cannot switch apps
 - **THEN** the dashboard shows no card of private rooms
 
 #### Scenario: App switched off on a standalone portal

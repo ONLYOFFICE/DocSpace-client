@@ -1386,7 +1386,6 @@
   "KeyChangedLastSeen": "viimeksi nähty: {{date}}",
   "KeyChangedNewFingerprint": "Uusi sormenjälki",
   "KeyChangedReasonAttack": "Joku yrittää esiintyä käyttäjänä. Jos et odottanut avaimen vaihtumista, pidä sitä epäilyttävänä.",
-  "KeyChangedReasonRecovery": "Käyttäjä palautti henkilöllisyytensä palautuslauseella.",
   "KeyChangedReasonReplaced": "Käyttäjä korvasi salausavaimensa uudella.",
   "KeyChangedReasonReset": "Käyttäjä nollasi salausavaimensa unohdettua salauslausettaan.",
   "KeyChangedRefuse": "Älä luota",

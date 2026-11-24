@@ -40,10 +40,13 @@ import { generateDEK } from "../file-keys";
 import {
   wrapDekForRecipients,
   unwrapDekForCurrentUser,
-  isWrappedForReplacedKey,
   type RoomMemberPublicKey,
 } from "../room-file-access";
-import { NoAccessError, AuthenticationError } from "../errors";
+import {
+  NoAccessError,
+  AuthenticationError,
+  KeyReplacedError,
+} from "../errors";
 import { getTofuStore, resetTofuStores } from "../tofu-store";
 import { type IdentityKeyPair, type ServerAccessKeyDto } from "../types";
 import { arrayBufferToBase64 } from "../utils";
@@ -474,56 +477,100 @@ describe("sender listed with several keys (leftover envelopes)", () => {
 describe("A file wrapped for a key the user no longer holds is reported as such", () => {
   const CURRENT = "1545741c-0000-4000-8000-00000000000a";
   const PREVIOUS = "3b01cb76-0000-4000-8000-00000000000b";
-  const entry = (publicKeyId: string, userId = ALICE_ID) => ({
-    userId,
-    publicKeyId,
-    privateKeyEnc: "wrap",
-  });
-  const info = (publicKeyId: string, keyIds: string[] | null = [CURRENT]) => ({
-    userKeys: keyIds?.map((id) => ({ id })),
-    fileKeys: [entry(publicKeyId)],
+  let sender: IdentityKeyPair;
+  let key: IdentityKeyPair;
+  let previousKey: IdentityKeyPair;
+  let fileDek: Uint8Array;
+  const LISTED = [{ id: CURRENT }];
+
+  beforeAll(async () => {
+    resetTofuStores();
+    sender = await generateIdentityKeyPair();
+    key = await generateIdentityKeyPair();
+    previousKey = await generateIdentityKeyPair();
+    fileDek = generateDEK();
   });
 
-  it("Download of one such file", () => {
-    expect(isWrappedForReplacedKey(info(PREVIOUS), ALICE_ID)).toBe(true);
-  });
+  // Bob's entry of a file Alice wrapped for the given key pair under the given id.
+  const wrapFor = (recipient: IdentityKeyPair, publicKeyId: string) =>
+    wrapDekForRecipients({
+      dek: fileDek,
+      senderIdentity: sender,
+      senderUserId: ALICE_ID,
+      recipients: [
+        { userId: BOB_ID, publicKey: pubB64(recipient), publicKeyId },
+      ],
+      fileId: FILE_ID,
+    });
 
-  it("wrap for the current key, id in another letter case", () => {
-    expect(isWrappedForReplacedKey(info(CURRENT.toUpperCase()), ALICE_ID)).toBe(
-      false,
+  const unwrap = (
+    fileKeys: ServerAccessKeyDto[],
+    userKeys: { id: string }[] | null | undefined,
+  ) =>
+    unwrapDekForCurrentUser({
+      fileKeys,
+      roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(sender) }],
+      userKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: key,
+      fileId: FILE_ID,
+    });
+
+  const refusal = (attempt: Promise<Uint8Array>) =>
+    attempt.then(
+      () => null,
+      (error: unknown) => error,
+    );
+
+  it("Key imported again", async () => {
+    // The same key pair under the id it had before it was imported again.
+    expect(await unwrap(await wrapFor(key, PREVIOUS), LISTED)).toEqual(
+      fileDek,
     );
   });
 
-  it("wrap for one of two listed keys", () => {
-    expect(
-      isWrappedForReplacedKey(info(PREVIOUS, [CURRENT, PREVIOUS]), ALICE_ID),
-    ).toBe(false);
+  it("Download of one such file", async () => {
+    await expect(
+      unwrap(await wrapFor(previousKey, PREVIOUS), LISTED),
+    ).rejects.toBeInstanceOf(KeyReplacedError);
   });
 
-  it("Entry without a key id", () => {
-    expect(isWrappedForReplacedKey(info(""), ALICE_ID)).toBe(false);
-    expect(
-      isWrappedForReplacedKey(
-        info("00000000-0000-0000-0000-000000000000"),
-        ALICE_ID,
-      ),
-    ).toBe(false);
-  });
-
-  it("Key list not known", () => {
-    expect(isWrappedForReplacedKey(info(PREVIOUS, null), ALICE_ID)).toBe(
-      false,
+  it("a wrap the key does not open under a listed id keeps its own error", async () => {
+    const error = await refusal(
+      unwrap(await wrapFor(previousKey, CURRENT), LISTED),
     );
-    expect(isWrappedForReplacedKey(info(PREVIOUS, []), ALICE_ID)).toBe(false);
-    expect(isWrappedForReplacedKey(null, ALICE_ID)).toBe(false);
+
+    expect(error).toBeInstanceOf(Error);
+    expect(error).not.toBeInstanceOf(KeyReplacedError);
   });
 
-  it("no own entry", () => {
-    expect(
-      isWrappedForReplacedKey(
-        { userKeys: [{ id: CURRENT }], fileKeys: [entry(PREVIOUS, BOB_ID)] },
-        ALICE_ID,
-      ),
-    ).toBe(false);
+  it("the key id is compared without regard to letter case", async () => {
+    const error = await refusal(
+      unwrap(await wrapFor(previousKey, CURRENT.toUpperCase()), LISTED),
+    );
+
+    expect(error).not.toBeInstanceOf(KeyReplacedError);
+  });
+
+  it("Entry without a key id", async () => {
+    for (const id of ["", "00000000-0000-0000-0000-000000000000"]) {
+      const error = await refusal(
+        unwrap(await wrapFor(previousKey, id), LISTED),
+      );
+
+      expect(error).toBeInstanceOf(Error);
+      expect(error).not.toBeInstanceOf(KeyReplacedError);
+    }
+  });
+
+  it("Key list not known", async () => {
+    for (const userKeys of [undefined, null, []]) {
+      const error = await refusal(
+        unwrap(await wrapFor(previousKey, PREVIOUS), userKeys),
+      );
+
+      expect(error).toBeInstanceOf(Error);
+      expect(error).not.toBeInstanceOf(KeyReplacedError);
+    }
   });
 });

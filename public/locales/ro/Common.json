@@ -1386,7 +1386,6 @@
   "KeyChangedLastSeen": "ultima vizualizare: {{date}}",
   "KeyChangedNewFingerprint": "Amprentă digitală nouă",
   "KeyChangedReasonAttack": "Cineva încearcă să uzurpe identitatea utilizatorului. Dacă nu vă așteptați la o schimbare de cheie, tratați-o ca suspectă.",
-  "KeyChangedReasonRecovery": "Utilizatorul și-a restaurat identitatea folosind o frază de recuperare.",
   "KeyChangedReasonReplaced": "Utilizatorul și-a înlocuit cheia de criptare cu una nouă.",
   "KeyChangedReasonReset": "Utilizatorul și-a resetat cheile de criptare după ce și-a uitat fraza de acces.",
   "KeyChangedRefuse": "Nu acordați încredere",

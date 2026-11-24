@@ -79,8 +79,10 @@ type Seed = {
   name: string;
   text: string;
   forBob: boolean;
-  /** Bob's wrap names a key that his key list no longer holds. */
+  /** Bob's wrap is made for a key pair he no longer holds, under its id. */
   replacedKey?: boolean;
+  /** Bob's wrap is made for his key, under an id his key list does not hold. */
+  otherKeyId?: boolean;
   folderId?: number;
   serverTitle?: string;
 };
@@ -117,9 +119,10 @@ async function openReportsRoom(
   );
   const bobPublicKeyB64 = bobKeysHandle.getKeys()[0].publicKey;
   const alice = await generateIdentityKeyPair();
+  const bobPreviousKey = await generateIdentityKeyPair();
 
   const initialFiles = await Promise.all(
-    seeds.map(async ({ id, name, text, forBob, replacedKey, folderId, serverTitle }) => {
+    seeds.map(async ({ id, name, text, forBob, replacedKey, otherKeyId, folderId, serverTitle }) => {
       const plainBytes = new TextEncoder().encode(text);
       const { encryptedBlob, dek } = await encryptFile(plainBytes, {
         fileName: name,
@@ -134,8 +137,11 @@ async function openReportsRoom(
             ? [
                 {
                   userId: BOB_ID,
-                  publicKey: bobPublicKeyB64,
-                  publicKeyId: replacedKey ? REPLACED_KEY_ID : undefined,
+                  publicKey: replacedKey
+                    ? pubB64(bobPreviousKey)
+                    : bobPublicKeyB64,
+                  publicKeyId:
+                    replacedKey || otherKeyId ? REPLACED_KEY_ID : undefined,
                 },
               ]
             : []),
@@ -630,5 +636,35 @@ test.describe("Private room — files wrapped for a key the user no longer holds
       ),
     ).toBeVisible({ timeout: 15000 });
     await expect(page.getByText(/Failed to decrypt/)).toHaveCount(0);
+  });
+
+  test("Key imported again", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const { passphrase, passphrasePrompt } = await openReportsRoom(
+      page,
+      mockRequest,
+      baseUrl,
+      [
+        {
+          id: 8741,
+          name: "kept.png",
+          text: "Wrapped for the same key under its earlier id",
+          forBob: true,
+          otherKeyId: true,
+          serverTitle: "obfuscated-8741.png",
+        },
+      ],
+    );
+
+    await page.getByTestId("private_room_locked_block_unlock").click();
+    await enterPassphrase(passphrasePrompt, passphrase);
+
+    // The list shows the decrypted name without its extension.
+    await expect(page.getByTestId("table-body")).toContainText("kept", {
+      timeout: 15000,
+    });
+    await expect(
+      page.getByTestId("private_room_replaced_key_notice"),
+    ).toHaveCount(0);
   });
 });

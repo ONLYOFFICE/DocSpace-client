@@ -1386,7 +1386,6 @@
   "KeyChangedLastSeen": "آخر ظهور: {{date}}",
   "KeyChangedNewFingerprint": "بصمة الأصبع الجديدة",
   "KeyChangedReasonAttack": "شخص ما يحاول انتحال هوية المستخدم. إذا لم تكن تتوقع تغيير مفتاح، فعامل الأمر بحذر.",
-  "KeyChangedReasonRecovery": "استعاد المستخدم هويته باستخدام عبارة الاسترداد.",
   "KeyChangedReasonReplaced": "استبدل المستخدم مفتاح التشفير الخاص به بمفتاح جديد.",
   "KeyChangedReasonReset": "أعاد المستخدم تعيين مفاتيح التشفير بعد نسيان عبارة المرور.",
   "KeyChangedRefuse": "عدم الوثوق",

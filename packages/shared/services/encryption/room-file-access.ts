@@ -42,6 +42,7 @@ import { wipeDek } from "./file-keys";
 import {
   AuthenticationError,
   KeyCheckUnavailableError,
+  KeyReplacedError,
   NoAccessError,
 } from "./errors";
 import {
@@ -62,12 +63,11 @@ export type RoomMemberPublicKey = {
 const ZERO_KEY_ID = "00000000-0000-0000-0000-000000000000";
 
 /**
- * True when the user's own access entry of a file names a key that the key
- * list of the same answer does not hold. An entry without a key id, or an
- * answer without a key list, is not that case.
+ * True when the user's own access entry of a file names a key id that the key
+ * list does not hold. Only a hint: an imported key keeps its pair under a new
+ * id, so the verdict needs the unwrap to fail as well.
  */
-// Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
-export function isWrappedForReplacedKey(
+function namesKeyOutsideList(
   info:
     | {
         userKeys?: readonly { id: string }[] | null;
@@ -89,10 +89,14 @@ export function isWrappedForReplacedKey(
 }
 
 /** Throws NoAccessError when no entry; AuthenticationError on HPKE-Auth fail
- * or on TOFU mismatch when no resolver accepts the new sender key. */
+ * or on TOFU mismatch when no resolver accepts the new sender key;
+ * KeyReplacedError when no sender key opens the wrap and the entry names a
+ * key id that `userKeys`, the caller's key list, does not hold. */
 export async function unwrapDekForCurrentUser(params: {
   fileKeys: ServerAccessKeyDto[];
   roomMemberKeys: RoomMemberPublicKey[];
+  /** The caller's key list, as the access answer carries it. */
+  userKeys?: readonly { id: string }[] | null;
   currentUserId: string;
   currentIdentity: IdentityKeyPair;
   fileId: number;
@@ -102,6 +106,7 @@ export async function unwrapDekForCurrentUser(params: {
   const {
     fileKeys,
     roomMemberKeys,
+    userKeys,
     currentUserId,
     currentIdentity,
     fileId,
@@ -218,6 +223,11 @@ export async function unwrapDekForCurrentUser(params: {
       throw e;
     }
     return dek;
+  }
+
+  // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+  if (namesKeyOutsideList({ userKeys, fileKeys }, currentUserId)) {
+    throw new KeyReplacedError();
   }
 
   throw lastError instanceof Error

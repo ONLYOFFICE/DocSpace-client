@@ -74,13 +74,18 @@ import {
 } from "../useRotatePassphraseFlow";
 
 const lockAfterReseal = vi.fn();
+const onEnvelopeReplaced = vi.fn();
 
 let latest: RotatePassphraseFlow;
 const Harness = (deps: {
   userId: string | undefined;
   refreshKeysFromServer: () => Promise<void>;
 }) => {
-  latest = useRotatePassphraseFlow({ lockAfterReseal, ...deps });
+  latest = useRotatePassphraseFlow({
+    lockAfterReseal,
+    onEnvelopeReplaced,
+    ...deps,
+  });
   return <>{latest.modals}</>;
 };
 
@@ -126,6 +131,31 @@ describe("useRotatePassphraseFlow", () => {
     expect(captured.rotation?.error).toBe("Common:InvalidPassphrase");
     expect(toastr.error).not.toHaveBeenCalled();
     expect(captured.rotation).not.toBeNull();
+  });
+
+  it("Key list not read again after the change", async () => {
+    vi.mocked(changePassphrase).mockResolvedValueOnce({
+      publicKey: "pub-old",
+      privateKeyEnc: "enc-new",
+    });
+    vi.mocked(updateEncryptionKeys).mockResolvedValueOnce(undefined as never);
+    // The page's own refresh swallows a failed read, so it resolves here too.
+    const refreshKeysFromServer = vi.fn(async () => undefined);
+    render(<Harness userId="42" refreshKeysFromServer={refreshKeysFromServer} />);
+    act(() => latest.request(dummyKey));
+    await act(async () => {
+      await (
+        captured.rotation!.onSubmit as (a: string, b: string) => Promise<void>
+      )("old-pass", "new-pass");
+    });
+
+    expect(onEnvelopeReplaced).toHaveBeenCalledWith({
+      ...dummyKey,
+      privateKeyEnc: "enc-new",
+    });
+    expect(onEnvelopeReplaced.mock.invocationCallOrder[0]).toBeLessThan(
+      refreshKeysFromServer.mock.invocationCallOrder[0],
+    );
   });
 
   it("does NOT lock the identity when the rotation fails", async () => {

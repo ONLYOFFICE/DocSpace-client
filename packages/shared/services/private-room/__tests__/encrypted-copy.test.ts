@@ -127,19 +127,24 @@ describe("encryptedCopy", () => {
       expect(wipeDek).not.toHaveBeenCalled();
     });
 
-    it("One file of several: a file wrapped for a previous key is refused before it is fetched", async () => {
-      const fetchSpy = vi.fn();
-      vi.stubGlobal("fetch", fetchSpy);
+    it("One file of several: the unwrap's verdict on a replaced key is passed on", async () => {
+      vi.stubGlobal("fetch", vi.fn().mockResolvedValue(respond(16)));
+      const userKeys = [{ id: "key-now" }];
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
-        userKeys: [{ id: "key-now" }],
+        userKeys,
         fileKeys: [{ userId: "u1", publicKeyId: "key-before" }],
       // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
+      vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+        new KeyReplacedError(),
+      );
+
       await expect(
         decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
       ).rejects.toBeInstanceOf(KeyReplacedError);
-      expect(fetchSpy).not.toHaveBeenCalled();
-      expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
+      expect(vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].userKeys).toBe(
+        userKeys,
+      );
     });
 
     it("hasOwnEntry uses String() coercion on both sides", async () => {

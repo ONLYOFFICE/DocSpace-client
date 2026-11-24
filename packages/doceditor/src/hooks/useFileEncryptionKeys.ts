@@ -40,10 +40,8 @@ import type { EditorConfigBase } from "@onlyoffice/doceditor-types";
 
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
 import { useEncryptionOptional } from "@docspace/shared/context/encryption";
-import {
-  isWrappedForReplacedKey,
-  unwrapDekForCurrentUser,
-} from "@docspace/shared/services/encryption/room-file-access";
+import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
+import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { EDITOR_CONTRACT_VERSION } from "@docspace/shared/services/encryption/types";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
@@ -254,10 +252,6 @@ const useFileEncryptionKeys = (
           if (!cancelled) setState({ status: "no-access" });
           return;
         }
-        if (isWrappedForReplacedKey(info, currentUserId)) {
-          if (!cancelled) setState({ status: "key-replaced" });
-          return;
-        }
 
         if (cancelled) return;
         setState({ status: "unlocking" });
@@ -283,6 +277,7 @@ const useFileEncryptionKeys = (
         dek = await unwrapDekForCurrentUser({
           fileKeys: info.fileKeys,
           roomMemberKeys,
+          userKeys: info.userKeys,
           currentUserId,
           currentIdentity: identity,
           fileId: numericFileId,
@@ -305,6 +300,10 @@ const useFileEncryptionKeys = (
         if (cancelled) return;
         setState({ status: "ready", encryptionKeys });
       } catch (error) {
+        if (error instanceof KeyReplacedError) {
+          if (!cancelled) setState({ status: "key-replaced" });
+          return;
+        }
         console.error("[ENCRYPTION] editor key acquisition failed:", error);
         if (!cancelled) setState({ status: "error" });
       } finally {

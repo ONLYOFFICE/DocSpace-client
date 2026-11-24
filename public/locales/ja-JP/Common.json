@@ -1386,7 +1386,6 @@
   "KeyChangedLastSeen": "最終確認日：{{date}}",
   "KeyChangedNewFingerprint": "新しいフィンガープリント",
   "KeyChangedReasonAttack": "誰かがユーザーへのなりすましを試みています。キー変更を予期していなかった場合は、不審なものとして扱ってください。",
-  "KeyChangedReasonRecovery": "ユーザーがリカバリーフレーズを使用して本人確認を復元しました。",
   "KeyChangedReasonReplaced": "ユーザーが暗号化キーを新しいものに置き換えました。",
   "KeyChangedReasonReset": "ユーザーがパスフレーズを忘れたため、暗号化キーをリセットしました。",
   "KeyChangedRefuse": "信頼しない",

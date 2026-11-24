@@ -1386,7 +1386,6 @@
   "KeyChangedLastSeen": "pēdējo reizi redzēta: {{date}}",
   "KeyChangedNewFingerprint": "Jaunais nospiedums",
   "KeyChangedReasonAttack": "Kāds mēģina uzdoties par šo lietotāju. Ja neparedzējāt atslēgas maiņu, uzskatiet to par aizdomīgu.",
-  "KeyChangedReasonRecovery": "Lietotājs atjaunoja savu identitāti, izmantojot atkopšanas frāzi.",
   "KeyChangedReasonReplaced": "Lietotājs aizstāja savu šifrēšanas atslēgu ar jaunu.",
   "KeyChangedReasonReset": "Lietotājs atiestatīja savas šifrēšanas atslēgas pēc ieejas frāzes aizmiršanas.",
   "KeyChangedRefuse": "Neuzticēties",

@@ -67,6 +67,7 @@ import axios from "axios";
 // unrelated copy whose queued commands nobody ever delivers.
 import { zendeskAPI } from "@onlyoffice/apps-ui-kit/components/article/zendesk/Zendesk.utils";
 import { CategoryType } from "@docspace/shared/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
@@ -277,6 +278,13 @@ class ProfileActionsStore {
     this.selectedFolderStore.setSelectedFolder(null);
 
     window.DocSpace.navigate(settingsUrl);
+
+    if (
+      settingsUrl === "/portal-settings" &&
+      this.settingsStore.currentDeviceType === DeviceType.mobile
+    ) {
+      this.settingsStore.setArticleOpen(true);
+    }
   };
 
   onAccountsClick = (

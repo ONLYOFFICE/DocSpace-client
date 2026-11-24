@@ -55,6 +55,7 @@ import { DeviceType, FileStatus, FileType, FolderType } from "../../enums";
 import { MediaViewerProps } from "./MediaViewer.types";
 import { NextButton } from "./sub-components/Buttons/NextButton";
 import { PrevButton } from "./sub-components/Buttons/PrevButton";
+import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
 vi.mock("../../utils/common", async () => {
   const originalModule =
@@ -491,4 +492,62 @@ describe("Media viewer menu models", () => {
       expect(visibleKeys(model)).toContain("rename");
     },
   );
+});
+
+describe("MediaViewer - plugin title follows the open file (Bug 85159)", () => {
+  const playlist = [
+    { ...mockPlaylistItem, id: 1, fileId: 1, title: "first.eml", src: "a" },
+    { ...mockPlaylistItem, id: 2, fileId: 2, title: "second.eml", src: "b" },
+  ];
+
+  const files = playlist.map((item) => ({
+    ...mockFile,
+    id: item.fileId,
+    title: item.title,
+  }));
+
+  const openedByPlugin = (pluginTitle: string) =>
+    createMockProps({
+      playlist,
+      files,
+      playlistPos: 0,
+      currentFileId: 1,
+      pluginFileId: 1,
+      pluginTitle,
+    });
+
+  const headerTitle = () =>
+    vi.mocked(ViewerWrapper).mock.lastCall?.[0].title;
+
+  it("shows the plugin title on the file the plugin opened it for", () => {
+    render(<MediaViewer {...openedByPlugin("Mail from Anna")} />);
+
+    expect(headerTitle()).toBe("Mail from Anna");
+  });
+
+  it("shows the name of the next file after moving on", () => {
+    const props = openedByPlugin("first.eml");
+    const { rerender } = render(<MediaViewer {...props} />);
+
+    rerender(<MediaViewer {...props} playlistPos={1} currentFileId={2} />);
+
+    expect(headerTitle()).toBe("second.eml");
+  });
+
+  it("keeps a title the plugin updates together with the file", () => {
+    const props = openedByPlugin("Mail 1");
+    const { rerender } = render(<MediaViewer {...props} />);
+
+    rerender(
+      <MediaViewer
+        {...props}
+        playlistPos={1}
+        currentFileId={2}
+        pluginFileId={2}
+        pluginTitle="Mail 2"
+      />,
+    );
+
+    expect(headerTitle()).toBe("Mail 2");
+  });
 });

@@ -76,6 +76,21 @@ import { toAiPreset } from "./AiPresetsStore";
 /** The Skill sets connected and disconnected in the chat's composer. */
 type TSkillRoomsChange = { added: { id: string }[]; removed: string[] };
 
+/** The two kinds of rooms an agent links: its Skill sets and its Knowledge bases. */
+export type TAgentRoomsKind = "instructions" | "knowledge";
+
+/** The agent's rooms behind a list of the chat's composer. */
+export const toAgentRoomsKind = (kind: "skills" | "knowledge"): TAgentRoomsKind =>
+  kind === "knowledge" ? "knowledge" : "instructions";
+
+export type TRoomsSelectorState = {
+  /** The agent's room id. */
+  id: number;
+  kind: TAgentRoomsKind;
+  /** The rooms of that kind the agent links, ticked when the selector opens. */
+  rooms: TAiProjectSource[];
+};
+
 export type TProjectDialogState =
   | { mode: "create" }
   | { mode: "edit"; project: TAiProject };
@@ -206,6 +221,9 @@ class AiProjectsStore {
 
   projectDialog: TProjectDialogState | null = null;
 
+  /** The rooms selector open on an agent outside its form; `null` while closed. */
+  roomsSelector: TRoomsSelectorState | null = null;
+
   /**
    * Bumped, by project id, each time a project is taken over as the server
    * has it after a change (a save here, an edit announced from elsewhere):
@@ -236,32 +254,72 @@ class AiProjectsStore {
   /* ------------------------------ Project ------------------------------ */
 
   /**
-   * Sets the rooms of one kind linked to the open project, as its sources
-   * column picked them. Only the links are written: the room itself, the
-   * model and the instructions stay as they are.
+   * Opens the selector of one kind of the agent's rooms, the one its form
+   * opens: "Manage skill sets..." and "Manage knowledge bases..." of the
+   * agent's Info panel and of its chat. The agent is read first, unless it
+   * is the open project, so the selector ticks the rooms the server has.
+   * Opens nothing for one who may not change the agent.
    */
-  setActiveRooms = async (kind: "instructions" | "knowledge", rooms: TAiProjectSource[]) => {
-    const current = this.activeProject;
-    if (!current) return;
-    const instructions = kind === "instructions" ? rooms : current.aiProject.instructionsRooms;
-    const knowledge = kind === "knowledge" ? rooms : current.aiProject.knowledgeRooms;
-    try {
-      const project = await updateAiProject(
-        current.id,
-        {
-          aiProject: {
-            instructionsRoomIds: instructions.map((room) => room.id),
-            knowledgeRoomIds: knowledge.map((room) => room.id),
-            rooms: [...instructions, ...knowledge],
+  openRoomsSelector = async (id: number, kind: TAgentRoomsKind) => {
+    const project = await this.readProject(id);
+    if (!project?.aiProject.canEditSettings) return;
+    runInAction(() => {
+      this.roomsSelector = {
+        id,
+        kind,
+        rooms: kind === "instructions" ? project.aiProject.instructionsRooms : project.aiProject.knowledgeRooms,
+      };
+    });
+  };
+
+  closeRoomsSelector = () => (this.roomsSelector = null);
+
+  /**
+   * Sets the rooms of one kind linked to an agent, as its rooms selector
+   * picked them. Only the links are written: the room itself, the model and
+   * the instructions stay as they are. Saved after the changes before it,
+   * from the agent as the server has it then. Resolves to `false` when the
+   * save failed.
+   */
+  setRooms = (id: number, kind: TAgentRoomsKind, rooms: TAiProjectSource[]): Promise<boolean> => {
+    const save = this.skillRoomsSaves.then(async () => {
+      const current = await this.readProject(id);
+      if (!current?.aiProject.canEditSettings) return false;
+      const instructions = kind === "instructions" ? rooms : current.aiProject.instructionsRooms;
+      const knowledge = kind === "knowledge" ? rooms : current.aiProject.knowledgeRooms;
+      try {
+        const project = await updateAiProject(
+          current.id,
+          {
+            aiProject: {
+              instructionsRoomIds: instructions.map((room) => room.id),
+              knowledgeRoomIds: knowledge.map((room) => room.id),
+              rooms: [...instructions, ...knowledge],
+            },
           },
-        },
-        current,
-      );
-      showWarnings(project);
-      runInAction(() => this.replaceProject(project));
-      if (this.activeProject?.id === current.id) this.syncPreset(project);
+          current,
+        );
+        showWarnings(project);
+        runInAction(() => this.replaceProject(project));
+        if (this.isChatOn(current.id)) this.syncPreset(project);
+        return true;
+      } catch (e) {
+        toastr.error(errorMessage(e));
+        return false;
+      }
+    });
+    this.skillRoomsSaves = save;
+    return save;
+  };
+
+  /** The agent as the server has it: the open project, or read by id. */
+  private readProject = async (id: number): Promise<TAiProject | null> => {
+    if (this.activeProject?.id === id && !this.activeProject.aiProject.partial) return this.activeProject;
+    try {
+      return await getAiProject(id);
     } catch (e) {
       toastr.error(errorMessage(e));
+      return null;
     }
   };
 
@@ -286,15 +344,7 @@ class AiProjectsStore {
    * server has, and the picked agent then follows the saved one.
    */
   changeSkillRooms = (id: number, change: TSkillRoomsChange): Promise<boolean> =>
-    this.queueSkillRoomsSave(async () => {
-      if (this.activeProject?.id === id) return this.activeProject;
-      try {
-        return await getAiProject(id);
-      } catch (e) {
-        toastr.error(errorMessage(e));
-        return null;
-      }
-    }, change);
+    this.queueSkillRoomsSave(() => this.readProject(id), change);
 
   private queueSkillRoomsSave = (
     read: () => Promise<TAiProject | null>,

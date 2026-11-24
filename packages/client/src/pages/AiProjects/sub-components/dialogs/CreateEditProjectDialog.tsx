@@ -48,13 +48,9 @@ import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import type { TImage } from "@onlyoffice/apps-ui-kit/components/image-editor/ImageEditor.types";
 import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
-import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
-import { RoomSearchArea } from "@docspace/shared/enums";
 import {
-  AI_PROJECT_MAX_ROOMS_PER_TYPE,
   INSTRUCTIONS_ROOM_TYPE,
   KNOWLEDGE_ROOM_TYPE,
 } from "@docspace/shared/api/ai/projects";
@@ -82,7 +78,8 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import { SourceRoomLogo } from "../project/RoomItem";
-import { isTagBeingTyped, roomLinkRefusal, savedProjectProfileId } from "../../utils";
+import { isTagBeingTyped, savedProjectProfileId } from "../../utils";
+import AgentRoomsSelector, { type TAgentRoomType } from "./AgentRoomsSelector";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -109,7 +106,7 @@ const logoCrop = (file: File, { x, y, zoom }: TIcon) =>
     img.src = url;
   });
 
-type TRoomType = typeof INSTRUCTIONS_ROOM_TYPE | typeof KNOWLEDGE_ROOM_TYPE;
+type TRoomType = TAgentRoomType;
 
 const MAX_TITLE = 170;
 
@@ -131,12 +128,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const dialogsStore = useStore("dialogsStore");
   const filesStore = useStore("filesStore");
   const tagsStore = useStore("tagsStore");
-  const settingsStore = useStore("settingsStore");
   const avatarEditorDialogStore = useStore("avatarEditorDialogStore");
   const { avatarEditorDialogVisible } = avatarEditorDialogStore;
-  // With vectorization off a Knowledge room cannot be searched, so none can
-  // be linked: the selector lists them greyed out, with the reason.
-  const vectorizationEnabled = settingsStore.aiConfig?.vectorizationEnabled !== false;
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
   const ensureProfiles = useProfilesStore((s) => s.ensureProfiles);
@@ -346,34 +339,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     dialogsStore.setChangeRoomOwnerIsVisible(true);
   };
 
-  // The limit is never shown up front: only ticking a room past it is told.
-  const onRoomsLimitReached = () =>
-    toastr.warning(
-      selector === INSTRUCTIONS_ROOM_TYPE
-        ? t("Common:AIProjectInstructionsRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })
-        : t("Common:AIProjectKnowledgeRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),
-    );
-
-  const onRoomsSelected = (items: TSelectorItem[]) => {
+  const onRoomsSelected = (rooms: TAiProjectSource[]) => {
     if (selector === null) return;
-    // The logo the selector read with the room, so the saved project shows
-    // the linked rooms without reading them back.
-    const rooms = items.map((item) => {
-      const room = item as { color?: string; cover?: TAiProjectCover; icon?: string; iconOriginal?: string };
-      return {
-        id: Number(item.id),
-        title: item.label,
-        roomType: selector,
-        available: true,
-        archived: false,
-        logo: {
-          color: room.color ? `#${room.color.replace("#", "")}` : "",
-          cover: room.cover ?? null,
-          medium: typeof room.icon === "string" ? room.icon : undefined,
-          original: room.iconOriginal,
-        },
-      };
-    });
     if (selector === INSTRUCTIONS_ROOM_TYPE) setInstructions(rooms);
     else setKnowledge(rooms);
     setSelector(null);
@@ -429,21 +396,6 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
 
   const selected = selector === INSTRUCTIONS_ROOM_TYPE ? instructions : knowledge;
 
-  // Why a room of the selector cannot be linked, or `null` when it can. The
-  // server links only rooms the user may manage, and refuses the whole save
-  // over one that is not: those are listed greyed out. A room linked already
-  // stays selected and is kept.
-  const getRoomDisabledReason = (room: { security?: { EditRoom?: boolean } | null }) => {
-    switch (roomLinkRefusal(room, selector === KNOWLEDGE_ROOM_TYPE, vectorizationEnabled)) {
-      case "vectorizationOff":
-        return t("Common:KnowledgeRoomsNeedVectorization");
-      case "noManageRights":
-        return t("Common:YouDontHaveEnoughPermission");
-      default:
-        return null;
-    }
-  };
-
   return (
     <ModalDialog
         visible
@@ -463,36 +415,11 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
       >
         {selector !== null ? (
           <ModalDialog.Container>
-            <RoomSelector
-              onClose={() => setSelector(null)}
-              isMultiSelect
-              // Room rows come with `disableMultiSelect`; this overrules it,
-              // as the "add rooms to a group" dialog does.
-              forceIsMultiSelect
-              maxSelectedItems={AI_PROJECT_MAX_ROOMS_PER_TYPE}
-              onSelectLimitReached={onRoomsLimitReached}
+            <AgentRoomsSelector
               roomType={selector}
-              // Instructions and Knowledge rooms live under the "AI rooms"
-              // root, not in Rooms.
-              searchArea={RoomSearchArea.AiHub}
-              isRoomDisabled={(room) => getRoomDisabledReason(room) !== null}
-              getRoomDisabledText={(room) => getRoomDisabledReason(room) ?? undefined}
-              withSearch
-              withHeader
-              headerProps={{
-                headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t("Common:SkillSets") : t("Common:AIProjectKnowledgeRooms"),
-                onCloseClick: () => setSelector(null),
-                onBackClick: () => setSelector(null),
-                withoutBackButton: false,
-                withoutBorder: false,
-              }}
-              withCancelButton
-              cancelButtonLabel={t("Common:CancelButton")}
-              onCancel={() => setSelector(null)}
-              submitButtonLabel={t("Common:SelectAction")}
-              selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}
-              sortSelectedFirst
+              selected={selected}
               onSubmit={onRoomsSelected}
+              onClose={() => setSelector(null)}
             />
           </ModalDialog.Container>
         ) : null}

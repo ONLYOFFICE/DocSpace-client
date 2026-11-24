@@ -54,6 +54,7 @@ import {
 } from "@docspace/shared/api/ai/projects";
 
 import { useStore } from "SRC_DIR/store/useStore";
+import type { TAgentRoomsKind } from "SRC_DIR/store/AiProjectsStore";
 import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 import RoomItem from "SRC_DIR/pages/AiProjects/sub-components/project/RoomItem";
 import SkillIcon from "SRC_DIR/components/SkillIcon";
@@ -219,7 +220,7 @@ type AiAgentContextProps = {
  * an empty section shows. A name opens its room. While the chat runs on the
  * agent, the user's own data sources of that chat come last. Those who may edit the agent get a "Manage ..." row under
  * each section ("Manage skill sets...", "Manage knowledge bases..."), which
- * opens the agent's form.
+ * opens the selector of that section's rooms; the pick is saved at once.
  */
 const AiAgentContext = ({ id }: AiAgentContextProps) => {
   const { t } = useTranslation(["Common"]);
@@ -236,7 +237,8 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   // Every skill set starts unfolded; only the ones folded by hand are kept.
   const [collapsed, setCollapsed] = React.useState<Record<number, boolean>>({});
 
-  // Read again once the agent is saved (a "Manage ..." row) or changed elsewhere.
+  // Read again once the agent is saved (the pick of a "Manage ..." row) or
+  // changed elsewhere.
   const revision = aiProjectsStore.projectRevisions[id] ?? 0;
   const shownId = React.useRef<number | null>(null);
 
@@ -271,13 +273,15 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
 
   if (!context) return null;
 
-  // The section's own "Manage ..." row, for those who may edit the agent.
-  const manageRow = (testId: string, label: string) =>
+  // The section's own "Manage ..." row, for those who may edit the agent:
+  // it opens the selector of that kind of rooms, as the agent's form and
+  // its chat's composer do.
+  const manageRow = (testId: string, label: string, kind: TAgentRoomsKind) =>
     context.canEdit ? (
       <ManageRow
         testId={testId}
         label={label}
-        onClick={() => aiProjectsStore.openEditDialogById(id)}
+        onClick={() => void aiProjectsStore.openRoomsSelector(id, kind)}
       />
     ) : null;
 
@@ -341,7 +345,11 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
             </React.Fragment>
           );
         },
-        manageRow("ai-agent-context-manage-skills", t("Common:ManageSkillSets")),
+        manageRow(
+          "ai-agent-context-manage-skills",
+          t("Common:ManageSkillSets"),
+          "instructions",
+        ),
       )}
       {section(
         "ai-agent-context-knowledge",
@@ -359,6 +367,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
         manageRow(
           "ai-agent-context-manage-knowledge",
           t("Common:ManageKnowledgeBases"),
+          "knowledge",
         ),
       )}
       {isChatAgent ? <DataSources /> : null}

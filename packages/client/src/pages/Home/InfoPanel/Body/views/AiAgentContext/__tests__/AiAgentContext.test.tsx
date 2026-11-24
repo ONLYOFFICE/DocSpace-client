@@ -8,7 +8,7 @@ const api = vi.hoisted(() => ({
   getAiProjectSkills: vi.fn(),
 }));
 const store = vi.hoisted(() => ({
-  openEditDialogById: vi.fn(),
+  openRoomsSelector: vi.fn(),
   projectRevisions: {} as Record<number, number>,
   // The agent the chat runs on (`aiPresetsStore`).
   activePreset: null as { id: string } | null,
@@ -69,7 +69,7 @@ beforeEach(() => {
   api.getAiProjectSkills
     .mockReset()
     .mockResolvedValue([{ id: 1, skills: [{ id: "9", name: "clause-check", description: "Checks" }] }]);
-  store.openEditDialogById.mockReset();
+  store.openRoomsSelector.mockReset();
   store.projectRevisions = observable({});
   store.activePreset = null;
   chat.folders = [];
@@ -106,7 +106,7 @@ describe("AiAgentContext", () => {
     expect(screen.queryByTestId("toggle-Legal")).toBeNull();
   });
 
-  it("offers a Manage row under each section to those who may edit the agent, which opens its form", async () => {
+  it("offers a Manage row under each section to those who may edit the agent, which opens the selector of its rooms", async () => {
     render(<AiAgentContext id={7} />);
     const skills = await screen.findByTestId("ai-agent-context-manage-skills");
     const knowledge = screen.getByTestId("ai-agent-context-manage-knowledge");
@@ -118,8 +118,9 @@ describe("AiAgentContext", () => {
 
     fireEvent.click(skills);
     fireEvent.click(knowledge);
-    expect(store.openEditDialogById).toHaveBeenCalledTimes(2);
-    expect(store.openEditDialogById).toHaveBeenCalledWith(7);
+    expect(store.openRoomsSelector).toHaveBeenCalledTimes(2);
+    expect(store.openRoomsSelector).toHaveBeenNthCalledWith(1, 7, "instructions");
+    expect(store.openRoomsSelector).toHaveBeenNthCalledWith(2, 7, "knowledge");
   });
 
   it("reads the agent again once it is saved, keeping what it shows meanwhile", async () => {

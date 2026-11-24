@@ -60,7 +60,12 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import DialogComponent from "SRC_DIR/components/GlobalEvents/sub-components/Dialog";
 import type AiPresetsStore from "SRC_DIR/store/AiPresetsStore";
-import { errorMessage, isPaymentRequired } from "SRC_DIR/store/AiProjectsStore";
+import {
+  errorMessage,
+  isPaymentRequired,
+  toAgentRoomsKind,
+  type TAgentRoomsKind,
+} from "SRC_DIR/store/AiProjectsStore";
 import { canManageProjects, hasPortalChatModel } from "SRC_DIR/pages/AiProjects/utils";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 import { InfoPanelView, showInfoPanel } from "SRC_DIR/helpers/info-panel";
@@ -108,6 +113,8 @@ type AiPresetsBridgeProps = {
   isAiProjectOpen: boolean;
   /** Opens the edit form of a project, read first. */
   openEditAiProject: (id: number) => void | Promise<void>;
+  /** Opens the selector of a project's Skill sets or Knowledge bases, read first. */
+  openAgentRooms: (id: number, kind: TAgentRoomsKind) => void | Promise<void>;
   /**
    * Saves a change of the Skill sets made in the chat to the project;
    * resolves to `false` when nothing was saved.
@@ -158,6 +165,7 @@ const AiPresetsBridge = ({
   setPortalHasChatModel,
   isAiProjectOpen,
   openEditAiProject,
+  openAgentRooms,
   changeAgentSkillRooms,
   inviteToRoom,
   selectForInfoPanel,
@@ -413,7 +421,7 @@ const AiPresetsBridge = ({
 
   // A picked agent's Skill sets and Knowledge bases are its settings, as on
   // its page (AiProjectView): the composer lists them as they are, "Manage
-  // ..." opens the agent's form and a Skill set changed in the slash menu is
+  // ..." opens the selector of the agent's rooms of that list and a Skill set changed in the slash menu is
   // saved to the agent - for those who may edit it. A member gets the lists
   // with no remove control and no Manage row, and no one may drop a
   // knowledge base from the chat alone. When a save fails, the chat goes
@@ -423,7 +431,7 @@ const AiPresetsBridge = ({
     if (isInsideOpenProject || activeAgentId === null) return undefined;
     const id = Number(activeAgentId);
     const manager: AiChatSourcesManager = {
-      onManage: canEditAgent ? () => void openEditAiProject(id) : null,
+      onManage: canEditAgent ? (kind) => void openAgentRooms(id, toAgentRoomsKind(kind)) : null,
       onSkillRoomsChange: canEditAgent
         ? (change) => {
             void changeAgentSkillRooms(id, change).then((saved) => {
@@ -446,7 +454,7 @@ const AiPresetsBridge = ({
   }, [
     aiChatStore,
     aiPresetsStore,
-    openEditAiProject,
+    openAgentRooms,
     changeAgentSkillRooms,
     isInsideOpenProject,
     activeAgentId,
@@ -646,6 +654,7 @@ export default inject(
   showPaymentWarning: () => dialogsStore.setQuotaWarningDialogVisible(true),
   isAiProjectOpen: aiProjectsStore.activeProject !== null,
   openEditAiProject: aiProjectsStore.openEditDialogById,
+  openAgentRooms: aiProjectsStore.openRoomsSelector,
   changeAgentSkillRooms: aiProjectsStore.changeSkillRooms,
   inviteToRoom: contextOptionsStore.onClickInviteUsers,
   // The Info panel shows the list's selection: the agent takes its place.

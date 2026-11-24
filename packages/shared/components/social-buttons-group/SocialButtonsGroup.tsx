@@ -48,9 +48,26 @@ import type {
 import { PROVIDERS_DATA } from "../../constants";
 import MoreLoginModal from "../../dialogs/more-login-modal";
 
+const PROVIDERS_ORDER = [
+  "google",
+  "appleid",
+  "microsoft",
+  "facebook",
+  "linkedin",
+  "twitter",
+  "zoom",
+  "weixin",
+  "nextcloud",
+];
+
+const providerRank = (provider: string) => {
+  const index = PROVIDERS_ORDER.indexOf(provider);
+  return index === -1 ? PROVIDERS_ORDER.length : index;
+};
+
 export const SocialButtonsGroup = memo(
   ({
-    providers = [],
+    providers: unsortedProviders = [],
     onClick,
     ssoLabel,
     ssoUrl,
@@ -60,6 +77,10 @@ export const SocialButtonsGroup = memo(
     onMoreAuthToggle,
   }: SocialButtonProps) => {
     const [moreAuthVisible, setMoreAuthVisible] = useState(false);
+
+    const providers = [...unsortedProviders].sort(
+      (a, b) => providerRank(a.provider) - providerRank(b.provider),
+    );
 
     const length = providers.length - 1;
 

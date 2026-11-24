@@ -83,6 +83,7 @@ export interface PluginItemProps
   theme: TTheme;
   dataTestId?: string;
   shadowedBy?: Pick<TPlugin, "nameLocale" | "version" | "enabled">;
+  isNotLoaded?: boolean;
   onDelete?: () => void;
 }
 

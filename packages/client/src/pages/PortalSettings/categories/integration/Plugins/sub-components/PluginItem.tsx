@@ -75,6 +75,7 @@ const PluginItem = ({
   dataTestId,
   theme,
   shadowedBy,
+  isNotLoaded,
   onDelete,
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common", "WebPlugins"]);
@@ -164,6 +165,16 @@ const PluginItem = ({
     >
       <PluginIncompatibleSvg />
     </div>
+  ) : isNotLoaded ? (
+    <div
+      className={classNames(styles.pluginLoadError, styles.pluginInitError)}
+      data-tooltip-id="system-tooltip"
+      data-tooltip-content={t("WebPlugins:PersonalPluginNotLoaded")}
+      data-tooltip-place="bottom"
+      data-testid={`plugin_not_loaded_${name}_icon`}
+    >
+      <PluginIncompatibleSvg />
+    </div>
   ) : null;
 
   return (
@@ -189,7 +200,7 @@ const PluginItem = ({
             <ToggleButton
               className={styles.pluginToggleButton}
               onChange={onChangeStatus}
-              isChecked={enabled && !!updatePlugin}
+              isChecked={enabled && (!!updatePlugin || !!isNotLoaded)}
               isDisabled={(!!loadError && !enabled) || !updatePlugin}
               dataTestId="enable_plugin_toggle_button"
             />

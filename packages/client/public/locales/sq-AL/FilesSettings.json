@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Pyet çdo herë",
   "CancellaionNotification": "Mos e shfaq më lajmërimin për anulim.",
   "DefaultHomepage": "Faqja kryesore e parazgjedhur",
   "GroupByRooms": "Grupo sipas dhomave",
+  "OpenDocumentsOnMobile": "Hapja e dokumenteve në pajisjet celulare",
+  "OpenInMobileApp": "Në aplikacionin celular",
+  "OpenInMobileBrowser": "Në shfletues",
   "OpenSameTab": "Hap redaktuesit në të njëjtën skedë",
   "ShowQuickActions": "Shfaq veprimet e shpejta"
 }

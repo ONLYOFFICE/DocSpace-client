@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Hər dəfə soruşmaq",
   "CancellaionNotification": "Ləğvetmə bildirişini yenidən göstərməyin",
   "DefaultHomepage": "Standart Ana Səhifə",
   "GroupByRooms": "Otaqlar üzrə qruplaşdır",
+  "OpenDocumentsOnMobile": "Sənədləri mobil cihazlarda açmaq",
+  "OpenInMobileApp": "Mobil tətbiqdə",
+  "OpenInMobileBrowser": "Brauzerdə",
   "OpenSameTab": "Redaktorları eyni vərəqdə açın",
   "ShowQuickActions": "Sürətli hərəkətləri göstər"
 }

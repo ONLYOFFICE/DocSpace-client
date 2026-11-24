@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Спрашивать каждый раз",
   "CancellaionNotification": "Больше не показывать уведомление об отмене",
   "DefaultHomepage": "Домашняя страница по умолчанию",
   "GroupByRooms": "Группировать по комнатам",
+  "OpenDocumentsOnMobile": "Открытие документов на мобильных устройствах",
+  "OpenInMobileApp": "В мобильном приложении",
+  "OpenInMobileBrowser": "В браузере",
   "OpenSameTab": "Открывать редакторы в той же вкладке",
   "ShowQuickActions": "Показывать быстрые действия"
 }

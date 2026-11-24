@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Հարցնել ամեն անգամ",
   "CancellaionNotification": "Նորից չցուցադրել չեղարկման ծանուցումը",
   "DefaultHomepage": "Ստանդարտ գլխավոր էջ",
   "GroupByRooms": "Խմբավորել ըստ սենյակների",
+  "OpenDocumentsOnMobile": "Փաստաթղթերի բացումը բջջային սարքերում",
+  "OpenInMobileApp": "Բջջային հավելվածում",
+  "OpenInMobileBrowser": "Դիտարկիչում",
   "OpenSameTab": "Բացել խմբագրիչները նույն ներդիրում",
   "ShowQuickActions": "Ցուցադրել արագ գործողությունները"
 }

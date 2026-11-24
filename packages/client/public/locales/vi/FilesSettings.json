@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Luôn hỏi",
   "CancellaionNotification": "Không hiển thị lại thông báo hủy",
   "DefaultHomepage": "Trang chủ mặc định",
   "GroupByRooms": "Nhóm theo phòng",
+  "OpenDocumentsOnMobile": "Mở tài liệu trên thiết bị di động",
+  "OpenInMobileApp": "Trong ứng dụng di động",
+  "OpenInMobileBrowser": "Trong trình duyệt",
   "OpenSameTab": "Mở trình chỉnh sửa trong cùng một tab",
   "ShowQuickActions": "Hiển thị hành động nhanh"
 }

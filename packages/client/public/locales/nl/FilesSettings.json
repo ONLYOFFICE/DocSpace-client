@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Elke keer vragen",
   "CancellaionNotification": "Annuleringsmelding niet meer weergeven",
   "DefaultHomepage": "Standaard homepage",
   "GroupByRooms": "Groepeer op kamers",
+  "OpenDocumentsOnMobile": "Documenten openen op mobiele apparaten",
+  "OpenInMobileApp": "In de mobiele app",
+  "OpenInMobileBrowser": "In de browser",
   "OpenSameTab": "Editors in hetzelfde tabblad openen",
   "ShowQuickActions": "Snelle acties tonen"
 }

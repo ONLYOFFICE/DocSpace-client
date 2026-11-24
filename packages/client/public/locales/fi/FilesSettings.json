@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Kysy joka kerta",
   "CancellaionNotification": "Älä näytä peruutusilmoitusta enää",
   "DefaultHomepage": "Oletusetusivu",
   "GroupByRooms": "Ryhmittele huoneittain",
+  "OpenDocumentsOnMobile": "Asiakirjojen avaaminen mobiililaitteilla",
+  "OpenInMobileApp": "Mobiilisovelluksessa",
+  "OpenInMobileBrowser": "Selaimessa",
   "OpenSameTab": "Avaa editorit samassa välilehdessä",
   "ShowQuickActions": "Näytä pikatoiminnot"
 }

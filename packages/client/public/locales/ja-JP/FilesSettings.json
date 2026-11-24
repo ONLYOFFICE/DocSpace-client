@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "毎回確認する",
   "CancellaionNotification": "キャンセル通知を再表示しない",
   "DefaultHomepage": "デフォルトホームページ",
   "GroupByRooms": "部屋ごとにグループ化",
+  "OpenDocumentsOnMobile": "モバイルデバイスでドキュメントを開く方法",
+  "OpenInMobileApp": "モバイルアプリで開く",
+  "OpenInMobileBrowser": "ブラウザで開く",
   "OpenSameTab": "エディタを同じタブで開く",
   "ShowQuickActions": "クイックアクションを表示する"
 }

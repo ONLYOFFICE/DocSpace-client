@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Perguntar sempre",
   "CancellaionNotification": "Não volte a apresentar a notificação de cancelamento",
   "DefaultHomepage": "Página inicial padrão",
   "GroupByRooms": "Agrupar por salas",
+  "OpenDocumentsOnMobile": "Abrir documentos em dispositivos móveis",
+  "OpenInMobileApp": "Na aplicação móvel",
+  "OpenInMobileBrowser": "No navegador",
   "OpenSameTab": "Abrir editores no mesmo separador",
   "ShowQuickActions": "Mostrar ações rápidas"
 }

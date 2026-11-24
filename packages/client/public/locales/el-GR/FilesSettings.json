@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Ερώτηση κάθε φορά",
   "CancellaionNotification": "Να μην εμφανιστεί ξανά η ειδοποίηση ακύρωσης",
   "DefaultHomepage": "Προεπιλεγμένη αρχική σελίδα",
   "GroupByRooms": "Ομαδοποίηση ανά δωμάτια",
+  "OpenDocumentsOnMobile": "Άνοιγμα εγγράφων σε κινητές συσκευές",
+  "OpenInMobileApp": "Στην εφαρμογή για κινητά",
+  "OpenInMobileBrowser": "Στο πρόγραμμα περιήγησης",
   "OpenSameTab": "Άνοιγμα επεξεργαστών στην ίδια καρτέλα",
   "ShowQuickActions": "Εμφάνιση γρήγορων ενεργειών"
 }

@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "매번 묻기",
   "CancellaionNotification": "취소 알림을 다시 표시하지 않음",
   "DefaultHomepage": "기본 홈페이지",
   "GroupByRooms": "방별 그룹",
+  "OpenDocumentsOnMobile": "모바일 기기에서 문서 열기",
+  "OpenInMobileApp": "모바일 앱에서",
+  "OpenInMobileBrowser": "브라우저에서",
   "OpenSameTab": "동일한 탭에서 편집기 열기",
   "ShowQuickActions": "빠른 작업 표시"
 }

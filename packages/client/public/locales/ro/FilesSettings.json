@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Întreabă de fiecare dată",
   "CancellaionNotification": "Nu afișa din nou notificarea de anulare",
   "DefaultHomepage": "Pagina principală implicită",
   "GroupByRooms": "Grupează după săli",
+  "OpenDocumentsOnMobile": "Deschiderea documentelor pe dispozitive mobile",
+  "OpenInMobileApp": "În aplicația mobilă",
+  "OpenInMobileBrowser": "În browser",
   "OpenSameTab": "Deschidere editoare în aceeași filă",
   "ShowQuickActions": "Afișare acțiuni rapide"
 }

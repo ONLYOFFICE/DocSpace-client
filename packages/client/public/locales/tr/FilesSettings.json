@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Her seferinde sor",
   "CancellaionNotification": "İptal bildirimini bir daha gösterme",
   "DefaultHomepage": "Varsayılan ana sayfa",
   "GroupByRooms": "Odalara göre gruplandır",
+  "OpenDocumentsOnMobile": "Belgelerin mobil cihazlarda açılması",
+  "OpenInMobileApp": "Mobil uygulamada",
+  "OpenInMobileBrowser": "Tarayıcıda",
   "OpenSameTab": "Düzenleyicileri aynı sekmede aç",
   "ShowQuickActions": "Hızlı eylemleri göster"
 }

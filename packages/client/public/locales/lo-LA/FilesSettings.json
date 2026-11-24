@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "ຖາມທຸກຄັ້ງ",
   "CancellaionNotification": "ຢ່າສະແດງການແຈ້ງເຕືອນການຍົກເລີກອີກ",
   "DefaultHomepage": "ໜ້າຫຼັກເລີ່ມຕົ້ນ",
   "GroupByRooms": "ຈັດກຸ່ມຕາມຫ້ອງ",
+  "OpenDocumentsOnMobile": "ເປີດເອກະສານໃນອຸປະກອນມືຖື",
+  "OpenInMobileApp": "ໃນແອັບມືຖື",
+  "OpenInMobileBrowser": "ໃນໂປຣແກຣມທ່ອງເວັບ",
   "OpenSameTab": "ເປີດຕົວແກ້ໄຂໃນແຖບດຽວກັນ",
   "ShowQuickActions": "ສະແດງການດໍາເນີນການດ່ວນ"
 }

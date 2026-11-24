@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Питане всеки път",
   "CancellaionNotification": "Не показвай отново известието за анулиране",
   "DefaultHomepage": "Начална страница по подразбиране",
   "GroupByRooms": "Групиране по стаи",
+  "OpenDocumentsOnMobile": "Отваряне на документи на мобилни устройства",
+  "OpenInMobileApp": "В мобилното приложение",
+  "OpenInMobileBrowser": "В браузъра",
   "OpenSameTab": "Отваряй редакторите в същия раздел",
   "ShowQuickActions": "Показвай бързите действия"
 }

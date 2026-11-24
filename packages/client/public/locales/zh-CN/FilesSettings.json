@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "每次询问",
   "CancellaionNotification": "不再显示取消通知",
   "DefaultHomepage": "默认主页",
   "GroupByRooms": "按房间分组",
+  "OpenDocumentsOnMobile": "在移动设备上打开文档",
+  "OpenInMobileApp": "在移动应用中",
+  "OpenInMobileBrowser": "在浏览器中",
   "OpenSameTab": "在同一标签页中打开编辑器",
   "ShowQuickActions": "显示快捷操作"
 }

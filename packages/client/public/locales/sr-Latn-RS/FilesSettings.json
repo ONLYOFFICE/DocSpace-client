@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Pitaj svaki put",
   "CancellaionNotification": "Ne prikazuj više obaveštenje o otkazivanju",
   "DefaultHomepage": "Podrazumevana početna stranica",
   "GroupByRooms": "Grupisanje po sobama",
+  "OpenDocumentsOnMobile": "Otvaranje dokumenata na mobilnim uređajima",
+  "OpenInMobileApp": "U mobilnoj aplikaciji",
+  "OpenInMobileBrowser": "U pregledaču",
   "OpenSameTab": "Otvori uređivače u istoj kartici",
   "ShowQuickActions": "Prikaži brze akcije"
 }

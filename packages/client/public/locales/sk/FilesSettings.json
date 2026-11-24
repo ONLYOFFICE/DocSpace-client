@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Zakaždým sa opýtať",
   "CancellaionNotification": "Nezobrazovať znova oznámenie o zrušení",
   "DefaultHomepage": "Predvolená domovská stránka",
   "GroupByRooms": "Zoskupiť podľa miestností",
+  "OpenDocumentsOnMobile": "Otváranie dokumentov na mobilných zariadeniach",
+  "OpenInMobileApp": "V mobilnej aplikácii",
+  "OpenInMobileBrowser": "V prehliadači",
   "OpenSameTab": "Otvárať editory v rovnakej karte",
   "ShowQuickActions": "Zobrazovať rýchle akcie"
 }

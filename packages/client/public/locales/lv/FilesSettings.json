@@ -1,7 +1,11 @@
 {
+  "AskEveryTime": "Jautāt katru reizi",
   "CancellaionNotification": "Nerādīt atcelšanas paziņojumu atkārtoti",
   "DefaultHomepage": "Sākuma lapa",
   "GroupByRooms": "Grupēt pēc telpām",
+  "OpenDocumentsOnMobile": "Dokumentu atvēršana mobilajās ierīcēs",
+  "OpenInMobileApp": "Mobilajā lietotnē",
+  "OpenInMobileBrowser": "Pārlūkprogrammā",
   "OpenSameTab": "Atvērt redaktorus tajā pašā cilnē",
   "ShowQuickActions": "Rādīt ātrās darbības"
 }

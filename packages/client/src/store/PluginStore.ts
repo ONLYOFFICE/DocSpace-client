@@ -98,6 +98,8 @@ import type {
   IArticleNavigationItemClient,
   IDashboardWidgetItemClient,
   IArticleWidgetItemClient,
+  IProfileTabItemClient,
+  IProfileFieldItemClient,
   IframeWindow,
   TPlugin,
   TPluginError,
@@ -203,6 +205,10 @@ class PluginStore {
 
   articleWidgetItems: Map<string, IArticleWidgetItemClient> = new Map();
 
+  profileTabItems: Map<string, IProfileTabItemClient> = new Map();
+
+  profileFieldItems: Map<string, IProfileFieldItemClient> = new Map();
+
   pluginFrame: HTMLIFrameElement | null = null;
 
   isInit = false;
@@ -270,6 +276,8 @@ class PluginStore {
       reactPluginModalState: observable.ref,
       reactSettingsSaveButtonState: observable.ref,
       articleWidgetItems: observable.shallow,
+      profileTabItems: observable.shallow,
+      profileFieldItems: observable.shallow,
     });
 
     // Subscribe to plugin state changes via WebSocket
@@ -327,6 +335,8 @@ class PluginStore {
       updateArticleNavigationItems: this.updateArticleNavigationItems,
       updateDashboardWidgetItems: this.updateDashboardWidgetItems,
       updateArticleWidgetItem: this.updateArticleWidgetItem,
+      updateProfileTabItems: this.updateProfileTabItems,
+      updateProfileFieldItems: this.updateProfileFieldItems,
       updateFileItems: this.updateFileItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
@@ -827,6 +837,14 @@ class PluginStore {
     if (scopes.includes(PluginScopes.ArticleWidget)) {
       this.updateArticleWidgetItem(name);
     }
+
+    if (scopes.includes(PluginScopes.ProfileTab)) {
+      this.updateProfileTabItems(name);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileField)) {
+      this.updateProfileFieldItems(name);
+    }
   };
 
   /** Takes back everything `registerPluginItems` published. */
@@ -871,6 +889,14 @@ class PluginStore {
 
     if (scopes.includes(PluginScopes.ArticleWidget)) {
       this.articleWidgetItems.delete(plugin.name);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileTab)) {
+      this.deactivateProfileTabItems(plugin);
+    }
+
+    if (scopes.includes(PluginScopes.ProfileField)) {
+      this.deactivateProfileFieldItems(plugin);
     }
   };
 
@@ -1907,10 +1933,70 @@ class PluginStore {
     }
   };
 
+  updateProfileTabItems = (name: string) => {
+    this.syncProfileItems(this.profileTabItems, name, (plugin) =>
+      plugin.getProfileTabItems?.(),
+    );
+  };
+
+  updateProfileFieldItems = (name: string) => {
+    this.syncProfileItems(this.profileFieldItems, name, (plugin) =>
+      plugin.getProfileFieldItems?.(),
+    );
+  };
+
+  private syncProfileItems = <
+    T extends IProfileTabItemClient | IProfileFieldItemClient,
+  >(
+    target: Map<string, T>,
+    name: string,
+    getItems: (plugin: TPlugin) => Map<string, Omit<T, "pluginName">> | undefined,
+  ) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items = getItems(plugin);
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+    const { user } = this.userStore;
+
+    const actualItems = new Map<string, T>();
+
+    items.forEach((item, key) => {
+      if (
+        matchesUserRole(item.usersTypes, userRole) &&
+        (!item.devices || item.devices.includes(device)) &&
+        matchesUserAccess(item, user)
+      ) {
+        actualItems.set(key, { ...item, pluginName: name } as T);
+      }
+    });
+
+    this.removeMissingItems(target, name, new Set(actualItems.keys()));
+
+    actualItems.forEach((value, key) => target.set(key, value));
+  };
+
   deactivateDashboardWidgetItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
     this.removeMissingItems(this.dashboardWidgetItems, plugin.name, new Set());
+  };
+
+  deactivateProfileTabItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    this.removeMissingItems(this.profileTabItems, plugin.name, new Set());
+  };
+
+  deactivateProfileFieldItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    this.removeMissingItems(this.profileFieldItems, plugin.name, new Set());
   };
 
   deactivateArticleNavigationItems = (plugin: TPlugin) => {
@@ -2217,6 +2303,8 @@ class PluginStore {
         ),
         updateDashboardWidgetItems: redraw(Actions.updateDashboardWidgetItems),
         updateArticleWidgetItem: redraw(Actions.updateArticleWidgetItem),
+        updateProfileTabItems: redraw(Actions.updateProfileTabItems),
+        updateProfileFieldItems: redraw(Actions.updateProfileFieldItems),
       },
       api: pluginApi,
       settings: {
@@ -2365,6 +2453,14 @@ class PluginStore {
 
   get articleWidgetItemsList() {
     return listByPluginName(this.articleWidgetItems);
+  }
+
+  get profileTabItemsList() {
+    return listByPluginName(this.profileTabItems);
+  }
+
+  get profileFieldItemsList() {
+    return listByPluginName(this.profileFieldItems);
   }
 }
 

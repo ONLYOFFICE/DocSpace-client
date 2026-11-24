@@ -41,7 +41,10 @@ import * as filesApi from "@docspace/shared/api/files";
 import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import {
+  decryptFileFromBlob,
+  wipeDek,
+} from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { requestDeviceSetupHint } from "@docspace/shared/services/encryption/device-setup-hint-notifier";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
@@ -63,7 +66,7 @@ import type UploadDataStore from "../../UploadDataStore";
 
 vi.mock("@docspace/shared/services/encryption/file-keys", async (orig) => {
   const actual = (await orig()) as Record<string, unknown>;
-  return { ...actual, wipeDek: vi.fn() };
+  return { ...actual, wipeDek: vi.fn(), decryptFileFromBlob: vi.fn() };
 });
 
 vi.mock("@docspace/shared/services/encryption/secret-storage", async (orig) => {
@@ -207,6 +210,97 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
   beforeEach(() => {
     vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
     vi.mocked(sniffDse3Upload).mockResolvedValue(null);
+  });
+
+  it("Result after cancel all and a new drop", async () => {
+    const { store } = setupEncryptedPendingFile();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(makeDek()) as never,
+    );
+    serveEncryptedUpload();
+    let unlock!: (value: unknown) => void;
+    vi.mocked(requireUnlock).mockReturnValueOnce(
+      new Promise((resolve) => {
+        unlock = resolve;
+      }) as never,
+    );
+
+    const run = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+    store.cancelUpload();
+    store.files = [
+      makeUploadFile({
+        uniqueId: "new-drop",
+        file: makeBrowserFile("next.docx", 10),
+      }),
+    ];
+    unlock(IDENTITY);
+    await run;
+
+    expect(filesApi.startUploadSession).not.toHaveBeenCalled();
+    expect(store.files[0]).toMatchObject({
+      uniqueId: "new-drop",
+      action: "upload",
+      fileId: null,
+      error: null,
+      encrypted: false,
+    });
+  });
+
+  it("Unlock declined after cancel all and a new drop", async () => {
+    const { store } = setupEncryptedPendingFile();
+    let unlock!: (value: unknown) => void;
+    vi.mocked(requireUnlock).mockReturnValueOnce(
+      new Promise((resolve) => {
+        unlock = resolve;
+      }) as never,
+    );
+
+    const run = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+    store.cancelUpload();
+    store.files = [makeUploadFile({ uniqueId: "new-drop" })];
+    unlock(null);
+    await run;
+
+    expect(store.files[0]).toMatchObject({ uniqueId: "new-drop", error: null });
+  });
+
+  const declineUnlockAfter = async (
+    cancel: (store: UploadDataStore, uniqueId: string) => void,
+  ) => {
+    const { store, entry } = setupEncryptedPendingFile();
+    let unlock!: (value: unknown) => void;
+    vi.mocked(requireUnlock).mockReturnValueOnce(
+      new Promise((resolve) => {
+        unlock = resolve;
+      }) as never,
+    );
+    const run = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(requireUnlock).toHaveBeenCalled());
+    cancel(store, entry.uniqueId);
+    const startSessionFunc = replaceAction(store, "startSessionFunc");
+    unlock(null);
+    await run;
+    return { store, startSessionFunc };
+  };
+
+  it("Row cancelled while the unlock prompt is open", async () => {
+    const { store, startSessionFunc } = await declineUnlockAfter(
+      (store, uniqueId) => store.cancelCurrentUpload(uniqueId, t),
+    );
+
+    expect(store.currentUploadNumber).toBe(0);
+    expect(startSessionFunc).not.toHaveBeenCalled();
+  });
+
+  it("Cancel all while the unlock prompt is open", async () => {
+    const { store, startSessionFunc } = await declineUnlockAfter((store) =>
+      store.cancelUpload(),
+    );
+
+    expect(store.currentUploadNumber).toBe(0);
+    expect(startSessionFunc).not.toHaveBeenCalled();
   });
 
   it("marks the entry encrypted, shows the encryption progress and starts the session with the obfuscated name", async () => {
@@ -494,6 +588,60 @@ describe("UploadDataStore.startSessionFunc — encrypted upload through the shar
     expect(store.currentUploadNumber).toBe(0);
   });
 
+  it("Quota exceeded mid-batch", async () => {
+    const { store } = setupEncryptedPendingFile();
+    const pending = (uniqueId: string) =>
+      makeUploadFile({
+        uniqueId,
+        file: makeBrowserFile(`${uniqueId}.docx`, 3000),
+        toFolderId: 7,
+        encryptionRoomId: 7,
+        target: makePrivateUploadTarget({ folderId: 7 }),
+      });
+    const done = {
+      ...pending("enc-done"),
+      action: "uploaded",
+      inAction: true,
+    } as (typeof store.files)[number];
+    const files = [done, store.files[0], pending("enc-next"), pending("enc-last")];
+    store.files = files;
+    store.uploadedFilesHistory = files.map((f) => ({ ...f }));
+    const dek = makeDek();
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(
+      preparedUpload(dek) as never,
+    );
+    vi.mocked(filesApi.startUploadSession).mockRejectedValue({
+      response: {
+        status: 507,
+        data: {
+          error: {
+            message: "Storage quota exceeded",
+            type: "TenantQuotaException",
+          },
+        },
+      },
+      message: "Request failed with status code 507",
+    });
+
+    await store.startSessionFunc(1, t);
+
+    expect(store.files.map((f) => f.isQuotaError ?? false)).toEqual([
+      false,
+      true,
+      true,
+      true,
+    ]);
+    expect(store.files[0].error).toBeFalsy();
+    expect(store.files.slice(2).map((f) => f.error)).toEqual([
+      "Storage quota exceeded",
+      "Storage quota exceeded",
+    ]);
+    expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1);
+    expect(prepareEncryptedUpload).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(wipeDek).mock.calls).toEqual([[dek]]);
+  });
+
   it("fails the file and frees the slot when the encryption preparation itself rejects", async () => {
     allowConsoleError("[ENCRYPTION] encrypted upload preparation failed");
     const { store, fakes } = setupEncryptedPendingFile();
@@ -672,7 +820,52 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
     return { ...harness, entry };
   };
 
-  it("uploads the DSE3 blob unchanged with the recovered DEK instead of re-encrypting", async () => {
+  const reencrypted = () => ({
+    data: new Blob([new Uint8Array(2100)]),
+    encrypted: true,
+    dek: makeDek(9),
+    uploadFileName: "0b5c72a8-0000-4000-8000-000000000000.docx",
+    originalFileType: "application/octet-stream",
+    originalFileSize: 2000,
+    originalFileName: "secret.docx",
+  });
+
+  beforeEach(() => {
+    vi.mocked(decryptFileFromBlob).mockResolvedValue({
+      data: new Blob([new Uint8Array(2000)]),
+      fileName: null,
+    });
+    vi.mocked(prepareEncryptedUpload).mockResolvedValue(reencrypted() as never);
+  });
+
+  it("Re-imported container kept beside its source: stored under the suffixed name", async () => {
+    const { store, entry } = setupReimportPendingFile();
+    store.files[0].keepBothName = "secret (1).docx";
+    vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
+    vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
+    vi.mocked(recoverDekForReimport).mockResolvedValue({
+      dek: makeDek(),
+      realName: "secret.docx",
+      sourceFileId: 42,
+    } as never);
+    vi.mocked(filesApi.startUploadSession).mockReturnValue(
+      new Promise(() => {}) as never,
+    );
+
+    store.startSessionFunc(0, t);
+    await vi.waitFor(() =>
+      expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
+    );
+
+    expect(vi.mocked(prepareEncryptedUpload).mock.calls[0][0].file.name).toBe(
+      "secret (1).docx",
+    );
+    expect(vi.mocked(recoverDekForReimport).mock.calls[0][0].file.name).toBe(
+      entry.file.name,
+    );
+  });
+
+  it("Ciphertext re-uploaded: decrypted with the recovered key and encrypted again under the real name", async () => {
     const { store, entry } = setupReimportPendingFile();
     vi.mocked(sniffDse3Upload).mockResolvedValue(dse3Header as never);
     vi.mocked(requireUnlock).mockResolvedValue(IDENTITY as never);
@@ -690,7 +883,9 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
       expect(filesApi.startUploadSession).toHaveBeenCalledTimes(1),
     );
 
-    expect(prepareEncryptedUpload).not.toHaveBeenCalled();
+    expect(vi.mocked(prepareEncryptedUpload).mock.calls[0][0].file.name).toBe(
+      "secret.docx",
+    );
     expect(vi.mocked(recoverDekForReimport).mock.calls).toEqual([
       [
         {
@@ -710,7 +905,7 @@ describe("UploadDataStore.startSessionFunc — encrypted re-import (bug 83549)",
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/,
     );
     expect(sessionArgs[1]).not.toBe(RAW_NAME);
-    expect(sessionArgs[2]).toBe(2048);
+    expect(sessionArgs[2]).toBe(2100);
     expect(sessionArgs[4]).toBe(true);
   });
 
@@ -791,7 +986,7 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
     );
   });
 
-  it("uploader declines to unlock: cancelEncryptedBatchUpload fails only the not-yet-started encryptable files with the locked reason", () => {
+  it("uploader declines to unlock: cancelEncryptedBatchUpload fails every not-yet-started file bound for the room with the locked reason", () => {
     const { store } = createTestUploadDataStore({ userStore: userWithKeys() });
     const target = makePrivateUploadTarget();
     const pendingEncryptable = makeUploadFile({ uniqueId: "enc-a", target });
@@ -819,7 +1014,7 @@ describe("UploadDataStore — encrypted batch gates (Phase 5 net)", () => {
     expect(store.files[0].inAction).toBe(true);
     expect(store.files[0].percent).toBe(0);
     expect(store.files[1].error).toBeNull();
-    expect(store.files[2].error).toBeNull();
+    expect(store.files[2].error).toBe("Common:EncryptionLockedUpload");
     expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual([
       "enc-a",
       "run-b",

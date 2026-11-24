@@ -77,6 +77,15 @@ export class NoAccessError extends CryptoError {
   }
 }
 
+/** The user's wrap of a file names a key that is not in the user's key list. */
+// Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+export class KeyReplacedError extends CryptoError {
+  constructor() {
+    super("File is wrapped for a key the user no longer holds", "KEY_REPLACED");
+    this.name = "KeyReplacedError";
+  }
+}
+
 export class InvalidFormatError extends CryptoError {
   constructor(detail?: string) {
     super(
@@ -111,6 +120,18 @@ export class AuthenticationError extends CryptoError {
       "AUTHENTICATION_FAILED",
     );
     this.name = "AuthenticationError";
+  }
+}
+
+/**
+ * A peer key that could not be checked against its pin: the pin could not be
+ * read or stored, or the pin store could not be opened.
+ */
+// Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+export class KeyCheckUnavailableError extends AuthenticationError {
+  constructor() {
+    super("peer key could not be checked");
+    this.name = "KeyCheckUnavailableError";
   }
 }
 

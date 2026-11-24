@@ -1,0 +1,35 @@
+{
+  "key_path": "EditSkill",
+  "content": "Edit skill",
+  "content_en_sha1_hash": "5a08d3c52cc75039dd2dd334ea6ceaefede32203",
+  "created_at": "2026-11-18T08:35:30.608Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "Title of the dialog that edits a skill (a Markdown file of AI instructions in a skill set) and the context menu item that opens it. Imperative verb phrase.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/index.tsx",
+      "line_number": 248,
+      "context": "}}\n onClose={onClose}\n isCloseable={!isSaving}\n dataTestId=\"edit-skill-dialog\"\n >\n <ModalDialog.Header>{isNew ? t(\"Common:NewSkill\") : t(\"Common:EditSkill\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {isFailed ? (\n <Text className={styles.message} data-testid=\"edit-skill-error\">\n {t(\"Common:SomethingWentWrong\")}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 918,
+      "context": "},\n indexOptions,\n {\n id: \"option_edit-skill\",\n key: \"edit-skill\",\n label: t(\"Common:EditSkill\"),\n icon: PencilReactSvgUrl,\n // A skill is a file: the option is offered for nothing else.\n onClick: () => self.dialogsStore.setEditSkillFile(item as unknown as TFile),\n disabled: false,\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

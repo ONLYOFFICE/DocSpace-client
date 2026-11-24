@@ -1,0 +1,21 @@
+{
+  "key_path": "AllTopUps",
+  "content": "All top-ups",
+  "content_en_sha1_hash": "70a89b9a46f6b422aa243c844edbbce1eed36def",
+  "created_at": "2026-11-19T16:13:48.240Z",
+  "updated_at": "2026-11-19T16:13:48.240Z",
+  "comment": {
+    "text": "Option in the filter of the wallet invoice history (Payments) that shows invoices for all balance top-ups, both manual and automatic. Plural noun phrase, short dropdown label.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

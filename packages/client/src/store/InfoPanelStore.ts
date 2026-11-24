@@ -41,7 +41,7 @@ import {
 } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
 
@@ -166,7 +166,14 @@ class InfoPanelStore {
         Array.isArray(this.infoPanelSelection) &&
         this.infoPanelSelection.length === 0);
 
+    // An agent's page opens its panel on Details, as "Agent info" does
+    // (spec ai-agent-page, "Agent info"); Members, when the caller has it,
+    // comes last there.
+    const selectedFolderIsAgentPage =
+      this.selectedFolderStore?.roomType === RoomsType.AiProjectRoom;
+
     if (
+      !selectedFolderIsAgentPage &&
       (selectedFolderIsRoomOrFolderInRoom ||
         archivedFolderIsRoomOrFolderInRoom ||
         selectedFolderIsAgentOrFolderInAgent) &&

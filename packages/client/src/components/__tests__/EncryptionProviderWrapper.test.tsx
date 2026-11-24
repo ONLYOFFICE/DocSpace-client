@@ -36,7 +36,7 @@
 import { act, render } from "@testing-library/react";
 import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const encryption = vi.hoisted(() => ({
   hasConfiguredKey: false,
@@ -71,8 +71,18 @@ vi.mock("@docspace/shared/dialogs/key-recovery", () => ({
 vi.mock("@docspace/shared/api/privacy", () => ({
   getEncryptionKeys: vi.fn(),
 }));
+vi.mock("@docspace/shared/hooks/useDeviceRecordPruning", () => ({
+  useDeviceRecordPruning: vi.fn(),
+}));
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
+
+import { NoAccessError } from "@docspace/shared/services/encryption/errors";
+import {
+  reportPotentialGhostState,
+  resetGhostStateGate,
+} from "@docspace/shared/services/encryption/ghost-state-notifier";
 
 import { roomUnlockRequest } from "SRC_DIR/helpers/roomUnlockRequest";
 
@@ -85,6 +95,8 @@ const DeviceSetupHintEffect =
   wrapperModule.DeviceSetupHintEffect as unknown as React.ComponentType;
 const RoomUnlockEffect =
   wrapperModule.RoomUnlockEffect as unknown as React.ComponentType;
+const GhostStateToastEffect =
+  wrapperModule.GhostStateToastEffect as unknown as React.ComponentType;
 
 const KEY = { id: "key-1", publicKey: "pub", privateKeyEnc: "enc" };
 
@@ -294,5 +306,134 @@ describe("EncryptionProviderWrapper tells the provider whether the key list is k
     renderWrapper(keys);
 
     expect(encryption.providerProps?.keysLoaded).toBe(keysLoaded);
+  });
+});
+
+describe("Removing the key removes what this device keeps of it", () => {
+  it("Key removed on another device", () => {
+    renderWrapper([KEY]);
+
+    expect(useDeviceRecordPruning).toHaveBeenLastCalledWith("me", [KEY]);
+  });
+
+  it("Key removed on another device: a list not known prunes nothing on its account", () => {
+    renderWrapper(undefined);
+
+    expect(useDeviceRecordPruning).toHaveBeenLastCalledWith("me", null);
+  });
+});
+
+describe("Other tabs read the key list again after a key change", () => {
+  const RESEALED = { ...KEY, privateKeyEnc: "enc-new" };
+
+  const renderWithStore = (read: () => Promise<unknown>) => {
+    const userStore = observable({
+      encryptionKeys: [KEY] as unknown[] | null,
+      user: { id: "me" },
+      clearEncryptionKeys() {
+        userStore.encryptionKeys = null;
+      },
+      ensureEncryptionKeys: async () => {
+        const keys = await read().catch(() => null);
+        runInAction(() => {
+          if (keys) userStore.encryptionKeys = keys as unknown[];
+        });
+        return keys;
+      },
+    });
+    render(
+      <Provider userStore={userStore}>
+        <EncryptionProviderWrapper />
+      </Provider>,
+    );
+    return userStore;
+  };
+
+  const keysChanged = async () => {
+    await act(async () => {
+      (encryption.providerProps?.onKeysChanged as () => void)();
+    });
+  };
+
+  it("New passphrase in the other tab", async () => {
+    let answer!: (keys: unknown) => void;
+    renderWithStore(
+      () =>
+        new Promise((resolve) => {
+          answer = resolve;
+        }),
+    );
+
+    await keysChanged();
+    // Until the read answers, the list is not known.
+    expect(encryption.providerProps?.keysLoaded).toBe(false);
+    expect(encryption.providerProps?.userKeys).toBeNull();
+
+    await act(async () => {
+      answer([RESEALED]);
+    });
+    expect(encryption.providerProps?.userKeys).toEqual({
+      publicKey: "pub",
+      privateKeyEnc: "enc-new",
+      userId: "me",
+    });
+  });
+
+  it("Key deleted while Keys management is open elsewhere", async () => {
+    renderWithStore(() => Promise.resolve([]));
+
+    await keysChanged();
+
+    expect(encryption.providerProps?.keysLoaded).toBe(true);
+    expect(encryption.providerProps?.userKeys).toBeNull();
+  });
+
+  it("Read fails in the other tab", async () => {
+    renderWithStore(() => Promise.reject(new Error("500")));
+
+    await keysChanged();
+
+    expect(encryption.providerProps?.keysLoaded).toBe(false);
+    expect(encryption.providerProps?.userKeys).toBeNull();
+  });
+});
+
+describe("Unreadable file", () => {
+  beforeEach(() => {
+    sessionStorage.clear();
+    resetGhostStateGate();
+  });
+
+  afterEach(() => vi.unstubAllGlobals());
+
+  type ToastContent = React.ReactElement<{
+    i18nKey: string;
+    components: React.ReactElement<{ onClick: () => void }>[];
+  }>;
+
+  it("warns with a link to Keys management", () => {
+    const location = { href: "/rooms/shared" };
+    vi.stubGlobal("location", location);
+    render(<GhostStateToastEffect />);
+
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(toastr.warning).toHaveBeenCalledTimes(1);
+    const content = vi.mocked(toastr.warning).mock.calls[0][0] as ToastContent;
+    expect(content.props.i18nKey).toBe("Common:GhostStateDetected");
+
+    content.props.components[0].props.onClick();
+
+    expect(toastr.clear).toHaveBeenCalledTimes(1);
+    expect(location.href).toBe("/profile/keys-management");
+  });
+
+  it("clears the handler on unmount", () => {
+    const view = render(<GhostStateToastEffect />);
+    view.unmount();
+
+    reportPotentialGhostState(new NoAccessError());
+
+    expect(toastr.warning).not.toHaveBeenCalled();
   });
 });

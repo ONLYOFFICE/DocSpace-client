@@ -36,3 +36,19 @@
 .dragAndDrop {
   border-radius: 12px;
 }
+
+// The badges and the quick buttons of a skill's tile, side by side in its
+// upper end corner.
+.skillCorner {
+  display: flex;
+  gap: 4px;
+
+  // A lock and a shared link stay in sight at rest, as they do in the
+  // corner the tile keeps its quick buttons in. The class is doubled to
+  // weigh as much as that rule of the tile.
+  &.skillCorner :global(.badges .badge.file-locked),
+  &.skillCorner :global(.badges .badge.link-shared) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

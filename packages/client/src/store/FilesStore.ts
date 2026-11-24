@@ -64,6 +64,7 @@ import type { TagChange } from "@docspace/shared/components/tag-management/TagMa
 import { getCategoryType } from "@docspace/shared/utils/common";
 import {
   subscribeFilenameCache,
+  isReplacedKeyFile,
   getCachedEncryptedFilename,
 } from "@docspace/shared/services/encryption/filename-cache";
 import {
@@ -125,6 +126,7 @@ import type PublicRoomStore from "./PublicRoomStore";
 import type AppsStore from "./AppsStore";
 import type IndexingStore from "./IndexingStore";
 import type DialogsStore from "./DialogsStore";
+import type AiProjectsStore from "./AiProjectsStore";
 
 import {
   PersistenceKeys,
@@ -156,6 +158,7 @@ import { getItemUrl as buildItemUrl } from "./filesStore/itemUrl.helpers";
 import {
   fetchFilesImpl,
   fetchRoomsImpl,
+  getQuotaRefreshFilter,
   fetchMoreFilesImpl,
   refetchRoomsListOnSectionChangeImpl,
 } from "./filesStore/fetch.helpers";
@@ -387,6 +390,14 @@ class FilesStore {
   > = null;
 
   arrRoomGroups: unknown[] = [];
+
+  // Attached post-construction in store/index.ts, not observable: the
+  // agents' tiles read their summaries again with the list, and when an
+  // agent's room is updated or deleted.
+  declare aiProjectsStore?: Pick<
+    AiProjectsStore,
+    "refreshTileSummaries" | "refreshTileSummary" | "forgetTileSummary"
+  >;
 
   // created by a constructor assignment before
   // makeAutoObservable in the old JS (never a class field) — `declare`
@@ -651,6 +662,13 @@ class FilesStore {
     });
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
+  }
+
+  // Spec: private-rooms/file-operations, "A private room names the files wrapped for a key the user no longer holds"
+  get replacedKeyFilesCount() {
+    void this.encryptedFilenameCacheVersion;
+    return this.files.filter((f) => f.encrypted && isReplacedKeyFile(f.id))
+      .length;
   }
 
   get selection() {
@@ -1330,7 +1348,13 @@ class FilesStore {
 
     reaction(
       () => appsStore.isPrivateRoomsSectionAvailable,
-      () => refetchRoomsListOnSectionChangeImpl(this),
+      () => {
+        // Spec: private-rooms/sidebar-section, "The folder tree follows a switch of the E2E rooms app"
+        Promise.resolve(this.treeFoldersStore.fetchTreeFolders()).catch(
+          () => {},
+        );
+        refetchRoomsListOnSectionChangeImpl(this);
+      },
     );
   };
 
@@ -1364,13 +1388,13 @@ class FilesStore {
     );
 
     if (!inRoom) {
-      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
-        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
-        newFilter.searchArea = RoomSearchArea.Templates;
-        await this.fetchRooms(null, newFilter, false, false, false);
-      } else {
-        await this.fetchRooms(null, filter, false, false, false);
-      }
+      await this.fetchRooms(
+        null,
+        getQuotaRefreshFilter(this, filter),
+        false,
+        false,
+        false,
+      );
     }
 
     return rooms;
@@ -1384,13 +1408,13 @@ class FilesStore {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs as number[]);
 
     if (!inRoom) {
-      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
-        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
-        newFilter.searchArea = RoomSearchArea.Templates;
-        await this.fetchRooms(null, newFilter, false, false, false);
-      } else {
-        await this.fetchRooms(null, filter, false, false, false);
-      }
+      await this.fetchRooms(
+        null,
+        getQuotaRefreshFilter(this, filter),
+        false,
+        false,
+        false,
+      );
     }
 
     return rooms;

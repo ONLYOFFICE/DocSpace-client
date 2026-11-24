@@ -3,7 +3,7 @@
   "content": "Key unlocked",
   "content_en_sha1_hash": "68f49db13399a478037602640fcc883016039dfa",
   "created_at": "2026-11-17T11:37:53.507Z",
-  "updated_at": "2026-11-17T11:38:48.375Z",
+  "updated_at": "2026-11-19T16:14:54.064Z",
   "comment": {
     "text": "Label of the small button in the header of a private room, next to the room menu, showing that the user's encryption key is unlocked on this device; pressing it opens the key actions. A short state label (adjective or participle), not a command.",
     "is_auto": true,
@@ -13,8 +13,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/sub-components/KeyStateIndicator.tsx",
-      "line_number": 65,
-      "context": "const { isUnlocked, hasConfiguredKey, keysLoaded, requireIdentity } =\n useEncryption();\n \n if (!isPrivate || !keysLoaded || !hasConfiguredKey) return null;\n \n const label = isUnlocked ? t(\"Common:KeyUnlocked\") : t(\"Common:KeyLocked\");\n \n const onClick = () => {\n if (isUnlocked) return;\n \n void requireIdentity().then((identity) => {",
+      "line_number": 78,
+      "context": "const buttonRef = useRef<HTMLElement>(null);\n const anchorRef = useRef<HTMLSpanElement>(null);\n \n if (!isPrivate || !keysLoaded || !hasConfiguredKey) return null;\n \n const label = isUnlocked ? t(\"Common:KeyUnlocked\") : t(\"Common:KeyLocked\");\n const showPopover = isPopoverOpen && isUnlocked;\n \n const closePopover = (returnFocus: boolean) => {\n setIsPopoverOpen(false);\n if (returnFocus) buttonRef.current?.focus();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/sub-components/KeyStatePopover.tsx",
+      "line_number": 143,
+      "context": "return (\n <DropDown\n open\n role=\"dialog\"\n ariaLabel={t(\"Common:KeyUnlocked\")}\n forwardedRef={anchorRef}\n directionX=\"left\"\n directionY=\"bottom\"\n manualWidth=\"320px\"\n isMobileView={isMobileView}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/sub-components/KeyStatePopover.tsx",
+      "line_number": 143,
+      "context": "return (\n <DropDown\n open\n role=\"dialog\"\n ariaLabel={t(\"Common:KeyUnlocked\")}\n forwardedRef={anchorRef}\n directionX=\"left\"\n directionY=\"bottom\"\n manualWidth=\"320px\"\n isMobileView={isMobileView}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
+      "line_number": 367,
+      "context": "<span data-testid=\"key_lock_state\">\n <Badge\n label={\n keyState === \"locked\"\n ? t(\"Common:KeyLocked\")\n : t(\"Common:KeyUnlocked\")\n }\n backgroundColor={KEY_STATUS_BADGE_COLORS[keyState].background}\n color={KEY_STATUS_BADGE_COLORS[keyState].text}\n maxWidth=\"none\"\n />",
       "module": "/packages/client"
     }
   ],

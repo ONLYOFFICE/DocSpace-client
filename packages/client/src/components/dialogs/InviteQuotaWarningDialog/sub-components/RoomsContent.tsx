@@ -64,8 +64,8 @@ const RoomsContent = ({
       <br />
       <Text>
         {isPaymentPageAvailable
-          ? t("ChooseNewPlan")
-          : t("MainBar:ContactToUpgradeTariff")}
+          ? t("Common:ChooseNewPlan")
+          : t("Common:ContactToUpgradeTariff")}
       </Text>
     </>
   );
@@ -76,13 +76,13 @@ const RoomsContent = ({
         <Text fontWeight={600}>
           {isArchiveFolderRoot
             ? t("CannotRestoreRoom")
-            : t("CannotCreateNewRoom")}
+            : t("Common:CannotCreateNewRoom")}
         </Text>
         <br />
         <Text>
           {isArchiveFolderRoot
             ? t("NotPossibleRoomRestoring")
-            : t("NewRoomWillExceedLimit")}
+            : t("Common:NewRoomWillExceedLimit")}
         </Text>
         {chooseNewPlan}
       </>
@@ -90,10 +90,10 @@ const RoomsContent = ({
 
   return (
     <>
-      <Text fontWeight={600}>{t("RoomsQuotaAlmostExhausted")}</Text>
+      <Text fontWeight={600}>{t("Common:RoomsQuotaAlmostExhausted")}</Text>
       <br />
       <Text>
-        {t("NumberOfRoomsAccordingToTariff", {
+        {t("Common:NumberOfRoomsAccordingToTariff", {
           currentValue: usedRoomsCount,
           maxValue: maxCountRoomsByQuota,
         })}

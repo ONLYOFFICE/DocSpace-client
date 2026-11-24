@@ -26,6 +26,49 @@ describe("InviteResult", () => {
     ).toHaveTextContent("Carol Jones");
   });
 
+  it("Invitation by a user who replaced their key", () => {
+    render(
+      <InviteResult
+        t={t}
+        outcome={{
+          granted: [],
+          pending: [{ member: carol, missingFileIds: [1, 2] }],
+          skipped: [],
+          refused: [],
+          keyReplacedFileIds: [1, 2],
+        }}
+      />,
+    );
+
+    const pending = screen.getByRole("region", {
+      name: "Common:EncryptedAccessPending",
+    });
+    expect(pending).toHaveTextContent("Carol Jones");
+    expect(pending).toHaveTextContent("Common:PrivateRoomReplacedKeyBarText_other");
+    expect(pending).not.toHaveTextContent(
+      "Common:EncryptedReencryptPartialFailure",
+    );
+  });
+
+  it("Mixed causes", () => {
+    render(
+      <InviteResult
+        t={t}
+        outcome={{
+          granted: [],
+          pending: [{ member: carol, missingFileIds: [1, 2] }],
+          skipped: [],
+          refused: [],
+          keyReplacedFileIds: [1],
+        }}
+      />,
+    );
+
+    expect(
+      screen.getByRole("region", { name: "Common:EncryptedAccessPending" }),
+    ).toHaveTextContent("Common:EncryptedReencryptPartialFailure");
+  });
+
   it("Result with a skipped invitee: the group is named and holds the reason", () => {
     render(
       <InviteResult
@@ -82,5 +125,29 @@ describe("InviteResult", () => {
       "Common:EncryptedSkippedNoKeys",
     );
     expect(screen.queryByText("Common:EncryptedInviteNoKey")).toBeNull();
+  });
+});
+
+describe("A peer key that could not be checked is reported per operation", () => {
+  it.each([
+    ["Invitee whose key could not be checked", "key-unchecked"],
+    ["Invitation with one unusable key", "key-unusable"],
+  ] as const)("%s", (_, reason) => {
+    render(
+      <InviteResult
+        t={t}
+        outcome={{
+          granted: [carol],
+          pending: [],
+          skipped: [{ ...dan, reason, notInvited: true }],
+          refused: [],
+        }}
+      />,
+    );
+
+    const notInvited = screen.getByRole("region", { name: "Common:NotInvited" });
+    expect(notInvited).toHaveTextContent("Common:EncryptedInviteFailed");
+    expect(notInvited).not.toHaveTextContent("Common:EncryptedInviteNoKey");
+    expect(screen.queryByTestId("invite_panel_result_skipped")).toBeNull();
   });
 });

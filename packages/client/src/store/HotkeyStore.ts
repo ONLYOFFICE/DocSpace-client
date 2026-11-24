@@ -78,6 +78,7 @@ type TFilesItem = {
   folderId?: number | string;
   isFolder?: boolean;
   isRoom?: boolean;
+  roomType?: number;
   isTemplate?: boolean;
   isEditing?: boolean;
   security?: { Copy?: boolean; Move?: boolean };

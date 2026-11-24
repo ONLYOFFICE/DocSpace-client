@@ -3,7 +3,7 @@
   "content": "Create passphrase",
   "content_en_sha1_hash": "1e803517a3c9f627e4fbe566aecf6308c371733b",
   "created_at": "2026-05-24T17:27:22.286Z",
-  "updated_at": "2026-11-05T16:49:40.026Z",
+  "updated_at": "2026-11-19T16:14:54.179Z",
   "comment": {
     "text": "Dialog title appearing when a user is setting up a new passphrase.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
+      "line_number": 143,
+      "context": "[submitPassphrase, isPassphraseValid, isLoading, confirming],\n );\n \n const title = {\n explanation: t(\"Common:GenerateNewKey\"),\n passphrase: t(\"Common:CreatePassphrase\"),\n recovery: t(\"Common:RecoveryPhraseTitle\"),\n }[step];\n \n const confirmMismatch =\n !!confirmPassphrase && passphrase !== confirmPassphrase;",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 246,
+      "line_number": 200,
       "context": ">\n <ModalDialog.Header>\n <span id={titleId}>\n {title ??\n (isNew\n ? t(\"Common:CreatePassphrase\")\n : t(\"Common:EnterPassphrase\"))}\n </span>\n </ModalDialog.Header>\n \n <ModalDialog.Body>",
       "module": "/packages/shared"
     }

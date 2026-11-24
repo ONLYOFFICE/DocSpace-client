@@ -67,7 +67,7 @@ import { TextInput } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { getInviteeRoleOptions } from "@docspace/shared/utils/inviteRoles";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
@@ -192,15 +192,11 @@ const Item = ({
 
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
+  // The roles by the invitee's type: the paid ones are left to admins.
   const filteredAccesses =
     roomId === -1
       ? accesses
-      : item.isGroup ||
-          isUserRolesFilterd ||
-          type === EmployeeType.Guest ||
-          type === EmployeeType.User
-        ? filterPaidRoleOptions(accesses)
-        : accesses;
+      : getInviteeRoleOptions(accesses, { type, isGroup: item.isGroup });
 
   const defaultAccess =
     isUserRolesFilterd || isGroupRoleFiltered

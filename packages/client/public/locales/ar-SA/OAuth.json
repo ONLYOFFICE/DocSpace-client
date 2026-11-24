@@ -50,7 +50,6 @@
   "IconDescription": "JPG أو PNG أو SVG، بحجم 3232x.",
   "ID": "معرف",
   "InvalidToken": "رمز غير صالح",
-  "LastModified": "آخر تعديل",
   "NewApp": "تطبيق جديد",
   "NoAuthorizedApps": "لا توجد تطبيقات مصرح بها",
   "NoOAuthAppHeader": "لا توجد تطبيقات OAuth",

@@ -38,7 +38,7 @@ import isEqual from "lodash/isEqual";
 import cloneDeep from "lodash/cloneDeep";
 import { ModalDialog } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
@@ -317,7 +317,11 @@ const EditRoomDialog = ({
       <ModalDialog.Header>
         {isTemplate
           ? t("Files:EditTemplate")
-          : t("CreateEditRoomDialog:RoomEditing")}
+          : item?.roomType === RoomsType.KnowledgeRoom
+            ? t("Common:EditKnowledgeBase")
+            : item?.roomType === RoomsType.InstructionsRoom
+              ? t("Common:EditSkillSet")
+              : t("CreateEditRoomDialog:RoomEditing")}
       </ModalDialog.Header>
 
       <ModalDialog.Body>

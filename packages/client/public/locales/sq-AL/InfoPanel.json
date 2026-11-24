@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Shikoni detajet e të ftuarve këtu",
   "HistoryEmptyScreenText": "Historiku i aktivitetit do të shfaqet këtu",
   "HistoryThirdParty": "Shfaqja e historikut nuk ofrohet për dhoma publike me depo të lidhura të palëve të treta",
+  "KnowledgeBasesEmptyScreenText": "Shikoni detajet e bazës së njohurive këtu",
   "LastUpdateInfo": "Përditësim i fundit",
   "LifetimeEnds": "Jeta përfundon",
   "MembersEmptyScreenText": "Shikoni detajet e anëtarëve këtu",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Shikoni detajet e dhomave këtu",
   "SelectedGroups": "Grupet e selektuara",
   "SelectedUsers": "Llogaritë e selektuara",
+  "SkillSetsEmptyScreenText": "Shikoni detajet e grupit të aftësive këtu",
   "StorageType": "Lloji i ruajtjes",
   "Users": "Përdoruesit"
 }

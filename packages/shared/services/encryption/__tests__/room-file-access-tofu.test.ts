@@ -35,6 +35,15 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
+vi.mock("../hpke", async (io) => {
+  const actual = (await io()) as typeof import("../hpke");
+  return { ...actual, unwrapDEK: vi.fn(actual.unwrapDEK) };
+});
+vi.mock("../file-keys", async (io) => {
+  const actual = (await io()) as typeof import("../file-keys");
+  return { ...actual, wipeDek: vi.fn(actual.wipeDek) };
+});
+
 import { generateIdentityKeyPair } from "../identity";
 import { generateDEK } from "../file-keys";
 import {
@@ -50,7 +59,9 @@ import {
   unregisterKeyMismatchHandler,
   type KeyMismatchResolver,
 } from "../tofu-store";
-import { AuthenticationError } from "../errors";
+import { AuthenticationError, KeyCheckUnavailableError } from "../errors";
+import { unwrapDEK } from "../hpke";
+import { wipeDek } from "../file-keys";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../types";
 import { arrayBufferToBase64 } from "../utils";
 import { mockIDB, resetMockIDB } from "../../private-room/__tests__/_helpers/mock-idb";
@@ -172,7 +183,7 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
     registerKeyMismatchHandler(resolver);
     const check = vi
       .spyOn(TofuStore.prototype, "checkKey")
-      .mockResolvedValue({ kind: "unreadable" });
+      .mockResolvedValue({ kind: "unavailable" });
 
     await expect(
       unwrapDekForCurrentUser({
@@ -394,5 +405,223 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
 
     expect(out).toEqual(dek);
     expect(resolver).not.toHaveBeenCalled();
+  });
+
+  describe("Key mismatch on unwrap is refused unless a resolver accepts it", () => {
+    const pinAlice = () =>
+      unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+      });
+
+    /** Whether an unwrap was tried with the given sender key. */
+    const unwrappedWith = (kp: IdentityKeyPair) =>
+      vi
+        .mocked(unwrapDEK)
+        .mock.calls.some(([args]) =>
+          (args.expectedSenderPublicKey as Uint8Array).every(
+            (b, i) => b === kp.publicKey[i],
+          ),
+        );
+
+    beforeEach(() => {
+      vi.mocked(unwrapDEK).mockClear();
+      vi.mocked(wipeDek).mockClear();
+    });
+
+    it("No resolver registered", async () => {
+      await pinAlice();
+      vi.mocked(unwrapDEK).mockClear();
+
+      await expect(
+        unwrapDekForCurrentUser({
+          fileKeys: attackerFileKeys,
+          roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(attacker) }],
+          currentUserId: BOB_ID,
+          currentIdentity: bob,
+          fileId: FILE_ID,
+        }),
+      ).rejects.toBeInstanceOf(AuthenticationError);
+      // The changed key opened the wrap; its file key was wiped, not handed over.
+      expect(unwrappedWith(attacker)).toBe(true);
+      expect(wipeDek).toHaveBeenCalledTimes(1);
+    });
+
+    it("User accepts the new key", async () => {
+      await pinAlice();
+
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: attackerFileKeys,
+        roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(attacker) }],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+        onKeyChange: async () => "accept",
+      });
+
+      expect(out).toEqual(dek);
+      const trusted = (await getTofuStore(BOB_ID).getKeys(ALICE_ID)).map(
+        (k) => k.publicKey,
+      );
+      expect(trusted).toEqual(
+        expect.arrayContaining([pubB64(alice), pubB64(attacker)]),
+      );
+    });
+
+    it("Unwrap waits for the decision", async () => {
+      await pinAlice();
+      vi.mocked(unwrapDEK).mockClear();
+      let answer!: (decision: "accept" | "refuse") => void;
+      const asked = vi.fn(
+        () =>
+          new Promise<"accept" | "refuse">((resolve) => {
+            answer = resolve;
+          }),
+      );
+
+      let handedOver = false;
+      const unwrapping = unwrapDekForCurrentUser({
+        fileKeys: attackerFileKeys,
+        roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(attacker) }],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+        onKeyChange: asked,
+      }).then((out) => {
+        handedOver = true;
+        return out;
+      });
+      await vi.waitFor(() => expect(asked).toHaveBeenCalled());
+      await new Promise((resolve) => setTimeout(resolve, 20));
+      expect(handedOver).toBe(false);
+
+      answer("accept");
+      expect(await unwrapping).toEqual(dek);
+    });
+
+    it("Listed changed key that does not open the wrap", async () => {
+      await pinAlice();
+      const other = await generateIdentityKeyPair();
+      const asked: string[] = [];
+
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: attackerFileKeys,
+        roomMemberKeys: [
+          { userId: ALICE_ID, publicKey: pubB64(other) },
+          { userId: ALICE_ID, publicKey: pubB64(attacker) },
+        ],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+        onKeyChange: async (info) => {
+          asked.push(info.newKey);
+          return "accept";
+        },
+      });
+
+      expect(out).toEqual(dek);
+      expect(asked).toEqual([pubB64(attacker)]);
+      const trusted = (await getTofuStore(BOB_ID).getKeys(ALICE_ID)).map(
+        (k) => k.publicKey,
+      );
+      expect(trusted).not.toContain(pubB64(other));
+    });
+
+    it("Pinned key listed beside a changed one", async () => {
+      await pinAlice();
+      const resolver = vi.fn<KeyMismatchResolver>(async () => "accept");
+
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [
+          { userId: ALICE_ID, publicKey: pubB64(attacker) },
+          { userId: ALICE_ID, publicKey: pubB64(alice) },
+        ],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+        onKeyChange: resolver,
+      });
+
+      expect(out).toEqual(dek);
+      expect(resolver).not.toHaveBeenCalled();
+    });
+
+    it("Listed key that does not open the wrap", async () => {
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [
+          { userId: ALICE_ID, publicKey: pubB64(attacker) },
+          { userId: ALICE_ID, publicKey: pubB64(alice) },
+        ],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+      });
+
+      expect(out).toEqual(dek);
+      expect(
+        (await getTofuStore(BOB_ID).getKeys(ALICE_ID)).map((k) => k.publicKey),
+      ).toEqual([pubB64(alice)]);
+    });
+
+    it("Sender pin cannot be stored", async () => {
+      const check = vi
+        .spyOn(TofuStore.prototype, "checkKey")
+        .mockResolvedValue({ kind: "unavailable" });
+
+      await expect(pinAlice()).rejects.toBeInstanceOf(KeyCheckUnavailableError);
+      // The wrap opened, and the file key was wiped instead of handed over.
+      expect(unwrappedWith(alice)).toBe(true);
+      expect(wipeDek).toHaveBeenCalledTimes(1);
+      check.mockRestore();
+    });
+
+    it("Sender pin cannot be stored: an accepted key that is not stored is not used", async () => {
+      await pinAlice();
+      vi.mocked(unwrapDEK).mockClear();
+      const accept = vi
+        .spyOn(TofuStore.prototype, "acceptKey")
+        .mockResolvedValue(false);
+
+      await expect(
+        unwrapDekForCurrentUser({
+          fileKeys: attackerFileKeys,
+          roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(attacker) }],
+          currentUserId: BOB_ID,
+          currentIdentity: bob,
+          fileId: FILE_ID,
+          onKeyChange: async () => "accept",
+        }),
+      ).rejects.toBeInstanceOf(KeyCheckUnavailableError);
+      expect(wipeDek).toHaveBeenCalledTimes(1);
+      accept.mockRestore();
+    });
+  });
+
+  describe("An unusable member key affects only that member", () => {
+    it.each([
+      ["not base64", "not base64!!"],
+      ["16 bytes", arrayBufferToBase64(new Uint8Array(16).buffer)],
+    ])("Unusable sender candidate: %s", async (_, unusable) => {
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [
+          { userId: ALICE_ID, publicKey: unusable },
+          { userId: ALICE_ID, publicKey: pubB64(alice) },
+        ],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+      });
+
+      expect(out).toEqual(dek);
+      expect(
+        (await getTofuStore(BOB_ID).getKeys(ALICE_ID)).map((k) => k.publicKey),
+      ).toEqual([pubB64(alice)]);
+    });
   });
 });

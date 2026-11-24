@@ -33,11 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useId } from "react";
 
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import styles from "./CreateEditDialogParams.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type ToggleParamProps = {
   id: string;
@@ -56,16 +57,20 @@ const ToggleParam = ({
   isDisabled,
   onCheckedChange,
 }: ToggleParamProps) => {
+  const inputId = useId();
   return (
     <div className={styles.toggleParam}>
       <div className="set_room_params-info">
         <div className="set_room_params-info-title">
-          <div className="set_room_params-info-title-text">{title}</div>
+          <ControlCaption htmlFor={inputId} isDisabled={isDisabled}>
+            <div className="set_room_params-info-title-text">{title}</div>
+          </ControlCaption>
         </div>
         <div className="set_room_params-info-description">{description}</div>
       </div>
       <ToggleButton
         id={id}
+        inputId={inputId}
         className="set_room_params-toggle"
         isChecked={isChecked}
         onChange={onCheckedChange}

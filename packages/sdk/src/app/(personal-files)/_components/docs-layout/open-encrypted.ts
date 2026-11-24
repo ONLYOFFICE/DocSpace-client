@@ -53,3 +53,40 @@ export const refusesEncryptedOpen = (
   !!isPrivate &&
   !!file.encrypted &&
   !isEncryptedEditingAvailable(filesSettings);
+
+/**
+ * What opening a file of the list does: the conversion dialog, the editor,
+ * or a message when an encrypted file can be neither converted nor edited.
+ */
+export const makeOpenFile =
+  ({
+    isPrivate,
+    filesSettings,
+    t,
+    info,
+    requestConvert,
+    openFileInEditor,
+  }: {
+    isPrivate: boolean | undefined;
+    filesSettings: Parameters<typeof refusesEncryptedOpen>[2];
+    t: (key: string) => string;
+    info: (message: string) => void;
+    requestConvert: (file: TFileItem) => void;
+    openFileInEditor: (file: TFileItem, preview?: boolean) => void;
+  }) =>
+  (file: TFileItem, preview?: boolean) => {
+    // Spec: private-rooms/sdk-surface, "SDK does not send an encrypted file to conversion"
+    if (file.encrypted && file.viewAccessibility?.MustConvert) {
+      info(t("Common:PrivateRoomConvertNotSupported"));
+      return;
+    }
+    if (refusesEncryptedOpen(isPrivate, file, filesSettings)) {
+      info(t("Common:PrivateRoomEditorNotSupported"));
+      return;
+    }
+    if (!preview && file.viewAccessibility?.MustConvert) {
+      requestConvert(file);
+      return;
+    }
+    openFileInEditor(file, preview);
+  };

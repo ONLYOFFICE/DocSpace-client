@@ -1,0 +1,21 @@
+{
+  "key_path": "ManualTopUps",
+  "content": "Manual top-ups",
+  "content_en_sha1_hash": "28d6b51de33b2370e7207ac0f465847fa3d41fb2",
+  "created_at": "2026-11-19T16:14:20.974Z",
+  "updated_at": "2026-11-19T16:14:20.974Z",
+  "comment": {
+    "text": "Option in the filter of the wallet invoice history that shows only invoices for manual balance top-ups. Plural noun phrase, short dropdown label.",
+    "is_auto": false,
+    "updated_at": "2026-11-19T16:15:25.238Z"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

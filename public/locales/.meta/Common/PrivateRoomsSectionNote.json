@@ -2,13 +2,12 @@
   "key_path": "PrivateRoomsSectionNote",
   "content": "Files here are end-to-end encrypted: only room members can read them.",
   "content_en_sha1_hash": "9951097f95edec4c2bb06fd6e0d82a7f0f2635ed",
-  "created_at": "2026-11-18T17:28:07.474Z",
-  "updated_at": "2026-11-18T17:29:08.930Z",
+  "created_at": "2026-11-19T16:14:28.760Z",
+  "updated_at": "2026-11-19T16:14:54.065Z",
   "comment": {
-    "text": "One-line note with a lock icon in the header of the Private rooms list and of its archive. \"Here\" means this section of private rooms; the sentence is about files only, since room names and members are not encrypted. Keep it short: the line is cut with an ellipsis in a narrow header.",
-    "is_auto": true,
-    "updated_at": "2026-11-18T17:29:08.930Z",
-    "model": "claude-fable-5-2"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {

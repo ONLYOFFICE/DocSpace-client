@@ -64,4 +64,10 @@ export type QuickButtonsProps = {
   onClickFavorite?: VoidFunction;
   onRetryVectorization?: VoidFunction;
   openShareTab?: VoidFunction;
+  /**
+   * Opens the AI chat with the item in use: a skill set connected, or the
+   * set a skill lies in. Given, the row offers "Use in chat" in place of its
+   * share link.
+   */
+  onUseInChat?: VoidFunction;
 };

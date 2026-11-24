@@ -67,6 +67,9 @@ vi.mock("PUBLIC_DIR/images/icons/12/lock.react.svg?url", () => ({
 vi.mock("PUBLIC_DIR/images/favorite.react.svg?url", () => ({
   default: "favorite-icon.svg",
 }));
+vi.mock("PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url", () => ({
+  default: "chat-bubble-icon.svg",
+}));
 
 // Mock isTablet and isDesktop
 vi.mock("../../utils", async () => {
@@ -98,6 +101,7 @@ const mockT = ((key: string, params?: Record<string, string>) => {
     "Common:FileWillBeDeletedPermanently": `File will be deleted permanently on ${params?.date || ""}`,
     "Common:SectionMoveNotification": `File will be moved to ${params?.sectionName || ""} on ${params?.date || ""}`,
     "Common:TrashSection": "Trash",
+    "Common:UseInChat": "Use in chat",
   };
 
   return translations[key] || key;
@@ -242,6 +246,41 @@ describe("<QuickButtons />", () => {
     await userEvent.click(shareButton);
 
     expect(onClickShare).toHaveBeenCalledTimes(1);
+  });
+
+  it("offers Use in chat in place of the share link when given", async () => {
+    const onUseInChat = vi.fn();
+
+    renderWithTheme(
+      <QuickButtons {...baseProps} onUseInChat={onUseInChat} />,
+    );
+
+    expect(screen.queryByTitle("Copy Shared Link")).not.toBeInTheDocument();
+    await userEvent.click(screen.getByTitle("Use in chat"));
+
+    expect(onUseInChat).toHaveBeenCalledTimes(1);
+  });
+
+  it("offers Use in chat on a skill set, a room", () => {
+    renderWithTheme(
+      <QuickButtons
+        {...baseProps}
+        item={{
+          ...baseFileItem,
+          isRoom: true,
+          roomType: RoomsType.InstructionsRoom,
+        } as unknown as TFile}
+        onUseInChat={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByTitle("Use in chat")).toBeInTheDocument();
+  });
+
+  it("offers no Use in chat by default", () => {
+    renderWithTheme(<QuickButtons {...baseProps} />);
+
+    expect(screen.queryByTitle("Use in chat")).not.toBeInTheDocument();
   });
 
   it("renders download button for public room files in tile view", () => {

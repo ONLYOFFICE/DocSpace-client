@@ -98,6 +98,8 @@ export type TItem = {
   encrypted?: boolean;
   fileExst?: string;
   filesCount?: number;
+  /** How many agents use the skill set or the knowledge base. */
+  linkedProjectsCount?: number;
   fileStatus?: FileStatus;
   fileType?: FileType;
   folderId?: number;

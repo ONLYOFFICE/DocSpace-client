@@ -41,7 +41,11 @@ import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { FileType, RoomsType } from "@docspace/shared/enums";
+import {
+  FileType,
+  RoomsType,
+  VectorizationStatus,
+} from "@docspace/shared/enums";
 import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
@@ -59,7 +63,24 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
+import {
+  isSkillFile,
+  type TSkillFolder,
+} from "@docspace/shared/utils/skillFile";
+import type SkillsStore from "SRC_DIR/store/SkillsStore";
+import type KnowledgeBasesStore from "SRC_DIR/store/KnowledgeBasesStore";
+import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
+import {
+  getKnowledgeBaseStatus,
+  KNOWLEDGE_BASE_REREAD_MS,
+} from "SRC_DIR/store/KnowledgeBasesStore";
+
 import { FormInfo } from "./sub-components/FormInfo";
+import SkillIcon, { getAiRoomIconKind } from "SRC_DIR/components/SkillIcon";
+
+import { SkillSetInfo } from "./sub-components/SkillSetInfo";
+import { UsedByAgents } from "./sub-components/UsedByAgents";
 
 import DetailsHelper from "./Details.utils";
 
@@ -92,6 +113,20 @@ type DetailsProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
 
   roomLifetime?: TRoomLifetime;
+
+  /** The open folder: a skill is told by it, and named after it when it is a skill set. */
+  openFolder?: TSkillFolder & { title: string };
+  getSkill?: SkillsStore["get"];
+  fetchSkill?: SkillsStore["fetch"];
+  setEditSkillFile?: DialogsStore["setEditSkillFile"];
+
+  getKnowledgeBase?: KnowledgeBasesStore["get"];
+  fetchKnowledgeBase?: KnowledgeBasesStore["fetch"];
+
+  agentSummaries?: AiProjectsStore["tileSummaries"];
+  fetchAgentSummary?: AiProjectsStore["fetchTileSummary"];
+  agentDefaultModelName?: AiProjectsStore["defaultModelName"];
+  fetchAgentDefaultModel?: AiProjectsStore["fetchDefaultModel"];
 };
 
 const Details = ({
@@ -110,6 +145,16 @@ const Details = ({
   onChangeFile,
   roomLifetime,
   onCreateRoomFromTemplate,
+  openFolder,
+  getSkill,
+  fetchSkill,
+  setEditSkillFile,
+  getKnowledgeBase,
+  fetchKnowledgeBase,
+  agentSummaries,
+  fetchAgentSummary,
+  agentDefaultModelName,
+  fetchAgentDefaultModel,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -124,6 +169,109 @@ const Details = ({
 
   const onThumbnailError = () => setIsThumbmailError(true);
 
+  // A skill is described by its file's text, which the skills store reads.
+  const skillFile = isSkillFile(selection as TFile, openFolder)
+    ? (selection as TFile)
+    : null;
+  const isSkill = !!skillFile;
+  const skill = skillFile ? (getSkill?.(skillFile) ?? null) : null;
+  const skillName = skill?.name;
+  const skillSetTitle =
+    skillFile &&
+    openFolder?.roomType === RoomsType.InstructionsRoom &&
+    String(openFolder.id) === String(skillFile.folderId)
+      ? openFolder.title
+      : undefined;
+
+  // A saved skill is dropped from the store and read again.
+  const hasSkill = !!skill;
+  useEffect(() => {
+    if (skillFile && !hasSkill) fetchSkill?.(skillFile);
+  }, [skillFile, fetchSkill, hasSkill]);
+
+  // How far a knowledge base is indexed is in its files: they are read
+  // again each time the base is selected, since indexing ends on its own.
+  const knowledgeBaseId =
+    "isRoom" in selection &&
+    selection.isRoom &&
+    selection.roomType === RoomsType.KnowledgeRoom
+      ? selection.id
+      : null;
+  const knowledgeBaseFilesCount =
+    knowledgeBaseId !== null && "filesCount" in selection
+      ? selection.filesCount
+      : undefined;
+  const knowledgeStatus =
+    knowledgeBaseId !== null
+      ? getKnowledgeBaseStatus(
+          getKnowledgeBase?.({
+            id: knowledgeBaseId,
+            filesCount: knowledgeBaseFilesCount,
+          }) ?? null,
+        )
+      : null;
+
+  useEffect(() => {
+    if (knowledgeBaseId !== null)
+      fetchKnowledgeBase?.(
+        { id: knowledgeBaseId, filesCount: knowledgeBaseFilesCount },
+        true,
+      );
+  }, [knowledgeBaseId, knowledgeBaseFilesCount, fetchKnowledgeBase]);
+
+  // ... and while they are being indexed, again every little while.
+  const isIndexingBase = knowledgeStatus === VectorizationStatus.InProgress;
+  useEffect(() => {
+    if (knowledgeBaseId === null || !isIndexingBase) return undefined;
+    const timer = setInterval(
+      () =>
+        fetchKnowledgeBase?.(
+          { id: knowledgeBaseId, filesCount: knowledgeBaseFilesCount },
+          true,
+        ),
+      KNOWLEDGE_BASE_REREAD_MS,
+    );
+    return () => clearInterval(timer);
+  }, [
+    knowledgeBaseId,
+    knowledgeBaseFilesCount,
+    isIndexingBase,
+    fetchKnowledgeBase,
+  ]);
+
+  // An agent of the Files list, or the one whose page is open, comes
+  // without its settings in full: its model is what its tile reads. One
+  // without a model of its own runs on the portal's chat model.
+  const isAIProject = isAgent(selection);
+  const agentSettings =
+    isAIProject && "aiProject" in selection
+      ? (selection.aiProject as
+          | { partial?: true; modelUnread?: true }
+          | undefined)
+      : undefined;
+  const agentSummaryId =
+    isAIProject &&
+    (!agentSettings || agentSettings.partial || agentSettings.modelUnread)
+      ? Number(selection.id)
+      : null;
+  const agentSummary =
+    agentSummaryId !== null ? agentSummaries?.[agentSummaryId] : undefined;
+  const agentModelName = agentSummary ? agentSummary.model : undefined;
+
+  useEffect(() => {
+    if (agentSummaryId !== null) void fetchAgentSummary?.(agentSummaryId);
+  }, [agentSummaryId, fetchAgentSummary]);
+
+  useEffect(() => {
+    if (isAIProject) void fetchAgentDefaultModel?.();
+  }, [isAIProject, fetchAgentDefaultModel]);
+
+  // A file of a knowledge base that could not be indexed says so first.
+  const isIndexingFailed =
+    !("isRoom" in selection && selection.isRoom) &&
+    (selection as { vectorizationStatus?: VectorizationStatus | null })
+      .vectorizationStatus === VectorizationStatus.Failed;
+
   const detailsHelper = new DetailsHelper({
     isCollaborator: isCollaborator!,
     isVisitor: isVisitor!,
@@ -135,6 +283,12 @@ const Details = ({
     isAdmin: isAdmin!,
     isArchiveFolder: isArchive,
     roomLifetime: roomLifetime!,
+    isSkill,
+    skillSetTitle,
+    skillName,
+    knowledgeStatus,
+    agentModelName,
+    agentDefaultModelName,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -157,7 +311,15 @@ const Details = ({
       // erased cast preserves that no-op behavior.
       await createThumbnail?.(selection.id as unknown as TFile);
     }
-  }, [selection]);
+  }, [
+    selection,
+    isSkill,
+    skillName,
+    skillSetTitle,
+    knowledgeStatus,
+    agentModelName,
+    agentDefaultModelName,
+  ]);
 
   const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChangeFile?.(e, t);
@@ -214,8 +376,10 @@ const Details = ({
   const isFormSpaceTemplate =
     "roomType" in selection && selection.roomType === RoomsType.FormRoom;
 
+  // A skill set and a knowledge base are drawn with their own icons.
+  const aiRoomIconKind = getAiRoomIconKind(selection as never);
+
   const color = "logo" in selection ? selection.logo?.color : undefined;
-  const isAIProject = "isAIProject" in selection && !!selection.isAIProject;
   const resolvedTitle = useResolvedFileTitle(
     selection as { id?: number | string; title?: string; encrypted?: boolean },
   );
@@ -274,52 +438,87 @@ const Details = ({
         </div>
       ) : (
         <div className={styles.noThumbnail}>
-          <RoomIcon
-            color={color}
-            title={title}
-            isArchive={isArchive}
-            size="96px"
-            radius="16px"
-            // isRoom={"isRoom" in selection ? selection.isRoom : false}
-            showDefault={showDefaultRoomIcon}
-            imgClassName={`no-thumbnail-img ${"isRoom" in selection && selection.isRoom && styles.isRoom} ${
-              "logo" in selection &&
-              !isArchive &&
-              selection.logo?.large &&
-              styles.customLogo
-            }`}
-            logo={currentIcon}
-            model={model}
-            dropDownManualX={isMobile() ? "-30px" : "-10px"}
-            onChangeFile={onChangeFileContext}
-            badgeUrl={badgeUrl ?? undefined}
-            badgeIconColor={badgeIconColor}
-            tooltipContent={tooltipContent ?? undefined}
-            tooltipId="info-panel-details_icon-tooltip"
-            // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
-            // An AI project changes its logo in its own edit dialog: the
-            // room cover flow here would save it as a room's.
-            withEditing={
-              "isRoom" in selection && selection.isRoom && !isAIProject
-                ? Boolean(selection.security?.EditRoom)
-                : false
-            }
-            dataTestId="info_panel_details_room_icon"
-          />
+          {skillFile || aiRoomIconKind ? (
+            <SkillIcon kind={aiRoomIconKind ?? "skill"} size={96} />
+          ) : (
+            <RoomIcon
+              color={color}
+              title={title}
+              isArchive={isArchive}
+              size="96px"
+              radius="16px"
+              // isRoom={"isRoom" in selection ? selection.isRoom : false}
+              showDefault={showDefaultRoomIcon}
+              imgClassName={`no-thumbnail-img ${"isRoom" in selection && selection.isRoom && styles.isRoom} ${
+                "logo" in selection &&
+                !isArchive &&
+                selection.logo?.large &&
+                styles.customLogo
+              }`}
+              logo={currentIcon}
+              model={model}
+              dropDownManualX={isMobile() ? "-30px" : "-10px"}
+              onChangeFile={onChangeFileContext}
+              badgeUrl={badgeUrl ?? undefined}
+              badgeIconColor={badgeIconColor}
+              tooltipContent={tooltipContent ?? undefined}
+              tooltipId="info-panel-details_icon-tooltip"
+              // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
+              // An AI project changes its logo in its own edit dialog: the
+              // room cover flow here would save it as a room's.
+              withEditing={
+                "isRoom" in selection && selection.isRoom && !isAIProject
+                  ? Boolean(selection.security?.EditRoom)
+                  : false
+              }
+              dataTestId="info_panel_details_room_icon"
+            />
+          )}
         </div>
       )}
+      {isIndexingFailed ? (
+        <Text
+          as="div"
+          fontSize="13px"
+          lineHeight="20px"
+          className={styles.indexingError}
+          dataTestId="info_panel_details_indexing_error"
+        >
+          {t("Common:PreparationForAIFailedInfo")}
+        </Text>
+      ) : null}
+      {skill?.description ? (
+        <>
+          <div className={commonStyles.subtitle}>
+            <Text fontWeight="600" fontSize="14px">
+              {t("Common:DescriptionLabel")}
+            </Text>
+          </div>
+          <Text
+            fontSize="13px"
+            className={styles.skillDescription}
+            dataTestId="info_panel_details_skill_description"
+          >
+            {skill.description}
+          </Text>
+        </>
+      ) : null}
       <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
           {t("Common:Properties")}
         </Text>
       </div>
-      <div className={commonStyles.properties}>
+      <div
+        className={commonStyles.properties}
+        data-testid="info_panel_details_properties"
+      >
         {itemProperties.map((property) => {
           return (
             <div
               id={property.id}
               key={property.title}
               className={`property ${property.className}`}
+              data-testid={`info_panel_details_property_${property.id}`}
             >
               <Text className="property-title">{property.title}</Text>
               {property.content}
@@ -328,6 +527,17 @@ const Details = ({
         })}
       </div>
       <FormInfo selection={selection} />
+      {skillFile ? (
+        <Button
+          label={t("Common:ViewInstructions")}
+          size={ButtonSize.small}
+          scale
+          onClick={() => setEditSkillFile?.(skillFile, true)}
+          testId="info_panel_details_view_instructions_button"
+        />
+      ) : null}
+      <SkillSetInfo selection={selection} />
+      <UsedByAgents selection={selection} />
     </>
   );
 };
@@ -343,6 +553,9 @@ export default inject(
     dialogsStore,
     avatarEditorDialogStore,
     selectedFolderStore,
+    skillsStore,
+    knowledgeBasesStore,
+    aiProjectsStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -360,6 +573,21 @@ export default inject(
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
+      openFolder: {
+        id: selectedFolderStore.id,
+        roomType: selectedFolderStore.roomType,
+        parentRoomType: selectedFolderStore.parentRoomType,
+        title: selectedFolderStore.title,
+      },
+      getSkill: skillsStore.get,
+      getKnowledgeBase: knowledgeBasesStore.get,
+      fetchKnowledgeBase: knowledgeBasesStore.fetch,
+      agentSummaries: aiProjectsStore.tileSummaries,
+      fetchAgentSummary: aiProjectsStore.fetchTileSummary,
+      agentDefaultModelName: aiProjectsStore.defaultModelName,
+      fetchAgentDefaultModel: aiProjectsStore.fetchDefaultModel,
+      fetchSkill: skillsStore.fetch,
+      setEditSkillFile: dialogsStore.setEditSkillFile,
       culture,
       createThumbnail,
       getInfoPanelItemIcon,

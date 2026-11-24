@@ -45,16 +45,6 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-linux-s390x-gnu@1.2.2'
   - '@rolldown/binding-linux-x64-musl@1.2.2'
   - '@rolldown/binding-openharmony-arm64@1.2.8'
-  - '@next/env@16.3.6'
-  - '@next/swc-darwin-arm64@16.3.6'
-  - '@next/swc-darwin-x64@16.3.6'
-  - '@next/swc-linux-arm64-gnu@16.3.6'
-  - '@next/swc-linux-arm64-musl@16.3.6'
-  - '@next/swc-linux-x64-gnu@16.3.6'
-  - '@next/swc-linux-x64-musl@16.3.6'
-  - '@next/swc-win32-arm64-msvc@16.3.6'
-  - '@next/swc-win32-x64-msvc@16.3.6'
-  - next@16.3.6
   - '@onlyoffice/docspace-sdk-js@2.2.0'
   - '@onlyoffice/doceditor-types@10.0.0'
   - '@onlyoffice/document-editor-react@2.3.0'
@@ -113,6 +103,8 @@ auditConfig:
     # @grpc/grpc-js held on 1.9.x by @firebase/firestore, see overrides
     - GHSA-m9gg-hp2v-232j
     - GHSA-f596-whhp-79r4
+    # minimatch held on 10.x by nx, see overrides
+    - GHSA-g3hv-75wg-m249
 
 overrides:
   pnpm: ">=10.33.0"
@@ -137,7 +129,13 @@ overrides:
   node-fetch: ">=2.6.7"
   ajv: ">=8.18.0"
   fast-xml-parser: ">=5.7.0"
-  minimatch: ">=10.2.1"
+  # Bounded to 10.x on purpose; GHSA-g3hv-75wg-m249 (moderate, DoS via
+  # globparts amplification) is patched only in 11.0.1. nx (24.0.6 included)
+  # pins minimatch 10.2.5 and calls minimatch.makeRe, which 11 removed, so
+  # forcing 11 breaks project-pattern matching in `nx run-many`. Every pattern
+  # matched here comes from our own configs, never from user input. Revisit
+  # when nx moves to minimatch 11.
+  minimatch: "^10.2.1"
   serialize-javascript: ">=7.0.3"
   immutable: ">=5.1.5"
   "@svgr/plugin-svgo>svgo": "~3.3.3"
@@ -155,7 +153,9 @@ overrides:
   # nanoid 5/6 trees untouched
   "nanoid@^3": "^3.3.18"
   protobufjs: ">=8.6.0"
-  follow-redirects: ">=1.16.0"
+  # axios and nx still accept follow-redirects ^1.15; 1.16.3 fixes
+  # GHSA-mrwp-f3q8-3g9p
+  "follow-redirects@^1": "^1.16.3"
   # Security fixes
   # Deliberately NOT overridden: decode-uri-component (GHSA-vcc3-ghjq-m6fr,
   # moderate, exponential decoding of malformed percent-encoded input). Every
@@ -176,7 +176,13 @@ overrides:
   # errors from a grpc server, and nothing here runs one.
   "@grpc/grpc-js": "~1.9.16"
   form-data: ">=4.0.6"
-  vite: ">=8.0.16"
+  # vitest, @vitest/mocker, vite-plugin-svgr and @storybook/csf-plugin bring
+  # their own vite ^8 range; 8.3.3+ fixes the launch-editor and server.fs
+  # advisories
+  "vite@^8": "^8.3.8"
+  # ajv 8 (latest) still accepts fast-uri ^3.0.1; 3.1.9 fixes
+  # GHSA-w74x-v6f9-j3xg and GHSA-wjr9-j795-jxcr
+  "fast-uri@^3": "^3.1.9"
   "@babel/core": ">=7.29.6 <8"
   # Inherited libvips CVEs: next still asks for ^0.34.x, so the override lifts
   # its transitive copy. @docspace/login depends on sharp directly for the

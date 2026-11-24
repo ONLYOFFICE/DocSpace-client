@@ -114,7 +114,7 @@ const getAuthHeaders = async (): Promise<Record<string, string>> => {
   return {};
 };
 
-const authFetch = async (
+export const authFetch = async (
   url: string,
   init: RequestInit = {},
 ): Promise<Response> => {

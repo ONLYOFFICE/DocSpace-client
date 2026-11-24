@@ -3,7 +3,7 @@
   "content": "Preview",
   "content_en_sha1_hash": "f1fbb2b43dca281d0138f4fcc92543ad143ef0b1",
   "created_at": "2025-05-19T21:30:47.467Z",
-  "updated_at": "2026-11-05T16:49:39.934Z",
+  "updated_at": "2026-11-17T13:13:27.166Z",
   "comment": {
     "text": "This is a button label or tab title that allows users to view a preview of a document, template, or other content.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 79,
+      "line_number": 82,
       "context": "disabled: !item.viewAccessibility.WebEdit,\n },\n {\n id: \"option_preview\",\n key: \"preview\",\n label: t(\"Common:Preview\"),\n icon: EyeReactSvgUrl,\n onClick: () => funcs.onPreviewClick?.(item),\n disabled: !item.security.Read,\n },\n {",
       "module": "/packages/shared"
     }

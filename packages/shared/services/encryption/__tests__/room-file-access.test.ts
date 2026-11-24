@@ -42,7 +42,11 @@ import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
 } from "../room-file-access";
-import { NoAccessError, AuthenticationError } from "../errors";
+import {
+  NoAccessError,
+  AuthenticationError,
+  KeyReplacedError,
+} from "../errors";
 import { getTofuStore, resetTofuStores } from "../tofu-store";
 import { type IdentityKeyPair, type ServerAccessKeyDto } from "../types";
 import { arrayBufferToBase64 } from "../utils";
@@ -424,5 +428,149 @@ describe("sender listed with several keys (leftover envelopes)", () => {
         onKeyChange: async () => "refuse",
       }),
     ).rejects.toBeInstanceOf(AuthenticationError);
+  });
+
+  describe("An unusable member key affects only that member", () => {
+    it("One recipient left out", async () => {
+      const alice = await generateIdentityKeyPair();
+      const bob = await generateIdentityKeyPair();
+      const carol = await generateIdentityKeyPair();
+      const dek = generateDEK();
+      // Users of their own, so no pin from the tests above applies.
+      const [SENDER, FIRST, SECOND] = [
+        "33333333-3333-3333-3333-333333333331",
+        "33333333-3333-3333-3333-333333333332",
+        "33333333-3333-3333-3333-333333333333",
+      ];
+      const roomMemberKeys = [
+        { userId: SENDER, publicKey: pubB64(alice) },
+        { userId: FIRST, publicKey: pubB64(bob) },
+        { userId: SECOND, publicKey: pubB64(carol) },
+      ];
+
+      const wraps = await wrapDekForRecipients({
+        dek,
+        senderIdentity: alice,
+        senderUserId: SENDER,
+        recipients: [
+          { userId: FIRST, publicKey: pubB64(bob) },
+          { userId: "not-base64", publicKey: "not base64!!" },
+          { userId: "short-key", publicKey: "AAAAAAAAAAAAAAAAAAAAAA==" },
+          { userId: SECOND, publicKey: pubB64(carol) },
+        ],
+        fileId: FILE_ID,
+      });
+
+      expect(wraps.map((w) => w.userId)).toEqual([FIRST, SECOND]);
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: wraps,
+        roomMemberKeys,
+        currentUserId: SECOND,
+        currentIdentity: carol,
+        fileId: FILE_ID,
+      });
+      expect(out).toEqual(dek);
+    });
+  });
+});
+
+describe("A file wrapped for a key the user no longer holds is reported as such", () => {
+  const CURRENT = "1545741c-0000-4000-8000-00000000000a";
+  const PREVIOUS = "3b01cb76-0000-4000-8000-00000000000b";
+  let sender: IdentityKeyPair;
+  let key: IdentityKeyPair;
+  let previousKey: IdentityKeyPair;
+  let fileDek: Uint8Array;
+  const LISTED = [{ id: CURRENT }];
+
+  beforeAll(async () => {
+    resetTofuStores();
+    sender = await generateIdentityKeyPair();
+    key = await generateIdentityKeyPair();
+    previousKey = await generateIdentityKeyPair();
+    fileDek = generateDEK();
+  });
+
+  // Bob's entry of a file Alice wrapped for the given key pair under the given id.
+  const wrapFor = (recipient: IdentityKeyPair, publicKeyId: string) =>
+    wrapDekForRecipients({
+      dek: fileDek,
+      senderIdentity: sender,
+      senderUserId: ALICE_ID,
+      recipients: [
+        { userId: BOB_ID, publicKey: pubB64(recipient), publicKeyId },
+      ],
+      fileId: FILE_ID,
+    });
+
+  const unwrap = (
+    fileKeys: ServerAccessKeyDto[],
+    userKeys: { id: string }[] | null | undefined,
+  ) =>
+    unwrapDekForCurrentUser({
+      fileKeys,
+      roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(sender) }],
+      userKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: key,
+      fileId: FILE_ID,
+    });
+
+  const refusal = (attempt: Promise<Uint8Array>) =>
+    attempt.then(
+      () => null,
+      (error: unknown) => error,
+    );
+
+  it("Key imported again", async () => {
+    // The same key pair under the id it had before it was imported again.
+    expect(await unwrap(await wrapFor(key, PREVIOUS), LISTED)).toEqual(
+      fileDek,
+    );
+  });
+
+  it("Download of one such file", async () => {
+    await expect(
+      unwrap(await wrapFor(previousKey, PREVIOUS), LISTED),
+    ).rejects.toBeInstanceOf(KeyReplacedError);
+  });
+
+  it("a wrap the key does not open under a listed id keeps its own error", async () => {
+    const error = await refusal(
+      unwrap(await wrapFor(previousKey, CURRENT), LISTED),
+    );
+
+    expect(error).toBeInstanceOf(Error);
+    expect(error).not.toBeInstanceOf(KeyReplacedError);
+  });
+
+  it("the key id is compared without regard to letter case", async () => {
+    const error = await refusal(
+      unwrap(await wrapFor(previousKey, CURRENT.toUpperCase()), LISTED),
+    );
+
+    expect(error).not.toBeInstanceOf(KeyReplacedError);
+  });
+
+  it("Entry without a key id", async () => {
+    for (const id of ["", "00000000-0000-0000-0000-000000000000"]) {
+      const error = await refusal(
+        unwrap(await wrapFor(previousKey, id), LISTED),
+      );
+
+      expect(error).toBeInstanceOf(Error);
+      expect(error).not.toBeInstanceOf(KeyReplacedError);
+    }
+  });
+
+  it("Key list not known", async () => {
+    for (const userKeys of [undefined, null, []]) {
+      const error = await refusal(
+        unwrap(await wrapFor(previousKey, PREVIOUS), userKeys),
+      );
+
+      expect(error).toBeInstanceOf(Error);
+      expect(error).not.toBeInstanceOf(KeyReplacedError);
+    }
   });
 });

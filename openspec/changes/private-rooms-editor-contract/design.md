@@ -1174,6 +1174,59 @@ a User with the Viewer access. The room and the files of the runs before
   desktop application, ten openings in a row of the spreadsheet, and the
   release stand.
 
+### Read of 2026-11-19: what reads the encryption keys entry
+
+Three sources, read on 2026-11-19.
+
+- **Web editor.** In the bundles of Document Server 10.0.3.58
+  (`web-apps/apps/documenteditor/main/app.js`,
+  `web-apps/apps/api/documents/api.js`, `sdkjs/word/sdk-all-min.js`,
+  `sdkjs/common/crypto/onlyoffice-crypto.js`) the name `cryptoEngineId`
+  does not occur. `web-apps` hands `editorConfig.encryptionKeys` to the core
+  unchanged, and the web engine of the add-on starts when the entry has
+  `dek`: it loads the crypto library, compares `contractVersion` with the
+  library's `EDITOR_CONTRACT_VERSION` and imports `dek`. This matches the
+  read of 2026-10-29 on build 10.0.0.133. The cell, slide and PDF bundles
+  were not read again.
+- **Desktop application.** Answered by the owner on 2026-11-19: the desktop
+  application reads `cryptoEngineId`, chooses the encryption scheme by it
+  (earlier versions of the solution used another scheme under another
+  identifier) and does not load the scripts of the crypto library without
+  it. The editor page gives the desktop its key pair in `initDesktop`
+  (`packages/doceditor/src/utils/initDesktop.ts`), which takes `publicKey`,
+  `privateKeyEnc` and `cryptoEngineId` from the server's
+  `editorConfig.encryptionKeys`; `regDesktop`
+  (`packages/shared/utils/desktop.ts`) starts from the client constant of
+  the earlier engine and overrides it with that value.
+- **Server.** `cryptoEngineId` is a portal constant.
+  `EncryptionKeyDto.DefaultCryptoEngineId`
+  (`{DC522726-5E0E-43E5-AA02-8EA156BECBC5}`) is the default of the property,
+  and `EncryptionKeyRequestDto` has no such field, so a client cannot set
+  it. The value is serialized with the user's key set when a key is stored
+  and comes back from `GetKeyPairAsync`
+  (`products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs`), the one
+  read behind both `GET privacyroom/keys` and the editor configuration
+  (`EditorController`), so both carry the same value. A pair stored before
+  key sets existed has no stored value and reads the default.
+  `KeyFieldsAndIsolationTests` asserts one value across a user's keys.
+
+What follows:
+
+- The web path needs nothing from the server's `encryptionKeys`. The page
+  loads its key set from `GET privacyroom/keys` and the file key from the
+  access entries; the key hook copies only `cryptoEngineId` from the
+  configuration into the entry it builds, a field the web editor does not
+  read.
+- The desktop path needs the key pair and `cryptoEngineId`, and both are in
+  the key set the page already loads. Once `initDesktop` takes them from
+  there (task 10.9), nothing on the page reads the server's
+  `encryptionKeys`, and task 10.6 leaves it with the engine identifier
+  alone. Task 10.6 therefore follows 10.9 and no longer waits for the
+  Document Server team's answer of task 1.2.
+- Which key path the desktop's new engine uses stays with task 9.10: task
+  10.9 changes where the page takes the pair from, not which path the
+  desktop takes.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -1659,9 +1712,10 @@ the Document Server capability" (2026-11-10).
   of `portal:cryptoinfo` or the web path with `dek`) is for the desktop
   developer (task 9.10). Until it is answered the editor page runs the same
   key path in the desktop as in the browser.
-- What does the editor read from `editorConfig.encryptionKeys` besides
-  `dek`? The answer sets what the server puts into that field (tasks 1.2
-  and 10.6). Owner: backend team with the Document Server team.
+- Answered on 2026-11-19 ("Read of 2026-11-19: what reads the encryption
+  keys entry"): the web editor reads `dek` and `contractVersion` from
+  `editorConfig.encryptionKeys` and nothing else; the desktop application
+  reads `cryptoEngineId`. Tasks 10.6 and 10.9 follow from it.
 - How does the Document Server end an encrypted editing session: does it
   close it after the last editor leaves, drop changes that a save already
   contains, and send a final callback? What happens to unsaved encrypted

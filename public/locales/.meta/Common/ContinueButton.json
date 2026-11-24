@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2026-11-09T09:26:33.306Z",
+  "updated_at": "2026-11-19T16:14:53.975Z",
   "comment": {
     "text": "This is the label for a button that allows users to proceed with an action, such as confirming a service, closing an editor without saving, or initiating a file conversion.",
     "is_auto": true,
@@ -27,12 +27,6 @@
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
       "line_number": 223,
       "context": ") : null}\n </div>\n <div className={styles.convertDialogButtons}>\n <Button\n key=\"ContinueButton\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onConvert}\n testId=\"convert_dialog_continue_button\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 398,
-      "context": "<>\n <ConfirmationModal\n visible={keyGate.keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={onConfirmGenerateKey}\n onCancel={onCancelGenerateKey}\n zIndex={410}\n />\n {keyGate.keyGenerationModals}",
       "module": "/packages/client"
     },
     {
@@ -66,6 +60,30 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteKeyFlow.tsx",
+      "line_number": 212,
+      "context": ") : null}\n {verifying !== null ? (\n <PassphraseModal\n visible\n isNew={false}\n submitLabel={t(\"Common:ContinueButton\")}\n onSubmit={onPassphraseSubmit}\n onCancel={() => {\n setVerifying(null);\n setPassphraseError(null);\n }}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteUnusedKeysFlow.tsx",
+      "line_number": 165,
+      "context": ") : null}\n {verifying ? (\n <PassphraseModal\n visible\n isNew={false}\n submitLabel={t(\"Common:ContinueButton\")}\n onSubmit={onPassphraseSubmit}\n onCancel={() => {\n setVerifying(false);\n setPassphraseError(null);\n }}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useExportKeyFlow.tsx",
+      "line_number": 126,
+      "context": "const modals = target ? (\n <PassphraseModal\n visible\n isNew={false}\n submitLabel={t(\"Common:ContinueButton\")}\n onSubmit={onSubmit}\n onCancel={reset}\n isLoading={isPending}\n externalError={error}\n onForgotPassphrase={",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useImportKeyFlow.tsx",
+      "line_number": 183,
+      "context": "<PassphraseModal\n visible\n onSubmit={onPassphraseSubmit}\n onCancel={reset}\n isNew={false}\n submitLabel={t(\"Common:ContinueButton\")}\n isLoading={isPending}\n />\n ) : null}\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 120,
       "context": "id=\"email-continue\"\n className=\"login-continue-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n isDisabled={isLoading || isContinueDisabled}\n isLoading={isLoading}\n onClick={onContinue}\n testId=\"email_continue_button\"\n />",
@@ -90,12 +108,6 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(private)/_components/create-room/PrivateCreateRoomDialog.tsx",
-      "line_number": 144,
-      "context": "<>\n <ConfirmationModal\n visible={keyGate.keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={keyGate.confirmKeyGeneration}\n onCancel={() => keyGate.cancelKeyGeneration(isCreation)}\n zIndex={410}\n />\n {keyGate.keyGenerationModals}",
-      "module": "/packages/sdk"
-    },
-    {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
       "line_number": 599,
       "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
@@ -108,21 +120,27 @@
       "module": "/packages/shared"
     },
     {
+      "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
+      "line_number": 295,
+      "context": "scale\n primary\n key=\"ContinueButton\"\n onClick={primary.onClick}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={primary.isDisabled}\n isLoading={isLoading}\n />\n {step === \"explanation\" ? (\n <Button",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 239,
+      "line_number": 125,
       "context": "scale\n primary\n key=\"ContinueButton\"\n onClick={onConfirm}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={!acknowledged || isLoading}\n isLoading={isLoading}\n />\n <Button\n scale",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
-      "line_number": 211,
+      "line_number": 244,
       "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={t(\"Common:ContinueButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading || isValidating}\n />\n <Button\n scale",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 448,
-      "context": "scale\n primary\n key=\"SubmitButton\"\n onClick={handleSubmit}\n size={ButtonSize.normal}\n label={submitLabel ?? t(\"Common:ContinueButton\")}\n isDisabled={isDisabled}\n isLoading={isLoading}\n />\n <Button\n scale",
+      "line_number": 337,
+      "context": "onClick={handleSubmit}\n size={ButtonSize.normal}\n label={\n submitLabel ??\n // Spec: private-rooms/key-management, \"Unlock with the passphrase\"\n (isNew ? t(\"Common:ContinueButton\") : t(\"Common:UnlockKey\"))\n }\n isDisabled={isDisabled}\n isLoading={isLoading}\n />\n <Button",
       "module": "/packages/shared"
     },
     {

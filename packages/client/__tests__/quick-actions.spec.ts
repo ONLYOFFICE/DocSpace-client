@@ -176,6 +176,30 @@ test.describe("Quick actions visibility", () => {
 
     await expect(toggle).toHaveAttribute("aria-checked", "true");
   });
+
+  // Bug 84775: the caption beside a switch is part of the control - a click on
+  // it toggles the switch, and it is the switch's accessible name.
+  test("toggles the profile setting from its caption", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      filesSettingsHandler(TEST_PORT, { showQuickActions: false }),
+    );
+
+    await page.goto(`${baseUrl}${PROFILE_URL}`);
+
+    const toggle = page.getByTestId(PROFILE_TOGGLE);
+    await expect(toggle).toHaveAttribute("aria-checked", "false");
+    await expect(
+      page.getByRole("checkbox", { name: "Show quick actions" }),
+    ).toHaveCount(1);
+
+    await page.getByText("Show quick actions", { exact: true }).click();
+
+    await expect(toggle).toHaveAttribute("aria-checked", "true");
+  });
 });
 
 // A form filling room accepts PDF forms only. It is normally opened under

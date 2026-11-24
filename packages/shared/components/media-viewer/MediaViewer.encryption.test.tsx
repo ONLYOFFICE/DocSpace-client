@@ -1,21 +1,19 @@
 import React from "react";
-import type { TFunction } from "i18next";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { DeviceType, FileStatus } from "../../enums";
-import {
-  DecryptionError,
-  NoAccessError,
-} from "../../services/encryption/errors";
+import type { DecryptFileParams } from "@onlyoffice/apps-ui-kit/media-viewer/MediaViewer.types";
+
+import { DecryptionError, NoAccessError, KeyReplacedError } from "../../services/encryption/errors";
 import type { MediaViewerProps } from "./MediaViewer.types";
 
+// The viewer itself lives in ui-kit; this wrapper only hands it decryptFile.
 const viewer = vi.hoisted(() => ({
   props: null as Record<string, unknown> | null,
 }));
 
-vi.mock("./sub-components/ViewerWrapper", () => ({
-  ViewerWrapper: (props: Record<string, unknown>) => {
+vi.mock("@onlyoffice/apps-ui-kit/media-viewer/MediaViewer", () => ({
+  default: (props: Record<string, unknown>) => {
     viewer.props = props;
     return null;
   },
@@ -23,7 +21,7 @@ vi.mock("./sub-components/ViewerWrapper", () => ({
 
 vi.mock("../../api/files", async (importOriginal) => ({
   ...(await importOriginal<Record<string, unknown>>()),
-  getFileEncryptionAccess: vi.fn(async () => ({ fileKeys: [{}] })),
+  getFileEncryptionAccess: vi.fn(),
 }));
 
 vi.mock("../../services/encryption/secret-storage", async (importOriginal) => ({
@@ -46,78 +44,69 @@ vi.mock("../../services/encryption/file-keys", async (importOriginal) => ({
 }));
 
 import MediaViewer from "./MediaViewer";
+import { getFileEncryptionAccess } from "../../api/files";
+import { requireUnlock } from "../../services/encryption/secret-storage";
 import { unwrapDekForCurrentUser } from "../../services/encryption/room-file-access";
 import { decryptFile } from "../../services/encryption/file-keys";
 
-const item = (id: number, title: string) => ({
-  id,
-  fileId: id,
-  src: `file-${id}`,
-  title,
-  fileExst: ".png",
-  version: 1,
-  versionGroup: 1,
-  thumbnailUrl: "",
-  fileStatus: FileStatus.None,
-  canShare: false,
-  encrypted: true,
-});
-
-const PLAYLIST = [item(1, "photo.png"), item(2, "shared.png")];
-
-// The message is the key followed by its interpolation values.
-const t = ((key: string, options?: Record<string, unknown>) =>
-  options ? `${key} ${JSON.stringify(options)}` : key) as unknown as TFunction;
-
-const props = (playlistPos: number): MediaViewerProps =>
+// GET files/{id}/access: file 1 holds no entry for bob, file 2 holds his.
+const accessFor = async (fileId: number) =>
   ({
-    visible: true,
-    files: [],
-    playlist: PLAYLIST,
-    playlistPos,
-    currentFileId: PLAYLIST[playlistPos].id,
-    userAccess: true,
-    isPreviewFile: false,
-    extsImagePreviewed: [".png"],
-    deleteDialogVisible: false,
-    pluginContextMenuItems: [],
-    currentDeviceType: DeviceType.desktop,
-    isPublicFile: false,
-    autoPlay: false,
-    userId: "bob",
-    currentRoomId: 7,
-    t,
-    getIcon: () => "",
-    onClose: vi.fn(),
-    nextMedia: vi.fn(),
-    prevMedia: vi.fn(),
-    onChangeUrl: vi.fn(),
-  }) as unknown as MediaViewerProps;
+    fileKeys: fileId === 1 ? [] : [{ userId: "bob" }],
+  }) as Awaited<ReturnType<typeof getFileEncryptionAccess>>;
+
+const params = (fileId: number): DecryptFileParams =>
+  ({
+    src: `file-${fileId}`,
+    fileId,
+    roomId: 7,
+    signal: new AbortController().signal,
+  }) as DecryptFileParams;
+
+const kitDecryptFile = (userId = "bob") => {
+  render(<MediaViewer {...({ userId } as unknown as MediaViewerProps)} />);
+  return viewer.props?.decryptFile as (p: DecryptFileParams) => Promise<unknown>;
+};
 
 describe("The media viewer reports a file that is not shared yet as no access", () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     viewer.props = null;
     vi.stubGlobal(
       "fetch",
       vi.fn(async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) })),
     );
-    vi.stubGlobal("URL", { ...URL, createObjectURL: vi.fn(() => "blob:shown") });
-    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.mocked(getFileEncryptionAccess).mockImplementation(accessFor as never);
   });
 
-  afterEach(() => {
-    vi.unstubAllGlobals();
-    vi.restoreAllMocks();
+  it("Not shared yet while the key is locked", async () => {
+    await expect(kitDecryptFile()(params(1))).rejects.toBeInstanceOf(NoAccessError);
+    expect(requireUnlock).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+    expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
   });
 
-  it("Image not shared with the user yet", async () => {
-    vi.mocked(unwrapDekForCurrentUser).mockRejectedValue(new NoAccessError("bob"));
+  it("Media viewer: a file wrapped for a previous key", async () => {
+    const userKeys = [{ id: "key-now" }];
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      userKeys,
+      fileKeys: [{ userId: "bob", publicKeyId: "key-before" }],
+    } as never);
+    vi.mocked(unwrapDekForCurrentUser).mockRejectedValue(new KeyReplacedError());
 
-    render(<MediaViewer {...props(0)} />);
-
-    await waitFor(() =>
-      expect(viewer.props?.decryptionError).toBe("Common:EncryptedFileNoAccessYet"),
+    await expect(kitDecryptFile()(params(2))).rejects.toBeInstanceOf(
+      KeyReplacedError,
     );
+    expect(vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].userKeys).toBe(
+      userKeys,
+    );
+  });
+
+  it("Access answer without fileKeys", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({} as never);
+
+    await expect(kitDecryptFile()(params(2))).rejects.toBeInstanceOf(NoAccessError);
+    expect(requireUnlock).not.toHaveBeenCalled();
   });
 
   it("File wrapped but damaged", async () => {
@@ -126,33 +115,31 @@ describe("The media viewer reports a file that is not shared yet as no access", 
     );
     vi.mocked(decryptFile).mockRejectedValue(new DecryptionError("tag mismatch"));
 
-    render(<MediaViewer {...props(0)} />);
-
-    await waitFor(() =>
-      expect(viewer.props?.decryptionError).toBe(
-        'Common:EncryptionDecryptPartialFailed {"fileNames":"photo.png"}',
-      ),
-    );
+    await expect(kitDecryptFile()(params(2))).rejects.toBeInstanceOf(DecryptionError);
   });
 
-  it("Next file in the viewer", async () => {
-    vi.mocked(unwrapDekForCurrentUser).mockImplementation(async ({ fileId }) => {
-      if (fileId === 1) throw new NoAccessError("bob");
-      return {} as Awaited<ReturnType<typeof unwrapDekForCurrentUser>>;
-    });
-    vi.mocked(decryptFile).mockResolvedValue({
-      data: new Blob([new Uint8Array([1, 2, 3])]),
+  it("Shared file is decrypted", async () => {
+    const data = new Blob([new Uint8Array([1, 2, 3])]);
+    vi.mocked(unwrapDekForCurrentUser).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof unwrapDekForCurrentUser>>,
+    );
+    vi.mocked(decryptFile).mockResolvedValue({ data, fileName: "shared.png" });
+
+    await expect(kitDecryptFile()(params(2))).resolves.toEqual({
+      data,
       fileName: "shared.png",
     });
+    expect(requireUnlock).toHaveBeenCalledWith("bob");
+  });
 
-    const { rerender } = render(<MediaViewer {...props(0)} />);
-    await waitFor(() =>
-      expect(viewer.props?.decryptionError).toBe("Common:EncryptedFileNoAccessYet"),
-    );
+  it("Image not shared with the user yet shows its own message", () => {
+    const t = ((key: string) => key) as unknown as MediaViewerProps["t"];
+    render(<MediaViewer {...({ userId: "bob", t } as unknown as MediaViewerProps)} />);
+    const message = viewer.props?.getDecryptionErrorMessage as (e: Error) => string | null;
 
-    rerender(<MediaViewer {...props(1)} />);
-
-    await waitFor(() => expect(viewer.props?.fileUrl).toBe("blob:shown"));
-    expect(viewer.props?.decryptionError).toBeUndefined();
+    expect(message(new NoAccessError("bob"))).toBe("Common:EncryptedFileNoAccessYet");
+    expect(message(new KeyReplacedError())).toBe("Common:EncryptedFileKeyReplaced");
+    // A damaged file has no message of its own: the viewer shows the general one with its name.
+    expect(message(new DecryptionError("tag mismatch"))).toBeNull();
   });
 });

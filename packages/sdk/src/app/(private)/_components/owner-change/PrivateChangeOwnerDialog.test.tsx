@@ -63,6 +63,8 @@ const mocks = vi.hoisted(() => ({
   getRoomMembers: vi.fn(),
   getUserList: vi.fn(),
   toastr: { success: vi.fn(), error: vi.fn() },
+  onClose: vi.fn(),
+  onChanged: vi.fn(),
 }));
 
 vi.mock("react-i18next", () => ({
@@ -131,7 +133,8 @@ describe("PrivateChangeOwnerDialog", () => {
       root?.render(
         <PrivateChangeOwnerDialog
           visible
-          onClose={vi.fn()}
+          onClose={mocks.onClose}
+          onChanged={mocks.onChanged}
           roomId={ROOM_ID}
           roomOwnerId="me"
           currentUserId="me"
@@ -189,6 +192,45 @@ describe("PrivateChangeOwnerDialog", () => {
     expect(mocks.changeOwner).not.toHaveBeenCalled();
   });
 
+  it("Candidate left the room meanwhile", async () => {
+    await open();
+    mocks.getRoomMembers.mockImplementation(async () => ({ items: [] }));
+
+    await submit(false);
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedChangeOwnerNotMember",
+    );
+    expect(mocks.validateMembersForEncryption).not.toHaveBeenCalled();
+    expect(mocks.changeOwner).not.toHaveBeenCalled();
+  });
+
+  it("Members cannot be read", async () => {
+    mocks.getRoomMembers.mockImplementation(async () => {
+      throw new Error("403");
+    });
+    const container = document.createElement("div");
+    root = createRoot(container);
+
+    await act(async () => {
+      root?.render(
+        <PrivateChangeOwnerDialog
+          visible
+          onClose={vi.fn()}
+          roomId={ROOM_ID}
+          roomOwnerId="me"
+          currentUserId="me"
+        />,
+      );
+    });
+    await act(async () => {});
+
+    expect(container.textContent).toContain(
+      "Common:OwnerCandidatesLoadFailed",
+    );
+    expect(mocks.selector).toBeNull();
+  });
+
   it("offers the leave option checked by default to the owner", async () => {
     await open();
 
@@ -203,6 +245,7 @@ describe("PrivateChangeOwnerDialog", () => {
     expect(mocks.changeOwner).toHaveBeenCalledWith({
       roomId: ROOM_ID,
       newOwnerId: "bob",
+      currentUserId: "me",
     });
     expect(mocks.leaveRoom).toHaveBeenCalledWith({
       roomId: ROOM_ID,
@@ -210,6 +253,38 @@ describe("PrivateChangeOwnerDialog", () => {
     });
     expect(mocks.toastr.success).toHaveBeenCalledWith("Common:YouLeftTheRoom");
     expect(mocks.push).toHaveBeenCalledWith("/private?privateRooms=true");
+  });
+
+  it("Leave after an owner change refused", async () => {
+    mocks.leaveRoom.mockRejectedValueOnce(
+      Object.assign(new Error("Server text"), { response: { status: 403 } }),
+    );
+    await open();
+
+    await submit(true);
+
+    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      "Common:EncryptedAccessChangeRefused",
+    );
+    expect(mocks.toastr.success).not.toHaveBeenCalled();
+    expect(mocks.onChanged).toHaveBeenCalledWith(ROOM_ID);
+    expect(mocks.onClose).toHaveBeenCalled();
+    expect(mocks.push).not.toHaveBeenCalled();
+  });
+
+  it("Leave after an owner change fails for another reason", async () => {
+    mocks.leaveRoom.mockRejectedValueOnce(new Error("Server text"));
+    await open();
+
+    await submit(true);
+
+    expect(mocks.toastr.error).toHaveBeenCalledTimes(1);
+    expect(mocks.toastr.error).not.toHaveBeenCalledWith("Server text");
+    expect(mocks.toastr.success).not.toHaveBeenCalled();
+    expect(mocks.onChanged).toHaveBeenCalledWith(ROOM_ID);
+    expect(mocks.onClose).toHaveBeenCalled();
+    expect(mocks.push).not.toHaveBeenCalled();
   });
 
   it("stays in the room when the owner keeps the membership", async () => {

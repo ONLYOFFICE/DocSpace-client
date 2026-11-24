@@ -33,7 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { NoAccessError, AuthenticationError } from "./errors";
+import {
+  AuthenticationError,
+  KeyCheckUnavailableError,
+  KeyReplacedError,
+  NoAccessError,
+} from "./errors";
 
 const SESSION_KEY = "encryption-ghost-state-notified";
 
@@ -74,6 +79,10 @@ export const resetGhostStateGate = () => {
  * in this session.
  */
 export const reportPotentialGhostState = (error: unknown): void => {
+  // Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
+  if (error instanceof KeyCheckUnavailableError) return;
+  // Spec: private-rooms/key-management, "Ghost-state notification"
+  if (error instanceof KeyReplacedError) return;
   if (
     !(error instanceof NoAccessError) &&
     !(error instanceof AuthenticationError)

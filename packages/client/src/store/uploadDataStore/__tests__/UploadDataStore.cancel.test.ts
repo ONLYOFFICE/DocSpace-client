@@ -36,6 +36,7 @@ import {
   makeUploadFile,
 } from "./testHarness";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { startUploadSession } from "@docspace/shared/api/files";
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
@@ -167,6 +168,39 @@ describe("UploadDataStore.cancelUpload", () => {
     expect(progressMock.mock.invocationCallOrder[0]).toBeLessThan(
       vi.mocked(toastr.info).mock.invocationCallOrder[0],
     );
+  });
+});
+
+describe("A late upload result reaches only its own row", () => {
+  it("Plain result after cancel all and a new drop", async () => {
+    const { store } = createTestUploadDataStore();
+    const first = makeUploadFile({ uniqueId: "first" });
+    store.files = [first];
+    store.uploadedFilesHistory = [{ ...first }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    let answerSession!: (value: unknown) => void;
+    asMock(startUploadSession).mockReturnValueOnce(
+      new Promise((resolve) => {
+        answerSession = resolve;
+      }),
+    );
+    const uploadFileChunks = stubStoreMethod(store, "uploadFileChunks");
+
+    const run = store.startSessionFunc(0, t);
+    store.cancelUpload();
+    const dropped = makeUploadFile({ uniqueId: "new-drop" });
+    store.files = [dropped];
+    answerSession({ id: "session-1", path: [2, 1] });
+    await run;
+
+    expect(uploadFileChunks).not.toHaveBeenCalled();
+    expect(store.files[0]).toMatchObject({
+      uniqueId: "new-drop",
+      action: "upload",
+      fileId: null,
+      error: null,
+    });
   });
 });
 

@@ -46,6 +46,8 @@ export const OAUTH_FRAME_HEADER = "x-sdk-oauth-frame";
 
 export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
 
+export const MEDIA_VIEWER_LINK_ERROR_HEADER = "x-media-viewer-link-error";
+
 export const ROOM_ID_HEADER = "x-sdk-config-room-id";
 export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
 export const AGENT_ID_HEADER = "x-sdk-config-agent-id";

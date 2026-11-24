@@ -49,6 +49,10 @@ vi.mock(
     recoverEncryptedFilenames: vi.fn(async () => {}),
   }),
 );
+vi.mock("@docspace/shared/api/files", async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  getFolderInfo: vi.fn(async () => ({ id: 1, security: { EditRoom: true } })),
+}));
 vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
   backfillEncryptedFilesForRoomMembers: vi.fn(async () => ({
     fileResults: [],
@@ -206,5 +210,23 @@ describe("FilesStore.syncEncryptedRoom — characterization", () => {
 
     expect(recoverEncryptedFilenames).toHaveBeenCalled();
     expect(backfillEncryptedFilesForRoomMembers).toHaveBeenCalledTimes(1);
+  });
+
+  it("Unlock inside a subfolder", async () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: {
+        id: 9,
+        isRoom: false,
+        navigationPath: [{ id: 1, isRoom: true }],
+        security: {},
+      },
+    });
+    vi.mocked(SecretStorage.getCached).mockReturnValue(IDENTITY as never);
+
+    store.syncEncryptedRoom();
+
+    await vi.waitFor(() =>
+      expect(backfillEncryptedFilesForRoomMembers).toHaveBeenCalledTimes(1),
+    );
   });
 });

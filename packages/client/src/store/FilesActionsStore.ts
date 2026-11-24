@@ -200,6 +200,7 @@ import {
   runOperationsImpl,
 } from "./filesActionsStore/selection.helpers";
 import type UploadDataStore from "./UploadDataStore";
+import type AiPresetsStore from "./AiPresetsStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type FilesSettingsStore from "./FilesSettingsStore";
@@ -439,6 +440,11 @@ class FilesActionStore {
   // after makeAutoObservable, so it is not observable). `declare` keeps that
   // runtime shape.
   declare pluginStore: PluginStore;
+
+  // Assigned after construction (store/index.ts), like pluginStore not
+  // observable: the agents the sidebar and the chat's agents menu list,
+  // re-read when an agent is deleted or left here.
+  declare aiPresetsStore?: AiPresetsStore;
 
   // the next three fields are initialized to null before the
   // constructor always assigns them; typed as the assigned store (with an
@@ -720,7 +726,7 @@ class FilesActionStore {
   moveDragItems = (
     destFolderId: number | string,
     folderTitle: string,
-    destFolderInfo: TFolder & {
+    destFolderInfo?: TFolder & {
       private?: boolean;
       rootFolderId?: number | string;
     },

@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Kliknite ovde</1> da biste nadogradili vaš tarifni plan.",
   "ConfirmEmailDescription": "Koristite vezu datu u email-u za aktivaciju. Niste dobili email sa linkom za aktivaciju?",
   "ConfirmEmailHeader": "Aktivirajte svoju imejl adresu ({{ email }}) da biste dobili pristup funkcijama radnog prostora.",
-  "ContactToUpgradeTariff": "Obratite se superadministratoru da nadogradi tarifni plan.",
   "PersonalQuotaHeader": "Vaša lična skladišna kvota je prekoračena",
   "PersonalQuotaHeaderForAdmins": "Skladišna kvota po korisniku prekoračena",
   "PersonalUserQuotaAdminsDescription": "Da biste otpremili i kreirali nove datoteke i foldere, oslobodite prostor na disku ili upravljajte kvotom po korisniku u <1>Storage management settings</1>",

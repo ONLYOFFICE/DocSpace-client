@@ -70,16 +70,18 @@ export const projectLogo = (logo: TAiProjectLogo): TLogo | undefined =>
 type ProjectLogoProps = {
   project: Pick<TAiProject, "title" | "logo">;
   size?: string;
+  /** The corner radius; 6px suits the 32px default. */
+  radius?: string;
   className?: string;
 };
 
 /** The logo a room shows: the uploaded picture, the built-in cover in the project's colour, or the initials. */
-export const ProjectLogo = ({ project, size = "32px", className }: ProjectLogoProps) => (
+export const ProjectLogo = ({ project, size = "32px", radius = "6px", className }: ProjectLogoProps) => (
   <RoomIcon
     title={project.title}
     color={project.logo.color.replace("#", "")}
     size={size}
-    radius="6px"
+    radius={radius}
     showDefault={!projectLogo(project.logo)}
     logo={projectLogo(project.logo)}
     className={classNames(styles.projectLogo, className)}

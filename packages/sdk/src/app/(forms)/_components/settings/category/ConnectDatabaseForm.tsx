@@ -35,7 +35,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -62,6 +62,7 @@ import {
 } from "../../../_api/dbSettings";
 
 import styles from "./SettingsPanel.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const DB_TYPE_OPTIONS: TOption[] = [{ key: "MySQL", label: "MySQL" }];
 
@@ -71,6 +72,7 @@ type ConnectDatabaseFormProps = {
 
 const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
   const { t } = useTranslation(["Common"]);
+  const captionId = useId();
   const store = useFormsDbSettingsStore();
   const { roomId } = useFormsSettingsStore();
   const tourStore = useFormsTourStore();
@@ -163,12 +165,15 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
     <div className={inline ? styles.inlineBody : styles.panelBody}>
       <div className={styles.toggleBlock}>
         <div className={styles.toggleHeader}>
-          <Text fontSize="16px" fontWeight={700}>
-            {t("Common:CollectResultsInXlsx")}
-          </Text>
+          <ControlCaption htmlFor={`${captionId}-xlsx`}>
+            <Text fontSize="16px" fontWeight={700}>
+              {t("Common:CollectResultsInXlsx")}
+            </Text>
+          </ControlCaption>
           <ToggleButton
             className={styles.toggle}
             isChecked={store.collectXlsx}
+            inputId={`${captionId}-xlsx`}
             onChange={onToggleXlsx}
           />
         </div>
@@ -179,13 +184,16 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
 
       <div className={styles.toggleBlock}>
         <div className={styles.toggleHeader}>
-          <Text fontSize="16px" fontWeight={700}>
-            {t("Common:ExportResultsToDatabase")}
-          </Text>
+          <ControlCaption htmlFor={`${captionId}-db`} isDisabled={tourStore.showMockItems}>
+            <Text fontSize="16px" fontWeight={700}>
+              {t("Common:ExportResultsToDatabase")}
+            </Text>
+          </ControlCaption>
           <ToggleButton
             className={styles.toggle}
             isChecked={sendToDb}
             isDisabled={tourStore.showMockItems}
+            inputId={`${captionId}-db`}
             onChange={onToggleSendToDb}
           />
         </div>

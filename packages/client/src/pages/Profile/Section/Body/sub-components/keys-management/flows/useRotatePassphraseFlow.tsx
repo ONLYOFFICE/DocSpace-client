@@ -39,7 +39,6 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -49,6 +48,10 @@ import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 type Deps = {
   userId: string | undefined;
   refreshKeysFromServer: () => Promise<void>;
+  /** Puts the key with its new envelope into the key list the page holds. */
+  onEnvelopeReplaced: (key: TEncryptionKeyPair) => void;
+  /** The context's lock after a passphrase change (useEncryption). */
+  lockAfterReseal: () => void;
   onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
 };
 
@@ -61,6 +64,8 @@ export type RotatePassphraseFlow = {
 export function useRotatePassphraseFlow({
   userId,
   refreshKeysFromServer,
+  onEnvelopeReplaced,
+  lockAfterReseal,
   onForgotPassphrase,
 }: Deps): RotatePassphraseFlow {
   const { t } = useTranslation(["Common"]);
@@ -94,7 +99,10 @@ export function useRotatePassphraseFlow({
           publicKey: updated.publicKey,
           privateKeyEnc: updated.privateKeyEnc,
         });
-        SecretStorage.lock();
+        // The page holds the new envelope whether or not the list is read again.
+        // Spec: private-rooms/key-management, "Change passphrase"
+        onEnvelopeReplaced({ ...target, ...updated });
+        lockAfterReseal();
         await refreshKeysFromServer();
         toastr.success(t("Common:PassphraseUpdated"));
         reset();
@@ -107,7 +115,15 @@ export function useRotatePassphraseFlow({
         setIsPending(false);
       }
     },
-    [target, userId, refreshKeysFromServer, reset, t],
+    [
+      target,
+      userId,
+      refreshKeysFromServer,
+      onEnvelopeReplaced,
+      lockAfterReseal,
+      reset,
+      t,
+    ],
   );
 
   const modals = target ? (

@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/context/encryption";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
+import { useDeviceRecordPruning } from "@docspace/shared/hooks/useDeviceRecordPruning";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
@@ -197,6 +198,14 @@ const EncryptionProviderWrapper = ({
     [keysLoadFailed],
   );
 
+  useDeviceRecordPruning(userId, keys);
+
+  // Spec: private-rooms/key-management, "Other tabs read the key list again after a key change"
+  const handleKeysChanged = React.useCallback(() => {
+    setKeys(null);
+    keysLoad.reload();
+  }, [keysLoad]);
+
   const chosen = selectUserKey(keys);
 
   const userKeys =
@@ -229,6 +238,7 @@ const EncryptionProviderWrapper = ({
         keysLoaded={keys !== null}
         PassphraseDialog={PassphraseUnlockAdapter}
         KeyChangeDialog={KeyChangeDialog}
+        onKeysChanged={handleKeysChanged}
       >
         <EncryptionKeysReadyContext.Provider value={keysReady}>
           <EncryptionKeysLoadContext.Provider value={keysLoad}>

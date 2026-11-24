@@ -226,16 +226,15 @@ test.describe("Keys management — edge cases", () => {
     expect(handleRef.current!.getKeys()).toHaveLength(0);
   });
 
-  test("auto-lock on tab visibility change hides the Lock now button", async ({
+  test("a hidden tab keeps the key unlocked", async ({
     page,
     mockRequest,
     baseUrl,
   }) => {
     await bootstrapEncryption(page, mockRequest, baseUrl);
 
-    // The tab-hide lock obeys the auto-lock preference, and the default is
-    // "Off" — enable a preset so hiding the tab actually locks. The legacy
-    // key is migrated to the per-user key on first read.
+    // The shortest preset. The legacy key is migrated to the per-user key on
+    // first read.
     await page.evaluate(() =>
       localStorage.setItem("encryption-auto-lock-timeout-seconds", "300"),
     );
@@ -251,15 +250,19 @@ test.describe("Keys management — edge cases", () => {
       });
     });
 
-    // The visibilitychange listener is (re)registered as auto-lock suspension
-    // clears, so a single dispatch can race that registration. Keep the tab
-    // "hidden" and re-dispatch until the auto-lock takes effect.
-    await expect(async () => {
-      await page.evaluate(() =>
-        document.dispatchEvent(new Event("visibilitychange")),
-      );
-      await expect(lockNowBtn).toBeHidden({ timeout: 1000 });
-    }).toPass({ timeout: 10000 });
+    await page.evaluate(() =>
+      document.dispatchEvent(new Event("visibilitychange")),
+    );
+    await page.evaluate(() => {
+      Object.defineProperty(document, "visibilityState", {
+        configurable: true,
+        get: () => "visible",
+      });
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+
+    await expect(lockNowBtn).toBeVisible();
+    await expect(page.getByTestId("keys_unlock_button")).toHaveCount(0);
   });
 
   test("Typed passphrase kept", async ({ page, mockRequest, baseUrl }) => {

@@ -1,0 +1,181 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
+// The instructions view: a modal of a fixed height, as wide as an editor needs, never taller or
+// wider than the window: on a phone it is the bottom sheet of every modal.
+// Its body takes the height the header and the footer leave.
+.dialog {
+  --modal-dialog-default-width: min(640px, calc(100vw - 32px));
+
+  :global(#modal-dialog) {
+    display: flex;
+    flex-direction: column;
+    height: min(680px, calc(100dvh - 32px));
+
+    @include mixins.mobile {
+      height: calc(100dvh - 64px);
+    }
+  }
+
+  :global(.modal-body) {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  // The header of a modal keeps its own distance to the form.
+  .body {
+    padding-block: 0 8px;
+  }
+}
+
+// The form takes the dialog's whole body, in the panel of a new, an edited
+// or a generated skill, as the instructions do in their modal, so the instructions get the height the other
+// fields leave and scroll inside their editor. The dialog body is the
+// positioned box; its side padding is kept by the inline inset. Only a
+// dialog too short for the fields scrolls as a whole.
+.body {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: var(--modal-dialog-padding-x, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  padding-block: 20px 16px;
+  overflow-y: auto;
+}
+
+// The editor's box and the editor in it fill the field; the text scrolls
+// in the editor.
+.editorFill {
+  flex: 1 1 0;
+  min-height: 0;
+
+  > div {
+    height: 100%;
+  }
+}
+
+.field {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+// The instructions: all the height that is left, never less than a few lines.
+.fieldFill {
+  flex: 1 1 0;
+  min-height: 180px;
+}
+
+// The name field keeps the height of a label and an input; with its error
+// under it, it grows instead of running into the next field.
+.nameField > div {
+  max-height: none;
+}
+
+.hint {
+  color: var(--text-secondary);
+}
+
+.command {
+  font-weight: 600;
+  color: var(--accent-main);
+}
+
+// The toolbar and the editor under it are one bordered box.
+.instructions {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+
+  > div:last-child {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 4px;
+  border: 1px solid var(--aside-header-border-color);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  background: var(--article-catalog-background);
+}
+
+.toolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--files-section-table-view-row-border-color);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+.toolbarNote {
+  margin-inline-start: auto;
+  padding-inline-end: 4px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.message {
+  color: var(--text-secondary);
+}

@@ -51,7 +51,15 @@
 //   npx playwright test __tests__/e2e/private --reporter=line
 // =============================================================================
 
-import type { Locator, Page } from "@playwright/test";
+import type { FrameLocator, Locator, Page } from "@playwright/test";
+
+import type { SetupServer } from "@docspace/shared/__mocks__/e2e";
+import {
+  API_PREFIX,
+  BASE_URL,
+  http,
+  HttpResponse,
+} from "@docspace/shared/__mocks__/e2e";
 
 import {
   emptyTemplateHandler,
@@ -73,7 +81,13 @@ import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-
 import { isDSE3Format } from "@docspace/shared/services/encryption/streaming-encryption";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 
+import {
+  PATH_QUOTA,
+  quotaSuccess,
+} from "@docspace/shared/__mocks__/handlers/portal/quota";
+
 import { FIXTURE_IDENTITY, FIXTURE_USER_ID } from "../fixtures/crypto";
+import { openInSdkHost, readSdkEvents } from "../fixtures/sdkHost";
 import {
   test,
   expect,
@@ -103,6 +117,10 @@ const CAROL = {
   displayName: "Carol Jones",
   email: "carol@example.com",
 };
+
+/** Common:PrivateOwnerEncryptionHint, shown only by the private owner picker. */
+const PRIVATE_OWNER_HINT =
+  "Only users who are already members of this room and have set up encryption can become the owner.";
 
 /** The rights FolderDtoHelper sends the owner of an active room. */
 const OWNER_ROOM_SECURITY = {
@@ -222,6 +240,9 @@ const serveRooms = async (
     memberKeys = [],
     folders = [],
     archived = false,
+    archivedRoomSecurity,
+    sharedRoomFolders = [],
+    roomSecurity = OWNER_ROOM_SECURITY,
   }: {
     files?: TPlainFile[];
     secondRoom?: boolean;
@@ -229,6 +250,9 @@ const serveRooms = async (
     memberKeys?: TEncryptionKeyPair[];
     folders?: { id: number; title: string }[];
     archived?: boolean;
+    archivedRoomSecurity?: Record<string, boolean>;
+    sharedRoomFolders?: { id: number; title: string }[];
+    roomSecurity?: Record<string, boolean>;
   } = {},
 ): Promise<TRooms> => {
   const alice = await generateIdentityKeyPair();
@@ -256,11 +280,12 @@ const serveRooms = async (
       roomId: ROOM_ID,
       title: ROOM_TITLE,
       ownerId: FIXTURE_USER_ID,
-      roomSecurity: OWNER_ROOM_SECURITY,
+      roomSecurity,
       roomUserKeys: [MY_KEY],
       initialFiles,
       folders,
       archived,
+      archivedRoomSecurity,
       withOtherRooms,
       handle: roomHandle,
     }),
@@ -283,6 +308,7 @@ const serveRooms = async (
           ownerId: FIXTURE_USER_ID,
           isPrivate: false,
           roomSecurity: OWNER_ROOM_SECURITY,
+          folders: sharedRoomFolders,
           withOtherRooms: true,
           handle: sharedHandle,
         })
@@ -321,7 +347,7 @@ const openRoom = (page: Page, baseUrl: string) =>
   page.goto(`${baseUrl}${PRIVATE_LIST}/${ROOM_ID}${OPT_IN}`);
 
 /** The list shows titles without their extension. */
-const row = (page: Page, title: string) =>
+const row = (page: Page | FrameLocator, title: string) =>
   page
     .getByTestId("table-row")
     .filter({ hasText: title.replace(/\.[^.]+$/, "") });
@@ -672,7 +698,211 @@ test.describe("(private) — rooms list & unlock", () => {
   });
 });
 
+// Every request of a run, from the server renders and from the browser, in
+// the order they started.
+const recordRequests = (server: SetupServer, page: Page) => {
+  const urls: string[] = [];
+  const onServer = ({ request }: { request: Request }) => urls.push(request.url);
+  server.events.on("request:start", onServer);
+  page.on("request", (request) => urls.push(request.url()));
+  return {
+    urls,
+    stop: () => server.events.removeListener("request:start", onServer),
+  };
+};
+
+const listsFolder = (folderId: number) => (url: string) =>
+  new RegExp(`/api/2\\.0/files/${folderId}(\\?|$)`).test(url);
+
+const NOT_AVAILABLE = "This feature is under development";
+
+// Spec: private-rooms/sdk-surface, "Frame events carry no item of a private room"
+test.describe("(private) — frame events", () => {
+  test("Host subscribed to file clicks, encrypted file", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port, { files: [PHOTO] });
+    const frame = await openInSdkHost(
+      page,
+      baseUrl,
+      `${PRIVATE_LIST}/${ROOM_ID}${OPT_IN}`,
+      { privateRooms: true, events: { onFileManagerClick: true } },
+    );
+
+    await row(frame, PHOTO.serverTitle).dblclick();
+    await unlock(frame);
+
+    const viewer = frame.getByRole("dialog", {
+      name: `image viewer - ${PHOTO.name}`,
+    });
+    await expect(viewer.locator("img[src^='blob:']")).toBeVisible();
+    expect(await readSdkEvents(page, "onFileManagerClick")).toEqual([]);
+  });
+});
+
+// Spec: private-rooms/sdk-surface, "Private rooms only through the private pages"
+test.describe("(private) — generic addresses of a private room", () => {
+  test("Folder of a private room opened in personal files: with the opt-in", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+    serverRequestInterceptor,
+  }) => {
+    await serveRooms(mockBoth, port, { folders: [ROOM_FOLDER] });
+    const log = recordRequests(serverRequestInterceptor, page);
+
+    await page.goto(
+      `${baseUrl}/sdk/personal-files?folder=${ROOM_FOLDER.id}&search=secretplan&privateRooms=true`,
+    );
+
+    await page.waitForURL(
+      (url) =>
+        url.pathname === `${PRIVATE_LIST}/${ROOM_ID}` &&
+        url.searchParams.get("folder") === String(ROOM_FOLDER.id) &&
+        url.searchParams.get("privateRooms") === "true" &&
+        !url.searchParams.has("search"),
+    );
+    log.stop();
+    expect(log.urls.filter((url) => url.includes("secretplan"))).toEqual([
+      expect.stringContaining("/sdk/personal-files"),
+    ]);
+  });
+
+  test("Folder of a private room opened in personal files: without the opt-in", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+    serverRequestInterceptor,
+  }) => {
+    await serveRooms(mockBoth, port, { folders: [ROOM_FOLDER] });
+    const log = recordRequests(serverRequestInterceptor, page);
+
+    await page.goto(`${baseUrl}/sdk/personal-files?folder=${ROOM_FOLDER.id}`);
+
+    await page.waitForURL(
+      (url) => url.pathname === `${PRIVATE_LIST}/${ROOM_ID}`,
+    );
+    await expect(page.getByText(NOT_AVAILABLE)).toBeVisible();
+    log.stop();
+    expect(log.urls.filter(listsFolder(ROOM_FOLDER.id))).toEqual([]);
+  });
+
+  test("Private folder named to the file selector", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+    serverRequestInterceptor,
+  }) => {
+    await serveRooms(mockBoth, port, { folders: [ROOM_FOLDER] });
+    const log = recordRequests(serverRequestInterceptor, page);
+
+    await page.goto(`${baseUrl}/sdk/file-selector?id=${ROOM_FOLDER.id}`);
+
+    await expect(page.getByText(NOT_AVAILABLE)).toBeVisible();
+    log.stop();
+    expect(log.urls.filter(listsFolder(ROOM_FOLDER.id))).toEqual([]);
+    await expect(page.locator("[data-testid^='selector-item-']")).toHaveCount(0);
+  });
+
+  test("Uploader aimed at a private folder", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+    serverRequestInterceptor,
+  }) => {
+    await serveRooms(mockBoth, port, { folders: [ROOM_FOLDER] });
+    const log = recordRequests(serverRequestInterceptor, page);
+
+    await page.goto(`${baseUrl}/sdk/uploader?targetId=${ROOM_FOLDER.id}`);
+
+    await expect(page.getByText(NOT_AVAILABLE)).toBeVisible();
+    await expect(page.locator("input[type='file']")).toHaveCount(0);
+    log.stop();
+    expect(
+      log.urls.filter(
+        (url) =>
+          listsFolder(ROOM_FOLDER.id)(url) || /\/upload\/|\/session/.test(url),
+      ),
+    ).toEqual([]);
+  });
+
+  test("Folder of a private room reached on a generic page", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+    serverRequestInterceptor,
+  }) => {
+    // The ordinary room lists a folder that its path places in the private
+    // room: the page decides by the room on the path, not by the list.
+    await serveRooms(mockBoth, port, {
+      folders: [ROOM_FOLDER],
+      sharedRoom: true,
+      sharedRoomFolders: [ROOM_FOLDER],
+    });
+    await page.goto(`${baseUrl}/sdk/rooms/${SHARED_ROOM_ID}${OPT_IN}`);
+    const folderRow = page.getByText(ROOM_FOLDER.title, { exact: true });
+    await expect(folderRow.first()).toBeVisible();
+    const log = recordRequests(serverRequestInterceptor, page);
+
+    await folderRow.first().dblclick();
+
+    await page.waitForURL(
+      (url) =>
+        url.pathname === `${PRIVATE_LIST}/${ROOM_ID}` &&
+        url.searchParams.get("folder") === String(ROOM_FOLDER.id) &&
+        url.searchParams.get("privateRooms") === "true",
+    );
+    await expect(page.getByText(NOT_AVAILABLE)).toHaveCount(0);
+    log.stop();
+    const toPrivatePage = log.urls.findIndex((url) =>
+      url.includes(`${PRIVATE_LIST}/${ROOM_ID}`),
+    );
+    expect(toPrivatePage).toBeGreaterThan(-1);
+    expect(
+      log.urls.slice(0, toPrivatePage).filter(listsFolder(ROOM_FOLDER.id)),
+    ).toEqual([]);
+  });
+});
+
+/** The portal quota with every room of the pricing plan in use. */
+const roomLimitReachedHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_QUOTA}`, () => {
+    const quota = quotaSuccess();
+    const room = quota.response.features.find((f) => f.id === "room") as {
+      value: number;
+      used: { value: number; title: string };
+    };
+    room.value = 12;
+    room.used = { value: 12, title: "Rooms:" };
+    return HttpResponse.json(quota);
+  });
+
 test.describe("(private) — create / upload / download / preview", () => {
+  test("Room limit reached", async ({ page, baseUrl, port, mockBoth }) => {
+    await serveRooms(mockBoth, port);
+    mockBoth(roomLimitReachedHandler(port));
+    await page.goto(`${baseUrl}${PRIVATE_LIST}${OPT_IN}`);
+
+    await page.getByTestId("main-button").click();
+
+    await expect(page.getByText("Room cannot be created")).toBeVisible();
+    await expect(
+      page.getByText(
+        "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
+      ),
+    ).toBeVisible();
+    await expect(page.getByText("CannotCreateNewRoom")).toHaveCount(0);
+    await expect(page.getByText("NewRoomWillExceedLimit")).toHaveCount(0);
+  });
+
   test("Document created", async ({ page, baseUrl, port, mockBoth }) => {
     const { room } = await serveRooms(mockBoth, port, { files: [] });
     mockBoth(emptyTemplateHandler(port));
@@ -807,6 +1037,8 @@ test.describe("(private) — create / upload / download / preview", () => {
     await expect(dialog).toBeHidden();
     expect(room.getSessions()).toEqual([]);
     expect(room.getFiles()).toHaveLength(1);
+    // The cancelled file leaves the upload panel: no upload button stays.
+    await expect(page.getByTestId("icon-upload")).toHaveCount(0);
   });
 
   test("Upload with a clashing name: keep both stores the first free copy suffix", async ({
@@ -1151,6 +1383,47 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     expect(room.getFiles().map((f) => f.id)).toEqual([MEMO.id]);
   });
 
+  test("Copy or move picker on a private page", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveRooms(mockBoth, port, { secondRoom: true });
+    const searched: string[] = [];
+    page.on("request", (request) => {
+      const params = new URL(request.url()).searchParams;
+      if (params.get("search") || params.get("filterValue")) {
+        searched.push(request.url());
+      }
+    });
+    await openRoom(page, baseUrl);
+
+    for (const option of ["copy", "move-to"] as const) {
+      await chooseTransfer(page, row(page, MEMO.serverTitle), option);
+      const picker = page.getByTestId("aside").first();
+      const item = (title: string) =>
+        picker
+          .locator("[data-testid^='selector-item-']")
+          .filter({ hasText: title });
+      await expect(picker.getByText(ROOM_TITLE, { exact: true })).toBeVisible();
+      await expect(picker.getByTestId("selector_search_input")).toHaveCount(0);
+
+      if (option === "copy") {
+        await picker.getByText("Apps", { exact: true }).first().click();
+        await expect(picker.getByTestId("selector_search_input")).toHaveCount(0);
+        await item("Private").first().click();
+        await item(SECOND_ROOM_TITLE).click();
+        await expect(item(SECOND_ROOM_FOLDER.title)).toBeVisible();
+        await expect(picker.getByTestId("selector_search_input")).toHaveCount(0);
+      }
+      await picker.getByRole("button", { name: "Cancel" }).click();
+      await expect(picker).toHaveCount(0);
+    }
+
+    expect(searched).toEqual([]);
+  });
+
   test("Destination outside private rooms", async ({
     page,
     baseUrl,
@@ -1191,6 +1464,83 @@ test.describe("(private) — copy / move / duplicate (P1)", () => {
     expect(room.getFiles().map((f) => f.id)).toEqual([MEMO.id]);
   });
 });
+
+/** The room administrators the owner picker lists (people/filter). */
+const roomAdminsHandler = (port: string, users: (typeof CAROL)[]) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/people/filter`, () =>
+    HttpResponse.json({
+      response: users.map((user) => ({
+        id: user.id,
+        displayName: user.displayName,
+        email: user.email,
+        isRoomAdmin: true,
+        isAdmin: false,
+        isOwner: false,
+        isVisitor: false,
+        isCollaborator: false,
+        status: 1,
+        activationStatus: 1,
+        hasAvatar: false,
+        avatarSmall: "",
+      })),
+      count: users.length,
+      total: users.length,
+      status: 0,
+      statusCode: 200,
+    }),
+  );
+
+/**
+ * The room of the signed-in user, with Carol, a room administrator, as its
+ * member; with `candidateHasKey` she holds a key but no entry on MEMO.
+ */
+const serveOwnerChange = async (
+  mockBoth: TMockBoth,
+  port: string,
+  { candidateHasKey }: { candidateHasKey: boolean },
+) => {
+  const carol = await generateIdentityKeyPair();
+  const carolKey = {
+    ...MY_KEY,
+    id: "carol-1",
+    userId: CAROL.id,
+    publicKey: arrayBufferToBase64(carol.publicKey.buffer as ArrayBuffer),
+    privateKeyEnc: "",
+  };
+  const { room } = await serveRooms(mockBoth, port, {
+    memberKeys: candidateHasKey ? [carolKey] : [],
+    roomSecurity: { ...OWNER_ROOM_SECURITY, ChangeOwner: true },
+  });
+  if (candidateHasKey) room.setRoomUserKeys([MY_KEY, carolKey]);
+  mockBoth(
+    roomAdminsHandler(port, [CAROL]),
+    ...roomMembersHandlers(port, ROOM_ID, {
+      initial: [
+        { id: CAROL.id, displayName: CAROL.displayName, email: CAROL.email },
+      ],
+    }),
+  );
+  return room;
+};
+
+/** Picks Carol as the new owner from the header menu of the open room. */
+const assignCarolAsOwner = async (page: Page, baseUrl: string) => {
+  await openRoom(page, baseUrl);
+  await expect(row(page, MEMO.serverTitle)).toBeVisible();
+  await page.locator("#header_optional-button").click();
+  await page.getByRole("menuitem", { name: "More options" }).hover();
+  await page.locator("#option_change-room-owner").click();
+  await page
+    .locator("[data-testid^='selector-item-']")
+    .filter({ hasText: CAROL.displayName })
+    .click();
+  await page.getByRole("button", { name: "Assign Owner" }).click();
+};
+
+const ownerRequests = (room: EncryptedFilesHandlerHandle) =>
+  room
+    .getRequests()
+    .filter((r) => r.method === "POST" && r.url.endsWith("/files/owner"));
 
 test.describe("(private) — members / invite / owner / backfill (P1/M3)", () => {
   test("All invitees have verified keys", async ({
@@ -1336,21 +1686,124 @@ test.describe("(private) — members / invite / owner / backfill (P1/M3)", () =>
     },
   );
 
-  // §17.2 #16
-  test.fixme(
-    "change-owner: validates the candidate has an encryption key before handoff",
-    async () => {
-      // BLOCKER A + B + D:
-      //   - All unlock + cookie blockers.
-      //   - The guard in usePrivateChangeOwner: check privacyroomKeys for the
-      //     candidate; if absent → toast Common:PrivateRoomChangeOwnerNoKey.
-      //   - If present but the key fingerprint does not match → toast
-      //     Common:PrivateRoomChangeOwnerKeyMismatch (§3.3 parity).
-      //   - The test requires two users in the mock: one with a key and one without.
-      //
-      // Candidate without key → blocked with a toast; with key → setFileOwner.
-    },
-  );
+  test("Candidate without a key", async ({ page, baseUrl, port, mockBoth }) => {
+    const room = await serveOwnerChange(mockBoth, port, {
+      candidateHasKey: false,
+    });
+
+    await assignCarolAsOwner(page, baseUrl);
+
+    await expect(
+      page.getByText(`Cannot transfer ownership to ${CAROL.displayName}`),
+    ).toBeVisible();
+    expect(ownerRequests(room)).toEqual([]);
+    expect(keyHolders(room, MEMO.id)).toEqual([ALICE_ID, FIXTURE_USER_ID].sort());
+  });
+
+  test("Missing entries wrapped before the transfer", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    const room = await serveOwnerChange(mockBoth, port, {
+      candidateHasKey: true,
+    });
+    let holdersAtTransfer: string[] = [];
+    await page.route(/\/api\/2\.0\/files\/owner$/, async (route) => {
+      holdersAtTransfer = keyHolders(room, MEMO.id);
+      await route.fallback();
+    });
+
+    await assignCarolAsOwner(page, baseUrl);
+    await unlock(page);
+
+    await expect.poll(() => ownerRequests(room).length).toBe(1);
+    expect(holdersAtTransfer).toEqual([ALICE_ID, CAROL.id, FIXTURE_USER_ID].sort());
+    // The flow itself asked which files Carol lacks before the transfer.
+    const urls = room.getRequests().map((r) => `${r.method} ${r.url}`);
+    const asked = urls.indexOf(
+      `GET /${API_PREFIX}/privacyroom/${ROOM_ID}/access/missing?userIds=${CAROL.id}`,
+    );
+    expect(asked).toBeGreaterThan(-1);
+    expect(asked).toBeLessThan(urls.indexOf(`POST /${API_PREFIX}/files/owner`));
+    await expect(page.getByText("You have appointed a new owner.")).toBeVisible();
+  });
+
+  test("Owner change from the info panel of an open room", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveOwnerChange(mockBoth, port, { candidateHasKey: true });
+    await openRoom(page, baseUrl);
+    await expect(row(page, MEMO.serverTitle)).toBeVisible();
+
+    await page.locator(".info-panel-toggle").click();
+    await page.locator("#info-panel_room-context-button").click();
+    const more = page.getByRole("menuitem", { name: "More options" });
+    if (await more.isVisible()) await more.hover();
+    await page.locator("#option_change-room-owner").click();
+
+    // The private dialog: current members as candidates, with its key hint.
+    await expect(
+      page
+        .locator("[data-testid^='selector-item-']")
+        .filter({ hasText: CAROL.displayName }),
+    ).toBeVisible();
+    await expect(page.getByText(PRIVATE_OWNER_HINT)).toBeVisible();
+  });
+
+  test("Transfer refused by the server", async ({
+    page,
+    baseUrl,
+    port,
+    mockBoth,
+  }) => {
+    await serveOwnerChange(mockBoth, port, {
+      candidateHasKey: true,
+    });
+    // The server refuses the transfer as it does when a file gained no
+    // entry for Carol after the wrap (the room's own backfill may wrap MEMO
+    // at any time, so the refusal is answered here) and then lists the file.
+    let refused = false;
+    await page.route(/\/api\/2\.0\/files\/owner$/, async (route) => {
+      refused = true;
+      await route.fulfill({
+        status: 409,
+        json: {
+          error: {
+            message:
+              "The new owner holds no key for some encrypted files of the room",
+          },
+          status: 1,
+          statusCode: 409,
+        },
+      });
+    });
+    await page.route(/\/access\/missing\?userIds=/, async (route) => {
+      if (!refused) return route.fallback();
+      await route.fulfill({
+        json: {
+          response: [{ userId: CAROL.id, fileIds: [MEMO.id] }],
+          status: 0,
+          statusCode: 200,
+        },
+      });
+    });
+
+    await assignCarolAsOwner(page, baseUrl);
+    await unlock(page);
+
+    await expect(
+      page.getByText(
+        "1 encrypted file(s) could not be made available to the new members.",
+      ),
+    ).toBeVisible();
+    expect(refused).toBe(true);
+    await expect(page.getByText("You have appointed a new owner.")).toBeHidden();
+  });
 
   test.fixme(
     "backfill: entering a room as manager wraps DEKs for late-registered members",
@@ -1381,7 +1834,12 @@ test.describe("(private) — archive", () => {
     port,
     mockBoth,
   }) => {
-    await serveRooms(mockBoth, port, { files: [PHOTO], archived: true });
+    // Spec: private-rooms/sdk-surface, "No upload or creation without the create right"
+    await serveRooms(mockBoth, port, {
+      files: [PHOTO],
+      archived: true,
+      archivedRoomSecurity: OWNER_ROOM_SECURITY,
+    });
     await openRoom(page, baseUrl);
     const photoRow = row(page, PHOTO.serverTitle);
     await expect(photoRow).toBeVisible();
@@ -1404,11 +1862,18 @@ test.describe("(private) — archive", () => {
     port,
     mockBoth,
   }) => {
-    await serveRooms(mockBoth, port, { archived: true });
+    await serveRooms(mockBoth, port, {
+      archived: true,
+      archivedRoomSecurity: OWNER_ROOM_SECURITY,
+    });
     const uploadRequests: string[] = [];
+    const createRequests: string[] = [];
     page.on("request", (request) => {
       if (/\/upload\/|\/session/.test(request.url())) {
         uploadRequests.push(request.url());
+      }
+      if (request.method() === "POST" && /\/files\/folder\//.test(request.url())) {
+        createRequests.push(request.url());
       }
     });
 
@@ -1422,6 +1887,10 @@ test.describe("(private) — archive", () => {
 
     expect(await chooser).toBeNull();
     expect(uploadRequests).toEqual([]);
+
+    await page.keyboard.press("Shift+F");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(createRequests).toEqual([]);
   });
 
   test("Restore from the header of an archived room", async ({

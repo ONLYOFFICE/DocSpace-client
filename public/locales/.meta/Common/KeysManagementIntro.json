@@ -2,19 +2,18 @@
   "key_path": "KeysManagementIntro",
   "content": "Your encryption key protects files in private rooms. Your passphrase unlocks the key; your recovery phrase helps restore access if you forget it.",
   "content_en_sha1_hash": "52ef8516a81b4d5e3e80d12c512fe85fc752c917",
-  "created_at": "2026-11-18T17:27:47.882Z",
-  "updated_at": "2026-11-18T17:29:08.930Z",
+  "created_at": "2026-11-19T16:14:17.615Z",
+  "updated_at": "2026-11-19T16:14:54.121Z",
   "comment": {
-    "text": "Introductory paragraph at the top of the Keys management tab of the user profile, shown with or without a key. Explains three related terms that must match their translations elsewhere: the encryption key protects files in private rooms, the passphrase unlocks that key, the recovery phrase restores access when the passphrase is forgotten; the final \"it\" refers to the passphrase.",
-    "is_auto": true,
-    "updated_at": "2026-11-18T17:29:08.930Z",
-    "model": "claude-fable-5-2"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 288,
-      "context": "return (\n <div className={styles.sectionBody}>\n {/* Spec: private-rooms/key-management, \"Keys management opens with an introduction\" */}\n <Text as=\"p\" className={styles.intro} dataTestId=\"keys_management_intro\">\n {t(\"Common:KeysManagementIntro\")}\n </Text>\n <KeysList\n keyState={hasKeys ? (isUnlocked ? \"unlocked\" : \"locked\") : undefined}\n keys={encryptionKeys || []}\n onDelete={remove.request}",
+      "line_number": 301,
+      "context": "return (\n <div className={styles.sectionBody}>\n {/* Spec: private-rooms/key-management, \"Keys management opens with an introduction\" */}\n <Text as=\"p\" className={styles.intro} dataTestId=\"keys_management_intro\">\n {t(\"Common:KeysManagementIntro\")}\n </Text>\n {/* A list that failed to load is reported by the block below. */}\n {!keysKnown && keysLoadFailed ? null : (\n <KeysList\n keyState={hasKeys ? (isUnlocked ? \"unlocked\" : \"locked\") : undefined}",
       "module": "/packages/client"
     }
   ],

@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PNPM
-RUN npm install -g pnpm@12.11.2
+RUN npm install -g pnpm@12.21.0
 
 WORKDIR /app
 

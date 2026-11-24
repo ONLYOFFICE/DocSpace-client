@@ -105,6 +105,11 @@ export type TRoom = {
   parentId: number;
   filesCount: number;
   foldersCount: number;
+  /**
+   * How many agents use the room as a source, readable by the caller or
+   * not. Only a skill set and a knowledge base carry it.
+   */
+  linkedProjectsCount?: number;
   new: number;
   mute: boolean;
   tags: string[];

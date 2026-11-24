@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu.",
   "ConfirmEmailDescription": "Izmantojiet aktivizēšanas e-pasta ziņojumā norādīto saiti. Vai neesat saņēmis e-pasta ziņojumu ar aktivizēšanas saiti?",
   "ConfirmEmailHeader": "Lūdzu, aktivizējiet savu e-pastu ({{ email }}), lai piekļūtu darbvietas funkcijām.",
-  "ContactToUpgradeTariff": "Sazinieties ar superadministratoru, lai uzlabotu tarifa plānu.",
   "PersonalQuotaHeader": "Ir pārsniegta jūsu personīgās krātuves kvota",
   "PersonalQuotaHeaderForAdmins": "Ir pārsniegta krātuves kvota vienam lietotājam",
   "PersonalUserQuotaAdminsDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai pārvaldiet kvotu katram lietotājam <1>Krātuves pārvaldības iestatījumos.</1>",

@@ -3,7 +3,7 @@
   "content": "Private rooms",
   "content_en_sha1_hash": "9a2ea678656f317a4c8a199c21fa0c78c7870d16",
   "created_at": "2026-11-13T13:23:52.459Z",
-  "updated_at": "2026-11-13T13:24:53.237Z",
+  "updated_at": "2026-11-19T16:14:53.930Z",
   "comment": {
     "text": "Name of the left sidebar section that lists end-to-end encrypted private rooms, placed after Rooms and Forms and holding an Archive sub-item. Also the header and browser-tab title of that list, the root of its breadcrumbs, the section name inside Go to {{sectionName}}, an option of the default start page setting and the title of the E2E rooms app in the apps catalog. Plural section name (private rooms as a group), not a property of one item; keep it short, the sidebar is narrow.",
     "is_auto": true,
@@ -48,8 +48,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 249,
+      "context": "// Spec: private-rooms/sidebar-section, \"Dashboard shows a card of private rooms\"\n if (privateRooms !== \"none\") {\n items.push({\n id: \"e2e-rooms\",\n icon: <CatalogPrivateIcon />,\n title: t(\"Common:Private\"),\n description: t(\"Common:DashboardE2eRoomsDescription\"),\n // Spec: private-rooms/sidebar-section, \"Dashboard card of private rooms carries the Beta badge\"\n badge: (\n <BetaBadge\n place=\"bottom\"",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 777,
+      "line_number": 782,
       "context": "return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isPrivateRoomsListRoot(location, isRoomsFolder))\n return t(\"Common:Private\");\n \n // The AI root is titled by the client, after what its list holds.\n if (getCategoryType(location) === CategoryType.AiHub)\n return getAiWorkspaceTitle(t, location.search);",
       "module": "/packages/client"
     },

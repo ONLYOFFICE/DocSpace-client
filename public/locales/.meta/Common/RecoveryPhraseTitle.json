@@ -3,7 +3,7 @@
   "content": "Recovery phrase",
   "content_en_sha1_hash": "33d2fd77b6fd28611bb5a0eceaad2cb681947209",
   "created_at": "2026-11-13T10:17:43.563Z",
-  "updated_at": "2026-11-13T10:19:02.284Z",
+  "updated_at": "2026-11-19T16:14:54.122Z",
   "comment": {
     "text": "Title of the dialog that shows the newly generated 24-word recovery phrase of an encryption key (private rooms), with buttons to copy or download it. Noun phrase, not an instruction. Must stay short: the dialog header is a single line of about 28 Latin characters and longer text is cut off with an ellipsis.",
     "is_auto": true,
@@ -12,9 +12,21 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 398,
+      "context": "</div>\n {/* Spec: private-rooms/key-management, \"Recovery phrase has a block of its own in Keys management\" */}\n {recover.available ? (\n <div className={styles.recoverySection} data-testid=\"recovery_section\">\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Common:RecoveryPhraseTitle\")}\n </Text>\n <Text as=\"p\" className={styles.recoveryText}>\n {t(\"Common:RecoveryPhraseSectionText\")}\n </Text>\n <Link",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
+      "line_number": 144,
+      "context": ");\n \n const title = {\n explanation: t(\"Common:GenerateNewKey\"),\n passphrase: t(\"Common:CreatePassphrase\"),\n recovery: t(\"Common:RecoveryPhraseTitle\"),\n }[step];\n \n const confirmMismatch =\n !!confirmPassphrase && passphrase !== confirmPassphrase;\n const announcedError =",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 179,
-      "context": "aria-labelledby={titleId}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n <span id={titleId}>{t(\"Common:RecoveryPhraseTitle\")}</span>\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>",
+      "line_number": 105,
+      "context": "isLoading={!ready}\n autoMaxHeight\n isLarge\n >\n <ModalDialog.Header>\n <span id={titleId}>{t(\"Common:RecoveryPhraseTitle\")}</span>\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <RecoveryPhraseContent\n mnemonic={mnemonic}",
       "module": "/packages/shared"
     }
   ],

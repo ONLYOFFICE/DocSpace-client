@@ -18,6 +18,7 @@ const mocks = vi.hoisted(() => {
     },
     writtenAt: null as number | null,
     passkeyAvailable: false,
+    passkeyEnrolled: false,
     generate: flow(),
     importFlow: { ...flow(), fileInput: null },
     recover: { ...flow(), available: true },
@@ -27,6 +28,7 @@ const mocks = vi.hoisted(() => {
     exportFlow: flow(),
     rotate: flow(),
     toastSuccess: vi.fn(),
+    toastError: vi.fn(),
     getEncryptionKeys: vi.fn(),
   };
 });
@@ -39,9 +41,12 @@ vi.mock("@docspace/shared/services/encryption/device-unlock-store", () => ({
   forgetDeviceUnlock: vi.fn(async () => {}),
   getDeviceUnlockWrittenAt: vi.fn(async () => mocks.writtenAt),
 }));
+vi.mock("@docspace/shared/services/encryption/lock-broadcast", () => ({
+  broadcastLock: vi.fn(),
+}));
 vi.mock("@docspace/shared/services/encryption/passkey-unlock", () => ({
   isPasskeyUnlockAvailable: vi.fn(async () => mocks.passkeyAvailable),
-  hasPasskeyUnlock: vi.fn(async () => false),
+  hasPasskeyUnlock: vi.fn(async () => mocks.passkeyEnrolled),
   enrollPasskeyUnlock: vi.fn(),
   removePasskeyUnlock: vi.fn(async () => {}),
 }));
@@ -49,11 +54,21 @@ vi.mock("@docspace/shared/api/privacy", () => ({
   getEncryptionKeys: mocks.getEncryptionKeys,
 }));
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
-  toastr: { success: mocks.toastSuccess, error: vi.fn() },
+  toastr: { success: mocks.toastSuccess, error: mocks.toastError },
 }));
 vi.mock("../KeysList", () => ({
-  KeysList: ({ keyState }: { keyState?: string }) => (
-    <div data-testid="keys_list" data-key-state={keyState ?? "none"} />
+  KeysList: ({
+    keyState,
+    keys,
+  }: {
+    keyState?: string;
+    keys: unknown[] | null;
+  }) => (
+    <div
+      data-testid="keys_list"
+      data-key-state={keyState ?? "none"}
+      data-keys={keys === null ? "unknown" : String(keys.length)}
+    />
   ),
 }));
 vi.mock("@docspace/shared/dialogs/key-generation", () => ({
@@ -80,6 +95,13 @@ vi.mock("../flows/useRotatePassphraseFlow", () => ({
 vi.mock("../flows/useResetKeysFlow", () => ({
   useResetKeysFlow: () => mocks.reset,
 }));
+
+import { forgetDeviceUnlock } from "@docspace/shared/services/encryption/device-unlock-store";
+import { broadcastLock } from "@docspace/shared/services/encryption/lock-broadcast";
+import {
+  enrollPasskeyUnlock,
+  removePasskeyUnlock,
+} from "@docspace/shared/services/encryption/passkey-unlock";
 
 import KeysManagement from "../KeysManagement";
 
@@ -112,6 +134,8 @@ beforeEach(() => {
   mocks.encryption.isUnlocked = true;
   mocks.writtenAt = null;
   mocks.passkeyAvailable = false;
+  mocks.passkeyEnrolled = false;
+  mocks.encryption.getIdentity.mockReset();
   mocks.recover.available = true;
   mocks.getEncryptionKeys.mockResolvedValue([]);
 });
@@ -171,6 +195,71 @@ describe("KeysManagement", () => {
     });
 
     expect(toggle).not.toBeChecked();
+  });
+
+  describe("Passkey unlock", () => {
+    const passkeyToggle = () =>
+      screen.findByRole("checkbox", { name: "Common:PasskeyUnlockLabel" });
+
+    it("Enrol", async () => {
+      const user = userEvent.setup();
+      const identity = { userId: "user-1" };
+      mocks.passkeyAvailable = true;
+      mocks.encryption.getIdentity.mockReturnValue(identity);
+      vi.mocked(enrollPasskeyUnlock).mockResolvedValueOnce("ok");
+      renderPage([KEY]);
+
+      await user.click(await passkeyToggle());
+
+      await waitFor(() =>
+        expect(mocks.toastSuccess).toHaveBeenCalledWith("Common:PasskeyEnabled"),
+      );
+      expect(enrollPasskeyUnlock).toHaveBeenCalledWith(
+        "user-1",
+        "pub",
+        identity,
+        expect.objectContaining({ userName: "user@example.com" }),
+      );
+      expect(await passkeyToggle()).toBeChecked();
+    });
+
+    it("Enrol fails", async () => {
+      const user = userEvent.setup();
+      mocks.passkeyAvailable = true;
+      mocks.encryption.getIdentity.mockReturnValue({ userId: "user-1" });
+      vi.mocked(enrollPasskeyUnlock).mockResolvedValueOnce("failed");
+      renderPage([KEY]);
+
+      await user.click(await passkeyToggle());
+
+      await waitFor(() =>
+        expect(mocks.toastError).toHaveBeenCalledWith(
+          "Common:PasskeyEnrollFailed",
+        ),
+      );
+      expect(mocks.toastSuccess).not.toHaveBeenCalled();
+      expect(await passkeyToggle()).not.toBeChecked();
+    });
+
+    it("Remove", async () => {
+      const user = userEvent.setup();
+      mocks.passkeyAvailable = true;
+      mocks.passkeyEnrolled = true;
+      renderPage([KEY]);
+      const toggle = await passkeyToggle();
+      await waitFor(() => expect(toggle).toBeChecked());
+
+      await user.click(toggle);
+
+      await waitFor(() =>
+        expect(mocks.toastSuccess).toHaveBeenCalledWith(
+          "Common:PasskeyDisabled",
+        ),
+      );
+      expect(removePasskeyUnlock).toHaveBeenCalledWith("user-1");
+      expect(enrollPasskeyUnlock).not.toHaveBeenCalled();
+      expect(await passkeyToggle()).not.toBeChecked();
+    });
   });
 
   it("Device section", async () => {
@@ -233,6 +322,75 @@ describe("KeysManagement", () => {
     expect(
       screen.queryByRole("button", { name: "Common:LockNow" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("Remembered until right after the unlock", async () => {
+    const userStore = {
+      encryptionKeys: [KEY],
+      setUserEncryptionKeys: vi.fn(),
+      user: { id: "user-1", email: "user@example.com" },
+    };
+    // The mocked context is not reactive: a changed prop stands in for the
+    // update the encryption provider sends on the unlock.
+    const page = (tick: number) => (
+      <Provider userStore={userStore}>
+        <KeysManagement {...({ tick } as object)} />
+      </Provider>
+    );
+    mocks.encryption.isUnlocked = false;
+    const view = render(page(0));
+    expect(
+      screen.queryByText("Common:DeviceUnlockRememberedUntil"),
+    ).not.toBeInTheDocument();
+
+    // The provider reports the unlock once the record is written.
+    mocks.writtenAt = Date.now();
+    mocks.encryption.isUnlocked = true;
+    view.rerender(page(1));
+
+    expect(
+      await screen.findByText("Common:DeviceUnlockRememberedUntil"),
+    ).toBeInTheDocument();
+  });
+
+  it("Forget device", async () => {
+    const user = userEvent.setup();
+    mocks.encryption.isUnlocked = false;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+    await screen.findByText("Common:DeviceUnlockRememberedUntil");
+
+    await user.click(action("Common:ForgetDeviceButton"));
+
+    await waitFor(() =>
+      expect(mocks.toastSuccess).toHaveBeenCalledWith(
+        "Common:DeviceUnlockForgotten",
+      ),
+    );
+    expect(
+      screen.queryByText("Common:DeviceUnlockRememberedUntil"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("Forget device in another tab", async () => {
+    const user = userEvent.setup();
+    const order: string[] = [];
+    vi.mocked(forgetDeviceUnlock).mockImplementationOnce(async () => {
+      order.push("forget");
+    });
+    vi.mocked(broadcastLock).mockImplementationOnce(() => {
+      order.push("lock");
+    });
+    mocks.encryption.isUnlocked = false;
+    mocks.writtenAt = Date.now();
+    renderPage([KEY]);
+
+    await user.click(
+      await screen.findByRole("button", { name: "Common:ForgetDeviceButton" }),
+    );
+
+    await waitFor(() => expect(broadcastLock).toHaveBeenCalledWith("user-1"));
+    expect(order).toEqual(["forget", "lock"]);
   });
 });
 
@@ -349,6 +507,36 @@ describe("Recovery phrase has a block of its own in Keys management", () => {
     renderPage([KEY]);
 
     expect(screen.queryByTestId("recovery_section")).toBeNull();
+  });
+});
+
+describe("An unknown key list is not shown as no key", () => {
+  it("List loading", () => {
+    mocks.getEncryptionKeys.mockReturnValue(new Promise(() => {}));
+    renderPage(null);
+
+    expect(screen.getByTestId("keys_list")).toHaveAttribute(
+      "data-keys",
+      "unknown",
+    );
+  });
+
+  it("List failed", async () => {
+    mocks.getEncryptionKeys.mockRejectedValue(new Error("Network Error"));
+    renderPage(null);
+
+    expect(
+      await screen.findByText("Common:EncryptionKeysLoadFailed"),
+    ).toBeInTheDocument();
+    expect(action("Common:TryAgain")).toBeInTheDocument();
+    expect(screen.queryByTestId("keys_list")).not.toBeInTheDocument();
+  });
+
+  it("List empty", () => {
+    renderPage([]);
+
+    expect(screen.getByTestId("keys_list")).toHaveAttribute("data-keys", "0");
+    expect(action("Common:GenerateNewKey")).toBeInTheDocument();
   });
 });
 

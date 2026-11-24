@@ -955,15 +955,38 @@ export type RootOptions = {
    * guest, so a spec signed in as one passes `false`. Defaults to `true`.
    */
   withAiHub?: boolean;
+  /**
+   * The AI projects the caller pinned, which the "AI rooms" root lists in
+   * `folders` whatever `count` asks for, with `total` and `count` set to
+   * their number (FoldersControllerCommon.GetRootFoldersAsync). A function
+   * is read on every request, for a spec that pins or unpins. Defaults to
+   * none.
+   */
+  pinnedAiProjects?: unknown[] | (() => unknown[]);
 };
 
 export const rootResolve = ({
   withAiHub = true,
   withPrivateRoot = true,
   privateRootNew = 0,
+  pinnedAiProjects = [],
 }: RootOptions = {}): Response => {
+  const pinned =
+    typeof pinnedAiProjects === "function"
+      ? pinnedAiProjects()
+      : pinnedAiProjects;
   const roots = withAiHub
-    ? successRoot.response
+    ? successRoot.response.map((root) =>
+        root.current.rootFolderType === AI_HUB_FOLDER_TYPE
+          ? {
+              ...root,
+              folders: pinned as never[],
+              startIndex: 0,
+              count: pinned.length,
+              total: pinned.length,
+            }
+          : root,
+      )
     : successRoot.response.filter(
         (root) => root.current.rootFolderType !== AI_HUB_FOLDER_TYPE,
       );

@@ -159,6 +159,43 @@ test.describe("Private rooms with the E2E rooms app off", () => {
     await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 });
   });
 
+  test("App switched on", async ({ page, mockRequest, wsMock, baseUrl }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+    );
+    await wsMock.setupWebSocketMock();
+    mockRequest.use(
+      privateRoomListHandler(TEST_PORT, {
+        roomId: 9700,
+        title: "Existing Private Room",
+        ordinaryRooms: [{ roomId: 9701, title: "Ordinary Room" }],
+      }),
+    );
+    await page.goto(`${baseUrl}${ROOMS_URL}filter`);
+    await expect(roomLink(page, "Ordinary Room")).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(navItem(page, "private-rooms")).toHaveCount(0);
+
+    // The server lists the Private root once the app is on.
+    mockRequest.use(
+      rootHandler(TEST_PORT, { privateRootNew: 2 }),
+      appsHandler(TEST_PORT),
+    );
+    wsMock.emitSocketEvent("s:change-app-enabled", {
+      id: "e2e-rooms",
+      enabled: true,
+    } as never);
+
+    const item = navItem(page, "private-rooms").locator(
+      "xpath=ancestor::li[1]",
+    );
+    await expect(item.locator(".new-items")).toHaveText("2", {
+      timeout: 15000,
+    });
+    wsMock.closeConnection();
+  });
+
   test("Browser-local flag ignored", async ({ page, mockRequest, baseUrl }) => {
     mockRequest.use(roomListHandler(TEST_PORT, TypeRoomList.IsDefault));
 

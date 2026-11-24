@@ -187,6 +187,37 @@ test.describe("Profile > Keys Management", () => {
     expect(keysHandle.getKeys()).toHaveLength(1);
   });
 
+  for (const [script, passphrase] of [
+    ["Cyrillic, 16 characters", "абвгдеёжзийклмно"],
+    ["CJK, 12 characters", "春眠不觉晓处处闻啼鸟夜来"],
+  ] as const) {
+    test(`Passphrase in another script: ${script}`, async ({
+      page,
+      mockRequest,
+      baseUrl,
+    }) => {
+      test.slow();
+      const { keysHandle } = await bootstrapEncryption(
+        page,
+        mockRequest,
+        baseUrl,
+        {
+          passphrase,
+          onPassphraseStep: async (dialog) => {
+            const strength = dialog.getByTestId("passphrase_strength");
+            await expect(strength).toBeVisible();
+            await expect(strength).not.toContainText("Weak");
+            await expect(
+              dialog.getByRole("button", { name: "Continue" }),
+            ).toBeEnabled();
+          },
+        },
+      );
+
+      expect(keysHandle.getKeys()).toHaveLength(1);
+    });
+  }
+
   test("cancel passphrase modal does NOT upload anything", async ({
     page,
     mockRequest,
@@ -532,6 +563,24 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     await expect(words).toBeVisible({ timeout: 5_000 });
     return words;
   };
+
+  test("Dark theme", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await openRecoveryStep(page, baseUrl);
+
+    const colours = await page
+      .getByTestId("recovery_save_icon")
+      .evaluateAll((icons) =>
+        icons.map((icon) => {
+          const action = icon.closest("button") as HTMLElement;
+          action.style.color = "rgb(1, 2, 3)";
+          return getComputedStyle(icon.querySelector("path") as SVGPathElement)
+            .fill;
+        }),
+      );
+
+    expect(colours).toEqual(Array(3).fill("rgb(1, 2, 3)"));
+  });
 
   const tileBoxes = async (words: Locator) =>
     words.getByRole("listitem").evaluateAll((items) =>

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef, useId } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { withoutInjected } from "SRC_DIR/helpers/injected";
@@ -68,6 +68,7 @@ import styles from "./TemplateAccessSettingsPanel.module.scss";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type TemplateAccessSettingsContainer =
 	| {
@@ -122,6 +123,7 @@ const TemplateAccessSettingsPanel = ({
 	templateIsAvailable,
 	setTemplateIsAvailable,
 }: TemplateAccessSettingsPanelProps) => {
+	const availableToggleId = useId();
 	const [accessItems, setAccessItems] = useState<TSelectorItem[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -347,12 +349,13 @@ const TemplateAccessSettingsPanel = ({
 							fontSize="16px"
 							fontWeight={700}
 						>
-							{t("Files:TemplateAvailable")}
+							<ControlCaption htmlFor={`${availableToggleId}-panel`}>{t("Files:TemplateAvailable")}</ControlCaption>
 
 							<ToggleButton
 								className={`invite-via-link ${styles.toggleButton}`}
 								isChecked={isAvailable}
 								onChange={onAvailableChange}
+								inputId={`${availableToggleId}-panel`}
 								dataTestId="template_access_settings_available"
 							/>
 						</Heading>
@@ -448,12 +451,13 @@ const TemplateAccessSettingsPanel = ({
 							fontSize="16px"
 							fontWeight={700}
 						>
-							{t("Files:TemplateAvailable")}
+							<ControlCaption htmlFor={`${availableToggleId}-modal`}>{t("Files:TemplateAvailable")}</ControlCaption>
 
 							<ToggleButton
 								className={`invite-via-link ${styles.toggleButton}`}
 								isChecked={isAvailable}
 								onChange={onAvailableChange}
+								inputId={`${availableToggleId}-modal`}
 								dataTestId="template_access_settings_modal_available"
 							/>
 						</Heading>

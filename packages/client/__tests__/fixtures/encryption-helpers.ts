@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import {
   privacyroomKeysHandlers,
   type PrivacyroomHandlerHandle,
@@ -49,6 +49,8 @@ export type BootstrapResult = {
 
 export type BootstrapOptions = {
   passphrase?: string;
+  /** Runs on the passphrase step once both fields are filled, before Continue. */
+  onPassphraseStep?: (dialog: Locator) => Promise<void>;
 };
 
 // Must satisfy the rules of a new passphrase (PASSPHRASE_SETTINGS): at
@@ -96,6 +98,10 @@ export async function bootstrapEncryption(
 
   const confirmInput = page.getByLabel("Confirm passphrase", { exact: true });
   await confirmInput.fill(passphrase);
+
+  await options.onPassphraseStep?.(
+    page.getByRole("dialog", { name: "Create passphrase" }),
+  );
 
   await page
     .getByRole("dialog")

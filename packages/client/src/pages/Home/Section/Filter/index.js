@@ -89,6 +89,7 @@ import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { createGroup } from "SRC_DIR/helpers/contacts";
 import { getSectionCreateButton } from "SRC_DIR/helpers/getSectionCreateButton";
+import { getAiWorkspaceListType } from "SRC_DIR/helpers/aiWorkspace";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -101,6 +102,7 @@ import { isMetadataRootSupported } from "@docspace/shared/utils/metadata";
 
 import { useContactsFilter } from "./useContacts";
 import MetadataFilterSection from "./MetadataFilter";
+import AgentCategories from "./AgentCategories";
 import {
   METADATA_FILTER_GROUP,
   addMetadataGroup,
@@ -172,6 +174,7 @@ const SectionFilterContent = ({
 
   getSelectedFolder,
   selectedFolderId,
+  selectedFolderRoomType,
 
   getFolderModel,
   getContactsModel,
@@ -258,8 +261,10 @@ const SectionFilterContent = ({
     isContactsGuestsPage,
     isRoomsFolder,
     isAiHubFolder,
+    search: location.search,
     isFormsSection,
     isFormsFolder,
+    isKnowledgeBase: selectedFolderRoomType === RoomsType.KnowledgeRoom,
     selectedFolderId,
     getFolderModel,
     getContactsModel,
@@ -506,6 +511,12 @@ const SectionFilterContent = ({
       const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
       newFilter.groupId = getPinnedGroupId() ?? null;
+      // A list of the AI Chat section is its rooms narrowed to one room
+      // type, which is the list itself and not a filter to clear: without
+      // it the Skill sets would turn into every room of the section.
+      if (roomsFilter.searchArea === RoomSearchArea.AiHub) {
+        newFilter.type = [String(getAiWorkspaceListType(location.search))];
+      }
 
       const path = getRoomsListBasePath(roomsFilter.searchArea);
 
@@ -532,6 +543,7 @@ const SectionFilterContent = ({
     isContactsPage,
 
     location.pathname,
+    location.search,
   ]);
 
   const onSearch = React.useCallback(
@@ -1615,7 +1627,8 @@ const SectionFilterContent = ({
     commonOptions.push(name);
 
     if (isRooms) {
-      commonOptions.push(roomType);
+      // Each list of the AI Chat section holds one room type: no Type sort.
+      if (!isAiHubFolder) commonOptions.push(roomType);
       commonOptions.push(tags);
       commonOptions.push(owner);
       commonOptions.push(activityDate);
@@ -1637,6 +1650,7 @@ const SectionFilterContent = ({
     return commonOptions;
   }, [
     isRooms,
+    isAiHubFolder,
     isContactsPage,
 
     t,
@@ -1876,7 +1890,19 @@ const SectionFilterContent = ({
     />
   );
 
-  return filterInput;
+  // The Agents list draws its category row under the filter.
+  const isAgentsList =
+    isAiHubFolder &&
+    getAiWorkspaceListType(location.search) === RoomsType.AiProjectRoom;
+
+  if (!isAgentsList) return filterInput;
+
+  return (
+    <>
+      {filterInput}
+      <AgentCategories />
+    </>
+  );
 };
 
 export default inject(
@@ -1952,6 +1978,7 @@ export default inject(
       isIndexedFolder,
       getSelectedFolder,
       id: selectedFolderId,
+      roomType: selectedFolderRoomType,
     } = selectedFolderStore;
     const { getFolderModel, onCreateRoom } = contextOptionsStore;
 
@@ -1992,6 +2019,7 @@ export default inject(
       isVisitor: user?.isVisitor,
       getSelectedFolder,
       selectedFolderId,
+      selectedFolderRoomType,
 
       getFolderModel,
       getContactsModel,

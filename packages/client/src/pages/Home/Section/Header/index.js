@@ -174,6 +174,7 @@ const SectionHeaderContent = (props) => {
     isEmptyPage,
     isGroupsEmpty,
     groupsIsFiltered,
+    roomsFilterGroupId,
 
     isLoading,
 
@@ -505,8 +506,10 @@ const SectionHeaderContent = (props) => {
     return onCreateRoom();
   }, [isContactsGroupsPage, onCreateRoom]);
 
+  const isEmptyRoomGroup =
+    isEmptyPage && !!roomsFilterGroupId && (isRoomsFolder || isFormsSection);
   const isPlusButtonVisible =
-    (isEmptyPage && !isContactsPage) ||
+    (isEmptyPage && !isContactsPage && !isEmptyRoomGroup) ||
     (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {
@@ -1538,6 +1541,7 @@ export default inject(
       isCollaborator,
       isVisitor,
       isEmptyPage,
+      roomsFilterGroupId: filesStore.roomsFilter?.groupId,
       isGroupsEmpty: groups?.length === 0,
       groupsIsFiltered,
       categoryType,

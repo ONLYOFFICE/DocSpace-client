@@ -411,8 +411,12 @@ const PureHome = observer((props) => {
     isProfile,
     isSettingsPage,
   });
+  const isEmptyRoomGroup =
+    isEmptyPage && !!roomsFilterGroupId && (isRoomsFolder || isFormsSection);
   const showQuickActions =
-    quickActionsEnabled && quickActions.show && !isEmptyPage;
+    quickActionsEnabled &&
+    quickActions.show &&
+    (!isEmptyPage || isEmptyRoomGroup);
 
   const onHideQuickActions = useHideQuickActions({ t, setShowQuickActions });
 

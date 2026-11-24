@@ -36,7 +36,7 @@
 
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { FolderType, ShareAccessRights } from "../../../enums";
+import { FolderType, RoomsType, ShareAccessRights } from "../../../enums";
 import type { TFile, TFileLink, TFolder } from "../../../api/files/types";
 import type { TRoom } from "../../../api/rooms/types";
 import {
@@ -46,7 +46,9 @@ import {
 } from "../../encryption/link-key";
 import {
   canManagePrivateLinks,
+  canManagePrivateRoomLinks,
   createPrivateItemLink,
+  getPrivateLinkAddress,
   editPrivateItemLink,
   getPrivateLinkNeed,
   revokePrivateItemLink,
@@ -111,6 +113,27 @@ describe("canManagePrivateLinks", () => {
   });
 });
 
+describe("canManagePrivateRoomLinks", () => {
+  const room = (roomType: RoomsType) =>
+    ({
+      private: true,
+      security: { EditAccess: true },
+      rootFolderType: FolderType.Rooms,
+      roomType,
+    }) as unknown as TRoom;
+
+  it("Members view", () => {
+    expect(canManagePrivateRoomLinks(room(RoomsType.CustomRoom))).toBe(true);
+  });
+
+  it("Room of a type without room links", () => {
+    expect(canManagePrivateRoomLinks(room(RoomsType.EditingRoom))).toBe(false);
+    expect(canManagePrivateRoomLinks(room(RoomsType.VirtualDataRoom))).toBe(
+      false,
+    );
+  });
+});
+
 describe("getPrivateLinkNeed", () => {
   it("Link to a folder or a room without a password", () => {
     expect(getPrivateLinkNeed(folder, { expirationDate: "2030-01-01" })).toBe(
@@ -151,6 +174,8 @@ describe("createPrivateItemLink", () => {
 
     // The address carries the secret after `#`, and the secret opens what
     // the server was sent.
+    // The address is kept for the page, and dropped with the link.
+    expect(getPrivateLinkAddress("link-1")).toBe(made!.address);
     const [address, secret] = made!.address.split("#");
     expect(address).toBe(SHORT);
     expect(isLinkSecret(secret)).toBe(true);
@@ -212,9 +237,15 @@ describe("links that exist", () => {
   });
 
   it("Link revoked", async () => {
+    await createPrivateItemLink(file, "u-1");
+    setPrivateItemLink.mockClear();
+    expect(getPrivateLinkAddress("link-1")).toBeDefined();
+    await revokePrivateItemLink(file, stored("link-1"));
+    expect(getPrivateLinkAddress("link-1")).toBeUndefined();
+
     await revokePrivateItemLink(folder, stored("link-2"));
 
-    expect(setPrivateItemLink).toHaveBeenCalledWith(
+    expect(setPrivateItemLink).toHaveBeenLastCalledWith(
       { folderId: 18 },
       { linkId: "link-2", access: ShareAccessRights.None },
     );

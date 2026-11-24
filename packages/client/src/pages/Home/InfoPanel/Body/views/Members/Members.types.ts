@@ -97,6 +97,9 @@ export type MembersProps = {
   isPublicRoom?: boolean;
   isCustomRoom?: boolean;
 
+  setLinkParams?: DialogsStore["setLinkParams"];
+  setEditLinkPanelIsVisible?: DialogsStore["setEditLinkPanelIsVisible"];
+
   primaryLink?: PublicRoomStore["primaryLink"];
   additionalLinks?: PublicRoomStore["additionalLinks"];
   hasExternalLinks?: boolean;
@@ -177,6 +180,7 @@ export type LinkRowProps = {
   isCustomRoom: boolean;
   setExternalLink?: PublicRoomStore["setExternalLink"];
   deleteExternalLink?: PublicRoomStore["deleteExternalLink"];
+  selfId?: string;
 };
 
 export type UseMembersProps = {

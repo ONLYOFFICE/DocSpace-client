@@ -54,11 +54,12 @@ import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
 import {
   PRIVATE_ITEM_LINKS_LIMIT,
+  PRIVATE_LINK_RIGHTS,
   createPrivateItemLink,
+  getPrivateLinkAddress,
   editPrivateItemLink,
   revokePrivateItemLink,
 } from "../../../services/private-room/private-links";
-import type { TAvailableShareRights } from "../../../types";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
 
 import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
@@ -75,13 +76,6 @@ import { RevokePrivateLinkDialog } from "../sub-components/RevokePrivateLinkDial
 import styles from "../Share.module.scss";
 import { copyShareLink, evenPrimaryLink } from "../Share.helpers";
 import type { AccessItem, TLink, UseShareProps } from "../Share.types";
-
-// A link of a private item reads only (the server refuses any other access),
-// whatever rights the entry reports: a folder of a private room lists them all.
-const PRIVATE_LINK_RIGHTS = {
-  ExternalLink: ["Read"],
-  PrimaryExternalLink: ["Read"],
-} as TAvailableShareRights;
 
 export const useShare = ({
   setView,
@@ -123,12 +117,6 @@ export const useShare = ({
   // room's links is decided by the room (`canManagePrivateLinks`).
   const hideSharePanel = !infoPanelSelection?.canShare && !privateLinks;
 
-  // The addresses of the private links made while the panel is mounted, by
-  // link id. The secret after `#` exists nowhere else.
-  // shortcut: the address of a link can be copied only by who made it, until
-  // the page is left; the owner and the managers get it back once the server
-  // stores the wraps of a link's secret (private-rooms-external-links 3.4).
-  const privateAddresses = useRef(new Map<string, string>());
   const [linkToRevoke, setLinkToRevoke] = useState<TFileLink | null>(null);
 
   const showError = (error: unknown) => {
@@ -140,7 +128,7 @@ export const useShare = ({
   };
 
   const copyPrivateLink = async (link: TFileLink) => {
-    const address = privateAddresses.current.get(String(link.sharedTo.id));
+    const address = getPrivateLinkAddress(link.sharedTo.id);
     if (!address) return;
 
     await copyShareLink(
@@ -222,11 +210,8 @@ export const useShare = ({
         link: { sharedTo: { primary } } as TFileLink,
         item: infoPanelSelection,
         privateLinkUserId: selfId,
-        updateLink: (newLink: TFileLink, address?: string) => {
-          if (!mountedRef.current) return;
-          if (address)
-            privateAddresses.current.set(String(newLink.sharedTo.id), address);
-          setFileLinks((links) => [...links, newLink]);
+        updateLink: (newLink: TFileLink) => {
+          if (mountedRef.current) setFileLinks((links) => [...links, newLink]);
         },
       });
       return false;
@@ -250,7 +235,6 @@ export const useShare = ({
         return false;
       }
 
-      privateAddresses.current.set(String(made.link.sharedTo.id), made.address);
       setFileLinks((links) =>
         links.map((link) =>
           "isLoaded" in link && link.isLoaded ? made.link : link,
@@ -405,7 +389,6 @@ export const useShare = ({
 
     try {
       await revokePrivateItemLink(infoPanelSelection, linkToRevoke);
-      privateAddresses.current.delete(String(linkToRevoke.sharedTo.id));
       deleteLink(linkToRevoke.sharedTo.id);
       toastr.success(t("Common:LinkRemoved"));
     } catch (error) {
@@ -650,7 +633,7 @@ export const useShare = ({
   };
 
   const canCopyPrivateLink = (link: TFileLink) =>
-    privateAddresses.current.has(String(link.sharedTo.id));
+    !!getPrivateLinkAddress(link.sharedTo.id);
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
     // No embedding of a private item, and no address without its secret.

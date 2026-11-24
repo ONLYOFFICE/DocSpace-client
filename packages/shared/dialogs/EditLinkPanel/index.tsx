@@ -392,7 +392,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         // The unlock was dismissed: the panel stays, with what was entered.
         if (!made) return null;
 
-        updateLink?.(made.link, made.address);
+        updateLink?.(made.link);
         copyShareLink(
           item,
           {

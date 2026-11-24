@@ -78,7 +78,7 @@ export type EditLinkPanelProps = ExternalLinkType & {
   withBackButton?: boolean;
 
   onClose?: VoidFunction;
-  updateLink?: (link: TFileLink, address?: string) => void;
+  updateLink?: (link: TFileLink) => void;
   isExternalShareRestricted?: boolean;
   /**
    * The id of the user, given for a link of a private item: the panel then

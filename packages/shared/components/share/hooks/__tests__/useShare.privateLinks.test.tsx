@@ -57,6 +57,7 @@ const links = vi.hoisted(() => ({
   create: vi.fn(),
   edit: vi.fn(),
   revoke: vi.fn(),
+  address: vi.fn(),
 }));
 
 vi.mock("../../Share.helpers", async (io) => ({
@@ -69,6 +70,7 @@ vi.mock("../../../../services/private-room/private-links", async (io) => ({
   createPrivateItemLink: links.create,
   editPrivateItemLink: links.edit,
   revokePrivateItemLink: links.revoke,
+  getPrivateLinkAddress: links.address,
 }));
 
 const SHORT = "https://portal.example/s/abc";
@@ -125,12 +127,14 @@ const Links = ({ props }: { props: UseShareProps }) => {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  links.address.mockReset();
 });
 
 describe("useShare: links of a private item", () => {
   it("Link to a file to view without a password", async () => {
     const made = link("1", { passwordRequired: false });
     links.create.mockResolvedValue({ link: made, address: `${SHORT}#secret` });
+    links.address.mockReturnValue(`${SHORT}#secret`);
     const props = propsOf({});
     render(<Links props={props} />);
 

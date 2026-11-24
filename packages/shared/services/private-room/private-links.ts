@@ -38,7 +38,8 @@ import { setPrivateItemLink } from "../../api/privacy";
 import type { TPrivateLinkTarget } from "../../api/privacy/types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 import type { TRoom } from "../../api/rooms/types";
-import { FolderType, ShareAccessRights } from "../../enums";
+import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
+import type { TAvailableShareRights } from "../../types";
 import { isFile, isRoom } from "../../utils/typeGuards";
 import { createLinkKey, generateLinkSecret } from "../encryption/link-key";
 import { requireUnlock } from "../encryption/secret-storage";
@@ -54,6 +55,31 @@ export const PRIVATE_FILE_LINK_DAYS = 7;
  * made (`FileSecurity.GetLinksSettings`), so the number is repeated here.
  */
 export const PRIVATE_ITEM_LINKS_LIMIT = 6;
+
+/**
+ * How many additional links a private Custom room holds next to its primary
+ * one (the same table of the server).
+ */
+export const PRIVATE_ROOM_ADDITIONAL_LINKS_LIMIT = 5;
+
+/**
+ * A link of a private item reads only (the server refuses any other access),
+ * whatever rights the entry reports: a folder of a private room lists them all.
+ */
+export const PRIVATE_LINK_RIGHTS = {
+  ExternalLink: ["Read"],
+  PrimaryExternalLink: ["Read"],
+} as TAvailableShareRights;
+
+// The addresses of the links made on this page, by link id. The secret after
+// `#` exists nowhere else.
+// shortcut: the address of a link can be copied only by who made it, until
+// the page is left; the owner and the managers get it back once the server
+// stores the wraps of a link's secret (private-rooms-external-links 3.4).
+const addresses = new Map<string, string>();
+
+export const getPrivateLinkAddress = (linkId: string | number) =>
+  addresses.get(String(linkId));
 
 export type TPrivateLinkOptions = {
   password?: string;
@@ -79,6 +105,21 @@ export const canManagePrivateLinks = (
   room.private === true &&
   room.security?.EditAccess === true &&
   room.rootFolderType !== FolderType.Archive;
+
+/**
+ * Whether the private room takes links to itself, which only a Custom room
+ * does: a Collaboration room and a Virtual Data Room have links to their
+ * files and folders only.
+ *
+ * Spec: private-rooms/room-membership, "External link of a private item keeps the link model of the portal"
+ */
+export const canManagePrivateRoomLinks = (
+  room:
+    | Pick<TRoom, "private" | "security" | "rootFolderType" | "roomType">
+    | null
+    | undefined,
+): boolean =>
+  canManagePrivateLinks(room) && room?.roomType === RoomsType.CustomRoom;
 
 /**
  * What a link of a private item lacks: a password, which a link to a folder
@@ -148,7 +189,10 @@ export async function createPrivateItemLink(
     ...material,
   });
 
-  return { link, address: `${link.sharedTo.shareLink}#${secret}` };
+  const address = `${link.sharedTo.shareLink}#${secret}`;
+  addresses.set(String(link.sharedTo.id), address);
+
+  return { link, address };
 }
 
 /**
@@ -166,11 +210,15 @@ export const editPrivateItemLink = (item: TPrivateLinkItem, link: TFileLink) =>
   });
 
 /** Spec: private-rooms/room-membership, "Revoking an external link" */
-export const revokePrivateItemLink = (
+export const revokePrivateItemLink = async (
   item: TPrivateLinkItem,
   link: TFileLink,
-) =>
-  setPrivateItemLink(getTarget(item), {
+) => {
+  const revoked = await setPrivateItemLink(getTarget(item), {
     linkId: String(link.sharedTo.id),
     access: ShareAccessRights.None,
   });
+  addresses.delete(String(link.sharedTo.id));
+
+  return revoked;
+};

@@ -311,6 +311,12 @@ seven days and its address copied; a revocation asks first and removes the
 link. The Share tab of a folder opens the link settings for a new link,
 with the password asked and no download ban, and the link is made with it.
 
+The Members tab of the room, as the room admin: the block of links with
+a control to create one; the link settings ask for the password, and the
+link is made, listed with its lock and copied; the revocation asks first
+and the room lists no link after it (`GET files/rooms/{id}/links`). The
+room reports no `shareSettings` either.
+
 To ask of the backend team: a right with the entry that says the caller
 manages its links, and the link settings (the limits) of an entry of a
 private room; the folder's `availableShareRights` narrowed to reading;

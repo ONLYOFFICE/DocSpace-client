@@ -53,7 +53,7 @@ export interface InjectedEditLinkPanelProps {
   visible: boolean;
   setIsVisible: (isVisible: boolean) => void;
 
-  updateLink?: (link: TFileLink, address?: string) => void;
+  updateLink?: (link: TFileLink) => void;
   setLinkParams: (linkParams: LinkParamsType | null) => void;
 
   setExternalLink: (link: TFileLink) => void;

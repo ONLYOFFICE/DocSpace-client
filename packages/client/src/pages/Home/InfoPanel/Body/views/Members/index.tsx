@@ -54,6 +54,11 @@ import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 import { createExternalLink } from "@docspace/shared/api/rooms";
+import {
+  PRIVATE_ROOM_ADDITIONAL_LINKS_LIMIT,
+  canManagePrivateRoomLinks,
+} from "@docspace/shared/services/private-room/private-links";
+import type { TFileLink } from "@docspace/shared/api/files/types";
 import MembersList from "@docspace/shared/components/share/sub-components/List";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
@@ -102,6 +107,8 @@ const Members = ({
   isExternalShareRestricted,
   defaultShareLinkInternal,
   hasExternalLinks,
+  setLinkParams,
+  setEditLinkPanelIsVisible,
 }: MembersProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -122,8 +129,24 @@ const Members = ({
     scrollToTop();
   }, [isMembersPanelUpdating, scrollToTop]);
 
+  const isPrivateRoom = infoPanelSelection?.private === true;
+
   const onAddNewLink = async () => {
     const roomId = infoPanelSelection!.id;
+
+    // A link to a private room needs a password, which the settings of the
+    // link ask for before it is made.
+    // Spec: private-rooms/room-membership, "A link without a password is limited to one file to view"
+    if (isPrivateRoom) {
+      setEditLinkPanelIsVisible!(true);
+      setLinkParams!({
+        link: { sharedTo: { primary: !primaryLink } } as TFileLink,
+        item: infoPanelSelection!,
+        privateLinkUserId: selfId,
+        updateLink: setExternalLink,
+      });
+      return;
+    }
 
     try {
       if (isPublicRoom || primaryLink) {
@@ -160,14 +183,18 @@ const Members = ({
   const getPublicRoomItems = () => {
     const publicRoomItems = [];
 
-    const countCanCreateLink = Math.max(
-      0,
-      (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
-        (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
-        1,
-    );
+    // A private room reports no link settings of its own.
+    const countCanCreateLink = isPrivateRoom
+      ? PRIVATE_ROOM_ADDITIONAL_LINKS_LIMIT
+      : Math.max(
+          0,
+          (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
+            (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
+            1,
+        );
 
     const canAddLink =
+      isPrivateRoom ||
       (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
     if (
@@ -486,8 +513,11 @@ export default inject(
       publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
-      dialogsStore;
+    const {
+      setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+    } = dialogsStore;
 
     const { id } = selectedFolderStore;
 
@@ -498,8 +528,12 @@ export default inject(
     const isCustomRoom = roomType === RoomsType.CustomRoom;
     const isPrivateRoom = !!infoPanelRoomSelection?.private;
 
-    const isPublicRoomType =
-      !isPrivateRoom && (isPublicRoom || isCustomRoom || isFormRoom);
+    // Spec: private-rooms/room-membership, "No public sharing for private rooms":
+    // a private room shows its links to who manages them, and only a Custom
+    // room has links to itself.
+    const isPublicRoomType = isPrivateRoom
+      ? canManagePrivateRoomLinks(infoPanelRoomSelection)
+      : isPublicRoom || isCustomRoom || isFormRoom;
 
     const { isRootFolder } = selectedFolderStore;
     const {
@@ -535,6 +569,8 @@ export default inject(
       isRootFolder,
       isExternalShareRestricted,
       defaultShareLinkInternal,
+      setLinkParams,
+      setEditLinkPanelIsVisible,
     };
   },
 )(observer(Members));

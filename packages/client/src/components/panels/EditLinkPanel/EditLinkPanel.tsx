@@ -104,8 +104,11 @@ export default inject<TStore>(
     const { item, updateLink } = linkParams ?? {};
     const linkId = linkParams?.link?.sharedTo?.id;
 
+    // A new link of a private room is not in the store yet: the panel gets
+    // what it was opened with.
     const link = isRoom(item)
-      ? externalLinks.find((l) => l?.sharedTo?.id === linkId)
+      ? (externalLinks.find((l) => l?.sharedTo?.id === linkId) ??
+        (linkParams?.privateLinkUserId ? linkParams.link : undefined))
       : linkParams?.link;
 
     const {

@@ -129,6 +129,8 @@ const members = (): TInfoPanelMembers =>
 const renderMembersOf = (room: TRoom) => {
   const setRemoveUserConfirmation = vi.fn();
   const changeUserRole = vi.fn(async () => {});
+  const setLinkParams = vi.fn();
+  const setEditLinkPanelIsVisible = vi.fn();
 
   render(
     <Provider
@@ -157,6 +159,8 @@ const renderMembersOf = (room: TRoom) => {
         setEditMembersGroup: vi.fn(),
         setEditGroupMembersDialogVisible: vi.fn(),
         setRemoveUserConfirmation,
+        setLinkParams,
+        setEditLinkPanelIsVisible,
       }}
       infoPanelStore={{
         infoPanelRoomSelection: room,
@@ -182,7 +186,12 @@ const renderMembersOf = (room: TRoom) => {
     </Provider>,
   );
 
-  return { setRemoveUserConfirmation, changeUserRole };
+  return {
+    setRemoveUserConfirmation,
+    changeUserRole,
+    setLinkParams,
+    setEditLinkPanelIsVisible,
+  };
 };
 
 describe("Members tab of a room selected in a list", () => {
@@ -202,12 +211,46 @@ describe("Members tab of a room selected in a list", () => {
   });
 
   it("Members view of a room selected in a list", () => {
-    renderMembersOf(listItemOf(privateRoomDto()));
+    const { setLinkParams, setEditLinkPanelIsVisible } = renderMembersOf(
+      listItemOf(privateRoomDto()),
+    );
+
+    expect(
+      screen.getByTestId("info_panel_members_links_block"),
+    ).toBeInTheDocument();
+
+    // A link to a room needs a password: the settings of the link ask for it.
+    fireEvent.click(
+      screen.getByTestId("info_panel_members_create_additional_link"),
+    );
+    expect(setEditLinkPanelIsVisible).toHaveBeenCalledWith(true);
+    expect(setLinkParams.mock.calls[0][0]).toMatchObject({
+      privateLinkUserId: "admin",
+      link: { sharedTo: { primary: true } },
+    });
+  });
+
+  it("Member who may not change the access", () => {
+    renderMembersOf(
+      listItemOf(
+        privateRoomDto({
+          security: { EditAccess: false, Read: true },
+        } as Partial<TRoom>),
+      ),
+    );
 
     expect(screen.queryByTestId("info_panel_members_links_block")).toBeNull();
     expect(
       screen.queryByTestId("info_panel_members_create_additional_link"),
     ).toBeNull();
+  });
+
+  it("Room of a type without room links", () => {
+    renderMembersOf(
+      listItemOf(privateRoomDto({ roomType: RoomsType.EditingRoom })),
+    );
+
+    expect(screen.queryByTestId("info_panel_members_links_block")).toBeNull();
   });
 
   it("Remove member of a room selected in a list", () => {

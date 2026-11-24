@@ -53,6 +53,13 @@ import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
+import { RevokePrivateLinkDialog } from "@docspace/shared/components/share/sub-components/RevokePrivateLinkDialog";
+import {
+  PRIVATE_LINK_RIGHTS,
+  editPrivateItemLink,
+  getPrivateLinkAddress,
+  revokePrivateItemLink,
+} from "@docspace/shared/services/private-room/private-links";
 
 import type { TFileLink } from "@docspace/shared/api/files/types";
 
@@ -78,9 +85,21 @@ const LinkRow = (props: LinkRowProps) => {
     isExternalShareRestricted,
     isLinkBlockedByAdmin,
     isLinkRestrictedByAdmin,
+    selfId,
   } = props;
 
-  const availableShareRights = item.availableShareRights;
+  // A link of a private room: it reads only, is neither embedded nor shown
+  // with its password, and is set without its key material.
+  // Spec: private-rooms/room-membership, "External link of a private item keeps the link model of the portal"
+  const isPrivateLink = item.private === true;
+  const privateAddress = isPrivateLink
+    ? getPrivateLinkAddress(link.sharedTo.id)
+    : undefined;
+  const [revokeVisible, setRevokeVisible] = useState(false);
+
+  const availableShareRights = isPrivateLink
+    ? PRIVATE_LINK_RIGHTS
+    : item.availableShareRights;
 
   const { t } = useTranslation(["Files", "Settings", "Translations"]);
 
@@ -100,8 +119,32 @@ const LinkRow = (props: LinkRowProps) => {
     setLinkParams?.({
       link,
       item,
+      privateLinkUserId: isPrivateLink ? selfId : undefined,
+      updateLink: isPrivateLink ? setExternalLink : undefined,
     });
     onCloseContextMenu();
+  };
+
+  const onCopyPrivateLink = () => {
+    if (!privateAddress) return;
+    copyShareLink(
+      item,
+      { ...link, sharedTo: { ...link.sharedTo, shareLink: privateAddress } },
+      t as TFunction,
+    );
+  };
+
+  const onRevokePrivateLink = async () => {
+    try {
+      await revokePrivateItemLink(item, link);
+      deleteExternalLink!(null, link.sharedTo.id);
+      toastr.success(t("Common:LinkRemoved"));
+    } catch (err: unknown) {
+      console.error(err);
+      toastr.error(err as Error);
+    } finally {
+      setRevokeVisible(false);
+    }
   };
 
   const onCopyPassword = () => {
@@ -144,6 +187,37 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const getData = () => {
+    if (isPrivateLink) {
+      return [
+        {
+          key: "edit-link-key",
+          label: t("Common:LinkSettings"),
+          icon: SettingsReactSvgUrl,
+          onClick: onEditLink,
+        },
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopySharedLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: onCopyPrivateLink,
+          disabled: isDisabled || !privateAddress,
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: t("Common:RevokeLink"),
+          icon: OutlineReactSvgUrl,
+          onClick: () => {
+            setRevokeVisible(true);
+            onCloseContextMenu();
+          },
+        },
+      ];
+    }
+
     const isRestrictedByAdmin = isLinkRestrictedByAdmin!(item, link);
 
     if (isRestrictedByAdmin) {
@@ -220,6 +294,11 @@ const LinkRow = (props: LinkRowProps) => {
     const startLoaderTime = new Date();
 
     try {
+      if (isPrivateLink) {
+        setExternalLink!(await editPrivateItemLink(item, newLink));
+        return;
+      }
+
       const linkData = await ShareLinkService.editLink(item, newLink);
       setExternalLink!(linkData);
       setLinkParams!({
@@ -251,6 +330,19 @@ const LinkRow = (props: LinkRowProps) => {
     link: TFileLink,
     isReactivate: boolean = false,
   ) => {
+    if (isPrivateLink) {
+      if (!isReactivate) return setRevokeVisible(true);
+
+      await editExternalLinkAction({
+        ...link,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: addToDate(now(), 7, "days")?.toISO() ?? null,
+        },
+      });
+      return;
+    }
+
     setLoadingLinks([link.sharedTo.id]);
 
     try {
@@ -302,6 +394,8 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyLink = (linkArg: TFileLink) => {
+    if (isPrivateLink) return onCopyPrivateLink();
+
     if (isLinkBlockedByAdmin!(item, linkArg)) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
       return;
@@ -310,22 +404,32 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   return (
-    <LinkRowComponent
-      isRoomsLink
-      links={[link]}
-      getData={getData}
-      onCopyLink={onCopyLink}
-      loadingLinks={loadingLinks}
-      isArchiveFolder={isArchiveFolder!}
-      isExternalShareRestricted={isExternalShareRestricted}
-      changeShareOption={changeShareOption}
-      onOpenContextMenu={onOpenContextMenu}
-      onCloseContextMenu={onCloseContextMenu}
-      removedExpiredLink={removedExpiredLink}
-      availableShareRights={availableShareRights}
-      onAccessRightsSelect={onAccessRightsSelect}
-      changeExpirationOption={changeExpirationOption}
-    />
+    <>
+      {isPrivateLink ? (
+        <RevokePrivateLinkDialog
+          visible={revokeVisible}
+          onConfirm={onRevokePrivateLink}
+          onClose={() => setRevokeVisible(false)}
+        />
+      ) : null}
+      <LinkRowComponent
+        canCopyLink={isPrivateLink ? () => !!privateAddress : undefined}
+        isRoomsLink
+        links={[link]}
+        getData={getData}
+        onCopyLink={onCopyLink}
+        loadingLinks={loadingLinks}
+        isArchiveFolder={isArchiveFolder!}
+        isExternalShareRestricted={isExternalShareRestricted}
+        changeShareOption={changeShareOption}
+        onOpenContextMenu={onOpenContextMenu}
+        onCloseContextMenu={onCloseContextMenu}
+        removedExpiredLink={removedExpiredLink}
+        availableShareRights={availableShareRights}
+        onAccessRightsSelect={onAccessRightsSelect}
+        changeExpirationOption={changeExpirationOption}
+      />
+    </>
   );
 };
 
@@ -337,6 +441,7 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
       infoPanelStore,
       publicRoomStore,
       filesSettingsStore,
+      userStore,
     },
     { item },
   ) => {
@@ -380,6 +485,7 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
       deleteExternalLink,
 
       setIsScrollLocked,
+      selfId: userStore.user?.id,
     };
   },
 )(observer(LinkRow));

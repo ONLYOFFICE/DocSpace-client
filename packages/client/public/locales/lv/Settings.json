@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Varat izveidot tikai trīs pielāgotus dizainus. Lai izveidotu jaunu dizainu, ir jāizdzēš viens no iepriekšējiem dizainiem.",
   "LinksBeforeRestriction": "Izvēlieties, kas notiks ar saitēm, kas izveidotas pirms ierobežojuma:",
   "LinkStopWorking": "Iepriekš izveidotās publiskās saites pārstās darboties.",
+  "LinksKeepWorking": "Iepriekš izveidotās publiskās saites darbojas, līdz tās tiek noņemtas.",
   "LoginHistoryCampaignHeader": "Nodrošiniet savu darbvietu",
   "LoginHistoryCampaignText": "Aizsargājiet savus datus un kontus no nesankcionētas piekļuves.",
   "LoginHistoryCampaignTitle": "Iespējot divu faktoru autentifikāciju, lai nodrošinātu darbvietas drošību",

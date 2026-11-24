@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Você só pode criar 3 temas personalizados. Para criar um novo, você deve excluir um dos temas anteriores.",
   "LinksBeforeRestriction": "Escolha o que acontece com os links criados antes da restrição:",
   "LinkStopWorking": "Os links públicos criados anteriormente deixarão de funcionar.",
+  "LinksKeepWorking": "Os links públicos criados anteriormente continuam funcionando até serem removidos.",
   "LoginHistoryCampaignHeader": "Proteja seu espaço de trabalho",
   "LoginHistoryCampaignText": "Proteja seus dados e contas contra acessos não autorizados.",
   "LoginHistoryCampaignTitle": "Habilitar autenticação de dois fatores para proteger seu espaço de trabalho",

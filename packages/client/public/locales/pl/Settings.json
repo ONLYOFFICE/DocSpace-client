@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Możesz utworzyć tylko 3 niestandardowe motywy. Aby utworzyć nowy, musisz usunąć jeden z poprzednich motywów.",
   "LinksBeforeRestriction": "Wybierz, co ma się stać z linkami utworzonymi przed wprowadzeniem ograniczenia:",
   "LinkStopWorking": "Wcześniej utworzone publiczne linki przestaną działać.",
+  "LinksKeepWorking": "Wcześniej utworzone linki publiczne działają, dopóki nie zostaną usunięte.",
   "LoginHistoryCampaignHeader": "Zabezpiecz swoją przestrzeń roboczą",
   "LoginHistoryCampaignText": "Chroń swoje dane i konta przed nieautoryzowanym dostępem.",
   "LoginHistoryCampaignTitle": "Włącz uwierzytelnianie dwuskładnikowe, aby zabezpieczyć swoją przestrzeń roboczą",

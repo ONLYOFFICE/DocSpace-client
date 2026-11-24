@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "U kunt slechts 3 aangepaste thema's maken. Om een nieuwe aan te maken, moet u een van de vorige thema's verwijderen.",
   "LinksBeforeRestriction": "Kies wat er gebeurt met links die zijn aangemaakt vóór de beperking:",
   "LinkStopWorking": "Eerder gemaakte openbare links werken niet meer.",
+  "LinksKeepWorking": "Eerder gemaakte openbare links blijven werken totdat ze worden verwijderd.",
   "LoginHistoryCampaignHeader": "Beveilig je werkruimte",
   "LoginHistoryCampaignText": "Bescherm uw gegevens en accounts tegen ongeautoriseerde toegang.",
   "LoginHistoryCampaignTitle": "Twee-factor authenticatie inschakelen om uw werkruimte te beveiligen",

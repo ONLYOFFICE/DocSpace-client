@@ -198,6 +198,7 @@
   "LimitThemesTooltip": "Môžete vytvoriť iba 3 vlastné témy. Ak chcete vytvoriť novú, musíte vymazať jednu z predchádzajúcich tém.",
   "LinksBeforeRestriction": "Vyberte, čo sa stane s prepojeniami vytvorenými pred zavedením obmedzenia:",
   "LinkStopWorking": "Predtým vytvorené verejné prepojenia prestanú fungovať.",
+  "LinksKeepWorking": "Predtým vytvorené verejné odkazy fungujú, kým nie sú odstránené.",
   "LoginHistoryCampaignHeader": "Zabezpečte si svoj pracovný priestor",
   "LoginHistoryCampaignText": "Chráňte svoje dáta a účty pred neoprávneným prístupom.",
   "LoginHistoryCampaignTitle": "Povoliť dvojfaktorové overenie na zabezpečenie vášho pracovného priestoru",

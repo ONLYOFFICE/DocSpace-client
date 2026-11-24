@@ -757,6 +757,7 @@
   "DeleteRoomsTitle": "Delete these rooms?",
   "DeleteRoomTitle": "Delete this room?",
   "DeleteRoomWarning": "I understand the consequences and want to delete the room",
+  "DeleteNamedTagConfirmation": "Deleting the tag <1>{{tagName}}</1> will remove it from all rooms where it is used.",
   "DeleteTag": "Delete tag",
   "DeleteTagCannotBeUndone": "This action cannot be undone.",
   "DeleteTagConfirmation": "Deleting this tag will remove it from all rooms where it is used.",

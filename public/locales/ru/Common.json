@@ -757,6 +757,7 @@
   "DeleteRoomsTitle": "Удалить эти комнаты?",
   "DeleteRoomTitle": "Удалить эту комнату?",
   "DeleteRoomWarning": "Я понимаю последствия и хочу удалить комнату",
+  "DeleteNamedTagConfirmation": "Тег <1>{{tagName}}</1> будет удалён из всех комнат, в которых он используется.",
   "DeleteTag": "Удалить тег",
   "DeleteTagCannotBeUndone": "Это действие нельзя отменить.",
   "DeleteTagConfirmation": "Удаление этого тега удалит его из всех комнат, в которых он используется.",

@@ -34,7 +34,7 @@
  */
 
 import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { Checkbox } from "@onlyoffice/apps-ui-kit/components/checkbox";
@@ -61,7 +61,7 @@ export const DeleteTagModal = ({
   onSubmit,
   isChecked,
   onCheckboxChange,
-  // tagName,
+  tagName,
   ref,
 }: DeleteTagModalProps) => {
   const { t } = useTranslation(["Common"]);
@@ -85,7 +85,16 @@ export const DeleteTagModal = ({
       <ModalDialog.Header>{t("Common:DeleteTag")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text className={styles.deleteTagModalText}>
-          {t("Common:DeleteTagConfirmation")}
+          {tagName ? (
+            <Trans
+              t={t}
+              i18nKey="Common:DeleteNamedTagConfirmation"
+              values={{ tagName }}
+              components={{ 1: <strong /> }}
+            />
+          ) : (
+            t("Common:DeleteTagConfirmation")
+          )}
         </Text>
         <Text className={styles.deleteTagModalText}>
           {t("Common:DeleteTagCannotBeUndone")}

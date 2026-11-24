@@ -1387,7 +1387,6 @@
   "KeyChangedLastSeen": "Last seen: {{date}}",
   "KeyChangedNewFingerprint": "New fingerprint",
   "KeyChangedReasonAttack": "Someone is attempting to impersonate the user. If you did not expect a key change, treat it as suspicious.",
-  "KeyChangedReasonRecovery": "The user restored their identity using a recovery phrase.",
   "KeyChangedReasonReplaced": "The user replaced their encryption key with a new one.",
   "KeyChangedReasonReset": "The user reset their encryption keys after forgetting their passphrase.",
   "KeyChangedRefuse": "Don't trust",

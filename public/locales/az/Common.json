@@ -1387,7 +1387,6 @@
   "KeyChangedLastSeen": "son görülmə: {{date}}",
   "KeyChangedNewFingerprint": "Yeni barmaq izi",
   "KeyChangedReasonAttack": "Kimsə istifadəçini saxtalaşdırmağa çalışır. Açar dəyişikliyini gözləmirdinizsə, onu şübhəli hesab edin.",
-  "KeyChangedReasonRecovery": "İstifadəçi bərpa ifadəsindən istifadə edərək şəxsiyyətini bərpa etdi.",
   "KeyChangedReasonReplaced": "İstifadəçi şifrələmə açarını yenisi ilə əvəz etdi.",
   "KeyChangedReasonReset": "İstifadəçi parolunu unutduqdan sonra şifrələmə açarlarını sıfırladı.",
   "KeyChangedRefuse": "Etibar etməyin",

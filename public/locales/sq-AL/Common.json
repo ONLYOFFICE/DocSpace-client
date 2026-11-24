@@ -1387,7 +1387,6 @@
   "KeyChangedLastSeen": "parë për herë të fundit: {{date}}",
   "KeyChangedNewFingerprint": "Gjurma dixhitale e re",
   "KeyChangedReasonAttack": "Dikush po përpiqet të imitojë përdoruesin. Nëse nuk prisnit një ndryshim çelësi, trajtojeni si të dyshimtë.",
-  "KeyChangedReasonRecovery": "Përdoruesi restauroi identitetin e tij duke përdorur një frazë rikuperimi.",
   "KeyChangedReasonReplaced": "Përdoruesi e zëvendësoi çelësin e tij të enkriptimit me një të ri.",
   "KeyChangedReasonReset": "Përdoruesi rivendosi çelësat e enkriptimit pasi harroi frazëkalimin e tij.",
   "KeyChangedRefuse": "Mos besoni",

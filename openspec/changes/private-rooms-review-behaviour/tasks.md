@@ -11,7 +11,7 @@
 
 ## 3. Key-change dialog
 
-- [ ] 3.1 Remove the recovery reason from `packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx` and `KeyChangedReasonRecovery` from every `public/locales/*/Common.json` with its `.meta` file (bulk edit by script, per `.claude/rules/bulk-locale-edits.md`); update the dialog's unit test to expect two reasons; verify with `cd packages/shared && pnpm exec vitest run dialogs/key-change-dialog`, `cd common/tests && npx vitest run test/locales.test.js` and a search that finds no `KeyChangedReasonRecovery` outside `openspec/changes/archive`
+- [x] 3.1 Remove the recovery reason from `packages/shared/dialogs/key-change-dialog/KeyChangeDialog.tsx` and `KeyChangedReasonRecovery` from every `public/locales/*/Common.json` with its `.meta` file (bulk edit by script, per `.claude/rules/bulk-locale-edits.md`); update the dialog's unit test to expect two reasons; verify with `cd packages/shared && pnpm exec vitest run dialogs/key-change-dialog`, `cd common/tests && npx vitest run test/locales.test.js` and a search that finds no `KeyChangedReasonRecovery` outside `openspec/changes/archive`
 
 ## 4. Integration
 

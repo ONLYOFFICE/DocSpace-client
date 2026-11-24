@@ -1387,7 +1387,6 @@
   "KeyChangedLastSeen": "dernière observation : {{date}}",
   "KeyChangedNewFingerprint": "Nouvelle empreinte",
   "KeyChangedReasonAttack": "Quelqu'un tente d'usurper l'identité de l'utilisateur. Si vous n'attendiez pas de changement de clé, considérez-le comme suspect.",
-  "KeyChangedReasonRecovery": "L'utilisateur a restauré son identité à l'aide d'une phrase de récupération.",
   "KeyChangedReasonReplaced": "L'utilisateur a remplacé sa clé de chiffrement par une nouvelle.",
   "KeyChangedReasonReset": "L'utilisateur a réinitialisé ses clés de chiffrement après avoir oublié sa phrase de passe.",
   "KeyChangedRefuse": "Ne pas approuver",

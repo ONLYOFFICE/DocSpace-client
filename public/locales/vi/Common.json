@@ -1387,7 +1387,6 @@
   "KeyChangedLastSeen": "lần cuối thấy: {{date}}",
   "KeyChangedNewFingerprint": "Dấu vân tay mới",
   "KeyChangedReasonAttack": "Ai đó đang cố mạo danh người dùng. Nếu bạn không mong đợi khoá thay đổi, hãy coi đó là đáng ngờ.",
-  "KeyChangedReasonRecovery": "Người dùng đã khôi phục danh tính của họ bằng cụm từ khôi phục.",
   "KeyChangedReasonReplaced": "Người dùng đã thay khoá mã hoá của mình bằng khoá mới.",
   "KeyChangedReasonReset": "Người dùng đã đặt lại khoá mã hoá sau khi quên mật khẩu bảo vệ.",
   "KeyChangedRefuse": "Không tin tưởng",

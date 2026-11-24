@@ -1387,7 +1387,6 @@
   "KeyChangedLastSeen": "son görülme: {{date}}",
   "KeyChangedNewFingerprint": "Yeni parmak izi",
   "KeyChangedReasonAttack": "Biri kullanıcının kimliğine bürünmeye çalışıyor. Anahtar değişikliğini beklemiyorsanız bunu şüpheli olarak değerlendirin.",
-  "KeyChangedReasonRecovery": "Kullanıcı kimliğini bir kurtarma ifadesiyle geri yükledi.",
   "KeyChangedReasonReplaced": "Kullanıcı şifreleme anahtarını yenisiyle değiştirdi.",
   "KeyChangedReasonReset": "Kullanıcı parolasını unuttuğu için şifreleme anahtarlarını sıfırladı.",
   "KeyChangedRefuse": "Güvenme",

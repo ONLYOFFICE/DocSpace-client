@@ -1387,7 +1387,6 @@
   "KeyChangedLastSeen": "ostatnio widziany: {{date}}",
   "KeyChangedNewFingerprint": "Nowy odcisk palca",
   "KeyChangedReasonAttack": "Ktoś próbuje podszyć się pod użytkownika. Jeśli nie oczekiwałeś(-aś) zmiany klucza, potraktuj to jako podejrzane.",
-  "KeyChangedReasonRecovery": "Użytkownik przywrócił swoją tożsamość przy użyciu frazy odzyskiwania.",
   "KeyChangedReasonReplaced": "Użytkownik zastąpił swój klucz szyfrowania nowym.",
   "KeyChangedReasonReset": "Użytkownik zresetował klucze szyfrowania po zapomnieniu hasła dostępu.",
   "KeyChangedRefuse": "Nie ufaj",

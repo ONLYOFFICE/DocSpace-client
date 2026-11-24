@@ -8,4 +8,4 @@
 
 ## 2. Integration
 
-- [ ] 2.1 Adjust the E2E case of `packages/client/__tests__/private-room-cross-user-download.spec.ts` to a wrap the key cannot open and add "Key imported again" (same key, another id: no notice, the file opens); run that spec in Docker; run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; check on the local stand that room 19 still shows the notice with 6 files
+- [x] 2.1 Adjust the E2E case of `packages/client/__tests__/private-room-cross-user-download.spec.ts` to a wrap the key cannot open and add "Key imported again" (same key, another id: no notice, the file opens); run that spec in Docker; run `pnpm nx run-many -t tsc lint test --parallel=3`, `npm --prefix ./common/tests run test:lefthook` and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`; the check on the local stand (room 19 still shows the notice with 6 files) was not made: the stand was not running

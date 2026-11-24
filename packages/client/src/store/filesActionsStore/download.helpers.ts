@@ -547,6 +547,7 @@ const downloadDecryptedZipImpl = async (
     const total = entries.length;
     const results: ArchiveItem[] = [];
     const failures: string[] = [];
+    let replacedKeyFailures = 0;
     const roomMemberKeysCache = new Map<
       string,
       Awaited<ReturnType<typeof loadRoomMemberKeysSafe>>
@@ -584,10 +585,12 @@ const downloadDecryptedZipImpl = async (
         const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(
           (k) => String(k.userId) === String(userId),
         );
-        if (
-          !hasOwnEntry ||
-          isWrappedForReplacedKey(encryptionInfo, String(userId))
-        ) {
+        const keyReplaced = isWrappedForReplacedKey(
+          encryptionInfo,
+          String(userId),
+        );
+        if (!hasOwnEntry || keyReplaced) {
+          if (keyReplaced) replacedKeyFailures += 1;
           failures.push(`${dir}${shownName}`);
           continue;
         }
@@ -643,7 +646,17 @@ const downloadDecryptedZipImpl = async (
 
     if (results.length === 0 && failures.length > 0) {
       finish(true);
-      toastr.error(i18n.t("Files:DecryptAllFailed"));
+      // Spec: private-rooms/file-operations, "Decrypted folder download"
+      if (replacedKeyFailures === failures.length) {
+        const count = failures.length;
+        toastr.error(
+          count === 1
+            ? i18n.t("Common:PrivateRoomReplacedKeyBarText_one", { count })
+            : i18n.t("Common:PrivateRoomReplacedKeyBarText_other", { count }),
+        );
+      } else {
+        toastr.error(i18n.t("Files:DecryptAllFailed"));
+      }
       return;
     }
 

@@ -439,6 +439,56 @@ describe("FilesActionsStore — decrypted folder download", () => {
       fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],
     } as never);
 
+  const replacedKeyAccess = (noEntryFor: number[] = []) =>
+    vi.mocked(getFileEncryptionAccess).mockImplementation((async (
+      fileId: number,
+    ) => ({
+      userKeys: [{ id: "k1" }],
+      fileKeys: noEntryFor.includes(fileId)
+        ? []
+        : [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
+    })) as never);
+
+  it("Every file is wrapped for a key the user no longer holds", async () => {
+    vi.mocked(getFolder).mockResolvedValue(
+      listing([encrypted(1), encrypted(2)]) as never,
+    );
+    replacedKeyAccess();
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomReplacedKeyBarText_other",
+    );
+    expect(downloadAndDecryptFileToBuffer).not.toHaveBeenCalled();
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
+  it("Every file is wrapped for a key the user no longer holds: one file", async () => {
+    vi.mocked(getFolder).mockResolvedValue(listing([encrypted(1)]) as never);
+    replacedKeyAccess();
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomReplacedKeyBarText_one",
+    );
+  });
+
+  it("No file can be decrypted", async () => {
+    vi.mocked(getFolder).mockResolvedValue(
+      listing([encrypted(1), encrypted(2)]) as never,
+    );
+    replacedKeyAccess([2]);
+
+    await setup().downloadEncryptedFolder(reports as never);
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith("Files:DecryptAllFailed");
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
   it("File name with a separator inside a folder archive", async () => {
     vi.mocked(getFolder).mockResolvedValue(
       listing([encrypted(1), encrypted(2)]) as never,
@@ -529,6 +579,34 @@ describe("FilesActionsStore — decrypted folder download", () => {
 });
 
 describe("FilesActionsStore — decrypted download of several files", () => {
+  it("Every file is wrapped for a key the user no longer holds", async () => {
+    vi.mocked(getFileEncryptionAccess).mockResolvedValue({
+      userKeys: [{ id: "k1" }],
+      fileKeys: [{ userId: "user-1", publicKeyId: "k0", privateKeyEnc: "w" }],
+    } as never);
+    const { store: uploadDataStore } = progress();
+    const store = createTestFilesActionsStore({
+      userStore: { user: { id: "user-1" }, encryptionKeys: [{ id: "k1" }] },
+      selectedFolderStore: { id: 10, isRoom: true, navigationPath: [] },
+      uploadDataStore,
+    });
+
+    await store.downloadEncryptedFilesAsZip(
+      [1, 2].map((id) => ({
+        id,
+        title: `opaque-${id}.xlsx`,
+        encrypted: true,
+        viewUrl: `http://x/${id}`,
+      })) as never,
+    );
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(toastr.error).toHaveBeenCalledWith(
+      "Common:PrivateRoomReplacedKeyBarText_other",
+    );
+    expect(triggerFileDownload).not.toHaveBeenCalled();
+  });
+
   it("Names that differ only in case", async () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [{ userId: "user-1", publicKeyId: "k1", privateKeyEnc: "w" }],

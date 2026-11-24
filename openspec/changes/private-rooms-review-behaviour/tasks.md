@@ -7,7 +7,7 @@
 
 ## 2. Decrypted archives
 
-- [ ] 2.1 Count the files left out for a replaced key in both archives of `packages/client/src/store/filesActionsStore/download.helpers.ts` and show Common:PrivateRoomReplacedKeyBarText with the count when it is the one cause and nothing was decrypted (design.md, decision 3); verify with cases "Every file is wrapped for a key the user no longer holds" and "No file can be decrypted" for the selection and for the folder in `FilesActionsStore.deleteDownload.test.ts` via `pnpm test:store`
+- [x] 2.1 Count the files left out for a replaced key in both archives of `packages/client/src/store/filesActionsStore/download.helpers.ts` and show Common:PrivateRoomReplacedKeyBarText with the count when it is the one cause and nothing was decrypted (design.md, decision 3); verify with cases "Every file is wrapped for a key the user no longer holds" and "No file can be decrypted" for the selection and for the folder in `FilesActionsStore.deleteDownload.test.ts` via `pnpm test:store`
 
 ## 3. Key-change dialog
 

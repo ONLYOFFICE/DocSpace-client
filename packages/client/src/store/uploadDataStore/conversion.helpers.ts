@@ -226,6 +226,30 @@ export async function startConversionFromFilesImpl(
           isFileHasExst: !historyFile!.fileInfo!.fileExst,
         });
       }
+
+      const converted = historyFile?.fileInfo;
+      if (
+        !historyFile?.error &&
+        converted?.folderId &&
+        String(converted.folderId) !== String(self.selectedFolderStore.id)
+      ) {
+        const fileTitle = resolveDisplayTitle({
+          id: converted.id,
+          title: converted.title,
+          encrypted: converted.encrypted,
+        });
+
+        getFolderInfo(converted.folderId)
+          .then((folderInfo) =>
+            toastr.success(
+              t("ConvertDialog:InfoCreateFileIn", {
+                fileTitle,
+                folderTitle: folderInfo.title,
+              }),
+            ),
+          )
+          .catch(() => {});
+      }
     }
 
     index++;

@@ -354,6 +354,28 @@ describe("AiProjectsStore", () => {
       expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "2", profileId: "p1" }));
     });
 
+    it("unlinks one room of an agent and keeps the others of that kind", async () => {
+      const store = createStore();
+      await store.openProject(
+        project(1, "Project 1", {
+          aiProject: {
+            ...project(1).aiProject,
+            instructionsRooms: [
+              { id: 12, title: "Skills", available: true },
+              { id: 13, title: "Gone", available: false },
+            ],
+            knowledgeRooms: [{ id: 9, title: "Docs", available: true }],
+          },
+        } as Partial<TAiProject>),
+      );
+      api.updateAiProject.mockResolvedValue(project(1));
+
+      expect(await store.unlinkRoom(1, "instructions", 12)).toBe(true);
+      const { aiProject } = api.updateAiProject.mock.calls[0][1];
+      expect(aiProject.instructionsRoomIds).toEqual([13]);
+      expect(aiProject.knowledgeRoomIds).toEqual([9]);
+    });
+
     it("goes back to the agent's model when the save fails", async () => {
       const store = createStore();
       await store.openProject(project(1));

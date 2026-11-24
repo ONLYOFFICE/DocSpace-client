@@ -121,6 +121,26 @@
   }
 }
 
-.dataSourceRemove {
+// The name takes the row, so the bin ends it.
+.dataSourceName {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// A linked room's row: the room takes what the bin leaves.
+.sourceRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sourceItem {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// The bin that ends a row, as in the composer's slash menu.
+.remove {
   flex-shrink: 0;
 }

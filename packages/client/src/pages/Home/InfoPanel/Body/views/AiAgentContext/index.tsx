@@ -59,7 +59,7 @@ import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 import RoomItem from "SRC_DIR/pages/AiProjects/sub-components/project/RoomItem";
 import SkillIcon from "SRC_DIR/components/SkillIcon";
 
-import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import RoomIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 
@@ -141,6 +141,29 @@ const ManageRow = ({ testId, label, onClick }: ManageRowProps) => (
   </Link>
 );
 
+type RemoveButtonProps = {
+  testId: string;
+  /** The name of what the bin removes. */
+  name: string;
+  onClick: () => void;
+};
+
+/** The bin at the end of a row, as the composer's slash menu draws it. */
+const RemoveButton = ({ testId, name, onClick }: RemoveButtonProps) => {
+  const { t } = useTranslation(["Common"]);
+  return (
+    <IconButton
+      className={styles.remove}
+      iconName={TrashReactSvgUrl}
+      size={16}
+      title={t("Common:RemoveSource", { name })}
+      ariaLabel={t("Common:RemoveSource", { name })}
+      onClick={onClick}
+      dataTestId={testId}
+    />
+  );
+};
+
 /**
  * Data sources: the folders and rooms the user connected to the chat that
  * runs on the agent. They are the user's own, not the agent's: every member
@@ -175,6 +198,7 @@ const DataSources = () => {
             {room.kind === "room" ? <RoomIcon /> : <FolderIcon />}
           </span>
           <Text
+            className={styles.dataSourceName}
             fontSize="13px"
             fontWeight={600}
             lineHeight="15px"
@@ -184,14 +208,10 @@ const DataSources = () => {
           >
             {room.name}
           </Text>
-          <IconButton
-            className={styles.dataSourceRemove}
-            iconName={CrossReactSvgUrl}
-            size={12}
-            title={t("Common:RemoveSource", { name: room.name })}
-            ariaLabel={t("Common:RemoveSource", { name: room.name })}
+          <RemoveButton
+            testId="ai-agent-context-remove-data-source"
+            name={room.name}
             onClick={() => disconnect(cloud, room.id)}
-            dataTestId="ai-agent-context-remove-data-source"
           />
         </div>
       ))}
@@ -218,8 +238,10 @@ type AiAgentContextProps = {
  * section is headed as the same list is in the composer's slash menu: a
  * caption and a line saying what the assistant does with it, which is all
  * an empty section shows. A name opens its room. While the chat runs on the
- * agent, the user's own data sources of that chat come last. Those who may edit the agent get a "Manage ..." row under
- * each section ("Manage skill sets...", "Manage knowledge bases..."), which
+ * agent, the user's own data sources of that chat come last. Those who may
+ * edit the agent get a bin at the end of every skill set and knowledge base,
+ * which unlinks it from the agent, and a "Manage ..." row under each
+ * section ("Manage skill sets...", "Manage knowledge bases..."), which
  * opens the selector of that section's rooms; the pick is saved at once.
  */
 const AiAgentContext = ({ id }: AiAgentContextProps) => {
@@ -285,6 +307,21 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       />
     ) : null;
 
+  // A linked room's row, ended by a bin that unlinks it from the agent for
+  // those who may edit the agent, as the slash menu ends a skill set's row.
+  const sourceRow = (kind: TAgentRoomsKind, room: TAiProjectSource, item: React.ReactNode) => (
+    <div className={styles.sourceRow} data-testid="ai-agent-context-source">
+      <div className={styles.sourceItem}>{item}</div>
+      {context.canEdit ? (
+        <RemoveButton
+          testId={`ai-agent-context-remove-${kind}`}
+          name={room.title}
+          onClick={() => void aiProjectsStore.unlinkRoom(id, kind, room.id)}
+        />
+      ) : null}
+    </div>
+  );
+
   const section = (
     testId: string,
     label: string,
@@ -311,21 +348,25 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
           const isExpanded = skills.length > 0 && !collapsed[room.id];
           return (
             <React.Fragment key={room.id}>
-              <RoomItem
-                id={room.id}
-                title={room.title}
-                icon="instructionsRoom.svg"
-                isExpanded={isExpanded}
-                onToggle={
-                  skills.length > 0
-                    ? () =>
-                        setCollapsed((state) => ({
-                          ...state,
-                          [room.id]: !state[room.id],
-                        }))
-                    : undefined
-                }
-              />
+              {sourceRow(
+                "instructions",
+                room,
+                <RoomItem
+                  id={room.id}
+                  title={room.title}
+                  icon="instructionsRoom.svg"
+                  isExpanded={isExpanded}
+                  onToggle={
+                    skills.length > 0
+                      ? () =>
+                          setCollapsed((state) => ({
+                            ...state,
+                            [room.id]: !state[room.id],
+                          }))
+                      : undefined
+                  }
+                />,
+              )}
               {isExpanded ? (
                 <ul className={styles.skills}>
                   {skills.map((skill) => (
@@ -357,12 +398,13 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
         chatT("KnowledgeBasesHint"),
         context.knowledgeBases,
         (room) => (
-          <RoomItem
-            key={room.id}
-            id={room.id}
-            title={room.title}
-            icon="knowledgeRoom.svg"
-          />
+          <React.Fragment key={room.id}>
+            {sourceRow(
+              "knowledge",
+              room,
+              <RoomItem id={room.id} title={room.title} icon="knowledgeRoom.svg" />,
+            )}
+          </React.Fragment>
         ),
         manageRow(
           "ai-agent-context-manage-knowledge",

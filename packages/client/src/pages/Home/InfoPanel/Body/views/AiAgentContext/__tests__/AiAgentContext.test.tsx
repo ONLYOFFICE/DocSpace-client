@@ -9,6 +9,7 @@ const api = vi.hoisted(() => ({
 }));
 const store = vi.hoisted(() => ({
   openRoomsSelector: vi.fn(),
+  unlinkRoom: vi.fn(),
   projectRevisions: {} as Record<number, number>,
   // The agent the chat runs on (`aiPresetsStore`).
   activePreset: null as { id: string } | null,
@@ -71,6 +72,7 @@ beforeEach(() => {
     .mockReset()
     .mockResolvedValue([{ id: 1, skills: [{ id: "9", name: "clause-check", description: "Checks" }] }]);
   store.openRoomsSelector.mockReset();
+  store.unlinkRoom.mockReset();
   store.projectRevisions = observable({});
   store.activePreset = null;
   chat.folders = [];
@@ -161,6 +163,23 @@ describe("AiAgentContext", () => {
     await screen.findAllByTestId("room");
     expect(screen.queryByTestId("ai-agent-context-manage-skills")).toBeNull();
     expect(screen.queryByTestId("ai-agent-context-manage-knowledge")).toBeNull();
+  });
+
+  it("ends every skill set and knowledge base with a bin that unlinks it, for those who may edit the agent", async () => {
+    render(<AiAgentContext id={7} />);
+    await screen.findAllByTestId("room");
+    fireEvent.click(screen.getByTestId("ai-agent-context-remove-instructions"));
+    fireEvent.click(screen.getByTestId("ai-agent-context-remove-knowledge"));
+    expect(store.unlinkRoom).toHaveBeenNthCalledWith(1, 7, "instructions", 1);
+    expect(store.unlinkRoom).toHaveBeenNthCalledWith(2, 7, "knowledge", 3);
+  });
+
+  it("offers no bin to one who may not edit the agent", async () => {
+    api.getAiProject.mockResolvedValue(project(false));
+    render(<AiAgentContext id={7} />);
+    await screen.findAllByTestId("room");
+    expect(screen.queryByTestId("ai-agent-context-remove-instructions")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-context-remove-knowledge")).toBeNull();
   });
 
   it("heads each section with what the assistant does with it, which is all an empty one shows", async () => {

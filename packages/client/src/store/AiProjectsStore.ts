@@ -291,12 +291,28 @@ class AiProjectsStore {
    * from the agent as the server has it then. Resolves to `false` when the
    * save failed.
    */
-  setRooms = (id: number, kind: TAgentRoomsKind, rooms: TAiProjectSource[]): Promise<boolean> => {
+  setRooms = (id: number, kind: TAgentRoomsKind, rooms: TAiProjectSource[]): Promise<boolean> =>
+    this.saveRooms(id, kind, () => rooms);
+
+  /**
+   * Unlinks one room of an agent, from the bin of its row in the agent's
+   * Info panel. The rest of the agent's rooms of that kind, unavailable ones
+   * included, stay linked.
+   */
+  unlinkRoom = (id: number, kind: TAgentRoomsKind, roomId: number): Promise<boolean> =>
+    this.saveRooms(id, kind, (linked) => linked.filter((room) => room.id !== roomId));
+
+  private saveRooms = (
+    id: number,
+    kind: TAgentRoomsKind,
+    pick: (linked: TAiProjectSource[]) => TAiProjectSource[],
+  ): Promise<boolean> => {
     const save = this.skillRoomsSaves.then(async () => {
       const current = await this.readProject(id);
       if (!current || !getAgentRights(current).edit) return false;
-      const instructions = kind === "instructions" ? rooms : current.aiProject.instructionsRooms;
-      const knowledge = kind === "knowledge" ? rooms : current.aiProject.knowledgeRooms;
+      const { instructionsRooms, knowledgeRooms } = current.aiProject;
+      const instructions = kind === "instructions" ? pick(instructionsRooms) : instructionsRooms;
+      const knowledge = kind === "knowledge" ? pick(knowledgeRooms) : knowledgeRooms;
       try {
         const project = await updateAiProject(
           current.id,

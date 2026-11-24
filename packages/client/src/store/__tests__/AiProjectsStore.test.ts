@@ -54,6 +54,7 @@ const project = (id: number, title = `Project ${id}`, extra: Partial<TAiProject>
     mute: false,
     tags: [],
     access: 1,
+    inRoom: true,
     security: { EditRoom: true },
     logo: { color: "#FF6680" },
     aiProject: {
@@ -326,6 +327,65 @@ describe("AiProjectsStore", () => {
       expect(presets.fetchPresets).toHaveBeenCalled();
     });
 
+    it("saves the model picked in the chat as the agent's model, only for one with EditRoom", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      api.updateAiProject.mockImplementation(async (id: number) =>
+        project(id, `Project ${id}`, {
+          aiProject: { ...project(id).aiProject, profile: { id: "p2", name: "GPT", available: true } },
+        } as Partial<TAiProject>),
+      );
+
+      expect(await store.setModel(1, "p2")).toBe(true);
+      expect(api.updateAiProject).toHaveBeenCalledWith(1, { aiProject: { profileId: "p2" } }, expect.objectContaining({ id: 1 }));
+      expect(store.activeProject?.aiProject.profile?.id).toBe("p2");
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "1", profileId: "p2" }));
+      expect(store.modelRejected).toBeNull();
+
+      // The model the agent has already: nothing to write.
+      expect(await store.setModel(1, "p2")).toBe(true);
+      expect(api.updateAiProject).toHaveBeenCalledTimes(1);
+
+      // Without EditRoom nothing is written, and the chat goes back to the agent's model.
+      await store.openProject(project(2, "Project 2", { security: { Read: true } } as Partial<TAiProject>));
+      expect(await store.setModel(2, "p2")).toBe(false);
+      expect(api.updateAiProject).toHaveBeenCalledTimes(1);
+      expect(store.modelRejected).toEqual({ id: 2 });
+      expect(presets.setActivePreset).toHaveBeenLastCalledWith(expect.objectContaining({ id: "2", profileId: "p1" }));
+    });
+
+    it("unlinks one room of an agent and keeps the others of that kind", async () => {
+      const store = createStore();
+      await store.openProject(
+        project(1, "Project 1", {
+          aiProject: {
+            ...project(1).aiProject,
+            instructionsRooms: [
+              { id: 12, title: "Skills", available: true },
+              { id: 13, title: "Gone", available: false },
+            ],
+            knowledgeRooms: [{ id: 9, title: "Docs", available: true }],
+          },
+        } as Partial<TAiProject>),
+      );
+      api.updateAiProject.mockResolvedValue(project(1));
+
+      expect(await store.unlinkRoom(1, "instructions", 12)).toBe(true);
+      const { aiProject } = api.updateAiProject.mock.calls[0][1];
+      expect(aiProject.instructionsRoomIds).toEqual([13]);
+      expect(aiProject.knowledgeRoomIds).toEqual([9]);
+    });
+
+    it("goes back to the agent's model when the save fails", async () => {
+      const store = createStore();
+      await store.openProject(project(1));
+      api.updateAiProject.mockRejectedValueOnce(new Error("refused"));
+
+      expect(await store.setModel(1, "p2")).toBe(false);
+      expect(toastr.error).toHaveBeenCalledWith("refused");
+      expect(store.modelRejected).toEqual({ id: 1 });
+    });
+
     it("replaces an updated open project and re-syncs the chat", async () => {
       const store = createStore();
       await store.openProject(project(1));
@@ -426,9 +486,7 @@ describe("AiProjectsStore", () => {
 
       // An agent the user may not change is not saved, nor one that cannot be read.
       api.getAiProject.mockResolvedValueOnce(
-        project(8, "Project 8", {
-          aiProject: { ...project(8).aiProject, canEditSettings: false } as TAiProject["aiProject"],
-        }),
+        project(8, "Project 8", { security: { Read: true } } as Partial<TAiProject>),
       );
       expect(await store.changeSkillRooms(8, { added: [], removed: ["12"] })).toBe(false);
       api.getAiProject.mockRejectedValueOnce(new Error("gone"));

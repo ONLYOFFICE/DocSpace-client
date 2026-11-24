@@ -49,9 +49,10 @@ import type { TOperation } from "../files/types";
  * (list with `searchArea=AiHub&type=12`, create, read, update, delete); its
  * linked rooms are `files/rooms/{id}/sources` and the skills of those rooms
  * `files/rooms/{id}/skills`. The project's model is proxied by ASC.AI.Chat
- * (`ai/projects/{id}/model`) until Files serves it; the project's own
- * instructions to the chat are `files/rooms/{id}/instructions` and the
- * suggestion chips of its empty chat `files/rooms/{id}/suggestions`. This
+ * (`ai/projects/{id}/model`) until Files serves it. The project's own
+ * instructions and suggestion chips (`files/rooms/{id}/instructions`,
+ * `files/rooms/{id}/suggestions`) are removed on the server: their requests
+ * are commented out and both are always empty. This
  * module composes the `aiProject` block the page reads from the room, its
  * sources, its model, its instructions and its suggestions. The list answers the rooms
  * without the block (`aiProject.partial`): a project is read again when it
@@ -64,8 +65,11 @@ import type { TOperation } from "../files/types";
 
 const roomsUrl = "/files/rooms";
 const modelUrl = (id: number) => `${roomsUrl}/${id}/model`;
-const instructionsUrl = (id: number) => `${roomsUrl}/${id}/instructions`;
-const suggestionsUrl = (id: number) => `${roomsUrl}/${id}/suggestions`;
+// The server removed `files/rooms/{id}/instructions` and
+// `files/rooms/{id}/suggestions`: their requests are commented out below,
+// and an agent has no instructions or suggestions of its own any more.
+// const instructionsUrl = (id: number) => `${roomsUrl}/${id}/instructions`;
+// const suggestionsUrl = (id: number) => `${roomsUrl}/${id}/suggestions`;
 
 /** `FileShare` on the server, limited to what a project uses: a Member is the room's Content creator. */
 export const AiProjectAccess = {
@@ -511,9 +515,11 @@ export const getAiProjectModel = async (id: number, known?: TAiProjectProfile | 
  * The project's instructions to the chat (`GET files/rooms/{id}/instructions`,
  * readable by every member); "" when none are set.
  */
-export const getAiProjectInstructions = async (id: number) => {
-  const res = (await request({ method: "GET", url: instructionsUrl(id) })) as { instructions?: string | null } | null;
-  return res?.instructions ?? "";
+export const getAiProjectInstructions = async (_id: number) => {
+  // Removed on the server (see `instructionsUrl`).
+  // const res = (await request({ method: "GET", url: instructionsUrl(id) })) as { instructions?: string | null } | null;
+  // return res?.instructions ?? "";
+  return "";
 };
 
 /** Two suggestion lists with the same chips in the same order. */
@@ -524,11 +530,13 @@ const sameSuggestions = (a: TAiProjectSuggestion[], b: TAiProjectSuggestion[]) =
  * The suggestion chips of the project's empty chat
  * (`GET files/rooms/{id}/suggestions`, readable by every member); `[]` when none.
  */
-export const getAiProjectSuggestions = async (id: number): Promise<TAiProjectSuggestion[]> => {
-  const res = (await request({ method: "GET", url: suggestionsUrl(id) })) as {
-    suggestions?: TAiProjectSuggestion[] | null;
-  } | null;
-  return res?.suggestions ?? [];
+export const getAiProjectSuggestions = async (_id: number): Promise<TAiProjectSuggestion[]> => {
+  // Removed on the server (see `suggestionsUrl`).
+  // const res = (await request({ method: "GET", url: suggestionsUrl(id) })) as {
+  //   suggestions?: TAiProjectSuggestion[] | null;
+  // } | null;
+  // return res?.suggestions ?? [];
+  return [];
 };
 
 /**
@@ -677,17 +685,19 @@ const saveModel = async (id: number, profileId: string | null | undefined) => {
  * refused write does not fail the save, keeps `previous` and comes back as
  * a warning.
  */
-const saveInstructions = async (id: number, instructions: string, previous: string) => {
+const saveInstructions = async (_id: number, instructions: string, _previous: string) => {
   const warnings: TAiProjectWarning[] = [];
-  try {
-    const res = (await request({ method: "PUT", url: instructionsUrl(id), data: { instructions } })) as {
-      instructions?: string | null;
-    } | null;
-    return { instructions: res?.instructions ?? instructions, warnings };
-  } catch (e) {
-    warnings.push({ code: "instructionsNotSaved", roomId: null, subjectId: null, message: errorMessage(e) });
-    return { instructions: previous, warnings };
-  }
+  // Removed on the server (see `instructionsUrl`): nothing is written.
+  // try {
+  //   const res = (await request({ method: "PUT", url: instructionsUrl(id), data: { instructions } })) as {
+  //     instructions?: string | null;
+  //   } | null;
+  //   return { instructions: res?.instructions ?? instructions, warnings };
+  // } catch (e) {
+  //   warnings.push({ code: "instructionsNotSaved", roomId: null, subjectId: null, message: errorMessage(e) });
+  //   return { instructions: previous, warnings };
+  // }
+  return { instructions, warnings };
 };
 
 /**
@@ -696,20 +706,22 @@ const saveInstructions = async (id: number, instructions: string, previous: stri
  * a warning.
  */
 const saveSuggestions = async (
-  id: number,
+  _id: number,
   suggestions: TAiProjectSuggestion[],
-  previous: TAiProjectSuggestion[],
+  _previous: TAiProjectSuggestion[],
 ) => {
   const warnings: TAiProjectWarning[] = [];
-  try {
-    const res = (await request({ method: "PUT", url: suggestionsUrl(id), data: { suggestions } })) as {
-      suggestions?: TAiProjectSuggestion[] | null;
-    } | null;
-    return { suggestions: res?.suggestions ?? suggestions, warnings };
-  } catch (e) {
-    warnings.push({ code: "suggestionsNotSaved", roomId: null, subjectId: null, message: errorMessage(e) });
-    return { suggestions: previous, warnings };
-  }
+  // Removed on the server (see `suggestionsUrl`): nothing is written.
+  // try {
+  //   const res = (await request({ method: "PUT", url: suggestionsUrl(id), data: { suggestions } })) as {
+  //     suggestions?: TAiProjectSuggestion[] | null;
+  //   } | null;
+  //   return { suggestions: res?.suggestions ?? suggestions, warnings };
+  // } catch (e) {
+  //   warnings.push({ code: "suggestionsNotSaved", roomId: null, subjectId: null, message: errorMessage(e) });
+  //   return { suggestions: previous, warnings };
+  // }
+  return { suggestions, warnings };
 };
 
 export const getAiProjects = async (

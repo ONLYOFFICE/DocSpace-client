@@ -42,7 +42,7 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { isMobile } from "@onlyoffice/apps-ui-kit/utils";
-import { ButtonKeys } from "@docspace/shared/enums";
+import { ButtonKeys, RoomSearchArea } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
 
 import { CoverDialogProps } from "../RoomLogoCoverDialog.types";
@@ -59,6 +59,7 @@ import {
 } from "@onlyoffice/apps-ui-kit/components/text-input";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import styles from "../EditRoomGroupsDialog.module.scss";
+import { showRoomGroupChangedToast } from "SRC_DIR/helpers/toast-helpers";
 
 const GroupIconDialog = ({
   getCovers,
@@ -191,6 +192,14 @@ const GroupIconDialog = ({
       try {
         await setCreateGroupRooms(newGroup);
         await getAllRoomGroups();
+
+        showRoomGroupChangedToast(
+          t,
+          "add",
+          searchArea === RoomSearchArea.Forms,
+          arrIdsRooms.length,
+          groupName,
+        );
 
         onCloseEditRoomGroupsDialog();
       } catch (error: unknown) {

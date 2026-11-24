@@ -86,7 +86,8 @@ vi.mock("@docspace/shared/context/encryption", () => ({
   useEncryptionOptional: () => encryptionContext,
 }));
 
-vi.mock("@docspace/shared/services/encryption/room-file-access", () => ({
+vi.mock("@docspace/shared/services/encryption/room-file-access", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
   unwrapDekForCurrentUser: vi.fn(async () => Uint8Array.from(DEK)),
 }));
 
@@ -222,6 +223,23 @@ describe("useFileEncryptionKeys", () => {
 
     expect(await settledAt("no-access")).toBe("no-access");
     expect(requireIdentity).not.toHaveBeenCalled();
+  });
+
+  it("Wrapped for a key the user no longer holds", async () => {
+    vi.mocked(getFileEncryptionAccess).mockImplementation(
+      async () =>
+        ({
+          userKeys: [{ id: "key-now" }],
+          fileKeys: [{ userId: USER_ID, publicKeyId: "key-before" }],
+        }) as never,
+    );
+    const requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
+    encryptionContext.requireIdentity = requireIdentity;
+    render(config([{ userId: USER_ID }]));
+
+    expect(await settledAt("key-replaced")).toBe("key-replaced");
+    expect(requireIdentity).not.toHaveBeenCalled();
+    expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
   });
 
   it("Key flow restarts within one attempt", async () => {

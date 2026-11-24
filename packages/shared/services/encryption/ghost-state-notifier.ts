@@ -36,6 +36,7 @@
 import {
   AuthenticationError,
   KeyCheckUnavailableError,
+  KeyReplacedError,
   NoAccessError,
 } from "./errors";
 
@@ -80,6 +81,8 @@ export const resetGhostStateGate = () => {
 export const reportPotentialGhostState = (error: unknown): void => {
   // Spec: private-rooms/encryption-core, "A peer key that could not be checked is reported per operation"
   if (error instanceof KeyCheckUnavailableError) return;
+  // Spec: private-rooms/key-management, "Ghost-state notification"
+  if (error instanceof KeyReplacedError) return;
   if (
     !(error instanceof NoAccessError) &&
     !(error instanceof AuthenticationError)

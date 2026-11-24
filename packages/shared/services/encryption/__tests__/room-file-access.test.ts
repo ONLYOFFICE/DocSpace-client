@@ -40,6 +40,7 @@ import { generateDEK } from "../file-keys";
 import {
   wrapDekForRecipients,
   unwrapDekForCurrentUser,
+  isWrappedForReplacedKey,
   type RoomMemberPublicKey,
 } from "../room-file-access";
 import { NoAccessError, AuthenticationError } from "../errors";
@@ -467,5 +468,62 @@ describe("sender listed with several keys (leftover envelopes)", () => {
       });
       expect(out).toEqual(dek);
     });
+  });
+});
+
+describe("A file wrapped for a key the user no longer holds is reported as such", () => {
+  const CURRENT = "1545741c-0000-4000-8000-00000000000a";
+  const PREVIOUS = "3b01cb76-0000-4000-8000-00000000000b";
+  const entry = (publicKeyId: string, userId = ALICE_ID) => ({
+    userId,
+    publicKeyId,
+    privateKeyEnc: "wrap",
+  });
+  const info = (publicKeyId: string, keyIds: string[] | null = [CURRENT]) => ({
+    userKeys: keyIds?.map((id) => ({ id })),
+    fileKeys: [entry(publicKeyId)],
+  });
+
+  it("Download of one such file", () => {
+    expect(isWrappedForReplacedKey(info(PREVIOUS), ALICE_ID)).toBe(true);
+  });
+
+  it("wrap for the current key, id in another letter case", () => {
+    expect(isWrappedForReplacedKey(info(CURRENT.toUpperCase()), ALICE_ID)).toBe(
+      false,
+    );
+  });
+
+  it("wrap for one of two listed keys", () => {
+    expect(
+      isWrappedForReplacedKey(info(PREVIOUS, [CURRENT, PREVIOUS]), ALICE_ID),
+    ).toBe(false);
+  });
+
+  it("Entry without a key id", () => {
+    expect(isWrappedForReplacedKey(info(""), ALICE_ID)).toBe(false);
+    expect(
+      isWrappedForReplacedKey(
+        info("00000000-0000-0000-0000-000000000000"),
+        ALICE_ID,
+      ),
+    ).toBe(false);
+  });
+
+  it("Key list not known", () => {
+    expect(isWrappedForReplacedKey(info(PREVIOUS, null), ALICE_ID)).toBe(
+      false,
+    );
+    expect(isWrappedForReplacedKey(info(PREVIOUS, []), ALICE_ID)).toBe(false);
+    expect(isWrappedForReplacedKey(null, ALICE_ID)).toBe(false);
+  });
+
+  it("no own entry", () => {
+    expect(
+      isWrappedForReplacedKey(
+        { userKeys: [{ id: CURRENT }], fileKeys: [entry(PREVIOUS, BOB_ID)] },
+        ALICE_ID,
+      ),
+    ).toBe(false);
   });
 });

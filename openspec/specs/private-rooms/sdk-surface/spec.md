@@ -31,7 +31,7 @@ The private layout SHALL run the shell effects: the locks of the user's other pa
 - **THEN** every SDK page of the user locks as well and aborts its encrypted operations, and the remembered record is left to the page that locked
 
 #### Scenario: Idle lock in another tab
-- **WHEN** another SDK page of the user locks after its idle time or because it was hidden
+- **WHEN** another SDK page of the user locks after its idle time
 - **THEN** this SDK page stays unlocked
 
 #### Scenario: Unlock recovers names

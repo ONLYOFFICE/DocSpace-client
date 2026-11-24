@@ -35,9 +35,12 @@
 
 import { getFileEncryptionAccess } from "../../api/files";
 import { decryptFile, wipeDek } from "../encryption/file-keys";
-import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import {
+  isWrappedForReplacedKey,
+  unwrapDekForCurrentUser,
+} from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
-import { NoAccessError } from "../encryption/errors";
+import { KeyReplacedError, NoAccessError } from "../encryption/errors";
 import type { IdentityKeyPair } from "../encryption/types";
 import type { MoveSourceRef } from "./encrypted-upload";
 import { loadFileSenderKeysSafe } from "./room-member-keys";
@@ -64,6 +67,10 @@ export async function decryptEncryptedItemToFile(
   const fileKeys = encryptionInfo.fileKeys ?? [];
   if (!fileKeys.some((k) => String(k.userId) === String(currentUserId))) {
     throw new NoAccessError(currentUserId);
+  }
+  // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+  if (isWrappedForReplacedKey(encryptionInfo, currentUserId)) {
+    throw new KeyReplacedError();
   }
 
   const response = await fetch(item.viewUrl);

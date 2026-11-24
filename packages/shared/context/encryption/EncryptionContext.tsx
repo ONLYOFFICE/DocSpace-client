@@ -56,7 +56,6 @@ import {
 } from "../../services/encryption/secret-storage";
 import {
   getAutoLockTimeoutSeconds,
-  locksWhenTabHidden,
   setAutoLockScope,
   subscribeAutoLockChange,
 } from "../../services/encryption/auto-lock-preference";
@@ -416,23 +415,6 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       unregisterAutoLockSuspender();
     };
   }, [suspendAutoLock]);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return undefined;
-    if (autoLockSuspendCount > 0) return undefined;
-    const handler = () => {
-      if (!locksWhenTabHidden()) return;
-      if (document.visibilityState === "hidden") {
-        SecretStorage.lock();
-        clearEncryptedFilenameCache();
-        setIsUnlocked(false);
-      }
-    };
-    document.addEventListener("visibilitychange", handler);
-    return () => {
-      document.removeEventListener("visibilitychange", handler);
-    };
-  }, [autoLockSuspendCount]);
 
   const [autoLockRevision, setAutoLockRevision] = useState(0);
 

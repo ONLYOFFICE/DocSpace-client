@@ -71,6 +71,7 @@ import {
   GROUPS_SELECTOR,
   type TourStepFlags,
 } from "./tourSteps";
+import { isTourBlocked } from "SRC_DIR/components/Tour/isTourBlocked";
 
 type RoomsTourProps = {
   roomsTourStore: RoomsTourStore;
@@ -118,7 +119,7 @@ const RoomsTour = ({
   organizeRoomsGrouping,
 }: RoomsTourProps) => {
   const { t, ready } = useTranslation(["RoomsTour", "FilesTour", "Common"]);
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = isTourBlocked(currentDeviceType);
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const borrowedPanel = useRef<InfoPanelState | null>(null);

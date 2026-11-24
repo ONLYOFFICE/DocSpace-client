@@ -64,7 +64,6 @@ import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@onlyoffice/apps-ui-kit/components/rectangle";
 import { QuickActions } from "@onlyoffice/apps-ui-kit/components/quick-actions";
-import { DeviceType } from "@docspace/shared/enums";
 import { isDevToolsOffered } from "@docspace/shared/utils/devToolsAccess";
 
 import integrationStyles from "SRC_DIR/components/IntegrationsCard/IntegrationsCard.module.scss";
@@ -73,6 +72,7 @@ import { modulesGridStyle } from "../utils";
 import { PROFILE_CARD_HIDDEN_KEY } from "./ProfileCard";
 
 import styles from "../Dashboard.module.scss";
+import { isTourBlocked } from "SRC_DIR/components/Tour/isTourBlocked";
 
 // Each loader below mirrors the geometry of its real counterpart so the Overview
 // skeleton lines up with the content and there's no layout shift when it
@@ -251,7 +251,7 @@ const DashboardLoaderComponent = ({
   // the grid's column cap.
   const moduleCount = 3;
 
-  const showTourButton = currentDeviceType !== DeviceType.mobile;
+  const showTourButton = !isTourBlocked(currentDeviceType);
 
   return (
     <div className={styles.dashboard}>

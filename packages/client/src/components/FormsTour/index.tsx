@@ -79,6 +79,7 @@ import {
   FIRST_ITEM_SELECTOR,
   type TourStepFlags,
 } from "./tourSteps";
+import { isTourBlocked } from "SRC_DIR/components/Tour/isTourBlocked";
 
 type FormsTourProps = {
   formsTourStore: FormsTourStore;
@@ -114,7 +115,7 @@ const FormsTour = ({
   hasForms,
 }: FormsTourProps) => {
   const { t, ready } = useTranslation(["FormsTour", "FilesTour", "Common"]);
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = isTourBlocked(currentDeviceType);
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
   // Where the tour was standing when it walked into a space, so it can put the

@@ -47,6 +47,7 @@ import useTour, {
 import { DASHBOARD_TOUR_LABEL } from "SRC_DIR/components/Tour/logLabels";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
+import { isTourBlocked } from "SRC_DIR/components/Tour/isTourBlocked";
 
 /**
  * How long to let the dashboard settle before starting.
@@ -86,7 +87,7 @@ const DashboardTour = ({
   isDashboardReady,
 }: DashboardTourProps) => {
   const { t } = useTranslation(["DashboardTour", "Common"]);
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = isTourBlocked(currentDeviceType);
 
   /**
    * Which of the page's optional regions are actually on it.

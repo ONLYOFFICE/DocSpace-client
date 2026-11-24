@@ -73,7 +73,6 @@ import { Scrollbar } from "@onlyoffice/apps-ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
-import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
@@ -108,6 +107,7 @@ import { usePluginModuleItems } from "./hooks/usePluginModuleItems";
 import { useMyFolderId } from "./hooks/useMyFolderId";
 import { modulesGridStyle } from "./utils";
 import styles from "./Dashboard.module.scss";
+import { isTourBlocked } from "SRC_DIR/components/Tour/isTourBlocked";
 
 type DashboardProps = ChatNoAccessStoreProps & {
   isGuest: boolean;
@@ -176,7 +176,7 @@ const Dashboard = (props: DashboardProps) => {
   // welcome is not offered and neither help icon is rendered — the CSS in
   // `Dashboard.module.scss` hides them too, but a button that cannot do
   // anything should not be in the tree to begin with.
-  const isMobile = currentDeviceType === DeviceType.mobile;
+  const isMobile = isTourBlocked(currentDeviceType);
 
   const navigate = useNavigate();
   const location = useLocation();

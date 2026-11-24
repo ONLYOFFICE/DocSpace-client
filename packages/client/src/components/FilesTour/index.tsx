@@ -61,6 +61,7 @@ import { tourDemo } from "SRC_DIR/api/tourDemo";
 import { buildDemoFileList } from "SRC_DIR/api/tourDemo/data";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
+import { isTourBlocked } from "SRC_DIR/components/Tour/isTourBlocked";
 
 /** The sidebar anchors the tour's last step points at. */
 type SidebarIds = Pick<
@@ -321,7 +322,7 @@ export default inject(
       user: userStore?.user,
       userId: userStore?.user?.id,
       audience,
-      isMobileView: settingsStore.currentDeviceType === DeviceType.mobile,
+      isMobileView: isTourBlocked(settingsStore.currentDeviceType),
       isDesktop: settingsStore.currentDeviceType === DeviceType.desktop,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,

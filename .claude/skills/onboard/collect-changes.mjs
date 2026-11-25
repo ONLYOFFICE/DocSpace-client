@@ -26,7 +26,7 @@
  *   --deep <path,...>     print the full base->worktree diff of these
  *                         paths (capped per path) for close reading
  *
- * The BASE STATE (locales, screenshots, tarball version, hotspots) is read
+ * The BASE STATE (locales, screenshots, ui-kit version, hotspots) is read
  * from the base ref's tip - what that release actually holds - while the
  * commit list walks merge-base..HEAD (the work new on this side). Pick the
  * base as the state users actually run (a release tag, origin/master), not
@@ -36,7 +36,8 @@
  * churned files; READ THEIR DIFFS before judging what changed), uncommitted
  * changes, locale key delta (added/removed/changed), screenshot baseline
  * delta, deep diffs, and the ui-kit range. ui-kit is a separate repository
- * consumed here as a tarball, so its range comes from a clone on disk (found
+ * consumed here as a package (an npm release, or a local tarball while an
+ * unpublished build is tried), so its range comes from a clone on disk (found
  * by .claude/scripts/ui-kit/locate.mjs) and is walked against the same base
  * ref name there - the two repositories mirror branch names. Without a clone
  * the section is skipped with a note, never guessed.
@@ -44,6 +45,7 @@
 
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
+import { posix } from "node:path";
 
 import { statusLines, uiKitStatus } from "../../scripts/ui-kit/locate.mjs";
 
@@ -61,13 +63,18 @@ const shots = [];
 
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
-  if (a === "--base") base = args[++i];
-  else if (a === "--locales") localeFiles.push(...args[++i].split(","));
-  else if (a === "--key-filter") keyFilter = new RegExp(args[++i], "i");
-  else if (a === "--shots") shots.push(...args[++i].split(","));
-  else if (a === "--uikit") uikitPaths.push(...args[++i].split(","));
-  else if (a === "--uikit-src") uikitSrc = args[++i];
-  else if (a === "--deep") deepPaths.push(...args[++i].split(","));
+  const value = () => {
+    const v = args[++i];
+    if (v === undefined || v.startsWith("--")) fail(`${a} needs a value`);
+    return v;
+  };
+  if (a === "--base") base = value();
+  else if (a === "--locales") localeFiles.push(...value().split(","));
+  else if (a === "--key-filter") keyFilter = new RegExp(value(), "i");
+  else if (a === "--shots") shots.push(...value().split(","));
+  else if (a === "--uikit") uikitPaths.push(...value().split(","));
+  else if (a === "--uikit-src") uikitSrc = value();
+  else if (a === "--deep") deepPaths.push(...value().split(","));
   else if (a.startsWith("--")) fail(`Unknown flag: ${a}`);
   else paths.push(a);
 }
@@ -112,7 +119,7 @@ const mbDate = git(["show", "-s", "--format=%ad", "--date=short", mergeBase]);
 const baseDate = git(["show", "-s", "--format=%ad", "--date=short", baseTip]);
 
 console.log(`# Change digest: ${base} -> ${branch} (working tree)`);
-console.log(`\n- base state: \`${base}\` tip = \`${baseTip.slice(0, 11)}\` (${baseDate}) — locales, screenshots, tarball version and hotspots compare against THIS`);
+console.log(`\n- base state: \`${base}\` tip = \`${baseTip.slice(0, 11)}\` (${baseDate}) — locales, screenshots, ui-kit version and hotspots compare against THIS`);
 console.log(`- merge-base with HEAD: \`${mergeBase.slice(0, 11)}\` (${mbDate}) — the commit list walks from here`);
 if (baseTip !== mergeBase)
   console.log(`- NOTE: the base tip is not the merge-base — the base line has its own commits; state diffs may include their reversals`);
@@ -284,9 +291,26 @@ if (deepPaths.length) {
 
 // --- ui-kit (separate repository) ------------------------------------------
 
-section("ui-kit (separate repository, consumed as a tarball)");
+section("ui-kit (separate repository, consumed as a package)");
 
-const TARBALL = "onlyoffice-apps-ui-kit.tgz";
+// The client's manifest says how ui-kit is consumed: an npm range, or
+// `file:../../<name>.tgz` while an unpublished build is tried.
+const UIKIT = "@onlyoffice/apps-ui-kit";
+const MANIFEST_DIR = "packages/client";
+const MANIFEST = `${MANIFEST_DIR}/package.json`;
+
+function specOf(text) {
+  try {
+    const pkg = JSON.parse(text);
+    return pkg.dependencies?.[UIKIT] ?? pkg.devDependencies?.[UIKIT] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** Repo-relative tarball path of a `file:` specifier, null for an npm range. */
+const tarballOf = (spec) =>
+  spec?.startsWith("file:") ? posix.normalize(posix.join(MANIFEST_DIR, spec.slice(5))) : null;
 
 function tarballVersion(bytes) {
   if (!bytes) return null;
@@ -301,10 +325,10 @@ function tarballVersion(bytes) {
   }
 }
 
-function baseTarball() {
+function baseBytes(path) {
   try {
-    // Silent when the base predates the tarball (a pre-split master).
-    return execFileSync("git", ["show", `${baseTip}:${TARBALL}`], {
+    // Silent when the base has no such file (a pre-split master).
+    return execFileSync("git", ["show", `${baseTip}:${path}`], {
       maxBuffer: 256 * 1024 * 1024,
       stdio: ["ignore", "pipe", "ignore"],
     });
@@ -313,11 +337,29 @@ function baseTarball() {
   }
 }
 
-const fmtVersion = (v) => (v ? `\`${v}\`` : "(none - no tarball at that commit)");
+function installedVersion() {
+  try {
+    return JSON.parse(readFileSync(`${MANIFEST_DIR}/node_modules/${UIKIT}/package.json`, "utf8")).version ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function fmtVersion(spec, version) {
+  if (!spec) return "(none - the manifest does not name ui-kit there)";
+  if (!spec.startsWith("file:")) return version ? `\`${version}\` (npm \`${spec}\`)` : `npm \`${spec}\``;
+  return version ? `\`${version}\` (local tarball)` : "local tarball, version unknown";
+}
+
+const baseSpec = specOf(baseBytes(MANIFEST)?.toString("utf8") ?? "");
+const baseTar = tarballOf(baseSpec);
+const nowSpec = existsSync(MANIFEST) ? specOf(readFileSync(MANIFEST, "utf8")) : null;
+const nowTar = tarballOf(nowSpec);
 console.log(
-  `- tarball version: at base ${fmtVersion(tarballVersion(baseTarball()))}, now ${fmtVersion(
-    tarballVersion(existsSync(TARBALL) ? readFileSync(TARBALL) : null),
-  )} - informational only; the version is not bumped per change, so the range below comes from the clone`,
+  `- ui-kit version: at base ${fmtVersion(baseSpec, baseTar ? tarballVersion(baseBytes(baseTar)) : null)}, now ${fmtVersion(
+    nowSpec,
+    nowTar ? tarballVersion(existsSync(nowTar) ? readFileSync(nowTar) : null) : installedVersion(),
+  )} - informational only; a tarball's version is not bumped per change, so the range below comes from the clone`,
 );
 
 const uk = uiKitStatus({ explicit: uikitSrc });

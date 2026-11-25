@@ -225,6 +225,7 @@ the translation skills use that comment as context.
 | `.claude/rules/e2e-tests.md` | `packages/client/__tests__/**`, `packages/shared/__mocks__/**` |
 | `.claude/rules/link-preview.md` | `packages/client/index.html`, `packages/shared/utils/link-preview.ts`, `packages/shared/components/link-preview-meta/**`, `packages/login/src/app/link-preview/**` |
 | `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
+| `.claude/rules/billing-access.md` | SaaS billing pages, stores and guards (payments, PaymentComplete, BillingSidebar, MainBar, paid backup, DocsConnect), and their specs |
 | `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
 | `.claude/rules/private-rooms.md` | private-room / encryption code, `openspec/**` — OpenSpec specs and workflow for the feature |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |

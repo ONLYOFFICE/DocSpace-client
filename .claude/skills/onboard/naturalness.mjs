@@ -32,6 +32,13 @@ if (!src || src.startsWith("--")) {
   process.exit(2);
 }
 
+for (const k of ["lang", "text", "json", "baseline", "protect"]) {
+  if (args[k] === true) {
+    console.error(`--${k} needs a value: --${k}=<value>`);
+    process.exit(2);
+  }
+}
+
 // ---------- HTML → blocks ----------
 
 const VOID = new Set(["img", "br", "hr", "meta", "link", "input", "source", "wbr", "col", "area"]);

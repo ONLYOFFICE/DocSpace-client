@@ -1,9 +1,16 @@
 ---
 paths:
   - "packages/client/src/pages/PortalSettings/categories/payments/**"
+  - "packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/**"
+  - "packages/client/src/pages/PaymentComplete/**"
   - "packages/client/src/components/BillingSidebar/**"
   - "packages/client/src/components/MainBar/**"
+  - "packages/client/src/store/PaymentStore.ts"
+  - "packages/client/src/store/ServicesStore.ts"
+  - "packages/client/src/store/DocsConnectStore.ts"
+  - "packages/shared/pages/backup/manual-backup/**"
   - "packages/shared/routes/Route.private.tsx"
+  - "packages/shared/routes/Route.private.payments.test.tsx"
   - "packages/shared/store/CurrentTariffStatusStore.ts"
   - "packages/client/__tests__/payments.spec.ts"
   - "packages/client/__tests__/wallet-low-balance.spec.ts"
@@ -36,7 +43,7 @@ scope here. The room-role side of permissions lives in
 ## The payer is an email, not a role
 
 `getIsPayer` (`billing/utils/paymentSelectors.ts` in the separate
-`docspace-ui-kit-react` repository, consumed here as a tarball) simply
+`docspace-ui-kit-react` repository, consumed here as a package) simply
 compares the signed-in user's email with `walletCustomerEmail` returned
 by `GET /portal/payment/customerinfo`. This has three consequences:
 

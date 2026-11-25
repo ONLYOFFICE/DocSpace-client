@@ -504,7 +504,7 @@ this section says otherwise.
   Pass the area's `en` namespaces via `--locales`; for shared
   namespaces (`Common`) always add a `--key-filter`, or the digest
   drowns in unrelated keys.
-- **ui-kit is a separate repository**, consumed here as a tarball, so
+- **ui-kit is a separate repository**, consumed here as a package, so
   its half of the digest comes from a clone of `docspace-ui-kit-react`
   on disk. The script finds it through
   `.claude/scripts/ui-kit/locate.mjs` (`--uikit-src`, then

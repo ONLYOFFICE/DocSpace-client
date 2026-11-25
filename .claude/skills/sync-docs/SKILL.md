@@ -9,7 +9,7 @@ argument-hint: "<area or rule name>"
 Three places describe the same behavior and age independently: the code,
 the `.claude/rules/*.md` files, and Storybook prose. The Storybook lives
 in `docspace-ui-kit-react`, a separate repository consumed here only as
-a prebuilt tarball — its prose is any `.mdx` page the glob in that
+a built package — its prose is any `.mdx` page the glob in that
 repo's `.storybook/main.ts` picks up (including the unattached pages
 under its `docs/`), plus story descriptions in `*.stories.tsx`. Pages
 parked as `*.bak` next to a component (the billing pages are, while
@@ -124,7 +124,7 @@ until the user answers.
 - `.mdx` / `*.stories.tsx` — edit in the ui-kit clone and say the
   commit belongs to the `docspace-ui-kit-react` repository, on its own
   branch, not to this one; nothing here records it beyond a later
-  tarball bump.
+  ui-kit version bump.
 - Rules that defer to an external source of truth — report the
   mismatch to the user; the source is not ours to edit.
 - **code suspect** findings go to the user as potential bugs, with the

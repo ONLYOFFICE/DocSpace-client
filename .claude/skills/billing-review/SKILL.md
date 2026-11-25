@@ -14,8 +14,10 @@ concrete suggested fix.
 The billing code is split across two repositories: the client keeps the
 wiring (routes, the sidebar, store glue, E2E specs), while the billing
 pages, components and the canonical getters live in `billing/**` of
-`docspace-ui-kit-react`, consumed here only as a prebuilt tarball. A
-ui-kit change is invisible in the client diff (at most a swapped
+`docspace-ui-kit-react`, consumed here only as a built package (an npm
+release, or a local tarball while an unpublished build is tried). A
+ui-kit change is invisible in the client diff (at most a version bump
+in the manifests and `pnpm-lock.yaml`, or a swapped
 `onlyoffice-apps-ui-kit.tgz`), so the review has two halves.
 
 ## Scope
@@ -84,8 +86,10 @@ Client repository:
 - `packages/client/src/components/BillingSidebar/**`
 - `packages/client/src/components/MainBar/**` — the low-balance banner
 - `packages/shared/routes/Route.private.tsx` — the billing redirects
-- `onlyoffice-apps-ui-kit.tgz` — a swapped tarball means ui-kit changed;
-  check the ui-kit half
+- the `@onlyoffice/apps-ui-kit` specifier in any `packages/*/package.json`
+  (with its `pnpm-lock.yaml` entry), or a swapped
+  `onlyoffice-apps-ui-kit.tgz` — either means ui-kit changed; check the
+  ui-kit half
 - billing consumers outside billing:
   `packages/shared/pages/backup/manual-backup/**`,
   `packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/**`

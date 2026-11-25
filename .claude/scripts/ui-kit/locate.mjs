@@ -2,7 +2,7 @@
 /**
  * Locate the docspace-ui-kit-react clone that client-side skills read.
  *
- * ui-kit is a separate repository consumed here as a prebuilt tarball; its
+ * ui-kit is a separate repository consumed here as a built package; its
  * sources, git history and Storybook prose exist only in a clone somewhere on
  * disk. Resolution order:
  *   1. --uikit-src <path> (CLI) / `explicit` (API)
@@ -168,6 +168,11 @@ if (isCli()) {
   }
   const src = args.indexOf("--uikit-src");
   const explicit = src !== -1 ? args[src + 1] : undefined;
+  // A flag without its path must not fall back to the default clone.
+  if (src !== -1 && (!explicit || explicit.startsWith("--"))) {
+    console.error("--uikit-src needs a path");
+    process.exit(2);
+  }
   if (args.includes("--status")) {
     const st = uiKitStatus({ explicit });
     if (st.error) {

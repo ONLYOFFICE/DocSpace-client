@@ -15,8 +15,10 @@ catch.
 The caller gives you:
 
 - the path of a plain-text file: one block per line, tagged with its kind
-  (`[sub]`, `[p]`, `[li]`, `[callout]`, `[caption]`, `[loose]` are prose;
-  `[heading]`, `[label]`, `[alt]` are short labels), grouped by `=== #section`;
+  (`[heading]`, `[label]`, `[alt]` are short labels; every other tag is
+  prose — `[lead]`, `[sub]`, `[p]`, `[li]`, `[callout]`, `[note]`,
+  `[panel-intro]`, `[caption]`, `[cell]`, `[dd]`, `[dt]`, `[blockquote]`,
+  `[loose]`), grouped by `=== #section`;
 - the page language;
 - the scanner report: rhythm and density numbers, repeated phrases,
   sentence openers, the longest sentences, structure issues. It holds no

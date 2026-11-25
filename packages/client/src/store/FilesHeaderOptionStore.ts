@@ -351,7 +351,7 @@ export default class FilesHeaderOptionStore {
               typeof group.icon === "object" &&
               group.icon?.data?.small
             ) {
-              groupIcon = `data:image/svg+xml;utf8,${encodeURIComponent(group.icon.data.small)}`;
+              groupIcon = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(group.icon.data.small)}`;
             }
             return {
               id: `menu-add-to-group-${group.id}`,

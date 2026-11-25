@@ -76,7 +76,7 @@ export const SelectIcon = ({
               data-testid={`select_icon_${icon.id}`}
             >
               <ReactSVG
-                src={`data:image/svg+xml;utf8,${encodeURIComponent(icon.data)}`}
+                src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(icon.data)}`}
               />
             </div>
           );

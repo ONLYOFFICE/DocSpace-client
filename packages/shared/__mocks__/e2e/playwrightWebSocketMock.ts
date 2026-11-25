@@ -47,8 +47,16 @@ type ServerMessage =
   | unknown[]
   | Record<string, unknown>;
 
+type ModifyThreadFilesEventData = {
+  cmd: "create";
+  id: number;
+  threadId: string;
+  kind: "artifacts" | "attachments";
+};
+
 type SocketEventData =
   | TOptSocket
+  | ModifyThreadFilesEventData
   | ExportChatEventData
   | TTopUpWalletData
   | TWalletLowBalanceData
@@ -109,6 +117,11 @@ export class PlaywrightWebSocketMock {
 
   emitModifyFolder(data: TOptSocket): void {
     this.emitSocketEvent("s:modify-folder", data);
+  }
+
+  /** A file saved to a conversation of an agent, announced to its author. */
+  emitModifyThreadFiles(data: ModifyThreadFilesEventData): void {
+    this.emitSocketEvent("s:modify-thread-files", data);
   }
 
   emitExportChat(data: ExportChatEventData): void {

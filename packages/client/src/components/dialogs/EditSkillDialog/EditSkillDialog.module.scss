@@ -40,7 +40,9 @@
 // a phone it is the bottom sheet of every modal. Its body takes the height
 // the header and the footer leave.
 .dialog {
-  --modal-dialog-default-width: calc(100vw - 64px);
+  // The width itself, not its default: ui-kit resolves the default on the
+  // overlay above this class, where a value set here is not seen.
+  --modal-dialog-width: calc(100vw - 64px);
 
   :global(#modal-dialog) {
     display: flex;

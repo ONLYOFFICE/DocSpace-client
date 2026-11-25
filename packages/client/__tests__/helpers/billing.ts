@@ -144,7 +144,31 @@ const customerInfoHandler = (
     }),
   );
 
-const tariffHandlerFor = (state: TariffKind) => {
+const restrictedTariffHandler = (state: TariffKind, restricted: boolean) =>
+  http.get(apiUrl(PATH_TARIFF), () => {
+    const body = tariffSuccess(
+      false,
+      state === "grace",
+      false,
+      false,
+      TARIFF_DUE_DATE_EXPIRED,
+    );
+
+    return new Response(
+      JSON.stringify({
+        ...body,
+        response: {
+          ...body.response,
+          ...(state === "unpaid" ? { state: TariffState.NotPaid } : {}),
+          restricted,
+        },
+      }),
+    );
+  });
+
+const tariffHandlerFor = (state: TariffKind, restricted?: boolean) => {
+  if (restricted !== undefined)
+    return restrictedTariffHandler(state, restricted);
   if (state === "unpaid") return unpaidTariffHandler();
 
   return tariffHandler(
@@ -166,6 +190,7 @@ export const useSaasBilling = (
     plan = "business",
     card = "active",
     isDelayedPaymentMethod = false,
+    restricted,
   }: {
     user?: UserKind;
     payer?: PayerKind;
@@ -174,6 +199,7 @@ export const useSaasBilling = (
     card?: CardKind;
     /** the deposit is accepted at once, the funds reach the wallet later */
     isDelayedPaymentMethod?: boolean;
+    restricted?: boolean;
   } = {},
 ) => {
   mockRequest.use(
@@ -187,7 +213,7 @@ export const useSaasBilling = (
     customerInfoHandler(payer, card, isDelayedPaymentMethod),
     paymentAccountHandler(TEST_PORT),
     paymentUrlHandler(TEST_PORT),
-    tariffHandlerFor(tariff),
+    tariffHandlerFor(tariff, restricted),
     plan === "startup"
       ? freeQuotaHandler(TEST_PORT)
       : quotaHandler(TEST_PORT, false, false, false, true),

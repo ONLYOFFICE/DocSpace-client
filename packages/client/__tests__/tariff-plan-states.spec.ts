@@ -48,6 +48,7 @@ import type { Page } from "@playwright/test";
 
 import { expect, test } from "./fixtures/base";
 import {
+  GRACE_NOW,
   PAID_NOW,
   apiUrl,
   balanceHandler,
@@ -606,6 +607,62 @@ test.describe("Not-paid portal", () => {
     await expect.poll(() => purchases.length).toBe(1);
     await expect(modalWith(page, "Continue to Stripe")).toHaveCount(0);
     expect(deposits).toHaveLength(0);
+  });
+});
+
+test.describe("Grace period with a delayed payment method", () => {
+  const AWAITING_PAYMENT =
+    "Awaiting payment. Once the funds reach your wallet, pay for the plan to renew it.";
+  const RESTRICTIONS = "admins can't create rooms";
+
+  test.beforeEach(async ({ mockRequest, page }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      tariff: "grace",
+      restricted: false,
+      isDelayedPaymentMethod: true,
+    });
+    mockRequest.use(walletServicesHandler());
+    await page.clock.setSystemTime(GRACE_NOW);
+  });
+
+  test("the notice says the payment is awaited instead of listing restrictions", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+
+    await expect(page.getByText(AWAITING_PAYMENT)).toBeVisible();
+    await expect(page.getByText(RESTRICTIONS)).toHaveCount(0);
+    await expect(planButton(page)).toBeEnabled();
+    await expect(planButton(page)).toHaveText("Top up wallet");
+
+    await expectScreenshot(page, [
+      "desktop",
+      "tariff-plan",
+      "grace-delayed-payment-awaiting-funds.png",
+    ]);
+  });
+
+  test("once the funds reach the wallet the plan is paid from it", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(balanceHandler(10_000));
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+
+    await expect(page.getByText(AWAITING_PAYMENT)).toBeVisible();
+    await expect(planButton(page)).toBeEnabled();
+    await expect(planButton(page)).toContainText("Upgrade now");
+
+    await expectScreenshot(page, [
+      "desktop",
+      "tariff-plan",
+      "grace-delayed-payment-funds-arrived.png",
+    ]);
   });
 });
 

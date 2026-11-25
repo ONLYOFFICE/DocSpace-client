@@ -290,7 +290,7 @@ const GenerateSkillDialog = ({
       withForm
       onSubmit={(e) => {
         e.preventDefault();
-        void onSave();
+        void (skill ? onSave() : onGenerate());
       }}
       onClose={onClose}
       isCloseable={!isSaving}
@@ -357,16 +357,6 @@ const GenerateSkillDialog = ({
                 dataTestId="generate-skill-description"
               />
             </div>
-            <Button
-              scale
-              size={ButtonSize.small}
-              icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}
-              label={t("Common:GenerateSkill")}
-              isLoading={isGenerating}
-              isDisabled={!canGenerate || isSaving}
-              onClick={() => void onGenerate()}
-              testId="generate-skill-run-button"
-            />
             {error ? (
               <Text className={styles.error} fontSize="12px" lineHeight="16px">
                 {error}
@@ -376,15 +366,29 @@ const GenerateSkillDialog = ({
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          label={t("Common:SaveButton")}
-          size={ButtonSize.normal}
-          primary
-          type="submit"
-          isLoading={isSaving}
-          isDisabled={!canSave || isGenerating}
-          testId="generate-skill-save"
-        />
+        {/* The request has one thing to do, and the skill it gives another. */}
+        {skill ? (
+          <Button
+            label={t("Common:SaveButton")}
+            size={ButtonSize.normal}
+            primary
+            type="submit"
+            isLoading={isSaving}
+            isDisabled={!canSave}
+            testId="generate-skill-save"
+          />
+        ) : (
+          <Button
+            icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}
+            label={t("Common:GenerateSkill")}
+            size={ButtonSize.normal}
+            primary
+            type="submit"
+            isLoading={isGenerating}
+            isDisabled={!canGenerate}
+            testId="generate-skill-run-button"
+          />
+        )}
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}

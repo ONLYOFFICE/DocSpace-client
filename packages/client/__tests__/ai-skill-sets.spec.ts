@@ -724,7 +724,10 @@ test.describe("AI Chat: Skill sets", () => {
         "New skill",
       );
       expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
-      await expect(page.getByTestId("generate-skill-save")).toBeDisabled();
+      // Generate skill is the request's one action: nothing to save yet,
+      // and nothing to generate from until the skill is described.
+      await expect(page.getByTestId("generate-skill-save")).toHaveCount(0);
+      await expect(page.getByTestId("generate-skill-run-button")).toBeDisabled();
 
       await page
         .getByTestId("generate-skill-description")
@@ -746,6 +749,7 @@ test.describe("AI Chat: Skill sets", () => {
       await expect(editor(page)).not.toContainText("description:");
       expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
       await expect(page.getByTestId("generate-skill-save")).toBeEnabled();
+      await expect(page.getByTestId("generate-skill-run-button")).toHaveCount(0);
     });
 
     // Spec: ai-skill-sets, "Use a skill set in the chat"

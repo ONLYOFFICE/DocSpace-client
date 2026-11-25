@@ -73,6 +73,17 @@ import {
   BROKEN_PLUGIN_MISSING_PACKAGE,
   INIT_ERROR_PLUGIN_MESSAGE,
 } from "./webplugins";
+export {
+  MEMBER_PLUGIN_ADMIN_ID,
+  MEMBER_PLUGIN_OWNER_ID,
+  MEMBER_PLUGIN_USER_ID,
+  mockMemberPlugins,
+  personalPluginsSettings,
+  membersPluginsHandler,
+  memberPluginUpdateHandler,
+  memberPluginDeleteHandler,
+  personalPluginsSwitchHandler,
+} from "./personalWebPlugins";
 import { activeConnectionsHandler } from "./activeconnections";
 import { backupStorageHandler } from "./backupStorage";
 import { deepLinkHandler } from "./deepLink";

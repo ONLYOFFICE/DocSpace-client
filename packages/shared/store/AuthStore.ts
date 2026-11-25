@@ -147,6 +147,12 @@ class AuthStore {
         });
       },
     );
+    SocketHelper?.on(SocketEvents.ChangeTariff, () => {
+      console.log("[WS] change-tariff");
+
+      this.currentTariffStatusStore?.fetchPortalTariff();
+    });
+
     SocketHelper?.on(
       SocketEvents.ChangedQuotaUserUsedValue,
       (options: TOptSocket) => {

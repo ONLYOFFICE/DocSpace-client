@@ -123,6 +123,14 @@ The system SHALL offer a "remember this device" option in the unlock dialog wher
 - **WHEN** the user clicks Common:ForgetDeviceButton in Keys management
 - **THEN** the stored unlock is removed, Common:DeviceUnlockForgotten is shown, and the next operation prompts again
 
+#### Scenario: Passphrase changed on a remembered device
+- **WHEN** the user changes the passphrase of the key on a device that is remembered
+- **THEN** the remembered record is removed from this device, and the next encrypted operation asks for the new passphrase or a passkey
+
+#### Scenario: Passphrase changed on another device
+- **WHEN** the user changes the passphrase on one device while another device is remembered
+- **THEN** the other device keeps its remembered record until it is locked, forgotten or past its maximum age
+
 #### Scenario: Remembered record expired
 - **WHEN** a remembered device needs the identity more than 30 days after the record was written
 - **THEN** the record is discarded and the user is prompted for the passphrase (or passkey) as if the device had never been remembered
@@ -159,7 +167,7 @@ The system SHALL offer a passkey toggle (Common:PasskeyUnlockLabel) when the pla
 - **THEN** the passkey record is deleted and Common:PasskeyDisabled is shown
 
 ### Requirement: Auto-lock timeout presets
-The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (30 by default) and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, touch, a scroll of the page or of a list in it); with the 5 or 15 minute preset it SHALL also lock once the tab is hidden. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
+The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (30 by default) and SHALL NOT offer a preset longer than the 30-minute limit of the in-memory key. The identity SHALL lock after that much inactivity (mouse, keyboard, touch, a scroll of the page or of a list in it). It SHALL NOT lock because the tab is hidden, with any preset. On a remembered device auto-lock SHALL wipe the in-memory key and the filename cache but SHALL NOT delete the remembered record.
 
 #### Scenario: Idle lock
 - **WHEN** the preset is 5 minutes and the user is inactive for 5 minutes
@@ -167,11 +175,19 @@ The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (
 
 #### Scenario: Tab hidden
 - **WHEN** the preset is 5 or 15 minutes and the tab is hidden
-- **THEN** the identity locks immediately
+- **THEN** the identity stays unlocked, and the page shows Common:KeyUnlocked when the user returns to it within the idle time
 
 #### Scenario: Tab hidden with the default preset
 - **WHEN** the preset is 30 minutes and the tab is hidden
 - **THEN** the identity stays unlocked
+
+#### Scenario: Document opened in another tab
+- **WHEN** the preset is 5 minutes and the user opens a document of a private room, which opens the editor in a new tab, and returns to the file list within 5 minutes
+- **THEN** the file list shows Common:KeyUnlocked and no locked-key block
+
+#### Scenario: Idle time runs while the tab is hidden
+- **WHEN** the preset is 5 minutes and the tab stays hidden for more than 5 minutes without activity in it
+- **THEN** the identity of that tab is locked by the idle timeout
 
 #### Scenario: Preset off
 - **WHEN** the value stored by an earlier version is off or 60 minutes
@@ -182,7 +198,7 @@ The system SHALL let the user pick an auto-lock timeout of 5, 15 or 30 minutes (
 - **THEN** it offers Common:AutoLock5m, Common:AutoLock15m and Common:AutoLock30m, and nothing else
 
 #### Scenario: Auto-lock on a remembered device
-- **WHEN** the device is remembered and the idle timeout or a hidden tab locks the identity
+- **WHEN** the device is remembered and the idle timeout locks the identity
 - **THEN** the next encrypted operation restores the key from the device record without a prompt, and Keys management still shows the device as remembered
 
 #### Scenario: Scrolling a list counts as activity
@@ -223,11 +239,15 @@ The system SHALL import a key from a previously exported JSON file (Common:Impor
 - **THEN** Keys management offers no import
 
 ### Requirement: Change passphrase
-The system SHALL let the user re-seal their key under a new passphrase after proving the current one, replacing the envelope in place and locking the identity, confirming with Common:PassphraseUpdated. The recovery phrase SHALL keep working.
+The system SHALL let the user re-seal their key under a new passphrase after proving the current one, replacing the envelope in place, locking the identity and removing the remembered record of this device, confirming with Common:PassphraseUpdated. The recovery phrase SHALL keep working.
 
 #### Scenario: Rotate passphrase
 - **WHEN** the user enters the current passphrase and a new acceptable one
 - **THEN** the envelope on the server is replaced and the old passphrase no longer unlocks it
+
+#### Scenario: Key list not read again after the change
+- **WHEN** the passphrase is changed and the following read of the key list fails
+- **THEN** the page that made the change unlocks with the new passphrase and refuses the old one, without a reload
 
 ### Requirement: Recover with the recovery phrase
 The system SHALL let the user restore access on this device by entering the 24-word phrase (Common:UseRecoveryPhrase) and then set a new passphrase; success is confirmed with Common:RecoveryPhraseRestored. A wrong phrase SHALL report Common:InvalidRecoveryPhrase.
@@ -271,10 +291,10 @@ The system SHALL offer Common:ResetEncryptionKeysCta to a user who lost both pas
 - **THEN** Common:ResetEncryptionKeysFailed is shown and no key is deleted
 
 ### Requirement: Device setup hint on entering a private room without keys
-The system SHALL show, once per browser session, an info toast (Common:EncryptionDeviceSetupHint) with a link to Keys management when the user enters a private room on a device with no configured key. The hint SHALL wait until the user's key list is known.
+The system SHALL show, once per browser session, an info toast (Common:EncryptionDeviceSetupHint) with a link to Keys management when a user whose account has no encryption key enters a private room. The hint SHALL wait until the user's key list is known.
 
 #### Scenario: First private room this session
-- **WHEN** a user without keys on this device opens a private room
+- **WHEN** a user without an encryption key opens a private room
 - **THEN** the hint toast appears with the link
 
 #### Scenario: Second room same session
@@ -283,14 +303,22 @@ The system SHALL show, once per browser session, an info toast (Common:Encryptio
 
 #### Scenario: Key list not known
 - **WHEN** a user opens a private room while their key list has not loaded or failed to load
-- **THEN** no hint is shown until the list has loaded and holds no key for this device
+- **THEN** no hint is shown until the list has loaded and holds no key
 
 ### Requirement: Ghost-state notification
-The system SHALL show, once per session, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because the user's key cannot unwrap the file.
+The system SHALL show, once per session and once more after the user resets their keys, a toast (Common:GhostStateDetected) linking to Keys management when a download, copy or filename recovery fails because the user's key cannot unwrap the file. It SHALL NOT show that toast for a file whose access entry names a key the user no longer holds.
 
 #### Scenario: Unreadable file
 - **WHEN** an encrypted operation finds no usable wrap for the current user
 - **THEN** the ghost-state toast appears once, later failures in the session stay silent
+
+#### Scenario: File wrapped for a previous key
+- **WHEN** filename recovery, a download or a copy meets a file whose access entry names a key that is not in the user's key list
+- **THEN** the ghost-state toast is not shown and the session's one toast is not used up
+
+#### Scenario: After a key reset
+- **WHEN** the toast was shown in the session, the user resets their keys and an encrypted operation again finds no usable wrap
+- **THEN** the toast is shown once more
 
 ### Requirement: Key-change dialog
 The system SHALL show a dialog when a peer's public key differs from its pin, naming the peer by display name, stating how long the previous key was active, listing possible causes and an out-of-band verification tip, with accept and refuse actions. Concurrent mismatches SHALL wait for the open dialog and be shown one after another; requests for the same user and key SHALL share the user's one decision. The system SHALL NOT answer a request on the user's behalf.
@@ -369,7 +397,7 @@ The system SHALL NOT close a key dialog on a click or tap on the backdrop beside
 - **THEN** the dialog closes and the pending operation is aborted, as on Cancel
 
 ### Requirement: Closing a key dialog with typed input asks for confirmation
-The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross or Escape closes a passphrase-creation, passphrase-change or recovery-phrase-input dialog that holds typed input, or a recovery-phrase display whose phrase is not yet acknowledged; declining keeps the dialog open with its input, confirming discards it, whether the answer is given with a pointer or with the keyboard. The unlock prompt, the reset dialog and the key-change dialog SHALL close without a question.
+The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross or Escape closes a passphrase-creation, passphrase-change or recovery-phrase-input dialog whose step holds typed input, or a recovery-phrase display whose phrase is not yet acknowledged; declining keeps the dialog open with its input, confirming discards it, whether the answer is given with a pointer or with the keyboard. The unlock prompt, the reset dialog and the key-change dialog SHALL close without a question.
 
 #### Scenario: Typed passphrase kept
 - **WHEN** the user has typed a new passphrase, presses Escape and declines the confirmation
@@ -394,6 +422,10 @@ The system SHALL ask for confirmation (Common:UnsavedChanges) before the cross o
 #### Scenario: Unlock prompt closes at once
 - **WHEN** the user has typed into the unlock prompt and presses Escape
 - **THEN** the prompt closes without a confirmation and the pending operation is aborted
+
+#### Scenario: Explanation step after going back
+- **WHEN** the user typed a passphrase in key setup, went back to the explanation step and presses the cross or Escape there
+- **THEN** the dialog closes without a question and the typed passphrase is dropped
 
 ### Requirement: Key dialogs take the focus when they open
 The system SHALL move the keyboard focus into a key dialog as it opens: to its first text field when it has one, otherwise to the dialog itself, in both the modal and the aside presentation, so the next Tab moves within the dialog and not in the page behind it.
@@ -495,7 +527,7 @@ While a key dialog's primary action is in progress the system SHALL report that 
 - **THEN** the primary action is exposed as busy and the fields are disabled
 
 ### Requirement: Keys management controls are reachable with Tab
-The system SHALL make every enabled control of the keys management page a tab stop, in the order the page displays them: the key card's change-passphrase, export and delete actions, the generate, import, recovery-phrase, delete-unused and reset actions, and the device section's auto-lock selector, passkey toggle, forget-device and lock-now actions. A disabled control SHALL NOT be a tab stop.
+The system SHALL make every enabled control of the keys management page a tab stop, in the order the page displays them: the key card's change-passphrase, export and delete actions, the unlock, delete-unused, generate, import and recovery-phrase actions, the device section's auto-lock selector, passkey toggle, forget-device and lock-now actions, and the reset action. A disabled control SHALL NOT be a tab stop.
 
 #### Scenario: Tab across the key card
 - **WHEN** a user with a key moves the focus with Tab across the key card
@@ -503,7 +535,7 @@ The system SHALL make every enabled control of the keys management page a tab st
 
 #### Scenario: No key yet
 - **WHEN** a user without a key moves the focus with Tab from Common:GenerateNewKey
-- **THEN** the next stop is Common:ImportKey, followed by Common:UseRecoveryPhrase when it is offered
+- **THEN** the next stop is Common:ImportKey
 
 #### Scenario: Device section
 - **WHEN** the device is remembered, the identity is unlocked and the user tabs through the device section
@@ -702,7 +734,7 @@ The system SHALL describe the encryption key as the key of the user's account in
 
 #### Scenario: Reasons of a key change
 - **WHEN** the key-change dialog lists the legitimate reasons of a change
-- **THEN** it names a replaced key (Common:KeyChangedReasonReplaced), a recovery and a reset, and no reason that keys are stored per device
+- **THEN** it names a replaced key (Common:KeyChangedReasonReplaced) and a reset, which are the two actions that change a key; it names neither a recovery with the recovery phrase, which keeps the key, nor a reason that keys are stored per device
 
 ### Requirement: A new passphrase needs no particular characters
 The system SHALL accept a new passphrase, at key creation, after a recovery with the recovery phrase and at a passphrase change, when it has at least 12 characters and matches no common pattern, in whatever script it is written, and SHALL NOT require a capital letter, a digit, a punctuation character or a Latin letter in it. The rules tooltip of the passphrase field SHALL name the length alone.
@@ -743,8 +775,8 @@ The system SHALL accept a new passphrase, at key creation, after a recovery with
 The system SHALL NOT generate a new key pair when the passphrase is changed or the key is recovered with the recovery phrase: only the envelope is sealed again. A copy of the key exported earlier, with the passphrase it was exported under, SHALL keep opening the user's files, so a leaked passphrase or export is not cured by a passphrase change. No action replaces the key pair of a user who keeps access to their files.
 
 #### Scenario: Old export after a passphrase change
-- **WHEN** the user exports the key, changes the passphrase, and the old export is later imported on another device with the old passphrase
-- **THEN** that device opens the user's encrypted files
+- **WHEN** the user exports the key, changes the passphrase, later deletes the key and imports the old export with the old passphrase
+- **THEN** the imported key opens the user's encrypted files
 
 #### Scenario: Public key unchanged
 - **WHEN** the user changes the passphrase
@@ -758,7 +790,7 @@ The system SHALL offer Common:ForgetDeviceButton only while the identity is lock
 - **THEN** Common:DeviceUnlockRememberedUntil and Common:LockNow are shown, and Common:ForgetDeviceButton is not
 
 #### Scenario: Remembered device, identity locked
-- **WHEN** the identity of a remembered device is locked by the idle timeout or a hidden tab and the user opens Keys management
+- **WHEN** the identity of a remembered device is locked by the idle timeout and the user opens Keys management
 - **THEN** Common:DeviceUnlockRememberedUntil and Common:ForgetDeviceButton are shown, and Common:LockNow is not
 
 #### Scenario: Lock now on a remembered device
@@ -766,7 +798,7 @@ The system SHALL offer Common:ForgetDeviceButton only while the identity is lock
 - **THEN** the identity is locked, the remembered record is removed, and the next encrypted operation MUST NOT run without the passphrase or a passkey
 
 ### Requirement: A newly picked auto-lock preset applies at once
-The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it, in the page where it is picked and in every other open page of the same user in this browser: the idle time SHALL be counted from that moment with the new length, and the hidden-tab rule of the new preset SHALL hold from that moment, without a lock and a new unlock in between.
+The system SHALL apply an auto-lock preset to the unlocked identity as soon as the user picks it, in the page where it is picked and in every other open page of the same user in this browser: the idle time SHALL be counted from that moment with the new length, without a lock and a new unlock in between.
 
 #### Scenario: Shorter preset picked while unlocked
 - **WHEN** the identity was unlocked with the 30-minute preset and the user picks 5 minutes
@@ -774,11 +806,11 @@ The system SHALL apply an auto-lock preset to the unlocked identity as soon as t
 
 #### Scenario: Longer preset picked while unlocked
 - **WHEN** the identity was unlocked with the 5-minute preset and the user picks 30 minutes
-- **THEN** the identity stays unlocked through 5 minutes of inactivity and when the tab is hidden
+- **THEN** the identity stays unlocked through 5 minutes of inactivity
 
 #### Scenario: Preset picked in another tab
 - **WHEN** two tabs hold the key unlocked with the 30-minute preset and the user picks 5 minutes in one of them
-- **THEN** the other tab shows 5 minutes, locks after 5 minutes of inactivity counted from the pick, and locks when it is hidden
+- **THEN** the other tab shows 5 minutes, locks after 5 minutes of inactivity counted from the pick
 
 ### Requirement: The unlock dialog on entry is raised once per private room
 The system SHALL raise the unlock dialog by itself once per private room that a user with a locked key enters, and SHALL NOT raise it again when the user moves between the folders of that room: after the first answer the locked-key block is the way to unlock. Entering another private room SHALL raise the dialog again.
@@ -1151,7 +1183,7 @@ The system SHALL show each word of the recovery phrase in a tile of its own with
 - **THEN** the clipboard holds the 24 words in order, separated by spaces, with no number
 
 ### Requirement: Recovery phrase save actions carry icons
-The system SHALL show an icon before the label of each save action of the recovery phrase (Common:RecoveryKitPrint, Common:Download, Common:CopyToClipboard). The three actions SHALL keep the same weight and SHALL stand in one row where their labels fit and wrap to further rows where they do not. An icon SHALL NOT be the name of its action for assistive technology.
+The system SHALL show an icon before the label of each save action of the recovery phrase (Common:RecoveryKitPrint, Common:Download, Common:CopyToClipboard). The three actions SHALL keep the same weight and SHALL stand in one row where their labels fit and wrap to further rows where they do not. An icon SHALL have the colour of its label, in the light and the dark theme and while the action is disabled. An icon SHALL NOT be the name of its action for assistive technology.
 
 #### Scenario: Icons shown
 - **WHEN** the recovery phrase is shown
@@ -1164,6 +1196,10 @@ The system SHALL show an icon before the label of each save action of the recove
 #### Scenario: Name of an action
 - **WHEN** assistive technology reads a save action
 - **THEN** it reads the label and nothing for the icon
+
+#### Scenario: Dark theme
+- **WHEN** the recovery phrase is shown in the dark theme
+- **THEN** each icon has the colour of the label next to it and is as readable as the label
 
 ### Requirement: Key setup terms carry icons
 The system SHALL show an icon before each of the three terms of the explanation step of key setup. The icons SHALL be decoration: hidden from assistive technology, with the titles and descriptions unchanged.
@@ -1240,7 +1276,7 @@ While the user's key is locked, the system SHALL show under the heading of the k
 - **THEN** no unlock action is shown
 
 ### Requirement: Recovery phrase has a block of its own in Keys management
-The system SHALL show the link Common:UseRecoveryPhrase under the heading Common:RecoveryPhraseTitle and the sentence Common:RecoveryPhraseSectionText, which says that the phrase sets a new passphrase and restores access to the existing key. The block SHALL be shown wherever the link is shown today.
+The system SHALL show the link Common:UseRecoveryPhrase under the heading Common:RecoveryPhraseTitle and the sentence Common:RecoveryPhraseSectionText, which says that the phrase sets a new passphrase and restores access to the existing key. The block SHALL be shown while the user has a key.
 
 #### Scenario: User with a key
 - **WHEN** a user who holds a key opens Keys management
@@ -1270,7 +1306,7 @@ The system SHALL remove from this device the remembered record and the passkey r
 - **THEN** the record is removed, and Keys management shows no Common:DeviceUnlockRememberedUntil line
 
 ### Requirement: A lock reaches every tab of the user
-The system SHALL lock the identity in every open page of the same user in this browser, files, editor and SDK pages alike, within a second and without a reload, when Common:LockNow, Common:ForgetDeviceButton, a key deletion, a reset, a passphrase change or a logout happens in one of them. A lock by idle time, by a hidden tab or by the in-memory expiry SHALL stay with its page. An unlock SHALL NOT be shared.
+The system SHALL lock the identity in every open page of the same user in this browser, files, editor and SDK pages alike, within a second and without a reload, when Common:LockNow, Common:ForgetDeviceButton, a key deletion, a reset, a passphrase change or a logout happens in one of them. A lock by idle time or by the in-memory expiry SHALL stay with its page. An unlock SHALL NOT be shared.
 
 #### Scenario: Lock now in another tab
 - **WHEN** two tabs show a private room with the key unlocked and the user presses Common:LockNow in one of them
@@ -1304,9 +1340,9 @@ The system SHALL lock the identity in every open page of the same user in this b
 - **WHEN** one tab locks after the idle time while the user works in another tab of the same user
 - **THEN** the tab the user works in stays unlocked
 
-#### Scenario: Hidden-tab lock stays in its tab
+#### Scenario: Hidden tab keeps its key
 - **WHEN** the preset is 5 minutes and the user switches from one tab with the key unlocked to another
-- **THEN** the hidden tab locks and the tab the user switched to stays unlocked
+- **THEN** neither tab locks: the hidden tab keeps the key until its idle time passes
 
 #### Scenario: Unlock not shared
 - **WHEN** the user unlocks the key in one tab while another tab is locked

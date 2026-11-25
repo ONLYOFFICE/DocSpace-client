@@ -186,7 +186,7 @@ self: ContextOptionsStore,item: TContextItem
 
   const infoView = isRoom
     ? self.infoPanelStore.roomsView
-    : self.infoPanelStore.fileView;
+    : self.infoPanelStore.currentFileView;
 
   const { infoPanelSelection } = self.infoPanelStore;
 

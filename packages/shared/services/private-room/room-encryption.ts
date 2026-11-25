@@ -45,6 +45,7 @@ import {
   type RoomMemberPublicKey,
 } from "../encryption/room-file-access";
 import { wipeDek } from "../encryption/file-keys";
+import { KeyReplacedError } from "../encryption/errors";
 import {
   type KeyMismatchResolver,
 } from "../encryption/tofu-store";
@@ -69,6 +70,8 @@ export interface FileEncryptionOpResult {
   skipped?: boolean;
   unreadable?: boolean;
   error?: string;
+  /** The file is wrapped for a key the caller no longer holds. */
+  keyReplaced?: true;
 }
 
 export type SkippedMemberReason = "no-key" | SkippedMemberKey["reason"];
@@ -253,6 +256,7 @@ async function wrapFilesForMembers(
         dek = await unwrapDekForCurrentUser({
           fileKeys: info.fileKeys,
           roomMemberKeys,
+          userKeys: info.userKeys,
           currentUserId,
           currentIdentity: identity,
           fileId,
@@ -262,6 +266,7 @@ async function wrapFilesForMembers(
           fileId,
           success: false,
           error: e instanceof Error ? e.message : "unwrap failed",
+          ...(e instanceof KeyReplacedError && { keyReplaced: true as const }),
         });
         continue;
       }
@@ -523,6 +528,7 @@ export async function backfillEncryptedFilesForRoomMembers(
         dek = await unwrapDekForCurrentUser({
           fileKeys: info.fileKeys,
           roomMemberKeys: senderCandidates,
+          userKeys: info.userKeys,
           currentUserId,
           currentIdentity: identity,
           fileId: fileId,
@@ -532,6 +538,7 @@ export async function backfillEncryptedFilesForRoomMembers(
           fileId: fileId,
           success: false,
           error: e instanceof Error ? e.message : "unwrap failed",
+          ...(e instanceof KeyReplacedError && { keyReplaced: true as const }),
         });
         continue;
       }

@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -141,18 +142,19 @@ type TRenderOptions = {
   recentThreads?: { id: string; title: string }[];
   hasMoreThreads?: boolean;
   selectedFolder?: Record<string, unknown>;
+  isAiProjectRoomRoot?: boolean;
 };
 
-const renderSidebar = (
+const sidebar = (
   extraFolders: unknown[] = [],
   {
     pinnedProjects = [],
     recentThreads = [],
     hasMoreThreads = false,
     selectedFolder = { id: 1, rootFolderType: FolderType.USER, isRootFolder: true },
+    isAiProjectRoomRoot = false,
   }: TRenderOptions = {},
-) =>
-  render(
+) => (
     <Provider
       authStore={{ isAdmin: true, isRoomAdmin: false }}
       userStore={{ user: { id: "user-1", isVisitor: false } }}
@@ -168,6 +170,7 @@ const renderSidebar = (
         myFolderId: 1,
         isTemplatesFolderRoot: false,
         isDocumentsFolder: false,
+        isAiProjectRoomRoot,
         pinnedAiProjects: pinnedProjects.map((project) => ({
           ...project,
           logo: { color: "" },
@@ -195,8 +198,11 @@ const renderSidebar = (
       }}
     >
       <ClientArticleSidebar />
-    </Provider>,
-  );
+    </Provider>
+);
+
+const renderSidebar = (extraFolders: unknown[] = [], options: TRenderOptions = {}) =>
+  render(sidebar(extraFolders, options));
 
 describe("ClientArticleSidebar — Private section", () => {
   it("Private item rendered", () => {
@@ -295,6 +301,44 @@ describe("ClientArticleSidebar — an opened AI room on its short address", () =
         roomType: RoomsType.InstructionsRoom,
       }),
     ).toBe("ai-rooms");
+  });
+
+  it("stays on Skill sets while a skill set opened from its list is loading", () => {
+    // Observable, as the store is: the sidebar follows what it holds.
+    const selectedFolder = observable<Record<string, unknown>>({
+      id: 2010,
+      rootFolderType: FolderType.AiHub,
+      isRootFolder: true,
+      roomType: null,
+    });
+    const activeId = () => screen.getByTestId("nav").dataset.activeId;
+    try {
+      route.pathname = "/ai-rooms/filter";
+      route.search = `?type=${RoomsType.InstructionsRoom}`;
+      renderSidebar(aiHub, { selectedFolder });
+      expect(activeId()).toBe("ai-rooms-skills");
+
+      // The address names the room, which the store does not hold yet.
+      route.pathname = "/ai-rooms/32/filter";
+      route.search = "?folder=32";
+      act(() =>
+        runInAction(() => {
+          selectedFolder.isRootFolder = false;
+        }),
+      );
+      expect(activeId()).toBe("ai-rooms-skills");
+
+      act(() =>
+        runInAction(() => {
+          selectedFolder.id = 32;
+          selectedFolder.roomType = RoomsType.InstructionsRoom;
+        }),
+      );
+      expect(activeId()).toBe("ai-rooms-skills");
+    } finally {
+      route.pathname = "/private/filter";
+      route.search = "";
+    }
   });
 });
 
@@ -448,6 +492,28 @@ describe("ClientArticleSidebar — leaving the AI Chat page", () => {
     vi.runAllTimers();
     expect(store.close).toHaveBeenCalledTimes(1);
     vi.useRealTimers();
+    chat.store = null;
+  });
+
+  it("leaves an agent's chat open for the agent picked next, and closes it for any other entry", () => {
+    const store = {
+      isVisible: true,
+      effectiveFullscreen: true,
+      isOnHistoryPage: false,
+      close: vi.fn(),
+      setFullscreen: vi.fn(),
+    };
+    chat.store = store;
+    renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
+      pinnedProjects: [{ id: "100", name: "Next" }],
+      isAiProjectRoomRoot: true,
+    });
+
+    fireEvent.click(screen.getByTestId("nav-ai-nested-project-100"));
+    expect(store.close).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByTestId("nav-ai-rooms"));
+    expect(store.close).toHaveBeenCalledTimes(1);
     chat.store = null;
   });
 

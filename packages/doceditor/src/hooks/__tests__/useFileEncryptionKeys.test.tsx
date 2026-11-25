@@ -81,7 +81,8 @@ vi.mock("@docspace/shared/context/encryption", () => ({
   useEncryptionOptional: () => encryptionContext,
 }));
 
-vi.mock("@docspace/shared/services/encryption/room-file-access", () => ({
+vi.mock("@docspace/shared/services/encryption/room-file-access", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
   unwrapDekForCurrentUser: vi.fn(async () => Uint8Array.from(DEK)),
 }));
 
@@ -103,6 +104,7 @@ vi.mock("@/components/EncryptionProviderWrapper", () => ({
 
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
 import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
+import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
 
 import useFileEncryptionKeys, {
   type TUseFileEncryptionKeys,
@@ -215,6 +217,41 @@ describe("useFileEncryptionKeys", () => {
 
     expect(await settledAt("no-access")).toBe("no-access");
     expect(requireIdentity).not.toHaveBeenCalled();
+  });
+
+  it("Wrapped for a key the user no longer holds", async () => {
+    const userKeys = [{ id: "key-now" }];
+    vi.mocked(getFileEncryptionAccess).mockImplementation(
+      async () =>
+        ({
+          userKeys,
+          fileKeys: [{ userId: USER_ID, publicKeyId: "key-before" }],
+        }) as never,
+    );
+    vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+      new KeyReplacedError(),
+    );
+    encryptionContext.requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
+    render(config([{ userId: USER_ID }]));
+
+    expect(await settledAt("key-replaced")).toBe("key-replaced");
+    expect(vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].userKeys).toBe(
+      userKeys,
+    );
+  });
+
+  it("Key imported again", async () => {
+    vi.mocked(getFileEncryptionAccess).mockImplementation(
+      async () =>
+        ({
+          userKeys: [{ id: "key-now" }],
+          fileKeys: [{ userId: USER_ID, publicKeyId: "key-before" }],
+        }) as never,
+    );
+    encryptionContext.requireIdentity = vi.fn(async () => ({ userId: USER_ID }));
+    render(config([{ userId: USER_ID }]));
+
+    expect(await settledAt("ready")).toBe("ready");
   });
 
   it("Key flow restarts within one attempt", async () => {

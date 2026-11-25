@@ -47,7 +47,7 @@ import type {
   PlaylistType,
 } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { Error403 } from "@docspace/shared/components/errors/Error403";
-import { ViewerLoader } from "@docspace/shared/components/media-viewer/sub-components/ViewerLoader";
+import { ViewerLoader } from "@onlyoffice/apps-ui-kit/media-viewer/sub-components/ViewerLoader";
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 
 import { DEFAULT_EXTS_IMAGE } from "./PublicPreview.constants";

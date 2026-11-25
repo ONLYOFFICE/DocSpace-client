@@ -40,8 +40,10 @@ import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { NavMenuGroup } from "@onlyoffice/apps-ui-kit/components/nav-menu";
+import { DeviceType } from "@docspace/shared/enums";
 
 const navigate = vi.hoisted(() => vi.fn());
+const setArticleOpen = vi.hoisted(() => vi.fn());
 const captured = vi.hoisted(() => ({ groups: [] as NavMenuGroup[] }));
 
 vi.mock("react-router", async (importOriginal) => ({
@@ -78,6 +80,8 @@ const stores = {
     standalone: props.standalone,
     baseDomain: props.baseDomain,
     aiServicesEnabled: props.aiServicesEnabled,
+    currentDeviceType: DeviceType.desktop,
+    setArticleOpen,
   },
   userStore: { user: { isOwner: props.isOwner } },
   currentTariffStatusStore: {
@@ -92,10 +96,20 @@ const stores = {
   appsStore: { canManageApps: props.canManageApps },
 };
 
-const renderSidebar = () =>
+const renderSidebar = ({
+  deviceType = DeviceType.desktop,
+  state,
+}: { deviceType?: DeviceType; state?: object } = {}) =>
   render(
-    <Provider {...stores}>
-      <MemoryRouter initialEntries={["/portal-settings"]}>
+    <Provider
+      {...stores}
+      settingsStore={{ ...stores.settingsStore, currentDeviceType: deviceType }}
+    >
+      <MemoryRouter
+        initialEntries={[
+          { pathname: "/portal-settings/customization/general", state },
+        ]}
+      >
         <PortalSettingsSidebar {...props} />
       </MemoryRouter>
     </Provider>,
@@ -125,5 +139,40 @@ describe("PortalSettingsSidebar navigation", () => {
     item.onClick?.(item, { isLink: false });
 
     expect(navigate).toHaveBeenCalledWith(item.linkData?.path);
+  });
+});
+
+// Bug 67530: on a phone the profile menu's "Settings" opens on the section
+// list instead of a single section that hides the others.
+describe("PortalSettingsSidebar section list on a phone", () => {
+  beforeEach(() => {
+    navigate.mockClear();
+    setArticleOpen.mockClear();
+  });
+
+  it("opens the section list when asked on a phone and drops the flag", () => {
+    renderSidebar({
+      deviceType: DeviceType.mobile,
+      state: { openArticle: true },
+    });
+
+    expect(setArticleOpen).toHaveBeenCalledWith(true);
+    expect(navigate).toHaveBeenCalledWith(
+      "/portal-settings/customization/general",
+      { replace: true, state: { openArticle: undefined } },
+    );
+  });
+
+  it("does not open the panel off a phone", () => {
+    renderSidebar({ state: { openArticle: true } });
+
+    expect(setArticleOpen).not.toHaveBeenCalled();
+  });
+
+  it("does nothing without the flag", () => {
+    renderSidebar({ deviceType: DeviceType.mobile });
+
+    expect(setArticleOpen).not.toHaveBeenCalled();
+    expect(navigate).not.toHaveBeenCalled();
   });
 });

@@ -385,6 +385,7 @@ self: FilesActionStore,file: TActionItem
       fileId: file.id,
       fileKeys: encryptionInfo.fileKeys,
       roomMemberKeys,
+      userKeys: encryptionInfo.userKeys,
       userId: String(userId),
       identity,
       originalFileName: file.title,
@@ -418,10 +419,15 @@ self: FilesActionStore,file: TActionItem
     if (result.success && result.file) {
       triggerFileDownload(result.file);
     } else {
-      if (result.error) {
-        console.error("[ENCRYPTION] downloadEncryptedFile:", result.error);
+      // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+      if (result.keyReplaced) {
+        toastr.error(i18n.t("Common:EncryptedFileKeyReplaced"));
+      } else {
+        if (result.error) {
+          console.error("[ENCRYPTION] downloadEncryptedFile:", result.error);
+        }
+        toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
       }
-      toastr.error(i18n.t("Common:EncryptionDownloadFailed"));
     }
   } catch (error) {
     setSecondaryProgressBarData({
@@ -541,6 +547,7 @@ const downloadDecryptedZipImpl = async (
     const total = entries.length;
     const results: ArchiveItem[] = [];
     const failures: string[] = [];
+    let replacedKeyFailures = 0;
     const roomMemberKeysCache = new Map<
       string,
       Awaited<ReturnType<typeof loadRoomMemberKeysSafe>>
@@ -594,6 +601,7 @@ const downloadDecryptedZipImpl = async (
           fileId: file.id,
           fileKeys: encryptionInfo.fileKeys!,
           roomMemberKeys,
+          userKeys: encryptionInfo.userKeys,
           userId: String(userId),
           identity,
           originalFileName: file.title,
@@ -625,6 +633,7 @@ const downloadDecryptedZipImpl = async (
             data: result.data,
           });
         } else {
+          if (result.keyReplaced) replacedKeyFailures += 1;
           failures.push(`${dir}${shownName}`);
         }
       } catch {
@@ -634,7 +643,17 @@ const downloadDecryptedZipImpl = async (
 
     if (results.length === 0 && failures.length > 0) {
       finish(true);
-      toastr.error(i18n.t("Files:DecryptAllFailed"));
+      // Spec: private-rooms/file-operations, "Decrypted folder download"
+      if (replacedKeyFailures === failures.length) {
+        const count = failures.length;
+        toastr.error(
+          count === 1
+            ? i18n.t("Common:PrivateRoomReplacedKeyBarText_one", { count })
+            : i18n.t("Common:PrivateRoomReplacedKeyBarText_other", { count }),
+        );
+      } else {
+        toastr.error(i18n.t("Files:DecryptAllFailed"));
+      }
       return;
     }
 

@@ -418,7 +418,9 @@ const AccessControl = ({
                     })}
                   </Text>
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
-                    {t("Settings:LinkStopWorking")}
+                    {blockExisting
+                      ? t("Settings:LinkStopWorking")
+                      : t("Settings:LinksKeepWorking")}
                   </Text>
                 </div>
               </div>
@@ -441,7 +443,9 @@ const AccessControl = ({
                     })}
                   </Text>
                   <Text fontSize="13px" fontWeight="400" lineHeight="20px">
-                    {t("Settings:LinkStopWorking")}
+                    {blockExisting
+                      ? t("Settings:LinkStopWorking")
+                      : t("Settings:LinksKeepWorking")}
                   </Text>
                   <Text fontSize="13px" fontWeight="600" lineHeight="20px">
                     {t("Settings:AppliesToRoomsWarning")}

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Defines the composer's two menus for the sources of a chat: the "+" menu's lists of skill sets, knowledge bases and data sources, and the slash menu, which lists the skills and, under them, the knowledge bases and data sources. It covers a chat on the default agent, where the user picks the sources, and a chat that runs on an agent, where skill sets and knowledge bases are the agent's settings.
+Defines the composer's two menus for the sources of a chat: the "+" menu's lists of skill sets, knowledge bases and data sources, and the slash menu, which lists the skill sets with their skills. It covers a chat on the default agent, where the user picks the sources, and a chat that runs on an agent, where skill sets and knowledge bases are the agent's settings.
 
 Implementation: the ai-chat library draws the lists (its composer components and dropdown); ui-kit builds their rows and callbacks in `ai-agent/providers`; the client says through the chat store who manages the sources.
 
@@ -45,32 +45,25 @@ A click on a skill in the Skill sets list or in the slash menu SHALL add its cal
 - **THEN** its call leaves the draft and the tick goes
 
 ### Requirement: Slash menu
-Typing "/" at the start of the draft or after a space SHALL open a menu above the composer. Its "Skill sets" caption and hint SHALL stay on top, and under them one scrolling body SHALL list the skill list with "Manage skill sets...", then a Knowledge bases section with the connected bases and "Manage knowledge bases...", then a Data sources section with the connected folders and rooms and "Manage sources...".
+Typing "/" at the start of the draft or after a space SHALL open a menu above the composer. Its "Skill sets" caption and hint SHALL stay on top, and under them one scrolling body SHALL list the skill list with "Manage skill sets...". The knowledge bases and the data sources SHALL NOT be listed there: they are in the "+" menu.
 
 #### Scenario: Open the menu
 - **WHEN** a user with two skill sets, one knowledge base and one folder connected types "/"
-- **THEN** the menu lists the two sets with their skills, then the knowledge base, then the folder, each section under its caption and hint and ending with its "Manage ..." row
+- **THEN** the menu lists the two sets with their skills and "Manage skill sets...", and neither the knowledge base nor the folder
 
 ### Requirement: Filtering the slash menu
-What is typed after the slash SHALL narrow the skills by name or description, with every set unfolded, and the knowledge bases and data sources by name. While something is typed the "Manage knowledge bases..." and "Manage sources..." rows SHALL be hidden, and a section left with no rows SHALL be left out.
+What is typed after the slash SHALL narrow the skills by name or description, with every set unfolded. A set left with no matching skill SHALL be left out.
 
 #### Scenario: Filter
-- **WHEN** the user types "/sum" and no knowledge base or data source has "sum" in its name
-- **THEN** only the skills whose name or description matches "sum" are listed, under their sets, and neither the Knowledge bases nor the Data sources section is shown
+- **WHEN** the user types "/sum"
+- **THEN** only the skills whose name or description matches "sum" are listed, under their sets
 
 ### Requirement: Keyboard in the slash menu
-The arrow keys, Enter and Tab SHALL move among and pick the skills only. The rows of knowledge bases and data sources and the "Manage ..." rows SHALL NOT be reached by them, and a click on the row of a knowledge base or a data source SHALL do nothing.
+The arrow keys, Enter and Tab SHALL move among and pick the skills only. The rows of the sets and the "Manage skill sets..." row SHALL NOT be reached by them.
 
 #### Scenario: Arrow past the skills
 - **WHEN** the highlight is on the last skill and the user presses the down arrow
-- **THEN** the highlight goes back to the first skill, not to a knowledge base
-
-### Requirement: Knowledge bases and data sources in the slash menu
-In the slash menu the Knowledge bases and Data sources sections SHALL each start with a caption and a hint on what the assistant does with them. Each knowledge base SHALL end with a bin labelled "Disconnect knowledge base: <name>" and each data source with a bin labelled "Disconnect folder: <name>". Using a bin SHALL disconnect that source and keep the menu open with the input focused. In a chat that runs on an agent the knowledge bases SHALL follow "Lists of a chat on an agent".
-
-#### Scenario: Disconnect a folder from the slash menu
-- **WHEN** the user uses the bin of the folder "Contracts 2026" in the slash menu
-- **THEN** the folder leaves the menu, the menu stays open, and the next round does not read that folder
+- **THEN** the highlight goes back to the first skill
 
 ### Requirement: Skill calls in the draft
 A skill call in the draft SHALL be drawn inline with the text, in the link colour. It SHALL NOT be drawn as a chip above the input.
@@ -102,11 +95,11 @@ The Knowledge bases entry SHALL open a list headed by a "Knowledge bases" captio
 - **THEN** the row goes, the list stays open, and the next round does not search that base
 
 ### Requirement: Knowledge bases with vectorization off
-While vectorization is off on the portal, neither menu SHALL offer a way to connect a base, nor "Manage knowledge bases..." to those who may edit the agent the chat runs on. Bases connected earlier SHALL stay listed, removable on the default agent, and with none connected the Knowledge bases entry of the "+" menu and the section of the slash menu SHALL be absent.
+While vectorization is off on the portal, the "+" menu SHALL NOT offer a way to connect a base, nor "Manage knowledge bases..." to those who may edit the agent the chat runs on. Bases connected earlier SHALL stay listed, removable on the default agent, and with none connected the Knowledge bases entry of the "+" menu SHALL be absent.
 
 #### Scenario: One base connected earlier
 - **WHEN** vectorization is turned off while the chat has "Company policies" connected
-- **THEN** both menus show that base with its remove control and no "Manage knowledge bases..." row
+- **THEN** "+" > Knowledge bases shows that base with its remove control and no "Manage knowledge bases..." row
 
 ### Requirement: Data sources list
 The Data sources entry SHALL open a list headed by a "Data sources" caption and a line saying that the assistant works with the files of the connected folders and rooms, then the folders and rooms the user connected as the chat's context, one flat row each, with no further level. A row SHALL carry the room icon for a room and the folder icon for a folder, and a "Remove <name>" control that disconnects it and keeps the list open.
@@ -116,14 +109,14 @@ The Data sources entry SHALL open a list headed by a "Data sources" caption and 
 - **THEN** the list shows two rows, the first with the room icon and the second with the folder icon, each with its remove control
 
 ### Requirement: Data sources limit
-A chat SHALL take at most 20 data sources. At the limit neither menu SHALL offer a way to add another until one is removed.
+A chat SHALL take at most 20 data sources. At the limit the "+" menu SHALL NOT offer a way to add another until one is removed.
 
 #### Scenario: Twenty connected
 - **WHEN** 20 folders and rooms are connected
-- **THEN** both menus show them with their remove controls and no "Manage sources..." row
+- **THEN** "+" > Data sources shows them with their remove controls and no "Manage sources..." row
 
 ### Requirement: Manage rows
-Each of the three lists, in the "+" menu and in the slash menu, SHALL end, directly under its rows, with its own row in the link colour with a gear: "Manage skill sets...", "Manage knowledge bases..." and "Manage sources...". On the default agent they SHALL open the picker of Instructions rooms, of Knowledge rooms, and of folders and rooms, with what the chat uses ticked.
+Each of the three lists of the "+" menu, and the skill list of the slash menu, SHALL end, directly under its rows, with its own row in the link colour with a gear: "Manage skill sets...", "Manage knowledge bases..." and "Manage sources...". On the default agent they SHALL open the picker of Instructions rooms, of Knowledge rooms, and of folders and rooms, with what the chat uses ticked.
 
 #### Scenario: Manage knowledge bases
 - **WHEN** the user chooses "Manage knowledge bases..." on the default agent
@@ -140,20 +133,30 @@ On the default agent the pickers SHALL offer every Instructions room and Knowled
 - **WHEN** an Instructions room exists that the user is not a member of
 - **THEN** the picker does not offer it
 
+### Requirement: Remove controls show on demand
+The remove control of a source's row - a skill set's, a knowledge base's, a data source's - in the "+" menu and the slash menu SHALL be shown while the pointer or the keyboard is on the row or the focus is on the control, and SHALL stay shown on a touch screen.
+
+#### Scenario: Pointer on a row
+- **WHEN** the user moves the pointer onto a data source in "+" > Data sources
+- **THEN** the row shows its remove control, and the other rows show none
+
 ### Requirement: Lists of a chat on an agent
-In a chat that runs on an agent, the skill sets and knowledge bases of both menus SHALL be the agent's linked rooms. For the agent owner and Agent managers the "Manage ..." rows of the "+" menu and "Manage knowledge bases..." of the slash menu SHALL open the agent's edit form. Members SHALL get no remove control and no such row. No one SHALL get a remove control on a knowledge base.
+In a chat that runs on an agent, the skill sets and knowledge bases of both menus SHALL be the agent's linked rooms. For the agent owner and Agent managers "Manage skill sets..." and "Manage knowledge bases..." of the "+" menu SHALL open the picker of the agent's rooms of that list, with the linked ones ticked, not the agent's edit form. Members SHALL get no remove control and no such row. A knowledge base SHALL follow "Knowledge bases of a chat on an agent".
 
 #### Scenario: Agent manager in the "+" menu
 - **WHEN** an Agent manager (`Common:AgentManager`) chooses "Manage skill sets..." in "+" > Skill sets of the agent's chat
-- **THEN** the agent's edit form opens, not the room picker
+- **THEN** the Instructions room picker opens with the agent's skill sets ticked, not the agent's edit form
 
 #### Scenario: Member
 - **WHEN** a Member opens "+" > Skill sets and the slash menu in the agent's chat
 - **THEN** the agent's skill sets and skills are listed with no remove control and no "Manage skill sets..." row
 
-#### Scenario: Agent manager and the knowledge bases of the slash menu
-- **WHEN** an Agent manager opens the slash menu in the agent's chat
-- **THEN** the agent's knowledge bases are listed with no bin, and "Manage knowledge bases..." opens the agent's edit form
+### Requirement: Knowledge bases of a chat on an agent
+For the agent owner and Agent managers each knowledge base of "+" > Knowledge bases of an agent's chat SHALL offer a "Remove <name>" control that unlinks the base from the agent, and the chat SHALL follow the agent once it is saved. Members SHALL get no such control.
+
+#### Scenario: Agent manager unlinks a knowledge base in the "+" menu
+- **WHEN** an Agent manager uses the remove control of a knowledge base in "+" > Knowledge bases of the agent's chat
+- **THEN** the base is unlinked from the agent and leaves the list
 
 ### Requirement: Slash menu of a chat on an agent
 For the agent owner and Agent managers the slash menu of an agent's chat SHALL change the agent's skill sets in place: each set SHALL keep its remove control, and "Manage skill sets..." SHALL open the picker of Instructions rooms with the connected sets ticked, not the agent's edit form.

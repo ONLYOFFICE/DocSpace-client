@@ -515,6 +515,8 @@ test.describe("Keys management — advanced flows", () => {
   const onRememberableDevice = async (
     ...[page, mockRequest, baseUrl]: Parameters<typeof bootstrapEncryption>
   ) => {
+    // Installed before the page loads, so the idle timer runs on this clock.
+    await page.clock.install();
     const { keysHandle, passphrase } = await bootstrapEncryption(
       page,
       mockRequest,
@@ -539,11 +541,6 @@ test.describe("Keys management — advanced flows", () => {
       ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
     );
     accessHandle.current!.setRoomKeys(ROOM_ID, [own]);
-
-    // The tab-hide lock obeys the auto-lock preference, which is off by default.
-    await page.evaluate(() =>
-      localStorage.setItem("encryption-auto-lock-timeout-seconds", "300"),
-    );
 
     // In-app navigation keeps the in-memory identity across pages.
     const navigate = (url: string) =>
@@ -573,23 +570,11 @@ test.describe("Keys management — advanced flows", () => {
       });
 
     const lockNow = page.getByTestId("lock_now_link");
-    const setVisibility = (state: "hidden" | "visible") =>
-      page.evaluate((value) => {
-        Object.defineProperty(document, "visibilityState", {
-          configurable: true,
-          get: () => value,
-        });
-        document.dispatchEvent(new Event("visibilitychange"));
-      }, state);
-    // The listener is re-registered as auto-lock suspension clears, so keep
-    // re-dispatching until the lock takes effect.
-    const hideTabUntilLocked = async () => {
+    // The default preset is 30 minutes.
+    const idleUntilLocked = async () => {
       await expect(lockNow).toBeVisible({ timeout: 10000 });
-      await expect(async () => {
-        await setVisibility("hidden");
-        await expect(lockNow).toBeHidden({ timeout: 1000 });
-      }).toPass({ timeout: 10000 });
-      await setVisibility("visible");
+      await page.clock.fastForward("30:01");
+      await expect(lockNow).toBeHidden({ timeout: 10000 });
     };
 
     const prompt = page
@@ -599,7 +584,7 @@ test.describe("Keys management — advanced flows", () => {
     // The first upload after the lock prompts; the passphrase is entered
     // with the device remembered.
     const unlockAndRemember = async () => {
-      await hideTabUntilLocked();
+      await idleUntilLocked();
       await openRoom();
       await upload("first.txt");
       await expect(prompt).toBeVisible({ timeout: 15000 });
@@ -618,7 +603,7 @@ test.describe("Keys management — advanced flows", () => {
       navigate,
       openRoom,
       upload,
-      hideTabUntilLocked,
+      idleUntilLocked,
       prompt,
       unlockAndRemember,
     };
@@ -635,22 +620,22 @@ test.describe("Keys management — advanced flows", () => {
       navigate,
       openRoom,
       upload,
-      hideTabUntilLocked,
+      idleUntilLocked,
       prompt,
       unlockAndRemember,
     } = await onRememberableDevice(page, mockRequest, baseUrl);
 
-    // Not remembered yet: after the hidden-tab lock the upload prompts.
+    // Not remembered yet: after the idle lock the upload prompts.
     await unlockAndRemember();
 
-    // Remembered: the hidden tab still locks, the device stays remembered.
+    // Remembered: the idle time still locks, the device stays remembered.
     await navigate("/profile/keys-management");
     // Unlocked, Lock now is the one action; the forget link comes with the lock.
     const remembered = page.getByTestId("device_remembered_until");
     const forgetDevice = page.getByTestId("forget_device_link");
     await expect(remembered).toBeVisible({ timeout: 10000 });
     await expect(forgetDevice).toHaveCount(0);
-    await hideTabUntilLocked();
+    await idleUntilLocked();
     await expect(remembered).toBeVisible();
     await expect(forgetDevice).toBeVisible();
 
@@ -670,14 +655,14 @@ test.describe("Keys management — advanced flows", () => {
       navigate,
       openRoom,
       upload,
-      hideTabUntilLocked,
+      idleUntilLocked,
       prompt,
       unlockAndRemember,
     } = await onRememberableDevice(page, mockRequest, baseUrl);
     await unlockAndRemember();
 
     await navigate("/profile/keys-management");
-    await hideTabUntilLocked();
+    await idleUntilLocked();
     await page.getByTestId("forget_device_link").click();
 
     await expect(

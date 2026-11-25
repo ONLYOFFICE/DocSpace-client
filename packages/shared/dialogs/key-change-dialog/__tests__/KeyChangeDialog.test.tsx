@@ -85,7 +85,6 @@ describe("KeyChangeDialog", () => {
   describe("Reasons of a key change", () => {
     const LEGITIMATE = [
       "Common:KeyChangedReasonReplaced",
-      "Common:KeyChangedReasonRecovery",
       "Common:KeyChangedReasonReset",
     ];
 
@@ -96,7 +95,7 @@ describe("KeyChangeDialog", () => {
         .getAllByRole("listitem")
         .map((item) => item.textContent);
 
-      expect(reasons).toHaveLength(4);
+      expect(reasons).toHaveLength(3);
       expect(reasons).toEqual(
         expect.arrayContaining([...LEGITIMATE, "Common:KeyChangedReasonAttack"]),
       );

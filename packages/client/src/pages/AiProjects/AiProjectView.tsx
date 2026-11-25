@@ -54,6 +54,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { toAgentRoomsKind } from "SRC_DIR/store/AiProjectsStore";
 
 import EmptyAccessLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
@@ -124,10 +125,19 @@ const AiProjectView = ({
   // The room on screen is the project: read it and start its chat. Another
   // project room replaces it; the same room is left as it is. A project the
   // caller is not a member of is not opened.
+  //
+  // While another agent is being read, the one before it stays on screen
+  // with its chat: the chat goes from one agent's greeting to the next one's
+  // with nothing in between. A read that fails leaves no chat. The room
+  // whose read has ended is kept, not a flag raised by the effect: the flag
+  // would come one render late and take the chat away for a frame.
+  const [readRoomId, setReadRoomId] = React.useState<number | null>(null);
+  const isOpening = readRoomId !== roomId;
   React.useEffect(() => {
     if (!inRoom) return undefined;
     let cancelled = false;
     void store.openProjectById(roomId).then((project) => {
+      if (!cancelled) setReadRoomId(roomId);
       if (cancelled || !project) return;
       const { profile, instructionsRooms, knowledgeRooms } = project.aiProject;
       aiChatStore.openProject({
@@ -291,18 +301,25 @@ const AiProjectView = ({
   }, [aiChatStore, isProjectOnScreen, isChatFullscreen]);
 
   // The project's Skill sets and Knowledge bases are its settings: the
-  // chat's "+" menu lists them and its "Manage sources" opens the project's
-  // form - for those who may change the project; a member only sees the
-  // lists. The folders of Data sources stay the member's own pick. The
-  // composer's slash menu changes the Skill sets in place - a set
-  // disconnected from its row, the pick of "Manage skill sets" - and that
-  // change is saved to the project; when the save fails, the chat goes back
-  // to the rooms the project has.
+  // chat's "+" menu lists them and its "Manage ..." opens the selector of
+  // the project's rooms of that list, as the project's form does - for
+  // those who may change the project; a member only sees the lists. The
+  // folders of Data sources stay the member's own pick. A Skill set
+  // disconnected from its row in the composer's slash menu is saved to the
+  // project; when the save fails, the chat goes back
+  // to the rooms the project has. A Knowledge base is unlinked from the
+  // project by the bin of its row in the "+" menu, as by the bin of the Info
+  // panel's Context tab; the chat follows the project once it is saved.
   const activeProject = store.activeProject;
   const canEditSources = !!activeProject && activeProject.id === roomId && getAgentRights(activeProject).edit;
   React.useEffect(() => {
     aiChatStore.setSourcesManager({
-      onManage: canEditSources ? () => store.activeProject && store.openEditDialog(store.activeProject) : null,
+      onManage: canEditSources
+        ? (kind) => {
+            const project = store.activeProject;
+            if (project) void store.openRoomsSelector(project.id, toAgentRoomsKind(kind));
+          }
+        : null,
       onSkillRoomsChange: canEditSources
         ? (change) => {
             void store.changeActiveSkillRooms(change).then((saved) => {
@@ -316,6 +333,12 @@ const AiProjectView = ({
                 knowledgeRooms: toChatRooms(knowledgeRooms),
               });
             });
+          }
+        : undefined,
+      onKnowledgeRoomRemove: canEditSources
+        ? (knowledgeRoomId) => {
+            const project = store.activeProject;
+            if (project) void store.unlinkRoom(project.id, "knowledge", Number(knowledgeRoomId));
           }
         : undefined,
     });
@@ -353,7 +376,7 @@ const AiProjectView = ({
   }
 
   const project = store.activeProject;
-  if (!isAiChatAvailable || !project || project.id !== roomId) return null;
+  if (!isAiChatAvailable || !project || (project.id !== roomId && !isOpening)) return null;
 
   return (
     // `chat-container` drops the body's vertical padding while the chat

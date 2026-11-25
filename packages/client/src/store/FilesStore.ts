@@ -64,6 +64,7 @@ import type { TagChange } from "@docspace/shared/components/tag-management/TagMa
 import { getCategoryType } from "@docspace/shared/utils/common";
 import {
   subscribeFilenameCache,
+  isReplacedKeyFile,
   getCachedEncryptedFilename,
 } from "@docspace/shared/services/encryption/filename-cache";
 import {
@@ -208,6 +209,28 @@ export type { TItem, TItemSecurity } from "./filesStore/types";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = getPersistedString(PersistenceKeys.viewAs);
+
+/**
+ * The lists of the AI section that keep a view of their own, apart from the
+ * rest of Files: the agents, shown as tiles until another view is picked
+ * there, and the skill sets and knowledge bases - their lists and what is
+ * inside them - shown as rows.
+ */
+type TAiViewContext = "agents" | "sources";
+
+const AI_VIEW_KEYS: Record<TAiViewContext, string> = {
+  agents: "viewAs_aiAgents",
+  sources: "viewAs_aiSources",
+};
+
+/** A stored view as this device can show it: no table off the desktop. */
+const toDeviceView = (view: string | null, fallback: TViewAs): TViewAs => {
+  const stored = (view || fallback) as TViewAs;
+  return !isDesktop() && stored !== "tile" ? "row" : stored;
+};
+
+const readAiView = (context: TAiViewContext): TViewAs =>
+  toDeviceView(getPersistedString(AI_VIEW_KEYS[context]), context === "agents" ? "tile" : "table");
 
 let timerId: ReturnType<typeof setTimeout> | null;
 
@@ -663,6 +686,13 @@ class FilesStore {
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
 
+  // Spec: private-rooms/file-operations, "A private room names the files wrapped for a key the user no longer holds"
+  get replacedKeyFilesCount() {
+    void this.encryptedFilenameCacheVersion;
+    return this.files.filter((f) => f.encrypted && isReplacedKeyFile(f.id))
+      .length;
+  }
+
   get selection() {
     return this._selection;
   }
@@ -890,14 +920,49 @@ class FilesStore {
     this.activeFolders = arrayFormation;
   };
 
+  /** The views of the AI section's own lists (`TAiViewContext`). */
+  aiViews: Record<TAiViewContext, TViewAs> = {
+    agents: readAiView("agents"),
+    sources: readAiView("sources"),
+  };
+
+  /** Which of the AI section's own lists is open, or `null` for any other folder. */
+  get aiViewContext(): TAiViewContext | null {
+    const { rootFolderType, isRootFolder, roomType, parentRoomType } = this.selectedFolderStore;
+    if (rootFolderType !== FolderType.AiHub) return null;
+    if (isRootFolder) {
+      const { type } = this.roomsFilter;
+      const types = (Array.isArray(type) ? type : type != null ? [type] : []).map(Number);
+      if (types.length === 1 && (types[0] === RoomsType.InstructionsRoom || types[0] === RoomsType.KnowledgeRoom))
+        return "sources";
+      // The section's root lists the agents unless a type says otherwise.
+      return types.length === 0 || types.includes(RoomsType.AiProjectRoom) ? "agents" : null;
+    }
+    if (
+      roomType === RoomsType.InstructionsRoom ||
+      roomType === RoomsType.KnowledgeRoom ||
+      parentRoomType === FolderType.InstructionsRoom ||
+      parentRoomType === FolderType.KnowledgeRoom
+    )
+      return "sources";
+    return null;
+  }
+
   setViewAs = (viewAs: TViewAs) => {
-    this.privateViewAs = viewAs;
-    setPersistedString(PersistenceKeys.viewAs, viewAs);
+    const context = this.aiViewContext;
+    if (context) {
+      this.aiViews[context] = viewAs;
+      setPersistedString(AI_VIEW_KEYS[context], viewAs);
+    } else {
+      this.privateViewAs = viewAs;
+      setPersistedString(PersistenceKeys.viewAs, viewAs);
+    }
     viewAs === "tile" && this.createThumbnails();
   };
 
   get viewAs() {
-    const view = this.privateViewAs;
+    const context = this.aiViewContext;
+    const view = context ? this.aiViews[context] : this.privateViewAs;
 
     const { parentRoomType, roomType, isIndexedFolder } =
       this.selectedFolderStore;

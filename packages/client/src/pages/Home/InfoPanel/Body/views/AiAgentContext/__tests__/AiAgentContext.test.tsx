@@ -8,7 +8,8 @@ const api = vi.hoisted(() => ({
   getAiProjectSkills: vi.fn(),
 }));
 const store = vi.hoisted(() => ({
-  openEditDialogById: vi.fn(),
+  openRoomsSelector: vi.fn(),
+  unlinkRoom: vi.fn(),
   projectRevisions: {} as Record<number, number>,
   // The agent the chat runs on (`aiPresetsStore`).
   activePreset: null as { id: string } | null,
@@ -55,12 +56,13 @@ import AiAgentContext from "../index";
 
 const room = (id: number, title: string, available = true) => ({ id, title, available });
 
-const project = (canEditSettings: boolean, inRoom = true) => ({
+// `canEdit` is the room's EditRoom right, which the agent's settings ask.
+const project = (canEdit: boolean, inRoom = true) => ({
   inRoom,
+  security: { EditRoom: canEdit },
   aiProject: {
     instructionsRooms: [room(1, "Legal"), room(2, "Gone", false)],
     knowledgeRooms: [room(3, "Wiki")],
-    canEditSettings,
   },
 });
 
@@ -69,7 +71,8 @@ beforeEach(() => {
   api.getAiProjectSkills
     .mockReset()
     .mockResolvedValue([{ id: 1, skills: [{ id: "9", name: "clause-check", description: "Checks" }] }]);
-  store.openEditDialogById.mockReset();
+  store.openRoomsSelector.mockReset();
+  store.unlinkRoom.mockReset();
   store.projectRevisions = observable({});
   store.activePreset = null;
   chat.folders = [];
@@ -84,9 +87,18 @@ describe("AiAgentContext", () => {
     expect(rooms.map((node) => node.textContent)).toEqual(["Legal", "Wiki"]);
   });
 
-  it("unfolds a skill set to its skills", async () => {
+  it("shows every skill set unfolded to its skills, each with the skill icon", async () => {
     render(<AiAgentContext id={7} />);
-    fireEvent.click(await screen.findByTestId("toggle-Legal"));
+    const skill = await screen.findByText("clause-check");
+    expect(skill.closest("li")?.querySelector('[data-testid="skill-icon-skill"]')).toBeTruthy();
+  });
+
+  it("folds a skill set by hand and unfolds it again", async () => {
+    render(<AiAgentContext id={7} />);
+    const toggle = await screen.findByTestId("toggle-Legal");
+    fireEvent.click(toggle);
+    expect(screen.queryByText("clause-check")).toBeNull();
+    fireEvent.click(toggle);
     expect(screen.getByText("clause-check")).toBeTruthy();
   });
 
@@ -97,7 +109,7 @@ describe("AiAgentContext", () => {
     expect(screen.queryByTestId("toggle-Legal")).toBeNull();
   });
 
-  it("offers a Manage row under each section to those who may edit the agent, which opens its form", async () => {
+  it("offers a Manage row under each section to those who may edit the agent, which opens the selector of its rooms", async () => {
     render(<AiAgentContext id={7} />);
     const skills = await screen.findByTestId("ai-agent-context-manage-skills");
     const knowledge = screen.getByTestId("ai-agent-context-manage-knowledge");
@@ -109,8 +121,9 @@ describe("AiAgentContext", () => {
 
     fireEvent.click(skills);
     fireEvent.click(knowledge);
-    expect(store.openEditDialogById).toHaveBeenCalledTimes(2);
-    expect(store.openEditDialogById).toHaveBeenCalledWith(7);
+    expect(store.openRoomsSelector).toHaveBeenCalledTimes(2);
+    expect(store.openRoomsSelector).toHaveBeenNthCalledWith(1, 7, "instructions");
+    expect(store.openRoomsSelector).toHaveBeenNthCalledWith(2, 7, "knowledge");
   });
 
   it("reads the agent again once it is saved, keeping what it shows meanwhile", async () => {
@@ -120,7 +133,8 @@ describe("AiAgentContext", () => {
 
     api.getAiProject.mockResolvedValue({
       inRoom: true,
-      aiProject: { instructionsRooms: [room(1, "Legal")], knowledgeRooms: [room(4, "Policies")], canEditSettings: true },
+      security: { EditRoom: true },
+      aiProject: { instructionsRooms: [room(1, "Legal")], knowledgeRooms: [room(4, "Policies")] },
     });
     act(() => {
       runInAction(() => {
@@ -151,10 +165,28 @@ describe("AiAgentContext", () => {
     expect(screen.queryByTestId("ai-agent-context-manage-knowledge")).toBeNull();
   });
 
+  it("ends every skill set and knowledge base with a bin that unlinks it, for those who may edit the agent", async () => {
+    render(<AiAgentContext id={7} />);
+    await screen.findAllByTestId("room");
+    fireEvent.click(screen.getByTestId("ai-agent-context-remove-instructions"));
+    fireEvent.click(screen.getByTestId("ai-agent-context-remove-knowledge"));
+    expect(store.unlinkRoom).toHaveBeenNthCalledWith(1, 7, "instructions", 1);
+    expect(store.unlinkRoom).toHaveBeenNthCalledWith(2, 7, "knowledge", 3);
+  });
+
+  it("offers no bin to one who may not edit the agent", async () => {
+    api.getAiProject.mockResolvedValue(project(false));
+    render(<AiAgentContext id={7} />);
+    await screen.findAllByTestId("room");
+    expect(screen.queryByTestId("ai-agent-context-remove-instructions")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-context-remove-knowledge")).toBeNull();
+  });
+
   it("heads each section with what the assistant does with it, which is all an empty one shows", async () => {
     api.getAiProject.mockResolvedValue({
       inRoom: true,
-      aiProject: { instructionsRooms: [], knowledgeRooms: [], canEditSettings: false },
+      security: { EditRoom: false },
+      aiProject: { instructionsRooms: [], knowledgeRooms: [] },
     });
     render(<AiAgentContext id={7} />);
     const skills = await screen.findByTestId("ai-agent-context-skills");

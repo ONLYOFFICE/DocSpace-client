@@ -29,38 +29,22 @@ const roleKeys = (options: TOption[]) =>
   options.map((option) => `${option.key}${option.disabled ? " (disabled)" : ""}`);
 
 describe("the roles an agent's invite panel offers by the invitee's type", () => {
-  it("offers Agent manager and Member only, no read-only role", () => {
+  it("offers Member alone, no Agent manager and no read-only role", () => {
     const accesses = agentOptions()
       .map((option) => option.access)
       .filter((access) => access !== undefined);
-    expect(accesses).toEqual([
-      ShareAccessRights.RoomManager,
-      ShareAccessRights.Collaborator,
-    ]);
-    expect(accesses).not.toContain(ShareAccessRights.ReadOnly);
+    expect(accesses).toEqual([ShareAccessRights.Collaborator]);
   });
 
   it.each([
     ["portal owner", EmployeeType.Owner],
     ["DocSpace admin", EmployeeType.Admin],
     ["room admin", EmployeeType.RoomAdmin],
-  ])("offers a %s both roles", (_name, type) => {
-    expect(roleKeys(offered({ type }))).toEqual(["projectManager", "projectMember"]);
-  });
-
-  it("preselects Agent manager for an admin, as the panel opens on it", () => {
-    const preselected = getDefaultAccessUser(RoomsType.AiProjectRoom);
-    const option = offered({ type: EmployeeType.RoomAdmin }).find(
-      (item) => item.access === preselected,
-    );
-    expect(option?.key).toBe("projectManager");
-    expect(option?.disabled).toBeFalsy();
-  });
-
-  it("leaves a User Member only, Agent manager disabled with the note on who may hold it", () => {
-    const options = offered({ type: EmployeeType.User });
-    expect(roleKeys(options)).toEqual(["projectManager (disabled)", "projectMember"]);
-    expect(options[0].tooltip).toBe("Common:UserAgentMaxAvailableRoleWarning");
+    ["User", EmployeeType.User],
+  ])("offers a %s Member, preselected", (_name, type) => {
+    const options = offered({ type });
+    expect(roleKeys(options)).toEqual(["projectMember"]);
+    expect(options[0].access).toBe(getDefaultAccessUser(RoomsType.AiProjectRoom));
   });
 
   it("treats Agent manager as the paid role and Member as free", () => {

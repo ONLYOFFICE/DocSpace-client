@@ -47,7 +47,26 @@ const getSectionBasePath = (section: Section) =>
   `${SECTION_BASE_PATH[section]}/${PLUGIN_SECTION_SEGMENT}`;
 
 export const getPluginSectionPath = (section: Section, itemKey: string) =>
-  `${getSectionBasePath(section)}/${itemKey}`;
+  `${getSectionBasePath(section)}/${encodeURIComponent(itemKey)}`;
+
+const canonicalSegment = (segment: string) => {
+  try {
+    return encodeURIComponent(decodeURIComponent(segment));
+  } catch {
+    return segment;
+  }
+};
+
+export const isPluginSectionPathActive = (
+  pathname: string,
+  section: Section,
+  itemKey: string,
+) => {
+  const path = getPluginSectionPath(section, itemKey);
+  const current = pathname.split("/").map(canonicalSegment).join("/");
+
+  return current === path || current.startsWith(`${path}/`);
+};
 
 export const getPluginSectionRoute = (section: Section) =>
   `${getSectionBasePath(section)}/:itemKey`;

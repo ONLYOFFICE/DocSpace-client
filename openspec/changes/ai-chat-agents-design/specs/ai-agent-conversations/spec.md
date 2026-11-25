@@ -78,11 +78,19 @@ Picking an agent, or the default agent, in the chat panel SHALL switch the chat 
 - **THEN** a new empty conversation opens on "Legal Reviewer", and the earlier one is listed in the default agent's history
 
 ### Requirement: Model of a chat on an agent
-A chat that runs on an agent SHALL run on the agent's model, or on the portal's default chat model when the agent stores none. The composer SHALL show that model as a label that no role can change there, on the agent's page and in the chat panel alike.
+A chat that runs on an agent SHALL run on the agent's model, or on the portal's default chat model when the agent stores none. On the agent's page and in the chat panel alike, the composer SHALL offer the model picker only to a user whose rights on the agent's room include `EditRoom`, and a model picked there SHALL be saved as the agent's model. Every other user SHALL see the model as a label that cannot be changed.
 
 #### Scenario: Member in the chat panel
 - **WHEN** a Member picks an agent in the chat panel of a room
 - **THEN** the composer shows the agent's model as plain text that cannot be changed
+
+#### Scenario: Agent manager changes the model
+- **WHEN** an Agent manager picks another model in the composer of the agent's chat
+- **THEN** the agent's model becomes that model, and the chat runs on it
+
+#### Scenario: Model not saved
+- **WHEN** the agent refuses the picked model
+- **THEN** an error is shown and the chat goes back to the agent's model
 
 ### Requirement: Sources of a chat on an agent
 A chat that runs on an agent SHALL use the agent's skill sets and knowledge bases, and none that the user had connected on the default agent.

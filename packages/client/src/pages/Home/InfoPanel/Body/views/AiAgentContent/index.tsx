@@ -42,7 +42,12 @@ import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/contex
 import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import SocketHelper, {
+  SocketEvents,
+  type TModifyThreadFilesData,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   getAiThreadArtifacts,
   getAiThreadAttachments,
@@ -53,6 +58,8 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import EmptyFilesLightSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
+import EmptyFilesDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
 
 import styles from "./AiAgentContent.module.scss";
 
@@ -63,10 +70,26 @@ import styles from "./AiAgentContent.module.scss";
  */
 export const REFRESH_DELAY_MS = 400;
 
-type TThreadFiles = { artifacts: TFile[]; attachments: TFile[] };
+type TKind = "artifacts" | "attachments";
+
+const KINDS: TKind[] = ["artifacts", "attachments"];
+
+const READERS = {
+  artifacts: getAiThreadArtifacts,
+  attachments: getAiThreadAttachments,
+};
+
+/** The two lists; a list not read yet is null. */
+type TThreadFiles = Record<TKind, TFile[] | null>;
 
 const NO_FILES: TThreadFiles = { artifacts: [], attachments: [] };
+const NOT_READ: TThreadFiles = { artifacts: null, attachments: null };
+const NONE_FAILED: Record<TKind, boolean> = {
+  artifacts: false,
+  attachments: false,
+};
 
+/** The same files as shown: kept as they are, so no row is drawn again. */
 const sameList = (a: TFile[], b: TFile[]) =>
   a.length === b.length &&
   a.every(
@@ -77,31 +100,22 @@ const sameList = (a: TFile[], b: TFile[]) =>
       file.updated === b[i].updated,
   );
 
-/** The same files as shown: kept as they are, so no row is drawn again. */
-const sameFiles = (a: TThreadFiles | null, b: TThreadFiles) =>
-  !!a &&
-  sameList(a.artifacts, b.artifacts) &&
-  sameList(a.attachments, b.attachments);
-
 /**
- * The files of a conversation. The attachments do not hold the artifacts
- * back: a list that cannot be read is shown empty, and only both failing is
- * an error.
+ * The link a file opens by: the server's own, without the version it pins.
+ * A file of a conversation is opened as it is now - with a version in the
+ * address the editor takes it for a revision of the history and does not
+ * open it for work.
  */
-export const readThreadFiles = async (
-  projectId: number,
-  threadId: string,
-): Promise<TThreadFiles> => {
-  const [artifacts, attachments] = await Promise.allSettled([
-    getAiThreadArtifacts(projectId, threadId),
-    getAiThreadAttachments(projectId, threadId),
-  ]);
-  if (artifacts.status === "rejected" && attachments.status === "rejected")
-    throw artifacts.reason;
-  return {
-    artifacts: artifacts.status === "fulfilled" ? artifacts.value : [],
-    attachments: attachments.status === "fulfilled" ? attachments.value : [],
-  };
+export const getOpenUrl = (webUrl?: string) => {
+  if (!webUrl) return webUrl;
+  try {
+    const url = new URL(webUrl, window.location.origin);
+    if (!url.searchParams.has("version")) return webUrl;
+    url.searchParams.delete("version");
+    return url.href;
+  } catch {
+    return webUrl;
+  }
 };
 
 type AiAgentContentProps = {
@@ -113,15 +127,24 @@ type AiAgentContentProps = {
  * The Content tab of the Info panel on an agent's page: the files of the
  * conversation on screen - Artifacts, what its replies produced, and
  * Attachments, what the user added to it. It follows the conversation: a new
- * chat shows both empty, another conversation its own files. A file opens in
- * a new tab; its "..." menu downloads it, saves a copy to a room or opens
+ * chat, as any conversation without a file, shows the panel's empty screen
+ * in place of the two sections, another conversation its own files.
+ *
+ * The two lists are read apart and each is shown as it comes, the other not
+ * waited for. A list without a file has no section at all. A list that
+ * cannot be read counts as one without files, and only both failing is an
+ * error. An image or a
+ * media file opens in the viewer over the page, any other file in a new tab;
+ * its "..." menu downloads it, saves a copy to a room or opens
  * the room or folder it is in.
  *
- * The server announces no new file, so the lists are read again when the
- * chat reports a round of this conversation that may have produced one
+ * A list is read again when the server announces a new file of its kind in
+ * this conversation (`s:modify-thread-files`), which also covers a round run
+ * on another device; the other list is left alone. A removed file is not announced, and an event may be lost
+ * with the connection, so both are also read when the chat reports a round
+ * of this conversation that may have changed them
  * (dialogsStore.aiChatThreadFilesChange, fed from the chat's callbacks in
- * Shell), and when the browser tab is shown again: a round finished out of
- * sight, or on another device, reports nothing here.
+ * Shell), and when the browser tab is shown again.
  */
 const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -132,50 +155,62 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const filesStore = useStore("filesStore");
   const dialogsStore = useStore("dialogsStore");
   const infoPanelStore = useStore("infoPanelStore");
+  const mediaViewerDataStore = useStore("mediaViewerDataStore");
+  const { isBase } = useTheme();
 
   // A change reported for another conversation is none of this tab's.
   const change = dialogsStore.aiChatThreadFilesChange;
   const refreshKey =
     threadId && change.threadId === threadId ? change.seq : 0;
 
-  const [files, setFiles] = React.useState<TThreadFiles | null>(null);
-  const [failed, setFailed] = React.useState(false);
+  const [files, setFiles] = React.useState<TThreadFiles>(NOT_READ);
+  const [failed, setFailed] = React.useState(NONE_FAILED);
 
-  const filesRef = React.useRef(files);
-  filesRef.current = files;
-  // Only the latest read may show its answer: an earlier one, of this
-  // conversation or of the one before, may come back after it.
-  const latestRef = React.useRef(0);
+  // Only the latest read of a list may show its answer: an earlier one, of
+  // this conversation or of the one before, may come back after it.
+  const latestRef = React.useRef({ artifacts: 0, attachments: 0 });
   const prevThreadRef = React.useRef(threadId);
   // The last change already covered by a read, so a change seen again on
   // coming back to a conversation does not read it twice.
   const handledSeqRef = React.useRef(0);
 
-  const read = React.useCallback(() => {
-    if (!threadId) return;
-    latestRef.current += 1;
-    const id = latestRef.current;
-    readThreadFiles(projectId, threadId)
-      .then((data) => {
-        if (id !== latestRef.current) return;
-        // A read again may recover from a first read that failed.
-        setFailed(false);
-        setFiles((shown) => (sameFiles(shown, data) ? shown : data));
-      })
-      .catch(() => {
-        // A read again that fails keeps what is shown.
-        if (id === latestRef.current && !filesRef.current) setFailed(true);
+  const read = React.useCallback(
+    (kinds: TKind[] = KINDS) => {
+      if (!threadId) return;
+      kinds.forEach((kind) => {
+        latestRef.current[kind] += 1;
+        const id = latestRef.current[kind];
+        READERS[kind](projectId, threadId)
+          .then((list) => {
+            if (id !== latestRef.current[kind]) return;
+            // A read again may recover from a read that failed.
+            setFailed((was) => (was[kind] ? { ...was, [kind]: false } : was));
+            setFiles((shown) => {
+              const current = shown[kind];
+              return current && sameList(current, list)
+                ? shown
+                : { ...shown, [kind]: list };
+            });
+          })
+          .catch(() => {
+            // A read again that fails keeps what is shown.
+            if (id !== latestRef.current[kind]) return;
+            setFailed((was) => (was[kind] ? was : { ...was, [kind]: true }));
+          });
       });
-  }, [projectId, threadId]);
+    },
+    [projectId, threadId],
+  );
 
   const readRef = React.useRef(read);
   readRef.current = read;
 
   React.useEffect(() => {
     // Whatever is still on its way belongs to what was shown before.
-    latestRef.current += 1;
+    latestRef.current.artifacts += 1;
+    latestRef.current.attachments += 1;
     handledSeqRef.current = dialogsStore.aiChatThreadFilesChange.seq;
-    setFailed(false);
+    setFailed(NONE_FAILED);
     const prevThreadId = prevThreadRef.current;
     prevThreadRef.current = threadId;
     // A chat not sent yet is no conversation: nothing to read.
@@ -185,7 +220,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     }
     // Another conversation hides the files of the last one. The one a new
     // chat has just become keeps its empty lists until its files come.
-    if (prevThreadId) setFiles(null);
+    if (prevThreadId) setFiles(NOT_READ);
     read();
   }, [projectId, threadId]);
 
@@ -197,6 +232,41 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   }, [refreshKey]);
 
   React.useEffect(() => {
+    if (!threadId) return undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    // The lists announced since the last read.
+    const announced = new Set<TKind>();
+    const onModify = ({
+      cmd,
+      threadId: changed,
+      kind,
+    }: Partial<TModifyThreadFilesData> = {}) => {
+      // The server writes the id as a GUID, whatever case the chat keeps.
+      if (cmd !== "create" || !changed) return;
+      if (String(changed).toLowerCase() !== threadId.toLowerCase()) return;
+      // Only the list the file went to is read; a kind unknown here, both.
+      (kind && KINDS.includes(kind) ? [kind] : KINDS).forEach((k) =>
+        announced.add(k),
+      );
+      // A message's attachments come one event each: one read for them all.
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const kinds = [...announced];
+        announced.clear();
+        readRef.current(kinds);
+      }, REFRESH_DELAY_MS);
+    };
+    // A file saved to this conversation, an artifact or an attachment: sent
+    // to its author only, in the agent's own room `DIR-{projectId}`, which
+    // the open agent's page is subscribed to.
+    SocketHelper?.on(SocketEvents.ModifyThreadFiles, onModify);
+    return () => {
+      clearTimeout(timer);
+      SocketHelper?.off(SocketEvents.ModifyThreadFiles, onModify);
+    };
+  }, [threadId]);
+
+  React.useEffect(() => {
     const onVisibilityChange = () => {
       if (document.visibilityState === "visible") readRef.current();
     };
@@ -205,14 +275,42 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
       document.removeEventListener("visibilitychange", onVisibilityChange);
   }, []);
 
-  if (failed)
+  // A list that could not be read counts as one without files.
+  const artifacts = files.artifacts ?? (failed.artifacts ? [] : null);
+  const attachments = files.attachments ?? (failed.attachments ? [] : null);
+
+  if (
+    failed.artifacts &&
+    failed.attachments &&
+    !files.artifacts &&
+    !files.attachments
+  )
     return (
       <Text className={styles.message} data-testid="ai-agent-content-error">
         {t("Common:SomethingWentWrong")}
       </Text>
     );
 
-  if (!files) return null;
+  if (!artifacts && !attachments) return null;
+
+  // Nothing in either list: the empty screen of the Info panel, not two
+  // captions over two "no files" lines.
+  if (artifacts?.length === 0 && attachments?.length === 0)
+    return (
+      <div className={styles.emptyScreen} data-testid="ai-agent-content-empty">
+        <img
+          className={styles.emptyImage}
+          src={isBase ? EmptyFilesLightSvgUrl : EmptyFilesDarkSvgUrl}
+          alt=""
+        />
+        <Text fontSize="16px" fontWeight={700} lineHeight="22px" textAlign="center">
+          {t("Common:AiContentEmpty")}
+        </Text>
+        <Text fontSize="12px" lineHeight="16px" textAlign="center" className={styles.emptyDescription}>
+          {t("Common:AiContentEmptyDescription")}
+        </Text>
+      </div>
+    );
 
   // A copy goes through the portal's copy panel, which copies the buffered
   // item when nothing is selected: this file, not what a list held.
@@ -233,6 +331,17 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
           filesStore.setBufferSelection(null);
       },
     );
+  };
+
+  // The viewer plays the files of the list on screen, and an agent's page
+  // has none: the file is handed to it as the one item of its playlist, the
+  // way the upload panel shows a file of another folder.
+  const openInViewer = (e: React.MouseEvent, file: TFile) => {
+    // A click that asks for a new tab or window keeps the link's own way.
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    mediaViewerDataStore.setCurrentItem({ fileId: file.id, fileInfo: file });
+    mediaViewerDataStore.setMediaViewerData({ visible: true, id: file.id });
   };
 
   const getRowOptions = (file: TFile): ContextMenuModel[] => [
@@ -260,13 +369,21 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     ]
       .filter(Boolean)
       .join(" \u00b7 ");
+    const isMedia =
+      !!file.viewAccessibility?.ImageView ||
+      !!file.viewAccessibility?.MediaView;
     return (
       <div key={file.id} className={styles.row} data-testid="ai-agent-content-file">
         <img className={styles.icon} src={getIcon(32, file.fileExst)} alt="" />
         <div className={styles.text}>
           <Link
-            href={file.webUrl}
+            href={getOpenUrl(file.webUrl)}
             target={LinkTarget.blank}
+            onClick={
+              isMedia
+                ? (e: React.MouseEvent) => openInViewer(e, file)
+                : undefined
+            }
             fontSize="13px"
             fontWeight={600}
             isTextOverflow
@@ -301,7 +418,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
       <div className={styles.header}>
         <Text
           as="h4"
-          fontSize="12px"
+          fontSize="14px"
           fontWeight={600}
           className={styles.heading}
         >
@@ -327,25 +444,28 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
           </Link>
         ) : null}
       </div>
-      {list.length > 0 ? (
-        list.map((file) => row(file))
-      ) : (
-        <Text fontSize="13px" className={styles.empty}>
-          {t("Common:AiContentEmpty")}
-        </Text>
-      )}
+      {list.map((file) => row(file))}
     </section>
   );
 
+  // A list is shown as soon as it has come, and only when it has files: a
+  // list without one has no section, caption included. Both without a file
+  // are the empty screen above.
+  if (!artifacts?.length && !attachments?.length) return null;
+
   return (
     <div className={styles.content} data-testid="ai-agent-content">
-      {section("artifacts", t("Common:AiArtifacts"), files.artifacts, true)}
-      {section(
-        "attachments",
-        t("Common:AiAttachments"),
-        files.attachments,
-        false,
-      )}
+      {artifacts?.length
+        ? section("artifacts", t("Common:AiArtifacts"), artifacts, true)
+        : null}
+      {attachments?.length
+        ? section(
+            "attachments",
+            t("Common:AiAttachments"),
+            attachments,
+            false,
+          )
+        : null}
     </div>
   );
 });

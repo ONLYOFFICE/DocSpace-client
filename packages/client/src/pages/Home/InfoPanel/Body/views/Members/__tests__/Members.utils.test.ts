@@ -19,13 +19,13 @@ describe("MembersHelper.getOptionsByRoomType", () => {
     expect(keysOf(RoomsType.InstructionsRoom)).toEqual(["roomAdmin", "collaborator", "editor", "viewer"]);
   });
 
-  it("offers both project roles in a project", () => {
-    expect(keysOf(RoomsType.AiProjectRoom)).toEqual(["projectManager", "projectMember"]);
+  it("offers Member alone in a project, no Agent manager", () => {
+    expect(keysOf(RoomsType.AiProjectRoom)).toEqual(["projectMember"]);
   });
 
-  it("names an agent's roles Agent manager and Member", () => {
+  it("names an agent's role Member", () => {
     const options = new MembersHelper({ t }).getOptionsByRoomType(RoomsType.AiProjectRoom, false);
-    expect(options?.map((o) => ("label" in o ? o.label : undefined))).toEqual(["Common:AgentManager", "Common:Member"]);
+    expect(options?.map((o) => ("label" in o ? o.label : undefined))).toEqual(["Common:Member"]);
   });
 
   it("appends the remove option when the caller may change roles", () => {

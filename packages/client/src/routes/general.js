@@ -39,6 +39,7 @@ import componentLoader from "@docspace/shared/utils/component-loader";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
 import KeysManagementRoute from "SRC_DIR/components/KeysManagementRoute";
+import { getProfileTabId } from "SRC_DIR/pages/Profile/Section/Body/profileTabs";
 
 // Every profile tab renders the same element tree, the keys-management guard
 // included (unguarded for the other tabs): with one tab wrapped differently,
@@ -104,6 +105,16 @@ export const profileClientRoutes = [
   },
   {
     path: "profile/authorized-apps",
+    element: (
+      <PrivateRouteWrapper>
+        <KeysManagementRoute guarded={false}>
+          <ViewComponent />
+        </KeysManagementRoute>
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/p/:key",
     element: (
       <PrivateRouteWrapper>
         <KeysManagementRoute guarded={false}>
@@ -240,6 +251,16 @@ export const generalClientRoutes = [
             () =>
               import(
                 "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader"
+              ),
+          ),
+      },
+      {
+        path: "javascript-sdk/media-viewer",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/MediaViewer"
               ),
           ),
       },
@@ -441,7 +462,7 @@ const ProfileTab = () => {
   const Page = ProfilePage;
 
   return (
-    <KeysManagementRoute guarded={pathname.includes("/keys-management")}>
+    <KeysManagementRoute guarded={getProfileTabId(pathname) === "keys-management"}>
       <Page />
     </KeysManagementRoute>
   );
@@ -490,6 +511,10 @@ const generalRoutes = [
       },
       {
         path: "authorized-apps",
+        lazy: loadProfileTab,
+      },
+      {
+        path: "p/:key",
         lazy: loadProfileTab,
       },
     ],

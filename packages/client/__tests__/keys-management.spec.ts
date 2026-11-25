@@ -564,6 +564,24 @@ test.describe("Profile > Keys Management: key dialogs on screen", () => {
     return words;
   };
 
+  test("Dark theme", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(...privacyroomKeysHandlers(TEST_PORT, { initial: [] }));
+    await openRecoveryStep(page, baseUrl);
+
+    const colours = await page
+      .getByTestId("recovery_save_icon")
+      .evaluateAll((icons) =>
+        icons.map((icon) => {
+          const action = icon.closest("button") as HTMLElement;
+          action.style.color = "rgb(1, 2, 3)";
+          return getComputedStyle(icon.querySelector("path") as SVGPathElement)
+            .fill;
+        }),
+      );
+
+    expect(colours).toEqual(Array(3).fill("rgb(1, 2, 3)"));
+  });
+
   const tileBoxes = async (words: Locator) =>
     words.getByRole("listitem").evaluateAll((items) =>
       items.map((item) => {

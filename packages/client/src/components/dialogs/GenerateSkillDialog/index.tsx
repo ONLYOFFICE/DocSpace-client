@@ -164,6 +164,10 @@ const GenerateSkillDialog = ({
     targetRoomId != null;
 
   const onClose = () => {
+    // A skill being saved is not left. The cross stays in the header all
+    // the same: without it the title, which the back arrow shares the
+    // header with, is spread to the far edge.
+    if (isSaving) return;
     abortRef.current?.abort();
     setGenerateSkillDialogVisible?.(false);
   };
@@ -293,7 +297,6 @@ const GenerateSkillDialog = ({
         void (skill ? onSave() : onGenerate());
       }}
       onClose={onClose}
-      isCloseable={!isSaving}
       // The generated skill hides the form it was asked for with; the back
       // arrow returns to it and drops the skill, which "Generate skill"
       // writes anew.

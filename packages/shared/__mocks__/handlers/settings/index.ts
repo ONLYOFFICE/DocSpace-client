@@ -78,6 +78,8 @@ export {
   MEMBER_PLUGIN_OWNER_ID,
   MEMBER_PLUGIN_USER_ID,
   mockMemberPlugins,
+  mockOwnPersonalPlugin,
+  ownPersonalPluginsHandlers,
   personalPluginsSettings,
   membersPluginsHandler,
   memberPluginUpdateHandler,

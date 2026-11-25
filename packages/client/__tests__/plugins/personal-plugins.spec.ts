@@ -36,6 +36,7 @@
 import type { Page } from "@playwright/test";
 
 import {
+  capabilitiesHandler,
   filesSettingsHandler,
   MEMBER_PLUGIN_ADMIN_ID,
   MEMBER_PLUGIN_OWNER_ID,
@@ -43,6 +44,8 @@ import {
   memberPluginDeleteHandler,
   memberPluginUpdateHandler,
   membersPluginsHandler,
+  mockOwnPersonalPlugin,
+  ownPersonalPluginsHandlers,
   personalPluginsSettings,
   personalPluginsSwitchHandler,
   selfActivationStatusHandler,
@@ -50,6 +53,7 @@ import {
   TypeSettings,
   webPluginsHandler,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "../fixtures/base";
 
 const ROWS =
@@ -107,6 +111,12 @@ test.describe("Users' plugins", () => {
     await expect(own.locator(".owner_icon")).toBeVisible();
     await expect(admins.locator(".admin_icon")).toBeVisible();
     await expect(user.locator(".owner_icon, .admin_icon")).toHaveCount(0);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins",
+      "personal-plugins-users.png",
+    ]);
   });
 
   test("sorts by the plugin name, and back on a second click", async ({
@@ -235,6 +245,12 @@ test.describe("Users' plugins", () => {
       ),
     ).toBeVisible();
 
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins",
+      "personal-plugins-users-delete-dialog.png",
+    ]);
+
     const request = page.waitForRequest(
       (r) =>
         r.method() === "DELETE" &&
@@ -289,6 +305,12 @@ test.describe("Users' plugins", () => {
       page.getByText("No one has added their own plugins yet"),
     ).toBeVisible();
     await expect(page.locator(ROWS)).toHaveCount(0);
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins",
+      "personal-plugins-users-empty.png",
+    ]);
   });
 
   test("has no Users' plugins tab when the installation turns personal plugins off", async ({
@@ -309,5 +331,70 @@ test.describe("Users' plugins", () => {
 
     await expect(page.getByTestId("empty-screen-container")).toBeVisible();
     await expect(page.getByTestId("users_tab")).toHaveCount(0);
+  });
+});
+
+test.describe("Personal plugins in the profile", () => {
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(
+        TEST_PORT,
+        TypeSettings.AuthenticatedWithPlugins,
+        personalPluginsSettings(true),
+      ),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("uploads a plugin for oneself and lists it on the Plugins tab", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(...ownPersonalPluginsHandlers(TEST_PORT));
+
+    await page.goto(`${baseUrl}/profile/plugins`);
+
+    const dropzone = page.getByTestId("upload_personal_plugin_dropzone");
+    await expect(dropzone).toBeVisible();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins",
+      "personal-plugins-profile-empty.png",
+    ]);
+
+    const upload = page.waitForRequest(
+      (r) =>
+        r.method() === "POST" &&
+        r.url().endsWith("/settings/webplugins?personal=true"),
+    );
+    const bundle = page.waitForResponse(`**${mockOwnPersonalPlugin.url}`);
+
+    await dropzone.getByTestId("dropzone-input").setInputFiles({
+      name: "my-notes.zip",
+      mimeType: "application/zip",
+      buffer: Buffer.from("personal plugin archive"),
+    });
+
+    await upload;
+    await bundle;
+
+    const card = page.getByTestId(`personal_plugin_${mockOwnPersonalPlugin.name}`);
+    await expect(card).toBeVisible();
+    await expect(card.getByText(mockOwnPersonalPlugin.version)).toBeVisible();
+    await expect(
+      card.getByTestId("enable_plugin_toggle_button").getByTestId(
+        "toggle-button-input",
+      ),
+    ).toBeChecked();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "plugins",
+      "personal-plugins-profile.png",
+    ]);
   });
 });

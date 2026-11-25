@@ -36,9 +36,9 @@
 import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
-import type { TMemberPlugin } from "../../../api/plugins/types";
+import type { TAPIPlugin, TMemberPlugin } from "../../../api/plugins/types";
 import { EmployeeType } from "../../../enums";
-import { mockPlugin1 } from "./webplugins";
+import { mockPlugin1, PATH_WEB_PLUGINS } from "./webplugins";
 
 export const PATH_PERSONAL_WEB_PLUGINS = "settings/personalwebplugins";
 
@@ -158,6 +158,66 @@ export const memberPluginDeleteHandler = (port: string) =>
   http.delete(`${pluginsUrl(port)}/:userId/:name`, () =>
     Response.json({ response: null, status: 0 }),
   );
+
+export const mockOwnPersonalPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "my-notes",
+  pluginName: "MyNotes",
+  version: "1.0.0",
+  description: "Keeps short notes for yourself.",
+  nameLocale: { en: "My notes", "en-US": "My notes" },
+  descriptionLocale: {
+    en: "Keeps short notes for yourself.",
+    "en-US": "Keeps short notes for yourself.",
+  },
+  scopes: "ContextMenu",
+  url: "/plugins/my-notes/plugin.js",
+  runtime: "module",
+  personal: true,
+  cspDomains: "",
+};
+
+const ownPluginSource = `export default {
+  status: "active",
+  onLoadCallback: async () => {},
+  setOnLoadCallback() {},
+  updateStatus(status) { this.status = status; },
+  getStatus() { return this.status; },
+  getContextMenuItems: () => new Map(),
+};`;
+
+const isPersonal = (request: Request) =>
+  new URL(request.url).searchParams.get("personal") === "true";
+
+export const ownPersonalPluginsHandlers = (
+  port: string,
+  own: TAPIPlugin[] = [],
+) => {
+  const plugins = [...own];
+  const url = `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`;
+
+  return [
+    http.get(url, ({ request }) => {
+      const list = isPersonal(request) ? plugins : [];
+
+      return Response.json({ response: list, count: list.length, status: 0 });
+    }),
+    http.post(url, ({ request }) => {
+      if (!isPersonal(request)) return new Response(null, { status: 403 });
+
+      plugins.push(mockOwnPersonalPlugin);
+
+      return Response.json({ response: mockOwnPersonalPlugin, status: 0 });
+    }),
+    http.get(
+      `*${mockOwnPersonalPlugin.url}`,
+      () =>
+        new Response(ownPluginSource, {
+          headers: { "Content-Type": "application/javascript; charset=utf-8" },
+        }),
+    ),
+  ];
+};
 
 export const personalPluginsSwitchHandler = (port: string) =>
   http.post(

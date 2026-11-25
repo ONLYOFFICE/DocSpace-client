@@ -1096,6 +1096,8 @@ const Shell = ({ page = "home", ...rest }) => {
           // "Set up Web search..." and "Add model..." lead to the portal's
           // AI settings, which only an admin may open.
           canManageAiSettings={isAdmin}
+          // The model may pause a round to ask a clarifying question.
+          askUserQuestions
           hideProfilePicker={false}
           profilePickerReadOnly={isAgentModelLocked}
           onProfilePickerSelect={onAgentModelPicked}

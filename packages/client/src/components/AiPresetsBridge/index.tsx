@@ -120,6 +120,8 @@ type AiPresetsBridgeProps = {
    * resolves to `false` when nothing was saved.
    */
   changeAgentSkillRooms: (id: number, change: AiChatSkillRoomsChange) => Promise<boolean>;
+  /** Unlinks one room of an agent's Skill sets or Knowledge bases. */
+  unlinkAgentRoom: (id: number, kind: TAgentRoomsKind, roomId: number) => Promise<boolean>;
   /** Read in a reaction: set anew each time a model picked in the chat on an agent was not saved. */
   aiProjectsModelRejected: () => { id: number } | null;
   /** Opens the invite panel of a room. */
@@ -169,6 +171,7 @@ const AiPresetsBridge = ({
   openEditAiProject,
   openAgentRooms,
   changeAgentSkillRooms,
+  unlinkAgentRoom,
   aiProjectsModelRejected,
   inviteToRoom,
   selectForInfoPanel,
@@ -425,9 +428,9 @@ const AiPresetsBridge = ({
   // A picked agent's Skill sets and Knowledge bases are its settings, as on
   // its page (AiProjectView): the composer lists them as they are, "Manage
   // ..." opens the selector of the agent's rooms of that list and a Skill set changed in the slash menu is
-  // saved to the agent - for those who may edit it. A member gets the lists
-  // with no remove control and no Manage row, and no one may drop a
-  // knowledge base from the chat alone. When a save fails, the chat goes
+  // saved to the agent - for those who may edit it, as is a Knowledge base
+  // unlinked by the bin of its row in the "+" menu. A member gets the lists
+  // with no remove control and no Manage row. When a save fails, the chat goes
   // back to the rooms the agent has. Cleared only while it is this one: the
   // agent's page sets its own.
   React.useEffect(() => {
@@ -449,6 +452,9 @@ const AiPresetsBridge = ({
             });
           }
         : undefined,
+      onKnowledgeRoomRemove: canEditAgent
+        ? (roomId) => void unlinkAgentRoom(id, "knowledge", Number(roomId))
+        : undefined,
     };
     aiChatStore.setSourcesManager(manager);
     return () => {
@@ -459,6 +465,7 @@ const AiPresetsBridge = ({
     aiPresetsStore,
     openAgentRooms,
     changeAgentSkillRooms,
+    unlinkAgentRoom,
     isInsideOpenProject,
     activeAgentId,
     canEditAgent,
@@ -680,6 +687,7 @@ export default inject(
   openEditAiProject: aiProjectsStore.openEditDialogById,
   openAgentRooms: aiProjectsStore.openRoomsSelector,
   changeAgentSkillRooms: aiProjectsStore.changeSkillRooms,
+  unlinkAgentRoom: aiProjectsStore.unlinkRoom,
   aiProjectsModelRejected: aiProjectsStore.getModelRejected,
   inviteToRoom: contextOptionsStore.onClickInviteUsers,
   // The Info panel shows the list's selection: the agent takes its place.

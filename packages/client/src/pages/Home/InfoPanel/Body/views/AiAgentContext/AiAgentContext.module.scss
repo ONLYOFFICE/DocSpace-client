@@ -47,9 +47,12 @@
   min-width: 0;
 }
 
+// A caption as the Info panel writes them over a group of members
+// ("Administration").
 .heading {
   margin: 0;
-  color: var(--text-secondary);
+  line-height: 20px;
+  color: var(--info-panel-subtitle-color);
 }
 
 // What the assistant does with the section's sources, under its caption.
@@ -140,7 +143,23 @@
   min-width: 0;
 }
 
-// The bin that ends a row, as in the composer's slash menu.
+// The bin that ends a row, as in the composer's slash menu: shown while the
+// pointer is on its row or the focus is in it. A screen with no pointer to
+// hover with keeps it shown.
 .remove {
   flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .dataSource,
+  .sourceRow {
+    .remove {
+      opacity: 0;
+    }
+
+    &:hover .remove,
+    &:focus-within .remove {
+      opacity: 1;
+    }
+  }
 }

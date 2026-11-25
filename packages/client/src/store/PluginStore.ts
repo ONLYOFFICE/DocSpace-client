@@ -116,7 +116,11 @@ import type {
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserAccess, matchesUserRole } from "../helpers/plugins/roles";
-import { clashesWith, isUserPlugin } from "../helpers/plugins/personal";
+import {
+  clashesWith,
+  getLocalizedText,
+  isUserPlugin,
+} from "../helpers/plugins/personal";
 import {
   isSupersededPluginItem,
   MARKDOWN_EXTENSION,
@@ -930,11 +934,17 @@ class PluginStore {
 
     const language = plugin.getLanguage?.() ?? currentLanguage;
 
-    plugin.nameLocale = plugin.nameLocaleMap?.[language] || plugin.name;
+    plugin.nameLocale = getLocalizedText(
+      plugin.nameLocaleMap,
+      language,
+      plugin.name,
+    );
 
-    plugin.descriptionLocale =
-      plugin.descriptionLocaleMap?.[language] ||
-      plugin.description;
+    plugin.descriptionLocale = getLocalizedText(
+      plugin.descriptionLocaleMap,
+      language,
+      plugin.description,
+    );
   };
 
   initPlugin = (

@@ -45,7 +45,6 @@ import {
   quotaHandler,
   selfByTypeHandler,
   settingsHandler,
-  tariffHandler,
   TARIFF_DUE_DATE_EXPIRED,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -75,25 +74,6 @@ export const jsonResponse = (response: unknown) =>
   new Response(
     JSON.stringify({ response, count: 1, status: 0, statusCode: 200 }),
   );
-
-// The shared tariff handler only produces Paid or Delay.
-export const unpaidTariffHandler = () =>
-  http.get(apiUrl(PATH_TARIFF), () => {
-    const body = tariffSuccess(
-      false,
-      false,
-      false,
-      false,
-      TARIFF_DUE_DATE_EXPIRED,
-    );
-
-    return new Response(
-      JSON.stringify({
-        ...body,
-        response: { ...body.response, state: TariffState.NotPaid },
-      }),
-    );
-  });
 
 // An object balance marks the wallet as topped up before (wasFirstTopUp).
 export const balanceHandler = (amount = 50) =>
@@ -144,7 +124,7 @@ const customerInfoHandler = (
     }),
   );
 
-const restrictedTariffHandler = (state: TariffKind, restricted: boolean) =>
+const tariffStateHandler = (state: TariffKind, restricted?: boolean) =>
   http.get(apiUrl(PATH_TARIFF), () => {
     const body = tariffSuccess(
       false,
@@ -160,26 +140,11 @@ const restrictedTariffHandler = (state: TariffKind, restricted: boolean) =>
         response: {
           ...body.response,
           ...(state === "unpaid" ? { state: TariffState.NotPaid } : {}),
-          restricted,
+          ...(restricted === undefined ? {} : { restricted }),
         },
       }),
     );
   });
-
-const tariffHandlerFor = (state: TariffKind, restricted?: boolean) => {
-  if (restricted !== undefined)
-    return restrictedTariffHandler(state, restricted);
-  if (state === "unpaid") return unpaidTariffHandler();
-
-  return tariffHandler(
-    TEST_PORT,
-    false,
-    state === "grace",
-    false,
-    false,
-    TARIFF_DUE_DATE_EXPIRED,
-  );
-};
 
 export const useSaasBilling = (
   mockRequest: WorkerFixture,
@@ -213,7 +178,7 @@ export const useSaasBilling = (
     customerInfoHandler(payer, card, isDelayedPaymentMethod),
     paymentAccountHandler(TEST_PORT),
     paymentUrlHandler(TEST_PORT),
-    tariffHandlerFor(tariff, restricted),
+    tariffStateHandler(tariff, restricted),
     plan === "startup"
       ? freeQuotaHandler(TEST_PORT)
       : quotaHandler(TEST_PORT, false, false, false, true),

@@ -21,6 +21,8 @@ listed here: they are tracked privately until a released version fixes them.
 |---|-------|----------------------|----------|--------|
 | C1 | shared-links | The copy-link quick button of a file, folder or room copies its primary link without checking whether it expired; the link row and the context menu item refuse an expired link with an error. | `packages/client/src/HOCs/withQuickButtons.js:105-134` against `actions.helpers.tsx:751-754` | OPEN |
 | C3 | file-operations | After an upload finishes, the progress counters are reset on a timer; an upload started inside that window loses its percent, size and uploaded count, while its files stay queued. | `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.finish.test.ts:229` (pinned as a known race) | OPEN |
+| C4 | quotas | Once any bar has been closed in the browser, the two combined bars (rooms and storage near or at the limit) are shown only if they were themselves closed before, and stay hidden otherwise: their check is the opposite of every other bar's. | `packages/client/src/components/MainBar/Bar.js:292-297` against `:285-291` | OPEN |
+| C5 | quotas | A type change or a status change that fails for any reason is reported as the paid users limit (`Common:QuotaPaidUserLimitError`), whatever the server answered. | `packages/client/src/components/GlobalEvents/ChangeUserTypeEvent.tsx:112-120`; `packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx:108-120` | OPEN |
 | C2 | shared-links | A link for anyone keeps the "Blocked by admin" label and the reduced actions menu while the administrator allows existing links; only copying is unaffected. | `external-sharing-share-panel.spec.ts:297-333` | NOT A DEFECT (design decision) |
 
 ## Client vs server

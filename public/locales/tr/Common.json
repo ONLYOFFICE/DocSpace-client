@@ -985,7 +985,6 @@
   "EnabledApps": "Etkin uygulamalar",
   "EnableNotifications": "Bildirimleri etkinleştir",
   "EnableThirdPartyIntegration": "Lütfen sahibinden veya süper yöneticinden çalışma alanı ayarlarının Entegrasyon bölümünde ilgili hizmeti etkinleştirmesini isteyin.",
-  "EnableWebSearchInBilling": "Web aramasını Fatura bölümünde etkinleştirin",
   "EncryptedAccessChangeRefused": "Erişim değiştirilmedi: üyenin şifreleme anahtarları yok.",
   "EncryptedAccessPending": "Erişim beklemede",
   "EncryptedAccessRestored": "{{user}} artık odadaki tüm şifrelenmiş dosyalara erişebilir.",

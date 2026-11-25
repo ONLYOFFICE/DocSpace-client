@@ -985,7 +985,6 @@
   "EnabledApps": "활성화된 앱",
   "EnableNotifications": "알림 활성화",
   "EnableThirdPartyIntegration": "워크스페이스 설정의 통합 섹션에서 해당 서비스를 활성화하도록 소유자 또는 슈퍼 관리자에게 요청하세요.",
-  "EnableWebSearchInBilling": "청구에서 웹 검색을 활성화하세요",
   "EncryptedAccessChangeRefused": "접근 권한이 변경되지 않았습니다: 구성원에게 암호화 키가 없습니다.",
   "EncryptedAccessPending": "액세스 대기 중",
   "EncryptedAccessRestored": "이제 {{user}} 사용자가 방의 모든 암호화 파일에 접근할 수 있습니다.",

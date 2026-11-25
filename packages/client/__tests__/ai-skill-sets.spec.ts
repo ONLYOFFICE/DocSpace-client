@@ -109,8 +109,11 @@ const documentAssistant = (sets: SkillSetMock[]) =>
 const openSkillSets = async (page: Page, baseUrl: string) => {
   await page.setViewportSize(DESKTOP);
   await page.goto(`${baseUrl}${AI_ROOMS_URL}`);
-  await expect(table(page)).toBeVisible();
-  await sidebar(page).getByText("Skill sets", { exact: true }).click();
+  // The section opens on Agents, whose view is the user's own: only the
+  // sidebar is sure to be there.
+  const entry = sidebar(page).getByText("Skill sets", { exact: true });
+  await expect(entry).toBeVisible();
+  await entry.click();
   await expect(table(page)).toContainText("Document assistant");
 };
 

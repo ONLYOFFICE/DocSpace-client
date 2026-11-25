@@ -33,12 +33,28 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-// The same top offset and description colour as the metadata AI panel.
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
+// The request for a skill: the modal of New skill and Edit skill in its
+// width, as tall as its few fields. The width itself is set, not its
+// default, which ui-kit resolves above this class.
+.dialog {
+  --modal-dialog-width: min(720px, calc(100vw - 32px));
+
+  // The buttons keep their own width and share the sheet's on a phone.
+  @include mixins.mobile {
+    :global(.modal-footer) > * {
+      flex: 1 1 0;
+    }
+  }
+}
+
+// The header of a modal keeps its own distance to the fields.
 .body {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-top: 20px;
+  padding-bottom: 8px;
 }
 
 .description {
@@ -78,28 +94,5 @@
   :global(.cm-scroller) * {
     font-family:
       "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  }
-}
-
-// The drag handle on the panel's inner edge. The aside content is moved in
-// with a transform, which makes it the containing block of a fixed child,
-// so the handle follows the panel as it slides and as it is resized.
-.resizer {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  inset-inline-start: 0;
-  z-index: 1;
-  width: 6px;
-  cursor: col-resize;
-  touch-action: none;
-
-  &:hover,
-  &:active {
-    background-color: var(--aside-header-border-color);
-  }
-
-  @media (max-width: 600px) {
-    display: none;
   }
 }

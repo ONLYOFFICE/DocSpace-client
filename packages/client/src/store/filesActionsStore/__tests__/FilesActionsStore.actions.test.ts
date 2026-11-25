@@ -18,7 +18,10 @@ vi.mock("@docspace/shared/api/settings", async (io) => ({
 
 import { setPinAction, changeCustomFilter } from "../helpers";
 import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
 import { createTestFilesActionsStore, t } from "./testHarness";
+// After the harness on purpose: the harness mocks the toast module.
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
 describe("FilesActionsStore — actions (batch 4)", () => {
   it("setPinAction / changeCustomFilter delegate to helpers", async () => {
@@ -56,6 +59,24 @@ describe("FilesActionsStore — actions (batch 4)", () => {
     store.setMuteAction("mute", { id: 1, rootFolderId: 10, new: 2 } as never, t);
     expect(updateRoomMute).toHaveBeenCalledWith(0, true);
   });
+
+  it.each([
+    [RoomsType.AiProjectRoom, "mute", "Common:AIAgentNotificationsDisabled"],
+    [RoomsType.AiProjectRoom, "unmute", "Common:AIAgentNotificationsEnabled"],
+    [RoomsType.CustomRoom, "mute", "Common:RoomNotificationsDisabled"],
+  ] as const)(
+    "setMuteAction of a room of type %s says %s in its notice",
+    async (roomType, action, notice) => {
+      const store = createTestFilesActionsStore({
+        filesStore: { folders: [], updateRoomMute: vi.fn() },
+        treeFoldersStore: { treeFolders: [] },
+      });
+      store.setMuteAction(action, { id: 1, roomType } as never, t);
+      await vi.waitFor(() =>
+        expect(toastr.success).toHaveBeenLastCalledWith(notice),
+      );
+    },
+  );
 
   it("lockFileAction locks via API and stores the result", async () => {
     const setFile = vi.fn();

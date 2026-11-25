@@ -59,8 +59,8 @@ const sourceFiles = (dir: string): string[] =>
       : [];
   });
 
-const renderedKeys = () =>
-  sourceFiles(privateDir).flatMap((file) => {
+const renderedKeys = (dir = privateDir) =>
+  sourceFiles(dir).flatMap((file) => {
     const source = fs.readFileSync(file, "utf8");
     return [...source.matchAll(/\bt\(\s*"([^"]+)"|i18nKey="([^"]+)"/g)].map(
       (match) => ({
@@ -68,6 +68,20 @@ const renderedKeys = () =>
         key: match[1] ?? match[2],
       }),
     );
+  });
+
+/** The route groups whose components the private pages render. */
+const renderedDirs = ["(private)", "(rooms)", "(docspace)", "(personal-files)"].map(
+  (group) => path.resolve(privateDir, "..", group),
+);
+
+const namespaceAttributes = (dir: string) =>
+  sourceFiles(dir).flatMap((file) => {
+    const source = fs.readFileSync(file, "utf8");
+    return [...source.matchAll(/\bns="([^"]+)"/g)].map((match) => ({
+      file: path.relative(privateDir, file),
+      ns: match[1],
+    }));
   });
 
 describe("translations of the SDK private surface", () => {
@@ -81,5 +95,22 @@ describe("translations of the SDK private surface", () => {
     );
 
     expect(raw).toEqual([]);
+  });
+
+  it("Room limit reached: every component the private pages render reads Common", () => {
+    const keys = renderedDirs.flatMap((dir) => renderedKeys(dir));
+    expect(keys.length).toBeGreaterThan(0);
+
+    const raw = keys.filter(({ key }) => {
+      const [ns, name] = key.includes(":") ? key.split(":", 2) : ["", key];
+      if (ns && ns !== "Common") return true;
+      return !commonKeys.has(name);
+    });
+    const otherNamespaces = renderedDirs
+      .flatMap((dir) => namespaceAttributes(dir))
+      .filter(({ ns }) => ns !== "Common");
+
+    expect(raw).toEqual([]);
+    expect(otherNamespaces).toEqual([]);
   });
 });

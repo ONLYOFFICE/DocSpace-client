@@ -510,12 +510,13 @@ test.describe("Keys management — advanced flows", () => {
     await expect(unlockWithPassphrase(body, newPassphrase)).resolves.toBeTruthy();
   });
 
-  test("Auto-lock on a remembered device", async ({
-    page,
-    mockRequest,
-    baseUrl,
-  }) => {
-    test.slow();
+  // A private room with the user's key, the auto-lock on and the helpers
+  // that lock the tab, open the room and upload into it.
+  const onRememberableDevice = async (
+    ...[page, mockRequest, baseUrl]: Parameters<typeof bootstrapEncryption>
+  ) => {
+    // Installed before the page loads, so the idle timer runs on this clock.
+    await page.clock.install();
     const { keysHandle, passphrase } = await bootstrapEncryption(
       page,
       mockRequest,
@@ -540,11 +541,6 @@ test.describe("Keys management — advanced flows", () => {
       ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
     );
     accessHandle.current!.setRoomKeys(ROOM_ID, [own]);
-
-    // The tab-hide lock obeys the auto-lock preference, which is off by default.
-    await page.evaluate(() =>
-      localStorage.setItem("encryption-auto-lock-timeout-seconds", "300"),
-    );
 
     // In-app navigation keeps the in-memory identity across pages.
     const navigate = (url: string) =>
@@ -574,51 +570,72 @@ test.describe("Keys management — advanced flows", () => {
       });
 
     const lockNow = page.getByTestId("lock_now_link");
-    const setVisibility = (state: "hidden" | "visible") =>
-      page.evaluate((value) => {
-        Object.defineProperty(document, "visibilityState", {
-          configurable: true,
-          get: () => value,
-        });
-        document.dispatchEvent(new Event("visibilitychange"));
-      }, state);
-    // The listener is re-registered as auto-lock suspension clears, so keep
-    // re-dispatching until the lock takes effect.
-    const hideTabUntilLocked = async () => {
+    // The default preset is 30 minutes.
+    const idleUntilLocked = async () => {
       await expect(lockNow).toBeVisible({ timeout: 10000 });
-      await expect(async () => {
-        await setVisibility("hidden");
-        await expect(lockNow).toBeHidden({ timeout: 1000 });
-      }).toPass({ timeout: 10000 });
-      await setVisibility("visible");
+      await page.clock.fastForward("30:01");
+      await expect(lockNow).toBeHidden({ timeout: 10000 });
     };
 
     const prompt = page
       .getByRole("dialog")
       .filter({ hasText: "Enter passphrase" });
 
-    // Not remembered yet: after the hidden-tab lock the upload prompts.
-    await hideTabUntilLocked();
-    await openRoom();
-    await upload("first.txt");
-    await expect(prompt).toBeVisible({ timeout: 15000 });
-    await prompt
-      .getByLabel("Passphrase", { exact: true })
-      .fill(passphrase);
-    await prompt.getByText("Don't ask again on this device").click();
-    await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
-    await expect
-      .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
-      .toBe(1);
+    // The first upload after the lock prompts; the passphrase is entered
+    // with the device remembered.
+    const unlockAndRemember = async () => {
+      await idleUntilLocked();
+      await openRoom();
+      await upload("first.txt");
+      await expect(prompt).toBeVisible({ timeout: 15000 });
+      await prompt
+        .getByLabel("Passphrase", { exact: true })
+        .fill(passphrase);
+      await prompt.getByText("Don't ask again on this device").click();
+      await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
+      await expect
+        .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
+        .toBe(1);
+    };
 
-    // Remembered: the hidden tab still locks, the device stays remembered.
+    return {
+      filesHandle,
+      navigate,
+      openRoom,
+      upload,
+      idleUntilLocked,
+      prompt,
+      unlockAndRemember,
+    };
+  };
+
+  test("Auto-lock on a remembered device", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    test.slow();
+    const {
+      filesHandle,
+      navigate,
+      openRoom,
+      upload,
+      idleUntilLocked,
+      prompt,
+      unlockAndRemember,
+    } = await onRememberableDevice(page, mockRequest, baseUrl);
+
+    // Not remembered yet: after the idle lock the upload prompts.
+    await unlockAndRemember();
+
+    // Remembered: the idle time still locks, the device stays remembered.
     await navigate("/profile/keys-management");
     // Unlocked, Lock now is the one action; the forget link comes with the lock.
     const remembered = page.getByTestId("device_remembered_until");
     const forgetDevice = page.getByTestId("forget_device_link");
     await expect(remembered).toBeVisible({ timeout: 10000 });
     await expect(forgetDevice).toHaveCount(0);
-    await hideTabUntilLocked();
+    await idleUntilLocked();
     await expect(remembered).toBeVisible();
     await expect(forgetDevice).toBeVisible();
 
@@ -629,5 +646,34 @@ test.describe("Keys management — advanced flows", () => {
       .poll(() => filesHandle.current!.getFiles().length, { timeout: 30000 })
       .toBe(2);
     await expect(prompt).toBeHidden();
+  });
+
+  test("Forget device", async ({ page, mockRequest, baseUrl }) => {
+    test.slow();
+    const {
+      filesHandle,
+      navigate,
+      openRoom,
+      upload,
+      idleUntilLocked,
+      prompt,
+      unlockAndRemember,
+    } = await onRememberableDevice(page, mockRequest, baseUrl);
+    await unlockAndRemember();
+
+    await navigate("/profile/keys-management");
+    await idleUntilLocked();
+    await page.getByTestId("forget_device_link").click();
+
+    await expect(
+      page.getByText("This device will now ask for the passphrase again."),
+    ).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId("device_remembered_until")).toHaveCount(0);
+
+    // Nothing is left to restore the key from: the next upload prompts.
+    await openRoom();
+    await upload("second.txt");
+    await expect(prompt).toBeVisible({ timeout: 15000 });
+    expect(filesHandle.current!.getFiles()).toHaveLength(1);
   });
 });

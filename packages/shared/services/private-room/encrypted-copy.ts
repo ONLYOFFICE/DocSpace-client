@@ -37,6 +37,7 @@ import { getFileEncryptionAccess } from "../../api/files";
 import { decryptFile, wipeDek } from "../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
+import { NoAccessError } from "../encryption/errors";
 import type { IdentityKeyPair } from "../encryption/types";
 import type { MoveSourceRef } from "./encrypted-upload";
 import { loadFileSenderKeysSafe } from "./room-member-keys";
@@ -56,15 +57,13 @@ export async function decryptEncryptedItemToFile(
   roomId: number | string | null | undefined,
 ): Promise<File> {
   const encryptionInfo = await getFileEncryptionAccess(item.id);
-  if (!encryptionInfo || !encryptionInfo.fileKeys) {
+  if (!encryptionInfo) {
     throw new Error("Encryption access info missing");
   }
 
-  const hasOwnEntry = encryptionInfo.fileKeys.some(
-    (k) => String(k.userId) === String(currentUserId),
-  );
-  if (!hasOwnEntry) {
-    throw new Error("Current user has no decrypt access to this file");
+  const fileKeys = encryptionInfo.fileKeys ?? [];
+  if (!fileKeys.some((k) => String(k.userId) === String(currentUserId))) {
+    throw new NoAccessError(currentUserId);
   }
 
   const response = await fetch(item.viewUrl);
@@ -78,8 +77,9 @@ export async function decryptEncryptedItemToFile(
   let dek;
   try {
     dek = await unwrapDekForCurrentUser({
-      fileKeys: encryptionInfo.fileKeys,
+      fileKeys,
       roomMemberKeys,
+      userKeys: encryptionInfo.userKeys,
       currentUserId,
       currentIdentity: identity,
       fileId: item.id,

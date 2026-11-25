@@ -112,3 +112,70 @@ describe("LeaveRoomDialog — leaving a private room", () => {
     expect(toastr.error).not.toHaveBeenCalled();
   });
 });
+
+const renderTextOf = (props: Record<string, unknown>) => {
+  const Dialog = LeaveRoomDialog as unknown as React.ComponentType<
+    Record<string, unknown>
+  >;
+
+  render(
+    <Dialog
+      visible
+      setIsVisible={vi.fn()}
+      setChangeRoomOwnerIsVisible={vi.fn()}
+      isRoomOwner={false}
+      isFormSpace={false}
+      isAgentRoom={false}
+      isFormFiller={false}
+      onLeaveRoomAction={vi.fn(async () => undefined)}
+      {...props}
+    />,
+  );
+};
+
+describe("LeaveRoomDialog - texts", () => {
+  it("Member leaves", () => {
+    renderTextOf({ isAgentRoom: true });
+
+    expect(
+      screen.getByText("Common:LeaveAgentConversationsWarning"),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("Common:WantLeaveAgent")).toBeNull();
+  });
+
+  it("asks the owner of an agent to hand it over first", () => {
+    renderTextOf({ isAgentRoom: true, isRoomOwner: true });
+
+    expect(
+      screen.getByText("Common:LeaveAgentDescription"),
+    ).toBeInTheDocument();
+  });
+
+  it("Plain room", () => {
+    renderTextOf({});
+
+    expect(screen.getByText("Common:WantLeaveRoom")).toBeInTheDocument();
+  });
+
+  it.each([
+    ["isKnowledgeBase", "KnowledgeBase"],
+    ["isSkillSet", "SkillSet"],
+  ])("names the room of a %s dialog by what it is", (flag, name) => {
+    renderTextOf({ [flag]: true });
+
+    expect(screen.getByText(`Common:LeaveThe${name}`)).toBeInTheDocument();
+    expect(screen.getByText(`Common:WantLeave${name}`)).toBeInTheDocument();
+    expect(screen.queryByText("Common:WantLeaveRoom")).toBeNull();
+  });
+
+  it.each([
+    ["isKnowledgeBase", "KnowledgeBase"],
+    ["isSkillSet", "SkillSet"],
+  ])("asks the owner of a %s dialog to hand it over first", (flag, name) => {
+    renderTextOf({ [flag]: true, isRoomOwner: true });
+
+    expect(
+      screen.getByText(`Common:Leave${name}Description`),
+    ).toBeInTheDocument();
+  });
+});

@@ -1,0 +1,29 @@
+{
+  "key_path": "AiTemplateInstallKnowledgeBaseDescription",
+  "content": "The template <1>\"{{name}}\"</1> creates a new knowledge base with its files.",
+  "content_en_sha1_hash": "39014cdbcd3c71fa2176c99b57bc8820dfb15d87",
+  "created_at": "2026-11-18T08:05:13.507Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
+  "comment": {
+    "text": "Text of the Install this template? confirmation dialog for a knowledge base template in the AI templates catalog. {{name}} is the template name, shown in bold with its quotes by <1></1>; installing creates a new knowledge base (a room of files the chat searches) filled with the template's files.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:13:34.331Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/AiTemplateInstallDialog.tsx",
+      "line_number": 77,
+      "context": ");\n case \"knowledgeBase\":\n return (\n <Trans\n t={t}\n i18nKey=\"Common:AiTemplateInstallKnowledgeBaseDescription\"\n values={values}\n components={components}\n />\n );\n default:",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

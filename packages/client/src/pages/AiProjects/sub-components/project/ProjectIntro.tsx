@@ -46,7 +46,9 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import { ProjectLogo } from "../list/ProjectLogo";
 import RoomItem from "./RoomItem";
-import { isManager } from "../../utils";
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
+
+import { hasPortalChatModel, isAgentModelUnavailable } from "../../utils";
 import styles from "./ProjectIntro.module.scss";
 
 /** Rooms of a kind shown before the rest fold into a "+N" chip. */
@@ -78,7 +80,6 @@ const SourceGroup = ({ label, rooms, kind }: SourceGroupProps) => {
             <RoomItem
               id={room.id}
               title={room.title}
-              logo={room.logo}
               icon={kind === "instructions" ? "instructionsRoom.svg" : "knowledgeRoom.svg"}
             />
           </div>
@@ -111,11 +112,15 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
   const { t } = useTranslation(["Common"]);
   const { useProfilesStore } = useStores();
   const aiProjectsStore = useStore("aiProjectsStore");
-  // The stored model is gone or cannot chat: no round can run until it is
-  // changed, so the intro says so instead of the model line. Owner and
-  // managers get the Edit project action, members are told to ask one.
-  const modelUnavailable = project.aiProject.profile?.available === false;
-  const canEdit = isManager(project);
+  // The stored model is gone or cannot chat, or there is none and the portal
+  // has no chat model to run on: no round can run until it is changed, so
+  // the intro says so instead of the model line. Owner and managers get the
+  // Edit project action, members are told to ask one.
+  const portalChatModel = useProfilesStore((s) =>
+    s.initialized ? hasPortalChatModel(s.chatProfile, s.defaultProfile) : null,
+  );
+  const modelUnavailable = isAgentModelUnavailable(project, portalChatModel);
+  const canEdit = getAgentRights(project).edit;
   // The model the composer shows: the one picked for this chat, else the
   // chat default, else the portal default (ai-chat's current chat profile).
   const currentModel = useProfilesStore((s) => (s.sessionChatProfile ?? s.chatProfile ?? s.defaultProfile)?.name);
@@ -162,10 +167,10 @@ export const ProjectIntro = observer(({ project }: ProjectIntroProps) => {
       {instructionsRooms.length > 0 || knowledgeRooms.length > 0 ? (
         <div className={styles.sources}>
           {instructionsRooms.length > 0 ? (
-            <SourceGroup label={t("Common:Skills")} rooms={instructionsRooms} kind="instructions" />
+            <SourceGroup label={t("Common:SkillSets")} rooms={instructionsRooms} kind="instructions" />
           ) : null}
           {knowledgeRooms.length > 0 ? (
-            <SourceGroup label={t("Common:AiWorkspaceKnowledge")} rooms={knowledgeRooms} kind="knowledge" />
+            <SourceGroup label={t("Common:AIProjectKnowledgeRooms")} rooms={knowledgeRooms} kind="knowledge" />
           ) : null}
         </div>
       ) : null}

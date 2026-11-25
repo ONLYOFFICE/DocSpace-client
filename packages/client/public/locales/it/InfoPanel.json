@@ -36,6 +36,7 @@
   "GuestsEmptyScreenText": "Vedi i dettagli degli ospiti qui",
   "HistoryEmptyScreenText": "La cronologia delle attività verrà visualizzata qui",
   "HistoryThirdParty": "La visualizzazione della cronologia non è disponibile per le stanze pubbliche con archivi di terze parti collegati",
+  "KnowledgeBasesEmptyScreenText": "Vedi i dettagli della base di conoscenza qui",
   "LastUpdateInfo": "Ultimo aggiornamento",
   "LifetimeEnds": "La durata sta finendo",
   "MembersEmptyScreenText": "Vedi i dettagli dei membri qui",
@@ -44,6 +45,7 @@
   "RoomsEmptyScreenTent": "Vedi i dettagli delle stanze qui",
   "SelectedGroups": "Gruppi selezionati",
   "SelectedUsers": "Account selezionati",
+  "SkillSetsEmptyScreenText": "Vedi i dettagli del set di competenze qui",
   "StorageType": "Tipo di archiviazione",
   "Users": "Utenti"
 }

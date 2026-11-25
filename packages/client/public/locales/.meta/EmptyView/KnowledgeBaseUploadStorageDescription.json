@@ -1,0 +1,29 @@
+{
+  "key_path": "KnowledgeBaseUploadStorageDescription",
+  "content": "Upload files from your documents or rooms",
+  "content_en_sha1_hash": "d7aaa7c9307d619fe09ddf3cf279e651add1bd18",
+  "created_at": "2026-11-20T10:53:41.461Z",
+  "updated_at": "2026-11-20T10:54:39.928Z",
+  "comment": {
+    "text": "One-line description under the Upload from storage quick action on the empty screen inside a knowledge base: opens a picker of the user's own documents and rooms. Imperative, no full stop.",
+    "is_auto": true,
+    "updated_at": "2026-11-20T10:54:39.928Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 483,
+      "context": "// The workspace picker of a Knowledge or Instructions room copies several\n // files at once and lists only what the room holds: the formats\n // vectorization reads, or Markdown.\n const uploadKnowledgeFromStorage: EmptyViewItemType = {\n ...uploadAllFromDocSpace,\n description: t(\"EmptyView:KnowledgeBaseUploadStorageDescription\"),\n key: \"upload-knowledge-from-storage\",\n onClick: () => actions.uploadFromDocspaceKnowledgeRoom(),\n };\n \n const uploadMarkdownFromStorage: EmptyViewItemType = {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

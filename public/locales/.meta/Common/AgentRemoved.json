@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentRemoved",
+  "content": "Agent removed",
+  "content_en_sha1_hash": "90bf5de6760f897346d9be146912dc3e52573eee",
+  "created_at": "2026-11-18T08:05:08.267Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
+  "comment": {
+    "text": "Success toast after one agent is permanently deleted through the delete confirmation dialog. Short past-participle phrase; removed means deleted, as in the room counterpart Room removed.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:13:34.331Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 158,
+      "context": "};\n \n const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: isAgentDelete\n ? t(\"Common:AgentRemoved\")\n : isFormSpace\n ? t(\"Common:SpaceRemoved\")\n : t(\"Common:RoomRemoved\"),\n successRemoveRooms: isAgentDelete\n ? t(\"Common:AgentsRemoved\")",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

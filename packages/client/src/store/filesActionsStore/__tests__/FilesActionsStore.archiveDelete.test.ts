@@ -42,6 +42,29 @@ describe("FilesActionsStore — archive/delete operations (batch 15)", () => {
     expect(p.secondaryProgressDataStore.setSecondaryProgressBarData).toHaveBeenCalled();
   });
 
+  it("deleteRoomsAction re-reads the agents only when one of them was deleted", async () => {
+    const fetchPresets = vi.fn(async () => {});
+    const store = createTestFilesActionsStore({
+      uploadDataStore: progressStore(),
+      filesStore: {
+        files: [],
+        folders: [{ id: 5 }],
+        addActiveItems: vi.fn(),
+        getIsEmptyTrash: vi.fn(),
+        removeFiles: vi.fn(),
+      },
+    });
+
+    store.aiPresetsStore = { presets: [{ id: "5" }], fetchPresets } as never;
+    await store.deleteRoomsAction([5]);
+    expect(fetchPresets).toHaveBeenCalledTimes(1);
+
+    fetchPresets.mockClear();
+    store.aiPresetsStore = { presets: [{ id: "2" }], fetchPresets } as never;
+    await store.deleteRoomsAction([5]);
+    expect(fetchPresets).not.toHaveBeenCalled();
+  });
+
   it("deleteItemOperation (folder) drives the progress bar", async () => {
     const p = progressStore();
     const store = createTestFilesActionsStore({

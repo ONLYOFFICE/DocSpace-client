@@ -70,6 +70,15 @@
   overflow: hidden;
   border: 1px solid var(--aside-header-border-color);
   border-radius: 3px;
+
+  // A skill's text is set in a monospace font, as code is. The page sets its
+  // font on every element, so the editor's text and all that is in it get
+  // this one by name.
+  :global(.cm-scroller),
+  :global(.cm-scroller) * {
+    font-family:
+      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  }
 }
 
 // The drag handle on the panel's inner edge. The aside content is moved in

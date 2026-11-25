@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG hoặc SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "Mã token không hợp lệ",
-  "LastModified": "Lần sửa đổi cuối",
   "NewApp": "Ứng dụng mới",
   "NoAuthorizedApps": "Không có ứng dụng được ủy quyền",
   "NoOAuthAppHeader": "Không có ứng dụng OAuth",

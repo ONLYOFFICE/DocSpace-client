@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG ou SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "Jeton non valide",
-  "LastModified": "Dernière modification",
   "NewApp": "Nouvelle application",
   "NoAuthorizedApps": "Aucune application autorisée",
   "NoOAuthAppHeader": "Aucune application OAuth",

@@ -34,10 +34,10 @@
  */
 
 import { removeFiles, moveToFolder } from "@docspace/shared/api/files";
-import { getRoomMissingFileKeys } from "@docspace/shared/api/privacy";
 import {
   AnalyticsEvents,
   Events,
+  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
@@ -48,7 +48,10 @@ import {
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import { isAccessChangeRefused } from "@docspace/shared/services/private-room/access-refusal";
-import { prepareNewOwner } from "@docspace/shared/services/private-room/room-member-flows";
+import {
+  countMissingFilesOfRefusedOwnerChange,
+  prepareNewOwner,
+} from "@docspace/shared/services/private-room/room-member-flows";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
@@ -57,6 +60,7 @@ import { FileOperationStatus } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile, TOperation } from "@docspace/shared/api/files/types";
 import type { UserStore } from "@docspace/shared/store/UserStore";
+import { getAiWorkspaceTabUrl, isAgent } from "SRC_DIR/helpers/aiWorkspace";
 import { setPinAction as setPinActionHelper } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
 import type { TActionItem } from "../FilesActionsStore";
@@ -118,7 +122,21 @@ self: FilesActionStore,
   t: TTranslation,
 
 )=> {
-  return setPinActionHelper(action, id, t);
+  // The notice speaks of agents when every pinned room is one: a room of
+  // the list, or the agent whose page is open.
+  const ids = (Array.isArray(id) ? id : [id]).map(String);
+  const { folders } = self.filesStore;
+  const { selectedFolderStore } = self;
+  const roomOf = (roomId: string) =>
+    folders.find((folder) => String(folder.id) === roomId) ??
+    (String(selectedFolderStore.id) === roomId ? selectedFolderStore : null);
+  const ofAgents = ids.length > 0 && ids.every((roomId) => isAgent(roomOf(roomId)));
+
+  await setPinActionHelper(action, id, t, ofAgents);
+
+  // The sidebar lists the pinned agents under Agents, in the server's order.
+  if (ids.some((roomId) => isAgent(roomOf(roomId))))
+    void self.treeFoldersStore.fetchTreeFolders();
 };
 
 
@@ -152,8 +170,12 @@ self: FilesActionStore,action: string, item: TActionItem, t: TTranslation
         (count as number) + (newCount as number);
   }
 
-  const notificationsDisabled = t("Common:RoomNotificationsDisabled");
-  const notificationsEnabled = t("Common:RoomNotificationsEnabled");
+  const notificationsDisabled = isAgent(item)
+    ? t("Common:AIAgentNotificationsDisabled")
+    : t("Common:RoomNotificationsDisabled");
+  const notificationsEnabled = isAgent(item)
+    ? t("Common:AIAgentNotificationsEnabled")
+    : t("Common:RoomNotificationsEnabled");
 
   (muteRoomNotification(id, muteStatus) as Promise<unknown>)
     .then(() =>
@@ -589,7 +611,13 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
 
   const successText = isOwner
     ? t("Common:LeftAndAppointNewOwner")
-    : t("Common:YouLeftTheRoom");
+    : isAgent(room)
+      ? t("Common:YouLeftTheAgent")
+      : room.roomType === RoomsType.KnowledgeRoom
+        ? t("Common:YouLeftTheKnowledgeBase")
+        : room.roomType === RoomsType.InstructionsRoom
+          ? t("Common:YouLeftTheSkillSet")
+          : t("Common:YouLeftTheRoom");
 
   const leave = () =>
     (
@@ -601,11 +629,20 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
       .then(() => {
         if (!keepsReading) {
           if (!isRoot) {
-            const filter = RoomsFilter.getDefault();
-            const list = isPrivateRoomsRoute(window.DocSpace.location.pathname)
-              ? "/private/filter"
-              : "rooms/shared/filter";
-            window.DocSpace.navigate(`${list}?${filter.toUrlParams()}`);
+            // An agent's page is left for the agents' list it came from.
+            if (isAgent(room)) {
+              window.DocSpace.navigate(
+                getAiWorkspaceTabUrl(false, RoomsType.AiProjectRoom, user?.id),
+              );
+            } else {
+              const filter = RoomsFilter.getDefault();
+              const list = isPrivateRoomsRoute(
+                window.DocSpace.location.pathname,
+              )
+                ? "/private/filter"
+                : "rooms/shared/filter";
+              window.DocSpace.navigate(`${list}?${filter.toUrlParams()}`);
+            }
           } else {
             self.filesStore.removeFiles(null, [roomId]);
           }
@@ -616,6 +653,12 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
           self.updateCurrentFolder(null, operationId);
         } else {
           self.filesStore.setInRoomFolder(roomId, false);
+        }
+
+        // A left agent leaves the sidebar and the chat's agents menu.
+        if (isAgent(room)) {
+          void self.aiPresetsStore?.fetchPresets();
+          self.treeFoldersStore.removePinnedAiProject(roomId);
         }
 
         toastr.success(successText);
@@ -633,10 +676,6 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   return leave();
 };
 
-
-/** The HTTP status an API request was refused with, if any. */
-const statusOf = (error: unknown) =>
-  (error as { response?: { status?: number } })?.response?.status;
 
 // Spec: private-rooms/room-membership, "Ownership transfer wraps the candidate's missing files"
 export const changeRoomOwnerImpl = async (
@@ -701,16 +740,9 @@ export const changeRoomOwnerImpl = async (
     if (isLeaveChecked) await self.onLeaveRoom(t);
     else toastr.success(t("Common:AppointNewOwner"));
   } catch (e) {
-    // The server refuses the transfer while the candidate lacks an entry on
-    // an encrypted file, for example one uploaded since they were wrapped
-    // above; it lists those files on request.
-    const listed =
-      isPrivateRoom && statusOf(e) === 409
-        ? await getRoomMissingFileKeys(roomId, [userId]).catch(() => [])
-        : [];
-    const count =
-      listed.find((entry) => entry.userId.toLowerCase() === userId.toLowerCase())
-        ?.fileIds.length ?? 0;
+    const count = isPrivateRoom
+      ? await countMissingFilesOfRefusedOwnerChange(e, roomId, userId)
+      : 0;
     if (count > 0) {
       toastr.error(t("Common:EncryptedReencryptPartialFailure", { count }));
     } else {

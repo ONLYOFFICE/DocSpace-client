@@ -39,6 +39,7 @@ import {
   recoverEncryptedFilenames,
 } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
 import { backfillEncryptedFilesForRoomMembers } from "@docspace/shared/services/private-room/room-encryption";
+import { getFolderInfo } from "@docspace/shared/api/files";
 
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -90,12 +91,21 @@ export function ensureEncryptedFilenameForFileImpl(self: FilesStore, file: TFile
 export function syncEncryptedRoomImpl(self: FilesStore) {
   self.recoverEncryptedFilenamesForCurrentView();
 
-  const roomId =
-    self.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
-    (self.selectedFolderStore.isRoom ? self.selectedFolderStore.id : null);
-  if (roomId) {
-    self.maybeBackfillEncryptedRoom(roomId, self.selectedFolderStore.security);
+  const { selectedFolderStore } = self;
+  if (selectedFolderStore.isRoom) {
+    self.maybeBackfillEncryptedRoom(
+      selectedFolderStore.id,
+      selectedFolderStore.security,
+    );
+    return;
   }
+  // Spec: private-rooms/room-membership, "The backfill sweep starts from any folder of the room"
+  const roomId = selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id;
+  if (!roomId || self._backfilledEncryptedRooms.has(roomId)) return;
+  getFolderInfo(roomId).then(
+    (room) => self.maybeBackfillEncryptedRoom(roomId, room.security),
+    () => {},
+  );
 }
 
 export function maybeBackfillEncryptedRoomImpl(

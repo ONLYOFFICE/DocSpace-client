@@ -607,6 +607,217 @@ describe("ContextOptionsStore.getFilesContextOptions — the members link", () =
   it("gives way to the external link for a shareable file elsewhere", () => {
     expect(membersLink(FolderType.Rooms)?.disabled ?? true).toBe(true);
   });
+
+  // A skill in a skill set: the lone link takes the place of the Share
+  // submenu, Edit skill opens with the other ways to open the file, and
+  // nothing follows Delete.
+  it("keeps the lone link and Edit skill of a skill above Delete, the last item", () => {
+    const store = createTestContextOptionsStore();
+    const keys = menuShape(
+      store.getFilesContextOptions(
+        {
+          ...fileItem([
+            "select",
+            "link-for-room-members",
+            "edit-skill",
+            "rename",
+            "delete",
+          ]),
+          canShare: true,
+          rootFolderType: FolderType.AiHub,
+        } as never,
+        t,
+      ),
+    )
+      .map((option) => String(option.key))
+      .filter((key) => !key.startsWith("separator"));
+
+    expect(keys).toEqual([
+      "select",
+      "edit-skill",
+      "link-for-room-members",
+      "rename",
+      "delete",
+    ]);
+  });
+});
+
+// ai-agent-page, "Actions menu of an agent" and "Actions menu on a card".
+describe("ContextOptionsStore.getFilesContextOptions — an agent's menu", () => {
+  const shape = (model: unknown[]) =>
+    (model as { key: string; label?: string; isSeparator?: boolean }[]).map(
+      (option) => (option.isSeparator ? "|" : `${option.key}=${option.label}`),
+    );
+
+  const agent = (contextOptions: string[], extra: Record<string, unknown> = {}) => ({
+    id: 7,
+    parentId: 1,
+    title: "Legal Reviewer",
+    isRoom: true,
+    isFolder: true,
+    inRoom: true,
+    roomType: RoomsType.AiProjectRoom,
+    rootFolderType: FolderType.AiHub,
+    security: { Read: true, Mute: true },
+    viewAccessibility: {},
+    ...extra,
+    contextOptions,
+  });
+
+  const ALL_ROOM_OPTIONS = [
+    "select",
+    "open",
+    "separator0",
+    "link-for-room-members",
+    "edit-room",
+    "invite-users-to-room",
+    "room-info",
+    "pin-room",
+    "mute-room",
+    "separator1",
+    "change-room-owner",
+    "leave-room",
+    "delete",
+  ];
+
+  // What a Member's rights take out of the room's option list.
+  const MANAGE_KEYS = [
+    "edit-room",
+    "invite-users-to-room",
+    "change-room-owner",
+    "delete",
+  ];
+
+  it("words and orders the owner's menu on the agent's page", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { id: 7, security: {}, navigationPath: [{ id: 7 }] },
+    });
+
+    const menu = store.getFilesContextOptions(
+      agent(
+        [
+          "link-for-room-members",
+          "edit-room",
+          "invite-users-to-room",
+          "room-info",
+          "change-room-owner",
+          "delete",
+        ],
+        { createdBy: { id: "user-1" } },
+      ) as never,
+      t,
+      false,
+      true,
+    );
+
+    // No Edit agent, even when the item's list carries it.
+    expect(shape(menu)).toEqual([
+      "invite-users-to-room=Common:ShareAgent",
+      "room-info=Common:AgentInfo",
+      "link-for-room-members=Common:CopyLink",
+      "change-room-owner=Common:AIProjectChangeOwner",
+      "|",
+      "delete=Common:DeleteAgent",
+    ]);
+  });
+
+  it("gives a Member's card select, open, Agent info, pin, notifications, copy link and Leave agent", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { id: 1, rootFolderId: 1, security: {}, navigationPath: [] },
+    });
+
+    const keys = shape(
+      store.getFilesContextOptions(
+        agent(ALL_ROOM_OPTIONS.filter((key) => !MANAGE_KEYS.includes(key))) as never,
+        t,
+      ),
+    ).map((entry) => entry.split("=")[0]);
+
+    expect(keys).toEqual([
+      "select",
+      "open",
+      "|",
+      "room-info",
+      "pin-room",
+      "mute-room",
+      "link-for-room-members",
+      "leave-room",
+    ]);
+  });
+
+  it("puts Delete agent last, after a separator, on a card with every item", () => {
+    const store = createTestContextOptionsStore({
+      selectedFolderStore: { id: 1, rootFolderId: 1, security: {}, navigationPath: [] },
+    });
+
+    const keys = shape(
+      store.getFilesContextOptions(agent(ALL_ROOM_OPTIONS) as never, t),
+    ).map((entry) => entry.split("=")[0]);
+
+    expect(keys).toEqual([
+      "select",
+      "open",
+      "|",
+      "invite-users-to-room",
+      "room-info",
+      "pin-room",
+      "mute-room",
+      "link-for-room-members",
+      "change-room-owner",
+      "leave-room",
+      "|",
+      "delete",
+    ]);
+  });
+
+  it("keeps the room wording for an ordinary room", () => {
+    const store = createTestContextOptionsStore();
+    const labels = shape(
+      store.getFilesContextOptions(
+        agent(["edit-room", "invite-users-to-room", "room-info", "leave-room", "delete"], {
+          roomType: RoomsType.CustomRoom,
+          rootFolderType: FolderType.Rooms,
+        }) as never,
+        t,
+      ),
+    );
+
+    expect(labels).toEqual(
+      expect.arrayContaining([
+        "edit-room=Common:EditRoom",
+        "invite-users-to-room=Common:InviteContacts",
+        "room-info=Common:RoomInfo",
+        "leave-room=Common:LeaveTheRoom",
+        "delete=Common:DeleteRoom",
+      ]),
+    );
+  });
+
+  it.each([
+    [RoomsType.KnowledgeRoom, "KnowledgeBase"],
+    [RoomsType.InstructionsRoom, "SkillSet"],
+  ])("names a room of type %s by what it is, not a room", (roomType, name) => {
+    const store = createTestContextOptionsStore();
+    const labels = shape(
+      store.getFilesContextOptions(
+        agent(
+          ["edit-room", "room-info", "change-room-owner", "leave-room", "delete"],
+          { roomType, rootFolderType: FolderType.AiHub },
+        ) as never,
+        t,
+      ),
+    );
+
+    expect(labels).toEqual(
+      expect.arrayContaining([
+        `edit-room=Common:Edit${name}`,
+        `room-info=Common:${name}Info`,
+        `leave-room=Common:LeaveThe${name}`,
+        `delete=Common:Delete${name}`,
+      ]),
+    );
+    expect(labels.join()).not.toMatch(/Room\b|RoomInfo|RoomOwner/);
+  });
 });
 
 describe("ContextOptionsStore.getFilesContextOptions - the Download submenu", () => {

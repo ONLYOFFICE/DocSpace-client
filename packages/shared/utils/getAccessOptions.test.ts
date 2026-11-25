@@ -39,14 +39,22 @@ describe("getAccessOptions for an AI project", () => {
     return option && "access" in option ? option.access : undefined;
   };
 
-  it("offers Project manager and Member, a member reading the project", () => {
-    expect(accessOf("projectManager")).toBe(ShareAccessRights.RoomManager);
-    expect(accessOf("projectMember")).toBe(ShareAccessRights.ReadOnly);
+  it("offers Member alone, a member being its Content creator, and no Agent manager", () => {
+    expect(keysOf(RoomsType.AiProjectRoom)).toEqual(["projectMember"]);
+    expect(accessOf("projectMember")).toBe(ShareAccessRights.Collaborator);
+    expect(accessOf("projectManager")).toBeUndefined();
   });
 
-  it("creates the invitation link as Project manager", () => {
+  it("names the role in agent terms", () => {
+    const option = getAccessOptions(t, RoomsType.AiProjectRoom).find(
+      (item) => "key" in item && item.key === "projectMember",
+    ) as { label?: string } | undefined;
+    expect(option?.label).toBe("Common:Member");
+  });
+
+  it("invites as Member (Content creator)", () => {
     expect(getDefaultAccessUser(RoomsType.AiProjectRoom)).toBe(
-      ShareAccessRights.RoomManager,
+      ShareAccessRights.Collaborator,
     );
   });
 });

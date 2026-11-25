@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG lub SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "Nieprawidłowy token",
-  "LastModified": "Ostatnia modyfikacja",
   "NewApp": "Nowa aplikacja",
   "NoAuthorizedApps": "Brak autoryzowanych aplikacji",
   "NoOAuthAppHeader": "Brak aplikacji OAuth",

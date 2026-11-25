@@ -121,10 +121,17 @@ const parseFolderTypes = (value: unknown): number[] | null => {
   return list.length ? list : null;
 };
 
+// Params of the rooms list's own filter, which a files URL does not take: the
+// room type an AI section list is narrowed to, and the tab it is on. Built
+// while such a list is on screen (opening one of its rooms, a sidebar entry),
+// a files URL would carry them on into the room and from there into Files.
+const ROOMS_LIST_PARAMS = ["type", "tab"];
+
 const getOtherSearchParams = () => {
   const searchParams = new URLSearchParams(window.location.search);
 
   const filterSearchParams = [
+    ...ROOMS_LIST_PARAMS,
     SEARCH_TYPE,
     AUTHOR_TYPE,
     SHARED_BY,

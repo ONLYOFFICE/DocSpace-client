@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG または SVG, 32x32",
   "ID": "ID",
   "InvalidToken": "無効なトークン",
-  "LastModified": "最終更新日",
   "NewApp": "新規アプリ",
   "NoAuthorizedApps": "認証済みアプリがありません",
   "NoOAuthAppHeader": "OAuthアプリがありません",

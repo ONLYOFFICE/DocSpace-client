@@ -49,3 +49,9 @@
 .medium {
   @include mixins.icon-size(medium);
 }
+
+// The pill keeps its text on one line beside a truncated title.
+.pill {
+  flex: none;
+  white-space: nowrap;
+}

@@ -61,6 +61,7 @@ import MembersEmptyContainer from "@/app/(docspace)/_components/info-panel/views
 import PrivateMemberUser from "./PrivateMemberUser";
 import {
   classifyMembers,
+  isListedMember,
   USERS_ONLY,
   type MemberSectionKey,
 } from "./PrivateMembersView.utils";
@@ -167,9 +168,12 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
     );
   }
 
+  // The next page and Show more count the raw page; the list shows only
+  // members the grouped view lists, in a search too.
   const hasMore = members.length < total;
   const isSearching = !!filterValue?.trim();
-  const sections = classifyMembers(members);
+  const listed = members.filter(isListedMember);
+  const sections = classifyMembers(listed);
 
   const sectionTitle = (key: MemberSectionKey): string => {
     switch (key) {
@@ -237,7 +241,7 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
     <div className={styles.root}>
       <ul className={styles.list}>
         {isSearching
-          ? members.map(renderMember)
+          ? listed.map(renderMember)
           : sections.map((section) =>
               section.members.length === 0 ? null : (
                 <React.Fragment key={section.key}>
@@ -269,7 +273,7 @@ const PrivateMembersView: React.FC<PrivateMembersViewProps> = ({
         />
       ) : null}
 
-      {members.length === 0 ? <MembersEmptyContainer /> : null}
+      {listed.length === 0 ? <MembersEmptyContainer /> : null}
     </div>
   );
 };

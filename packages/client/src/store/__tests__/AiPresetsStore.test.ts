@@ -10,7 +10,16 @@ const api = vi.hoisted(() => ({
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
 
-import AiPresetsStore, { toAiPreset } from "../AiPresetsStore";
+const roomsApi = vi.hoisted(() => ({ getRoomInfo: vi.fn() }));
+
+vi.mock("@docspace/shared/api/rooms", () => roomsApi);
+
+import AiPresetsStore, {
+  PICKER_PROJECTS_MAX_PAGES,
+  PICKER_PROJECTS_PAGE_SIZE,
+  PRESETS_FRESH_MS,
+  toAiPreset,
+} from "../AiPresetsStore";
 
 const room = (id: number, title: string, available = true): TAiProjectSource =>
   ({ id, title, available, roomType: 10 }) as TAiProjectSource;
@@ -20,6 +29,8 @@ const project = (id: number, title: string, overrides: Partial<TAiProject["aiPro
     id,
     title,
     created: "2026-10-01T00:00:00.000Z",
+    inRoom: true,
+    security: { EditRoom: true },
     aiProject: {
       profile: { id: "p1", name: "Claude", available: true },
       instructionsRooms: [room(12, "Skills"), room(13, "Legal tone")],
@@ -45,6 +56,8 @@ describe("AiPresetsStore", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales")] });
+    // The user manages every room unless a case says otherwise.
+    roomsApi.getRoomInfo.mockImplementation(async (id: number) => ({ id, security: { EditRoom: true } }));
   });
 
   it("takes a project's model and its readable rooms", () => {
@@ -59,8 +72,15 @@ describe("AiPresetsStore", () => {
         { cloud: "docspace", id: "13", name: "Legal tone" },
       ],
       knowledgeRooms: [{ cloud: "docspace", id: "9", name: "Docs" }],
+      // The fixture may change the settings and carries no room rights.
+      rights: { edit: true, share: false, delete: false },
+      suggestions: [],
     });
     expect(toAiPreset(project(2, "Default", { profile: null })).profileId).toBeNull();
+    expect(
+      toAiPreset(project(3, "Legal", { suggestions: [{ name: "Review", prompt: "Review this contract" }] }))
+        .suggestions,
+    ).toEqual([{ name: "Review", prompt: "Review this contract" }]);
   });
 
   it("lists the user's projects, the most recent first, and none without a user", async () => {
@@ -74,6 +94,71 @@ describe("AiPresetsStore", () => {
       expect.objectContaining({ sortBy: "DateAndTime", sortOrder: "descending" }),
     );
     expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
+  });
+
+  it("offers a DocSpace admin outside an agent none of it", async () => {
+    api.getAiProjects.mockResolvedValue({
+      folders: [project(1, "Sales"), { ...project(2, "Legal Reviewer"), inRoom: false }],
+    });
+    const store = new AiPresetsStore();
+    store.init("admin");
+    await flush();
+    expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
+  });
+
+  it("reads the projects page by page up to the total, so the user's own past the first page are offered", async () => {
+    // A DocSpace admin reads every project: 230, of which the user is in
+    // one on each page.
+    const pageOf = (from: number, count: number) =>
+      Array.from({ length: count }, (_, i) => ({
+        ...project(from + i, `Agent ${from + i}`),
+        inRoom: (from + i) % 100 === 5,
+      }));
+    api.getAiProjects.mockImplementation(async ({ startIndex = 0, count }: { startIndex?: number; count: number }) => ({
+      folders: pageOf(startIndex, Math.min(count, 230 - startIndex)),
+      total: 230,
+    }));
+    const store = new AiPresetsStore();
+    store.init("admin");
+    await vi.waitFor(() => expect(store.presets).toHaveLength(3));
+    expect(api.getAiProjects).toHaveBeenCalledTimes(3);
+    expect(api.getAiProjects.mock.calls.map(([query]) => query.startIndex)).toEqual([0, 100, 200]);
+    for (const [query] of api.getAiProjects.mock.calls) {
+      expect(query).toEqual(
+        expect.objectContaining({ sortBy: "DateAndTime", sortOrder: "descending", count: PICKER_PROJECTS_PAGE_SIZE }),
+      );
+    }
+    // In the list's order: the sidebar shows the most recent and "Show more".
+    expect(store.presets.map((p) => p.name)).toEqual(["Agent 5", "Agent 105", "Agent 205"]);
+  });
+
+  it("stops at a full page that completes the total, and keeps a project the next page repeats once", async () => {
+    const full = Array.from({ length: PICKER_PROJECTS_PAGE_SIZE }, (_, i) => project(i, `Agent ${i}`));
+    api.getAiProjects
+      .mockResolvedValueOnce({ folders: full, total: 101 })
+      // A project created meanwhile pushed the last one of page one onto page two.
+      .mockResolvedValueOnce({ folders: [project(99, "Agent 99")], total: 101 });
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await vi.waitFor(() => expect(store.presets).toHaveLength(PICKER_PROJECTS_PAGE_SIZE));
+    expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+
+    api.getAiProjects.mockReset().mockResolvedValue({ folders: full, total: PICKER_PROJECTS_PAGE_SIZE });
+    await store.fetchPresets();
+    expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+  });
+
+  it("reads at most a bounded number of pages", async () => {
+    let next = 0;
+    api.getAiProjects.mockImplementation(async () => ({
+      folders: Array.from({ length: PICKER_PROJECTS_PAGE_SIZE }, () => project(next++, "Agent")),
+      total: 1_000_000,
+    }));
+    const store = new AiPresetsStore();
+    store.init("admin");
+    await vi.waitFor(() => expect(store.presets.length).toBeGreaterThan(0));
+    expect(api.getAiProjects).toHaveBeenCalledTimes(PICKER_PROJECTS_MAX_PAGES);
+    expect(store.presets).toHaveLength(PICKER_PROJECTS_MAX_PAGES * PICKER_PROJECTS_PAGE_SIZE);
   });
 
   it("keeps the last list when a re-read fails", async () => {
@@ -99,8 +184,91 @@ describe("AiPresetsStore", () => {
       aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [9] },
     });
     expect(saved?.preset.id).toBe("5");
+    expect(saved?.notLinked).toEqual([]);
     expect(store.pendingSettings).toBeNull();
     expect(store.presets.map((p) => p.name)).toEqual(["Contracts", "Sales"]);
+  });
+
+  it("saves a picked agent as a new one with its model and rooms, and leaves the agent as it was", async () => {
+    api.createAiProject.mockResolvedValue(project(6, "Legal Reviewer (EU)"));
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+    const agent = toAiPreset(project(3, "Legal Reviewer", { profile: { id: "p2", name: "GPT", provider: "OpenAI", available: true } }));
+    store.setActivePreset(agent);
+
+    // The chat hands over what it shows; the picked agent decides.
+    store.openSaveDialog({ ...settings, profileId: "p1", contextRooms: [], knowledgeRooms: [] });
+    const saved = await store.savePreset("Legal Reviewer (EU)");
+
+    expect(api.createAiProject).toHaveBeenCalledWith({
+      title: "Legal Reviewer (EU)",
+      aiProject: { profileId: "p2", instructionsRoomIds: [12, 13], knowledgeRoomIds: [9] },
+    });
+    expect(saved?.notLinked).toEqual([]);
+    expect(store.activePreset).toEqual(agent);
+    expect(store.activePreset?.name).toBe("Legal Reviewer");
+    expect(store.presets.map((p) => p.name)).toEqual(["Legal Reviewer (EU)", "Sales"]);
+  });
+
+  it("takes the chat's model for a picked agent the server keeps no model for", async () => {
+    api.createAiProject.mockResolvedValue(project(6, "Copy"));
+    const store = new AiPresetsStore();
+    store.init("u1");
+    store.setActivePreset(toAiPreset(project(3, "Legal Reviewer", { profile: null })));
+    store.openSaveDialog(settings);
+    expect(store.pendingSettings).toEqual(
+      expect.objectContaining({ profileId: "p1", profileName: "Claude" }),
+    );
+  });
+
+  it("creates the agent without the rooms the user may not link and names each of them", async () => {
+    api.createAiProject.mockResolvedValue(project(6, "Legal Reviewer (EU)"));
+    // A Member of the agent reads "Legal tone" and "Docs" only through it,
+    // and "Gone" cannot be read at all.
+    roomsApi.getRoomInfo.mockImplementation(async (id: number) => {
+      if (id === 14) throw new Error("404");
+      return { id, security: { EditRoom: id === 12 } };
+    });
+    const store = new AiPresetsStore();
+    store.init("u1");
+    store.setActivePreset({
+      ...toAiPreset(project(3, "Legal Reviewer")),
+      knowledgeRooms: [
+        { cloud: "docspace", id: "9", name: "Docs" },
+        { cloud: "docspace", id: "14", name: "Gone" },
+      ],
+    });
+
+    store.openSaveDialog(settings);
+    const saved = await store.savePreset("Legal Reviewer (EU)");
+
+    expect(api.createAiProject).toHaveBeenCalledWith({
+      title: "Legal Reviewer (EU)",
+      aiProject: { profileId: "p1", instructionsRoomIds: [12], knowledgeRoomIds: [] },
+    });
+    expect(saved?.notLinked.map((room) => room.name)).toEqual(["Legal tone", "Docs", "Gone"]);
+    // Each room is read once.
+    expect(roomsApi.getRoomInfo).toHaveBeenCalledTimes(4);
+  });
+
+  it("still creates the agent with the model when no room may be linked", async () => {
+    api.createAiProject.mockResolvedValue(project(5, "Contracts"));
+    roomsApi.getRoomInfo.mockResolvedValue({ security: { EditRoom: false } });
+    const store = new AiPresetsStore();
+    store.init("u1");
+    store.openSaveDialog(settings);
+    const saved = await store.savePreset("Contracts");
+
+    expect(api.createAiProject).toHaveBeenCalledWith({
+      title: "Contracts",
+      aiProject: { profileId: "p1", instructionsRoomIds: [], knowledgeRoomIds: [] },
+    });
+    // A room of another cloud is never linked, and so never named.
+    expect(saved?.notLinked).toEqual([
+      { cloud: "docspace", id: "12", name: "Skills" },
+      { cloud: "docspace", id: "9", name: "Docs" },
+    ]);
   });
 
   it("refuses an empty name and a save without an open dialog", async () => {
@@ -121,13 +289,47 @@ describe("AiPresetsStore", () => {
     expect(store.pendingSettings).toEqual(settings);
   });
 
+  it("refreshes a list only once it is no longer current, and shares a read on its way", async () => {
+    try {
+      const store = new AiPresetsStore();
+      store.init("u1");
+      await flush();
+      expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+
+      // Read a moment ago: the chat and its menu opening read nothing.
+      await store.refreshPresets();
+      expect(api.getAiProjects).toHaveBeenCalledTimes(1);
+
+      vi.setSystemTime(Date.now() + PRESETS_FRESH_MS);
+      await Promise.all([store.refreshPresets(), store.refreshPresets()]);
+      expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+
+      // A list known to have changed is read whatever its age.
+      await store.fetchPresets();
+      expect(api.getAiProjects).toHaveBeenCalledTimes(3);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("reads again after a failed read, however recent", async () => {
+    api.getAiProjects.mockRejectedValueOnce(new Error("offline"));
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    await store.refreshPresets();
+    expect(api.getAiProjects).toHaveBeenCalledTimes(2);
+    expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
+  });
+
   it("applies a picked project as it is now", async () => {
     api.getAiProject.mockResolvedValue(project(1, "Sales (renamed)"));
     const store = new AiPresetsStore();
     store.init("u1");
     await flush();
 
-    expect(await store.requestApply(store.presets[0])).toBe(true);
+    expect(await store.requestApply(store.presets[0])).toBe("applied");
     expect(api.getAiProject).toHaveBeenCalledWith(1);
     expect(store.pendingApply?.name).toBe("Sales (renamed)");
     expect(store.presets[0].name).toBe("Sales (renamed)");
@@ -141,9 +343,82 @@ describe("AiPresetsStore", () => {
     store.init("u1");
     await flush();
 
-    expect(await store.requestApply(store.presets[0])).toBe(false);
+    expect(await store.requestApply(store.presets[0])).toBe("gone");
     expect(store.pendingApply).toBeNull();
     expect(store.presets).toEqual([]);
+  });
+
+  it("applies nothing and rejects with the error when the project cannot be read for another reason", async () => {
+    const failure = { response: { status: 500 }, message: "down" };
+    api.getAiProject.mockRejectedValue(failure);
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    await expect(store.requestApply(store.presets[0])).rejects.toBe(failure);
+    expect(store.pendingApply).toBeNull();
+    // The project stays in the list.
+    expect(store.presets.map((p) => p.name)).toEqual(["Sales"]);
+  });
+
+  it("drops a failed read quietly once another pick overtook it", async () => {
+    let failSales: (reason: unknown) => void = () => {};
+    api.getAiProject.mockImplementationOnce(
+      () =>
+        new Promise<TAiProject>((_, reject) => {
+          failSales = reject;
+        }),
+    );
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    const sales = store.requestApply(store.presets[0]);
+    store.cancelApply();
+    failSales({ response: { status: 500 } });
+    expect(await sales).toBe("superseded");
+  });
+
+  it("applies only the latest pick, whichever read comes back first", async () => {
+    api.getAiProjects.mockResolvedValue({ folders: [project(1, "Sales"), project(2, "Legal")] });
+    let resolveSales: (value: TAiProject) => void = () => {};
+    api.getAiProject.mockImplementation((id: number) =>
+      id === 1
+        ? new Promise<TAiProject>((resolve) => {
+            resolveSales = resolve;
+          })
+        : Promise.resolve(project(2, "Legal")),
+    );
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    const sales = store.requestApply(store.presets[0]);
+    expect(await store.requestApply(store.presets[1])).toBe("applied");
+    expect(store.pendingApply?.id).toBe("2");
+
+    resolveSales(project(1, "Sales"));
+    expect(await sales).toBe("superseded");
+    expect(store.pendingApply?.id).toBe("2");
+  });
+
+  it("drops a pick called off while its read is on its way", async () => {
+    let resolveSales: (value: TAiProject) => void = () => {};
+    api.getAiProject.mockImplementation(
+      () =>
+        new Promise<TAiProject>((resolve) => {
+          resolveSales = resolve;
+        }),
+    );
+    const store = new AiPresetsStore();
+    store.init("u1");
+    await flush();
+
+    const sales = store.requestApply(store.presets[0]);
+    store.cancelApply();
+    resolveSales(project(1, "Sales"));
+    expect(await sales).toBe("superseded");
+    expect(store.pendingApply).toBeNull();
   });
 
   it("exposes the active project's Instructions rooms as the chat context rooms", () => {
@@ -155,5 +430,50 @@ describe("AiPresetsStore", () => {
     ]);
     store.setActivePreset(null);
     expect(store.activePresetContextRooms).toBeNull();
+  });
+  it("records a skill set's Use in chat once, as the chat's room", () => {
+    const store = new AiPresetsStore();
+    store.requestUseInChat({ id: 12, title: "Sales assistant" });
+    expect(store.consumeUseInChat()).toEqual({
+      room: { cloud: "docspace", id: "12", name: "Sales assistant" },
+      draft: null,
+      knowledge: false,
+    });
+    expect(store.consumeUseInChat()).toBeNull();
+  });
+
+  it("records a knowledge base's Use in chat as a knowledge base", () => {
+    const store = new AiPresetsStore();
+    store.requestUseInChat({ id: 21, title: "Company policies", knowledge: true });
+    expect(store.consumeUseInChat()).toEqual({
+      room: { cloud: "docspace", id: "21", name: "Company policies" },
+      draft: null,
+      knowledge: true,
+    });
+    expect(store.consumeUseInChat()).toBeNull();
+  });
+
+  it("records the skill's call with a skill's Use in chat", () => {
+    const store = new AiPresetsStore();
+    store.requestUseInChat({ id: 12, title: "Sales assistant", skill: "document-summary" });
+    expect(store.consumeUseInChat()?.draft).toBe("/document-summary ");
+    expect(store.consumeUseInChat()).toBeNull();
+  });
+
+  it("makes the skill sets used in chat its context rooms until an agent is picked", () => {
+    const store = new AiPresetsStore();
+    expect(store.chatContextRooms).toBeNull();
+
+    store.setChatSkillRooms([{ cloud: "docspace", id: "12", name: "Sales assistant" }]);
+    expect(store.chatContextRooms).toEqual([{ id: "12", name: "Sales assistant" }]);
+
+    // An agent brings its own sets, and leaving it does not bring these back.
+    store.setActivePreset(toAiPreset(project(1, "Sales")));
+    expect(store.chatContextRooms).toEqual([
+      { id: "12", name: "Skills" },
+      { id: "13", name: "Legal tone" },
+    ]);
+    store.setActivePreset(null);
+    expect(store.chatContextRooms).toBeNull();
   });
 });

@@ -19,8 +19,13 @@ describe("MembersHelper.getOptionsByRoomType", () => {
     expect(keysOf(RoomsType.InstructionsRoom)).toEqual(["roomAdmin", "collaborator", "editor", "viewer"]);
   });
 
-  it("offers both project roles in a project", () => {
-    expect(keysOf(RoomsType.AiProjectRoom)).toEqual(["projectManager", "projectMember"]);
+  it("offers Member alone in a project, no Agent manager", () => {
+    expect(keysOf(RoomsType.AiProjectRoom)).toEqual(["projectMember"]);
+  });
+
+  it("names an agent's role Member", () => {
+    const options = new MembersHelper({ t }).getOptionsByRoomType(RoomsType.AiProjectRoom, false);
+    expect(options?.map((o) => ("label" in o ? o.label : undefined))).toEqual(["Common:Member"]);
   });
 
   it("appends the remove option when the caller may change roles", () => {
@@ -33,7 +38,7 @@ describe("MembersHelper.getOptionByUserAccess", () => {
     new MembersHelper({ t }).getOptionByUserAccess(access, roomType)?.key;
 
   it("names the project roles in a project only", () => {
-    expect(keyOf(ShareAccessRights.ReadOnly, RoomsType.AiProjectRoom)).toBe("projectMember");
+    expect(keyOf(ShareAccessRights.Collaborator, RoomsType.AiProjectRoom)).toBe("projectMember");
     expect(keyOf(ShareAccessRights.RoomManager, RoomsType.AiProjectRoom)).toBe("projectManager");
   });
 
@@ -42,5 +47,9 @@ describe("MembersHelper.getOptionByUserAccess", () => {
       expect(keyOf(ShareAccessRights.ReadOnly, roomType)).toBe("viewer");
       expect(keyOf(ShareAccessRights.RoomManager, roomType)).toBe("roomAdmin");
     }
+  });
+
+  it("keeps Content creator in any other room", () => {
+    expect(keyOf(ShareAccessRights.Collaborator, RoomsType.CustomRoom)).toBe("collaborator");
   });
 });

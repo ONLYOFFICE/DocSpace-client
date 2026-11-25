@@ -38,6 +38,7 @@
 import {
   getFoldersTree,
   getFolder,
+  getFolderPath,
   getSettingsFiles,
 } from "@docspace/shared/api/files";
 import { getRooms } from "@docspace/shared/api/rooms";
@@ -45,6 +46,7 @@ import { getSettings } from "@docspace/shared/api/settings";
 
 import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
 import OAuthPageLoader from "@/components/OAuthPageLoader";
+import PrivateTargetNotAvailable from "@/components/PrivateTargetNotAvailable";
 
 import FilesSelectorClient from "./page.client";
 import {
@@ -55,6 +57,7 @@ import {
 
 const clientDeps = {
   getFoldersTree,
+  getFolderPath,
   getFilesSettings: getSettingsFiles,
   getSettings,
   getRooms,
@@ -73,6 +76,7 @@ export default function FilesSelectorOAuth({
 
   if (error) throw error;
   if (!clientProps) return <OAuthPageLoader />;
+  if ("privateTarget" in clientProps) return <PrivateTargetNotAvailable />;
 
   return <FilesSelectorClient {...clientProps} />;
 }

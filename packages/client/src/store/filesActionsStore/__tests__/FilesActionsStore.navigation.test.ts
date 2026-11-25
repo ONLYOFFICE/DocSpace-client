@@ -1,7 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea, RoomsType } from "@docspace/shared/enums";
 import { createTestFilesActionsStore } from "./testHarness";
 
 // Mutable filter fake with the bits selectTag/selectOption touch.
@@ -99,6 +99,35 @@ describe("FilesActionsStore — navigation/filter (batch 6)", () => {
     expect(url).toContain(`searchArea=${RoomSearchArea.Templates}`);
   });
 
+  it.each([
+    ["an agent", RoomsType.AiProjectRoom],
+    ["a skill set", RoomsType.InstructionsRoom],
+    ["a knowledge base", RoomsType.KnowledgeRoom],
+  ])("moveToRoomsPage returns from %s to the AI section's list of its kind", (_, roomType) => {
+    (
+      window as unknown as { DocSpace: { location: { pathname: string } } }
+    ).DocSpace.location.pathname = "/ai-rooms/123/filter";
+
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        navigationPath: [],
+        pathParts: [
+          { id: 1, title: "AI rooms" },
+          { id: 123, title: "Room", roomType },
+        ],
+        rootFolderType: FolderType.AiHub,
+      },
+    });
+
+    store.moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url.startsWith("/ai-rooms/filter?")).toBe(true);
+    expect(new URLSearchParams(url.split("?")[1]).getAll("type")).toEqual([
+      String(roomType),
+    ]);
+  });
+
   it("onClickBack closes the media viewer when it is open", () => {
     const store = createTestFilesActionsStore({
       clientLoadingStore: { isLoading: false },
@@ -187,3 +216,34 @@ describe("FilesActionsStore — exits from the Private section", () => {
   });
 });
 
+
+describe("FilesActionsStore — back from a room of the AI Chat section", () => {
+  const openAiRoom = (store: Record<string, unknown>) => {
+    (window as unknown as { DocSpace: unknown }).DocSpace = {
+      location: { pathname: "/ai-rooms/12/filter", search: "?folder=12", state: {} },
+      navigate,
+    };
+    return createTestFilesActionsStore({ selectedFolderStore: store });
+  };
+
+  it("returns from a skill set to the Skill sets list", () => {
+    openAiRoom({ roomType: 10, navigationPath: [] }).moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url.startsWith("/ai-rooms/filter?")).toBe(true);
+    expect(url).toContain(`searchArea=${RoomSearchArea.AiHub}`);
+    expect(url).toContain("type=10");
+  });
+
+  it("returns from a folder of a knowledge base to the Knowledge bases list", () => {
+    openAiRoom({
+      roomType: null,
+      navigationPath: [
+        { id: 12, title: "Contracts", isRoom: true, roomType: 11 },
+        { id: 2, title: "Common:AIProjectKnowledgeRooms", isRootRoom: true },
+      ],
+    }).moveToRoomsPage();
+
+    expect(navigate.mock.calls[0][0]).toContain("type=11");
+  });
+});

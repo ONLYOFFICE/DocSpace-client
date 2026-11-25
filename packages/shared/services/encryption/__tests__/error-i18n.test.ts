@@ -45,6 +45,7 @@ import {
   KeyCheckUnavailableError,
   KeyNotFoundError,
   NoAccessError,
+  KeyReplacedError,
 } from "../errors";
 
 const t = ((key: string) => key) as unknown as TFunction;
@@ -76,6 +77,12 @@ describe("getSpecificEncryptionErrorMessage", () => {
   it("names an error that has a message of its own", () => {
     expect(getSpecificEncryptionErrorMessage(t, new NoAccessError("u"))).toBe(
       "Common:EncryptedFileNoAccessYet",
+    );
+  });
+
+  it("Download of one such file", () => {
+    expect(getSpecificEncryptionErrorMessage(t, new KeyReplacedError())).toBe(
+      "Common:EncryptedFileKeyReplaced",
     );
   });
 

@@ -75,6 +75,7 @@ vi.mock("react-i18next", () => ({
 import React from "react";
 import { mockDefaultProps } from "./mockData";
 import { FilesSelectorInput } from "./index";
+import { isRoomDisabledForBackup } from "./FilesSelector.helpers";
 
 describe("FilesSelectorInput", () => {
   beforeEach(() => {
@@ -116,5 +117,25 @@ describe("FilesSelectorInput", () => {
     // Check if data-visible attribute exists and is truthy (could be true or "true")
     expect(filesSelector).toHaveAttribute("data-visible");
     expect(filesSelector.getAttribute("data-visible")).toBeTruthy();
+  });
+
+  // Bug 78865: rooms a backup cannot be saved to are greyed out in the
+  // backup room picker, and only there.
+  it("greys out rooms unfit for a backup only in the backup picker", async () => {
+    const lastSelectorProps = () =>
+      mocks.FilesSelectorMock.mock.lastCall?.[0] as {
+        isRoomDisabled?: unknown;
+      };
+
+    const { unmount } = render(
+      <FilesSelectorInput {...mockDefaultProps} isRoomBackup />,
+    );
+    await userEvent.click(screen.getByTestId("file-input"));
+    expect(lastSelectorProps().isRoomDisabled).toBe(isRoomDisabledForBackup);
+    unmount();
+
+    render(<FilesSelectorInput {...mockDefaultProps} />);
+    await userEvent.click(screen.getByTestId("file-input"));
+    expect(lastSelectorProps().isRoomDisabled).toBeUndefined();
   });
 });

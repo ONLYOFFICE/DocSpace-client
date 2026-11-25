@@ -83,6 +83,8 @@ export type TUploadFile = {
   password?: string | null;
   format?: string | null;
   index?: number;
+  /** The "keep both" name of a re-imported container, applied after its recovery. */
+  keepBothName?: string;
 };
 
 export type TConversionProgress = {

@@ -3,7 +3,7 @@
   "content": "Every month",
   "content_en_sha1_hash": "7f3932f9cb96cb99072771c992c0ce3c0b342bfb",
   "created_at": "2025-05-19T21:30:45.176Z",
-  "updated_at": "2026-06-15T19:31:56.174Z",
+  "updated_at": "2026-11-17T13:13:27.256Z",
   "comment": {
     "text": "This is a placeholder text for a dropdown menu or a label in a list, indicating a monthly recurrence for a scheduled event or setting.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
-      "line_number": 536,
+      "line_number": 539,
       "context": "export const getLabel = (period: PeriodType, t: TFunction) => {\n switch (period) {\n case \"Year\":\n return t(\"Common:EveryYear\");\n case \"Month\":\n return t(\"Common:EveryMonth\");\n case \"Week\":\n return t(\"Common:EveryWeek\");\n case \"Day\":\n return t(\"Common:EveryDay\");\n case \"Hour\":",
       "module": "/packages/shared"
     },

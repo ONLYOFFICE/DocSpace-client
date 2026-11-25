@@ -48,13 +48,9 @@ import { RoomIcon } from "@onlyoffice/apps-ui-kit/components/room-icon";
 import type { TImage } from "@onlyoffice/apps-ui-kit/components/image-editor/ImageEditor.types";
 import { calculateRoomLogoParams } from "@onlyoffice/apps-ui-kit/utils";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
-import RoomSelector from "@onlyoffice/apps-ui-kit/selectors/Room";
-import type { TSelectorItem } from "@onlyoffice/apps-ui-kit/components/selector";
 import { useStores } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
-import { RoomSearchArea } from "@docspace/shared/enums";
 import {
-  AI_PROJECT_MAX_ROOMS_PER_TYPE,
   INSTRUCTIONS_ROOM_TYPE,
   KNOWLEDGE_ROOM_TYPE,
 } from "@docspace/shared/api/ai/projects";
@@ -77,12 +73,13 @@ import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledPar
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import AvatarEditorDialog from "SRC_DIR/components/dialogs/AvatarEditorDialog";
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
-import { errorMessage } from "SRC_DIR/store/AiProjectsStore";
+import { errorMessage, isPaymentRequired } from "SRC_DIR/store/AiProjectsStore";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import { coverLogo, uploadedLogo } from "../list/ProjectLogo";
 import { SourceRoomLogo } from "../project/RoomItem";
-import { savedProjectProfileId } from "../../utils";
+import { isTagBeingTyped, savedProjectProfileId } from "../../utils";
+import AgentRoomsSelector, { type TAgentRoomType } from "./AgentRoomsSelector";
 import styles from "./CreateEditProjectDialog.module.scss";
 
 type CreateEditProjectDialogProps = {
@@ -109,7 +106,7 @@ const logoCrop = (file: File, { x, y, zoom }: TIcon) =>
     img.src = url;
   });
 
-type TRoomType = typeof INSTRUCTIONS_ROOM_TYPE | typeof KNOWLEDGE_ROOM_TYPE;
+type TRoomType = TAgentRoomType;
 
 const MAX_TITLE = 170;
 
@@ -131,16 +128,16 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const dialogsStore = useStore("dialogsStore");
   const filesStore = useStore("filesStore");
   const tagsStore = useStore("tagsStore");
-  const settingsStore = useStore("settingsStore");
   const avatarEditorDialogStore = useStore("avatarEditorDialogStore");
   const { avatarEditorDialogVisible } = avatarEditorDialogStore;
-  // With vectorization off a Knowledge room cannot be searched, so none can
-  // be linked: the selector lists them greyed out, with the reason.
-  const vectorizationEnabled = settingsStore.aiConfig?.vectorizationEnabled !== false;
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
   const ensureProfiles = useProfilesStore((s) => s.ensureProfiles);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
+  const chatProfile = useProfilesStore((s) => s.chatProfile);
+  // The model an agent without one of its own runs on, as the server picks
+  // it (and the tiles name it): the portal's Chat model, else the Default slot.
+  const portalProfile = chatProfile ?? defaultProfile;
   const profilesLoaded = useProfilesStore((s) => s.profilesLoaded);
   // The chat starts knowing only its assigned profiles; the model combo
   // box lists the whole catalogue.
@@ -168,7 +165,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   const [imageRemoved, setImageRemoved] = React.useState(false);
   const storedImage = !imageRemoved && project ? uploadedLogo(project.logo) : null;
   const hasImage = !!previewIcon || !!storedImage;
-  // `null` until a model is picked: the portal default is preselected.
+  // `null` until a model is picked: the portal's chat model is preselected.
   const [profileId, setProfileId] = React.useState<string | null>(project?.aiProject.profile?.id ?? null);
   const [instructions, setInstructions] = React.useState<TAiProjectSource[]>(project?.aiProject.instructionsRooms ?? []);
   const [knowledge, setKnowledge] = React.useState<TAiProjectSource[]>(project?.aiProject.knowledgeRooms ?? []);
@@ -249,27 +246,29 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
   // uploaded, like a new room.
   const isEmptyIcon = !project && !title && !dialogsStore.cover && !hasImage;
 
-  // The default profile of the portal first, then every chat-capable
-  // profile, each by its name only. Whichever is picked is stored as the
-  // project's own model, the default included.
+  // The portal's chat model first, then every chat-capable profile, each by
+  // its name only. Whichever is picked is stored as the project's own model,
+  // the portal's included; a new project stores the one shown. An agent
+  // edited without a model of its own keeps none until one is picked.
   const profileOptions = React.useMemo<TOption[]>(
     () => [
-      ...(defaultProfile ? [{ key: defaultProfile.id, value: defaultProfile.id, label: defaultProfile.name }] : []),
+      ...(portalProfile ? [{ key: portalProfile.id, value: portalProfile.id, label: portalProfile.name }] : []),
       ...chatProfiles
-        .filter((profile) => profile.id !== defaultProfile?.id)
+        .filter((profile) => profile.id !== portalProfile?.id)
         .map((profile) => ({ key: profile.id, value: profile.id, label: profile.name })),
     ],
-    [chatProfiles, defaultProfile],
+    [chatProfiles, portalProfile],
   );
   const selectedProfileOption =
     profileOptions.find((option) => option.key === profileId) ?? (profileOptions[0] as TOption);
-  // A stored model that is gone, or none at all, shows as the default, so
-  // the default is what gets saved; one not read yet is kept.
+  // A stored model that is gone shows as the default, so the default is
+  // what gets saved; one not read yet is kept, and none at all stays none.
   const savedProfileId = savedProjectProfileId(
     profileId,
     profileOptions.map((option) => String(option.key)),
     selectedProfileOption ? String(selectedProfileOption.key) : undefined,
     profilesLoaded,
+    !!project,
   );
 
   if (!state) return null;
@@ -321,7 +320,14 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         onCreated?.(created);
       }
     } catch (e) {
-      toastr.error(errorMessage(e));
+      if (isPaymentRequired(e)) {
+        // The warning that an unpaid portal shows for a new room says why and
+        // leads to the payments page; the form gives way to it.
+        store.closeProjectDialog();
+        dialogsStore.setQuotaWarningDialogVisible(true);
+      } else {
+        toastr.error(errorMessage(e));
+      }
     } finally {
       setIsSaving(false);
     }
@@ -333,34 +339,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
     dialogsStore.setChangeRoomOwnerIsVisible(true);
   };
 
-  // The limit is never shown up front: only ticking a room past it is told.
-  const onRoomsLimitReached = () =>
-    toastr.warning(
-      selector === INSTRUCTIONS_ROOM_TYPE
-        ? t("Common:AIProjectInstructionsRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })
-        : t("Common:AIProjectKnowledgeRoomsLimit", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),
-    );
-
-  const onRoomsSelected = (items: TSelectorItem[]) => {
+  const onRoomsSelected = (rooms: TAiProjectSource[]) => {
     if (selector === null) return;
-    // The logo the selector read with the room, so the saved project shows
-    // the linked rooms without reading them back.
-    const rooms = items.map((item) => {
-      const room = item as { color?: string; cover?: TAiProjectCover; icon?: string; iconOriginal?: string };
-      return {
-        id: Number(item.id),
-        title: item.label,
-        roomType: selector,
-        available: true,
-        archived: false,
-        logo: {
-          color: room.color ? `#${room.color.replace("#", "")}` : "",
-          cover: room.cover ?? null,
-          medium: typeof room.icon === "string" ? room.icon : undefined,
-          original: room.iconOriginal,
-        },
-      };
-    });
     if (selector === INSTRUCTIONS_ROOM_TYPE) setInstructions(rooms);
     else setKnowledge(rooms);
     setSelector(null);
@@ -392,13 +372,15 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         <div className={styles.roomList}>
           {rooms.map((room) => (
             <div className={styles.roomItem} key={room.id} data-testid="ai-project-room-item">
-              <SourceRoomLogo title={room.title} logo={room.logo ?? undefined} icon={ROOM_ICONS[type]} size="20px" />
+              <SourceRoomLogo icon={ROOM_ICONS[type]} size="20px" />
               <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect truncate>
                 {room.title}
               </Text>
               <IconButton
                 iconName={CrossReactSvgUrl}
                 size={12}
+                title={t("Common:RemoveSource", { name: room.title })}
+                ariaLabel={t("Common:RemoveSource", { name: room.title })}
                 onClick={() => setRooms(rooms.filter((r) => r.id !== room.id))}
                 dataTestId="ai-project-remove-room"
               />
@@ -422,6 +404,8 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
         withForm
         onSubmit={(e) => {
           e.preventDefault();
+          // Enter in the Tags field adds the typed tag instead.
+          if (isTagBeingTyped(e.currentTarget)) return;
           void onSubmit();
         }}
         onClose={store.closeProjectDialog}
@@ -431,45 +415,16 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
       >
         {selector !== null ? (
           <ModalDialog.Container>
-            <RoomSelector
-              onClose={() => setSelector(null)}
-              isMultiSelect
-              // Room rows come with `disableMultiSelect`; this overrules it,
-              // as the "add rooms to a group" dialog does.
-              forceIsMultiSelect
-              maxSelectedItems={AI_PROJECT_MAX_ROOMS_PER_TYPE}
-              onSelectLimitReached={onRoomsLimitReached}
+            <AgentRoomsSelector
               roomType={selector}
-              // Instructions and Knowledge rooms live under the "AI rooms"
-              // root, not in Rooms.
-              searchArea={RoomSearchArea.AiHub}
-              isRoomDisabled={() => selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled}
-              getRoomDisabledText={() =>
-                selector === KNOWLEDGE_ROOM_TYPE && !vectorizationEnabled
-                  ? t("Common:KnowledgeRoomsNeedVectorization")
-                  : undefined
-              }
-              withSearch
-              withHeader
-              headerProps={{
-                headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t("Common:InstructionsRooms") : t("Common:AIProjectKnowledgeRooms"),
-                onCloseClick: () => setSelector(null),
-                onBackClick: () => setSelector(null),
-                withoutBackButton: false,
-                withoutBorder: false,
-              }}
-              withCancelButton
-              cancelButtonLabel={t("Common:CancelButton")}
-              onCancel={() => setSelector(null)}
-              submitButtonLabel={t("Common:SelectAction")}
-              selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}
-              sortSelectedFirst
+              selected={selected}
               onSubmit={onRoomsSelected}
+              onClose={() => setSelector(null)}
             />
           </ModalDialog.Container>
         ) : null}
         <ModalDialog.Header>
-          {project ? t("Common:AIProjectEditTitle") : t("Common:AIProjectCreateTitle")}
+          {project ? t("Common:EditAgent") : t("Common:CreateAgent")}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.body}>
@@ -490,7 +445,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
               />
               <InputParam
                 id="ai-project-title"
-                title={`${t("Common:Label")}:`}
+                title={`${t("Common:AgentName")}:`}
                 placeholder={t("Common:EnterName")}
                 value={title}
                 onChange={(e) => {
@@ -532,7 +487,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                 {t("Common:AIProjectModelHint")}
               </Text>
             </div>
-            {roomsBlock(t("Common:InstructionsRooms"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
+            {roomsBlock(t("Common:SkillSets"), t("Common:AIProjectInstructionsHint"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}
             {roomsBlock(t("Common:AIProjectKnowledgeRooms"), t("Common:AIProjectKnowledgeHint"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}
             {project?.createdBy ? (
               <div className={styles.owner}>
@@ -540,7 +495,7 @@ const CreateEditProjectDialog = ({ store, onCreated }: CreateEditProjectDialogPr
                   roomOwner={project.createdBy as never}
                   canChangeOwner={project.security.ChangeOwner}
                   onOwnerChange={onOwnerChange}
-                  label={t("Common:AIProjectOwner")}
+                  label={t("Common:AgentOwner")}
                 />
               </div>
             ) : null}

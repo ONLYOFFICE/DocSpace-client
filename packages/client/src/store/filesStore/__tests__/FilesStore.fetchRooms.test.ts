@@ -178,6 +178,33 @@ describe("FilesStore.fetchRooms — AI Workspace empty list", () => {
   });
 });
 
+describe("FilesStore.fetchRooms — agents' tiles", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  const fetchIn = async (rootFolderType: FolderType) => {
+    const store = createTestFilesStore();
+    const aiProjectsStore = {
+      refreshTileSummaries: vi.fn(),
+      refreshTileSummary: vi.fn(),
+      forgetTileSummary: vi.fn(),
+    };
+    store.aiProjectsStore = aiProjectsStore;
+    const payload = roomsPayload([room(1)]);
+    payload.current.rootFolderType = rootFolderType;
+    vi.spyOn(api.rooms, "getRooms").mockResolvedValue(payload as never);
+    await store.fetchRooms(0);
+    return aiProjectsStore;
+  };
+
+  it("has the agents' tiles read their summaries again with the AI list", async () => {
+    expect((await fetchIn(FolderType.AiHub)).refreshTileSummaries).toHaveBeenCalledTimes(1);
+  });
+
+  it("leaves them alone for another list", async () => {
+    expect((await fetchIn(FolderType.Rooms)).refreshTileSummaries).not.toHaveBeenCalled();
+  });
+});
+
 describe("FilesStore.fetchRooms — last-page clamp", () => {
   afterEach(() => vi.restoreAllMocks());
 
@@ -329,6 +356,22 @@ describe("FilesStore rooms requests — Private section scope", () => {
     expect(sentFilter(getRooms).privacyFilter).toBeNull();
   });
 
+  it("Address with another search area", async () => {
+    const store = storeOnRoomsList(true);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+    const filter = store.roomsFilter.clone();
+    filter.searchArea = RoomSearchArea.Any;
+
+    await store.fetchRooms(0, filter);
+
+    expect(sentFilter(getRooms)).toMatchObject({
+      searchArea: RoomSearchArea.Any,
+      privacyFilter: RoomPrivacyFilter.NotPrivate,
+    });
+  });
+
   it("Section not available: the same requests", async () => {
     const getRooms = vi
       .spyOn(api.rooms, "getRooms")
@@ -401,6 +444,28 @@ describe("FilesStore rooms requests — Private section scope", () => {
       searchArea: RoomSearchArea.PrivateRooms,
     });
     expect(store.folders.map((f) => f.id)).toEqual([2, 3, 4]);
+  });
+
+  it.each([
+    ["on", false, true],
+    ["off", true, false],
+  ])("App switched %s", async (_, before, after) => {
+    // A folder of a room is open, so the rooms list itself is not reloaded.
+    openAddress("/rooms/shared/12/filter");
+    const store = storeOnRoomsList(true);
+    const fetchTreeFolders = vi.fn(async () => {});
+    store.treeFoldersStore.fetchTreeFolders = fetchTreeFolders as never;
+    const apps = observable({
+      isPrivateRoomsSectionAvailable: before,
+      isInstalled: () => true,
+    });
+    store.watchPrivateRoomsSection(apps);
+
+    runInAction(() => {
+      apps.isPrivateRoomsSectionAvailable = after;
+    });
+
+    await vi.waitFor(() => expect(fetchTreeFolders).toHaveBeenCalledTimes(1));
   });
 
   it("reloads the open Rooms list when the section availability flips", async () => {
@@ -477,5 +542,69 @@ describe("FilesStore.fetchRooms — selection carried into the list", () => {
 
     expect(store.bufferSelection).toBeNull();
     expect(store.selection).toEqual([]);
+  });
+});
+
+describe("FilesStore room quota — the list stays in its section (Bug 84973)", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  const requestedFilter = (getRooms: { mock: { calls: unknown[][] } }) =>
+    getRooms.mock.calls[0][0] as RoomsFilter;
+
+  const aiRoomsFilter = () => {
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AiHub);
+    filter.type = [String(RoomsType.KnowledgeRoom)];
+    return filter;
+  };
+
+  it("reads AI rooms again after a custom quota is set there", async () => {
+    const store = createTestFilesStore();
+    store.roomsFilter = aiRoomsFilter();
+    vi.spyOn(api.rooms, "setCustomRoomQuota").mockResolvedValue([] as never);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+
+    await store.setCustomRoomQuota([1], 100);
+
+    expect(requestedFilter(getRooms).searchArea).toBe(RoomSearchArea.AiHub);
+    expect(requestedFilter(getRooms).type).toEqual([
+      String(RoomsType.KnowledgeRoom),
+    ]);
+  });
+
+  it("reads AI rooms again after the quota is reset there", async () => {
+    const store = createTestFilesStore();
+    store.roomsFilter = aiRoomsFilter();
+    vi.spyOn(api.rooms, "resetRoomQuota").mockResolvedValue([] as never);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+
+    await store.resetRoomQuota([1]);
+
+    expect(requestedFilter(getRooms).searchArea).toBe(RoomSearchArea.AiHub);
+  });
+
+  it("keeps the default filter in the Rooms section", async () => {
+    const store = createTestFilesStore();
+    vi.spyOn(api.rooms, "setCustomRoomQuota").mockResolvedValue([] as never);
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(roomsPayload([room(1)]) as never);
+
+    await store.setCustomRoomQuota([1], 100);
+
+    expect(requestedFilter(getRooms).searchArea).toBe(RoomSearchArea.Active);
+  });
+
+  it("does not read the list again inside a room", async () => {
+    const store = createTestFilesStore();
+    vi.spyOn(api.rooms, "setCustomRoomQuota").mockResolvedValue([] as never);
+    const getRooms = vi.spyOn(api.rooms, "getRooms");
+
+    await store.setCustomRoomQuota([1], 100, true);
+
+    expect(getRooms).not.toHaveBeenCalled();
   });
 });

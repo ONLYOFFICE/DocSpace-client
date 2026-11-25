@@ -12,6 +12,7 @@
   "Common: AIChat, AIChatButton",
   "Common: AboutCompanyTitle, AboutHeader",
   "Common: AddTag, TagsPlaceholder",
+  "Common: ArbiterRemoveExpert, RemoveSource",
   "Common: ArbiterSomethingWentWrong, SomethingWentWrong",
   "Common: ArbiterStopped, Stopped",
   "Common: ArbiterTitle, DashboardAIArbiterTitle",

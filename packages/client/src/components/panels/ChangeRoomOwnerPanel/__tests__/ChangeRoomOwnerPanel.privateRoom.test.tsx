@@ -157,21 +157,45 @@ describe("Change owner of a private room", () => {
     expect(mocks.selector?.excludeItems).toEqual(["me", "carol"]);
     expect(mocks.getRoomMembers).toHaveBeenCalledWith(
       ROOM_ID,
-      { count: 100 },
+      { count: 100, startIndex: 0 },
       expect.any(AbortSignal),
     );
     const [adminsFilter] = mocks.getUserList.mock.calls[0];
     expect(adminsFilter.pageCount).toBe(100);
   });
 
-  it("offers every candidate when the room members cannot be read", async () => {
+  it("Members cannot be read", async () => {
     mocks.getRoomMembers.mockImplementation(async () => {
       throw new Error("403");
     });
     renderPanelFor(privateRoomDto({ id: ROOM_ID }));
 
+    expect(
+      await screen.findByTestId("change_owner_candidates_failed"),
+    ).toHaveTextContent("Common:OwnerCandidatesLoadFailed");
+    expect(screen.queryByTestId("people_selector")).toBeNull();
+  });
+
+  it.each([
+    ["the change-owner panel", undefined],
+    ["the edit dialog", { onOwnerChange: vi.fn() }],
+  ])("Candidate left the room meanwhile, in %s", async (_, editDialog) => {
+    const { changeRoomOwner } = renderPanelFor(
+      privateRoomDto({ id: ROOM_ID }),
+      editDialog,
+    );
     await waitFor(() => expect(screen.getByTestId("people_selector")));
-    expect(mocks.selector?.excludeItems).toEqual(["me"]);
+    mocks.getRoomMembers.mockImplementation(async () => ({ items: [] }));
+
+    await act(() =>
+      mocks.selector!.onSubmit([{ id: "bob", label: "Bob" }], null, "", true),
+    );
+
+    expect(mocks.toastr.error).toHaveBeenCalledWith(
+      expect.stringContaining("Common:EncryptedChangeOwnerNotMember"),
+    );
+    expect(changeRoomOwner).not.toHaveBeenCalled();
+    expect(editDialog?.onOwnerChange ?? vi.fn()).not.toHaveBeenCalled();
   });
 
   it("refuses a new owner without a key", async () => {

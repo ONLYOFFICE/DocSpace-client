@@ -57,6 +57,8 @@ import { isAccessChangeRefused } from "@docspace/shared/services/private-room/ac
 import { pendingAccessStore } from "@docspace/shared/services/private-room/pending-access";
 import { retryPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
 
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
+
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";
 
@@ -219,7 +221,16 @@ const User = ({
       return setRemoveUserConfirmation!(
         true,
         () => updateRole(option, false),
+        "encryptedRoom",
+      );
+    }
+
+    // Spec: ai-agent-access, "Removing a member warns about their conversations"
+    if (isRemoval && isAgent(room)) {
+      return setRemoveUserConfirmation!(
         true,
+        () => updateRole(option, false),
+        "agentMember",
       );
     }
 

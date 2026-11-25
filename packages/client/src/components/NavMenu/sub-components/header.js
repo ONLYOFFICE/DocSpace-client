@@ -52,11 +52,15 @@ const HeaderComponent = ({
   isGuest,
   aiServicesEnabled,
   isPrivateRoomsSectionAvailable,
+  isRoomsSectionAvailable,
+  isFormsSectionAvailable,
 }) => {
   const defaultUrl = getDefaultStartPageUrl(defaultFolderType, {
     isGuest,
     aiServicesEnabled,
     isPrivateRoomsSectionAvailable,
+    isRoomsSectionAvailable,
+    isFormsSectionAvailable,
   });
   const logo = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
@@ -108,6 +112,8 @@ export default inject(({ settingsStore, userStore, appsStore }) => {
     isGuest: userStore.user?.isVisitor ?? false,
     aiServicesEnabled,
     isPrivateRoomsSectionAvailable: appsStore?.isPrivateRoomsSectionAvailable,
+    isRoomsSectionAvailable: appsStore?.isInstalled("ai-rooms"),
+    isFormsSectionAvailable: appsStore?.isInstalled("ai-forms"),
     // currentProductName: (product && product.title) || "",
   };
 })(observer(HeaderComponent));

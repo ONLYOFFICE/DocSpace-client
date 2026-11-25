@@ -34,9 +34,14 @@
  */
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
-import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
+import {
+  getFilesSettings,
+  getFolder,
+  getFolderPath,
+  getFoldersTree,
+} from "@/api/files";
 import { getSettings } from "@/api/settings";
 import { getSelf } from "@/api/people";
 
@@ -49,6 +54,7 @@ import {
 
 const ssrDeps = {
   getFoldersTree,
+  getFolderPath,
   getFolder,
   getFilesSettings,
   getSettings,
@@ -73,6 +79,7 @@ export default async function Docs({
 
   if (!result) throw new Error("Failed to load required settings");
   if ("redirectTo" in result) redirect(result.redirectTo);
+  if ("notFound" in result || "notAvailable" in result) notFound();
 
   return <DocsPage authToken={authToken} {...result.data} />;
 }

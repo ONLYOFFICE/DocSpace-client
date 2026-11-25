@@ -63,6 +63,7 @@ const env = vi.hoisted(() => {
         | "ready"
         | "unlock-cancelled"
         | "no-access"
+        | "key-replaced"
         | "no-key"
         | "load-failed"
         | "error",
@@ -562,6 +563,11 @@ describe("Editor", () => {
 
     it.each([
       ["No access entry", "no-access", "Common:EncryptedFileNoAccessYet"],
+      [
+        "Wrapped for a key the user no longer holds",
+        "key-replaced",
+        "Common:EncryptedFileKeyReplaced",
+      ],
       ["No key", "no-key", "Common:EncryptionKeysNotConfigured"],
       ["Key flow error", "error", "Common:SomethingWentWrong"],
     ] as const)("%s", async (_name, status, message) => {

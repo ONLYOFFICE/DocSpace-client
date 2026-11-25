@@ -156,6 +156,24 @@
     gap: 8px;
   }
 
+  .pluginFields,
+  .pluginField {
+    display: contents;
+  }
+
+  .pluginFieldLabel {
+    align-self: center;
+    max-width: 160px;
+  }
+
+  .pluginFieldValue {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 20px;
+    white-space: normal;
+  }
+
   .languageComboBoxWrapper {
     display: flex;
     height: 28px;
@@ -241,6 +259,43 @@
   @include mixins.mobileContainer(profile) {
     .rowsContainer {
       display: none;
+
+      &:has(.pluginFields) {
+        display: flex;
+        flex-direction: column;
+        order: 1;
+      }
+
+      > :not(.pluginFields) {
+        display: none;
+      }
+    }
+
+    .pluginFields {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pluginField {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 12px 16px;
+      border-radius: 6px;
+      background: var(--profile-mobile-row-background);
+    }
+
+    .pluginFieldLabel {
+      align-self: stretch;
+      max-width: none;
+      font-size: 12px !important;
+      line-height: 16px !important;
+      color: var(--profile-mobile-label);
+
+      &:empty {
+        display: none;
+      }
     }
 
     .mobileProfileBlock {

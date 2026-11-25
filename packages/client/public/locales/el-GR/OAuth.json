@@ -50,7 +50,6 @@
   "IconDescription": "JPG, PNG ή SVG, 32x32",
   "ID": "Αναγνωριστικό",
   "InvalidToken": "Μη έγκυρο διακριτικό",
-  "LastModified": "Τελευταία τροποποίηση",
   "NewApp": "Νέα εφαρμογή",
   "NoAuthorizedApps": "Δεν υπάρχουν εξουσιοδοτημένες εφαρμογές",
   "NoOAuthAppHeader": "Δεν υπάρχουν εφαρμογές OAuth",

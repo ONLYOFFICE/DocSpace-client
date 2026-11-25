@@ -43,6 +43,7 @@ import {
   InvalidRecoveryPhraseError,
   KeyCheckUnavailableError,
   KeyNotFoundError,
+  KeyReplacedError,
   NoAccessError,
   UnsupportedSuiteError,
   UnsupportedVersionError,
@@ -85,6 +86,9 @@ export function getSpecificEncryptionErrorMessage(
   // Spec: private-rooms/file-operations, "A file without a wrap for the user is reported as no access"
   if (error instanceof NoAccessError) {
     return t("Common:EncryptedFileNoAccessYet");
+  }
+  if (error instanceof KeyReplacedError) {
+    return t("Common:EncryptedFileKeyReplaced");
   }
   if (error instanceof KeyNotFoundError) {
     return t("Common:NoEncryptionKey");

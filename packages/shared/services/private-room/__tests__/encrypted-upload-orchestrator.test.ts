@@ -37,6 +37,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 import {
+  EncryptedNameCheckError,
   EncryptedUploadNotKeptError,
   EncryptedWrapError,
   getEncryptedUploadErrorMessage,
@@ -107,6 +108,10 @@ vi.mock("../../encryption/file-keys", () => ({
   ),
   wipeDek: vi.fn(),
   generateDEK: vi.fn(async () => new Uint8Array(AES_KEY_SIZE_BYTES)),
+  decryptFileFromBlob: vi.fn(async () => ({
+    data: new Blob(["clear bytes"]),
+    fileName: null,
+  })),
 }));
 
 vi.mock("../../encryption/room-file-access", () => ({
@@ -480,43 +485,69 @@ describe("orchestrateEncryptedUpload - batch rules", () => {
     expect(results).toMatchObject([{ ok: true, uploadId: "row-2" }]);
   });
 
-  it("Ciphertext re-uploaded: the file goes as it is, under its recovered key and name", async () => {
-    const { startUploadSession, uploadChunkSequential } = await import(
-      "../../../api/files"
-    );
-    const { encryptFile } = await import("../../encryption/file-keys");
-    const { wrapDekForRecipients } = await import(
-      "../../encryption/room-file-access"
-    );
-    const dek = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
+  const reimport = async () => {
+    const recovered = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
     vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
     vi.mocked(recoverDekForReimport).mockResolvedValueOnce({
-      dek,
+      dek: recovered,
       realName: "Report.docx",
       sourceFileId: 77,
     });
-    const downloaded = makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48);
-
     const { results } = await orchestrateEncryptedUpload({
-      files: [downloaded],
+      files: [makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48)],
       folderId: 1,
       roomId: 10,
       identity: makeIdentity() as never,
       ...KEYS,
     });
+    return { results, recovered };
+  };
+
+  it("Ciphertext re-uploaded", async () => {
+    const { encryptFile, decryptFileFromBlob, wipeDek } = await import(
+      "../../encryption/file-keys"
+    );
+
+    const { results, recovered } = await reimport();
 
     expect(results).toMatchObject([{ ok: true, originalName: "Report.docx" }]);
-    expect(encryptFile).not.toHaveBeenCalled();
-    const [, uploadName, size, , encrypted] =
-      vi.mocked(startUploadSession).mock.calls[0];
-    expect(uploadName).not.toBe(downloaded.name);
-    expect(uploadName).toMatch(/\.docx$/);
-    expect([size, encrypted]).toEqual([48, true]);
-    const form = vi.mocked(uploadChunkSequential).mock.calls[0][2] as FormData;
-    expect((form.get("file") as Blob).size).toBe(48);
-    expect(vi.mocked(wrapDekForRecipients).mock.calls[0][0]).toMatchObject({
-      dek,
-    });
+    expect(decryptFileFromBlob).toHaveBeenCalledWith(
+      expect.any(File),
+      recovered,
+    );
+    const [clear, options] = vi.mocked(encryptFile).mock.calls[0];
+    expect((clear as Blob).size).toBe("clear bytes".length);
+    expect(options?.fileName).toBe("Report.docx");
+    expect(wipeDek).toHaveBeenCalledWith(recovered);
+  });
+
+  it("Re-import gets a key of its own", async () => {
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+
+    const { recovered } = await reimport();
+
+    const { dek } = vi.mocked(wrapDekForRecipients).mock.calls[0][0];
+    expect(dek).not.toEqual(recovered);
+  });
+
+  it("Damaged container", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    const { decryptFileFromBlob, wipeDek } = await import(
+      "../../encryption/file-keys"
+    );
+    vi.mocked(decryptFileFromBlob).mockRejectedValueOnce(
+      new Error("chunk 2 failed its authentication"),
+    );
+
+    const { results, recovered } = await reimport();
+
+    expect(startUploadSession).not.toHaveBeenCalled();
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptionReimportFailed",
+    );
+    expect(wipeDek).toHaveBeenCalledWith(recovered);
   });
 
   it("Ciphertext re-uploaded without a recoverable key: nothing is sent and the row names the re-import failure", async () => {
@@ -568,7 +599,12 @@ describe("orchestrateEncryptedUpload - batch rules", () => {
     });
 
     expect(onNameClash).toHaveBeenCalledWith([
-      { uploadId: "row-1", file: expect.any(File), renamed: "Report (2).docx" },
+      {
+        uploadId: "row-1",
+        file: expect.any(File),
+        name: "Report.docx",
+        renamed: "Report (2).docx",
+      },
     ]);
     expect(sessionsAtPrompt).toBe(0);
     expect(
@@ -578,6 +614,113 @@ describe("orchestrateEncryptedUpload - batch rules", () => {
       "Report (2).docx",
       "notes.txt",
     ]);
+  });
+
+  it("Folder listing fails in the SDK", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    // Folder 1 is listed first and fails; folder 2 holds no clash.
+    vi.mocked(listDecryptedFileNames)
+      .mockRejectedValueOnce(new Error("403"))
+      .mockResolvedValueOnce([]);
+    const onFileError = vi.fn();
+
+    const { results, refused } = await retryEncryptedUploads({
+      items: [
+        { file: makeFile("Report.docx", 16), uploadId: "row-1", folderId: 1, roomId: 10 },
+        { file: makeFile("notes.txt", 16), uploadId: "row-2", folderId: 2, roomId: 10 },
+      ],
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash: async () => true,
+      onFileError,
+    });
+
+    expect(refused).toBeUndefined();
+    expect(results[0].ok).toBe(false);
+    expect(results[0].error).toBeInstanceOf(EncryptedNameCheckError);
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptedNameCheckFailed",
+    );
+    expect(onFileError).toHaveBeenCalledWith(
+      expect.any(File),
+      results[0].error,
+      "row-1",
+    );
+    expect(vi.mocked(startUploadSession).mock.calls.map(([folderId]) => folderId)).toEqual([2]);
+    expect(results[1].ok).toBe(true);
+  });
+
+  it("Re-imported container in the folder of its source", async () => {
+    const { encryptFile, wipeDek } = await import("../../encryption/file-keys");
+    const CONTAINER = "5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx";
+    const forComparison = new Uint8Array(AES_KEY_SIZE_BYTES).fill(3);
+    const forUpload = new Uint8Array(AES_KEY_SIZE_BYTES).fill(7);
+    vi.mocked(listDecryptedFileNames).mockResolvedValueOnce(["Report.docx"]);
+    vi.mocked(sniffDse3Upload)
+      .mockResolvedValueOnce({} as never)
+      .mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport)
+      .mockResolvedValueOnce({ dek: forComparison, realName: "Report.docx", sourceFileId: 77 })
+      .mockResolvedValueOnce({ dek: forUpload, realName: "Report.docx", sourceFileId: 77 });
+    const onNameClash = vi.fn(async () => true);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [makeFile(CONTAINER, 48)],
+      uploadIds: ["row-1"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash,
+    });
+
+    expect(onNameClash).toHaveBeenCalledWith([
+      expect.objectContaining({ name: "Report.docx", renamed: "Report (1).docx" }),
+    ]);
+    expect(wipeDek).toHaveBeenCalledWith(forComparison);
+    // The recovery of the upload still reads the source uuid from the file name.
+    expect(vi.mocked(recoverDekForReimport).mock.calls[1][0].file.name).toBe(
+      CONTAINER,
+    );
+    expect(vi.mocked(encryptFile).mock.calls[0][1]?.fileName).toBe(
+      "Report (1).docx",
+    );
+    expect(results).toMatchObject([{ ok: true, originalName: "Report (1).docx" }]);
+  });
+
+  it("Name of a re-imported container cannot be recovered", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+    vi.mocked(sniffDse3Upload).mockResolvedValueOnce({} as never);
+    vi.mocked(recoverDekForReimport).mockRejectedValueOnce(new Error("403"));
+    const onFileError = vi.fn();
+    const onNameClash = vi.fn(async () => true);
+
+    const { results } = await orchestrateEncryptedUpload({
+      files: [
+        makeFile("5f0c9a52-2f7b-4f43-9a8e-0d1c2b3a4f51.docx", 48),
+        makeFile("notes.txt", 16),
+      ],
+      uploadIds: ["row-1", "row-2"],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      ...KEYS,
+      onNameClash,
+      onFileError,
+    });
+
+    expect(onNameClash).not.toHaveBeenCalled();
+    expect(startUploadSession).toHaveBeenCalledTimes(1);
+    expect(results[0].ok).toBe(false);
+    expect(getEncryptedUploadErrorMessage(t, results[0].error)).toBe(
+      "Common:EncryptionReimportFailed",
+    );
+    expect(onFileError).toHaveBeenCalledWith(
+      expect.any(File),
+      results[0].error,
+      "row-1",
+    );
+    expect(results[1].ok).toBe(true);
   });
 
   it("Upload with a clashing name, cancelled: nothing is sent", async () => {

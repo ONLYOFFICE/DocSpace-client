@@ -54,6 +54,7 @@ const badgeTitle = (encryptionKeys: unknown) => {
     <Provider
       treeFoldersStore={{ isPrivacyFolder: false }}
       userStore={{ encryptionKeys }}
+      selectedFolderStore={{}}
     >
       <ItemIcon title="Secret.docx" className="icon" fileExst=".docx" encrypted />
     </Provider>,

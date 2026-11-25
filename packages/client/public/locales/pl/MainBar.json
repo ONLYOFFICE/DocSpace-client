@@ -3,7 +3,6 @@
   "ClickToUpgradeTariff": "<1>Kliknij tutaj</1>, aby uaktualnić swój plan cenowy.",
   "ConfirmEmailDescription": "Użyj linku otrzymanego w e-mailu aktywacyjnym. E-mail z linkiem aktywacyjnym nie dotarł?",
   "ConfirmEmailHeader": "Aktywuj swój adres e-mail ({{ email }}), aby uzyskać dostęp do funkcji przestrzeni roboczej.",
-  "ContactToUpgradeTariff": "Skontaktuj się z superadministratorem, aby ulepszyć plan taryfowy.",
   "PersonalQuotaHeader": "Twój osobisty limit pamięci przekroczył",
   "PersonalQuotaHeaderForAdmins": "Limit pamięci na użytkownika przekroczył",
   "PersonalUserQuotaAdminsDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub zmień limit pamięci na użytkownika w <1>ustawieniach zarządzania pamięcią.</1>",

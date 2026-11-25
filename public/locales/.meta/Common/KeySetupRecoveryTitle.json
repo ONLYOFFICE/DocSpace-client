@@ -3,7 +3,7 @@
   "content": "Your recovery phrase",
   "content_en_sha1_hash": "4d33238dd8ae2ece25d73af9aec8dfec815a17f4",
   "created_at": "2026-11-17T10:34:33.048Z",
-  "updated_at": "2026-11-17T10:35:18.940Z",
+  "updated_at": "2026-11-19T16:14:54.180Z",
   "comment": {
     "text": "Heading of the third of three terms on the explanation step of key setup: the 24-word recovery phrase shown at the last step; a short noun phrase addressed to the user.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
-      "line_number": 212,
-      "context": "[\n t(\"Common:KeySetupPassphraseTitle\"),\n t(\"Common:KeySetupPassphraseDescription\"),\n ],\n [\n t(\"Common:KeySetupRecoveryTitle\"),\n t(\"Common:KeySetupRecoveryDescription\"),\n ],\n ].map(([term, description]) => (\n <div key={term} className={styles.term}>\n <dt>",
+      "line_number": 221,
+      "context": "t(\"Common:KeySetupPassphraseTitle\"),\n t(\"Common:KeySetupPassphraseDescription\"),\n ],\n [\n RestoreIcon,\n t(\"Common:KeySetupRecoveryTitle\"),\n t(\"Common:KeySetupRecoveryDescription\"),\n ],\n ] as const\n ).map(([Icon, term, description]) => (\n // Spec: private-rooms/key-management, \"Key setup terms carry icons\"",
       "module": "/packages/shared"
     }
   ],

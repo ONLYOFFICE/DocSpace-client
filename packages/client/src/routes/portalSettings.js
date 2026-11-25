@@ -47,6 +47,13 @@ import { ViewComponent } from "../pages/PortalSettings/View";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
 
+// Keeps the navigation state across the redirect (the profile menu asks for
+// the section list on a phone with it).
+const IndexRedirect = () => {
+  const location = useLocation();
+  return <Navigate to="customization/general" replace state={location.state} />;
+};
+
 const DevToolsRedirect = () => {
   const location = useLocation();
   const newPath = location.pathname.replace(
@@ -106,7 +113,7 @@ const PortalSettingsRoutes = {
   children: [
     {
       index: true,
-      element: <Navigate to="customization/general" replace />,
+      element: <IndexRedirect />,
     },
     {
       path: "customization",

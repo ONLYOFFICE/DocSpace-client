@@ -51,7 +51,6 @@ vi.mock("../../_utils/abort-registry", () => ({
 
 vi.mock("@docspace/shared/services/encryption/auto-lock-preference", () => ({
   getAutoLockTimeoutSeconds: () => env.timeoutSeconds,
-  locksWhenTabHidden: () => false,
   setAutoLockScope: () => {},
   subscribeAutoLockChange: () => () => {},
 }));
@@ -183,5 +182,65 @@ describe("Shell side effects", () => {
 
     expect(isUnlocked).toBe(false);
     expect(heard).not.toHaveBeenCalled();
+  });
+});
+
+describe("Shell side effects: abort on lock", () => {
+  let root: Root | null = null;
+
+  const render = (privateKeyEnc: string) =>
+    act(() =>
+      root?.render(
+        <EncryptionProvider
+          userKeys={{ userId: USER_ID, publicKey: "pub", privateKeyEnc }}
+        >
+          <AbortOnLockEffect />
+          <Probe />
+        </EncryptionProvider>,
+      ),
+    );
+
+  const lockFromAnotherTab = () =>
+    act(() =>
+      new FakeBroadcastChannel(getLockBroadcastChannelName(USER_ID)).postMessage(
+        { type: "lock", sessionId: "another-tab" },
+      ),
+    );
+
+  beforeEach(() => {
+    FakeBroadcastChannel.open.clear();
+    vi.stubGlobal("BroadcastChannel", FakeBroadcastChannel);
+    env.abortAll.mockClear();
+    root = createRoot(document.createElement("div"));
+  });
+
+  afterEach(() => {
+    act(() => root?.unmount());
+    root = null;
+    SecretStorage.lock();
+    vi.unstubAllGlobals();
+  });
+
+  it("does not abort on a first render while locked", () => {
+    render("enc");
+
+    expect(isUnlocked).toBe(false);
+    expect(env.abortAll).not.toHaveBeenCalled();
+  });
+
+  it("aborts again on a second lock after an unlock", () => {
+    SecretStorage.cacheUnlocked(USER_ID, IDENTITY);
+    render("enc");
+    lockFromAnotherTab();
+    expect(env.abortAll).toHaveBeenCalledTimes(1);
+
+    // A new envelope makes the provider read the cached key again.
+    SecretStorage.cacheUnlocked(USER_ID, IDENTITY);
+    render("enc-2");
+    expect(isUnlocked).toBe(true);
+    lockFromAnotherTab();
+
+    expect(isUnlocked).toBe(false);
+    expect(env.abortAll).toHaveBeenCalledTimes(2);
   });
 });

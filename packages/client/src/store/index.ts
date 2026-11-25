@@ -101,7 +101,10 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import OAuthStore from "./OAuthStore";
 import DocsConnectStore from "./DocsConnectStore";
 import AiPresetsStore from "./AiPresetsStore";
+import SkillsStore from "./SkillsStore";
+import KnowledgeBasesStore from "./KnowledgeBasesStore";
 import AiProjectsStore from "./AiProjectsStore";
+import AiTemplatesStore from "./AiTemplatesStore";
 import AppsStore from "./AppsStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
@@ -112,8 +115,11 @@ import DefaultTemplatesStore from "./portal-settings/DefaultTemplatesStore";
 import TelegramStore from "./TelegramStore";
 
 const aiPresetsStore = new AiPresetsStore();
+const skillsStore = new SkillsStore();
+const knowledgeBasesStore = new KnowledgeBasesStore();
 
 const aiProjectsStore = new AiProjectsStore(aiPresetsStore, userStore);
+const aiTemplatesStore = new AiTemplatesStore();
 
 const appsStore = new AppsStore(settingsStore);
 
@@ -239,6 +245,8 @@ const dialogsStore = new DialogsStore(
 );
 
 filesStore.dialogsStore = dialogsStore;
+filesStore.aiProjectsStore = aiProjectsStore;
+aiProjectsStore.treeFoldersStore = treeFoldersStore;
 filesStore.watchPrivateRoomsSection(appsStore);
 
 const profileActionsStore = new ProfileActionsStore(
@@ -307,6 +315,7 @@ const filesActionsStore = new FilesActionsStore(
 );
 
 versionHistoryStore.filesActionsStore = filesActionsStore;
+filesActionsStore.aiPresetsStore = aiPresetsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
@@ -358,6 +367,7 @@ const tableStore = new TableStore(
 // typed in InfoPanelStore.ts). Candidate for constructor injection once the
 // construction order is revisited.
 infoPanelStore.selectedFolderStore = selectedFolderStore;
+tableStore.filesStore = filesStore;
 infoPanelStore.filesStore = filesStore;
 infoPanelStore.filesSettingsStore = filesSettingsStore;
 infoPanelStore.peopleStore = peopleStore;
@@ -488,7 +498,10 @@ const store = {
   dashboardTourStore,
 
   aiPresetsStore,
+  skillsStore,
+  knowledgeBasesStore,
   aiProjectsStore,
+  aiTemplatesStore,
   appsStore,
   aiSettingsStore,
   telegramStore,

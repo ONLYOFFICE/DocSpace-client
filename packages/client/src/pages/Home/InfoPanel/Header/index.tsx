@@ -60,6 +60,8 @@ const InfoPanelHeaderContent = ({
     enablePlugins,
     isRecentFolder,
     isPrivacyFolder,
+    aiChatProjectId,
+    isAiTemplate,
   } = restProps as Exclude<InfoPanelHeaderContentProps, { isGallery: true }>;
 
   return (
@@ -74,6 +76,8 @@ const InfoPanelHeaderContent = ({
       enablePlugins={enablePlugins}
       isRecentFolder={isRecentFolder}
       isPrivacyFolder={isPrivacyFolder}
+      aiChatProjectId={aiChatProjectId}
+      isAiTemplate={isAiTemplate}
     />
   );
 };
@@ -84,12 +88,13 @@ export default inject(
     infoPanelStore,
     pluginStore,
     treeFoldersStore,
+    aiProjectsStore,
+    aiTemplatesStore,
   }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
     const {
       roomsView,
-      fileView,
       setView,
 
       setIsVisible,
@@ -105,7 +110,8 @@ export default inject(
     return {
       selection,
       roomsView,
-      fileView,
+      // A skill opens on its own tab (Details until another is picked).
+      fileView: infoPanelStore.currentFileView,
       setView,
 
       setIsVisible,
@@ -117,6 +123,8 @@ export default inject(
 
       isRecentFolder,
       isPrivacyFolder,
+      aiChatProjectId: aiProjectsStore.activeProject?.id ?? null,
+      isAiTemplate: !!aiTemplatesStore.selected,
     };
   },
 )(observer(InfoPanelHeaderContent));

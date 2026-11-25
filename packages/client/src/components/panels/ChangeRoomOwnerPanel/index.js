@@ -45,11 +45,12 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { getNewOwnerKeyRefusal } from "@docspace/shared/services/private-room/room-member-flows";
 import { usePrivateRoomOwnerExclusions } from "@docspace/shared/hooks/usePrivateRoomOwnerExclusions";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import { isAgent } from "SRC_DIR/helpers/aiWorkspace";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -66,6 +67,8 @@ const ChangeRoomOwner = (props) => {
     isAIProject,
     changeAiProjectOwner,
     isFormSpace,
+    isKnowledgeBase,
+    isSkillSet,
     updateInfoPanelMembers,
     roomId,
     isPrivateRoom,
@@ -110,8 +113,8 @@ const ChangeRoomOwner = (props) => {
     }
 
     if (isAIProject) {
-      // The checkbox reads "leave the project": unchecked keeps the former
-      // owner in it as a project manager.
+      // The checkbox reads "Leave agent": unchecked keeps the former owner
+      // in it as an Agent manager.
       await changeAiProjectOwner(candidate.id, !isChecked);
       updateInfoPanelMembers();
     } else {
@@ -132,7 +135,8 @@ const ChangeRoomOwner = (props) => {
     return newFilter;
   }, []);
 
-  const { excludeItems, excludeReady } = usePrivateRoomOwnerExclusions({
+  const { excludeItems, excludeReady, excludeFailed } =
+    usePrivateRoomOwnerExclusions({
     isPrivateRoom,
     roomId,
     userId,
@@ -140,21 +144,43 @@ const ChangeRoomOwner = (props) => {
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
+  // A knowledge base and a skill set are named as such, not as a room.
   const headerLabel = isAIProject
     ? t("Common:AIProjectChangeOwner")
-    : t("Common:ChangeTheRoomOwner");
+    : isKnowledgeBase
+      ? t("Common:ChangeKnowledgeBaseOwner")
+      : isSkillSet
+        ? t("Common:ChangeSkillSetOwner")
+        : t("Common:ChangeTheRoomOwner");
 
+  // Spec: ai-agent-access, "Who may own an agent"
   const infoText = isAIProject
-    ? t("Common:AIProjectChangeOwnerInfo", { productName: getBrandName("ProductName") })
-    : t("Common:PeopleSelectorInfo");
+    ? ownerIsCurrentUser && !showBackButton
+      ? t("Common:AIProjectChangeOwnerLeaveInfo")
+      : t("Common:AIProjectChangeOwnerInfo")
+    : isKnowledgeBase
+      ? t("Common:KnowledgeBaseOwnerSelectorInfo")
+      : isSkillSet
+        ? t("Common:SkillSetOwnerSelectorInfo")
+        : t("Common:PeopleSelectorInfo");
 
   const footerCheckboxLabel = isAIProject
-    ? t("Common:AIProjectLeave")
-    : isFormSpace
-      ? t("Common:LeaveTheFormSpace")
-      : t("Common:LeaveTheRoom");
+    ? t("Common:LeaveTheAgent")
+    : isKnowledgeBase
+      ? t("Common:LeaveTheKnowledgeBase")
+      : isSkillSet
+        ? t("Common:LeaveTheSkillSet")
+        : isFormSpace
+          ? t("Common:LeaveTheFormSpace")
+          : t("Common:LeaveTheRoom");
 
-  const selectorComponent = excludeReady ? (
+  const selectorComponent = excludeFailed ? (
+    <div className={styles.changeOwnerLoader}>
+      <Text role="alert" dataTestId="change_owner_candidates_failed">
+        {t("Common:OwnerCandidatesLoadFailed")}
+      </Text>
+    </div>
+  ) : excludeReady ? (
     <PeopleSelector
       withCancelButton
       onCancel={handleClosePanel}
@@ -183,7 +209,9 @@ const ChangeRoomOwner = (props) => {
       withInfo
       infoText={infoText}
       emptyScreenHeader={t("Common:NotFoundMembers")}
-      emptyScreenDescription={infoText}
+      emptyScreenDescription={
+        isAIProject ? t("Common:AIProjectChangeOwnerInfo") : infoText
+      }
       className={styles.changeOwnerPeopleSelector}
       data-test-id="change_owner_people_selector"
     />
@@ -246,10 +274,12 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
-      isAIProject: room?.isAIProject,
+      isAIProject: isAgent(room),
       changeAiProjectOwner: (newOwnerId, keepAsManager) =>
         aiProjectsStore.changeOwner(room, newOwnerId, keepAsManager),
       isFormSpace: room?.roomType === RoomsType.FormRoom,
+      isKnowledgeBase: room?.roomType === RoomsType.KnowledgeRoom,
+      isSkillSet: room?.roomType === RoomsType.InstructionsRoom,
       updateInfoPanelMembers,
       roomId: room?.id,
       isPrivateRoom: !!(room?.isPrivateRoom ?? room?.private),

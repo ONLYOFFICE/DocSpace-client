@@ -36,6 +36,7 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -115,7 +116,12 @@ const AiAgentsAiChatProviders = ({
   const params = useParams();
   const rawAgentId = params?.agentId;
   const agentId = Array.isArray(rawAgentId) ? rawAgentId[0] : rawAgentId;
-  const entityId = agentId || undefined;
+  // The chat takes the room as its scope once the room is known to be an
+  // AI agent room.
+  const entityId =
+    agentId && aiRoomStore.agentRoomId === Number(agentId)
+      ? agentId
+      : undefined;
   const isAgentRoom = Boolean(entityId);
   const isStandalone = Boolean(portalSettings?.standalone);
 
@@ -199,6 +205,7 @@ const AiAgentsAiChatProviders = ({
       // Guests are intentionally NOT excluded here — the agents surface is
       // left untouched for now.
       canUseAi={!!user}
+      userId={user?.id}
       callbacks={callbacks}
       entityId={entityId}
       formatChatError={formatChatError}
@@ -217,4 +224,4 @@ const AiAgentsAiChatProviders = ({
   );
 };
 
-export default AiAgentsAiChatProviders;
+export default observer(AiAgentsAiChatProviders);

@@ -45,10 +45,9 @@ export const getDefaultAccessUser = (
     case RoomsType.PublicRoom:
       return ShareAccessRights.Collaborator;
 
-    // A project's invitation link joins as Project manager, the only role
-    // the server takes for it.
+    // An agent is shared as Member (Content creator) only.
     case RoomsType.AiProjectRoom:
-      return ShareAccessRights.RoomManager;
+      return ShareAccessRights.Collaborator;
 
     default:
       return ShareAccessRights.ReadOnly;

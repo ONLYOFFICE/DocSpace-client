@@ -158,9 +158,13 @@ describe("getFilesContextOptions — folder context", () => {
 describe("getFilesContextOptions — encrypted file", () => {
   it("strips sharing/link/version options and adds download-encrypted", () => {
     const store = createTestFilesStore();
-    const opts = store.getFilesContextOptions(encryptedFile());
+    const file = encryptedFile();
+    const opts = store.getFilesContextOptions(file);
 
     expect(opts).toContain("download-encrypted");
+    // Spec: private-rooms/file-operations, "Rename withheld for encrypted files"
+    expect(file.security?.Rename).toBe(true);
+    expect(opts).not.toContain("rename");
     for (const stripped of [
       "sharing-settings",
       "copy-shared-link",
@@ -262,6 +266,48 @@ describe("getFilesContextOptions — file in an AI room", () => {
       expect(inAiRoom).not.toContain(option);
     }
     expect(inAiRoom).toContain("link-for-room-members");
+  });
+});
+
+describe("getFilesContextOptions — a skill", () => {
+  const skill = (security: Record<string, boolean>) =>
+    ({
+      ...fullPermFile(),
+      title: "review.md",
+      fileExst: ".md",
+      parentRoomType: FolderType.InstructionsRoom,
+      rootFolderType: FolderType.AiHub,
+      security,
+    }) as unknown as TItem;
+
+  it("offers only select, edit, view, copy link, move, copy, download and delete", () => {
+    const store = createTestFilesStore();
+    const options = store
+      .getFilesContextOptions(skill(fullPermFile().security as Record<string, boolean>))
+      .filter((key) => !key.startsWith("separator"));
+    const allowed = [
+      "select",
+      "edit",
+      "edit-skill",
+      "preview",
+      "view",
+      "link-for-room-members",
+      "move",
+      "move-to",
+      "copy-to",
+      "download",
+      "delete",
+    ];
+    expect(options.filter((key) => !allowed.includes(key))).toEqual([]);
+    for (const key of ["select", "edit-skill", "link-for-room-members", "move-to", "copy-to", "download", "delete"])
+      expect(options).toContain(key);
+  });
+
+  it("still leaves out what the skill's rights do not allow", () => {
+    const store = createTestFilesStore();
+    const options = store.getFilesContextOptions(skill({}));
+    // Moving is asked of the access rights store, faked as allowing it here.
+    for (const key of ["edit-skill", "delete", "download"]) expect(options).not.toContain(key);
   });
 });
 
@@ -454,6 +500,113 @@ describe("getFilesContextOptions — download in a private room", () => {
 
     expect(opts).toContain("download");
     expect(opts).toContain("download-encrypted");
+  });
+});
+
+describe("getFilesContextOptions — an agent's owner", () => {
+  const agent = (ownerId: string) =>
+    ({
+      id: 8,
+      title: "Legal Reviewer",
+      roomType: RoomsType.AiProjectRoom,
+      rootFolderType: FolderType.AiHub,
+      inRoom: true,
+      createdBy: { id: ownerId },
+      security: { Read: true, EditRoom: true, EditAccess: true, Delete: true },
+      viewAccessibility: {},
+    }) as unknown as TItem;
+
+  it("is offered no Leave agent, while a member is", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    expect(store.getFilesContextOptions(agent("user-1"))).not.toContain(
+      "leave-room",
+    );
+    expect(store.getFilesContextOptions(agent("user-2"))).toContain(
+      "leave-room",
+    );
+  });
+
+  it("is offered no Edit agent, while the owner of an ordinary room keeps Edit room", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      ...agent("user-1"),
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+    } as unknown as TItem;
+
+    const opts = store.getFilesContextOptions(agent("user-1"));
+    expect(opts).not.toContain("edit-room");
+    expect(opts).toContain("invite-users-to-room");
+    expect(store.getFilesContextOptions(room)).toContain("edit-room");
+  });
+
+  it("keeps Leave the room for the owner of an ordinary room", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      ...agent("user-1"),
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+    } as unknown as TItem;
+
+    expect(store.getFilesContextOptions(room)).toContain("leave-room");
+  });
+
+  it("offers a Member no Edit agent, Share agent, change owner or Delete agent", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const member = {
+      ...agent("user-2"),
+      security: { Read: true, Pin: true, Mute: true },
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(member);
+
+    expect(opts).toEqual(
+      expect.arrayContaining(["room-info", "link-for-room-members", "leave-room"]),
+    );
+    for (const key of [
+      "edit-room",
+      "invite-users-to-room",
+      "change-room-owner",
+      "delete",
+    ]) {
+      expect(opts).not.toContain(key);
+    }
+  });
+
+  it("offers a DocSpace admin outside the agent change owner and Delete agent, without edit, share, notifications or leave", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const outside = {
+      ...agent("user-2"),
+      inRoom: false,
+      security: {
+        Read: true,
+        EditRoom: true,
+        EditAccess: true,
+        ChangeOwner: true,
+        Delete: true,
+        Pin: true,
+        Mute: true,
+      },
+    } as unknown as TItem;
+    const opts = store.getFilesContextOptions(outside);
+
+    expect(opts).toEqual(
+      expect.arrayContaining(["room-info", "change-room-owner", "delete"]),
+    );
+    for (const key of [
+      "edit-room",
+      "invite-users-to-room",
+      "mute-room",
+      "unmute-room",
+      "leave-room",
+    ]) {
+      expect(opts).not.toContain(key);
+    }
   });
 });
 

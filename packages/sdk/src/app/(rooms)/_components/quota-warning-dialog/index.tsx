@@ -69,7 +69,7 @@ const QuotaWarningDialog = observer(
     standalone,
     language,
   }: QuotaWarningDialogProps) => {
-    const { t, ready } = useTranslation(["Payments", "Common"]);
+    const { t, ready } = useTranslation(["Common"]);
     const dialogsStore = useDialogsStore();
     const quotaStore = useRoomsQuotaStore();
 
@@ -128,15 +128,15 @@ const QuotaWarningDialog = observer(
       <>
         <Text fontWeight={700}>
           {standalone
-            ? t("LicenseExpiredRestriction")
-            : t("PlanPaymentOverdue", { planName: "" })}
+            ? t("Common:LicenseExpiredRestriction")
+            : t("Common:PlanPaymentOverdue", { planName: "" })}
         </Text>
         <br />
         <Text as="div">
           {standalone ? (
             <Trans
               i18nKey="GracePeriodActive"
-              ns="Payments"
+              ns="Common"
               t={t}
               values={{ fromDate, byDate, delayDaysCount }}
               components={{ 1: <Text key="grace-period-text" as="span" /> }}
@@ -154,7 +154,7 @@ const QuotaWarningDialog = observer(
         <br />
         <Text>
           {standalone
-            ? t("LicenseGracePeriodInfo")
+            ? t("Common:LicenseGracePeriodInfo")
             : t("Common:GracePeriodActivatedDescription")}
         </Text>
       </>
@@ -163,25 +163,25 @@ const QuotaWarningDialog = observer(
     const chooseNewPlan = (
       <Text>
         {isPaymentPageAvailable
-          ? t("ChooseNewPlan")
-          : t("MainBar:ContactToUpgradeTariff")}
+          ? t("Common:ChooseNewPlan")
+          : t("Common:ContactToUpgradeTariff")}
       </Text>
     );
 
     const roomsLimitContent = isRoomsTariffLimit ? (
       <>
-        <Text fontWeight={600}>{t("CannotCreateNewRoom")}</Text>
+        <Text fontWeight={600}>{t("Common:CannotCreateNewRoom")}</Text>
         <br />
-        <Text>{t("NewRoomWillExceedLimit")}</Text>
+        <Text>{t("Common:NewRoomWillExceedLimit")}</Text>
         <br />
         {chooseNewPlan}
       </>
     ) : (
       <>
-        <Text fontWeight={600}>{t("RoomsQuotaAlmostExhausted")}</Text>
+        <Text fontWeight={600}>{t("Common:RoomsQuotaAlmostExhausted")}</Text>
         <br />
         <Text>
-          {t("NumberOfRoomsAccordingToTariff", {
+          {t("Common:NumberOfRoomsAccordingToTariff", {
             currentValue: usedRoomsCount,
             maxValue: maxCountRoomsByQuota,
           })}

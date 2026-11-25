@@ -50,6 +50,8 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
+import type { TFile } from "@docspace/shared/api/files/types";
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
@@ -100,6 +102,7 @@ import { isFolder } from "@docspace/shared/utils/typeGuards";
 import {
   createMenuGroup,
   filterModel,
+  layoutAgentOptions,
   layoutRoomOptions,
   onClickLinkForPortal,
   onEditRoomTemplate,
@@ -300,6 +303,11 @@ export const getFilesContextOptionsImpl = (
 
   const isArchive = item.rootFolderType === FolderType.Archive;
   const isFormSpace = item.roomType === RoomsType.FormRoom;
+  // A room of type 12 is an agent: its menu speaks of an agent.
+  const isAgent = item.roomType === RoomsType.AiProjectRoom;
+  // A knowledge base and a skill set are rooms too, and are named so.
+  const isKnowledgeBase = item.roomType === RoomsType.KnowledgeRoom;
+  const isSkillSet = item.roomType === RoomsType.InstructionsRoom;
 
   const hasShareLinkRights = isPublicRoom
     ? item.security?.Read
@@ -463,7 +471,15 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_edit-room",
       key: "edit-room",
-      label: isFormSpace ? t("Common:EditFormSpace") : t("Common:EditRoom"),
+      label: isAgent
+        ? t("Common:EditAgent")
+        : isKnowledgeBase
+          ? t("Common:EditKnowledgeBase")
+          : isSkillSet
+            ? t("Common:EditSkillSet")
+            : isFormSpace
+              ? t("Common:EditFormSpace")
+              : t("Common:EditRoom"),
       icon: SettingsReactSvgUrl,
       onClick: () => self.onClickEditRoom(item),
       disabled: false,
@@ -471,7 +487,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_invite-users-to-room",
       key: "invite-users-to-room",
-      label: t("Common:InviteContacts"),
+      label: isAgent ? t("Common:ShareAgent") : t("Common:InviteContacts"),
       icon: PersonReactSvgUrl,
       onClick: () => self.onClickInviteUsers(item.id, item.roomType),
       disabled: false,
@@ -696,7 +712,13 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_room-info",
       key: "room-info",
-      label: t("Common:RoomInfo"),
+      label: isAgent
+        ? t("Common:AgentInfo")
+        : isKnowledgeBase
+          ? t("Common:KnowledgeBaseInfo")
+          : isSkillSet
+            ? t("Common:SkillSetInfo")
+            : t("Common:RoomInfo"),
       icon: InfoOutlineReactSvgUrl,
       onClick: () => self.onShowInfoPanel(item),
       disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
@@ -797,9 +819,15 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_change-room-owner",
       key: "change-room-owner",
-      label: isFormSpace
-        ? t("Common:ChangeFormSpaceOwner")
-        : t("Common:ChangeRoomOwner"),
+      label: isAgent
+        ? t("Common:AIProjectChangeOwner")
+        : isKnowledgeBase
+          ? t("Common:ChangeKnowledgeBaseOwner")
+          : isSkillSet
+            ? t("Common:ChangeSkillSetOwner")
+            : isFormSpace
+              ? t("Common:ChangeFormSpaceOwner")
+              : t("Common:ChangeRoomOwner"),
       icon: ReconnectSvgUrl,
       onClick: self.onChangeRoomOwner,
       disabled: false,
@@ -902,6 +930,15 @@ export const getFilesContextOptionsImpl = (
     },
     indexOptions,
     {
+      id: "option_edit-skill",
+      key: "edit-skill",
+      label: t("Common:EditSkill"),
+      icon: PencilReactSvgUrl,
+      // A skill is a file: the option is offered for nothing else.
+      onClick: () => self.dialogsStore.setEditSkillFile(item as unknown as TFile),
+      disabled: false,
+    },
+    {
       id: "option_rename",
       key: "rename",
       label: t("Common:Rename"),
@@ -932,9 +969,15 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_leave-room",
       key: "leave-room",
-      label: isFormSpace
-        ? t("Common:LeaveTheFormSpace")
-        : t("Common:LeaveTheRoom"),
+      label: isAgent
+        ? t("Common:LeaveTheAgent")
+        : isKnowledgeBase
+          ? t("Common:LeaveTheKnowledgeBase")
+          : isSkillSet
+            ? t("Common:LeaveTheSkillSet")
+            : isFormSpace
+              ? t("Common:LeaveTheFormSpace")
+              : t("Common:LeaveTheRoom"),
       icon: LeaveRoomSvgUrl,
       onClick: self.onLeaveRoom,
       disabled:
@@ -976,9 +1019,15 @@ export const getFilesContextOptionsImpl = (
         : item.isTemplate
           ? t("Files:DeleteTemplateAction")
           : item.isRoom
-            ? isFormSpace
-              ? t("Common:DeleteFormSpace")
-              : t("Common:DeleteRoom")
+            ? isAgent
+              ? t("Common:DeleteAgent")
+              : isKnowledgeBase
+                ? t("Common:DeleteKnowledgeBase")
+                : isSkillSet
+                  ? t("Common:DeleteSkillSet")
+                  : isFormSpace
+                    ? t("Common:DeleteFormSpace")
+                    : t("Common:DeleteRoom")
             : t("Common:Delete"),
       icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
       onClick: () => self.onDelete(item, t),
@@ -1075,16 +1124,20 @@ export const getFilesContextOptionsImpl = (
     [{ key: "change-room-owner" }, { key: "change-agent-owner" }],
   ];
 
-  const menuGroupsConfig: TMenuGroupConfig[] = [
-    {
-      groupKey: "more-options",
-      groupLabel: t("Common:MoreOptions"),
-      groupIcon: DotsHorizontalUrl,
-      itemKeys: moreOptionsItemKeys,
-      needsGrouping: true,
-      minItemsCount,
-    },
-  ];
+  // An agent's menu keeps its items in its own order, none of them folded
+  // under More options.
+  const menuGroupsConfig: TMenuGroupConfig[] = isAgent
+    ? []
+    : [
+        {
+          groupKey: "more-options",
+          groupLabel: t("Common:MoreOptions"),
+          groupIcon: DotsHorizontalUrl,
+          itemKeys: moreOptionsItemKeys,
+          needsGrouping: true,
+          minItemsCount,
+        },
+      ];
 
   if (!item.isRoom) {
     menuGroupsConfig.push({
@@ -1273,6 +1326,14 @@ export const getFilesContextOptionsImpl = (
   );
 
   if (!item.isRoom) {
+    // A Share submenu left with one item is not built: the item stays bare
+    // and takes the submenu's place.
+    const BARE_SHARE_KEYS = [
+      "link-for-room-members",
+      "copy-shared-link",
+      "manage-links",
+      "create-room",
+    ];
     const groups = item.isFolder
       ? [
           ["select", "open", "mark-read", "open-location"],
@@ -1280,6 +1341,7 @@ export const getFilesContextOptionsImpl = (
           [
             "update-xlsx-data",
             "share",
+            ...BARE_SHARE_KEYS,
             "move",
             // a one-item "move" category is replaced by this bare option
             "move-to",
@@ -1299,6 +1361,7 @@ export const getFilesContextOptionsImpl = (
             "open-pdf",
             "fill-form",
             "edit",
+            "edit-skill",
             "start-filling",
             "vectorization",
             "preview",
@@ -1316,6 +1379,7 @@ export const getFilesContextOptionsImpl = (
           [
             "update-xlsx-data",
             "share",
+            ...BARE_SHARE_KEYS,
             "move",
             "move-to",
             "copy-to",
@@ -1357,6 +1421,24 @@ export const getFilesContextOptionsImpl = (
       frameActionsPlaced = true;
     };
 
+    // An option no group names keeps a row of its own, ahead of the frame
+    // actions and of the group that removes the item: Delete stays last.
+    let leftoversPlaced = false;
+    const placeLeftovers = () => {
+      const placedKeys = groups.flat();
+      items.forEach((option) => {
+        if (placedKeys.includes(option.key)) return;
+        if (result.length > 0 && !result[result.length - 1].isSeparator) {
+          result.push({
+            key: `separator${folderSeparatorIndex++}`,
+            isSeparator: true,
+          });
+        }
+        result.push(option);
+      });
+      leftoversPlaced = true;
+    };
+
     groups.forEach((group) => {
       const groupItems: TContextOption[] = [];
 
@@ -1368,6 +1450,7 @@ export const getFilesContextOptionsImpl = (
       if (groupItems.length > 0) {
         const isDeleteGroup = group.includes("delete");
 
+        if (isDeleteGroup && !leftoversPlaced) placeLeftovers();
         if (isDeleteGroup && !frameActionsPlaced) placeFrameActions();
         const shouldAddSeparator =
           result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
@@ -1393,20 +1476,8 @@ export const getFilesContextOptionsImpl = (
       }
     });
 
+    if (!leftoversPlaced) placeLeftovers();
     if (!frameActionsPlaced) placeFrameActions();
-
-    items.forEach((option) => {
-      const isInGroups = groups.flat().includes(option.key);
-      if (!isInGroups) {
-        if (result.length > 0 && !result[result.length - 1].isSeparator) {
-          result.push({
-            key: `separator${folderSeparatorIndex++}`,
-            isSeparator: true,
-          });
-        }
-        result.push(option);
-      }
-    });
 
     // Insert plugin items according to their placement
     const newResult = placePlugins(result, pluginItems);
@@ -1425,6 +1496,17 @@ export const getFilesContextOptionsImpl = (
       const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
       resultOptions.splice(moveIndex, 0, downloadGroup);
     }
+  }
+
+  if (isAgent) {
+    return withUniqueSeparatorKeys(
+      trimSeparator(
+        placePlugins(
+          layoutAgentOptions(resultOptions, frameActions),
+          pluginItems,
+        ) as ContextMenuModel[],
+      ),
+    );
   }
 
   const usedSeparatorKeys = new Set<string>();

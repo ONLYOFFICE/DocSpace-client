@@ -113,7 +113,7 @@ beforeEach(() => {
 });
 
 describe("cancelEncryptedBatchUploadImpl", () => {
-  it("Uploader declines to unlock: only pending, encryptable rows fail with Common:EncryptionLockedUpload", () => {
+  it("Uploader declines to unlock: every pending row bound for the room fails with Common:EncryptionLockedUpload", () => {
     const { store } = createTestUploadDataStore(keyed);
     const target = makePrivateUploadTarget();
     const enc = makeUploadFile({ uniqueId: "enc", action: "upload", target });
@@ -144,8 +144,10 @@ describe("cancelEncryptedBatchUploadImpl", () => {
     expect(store.uploadedFilesHistory[0].error).toBe(
       "Common:EncryptionLockedUpload",
     );
-    expect(store.files[1].error).toBeNull();
-    expect(store.uploadedFilesHistory[1].error).toBeNull();
+    expect(store.files[1].error).toBe("Common:EncryptionLockedUpload");
+    expect(store.uploadedFilesHistory[1].error).toBe(
+      "Common:EncryptionLockedUpload",
+    );
     expect(store.files[2].error).toBe("boom");
     expect(store.files[3].error).toBeNull();
   });
@@ -183,12 +185,6 @@ describe("ensureEncryptionUnlockedForBatchImpl", () => {
       treeFoldersStore: { isPrivacyFolder: true },
     });
     store.files = [
-      makeUploadFile({
-        action: "upload",
-        file: makeBrowserFile("a.docx", 10, { encrypted: true }),
-        encrypted: true,
-        target: makePrivateUploadTarget(),
-      }),
       makeUploadFile({ action: "converted", target: makePrivateUploadTarget() }),
       makeUploadFile({ action: "upload" }),
     ];

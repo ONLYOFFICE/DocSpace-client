@@ -41,13 +41,15 @@ import { useTranslation } from "react-i18next";
 export const PRIVATE_ROOMS_OFF_HINT =
   "[SDK] Private rooms are off: pass privateRooms: true in the frame configuration.";
 
-const PrivateRoomsNotAvailable = () => {
+/** `optInHint`: the view stands for a missing opt-in, which the hint names. */
+const PrivateRoomsNotAvailable = ({ optInHint = true }: { optInHint?: boolean }) => {
   const { t } = useTranslation(["Common"]);
 
   React.useEffect(() => {
+    if (!optInHint) return;
     // biome-ignore lint/suspicious/noConsole: a fixed hint for the host developer, it carries no data
     console.info(PRIVATE_ROOMS_OFF_HINT);
-  }, []);
+  }, [optInHint]);
 
   return (
     <div

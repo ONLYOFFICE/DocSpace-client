@@ -1,0 +1,29 @@
+{
+  "key_path": "KnowledgeBaseEmptyDescription",
+  "content": "Add the files the assistant should look for answers in.",
+  "content_en_sha1_hash": "6c3c6029bbd538d657c2f826b26f10406d02a33f",
+  "created_at": "2026-11-20T10:53:41.449Z",
+  "updated_at": "2026-11-20T10:54:39.928Z",
+  "comment": {
+    "text": "Description on the empty screen inside a knowledge base for a user who may add files: the AI assistant will look for answers in the files added here.",
+    "is_auto": true,
+    "updated_at": "2026-11-20T10:54:39.928Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 263,
+      "context": "? t(\"EmptyView:SkillSetEmptyUserDescription\")\n : t(\"EmptyView:SkillSetEmptyDescription\");\n if (type === RoomsType.KnowledgeRoom)\n return isReadOnly\n ? t(\"EmptyView:KnowledgeBaseEmptyUserDescription\")\n : t(\"EmptyView:KnowledgeBaseEmptyDescription\");\n \n if (isReadOnly) return t(\"Common:UserEmptyDescription\");\n \n return t(\"EmptyView:EmptyViewDescription\");\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

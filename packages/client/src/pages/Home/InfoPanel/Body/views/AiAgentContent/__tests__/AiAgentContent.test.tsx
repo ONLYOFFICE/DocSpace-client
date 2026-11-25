@@ -1,0 +1,396 @@
+import React from "react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+
+const api = vi.hoisted(() => ({
+  getAiThreadArtifacts: vi.fn(),
+  getAiThreadAttachments: vi.fn(),
+}));
+// The copy panel's flag and the buffered item are observable, as in the
+// stores: the view waits for the panel to close.
+const stores = await vi.hoisted(async () => {
+  const { observable, runInAction } = await import("mobx");
+  const copyPanel = observable({ visible: false });
+  const filesStore = {
+    bufferSelection: null as { id: number } | null,
+    setSelected: vi.fn(),
+    setBufferSelection: vi.fn(),
+  };
+  return {
+    dialogsStore: {
+      aiChatActiveThreadId: "t-1",
+      aiChatThreadFilesChange: { threadId: "", seq: 0 },
+      get copyPanelVisible() {
+        return copyPanel.visible;
+      },
+      setCopyPanelVisible: vi.fn((visible: boolean) =>
+        runInAction(() => {
+          copyPanel.visible = visible;
+        }),
+      ),
+    },
+    filesSettingsStore: { getIcon: () => "icon.svg" },
+    settingsStore: { culture: "en" },
+    filesActionsStore: { downloadFiles: vi.fn() },
+    filesStore,
+    infoPanelStore: { setIsMobileHidden: vi.fn() },
+  };
+});
+
+vi.mock("@docspace/shared/api/ai/threadFiles", () => api);
+vi.mock("SRC_DIR/store/useStore", () => ({
+  useStore: (name: keyof typeof stores) => stores[name],
+}));
+vi.mock("mobx-react", () => ({ observer: (component: unknown) => component }));
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key: string) => key }),
+}));
+// The row's "..." menu, drawn open: its items as buttons.
+vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
+  ContextMenuButton: ({
+    getData,
+    testId,
+  }: {
+    getData: () => { key: string; label: string; onClick: () => void }[];
+    testId: string;
+  }) => (
+    <div data-testid={testId}>
+      {getData().map((item) => (
+        <button key={item.key} type="button" data-testid={item.key} onClick={item.onClick}>
+          {item.label}
+        </button>
+      ))}
+    </div>
+  ),
+}));
+
+import AiAgentContent, { REFRESH_DELAY_MS } from "../index";
+
+const file = (id: number, title: string) => ({
+  id,
+  title,
+  fileExst: ".png",
+  contentLength: "12 KB",
+  created: "2026-11-13T10:00:00Z",
+  webUrl: `/doceditor?fileId=${id}`,
+  viewUrl: `/download/${id}`,
+});
+
+const titles = (testId: string) =>
+  Array.from(screen.getByTestId(testId).querySelectorAll('[data-testid="ai-agent-content-file"]')).map(
+    (node) => node.querySelector("a")?.textContent,
+  );
+
+const flush = () => act(async () => {});
+
+/** The chat reports that a conversation may have new files. */
+const signal = (threadId: string) => {
+  const { seq } = stores.dialogsStore.aiChatThreadFilesChange;
+  stores.dialogsStore.aiChatThreadFilesChange = { threadId, seq: seq + 1 };
+};
+
+const wait = (ms: number) =>
+  act(async () => {
+    await vi.advanceTimersByTimeAsync(ms);
+  });
+
+const deferred = <T,>() => {
+  let resolve!: (value: T) => void;
+  const promise = new Promise<T>((r) => {
+    resolve = r;
+  });
+  return { promise, resolve };
+};
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  stores.dialogsStore.aiChatActiveThreadId = "t-1";
+  stores.dialogsStore.aiChatThreadFilesChange = { threadId: "", seq: 0 };
+  stores.dialogsStore.setCopyPanelVisible(false);
+  vi.clearAllMocks();
+  stores.filesStore.bufferSelection = null;
+  api.getAiThreadArtifacts.mockResolvedValue([file(1, "Chart.png")]);
+  api.getAiThreadAttachments.mockResolvedValue([file(2, "Agreement.docx"), file(3, "Notes.jpg")]);
+});
+
+afterEach(() => vi.useRealTimers());
+
+describe("AiAgentContent", () => {
+  it("lists the artifacts and the attachments of the conversation on screen", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-1");
+    expect(api.getAiThreadAttachments).toHaveBeenCalledWith(7, "t-1");
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+    expect(titles("ai-agent-content-attachments")).toEqual(["Agreement.docx", "Notes.jpg"]);
+  });
+
+  it("downloads all the artifacts as one archive, once there is more than one", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    // One artifact has its own button only; the attachments never get the link.
+    expect(screen.queryByTestId("ai-agent-content-download-all")).toBeNull();
+  });
+
+  it("offers Download all for several artifacts", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([file(1, "Chart.png"), file(5, "Proposal.docx")]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    fireEvent.click(screen.getByTestId("ai-agent-content-download-all"));
+    expect(stores.filesActionsStore.downloadFiles).toHaveBeenCalledWith([1, 5], [], {
+      label: "Common:ArchivingData",
+    });
+  });
+
+  it("gives each file a menu that downloads it or saves a copy of it to a room", async () => {
+    const open = vi.spyOn(window, "open").mockImplementation(() => null);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const [row] = screen.getByTestId("ai-agent-content-artifacts").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    const item = (key: string) => row.querySelector(`[data-testid="${key}"]`) as HTMLElement;
+    expect(item("ai-agent-content-download").textContent).toBe("Common:Download");
+    expect(item("ai-agent-content-save-to-room").textContent).toBe("Common:SaveToRoom");
+
+    fireEvent.click(item("ai-agent-content-download"));
+    expect(open).toHaveBeenCalledWith("/download/1", "_self");
+
+    fireEvent.click(item("ai-agent-content-save-to-room"));
+    // The copy panel copies this file, not what a list had selected.
+    expect(stores.filesStore.setSelected).toHaveBeenCalledWith("none");
+    expect(stores.filesStore.setBufferSelection).toHaveBeenCalledWith(expect.objectContaining({ id: 1 }));
+    expect(stores.dialogsStore.setCopyPanelVisible).toHaveBeenCalledWith(true);
+    expect(stores.filesStore.setBufferSelection.mock.invocationCallOrder[0]).toBeGreaterThan(
+      stores.filesStore.setSelected.mock.invocationCallOrder[0],
+    );
+    open.mockRestore();
+  });
+
+  // The agent's page has no list whose click would take the buffer away.
+  it("gives the Info panel back to the agent once the copy panel closes", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const [row] = screen.getByTestId("ai-agent-content-artifacts").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    fireEvent.click(row.querySelector('[data-testid="ai-agent-content-save-to-room"]') as HTMLElement);
+    expect(stores.filesStore.setBufferSelection).toHaveBeenCalledTimes(1);
+
+    stores.filesStore.bufferSelection = { id: 1 };
+    act(() => stores.dialogsStore.setCopyPanelVisible(false));
+    expect(stores.filesStore.setBufferSelection).toHaveBeenLastCalledWith(null);
+  });
+
+  it("leaves alone a buffer that holds something else by the time the copy panel closes", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const [row] = screen.getByTestId("ai-agent-content-artifacts").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    fireEvent.click(row.querySelector('[data-testid="ai-agent-content-save-to-room"]') as HTMLElement);
+
+    stores.filesStore.bufferSelection = { id: 99 };
+    act(() => stores.dialogsStore.setCopyPanelVisible(false));
+    expect(stores.filesStore.setBufferSelection).toHaveBeenCalledTimes(1);
+  });
+
+  // Spec: ai-agent-info-panel, "Actions of a Content row"
+  it("offers no Open location, as the conversation's folders are internal", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const rows = screen.getByTestId("ai-agent-content").querySelectorAll('[data-testid="ai-agent-content-file"]');
+    expect(rows.length).toBeGreaterThan(0);
+    rows.forEach((row) => {
+      expect(row.querySelector('[data-testid="ai-agent-content-open-location"]')).toBeNull();
+      expect(row.querySelector('[data-testid="ai-agent-content-download"]')).not.toBeNull();
+    });
+  });
+
+  it("shows both sections empty for a new chat, without a request", async () => {
+    stores.dialogsStore.aiChatActiveThreadId = "";
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(api.getAiThreadArtifacts).not.toHaveBeenCalled();
+    expect(screen.getAllByText("Common:AiContentEmpty")).toHaveLength(2);
+  });
+
+  it("follows the conversation", async () => {
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await flush();
+    stores.dialogsStore.aiChatActiveThreadId = "t-2";
+    api.getAiThreadArtifacts.mockResolvedValue([]);
+    api.getAiThreadAttachments.mockResolvedValue([file(4, "Other.pdf")]);
+    rerender(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(api.getAiThreadArtifacts).toHaveBeenLastCalledWith(7, "t-2");
+    expect(titles("ai-agent-content-attachments")).toEqual(["Other.pdf"]);
+  });
+
+  it("keeps the list that could be read when the other could not", async () => {
+    api.getAiThreadArtifacts.mockRejectedValue(new Error("404"));
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(titles("ai-agent-content-artifacts")).toEqual([]);
+    expect(titles("ai-agent-content-attachments")).toHaveLength(2);
+  });
+
+  it("says so when neither list can be read", async () => {
+    api.getAiThreadArtifacts.mockRejectedValue(new Error("down"));
+    api.getAiThreadAttachments.mockRejectedValue(new Error("down"));
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.getByTestId("ai-agent-content-error")).toBeTruthy();
+  });
+
+  it("reads the lists again when the chat reports new files in its conversation, keeping the rows meanwhile", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    const panel = screen.getByTestId("ai-agent-content");
+    const next = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(next.promise);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+    // Nothing goes blank while the new lists are on their way.
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+    next.resolve([file(1, "Chart.png"), file(6, "Report.docx")]);
+    await wait(0);
+    expect(screen.getByTestId("ai-agent-content")).toBe(panel);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png", "Report.docx"]);
+  });
+
+  it("ignores a change in another conversation", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    signal("t-other");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS * 2);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
+  });
+
+  it("reads once for a burst of changes", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    for (let i = 0; i < 3; i += 1) {
+      signal("t-1");
+      rerender(<AiAgentContent projectId={7} />);
+      await wait(REFRESH_DELAY_MS / 4);
+    }
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+  });
+
+  it("shows the newer lists when two reads come back in reverse order", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    const older = deferred<unknown[]>();
+    const newer = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(older.promise).mockReturnValueOnce(newer.promise);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    newer.resolve([file(8, "Newer.docx")]);
+    await wait(0);
+    older.resolve([file(9, "Older.docx")]);
+    await wait(0);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Newer.docx"]);
+  });
+
+  it("drops a read of the last conversation that comes back after a switch", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    const late = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(late.promise);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    stores.dialogsStore.aiChatActiveThreadId = "t-2";
+    api.getAiThreadArtifacts.mockResolvedValue([file(4, "Other.pdf")]);
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(0);
+    late.resolve([file(9, "Late.docx")]);
+    await wait(0);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Other.pdf"]);
+  });
+
+  it("shows the lists when a read again succeeds after the first one failed", async () => {
+    vi.useFakeTimers();
+    api.getAiThreadArtifacts.mockRejectedValueOnce(new Error("down"));
+    api.getAiThreadAttachments.mockRejectedValueOnce(new Error("down"));
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    expect(screen.getByTestId("ai-agent-content-error")).toBeTruthy();
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    expect(screen.queryByTestId("ai-agent-content-error")).toBeNull();
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+  });
+
+  it("keeps the lists when a read again fails", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    api.getAiThreadArtifacts.mockRejectedValue(new Error("down"));
+    api.getAiThreadAttachments.mockRejectedValue(new Error("down"));
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(screen.queryByTestId("ai-agent-content-error")).toBeNull();
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+  });
+
+  it("goes from the empty lists of a new chat to its files without going blank", async () => {
+    stores.dialogsStore.aiChatActiveThreadId = "";
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await flush();
+    const answer = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(answer.promise);
+    stores.dialogsStore.aiChatActiveThreadId = "t-new";
+    rerender(<AiAgentContent projectId={7} />);
+    await flush();
+    // Still the empty lists, not nothing, while its files are on their way.
+    expect(screen.getAllByText("Common:AiContentEmpty")).toHaveLength(2);
+    answer.resolve([file(1, "Chart.png")]);
+    await flush();
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-new");
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+    expect(titles("ai-agent-content-attachments")).toHaveLength(2);
+  });
+
+  it("does not read again on coming back to a conversation whose change it has seen", async () => {
+    vi.useFakeTimers();
+    const { rerender } = render(<AiAgentContent projectId={7} />);
+    await wait(0);
+    signal("t-1");
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS);
+    stores.dialogsStore.aiChatActiveThreadId = "t-2";
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(0);
+    stores.dialogsStore.aiChatActiveThreadId = "t-1";
+    rerender(<AiAgentContent projectId={7} />);
+    await wait(REFRESH_DELAY_MS * 2);
+    // The first read, the change, t-2, and coming back: no second read for the change.
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(4);
+  });
+
+  it("reads the lists again when the browser tab is shown again", async () => {
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    api.getAiThreadArtifacts.mockResolvedValue([file(1, "Chart.png"), file(6, "Report.docx")]);
+    await act(async () => {
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await flush();
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png", "Report.docx"]);
+  });
+});

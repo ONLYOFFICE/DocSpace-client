@@ -634,9 +634,12 @@ export default function useContextMenuModel({
   );
 
   const getGroupCopyItem = useCallback(() => {
-    const canCopy = filesSelectionStore.selection.every(
-      (i) => i.security.Copy || (!i.isFolder && (i as TFileItem).encrypted),
-    );
+    // Spec: private-rooms/sdk-surface, "Menu entries withheld for encrypted items"
+    const canCopy =
+      !(insidePrivateRoom && filesSelectionStore.selection.some((i) => i.isFolder)) &&
+      filesSelectionStore.selection.every(
+        (i) => i.security.Copy || (!i.isFolder && (i as TFileItem).encrypted),
+      );
     return {
       id: "option_copy",
       key: "copy",
@@ -647,7 +650,7 @@ export default function useContextMenuModel({
       },
       disabled: !onCopySelectedClick || !canCopy,
     };
-  }, [t, onCopySelectedClick, filesSelectionStore.selection]);
+  }, [t, onCopySelectedClick, filesSelectionStore.selection, insidePrivateRoom]);
 
   const getGroupMoveItem = useCallback(() => {
     const canMove = filesSelectionStore.selection.every((i) => i.security.Move);

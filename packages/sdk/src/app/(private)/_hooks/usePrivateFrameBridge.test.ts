@@ -70,6 +70,15 @@ describe("usePrivateFrameBridge / withoutSearchText", () => {
     expect(withoutSearchText("?search=Quarterly")).toBe("");
   });
 
+  it("Navigation after a search of the private rooms list", () => {
+    expect(
+      withoutSearchText(
+        "?filterValue=Board%20plans&sortBy=Title&searchArea=PrivateRooms&privateRooms=true",
+      ),
+    ).toBe("?sortBy=Title&searchArea=PrivateRooms&privateRooms=true");
+    expect(withoutSearchText("?filterValue=Board&search=Q1")).toBe("");
+  });
+
   it("passes a query without a search text through unchanged", () => {
     expect(withoutSearchText("?folder=7002&privateRooms=true")).toBe(
       "?folder=7002&privateRooms=true",

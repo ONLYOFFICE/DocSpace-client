@@ -1,0 +1,29 @@
+{
+  "key_path": "AddToMyAgents",
+  "content": "Add to my agents",
+  "content_en_sha1_hash": "338177d0f8f3bbcbfdee28757dae268b79240c02",
+  "created_at": "2026-11-18T08:05:07.460Z",
+  "updated_at": "2026-11-18T08:13:34.331Z",
+  "comment": {
+    "text": "Install button label of an agent template in the AI templates catalog (on the card, in its menu, in the Info panel and in the install confirmation dialog); installing it creates a new agent for the user. Imperative verb phrase; skill set and knowledge base templates show Install instead.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:13:34.331Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/useInstallAiTemplate.ts",
+      "line_number": 54,
+      "context": "/** The label of a template's install action: an agent is added to the user's agents. */\n export const getInstallLabel = (\n t: (key: string) => string,\n template: TAiTemplate,\n ) =>\n template.kind === \"agent\" ? t(\"Common:AddToMyAgents\") : t(\"Common:Install\");\n \n /**\n * Who may install a template: whoever may create an agent (the portal owner,\n * DocSpace admins and room admins), as installing one creates an agent.\n */",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -40,9 +40,12 @@ import {
   Security,
 } from "@onlyoffice/docspace-plugin-sdk";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import type { TFile } from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
+import {
+  canManageAgentMembers,
+  getAvailableInfoPanelTabs,
+} from "SRC_DIR/helpers/info-panel/tabs";
 import type { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
 import {
   listItemOf,
@@ -69,6 +72,167 @@ describe("getAvailableInfoPanelTabs", () => {
       InfoPanelView.infoDetails,
     ]);
     expect(useRoomsView).toBe(true);
+  });
+
+  it("No Metadata tab for anything of the AI section, while a file of My documents has it", () => {
+    const tabsOf = (selection: object) =>
+      getAvailableInfoPanelTabs({
+        selection: selection as never,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder: false,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs;
+    const file = { id: 5, parentId: 3, fileExst: ".docx", title: "Plan.docx" };
+
+    expect(tabsOf({ ...file, rootFolderType: FolderType.USER })).toContain(InfoPanelView.infoMetadata);
+    expect(tabsOf({ ...file, rootFolderType: FolderType.AiHub })).not.toContain(InfoPanelView.infoMetadata);
+    expect(
+      tabsOf({ id: 12, parentId: 3, isRoom: true, roomType: RoomsType.KnowledgeRoom, rootFolderType: FolderType.AiHub }),
+    ).not.toContain(InfoPanelView.infoMetadata);
+  });
+
+  const agentTabs = (selection: object, aiChatProjectId: number | null = null) =>
+    getAvailableInfoPanelTabs({
+      selection: selection as never,
+      isTrash: false,
+      isRecentFolder: false,
+      isPrivacyFolder: false,
+      enablePlugins: true,
+      infoPanelItemsList: [],
+      aiChatProjectId,
+    }).tabs;
+
+  it("An agent has Details and Context only, plugins or not, for a user who may not change its members", () => {
+    const expected = [InfoPanelView.infoDetails, InfoPanelView.infoContext];
+    expect(agentTabs({ id: 7, isAIProject: true, rootFolderType: FolderType.AiHub })).toEqual(expected);
+    // A selection of the list is known by its room type alone.
+    expect(agentTabs({ id: 7, roomType: RoomsType.AiProjectRoom, rootFolderType: FolderType.AiHub })).toEqual(expected);
+  });
+
+  it("An agent whose page is open has Content too, and no other agent has", () => {
+    const agent = { id: 7, roomType: RoomsType.AiProjectRoom, rootFolderType: FolderType.AiHub };
+    expect(agentTabs(agent, 7)).toEqual([
+      InfoPanelView.infoDetails,
+      InfoPanelView.infoContext,
+      InfoPanelView.infoContent,
+    ]);
+    expect(agentTabs(agent, 8)).not.toContain(InfoPanelView.infoContent);
+  });
+
+  // Spec: ai-agent-info-panel, "Members of an agent"
+  describe("the members of an agent", () => {
+    const agent = (security: object, inRoom?: boolean) => ({
+      id: 7,
+      roomType: RoomsType.AiProjectRoom,
+      rootFolderType: FolderType.AiHub,
+      security,
+      ...(inRoom === undefined ? {} : { inRoom }),
+    });
+
+    it("are a last tab for the owner and an Agent manager, who may change them", () => {
+      expect(agentTabs(agent({ EditAccess: true }, true))).toEqual([
+        InfoPanelView.infoDetails,
+        InfoPanelView.infoContext,
+        InfoPanelView.infoMembers,
+      ]);
+      // On the agent's page they come after Content.
+      expect(agentTabs(agent({ EditAccess: true }, true), 7)).toEqual([
+        InfoPanelView.infoDetails,
+        InfoPanelView.infoContext,
+        InfoPanelView.infoContent,
+        InfoPanelView.infoMembers,
+      ]);
+    });
+
+    it("are not offered to a Member", () => {
+      expect(agentTabs(agent({ EditAccess: false }, true))).not.toContain(InfoPanelView.infoMembers);
+      expect(agentTabs(agent({}, true))).not.toContain(InfoPanelView.infoMembers);
+    });
+
+    it("are not offered to a DocSpace admin who is not a member", () => {
+      expect(agentTabs(agent({ EditAccess: true }, false))).not.toContain(InfoPanelView.infoMembers);
+      expect(canManageAgentMembers(agent({ EditAccess: true }, false))).toBe(false);
+    });
+
+    it("are offered for a selection that does not say whether the caller is in it", () => {
+      expect(canManageAgentMembers(agent({ EditAccess: true }))).toBe(true);
+    });
+  });
+
+  it("A template of the Templates tab has Details and Context, whatever else is selected", () => {
+    const templateTabs = (selection: object | null) =>
+      getAvailableInfoPanelTabs({
+        selection: selection as never,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder: false,
+        enablePlugins: true,
+        infoPanelItemsList: [],
+        isAiTemplate: true,
+      });
+    const expected = {
+      tabs: [InfoPanelView.infoDetails, InfoPanelView.infoContext],
+      useRoomsView: true,
+    };
+    // The list's own folder is the selection on the Templates tab.
+    expect(templateTabs({ id: 1, isFolder: true, rootFolderType: FolderType.AiHub })).toEqual(expected);
+    expect(templateTabs(null)).toEqual(expected);
+  });
+
+  it("Encrypted file selected", () => {
+    const selection = {
+      id: 1,
+      isFile: true,
+      fileExst: ".docx",
+      encrypted: true,
+      canShare: true,
+      rootFolderType: FolderType.Rooms,
+      security: {},
+    } as unknown as TFile;
+
+    const { tabs } = getAvailableInfoPanelTabs({
+      selection,
+      isTrash: false,
+      isRecentFolder: false,
+      isPrivacyFolder: false,
+      enablePlugins: false,
+      infoPanelItemsList: [],
+    });
+
+    expect(tabs).not.toContain(InfoPanelView.infoShare);
+    expect(
+      getAvailableInfoPanelTabs({
+        selection: { ...selection, encrypted: false } as TFile,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder: false,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs,
+    ).toContain(InfoPanelView.infoShare);
+  });
+
+  it("Folder inside a private room selected", () => {
+    const folderTabs = (isPrivacyFolder: boolean) =>
+      getAvailableInfoPanelTabs({
+        selection: {
+          id: 2,
+          isFolder: true,
+          canShare: true,
+          rootFolderType: FolderType.Rooms,
+          security: {},
+        } as unknown as TFolder,
+        isTrash: false,
+        isRecentFolder: false,
+        isPrivacyFolder,
+        enablePlugins: false,
+        infoPanelItemsList: [],
+      }).tabs;
+
+    expect(folderTabs(true)).not.toContain(InfoPanelView.infoShare);
+    expect(folderTabs(false)).toContain(InfoPanelView.infoShare);
   });
 });
 

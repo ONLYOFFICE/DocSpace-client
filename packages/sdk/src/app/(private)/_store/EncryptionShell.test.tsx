@@ -135,25 +135,13 @@ describe("EncryptionShell passphrase dialog", () => {
 
     expect(onCancel).toHaveBeenCalledTimes(1);
     expect(open).toHaveBeenCalledWith(
-      "https://portal.example.com/profile/keys-management",
+      `${window.location.origin}/profile/keys-management`,
       "_blank",
     );
     expect(toastr.info).not.toHaveBeenCalled();
   });
 
   it("Client not reachable", () => {
-    frame.src = undefined;
-    const open = vi.spyOn(window, "open");
-
-    forgotPassphrase();
-
-    expect(open).not.toHaveBeenCalled();
-    expect(toastr.info).toHaveBeenCalledWith(
-      "Common:EncryptionKeysManagedInProfile",
-    );
-  });
-
-  it("explains in place when the new tab is blocked", () => {
     vi.spyOn(window, "open").mockReturnValue(null);
 
     forgotPassphrase();

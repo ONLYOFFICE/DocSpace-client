@@ -3,7 +3,7 @@
   "content": "Passphrases do not match",
   "content_en_sha1_hash": "42a0ba82992be92edb99d0ae3a35c75971c1ab9c",
   "created_at": "2026-05-24T17:27:34.691Z",
-  "updated_at": "2026-11-05T16:49:39.985Z",
+  "updated_at": "2026-11-19T16:14:54.126Z",
   "comment": {
     "text": "Error text in a dialog that appears when the entered passphrase and the confirmation passphrase are not identical.",
     "is_auto": true,
@@ -13,20 +13,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/KeyRotationDialog.tsx",
-      "line_number": 123,
+      "line_number": 127,
       "context": "? t(\"Common:PassphraseCommonPattern\")\n : \"\");\n \n const confirmFieldError =\n confirmPassphrase && newPassphrase !== confirmPassphrase\n ? t(\"Common:PassphraseMismatch\")\n : \"\";\n \n const handleSubmit = useCallback(async () => {\n setAttemptedSubmit(true);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 227,
-      "context": "!!displayedError ||\n (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);\n \n const confirmMismatch = !!confirmPassphrase && passphrase !== confirmPassphrase;\n const announcedError =\n displayedError || (confirmMismatch ? t(\"Common:PassphraseMismatch\") : \"\");\n \n return (\n <>\n <ModalDialog\n zIndex={410}",
+      "file_path": "/packages/shared/dialogs/key-generation/KeySetupDialog.tsx",
+      "line_number": 151,
+      "context": "const confirmMismatch =\n !!confirmPassphrase && passphrase !== confirmPassphrase;\n const announcedError =\n step === \"passphrase\" && confirmMismatch\n ? t(\"Common:PassphraseMismatch\")\n : \"\";\n \n const primary = {\n explanation: {\n onClick: onContinue,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseCreationFields.tsx",
+      "line_number": 192,
+      "context": "labelVisible\n labelText={t(\"Common:ConfirmPassphrase\")}\n labelFor=\"confirmPassphrase\"\n removeMargin\n hasError={confirmMismatch}\n errorMessage={confirmMismatch ? t(\"Common:PassphraseMismatch\") : \"\"}\n errorMessageWidth=\"100%\"\n className={styles.inputWrapper}\n >\n <PasswordInput\n key={confirmInputKey}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 227,
-      "context": "!!displayedError ||\n (isNew && passphrase.length >= MIN_LENGTH && !rulesPassed);\n \n const confirmMismatch = !!confirmPassphrase && passphrase !== confirmPassphrase;\n const announcedError =\n displayedError || (confirmMismatch ? t(\"Common:PassphraseMismatch\") : \"\");\n \n return (\n <>\n <ModalDialog\n zIndex={410}",
+      "line_number": 181,
+      "context": "const passphraseHasError = !!displayedError;\n \n const confirmMismatch = !!confirmPassphrase && passphrase !== confirmPassphrase;\n const announcedError =\n displayedError || (confirmMismatch ? t(\"Common:PassphraseMismatch\") : \"\");\n \n return (\n <>\n <ModalDialog\n zIndex={410}",
       "module": "/packages/shared"
     }
   ],

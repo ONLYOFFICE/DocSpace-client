@@ -50,7 +50,6 @@ import {
   getDefaultFileTestIdPrefix,
 } from "SRC_DIR/helpers/filesUtils";
 import { runEncryptedFileCreation } from "SRC_DIR/helpers/encryptedFileCreation";
-import { createSkill } from "@docspace/shared/api/ai";
 import {
   getDisplayFileNames,
   getUniqueFileTitle,
@@ -109,6 +108,7 @@ const CreateEvent = ({
   fetchFiles,
   openDocEditor,
   isInstructionsRoom,
+  setNewSkillFolderId,
   openMarkdownFile,
   isMarkdownEditorAvailable,
 }) => {
@@ -186,9 +186,8 @@ const CreateEvent = ({
       } else if (extension === "md" && !isPrivacy) {
         // Markdown is edited by the Markdown plugin, not by the document
         // editor: the file is created here and opened in the plugin, when
-        // it is enabled. A skill in an Instructions room is written by the
-        // AI service from the skill template, with the frontmatter the
-        // Files service requires of it.
+        // it is enabled. A skill in an Instructions room never gets here:
+        // the skill dialog creates it (see the effect below).
         const fileTitle = `${newValue.trimEnd()}.${extension}`;
         // Without the plugin the new file opens view-only in the document
         // editor, as any Markdown file does. A new tab is opened before the
@@ -199,12 +198,7 @@ const CreateEvent = ({
             : null;
 
         try {
-          const file = isInstructionsRoom
-            ? await createSkill({
-                destId: parentId,
-                title: newValue.trimEnd(),
-              }).then((skill) => api.files.getFileInfo(skill.id))
-            : await createFile(parentId, fileTitle);
+          const file = await createFile(parentId, fileTitle);
 
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
@@ -383,7 +377,6 @@ const CreateEvent = ({
       encryptionRoomId,
       fetchFiles,
       openDocEditor,
-      isInstructionsRoom,
       openMarkdownFile,
       isMarkdownEditorAvailable,
     ],
@@ -410,6 +403,15 @@ const CreateEvent = ({
       setStartValue(getTitleWithoutExtension(item, fromTemplate));
     } else {
       setStartValue(suggestedName);
+    }
+
+    // A skill is not named in this dialog and filled in elsewhere: "New
+    // skill" opens the skill dialog, which takes its name, description and
+    // instructions and creates the file on Save.
+    if (extension === "md" && isInstructionsRoom && !isPrivacy) {
+      setNewSkillFolderId(parentId);
+      onCloseAction();
+      return undefined;
     }
 
     setHeaderTitle(defaultName);
@@ -546,6 +548,7 @@ export default inject(
       fetchFiles,
       openDocEditor,
       isInstructionsRoom: roomType === RoomsType.InstructionsRoom,
+      setNewSkillFolderId: dialogsStore.setNewSkillFolderId,
       openMarkdownFile: pluginStore.openMarkdownFile,
       isMarkdownEditorAvailable: pluginStore.isMarkdownEditorAvailable,
     };

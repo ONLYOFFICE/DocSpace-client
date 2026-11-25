@@ -54,6 +54,10 @@ import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
+import SkillsRowDataComponent from "./sub-components/SkillsRowData";
+import SkillSetsRowDataComponent from "./sub-components/SkillSetsRowData";
+import KnowledgeBasesRowDataComponent from "./sub-components/KnowledgeBasesRowData";
+import KnowledgeFilesRowDataComponent from "./sub-components/KnowledgeFilesRowData";
 import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
 import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
 
@@ -86,6 +90,10 @@ const FilesTableRow = memo((props) => {
     showHotkeyBorder,
     id,
     isRooms,
+    isSkillSet,
+    isSkillSetsList,
+    isKnowledgeBasesList,
+    isKnowledgeBase,
     isTemplates,
     isTrashFolder,
     isIndexEditingMode,
@@ -123,6 +131,7 @@ const FilesTableRow = memo((props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      roomType={item.roomType}
       isPrivateRoom={item.isPrivateRoom}
       title={item.title}
       showDefault={
@@ -320,6 +329,18 @@ const FilesTableRow = memo((props) => {
             isHovered={isHovered}
             {...props}
           />
+        ) : isSkillSetsList ? (
+          <SkillSetsRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isKnowledgeBasesList ? (
+          <KnowledgeBasesRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
         ) : isRooms ? (
           <RoomsRowDataComponent
             element={element}
@@ -348,6 +369,20 @@ const FilesTableRow = memo((props) => {
           />
         ) : isFavoritesFolder ? (
           <FavoritesRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            {...props}
+          />
+        ) : isKnowledgeBase ? (
+          <KnowledgeFilesRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            {...props}
+          />
+        ) : isSkillSet ? (
+          <SkillsRowDataComponent
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}

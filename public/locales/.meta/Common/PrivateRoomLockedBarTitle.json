@@ -3,7 +3,7 @@
   "content": "Your encryption key is locked",
   "content_en_sha1_hash": "4e683110d4e104bfc907198ea19331e3689eed24",
   "created_at": "2026-11-11T16:54:30.030Z",
-  "updated_at": "2026-11-11T16:56:26.897Z",
+  "updated_at": "2026-11-19T16:14:54.056Z",
   "comment": {
     "text": "Title of the bar shown at the top of a private (end-to-end encrypted) room while the user's encryption key is locked. A short statement, no trailing period. The key belongs to the user's account, not to the room.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBar.tsx",
-      "line_number": 80,
-      "context": "});\n };\n \n return (\n <PublicRoomBar\n headerText={t(\"Common:PrivateRoomLockedBarTitle\")}\n bodyText={\n <>\n {t(\"Common:PrivateRoomLockedBarText\")}{\" \"}\n <Link\n type={LinkType.action}",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomLockedBlock.tsx",
+      "line_number": 168,
+      "context": "as=\"h2\"\n id={titleId}\n fontSize=\"16px\"\n fontWeight={700}\n >\n {t(\"Common:PrivateRoomLockedBarTitle\")}\n </Text>\n <Text fontSize=\"13px\" className={styles.text}>\n {t(\"Common:PrivateRoomLockedBarText\")}\n </Text>\n <div className={styles.actions}>",
       "module": "/packages/client"
     }
   ],

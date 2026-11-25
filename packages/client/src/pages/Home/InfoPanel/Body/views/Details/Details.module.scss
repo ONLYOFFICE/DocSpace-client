@@ -108,3 +108,18 @@
     fill: var(--info-panel-links-bar-color);
   }
 }
+
+// A skill's description is read in full, as its author wrapped it.
+.skillDescription {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+// A file of a knowledge base that could not be indexed.
+.indexingError {
+  margin-top: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--toast-error-bg);
+  color: var(--toastr-title-error-color);
+}

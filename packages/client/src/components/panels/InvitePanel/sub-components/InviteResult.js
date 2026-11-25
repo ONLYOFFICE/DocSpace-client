@@ -38,6 +38,7 @@ import { useEffect, useId, useRef } from "react";
 import { Heading } from "@onlyoffice/apps-ui-kit/components/heading";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { waitsForAccess } from "@docspace/shared/services/private-room/room-encryption";
+import { reencryptFailureText } from "@docspace/shared/services/private-room/room-member-flows";
 
 import styles from "../InvitePanel.module.scss";
 
@@ -45,7 +46,14 @@ const namesOf = (members) =>
   members.map((member) => member.displayName || member.id).join(", ");
 
 const InviteResult = ({ t, outcome }) => {
-  const { granted, pending, skipped, failed, refused = [] } = outcome;
+  const {
+    granted,
+    pending,
+    skipped,
+    failed,
+    refused = [],
+    keyReplacedFileIds,
+  } = outcome;
   const refusedWithoutKey = refused
     .filter((entry) => entry.noKey)
     .map((entry) => entry.member);
@@ -67,9 +75,6 @@ const InviteResult = ({ t, outcome }) => {
   const withRefusedKey = skipped.filter(
     (member) => member.reason === "key-mismatch-refused",
   );
-  const missingFileCount = new Set(
-    pending.flatMap((entry) => entry.missingFileIds),
-  ).size;
 
   const regionRef = useRef(null);
   const grantedId = useId();
@@ -114,9 +119,11 @@ const InviteResult = ({ t, outcome }) => {
           <Text className={styles.resultReason}>
             {failed
               ? t("Common:EncryptedReencryptFailed")
-              : t("Common:EncryptedReencryptPartialFailure", {
-                  count: missingFileCount,
-                })}
+              : reencryptFailureText(
+                  t,
+                  pending.flatMap((entry) => entry.missingFileIds),
+                  keyReplacedFileIds,
+                )}
           </Text>
         </section>
       ) : null}

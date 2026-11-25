@@ -434,7 +434,9 @@ const Badges = ({
         </div>
       ) : null}
 
+      {/* Spec: private-rooms/file-operations, "Favorites, conversion and download-as withheld" */}
       {item.viewAccessibility?.MustConvert &&
+      !encrypted &&
       security &&
       "Convert" in security &&
       security?.Convert &&
@@ -529,7 +531,7 @@ const Badges = ({
               backgroundColor={
                 themeIsBase ? globalColors.gray : globalColors.grayDark
               }
-              label={t("Common:Preparing")}
+              label={t("Common:Indexing")}
               borderRadius="50px"
               color={globalColors.white}
               fontSize="9px"
@@ -553,10 +555,11 @@ const Badges = ({
       {!isTile && vectorizationStatus === VectorizationStatus.Failed ? (
         <FailedVectorizationBadge
           className={classNames(
-            styles.iconBadge,
-            "badge tablet-badge icons-group",
+            styles.versionBadge,
+            "badge-version badge-version-current tablet-badge icons-group",
           )}
-          size={tabletViewBadge ? "medium" : "small"}
+          label={t("Common:Error")}
+          themeIsBase={themeIsBase}
           onRetryVectorization={onRetryVectorization}
           withRetryVectorization={hasRetryVectorizationAccess}
         />

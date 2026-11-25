@@ -1,0 +1,22 @@
+{
+  "key_path": "DefaultAIAgent",
+  "content": "Default AI agent",
+  "content_en_sha1_hash": "4568abf7709af889c3c4e704a7d3d639d47575cb",
+  "created_at": "2026-11-18T08:35:24.992Z",
+  "updated_at": "2026-11-18T08:38:08.350Z",
+  "comment": {
+    "text": "First item of the agent picker menu in the AI chat title: the plain AI assistant used when no agent is chosen. Short noun phrase; agent is the same term as in the other agent strings.",
+    "is_auto": true,
+    "updated_at": "2026-11-18T08:38:08.350Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import SkillIcon, { getAiRoomIconKind } from "SRC_DIR/components/SkillIcon";
 import React, { useState, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -366,8 +367,23 @@ const SetRoomParams = ({
           !infoPanelSelection?.logo?.large) ||
         cover?.color;
 
+  // A skill set and a knowledge base are always drawn with their own icons:
+  // the dialog shows the icon and offers no logo to upload and no cover to
+  // pick.
+  const aiRoomIconKind = getAiRoomIconKind({
+    isRoom: true,
+    roomType: roomParams.type,
+  });
+
   const element =
-    isEdit || isTemplate || fromTemplate ? (
+    aiRoomIconKind ? (
+      <SkillIcon
+        kind={aiRoomIconKind}
+        size={isMobile() && !horizontalOrientation ? 96 : 64}
+        className="room-params-icon"
+        dataTestId="create_edit_room_icon"
+      />
+    ) : isEdit || isTemplate || fromTemplate ? (
       <ItemIcon
         id={selection?.id}
         fileExst={selection?.fileExst}

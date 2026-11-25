@@ -50,7 +50,7 @@ import {
   ContextMenuButtonDisplayType,
 } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 
-import OformsStore from "SRC_DIR/store/OformsStore";
+import TemplateGalleryStore from "SRC_DIR/store/TemplateGalleryStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 
@@ -59,11 +59,11 @@ import commonStyles from "../../helpers/Common.module.scss";
 import styles from "./Gallery.module.scss";
 
 type ItemTitleProps = {
-  gallerySelected: OformsStore["gallerySelected"];
+  gallerySelected: TemplateGalleryStore["gallerySelected"];
   getIcon?: FilesSettingsStore["getIcon"];
   currentColorScheme?: SettingsStore["currentColorScheme"];
   getFormGalleryContextOptions?: ContextOptionsStore["getFormGalleryContextOptions"];
-  currentExtensionGallery?: OformsStore["currentExtensionGallery"];
+  currentExtensionGallery?: TemplateGalleryStore["currentExtensionGallery"];
 };
 
 const ItemTitle = ({
@@ -148,12 +148,12 @@ export default inject(
     contextOptionsStore,
     settingsStore,
     filesSettingsStore,
-    oformsStore,
+    templateGalleryStore,
   }: TStore) => ({
     getFormGalleryContextOptions:
       contextOptionsStore.getFormGalleryContextOptions,
     currentColorScheme: settingsStore.currentColorScheme,
     getIcon: filesSettingsStore.getIcon,
-    currentExtensionGallery: oformsStore.currentExtensionGallery,
+    currentExtensionGallery: templateGalleryStore.currentExtensionGallery,
   }),
 )(observer(ItemTitle));

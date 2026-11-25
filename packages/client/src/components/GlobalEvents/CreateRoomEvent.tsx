@@ -55,7 +55,7 @@ import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
-import type OformsStore from "SRC_DIR/store/OformsStore";
+import type TemplateGalleryStore from "SRC_DIR/store/TemplateGalleryStore";
 import type ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
@@ -79,7 +79,7 @@ type CreateRoomEventProps = {
   processCreatingRoomFromData: FilesActionStore["processCreatingRoomFromData"];
   setProcessCreatingRoomFromData: FilesActionStore["setProcessCreatingRoomFromData"];
 
-  setFormTemplateForNewRoom: OformsStore["setFormTemplateForNewRoom"];
+  setFormTemplateForNewRoom: TemplateGalleryStore["setFormTemplateForNewRoom"];
 
   templateGalleryAvailable: boolean;
   onShowTemplateGallery: ContextOptionsStore["onShowTemplateGallery"];
@@ -311,7 +311,7 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     userStore,
-    oformsStore,
+    templateGalleryStore,
     settingsStore,
     contextOptionsStore,
     aiProjectsStore,
@@ -383,7 +383,7 @@ export default inject(
       processCreatingRoomFromData,
       setSelectedRoomType,
       setProcessCreatingRoomFromData,
-      setFormTemplateForNewRoom: oformsStore.setFormTemplateForNewRoom,
+      setFormTemplateForNewRoom: templateGalleryStore.setFormTemplateForNewRoom,
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       onShowTemplateGallery: contextOptionsStore.onShowTemplateGallery,
       getThirdPartyIcon,

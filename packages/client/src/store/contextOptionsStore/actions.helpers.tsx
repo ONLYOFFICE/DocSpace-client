@@ -613,11 +613,14 @@ const onCreateRoomFromTemplateImpl = (self: ContextOptionsStore) => {
     setTemplateGalleryVisible,
     setFormTemplateForNewRoom,
     setGallerySelected,
-  } = self.oformsStore;
+  } = self.templateGalleryStore;
 
   if (!gallerySelected) return;
 
-  const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
+  const extension = self.templateGalleryStore.currentExtensionGallery.replace(
+    ".",
+    "",
+  );
   const title = gallerySelected.title;
 
   setFormTemplateForNewRoom({ id: gallerySelected.id, title, extension });
@@ -645,18 +648,21 @@ export const onCreateTemplateImpl = async (
   self: ContextOptionsStore,
   _navigate?: unknown,
 ) => {
-  self.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
+  self.templateGalleryStore.setIsVisibleInfoPanelTemplateGallery(false);
 
-  if (self.oformsStore.createRoomFromTemplate)
+  if (self.templateGalleryStore.createRoomFromTemplate)
     return onCreateRoomFromTemplateImpl(self);
 
   // Nothing selected means the template was already consumed (the Forms-root
   // room flow clears it) or nothing was picked at all -- either way there is no
   // file to create, and going on would open an empty naming dialog.
-  const { gallerySelected } = self.oformsStore;
+  const { gallerySelected } = self.templateGalleryStore;
   if (!gallerySelected) return;
 
-  const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
+  const extension = self.templateGalleryStore.currentExtensionGallery.replace(
+    ".",
+    "",
+  );
 
   const event: TStoreCustomEvent = new CustomEvent(Events.CREATE, {
     detail: {

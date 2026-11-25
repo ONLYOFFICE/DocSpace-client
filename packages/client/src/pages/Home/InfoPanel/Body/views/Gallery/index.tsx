@@ -41,7 +41,7 @@ import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/l
 
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 
-import OformsStore from "SRC_DIR/store/OformsStore";
+import TemplateGalleryStore from "SRC_DIR/store/TemplateGalleryStore";
 
 import commonStyles from "../../helpers/Common.module.scss";
 
@@ -51,7 +51,7 @@ import styles from "./Gallery.module.scss";
 import ItemTitle from "./ItemTitle";
 
 type GalleryProps = {
-  gallerySelected?: OformsStore["gallerySelected"];
+  gallerySelected?: TemplateGalleryStore["gallerySelected"];
   culture?: string;
 };
 
@@ -158,10 +158,10 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
   );
 };
 
-export default inject(({ settingsStore, oformsStore }: TStore) => {
+export default inject(({ settingsStore, templateGalleryStore }: TStore) => {
   const { culture } = settingsStore;
 
-  const { gallerySelected } = oformsStore;
+  const { gallerySelected } = templateGalleryStore;
 
   return {
     gallerySelected,

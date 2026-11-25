@@ -29,7 +29,7 @@ import type {
 
 import { TemplateGalleryContractError } from "@docspace/shared/api/template-gallery";
 
-import OformsStore from "../OformsStore";
+import TemplateGalleryStore from "../TemplateGalleryStore";
 
 const settingsStore = {
   culture: "en",
@@ -101,10 +101,10 @@ const purposes: TGalleryPurpose[] = [
 ];
 
 const createStore = () => {
-  const store = new OformsStore(settingsStore, userStore, {
+  const store = new TemplateGalleryStore(settingsStore, userStore, {
     isFormRoomRoot: false,
   });
-  store.setOformLocales(["en", "de", "fr"]);
+  store.setGalleryLocales(["en", "de", "fr"]);
   return store;
 };
 
@@ -122,16 +122,18 @@ beforeEach(() => {
   api.getGalleryLocales.mockResolvedValue(["en", "de", "fr"]);
 });
 
-describe("OformsStore.oformsApiRoot", () => {
+describe("TemplateGalleryStore.galleryApiRoot", () => {
   it("drops the collection segment of the templates path", () => {
     const store = createStore();
 
-    expect(store.oformsApiUrl).toBe("https://cms.example/dashboard/api/oforms/");
-    expect(store.oformsApiRoot).toBe("https://cms.example/dashboard/api");
+    expect(store.galleryApiUrl).toBe(
+      "https://cms.example/dashboard/api/oforms/",
+    );
+    expect(store.galleryApiRoot).toBe("https://cms.example/dashboard/api");
   });
 });
 
-describe("OformsStore.parentCategories", () => {
+describe("TemplateGalleryStore.parentCategories", () => {
   it("lists the groups of both purposes when none is selected", () => {
     const store = createStore();
     store.setPurposes(purposes);
@@ -142,7 +144,7 @@ describe("OformsStore.parentCategories", () => {
   it("narrows the groups to the selected purpose", () => {
     const store = createStore();
     store.setPurposes(purposes);
-    store.oformsFilter.purpose = "personal";
+    store.galleryFilter.purpose = "personal";
 
     expect(store.parentCategories.map(({ id }) => id)).toEqual([30]);
   });
@@ -181,52 +183,52 @@ describe("OformsStore.parentCategories", () => {
   });
 });
 
-describe("OformsStore filter conditions", () => {
+describe("TemplateGalleryStore filter conditions", () => {
   it("adds and removes categories one by one", async () => {
     const store = createStore();
     store.setPurposes(purposes);
 
-    store.toggleOformsCategory("sc-10");
-    store.toggleOformsCategory("sc-30");
-    expect(store.oformsFilter.categoryIds).toEqual(["sc-10", "sc-30"]);
+    store.toggleGalleryCategory("sc-10");
+    store.toggleGalleryCategory("sc-30");
+    expect(store.galleryFilter.categoryIds).toEqual(["sc-10", "sc-30"]);
     expect(store.selectedCategories.map(({ id }) => id)).toEqual([10, 30]);
 
-    store.toggleOformsCategory("sc-10");
-    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+    store.toggleGalleryCategory("sc-10");
+    expect(store.galleryFilter.categoryIds).toEqual(["sc-30"]);
   });
 
   it("removes a category only once when its chip reports the removal twice", () => {
     const store = createStore();
     store.setPurposes(purposes);
-    store.oformsFilter.categoryIds = ["sc-10", "sc-30"];
+    store.galleryFilter.categoryIds = ["sc-10", "sc-30"];
 
-    store.removeOformsCategory("sc-10");
-    store.removeOformsCategory("sc-10");
+    store.removeGalleryCategory("sc-10");
+    store.removeGalleryCategory("sc-10");
 
-    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+    expect(store.galleryFilter.categoryIds).toEqual(["sc-30"]);
   });
 
   it("drops the categories of the other purpose on a purpose switch", () => {
     const store = createStore();
     store.setPurposes(purposes);
-    store.oformsFilter.categoryIds = ["sc-10", "sc-30"];
+    store.galleryFilter.categoryIds = ["sc-10", "sc-30"];
 
-    store.filterOformsByPurpose("personal");
+    store.filterGalleryByPurpose("personal");
 
-    expect(store.oformsFilter.purpose).toBe("personal");
-    expect(store.oformsFilter.categoryIds).toEqual(["sc-30"]);
+    expect(store.galleryFilter.purpose).toBe("personal");
+    expect(store.galleryFilter.categoryIds).toEqual(["sc-30"]);
   });
 
   it("counts only a non-default language, a purpose or a category as a change", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    expect(store.isOformsFilterChanged).toBe(false);
+    expect(store.isGalleryFilterChanged).toBe(false);
 
-    store.oformsFilter.search = "invoice";
-    expect(store.isOformsFilterChanged).toBe(false);
+    store.galleryFilter.search = "invoice";
+    expect(store.isGalleryFilterChanged).toBe(false);
 
-    store.oformsFilter.purpose = "business";
-    expect(store.isOformsFilterChanged).toBe(true);
+    store.galleryFilter.purpose = "business";
+    expect(store.isGalleryFilterChanged).toBe(true);
   });
 
   it("loads the list and the taxonomy together when no category is selected", async () => {
@@ -236,7 +238,7 @@ describe("OformsStore filter conditions", () => {
     api.getGalleryPurposes.mockReturnValueOnce(purposesRequest.promise);
     api.getGalleryTemplates.mockClear();
 
-    const switching = store.filterOformsByLocale("de");
+    const switching = store.filterGalleryByLocale("de");
     await Promise.resolve();
 
     expect(api.getGalleryTemplates).toHaveBeenCalledTimes(1);
@@ -248,13 +250,13 @@ describe("OformsStore filter conditions", () => {
   it("ignores Clear all while a language switch is loading", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    store.oformsFilter.purpose = "business";
-    store.setFilterOformsByLocaleIsLoading(true);
+    store.galleryFilter.purpose = "business";
+    store.setFilterGalleryByLocaleIsLoading(true);
     api.getGalleryTemplates.mockClear();
 
-    await store.clearOformsFilter();
+    await store.clearGalleryFilter();
 
-    expect(store.oformsFilter.purpose).toBe("business");
+    expect(store.galleryFilter.purpose).toBe("business");
     expect(api.getGalleryTemplates).not.toHaveBeenCalled();
   });
 
@@ -280,28 +282,28 @@ describe("OformsStore filter conditions", () => {
   it("clears every condition but the search", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    store.oformsFilter.search = "invoice";
-    store.oformsFilter.purpose = "business";
-    store.oformsFilter.categoryIds = ["sc-10"];
-    await store.filterOformsByLocale("de");
+    store.galleryFilter.search = "invoice";
+    store.galleryFilter.purpose = "business";
+    store.galleryFilter.categoryIds = ["sc-10"];
+    await store.filterGalleryByLocale("de");
     api.getGalleryPurposes.mockClear();
 
-    await store.clearOformsFilter();
+    await store.clearGalleryFilter();
 
-    expect(store.oformsFilter.locale).toBe("en");
-    expect(store.oformsFilter.purpose).toBe("");
-    expect(store.oformsFilter.categoryIds).toEqual([]);
-    expect(store.oformsFilter.search).toBe("invoice");
+    expect(store.galleryFilter.locale).toBe("en");
+    expect(store.galleryFilter.purpose).toBe("");
+    expect(store.galleryFilter.categoryIds).toEqual([]);
+    expect(store.galleryFilter.search).toBe("invoice");
     expect(api.getGalleryPurposes).toHaveBeenCalledWith(
       expect.any(String),
       "en",
       "docx",
     );
-    expect(store.isOformsFilterChanged).toBe(false);
+    expect(store.isGalleryFilterChanged).toBe(false);
   });
 });
 
-describe("OformsStore taxonomy loading", () => {
+describe("TemplateGalleryStore taxonomy loading", () => {
   it("loads the taxonomy together with the first page", async () => {
     const store = createStore();
 
@@ -333,7 +335,7 @@ describe("OformsStore taxonomy loading", () => {
     await store.initTemplateGallery();
     api.getGalleryPurposes.mockClear();
 
-    await store.filterOformsByLocale("de");
+    await store.filterGalleryByLocale("de");
 
     expect(api.getGalleryPurposes).toHaveBeenCalledTimes(1);
     expect(api.getGalleryPurposes).toHaveBeenCalledWith(
@@ -341,18 +343,18 @@ describe("OformsStore taxonomy loading", () => {
       "de",
       "docx",
     );
-    expect(store.filterOformsByLocaleIsLoading).toBe(false);
+    expect(store.filterGalleryByLocaleIsLoading).toBe(false);
   });
 
   it("keeps the selected categories the new language still has", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    store.oformsFilter.categoryIds = ["sc-10", "sc-20", "sc-gone"];
+    store.galleryFilter.categoryIds = ["sc-10", "sc-20", "sc-gone"];
     api.getGalleryTemplates.mockClear();
 
-    await store.filterOformsByLocale("de");
+    await store.filterGalleryByLocale("de");
 
-    expect(store.oformsFilter.categoryIds).toEqual(["sc-10"]);
+    expect(store.galleryFilter.categoryIds).toEqual(["sc-10"]);
     const [, requested] = api.getGalleryTemplates.mock.calls[0];
     expect(requested.categoryIds).toEqual(["sc-10"]);
   });
@@ -385,56 +387,56 @@ describe("OformsStore taxonomy loading", () => {
   });
 });
 
-describe("OformsStore list loading", () => {
+describe("TemplateGalleryStore list loading", () => {
   it("dims the list only while a filter change is pending", async () => {
     const store = createStore();
     const pending = deferred<TGalleryTemplatesList>();
     api.getGalleryTemplates.mockReturnValueOnce(pending.promise);
 
-    const refetch = store.refetchOforms(store.oformsFilter.clone());
+    const refetch = store.refetchGalleryTemplates(store.galleryFilter.clone());
 
-    expect(store.oformsIsLoading).toBe(true);
-    expect(store.oformsIsRefetching).toBe(true);
+    expect(store.galleryIsLoading).toBe(true);
+    expect(store.galleryIsRefetching).toBe(true);
 
     pending.resolve(list([1, 2]));
     await refetch;
 
-    expect(store.oformsIsLoading).toBe(false);
-    expect(store.oformsIsRefetching).toBe(false);
-    expect(store.oformFiles?.map(({ id }) => id)).toEqual([1, 2]);
+    expect(store.galleryIsLoading).toBe(false);
+    expect(store.galleryIsRefetching).toBe(false);
+    expect(store.galleryTemplates?.map(({ id }) => id)).toEqual([1, 2]);
   });
 
   it("does not dim the list while the next page loads", async () => {
     const store = createStore();
-    await store.fetchOforms(store.oformsFilter.clone());
-    store.oformsFilter.total = 4;
-    store.setOformFiles([template(1), template(2)]);
+    await store.fetchGalleryTemplates(store.galleryFilter.clone());
+    store.galleryFilter.total = 4;
+    store.setGalleryTemplates([template(1), template(2)]);
 
     const pending = deferred<TGalleryTemplatesList>();
     api.getGalleryTemplates.mockReturnValueOnce(pending.promise);
 
-    const more = store.fetchMoreOforms();
+    const more = store.fetchMoreGalleryTemplates();
 
-    expect(store.oformsIsLoading).toBe(true);
-    expect(store.oformsIsRefetching).toBe(false);
+    expect(store.galleryIsLoading).toBe(true);
+    expect(store.galleryIsRefetching).toBe(false);
 
     pending.resolve(list([3, 4], 4));
     await more;
 
-    expect(store.oformsIsLoading).toBe(false);
-    expect(store.oformFiles?.map(({ id }) => id)).toEqual([1, 2, 3, 4]);
+    expect(store.galleryIsLoading).toBe(false);
+    expect(store.galleryTemplates?.map(({ id }) => id)).toEqual([1, 2, 3, 4]);
   });
 
   it("does not paginate while a filter change is in flight", async () => {
     const store = createStore();
-    store.oformsFilter.total = 10;
-    store.setOformFiles([template(1)]);
+    store.galleryFilter.total = 10;
+    store.setGalleryTemplates([template(1)]);
 
     const pending = deferred<TGalleryTemplatesList>();
     api.getGalleryTemplates.mockReturnValueOnce(pending.promise);
-    const refetch = store.refetchOforms(store.oformsFilter.clone());
+    const refetch = store.refetchGalleryTemplates(store.galleryFilter.clone());
 
-    await store.fetchMoreOforms();
+    await store.fetchMoreGalleryTemplates();
 
     expect(api.getGalleryTemplates).toHaveBeenCalledTimes(1);
 
@@ -450,66 +452,66 @@ describe("OformsStore list loading", () => {
       .mockReturnValueOnce(slow.promise)
       .mockReturnValueOnce(fast.promise);
 
-    const slowFilter = store.oformsFilter.clone();
+    const slowFilter = store.galleryFilter.clone();
     slowFilter.search = "slow";
-    const fastFilter = store.oformsFilter.clone();
+    const fastFilter = store.galleryFilter.clone();
     fastFilter.search = "fast";
 
-    const first = store.refetchOforms(slowFilter);
-    const second = store.refetchOforms(fastFilter);
+    const first = store.refetchGalleryTemplates(slowFilter);
+    const second = store.refetchGalleryTemplates(fastFilter);
 
     fast.resolve(list([2]));
     await second;
     slow.resolve(list([1]));
     await first;
 
-    expect(store.oformFiles?.map(({ id }) => id)).toEqual([2]);
-    expect(store.oformsFilter.search).toBe("fast");
-    expect(store.oformsIsRefetching).toBe(false);
+    expect(store.galleryTemplates?.map(({ id }) => id)).toEqual([2]);
+    expect(store.galleryFilter.search).toBe("fast");
+    expect(store.galleryIsRefetching).toBe(false);
   });
 
   it("drops a page that belongs to a list already replaced", async () => {
     const store = createStore();
-    store.oformsFilter.total = 10;
-    store.setOformFiles([template(1)]);
+    store.galleryFilter.total = 10;
+    store.setGalleryTemplates([template(1)]);
 
     const page = deferred<TGalleryTemplatesList>();
     api.getGalleryTemplates.mockReturnValueOnce(page.promise);
-    const more = store.fetchMoreOforms();
+    const more = store.fetchMoreGalleryTemplates();
 
     api.getGalleryTemplates.mockResolvedValueOnce(list([5]));
-    await store.fetchOforms(store.oformsFilter.clone());
+    await store.fetchGalleryTemplates(store.galleryFilter.clone());
 
     page.resolve(list([2], 10));
     await more;
 
-    expect(store.oformFiles?.map(({ id }) => id)).toEqual([5]);
-    expect(store.oformsIsLoading).toBe(false);
+    expect(store.galleryTemplates?.map(({ id }) => id)).toEqual([5]);
+    expect(store.galleryIsLoading).toBe(false);
   });
 
   it("leaves the loading flag to the refetch that dropped a page", async () => {
     const store = createStore();
-    store.oformsFilter.total = 10;
-    store.setOformFiles([template(1)]);
+    store.galleryFilter.total = 10;
+    store.setGalleryTemplates([template(1)]);
 
     const page = deferred<TGalleryTemplatesList>();
     api.getGalleryTemplates.mockReturnValueOnce(page.promise);
-    const more = store.fetchMoreOforms();
+    const more = store.fetchMoreGalleryTemplates();
 
     const replacement = deferred<TGalleryTemplatesList>();
     api.getGalleryTemplates.mockReturnValueOnce(replacement.promise);
-    const refetch = store.refetchOforms(store.oformsFilter.clone());
+    const refetch = store.refetchGalleryTemplates(store.galleryFilter.clone());
 
     page.resolve(list([2], 10));
     await more;
 
-    expect(store.oformsIsLoading).toBe(true);
-    expect(store.oformFiles?.map(({ id }) => id)).toEqual([1]);
+    expect(store.galleryIsLoading).toBe(true);
+    expect(store.galleryTemplates?.map(({ id }) => id)).toEqual([1]);
 
     replacement.resolve(list([5]));
     await refetch;
 
-    expect(store.oformsIsLoading).toBe(false);
+    expect(store.galleryIsLoading).toBe(false);
   });
 
   it("dims the list while a tab switch reloads it", async () => {
@@ -519,15 +521,15 @@ describe("OformsStore list loading", () => {
 
     const reset = store.resetFilters(".xlsx");
 
-    expect(store.oformsIsLoading).toBe(true);
-    expect(store.oformsIsRefetching).toBe(true);
+    expect(store.galleryIsLoading).toBe(true);
+    expect(store.galleryIsRefetching).toBe(true);
 
     pending.resolve(list([3]));
     await reset;
 
-    expect(store.oformsIsLoading).toBe(false);
-    expect(store.oformsIsRefetching).toBe(false);
-    expect(store.oformFiles?.map(({ id }) => id)).toEqual([3]);
+    expect(store.galleryIsLoading).toBe(false);
+    expect(store.galleryIsRefetching).toBe(false);
+    expect(store.galleryTemplates?.map(({ id }) => id)).toEqual([3]);
   });
 
   it("undims the list when a tab switch outruns a filter change", async () => {
@@ -535,9 +537,9 @@ describe("OformsStore list loading", () => {
     const slow = deferred<TGalleryTemplatesList>();
     api.getGalleryTemplates.mockReturnValueOnce(slow.promise);
 
-    const searchFilter = store.oformsFilter.clone();
+    const searchFilter = store.galleryFilter.clone();
     searchFilter.search = "slow";
-    const refetch = store.refetchOforms(searchFilter);
+    const refetch = store.refetchGalleryTemplates(searchFilter);
 
     api.getGalleryTemplates.mockResolvedValueOnce(list([7]));
     await store.resetFilters(".xlsx");
@@ -545,22 +547,22 @@ describe("OformsStore list loading", () => {
     slow.resolve(list([1]));
     await refetch;
 
-    expect(store.oformFiles?.map(({ id }) => id)).toEqual([7]);
-    expect(store.oformsIsLoading).toBe(false);
-    expect(store.oformsIsRefetching).toBe(false);
+    expect(store.galleryTemplates?.map(({ id }) => id)).toEqual([7]);
+    expect(store.galleryIsLoading).toBe(false);
+    expect(store.galleryIsRefetching).toBe(false);
   });
 
   it("stops paginating when the list request fails", async () => {
     const store = createStore();
-    store.oformsFilter.total = 10;
-    store.setOformFiles([template(1)]);
+    store.galleryFilter.total = 10;
+    store.setGalleryTemplates([template(1)]);
 
     api.getGalleryTemplates.mockRejectedValueOnce({
       response: { status: 500 },
     });
-    await store.fetchOforms(store.oformsFilter.clone());
+    await store.fetchGalleryTemplates(store.galleryFilter.clone());
 
-    expect(store.oformsFilter.total).toBe(0);
+    expect(store.galleryFilter.total).toBe(0);
     expect(store.hasMoreForms).toBe(false);
   });
 
@@ -570,30 +572,30 @@ describe("OformsStore list loading", () => {
     api.getGalleryTemplates.mockRejectedValueOnce({
       response: { status: 403 },
     });
-    await store.fetchOforms(store.oformsFilter.clone());
+    await store.fetchGalleryTemplates(store.galleryFilter.clone());
 
-    expect(store.oformsLoadError).toBe(true);
-    expect(store.oformsNetworkError).toBe(false);
+    expect(store.galleryLoadError).toBe(true);
+    expect(store.galleryNetworkError).toBe(false);
   });
 
   it("tells a dead network apart from a refusing CMS", async () => {
     const store = createStore();
 
     api.getGalleryTemplates.mockRejectedValueOnce({ code: "ERR_NETWORK" });
-    await store.fetchOforms(store.oformsFilter.clone());
+    await store.fetchGalleryTemplates(store.galleryFilter.clone());
 
-    expect(store.oformsNetworkError).toBe(true);
-    expect(store.oformsLoadError).toBe(false);
+    expect(store.galleryNetworkError).toBe(true);
+    expect(store.galleryLoadError).toBe(false);
   });
 
   it("answers the locales request with an empty list when it fails", async () => {
     const store = createStore();
-    store.setOformLocales(null);
+    store.setGalleryLocales(null);
 
     api.getGalleryLocales.mockRejectedValueOnce({ response: { status: 403 } });
-    await store.fetchOformLocales();
+    await store.fetchGalleryLocales();
 
-    expect(store.oformLocales).toEqual([]);
+    expect(store.galleryLocales).toEqual([]);
   });
 
   it("raises the error screen when the CMS answers with the previous contract", async () => {
@@ -602,9 +604,9 @@ describe("OformsStore list loading", () => {
     api.getGalleryTemplates.mockRejectedValueOnce(
       new TemplateGalleryContractError(),
     );
-    await store.fetchOforms(store.oformsFilter.clone());
+    await store.fetchGalleryTemplates(store.galleryFilter.clone());
 
-    expect(store.oformsLoadError).toBe(true);
-    expect(store.oformFiles).toEqual([]);
+    expect(store.galleryLoadError).toBe(true);
+    expect(store.galleryTemplates).toEqual([]);
   });
 });

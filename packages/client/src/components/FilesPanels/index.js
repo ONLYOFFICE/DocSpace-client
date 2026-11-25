@@ -502,7 +502,7 @@ export default inject(
     currentQuotaStore,
     filesActionsStore,
     filesStore,
-    oformsStore,
+    templateGalleryStore,
     filesSettingsStore,
     aiProjectsStore,
     selectedFolderStore,
@@ -607,7 +607,7 @@ export default inject(
     } = pluginStore;
 
     const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
-      oformsStore;
+      templateGalleryStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {

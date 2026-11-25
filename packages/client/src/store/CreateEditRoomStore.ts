@@ -83,7 +83,7 @@ import ClientLoadingStore from "./ClientLoadingStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import DialogsStore from "./DialogsStore";
 import FilesActionsStore from "./FilesActionsStore";
-import type OformsStore from "./OformsStore";
+import type TemplateGalleryStore from "./TemplateGalleryStore";
 import SelectedFolderStore from "./SelectedFolderStore";
 import TagsStore from "./TagsStore";
 import { ThirdPartyStore } from "./ThirdPartyStore";
@@ -123,7 +123,7 @@ class CreateEditRoomStore {
     public clientLoadingStore: ClientLoadingStore,
     public dialogsStore: DialogsStore,
     public avatarEditorDialogStore: AvatarEditorDialogStore,
-    public oformsStore: OformsStore,
+    public templateGalleryStore: TemplateGalleryStore,
   ) {
     makeAutoObservable(this);
   }
@@ -828,7 +828,7 @@ class CreateEditRoomStore {
   // picked, so this is the only call the flow makes for the form itself.
   createFormFromTemplate = async (room: TRoom) => {
     const { formTemplateForNewRoom, setFormTemplateForNewRoom } =
-      this.oformsStore;
+      this.templateGalleryStore;
 
     if (!formTemplateForNewRoom) return;
 

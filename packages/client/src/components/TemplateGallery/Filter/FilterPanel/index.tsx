@@ -62,17 +62,17 @@ const FilterPanel: FC<FilterPanelProps> = ({
   t,
   isLoading,
   viewMobile,
-  oformLocales,
+  galleryLocales,
   locale,
   purposes,
   purpose,
   parentCategories,
   categoryIds,
-  isOformsFilterChanged,
-  filterOformsByLocaleIsLoading,
-  filterOformsByLocale,
-  filterOformsByPurpose,
-  toggleOformsCategory,
+  isGalleryFilterChanged,
+  filterGalleryByLocaleIsLoading,
+  filterGalleryByLocale,
+  filterGalleryByPurpose,
+  toggleGalleryCategory,
   isOpen,
   setIsOpen,
 }) => {
@@ -104,8 +104,8 @@ const FilterPanel: FC<FilterPanelProps> = ({
   useEventListener("mousedown", onOutsideMouseDown);
 
   const languageOptions = useMemo(
-    () => mapCulturesToArray((oformLocales ?? []).map(toCulture), false),
-    [oformLocales],
+    () => mapCulturesToArray((galleryLocales ?? []).map(toCulture), false),
+    [galleryLocales],
   );
 
   if (isLoading) return <RectangleSkeleton width="32px" height="32px" />;
@@ -116,15 +116,15 @@ const FilterPanel: FC<FilterPanelProps> = ({
 
   const onSelectLanguage = (option: TOption) => {
     const { index } = option as TOption & { index?: number };
-    if (typeof index !== "number" || !oformLocales) return;
+    if (typeof index !== "number" || !galleryLocales) return;
 
-    const nextLocale = oformLocales[index];
-    if (nextLocale !== locale) filterOformsByLocale(nextLocale);
+    const nextLocale = galleryLocales[index];
+    if (nextLocale !== locale) filterGalleryByLocale(nextLocale);
   };
 
   const onSelectPurpose = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    filterOformsByPurpose(value === ALL_PURPOSES ? "" : value);
+    filterGalleryByPurpose(value === ALL_PURPOSES ? "" : value);
   };
 
   const purposeOptions = [
@@ -132,7 +132,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
     ...purposes.map(({ key, name }) => ({ value: key, label: name })),
   ];
 
-  const isDisabled = filterOformsByLocaleIsLoading;
+  const isDisabled = filterGalleryByLocaleIsLoading;
 
   return (
     <div className={styles.filterPanelRoot}>
@@ -141,7 +141,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
           id="template-gallery-filter"
           title={t("Common:Filter")}
           onClick={onToggle}
-          isShowIndicator={isOformsFilterChanged}
+          isShowIndicator={isGalleryFilterChanged}
           dataTestId="template_gallery_filter_button"
         />
       </div>
@@ -206,7 +206,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
                     key={documentId}
                     label={name}
                     isChecked={categoryIds.includes(documentId)}
-                    onChange={() => toggleOformsCategory(documentId)}
+                    onChange={() => toggleGalleryCategory(documentId)}
                     isDisabled={isDisabled}
                     dataTestId={`template_gallery_category_${documentId}`}
                   />
@@ -220,20 +220,21 @@ const FilterPanel: FC<FilterPanelProps> = ({
   );
 };
 
-const injectStores = ({ oformsStore }: TStore) => ({
-  oformLocales: oformsStore.oformLocales,
-  locale: oformsStore.oformsFilter.locale ?? "",
-  purposes: oformsStore.purposes,
-  purpose: oformsStore.oformsFilter.purpose,
-  parentCategories: oformsStore.parentCategories,
-  categoryIds: oformsStore.oformsFilter.categoryIds,
-  isOformsFilterChanged: oformsStore.isOformsFilterChanged,
-  filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
-  filterOformsByLocale: oformsStore.filterOformsByLocale,
-  filterOformsByPurpose: oformsStore.filterOformsByPurpose,
-  toggleOformsCategory: oformsStore.toggleOformsCategory,
-  isOpen: oformsStore.filterPanelVisible,
-  setIsOpen: oformsStore.setFilterPanelVisible,
+const injectStores = ({ templateGalleryStore }: TStore) => ({
+  galleryLocales: templateGalleryStore.galleryLocales,
+  locale: templateGalleryStore.galleryFilter.locale ?? "",
+  purposes: templateGalleryStore.purposes,
+  purpose: templateGalleryStore.galleryFilter.purpose,
+  parentCategories: templateGalleryStore.parentCategories,
+  categoryIds: templateGalleryStore.galleryFilter.categoryIds,
+  isGalleryFilterChanged: templateGalleryStore.isGalleryFilterChanged,
+  filterGalleryByLocaleIsLoading:
+    templateGalleryStore.filterGalleryByLocaleIsLoading,
+  filterGalleryByLocale: templateGalleryStore.filterGalleryByLocale,
+  filterGalleryByPurpose: templateGalleryStore.filterGalleryByPurpose,
+  toggleGalleryCategory: templateGalleryStore.toggleGalleryCategory,
+  isOpen: templateGalleryStore.filterPanelVisible,
+  setIsOpen: templateGalleryStore.setFilterPanelVisible,
 });
 
 export default withoutInjected<

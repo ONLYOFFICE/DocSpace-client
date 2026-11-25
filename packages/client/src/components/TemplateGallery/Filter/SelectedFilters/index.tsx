@@ -55,14 +55,14 @@ const SelectedFilters: FC<SelectedFiltersProps> = ({
   onHeightChange,
   locale,
   isLocaleChanged,
-  defaultOformLocale,
+  defaultGalleryLocale,
   selectedPurpose,
   selectedCategories,
-  filterOformsByLocaleIsLoading,
-  filterOformsByLocale,
-  filterOformsByPurpose,
-  removeOformsCategory,
-  clearOformsFilter,
+  filterGalleryByLocaleIsLoading,
+  filterGalleryByLocale,
+  filterGalleryByPurpose,
+  removeGalleryCategory,
+  clearGalleryFilter,
 }) => {
   const rowRef = useRef<HTMLDivElement>(null);
 
@@ -118,17 +118,17 @@ const SelectedFilters: FC<SelectedFiltersProps> = ({
   if (!hasItems) return null;
 
   const onRemove = (key: string | number, _label: unknown, group?: string) => {
-    if (filterOformsByLocaleIsLoading) return;
+    if (filterGalleryByLocaleIsLoading) return;
 
     switch (group) {
       case LANGUAGE_GROUP:
-        filterOformsByLocale(defaultOformLocale);
+        filterGalleryByLocale(defaultGalleryLocale);
         break;
       case PURPOSE_GROUP:
-        filterOformsByPurpose("");
+        filterGalleryByPurpose("");
         break;
       default:
-        removeOformsCategory(String(key));
+        removeGalleryCategory(String(key));
     }
   };
 
@@ -148,7 +148,7 @@ const SelectedFilters: FC<SelectedFiltersProps> = ({
           onClose={onRemove}
           onClick={onRemove}
           isInline
-          isDisabled={filterOformsByLocaleIsLoading}
+          isDisabled={filterGalleryByLocaleIsLoading}
           dataTestId={`template_gallery_selected_${item.group}_${item.key}`}
         />
       ))}
@@ -159,7 +159,7 @@ const SelectedFilters: FC<SelectedFiltersProps> = ({
           fontWeight={600}
           isSemitransparent
           type={LinkType.action}
-          onClick={clearOformsFilter}
+          onClick={clearGalleryFilter}
           dataTestId="template_gallery_clear_all"
         >
           {t("Common:ClearAll")}
@@ -169,17 +169,18 @@ const SelectedFilters: FC<SelectedFiltersProps> = ({
   );
 };
 
-const injectStores = ({ oformsStore }: TStore) => ({
-  locale: oformsStore.oformsFilter.locale ?? "",
-  isLocaleChanged: oformsStore.isLocaleChanged,
-  defaultOformLocale: oformsStore.defaultOformLocale,
-  selectedPurpose: oformsStore.selectedPurpose,
-  selectedCategories: oformsStore.selectedCategories,
-  filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
-  filterOformsByLocale: oformsStore.filterOformsByLocale,
-  filterOformsByPurpose: oformsStore.filterOformsByPurpose,
-  removeOformsCategory: oformsStore.removeOformsCategory,
-  clearOformsFilter: oformsStore.clearOformsFilter,
+const injectStores = ({ templateGalleryStore }: TStore) => ({
+  locale: templateGalleryStore.galleryFilter.locale ?? "",
+  isLocaleChanged: templateGalleryStore.isLocaleChanged,
+  defaultGalleryLocale: templateGalleryStore.defaultGalleryLocale,
+  selectedPurpose: templateGalleryStore.selectedPurpose,
+  selectedCategories: templateGalleryStore.selectedCategories,
+  filterGalleryByLocaleIsLoading:
+    templateGalleryStore.filterGalleryByLocaleIsLoading,
+  filterGalleryByLocale: templateGalleryStore.filterGalleryByLocale,
+  filterGalleryByPurpose: templateGalleryStore.filterGalleryByPurpose,
+  removeGalleryCategory: templateGalleryStore.removeGalleryCategory,
+  clearGalleryFilter: templateGalleryStore.clearGalleryFilter,
 });
 
 export default withoutInjected<

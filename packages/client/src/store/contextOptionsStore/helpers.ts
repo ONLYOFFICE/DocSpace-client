@@ -357,7 +357,9 @@ export const onShowWaitOperationToast = (t: TTranslation) => {
   toastr.warning(t("Files:WaitOperation"));
 };
 
-export const onSuggestOformChanges = (item: { title?: string } | null) => {
+export const onSuggestGalleryTemplateChanges = (
+  item: { title?: string } | null,
+) => {
   const formTitle = item?.title;
 
   // Without a template to name, the subject stays generic: interpolating an

@@ -62,7 +62,7 @@ describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
     const setIsVisibleInfoPanelTemplateGallery = vi.fn();
     const dispatchEvent = vi.spyOn(window, "dispatchEvent");
     const store = createTestContextOptionsStore({
-      oformsStore: {
+      templateGalleryStore: {
         setIsVisibleInfoPanelTemplateGallery,
         currentExtensionGallery: ".docx",
         gallerySelected: { title: "Form" },
@@ -81,7 +81,7 @@ describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
     const dispatchEvent = vi.spyOn(window, "dispatchEvent");
 
     const store = createTestContextOptionsStore({
-      oformsStore: {
+      templateGalleryStore: {
         setIsVisibleInfoPanelTemplateGallery: vi.fn(),
         setTemplateGalleryVisible,
         setFormTemplateForNewRoom,
@@ -121,7 +121,7 @@ describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
   it("onCreateTemplate no-ops once the gallery selection has been consumed", async () => {
     const dispatchEvent = vi.spyOn(window, "dispatchEvent");
     const store = createTestContextOptionsStore({
-      oformsStore: {
+      templateGalleryStore: {
         setIsVisibleInfoPanelTemplateGallery: vi.fn(),
         createRoomFromTemplate: false,
         currentExtensionGallery: ".pdf",

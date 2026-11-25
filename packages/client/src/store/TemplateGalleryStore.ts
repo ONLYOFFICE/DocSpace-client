@@ -65,7 +65,7 @@ type TTreeFoldersStore = {
 
 const myDocumentsFolderId = 2;
 
-class OformsStore {
+class TemplateGalleryStore {
   settingsStore: SettingsStore;
 
   treeFoldersStore: TTreeFoldersStore;
@@ -74,40 +74,40 @@ class OformsStore {
   // constructor immediately assigns the real store.
   userStore: UserStore = null!;
 
-  oformFiles: TGalleryTemplate[] | null = null;
+  galleryTemplates: TGalleryTemplate[] | null = null;
 
   gallerySelected: TGalleryTemplate | null = null;
 
-  oformsIsLoading = false;
+  galleryIsLoading = false;
 
-  oformsIsRefetching = false;
+  galleryIsRefetching = false;
 
   listRequestId = 0;
 
   purposesRequestId = 0;
 
-  oformsLoadError = false;
+  galleryLoadError = false;
 
-  oformsNetworkError = false;
+  galleryNetworkError = false;
 
-  oformsFilter: TemplateGalleryFilter = TemplateGalleryFilter.getDefault();
+  galleryFilter: TemplateGalleryFilter = TemplateGalleryFilter.getDefault();
 
-  oformFromFolderId: number | string = myDocumentsFolderId;
+  galleryFromFolderId: number | string = myDocumentsFolderId;
 
   // The whole taxonomy of the CMS, fetched in one request per gallery locale
   // and file type: purpose (Business / Personal) -> parent category ->
   // subcategory.
   purposes: TGalleryPurpose[] = [];
 
-  oformLocales: string[] | null = null;
+  galleryLocales: string[] | null = null;
 
-  filterOformsByLocaleIsLoading = false;
+  filterGalleryByLocaleIsLoading = false;
 
   categoryFilterLoaded = false;
 
   languageFilterLoaded = false;
 
-  oformFilesLoaded = false;
+  galleryTemplatesLoaded = false;
 
   templateGalleryVisible = false;
 
@@ -143,48 +143,48 @@ class OformsStore {
     makeAutoObservable(this, { listRequestId: false });
   }
 
-  get defaultOformLocale() {
+  get defaultGalleryLocale() {
     const userLocale = getCookie(LANGUAGE) || this.userStore.user?.cultureName;
     const convertedLocale = convertToLanguage(userLocale);
 
     // `includes(convertedLocale)` is only true when `convertedLocale` is a
     // string, so the assertions below are safe and keep the original logic.
-    const locale = this.oformLocales?.includes(convertedLocale as string)
+    const locale = this.galleryLocales?.includes(convertedLocale as string)
       ? (convertedLocale as string)
-      : this.oformLocales?.includes(this.settingsStore.culture)
+      : this.galleryLocales?.includes(this.settingsStore.culture)
         ? this.settingsStore.culture
         : "en";
 
     return locale;
   }
 
-  setOformFiles = (oformFiles: TGalleryTemplate[] | null) =>
-    (this.oformFiles = oformFiles);
+  setGalleryTemplates = (galleryTemplates: TGalleryTemplate[] | null) =>
+    (this.galleryTemplates = galleryTemplates);
 
-  setOformsFilter = (oformsFilter: TemplateGalleryFilter) =>
-    (this.oformsFilter = oformsFilter);
+  setGalleryFilter = (galleryFilter: TemplateGalleryFilter) =>
+    (this.galleryFilter = galleryFilter);
 
-  setOformFromFolderId = (oformFromFolderId: number | string) => {
-    this.oformFromFolderId = oformFromFolderId;
+  setGalleryFromFolderId = (galleryFromFolderId: number | string) => {
+    this.galleryFromFolderId = galleryFromFolderId;
   };
 
-  setOformsIsLoading = (oformsIsLoading: boolean) =>
-    (this.oformsIsLoading = oformsIsLoading);
+  setGalleryIsLoading = (galleryIsLoading: boolean) =>
+    (this.galleryIsLoading = galleryIsLoading);
 
-  setOformsIsRefetching = (oformsIsRefetching: boolean) =>
-    (this.oformsIsRefetching = oformsIsRefetching);
+  setGalleryIsRefetching = (galleryIsRefetching: boolean) =>
+    (this.galleryIsRefetching = galleryIsRefetching);
 
   setGallerySelected = (gallerySelected: TGalleryTemplate | null) => {
     this.gallerySelected = gallerySelected;
   };
 
-  setOformLocales = (oformLocales: string[] | null) =>
-    (this.oformLocales = oformLocales);
+  setGalleryLocales = (galleryLocales: string[] | null) =>
+    (this.galleryLocales = galleryLocales);
 
-  setFilterOformsByLocaleIsLoading = (
-    filterOformsByLocaleIsLoading: boolean,
+  setFilterGalleryByLocaleIsLoading = (
+    filterGalleryByLocaleIsLoading: boolean,
   ) => {
-    this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
+    this.filterGalleryByLocaleIsLoading = filterGalleryByLocaleIsLoading;
   };
 
   setCategoryFilterLoaded = (categoryFilterLoaded: boolean) => {
@@ -195,8 +195,8 @@ class OformsStore {
     this.languageFilterLoaded = languageFilterLoaded;
   };
 
-  setOformFilesLoaded = (oformFilesLoaded: boolean) => {
-    this.oformFilesLoaded = oformFilesLoaded;
+  setGalleryTemplatesLoaded = (galleryTemplatesLoaded: boolean) => {
+    this.galleryTemplatesLoaded = galleryTemplatesLoaded;
   };
 
   setIsVisibleInfoPanelTemplateGallery = (
@@ -210,7 +210,7 @@ class OformsStore {
   };
 
   setFormTemplateForNewRoom = (
-    formTemplateForNewRoom: OformsStore["formTemplateForNewRoom"],
+    formTemplateForNewRoom: TemplateGalleryStore["formTemplateForNewRoom"],
   ) => {
     this.formTemplateForNewRoom = formTemplateForNewRoom;
   };
@@ -226,39 +226,39 @@ class OformsStore {
    * taxonomy and the locale list live next to it, so the collection segment is
    * dropped: `.../dashboard/api/oforms/` -> `.../dashboard/api`.
    */
-  get oformsApiRoot() {
+  get galleryApiRoot() {
     const { domain, path } = this.settingsStore.templateGallery;
 
     return combineUrl(domain, path.replace(/\/*oforms\/*$/, ""));
   }
 
-  get oformsApiUrl() {
+  get galleryApiUrl() {
     const { domain, path } = this.settingsStore.templateGallery;
 
     return combineUrl(domain, path);
   }
 
-  fetchOformLocales = async () => {
-    const url = combineUrl(this.oformsApiRoot, "/i18n/locales");
+  fetchGalleryLocales = async () => {
+    const url = combineUrl(this.galleryApiRoot, "/i18n/locales");
 
     try {
-      this.setOformLocales(await getGalleryLocales(url));
+      this.setGalleryLocales(await getGalleryLocales(url));
     } catch {
       // An empty list is the answer the language filter renders from; the
       // failure itself reaches the user through the error screen the list
       // request raises, so it is not toasted on top of it.
-      this.setOformLocales([]);
+      this.setGalleryLocales([]);
     }
   };
 
-  getOforms = async (
+  requestGalleryTemplates = async (
     filter: TemplateGalleryFilter = TemplateGalleryFilter.getDefault(),
   ) => {
     try {
-      const oforms = await getGalleryTemplates(this.oformsApiUrl, filter);
-      this.oformsLoadError = false;
-      this.oformsNetworkError = false;
-      return oforms;
+      const templates = await getGalleryTemplates(this.galleryApiUrl, filter);
+      this.galleryLoadError = false;
+      this.galleryNetworkError = false;
+      return templates;
     } catch (err) {
       // Every way the catalog can fail ends on the same error screen: a
       // status this code does not enumerate (403 from the CDN in front of the
@@ -267,9 +267,9 @@ class OformsStore {
       const isNetworkError = (err as AxiosError)?.code === "ERR_NETWORK";
 
       if (isNetworkError) {
-        this.oformsNetworkError = true;
+        this.galleryNetworkError = true;
       } else {
-        this.oformsLoadError = true;
+        this.galleryLoadError = true;
       }
     }
 
@@ -279,36 +279,36 @@ class OformsStore {
   // A failed request leaves no list to paginate: keeping the previous total
   // would make `hasMoreForms` true against an empty list and let the grid
   // retry the same failing page on every scroll.
-  applyOformsList = (
+  applyGalleryTemplatesList = (
     filter: TemplateGalleryFilter,
-    oformData: TGalleryTemplatesList | null,
+    galleryData: TGalleryTemplatesList | null,
   ) => {
-    if (oformData) {
-      filter.page = oformData.pagination.page;
-      filter.total = oformData.pagination.total;
+    if (galleryData) {
+      filter.page = galleryData.pagination.page;
+      filter.total = galleryData.pagination.total;
     } else {
       filter.total = 0;
     }
 
-    return oformData?.templates ?? [];
+    return galleryData?.templates ?? [];
   };
 
-  fetchOforms = async (
+  fetchGalleryTemplates = async (
     filter: TemplateGalleryFilter = TemplateGalleryFilter.getDefault(),
   ) => {
     this.listRequestId += 1;
     const requestId = this.listRequestId;
 
-    const oformData = await this.getOforms(filter);
+    const galleryData = await this.requestGalleryTemplates(filter);
     if (requestId !== this.listRequestId) return false;
 
-    const templates = this.applyOformsList(filter, oformData);
+    const templates = this.applyGalleryTemplatesList(filter, galleryData);
 
     runInAction(() => {
-      this.setOformsFilter(filter);
-      this.setOformFiles(templates);
-      this.setOformsIsLoading(false);
-      this.setOformsIsRefetching(false);
+      this.setGalleryFilter(filter);
+      this.setGalleryTemplates(templates);
+      this.setGalleryIsLoading(false);
+      this.setGalleryIsRefetching(false);
     });
 
     return true;
@@ -317,30 +317,30 @@ class OformsStore {
   /**
    * A filter change refetches the list in place: the tiles already on screen
    * stay, dimmed, until the answer arrives. The loading flag also keeps
-   * `fetchMoreOforms` from paginating a list that is being replaced.
+   * `fetchMoreGalleryTemplates` from paginating a list that is being replaced.
    *
-   * Both flags are cleared by whichever `fetchOforms` turns out to be the
-   * latest one, not here: a superseded refetch must leave them raised for the
-   * request that replaced it, and that request can just as well come from an
-   * entry point that never went through `refetchOforms` (a tab switch, the
-   * first load).
+   * Both flags are cleared by whichever `fetchGalleryTemplates` turns out to be
+   * the latest one, not here: a superseded refetch must leave them raised for
+   * the request that replaced it, and that request can just as well come from
+   * an entry point that never went through `refetchGalleryTemplates` (a tab
+   * switch, the first load).
    */
-  refetchOforms = async (filter: TemplateGalleryFilter) => {
-    this.setOformsIsLoading(true);
-    this.setOformsIsRefetching(true);
+  refetchGalleryTemplates = async (filter: TemplateGalleryFilter) => {
+    this.setGalleryIsLoading(true);
+    this.setGalleryIsRefetching(true);
 
-    await this.fetchOforms(filter);
+    await this.fetchGalleryTemplates(filter);
   };
 
-  fetchMoreOforms = async () => {
-    if (!this.hasMoreForms || this.oformsIsLoading) return;
-    this.setOformsIsLoading(true);
+  fetchMoreGalleryTemplates = async () => {
+    if (!this.hasMoreForms || this.galleryIsLoading) return;
+    this.setGalleryIsLoading(true);
 
     const requestId = this.listRequestId;
-    const newOformsFilter = this.oformsFilter.clone();
-    newOformsFilter.page += 1;
+    const newGalleryFilter = this.galleryFilter.clone();
+    newGalleryFilter.page += 1;
 
-    const oformData = await this.getOforms(newOformsFilter);
+    const galleryData = await this.requestGalleryTemplates(newGalleryFilter);
 
     runInAction(() => {
       // A page of a list that has already been replaced is dropped whole,
@@ -349,10 +349,13 @@ class OformsStore {
       // that list while it is still being fetched.
       if (requestId !== this.listRequestId) return;
 
-      const newForms = this.applyOformsList(newOformsFilter, oformData);
-      this.setOformsFilter(newOformsFilter);
-      this.setOformFiles([...(this.oformFiles || []), ...newForms]);
-      this.setOformsIsLoading(false);
+      const newForms = this.applyGalleryTemplatesList(
+        newGalleryFilter,
+        galleryData,
+      );
+      this.setGalleryFilter(newGalleryFilter);
+      this.setGalleryTemplates([...(this.galleryTemplates || []), ...newForms]);
+      this.setGalleryIsLoading(false);
     });
   };
 
@@ -386,7 +389,7 @@ class OformsStore {
    * and picking one could only ever end in an empty screen.
    */
   get parentCategories(): TGalleryParentCategory[] {
-    const { purpose, locale } = this.oformsFilter;
+    const { purpose, locale } = this.galleryFilter;
 
     return this.purposes
       .filter(({ key }) => !purpose || key === purpose)
@@ -402,7 +405,7 @@ class OformsStore {
   }
 
   get selectedCategories(): TGalleryParentCategory[] {
-    const { categoryIds } = this.oformsFilter;
+    const { categoryIds } = this.galleryFilter;
 
     return this.parentCategories.filter(({ documentId }) =>
       categoryIds.includes(documentId),
@@ -410,22 +413,22 @@ class OformsStore {
   }
 
   get selectedPurpose(): TGalleryPurpose | null {
-    const { purpose } = this.oformsFilter;
+    const { purpose } = this.galleryFilter;
 
     return this.purposes.find(({ key }) => key === purpose) ?? null;
   }
 
   get isLocaleChanged() {
-    const { locale } = this.oformsFilter;
+    const { locale } = this.galleryFilter;
 
-    return !!locale && locale !== this.defaultOformLocale;
+    return !!locale && locale !== this.defaultGalleryLocale;
   }
 
-  get isOformsFilterChanged() {
+  get isGalleryFilterChanged() {
     return (
       this.isLocaleChanged ||
-      !!this.oformsFilter.purpose ||
-      this.oformsFilter.categoryIds.length > 0
+      !!this.galleryFilter.purpose ||
+      this.galleryFilter.categoryIds.length > 0
     );
   }
 
@@ -442,7 +445,7 @@ class OformsStore {
   };
 
   fetchPurposes = async (locale: string, extension: string) => {
-    const url = combineUrl(this.oformsApiRoot, "/purposes");
+    const url = combineUrl(this.galleryApiRoot, "/purposes");
 
     this.purposesRequestId += 1;
     const requestId = this.purposesRequestId;
@@ -466,129 +469,129 @@ class OformsStore {
     });
   };
 
-  fetchOformsWithPurposes = (filter: TemplateGalleryFilter) =>
+  fetchGalleryTemplatesWithPurposes = (filter: TemplateGalleryFilter) =>
     Promise.all([
-      this.fetchOforms(filter),
+      this.fetchGalleryTemplates(filter),
       this.fetchPurposes(
-        filter.locale ?? this.defaultOformLocale,
+        filter.locale ?? this.defaultGalleryLocale,
         filter.extension,
       ),
     ]);
 
-  filterOformsByCategories = (categoryIds: string[]) => {
-    this.oformsFilter.page = 1;
-    this.oformsFilter.categoryIds = categoryIds;
-    const newOformsFilter = this.oformsFilter.clone();
+  filterGalleryByCategories = (categoryIds: string[]) => {
+    this.galleryFilter.page = 1;
+    this.galleryFilter.categoryIds = categoryIds;
+    const newGalleryFilter = this.galleryFilter.clone();
 
-    runInAction(() => this.refetchOforms(newOformsFilter));
+    runInAction(() => this.refetchGalleryTemplates(newGalleryFilter));
   };
 
-  toggleOformsCategory = (categoryId: string) => {
-    const { categoryIds } = this.oformsFilter;
+  toggleGalleryCategory = (categoryId: string) => {
+    const { categoryIds } = this.galleryFilter;
 
-    this.filterOformsByCategories(
+    this.filterGalleryByCategories(
       categoryIds.includes(categoryId)
         ? categoryIds.filter((id) => id !== categoryId)
         : [...categoryIds, categoryId],
     );
   };
 
-  removeOformsCategory = (categoryId: string) => {
-    const { categoryIds } = this.oformsFilter;
+  removeGalleryCategory = (categoryId: string) => {
+    const { categoryIds } = this.galleryFilter;
     if (!categoryIds.includes(categoryId)) return;
 
-    this.filterOformsByCategories(
+    this.filterGalleryByCategories(
       categoryIds.filter((id) => id !== categoryId),
     );
   };
 
   // Every purpose owns its own category groups, so only the selected
   // categories of the new purpose survive the switch.
-  filterOformsByPurpose = (purpose: string) => {
-    this.oformsFilter.page = 1;
-    this.oformsFilter.categoryIds = this.getAvailableCategoryIds(
-      this.oformsFilter.categoryIds,
+  filterGalleryByPurpose = (purpose: string) => {
+    this.galleryFilter.page = 1;
+    this.galleryFilter.categoryIds = this.getAvailableCategoryIds(
+      this.galleryFilter.categoryIds,
       purpose,
     );
-    this.oformsFilter.purpose = purpose;
-    const newOformsFilter = this.oformsFilter.clone();
+    this.galleryFilter.purpose = purpose;
+    const newGalleryFilter = this.galleryFilter.clone();
 
-    runInAction(() => this.refetchOforms(newOformsFilter));
+    runInAction(() => this.refetchGalleryTemplates(newGalleryFilter));
   };
 
-  filterOformsByLocale = async (locale: string) => {
+  filterGalleryByLocale = async (locale: string) => {
     if (!locale) return;
 
-    if (locale !== this.oformsFilter.locale)
-      this.setFilterOformsByLocaleIsLoading(true);
+    if (locale !== this.galleryFilter.locale)
+      this.setFilterGalleryByLocaleIsLoading(true);
 
-    this.oformsFilter.page = 1;
-    this.oformsFilter.locale = locale;
-    const newOformsFilter = this.oformsFilter.clone();
+    this.galleryFilter.page = 1;
+    this.galleryFilter.locale = locale;
+    const newGalleryFilter = this.galleryFilter.clone();
 
     try {
-      if (!newOformsFilter.categoryIds.length) {
+      if (!newGalleryFilter.categoryIds.length) {
         await Promise.all([
-          this.fetchPurposes(locale, newOformsFilter.extension),
-          this.refetchOforms(newOformsFilter),
+          this.fetchPurposes(locale, newGalleryFilter.extension),
+          this.refetchGalleryTemplates(newGalleryFilter),
         ]);
         return;
       }
 
-      await this.fetchPurposes(locale, newOformsFilter.extension);
+      await this.fetchPurposes(locale, newGalleryFilter.extension);
 
-      newOformsFilter.categoryIds = this.getAvailableCategoryIds(
-        newOformsFilter.categoryIds,
-        newOformsFilter.purpose,
+      newGalleryFilter.categoryIds = this.getAvailableCategoryIds(
+        newGalleryFilter.categoryIds,
+        newGalleryFilter.purpose,
       );
       runInAction(() => {
-        this.oformsFilter.categoryIds = newOformsFilter.categoryIds;
+        this.galleryFilter.categoryIds = newGalleryFilter.categoryIds;
       });
 
-      await this.refetchOforms(newOformsFilter);
+      await this.refetchGalleryTemplates(newGalleryFilter);
     } finally {
-      this.setFilterOformsByLocaleIsLoading(false);
+      this.setFilterGalleryByLocaleIsLoading(false);
     }
   };
 
-  clearOformsFilter = async () => {
-    if (!this.isOformsFilterChanged || this.filterOformsByLocaleIsLoading)
+  clearGalleryFilter = async () => {
+    if (!this.isGalleryFilterChanged || this.filterGalleryByLocaleIsLoading)
       return;
 
-    const locale = this.defaultOformLocale;
+    const locale = this.defaultGalleryLocale;
 
     if (this.isLocaleChanged) {
-      this.oformsFilter.purpose = "";
-      this.oformsFilter.categoryIds = [];
-      await this.filterOformsByLocale(locale);
+      this.galleryFilter.purpose = "";
+      this.galleryFilter.categoryIds = [];
+      await this.filterGalleryByLocale(locale);
       return;
     }
 
-    this.oformsFilter.page = 1;
-    this.oformsFilter.purpose = "";
-    this.oformsFilter.categoryIds = [];
+    this.galleryFilter.page = 1;
+    this.galleryFilter.purpose = "";
+    this.galleryFilter.categoryIds = [];
 
-    await this.refetchOforms(this.oformsFilter.clone());
+    await this.refetchGalleryTemplates(this.galleryFilter.clone());
   };
 
-  filterOformsBySearch = (search: string) => {
-    this.oformsFilter.page = 1;
-    this.oformsFilter.search = search;
-    const newOformsFilter = this.oformsFilter.clone();
+  filterGalleryBySearch = (search: string) => {
+    this.galleryFilter.page = 1;
+    this.galleryFilter.search = search;
+    const newGalleryFilter = this.galleryFilter.clone();
 
-    runInAction(() => this.refetchOforms(newOformsFilter));
+    runInAction(() => this.refetchGalleryTemplates(newGalleryFilter));
   };
 
   initTemplateGallery = async () => {
-    await this.fetchOformLocales();
+    await this.fetchGalleryLocales();
 
     const firstLoadFilter = this.isFormsOnlyGallery
       ? TemplateGalleryFilter.getDefault()
       : TemplateGalleryFilter.getDefaultDocx();
 
-    firstLoadFilter.locale = this.defaultOformLocale;
+    firstLoadFilter.locale = this.defaultGalleryLocale;
 
-    await this.fetchOformsWithPurposes(firstLoadFilter);
+    await this.fetchGalleryTemplatesWithPurposes(firstLoadFilter);
   };
 
   resetFilters = async (ext?: string) => {
@@ -603,14 +606,14 @@ class OformsStore {
             ? TemplateGalleryFilter.getDefaultPresentation()
             : TemplateGalleryFilter.getDefault();
 
-    defaultFilter.locale = this.defaultOformLocale;
+    defaultFilter.locale = this.defaultGalleryLocale;
 
     // Switching a tab and clearing a filter both replace the list in place,
     // so they dim the tiles the same way a filter change does.
-    this.setOformsIsLoading(true);
-    this.setOformsIsRefetching(true);
+    this.setGalleryIsLoading(true);
+    this.setGalleryIsRefetching(true);
 
-    await this.fetchOformsWithPurposes(defaultFilter);
+    await this.fetchGalleryTemplatesWithPurposes(defaultFilter);
   };
 
   setTemplateGalleryVisible = (templateGalleryVisible: boolean) => {
@@ -634,16 +637,19 @@ class OformsStore {
   };
 
   get hasGalleryFiles() {
-    return this.oformFiles && !!this.oformFiles.length;
+    return this.galleryTemplates && !!this.galleryTemplates.length;
   }
 
-  get oformsFilterTotal() {
-    return this.oformsFilter.total;
+  get galleryFilterTotal() {
+    return this.galleryFilter.total;
   }
 
   get hasMoreForms() {
-    return this.oformFiles && this.oformFiles.length < this.oformsFilterTotal;
+    return (
+      this.galleryTemplates &&
+      this.galleryTemplates.length < this.galleryFilterTotal
+    );
   }
 }
 
-export default OformsStore;
+export default TemplateGalleryStore;

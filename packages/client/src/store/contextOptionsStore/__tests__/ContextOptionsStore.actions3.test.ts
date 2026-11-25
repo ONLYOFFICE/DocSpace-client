@@ -187,14 +187,14 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
     expect(setEmptyTrashDialogVisible).toHaveBeenCalledWith(true);
   });
 
-  it("onShowTemplateGallery -> oformsStore.setTemplateGalleryVisible(true)", () => {
+  it("onShowTemplateGallery -> templateGalleryStore.setTemplateGalleryVisible(true)", () => {
     const setTemplateGalleryVisible = vi.fn();
     const setCreateRoomFromTemplate = vi.fn();
     const store = createTestContextOptionsStore({
-      oformsStore: {
+      templateGalleryStore: {
         setTemplateGalleryVisible,
         setCreateRoomFromTemplate,
-        setOformFromFolderId: vi.fn(),
+        setGalleryFromFolderId: vi.fn(),
       },
     });
     store.onShowTemplateGallery();
@@ -205,10 +205,10 @@ describe("ContextOptionsStore — action handler delegation (batch 6)", () => {
   it("onShowTemplateGallery(true) -> gallery creates a form space, not a file", () => {
     const setCreateRoomFromTemplate = vi.fn();
     const store = createTestContextOptionsStore({
-      oformsStore: {
+      templateGalleryStore: {
         setTemplateGalleryVisible: vi.fn(),
         setCreateRoomFromTemplate,
-        setOformFromFolderId: vi.fn(),
+        setGalleryFromFolderId: vi.fn(),
       },
     });
     store.onShowTemplateGallery(true);

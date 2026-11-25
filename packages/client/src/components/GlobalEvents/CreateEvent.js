@@ -455,7 +455,7 @@ export default inject(
     treeFoldersStore,
     uploadDataStore,
     dialogsStore,
-    oformsStore,
+    templateGalleryStore,
     filesSettingsStore,
     currentTariffStatusStore,
     publicRoomStore,
@@ -474,7 +474,7 @@ export default inject(
       openDocEditor,
     } = filesStore;
 
-    const { gallerySelected, setGallerySelected } = oformsStore;
+    const { gallerySelected, setGallerySelected } = templateGalleryStore;
 
     const { completeAction, openItemAction } = filesActionsStore;
 

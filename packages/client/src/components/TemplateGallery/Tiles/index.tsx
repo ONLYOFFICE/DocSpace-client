@@ -50,11 +50,11 @@ import useTemplateGalleryHotkeys from "../hooks/useTemplateGalleryHotkeys";
 
 const Tiles: FC<TilesProps> = ({
   tReady,
-  oformFiles,
+  galleryTemplates,
   hasMoreFiles,
   fetchMoreFiles,
   setGallerySelected,
-  setOformFilesLoaded,
+  setGalleryTemplatesLoaded,
   isShowOneTile,
   smallPreview,
   setIsVisibleInfoPanelTemplateGallery,
@@ -66,8 +66,8 @@ const Tiles: FC<TilesProps> = ({
   filterPanelVisible,
 }) => {
   useEffect(() => {
-    setOformFilesLoaded(tReady && oformFiles?.length > 0);
-  }, [tReady, oformFiles]);
+    setGalleryTemplatesLoaded(tReady && galleryTemplates?.length > 0);
+  }, [tReady, galleryTemplates]);
 
   const onClickInfo = useCallback(
     (item: TFile) => {
@@ -89,27 +89,27 @@ const Tiles: FC<TilesProps> = ({
 
   const handleSelectByIndex = useCallback(
     (index: number) => {
-      if (oformFiles && oformFiles[index]) {
-        onClick(oformFiles[index]);
+      if (galleryTemplates && galleryTemplates[index]) {
+        onClick(galleryTemplates[index]);
       }
     },
-    [oformFiles, onClick],
+    [galleryTemplates, onClick],
   );
 
   const handleInfoSelectByIndex = useCallback(
     (index: number) => {
-      if (oformFiles && oformFiles[index]) {
-        onClickInfo(oformFiles[index]);
+      if (galleryTemplates && galleryTemplates[index]) {
+        onClickInfo(galleryTemplates[index]);
       }
     },
-    [oformFiles, onClickInfo],
+    [galleryTemplates, onClickInfo],
   );
 
   const [gridColumns, setGridColumns] = useState(0);
   const countTilesInRow = gridColumns || getCountTilesInGallery(isShowOneTile);
 
   const { focusedIndex } = useTemplateGalleryHotkeys({
-    itemsCount: oformFiles?.length || 0,
+    itemsCount: galleryTemplates?.length || 0,
     columnsCount: countTilesInRow,
     onSelect: handleSelectByIndex,
     onInfoSelect: handleInfoSelectByIndex,
@@ -120,7 +120,7 @@ const Tiles: FC<TilesProps> = ({
   return (
     <div className="tile-container">
       <InfiniteGrid
-        filesList={oformFiles}
+        filesList={galleryTemplates}
         hasMoreFiles={hasMoreFiles}
         fetchMoreFiles={fetchMoreFiles}
         isShowOneTile={isShowOneTile}
@@ -131,7 +131,7 @@ const Tiles: FC<TilesProps> = ({
       >
         {isShowInitSkeleton
           ? null
-          : oformFiles.map((item: TFile, index: number) => {
+          : galleryTemplates.map((item: TFile, index: number) => {
               return (
                 <FileTile
                   key={item.id}
@@ -150,27 +150,27 @@ const Tiles: FC<TilesProps> = ({
 
 const injectStores = ({
   settingsStore,
-  oformsStore,
+  templateGalleryStore,
   contextOptionsStore,
   dialogsStore,
 }: TStore) => ({
   theme: settingsStore.theme,
-  oformFiles: oformsStore.oformFiles,
-  hasGalleryFiles: oformsStore.hasGalleryFiles,
-  hasMoreFiles: oformsStore.hasMoreForms,
-  fetchMoreFiles: oformsStore.fetchMoreOforms,
-  setGallerySelected: oformsStore.setGallerySelected,
-  resetFilters: oformsStore.resetFilters,
-  setOformFilesLoaded: oformsStore.setOformFilesLoaded,
-  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
-  languageFilterLoaded: oformsStore.languageFilterLoaded,
-  oformFilesLoaded: oformsStore.oformFilesLoaded,
+  galleryTemplates: templateGalleryStore.galleryTemplates,
+  hasGalleryFiles: templateGalleryStore.hasGalleryFiles,
+  hasMoreFiles: templateGalleryStore.hasMoreForms,
+  fetchMoreFiles: templateGalleryStore.fetchMoreGalleryTemplates,
+  setGallerySelected: templateGalleryStore.setGallerySelected,
+  resetFilters: templateGalleryStore.resetFilters,
+  setGalleryTemplatesLoaded: templateGalleryStore.setGalleryTemplatesLoaded,
+  categoryFilterLoaded: templateGalleryStore.categoryFilterLoaded,
+  languageFilterLoaded: templateGalleryStore.languageFilterLoaded,
+  galleryTemplatesLoaded: templateGalleryStore.galleryTemplatesLoaded,
   onCreateTemplate: contextOptionsStore.onCreateTemplate,
-  setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
+  setTemplateGalleryVisible: templateGalleryStore.setTemplateGalleryVisible,
   setIsVisibleInfoPanelTemplateGallery:
-    oformsStore.setIsVisibleInfoPanelTemplateGallery,
+    templateGalleryStore.setIsVisibleInfoPanelTemplateGallery,
   setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
-  filterPanelVisible: oformsStore.filterPanelVisible,
+  filterPanelVisible: templateGalleryStore.filterPanelVisible,
 });
 
 export default withoutInjected<TilesProps, ReturnType<typeof injectStores>>(

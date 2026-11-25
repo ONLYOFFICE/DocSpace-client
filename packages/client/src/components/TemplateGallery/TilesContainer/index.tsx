@@ -65,11 +65,11 @@ interface TilesContainerOwnProps {
 }
 
 interface FilterProps {
-  oformsFilter: TemplateGalleryFilter;
-  filterOformsByLocaleIsLoading: boolean;
+  galleryFilter: TemplateGalleryFilter;
+  filterGalleryByLocaleIsLoading: boolean;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
-  filterOformsBySearch: (search: string) => void;
+  filterGalleryBySearch: (search: string) => void;
 }
 
 interface TilesContainerInjectedProps extends FilterProps {
@@ -77,8 +77,8 @@ interface TilesContainerInjectedProps extends FilterProps {
   resetFilters: (ext: string) => Promise<void>;
   t: TTranslation;
   isFormsOnlyGallery: boolean;
-  oformsIsRefetching: boolean;
-  oformLocales: string[] | null;
+  galleryIsRefetching: boolean;
+  galleryLocales: string[] | null;
   setLanguageFilterLoaded: (isLoaded: boolean) => void;
 }
 
@@ -94,8 +94,8 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
     resetFilters,
     t,
     isFormsOnlyGallery,
-    oformsIsRefetching,
-    oformLocales,
+    galleryIsRefetching,
+    galleryLocales,
     setLanguageFilterLoaded,
     ...filterProps
   } = props;
@@ -113,8 +113,8 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
   );
 
   useEffect(() => {
-    setLanguageFilterLoaded(oformLocales !== null);
-  }, [oformLocales, setLanguageFilterLoaded]);
+    setLanguageFilterLoaded(galleryLocales !== null);
+  }, [galleryLocales, setLanguageFilterLoaded]);
 
   useEffect(() => {
     scrollRef.current?.scrollToTop();
@@ -206,7 +206,7 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
       />
       <div
         className={classNames(styles.galleryContent, {
-          [styles.dimmed]: oformsIsRefetching && !isShowInitSkeleton,
+          [styles.dimmed]: galleryIsRefetching && !isShowInitSkeleton,
         })}
       >
         {renderContent()}
@@ -215,33 +215,33 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => {
+export default inject<TStore>(({ templateGalleryStore }) => {
   const {
     hasGalleryFiles,
     resetFilters,
-    oformsFilter,
+    galleryFilter,
     categoryFilterLoaded,
-    filterOformsByLocaleIsLoading,
+    filterGalleryByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
-    filterOformsBySearch,
+    filterGalleryBySearch,
     isFormsOnlyGallery,
-    oformsIsRefetching,
-    oformLocales,
-  } = oformsStore;
+    galleryIsRefetching,
+    galleryLocales,
+  } = templateGalleryStore;
 
   return {
-    oformLocales,
+    galleryLocales,
     hasGalleryFiles,
     resetFilters,
-    oformsFilter,
+    galleryFilter,
     categoryFilterLoaded,
-    filterOformsByLocaleIsLoading,
+    filterGalleryByLocaleIsLoading,
     languageFilterLoaded,
     setLanguageFilterLoaded,
-    filterOformsBySearch,
+    filterGalleryBySearch,
     isFormsOnlyGallery,
-    oformsIsRefetching,
+    galleryIsRefetching,
   };
 })(
   withTranslation("Common")(observer(TilesContainer)),

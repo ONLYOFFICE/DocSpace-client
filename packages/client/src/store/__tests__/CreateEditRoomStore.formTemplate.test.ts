@@ -62,10 +62,10 @@ const { createFile } = await import("@docspace/shared/api/files");
 const { toastr } = await import("@onlyoffice/apps-ui-kit/components/toast");
 
 /** CreateEditRoomStore with only the deps createFormFromTemplate touches. */
-const createStore = (oformsStore: Record<string, unknown>) => {
+const createStore = (templateGalleryStore: Record<string, unknown>) => {
   const deps = Array.from({ length: 10 }, () => ({}));
   return new CreateEditRoomStore(
-    ...([...deps, oformsStore] as unknown as ConstructorParameters<
+    ...([...deps, templateGalleryStore] as unknown as ConstructorParameters<
       typeof CreateEditRoomStore
     >),
   );

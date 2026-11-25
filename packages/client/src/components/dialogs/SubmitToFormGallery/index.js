@@ -265,7 +265,7 @@ export default inject(
 		dialogsStore,
 		settingsStore,
 		filesSettingsStore,
-		oformsStore,
+		templateGalleryStore,
 	}) => ({
 		visible: dialogsStore.submitToGalleryDialogVisible,
 		setVisible: dialogsStore.setSubmitToGalleryDialogVisible,
@@ -274,7 +274,7 @@ export default inject(
 		getIcon: filesSettingsStore.getIcon,
 		currentColorScheme: settingsStore.currentColorScheme,
 		canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
-		submitToFormGallery: oformsStore.submitToFormGallery,
+		submitToFormGallery: templateGalleryStore.submitToFormGallery,
 	}),
 )(
 	withTranslation(

@@ -43,21 +43,21 @@ import { SearchFilterProps } from "./SearchFilter.types";
 
 const SearchFilter: FC<SearchFilterProps> = ({
   t,
-  oformsFilter,
-  filterOformsBySearch,
+  galleryFilter,
+  filterGalleryBySearch,
   isLoading,
   isDisabled,
 }) => {
-  const [value, setValue] = useState(oformsFilter.search);
+  const [value, setValue] = useState(galleryFilter.search);
   const onChangeValue = (val: string) => {
     setValue(val);
-    filterOformsBySearch(val);
+    filterGalleryBySearch(val);
   };
   const onClear = () => onChangeValue("");
 
   useEffect(() => {
-    if (value !== oformsFilter.search) setValue(oformsFilter.search);
-  }, [oformsFilter.search, value]);
+    if (value !== galleryFilter.search) setValue(galleryFilter.search);
+  }, [galleryFilter.search, value]);
 
   const ref = useRef<HTMLInputElement>(null);
   const onInputClick = () => ref?.current?.focus();

@@ -57,7 +57,7 @@ type RoomTypeListProps = {
   isAiRoomsCreate?: boolean;
   // Picking "AI project" there leaves this dialog for the project form.
   onOpenAiProjectForm?: () => void;
-  // Set only when the OForms gallery is available; offers a form space built
+  // Set only when the template gallery is available; offers a form space built
   // around a gallery template even with the Forms quick actions turned off.
   onOpenTemplateGallery?: () => void;
 

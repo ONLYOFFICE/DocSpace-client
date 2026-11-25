@@ -142,12 +142,12 @@ type TemplateGalleryProps = {
   setCurrentExtensionGallery: (extension: string) => void;
   resetFilters: (ext: string) => Promise<void>;
   initTemplateGallery: () => Promise<void>;
-  oformsLoadError: boolean;
-  oformsNetworkError: boolean;
+  galleryLoadError: boolean;
+  galleryNetworkError: boolean;
   submitToGalleryDialogVisible: boolean;
   setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
   t: TTranslation;
-  filterOformsByLocaleIsLoading: boolean;
+  filterGalleryByLocaleIsLoading: boolean;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
@@ -201,12 +201,12 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
     setCurrentExtensionGallery,
     resetFilters,
     initTemplateGallery,
-    oformsLoadError,
-    oformsNetworkError,
+    galleryLoadError,
+    galleryNetworkError,
     submitToGalleryDialogVisible,
     setSubmitToGalleryDialogVisible,
     t,
-    filterOformsByLocaleIsLoading,
+    filterGalleryByLocaleIsLoading,
     categoryFilterLoaded,
     languageFilterLoaded,
     setIsVisibleInfoPanelTemplateGallery,
@@ -237,14 +237,14 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
   useEffect(() => {
     if (
       !isInitLoading &&
-      !filterOformsByLocaleIsLoading &&
+      !filterGalleryByLocaleIsLoading &&
       categoryFilterLoaded &&
       languageFilterLoaded
     )
       setShowInitSkeleton(false);
   }, [
     isInitLoading,
-    filterOformsByLocaleIsLoading,
+    filterGalleryByLocaleIsLoading,
     categoryFilterLoaded,
     languageFilterLoaded,
   ]);
@@ -279,8 +279,8 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
       <div className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
-          {!oformsLoadError &&
-          !oformsNetworkError &&
+          {!galleryLoadError &&
+          !galleryNetworkError &&
           canSubmitToFormGallery() ? (
             <Button
               className={styles.headerButton}
@@ -301,8 +301,8 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
     ),
     [
       t,
-      oformsLoadError,
-      oformsNetworkError,
+      galleryLoadError,
+      galleryNetworkError,
       onOpenSubmitToGalleryDialog,
       onCloseClick,
       canSubmitToFormGallery,
@@ -310,8 +310,8 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
   );
 
   const renderContent = useMemo(() => {
-    if (oformsLoadError || oformsNetworkError) {
-      const descriptionText = oformsNetworkError
+    if (galleryLoadError || galleryNetworkError) {
+      const descriptionText = galleryNetworkError
         ? t("FormGallery:ErrorViewDescriptionNetworkError")
         : t("FormGallery:ErrorViewDescription");
 
@@ -340,8 +340,8 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
       />
     );
   }, [
-    oformsLoadError,
-    oformsNetworkError,
+    galleryLoadError,
+    galleryNetworkError,
     onCloseClick,
     isFormsOnlyGallery,
     currentTabId,
@@ -397,25 +397,25 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
 };
 
 export default inject<TStore>(
-  ({ oformsStore, dialogsStore, accessRightsStore }) => {
+  ({ templateGalleryStore, dialogsStore, accessRightsStore }) => {
     const {
       templateGalleryVisible,
       setTemplateGalleryVisible,
       setCurrentExtensionGallery,
       resetFilters,
       initTemplateGallery,
-      oformsLoadError,
-      filterOformsByLocaleIsLoading,
+      galleryLoadError,
+      filterGalleryByLocaleIsLoading,
       categoryFilterLoaded,
       languageFilterLoaded,
-      oformsNetworkError,
+      galleryNetworkError,
       setIsVisibleInfoPanelTemplateGallery,
       setGallerySelected,
       isFormsOnlyGallery,
       setCreateRoomFromTemplate,
       filterPanelVisible,
       setFilterPanelVisible,
-    } = oformsStore;
+    } = templateGalleryStore;
 
     const { submitToGalleryDialogVisible, setSubmitToGalleryDialogVisible } =
       dialogsStore;
@@ -426,13 +426,13 @@ export default inject<TStore>(
       setCurrentExtensionGallery,
       resetFilters,
       initTemplateGallery,
-      oformsLoadError,
+      galleryLoadError,
       submitToGalleryDialogVisible,
       setSubmitToGalleryDialogVisible,
-      filterOformsByLocaleIsLoading,
+      filterGalleryByLocaleIsLoading,
       categoryFilterLoaded,
       languageFilterLoaded,
-      oformsNetworkError,
+      galleryNetworkError,
       setIsVisibleInfoPanelTemplateGallery,
       setGallerySelected,
       isFormsOnlyGallery,

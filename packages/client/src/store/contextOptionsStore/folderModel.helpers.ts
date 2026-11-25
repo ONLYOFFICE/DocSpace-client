@@ -64,7 +64,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getAiWorkspaceCreateLabel } from "SRC_DIR/helpers/aiWorkspace";
-import { onSuggestOformChanges, onUploadAction } from "./helpers";
+import { onSuggestGalleryTemplateChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
@@ -84,7 +84,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "template-info",
       label: t("FormGallery:TemplateInfo"),
-      onClick: () => item && self.onShowOformTemplateInfo(item),
+      onClick: () => item && self.onShowGalleryTemplateInfo(item),
     },
     {
       key: "separator",
@@ -93,7 +93,7 @@ export const getFormGalleryContextOptionsImpl = (
     {
       key: "suggest-changes",
       label: t("FormGallery:SuggestChanges"),
-      onClick: () => onSuggestOformChanges(item),
+      onClick: () => onSuggestGalleryTemplateChanges(item),
     },
   ];
 };

@@ -36,9 +36,9 @@
 import TemplateGalleryFilter from "@docspace/shared/api/template-gallery/filter";
 
 export interface FilterContentProps {
-  oformsFilter: TemplateGalleryFilter;
-  filterOformsBySearch: (search: string) => void;
-  filterOformsByLocaleIsLoading: boolean;
+  galleryFilter: TemplateGalleryFilter;
+  filterGalleryBySearch: (search: string) => void;
+  filterGalleryByLocaleIsLoading: boolean;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   setShowOneTile: (show: boolean) => void;

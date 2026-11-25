@@ -130,13 +130,13 @@ export type UseQuickActionsProps = SectionFlags & {
   canCreateEncrypted?: boolean;
   // SDK's canCreateRooms: admins / owners / room admins.
   canCreateRooms?: boolean;
-  // Whether the OForms template gallery is reachable (settingsStore). The
+  // Whether the template gallery is reachable (settingsStore). The
   // FormRoom "from template" tile is only offered when it is.
   templateGalleryAvailable?: boolean;
-  // OformsStore actions used to open the template gallery scoped to the current
-  // folder (mirrors MainButton.onShowTemplateGallery).
+  // TemplateGalleryStore actions used to open the template gallery scoped to
+  // the current folder (mirrors MainButton.onShowTemplateGallery).
   setTemplateGalleryVisible?: (visible: boolean) => void;
-  setOformFromFolderId?: (id: number | string | null) => void;
+  setGalleryFromFolderId?: (id: number | string | null) => void;
   // Makes the gallery create a form space out of the picked template instead of
   // a file — used by the Forms root tile, which has no folder to create in.
   setCreateRoomFromTemplate?: (value: boolean) => void;
@@ -164,7 +164,7 @@ export const useQuickActions = (
     canCreateRooms,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
-    setOformFromFolderId,
+    setGalleryFromFolderId,
     setCreateRoomFromTemplate,
     ...sectionFlags
   } = props;
@@ -291,8 +291,8 @@ export const useQuickActions = (
       // Opens the create-room dialog on its template picker, scoped to form
       // templates, so a form space can be created from a template without
       // leaving the Forms list. Note the in-room tile below reuses this `id`
-      // for the OForms gallery; only this one carries a testid, so the two can
-      // never collide in the DOM.
+      // for the template gallery; only this one carries a testid, so the two
+      // can never collide in the DOM.
       {
         id: "quick-form-template",
         dataTestId: "quick-form-space-template",
@@ -302,7 +302,7 @@ export const useQuickActions = (
       },
     ];
 
-    // The OForms gallery. There is no folder to create a form in at the Forms
+    // The template gallery. There is no folder to create a form in at the Forms
     // root, so `createRoomFromTemplate` makes the picked template produce a
     // form space built around it (see onCreateTemplateImpl).
     if (templateGalleryAvailable) {
@@ -314,7 +314,7 @@ export const useQuickActions = (
         onClick: () => {
           setCreateRoomFromTemplate?.(true);
           setTemplateGalleryVisible?.(true);
-          setOformFromFolderId?.(currentFolderId);
+          setGalleryFromFolderId?.(currentFolderId);
         },
       });
     }
@@ -330,13 +330,13 @@ export const useQuickActions = (
     templateGalleryAvailable,
     setCreateRoomFromTemplate,
     setTemplateGalleryVisible,
-    setOformFromFolderId,
+    setGalleryFromFolderId,
   ]);
 
   // Inside a Form Filling room only PDF forms can be created. A blank PDF form
   // is the same `pdf` create flow as the personal-files PDF tile (dispatchCreate
-  // carries `edit: true` for PDF, opening the form editor). When the OForms
-  // template gallery is available, also offer a "from template" tile that opens
+  // carries `edit: true` for PDF, opening the form editor). When the template
+  // gallery is available, also offer a "from template" tile that opens
   // it scoped to the current folder (mirrors MainButton's FormRoom gallery item).
   const formRoomItems = React.useMemo<QuickActionItem[]>(() => {
     const items: QuickActionItem[] = [
@@ -357,7 +357,7 @@ export const useQuickActions = (
         label: t("Common:TemplateGallery"),
         onClick: () => {
           setTemplateGalleryVisible?.(true);
-          setOformFromFolderId?.(currentFolderId);
+          setGalleryFromFolderId?.(currentFolderId);
         },
       });
     }
@@ -370,7 +370,7 @@ export const useQuickActions = (
     currentFolderId,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
-    setOformFromFolderId,
+    setGalleryFromFolderId,
     aiChatItems,
     isAiChatAvailable,
   ]);

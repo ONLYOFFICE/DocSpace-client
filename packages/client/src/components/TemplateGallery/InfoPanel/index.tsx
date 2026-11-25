@@ -77,12 +77,12 @@ const InfoPanelTemplateGallery = ({
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => {
+export default inject<TStore>(({ templateGalleryStore }) => {
   const {
     isVisibleInfoPanelTemplateGallery,
     setIsVisibleInfoPanelTemplateGallery,
     setGallerySelected,
-  } = oformsStore;
+  } = templateGalleryStore;
 
   return {
     isVisibleInfoPanelTemplateGallery,

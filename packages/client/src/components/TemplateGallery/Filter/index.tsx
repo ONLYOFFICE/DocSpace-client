@@ -52,9 +52,9 @@ const FilterContent: FC<FilterContentProps> = ({
   setShowOneTile,
   isShowOneTile,
   isShowInitSkeleton,
-  oformsFilter,
-  filterOformsBySearch,
-  filterOformsByLocaleIsLoading,
+  galleryFilter,
+  filterGalleryBySearch,
+  filterGalleryByLocaleIsLoading,
   categoryFilterLoaded,
   languageFilterLoaded,
   onSelectedFiltersHeightChange,
@@ -76,7 +76,7 @@ const FilterContent: FC<FilterContentProps> = ({
     return (
       <div
         className={classNames(styles.viewButton, {
-          [styles.isDisabled]: filterOformsByLocaleIsLoading,
+          [styles.isDisabled]: filterGalleryByLocaleIsLoading,
         })}
         onClick={handleViewToggle}
       >
@@ -92,10 +92,10 @@ const FilterContent: FC<FilterContentProps> = ({
     <div className={styles.filter}>
       <div className={styles.searchRow}>
         <SearchFilter
-          oformsFilter={oformsFilter}
-          filterOformsBySearch={filterOformsBySearch}
+          galleryFilter={galleryFilter}
+          filterGalleryBySearch={filterGalleryBySearch}
           isLoading={isLoading}
-          isDisabled={filterOformsByLocaleIsLoading}
+          isDisabled={filterGalleryByLocaleIsLoading}
         />
         <FilterPanel isLoading={isLoading} viewMobile={isMobileView} />
         {renderViewToggleButton()}

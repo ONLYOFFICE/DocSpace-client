@@ -123,7 +123,7 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isArchiveFolder,
 
-    setOformFromFolderId,
+    setGalleryFromFolderId,
 
     enablePlugins,
     mainButtonItemsList,
@@ -314,7 +314,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowTemplateGallery = () => {
     setTemplateGalleryVisible(true);
-    setOformFromFolderId(currentFolderId);
+    setGalleryFromFolderId(currentFolderId);
   };
 
   React.useEffect(() => {
@@ -907,7 +907,7 @@ export default inject(
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
-    oformsStore,
+    templateGalleryStore,
     pluginStore,
     versionHistoryStore,
     userStore,
@@ -970,8 +970,8 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
-      oformsStore;
+    const { setGalleryFromFolderId, galleryFilter, setTemplateGalleryVisible } =
+      templateGalleryStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
@@ -1009,8 +1009,8 @@ export default inject(
       currentRoomType,
     vectorizationEnabled,
 
-      setOformFromFolderId,
-      oformsFilter,
+      setGalleryFromFolderId,
+      galleryFilter,
 
       enablePlugins,
       mainButtonItemsList,

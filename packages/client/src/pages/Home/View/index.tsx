@@ -69,7 +69,7 @@ import useProfileBody, {
 } from "../../Profile/Section/Body/useProfileBody";
 import useContacts, { type UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { type UseFilesProps } from "../Hooks/useFiles";
-import OformsStore from "SRC_DIR/store/OformsStore";
+import TemplateGalleryStore from "SRC_DIR/store/TemplateGalleryStore";
 import AiProjectViewConnected from "SRC_DIR/pages/AiProjects/AiProjectView";
 import EmptyAiRoomsContainerConnected from "SRC_DIR/components/EmptyContainer/EmptyAiRoomsContainer";
 
@@ -96,7 +96,7 @@ type ViewProps = UseContactsProps &
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
 
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
-    currentExtensionGallery: OformsStore["currentExtensionGallery"];
+    currentExtensionGallery: TemplateGalleryStore["currentExtensionGallery"];
     /** An AI project room is the selected folder: its chat replaces the file list. */
     isAiProjectRoomRoot: boolean;
     /** The "AI rooms" list while AI is not set up on the portal: the "AI is off" view replaces it. */
@@ -532,7 +532,7 @@ export const ViewComponent = inject(
     filesStore,
     clientLoadingStore,
     mediaViewerDataStore,
-    oformsStore,
+    templateGalleryStore,
     userStore,
     selectedFolderStore,
     filesSettingsStore,
@@ -590,7 +590,7 @@ export const ViewComponent = inject(
       gallerySelected,
       isVisibleInfoPanelTemplateGallery,
       currentExtensionGallery,
-    } = oformsStore;
+    } = templateGalleryStore;
 
     const { getFilesSettings } = filesSettingsStore;
 

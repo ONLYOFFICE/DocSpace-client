@@ -86,12 +86,12 @@ describe("ContextOptionsStore — action handler delegation (batch 10)", () => {
     expect(setSubmitToGalleryDialogVisible).toHaveBeenCalledWith(true);
   });
 
-  it("onShowOformTemplateInfo -> showInfoPanel + oformsStore.setGallerySelected", () => {
+  it("onShowGalleryTemplateInfo -> showInfoPanel + templateGalleryStore.setGallerySelected", () => {
     const setGallerySelected = vi.fn();
     const store = createTestContextOptionsStore({
-      oformsStore: { setGallerySelected },
+      templateGalleryStore: { setGallerySelected },
     });
-    store.onShowOformTemplateInfo(item() as never);
+    store.onShowGalleryTemplateInfo(item() as never);
     expect(showInfoPanel).toHaveBeenCalledTimes(1);
     expect(setGallerySelected).toHaveBeenCalledTimes(1);
   });

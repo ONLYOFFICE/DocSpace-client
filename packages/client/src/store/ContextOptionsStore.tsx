@@ -146,7 +146,7 @@ import type VersionHistoryStore from "./VersionHistoryStore";
 import type FilesSettingsStore from "./FilesSettingsStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type PublicRoomStore from "./PublicRoomStore";
-import type OformsStore from "./OformsStore";
+import type TemplateGalleryStore from "./TemplateGalleryStore";
 import type PluginStore from "./PluginStore";
 import type InfoPanelStore from "./InfoPanelStore";
 import type IndexingStore from "./IndexingStore";
@@ -186,7 +186,7 @@ class ContextOptionsStore {
 
   publicRoomStore: PublicRoomStore;
 
-  oformsStore: OformsStore;
+  templateGalleryStore: TemplateGalleryStore;
 
   pluginStore: PluginStore;
 
@@ -222,7 +222,7 @@ class ContextOptionsStore {
     filesSettingsStore: FilesSettingsStore,
     selectedFolderStore: SelectedFolderStore,
     publicRoomStore: PublicRoomStore,
-    oformsStore: OformsStore,
+    templateGalleryStore: TemplateGalleryStore,
     pluginStore: PluginStore,
     infoPanelStore: InfoPanelStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -243,7 +243,7 @@ class ContextOptionsStore {
     this.filesSettingsStore = filesSettingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.publicRoomStore = publicRoomStore;
-    this.oformsStore = oformsStore;
+    this.templateGalleryStore = templateGalleryStore;
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
@@ -889,9 +889,9 @@ class ContextOptionsStore {
   // without changing runtime behavior.
   onCreateTemplate = async (_navigate?: unknown)=> onCreateTemplateImpl(this, _navigate);
 
-  onShowOformTemplateInfo = (item: TGalleryTemplate) => {
+  onShowGalleryTemplateInfo = (item: TGalleryTemplate) => {
     showInfoPanel();
-    this.oformsStore.setGallerySelected(item);
+    this.templateGalleryStore.setGallerySelected(item);
   };
 
   getFormGalleryContextOptions = (
@@ -1089,11 +1089,13 @@ class ContextOptionsStore {
   // it the create falls through to the file branch and the editor opens on a
   // file the user may not create there -- "Access denied".
   onShowTemplateGallery = (createRoomFromTemplate = false) => {
-    this.oformsStore.setCreateRoomFromTemplate(createRoomFromTemplate);
-    this.oformsStore.setTemplateGalleryVisible(true);
+    this.templateGalleryStore.setCreateRoomFromTemplate(createRoomFromTemplate);
+    this.templateGalleryStore.setTemplateGalleryVisible(true);
     // the original .js passed a possibly-null selected folder
     // id through unchecked — the non-null assertion keeps that behavior.
-    this.oformsStore.setOformFromFolderId(this.selectedFolderStore.id!);
+    this.templateGalleryStore.setGalleryFromFolderId(
+      this.selectedFolderStore.id!,
+    );
   };
 
   // TODO: add privacy room check for files

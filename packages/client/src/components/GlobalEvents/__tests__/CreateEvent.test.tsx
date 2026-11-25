@@ -191,7 +191,10 @@ const createStores = ({
       }),
       isKeyListUnreadable: mocks.isKeyListUnreadable,
     },
-    oformsStore: { gallerySelected: null, setGallerySelected: vi.fn() },
+    templateGalleryStore: {
+      gallerySelected: null,
+      setGallerySelected: vi.fn(),
+    },
     currentTariffStatusStore: { setPortalTariff: vi.fn() },
     publicRoomStore: { publicRoomKey: null },
     pluginStore: {

@@ -46,17 +46,17 @@ export interface FilterPanelOwnProps {
 
 export interface FilterPanelProps extends FilterPanelOwnProps {
   t: TFunction;
-  oformLocales: string[] | null;
+  galleryLocales: string[] | null;
   locale: string;
   purposes: TGalleryPurpose[];
   purpose: string;
   parentCategories: TGalleryParentCategory[];
   categoryIds: string[];
-  isOformsFilterChanged: boolean;
-  filterOformsByLocaleIsLoading: boolean;
-  filterOformsByLocale: (locale: string) => Promise<void>;
-  filterOformsByPurpose: (purpose: string) => void;
-  toggleOformsCategory: (categoryId: string) => void;
+  isGalleryFilterChanged: boolean;
+  filterGalleryByLocaleIsLoading: boolean;
+  filterGalleryByLocale: (locale: string) => Promise<void>;
+  filterGalleryByPurpose: (purpose: string) => void;
+  toggleGalleryCategory: (categoryId: string) => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }

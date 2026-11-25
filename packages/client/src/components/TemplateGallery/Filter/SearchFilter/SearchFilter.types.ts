@@ -38,8 +38,8 @@ import type { TFunction } from "i18next";
 
 export interface SearchFilterProps {
   t: TFunction;
-  oformsFilter: TemplateGalleryFilter;
-  filterOformsBySearch: (search: string) => void;
+  galleryFilter: TemplateGalleryFilter;
+  filterGalleryBySearch: (search: string) => void;
   isLoading: boolean;
   isDisabled: boolean;
 }

@@ -78,7 +78,7 @@ import HotkeyStore from "./HotkeyStore";
 
 import TagsStore from "./TagsStore";
 import PeopleStore from "./contacts/PeopleStore";
-import OformsStore from "./OformsStore";
+import TemplateGalleryStore from "./TemplateGalleryStore";
 
 import AccessRightsStore from "./AccessRightsStore";
 import TableStore from "./TableStore";
@@ -222,7 +222,11 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   pluginStore,
 );
 
-const oformsStore = new OformsStore(settingsStore, userStore, treeFoldersStore);
+const templateGalleryStore = new TemplateGalleryStore(
+  settingsStore,
+  userStore,
+  treeFoldersStore,
+);
 
 const secondaryProgressDataStore = new SecondaryProgressDataStore(
   treeFoldersStore,
@@ -331,7 +335,7 @@ const contextOptionsStore = new ContextOptionsStore(
   filesSettingsStore,
   selectedFolderStore,
   publicRoomStore,
-  oformsStore,
+  templateGalleryStore,
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
@@ -390,7 +394,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   clientLoadingStore,
   dialogsStore,
   avatarEditorDialogStore,
-  oformsStore,
+  templateGalleryStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
@@ -465,7 +469,7 @@ const store = {
   contextOptionsStore,
   hotkeyStore,
 
-  oformsStore,
+  templateGalleryStore,
   tableStore,
 
   tagsStore,

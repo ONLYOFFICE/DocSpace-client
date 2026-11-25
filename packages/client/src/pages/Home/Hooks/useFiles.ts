@@ -69,7 +69,7 @@ import {
 } from "SRC_DIR/pages/Home/Section/Filter/MetadataFilter/utils";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
-import OformsStore from "SRC_DIR/store/OformsStore";
+import TemplateGalleryStore from "SRC_DIR/store/TemplateGalleryStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -117,13 +117,13 @@ export type UseFilesProps = {
   playlist: MediaViewerDataStore["playlist"];
   setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
 
-  gallerySelected: OformsStore["gallerySelected"];
-  isVisibleInfoPanelTemplateGallery: OformsStore["isVisibleInfoPanelTemplateGallery"];
+  gallerySelected: TemplateGalleryStore["gallerySelected"];
+  isVisibleInfoPanelTemplateGallery: TemplateGalleryStore["isVisibleInfoPanelTemplateGallery"];
 
   userId: string;
 
   selectedFolderStore: SelectedFolderStore;
-  currentExtensionGallery: OformsStore["currentExtensionGallery"];
+  currentExtensionGallery: TemplateGalleryStore["currentExtensionGallery"];
   setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
 };
 

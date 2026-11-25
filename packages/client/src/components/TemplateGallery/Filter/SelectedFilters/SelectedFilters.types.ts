@@ -47,12 +47,12 @@ export interface SelectedFiltersProps extends SelectedFiltersOwnProps {
   t: TFunction;
   locale: string;
   isLocaleChanged: boolean;
-  defaultOformLocale: string;
+  defaultGalleryLocale: string;
   selectedPurpose: TGalleryPurpose | null;
   selectedCategories: TGalleryParentCategory[];
-  filterOformsByLocaleIsLoading: boolean;
-  filterOformsByLocale: (locale: string) => Promise<void>;
-  filterOformsByPurpose: (purpose: string) => void;
-  removeOformsCategory: (categoryId: string) => void;
-  clearOformsFilter: () => Promise<void>;
+  filterGalleryByLocaleIsLoading: boolean;
+  filterGalleryByLocale: (locale: string) => Promise<void>;
+  filterGalleryByPurpose: (purpose: string) => void;
+  removeGalleryCategory: (categoryId: string) => void;
+  clearGalleryFilter: () => Promise<void>;
 }

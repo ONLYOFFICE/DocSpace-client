@@ -41,10 +41,10 @@ export type TFile = TGalleryTemplate;
 
 export interface TilesProps {
   tReady: boolean;
-  oformFiles: TFile[];
+  galleryTemplates: TFile[];
   hasMoreFiles: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  setOformFilesLoaded: (loaded: boolean) => void;
+  setGalleryTemplatesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
   smallPreview: boolean;
   setGallerySelected: (item: TGalleryTemplate | null) => void;

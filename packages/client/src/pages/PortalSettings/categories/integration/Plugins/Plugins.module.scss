@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
 .emptyContainer {
   width: 100%;
   display: flex;
@@ -201,5 +203,53 @@
         height: 105px;
       }
     }
+  }
+}
+
+.personalSwitch {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--sso-toggle-content-bg);
+
+  .personalSwitchToggle {
+    position: static;
+    margin-top: 1px;
+  }
+
+  .personalSwitchCaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .personalSwitchHint {
+    color: var(--settings-common-description-color);
+  }
+}
+
+.usersPlugins {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .usersPluginsDescription {
+    max-width: 700px;
+    color: var(--settings-common-description-color);
+  }
+}
+
+
+.pluginsTabs {
+  width: 100%;
+
+  [data-sticky] {
+    position: relative;
+    z-index: 0;
   }
 }

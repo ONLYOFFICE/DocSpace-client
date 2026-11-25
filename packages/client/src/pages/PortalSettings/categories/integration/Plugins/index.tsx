@@ -33,10 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -49,6 +50,7 @@ import EmptyScreen from "./sub-components/EmptyScreen";
 import ListLoader from "./sub-components/ListLoader";
 import UploadDescription from "./sub-components/UploadDescription";
 import PluginCacheWarningDialog from "./sub-components/PluginCacheWarningDialog";
+import UsersPlugins from "./sub-components/UsersPlugins";
 import usePluginUpload from "./hooks/usePluginUpload";
 
 import styles from "./Plugins.module.scss";
@@ -69,8 +71,11 @@ const PluginPage = ({
   pluginsSdkUrl,
 
   showPortalSettingsLoader,
+  withUsersPlugins,
 }: PluginsProps) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
+
+  const [selectedTab, setSelectedTab] = useState("portal");
 
   const { onDrop, showCacheWarning, handleCloseCacheWarning } = usePluginUpload(
     { addPlugin },
@@ -80,7 +85,7 @@ const PluginPage = ({
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
 
-  return (
+  const portalPlugins = (
     <>
       {showPortalSettingsLoader ||
       (!isEmptyList && pluginList.length === 0) ||
@@ -142,6 +147,28 @@ const PluginPage = ({
       )}
     </>
   );
+
+  if (!withUsersPlugins) return portalPlugins;
+
+  return (
+    <Tabs
+      selectedItemId={selectedTab}
+      onSelect={(item) => setSelectedTab(`${item.id}`)}
+      className={styles.pluginsTabs}
+      items={[
+        {
+          id: "portal",
+          name: t("PortalPlugins"),
+          content: portalPlugins,
+        },
+        {
+          id: "users",
+          name: t("UsersPlugins"),
+          content: <UsersPlugins />,
+        },
+      ]}
+    />
+  );
 };
 
 export default inject(
@@ -196,6 +223,8 @@ export default inject(
       pluginsSdkUrl,
 
       showPortalSettingsLoader,
+
+      withUsersPlugins: pluginOptions.personalAvailable,
     };
   },
 )(observer(PluginPage));

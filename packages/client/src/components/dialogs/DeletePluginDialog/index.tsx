@@ -45,13 +45,16 @@ import { TTranslation } from "@docspace/shared/types";
 type Props = {
   isVisible: boolean;
   personal?: boolean;
+  userName?: string;
+  pluginTitle?: string;
   onClose?: () => void;
   onDelete?: (t: TTranslation) => Promise<void>;
 };
 
 const DeletePluginDialog = (props: Props) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
-  const { isVisible, personal, onClose, onDelete } = props;
+  const { isVisible, personal, userName, pluginTitle, onClose, onDelete } =
+    props;
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
@@ -72,9 +75,14 @@ const DeletePluginDialog = (props: Props) => {
     <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {personal
-          ? t("DeletePersonalPluginDescription")
-          : t("DeletePluginDescription")}
+        {userName
+          ? t("DeleteUserPluginDescription", {
+              userName,
+              pluginName: pluginTitle,
+            })
+          : personal
+            ? t("DeletePersonalPluginDescription")
+            : t("DeletePluginDescription")}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -109,6 +117,7 @@ export default inject<TStore>(({ pluginStore }) => {
     setDeletePluginDialogVisible,
     setDeletePluginDialogProps,
     uninstallPlugin,
+    deleteUserPlugin,
   } = pluginStore;
 
   const onClose = () => {
@@ -116,13 +125,15 @@ export default inject<TStore>(({ pluginStore }) => {
     setDeletePluginDialogProps(null);
   };
 
-  const { pluginName, personal } = deletePluginDialogProps || {};
+  const { pluginName, personal, userId, userName, pluginTitle } =
+    deletePluginDialogProps || {};
 
   const onDelete = async (t: TTranslation) => {
     if (!pluginName) return;
 
-    await uninstallPlugin(pluginName, t, personal);
+    if (userId) await deleteUserPlugin(userId, pluginName, t);
+    else await uninstallPlugin(pluginName, t, personal);
   };
 
-  return { personal, onClose, onDelete };
+  return { personal, userName, pluginTitle, onClose, onDelete };
 })(observer(DeletePluginDialog));

@@ -37,6 +37,7 @@ import { TFunction } from "i18next";
 import { TColorScheme, TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 import { TTranslation } from "@docspace/shared/types";
 
+import type { TMemberPlugin } from "@docspace/shared/api/plugins/types";
 import { TPlugin } from "SRC_DIR/helpers/plugins/types";
 import PluginStore from "SRC_DIR/store/PluginStore";
 
@@ -116,6 +117,8 @@ export interface PluginsProps {
   pluginsSdkUrl: string | undefined;
 
   showPortalSettingsLoader: boolean;
+
+  withUsersPlugins: boolean;
 }
 
 export interface UploadDecsriptionProps {
@@ -123,3 +126,27 @@ export interface UploadDecsriptionProps {
   currentColorScheme: TColorScheme;
   t: TTranslation;
 }
+
+export interface PersonalPluginsSwitchProps {
+  isEnabled: boolean;
+  onSwitch: (enabled: boolean) => Promise<void>;
+}
+
+export interface UsersPluginsListProps {
+  items: TMemberPlugin[];
+  language: string;
+  onSwitch: (plugin: TMemberPlugin, enabled: boolean) => Promise<void>;
+  onDelete: (plugin: TMemberPlugin) => void;
+}
+
+export interface UsersPluginsViewProps extends UsersPluginsListProps {
+  sectionWidth: number;
+  currentUserId?: string;
+}
+
+export interface UsersPluginsItemProps
+  extends Omit<UsersPluginsListProps, "items"> {
+  plugin: TMemberPlugin;
+  isMe: boolean;
+}
+

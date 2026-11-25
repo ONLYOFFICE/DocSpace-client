@@ -100,7 +100,7 @@ const GroupItem = ({
           <div className={styles.iconGroup}>
             {iconData && (
               <ReactSVG
-                src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(iconData)}`}
+                src={`data:image/svg+xml;utf8,${encodeURIComponent(iconData)}`}
               />
             )}
           </div>

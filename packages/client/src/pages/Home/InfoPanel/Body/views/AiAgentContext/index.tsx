@@ -105,7 +105,7 @@ type SectionProps = {
 /** A section of the tab: its caption, the line under it, its rows. */
 const Section = ({ testId, label, hint, children }: SectionProps) => (
   <section className={styles.section} data-testid={testId}>
-    <Text as="h4" fontSize="12px" fontWeight={600} className={styles.heading}>
+    <Text as="h4" fontSize="14px" fontWeight={600} className={styles.heading}>
       {label}
     </Text>
     <Text

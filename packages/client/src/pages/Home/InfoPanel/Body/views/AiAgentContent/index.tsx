@@ -322,7 +322,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
       <div className={styles.header}>
         <Text
           as="h4"
-          fontSize="12px"
+          fontSize="14px"
           fontWeight={600}
           className={styles.heading}
         >

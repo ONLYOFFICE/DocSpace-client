@@ -52,12 +52,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-block-end: 4px;
+  margin-block-end: 8px;
 }
 
+// A caption as the Info panel writes them over a group of members
+// ("Administration").
 .heading {
   margin: 0;
-  color: var(--text-secondary);
+  line-height: 20px;
+  color: var(--info-panel-subtitle-color);
 }
 
 .row {

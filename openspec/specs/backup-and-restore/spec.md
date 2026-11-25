@@ -9,6 +9,7 @@ and confirmations, and the restore and storage encryption progress pages.
 Server counterpart: `../server/openspec/specs/backup-and-restore`. Operations called: `startBackup`, `cancelBackup`,
 `getBackupProgress`, `getBackupSchedule`, `createBackupSchedule`, `deleteBackupSchedule`, `getBackupHistory`,
 `deleteBackup`, `deleteBackupHistory`, `startBackupRestore`, `getRestoreProgress`, `getAllBackupStorages`,
+`getAmazonS3Regions`,
 `topUpDeposit`. The client sends them under `portal/`, which the proxy rewrites to `backup/`; it also asks
 `portal/enablerestore` and `portal/enableAutoBackup` and uploads a local archive to `backupFileUpload.ashx`, none of
 which the API description lists.

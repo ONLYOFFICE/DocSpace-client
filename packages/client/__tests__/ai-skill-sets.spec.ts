@@ -34,8 +34,10 @@
  */
 
 import type { Locator, Page } from "@playwright/test";
+import { http, HttpResponse } from "msw";
 
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { API_PREFIX, BASE_URL } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
   TypeSettings,
@@ -158,6 +160,34 @@ const selectEditorLine = async (page: Page, index: number) => {
   await page.keyboard.press("Home");
   await page.keyboard.press("Shift+End");
 };
+
+/** The skill dialog, whatever it shows: the instructions or a form. */
+const dialog = (page: Page) =>
+  page.locator('#modal-dialog[aria-modal="true"]');
+
+/** The width the skill modal has on a desktop: board 13's. */
+const DIALOG_WIDTH = 720;
+
+const dialogWidth = async (page: Page) =>
+  Math.round((await dialog(page).boundingBox())?.width ?? 0);
+
+/** The skill "Create skill with AI" is answered with. */
+const GENERATED_SKILL = {
+  title: "Contract digest",
+  name: "contract-digest",
+  description: "Sums up a contract for the signer.",
+  instructions: "List the parties, the term and the payment.",
+};
+
+/** `POST ai/skills/generate`, answering the generated file, not saved. */
+const generateSkillHandler = () =>
+  http.post(`${BASE_URL}:${TEST_PORT}/${API_PREFIX}/ai/skills/generate`, () =>
+    HttpResponse.json({
+      title: GENERATED_SKILL.title,
+      name: GENERATED_SKILL.name,
+      content: `---\nname: "${GENERATED_SKILL.name}"\ndescription: "${GENERATED_SKILL.description}"\n---\n\n${GENERATED_SKILL.instructions}\n`,
+    }),
+  );
 
 const selectedText = (page: Page) =>
   page.evaluate(() => document.getSelection()?.toString() ?? "");
@@ -638,6 +668,86 @@ test.describe("AI Chat: Skill sets", () => {
       expect(set.skills[0].text).toBe(before);
     });
 
+    // Spec: ai-skill-sets, "View instructions"
+    test("Click on a skill", async ({ page, baseUrl }) => {
+      await openSet(page, baseUrl, documentAssistant(sets));
+
+      await row(page, "Document summary")
+        .getByText("Document summary", { exact: true })
+        .click();
+
+      // The instructions to read, not the form, also for who may edit.
+      await expect(page.getByTestId("view-skill-dialog")).toBeAttached();
+      await expect(editor(page)).toContainText("Read the whole document");
+      await expect(editor(page)).toHaveAttribute("contenteditable", "false");
+      await expect(page.getByTestId("edit-skill-name")).toHaveCount(0);
+      expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
+
+      // Edit is there, and the form it opens is the same modal.
+      await page.getByTestId("view-skill-edit").click();
+      await expect(page.getByTestId("edit-skill-name")).toHaveValue(
+        "Document summary",
+      );
+      expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
+    });
+
+    // Spec: ai-skill-sets, "View instructions"
+    test("Preview", async ({ page, baseUrl }) => {
+      await openSet(page, baseUrl, documentAssistant(sets));
+
+      await row(page, "Document summary")
+        .getByTestId("context-menu-button")
+        .first()
+        .click();
+      await page.locator("#option_preview").click();
+
+      // The skill's instructions in its dialog, not the document editor.
+      await expect(page.getByTestId("view-skill-dialog")).toBeAttached();
+      await expect(editor(page)).toContainText("Read the whole document");
+      await expect(editor(page)).toHaveAttribute("contenteditable", "false");
+      await expect(page.getByTestId("view-skill-edit")).toBeVisible();
+      expect(page.url()).not.toContain("doceditor");
+    });
+
+    // Spec: ai-skill-sets, "Create skill with AI"
+    test("Create skill with AI", async ({ page, baseUrl, mockRequest }) => {
+      mockRequest.use(generateSkillHandler());
+      await openSet(page, baseUrl, documentAssistant(sets));
+
+      await page.getByTestId("main-button").first().click();
+      await page
+        .getByRole("menuitem", { name: "Create skill with AI" })
+        .click();
+
+      // The request is asked for in the modal of the other skill forms.
+      await expect(page.getByTestId("generate-skill-title")).toHaveValue(
+        "New skill",
+      );
+      expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
+      await expect(page.getByTestId("generate-skill-save")).toBeDisabled();
+
+      await page
+        .getByTestId("generate-skill-description")
+        .fill("Sum up a contract");
+      await page.getByTestId("generate-skill-run-button").click();
+
+      // The generated skill in the fields of the Edit skill form, named by
+      // the AI as the name was left as it opened.
+      await expect(page.getByTestId("edit-skill-name")).toHaveValue(
+        GENERATED_SKILL.title,
+      );
+      await expect(page.getByTestId("edit-skill-command")).toHaveText(
+        `Command in chat: /${GENERATED_SKILL.name}`,
+      );
+      await expect(page.getByTestId("edit-skill-description")).toHaveValue(
+        GENERATED_SKILL.description,
+      );
+      await expect(editor(page)).toContainText(GENERATED_SKILL.instructions);
+      await expect(editor(page)).not.toContainText("description:");
+      expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
+      await expect(page.getByTestId("generate-skill-save")).toBeEnabled();
+    });
+
     // Spec: ai-skill-sets, "Use a skill set in the chat"
     test("Skill in a new chat", async ({ page, baseUrl }) => {
       await openSet(page, baseUrl, documentAssistant(sets));
@@ -687,6 +797,19 @@ test.describe("AI Chat: Skill sets", () => {
 
       await page.getByTestId("view-skill-close").click();
       await expect(page.getByTestId("view-skill-dialog")).toHaveCount(0);
+    });
+
+    // Spec: ai-skill-sets, "View instructions"
+    test("Reader clicks a skill", async ({ page, baseUrl }) => {
+      await openSet(page, baseUrl, documentAssistant(sets));
+
+      await row(page, "Document summary")
+        .getByText("Document summary", { exact: true })
+        .click();
+
+      await expect(page.getByTestId("view-skill-dialog")).toBeAttached();
+      await expect(editor(page)).toContainText("Read the whole document");
+      await expect(page.getByTestId("view-skill-edit")).toHaveCount(0);
     });
 
     // Spec: ai-skill-sets, "Edit skill"

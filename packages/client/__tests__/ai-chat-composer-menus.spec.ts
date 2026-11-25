@@ -245,10 +245,6 @@ const skillLabels = (list: Locator) =>
 
 const trimmed = (texts: string[]) => texts.map((text) => text.trim());
 
-/** The slash menu's section of the knowledge bases or of the data sources. */
-const slashSection = (page: Page, kind: "knowledge" | "data-sources") =>
-  slashMenu(page).getByTestId(`composer-skills-menu-${kind}`);
-
 const send = async (page: Page, text: string) => {
   await input(page).fill(text);
   await page.getByTestId("send-button").click();
@@ -471,7 +467,7 @@ test.describe("AI chat composer: the default agent", () => {
   });
 
   // Spec: ai-chat-source-menus, "Slash menu"
-  test("Open the menu: the sets with their skills, then the knowledge base, then the folder, each section ending with its Manage row", async ({
+  test("Open the menu: the sets with their skills and Manage skill sets, and neither the knowledge base nor the folder", async ({
     page,
     baseUrl,
     mockRequest,
@@ -501,46 +497,15 @@ test.describe("AI chat composer: the default agent", () => {
       "Manage skill sets...",
     );
 
-    const knowledge = slashSection(page, "knowledge");
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-title"),
-    ).toHaveText(/knowledge bases/i);
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-hint"),
-    ).toBeVisible();
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-item"),
-    ).toHaveText([COMPANY_POLICIES.name]);
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-manage"),
-    ).toHaveText("Manage knowledge bases...");
-
-    const dataSources = slashSection(page, "data-sources");
-    await expect(
-      dataSources.getByTestId("composer-skills-menu-data-sources-title"),
-    ).toHaveText(/data sources/i);
-    await expect(
-      dataSources.getByTestId("composer-skills-menu-data-sources-hint"),
-    ).toBeVisible();
-    await expect(
-      dataSources.getByTestId("composer-skills-menu-data-sources-item"),
-    ).toHaveText([CONTRACTS_2026.name]);
-    await expect(
-      dataSources.getByTestId("composer-skills-menu-data-sources-manage"),
-    ).toHaveText("Manage sources...");
-
-    // The skills, then the knowledge bases, then the data sources.
-    const manageSkills = await menu
-      .getByTestId("composer-skills-menu-manage")
-      .boundingBox();
-    const knowledgeBox = await knowledge.boundingBox();
-    const dataSourcesBox = await dataSources.boundingBox();
-    expect(knowledgeBox!.y).toBeGreaterThan(manageSkills!.y);
-    expect(dataSourcesBox!.y).toBeGreaterThan(knowledgeBox!.y);
+    // The knowledge bases and the data sources are in the "+" menu only.
+    await expect(menu).not.toContainText(COMPANY_POLICIES.name);
+    await expect(menu).not.toContainText(CONTRACTS_2026.name);
+    await expect(menu).not.toContainText("Manage knowledge bases...");
+    await expect(menu).not.toContainText("Manage sources...");
   });
 
   // Spec: ai-chat-source-menus, "Filtering the slash menu"
-  test("Filter: /sum lists only the matching skills under their sets, and neither the Knowledge bases nor the Data sources section", async ({
+  test("Filter: /sum lists only the matching skills under their sets", async ({
     page,
     baseUrl,
     mockRequest,
@@ -559,12 +524,10 @@ test.describe("AI chat composer: the default agent", () => {
       DOCUMENT_ASSISTANT.name,
       SALES_ASSISTANT.name,
     ]);
-    await expect(slashSection(page, "knowledge")).toHaveCount(0);
-    await expect(slashSection(page, "data-sources")).toHaveCount(0);
   });
 
   // Spec: ai-chat-source-menus, "Keyboard in the slash menu"
-  test("Arrow past the skills: down from the last skill goes back to the first, not to a knowledge base", async ({
+  test("Arrow past the skills: down from the last skill goes back to the first", async ({
     page,
     baseUrl,
     mockRequest,
@@ -585,53 +548,6 @@ test.describe("AI chat composer: the default agent", () => {
     await page.keyboard.press("ArrowDown");
     await expect(rows.first()).toHaveAttribute("aria-selected", "true");
     await expect(menu.locator('[aria-selected="true"]')).toHaveCount(1);
-
-    // The rows of the knowledge bases and data sources are no options.
-    await expect(slashSection(page, "knowledge").getByRole("option")).toHaveCount(
-      0,
-    );
-    await expect(
-      slashSection(page, "data-sources").getByRole("option"),
-    ).toHaveCount(0);
-  });
-
-  // Spec: ai-chat-source-menus, "Knowledge bases and data sources in the slash menu"
-  test("Disconnect a folder from the slash menu: the folder leaves, the menu stays open, and the next round does not read it", async ({
-    page,
-    baseUrl,
-    mockRequest,
-  }) => {
-    const log = aiChatRequestLog();
-    useDefaultChat(mockRequest, SKILLS, log);
-    await connectSources(page, OWNER_ID, ALL_SOURCES);
-
-    await openDefaultChat(page, baseUrl);
-    await openSlashMenu(page);
-    const knowledgeBin = slashSection(page, "knowledge").getByRole("button", {
-      name: `Disconnect knowledge base: ${COMPANY_POLICIES.name}`,
-    });
-    await expect(knowledgeBin).toBeVisible();
-
-    await slashSection(page, "data-sources")
-      .getByRole("button", { name: `Disconnect folder: ${CONTRACTS_2026.name}` })
-      .click();
-
-    await expect(
-      slashSection(page, "data-sources").getByTestId(
-        "composer-skills-menu-data-sources-item",
-      ),
-    ).toHaveText([DESIGN_FOR_MARKETING.name]);
-    await expect(slashMenu(page)).toBeVisible();
-    await expect(input(page)).toBeFocused();
-
-    await send(page, "Which contracts expire this year?");
-    await expect.poll(() => log.send.length).toBe(1);
-    const folders = (log.send[0].actionArgs?.folderContexts ?? []) as {
-      id: string;
-    }[];
-    expect(folders.map((folder) => folder.id)).toEqual([
-      String(DESIGN_FOR_MARKETING.id),
-    ]);
   });
 
   // Spec: ai-chat-source-menus, "Skill calls in the draft"
@@ -800,7 +716,7 @@ test.describe("AI chat composer: the default agent", () => {
   });
 
   // Spec: ai-chat-source-menus, "Knowledge bases with vectorization off"
-  test("One base connected earlier: with vectorization off both menus show it with its remove control and no Manage knowledge bases row", async ({
+  test("One base connected earlier: with vectorization off + > Knowledge bases shows it with its remove control and no Manage knowledge bases row", async ({
     page,
     baseUrl,
     mockRequest,
@@ -821,19 +737,6 @@ test.describe("AI chat composer: the default agent", () => {
       list.getByRole("button", { name: `Remove ${COMPANY_POLICIES.name}` }),
     ).toBeVisible();
     await expect(list).not.toContainText("Manage knowledge bases...");
-
-    await closePlusMenu(page);
-    await openSlashMenu(page);
-    const knowledge = slashSection(page, "knowledge");
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-item"),
-    ).toHaveText([COMPANY_POLICIES.name]);
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-remove"),
-    ).toBeVisible();
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-manage"),
-    ).toHaveCount(0);
   });
 
   // Spec: ai-chat-source-menus, "Data sources list"
@@ -879,7 +782,7 @@ test.describe("AI chat composer: the default agent", () => {
   });
 
   // Spec: ai-chat-source-menus, "Data sources limit"
-  test("Twenty connected: both menus show them with their remove controls and no Manage sources row", async ({
+  test("Twenty connected: + > Data sources shows them with their remove controls and no Manage sources row", async ({
     page,
     baseUrl,
     mockRequest,
@@ -904,19 +807,6 @@ test.describe("AI chat composer: the default agent", () => {
       list.getByTestId("attachment-menu-data-sources-item-action"),
     ).toHaveCount(20);
     await expect(list).not.toContainText("Manage sources...");
-
-    await closePlusMenu(page);
-    await openSlashMenu(page);
-    const dataSources = slashSection(page, "data-sources");
-    await expect(
-      dataSources.getByTestId("composer-skills-menu-data-sources-item"),
-    ).toHaveCount(20);
-    await expect(
-      dataSources.getByTestId("composer-skills-menu-data-sources-remove"),
-    ).toHaveCount(20);
-    await expect(
-      dataSources.getByTestId("composer-skills-menu-data-sources-manage"),
-    ).toHaveCount(0);
   });
 
   // Spec: ai-chat-source-menus, "Manage rows"
@@ -1026,7 +916,7 @@ test.describe("AI chat composer: a chat on an agent", () => {
   });
 
   // Spec: ai-chat-source-menus, "Lists of a chat on an agent"
-  test("Agent manager in the + menu: Manage skill sets opens the agent's edit form, not the room picker", async ({
+  test("Agent manager in the + menu: Manage skill sets opens the Instructions room picker with the agent's sets ticked, not the agent's edit form", async ({
     page,
     baseUrl,
     mockRequest,
@@ -1044,14 +934,19 @@ test.describe("AI chat composer: a chat on an agent", () => {
     );
     await list.getByTestId("composer-skills-menu-manage").click();
 
-    // The modal wrapper has no box of its own; its dialog does.
-    await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
-    await expect(
-      page.getByRole("dialog").filter({ hasText: "Edit agent" }),
-    ).toBeVisible();
-    await expect(
-      page.getByTestId("aside").filter({ hasText: "Skill sets" }),
-    ).toHaveCount(0);
+    const picker = page
+      .getByTestId("aside")
+      .filter({ hasText: "Skill sets" })
+      .first();
+    await expect(picker).toBeVisible();
+    for (const room of [SALES_PLAYBOOK, LEGAL_TONE]) {
+      const item = picker
+        .locator('[data-testid^="selector-item-"]')
+        .filter({ hasText: room.title })
+        .first();
+      await expect(item.locator('input[type="checkbox"]')).toBeChecked();
+    }
+    await expect(page.getByTestId("ai-project-dialog")).toHaveCount(0);
   });
 
   // Spec: ai-chat-source-menus, "Lists of a chat on an agent"
@@ -1083,49 +978,61 @@ test.describe("AI chat composer: a chat on an agent", () => {
       0,
     );
     await expect(menu.getByTestId("composer-skills-menu-manage")).toHaveCount(0);
-    // No one may drop a knowledge base from an agent's chat, and a Member
-    // may not open the agent's form.
+
+    // A Member reads the agent's knowledge bases and changes none.
+    await input(page).fill("");
+    const knowledge = await openPlusList(page, "knowledge");
     await expect(
-      slashSection(page, "knowledge").getByTestId(
-        "composer-skills-menu-knowledge-item",
-      ),
+      knowledge.getByTestId("attachment-menu-knowledge-item"),
     ).toHaveText([CONTRACTS_ARCHIVE.title]);
     await expect(
-      menu.getByTestId("composer-skills-menu-knowledge-remove"),
+      knowledge.getByTestId("attachment-menu-knowledge-item-action"),
     ).toHaveCount(0);
-    await expect(
-      menu.getByTestId("composer-skills-menu-knowledge-manage"),
-    ).toHaveCount(0);
+    await expect(knowledge).not.toContainText("Manage knowledge bases...");
   });
 
-  // Spec: ai-chat-source-menus, "Lists of a chat on an agent"
-  test("Agent manager and the knowledge bases of the slash menu: listed with no bin, and Manage knowledge bases opens the agent's edit form", async ({
+  // Spec: ai-chat-source-menus, "Knowledge bases of a chat on an agent"
+  test("Agent manager unlinks a knowledge base in the + menu: the base is unlinked from the agent and leaves the list", async ({
     page,
     baseUrl,
     mockRequest,
   }) => {
-    await openAgentChat(
+    const agent = await openAgentChat(
       page,
       baseUrl,
       mockRequest,
       AiProjectMockAccess.ProjectManager,
     );
 
-    await openSlashMenu(page);
-    const knowledge = slashSection(page, "knowledge");
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-item"),
-    ).toHaveText([CONTRACTS_ARCHIVE.title]);
-    await expect(
-      knowledge.getByTestId("composer-skills-menu-knowledge-remove"),
-    ).toHaveCount(0);
+    const list = await openPlusList(page, "knowledge");
+    const rows = list
+      .getByTestId("attachment-menu-knowledge-item")
+      .filter({ hasNotText: "Manage knowledge bases..." });
+    await expect(rows).toHaveText([CONTRACTS_ARCHIVE.title]);
 
-    await knowledge.getByTestId("composer-skills-menu-knowledge-manage").click();
-    // The modal wrapper has no box of its own; its dialog does.
-    await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
-    await expect(
-      page.getByRole("dialog").filter({ hasText: "Edit agent" }),
-    ).toBeVisible();
+    // Spec: ai-chat-source-menus, "Remove controls show on demand"
+    const bin = list.getByRole("button", {
+      name: `Remove ${CONTRACTS_ARCHIVE.title}`,
+    });
+    // The pointer on another row of the list, then on the base's own.
+    await list.getByText("Manage knowledge bases...").hover();
+    await expect(bin).toHaveCSS("opacity", "0");
+    await rows.first().hover();
+    await expect(bin).toHaveCSS("opacity", "1");
+
+    const unlinked = page.waitForRequest(
+      (request) =>
+        request.method() === "DELETE" &&
+        request.url().includes(`/files/rooms/${agent.id}/sources`),
+    );
+    await bin.click();
+
+    const request = await unlinked;
+    expect(request.postDataJSON()).toEqual({ roomIds: [CONTRACTS_ARCHIVE.id] });
+    await expect(rows).toHaveCount(0);
+    await expect
+      .poll(() => agent.aiProject.knowledgeRooms.map((room) => room.id))
+      .toEqual([]);
   });
 
   // Spec: ai-chat-source-menus, "Slash menu of a chat on an agent"

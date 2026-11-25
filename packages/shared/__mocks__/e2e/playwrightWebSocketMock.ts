@@ -36,6 +36,7 @@
 import type { Page, WebSocketRoute } from "@playwright/test";
 import {
   ExportChatEventData,
+  TModifyThreadFilesData,
   TOptSocket,
   TTopUpWalletData,
   TWalletLowBalanceData,
@@ -47,16 +48,9 @@ type ServerMessage =
   | unknown[]
   | Record<string, unknown>;
 
-type ModifyThreadFilesEventData = {
-  cmd: "create";
-  id: number;
-  threadId: string;
-  kind: "artifacts" | "attachments";
-};
-
 type SocketEventData =
   | TOptSocket
-  | ModifyThreadFilesEventData
+  | TModifyThreadFilesData
   | ExportChatEventData
   | TTopUpWalletData
   | TWalletLowBalanceData
@@ -120,7 +114,7 @@ export class PlaywrightWebSocketMock {
   }
 
   /** A file saved to a conversation of an agent, announced to its author. */
-  emitModifyThreadFiles(data: ModifyThreadFilesEventData): void {
+  emitModifyThreadFiles(data: TModifyThreadFilesData): void {
     this.emitSocketEvent("s:modify-thread-files", data);
   }
 

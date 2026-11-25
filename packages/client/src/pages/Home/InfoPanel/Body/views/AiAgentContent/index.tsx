@@ -45,8 +45,8 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import SocketHelper, {
-  type SocketEvents,
-  type TUnmappedSocketListener,
+  SocketEvents,
+  type TModifyThreadFilesData,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   getAiThreadArtifacts,
@@ -70,15 +70,6 @@ import styles from "./AiAgentContent.module.scss";
  */
 export const REFRESH_DELAY_MS = 400;
 
-/**
- * A file saved to a conversation: an artifact of a reply or an attachment of
- * a message. Sent to the conversation's author only, in the agent's own room
- * `DIR-{projectId}`, which the open agent's page is subscribed to. The event
- * is not in the ui-kit's SocketEvents yet.
- */
-export const MODIFY_THREAD_FILES_EVENT =
-  "s:modify-thread-files" as SocketEvents;
-
 type TKind = "artifacts" | "attachments";
 
 const KINDS: TKind[] = ["artifacts", "attachments"];
@@ -86,13 +77,6 @@ const KINDS: TKind[] = ["artifacts", "attachments"];
 const READERS = {
   artifacts: getAiThreadArtifacts,
   attachments: getAiThreadAttachments,
-};
-
-type TModifyThreadFiles = {
-  cmd?: string;
-  id?: number | string;
-  threadId?: string;
-  kind?: TKind;
 };
 
 /** The two lists; a list not read yet is null. */
@@ -237,7 +221,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
       cmd,
       threadId: changed,
       kind,
-    }: TModifyThreadFiles = {}) => {
+    }: Partial<TModifyThreadFilesData> = {}) => {
       // The server writes the id as a GUID, whatever case the chat keeps.
       if (cmd !== "create" || !changed) return;
       if (String(changed).toLowerCase() !== threadId.toLowerCase()) return;
@@ -253,12 +237,13 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
         readRef.current(kinds);
       }, REFRESH_DELAY_MS);
     };
-    // The event is not in the ui-kit's typed listener map.
-    const listener = onModify as unknown as TUnmappedSocketListener;
-    SocketHelper?.on(MODIFY_THREAD_FILES_EVENT, listener);
+    // A file saved to this conversation, an artifact or an attachment: sent
+    // to its author only, in the agent's own room `DIR-{projectId}`, which
+    // the open agent's page is subscribed to.
+    SocketHelper?.on(SocketEvents.ModifyThreadFiles, onModify);
     return () => {
       clearTimeout(timer);
-      SocketHelper?.off(MODIFY_THREAD_FILES_EVENT, listener);
+      SocketHelper?.off(SocketEvents.ModifyThreadFiles, onModify);
     };
   }, [threadId]);
 

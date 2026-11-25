@@ -61,7 +61,10 @@ const socket = vi.hoisted(() => {
 });
 
 vi.mock("@docspace/shared/api/ai/threadFiles", () => api);
-vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({ default: socket }));
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
+  default: socket,
+  SocketEvents: { ModifyThreadFiles: "s:modify-thread-files" },
+}));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: keyof typeof stores) => stores[name],
 }));
@@ -91,7 +94,9 @@ vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
   ),
 }));
 
-import AiAgentContent, { MODIFY_THREAD_FILES_EVENT, REFRESH_DELAY_MS } from "../index";
+import AiAgentContent, { REFRESH_DELAY_MS } from "../index";
+
+const MODIFY_THREAD_FILES_EVENT = "s:modify-thread-files";
 
 const file = (id: number, title: string) => ({
   id,
@@ -507,7 +512,6 @@ describe("AiAgentContent", () => {
     vi.useFakeTimers();
     render(<AiAgentContent projectId={7} />);
     await flush();
-    expect(MODIFY_THREAD_FILES_EVENT).toBe("s:modify-thread-files");
     api.getAiThreadArtifacts.mockResolvedValue([file(9, "Report.docx"), file(1, "Chart.png")]);
     // The server writes the id in its own case.
     announce("T-1");

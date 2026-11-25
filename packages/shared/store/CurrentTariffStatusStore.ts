@@ -43,7 +43,13 @@ import { PaymentMethodStatus, TariffState } from "../enums";
 
 import { TCustomerInfo, TPortalTariff } from "../api/portal/types";
 import { isValidDate } from "../utils";
-import { getDaysLeft, getDaysRemaining } from "../utils/common";
+import {
+  getDaysLeft,
+  getDaysRemaining,
+  getIsGracePeriod,
+  getIsGracePeriodRestricted,
+  getIsTariffRestricted,
+} from "../utils/common";
 import {
   parseToDateTime,
   formatDateLocalized,
@@ -110,7 +116,7 @@ class CurrentTariffStatusStore {
   }
 
   get isGracePeriod() {
-    return this.portalTariffStatus?.state === TariffState.Delay;
+    return getIsGracePeriod(this.portalTariffStatus);
   }
 
   get isPaidPeriod() {
@@ -119,6 +125,14 @@ class CurrentTariffStatusStore {
 
   get isNotPaidPeriod() {
     return this.portalTariffStatus?.state === TariffState.NotPaid;
+  }
+
+  get isRestricted() {
+    return getIsTariffRestricted(this.portalTariffStatus);
+  }
+
+  get isGracePeriodRestricted() {
+    return getIsGracePeriodRestricted(this.portalTariffStatus);
   }
 
   get dueDate() {

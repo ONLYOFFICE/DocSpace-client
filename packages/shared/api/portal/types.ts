@@ -54,6 +54,7 @@ export type TPortalTariff = {
   licenseDate: Date;
   customerId: string;
   portalStatus?: number;
+  restricted?: boolean;
   quotas: TQuotas[];
   enterprise: boolean;
   developer: boolean;

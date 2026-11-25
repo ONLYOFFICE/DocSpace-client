@@ -88,6 +88,7 @@ import PluginStore from "SRC_DIR/store/PluginStore";
 import type { TAvatarImage } from "SRC_DIR/store/AvatarEditorDialogStore";
 
 import styles from "./Profile.module.scss";
+import PluginFields from "./PluginFields";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 const getDropdownHoverRules = () => [
@@ -133,6 +134,7 @@ type MainProfileProps = {
   getBanner?: CampaignsStore["getBanner"];
   updatePlugins?: PluginStore["updatePlugins"];
   enablePlugins?: SettingsStore["enablePlugins"];
+  pluginFields?: PluginStore["profileFieldItemsList"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -163,6 +165,7 @@ const MainProfile = (props: MainProfileProps) => {
     getBanner,
     enablePlugins,
     updatePlugins,
+    pluginFields = [],
   } = props;
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
@@ -648,6 +651,8 @@ const MainProfile = (props: MainProfileProps) => {
                 />
               ) : null}
             </div>
+
+            <PluginFields items={pluginFields} />
           </div>
 
           <div className={styles.mobileProfileBlock}>
@@ -873,7 +878,7 @@ export default inject(
 
     const { getBanner } = campaignsStore;
 
-    const { updatePlugins } = pluginStore;
+    const { updatePlugins, profileFieldItemsList } = pluginStore;
 
     return {
       profile,
@@ -900,6 +905,7 @@ export default inject(
       getBanner,
       updatePlugins,
       enablePlugins,
+      pluginFields: profileFieldItemsList,
     };
   },
 )(withCultureNames<MainProfileProps>(observer(MainProfile)));

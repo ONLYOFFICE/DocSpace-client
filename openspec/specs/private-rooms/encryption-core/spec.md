@@ -302,7 +302,7 @@ The system SHALL check each member's public key against its pin before wrapping 
 The system SHALL cache decrypted filenames only in sessionStorage and SHALL clear the cache whenever the identity is locked, an unlocked session that expires on its own included.
 
 #### Scenario: Lock clears names
-- **WHEN** the identity locks (explicitly, on idle, or on tab hidden)
+- **WHEN** the identity locks (explicitly or on idle)
 - **THEN** the filename cache is emptied and the list shows opaque names until the next unlock
 
 #### Scenario: Unlocked session expires

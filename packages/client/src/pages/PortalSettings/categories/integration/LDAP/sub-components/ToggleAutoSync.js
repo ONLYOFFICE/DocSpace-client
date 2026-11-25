@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useId } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -43,6 +43,7 @@ import PaidBadge from "SRC_DIR/components/PaidBadge";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import classnames from "classnames";
 import styles from "./ToggleAutoSync.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const ToggleAutoSync = ({
   toggleCron,
@@ -53,6 +54,7 @@ const ToggleAutoSync = ({
   isUIDisabled,
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
+  const inputId = useId();
 
   const onChangeToggle = React.useCallback(
     (e) => {
@@ -76,19 +78,22 @@ const ToggleAutoSync = ({
         isChecked={isCronEnabled}
         onChange={onChangeToggle}
         isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+        inputId={inputId}
         dataTestId="auto_sync_toggle_button"
       />
 
       <div className="toggle-caption">
         <div className="toggle-caption_title">
-          <Text
-            fontWeight={600}
-            lineHeight="20px"
-            noSelect
-            className="settings_unavailable"
-          >
-            {t("LdapAutoSyncToggle")}
-          </Text>
+          <ControlCaption htmlFor={inputId} isDisabled={!isLdapEnabledOnServer || isUIDisabled}>
+            <Text
+              fontWeight={600}
+              lineHeight="20px"
+              noSelect
+              className="settings_unavailable"
+            >
+              {t("LdapAutoSyncToggle")}
+            </Text>
+          </ControlCaption>
           {!isLdapAvailable ? (
             <PaidBadge className="toggle-caption_title_badge" />
           ) : null}

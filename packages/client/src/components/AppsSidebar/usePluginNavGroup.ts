@@ -43,7 +43,10 @@ import type {
 } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
-import { getPluginSectionPath } from "SRC_DIR/helpers/plugins/navigation";
+import {
+  getPluginSectionPath,
+  isPluginSectionPathActive,
+} from "SRC_DIR/helpers/plugins/navigation";
 import type PluginStore from "SRC_DIR/store/PluginStore";
 
 export type PluginNavigationItems = NonNullable<
@@ -63,9 +66,6 @@ type UsePluginNavGroupResult = {
 const PLUGIN_GROUP_ID = "plugin-navigation";
 
 const EMPTY_RESULT: UsePluginNavGroupResult = { pluginGroup: null };
-
-const isActivePath = (pathname: string, path: string) =>
-  pathname === path || pathname.startsWith(`${path}/`);
 
 const getNavItemId = (itemKey: string) => `${PLUGIN_GROUP_ID}-${itemKey}`;
 
@@ -102,7 +102,7 @@ export const usePluginNavGroup = ({
     });
 
     const activeItem = sectionItems.find(({ key }) =>
-      isActivePath(pathname, getPluginSectionPath(section, key)),
+      isPluginSectionPathActive(pathname, section, key),
     );
 
     return {

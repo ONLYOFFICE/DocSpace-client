@@ -32,8 +32,23 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+import type { FilesSelectorProps } from "@onlyoffice/apps-ui-kit/selectors/Files/FilesSelector.types";
+
 import type { TTranslation } from "../../types";
-import { FilesSelectorFilterTypes } from "../../enums";
+import { FilesSelectorFilterTypes, RoomsType } from "../../enums";
+
+type TSelectorRoom = Parameters<
+  NonNullable<FilesSelectorProps["isRoomDisabled"]>
+>[0];
+
+/**
+ * A room a backup cannot be saved to: a Form Filling Room only holds PDF
+ * forms, and a room where the user may not create files (for instance one
+ * a Room admin created, seen by the owner) fails with an error on save.
+ * Such rooms stay in the list, greyed out, instead of failing after a pick.
+ */
+export const isRoomDisabledForBackup = (room: TSelectorRoom) =>
+  (room.roomType as number) === RoomsType.FormRoom || !room.security?.Create;
 
 export const getHeaderLabel = (
   t: TTranslation,

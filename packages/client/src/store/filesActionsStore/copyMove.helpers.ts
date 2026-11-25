@@ -40,6 +40,7 @@ import {
   getFolder,
 } from "@docspace/shared/api/files";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   isFile as isFileCheck,
@@ -350,6 +351,7 @@ self: FilesActionStore,
 
   const decrypted: { item: TActionItem; file: File }[] = [];
   const failed: string[] = [];
+  let keyReplaced = false;
 
   for (const item of items) {
     try {
@@ -373,6 +375,7 @@ self: FilesActionStore,
         `[ENCRYPTION] client copy failed for file ${item.id}:`,
         error,
       );
+      keyReplaced = error instanceof KeyReplacedError;
       failed.push(item.title);
     }
   }
@@ -402,6 +405,12 @@ self: FilesActionStore,
 
   if (filesToUpload.length > 0) {
     self.uploadDataStore.startUpload(filesToUpload, target, i18n.t);
+  }
+
+  // Spec: private-rooms/file-operations, "A file wrapped for a key the user no longer holds is reported as such"
+  if (items.length === 1 && keyReplaced) {
+    toastr.error(i18n.t("Common:EncryptedFileKeyReplaced"));
+    return;
   }
 
   if (failed.length > 0) {

@@ -53,11 +53,10 @@ import styles from "./index.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { canOpenDocsConnect } from "@docspace/shared/utils/devToolsAccess";
 import ApplyToPortalDialog from "../../developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog";
+import { parseUrlInput } from "./utils";
 
 const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
 
-const URL_REGEX =
-  /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
 const SECRET_KEY_MASK_CHAR = "•";
@@ -145,9 +144,9 @@ const DocumentService = ({
   const secretKeyToSave = isSecretKeyMasked ? undefined : secretKey;
 
   const onChangeDocServiceUrl = (e) => {
-    setDocServiceUrl(e.target.value);
-    if (!e.target.value) setDocServiceUrlIsValid(true);
-    else setDocServiceUrlIsValid(URL_REGEX.test(e.target.value));
+    const { url, isValid } = parseUrlInput(e.target.value);
+    setDocServiceUrl(url);
+    setDocServiceUrlIsValid(isValid);
   };
 
   const onChangeIsDisabledCertificat = () => {
@@ -174,15 +173,15 @@ const DocumentService = ({
   };
 
   const onChangeInternalUrl = (e) => {
-    setInternalUrl(e.target.value);
-    if (!e.target.value) setInternalUrlIsValid(true);
-    else setInternalUrlIsValid(URL_REGEX.test(e.target.value));
+    const { url, isValid } = parseUrlInput(e.target.value);
+    setInternalUrl(url);
+    setInternalUrlIsValid(isValid);
   };
 
   const onChangePortalUrl = (e) => {
-    setPortalUrl(e.target.value);
-    if (!e.target.value) setPortalUrlIsValid(true);
-    else setPortalUrlIsValid(URL_REGEX.test(e.target.value));
+    const { url, isValid } = parseUrlInput(e.target.value);
+    setPortalUrl(url);
+    setPortalUrlIsValid(isValid);
   };
 
   const onSubmit = (e) => {

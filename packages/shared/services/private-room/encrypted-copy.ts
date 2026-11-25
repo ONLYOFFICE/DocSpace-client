@@ -79,6 +79,7 @@ export async function decryptEncryptedItemToFile(
     dek = await unwrapDekForCurrentUser({
       fileKeys,
       roomMemberKeys,
+      userKeys: encryptionInfo.userKeys,
       currentUserId,
       currentIdentity: identity,
       fileId: item.id,

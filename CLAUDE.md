@@ -122,7 +122,10 @@ declared by those same apps; their versions sit in the `catalog:` block of
 `pnpm-workspace.yaml` - see `.claude/rules/pnpm.md`.
 
 `@onlyoffice/docspace-plugin-sdk` is switched to an unpublished build the same
-way, with `pnpm run update-plugin-sdk` (a pack from `../../docspace-plugin-sdk`).
+way, with `pnpm run update-plugin-sdk` (a pack from `../../docspace-plugin-sdk`),
+and the Embed SDK `@onlyoffice/docspace-sdk-js` with `pnpm run update-sdk-js`
+(a pack from `../../docspace-sdk-js`), which also writes the pack's
+`dist/api.js` to `public/scripts/sdk/<x.y.z>/api.js` for the Embed SDK presets.
 
 ### buildtools sibling repo
 

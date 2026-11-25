@@ -32,7 +32,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
@@ -57,6 +57,7 @@ import { LearnMoreWrapper } from "../StyledSecurity";
 import InvitationLoader from "../sub-components/loaders/invitation-loader";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const InvitationSettings = ({
   t,
@@ -89,6 +90,7 @@ const InvitationSettings = ({
   currentColorScheme: TColorScheme;
   isInit: boolean;
 }) => {
+  const captionId = useId();
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -281,21 +283,23 @@ const InvitationSettings = ({
           <div className={styles.checkboxContainer}>
             <Checkbox
               className={styles.checkbox}
+              inputId={`${captionId}-contacts`}
               dataTestId="invitation_settings_contacts_checkbox"
               isChecked={isCheckedContacts}
               onChange={onChangeContacts}
             />
-            <Text
-              fontSize="13px"
-              fontWeight="600"
-              lineHeight="20px"
-              onClick={onChangeContacts}
-              noSelect
-            >
-              {t("InviteViaContacts", {
-                sectionName: t("Common:Contacts"),
-              })}
-            </Text>
+            <ControlCaption htmlFor={`${captionId}-contacts`}>
+              <Text
+                fontSize="13px"
+                fontWeight="600"
+                lineHeight="20px"
+                noSelect
+              >
+                {t("InviteViaContacts", {
+                  sectionName: t("Common:Contacts"),
+                })}
+              </Text>
+            </ControlCaption>
           </div>
 
           <Text
@@ -314,19 +318,21 @@ const InvitationSettings = ({
           <div className={styles.checkboxContainer}>
             <Checkbox
               className={styles.checkbox}
+              inputId={`${captionId}-guests`}
               dataTestId="invitation_settings_guests_checkbox"
               isChecked={isCheckedGuests}
               onChange={onChangeGuests}
             />
-            <Text
-              fontSize="13px"
-              fontWeight="600"
-              lineHeight="20px"
-              onClick={onChangeGuests}
-              noSelect
-            >
-              {t("InvitationSettingsGuests")}
-            </Text>
+            <ControlCaption htmlFor={`${captionId}-guests`}>
+              <Text
+                fontSize="13px"
+                fontWeight="600"
+                lineHeight="20px"
+                noSelect
+              >
+                {t("InvitationSettingsGuests")}
+              </Text>
+            </ControlCaption>
           </div>
 
           <Text

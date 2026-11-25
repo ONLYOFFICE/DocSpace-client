@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import React, { useId } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -45,6 +45,7 @@ import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import { DefaultPageSetting } from "./sub-components/DefaultPageSetting";
 import styles from "./FileManagement.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type FileManagementProps = {
   logoText?: string;
@@ -102,6 +103,7 @@ const FileManagement = ({
   setShowQuickActions,
 }: FileManagementProps) => {
   const { t } = useTranslation(["FilesSettings", "Common"]);
+  const captionId = useId();
 
   const onChangeOriginalCopy = React.useCallback(() => {
     setStoreOriginal?.(!storeOriginalFiles, "storeOriginalFiles");
@@ -145,9 +147,12 @@ const FileManagement = ({
             className={classNames("ask-again", styles.toggleBtn)}
             onChange={onChangeKeepNewFileName}
             isChecked={keepNewFileName}
+            inputId={`${captionId}-ask-again`}
             dataTestId="ask_again_toggle_button"
           />
-          <Text>{t("Common:DontAskAgain")}</Text>
+          <ControlCaption htmlFor={`${captionId}-ask-again`}>
+            <Text>{t("Common:DontAskAgain")}</Text>
+          </ControlCaption>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
@@ -155,9 +160,12 @@ const FileManagement = ({
             className={classNames("save-copy-original ", styles.toggleBtn)}
             onChange={onChangeOriginalCopy}
             isChecked={storeOriginalFiles}
+            inputId={`${captionId}-original-copy`}
             dataTestId="save_copy_original_toggle_button"
           />
-          <Text>{t("Common:OriginalCopy")}</Text>
+          <ControlCaption htmlFor={`${captionId}-original-copy`}>
+            <Text>{t("Common:OriginalCopy")}</Text>
+          </ControlCaption>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
@@ -165,13 +173,16 @@ const FileManagement = ({
             className={classNames("display-notification", styles.toggleBtn)}
             onChange={onChangeDeleteConfirm}
             isChecked={confirmDelete}
+            inputId={`${captionId}-trash-confirmation`}
             dataTestId="display_notification_toggle_button"
           />
-          <Text>
-            {t("Common:TrashMoveConfirmation", {
-              sectionName: t("Common:TrashSection"),
-            })}
-          </Text>
+          <ControlCaption htmlFor={`${captionId}-trash-confirmation`}>
+            <Text>
+              {t("Common:TrashMoveConfirmation", {
+                sectionName: t("Common:TrashSection"),
+              })}
+            </Text>
+          </ControlCaption>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
@@ -179,13 +190,16 @@ const FileManagement = ({
             className={classNames("open-same-tab", styles.toggleBtn)}
             onChange={onChangeOpenEditorInSameTab}
             isChecked={openEditorInSameTab}
+            inputId={`${captionId}-same-tab`}
             dataTestId="open_same_tab_toggle_button"
           />
-          <Text>
-            {t("OpenSameTab", {
-              organizationName: logoText,
-            })}
-          </Text>
+          <ControlCaption htmlFor={`${captionId}-same-tab`}>
+            <Text>
+              {t("OpenSameTab", {
+                organizationName: logoText,
+              })}
+            </Text>
+          </ControlCaption>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
@@ -193,9 +207,12 @@ const FileManagement = ({
             className={classNames("display-file-extension", styles.toggleBtn)}
             onChange={onChangeDisplayFileExtension}
             isChecked={displayFileExtension}
+            inputId={`${captionId}-file-extension`}
             dataTestId="display_file_extension_toggle_button"
           />
-          <Text>{t("Common:DisplayFileExtension")}</Text>
+          <ControlCaption htmlFor={`${captionId}-file-extension`}>
+            <Text>{t("Common:DisplayFileExtension")}</Text>
+          </ControlCaption>
         </div>
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton
@@ -205,27 +222,36 @@ const FileManagement = ({
             )}
             onChange={onChangeCancellationNotification}
             isChecked={hideConfirmCancelOperation}
+            inputId={`${captionId}-cancel-notification`}
             dataTestId="cancelletion_notification_toggle_button"
           />
-          <Text>{t("CancellaionNotification")}</Text>
+          <ControlCaption htmlFor={`${captionId}-cancel-notification`}>
+            <Text>{t("CancellaionNotification")}</Text>
+          </ControlCaption>
         </div>
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton
             className={classNames("room-grouping", styles.toggleBtn)}
             onChange={onChangeRoomGrouping}
             isChecked={organizeRoomsGrouping}
+            inputId={`${captionId}-room-grouping`}
             dataTestId="room_grouping_toggle_button"
           />
-          <Text>{t("GroupByRooms")}</Text>
+          <ControlCaption htmlFor={`${captionId}-room-grouping`}>
+            <Text>{t("GroupByRooms")}</Text>
+          </ControlCaption>
         </div>
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton
             className={classNames("show-quick-actions", styles.toggleBtn)}
             onChange={onChangeShowQuickActions}
             isChecked={showQuickActions}
+            inputId={`${captionId}-quick-actions`}
             dataTestId="show_quick_actions_toggle_button"
           />
-          <Text>{t("ShowQuickActions")}</Text>
+          <ControlCaption htmlFor={`${captionId}-quick-actions`}>
+            <Text>{t("ShowQuickActions")}</Text>
+          </ControlCaption>
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -55,6 +55,7 @@ import { getPluginErrorText } from "SRC_DIR/helpers/plugins/errors";
 import styles from "../Plugins.module.scss";
 import { PluginItemProps } from "../Plugins.types";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const PluginItem = ({
   name,
@@ -79,6 +80,7 @@ const PluginItem = ({
   onDelete,
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common", "WebPlugins"]);
+  const pluginToggleId = useId();
 
   const descriptionRef = useRef<HTMLDivElement>(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
@@ -151,6 +153,8 @@ const PluginItem = ({
     />
   );
 
+  const isToggleDisabled = (!!loadError && !enabled) || !updatePlugin;
+
   const error = loadError ?? initError;
 
   const errorIcon = error ? (
@@ -187,7 +191,9 @@ const PluginItem = ({
       />
       <div className={styles.pluginInfo}>
         <div className={styles.pluginHeader}>
-          <Heading className={styles.pluginName}>{nameLocale}</Heading>
+          <ControlCaption htmlFor={pluginToggleId} isDisabled={isToggleDisabled}>
+            <Heading className={styles.pluginName}>{nameLocale}</Heading>
+          </ControlCaption>
           <div className={styles.pluginControls}>
             {openSettingsDialog ? (
               <IconButton
@@ -201,7 +207,8 @@ const PluginItem = ({
               className={styles.pluginToggleButton}
               onChange={onChangeStatus}
               isChecked={enabled && (!!updatePlugin || !!isNotLoaded)}
-              isDisabled={(!!loadError && !enabled) || !updatePlugin}
+              isDisabled={isToggleDisabled}
+              inputId={pluginToggleId}
               dataTestId="enable_plugin_toggle_button"
             />
           </div>

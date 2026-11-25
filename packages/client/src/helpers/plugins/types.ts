@@ -56,6 +56,8 @@ import type {
   IArticleNavigationItem,
   IDashboardWidgetItem,
   IArticleWidgetItem,
+  IProfileTabItem,
+  IProfileFieldItem,
   ISettings,
   IMessage,
   IPostMessage,
@@ -73,6 +75,8 @@ import type {
   IArticleNavigationPlugin,
   IDashboardWidgetPlugin,
   IArticleWidgetPlugin,
+  IProfileTabPlugin,
+  IProfileFieldPlugin,
   IPlugin,
   IApiPlugin,
   ISettingsPlugin,
@@ -218,6 +222,14 @@ export interface IArticleWidgetItemClient extends IArticleWidgetItem {
   label: string;
 }
 
+export interface IProfileTabItemClient extends IProfileTabItem {
+  pluginName: string;
+}
+
+export interface IProfileFieldItemClient extends IProfileFieldItem {
+  pluginName: string;
+}
+
 export interface IMediaViewerClient extends IMediaViewer {
   pluginName: string;
 }
@@ -301,7 +313,9 @@ export type TPlugin = {
   Partial<IArticleButtonPlugin> &
   Partial<IArticleNavigationPlugin> &
   Partial<IDashboardWidgetPlugin> &
-  Partial<IArticleWidgetPlugin>;
+  Partial<IArticleWidgetPlugin> &
+  Partial<IProfileTabPlugin> &
+  Partial<IProfileFieldPlugin>;
 
 export interface TMessageActionsParams {
   message: IMessage;
@@ -331,6 +345,8 @@ export interface TMessageActionsParams {
   updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
   updateDashboardWidgetItems?: PluginStore["updateDashboardWidgetItems"];
   updateArticleWidgetItem?: PluginStore["updateArticleWidgetItem"];
+  updateProfileTabItems?: PluginStore["updateProfileTabItems"];
+  updateProfileFieldItems?: PluginStore["updateProfileFieldItems"];
   closeMobileArticle?: PluginStore["closeMobileArticle"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];

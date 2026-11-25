@@ -63,12 +63,23 @@
   flex-direction: column;
   gap: 2px;
   margin: 0;
-  // Under the name of its skill set, past the expander and the logo.
-  padding-inline-start: 52px;
+  // Under the logo of its skill set, past the expander: the skill's icon
+  // stands where the set's logo does, its name where the set's name does.
+  padding-inline-start: 24px;
   list-style: none;
 }
 
+// A skill as one row: its icon, then its name.
+.skillRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 24px;
+}
+
 .skill {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -110,6 +121,26 @@
   }
 }
 
-.dataSourceRemove {
+// The name takes the row, so the bin ends it.
+.dataSourceName {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// A linked room's row: the room takes what the bin leaves.
+.sourceRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sourceItem {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// The bin that ends a row, as in the composer's slash menu.
+.remove {
   flex-shrink: 0;
 }

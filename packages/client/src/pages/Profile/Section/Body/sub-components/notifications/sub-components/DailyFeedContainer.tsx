@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useId } from "react";
+
 import { inject, observer } from "mobx-react";
 import { TFunction } from "i18next";
 
@@ -43,6 +45,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type DailyFeedContainerProps = {
   t: TFunction;
@@ -59,6 +62,7 @@ const DailyFeedContainer = ({
   textProps,
   textDescriptionsProps,
 }: DailyFeedContainerProps) => {
+  const inputId = useId();
   const onChangeEmailSubscription = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -73,14 +77,17 @@ const DailyFeedContainer = ({
   return (
     <div className={styles.notificationContainer}>
       <div className={styles.row}>
-        <Text {...textProps} className="subscription-title">
-          {t("DailyFeed", { organizationName: getBrandName("OrganizationName"),
-            productName: getBrandName("ProductName") })}
-        </Text>
+        <ControlCaption htmlFor={inputId}>
+          <Text {...textProps} className="subscription-title">
+            {t("DailyFeed", { organizationName: getBrandName("OrganizationName"),
+              productName: getBrandName("ProductName") })}
+          </Text>
+        </ControlCaption>
         <ToggleButton
           className="daily-feed"
           onChange={onChangeEmailSubscription}
           isChecked={dailyFeedSubscriptions}
+          inputId={inputId}
           dataTestId="daily_feed_toggle_button"
         />
       </div>

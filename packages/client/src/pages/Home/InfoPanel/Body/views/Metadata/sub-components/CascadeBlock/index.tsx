@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
@@ -44,6 +44,7 @@ import type { TCascadeConflict, TCascadeItemType } from "../../types";
 import ApplyMetadataDialog from "./ApplyMetadataDialog";
 import CascadeProgress from "./CascadeProgress";
 import styles from "../../Metadata.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type CascadeBlockProps = {
   itemType: TCascadeItemType;
@@ -65,6 +66,7 @@ const CascadeBlock = ({
   onDisable,
 }: CascadeBlockProps) => {
   const { t } = useTranslation(["Metadata"]);
+  const cascadeToggleId = useId();
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const isProgressVisible = useDelayedVisibility(isRunning);
 
@@ -88,14 +90,17 @@ const CascadeBlock = ({
           className={styles.toggle}
           isChecked={isApplied}
           onChange={() => (isApplied ? onDisable() : setIsDialogVisible(true))}
+          inputId={cascadeToggleId}
           dataTestId="info_panel_metadata_cascade_toggle"
         />
       </div>
       <div className={styles.cascadeContent}>
         <div className={styles.cascadeText}>
-          <Text fontWeight={600} lineHeight="20px">
-            {titles[itemType]}
-          </Text>
+          <ControlCaption htmlFor={cascadeToggleId}>
+            <Text fontWeight={600} lineHeight="20px">
+              {titles[itemType]}
+            </Text>
+          </ControlCaption>
           <Text fontSize="12px" lineHeight="16px">
             {descriptions[itemType]}
           </Text>

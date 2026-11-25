@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/AutoLockSetting/AutoLockSetting.tsx",
       "line_number": 98,
-      "context": "return (\n <div className={styles.container} role=\"group\" aria-labelledby={labelId}>\n <div className={styles.label}>\n <Text id={labelId} fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:AutoLockLabel\")}\n </Text>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:AutoLockHint\")}\n </Text>\n </div>",
+      "context": "return (\n <div className={styles.container} role=\"group\" aria-labelledby={labelId}>\n <div className={styles.label}>\n <Text id={labelId} fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:AutoLockLabel\")}\n </Text>\n </div>",
       "module": "/packages/client"
     }
   ],

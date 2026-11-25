@@ -41,7 +41,7 @@ import {
   tagFileForCopy,
 } from "../encrypted-copy";
 import type { IdentityKeyPair } from "../../encryption/types";
-import { NoAccessError } from "../../encryption/errors";
+import { KeyReplacedError, NoAccessError } from "../../encryption/errors";
 
 // TS lib.dom rejects Uint8Array<ArrayBufferLike> as BodyInit on some lib versions.
 const respond = (bytes: number | Uint8Array, init?: ResponseInit): Response => {
@@ -53,7 +53,8 @@ vi.mock("../../encryption/file-keys", () => ({
   decryptFile: vi.fn(),
   wipeDek: vi.fn(),
 }));
-vi.mock("../../encryption/room-file-access", () => ({
+vi.mock("../../encryption/room-file-access", async (io) => ({
+  ...((await io()) as Record<string, unknown>),
   unwrapDekForCurrentUser: vi.fn(),
 }));
 vi.mock("../../../api/files", () => ({
@@ -124,6 +125,26 @@ describe("encryptedCopy", () => {
       ).rejects.toBeInstanceOf(NoAccessError);
       expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
       expect(wipeDek).not.toHaveBeenCalled();
+    });
+
+    it("One file of several: the unwrap's verdict on a replaced key is passed on", async () => {
+      vi.stubGlobal("fetch", vi.fn().mockResolvedValue(respond(16)));
+      const userKeys = [{ id: "key-now" }];
+      vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
+        userKeys,
+        fileKeys: [{ userId: "u1", publicKeyId: "key-before" }],
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      } as any);
+      vi.mocked(unwrapDekForCurrentUser).mockRejectedValueOnce(
+        new KeyReplacedError(),
+      );
+
+      await expect(
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
+      ).rejects.toBeInstanceOf(KeyReplacedError);
+      expect(vi.mocked(unwrapDekForCurrentUser).mock.calls[0][0].userKeys).toBe(
+        userKeys,
+      );
     });
 
     it("hasOwnEntry uses String() coercion on both sides", async () => {

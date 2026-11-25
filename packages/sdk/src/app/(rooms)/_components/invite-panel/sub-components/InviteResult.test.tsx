@@ -58,6 +58,38 @@ describe("A peer key that could not be checked is reported per operation", () =>
     host.remove();
   });
 
+  it("Invitation by a user who replaced their key", () => {
+    host = document.createElement("div");
+    document.body.appendChild(host);
+    root = createRoot(host);
+    act(() =>
+      root?.render(
+        <InviteResult
+          t={t}
+          outcome={{
+            granted: [],
+            pending: [
+              { member: { id: "carol", displayName: "Carol" }, missingFileIds: [1, 2] },
+            ],
+            skipped: [],
+            refused: [],
+            keyReplacedFileIds: [1, 2],
+          }}
+        />,
+      ),
+    );
+
+    const pending = host.querySelector(
+      '[data-testid="invite_panel_result_pending"]',
+    );
+    expect(pending?.textContent).toContain(
+      "Common:PrivateRoomReplacedKeyBarText_other",
+    );
+    expect(pending?.textContent).not.toContain(
+      "Common:EncryptedReencryptPartialFailure",
+    );
+  });
+
   it.each([
     ["Invitee whose key could not be checked", "key-unchecked"],
     ["Invitation with one unusable key", "key-unusable"],

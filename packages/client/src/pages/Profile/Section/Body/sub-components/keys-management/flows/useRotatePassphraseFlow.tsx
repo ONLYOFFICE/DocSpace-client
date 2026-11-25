@@ -48,6 +48,8 @@ import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
 type Deps = {
   userId: string | undefined;
   refreshKeysFromServer: () => Promise<void>;
+  /** Puts the key with its new envelope into the key list the page holds. */
+  onEnvelopeReplaced: (key: TEncryptionKeyPair) => void;
   /** The context's lock after a passphrase change (useEncryption). */
   lockAfterReseal: () => void;
   onForgotPassphrase?: (target?: TEncryptionKeyPair) => void;
@@ -62,6 +64,7 @@ export type RotatePassphraseFlow = {
 export function useRotatePassphraseFlow({
   userId,
   refreshKeysFromServer,
+  onEnvelopeReplaced,
   lockAfterReseal,
   onForgotPassphrase,
 }: Deps): RotatePassphraseFlow {
@@ -96,6 +99,9 @@ export function useRotatePassphraseFlow({
           publicKey: updated.publicKey,
           privateKeyEnc: updated.privateKeyEnc,
         });
+        // The page holds the new envelope whether or not the list is read again.
+        // Spec: private-rooms/key-management, "Change passphrase"
+        onEnvelopeReplaced({ ...target, ...updated });
         lockAfterReseal();
         await refreshKeysFromServer();
         toastr.success(t("Common:PassphraseUpdated"));
@@ -109,7 +115,15 @@ export function useRotatePassphraseFlow({
         setIsPending(false);
       }
     },
-    [target, userId, refreshKeysFromServer, lockAfterReseal, reset, t],
+    [
+      target,
+      userId,
+      refreshKeysFromServer,
+      onEnvelopeReplaced,
+      lockAfterReseal,
+      reset,
+      t,
+    ],
   );
 
   const modals = target ? (

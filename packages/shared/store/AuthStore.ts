@@ -150,7 +150,7 @@ class AuthStore {
     SocketHelper?.on(SocketEvents.ChangeTariff, () => {
       console.log("[WS] change-tariff");
 
-      this.currentTariffStatusStore?.fetchPortalTariff();
+      this.currentTariffStatusStore?.fetchPortalTariff(true);
     });
 
     SocketHelper?.on(

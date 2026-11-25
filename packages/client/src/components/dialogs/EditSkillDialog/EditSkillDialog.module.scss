@@ -35,19 +35,20 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/mixins";
 
-// The skill's modal, for its instructions alone and for its form: it takes
-// the window but a margin around it, so the instructions have room, and on
+// The skill's modal, for its instructions alone and for its form: as wide as
+// board 13 draws it and as tall as the window but a margin, so the
+// instructions have room, and on
 // a phone it is the bottom sheet of every modal. Its body takes the height
 // the header and the footer leave.
 .dialog {
   // The width itself, not its default: ui-kit resolves the default on the
   // overlay above this class, where a value set here is not seen.
-  --modal-dialog-width: calc(100vw - 64px);
+  --modal-dialog-width: min(720px, calc(100vw - 32px));
 
   :global(#modal-dialog) {
     display: flex;
     flex-direction: column;
-    height: calc(100dvh - 64px);
+    height: calc(100dvh - 96px);
   }
 
   :global(.modal-body) {

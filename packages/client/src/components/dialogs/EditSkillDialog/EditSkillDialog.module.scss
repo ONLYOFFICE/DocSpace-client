@@ -70,8 +70,8 @@
   }
 }
 
-// The form takes the dialog's whole body, in the modal of a new or an edited
-// skill and in the panel of a generated one, so the instructions get the height the other
+// The form takes the dialog's whole body, in the modal of a new, an edited
+// or a generated skill, so the instructions get the height the other
 // fields leave and scroll inside their editor. The dialog body is the
 // positioned box; its side padding is kept by the inline inset. Only a
 // dialog too short for the fields scrolls as a whole.

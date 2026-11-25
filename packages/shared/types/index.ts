@@ -119,13 +119,10 @@ export type TSortBy =
   | "usedspace"
   | "Size";
 
-// Two call signatures rather than one with an optional second parameter: the
-// `t` of i18next 27 is typed over a union of argument tuples, none of which
-// has an optional element, so it is assignable to this shape only.
-export type TTranslation = {
-  (key: string): string;
-  (key: string, params: Record<string, unknown>): string;
-};
+export type TTranslation = (
+  key: string,
+  params?: Record<string, unknown>,
+) => string;
 
 export type Nullable<T> = T | null;
 
@@ -248,10 +245,7 @@ declare global {
       apply: (...args: unknown[]) => void;
     };
     i18n?: {
-      t?: {
-        (key: string): string;
-        (key: string, options: Record<string, string | number>): string;
-      };
+      t?: (key: string, options?: Record<string, string | number>) => string;
       inLoad: { url: string; callbacks: Function[] }[];
       loaded: Record<
         string,

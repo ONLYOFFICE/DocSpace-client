@@ -55,10 +55,7 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import styles from "../SpaceQuota/space-quota.module.scss";
 
 const getLimitLabel = (
-  t: {
-    (key: string): string;
-    (key: string, values: Record<string, string>): string;
-  },
+  t: (key: string, values?: Record<string, string>) => string,
   period: TUserServiceLimit["period"],
   amount: string,
 ) => {

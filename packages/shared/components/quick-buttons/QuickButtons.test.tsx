@@ -105,7 +105,7 @@ const mockT = ((key: string, params?: Record<string, string>) => {
   };
 
   return translations[key] || key;
-}) as unknown as TFunction;
+}) as TFunction;
 
 const baseFileItem: TFile = {
   id: 1,

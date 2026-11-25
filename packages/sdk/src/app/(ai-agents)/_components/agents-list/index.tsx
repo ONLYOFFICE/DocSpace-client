@@ -134,10 +134,10 @@ const computeTagAccess = (
 // with the ui-kit RoomTile contract (string label).
 const getRoomTypeName = (
   _type: string,
-  t: {
-    (key: string): string;
-    (key: string, interpolation: Record<string, string | number>): string;
-  },
+  t: (
+    key: string,
+    interpolation?: Record<string, string | number>,
+  ) => string,
 ) => t("Common:AIRoomTitle", { defaultValue: "AI agent" });
 
 type Props = {

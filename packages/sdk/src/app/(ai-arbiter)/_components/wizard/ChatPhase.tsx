@@ -41,10 +41,7 @@ import { parseChips } from "@/utils/ai-arbiter";
 import styles from "./Wizard.module.scss";
 import type { ChatMessage } from "./useWizardChat";
 
-type TFunc = {
-  (key: string): string;
-  (key: string, opts: Record<string, unknown>): string;
-};
+type TFunc = (key: string, opts?: Record<string, unknown>) => string;
 
 function inferPreparingStage(text: string, t: TFunc): string {
   if (!text) return t("Common:ArbiterAnalyzingAnswers");

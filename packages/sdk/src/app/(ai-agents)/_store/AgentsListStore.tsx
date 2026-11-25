@@ -72,12 +72,7 @@ import { downloadFiles } from "@docspace/shared/api/files";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 
-// Two call signatures, not an optional second parameter: the `t` of i18next
-// 27 is assignable to this shape only.
-type TFunction = {
-  (key: string): string;
-  (key: string, options: Record<string, unknown>): string;
-};
+type TFunction = (key: string, options?: Record<string, unknown>) => string;
 
 export type AgentsViewAs = "tile" | "row" | "table";
 

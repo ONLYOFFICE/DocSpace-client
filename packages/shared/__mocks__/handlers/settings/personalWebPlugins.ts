@@ -37,7 +37,6 @@ import { http } from "msw";
 
 import { BASE_URL, API_PREFIX } from "../../e2e/utils";
 import type { TAPIPlugin, TMemberPlugin } from "../../../api/plugins/types";
-import { EmployeeType } from "../../../enums";
 import { mockPlugin1, PATH_WEB_PLUGINS } from "./webplugins";
 
 export const PATH_PERSONAL_WEB_PLUGINS = "settings/personalwebplugins";
@@ -67,7 +66,7 @@ const memberPlugin = (
   personal: true,
   cspDomains: "",
   url: `/storage/personalwebplugins/root/${name}/plugin.js`,
-  createByType: EmployeeType.User,
+  createByType: "User",
   createByIsOwner: false,
   ...overrides,
 });
@@ -90,7 +89,7 @@ export const mockMemberPlugins: TMemberPlugin[] = [
     "Copies the ID of a file, folder or room to the clipboard.",
     {
       createBy: member(MEMBER_PLUGIN_OWNER_ID, "Administrator "),
-      createByType: EmployeeType.Admin,
+      createByType: "DocSpaceAdmin",
       createByIsOwner: true,
       createOn: new Date("2026-11-24T10:00:00Z"),
     },
@@ -102,7 +101,7 @@ export const mockMemberPlugins: TMemberPlugin[] = [
     {
       version: "1.3.0",
       createBy: member(MEMBER_PLUGIN_ADMIN_ID, "Admin User"),
-      createByType: EmployeeType.Admin,
+      createByType: "DocSpaceAdmin",
       createOn: new Date("2026-11-22T10:00:00Z"),
     },
   ),

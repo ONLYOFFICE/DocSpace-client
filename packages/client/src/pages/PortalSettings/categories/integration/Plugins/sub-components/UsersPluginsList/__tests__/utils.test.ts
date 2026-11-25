@@ -36,7 +36,6 @@
 import { describe, expect, it } from "vitest";
 
 import { AvatarRole } from "@onlyoffice/apps-ui-kit/components/avatar";
-import { EmployeeType } from "@docspace/shared/enums";
 import type { TMemberPlugin } from "@docspace/shared/api/plugins/types";
 
 import {
@@ -57,7 +56,7 @@ const plugin = (
     nameLocale: { ru: title },
     createOn,
     createBy: { id: user, displayName: user },
-    createByType: EmployeeType.User,
+    createByType: "User",
     createByIsOwner: false,
   }) as unknown as TMemberPlugin;
 
@@ -114,16 +113,16 @@ describe("sortUsersPlugins", () => {
 describe("getMemberAvatarRole", () => {
   it("marks the owner, admins only, and nobody else", () => {
     expect(
-      getMemberAvatarRole({ createByType: EmployeeType.Admin, createByIsOwner: true }),
+      getMemberAvatarRole({ createByType: "DocSpaceAdmin", createByIsOwner: true }),
     ).toBe(AvatarRole.owner);
     expect(
-      getMemberAvatarRole({ createByType: EmployeeType.Admin, createByIsOwner: false }),
+      getMemberAvatarRole({ createByType: "DocSpaceAdmin", createByIsOwner: false }),
     ).toBe(AvatarRole.admin);
     expect(
-      getMemberAvatarRole({ createByType: EmployeeType.User, createByIsOwner: false }),
+      getMemberAvatarRole({ createByType: "User", createByIsOwner: false }),
     ).toBe(AvatarRole.user);
     expect(
-      getMemberAvatarRole({ createByType: EmployeeType.Guest, createByIsOwner: false }),
+      getMemberAvatarRole({ createByType: "Guest", createByIsOwner: false }),
     ).toBe(AvatarRole.user);
   });
 });

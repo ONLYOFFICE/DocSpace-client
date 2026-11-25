@@ -61,11 +61,20 @@ export const HIDEABLE_COLUMNS = [
 
 export type THideableColumn = (typeof HIDEABLE_COLUMNS)[number];
 
+const MEMBER_TYPES: Record<TMemberPlugin["createByType"], EmployeeType> = {
+  DocSpaceAdmin: EmployeeType.Admin,
+  RoomAdmin: EmployeeType.RoomAdmin,
+  User: EmployeeType.User,
+  Guest: EmployeeType.Guest,
+};
+
 export const getMemberAvatarRole = (
   plugin: Pick<TMemberPlugin, "createByType" | "createByIsOwner">,
 ) =>
   getUserAvatarRoleByType(
-    plugin.createByIsOwner ? EmployeeType.Owner : plugin.createByType,
+    plugin.createByIsOwner
+      ? EmployeeType.Owner
+      : (MEMBER_TYPES[plugin.createByType] ?? EmployeeType.Guest),
   );
 
 export const sortUsersPlugins = (

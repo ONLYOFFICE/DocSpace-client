@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { EmployeeType } from "../../enums";
 import { TCreatedBy } from "../../types";
 
 export type TAPIPlugin = {
@@ -63,6 +62,6 @@ export type TAPIPlugin = {
 };
 
 export type TMemberPlugin = TAPIPlugin & {
-  createByType: EmployeeType;
+  createByType: "DocSpaceAdmin" | "RoomAdmin" | "User" | "Guest";
   createByIsOwner: boolean;
 };

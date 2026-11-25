@@ -11,11 +11,41 @@ context: |
   and rules; every committed file is English, user-facing strings go through
   i18n (t()), never hardcoded.
 
-  OpenSpec currently covers one feature: private (end-to-end encrypted) rooms.
-  Main specs live under openspec/specs/private-rooms/<capability>/spec.md and
-  describe the behaviour that exists on the branch today, including deliberate
-  v1 limitations written as SHALL NOT requirements. Anything missing, partial
-  or undecided is a change under openspec/changes/.
+  Main specs describe the behaviour the web client has on the branch today,
+  across every app of the monorepo (client, login, doceditor, management,
+  sdk). Anything missing, partial or undecided is a change under
+  openspec/changes/. Layout:
+  - openspec/specs/<capability>/spec.md: requirements and scenarios of one
+    product area. Where the area is also a server capability the name is the
+    same as in ../server/openspec/specs/<capability> (billing, shared-links,
+    room-types, ...), so the two spec sets can be read side by side; areas
+    the server has no counterpart for (info-panel, files-navigation,
+    editor-integration, ...) have client names.
+  - openspec/specs/<capability>/verification.md: one row per requirement and
+    scenario, `Claim | Source | Status`. Status E2E-CONFIRMED (a Playwright
+    test asserts it, cited `packages/<app>/__tests__/<file>.spec.ts:line`),
+    UNIT-CONFIRMED (a Vitest test, `file:line`), CODE-ONLY (read from the
+    code, no test; the row says why when a test cannot reach it),
+    MATRIX-ONLY (only the product matrix in .claude/rules/access-matrix.md
+    or dashboard-matrix.md says it), SERVER-SPEC (a server fact, citing the
+    requirement of ../server/openspec/specs/<capability>/spec.md).
+  - openspec/deviations.md: the register of what the specs leave out on
+    purpose: behaviour that looks like a client defect, places where the
+    client and the server disagree, and places where the client and the
+    product matrix disagree. A requirement describes behaviour that looks
+    intended; clearly wrong behaviour goes there instead, never into a
+    requirement.
+  - openspec/specs/private-rooms/<capability>/spec.md: private (end-to-end
+    encrypted) rooms, which predate this layout and have no verification.md
+    yet; deliberate v1 limitations are written as SHALL NOT requirements.
+  The AI agents and AI chat are specified by the open change
+  ai-chat-agents-design and enter the main specs when it is archived.
+
+  Find the capabilities a change touches by what it changes: the UI area,
+  the route, the i18n key, or the server operationId it calls. A text search
+  for them in openspec/specs/*/spec.md finds the governing requirement; read
+  only the spec.md files found, and their verification.md only to see how a
+  requirement is proven.
 
   Where the private-rooms code lives:
   - Crypto core: packages/shared/services/encryption (identity, HPKE wrap,
@@ -99,10 +129,11 @@ context: |
   uploads before the upload session`; then a blank line and a plain-prose
   body wrapped at 72 columns saying what changed and why, ending with the
   line `OpenSpec: <change> <task id>` when it implements a task. No
-  Co-Authored-By or other AI-attribution lines (CLAUDE.md). Commit directly
-  on `release/v4.1.0`, where the feature branch was merged on 2026-11-03
-  (PR !798), never on master or develop; never push unless the user asks,
-  and never bypass hooks with --no-verify.
+  Co-Authored-By or other AI-attribution lines (CLAUDE.md). Private-rooms
+  work is committed directly on `release/v4.1.0`, where the feature branch
+  was merged on 2026-11-03 (PR !798), never on master or develop; other work
+  goes on the branch the user names. Never push unless the user asks, and
+  never bypass hooks with --no-verify.
 
   Design history: the original design documents (SECURITY.md, FORMAT.md,
   AUDIT_FRONTEND/BACKEND.md, V1_RELEASE_PROGRESS.md, SDK plans) were never
@@ -114,7 +145,14 @@ rules:
     - State explicitly what is out of scope and which decisions need a human.
     - Name the server-side (../server) or Document Server work the change depends on.
     - Never state a security defect as the reason of a change (context, "Security defects stay out of the repository"); say what the behaviour shall be.
+    - List the capabilities the change touches, each with the UI area, route, i18n key or operationId that led you to it.
+    - >-
+      Add a section "Breaks current behaviour". For every requirement the change modifies or removes, name it
+      and say what a user sees differently and who is affected (user types, room roles, embedding hosts of the
+      SDK, plugins). If the change touches a row of openspec/deviations.md, name it and say whether the change
+      fixes it, keeps it, or makes it worse. If nothing changes for existing users, write "None" and say why.
   specs:
+    - Every requirement modified or removed is quoted from the current openspec/specs/<capability>/spec.md exactly as it is there, so the delta can be checked against it.
     - One observable behaviour per requirement; keep descriptions under 500 characters.
     - Requirements never name classes, functions, stores or files; a short "Implementation" note in Purpose may point at the owning modules.
     - Deliberate v1 limitations are requirements too, phrased as SHALL NOT, so the limitation is visible and testable.
@@ -130,6 +168,9 @@ rules:
     - A task that fixes a security defect names the behaviour asked and its acceptance only, never the defect, its route or how to reach it.
     - Locale changes run the translation skills and the locale tests in the same task group.
     - "Keep the pre-push gate in mind: tsc, biome, locale tests, shared/client/sdk unit tests must stay green."
+    - For every requirement the change modifies, add a task to update the tests its verification.md rows cite and the rows themselves.
+    - For every new requirement, add a task for a test (E2E or unit) and its verification.md row; a requirement no test can reach gets a CODE-ONLY row saying why.
+    - "End with a task to run `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`."
 
 operations:
   apply:
@@ -142,4 +183,5 @@ operations:
   archive:
     guidance:
       - Before archiving, confirm the main spec still describes the behaviour on the branch, not the behaviour planned.
+      - When the merged main spec has a verification.md, add or update its rows for every requirement the change added or modified in the same archive commit.
       - "Commit the archive (moved change folder and merged main specs) as one commit, `OpenSpec: <change>: archive`."

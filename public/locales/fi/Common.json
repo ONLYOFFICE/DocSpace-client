@@ -128,6 +128,7 @@
   "AIChatRecent": "Viimeisimmät",
   "AIChats": "AI-keskustelut",
   "AiContentEmpty": "Ei vielä tiedostoja",
+  "AiContentEmptyDescription": "Agentin luomat tiedostot ja tähän keskusteluun liittämäsi tiedostot näkyvät tässä.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktivoi AI chattataksesi agenttiesi kanssa, käyttääksesi heidän tietopohjaansa ja antaaksesi heidän suorittaa tehtäviä sovelluksissasi. AI:n käyttö veloitetaan lompakkosi saldosta.",
   "AIDisabledInfoBlockContactAdminDescription": "Ota yhteyttä pääjärjestelmänvalvojaan aktivoidaksesi AI:n ja chattataksesi agenttiesi kanssa, käyttääksesi heidän tietopohjaansa ja antaaksesi heidän suorittaa tehtäviä sovelluksissasi.",
   "AIDisabledInfoBlockStandaloneDescription": "AI-ominaisuudet on tällä hetkellä poistettu käytöstä, mikä tarkoittaa, ettei tämä agentti voi käsitellä keskusteluja tai tehtäviä. Yhdistä oma AI-palvelusi avataksesi edistyneet ominaisuudet työtilassa.",

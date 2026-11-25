@@ -128,6 +128,7 @@
   "AIChatRecent": "Nedavno",
   "AIChats": "AI ćatovi",
   "AiContentEmpty": "Još nema datoteka",
+  "AiContentEmptyDescription": "Datoteke koje napravi agent i datoteke koje priložite u ovom čatu će se pojaviti ovde.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktivirajte AI da biste razgovarali sa agentima, pristupili njihovoj bazi znanja i omogućili im da izvršavaju zadatke u vašim aplikacijama. Korišćenje AI naplaćuje se sa stanja vašeg novčanika.",
   "AIDisabledInfoBlockContactAdminDescription": "Kontaktirajte superadministratora da biste aktivirali AI i razgovarali sa agentima, pristupili njihovoj bazi znanja i omogućili im da izvršavaju zadatke u vašim aplikacijama.",
   "AIDisabledInfoBlockStandaloneDescription": "AI mogućnosti su trenutno isključene, što znači da ovaj agent ne može da obrađuje ćaskanja ili zadatke. Povežite sopstvenu AI uslugu da otključate napredne funkcije u radnom prostoru.",

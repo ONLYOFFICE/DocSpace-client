@@ -128,6 +128,7 @@
   "AIChatRecent": "Recientes",
   "AIChats": "Chats de IA",
   "AiContentEmpty": "Todavía no hay archivos",
+  "AiContentEmptyDescription": "Los archivos creados por el agente y los que adjunte en este chat aparecerán aquí.",
   "AIDisabledInfoBlockActivateWalletDescription": "Active la IA para chatear con sus agentes, acceder a su base de conocimiento y permitirles ejecutar tareas en sus aplicaciones. El uso de IA se factura desde el saldo de su cartera.",
   "AIDisabledInfoBlockContactAdminDescription": "Póngase en contacto con el superadministrador para activar la IA y chatear con sus agentes, acceder a su base de conocimiento y permitirles ejecutar tareas en sus aplicaciones.",
   "AIDisabledInfoBlockStandaloneDescription": "Las funciones de IA están actualmente desactivadas, lo que significa que este agente no puede procesar chats ni tareas. Conecte su propio servicio de IA para desbloquear funciones avanzadas en el espacio de trabajo.",

@@ -33,12 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type OformsFilter from "@docspace/shared/api/oforms/filter";
+import type TemplateGalleryFilter from "@docspace/shared/api/template-gallery/filter";
 import type { TFunction } from "i18next";
 
 export interface SearchFilterProps {
   t: TFunction;
-  oformsFilter: OformsFilter;
+  oformsFilter: TemplateGalleryFilter;
   filterOformsBySearch: (search: string) => void;
   isLoading: boolean;
   isDisabled: boolean;

@@ -10,13 +10,13 @@ vi.mock("axios", () => ({
 
 // eslint-disable-next-line import/first
 import {
-  getOforms,
-  getOformPurposes,
-  getOformLocales,
-  OformsContractError,
+  getGalleryTemplates,
+  getGalleryPurposes,
+  getGalleryLocales,
+  TemplateGalleryContractError,
 } from ".";
 // eslint-disable-next-line import/first
-import OformsFilter from "./filter";
+import TemplateGalleryFilter from "./filter";
 
 const CMS = "https://cms.example/dashboard/api";
 
@@ -47,13 +47,13 @@ const rawTemplate = {
   ],
 };
 
-describe("getOforms", () => {
+describe("getGalleryTemplates", () => {
   beforeEach(() => get.mockClear());
 
   it("requests the card fields and appends the filter params", async () => {
     get.mockResolvedValueOnce({ data: { data: [], meta: null } });
 
-    const filter = OformsFilter.getDefaultDocx();
+    const filter = TemplateGalleryFilter.getDefaultDocx();
     filter.locale = "de";
     filter.purpose = "business";
     filter.categoryIds = ["pc-1", "pc-2"];
@@ -61,7 +61,7 @@ describe("getOforms", () => {
     filter.sortBy = "name_form";
     filter.sortOrder = "asc";
 
-    await getOforms(`${CMS}/oforms`, filter);
+    await getGalleryTemplates(`${CMS}/oforms`, filter);
 
     const [url] = get.mock.calls[0];
     expect(url.startsWith(`${CMS}/oforms?fields[0]=name_form&`)).toBe(true);
@@ -85,16 +85,19 @@ describe("getOforms", () => {
   });
 
   it("gives every filter its own category list", () => {
-    const first = OformsFilter.getDefault();
+    const first = TemplateGalleryFilter.getDefault();
     first.categoryIds.push("pc-1");
 
-    expect(OformsFilter.getDefault().categoryIds).toEqual([]);
+    expect(TemplateGalleryFilter.getDefault().categoryIds).toEqual([]);
   });
 
   it("leaves empty filters out and falls back to sorting by name", async () => {
     get.mockResolvedValueOnce({ data: { data: [] } });
 
-    await getOforms(`${CMS}/oforms`, OformsFilter.getDefault());
+    await getGalleryTemplates(
+      `${CMS}/oforms`,
+      TemplateGalleryFilter.getDefault(),
+    );
 
     const [url] = get.mock.calls[0];
     expect(url).not.toContain("filters[subcategories]");
@@ -111,9 +114,9 @@ describe("getOforms", () => {
       },
     });
 
-    const { templates, pagination } = await getOforms(
+    const { templates, pagination } = await getGalleryTemplates(
       `${CMS}/oforms`,
-      OformsFilter.getDefault(),
+      TemplateGalleryFilter.getDefault(),
     );
 
     expect(pagination).toEqual({ page: 2, pageSize: 1, pageCount: 5, total: 5 });
@@ -150,9 +153,9 @@ describe("getOforms", () => {
       },
     });
 
-    const { templates, pagination } = await getOforms(
+    const { templates, pagination } = await getGalleryTemplates(
       `${CMS}/oforms`,
-      OformsFilter.getDefault(),
+      TemplateGalleryFilter.getDefault(),
     );
 
     expect(templates[0].description).toBe("Short");
@@ -175,18 +178,18 @@ describe("getOforms", () => {
     });
 
     await expect(
-      getOforms(`${CMS}/oforms`, OformsFilter.getDefault()),
-    ).rejects.toBeInstanceOf(OformsContractError);
+      getGalleryTemplates(`${CMS}/oforms`, TemplateGalleryFilter.getDefault()),
+    ).rejects.toBeInstanceOf(TemplateGalleryContractError);
   });
 });
 
-describe("getOformPurposes", () => {
+describe("getGalleryPurposes", () => {
   beforeEach(() => get.mockClear());
 
   it("asks for the localized tree with per-extension counts", async () => {
     get.mockResolvedValueOnce({ data: { data: [] } });
 
-    await getOformPurposes(`${CMS}/purposes`, "fr", "pdf");
+    await getGalleryPurposes(`${CMS}/purposes`, "fr", "pdf");
 
     const [url] = get.mock.calls[0];
     const sub = "populate[parent_categories][populate][subcategories]";
@@ -229,7 +232,7 @@ describe("getOformPurposes", () => {
       },
     });
 
-    const purposes = await getOformPurposes(`${CMS}/purposes`, "en", "pdf");
+    const purposes = await getGalleryPurposes(`${CMS}/purposes`, "en", "pdf");
 
     expect(purposes).toEqual([
       {
@@ -267,12 +270,15 @@ describe("getOformPurposes", () => {
   });
 });
 
-describe("getOformLocales", () => {
+describe("getGalleryLocales", () => {
   it("returns the locale codes only", async () => {
     get.mockResolvedValueOnce({
       data: [{ code: "en" }, { code: "de" }, { code: "" }],
     });
 
-    expect(await getOformLocales(`${CMS}/i18n/locales`)).toEqual(["en", "de"]);
+    expect(await getGalleryLocales(`${CMS}/i18n/locales`)).toEqual([
+      "en",
+      "de",
+    ]);
   });
 });

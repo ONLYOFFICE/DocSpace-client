@@ -35,9 +35,9 @@
 
 import type { TFunction } from "i18next";
 import type {
-  TOformParentCategory,
-  TOformPurpose,
-} from "@docspace/shared/api/oforms/types";
+  TGalleryParentCategory,
+  TGalleryPurpose,
+} from "@docspace/shared/api/template-gallery/types";
 
 export interface SelectedFiltersOwnProps {
   onHeightChange: (height: number) => void;
@@ -48,8 +48,8 @@ export interface SelectedFiltersProps extends SelectedFiltersOwnProps {
   locale: string;
   isLocaleChanged: boolean;
   defaultOformLocale: string;
-  selectedPurpose: TOformPurpose | null;
-  selectedCategories: TOformParentCategory[];
+  selectedPurpose: TGalleryPurpose | null;
+  selectedCategories: TGalleryParentCategory[];
   filterOformsByLocaleIsLoading: boolean;
   filterOformsByLocale: (locale: string) => Promise<void>;
   filterOformsByPurpose: (purpose: string) => void;

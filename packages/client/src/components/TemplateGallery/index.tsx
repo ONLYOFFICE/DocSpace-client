@@ -44,7 +44,7 @@ import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Button } from "@onlyoffice/apps-ui-kit/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
-import type { TOformFile } from "@docspace/shared/api/oforms/types";
+import type { TGalleryTemplate } from "@docspace/shared/api/template-gallery/types";
 import { useEventListener } from "@onlyoffice/apps-ui-kit/hooks/useEventListener";
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
@@ -151,7 +151,7 @@ type TemplateGalleryProps = {
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
-  setGallerySelected: (item: TOformFile | null) => void;
+  setGallerySelected: (item: TGalleryTemplate | null) => void;
   isFormsOnlyGallery: boolean;
   setCreateRoomFromTemplate: (createRoomFromTemplate: boolean) => void;
   filterPanelVisible: boolean;

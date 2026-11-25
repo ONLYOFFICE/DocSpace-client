@@ -45,7 +45,7 @@ import type {
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TOformFile } from "@docspace/shared/api/oforms/types";
+import type { TGalleryTemplate } from "@docspace/shared/api/template-gallery/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type {
   CurrentQuotasStore,
@@ -889,13 +889,13 @@ class ContextOptionsStore {
   // without changing runtime behavior.
   onCreateTemplate = async (_navigate?: unknown)=> onCreateTemplateImpl(this, _navigate);
 
-  onShowOformTemplateInfo = (item: TOformFile) => {
+  onShowOformTemplateInfo = (item: TGalleryTemplate) => {
     showInfoPanel();
     this.oformsStore.setGallerySelected(item);
   };
 
   getFormGalleryContextOptions = (
-    item: TOformFile | null,
+    item: TGalleryTemplate | null,
     t: TTranslation,
     navigate?: unknown,
   ): ContextMenuModel[]=> getFormGalleryContextOptionsImpl(this, item, t, navigate);

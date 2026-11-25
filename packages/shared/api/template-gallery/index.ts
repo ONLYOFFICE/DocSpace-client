@@ -35,23 +35,23 @@
 
 import axios from "axios";
 
-import type OformsFilter from "./filter";
+import type TemplateGalleryFilter from "./filter";
 import type {
-  TOformCategory,
-  TOformFile,
-  TOformParentCategory,
-  TOformPreview,
-  TOformPurpose,
-  TOformRawCategory,
-  TOformRawLocale,
-  TOformRawMedia,
-  TOformRawParentCategory,
-  TOformRawPurposesResponse,
-  TOformRawTemplate,
-  TOformSource,
-  TOformsList,
-  TOformsPagination,
-  TOformsRawListResponse,
+  TGalleryCategory,
+  TGalleryTemplate,
+  TGalleryParentCategory,
+  TGalleryPreview,
+  TGalleryPurpose,
+  TGalleryRawCategory,
+  TGalleryRawLocale,
+  TGalleryRawMedia,
+  TGalleryRawParentCategory,
+  TGalleryRawPurposesResponse,
+  TGalleryRawTemplate,
+  TGallerySource,
+  TGalleryTemplatesList,
+  TGalleryPagination,
+  TGalleryRawListResponse,
 } from "./types";
 
 /**
@@ -98,7 +98,7 @@ const purposeQuery = (locale: string, extension: string) =>
     .filter(Boolean)
     .join("&");
 
-const EMPTY_PAGINATION: TOformsPagination = {
+const EMPTY_PAGINATION: TGalleryPagination = {
   page: 1,
   pageSize: 0,
   pageCount: 0,
@@ -121,9 +121,9 @@ const toAbsoluteUrl = (url: string | null | undefined, baseUrl: string) => {
 };
 
 const normalizePreview = (
-  media: TOformRawMedia | null | undefined,
+  media: TGalleryRawMedia | null | undefined,
   baseUrl: string,
-): TOformPreview | null => {
+): TGalleryPreview | null => {
   const url = toAbsoluteUrl(media?.url, baseUrl);
   if (!url) return null;
 
@@ -135,9 +135,9 @@ const normalizePreview = (
 };
 
 const normalizeSource = (
-  files: TOformRawMedia[] | null | undefined,
+  files: TGalleryRawMedia[] | null | undefined,
   baseUrl: string,
-): TOformSource | null => {
+): TGallerySource | null => {
   const [media] = files ?? [];
   if (!media) return null;
 
@@ -150,9 +150,9 @@ const normalizeSource = (
 };
 
 const normalizeTemplate = (
-  template: TOformRawTemplate,
+  template: TGalleryRawTemplate,
   baseUrl: string,
-): TOformFile => ({
+): TGalleryTemplate => ({
   id: template.id,
   documentId: template.documentId,
   title: template.name_form ?? "",
@@ -165,7 +165,9 @@ const normalizeTemplate = (
   file: normalizeSource(template.file_oform, baseUrl),
 });
 
-const normalizeCategory = (category: TOformRawCategory): TOformCategory => ({
+const normalizeCategory = (
+  category: TGalleryRawCategory,
+): TGalleryCategory => ({
   id: category.id,
   documentId: category.documentId,
   name: category.name ?? "",
@@ -174,8 +176,8 @@ const normalizeCategory = (category: TOformRawCategory): TOformCategory => ({
 });
 
 const normalizeParentCategory = (
-  category: TOformRawParentCategory,
-): TOformParentCategory => ({
+  category: TGalleryRawParentCategory,
+): TGalleryParentCategory => ({
   ...normalizeCategory(category),
   subcategories: (category.subcategories ?? []).map(normalizeCategory),
 });
@@ -187,25 +189,25 @@ const normalizeParentCategory = (
  * would fill the gallery with nameless, image-less cards instead of failing -
  * the store turns this into the same error screen as a 404.
  */
-export class OformsContractError extends Error {
+export class TemplateGalleryContractError extends Error {
   constructor() {
-    super("The oforms CMS answered with an unsupported contract");
-    this.name = "OformsContractError";
+    super("The template gallery CMS answered with an unsupported contract");
+    this.name = "TemplateGalleryContractError";
   }
 }
 
-export const getOforms = async (
+export const getGalleryTemplates = async (
   url: string,
-  filter: OformsFilter,
-): Promise<TOformsList> => {
-  const res = await axios.get<TOformsRawListResponse>(
+  filter: TemplateGalleryFilter,
+): Promise<TGalleryTemplatesList> => {
+  const res = await axios.get<TGalleryRawListResponse>(
     `${url}?${TEMPLATE_FIELDS}&${filter.toApiUrlParams()}`,
   );
 
   const rawTemplates = res?.data?.data ?? [];
 
   if (rawTemplates.length && !rawTemplates[0].documentId)
-    throw new OformsContractError();
+    throw new TemplateGalleryContractError();
 
   const templates = rawTemplates.map((template) =>
     normalizeTemplate(template, url),
@@ -220,18 +222,18 @@ export const getOforms = async (
   };
 };
 
-export const getOformLocales = async (url: string): Promise<string[]> => {
-  const res = await axios.get<TOformRawLocale[]>(url);
+export const getGalleryLocales = async (url: string): Promise<string[]> => {
+  const res = await axios.get<TGalleryRawLocale[]>(url);
 
   return (res?.data ?? []).map((locale) => locale.code).filter(Boolean);
 };
 
-export const getOformPurposes = async (
+export const getGalleryPurposes = async (
   url: string,
   locale: string,
   extension: string,
-): Promise<TOformPurpose[]> => {
-  const res = await axios.get<TOformRawPurposesResponse>(
+): Promise<TGalleryPurpose[]> => {
+  const res = await axios.get<TGalleryRawPurposesResponse>(
     `${url}?${purposeQuery(locale, extension)}`,
   );
 

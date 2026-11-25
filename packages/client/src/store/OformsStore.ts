@@ -35,14 +35,14 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 
-import OformsFilter from "@docspace/shared/api/oforms/filter";
+import TemplateGalleryFilter from "@docspace/shared/api/template-gallery/filter";
 import {
   submitToGallery,
-  getOformLocales,
-  getOforms,
-  getOformPurposes,
-  OformsContractError,
-} from "@docspace/shared/api/oforms";
+  getGalleryLocales,
+  getGalleryTemplates,
+  getGalleryPurposes,
+  TemplateGalleryContractError,
+} from "@docspace/shared/api/template-gallery";
 
 import { convertToLanguage } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -51,11 +51,11 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import type { AxiosError, AxiosResponse } from "axios";
 import type {
-  TOformFile,
-  TOformParentCategory,
-  TOformPurpose,
-  TOformsList,
-} from "@docspace/shared/api/oforms/types";
+  TGalleryTemplate,
+  TGalleryParentCategory,
+  TGalleryPurpose,
+  TGalleryTemplatesList,
+} from "@docspace/shared/api/template-gallery/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
@@ -74,9 +74,9 @@ class OformsStore {
   // constructor immediately assigns the real store.
   userStore: UserStore = null!;
 
-  oformFiles: TOformFile[] | null = null;
+  oformFiles: TGalleryTemplate[] | null = null;
 
-  gallerySelected: TOformFile | null = null;
+  gallerySelected: TGalleryTemplate | null = null;
 
   oformsIsLoading = false;
 
@@ -90,14 +90,14 @@ class OformsStore {
 
   oformsNetworkError = false;
 
-  oformsFilter: OformsFilter = OformsFilter.getDefault();
+  oformsFilter: TemplateGalleryFilter = TemplateGalleryFilter.getDefault();
 
   oformFromFolderId: number | string = myDocumentsFolderId;
 
   // The whole taxonomy of the CMS, fetched in one request per gallery locale
   // and file type: purpose (Business / Personal) -> parent category ->
   // subcategory.
-  purposes: TOformPurpose[] = [];
+  purposes: TGalleryPurpose[] = [];
 
   oformLocales: string[] | null = null;
 
@@ -158,10 +158,10 @@ class OformsStore {
     return locale;
   }
 
-  setOformFiles = (oformFiles: TOformFile[] | null) =>
+  setOformFiles = (oformFiles: TGalleryTemplate[] | null) =>
     (this.oformFiles = oformFiles);
 
-  setOformsFilter = (oformsFilter: OformsFilter) =>
+  setOformsFilter = (oformsFilter: TemplateGalleryFilter) =>
     (this.oformsFilter = oformsFilter);
 
   setOformFromFolderId = (oformFromFolderId: number | string) => {
@@ -174,7 +174,7 @@ class OformsStore {
   setOformsIsRefetching = (oformsIsRefetching: boolean) =>
     (this.oformsIsRefetching = oformsIsRefetching);
 
-  setGallerySelected = (gallerySelected: TOformFile | null) => {
+  setGallerySelected = (gallerySelected: TGalleryTemplate | null) => {
     this.gallerySelected = gallerySelected;
   };
 
@@ -242,7 +242,7 @@ class OformsStore {
     const url = combineUrl(this.oformsApiRoot, "/i18n/locales");
 
     try {
-      this.setOformLocales(await getOformLocales(url));
+      this.setOformLocales(await getGalleryLocales(url));
     } catch {
       // An empty list is the answer the language filter renders from; the
       // failure itself reaches the user through the error screen the list
@@ -251,9 +251,11 @@ class OformsStore {
     }
   };
 
-  getOforms = async (filter: OformsFilter = OformsFilter.getDefault()) => {
+  getOforms = async (
+    filter: TemplateGalleryFilter = TemplateGalleryFilter.getDefault(),
+  ) => {
     try {
-      const oforms = await getOforms(this.oformsApiUrl, filter);
+      const oforms = await getGalleryTemplates(this.oformsApiUrl, filter);
       this.oformsLoadError = false;
       this.oformsNetworkError = false;
       return oforms;
@@ -277,7 +279,10 @@ class OformsStore {
   // A failed request leaves no list to paginate: keeping the previous total
   // would make `hasMoreForms` true against an empty list and let the grid
   // retry the same failing page on every scroll.
-  applyOformsList = (filter: OformsFilter, oformData: TOformsList | null) => {
+  applyOformsList = (
+    filter: TemplateGalleryFilter,
+    oformData: TGalleryTemplatesList | null,
+  ) => {
     if (oformData) {
       filter.page = oformData.pagination.page;
       filter.total = oformData.pagination.total;
@@ -288,7 +293,9 @@ class OformsStore {
     return oformData?.templates ?? [];
   };
 
-  fetchOforms = async (filter: OformsFilter = OformsFilter.getDefault()) => {
+  fetchOforms = async (
+    filter: TemplateGalleryFilter = TemplateGalleryFilter.getDefault(),
+  ) => {
     this.listRequestId += 1;
     const requestId = this.listRequestId;
 
@@ -318,7 +325,7 @@ class OformsStore {
    * entry point that never went through `refetchOforms` (a tab switch, the
    * first load).
    */
-  refetchOforms = async (filter: OformsFilter) => {
+  refetchOforms = async (filter: TemplateGalleryFilter) => {
     this.setOformsIsLoading(true);
     this.setOformsIsRefetching(true);
 
@@ -367,7 +374,7 @@ class OformsStore {
     return res;
   };
 
-  setPurposes = (purposes: TOformPurpose[]) => {
+  setPurposes = (purposes: TGalleryPurpose[]) => {
     this.purposes = purposes;
   };
 
@@ -378,7 +385,7 @@ class OformsStore {
    * template of the current type are left out - the CMS keeps plenty of them,
    * and picking one could only ever end in an empty screen.
    */
-  get parentCategories(): TOformParentCategory[] {
+  get parentCategories(): TGalleryParentCategory[] {
     const { purpose, locale } = this.oformsFilter;
 
     return this.purposes
@@ -394,7 +401,7 @@ class OformsStore {
       .sort((a, b) => a.name.localeCompare(b.name, locale ?? undefined));
   }
 
-  get selectedCategories(): TOformParentCategory[] {
+  get selectedCategories(): TGalleryParentCategory[] {
     const { categoryIds } = this.oformsFilter;
 
     return this.parentCategories.filter(({ documentId }) =>
@@ -402,7 +409,7 @@ class OformsStore {
     );
   }
 
-  get selectedPurpose(): TOformPurpose | null {
+  get selectedPurpose(): TGalleryPurpose | null {
     const { purpose } = this.oformsFilter;
 
     return this.purposes.find(({ key }) => key === purpose) ?? null;
@@ -440,10 +447,10 @@ class OformsStore {
     this.purposesRequestId += 1;
     const requestId = this.purposesRequestId;
 
-    let purposes: TOformPurpose[] = [];
+    let purposes: TGalleryPurpose[] = [];
 
     try {
-      purposes = await getOformPurposes(url, locale, extension);
+      purposes = await getGalleryPurposes(url, locale, extension);
     } catch {
       // Same as the locales: the taxonomy fails together with the list it
       // filters, and the error screen speaks for both.
@@ -459,7 +466,7 @@ class OformsStore {
     });
   };
 
-  fetchOformsWithPurposes = (filter: OformsFilter) =>
+  fetchOformsWithPurposes = (filter: TemplateGalleryFilter) =>
     Promise.all([
       this.fetchOforms(filter),
       this.fetchPurposes(
@@ -576,8 +583,8 @@ class OformsStore {
     await this.fetchOformLocales();
 
     const firstLoadFilter = this.isFormsOnlyGallery
-      ? OformsFilter.getDefault()
-      : OformsFilter.getDefaultDocx();
+      ? TemplateGalleryFilter.getDefault()
+      : TemplateGalleryFilter.getDefaultDocx();
 
     firstLoadFilter.locale = this.defaultOformLocale;
 
@@ -589,12 +596,12 @@ class OformsStore {
 
     const defaultFilter =
       ext === ".docx"
-        ? OformsFilter.getDefaultDocx()
+        ? TemplateGalleryFilter.getDefaultDocx()
         : ext === ".xlsx"
-          ? OformsFilter.getDefaultSpreadsheet()
+          ? TemplateGalleryFilter.getDefaultSpreadsheet()
           : ext === ".pptx"
-            ? OformsFilter.getDefaultPresentation()
-            : OformsFilter.getDefault();
+            ? TemplateGalleryFilter.getDefaultPresentation()
+            : TemplateGalleryFilter.getDefault();
 
     defaultFilter.locale = this.defaultOformLocale;
 

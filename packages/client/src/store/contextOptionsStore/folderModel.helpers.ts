@@ -53,7 +53,7 @@ import AIReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 import { isMobile, isTablet } from "react-device-detect";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
-import type { TOformFile } from "@docspace/shared/api/oforms/types";
+import type { TGalleryTemplate } from "@docspace/shared/api/template-gallery/types";
 import {
   RoomsType,
   FolderType,
@@ -71,7 +71,7 @@ import { getNewRoomLabel } from "SRC_DIR/helpers/newRoomLabel";
 
 export const getFormGalleryContextOptionsImpl = (
   self: ContextOptionsStore,
-  item: TOformFile | null,
+  item: TGalleryTemplate | null,
   t: TTranslation,
   navigate?: unknown,
 ): ContextMenuModel[] => {

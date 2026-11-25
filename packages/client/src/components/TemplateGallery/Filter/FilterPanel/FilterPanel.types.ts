@@ -35,9 +35,9 @@
 
 import type { TFunction } from "i18next";
 import type {
-  TOformParentCategory,
-  TOformPurpose,
-} from "@docspace/shared/api/oforms/types";
+  TGalleryParentCategory,
+  TGalleryPurpose,
+} from "@docspace/shared/api/template-gallery/types";
 
 export interface FilterPanelOwnProps {
   isLoading: boolean;
@@ -48,9 +48,9 @@ export interface FilterPanelProps extends FilterPanelOwnProps {
   t: TFunction;
   oformLocales: string[] | null;
   locale: string;
-  purposes: TOformPurpose[];
+  purposes: TGalleryPurpose[];
   purpose: string;
-  parentCategories: TOformParentCategory[];
+  parentCategories: TGalleryParentCategory[];
   categoryIds: string[];
   isOformsFilterChanged: boolean;
   filterOformsByLocaleIsLoading: boolean;

@@ -64,7 +64,7 @@ const sortTypeDefinition = {
   sortOrder: ["asc", "desc"],
 };
 
-class OformsFilter {
+class TemplateGalleryFilter {
   page: number;
 
   pageSize: number;
@@ -113,7 +113,7 @@ class OformsFilter {
   }
 
   static getDefault(total = DEFAULT_TOTAL, extension = DEFAULT_EXTENSION) {
-    return new OformsFilter(
+    return new TemplateGalleryFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_SIZE,
       [],
@@ -128,19 +128,19 @@ class OformsFilter {
   }
 
   static getDefaultDocx(total = DEFAULT_TOTAL) {
-    return OformsFilter.getDefault(total, "docx");
+    return TemplateGalleryFilter.getDefault(total, "docx");
   }
 
   static getDefaultSpreadsheet(total = DEFAULT_TOTAL) {
-    return OformsFilter.getDefault(total, "xlsx");
+    return TemplateGalleryFilter.getDefault(total, "xlsx");
   }
 
   static getDefaultPresentation(total = DEFAULT_TOTAL) {
-    return OformsFilter.getDefault(total, "pptx");
+    return TemplateGalleryFilter.getDefault(total, "pptx");
   }
 
   clone() {
-    return new OformsFilter(
+    return new TemplateGalleryFilter(
       this.page,
       this.pageSize,
       [...this.categoryIds],
@@ -184,4 +184,4 @@ class OformsFilter {
   };
 }
 
-export default OformsFilter;
+export default TemplateGalleryFilter;

@@ -1,15 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 const api = vi.hoisted(() => ({
-  getOforms: vi.fn(),
-  getOformPurposes: vi.fn(),
-  getOformLocales: vi.fn(),
+  getGalleryTemplates: vi.fn(),
+  getGalleryPurposes: vi.fn(),
+  getGalleryLocales: vi.fn(),
   submitToGallery: vi.fn(),
 }));
 
-// Partial: the module also exports `OformsContractError`, which the store
-// checks with `instanceof` - a full replacement would make it `undefined`.
-vi.mock("@docspace/shared/api/oforms", async (io) => ({
+// Partial: the module also exports `TemplateGalleryContractError`, which the
+// store checks with `instanceof` - a full replacement would make it
+// `undefined`.
+vi.mock("@docspace/shared/api/template-gallery", async (io) => ({
   ...((await io()) as Record<string, unknown>),
   ...api,
 }));
@@ -21,12 +22,12 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type {
-  TOformFile,
-  TOformPurpose,
-  TOformsList,
-} from "@docspace/shared/api/oforms/types";
+  TGalleryTemplate,
+  TGalleryPurpose,
+  TGalleryTemplatesList,
+} from "@docspace/shared/api/template-gallery/types";
 
-import { OformsContractError } from "@docspace/shared/api/oforms";
+import { TemplateGalleryContractError } from "@docspace/shared/api/template-gallery";
 
 import OformsStore from "../OformsStore";
 
@@ -44,7 +45,7 @@ const userStore = {
   user: { cultureName: "en" },
 } as unknown as UserStore;
 
-const template = (id: number): TOformFile => ({
+const template = (id: number): TGalleryTemplate => ({
   id,
   documentId: `doc-${id}`,
   title: `Form ${id}`,
@@ -55,7 +56,7 @@ const template = (id: number): TOformFile => ({
   file: null,
 });
 
-const list = (ids: number[], total = ids.length): TOformsList => ({
+const list = (ids: number[], total = ids.length): TGalleryTemplatesList => ({
   templates: ids.map(template),
   pagination: { page: 1, pageSize: 150, pageCount: 1, total },
 });
@@ -68,7 +69,7 @@ const category = (id: number, templatesCount: number) => ({
   templatesCount,
 });
 
-const purposes: TOformPurpose[] = [
+const purposes: TGalleryPurpose[] = [
   {
     id: 1,
     documentId: "p-1",
@@ -116,9 +117,9 @@ const deferred = <T>() => {
 };
 
 beforeEach(() => {
-  api.getOforms.mockResolvedValue(list([]));
-  api.getOformPurposes.mockResolvedValue(purposes);
-  api.getOformLocales.mockResolvedValue(["en", "de", "fr"]);
+  api.getGalleryTemplates.mockResolvedValue(list([]));
+  api.getGalleryPurposes.mockResolvedValue(purposes);
+  api.getGalleryLocales.mockResolvedValue(["en", "de", "fr"]);
 });
 
 describe("OformsStore.oformsApiRoot", () => {
@@ -231,14 +232,14 @@ describe("OformsStore filter conditions", () => {
   it("loads the list and the taxonomy together when no category is selected", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    const purposesRequest = deferred<TOformPurpose[]>();
-    api.getOformPurposes.mockReturnValueOnce(purposesRequest.promise);
-    api.getOforms.mockClear();
+    const purposesRequest = deferred<TGalleryPurpose[]>();
+    api.getGalleryPurposes.mockReturnValueOnce(purposesRequest.promise);
+    api.getGalleryTemplates.mockClear();
 
     const switching = store.filterOformsByLocale("de");
     await Promise.resolve();
 
-    expect(api.getOforms).toHaveBeenCalledTimes(1);
+    expect(api.getGalleryTemplates).toHaveBeenCalledTimes(1);
 
     purposesRequest.resolve(purposes);
     await switching;
@@ -249,12 +250,12 @@ describe("OformsStore filter conditions", () => {
     await store.initTemplateGallery();
     store.oformsFilter.purpose = "business";
     store.setFilterOformsByLocaleIsLoading(true);
-    api.getOforms.mockClear();
+    api.getGalleryTemplates.mockClear();
 
     await store.clearOformsFilter();
 
     expect(store.oformsFilter.purpose).toBe("business");
-    expect(api.getOforms).not.toHaveBeenCalled();
+    expect(api.getGalleryTemplates).not.toHaveBeenCalled();
   });
 
   it("closes the filter panel on a tab switch", async () => {
@@ -283,7 +284,7 @@ describe("OformsStore filter conditions", () => {
     store.oformsFilter.purpose = "business";
     store.oformsFilter.categoryIds = ["sc-10"];
     await store.filterOformsByLocale("de");
-    api.getOformPurposes.mockClear();
+    api.getGalleryPurposes.mockClear();
 
     await store.clearOformsFilter();
 
@@ -291,7 +292,7 @@ describe("OformsStore filter conditions", () => {
     expect(store.oformsFilter.purpose).toBe("");
     expect(store.oformsFilter.categoryIds).toEqual([]);
     expect(store.oformsFilter.search).toBe("invoice");
-    expect(api.getOformPurposes).toHaveBeenCalledWith(
+    expect(api.getGalleryPurposes).toHaveBeenCalledWith(
       expect.any(String),
       "en",
       "docx",
@@ -306,7 +307,7 @@ describe("OformsStore taxonomy loading", () => {
 
     await store.initTemplateGallery();
 
-    expect(api.getOformPurposes).toHaveBeenCalledWith(
+    expect(api.getGalleryPurposes).toHaveBeenCalledWith(
       "https://cms.example/dashboard/api/purposes",
       "en",
       "docx",
@@ -320,7 +321,7 @@ describe("OformsStore taxonomy loading", () => {
 
     await store.resetFilters(".xlsx");
 
-    expect(api.getOformPurposes).toHaveBeenCalledWith(
+    expect(api.getGalleryPurposes).toHaveBeenCalledWith(
       expect.any(String),
       "en",
       "xlsx",
@@ -330,12 +331,12 @@ describe("OformsStore taxonomy loading", () => {
   it("follows the gallery language, not the language of the user", async () => {
     const store = createStore();
     await store.initTemplateGallery();
-    api.getOformPurposes.mockClear();
+    api.getGalleryPurposes.mockClear();
 
     await store.filterOformsByLocale("de");
 
-    expect(api.getOformPurposes).toHaveBeenCalledTimes(1);
-    expect(api.getOformPurposes).toHaveBeenCalledWith(
+    expect(api.getGalleryPurposes).toHaveBeenCalledTimes(1);
+    expect(api.getGalleryPurposes).toHaveBeenCalledWith(
       expect.any(String),
       "de",
       "docx",
@@ -347,18 +348,18 @@ describe("OformsStore taxonomy loading", () => {
     const store = createStore();
     await store.initTemplateGallery();
     store.oformsFilter.categoryIds = ["sc-10", "sc-20", "sc-gone"];
-    api.getOforms.mockClear();
+    api.getGalleryTemplates.mockClear();
 
     await store.filterOformsByLocale("de");
 
     expect(store.oformsFilter.categoryIds).toEqual(["sc-10"]);
-    const [, requested] = api.getOforms.mock.calls[0];
+    const [, requested] = api.getGalleryTemplates.mock.calls[0];
     expect(requested.categoryIds).toEqual(["sc-10"]);
   });
 
   it("marks the filter as loaded even when the taxonomy request fails", async () => {
     const store = createStore();
-    api.getOformPurposes.mockRejectedValueOnce(new Error("Network Error"));
+    api.getGalleryPurposes.mockRejectedValueOnce(new Error("Network Error"));
 
     await store.fetchPurposes("en", "pdf");
 
@@ -368,9 +369,9 @@ describe("OformsStore taxonomy loading", () => {
 
   it("keeps the taxonomy of the latest tab when an earlier one answers later", async () => {
     const store = createStore();
-    const stale = deferred<TOformPurpose[]>();
+    const stale = deferred<TGalleryPurpose[]>();
     const latest = [purposes[1]];
-    api.getOformPurposes
+    api.getGalleryPurposes
       .mockReturnValueOnce(stale.promise)
       .mockResolvedValueOnce(latest);
 
@@ -387,8 +388,8 @@ describe("OformsStore taxonomy loading", () => {
 describe("OformsStore list loading", () => {
   it("dims the list only while a filter change is pending", async () => {
     const store = createStore();
-    const pending = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(pending.promise);
+    const pending = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(pending.promise);
 
     const refetch = store.refetchOforms(store.oformsFilter.clone());
 
@@ -409,8 +410,8 @@ describe("OformsStore list loading", () => {
     store.oformsFilter.total = 4;
     store.setOformFiles([template(1), template(2)]);
 
-    const pending = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(pending.promise);
+    const pending = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(pending.promise);
 
     const more = store.fetchMoreOforms();
 
@@ -429,13 +430,13 @@ describe("OformsStore list loading", () => {
     store.oformsFilter.total = 10;
     store.setOformFiles([template(1)]);
 
-    const pending = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(pending.promise);
+    const pending = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(pending.promise);
     const refetch = store.refetchOforms(store.oformsFilter.clone());
 
     await store.fetchMoreOforms();
 
-    expect(api.getOforms).toHaveBeenCalledTimes(1);
+    expect(api.getGalleryTemplates).toHaveBeenCalledTimes(1);
 
     pending.resolve(list([2]));
     await refetch;
@@ -443,9 +444,9 @@ describe("OformsStore list loading", () => {
 
   it("drops the answer of a filter change that was superseded", async () => {
     const store = createStore();
-    const slow = deferred<TOformsList>();
-    const fast = deferred<TOformsList>();
-    api.getOforms
+    const slow = deferred<TGalleryTemplatesList>();
+    const fast = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates
       .mockReturnValueOnce(slow.promise)
       .mockReturnValueOnce(fast.promise);
 
@@ -472,11 +473,11 @@ describe("OformsStore list loading", () => {
     store.oformsFilter.total = 10;
     store.setOformFiles([template(1)]);
 
-    const page = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(page.promise);
+    const page = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(page.promise);
     const more = store.fetchMoreOforms();
 
-    api.getOforms.mockResolvedValueOnce(list([5]));
+    api.getGalleryTemplates.mockResolvedValueOnce(list([5]));
     await store.fetchOforms(store.oformsFilter.clone());
 
     page.resolve(list([2], 10));
@@ -491,12 +492,12 @@ describe("OformsStore list loading", () => {
     store.oformsFilter.total = 10;
     store.setOformFiles([template(1)]);
 
-    const page = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(page.promise);
+    const page = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(page.promise);
     const more = store.fetchMoreOforms();
 
-    const replacement = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(replacement.promise);
+    const replacement = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(replacement.promise);
     const refetch = store.refetchOforms(store.oformsFilter.clone());
 
     page.resolve(list([2], 10));
@@ -513,8 +514,8 @@ describe("OformsStore list loading", () => {
 
   it("dims the list while a tab switch reloads it", async () => {
     const store = createStore();
-    const pending = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(pending.promise);
+    const pending = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(pending.promise);
 
     const reset = store.resetFilters(".xlsx");
 
@@ -531,14 +532,14 @@ describe("OformsStore list loading", () => {
 
   it("undims the list when a tab switch outruns a filter change", async () => {
     const store = createStore();
-    const slow = deferred<TOformsList>();
-    api.getOforms.mockReturnValueOnce(slow.promise);
+    const slow = deferred<TGalleryTemplatesList>();
+    api.getGalleryTemplates.mockReturnValueOnce(slow.promise);
 
     const searchFilter = store.oformsFilter.clone();
     searchFilter.search = "slow";
     const refetch = store.refetchOforms(searchFilter);
 
-    api.getOforms.mockResolvedValueOnce(list([7]));
+    api.getGalleryTemplates.mockResolvedValueOnce(list([7]));
     await store.resetFilters(".xlsx");
 
     slow.resolve(list([1]));
@@ -554,7 +555,9 @@ describe("OformsStore list loading", () => {
     store.oformsFilter.total = 10;
     store.setOformFiles([template(1)]);
 
-    api.getOforms.mockRejectedValueOnce({ response: { status: 500 } });
+    api.getGalleryTemplates.mockRejectedValueOnce({
+      response: { status: 500 },
+    });
     await store.fetchOforms(store.oformsFilter.clone());
 
     expect(store.oformsFilter.total).toBe(0);
@@ -564,7 +567,9 @@ describe("OformsStore list loading", () => {
   it("raises the error screen for a status the CMS was not expected to answer", async () => {
     const store = createStore();
 
-    api.getOforms.mockRejectedValueOnce({ response: { status: 403 } });
+    api.getGalleryTemplates.mockRejectedValueOnce({
+      response: { status: 403 },
+    });
     await store.fetchOforms(store.oformsFilter.clone());
 
     expect(store.oformsLoadError).toBe(true);
@@ -574,7 +579,7 @@ describe("OformsStore list loading", () => {
   it("tells a dead network apart from a refusing CMS", async () => {
     const store = createStore();
 
-    api.getOforms.mockRejectedValueOnce({ code: "ERR_NETWORK" });
+    api.getGalleryTemplates.mockRejectedValueOnce({ code: "ERR_NETWORK" });
     await store.fetchOforms(store.oformsFilter.clone());
 
     expect(store.oformsNetworkError).toBe(true);
@@ -585,7 +590,7 @@ describe("OformsStore list loading", () => {
     const store = createStore();
     store.setOformLocales(null);
 
-    api.getOformLocales.mockRejectedValueOnce({ response: { status: 403 } });
+    api.getGalleryLocales.mockRejectedValueOnce({ response: { status: 403 } });
     await store.fetchOformLocales();
 
     expect(store.oformLocales).toEqual([]);
@@ -594,7 +599,9 @@ describe("OformsStore list loading", () => {
   it("raises the error screen when the CMS answers with the previous contract", async () => {
     const store = createStore();
 
-    api.getOforms.mockRejectedValueOnce(new OformsContractError());
+    api.getGalleryTemplates.mockRejectedValueOnce(
+      new TemplateGalleryContractError(),
+    );
     await store.fetchOforms(store.oformsFilter.clone());
 
     expect(store.oformsLoadError).toBe(true);

@@ -33,10 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TOformFile } from "@docspace/shared/api/oforms/types";
+import type { TGalleryTemplate } from "@docspace/shared/api/template-gallery/types";
 
 export interface FileTileProps {
-  item: TOformFile;
+  item: TGalleryTemplate;
   smallPreview: boolean;
   onClickInfo: (e: React.MouseEvent) => void;
   onClick: () => void;

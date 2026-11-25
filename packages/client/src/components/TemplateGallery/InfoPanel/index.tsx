@@ -34,7 +34,7 @@
  */
 
 import { inject, observer } from "mobx-react";
-import type { TOformFile } from "@docspace/shared/api/oforms/types";
+import type { TGalleryTemplate } from "@docspace/shared/api/template-gallery/types";
 import InfoPanel from "@onlyoffice/apps-ui-kit/components/section/sub-components/InfoPanel";
 import SubInfoPanelBody from "@onlyoffice/apps-ui-kit/components/section/sub-components/InfoPanelBody";
 import SubInfoPanelHeader from "@onlyoffice/apps-ui-kit/components/section/sub-components/InfoPanelHeader";
@@ -47,7 +47,7 @@ import {
 interface InfoPanelTemplateGalleryProps {
   isVisibleInfoPanelTemplateGallery: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
-  setGallerySelected: (item: TOformFile | null) => void;
+  setGallerySelected: (item: TGalleryTemplate | null) => void;
 }
 
 const InfoPanelTemplateGallery = ({

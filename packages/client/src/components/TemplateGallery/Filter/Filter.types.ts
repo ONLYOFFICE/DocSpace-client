@@ -33,10 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import OformsFilter from "@docspace/shared/api/oforms/filter";
+import TemplateGalleryFilter from "@docspace/shared/api/template-gallery/filter";
 
 export interface FilterContentProps {
-  oformsFilter: OformsFilter;
+  oformsFilter: TemplateGalleryFilter;
   filterOformsBySearch: (search: string) => void;
   filterOformsByLocaleIsLoading: boolean;
   categoryFilterLoaded: boolean;

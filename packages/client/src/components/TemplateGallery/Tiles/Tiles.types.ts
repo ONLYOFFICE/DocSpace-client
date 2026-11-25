@@ -35,9 +35,9 @@
 
 import type { NavigateFunction } from "react-router";
 import type { IndexRange } from "react-virtualized";
-import type { TOformFile } from "@docspace/shared/api/oforms/types";
+import type { TGalleryTemplate } from "@docspace/shared/api/template-gallery/types";
 
-export type TFile = TOformFile;
+export type TFile = TGalleryTemplate;
 
 export interface TilesProps {
   tReady: boolean;
@@ -47,7 +47,7 @@ export interface TilesProps {
   setOformFilesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
   smallPreview: boolean;
-  setGallerySelected: (item: TOformFile | null) => void;
+  setGallerySelected: (item: TGalleryTemplate | null) => void;
   viewMobile: boolean;
   setTemplateGalleryVisible: (isVisible: boolean) => void;
   isShowInitSkeleton: boolean;

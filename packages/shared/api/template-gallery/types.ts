@@ -38,13 +38,13 @@
  *
  * The CMS is Strapi v5: entities are flat (no `attributes` envelope), carry
  * both a numeric `id` and a string `documentId`, and relations are plain
- * arrays. The `TOformRaw*` types describe what the API answers with; the
+ * arrays. The `TGalleryRaw*` types describe what the API answers with; the
  * client never passes them further than the normalizers in `./index.ts`,
- * which map them to the `TOform*` model the gallery is built on.
+ * which map them to the `TGallery*` model the gallery is built on.
  */
 
 /** A media entry (image or template file) as the gallery requests it. */
-export type TOformRawMedia = {
+export type TGalleryRawMedia = {
   id: number;
   documentId: string;
   url?: string | null;
@@ -56,7 +56,7 @@ export type TOformRawMedia = {
 };
 
 /** A template entity of the `/oforms` collection. */
-export type TOformRawTemplate = {
+export type TGalleryRawTemplate = {
   id: number;
   documentId: string;
   name_form?: string | null;
@@ -64,12 +64,12 @@ export type TOformRawTemplate = {
   template_desc?: string | null;
   url?: string | null;
   updatedAt?: string | null;
-  card_prewiew?: TOformRawMedia | null;
-  file_oform?: TOformRawMedia[] | null;
+  card_prewiew?: TGalleryRawMedia | null;
+  file_oform?: TGalleryRawMedia[] | null;
 };
 
 /** Pagination block of a list response (`meta.pagination`). */
-export type TOformsPagination = {
+export type TGalleryPagination = {
   page: number;
   pageSize: number;
   pageCount: number;
@@ -77,15 +77,15 @@ export type TOformsPagination = {
 };
 
 /** Body of the templates list response. */
-export type TOformsRawListResponse = {
-  data?: TOformRawTemplate[] | null;
+export type TGalleryRawListResponse = {
+  data?: TGalleryRawTemplate[] | null;
   meta?: {
-    pagination?: TOformsPagination;
+    pagination?: TGalleryPagination;
   } | null;
 };
 
 /** A taxonomy entity: a subcategory, or a parent category without children. */
-export type TOformRawCategory = {
+export type TGalleryRawCategory = {
   id: number;
   documentId: string;
   name?: string | null;
@@ -95,38 +95,38 @@ export type TOformRawCategory = {
 };
 
 /** A parent category with the subcategories it groups. */
-export type TOformRawParentCategory = TOformRawCategory & {
-  subcategories?: TOformRawCategory[] | null;
+export type TGalleryRawParentCategory = TGalleryRawCategory & {
+  subcategories?: TGalleryRawCategory[] | null;
 };
 
 /** The top level of the taxonomy: Business or Personal. */
-export type TOformRawPurpose = {
+export type TGalleryRawPurpose = {
   id: number;
   documentId: string;
   key?: string | null;
   name?: string | null;
-  parent_categories?: TOformRawParentCategory[] | null;
+  parent_categories?: TGalleryRawParentCategory[] | null;
 };
 
 /** Body of the `/purposes` response. */
-export type TOformRawPurposesResponse = {
-  data?: TOformRawPurpose[] | null;
+export type TGalleryRawPurposesResponse = {
+  data?: TGalleryRawPurpose[] | null;
 };
 
 /** One entry of the `/i18n/locales` response. */
-export type TOformRawLocale = {
+export type TGalleryRawLocale = {
   code: string;
 };
 
 /** The card image of a template, with the dimensions the tile lays out by. */
-export type TOformPreview = {
+export type TGalleryPreview = {
   url: string;
   width: number;
   height: number;
 };
 
 /** The downloadable template file behind a gallery card. */
-export type TOformSource = {
+export type TGallerySource = {
   url: string;
   name: string;
   /** Extension with the leading dot, as the CMS stores it (`.docx`). */
@@ -139,7 +139,7 @@ export type TOformSource = {
  * A gallery template in client terms. Field names of the CMS stop here: every
  * consumer (tiles, info panel, create-file flow) reads this shape.
  */
-export type TOformFile = {
+export type TGalleryTemplate = {
   /** Numeric CMS id. Travels to the backend as `formId`. */
   id: number;
   documentId: string;
@@ -148,18 +148,18 @@ export type TOformFile = {
   slug: string;
   description: string;
   updatedAt: string;
-  preview: TOformPreview | null;
-  file: TOformSource | null;
+  preview: TGalleryPreview | null;
+  file: TGallerySource | null;
 };
 
 /** A normalized templates list with its pagination. */
-export type TOformsList = {
-  templates: TOformFile[];
-  pagination: TOformsPagination;
+export type TGalleryTemplatesList = {
+  templates: TGalleryTemplate[];
+  pagination: TGalleryPagination;
 };
 
 /** A leaf of the taxonomy the category filter selects by. */
-export type TOformCategory = {
+export type TGalleryCategory = {
   id: number;
   documentId: string;
   name: string;
@@ -173,16 +173,16 @@ export type TOformCategory = {
 };
 
 /** A category group: one first-level item of the category filter. */
-export type TOformParentCategory = TOformCategory & {
-  subcategories: TOformCategory[];
+export type TGalleryParentCategory = TGalleryCategory & {
+  subcategories: TGalleryCategory[];
 };
 
 /** Business or Personal, with the category tree it owns. */
-export type TOformPurpose = {
+export type TGalleryPurpose = {
   id: number;
   documentId: string;
   /** Machine key (`business` / `personal`), used as the filter value. */
   key: string;
   name: string;
-  parentCategories: TOformParentCategory[];
+  parentCategories: TGalleryParentCategory[];
 };

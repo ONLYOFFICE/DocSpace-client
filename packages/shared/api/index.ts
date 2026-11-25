@@ -38,7 +38,7 @@
 import Filter from "./people/filter";
 import FilesFilter from "./files/filter";
 import RoomsFilter from "./rooms/filter";
-import OformsFilter from "./oforms/filter";
+import TemplateGalleryFilter from "./template-gallery/filter";
 import * as people from "./people";
 import * as user from "./user";
 import * as settings from "./settings";
@@ -49,7 +49,7 @@ import * as files from "./files";
 import * as rooms from "./rooms";
 import * as plugins from "./plugins";
 import * as management from "./management";
-import * as oforms from "./oforms";
+import * as templateGallery from "./template-gallery";
 import * as oauth from "./oauth";
 import * as debuginfo from "./debuginfo";
 import * as apiKeys from "./api-keys";
@@ -63,7 +63,7 @@ export default {
   Filter,
   FilesFilter,
   RoomsFilter,
-  OformsFilter,
+  TemplateGalleryFilter,
   people,
   user,
   settings,
@@ -74,7 +74,7 @@ export default {
   files,
   rooms,
   plugins,
-  oforms,
+  templateGallery,
   oauth,
   management,
   debuginfo,

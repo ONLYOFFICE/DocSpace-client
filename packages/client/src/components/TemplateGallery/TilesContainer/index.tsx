@@ -52,7 +52,7 @@ import {
 import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
-import type OformsFilter from "@docspace/shared/api/oforms/filter";
+import type TemplateGalleryFilter from "@docspace/shared/api/template-gallery/filter";
 import styles from "../TemplateGallery.module.scss";
 import FilterContent from "../Filter";
 import Tiles from "../Tiles";
@@ -65,7 +65,7 @@ interface TilesContainerOwnProps {
 }
 
 interface FilterProps {
-  oformsFilter: OformsFilter;
+  oformsFilter: TemplateGalleryFilter;
   filterOformsByLocaleIsLoading: boolean;
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;

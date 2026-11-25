@@ -34,6 +34,10 @@ const stores = await vi.hoisted(async () => {
     filesActionsStore: { downloadFiles: vi.fn() },
     filesStore,
     infoPanelStore: { setIsMobileHidden: vi.fn() },
+    mediaViewerDataStore: {
+      setCurrentItem: vi.fn(),
+      setMediaViewerData: vi.fn(),
+    },
   };
 });
 
@@ -163,6 +167,33 @@ describe("AiAgentContent", () => {
       stores.filesStore.setSelected.mock.invocationCallOrder[0],
     );
     open.mockRestore();
+  });
+
+  it("opens an image in the viewer of the same tab, and any other file by its link", async () => {
+    const image = {
+      ...file(1, "Chart.png"),
+      viewAccessibility: { ImageView: true, MediaView: false },
+    };
+    api.getAiThreadArtifacts.mockResolvedValue([image, file(5, "Proposal.docx")]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const links = screen.getAllByTestId("ai-agent-content-open");
+
+    // fireEvent returns false when the default action was prevented.
+    expect(fireEvent.click(links[0])).toBe(false);
+    expect(stores.mediaViewerDataStore.setCurrentItem).toHaveBeenCalledWith({
+      fileId: 1,
+      fileInfo: image,
+    });
+    expect(stores.mediaViewerDataStore.setMediaViewerData).toHaveBeenCalledWith({
+      visible: true,
+      id: 1,
+    });
+
+    // A click that asks for a new tab keeps the link's own way.
+    expect(fireEvent.click(links[0], { ctrlKey: true })).toBe(true);
+    expect(fireEvent.click(links[1])).toBe(true);
+    expect(stores.mediaViewerDataStore.setMediaViewerData).toHaveBeenCalledTimes(1);
   });
 
   // The agent's page has no list whose click would take the buffer away.

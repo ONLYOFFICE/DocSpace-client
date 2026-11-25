@@ -113,8 +113,9 @@ type AiAgentContentProps = {
  * The Content tab of the Info panel on an agent's page: the files of the
  * conversation on screen - Artifacts, what its replies produced, and
  * Attachments, what the user added to it. It follows the conversation: a new
- * chat shows both empty, another conversation its own files. A file opens in
- * a new tab; its "..." menu downloads it, saves a copy to a room or opens
+ * chat shows both empty, another conversation its own files. An image or a
+ * media file opens in the viewer over the page, any other file in a new tab;
+ * its "..." menu downloads it, saves a copy to a room or opens
  * the room or folder it is in.
  *
  * The server announces no new file, so the lists are read again when the
@@ -132,6 +133,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const filesStore = useStore("filesStore");
   const dialogsStore = useStore("dialogsStore");
   const infoPanelStore = useStore("infoPanelStore");
+  const mediaViewerDataStore = useStore("mediaViewerDataStore");
 
   // A change reported for another conversation is none of this tab's.
   const change = dialogsStore.aiChatThreadFilesChange;
@@ -235,6 +237,17 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     );
   };
 
+  // The viewer plays the files of the list on screen, and an agent's page
+  // has none: the file is handed to it as the one item of its playlist, the
+  // way the upload panel shows a file of another folder.
+  const openInViewer = (e: React.MouseEvent, file: TFile) => {
+    // A click that asks for a new tab or window keeps the link's own way.
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    mediaViewerDataStore.setCurrentItem({ fileId: file.id, fileInfo: file });
+    mediaViewerDataStore.setMediaViewerData({ visible: true, id: file.id });
+  };
+
   const getRowOptions = (file: TFile): ContextMenuModel[] => [
     {
       key: "ai-agent-content-download",
@@ -260,6 +273,9 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     ]
       .filter(Boolean)
       .join(" \u00b7 ");
+    const isMedia =
+      !!file.viewAccessibility?.ImageView ||
+      !!file.viewAccessibility?.MediaView;
     return (
       <div key={file.id} className={styles.row} data-testid="ai-agent-content-file">
         <img className={styles.icon} src={getIcon(32, file.fileExst)} alt="" />
@@ -267,6 +283,11 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
           <Link
             href={file.webUrl}
             target={LinkTarget.blank}
+            onClick={
+              isMedia
+                ? (e: React.MouseEvent) => openInViewer(e, file)
+                : undefined
+            }
             fontSize="13px"
             fontWeight={600}
             isTextOverflow

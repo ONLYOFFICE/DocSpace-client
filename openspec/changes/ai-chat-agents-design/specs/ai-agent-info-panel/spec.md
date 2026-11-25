@@ -146,7 +146,7 @@ The answer of the latest read of a conversation SHALL win over an earlier read a
 - **THEN** the files listed before stay on screen
 
 ### Requirement: File rows of Content
-Each row SHALL show the file's icon, its name and its size, and for an artifact the time it was produced. The name SHALL open the file in a new tab. The attachments are the files kept in the conversation's folder: a file attached where it lies, because it could not be copied there, SHALL NOT be listed.
+Each row SHALL show the file's icon, its name and its size, and for an artifact the time it was produced. The name SHALL open the file in a new tab, except an image or a media file, which SHALL open in the media viewer over the agent's page, in the same tab. The attachments are the files kept in the conversation's folder: a file attached where it lies, because it could not be copied there, SHALL NOT be listed.
 
 #### Scenario: Generated image
 - **WHEN** a reply produced an image

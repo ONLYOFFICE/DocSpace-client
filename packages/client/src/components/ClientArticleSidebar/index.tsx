@@ -280,11 +280,14 @@ const ClientArticleSidebar = ({
   React.useEffect(() => cancelChatClose, [cancelChatClose]);
   const isAiProjectRoomRootRef = React.useRef(isAiProjectRoomRoot);
   isAiProjectRoomRootRef.current = isAiProjectRoomRoot;
-  const leaveFullscreenChat = React.useCallback(() => {
+  const leaveFullscreenChat = React.useCallback((path: string) => {
     if (!aiChatStore?.effectiveFullscreen) return;
     cancelChatClose();
     if (isAiProjectRoomRootRef.current) {
-      aiChatStore.close();
+      // Another agent takes the chat over from this one; closed here, it
+      // showed the default greeting until that agent was read. Any other
+      // room of the section releases the chat once it is the one shown.
+      if (!/^\/ai-rooms\/\d+\//.test(path)) aiChatStore.close();
       return;
     }
     const close = () => {
@@ -303,7 +306,7 @@ const ClientArticleSidebar = ({
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
       onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
-        leaveFullscreenChat();
+        leaveFullscreenChat(path);
         onFolderNavigateRef.current?.();
         if (!meta?.isLink) navigate(path);
       },

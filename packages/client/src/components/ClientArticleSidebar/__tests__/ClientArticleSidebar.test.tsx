@@ -142,6 +142,7 @@ type TRenderOptions = {
   recentThreads?: { id: string; title: string }[];
   hasMoreThreads?: boolean;
   selectedFolder?: Record<string, unknown>;
+  isAiProjectRoomRoot?: boolean;
 };
 
 const sidebar = (
@@ -151,6 +152,7 @@ const sidebar = (
     recentThreads = [],
     hasMoreThreads = false,
     selectedFolder = { id: 1, rootFolderType: FolderType.USER, isRootFolder: true },
+    isAiProjectRoomRoot = false,
   }: TRenderOptions = {},
 ) => (
     <Provider
@@ -168,6 +170,7 @@ const sidebar = (
         myFolderId: 1,
         isTemplatesFolderRoot: false,
         isDocumentsFolder: false,
+        isAiProjectRoomRoot,
         pinnedAiProjects: pinnedProjects.map((project) => ({
           ...project,
           logo: { color: "" },
@@ -489,6 +492,28 @@ describe("ClientArticleSidebar — leaving the AI Chat page", () => {
     vi.runAllTimers();
     expect(store.close).toHaveBeenCalledTimes(1);
     vi.useRealTimers();
+    chat.store = null;
+  });
+
+  it("leaves an agent's chat open for the agent picked next, and closes it for any other entry", () => {
+    const store = {
+      isVisible: true,
+      effectiveFullscreen: true,
+      isOnHistoryPage: false,
+      close: vi.fn(),
+      setFullscreen: vi.fn(),
+    };
+    chat.store = store;
+    renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
+      pinnedProjects: [{ id: "100", name: "Next" }],
+      isAiProjectRoomRoot: true,
+    });
+
+    fireEvent.click(screen.getByTestId("nav-ai-nested-project-100"));
+    expect(store.close).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByTestId("nav-ai-rooms"));
+    expect(store.close).toHaveBeenCalledTimes(1);
     chat.store = null;
   });
 

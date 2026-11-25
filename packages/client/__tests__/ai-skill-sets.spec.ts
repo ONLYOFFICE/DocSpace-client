@@ -668,7 +668,7 @@ test.describe("AI Chat: Skill sets", () => {
       expect(set.skills[0].text).toBe(before);
     });
 
-    // Spec: ai-skill-sets, "View instructions"
+    // Spec: ai-skill-sets, "Opening a skill"
     test("Click on a skill", async ({ page, baseUrl }) => {
       await openSet(page, baseUrl, documentAssistant(sets));
 
@@ -691,7 +691,7 @@ test.describe("AI Chat: Skill sets", () => {
       expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
     });
 
-    // Spec: ai-skill-sets, "View instructions"
+    // Spec: ai-skill-sets, "Opening a skill"
     test("Preview", async ({ page, baseUrl }) => {
       await openSet(page, baseUrl, documentAssistant(sets));
 
@@ -709,7 +709,8 @@ test.describe("AI Chat: Skill sets", () => {
       expect(page.url()).not.toContain("doceditor");
     });
 
-    // Spec: ai-skill-sets, "Create skill with AI"
+    // Spec: ai-skill-sets, "Create skill with AI", "Generated skill" and
+    // "The skill dialog"
     test("Create skill with AI", async ({ page, baseUrl, mockRequest }) => {
       mockRequest.use(generateSkillHandler());
       await openSet(page, baseUrl, documentAssistant(sets));
@@ -803,7 +804,7 @@ test.describe("AI Chat: Skill sets", () => {
       await expect(page.getByTestId("view-skill-dialog")).toHaveCount(0);
     });
 
-    // Spec: ai-skill-sets, "View instructions"
+    // Spec: ai-skill-sets, "Opening a skill"
     test("Reader clicks a skill", async ({ page, baseUrl }) => {
       await openSet(page, baseUrl, documentAssistant(sets));
 

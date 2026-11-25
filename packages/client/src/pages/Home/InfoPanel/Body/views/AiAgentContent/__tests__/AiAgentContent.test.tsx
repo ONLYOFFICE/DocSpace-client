@@ -41,7 +41,27 @@ const stores = await vi.hoisted(async () => {
   };
 });
 
+// The socket, as a plain emitter: what the server sends is handed to the
+// listeners of that event.
+const socket = vi.hoisted(() => {
+  const listeners = new Map<string, Set<(data?: unknown) => void>>();
+  return {
+    listeners,
+    on: (event: string, listener: (data?: unknown) => void) => {
+      if (!listeners.has(event)) listeners.set(event, new Set());
+      listeners.get(event)?.add(listener);
+    },
+    off: (event: string, listener: (data?: unknown) => void) => {
+      listeners.get(event)?.delete(listener);
+    },
+    send: (event: string, data?: unknown) => {
+      listeners.get(event)?.forEach((listener) => listener(data));
+    },
+  };
+});
+
 vi.mock("@docspace/shared/api/ai/threadFiles", () => api);
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({ default: socket }));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: keyof typeof stores) => stores[name],
 }));
@@ -68,7 +88,7 @@ vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
   ),
 }));
 
-import AiAgentContent, { REFRESH_DELAY_MS } from "../index";
+import AiAgentContent, { MODIFY_THREAD_FILES_EVENT, REFRESH_DELAY_MS } from "../index";
 
 const file = (id: number, title: string) => ({
   id,
@@ -93,6 +113,10 @@ const signal = (threadId: string) => {
   stores.dialogsStore.aiChatThreadFilesChange = { threadId, seq: seq + 1 };
 };
 
+/** The server announces a file saved to a conversation. */
+const announce = (threadId: string, kind = "artifacts", cmd = "create") =>
+  socket.send(MODIFY_THREAD_FILES_EVENT, { cmd, id: 9, threadId, kind });
+
 const wait = (ms: number) =>
   act(async () => {
     await vi.advanceTimersByTimeAsync(ms);
@@ -108,6 +132,7 @@ const deferred = <T,>() => {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  socket.listeners.clear();
   stores.dialogsStore.aiChatActiveThreadId = "t-1";
   stores.dialogsStore.aiChatThreadFilesChange = { threadId: "", seq: 0 };
   stores.dialogsStore.setCopyPanelVisible(false);
@@ -423,5 +448,52 @@ describe("AiAgentContent", () => {
     await flush();
     expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png", "Report.docx"]);
+  });
+
+  it("reads the lists again when the server announces a new file of the conversation", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(MODIFY_THREAD_FILES_EVENT).toBe("s:modify-thread-files");
+    api.getAiThreadArtifacts.mockResolvedValue([file(9, "Report.docx"), file(1, "Chart.png")]);
+    // The server writes the id in its own case.
+    announce("T-1");
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Report.docx", "Chart.png"]);
+  });
+
+  it("reads once for the files announced together", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-1", "attachments");
+    await wait(REFRESH_DELAY_MS / 2);
+    announce("t-1", "attachments");
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+  });
+
+  it("ignores a file announced for another conversation, or another command", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-other");
+    announce("t-1", "artifacts", "delete");
+    await wait(REFRESH_DELAY_MS * 2);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
+  });
+
+  it("stops listening once it is put away", async () => {
+    vi.useFakeTimers();
+    const { unmount } = render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-1");
+    unmount();
+    expect(socket.listeners.get(MODIFY_THREAD_FILES_EVENT)?.size).toBe(0);
+    await wait(REFRESH_DELAY_MS * 2);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
   });
 });

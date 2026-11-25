@@ -43,6 +43,10 @@ import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-me
 import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
+import SocketHelper, {
+  type SocketEvents,
+  type TUnmappedSocketListener,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import {
   getAiThreadArtifacts,
   getAiThreadAttachments,
@@ -62,6 +66,22 @@ import styles from "./AiAgentContent.module.scss";
  * the burst becomes one pair of requests.
  */
 export const REFRESH_DELAY_MS = 400;
+
+/**
+ * A file saved to a conversation: an artifact of a reply or an attachment of
+ * a message. Sent to the conversation's author only, in the agent's own room
+ * `DIR-{projectId}`, which the open agent's page is subscribed to. The event
+ * is not in the ui-kit's SocketEvents yet.
+ */
+export const MODIFY_THREAD_FILES_EVENT =
+  "s:modify-thread-files" as SocketEvents;
+
+type TModifyThreadFiles = {
+  cmd?: string;
+  id?: number | string;
+  threadId?: string;
+  kind?: "artifacts" | "attachments";
+};
 
 type TThreadFiles = { artifacts: TFile[]; attachments: TFile[] };
 
@@ -118,11 +138,13 @@ type AiAgentContentProps = {
  * its "..." menu downloads it, saves a copy to a room or opens
  * the room or folder it is in.
  *
- * The server announces no new file, so the lists are read again when the
- * chat reports a round of this conversation that may have produced one
+ * The lists are read again when the server announces a new file of this
+ * conversation (`s:modify-thread-files`), which also covers a round run on
+ * another device. A removed file is not announced, and an event may be lost
+ * with the connection, so they are also read when the chat reports a round
+ * of this conversation that may have changed them
  * (dialogsStore.aiChatThreadFilesChange, fed from the chat's callbacks in
- * Shell), and when the browser tab is shown again: a round finished out of
- * sight, or on another device, reports nothing here.
+ * Shell), and when the browser tab is shown again.
  */
 const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -197,6 +219,26 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     const timer = setTimeout(() => readRef.current(), REFRESH_DELAY_MS);
     return () => clearTimeout(timer);
   }, [refreshKey]);
+
+  React.useEffect(() => {
+    if (!threadId) return undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const onModify = ({ cmd, threadId: changed }: TModifyThreadFiles = {}) => {
+      // The server writes the id as a GUID, whatever case the chat keeps.
+      if (cmd !== "create" || !changed) return;
+      if (String(changed).toLowerCase() !== threadId.toLowerCase()) return;
+      // A message's attachments come one event each: one read for them all.
+      clearTimeout(timer);
+      timer = setTimeout(() => readRef.current(), REFRESH_DELAY_MS);
+    };
+    // The event is not in the ui-kit's typed listener map.
+    const listener = onModify as unknown as TUnmappedSocketListener;
+    SocketHelper?.on(MODIFY_THREAD_FILES_EVENT, listener);
+    return () => {
+      clearTimeout(timer);
+      SocketHelper?.off(MODIFY_THREAD_FILES_EVENT, listener);
+    };
+  }, [threadId]);
 
   React.useEffect(() => {
     const onVisibilityChange = () => {

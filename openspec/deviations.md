@@ -20,6 +20,7 @@ listed here: they are tracked privately until a released version fixes them.
 | # | Where | What the client does | Evidence | Status |
 |---|-------|----------------------|----------|--------|
 | C1 | shared-links | The copy-link quick button of a file, folder or room copies its primary link without checking whether it expired; the link row and the context menu item refuse an expired link with an error. | `packages/client/src/HOCs/withQuickButtons.js:105-134` against `actions.helpers.tsx:751-754` | OPEN |
+| C3 | file-operations | After an upload finishes, the progress counters are reset on a timer; an upload started inside that window loses its percent, size and uploaded count, while its files stay queued. | `packages/client/src/store/uploadDataStore/__tests__/UploadDataStore.finish.test.ts:229` (pinned as a known race) | OPEN |
 | C2 | shared-links | A link for anyone keeps the "Blocked by admin" label and the reduced actions menu while the administrator allows existing links; only copying is unaffected. | `external-sharing-share-panel.spec.ts:297-333` | NOT A DEFECT (design decision) |
 
 ## Client vs server

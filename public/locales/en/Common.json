@@ -382,6 +382,7 @@
   "AvailableCreditsInsufficient": "Available credits: <1>{{balance}}</1> | Insufficient funds",
   "AvailableLimit": "<1>Available limit under current plan:</1> {{amount}}",
   "AvailableMCPServers": "Available {{mcpServers}}",
+  "AwaitingPaymentPayBeforeBlocking": "Awaiting payment. Once the funds reach your wallet, pay for the plan before {{date}} to avoid portal blocking.",
   "Back": "Back",
   "BackToBilling": "Back to Billing",
   "Backup": "Backup",

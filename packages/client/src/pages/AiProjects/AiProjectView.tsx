@@ -54,6 +54,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
 
 import type AiProjectsStore from "SRC_DIR/store/AiProjectsStore";
+import { toAgentRoomsKind } from "SRC_DIR/store/AiProjectsStore";
 
 import EmptyAccessLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 import EmptyAccessDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
@@ -291,18 +292,23 @@ const AiProjectView = ({
   }, [aiChatStore, isProjectOnScreen, isChatFullscreen]);
 
   // The project's Skill sets and Knowledge bases are its settings: the
-  // chat's "+" menu lists them and its "Manage sources" opens the project's
-  // form - for those who may change the project; a member only sees the
-  // lists. The folders of Data sources stay the member's own pick. The
-  // composer's slash menu changes the Skill sets in place - a set
-  // disconnected from its row, the pick of "Manage skill sets" - and that
-  // change is saved to the project; when the save fails, the chat goes back
+  // chat's "+" menu lists them and its "Manage ..." opens the selector of
+  // the project's rooms of that list, as the project's form does - for
+  // those who may change the project; a member only sees the lists. The
+  // folders of Data sources stay the member's own pick. A Skill set
+  // disconnected from its row in the composer's slash menu is saved to the
+  // project; when the save fails, the chat goes back
   // to the rooms the project has.
   const activeProject = store.activeProject;
   const canEditSources = !!activeProject && activeProject.id === roomId && getAgentRights(activeProject).edit;
   React.useEffect(() => {
     aiChatStore.setSourcesManager({
-      onManage: canEditSources ? () => store.activeProject && store.openEditDialog(store.activeProject) : null,
+      onManage: canEditSources
+        ? (kind) => {
+            const project = store.activeProject;
+            if (project) void store.openRoomsSelector(project.id, toAgentRoomsKind(kind));
+          }
+        : null,
       onSkillRoomsChange: canEditSources
         ? (change) => {
             void store.changeActiveSkillRooms(change).then((saved) => {

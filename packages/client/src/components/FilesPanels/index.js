@@ -111,12 +111,14 @@ import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
 import AiProjectDialog from "../dialogs/AiProjectDialog";
+import AiProjectRoomsDialog from "../dialogs/AiProjectRoomsDialog";
 import GenerateSkillDialog from "../dialogs/GenerateSkillDialog";
 import EditSkillDialog from "../dialogs/EditSkillDialog";
 
 const Panels = (props) => {
   const {
     aiProjectDialogVisible,
+    aiProjectRoomsDialogVisible,
     generateSkillDialogVisible,
     editSkillDialogVisible,
     uploadPanelVisible,
@@ -483,6 +485,9 @@ const Panels = (props) => {
       <PauseSubmissionsDialog key="pause-submissions-dialog" />
     ),
     aiProjectDialogVisible && <AiProjectDialog key="ai-project-dialog" />,
+    aiProjectRoomsDialogVisible && (
+      <AiProjectRoomsDialog key="ai-project-rooms-dialog" />
+    ),
     generateSkillDialogVisible && (
       <GenerateSkillDialog key="generate-skill-dialog" />
     ),
@@ -627,6 +632,7 @@ export default inject(
 
     return {
       aiProjectDialogVisible: aiProjectsStore.projectDialog !== null,
+      aiProjectRoomsDialogVisible: aiProjectsStore.roomsSelector !== null,
       generateSkillDialogVisible: dialogsStore.generateSkillDialogVisible,
       editSkillDialogVisible:
         dialogsStore.editSkillFile !== null ||

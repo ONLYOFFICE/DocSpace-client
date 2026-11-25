@@ -31,15 +31,19 @@ Creating an agent, through the create control of the AI section, the "AI agent" 
 - **THEN** neither a create control nor "Save as new agent" is offered
 
 ### Requirement: Roles of an agent
-An agent SHALL have three roles: Agent owner (`Common:AgentOwner`), Agent manager (`Common:AgentManager`) and Member, which is the room's Content creator (`access` 11). Agent manager SHALL be offered only for a portal owner, a DocSpace admin or a room admin; a User SHALL be offered Member only. No read-only role (the room's Viewer) SHALL be offered: the server refuses it for an agent (server ecb2d0849a).
+An agent SHALL have three roles: Agent owner (`Common:AgentOwner`), Agent manager (`Common:AgentManager`) and Member, which is the room's Content creator (`access` 11). Sharing an agent - its invite panel and a member's role on its Members tab - SHALL offer Member alone, whatever the invitee's type; Agent manager SHALL NOT be offered. No read-only role (the room's Viewer) SHALL be offered: the server refuses it for an agent (server ecb2d0849a).
 
 #### Scenario: Inviting a room admin
 - **WHEN** an Agent manager picks a room admin in the agent's invite panel
-- **THEN** Agent manager and Member are offered, with Agent manager preselected
+- **THEN** Member is the only role offered, and it is preselected
 
-#### Scenario: Inviting a User
-- **WHEN** an Agent manager picks a User in the agent's invite panel
-- **THEN** Member is the only role that can be chosen, and Agent manager is disabled with the note that only room admins and DocSpace admins can hold it (`Common:UserAgentMaxAvailableRoleWarning`)
+#### Scenario: Changing a member's role
+- **WHEN** an Agent manager opens the role menu of a member on the agent's Members tab
+- **THEN** it offers Member and removal, and no Agent manager
+
+#### Scenario: Agent manager from before
+- **WHEN** the Members tab lists a member who is an Agent manager already
+- **THEN** the member's role reads Agent manager
 
 ### Requirement: Who may be invited to an agent
 The agent's invite panel SHALL offer portal users only. It SHALL NOT offer guests, new or existing, groups, an invitation by e-mail, or an invitation link: members are invited by name only. The server refuses a group as a member of an agent in any role (server d2e3fe02c9).
@@ -53,21 +57,21 @@ The agent's invite panel SHALL offer portal users only. It SHALL NOT offer guest
 - **THEN** it offers no "Invite via link" section
 
 ### Requirement: What the Agent owner is offered
-The Agent owner SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, pin, notifications, change owner and Delete agent. The Agent owner SHALL NOT be offered leave.
+The Agent owner SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, the model picker of the agent's chat, pin, notifications, change owner and Delete agent. The Agent owner SHALL NOT be offered leave.
 
 #### Scenario: Owner on the agent's page
 - **WHEN** the Agent owner opens the agent's page
-- **THEN** the header has "Share agent", and the actions menu has Edit agent, change owner and Delete agent (`Common:DeleteAgent`), and no leave
+- **THEN** the header has "Share agent", and the actions menu has change owner and Delete agent (`Common:DeleteAgent`), and neither Edit agent nor leave
 
 ### Requirement: What an Agent manager is offered
-An Agent manager SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, pin, notifications and leave. An Agent manager SHALL NOT be offered Delete agent or change owner.
+An Agent manager SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, the model picker of the agent's chat, pin, notifications and leave. An Agent manager SHALL NOT be offered Delete agent or change owner.
 
 #### Scenario: Manager on the agent's page
 - **WHEN** an Agent manager opens the actions menu of the agent
-- **THEN** it has Edit agent, Share agent and leave, and neither Delete agent nor change owner
+- **THEN** it has Share agent and leave, and neither Edit agent, Delete agent nor change owner
 
 ### Requirement: What a Member is offered
-A Member SHALL be offered: the chat, Agent info (`Common:AgentInfo`), the agent's skill sets and knowledge bases to read, their own data sources to add and remove, pin, notifications and leave. A Member SHALL NOT be offered Edit agent, Share agent, Delete agent, change owner, role changes, removals, or any "Manage ..." row of the agent's skill sets and knowledge bases.
+A Member SHALL be offered: the chat, Agent info (`Common:AgentInfo`), the agent's skill sets and knowledge bases to read, their own data sources to add and remove, pin, notifications and leave. A Member SHALL NOT be offered Edit agent, Share agent, Delete agent, change owner, role changes, removals, any "Manage ..." row of the agent's skill sets and knowledge bases, or the model picker of the agent's chat.
 
 #### Scenario: Member in the agent's chat
 - **WHEN** a Member opens the agent's page

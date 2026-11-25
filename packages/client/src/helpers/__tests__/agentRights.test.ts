@@ -125,9 +125,14 @@ describe("getAgentRights", () => {
     expect(getAgentRights(memberAgent, "room-admin").share).toBe(false);
   });
 
-  it("falls back to EditRoom when the agent comes without its settings block", () => {
+  it("lets edit the agent's settings by the room's EditRoom right only", () => {
     const { aiProject: _settings, ...room } = managerAgent;
     expect(getAgentRights(room, "manager").edit).toBe(true);
+    // The settings block's own flag does not grant or withhold it.
+    const refused = { ...managerAgent, aiProject: { canEditSettings: false } };
+    const granted = { ...memberAgent, aiProject: { canEditSettings: true } };
+    expect(getAgentRights(refused, "manager").edit).toBe(true);
+    expect(getAgentRights(granted, "member").edit).toBe(false);
     expect(getAgentRights(null).chat).toBe(false);
   });
 });

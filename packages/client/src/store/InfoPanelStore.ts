@@ -79,6 +79,7 @@ import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import TreeFoldersStore from "./TreeFoldersStore";
 import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
 import DocumentBuilderReportStore, {
   ReportType,
 } from "./DocumentBuilderReportStore";
@@ -100,6 +101,13 @@ class InfoPanelStore {
   roomsView: InfoPanelViewType = InfoPanelView.infoMembers;
 
   fileView: InfoPanelViewType = InfoPanelView.infoHistory;
+
+  /**
+   * The tab a skill (a skill file of a skill set) opens on: its Details,
+   * until another tab is picked for a skill. Kept apart from `fileView`, so
+   * a tab picked for a skill does not follow other files, nor theirs a skill.
+   */
+  skillView: InfoPanelViewType = InfoPanelView.infoDetails;
 
   isScrollLocked = false;
 
@@ -398,9 +406,27 @@ class InfoPanelStore {
   resetView = () => {
     this.roomsView = InfoPanelView.infoMembers;
     this.fileView = InfoPanelView.infoHistory;
+    this.skillView = InfoPanelView.infoDetails;
   };
 
+  /** The panel shows a skill: a skill file of the selection or of the open skill set. */
+  get isSkillSelected() {
+    const selection = this.infoPanelSelection;
+    if (!selection || Array.isArray(selection)) return false;
+    return isSkillFile(selection as TFile, this.selectedFolderStore);
+  }
+
+  /** The tab of a file as the panel shows it: a skill's own, else `fileView`. */
+  get currentFileView(): InfoPanelViewType {
+    return this.isSkillSelected ? this.skillView : this.fileView;
+  }
+
   setView = (view: InfoPanelViewType) => {
+    if (this.isSkillSelected) {
+      this.skillView = view;
+      this.isScrollLocked = false;
+      return;
+    }
     this.roomsView =
       view === InfoPanelView.infoShare ? InfoPanelView.infoMembers : view;
     this.fileView =
@@ -492,14 +518,14 @@ class InfoPanelStore {
   get isShareTabActive(): boolean {
     return (
       this.roomsView === InfoPanelView.infoShare ||
-      this.fileView === InfoPanelView.infoShare
+      this.currentFileView === InfoPanelView.infoShare
     );
   }
 
   get isDetailsTabActive(): boolean {
     return (
       this.roomsView === InfoPanelView.infoDetails ||
-      this.fileView === InfoPanelView.infoDetails
+      this.currentFileView === InfoPanelView.infoDetails
     );
   }
 

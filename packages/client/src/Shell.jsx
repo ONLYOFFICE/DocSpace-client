@@ -121,6 +121,7 @@ import { AiChatPageBridge } from "./components/AiChatPageBridge";
 import { getAiThreadFilesCallbacks } from "./components/AiChatPageBridge/aiThreadFilesCallbacks";
 import { AiChatVisibilityBridge } from "./components/AiChatVisibilityBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
+import { getAgentRights } from "./helpers/agentRights";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
@@ -193,6 +194,8 @@ const Shell = ({ page = "home", ...rest }) => {
     aiChatContextRooms,
     aiActivePresetId,
     aiActivePresetSuggestions,
+    aiActivePresetCanEdit,
+    setAiAgentModel,
     isAiProjectOpen,
     aiActiveProject,
     openEditAiProject,
@@ -265,6 +268,30 @@ const Shell = ({ page = "home", ...rest }) => {
   // The chat runs on an agent: on the agent's page, or picked in the title
   // menu of the chat panel (the agent's page sets it as well).
   const isChatOnAgent = isInsideAiProject || !!aiActivePresetId;
+
+  // The agent the chat runs on, and whether the user may change its
+  // settings (the room's `EditRoom` right): only then the composer's model
+  // picker is open, and a model picked there is saved as the agent's.
+  const chatAgentId = isInsideAiProject
+    ? (aiActiveProject?.id ?? null)
+    : aiActivePresetId
+      ? Number(aiActivePresetId)
+      : null;
+  const canEditChatAgent = isInsideAiProject
+    ? !!aiActiveProject && getAgentRights(aiActiveProject).edit
+    : !!aiActivePresetCanEdit;
+  const isAgentModelLocked = isChatOnAgent && !canEditChatAgent;
+  const onAgentModelPicked = React.useMemo(
+    () =>
+      isChatOnAgent && canEditChatAgent && chatAgentId !== null
+        ? (profile, actionId) => {
+            // A row of the host's own actions is not a model of the agent.
+            if (actionId || !profile?.id) return;
+            void setAiAgentModel(chatAgentId, profile.id);
+          }
+        : undefined,
+    [isChatOnAgent, canEditChatAgent, chatAgentId, setAiAgentModel],
+  );
 
   useCreateFileError({
     setPortalTariff,
@@ -1064,11 +1091,13 @@ const Shell = ({ page = "home", ...rest }) => {
           // The picker area is always present (an explicit `false` also
           // overrides the lib's entityId default-hide heuristic — the chat
           // is always entity-scoped here). A chat on an agent, on its page
-          // or in the panel, runs on the agent's model, so the picker is a
-          // read-only label.
+          // or in the panel, runs on the agent's model: the picker is a
+          // read-only label, unless the user may edit the agent - then a
+          // model picked there becomes the agent's.
           formatChatError={formatChatError}
           hideProfilePicker={false}
-          profilePickerReadOnly={isChatOnAgent}
+          profilePickerReadOnly={isAgentModelLocked}
+          onProfilePickerSelect={onAgentModelPicked}
           isChatOpen={isChatOpen}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={
@@ -1293,6 +1322,8 @@ const ShellWrapper = inject(
       // The agent the chat runs on, picked in the panel or open on its page.
       aiActivePresetId: aiPresetsStore.activePreset?.id ?? null,
       aiActivePresetSuggestions: aiPresetsStore.activePreset?.suggestions,
+      aiActivePresetCanEdit: !!aiPresetsStore.activePreset?.rights.edit,
+      setAiAgentModel: aiProjectsStore.setModel,
       isAiProjectOpen: aiProjectsStore.activeProject !== null,
       aiActiveProject: aiProjectsStore.activeProject,
       portalHasChatModel: aiProjectsStore.portalHasChatModel,

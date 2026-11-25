@@ -40,6 +40,7 @@ import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import {
   clashesWith,
   getLocalizedText,
+  isUserPlugin,
   getPersonalPluginRows,
 } from "SRC_DIR/helpers/plugins/personal";
 
@@ -130,5 +131,17 @@ describe("getLocalizedText", () => {
 
   it("falls back when the plugin has no translations", () => {
     expect(getLocalizedText(undefined, "ru", "fallback")).toBe("fallback");
+  });
+});
+
+describe("isUserPlugin", () => {
+  const plugin = { name: "hello", createBy: { id: "u1" } } as TAPIPlugin;
+
+  it("matches the plugin of that user by its name in any case", () => {
+    expect(isUserPlugin(plugin, "u1", "Hello")).toBe(true);
+  });
+
+  it("does not match the plugin of the same name of another user", () => {
+    expect(isUserPlugin(plugin, "u2", "hello")).toBe(false);
   });
 });

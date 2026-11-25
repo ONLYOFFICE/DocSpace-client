@@ -63,7 +63,10 @@ import type {
   TFileSecurity,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
-import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import type {
+  TAPIPlugin,
+  TMemberPlugin,
+} from "@docspace/shared/api/plugins/types";
 
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -71,6 +74,7 @@ import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import SocketHelper, {
   SocketEvents,
   TChangeWebPluginData,
+  TChangePersonalWebPluginsData,
   SocketCommands,
 } from "@onlyoffice/apps-ui-kit/utils/socket";
 
@@ -112,7 +116,7 @@ import type {
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserAccess, matchesUserRole } from "../helpers/plugins/roles";
-import { clashesWith } from "../helpers/plugins/personal";
+import { clashesWith, isUserPlugin } from "../helpers/plugins/personal";
 import {
   isSupersededPluginItem,
   MARKDOWN_EXTENSION,
@@ -237,12 +241,21 @@ class PluginStore {
 
   deletePluginDialogVisible = false;
 
-  deletePluginDialogProps: null | { pluginName: string; personal?: boolean } =
-    null;
+  deletePluginDialogProps: null | {
+    pluginName: string;
+    personal?: boolean;
+    userId?: string;
+    userName?: string;
+    pluginTitle?: string;
+  } = null;
 
   isEmptyList = false;
 
   personalPlugins: TAPIPlugin[] = [];
+
+  usersPlugins: TMemberPlugin[] = [];
+
+  isUsersPluginsLoaded = false;
 
   reloadRequiredPlugins: string[] = [];
 
@@ -318,6 +331,46 @@ class PluginStore {
       SocketEvents.ChangePersonalWebPlugin,
       this.handlePersonalPluginStateChange,
     );
+
+    SocketHelper?.on(
+      SocketEvents.ChangePersonalWebPlugins,
+      this.handlePersonalPluginsSwitch,
+    );
+  };
+
+  handlePersonalPluginsSwitch = ({
+    enabled,
+  }: TChangePersonalWebPluginsData) => {
+    this.settingsStore.setPersonalPluginsEnabled(enabled);
+
+    this.personalChanges = this.personalChanges
+      .then(() =>
+        enabled ? this.loadPersonalPlugins() : this.unloadPersonalPlugins(),
+      )
+      .catch((e) => {
+        console.error("[Plugins] Personal plugins switch failed:", e);
+      });
+
+    return this.personalChanges;
+  };
+
+  private loadPersonalPlugins = async () => {
+    if (!(await this.fetchPersonalPlugins(false))) return;
+
+    for (const own of this.personalPlugins) {
+      await this.syncPersonalPlugin(own.name);
+    }
+  };
+
+  private unloadPersonalPlugins = () => {
+    for (const plugin of this.plugins.filter((p) => p.personal)) {
+      if (plugin.enabled) this.deactivatePlugin(plugin.name);
+    }
+
+    runInAction(() => {
+      this.plugins = this.plugins.filter((p) => !p.personal);
+      this.personalPlugins = [];
+    });
   };
 
   handlePersonalPluginStateChange = ({
@@ -362,6 +415,10 @@ class PluginStore {
       return;
     }
 
+    await this.syncPersonalPlugin(name);
+  };
+
+  private syncPersonalPlugin = async (name: string) => {
     const loaded = this.plugins.find((p) => p.personal && p.name === name);
     const own = this.personalPlugins.find((p) => p.name === name);
 
@@ -540,9 +597,7 @@ class PluginStore {
     this.deletePluginDialogVisible = value;
   };
 
-  setDeletePluginDialogProps = (
-    value: null | { pluginName: string; personal?: boolean },
-  ) => {
+  setDeletePluginDialogProps = (value: PluginStore["deletePluginDialogProps"]) => {
     this.deletePluginDialogProps = value;
   };
 
@@ -708,6 +763,62 @@ class PluginStore {
         p.version === plugin.version &&
         !!p.personal === !!plugin.personal,
     );
+  };
+
+  switchPersonalPlugins = async (enabled: boolean) => {
+    try {
+      await api.plugins.setPersonalPluginsEnabled(enabled);
+
+      this.settingsStore.setPersonalPluginsEnabled(enabled);
+    } catch (e) {
+      toastr.error(e as TData);
+    }
+  };
+
+  fetchUsersPlugins = async () => {
+    try {
+      const plugins = await api.plugins.getMembersPlugins();
+
+      runInAction(() => {
+        this.usersPlugins = plugins;
+      });
+    } catch (e) {
+      toastr.error(e as TData);
+    } finally {
+      runInAction(() => {
+        this.isUsersPluginsLoaded = true;
+      });
+    }
+  };
+
+  updateUserPlugin = async (userId: string, name: string, enabled: boolean) => {
+    try {
+      await api.plugins.updateMemberPlugin(userId, name, enabled);
+
+      runInAction(() => {
+        this.usersPlugins = this.usersPlugins.map((p) =>
+          isUserPlugin(p, userId, name) ? { ...p, enabled } : p,
+        );
+      });
+    } catch (e) {
+      toastr.error(e as TData);
+    }
+  };
+
+  deleteUserPlugin = async (userId: string, name: string, t: TTranslation) => {
+    try {
+      await api.plugins.deleteMemberPlugin(userId, name);
+
+      runInAction(() => {
+        this.usersPlugins = this.usersPlugins.filter(
+          (p) => !isUserPlugin(p, userId, name),
+        );
+      });
+
+      toastr.success(t("PluginDeletedSuccessfully"));
+    } catch (e) {
+      toastr.error(e as TData);
+    }
   };
 
   fetchPersonalPlugins = async (notifyError = true) => {

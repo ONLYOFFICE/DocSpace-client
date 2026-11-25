@@ -53,6 +53,10 @@ vi.mock("@docspace/shared/api", () => ({
       getPlugins: vi.fn(async () => []),
       updatePlugin: vi.fn(async () => ({})),
       addPlugin: vi.fn(),
+      setPersonalPluginsEnabled: vi.fn(async () => undefined),
+      getMembersPlugins: vi.fn(async () => []),
+      updateMemberPlugin: vi.fn(async () => ({})),
+      deleteMemberPlugin: vi.fn(async () => undefined),
     },
   },
 }));
@@ -829,5 +833,194 @@ describe("checkPluginCacheWarning", () => {
     expect(
       store.checkPluginCacheWarning({ name: NAME, version: "1.0.0" } as never),
     ).toBe(false);
+  });
+});
+
+describe("handlePersonalPluginsSwitch", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  const withPortalAndPersonalPlugin = () => {
+    const settingsStore = {
+      culture: "en",
+      setPersonalPluginsEnabled: vi.fn(),
+    };
+
+    const store = new PluginStore(
+      settingsStore as unknown as SettingsStore,
+      {} as unknown as SelectedFolderStore,
+      { user: null } as unknown as UserStore,
+      {} as unknown as CurrentTariffStatusStore,
+    );
+
+    runInAction(() => {
+      store.plugins = [
+        {
+          name: "portal",
+          pluginName: "Portal",
+          enabled: true,
+          personal: false,
+          scopes: [],
+        } as unknown as TPlugin,
+        {
+          name: NAME,
+          pluginName: "Hello",
+          enabled: true,
+          personal: true,
+          scopes: [],
+        } as unknown as TPlugin,
+      ];
+      store.personalPlugins = [
+        { name: NAME, enabled: true } as unknown as TAPIPlugin,
+      ];
+    });
+
+    return { store, settingsStore };
+  };
+
+  it("unloads the personal plugins and keeps the portal ones when switched off", async () => {
+    const { store, settingsStore } = withPortalAndPersonalPlugin();
+
+    await store.handlePersonalPluginsSwitch({ enabled: false });
+
+    expect(settingsStore.setPersonalPluginsEnabled).toHaveBeenCalledWith(
+      false,
+    );
+    expect(store.plugins.map((p) => p.name)).toEqual(["portal"]);
+    expect(store.personalPlugins).toEqual([]);
+  });
+
+  it("loads the member's own plugins when switched on", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: false, status: 404, text: async () => "" }),
+    );
+    vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const { store, settingsStore } = withPortalAndPersonalPlugin();
+
+    runInAction(() => {
+      store.plugins = store.plugins.filter((p) => !p.personal);
+      store.personalPlugins = [];
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      {
+        name: "own",
+        pluginName: "Own",
+        enabled: true,
+        personal: true,
+        scopes: "",
+        url: "https://portal.test/plugins/own/plugin.js",
+        version: "1.0.0",
+        runtime: "module",
+      } as unknown as TAPIPlugin,
+    ]);
+
+    await store.handlePersonalPluginsSwitch({ enabled: true });
+
+    expect(settingsStore.setPersonalPluginsEnabled).toHaveBeenCalledWith(true);
+    expect(store.plugins.map((p) => p.name).sort()).toEqual(["own", "portal"]);
+  });
+});
+
+describe("users' plugins for an administrator", () => {
+  const usersPlugin = (name: string, userId: string, enabled = true) =>
+    ({ name, enabled, createBy: { id: userId } }) as unknown as TAPIPlugin;
+
+  const withUsersPlugins = () => {
+    const settingsStore = {
+      culture: "en",
+      setPersonalPluginsEnabled: vi.fn(),
+    };
+
+    const store = new PluginStore(
+      settingsStore as unknown as SettingsStore,
+      {} as unknown as SelectedFolderStore,
+      { user: null } as unknown as UserStore,
+      {} as unknown as CurrentTariffStatusStore,
+    );
+
+    runInAction(() => {
+      store.usersPlugins = [
+        usersPlugin(NAME, "u1"),
+        usersPlugin(NAME, "u2"),
+      ];
+    });
+
+    return { store, settingsStore };
+  };
+
+  it("reads the plugins of all users and marks them read", async () => {
+    const { store } = withUsersPlugins();
+
+    vi.mocked(api.plugins.getMembersPlugins).mockResolvedValueOnce([
+      usersPlugin("other", "u3"),
+    ]);
+
+    await store.fetchUsersPlugins();
+
+    expect(store.usersPlugins.map((p) => p.name)).toEqual(["other"]);
+    expect(store.isUsersPluginsLoaded).toBe(true);
+  });
+
+  it("switches off the plugin of one user and leaves the same name of another", async () => {
+    const { store } = withUsersPlugins();
+
+    await store.updateUserPlugin("u1", NAME, false);
+
+    expect(api.plugins.updateMemberPlugin).toHaveBeenCalledWith(
+      "u1",
+      NAME,
+      false,
+    );
+    expect(store.usersPlugins.map((p) => p.enabled)).toEqual([false, true]);
+  });
+
+  it("drops the deleted plugin of one user from the list", async () => {
+    const { store } = withUsersPlugins();
+
+    await store.deleteUserPlugin("u2", NAME, t);
+
+    expect(api.plugins.deleteMemberPlugin).toHaveBeenCalledWith("u2", NAME);
+    expect(store.usersPlugins.map((p) => p.createBy.id)).toEqual(["u1"]);
+  });
+
+  it("keeps the list when a deletion is refused", async () => {
+    const { store } = withUsersPlugins();
+
+    vi.mocked(api.plugins.deleteMemberPlugin).mockRejectedValueOnce(
+      new Error("Access denied"),
+    );
+
+    await store.deleteUserPlugin("u2", NAME, t);
+
+    expect(store.usersPlugins).toHaveLength(2);
+    expect(toastr.error).toHaveBeenCalled();
+  });
+
+  it("switches personal plugins for the workspace and shows the new state at once", async () => {
+    const { store, settingsStore } = withUsersPlugins();
+
+    await store.switchPersonalPlugins(false);
+
+    expect(api.plugins.setPersonalPluginsEnabled).toHaveBeenCalledWith(false);
+    expect(settingsStore.setPersonalPluginsEnabled).toHaveBeenCalledWith(
+      false,
+    );
+  });
+
+  it("keeps the state shown when the switch is refused", async () => {
+    const { store, settingsStore } = withUsersPlugins();
+
+    vi.mocked(api.plugins.setPersonalPluginsEnabled).mockRejectedValueOnce(
+      new Error("Access denied"),
+    );
+
+    await store.switchPersonalPlugins(false);
+
+    expect(settingsStore.setPersonalPluginsEnabled).not.toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalled();
   });
 });

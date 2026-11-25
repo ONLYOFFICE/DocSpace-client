@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { EmployeeType } from "../../enums";
 import { TCreatedBy } from "../../types";
 
 export type TAPIPlugin = {
@@ -59,4 +60,9 @@ export type TAPIPlugin = {
   settings: string;
   /** "module" — load as ES module without iframe; absent/other — legacy iframe */
   runtime?: "module";
+};
+
+export type TMemberPlugin = TAPIPlugin & {
+  createByType: EmployeeType;
+  createByIsOwner: boolean;
 };

@@ -36,7 +36,7 @@
 // @ts-nocheck
 
 import { request } from "../client";
-import { TAPIPlugin } from "./types";
+import { TAPIPlugin, TMemberPlugin } from "./types";
 
 const personalQuery = (personal?: boolean) =>
   personal ? "?personal=true" : "";
@@ -102,5 +102,42 @@ export const deletePlugin = async (name: string, personal?: boolean) => {
   return request({
     method: "DELETE",
     url: `/settings/webplugins/${name}${personalQuery(personal)}`,
+  });
+};
+
+export const setPersonalPluginsEnabled = async (enabled: boolean) => {
+  return request({
+    method: "POST",
+    url: `/settings/personalwebplugins`,
+    data: { enabled },
+  });
+};
+
+export const getMembersPlugins = async (signal?: AbortSignal) => {
+  const res = (await request({
+    method: "GET",
+    url: `/settings/personalwebplugins/plugins`,
+    signal,
+  })) as TMemberPlugin[];
+
+  return res;
+};
+
+export const updateMemberPlugin = async (
+  userId: string,
+  name: string,
+  enabled: boolean,
+) => {
+  return request({
+    method: "PUT",
+    url: `/settings/personalwebplugins/plugins/${userId}/${name}`,
+    data: { enabled },
+  }) as Promise<TMemberPlugin>;
+};
+
+export const deleteMemberPlugin = async (userId: string, name: string) => {
+  return request({
+    method: "DELETE",
+    url: `/settings/personalwebplugins/plugins/${userId}/${name}`,
   });
 };

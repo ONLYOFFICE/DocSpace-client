@@ -287,7 +287,12 @@ class SettingsStore {
 
   enablePlugins = false;
 
-  pluginOptions = { upload: false, delete: false, personal: false };
+  pluginOptions = {
+    upload: false,
+    delete: false,
+    personal: false,
+    personalAvailable: false,
+  };
 
   domainValidator: TDomainValidator | null = null;
 
@@ -383,6 +388,10 @@ class SettingsStore {
 
   setWalletLowBalance = (walletLowBalance: boolean) => {
     this.walletLowBalance = walletLowBalance;
+  };
+
+  setPersonalPluginsEnabled = (personal: boolean) => {
+    this.pluginOptions = { ...this.pluginOptions, personal };
   };
 
   externalDbEnabled: boolean = false;
@@ -1147,6 +1156,7 @@ class SettingsStore {
         upload: origSettings.plugins.upload,
         delete: origSettings.plugins.delete,
         personal: !!origSettings.plugins.personal,
+        personalAvailable: !!origSettings.plugins.personalAvailable,
       };
     }
 

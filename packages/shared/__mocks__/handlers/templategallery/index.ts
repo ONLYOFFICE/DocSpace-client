@@ -37,7 +37,7 @@ import { http } from "msw";
 
 import { BASE_URL } from "../../e2e/utils";
 
-const CMS_PATH = "oforms-cms/api";
+const CMS_PATH = "template-gallery-cms/api";
 
 const SEARCH_FILTER = "filters[name_form][$containsi]";
 const PURPOSE_FILTER =
@@ -64,7 +64,7 @@ const PURPOSE_NAMES: Record<string, Record<TLocale, string>> = {
   personal: { en: "Personal", de: "Privat" },
 };
 
-const OFORMS_CATEGORIES: TCategory[] = [
+const GALLERY_CATEGORIES: TCategory[] = [
   {
     documentId: "pc-finance",
     purpose: "business",
@@ -87,7 +87,7 @@ const OFORMS_CATEGORIES: TCategory[] = [
   },
 ];
 
-const OFORMS_TEMPLATES: TTemplate[] = [
+const GALLERY_TEMPLATES: TTemplate[] = [
   {
     id: 1,
     categoryId: "pc-finance",
@@ -109,7 +109,7 @@ const OFORMS_TEMPLATES: TTemplate[] = [
 const cmsUrl = (port: string, path: string) =>
   `${BASE_URL}:${port}/${CMS_PATH}/${path}`;
 
-export const oformsTemplateGallerySettings = (port: string) => ({
+export const templateGallerySettings = (port: string) => ({
   templateGallery: {
     domain: `${BASE_URL}:${port}`,
     path: `/${CMS_PATH}/oforms`,
@@ -122,7 +122,7 @@ const toLocale = (value: string | null): TLocale =>
   value === "de" ? "de" : "en";
 
 const categoriesOf = (locale: TLocale, purpose: string) =>
-  OFORMS_CATEGORIES.filter(
+  GALLERY_CATEGORIES.filter(
     (category) => category.purpose === purpose && category.names[locale],
   ).map((category, index) => ({
     id: index + 1,
@@ -159,10 +159,10 @@ const templatesResponse = (params: URLSearchParams) => {
     .map(([, value]) => value);
 
   const purposeOf = (categoryId: string) =>
-    OFORMS_CATEGORIES.find(({ documentId }) => documentId === categoryId)
+    GALLERY_CATEGORIES.find(({ documentId }) => documentId === categoryId)
       ?.purpose;
 
-  const data = OFORMS_TEMPLATES.filter(({ names }) => names[locale])
+  const data = GALLERY_TEMPLATES.filter(({ names }) => names[locale])
     .filter(({ categoryId }) => !purpose || purposeOf(categoryId) === purpose)
     .filter(
       ({ categoryId }) =>
@@ -196,7 +196,7 @@ const templatesResponse = (params: URLSearchParams) => {
 
 const json = (body: unknown) => new Response(JSON.stringify(body));
 
-export const oformsHandlers = (port: string) => [
+export const templateGalleryHandlers = (port: string) => [
   http.get(cmsUrl(port, "i18n/locales"), () =>
     json([{ code: "en" }, { code: "de" }]),
   ),

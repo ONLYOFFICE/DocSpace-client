@@ -38,8 +38,8 @@ import {
   filesSettingsHandler,
   myDocumentsHandler,
   myHandler,
-  oformsTemplateGallerySettings,
-  oformsHandlers,
+  templateGallerySettings,
+  templateGalleryHandlers,
   rootHandler,
   selfActivationStatusHandler,
   settingsHandler,
@@ -92,12 +92,12 @@ test.describe("Template gallery filter", () => {
       settingsHandler(
         TEST_PORT,
         TypeSettings.Authenticated,
-        oformsTemplateGallerySettings(TEST_PORT),
+        templateGallerySettings(TEST_PORT),
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       myHandler(TEST_PORT, true),
       myDocumentsHandler(TEST_PORT, true),
-      ...oformsHandlers(TEST_PORT),
+      ...templateGalleryHandlers(TEST_PORT),
     );
   });
 
@@ -170,7 +170,7 @@ test.describe("Template gallery filter", () => {
 
     const localeRequest = page.waitForRequest(
       (request) =>
-        request.url().includes("/oforms-cms/api/oforms?") &&
+        request.url().includes("/template-gallery-cms/api/oforms?") &&
         new URL(request.url()).searchParams.get("locale") === "de",
     );
 

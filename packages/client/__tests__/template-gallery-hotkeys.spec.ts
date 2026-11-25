@@ -40,8 +40,8 @@ import {
   filesSettingsHandler,
   myDocumentsHandler,
   myHandler,
-  oformsTemplateGallerySettings,
-  oformsHandlers,
+  templateGallerySettings,
+  templateGalleryHandlers,
   roomTagsHandler,
   rootHandler,
   selfActivationStatusHandler,
@@ -96,12 +96,12 @@ test.describe("Hotkeys with the template gallery open", () => {
       settingsHandler(
         TEST_PORT,
         TypeSettings.Authenticated,
-        oformsTemplateGallerySettings(TEST_PORT),
+        templateGallerySettings(TEST_PORT),
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       myHandler(TEST_PORT, true),
       myDocumentsHandler(TEST_PORT, true),
-      ...oformsHandlers(TEST_PORT),
+      ...templateGalleryHandlers(TEST_PORT),
     );
 
     await page.goto(`${baseUrl}${PERSONAL_FOLDER_URL}`);
@@ -162,12 +162,12 @@ test.describe("Hotkeys in the Forms template gallery", () => {
       settingsHandler(
         TEST_PORT,
         TypeSettings.Authenticated,
-        oformsTemplateGallerySettings(TEST_PORT),
+        templateGallerySettings(TEST_PORT),
       ),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       formsRootHandler(),
       roomTagsHandler(TEST_PORT),
-      ...oformsHandlers(TEST_PORT),
+      ...templateGalleryHandlers(TEST_PORT),
     );
 
     const createRequests: string[] = [];

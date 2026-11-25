@@ -35,25 +35,30 @@
 
 @use "@onlyoffice/apps-ui-kit/styles/mixins";
 
-// The instructions view: a modal of a fixed height, as wide as an editor needs, never taller or
-// wider than the window: on a phone it is the bottom sheet of every modal.
-// Its body takes the height the header and the footer leave.
+// The skill's modal, for its instructions alone and for its form: it takes
+// the window but a margin around it, so the instructions have room, and on
+// a phone it is the bottom sheet of every modal. Its body takes the height
+// the header and the footer leave.
 .dialog {
-  --modal-dialog-default-width: min(640px, calc(100vw - 32px));
+  --modal-dialog-default-width: calc(100vw - 64px);
 
   :global(#modal-dialog) {
     display: flex;
     flex-direction: column;
-    height: min(680px, calc(100dvh - 32px));
-
-    @include mixins.mobile {
-      height: calc(100dvh - 64px);
-    }
+    height: calc(100dvh - 64px);
   }
 
   :global(.modal-body) {
     flex: 1 1 auto;
     min-height: 0;
+  }
+
+  // The buttons keep their own width in a dialog this wide and share the
+  // sheet's width on a phone.
+  @include mixins.mobile {
+    :global(.modal-footer) > * {
+      flex: 1 1 0;
+    }
   }
 
   // The header of a modal keeps its own distance to the form.
@@ -62,8 +67,8 @@
   }
 }
 
-// The form takes the dialog's whole body, in the panel of a new, an edited
-// or a generated skill, as the instructions do in their modal, so the instructions get the height the other
+// The form takes the dialog's whole body, in the modal of a new or an edited
+// skill and in the panel of a generated one, so the instructions get the height the other
 // fields leave and scroll inside their editor. The dialog body is the
 // positioned box; its side padding is kept by the inline inset. Only a
 // dialog too short for the fields scrolls as a whole.

@@ -377,11 +377,11 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.71.tgz
-        version: file:onlyoffice-ai-chat-1.0.2-progress.71.tgz(ebfc3269144ca83955c0791ed073ac72)
+        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.72.tgz
+        version: file:onlyoffice-ai-chat-1.0.2-progress.72.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(813f27f5bc52591aafa848f7f493c015)
+        version: file:onlyoffice-apps-ui-kit.tgz(ca05448346b29098c6317c2ce3af450a)
       '@onlyoffice/doceditor-types':
         specifier: ^10.0.1
         version: 10.0.1
@@ -727,7 +727,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(813f27f5bc52591aafa848f7f493c015)
+        version: file:onlyoffice-apps-ui-kit.tgz(ca05448346b29098c6317c2ce3af450a)
       '@onlyoffice/doceditor-types':
         specifier: ^10.0.1
         version: 10.0.1
@@ -860,7 +860,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(813f27f5bc52591aafa848f7f493c015)
+        version: file:onlyoffice-apps-ui-kit.tgz(ca05448346b29098c6317c2ce3af450a)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -981,7 +981,7 @@ importers:
         version: link:../shared
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(813f27f5bc52591aafa848f7f493c015)
+        version: file:onlyoffice-apps-ui-kit.tgz(ca05448346b29098c6317c2ce3af450a)
       axios:
         specifier: '>=1.15.2'
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -1146,11 +1146,11 @@ importers:
         specifier: 'catalog:'
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.71.tgz
-        version: file:onlyoffice-ai-chat-1.0.2-progress.71.tgz(ebfc3269144ca83955c0791ed073ac72)
+        specifier: file:../../onlyoffice-ai-chat-1.0.2-progress.72.tgz
+        version: file:onlyoffice-ai-chat-1.0.2-progress.72.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(813f27f5bc52591aafa848f7f493c015)
+        version: file:onlyoffice-apps-ui-kit.tgz(ca05448346b29098c6317c2ce3af450a)
       '@radix-ui/react-dialog':
         specifier: 'catalog:'
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1421,7 +1421,7 @@ importers:
         version: 2.4.0
       '@onlyoffice/apps-ui-kit':
         specifier: file:../../onlyoffice-apps-ui-kit.tgz
-        version: file:onlyoffice-apps-ui-kit.tgz(813f27f5bc52591aafa848f7f493c015)
+        version: file:onlyoffice-apps-ui-kit.tgz(ca05448346b29098c6317c2ce3af450a)
       '@react-spring/web':
         specifier: 9.7.5
         version: 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3510,9 +3510,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.71.tgz':
-    resolution: {integrity: sha512-mENiXweWvhTsnogo8kCbyGd8CuAVyqNIiOKYeiy4JLdkIrZdW6zr+ne6WXfyi7bAAZ9U5bHDQqZmTbjSo9aA6g==, tarball: file:onlyoffice-ai-chat-1.0.2-progress.71.tgz}
-    version: 1.0.2-progress.71
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.72.tgz':
+    resolution: {integrity: sha512-n0c+3+LoRlWR+kmHat29sfvReNJP4Z28NsfQXJYkFlS9t8rNR67L/MRV0WoCsRsTE5ScvphIDisEA/yeERWxSw==, tarball: file:onlyoffice-ai-chat-1.0.2-progress.72.tgz}
+    version: 1.0.2-progress.72
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -11838,7 +11838,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.2.1':
     optional: true
 
-  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.71.tgz(ebfc3269144ca83955c0791ed073ac72)':
+  '@onlyoffice/ai-chat@file:onlyoffice-ai-chat-1.0.2-progress.72.tgz(ebfc3269144ca83955c0791ed073ac72)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
       assistant-stream: 0.2.47
@@ -11877,7 +11877,7 @@ snapshots:
       tailwind-merge: 3.6.0
       zustand: 5.0.7(@types/react@19.2.10)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
 
-  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(813f27f5bc52591aafa848f7f493c015)':
+  '@onlyoffice/apps-ui-kit@file:onlyoffice-apps-ui-kit.tgz(ca05448346b29098c6317c2ce3af450a)':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@onlyoffice/docspace-api-sdk': 3.7.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -11915,7 +11915,7 @@ snapshots:
       xss: 1.0.15
       zoom-level: 2.5.0
     optionalDependencies:
-      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-1.0.2-progress.71.tgz(ebfc3269144ca83955c0791ed073ac72)
+      '@onlyoffice/ai-chat': file:onlyoffice-ai-chat-1.0.2-progress.72.tgz(ebfc3269144ca83955c0791ed073ac72)
       '@onlyoffice/doceditor-types': 10.0.1
       '@onlyoffice/document-editor-react': 2.3.0(@onlyoffice/doceditor-types@10.0.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@react-spring/web': 9.7.5(react-dom@19.2.8(react@19.2.8))(react@19.2.8)

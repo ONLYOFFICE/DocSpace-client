@@ -43,13 +43,7 @@ import { PaymentMethodStatus, TariffState } from "../enums";
 
 import { TCustomerInfo, TPortalTariff } from "../api/portal/types";
 import { isValidDate } from "../utils";
-import {
-  getDaysLeft,
-  getDaysRemaining,
-  getIsGracePeriod,
-  getIsGracePeriodRestricted,
-  getIsTariffRestricted,
-} from "../utils/common";
+import { getDaysLeft, getDaysRemaining } from "../utils/common";
 import {
   parseToDateTime,
   formatDateLocalized,
@@ -62,6 +56,11 @@ import {
   AI_TOOLS,
   AI_TOOLS_BYOK,
 } from "@onlyoffice/apps-ui-kit/billing/constants";
+import {
+  getIsGracePeriod,
+  getIsGracePeriodRestricted,
+  getIsTariffRestricted,
+} from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";

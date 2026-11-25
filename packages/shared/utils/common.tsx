@@ -86,7 +86,6 @@ import {
   EmployeeTypeString,
   UrlActionType,
   RoomsTypePrivate,
-  TariffState,
 } from "../enums";
 import {
   CategoryType,
@@ -96,8 +95,7 @@ import {
   TIMEZONE,
 } from "../constants";
 
-import { Nullable, TI18n, TTranslation, ValueOf } from "../types";
-import type { TPortalTariff } from "../api/portal/types";
+import { TI18n, TTranslation, ValueOf } from "../types";
 import { TUser, TUserServiceLimit } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
@@ -895,24 +893,6 @@ export const getDaysRemaining = (autoDelete: Date) => {
   if (daysRemaining <= 0) return "<1";
   return `${daysRemaining}`;
 };
-
-export const getIsGracePeriod = (tariff: Nullable<TPortalTariff> | undefined) =>
-  tariff?.state === TariffState.Delay;
-
-export const getIsTariffRestricted = (
-  tariff: Nullable<TPortalTariff> | undefined,
-) => {
-  if (!tariff) return false;
-  if (typeof tariff.restricted === "boolean") return tariff.restricted;
-
-  return (
-    tariff.state === TariffState.Delay || tariff.state === TariffState.NotPaid
-  );
-};
-
-export const getIsGracePeriodRestricted = (
-  tariff: Nullable<TPortalTariff> | undefined,
-) => getIsGracePeriod(tariff) && getIsTariffRestricted(tariff);
 
 export const getFileExtension = (fileTitleParam: string) => {
   let fileTitle = fileTitleParam;

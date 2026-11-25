@@ -44,12 +44,12 @@ import type {
   TNumericPaymentFeature,
   TPortalTariff,
 } from "@docspace/shared/api/portal/types";
+import { PortalFeaturesLimitations } from "@onlyoffice/apps-ui-kit/enums";
+import { ROOM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import {
   getIsGracePeriod,
   getIsGracePeriodRestricted,
-} from "@docspace/shared/utils/common";
-import { PortalFeaturesLimitations } from "@onlyoffice/apps-ui-kit/enums";
-import { ROOM } from "@onlyoffice/apps-ui-kit/billing/constants";
+} from "@onlyoffice/apps-ui-kit/billing/utils/common";
 import { COUNT_FOR_SHOWING_BAR } from "@docspace/shared/constants";
 import type { Nullable } from "@docspace/shared/types";
 

@@ -49,7 +49,7 @@ import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
-import { getLocalizedText } from "SRC_DIR/helpers/plugins/personal";
+import { getLocalizedText } from "SRC_DIR/helpers/plugins/locale";
 
 import { UsersPluginsItemProps } from "../../Plugins.types";
 import { getContextOptions } from "./getContextOptions";

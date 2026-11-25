@@ -48,7 +48,7 @@ import type { TMemberPlugin } from "@docspace/shared/api/plugins/types";
 import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
 import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
 
-import { getLocalizedText } from "SRC_DIR/helpers/plugins/personal";
+import { getLocalizedText } from "SRC_DIR/helpers/plugins/locale";
 import { useStore } from "SRC_DIR/store/useStore";
 
 import PersonalPluginsSwitch from "./PersonalPluginsSwitch";

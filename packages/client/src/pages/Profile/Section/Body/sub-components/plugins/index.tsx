@@ -45,10 +45,8 @@ import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import { useStore } from "SRC_DIR/store/useStore";
-import {
-  getLocalizedText,
-  getPersonalPluginRows,
-} from "SRC_DIR/helpers/plugins/personal";
+import { getPersonalPluginRows } from "SRC_DIR/helpers/plugins/personal";
+import { getLocalizedText } from "SRC_DIR/helpers/plugins/locale";
 import Dropzone from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/Dropzone";
 import PluginItem from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem";
 import PluginCacheWarningDialog from "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginCacheWarningDialog";

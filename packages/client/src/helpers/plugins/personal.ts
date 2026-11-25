@@ -57,23 +57,6 @@ export const isUserPlugin = (
   name: string,
 ) => plugin.createBy?.id === userId && isSameName(plugin.name, name);
 
-const baseLanguage = (language: string) => language.split("-")[0].toLowerCase();
-
-export const getLocalizedText = (
-  map: { [key: string]: string } | undefined,
-  language: string,
-  fallback: string,
-) => {
-  if (!map) return fallback;
-  if (map[language]) return map[language];
-
-  const sameLanguage = Object.keys(map).find(
-    (key) => map[key] && baseLanguage(key) === baseLanguage(language),
-  );
-
-  return sameLanguage ? map[sameLanguage] : fallback;
-};
-
 export const getPersonalPluginRows = <TLoaded extends TPluginIdentity>(
   own: TAPIPlugin[],
   loaded: TLoaded[],

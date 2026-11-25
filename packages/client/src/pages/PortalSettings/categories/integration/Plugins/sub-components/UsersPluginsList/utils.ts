@@ -37,7 +37,7 @@ import { EmployeeType } from "@docspace/shared/enums";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 import type { TMemberPlugin } from "@docspace/shared/api/plugins/types";
 
-import { getLocalizedText } from "SRC_DIR/helpers/plugins/personal";
+import { getLocalizedText } from "SRC_DIR/helpers/plugins/locale";
 
 export type TUsersPluginsSortBy = "plugin" | "user" | "uploaded";
 

@@ -39,7 +39,6 @@ import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 
 import {
   clashesWith,
-  getLocalizedText,
   isUserPlugin,
   getPersonalPluginRows,
 } from "SRC_DIR/helpers/plugins/personal";
@@ -117,31 +116,6 @@ describe("getPersonalPluginRows", () => {
 
     expect(row.loaded).toBeUndefined();
     expect(row.shadowedBy).toBeUndefined();
-  });
-});
-
-describe("getLocalizedText", () => {
-  it("takes the text of the language", () => {
-    expect(getLocalizedText({ en: "Hello", ru: "Privet" }, "ru", "fallback")).toBe("Privet");
-  });
-
-  it("falls back when the language is missing", () => {
-    expect(getLocalizedText({ en: "Hello" }, "ru", "fallback")).toBe("fallback");
-  });
-
-  it("takes another region of the same language before falling back", () => {
-    expect(
-      getLocalizedText({ "en-US": "Hello", ru: "Privet" }, "en-GB", "fallback"),
-    ).toBe("Hello");
-    expect(getLocalizedText({ de: "Hallo" }, "de-AT", "fallback")).toBe("Hallo");
-    expect(getLocalizedText({ "pt-BR": "Ola" }, "pt", "fallback")).toBe("Ola");
-    expect(getLocalizedText({ "en-US": "" }, "en-GB", "fallback")).toBe(
-      "fallback",
-    );
-  });
-
-  it("falls back when the plugin has no translations", () => {
-    expect(getLocalizedText(undefined, "ru", "fallback")).toBe("fallback");
   });
 });
 

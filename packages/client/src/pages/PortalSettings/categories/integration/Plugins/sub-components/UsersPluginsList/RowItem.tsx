@@ -40,7 +40,7 @@ import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
-import { getLocalizedText } from "SRC_DIR/helpers/plugins/personal";
+import { getLocalizedText } from "SRC_DIR/helpers/plugins/locale";
 
 import { UsersPluginsItemProps } from "../../Plugins.types";
 import { getContextOptions } from "./getContextOptions";

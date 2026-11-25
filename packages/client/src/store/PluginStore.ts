@@ -116,11 +116,8 @@ import type {
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserAccess, matchesUserRole } from "../helpers/plugins/roles";
-import {
-  clashesWith,
-  getLocalizedText,
-  isUserPlugin,
-} from "../helpers/plugins/personal";
+import { clashesWith, isUserPlugin } from "../helpers/plugins/personal";
+import { getLocalizedText } from "../helpers/plugins/locale";
 import {
   isSupersededPluginItem,
   MARKDOWN_EXTENSION,

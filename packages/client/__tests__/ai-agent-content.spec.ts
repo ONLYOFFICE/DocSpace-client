@@ -212,7 +212,7 @@ test.describe("Content of an agent's conversation", () => {
   });
 
   // Spec: ai-agent-info-panel, "Files of the conversation"
-  test("a new chat shows both sections empty", async ({ page, baseUrl }) => {
+  test("a new chat shows the empty screen", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}${agentUrl(AGENT.id)}`);
     await openConversation(page, REPORT.threadId);
     await openContent(page);
@@ -220,8 +220,11 @@ test.describe("Content of an agent's conversation", () => {
 
     await page.locator("#chat-toolbar").getByRole("button", { name: "New chat" }).click();
 
-    await expect(artifacts(page)).toContainText("No files yet");
-    await expect(attachments(page)).toContainText("No files yet");
+    const empty = page.getByTestId("ai-agent-content-empty");
+    await expect(empty).toContainText("No files yet");
+    await expect(empty.locator("img")).toBeVisible();
+    await expect(artifacts(page)).toHaveCount(0);
+    await expect(attachments(page)).toHaveCount(0);
     await expect(page.getByTestId("ai-agent-content-file")).toHaveCount(0);
   });
 

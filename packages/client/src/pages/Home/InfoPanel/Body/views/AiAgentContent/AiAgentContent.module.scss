@@ -94,3 +94,24 @@
   align-items: center;
   gap: 12px;
 }
+
+// The empty screen as the Info panel draws it for a list with no selection:
+// its illustration, a heading and a line under it.
+.emptyScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block-start: 80px;
+  padding-inline: 16px;
+}
+
+.emptyImage {
+  width: 150px;
+  height: 105px;
+  margin-block-end: 32px;
+}
+
+.emptyDescription {
+  margin-block-start: 8px;
+  color: var(--text-secondary);
+}

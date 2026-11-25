@@ -42,6 +42,7 @@ import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/contex
 import { ContextMenuButton } from "@onlyoffice/apps-ui-kit/components/context-menu-button";
 import { Link, LinkTarget, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
 import SocketHelper, {
   type SocketEvents,
@@ -57,6 +58,8 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import EmptyFilesLightSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
+import EmptyFilesDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
 
 import styles from "./AiAgentContent.module.scss";
 
@@ -133,7 +136,8 @@ type AiAgentContentProps = {
  * The Content tab of the Info panel on an agent's page: the files of the
  * conversation on screen - Artifacts, what its replies produced, and
  * Attachments, what the user added to it. It follows the conversation: a new
- * chat shows both empty, another conversation its own files. An image or a
+ * chat, as any conversation without a file, shows the panel's empty screen
+ * in place of the two sections, another conversation its own files. An image or a
  * media file opens in the viewer over the page, any other file in a new tab;
  * its "..." menu downloads it, saves a copy to a room or opens
  * the room or folder it is in.
@@ -156,6 +160,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
   const dialogsStore = useStore("dialogsStore");
   const infoPanelStore = useStore("infoPanelStore");
   const mediaViewerDataStore = useStore("mediaViewerDataStore");
+  const { isBase } = useTheme();
 
   // A change reported for another conversation is none of this tab's.
   const change = dialogsStore.aiChatThreadFilesChange;
@@ -257,6 +262,25 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
     );
 
   if (!files) return null;
+
+  // Nothing in either list: the empty screen of the Info panel, not two
+  // captions over two "no files" lines.
+  if (files.artifacts.length === 0 && files.attachments.length === 0)
+    return (
+      <div className={styles.emptyScreen} data-testid="ai-agent-content-empty">
+        <img
+          className={styles.emptyImage}
+          src={isBase ? EmptyFilesLightSvgUrl : EmptyFilesDarkSvgUrl}
+          alt=""
+        />
+        <Text fontSize="16px" fontWeight={700} lineHeight="22px" textAlign="center">
+          {t("Common:AiContentEmpty")}
+        </Text>
+        <Text fontSize="12px" lineHeight="16px" textAlign="center" className={styles.emptyDescription}>
+          {t("Common:AiContentEmptyDescription")}
+        </Text>
+      </div>
+    );
 
   // A copy goes through the portal's copy panel, which copies the buffered
   // item when nothing is selected: this file, not what a list held.

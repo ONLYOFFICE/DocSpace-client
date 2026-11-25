@@ -65,6 +65,9 @@ vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({ default: socket }));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: keyof typeof stores) => stores[name],
 }));
+vi.mock("@onlyoffice/apps-ui-kit/context/ThemeContext", () => ({
+  useTheme: () => ({ isBase: true }),
+}));
 vi.mock("mobx-react", () => ({ observer: (component: unknown) => component }));
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
@@ -257,12 +260,35 @@ describe("AiAgentContent", () => {
     });
   });
 
-  it("shows both sections empty for a new chat, without a request", async () => {
+  it("shows the empty screen for a new chat, without a request", async () => {
     stores.dialogsStore.aiChatActiveThreadId = "";
     render(<AiAgentContent projectId={7} />);
     await flush();
     expect(api.getAiThreadArtifacts).not.toHaveBeenCalled();
-    expect(screen.getAllByText("Common:AiContentEmpty")).toHaveLength(2);
+    const empty = screen.getByTestId("ai-agent-content-empty");
+    expect(empty.querySelector("img")).not.toBeNull();
+    expect(empty.textContent).toContain("Common:AiContentEmpty");
+    expect(empty.textContent).toContain("Common:AiContentEmptyDescription");
+    // The screen stands in place of the two sections.
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-content-attachments")).toBeNull();
+  });
+
+  it("shows the empty screen for a conversation without a file", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([]);
+    api.getAiThreadAttachments.mockResolvedValue([]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.getByTestId("ai-agent-content-empty")).not.toBeNull();
+  });
+
+  it("keeps both sections, one saying it has no files, when only the other has", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.queryByTestId("ai-agent-content-empty")).toBeNull();
+    expect(screen.getByTestId("ai-agent-content-artifacts").textContent).toContain("Common:AiContentEmpty");
+    expect(titles("ai-agent-content-attachments")).toHaveLength(2);
   });
 
   it("follows the conversation", async () => {
@@ -403,7 +429,7 @@ describe("AiAgentContent", () => {
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
   });
 
-  it("goes from the empty lists of a new chat to its files without going blank", async () => {
+  it("goes from the empty screen of a new chat to its files without going blank", async () => {
     stores.dialogsStore.aiChatActiveThreadId = "";
     const { rerender } = render(<AiAgentContent projectId={7} />);
     await flush();
@@ -412,8 +438,8 @@ describe("AiAgentContent", () => {
     stores.dialogsStore.aiChatActiveThreadId = "t-new";
     rerender(<AiAgentContent projectId={7} />);
     await flush();
-    // Still the empty lists, not nothing, while its files are on their way.
-    expect(screen.getAllByText("Common:AiContentEmpty")).toHaveLength(2);
+    // Still the empty screen, not nothing, while its files are on their way.
+    expect(screen.getByTestId("ai-agent-content-empty")).not.toBeNull();
     answer.resolve([file(1, "Chart.png")]);
     await flush();
     expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-new");

@@ -101,18 +101,32 @@ On the page of an agent, where its chat is open, the Info panel of that agent SH
 - **THEN** there is no Content tab
 
 ### Requirement: Files of the conversation
-Content SHALL list the files of the conversation on screen in two sections: Artifacts (`Common:AiArtifacts`), the files its replies produced, and Attachments (`Common:AiAttachments`), the files the user added to it, each the newest first and up to the server's first page of 100. It SHALL follow the conversation: a chat not sent yet SHALL show both sections empty (`Common:AiContentEmpty`) and go to its files without blanking once its first message creates the conversation.
+Content SHALL list the files of the conversation on screen in two sections: Artifacts (`Common:AiArtifacts`), the files its replies produced, and Attachments (`Common:AiAttachments`), the files the user added to it, each the newest first and up to the server's first page of 100. It SHALL follow the conversation, another conversation showing its own files.
 
 #### Scenario: Conversation with files
 - **WHEN** a member opens Content in a conversation where they attached a document and the agent generated an image
 - **THEN** Artifacts lists the image and Attachments lists the document
 
+### Requirement: Empty screen of Content
+A conversation with no file in either list, as a chat not sent yet, SHALL show the Info panel's empty screen in place of the two sections: its illustration, `Common:AiContentEmpty` and `Common:AiContentEmptyDescription`. It SHALL go to its files without blanking once its first message creates the conversation. When only one list has files, both sections SHALL stay and the empty one SHALL read `Common:AiContentEmpty`.
+
 #### Scenario: New chat
 - **WHEN** the member starts a new chat with Content open
-- **THEN** both sections read "No files yet"
+- **THEN** the empty screen reads "No files yet" over its illustration and neither section is shown
+
+#### Scenario: Only attachments
+- **WHEN** the conversation has an attachment and no artifact
+- **THEN** both sections are shown and Artifacts reads "No files yet"
+
+### Requirement: Content follows the files the server announces
+Content SHALL read both lists again when the server announces a new file of the conversation on screen: `s:modify-thread-files` with `cmd: "create"`, sent to its author in the agent's room `DIR-{projectId}`. The conversation's id SHALL be compared without regard to case, events close together SHALL make one read, and an event for another conversation SHALL be ignored.
+
+#### Scenario: Artifact saved from another device
+- **WHEN** the server announces a new artifact of the conversation on screen while Content is open
+- **THEN** Artifacts lists it without a reload and without the existing rows blanking
 
 ### Requirement: Content follows the rounds of the conversation
-No socket event announces a new artifact or attachment, so Content SHALL read both lists again when a round of the conversation on screen starts, when one of its tool calls returns a result, and when it ends, fails or is stopped. Signals close together SHALL make one read, a signal for another conversation SHALL be ignored, and the rows shown SHALL stay on screen meanwhile. Content SHALL also read again when the browser tab becomes visible, and SHALL NOT read on a timer.
+A removed file is not announced and an event may be lost, so Content SHALL also read both lists again when a round of the conversation on screen starts, when one of its tool calls returns a result, and when it ends, fails or is stopped. Signals close together SHALL make one read, a signal for another conversation SHALL be ignored, and the rows shown SHALL stay on screen meanwhile. Content SHALL also read again when the browser tab becomes visible, and SHALL NOT read on a timer.
 
 #### Scenario: Image generated in the open conversation
 - **WHEN** a reply in the conversation on screen produces an image while Content is open

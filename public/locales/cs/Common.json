@@ -128,6 +128,7 @@
   "AIChatRecent": "Nedávné",
   "AIChats": "AI chaty",
   "AiContentEmpty": "Zatím žádné soubory",
+  "AiContentEmptyDescription": "Zde se zobrazí soubory vytvořené agentem a soubory, které v tomto chatu připojíte.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktivujte AI pro chat s agenty, přístup k jejich znalostní bázi a umožněte jim spouštět úkoly napříč vašimi aplikacemi. Využití AI je účtováno ze zůstatku vaší peněženky.",
   "AIDisabledInfoBlockContactAdminDescription": "Kontaktujte supersprávce pro aktivaci AI a chat s agenty, přístup k jejich znalostní bázi a umožněte jim spouštět úkoly napříč vašimi aplikacemi.",
   "AIDisabledInfoBlockStandaloneDescription": "Funkce AI jsou momentálně vypnuté, což znamená, že tento agent nemůže zpracovávat chaty ani úkoly. Připojte vlastní AI službu, abyste v pracovním prostoru odemkli pokročilé funkce.",

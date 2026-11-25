@@ -173,8 +173,10 @@ class MembersHelper {
           options.viewer,
           ...deleteOption,
         ];
+      // A member of an agent is made Member only; an Agent manager from
+      // before is still named so (getOptionByUserAccess).
       case RoomsType.AiProjectRoom:
-        return [options.projectManager, options.projectMember, ...deleteOption];
+        return [options.projectMember, ...deleteOption];
       default:
         return [];
     }

@@ -72,9 +72,25 @@ import { createLoader } from "@docspace/shared/utils/createLoader";
 import type AiPresetsStore from "./AiPresetsStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import { toAiPreset } from "./AiPresetsStore";
+import { getAgentRights } from "SRC_DIR/helpers/agentRights";
 
 /** The Skill sets connected and disconnected in the chat's composer. */
 type TSkillRoomsChange = { added: { id: string }[]; removed: string[] };
+
+/** The two kinds of rooms an agent links: its Skill sets and its Knowledge bases. */
+export type TAgentRoomsKind = "instructions" | "knowledge";
+
+/** The agent's rooms behind a list of the chat's composer. */
+export const toAgentRoomsKind = (kind: "skills" | "knowledge"): TAgentRoomsKind =>
+  kind === "knowledge" ? "knowledge" : "instructions";
+
+export type TRoomsSelectorState = {
+  /** The agent's room id. */
+  id: number;
+  kind: TAgentRoomsKind;
+  /** The rooms of that kind the agent links, ticked when the selector opens. */
+  rooms: TAiProjectSource[];
+};
 
 export type TProjectDialogState =
   | { mode: "create" }
@@ -207,6 +223,18 @@ class AiProjectsStore {
   projectDialog: TProjectDialogState | null = null;
 
   /**
+   * Set, as a new object each time, when a model picked in the chat on an
+   * agent was not saved: the chat goes back to the agent's model.
+   */
+  modelRejected: { id: number } | null = null;
+
+  /** `modelRejected`, read through a function that keeps its identity. */
+  getModelRejected = () => this.modelRejected;
+
+  /** The rooms selector open on an agent outside its form; `null` while closed. */
+  roomsSelector: TRoomsSelectorState | null = null;
+
+  /**
    * Bumped, by project id, each time a project is taken over as the server
    * has it after a change (a save here, an edit announced from elsewhere):
    * views that read a project on their own, as the Info panel's Context tab
@@ -236,32 +264,122 @@ class AiProjectsStore {
   /* ------------------------------ Project ------------------------------ */
 
   /**
-   * Sets the rooms of one kind linked to the open project, as its sources
-   * column picked them. Only the links are written: the room itself, the
-   * model and the instructions stay as they are.
+   * Opens the selector of one kind of the agent's rooms, the one its form
+   * opens: "Manage skill sets..." and "Manage knowledge bases..." of the
+   * agent's Info panel and of its chat. The agent is read first, unless it
+   * is the open project, so the selector ticks the rooms the server has.
+   * Opens nothing for one who may not change the agent.
    */
-  setActiveRooms = async (kind: "instructions" | "knowledge", rooms: TAiProjectSource[]) => {
-    const current = this.activeProject;
-    if (!current) return;
-    const instructions = kind === "instructions" ? rooms : current.aiProject.instructionsRooms;
-    const knowledge = kind === "knowledge" ? rooms : current.aiProject.knowledgeRooms;
-    try {
-      const project = await updateAiProject(
-        current.id,
-        {
-          aiProject: {
-            instructionsRoomIds: instructions.map((room) => room.id),
-            knowledgeRoomIds: knowledge.map((room) => room.id),
-            rooms: [...instructions, ...knowledge],
+  openRoomsSelector = async (id: number, kind: TAgentRoomsKind) => {
+    const project = await this.readProject(id);
+    if (!project || !getAgentRights(project).edit) return;
+    runInAction(() => {
+      this.roomsSelector = {
+        id,
+        kind,
+        rooms: kind === "instructions" ? project.aiProject.instructionsRooms : project.aiProject.knowledgeRooms,
+      };
+    });
+  };
+
+  closeRoomsSelector = () => (this.roomsSelector = null);
+
+  /**
+   * Sets the rooms of one kind linked to an agent, as its rooms selector
+   * picked them. Only the links are written: the room itself, the model and
+   * the instructions stay as they are. Saved after the changes before it,
+   * from the agent as the server has it then. Resolves to `false` when the
+   * save failed.
+   */
+  setRooms = (id: number, kind: TAgentRoomsKind, rooms: TAiProjectSource[]): Promise<boolean> =>
+    this.saveRooms(id, kind, () => rooms);
+
+  /**
+   * Unlinks one room of an agent, from the bin of its row in the agent's
+   * Info panel. The rest of the agent's rooms of that kind, unavailable ones
+   * included, stay linked.
+   */
+  unlinkRoom = (id: number, kind: TAgentRoomsKind, roomId: number): Promise<boolean> =>
+    this.saveRooms(id, kind, (linked) => linked.filter((room) => room.id !== roomId));
+
+  private saveRooms = (
+    id: number,
+    kind: TAgentRoomsKind,
+    pick: (linked: TAiProjectSource[]) => TAiProjectSource[],
+  ): Promise<boolean> => {
+    const save = this.skillRoomsSaves.then(async () => {
+      const current = await this.readProject(id);
+      if (!current || !getAgentRights(current).edit) return false;
+      const { instructionsRooms, knowledgeRooms } = current.aiProject;
+      const instructions = kind === "instructions" ? pick(instructionsRooms) : instructionsRooms;
+      const knowledge = kind === "knowledge" ? pick(knowledgeRooms) : knowledgeRooms;
+      try {
+        const project = await updateAiProject(
+          current.id,
+          {
+            aiProject: {
+              instructionsRoomIds: instructions.map((room) => room.id),
+              knowledgeRoomIds: knowledge.map((room) => room.id),
+              rooms: [...instructions, ...knowledge],
+            },
           },
-        },
-        current,
-      );
-      showWarnings(project);
-      runInAction(() => this.replaceProject(project));
-      if (this.activeProject?.id === current.id) this.syncPreset(project);
+          current,
+        );
+        showWarnings(project);
+        runInAction(() => this.replaceProject(project));
+        if (this.isChatOn(current.id)) this.syncPreset(project);
+        return true;
+      } catch (e) {
+        toastr.error(errorMessage(e));
+        return false;
+      }
+    });
+    this.skillRoomsSaves = save;
+    return save;
+  };
+
+  /**
+   * Saves the model picked in the composer of the chat that runs on an
+   * agent as the agent's model. Only the model is written. Saved after the
+   * changes before it, from the agent as the server has it then. When the
+   * save fails, or the user may not change the agent, the chat is asked to
+   * go back to the agent's model (`modelRejected`). Resolves to `false` when
+   * nothing was saved.
+   */
+  setModel = (id: number, profileId: string): Promise<boolean> => {
+    const save = this.skillRoomsSaves.then(async () => {
+      const current = await this.readProject(id);
+      if (!current) return false;
+      if (current.aiProject.profile?.id === profileId) return true;
+      if (getAgentRights(current).edit) {
+        try {
+          const project = await updateAiProject(current.id, { aiProject: { profileId } }, current);
+          showWarnings(project);
+          runInAction(() => this.replaceProject(project));
+          if (this.isChatOn(current.id)) this.syncPreset(project);
+          return true;
+        } catch (e) {
+          toastr.error(errorMessage(e));
+        }
+      }
+      if (this.isChatOn(current.id)) {
+        this.syncPreset(current);
+        runInAction(() => (this.modelRejected = { id: current.id }));
+      }
+      return false;
+    });
+    this.skillRoomsSaves = save;
+    return save;
+  };
+
+  /** The agent as the server has it: the open project, or read by id. */
+  private readProject = async (id: number): Promise<TAiProject | null> => {
+    if (this.activeProject?.id === id && !this.activeProject.aiProject.partial) return this.activeProject;
+    try {
+      return await getAiProject(id);
     } catch (e) {
       toastr.error(errorMessage(e));
+      return null;
     }
   };
 
@@ -286,15 +404,7 @@ class AiProjectsStore {
    * server has, and the picked agent then follows the saved one.
    */
   changeSkillRooms = (id: number, change: TSkillRoomsChange): Promise<boolean> =>
-    this.queueSkillRoomsSave(async () => {
-      if (this.activeProject?.id === id) return this.activeProject;
-      try {
-        return await getAiProject(id);
-      } catch (e) {
-        toastr.error(errorMessage(e));
-        return null;
-      }
-    }, change);
+    this.queueSkillRoomsSave(() => this.readProject(id), change);
 
   private queueSkillRoomsSave = (
     read: () => Promise<TAiProject | null>,
@@ -302,7 +412,7 @@ class AiProjectsStore {
   ): Promise<boolean> => {
     const save = this.skillRoomsSaves.then(async () => {
       const current = await read();
-      if (!current?.aiProject.canEditSettings) return false;
+      if (!current || !getAgentRights(current).edit) return false;
       const { instructionsRooms, knowledgeRooms } = current.aiProject;
       const removed = new Set(change.removed.map(Number));
       const kept = instructionsRooms.map((room) => room.id).filter((id) => !removed.has(id));

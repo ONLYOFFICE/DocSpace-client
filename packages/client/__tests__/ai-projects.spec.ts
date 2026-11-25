@@ -189,7 +189,7 @@ const OUTSIDE_AGENT = aiProjectMock({
 const [SKILL_SET] = MEMBER_AGENT.aiProject.instructionsRooms;
 
 test.describe("AI Chat section", () => {
-  test.beforeEach(({ mockRequest }) => {
+  test.beforeEach(async ({ page, mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
       filesSettingsHandler(TEST_PORT),
@@ -197,6 +197,12 @@ test.describe("AI Chat section", () => {
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       aiConfigHandler(TEST_PORT),
       ...aiChatStoreHandlers(TEST_PORT),
+    );
+    // The Agents list opens as tiles until another view is picked there,
+    // and keeps the pick apart from the rest of Files. The cases below read
+    // it as the table a user switched to; "agent cards" goes back to tiles.
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
     );
   });
 
@@ -514,7 +520,7 @@ test.describe("AI Chat section", () => {
         ...aiSectionsHandlers(TEST_PORT, [...AI_PROJECTS, OUTSIDE_AGENT]),
       );
       await page.addInitScript(() =>
-        window.localStorage.setItem("viewAs", "tile"),
+        window.localStorage.setItem("viewAs_aiAgents", "tile"),
       );
     });
 
@@ -726,7 +732,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-page, "Actions menu of an agent"
-    test("offers the Agent owner Edit, Share, Agent info, copy link, change owner and Delete agent, and no Leave agent", async ({
+    test("offers the Agent owner Share, Agent info, copy link, change owner and Delete agent, and neither Edit agent nor Leave agent", async ({
       page,
       baseUrl,
     }) => {
@@ -737,14 +743,12 @@ test.describe("AI Chat section", () => {
       await expect
         .poll(() => menuItems(page))
         .toEqual([
-          "option_edit-room",
           "option_invite-users-to-room",
           "option_room-info",
           "option_link-for-room-members",
           "option_change-room-owner",
           "option_delete",
         ]);
-      await expect(page.locator("#option_edit-room")).toHaveText("Edit agent");
       await expect(page.locator("#option_invite-users-to-room")).toHaveText(
         "Share agent",
       );
@@ -897,7 +901,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-page, "Actions menu of an agent"
-    test("offers an Agent manager Edit, Share, Agent info, copy link and Leave agent, without change owner or Delete agent", async ({
+    test("offers an Agent manager Share, Agent info, copy link and Leave agent, without Edit agent, change owner or Delete agent", async ({
       page,
       mockRequest,
       baseUrl,
@@ -911,7 +915,6 @@ test.describe("AI Chat section", () => {
       await expect
         .poll(() => menuItems(page))
         .toEqual([
-          "option_edit-room",
           "option_invite-users-to-room",
           "option_room-info",
           "option_link-for-room-members",
@@ -1092,7 +1095,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-info-panel, "Context tab"; "Skills of a skill set"; "Managing sources from Context"
-    test("lists a Member the agent's skill sets and knowledge bases on Context, a skill set unfolding to its skills, with no Manage rows", async ({
+    test("lists a Member the agent's skill sets and knowledge bases on Context, a skill set unfolded to its skills until folded, with no Manage rows", async ({
       page,
       baseUrl,
     }) => {
@@ -1114,11 +1117,16 @@ test.describe("AI Chat section", () => {
         await expect(knowledgeBases).toContainText(room.title);
       }
 
-      // The skill set unfolds to the names of its skills.
-      await expect(skillSets).not.toContainText("Pitch builder");
-      await page.getByTestId(`ai-project-room-expander-${SKILL_SET.id}`).click();
+      // The skill set is unfolded to the names of its skills until folded.
       await expect(skillSets).toContainText("Pitch builder");
       await expect(skillSets).toContainText("Follow-up writer");
+      await page.getByTestId(`ai-project-room-expander-${SKILL_SET.id}`).click();
+      await expect(skillSets).not.toContainText("Pitch builder");
+
+      // A Member may not edit the agent: no bin on a row.
+      await expect(
+        page.getByTestId(/^ai-agent-context-remove-/),
+      ).toHaveCount(0);
 
       // A Member may not edit the agent: no "Manage ..." row.
       await expect(page.getByTestId("ai-agent-context-manage-skills")).toHaveCount(0);
@@ -1145,7 +1153,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-info-panel, "Managing sources from Context" ("Agent manager")
-    test("lets an Agent manager open the agent's edit form from Manage knowledge bases on Context", async ({
+    test("lets an Agent manager open the picker of the agent's knowledge bases from Manage knowledge bases on Context, and shows a row's bin under the pointer", async ({
       page,
       baseUrl,
     }) => {
@@ -1167,9 +1175,22 @@ test.describe("AI Chat section", () => {
           .getByTestId("ai-agent-context-manage-knowledge"),
       ).toBeVisible();
 
+      // The bin of a row shows while the pointer is on the row.
+      const source = page
+        .getByTestId("ai-agent-context-knowledge")
+        .getByTestId("ai-agent-context-source")
+        .first();
+      const bin = source.getByTestId("ai-agent-context-remove-knowledge");
+      await manageKnowledge.hover();
+      await expect(bin).toHaveCSS("opacity", "0");
+      await source.hover();
+      await expect(bin).toHaveCSS("opacity", "1");
+
       await manageKnowledge.click();
-      await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
-      await expect(page.getByTestId("ai-project-title")).toHaveValue(MANAGED_AGENT.title);
+      await expect(
+        page.getByTestId("aside").filter({ hasText: "Knowledge bases" }).first(),
+      ).toBeVisible();
+      await expect(page.getByTestId("ai-project-dialog")).toHaveCount(0);
     });
 
     // Spec: ai-agent-info-panel, "Context that cannot be read"

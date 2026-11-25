@@ -25,14 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Locator, Page } from "@playwright/test";
-import { http } from "msw";
 
-import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import {
   filesSettingsHandler,
   groupHandler,
   groupsHandler,
-  mockWorkspaceAppPlugin,
   myDocumentsHandler,
   myHandler,
   rootHandler,
@@ -42,11 +39,11 @@ import {
   settingsHandler,
   TypeSettings,
   webPluginsHandler,
-  webPluginsListHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test, TEST_PORT } from "../fixtures/base";
+import { fakePlugins, openWithPlugins } from "../helpers/plugins";
 
 const PLUGIN_REQUEST_URL = "**/plugins/workspace-app/plugin.js";
 
@@ -326,48 +323,8 @@ export default {
 };
 `;
 
-const fakePluginManifest = (plugin: TFakePlugin): TAPIPlugin => ({
-  ...mockWorkspaceAppPlugin,
-  name: plugin.name,
-  version: "1.0.0",
-  description: `${plugin.name} description`,
-  pluginName: plugin.name.replace(/-/g, ""),
-  scopes: "ArticleNavigation,DashboardWidget",
-  image: "icon.svg",
-  url: `/plugins/${plugin.name}/plugin.js`,
-  enabled: plugin.enabled ?? true,
-  settings: "",
-});
-
-const fakePluginHandlers = (plugins: TFakePlugin[]) => [
-  webPluginsListHandler(TEST_PORT, plugins.map(fakePluginManifest)),
-  ...plugins.map((plugin) =>
-    http.get(
-      `*/plugins/${plugin.name}/plugin.js`,
-      () =>
-        new Response(fakePluginSource(plugin), {
-          headers: { "Content-Type": "application/javascript; charset=utf-8" },
-        }),
-    ),
-  ),
-  http.get(
-    "*/plugins/:pluginName/assets/icon.svg",
-    () =>
-      new Response(ICON_SVG, { headers: { "Content-Type": "image/svg+xml" } }),
-  ),
-];
-
-const openWithPlugins = async (
-  page: Page,
-  url: string,
-  plugins: TFakePlugin[],
-) => {
-  const loaded = plugins.map(({ name }) =>
-    page.waitForResponse(`**/plugins/${name}/plugin.js`),
-  );
-  await page.goto(url);
-  await Promise.all(loaded);
-};
+const fakePluginHandlers = (plugins: TFakePlugin[]) =>
+  fakePlugins(plugins, "ArticleNavigation,DashboardWidget", fakePluginSource, ICON_SVG);
 
 const keysOf = (page: Page, attribute: string, prefix: string) =>
   page

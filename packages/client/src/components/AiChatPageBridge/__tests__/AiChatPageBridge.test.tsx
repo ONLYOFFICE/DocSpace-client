@@ -121,7 +121,7 @@ vi.mock("SRC_DIR/store/useStore", () => ({
           : { isAiProjectRoomRoot: false },
 }));
 
-import AiChatPageBridge from "../index";
+import AiChatPageBridge, { RECENT_REFRESH_DELAY_MS } from "../index";
 
 const titled = (count: number, prefix: string) =>
   Array.from({ length: count }, (_, index) => ({
@@ -148,35 +148,100 @@ describe("AiChatPageBridge — Recent", () => {
 
   afterEach(cleanup);
 
-  it("lists the chat's own conversations outside an agent, the five latest with Show more", async () => {
-    chat.threads.threads = [...titled(6, "plain"), { threadId: "draft" }];
+  const recent = (count: number, prefix: string) =>
+    titled(count, prefix).map((thread) => ({ id: thread.threadId, title: thread.title }));
+
+  const rerenderAt = (view: ReturnType<typeof renderBridge>, chatEntityId?: string) =>
+    view.rerender(
+      <MemoryRouter initialEntries={["/rooms/shared"]}>
+        <AiChatPageBridge canLoadThreads chatEntityId={chatEntityId} />
+      </MemoryRouter>,
+    );
+
+  it("lists the conversations of no agent by a read of its own, the five latest with Show more", async () => {
+    const list = vi
+      .spyOn(chat, "list")
+      .mockResolvedValue([{ threadId: "draft" }, ...titled(6, "plain")]);
     const ensureThreads = vi.spyOn(chat.threads, "ensureThreads");
     renderBridge();
     await flush();
 
+    // The chat's own list is still read: a reload looks its chat up in it.
     expect(ensureThreads).toHaveBeenCalledWith(undefined);
-    expect(dialogsStore.setAiChatRecentThreads).toHaveBeenLastCalledWith(
-      titled(5, "plain").map((thread) => ({ id: thread.threadId, title: thread.title })),
-      true,
-    );
+    expect(list).toHaveBeenCalledWith(undefined, 20);
+    expect(dialogsStore.setAiChatRecentThreads).toHaveBeenLastCalledWith(recent(5, "plain"), true);
   });
 
   it("lists the conversations of no agent while the chat is scoped to an agent", async () => {
     // The chat's own list is the agent's.
     chat.threads.threads = titled(2, "agent");
-    const list = vi.spyOn(chat, "list").mockResolvedValue(titled(2, "plain"));
+    vi.spyOn(chat, "list").mockResolvedValue(titled(2, "plain"));
     renderBridge("42");
     await flush();
 
-    expect(list).toHaveBeenCalledWith(undefined, 6);
-    expect(dialogsStore.setAiChatRecentThreads).toHaveBeenLastCalledWith(
-      titled(2, "plain").map((thread) => ({ id: thread.threadId, title: thread.title })),
-      false,
-    );
+    expect(dialogsStore.setAiChatRecentThreads).toHaveBeenLastCalledWith(recent(2, "plain"), false);
     expect(dialogsStore.setAiChatRecentThreads).not.toHaveBeenCalledWith(
       expect.arrayContaining([expect.objectContaining({ id: "agent0" })]),
       expect.anything(),
     );
+  });
+
+  it("neither reads Recent again nor takes the chat's list on the way from one agent to another", async () => {
+    vi.useFakeTimers();
+    try {
+      chat.threads.threads = titled(2, "agent");
+      const list = vi.spyOn(chat, "list").mockResolvedValue(titled(2, "plain"));
+      const view = renderBridge("42");
+      await flush();
+      expect(list).toHaveBeenCalledTimes(1);
+      expect(dialogsStore.setAiChatRecentThreads).toHaveBeenCalledTimes(1);
+
+      // Between the two the chat is on no agent, its list still the first one's.
+      rerenderAt(view);
+      await flush();
+      chat.threads.threads = titled(3, "other");
+      rerenderAt(view, "43");
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(RECENT_REFRESH_DELAY_MS * 2);
+      });
+
+      expect(list).toHaveBeenCalledTimes(1);
+      expect(dialogsStore.setAiChatRecentThreads).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("reads Recent again once the general chat changed", async () => {
+    vi.useFakeTimers();
+    try {
+      chat.threads.threads = titled(2, "plain");
+      const list = vi.spyOn(chat, "list").mockResolvedValue(titled(2, "plain"));
+      const view = renderBridge();
+      await flush();
+      expect(list).toHaveBeenCalledTimes(1);
+
+      // A new conversation of no agent got its first message.
+      chat.threads.threads = [{ threadId: "new", title: "New" }, ...titled(2, "plain")];
+      list.mockResolvedValue(chat.threads.threads);
+      // The mocked store does not notify: a prop of no meaning draws again.
+      view.rerender(
+        <MemoryRouter initialEntries={["/rooms/shared"]}>
+          <AiChatPageBridge canLoadThreads {...({ "data-draw": 2 } as object)} />
+        </MemoryRouter>,
+      );
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(RECENT_REFRESH_DELAY_MS);
+      });
+
+      expect(list).toHaveBeenCalledTimes(2);
+      expect(dialogsStore.setAiChatRecentThreads).toHaveBeenLastCalledWith(
+        [{ id: "new", title: "New" }, ...recent(2, "plain")],
+        false,
+      );
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
 

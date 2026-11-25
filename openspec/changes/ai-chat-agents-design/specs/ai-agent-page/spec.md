@@ -34,15 +34,19 @@ The title of an agent's page SHALL be the agent's logo and name as plain text an
 - **THEN** the title reads "Legal Reviewer" with its logo and no arrow, and a click on it opens nothing
 
 ### Requirement: Actions menu of an agent
-The actions menu of an agent SHALL list Edit agent (`Common:EditAgent`), Share agent and Agent info (`Common:AgentInfo`) first, then copy link, change owner and Leave agent (`Common:LeaveTheAgent`), and Delete agent (`Common:DeleteAgent`) last after a separator. An item SHALL be present only when the agent's rights allow the action to the user.
+The actions menu of an agent SHALL list Share agent and Agent info (`Common:AgentInfo`) first, then copy link, change owner and Leave agent (`Common:LeaveTheAgent`), and Delete agent (`Common:DeleteAgent`) last after a separator. An item SHALL be present only when the agent's rights allow the action to the user. The menu SHALL NOT offer Edit agent (`Common:EditAgent`).
+
+#### Scenario: No Edit agent in the menu
+- **WHEN** the agent owner opens the menu on the agent's page or on its card
+- **THEN** it offers no Edit agent: the agent's skill sets and knowledge bases are managed from the "Manage ..." rows of its Info panel's Context tab and of its chat
 
 #### Scenario: Agent owner on the page
 - **WHEN** the agent owner opens the menu on the agent's page
-- **THEN** it lists Edit agent, Share agent, Agent info, copy link, change owner and Delete agent, and no Leave agent
+- **THEN** it lists Share agent, Agent info, copy link, change owner and Delete agent, and neither Edit agent nor Leave agent
 
 #### Scenario: Agent manager on the page
 - **WHEN** an Agent manager opens the menu on the agent's page
-- **THEN** it lists Edit agent, Share agent, Agent info, copy link and Leave agent, and neither change owner nor Delete agent
+- **THEN** it lists Share agent, Agent info, copy link and Leave agent, and neither Edit agent, change owner nor Delete agent
 
 #### Scenario: Member on the page
 - **WHEN** a Member opens the menu on the agent's page

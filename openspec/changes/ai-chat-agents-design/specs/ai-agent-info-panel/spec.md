@@ -101,18 +101,39 @@ On the page of an agent, where its chat is open, the Info panel of that agent SH
 - **THEN** there is no Content tab
 
 ### Requirement: Files of the conversation
-Content SHALL list the files of the conversation on screen in two sections: Artifacts (`Common:AiArtifacts`), the files its replies produced, and Attachments (`Common:AiAttachments`), the files the user added to it, each the newest first and up to the server's first page of 100. It SHALL follow the conversation: a chat not sent yet SHALL show both sections empty (`Common:AiContentEmpty`) and go to its files without blanking once its first message creates the conversation.
+Content SHALL list the files of the conversation on screen in two sections: Artifacts (`Common:AiArtifacts`), the files its replies produced, and Attachments (`Common:AiAttachments`), the files the user added to it, each the newest first and up to the server's first page of 100. It SHALL follow the conversation, another conversation showing its own files.
 
 #### Scenario: Conversation with files
 - **WHEN** a member opens Content in a conversation where they attached a document and the agent generated an image
 - **THEN** Artifacts lists the image and Attachments lists the document
 
+### Requirement: Each list of Content is shown as it comes
+Content SHALL read Artifacts and Attachments apart and show each section as soon as its list has come, without waiting for the other. A list that came empty SHALL show nothing; the empty screen SHALL appear only once both lists have come without a file.
+
+#### Scenario: Attachments come first
+- **WHEN** the attachments of the conversation have come and its artifacts are still being read
+- **THEN** Attachments lists its files and Artifacts appears once its own list comes
+
+### Requirement: Empty screen of Content
+A conversation with no file in either list, as a chat not sent yet, SHALL show the Info panel's empty screen in place of the two sections: its illustration, `Common:AiContentEmpty` and `Common:AiContentEmptyDescription`. It SHALL go to its files without blanking once its first message creates the conversation. A list without a file SHALL have no section, its caption included: when only one list has files, only its section SHALL be shown.
+
 #### Scenario: New chat
 - **WHEN** the member starts a new chat with Content open
-- **THEN** both sections read "No files yet"
+- **THEN** the empty screen reads "No files yet" over its illustration and neither section is shown
+
+#### Scenario: Only attachments
+- **WHEN** the conversation has an attachment and no artifact
+- **THEN** Attachments is shown and there is no Artifacts section, no caption and no "No files yet" line
+
+### Requirement: Content follows the files the server announces
+Content SHALL read a list again when the server announces a new file of its `kind` in the conversation on screen, leaving the other list alone: `s:modify-thread-files` with `cmd: "create"`, sent to its author in the agent's room `DIR-{projectId}`. The conversation's id SHALL be compared without regard to case, events close together SHALL make one read, and an event for another conversation SHALL be ignored.
+
+#### Scenario: Artifact saved from another device
+- **WHEN** the server announces a new artifact of the conversation on screen while Content is open
+- **THEN** Artifacts lists it without a reload and without the existing rows blanking
 
 ### Requirement: Content follows the rounds of the conversation
-No socket event announces a new artifact or attachment, so Content SHALL read both lists again when a round of the conversation on screen starts, when one of its tool calls returns a result, and when it ends, fails or is stopped. Signals close together SHALL make one read, a signal for another conversation SHALL be ignored, and the rows shown SHALL stay on screen meanwhile. Content SHALL also read again when the browser tab becomes visible, and SHALL NOT read on a timer.
+A removed file is not announced and an event may be lost, so Content SHALL also read both lists again when a round of the conversation on screen starts, when one of its tool calls returns a result, and when it ends, fails or is stopped. Signals close together SHALL make one read, a signal for another conversation SHALL be ignored, and the rows shown SHALL stay on screen meanwhile. Content SHALL also read again when the browser tab becomes visible, and SHALL NOT read on a timer.
 
 #### Scenario: Image generated in the open conversation
 - **WHEN** a reply in the conversation on screen produces an image while Content is open
@@ -146,7 +167,7 @@ The answer of the latest read of a conversation SHALL win over an earlier read a
 - **THEN** the files listed before stay on screen
 
 ### Requirement: File rows of Content
-Each row SHALL show the file's icon, its name and its size, and for an artifact the time it was produced. The name SHALL open the file in a new tab. The attachments are the files kept in the conversation's folder: a file attached where it lies, because it could not be copied there, SHALL NOT be listed.
+Each row SHALL show the file's icon, its name and its size, and for an artifact the time it was produced. The name SHALL open the file in a new tab, except an image or a media file, which SHALL open in the media viewer over the agent's page, in the same tab. The attachments are the files kept in the conversation's folder: a file attached where it lies, because it could not be copied there, SHALL NOT be listed.
 
 #### Scenario: Generated image
 - **WHEN** a reply produced an image
@@ -171,7 +192,7 @@ While Artifacts lists more than one file, its heading SHALL offer "Download all"
 - **THEN** both files are downloaded together
 
 ### Requirement: Content is the author's own
-Content SHALL show only the files of the caller's own conversation; the server answers both lists to its author only, the agent owner and admins refused. One list that cannot be read SHALL be shown empty without hiding the other; when neither can be read Content SHALL say that something went wrong. The server counts both lists, so the API client hands each over as `{ total, items }`; Content SHALL read the files out of `items`.
+Content SHALL show only the files of the caller's own conversation; the server answers both lists to its author only, the agent owner and admins refused. One list that cannot be read SHALL count as one without files and SHALL NOT hide the other; when neither can be read Content SHALL say that something went wrong. The server counts both lists, so the API client hands each over as `{ total, items }`; Content SHALL read the files out of `items`.
 
 #### Scenario: Counted list
 - **WHEN** the attachments of the conversation are answered as a counted list of one file
@@ -179,7 +200,7 @@ Content SHALL show only the files of the caller's own conversation; the server a
 
 #### Scenario: Artifacts unavailable
 - **WHEN** the artifacts of the conversation cannot be read and its attachments can
-- **THEN** Artifacts is empty and Attachments lists the files
+- **THEN** Attachments lists the files and no Artifacts section is shown
 
 ### Requirement: An agent's contents are not listed
 The Files views SHALL list nothing inside an agent, and its Details SHALL show no file or folder count, as the server lists no contents of an agent and reports no counters for it.

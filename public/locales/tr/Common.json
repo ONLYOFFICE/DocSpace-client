@@ -128,6 +128,7 @@
   "AIChatRecent": "Son kullanılanlar",
   "AIChats": "Yapay zeka sohbetleri",
   "AiContentEmpty": "Henüz dosya yok",
+  "AiContentEmptyDescription": "Aracının oluşturduğu dosyalar ve bu sohbete eklediğiniz dosyalar burada görünecektir.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aracılarınızla sohbet etmek, bilgi tabanlarına erişmek ve uygulamalarınızda görevler yürütmelerine izin vermek için AI’yı etkinleştirin. AI kullanımı cüzdan bakiyenizden faturalandırılır.",
   "AIDisabledInfoBlockContactAdminDescription": "Yapay zekayı etkinleştirmek ve aracılarla iletişim kurmak, aracıların bilgi tabanına erişmek ve uygulamalarınızda görevleri gerçekleştirmek için süper yöneticinizle iletişime geçin.",
   "AIDisabledInfoBlockStandaloneDescription": "AI özellikleri şu anda kapalı, bu da bu ajanın sohbetleri veya görevleri işleyemeyeceği anlamına geliyor. Çalışma alanında gelişmiş özelliklerin kilidini açmak için kendi AI hizmetinizi bağlayın.",

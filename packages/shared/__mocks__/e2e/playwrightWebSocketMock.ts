@@ -36,6 +36,7 @@
 import type { Page, WebSocketRoute } from "@playwright/test";
 import {
   ExportChatEventData,
+  TModifyThreadFilesData,
   TOptSocket,
   TTopUpWalletData,
   TWalletLowBalanceData,
@@ -49,6 +50,7 @@ type ServerMessage =
 
 type SocketEventData =
   | TOptSocket
+  | TModifyThreadFilesData
   | ExportChatEventData
   | TTopUpWalletData
   | TWalletLowBalanceData
@@ -109,6 +111,11 @@ export class PlaywrightWebSocketMock {
 
   emitModifyFolder(data: TOptSocket): void {
     this.emitSocketEvent("s:modify-folder", data);
+  }
+
+  /** A file saved to a conversation of an agent, announced to its author. */
+  emitModifyThreadFiles(data: TModifyThreadFilesData): void {
+    this.emitSocketEvent("s:modify-thread-files", data);
   }
 
   emitExportChat(data: ExportChatEventData): void {

@@ -269,6 +269,48 @@ describe("getFilesContextOptions — file in an AI room", () => {
   });
 });
 
+describe("getFilesContextOptions — a skill", () => {
+  const skill = (security: Record<string, boolean>) =>
+    ({
+      ...fullPermFile(),
+      title: "review.md",
+      fileExst: ".md",
+      parentRoomType: FolderType.InstructionsRoom,
+      rootFolderType: FolderType.AiHub,
+      security,
+    }) as unknown as TItem;
+
+  it("offers only select, edit, view, copy link, move, copy, download and delete", () => {
+    const store = createTestFilesStore();
+    const options = store
+      .getFilesContextOptions(skill(fullPermFile().security as Record<string, boolean>))
+      .filter((key) => !key.startsWith("separator"));
+    const allowed = [
+      "select",
+      "edit",
+      "edit-skill",
+      "preview",
+      "view",
+      "link-for-room-members",
+      "move",
+      "move-to",
+      "copy-to",
+      "download",
+      "delete",
+    ];
+    expect(options.filter((key) => !allowed.includes(key))).toEqual([]);
+    for (const key of ["select", "edit-skill", "link-for-room-members", "move-to", "copy-to", "download", "delete"])
+      expect(options).toContain(key);
+  });
+
+  it("still leaves out what the skill's rights do not allow", () => {
+    const store = createTestFilesStore();
+    const options = store.getFilesContextOptions(skill({}));
+    // Moving is asked of the access rights store, faked as allowing it here.
+    for (const key of ["edit-skill", "delete", "download"]) expect(options).not.toContain(key);
+  });
+});
+
 // Bug 82880: a format that needs server-side conversion cannot be opened from
 // a private room at all, so the menu must not offer it — the file click already
 // explains why. Keys are present here on purpose: without them the no-keys
@@ -484,6 +526,21 @@ describe("getFilesContextOptions — an agent's owner", () => {
     expect(store.getFilesContextOptions(agent("user-2"))).toContain(
       "leave-room",
     );
+  });
+
+  it("is offered no Edit agent, while the owner of an ordinary room keeps Edit room", () => {
+    const store = createTestFilesStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const room = {
+      ...agent("user-1"),
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.Rooms,
+    } as unknown as TItem;
+
+    const opts = store.getFilesContextOptions(agent("user-1"));
+    expect(opts).not.toContain("edit-room");
+    expect(opts).toContain("invite-users-to-room");
+    expect(store.getFilesContextOptions(room)).toContain("edit-room");
   });
 
   it("keeps Leave the room for the owner of an ordinary room", () => {

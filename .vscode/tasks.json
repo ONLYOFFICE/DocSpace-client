@@ -31,7 +31,8 @@
       "options": {
         "env": {
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false"
         }
       },
       "type": "shell",
@@ -52,7 +53,8 @@
       "options": {
         "env": {
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false"
         }
       },
       "type": "shell",
@@ -74,7 +76,8 @@
         "env": {
           "APP_EDITION": "enterprise",
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false"
         }
       },
       "type": "shell",
@@ -96,7 +99,8 @@
         "env": {
           "APP_EDITION": "enterprise",
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false"
         }
       },
       "type": "shell",
@@ -120,7 +124,8 @@
           "APP_EDITOR_TEST": "true",
           "APP_EDITOR_VERSION": "10.0.3.58",
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false"
         }
       },
       "type": "shell",
@@ -144,7 +149,8 @@
           "APP_EDITOR_TEST": "true",
           "APP_EDITOR_VERSION": "10.0.3.58",
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false"
         }
       },
       "type": "shell",
@@ -165,7 +171,8 @@
       "options": {
         "env": {
           "SKIP_CLIENT": "true",
-          "STORYBOOK": "false"
+          "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false"
         }
       },
       "type": "shell",
@@ -189,6 +196,7 @@
           "APP_EDITOR_VERSION": "10.0.3.58",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false",
+          "APPHOST_HTTPS": "false",
           "APP_EDITION": "developer"
         }
       },

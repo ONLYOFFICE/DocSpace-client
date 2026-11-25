@@ -12,9 +12,10 @@ conversion prompt, default templates, Document Server address). Operations calle
 `setOrganizeRoomsGrouping`, `showQuickActions`, `getDefaultTemplates`, `setDefaultTemplate`,
 `uploadDefaultTemplate`, `resetDefaultTemplate`, `getDocServiceUrl`, `checkDocServiceUrl`.
 
-Out of scope: the conversion prompt and its don't-ask-again (ile-operations); the start page choices of the same tab, which follow the applications (`apps`); what room grouping does
-in the Rooms list (`room-types`); what the quick actions offer in a form room (`form-filling-workflow`); connecting
-Docs Connect editors from the Document Server page (`docs-connect`); the other profile tabs (`profile`).
+Out of scope: the conversion prompt and its don't-ask-again (`file-operations`); the start page choices of the same
+tab, which follow the applications (`apps`); what room grouping does in the Rooms list (`room-types`); what the quick
+actions offer in a form room (`form-filling-workflow`); connecting Docs Connect editors from the Document Server page
+(`docs-connect`); the other profile tabs (`profile`).
 
 Implementation: the file management tab of the profile, the files settings store, the Document templates page of
 Customization and the Document Server page of Integration.

@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -143,7 +144,7 @@ type TRenderOptions = {
   selectedFolder?: Record<string, unknown>;
 };
 
-const renderSidebar = (
+const sidebar = (
   extraFolders: unknown[] = [],
   {
     pinnedProjects = [],
@@ -151,8 +152,7 @@ const renderSidebar = (
     hasMoreThreads = false,
     selectedFolder = { id: 1, rootFolderType: FolderType.USER, isRootFolder: true },
   }: TRenderOptions = {},
-) =>
-  render(
+) => (
     <Provider
       authStore={{ isAdmin: true, isRoomAdmin: false }}
       userStore={{ user: { id: "user-1", isVisitor: false } }}
@@ -195,8 +195,11 @@ const renderSidebar = (
       }}
     >
       <ClientArticleSidebar />
-    </Provider>,
-  );
+    </Provider>
+);
+
+const renderSidebar = (extraFolders: unknown[] = [], options: TRenderOptions = {}) =>
+  render(sidebar(extraFolders, options));
 
 describe("ClientArticleSidebar — Private section", () => {
   it("Private item rendered", () => {
@@ -295,6 +298,44 @@ describe("ClientArticleSidebar — an opened AI room on its short address", () =
         roomType: RoomsType.InstructionsRoom,
       }),
     ).toBe("ai-rooms");
+  });
+
+  it("stays on Skill sets while a skill set opened from its list is loading", () => {
+    // Observable, as the store is: the sidebar follows what it holds.
+    const selectedFolder = observable<Record<string, unknown>>({
+      id: 2010,
+      rootFolderType: FolderType.AiHub,
+      isRootFolder: true,
+      roomType: null,
+    });
+    const activeId = () => screen.getByTestId("nav").dataset.activeId;
+    try {
+      route.pathname = "/ai-rooms/filter";
+      route.search = `?type=${RoomsType.InstructionsRoom}`;
+      renderSidebar(aiHub, { selectedFolder });
+      expect(activeId()).toBe("ai-rooms-skills");
+
+      // The address names the room, which the store does not hold yet.
+      route.pathname = "/ai-rooms/32/filter";
+      route.search = "?folder=32";
+      act(() =>
+        runInAction(() => {
+          selectedFolder.isRootFolder = false;
+        }),
+      );
+      expect(activeId()).toBe("ai-rooms-skills");
+
+      act(() =>
+        runInAction(() => {
+          selectedFolder.id = 32;
+          selectedFolder.roomType = RoomsType.InstructionsRoom;
+        }),
+      );
+      expect(activeId()).toBe("ai-rooms-skills");
+    } finally {
+      route.pathname = "/private/filter";
+      route.search = "";
+    }
   });
 });
 

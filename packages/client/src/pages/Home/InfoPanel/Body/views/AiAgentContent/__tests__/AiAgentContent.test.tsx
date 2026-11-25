@@ -229,6 +229,25 @@ describe("AiAgentContent", () => {
     expect(stores.mediaViewerDataStore.setMediaViewerData).toHaveBeenCalledTimes(1);
   });
 
+  it("opens a file by the server's link without the version it pins", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([
+      {
+        ...file(5, "Proposal.docx"),
+        webUrl: "http://localhost/doceditor?fileId=5&version=2&share=key",
+      },
+      file(6, "Notes.docx"),
+    ]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const links = screen.getAllByTestId("ai-agent-content-open");
+
+    expect(links[0].getAttribute("href")).toBe(
+      "http://localhost/doceditor?fileId=5&share=key",
+    );
+    // A link without a version is left as the server gave it.
+    expect(links[1].getAttribute("href")).toBe("/doceditor?fileId=6");
+  });
+
   // The agent's page has no list whose click would take the buffer away.
   it("gives the Info panel back to the agent once the copy panel closes", async () => {
     render(<AiAgentContent projectId={7} />);

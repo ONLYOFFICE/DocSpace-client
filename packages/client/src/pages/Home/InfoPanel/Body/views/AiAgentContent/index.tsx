@@ -100,6 +100,24 @@ const sameList = (a: TFile[], b: TFile[]) =>
       file.updated === b[i].updated,
   );
 
+/**
+ * The link a file opens by: the server's own, without the version it pins.
+ * A file of a conversation is opened as it is now - with a version in the
+ * address the editor takes it for a revision of the history and does not
+ * open it for work.
+ */
+export const getOpenUrl = (webUrl?: string) => {
+  if (!webUrl) return webUrl;
+  try {
+    const url = new URL(webUrl, window.location.origin);
+    if (!url.searchParams.has("version")) return webUrl;
+    url.searchParams.delete("version");
+    return url.href;
+  } catch {
+    return webUrl;
+  }
+};
+
 type AiAgentContentProps = {
   /** The id of the agent whose page is open. */
   projectId: number;
@@ -359,7 +377,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
         <img className={styles.icon} src={getIcon(32, file.fileExst)} alt="" />
         <div className={styles.text}>
           <Link
-            href={file.webUrl}
+            href={getOpenUrl(file.webUrl)}
             target={LinkTarget.blank}
             onClick={
               isMedia

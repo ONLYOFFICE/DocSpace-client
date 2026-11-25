@@ -307,7 +307,9 @@ const AiProjectView = ({
   // folders of Data sources stay the member's own pick. A Skill set
   // disconnected from its row in the composer's slash menu is saved to the
   // project; when the save fails, the chat goes back
-  // to the rooms the project has.
+  // to the rooms the project has. A Knowledge base is unlinked from the
+  // project by the bin of its row in the "+" menu, as by the bin of the Info
+  // panel's Context tab; the chat follows the project once it is saved.
   const activeProject = store.activeProject;
   const canEditSources = !!activeProject && activeProject.id === roomId && getAgentRights(activeProject).edit;
   React.useEffect(() => {
@@ -331,6 +333,12 @@ const AiProjectView = ({
                 knowledgeRooms: toChatRooms(knowledgeRooms),
               });
             });
+          }
+        : undefined,
+      onKnowledgeRoomRemove: canEditSources
+        ? (knowledgeRoomId) => {
+            const project = store.activeProject;
+            if (project) void store.unlinkRoom(project.id, "knowledge", Number(knowledgeRoomId));
           }
         : undefined,
     });

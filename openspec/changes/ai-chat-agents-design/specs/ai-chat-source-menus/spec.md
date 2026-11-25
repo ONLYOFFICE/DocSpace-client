@@ -140,8 +140,15 @@ On the default agent the pickers SHALL offer every Instructions room and Knowled
 - **WHEN** an Instructions room exists that the user is not a member of
 - **THEN** the picker does not offer it
 
+### Requirement: Remove controls show on demand
+The remove control of a source's row - a skill set's, a knowledge base's, a data source's - in the "+" menu and the slash menu SHALL be shown while the pointer or the keyboard is on the row or the focus is on the control, and SHALL stay shown on a touch screen.
+
+#### Scenario: Pointer on a row
+- **WHEN** the user moves the pointer onto a data source in "+" > Data sources
+- **THEN** the row shows its remove control, and the other rows show none
+
 ### Requirement: Lists of a chat on an agent
-In a chat that runs on an agent, the skill sets and knowledge bases of both menus SHALL be the agent's linked rooms. For the agent owner and Agent managers the "Manage ..." rows of the "+" menu and "Manage knowledge bases..." of the slash menu SHALL open the agent's edit form. Members SHALL get no remove control and no such row. No one SHALL get a remove control on a knowledge base.
+In a chat that runs on an agent, the skill sets and knowledge bases of both menus SHALL be the agent's linked rooms. For the agent owner and Agent managers the "Manage ..." rows of the "+" menu and "Manage knowledge bases..." of the slash menu SHALL open the agent's edit form. Members SHALL get no remove control and no such row. A knowledge base SHALL follow "Knowledge bases of a chat on an agent".
 
 #### Scenario: Agent manager in the "+" menu
 - **WHEN** an Agent manager (`Common:AgentManager`) chooses "Manage skill sets..." in "+" > Skill sets of the agent's chat
@@ -154,6 +161,13 @@ In a chat that runs on an agent, the skill sets and knowledge bases of both menu
 #### Scenario: Agent manager and the knowledge bases of the slash menu
 - **WHEN** an Agent manager opens the slash menu in the agent's chat
 - **THEN** the agent's knowledge bases are listed with no bin, and "Manage knowledge bases..." opens the agent's edit form
+
+### Requirement: Knowledge bases of a chat on an agent
+For the agent owner and Agent managers each knowledge base of "+" > Knowledge bases of an agent's chat SHALL offer a "Remove <name>" control that unlinks the base from the agent, and the chat SHALL follow the agent once it is saved. Members SHALL get no such control.
+
+#### Scenario: Agent manager unlinks a knowledge base in the "+" menu
+- **WHEN** an Agent manager uses the remove control of a knowledge base in "+" > Knowledge bases of the agent's chat
+- **THEN** the base is unlinked from the agent and leaves the list
 
 ### Requirement: Slash menu of a chat on an agent
 For the agent owner and Agent managers the slash menu of an agent's chat SHALL change the agent's skill sets in place: each set SHALL keep its remove control, and "Manage skill sets..." SHALL open the picker of Instructions rooms with the connected sets ticked, not the agent's edit form.

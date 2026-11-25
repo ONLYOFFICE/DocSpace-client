@@ -371,7 +371,7 @@ export default inject(
       },
       setIsMobileHidden,
 
-      isGracePeriod: currentTariffStatusStore.isGracePeriod,
+      isGracePeriod: currentTariffStatusStore.isGracePeriodRestricted,
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,

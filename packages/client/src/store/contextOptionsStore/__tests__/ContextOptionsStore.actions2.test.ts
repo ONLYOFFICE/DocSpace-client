@@ -171,7 +171,7 @@ describe("ContextOptionsStore — action handler delegation (batch 4)", () => {
   it("onClickInviteUsers opens the invite panel outside a grace period", () => {
     const setInvitePanelOptions = vi.fn();
     const store = createTestContextOptionsStore({
-      currentTariffStatusStore: { isGracePeriod: false },
+      currentTariffStatusStore: { isGracePeriodRestricted: false },
       dialogsStore: { setInvitePanelOptions },
     });
     store.onClickInviteUsers(9, undefined);

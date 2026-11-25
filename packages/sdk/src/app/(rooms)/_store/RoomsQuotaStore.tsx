@@ -44,7 +44,10 @@ import type {
   TNumericPaymentFeature,
   TPortalTariff,
 } from "@docspace/shared/api/portal/types";
-import { TariffState } from "@docspace/shared/enums";
+import {
+  getIsGracePeriod,
+  getIsGracePeriodRestricted,
+} from "@docspace/shared/utils/common";
 import { PortalFeaturesLimitations } from "@onlyoffice/apps-ui-kit/enums";
 import { ROOM } from "@onlyoffice/apps-ui-kit/billing/constants";
 import { COUNT_FOR_SHOWING_BAR } from "@docspace/shared/constants";
@@ -73,7 +76,11 @@ class RoomsQuotaStore {
   }
 
   get isGracePeriod() {
-    return this.portalTariff?.state === TariffState.Delay;
+    return getIsGracePeriod(this.portalTariff);
+  }
+
+  get isGracePeriodRestricted() {
+    return getIsGracePeriodRestricted(this.portalTariff);
   }
 
   get dueDate() {
@@ -105,7 +112,7 @@ class RoomsQuotaStore {
   }
 
   get isWarningRoomsDialog(): boolean {
-    return this.isGracePeriod || this.isRoomsTariffLimit;
+    return this.isGracePeriodRestricted || this.isRoomsTariffLimit;
   }
 
   fetch = async (): Promise<void> => {

@@ -766,9 +766,9 @@ class ContextOptionsStore {
   // original .js forwarded as-is to getDefaultAccessUser — the cast keeps
   // that behavior.
   onClickInviteUsers = (roomId: number | string, roomType?: RoomsType) => {
-    const { isGracePeriod } = this.currentTariffStatusStore;
+    const { isGracePeriodRestricted } = this.currentTariffStatusStore;
 
-    if (isGracePeriod) {
+    if (isGracePeriodRestricted) {
       this.dialogsStore.setQuotaWarningDialogVisible(true);
     } else {
       this.dialogsStore.setInvitePanelOptions({

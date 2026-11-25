@@ -43,7 +43,7 @@ import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
   true;
 
 const quota = vi.hoisted(() => ({
-  isGracePeriod: false,
+  isGracePeriodRestricted: false,
   dueDate: null,
   delayDueDate: null,
   isRoomsTariffLimit: true,

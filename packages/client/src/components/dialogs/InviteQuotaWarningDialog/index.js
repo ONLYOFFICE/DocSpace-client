@@ -222,7 +222,7 @@ export default inject(
     settingsStore,
   }) => {
     const { isPaymentPageAvailable } = authStore;
-    const { dueDate, delayDueDate, isGracePeriod, isCommunity } =
+    const { dueDate, delayDueDate, isGracePeriodRestricted, isCommunity } =
       currentTariffStatusStore;
     const { currentTariffPlanTitle } = currentQuotaStore;
 
@@ -239,7 +239,7 @@ export default inject(
       setIsVisible: setQuotaWarningDialogVisible,
       dueDate,
       delayDueDate,
-      isGracePeriod,
+      isGracePeriod: isGracePeriodRestricted,
       standalone,
     };
   },

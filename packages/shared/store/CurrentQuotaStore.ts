@@ -400,12 +400,13 @@ class CurrentQuotasStore {
     )
       return true;
 
-    return this.currentTariffStatusStore?.isGracePeriod;
+    return this.currentTariffStatusStore?.isGracePeriodRestricted;
   };
 
   get isWarningRoomsDialog() {
     return (
-      this.currentTariffStatusStore?.isGracePeriod || this.isRoomsTariffLimit
+      this.currentTariffStatusStore?.isGracePeriodRestricted ||
+      this.isRoomsTariffLimit
     );
   }
 

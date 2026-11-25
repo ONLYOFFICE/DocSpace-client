@@ -76,7 +76,7 @@ const QuotaWarningDialog = observer(
     const visible = dialogsStore.isDialogOpen(SDKDialogs.QuotaWarningRooms);
 
     const {
-      isGracePeriod,
+      isGracePeriodRestricted: isGracePeriod,
       dueDate,
       delayDueDate,
       isRoomsTariffLimit,

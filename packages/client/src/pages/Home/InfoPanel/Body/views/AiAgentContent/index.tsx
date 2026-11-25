@@ -113,8 +113,9 @@ type AiAgentContentProps = {
  * in place of the two sections, another conversation its own files.
  *
  * The two lists are read apart and each is shown as it comes, the other not
- * waited for. A list that cannot be read is shown empty, and only both
- * failing is an error. An image or a
+ * waited for. A list without a file has no section at all. A list that
+ * cannot be read counts as one without files, and only both failing is an
+ * error. An image or a
  * media file opens in the viewer over the page, any other file in a new tab;
  * its "..." menu downloads it, saves a copy to a room or opens
  * the room or folder it is in.
@@ -256,7 +257,7 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
       document.removeEventListener("visibilitychange", onVisibilityChange);
   }, []);
 
-  // A list that could not be read is shown empty beside the other.
+  // A list that could not be read counts as one without files.
   const artifacts = files.artifacts ?? (failed.artifacts ? [] : null);
   const attachments = files.attachments ?? (failed.attachments ? [] : null);
 
@@ -425,28 +426,21 @@ const AiAgentContent = observer(({ projectId }: AiAgentContentProps) => {
           </Link>
         ) : null}
       </div>
-      {list.length > 0 ? (
-        list.map((file) => row(file))
-      ) : (
-        <Text fontSize="13px" className={styles.empty}>
-          {t("Common:AiContentEmpty")}
-        </Text>
-      )}
+      {list.map((file) => row(file))}
     </section>
   );
 
-  // A list is shown as soon as it has come. One that came empty waits for
-  // the other, which decides between its "no files" line and the empty
-  // screen, so neither flashes by.
-  const shown = (list: TFile[] | null, other: TFile[] | null) =>
-    !!list && (list.length > 0 || !!other);
+  // A list is shown as soon as it has come, and only when it has files: a
+  // list without one has no section, caption included. Both without a file
+  // are the empty screen above.
+  if (!artifacts?.length && !attachments?.length) return null;
 
   return (
     <div className={styles.content} data-testid="ai-agent-content">
-      {artifacts && shown(artifacts, attachments)
+      {artifacts?.length
         ? section("artifacts", t("Common:AiArtifacts"), artifacts, true)
         : null}
-      {attachments && shown(attachments, artifacts)
+      {attachments?.length
         ? section(
             "attachments",
             t("Common:AiAttachments"),

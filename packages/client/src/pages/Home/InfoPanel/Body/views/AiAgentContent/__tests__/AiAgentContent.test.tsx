@@ -287,13 +287,23 @@ describe("AiAgentContent", () => {
     expect(screen.getByTestId("ai-agent-content-empty")).not.toBeNull();
   });
 
-  it("keeps both sections, one saying it has no files, when only the other has", async () => {
+  it("shows no section for a list without a file when the other has files", async () => {
     api.getAiThreadArtifacts.mockResolvedValue([]);
     render(<AiAgentContent projectId={7} />);
     await flush();
     expect(screen.queryByTestId("ai-agent-content-empty")).toBeNull();
-    expect(screen.getByTestId("ai-agent-content-artifacts").textContent).toContain("Common:AiContentEmpty");
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    expect(screen.queryByText("Common:AiArtifacts")).toBeNull();
+    expect(screen.queryByText("Common:AiContentEmpty")).toBeNull();
     expect(titles("ai-agent-content-attachments")).toHaveLength(2);
+  });
+
+  it("shows no Attachments section when only the artifacts have files", async () => {
+    api.getAiThreadAttachments.mockResolvedValue([]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.queryByTestId("ai-agent-content-attachments")).toBeNull();
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
   });
 
   it("follows the conversation", async () => {
@@ -312,7 +322,7 @@ describe("AiAgentContent", () => {
     api.getAiThreadArtifacts.mockRejectedValue(new Error("404"));
     render(<AiAgentContent projectId={7} />);
     await flush();
-    expect(titles("ai-agent-content-artifacts")).toEqual([]);
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
     expect(titles("ai-agent-content-attachments")).toHaveLength(2);
   });
 
@@ -447,7 +457,7 @@ describe("AiAgentContent", () => {
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
   });
 
-  it("holds a list that came empty until the other tells a section from the empty screen", async () => {
+  it("shows nothing for a list that came empty until the other comes, then the empty screen", async () => {
     const attachments = deferred<unknown[]>();
     api.getAiThreadArtifacts.mockResolvedValue([]);
     api.getAiThreadAttachments.mockReturnValueOnce(attachments.promise);
@@ -469,9 +479,9 @@ describe("AiAgentContent", () => {
     stores.dialogsStore.aiChatActiveThreadId = "t-new";
     rerender(<AiAgentContent projectId={7} />);
     await flush();
-    // The attachments that came are shown, the artifacts still as they were.
+    // The attachments that came are shown, the artifacts have no section yet.
     expect(titles("ai-agent-content-attachments")).toHaveLength(2);
-    expect(titles("ai-agent-content-artifacts")).toEqual([]);
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
     answer.resolve([file(1, "Chart.png")]);
     await flush();
     expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-new");

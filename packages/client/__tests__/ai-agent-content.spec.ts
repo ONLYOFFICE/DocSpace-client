@@ -240,6 +240,28 @@ test.describe("Content of an agent's conversation", () => {
     ]);
   });
 
+  // Spec: ai-agent-info-panel, "Empty screen of Content"
+  test("a conversation with attachments only shows no Artifacts section", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...aiThreadFilesHandlers(TEST_PORT, [...AI_PROJECTS], {
+        [REPORT.threadId]: { artifacts: [], attachments: [BRIEF] },
+      }),
+    );
+    await page.goto(`${baseUrl}${agentUrl(AGENT.id)}`);
+    await openConversation(page, REPORT.threadId);
+    await openContent(page);
+
+    await expect(attachments(page)).toContainText(BRIEF.title);
+    await expect(artifacts(page)).toHaveCount(0);
+    await expect(page.getByTestId("ai-agent-content")).not.toContainText("Artifacts");
+    await expect(page.getByTestId("ai-agent-content")).not.toContainText("No files yet");
+    await expect(page.getByTestId("ai-agent-content-empty")).toHaveCount(0);
+  });
+
   // Spec: ai-agent-info-panel, "Content follows the files the server announces"
   test("a new artifact the server announces is listed without a reload, the attachments left as they are", async ({
     page,

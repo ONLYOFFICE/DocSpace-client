@@ -126,7 +126,6 @@ const AgentsHeader = ({
     <div className={classnames(styles.headerContainer)} style={outerOffsetStyle}>
       <div className="header-container" style={innerOffsetStyle}>
         <Navigation
-          showText
           isRootFolder={isRootFolder}
           canCreate={false}
           title={title}
@@ -137,8 +136,6 @@ const AgentsHeader = ({
           getContextOptionsFolder={getContextOptions ?? noOptions}
           onClickFolder={handleClickFolder}
           isTrashFolder={false}
-          isEmptyPage={isEmptyList}
-          isEmptyFilesList={isEmptyList}
           onBackToParentFolder={handleBack}
           showRootFolderTitle={false}
           withMenu={!!getContextOptions}
@@ -147,17 +144,13 @@ const AgentsHeader = ({
           titleIcon=""
           titleIconTooltip=""
           showNavigationButton={false}
-          isCurrentFolderInfo={false}
           showTitle
-          isRoom={false}
           isInfoPanelVisible={false}
           toggleInfoPanel={noop}
           withLogo=""
           burgerLogo=""
           onLogoClick={noop}
           hideInfoPanel
-          clearTrash={noop}
-          showFolderInfo={noop}
         />
       </div>
     </div>

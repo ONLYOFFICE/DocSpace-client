@@ -661,7 +661,6 @@ const Shell = ({ page = "home", ...rest }) => {
         organizationName: logoText,
         productName: getBrandName("ProductName"),
       })} ${t("BarMaintenanceDisclaimer")}`,
-      isMaintenance: true,
       onAction: () => {
         setMaintenanceExist(false);
         setSnackbarExist(false);

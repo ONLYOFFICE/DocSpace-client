@@ -63,7 +63,6 @@ const SessionsRowContent = ({
 		<RowContent
 			className={styles.rowContent}
 			key={id}
-			sectionWidth={sectionWidth}
 			sideColor={theme.profile.activeSessions.tableCellColor}
 		>
 			<Text fontSize="14px" fontWeight="600" dataTestId="session_platform">

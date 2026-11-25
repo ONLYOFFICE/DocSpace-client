@@ -52,7 +52,6 @@ import { FormsSection } from "@/types/forms";
 
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
-import { useFormsListStore } from "../../_store/FormsListStore";
 import { useLibraryParams } from "../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import styles from "../forms-layout/FormsLayout.module.scss";
@@ -104,7 +103,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
       .catch(() => setLibCategoryTitle(String(libParams.categoryId)));
   }, [libParams.categoryId]);
 
-  const { items, folders } = useFormsListStore();
   const { currentDeviceType } = useDeviceType();
 
   const isLibrary = activeSection === FormsSection.Library;
@@ -344,7 +342,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
       >
         <div className={styles.headerNavigation}>
           <Navigation
-            showText
             isRootFolder
             canCreate={false}
             title={getSectionTitle()}
@@ -356,8 +353,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             getContextOptionsFolder={() => []}
             onClickFolder={() => {}}
             isTrashFolder={false}
-            isEmptyPage={false}
-            isEmptyFilesList={false}
             onBackToParentFolder={() => {}}
             showRootFolderTitle={false}
             withLogo=""
@@ -367,17 +362,13 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             titleIcon=""
             titleIconTooltip=""
             showNavigationButton={false}
-            isCurrentFolderInfo={false}
             showTitle
             isPublicRoom={false}
-            isRoom={false}
             isInfoPanelVisible={false}
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
           />
         </div>
       </div>
@@ -387,7 +378,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
   if (isEditing) {
     const editingNavigation = (
       <Navigation
-        showText
         isRootFolder={false}
         canCreate={false}
         title={editingFile?.title || ""}
@@ -399,8 +389,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
         getContextOptionsFolder={() => []}
         onClickFolder={handleEditorBreadcrumbClick}
         isTrashFolder={false}
-        isEmptyPage={false}
-        isEmptyFilesList={false}
         onBackToParentFolder={handleEditorBack}
         showRootFolderTitle={false}
         withLogo=""
@@ -410,17 +398,13 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
         titleIcon=""
         titleIconTooltip=""
         showNavigationButton={false}
-        isCurrentFolderInfo={false}
         showTitle
         isPublicRoom={false}
-        isRoom={false}
         isInfoPanelVisible={false}
         {...chatNavProps}
         toggleInfoPanel={() => {}}
         onLogoClick={() => {}}
         hideInfoPanel
-        clearTrash={() => {}}
-        showFolderInfo={() => {}}
       />
     );
 
@@ -443,7 +427,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
       >
         <div className={styles.headerNavigation}>
           <Navigation
-            showText
             isRootFolder={false}
             canCreate={false}
             title={completedFolder?.title || ""}
@@ -455,8 +438,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             getContextOptionsFolder={() => []}
             onClickFolder={() => goBackToCompletedRoot()}
             isTrashFolder={false}
-            isEmptyPage={items.length === 0}
-            isEmptyFilesList={items.length === 0}
             onBackToParentFolder={() => goBackToCompletedRoot()}
             showRootFolderTitle={false}
             withLogo=""
@@ -466,17 +447,13 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             titleIcon=""
             titleIconTooltip=""
             showNavigationButton={false}
-            isCurrentFolderInfo={false}
             showTitle
             isPublicRoom={false}
-            isRoom={false}
             isInfoPanelVisible={false}
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
           />
         </div>
       </div>
@@ -491,7 +468,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
       >
         <div className={styles.headerNavigation}>
           <Navigation
-            showText
             isRootFolder={false}
             canCreate={false}
             title={inProgressFolder?.title || ""}
@@ -503,8 +479,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             getContextOptionsFolder={() => []}
             onClickFolder={() => goBackToInProgressRoot()}
             isTrashFolder={false}
-            isEmptyPage={items.length === 0}
-            isEmptyFilesList={items.length === 0}
             onBackToParentFolder={() => goBackToInProgressRoot()}
             showRootFolderTitle={false}
             withLogo=""
@@ -514,17 +488,13 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             titleIcon=""
             titleIconTooltip=""
             showNavigationButton={false}
-            isCurrentFolderInfo={false}
             showTitle
             isPublicRoom={false}
-            isRoom={false}
             isInfoPanelVisible={false}
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
           />
         </div>
       </div>
@@ -554,7 +524,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
       >
         <div className={styles.headerNavigation}>
           <Navigation
-            showText
             isRootFolder={false}
             canCreate={false}
             title={libraryTitle}
@@ -566,8 +535,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             getContextOptionsFolder={() => []}
             onClickFolder={handleLibraryBreadcrumbClick}
             isTrashFolder={false}
-            isEmptyPage={items.length === 0 && folders.length === 0}
-            isEmptyFilesList={items.length === 0 && folders.length === 0}
             onBackToParentFolder={() => router.back()}
             showRootFolderTitle={false}
             withLogo=""
@@ -577,17 +544,13 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
             titleIcon=""
             titleIconTooltip=""
             showNavigationButton={false}
-            isCurrentFolderInfo={false}
             showTitle
             isPublicRoom={false}
-            isRoom={false}
             isInfoPanelVisible={false}
             {...chatNavProps}
             toggleInfoPanel={() => {}}
             onLogoClick={() => {}}
             hideInfoPanel
-            clearTrash={() => {}}
-            showFolderInfo={() => {}}
           />
         </div>
       </div>
@@ -604,7 +567,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
           {getSectionTitle()}
         </span>
         <Navigation
-          showText
           isRootFolder
           canCreate={false}
           isPlusButtonVisible={false}
@@ -617,8 +579,6 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
           getContextOptionsFolder={() => []}
           onClickFolder={() => {}}
           isTrashFolder={false}
-          isEmptyPage={items.length === 0 && folders.length === 0}
-          isEmptyFilesList={items.length === 0 && folders.length === 0}
           onBackToParentFolder={() => {}}
           showRootFolderTitle={false}
           withLogo=""
@@ -628,17 +588,13 @@ const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
           titleIcon=""
           titleIconTooltip=""
           showNavigationButton={false}
-          isCurrentFolderInfo={false}
           showTitle
           isPublicRoom={false}
-          isRoom={false}
           isInfoPanelVisible={false}
           {...chatNavProps}
           toggleInfoPanel={() => {}}
           onLogoClick={() => {}}
           hideInfoPanel
-          clearTrash={() => {}}
-          showFolderInfo={() => {}}
         />
       </div>
     </div>

@@ -159,20 +159,6 @@ const AgentsList = observer(({ agents, section }: Props) => {
   const getContextOptions = useAgentContextOptions();
 
   const tableContainerRef = React.useRef<HTMLDivElement>(null);
-  const [sectionWidth, setSectionWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    const el = tableContainerRef.current;
-    if (!el || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setSectionWidth(entry.contentRect.width);
-      }
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
   const goToAgent = (id: TAgent["id"]) => {
     router.push(`/ai-agents/${id}?tab=chat`);
   };
@@ -345,14 +331,6 @@ const AgentsList = observer(({ agents, section }: Props) => {
                 checked={store.isSelected(agent.id)}
                 onSelect={() => store.toggleAgentSelection(agent)}
                 onRowClick={() => goToAgent(agent.id)}
-                item={{
-                  title: agent.title,
-                  logo: {
-                    medium: logo?.medium,
-                    small: logo?.small,
-                    color: logo?.color,
-                  },
-                }}
               >
                 <RowContent sideColor="var(--text-color)">
                   <Link
@@ -421,7 +399,6 @@ const AgentsList = observer(({ agents, section }: Props) => {
           containerRef={tableContainerRef}
           columns={columns}
           columnStorageName={COLUMN_STORAGE_NAME}
-          sectionWidth={sectionWidth}
           useReactWindow={false}
           showSettings={false}
         />

@@ -49,7 +49,6 @@ const TableHeader = (props: TableHeaderProps) => {
     tableRef,
     columnStorageName,
     setHideColumns,
-    sectionWidth,
     columnInfoPanelStorageName,
   } = props;
   const { t } = useTranslation(["Webhooks", "Common", "Files", "Settings"]);
@@ -126,7 +125,6 @@ const TableHeader = (props: TableHeaderProps) => {
   return (
     <TableHeaderComponent
       containerRef={tableRef}
-      sectionWidth={sectionWidth}
       columns={columns}
       columnStorageName={columnStorageName}
       showSettings={false}

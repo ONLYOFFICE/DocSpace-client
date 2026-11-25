@@ -105,7 +105,6 @@ const LanguageCombobox = (props: ComboboxProps) => {
       scaled={false}
       scaledOptions={false}
       size={ComboBoxSize.content}
-      showDisabledItems
       dropDownMaxHeight={300}
       fillIcon={false}
       displaySelectedOption
@@ -114,14 +113,12 @@ const LanguageCombobox = (props: ComboboxProps) => {
       type={showLanguageName ? undefined : "onlyIcon"}
       optionStyle={{ padding: "0 8px" }}
       isMobileView={isMobileView}
-      withBlur={isMobileView}
       withLabel={!!withLabel}
       modernView={showLanguageName}
       usePortalBackdrop={usePortalBackdrop}
       withBackdrop={withBackdrop}
       shouldShowBackdrop={shouldShowBackdrop}
       dataTestId={dataTestId ?? "language-combobox"}
-      role="combobox"
     />
   );
 };

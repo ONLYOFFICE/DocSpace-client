@@ -162,7 +162,6 @@ const FilesTileContainer = ({
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
       <TileContainer
-        isDesc={isDesc}
         className="tile-container"
         useReactWindow
         infiniteGrid={InfiniteGrid}

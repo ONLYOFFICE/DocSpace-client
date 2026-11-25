@@ -107,6 +107,13 @@ Content SHALL list the files of the conversation on screen in two sections: Arti
 - **WHEN** a member opens Content in a conversation where they attached a document and the agent generated an image
 - **THEN** Artifacts lists the image and Attachments lists the document
 
+### Requirement: Each list of Content is shown as it comes
+Content SHALL read Artifacts and Attachments apart and show each section as soon as its list has come, without waiting for the other. A list that came empty SHALL wait for the other, which decides between its `Common:AiContentEmpty` line and the empty screen, so that neither flashes by.
+
+#### Scenario: Attachments come first
+- **WHEN** the attachments of the conversation have come and its artifacts are still being read
+- **THEN** Attachments lists its files and Artifacts appears once its own list comes
+
 ### Requirement: Empty screen of Content
 A conversation with no file in either list, as a chat not sent yet, SHALL show the Info panel's empty screen in place of the two sections: its illustration, `Common:AiContentEmpty` and `Common:AiContentEmptyDescription`. It SHALL go to its files without blanking once its first message creates the conversation. When only one list has files, both sections SHALL stay and the empty one SHALL read `Common:AiContentEmpty`.
 
@@ -119,7 +126,7 @@ A conversation with no file in either list, as a chat not sent yet, SHALL show t
 - **THEN** both sections are shown and Artifacts reads "No files yet"
 
 ### Requirement: Content follows the files the server announces
-Content SHALL read both lists again when the server announces a new file of the conversation on screen: `s:modify-thread-files` with `cmd: "create"`, sent to its author in the agent's room `DIR-{projectId}`. The conversation's id SHALL be compared without regard to case, events close together SHALL make one read, and an event for another conversation SHALL be ignored.
+Content SHALL read a list again when the server announces a new file of its `kind` in the conversation on screen, leaving the other list alone: `s:modify-thread-files` with `cmd: "create"`, sent to its author in the agent's room `DIR-{projectId}`. The conversation's id SHALL be compared without regard to case, events close together SHALL make one read, and an event for another conversation SHALL be ignored.
 
 #### Scenario: Artifact saved from another device
 - **WHEN** the server announces a new artifact of the conversation on screen while Content is open

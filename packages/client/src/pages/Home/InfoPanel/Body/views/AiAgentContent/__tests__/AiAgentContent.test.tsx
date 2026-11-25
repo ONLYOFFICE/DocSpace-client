@@ -429,6 +429,32 @@ describe("AiAgentContent", () => {
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
   });
 
+  it("shows a list as soon as it comes, without waiting for the other", async () => {
+    const artifacts = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(artifacts.promise);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    // The attachments are here, the artifacts still on their way.
+    expect(titles("ai-agent-content-attachments")).toEqual(["Agreement.docx", "Notes.jpg"]);
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    artifacts.resolve([file(1, "Chart.png")]);
+    await flush();
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+  });
+
+  it("holds a list that came empty until the other tells a section from the empty screen", async () => {
+    const attachments = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockResolvedValue([]);
+    api.getAiThreadAttachments.mockReturnValueOnce(attachments.promise);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-content-empty")).toBeNull();
+    attachments.resolve([]);
+    await flush();
+    expect(screen.getByTestId("ai-agent-content-empty")).not.toBeNull();
+  });
+
   it("goes from the empty screen of a new chat to its files without going blank", async () => {
     stores.dialogsStore.aiChatActiveThreadId = "";
     const { rerender } = render(<AiAgentContent projectId={7} />);
@@ -438,8 +464,9 @@ describe("AiAgentContent", () => {
     stores.dialogsStore.aiChatActiveThreadId = "t-new";
     rerender(<AiAgentContent projectId={7} />);
     await flush();
-    // Still the empty screen, not nothing, while its files are on their way.
-    expect(screen.getByTestId("ai-agent-content-empty")).not.toBeNull();
+    // The attachments that came are shown, the artifacts still as they were.
+    expect(titles("ai-agent-content-attachments")).toHaveLength(2);
+    expect(titles("ai-agent-content-artifacts")).toEqual([]);
     answer.resolve([file(1, "Chart.png")]);
     await flush();
     expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-new");
@@ -476,7 +503,7 @@ describe("AiAgentContent", () => {
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png", "Report.docx"]);
   });
 
-  it("reads the lists again when the server announces a new file of the conversation", async () => {
+  it("reads a list again when the server announces a new file of its kind, leaving the other alone", async () => {
     vi.useFakeTimers();
     render(<AiAgentContent projectId={7} />);
     await flush();
@@ -487,8 +514,19 @@ describe("AiAgentContent", () => {
     expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
     await wait(REFRESH_DELAY_MS);
     expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
-    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(1);
     expect(titles("ai-agent-content-artifacts")).toEqual(["Report.docx", "Chart.png"]);
+  });
+
+  it("reads both lists once when files of both kinds are announced together", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-1", "artifacts");
+    announce("t-1", "attachments");
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
   });
 
   it("reads once for the files announced together", async () => {

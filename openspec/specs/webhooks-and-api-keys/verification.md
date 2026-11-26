@@ -22,7 +22,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | **Who gets Developer Tools** | | |
 | Guest shown the section, refused with a toast, kept out by address; documentation still a link | `dev-tools-access.spec.ts:123, 147, 193, 252` | E2E-CONFIRMED |
 | Who opens and who is offered the section | `access:36-77` | CODE-ONLY |
-| Offered by user type and the limit, on the dashboard | `dashboard-appearance.spec.ts:542, 623` | E2E-CONFIRMED |
+| Offered by user type and the limit, on the dashboard | `dashboard-appearance.spec.ts:544` | E2E-CONFIRMED |
 | The rule on the server | `server`, "Developer Tools access rule"; "Reading and changing the Developer Tools restriction" | SERVER-SPEC |
 | **The Developer Tools overview** | | |
 | Cards and links; Docs Connect only on SaaS for administrators | `dt/Main/index.tsx:73-190`; `packages/client/src/components/DeveloperToolsSidebar/index.tsx:80-170`; `access:88-109` | CODE-ONLY |

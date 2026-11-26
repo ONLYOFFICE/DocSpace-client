@@ -489,6 +489,31 @@ What follows for this change:
   a visitor is started on the components of the public room without
   waiting for the screens of task 0.4.
 
+### Server read of the portal's external sharing setting (2026-11-26)
+
+`../server` at `92c9b60f23`, read for the rest of task 3.2
+(`ExternalShare.IsCreationRestrictedAsync`, `IsGlobalRestrictionApplies`,
+`FileStorageService.ResolveRequiredAuthAsync`,
+`ExternalLinkHelper.ValidateAsync`). The setting of all external links
+does not close the links of a private item, as the backend team's summary
+put it; it treats them as the links of any room:
+
+- While external sharing is restricted and the restriction applies to
+  rooms, a link that is set or changed is made a link for DocSpace users
+  only, whatever the request asks; it is not refused. The items of a
+  private room lie under the rooms root, so the rule covers them.
+- A link made before for anybody answers ExternalAccessDenied to a
+  visitor who is not signed in only when the portal also blocks existing
+  links; a signed-in user opens it.
+- The setting of private rooms is separate and closes every link of a
+  private item, whoever opens it.
+
+What follows: the link controls of a private item stay under the
+restriction, with the audience the ordinary link row already limits; the
+copy of a link the portal blocks is refused with the text ordinary links
+have; and the administrator's switch is shown whenever private rooms are
+available, since the setting has an effect under the restriction too.
+
 ## Goals / Non-Goals
 
 **Goals:**

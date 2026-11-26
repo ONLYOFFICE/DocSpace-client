@@ -50,6 +50,17 @@ The system SHALL show the Share tab of the info panel for a private room, a fold
 
 ## ADDED Requirements
 
+### Requirement: Links of a private item follow the portal's restriction of external sharing
+The system SHALL treat an external link of a private item as an ordinary link of a room while the portal restricts external sharing: the link is offered for DocSpace users only, and the address of a link for anybody is not copied while the portal blocks existing links.
+
+#### Scenario: Link made under the restriction
+- **WHEN** a member makes a link of a private item while external sharing is restricted for rooms
+- **THEN** the link is for DocSpace users only, and no other audience is offered
+
+#### Scenario: Link for anybody that the portal blocks
+- **WHEN** a member copies a link made for anybody while the portal restricts external sharing and blocks existing links
+- **THEN** no address is copied, and the text of a blocked link is shown
+
 ### Requirement: External link of a private item keeps the link model of the portal
 The system SHALL offer for a private item the primary and the additional external links of an ordinary item, within the same limits, with the access to view and the settings title, end date, password, limit of uses and DocSpace users only. It SHALL NOT offer another access or the download ban. The address SHALL be shown for copying with its secret part and SHALL NOT be sent to the server whole.
 
@@ -189,7 +200,7 @@ The system SHALL NOT offer an external link in an archived private room, and SHA
 - **THEN** the links it held work again
 
 ### Requirement: An administrator switches external links of private rooms
-The system SHALL show a DocSpace admin a switch for external links of private rooms next to the setting of external links, while private rooms are available and external links are allowed, and SHALL NOT show it to anybody else. A change SHALL go to the server at once, without the save of the page; the switch SHALL show the value the server answered, and the open pages of other users SHALL follow the change without a reload.
+The system SHALL show a DocSpace admin a switch for external links of private rooms next to the setting of external links, while private rooms are available, and SHALL NOT show it to anybody else. A change SHALL go to the server at once, without the save of the page; the switch SHALL show the value the server answered, and the open pages of other users SHALL follow the change without a reload.
 
 #### Scenario: Administrator turns the links off
 - **WHEN** a DocSpace admin turns the switch off
@@ -207,9 +218,9 @@ The system SHALL show a DocSpace admin a switch for external links of private ro
 - **WHEN** private rooms are not available on the portal
 - **THEN** the switch is not shown
 
-#### Scenario: External links forbidden for the portal
-- **WHEN** external links are forbidden for the whole portal
-- **THEN** the switch is not shown, since no link of any item is served
+#### Scenario: External sharing restricted for the portal
+- **WHEN** external sharing is restricted for the portal
+- **THEN** the switch is still shown, since the links of private items stay, for DocSpace users only
 
 #### Scenario: Change refused
 - **WHEN** the server refuses the change

@@ -128,6 +128,7 @@
   "AIChatRecent": "Nesenie",
   "AIChats": "MI čati",
   "AiContentEmpty": "Vēl nav failu",
+  "AiContentEmptyDescription": "Šeit tiks parādīti aģenta izveidotie faili un faili, ko pievienojat šajā čatā.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktivizējiet MI, lai tērzētu ar saviem aģentiem, piekļūtu viņu zināšanu bāzei un ļautu tiem veikt uzdevumus jūsu lietotnēs. AI izmantošana tiek iekasēta no jūsu maka atlikuma.",
   "AIDisabledInfoBlockContactAdminDescription": "Sazinieties ar superadministratoru, lai aktivizētu MI un tērzētu ar saviem aģentiem, piekļūtu viņu zināšanu bāzei un ļautu tiem veikt uzdevumus jūsu lietotnēs.",
   "AIDisabledInfoBlockStandaloneDescription": "MI iespējas pašlaik ir izslēgtas, kas nozīmē, ka šis aģents nevar apstrādāt tērzēšanas vai uzdevumus. Pievienojiet savu MI pakalpojumu, lai darbvietā atbloķētu paplašinātās funkcijas.",

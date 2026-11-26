@@ -190,7 +190,6 @@ const EditSkillDialog = ({
               label={t("Common:EditButton")}
               size={ButtonSize.normal}
               primary
-              scale
               onClick={() => setIsViewing(false)}
               isDisabled={isLoading}
               testId="view-skill-edit"
@@ -199,7 +198,6 @@ const EditSkillDialog = ({
           <Button
             label={t("Common:CloseButton")}
             size={ButtonSize.normal}
-            scale
             onClick={onClose}
             testId="view-skill-close"
           />
@@ -234,12 +232,14 @@ const EditSkillDialog = ({
     }
   };
 
-  // A skill is written and edited in a side panel, as one made with AI is;
-  // its instructions alone are read in a modal.
+  // A skill is written and edited in the modal its instructions are read
+  // in: one that takes most of the window, so the instructions have room.
   return (
     <ModalDialog
       visible
-      displayType={ModalDialogType.aside}
+      displayType={ModalDialogType.modal}
+      autoMaxHeight
+      className={styles.dialog}
       withForm
       onSubmit={(e) => {
         e.preventDefault();
@@ -277,7 +277,6 @@ const EditSkillDialog = ({
           label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           primary
-          scale
           type="submit"
           isLoading={isSaving}
           isDisabled={!canSave}
@@ -286,7 +285,6 @@ const EditSkillDialog = ({
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
-          scale
           onClick={onClose}
           isDisabled={isSaving}
           testId="edit-skill-cancel"

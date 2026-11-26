@@ -75,6 +75,9 @@ import EmptyAiRoomsContainerConnected from "SRC_DIR/components/EmptyContainer/Em
 
 // Every prop of the project view is injected.
 const AiProjectView = AiProjectViewConnected as unknown as React.FC;
+
+/** The address of a room of the AI section (an agent, a skill set, a knowledge base). */
+const isAiRoomAddress = (pathname: string) => /^\/ai-rooms\/\d+\//.test(pathname);
 const EmptyAiRoomsContainer = EmptyAiRoomsContainerConnected as unknown as React.FC;
 
 type ViewProps = UseContactsProps &
@@ -511,7 +514,11 @@ const View = ({
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
-          ) : isAiProjectRoomRoot && !isLoading ? (
+          ) : isAiProjectRoomRoot &&
+            // On the way to another room of the AI section the agent's view
+            // stays: taken away for the load, it closed the agent and its
+            // chat showed the default greeting between two agents.
+            (!isLoading || isAiRoomAddress(location.pathname)) ? (
             <AiProjectView />
           ) : isAiRoomsOff && !isLoading ? (
             <EmptyAiRoomsContainer />

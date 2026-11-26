@@ -128,6 +128,7 @@
   "AIChatRecent": "Recente",
   "AIChats": "Chat-uri IA",
   "AiContentEmpty": "Încă nu există fișiere",
+  "AiContentEmptyDescription": "Fișierele create de agent și cele pe care le atașați în acest chat vor fi afișate aici.",
   "AIDisabledInfoBlockActivateWalletDescription": "Activați IA pentru a discuta cu agenții dvs., a accesa baza lor de cunoștințe și a le permite să execute sarcini în aplicațiile dvs. Utilizarea IA este facturată din soldul portofelului dvs.",
   "AIDisabledInfoBlockContactAdminDescription": "Contactați superadministratorul pentru a activa IA și a discuta cu agenții dvs., a accesa baza lor de cunoștințe și a le permite să execute sarcini în aplicațiile dvs.",
   "AIDisabledInfoBlockStandaloneDescription": "Capabilitățile IA sunt momentan dezactivate, ceea ce înseamnă că acest agent nu poate procesa chat-uri sau sarcini. Conectați propriul serviciu IA pentru a debloca funcționalități avansate în spațiul de lucru.",

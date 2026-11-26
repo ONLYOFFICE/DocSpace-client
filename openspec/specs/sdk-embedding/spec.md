@@ -75,6 +75,29 @@ information SHALL be returned serializable, keeping the fields hosts rely on and
 - **WHEN** a host calls a Manager method on a frame opened in another mode
 - **THEN** the frame answers with the wrong-mode reply
 
+### Requirement: Selector frames
+
+The file and room selector frames SHALL follow the host's options — header and subtitle, search, breadcrumbs, a cancel
+button, accept and cancel labels, a type filter, a start folder and, for files, rooms only or My documents only — in
+the light and dark themes and in right-to-left languages, show an empty view without items, keep accept disabled until
+an item is picked, and report the picked item or the cancel to the host.
+
+#### Scenario: Picking a room
+
+- **WHEN** a user picks a room in the room selector frame and accepts
+- **THEN** the host is told the room's id, title and type once
+
+### Requirement: Custom actions of a frame
+
+A Personal or Forms frame SHALL add the host's custom actions — file actions to the context menu of the files they
+apply to, create items to the New button — replace them on `setCustomActions`, and report the clicked action with its
+item to the host; a Forms frame SHALL report its room as the folder.
+
+#### Scenario: Action by extension
+
+- **WHEN** the host defines an action for DOCX files and a user opens the menu of a DOCX file
+- **THEN** the action is offered and its click is reported with the file
+
 ### Requirement: Frame targets
 
 A frame opened for a folder or a link SHALL report `onNotFound` when the target is missing and `onNoAccess` when it

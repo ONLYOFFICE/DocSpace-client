@@ -34,6 +34,15 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Wrong-mode reply, result, error, setCustomActions, folder info, host window only | `useSDK/useSDK.dispatch.test.ts:94, 105, 113, 128, 139, 150` | UNIT-CONFIRMED |
 | Folder info fields kept and dropped | `useSDK/useSDK.folderInfo.test.ts:83, 93, 106` | UNIT-CONFIRMED |
 | The SDK app's method registry and replies | `sdk/providers/SDKConfigProvider.test.tsx:57, 66, 75`; `sdk/providers/sdkMethods.test.ts:8, 19, 34` | UNIT-CONFIRMED |
+| Personal frame: data methods answered with the list entities, a Manager method refused with the wrong-mode reply | `packages/sdk/__tests__/e2e/personal.spec.tsx:78, 102` | E2E-CONFIRMED |
+| Forms frame: list methods answered, folder information refused with the wrong-mode reply | `packages/sdk/__tests__/e2e/forms.spec.tsx:141` | E2E-CONFIRMED |
+| **Selector frames** | | |
+| File selector: every option alone and in threes, light, dark and right-to-left, with items and empty | `packages/sdk/__tests__/e2e/fileSelector.spec.tsx:51-3757` | E2E-CONFIRMED |
+| Room selector: header, search, cancel, labels, Russian and Arabic, light and dark, with items and empty | `packages/sdk/__tests__/e2e/roomSelector.spec.tsx:48-1692` | E2E-CONFIRMED |
+| Accept disabled until a room is picked, the picked room reported once; cancel reported; search typed in | `packages/sdk/__tests__/e2e/roomSelector.spec.tsx:1714, 1758, 1786-1907` | E2E-CONFIRMED |
+| **Custom actions of a frame** | | |
+| File actions by extension, the click reported with the item; create items in New; replaced by `setCustomActions`; shown in the context menu | `packages/sdk/__tests__/e2e/personal.spec.tsx:115, 141, 154, 166` | E2E-CONFIRMED |
+| Forms frame: the custom file action offered where it applies, the room reported as the folder | `packages/sdk/__tests__/e2e/forms.spec.tsx:158` | E2E-CONFIRMED |
 | **Frame targets** | | |
 | Not found, no access, refused link first, unknown error header ignored, public room links | `sdk/app/media-viewer/page.test.tsx:66-249` | UNIT-CONFIRMED |
 | Password page for a link with a password; refused link named; client header dropped | `sdk/proxy.test.ts:55, 73, 86, 99` | UNIT-CONFIRMED |
@@ -47,7 +56,8 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 
 | What | Why | Where |
 |---|---|---|
-| Private rooms in a frame and the private-surface policy | Owned by `private-rooms/sdk-surface` and `private-rooms/feature-gating` | `sdk/proxy.test.ts:241-290`; `useSDK/useSDK.createInPrivateRoom.test.ts`; `sdk/app/uploader/page.test.tsx` |
-| AI chat, agents and arbiter frames | Owned by the change `ai-chat-agents-design` | `sdk/proxy.test.ts:114-216`; `sdk/app/(ai-agents)/` |
+| Private rooms in a frame and the private-surface policy | Owned by `private-rooms/sdk-surface` and `private-rooms/feature-gating` | `sdk/proxy.test.ts:241-290`; `useSDK/useSDK.createInPrivateRoom.test.ts`; `sdk/app/uploader/page.test.tsx`; `packages/sdk/__tests__/e2e/private/private-rooms.spec.ts`; `packages/sdk/__tests__/e2e/private/private-security.spec.ts` |
+| AI chat, agents and arbiter frames, and the AI chat button of a Forms frame | Owned by the change `ai-chat-agents-design` | `sdk/proxy.test.ts:114-216`; `sdk/app/(ai-agents)/`; `packages/sdk/__tests__/e2e/aiAgents.spec.tsx`; `packages/sdk/__tests__/e2e/aiArbiter.spec.tsx`; `packages/sdk/__tests__/e2e/chat.spec.tsx`; `packages/sdk/__tests__/e2e/forms.spec.tsx:60-104` |
+| Creating a form in a third-party room of a Forms frame | Follows `form-filling-workflow` and `room-types` | `packages/sdk/__tests__/e2e/forms.spec.tsx:198` |
 | The rooms, personal files and forms pages served in a frame | Follow the specs of those features | `sdk/app/(rooms)/`; `sdk/app/(personal-files)/`; `sdk/app/(forms)/` |
 | Personal files E2E of the SDK app | Follow `files-navigation` and `keyboard-and-hotkeys` | `packages/sdk/__tests__/e2e/personal-files/` |

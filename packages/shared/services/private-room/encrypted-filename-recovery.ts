@@ -67,7 +67,9 @@ const MAX_PARALLEL = 5;
 // same file twice; awaiting callers also need to join an in-flight recovery.
 const inFlight = new Map<number, Promise<void>>();
 
-async function fetchHeaderBytes(url: string): Promise<Uint8Array | null> {
+export async function fetchHeaderBytes(
+  url: string,
+): Promise<Uint8Array | null> {
   try {
     const response = await fetch(url, {
       headers: { Range: `bytes=0-${HEADER_FETCH_BYTES - 1}` },

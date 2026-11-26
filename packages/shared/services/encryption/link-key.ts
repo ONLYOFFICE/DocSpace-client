@@ -48,6 +48,7 @@ import { inspectWrap, unwrapKeyForContext, wrapKeyForContext } from "./hpke";
 import {
   DEFAULT_ARGON2_PARAMS,
   generateIdentityKeyPair,
+  readEnvelopePublicKey,
   serializeIdentity,
   unlockWithPassphrase,
 } from "./identity";
@@ -223,10 +224,13 @@ export async function createLinkKey(
 
 /**
  * Opens the sealed key of a link. A wrong secret or password ends in
- * InvalidPassphraseError, a malformed secret in InvalidFormatError.
+ * InvalidPassphraseError, a malformed secret in InvalidFormatError. A
+ * visitor is answered the sealed key alone, and the public key is then the
+ * one the envelope holds.
  */
 export async function openLinkKey(
-  material: Pick<LinkKeyMaterial, "linkPublicKey" | "linkPrivateKeyEnc">,
+  material: Pick<LinkKeyMaterial, "linkPrivateKeyEnc"> &
+    Partial<Pick<LinkKeyMaterial, "linkPublicKey">>,
   secret: string,
   password?: string,
 ): Promise<IdentityKeyPair> {
@@ -234,7 +238,9 @@ export async function openLinkKey(
   zeroBuffer(proof);
   return unlockWithPassphrase(
     {
-      publicKey: material.linkPublicKey,
+      publicKey:
+        material.linkPublicKey ??
+        readEnvelopePublicKey(material.linkPrivateKeyEnc),
       privateKeyEnc: material.linkPrivateKeyEnc,
     },
     sealPassphrase,

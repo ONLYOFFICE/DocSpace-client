@@ -727,6 +727,22 @@ none is open. The technical decisions below follow from them.
     Rejected: a mismatch would open the dialog of a changed member key
     for something that is not a member.
 
+29. **The wrap of a link's secret carries the private key of the link as
+    well (2026-11-26, with task 3.4).** Decision 16 lets anybody who
+    manages links set a new password, also when the old one is forgotten.
+    A new password seals the same key pair again, and the server gives
+    the sealed key only against the proof of the old password, so a
+    manager has to hold the private key itself. The wrap a manager gets
+    is therefore two wraps joined by a dot, the secret and the private
+    key, each made as a file key is wrapped, under a label of its own and
+    bound to the maker, the user and the id of the link in the place of a
+    file id; the server stores the value as it comes. A manager is a
+    member of the room and reads every file the link covers, so the
+    private key gives them nothing they do not have. The id of the link
+    is the server's, so the wrap is stored by a second request after the
+    link is made. Alternative: wrap the secret alone and ask for the old
+    password. Rejected: a forgotten password would end the address.
+
 ## Risks / Trade-offs
 
 - [The address leaks: a forwarded message, a browser history, a

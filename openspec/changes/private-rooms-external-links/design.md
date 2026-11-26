@@ -771,6 +771,26 @@ none is open. The technical decisions below follow from them.
     without the old one; it went with the change of decision 16, and the
     private key of a link is kept nowhere but sealed on the server.
 
+30. **The policy of the visitor's page is set by a check of the path in
+    the head of `index.html` (decided by the owner on 2026-11-26, with
+    task 4.5).** `packages/client/index.html` is one file for every
+    route. Its first script, before any other script or stylesheet is
+    asked for, compares the path with `share/private` and, on that page
+    alone, adds a `Content-Security-Policy` meta to the head. The policy
+    is `script-src` with the page's own origin and what the scripts of
+    the portal need to run (`'unsafe-inline'`, `'unsafe-eval'`, `blob:`,
+    as the default policy of the server has them): what it refuses is a
+    script of another origin. It names no storage and no Document Server
+    and has no `connect-src`: the head knows neither origin before the
+    first request, and the header of the proxy (task 4.4), built by the
+    server, is the line that names them. A document opened in the editor
+    by a visitor (task 5.1) will need the origin of the Document Server
+    here. In development behind the proxy the modules come from the Vite
+    server, whose origin the HTML transform writes into the policy.
+    Alternatives: a meta inserted by the page itself, rejected since the
+    bundle has run by then; an entry page of its own served by the proxy,
+    rejected as a second build to keep in step.
+
 ## Risks / Trade-offs
 
 - [The address leaks: a forwarded message, a browser history, a

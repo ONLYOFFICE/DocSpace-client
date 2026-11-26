@@ -50,7 +50,7 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | What each type is told of the portal quota | `server`, "Payment quota information trimmed by user type" | SERVER-SPEC |
 | **Paid users limit** | | |
 | Message with Billing or Payments, no link for a Room admin or on Community Edition | `packages/client/src/components/PaidQuotaLimitError/index.js:43-79` | CODE-ONLY |
-| Shown when a type or status change fails | `packages/client/src/components/GlobalEvents/ChangeUserTypeEvent.tsx:112-120`; `packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx:108-120` | CODE-ONLY |
+| Shown when a type or status change is refused over the limit | `packages/client/src/components/GlobalEvents/ChangeUserTypeEvent.tsx:112-120`; `packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx:108-120` | CODE-ONLY |
 | Limits on the server | `server`, "Count limits of the tariff" | SERVER-SPEC |
 
 ## Left out of the spec

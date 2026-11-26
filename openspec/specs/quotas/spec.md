@@ -110,7 +110,8 @@ the quota filter SHALL be offered only while a default user quota is set.
 ### Requirement: Storage column of the Rooms list
 
 With the statistics feature, the owner and DocSpace admins SHALL see each room's used space and limit in the Rooms
-list, sort rooms by storage and, while a default room quota is set, filter them by quota; other users SHALL NOT see the\ncolumn.
+list, sort rooms by storage and, while a default room quota is set, filter them by quota; other users SHALL NOT see the
+column.
 
 #### Scenario: User
 
@@ -131,8 +132,8 @@ asked to contact an administrator. A closed bar SHALL stay closed in that browse
 
 ### Requirement: Paid users limit
 
-When changing users' type or turning users on fails, the client SHALL report the paid users limit
-(`Common:QuotaPaidUserLimitError`) with a link to Billing (`Common:PaymentsTitle` on a server installation), except for
+When the server refuses to change users' type or turn users on because the paid users limit is reached, the client
+SHALL report the paid users limit (`Common:QuotaPaidUserLimitError`) with a link to Billing (`Common:PaymentsTitle` on a server installation), except for
 a Room admin and on Community Edition.
 
 #### Scenario: Type change over the limit

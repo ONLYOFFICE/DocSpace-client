@@ -572,6 +572,29 @@ Not checked, and why:
   only, a manager named later, a private Virtual Data Room that
   restricts downloading, and the archive.
 
+Added the same day, with the portal owner signed in:
+
+- The switch stands on the page of the external sharing settings, under
+  its options, and is on. Turned off, the server stores the setting off
+  and the confirmation is shown; after a reload the switch is off.
+- With the setting off the folder link answers Invalid, still with
+  `isPrivate`, and its page shows that the link is no longer available.
+  The room manager reads `privateRoomLinks: false`, the folder still
+  counts one link, and a change of the link answers 403.
+- Turned on again, the link answers RequiredPassword as before.
+- With external sharing restricted for rooms and existing links
+  blocked, the link made for anybody still answers RequiredPassword to
+  a request that is not signed in: the denial of a blocked link is
+  applied to a status that is already Ok, so it comes with the proof
+  and not before it. A change of the link by the manager is accepted
+  and makes it a link for DocSpace users only; from then on a request
+  that is not signed in answers ExternalAccessDenied. The settings were
+  put back as they were.
+
+Still not checked: the change of the setting reaching an open page of
+another user through the socket event, and the link opened with its
+proof while the portal blocks it.
+
 ## Goals / Non-Goals
 
 **Goals:**

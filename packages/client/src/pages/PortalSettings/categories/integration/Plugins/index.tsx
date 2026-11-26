@@ -36,6 +36,7 @@
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 
 import { Tabs } from "@onlyoffice/apps-ui-kit/components/tabs";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -72,10 +73,25 @@ const PluginPage = ({
 
   showPortalSettingsLoader,
   withUsersPlugins,
+  fetchUsersPlugins,
 }: PluginsProps) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
 
-  const [selectedTab, setSelectedTab] = useState("portal");
+  const [searchParams] = useSearchParams();
+  const [selectedTab, setSelectedTab] = useState(() =>
+    searchParams.get("tab") === "users" ? "users" : "portal",
+  );
+
+  const onSelectTab = (id: string) => {
+    setSelectedTab(id);
+
+    const url = new URL(window.location.href);
+
+    if (id === "users") url.searchParams.set("tab", id);
+    else url.searchParams.delete("tab");
+
+    window.history.replaceState(window.history.state, "", url);
+  };
 
   const { onDrop, showCacheWarning, handleCloseCacheWarning } = usePluginUpload(
     { addPlugin },
@@ -153,18 +169,21 @@ const PluginPage = ({
   return (
     <Tabs
       selectedItemId={selectedTab}
-      onSelect={(item) => setSelectedTab(`${item.id}`)}
+      onSelect={(item) => onSelectTab(`${item.id}`)}
       className={styles.pluginsTabs}
+      withAnimation
       items={[
         {
           id: "portal",
           name: t("PortalPlugins"),
           content: portalPlugins,
+          onClick: () => {},
         },
         {
           id: "users",
           name: t("UsersPlugins"),
           content: <UsersPlugins />,
+          onClick: fetchUsersPlugins,
         },
       ]}
     />
@@ -198,6 +217,8 @@ export default inject(
       addPlugin,
 
       isEmptyList,
+
+      fetchUsersPlugins,
     } = pluginStore;
 
     const openSettingsDialog = (pluginName: string) => {
@@ -225,6 +246,7 @@ export default inject(
       showPortalSettingsLoader,
 
       withUsersPlugins: pluginOptions.personalAvailable,
+      fetchUsersPlugins: () => fetchUsersPlugins(),
     };
   },
 )(observer(PluginPage));

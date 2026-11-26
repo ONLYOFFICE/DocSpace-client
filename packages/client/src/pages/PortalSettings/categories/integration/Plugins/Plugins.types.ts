@@ -119,6 +119,8 @@ export interface PluginsProps {
   showPortalSettingsLoader: boolean;
 
   withUsersPlugins: boolean;
+
+  fetchUsersPlugins: () => Promise<void>;
 }
 
 export interface UploadDecsriptionProps {

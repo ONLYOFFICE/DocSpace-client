@@ -197,12 +197,6 @@ export type TValidateShareRoom = {
   isAuthenticated: boolean;
   linkId: string;
   shared: boolean;
-  /**
-   * The working external links set on the entry itself. Answered only for a
-   * private room and its items, and only to the owner and the room managers;
-   * null for anybody else.
-   */
-  externalLinksCount?: number | null;
   status: ValidationStatus;
   tenantId: number;
   title: string;
@@ -214,6 +208,19 @@ export type TValidateShareRoom = {
   entityTitle?: string;
   entityType?: LinkSharingEntityType;
   isRoomMember?: boolean;
+  /** The link belongs to an item of a private room; absent on any other link. */
+  isPrivate?: boolean;
+  /**
+   * A link of a private item: whether its visitor types a password to make
+   * the proof. Without a proof such a link answers the status of a missing
+   * password also when it asks for none.
+   */
+  passwordRequired?: boolean;
+  /**
+   * The private key of the link sealed under its secret, in the answer to the
+   * request whose proof opened the link and in no other.
+   */
+  linkPrivateKeyEnc?: string;
 };
 
 export type TPublicRoomPassword = TValidateShareRoom;

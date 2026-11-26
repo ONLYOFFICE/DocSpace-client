@@ -36,6 +36,7 @@
 import { ShareAccessRights, ShareLinkType } from "../../enums";
 import { request } from "../client";
 import type { TFileLink } from "../files/types";
+import type { TValidateShareRoom } from "../rooms/types";
 import type {
   TPrivateLinkRequest,
   TPrivateLinkTarget,
@@ -117,6 +118,31 @@ export async function getRoomMissingFileKeys(
   return res ?? [];
 }
 
+/**
+ * Opens an external link of a private item with the proof its page derived
+ * from the secret of the address, and from the password when the link has
+ * one (`SecurityController.ApplyExternalSharePassword`). A matching proof
+ * opens the session of the link and answers its sealed private key; a wrong
+ * one answers the status of a wrong password, and is counted as one.
+ */
+export async function openPrivateLink(
+  key: string,
+  proof: string,
+  signal?: AbortSignal,
+) {
+  return (await request({
+    method: "post",
+    url: `files/share/${key}/password`,
+    data: { proof },
+    signal,
+  })) as TValidateShareRoom;
+}
+
+/**
+ * The keys of a file. To a visitor of an external link, who is not a member
+ * of the room, the answer holds the public keys of the members and one entry
+ * of the link with `fileKeyEnc`; the link is named by the request token.
+ */
 export async function getFilePublicKeys(fileId: string | number) {
   const res = (await request({
     method: "get",

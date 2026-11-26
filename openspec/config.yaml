@@ -45,7 +45,9 @@ context: |
   the route, the i18n key, or the server operationId it calls. A text search
   for them in openspec/specs/*/spec.md finds the governing requirement; read
   only the spec.md files found, and their verification.md only to see how a
-  requirement is proven.
+  requirement is proven. Keeping the main specs true after a merge, their
+  coverage report and new capabilities are the openspec-maintain skill
+  (.claude/skills/openspec-maintain, script .claude/scripts/openspec/coverage.mjs).
 
   Where the private-rooms code lives:
   - Crypto core: packages/shared/services/encryption (identity, HPKE wrap,

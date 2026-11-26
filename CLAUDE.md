@@ -275,6 +275,21 @@ pre-push gate is the only automatic check. CI additionally covers what
 lefthook skips: full locale completeness, `pnpm licenses-audit`, and all
 Playwright E2E suites.
 
+## OpenSpec
+
+`openspec/specs/<capability>/` holds the main specs of the whole web client:
+what it does on the branch today, one `spec.md` of requirements per product
+area and a `verification.md` that ties each claim to an E2E test, a unit test,
+the code or a server spec (`../server/openspec/specs`, same names where the
+domain is the same). `openspec/deviations.md` lists behaviour that looks wrong
+and is therefore kept out of the requirements. Before changing behaviour, grep
+the specs for the route, i18n key or operationId to find the governing
+requirement; planned work goes through a change (`/opsx:propose`). The
+`openspec-maintain` skill keeps the specs true after a merge and reports their
+test coverage (`node .claude/scripts/openspec/coverage.mjs`). Private rooms
+keep their own workflow (`.claude/rules/private-rooms.md`); the AI agents are
+specified by the open change `ai-chat-agents-design`.
+
 ## Internationalization (i18n)
 
 User-facing strings always go through `t()`. **Never hardcode brand names or
@@ -306,7 +321,8 @@ the translation skills use that comment as context.
 | `.claude/rules/link-preview.md` | `packages/client/index.html`, `packages/shared/utils/link-preview.ts`, `packages/shared/components/link-preview-meta/**`, `packages/login/src/app/link-preview/**` |
 | `.claude/rules/access-matrix.md` | access rules for user types and room roles, and their specs |
 | `.claude/rules/dashboard-matrix.md` | `packages/client/src/pages/Dashboard/**`, `dashboard-appearance.spec.ts`, its screenshots |
-| `.claude/rules/private-rooms.md` | private-room / encryption code, `openspec/**` — OpenSpec specs and workflow for the feature |
+| `.claude/rules/openspec.md` | `openspec/**` — main specs of the product, finding the governing requirement |
+| `.claude/rules/private-rooms.md` | private-room / encryption code, `openspec/specs/private-rooms/**`, its changes — the feature's spec-first workflow |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
 | `.claude/rules/claude-settings.md` | `.claude/settings*.json` |
 | `.claude/rules/vscode-tasks.md` | `.vscode/**`, `frontend.code-workspace` |

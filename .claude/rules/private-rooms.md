@@ -20,14 +20,16 @@ paths:
   - "packages/doceditor/src/hooks/useFileEncryptionKeys.ts"
   - "packages/doceditor/src/components/EncryptionProviderWrapper.tsx"
   - "packages/sdk/src/app/(private)/**"
-  - "openspec/**"
+  - "openspec/specs/private-rooms/**"
+  - "openspec/changes/*private-rooms*/**"
 ---
 
 # Private rooms are developed spec-first (OpenSpec)
 
-Private (end-to-end encrypted) rooms are the one feature of this repo managed
-with OpenSpec. The behaviour that exists on the branch is written down as
-main specs, and every planned change is a change folder:
+Private (end-to-end encrypted) rooms are developed through OpenSpec changes
+(the main specs of the rest of the product: `.claude/rules/openspec.md`). The
+behaviour that exists on the branch is written down as main specs, and every
+planned change is a change folder:
 
 - `openspec/specs/private-rooms/<capability>/spec.md` — current truth, one
   file per capability (feature-gating, encryption-core, key-management,

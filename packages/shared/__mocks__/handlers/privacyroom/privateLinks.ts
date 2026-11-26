@@ -400,10 +400,24 @@ export const privateLinksHandlers = (
     return okResponse(toDto(link));
   };
 
-  const list = (entry: string) =>
-    okResponse(
-      canManage ? links.filter((link) => link.entry === entry).map(toDto) : [],
+  // FilesController.GetFileLinks sets the count and the total of the answer,
+  // which the client reads as a page; GetFolderLinks and the links of a room
+  // set the count alone, and the client is answered the list itself.
+  const list = (entry: string, isFile: boolean) => {
+    const listed = canManage
+      ? links.filter((link) => link.entry === entry).map(toDto)
+      : [];
+    return new Response(
+      JSON.stringify({
+        response: listed,
+        count: listed.length,
+        ...(isFile && { total: listed.length }),
+        status: 0,
+        statusCode: 200,
+      }),
+      { headers: { "Content-Type": "application/json" } },
     );
+  };
 
   const routes = [
     { path: `rooms/${opts.roomId}`, entry: `room:${opts.roomId}`, isFile: false },
@@ -425,6 +439,6 @@ export const privateLinksHandlers = (
       set(entry, isFile, request),
     ),
     /** getRoomLinks, getFolderLinks, getFileLinks. */
-    http.get(`${api}/${path}/links`, () => list(entry)),
+    http.get(`${api}/${path}/links`, () => list(entry, isFile)),
   ]);
 };

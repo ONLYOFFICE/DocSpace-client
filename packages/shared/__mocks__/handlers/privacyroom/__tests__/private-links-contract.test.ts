@@ -141,6 +141,15 @@ describe("privateLinks mock (mirrors FileSharingAceHelper.ValidatePrivateLinksAs
     expect(body.response.sharedTo.shareLink).not.toContain("#");
   });
 
+  it("answers the links of a file as a page and those of a folder as a list", async () => {
+    const page = await (await fetch(url(FILE))).json();
+    const plain = await (await fetch(url(FOLDER))).json();
+
+    expect(page).toMatchObject({ response: [], count: 0, total: 0 });
+    expect(plain).toMatchObject({ response: [], count: 0 });
+    expect(plain).not.toHaveProperty("total");
+  });
+
   it("Link read", async () => {
     await put(FOLDER, await material());
 

@@ -34,14 +34,22 @@
  */
 
 import {
+  capabilitiesHandler,
   encryptedFilesHandlers,
   filesSettingsHandler,
+  privacyroomAccessHandlers,
+  privateLinksHandlers,
   privateLinkVisitorHandlers,
+  privateRoomLinksHandler,
+  rootHandler,
+  selfActivationStatusHandler,
   settingsHandler,
   TypeSettings,
+  type PrivacyroomAccessHandlerHandle,
+  type PrivateLinksHandlerHandle,
   type PrivateLinkVisitorHandle,
 } from "@docspace/shared/__mocks__/handlers";
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 import { generateIdentityKeyPair } from "@docspace/shared/services/encryption/identity";
 import { encryptFile } from "@docspace/shared/services/encryption/file-keys";
@@ -52,6 +60,7 @@ import {
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
 import { expect, test, TEST_PORT } from "./fixtures/base";
+import { bootstrapEncryption } from "./fixtures/encryption-helpers";
 
 const MEMBER_ID = "11111111-1111-1111-1111-111111111111";
 const LINK_ID = "33333333-3333-4333-8333-333333333333";
@@ -301,3 +310,230 @@ test.describe("External links of private rooms: the page of a visitor", () => {
     expect(landed.hash).toBe(`#${secret}`);
   });
 });
+
+const USER_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+const OWN_ROOM_ID = 9950;
+const OWN_FILE_ID = 8950;
+const OWN_FILE_NAME = "Board minutes.txt";
+
+/** Answers the passphrase prompt an action behind the unlock raises. */
+async function enterPassphrase(page: Page, passphrase: string) {
+  const prompt = page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
+  await prompt.waitFor({ state: "visible", timeout: 10000 });
+  await prompt
+    .locator('input[name="passphrase"], #passphrase input')
+    .first()
+    .fill(passphrase);
+  await prompt.getByRole("button", { name: "Unlock", exact: true }).click();
+}
+
+async function dismissPassphrase(page: Page) {
+  const prompt = page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
+  if (await prompt.isVisible().catch(() => false)) {
+    await prompt.getByRole("button", { name: "Cancel", exact: true }).click();
+    await expect(prompt).toBeHidden();
+  }
+}
+
+/**
+ * A private room the signed-in user owns, with one file wrapped for them by
+ * another member, opened in the list with the file selected and the info
+ * panel shown.
+ */
+async function openOwnRoom(
+  page: Page,
+  mockRequest: WorkerFixture,
+  baseUrl: string,
+) {
+  const { keysHandle, passphrase } = await bootstrapEncryption(
+    page,
+    mockRequest,
+    baseUrl,
+  );
+  const ownKey = keysHandle.getKeys()[0];
+  const member = await generateIdentityKeyPair();
+  const memberPublicKey = arrayBufferToBase64(member.publicKey);
+
+  const plain = new TextEncoder().encode("minutes");
+  const { encryptedBlob, dek } = await encryptFile(plain, {
+    fileName: OWN_FILE_NAME,
+  });
+  const fileKeys = await wrapDekForRecipients({
+    dek,
+    senderIdentity: member,
+    senderUserId: MEMBER_ID,
+    recipients: [
+      { userId: MEMBER_ID, publicKey: memberPublicKey },
+      { userId: USER_ID, publicKey: ownKey.publicKey, publicKeyId: ownKey.id },
+    ],
+    fileId: OWN_FILE_ID,
+  });
+
+  const accessHandle: { current: PrivacyroomAccessHandlerHandle | null } = {
+    current: null,
+  };
+  const linksHandle: { current: PrivateLinksHandlerHandle | null } = {
+    current: null,
+  };
+  const roomKeys = [
+    { id: "member-1", userId: MEMBER_ID, publicKey: memberPublicKey, privateKeyEnc: "" },
+    { id: ownKey.id, userId: USER_ID, publicKey: ownKey.publicKey, privateKeyEnc: "" },
+  ];
+  mockRequest.use(
+    ...encryptedFilesHandlers(TEST_PORT, {
+      roomId: OWN_ROOM_ID,
+      ownerId: USER_ID,
+      currentUserId: USER_ID,
+      // The owner of the room may change its access, which is what tells
+      // that they manage the links of its items.
+      roomSecurity: {
+        Read: true,
+        Create: true,
+        Delete: true,
+        Download: true,
+        Rename: true,
+        EditRoom: true,
+        EditAccess: true,
+        Move: true,
+        MoveTo: true,
+        Copy: false,
+        CopyTo: false,
+        Duplicate: false,
+        IndexExport: false,
+      },
+      initialFiles: [
+        {
+          id: OWN_FILE_ID,
+          title: OWN_FILE_NAME,
+          serverTitle: "stored-8950.txt",
+          size: plain.byteLength,
+          encrypted: true,
+          fileKeys,
+          bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
+        },
+      ],
+      callerKeys: [
+        { ...ownKey, date: "2026-01-01T00:00:00.000Z", cryptoEngineId: "" },
+      ],
+      roomUserKeys: roomKeys.map((key) => ({
+        ...key,
+        date: "2026-01-01T00:00:00.000Z",
+        cryptoEngineId: "",
+      })),
+    }),
+    ...privacyroomAccessHandlers(TEST_PORT, { handle: accessHandle }),
+  );
+  accessHandle.current!.setRoomKeys(OWN_ROOM_ID, roomKeys);
+  // After the room: the links of its items are those of a private item.
+  mockRequest.use(
+    ...privateLinksHandlers(TEST_PORT, {
+      roomId: OWN_ROOM_ID,
+      fileIds: [OWN_FILE_ID],
+      callerId: USER_ID,
+      managerIds: [USER_ID],
+      handle: linksHandle,
+    }),
+  );
+
+  await page.goto(`${baseUrl}/private/${OWN_ROOM_ID}/filter?folder=${OWN_ROOM_ID}`);
+  const row = page.getByTestId("table-row-0");
+  await expect(row).toBeVisible({ timeout: 15000 });
+  await dismissPassphrase(page);
+
+  return { passphrase, linksHandle: linksHandle.current!, row };
+}
+
+async function openShareTab(page: Page, row: Locator) {
+  await row.click();
+  await page.locator(".info-panel-toggle").click();
+  await page.getByTestId("info_share_tab").click();
+}
+
+test.describe("External links of private rooms: the member who manages links", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      rootHandler(TEST_PORT),
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      capabilitiesHandler(TEST_PORT, true),
+      filesSettingsHandler(TEST_PORT),
+    );
+  });
+
+  test("Link to a file to view without a password, then revoked", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { passphrase, linksHandle, row } = await openOwnRoom(
+      page,
+      mockRequest,
+      baseUrl,
+    );
+    await openShareTab(page, row);
+
+    await page.getByTestId("info_panel_share_create_and_copy_link").click();
+    await enterPassphrase(page, passphrase);
+
+    await expect.poll(() => linksHandle.getLinks().length).toBe(1);
+    const [link] = linksHandle.getLinks();
+    expect(link.passwordRequired).toBe(false);
+    expect(link.expirationDate).toBeTruthy();
+    // The secret of the link is kept wrapped for who manages links.
+    await expect
+      .poll(() => Object.keys(linksHandle.getLinks()[0].secretWraps))
+      .toEqual([USER_ID]);
+
+    // Revoking an external link
+    const linkRow = page.getByText("External link", { exact: true });
+    await expect(linkRow).toBeVisible();
+    await page
+      .locator('[class*="linkRow"], [class*="link-row"]')
+      .first()
+      .getByTestId("context-menu-button")
+      .click();
+    await page.getByTestId("delete-link-key_item").click();
+    // The revocation asks first, and nothing is revoked before the answer.
+    const confirm = page.getByTestId("revoke_private_link_dialog_submit");
+    await expect(confirm).toBeVisible();
+    expect(linksHandle.getLinks()).toHaveLength(1);
+    await confirm.click();
+
+    await expect.poll(() => linksHandle.getLinks().length).toBe(0);
+  });
+
+  test("Portal forbids the links", async ({ page, mockRequest, baseUrl }) => {
+    mockRequest.use(filesSettingsHandler(TEST_PORT, { privateRoomLinks: false }));
+    const { row } = await openOwnRoom(page, mockRequest, baseUrl);
+
+    await row.click();
+    await page.locator(".info-panel-toggle").click();
+
+    await expect(page.getByTestId("info_details_tab")).toBeVisible();
+    await expect(page.getByTestId("info_share_tab")).toHaveCount(0);
+  });
+
+  test("Administrator turns the links off", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(privateRoomLinksHandler(TEST_PORT));
+    const sent = page.waitForRequest(
+      (request) =>
+        request.method() === "PUT" &&
+        request.url().includes("/files/settings/external/private"),
+    );
+
+    await page.goto(
+      `${baseUrl}/portal-settings/security/access-portal/access-control`,
+    );
+    const toggle = page.getByTestId("private_room_links_toggle");
+    await expect(toggle.locator("input")).toBeChecked();
+    await page.getByText("External links of private rooms", { exact: true }).click();
+
+    expect((await sent).postDataJSON()).toEqual({ set: false });
+    await expect(toggle.locator("input")).not.toBeChecked();
+  });
+});
+

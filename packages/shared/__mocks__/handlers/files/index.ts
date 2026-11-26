@@ -35,6 +35,7 @@
 
 import {
   filesSettingsHandler,
+  privateRoomLinksHandler,
   showQuickActionsHandler,
   changeDeleteConfirmHandler,
 } from "./filesSettings";
@@ -164,6 +165,7 @@ export {
 export {
   foldersTreeHandler,
   filesSettingsHandler,
+  privateRoomLinksHandler,
   showQuickActionsHandler,
   changeDeleteConfirmHandler,
   validatePublicRoomKeyHandler,

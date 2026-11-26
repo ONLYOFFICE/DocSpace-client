@@ -204,9 +204,12 @@ the code or a server spec (`../server/openspec/specs`, same names where the
 domain is the same). `openspec/deviations.md` lists behaviour that looks wrong
 and is therefore kept out of the requirements. Before changing behaviour, grep
 the specs for the route, i18n key or operationId to find the governing
-requirement; planned work goes through a change (`/opsx:propose`). The
-`openspec-maintain` skill keeps the specs true after a merge and reports their
-test coverage (`node .claude/scripts/openspec/coverage.mjs`). Private rooms
+requirement; planned work goes through a change (`/opsx:propose`). A fix that
+changes behaviour, or edits a test that a `verification.md` row cites, updates
+that requirement and that row in the same commit:
+`node .claude/scripts/openspec/coverage.mjs stale` lists the cited test lines
+that moved. The `openspec-maintain` skill keeps the specs true after a merge
+and reports their test coverage (`coverage.mjs counts`, `uncited`). Private rooms
 keep their own workflow (`.claude/rules/private-rooms.md`); the AI agents are
 specified by the open change `ai-chat-agents-design`.
 

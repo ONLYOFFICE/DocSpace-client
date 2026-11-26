@@ -80,6 +80,12 @@ the fix as **lower confidence**.
 Edit only what's needed, matching surrounding code style and repo conventions.
 No drive-by refactors.
 
+In the client repo, a fix that changes observable behaviour updates the
+governing requirement in `openspec/specs/*/spec.md`, and a test edit that a
+`verification.md` row cites updates that row (moved line, new status); a fixed
+`openspec/deviations.md` row moves to "Closed" as FIXED. Check with
+`node .claude/scripts/openspec/coverage.mjs stale`.
+
 ## Step 6 — gate (mandatory, before proposing a commit)
 
 Run the repo-appropriate checks from the table in Step 2. All must pass:

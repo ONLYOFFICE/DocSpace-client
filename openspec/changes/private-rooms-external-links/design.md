@@ -628,11 +628,20 @@ Document Server reports itself as encrypting.
   browser that is not signed in was not used: the answer of the server
   for it is the one above, and the editor page was not opened in it.
 
-What follows: the question of task 0.3 is answered by the run for the
-view mode, so far as a signed-in visitor shows it. The editor opens the
-link without a password only: its page sends the proof again, since the
-sealed key comes with a proof alone, and has no prompt for a password.
-How a link with a password reaches the editor is open.
+Later the same day, in a browser that is not signed in: the same
+document opened from the page of the link in the editor, with its name
+and its text, in the view mode. The question of task 0.3 is answered
+yes by this run; the Document Server team's own word is not recorded.
+
+A link with a password (decided by the owner on 2026-11-26): the page of
+the editor asks for the password again. The sealed key of a link comes
+with a proof alone, and the password is part of the proof, so the page
+that opens the file key has to have it; the form survives a reload of
+the tab, which a key handed over from the page of the link would not.
+The page reads from the status of the link whether a password is asked
+before it sends any proof, since a proof without the password would be
+counted as a wrong one. Seen on the stand: the form, the text of a wrong
+password, and the document after the right one.
 
 ## Goals / Non-Goals
 

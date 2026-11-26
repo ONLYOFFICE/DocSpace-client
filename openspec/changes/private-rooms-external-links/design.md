@@ -668,6 +668,19 @@ nothing to create; the readiness is not asked in the archive, and the
 row copies nothing there. The menu of the archived room has no external
 link. Restored, the room answers the right and the missing wraps again.
 
+A visitor and a member on one document, for task 5.2, later the same day:
+the client at `181df448abe`, the server at `92c9b60f23`, DocSpace 3.1.0
+with Document Server 10.0.3.58. A browser that is not signed in opened
+the address of a link without a password to a .docx of a private room,
+was sent to `share/private` and from there opened the document in the
+editor, in the view mode, with its text. The owner of the room then
+opened the same document for editing in another browser and typed into
+it: the page of the visitor stayed open and showed that one more person
+had the document open, with the text it had been opened with. The owner
+saved, and the file went from version 3 to 5. The visitor opened the
+address again and read the new text. Whether the save kept the key of
+the file or wrapped a new one for the link was not looked at.
+
 ### Gate and Docker runs of 2026-11-26
 
 Run for task 6.1 on the client at `bf8d6ef7295` with the correction of

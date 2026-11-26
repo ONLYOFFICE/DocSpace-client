@@ -166,8 +166,8 @@ const defaultFakes = (): FakeStores => ({
     fetchTreeFolders: vi.fn(async () => {}),
     updateTreeFoldersItem: vi.fn(),
     getRootFolder: () => ({}),
-    syncPinnedAiProject: vi.fn(),
-    removePinnedAiProject: vi.fn(),
+    syncAiHubRootProject: vi.fn(),
+    removeAiHubRootProject: vi.fn(),
   },
   filesStore: {
     selection: [],

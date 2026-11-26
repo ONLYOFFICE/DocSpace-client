@@ -138,7 +138,7 @@ const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
 type TRenderOptions = {
-  pinnedProjects?: { id: string; name: string }[];
+  aiProjects?: { id: string; name: string }[];
   recentThreads?: { id: string; title: string }[];
   hasMoreThreads?: boolean;
   selectedFolder?: Record<string, unknown>;
@@ -148,7 +148,7 @@ type TRenderOptions = {
 const sidebar = (
   extraFolders: unknown[] = [],
   {
-    pinnedProjects = [],
+    aiProjects = [],
     recentThreads = [],
     hasMoreThreads = false,
     selectedFolder = { id: 1, rootFolderType: FolderType.USER, isRootFolder: true },
@@ -171,7 +171,7 @@ const sidebar = (
         isTemplatesFolderRoot: false,
         isDocumentsFolder: false,
         isAiProjectRoomRoot,
-        pinnedAiProjects: pinnedProjects.map((project) => ({
+        aiHubRootProjects: aiProjects.map((project) => ({
           ...project,
           logo: { color: "" },
         })),
@@ -342,15 +342,15 @@ describe("ClientArticleSidebar — an opened AI room on its short address", () =
 });
 
 describe("ClientArticleSidebar — AI Chat section recent entries", () => {
-  it("lists the conversations under AI Chat with All chats, then every pinned project under Agents with All agents", () => {
-    const pinnedProjects = Array.from({ length: 7 }, (_, index) => ({
+  it("lists the conversations under AI Chat with All chats, then every listed project under Agents with All agents", () => {
+    const aiProjects = Array.from({ length: 7 }, (_, index) => ({
       id: String(100 + index),
       name: `Project ${index}`,
     }));
     renderSidebar(
       [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
       {
-        pinnedProjects,
+        aiProjects,
         recentThreads: [
           { id: "t1", title: "First" },
           { id: "t2", title: "Second" },
@@ -389,7 +389,7 @@ describe("ClientArticleSidebar — collapsed", () => {
     route.search = "?folder=100";
     try {
       renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
-        pinnedProjects: [{ id: "100", name: "Only" }],
+        aiProjects: [{ id: "100", name: "Only" }],
         recentThreads: [{ id: "t1", title: "First" }],
         hasMoreThreads: true,
       });
@@ -416,7 +416,7 @@ describe("ClientArticleSidebar — AI Chat section links to the whole lists", ()
 
   it("offers All chats and All agents while a conversation and an agent are listed", () => {
     renderSidebar(aiHub, {
-      pinnedProjects: [{ id: "100", name: "Only" }],
+      aiProjects: [{ id: "100", name: "Only" }],
       recentThreads: [{ id: "t1", title: "First" }],
     });
 
@@ -433,7 +433,7 @@ describe("ClientArticleSidebar — AI Chat section links to the whole lists", ()
 
   it("opens the Agents list from All agents", () => {
     renderSidebar(aiHub, {
-      pinnedProjects: [{ id: "100", name: "Only" }],
+      aiProjects: [{ id: "100", name: "Only" }],
       recentThreads: [{ id: "t1", title: "First" }],
     });
 
@@ -449,7 +449,7 @@ describe("ClientArticleSidebar — AI Chat section full names", () => {
     renderSidebar(
       [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
       {
-        pinnedProjects: [{ id: "100", name: "A project with a very long name" }],
+        aiProjects: [{ id: "100", name: "A project with a very long name" }],
         recentThreads: [{ id: "t1", title: "A conversation with a long title" }],
       },
     );
@@ -522,7 +522,7 @@ describe("ClientArticleSidebar — leaving the AI Chat page", () => {
     };
     chat.store = store;
     renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
-      pinnedProjects: [{ id: "100", name: "Next" }],
+      aiProjects: [{ id: "100", name: "Next" }],
       isAiProjectRoomRoot: true,
     });
 

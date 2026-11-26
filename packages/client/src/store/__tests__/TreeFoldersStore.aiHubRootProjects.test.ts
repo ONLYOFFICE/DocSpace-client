@@ -63,21 +63,21 @@ vi.mock("@onlyoffice/apps-ui-kit/utils/socket", async (importOriginal) => {
   };
 });
 
-const room = (id: number, title: string) => ({
+const room = (id: number, title: string, pinned = true) => ({
   id,
   title,
   roomType: RoomsType.AiProjectRoom,
-  pinned: true,
+  pinned,
   logo: { color: "FF6680" },
 });
 
-const tree = (...pinned: ReturnType<typeof room>[]) => [
+const tree = (...projects: ReturnType<typeof room>[]) => [
   { id: 1, title: "My documents", rootFolderType: FolderType.USER },
   {
     id: 9,
     title: "AI",
     rootFolderType: FolderType.AiHub,
-    pinnedAiProjects: pinned,
+    aiHubRootProjects: projects,
   },
 ];
 
@@ -95,20 +95,28 @@ const project = (id: number, title: string, pinned = true) => ({
   logo: { color: "#FF6680" },
 });
 
-describe("TreeFoldersStore pinned AI projects", () => {
+const fivePinned = () =>
+  [11, 12, 13, 14, 15].map((id) => room(id, `Project ${id}`));
+
+const ids = (store: TreeFoldersStore) =>
+  store.aiHubRootProjects.map((p) => p.id);
+
+describe("TreeFoldersStore AI projects of the sidebar", () => {
   beforeEach(() => {
     getFoldersTree.mockReset();
   });
 
-  it("reads the pinned projects of the AI rooms section with the tree", async () => {
-    getFoldersTree.mockResolvedValue(tree(room(11, "First"), room(12, "Second")));
+  it("reads the projects of the AI rooms section with the tree, pinned or not", async () => {
+    getFoldersTree.mockResolvedValue(
+      tree(room(11, "First"), room(12, "Second", false)),
+    );
     const store = createStore();
 
     await store.fetchTreeFolders();
 
-    expect(store.pinnedAiProjects).toEqual([
-      { id: "11", name: "First", logo: { color: "#FF6680" } },
-      { id: "12", name: "Second", logo: { color: "#FF6680" } },
+    expect(store.aiHubRootProjects).toEqual([
+      { id: "11", name: "First", logo: { color: "#FF6680" }, pinned: true },
+      { id: "12", name: "Second", logo: { color: "#FF6680" }, pinned: false },
     ]);
   });
 
@@ -118,7 +126,7 @@ describe("TreeFoldersStore pinned AI projects", () => {
 
     await store.fetchTreeFolders();
 
-    expect(store.pinnedAiProjects).toEqual([]);
+    expect(store.aiHubRootProjects).toEqual([]);
   });
 
   it("renames a listed project in place, without reading the tree", async () => {
@@ -126,43 +134,100 @@ describe("TreeFoldersStore pinned AI projects", () => {
     const store = createStore();
     await store.fetchTreeFolders();
 
-    store.syncPinnedAiProject(project(12, "Renamed"));
+    store.syncAiHubRootProject(project(12, "Renamed"));
 
-    expect(store.pinnedAiProjects.map((p) => p.name)).toEqual(["First", "Renamed"]);
+    expect(store.aiHubRootProjects.map((p) => p.name)).toEqual(["First", "Renamed"]);
     expect(getFoldersTree).toHaveBeenCalledTimes(1);
   });
 
-  it("drops an unpinned project and ignores one that was never listed", async () => {
+  it("keeps an unpinned project listed and reads the tree again for its new place", async () => {
     getFoldersTree.mockResolvedValue(tree(room(11, "First"), room(12, "Second")));
     const store = createStore();
     await store.fetchTreeFolders();
+    getFoldersTree.mockResolvedValue(
+      tree(room(12, "Second"), room(11, "First", false)),
+    );
 
-    store.syncPinnedAiProject(project(11, "First", false));
-    store.syncPinnedAiProject(project(40, "Other", false));
+    store.syncAiHubRootProject(project(11, "First", false));
+    await vi.waitFor(() => expect(ids(store)).toEqual(["12", "11"]));
 
-    expect(store.pinnedAiProjects.map((p) => p.id)).toEqual(["12"]);
-    expect(getFoldersTree).toHaveBeenCalledTimes(1);
+    expect(store.aiHubRootProjects[1].pinned).toBe(false);
+    expect(getFoldersTree).toHaveBeenCalledTimes(2);
   });
 
   it("reads the tree again for a project pinned just now", async () => {
+    getFoldersTree.mockResolvedValue(tree(...fivePinned()));
+    const store = createStore();
+    await store.fetchTreeFolders();
+    getFoldersTree.mockResolvedValue(
+      tree(room(20, "New"), ...fivePinned().slice(0, 4)),
+    );
+
+    store.syncAiHubRootProject(project(20, "New"));
+    await vi.waitFor(() => expect(ids(store)[0]).toBe("20"));
+
+    expect(ids(store)).toEqual(["20", "11", "12", "13", "14"]);
+  });
+
+  it("reads the tree again for a new project while the list has room for it", async () => {
     getFoldersTree.mockResolvedValue(tree(room(11, "First")));
     const store = createStore();
     await store.fetchTreeFolders();
-    getFoldersTree.mockResolvedValue(tree(room(13, "New"), room(11, "First")));
+    getFoldersTree.mockResolvedValue(
+      tree(room(11, "First"), room(30, "Created", false)),
+    );
 
-    store.syncPinnedAiProject(project(13, "New"));
-    await vi.waitFor(() => expect(store.pinnedAiProjects).toHaveLength(2));
-
-    expect(store.pinnedAiProjects.map((p) => p.id)).toEqual(["13", "11"]);
+    store.syncAiHubRootProject(project(30, "Created", false));
+    await vi.waitFor(() => expect(ids(store)).toEqual(["11", "30"]));
   });
 
-  it("drops a deleted project by its id", async () => {
+  it("reads the tree again for a new project that may push out one that is not pinned", async () => {
+    getFoldersTree.mockResolvedValue(
+      tree(...fivePinned().slice(0, 4), room(15, "Loose", false)),
+    );
+    const store = createStore();
+    await store.fetchTreeFolders();
+
+    store.syncAiHubRootProject(project(30, "Created", false));
+
+    expect(getFoldersTree).toHaveBeenCalledTimes(2);
+  });
+
+  it("takes no other project into a list of five pinned ones", async () => {
+    getFoldersTree.mockResolvedValue(tree(...fivePinned()));
+    const store = createStore();
+    await store.fetchTreeFolders();
+
+    store.syncAiHubRootProject(project(30, "Created", false));
+
+    expect(ids(store)).toEqual(["11", "12", "13", "14", "15"]);
+    expect(getFoldersTree).toHaveBeenCalledTimes(1);
+  });
+
+  it("drops a deleted project by its id, and ignores one that is not listed", async () => {
     getFoldersTree.mockResolvedValue(tree(room(11, "First"), room(12, "Second")));
     const store = createStore();
     await store.fetchTreeFolders();
 
-    store.removePinnedAiProject(11);
+    store.removeAiHubRootProject(11);
+    store.removeAiHubRootProject(40);
 
-    expect(store.pinnedAiProjects.map((p) => p.id)).toEqual(["12"]);
+    expect(ids(store)).toEqual(["12"]);
+    expect(getFoldersTree).toHaveBeenCalledTimes(1);
+  });
+
+  it("reads the tree again for the project that takes the place of one deleted from a full list", async () => {
+    getFoldersTree.mockResolvedValue(tree(...fivePinned()));
+    const store = createStore();
+    await store.fetchTreeFolders();
+    getFoldersTree.mockResolvedValue(
+      tree(...fivePinned().slice(1), room(16, "Next", false)),
+    );
+
+    store.removeAiHubRootProject(11);
+    expect(ids(store)).toEqual(["12", "13", "14", "15"]);
+    await vi.waitFor(() => expect(ids(store)).toHaveLength(5));
+
+    expect(ids(store)).toEqual(["12", "13", "14", "15", "16"]);
   });
 });

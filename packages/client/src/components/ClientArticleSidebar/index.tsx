@@ -100,7 +100,7 @@ import {
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import type { TAiChatRecentThread } from "SRC_DIR/store/DialogsStore";
-import type { TPinnedAiProject } from "SRC_DIR/store/TreeFoldersStore";
+import type { TAiHubRootProject } from "SRC_DIR/store/TreeFoldersStore";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 
 import styles from "./ClientArticleSidebar.module.scss";
@@ -132,9 +132,9 @@ type ClientArticleSidebarProps = FolderIds & {
     threadId?: string,
   ) => void;
   // The latest conversations, listed under AI Chat with the one the chat
-  // shows, and the AI projects the user pinned, listed under Agents in the
-  // order the Agents list shows pinned ones.
-  pinnedAiProjects?: TPinnedAiProject[];
+  // shows, and the AI projects listed under Agents: up to five, the pinned
+  // ones first, as the server picks them.
+  aiHubRootProjects?: TAiHubRootProject[];
   recentAiChats?: TAiChatRecentThread[];
   hasMoreAiChats?: boolean;
   activeAiChatId?: string;
@@ -223,7 +223,7 @@ const ClientArticleSidebar = ({
   aiOpenFolderId,
   aiOpenRoomType,
   requestAiChatPage,
-  pinnedAiProjects = EMPTY_LIST,
+  aiHubRootProjects = EMPTY_LIST,
   recentAiChats = EMPTY_LIST,
   hasMoreAiChats = false,
   activeAiChatId,
@@ -436,7 +436,7 @@ const ClientArticleSidebar = ({
   const openProjectId = /^\/ai-rooms\/(\d+)\//.exec(location.pathname)?.[1];
   const aiProjectPageId =
     openProjectId &&
-    pinnedAiProjects.some((project) => project.id === openProjectId)
+    aiHubRootProjects.some((project) => project.id === openProjectId)
       ? aiProjectItemId(openProjectId)
       : undefined;
 
@@ -873,7 +873,7 @@ const ClientArticleSidebar = ({
           },
           // A project opens as its room, which shows its chat. Its logo is
           // the one the projects list shows; without one, its initials.
-          ...pinnedAiProjects.map((project) => ({
+          ...aiHubRootProjects.map((project) => ({
             id: aiProjectItemId(project.id),
             label: project.name,
             iconNode: (
@@ -889,8 +889,8 @@ const ClientArticleSidebar = ({
             ),
             ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
           })),
-          // Only the pinned ones are listed: the rest are in the Agents list.
-          ...(pinnedAiProjects.length > 0
+          // A few of them are listed: the rest are in the Agents list.
+          ...(aiHubRootProjects.length > 0
             ? [
                 {
                   id: AI_ALL_AGENTS_ID,
@@ -939,7 +939,7 @@ const ClientArticleSidebar = ({
     aiHubTypeUrl,
     aiAgentsUrl,
     openAiChatPage,
-    pinnedAiProjects,
+    aiHubRootProjects,
     recentAiChats,
     hasMoreAiChats,
     treeFolders,
@@ -964,7 +964,7 @@ const ClientArticleSidebar = ({
   // menu drew anew has none).
   React.useEffect(() => {
     const titles: [string, string][] = [
-      ...pinnedAiProjects.map(
+      ...aiHubRootProjects.map(
         (project) => [aiProjectItemId(project.id), project.name] as [string, string],
       ),
       ...recentAiChats.map(
@@ -1034,7 +1034,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
         }
       : {}),
     requestAiChatPage: dialogsStore.requestAiChatPage,
-    pinnedAiProjects: treeFoldersStore.pinnedAiProjects,
+    aiHubRootProjects: treeFoldersStore.aiHubRootProjects,
     recentAiChats: dialogsStore.aiChatRecentThreads,
     hasMoreAiChats: dialogsStore.aiChatHasMoreThreads,
     activeAiChatId: dialogsStore.aiChatActiveThreadId,

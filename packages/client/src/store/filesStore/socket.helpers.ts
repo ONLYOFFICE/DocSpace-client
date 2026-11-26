@@ -408,8 +408,8 @@ export function refreshFolderImpl(
       if (folderInfo.roomType === RoomsType.AiProjectRoom) {
         void self.aiProjectsStore?.refreshTileSummary(Number(folderInfo.id));
         // Pinned, unpinned, renamed or given another logo, here or elsewhere:
-        // the sidebar's list of pinned agents follows.
-        self.treeFoldersStore.syncPinnedAiProject(
+        // the sidebar's list of agents follows.
+        self.treeFoldersStore.syncAiHubRootProject(
           toAiProject(folderInfo as unknown as TAiProjectRoomDto),
         );
       }
@@ -498,7 +498,7 @@ export function wsModifyFolderDeleteImpl(self: FilesStore, opt?: TOptSocket) {
     });
   } else if (opt?.type === "folder" && opt?.id) {
     // A deleted agent leaves the sidebar, whatever list is on screen.
-    self.treeFoldersStore.removePinnedAiProject(opt.id);
+    self.treeFoldersStore.removeAiHubRootProject(opt.id);
 
     const { isRoom, isTemplate, pathParts, rootFolderType } =
       self.selectedFolderStore;

@@ -39,7 +39,9 @@ import { getLocalizedText } from "../locale";
 
 describe("getLocalizedText", () => {
   it("takes the text of the language", () => {
-    expect(getLocalizedText({ en: "Hello", ru: "Privet" }, "ru", "fallback")).toBe("Privet");
+    expect(
+      getLocalizedText({ en: "Hello", ru: "Russian text" }, "ru", "fallback"),
+    ).toBe("Russian text");
   });
 
   it("falls back when the language is missing", () => {
@@ -48,13 +50,27 @@ describe("getLocalizedText", () => {
 
   it("takes another region of the same language before falling back", () => {
     expect(
-      getLocalizedText({ "en-US": "Hello", ru: "Privet" }, "en-GB", "fallback"),
+      getLocalizedText({ "en-US": "Hello", ru: "Russian text" }, "en-GB", "fallback"),
     ).toBe("Hello");
-    expect(getLocalizedText({ de: "Hallo" }, "de-AT", "fallback")).toBe("Hallo");
-    expect(getLocalizedText({ "pt-BR": "Ola" }, "pt", "fallback")).toBe("Ola");
+    expect(getLocalizedText({ de: "German text" }, "de-AT", "fallback")).toBe(
+      "German text",
+    );
+    expect(
+      getLocalizedText({ "pt-BR": "Portuguese text" }, "pt", "fallback"),
+    ).toBe("Portuguese text");
     expect(getLocalizedText({ "en-US": "" }, "en-GB", "fallback")).toBe(
       "fallback",
     );
+  });
+
+  it("matches the language in any case before another region", () => {
+    expect(
+      getLocalizedText(
+        { "zh-TW": "Traditional", "zh-cn": "Simplified" },
+        "zh-CN",
+        "fallback",
+      ),
+    ).toBe("Simplified");
   });
 
   it("prefers the bare language to another region", () => {

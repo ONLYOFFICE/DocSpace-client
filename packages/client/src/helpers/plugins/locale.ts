@@ -42,11 +42,12 @@ export const getLocalizedText = (
   fallback: string,
 ) => {
   if (!map) return fallback;
-  if (map[language]) return map[language];
 
+  const exact = language.toLowerCase();
   const base = baseLanguage(language);
   const keys = Object.keys(map).filter((key) => map[key]);
   const key =
+    keys.find((k) => k.toLowerCase() === exact) ??
     keys.find((k) => k.toLowerCase() === base) ??
     keys.find((k) => baseLanguage(k) === base);
 

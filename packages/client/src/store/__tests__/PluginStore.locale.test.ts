@@ -66,8 +66,8 @@ const plugin = (extra: Partial<TPlugin> = {}) =>
   ({
     name: "my-notes",
     description: "my-notes description",
-    nameLocaleMap: { "en-US": "My notes", ru: "Заметки" },
-    descriptionLocaleMap: { "en-US": "Keeps notes", ru: "Хранит заметки" },
+    nameLocaleMap: { "en-US": "My notes", ru: "Notes in Russian" },
+    descriptionLocaleMap: { "en-US": "Keeps notes", ru: "Keeps notes, in Russian" },
     ...extra,
   }) as unknown as TPlugin;
 
@@ -86,7 +86,7 @@ describe("initLocalePlugin", () => {
 
     storeIn("en-GB").initLocalePlugin(loaded);
 
-    expect(loaded.nameLocale).toBe("Заметки");
+    expect(loaded.nameLocale).toBe("Notes in Russian");
   });
 
   it("falls back to the manifest name and description", () => {

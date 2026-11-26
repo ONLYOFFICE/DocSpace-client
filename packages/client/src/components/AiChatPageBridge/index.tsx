@@ -99,9 +99,9 @@ type AiChatPageBridgeProps = {
  * exist only inside `AiAgentProviders` (mounted once inside them):
  *
  * - fulfils the requests recorded by `dialogsStore.requestAiChatPage` - AI
- *   Chat, Recent and a conversation under it open the chat fullscreen, on the
- *   conversation, on its history or on that conversation. Recent and a
- *   conversation under it open on the default agent, whatever agent the
+ *   Chat, a conversation under it and All chats open the chat fullscreen, on
+ *   a new conversation, on that conversation or on its history. A
+ *   conversation and All chats open on the default agent, whatever agent the
  *   chat ran on;
  * - mirrors the latest conversations and the open one into `dialogsStore`
  *   for Recent's entries. They are read even while the chat is closed, since
@@ -362,12 +362,24 @@ const AiChatPageBridgeComponent = ({
         switchToThread(consumed.threadId);
         return;
       }
-      // A closed panel starts a fresh conversation, an open one keeps its
-      // thread - the same as every other way to open the chat.
+      // A closed panel starts a fresh conversation by itself.
+      const wasOpen = aiChatStore.isVisible;
       aiChatStore.openNewChat();
       aiChatStore.setFullscreen(true);
-      if (consumed.page === "history") void openHistory();
-      else goToChat();
+      if (consumed.page === "history") {
+        void openHistory();
+        return;
+      }
+      // AI Chat starts a new conversation every time: an open chat is taken
+      // off the conversation it shows, which stays in the history. One that
+      // has no message yet is new already. The agent picked in the panel
+      // stays, and its model with it.
+      const chatThreads = useThreadsStore.getState();
+      if (wasOpen && chatThreads.threadId)
+        chatThreads.onSwitchToNewThread({
+          keepSessionProfile: !!aiPresetsStore.activePreset,
+        });
+      goToChat();
     };
 
     // A request that waits for no navigation opens the chat at once, before

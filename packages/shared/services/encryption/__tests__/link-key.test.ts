@@ -302,11 +302,10 @@ describe("The secret of a link is wrapped for those who manage links", () => {
 
   const setup = async () => {
     const secret = generateLinkSecret();
-    const { keyPair, material } = await createLinkKey(secret, "one");
     const creator = await generateIdentityKeyPair();
     const manager = await generateIdentityKeyPair();
     const wrap = await wrapLinkSecret({
-      link: { secret, keyPair },
+      secret,
       linkId: LINK_ID,
       sender: creator,
       senderUserId: CREATOR_ID,
@@ -317,7 +316,6 @@ describe("The secret of a link is wrapped for those who manage links", () => {
       unwrapLinkSecret({
         wrap,
         linkId: LINK_ID,
-        linkPublicKey: material.linkPublicKey,
         recipient: manager,
         recipientUserId: MANAGER_ID,
         senders: [
@@ -325,23 +323,13 @@ describe("The secret of a link is wrapped for those who manage links", () => {
         ],
         ...over,
       });
-    return { secret, keyPair, material, creator, manager, wrap, open };
+    return { secret, creator, manager, wrap, open };
   };
 
   it("Address copied by another manager", async () => {
     const { secret, open } = await setup();
 
-    expect((await open()).secret).toBe(secret);
-  });
-
-  it("lets a manager seal the link again under a new password", async () => {
-    const { secret, material, open } = await setup();
-
-    const held = await open();
-    const again = await sealLinkKey(held.keyPair, held.secret, "two");
-
-    expect(again.linkPublicKey).toBe(material.linkPublicKey);
-    await expect(openLinkKey(again, secret, "two")).resolves.toBeDefined();
+    expect(await open()).toBe(secret);
   });
 
   it("Member who does not manage links", async () => {
@@ -351,7 +339,7 @@ describe("The secret of a link is wrapped for those who manage links", () => {
     await expect(open({ recipient: member })).rejects.toThrow();
   });
 
-  it("does not open as the wrap of another link", async () => {
+  it("Wrap offered to another link", async () => {
     const { open } = await setup();
 
     await expect(open({ linkId: OTHER_LINK_ID })).rejects.toThrow();

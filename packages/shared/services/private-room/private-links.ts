@@ -44,7 +44,6 @@ import { isFile, isRoom } from "../../utils/typeGuards";
 import {
   createLinkKey,
   generateLinkSecret,
-  type LinkSecret,
   unwrapLinkSecret,
   wrapLinkSecret,
 } from "../encryption/link-key";
@@ -120,8 +119,8 @@ export async function readPrivateLinkAddress(
   const known = addresses.get(linkId);
   if (known) return known;
 
-  const { linkSecretWrap, linkPublicKey } = link.sharedTo;
-  if (!linkSecretWrap || !linkPublicKey) return null;
+  const { linkSecretWrap } = link.sharedTo;
+  if (!linkSecretWrap) return null;
 
   const identity = await requireUnlock(userId);
   if (!identity) return null;
@@ -130,10 +129,9 @@ export async function readPrivateLinkAddress(
     const own = await findOwnKey(identity);
     if (!own || own.id !== linkSecretWrap.publicKeyId) return null;
 
-    const { secret } = await unwrapLinkSecret({
+    const secret = await unwrapLinkSecret({
       wrap: linkSecretWrap.wrap,
       linkId,
-      linkPublicKey,
       recipient: identity,
       recipientUserId: userId,
       senders: [{ userId, publicKey: own.publicKey }],
@@ -157,7 +155,7 @@ export async function readPrivateLinkAddress(
 async function storeOwnSecretWrap(
   item: TPrivateLinkItem,
   link: TFileLink,
-  held: LinkSecret,
+  secret: string,
   userId: string,
   identity: IdentityKeyPair,
 ): Promise<TFileLink> {
@@ -166,7 +164,7 @@ async function storeOwnSecretWrap(
     if (!own) return link;
 
     const wrap = await wrapLinkSecret({
-      link: held,
+      secret,
       linkId: String(link.sharedTo.id),
       sender: identity,
       senderUserId: userId,
@@ -293,7 +291,7 @@ export async function createPrivateItemLink(
   if (!identity) return null;
 
   const secret = generateLinkSecret();
-  const { keyPair, material } = await createLinkKey(secret, password);
+  const { material } = await createLinkKey(secret, password);
 
   const created = await setPrivateItemLink(getTarget(item), {
     access: ShareAccessRights.ReadOnly,
@@ -311,7 +309,7 @@ export async function createPrivateItemLink(
   const link = await storeOwnSecretWrap(
     item,
     created,
-    { secret, keyPair },
+    secret,
     userId,
     identity,
   );

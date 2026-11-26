@@ -622,7 +622,8 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agents-list, "Category row"; "Choosing a category"
-    test("narrows the agents to a category from the row under the filter", async ({
+    // Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+    test.skip("narrows the agents to a category from the row under the filter", async ({
       page,
       baseUrl,
     }) => {

@@ -243,7 +243,8 @@ const TEMPLATES_TAB = "templates";
 
 /**
  * The Templates tab of the Agents list is hidden for now: no tabs are drawn
- * over the list, a `tab=templates` address shows the list itself, and the
+ * over the list, nor the category row under its filter, a `tab=templates`
+ * address shows the list itself, and the
  * catalog is not read (its requests are commented out in AiTemplatesStore).
  * Set to true, and restore those requests, to bring the tab back.
  */

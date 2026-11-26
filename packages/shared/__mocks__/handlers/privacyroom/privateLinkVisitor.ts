@@ -48,6 +48,9 @@ export type PrivateLinkVisitorOptions = {
   /** The signed key of the link, which the address carries as `key`. */
   key: string;
   linkId: string;
+  /** The file, folder or room the link is set on, and its kind: FileEntryType.Folder (1) or .File (2). */
+  entryId: number;
+  entryType: 1 | 2;
   title?: string;
   passwordRequired: boolean;
   /** The key material the link was stored with. */
@@ -119,7 +122,8 @@ const proofMatches = async (proof: unknown, proofHash: string) => {
  * SecurityController.ApplyExternalSharePassword and
  * EncryptionKeyPairDtoHelper.GetLinkSessionKeysAsync do it.
  *
- * `GET files/share/{key}`: the status with `isPrivate` and
+ * `GET files/share/{key}`: the status with the id and the kind of the entry
+ * the link is set on (ExternalShareDto.Id, .Type), `isPrivate` and
  * `passwordRequired`; RequiredPassword until a proof has opened the
  * session, also for a link that asks for no password, then Ok; Invalid for
  * a link a gate closes or that is revoked, Expired past its end date. It
@@ -173,7 +177,8 @@ export const privateLinkVisitorHandlers = (
   const answer = (status: number, extra: object = {}) =>
     json({
       status,
-      id: opts.linkId,
+      id: String(opts.entryId),
+      type: opts.entryType,
       linkId: opts.linkId,
       title: opts.title ?? "",
       isPrivate: true,

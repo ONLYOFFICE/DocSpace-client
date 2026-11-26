@@ -67,6 +67,8 @@ beforeAll(async () => {
     ...privateLinkVisitorHandlers(PORT, {
       key: KEY,
       linkId: LINK_ID,
+      entryId: COVERED,
+      entryType: 2,
       passwordRequired: true,
       ...material,
       memberKeys: [{ id: "key-1", userId: "u-1", publicKey: "pk-1" }],
@@ -132,6 +134,8 @@ describe("privateLinkVisitor mock - A link is served only against a proof of its
 
     expect(missing).toMatchObject({
       status: 3,
+      id: String(COVERED),
+      type: 2,
       isPrivate: true,
       passwordRequired: true,
     });

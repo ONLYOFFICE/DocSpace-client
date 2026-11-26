@@ -643,6 +643,31 @@ before it sends any proof, since a proof without the password would be
 counted as a wrong one. Seen on the stand: the form, the text of a wrong
 password, and the document after the right one.
 
+The room menu, a link that is not ready and the archive, later the same
+day, as the owner of a private Custom room with one encrypted file. The
+menu of the room carries the external link and neither a link for room
+members nor the embedding. With no link the entry opens the settings of
+a new one with its password; the link is stored with the wrap of its
+secret and no file left without a key, and the server answers it as not
+primary (`primary: false`), so the entry takes the first link of the
+room when none is primary. The entry then copies the address. With the
+answer of `privacyroom/{roomId}/access/missing` replaced in the page by
+one that names the link as lacking the key of the file, the entry gives
+the text of a link that is not ready and copies nothing; a real file
+left without a key was not produced on the stand. The progress line was
+not seen: one file is wrapped at once.
+
+Archived, the room answers `security.EditAccess: false`,
+`externalLinksCount: 1`, its link in `files/rooms/{id}/share` with
+`filterType=2` and in `files/rooms/{id}/links`, and 403 for
+`privacyroom/{roomId}/access/missing`. The first run showed no link in
+the Members view: the view asked for the links and drew them only with
+the right to change the access, and drew the heading in the archive
+only over a primary link. Corrected, it lists the link dimmed, with
+nothing to create; the readiness is not asked in the archive, and the
+row copies nothing there. The menu of the archived room has no external
+link. Restored, the room answers the right and the missing wraps again.
+
 ## Goals / Non-Goals
 
 **Goals:**

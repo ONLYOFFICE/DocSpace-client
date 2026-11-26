@@ -94,7 +94,9 @@ const LinkRow = (props: LinkRowProps) => {
   // with its password, and is set without its key material.
   // Spec: private-rooms/room-membership, "External link of a private item keeps the link model of the portal"
   const isPrivateLink = item.private === true;
-  const canCopyPrivateLink = isPrivateLink && canReadPrivateLinkAddress(link);
+  // Spec: private-rooms/room-membership, "External links stop in an archived private room"
+  const canCopyPrivateLink =
+    isPrivateLink && !isArchiveFolder && canReadPrivateLinkAddress(link);
   const [revokeVisible, setRevokeVisible] = useState(false);
 
   const availableShareRights = isPrivateLink
@@ -126,6 +128,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyPrivateLink = async () => {
+    if (isArchiveFolder) return;
     if (!isPrivateLinkReady(link)) {
       toastr.warning(t("Common:PrivateLinkNotReady"));
       return;

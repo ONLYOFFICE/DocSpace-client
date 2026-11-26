@@ -636,7 +636,7 @@ describe("A link to a folder or a room is ready when every file has its key", ()
     expect(isPrivateLinkReady(link)).toBe(false);
   });
 
-  it("keeps what is known when the server cannot be asked, and asks nothing for a file", async () => {
+  it("keeps what is known when the server cannot be asked, and asks nothing for a file or in the archive", async () => {
     const { link } = await made("ready-6", [3]);
     getRoomMissingFileKeys.mockRejectedValue(new Error("offline"));
 
@@ -645,6 +645,10 @@ describe("A link to a folder or a room is ready when every file has its key", ()
 
     getRoomMissingFileKeys.mockClear();
     await refreshPrivateLinksReadiness(file, [link]);
+    await refreshPrivateLinksReadiness(
+      { ...folder, rootFolderType: FolderType.Archive },
+      [link],
+    );
     expect(getRoomMissingFileKeys).not.toHaveBeenCalled();
   });
 

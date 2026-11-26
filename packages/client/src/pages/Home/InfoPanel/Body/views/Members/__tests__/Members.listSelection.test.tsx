@@ -37,7 +37,11 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import {
@@ -95,6 +99,13 @@ vi.mock("@docspace/shared/components/share/sub-components/User", () => ({
   ),
 }));
 
+// The row of a link is covered by its own tests; here only its presence counts.
+vi.mock("../sub-components/LinkRow", () => ({
+  default: ({ link }: { link: { sharedTo: { title: string } } }) => (
+    <div data-testid="stub_link_row">{link.sharedTo.title}</div>
+  ),
+}));
+
 const { default: Members } = await import("../index");
 
 const members = (): TInfoPanelMembers =>
@@ -126,7 +137,7 @@ const members = (): TInfoPanelMembers =>
     expected: [],
   }) as unknown as TInfoPanelMembers;
 
-const renderMembersOf = (room: TRoom) => {
+const renderMembersOf = (room: TRoom, archivedLinks?: object[]) => {
   const setRemoveUserConfirmation = vi.fn();
   const changeUserRole = vi.fn(async () => {});
   const setLinkParams = vi.fn();
@@ -146,12 +157,12 @@ const renderMembersOf = (room: TRoom) => {
       selectedFolderStore={{ id: 2, isRootFolder: true }}
       publicRoomStore={{
         primaryLink: null,
-        additionalLinks: [],
+        additionalLinks: archivedLinks ?? [],
         setExternalLink: vi.fn(),
         hasExternalLinks: false,
       }}
       treeFoldersStore={{
-        isArchiveFolderRoot: false,
+        isArchiveFolderRoot: !!archivedLinks,
         isAIAgentsFolderRoot: false,
       }}
       filesSettingsStore={{ privateRoomLinks: true }}
@@ -241,6 +252,31 @@ describe("Members tab of a room selected in a list", () => {
     );
 
     expect(screen.queryByTestId("info_panel_members_links_block")).toBeNull();
+    expect(
+      screen.queryByTestId("info_panel_members_create_additional_link"),
+    ).toBeNull();
+  });
+
+  it("Room archived: the links it held are listed, with none to create", () => {
+    const archived = privateRoomDto({
+      rootFolderType: FolderType.Archive,
+      externalLinksCount: 1,
+      security: { EditAccess: false } as TRoom["security"],
+    });
+    const link = {
+      access: ShareAccessRights.ReadOnly,
+      sharedTo: { id: "link-1", title: "Shared link", passwordRequired: true },
+    };
+
+    renderMembersOf(listItemOf(archived), [link]);
+
+    expect(
+      screen.getByTestId("info_panel_members_links_block"),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Shared link")).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("info_panel_members_add_new_link_button"),
+    ).toBeNull();
     expect(
       screen.queryByTestId("info_panel_members_create_additional_link"),
     ).toBeNull();

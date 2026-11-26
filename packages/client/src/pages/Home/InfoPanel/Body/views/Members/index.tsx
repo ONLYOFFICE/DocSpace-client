@@ -221,13 +221,22 @@ const Members = ({
       isPrivateRoom ||
       (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
+    // An archived private room reports no right to change its access, and
+    // its links are not primary ones.
+    const isArchivedPrivateRoom =
+      isPrivateRoom && showsArchivedPrivateRoomLinks(infoPanelSelection);
+
     if (
       isPublicRoomType &&
-      infoPanelSelection?.security.EditAccess &&
+      (infoPanelSelection?.security.EditAccess || isArchivedPrivateRoom) &&
       !searchValue &&
       !isTemplate
     ) {
-      if (!isArchiveFolder || primaryLink) {
+      if (
+        !isArchiveFolder ||
+        primaryLink ||
+        (isArchivedPrivateRoom && additionalLinks?.length)
+      ) {
         publicRoomItems.push(
           <div
             className={styles.linksBlock}

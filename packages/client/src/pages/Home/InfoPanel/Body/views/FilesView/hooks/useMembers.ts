@@ -47,6 +47,7 @@ import {
 } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import { loadPendingAccess } from "@docspace/shared/services/private-room/room-member-flows";
+import { showsArchivedPrivateRoomLinks } from "@docspace/shared/services/private-room/private-links";
 import { Nullable } from "@docspace/shared/types";
 import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 
@@ -249,7 +250,8 @@ export const useMembers = ({
 
     if (
       isPublicRoomType &&
-      security.EditAccess &&
+      // An archived private room reports no right to change its access.
+      (security.EditAccess || showsArchivedPrivateRoomLinks(room)) &&
       !searchValue &&
       !isTemplate &&
       roomId

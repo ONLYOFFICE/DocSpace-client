@@ -195,7 +195,9 @@ export async function refreshPrivateLinksReadiness(
     .map((link) => link?.sharedTo?.id)
     .filter((id) => id !== undefined && id !== null)
     .map(String);
-  if (isFile(item) || linkIds.length === 0) return;
+  // The server refuses the question for an archived room, where no link works.
+  const isArchived = item.rootFolderType === FolderType.Archive;
+  if (isFile(item) || isArchived || linkIds.length === 0) return;
 
   try {
     const roomId = await findRoomId(item);

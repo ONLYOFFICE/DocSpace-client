@@ -34,6 +34,7 @@
  */
 
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import {
   TOption,
@@ -63,6 +64,8 @@ const LanguageCombobox = (props: ComboboxProps) => {
     isDisabled = false,
     showLanguageName = false,
   } = props;
+
+  const { t } = useTranslation("Common");
 
   const withLabel = isMobileView || showLanguageName;
 
@@ -119,6 +122,9 @@ const LanguageCombobox = (props: ComboboxProps) => {
       withBackdrop={withBackdrop}
       shouldShowBackdrop={shouldShowBackdrop}
       dataTestId={dataTestId ?? "language-combobox"}
+      // The icon alone names nothing: without the language name drawn, the
+      // button is named for what it chooses.
+      aria-label={showLanguageName ? undefined : t("Common:Language")}
     />
   );
 };

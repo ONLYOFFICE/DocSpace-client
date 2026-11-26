@@ -82,7 +82,15 @@ The system SHALL wrap the secret of an external link for the public key of the r
 
 #### Scenario: Manager named later
 - **WHEN** a member becomes a room manager after a link was created
-- **THEN** the secret is wrapped for them the next time a manager who holds it opens the room
+- **THEN** the secret is wrapped for them the next time a manager who holds it, with the key unlocked, looks at the links of the item or copies the address
+
+#### Scenario: Links listed with the key locked
+- **WHEN** a manager who holds the secret looks at the links of an item while their key is locked
+- **THEN** no unlock is asked and no wrap is made
+
+#### Scenario: Manager whose key does not pass the check
+- **WHEN** the key the room lists for a manager differs from the one seen before, or the manager has no key
+- **THEN** no wrap is made for that manager, and the others get theirs
 
 #### Scenario: Member who does not manage links
 - **WHEN** a member with a lower role looks at a link of the room

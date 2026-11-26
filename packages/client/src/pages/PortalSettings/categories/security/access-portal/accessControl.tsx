@@ -78,6 +78,7 @@ import type { TAccessControlSettings } from "@docspace/shared/api/files";
 
 import AccessControlLoader from "../sub-components/loaders/access-control-loader";
 import { MainContainer } from "../StyledSecurity";
+import { PrivateRoomLinksSwitchSection } from "./privateRoomLinksSwitch";
 import styles from "./AccessControl.module.scss";
 
 const STORAGE_KEY_DEFAULT = "defaultAccessControlSettings";
@@ -479,6 +480,8 @@ const AccessControl = ({
             </div>
           </>
         )}
+
+        <PrivateRoomLinksSwitchSection />
 
         <SaveCancelButtons
           className="save-cancel-buttons"

@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Opomba:</strong> Vaš stari naslov prostora ne bo na voljo novim uporabnikom, ko kliknete gumb Shrani.",
   "PortalSecurityTitle": "Ta podrazdelek vam omogoča, da uporabnikom zagotovite varne in priročne načine za dostop do delovnega prostora.",
   "PreviewTooltipDescription": "Predoglejte si vmesnik z uporabljeno izbrano barvo",
+  "PrivateRoomLinks": "Zunanje povezave zasebnih sob",
+  "PrivateRoomLinksDescription": "Lastnikom in upravljalcem sob dovoli ustvarjanje zunanjih povezav do zasebnih sob ter njihovih datotek in map. Ko je ta nastavitev izklopljena, obstoječe povezave ne delujejo, dokler je znova ne vklopite.",
   "ProjectsDescription": "Vsak projekt je uvožen kot soba, v kateri bodo vsi dokumenti in uporabniki tega projekta. Vodja projekta bo postal lastnik sobe",
   "ProvideChoice": "Ponudite izbiro (splet ali aplikacija)",
   "QuotaPerRoom": "Kvota na sobo",

@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Hinweis:</strong> Ihre alte Adresse wird für neue Benutzer nicht mehr verfügbar sein, sobald Sie auf die Schaltfläche Speichern klicken.",
   "PortalSecurityTitle": "Mit diesem Abschnitt können Sie den Benutzern einen sicheren und bequemen Zugang zum Arbeitsbereich ermöglichen.",
   "PreviewTooltipDescription": "Vorschau der Benutzeroberfläche mit der angewendeten ausgewählten Farbe",
+  "PrivateRoomLinks": "Externe Links privater Räume",
+  "PrivateRoomLinksDescription": "Raumbesitzern und Raum-Managern erlauben, externe Links zu privaten Räumen sowie zu deren Dateien und Ordnern zu erstellen. Ist diese Einstellung deaktiviert, funktionieren vorhandene Links nicht, bis sie wieder aktiviert wird.",
   "ProjectsDescription": "Jedes Projekt wird als Raum importiert, der alle Dokumente und Benutzer dieses Projekts enthält. Der Projektleiter wird Besitzer des Raumes",
   "ProvideChoice": "Auswahlmöglichkeit (Web oder App)",
   "QuotaPerRoom": "Quota pro Zimmer",

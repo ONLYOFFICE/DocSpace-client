@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Piezīme.</strong> Jūsu vecā vietas adrese vairs nebūs pieejama jauniem lietotājiem, tiklīdz noklikšķināsiet uz pogas Saglabāt.",
   "PortalSecurityTitle": "Šī apakšsadaļa ļauj jums nodrošināt lietotājiem drošus un ērtus veidus, kā piekļūt darbvietai.",
   "PreviewTooltipDescription": "Priekšskatīt saskarni, kurai ir piemērota izvēlētā krāsa",
+  "PrivateRoomLinks": "Privāto telpu ārējās saites",
+  "PrivateRoomLinksDescription": "Atļaut telpu īpašniekiem un pārvaldniekiem izveidot ārējās saites uz privātajām telpām un to failiem un mapēm. Kad šis iestatījums ir izslēgts, esošās saites nedarbojas, līdz tas tiek atkal ieslēgts.",
   "ProjectsDescription": "Katrs projekts tiek importēts kā telpa, kurā būs visi šī projekta dokumenti un lietotāji. Projekta vadītājs kļūs par telpas īpašnieku",
   "ProvideChoice": "Piedāvājiet izvēli (tīmeklī vai lietotnē)",
   "QuotaPerRoom": "Kvota katrai telpai",

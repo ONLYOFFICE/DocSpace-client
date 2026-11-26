@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Pozor:</strong> Vaša stará adresa priestoru sa po kliknutí na tlačidlo Uložiť stane nedostupnou pre nových používateľov.",
   "PortalSecurityTitle": "Tento pododdiel vám umožňuje poskytnúť používateľom bezpečné a pohodlné spôsoby prístupu k pracovnému priestoru.",
   "PreviewTooltipDescription": "Náhľad rozhrania s aplikovaním vybranej farby",
+  "PrivateRoomLinks": "Externé odkazy súkromných miestností",
+  "PrivateRoomLinksDescription": "Povoliť majiteľom a manažérom miestností vytvárať externé odkazy na súkromné miestnosti a na ich súbory a priečinky. Keď je toto nastavenie vypnuté, existujúce odkazy nefungujú, kým sa znova nezapne.",
   "ProjectsDescription": "Každý projekt sa importuje ako miestnosť, ktorá bude obsahovať všetky dokumenty a používateľov tohto projektu. Projektový manažér sa stane vlastníkom miestnosti",
   "ProvideChoice": "Poskytnúť možnosť výberu (web alebo aplikácia)",
   "QuotaPerRoom": "Kvóta na miestnosť",

@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Notă:</strong> Vechea adresă a spațiului dvs. va deveni indisponibilă pentru noii utilizatori odată ce faceți clic pe butonul Salvare.",
   "PortalSecurityTitle": "Această subsecțiune vă permite să oferiți utilizatorilor modalități sigure și convenabile de a accesa spațiul de lucru.",
   "PreviewTooltipDescription": "Previzualizați interfața în culoarea selectată",
+  "PrivateRoomLinks": "Linkuri externe ale sălilor private",
+  "PrivateRoomLinksDescription": "Permiteți proprietarilor și managerilor de sală să creeze linkuri externe către sălile private și către fișierele și folderele acestora. Când această setare este dezactivată, linkurile existente nu mai funcționează până la reactivarea ei.",
   "ProjectsDescription": "Fiecare proiect este importat ca o sală, care va conține toate documentele și utilizatorii acestui proiect. Managerul de proiect va deveni proprietarul sălii.",
   "ProvideChoice": "La alegere (web sau aplicație)",
   "QuotaPerRoom": "Cotă per sală",

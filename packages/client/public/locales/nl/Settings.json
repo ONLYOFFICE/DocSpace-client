@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Note:</strong> Let op: zodra u op Opslaan klikt, werkt uw oude adres niet meer voor nieuwe gebruikers.",
   "PortalSecurityTitle": "Met deze subsectie kunt u gebruikers veilige en handige manieren bieden om toegang te krijgen tot de werkruimte.",
   "PreviewTooltipDescription": "Bekijk een voorbeeld van de interface met de geselecteerde kleur toegepast",
+  "PrivateRoomLinks": "Externe links van privékamers",
+  "PrivateRoomLinksDescription": "Sta kamereigenaren en kamerbeheerders toe om externe links te maken naar privékamers en naar de bestanden en mappen daarin. Als deze instelling is uitgeschakeld, werken bestaande links niet totdat ze weer wordt ingeschakeld.",
   "ProjectsDescription": "Elk project wordt geïmporteerd als kamer, die alle documenten en gebruikers van dit project zal bevatten. De projectmanager wordt eigenaar van de kamer",
   "ProvideChoice": "Geef een keuze (web of app)",
   "QuotaPerRoom": "Quota per kamer",

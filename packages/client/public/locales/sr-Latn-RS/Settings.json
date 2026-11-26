@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Napomena:</strong> Kada kliknete na Sačuvaj, vaša stara adresa prestaće da radi za nove korisnike.",
   "PortalSecurityTitle": "Ovaj pododeljak vam omogućava da korisnicima pružite bezbedne i pogodne načine da pristupe radnom prostoru.",
   "PreviewTooltipDescription": "Pregledajte interfejs sa primenjenom izabranom bojom",
+  "PrivateRoomLinks": "Spoljni linkovi privatnih soba",
+  "PrivateRoomLinksDescription": "Dozvoli vlasnicima i upravnicima soba da prave spoljne linkove ka privatnim sobama i njihovim datotekama i fasciklama. Kada je ovo podešavanje isključeno, postojeći linkovi ne rade dok se ponovo ne uključi.",
   "ProjectsDescription": "Svaki projekat se uvozi kao soba, koja će sadržati sve dokumente i korisnike ovog projekta. Menadžer projekta će postati vlasnik sobe.",
   "ProvideChoice": "Omogući izbor (pregledač ili aplikacija)",
   "QuotaPerRoom": "Kvota po sobi",

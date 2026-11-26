@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Huom:</strong> Kun klikkaat Tallenna-painiketta, vanha osoitteesi lakkaa toimimasta uusille käyttäjille.",
   "PortalSecurityTitle": "Tässä aliosiossa voit tarjota käyttäjille turvallisia ja käteviä tapoja päästä työtilaan.",
   "PreviewTooltipDescription": "Esikatsele käyttöliittymä valitun värin kanssa",
+  "PrivateRoomLinks": "Yksityishuoneiden ulkoiset linkit",
+  "PrivateRoomLinksDescription": "Salli huoneiden omistajien ja hallinnoijien luoda ulkoisia linkkejä yksityishuoneisiin sekä niiden tiedostoihin ja kansioihin. Kun tämä asetus on pois käytöstä, olemassa olevat linkit eivät toimi, ennen kuin asetus otetaan uudelleen käyttöön.",
   "ProjectsDescription": "Jokainen projekti tuodaan huoneena, joka sisältää kaikki asiakirjat ja tämän projektin käyttäjät. Projektipäälliköstä tulee huoneen omistaja.",
   "ProvideChoice": "Tarjoa valinta (verkko tai sovellus)",
   "QuotaPerRoom": "Kiintiö per huone",

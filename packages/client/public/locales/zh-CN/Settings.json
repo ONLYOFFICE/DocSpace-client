@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>请注意</strong>：点击“保存”按钮后，新用户将无法通过旧地址进入您的空间。",
   "PortalSecurityTitle": "此部分设置允许您为用户提供安全便捷的工作区访问方式。",
   "PreviewTooltipDescription": "预览所选配色的界面",
+  "PrivateRoomLinks": "私人房间的外部链接",
+  "PrivateRoomLinksDescription": "允许房间所有者和房间管理员创建指向私人房间及其文件和文件夹的外部链接。关闭此设置后，现有链接将停止工作，直到重新开启。",
   "ProjectsDescription": "每个项目会被导入为一个房间，包含项目中所有的文档和用户。项目经理会成为房间的所有者",
   "ProvideChoice": "提供选项（网页端/应用程序端）",
   "QuotaPerRoom": "每个房间的配额",

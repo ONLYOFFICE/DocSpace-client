@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Nota:</strong> una volta cliccato su Salva, il tuo vecchio indirizzo non funzionerà più per i nuovi utenti.",
   "PortalSecurityTitle": "Questa sottosezione consente di fornire agli utenti modalità sicure e convenienti per accedere allo spazio di lavoro.",
   "PreviewTooltipDescription": "Anteprima dell’interfaccia con il colore selezionato applicato",
+  "PrivateRoomLinks": "Collegamenti esterni delle stanze private",
+  "PrivateRoomLinksDescription": "Consenti ai proprietari e ai manager della stanza di creare collegamenti esterni alle stanze private e ai relativi file e cartelle. Quando questa impostazione è disattivata, i collegamenti esistenti smettono di funzionare finché non viene riattivata.",
   "ProjectsDescription": "Ogni progetto viene importato come una stanza, che conterrà tutti i documenti e gli utenti di questo progetto. Il project manager diventerà il proprietario della stanza",
   "ProvideChoice": "Fornisci una scelta (web o app)",
   "QuotaPerRoom": "Quota per stanza",

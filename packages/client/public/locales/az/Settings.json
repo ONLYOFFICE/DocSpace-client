@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Qeyd:</strong> Saxla düyməsini kliklədiyiniz zaman köhnə domen ünvanınız yeni istifadəçilər üçün yararsız olacaq.",
   "PortalSecurityTitle": "Bu alt bölmə istifadəçilərə iş sahəsinə daxil olmaq üçün təhlükəsiz və rahat yollar təklif etməyə imkan verir.",
   "PreviewTooltipDescription": "Tətbiq edilmiş seçilmiş rənglə interfeysə əvvəlcədən baxın",
+  "PrivateRoomLinks": "Şəxsi otaqların xarici keçidləri",
+  "PrivateRoomLinksDescription": "Otaq sahiblərinə və otaq menecerlərinə şəxsi otaqlara, onların fayl və qovluqlarına xarici keçidlər yaratmağa icazə verin. Bu ayar söndürüldükdə mövcud keçidlər ayar yenidən yandırılana qədər işləmir.",
   "ProjectsDescription": "Hər bir layihə həmin layihənin bütün sənəd və istifadəçilərini ehtiva edən otaq kimi idxal olunur. Layihə meneceri otağın sahibi olacaq",
   "ProvideChoice": "Seçim təqdim edin (veb və ya tətbiq)",
   "QuotaPerRoom": "Otaq üçün kvota",

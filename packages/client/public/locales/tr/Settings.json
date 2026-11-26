@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Not:</strong> Kaydet düğmesine tıkladığınızda eski alan adresiniz yeni kullanıcılar tarafından kullanılamaz hale gelecektir.",
   "PortalSecurityTitle": "Bu alt bölüm, kullanıcılara çalışma alanına erişmeleri için güvenli ve kullanışlı yollar sunmanıza olanak sağlar.",
   "PreviewTooltipDescription": "Seçilen renkle uygulanmış arayüz ön izlemesini görüntüleyin",
+  "PrivateRoomLinks": "Özel odaların harici bağlantıları",
+  "PrivateRoomLinksDescription": "Oda sahiplerinin ve oda yöneticilerinin özel odalara, bu odalardaki dosya ve klasörlere harici bağlantılar oluşturmasına izin verin. Bu ayar kapalıyken mevcut bağlantılar, ayar yeniden açılana kadar çalışmaz.",
   "ProjectsDescription": "Her proje, bu projenin tüm belgelerini ve kullanıcılarını içerecek bir oda olarak içe aktarılır. Proje yöneticisi odanın sahibi olur",
   "ProvideChoice": "Seçim sun (web veya uygulama)",
   "QuotaPerRoom": "Oda başına kota",

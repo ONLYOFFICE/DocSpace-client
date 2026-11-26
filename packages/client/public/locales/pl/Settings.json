@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Uwaga:</strong> Twój stary adres obszaru stanie się niedostępny dla nowych użytkowników po kliknięciu przycisku Zapisz.",
   "PortalSecurityTitle": "Niniejsza podsekcja umożliwia zapewnienie użytkownikom bezpiecznych i wygodnych sposobów dostępu do przestrzeni roboczej.",
   "PreviewTooltipDescription": "Podgląd interfejsu z zastosowanym wybranym kolorem",
+  "PrivateRoomLinks": "Linki zewnętrzne prywatnych pokojów",
+  "PrivateRoomLinksDescription": "Zezwalaj właścicielom i menedżerom pokojów na tworzenie linków zewnętrznych do prywatnych pokojów oraz ich plików i folderów. Gdy to ustawienie jest wyłączone, istniejące linki nie działają do czasu jego ponownego włączenia.",
   "ProjectsDescription": "Każdy projekt jest importowany jako pokój, który będzie zawierał wszystkie dokumenty oraz użytkowników tego projektu. Menedżer projektu zostanie właścicielem pokoju",
   "ProvideChoice": "Zaoferuj wybór (przeglądarka lub aplikacja)",
   "QuotaPerRoom": "Limit na pokój",

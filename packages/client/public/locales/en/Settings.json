@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Note:</strong> Once you click Save, your old address will stop working for new users.",
   "PortalSecurityTitle": "This subsection allows you to provide users with secure and convenient ways to access the workspace.",
   "PreviewTooltipDescription": "Preview the interface with the selected color applied",
+  "PrivateRoomLinks": "External links of private rooms",
+  "PrivateRoomLinksDescription": "Allow room owners and room managers to create external links to private rooms and to their files and folders. When this setting is off, existing links stop working until it is turned on again.",
   "ProjectsDescription": "Each project is imported as a room, which will contain all the documents and users of this project. The project manager will become the owner of the room",
   "ProvideChoice": "Provide a choice (web or app)",
   "QuotaPerRoom": "Quota per room",

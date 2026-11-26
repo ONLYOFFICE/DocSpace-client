@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Lưu ý:</strong> Địa chỉ không gian cũ của bạn sẽ không khả dụng đối với người dùng mới sau khi bạn nhấp vào nút Lưu.",
   "PortalSecurityTitle": "Tiểu mục này cho phép bạn cung cấp cho người dùng những cách an toàn và thuận tiện để truy cập không gian làm việc.",
   "PreviewTooltipDescription": "Xem trước giao diện với màu đã chọn",
+  "PrivateRoomLinks": "Liên kết ngoài của phòng riêng tư",
+  "PrivateRoomLinksDescription": "Cho phép chủ sở hữu phòng và quản lý phòng tạo liên kết ngoài đến phòng riêng tư cũng như các tệp và thư mục trong đó. Khi cài đặt này tắt, các liên kết hiện có sẽ ngừng hoạt động cho đến khi cài đặt được bật lại.",
   "ProjectsDescription": "Mỗi dự án được nhập dưới dạng một phòng, nó sẽ chứa tất cả các tài liệu và người dùng của dự án này. Người quản lý dự án sẽ trở thành chủ sở hữu của phòng",
   "ProvideChoice": "Cung cấp lựa chọn (web hoặc ứng dụng)",
   "QuotaPerRoom": "Hạn mức mỗi phòng",

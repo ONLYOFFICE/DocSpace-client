@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Shënim:</strong> Sapo të klikoni Ruaj, adresa juaj e vjetër do të pushojë së funksionuari për përdoruesit e rinj.",
   "PortalSecurityTitle": "Ky nënseksion ju lejon t'u ofroni përdoruesve mënyra të sigurta dhe të përshtatshme për të hyrë në hapësirën e punës.",
   "PreviewTooltipDescription": "Shikoni paraprakisht ndërfaqen me ngjyrën e zgjedhur të aplikuar",
+  "PrivateRoomLinks": "Lidhjet e jashtme të dhomave private",
+  "PrivateRoomLinksDescription": "Lejo pronarët dhe menaxherët e dhomave të krijojnë lidhje të jashtme për dhomat private dhe për skedarët e dosjet e tyre. Kur ky cilësim është i çaktivizuar, lidhjet ekzistuese nuk funksionojnë derisa të aktivizohet sërish.",
   "ProjectsDescription": "Çdo projekt importohet si një dhomë, e cila do të përmbajë të gjitha dokumentet dhe përdoruesit e këtij projekti. Menaxheri i projektit do të bëhet pronar i dhomës",
   "ProvideChoice": "Ofrojeni një zgjedhje (web ose aplikacion)",
   "QuotaPerRoom": "Kuota për dhomë",

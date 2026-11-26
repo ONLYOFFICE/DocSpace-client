@@ -242,6 +242,8 @@
   "PortalRenamingNote": "<strong>Ojo:</strong> En cuanto haga clic en Guardar, su dirección antigua dejará de funcionar para los nuevos usuarios.",
   "PortalSecurityTitle": "Esta subsección le permite ofrecer a los usuarios formas seguras y cómodas de acceder al espacio de trabajo.",
   "PreviewTooltipDescription": "Vista previa de la interfaz con el color seleccionado",
+  "PrivateRoomLinks": "Enlaces externos de salas privadas",
+  "PrivateRoomLinksDescription": "Permitir que los propietarios y los gestores de sala creen enlaces externos a las salas privadas y a sus archivos y carpetas. Cuando este ajuste está desactivado, los enlaces existentes dejan de funcionar hasta que se vuelva a activar.",
   "ProjectsDescription": "Cada proyecto se importa como una sala, que contendrá todos los documentos y usuarios de este proyecto. El gerente del proyecto se convertirá en el propietario de la sala.",
   "ProvideChoice": "Opciones (web o app)",
   "QuotaPerRoom": "Cuota por sala",

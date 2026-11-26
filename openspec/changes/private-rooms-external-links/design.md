@@ -606,6 +606,34 @@ Still not checked: the link controls of a manager's open page going away
 with the event, which the store they read drives, and the link opened
 with its proof while the portal blocks it.
 
+Added the same day, the editor (tasks 0.3, 1.4 and 5.1). The stand's
+Document Server reports itself as encrypting.
+
+- `GET files/file/{fileId}/openedit` for a request that is not signed in
+  and carries the key of a link: 403 before the proof. In the session
+  the proof opened it answers the configuration in the view mode, also
+  when editing is asked for, with every permission to change off, no
+  callback address, no user and no key envelopes, and with the document
+  address of the file handler carrying the key of the link. A member is
+  answered the edit mode with the callback address and their key
+  envelopes.
+- A text document uploaded encrypted and linked without a password was
+  opened from the page of the link in the editor: the file key is opened
+  in the browser with the key of the link and handed to the editor as a
+  member's is, and the editor showed the decrypted name and the text of
+  the document, with the menus of the view mode. The Document Server
+  takes the key from the page and asks for no account of its own.
+- That run was made by a signed-in user of the portal who is not a member
+  of the room, which is the case of a link opened by a DocSpace user. A
+  browser that is not signed in was not used: the answer of the server
+  for it is the one above, and the editor page was not opened in it.
+
+What follows: the question of task 0.3 is answered by the run for the
+view mode, so far as a signed-in visitor shows it. The editor opens the
+link without a password only: its page sends the proof again, since the
+sealed key comes with a proof alone, and has no prompt for a password.
+How a link with a password reaches the editor is open.
+
 ## Goals / Non-Goals
 
 **Goals:**

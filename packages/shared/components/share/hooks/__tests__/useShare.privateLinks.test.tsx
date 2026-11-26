@@ -37,6 +37,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ShareAccessRights } from "../../../../enums";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+
 import { copyShareLink } from "../../Share.helpers";
 import { useShare } from "../useShare";
 import type { UseShareProps } from "../../Share.types";
@@ -58,6 +60,10 @@ const links = vi.hoisted(() => ({
   edit: vi.fn(),
   revoke: vi.fn(),
   address: vi.fn(),
+}));
+
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
+  toastr: { error: vi.fn(), warning: vi.fn(), success: vi.fn() },
 }));
 
 vi.mock("../../Share.helpers", async (io) => ({
@@ -234,4 +240,45 @@ describe("useShare: links of a private item", () => {
     await vi.waitFor(() => expect(links.address).toHaveBeenCalled());
     expect(copyShareLink).not.toHaveBeenCalled();
   });
+
+  it("gives a text when the wrap of the secret does not open", async () => {
+    const wrapped = link("1", {
+      linkSecretWrap: { publicKeyId: "key-1", wrap: "wrap" },
+    });
+    links.address.mockRejectedValue(new Error("does not open"));
+    render(<Links props={propsOf({ fileLinkProps: [wrapped] })} />);
+
+    fireEvent.click(screen.getByText("Link 1"));
+
+    await vi.waitFor(() =>
+      expect(toastr.error).toHaveBeenCalledWith(
+        "Common:PrivateLinkAddressUnavailable",
+      ),
+    );
+    expect(copyShareLink).not.toHaveBeenCalled();
+  });
+
+  it("Restriction on: no link is created or copied, and the reason is named", async () => {
+    const wrapped = link("1", {
+      linkSecretWrap: { publicKeyId: "key-1", wrap: "wrap" },
+    });
+    render(
+      <Links
+        props={propsOf({ fileLinkProps: [wrapped], privateLinksClosed: true })}
+      />,
+    );
+
+    expect(
+      screen.queryByTestId("info_panel_share_add_link_button"),
+    ).toBeNull();
+    fireEvent.click(screen.getByText("Link 1"));
+
+    await vi.waitFor(() =>
+      expect(toastr.warning).toHaveBeenCalledWith(
+        "Common:PrivateLinksDownloadRestricted",
+      ),
+    );
+    expect(links.address).not.toHaveBeenCalled();
+  });
 });
+

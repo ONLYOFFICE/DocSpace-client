@@ -1,0 +1,35 @@
+{
+  "key_path": "PrivateLinksDownloadRestricted",
+  "content": "External links do not work while downloading is restricted in this room. They will work again once the restriction is turned off.",
+  "content_en_sha1_hash": "954e9a1af21f5fed68d1e0d83026536619b98d1a",
+  "created_at": "2026-11-26T08:59:24.532Z",
+  "updated_at": "2026-11-26T09:00:11.608Z",
+  "comment": {
+    "text": "Notice bar at the top of the Share tab of the info panel, and warning toast on an attempt to copy a link, for a file or folder of a private virtual data room in which downloading is restricted for the whole room. Says the external links of the item are inactive while that room setting is on and become active again when it is turned off. 'External links' are links for people outside the room. Two full sentences with periods.",
+    "is_auto": true,
+    "updated_at": "2026-11-26T09:00:11.608Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 136,
+      "context": "};\n \n const copyPrivateLink = async (link: TFileLink) => {\n // Spec: private-rooms/room-membership, \"No link in a private virtual data room that restricts downloading\"\n if (privateLinksClosed) {\n toastr.warning(t(\"Common:PrivateLinksDownloadRestricted\"));\n return;\n }\n \n const address = await readPrivateLinkAddress(\n infoPanelSelection,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/index.tsx",
+      "line_number": 151,
+      "context": "{privateLinks && privateLinksClosed ? (\n <div className={styles.containerShareInfoBar}>\n <PublicRoomBar\n hideHeader\n headerText=\"\"\n bodyText={t(\"Common:PrivateLinksDownloadRestricted\")}\n dataTestId=\"info_panel_share_private_links_closed_bar\"\n className={styles.shareInfoBar}\n />\n </div>\n ) : null}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

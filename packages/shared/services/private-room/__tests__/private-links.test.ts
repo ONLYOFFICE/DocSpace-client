@@ -54,6 +54,8 @@ import {
   getPrivateLinkAddress,
   readPrivateLinkAddress,
   shareLinkSecretsWithManagers,
+  arePrivateLinksClosed,
+  PrivateLinkAddressError,
   editPrivateItemLink,
   getPrivateLinkNeed,
   revokePrivateItemLink,
@@ -179,6 +181,30 @@ describe("getPrivateLinkNeed", () => {
     expect(getPrivateLinkNeed(file, { expirationDate: "2030-01-01" })).toBe(
       null,
     );
+  });
+});
+
+describe("arePrivateLinksClosed", () => {
+  it("Restriction on", () => {
+    expect(
+      arePrivateLinksClosed({
+        roomType: RoomsType.VirtualDataRoom,
+        denyDownload: true,
+      }),
+    ).toBe(true);
+  });
+
+  it("Restriction turned off, and a room of another type", () => {
+    expect(
+      arePrivateLinksClosed({
+        roomType: RoomsType.VirtualDataRoom,
+        denyDownload: false,
+      }),
+    ).toBe(false);
+    expect(
+      arePrivateLinksClosed({ roomType: RoomsType.CustomRoom, denyDownload: true }),
+    ).toBe(false);
+    expect(arePrivateLinksClosed(null)).toBe(false);
   });
 });
 
@@ -391,7 +417,9 @@ describe("The secret of a link is wrapped for those who manage links", () => {
     await revokePrivateItemLink(folder, link);
     getEncryptionKeys.mockResolvedValue([]);
 
-    expect(await readPrivateLinkAddress(folder, link, USER_ID)).toBeNull();
+    await expect(
+      readPrivateLinkAddress(folder, link, USER_ID),
+    ).rejects.toBeInstanceOf(PrivateLinkAddressError);
   });
 
   it("keeps the link when the wrap cannot be stored", async () => {

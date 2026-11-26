@@ -97,6 +97,7 @@ export const useShare = ({
   blockExistingLinksOnRestrict,
   defaultShareLinkInternal,
   privateLinks,
+  privateLinksClosed,
   selfId,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
@@ -130,11 +131,20 @@ export const useShare = ({
   };
 
   const copyPrivateLink = async (link: TFileLink) => {
+    // Spec: private-rooms/room-membership, "No link in a private virtual data room that restricts downloading"
+    if (privateLinksClosed) {
+      toastr.warning(t("Common:PrivateLinksDownloadRestricted"));
+      return;
+    }
+
     const address = await readPrivateLinkAddress(
       infoPanelSelection,
       link,
       selfId ?? "",
-    );
+    ).catch(() => {
+      toastr.error(t("Common:PrivateLinkAddressUnavailable"));
+      return null;
+    });
     if (!address) return;
 
     await copyShareLink(
@@ -762,9 +772,9 @@ export const useShare = ({
           1,
       );
 
-  const canAddLink =
-    privateLinks ||
-    (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
+  const canAddLink = privateLinks
+    ? !privateLinksClosed
+    : (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
   const blockLinkCreation =
     isExternalShareRestricted &&

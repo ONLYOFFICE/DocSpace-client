@@ -162,6 +162,8 @@ export type ShareProps = {
    * listed.
    */
   privateLinks?: boolean;
+  /** The room closes the links of its items: none is made, and those held do not work. */
+  privateLinksClosed?: boolean;
 };
 
 export interface LinkTitleProps {
@@ -228,6 +230,7 @@ export interface UseShareProps {
   }) => void;
   hideLinkTypeSelector?: boolean;
   privateLinks?: boolean;
+  privateLinksClosed?: boolean;
   selfId?: string;
 }
 

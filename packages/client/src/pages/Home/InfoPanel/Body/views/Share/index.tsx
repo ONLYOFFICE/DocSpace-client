@@ -40,7 +40,10 @@ import Share from "@docspace/shared/components/share";
 import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
 import { FolderType } from "@docspace/shared/enums";
-import { canManagePrivateLinks } from "@docspace/shared/services/private-room/private-links";
+import {
+  arePrivateLinksClosed,
+  canManagePrivateLinks,
+} from "@docspace/shared/services/private-room/private-links";
 
 import type { ShareProps } from "@docspace/shared/components/share/Share.types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -155,6 +158,9 @@ export default inject<TStore>(
         (("encrypted" in selection && selection.encrypted === true) ||
           treeFoldersStore.isPrivacyFolder) &&
         canManagePrivateLinks(infoPanelStore.infoPanelRoomSelection),
+      privateLinksClosed: arePrivateLinksClosed(
+        infoPanelStore.infoPanelRoomSelection,
+      ),
     };
   },
 )(observer(WrapperShare as FC<ExternalShareProps>));

@@ -1,0 +1,35 @@
+{
+  "key_path": "PrivateLinkAddressUnavailable",
+  "content": "The link address cannot be opened with your current encryption key. Ask another room manager to copy the link, or create a new one.",
+  "content_en_sha1_hash": "56f089ecd1900e096d2ff216c4eabdf8f3553a5c",
+  "created_at": "2026-11-26T08:59:24.406Z",
+  "updated_at": "2026-11-26T09:00:11.608Z",
+  "comment": {
+    "text": "Error toast shown when a room manager tries to copy the address of an external link of a private (end-to-end encrypted) room and the address cannot be decrypted with the encryption key the user has now, for example after the user replaced the key. 'Link address' is the URL of the external link; 'encryption key' is the user's own key for private rooms; 'room manager' is the room role. Two full sentences with periods.",
+    "is_auto": true,
+    "updated_at": "2026-11-26T09:00:11.608Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
+      "line_number": 133,
+      "context": "const privateAddress = await readPrivateLinkAddress(\n item,\n link,\n selfId ?? \"\",\n ).catch(() => {\n toastr.error(t(\"Common:PrivateLinkAddressUnavailable\"));\n return null;\n });\n if (!privateAddress) return;\n copyShareLink(\n item,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 145,
+      "context": "const address = await readPrivateLinkAddress(\n infoPanelSelection,\n link,\n selfId ?? \"\",\n ).catch(() => {\n toastr.error(t(\"Common:PrivateLinkAddressUnavailable\"));\n return null;\n });\n if (!address) return;\n \n await copyShareLink(",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

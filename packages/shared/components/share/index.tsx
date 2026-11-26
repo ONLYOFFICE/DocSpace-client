@@ -37,6 +37,8 @@ import { useState } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
+import PublicRoomBar from "@onlyoffice/apps-ui-kit/components/public-room-bar";
+
 import { FolderType } from "../../enums";
 import ShareLoader from "../../skeletons/share";
 
@@ -73,6 +75,7 @@ const Share = (props: ShareProps) => {
     isExternalShareRestricted,
     defaultShareLinkInternal,
     privateLinks,
+    privateLinksClosed,
   } = props;
 
   // HACK: Hide share option for rooms — remove after implementation is ready
@@ -90,6 +93,7 @@ const Share = (props: ShareProps) => {
 
   const { getLinkElements, privateLinkDialog } = useShare({
     privateLinks,
+    privateLinksClosed,
     selfId,
     infoPanelSelection,
     setEditLinkPanelIsVisible,
@@ -139,6 +143,17 @@ const Share = (props: ShareProps) => {
       data-testid="shared-links"
     >
       {/* The bar invites to share the item with users, which a private room does not do. */}
+      {privateLinks && privateLinksClosed ? (
+        <div className={styles.containerShareInfoBar}>
+          <PublicRoomBar
+            hideHeader
+            headerText=""
+            bodyText={t("Common:PrivateLinksDownloadRestricted")}
+            dataTestId="info_panel_share_private_links_closed_bar"
+            className={styles.shareInfoBar}
+          />
+        </div>
+      ) : null}
       {privateLinks ? null : (
         <ShareInfoBar
           t={t}

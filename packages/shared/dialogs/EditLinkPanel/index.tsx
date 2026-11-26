@@ -662,7 +662,15 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
                 onSelect={handleSelectLinkAccess}
               />
             ) : null}
-            {isPrivateLink && !isNewPrivateLink ? null : (
+            {isPrivateLink && !isNewPrivateLink ? (
+              // Spec: private-rooms/room-membership, "Password of a link is neither shown nor changed"
+              <ToggleBlock
+                withToggle={false}
+                headerText={t("Common:PasswordAccess")}
+                bodyText={t("Common:PrivateLinkPasswordFixed")}
+                dataTestId="edit_link_panel_password_fixed"
+              />
+            ) : (
               <PasswordAccessBlock
                 t={t}
                 isLoading={isLoading}

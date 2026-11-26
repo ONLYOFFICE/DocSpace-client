@@ -164,6 +164,29 @@ const readVerifiedMemberKeys = async (
 export const canReadPrivateLinkAddress = (link: TFileLink) =>
   addresses.has(String(link.sharedTo.id)) || !!link.sharedTo.linkSecretWrap;
 
+/**
+ * The secret of a link is wrapped for the caller, and the wrap does not open:
+ * it was made for a key the caller has replaced, or its maker's key does not
+ * pass the check.
+ */
+export class PrivateLinkAddressError extends Error {
+  constructor() {
+    super("The wrap of the link's secret does not open");
+    this.name = "PrivateLinkAddressError";
+  }
+}
+
+/**
+ * Whether the links of the room's items are closed by the room itself: a
+ * Virtual Data Room that restricts downloading serves none and takes none.
+ *
+ * Spec: private-rooms/room-membership, "No link in a private virtual data room that restricts downloading"
+ */
+export const arePrivateLinksClosed = (
+  room: Pick<TRoom, "roomType" | "denyDownload"> | null | undefined,
+): boolean =>
+  room?.roomType === RoomsType.VirtualDataRoom && room.denyDownload === true;
+
 /** Opens the wrap of a link's secret the server holds for the caller. */
 async function openOwnSecretWrap(
   item: TPrivateLinkItem,
@@ -196,9 +219,10 @@ async function openOwnSecretWrap(
 /**
  * The address of a link with its secret after `#`, opened from the wrap the
  * server holds for the caller, whoever of those who manage links made it.
- * Asks for the unlock first; null when it is dismissed, when no wrap was made
- * for the caller's current key, or when the wrap does not open. A manager who
- * reads an address passes the secret on to the managers who have no wrap yet.
+ * Asks for the unlock first; null when it is dismissed or no wrap was made
+ * for the caller. A wrap that does not open ends in PrivateLinkAddressError.
+ * A manager who reads an address passes the secret on to the managers who
+ * have no wrap yet.
  */
 export async function readPrivateLinkAddress(
   item: TPrivateLinkItem,
@@ -213,19 +237,17 @@ export async function readPrivateLinkAddress(
   const identity = await requireUnlock(userId);
   if (!identity) return null;
 
-  try {
-    const secret = await openOwnSecretWrap(item, link, userId, identity);
-    if (!secret) return null;
+  const secret = await openOwnSecretWrap(item, link, userId, identity).catch(
+    () => null,
+  );
+  if (!secret) throw new PrivateLinkAddressError();
 
-    const address = `${link.sharedTo.shareLink}#${secret}`;
-    addresses.set(linkId, address);
-    if (link.sharedTo.managersWithoutLinkSecretWrap?.length) {
-      void storeSecretWraps(item, link, secret, userId, identity);
-    }
-    return address;
-  } catch {
-    return null;
+  const address = `${link.sharedTo.shareLink}#${secret}`;
+  addresses.set(linkId, address);
+  if (link.sharedTo.managersWithoutLinkSecretWrap?.length) {
+    void storeSecretWraps(item, link, secret, userId, identity);
   }
+  return address;
 }
 
 // The managers no wrap could be made for on this page, as `linkId:userId`:
@@ -319,7 +341,7 @@ export async function shareLinkSecretsWithManagers(
   for (const link of links) {
     const lacking = link.sharedTo?.managersWithoutLinkSecretWrap ?? [];
     if (!link.sharedTo?.linkSecretWrap || lacking.length === 0) continue;
-    await readPrivateLinkAddress(item, link, userId);
+    await readPrivateLinkAddress(item, link, userId).catch(() => null);
   }
 }
 

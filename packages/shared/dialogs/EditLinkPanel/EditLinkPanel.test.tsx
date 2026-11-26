@@ -97,7 +97,13 @@ vi.mock("./LimitTimeBlock", () => ({
 }));
 
 vi.mock("./ToggleBlock", () => ({
-  default: () => <div data-testid="stub_toggle_block" />,
+  default: ({
+    bodyText,
+    dataTestId,
+  }: {
+    bodyText?: string;
+    dataTestId?: string;
+  }) => <div data-testid={dataTestId ?? "stub_toggle_block"}>{bodyText}</div>,
 }));
 
 vi.mock("./AccessSelectorBlock", () => ({
@@ -382,6 +388,9 @@ describe("<EditLinkPanel />", () => {
 
       await waitFor(() => expect(getSaveButton()).toBeInTheDocument());
       expect(screen.queryByTestId("stub_password_block")).toBeNull();
+      expect(
+        screen.getByTestId("edit_link_panel_password_fixed"),
+      ).toHaveTextContent("Common:PrivateLinkPasswordFixed");
     });
 
     it("changes a link that exists without key material", async () => {

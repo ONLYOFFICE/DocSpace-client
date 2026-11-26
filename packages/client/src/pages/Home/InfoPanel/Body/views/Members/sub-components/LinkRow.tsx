@@ -129,7 +129,10 @@ const LinkRow = (props: LinkRowProps) => {
       item,
       link,
       selfId ?? "",
-    );
+    ).catch(() => {
+      toastr.error(t("Common:PrivateLinkAddressUnavailable"));
+      return null;
+    });
     if (!privateAddress) return;
     copyShareLink(
       item,

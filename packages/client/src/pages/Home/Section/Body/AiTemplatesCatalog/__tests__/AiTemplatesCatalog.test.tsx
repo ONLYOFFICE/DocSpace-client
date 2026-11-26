@@ -143,7 +143,8 @@ beforeEach(() => {
 
 const templatesStore = () => stores.templates as AiTemplatesStore;
 
-describe("AiTemplatesCatalog", () => {
+// Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+describe.skip("AiTemplatesCatalog", () => {
   it("shows the agents with the skill sets and knowledge bases they bring", async () => {
     render(<AiTemplatesCatalog />);
     const [card] = await cards();
@@ -458,7 +459,8 @@ describe("AiTemplatesCatalog", () => {
   });
 });
 
-describe("the Templates tab reached from a room of the section", () => {
+// Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+describe.skip("the Templates tab reached from a room of the section", () => {
   it("reads the section's root for the header and titles the browser tab", async () => {
     treeFoldersStore.isAiHubFolder = false;
     location.search = `?searchArea=AiHub&type=${RoomsType.AiProjectRoom}&tab=templates`;

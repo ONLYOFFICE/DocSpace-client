@@ -242,6 +242,14 @@ const TAB_PARAM = "tab";
 const TEMPLATES_TAB = "templates";
 
 /**
+ * The Templates tab of the Agents list is hidden for now: no tabs are drawn
+ * over the list, a `tab=templates` address shows the list itself, and the
+ * catalog is not read (its requests are commented out in AiTemplatesStore).
+ * Set to true, and restore those requests, to bring the tab back.
+ */
+export const AI_TEMPLATES_ENABLED = false;
+
+/**
  * The list has a Templates tab: only the Agents do. Skill sets and Knowledge
  * bases are plain lists, without tabs.
  */
@@ -253,6 +261,7 @@ export const hasAiWorkspaceTemplates = (search: string): boolean =>
  * query on a list without the tab is ignored, so the list itself is shown.
  */
 export const isAiWorkspaceTemplates = (search: string): boolean =>
+  AI_TEMPLATES_ENABLED &&
   hasAiWorkspaceTemplates(search) &&
   new URLSearchParams(search).get(TAB_PARAM) === TEMPLATES_TAB;
 

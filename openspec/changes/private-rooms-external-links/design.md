@@ -514,6 +514,64 @@ copy of a link the portal blocks is refused with the text ordinary links
 have; and the administrator's switch is shown whenever private rooms are
 available, since the setting has an effect under the restriction too.
 
+### Stand check of 2026-11-26
+
+A local stand of the owner: `../server` at `92c9b60f23`, a standalone
+portal with a new database, the client of this branch at `b86d8a6a424`
+behind the proxy of `../buildtools` on its branch
+`feature/private-rooms-external-links`. Two test accounts, each with an
+encryption key, the first the owner of a private Custom room and the
+second its room manager; the room holds a file and a folder with a file.
+The manager's side was driven by the services of the client themselves,
+run against the stand; the visitor's side and the interface in a
+browser.
+
+What held:
+
+- A link to the file without a password and a link to the folder with
+  one are stored; each gets the wraps of the file keys it covers at its
+  creation, and `access/missing` names none afterwards.
+- The request that repeats the settings of a link and carries
+  `linkSecretWraps` for both managers is accepted, and the link then
+  answers the caller's wrap and no manager without one. The other
+  manager, on a page of their own, opens the wrap made for them and gets
+  the address the creator got.
+- `GET files/folder/{id}/path` names the room by its `roomType`, which
+  the client reads the room of an item from.
+- The file answers `externalLinksCount` 1 while it holds the link and 0
+  after the revocation; in the list the folder carries the mark with its
+  number, and the file none once its link is revoked.
+- The short address of a link redirects to `share/private?key=<key>`,
+  with `&folder=<id>` for the folder, and the browser keeps the part
+  after `#`. A visitor who is not signed in is shown the real name of
+  the file and downloads it decrypted: the stored file and its head are
+  served to the session the proof opened.
+- The folder link asks for its password, answers a wrong one with the
+  text of a wrong password, and lists the folder after the right one.
+- A revoked link shows that it is no longer available.
+- The policy the head of the page adds is in force: a script asked from
+  another origin is refused with a `script-src` violation.
+- The Share tab of the folder lists the link; its address is copied on
+  a new page from the wrap, after the unlock; its settings show the
+  text of the fixed password in the place of the password field.
+
+What the check found in the script that drove it, not in the client: a
+key stored without an id is given the empty id by the server, and a wrap
+of a secret for such a key is refused with 400. The interface always
+makes a key with an id.
+
+Not checked, and why:
+
+- The restricted policy header of the proxy. The proxy of this stand
+  cannot reach the cache the Lua block reads and sends no policy header
+  on any page, as before the change of task 4.4.
+- The portal setting, the administrator's switch and the restriction of
+  external sharing, which take a DocSpace admin; the test accounts are
+  room admins.
+- A member of the room who opens a link, a link for DocSpace users
+  only, a manager named later, a private Virtual Data Room that
+  restricts downloading, and the archive.
+
 ## Goals / Non-Goals
 
 **Goals:**

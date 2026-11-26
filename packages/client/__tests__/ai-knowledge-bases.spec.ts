@@ -126,6 +126,14 @@ const property = (page: Page, id: string) =>
   page.getByTestId(`info_panel_details_property_${id}`);
 
 test.describe("AI Chat: Knowledge bases", () => {
+  // The Agents list opens as tiles until another view is picked there. The
+  // cases below read it as the table a user switched to.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
+    );
+  });
+
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),

@@ -182,6 +182,14 @@ test.describe("Members of an agent", () => {
     await expect(details).toBeVisible();
   };
 
+  // The Agents list opens as tiles until another view is picked there. The
+  // cases below read it as the table a user switched to.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
+    );
+  });
+
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
@@ -402,6 +410,14 @@ const openAgentsMenu = async (page: Page) => {
 };
 
 test.describe("Agent access", () => {
+  // The Agents list opens as tiles until another view is picked there. The
+  // cases below read it as the table a user switched to.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
+    );
+  });
+
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -763,6 +779,14 @@ test.describe("Inviting to an agent", () => {
     page
       .getByTestId("invite_panel_item_access_selector")
       .getByTestId(`access_right_option_${key}`);
+
+  // The Agents list opens as tiles until another view is picked there. The
+  // cases below read it as the table a user switched to.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
+    );
+  });
 
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(

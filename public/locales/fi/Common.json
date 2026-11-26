@@ -985,7 +985,6 @@
   "EnabledApps": "Käytössä olevat sovellukset",
   "EnableNotifications": "Salli ilmoitukset",
   "EnableThirdPartyIntegration": "Pyydä omistajaa tai pääjärjestelmänvalvojaa ottamaan vastaava palvelu käyttöön työtilan asetusten Integraatio-osiossa.",
-  "EnableWebSearchInBilling": "Ota hakukonehaku käyttöön Laskutus-osiossa",
   "EncryptedAccessChangeRefused": "Käyttöoikeutta ei muutettu: jäsenellä ei ole salausavaimia.",
   "EncryptedAccessPending": "Käyttöoikeus odottaa",
   "EncryptedAccessRestored": "Käyttäjällä {{user}} on nyt pääsy kaikkiin huoneen salattuihin tiedostoihin.",

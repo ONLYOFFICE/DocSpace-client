@@ -7,9 +7,13 @@ const api = vi.hoisted(() => ({
   getAiProject: vi.fn(),
   getAiProjectSkills: vi.fn(),
 }));
+const files = vi.hoisted(() => ({ getFileInfo: vi.fn() }));
+const toastr = vi.hoisted(() => ({ error: vi.fn() }));
 const store = vi.hoisted(() => ({
   openRoomsSelector: vi.fn(),
   unlinkRoom: vi.fn(),
+  // The skill dialog (`dialogsStore`).
+  setEditSkillFile: vi.fn(),
   projectRevisions: {} as Record<number, number>,
   // The agent the chat runs on (`aiPresetsStore`).
   activePreset: null as { id: string } | null,
@@ -22,6 +26,8 @@ const chat = vi.hoisted(() => ({
 }));
 
 vi.mock("@docspace/shared/api/ai/projects", () => api);
+vi.mock("@docspace/shared/api/files", () => files);
+vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
 vi.mock("SRC_DIR/store/useStore", () => ({ useStore: () => store }));
 vi.mock("@onlyoffice/ai-chat", () => ({ FOLDER_CONTEXTS_LIMIT: 2 }));
 vi.mock("@onlyoffice/apps-ui-kit/ai-agent/providers", () => ({
@@ -42,8 +48,16 @@ vi.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 vi.mock("SRC_DIR/pages/AiProjects/sub-components/project/RoomItem", () => ({
-  default: ({ title, onToggle }: { title: string; onToggle?: () => void }) => (
-    <div data-testid="room">
+  default: ({
+    title,
+    isPlainIcon,
+    onToggle,
+  }: {
+    title: string;
+    isPlainIcon?: boolean;
+    onToggle?: () => void;
+  }) => (
+    <div data-testid="room" data-plain-icon={!!isPlainIcon}>
       {title}
       {onToggle ? (
         <button type="button" data-testid={`toggle-${title}`} onClick={onToggle} />
@@ -73,6 +87,9 @@ beforeEach(() => {
     .mockResolvedValue([{ id: 1, skills: [{ id: "9", name: "clause-check", description: "Checks" }] }]);
   store.openRoomsSelector.mockReset();
   store.unlinkRoom.mockReset();
+  store.setEditSkillFile.mockReset();
+  files.getFileInfo.mockReset();
+  toastr.error.mockReset();
   store.projectRevisions = observable({});
   store.activePreset = null;
   chat.folders = [];
@@ -91,6 +108,40 @@ describe("AiAgentContext", () => {
     render(<AiAgentContext id={7} />);
     const skill = await screen.findByText("clause-check");
     expect(skill.closest("li")?.querySelector('[data-testid="skill-icon-skill"]')).toBeTruthy();
+  });
+
+  it("draws a skill set without the square behind its icon, and a knowledge base with it", async () => {
+    render(<AiAgentContext id={5} />);
+    await screen.findByText("clause-check");
+    const [set, base] = screen.getAllByTestId("room");
+    expect(set.dataset.plainIcon).toBe("true");
+    expect(base.dataset.plainIcon).toBe("false");
+  });
+
+  it("tells a skill's description in the tab's tooltip, not the browser's title", async () => {
+    render(<AiAgentContext id={5} />);
+    const skill = await screen.findByTestId("ai-agent-context-skill");
+    expect(skill.getAttribute("data-tooltip-id")).toBe("ai-agent-context-tooltip");
+    expect(skill.getAttribute("data-tooltip-content")).toBe("Checks");
+    expect(skill.hasAttribute("title")).toBe(false);
+  });
+
+  it("opens a skill's instructions to read on a click on the skill", async () => {
+    const file = { id: 9, title: "Clause check.md" };
+    files.getFileInfo.mockResolvedValue(file);
+    render(<AiAgentContext id={5} />);
+    fireEvent.click(await screen.findByTestId("ai-agent-context-skill"));
+    expect(files.getFileInfo).toHaveBeenCalledWith("9");
+    await vi.waitFor(() => expect(store.setEditSkillFile).toHaveBeenCalledWith(file, true));
+  });
+
+  it("says why a skill that cannot be read did not open", async () => {
+    const error = new Error("Forbidden");
+    files.getFileInfo.mockRejectedValue(error);
+    render(<AiAgentContext id={5} />);
+    fireEvent.click(await screen.findByTestId("ai-agent-context-skill"));
+    await vi.waitFor(() => expect(toastr.error).toHaveBeenCalledWith(error));
+    expect(store.setEditSkillFile).not.toHaveBeenCalled();
   });
 
   it("folds a skill set by hand and unfolds it again", async () => {

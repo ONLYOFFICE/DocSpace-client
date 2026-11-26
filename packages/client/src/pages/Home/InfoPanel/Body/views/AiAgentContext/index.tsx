@@ -41,6 +41,8 @@ import { FOLDER_CONTEXTS_LIMIT } from "@onlyoffice/ai-chat";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import {
   useI18n as useAiChatI18n,
   useStores as useAiChatStores,
@@ -53,6 +55,8 @@ import {
   type TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
 
+import { getFileInfo } from "@docspace/shared/api/files";
+
 import { useStore } from "SRC_DIR/store/useStore";
 import type { TAgentRoomsKind } from "SRC_DIR/store/AiProjectsStore";
 import { getAgentRights } from "SRC_DIR/helpers/agentRights";
@@ -64,6 +68,11 @@ import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import RoomIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 
 import styles from "./AiAgentContext.module.scss";
+
+// The one tooltip of the tab: a skill's description and a skill set's
+// name, drawn as the composer's slash menu draws a skill's, not as the
+// browser's own title.
+const TOOLTIP_ID = "ai-agent-context-tooltip";
 
 // The data sources of this portal, as the chat's store marks them.
 const PORTAL_CLOUD = "docspace";
@@ -202,7 +211,8 @@ const DataSources = () => {
             fontSize="13px"
             fontWeight={600}
             lineHeight="15px"
-            title={room.name}
+            data-tooltip-id={TOOLTIP_ID}
+            data-tooltip-content={room.name}
             truncate
             noSelect
           >
@@ -234,7 +244,8 @@ type AiAgentContextProps = {
 /**
  * The Context tab of an agent's Info panel: the skill sets the agent is
  * linked to, each unfolded to its skills until folded by hand, each skill
- * with the skill's icon, and its knowledge bases. Each
+ * with the skill's icon and opening its instructions to read on a click,
+ * and its knowledge bases. Each
  * section is headed as the same list is in the composer's slash menu: a
  * caption and a line saying what the assistant does with it, which is all
  * an empty section shows. A name opens its room. While the chat runs on the
@@ -250,6 +261,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   // shows over the same lists: read from its translations, not copied here.
   const { t: chatT } = useAiChatI18n();
   const aiProjectsStore = useStore("aiProjectsStore");
+  const dialogsStore = useStore("dialogsStore");
   // The chat runs on this agent: on its page, or picked in the chat panel.
   const isChatAgent =
     useStore("aiPresetsStore").activePreset?.id === String(id);
@@ -285,6 +297,14 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       cancelled = true;
     };
   }, [id, revision]);
+
+  // A skill opens as it does in the list of its set: its instructions to
+  // read, in the skill dialog, which asks for the file the skill is kept in.
+  const openSkill = (skillId: string) => {
+    getFileInfo(skillId)
+      .then((file) => dialogsStore.setEditSkillFile(file, true))
+      .catch((e) => toastr.error(e as Error));
+  };
 
   if (failed)
     return (
@@ -355,6 +375,8 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
                   id={room.id}
                   title={room.title}
                   icon="instructionsRoom.svg"
+                  isPlainIcon
+                  tooltipId={TOOLTIP_ID}
                   isExpanded={isExpanded}
                   onToggle={
                     skills.length > 0
@@ -370,15 +392,24 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
               {isExpanded ? (
                 <ul className={styles.skills}>
                   {skills.map((skill) => (
-                    <li key={skill.id} className={styles.skillRow}>
-                      <SkillIcon kind="skill" size={24} />
-                      <Text
-                        fontSize="13px"
-                        className={styles.skill}
-                        title={skill.description}
+                    <li key={skill.id}>
+                      <button
+                        type="button"
+                        className={styles.skillRow}
+                        data-tooltip-id={skill.description ? TOOLTIP_ID : undefined}
+                        data-tooltip-content={skill.description || undefined}
+                        onClick={() => openSkill(skill.id)}
+                        data-testid="ai-agent-context-skill"
                       >
-                        {skill.name}
-                      </Text>
+                        <SkillIcon kind="skill" size={24} />
+                        <Text
+                          as="span"
+                          fontSize="13px"
+                          className={styles.skill}
+                        >
+                          {skill.name}
+                        </Text>
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -402,7 +433,12 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
             {sourceRow(
               "knowledge",
               room,
-              <RoomItem id={room.id} title={room.title} icon="knowledgeRoom.svg" />,
+              <RoomItem
+                id={room.id}
+                title={room.title}
+                icon="knowledgeRoom.svg"
+                tooltipId={TOOLTIP_ID}
+              />,
             )}
           </React.Fragment>
         ),
@@ -413,6 +449,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
         ),
       )}
       {isChatAgent ? <DataSources /> : null}
+      <Tooltip id={TOOLTIP_ID} place="right" maxWidth="400px" />
     </div>
   );
 };

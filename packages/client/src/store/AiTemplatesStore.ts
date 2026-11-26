@@ -36,14 +36,16 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  getAiTemplates,
-  installAiTemplate,
+  // The Templates tab is hidden for now (AI_TEMPLATES_ENABLED): the catalog
+  // is neither read nor installed from.
+  // getAiTemplates,
+  // installAiTemplate,
   type TAiInstalledTemplate,
   type TAiTemplate,
   type TAiTemplateCatalog,
 } from "@docspace/shared/api/ai/templates";
 import type { TAiProjectCover } from "@docspace/shared/api/ai/projects";
-import { getRoomCovers } from "@docspace/shared/api/rooms";
+// import { getRoomCovers } from "@docspace/shared/api/rooms";
 
 /** The template of the catalog with this id, of any kind. */
 const findTemplate = (
@@ -98,30 +100,32 @@ class AiTemplatesStore {
    * when the read fails.
    */
   fetchCatalog = async () => {
-    if (!this.covers) void this.fetchCovers();
-    try {
-      const catalog = await getAiTemplates();
-      runInAction(() => {
-        this.catalog = catalog;
-        this.failed = false;
-      });
-    } catch {
-      runInAction(() => {
-        this.failed = !this.catalog;
-      });
-    }
+    // The Templates tab is hidden for now (AI_TEMPLATES_ENABLED).
+    // if (!this.covers) void this.fetchCovers();
+    // try {
+    //   const catalog = await getAiTemplates();
+    //   runInAction(() => {
+    //     this.catalog = catalog;
+    //     this.failed = false;
+    //   });
+    // } catch {
+    //   runInAction(() => {
+    //     this.failed = !this.catalog;
+    //   });
+    // }
   };
 
   /** Reads the built-in room covers once; a failed read leaves the initials. */
   fetchCovers = async () => {
-    try {
-      const covers = (await getRoomCovers()) as TAiProjectCover[] | null;
-      runInAction(() => {
-        this.covers = covers ?? null;
-      });
-    } catch {
-      // The templates keep their initials on their colours.
-    }
+    // The Templates tab is hidden for now (AI_TEMPLATES_ENABLED).
+    // try {
+    //   const covers = (await getRoomCovers()) as TAiProjectCover[] | null;
+    //   runInAction(() => {
+    //     this.covers = covers ?? null;
+    //   });
+    // } catch {
+    //   // The templates keep their initials on their colours.
+    // }
   };
 
   /** The selected template, while the catalog holds it. */
@@ -160,7 +164,9 @@ class AiTemplatesStore {
   install = async (template: TAiTemplate): Promise<TAiInstalledTemplate> => {
     this.installingId = template.id;
     try {
-      return await installAiTemplate(template.id);
+      // The Templates tab is hidden for now (AI_TEMPLATES_ENABLED).
+      // return await installAiTemplate(template.id);
+      throw new Error(`AI templates are disabled: ${template.id}`);
     } finally {
       runInAction(() => {
         this.installingId = null;

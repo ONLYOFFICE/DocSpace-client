@@ -81,6 +81,7 @@ import SkillIcon, { getAiRoomIconKind } from "SRC_DIR/components/SkillIcon";
 
 import { SkillSetInfo } from "./sub-components/SkillSetInfo";
 import { UsedByAgents } from "./sub-components/UsedByAgents";
+import { getAgentPageUrl } from "SRC_DIR/helpers/aiWorkspace";
 
 import DetailsHelper from "./Details.utils";
 
@@ -536,8 +537,14 @@ const Details = ({
           testId="info_panel_details_view_instructions_button"
         />
       ) : null}
-      <SkillSetInfo selection={selection} />
-      <UsedByAgents selection={selection} />
+      <SkillSetInfo
+        selection={selection}
+        onOpenSkill={(file) => setEditSkillFile?.(file, true)}
+      />
+      <UsedByAgents
+        selection={selection}
+        onOpenAgent={(id) => window.DocSpace.navigate(getAgentPageUrl(id))}
+      />
     </>
   );
 };

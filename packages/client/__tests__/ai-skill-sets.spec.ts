@@ -98,9 +98,11 @@ const rowOrder = async (page: Page, titles: string[]) => {
     .filter(Boolean);
 };
 
-/** The editor of the Edit skill dialog and of the instructions view. */
+/** The editor of the Edit skill dialog. */
 const editor = (page: Page) =>
   page.getByTestId("generate-skill-editor").locator(".cm-content");
+/** The instructions view: the skill's Markdown laid out, not its source. */
+const preview = (page: Page) => page.getByTestId("view-skill-preview");
 const editorLine = (page: Page, index: number) =>
   editor(page).locator(".cm-line").nth(index);
 
@@ -510,9 +512,16 @@ test.describe("AI Chat: Skill sets", () => {
       await expect(view).toBeAttached();
       await expect(page.getByText("Document summary", { exact: true }).last())
         .toBeVisible();
-      await expect(editor(page)).toContainText("Read the whole document");
-      await expect(editor(page)).not.toContainText("description:");
-      await expect(editor(page)).toHaveAttribute("contenteditable", "false");
+      await expect(preview(page)).toContainText("Read the whole document");
+      await expect(preview(page)).not.toContainText("description:");
+      // Laid out as it reads: a heading and a numbered list, with none of
+      // the Markdown that writes them, and no editor.
+      await expect(
+        preview(page).getByRole("heading", { level: 2, name: "Steps" }),
+      ).toBeVisible();
+      await expect(preview(page).locator("ol > li")).toHaveCount(2);
+      await expect(preview(page)).not.toContainText("##");
+      await expect(page.getByTestId("generate-skill-editor")).toHaveCount(0);
       await expect(page.getByTestId("view-skill-close")).toBeVisible();
 
       // Edit turns it into the Edit skill form on the same skill.
@@ -678,8 +687,8 @@ test.describe("AI Chat: Skill sets", () => {
 
       // The instructions to read, not the form, also for who may edit.
       await expect(page.getByTestId("view-skill-dialog")).toBeAttached();
-      await expect(editor(page)).toContainText("Read the whole document");
-      await expect(editor(page)).toHaveAttribute("contenteditable", "false");
+      await expect(preview(page)).toContainText("Read the whole document");
+      await expect(page.getByTestId("generate-skill-editor")).toHaveCount(0);
       await expect(page.getByTestId("edit-skill-name")).toHaveCount(0);
       expect(await dialogWidth(page)).toBe(DIALOG_WIDTH);
 
@@ -703,8 +712,8 @@ test.describe("AI Chat: Skill sets", () => {
 
       // The skill's instructions in its dialog, not the document editor.
       await expect(page.getByTestId("view-skill-dialog")).toBeAttached();
-      await expect(editor(page)).toContainText("Read the whole document");
-      await expect(editor(page)).toHaveAttribute("contenteditable", "false");
+      await expect(preview(page)).toContainText("Read the whole document");
+      await expect(page.getByTestId("generate-skill-editor")).toHaveCount(0);
       await expect(page.getByTestId("view-skill-edit")).toBeVisible();
       expect(page.url()).not.toContain("doceditor");
     });
@@ -796,8 +805,8 @@ test.describe("AI Chat: Skill sets", () => {
         .click();
 
       await expect(page.getByTestId("view-skill-dialog")).toBeAttached();
-      await expect(editor(page)).toContainText("Read the whole document");
-      await expect(editor(page)).toHaveAttribute("contenteditable", "false");
+      await expect(preview(page)).toContainText("Read the whole document");
+      await expect(page.getByTestId("generate-skill-editor")).toHaveCount(0);
       await expect(page.getByTestId("view-skill-edit")).toHaveCount(0);
 
       await page.getByTestId("view-skill-close").click();
@@ -813,7 +822,7 @@ test.describe("AI Chat: Skill sets", () => {
         .click();
 
       await expect(page.getByTestId("view-skill-dialog")).toBeAttached();
-      await expect(editor(page)).toContainText("Read the whole document");
+      await expect(preview(page)).toContainText("Read the whole document");
       await expect(page.getByTestId("view-skill-edit")).toHaveCount(0);
     });
 

@@ -985,7 +985,6 @@
   "EnabledApps": "Ứng dụng đã bật",
   "EnableNotifications": "Bật thông báo",
   "EnableThirdPartyIntegration": "Vui lòng đề nghị chủ sở hữu hoặc siêu quản trị viên bật dịch vụ tương ứng trong mục Tích hợp của cài đặt không gian làm việc.",
-  "EnableWebSearchInBilling": "Bật tìm kiếm web trong phần Thanh toán",
   "EncryptedAccessChangeRefused": "Quyền truy cập không thay đổi: thành viên chưa có khoá mã hoá.",
   "EncryptedAccessPending": "Đang chờ quyền truy cập",
   "EncryptedAccessRestored": "{{user}} hiện đã có quyền truy cập vào tất cả các tập tin được mã hoá trong phòng.",

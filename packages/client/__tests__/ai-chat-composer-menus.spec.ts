@@ -336,13 +336,15 @@ test.describe("AI chat composer: the default agent", () => {
     await openPlusMenu(page);
 
     // Skill sets and Knowledge bases in one group, Data sources in the
-    // next, then the web search switch.
+    // next, then web search. It is not set up on this portal, so its row
+    // offers to set it up and there is no switch.
     const order = [
       "attachment-menu-skills",
       "attachment-menu-knowledge",
       "attachment-menu-data-sources",
-      "attachment-menu-web-search",
+      "attachment-menu-set-up-web-search",
     ];
+    await expect(page.getByTestId("attachment-menu-web-search")).toHaveCount(0);
     const tops: number[] = [];
     for (const id of order) {
       const box = await page.getByTestId(id).boundingBox();

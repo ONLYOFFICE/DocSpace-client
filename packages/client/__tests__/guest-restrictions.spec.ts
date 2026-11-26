@@ -66,8 +66,7 @@ const CREATE_SECTION = '[data-tour-id="dashboard-create"]';
 const UPLOAD_LINK = "#dashboard-upload-link";
 
 const TOOLTIP_TITLE = "Guests can't create or upload files.";
-const TOOLTIP_DESCRIPTION =
-  "Ask the Room or Full admin for additional permissions.";
+const TOOLTIP_DESCRIPTION = "A Room or Full admin can grant this permission.";
 
 const tooltip = (page: Page) => page.getByText(TOOLTIP_TITLE);
 

@@ -99,7 +99,7 @@ describe("An administrator switches external links of private rooms", () => {
     expect(toastr.success).not.toHaveBeenCalled();
   });
 
-  it("Private rooms not available, or external links forbidden for the portal", () => {
+  it("Private rooms not available", () => {
     render(
       <PrivateRoomLinksSwitch
         isShown={false}

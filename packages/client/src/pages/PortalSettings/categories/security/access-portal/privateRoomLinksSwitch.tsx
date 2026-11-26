@@ -45,7 +45,7 @@ import type { TData } from "@onlyoffice/apps-ui-kit/components/toast";
 import styles from "./AccessControl.module.scss";
 
 type PrivateRoomLinksSwitchProps = {
-  /** Private rooms are available on the portal and external links are allowed. */
+  /** Private rooms are available on the portal. */
   isShown: boolean;
   privateRoomLinks: boolean;
   setPrivateRoomLinks: (set: boolean) => Promise<boolean>;
@@ -99,9 +99,7 @@ export const PrivateRoomLinksSwitch = ({
 
 export const PrivateRoomLinksSwitchSection = inject(
   ({ filesSettingsStore, appsStore }: TStore) => ({
-    isShown:
-      appsStore.isPrivateRoomsSectionAvailable &&
-      filesSettingsStore.externalShare,
+    isShown: appsStore.isPrivateRoomsSectionAvailable,
     privateRoomLinks: filesSettingsStore.privateRoomLinks,
     setPrivateRoomLinks: filesSettingsStore.setPrivateRoomLinks,
   }),

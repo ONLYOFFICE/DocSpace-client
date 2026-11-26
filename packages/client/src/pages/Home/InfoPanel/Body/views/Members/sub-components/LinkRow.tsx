@@ -401,12 +401,11 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyLink = (linkArg: TFileLink) => {
-    if (isPrivateLink) return onCopyPrivateLink();
-
     if (isLinkBlockedByAdmin!(item, linkArg)) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
       return;
     }
+    if (isPrivateLink) return onCopyPrivateLink();
     copyShareLink(item, linkArg, t);
   };
 

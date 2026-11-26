@@ -631,8 +631,6 @@ export const useShare = ({
       return;
     }
 
-    if (privateLinks) return copyPrivateLink(link);
-
     const isBlockedByAdmin =
       isExternalShareRestricted &&
       !link.sharedTo?.internal &&
@@ -660,6 +658,9 @@ export const useShare = ({
       }
       return;
     }
+
+    // A link of a private item is blocked by the portal as any other is.
+    if (privateLinks) return copyPrivateLink(link);
 
     await copyShareLink(infoPanelSelection, link, t);
   };

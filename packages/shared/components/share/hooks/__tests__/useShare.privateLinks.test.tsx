@@ -280,5 +280,30 @@ describe("useShare: links of a private item", () => {
     );
     expect(links.address).not.toHaveBeenCalled();
   });
+
+  it("External sharing restricted for the portal, with existing links blocked", async () => {
+    const wrapped = link("1", {
+      internal: false,
+      linkSecretWrap: { publicKeyId: "key-1", wrap: "wrap" },
+    });
+    render(
+      <Links
+        props={propsOf({
+          fileLinkProps: [wrapped],
+          isExternalShareRestricted: true,
+          blockExistingLinksOnRestrict: true,
+        })}
+      />,
+    );
+
+    fireEvent.click(screen.getByText("Link 1"));
+
+    await vi.waitFor(() =>
+      expect(toastr.error).toHaveBeenCalledWith(
+        "Common:LinkBlockedByAdminWarning",
+      ),
+    );
+    expect(links.address).not.toHaveBeenCalled();
+  });
 });
 

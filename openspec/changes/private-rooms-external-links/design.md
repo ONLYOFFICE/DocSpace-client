@@ -338,6 +338,153 @@ private room; the folder's `availableShareRights` narrowed to reading;
 the files and folders of an archived room listed to who managed them, if
 they are to be shown as not working.
 
+### Server read at `92c9b60f23` (2026-11-26)
+
+Two commits of the paired branch since the read at `39f71456b0`:
+`0b45c6d101` (2026-11-24) and `92c9b60f23` (2026-11-25). The backend
+team's summary of them for the client was read first, then every point
+of it in the source, through CodeGraph and the diff of the two commits.
+Its tests were not read one by one.
+
+What the server does at this commit:
+
+- **Address** (`ExternalShare.GetLinkDataAsync`). A link of a private
+  item gets `share/private?key=<key>`, with `&folder=<id>` for a folder
+  that is not a room, as decision 23 asked. A short address whose code is
+  unknown redirects to `<portal>/#` (`UrlShortRewriter`), so that a
+  fragment is not carried to a page of the portal.
+- **Status of a link** (`ExternalLinkHelper.ValidateAsync`,
+  `ExternalShare.ValidateRecordAsync`). The answer of `GET
+  files/share/{key}` carries `isPrivate: true` and `passwordRequired`
+  for a link of a private item, whatever its status. Without a proof and
+  without a session the status is RequiredPassword, also for a link
+  that asks for no password.
+- **Proof** (`ApplyExternalSharePassword`,
+  `ExternalShare.ValidatePrivateLinkAsync`, `LinkKeyMaterial.ProofMatches`).
+  `POST files/share/{key}/password` takes `proof`, the ordinary base64 of
+  32 bytes, and compares its SHA-256 with the stored hash in constant
+  time; a value that does not decode to 32 bytes does not match.
+  `password` is not looked at for such a link. A match sets the session
+  cookie of the link and answers Ok; a mismatch clears the cookie and
+  answers InvalidPassword, counted by the limiter of wrong passwords per
+  link and address.
+- **The sealed key comes with the proof only.** `linkPrivateKeyEnc` is in
+  the answer of the request whose proof matched, and in no other: a
+  request of the open session answers Ok without it. The audit event
+  `PrivateLinkOpened` is written with that answer, once per opening and
+  not per read.
+- **Gates** (`ExternalShare.IsPrivateLinkOpenAsync`,
+  `IsPrivateLinkAllowedIn`, `FileSharingAceHelper.ValidatePrivateLinksAsync`).
+  A link is closed while the portal setting is off, the `e2e-rooms` app
+  is off, the room is archived, or the room is a Virtual Data Room with
+  the room-wide restriction on downloading. A closed link answers
+  Invalid to a visitor and is not deleted; setting or changing a link
+  answers 403. The check of the gates in `ValidatePrivateLinksAsync`
+  covers only requests with an access, so it does not refuse a
+  revocation; the summary states 403 for a revocation in an archived
+  room and with the app off, which was not traced in the source.
+- **Portal setting** (`SettingsController.PrivateRoomLinks`,
+  `FilesSettingsHelper.ChangePrivateRoomLinksSettingsAsync`). `PUT
+  files/settings/external/private` with `{ "set": bool }` answers the
+  stored value, for a DocSpace admin only. `GET files/settings` answers
+  `privateRoomLinks`. A change emits `s:change-private-room-links-settings`
+  with `{ enabled }` to the quota room of the portal, the room of the
+  event of the external sharing setting.
+- **Key fields of a request** (`ValidatePrivateLinksAsync`,
+  `SetPrivateLinkAsync`). As before, and: a change of `passwordRequired`
+  on an existing link without the three key fields answers 400; a change
+  that meets a revocation of the same link answers 404; `linkSecretWraps`
+  may be sent alone for an existing link.
+- **Wraps of the secret** (`LinkSecretWrapRequest`, `LinkSecretWrapDto`,
+  `FileSharing`, `FileSharingHelper.GetLinkManagersAsync`). A request
+  carries `linkSecretWraps`, one `{ userId, publicKeyId, wrap }` per
+  user, the wrap at most 4096 characters; a wrap for a user who is not
+  the owner or a room manager answers 400. A link answers, inside
+  `sharedTo`, `linkSecretWrap` (`{ publicKeyId, wrap }` made for the
+  caller, or null) and `managersWithoutLinkSecretWrap`, the ids of the
+  owner and the managers without one, in ascending order. The wraps of a
+  user are deleted when the user leaves the room, is removed, gets a
+  role below room manager, or stops being the owner with a lower role.
+- **Links among the keys of a room**
+  (`EncryptionKeyPairDtoHelper`, `EncryptionKeyMapper.ToLinkKey`). `GET
+  privacyroom/{roomId}/access` adds one entry per working link of the
+  room or of an item in it: `isLink: true`, `id` and `userId` the id of
+  the link, `publicKey` its public key, no `privateKeyEnc`. The entry
+  does not name the item the link is set on. Revoked and expired links
+  are left out; a link closed by a gate is not.
+- **Wrap of a file key for a link**
+  (`FileStorageService.GetCoveringLinksAsync`). `PUT files/{fileId}/access`
+  stores a wrap for a working link that covers the file, set on the
+  file, on a folder above it or on the room; any other link id comes
+  back in `skippedUserIds`.
+- **Missing wraps.** `GET privacyroom/{roomId}/access/missing` without
+  `userIds` checks the owner, the members and every working link; an
+  entry of a link carries `isLink: true` and lists only the encrypted
+  files the link covers.
+- **Keys of a file for a visitor**
+  (`EncryptionKeyPairDtoHelper.GetKeyPairAsync`,
+  `GetLinkSessionKeysAsync`). `GET files/file/{fileId}/publickeys` is
+  open without signing in. A caller who is not signed in and names no
+  link is refused with 403 before the file is looked up. A visitor of a
+  link who is not a member of the room, signed in or not, gets the
+  public keys of the members without `privateKeyEnc`, and one entry of
+  the link with `isLink: true` and `fileKeyEnc`, the wrap made for the
+  link or null when no member has made one. A file the link does not
+  cover answers 403. A member of the room who comes with a link gets
+  the answer of a member.
+- **Count of links** (`FileEntryDtoHelper.GetPrivateLinksCountAsync`).
+  A room, a folder and a file answer `externalLinksCount`: the working
+  links set on the entry itself, for the owner and the room managers of
+  a private room and null for anybody else and outside private rooms. A
+  link closed by a gate is counted, and the entries of an archived
+  private room carry the count.
+- **Restricted policy** (`CspSettingsHelper.CreateHeaderAsync`, `CspDto`).
+  `GET` and `POST security/csp` answer `privateLinkHeader`: the portal,
+  its storage and the Document Server, without the allowed domains of
+  the portal and without the integrations. The value is kept in the
+  cache beside the full one, under the key of the host with `:private`
+  appended.
+- **Guests** (`UserController.UpdateMember`,
+  `PrivateRoomAccountHelper.DemandNoPrivateRoomOwnedAsync`,
+  `LeavePrivateRoomsAsync`). `PUT people/{userId}` with `isUser: true`
+  answers 403 with `PrivateRoomOwnershipException` for an owner of a
+  private room and saves nothing; any other user who becomes a guest
+  leaves every private room and loses the wraps of file keys and the key
+  pair, and a repeat of the call for a guest finishes an interrupted
+  exit. This is not about links and belongs to
+  `private-rooms-server-followups`.
+
+Not on the server: the regenerated OpenAPI documents and SDK; the
+restricted policy sent by the proxy, which is task 4.4 here; the editor
+for a visitor, which waits for the Document Server team (task 0.3).
+
+What follows for this change:
+
+- The asks of 2026-11-23 and 2026-11-24 are answered: the address
+  (decision 23), the count of links (decision 12) and the public key of
+  the member who made a wrap (decision 26, as the members' keys served
+  with the wrap). `externalLinksCount` is not null only for who manages
+  the links, so it also tells that with the entry itself.
+- The page of a visitor sends the proof at every load, since only that
+  answer carries the sealed key; a link with a password asks for the
+  password again after a reload (task 4.2).
+- The requirement of the `server-contract` delta "A link is served only
+  against a proof of its secret" has the sealed key, the wraps and the
+  content given to a request that carries the proof. The server gives
+  the sealed key to that request and the wraps and the content to the
+  session it opens. To revise with task 4.1.
+- The client reads the keys of a room and the missing wraps with every
+  entry taken for a member (`room-member-keys.ts`, `room-member-flows.ts`,
+  `room-encryption.ts`, the upload orchestrator, the desktop bridge),
+  and the server now lists links there. The second part of task 3.1
+  comes first.
+- An uploader cannot tell from the keys of a room which links cover the
+  file, and wraps for every link of the room; the server skips the
+  others. To ask of the backend team: the item of the link in its entry.
+- The switch of the portal setting for an administrator has no
+  requirement and no task here; the owner decides whether this change
+  holds it.
+
 ## Goals / Non-Goals
 
 **Goals:**

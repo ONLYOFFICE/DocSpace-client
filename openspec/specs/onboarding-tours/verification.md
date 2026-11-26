@@ -7,7 +7,11 @@
 Every requirement and scenario of `spec.md`, with where it is shown. Paths are relative to the repository root;
 client E2E paths omit `packages/client/__tests__/`. Shorthands: `dt` = `dashboard-tour.spec.ts`, `ft` =
 `files-tour.spec.ts`, `rt` = `rooms-tour.spec.ts`, `fmt` = `forms-tour.spec.ts`, `tour/` =
-`packages/client/src/components/Tour/`, `steps(X)` = `packages/client/src/components/XTour/__tests__/tourSteps.test.ts`.
+`packages/client/src/components/Tour/`, `steps(Dashboard)`, `steps(Files)`, `steps(Rooms)`, `steps(Forms)` =
+`packages/client/src/components/DashboardTour/__tests__/tourSteps.test.ts`,
+`packages/client/src/components/FilesTour/__tests__/tourSteps.test.ts`,
+`packages/client/src/components/RoomsTour/__tests__/tourSteps.test.ts`,
+`packages/client/src/components/FormsTour/__tests__/tourSteps.test.ts`.
 
 Status: **E2E-CONFIRMED** (a Playwright test asserts it, partly by screenshot), **UNIT-CONFIRMED** (a Vitest test
 asserts it), **CODE-ONLY** (read from the code, no test).

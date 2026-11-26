@@ -34,6 +34,7 @@
  */
 
 
+import { getFolderPath } from "../../api/files";
 import { getEncryptionKeys, setPrivateItemLink } from "../../api/privacy";
 import type { TPrivateLinkTarget } from "../../api/privacy/types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
@@ -49,7 +50,10 @@ import {
 } from "../encryption/link-key";
 import type { IdentityKeyPair } from "../encryption/types";
 import { arrayBufferToBase64 } from "../encryption/utils";
-import { requireUnlock } from "../encryption/secret-storage";
+import { inspectWrap } from "../encryption/hpke";
+import { requireUnlock, SecretStorage } from "../encryption/secret-storage";
+import { verifyMemberKey } from "./member-key-verification";
+import { loadRoomMemberKeys } from "./room-member-keys";
 import { wrapFilesForLink } from "./room-encryption";
 
 type TPrivateLinkItem = TFile | TFolder | TRoom;
@@ -96,6 +100,62 @@ const findOwnKey = async (identity: IdentityKeyPair) => {
 };
 
 /**
+ * The room an item of a private room lies in. An entry does not name its
+ * room, so the path of its folder is read (`FoldersController.GetFolderPath`).
+ */
+const findRoomId = async (item: TPrivateLinkItem): Promise<number | null> => {
+  if (isRoom(item)) return Number(item.id);
+  const folderId = isFile(item) ? item.folderId : item.id;
+  const path = await getFolderPath(Number(folderId));
+  const room = path.find((folder) => folder.roomType != null);
+  return room ? Number(room.id) : null;
+};
+
+const sameUser = (a: string, b: string) => a.toLowerCase() === b.toLowerCase();
+
+/**
+ * The keys of other members of the room that pass the check of a member's
+ * key, by user. A changed key is refused without asking: this runs beside
+ * what the user is doing.
+ */
+const readVerifiedMemberKeys = async (
+  item: TPrivateLinkItem,
+  scopeUserId: string,
+  userIds: string[],
+) => {
+  const roomId = await findRoomId(item);
+  if (roomId === null) return [];
+  const { keyByUserId, list } = await loadRoomMemberKeys(roomId);
+
+  const verified: Array<{
+    userId: string;
+    publicKey: string;
+    publicKeyId: string;
+    /** Every listed key of the user: a wrap may come from an earlier one. */
+    all: string[];
+  }> = [];
+  for (const [memberId, key] of keyByUserId) {
+    if (!userIds.some((userId) => sameUser(userId, memberId))) continue;
+    const checked = await verifyMemberKey({
+      userId: memberId,
+      scopeUserId,
+      publicKey: key.publicKey,
+      resolver: async () => "refuse",
+    });
+    if (checked.kind !== "ok" || !key.publicKeyId) continue;
+    verified.push({
+      userId: memberId,
+      publicKey: key.publicKey,
+      publicKeyId: key.publicKeyId,
+      all: list
+        .filter((entry) => sameUser(entry.userId, memberId))
+        .map((entry) => entry.publicKey),
+    });
+  }
+  return verified;
+};
+
+/**
  * Whether the address of a link can be given to the caller: it was read on
  * this page, or the server holds its secret wrapped for them.
  *
@@ -104,79 +164,162 @@ const findOwnKey = async (identity: IdentityKeyPair) => {
 export const canReadPrivateLinkAddress = (link: TFileLink) =>
   addresses.has(String(link.sharedTo.id)) || !!link.sharedTo.linkSecretWrap;
 
+/** Opens the wrap of a link's secret the server holds for the caller. */
+async function openOwnSecretWrap(
+  item: TPrivateLinkItem,
+  link: TFileLink,
+  userId: string,
+  identity: IdentityKeyPair,
+): Promise<string | null> {
+  const { linkSecretWrap } = link.sharedTo;
+  if (!linkSecretWrap) return null;
+
+  const own = await findOwnKey(identity);
+  if (!own || own.id !== linkSecretWrap.publicKeyId) return null;
+
+  const maker = inspectWrap(linkSecretWrap.wrap).senderUserId;
+  const senders = sameUser(maker, userId)
+    ? [{ userId, publicKey: own.publicKey }]
+    : (await readVerifiedMemberKeys(item, userId, [maker])).flatMap((member) =>
+        member.all.map((publicKey) => ({ userId: member.userId, publicKey })),
+      );
+
+  return unwrapLinkSecret({
+    wrap: linkSecretWrap.wrap,
+    linkId: String(link.sharedTo.id),
+    recipient: identity,
+    recipientUserId: userId,
+    senders,
+  });
+}
+
 /**
  * The address of a link with its secret after `#`, opened from the wrap the
- * server holds for the caller. Asks for the unlock first; null when it is
- * dismissed, when no wrap was made for the caller's current key, or when the
- * wrap does not open.
+ * server holds for the caller, whoever of those who manage links made it.
+ * Asks for the unlock first; null when it is dismissed, when no wrap was made
+ * for the caller's current key, or when the wrap does not open. A manager who
+ * reads an address passes the secret on to the managers who have no wrap yet.
  */
-// shortcut: only a wrap the caller made opens, since the keys of the other managers are not read here; the room's keys come with the wraps for them (private-rooms-external-links 3.4).
 export async function readPrivateLinkAddress(
+  item: TPrivateLinkItem,
   link: TFileLink,
   userId: string,
 ): Promise<string | null> {
   const linkId = String(link.sharedTo.id);
   const known = addresses.get(linkId);
   if (known) return known;
-
-  const { linkSecretWrap } = link.sharedTo;
-  if (!linkSecretWrap) return null;
+  if (!link.sharedTo.linkSecretWrap) return null;
 
   const identity = await requireUnlock(userId);
   if (!identity) return null;
 
   try {
-    const own = await findOwnKey(identity);
-    if (!own || own.id !== linkSecretWrap.publicKeyId) return null;
+    const secret = await openOwnSecretWrap(item, link, userId, identity);
+    if (!secret) return null;
 
-    const secret = await unwrapLinkSecret({
-      wrap: linkSecretWrap.wrap,
-      linkId,
-      recipient: identity,
-      recipientUserId: userId,
-      senders: [{ userId, publicKey: own.publicKey }],
-    });
     const address = `${link.sharedTo.shareLink}#${secret}`;
     addresses.set(linkId, address);
+    if (link.sharedTo.managersWithoutLinkSecretWrap?.length) {
+      void storeSecretWraps(item, link, secret, userId, identity);
+    }
     return address;
   } catch {
     return null;
   }
 }
 
+// The managers no wrap could be made for on this page, as `linkId:userId`:
+// one without a key, or whose key did not pass the check, is not tried again
+// at every listing.
+const leftOut = new Set<string>();
+
 /**
- * Stores the secret of a new link wrapped for its creator, so that the
- * address can be read again after the page is left. The request repeats the
- * settings of the link, which it would otherwise replace. A failure leaves
- * the link as it was made.
+ * Stores the secret of a link wrapped for those who manage links and have no
+ * wrap of it: the owner and the room managers the link names, the caller
+ * among them. The request repeats the settings of the link, which it would
+ * otherwise replace. A manager without a key, or whose key does not pass the
+ * check, is left for later; a failure leaves the link as it was.
  *
  * Spec: private-rooms/encryption-core, "The secret of a link is wrapped for those who manage links"
  */
-async function storeOwnSecretWrap(
+async function storeSecretWraps(
   item: TPrivateLinkItem,
   link: TFileLink,
   secret: string,
   userId: string,
   identity: IdentityKeyPair,
 ): Promise<TFileLink> {
+  const linkId = String(link.sharedTo.id);
   try {
-    const own = await findOwnKey(identity);
-    if (!own) return link;
+    const lacking = (
+      link.sharedTo.managersWithoutLinkSecretWrap ?? [userId]
+    ).filter((managerId) => !leftOut.has(`${linkId}:${managerId}`));
+    if (lacking.length === 0) return link;
 
-    const wrap = await wrapLinkSecret({
-      secret,
-      linkId: String(link.sharedTo.id),
-      sender: identity,
-      senderUserId: userId,
-      recipientPublicKey: own.publicKey,
-      recipientUserId: userId,
-    });
+    const recipients: Array<{
+      userId: string;
+      publicKey: string;
+      publicKeyId: string;
+    }> = [];
+    if (lacking.some((managerId) => sameUser(managerId, userId))) {
+      const own = await findOwnKey(identity);
+      if (own) {
+        recipients.push({ userId, publicKey: own.publicKey, publicKeyId: own.id });
+      }
+    }
+    const others = lacking.filter((managerId) => !sameUser(managerId, userId));
+    if (others.length > 0) {
+      recipients.push(...(await readVerifiedMemberKeys(item, userId, others)));
+    }
+    for (const managerId of lacking) {
+      if (!recipients.some((r) => sameUser(r.userId, managerId))) {
+        leftOut.add(`${linkId}:${managerId}`);
+      }
+    }
+    if (recipients.length === 0) return link;
+
+    const linkSecretWraps = [];
+    for (const recipient of recipients) {
+      linkSecretWraps.push({
+        userId: recipient.userId,
+        publicKeyId: recipient.publicKeyId,
+        wrap: await wrapLinkSecret({
+          secret,
+          linkId,
+          sender: identity,
+          senderUserId: userId,
+          recipientPublicKey: recipient.publicKey,
+          recipientUserId: recipient.userId,
+        }),
+      });
+    }
     return await setPrivateItemLink(getTarget(item), {
       ...linkSettings(link),
-      linkSecretWraps: [{ userId, publicKeyId: own.id, wrap }],
+      linkSecretWraps,
     });
   } catch {
     return link;
+  }
+}
+
+/**
+ * Passes the secrets of the listed links on to the managers who have no wrap
+ * of them, when the caller holds a wrap and their key is unlocked already: a
+ * listing asks for no unlock.
+ *
+ * Spec: private-rooms/encryption-core, "The secret of a link is wrapped for those who manage links"
+ */
+export async function shareLinkSecretsWithManagers(
+  item: TPrivateLinkItem,
+  links: TFileLink[],
+  userId: string,
+): Promise<void> {
+  if (!userId || !SecretStorage.hasUnlocked(userId)) return;
+
+  for (const link of links) {
+    const lacking = link.sharedTo?.managersWithoutLinkSecretWrap ?? [];
+    if (!link.sharedTo?.linkSecretWrap || lacking.length === 0) continue;
+    await readPrivateLinkAddress(item, link, userId);
   }
 }
 
@@ -306,13 +449,7 @@ export async function createPrivateItemLink(
   const address = `${created.sharedTo.shareLink}#${secret}`;
   addresses.set(String(created.sharedTo.id), address);
 
-  const link = await storeOwnSecretWrap(
-    item,
-    created,
-    secret,
-    userId,
-    identity,
-  );
+  const link = await storeSecretWraps(item, created, secret, userId, identity);
 
   const { missingFileIds } = await wrapFilesForLink(
     { id: Number(item.id), isFile: isFile(item) },
@@ -339,7 +476,11 @@ export const revokePrivateItemLink = async (
     linkId: String(link.sharedTo.id),
     access: ShareAccessRights.None,
   });
-  addresses.delete(String(link.sharedTo.id));
+  const linkId = String(link.sharedTo.id);
+  addresses.delete(linkId);
+  leftOut.forEach((key) => {
+    if (key.indexOf(`${linkId}:`) === 0) leftOut.delete(key);
+  });
 
   return revoked;
 };

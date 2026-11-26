@@ -125,7 +125,11 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyPrivateLink = async () => {
-    const privateAddress = await readPrivateLinkAddress(link, selfId ?? "");
+    const privateAddress = await readPrivateLinkAddress(
+      item,
+      link,
+      selfId ?? "",
+    );
     if (!privateAddress) return;
     copyShareLink(
       item,

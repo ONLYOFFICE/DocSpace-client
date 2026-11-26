@@ -53,6 +53,7 @@ import {
   createPrivateItemLink,
   getPrivateLinkAddress,
   readPrivateLinkAddress,
+  shareLinkSecretsWithManagers,
   editPrivateItemLink,
   getPrivateLinkNeed,
   revokePrivateItemLink,
@@ -60,14 +61,24 @@ import {
 
 const setPrivateItemLink = vi.hoisted(() => vi.fn());
 const getEncryptionKeys = vi.hoisted(() => vi.fn());
+const getRoomEncryptionKeys = vi.hoisted(() => vi.fn());
+const getFolderPath = vi.hoisted(() => vi.fn());
+const hasUnlocked = vi.hoisted(() => vi.fn());
+const verifyMemberKey = vi.hoisted(() => vi.fn());
 const requireUnlock = vi.hoisted(() => vi.fn());
 const wrapFilesForLink = vi.hoisted(() => vi.fn());
 
 vi.mock("../../../api/privacy", () => ({
   setPrivateItemLink,
   getEncryptionKeys,
+  getRoomEncryptionKeys,
 }));
-vi.mock("../../encryption/secret-storage", () => ({ requireUnlock }));
+vi.mock("../../../api/files", () => ({ getFolderPath }));
+vi.mock("../../encryption/secret-storage", () => ({
+  requireUnlock,
+  SecretStorage: { hasUnlocked },
+}));
+vi.mock("../member-key-verification", () => ({ verifyMemberKey }));
 vi.mock("../room-encryption", () => ({ wrapFilesForLink }));
 
 const file = { id: 9, fileExst: ".docx", folderId: 14 } as unknown as TFile;
@@ -90,6 +101,12 @@ const stored = (id = "link-1") =>
 beforeEach(() => {
   setPrivateItemLink.mockReset().mockResolvedValue(stored());
   getEncryptionKeys.mockReset().mockResolvedValue([]);
+  getRoomEncryptionKeys.mockReset().mockResolvedValue([]);
+  getFolderPath.mockReset().mockResolvedValue([{ id: 1 }, { id: 14, roomType: 5 }]);
+  hasUnlocked.mockReset().mockReturnValue(true);
+  verifyMemberKey
+    .mockReset()
+    .mockImplementation(async ({ publicKey }) => ({ kind: "ok", publicKey }));
   requireUnlock.mockReset().mockResolvedValue({});
   wrapFilesForLink.mockReset().mockResolvedValue({ missingFileIds: [] });
 });
@@ -291,6 +308,12 @@ describe("The secret of a link is wrapped for those who manage links", () => {
   const USER_ID = "11111111-1111-4111-8111-111111111111";
   const LINK_ID = "33333333-3333-4333-8333-333333333333";
 
+  // Nothing of the link is remembered from the test before.
+  beforeEach(async () => {
+    await revokePrivateItemLink(folder, stored(LINK_ID));
+    setPrivateItemLink.mockClear();
+  });
+
   /** Makes a link as its creator and answers what the server then holds. */
   const make = async () => {
     const identity = await generateIdentityKeyPair();
@@ -342,7 +365,9 @@ describe("The secret of a link is wrapped for those who manage links", () => {
     expect(getPrivateLinkAddress(LINK_ID)).toBeUndefined();
 
     expect(canReadPrivateLinkAddress(link)).toBe(true);
-    expect(await readPrivateLinkAddress(link, USER_ID)).toBe(made.address);
+    expect(await readPrivateLinkAddress(folder, link, USER_ID)).toBe(
+      made.address,
+    );
   });
 
   it("Key locked", async () => {
@@ -350,14 +375,14 @@ describe("The secret of a link is wrapped for those who manage links", () => {
     await revokePrivateItemLink(folder, link);
     requireUnlock.mockResolvedValue(null);
 
-    expect(await readPrivateLinkAddress(link, USER_ID)).toBeNull();
+    expect(await readPrivateLinkAddress(folder, link, USER_ID)).toBeNull();
   });
 
   it("Member who does not manage links", async () => {
     const bare = stored(LINK_ID);
 
     expect(canReadPrivateLinkAddress(bare)).toBe(false);
-    expect(await readPrivateLinkAddress(bare, USER_ID)).toBeNull();
+    expect(await readPrivateLinkAddress(folder, bare, USER_ID)).toBeNull();
     expect(requireUnlock).not.toHaveBeenCalled();
   });
 
@@ -366,7 +391,7 @@ describe("The secret of a link is wrapped for those who manage links", () => {
     await revokePrivateItemLink(folder, link);
     getEncryptionKeys.mockResolvedValue([]);
 
-    expect(await readPrivateLinkAddress(link, USER_ID)).toBeNull();
+    expect(await readPrivateLinkAddress(folder, link, USER_ID)).toBeNull();
   });
 
   it("keeps the link when the wrap cannot be stored", async () => {
@@ -390,5 +415,125 @@ describe("The secret of a link is wrapped for those who manage links", () => {
     expect(made!.link.sharedTo.id).toBe(LINK_ID);
     expect(getPrivateLinkAddress(LINK_ID)).toBe(made!.address);
   });
-});
 
+  describe("with another manager in the room", () => {
+    const MANAGER_ID = "22222222-2222-4222-8222-222222222222";
+
+    /** The creator makes a link in a room with a second manager. */
+    const makeWithManager = async (lacking: string[]) => {
+      const creator = await generateIdentityKeyPair();
+      const manager = await generateIdentityKeyPair();
+      const keyOf = (id: string, userId: string, pair: typeof creator) => ({
+        id,
+        userId,
+        publicKey: arrayBufferToBase64(pair.publicKey),
+      });
+      const creatorKey = keyOf("key-1", USER_ID, creator);
+      const managerKey = keyOf("key-2", MANAGER_ID, manager);
+      requireUnlock.mockResolvedValue(creator);
+      getEncryptionKeys.mockResolvedValue([creatorKey]);
+      getRoomEncryptionKeys.mockResolvedValue([creatorKey, managerKey]);
+      const created = stored(LINK_ID);
+      setPrivateItemLink.mockResolvedValue({
+        ...created,
+        sharedTo: {
+          ...created.sharedTo,
+          managersWithoutLinkSecretWrap: lacking,
+        },
+      });
+
+      const made = await createPrivateItemLink(folder, USER_ID, {
+        password: "p",
+      });
+      const wraps = setPrivateItemLink.mock.calls[1]?.[1].linkSecretWraps as
+        | Array<{ userId: string; publicKeyId: string; wrap: string }>
+        | undefined;
+      return { creator, manager, creatorKey, managerKey, made: made!, wraps };
+    };
+
+    it("wraps the secret for the creator and for the other manager, read from the room of the folder", async () => {
+      const { wraps } = await makeWithManager([USER_ID, MANAGER_ID]);
+
+      expect(getFolderPath).toHaveBeenCalledWith(18);
+      expect(getRoomEncryptionKeys).toHaveBeenCalledWith(14);
+      expect(wraps!.map((w) => [w.userId, w.publicKeyId])).toEqual([
+        [USER_ID, "key-1"],
+        [MANAGER_ID, "key-2"],
+      ]);
+    });
+
+    it("Address copied by another manager", async () => {
+      const { manager, managerKey, made, wraps } = await makeWithManager([
+        USER_ID,
+        MANAGER_ID,
+      ]);
+      const forManager = wraps!.find((w) => w.userId === MANAGER_ID)!;
+      const link = {
+        ...stored(LINK_ID),
+        sharedTo: { ...stored(LINK_ID).sharedTo, linkSecretWrap: forManager },
+      } as TFileLink;
+      // The other manager, on a page of their own.
+      await revokePrivateItemLink(folder, link);
+      requireUnlock.mockResolvedValue(manager);
+      getEncryptionKeys.mockResolvedValue([managerKey]);
+
+      expect(await readPrivateLinkAddress(folder, link, MANAGER_ID)).toBe(
+        made.address,
+      );
+    });
+
+    it("leaves out a manager whose key does not pass the check", async () => {
+      verifyMemberKey.mockResolvedValue({ kind: "key-mismatch-refused" });
+
+      const { wraps } = await makeWithManager([USER_ID, MANAGER_ID]);
+
+      expect(wraps!.map((w) => w.userId)).toEqual([USER_ID]);
+    });
+
+    it("Manager named later", async () => {
+      const { creatorKey, wraps } = await makeWithManager([USER_ID]);
+      const link = {
+        ...stored(LINK_ID),
+        sharedTo: {
+          ...stored(LINK_ID).sharedTo,
+          linkSecretWrap: wraps![0],
+          managersWithoutLinkSecretWrap: [MANAGER_ID],
+        },
+      } as TFileLink;
+      await revokePrivateItemLink(folder, link);
+      getEncryptionKeys.mockResolvedValue([creatorKey]);
+      setPrivateItemLink.mockClear();
+
+      await shareLinkSecretsWithManagers(folder, [link], USER_ID);
+
+      await vi.waitFor(() => expect(setPrivateItemLink).toHaveBeenCalled());
+      const request = setPrivateItemLink.mock.calls[0][1];
+      expect(request.linkSecretWraps.map((w: { userId: string }) => w.userId)).toEqual([
+        MANAGER_ID,
+      ]);
+      expect(request).toMatchObject({ linkId: LINK_ID, title: "Shared link" });
+    });
+
+    it("asks for no unlock when links are listed", async () => {
+      hasUnlocked.mockReturnValue(false);
+      requireUnlock.mockClear();
+
+      await shareLinkSecretsWithManagers(
+        folder,
+        [
+          {
+            ...stored(LINK_ID),
+            sharedTo: {
+              ...stored(LINK_ID).sharedTo,
+              linkSecretWrap: { publicKeyId: "key-1", wrap: "w" },
+              managersWithoutLinkSecretWrap: [MANAGER_ID],
+            },
+          } as TFileLink,
+        ],
+        USER_ID,
+      );
+
+      expect(requireUnlock).not.toHaveBeenCalled();
+    });
+  });
+});

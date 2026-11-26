@@ -216,7 +216,7 @@ describe("useShare: links of a private item", () => {
     fireEvent.click(screen.getByText("Link 1"));
 
     await vi.waitFor(() => expect(copyShareLink).toHaveBeenCalled());
-    expect(links.address).toHaveBeenCalledWith(wrapped, "u-1");
+    expect(links.address.mock.calls[0].slice(1)).toEqual([wrapped, "u-1"]);
     expect(vi.mocked(copyShareLink).mock.calls[0][1].sharedTo.shareLink).toBe(
       `${SHORT}#secret`,
     );

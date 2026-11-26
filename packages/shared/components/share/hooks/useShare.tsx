@@ -58,6 +58,7 @@ import {
   createPrivateItemLink,
   canReadPrivateLinkAddress,
   readPrivateLinkAddress,
+  shareLinkSecretsWithManagers,
   editPrivateItemLink,
   revokePrivateItemLink,
 } from "../../../services/private-room/private-links";
@@ -129,7 +130,11 @@ export const useShare = ({
   };
 
   const copyPrivateLink = async (link: TFileLink) => {
-    const address = await readPrivateLinkAddress(link, selfId ?? "");
+    const address = await readPrivateLinkAddress(
+      infoPanelSelection,
+      link,
+      selfId ?? "",
+    );
     if (!address) return;
 
     await copyShareLink(
@@ -168,7 +173,23 @@ export const useShare = ({
     setIsLoading(false);
     isInit.current = false;
     requestRunning.current = false;
-  }, [infoPanelSelection?.id, hideSharePanel, isFolder, setIsLoading]);
+
+    // Spec: private-rooms/encryption-core, "The secret of a link is wrapped for those who manage links"
+    if (privateLinks) {
+      void shareLinkSecretsWithManagers(
+        infoPanelSelection,
+        res.items,
+        selfId ?? "",
+      );
+    }
+  }, [
+    infoPanelSelection?.id,
+    hideSharePanel,
+    isFolder,
+    setIsLoading,
+    privateLinks,
+    selfId,
+  ]);
 
   useEffect(() => {
     if (hideSharePanel) {

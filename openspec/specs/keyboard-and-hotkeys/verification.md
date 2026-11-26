@@ -27,6 +27,7 @@ asserts it), **CODE-ONLY** (read from the code, no test).
 | `x`, Enter and Backspace | `whk:265-316, 370` | CODE-ONLY |
 | **Action hotkeys** | | |
 | F2 rename; V switches the view; Ctrl+/ opens the panel; Shift+D whichever key is released first | `hk:396, 405, 413, 421, 434` | E2E-CONFIRMED |
+| Personal files of an SDK frame: j/k on a non-Latin layout; Shift+D whichever key is released first; a held Shift+F opens one New folder dialog and types nothing | `packages/sdk/__tests__/e2e/personal-files/hotkeys.spec.ts:62, 99, 110, 121` | E2E-CONFIRMED |
 | Shift+U and Shift+I open the pickers | `packages/client/src/HOCs/__tests__/withHotkeys.upload.test.tsx:115, 124, 133, 184` | UNIT-CONFIRMED |
 | Create hotkeys blocked in the flat AI source rooms, left to the Create right elsewhere | `hkt:187, 192` | UNIT-CONFIRMED |
 | Folders without actions, guests, Shift+R in Rooms and Forms, Alt+Shift+O, Ctrl+I | `whk:156-200, 408-441, 518` | CODE-ONLY |

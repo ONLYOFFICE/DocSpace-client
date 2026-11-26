@@ -2,9 +2,10 @@
 
 ## Purpose
 
-Defines the keyboard of the web client's lists: when the hotkeys of the files list act, selecting and moving with the
-keys, the create, upload, delete and other action hotkeys, the clipboard, the keyboard focus inside the list, reaching
-every control of the page by Tab, the hotkeys of the Contacts lists and the hotkeys panel.
+Defines the keyboard of the web client's lists, the personal files of an SDK frame included: when the hotkeys of the
+files list act, selecting and moving with the keys, the create, upload, delete and other action hotkeys, the clipboard,
+the keyboard focus inside the list, reaching every control of the page by Tab, the hotkeys of the Contacts lists and the
+hotkeys panel.
 
 Server counterpart: none of its own. A hotkey runs the same action as its menu entry, which its own capability
 defines.
@@ -24,7 +25,7 @@ the Contacts hotkeys store and the HotkeysPanel.
 The hotkeys of the files list SHALL act only while the list has loaded and no dialog, context menu or media viewer is
 open, and SHALL NOT act while the user types in a text field. A key that the focused control uses — Tab, Enter or
 Space on a button or link, the arrows in a widget that moves within itself, any key of a trigger whose menu is open —
-SHALL stay with that control.
+SHALL stay with that control. A held key SHALL act once.
 
 #### Scenario: Delete confirmation open
 

@@ -237,7 +237,7 @@ describe("ClientArticleSidebar — Private section", () => {
 });
 
 describe("ClientArticleSidebar — AI Chat section", () => {
-  it("lists AI Chat, then Agents, Recent, Skill sets and Knowledge bases", () => {
+  it("lists AI Chat, then Agents, Skill sets and Knowledge bases", () => {
     renderSidebar([
       { id: 2010, title: "AI", rootFolderType: FolderType.AiHub },
     ]);
@@ -249,7 +249,6 @@ describe("ClientArticleSidebar — AI Chat section", () => {
     expect(ids).toEqual([
       "nav-ai-chat",
       "nav-ai-rooms",
-      "nav-ai-chat-recent",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
     ]);
@@ -343,7 +342,7 @@ describe("ClientArticleSidebar — an opened AI room on its short address", () =
 });
 
 describe("ClientArticleSidebar — AI Chat section recent entries", () => {
-  it("lists every pinned project under Agents, and the conversations under Recent with Show more", () => {
+  it("lists the conversations under AI Chat with All chats, then every pinned project under Agents with All agents", () => {
     const pinnedProjects = Array.from({ length: 7 }, (_, index) => ({
       id: String(100 + index),
       name: `Project ${index}`,
@@ -366,6 +365,9 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
 
     expect(ids).toEqual([
       "nav-ai-chat",
+      "nav-ai-nested-chat-t1",
+      "nav-ai-nested-chat-t2",
+      "nav-ai-nested-chats-more",
       "nav-ai-rooms",
       "nav-ai-nested-project-100",
       "nav-ai-nested-project-101",
@@ -374,10 +376,7 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
       "nav-ai-nested-project-104",
       "nav-ai-nested-project-105",
       "nav-ai-nested-project-106",
-      "nav-ai-chat-recent",
-      "nav-ai-nested-chat-t1",
-      "nav-ai-nested-chat-t2",
-      "nav-ai-nested-chats-more",
+      "nav-ai-nested-projects-more",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
     ]);
@@ -406,24 +405,42 @@ describe("ClientArticleSidebar — collapsed", () => {
     expect(collapsed.filter((id) => id.startsWith("ai-"))).toEqual([
       "ai-chat",
       "ai-rooms",
-      "ai-chat-recent",
       "ai-rooms-skills",
       "ai-rooms-knowledge",
     ]);
   });
 });
 
-describe("ClientArticleSidebar — AI Chat section without more entries", () => {
-  it("offers no Show more while everything is listed", () => {
-    renderSidebar(
-      [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
-      {
-        pinnedProjects: [{ id: "100", name: "Only" }],
-        recentThreads: [{ id: "t1", title: "First" }],
-      },
-    );
+describe("ClientArticleSidebar — AI Chat section links to the whole lists", () => {
+  const aiHub = [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }];
+
+  it("offers All chats and All agents while a conversation and an agent are listed", () => {
+    renderSidebar(aiHub, {
+      pinnedProjects: [{ id: "100", name: "Only" }],
+      recentThreads: [{ id: "t1", title: "First" }],
+    });
+
+    expect(screen.getByTestId("nav-ai-nested-chats-more")).toBeInTheDocument();
+    expect(screen.getByTestId("nav-ai-nested-projects-more")).toBeInTheDocument();
+  });
+
+  it("offers neither with nothing listed", () => {
+    renderSidebar(aiHub);
 
     expect(screen.queryByTestId("nav-ai-nested-chats-more")).toBeNull();
+    expect(screen.queryByTestId("nav-ai-nested-projects-more")).toBeNull();
+  });
+
+  it("opens the Agents list from All agents", () => {
+    renderSidebar(aiHub, {
+      pinnedProjects: [{ id: "100", name: "Only" }],
+      recentThreads: [{ id: "t1", title: "First" }],
+    });
+
+    fireEvent.click(screen.getByTestId("nav-ai-nested-projects-more"));
+    expect(navigateMock).toHaveBeenCalledWith(
+      expect.stringMatching(/^\/ai-rooms\/filter\?/),
+    );
   });
 });
 

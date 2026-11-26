@@ -1148,6 +1148,7 @@ export const getFilesSettings = (): TFilesSettings => {
     confirmDelete: true,
     enableThirdParty: true,
     externalShare: true,
+    privateRoomLinks: true,
     externalShareSocialMedia: true,
     defaultShareLinkInternal: false,
     externalShareApplyToDocuments: true,
@@ -1198,6 +1199,27 @@ export const filesSettingsHandler = (
   return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
     return filesSettingsResolver(overrides);
   });
+};
+
+export const PATH_PRIVATE_ROOM_LINKS = "files/settings/external/private";
+
+/**
+ * SettingsController.PrivateRoomLinks ->
+ * FilesSettingsHelper.ChangePrivateRoomLinksSettingsAsync: stores the value
+ * it is sent and answers it, for a DocSpace admin; anybody else is refused
+ * with 403.
+ */
+export const privateRoomLinksHandler = (port: string, isAdmin = true) => {
+  return http.put(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH_PRIVATE_ROOM_LINKS}`,
+    async ({ request }) => {
+      if (!isAdmin) return new Response(null, { status: 403 });
+
+      const body = (await request.json()) as { set: boolean };
+
+      return new Response(JSON.stringify({ response: body.set }));
+    },
+  );
 };
 
 export const PATH_SHOW_QUICK_ACTIONS = "files/showquickactions";

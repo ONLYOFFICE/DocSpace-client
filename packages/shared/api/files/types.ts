@@ -339,6 +339,8 @@ export type TFilesSettings = {
   downloadTarGz: boolean;
   enableThirdParty: boolean;
   externalShare: boolean;
+  /** Whether external links of private rooms and of their items are allowed. */
+  privateRoomLinks?: boolean;
   externalShareSocialMedia: boolean;
   defaultShareLinkInternal: boolean;
   externalShareApplyToDocuments: boolean;
@@ -523,6 +525,10 @@ export type TFileLink = {
     passwordRequired?: boolean | null;
     /** A link of a private item: the public key file keys are wrapped for. */
     linkPublicKey?: string | null;
+    /** A link of a private item: its secret wrapped for the caller, or null when nobody has wrapped it for them. */
+    linkSecretWrap?: { publicKeyId: string; wrap: string } | null;
+    /** A link of a private item: the owner and the room managers its secret is not wrapped for. */
+    managersWithoutLinkSecretWrap?: string[];
   };
   subjectType: number;
 };

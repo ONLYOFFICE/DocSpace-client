@@ -60,6 +60,13 @@ const ROOM_ID = 9780;
 const FOLDER_ID = 9781;
 const FILE_ID = 9782;
 const USER_ID = "11111111-1111-4111-8111-111111111111";
+const CALLER_ID = "22222222-2222-4222-8222-222222222222";
+const MANAGER_ID = "33333333-3333-4333-8333-333333333333";
+const wrapFor = (userId: string) => ({
+  userId,
+  publicKeyId: `key-of-${userId}`,
+  wrap: `wrap-for-${userId}`,
+});
 const NEXT_WEEK = "2026-12-01T00:00:00.000Z";
 
 const handle: { current: PrivateLinksHandlerHandle | null } = {
@@ -72,6 +79,8 @@ const server = setupServer(
     folderIds: [FOLDER_ID],
     fileIds: [FILE_ID],
     takenIds: [USER_ID],
+    callerId: CALLER_ID,
+    managerIds: [MANAGER_ID, CALLER_ID],
     handle,
   }),
 );
@@ -241,7 +250,12 @@ describe("privateLinks mock - A link of a private item without a password is lim
     const created = await put(FOLDER, await material());
     const linkId = created.body.response.sharedTo.id;
 
-    const { status } = await put(FOLDER, { linkId, passwordRequired: false });
+    const { status } = await put(FOLDER, {
+      linkId,
+      passwordRequired: false,
+      ...(await material()),
+      linkPublicKey: created.body.response.sharedTo.linkPublicKey,
+    });
 
     expect(status).toBe(403);
     expect(handle.current!.getLinks()[0].passwordRequired).toBe(true);
@@ -289,6 +303,127 @@ describe("privateLinks mock - Password of a link of a private item is replaced w
 
     expect(status).toBe(400);
     expect(handle.current!.getLinks()[0]).toEqual(before);
+  });
+});
+
+describe("privateLinks mock - Password of a link: the flag and a revocation (SetPrivateLinkAsync)", () => {
+  it("Password flag changed without new key material", async () => {
+    const created = await put(FOLDER, await material());
+    const linkId = created.body.response.sharedTo.id;
+
+    const { status } = await put(FOLDER, { linkId, passwordRequired: false });
+
+    expect(status).toBe(400);
+    expect(handle.current!.getLinks()[0].passwordRequired).toBe(true);
+  });
+
+  it("Change meets a revocation", async () => {
+    const created = await put(FOLDER, await material());
+    const linkId = created.body.response.sharedTo.id;
+    handle.current!.revokeDuringNextChange();
+
+    const { status } = await put(FOLDER, { linkId, title: "Renamed" });
+
+    expect(status).toBe(404);
+    expect(handle.current!.getLinks()).toEqual([]);
+  });
+});
+
+describe("privateLinks mock - The secret of a link is stored wrapped for those who manage links", () => {
+  it("Wrap read by its manager", async () => {
+    await put(FOLDER, {
+      ...(await material()),
+      linkSecretWraps: [wrapFor(CALLER_ID)],
+    });
+
+    const [link] = await list(FOLDER);
+
+    expect(link.sharedTo.linkSecretWrap).toEqual({
+      publicKeyId: `key-of-${CALLER_ID}`,
+      wrap: `wrap-for-${CALLER_ID}`,
+    });
+  });
+
+  it("Manager without a wrap", async () => {
+    await put(FOLDER, await material());
+    const [bare] = await list(FOLDER);
+    expect(bare.sharedTo.linkSecretWrap).toBeNull();
+    expect(bare.sharedTo.managersWithoutLinkSecretWrap).toEqual([
+      CALLER_ID,
+      MANAGER_ID,
+    ]);
+  });
+
+  it("Wrap added to an existing link", async () => {
+    const created = await put(FOLDER, {
+      ...(await material()),
+      linkSecretWraps: [wrapFor(CALLER_ID)],
+    });
+    const linkId = created.body.response.sharedTo.id;
+    const before = handle.current!.getLinks()[0];
+
+    const { status, body } = await put(FOLDER, {
+      linkId,
+      linkSecretWraps: [wrapFor(MANAGER_ID)],
+    });
+
+    expect(status).toBe(200);
+    expect(body.response.sharedTo.managersWithoutLinkSecretWrap).toEqual([]);
+    expect(handle.current!.getLinks()[0].linkProofHash).toBe(
+      before.linkProofHash,
+    );
+  });
+
+  it("Wrap for a user who does not manage links", async () => {
+    const outsider = await put(FOLDER, {
+      ...(await material()),
+      linkSecretWraps: [wrapFor(USER_ID)],
+    });
+    const twice = await put(FOLDER, {
+      ...(await material()),
+      linkSecretWraps: [wrapFor(CALLER_ID), wrapFor(CALLER_ID)],
+    });
+
+    expect(outsider.status).toBe(400);
+    expect(twice.status).toBe(400);
+    expect(handle.current!.getLinks()).toEqual([]);
+  });
+
+  it("Manager loses the role", async () => {
+    await put(FOLDER, {
+      ...(await material()),
+      linkSecretWraps: [wrapFor(CALLER_ID), wrapFor(MANAGER_ID)],
+    });
+
+    handle.current!.setManagers([CALLER_ID]);
+
+    const [link] = handle.current!.getLinks();
+    expect(Object.keys(link.secretWraps)).toEqual([CALLER_ID]);
+  });
+});
+
+describe("privateLinks mock - links closed by a gate (ExternalShare.IsPrivateLinkAllowedIn, the portal setting, the app)", () => {
+  it("Link requested in the archive", async () => {
+    handle.current!.setClosed(true);
+
+    const { status } = await put(FOLDER, await material());
+
+    expect(status).toBe(403);
+    expect(handle.current!.getLinks()).toEqual([]);
+  });
+
+  it("Portal forbids the links", async () => {
+    const created = await put(FOLDER, await material());
+    const linkId = created.body.response.sharedTo.id;
+    handle.current!.setClosed(true);
+
+    const changed = await put(FOLDER, { linkId, title: "Renamed" });
+
+    expect(changed.status).toBe(403);
+    expect(handle.current!.countOf(`folder:${FOLDER_ID}`)).toBe(1);
+
+    handle.current!.setClosed(false);
+    expect((await put(FOLDER, { linkId, title: "Renamed" })).status).toBe(200);
   });
 });
 

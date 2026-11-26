@@ -92,6 +92,15 @@ export type TPrivateLinkRequest = {
   linkPublicKey?: string;
   linkPrivateKeyEnc?: string;
   linkProofHash?: string;
+  /** The secret of the link wrapped for the owner and the room managers, one wrap per user. */
+  linkSecretWraps?: TLinkSecretWrapRequest[];
+};
+
+export type TLinkSecretWrapRequest = {
+  userId: string;
+  /** The id of the user's key the wrap was made for. */
+  publicKeyId: string;
+  wrap: string;
 };
 
 /**

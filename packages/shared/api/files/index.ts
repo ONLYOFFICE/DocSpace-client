@@ -1404,6 +1404,19 @@ export async function setAccessControlSettings(
   return res;
 }
 
+/**
+ * Allows or forbids external links of private rooms and of their items
+ * (`SettingsController.PrivateRoomLinks`), for a DocSpace admin; answers the
+ * stored value.
+ */
+export async function setPrivateRoomLinks(set: boolean) {
+  return (await request({
+    method: "put",
+    url: "/files/settings/external/private",
+    data: { set },
+  })) as boolean;
+}
+
 export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
   const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {

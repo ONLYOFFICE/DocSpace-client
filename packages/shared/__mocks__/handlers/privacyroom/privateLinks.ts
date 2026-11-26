@@ -74,7 +74,10 @@ type LinkBody = {
   linkPublicKey?: string;
   linkPrivateKeyEnc?: string;
   linkProofHash?: string;
+  linkSecretWraps?: SecretWrap[];
 };
+
+type SecretWrap = { userId?: string; publicKeyId?: string; wrap?: string };
 
 export type PrivateLinkRecord = {
   id: string;
@@ -87,12 +90,28 @@ export type PrivateLinkRecord = {
   linkPublicKey: string;
   linkPrivateKeyEnc: string;
   linkProofHash: string;
+  /** The wraps of the secret, by the user each was made for. */
+  secretWraps: Record<string, { publicKeyId: string; wrap: string }>;
 };
 
 export type PrivateLinksHandlerHandle = {
   getLinks: () => PrivateLinkRecord[];
   /** Whether the caller manages the links of the room: its owner or a room manager. */
   setCanManage: (canManage: boolean) => void;
+  /**
+   * The owner and the room managers. A user who is no longer among them
+   * loses the wraps of the secrets made for them.
+   */
+  setManagers: (userIds: string[]) => void;
+  /**
+   * Closes the links as a gate does: the portal setting or the app off, the
+   * room archived, or a Virtual Data Room that restricts downloading.
+   */
+  setClosed: (closed: boolean) => void;
+  /** The next change of an existing link meets a revocation of it. */
+  revokeDuringNextChange: () => void;
+  /** The working links set on an entry itself, as `externalLinksCount` counts them. */
+  countOf: (entry: string) => number;
   reset: () => void;
 };
 
@@ -104,6 +123,9 @@ export type PrivateLinksHandlerOptions = {
   fileIds?: number[];
   /** Ids a user, a group or another share holds, which a new link cannot take. */
   takenIds?: string[];
+  /** The caller, and the owner and the room managers of the room (the caller alone unless said). */
+  callerId?: string;
+  managerIds?: string[];
   handle?: { current: PrivateLinksHandlerHandle | null };
 };
 
@@ -154,13 +176,30 @@ const hasKeyLength = (value?: string) => {
  * ErrorMessage_MaxLinksCount (SetAceLinkAsync turns the warning of
  * SetAceObjectAsync into an InvalidOperationException), and a link in a
  * Virtual Data Room is for portal users whatever the request asks.
+ *
+ * Since `92c9b60f23`: while a gate closes the links (the portal setting or
+ * the app off, an archived room, a Virtual Data Room that restricts
+ * downloading) a link is not set or changed, 403. `linkSecretWraps` carries
+ * the secret wrapped for the owner and the room managers, one wrap per
+ * user; a wrap without a user, a key id or a value, longer than 4096
+ * characters, a second one for a user, or one for somebody else is 400
+ * (LinkKeyMaterial.ValidateSecretWraps, FileSharingHelper.GetLinkManagersAsync),
+ * and the wraps may come alone with a change of an existing link. A change
+ * of `passwordRequired` without key material is 400, and a change that
+ * meets a revocation of the link is 404 (SetPrivateLinkAsync). A link
+ * answers `linkSecretWrap`, the wrap made for the caller or null, and
+ * `managersWithoutLinkSecretWrap`, in ascending order.
  */
 export const privateLinksHandlers = (
   port: string,
   opts: PrivateLinksHandlerOptions,
 ) => {
   const links: PrivateLinkRecord[] = [];
+  const callerId = opts.callerId ?? "00000000-0000-4000-8000-00000000c411";
+  let managers = opts.managerIds ?? [callerId];
   let canManage = true;
+  let closed = false;
+  let raceRevocation = false;
   let nextCode = 1;
 
   const handle: PrivateLinksHandlerHandle = {
@@ -168,9 +207,27 @@ export const privateLinksHandlers = (
     setCanManage: (value) => {
       canManage = value;
     },
+    setManagers: (userIds) => {
+      managers = userIds.slice();
+      links.forEach((link) => {
+        Object.keys(link.secretWraps).forEach((userId) => {
+          if (managers.indexOf(userId) === -1) delete link.secretWraps[userId];
+        });
+      });
+    },
+    setClosed: (value) => {
+      closed = value;
+    },
+    revokeDuringNextChange: () => {
+      raceRevocation = true;
+    },
+    countOf: (entry) => links.filter((link) => link.entry === entry).length,
     reset: () => {
       links.length = 0;
+      managers = opts.managerIds ?? [callerId];
       canManage = true;
+      closed = false;
+      raceRevocation = false;
     },
   };
   if (opts.handle) opts.handle.current = handle;
@@ -188,6 +245,10 @@ export const privateLinksHandlers = (
       linkType: LINK_TYPE_EXTERNAL,
       passwordRequired: link.passwordRequired,
       linkPublicKey: link.linkPublicKey,
+      linkSecretWrap: link.secretWraps[callerId] ?? null,
+      managersWithoutLinkSecretWrap: managers
+        .filter((userId) => !link.secretWraps[userId])
+        .sort(),
       denyDownload: false,
       isExpired: false,
       primary: link.primary,
@@ -228,6 +289,7 @@ export const privateLinksHandlers = (
     if (body.linkType !== undefined && body.linkType !== LINK_TYPE_EXTERNAL) {
       return denied();
     }
+    if (closed) return denied();
 
     const isTaken =
       !!body.linkId &&
@@ -238,6 +300,23 @@ export const privateLinksHandlers = (
     const hasMaterial =
       !!body.linkPublicKey || !!body.linkPrivateKeyEnc || !!body.linkProofHash;
     if (!hasMaterial && !existing) return denied();
+
+    const wraps = body.linkSecretWraps ?? [];
+    const wrapped: string[] = [];
+    for (let i = 0; i < wraps.length; i += 1) {
+      const { userId, publicKeyId, wrap } = wraps[i];
+      if (
+        !userId ||
+        !publicKeyId ||
+        !wrap ||
+        wrap.length > MAX_PRIVATE_KEY_ENC_LENGTH ||
+        wrapped.indexOf(userId) !== -1
+      ) {
+        return badField("linkSecretWraps");
+      }
+      wrapped.push(userId);
+    }
+
     if (hasMaterial) {
       if (!hasKeyLength(body.linkPublicKey)) return badField("linkPublicKey");
       if (
@@ -252,10 +331,22 @@ export const privateLinksHandlers = (
       }
     }
 
+    if (wrapped.some((userId) => managers.indexOf(userId) === -1)) {
+      return badField("linkSecretWraps");
+    }
+
     if ((body.access ?? SHARE_READ) !== SHARE_READ || body.denyDownload) {
       return denied();
     }
     if (body.password) return badField("password");
+    if (
+      existing &&
+      body.passwordRequired !== undefined &&
+      body.passwordRequired !== existing.passwordRequired &&
+      !hasMaterial
+    ) {
+      return badField("passwordRequired");
+    }
 
     const passwordRequired =
       body.passwordRequired ?? existing?.passwordRequired ?? true;
@@ -276,6 +367,17 @@ export const privateLinksHandlers = (
       }
     }
 
+    if (existing && raceRevocation) {
+      raceRevocation = false;
+      links.splice(links.indexOf(existing), 1);
+      return refusal(404, "The link was revoked while it was being changed");
+    }
+
+    const secretWraps = { ...(existing?.secretWraps ?? {}) };
+    wraps.forEach(({ userId, publicKeyId, wrap }) => {
+      secretWraps[userId!] = { publicKeyId: publicKeyId!, wrap: wrap! };
+    });
+
     const link: PrivateLinkRecord = {
       id: body.linkId || `00000000-0000-4000-8000-${String(nextCode++).padStart(12, "0")}`,
       entry,
@@ -290,6 +392,7 @@ export const privateLinksHandlers = (
       linkPublicKey: body.linkPublicKey ?? existing!.linkPublicKey,
       linkPrivateKeyEnc: body.linkPrivateKeyEnc ?? existing!.linkPrivateKeyEnc,
       linkProofHash: body.linkProofHash ?? existing!.linkProofHash,
+      secretWraps,
     };
     if (existing) links[links.indexOf(existing)] = link;
     else links.push(link);

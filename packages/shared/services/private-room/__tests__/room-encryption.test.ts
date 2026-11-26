@@ -785,6 +785,23 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     vi.unstubAllGlobals();
   });
 
+  it("Link entry among the keys of a room", async () => {
+    getRoomMissingFileKeysMock.mockResolvedValue([
+      { userId: "link-1", fileIds: [FILE_ID], isLink: true },
+    ]);
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+    });
+
+    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
+  });
+
   it("Backfill wraps the missing files only", async () => {
     const OTHER_FILE_ID = FILE_ID + 1;
     getRoomMissingFileKeysMock.mockResolvedValue([

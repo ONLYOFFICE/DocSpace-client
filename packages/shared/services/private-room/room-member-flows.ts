@@ -76,10 +76,12 @@ export async function loadPendingAccess(roomId: number): Promise<void> {
   }
   pendingAccessStore.applyServerList(
     roomId,
-    listed.map((entry) => ({
-      userId: String(entry.userId),
-      fileIds: entry.fileIds ?? [],
-    })),
+    listed
+      .filter((entry) => !entry.isLink)
+      .map((entry) => ({
+        userId: String(entry.userId),
+        fileIds: entry.fileIds ?? [],
+      })),
     sinceLocalWrites,
   );
 }

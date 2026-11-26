@@ -974,6 +974,18 @@ describe("loadPendingAccess", () => {
     expect(pendingAccessStore.get(ROOM_ID, "u-ann")).toBeUndefined();
   });
 
+  it("Link entry among the keys of a room", async () => {
+    vi.mocked(getRoomMissingFileKeys).mockResolvedValue([
+      { userId: "u-bob", fileIds: [1] },
+      { userId: "u-ann", fileIds: [1, 2], isLink: true },
+    ]);
+
+    await loadPendingAccess(ROOM_ID);
+
+    expect(pendingAccessStore.get(ROOM_ID, "u-bob")).toBeDefined();
+    expect(pendingAccessStore.get(ROOM_ID, "u-ann")).toBeUndefined();
+  });
+
   it("Member who misses nothing any more", async () => {
     pendingAccessStore.record({
       roomId: ROOM_ID,

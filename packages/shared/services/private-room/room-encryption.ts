@@ -384,7 +384,8 @@ async function readMissingFileKeys(
   try {
     const entries = await getRoomMissingFileKeys(roomId);
     const byFile = new Map<number, Set<string>>();
-    for (const { userId, fileIds } of entries) {
+    for (const { userId, fileIds, isLink } of entries) {
+      if (isLink) continue;
       for (const fileId of fileIds) {
         const users = byFile.get(fileId) ?? new Set<string>();
         users.add(String(userId));

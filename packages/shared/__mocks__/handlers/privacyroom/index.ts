@@ -294,6 +294,11 @@ export type PrivacyroomAccessHandlerHandle = {
    * portal is.
    */
   setUserKeys: (userId: string, keys: TEncryptionKeyPair[]) => void;
+  /** The working external links of a room and of the items in it. */
+  setRoomLinks: (
+    roomId: number | string,
+    links: Array<{ id: string; publicKey: string }>,
+  ) => void;
   /** Answers as another signed-in user until `reset`. */
   setCurrentUserId: (userId: string) => void;
   getRequests: () => RequestLog[];
@@ -318,6 +323,7 @@ export const privacyroomAccessHandlers = (
   const archivedRooms = new Set<string>();
   const accessManagers = new Map<string, Set<string>>();
   const userKeys = new Map<string, TEncryptionKeyPair[]>();
+  const roomLinks = new Map<string, Array<{ id: string; publicKey: string }>>();
   const requests: RequestLog[] = [];
   let callerId = opts.userId ?? DEFAULT_USER_ID;
 
@@ -338,6 +344,9 @@ export const privacyroomAccessHandlers = (
     setUserKeys: (userId, keys) => {
       userKeys.set(String(userId), [...keys]);
     },
+    setRoomLinks: (id, links) => {
+      roomLinks.set(String(id), [...links]);
+    },
     setCurrentUserId: (userId) => {
       callerId = userId;
     },
@@ -348,6 +357,7 @@ export const privacyroomAccessHandlers = (
       archivedRooms.clear();
       accessManagers.clear();
       userKeys.clear();
+      roomLinks.clear();
       requests.length = 0;
       callerId = opts.userId ?? DEFAULT_USER_ID;
     },
@@ -363,7 +373,10 @@ export const privacyroomAccessHandlers = (
      * of each directly shared member. 404 for an unknown room, 400 for a room
      * that is not private, 403 when the caller holds no entry; then
      * SanitizeAccessKeys drops entries without a public key and keeps the
-     * private half only on the caller's entries.
+     * private half only on the caller's entries. After the members comes one
+     * entry per working link of the room or of an item in it
+     * (EncryptionKeyMapper.ToLinkKey): `isLink`, the id of the link as `id`
+     * and `userId`, its public key and no private half.
      */
     http.get(`${base}/:roomId(\\d+)/access`, ({ params, request }) => {
       const id = String(params.roomId);
@@ -383,7 +396,13 @@ export const privacyroomAccessHandlers = (
           const { privateKeyEnc: _privateKeyEnc, ...rest } = k;
           return rest;
         });
-      return okResponse(sanitized);
+      const linkKeys = (roomLinks.get(id) ?? []).map((link) => ({
+        id: link.id,
+        userId: link.id,
+        publicKey: link.publicKey,
+        isLink: true,
+      }));
+      return okResponse([...sanitized, ...linkKeys]);
     }),
 
     /**

@@ -48,6 +48,28 @@ describe("selectMemberKeys", () => {
   });
 });
 
+describe("Link entry among the keys of a room", () => {
+  const withLink = [
+    ...listed,
+    { id: "link-1", userId: "link-1", publicKey: "pk-link", isLink: true },
+  ];
+
+  it("is not a member whose key is selected", () => {
+    expect(Array.from(selectMemberKeys(withLink).keys())).toEqual([
+      "alice",
+      "bob",
+    ]);
+  });
+
+  it("is not among the keys a wrap may come from", async () => {
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue(withLink as never);
+
+    const { list } = await loadRoomMemberKeys(7);
+
+    expect(list.map((k) => k.userId)).not.toContain("link-1");
+  });
+});
+
 describe("loadRoomMemberKeys", () => {
   it("returns one selected key per member and keeps every key in the list", async () => {
     vi.mocked(getRoomEncryptionKeys).mockResolvedValue(listed as never);

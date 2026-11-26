@@ -275,6 +275,18 @@ describe("privacyroom mock - GET /privacyroom/{roomId}/access (GetUserKeysForRoo
     expect(body.response![1]).not.toHaveProperty("privateKeyEnc");
   });
 
+  it("Link entry among the keys of a room", async () => {
+    accessHandle.current!.setRoomKeys(7, [member(CALLER, "own")]);
+    accessHandle.current!.setRoomLinks(7, [{ id: "link-1", publicKey: "pk-link" }]);
+    const body = (await (await fetch(ACCESS_URL(7))).json()) as Envelope;
+    expect(body.response![1]).toEqual({
+      id: "link-1",
+      userId: "link-1",
+      publicKey: "pk-link",
+      isLink: true,
+    });
+  });
+
   it("drops entries without a public key", async () => {
     accessHandle.current!.setRoomKeys(7, [member(CALLER, "own"), member("bob", "bob-1", "")]);
     const body = (await (await fetch(ACCESS_URL(7))).json()) as Envelope;

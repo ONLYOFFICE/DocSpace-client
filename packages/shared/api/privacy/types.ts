@@ -54,9 +54,17 @@ export type TEncryptionKeyPair = {
  * A key in the key set of a room or a file (`EncryptionKeyDto`): the private
  * half comes back only on the caller's own entries and is absent on another
  * member's, since the server does not write a null property.
+ *
+ * An entry with `isLink` is an external link of the room or of an item in it,
+ * a recipient of file keys and not a member: `id` and `userId` are the id of
+ * the link. To a visitor of a link the entry of that link carries
+ * `fileKeyEnc`, the wrap of the file key made for it, or null when no member
+ * has made one.
  */
 export type TMemberEncryptionKey = Omit<TEncryptionKeyPair, "privateKeyEnc"> & {
   privateKeyEnc?: string;
+  isLink?: boolean;
+  fileKeyEnc?: string | null;
 };
 
 /** A key of a prospective member: the answer never carries the private half. */
@@ -86,8 +94,13 @@ export type TPrivateLinkRequest = {
   linkProofHash?: string;
 };
 
-/** `RoomMissingFileKeysDto`: a user and the encrypted files of a room that hold no key for them. */
+/**
+ * `RoomMissingFileKeysDto`: a user and the encrypted files of a room that
+ * hold no key for them. With `isLink`, `userId` is the id of an external link
+ * and the files are those the link covers.
+ */
 export type TRoomMissingFileKeys = {
   userId: string;
   fileIds: number[];
+  isLink?: boolean;
 };

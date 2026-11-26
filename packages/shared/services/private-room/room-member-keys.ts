@@ -47,7 +47,7 @@ const toMemberKeys = (
   const list: RoomMemberPublicKey[] = [];
   if (!Array.isArray(keys)) return list;
   for (const k of keys) {
-    if (!k?.userId || !k?.publicKey) continue;
+    if (!k?.userId || !k?.publicKey || k.isLink) continue;
     list.push({
       userId: String(k.userId),
       publicKey: k.publicKey,
@@ -65,7 +65,8 @@ const toMemberKeys = (
 export type TSelectableKey = Pick<
   TEncryptionKeyPair,
   "id" | "userId" | "publicKey" | "date"
->;
+> &
+  Pick<TMemberEncryptionKey, "isLink">;
 
 export function selectMemberKeys(
   keys: readonly TSelectableKey[] | null | undefined,
@@ -73,7 +74,7 @@ export function selectMemberKeys(
   const byUser = new Map<string, TSelectableKey[]>();
   if (Array.isArray(keys)) {
     for (const k of keys) {
-      if (!k?.userId || !k?.publicKey) continue;
+      if (!k?.userId || !k?.publicKey || k.isLink) continue;
       const userId = String(k.userId);
       const bucket = byUser.get(userId);
       if (bucket) bucket.push(k);

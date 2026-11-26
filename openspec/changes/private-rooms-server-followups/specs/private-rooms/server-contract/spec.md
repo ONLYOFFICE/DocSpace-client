@@ -66,6 +66,17 @@ The server SHALL refuse to turn a user into a guest, before anything is changed,
 - **WHEN** the owner of a private room is turned into a guest and the user named to take the rooms holds no encryption key, or no key of an encrypted file of the room
 - **THEN** the server answers 403 with `ASC.Files.Core.Helpers.PrivateRoomOwnershipException` in `error.type`, and the user's type, rooms and keys are as they were
 
+### Requirement: The member update makes no owner of a private room a guest
+The server SHALL refuse, before anything is saved, a member update that turns the owner of a private room into a guest, since that request names nobody to take the rooms. It SHALL make any other user turned into a guest by a member update leave the private rooms and lose the keys as the type change does, and SHALL finish an interrupted exit when the request is repeated for that guest.
+
+#### Scenario: Owner of a private room
+- **WHEN** a member update asks to make the owner of a private room a guest
+- **THEN** the server answers 403 with `ASC.Files.Core.Helpers.PrivateRoomOwnershipException` in `error.type`, and the user's type, rooms and keys are as they were
+
+#### Scenario: Member of a private room
+- **WHEN** a member update makes a member of a private room a guest
+- **THEN** the guest is not among the members of the room, holds no file key of it and no key pair
+
 ### Requirement: A share change of a private room is applied whole or not at all
 The server SHALL check, before it stores any share of a request that changes the access to a private room, that every user who would get access for the first time holds an encryption key, and SHALL refuse the whole request when one does not. It SHALL NOT give access to some users of a refused request.
 

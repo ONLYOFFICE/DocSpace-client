@@ -43,7 +43,8 @@
 
 import { argon2id } from "hash-wasm";
 
-import { InvalidFormatError } from "./errors";
+import { AuthenticationError, InvalidFormatError } from "./errors";
+import { inspectWrap, unwrapKeyForContext, wrapKeyForContext } from "./hpke";
 import {
   DEFAULT_ARGON2_PARAMS,
   generateIdentityKeyPair,
@@ -239,3 +240,100 @@ export async function openLinkKey(
     sealPassphrase,
   );
 }
+
+const INFO_SECRET_WRAP = "docspace-link-secret-wrap-v1";
+const INFO_KEY_WRAP = "docspace-link-key-wrap-v1";
+
+/** What a user who manages links holds of one: its secret and its key pair. */
+export type LinkSecret = { secret: string; keyPair: IdentityKeyPair };
+
+/**
+ * Wraps the secret of a link, and with it the private key of the link, for a
+ * user who manages links, as a file key is wrapped for a member: the wrap is
+ * bound to its maker, to the user and to the link. The two wraps travel as
+ * one value, joined by a dot. The private key is what lets a manager seal the
+ * link again under a new password without the old one.
+ */
+export async function wrapLinkSecret(params: {
+  link: LinkSecret;
+  linkId: string;
+  sender: IdentityKeyPair;
+  senderUserId: string;
+  /** Base64 of the 32 bytes of the user's public key. */
+  recipientPublicKey: string;
+  recipientUserId: string;
+}): Promise<string> {
+  const { link, linkId, sender, senderUserId, recipientUserId } = params;
+  const secretBytes = decodeSecret(link.secret);
+  try {
+    const wrap = (value: Uint8Array, label: string) =>
+      wrapKeyForContext({
+        dek: value,
+        senderPrivateKey: sender.privateKey,
+        senderPublicKey: sender.publicKey,
+        senderUserId,
+        recipientPublicKey: base64ToUint8Array(params.recipientPublicKey),
+        recipientUserId,
+        context: { label, id: linkId },
+      });
+    return `${await wrap(secretBytes, INFO_SECRET_WRAP)}.${await wrap(
+      link.keyPair.privateKey,
+      INFO_KEY_WRAP,
+    )}`;
+  } finally {
+    zeroBuffer(secretBytes);
+  }
+}
+
+/**
+ * Opens a wrap of a link's secret with the key of the user it was made for.
+ * The wrap names its maker, whose public key is looked up among `senders`.
+ * A wrap made for another user or another link ends in AuthenticationError.
+ */
+export async function unwrapLinkSecret(params: {
+  wrap: string;
+  linkId: string;
+  /** Base64 of the public key of the link, as the server answers it. */
+  linkPublicKey: string;
+  recipient: IdentityKeyPair;
+  recipientUserId: string;
+  senders: ReadonlyArray<{ userId: string; publicKey: string }>;
+}): Promise<LinkSecret> {
+  const { linkId, recipient, recipientUserId } = params;
+  const parts = params.wrap.split(".");
+  if (parts.length !== 2) {
+    throw new InvalidFormatError("link secret wrap: two wraps joined by a dot");
+  }
+  const maker = inspectWrap(parts[0]).senderUserId.toLowerCase();
+  const candidates = params.senders.filter(
+    (sender) => sender.userId.toLowerCase() === maker,
+  );
+
+  for (const candidate of candidates) {
+    const open = (wrapped: string, label: string) =>
+      unwrapKeyForContext({
+        wrapped,
+        recipientPrivateKey: recipient.privateKey,
+        recipientUserId,
+        expectedSenderPublicKey: base64ToUint8Array(candidate.publicKey),
+        expectedSenderUserId: candidate.userId,
+        context: { label, id: linkId },
+      });
+    try {
+      const secretBytes = await open(parts[0], INFO_SECRET_WRAP);
+      const secret = base64UrlEncode(secretBytes);
+      zeroBuffer(secretBytes);
+      return {
+        secret,
+        keyPair: {
+          publicKey: base64ToUint8Array(params.linkPublicKey),
+          privateKey: await open(parts[1], INFO_KEY_WRAP),
+        },
+      };
+    } catch (error) {
+      if (!(error instanceof AuthenticationError)) throw error;
+    }
+  }
+  throw new AuthenticationError("link secret wrap: no key of its maker opens it");
+}
+

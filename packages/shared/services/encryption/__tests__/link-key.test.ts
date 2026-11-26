@@ -50,6 +50,8 @@ import {
   LINK_SECRET_LENGTH,
   openLinkKey,
   sealLinkKey,
+  unwrapLinkSecret,
+  wrapLinkSecret,
 } from "../link-key";
 import {
   arrayBufferToBase64,
@@ -291,3 +293,74 @@ describe("An external link has a key pair of its own", () => {
     }
   });
 });
+
+describe("The secret of a link is wrapped for those who manage links", () => {
+  const CREATOR_ID = "11111111-1111-4111-8111-111111111111";
+  const MANAGER_ID = "22222222-2222-4222-8222-222222222222";
+  const LINK_ID = "33333333-3333-4333-8333-333333333333";
+  const OTHER_LINK_ID = "44444444-4444-4444-8444-444444444444";
+
+  const setup = async () => {
+    const secret = generateLinkSecret();
+    const { keyPair, material } = await createLinkKey(secret, "one");
+    const creator = await generateIdentityKeyPair();
+    const manager = await generateIdentityKeyPair();
+    const wrap = await wrapLinkSecret({
+      link: { secret, keyPair },
+      linkId: LINK_ID,
+      sender: creator,
+      senderUserId: CREATOR_ID,
+      recipientPublicKey: arrayBufferToBase64(manager.publicKey),
+      recipientUserId: MANAGER_ID,
+    });
+    const open = (over: object = {}) =>
+      unwrapLinkSecret({
+        wrap,
+        linkId: LINK_ID,
+        linkPublicKey: material.linkPublicKey,
+        recipient: manager,
+        recipientUserId: MANAGER_ID,
+        senders: [
+          { userId: CREATOR_ID, publicKey: arrayBufferToBase64(creator.publicKey) },
+        ],
+        ...over,
+      });
+    return { secret, keyPair, material, creator, manager, wrap, open };
+  };
+
+  it("Address copied by another manager", async () => {
+    const { secret, open } = await setup();
+
+    expect((await open()).secret).toBe(secret);
+  });
+
+  it("lets a manager seal the link again under a new password", async () => {
+    const { secret, material, open } = await setup();
+
+    const held = await open();
+    const again = await sealLinkKey(held.keyPair, held.secret, "two");
+
+    expect(again.linkPublicKey).toBe(material.linkPublicKey);
+    await expect(openLinkKey(again, secret, "two")).resolves.toBeDefined();
+  });
+
+  it("Member who does not manage links", async () => {
+    const { open } = await setup();
+    const member = await generateIdentityKeyPair();
+
+    await expect(open({ recipient: member })).rejects.toThrow();
+  });
+
+  it("does not open as the wrap of another link", async () => {
+    const { open } = await setup();
+
+    await expect(open({ linkId: OTHER_LINK_ID })).rejects.toThrow();
+  });
+
+  it("is shorter than the server takes", async () => {
+    const { wrap } = await setup();
+
+    expect(wrap.length).toBeLessThan(4096);
+  });
+});
+

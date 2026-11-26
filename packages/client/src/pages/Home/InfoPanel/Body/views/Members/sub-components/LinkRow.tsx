@@ -57,7 +57,8 @@ import { RevokePrivateLinkDialog } from "@docspace/shared/components/share/sub-c
 import {
   PRIVATE_LINK_RIGHTS,
   editPrivateItemLink,
-  getPrivateLinkAddress,
+  canReadPrivateLinkAddress,
+  readPrivateLinkAddress,
   revokePrivateItemLink,
 } from "@docspace/shared/services/private-room/private-links";
 
@@ -92,9 +93,7 @@ const LinkRow = (props: LinkRowProps) => {
   // with its password, and is set without its key material.
   // Spec: private-rooms/room-membership, "External link of a private item keeps the link model of the portal"
   const isPrivateLink = item.private === true;
-  const privateAddress = isPrivateLink
-    ? getPrivateLinkAddress(link.sharedTo.id)
-    : undefined;
+  const canCopyPrivateLink = isPrivateLink && canReadPrivateLinkAddress(link);
   const [revokeVisible, setRevokeVisible] = useState(false);
 
   const availableShareRights = isPrivateLink
@@ -125,7 +124,8 @@ const LinkRow = (props: LinkRowProps) => {
     onCloseContextMenu();
   };
 
-  const onCopyPrivateLink = () => {
+  const onCopyPrivateLink = async () => {
+    const privateAddress = await readPrivateLinkAddress(link, selfId ?? "");
     if (!privateAddress) return;
     copyShareLink(
       item,
@@ -200,7 +200,7 @@ const LinkRow = (props: LinkRowProps) => {
           label: t("Common:CopySharedLink"),
           icon: CopyToReactSvgUrl,
           onClick: onCopyPrivateLink,
-          disabled: isDisabled || !privateAddress,
+          disabled: isDisabled || !canCopyPrivateLink,
         },
         {
           key: "delete-link-separator",
@@ -413,7 +413,7 @@ const LinkRow = (props: LinkRowProps) => {
         />
       ) : null}
       <LinkRowComponent
-        canCopyLink={isPrivateLink ? () => !!privateAddress : undefined}
+        canCopyLink={isPrivateLink ? () => canCopyPrivateLink : undefined}
         isRoomsLink
         links={[link]}
         getData={getData}

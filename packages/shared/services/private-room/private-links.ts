@@ -34,14 +34,22 @@
  */
 
 
-import { setPrivateItemLink } from "../../api/privacy";
+import { getEncryptionKeys, setPrivateItemLink } from "../../api/privacy";
 import type { TPrivateLinkTarget } from "../../api/privacy/types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 import type { TRoom } from "../../api/rooms/types";
 import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
 import type { TAvailableShareRights } from "../../types";
 import { isFile, isRoom } from "../../utils/typeGuards";
-import { createLinkKey, generateLinkSecret } from "../encryption/link-key";
+import {
+  createLinkKey,
+  generateLinkSecret,
+  type LinkSecret,
+  unwrapLinkSecret,
+  wrapLinkSecret,
+} from "../encryption/link-key";
+import type { IdentityKeyPair } from "../encryption/types";
+import { arrayBufferToBase64 } from "../encryption/utils";
 import { requireUnlock } from "../encryption/secret-storage";
 import { wrapFilesForLink } from "./room-encryption";
 
@@ -72,15 +80,107 @@ export const PRIVATE_LINK_RIGHTS = {
   PrimaryExternalLink: ["Read"],
 } as TAvailableShareRights;
 
-// The addresses of the links made on this page, by link id. The secret after
-// `#` exists nowhere else.
-// shortcut: the address of a link can be copied only by who made it, until
-// the page is left; the owner and the managers get it back once the server
-// stores the wraps of a link's secret (private-rooms-external-links 3.4).
+// The addresses read on this page, by link id: those of the links made here
+// and those whose wrapped secret was opened.
 const addresses = new Map<string, string>();
 
 export const getPrivateLinkAddress = (linkId: string | number) =>
   addresses.get(String(linkId));
+
+/** The caller's stored key that the unlocked identity belongs to. */
+const findOwnKey = async (identity: IdentityKeyPair) => {
+  const publicKey = identity.publicKey
+    ? arrayBufferToBase64(identity.publicKey)
+    : "";
+  if (!publicKey) return undefined;
+  return (await getEncryptionKeys()).find((key) => key.publicKey === publicKey);
+};
+
+/**
+ * Whether the address of a link can be given to the caller: it was read on
+ * this page, or the server holds its secret wrapped for them.
+ *
+ * Spec: private-rooms/room-membership, "Address of an existing link is copied by the owner and the managers"
+ */
+export const canReadPrivateLinkAddress = (link: TFileLink) =>
+  addresses.has(String(link.sharedTo.id)) || !!link.sharedTo.linkSecretWrap;
+
+/**
+ * The address of a link with its secret after `#`, opened from the wrap the
+ * server holds for the caller. Asks for the unlock first; null when it is
+ * dismissed, when no wrap was made for the caller's current key, or when the
+ * wrap does not open.
+ */
+// shortcut: only a wrap the caller made opens, since the keys of the other managers are not read here; the room's keys come with the wraps for them (private-rooms-external-links 3.4).
+export async function readPrivateLinkAddress(
+  link: TFileLink,
+  userId: string,
+): Promise<string | null> {
+  const linkId = String(link.sharedTo.id);
+  const known = addresses.get(linkId);
+  if (known) return known;
+
+  const { linkSecretWrap, linkPublicKey } = link.sharedTo;
+  if (!linkSecretWrap || !linkPublicKey) return null;
+
+  const identity = await requireUnlock(userId);
+  if (!identity) return null;
+
+  try {
+    const own = await findOwnKey(identity);
+    if (!own || own.id !== linkSecretWrap.publicKeyId) return null;
+
+    const { secret } = await unwrapLinkSecret({
+      wrap: linkSecretWrap.wrap,
+      linkId,
+      linkPublicKey,
+      recipient: identity,
+      recipientUserId: userId,
+      senders: [{ userId, publicKey: own.publicKey }],
+    });
+    const address = `${link.sharedTo.shareLink}#${secret}`;
+    addresses.set(linkId, address);
+    return address;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Stores the secret of a new link wrapped for its creator, so that the
+ * address can be read again after the page is left. The request repeats the
+ * settings of the link, which it would otherwise replace. A failure leaves
+ * the link as it was made.
+ *
+ * Spec: private-rooms/encryption-core, "The secret of a link is wrapped for those who manage links"
+ */
+async function storeOwnSecretWrap(
+  item: TPrivateLinkItem,
+  link: TFileLink,
+  held: LinkSecret,
+  userId: string,
+  identity: IdentityKeyPair,
+): Promise<TFileLink> {
+  try {
+    const own = await findOwnKey(identity);
+    if (!own) return link;
+
+    const wrap = await wrapLinkSecret({
+      link: held,
+      linkId: String(link.sharedTo.id),
+      sender: identity,
+      senderUserId: userId,
+      recipientPublicKey: own.publicKey,
+      recipientUserId: userId,
+    });
+    return await setPrivateItemLink(getTarget(item), {
+      ...linkSettings(link),
+      linkSecretWraps: [{ userId, publicKeyId: own.id, wrap }],
+    });
+  } catch {
+    return link;
+  }
+}
 
 export type TPrivateLinkOptions = {
   password?: string;
@@ -138,6 +238,16 @@ export const getPrivateLinkNeed = (
   return expirationDate ? null : "end-date";
 };
 
+/** The settings of a link as a change of it sends them again. */
+const linkSettings = (link: TFileLink) => ({
+  linkId: String(link.sharedTo.id),
+  access: ShareAccessRights.ReadOnly,
+  title: link.sharedTo.title,
+  expirationDate: link.sharedTo.expirationDate ?? null,
+  internal: link.sharedTo.internal,
+  primary: link.sharedTo.primary,
+});
+
 const getTarget = (item: TPrivateLinkItem): TPrivateLinkTarget => {
   if (isRoom(item)) return { roomId: item.id };
   return isFile(item) ? { fileId: item.id } : { folderId: item.id };
@@ -183,9 +293,9 @@ export async function createPrivateItemLink(
   if (!identity) return null;
 
   const secret = generateLinkSecret();
-  const { material } = await createLinkKey(secret, password);
+  const { keyPair, material } = await createLinkKey(secret, password);
 
-  const link = await setPrivateItemLink(getTarget(item), {
+  const created = await setPrivateItemLink(getTarget(item), {
     access: ShareAccessRights.ReadOnly,
     title: options.title,
     expirationDate,
@@ -195,8 +305,16 @@ export async function createPrivateItemLink(
     ...material,
   });
 
-  const address = `${link.sharedTo.shareLink}#${secret}`;
-  addresses.set(String(link.sharedTo.id), address);
+  const address = `${created.sharedTo.shareLink}#${secret}`;
+  addresses.set(String(created.sharedTo.id), address);
+
+  const link = await storeOwnSecretWrap(
+    item,
+    created,
+    { secret, keyPair },
+    userId,
+    identity,
+  );
 
   const { missingFileIds } = await wrapFilesForLink(
     { id: Number(item.id), isFile: isFile(item) },
@@ -212,14 +330,7 @@ export async function createPrivateItemLink(
  * item. It sends no key material and no password: the server keeps both.
  */
 export const editPrivateItemLink = (item: TPrivateLinkItem, link: TFileLink) =>
-  setPrivateItemLink(getTarget(item), {
-    linkId: String(link.sharedTo.id),
-    access: ShareAccessRights.ReadOnly,
-    title: link.sharedTo.title,
-    expirationDate: link.sharedTo.expirationDate ?? null,
-    internal: link.sharedTo.internal,
-    primary: link.sharedTo.primary,
-  });
+  setPrivateItemLink(getTarget(item), linkSettings(link));
 
 /** Spec: private-rooms/room-membership, "Revoking an external link" */
 export const revokePrivateItemLink = async (

@@ -70,7 +70,7 @@ vi.mock("../../../../services/private-room/private-links", async (io) => ({
   createPrivateItemLink: links.create,
   editPrivateItemLink: links.edit,
   revokePrivateItemLink: links.revoke,
-  getPrivateLinkAddress: links.address,
+  readPrivateLinkAddress: links.address,
 }));
 
 const SHORT = "https://portal.example/s/abc";
@@ -134,7 +134,7 @@ describe("useShare: links of a private item", () => {
   it("Link to a file to view without a password", async () => {
     const made = link("1", { passwordRequired: false });
     links.create.mockResolvedValue({ link: made, address: `${SHORT}#secret` });
-    links.address.mockReturnValue(`${SHORT}#secret`);
+    links.address.mockResolvedValue(`${SHORT}#secret`);
     const props = propsOf({});
     render(<Links props={props} />);
 
@@ -196,11 +196,42 @@ describe("useShare: links of a private item", () => {
     expect(add()).toHaveAttribute("aria-disabled", "true");
   });
 
-  it("copies only the address of a link made on this page", () => {
+  it("Member who does not manage links: no address without a wrap of the secret", async () => {
+    links.address.mockResolvedValue(null);
     render(<Links props={propsOf({ fileLinkProps: [link("1")] })} />);
 
     fireEvent.click(screen.getByText("Link 1"));
 
+    await vi.waitFor(() => expect(links.address).toHaveBeenCalled());
+    expect(copyShareLink).not.toHaveBeenCalled();
+  });
+
+  it("Manager copies the address", async () => {
+    const wrapped = link("1", {
+      linkSecretWrap: { publicKeyId: "key-1", wrap: "wrap" },
+    });
+    links.address.mockResolvedValue(`${SHORT}#secret`);
+    render(<Links props={propsOf({ fileLinkProps: [wrapped] })} />);
+
+    fireEvent.click(screen.getByText("Link 1"));
+
+    await vi.waitFor(() => expect(copyShareLink).toHaveBeenCalled());
+    expect(links.address).toHaveBeenCalledWith(wrapped, "u-1");
+    expect(vi.mocked(copyShareLink).mock.calls[0][1].sharedTo.shareLink).toBe(
+      `${SHORT}#secret`,
+    );
+  });
+
+  it("Key locked", async () => {
+    const wrapped = link("1", {
+      linkSecretWrap: { publicKeyId: "key-1", wrap: "wrap" },
+    });
+    links.address.mockResolvedValue(null);
+    render(<Links props={propsOf({ fileLinkProps: [wrapped] })} />);
+
+    fireEvent.click(screen.getByText("Link 1"));
+
+    await vi.waitFor(() => expect(links.address).toHaveBeenCalled());
     expect(copyShareLink).not.toHaveBeenCalled();
   });
 });

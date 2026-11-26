@@ -56,7 +56,8 @@ import {
   PRIVATE_ITEM_LINKS_LIMIT,
   PRIVATE_LINK_RIGHTS,
   createPrivateItemLink,
-  getPrivateLinkAddress,
+  canReadPrivateLinkAddress,
+  readPrivateLinkAddress,
   editPrivateItemLink,
   revokePrivateItemLink,
 } from "../../../services/private-room/private-links";
@@ -128,7 +129,7 @@ export const useShare = ({
   };
 
   const copyPrivateLink = async (link: TFileLink) => {
-    const address = getPrivateLinkAddress(link.sharedTo.id);
+    const address = await readPrivateLinkAddress(link, selfId ?? "");
     if (!address) return;
 
     await copyShareLink(
@@ -633,7 +634,7 @@ export const useShare = ({
   };
 
   const canCopyPrivateLink = (link: TFileLink) =>
-    !!getPrivateLinkAddress(link.sharedTo.id);
+    canReadPrivateLinkAddress(link);
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
     // No embedding of a private item, and no address without its secret.

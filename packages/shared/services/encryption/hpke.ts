@@ -92,10 +92,30 @@ function getX25519(): X25519 {
   return x25519Singleton;
 }
 
+/** What a wrapped key belongs to: a label and the bytes that name the thing. */
+type WrapBinding = { label: string; subject: Uint8Array };
+
+const fileBinding = (fileId: number): WrapBinding => ({
+  label: HPKE_INFO_DEK_WRAP,
+  subject: uint64BE(fileId),
+});
+
+/**
+ * In place of a file: a label of its own and the id of what the key belongs
+ * to, such as an external link, so that a wrap made for one purpose does not
+ * open as another.
+ */
+export type WrapContext = { label: string; id: string };
+
+const contextBinding = (context: WrapContext): WrapBinding => ({
+  label: context.label,
+  subject: uuidToBytes(context.id),
+});
+
 function buildInfo(
   senderUserId: Uint8Array,
   recipientUserId: Uint8Array,
-  fileId: number,
+  { label, subject }: WrapBinding,
 ): Uint8Array {
   if (senderUserId.byteLength !== USER_ID_BYTES) {
     throw new InvalidFormatError(`senderUserId must be ${USER_ID_BYTES} bytes`);
@@ -106,11 +126,11 @@ function buildInfo(
     );
   }
   return concatBuffers(
-    utf8(HPKE_INFO_DEK_WRAP),
+    utf8(label),
     new Uint8Array([0x01]),
     senderUserId,
     recipientUserId,
-    uint64BE(fileId),
+    subject,
   );
 }
 
@@ -166,6 +186,26 @@ function assertNotErased(privateKey: Uint8Array) {
 }
 
 export async function wrapDEK(params: WrapDekParams): Promise<string> {
+  const { fileId } = params;
+  if (!Number.isFinite(fileId) || fileId <= 0) {
+    throw new InvalidFormatError(
+      "fileId must be a positive integer (server-assigned)",
+    );
+  }
+  return wrapWith(params, fileBinding(fileId));
+}
+
+/** Wraps 32 bytes that belong to something other than a file. */
+export async function wrapKeyForContext(
+  params: Omit<WrapDekParams, "fileId"> & { context: WrapContext },
+): Promise<string> {
+  return wrapWith(params, contextBinding(params.context));
+}
+
+async function wrapWith(
+  params: Omit<WrapDekParams, "fileId">,
+  binding: WrapBinding,
+): Promise<string> {
   const {
     dek,
     senderPrivateKey,
@@ -173,7 +213,6 @@ export async function wrapDEK(params: WrapDekParams): Promise<string> {
     senderUserId,
     recipientPublicKey,
     recipientUserId,
-    fileId,
   } = params;
 
   if (dek.byteLength !== AES_KEY_SIZE_BYTES) {
@@ -182,15 +221,10 @@ export async function wrapDEK(params: WrapDekParams): Promise<string> {
     );
   }
   assertNotErased(senderPrivateKey);
-  if (!Number.isFinite(fileId) || fileId <= 0) {
-    throw new InvalidFormatError(
-      "fileId must be a positive integer (server-assigned)",
-    );
-  }
 
   const senderIdBytes = uuidToBytes(senderUserId);
   const recipientIdBytes = uuidToBytes(recipientUserId);
-  const info = buildInfo(senderIdBytes, recipientIdBytes, fileId);
+  const info = buildInfo(senderIdBytes, recipientIdBytes, binding);
 
   const senderPriv = await importPrivateKeyRaw(senderPrivateKey);
   const senderPub = await importPublicKeyRaw(senderPublicKey);
@@ -247,6 +281,20 @@ export type UnwrapDekParams = {
 export async function unwrapDEK(
   params: UnwrapDekParams,
 ): Promise<Uint8Array> {
+  return unwrapWith(params, fileBinding(params.fileId));
+}
+
+/** Opens a wrap made by `wrapKeyForContext` under the same context. */
+export async function unwrapKeyForContext(
+  params: Omit<UnwrapDekParams, "fileId"> & { context: WrapContext },
+): Promise<Uint8Array> {
+  return unwrapWith(params, contextBinding(params.context));
+}
+
+async function unwrapWith(
+  params: Omit<UnwrapDekParams, "fileId">,
+  binding: WrapBinding,
+): Promise<Uint8Array> {
   assertNotErased(params.recipientPrivateKey);
   const buf = base64ToUint8Array(params.wrapped);
   if (buf.byteLength !== TOTAL_BLOB_SIZE) {
@@ -283,7 +331,7 @@ export async function unwrapDEK(
   }
 
   const recipientIdBytes = uuidToBytes(params.recipientUserId);
-  const info = buildInfo(senderIdInBlob, recipientIdBytes, params.fileId);
+  const info = buildInfo(senderIdInBlob, recipientIdBytes, binding);
 
   const recipientPriv = await importPrivateKeyRaw(params.recipientPrivateKey);
   const senderPub = await importPublicKeyRaw(params.expectedSenderPublicKey);

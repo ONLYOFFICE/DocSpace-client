@@ -99,7 +99,6 @@ export default inject(
 
     const {
       roomsView,
-      fileView,
       setView,
 
       setIsVisible,
@@ -115,7 +114,8 @@ export default inject(
     return {
       selection,
       roomsView,
-      fileView,
+      // A skill opens on its own tab (Details until another is picked).
+      fileView: infoPanelStore.currentFileView,
       setView,
 
       setIsVisible,

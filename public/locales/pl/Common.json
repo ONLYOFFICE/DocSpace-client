@@ -128,6 +128,7 @@
   "AIChatRecent": "Ostatnie",
   "AIChats": "Czaty AI",
   "AiContentEmpty": "Brak plików",
+  "AiContentEmptyDescription": "Tutaj pojawią się pliki utworzone przez agenta oraz pliki załączone w tym czacie.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktywuj AI, aby rozmawiać z agentami, uzyskiwać dostęp do ich bazy wiedzy i pozwolić im wykonywać zadania w Twoich aplikacjach. Korzystanie z AI jest rozliczane z salda portfela.",
   "AIDisabledInfoBlockContactAdminDescription": "Skontaktuj się z superadministratorem, aby aktywować AI oraz rozmawiać ze swoimi agentami, korzystać z ich bazy wiedzy i pozwolić im wykonywać zadania w Twoich aplikacjach.",
   "AIDisabledInfoBlockStandaloneDescription": "Funkcje AI są obecnie wyłączone, co oznacza, że ten agent nie może przetwarzać czatów ani zadań. Podłącz własną usługę AI, aby odblokować zaawansowane funkcje w przestrzeni roboczej.",

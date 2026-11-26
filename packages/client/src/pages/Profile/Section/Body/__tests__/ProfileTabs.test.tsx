@@ -34,9 +34,11 @@
  */
 
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import { Provider } from "mobx-react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+import { PLUGIN_TAB_WAIT_MS } from "../profileTabs";
 
 vi.mock("react-i18next", async (io) => ({
   ...((await io()) as Record<string, unknown>),
@@ -46,9 +48,22 @@ vi.mock("react-i18next", async (io) => ({
     (props: P) => <Component {...props} t={(key: string) => key} />,
 }));
 
+const router = vi.hoisted(() => ({ pathname: "/profile/keys-management" }));
+
 vi.mock("react-router", () => ({
   useNavigate: () => vi.fn(),
-  useLocation: () => ({ pathname: "/profile/keys-management", state: null }),
+  useLocation: () => ({ pathname: router.pathname, state: null }),
+  Navigate: ({ to }: { to: string }) => (
+    <div data-testid="navigate" data-to={to} />
+  ),
+}));
+
+vi.mock("@docspace/shared/skeletons/profile", () => ({
+  ProfileViewLoader: () => <div data-testid="profile-loader" />,
+}));
+
+vi.mock("SRC_DIR/components/plugins/PluginWrappedComponent", () => ({
+  default: () => null,
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/tabs", () => ({
@@ -109,16 +124,27 @@ type TKeysState = {
   isSectionAvailable?: boolean;
   encryptionKeys?: { id: string }[] | null;
   isGuest?: boolean;
+  pluginTabKeys?: string[];
+  arePluginsLoaded?: boolean;
 };
 
 const renderProfileTabs = ({
   isSectionAvailable = true,
   encryptionKeys = [],
   isGuest = false,
+  pluginTabKeys = [],
+  arePluginsLoaded = true,
 }: TKeysState = {}) =>
   render(
     <Provider
-      settingsStore={{ currentDeviceType: "desktop" }}
+      settingsStore={{ currentDeviceType: "desktop", enablePlugins: true }}
+      pluginStore={{
+        isLoaded: arePluginsLoaded,
+        profileTabItemsList: pluginTabKeys.map((key) => ({
+          key,
+          value: { key, label: key, component: () => null, pluginName: "p" },
+        })),
+      }}
       peopleStore={{
         targetUserStore: {
           setSubscriptions: vi.fn(),
@@ -222,5 +248,64 @@ describe("Keys management tab follows the Private section", () => {
     });
 
     expect(screen.queryByTestId("tab-keys-management")).toBeNull();
+  });
+});
+
+describe("Plugin tabs", () => {
+  afterEach(() => {
+    router.pathname = "/profile/keys-management";
+  });
+
+  it("adds a plugin tab after the portal's own", () => {
+    renderProfileTabs({ pluginTabKeys: ["calendar-sync"] });
+
+    const ids = screen
+      .getAllByTestId(/^tab-/)
+      .map((tab) => tab.dataset.testid);
+    expect(ids.at(-1)).toBe("tab-p/calendar-sync");
+  });
+
+  it("keeps a plugin tab keyed like a portal tab apart from it", () => {
+    renderProfileTabs({ pluginTabKeys: ["login"] });
+
+    expect(screen.getByTestId("tab-login")).toBeInTheDocument();
+    expect(screen.getByTestId("tab-p/login")).toBeInTheDocument();
+  });
+
+  it("shows the skeleton on a plugin tab address while the plugins load", () => {
+    router.pathname = "/profile/p/calendar-sync";
+    renderProfileTabs({ arePluginsLoaded: false });
+
+    expect(screen.getByTestId("profile-loader")).toBeInTheDocument();
+  });
+
+  it("stops waiting for a plugin tab when the plugins never finish loading", () => {
+    vi.useFakeTimers();
+
+    try {
+      router.pathname = "/profile/p/calendar-sync";
+      renderProfileTabs({ arePluginsLoaded: false });
+
+      act(() => {
+        vi.advanceTimersByTime(PLUGIN_TAB_WAIT_MS);
+      });
+
+      expect(screen.getByTestId("navigate")).toHaveAttribute(
+        "data-to",
+        "/profile/login",
+      );
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("sends a plugin tab address no plugin owns to the login tab once the plugins are loaded", () => {
+    router.pathname = "/profile/p/calendar-sync";
+    renderProfileTabs();
+
+    expect(screen.getByTestId("navigate")).toHaveAttribute(
+      "data-to",
+      "/profile/login",
+    );
   });
 });

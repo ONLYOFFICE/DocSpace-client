@@ -200,7 +200,13 @@ export function getAvailableInfoPanelTabs({
 
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
 
-  if (isMetadataSupported(selection)) {
+  // Nothing of the AI section (its rooms, their folders and files) has a
+  // Metadata tab.
+  const isInAiSection =
+    "rootFolderType" in selection &&
+    selection.rootFolderType === FolderType.AiHub;
+
+  if (isMetadataSupported(selection) && !isInAiSection) {
     tabs.push(InfoPanelView.infoMetadata);
   }
 

@@ -629,12 +629,10 @@ self: FilesActionStore,
       return;
     }
 
-    // A skill opens as a skill, not as the Markdown file that holds it: the
-    // "Edit skill" dialog for those who may change it, its instructions
-    // alone for the others.
+    // A skill opens as a skill, not as the Markdown file that holds it: its
+    // instructions to read, with Edit there for those who may change it.
     if (isSkillFile(item, self.selectedFolderStore)) {
-      const canEdit = !!item.security?.Edit && !!item.security?.Rename;
-      self.dialogsStore.setEditSkillFile(item as unknown as TFile, !canEdit);
+      self.dialogsStore.setEditSkillFile(item as unknown as TFile, true);
       return;
     }
 

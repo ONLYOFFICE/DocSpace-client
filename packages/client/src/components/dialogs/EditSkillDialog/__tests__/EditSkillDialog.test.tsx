@@ -164,18 +164,18 @@ describe("EditSkillDialog", () => {
     expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("Clause check");
   });
 
-  it("opens the instructions as a modal dialog and the form as a side panel", async () => {
+  it("opens the instructions and the form as a modal dialog", async () => {
     const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
     render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
     await screen.findByTestId("editor");
     expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
     fireEvent.click(screen.getByTestId("view-skill-edit"));
-    expect(screen.getByTestId("form").dataset.displayType).toBe("aside");
+    expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
   });
 
-  it("opens a new skill as a side panel", () => {
+  it("opens a new skill as a modal dialog", () => {
     render(<EditSkillDialog folderId={7} onClose={onClose} refreshFiles={refreshFiles} />);
-    expect(screen.getByTestId("form").dataset.displayType).toBe("aside");
+    expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
   });
 
   it("offers no Edit in the instructions view to those who may not edit the skill", async () => {

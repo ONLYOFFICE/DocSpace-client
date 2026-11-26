@@ -128,6 +128,7 @@
   "AIChatRecent": "Nedavno",
   "AIChats": "Klepeti z umetno inteligenco",
   "AiContentEmpty": "Še ni datotek",
+  "AiContentEmptyDescription": "Tukaj bodo prikazane datoteke, ki jih ustvari agent, in datoteke, ki jih pripneš v tem klepetu.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktivirajte AI za klepet z agenti, dostop do njihove baze znanja in dovolite jim izvajanje nalog v vaših aplikacijah. Uporaba AI se zaračuna iz stanja vašega denarnika.",
   "AIDisabledInfoBlockContactAdminDescription": "Obrnite se na superskrbnika za aktivacijo AI ter klepet z agenti, dostop do njihove baze znanja in dovolite jim izvajanje nalog v vaših aplikacijah.",
   "AIDisabledInfoBlockStandaloneDescription": "Zmožnosti umetne inteligence so trenutno izklopljene, kar pomeni, da ta agent ne more obdelovati klepetov ali nalog. Povežite lastno storitev umetne inteligence, da odklenete napredne funkcije v delovnem prostoru.",

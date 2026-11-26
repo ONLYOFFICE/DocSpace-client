@@ -69,6 +69,7 @@ import type {
   NavMenuItem,
 } from "@onlyoffice/apps-ui-kit/components/nav-menu";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import { DeviceType } from "@docspace/shared/enums";
 
 import {
   settingsTree,
@@ -88,6 +89,8 @@ type PortalSettingsSidebarProps = {
   setIsLoadedArticleBody: (value: boolean) => void;
   showPortalSettingsLoader?: boolean;
   showProfileLoader?: boolean;
+  currentDeviceType?: DeviceType;
+  setArticleOpen?: (value: boolean) => void;
 };
 
 const PortalSettingsSidebar = ({
@@ -101,6 +104,8 @@ const PortalSettingsSidebar = ({
   setIsLoadedArticleBody,
   showPortalSettingsLoader,
   showProfileLoader,
+  currentDeviceType,
+  setArticleOpen,
 }: PortalSettingsSidebarProps) => {
   const { t, ready } = useTranslation(["Settings", "Ldap", "OAuth", "Common"]);
   const location = useLocation();
@@ -109,6 +114,21 @@ const PortalSettingsSidebar = ({
   React.useEffect(() => {
     if (ready) setIsLoadedArticleBody(true);
   }, [ready, setIsLoadedArticleBody]);
+
+  // The profile menu's "Settings" asks for the section list on a phone
+  // (ProfileActionsStore.onSettingsClick). The flag is dropped right away, so
+  // going back or reloading does not open the panel again.
+  React.useEffect(() => {
+    const state = location.state as { openArticle?: boolean } | null;
+    if (!state?.openArticle) return;
+
+    if (currentDeviceType === DeviceType.mobile) setArticleOpen?.(true);
+
+    navigate(`${location.pathname}${location.search}`, {
+      replace: true,
+      state: { ...state, openArticle: undefined },
+    });
+  }, [location, currentDeviceType, setArticleOpen, navigate]);
 
   const mapLabel = (tKey: string): string => {
     switch (tKey) {
@@ -272,6 +292,8 @@ export default inject<TStore>(
     setIsLoadedArticleBody: common.setIsLoadedArticleBody,
     showPortalSettingsLoader: clientLoadingStore.showPortalSettingsLoader,
     showProfileLoader: clientLoadingStore.showProfileLoader,
+    currentDeviceType: settingsStore.currentDeviceType,
+    setArticleOpen: settingsStore.setArticleOpen,
   }),
 )(observer(PortalSettingsSidebar));
 

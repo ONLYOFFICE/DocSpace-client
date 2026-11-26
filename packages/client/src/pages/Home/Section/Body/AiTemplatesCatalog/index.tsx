@@ -38,6 +38,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import classNames from "classnames";
+import { AnimationEvents } from "@onlyoffice/apps-ui-kit/hooks/useAnimation";
 
 import { ReactSVG } from "react-svg";
 
@@ -205,7 +206,13 @@ const AiTemplatesCatalog = () => {
   const [category, setCategory] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    void aiTemplatesStore.fetchCatalog();
+    // The tab's highlight fills to the end once its page is shown. A list
+    // says so when it has loaded (Home's View); the catalog stands in for
+    // the list, so it says so once the catalog is read, or the fill stops
+    // short of the end.
+    void aiTemplatesStore
+      .fetchCatalog()
+      .finally(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)));
     // A template stays selected, and its confirmation open, while the tab
     // is shown.
     return () => {

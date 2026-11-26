@@ -128,6 +128,7 @@
   "AIChatRecent": "Son istifadə olunanlar",
   "AIChats": "Süni İntellekt söhbətləri",
   "AiContentEmpty": "Hələ fayl yoxdur",
+  "AiContentEmptyDescription": "Agentin yaratdığı və bu çatda əlavə etdiyiniz fayllar burada görünəcək.",
   "AIDisabledInfoBlockActivateWalletDescription": "Agentlərinizlə söhbət etmək, onların bilik bazasına daxil olmaq və tətbiqləriniz arasında tapşırıqlar yerinə yetirməsinə icazə vermək üçün AI-ni aktiv edin. AI istifadəsi cüzdan balansınızdan hesablanır.",
   "AIDisabledInfoBlockContactAdminDescription": "Agentlərinizlə söhbət etmək, onların bilik bazasına daxil olmaq və tətbiqləriniz arasında tapşırıqlar yerinə yetirməsinə icazə vermək üçün AI-ni aktiv etmək üçün super administratorla əlaqə saxlayın.",
   "AIDisabledInfoBlockStandaloneDescription": "AI imkanları hazırda söndürülüb, bu da o deməkdir ki, bu agent söhbətləri və ya tapşırıqları emal edə bilməz. İş sahəsi daxilində qabaqcıl funksiyaları açmaq üçün öz AI xidmətinizi qoşun.",

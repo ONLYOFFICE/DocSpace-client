@@ -710,8 +710,8 @@ describe("ContextOptionsStore.getFilesContextOptions — an agent's menu", () =>
       true,
     );
 
+    // No Edit agent, even when the item's list carries it.
     expect(shape(menu)).toEqual([
-      "edit-room=Common:EditAgent",
       "invite-users-to-room=Common:ShareAgent",
       "room-info=Common:AgentInfo",
       "link-for-room-members=Common:CopyLink",
@@ -758,7 +758,6 @@ describe("ContextOptionsStore.getFilesContextOptions — an agent's menu", () =>
       "select",
       "open",
       "|",
-      "edit-room",
       "invite-users-to-room",
       "room-info",
       "pin-room",

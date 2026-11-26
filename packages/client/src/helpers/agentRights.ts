@@ -45,7 +45,6 @@ export type TAgentRightsSource = {
   access?: number | null;
   createdBy?: { id?: string | null } | null;
   security?: Partial<Record<string, boolean>> | null;
-  aiProject?: { canEditSettings?: boolean | null } | null;
 };
 
 /** What the user is offered on one agent (`ai-agent-access`). */
@@ -56,7 +55,11 @@ export type TAgentRights = {
   isOwner: boolean;
   chat: boolean;
   info: boolean;
-  /** Edit agent, and the "Manage ..." rows of its skill sets and knowledge bases. */
+  /**
+   * Changing the agent's settings - its form, its skill sets, knowledge
+   * bases and model, from the Info panel and from the chat on it - asked of
+   * the room's `EditRoom` right only.
+   */
   edit: boolean;
   /** Share agent: inviting, changing roles and removing members. */
   share: boolean;
@@ -94,14 +97,12 @@ export const getAgentRights = (
       ? ownerId === userId
       : // `AiProjectAccess.Owner`: the room's full access.
         agent?.access === ShareAccessRights.FullAccess);
-  const canEditSettings =
-    agent?.aiProject?.canEditSettings ?? !!security.EditRoom;
   return {
     isMember,
     isOwner,
     chat: isMember,
     info: isMember || !!security.Read,
-    edit: isMember && !!canEditSettings,
+    edit: isMember && !!security.EditRoom,
     share: isMember && !!security.EditAccess,
     delete: !!security.Delete,
     changeOwner: !!security.ChangeOwner,

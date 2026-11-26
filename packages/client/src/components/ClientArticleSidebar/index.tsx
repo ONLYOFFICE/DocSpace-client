@@ -280,11 +280,14 @@ const ClientArticleSidebar = ({
   React.useEffect(() => cancelChatClose, [cancelChatClose]);
   const isAiProjectRoomRootRef = React.useRef(isAiProjectRoomRoot);
   isAiProjectRoomRootRef.current = isAiProjectRoomRoot;
-  const leaveFullscreenChat = React.useCallback(() => {
+  const leaveFullscreenChat = React.useCallback((path: string) => {
     if (!aiChatStore?.effectiveFullscreen) return;
     cancelChatClose();
     if (isAiProjectRoomRootRef.current) {
-      aiChatStore.close();
+      // Another agent takes the chat over from this one; closed here, it
+      // showed the default greeting until that agent was read. Any other
+      // room of the section releases the chat once it is the one shown.
+      if (!/^\/ai-rooms\/\d+\//.test(path)) aiChatStore.close();
       return;
     }
     const close = () => {
@@ -303,7 +306,7 @@ const ClientArticleSidebar = ({
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
       onClick: (_item: unknown, meta?: { isLink?: boolean }) => {
-        leaveFullscreenChat();
+        leaveFullscreenChat(path);
         onFolderNavigateRef.current?.();
         if (!meta?.isLink) navigate(path);
       },
@@ -460,7 +463,20 @@ const ClientArticleSidebar = ({
     ],
   );
 
-  const activeId = aiChatPageId ?? aiProjectPageId ?? locationActiveId;
+  // On the way into a room of the AI section the address already names it
+  // and says nothing of its type, which only the loaded room tells: until
+  // then the entry it was opened from stays the current one, so a skill set
+  // or a knowledge base does not pass through Agents.
+  const isAiRoomLoading =
+    /^\/ai-rooms\/\d+\//.test(location.pathname) && shownAiRoomType == null;
+  const lastActiveIdRef = React.useRef<string | undefined>(undefined);
+  const settledActiveId = aiProjectPageId ?? locationActiveId;
+  const activeId =
+    aiChatPageId ??
+    (isAiRoomLoading && !aiProjectPageId
+      ? (lastActiveIdRef.current ?? settledActiveId)
+      : settledActiveId);
+  lastActiveIdRef.current = activeId;
 
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     const find = (type: FolderType) =>

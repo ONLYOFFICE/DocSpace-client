@@ -34,6 +34,7 @@
  */
 
 import { describe, it, expect } from "vitest";
+import { matchRoutes } from "react-router";
 
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import {
@@ -41,6 +42,7 @@ import {
   getPluginSectionPath,
   getPluginSectionRoute,
   isPluginSectionPath,
+  isPluginSectionPathActive,
 } from "SRC_DIR/helpers/plugins/navigation";
 
 describe("getPluginSectionPath", () => {
@@ -51,6 +53,37 @@ describe("getPluginSectionPath", () => {
     );
     expect(getPluginSectionPath(Section.Settings, "overview")).toBe(
       "/portal-settings/p/overview",
+    );
+  });
+
+  it("encodes the key, so the router reads back exactly that key", () => {
+    const routes = [{ path: getPluginSectionRoute(Section.Accounts) }];
+
+    ["crm/sync", "a?b", "a#b", "100%", "a b", "a:b"].forEach((key) => {
+      const path = getPluginSectionPath(Section.Accounts, key);
+
+      expect(matchRoutes(routes, path)?.[0].params.itemKey).toBe(key);
+    });
+  });
+});
+
+describe("isPluginSectionPathActive", () => {
+  it("matches the item's page whether the address is encoded or not", () => {
+    expect(isPluginSectionPathActive("/p/a:b", Section.Files, "a:b")).toBe(true);
+    expect(isPluginSectionPathActive("/p/a%3Ab", Section.Files, "a:b")).toBe(
+      true,
+    );
+    expect(
+      isPluginSectionPathActive("/accounts/p/crm%2Fsync", Section.Accounts, "crm/sync"),
+    ).toBe(true);
+  });
+
+  it("keeps a key apart from a longer key that starts with it", () => {
+    expect(isPluginSectionPathActive("/p/crm%2Fsync", Section.Files, "crm")).toBe(
+      false,
+    );
+    expect(isPluginSectionPathActive("/p/crm-sync", Section.Files, "crm")).toBe(
+      false,
     );
   });
 });

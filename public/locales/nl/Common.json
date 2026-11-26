@@ -128,6 +128,7 @@
   "AIChatRecent": "Recent",
   "AIChats": "AI-chats",
   "AiContentEmpty": "Nog geen bestanden",
+  "AiContentEmptyDescription": "Bestanden die de agent maakt en bestanden die u in deze chat bijvoegt, verschijnen hier.",
   "AIDisabledInfoBlockActivateWalletDescription": "Activeer AI om met uw agenten te chatten, toegang te krijgen tot hun kennisbank en ze taken te laten uitvoeren in uw apps. AI-gebruik wordt in rekening gebracht via uw walletsaldo.",
   "AIDisabledInfoBlockContactAdminDescription": "Neem contact op met de superbeheerder om AI te activeren en met uw agenten te chatten, toegang te krijgen tot hun kennisbank en ze taken te laten uitvoeren in uw apps.",
   "AIDisabledInfoBlockStandaloneDescription": "AI-mogelijkheden zijn momenteel uitgeschakeld, wat betekent dat deze agent geen chats of taken kan verwerken. Verbind uw eigen AI-service om geavanceerde functies in de werkruimte te ontgrendelen.",

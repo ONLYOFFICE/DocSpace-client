@@ -128,6 +128,7 @@
   "AIChatRecent": "Recents",
   "AIChats": "AI chats",
   "AiContentEmpty": "No files yet",
+  "AiContentEmptyDescription": "Files created by the agent and files you attach in this conversation will appear here.",
   "AIDisabledInfoBlockActivateWalletDescription": "Activate AI to chat with your agents, access their knowledge base, and let them run tasks across your apps. AI usage is billed from your wallet balance.",
   "AIDisabledInfoBlockContactAdminDescription": "Contact the Full admin to activate AI and chat with your agents, access their knowledge base, and let them run tasks across your apps.",
   "AIDisabledInfoBlockStandaloneDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. Connect your own AI service to unlock advanced features in the workspace.",

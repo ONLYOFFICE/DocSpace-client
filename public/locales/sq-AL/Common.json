@@ -128,6 +128,7 @@
   "AIChatRecent": "Të fundit",
   "AIChats": "Bisedime IA",
   "AiContentEmpty": "Ende nuk ka skedarë",
+  "AiContentEmptyDescription": "Skedarët e krijuar nga agjenti dhe skedarët që bashkëngjitni në këtë bisedë do të shfaqen këtu.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktivizoni IA për të biseduar me agjentët tuaj, për të aksesuar bazën e tyre të njohurive dhe për t’i lënë ata të ekzekutojnë detyra në të gjitha aplikacionet tuaja. Përdorimi i IA faturohim nga balanca e portofolit tuaj.",
   "AIDisabledInfoBlockContactAdminDescription": "Kontaktoni superadministratorin për të aktivizuar IA dhe për të biseduar me agjentët tuaj, për të aksesuar bazën e tyre të njohurive dhe për t’i lënë ata të ekzekutojnë detyra në të gjitha aplikacionet tuaja.",
   "AIDisabledInfoBlockStandaloneDescription": "Aftësitë e IA janë aktualisht të çaktivizuara, që do të thotë se ky agjent nuk mund të përpunojë biseda ose detyra. Lidhni shërbimin tuaj të IA për të zhbllokuar funksionet e avancuara në hapësirën e punës.",

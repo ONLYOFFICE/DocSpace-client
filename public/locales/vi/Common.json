@@ -128,6 +128,7 @@
   "AIChatRecent": "Gần đây",
   "AIChats": "Trò chuyện AI",
   "AiContentEmpty": "Chưa có tệp nào",
+  "AiContentEmptyDescription": "Các tệp do tác nhân tạo và các tệp bạn đính kèm trong cuộc trò chuyện này sẽ xuất hiện ở đây.",
   "AIDisabledInfoBlockActivateWalletDescription": "Kích hoạt AI để trò chuyện với các tác nhân của bạn, truy cập cơ sở kiến thức của họ và cho phép họ chạy các tác vụ trên các ứng dụng của bạn. Việc sử dụng AI được tính từ số dư ví của bạn.",
   "AIDisabledInfoBlockContactAdminDescription": "Liên hệ với siêu quản trị viên để kích hoạt AI và trò chuyện với các tác nhân của bạn, truy cập cơ sở kiến thức của họ và cho phép họ chạy các tác vụ trên các ứng dụng của bạn.",
   "AIDisabledInfoBlockStandaloneDescription": "Các khả năng AI hiện đang bị tắt, nghĩa là tác nhân này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Kết nối dịch vụ AI của riêng bạn để mở khóa các tính năng nâng cao trong không gian làm việc.",

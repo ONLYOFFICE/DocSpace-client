@@ -128,6 +128,7 @@
   "AIChatRecent": "Zuletzt verwendet",
   "AIChats": "KI-Chats",
   "AiContentEmpty": "Noch keine Dateien",
+  "AiContentEmptyDescription": "Vom Agenten erstellte Dateien und Dateien, die Sie in diesem Chat anhängen, werden hier angezeigt.",
   "AIDisabledInfoBlockActivateWalletDescription": "Aktivieren Sie KI, um mit Ihren Agenten zu chatten, auf deren Wissensdatenbank zuzugreifen und ihnen zu ermöglichen, Aufgaben in Ihren Apps auszuführen. Die KI-Nutzung wird von Ihrem Wallet-Guthaben abgerechnet.",
   "AIDisabledInfoBlockContactAdminDescription": "Wenden Sie sich an den Super-Administrator, um KI zu aktivieren und mit Ihren Agenten zu chatten, auf deren Wissensdatenbank zuzugreifen und ihnen zu ermöglichen, Aufgaben in Ihren Apps auszuführen.",
   "AIDisabledInfoBlockStandaloneDescription": "Die KI-Funktionen sind derzeit deaktiviert, was bedeutet, dass dieser Agent keine Chats oder Aufgaben verarbeiten kann. Verbinden Sie Ihren eigenen KI-Dienst, um erweiterte Funktionen im Arbeitsbereich freizuschalten.",

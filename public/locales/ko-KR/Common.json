@@ -128,6 +128,7 @@
   "AIChatRecent": "최근",
   "AIChats": "AI 채팅",
   "AiContentEmpty": "아직 파일이 없습니다",
+  "AiContentEmptyDescription": "에이전트가 만든 파일과 이 채팅에 첨부한 파일이 여기에 표시됩니다.",
   "AIDisabledInfoBlockActivateWalletDescription": "에이전트와 채팅하고, 지식 베이스에 액세스하고, 앱 전반에서 작업을 실행할 수 있도록 AI를 활성화하세요. AI 사용량은 지갑 잔액에서 청구됩니다.",
   "AIDisabledInfoBlockContactAdminDescription": "에이전트와 채팅하고, 지식 베이스에 액세스하고, 앱 전반에서 작업을 실행할 수 있도록 AI를 활성화하려면 슈퍼관리자에게 문의하세요.",
   "AIDisabledInfoBlockStandaloneDescription": "현재 AI 기능이 꺼져 있어 이 에이전트가 채팅이나 작업을 처리할 수 없습니다. 자체 AI 서비스를 연결하여 워크스페이스의 고급 기능을 잠금 해제하세요.",

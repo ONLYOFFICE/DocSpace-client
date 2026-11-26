@@ -128,6 +128,7 @@
   "AIChatRecent": "最近",
   "AIChats": "AI チャット",
   "AiContentEmpty": "まだファイルがありません",
+  "AiContentEmptyDescription": "エージェントが作成したファイルと、このチャットで添付したファイルがここに表示されます。",
   "AIDisabledInfoBlockActivateWalletDescription": "エージェントとチャットし、ナレッジベースにアクセスし、アプリ全体でタスクを実行させるためにAIを有効にしてください。AIの使用はウォレット残高から請求されます。",
   "AIDisabledInfoBlockContactAdminDescription": "エージェントとチャットし、ナレッジベースにアクセスし、アプリ全体でタスクを実行させるためにAIを有効にするには、スーパー管理者に連絡してください。",
   "AIDisabledInfoBlockStandaloneDescription": "AI機能は現在オフになっているため、このエージェントはチャットやタスクを処理できません。独自のAIサービスを接続して、ワークスペースの高度な機能を利用しましょう。",

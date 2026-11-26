@@ -626,7 +626,16 @@ class DialogsStore {
     threads: TAiChatRecentThread[],
     hasMore = false,
   ) => {
-    this.aiChatRecentThreads = threads;
+    // The same conversations read again (another agent opened, the chat's
+    // list read anew) are not a new list: the sidebar would draw Recent again.
+    const shown = this.aiChatRecentThreads;
+    const isSame =
+      shown.length === threads.length &&
+      shown.every(
+        (thread, i) =>
+          thread.id === threads[i].id && thread.title === threads[i].title,
+      );
+    if (!isSame) this.aiChatRecentThreads = threads;
     this.aiChatHasMoreThreads = hasMore;
   };
 

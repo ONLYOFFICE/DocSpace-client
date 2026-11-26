@@ -28,7 +28,14 @@ billing wrapper, sidebar and payment-complete route; the server installation pag
 
 On SaaS the Billing section SHALL open for the owner and DocSpace admins only; any other user, and any of its
 addresses including the checkout return page, SHALL lead to the 401 page. Old addresses under the portal settings
-SHALL be forwarded to the matching Billing page. A server installation SHALL keep Payments in the portal settings.
+SHALL be forwarded to the matching Billing page. On a server installation the Billing addresses SHALL lead an
+administrator to the license page in the portal settings and a member to the home page, and on Community Edition the
+whole section SHALL be closed.
+
+#### Scenario: Billing address on a server installation
+
+- **WHEN** an administrator of an Enterprise server opens a Billing address
+- **THEN** the license page of the portal settings opens
 
 #### Scenario: Room admin opens the wallet
 
@@ -239,7 +246,8 @@ SHALL say the card is kept and skip the purchase; a failed purchase SHALL keep t
 
 While a SaaS portal is unpaid, administrators SHALL be sent to the tariff plan and members to the unavailable page,
 asking the server only what the page needs. Billing SHALL keep only Wallet and Tariff plan, the wallet read-only even
-for the payer, and other Billing pages SHALL lead back to the tariff plan; the backup page SHALL stay reachable.
+for the payer, and other Billing pages except the return from the checkout SHALL lead back to the tariff plan; the
+backup page SHALL stay reachable.
 
 #### Scenario: Member of an unpaid portal
 

@@ -23,6 +23,8 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | **Who reaches Billing** | | |
 | Member to 401 from the tariff page and the checkout return; Room admin from the wallet; admin opens the tariff page | `access:53, 65, 77, 89` | E2E-CONFIRMED |
 | Old payments addresses forwarded on SaaS, kept on a server installation | `packages/client/src/routes/portalSettings.js:66-83` | CODE-ONLY |
+| SaaS billing left alone; admin kept in, member bounced to 401 | `packages/shared/routes/Route.private.payments.test.tsx:135, 145, 178` | UNIT-CONFIRMED |
+| Server installation: admin and owner to the license page, member home, wallet closed, no loop; Community closed | `packages/shared/routes/Route.private.payments.test.tsx:85, 91, 100, 109, 115, 125` | UNIT-CONFIRMED |
 | **Billing pages** | | |
 | Every page on phone and tablet, and in the dark theme | `billing-layouts.spec.ts:291, 327` | E2E-CONFIRMED |
 | **Only the payer manages the card and the plan** | | |
@@ -89,6 +91,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | **Unpaid portal** | | |
 | Admin to the tariff page; wallet and backup reachable; owner deletion; member to unavailable; only allowed requests | `unpaid-portal-requests.spec.ts:194, 207, 220, 233, 246` | E2E-CONFIRMED |
 | Sidebar of two pages; read-only wallet; hidden pages back to the tariff page | `access:317, 350, 374` | E2E-CONFIRMED |
+| Not-paid admin finishes the checkout return; other pages lead to the tariff plan | `packages/shared/routes/Route.private.payments.test.tsx:157, 168` | UNIT-CONFIRMED |
 | Grace period: payer pays, non-payer warned; unlinked or expired card banner; payment method page | `access:388, 412, 434, 466, 498, 515, 541` | E2E-CONFIRMED |
 | Payment gate on the server | `server`, "Payment gate while the portal is not paid"; "Tariff state of a portal" | SERVER-SPEC |
 | **Payments on a server installation** | | |

@@ -1145,12 +1145,13 @@ test.describe("Private section — info panel", () => {
       timeout: 15000,
     });
 
+    // The external links of the room, as inside it, for who manages them.
     await expect(
       page.getByTestId("info_panel_members_links_block"),
-    ).toHaveCount(0);
+    ).toBeVisible();
     await expect(
       page.getByTestId("info_panel_members_create_additional_link"),
-    ).toHaveCount(0);
+    ).toBeVisible();
     await expect(page.getByTestId("info_share_tab")).toHaveCount(0);
   });
 });

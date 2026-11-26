@@ -668,6 +668,30 @@ nothing to create; the readiness is not asked in the archive, and the
 row copies nothing there. The menu of the archived room has no external
 link. Restored, the room answers the right and the missing wraps again.
 
+### Gate and Docker runs of 2026-11-26
+
+Run for task 6.1 on the client at `bf8d6ef7295` with the correction of
+the case named below, against the mocks of the branch.
+
+- The pre-push gate: `npm --prefix ./common/tests run test:lefthook`,
+  61 passed and 3 skipped (the translation-completeness suites, which
+  the gate leaves to CI); `nx run-many -t tsc lint test` over the six
+  packages, all green.
+- `openspec validate --all --strict` at 1.17.0: 22 passed.
+- The client private-room specs under Docker (`tests-local` on a fresh
+  `client-tests` image, three workers; the thirteen `private-room*`,
+  `private-rooms*` and `encrypted-file-ui` specs): 201 of 202 passed.
+  The one that failed, "Members view of a room selected in a list" of
+  `private-rooms-section.spec.ts`, still expected a private room to
+  show no links in the Members view, from before the links of a room
+  were added there; it now expects the block of links and the control
+  to create one, as the scenario of the delta says, and passes.
+- The SDK private-room specs under Docker (`tests-local` on a fresh
+  `sdk-tests` image, `__tests__/e2e/private`): 53 passed, 7 skipped,
+  the cases the specs set aside for the fixtures they still need.
+- Not run under Docker: the doceditor specs, whose cases for a visitor
+  passed on a local build (5 of 5 in `private-room-editor.spec.ts`).
+
 ## Goals / Non-Goals
 
 **Goals:**

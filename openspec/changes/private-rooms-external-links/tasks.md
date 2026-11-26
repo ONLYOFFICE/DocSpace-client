@@ -113,7 +113,8 @@ The Backend tasks are done in `../server` by the backend team, on its own branch
 
 ## 6. Integration
 
-- [ ] 6.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `nx run-many -t tsc lint test` over the six packages), the client and SDK private-room specs under Docker and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: green runs recorded in design.md with the date
+- [x] 6.1 Run the pre-push gate (`npm --prefix ./common/tests run test:lefthook`, then `nx run-many -t tsc lint test` over the six packages), the client and SDK private-room specs under Docker and `npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. Verify: green runs recorded in design.md with the date
+  - 2026-11-26: done, recorded in design.md, "Gate and Docker runs of 2026-11-26". One client case that had gone stale was brought in line with the delta. The doceditor specs were run on a local build only
 - [ ] 6.2 Manual check on a stand with the merged server: create a link with a password, open it in a browser that is not signed in, read and download a file, revoke the link and open the address again; read the audit trail. Verify: the run recorded in design.md with the date and the builds
   - 2026-11-26, in part: the run is recorded in design.md, "Stand check of 2026-11-26": a link with a password and one without, opened without signing in, the file read and downloaded, a link revoked and opened again. Not done: the audit trail was not read, and what that record lists as not checked
 

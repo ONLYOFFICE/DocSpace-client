@@ -20,7 +20,7 @@ For an agent, selected in the Agents list or opened from "Agent info", the Info 
 - **THEN** the panel shows Details
 
 ### Requirement: Members of an agent
-For the Agent owner and Agent managers who are members of the agent, the Info panel of the agent SHALL end with a Members tab (`Common:Members`): the room's members list, where a member's role is changed between Agent manager and Member and a member is removed with the confirmation of `ai-agent-access` "Removing a member warns about their conversations". A Member, and a DocSpace admin who is not a member, SHALL NOT be given the tab.
+For the Agent owner and Agent managers who are members of the agent, the Info panel of the agent SHALL end with a Members tab (`Common:Members`): the room's members list, where Member is the only role a member can be given (`ai-agent-access`, "Roles of an agent"), so a member is not re-roled, and a member is removed with the confirmation of `ai-agent-access` "Removing a member warns about their conversations". A Member, and a DocSpace admin who is not a member, SHALL NOT be given the tab.
 
 #### Scenario: Agent manager
 - **WHEN** an Agent manager opens the Info panel on the agent's page

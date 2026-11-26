@@ -274,8 +274,9 @@ test.describe("Members of an agent", () => {
  * rights (the room's `security` and whether the user is in it), so each user
  * gets agents in the role the scenario names.
  *
- * Menu items by key: Edit agent `edit-room` (in no agent's menu, whatever
- * the role), Share agent
+ * Menu items by key: Edit agent `edit-room` (in neither the card menu nor
+ * the page menu, whatever the role; the chat panel's "Agent actions" keeps
+ * it), Share agent
  * `invite-users-to-room`, Agent info `room-info`, copy link
  * `link-for-room-members`, change owner `change-room-owner`, Delete agent
  * `delete`, Leave agent `leave-room`, notifications `mute-room`.

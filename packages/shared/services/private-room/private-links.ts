@@ -35,7 +35,11 @@
 
 
 import { getFolderPath } from "../../api/files";
-import { getEncryptionKeys, setPrivateItemLink } from "../../api/privacy";
+import {
+  getEncryptionKeys,
+  getRoomMissingFileKeys,
+  setPrivateItemLink,
+} from "../../api/privacy";
 import type { TPrivateLinkTarget } from "../../api/privacy/types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 import type { TRoom } from "../../api/rooms/types";
@@ -162,7 +166,52 @@ const readVerifiedMemberKeys = async (
  * Spec: private-rooms/room-membership, "Address of an existing link is copied by the owner and the managers"
  */
 export const canReadPrivateLinkAddress = (link: TFileLink) =>
-  addresses.has(String(link.sharedTo.id)) || !!link.sharedTo.linkSecretWrap;
+  isPrivateLinkReady(link) &&
+  (addresses.has(String(link.sharedTo.id)) || !!link.sharedTo.linkSecretWrap);
+
+// The links that still lack the key of a file they cover, by link id.
+const notReady = new Set<string>();
+
+/**
+ * Whether every file a link covers has its key wrapped for the link, as far
+ * as this page knows: a link is taken as ready until its creation or
+ * `refreshPrivateLinksReadiness` finds a file without a wrap.
+ *
+ * Spec: private-rooms/room-membership, "A link to a folder or a room is ready when every file has its key"
+ */
+export const isPrivateLinkReady = (link: TFileLink) =>
+  !notReady.has(String(link.sharedTo.id));
+
+/**
+ * Reads from the server which of the links of a folder or a room still lack
+ * the key of a file. A link to one file is wrapped for at its creation and
+ * is not asked about. A failed read leaves what is known as it is.
+ */
+export async function refreshPrivateLinksReadiness(
+  item: TPrivateLinkItem,
+  links: TFileLink[],
+): Promise<void> {
+  const linkIds = links
+    .map((link) => link?.sharedTo?.id)
+    .filter((id) => id !== undefined && id !== null)
+    .map(String);
+  if (isFile(item) || linkIds.length === 0) return;
+
+  try {
+    const roomId = await findRoomId(item);
+    if (roomId === null) return;
+    const missing = await getRoomMissingFileKeys(roomId, linkIds);
+    for (const linkId of linkIds) {
+      const lacks = missing.some(
+        (entry) => sameUser(entry.userId, linkId) && entry.fileIds.length > 0,
+      );
+      if (lacks) notReady.add(linkId);
+      else notReady.delete(linkId);
+    }
+  } catch {
+    // The state of the links stays as it was known.
+  }
+}
 
 /**
  * The secret of a link is wrapped for the caller, and the wrap does not open:
@@ -351,6 +400,8 @@ export type TPrivateLinkOptions = {
   expirationDate?: string | null;
   internal?: boolean;
   primary?: boolean;
+  /** The files of a folder or a room wrapped for the link so far, of all it covers. */
+  onProgress?: (processed: number, total: number) => void;
 };
 
 /**
@@ -391,6 +442,31 @@ export const canManagePrivateRoomLinks = (
 ): boolean =>
   canManagePrivateLinks(room, portalAllowsLinks) &&
   room?.roomType === RoomsType.CustomRoom;
+
+/**
+ * Whether the links an archived private room held are shown, as not working,
+ * to who managed them. An archived room reports no right to change its
+ * access, so the count of links tells: the server answers it to the owner
+ * and the room managers alone, in the archive as well.
+ *
+ * Spec: private-rooms/room-membership, "External links stop in an archived private room"
+ */
+export const showsArchivedPrivateRoomLinks = (
+  room:
+    | Pick<
+        TRoom,
+        "private" | "rootFolderType" | "roomType" | "externalLinksCount"
+      >
+    | null
+    | undefined,
+  portalAllowsLinks = true,
+): boolean =>
+  portalAllowsLinks &&
+  !!room &&
+  room.private === true &&
+  room.rootFolderType === FolderType.Archive &&
+  room.roomType === RoomsType.CustomRoom &&
+  typeof room.externalLinksCount === "number";
 
 /**
  * What a link of a private item lacks: a password, which a link to a folder
@@ -483,8 +559,11 @@ export async function createPrivateItemLink(
   const { missingFileIds } = await wrapFilesForLink(
     { id: Number(item.id), isFile: isFile(item) },
     { id: String(link.sharedTo.id), publicKey: material.linkPublicKey },
-    { currentUserId: userId, identity },
+    { currentUserId: userId, identity, onProgress: options.onProgress },
   );
+  if (missingFileIds === null || missingFileIds.length > 0) {
+    notReady.add(String(link.sharedTo.id));
+  }
 
   return { link, address, missingFileIds };
 }
@@ -507,6 +586,7 @@ export const revokePrivateItemLink = async (
   });
   const linkId = String(link.sharedTo.id);
   addresses.delete(linkId);
+  notReady.delete(linkId);
   leftOut.forEach((key) => {
     if (key.indexOf(`${linkId}:`) === 0) leftOut.delete(key);
   });

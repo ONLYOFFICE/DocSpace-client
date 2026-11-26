@@ -59,11 +59,15 @@ import {
   editPrivateItemLink,
   getPrivateLinkNeed,
   revokePrivateItemLink,
+  isPrivateLinkReady,
+  refreshPrivateLinksReadiness,
+  showsArchivedPrivateRoomLinks,
 } from "../private-links";
 
 const setPrivateItemLink = vi.hoisted(() => vi.fn());
 const getEncryptionKeys = vi.hoisted(() => vi.fn());
 const getRoomEncryptionKeys = vi.hoisted(() => vi.fn());
+const getRoomMissingFileKeys = vi.hoisted(() => vi.fn());
 const getFolderPath = vi.hoisted(() => vi.fn());
 const hasUnlocked = vi.hoisted(() => vi.fn());
 const verifyMemberKey = vi.hoisted(() => vi.fn());
@@ -74,6 +78,7 @@ vi.mock("../../../api/privacy", () => ({
   setPrivateItemLink,
   getEncryptionKeys,
   getRoomEncryptionKeys,
+  getRoomMissingFileKeys,
 }));
 vi.mock("../../../api/files", () => ({ getFolderPath }));
 vi.mock("../../encryption/secret-storage", () => ({
@@ -104,6 +109,7 @@ beforeEach(() => {
   setPrivateItemLink.mockReset().mockResolvedValue(stored());
   getEncryptionKeys.mockReset().mockResolvedValue([]);
   getRoomEncryptionKeys.mockReset().mockResolvedValue([]);
+  getRoomMissingFileKeys.mockReset().mockResolvedValue([]);
   getFolderPath.mockReset().mockResolvedValue([{ id: 1 }, { id: 14, roomType: 5 }]);
   hasUnlocked.mockReset().mockReturnValue(true);
   verifyMemberKey
@@ -573,5 +579,113 @@ describe("The secret of a link is wrapped for those who manage links", () => {
 
       expect(requireUnlock).not.toHaveBeenCalled();
     });
+  });
+});
+
+describe("A link to a folder or a room is ready when every file has its key", () => {
+  const made = async (id: string, missingFileIds: number[] | null) => {
+    setPrivateItemLink.mockResolvedValue(stored(id));
+    wrapFilesForLink.mockResolvedValue({ missingFileIds });
+    return (await createPrivateItemLink(folder, "u-1", { password: "p" }))!;
+  };
+
+  it("Link created with every file wrapped", async () => {
+    const { link } = await made("ready-1", []);
+
+    expect(isPrivateLinkReady(link)).toBe(true);
+    expect(canReadPrivateLinkAddress(link)).toBe(true);
+  });
+
+  it("Link created while files lack a key: the address is not given out", async () => {
+    const { link } = await made("ready-2", [3]);
+
+    expect(isPrivateLinkReady(link)).toBe(false);
+    expect(canReadPrivateLinkAddress(link)).toBe(false);
+  });
+
+  it("takes a link whose files could not be counted as not ready", async () => {
+    const { link } = await made("ready-3", null);
+
+    expect(isPrivateLinkReady(link)).toBe(false);
+  });
+
+  it("reports the files wrapped so far to the caller", async () => {
+    const onProgress = vi.fn();
+    await createPrivateItemLink(folder, "u-1", { password: "p", onProgress });
+
+    expect(wrapFilesForLink.mock.calls[0][2].onProgress).toBe(onProgress);
+  });
+
+  it("Missing keys wrapped later: the link becomes ready", async () => {
+    const { link } = await made("ready-4", [3]);
+
+    await refreshPrivateLinksReadiness(folder, [link]);
+
+    expect(getRoomMissingFileKeys).toHaveBeenCalledWith(14, ["ready-4"]);
+    expect(isPrivateLinkReady(link)).toBe(true);
+  });
+
+  it("File added after the link: the server names the link as lacking its key", async () => {
+    const link = stored("ready-5");
+    getRoomMissingFileKeys.mockResolvedValue([
+      { userId: "READY-5", fileIds: [7] },
+    ]);
+
+    await refreshPrivateLinksReadiness(folder, [link]);
+
+    expect(isPrivateLinkReady(link)).toBe(false);
+  });
+
+  it("keeps what is known when the server cannot be asked, and asks nothing for a file", async () => {
+    const { link } = await made("ready-6", [3]);
+    getRoomMissingFileKeys.mockRejectedValue(new Error("offline"));
+
+    await refreshPrivateLinksReadiness(folder, [link]);
+    expect(isPrivateLinkReady(link)).toBe(false);
+
+    getRoomMissingFileKeys.mockClear();
+    await refreshPrivateLinksReadiness(file, [link]);
+    expect(getRoomMissingFileKeys).not.toHaveBeenCalled();
+  });
+
+  it("forgets a revoked link", async () => {
+    const { link } = await made("ready-7", [3]);
+
+    await revokePrivateItemLink(folder, link);
+
+    expect(isPrivateLinkReady(link)).toBe(true);
+  });
+});
+
+describe("External links stop in an archived private room", () => {
+  const archived = (over: object) =>
+    ({
+      private: true,
+      rootFolderType: FolderType.Archive,
+      roomType: RoomsType.CustomRoom,
+      externalLinksCount: 2,
+      ...over,
+    }) as unknown as TRoom;
+
+  it("Archived room with links, seen by who managed them", () => {
+    expect(showsArchivedPrivateRoomLinks(archived({}))).toBe(true);
+    expect(showsArchivedPrivateRoomLinks(archived({ externalLinksCount: 0 }))).toBe(true);
+  });
+
+  it("shows nothing to a member the server gives no count, outside the archive, for another room type or with links forbidden", () => {
+    expect(
+      showsArchivedPrivateRoomLinks(archived({ externalLinksCount: null })),
+    ).toBe(false);
+    expect(
+      showsArchivedPrivateRoomLinks(
+        archived({ rootFolderType: FolderType.Rooms }),
+      ),
+    ).toBe(false);
+    expect(
+      showsArchivedPrivateRoomLinks(
+        archived({ roomType: RoomsType.EditingRoom }),
+      ),
+    ).toBe(false);
+    expect(showsArchivedPrivateRoomLinks(archived({}), false)).toBe(false);
   });
 });

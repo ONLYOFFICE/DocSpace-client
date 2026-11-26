@@ -161,3 +161,10 @@
     padding-top: 8px;
   }
 }
+
+// Stands above the two buttons of the footer, which share one row.
+.wrapProgress {
+  flex-basis: 100%;
+  font-size: 12px;
+}
+

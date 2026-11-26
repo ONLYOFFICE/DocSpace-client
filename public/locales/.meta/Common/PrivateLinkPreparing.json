@@ -1,0 +1,29 @@
+{
+  "key_path": "PrivateLinkPreparing",
+  "content": "Preparing the link: {{processed}} of {{total}} files",
+  "content_en_sha1_hash": "a731439cd748b3e68a9a84fa11b07e7fa9d6f75a",
+  "created_at": "2026-11-26T13:34:37.709Z",
+  "updated_at": "2026-11-26T13:35:42.563Z",
+  "comment": {
+    "text": "Progress line in the footer of the link settings panel while an external link to a folder or a private (end-to-end encrypted) room is being created: the keys of its files are prepared one by one. {{processed}} is the number of files done, {{total}} the number of files in all; both are numbers. Short status line without a final period.",
+    "is_auto": true,
+    "updated_at": "2026-11-26T13:35:42.563Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 736,
+      "context": "<div\n className={styles.wrapProgress}\n data-testid=\"edit_link_panel_wrap_progress\"\n role=\"status\"\n >\n {t(\"Common:PrivateLinkPreparing\", wrapProgress)}\n </div>\n ) : null}\n <Button\n scale\n primary",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

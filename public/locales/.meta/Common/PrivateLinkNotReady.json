@@ -1,0 +1,47 @@
+{
+  "key_path": "PrivateLinkNotReady",
+  "content": "The link is not ready yet: its files are still being prepared. Try again later.",
+  "content_en_sha1_hash": "b4d7cd123a30928a0839eb9faf5f97bf25f3064f",
+  "created_at": "2026-11-26T13:34:37.631Z",
+  "updated_at": "2026-11-26T13:35:42.563Z",
+  "comment": {
+    "text": "Warning toast shown instead of copying an external link of a private (end-to-end encrypted) room, its folder or file, when the link was created but the keys of the files it leads to are still being prepared for it, so a visitor could not open them yet. Appears in the link settings panel, in the links list of the info panel and from the room context menu. Two full sentences with periods; the colon joins the reason.",
+    "is_auto": true,
+    "updated_at": "2026-11-26T13:35:42.563Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
+      "line_number": 130,
+      "context": "onCloseContextMenu();\n };\n \n const onCopyPrivateLink = async () => {\n if (!isPrivateLinkReady(link)) {\n toastr.warning(t(\"Common:PrivateLinkNotReady\"));\n return;\n }\n const privateAddress = await readPrivateLinkAddress(\n item,\n link,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 377,
+      "context": "toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n await refreshPrivateLinksReadiness(room, [link]);\n if (!isPrivateLinkReady(link)) {\n toastr.warning(t(\"Common:PrivateLinkNotReady\"));\n return;\n }\n \n const address = await readPrivateLinkAddress(room, link, userId).catch(() => {\n toastr.error(t(\"Common:PrivateLinkAddressUnavailable\"));",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 144,
+      "context": "return;\n }\n \n // Spec: private-rooms/room-membership, \"A link to a folder or a room is ready when every file has its key\"\n if (!isPrivateLinkReady(link)) {\n toastr.warning(t(\"Common:PrivateLinkNotReady\"));\n return;\n }\n \n const address = await readPrivateLinkAddress(\n infoPanelSelection,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 415,
+      "context": "sharedTo: { ...made.link.sharedTo, shareLink: made.address },\n },\n t,\n );\n } else {\n toastr.warning(t(\"Common:PrivateLinkNotReady\"));\n }\n return made.link;\n }\n \n if (isPrivateLink) {",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

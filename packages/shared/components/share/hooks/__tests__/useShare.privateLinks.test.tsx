@@ -60,6 +60,7 @@ const links = vi.hoisted(() => ({
   edit: vi.fn(),
   revoke: vi.fn(),
   address: vi.fn(),
+  ready: vi.fn(() => true),
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -77,6 +78,7 @@ vi.mock("../../../../services/private-room/private-links", async (io) => ({
   editPrivateItemLink: links.edit,
   revokePrivateItemLink: links.revoke,
   readPrivateLinkAddress: links.address,
+  isPrivateLinkReady: links.ready,
 }));
 
 const SHORT = "https://portal.example/s/abc";
@@ -239,6 +241,23 @@ describe("useShare: links of a private item", () => {
 
     await vi.waitFor(() => expect(links.address).toHaveBeenCalled());
     expect(copyShareLink).not.toHaveBeenCalled();
+  });
+
+  it("Page closed during the wrapping: a link not ready gives no address", async () => {
+    const wrapped = link("1", {
+      linkSecretWrap: { publicKeyId: "key-1", wrap: "wrap" },
+    });
+    links.ready.mockReturnValue(false);
+    render(<Links props={propsOf({ fileLinkProps: [wrapped] })} />);
+
+    fireEvent.click(screen.getByText("Link 1"));
+
+    await vi.waitFor(() =>
+      expect(toastr.warning).toHaveBeenCalledWith("Common:PrivateLinkNotReady"),
+    );
+    expect(links.address).not.toHaveBeenCalled();
+    expect(copyShareLink).not.toHaveBeenCalled();
+    links.ready.mockReturnValue(true);
   });
 
   it("gives a text when the wrap of the secret does not open", async () => {

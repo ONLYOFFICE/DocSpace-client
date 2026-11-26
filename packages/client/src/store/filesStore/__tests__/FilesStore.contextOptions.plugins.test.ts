@@ -124,6 +124,36 @@ describe("getFilesContextOptions — plugin items vs encrypted files", () => {
     expect(store.getFilesContextOptions(privateRoom)).not.toContain(PLUGIN_KEY);
   });
 
+  it("External link of a private room offered to who manages its links only", () => {
+    const privateRoom = (over: object) =>
+      ({
+        ...baseFolder(),
+        id: 6,
+        title: "Room",
+        roomType: RoomsType.CustomRoom,
+        private: true,
+        security: { EditAccess: true, CopySharedLink: true },
+        ...over,
+      }) as unknown as TItem;
+    const options = (item: TItem, privateRoomLinks = true) => {
+      const store = createTestFilesStore({
+        userStore: { encryptionKeys: [{ id: "key-1" }] },
+        filesSettingsStore: { privateRoomLinks },
+      });
+      store.dialogsStore = { roomGroups: [] } as never;
+      return store.getFilesContextOptions(item);
+    };
+
+    expect(options(privateRoom({}))).toContain("external-link");
+    expect(options(privateRoom({}), false)).not.toContain("external-link");
+    expect(
+      options(privateRoom({ security: { CopySharedLink: true } })),
+    ).not.toContain("external-link");
+    expect(
+      options(privateRoom({ roomType: RoomsType.EditingRoom })),
+    ).not.toContain("external-link");
+  });
+
   it("asks the plugin store for a room's keys with its id and room type", () => {
     const getContextMenuKeysByType = vi.fn(() => [PLUGIN_KEY]);
     const store = createTestFilesStore({

@@ -85,6 +85,7 @@ import {
   withheldMenuKeys,
   type TPrivateMenuIntent,
 } from "@docspace/shared/services/private-room/private-menu-rules";
+import { canManagePrivateRoomLinks } from "@docspace/shared/services/private-room/private-links";
 
 type TPrivateMenuKeys = Partial<Record<TPrivateMenuIntent, readonly string[]>>;
 
@@ -892,9 +893,22 @@ export const buildContextOptions = (
     }
 
     if (item.private) {
+      // Spec: private-rooms/room-membership, "No public sharing for private rooms":
+      // the external link of the room stays for who manages its links.
+      const managesLinks = canManagePrivateRoomLinks(
+        item as unknown as TRoom,
+        deps.filesSettingsStore?.privateRoomLinks,
+      );
       roomOptions = removeOptions(
         roomOptions,
-        withheldMenuKeys(PRIVATE_ROOM_WITHHELD, PRIVATE_ROOM_MENU_KEYS),
+        withheldMenuKeys(
+          new Set(
+            Array.from(PRIVATE_ROOM_WITHHELD).filter(
+              (intent) => intent !== "external-link" || !managesLinks,
+            ),
+          ),
+          PRIVATE_ROOM_MENU_KEYS,
+        ),
       );
     }
 

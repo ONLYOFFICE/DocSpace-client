@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { canManagePrivateRoomLinks } from "@docspace/shared/services/private-room/private-links";
 import { isSkillFile } from "@docspace/shared/utils/skillFile";
 import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
@@ -310,11 +311,18 @@ export const getFilesContextOptionsImpl = (
   const isKnowledgeBase = item.roomType === RoomsType.KnowledgeRoom;
   const isSkillSet = item.roomType === RoomsType.InstructionsRoom;
 
-  const hasShareLinkRights = isPublicRoom
-    ? item.security?.Read
-    : item.shared
-      ? item.security?.CopySharedLink
-      : item.security?.EditAccess;
+  // A private room reports no right to copy a link: who manages its links
+  // is told by the room itself.
+  const hasShareLinkRights = item.private
+    ? canManagePrivateRoomLinks(
+        item as unknown as TRoom,
+        self.filesSettingsStore.privateRoomLinks,
+      )
+    : isPublicRoom
+      ? item.security?.Read
+      : item.shared
+        ? item.security?.CopySharedLink
+        : item.security?.EditAccess;
 
   const { isFiltered } = self.filesStore;
   const { isIndexedFolder, security } = self.selectedFolderStore;

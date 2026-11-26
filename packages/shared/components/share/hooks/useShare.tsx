@@ -57,7 +57,9 @@ import {
   PRIVATE_LINK_RIGHTS,
   createPrivateItemLink,
   canReadPrivateLinkAddress,
+  isPrivateLinkReady,
   readPrivateLinkAddress,
+  refreshPrivateLinksReadiness,
   shareLinkSecretsWithManagers,
   editPrivateItemLink,
   revokePrivateItemLink,
@@ -137,6 +139,12 @@ export const useShare = ({
       return;
     }
 
+    // Spec: private-rooms/room-membership, "A link to a folder or a room is ready when every file has its key"
+    if (!isPrivateLinkReady(link)) {
+      toastr.warning(t("Common:PrivateLinkNotReady"));
+      return;
+    }
+
     const address = await readPrivateLinkAddress(
       infoPanelSelection,
       link,
@@ -178,6 +186,9 @@ export const useShare = ({
       : getExternalLinks;
 
     const res = await getExternalLinksMethod(infoPanelSelection.id);
+    if (privateLinks) {
+      await refreshPrivateLinksReadiness(infoPanelSelection, res.items);
+    }
 
     setFileLinks(res.items);
     setIsLoading(false);

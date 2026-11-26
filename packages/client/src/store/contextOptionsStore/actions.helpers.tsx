@@ -41,10 +41,20 @@ import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import type { TTranslation } from "@docspace/shared/types";
-import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type {
+  TFile,
+  TFileLink,
+  TFolder,
+} from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { getExternalLinks } from "@docspace/shared/api/rooms";
+import {
+  isPrivateLinkReady,
+  readPrivateLinkAddress,
+  refreshPrivateLinksReadiness,
+} from "@docspace/shared/services/private-room/private-links";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
 import { showRoomGroupChangedToast } from "SRC_DIR/helpers/toast-helpers";
 import { getOAuthToken } from "@onlyoffice/apps-ui-kit/utils/get-oauth-token";
@@ -56,6 +66,7 @@ import {
   Events,
   FolderType,
   FormFillingManageAction,
+  ShareLinkType,
 } from "@docspace/shared/enums";
 import {
   formRoleMapping,
@@ -321,11 +332,72 @@ export const onOpenEmbeddingSettingsImpl = async (
   setEmbeddingPanelData({ visible: true, item });
 };
 
+/**
+ * The external link of a private room, from its menu: the address of its
+ * primary link, read from the secret wrapped for the caller, or the settings
+ * of a new link when the room has none, which ask for its password.
+ *
+ * Spec: private-rooms/room-membership, "No public sharing for private rooms"
+ */
+const copyPrivateRoomLink = async (
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
+  const room = item as unknown as TRoom;
+  const userId = self.userStore.user?.id ?? "";
+
+  let links: TFileLink[];
+  try {
+    links = ((await getExternalLinks(room.id, ShareLinkType.External)) ??
+      []) as TFileLink[];
+  } catch (error) {
+    toastr.error(error as string);
+    return;
+  }
+
+  const link = links.find((entry) => entry.sharedTo.primary) ?? links[0];
+  if (!link) {
+    self.dialogsStore.setLinkParams({
+      link: { sharedTo: { primary: true } } as TFileLink,
+      item: room,
+      privateLinkUserId: userId,
+      updateLink: self.publicRoomStore.setExternalLink,
+    } as unknown as Parameters<DialogsStore["setLinkParams"]>[0]);
+    self.dialogsStore.setEditLinkPanelIsVisible(true);
+    return;
+  }
+
+  if (self.filesSettingsStore.isLinkBlockedByAdmin(room, link)) {
+    toastr.error(t("Common:LinkBlockedByAdminWarning"));
+    return;
+  }
+  await refreshPrivateLinksReadiness(room, [link]);
+  if (!isPrivateLinkReady(link)) {
+    toastr.warning(t("Common:PrivateLinkNotReady"));
+    return;
+  }
+
+  const address = await readPrivateLinkAddress(room, link, userId).catch(() => {
+    toastr.error(t("Common:PrivateLinkAddressUnavailable"));
+    return null;
+  });
+  if (!address) return;
+
+  copyShareLink(
+    room,
+    { ...link, sharedTo: { ...link.sharedTo, shareLink: address } },
+    t as unknown as TFunction,
+  );
+};
+
 export const onCreateAndCopySharedLinkImpl = async (
   self: ContextOptionsStore,
   item: TContextItem,
   t: TTranslation,
 ) => {
+  if (item.private) return copyPrivateRoomLink(self, item, t);
+
   const { isExpiredLinkAsync } = self.filesActionsStore;
 
   if (item.external && (item.isLinkExpired || (await isExpiredLinkAsync(item))))

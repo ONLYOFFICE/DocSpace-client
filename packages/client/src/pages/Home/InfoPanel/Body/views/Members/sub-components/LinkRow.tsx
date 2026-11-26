@@ -58,6 +58,7 @@ import {
   PRIVATE_LINK_RIGHTS,
   editPrivateItemLink,
   canReadPrivateLinkAddress,
+  isPrivateLinkReady,
   readPrivateLinkAddress,
   revokePrivateItemLink,
 } from "@docspace/shared/services/private-room/private-links";
@@ -125,6 +126,10 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyPrivateLink = async () => {
+    if (!isPrivateLinkReady(link)) {
+      toastr.warning(t("Common:PrivateLinkNotReady"));
+      return;
+    }
     const privateAddress = await readPrivateLinkAddress(
       item,
       link,

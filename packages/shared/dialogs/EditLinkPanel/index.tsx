@@ -73,6 +73,7 @@ import { parseToDateTime } from "@onlyoffice/apps-ui-kit/utils/date";
 import { ShareLinkService } from "../../services/share-link.service";
 import {
   createPrivateItemLink,
+  isPrivateLinkReady,
   editPrivateItemLink,
   getPrivateLinkNeed,
 } from "../../services/private-room/private-links";
@@ -220,6 +221,11 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  // The files of a folder or a room wrapped for a new link so far.
+  const [wrapProgress, setWrapProgress] = useState<{
+    processed: number;
+    total: number;
+  } | null>(null);
   const [passwordValue, setPasswordValue] = useState(password);
   const [expirationDate, setExpirationDate] = useState(date);
 
@@ -387,20 +393,27 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
           expirationDate: updatedLink.sharedTo.expirationDate ?? null,
           internal: updatedLink.sharedTo.internal,
           primary: updatedLink.sharedTo.primary,
-        });
+          onProgress: (processed, total) =>
+            setWrapProgress(total > 1 ? { processed, total } : null),
+        }).finally(() => setWrapProgress(null));
 
         // The unlock was dismissed: the panel stays, with what was entered.
         if (!made) return null;
 
         updateLink?.(made.link);
-        copyShareLink(
-          item,
-          {
-            ...made.link,
-            sharedTo: { ...made.link.sharedTo, shareLink: made.address },
-          },
-          t,
-        );
+        // Spec: private-rooms/room-membership, "A link to a folder or a room is ready when every file has its key"
+        if (isPrivateLinkReady(made.link)) {
+          copyShareLink(
+            item,
+            {
+              ...made.link,
+              sharedTo: { ...made.link.sharedTo, shareLink: made.address },
+            },
+            t,
+          );
+        } else {
+          toastr.warning(t("Common:PrivateLinkNotReady"));
+        }
         return made.link;
       }
 
@@ -714,6 +727,15 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
+          {wrapProgress ? (
+            <div
+              className={styles.wrapProgress}
+              data-testid="edit_link_panel_wrap_progress"
+              role="status"
+            >
+              {t("Common:PrivateLinkPreparing", wrapProgress)}
+            </div>
+          ) : null}
           <Button
             scale
             primary

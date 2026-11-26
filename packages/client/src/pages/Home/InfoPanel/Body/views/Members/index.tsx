@@ -57,7 +57,9 @@ import { createExternalLink } from "@docspace/shared/api/rooms";
 import {
   PRIVATE_ROOM_ADDITIONAL_LINKS_LIMIT,
   canManagePrivateRoomLinks,
+  refreshPrivateLinksReadiness,
   shareLinkSecretsWithManagers,
+  showsArchivedPrivateRoomLinks,
 } from "@docspace/shared/services/private-room/private-links";
 import type { TFileLink } from "@docspace/shared/api/files/types";
 import MembersList from "@docspace/shared/components/share/sub-components/List";
@@ -131,6 +133,7 @@ const Members = ({
   }, [isMembersPanelUpdating, scrollToTop]);
 
   const isPrivateRoom = infoPanelSelection?.private === true;
+  const [, setLinksReadiness] = React.useState(0);
 
   // Spec: private-rooms/encryption-core, "The secret of a link is wrapped for those who manage links"
   useEffect(() => {
@@ -139,6 +142,10 @@ const Members = ({
       (link): link is TFileLink => !!link,
     );
     void shareLinkSecretsWithManagers(infoPanelSelection, links, selfId ?? "");
+    // The rows read whether a link is ready when they render.
+    void refreshPrivateLinksReadiness(infoPanelSelection, links).then(() =>
+      setLinksReadiness((version) => version + 1),
+    );
   }, [
     isPrivateRoom,
     isPublicRoomType,
@@ -551,6 +558,10 @@ export default inject(
     // room has links to itself.
     const isPublicRoomType = isPrivateRoom
       ? canManagePrivateRoomLinks(
+          infoPanelRoomSelection,
+          filesSettingsStore.privateRoomLinks,
+        ) ||
+        showsArchivedPrivateRoomLinks(
           infoPanelRoomSelection,
           filesSettingsStore.privateRoomLinks,
         )

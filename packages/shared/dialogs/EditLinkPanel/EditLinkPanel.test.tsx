@@ -56,12 +56,17 @@ vi.mock("../../services/share-link.service", () => ({
   ShareLinkService: { editLink: vi.fn() },
 }));
 
-const privateLinks = vi.hoisted(() => ({ create: vi.fn(), edit: vi.fn() }));
+const privateLinks = vi.hoisted(() => ({
+  create: vi.fn(),
+  edit: vi.fn(),
+  ready: vi.fn(() => true),
+}));
 
 vi.mock("../../services/private-room/private-links", async (io) => ({
   ...((await io()) as object),
   createPrivateItemLink: privateLinks.create,
   editPrivateItemLink: privateLinks.edit,
+  isPrivateLinkReady: privateLinks.ready,
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
@@ -89,7 +94,24 @@ vi.mock("./LinkBlock", () => ({
 }));
 
 vi.mock("./PasswordAccessBlock", () => ({
-  default: () => <div data-testid="stub_password_block" />,
+  default: ({
+    setPasswordValue,
+    setIsPasswordValid,
+  }: {
+    setPasswordValue: (value: string) => void;
+    setIsPasswordValid: (value: boolean) => void;
+  }) => (
+    <button
+      type="button"
+      data-testid="stub_password_block"
+      onClick={() => {
+        setPasswordValue("Pass-1234");
+        setIsPasswordValid(true);
+      }}
+    >
+      password
+    </button>
+  ),
 }));
 
 vi.mock("./LimitTimeBlock", () => ({
@@ -427,6 +449,45 @@ describe("<EditLinkPanel />", () => {
 
       expect(privateLinks.create).not.toHaveBeenCalled();
       expect(props.setIsVisible).not.toHaveBeenCalled();
+    });
+
+    it("Link to a room with many files: the progress is shown, and a link left not ready is not copied", async () => {
+      const folder = { id: 18, isFolder: true, parentId: 14 };
+      const made = createLink(ShareAccessRights.ReadOnly);
+      let finish: () => void = () => {};
+      privateLinks.create.mockImplementation(
+        (_item, _userId, options) =>
+          new Promise((resolve) => {
+            options.onProgress(2, 5);
+            finish = () => resolve({ link: made, address: "address#secret" });
+          }),
+      );
+      privateLinks.ready.mockReturnValue(false);
+      const props = renderPrivate({
+        link: { sharedTo: { primary: true } } as unknown as TFileLink,
+        item: folder as unknown as EditLinkPanelProps["item"],
+      });
+      const user = userEvent.setup();
+
+      await user.click(screen.getByTestId("stub_password_block"));
+      await waitFor(() => expect(getSaveButton()).not.toBeDisabled());
+      await user.click(getSaveButton());
+
+      expect(
+        await screen.findByTestId("edit_link_panel_wrap_progress"),
+      ).toHaveTextContent("Common:PrivateLinkPreparing");
+      expect(privateLinks.create.mock.calls[0][2].password).toBe("Pass-1234");
+
+      finish();
+
+      await waitFor(() =>
+        expect(toastr.warning).toHaveBeenCalledWith(
+          "Common:PrivateLinkNotReady",
+        ),
+      );
+      expect(props.updateLink).toHaveBeenCalledWith(made);
+      expect(screen.queryByTestId("edit_link_panel_wrap_progress")).toBeNull();
+      privateLinks.ready.mockReturnValue(true);
     });
   });
 });

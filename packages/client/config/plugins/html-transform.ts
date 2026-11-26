@@ -96,6 +96,13 @@ export const htmlTransformPlugin = (): Plugin => {
           const port = ctx.server.config.server.port || 5001;
           const host = process.env.VITE_DEV_HOST || currentRequestHost;
           const viteOrigin = `http://${host}:${port}`;
+          // The page of a link of a private item takes scripts from its own
+          // origin alone (index.html); behind the proxy the modules come
+          // from the Vite server, which is named here.
+          html = html.replace(
+            /%DOCSPACE_DEV_SCRIPT_ORIGIN%/g,
+            ` ${viteOrigin}`,
+          );
           // Rewrite all module <script> src attributes that start with "/"
           // to use the absolute Vite origin.  This must handle the optional
           // ?t=<timestamp> query that Vite's devHtmlHook appends after HMR
@@ -113,7 +120,7 @@ export const htmlTransformPlugin = (): Plugin => {
           );
         }
 
-        return html;
+        return html.replace(/%DOCSPACE_DEV_SCRIPT_ORIGIN%/g, "");
       },
     },
   };

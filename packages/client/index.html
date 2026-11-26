@@ -2,6 +2,23 @@
 <html lang="en" translate="no">
   <head>
     <meta charset="utf-8" />
+    <!--
+      The page of a visitor of an external link of a private item reads the
+      secret of the link from its address, so it takes scripts from the portal
+      alone, whatever policy the answer carried. This script runs before any
+      other is asked for; the placeholder is empty in a build and names the
+      Vite server in development.
+      Spec: private-rooms/encryption-core, "The page of a visitor keeps the secret of a link to the address"
+    -->
+    <script>
+      if (/\/share\/private\/?$/.test(window.location.pathname)) {
+        var privateLinkPolicy = document.createElement("meta");
+        privateLinkPolicy.httpEquiv = "Content-Security-Policy";
+        privateLinkPolicy.content =
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:%DOCSPACE_DEV_SCRIPT_ORIGIN%";
+        document.head.appendChild(privateLinkPolicy);
+      }
+    </script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"

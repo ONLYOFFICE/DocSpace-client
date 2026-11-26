@@ -56,9 +56,11 @@ import {
 
 const setPrivateItemLink = vi.hoisted(() => vi.fn());
 const requireUnlock = vi.hoisted(() => vi.fn());
+const wrapFilesForLink = vi.hoisted(() => vi.fn());
 
 vi.mock("../../../api/privacy", () => ({ setPrivateItemLink }));
 vi.mock("../../encryption/secret-storage", () => ({ requireUnlock }));
+vi.mock("../room-encryption", () => ({ wrapFilesForLink }));
 
 const file = { id: 9, fileExst: ".docx", folderId: 14 } as unknown as TFile;
 const folder = { id: 18, isFolder: true, parentId: 14 } as unknown as TFolder;
@@ -80,6 +82,7 @@ const stored = (id = "link-1") =>
 beforeEach(() => {
   setPrivateItemLink.mockReset().mockResolvedValue(stored());
   requireUnlock.mockReset().mockResolvedValue({});
+  wrapFilesForLink.mockReset().mockResolvedValue({ missingFileIds: [] });
 });
 
 describe("canManagePrivateLinks", () => {
@@ -185,6 +188,29 @@ describe("createPrivateItemLink", () => {
     );
     const hash = new Uint8Array(await crypto.subtle.digest("SHA-256", proof));
     expect(request.linkProofHash).toBe(btoa(String.fromCharCode(...hash)));
+  });
+
+  it("Link to a file created: its key is wrapped for the link", async () => {
+    wrapFilesForLink.mockResolvedValue({ missingFileIds: [9] });
+
+    const made = await createPrivateItemLink(file, "u-1");
+
+    const request = setPrivateItemLink.mock.calls[0][1];
+    expect(wrapFilesForLink).toHaveBeenCalledWith(
+      { id: 9, isFile: true },
+      { id: "link-1", publicKey: request.linkPublicKey },
+      { currentUserId: "u-1", identity: {} },
+    );
+    expect(made!.missingFileIds).toEqual([9]);
+  });
+
+  it("Link to a folder created: the files under it are wrapped for the link", async () => {
+    await createPrivateItemLink(folder, "u-1", { password: "p" });
+
+    expect(wrapFilesForLink.mock.calls[0][0]).toEqual({
+      id: 18,
+      isFile: false,
+    });
   });
 
   it("Link to a folder or a room without a password", async () => {

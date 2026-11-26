@@ -37,7 +37,10 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
 import { generateIdentityKeyPair } from "../../encryption/identity";
 import { generateDEK } from "../../encryption/file-keys";
-import { wrapDekForRecipients } from "../../encryption/room-file-access";
+import {
+  unwrapDekForCurrentUser,
+  wrapDekForRecipients,
+} from "../../encryption/room-file-access";
 import { inspectWrap } from "../../encryption/hpke";
 import {
   TofuStore,
@@ -57,6 +60,7 @@ import {
   backfillEncryptedFilesForRoomMembers,
   rewrapMissingFilesForMember,
   validateMembersForEncryption,
+  wrapFilesForLink,
 } from "../room-encryption";
 import { verifyMemberKeys } from "../member-key-verification";
 
@@ -193,6 +197,90 @@ describe("addMembersToEncryptedRoom", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  describe("wrapFilesForLink", () => {
+    const LINK_ID = "44444444-4444-4444-8444-444444444444";
+    let link: IdentityKeyPair;
+
+    beforeEach(async () => {
+      link = await generateIdentityKeyPair();
+      getFilePublicKeysMock.mockReset();
+      getFilePublicKeysMock.mockResolvedValue([
+        { userId: ALICE, publicKey: pubB64(alice) },
+      ]);
+      getFileEncryptionAccessMock.mockResolvedValue({
+        fileKeys: aliceOwnWrap,
+        userKeys: [],
+      });
+    });
+
+    const wrap = (item: { id: number; isFile: boolean }) =>
+      wrapFilesForLink(
+        item,
+        { id: LINK_ID, publicKey: pubB64(link) },
+        { currentUserId: ALICE, identity: alice },
+      );
+
+    it("Link to a file created", async () => {
+      const { missingFileIds } = await wrap({ id: FILE_ID, isFile: true });
+
+      expect(missingFileIds).toEqual([]);
+      const written = setFileEncryptionKeysMock.mock
+        .calls[0][1] as ServerAccessKeyDto[];
+      expect(written.map((k) => k.userId)).toEqual([ALICE, LINK_ID]);
+
+      // The key of the link opens the wrap made for it.
+      const opened = await unwrapDekForCurrentUser({
+        fileKeys: written,
+        roomMemberKeys: [{ userId: ALICE, publicKey: pubB64(alice) }],
+        currentUserId: LINK_ID,
+        currentIdentity: link,
+        fileId: FILE_ID,
+      });
+      expect(Array.from(opened)).toEqual(Array.from(dek));
+    });
+
+    it("Link to a folder created: a file that cannot be opened is left for the backfill", async () => {
+      const UNREADABLE = FILE_ID + 1;
+      getFolderMock.mockResolvedValue({
+        folders: [],
+        files: [
+          { id: FILE_ID, encrypted: true },
+          { id: UNREADABLE, encrypted: true },
+          { id: FILE_ID + 2, encrypted: false },
+        ],
+        total: 3,
+      });
+      getFileEncryptionAccessMock.mockImplementation(async (id: number) =>
+        id === FILE_ID
+          ? { fileKeys: aliceOwnWrap, userKeys: [] }
+          : { fileKeys: [] },
+      );
+
+      const { missingFileIds } = await wrap({ id: 77, isFile: false });
+
+      expect(missingFileIds).toEqual([UNREADABLE]);
+      expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    });
+
+    it("Server stores no wrap for the link", async () => {
+      setFileEncryptionKeysMock.mockResolvedValue({
+        skippedUserIds: [LINK_ID],
+      });
+
+      expect(await wrap({ id: FILE_ID, isFile: true })).toEqual({
+        missingFileIds: [FILE_ID],
+      });
+    });
+
+    it("Files of the folder cannot be listed", async () => {
+      getFolderMock.mockRejectedValue(new Error("403"));
+
+      expect(await wrap({ id: 77, isFile: false })).toEqual({
+        missingFileIds: null,
+      });
+    });
   });
 
   it("returns empty result when newMembers is empty", async () => {

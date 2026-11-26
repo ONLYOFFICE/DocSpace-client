@@ -53,7 +53,11 @@ import {
   type SkippedMemberKey,
   verifyMemberKey,
 } from "./member-key-verification";
-import { loadRoomMemberKeys, selectMemberKeys } from "./room-member-keys";
+import {
+  loadFileSenderKeysSafe,
+  loadRoomMemberKeys,
+  selectMemberKeys,
+} from "./room-member-keys";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
@@ -632,6 +636,89 @@ export async function backfillEncryptedFilesForRoomMembers(
   }
 
   return { fileResults, skippedMembers, missingFileIdsByMember };
+}
+
+/**
+ * Wraps for a new external link the keys of the files it covers: the file
+ * itself, or every encrypted file under the folder or the room. The caller
+ * opens each file with its own entry. Resolves to the files left without a
+ * wrap, which the backfill covers later; null when the files of the folder
+ * could not be listed.
+ *
+ * Spec: private-rooms/encryption-core, "An external link has a key pair of its own"
+ */
+export async function wrapFilesForLink(
+  item: { id: number; isFile: boolean },
+  link: { id: string; publicKey: string },
+  { currentUserId, identity, onProgress }: RoomEncryptionOptions,
+): Promise<{ missingFileIds: number[] | null }> {
+  let fileIds: number[];
+  try {
+    fileIds = item.isFile
+      ? [item.id]
+      : (await getEncryptedFilesInRoom(item.id)).map((file) => file.id);
+  } catch {
+    return { missingFileIds: null };
+  }
+
+  const missingFileIds: number[] = [];
+  onProgress?.(0, fileIds.length);
+
+  for (let i = 0; i < fileIds.length; i++) {
+    const fileId = fileIds[i];
+    try {
+      const [senderKeys, info] = await Promise.all([
+        loadFileSenderKeysSafe(fileId),
+        getFileEncryptionAccess(fileId),
+      ]);
+      const fileKeys = info?.fileKeys ?? [];
+      if (fileKeys.length === 0) throw new Error("no encryption keys for file");
+
+      const dek = await unwrapDekForCurrentUser({
+        fileKeys,
+        roomMemberKeys: senderKeys,
+        userKeys: info.userKeys,
+        currentUserId,
+        currentIdentity: identity,
+        fileId,
+        onKeyChange: async () => "refuse",
+      });
+      let newKeys: ServerAccessKeyDto[];
+      try {
+        newKeys = await wrapDekForRecipients({
+          dek,
+          senderIdentity: identity,
+          senderUserId: currentUserId,
+          recipients: [
+            { userId: link.id, publicKey: link.publicKey, publicKeyId: link.id },
+          ],
+          fileId,
+        });
+      } finally {
+        wipeDek(dek);
+      }
+      if (newKeys.length === 0) throw new Error("no wrap made for the link");
+
+      const written = await setFileEncryptionKeys(fileId, [
+        ...fileKeys
+          .filter((k) => String(k.userId) !== link.id)
+          .map((k) => ({
+            userId: k.userId,
+            publicKeyId: k.publicKeyId || "",
+            privateKeyEnc: k.privateKeyEnc,
+          })),
+        ...newKeys,
+      ]);
+      if ((written?.skippedUserIds ?? []).map(String).includes(link.id)) {
+        missingFileIds.push(fileId);
+      }
+    } catch {
+      missingFileIds.push(fileId);
+    }
+    onProgress?.(i + 1, fileIds.length);
+  }
+
+  return { missingFileIds };
 }
 
 export async function roomHasEncryptedFiles(roomId: number): Promise<boolean> {

@@ -43,6 +43,7 @@ import type { TAvailableShareRights } from "../../types";
 import { isFile, isRoom } from "../../utils/typeGuards";
 import { createLinkKey, generateLinkSecret } from "../encryption/link-key";
 import { requireUnlock } from "../encryption/secret-storage";
+import { wrapFilesForLink } from "./room-encryption";
 
 type TPrivateLinkItem = TFile | TFolder | TRoom;
 
@@ -149,9 +150,9 @@ const getTarget = (item: TPrivateLinkItem): TPrivateLinkTarget => {
  * the browser; the address returned carries the secret after `#` and is the
  * only place it is kept. Resolves to null when the unlock is dismissed.
  *
- * The keys of the files the link covers are wrapped for it once the server
- * lists links among the recipients of file keys (task 3.3 of
- * `private-rooms-external-links`).
+ * The keys of the files the link covers are wrapped for it before the
+ * address is returned; `missingFileIds` names the files that got no wrap
+ * (null when they could not be listed), which the backfill covers later.
  *
  * Spec: private-rooms/room-membership, "External link of a private item keeps the link model of the portal"
  */
@@ -159,7 +160,11 @@ export async function createPrivateItemLink(
   item: TPrivateLinkItem,
   userId: string,
   options: TPrivateLinkOptions = {},
-): Promise<{ link: TFileLink; address: string } | null> {
+): Promise<{
+  link: TFileLink;
+  address: string;
+  missingFileIds: number[] | null;
+} | null> {
   const password = options.password || undefined;
 
   // A link to one file with no password and no word on its end date gets the
@@ -174,7 +179,8 @@ export async function createPrivateItemLink(
   const need = getPrivateLinkNeed(item, { password, expirationDate });
   if (need) throw new Error(`A link of a private item needs ${need}`);
 
-  if (!(await requireUnlock(userId))) return null;
+  const identity = await requireUnlock(userId);
+  if (!identity) return null;
 
   const secret = generateLinkSecret();
   const { material } = await createLinkKey(secret, password);
@@ -192,7 +198,13 @@ export async function createPrivateItemLink(
   const address = `${link.sharedTo.shareLink}#${secret}`;
   addresses.set(String(link.sharedTo.id), address);
 
-  return { link, address };
+  const { missingFileIds } = await wrapFilesForLink(
+    { id: Number(item.id), isFile: isFile(item) },
+    { id: String(link.sharedTo.id), publicKey: material.linkPublicKey },
+    { currentUserId: userId, identity },
+  );
+
+  return { link, address, missingFileIds };
 }
 
 /**

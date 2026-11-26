@@ -11,6 +11,11 @@ paths:
 
 # Unit tests (Vitest)
 
+The Vitest configs are `vitest.config.mts` (and the client's
+`config/plugins/jsx-in-js.mts` they import), so Vite loads them as ES modules
+without its `configLoader: 'native'` compatibility warning; use
+`import.meta.dirname` there, not `__dirname`.
+
 ## Where tests live — and where they must not
 
 - **client**: under `packages/client/src/**`, plus `packages/client/config/**`
